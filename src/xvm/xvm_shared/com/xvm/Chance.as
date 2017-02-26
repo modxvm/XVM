@@ -9,7 +9,6 @@ package com.xvm
     import com.xvm.battle.*;
     import com.xvm.types.stat.*;
     import com.xvm.vo.*;
-    import flash.utils.*;
 
     public class Chance
     {
@@ -23,7 +22,7 @@ package com.xvm
         private static var chanceT:Object = null;
         private static var chanceLiveT:Object = null;
 
-        public static function formatWinChancesText(stats:Dictionary, type:int, isShowChance:Boolean, isShowLiveChance:Boolean):String
+        public static function formatWinChancesText(stats:Object, type:int, isShowChance:Boolean, isShowLiveChance:Boolean):String
         {
             if (!Config.networkServicesSettings.statBattle)
             {
@@ -70,7 +69,7 @@ package com.xvm
             return "<font color='#FFBBBB'>" + Locale.get("Chance error") + ": " + text + "</font>";
         }
 
-        public static function GetChanceText(playerNames:Vector.<String>, stats:Dictionary,
+        public static function GetChanceText(playerNames:Vector.<String>, stats:Object,
             showChance:Boolean, showBattleLevel:Boolean, showLive:Boolean = false, showLog:Boolean = false):String
         {
             var teamsCount:Object = null;
@@ -131,7 +130,7 @@ package com.xvm
 
         // PRIVATE
 
-        private static function GetChance(playerNames:Vector.<String>, stats:Dictionary, chanceFunc:Function, live:Boolean, showLog:Boolean):Object
+        private static function GetChance(playerNames:Vector.<String>, stats:Object, chanceFunc:Function, live:Boolean, showLog:Boolean):Object
         {
             var Ka:Number = 0;
             var Ke:Number = 0;
@@ -251,7 +250,7 @@ package com.xvm
         }
 
         // return: { ally: Number, enemy: Number }
-        private static function CalculateTeamPlayersCount(playerNames:Vector.<String>, stats:Dictionary):Object
+        private static function CalculateTeamPlayersCount(playerNames:Vector.<String>, stats:Object):Object
         {
             var nally:Number = 0;
             var nenemy:Number = 0;
@@ -362,7 +361,7 @@ package com.xvm
             return "-";
         }
 
-        private static function GuessBattleLevel(playerNames:Vector.<String>, stats:Dictionary):Number
+        private static function GuessBattleLevel(playerNames:Vector.<String>, stats:Object):Number
         {
             // 1. Collect all vehicles info
             var vis:Array = [];

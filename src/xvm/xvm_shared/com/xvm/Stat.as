@@ -8,7 +8,6 @@ package com.xvm
     import com.xfw.events.*;
     import com.xvm.types.stat.*;
     import flash.events.*;
-    import flash.utils.*;
 
     public class Stat extends EventDispatcher
     {
@@ -30,12 +29,12 @@ package com.xvm
             return instance.battleStatLoaded;
         }
 
-        public static function get battleStat():Dictionary
+        public static function get battleStat():Object
         {
             return instance.battleCache;
         }
 
-        public static function getBattleResultsStat(arenaUniqueId:String):Dictionary
+        public static function getBattleResultsStat(arenaUniqueId:String):Object
         {
             return instance.battleResultsCache[arenaUniqueId];
         }
@@ -60,7 +59,7 @@ package com.xvm
 
         public static function clearBattleStat():void
         {
-            instance.battleCache = new Dictionary();
+            instance.battleCache = {};
         }
 
         public static function loadBattleStat():void
@@ -82,17 +81,17 @@ package com.xvm
 
         private var battleStatLoading:Boolean;
         private var battleStatLoaded:Boolean;
-        private var battleCache:Dictionary;
-        private var battleResultsCache:Dictionary;
-        private var userCache:Dictionary;
+        private var battleCache:Object;
+        private var battleResultsCache:Object;
+        private var userCache:Object;
 
         function Stat()
         {
             battleStatLoading = false;
             battleStatLoaded = false;
-            battleCache = new Dictionary();
-            battleResultsCache = new Dictionary();
-            userCache = new Dictionary();
+            battleCache = {};
+            battleResultsCache = {};
+            userCache = {};
             Xfw.addCommandListener(XvmCommandsInternal.AS_STAT_BATTLE_DATA, battleLoaded);
             Xfw.addCommandListener(XvmCommandsInternal.AS_STAT_BATTLE_RESULTS_DATA, battleResultsLoaded);
             Xfw.addCommandListener(XvmCommandsInternal.AS_STAT_USER_DATA, userLoaded);
@@ -154,7 +153,7 @@ package com.xvm
             {
                 //Logger.addObject(data, 3);
                 arenaUniqueId = data.arenaUniqueId;
-                battleResultsCache[arenaUniqueId] = new Dictionary();
+                battleResultsCache[arenaUniqueId] = {};
                 parseResult(data, battleResultsCache[arenaUniqueId]);
             }
             catch (ex:Error)
@@ -174,7 +173,7 @@ package com.xvm
             return null;
         }
 
-        private function parseResult(data:Object, cache:Dictionary):Array
+        private function parseResult(data:Object, cache:Object):Array
         {
             var updatedPlayers:Array = [];
             if (data.players)

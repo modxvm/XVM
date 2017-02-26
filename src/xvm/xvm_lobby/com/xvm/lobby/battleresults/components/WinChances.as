@@ -9,8 +9,8 @@ package com.xvm.lobby.battleresults.components
     import com.xfw.events.*;
     import com.xvm.types.stat.*;
     import flash.text.*;
-    import flash.utils.*;
     import net.wg.gui.lobby.battleResults.*;
+    import net.wg.gui.lobby.battleResults.data.*;
     import scaleform.gfx.*;
 
     public class WinChances
@@ -54,9 +54,8 @@ package com.xvm.lobby.battleresults.components
             }
 
             // fix stat data
-            //Logger.addObject(page.data, 3);
             var playerNames:Vector.<String> = new Vector.<String>();
-            var stats:Dictionary = Stat.getBattleResultsStat(arenaUniqueID);
+            var stats:Object = Stat.getBattleResultsStat(arenaUniqueID);
             for (var name:String in stats)
             {
                 playerNames.push(name);
@@ -64,9 +63,9 @@ package com.xvm.lobby.battleresults.components
                 if (sd == null)
                     continue;
                 sd.team = XfwConst.TEAM_ENEMY;
-                for each (var pl:Object in page.xfw_data.team1)
+                for each (var pl:TeamMemberItemVO in page.xfw_data.team1)
                 {
-                    if (pl.userName == sd.name)
+                    if (pl != null && pl.userVO.userName == sd.name)
                     {
                         sd.team = XfwConst.TEAM_ALLY;
                         break;
@@ -76,6 +75,7 @@ package com.xvm.lobby.battleresults.components
 
             var chanceResults:Boolean = Config.networkServicesSettings.statBattle && Config.networkServicesSettings.chanceResults;
             var chanceText:String = Chance.GetChanceText(playerNames, stats, chanceResults, Config.config.battleResults.showBattleTier);
+            //Logger.add("chanceText=" + chanceText);
             if (chanceText)
             {
                 chanceText = "<p class='txt' align='right'>" + chanceText + '</p>';

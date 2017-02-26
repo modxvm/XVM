@@ -5,12 +5,9 @@
 package com.xvm
 {
     import com.xfw.*;
-    import com.xvm.battle.*;
-    import com.xvm.battle.vo.VOPlayerState;
+    import com.xvm.battle.vo.*;
     import com.xvm.types.stat.*;
     import com.xvm.vo.*;
-    import flash.utils.*;
-    import mx.utils.*;
 
     public class Macros extends Object
     {
