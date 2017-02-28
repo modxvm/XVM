@@ -25,6 +25,7 @@ from gui.Scaleform.daapi.view.battle_results_window import BattleResultsWindow
 from gui.battle_results import composer
 from gui.battle_results.components import base
 from gui.battle_results.settings import BATTLE_RESULTS_RECORD
+from gui.shared.crits_mask_parser import critsParserGenerator
 
 from xfw import *
 
@@ -129,7 +130,7 @@ class XvmDataBlock(base.StatsBlock):
                 'piercings': vData['piercings'],
                 'kills': vData['kills'],
                 'spotted': vData['spotted'],
-                'critsCount': calcDetailsCount(vData['details'], ['crits']),
+                'critsCount': calcCritsCount(vData['details']),
                 'ricochetsCount': calcDetailsSum(vData['details'], 'rickochetsReceived'),
                 'nonPenetrationsCount': vData['noDamageDirectHitsReceived']
             }
@@ -170,15 +171,6 @@ def _StatsComposer__init__(base, self, *args):
     except:
         err(traceback.format_exc())
 
-## save xp
-#@overrideMethod(BattleResultsWindow, '_BattleResultsWindow__buildPersonalDataSource')
-#def _BattleResultsWindow__buildPersonalDataSource(base, self, personalData, playerAvatarData):
-#    result = base(self, personalData, playerAvatarData)
-#    for data in result:
-#        self._xvm_data['xpTotal'].append(data[1]['xpWithoutPremTotal'])
-#        self._xvm_data['xpPremTotal'].append(data[1]['xpWithPremTotal'])
-#    return result
-
 #####################################################################
 # utility
 
@@ -198,9 +190,22 @@ def calcDetailsCount(details, fields):
         n = 0
         for detail in details.values():
             for field in fields:
-                if field in detail and detail[field] > 0:
+                if detail.get(field, 0) > 0:
                     n += 1
                     break;
+        return n
+    except Exception as ex:
+        err(traceback.format_exc())
+        return 0
+
+def calcCritsCount(details):
+    try:
+        n = 0
+        for detail in details.values():
+            value = detail.get('crits', 0)
+            if value > 0:
+                for subType, critType in critsParserGenerator(value):
+                    n += 1
         return n
     except Exception as ex:
         err(traceback.format_exc())
