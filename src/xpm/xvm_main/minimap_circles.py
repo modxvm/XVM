@@ -194,7 +194,7 @@ class _MinimapCircles(object):
             'view_camouflage': self.camouflage,
             'artillery_range': artillery_range,
             'shell_range': shell_range,
-            'base_gun_reload_time': descr.gun['reloadTime'],
+            'base_gun_reload_time': float("{0:.3f}".format(descr.gun['reloadTime'])),
             'base_radio_distance': descr.radio['distance'],
             'commander_sixthSense': self.commander_sixthSense,
         }

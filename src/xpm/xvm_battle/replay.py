@@ -69,7 +69,7 @@ def onXmqpMessage(e):
                 period = g_replayCtrl._BattleReplay__arenaPeriod
                 _xvm_record_data['timing'].append({
                     'p': period,
-                    't': g_replayCtrl.currentTime,
+                    't': float("{0:.3f}".format(g_replayCtrl.currentTime)),
                     'm': 'XMQP',
                     'd': e.ctx
                 })
