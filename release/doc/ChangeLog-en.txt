@@ -1,14 +1,18 @@
-﻿XVM-6.5.5.1:
+﻿XVM-6.5.6:
   [XFW]
   * python console shortcut was changed to Ctrl+Alt+~
 
   [HANGAR]
-  * fixed critical hits counter
-  * fixed premium XP counter
+  * fixed hangar loading after battle
+  * fixed critical hits counter in the battle results window
+  * fixed premium XP counter in the battle results window
+  * fixed win chances in the battle results window
 
   [PYTHON MACROSES]
   * added the macro {{py:xvm.dynamic_color_rating(rating, value)}}
-  * fixed macroses {{py:xvm.crits}} and {{py:xvm.detection}}
+  * totalEfficiency: fixed macroses {{py:xvm.crits}} and {{py:xvm.detection}}
+  * repairTime: fixed timers stuck on switching in observer mode
+  * damageLog: fixed option "moveInBattle"
 
 XVM-6.5.5:
   [GENERAL]
