@@ -13,6 +13,7 @@
   * totalEfficiency: fixed macroses {{py:xvm.crits}} and {{py:xvm.detection}}
   * repairTime: fixed timers stuck on switching in observer mode
   * damageLog: fixed option "moveInBattle"
+  * damageLog: fixed macros usage in the "x" and "y" parameters
 
 XVM-6.5.5:
   [GENERAL]
