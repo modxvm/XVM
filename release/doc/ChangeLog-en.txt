@@ -1,4 +1,6 @@
-﻿XVM-6.5.6:
+﻿XVM-6.5.6.1-dev:
+
+XVM-6.5.6:
   [XFW]
   * python console shortcut was changed to Ctrl+Alt+~
 
