@@ -544,8 +544,8 @@ class Log(object):
                 as_callback("dLog_mouseMove", self.mouse_move)
         else:
             _data = {'x': config.get(section + 'x'), 'y': config.get(section + 'y')}
-        self.x = int(_data['x'])
-        self.y = int(_data['y'])
+        self.x = _data['x']
+        self.y = _data['y']
 
 
     def reset(self, section):
