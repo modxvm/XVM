@@ -60,7 +60,7 @@ MACROS_NAME = ['number', 'critical-hit', 'vehicle', 'name', 'vtype', 'c:costShel
                'level', 'clanicon', 'clannb', 'marksOnGun', 'squad-num', 'dmg-ratio', 'hit-effects', 'c:type-shell',
                'splash-hit', 'team-dmg', 'my-alive', 'gun-caliber', 'wn8', 'xwn8', 'eff', 'xeff', 'wgr', 'xwgr', 'xte',
                'c:wn8', 'c:xwn8', 'c:eff', 'c:xeff', 'c:wgr', 'c:xwgr', 'c:xte', 'fire-duration', 'diff-masses',
-               'nation']
+               'nation', 'my-blowup']
 
 
 def keyLower(_dict):
@@ -275,7 +275,8 @@ class Data(object):
                      'caliber': None,
                      'fireDuration': None,
                      'diff-masses': None,
-                     'nation': None
+                     'nation': None,
+                     'blowup': False
                      }
 
     def reset(self):
@@ -431,6 +432,7 @@ class Data(object):
     def onHealthChanged(self, vehicle, newHealth, attackerID, attackReasonID):
         if self.data['attackReasonID'] not in [24, 25]:
             self.data['attackReasonID'] = attackReasonID
+        self.data['blowup'] = newHealth == -13
         self.data['isDamage'] = True
         self.data['hitEffect'] = HIT_EFFECT_CODES[4]
         if self.data['attackReasonID'] != 0:
@@ -506,7 +508,8 @@ def getValueMacroes(section, value):
              'c:xte': readColor('x', value.get('xte', None)),
              'fire-duration': value.get('fireDuration', None),
              'diff-masses': value.get('diff-masses', None),
-             'nation': value.get('nation', None)
+             'nation': value.get('nation', None),
+             'my-blowup': 'blowup' if value['blowup'] else None,
              }
     return macro
 
@@ -526,7 +529,7 @@ def shadow_value(section, macroes):
     return shadow
 
 
-class Log(object):
+class DamageLog(object):
 
     def __init__(self, section):
         self.listLog = []
@@ -744,10 +747,10 @@ class LastHit(object):
         return
 
 
-_log = Log('damageLog/log/')
-_logAlt = Log('damageLog/logAlt/')
-_logBackground = Log('damageLog/logBackground/')
-_logAltBackground = Log('damageLog/logAltBackground/')
+_log = DamageLog('damageLog/log/')
+_logAlt = DamageLog('damageLog/logAlt/')
+_logBackground = DamageLog('damageLog/logBackground/')
+_logAltBackground = DamageLog('damageLog/logAltBackground/')
 _lastHit = LastHit('damageLog/lastHit/')
 
 
