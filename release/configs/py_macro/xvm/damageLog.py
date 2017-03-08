@@ -432,7 +432,7 @@ class Data(object):
     def onHealthChanged(self, vehicle, newHealth, attackerID, attackReasonID):
         if self.data['attackReasonID'] not in [24, 25]:
             self.data['attackReasonID'] = attackReasonID
-        self.data['blowup'] = newHealth == -13
+        self.data['blowup'] = (newHealth == -13) or (newHealth == -5)
         self.data['isDamage'] = True
         self.data['hitEffect'] = HIT_EFFECT_CODES[4]
         if self.data['attackReasonID'] != 0:
