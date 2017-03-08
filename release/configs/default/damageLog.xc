@@ -35,7 +35,7 @@
     {{fire-duration}}     - duration of fire ("groupDamagesFromFire" must be enabled to work) / продолжительность пожара (работает только при включенной опции "groupDamagesFromFire")
     {{diff-masses}}       - vehicles weights difference during collision / разность масс техники при столкновении
     {{nation}}            - vehicle nation / нация техники
-    {{my-blowup}}         - TO DO / возвращает 'blowup', если взорван боекомплект техники игрока, иначе пусто
+    {{my-blownup}}         - TO DO / возвращает 'blowup', если взорван боекомплект техники игрока, иначе пусто
 */
 
 {
