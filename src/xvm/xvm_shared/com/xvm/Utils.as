@@ -123,6 +123,8 @@ package com.xvm
                 case 17: return 'sandbox';
                 case 18: return 'fallout_classic';
                 case 19: return 'fallout_multiteam';
+                case 20: return 'sortie_2';
+                case 21: return 'fort_battle_2';
                 default: return 'unknown';
             }
         }

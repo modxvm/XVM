@@ -27,6 +27,8 @@ package com.xvm.types.cfg
         public var sandbox:String;
         public var fallout_classic:String;
         public var fallout_multiteam:String;
+        public var sortie_2:String;
+        public var fort_battle_2:String;
 
         public function clone():*
         {

@@ -51,29 +51,29 @@
     // Text for {{battletype}} macro.
     // Текст для макроса {{battletype}}.
     "battletype": {
-      // Неизвестный бой.
+      // Неизвестный бой
       "unknown": "",
-      // Случайный бой.
+      // Случайный бой
       "regular": "",
-      // Тренировочный бой.
+      // Тренировочный бой
       "training": "training",
-      // Ротный бой.
+      // Ротный бой
       "company": "company",
-      // Турнир.
+      // Турнир
       "tournament": "tournament",
-      // Клановый бой.
+      // Клановый бой
       "clan": "clan",
-      // Учебный бой.
+      // Учебный бой
       "tutorial": "",
-      // Командный бой.
+      // Командный бой
       "cybersport": "cybersport",
-      // Бой спецрежима (гонки, футбол и т.п.).
+      // Бой спецрежима (гонки, футбол и т.п.)
       "event_battles": "",
-      // Вылазка.
+      // Укрепрайон, вылазка
       "sortie": "sortie",
-      // Бой за укрепрайон.
+      // Битва за укрепрайон
       "fort_battle": "fort_battle",
-      // Командный бой: ладдер.
+      // Командный бой: ладдер
       "rated_cybersport": "rated_cybersport",
       // Глобальная карта (ГК)
       "global_map": "global_map",
@@ -88,7 +88,11 @@
       // Бой до последнего
       "fallout_classic": "",
       // ?
-      "fallout_multiteam": ""
+      "fallout_multiteam": "",
+      // Укрепрайон, вылазка (новый)
+      "sortie_2": "sortie_2",
+      // Битва за укрепрайон (новый)
+      "fort_battle_2": "fort_battle_2"
     },
     // Text for {{topclan}} macro.
     // Текст для макроса {{topclan}}
