@@ -1,4 +1,7 @@
 ﻿XVM-6.5.6.1-dev:
+  [CAROUSEL]
+  * fixed tooltip balloons
+
   [MINIMAP]
   * TO DO "artillery"
 

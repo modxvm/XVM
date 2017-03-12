@@ -226,7 +226,7 @@ def CommonStatsBlockConstructor_construct(base, self):
         gun = vehicle.gun.descriptor
         turret = vehicle.turret.descriptor
         comparator = idealCrewComparator_helper(vehicle)
-        vehicleCommonParams = dict(getParameters_helper(vehicle))
+        vehicleCommonParams = getParameters_helper(vehicle)
         veh_type_inconfig = vehicle.type.replace('AT-SPG', 'TD')
         clipGunInfoShown = False
         premium_shells = {}
@@ -383,7 +383,7 @@ def CommonStatsBlockConstructor_construct(base, self):
                     customtext = paramName[5:]
                     tooltip_add_param(self, result, l10n(customtext), '')
                 elif paramInfo is not None and paramName in paramInfo.name:
-                    valueStr = str(param_formatter.baseFormatParameter(paramName, paramInfo.value))
+                    valueStr = str(param_formatter.formatParameter(paramName, paramInfo.value))
                     tooltip_add_param(self, result, getParameterValue(paramName), valueStr)
         if vehicle.isInInventory:
             # optional devices icons, must be in the end
