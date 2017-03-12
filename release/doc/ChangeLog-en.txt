@@ -1,9 +1,10 @@
 ﻿XVM-6.5.6.1-dev:
   [CAROUSEL]
-  * fixed tooltip balloons
+  * fixed tooltips
 
   [MINIMAP]
-  * TO DO "artillery"
+  * changed "artillery" circle behavior:
+      circle radius consider vertical gun constraints
 
 XVM-6.5.6:
   [XFW]
