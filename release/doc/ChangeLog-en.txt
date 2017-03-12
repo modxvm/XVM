@@ -1,4 +1,6 @@
 ﻿XVM-6.5.6.1-dev:
+  [MINIMAP]
+  * TO DO "artillery"
 
 XVM-6.5.6:
   [XFW]
