@@ -14,17 +14,32 @@ package com.xvm.types.cfg
 
         public function get parsedVehicle():Vector.<CMinimapLine>
         {
-            return Vector.<CMinimapLine>(vehicle);
+            var res:Vector.<CMinimapLine> = new Vector.<CMinimapLine>();
+            for each (var value:Object in vehicle)
+            {
+                res.push(ObjectConverter.convertData(value, CMinimapLine));
+            }
+            return res;
         }
 
         public function get parsedCamera():Vector.<CMinimapLine>
         {
-            return Vector.<CMinimapLine>(camera);
+            var res:Vector.<CMinimapLine> = new Vector.<CMinimapLine>();
+            for each (var value:Object in camera)
+            {
+                res.push(ObjectConverter.convertData(value, CMinimapLine));
+            }
+            return res;
         }
 
         public function get parsedTraverseAngle():Vector.<CMinimapLine>
         {
-            return Vector.<CMinimapLine>(traverseAngle);
+            var res:Vector.<CMinimapLine> = new Vector.<CMinimapLine>();
+            for each (var value:Object in traverseAngle)
+            {
+                res.push(ObjectConverter.convertData(value, CMinimapLine));
+            }
+            return res;
         }
 
         public function clone():*
