@@ -1,5 +1,6 @@
 ﻿XVM-6.5.6.1-dev:
   [CAROUSEL]
+  * rename options: "damageAvgPerMinute" -> "avgDamagePerMinute", "damageAvg" -> "avgDamage"
   * fixed tooltips
 
   [MINIMAP]

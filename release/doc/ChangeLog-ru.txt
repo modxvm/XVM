@@ -1,5 +1,6 @@
 XVM-6.5.6.1-dev:
   [КАРУСЕЛЬ]
+  * переименованы параметры: "damageAvgPerMinute" -> "avgDamagePerMinute", "damageAvg" -> "avgDamage"
   * исправлены всплывающие подсказки
 
   [МИНИКАРТА]

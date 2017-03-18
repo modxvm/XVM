@@ -38,7 +38,7 @@
                     "shootingRadius",
                     "damageAvgSummary",
                     "piercingPowerAvgSummary",
-                    "damageAvgPerMinute",
+                    "avgDamagePerMinute",
                     "reloadTimeSecs",
                     "aimingTime",
                     "shotDispersionAngle",
@@ -64,7 +64,7 @@
                     "shootingRadius",
                     "damageAvgSummary",
                     "piercingPowerAvgSummary",
-                    "damageAvgPerMinute",
+                    "avgDamagePerMinute",
                     "reloadTimeSecs",
                     "aimingTime",
                     "shotDispersionAngle",
@@ -90,7 +90,7 @@
                     "shootingRadius",
                     "damageAvgSummary",
                     "piercingPowerAvgSummary",
-                    "damageAvgPerMinute",
+                    "avgDamagePerMinute",
                     "reloadTimeSecs",
                     "aimingTime",
                     "shotDispersionAngle",
@@ -115,7 +115,7 @@
                     "shootingRadius",
                     "damageAvgSummary",
                     "piercingPowerAvgSummary",
-                    "damageAvgPerMinute",
+                    "avgDamagePerMinute",
                     "reloadTimeSecs",
                     "aimingTime",
                     "shotDispersionAngle",
@@ -137,7 +137,7 @@
                     "shootingRadius",
                     "damageAvgSummary",
                     "piercingPowerAvgSummary",
-                    "damageAvgPerMinute",
+                    "avgDamagePerMinute",
                     "reloadTimeSecs",
                     "explosionRadius",
                     "aimingTime",
@@ -161,9 +161,9 @@ List of possible values: (if the parameter is not relevant for some tank, it wil
 "piercingPower",                        - Пробитие базовым снарядом (от и до) \ Penetration of basic shell (from - to)
 "piercingPowerAvg",                     - Пробитие базовым снарядом (среднее) \ Penetration of basic shell (avg)
 "piercingPowerAvgSummary",              - Сводка пробития всеми снарядами \ Summary of penetration of all shells
-"damageAvg",                            - Средний урон базовым снарядом \ Average damage of basic shell
+"avgDamage",                            - Средний урон базовым снарядом \ Average damage of basic shell
 "damageAvgSummary",                     - Сводка урона всеми снарядами \ Summary of damages of all shells
-"damageAvgPerMinute",                   - Средний ДПМ базовым снарядом\ Average DPM with basic shell
+"avgDamagePerMinute",                   - Средний ДПМ базовым снарядом\ Average DPM with basic shell
 "explosionRadius",                      - Радиус разлета осколков фугаса \ Radius of HE explosion splash
 "shotDispersionAngle",                  - Разброс от расстояния \ Accuracy, shell dispersion over distance
 "aimingTime",                           - Время сведения \ Aiming time
