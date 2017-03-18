@@ -130,8 +130,11 @@ package com.xvm.lobby.ping.PingServers
                 currentField.x = prevField.x + prevField.width + cfg.columnGap;
                 currentField.y = cfg.y + y_offset;
             }
-            bgImage.x = fields[0].x;
-            bgImage.y = fields[0].y;
+            if (bgImage != null)
+            {
+                bgImage.x = fields[0].x;
+                bgImage.y = fields[0].y;
+            }
         }
 
         private function update(e:ObjectEvent):void
