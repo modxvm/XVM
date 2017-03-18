@@ -8,8 +8,11 @@ package com.xvm.lobby.online.OnlineServers
     import com.xfw.events.*;
     import com.xvm.*;
     import com.xvm.types.cfg.*;
-    import flash.text.*;
+    import flash.display.*;
     import flash.events.*;
+    import flash.text.*;
+    import net.wg.gui.components.controls.UILoaderAlt; // '*' conflicts with UI classes
+    import net.wg.gui.events.*;
     import scaleform.clik.core.*;
     import org.idmedia.as3commons.util.*;
     import scaleform.gfx.*;
@@ -31,6 +34,7 @@ package com.xvm.lobby.online.OnlineServers
         private var fields:Vector.<TextField>;
         private var currentServer:String;
         private var serverColor:Number;
+        private var bgImage:UILoaderAlt;
 
         public function OnlineServersView(cfg:COnlineServers)
         {
@@ -38,6 +42,8 @@ package com.xvm.lobby.online.OnlineServers
             this.cfg = cfg;
             this.currentServer = currentServer;
             this.serverColor = parseInt(cfg.fontStyle.serverColor, 16);
+            if (cfg.bgImage != null)
+                createBackgroundImage(cfg.bgImage);
             fields = new Vector.<TextField>();
             var f:TextField = createNewField();
             f.htmlText = makeStyledRow( { cluster: Locale.get("Initialization"), people_online: "..." } );
@@ -86,6 +92,22 @@ package com.xvm.lobby.online.OnlineServers
             return 0;
         }
 
+        private function createBackgroundImage(src:String):void
+        {
+            // wild coding style :)
+            bgImage = this.addChildAt(App.utils.classFactory.getComponent("UILoaderAlt", UILoaderAlt, {
+                autoSize: true,
+                maintainAspectRatio: false,
+                source: "../../" + Utils.fixImgTag(src).replace("img://", "")
+            }), 0) as UILoaderAlt;
+            bgImage.addEventListener(UILoaderEvent.COMPLETE, function(e:UILoaderEvent):void {
+                var img:UILoaderAlt = e.currentTarget as UILoaderAlt;
+                var loader:Loader = img.getChildAt(1) as Loader;
+                img.width = loader.contentLoaderInfo.content.width;
+                img.height = loader.contentLoaderInfo.content.height;
+            });
+        }
+
         private function updatePositions():void
         {
             if (!fields.length)
@@ -109,6 +131,8 @@ package com.xvm.lobby.online.OnlineServers
                 currentField.x = prevField.x + prevField.width + cfg.columnGap;
                 currentField.y = cfg.y + y_offset;
             }
+            bgImage.x = fields[0].x;
+            bgImage.y = fields[0].y;
         }
 
         private function update(e:ObjectEvent):void

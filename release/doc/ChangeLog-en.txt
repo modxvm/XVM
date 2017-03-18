@@ -6,6 +6,9 @@
   * changed "artillery" circle behavior:
       circle radius consider vertical gun constraints
 
+  [HANGAR]
+  * added options hangar/pingServers/bgImage and hangar/onlineServers/bgImage
+
 XVM-6.5.6:
   [XFW]
   * python console shortcut was changed to Ctrl+Alt+~

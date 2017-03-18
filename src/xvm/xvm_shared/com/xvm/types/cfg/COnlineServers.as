@@ -14,6 +14,7 @@ package com.xvm.types.cfg
         public var hAlign:String;
         public var vAlign:String;
         public var alpha:*;
+        public var bgImage:String;
         public var delimiter:String;
         public var maxRows:*;
         public var columnGap:*;
