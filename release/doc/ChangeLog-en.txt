@@ -1,4 +1,6 @@
-﻿XVM-6.5.7:
+﻿XVM-6.5.8-dev:
+
+XVM-6.5.7:
   [GENERAL]
   * adaptation to 23.03.2017 micropatch
 

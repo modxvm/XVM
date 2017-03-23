@@ -1,7 +1,7 @@
 """ XVM (c) www.modxvm.com 2013-2017 """
 
 #############################
-# Command
+# Public
 
 def ping():
     _ping.ping()
@@ -14,27 +14,19 @@ def update_config(*args, **kwargs):
 
 import traceback
 import threading
-import os
-import re
 
 import BigWorld
 import ResMgr
 from gui.shared.utils.HangarSpace import g_hangarSpace
 
 from xfw import *
+from xfw.ping import ping as xfw_ping
+
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
 from xvm_main.python.xvm import l10n
 
-#Native module
-import imp
-XVMNativePing = imp.load_dynamic('XVMNativePing', './res_mods/mods/packages/xvm_ping/native/XVMNativePing.pyd')
 
-#############################
-
-"""
-NOTE: ICMP requires root privileges. Don't use it.
-"""
 class _Ping(object):
 
     def __init__(self):
@@ -92,7 +84,7 @@ class _Ping(object):
                 return
             try:
                 self._respond()
-            except Exception, ex:
+            except Exception:
                 err('_checkResult() exception: ' + traceback.format_exc())
             finally:
                 self.thread = None
@@ -111,21 +103,22 @@ class _Ping(object):
             # Parse ping output
             best_ping = 999
             for host in (self.hangarHosts if g_hangarSpace.inited else self.loginHosts):
-                hostping = XVMNativePing.ping(self.hosts_urls[host].split(':')[0])
+                hostping = xfw_ping(self.hosts_urls[host].split(':')[0])
 
                 if hostping<0:
                     res.append({'cluster': host, 'time': (self.hangarErrorString if g_hangarSpace.inited else self.loginErrorString)})
                     debug('Ping has returned non-zero status: %d' % hostping)
                     continue
-                
+
                 res.append({'cluster': host, 'time': hostping})
                 best_ping = min(best_ping, hostping)
+
             if (g_hangarSpace.inited and self.hangarShowTitle) or (not g_hangarSpace.inited and self.loginShowTitle):
                 res.insert(0, {'cluster': '###best_ping###', 'time': best_ping}) # will appear first, key is replaced by localized "Ping"
 
-        except Exception, ex:
+        except Exception:
             err('_pingAsync() exception: ' + traceback.format_exc())
-        
+
         with self.lock:
             self.resp = res
 
