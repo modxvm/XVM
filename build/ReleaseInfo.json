@@ -1,37 +1,32 @@
 ﻿{
     "RU": {
-        "ver": "6.5.4",
-        "wot": "0.9.17.0.3",
-        "message": " • WoT 0.9.17.0.3\n • Исправлены ошибки\n • Добавлены новые возможности\nПодробности на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
+        "ver": "6.5.7",
+        "wot": "0.9.17.1",
+        "message": " • WoT микропатч\n • Исправлены ошибки\n • Добавлены новые возможности\nПодробности на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
     },
     "EU": {
-        "ver": "6.5.4",
-        "wot": "0.9.17.0.3",
-        "message": " • WoT 0.9.17.0.3\n • Bugs fixed\n • Added new features\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "6.5.7",
+        "wot": "0.9.17.1",
+        "message": " • WoT micropatch\n • Bugs fixed\n • Added new features\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "US": {
-        "ver": "6.5.4",
-        "wot": "0.9.17.0.3",
-        "message": " • WoT 0.9.17.0.3\n • Bugs fixed\n • Added new features\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "6.5.7",
+        "wot": "0.9.17.1",
+        "message": " • WoT micropatch\n • Bugs fixed\n • Added new features\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "ASIA": {
         "ver": "6.5.4",
-        "wot": "0.9.17.0.3",
-        "message": " • WoT 0.9.17.0.3\n • Bugs fixed\n • Added new features\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
-    },
-    "KR": {
-        "ver": "6.5.4",
-        "wot": "0.9.17.0.3",
-        "message": " • WoT 0.9.17.0.3\n • Bugs fixed\n • Added new features\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "wot": "0.9.17.1",
+        "message": " • WoT micropatch\n • Bugs fixed\n • Added new features\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "CN": {
         "ver": "6.5.4",
-        "wot": "0.9.17.0.3",
-        "message": " • WoT 0.9.17.0.3\n • Bugs fixed\n • Added new features\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "wot": "0.9.17.1",
+        "message": " • WoT micropatch\n • Bugs fixed\n • Added new features\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "CT":  {
-        "ver": "6.5.4",
-        "wot": "0.9.17.0.3",
-        "message": " • WoT 0.9.17.0.3\n • Bugs fixed\n • Added new features\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "6.5.7",
+        "wot": "0.9.17.1",
+        "message": " • WoT micropatch\n • Bugs fixed\n • Added new features\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     }
 }
