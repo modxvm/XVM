@@ -15,7 +15,7 @@ source "$XVMBUILD_ROOT_PATH"/build/xvm-build.conf
 
 # $XVMBUILD_L10N_URL
 if [[ "$XVMINST_L10N_URL" == "" ]]; then
-    export XVMINST_L10N_URL="http://translate.by-reservation.com/download/xvm-installer/xvminstaller_l10n_isl.zip"
+    export XVMINST_L10N_URL="http://translate.modxvm.com/download/xvm-installer/xvm-installer_l10n_isl.zip"
 fi
 
 
