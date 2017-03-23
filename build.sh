@@ -116,19 +116,6 @@ build_xpm(){
     popd >/dev/null
 }
 
-build_native()
-{
-    echo ""
-    echo "Building C Python modules"
-
-    pushd "$XVMBUILD_ROOT_PATH"/src/xvm-native/ >/dev/null
-   
-    mkdir -p "../../~output/mods/packages/"
-    cp -rf "./release/packages/" "../../~output/mods/"
-
-    popd >/dev/null
-}
-
 calc_hash_for_xvm_integrity(){
     echo ""
     echo "Calculating hashes for xvm_integrity"
@@ -216,7 +203,6 @@ build_xfw
 build_xfw_fixversion
 build_xpm
 build_as3
-build_native
 
 if [[ "$XFW_DEVELOPMENT" == "" ]]; then
   clean_sha1
