@@ -1,4 +1,7 @@
-﻿XVM-6.5.6.1-dev:
+﻿XVM-6.5.7:
+  [GENERAL]
+  * adaptation to 23.03.2017 micropatch
+
   [CAROUSEL]
   * rename options: "damageAvgPerMinute" -> "avgDamagePerMinute", "damageAvg" -> "avgDamage"
   * fixed tooltips
