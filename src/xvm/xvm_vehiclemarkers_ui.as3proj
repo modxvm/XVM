@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="..\..\~output\mods\packages\xvm_battle\as_battle\xvm_vehiclemarkers_ui.swf" />
+    <movie path="..\..\~output\res_mods\mods\packages\xvm_battle\as_battle\xvm_vehiclemarkers_ui.swf" />
     <movie fps="50" />
     <movie width="1024" />
     <movie height="768" />

@@ -1,6 +1,7 @@
 ﻿XVM-6.5.8-dev:
   [XFW]
   * part of the functionality (ping, XInput) was moved from XVM to XFW
+  * partially switch to .wotmod packages format
 
 XVM-6.5.7:
   [GENERAL]

@@ -28,11 +28,38 @@ pack_xfw(){
     echo ""
     echo "Packing XFW"
 
+
     echo "$XVMBUILD_XFW_REVISION" >> "$XVMBUILD_ROOT_PATH"/src/xfw/~output/"$XVMBUILD_XFW_REVISION"
     echo "$XVMBUILD_XFW_HASH" >> "$XVMBUILD_ROOT_PATH"/src/xfw/~output/"$XVMBUILD_XFW_REVISION"
     echo "$XVMBUILD_XFW_BRANCH" >> "$XVMBUILD_ROOT_PATH"/src/xfw/~output/"$XVMBUILD_XFW_REVISION"
 
-    pushd "$XVMBUILD_ROOT_PATH"/src/xfw/~output_package/ > /dev/null
+    pushd "$XVMBUILD_ROOT_PATH"/src/xfw/ > /dev/null
+
+    rm -rf "~output_zip/"
+    mkdir -p "~output_zip/"
+
+    mkdir -p "~output_zip/res_mods/~ver/gui/flash/"
+    cp -rf "~output/swf_wg/." "~output_zip/res_mods/~ver/gui/flash"
+
+    mkdir -p "~output_zip/res_mods/~ver/scripts/client/gui/mods/"
+    cp -rf "~output/python/scripts/." "~output_zip/res_mods/~ver/scripts/"
+
+    mkdir -p "~output_zip/res_mods/mods/xfw/actionscript/"
+    cp -rf "~output/swf/." "~output_zip/res_mods/mods/xfw/actionscript"
+
+    mkdir -p "~output_zip/res_mods/mods/xfw/native/"
+    cp -rf "~output/native/." "~output_zip/res_mods/mods/xfw/native/"
+
+    mkdir -p "~output_zip/res_mods/mods/xfw/python/"
+    cp -rf "~output/python/mods/xfw/." "~output_zip/res_mods/mods/xfw/"
+
+    mkdir -p "~output_zip/res_mods/mods/xfw/resources/"
+
+    cp -r "~output/swc/" "~output_zip/"
+
+    popd > /dev/null
+
+    pushd "$XVMBUILD_ROOT_PATH"/src/xfw/~output_zip/ > /dev/null
     zip -9 -r -q "$XVMBUILD_XFW_REVISION"_"$XVMBUILD_XFW_HASH"_xfw.zip ./
     rm "$XVMBUILD_XFW_REVISION"
     popd > /dev/null

@@ -55,10 +55,10 @@ copy_xfw()
 copy_output()
 {
   echo "=> res_mods/$TARGET_VERSION"
-  cp -a ../~output/~ver/* "$WOT_PATH/res_mods/$TARGET_VERSION" || err "copy_output"
+  cp -a ../~output/res_mods/~ver/* "$WOT_PATH/res_mods/$TARGET_VERSION" || err "copy_output"
 
   echo "=> res_mods/mods"
-  cp -a ../~output/mods/* "$WOT_PATH/res_mods/mods" || err "copy_output"
+  cp -a ../~output/res_mods/mods/* "$WOT_PATH/res_mods/mods" || err "copy_output"
 }
 
 copy_configs()

@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="..\..\~output\mods\packages\xvm_lobby\as_lobby\xvm_lobby.swf" />
+    <movie path="..\..\~output\res_mods\mods\packages\xvm_lobby\as_lobby\xvm_lobby.swf" />
     <movie fps="50" />
     <movie width="1024" />
     <movie height="768" />

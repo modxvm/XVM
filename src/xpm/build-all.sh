@@ -19,9 +19,9 @@ detect_python
 
 clear()
 {
-  rm -rf "../../~output/~ver/gui/flash"
-  rm -rf "../../~output/~ver/scripts"
-  rm -rf "../../~output/mods/xfw"
+  rm -rf "../../~output/res_mods/~ver/gui/flash"
+  rm -rf "../../~output/res_mods/~ver/scripts"
+  rm -rf "../../~output/res_mods/mods/xfw"
 
   # remove _version_.py files
   for dir in $(find . -maxdepth 1 -type "d" ! -path "."); do
@@ -33,13 +33,13 @@ clear()
 
 make_dirs()
 {
-  mkdir -p ../../~output/~ver/gui/flash/
-  mkdir -p ../../~output/~ver/scripts
-  mkdir -p ../../~output/configs/xvm/
-  mkdir -p ../../~output/mods/shared_resources/
-  mkdir -p ../../~output/mods/xfw/actionscript/
-  mkdir -p ../../~output/mods/xfw/python/
-  mkdir -p ../../~output/mods/xfw/resources/
+  mkdir -p ../../~output/res_mods/~ver/gui/flash/
+  mkdir -p ../../~output/res_mods/~ver/scripts
+  mkdir -p ../../~output/res_mods/configs/xvm/
+  mkdir -p ../../~output/res_mods/mods/shared_resources/
+  mkdir -p ../../~output/res_mods/mods/xfw/actionscript/
+  mkdir -p ../../~output/res_mods/mods/xfw/python/
+  mkdir -p ../../~output/res_mods/mods/xfw/resources/
 }
 
 build_xfw()
@@ -56,10 +56,10 @@ build()
 
   [ "$d" = "$f" ] && d=""
 
-  py_dir="../../~output/$2/python/$d"
-  py_file="../../~output/$2/python/$f"
-  cmp_dir="../../~output/cmp/$2/python/$d"
-  cmp_file="../../~output/cmp/$2/python/$f.tmp"
+  py_dir="../../~output/res_mods/$2/python/$d"
+  py_file="../../~output/res_mods/$2/python/$f"
+  cmp_dir="../../~output/res_mods/cmp/$2/python/$d"
+  cmp_file="../../~output/res_mods/cmp/$2/python/$f.tmp"
 
   if [ -f "$py_file" ] && [ -f "$cmp_file" ] && cmp "$1" "$cmp_file" >/dev/null 2>&1; then
     return 0
@@ -120,7 +120,7 @@ done
 
 # generate default config from .xc files and xvm.xc.sample
 echo 'generate default_config.py and xvm.xc.sample'
-dc_fn=../../~output/mods/packages/xvm_main/python/default_config.py
+dc_fn=../../~output/res_mods/mods/packages/xvm_main/python/default_config.py
 rm -f "${dc_fn}c"
 "$XVMBUILD_PYTHON_FILEPATH" -c "
 import sys
@@ -139,7 +139,7 @@ rm -f "${dc_fn}c"
 [ ! -f ${dc_fn} ] && exit
 
 xvm_xc_sample_src=../../release/configs/xvm.xc.sample
-xvm_xc_sample_trgt=../../~output/mods/packages/xvm_main/python/default_xvm_xc.py
+xvm_xc_sample_trgt=../../~output/res_mods/mods/packages/xvm_main/python/default_xvm_xc.py
 echo -e -n "# -*- coding: utf-8 -*-\n''' Generated automatically by XVM builder '''\nDEFAULT_XVM_XC = '''" > $xvm_xc_sample_trgt
 cat $xvm_xc_sample_src >> $xvm_xc_sample_trgt
 echo "'''" >> $xvm_xc_sample_trgt

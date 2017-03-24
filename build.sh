@@ -8,6 +8,7 @@ cd "$XVMBUILD_ROOT_PATH"
 
 source ./build/library.sh
 source ./build/xvm-build.conf
+source ./src/xfw/build/xfw-build.conf
 
 ##########################
 ####      CONFIG      ####
@@ -21,41 +22,61 @@ fi
 ##########################
 #### HELPER FUNCTIONS ####
 ##########################
+
+#deletes temporary folders with hash calculation results
 clean_sha1()
 {
     pushd "$XVMBUILD_ROOT_PATH" > /dev/null
+    rm -rf ~output/cmp/
+    rm -rf ~output/res_mods/cmp/
     rm -rf ~output/sha1/
     rm -rf src/xfw/~output/sha1/
-    rm -rf ~output/cmp/
     rm -rf src/xfw/~output/cmp/
     popd > /dev/null
 }
 
-create_directories(){
+#creates all needed directories
+create_directories()
+{
     pushd "$XVMBUILD_ROOT_PATH" > /dev/null
-    mkdir -p ~output/~ver/gui/flash
-    mkdir -p ~output/~ver/scripts
-    mkdir -p ~output/configs/xvm
-    mkdir -p ~output/mods/xfw/actionscript
-    mkdir -p ~output/mods/xfw/native
-    mkdir -p ~output/mods/xfw/python
-    mkdir -p ~output/mods/shared_resources/xvm/
+    mkdir -p ~output/mods/~ver/
+    mkdir -p ~output/res_mods/~ver/gui/flash
+    mkdir -p ~output/res_mods/~ver/scripts
+    mkdir -p ~output/res_mods/configs/xvm
+    mkdir -p ~output/res_mods/mods/xfw/actionscript
+    mkdir -p ~output/res_mods/mods/shared_resources/xvm/
     popd > /dev/null
 }
 
-extend_path(){
+#extends PATH system environment variable
+extend_path()
+{
     export PATH=$PATH:"$XVMBUILD_ROOT_PATH"/build/bin/java/:"$XVMBUILD_ROOT_PATH"/build/bin/msil/:"$XVMBUILD_ROOT_PATH"/build/bin/"$OS"_"$arch"/
 }
 
-load_version(){
-    export XVMBUILD_WOT_VERSION="$TARGET_VERSION"
-    export XVMBUILD_XVM_VERSION="$XVM_VERSION"
+#get information about last commits in repository
+load_repositorystats()
+{
+    pushd "$XVMBUILD_ROOT_PATH"/ > /dev/null
+    export XVMBUILD_XVM_BRANCH=$(hg parent --template "{branch}") || exit 1
+    export XVMBUILD_XVM_HASH=$(hg parent --template "{node|short}") || exit 1
+    export XVMBUILD_XVM_REVISION=$(hg parent --template "{rev}") || exit 1
+    export XVMBUILD_XVM_COMMITMSG=$(hg parent --template "{desc}") || exit 1
+    export XVMBUILD_XVM_COMMITAUTHOR=$(hg parent --template "{author}" | sed 's/<.*//') || exit 1
+    popd > /dev/null
+
+    pushd "$XVMBUILD_ROOT_PATH"/src/xfw/ > /dev/null
+    export XVMBUILD_XFW_BRANCH=$(hg parent --template "{branch}") || exit 1
+    export XVMBUILD_XFW_HASH=$(hg parent --template "{node|short}") || exit 1
+    export XVMBUILD_XFW_REVISION=$(hg parent --template "{rev}") || exit 1
+    popd > /dev/null
 }
 
 ##########################
 ####  BUILD FUNCTIONS ####
 ##########################
 
+#builds XVM ActionScript 3 files
 build_as3(){
     echo ""
     echo "Building AS3 files"
@@ -63,10 +84,12 @@ build_as3(){
     pushd "$XVMBUILD_ROOT_PATH"/src/xvm/ > /dev/null
 
     top=( "_xvm_shared.as3proj" "_xvm_app.as3proj" "xvm_lobby.as3proj" "xvm_battle.as3proj" )
+
     for proj in "${top[@]}"; do
         echo "Building $proj"
         build_as3_h "$proj" || exit $?
     done
+
     for proj in *.as3proj; do
         exists=0
         for e in "${top[@]}"; do [[ "$e" == "$proj" ]] && { exists=1; break; } done
@@ -79,7 +102,9 @@ build_as3(){
     popd > /dev/null
 }
 
-build_xfw(){
+#builds XVM Framework and copy XFW to ~output/
+build_xfw()
+{
     echo ""
     echo "Building XFW"
 
@@ -88,22 +113,15 @@ build_xfw(){
     popd >/dev/null
 
     pushd "$XVMBUILD_ROOT_PATH" >/dev/null
-    cp -rf src/xfw/~output/swf_wg/*.swf ~output/~ver/gui/flash/
-    cp -rf src/xfw/~output/python/mods/* ~output/mods/
-    cp -rf src/xfw/~output/python/scripts/* ~output/~ver/scripts/
-    cp -rf src/xfw/~output/swf/*.swf ~output/mods/xfw/actionscript/
-    cp -rf src/xfw/~output/native/* ~output/mods/xfw/native/
+    cp -rf src/xfw/~output/swf/*.swf ~output/res_mods/mods/xfw/actionscript/
+    cp -rf src/xfw/~output/swf_wg/*.swf ~output/res_mods/~ver/gui/flash/
+    cp -rf src/xfw/~output_wotmod/*.wotmod ~output/mods/~ver/
     popd >/dev/null
 }
 
-build_xfw_fixversion()
+#builds Python part of XVM
+build_xpm()
 {
-    pushd "$XVMBUILD_ROOT_PATH" >/dev/null
-    mv "src/xfw/~output_package/res_mods/~ver/" "src/xfw/~output_package/res_mods/$XVMBUILD_WOT_VERSION/"
-    popd >/dev/null
-}
-
-build_xpm(){
     echo ""
     echo "Building XPM"
 
@@ -116,7 +134,9 @@ build_xpm(){
     popd >/dev/null
 }
 
-calc_hash_for_xvm_integrity(){
+#calculate XVM integrity hashes
+calc_hash_for_xvm_integrity()
+{
     echo ""
     echo "Calculating hashes for xvm_integrity"
 
@@ -131,17 +151,19 @@ calc_hash_for_xvm_integrity(){
     popd >/dev/null
 }
 
-copy_files(){
+copy_files()
+{
     # rename version-dependent folder
-    mv "$XVMBUILD_ROOT_PATH"/~output/~ver/ "$XVMBUILD_ROOT_PATH"/~output/"$XVMBUILD_WOT_VERSION"
+    mv "$XVMBUILD_ROOT_PATH"/~output/res_mods/~ver/ "$XVMBUILD_ROOT_PATH"/~output/res_mods/"$XVMBUILD_WOT_VERSION"
+    mv "$XVMBUILD_ROOT_PATH"/~output/mods/~ver/ "$XVMBUILD_ROOT_PATH"/~output/mods/"$XVMBUILD_WOT_VERSION"
 
     # cp non-binary files
-    cp -rf "$XVMBUILD_ROOT_PATH"/release/* "$XVMBUILD_ROOT_PATH"/~output/mods/shared_resources/xvm/
-    mv "$XVMBUILD_ROOT_PATH"/~output/mods/shared_resources/xvm/configs/* "$XVMBUILD_ROOT_PATH"/~output/configs/xvm
-    rm -rf "$XVMBUILD_ROOT_PATH"/~output/mods/shared_resources/xvm/configs/
+    cp -rf "$XVMBUILD_ROOT_PATH"/release/* "$XVMBUILD_ROOT_PATH"/~output/res_mods/mods/shared_resources/xvm/
+    mv "$XVMBUILD_ROOT_PATH"/~output/res_mods/mods/shared_resources/xvm/configs/* "$XVMBUILD_ROOT_PATH"/~output/res_mods/configs/xvm
+    rm -rf "$XVMBUILD_ROOT_PATH"/~output/res_mods/mods/shared_resources/xvm/configs/
 
     # get l10n files from translation server
-    pushd "$XVMBUILD_ROOT_PATH"/~output/mods/shared_resources/xvm/l10n/ >/dev/null
+    pushd "$XVMBUILD_ROOT_PATH"/~output/res_mods/mods/shared_resources/xvm/l10n/ >/dev/null
     mkdir -p temp
     cd temp
     wget --quiet --output-document=l10n.zip "$XVMBUILD_L10N_URL"
@@ -152,22 +174,12 @@ copy_files(){
     rm -rf temp/
     popd >/dev/null
 
-    # move all in res_mods
-
-    pushd "$XVMBUILD_ROOT_PATH"/ > /dev/null
-    mkdir -p res_mods/
-    mv ~output/* res_mods/
-    mv res_mods ~output/
-    popd >/dev/null
-
     # put readmes on root
     pushd "$XVMBUILD_ROOT_PATH"/~output/res_mods/mods/shared_resources/xvm/doc/ > /dev/null
     find . -name "readme-*.txt" -exec cp {} ../../../../../ \;
     popd > /dev/null
 
-    # remove swc
-    rm -r "$XVMBUILD_ROOT_PATH"/~output/res_mods/swc/
-
+    rm -r "$XVMBUILD_ROOT_PATH"/~output/swc/
 }
 
 ##########################
@@ -193,14 +205,12 @@ detect_wget
 detect_zip
 
 load_repositorystats
-load_version
 
 clean_repodir
 
 create_directories
 
 build_xfw
-build_xfw_fixversion
 build_xpm
 build_as3
 
