@@ -9,6 +9,7 @@ export XVMBUILD_ROOT_PATH="$CURRENT_PATH/../.."
 
 source /var/xvm/ci_config.sh
 source "$XVMBUILD_ROOT_PATH/build/xvm-build.conf"
+source "$XVMBUILD_ROOT_PATH/src/xfw/build/xfw-build.conf"
 source "$XVMBUILD_ROOT_PATH/build/library.sh"
 
 pack_xvm(){
