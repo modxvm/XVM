@@ -47,8 +47,8 @@ generate_defines(){
 
     rm -rf ./xvm_defines.iss
     cp ./xvm_defines_template.iss ./xvm_defines.iss
-    sed -i "s/XVM_WOTVERSION/${TARGET_VERSION}/g" ./xvm_defines.iss
-    sed -i "s/XVM_VERSION/${XVM_VERSION}/g" ./xvm_defines.iss
+    sed -i "s/XVM_WOTVERSION/${XVMBUILD_WOT_VERSION}/g" ./xvm_defines.iss
+    sed -i "s/XVM_VERSION/${XVMBUILD_XVM_VERSION}/g" ./xvm_defines.iss
 
     popd >/dev/null
 }
