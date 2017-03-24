@@ -54,24 +54,6 @@ extend_path()
     export PATH=$PATH:"$XVMBUILD_ROOT_PATH"/build/bin/java/:"$XVMBUILD_ROOT_PATH"/build/bin/msil/:"$XVMBUILD_ROOT_PATH"/build/bin/"$OS"_"$arch"/
 }
 
-#get information about last commits in repository
-load_repositorystats()
-{
-    pushd "$XVMBUILD_ROOT_PATH"/ > /dev/null
-    export XVMBUILD_XVM_BRANCH=$(hg parent --template "{branch}") || exit 1
-    export XVMBUILD_XVM_HASH=$(hg parent --template "{node|short}") || exit 1
-    export XVMBUILD_XVM_REVISION=$(hg parent --template "{rev}") || exit 1
-    export XVMBUILD_XVM_COMMITMSG=$(hg parent --template "{desc}") || exit 1
-    export XVMBUILD_XVM_COMMITAUTHOR=$(hg parent --template "{author}" | sed 's/<.*//') || exit 1
-    popd > /dev/null
-
-    pushd "$XVMBUILD_ROOT_PATH"/src/xfw/ > /dev/null
-    export XVMBUILD_XFW_BRANCH=$(hg parent --template "{branch}") || exit 1
-    export XVMBUILD_XFW_HASH=$(hg parent --template "{node|short}") || exit 1
-    export XVMBUILD_XFW_REVISION=$(hg parent --template "{rev}") || exit 1
-    popd > /dev/null
-}
-
 ##########################
 ####  BUILD FUNCTIONS ####
 ##########################
@@ -134,7 +116,7 @@ build_xpm()
     popd >/dev/null
 }
 
-#calculate XVM integrity hashes
+#calculates hashes for XVM files
 calc_hash_for_xvm_integrity()
 {
     echo ""
@@ -151,6 +133,7 @@ calc_hash_for_xvm_integrity()
     popd >/dev/null
 }
 
+#copies non-binary files and fix directory layout
 copy_files()
 {
     # rename version-dependent folder
