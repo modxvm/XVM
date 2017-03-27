@@ -181,8 +181,6 @@ List of possible values: (if the parameter is not relevant for some tank, it wil
 "shootingRadius",                       - Дальность стрельбы арты, пулеметов \ Shooting range of SPG, machine guns
 "turretRotationSpeed",                  - Скорость вращения башни (и оружия) \ Rotation speed of turret (and gun)
 "terrainResistance",                    - Сводка сопротивлений грунтов \ Summary of terrain resistances
-"timeOfReaching",                       - Время преодоления 100м, значения для твёрдого/среднего/мягкого грунтов \ 100m passing time, values for hard/medium/soft soils
-"attainableSpeed",                      - Скорость, набираемая за 5 секунд, значения для твёрдого/среднего/мягкого грунтов \ 5 seconds speed gathering, values for hard/medium/soft soils
 "switchOnTime",                         - Время перехода в осадный режим \ Siege mode activation time
 "switchOffTime",                        - Время перехода в походный режим \ Marching mode activation time
 "optDevicesIcons",                      - Значки дополнительного оборудования (будут показаны в конце) \ Icons of optional devices (will be shown at the end)
