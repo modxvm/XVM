@@ -3,7 +3,7 @@
   * part of the functionality (ping, XInput) was moved from XVM to XFW
   * partially switch to .wotmod packages format
   
-  [TOOLTIPS (tooltops.xc)]
+  [TOOLTIPS (tooltips.xc)]
   * Updated avaliable parameters list 
 
 XVM-6.5.7:
