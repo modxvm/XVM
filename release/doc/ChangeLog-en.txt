@@ -5,6 +5,9 @@
   
   [TOOLTIPS]
   * Updated avaliable parameters list (tooltips.xc) 
+  
+  [DAMAGE LOG]
+  * 'alive' value of a macro {{my-alive} } is renamed into 'al'
 
 XVM-6.5.7:
   [GENERAL]

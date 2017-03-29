@@ -158,6 +158,8 @@ def formatMacro(macro, macroes):
     for s in ('>=', '<=', '!=', '==', '=', '<', '>'):
         if s in _macro:
             _macro, _operator, _math = _macro.partition(s)
+            if '<dl' in _math:
+                return '<dl>'
             break
     _macro, _, fm['suf'] = _macro.partition('~')
     _macro, _, t = _macro.partition('%')
@@ -206,7 +208,6 @@ def formatMacro(macro, macroes):
                 _macro = ''
             else:
                 _macro = '{0:{flag}{width}{prec}{type}}{suf}'.format(_macro, **fm)
-        # log('_macro = %s' % _macro)
         return str(_macro)
     else:
         return macro
@@ -219,29 +220,48 @@ def parser(strHTML, macroes):
     if not isinstance(strHTML, str):
         strHTML = str(strHTML)
     while b:
-        dl = True
+        while b:
+            b = False
+            for s in MACROS_NAME:
+                temp_str = '{{%s}}' % s
+                if strHTML.find(temp_str) >= 0:
+                    _macro = macroes.get(s, None)
+                    value = '' if _macro is None else str(_macro)
+                    strHTML = strHTML.replace(temp_str, value)
+                    b = True
         start = strHTML.rfind('{{')
         end = strHTML.find('}}', start) + 2
         b = (start >= 0) and (end >= 2)
+        substr = strHTML[start:end]
+        dl = True
         if b:
             for s in MACROS_NAME:
-                begin = strHTML[start:end].find(s)
-                if (begin == 2) and (strHTML[(start + begin + len(s))] in ('|', '?', '~', '%', '>', '<', '!', '=', '}')):
+                begin = substr.find(s)
+                if (begin == 2) and (strHTML[(start + begin + len(s))] in ('|', '?', '~', '%', '>', '<', '!', '=')):
                     dl = False
                     break
             if dl:
                 i += 1
-                notMacroesDL['<dl>' + str(i)] = strHTML[start:end]
-                strHTML = strHTML.replace(notMacroesDL['<dl>' + str(i)], ('<dl>' + str(i)))
+                temp_str = '<dl%s>' % str(i)
+                notMacroesDL[temp_str] = substr
+                strHTML = '%s%s%s' % (strHTML[0:start], temp_str, strHTML[end:])
             else:
-                # old_strHTML = strHTML
                 s = strHTML[start:end]
-                strHTML = strHTML.replace(s, formatMacro(s, macroes))
-    while notMacroesDL:
+                _macro = formatMacro(s, macroes)
+                if _macro == '<dl>':
+                    i += 1
+                    temp_str = '<dl%s>' % str(i)
+                    notMacroesDL[temp_str] = s
+                    _macro = temp_str
+                strHTML = '%s%s%s' % (strHTML[0:start], _macro, strHTML[end:])
+    b = True
+    while b and i > 0:
+        b = False
         _notMacroesDL = notMacroesDL.copy()
         for s in _notMacroesDL:
-            strHTML = strHTML.replace(s, notMacroesDL.pop(s, ''))
-    # log('strHTML = %s' % strHTML)
+            if strHTML.find(s) >= 0:
+                b = True
+                strHTML = strHTML.replace(s, notMacroesDL.pop(s, ''), 1)
     return strHTML
 
 
@@ -401,9 +421,10 @@ class Data(object):
             self.data['damage'] = 0
             self.updateData()
             self.updateLabels()
-            as_event('ON_HIT')
 
     def updateLabels(self):
+        _log.callEvent = _logBackground.callEvent = not isDownAlt
+        _logAlt.callEvent = _logAltBackground.callEvent = isDownAlt
         _logAlt.output()
         _log.output()
         _lastHit.output()
@@ -449,7 +470,6 @@ class Data(object):
         self.data['oldHealth'] = max(0, newHealth)
         self.updateData()
         self.updateLabels()
-        as_event('ON_HIT')
 
 
 data = Data()
@@ -479,7 +499,7 @@ def getValueMacroes(section, value):
              'c:type-shell': conf['c_typeShell'].get(value['shellKind']),
              'c:hit-effects': conf['c_HitEffect'].get(value['hitEffect']),
              'hit-effects': conf['hitEffect'].get(value['hitEffect'], 'unknown'),
-             'number': value['number'] if value['number'] is not None else None,
+             'number': value['number'], # if value['number'] is not None else None,
              'dmg': value['damage'],
              'dmg-ratio': value['dmgRatio'],
              'vehicle': value['shortUserString'],
@@ -490,7 +510,7 @@ def getValueMacroes(section, value):
              'clanicon': value['clanicon'],
              'squad-num': value['squadnum'],
              'reloadGun': value['reloadGun'],
-             'my-alive': 'alive' if value['isAlive'] else None,
+             'my-alive': 'al' if value['isAlive'] else None,
              'gun-caliber': value['caliber'],
              'wn8': value.get('wn8', None),
              'xwn8': value.get('xwn8', None),
@@ -549,7 +569,7 @@ class DamageLog(object):
             _data = {'x': config.get(section + 'x'), 'y': config.get(section + 'y')}
         self.x = _data['x']
         self.y = _data['y']
-
+        self.callEvent = True
 
     def reset(self, section):
         self.listLog = []
@@ -559,6 +579,7 @@ class DamageLog(object):
         self.dictVehicle = {}
         self.dataLog = {}
         self.shadow = {}
+        self.callEvent = True
         if (None not in [self.x, self.y]) and config.get(section + 'moveInBattle') and section == 'damageLog/log/':
             userprefs.set('DamageLog/dLog', {'x': self.x, 'y': self.y})
 
@@ -632,12 +653,14 @@ class DamageLog(object):
                                                                 'numberLine': 0,
                                                                 'beginFire': beginFire if attackReasonID == 1 else None}
                 self.addLine(attackerID, attackReasonID)
+            if self.callEvent:
+                as_event('ON_HIT')
         else:
             if config.get(self.section + 'showHitNoDamage') or data.data['isDamage']:
                 self.dataLog = data.data
                 self.addLine(None, None)
-        as_event('ON_HIT')
-        return
+                if self.callEvent:
+                    as_event('ON_HIT')
 
 
 class LastHit(object):
@@ -743,8 +766,7 @@ class LastHit(object):
             self.timerLastHit = TimeInterval(timeDisplayLastHit, self, 'hideLastHit')
             self.timerLastHit.start()
             self.shadow = shadow_value(self.section, macroes)
-        as_event('ON_LAST_HIT')
-        return
+            as_event('ON_LAST_HIT')
 
 
 _log = DamageLog('damageLog/log/')

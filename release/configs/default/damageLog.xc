@@ -27,7 +27,7 @@
     {{dmg-ratio}}         - received damage in percent / полученный урон в процентах.
     {{team-dmg}}          - source of damage (ally , enemy, self damage) / источник урона (союзник, противник, урон по себе).
     {{splash-hit}}        - text when hit by splash damage from shell (HE/HESH) / текст при попадании осколков снаряда (ОФ/ХФ).
-    {{my-alive}}          - value 'alive' if my vehicle is alive, '' for dead / возвращает 'alive', если я живой, '', если не живой
+    {{my-alive}}          - value 'al' if my vehicle is alive, '' for dead / возвращает 'al', если я живой, '', если не живой
     {{reloadGun}}         - reloading time of a gun / время перезарядки орудия 
     {{gun-caliber}}       - caliber of a gun / калибр орудия
     {{wn8}}, {{xwn8}}, {{eff}}, {{xeff}}, {{wgr}}, {{xwgr}}, {{xte}}                - statistics macros (see macros.txt) / макросы статистика (смотрите macros_ru.txt)
@@ -35,7 +35,7 @@
     {{fire-duration}}     - duration of fire ("groupDamagesFromFire" must be enabled to work) / продолжительность пожара (работает только при включенной опции "groupDamagesFromFire")
     {{diff-masses}}       - vehicles weights difference during collision / разность масс техники при столкновении
     {{nation}}            - vehicle nation / нация техники
-    {{my-blownup}}         - TO DO / возвращает 'blownup', если взорван боекомплект техники игрока, иначе пусто
+    {{my-blownup}}        - value 'blownup' if own vehicle's ammunition have been blown up, '' otherwise  / возвращает 'blownup', если взорван боекомплект техники игрока, иначе пусто
 */
 
 {
