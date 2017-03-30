@@ -39,20 +39,15 @@ pack_xfw(){
     rm -rf "~output_zip/"
     mkdir -p "~output_zip/"
 
-    mkdir -p "~output_zip/res_mods/~ver/gui/flash/"
-    cp -rf "~output/swf_wg/." "~output_zip/res_mods/~ver/gui/flash"
+    mkdir -p "~output_zip/mods/$XVMBUILD_WOT_VERSION/"
+    cp -rf "~output_wotmod/com.modxvm.xfw_$XVMBUILD_XFW_VERSION.$XVMBUILD_XFW_REVISION.wotmod" "~output_zip/mods/$XVMBUILD_WOT_VERSION/"
 
-    mkdir -p "~output_zip/res_mods/~ver/scripts/client/gui/mods/"
-    cp -rf "~output/python/scripts/." "~output_zip/res_mods/~ver/scripts/"
+
+    mkdir -p "~output_zip/res_mods/$XVMBUILD_WOT_VERSION/gui/flash/"
+    cp -rf "~output/swf_wg/." "~output_zip/res_mods/$XVMBUILD_WOT_VERSION/gui/flash"
 
     mkdir -p "~output_zip/res_mods/mods/xfw/actionscript/"
     cp -rf "~output/swf/." "~output_zip/res_mods/mods/xfw/actionscript"
-
-    mkdir -p "~output_zip/res_mods/mods/xfw/native/"
-    cp -rf "~output/native/." "~output_zip/res_mods/mods/xfw/native/"
-
-    mkdir -p "~output_zip/res_mods/mods/xfw/python/"
-    cp -rf "~output/python/mods/xfw/." "~output_zip/res_mods/mods/xfw/"
 
     mkdir -p "~output_zip/res_mods/mods/xfw/resources/"
 
