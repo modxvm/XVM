@@ -81,8 +81,8 @@ deploy_xvm(){
     echo $XVMBUILD_XFW_HASH > "$XVMBUILD_OUTPUT_PATH"/xfw_hash.txt
     echo $XVMBUILD_XFW_BRANCH > "$XVMBUILD_OUTPUT_PATH"/xfw_branch.txt
 
-    echo $XVMBUILD_XVM_VERSION > "$XVMBUILD_OUTPUT_PATH"/xvm_version.txt
-    echo $XVMBUILD_WOT_VERSION > "$XVMBUILD_OUTPUT_PATH"/wot_version.txt
+    echo "$XVMBUILD_XVM_VERSION" > "$XVMBUILD_OUTPUT_PATH"/xvm_version.txt
+    echo "$XVMBUILD_WOT_VERSION" > "$XVMBUILD_OUTPUT_PATH"/wot_version.txt
 }
 
 deploy_xvminst()
