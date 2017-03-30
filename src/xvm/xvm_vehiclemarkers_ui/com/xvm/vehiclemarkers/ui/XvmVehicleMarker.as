@@ -70,7 +70,7 @@ package com.xvm.vehiclemarkers.ui
 
         override public function setVehicleInfo(vClass:String, vIconSource:String, vType:String, vLevel:int,
             pFullName:String, pName:String, pClan:String, pRegion:String,
-            maxHealth:int, entityName:String, hunt:Boolean, squadIndex:int):void
+            maxHealth:int, entityName:String, hunt:Boolean, squadIndex:int, locSecString:String):void
         {
             // WORKAROUND: possible bug - marker instance not deletes on MarkersManager.destroyMarker() call.
             if (!parent) { dispose(); return; }
