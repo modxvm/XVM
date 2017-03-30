@@ -1,4 +1,7 @@
-﻿XVM-6.5.8-dev:
+﻿XVM-6.6.0-dev:
+  [GENERAL]
+  * adaptation to World of Tanks 9.18
+
   [XFW]
   * part of the functionality (ping, XInput) was moved from XVM to XFW
   * partially switch to .wotmod packages format
