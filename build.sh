@@ -41,7 +41,6 @@ create_directories()
     pushd "$XVMBUILD_ROOT_PATH" > /dev/null
     mkdir -p ~output/mods/~ver/
     mkdir -p ~output/res_mods/~ver/gui/flash
-    mkdir -p ~output/res_mods/~ver/scripts
     mkdir -p ~output/res_mods/configs/xvm
     mkdir -p ~output/res_mods/mods/xfw/actionscript
     mkdir -p ~output/res_mods/mods/shared_resources/xvm/
