@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.17.1',
+    'VERSION':       '0.9.18',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.17.1'],
+    'GAME_VERSIONS': ['0.9.18'],
     # optional
 }
 
