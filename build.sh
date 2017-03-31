@@ -39,7 +39,6 @@ clean_sha1()
 create_directories()
 {
     pushd "$XVMBUILD_ROOT_PATH" > /dev/null
-    mkdir -p ~output/mods/~ver/
     mkdir -p ~output/res_mods/configs/xvm
     mkdir -p ~output/res_mods/mods/shared_resources/xvm/
     popd > /dev/null
@@ -132,7 +131,6 @@ calc_hash_for_xvm_integrity()
 copy_files()
 {
     # rename version-dependent folder
-    mv "$XVMBUILD_ROOT_PATH"/~output/res_mods/~ver/ "$XVMBUILD_ROOT_PATH"/~output/res_mods/"$XVMBUILD_WOT_VERSION"
     mv "$XVMBUILD_ROOT_PATH"/~output/mods/~ver/ "$XVMBUILD_ROOT_PATH"/~output/mods/"$XVMBUILD_WOT_VERSION"
 
     # cp non-binary files
