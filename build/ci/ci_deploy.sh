@@ -42,15 +42,6 @@ pack_xfw(){
     mkdir -p "~output_zip/mods/$XVMBUILD_WOT_VERSION/"
     cp -rf "~output_wotmod/com.modxvm.xfw_$XVMBUILD_XFW_VERSION.$XVMBUILD_XFW_REVISION.wotmod" "~output_zip/mods/$XVMBUILD_WOT_VERSION/"
 
-
-    mkdir -p "~output_zip/res_mods/$XVMBUILD_WOT_VERSION/gui/flash/"
-    cp -rf "~output/swf_wg/." "~output_zip/res_mods/$XVMBUILD_WOT_VERSION/gui/flash"
-
-    mkdir -p "~output_zip/res_mods/mods/xfw/actionscript/"
-    cp -rf "~output/swf/." "~output_zip/res_mods/mods/xfw/actionscript"
-
-    mkdir -p "~output_zip/res_mods/mods/xfw/resources/"
-
     cp -r "~output/swc/" "~output_zip/"
 
     popd > /dev/null
