@@ -433,7 +433,7 @@ _data = {
     "usa:A116_XM551":                        'Sheri',
     "usa:A117_T26E5":                        'T26e5',
     "usa:A117_T26E5_Patriot":                'T26e5',
-    "usa-A118_M4_Thunderbolt":               'Thund.bt',
+    "usa:A118_M4_Thunderbolt":               'Thund.bt',
     "usa:A11_T29":                           'T29',
     "usa:A11_T29_IGR":                       'T29',
     "usa:A12_T32":                           'T32',
