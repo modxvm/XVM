@@ -44,8 +44,10 @@ make_dirs()
 
 build_xfw()
 {
-  pushd ../xfw/src/python/ >/dev/null
-  ./build.sh || exit 1
+  pushd ../xfw/ >/dev/null
+  export XFW_BUILD_CLEAR=0
+  export XFW_BUILD_LIBS=0
+  ./build.sh python || exit 1
   popd >/dev/null
 }
 
