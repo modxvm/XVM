@@ -26,7 +26,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 05.02.2017
+    # Last update: 31.03.2017
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -59,6 +59,8 @@ _data = {
     "china:Ch24_Type64":                     'Typ64',
     "china:Ch25_121_mod_1971B":              '121B',
     "china:Ch26_59_Patton":                  '59Pat',
+    "china:Ch28_WZ_132A":                    'wz132a',
+    "china:Ch29_Type_62C_prot":              'wz132·1',
     "czech:Cz01_Skoda_T40":                  'skT40',
     "czech:Cz02_TVP_T50":                    'skT50',
     "czech:Cz03_LT_vz35":                    'vz.35',
@@ -134,6 +136,8 @@ _data = {
     "france:F74_AMX_M4_1949_Liberte":        'amx4·49',
     "france:F75_Char_de_25t":                'BChatAP',
     "france:F84_Somua_SM":                   'Som·SM',
+    "france:F87_Batignolles-Chatillon_12t":  'BChat12t',
+    "france:F88_AMX_13_105":                 '13·105',
     "germany:Env_Artillery":                 'E.Art',
     "germany:G02_Hummel":                    'Humml',
     "germany:G03_PzV_Panther":               'Pant',
@@ -179,6 +183,8 @@ _data = {
     "germany:G120_M41_90_GrandFinal":        'M41·90·GF',
     "germany:G121_Grille_15_L63":            'Grill15',
     "germany:G122_VK6501H":                  '6501h',
+    "germany:G125_Spz_57_Rh":                'Rhm.Pzw',
+    "germany:G126_HWK_12":                   'HWK12',
     "germany:G12_Ltraktor":                  'Ltr',
     "germany:G12_Ltraktor_bot":              'Ltr',
     "germany:G13_VK3001H":                   '3001h',
@@ -424,8 +430,10 @@ _data = {
     "usa:A111_T25_Pilot":                    'T25PN1',
     "usa:A112_T71E2":                        'T71·CMCD',
     "usa:A115_Chrysler_K":                   'ChrysK',
+    "usa:A116_XM551":                        'Sheri',
     "usa:A117_T26E5":                        'T26e5',
     "usa:A117_T26E5_Patriot":                'T26e5',
+    "usa:A118_M4_Thunderbolt":               'Thund.bt',
     "usa:A11_T29":                           'T29',
     "usa:A11_T29_IGR":                       'T29',
     "usa:A12_T32":                           'T32',
@@ -544,7 +552,10 @@ _data = {
     "ussr:R128_KV4_Kreslavskiy":             'Kv·4·Kresl',
     "ussr:R129_Object_257":                  'obj257',
     "ussr:R12_A-20":                         'A·20',
+    "ussr:R131_Tank_Gavalov":                'ltg',
+    "ussr:R132_VNII_100LT":                  't100lt',
     "ussr:R133_KV_122":                      'Kv122',
+    "ussr:R134_Object_252K":                 'zashch',
     "ussr:R134_Object_252U":                 'obj252u',
     "ussr:R13_KV-1s":                        'Kv·1s',
     "ussr:R14_SU-5":                         'Su·5',
