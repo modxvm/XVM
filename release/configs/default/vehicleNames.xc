@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 05.02.2017
+    // Last update: 31.03.2017
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -37,6 +37,8 @@
     "china-Ch24_Type64":                     {"name": null, "short": null},
     "china-Ch25_121_mod_1971B":              {"name": null, "short": null},
     "china-Ch26_59_Patton":                  {"name": null, "short": null},
+    "china-Ch28_WZ_132A":                    {"name": null, "short": null},
+    "china-Ch29_Type_62C_prot":              {"name": null, "short": null},
     "czech-Cz01_Skoda_T40":                  {"name": null, "short": null},
     "czech-Cz02_TVP_T50":                    {"name": null, "short": null},
     "czech-Cz03_LT_vz35":                    {"name": null, "short": null},
@@ -112,6 +114,8 @@
     "france-F74_AMX_M4_1949_Liberte":        {"name": null, "short": null},
     "france-F75_Char_de_25t":                {"name": null, "short": null},
     "france-F84_Somua_SM":                   {"name": null, "short": null},
+    "france-F87_Batignolles-Chatillon_12t":  {"name": null, "short": null},
+    "france-F88_AMX_13_105":                 {"name": null, "short": null},
     "germany-Env_Artillery":                 {"name": null, "short": null},
     "germany-G02_Hummel":                    {"name": null, "short": null},
     "germany-G03_PzV_Panther":               {"name": null, "short": null},
@@ -157,6 +161,8 @@
     "germany-G120_M41_90_GrandFinal":        {"name": null, "short": null},
     "germany-G121_Grille_15_L63":            {"name": null, "short": null},
     "germany-G122_VK6501H":                  {"name": null, "short": null},
+    "germany-G125_Spz_57_Rh":                {"name": null, "short": null},
+    "germany-G126_HWK_12":                   {"name": null, "short": null},
     "germany-G12_Ltraktor":                  {"name": null, "short": null},
     "germany-G12_Ltraktor_bot":              {"name": null, "short": null},
     "germany-G13_VK3001H":                   {"name": null, "short": null},
@@ -402,8 +408,10 @@
     "usa-A111_T25_Pilot":                    {"name": null, "short": null},
     "usa-A112_T71E2":                        {"name": null, "short": null},
     "usa-A115_Chrysler_K":                   {"name": null, "short": null},
+    "usa-A116_XM551":                        {"name": null, "short": null},
     "usa-A117_T26E5":                        {"name": null, "short": null},
     "usa-A117_T26E5_Patriot":                {"name": null, "short": null},
+    "usa-A118_M4_Thunderbolt":               {"name": null, "short": null},
     "usa-A11_T29":                           {"name": null, "short": null},
     "usa-A11_T29_IGR":                       {"name": null, "short": null},
     "usa-A12_T32":                           {"name": null, "short": null},
@@ -522,7 +530,10 @@
     "ussr-R128_KV4_Kreslavskiy":             {"name": null, "short": null},
     "ussr-R129_Object_257":                  {"name": null, "short": null},
     "ussr-R12_A-20":                         {"name": null, "short": null},
+    "ussr-R131_Tank_Gavalov":                {"name": null, "short": null},
+    "ussr-R132_VNII_100LT":                  {"name": null, "short": null},
     "ussr-R133_KV_122":                      {"name": null, "short": null},
+    "ussr-R134_Object_252K":                 {"name": null, "short": null},
     "ussr-R134_Object_252U":                 {"name": null, "short": null},
     "ussr-R13_KV-1s":                        {"name": null, "short": null},
     "ussr-R14_SU-5":                         {"name": null, "short": null},
