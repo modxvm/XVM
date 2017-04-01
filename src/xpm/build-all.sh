@@ -130,8 +130,6 @@ en = JSONxLoader.load('../../release/l10n/en.xc')
 ru = JSONxLoader.load('../../release/l10n/ru.xc')
 print('DEFAULT_CONFIG={}\nLANG_EN={}\nLANG_RU={}'.format(cfg, en, ru))
 " > $dc_fn 2>&1
-rm -f ../xfw/~output/python/mods/xfw/python/lib/JSONx/*.pyc
-rm -f ../xfw/~output/python/mods/xfw/python/lib/JSONxLoader/*.pyc
 "$XVMBUILD_PYTHON_FILEPATH" -c "import py_compile; py_compile.compile('$dc_fn')" 2>&1
 [ ! -f ${dc_fn}c ] && { cat "$dc_fn"; rm -f "$dc_fn"; }
 rm -f "${dc_fn}c"
