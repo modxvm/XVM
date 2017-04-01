@@ -54,7 +54,7 @@ package com.xvm.lobby.ping
         {
             if (pingControl)
             {
-                pingControl.visible = isHangar || (cfg.layer.toLowerCase() == "top");
+                pingControl.visible = isHangar || (cfg.layer.toLowerCase() == Defines.LAYER_TOP);
             }
         }
 
@@ -69,7 +69,7 @@ package com.xvm.lobby.ping
             if (cfg.enabled)
             {
                 var layer:String = cfg.layer.toLowerCase();
-                var index:int = (layer == "bottom") ? 0 : (layer == "top") ? page.getChildIndex(page.header) + 1 : page.getChildIndex(page.header);
+                var index:int = (layer == Defines.LAYER_BOTTOM) ? 0 : (layer == Defines.LAYER_TOP) ? page.getChildIndex(page.header) + 1 : page.getChildIndex(page.header);
                 pingControl = page.addChildAt(new PingServersView(cfg), index) as PingServersView;
             }
         }

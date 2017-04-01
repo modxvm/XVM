@@ -49,9 +49,6 @@
     // Below this percentage, ammo is low. (0 - 100)
     // Ниже этого процента, снарядов считается мало. (0 - 100)
     "lowAmmoPercentage": 20,
-    // true - Enable widgets
-    // true - включить виджеты
-    "widgetsEnabled": false,
     // Ping servers
     // Пинг серверов
     "pingServers": {
@@ -359,6 +356,9 @@
     "carousel": ${"carousel.xc":"carousel"},
     // Parameters for hangar clock
     // Параметры часов в ангаре
-    "clock": ${"clock.xc":"clock"}
+    "clock": ${"clock.xc":"clock"},
+    // Parameters for widgets
+    // Параметры виджетов
+    "widgets": ${"widgets.xc":"widgets.lobby"}
   }
 }

@@ -23,7 +23,6 @@ package com.xvm.types.cfg
         public var enableEquipAutoReturn:*;
         public var blockVehicleIfLowAmmo:*;
         public var lowAmmoPercentage:*;
-        public var widgetsEnabled:*;
         public var pingServers:CPingServers;
         public var onlineServers:COnlineServers;
         public var serverInfo:CHangarElement;
@@ -35,6 +34,7 @@ package com.xvm.types.cfg
         public var notificationsButtonType:String;
         public var carousel:CCarousel;
         public var clock:CHangarClock;
+        public var widgets:Array;
 
         public function clone():*
         {

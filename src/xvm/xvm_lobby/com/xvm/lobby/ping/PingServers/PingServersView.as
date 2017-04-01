@@ -83,9 +83,9 @@ package com.xvm.lobby.ping.PingServers
         {
             switch (cfg.vAlign)
             {
-                case "center":
+                case TextFieldEx.VALIGN_CENTER:
                     return (App.appHeight - this.actualHeight) / 2;
-                case "bottom":
+                case TextFieldEx.VALIGN_BOTTOM:
                     return App.appHeight - this.actualHeight;
             }
             return 0;

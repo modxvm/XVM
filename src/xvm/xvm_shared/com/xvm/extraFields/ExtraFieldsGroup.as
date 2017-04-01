@@ -4,6 +4,7 @@
  */
 package com.xvm.extraFields
 {
+    import com.xvm.*;
     import com.xvm.extraFields.*;
     import com.xvm.types.cfg.*;
     import com.xvm.vo.*;
@@ -12,11 +13,6 @@ package com.xvm.extraFields
 
     public class ExtraFieldsGroup implements IDisposable
     {
-        private const SUBSTRATE:String = "substrate";
-        private const BOTTOM:String = "bottom";
-        private const NORMAL:String = "normal";
-        private const TOP:String = "top";
-
         public var substrate:ExtraFields = null;
         public var bottom:ExtraFields = null;
         public var normal:ExtraFields = null;
@@ -34,25 +30,25 @@ package com.xvm.extraFields
             var filteredFormats:Array;
             if (formats && formats.length)
             {
-                filteredFormats = filterFormats(formats, SUBSTRATE);
+                filteredFormats = filterFormats(formats, Defines.LAYER_SUBSTRATE);
                 if (filteredFormats && filteredFormats.length)
                 {
                     substrate = new ExtraFields(filteredFormats, item.isLeftPanel, item.getSchemeNameForPlayer, item.getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
                     item.substrateHolder.addChild(substrate);
                 }
-                filteredFormats = filterFormats(formats, BOTTOM);
+                filteredFormats = filterFormats(formats, Defines.LAYER_BOTTOM);
                 if (filteredFormats && filteredFormats.length)
                 {
                     bottom = new ExtraFields(filteredFormats, item.isLeftPanel, item.getSchemeNameForPlayer, item.getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
                     item.bottomHolder.addChild(bottom);
                 }
-                filteredFormats = filterFormats(formats, NORMAL);
+                filteredFormats = filterFormats(formats, Defines.LAYER_NORMAL);
                 if (filteredFormats && filteredFormats.length)
                 {
                     normal = new ExtraFields(filteredFormats, item.isLeftPanel, item.getSchemeNameForPlayer, item.getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
                     item.normalHolder.addChild(normal);
                 }
-                filteredFormats = filterFormats(formats, TOP);
+                filteredFormats = filterFormats(formats, Defines.LAYER_TOP);
                 if (filteredFormats && filteredFormats.length)
                 {
                     top = new ExtraFields(filteredFormats, item.isLeftPanel, item.getSchemeNameForPlayer, item.getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);

@@ -9,6 +9,7 @@ package com.xvm.lobby.ui.clock
     import com.xvm.types.cfg.*;
     import flash.display.*;
     import flash.utils.*;
+    import flash.text.*;
     import net.wg.gui.components.controls.UILoaderAlt; // '*' conflicts with UI classes
     import net.wg.gui.events.*;
     import scaleform.clik.constants.*;
@@ -120,20 +121,20 @@ package com.xvm.lobby.ui.clock
 
             switch (cfg.align)
             {
-                case "center":
+                case TextFormatAlign.CENTER:
                     x += (App.appWidth - cfg.width) / 2;
                     break;
-                case "right":
+                case TextFormatAlign.RIGHT:
                     x += App.appWidth - cfg.width;
                     break;
             }
 
             switch (cfg.valign)
             {
-                case "center":
+                case TextFieldEx.VALIGN_CENTER:
                     y += (App.appHeight - cfg.height) / 2;
                     break;
-                case "bottom":
+                case TextFieldEx.VALIGN_BOTTOM:
                     y += App.appHeight - cfg.height;
                     break;
             }

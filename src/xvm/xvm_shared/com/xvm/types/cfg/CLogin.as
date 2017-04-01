@@ -13,6 +13,7 @@ package com.xvm.types.cfg
         public var confirmOldReplays:*;
         public var pingServers:CPingServers;
         public var onlineServers:COnlineServers;
+        public var widgets:Array;
 
         public function clone():*
         {

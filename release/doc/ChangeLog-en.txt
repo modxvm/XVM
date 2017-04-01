@@ -12,6 +12,12 @@
   [DAMAGE LOG]
   * 'alive' value of a macro {{my-alive} } is renamed into 'al'
 
+  [WIDGETS]
+  * added new function - widgets in login and lobby
+    currently only "extrafields" widget type implemented
+    configuration files: widgets.xc, widgetsTemplates.xc
+    referenced from lobby.xc, hangar.xc
+
 XVM-6.5.7:
   [GENERAL]
   * adaptation to 23.03.2017 micropatch

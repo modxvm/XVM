@@ -30,7 +30,7 @@ package com.xvm.lobby.ui.clock
             this.cfg = Config.config.hangar.clock;
 
             var layer:String = cfg.layer.toLowerCase();
-            var index:int = (layer == "bottom") ? 0 : (layer == "top") ? page.getChildIndex(page.header) + 1 : page.getChildIndex(page.subViewContainer as DisplayObject) + 1;
+            var index:int = (layer == Defines.LAYER_BOTTOM) ? 0 : (layer == Defines.LAYER_TOP) ? page.getChildIndex(page.header) + 1 : page.getChildIndex(page.subViewContainer as DisplayObject) + 1;
             clock = page.addChildAt(new ClockControl(cfg), index) as ClockControl;
         }
 
@@ -48,7 +48,7 @@ package com.xvm.lobby.ui.clock
         {
             if (clock)
             {
-                clock.visible = isHangar || (cfg.layer.toLowerCase() == "top");
+                clock.visible = isHangar || (cfg.layer.toLowerCase() == Defines.LAYER_TOP);
             }
         }
     }

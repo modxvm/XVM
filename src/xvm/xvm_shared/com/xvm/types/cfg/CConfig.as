@@ -6,6 +6,9 @@ package com.xvm.types.cfg
 {
     import com.xfw.*;
 
+    // add unreferenced classes
+    CWidget;
+
     public dynamic class CConfig extends Object implements ICloneable
     {
         // internal

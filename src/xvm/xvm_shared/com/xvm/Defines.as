@@ -76,13 +76,6 @@ package com.xvm
         public static const FROM_SQUAD:int = 3;
         public static const FROM_PLAYER:int = 4;
 
-        //// Widgets
-        //public static const WIDGET_MODE_HIDE:int =     0x01;
-        //public static const WIDGET_MODE_1:int =        0x02;
-        //public static const WIDGET_MODE_2:int =        0x04;
-        //public static const WIDGET_MODE_DETAILED:int = 0x08;
-        //public static const WIDGET_MODES_ALL:int = WIDGET_MODE_HIDE | WIDGET_MODE_1 | WIDGET_MODE_2 | WIDGET_MODE_DETAILED;
-
         //// String templates
         //public static const SYSTEM_MESSAGE_HEADER:String =
             //'<textformat tabstops="[130]"><img src="img://../xvm/res/icons/xvm/16x16t.png" vspace="-5">' +
@@ -133,5 +126,14 @@ package com.xvm
         // constants.DEATH_ZONES
         public static const DEATH_ZONES_STATIC:int = 0;
         public static const DEATH_ZONES_GAS_ATTACK:int = 1;
+
+        // layers
+        public static const LAYER_SUBSTRATE:String = "substrate";
+        public static const LAYER_BOTTOM:String = "bottom";
+        public static const LAYER_NORMAL:String = "normal";
+        public static const LAYER_TOP:String = "top";
+
+        // widgets types
+        public static const WIDGET_TYPE_EXTRAFIELD:String = "extrafield";
     }
 }

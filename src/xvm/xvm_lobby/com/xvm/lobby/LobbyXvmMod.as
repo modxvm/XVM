@@ -24,6 +24,7 @@ package com.xvm.lobby
     import com.xvm.lobby.squad.SquadXvmView;
     import com.xvm.lobby.techtree.ResearchXvmView;
     import com.xvm.lobby.techtree.TechTreeXvmView;
+    import com.xvm.lobby.widgets.WidgetsXvmView;
     import flash.events.*;
     import net.wg.infrastructure.interfaces.*;
 
@@ -45,8 +46,8 @@ package com.xvm.lobby
 
         private static const _views:Object =
         {
-            "login": [ LoginLayoutXvmView, OnlineLoginXvmView, PingLoginXvmView/*, WidgetsXvmView*/ ],
-            "lobby": [ LobbyXvmView, ClockXvmView, LimitsXvmView, OnlineLobbyXvmView, PingLobbyXvmView/*, WidgetsXvmView*/ ],
+            "login": [ LoginLayoutXvmView, OnlineLoginXvmView, PingLoginXvmView, WidgetsXvmView ],
+            "lobby": [ LobbyXvmView, ClockXvmView, LimitsXvmView, OnlineLobbyXvmView, PingLobbyXvmView, WidgetsXvmView ],
             "hangar": [ CrewXvmView, HangarXvmView ],
             "battleResults": [ BattleResultsXvmView ],
             "prb_windows/companyWindow": [ CompanyXvmView ],
