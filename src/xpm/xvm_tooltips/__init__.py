@@ -153,9 +153,6 @@ def SimplifiedStatsBlockConstructor_construct(base, self):
 @overrideMethod(tooltips_vehicle.AdditionalStatsBlockConstructor, 'construct')
 def AdditionalStatsBlockConstructor_construct(base, self):
     if config.get('tooltips/hideBottomText'):
-        lockBlock = self._makeLockBlock()
-        if lockBlock is not None:
-            return [lockBlock]
         return []
     else:
         return base(self)

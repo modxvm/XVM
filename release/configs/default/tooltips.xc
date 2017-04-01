@@ -162,6 +162,8 @@ List of possible values: (if the parameter is not relevant for some tank, it wil
 "piercingPowerAvg",                     - Пробитие базовым снарядом (среднее) \ Penetration of basic shell (avg)
 "piercingPowerAvgSummary",              - Сводка пробития всеми снарядами \ Summary of penetration of all shells
 "avgDamage",                            - Средний урон базовым снарядом \ Average damage of basic shell
+"stunMaxDuration",                      - Максимальное время оглушения (c) \ TO DO
+"stunMinDuration",                      - Минимальное время оглушения (c) \ TO DO
 "damageAvgSummary",                     - Сводка урона всеми снарядами \ Summary of damages of all shells
 "avgDamagePerMinute",                   - Средний ДПМ базовым снарядом\ Average DPM with basic shell
 "explosionRadius",                      - Радиус разлета осколков фугаса \ Radius of HE explosion splash

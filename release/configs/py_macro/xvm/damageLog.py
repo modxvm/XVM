@@ -159,7 +159,7 @@ def formatMacro(macro, macroes):
         if s in _macro:
             _macro, _operator, _math = _macro.partition(s)
             if '<dl' in _math:
-                return '<dl>'
+                return _macro, '<dl>'
             break
     _macro, _, fm['suf'] = _macro.partition('~')
     _macro, _, t = _macro.partition('%')
@@ -208,9 +208,9 @@ def formatMacro(macro, macroes):
                 _macro = ''
             else:
                 _macro = '{0:{flag}{width}{prec}{type}}{suf}'.format(_macro, **fm)
-        return str(_macro)
+        return str(_macro), None
     else:
-        return macro
+        return macro, None
 
 
 def parser(strHTML, macroes):
@@ -247,12 +247,20 @@ def parser(strHTML, macroes):
                 strHTML = '%s%s%s' % (strHTML[0:start], temp_str, strHTML[end:])
             else:
                 s = strHTML[start:end]
-                _macro = formatMacro(s, macroes)
-                if _macro == '<dl>':
-                    i += 1
-                    temp_str = '<dl%s>' % str(i)
-                    notMacroesDL[temp_str] = s
-                    _macro = temp_str
+                _macro, non = formatMacro(s, macroes)
+                if non == '<dl>':
+                    s = s.replace('{{' + _macro, '{{' + macroes[_macro], 1)
+                    b1 = True
+                    for s1 in MACROS_NAME:
+                        if s.find('{{%s' % s1) >= 0:
+                            b1 = False
+                    if b1:
+                        i += 1
+                        temp_str = '<dl%s>' % str(i)
+                        notMacroesDL[temp_str] = s
+                        _macro = temp_str
+                    else:
+                        _macro = s
                 strHTML = '%s%s%s' % (strHTML[0:start], _macro, strHTML[end:])
     b = True
     while b and i > 0:
@@ -789,9 +797,9 @@ def DamageLogPanel_addToBottomLog(base, self, value, actionTypeImg, vehicleTypeI
 
 
 @overrideMethod(DamageLogPanel, 'as_summaryStatsS')
-def as_summaryStatsS(base, self, damage, blocked, assist):
+def as_summaryStatsS(base, self, damage, blocked, assist, stun):
     if not config.get('damageLog/disabledSummaryStats'):
-        return base(self, damage, blocked, assist)
+        return base(self, damage, blocked, assist, stun)
 
 
 @overrideMethod(DamageLogPanel, '_onTotalEfficiencyUpdated')
