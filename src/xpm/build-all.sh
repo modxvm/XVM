@@ -43,6 +43,8 @@ build_xfw()
   export XFW_BUILD_CLEAR=0
   export XFW_BUILD_LIBS=0
   ./build.sh python || exit 1
+  unset XFW_BUILD_CLEAR
+  unset XFW_BUILD_LIBS
   popd >/dev/null
 }
 
