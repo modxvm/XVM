@@ -12,8 +12,9 @@
     "format": {
       "x": 100,
       "y": 100,
-      "width": 500,
-      "height": 1000,
+      "width": 200,
+      "height": 100,
+      "borderColor": "0xFFFF00",
       "textFormat": { "color": "0xF4EFE8", "size": 15 },
       "format": "TEST TEST TEST TEST\nTEST TEST TEST TEST\nTEST TEST TEST TEST\n"
     }
@@ -26,9 +27,10 @@
     "type": "extrafield",
     "format": {
       "x": 300,
-      "y": 20,
-      "width": 500,
-      "height": 1000,
+      "y": 500,
+      "width": 200,
+      "height": 100,
+      "borderColor": "0x00FF00",
       "textFormat": { "color": "0xF4EFE8", "size": 15 },
       "format": "TEST2 TEST2 TEST2 TEST2\nTEST2 TEST2 TEST2 TEST2\nTEST2 TEST2 TEST2 TEST2\n"
     }

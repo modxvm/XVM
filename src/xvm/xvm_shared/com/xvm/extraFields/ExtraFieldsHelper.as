@@ -274,10 +274,10 @@ package com.xvm.extraFields
         {
             if (cfgEventName != null)
             {
-                (field as Sprite).mouseEnabled = true;
+                field.mouseEnabled = true;
                 if (buttonMode)
                 {
-                    (field as Sprite).buttonMode = true;
+                    field.buttonMode = true;
                 }
                 field.addEventListener(eventName, handleMouseEvent);
             }
