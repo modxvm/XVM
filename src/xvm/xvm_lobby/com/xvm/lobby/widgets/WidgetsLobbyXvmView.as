@@ -59,14 +59,14 @@ package com.xvm.lobby.widgets
                 extraFieldsWidgetsBottom = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
             }
 
-            widgets = filterWidgets(cfg, Defines.WIDGET_TYPE_EXTRAFIELD, Defines.LAYER_BOTTOM);
+            widgets = filterWidgets(cfg, Defines.WIDGET_TYPE_EXTRAFIELD, Defines.LAYER_NORMAL);
             if (widgets != null && widgets.length > 0)
             {
                 index = page.getChildIndex(page.subViewContainer as DisplayObject) + 1;
                 extraFieldsWidgetsNormal = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
             }
 
-            widgets = filterWidgets(cfg, Defines.WIDGET_TYPE_EXTRAFIELD, Defines.LAYER_BOTTOM);
+            widgets = filterWidgets(cfg, Defines.WIDGET_TYPE_EXTRAFIELD, Defines.LAYER_TOP);
             if (widgets != null && widgets.length > 0)
             {
                 index = page.getChildIndex(page.header) + 1;
