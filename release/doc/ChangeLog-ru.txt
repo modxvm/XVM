@@ -16,7 +16,7 @@ XVM-6.6.0-dev:
   * добавлена новая функция - виджеты на логине и в лобби
     в данный момент реализованы только виджеты типа "extrafields"
     конфигурационные файлы: widgets.xc, widgetsTemplates.xc
-    ссылки в lobby.xc, hangar.xc
+    ссылки в login.xc, hangar.xc
 
 XVM-6.5.7:
   [ОБЩЕЕ]
