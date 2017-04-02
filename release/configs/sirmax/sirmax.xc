@@ -42,7 +42,8 @@
     "autologin": true,
     "confirmOldReplays": true,
     "pingServers": ${"def.pingServers"},
-    "onlineServers": ${"def.onlineServers"}
+    "onlineServers": ${"def.onlineServers"},
+    "widgets": ${"sirmax-widgets.xc":"widgets.login"}
   },
   "hangar": {
     "enableGoldLocker": true,
@@ -98,7 +99,8 @@
       //"rotation": 0,
       //"shiftX": 0,
       //"shiftY": 0
-    }
+    },
+    "widgets": ${"sirmax-widgets.xc":"widgets.lobby"}
   },
   "userInfo": {
     "inHangarFilterEnabled": true,

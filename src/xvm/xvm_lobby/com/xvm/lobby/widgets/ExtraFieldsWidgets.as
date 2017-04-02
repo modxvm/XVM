@@ -27,6 +27,9 @@ package com.xvm.lobby.widgets
         {
             super();
             this.cfg = cfg;
+            mouseEnabled = false;
+            mouseChildren = false;
+            buttonMode = false;
             _createExtraFields();
         }
 
@@ -100,6 +103,7 @@ package com.xvm.lobby.widgets
             sprite.y = 0;
             sprite.mouseEnabled = false;
             sprite.mouseChildren = false;
+            sprite.buttonMode = false;
             sprite.scaleX = 1;
             sprite.scaleY = 1;
             this.addChild(sprite);

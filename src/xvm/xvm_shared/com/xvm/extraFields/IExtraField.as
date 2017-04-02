@@ -19,6 +19,8 @@ package com.xvm.extraFields
         function get widthValue():Number;
         function get heightValue():Number;
         function get cfg():CExtraField;
+        function set mouseEnabled(value:Boolean):void;
+        function set buttonMode(value:Boolean):void;
         function update(options:IVOMacrosOptions, bindToIconOffset:int = 0, offsetX:int = 0, offsetY:int = 0, bounds:Rectangle = null):void;
         function updateOnEvent(e:PlayerStateEvent):void;
         function onKeyEvent(key:Number, isDown:Boolean):void

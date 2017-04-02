@@ -119,21 +119,21 @@ package com.xvm.lobby.widgets
             //Logger.add("[widgets] init lobby");
 
             var index:int;
-            var cfg:Array = filterWidgets(Config.config.login.widgets, Defines.WIDGET_TYPE_EXTRAFIELD, Defines.LAYER_BOTTOM);
+            var cfg:Array = filterWidgets(Config.config.lobby.widgets, Defines.WIDGET_TYPE_EXTRAFIELD, Defines.LAYER_BOTTOM);
             if (cfg != null && cfg.length > 0)
             {
                 index = 0;
                 _extraFieldsWidgetsBottom = page.addChildAt(new ExtraFieldsWidgets(cfg), index) as ExtraFieldsWidgets;
             }
 
-            cfg = filterWidgets(Config.config.login.widgets, Defines.WIDGET_TYPE_EXTRAFIELD, Defines.LAYER_BOTTOM);
+            cfg = filterWidgets(Config.config.lobby.widgets, Defines.WIDGET_TYPE_EXTRAFIELD, Defines.LAYER_BOTTOM);
             if (cfg != null && cfg.length > 0)
             {
                 index = page.getChildIndex(page.subViewContainer as DisplayObject) + 1;
                 _extraFieldsWidgetsNormal = page.addChildAt(new ExtraFieldsWidgets(cfg), index) as ExtraFieldsWidgets;
             }
 
-            cfg = filterWidgets(Config.config.login.widgets, Defines.WIDGET_TYPE_EXTRAFIELD, Defines.LAYER_BOTTOM);
+            cfg = filterWidgets(Config.config.lobby.widgets, Defines.WIDGET_TYPE_EXTRAFIELD, Defines.LAYER_BOTTOM);
             if (cfg != null && cfg.length > 0)
             {
                 index = page.getChildIndex(page.header) + 1;
