@@ -12,7 +12,7 @@ package com.xvm.types.cfg
         public var enabled:*;
         public var layer:String;
         public var type:String;
-        public var format:*;
+        public var formats:Array;
 
         public function clone():*
         {
@@ -20,15 +20,25 @@ package com.xvm.types.cfg
             cloned.enabled = enabled;
             cloned.layer = layer;
             cloned.type = type;
-            switch (type)
+            if (formats)
             {
-                case Defines.WIDGET_TYPE_EXTRAFIELD:
-                    var extraField:CExtraField = ObjectConverter.convertData(format, CExtraField);
-                    if (extraField != null)
+                cloned.formats = [];
+                var len:uint = formats.length;
+                for (var i:uint = 0; i < len; ++i)
+                {
+                    if (formats[i] != null)
                     {
-                        cloned.format = extraField.clone();
+                        var format:ICloneable = formats[i] as ICloneable;
+                        if (format)
+                        {
+                            cloned.formats.push(format.clone());
+                        }
+                        else
+                        {
+                            cloned.formats.push(XfwUtils.jsonclone(formats[i]));
+                        }
                     }
-                    break;
+                }
             }
             return cloned;
         }
