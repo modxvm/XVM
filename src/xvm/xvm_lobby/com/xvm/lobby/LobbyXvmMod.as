@@ -86,6 +86,10 @@ package com.xvm.lobby
                         {
                             _pingLobbyXvmView = mod as PingLobbyXvmView;
                         }
+                        else if (mod is WidgetsLobbyXvmView)
+                        {
+                            _widgetsLobbyXvmView = mod as WidgetsLobbyXvmView;
+                        }
                     }
                 }
                 return mods;
@@ -102,6 +106,7 @@ package com.xvm.lobby
         private var _clockXvmView:ClockXvmView = null;
         private var _onlineLobbyXvmView:OnlineLobbyXvmView = null;
         private var _pingLobbyXvmView:PingLobbyXvmView = null;
+        private var _widgetsLobbyXvmView:WidgetsLobbyXvmView = null;
 
         private function onHangarAfterPopulate():void
         {
@@ -126,6 +131,10 @@ package com.xvm.lobby
             if (_pingLobbyXvmView)
             {
                 _pingLobbyXvmView.setVisibility(isHangar);
+            }
+            if (_widgetsLobbyXvmView)
+            {
+                _widgetsLobbyXvmView.setVisibility(isHangar);
             }
         }
     }

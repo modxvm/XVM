@@ -20,6 +20,7 @@ package com.xvm.lobby.widgets
 
     public class WidgetsBaseXvmView extends XvmViewBase
     {
+        protected var cfg:Array = null;
         protected var extraFieldsWidgetsBottom:ExtraFieldsWidgets = null;
         protected var extraFieldsWidgetsNormal:ExtraFieldsWidgets = null;
         protected var extraFieldsWidgetsTop:ExtraFieldsWidgets = null;
@@ -49,6 +50,7 @@ package com.xvm.lobby.widgets
         {
             _initialized = false;
             remove();
+            cfg = null;
         }
 
         // PROTECTED
