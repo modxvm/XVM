@@ -16,7 +16,7 @@
   * added new function - widgets in login and lobby
     currently only "extrafields" widget type implemented
     configuration files: widgets.xc, widgetsTemplates.xc
-    referenced from lobby.xc, hangar.xc
+    referenced from login.xc, hangar.xc
 
 XVM-6.5.7:
   [GENERAL]
