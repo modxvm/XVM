@@ -51,7 +51,7 @@ package com.xvm.lobby.ui.tankcarousel
                 item.bottomHolder = _createExtraFieldsHolder(renderer, renderer.getChildIndex(renderer.content));
                 item.normalHolder = _createExtraFieldsHolder(renderer.content, renderer.content.getChildIndex(renderer.content.clanLock));
                 item.topHolder = _createExtraFieldsHolder(renderer, renderer.getChildIndex(renderer.focusIndicator) + 1);
-                item.extraFields = new ExtraFieldsGroup(item as IExtraFieldGroupHolder, formats, CTextFormat.GetDefaultConfigForLobby());
+                item.extraFields = new ExtraFieldsGroup(item as IExtraFieldGroupHolder, formats, false, CTextFormat.GetDefaultConfigForLobby());
             }
 
             //App.utils.scheduler.scheduleTask(function():void {

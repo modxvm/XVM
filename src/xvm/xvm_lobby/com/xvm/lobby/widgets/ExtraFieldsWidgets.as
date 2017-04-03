@@ -7,7 +7,7 @@ package com.xvm.lobby.widgets
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.extraFields.*;
-    import com.xvm.lobby.vo.VOLobbyMacrosOptions;
+    import com.xvm.lobby.vo.*;
     import com.xvm.types.cfg.*;
     import com.xvm.vo.*;
     import flash.display.*;
@@ -92,7 +92,7 @@ package com.xvm.lobby.widgets
             _bottomHolder = _createExtraFieldsHolder();
             _normalHolder = _createExtraFieldsHolder();
             _topHolder = _createExtraFieldsHolder();
-            _extraFields = new ExtraFieldsGroup(this, cfg, CTextFormat.GetDefaultConfigForLobby());
+            _extraFields = new ExtraFieldsGroup(this, cfg, true, CTextFormat.GetDefaultConfigForLobby());
             _extraFields.update(new VOLobbyMacrosOptions(), 0);
         }
 

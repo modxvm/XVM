@@ -56,6 +56,7 @@ package com.xvm.lobby.widgets
             {
                 index = 0;
                 extraFieldsWidgetsBottom = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
+                extraFieldsWidgetsBottom.visible = false;
             }
 
             widgets = filterWidgets(cfg, Defines.WIDGET_TYPE_EXTRAFIELD, Defines.LAYER_NORMAL);
@@ -63,6 +64,7 @@ package com.xvm.lobby.widgets
             {
                 index = page.getChildIndex(page.subViewContainer as DisplayObject) + 1;
                 extraFieldsWidgetsNormal = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
+                extraFieldsWidgetsNormal.visible = false;
             }
 
             widgets = filterWidgets(cfg, Defines.WIDGET_TYPE_EXTRAFIELD, Defines.LAYER_TOP);
@@ -70,6 +72,7 @@ package com.xvm.lobby.widgets
             {
                 index = page.getChildIndex(page.header) + 1;
                 extraFieldsWidgetsTop = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
+                extraFieldsWidgetsTop.visible = false;
             }
         }
     }

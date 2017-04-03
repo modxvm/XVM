@@ -16,6 +16,7 @@
         "width": 200,
         "height": 100,
         "borderColor": "0xFFFFFF",
+        "screenHAlign": "right",
         "textFormat": { "color": "0x222222", "size": 15 },
         "format": "TEST TEST TEST TEST\nTEST TEST TEST TEST\nTEST TEST TEST TEST\n"
       },

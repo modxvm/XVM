@@ -4,10 +4,12 @@
  */
 package com.xvm.extraFields
 {
+    import com.xfw.*;
     import com.xvm.*;
     import com.xvm.extraFields.*;
     import com.xvm.types.cfg.*;
     import com.xvm.vo.*;
+    import flash.geom.*;
     import flash.text.*;
     import net.wg.infrastructure.interfaces.entity.*;
 
@@ -18,11 +20,28 @@ package com.xvm.extraFields
         public var normal:ExtraFields = null;
         public var top:ExtraFields = null;
 
+        private var _isRootLayout:Boolean = false;
+        private var _lastUpdateArgs:Array = null;
         private var _x:Number = 0;
         private var _y:Number = 0;
 
-        public function ExtraFieldsGroup(item:IExtraFieldGroupHolder, formats:Array, defaultTextFormatConfig:CTextFormat = null)
+        public function ExtraFieldsGroup(item:IExtraFieldGroupHolder, formats:Array, isRootLayout:Boolean = false, defaultTextFormatConfig:CTextFormat = null)
         {
+            const createNewExtraFields:Function = function():ExtraFields
+            {
+                return new ExtraFields(
+                    filteredFormats,
+                    item.isLeftPanel,
+                    item.getSchemeNameForPlayer,
+                    item.getSchemeNameForVehicle,
+                    isRootLayout ? new Rectangle(0, 0, App.appWidth, App.appHeight) : null,
+                    isRootLayout ? ExtraFields.LAYOUT_ROOT : null,
+                    isRootLayout ? TextFormatAlign.LEFT : null,
+                    defaultTextFormatConfig);
+            }
+
+            _isRootLayout = isRootLayout;
+
             if (!defaultTextFormatConfig)
             {
                 defaultTextFormatConfig = CTextFormat.GetDefaultConfigForBattle(item.isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT);
@@ -33,32 +52,41 @@ package com.xvm.extraFields
                 filteredFormats = filterFormats(formats, Defines.LAYER_SUBSTRATE);
                 if (filteredFormats && filteredFormats.length)
                 {
-                    substrate = new ExtraFields(filteredFormats, item.isLeftPanel, item.getSchemeNameForPlayer, item.getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
+                    substrate = createNewExtraFields();
                     item.substrateHolder.addChild(substrate);
                 }
                 filteredFormats = filterFormats(formats, Defines.LAYER_BOTTOM);
                 if (filteredFormats && filteredFormats.length)
                 {
-                    bottom = new ExtraFields(filteredFormats, item.isLeftPanel, item.getSchemeNameForPlayer, item.getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
+                    bottom = createNewExtraFields();
                     item.bottomHolder.addChild(bottom);
                 }
                 filteredFormats = filterFormats(formats, Defines.LAYER_NORMAL);
                 if (filteredFormats && filteredFormats.length)
                 {
-                    normal = new ExtraFields(filteredFormats, item.isLeftPanel, item.getSchemeNameForPlayer, item.getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
+                    normal = createNewExtraFields();
                     item.normalHolder.addChild(normal);
                 }
                 filteredFormats = filterFormats(formats, Defines.LAYER_TOP);
                 if (filteredFormats && filteredFormats.length)
                 {
-                    top = new ExtraFields(filteredFormats, item.isLeftPanel, item.getSchemeNameForPlayer, item.getSchemeNameForVehicle, null, null, null, defaultTextFormatConfig);
+                    top = createNewExtraFields();
                     item.topHolder.addChild(top);
                 }
+            }
+
+            if (_isRootLayout)
+            {
+                Xfw.addCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
             }
         }
 
         public function dispose():void
         {
+            if (_isRootLayout)
+            {
+                Xfw.removeCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
+            }
             if (substrate)
             {
                 substrate.dispose();
@@ -149,6 +177,7 @@ package com.xvm.extraFields
 
         public function update(options:IVOMacrosOptions, bindToIconOffset:Number, offsetX:Number = 0, offsetY:Number = 0):void
         {
+            _lastUpdateArgs = arguments;
             if (substrate)
             {
                 substrate.update(options, bindToIconOffset, offsetX, offsetY);
@@ -183,6 +212,32 @@ package com.xvm.extraFields
             }
             return res;
         }
-    }
 
+        private function onUpdateStage():void
+        {
+            if (_isRootLayout)
+            {
+                if (substrate)
+                {
+                    substrate.updateBounds(new Rectangle(0, 0, App.appWidth, App.appHeight));
+                }
+                if (bottom)
+                {
+                    bottom.updateBounds(new Rectangle(0, 0, App.appWidth, App.appHeight));
+                }
+                if (normal)
+                {
+                    normal.updateBounds(new Rectangle(0, 0, App.appWidth, App.appHeight));
+                }
+                if (top)
+                {
+                    top.updateBounds(new Rectangle(0, 0, App.appWidth, App.appHeight));
+                }
+                if (_lastUpdateArgs != null)
+                {
+                    update.apply(this, _lastUpdateArgs);
+                }
+            }
+        }
+    }
 }
