@@ -24,18 +24,17 @@ package com.xvm.lobby.widgets
 
         public function setVisibility(isHangar:Boolean):void
         {
-            var isVisible:Boolean = isHangar || (cfg.layer.toLowerCase() == Defines.LAYER_TOP);
             if (extraFieldsWidgetsBottom)
             {
-                extraFieldsWidgetsBottom.visible = isVisible;
+                extraFieldsWidgetsBottom.visible = isHangar;
             }
             if (extraFieldsWidgetsNormal)
             {
-                extraFieldsWidgetsNormal.visible = isVisible;
+                extraFieldsWidgetsNormal.visible = isHangar;
             }
             if (extraFieldsWidgetsTop)
             {
-                extraFieldsWidgetsTop.visible = isVisible;
+                extraFieldsWidgetsTop.visible = true;
             }
         }
 
