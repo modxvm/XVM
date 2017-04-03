@@ -53,6 +53,9 @@
       // Info text (Crew incomplete, Repairs required)
       // Инфо текст (Неполный экипаж, Требуется ремонт).
       "info":     { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+      // Info image
+      // Инфо иконка
+      "infoImg":  { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       // Info text for "Buy vehicle" and "Buy slot" slots.
       // Инфо текст для слотов "Купить машину" и "Купить слот".
       "infoBuy":  { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },

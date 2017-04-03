@@ -17,6 +17,7 @@ package com.xvm.types.cfg
         public var rentInfo:CCarouselCellStandardField;
         public var clanLock:CCarouselCellStandardField;
         public var info:CCarouselCellStandardField;
+        public var infoImg:CCarouselCellStandardField;
         public var infoBuy:CCarouselCellStandardField;
         public var price:CCarouselCellStandardField;
         public var actionPrice:CCarouselCellStandardField;

@@ -69,6 +69,10 @@ package com.xvm.lobby.ui.tankcarousel
                     extraFields.visible = false;
                 }
             }
+            else
+            {
+                _helper.fixData(value);
+            }
             super.data = value;
         }
 

@@ -15,6 +15,7 @@ package com.xvm.lobby.ui.tankcarousel
     import flash.geom.*;
     import flash.text.*;
     import flash.utils.*;
+    import net.wg.gui.components.controls.*;
     import net.wg.gui.lobby.hangar.tcarousel.*;
     import net.wg.gui.lobby.hangar.tcarousel.data.*;
     import scaleform.gfx.*;
@@ -39,6 +40,7 @@ package com.xvm.lobby.ui.tankcarousel
             this.DEFAULT_HEIGHT = defaultHeight;
 
             renderer = item as TankCarouselItemRenderer;
+            //XfwUtils.logChilds(renderer);
 
             renderer.width = int(Macros.FormatNumberGlobal(cfg.width, DEFAULT_WIDTH - 2) + 2);
             renderer.height = int(Macros.FormatNumberGlobal(cfg.height, DEFAULT_HEIGHT - 2) + 2);
@@ -63,7 +65,7 @@ package com.xvm.lobby.ui.tankcarousel
             _setupStandardFieldTankName();
             _setupStandardFieldRentInfo();
             _setupStandardFieldClanLock();
-            _setupStandardFieldInfo(cfg.fields.info);
+            _setupStandardFieldInfo(cfg.fields.info, cfg.fields.infoImg);
             _setupStandardFieldPrice();
             _setupStandardFieldActionPrice();
             _setupStandardFieldFavorite();
@@ -87,6 +89,14 @@ package com.xvm.lobby.ui.tankcarousel
 
         // extra fields
 
+        public function fixData(value:Object):void
+        {
+            if (cfg.fields.infoImg.enabled == false)
+            {
+                value.infoImgSrc = null;
+            }
+        }
+
         public function updateDataXvm():void
         {
             try
@@ -96,7 +106,7 @@ package com.xvm.lobby.ui.tankcarousel
                 {
                     if (!(item.vehicleCarouselVO.buySlot || item.vehicleCarouselVO.buyTank))
                     {
-                        _setupStandardFieldInfo(cfg.fields.info);
+                        _setupStandardFieldInfo(cfg.fields.info, cfg.fields.infoImg);
                         if (item.extraFields)
                         {
                             if (item.vehicleCarouselVO.icon)
@@ -285,24 +295,45 @@ package com.xvm.lobby.ui.tankcarousel
         }
 
         private var orig_txtInfo_y:Number = NaN;
-        public function _setupStandardFieldInfo(cfg:CCarouselCellStandardField):void
+        private var orig_infoImg_y:Number = NaN;
+        public function _setupStandardFieldInfo(cfg:CCarouselCellStandardField, cfgImg:CCarouselCellStandardField = null):void
         {
             var field:TextField = renderer.content.txtInfo;
-            if (isNaN(orig_txtInfo_y))
+            /*if (isNaN(orig_txtInfo_y))
             {
                 orig_txtInfo_y = field.y;
             }
             else
             {
                 field.y = orig_txtInfo_y;
-            }
+            }*/
             _setupStandardFieldAlpha(field, cfg);
-            _setupStandardFieldScale(field, cfg);
+            /*_setupStandardFieldScale(field, cfg);
             field.antiAliasType = AntiAliasType.ADVANCED;
-            field.x = cfg.dx;
+            field.x += cfg.dx;
             field.width = DEFAULT_WIDTH / cfg.scale;
-            field.defaultTextFormat.align = TextFormatAlign.CENTER;
+            field.defaultTextFormat.align = TextFormatAlign.CENTER;*/
             //field.border = true; field.borderColor = 0xFFFF00; // DEBUG
+
+            if (cfgImg)
+            {
+                /*if (cfgImg.enabled)
+                {
+                    var img:Image = renderer.content.infoImg;
+                    if (isNaN(orig_infoImg_y))
+                    {
+                        orig_infoImg_y = img.y;
+                    }
+                    else
+                    {
+                        img.y = orig_infoImg_y;
+                    }
+                    _setupStandardFieldAlpha(img, cfgImg);
+                    _setupStandardFieldScale(img, cfgImg);
+                    img.x = cfgImg.dx;
+                    img.width = DEFAULT_WIDTH / cfgImg.scale;
+                }*/
+            }
         }
     }
 }
