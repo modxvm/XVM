@@ -1,33 +1,32 @@
 # Addons: "DamageLog"
 # ktulho <http://www.koreanrandom.com/forum/user/17624-ktulho/>
 
-import BigWorld
-import Keys
 import copy
+
+import BigWorld
 import GUI
+import Keys
+import ResMgr
+import nations
 import xvm_main.python.config as config
-import xvm_main.python.userprefs as userprefs
-from xvm_main.python.stats import _stat
 import xvm_main.python.stats as stats
-from items import vehicles, _xml
+import xvm_main.python.userprefs as userprefs
 from Avatar import PlayerAvatar
 from Vehicle import Vehicle
+from VehicleEffects import DamageFromShotDecoder
+from constants import ITEM_DEFS_PATH
+from gui.Scaleform.daapi.view.battle.shared.damage_log_panel import DamageLogPanel
+from gui.Scaleform.daapi.view.battle.shared.damage_panel import DamagePanel
+from gui.shared.utils.TimeInterval import TimeInterval
+from items import vehicles
+from items import vehicles, _xml
 from xfw import *
 from xvm_main.python.logger import *
-from VehicleEffects import DamageFromShotDecoder
-import ResMgr
-from constants import ITEM_DEFS_PATH
-import nations
-from gui.shared.utils.TimeInterval import TimeInterval
-from gui.Scaleform.daapi.view.battle.shared.damage_panel import DamagePanel
-from gui.Scaleform.daapi.view.battle.shared.damage_log_panel import DamageLogPanel
-from items import vehicles
-
+from xvm_main.python.stats import _stat
 
 on_fire = 0
 beginFire = None
 isDownAlt = False
-
 
 ATTACK_REASONS = {
     0: 'shot',
@@ -54,13 +53,25 @@ HIT_EFFECT_CODES = {
     5: 'critical_hit'
 }
 
-
 MACROS_NAME = ['number', 'critical-hit', 'vehicle', 'name', 'vtype', 'c:costShell', 'costShell', 'comp-name', 'clan',
                'dmg-kind', 'c:dmg-kind', 'c:vtype', 'type-shell', 'dmg', 'reloadGun', 'c:team-dmg', 'c:hit-effects',
                'level', 'clanicon', 'clannb', 'marksOnGun', 'squad-num', 'dmg-ratio', 'hit-effects', 'c:type-shell',
-               'splash-hit', 'team-dmg', 'my-alive', 'gun-caliber', 'wn8', 'xwn8', 'eff', 'xeff', 'wgr', 'xwgr', 'xte',
-               'c:wn8', 'c:xwn8', 'c:eff', 'c:xeff', 'c:wgr', 'c:xwgr', 'c:xte', 'fire-duration', 'diff-masses',
-               'nation', 'my-blownup']
+               'splash-hit', 'team-dmg', 'my-alive', 'gun-caliber', 'wn8', 'xwn8', 'wn6', 'xwn6', 'eff', 'xeff', 'wgr',
+               'xwgr', 'xte', 'c:wn8', 'c:xwn8', 'c:wn6', 'c:xwn6', 'c:eff', 'c:xeff', 'c:wgr', 'c:xwgr', 'c:xte',
+               'fire-duration', 'diff-masses', 'nation', 'my-blownup', 'r', 'c:r']
+
+RATINGS = {
+    'xvm_wgr': {'name': 'xwgr', 'size': 2},
+    'xvm_wn6': {'name': 'xwn6', 'size': 2},
+    'xvm_wn8': {'name': 'xwn8', 'size': 2},
+    'xvm_eff': {'name': 'xeff', 'size': 2},
+    'xvm_xte': {'name': 'xte', 'size': 2},
+    'basic_wgr': {'name': 'wgr', 'size': 5},
+    'basic_wn6': {'name': 'wn6', 'size': 4},
+    'basic_wn8': {'name': 'wn8', 'size': 4},
+    'basic_eff': {'name': 'eff', 'size': 4},
+    'basic_xte': {'name': 'xte', 'size': 2}
+}
 
 
 def keyLower(_dict):
@@ -102,6 +113,17 @@ def readyConfig(section):
            'c_typeShell': keyLower(config.get(section + 'c:type-shell'))
            }
     return res
+
+
+def readRating():
+    scale = config.networkServicesSettings.scale
+    name = config.networkServicesSettings.rating
+    r = '{}_{}'.format(scale, name)
+    if r in RATINGS:
+        return RATINGS[r]['name']
+    else:
+        return 'xwgr' if scale == 'xvm' else 'wgr'
+
 
 
 def comparing(_macro, _operator, _math):
@@ -174,7 +196,6 @@ def formatMacro(macro, macroes):
             break
     if not fm['width'] and t.isdigit():
         fm['width'] = int(t)
-    # _macro, _, _norm = _macro.partition(':')
     tempMacro = _macro
     if _macro in macroes:
         _macro = macroes[_macro]
@@ -274,7 +295,6 @@ def parser(strHTML, macroes):
 
 
 class Data(object):
-
     def __init__(self):
         self.data = {'isAlive': True,
                      'isDamage': False,
@@ -345,6 +365,8 @@ class Data(object):
                     stats = _stat.resp['players'][attacker['name']]
                     self.data['wn8'] = stats.get('wn8', None)
                     self.data['xwn8'] = stats.get('xwn8', None)
+                    self.data['wn6'] = stats.get('wn6', None)
+                    self.data['xwn6'] = stats.get('xwn6', None)
                     self.data['eff'] = stats.get('e', None)
                     self.data['xeff'] = stats.get('xeff', None)
                     self.data['wgr'] = stats.get('wgr', None)
@@ -353,6 +375,8 @@ class Data(object):
                 else:
                     self.data['wn8'] = None
                     self.data['xwn8'] = None
+                    self.data['wn6'] = None
+                    self.data['xwn6'] = None
                     self.data['eff'] = None
                     self.data['xeff'] = None
                     self.data['wgr'] = None
@@ -439,7 +463,6 @@ class Data(object):
         _logBackground.output()
         _logAltBackground.output()
 
-
     def showDamageFromShot(self, vehicle, attackerID, points, effectsIndex, damageFactor):
         maxHitEffectCode, decodedPoints = DamageFromShotDecoder.decodeHitPoints(points, vehicle.typeDescriptor)
         self.data['compName'] = decodedPoints[0].componentName if decodedPoints else 'unknown'
@@ -484,7 +507,6 @@ data = Data()
 
 
 def getValueMacroes(section, value):
-
     def readColor(sec, m):
         if m is not None:
             for val in config.get('colors/' + sec):
@@ -507,7 +529,7 @@ def getValueMacroes(section, value):
              'c:type-shell': conf['c_typeShell'].get(value['shellKind']),
              'c:hit-effects': conf['c_HitEffect'].get(value['hitEffect']),
              'hit-effects': conf['hitEffect'].get(value['hitEffect'], 'unknown'),
-             'number': value['number'], # if value['number'] is not None else None,
+             'number': value['number'],
              'dmg': value['damage'],
              'dmg-ratio': value['dmgRatio'],
              'vehicle': value['shortUserString'],
@@ -522,13 +544,19 @@ def getValueMacroes(section, value):
              'gun-caliber': value['caliber'],
              'wn8': value.get('wn8', None),
              'xwn8': value.get('xwn8', None),
+             'wn6': value.get('wn6', None),
+             'xwn6': value.get('xwn6', None),
              'eff': value.get('eff', None),
              'xeff': value.get('xeff', None),
              'wgr': value.get('wgr', None),
              'xwgr': value.get('xwgr', None),
              'xte': value.get('xte', None),
+             'r': '{{%s}}' % readRating(),
+             'c:r': '{{c:%s}}' % readRating(),
              'c:wn8': readColor('wn8', value.get('wn8', None)),
              'c:xwn8': readColor('x', value.get('xwn8', None)),
+             'c:wn6': readColor('wn6', value.get('wn6', None)),
+             'c:xwn6': readColor('x', value.get('xwn6', None)),
              'c:eff': readColor('eff', value.get('eff', None)),
              'c:xeff': readColor('x', value.get('xeff', None)),
              'c:wgr': readColor('wgr', value.get('wgr', None)),
@@ -557,16 +585,38 @@ def shadow_value(section, macroes):
     return shadow
 
 
-class DamageLog(object):
-
+class _Base(object):
     def __init__(self, section):
-        self.listLog = []
         self.section = section
-        self.numberLine = 0
         self.dictVehicle = {}
-        self.dataLog = {}
         self.shadow = {}
         self._data = None
+
+    def reset(self):
+        self.dictVehicle = {}
+        self.shadow = {}
+
+    def mouse_down(self, _data):
+        if _data['buttonIdx'] == 0:
+            self._data = _data
+
+    def mouse_up(self, _data):
+        if _data['buttonIdx'] == 0:
+            self._data = None
+
+    def _mouse_move(self, _data, nameEvent):
+        if self._data:
+            self.x += (_data['x'] - self._data['x'])
+            self.y += (_data['y'] - self._data['y'])
+            as_event(nameEvent)
+
+
+class DamageLog(_Base):
+    def __init__(self, section):
+        _Base.__init__(self, section)
+        self.listLog = []
+        self.numberLine = 0
+        self.dataLog = {}
         if config.get(section + 'moveInBattle'):
             _data = userprefs.get('DamageLog/dlog', {'x': config.get(section + 'x'), 'y': config.get(section + 'y')})
             if section == 'damageLog/log/':
@@ -580,30 +630,17 @@ class DamageLog(object):
         self.callEvent = True
 
     def reset(self, section):
+        _Base.reset(self)
         self.listLog = []
-        self.listIndents = []
         self.section = section
         self.numberLine = 0
-        self.dictVehicle = {}
         self.dataLog = {}
-        self.shadow = {}
         self.callEvent = True
         if (None not in [self.x, self.y]) and config.get(section + 'moveInBattle') and section == 'damageLog/log/':
             userprefs.set('DamageLog/dLog', {'x': self.x, 'y': self.y})
 
-    def mouse_down(self, _data):
-        if _data['buttonIdx'] == 0:
-            self._data = _data
-
-    def mouse_up(self, _data):
-        if _data['buttonIdx'] == 0:
-            self._data = None
-
     def mouse_move(self, _data):
-        if self._data:
-            self.x += (_data['x'] - self._data['x'])
-            self.y += (_data['y'] - self._data['y'])
-            as_event('ON_HIT')
+        self._mouse_move(_data, 'ON_HIT')
 
     def addLine(self, attackerID, attackReasonID):
         self.dataLog['number'] = len(self.listLog) + 1
@@ -671,14 +708,10 @@ class DamageLog(object):
                     as_event('ON_HIT')
 
 
-class LastHit(object):
-
+class LastHit(_Base):
     def __init__(self, section):
-        self.section = section
+        _Base.__init__(self, section)
         self.strLastHit = ''
-        self.dictVehicle = {}
-        self.shadow = {}
-        self._data = None
         if config.get(self.section + 'moveInBattle'):
             _data = userprefs.get('DamageLog/lastHit', {'x': config.get(section + 'x'), 'y': config.get(section + 'y')})
             as_callback("lastHit_mouseDown", self.mouse_down)
@@ -691,27 +724,15 @@ class LastHit(object):
         self.timerLastHit = None
 
     def reset(self):
+        _Base.reset(self)
         self.strLastHit = ''
-        self.dictVehicle = {}
-        self.shadow = {}
         if (self.timerLastHit is not None) and self.timerLastHit.isStarted:
             self.timerLastHit.stop()
         if (None not in [self.x, self.y]) and config.get(self.section + 'moveInBattle'):
             userprefs.set('DamageLog/lastHit', {'x': self.x, 'y': self.y})
 
-    def mouse_down(self, _data):
-        if _data['buttonIdx'] == 0:
-            self._data = _data
-
-    def mouse_up(self, _data):
-        if _data['buttonIdx'] == 0:
-            self._data = None
-
     def mouse_move(self, _data):
-        if self._data:
-            self.x += (_data['x'] - self._data['x'])
-            self.y += (_data['y'] - self._data['y'])
-            as_event('ON_LAST_HIT')
+        self._mouse_move(_data, 'ON_LAST_HIT')
 
     def hideLastHit(self):
         self.strLastHit = ''
