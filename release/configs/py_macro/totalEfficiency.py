@@ -125,9 +125,9 @@ def _onTotalEfficiencyUpdated(self, diff):
                 damage = totalDamage - old_totalDamage
                 old_totalDamage = totalDamage
             if PERSONAL_EFFICIENCY_TYPE.ASSIST_DAMAGE in diff:
-                totalStun = diff[PERSONAL_EFFICIENCY_TYPE.STUN]
-            if PERSONAL_EFFICIENCY_TYPE.STUN in diff:
                 totalAssist = diff[PERSONAL_EFFICIENCY_TYPE.ASSIST_DAMAGE]
+            if PERSONAL_EFFICIENCY_TYPE.STUN in diff:
+                totalStun = diff[PERSONAL_EFFICIENCY_TYPE.STUN]
             if PERSONAL_EFFICIENCY_TYPE.BLOCKED_DAMAGE in diff:
                 totalBlocked = diff[PERSONAL_EFFICIENCY_TYPE.BLOCKED_DAMAGE]
                 if totalBlocked == 0:
