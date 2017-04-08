@@ -52,24 +52,36 @@ std::string getFileContent(std::string filepath)
 void FindWot_WGC(char* buffer, size_t size)
 {
 	//try to get ProgramData path
-	TCHAR szPath[MAX_PATH];
-	if (!SUCCEEDED(SHGetFolderPath(NULL, CSIDL_COMMON_APPDATA , NULL, 0, szPath)))
+	TCHAR szProgramDataPath[MAX_PATH];
+	if (!SUCCEEDED(SHGetFolderPath(NULL, CSIDL_COMMON_APPDATA, NULL, 0, szProgramDataPath)))
 	{
 		return;
 	}
-	
-	//1. open first file from ProgramData\Wargaming.Net\GameCenter\apps\wot and write it's value
+
+	//try to open %ProgramData%\Wargaming.Net\GameCenter\data\wgc_path.dat
+	std::string wgcPath;
+	std::string wgcPathFile(std::string(szProgramDataPath) + "\\Wargaming.net\\GameCenter\\data\\wgc_path.dat");
+	if (exists(wgcPathFile))
+	{
+		wgcPath = getFileContent(wgcPathFile);
+	}
+	else
+	{
+		wgcPath = std::string(szProgramDataPath) + "\\Wargaming.net\\GameCenter";
+	}
+
+	//open first file from <WGC>\apps\wot and write it's value
 	try
 	{
-		for (auto& p : directory_iterator(std::string(szPath) + "\\Wargaming.net\\GameCenter\\apps\\wot\\"))
+		for (auto& p : directory_iterator(std::string(szProgramDataPath) + "\\Wargaming.net\\GameCenter\\apps\\wot\\"))
 		{
 			strcpy_s(buffer, size, getFileContent(p.path().string()).c_str());
 		}
 	}
 	catch (const std::exception&) {}
 
-	//2. read preferences.xml and get selected WoT version
-	std::string preferences(std::string(szPath) + "\\Wargaming.net\\GameCenter\\preferences.xml");
+	//read preferences.xml and get selected WoT version
+	std::string preferences(wgcPath + "\\preferences.xml");
 	if (!exists(preferences))
 	{
 		return;

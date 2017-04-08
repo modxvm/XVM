@@ -5,6 +5,7 @@
   [XFW]
   * part of the functionality (ping, XInput) was moved from XVM to XFW
   * partially switch to .wotmod packages format
+  * XFW can now be used without XVM
   
   [TOOLTIPS]
   * Updated avaliable parameters list (tooltips.xc) 
@@ -21,6 +22,9 @@
     currently only "extrafields" widget type implemented
     configuration files: widgets.xc, widgetsTemplates.xc
     referenced from login.xc, hangar.xc
+
+  [INSTALLER]
+  * improvements in WoT client path detection
 
 XVM-6.5.7:
   [GENERAL]
