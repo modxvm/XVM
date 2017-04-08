@@ -38,6 +38,7 @@ numberHits = 0
 fragsSquad = 0
 fragsSquad_dict = {}
 isPlayerInSquad = False
+totalStun = 0
 
 
 ribbonTypes = {
@@ -111,7 +112,7 @@ def showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor):
 
 @registerEvent(DamageLogPanel, '_onTotalEfficiencyUpdated')
 def _onTotalEfficiencyUpdated(self, diff):
-    global totalDamage, totalAssist, totalBlocked, numberHitsBlocked, old_totalDamage, damage
+    global totalDamage, totalAssist, totalBlocked, numberHitsBlocked, old_totalDamage, damage, totalStun
     if player is not None:
         if hasattr(player.inputHandler.ctrl, 'curVehicleID'):
             vId = player.inputHandler.ctrl.curVehicleID
@@ -124,6 +125,8 @@ def _onTotalEfficiencyUpdated(self, diff):
                 damage = totalDamage - old_totalDamage
                 old_totalDamage = totalDamage
             if PERSONAL_EFFICIENCY_TYPE.ASSIST_DAMAGE in diff:
+                totalStun = diff[PERSONAL_EFFICIENCY_TYPE.STUN]
+            if PERSONAL_EFFICIENCY_TYPE.STUN in diff:
                 totalAssist = diff[PERSONAL_EFFICIENCY_TYPE.ASSIST_DAMAGE]
             if PERSONAL_EFFICIENCY_TYPE.BLOCKED_DAMAGE in diff:
                 totalBlocked = diff[PERSONAL_EFFICIENCY_TYPE.BLOCKED_DAMAGE]
@@ -214,7 +217,7 @@ def onEnterWorld(self, prereqs):
 @registerEvent(PlayerAvatar, '_PlayerAvatar__destroyGUI')
 def destroyGUI(self):
     global vehiclesHealth, totalDamage, totalAssist, totalBlocked, damageReceived, damagesSquad, detection, isPlayerInSquad
-    global ribbonTypes, numberHitsBlocked, player, numberHitsDealt, old_totalDamage, damage, numberShotsDealt
+    global ribbonTypes, numberHitsBlocked, player, numberHitsDealt, old_totalDamage, damage, numberShotsDealt, totalStun
     global numberDamagesDealt, numberShotsReceived, numberHitsReceived, numberHits, fragsSquad, fragsSquad_dict
     vehiclesHealth = {}
     totalDamage = 0
@@ -236,6 +239,7 @@ def destroyGUI(self):
     fragsSquad = 0
     fragsSquad_dict = {}
     isPlayerInSquad = False
+    totalStun = 0
     ribbonTypes = {
         'armor': 0,
         'damage': 0,
@@ -269,6 +273,11 @@ def xvm_totalDamage():
 @xvm.export('xvm.totalAssist', deterministic=False)
 def xvm_totalAssist():
     return totalAssist
+
+
+@xvm.export('xvm.totalStun', deterministic=False)
+def xvm_totalStun():
+    return totalStun
 
 
 @xvm.export('xvm.totalBlocked', deterministic=False)

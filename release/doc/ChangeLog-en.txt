@@ -13,6 +13,9 @@
   * 'alive' value of a macro {{my-alive} } is renamed into 'al'
   * added macroses {{wn6}}, {{xwn6}}, {{r}}, {{c:wn6}}, {{c:xwn6}}, {{c:r}}
   
+  [PYTHON MACROSES]
+  * totalEfficiency: added the macro {{py:xvm.totalStun}}
+  
   [WIDGETS]
   * added new function - widgets in login and lobby
     currently only "extrafields" widget type implemented
