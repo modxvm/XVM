@@ -181,7 +181,7 @@ def formatMacro(macro, macroes):
         if s in _macro:
             _macro, _operator, _math = _macro.partition(s)
             if '<dl' in _math:
-                return _macro, '<dl>'
+                return _macro, True
             break
     _macro, _, fm['suf'] = _macro.partition('~')
     _macro, _, t = _macro.partition('%')
@@ -229,62 +229,53 @@ def formatMacro(macro, macroes):
                 _macro = ''
             else:
                 _macro = '{0:{flag}{width}{prec}{type}}{suf}'.format(_macro, **fm)
-        return str(_macro), None
+        return str(_macro), False
     else:
-        return macro, None
+        return macro, False
 
 
 def parser(strHTML, macroes):
     notMacroesDL = {}
     i = 0
-    b = True
     if not isinstance(strHTML, str):
         strHTML = str(strHTML)
-    while b:
+    while 1:
+        b = True
         while b:
             b = False
             for s in MACROS_NAME:
                 temp_str = '{{%s}}' % s
                 if strHTML.find(temp_str) >= 0:
-                    _macro = macroes.get(s, None)
-                    value = '' if _macro is None else str(_macro)
-                    strHTML = strHTML.replace(temp_str, value)
+                    _macro = str(macroes.get(s, ''))
+                    strHTML = strHTML.replace(temp_str, _macro)
                     b = True
         start = strHTML.rfind('{{')
         end = strHTML.find('}}', start) + 2
-        b = (start >= 0) and (end >= 2)
+        if not ((start >= 0) and (end >= 2)):
+            break
         substr = strHTML[start:end]
-        dl = True
-        if b:
-            for s in MACROS_NAME:
-                begin = substr.find(s)
-                if (begin == 2) and (strHTML[(start + begin + len(s))] in ('|', '?', '~', '%', '>', '<', '!', '=')):
-                    dl = False
-                    break
-            if dl:
-                i += 1
-                temp_str = '<dl%s>' % str(i)
-                notMacroesDL[temp_str] = substr
-                strHTML = '%s%s%s' % (strHTML[0:start], temp_str, strHTML[end:])
-            else:
-                s = strHTML[start:end]
-                _macro, non = formatMacro(s, macroes)
-                if non == '<dl>':
-                    s = s.replace('{{' + _macro, '{{' + macroes[_macro], 1)
-                    b1 = True
+        for s in MACROS_NAME:
+            begin = substr.find(s)
+            if (begin == 2) and (substr[(2 + len(s))] in ('|', '?', '~', '%', '>', '<', '!', '=')):
+                _macro, non = formatMacro(substr, macroes)
+                if non:
+                    substr = substr.replace('{{%s' % _macro, '{{%s' % macroes[_macro], 1)
                     for s1 in MACROS_NAME:
-                        if s.find('{{%s' % s1) >= 0:
-                            b1 = False
-                    if b1:
-                        i += 1
-                        temp_str = '<dl%s>' % str(i)
-                        notMacroesDL[temp_str] = s
-                        _macro = temp_str
+                        if substr.find('{{%s' % s1) >= 0:
+                            _macro = substr
+                            break
                     else:
-                        _macro = s
-                strHTML = '%s%s%s' % (strHTML[0:start], _macro, strHTML[end:])
-    b = True
-    while b and i > 0:
+                        i += 1
+                        _macro = '<dl%s>' % str(i)
+                        notMacroesDL[_macro] = substr
+                break
+        else:
+            i += 1
+            _macro = '<dl%s>' % str(i)
+            notMacroesDL[_macro] = substr
+        strHTML = '%s%s%s' % (strHTML[0:start], _macro, strHTML[end:])
+    b = (i > 0)
+    while b:
         b = False
         _notMacroesDL = notMacroesDL.copy()
         for s in _notMacroesDL:
