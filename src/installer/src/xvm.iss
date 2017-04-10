@@ -2,7 +2,7 @@
 #include "l10n_result\lang.iss"
 
 [Setup]
-AppCopyright    = "2016 (c) XVM team"
+AppCopyright    = "2017 (c) XVM team"
 AppId           = {{2865cd27-6b8b-4413-8272-cd968f316050}
 AppName         = "XVM"
 AppPublisher    = "XVM team"
@@ -144,28 +144,110 @@ Type: filesandordirs; Name: "{app}\xvm_uninst"
 Type: files; Name: "{app}\readme-*.txt"
 
 [Code]
-procedure FindWotA(Buffer: AnsiString; Max: Cardinal);
-external 'FindWotA@files:findwot.dll cdecl';
+procedure GetWotPreferredW(Buffer: String; Max: Integer);
+external 'GetWotPreferredW@files:findwot.dll cdecl';
+
+function GetWotPathsCount(): Integer;
+external 'GetWotPathsCount@files:findwot.dll cdecl';
+
+procedure GetWotPathsItemW(Buffer: String; Max: Integer; Index: Integer);
+external 'GetWotPathsItemW@files:findwot.dll cdecl';
+
+var
+  DirCombo: TNewComboBox;
+
+procedure DirComboChange(Sender: TObject);
+var
+  index: Integer;
+begin
+  if DirCombo.Text = ExpandConstant('{cm:browse}')  then
+  begin
+    WizardForm.DirBrowseButton.OnClick(nil);
+
+    for index:=0 to DirCombo.Items.Count do 
+    begin
+      if WizardForm.DirEdit.Text=DirCombo.Items.Strings[index] then
+      begin
+        DirCombo.ItemIndex:=index;
+        exit;
+      end;
+    end;
+    
+    if not FileExists(WizardForm.DirEdit.Text) then 
+    begin
+      MsgBox( ExpandConstant('{cm:wotNotFound}'), mbError, MB_OK);
+      DirCombo.ItemIndex:=-1;
+      WizardForm.DirEdit.Text:='';
+      exit;
+    end;
+
+    DirCombo.Items.Insert(DirCombo.Items.Count-1,WizardForm.DirEdit.Text)
+    DirCombo.ItemIndex := DirCombo.Items.Count-2;
+
+  end
+  else
+  begin
+    WizardForm.DirEdit.Text:=DirCombo.Text;
+  end;
+end;
+
 
 procedure InitializeWizard();
 var
-  Max: Cardinal;
-  Buffer: AnsiString;
+  WotPathsCount, Index: Integer;
+  Buffer: String;
 begin
-  Max := 512;
-  Buffer := StringOfChar(#0, Max);
-  FindWotA(Buffer, Max);
-  WizardForm.DirEdit.Text := Buffer;
+  WizardForm.DirEdit.Visible := False;
+  WizardForm.DirEdit.Text := '';
+  WizardForm.DirBrowseButton.Visible := False;
+
+  DirCombo := TNewComboBox.Create(WizardForm);
+  DirCombo.Parent := WizardForm.DirEdit.Parent;
+  DirCombo.Style := csDropDownList;
+  DirCombo.OnChange := @DirComboChange;
+  DirCombo.SetBounds(
+    WizardForm.DirEdit.Left, 
+    WizardForm.DirEdit.Top,
+    WizardForm.DirBrowseButton.Left + WizardForm.DirBrowseButton.Width - WizardForm.DirEdit.Left, 
+    WizardForm.DirEdit.Height
+  );
+          
+  WotPathsCount := GetWotPathsCount();
+  if WotPathsCount > 0 then
+  begin
+    SetLength(Buffer, 512);
+    for Index:=0 to wotPathsCount-1 do
+    begin
+      GetWotPathsItemW(Buffer,512,index);
+      DirCombo.Items.Add(Buffer);
+     end;
+  end;
+
+  DirCombo.Items.Add(ExpandConstant('{cm:browse}'));
+end;
+
+procedure CurPageChanged(CurPage: Integer);
+begin
+	if (CurPage = wpSelectDir) then
+	begin
+		if DirCombo.ItemIndex = -1 then
+			DirCombo.ItemIndex := 0;
+ 
+		DirCombo.OnChange(nil);
+	end;
 end;
 
 function NextButtonClick(CurPage: Integer): Boolean;
 begin                      
   Result := True;
   
-  if (CurPage = wpSelectDir) and not FileExists(ExpandConstant('{app}\WorldOfTanks.exe')) then 
+  if CurPage = wpSelectDir then
   begin
-    MsgBox( ExpandConstant('{cm:wotNotFound}'), mbError, MB_OK);
-    Result := False;
-    exit;
+   if not FileExists(ExpandConstant('{app}\WorldOfTanks.exe')) then 
+   begin
+      MsgBox( ExpandConstant('{cm:wotNotFound}'), mbError, MB_OK);
+      Result := False;
+      exit;
+    end;
   end;
 end;

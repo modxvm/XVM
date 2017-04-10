@@ -6,6 +6,7 @@ WelcomeLabel2=This will install XVM {#VersionXVM} for World of Tanks {#VersionWO
 FinishedLabelNoIcons=Setup has finished installing XVM on your computer.
 
 [CustomMessages]
+browse=Browse
 wotNotFound=World of Tanks not found in directory.
 backupXVM=Backup /res_mods/configs folder.
 websiteXVM=Activate online services on XVM website
