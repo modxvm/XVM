@@ -49,11 +49,10 @@ def LoginView_populate(base, self):
     if config.get('login/saveLastServer'):
         if self._servers.selectedServerIdx == 0:
             serverName = userprefs.get('autologin/server', 0)
-
-        for idx, value in enumerate(self._servers.serverList):
-            if serverName == value['data']:
-                self._servers._selectedServerIdx = idx
-                break
+            for idx, value in enumerate(self._servers.serverList):
+                if serverName == value['data']:
+                    self._servers._selectedServerIdx = idx
+                    break
 
     base(self)
 
