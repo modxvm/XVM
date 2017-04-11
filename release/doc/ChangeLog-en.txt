@@ -15,7 +15,7 @@
   * added macroses {{wn6}}, {{xwn6}}, {{r}}, {{c:wn6}}, {{c:xwn6}}, {{c:r}}
   
   [PYTHON MACROSES]
-  * totalEfficiency: added the macro {{py:xvm.totalStun}}
+  * totalEfficiency: added the macros {{py:xvm.totalStun}}, {{py:xvm.isStuns}}, {{py:xvm.numberStuns}}
   
   [WIDGETS]
   * added new function - widgets in login and lobby

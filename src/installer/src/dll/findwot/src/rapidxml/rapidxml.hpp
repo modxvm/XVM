@@ -285,6 +285,10 @@ namespace rapidxml
     //! \cond internal
     namespace internal
     {
+		inline bool over8bit(char ch) { return false; }
+		inline bool over8bit(signed char ch) { return false; }
+		inline bool over8bit(unsigned char ch) { return false; }
+		template<class Ch> inline bool over8bit(Ch ch) { return ch > 255; }
 
         // Struct that contains lookup tables for the parser
         // It must be a template to allow correct linking (because it has static data members, which are defined in a header file).
@@ -329,9 +333,13 @@ namespace rapidxml
             }
             else
             {
-                for (const Ch *end = p1 + size1; p1 < end; ++p1, ++p2)
-                    if (lookup_tables<0>::lookup_upcase[static_cast<unsigned char>(*p1)] != lookup_tables<0>::lookup_upcase[static_cast<unsigned char>(*p2)])
-                        return false;
+				for (const Ch *end = p1 + size1; p1 < end; ++p1, ++p2)
+				{
+					if ((over8bit(*p1) || over8bit(*p2)) && *p1 != *p2)
+						return false;
+					if (lookup_tables<0>::lookup_upcase[static_cast<unsigned char>(*p1)] != lookup_tables<0>::lookup_upcase[static_cast<unsigned char>(*p2)])
+						return false;
+				}
             }
             return true;
         }
@@ -1431,6 +1439,8 @@ namespace rapidxml
         {
             static unsigned char test(Ch ch)
             {
+				if (internal::over8bit(ch))
+					return 0;
                 return internal::lookup_tables<0>::lookup_whitespace[static_cast<unsigned char>(ch)];
             }
         };
@@ -1440,6 +1450,8 @@ namespace rapidxml
         {
             static unsigned char test(Ch ch)
             {
+				if (internal::over8bit(ch))
+					return 1;
                 return internal::lookup_tables<0>::lookup_node_name[static_cast<unsigned char>(ch)];
             }
         };
@@ -1449,6 +1461,8 @@ namespace rapidxml
         {
             static unsigned char test(Ch ch)
             {
+				if (internal::over8bit(ch))
+					return 1;
                 return internal::lookup_tables<0>::lookup_attribute_name[static_cast<unsigned char>(ch)];
             }
         };
@@ -1458,6 +1472,8 @@ namespace rapidxml
         {
             static unsigned char test(Ch ch)
             {
+				if (internal::over8bit(ch))
+					return 1;
                 return internal::lookup_tables<0>::lookup_text[static_cast<unsigned char>(ch)];
             }
         };
@@ -1467,6 +1483,8 @@ namespace rapidxml
         {
             static unsigned char test(Ch ch)
             {
+				if (internal::over8bit(ch))
+					return 1;
                 return internal::lookup_tables<0>::lookup_text_pure_no_ws[static_cast<unsigned char>(ch)];
             }
         };
@@ -1476,6 +1494,8 @@ namespace rapidxml
         {
             static unsigned char test(Ch ch)
             {
+				if (internal::over8bit(ch))
+					return 1;
                 return internal::lookup_tables<0>::lookup_text_pure_with_ws[static_cast<unsigned char>(ch)];
             }
         };
@@ -1486,6 +1506,8 @@ namespace rapidxml
         {
             static unsigned char test(Ch ch)
             {
+				if (internal::over8bit(ch))
+					return 1;
                 if (Quote == Ch('\''))
                     return internal::lookup_tables<0>::lookup_attribute_data_1[static_cast<unsigned char>(ch)];
                 if (Quote == Ch('\"'))
@@ -1586,7 +1608,7 @@ namespace rapidxml
             // Use translation skip
             Ch *src = text;
             Ch *dest = src;
-            while (StopPred::test(*src))
+			while (internal::over8bit(*src) || StopPred::test(*src))
             {
                 // If entity translation is enabled    
                 if (!(Flags & parse_no_entity_translation))
@@ -1656,6 +1678,8 @@ namespace rapidxml
                                 src += 3;   // Skip &#x
                                 while (1)
                                 {
+									if (internal::over8bit(*src))
+										break;
                                     unsigned char digit = internal::lookup_tables<0>::lookup_digits[static_cast<unsigned char>(*src)];
                                     if (digit == 0xFF)
                                         break;
@@ -1670,6 +1694,8 @@ namespace rapidxml
                                 src += 2;   // Skip &#
                                 while (1)
                                 {
+									if (internal::over8bit(*src))
+										break;
                                     unsigned char digit = internal::lookup_tables<0>::lookup_digits[static_cast<unsigned char>(*src)];
                                     if (digit == 0xFF)
                                         break;
@@ -1724,7 +1750,7 @@ namespace rapidxml
         
         // Parse BOM, if any
         template<int Flags>
-        void parse_bom(Ch *&text)
+        void parse_bom(char *&text)
         {
             // UTF-8?
             if (static_cast<unsigned char>(text[0]) == 0xEF && 
@@ -1734,6 +1760,13 @@ namespace rapidxml
                 text += 3;      // Skup utf-8 bom
             }
         }
+
+		template<int Flags>
+		void parse_bom(wchar_t *&text)
+		{
+			if (text[0] == 0xFEFF)
+				text++;
+		}
 
         // Parse XML declaration (<?xml...)
         template<int Flags>

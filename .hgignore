@@ -39,3 +39,4 @@ CMakeSettings.json
 *.validationcache
 *.log
 *.wsettings
+src/installer/src/dll/findwot/bin/findwot_test.exe

@@ -181,7 +181,7 @@ def formatMacro(macro, macroes):
         if s in _macro:
             _macro, _operator, _math = _macro.partition(s)
             if '<dl' in _math:
-                return _macro, '<dl>'
+                return _macro, True
             break
     _macro, _, fm['suf'] = _macro.partition('~')
     _macro, _, t = _macro.partition('%')
@@ -229,62 +229,53 @@ def formatMacro(macro, macroes):
                 _macro = ''
             else:
                 _macro = '{0:{flag}{width}{prec}{type}}{suf}'.format(_macro, **fm)
-        return str(_macro), None
+        return str(_macro), False
     else:
-        return macro, None
+        return macro, False
 
 
 def parser(strHTML, macroes):
     notMacroesDL = {}
     i = 0
-    b = True
     if not isinstance(strHTML, str):
         strHTML = str(strHTML)
-    while b:
+    while 1:
+        b = True
         while b:
             b = False
             for s in MACROS_NAME:
                 temp_str = '{{%s}}' % s
                 if strHTML.find(temp_str) >= 0:
-                    _macro = macroes.get(s, None)
-                    value = '' if _macro is None else str(_macro)
-                    strHTML = strHTML.replace(temp_str, value)
+                    _macro = str(macroes.get(s, ''))
+                    strHTML = strHTML.replace(temp_str, _macro)
                     b = True
         start = strHTML.rfind('{{')
         end = strHTML.find('}}', start) + 2
-        b = (start >= 0) and (end >= 2)
+        if not ((start >= 0) and (end >= 2)):
+            break
         substr = strHTML[start:end]
-        dl = True
-        if b:
-            for s in MACROS_NAME:
-                begin = substr.find(s)
-                if (begin == 2) and (strHTML[(start + begin + len(s))] in ('|', '?', '~', '%', '>', '<', '!', '=')):
-                    dl = False
-                    break
-            if dl:
-                i += 1
-                temp_str = '<dl%s>' % str(i)
-                notMacroesDL[temp_str] = substr
-                strHTML = '%s%s%s' % (strHTML[0:start], temp_str, strHTML[end:])
-            else:
-                s = strHTML[start:end]
-                _macro, non = formatMacro(s, macroes)
-                if non == '<dl>':
-                    s = s.replace('{{' + _macro, '{{' + macroes[_macro], 1)
-                    b1 = True
+        for s in MACROS_NAME:
+            begin = substr.find(s)
+            if (begin == 2) and (substr[(2 + len(s))] in ('|', '?', '~', '%', '>', '<', '!', '=')):
+                _macro, non = formatMacro(substr, macroes)
+                if non:
+                    substr = substr.replace('{{%s' % _macro, '{{%s' % macroes[_macro], 1)
                     for s1 in MACROS_NAME:
-                        if s.find('{{%s' % s1) >= 0:
-                            b1 = False
-                    if b1:
-                        i += 1
-                        temp_str = '<dl%s>' % str(i)
-                        notMacroesDL[temp_str] = s
-                        _macro = temp_str
+                        if substr.find('{{%s' % s1) >= 0:
+                            _macro = substr
+                            break
                     else:
-                        _macro = s
-                strHTML = '%s%s%s' % (strHTML[0:start], _macro, strHTML[end:])
-    b = True
-    while b and i > 0:
+                        i += 1
+                        _macro = '<dl%s>' % str(i)
+                        notMacroesDL[_macro] = substr
+                break
+        else:
+            i += 1
+            _macro = '<dl%s>' % str(i)
+            notMacroesDL[_macro] = substr
+        strHTML = '%s%s%s' % (strHTML[0:start], _macro, strHTML[end:])
+    b = (i > 0)
+    while b:
         b = False
         _notMacroesDL = notMacroesDL.copy()
         for s in _notMacroesDL:
@@ -571,18 +562,17 @@ def getValueMacroes(section, value):
 
 
 def shadow_value(section, macroes):
-    shadow = {'distance': parser(config.get(section + 'shadow/distance'), macroes),
-              'angle': parser(config.get(section + 'shadow/angle'), macroes),
-              'alpha': parser(config.get(section + 'shadow/alpha'), macroes),
-              'blur': parser(config.get(section + 'shadow/blur'), macroes),
-              'strength': parser(config.get(section + 'shadow/strength'), macroes),
-              'color': parser(config.get(section + 'shadow/color'), macroes),
-              'hideObject': parser(config.get(section + 'shadow/hideObject'), macroes),
-              'inner': parser(config.get(section + 'shadow/inner'), macroes),
-              'knockout': parser(config.get(section + 'shadow/knockout'), macroes),
-              'quality': parser(config.get(section + 'shadow/quality'), macroes)
-              }
-    return shadow
+    return {'distance': parser(config.get(section + 'shadow/distance'), macroes),
+            'angle': parser(config.get(section + 'shadow/angle'), macroes),
+            'alpha': parser(config.get(section + 'shadow/alpha'), macroes),
+            'blur': parser(config.get(section + 'shadow/blur'), macroes),
+            'strength': parser(config.get(section + 'shadow/strength'), macroes),
+            'color': parser(config.get(section + 'shadow/color'), macroes),
+            'hideObject': parser(config.get(section + 'shadow/hideObject'), macroes),
+            'inner': parser(config.get(section + 'shadow/inner'), macroes),
+            'knockout': parser(config.get(section + 'shadow/knockout'), macroes),
+            'quality': parser(config.get(section + 'shadow/quality'), macroes)
+            }
 
 
 class _Base(object):
@@ -615,7 +605,6 @@ class DamageLog(_Base):
     def __init__(self, section):
         _Base.__init__(self, section)
         self.listLog = []
-        self.numberLine = 0
         self.dataLog = {}
         if config.get(section + 'moveInBattle'):
             _data = userprefs.get('DamageLog/dlog', {'x': config.get(section + 'x'), 'y': config.get(section + 'y')})
@@ -633,7 +622,6 @@ class DamageLog(_Base):
         _Base.reset(self)
         self.listLog = []
         self.section = section
-        self.numberLine = 0
         self.dataLog = {}
         self.callEvent = True
         if (None not in [self.x, self.y]) and config.get(section + 'moveInBattle') and section == 'damageLog/log/':
@@ -651,7 +639,6 @@ class DamageLog(_Base):
             self.x = parser(config.get(self.section + 'x'), macroes)
             self.y = parser(config.get(self.section + 'y'), macroes)
         self.shadow = shadow_value(self.section, macroes)
-        self.numberLine += 1
         for attacker in self.dictVehicle:
             for attack in self.dictVehicle[attacker]:
                 if (attacker != attackerID) and (attack != attackReasonID):
@@ -664,27 +651,24 @@ class DamageLog(_Base):
             attackerID = data.data['attackerID']
             attackReasonID = data.data['attackReasonID']
             if attackerID in self.dictVehicle:
-                if (attackReasonID in self.dictVehicle[attackerID] and
-                        ('time' in self.dictVehicle[attackerID][attackReasonID]) and
-                        ('damage' in self.dictVehicle[attackerID][attackReasonID]) and
-                        ((BigWorld.serverTime() - self.dictVehicle[attackerID][attackReasonID]['time']) < 1)):
-                    self.dictVehicle[attackerID][attackReasonID]['time'] = BigWorld.serverTime()
-                    self.dictVehicle[attackerID][attackReasonID]['damage'] += data.data['damage']
+                if attackReasonID in self.dictVehicle[attackerID]:
                     key = self.dictVehicle[attackerID][attackReasonID]
-                    self.dataLog['damage'] = key['damage']
-                    self.dataLog['dmgRatio'] = self.dataLog['damage'] * 100 // data.data['maxHealth']
-                    self.dataLog['number'] = len(self.listLog)
-                    if (attackReasonID == 1) and (key['beginFire'] is not None):
-                        self.dataLog['fireDuration'] = BigWorld.time() - key['beginFire']
-                    else:
-                        self.dataLog['fireDuration'] = None
-                    numberLine = key['numberLine']
-                    macroes = getValueMacroes(self.section, self.dataLog)
-                    self.listLog[numberLine] = parser(config.get(self.section + 'formatHistory'), macroes)
-                    if not config.get(self.section + 'moveInBattle'):
-                        self.x = parser(config.get(self.section + 'x'), macroes)
-                        self.y = parser(config.get(self.section + 'y'), macroes)
-                    self.shadow = shadow_value(self.section, macroes)
+                    if ('time' in key) and ('damage' in key) and ((BigWorld.serverTime() - key['time']) < 1):
+                        key['time'] = BigWorld.serverTime()
+                        key['damage'] += data.data['damage']
+                        self.dataLog['damage'] = key['damage']
+                        self.dataLog['dmgRatio'] = self.dataLog['damage'] * 100 // data.data['maxHealth']
+                        self.dataLog['number'] = len(self.listLog)
+                        if (attackReasonID == 1) and (key['beginFire'] is not None):
+                            self.dataLog['fireDuration'] = BigWorld.time() - key['beginFire']
+                        else:
+                            self.dataLog['fireDuration'] = None
+                        macroes = getValueMacroes(self.section, self.dataLog)
+                        self.listLog[key['numberLine']] = parser(config.get(self.section + 'formatHistory'), macroes)
+                        if not config.get(self.section + 'moveInBattle'):
+                            self.x = parser(config.get(self.section + 'x'), macroes)
+                            self.y = parser(config.get(self.section + 'y'), macroes)
+                        self.shadow = shadow_value(self.section, macroes)
                 else:
                     self.dictVehicle[attackerID][attackReasonID] = {'time': BigWorld.serverTime(),
                                                                     'damage': data.data['damage'],
@@ -748,19 +732,17 @@ class LastHit(_Base):
             attackerID = data.data['attackerID']
             attackReasonID = data.data['attackReasonID']
             if attackerID in self.dictVehicle:
-                if (attackReasonID in self.dictVehicle[attackerID] and
-                        ('time' in self.dictVehicle[attackerID][attackReasonID]) and
-                        ('damage' in self.dictVehicle[attackerID][attackReasonID]) and
-                        ((BigWorld.serverTime() - self.dictVehicle[attackerID][attackReasonID]['time']) < 1)):
-                    self.dictVehicle[attackerID][attackReasonID]['time'] = BigWorld.serverTime()
-                    self.dictVehicle[attackerID][attackReasonID]['damage'] += data.data['damage']
+                if attackReasonID in self.dictVehicle[attackerID]:
                     key = self.dictVehicle[attackerID][attackReasonID]
-                    dataLog['damage'] = key['damage']
-                    dataLog['dmgRatio'] = dataLog['damage'] * 100 // data.data['maxHealth']
-                    if (attackReasonID == 1) and (key['beginFire'] is not None):
-                        dataLog['fireDuration'] = BigWorld.time() - key['beginFire']
-                    else:
-                        dataLog['fireDuration'] = None
+                    if ('time' in key) and ('damage' in key) and ((BigWorld.serverTime() - key['time']) < 1):
+                        key['time'] = BigWorld.serverTime()
+                        key['damage'] += data.data['damage']
+                        dataLog['damage'] = key['damage']
+                        dataLog['dmgRatio'] = dataLog['damage'] * 100 // data.data['maxHealth']
+                        if (attackReasonID == 1) and (key['beginFire'] is not None):
+                            dataLog['fireDuration'] = BigWorld.time() - key['beginFire']
+                        else:
+                            dataLog['fireDuration'] = None
                 else:
                     self.dictVehicle[attackerID][attackReasonID] = {'time': BigWorld.serverTime(),
                                                                     'damage': data.data['damage'],
