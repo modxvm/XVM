@@ -15,7 +15,7 @@ XVM-6.6.0-dev:
   * добавлены макросы {{wn6}}, {{xwn6}}, {{r}}, {{c:wn6}}, {{c:xwn6}}, {{c:r}}
   
   [МАКРОСЫ НА PYTHON]
-  * totalEfficiency: добавлены макросы {{py:xvm.totalStun}}, {{py:xvm.isStuns}}
+  * totalEfficiency: добавлены макросы {{py:xvm.totalStun}}, {{py:xvm.isStuns}}, {{py:xvm.numberStuns}}
 
   [ВИДЖЕТЫ]
   * добавлена новая функция - виджеты на логине и в лобби
