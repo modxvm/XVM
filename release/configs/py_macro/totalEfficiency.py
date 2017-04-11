@@ -39,6 +39,7 @@ fragsSquad = 0
 fragsSquad_dict = {}
 isPlayerInSquad = False
 totalStun = 0
+numberStuns = 0
 isStuns = None
 
 
@@ -83,13 +84,19 @@ def ArenaDataProvider_updateVehicleStats(self, vID, vStats):
 
 @registerEvent(PlayerAvatar, 'showShotResults')
 def PlayerAvatar_showShotResults(self, results):
-    global numberHits
+    global numberHits, numberStuns
+    b = False
     for r in results:
         if self.playerVehicleID != (r & 4294967295L):
             flags = r >> 32 & 4294967295L
             if flags & VHF.ATTACK_IS_DIRECT_PROJECTILE:
                 numberHits += 1
-                as_event('ON_TOTAL_EFFICIENCY')
+                b = True
+            if flags & VHF.STUN_STARTED:
+                numberStuns += 1
+                b = True
+    if b:
+        as_event('ON_TOTAL_EFFICIENCY')
 
 
 @registerEvent(ShowShooting, '_start')
@@ -221,6 +228,7 @@ def destroyGUI(self):
     global vehiclesHealth, totalDamage, totalAssist, totalBlocked, damageReceived, damagesSquad, detection, isPlayerInSquad
     global ribbonTypes, numberHitsBlocked, player, numberHitsDealt, old_totalDamage, damage, numberShotsDealt, totalStun
     global numberDamagesDealt, numberShotsReceived, numberHitsReceived, numberHits, fragsSquad, fragsSquad_dict, isStuns
+    global numberStuns
     vehiclesHealth = {}
     totalDamage = 0
     damage = 0
@@ -242,6 +250,7 @@ def destroyGUI(self):
     fragsSquad_dict = {}
     isPlayerInSquad = False
     totalStun = 0
+    numberStuns = 0
     isStuns = None
     ribbonTypes = {
         'armor': 0,
@@ -411,3 +420,8 @@ def xvm_dmg():
 @xvm.export('xvm.isStuns', deterministic=False)
 def xvm_isStuns():
     return isStuns
+
+
+@xvm.export('xvm.numberStuns', deterministic=False)
+def xvm_numberStuns():
+    return numberStuns
