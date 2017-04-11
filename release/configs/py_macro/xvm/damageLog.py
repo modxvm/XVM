@@ -202,11 +202,12 @@ def formatMacro(macro, macroes):
                 elif isinstance(_macro, float):
                     fm['prec'] = '.' + str(_prec)
                 elif isinstance(_macro, basestring):
-                    if len(unicode(_macro, 'utf8')) > _prec:
+                    u_macro = unicode(_macro, 'utf8')
+                    if len(u_macro) > _prec:
                         if (_prec - len(unicode(fm['suf'], 'utf8'))) > 0:
-                            _macro = unicode(_macro, 'utf8')[:(_prec - len(fm['suf']))]
+                            _macro = u_macro[:(_prec - len(fm['suf']))]
                         else:
-                            _macro = unicode(_macro, 'utf8')[:_prec]
+                            _macro = u_macro[:_prec]
                             fm['suf'] = ''
                     else:
                         fm['suf'] = ''
@@ -272,6 +273,23 @@ def parser(strHTML, macroes):
 
 class Data(object):
     def __init__(self):
+        def isGoldShell(n, s):
+            if n != 'icons':
+                xmlCtx = (None, xmlPath + '/' + n)
+                price = _xml.readPrice(xmlCtx, s, 'price')
+                return _xml.readInt(xmlCtx, s, 'id', 0, 65535) if price[1] else None
+
+        self.initial()
+        self.shells = {}
+        for nation in nations.NAMES:
+            xmlPath = '%s%s%s%s' % (ITEM_DEFS_PATH, 'vehicles/', nation, '/components/shells.xml')
+            self.shells[nation] = [isGoldShell(name, subsection) for name, subsection in ResMgr.openSection(xmlPath).items() if isGoldShell(name, subsection) is not None]
+        ResMgr.purge(xmlPath, True)
+
+    def reset(self):
+        self.initial()
+
+    def initial(self):
         self.data = {'isAlive': True,
                      'isDamage': False,
                      'attackReasonID': 0,
@@ -303,17 +321,15 @@ class Data(object):
                      'blownup': False
                      }
 
-    def reset(self):
-        self.__init__()
-
     def updateData(self):
         player = BigWorld.player()
         self.data['dmgRatio'] = self.data['damage'] * 100 // self.data['maxHealth']
-        if self.data['attackerID']:
-            entity = BigWorld.entity(self.data['attackerID'])
+        attackerID = self.data['attackerID']
+        if attackerID:
+            entity = BigWorld.entity(attackerID)
             self.data['marksOnGun'] = '_' + str(entity.publicInfo['marksOnGun']) if (entity is not None) else None
             self.data['teamDmg'] = 'unknown'
-            attacker = player.arena.vehicles.get(self.data['attackerID'])
+            attacker = player.arena.vehicles.get(attackerID)
             if attacker is not None:
                 if attacker['team'] != player.team:
                     self.data['teamDmg'] = 'enemy-dmg'
@@ -321,13 +337,15 @@ class Data(object):
                     self.data['teamDmg'] = 'player'
                 else:
                     self.data['teamDmg'] = 'ally-dmg'
-                if attacker['vehicleType']:
-                    self.data['attackerVehicleType'] = list(attacker['vehicleType'].type.tags.intersection(VEHICLE_CLASSES))[0].lower()
-                    self.data['shortUserString'] = attacker['vehicleType'].type.shortUserString
-                    self.data['level'] = attacker['vehicleType'].level
-                    self.data['nation'] = nations.NAMES[attacker['vehicleType'].type.customizationNationID]
+                vehicleType = attacker['vehicleType']
+                if vehicleType:
+                    _type = vehicleType.type
+                    self.data['attackerVehicleType'] = list(_type.tags.intersection(VEHICLE_CLASSES))[0].lower()
+                    self.data['shortUserString'] = _type.shortUserString
+                    self.data['level'] = vehicleType.level
+                    self.data['nation'] = nations.NAMES[_type.customizationNationID]
                     if self.data['attackReasonID'] == 2:
-                        self.data['diff-masses'] = (player.vehicleTypeDescriptor.physics['weight'] - attacker['vehicleType'].physics['weight']) / 1000.0
+                        self.data['diff-masses'] = (player.vehicleTypeDescriptor.physics['weight'] - vehicleType.physics['weight']) / 1000.0
                     elif self.data['diff-masses'] is not None:
                         self.data['diff-masses'] = None
                 else:
@@ -359,8 +377,8 @@ class Data(object):
                     self.data['xwgr'] = None
                     self.data['xte'] = None
                 self.data['clanAbbrev'] = attacker['clanAbbrev']
-            self.data['clanicon'] = _stat.getClanIcon(self.data['attackerID'])
-            statXVM = _stat.players.get(self.data['attackerID'], None)
+            self.data['clanicon'] = _stat.getClanIcon(attackerID)
+            statXVM = _stat.players.get(attackerID, None)
             self.data['squadnum'] = statXVM.squadnum if statXVM is not None else None
         else:
             self.data['teamDmg'] = 'unknown'
@@ -386,32 +404,28 @@ class Data(object):
             self.data['costShell'] = None
             return
         for shell in attacker['vehicleType'].gun['shots']:
-            if effectsIndex == shell['shell']['effectsIndex']:
-                self.data['shellKind'] = str(shell['shell']['kind']).lower()
-                self.data['caliber'] = shell['shell']['caliber']
-                xmlPath = ITEM_DEFS_PATH + 'vehicles/' + nations.NAMES[shell['shell']['id'][0]] + '/components/shells.xml'
-                for name, subsection in ResMgr.openSection(xmlPath).items():
-                    if name != 'icons':
-                        xmlCtx = (None, xmlPath + '/' + name)
-                        if _xml.readInt(xmlCtx, subsection, 'id', 0, 65535) == shell['shell']['id'][1]:
-                            price = _xml.readPrice(xmlCtx, subsection, 'price')
-                            self.data['costShell'] = 'gold-shell' if price[1] else 'silver-shell'
-                            break
-                ResMgr.purge(xmlPath, True)
+            _shell = shell['shell']
+            if effectsIndex == _shell['effectsIndex']:
+                self.data['shellKind'] = str(_shell['kind']).lower()
+                self.data['caliber'] = _shell['caliber']
+                _id = _shell['id']
+                self.data['costShell'] = 'gold-shell' if _id[1] in self.shells[nations.NAMES[_id[0]]] else 'silver-shell'
                 break
 
     def timeReload(self, attackerID):
         if self.data['attackerID']:
             player = BigWorld.player()
             attacker = player.arena.vehicles.get(attackerID)
-            if (attacker is not None) and (attacker['vehicleType']):
-                reload_orig = attacker['vehicleType'].gun['reloadTime']
-                crew = 0.94 if attacker['vehicleType'].miscAttrs['crewLevelIncrease'] != 0 else 1
-                if (attacker['vehicleType'].gun['clip'][0] == 1) and (attacker['vehicleType'].miscAttrs['gunReloadTimeFactor'] != 0):
-                    rammer = attacker['vehicleType'].miscAttrs['gunReloadTimeFactor']
+            vehicleType = attacker['vehicleType']
+            if (attacker is not None) and (vehicleType):
+                reload_orig = vehicleType.gun['reloadTime']
+                _miscAttrs = vehicleType.miscAttrs
+                crew = 0.94 if _miscAttrs['crewLevelIncrease'] != 0 else 1.0
+                if (vehicleType.gun['clip'][0] == 1) and (_miscAttrs['gunReloadTimeFactor'] != 0.0):
+                    rammer = _miscAttrs['gunReloadTimeFactor']
                 else:
                     rammer = 1
-                return float(reload_orig * crew * rammer)
+                return reload_orig * crew * rammer
             else:
                 return 0.0
         else:
