@@ -121,7 +121,7 @@ def readRating():
     if r in RATINGS:
         return RATINGS[r]['name']
     else:
-        return 'xwgr' if scale is 'xvm' else 'wgr'
+        return 'xwgr' if scale == 'xvm' else 'wgr'
 
 
 def comparing(_macro, _operator, _math):
@@ -132,23 +132,23 @@ def comparing(_macro, _operator, _math):
     elif isinstance(_macro, int):
         _math = int(_math)
     if isinstance(_macro, (float, int)) and isinstance(_math, (float, int)):
-        if _operator is '>=':
+        if _operator == '>=':
             return _macro >= _math
-        elif _operator is '<=':
+        elif _operator == '<=':
             return _macro <= _math
-        elif _operator is '!=':
+        elif _operator == '!=':
             return _macro != _math
         elif _operator in ('==', '='):
             return _macro == _math
-        elif _operator is '<':
+        elif _operator == '<':
             return _macro < _math
-        elif _operator is '>':
+        elif _operator == '>':
             return _macro > _math
     elif isinstance(_macro, basestring) and isinstance(_math, basestring):
         if _operator in ('==', '='):
-            return _macro is _math
-        elif _operator is '!=':
-            return _macro is not _math
+            return _macro == _math
+        elif _operator == '!=':
+            return _macro != _math
     else:
         return False
 
@@ -176,7 +176,7 @@ def formatMacro(macro, macroes):
     t, _, _prec = t.partition('.')
     _prec = int(_prec) if _prec.isdigit() else ''
     for s in ("-0'", "-0", "-'", "0'", '-', '0', "'"):
-        if (s in t) and (s[0] is t[0]):
+        if (s in t) and (s[0] == t[0]):
             _, fm['flag'], fm['width'] = t.rpartition(s)
             break
     if not fm['width'] and t.isdigit():
@@ -196,7 +196,7 @@ def formatMacro(macro, macroes):
         if _macro == macroes[tempMacro]:
             fm['flag'] = FLAG[fm['flag']]
             fm['prec'] = ''
-            if _prec is not '':
+            if _prec != '':
                 if isinstance(_macro, int):
                     _macro = int(_macro) + _prec
                 elif isinstance(_macro, float):
@@ -487,7 +487,7 @@ def getValueMacroes(section, value):
         if m is not None:
             for val in config.get('colors/' + sec):
                 if val['value'] > m:
-                    return '#' + val['color'][2:] if val['color'][:2] is '0x' else val['color']
+                    return '#' + val['color'][2:] if val['color'][:2] == '0x' else val['color']
 
     conf = readyConfig(section)
     macro = {'c:team-dmg': conf['c_teamDmg'][value['teamDmg']],
