@@ -2,21 +2,21 @@
   "widgets": {
     "login": [
       {
-        "enabled": true,
+        //"enabled": true,
         "$ref": { "file":"../default/widgetsTemplates.xc", "path":"test" }
       },
       {
-        "enabled": true,
+        //"enabled": true,
         "$ref": { "file":"../default/widgetsTemplates.xc", "path":"test2" }
       }
     ],
     "lobby": [
       {
-        "enabled": true,
+        //"enabled": true,
         "$ref": { "file":"../default/widgetsTemplates.xc", "path":"test" }
       },
       {
-        "enabled": true,
+        //"enabled": true,
         "$ref": { "file":"../default/widgetsTemplates.xc", "path":"test2" }
       }
     ]

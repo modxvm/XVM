@@ -23,6 +23,9 @@
     configuration files: widgets.xc, widgetsTemplates.xc
     referenced from login.xc, hangar.xc
 
+  [BATTLE LABELS]
+  * "layer" parameter can be used in the battleLabels
+
   [INSTALLER]
   * improvements in WoT client path detection
 

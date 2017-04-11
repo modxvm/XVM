@@ -23,6 +23,9 @@ XVM-6.6.0-dev:
     конфигурационные файлы: widgets.xc, widgetsTemplates.xc
     ссылки в login.xc, hangar.xc
 
+  [BATTLE LABELS]
+  * можно использовать параметр "layer" в battleLabels
+
   [УСТАНОВЩИК]
   * улучшение в алгоритме нахождения пути к установленному клиенту
 

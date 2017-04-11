@@ -93,7 +93,7 @@ package com.xvm.lobby.widgets
             _normalHolder = _createExtraFieldsHolder();
             _topHolder = _createExtraFieldsHolder();
             _extraFields = new ExtraFieldsGroup(this, cfg, true, CTextFormat.GetDefaultConfigForLobby());
-            _extraFields.update(new VOLobbyMacrosOptions(), 0);
+            _extraFields.update(new VOLobbyMacrosOptions());
         }
 
         private function _createExtraFieldsHolder():Sprite

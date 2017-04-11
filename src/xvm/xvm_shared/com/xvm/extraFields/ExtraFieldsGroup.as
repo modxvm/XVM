@@ -53,24 +53,28 @@ package com.xvm.extraFields
                 if (filteredFormats && filteredFormats.length)
                 {
                     substrate = createNewExtraFields();
+                    substrate.name = "ef_substrate";
                     item.substrateHolder.addChild(substrate);
                 }
                 filteredFormats = filterFormats(formats, Defines.LAYER_BOTTOM);
                 if (filteredFormats && filteredFormats.length)
                 {
                     bottom = createNewExtraFields();
+                    bottom.name = "ef_bottom";
                     item.bottomHolder.addChild(bottom);
                 }
                 filteredFormats = filterFormats(formats, Defines.LAYER_NORMAL);
                 if (filteredFormats && filteredFormats.length)
                 {
                     normal = createNewExtraFields();
+                    normal.name = "ef_normal";
                     item.normalHolder.addChild(normal);
                 }
                 filteredFormats = filterFormats(formats, Defines.LAYER_TOP);
                 if (filteredFormats && filteredFormats.length)
                 {
                     top = createNewExtraFields();
+                    top.name = "ef_top";
                     item.topHolder.addChild(top);
                 }
             }
@@ -175,7 +179,7 @@ package com.xvm.extraFields
             }
         }
 
-        public function update(options:IVOMacrosOptions, bindToIconOffset:Number, offsetX:Number = 0, offsetY:Number = 0):void
+        public function update(options:IVOMacrosOptions, bindToIconOffset:Number = 0, offsetX:Number = 0, offsetY:Number = 0):void
         {
             _lastUpdateArgs = arguments;
             if (substrate)

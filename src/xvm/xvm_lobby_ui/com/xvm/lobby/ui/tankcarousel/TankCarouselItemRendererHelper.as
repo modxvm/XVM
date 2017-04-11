@@ -124,7 +124,7 @@ package com.xvm.lobby.ui.tankcarousel
                                     {
                                         options.vehicleData.__vehicleDossierCut = vdata;
                                     }
-                                    item.extraFields.update(options, 0);
+                                    item.extraFields.update(options);
                                     isExtraFieldsVisible = true;
                                 }
                             }

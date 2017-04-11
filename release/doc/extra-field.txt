@@ -64,7 +64,7 @@ Legend:
 ├───────────────────┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────────
 │ "highlight"       │   │ X │   │   │   │   │ highlight icon depending on the player state (default: false)
 ├───────────────────┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────────
-│ "layer"           │ X │ X │ X │ X │ X │   │ field Z-order
+│ "layer"           │ X │ X │ X │ X │ X │ X │ field Z-order
 │                   │   │   │   │   │   │   │
 │                   │   │   │   │   │   │   │ values:
 │                   │   │   │   │   │   │   │   "substrate": put field behind all fields (for the players panel X value depends on the players panel width)

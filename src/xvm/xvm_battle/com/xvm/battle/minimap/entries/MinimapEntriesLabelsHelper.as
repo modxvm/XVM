@@ -96,7 +96,7 @@ package com.xvm.battle.minimap.entries
                 entry.extraFields.visible = !isAltMode;
                 if (!isAltMode)
                 {
-                    entry.extraFields.update(playerState, 0);
+                    entry.extraFields.update(playerState);
                 }
             }
             if (entry.extraFieldsAlt)
@@ -104,7 +104,7 @@ package com.xvm.battle.minimap.entries
                 entry.extraFieldsAlt.visible = isAltMode;
                 if (isAltMode)
                 {
-                    entry.extraFieldsAlt.update(playerState, 0);
+                    entry.extraFieldsAlt.update(playerState);
                 }
             }
         }
