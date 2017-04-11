@@ -27,6 +27,8 @@ from xvm_main.python.stats import _stat
 on_fire = 0
 beginFire = None
 isDownAlt = False
+autoReloadConfig = None
+damageLogConfig = {}
 
 ATTACK_REASONS = {
     0: 'shot',
@@ -73,46 +75,43 @@ RATINGS = {
     'basic_xte': {'name': 'xte', 'size': 2}
 }
 
+SECTION_LOG = 'damageLog/log/'
+SECTION_LOG_ALT = 'damageLog/logAlt/'
+SECTION_LOG_BACKGROUND = 'damageLog/logBackground/'
+SECTION_LOG_ALT_BACKGROUND = 'damageLog/logAltBackground/'
+SECTION_LASTHIT = 'damageLog/lastHit/'
+SECTIONS = (SECTION_LOG, SECTION_LOG_ALT, SECTION_LOG_BACKGROUND, SECTION_LOG_ALT_BACKGROUND, SECTION_LASTHIT)
 
 def keyLower(_dict):
     if _dict is not None:
         dict_return = {}
-        for key, value in _dict.items():
-            dict_return[key.lower()] = value
-        return dict_return
-    else:
-        return None
-
-
-def keyUpper(_dict):
-    if _dict is not None:
-        dict_return = {}
-        for key, value in _dict.items():
-            dict_return[key.upper()] = value
+        for key in _dict.keys():
+            dict_return[key.lower()] = _dict[key]
         return dict_return
     else:
         return None
 
 
 def readyConfig(section):
-    res = {'vehicleClass': keyLower(config.get(section + 'vtype')),
-           'c_Shell': keyLower(config.get(section + 'c:costShell')),
-           'costShell': keyLower(config.get(section + 'costShell')),
-           'c_typeHit': keyLower(config.get(section + 'c:dmg-kind')),
-           'c_VehicleClass': keyLower(config.get(section + 'c:vtype')),
-           'typeHit': keyLower(config.get(section + 'dmg-kind')),
-           'c_teamDmg': keyLower(config.get(section + 'c:team-dmg')),
-           'teamDmg': keyLower(config.get(section + 'team-dmg')),
-           'compNames': keyLower(config.get(section + 'comp-name')),
-           'splashHit': keyLower(config.get(section + 'splash-hit')),
-           'criticalHit': keyLower(config.get(section + 'critical-hit')),
-           # 'showHitNoDamage': config.get(section + 'showHitNoDamage'),
-           'hitEffect': keyLower(config.get(section + 'hit-effects')),
-           'c_HitEffect': keyLower(config.get(section + 'c:hit-effects')),
-           'typeShell': keyLower(config.get(section + 'type-shell')),
-           'c_typeShell': keyLower(config.get(section + 'c:type-shell'))
-           }
-    return res
+    if autoReloadConfig or (section not in damageLogConfig):
+        return {'vehicleClass': keyLower(config.get(section + 'vtype')),
+                'c_Shell': keyLower(config.get(section + 'c:costShell')),
+                'costShell': keyLower(config.get(section + 'costShell')),
+                'c_typeHit': keyLower(config.get(section + 'c:dmg-kind')),
+                'c_VehicleClass': keyLower(config.get(section + 'c:vtype')),
+                'typeHit': keyLower(config.get(section + 'dmg-kind')),
+                'c_teamDmg': keyLower(config.get(section + 'c:team-dmg')),
+                'teamDmg': keyLower(config.get(section + 'team-dmg')),
+                'compNames': keyLower(config.get(section + 'comp-name')),
+                'splashHit': keyLower(config.get(section + 'splash-hit')),
+                'criticalHit': keyLower(config.get(section + 'critical-hit')),
+                'hitEffect': keyLower(config.get(section + 'hit-effects')),
+                'c_HitEffect': keyLower(config.get(section + 'c:hit-effects')),
+                'typeShell': keyLower(config.get(section + 'type-shell')),
+                'c_typeShell': keyLower(config.get(section + 'c:type-shell'))
+                }
+    else:
+        return damageLogConfig[section]
 
 
 def readRating():
@@ -122,8 +121,7 @@ def readRating():
     if r in RATINGS:
         return RATINGS[r]['name']
     else:
-        return 'xwgr' if scale == 'xvm' else 'wgr'
-
+        return 'xwgr' if scale is 'xvm' else 'wgr'
 
 
 def comparing(_macro, _operator, _math):
@@ -134,49 +132,36 @@ def comparing(_macro, _operator, _math):
     elif isinstance(_macro, int):
         _math = int(_math)
     if isinstance(_macro, (float, int)) and isinstance(_math, (float, int)):
-        if _operator == '>=':
+        if _operator is '>=':
             return _macro >= _math
-        elif _operator == '<=':
+        elif _operator is '<=':
             return _macro <= _math
-        elif _operator == '!=':
+        elif _operator is '!=':
             return _macro != _math
         elif _operator in ('==', '='):
             return _macro == _math
-        elif _operator == '<':
+        elif _operator is '<':
             return _macro < _math
-        elif _operator == '>':
+        elif _operator is '>':
             return _macro > _math
     elif isinstance(_macro, basestring) and isinstance(_math, basestring):
         if _operator in ('==', '='):
-            return _macro == _math
-        elif _operator == '!=':
-            return _macro != _math
+            return _macro is _math
+        elif _operator is '!=':
+            return _macro is not _math
     else:
         return False
 
 
-def flag(_flag):
-    if _flag in ('', "'"):
-        _flag = '>'
-    elif _flag in ('-', "-'"):
-        _flag = '<'
-    elif _flag in ('0', "0'"):
-        _flag = '0'
-    elif _flag in ("-0", "-0'"):
-        _flag = '0<'
-    return _flag
+FLAG = {'': '>', "'": '>', '-': '<', "-'": '<', '0': '0', "0'": '0', "-0": '0<', "-0'": '0<'}
 
 
 def formatMacro(macro, macroes):
     _macro = macro[2:-2]
     _macro, _, _def = _macro.partition('|')
     _macro, _, _rep = _macro.partition('?')
-    fm = {}
+    fm = {'flag': '', 'type': '', 'width': '', 'suf': ''}
     _operator = ''
-    fm['flag'] = ''
-    fm['type'] = ''
-    fm['width'] = ''
-    fm['suf'] = ''
     for s in ('>=', '<=', '!=', '==', '=', '<', '>'):
         if s in _macro:
             _macro, _operator, _math = _macro.partition(s)
@@ -191,7 +176,7 @@ def formatMacro(macro, macroes):
     t, _, _prec = t.partition('.')
     _prec = int(_prec) if _prec.isdigit() else ''
     for s in ("-0'", "-0", "-'", "0'", '-', '0', "'"):
-        if (s in t) and (s[0] == t[0]):
+        if (s in t) and (s[0] is t[0]):
             _, fm['flag'], fm['width'] = t.rpartition(s)
             break
     if not fm['width'] and t.isdigit():
@@ -209,19 +194,19 @@ def formatMacro(macro, macroes):
         elif _def and not _macro:
             _macro = _def
         if _macro == macroes[tempMacro]:
-            fm['flag'] = flag(fm['flag'])
+            fm['flag'] = FLAG[fm['flag']]
             fm['prec'] = ''
-            if _prec != '':
+            if _prec is not '':
                 if isinstance(_macro, int):
-                    _macro = int(_macro) + int(_prec)
+                    _macro = int(_macro) + _prec
                 elif isinstance(_macro, float):
-                    fm['prec'] = '.' + str(int(_prec))
+                    fm['prec'] = '.' + str(_prec)
                 elif isinstance(_macro, basestring):
-                    if len(unicode(_macro, 'utf8')) > int(_prec):
-                        if (int(_prec) - len(unicode(fm['suf'], 'utf8'))) > 0:
-                            _macro = unicode(_macro, 'utf8')[:(int(_prec) - len(fm['suf']))]
+                    if len(unicode(_macro, 'utf8')) > _prec:
+                        if (_prec - len(unicode(fm['suf'], 'utf8'))) > 0:
+                            _macro = unicode(_macro, 'utf8')[:(_prec - len(fm['suf']))]
                         else:
-                            _macro = unicode(_macro, 'utf8')[:(int(_prec))]
+                            _macro = unicode(_macro, 'utf8')[:_prec]
                             fm['suf'] = ''
                     else:
                         fm['suf'] = ''
@@ -239,13 +224,13 @@ def parser(strHTML, macroes):
     i = 0
     if not isinstance(strHTML, str):
         strHTML = str(strHTML)
-    while 1:
+    while '{{' in strHTML:
         b = True
         while b:
             b = False
             for s in MACROS_NAME:
                 temp_str = '{{%s}}' % s
-                if strHTML.find(temp_str) >= 0:
+                if temp_str in strHTML:
                     _macro = str(macroes.get(s, ''))
                     strHTML = strHTML.replace(temp_str, _macro)
                     b = True
@@ -261,7 +246,7 @@ def parser(strHTML, macroes):
                 if non:
                     substr = substr.replace('{{%s' % _macro, '{{%s' % macroes[_macro], 1)
                     for s1 in MACROS_NAME:
-                        if substr.find('{{%s' % s1) >= 0:
+                        if ('{{%s' % s1) in substr:
                             _macro = substr
                             break
                     else:
@@ -279,7 +264,7 @@ def parser(strHTML, macroes):
         b = False
         _notMacroesDL = notMacroesDL.copy()
         for s in _notMacroesDL:
-            if strHTML.find(s) >= 0:
+            if s in strHTML:
                 b = True
                 strHTML = strHTML.replace(s, notMacroesDL.pop(s, ''), 1)
     return strHTML
@@ -502,23 +487,23 @@ def getValueMacroes(section, value):
         if m is not None:
             for val in config.get('colors/' + sec):
                 if val['value'] > m:
-                    return '#' + val['color'][2:] if val['color'][:2] == '0x' else val['color']
+                    return '#' + val['color'][2:] if val['color'][:2] is '0x' else val['color']
 
     conf = readyConfig(section)
-    macro = {'c:team-dmg': conf['c_teamDmg'].get(value['teamDmg']),
+    macro = {'c:team-dmg': conf['c_teamDmg'][value['teamDmg']],
              'team-dmg': conf['teamDmg'].get(value['teamDmg'], ''),
              'vtype': conf['vehicleClass'].get(value['attackerVehicleType'], 'not_vehicle'),
-             'c:costShell': conf['c_Shell'].get(value['costShell']),
+             'c:costShell': conf['c_Shell'][value['costShell']],
              'costShell': conf['costShell'].get(value['costShell'], 'unknown'),
-             'c:dmg-kind': conf['c_typeHit'].get(ATTACK_REASONS[value['attackReasonID']]),
+             'c:dmg-kind': conf['c_typeHit'][ATTACK_REASONS[value['attackReasonID']]],
              'dmg-kind': conf['typeHit'].get(ATTACK_REASONS[value['attackReasonID']], 'reason: %s' % value['attackReasonID']),
              'c:vtype': conf['c_VehicleClass'].get(value['attackerVehicleType'], 'not_vehicle'),
              'comp-name': conf['compNames'].get(value['compName'], 'unknown'),
              'splash-hit': conf['splashHit'].get(value['splashHit'], 'unknown'),
              'critical-hit': conf['criticalHit'].get('critical') if value['criticalHit'] else conf['criticalHit'].get('no-critical'),
              'type-shell': conf['typeShell'].get(value['shellKind'], 'unknown'),
-             'c:type-shell': conf['c_typeShell'].get(value['shellKind']),
-             'c:hit-effects': conf['c_HitEffect'].get(value['hitEffect']),
+             'c:type-shell': conf['c_typeShell'][value['shellKind']],
+             'c:hit-effects': conf['c_HitEffect'][value['hitEffect']],
              'hit-effects': conf['hitEffect'].get(value['hitEffect'], 'unknown'),
              'number': value['number'],
              'dmg': value['damage'],
@@ -780,11 +765,11 @@ class LastHit(_Base):
             as_event('ON_LAST_HIT')
 
 
-_log = DamageLog('damageLog/log/')
-_logAlt = DamageLog('damageLog/logAlt/')
-_logBackground = DamageLog('damageLog/logBackground/')
-_logAltBackground = DamageLog('damageLog/logAltBackground/')
-_lastHit = LastHit('damageLog/lastHit/')
+_log = DamageLog(SECTION_LOG)
+_logAlt = DamageLog(SECTION_LOG_ALT)
+_logBackground = DamageLog(SECTION_LOG_BACKGROUND)
+_logAltBackground = DamageLog(SECTION_LOG_ALT_BACKGROUND)
+_lastHit = LastHit(SECTION_LASTHIT)
 
 
 @overrideMethod(DamageLogPanel, '_addToTopLog')
@@ -830,7 +815,11 @@ def onHealthChanged(self, newHealth, attackerID, attackReasonID):
 @registerEvent(Vehicle, 'onEnterWorld')
 def onEnterWorld(self, prereqs):
     if self.isPlayerVehicle:
-        global on_fire
+        global on_fire, damageLogConfig, autoReloadConfig
+        autoReloadConfig = config.get('autoReloadConfig')
+        if not (autoReloadConfig or damageLogConfig):
+            for section in SECTIONS:
+                damageLogConfig[section] = readyConfig(section)
         on_fire = 0
         data.data['oldHealth'] = self.health
         data.data['maxHealth'] = self.health
