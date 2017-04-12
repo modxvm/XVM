@@ -168,9 +168,8 @@
       "y": "{{pp.mode=0?65|35}}",
       "width": 300,
       "height": 22,
-      "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 3 },
-      "textFormat": { "color": "0xE3E3E3", "size": 16 },
-      "format": "<textformat tabstops='[65,130,196]' leading='-2' ><img src='xvm://res/icons/Efficiency/damage.png' vspace='-2'> {{py:xvm.totalDamage}}<tab><img src='xvm://res/icons/Efficiency/assist.png' vspace='-2'> {{py:xvm.totalAssist}}<tab><img src='xvm://res/icons/Efficiency/reflect.png' vspace='-2'> {{py:xvm.totalBlocked}}<tab><img src='xvm://res/icons/Efficiency/discover.png' vspace='-2'> {{py:xvm.detection}}</textformat>"
+      "textFormat": { "size": 16 },
+      "format": "<textformat tabstops='[65,130,196]' leading='-2' ><img src='xvm://res/icons/Efficiency/damage.png' vspace='-2'> <font color='{{py:xvm.totalDamage>0?{{py:xvm.totalDamageColor}}}}'>{{py:xvm.totalDamage}}</font><tab><img src='xvm://res/icons/Efficiency/assist.png' vspace='-2'> {{py:xvm.totalAssist}}<tab><img src='xvm://res/icons/Efficiency/reflect.png' vspace='-2'> {{py:xvm.totalBlocked}}<tab><img src='xvm://res/icons/Efficiency/discover.png' vspace='-2'> {{py:xvm.detection}}</textformat>"
     },
     // Rewritable timer format
     // Перезаписываемый формат таймера
