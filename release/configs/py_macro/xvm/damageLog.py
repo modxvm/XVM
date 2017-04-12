@@ -8,6 +8,7 @@ import GUI
 import Keys
 import ResMgr
 import nations
+import BattleReplay
 import xvm_main.python.config as config
 import xvm_main.python.stats as stats
 import xvm_main.python.userprefs as userprefs
@@ -242,7 +243,7 @@ def parser(strHTML, macroes):
         substr = strHTML[start:end]
         for s in MACROS_NAME:
             begin = substr.find(s)
-            if (begin == 2) and (substr[(2 + len(s))] in ('|', '?', '~', '%', '>', '<', '!', '=')):
+            if (begin == 2) and (substr[(2 + len(s))] in ('?', '%', '|',  '>', '<', '!', '=', '~')):
                 _macro, non = formatMacro(substr, macroes)
                 if non:
                     substr = substr.replace('{{%s' % _macro, '{{%s' % macroes[_macro], 1)
@@ -290,6 +291,7 @@ class Data(object):
         self.initial()
 
     def initial(self):
+        self.isReplay = False
         self.data = {'isAlive': True,
                      'isDamage': False,
                      'attackReasonID': 0,
@@ -442,7 +444,10 @@ class Data(object):
         else:
             self.data['damage'] = 0
             self.updateData()
-            self.updateLabels()
+            if self.isReplay:
+                self.updateLabels()
+            else:
+                BigWorld.callback(0.03, self.updateLabels)
 
     def updateLabels(self):
         _log.callEvent = _logBackground.callEvent = not isDownAlt
@@ -486,11 +491,15 @@ class Data(object):
         else:
             self.data['reloadGun'] = self.timeReload(attackerID)
         self.data['attackerID'] = attackerID
-        self.data['damage'] = self.data['oldHealth'] - max(0, newHealth)
+        newHealth = max(0, newHealth)
+        self.data['damage'] = self.data['oldHealth'] - newHealth
         self.data['isAlive'] = (newHealth > 0) and bool(vehicle.isCrewActive)
-        self.data['oldHealth'] = max(0, newHealth)
+        self.data['oldHealth'] = newHealth
         self.updateData()
-        self.updateLabels()
+        if self.isReplay:
+            self.updateLabels()
+        else:
+            BigWorld.callback(0.03, self.updateLabels)
 
 
 data = Data()
@@ -640,7 +649,7 @@ class DamageLog(_Base):
         self.shadow = shadow_value(self.section, macroes)
         for attacker in self.dictVehicle:
             for attack in self.dictVehicle[attacker]:
-                if (attacker != attackerID) and (attack != attackReasonID):
+                if (attacker != attackerID) or (attack != attackReasonID):
                     self.dictVehicle[attacker][attack]['numberLine'] += 1
 
     def output(self):
@@ -652,7 +661,7 @@ class DamageLog(_Base):
             if attackerID in self.dictVehicle:
                 if attackReasonID in self.dictVehicle[attackerID]:
                     key = self.dictVehicle[attackerID][attackReasonID]
-                    if ('time' in key) and ('damage' in key) and ((BigWorld.serverTime() - key['time']) < 1):
+                    if ('time' in key) and ('damage' in key) and ('numberLine' in key) and ((BigWorld.serverTime() - key['time']) < 1.0):
                         key['time'] = BigWorld.serverTime()
                         key['damage'] += data.data['damage']
                         self.dataLog['damage'] = key['damage']
@@ -668,6 +677,12 @@ class DamageLog(_Base):
                             self.x = parser(config.get(self.section + 'x'), macroes)
                             self.y = parser(config.get(self.section + 'y'), macroes)
                         self.shadow = shadow_value(self.section, macroes)
+                    else:
+                        self.dictVehicle[attackerID][attackReasonID] = {'time': BigWorld.serverTime(),
+                                                                        'damage': data.data['damage'],
+                                                                        'numberLine': 0,
+                                                                        'beginFire': beginFire if attackReasonID == 1 else None}
+                        self.addLine(attackerID, attackReasonID)
                 else:
                     self.dictVehicle[attackerID][attackReasonID] = {'time': BigWorld.serverTime(),
                                                                     'damage': data.data['damage'],
@@ -815,7 +830,7 @@ def onHealthChanged(self, newHealth, attackerID, attackReasonID):
     global on_fire
     if self.isPlayerVehicle and data.data['isAlive']:
         data.onHealthChanged(self, newHealth, attackerID, attackReasonID)
-        if (newHealth <= 0):
+        if newHealth <= 0:
             on_fire = 0
             as_event('ON_FIRE')
     elif hasattr(BigWorld.player().inputHandler.ctrl, 'curVehicleID'):
@@ -830,6 +845,7 @@ def onHealthChanged(self, newHealth, attackerID, attackReasonID):
 def onEnterWorld(self, prereqs):
     if self.isPlayerVehicle:
         global on_fire, damageLogConfig, autoReloadConfig
+        data.isReplay = BattleReplay.isPlaying()
         autoReloadConfig = config.get('autoReloadConfig')
         if not (autoReloadConfig or damageLogConfig):
             for section in SECTIONS:
