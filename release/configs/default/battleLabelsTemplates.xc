@@ -24,7 +24,7 @@
       "hotKeyCode": 56, "onHold": "true", "visibleOnHotKey": false,
       "updateEvent": "ON_DAMAGE_CAUSED, ON_PANEL_MODE_CHANGED",
       "x": "{{pp.mode=0?5|{{py:math.sum({{pp.widthLeft}},50)}}}}",
-      "y": "{{pp.mode=0?85|60}}",
+      "y": "{{pp.mode=0?95|65}}",
       "width": 500,
       "height": 1000,
       "textFormat": { "color": "0xF4EFE8", "size": 15 },
@@ -163,15 +163,14 @@
     },
     "totalEfficiency": {
       "enabled": true,
-      "updateEvent": "PY(ON_TOTAL_EFFICIENCY)",
-      "x": 240,
-      "y": -2,
+      "updateEvent": "PY(ON_TOTAL_EFFICIENCY), ON_PANEL_MODE_CHANGED",
+      "x": "{{pp.mode=0?5|{{py:math.sum({{pp.widthLeft}},50)}}}}",
+      "y": "{{pp.mode=0?65|35}}",
       "width": 300,
       "height": 22,
-      "screenVAlign": "bottom",
       "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 3 },
       "textFormat": { "color": "0xE3E3E3", "size": 16 },
-      "format": "<textformat tabstops='[65,130,196]' leading='-2' ><img src='xvm://res/icons/Efficiency/damage.png'> {{py:xvm.totalDamage}}<tab><img src='xvm://res/icons/Efficiency/assist.png'> {{py:xvm.totalAssist}}<tab><img src='xvm://res/icons/Efficiency/reflect.png'> {{py:xvm.totalBlocked}}<tab><img src='xvm://res/icons/Efficiency/discover.png'> {{py:xvm.detection}}</textformat>"
+      "format": "<textformat tabstops='[65,130,196]' leading='-2' ><img src='xvm://res/icons/Efficiency/damage.png' vspace='-2'> {{py:xvm.totalDamage}}<tab><img src='xvm://res/icons/Efficiency/assist.png' vspace='-2'> {{py:xvm.totalAssist}}<tab><img src='xvm://res/icons/Efficiency/reflect.png' vspace='-2'> {{py:xvm.totalBlocked}}<tab><img src='xvm://res/icons/Efficiency/discover.png' vspace='-2'> {{py:xvm.detection}}</textformat>"
     },
     // Rewritable timer format
     // Перезаписываемый формат таймера
