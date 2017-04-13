@@ -6,7 +6,7 @@
   "clock": {
     // Show clock in hangar.
     // Показывать часы в ангаре.
-    "enabled": true,
+    "enabled": false,
     // Horizontal position.
     // Положение по горизонтали.
     "x": -10,

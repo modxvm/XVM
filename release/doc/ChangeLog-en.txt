@@ -28,6 +28,9 @@
 
   [INSTALLER]
   * improvements in WoT client path detection
+  
+  [HANGAR]
+  * clock in a hangar are transferred to widgets
 
 XVM-6.5.7:
   [GENERAL]

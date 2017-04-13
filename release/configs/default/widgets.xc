@@ -15,6 +15,7 @@
       ${ "widgetsTemplates.xc":"test2" }
     ],
     "lobby": [
+      ${ "widgetsTemplates.xc":"clock" },
       ${ "widgetsTemplates.xc":"test" },
       ${ "widgetsTemplates.xc":"test2" }
     ]
