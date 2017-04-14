@@ -31,6 +31,7 @@ XVM-6.6.0-dev:
   
   [АНГАР]
   * часы в ангаре перенесены в виджеты
+  * удален py_macro/battleClock.py (макрос {{py:xvm.formatDate()}} перемещен в py_macro/xvm.py)
 
 XVM-6.5.7:
   [ОБЩЕЕ]

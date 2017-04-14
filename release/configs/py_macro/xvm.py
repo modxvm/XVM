@@ -1,4 +1,4 @@
-
+import time
 import traceback
 
 # Import logger
@@ -8,6 +8,15 @@ from xvm_main.python.logger import *
 import xvm_main.python.config as config
 
 from xvm import utils
+
+# Date and time
+
+@xvm.export('xvm.formatDate', deterministic=False)
+def xvm_formatDate(formatDate):
+    import locale
+    t = time.strftime(formatDate).decode(locale.getdefaultlocale()[1])
+    return '{}'.format(t)
+
 
 # Team Strength
 

@@ -30,7 +30,8 @@
   * improvements in WoT client path detection
   
   [HANGAR]
-  * clock in a hangar are transferred to widgets
+  * clock in the hangar is moved to widgets
+  * removed py_macro/battleClock.py (macro {{py:xvm.formatDate()}} moved to py_macro/xvm.py)
 
 XVM-6.5.7:
   [GENERAL]
