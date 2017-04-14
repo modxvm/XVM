@@ -18,6 +18,7 @@ package com.xvm.lobby.online
     public class OnlineLobbyXvmView extends XvmViewBase
     {
         private var _initialized:Boolean = false;
+        private var _isHangar:Boolean = false;
         private var cfg:COnlineServers;
 
         public function OnlineLobbyXvmView(view:IView)
@@ -52,6 +53,7 @@ package com.xvm.lobby.online
 
         public function setVisibility(isHangar:Boolean):void
         {
+            _isHangar = isHangar;
             if (onlineControl)
             {
                 onlineControl.visible = isHangar || (cfg.layer.toLowerCase() == Defines.LAYER_TOP);
@@ -72,6 +74,7 @@ package com.xvm.lobby.online
                 var layer:String = cfg.layer.toLowerCase();
                 var index:int = (layer == Defines.LAYER_BOTTOM) ? 0 : (layer == Defines.LAYER_TOP) ? page.getChildIndex(page.header) + 1 : page.getChildIndex(page.header);
                 onlineControl = page.addChildAt(new OnlineServersView(cfg), index) as OnlineServersView;
+                setVisibility(_isHangar);
             }
         }
 

@@ -18,6 +18,7 @@ package com.xvm.lobby.ping
     public class PingLobbyXvmView extends XvmViewBase
     {
         private var _initialized:Boolean = false;
+        private var _isHangar:Boolean = false;
         private var cfg:CPingServers;
 
         public function PingLobbyXvmView(view:IView)
@@ -52,6 +53,7 @@ package com.xvm.lobby.ping
 
         public function setVisibility(isHangar:Boolean):void
         {
+            _isHangar = isHangar;
             if (pingControl)
             {
                 pingControl.visible = isHangar || (cfg.layer.toLowerCase() == Defines.LAYER_TOP);
@@ -71,6 +73,7 @@ package com.xvm.lobby.ping
                 var layer:String = cfg.layer.toLowerCase();
                 var index:int = (layer == Defines.LAYER_BOTTOM) ? 0 : (layer == Defines.LAYER_TOP) ? page.getChildIndex(page.header) + 1 : page.getChildIndex(page.header);
                 pingControl = page.addChildAt(new PingServersView(cfg), index) as PingServersView;
+                setVisibility(_isHangar);
             }
         }
 
