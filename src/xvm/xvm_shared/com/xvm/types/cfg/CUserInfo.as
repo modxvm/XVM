@@ -9,7 +9,6 @@ package com.xvm.types.cfg
     public dynamic class CUserInfo extends Object implements ICloneable
     {
         public var startPage:*;
-        public var sortColumn:*;
         public var showXTEColumn:*;
         public var showExtraDataInProfile:*;
         public var inHangarFilterEnabled:*;

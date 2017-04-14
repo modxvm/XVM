@@ -28,8 +28,6 @@ package com.xvm.lobby.ui.profile.components
     {
         // CONSTANTS
 
-        private static const DEFAULT_SORTING_INVALID:String = "default_sorting_invalid";
-
         public static const EVENT_VEHICLE_DOSSIER_LOADED:String = "vehicle_dossier_loaded";
 
         // PROPERTIES
@@ -163,32 +161,9 @@ package com.xvm.lobby.ui.profile.components
             dispatchEvent(new ObjectEvent(EVENT_VEHICLE_DOSSIER_LOADED, data));
         }
 
-        // Initial sort
-
-        // TODO: save sort order to userprofile
-        public function makeInitialSort():void
+        public function applyData(data:Object):void
         {
-            var idx:int = Math.abs(Config.config.userInfo.sortColumn) - 1;
-            var buttonBar:SortableHeaderButtonBar = page.listComponent.sortableButtonBar;
-            if (Config.config.userInfo.showXTEColumn)
-            {
-                if (buttonBar.dataProvider.length > 8)
-                    idx = idx == 7 ? 8 : idx == 8 ? 7 : idx; // swap 8 and 9 positions (mastery and xTE columns)
-            }
-            if (idx > buttonBar.dataProvider.length - 1)
-                idx = 5;
-
-            buttonBar.selectedIndex = idx;
-
-            var button:SortingButton = SortingButton(buttonBar.getButtonAt(idx));
-            if (button == null)
-                return;
-            button.sortDirection = Config.config.userInfo.sortColumn > 0 ? SortingInfo.ASCENDING_SORT : SortingInfo.DESCENDING_SORT;
-
-            page.listComponent.techniqueList.sortByField(button.id, Config.config.userInfo.sortColumn > 0);
-
-            page.listComponent.techniqueList.removeEventListener(SortableScrollingListEvent.SORT_APPLIED, onListSortAppliedHandler);
-            page.listComponent.techniqueList.addEventListener(SortableScrollingListEvent.SORT_APPLIED, onListSortAppliedHandler, false, 0, true);
+            page.listComponent.selectVehicleById(_selectedItemCD);
         }
 
         public function fixStatData():void
@@ -228,21 +203,6 @@ package com.xvm.lobby.ui.profile.components
         }
 
         // PRIVATE
-
-        // sort
-
-        private function onListSortAppliedHandler(e:SortableScrollingListEvent):void
-        {
-            try
-            {
-                page.listComponent.techniqueList.removeEventListener(SortableScrollingListEvent.SORT_APPLIED, onListSortAppliedHandler);
-                page.listComponent.selectVehicleById(_selectedItemCD);
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-        }
 
         // stat
 

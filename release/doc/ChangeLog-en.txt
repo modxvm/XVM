@@ -33,6 +33,7 @@
   * clock in the hangar is moved to widgets
   * removed py_macro/battleClock.py (macro {{py:xvm.formatDate()}} moved to py_macro/xvm.py)
   * removed config file "clock.xc" and references
+  * removed userInfo/sortColumn option, build in since 0.9.18
 
 XVM-6.5.7:
   [GENERAL]

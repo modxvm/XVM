@@ -99,7 +99,6 @@
   "userInfo": {
     "inHangarFilterEnabled": true,
     "startPage": 4,
-    "sortColumn": 3,
     //"sortColumn": -9,
     //"showXTEColumn": false,
     "defaultFilterValue": "+all -premium -master -arty"

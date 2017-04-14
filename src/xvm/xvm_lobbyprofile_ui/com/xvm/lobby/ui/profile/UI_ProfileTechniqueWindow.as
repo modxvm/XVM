@@ -83,7 +83,7 @@ package com.xvm.lobby.ui.profile
             {
                 if (technique)
                 {
-                    technique.makeInitialSort();
+                    technique.applyData(param1);
                 }
             }
             catch (ex:Error)
