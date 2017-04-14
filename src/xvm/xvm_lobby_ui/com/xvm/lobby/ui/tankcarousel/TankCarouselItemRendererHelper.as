@@ -15,6 +15,7 @@ package com.xvm.lobby.ui.tankcarousel
     import flash.geom.*;
     import flash.text.*;
     import flash.utils.*;
+    import net.wg.data.constants.generated.*;
     import net.wg.gui.components.controls.*;
     import net.wg.gui.lobby.hangar.tcarousel.*;
     import net.wg.gui.lobby.hangar.tcarousel.data.*;
@@ -65,7 +66,6 @@ package com.xvm.lobby.ui.tankcarousel
             _setupStandardFieldTankName();
             _setupStandardFieldRentInfo();
             _setupStandardFieldClanLock();
-            _setupStandardFieldInfo(cfg.fields.info, cfg.fields.infoImg);
             _setupStandardFieldPrice();
             _setupStandardFieldActionPrice();
             _setupStandardFieldFavorite();
@@ -106,7 +106,7 @@ package com.xvm.lobby.ui.tankcarousel
                 {
                     if (!(item.vehicleCarouselVO.buySlot || item.vehicleCarouselVO.buyTank))
                     {
-                        _setupStandardFieldInfo(cfg.fields.info, cfg.fields.infoImg);
+                        _setupStandardFieldInfo(cfg.fields.info);
                         if (item.extraFields)
                         {
                             if (item.vehicleCarouselVO.icon)
@@ -132,7 +132,7 @@ package com.xvm.lobby.ui.tankcarousel
                     }
                     else
                     {
-                        _setupStandardFieldInfoBuy(cfg.fields.infoBuy);
+                        _setupStandardFieldInfo(cfg.fields.infoBuy);
                         // Add used slots count
                         if (item.vehicleCarouselVO.buySlot && Config.config.hangar.carousel.showUsedSlots)
                         {
@@ -298,66 +298,49 @@ package com.xvm.lobby.ui.tankcarousel
             _setupStandardTextField(renderer.content.statsTF, cfg.fields.stats, 0);
         }
 
+        private var orig_txtInfo_x:Number = NaN;
         private var orig_txtInfo_y:Number = NaN;
+        private var orig_infoImg_x:Number = NaN;
         private var orig_infoImg_y:Number = NaN;
-        public function _setupStandardFieldInfo(cfg:CCarouselCellStandardField, cfgImg:CCarouselCellStandardField):void
+        public function _setupStandardFieldInfo(cfgInfo:CCarouselCellStandardField):void
         {
             var field:TextField = renderer.content.txtInfo;
-            /*if (isNaN(orig_txtInfo_y))
+            var tf:TextFormat = field.getTextFormat();
+            var img:Image = renderer.content.infoImg;
+            if (isNaN(orig_txtInfo_x))
             {
+                orig_txtInfo_x = field.x;
                 orig_txtInfo_y = field.y;
+                orig_infoImg_x = img.x;
+                orig_infoImg_y = img.y;
             }
-            else
-            {
-                field.y = orig_txtInfo_y;
-            }
-            _setupStandardFieldAlpha(field, cfg);
-            _setupStandardFieldScale(field, cfg);
-            field.antiAliasType = AntiAliasType.ADVANCED;
-            field.x += cfg.dx;
-            field.width = DEFAULT_WIDTH / cfg.scale;
-            field.height = DEFAULT_HEIGHT / cfg.scale;
-            field.border = true; field.borderColor = 0xFFFF00; // DEBUG
-*/
-            if (cfgImg)
-            {
-                /*if (cfgImg.enabled)
-                {
-                    var img:Image = renderer.content.infoImg;
-                    if (isNaN(orig_infoImg_y))
-                    {
-                        orig_infoImg_y = img.y;
-                    }
-                    else
-                    {
-                        img.y = orig_infoImg_y;
-                    }
-                    _setupStandardFieldAlpha(img, cfgImg);
-                    _setupStandardFieldScale(img, cfgImg);
-                    img.x = cfgImg.dx;
-                    img.width = DEFAULT_WIDTH / cfgImg.scale;
-                }*/
-            }
-        }
 
-        public function _setupStandardFieldInfoBuy(cfg:CCarouselCellStandardField):void
-        {
-            var field:TextField = renderer.content.txtInfo;
-            if (isNaN(orig_txtInfo_y))
+            _setupStandardFieldAlpha(field, cfgInfo);
+            _setupStandardFieldScale(field, cfgInfo);
+            field.antiAliasType = AntiAliasType.ADVANCED;
+            if (cfg.fields.infoImg.enabled && img.visible)
             {
-                orig_txtInfo_y = field.y;
+                field.x = orig_txtInfo_x + cfgInfo.dx;
+                tf.align = TEXT_ALIGN.LEFT;
             }
             else
             {
-                field.y = orig_txtInfo_y;
+                field.x = cfgInfo.dx;
+                tf.align = TEXT_ALIGN.CENTER;
             }
-            _setupStandardFieldAlpha(field, cfg);
-            _setupStandardFieldScale(field, cfg);
-            field.antiAliasType = AntiAliasType.ADVANCED;
-            field.x = cfg.dx;
-            field.width = DEFAULT_WIDTH / cfg.scale;
-            field.height = DEFAULT_HEIGHT / cfg.scale;
-            //field.border = true; field.borderColor = 0xFFFF00; // DEBUG
+            field.setTextFormat(tf);
+            field.y = orig_txtInfo_y + cfgInfo.dy;
+            field.width = DEFAULT_WIDTH / cfgInfo.scale;
+            field.height = DEFAULT_HEIGHT / cfgInfo.scale;
+            field.border = true; field.borderColor = 0xFFFF00; // DEBUG
+
+            if (img)
+            {
+                _setupStandardFieldAlpha(img, cfg.fields.infoImg);
+                _setupStandardFieldScale(img, cfg.fields.infoImg);
+                img.x = orig_infoImg_x + cfg.fields.infoImg.dx;
+                img.y = orig_infoImg_y + cfg.fields.infoImg.dy;
+            }
         }
     }
 }

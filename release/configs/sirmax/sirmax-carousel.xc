@@ -120,7 +120,7 @@
         "tankName": { "enabled": true,  "dx": 0, "dy": 3, "alpha": 100, "scale": 0.9 },
         //"info":     { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
         //"infoImg":  { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-        //"infoBuy":  { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+        "infoBuy":  { "enabled": true,  "dx": 0, "dy": -8, "alpha": 100, "scale": 1 },
         //"clanLock": { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100 },
         //"price":    { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100 },
         //"actionPrice": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100 },
