@@ -34,6 +34,9 @@
   * removed config file "clock.xc" and references
   * removed userInfo/sortColumn option, build in since 0.9.18
 
+  [MARKERS]
+  * added "stunMarker" settings for stun marker
+
 XVM-6.5.7:
   [GENERAL]
   * adaptation to 23.03.2017 micropatch

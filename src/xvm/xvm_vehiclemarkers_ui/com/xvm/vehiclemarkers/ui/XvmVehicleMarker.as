@@ -29,6 +29,7 @@ package com.xvm.vehiclemarkers.ui
         private var maxHealth:int = 0;
 
         private var actionMarkerComponent:ActionMarkerComponent = null;
+        private var stunMarkerComponent:StunMarkerComponent = null;
         private var contourIconComponent:ContourIconComponent = null;
         private var damageTextComponent:DamageTextComponent = null;
         private var healthBarComponent:HealthBarComponent = null;
@@ -260,6 +261,7 @@ package com.xvm.vehiclemarkers.ui
                 contourIconComponent = new ContourIconComponent(this);
                 levelIconComponent = new LevelIconComponent(this);
                 actionMarkerComponent = new ActionMarkerComponent(this);
+                stunMarkerComponent = new StunMarkerComponent(this);
                 healthBarComponent = new HealthBarComponent(this);
                 textFieldsComponent = new TextFieldsComponent(this);
                 damageTextComponent = new DamageTextComponent(this);
@@ -293,6 +295,11 @@ package com.xvm.vehiclemarkers.ui
                 {
                     actionMarkerComponent.dispose();
                     actionMarkerComponent = null;
+                }
+                if (stunMarkerComponent)
+                {
+                    stunMarkerComponent.dispose();
+                    stunMarkerComponent = null;
                 }
                 if (healthBarComponent)
                 {
