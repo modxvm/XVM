@@ -50,6 +50,7 @@ package com.xvm.lobby.ui.limits
                 goldLocker.addEventListener(Event.SELECT, onGoldLockerSwitched, false, 0, true);
                 goldLocker.toolTip = Locale.get(L10N_GOLD_UNLOCKED_TOOLTIP);
                 goldLocker.selected = Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_GOLD_LOCK_STATUS, false);
+                goldLocker.visible = false;
             }
 
             if (Config.config.hangar.enableFreeXpLocker)
@@ -58,6 +59,7 @@ package com.xvm.lobby.ui.limits
                 freeXpLocker.addEventListener(Event.SELECT, onFreeXpLockerSwitched, false, 0, true);
                 freeXpLocker.toolTip = Locale.get(L10N_FREEXP_UNLOCKED_TOOLTIP);
                 freeXpLocker.selected = Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_FREEXP_LOCK_STATUS, false);
+                freeXpLocker.visible = false;
             }
 
             page.header.headerButtonBar.addEventListener(HeaderEvents.HEADER_ITEMS_REPOSITION, this.onHeaderButtonsReposition, false, 0, true);
@@ -92,6 +94,7 @@ package com.xvm.lobby.ui.limits
                         var goldContent:HBC_Finance = goldControl.content as HBC_Finance;
                         if (goldContent)
                         {
+                            goldLocker.visible = true;
                             goldLocker.x = goldControl.x + goldContent.x + goldContent.moneyIconText.x + 3;
                             goldLocker.y = goldControl.y + goldContent.y + goldContent.moneyIconText.y + 20;
                         }
@@ -106,6 +109,7 @@ package com.xvm.lobby.ui.limits
                         var freeXpContent:HBC_Finance = freeXpControl.content as HBC_Finance;
                         if (freeXpContent)
                         {
+                            freeXpLocker.visible = true;
                             freeXpLocker.x = freeXpControl.x + freeXpContent.x + freeXpContent.moneyIconText.x + 3;
                             freeXpLocker.y = freeXpControl.y + freeXpContent.y + freeXpContent.moneyIconText.y + 20;
                         }
