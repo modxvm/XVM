@@ -64,12 +64,6 @@
       "x": 5
     },
     "carousel": ${"sirmax-carousel.xc":"carousel"},
-    "clock": {
-      //"layer": "bottom",
-      //"x": -200,
-      //"y": 70
-      //"format": "<font face='$FieldFont'><font size='26'> {{H}}:{{m%02d}} {{AM?a.m.|p.m.}}</font></font>"
-    },
     //"showBuyPremiumButton": false,
     //"showPremiumShopButton": false,
     "serverInfo": {

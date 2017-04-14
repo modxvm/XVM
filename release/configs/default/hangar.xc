@@ -354,9 +354,6 @@
     // Parameters for tank carousel
     // Параметры карусели танков
     "carousel": ${"carousel.xc":"carousel"},
-    // Parameters for hangar clock
-    // Параметры часов в ангаре
-    "clock": ${"clock.xc":"clock"},
     // Parameters for widgets
     // Параметры виджетов
     "widgets": ${"widgets.xc":"widgets.lobby"}
