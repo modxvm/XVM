@@ -132,17 +132,21 @@ package com.xvm.lobby.ui.tankcarousel
                     }
                     else
                     {
-                        _setupStandardFieldInfo(cfg.fields.infoBuy);
+                        _setupStandardFieldInfoBuy(cfg.fields.infoBuy);
                         // Add used slots count
                         if (item.vehicleCarouselVO.buySlot && Config.config.hangar.carousel.showUsedSlots)
                         {
-                            renderer.content.txtInfo.htmlText = item.vehicleCarouselVO.infoText + "\n<font face='$TextFont' size='12' color='#8C8C7E'>" +
-                                Locale.get("Used slots") + ": " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_USED_SLOTS_COUNT) + "</font>";
+                            renderer.content.txtInfo.htmlText =
+                                "<p align='center'>" + item.vehicleCarouselVO.infoText + "\n" +
+                                "<font face='$TextFont' size='12' color='#8C8C7E'>" +
+                                Locale.get("Used slots") + ": " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_USED_SLOTS_COUNT) + "</font></p>";
                         }
                         if (item.vehicleCarouselVO.buyTank && Config.config.hangar.carousel.showTotalSlots)
                         {
-                            renderer.content.txtInfo.htmlText = item.vehicleCarouselVO.infoText + " <font face='$TextFont' size='12' color='#8C8C7E'>" +
-                                Locale.get("from") + " " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_TOTAL_SLOTS_COUNT) + "</font>";
+                            renderer.content.txtInfo.htmlText =
+                                "<p align='center'>" + item.vehicleCarouselVO.infoText + " " +
+                                "<font face='$TextFont' size='12' color='#8C8C7E'>" +
+                                Locale.get("from") + " " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_TOTAL_SLOTS_COUNT) + "</font></p>";
                         }
                     }
                 }
@@ -296,7 +300,7 @@ package com.xvm.lobby.ui.tankcarousel
 
         private var orig_txtInfo_y:Number = NaN;
         private var orig_infoImg_y:Number = NaN;
-        public function _setupStandardFieldInfo(cfg:CCarouselCellStandardField, cfgImg:CCarouselCellStandardField = null):void
+        public function _setupStandardFieldInfo(cfg:CCarouselCellStandardField, cfgImg:CCarouselCellStandardField):void
         {
             var field:TextField = renderer.content.txtInfo;
             /*if (isNaN(orig_txtInfo_y))
@@ -306,15 +310,15 @@ package com.xvm.lobby.ui.tankcarousel
             else
             {
                 field.y = orig_txtInfo_y;
-            }*/
+            }
             _setupStandardFieldAlpha(field, cfg);
-            /*_setupStandardFieldScale(field, cfg);
+            _setupStandardFieldScale(field, cfg);
             field.antiAliasType = AntiAliasType.ADVANCED;
             field.x += cfg.dx;
             field.width = DEFAULT_WIDTH / cfg.scale;
-            field.defaultTextFormat.align = TextFormatAlign.CENTER;*/
-            //field.border = true; field.borderColor = 0xFFFF00; // DEBUG
-
+            field.height = DEFAULT_HEIGHT / cfg.scale;
+            field.border = true; field.borderColor = 0xFFFF00; // DEBUG
+*/
             if (cfgImg)
             {
                 /*if (cfgImg.enabled)
@@ -334,6 +338,26 @@ package com.xvm.lobby.ui.tankcarousel
                     img.width = DEFAULT_WIDTH / cfgImg.scale;
                 }*/
             }
+        }
+
+        public function _setupStandardFieldInfoBuy(cfg:CCarouselCellStandardField):void
+        {
+            var field:TextField = renderer.content.txtInfo;
+            if (isNaN(orig_txtInfo_y))
+            {
+                orig_txtInfo_y = field.y;
+            }
+            else
+            {
+                field.y = orig_txtInfo_y;
+            }
+            _setupStandardFieldAlpha(field, cfg);
+            _setupStandardFieldScale(field, cfg);
+            field.antiAliasType = AntiAliasType.ADVANCED;
+            field.x = cfg.dx;
+            field.width = DEFAULT_WIDTH / cfg.scale;
+            field.height = DEFAULT_HEIGHT / cfg.scale;
+            //field.border = true; field.borderColor = 0xFFFF00; // DEBUG
         }
     }
 }
