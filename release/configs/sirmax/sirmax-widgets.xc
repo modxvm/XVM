@@ -11,6 +11,7 @@
       }
     ],
     "lobby": [
+      ${ "../default/widgetsTemplates.xc":"clock" },
       {
         //"enabled": true,
         "$ref": { "file":"../default/widgetsTemplates.xc", "path":"test" }

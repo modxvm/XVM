@@ -4,7 +4,6 @@ package com.xvm.lobby.ui
      *  Link additional classes into xfw.swc
      */
     import com.xvm.lobby.ui.battleresults.*;
-    import com.xvm.lobby.ui.clock.*;
     import com.xvm.lobby.ui.crew.*;
     import com.xvm.lobby.ui.limits.*;
     import com.xvm.lobby.ui.squad.*;
@@ -17,9 +16,6 @@ package com.xvm.lobby.ui
     UI_BR_SubtaskComponent;
     UI_ProgressElement;
     UI_CommonStats;
-
-    // clock
-    ClockUIImpl;
 
     // crew
     UI_CrewItemRenderer;

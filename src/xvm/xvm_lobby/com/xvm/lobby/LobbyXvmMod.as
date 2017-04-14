@@ -9,7 +9,6 @@ package com.xvm.lobby
     import com.xfw.infrastructure.*;
     import com.xvm.infrastructure.*;
     import com.xvm.lobby.battleresults.BattleResultsXvmView;
-    import com.xvm.lobby.clock.ClockXvmView;
     import com.xvm.lobby.company.CompanyXvmView;
     import com.xvm.lobby.contacts.ContactsXvmView;
     import com.xvm.lobby.crew.CrewXvmView;
@@ -48,7 +47,7 @@ package com.xvm.lobby
         private static const _views:Object =
         {
             "login": [ LoginLayoutXvmView, OnlineLoginXvmView, PingLoginXvmView, WidgetsLoginXvmView ],
-            "lobby": [ LobbyXvmView, ClockXvmView, LimitsXvmView, OnlineLobbyXvmView, PingLobbyXvmView, WidgetsLobbyXvmView ],
+            "lobby": [ LobbyXvmView, LimitsXvmView, OnlineLobbyXvmView, PingLobbyXvmView, WidgetsLobbyXvmView ],
             "hangar": [ CrewXvmView, HangarXvmView ],
             "battleResults": [ BattleResultsXvmView ],
             "prb_windows/companyWindow": [ CompanyXvmView ],
@@ -74,11 +73,7 @@ package com.xvm.lobby
                 {
                     for each (var mod:IXfwView in mods)
                     {
-                        if (mod is ClockXvmView)
-                        {
-                            _clockXvmView = mod as ClockXvmView;
-                        }
-                        else if (mod is OnlineLobbyXvmView)
+                        if (mod is OnlineLobbyXvmView)
                         {
                             _onlineLobbyXvmView = mod as OnlineLobbyXvmView;
                         }
@@ -103,7 +98,6 @@ package com.xvm.lobby
 
         // PRIVATE
 
-        private var _clockXvmView:ClockXvmView = null;
         private var _onlineLobbyXvmView:OnlineLobbyXvmView = null;
         private var _pingLobbyXvmView:PingLobbyXvmView = null;
         private var _widgetsLobbyXvmView:WidgetsLobbyXvmView = null;
@@ -120,10 +114,6 @@ package com.xvm.lobby
 
         private function setModsVisibility(isHangar:Boolean):void
         {
-            if (_clockXvmView)
-            {
-                _clockXvmView.setVisibility(isHangar);
-            }
             if (_onlineLobbyXvmView)
             {
                 _onlineLobbyXvmView.setVisibility(isHangar);
