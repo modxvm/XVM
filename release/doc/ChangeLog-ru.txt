@@ -31,7 +31,6 @@ XVM-6.6.0-dev:
   
   [АНГАР]
   * часы в ангаре перенесены в виджеты
-  * удален py_macro/battleClock.py (макрос {{py:xvm.formatDate()}} перемещен в py_macro/xvm.py)
   * удален файл конфига "clock.xc" и ссылки на него
   * удалена опция userInfo/sortColumn, т.к. встроена в клиент с 0.9.18
 
