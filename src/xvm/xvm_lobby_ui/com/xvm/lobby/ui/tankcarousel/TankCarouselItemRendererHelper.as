@@ -332,7 +332,7 @@ package com.xvm.lobby.ui.tankcarousel
             field.y = orig_txtInfo_y + cfgInfo.dy;
             field.width = DEFAULT_WIDTH / cfgInfo.scale;
             field.height = DEFAULT_HEIGHT / cfgInfo.scale;
-            field.border = true; field.borderColor = 0xFFFF00; // DEBUG
+            //field.border = true; field.borderColor = 0xFFFF00; // DEBUG
 
             if (img)
             {
