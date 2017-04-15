@@ -58,7 +58,9 @@ package com.xvm.lobby.ui.profile.components
         public function onDispose():void
         {
             if (tech)
+            {
                 tech.removeEventListener(Technique.EVENT_VEHICLE_DOSSIER_LOADED, onVehicleDossierLoaded);
+            }
         }
 
         public function update(raw_data:ProfileVehicleDossierVO):void
@@ -211,24 +213,6 @@ package com.xvm.lobby.ui.profile.components
 
                 ratingTF.htmlText = "<textformat leading='-2'>" + formatHtmlText(s) + "</textformat>";
             }
-        }
-
-        private function updateSummaryData():void
-        {
-            //Logger.addObject(tech.accountDossier, 3, "accountDossier");
-
-            var data:AccountDossier = tech.accountDossier;
-            prepareData(data);
-            //Logger.addObject(data, 3, "prepared");
-
-            // LastBattleTime
-            lastBattleTimeTF.htmlText = "<p class='txt' align='right'>" + data.lastBattleTimeStr + "</p>";
-
-            updateGlobalRatings(data);
-        }
-
-        private function updateVehicleData(vehCD:Number):void
-        {
         }
 
         private function onVehicleDossierLoaded(e:ObjectEvent):void

@@ -81,6 +81,7 @@ package com.xvm.lobby.ui.profile.components
 
         private var _disposed:Boolean = false;
         private var _selectedItemCD:Number = -1;
+        private var _vdossier:VehicleDossier = null;
         //protected var filter:FilterControl;
 
         // CTOR
@@ -157,6 +158,7 @@ package com.xvm.lobby.ui.profile.components
                 return;
 
             //Logger.addObject(data, 1, "as_responseVehicleDossierXvm");
+            _vdossier = data;
             page.listComponent.techniqueList.invalidateData();
             dispatchEvent(new ObjectEvent(EVENT_VEHICLE_DOSSIER_LOADED, data));
         }
@@ -164,6 +166,10 @@ package com.xvm.lobby.ui.profile.components
         public function applyData(data:Object):void
         {
             page.listComponent.selectVehicleById(_selectedItemCD);
+            if (_vdossier != null)
+            {
+                dispatchEvent(new ObjectEvent(EVENT_VEHICLE_DOSSIER_LOADED, _vdossier));
+            }
         }
 
         public function fixStatData():void
