@@ -15,6 +15,7 @@ package com.xvm.lobby.ui.tankcarousel
     import flash.geom.*;
     import flash.text.*;
     import flash.utils.*;
+    import flash.filters.*;
     import net.wg.data.constants.generated.*;
     import net.wg.gui.components.controls.*;
     import net.wg.gui.lobby.hangar.tcarousel.*;
@@ -230,7 +231,95 @@ package com.xvm.lobby.ui.tankcarousel
             field.width = (DEFAULT_WIDTH - 4) / field.scaleX;
             field.autoSize = TextFieldAutoSize.NONE;
             field.defaultTextFormat.align = TextFormatAlign.RIGHT;
+            _setupTextFormat(field, cfg.textFormat);
+            _setupShadow(field, cfg.shadow);
             //field.border = true; field.borderColor = 0xFFFF00; // DEBUG
+        }
+
+        private function _setupTextFormat(field:TextField, cfg:CTextFormat):void
+        {
+            if (cfg != null)
+            {
+                cfg = cfg.clone();
+                if (Macros.FormatBooleanGlobal(cfg.enabled, true))
+                {
+                    var tf:TextFormat = field.getTextFormat();
+
+                    if (cfg.font != null)
+                        tf.font = Macros.FormatStringGlobal(cfg.font, tf.font);
+                    if (cfg.size != null)
+                        tf.size = Macros.FormatNumberGlobal(cfg.size);
+                    if (cfg.color != null)
+                        tf.color = Macros.FormatNumberGlobal(cfg.color);
+                    if (cfg.bold != null)
+                        tf.bold = Macros.FormatBooleanGlobal(cfg.bold);
+                    if (cfg.italic != null)
+                        tf.italic = Macros.FormatBooleanGlobal(cfg.italic);
+                    if (cfg.underline != null)
+                        tf.underline = Macros.FormatBooleanGlobal(cfg.underline);
+                    if (cfg.align != null)
+                        tf.align = Macros.FormatStringGlobal(cfg.align);
+                    if (cfg.leftMargin != null)
+                        tf.leftMargin = Macros.FormatNumberGlobal(cfg.leftMargin);
+                    if (cfg.rightMargin != null)
+                        tf.rightMargin = Macros.FormatNumberGlobal(cfg.rightMargin);
+                    if (cfg.indent != null)
+                        tf.indent = Macros.FormatNumberGlobal(cfg.indent);
+                    if (cfg.leading != null)
+                        tf.leading = Macros.FormatNumberGlobal(cfg.leading);
+                    if (cfg.valign != null)
+                        TextFieldEx.setVerticalAlign(field, Macros.FormatStringGlobal(cfg.valign));
+                    field.setTextFormat(tf);
+                }
+            }
+        }
+
+        private function _setupShadow(field:TextField, cfg:CShadow):void
+        {
+            if (cfg != null)
+            {
+                cfg = cfg.clone();
+                if (Macros.FormatBooleanGlobal(cfg.enabled, true))
+                {
+                    var filter:DropShadowFilter = null;
+                    if (field.filters)
+                    {
+                        for (var i:int = 0; i < field.filters.length; ++i)
+                        {
+                            filter = field.filters[i] as DropShadowFilter;
+                            if (filter != null)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    if (filter == null)
+                    {
+                        filter = Utils.createShadowFiltersFromConfig(CShadow.GetDefaultConfig())[0];
+                    }
+                    if (cfg.distance != null)
+                        filter.distance = Macros.FormatNumberGlobal(cfg.distance);
+                    if (cfg.angle != null)
+                        filter.angle = Macros.FormatNumberGlobal(cfg.angle);
+                    if (cfg.color != null)
+                        filter.color = Macros.FormatNumberGlobal(cfg.color);
+                    if (cfg.alpha != null)
+                        filter.alpha = Macros.FormatNumberGlobal(cfg.alpha);
+                    if (cfg.blur != null)
+                        filter.blurX = filter.blurY = Macros.FormatNumberGlobal(cfg.blur);
+                    if (cfg.strength != null)
+                        filter.strength = Macros.FormatNumberGlobal(cfg.strength);
+                    if (cfg.quality != null)
+                        filter.quality = Macros.FormatNumberGlobal(cfg.quality);
+                    if (cfg.inner != null)
+                        filter.inner = Macros.FormatBooleanGlobal(cfg.inner);
+                    if (cfg.knockout != null)
+                        filter.knockout = Macros.FormatBooleanGlobal(cfg.knockout);
+                    if (cfg.hideObject != null)
+                        filter.hideObject = Macros.FormatBooleanGlobal(cfg.hideObject);
+                    field.filters = [filter];
+                }
+            }
         }
 
         public function _setupStandardFieldTankName():void
@@ -332,6 +421,8 @@ package com.xvm.lobby.ui.tankcarousel
             field.y = orig_txtInfo_y + cfgInfo.dy;
             field.width = DEFAULT_WIDTH / cfgInfo.scale;
             field.height = DEFAULT_HEIGHT / cfgInfo.scale;
+            _setupTextFormat(field, cfgInfo.textFormat);
+            _setupShadow(field, cfgInfo.shadow);
             //field.border = true; field.borderColor = 0xFFFF00; // DEBUG
 
             if (img)

@@ -37,6 +37,10 @@
   [MARKERS]
   * added "stunMarker" settings for stun marker
 
+  [CAROUSEL]
+  * added settings "fields"/"infoImg"
+  * parameters "textFormat" and "shadow" added in the text fields settings in section "fields"
+
 XVM-6.5.7:
   [GENERAL]
   * adaptation to 23.03.2017 micropatch

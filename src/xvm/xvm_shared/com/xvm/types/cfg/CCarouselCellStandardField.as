@@ -13,6 +13,8 @@ package com.xvm.types.cfg
         public var dy:*;
         public var alpha:*;
         public var scale:*;
+        public var textFormat:CTextFormat;
+        public var shadow:CShadow;
 
         public function clone():*
         {
