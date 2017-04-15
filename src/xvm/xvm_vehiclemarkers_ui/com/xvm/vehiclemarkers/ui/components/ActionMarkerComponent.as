@@ -22,7 +22,7 @@ package com.xvm.vehiclemarkers.ui.components
             {
                 super.update(e);
                 var cfg:CMarkersActionMarker = e.cfg.actionMarker;
-                marker.actionMarker.visible = Macros.FormatBoolean(cfg.enabled, e.playerState);
+                marker.actionMarker.visible = cfg.enabled;
                 if (cfg.enabled)
                 {
                     marker.actionMarker.x = Macros.FormatNumber(cfg.x, e.playerState);

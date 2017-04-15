@@ -34,6 +34,8 @@ package com.xvm.types.cfg
             maxScale = Macros.FormatNumberGlobal(maxScale, 100);
             offsetX = Macros.FormatNumberGlobal(offsetX, 0);
             offsetY = Macros.FormatNumberGlobal(offsetY, 0);
+            // do not apply Macros.FormatNumberGlobal(), because Macros.FormatNumber() used:
+            // alpha
         }
     }
 }

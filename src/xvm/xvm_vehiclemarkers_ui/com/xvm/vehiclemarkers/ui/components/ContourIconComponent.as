@@ -28,12 +28,11 @@ package com.xvm.vehiclemarkers.ui.components
                     marker.vehicleIcon.x = cfg.x;
                     marker.vehicleIcon.y = cfg.y;
                     marker.vehicleIcon.alpha = cfg.alpha / 100.0;
-                }
-
-                if (cfg.amount)
-                {
-                    var color:Number = isNaN(cfg.color) ? Macros.FormatNumber("{{c:system}}", e.playerState) : cfg.color;
-                    GraphicsUtil.tint(marker.vehicleIcon, color, cfg.amount / 100.0);
+                    if (cfg.amount)
+                    {
+                        var color:Number = isNaN(cfg.color) ? Macros.FormatNumber("{{c:system}}", e.playerState) : cfg.color;
+                        GraphicsUtil.tint(marker.vehicleIcon, color, cfg.amount / 100.0);
+                    }
                 }
             }
             catch (ex:Error)

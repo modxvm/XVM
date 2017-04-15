@@ -22,9 +22,10 @@ package com.xvm.types.cfg
         internal function applyGlobalBattleMacros():void
         {
             enabled = Macros.FormatBooleanGlobal(enabled, true);
-            x = Macros.FormatNumberGlobal(x);
-            y = Macros.FormatNumberGlobal(y);
-            alpha = Macros.FormatNumberGlobal(alpha, 100);
+            // do not apply Macros.FormatNumberGlobal(), because Macros.FormatNumber() used:
+            // x
+            // y
+            // alpha
         }
     }
 }

@@ -22,7 +22,7 @@ package com.xvm.vehiclemarkers.ui.components
             {
                 super.update(e);
                 var cfg:CMarkersStunMarker = e.cfg.stunMarker;
-                marker.stunMarker.visible = Macros.FormatBoolean(cfg.enabled, e.playerState);
+                marker.stunMarker.visible = cfg.enabled;
                 if (cfg.enabled)
                 {
                     marker.stunMarker.x = Macros.FormatNumber(cfg.x, e.playerState);
