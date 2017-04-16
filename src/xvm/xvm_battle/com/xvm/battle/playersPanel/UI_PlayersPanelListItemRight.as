@@ -57,6 +57,8 @@ package com.xvm.battle.playersPanel
             {
                 // set static value to send only one event
                 super.setPlayerNameFullWidth(0);
+                proxy.invalidate(PlayersPanelListItemProxy.INVALIDATE_PANEL_STATE);
+                proxy.validateNow();
             }
         }
 
