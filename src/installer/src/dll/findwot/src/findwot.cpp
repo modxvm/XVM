@@ -84,7 +84,11 @@ std::wstring WGC_GetWGCInstallPath()
 	std::wstring wgcPathFile(programDataPath + L"\\Wargaming.net\\GameCenter\\data\\wgc_path.dat");
 	if (exists(wgcPathFile))
 	{
-		return getFileContent(wgcPathFile);
+		std::wstring path = getFileContent(wgcPathFile);
+		if (exists(path + L"\\wgc.exe"))
+		{
+			return path;
+		}
 	}
 	else if(exists(programDataPath + L"\\Wargaming.net\\GameCenter\\wgc.exe"))
 	{
@@ -103,7 +107,12 @@ std::vector<std::wstring> WGC_GetWotPaths()
 	{
 		for (auto& p : directory_iterator(programDataPath + L"\\Wargaming.net\\GameCenter\\apps\\wot\\"))
 		{
-			wotPaths.push_back(getFileContent(p.path().wstring()));
+			std::wstring path = getFileContent(p.path().wstring());
+
+			if (exists(path + L"\\WorldOfTanks.exe"))
+			{
+				wotPaths.push_back(path);
+			}
 		}
 	}
 	catch (const std::exception&) {}
@@ -146,7 +155,14 @@ std::wstring WGC_GetWotPreferedPath()
 		if (target == nullptr)
 			return std::wstring(L"");
 
-		return std::wstring(target->value());
+		if (exists(std::wstring(target->value())+L"\\WorldOfTanks.exe"))
+		{
+			return std::wstring(target->value());
+		}
+		else {
+			return std::wstring(L"");
+		}
+
 	}
 	catch (const std::exception&) {
 		return std::wstring(L"");
@@ -174,7 +190,7 @@ std::vector<std::wstring> Legacy_GetWotPaths() {
 	for (auto& p : keys)
 	{
 		std::wstring path = getRegistryValue(p.c_str(), L"InstallLocation");
-		if (!path.empty())
+		if (!path.empty() && exists(path + L"\\WorldOfTanks.exe"))
 		{
 			paths.push_back(path);
 		}
