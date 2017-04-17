@@ -110,13 +110,14 @@ def _MarkersManager_createMarker(base, self, symbol, *args, **kwargs):
 _exInfo = False
 @overrideMethod(MarkersManager, 'as_setShowExInfoFlagS')
 def _MarkersManager_as_setShowExInfoFlagS(base, self, flag):
-    if g_markers.active and config.get('hotkeys/markersAltMode/enabled'):
-        global _exInfo
-        if config.get('hotkeys/markersAltMode/onHold'):
-            _exInfo = flag
-        elif flag:
-            _exInfo = not _exInfo
-        base(self, _exInfo)
+    if g_markers.active:
+        if config.get('hotkeys/markersAltMode/enabled'):
+            global _exInfo
+            if config.get('hotkeys/markersAltMode/onHold'):
+                _exInfo = flag
+            elif flag:
+                _exInfo = not _exInfo
+            base(self, _exInfo)
     else:
         base(self, flag)
 
