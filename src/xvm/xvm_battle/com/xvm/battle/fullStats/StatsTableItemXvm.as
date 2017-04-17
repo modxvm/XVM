@@ -115,7 +115,7 @@ package com.xvm.battle.fullStats
             vehicleNameTF.autoSize = TextFieldAutoSize.NONE;
             TextFieldEx.setVerticalAlign(vehicleNameTF, TextFieldEx.VALIGN_CENTER);
 
-            Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
+            Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, disposeAndSetupExtraFields);
             Xvm.addEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
             Xvm.addEventListener(Defines.XVM_EVENT_ATLAS_LOADED, onAtlasLoaded);
             Xfw.addCommandListener(XvmCommands.AS_ON_CLAN_ICON_LOADED, onClanIconLoaded);
@@ -127,12 +127,12 @@ package com.xvm.battle.fullStats
             _normalHolder = playerNameTF.parent.addChildAt(new Sprite(), playerNameTF.parent.getChildIndex(icoIGR) + 1) as Sprite;
             _topHolder = playerNameTF.parent.addChild(new Sprite()) as Sprite;
 
-            setup();
+            setupExtraFields();
         }
 
         override protected function onDispose():void
         {
-            Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
+            Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, disposeAndSetupExtraFields);
             Xvm.removeEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
             Xvm.removeEventListener(Defines.XVM_EVENT_ATLAS_LOADED, onAtlasLoaded);
             Xfw.removeCommandListener(XvmCommands.AS_ON_CLAN_ICON_LOADED, onClanIconLoaded);
@@ -152,8 +152,13 @@ package com.xvm.battle.fullStats
         override public function setPlayerName(userProps:IUserProps):void
         {
             super.setPlayerName(userProps);
-            _vehicleID = BattleState.getVehicleIDByPlayerName(userProps.userName);
-            currentPlayerState = BattleState.get(_vehicleID);
+            var vehicleID:Number = BattleState.getVehicleIDByPlayerName(userProps.userName);
+            if (_vehicleID != vehicleID)
+            {
+                _vehicleID = vehicleID;
+                currentPlayerState = BattleState.get(_vehicleID);
+                disposeAndSetupExtraFields();
+            }
         }
 
         override public function setIsIGR(isIGR:Boolean):void
@@ -338,11 +343,15 @@ package com.xvm.battle.fullStats
 
         // XVM events handlers
 
-        private function setup():void
+        private function disposeAndSetupExtraFields():void
+        {
+            disposeExtraFields();
+            setupExtraFields();
+        }
+
+        private function setupExtraFields():void
         {
             cfg = Config.config.statisticForm;
-
-            disposeExtraFields();
 
             if (cfg.removeVehicleLevel)
             {
