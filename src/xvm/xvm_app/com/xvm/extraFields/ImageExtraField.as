@@ -239,7 +239,7 @@ package com.xvm.extraFields
                     _offsetX = offsetX;
                     needAlign = true;
                 }
-                if (_offsetX != offsetY)
+                if (_offsetY != offsetY)
                 {
                     _offsetY = offsetY;
                     needAlign = true;

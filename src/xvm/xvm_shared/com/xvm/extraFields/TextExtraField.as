@@ -588,7 +588,7 @@ package com.xvm.extraFields
                     _offsetX = offsetX;
                     needAlign = true;
                 }
-                if (_offsetX != offsetY)
+                if (_offsetY != offsetY)
                 {
                     _offsetY = offsetY;
                     needAlign = true;
@@ -679,8 +679,6 @@ package com.xvm.extraFields
                 if (_cfg.format)
                 {
                     value = Macros.FormatString(_cfg.format, options);
-
-                    //value = Utils.fixImgTag(value); // is required?
                     if (_textValue != value)
                     {
                         //Logger.add(_textValue + " => " + value);
