@@ -10,9 +10,9 @@
         "message": " • WoT micropatch\n • Bugs fixed\n • Added new features\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "US": {
-        "ver": "6.5.7",
-        "wot": "0.9.17.1",
-        "message": " • WoT micropatch\n • Bugs fixed\n • Added new features\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "6.6.0",
+        "wot": "0.9.18.0",
+        "message": " • WoT 0.9.18.0\n • Bugs fixed\n • Added new features\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "ASIA": {
         "ver": "6.5.7",

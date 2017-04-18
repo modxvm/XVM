@@ -1,4 +1,4 @@
-﻿XVM-6.6.0-dev:
+﻿XVM-6.6.0:
   [GENERAL]
   * adaptation to World of Tanks 9.18
 
