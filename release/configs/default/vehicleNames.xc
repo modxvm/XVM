@@ -4,14 +4,13 @@
  */
 {
   "vehicleNames": {
-    // Last update: 31.03.2017
+    // Last update: 19.04.2017
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
     "china-Ch03_WZ-111":                     {"name": null, "short": null},
     "china-Ch03_WZ_111_A":                   {"name": null, "short": null},
     "china-Ch04_T34_1":                      {"name": null, "short": null},
-    "china-Ch04_T34_1_training":             {"name": null, "short": null},
     "china-Ch05_T34_2":                      {"name": null, "short": null},
     "china-Ch06_Renault_NC31":               {"name": null, "short": null},
     "china-Ch06_Renault_NC31_bot":           {"name": null, "short": null},
@@ -120,7 +119,6 @@
     "germany-G02_Hummel":                    {"name": null, "short": null},
     "germany-G03_PzV_Panther":               {"name": null, "short": null},
     "germany-G03_PzV_Panther_IGR":           {"name": null, "short": null},
-    "germany-G03_PzV_Panther_training":      {"name": null, "short": null},
     "germany-G04_PzVI_Tiger_I":              {"name": null, "short": null},
     "germany-G04_PzVI_Tiger_IA":             {"name": null, "short": null},
     "germany-G04_PzVI_Tiger_I_IGR":          {"name": null, "short": null},
@@ -142,7 +140,6 @@
     "germany-G108_PzKpfwII_AusfD":           {"name": null, "short": null},
     "germany-G109_Steyr_WT":                 {"name": null, "short": null},
     "germany-G10_PzIII_AusfJ":               {"name": null, "short": null},
-    "germany-G10_PzIII_AusfJ_training":      {"name": null, "short": null},
     "germany-G110_Typ_205":                  {"name": null, "short": null},
     "germany-G112_KanonenJagdPanzer":        {"name": null, "short": null},
     "germany-G113_SP_I_C":                   {"name": null, "short": null},
@@ -170,7 +167,6 @@
     "germany-G16_PzVIB_Tiger_II":            {"name": null, "short": null},
     "germany-G16_PzVIB_Tiger_II_F":          {"name": null, "short": null},
     "germany-G16_PzVIB_Tiger_II_IGR":        {"name": null, "short": null},
-    "germany-G16_PzVIB_Tiger_II_training":   {"name": null, "short": null},
     "germany-G17_JagdPzIV":                  {"name": null, "short": null},
     "germany-G18_JagdPanther":               {"name": null, "short": null},
     "germany-G19_Wespe":                     {"name": null, "short": null},
@@ -390,7 +386,6 @@
     "usa-A05_M4_Sherman":                    {"name": null, "short": null},
     "usa-A05_M4_Sherman_IGR":                {"name": null, "short": null},
     "usa-A06_M4A3E8_Sherman":                {"name": null, "short": null},
-    "usa-A06_M4A3E8_Sherman_training":       {"name": null, "short": null},
     "usa-A07_T20":                           {"name": null, "short": null},
     "usa-A08_T23":                           {"name": null, "short": null},
     "usa-A09_T1_hvy":                        {"name": null, "short": null},
@@ -493,7 +488,6 @@
     "ussr-R05_KV":                           {"name": null, "short": null},
     "ussr-R06_T-28":                         {"name": null, "short": null},
     "ussr-R07_T-34-85":                      {"name": null, "short": null},
-    "ussr-R07_T-34-85_training":             {"name": null, "short": null},
     "ussr-R08_BT-2":                         {"name": null, "short": null},
     "ussr-R09_T-26":                         {"name": null, "short": null},
     "ussr-R09_T-26_bot":                     {"name": null, "short": null},
@@ -616,5 +610,13 @@
     "ussr-R98_T44_85":                       {"name": null, "short": null},
     "ussr-R98_T44_85M":                      {"name": null, "short": null},
     "ussr-R99_T44_122":                      {"name": null, "short": null}
+    /** Don't used
+    "china-Ch04_T34_1_training":             {"name": null, "short": null},
+    "germany-G03_PzV_Panther_training":      {"name": null, "short": null},
+    "germany-G10_PzIII_AusfJ_training":      {"name": null, "short": null},
+    "germany-G16_PzVIB_Tiger_II_training":   {"name": null, "short": null},
+    "usa-A06_M4A3E8_Sherman_training":       {"name": null, "short": null},
+    "ussr-R07_T-34-85_training":             {"name": null, "short": null},
+    */
   }
 }
