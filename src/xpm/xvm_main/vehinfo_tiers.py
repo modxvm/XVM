@@ -14,7 +14,7 @@ from gui.shared.utils.requesters import REQ_CRITERIA
 
 _special = {
     # Data from http://forum.worldoftanks.ru/index.php?/topic/41221-
-    # Last update: 31.03.2017
+    # Last update: 19.04.2017
 
     # level 2
     'germany:G53_PzI':                   [ 2, 2 ],
@@ -32,8 +32,8 @@ _special = {
     'ussr:R86_LTP':                      [ 3, 4 ],
 
     # level 4
-    'germany:G35_B-1bis_captured':       [ 4, 4 ],
     'france:F14_AMX40':                  [ 4, 6 ],
+    'germany:G35_B-1bis_captured':       [ 4, 4 ],
     'japan:J06_Ke_Ho':                   [ 4, 6 ],
     'uk:GB04_Valentine':                 [ 4, 6 ],
     'uk:GB60_Covenanter':                [ 4, 6 ],
@@ -92,10 +92,6 @@ def _getTiers(level, cls, key):
     # HT: (=T4 max+1)
     if level == 4 and cls == 'heavyTank':
         return (4, 5)
-
-    # LT: (=T4 max+4) & (>T4 min+1 max+3) & (>T7 min+1 max=11)
-    if level >= 4 and cls == 'lightTank':
-        return (level if level == 4 else level + 1, 11 if level > 7 else level + 3)
 
     # default: (<T3 max+1) & (>=T3 max+2) & (>T9 max=11)
     return (level, level + 1 if level < 3 else 11 if level > 9 else level + 2)

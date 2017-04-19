@@ -26,14 +26,13 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 31.03.2017
+    # Last update: 19.04.2017
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
     "china:Ch03_WZ-111":                     '111',
     "china:Ch03_WZ_111_A":                   '111',
     "china:Ch04_T34_1":                      't34·1',
-    "china:Ch04_T34_1_training":             't34·1',
     "china:Ch05_T34_2":                      't34·2',
     "china:Ch06_Renault_NC31":               'NC31',
     "china:Ch06_Renault_NC31_bot":           'NC31',
@@ -142,7 +141,6 @@ _data = {
     "germany:G02_Hummel":                    'Humml',
     "germany:G03_PzV_Panther":               'Pant',
     "germany:G03_PzV_Panther_IGR":           'Pant',
-    "germany:G03_PzV_Panther_training":      'Pant',
     "germany:G04_PzVI_Tiger_I":              'Tig1',
     "germany:G04_PzVI_Tiger_IA":             'Tig1a',
     "germany:G04_PzVI_Tiger_I_IGR":          'Tig1',
@@ -164,7 +162,6 @@ _data = {
     "germany:G108_PzKpfwII_AusfD":           'Pz2d',
     "germany:G109_Steyr_WT":                 'WTstr',
     "germany:G10_PzIII_AusfJ":               'Pz3',
-    "germany:G10_PzIII_AusfJ_training":      'Pz3',
     "germany:G110_Typ_205":                  'Mausch',
     "germany:G112_KanonenJagdPanzer":        'KnJpz',
     "germany:G113_SP_I_C":                   'sp1c',
@@ -192,7 +189,6 @@ _data = {
     "germany:G16_PzVIB_Tiger_II":            'Tig2',
     "germany:G16_PzVIB_Tiger_II_F":          'Tig2·h',
     "germany:G16_PzVIB_Tiger_II_IGR":        'Tig2',
-    "germany:G16_PzVIB_Tiger_II_training":   'Tig2',
     "germany:G17_JagdPzIV":                  'Jpz4',
     "germany:G18_JagdPanther":               'JagPnt',
     "germany:G19_Wespe":                     'Wespe',
@@ -412,7 +408,6 @@ _data = {
     "usa:A05_M4_Sherman":                    'M4',
     "usa:A05_M4_Sherman_IGR":                'M4',
     "usa:A06_M4A3E8_Sherman":                'M4a3e8',
-    "usa:A06_M4A3E8_Sherman_training":       'M4a3e8',
     "usa:A07_T20":                           'T20',
     "usa:A08_T23":                           'T23',
     "usa:A09_T1_hvy":                        'T1hv',
@@ -515,7 +510,6 @@ _data = {
     "ussr:R05_KV":                           'KV',
     "ussr:R06_T-28":                         't28',
     "ussr:R07_T-34-85":                      't34·85',
-    "ussr:R07_T-34-85_training":             't34·85',
     "ussr:R08_BT-2":                         'Bt2',
     "ussr:R09_T-26":                         't26',
     "ussr:R09_T-26_bot":                     't26',
@@ -638,4 +632,11 @@ _data = {
     "ussr:R98_T44_85":                       't44·85',
     "ussr:R98_T44_85M":                      't44·85m',
     "ussr:R99_T44_122":                      't44·122'
+    # Don't used
+    #"china:Ch04_T34_1_training":             't34·1',
+    #"germany:G03_PzV_Panther_training":      'Pant',
+    #"germany:G10_PzIII_AusfJ_training":      'Pz3',
+    #"germany:G16_PzVIB_Tiger_II_training":   'Tig2',
+    #"usa:A06_M4A3E8_Sherman_training":       'M4a3e8',
+    #"ussr:R07_T-34-85_training":             't34·85',
 }
