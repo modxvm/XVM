@@ -24,6 +24,7 @@ AppendDefaultDirName=false
 ShowLanguageDialog=true
 DisableProgramGroupPage=true
 Uninstallable=true
+DisableDirPage=false
 
 OutputDir=..\output
 OutputBaseFilename=setup_xvm
