@@ -1,4 +1,14 @@
-﻿XVM-6.6.0:
+﻿XVM-6.6.1:
+  [INSTALLER]
+  * fix installation when XVM was previously installer
+
+  [OTHER]
+  * restore missing locales
+  * XVM-Symbol.ttf font was updated
+  * fixed tiers for Light Tanks
+  * fixed typos in tanks short name
+
+XVM-6.6.0:
   [GENERAL]
   * adaptation to World of Tanks 9.18
 
