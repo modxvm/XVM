@@ -42,7 +42,7 @@ def xvm_formatDate(formatDate):
         formatDate = createDict('Bu', formatDate)
     if '%Bl' in formatDate:
         formatDate = createDict('Bl', formatDate)
-    t = time.strftime(formatDate).decode(locale.getdefaultlocale()[1])
+    t = time.strftime(formatDate).decode(loc)
     return t.format(**d)
 
 
