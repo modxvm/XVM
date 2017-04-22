@@ -18,6 +18,9 @@ if [[ "$XVMINST_L10N_URL" == "" ]]; then
     export XVMINST_L10N_URL="http://translate.modxvm.com/download/xvm-installer/xvm-installer-l10n_isl.zip"
 fi
 
+##########################
+####    FUNCTIONS     ####
+##########################
 
 extend_path()
 {
@@ -26,72 +29,79 @@ extend_path()
 
 clean_directories()
 {
-    rm -rf "$XVMINST_ROOT_PATH"/src/l10n_result/
-    mkdir -p "$XVMINST_ROOT_PATH"/src/l10n_result/
+    rm -rf "$XVMINST_ROOT_PATH/temp"
 
-    rm -rf "$XVMINST_ROOT_PATH"/src/temp_changelogs/
-    mkdir -p  "$XVMINST_ROOT_PATH"/src/temp_changelogs/
-}
-
-download_languages(){
-    pushd "$XVMINST_ROOT_PATH"/src/l10n_result/ > /dev/null
-
-    wget "$XVMINST_L10N_URL" --output-document=./l10n.zip
-    unzip -q -o l10n.zip -d .
-
-    popd > /dev/null
-}
-
-generate_defines(){
-    pushd "$XVMINST_ROOT_PATH"/src/ >/dev/null
-
-    rm -rf ./xvm_defines.iss
-    cp ./xvm_defines_template.iss ./xvm_defines.iss
-    sed -i "s/XVM_WOTVERSION/${XVMBUILD_WOT_VERSION}/g" ./xvm_defines.iss
-    sed -i "s/XVM_VERSION/${XVMBUILD_XVM_VERSION}/g" ./xvm_defines.iss
-
-    popd >/dev/null
+    mkdir -p "$XVMINST_ROOT_PATH/temp"
+    mkdir -p "$XVMINST_ROOT_PATH/temp/changelogs"
+    mkdir -p "$XVMINST_ROOT_PATH/temp/defines"
+    mkdir -p "$XVMINST_ROOT_PATH/temp/l10n_download"
+    mkdir -p "$XVMINST_ROOT_PATH/temp/l10n_result"
 }
 
 prepare_changelog()
 {
-    cp "$XVMBUILD_ROOT_PATH"/~output/res_mods/mods/shared_resources/xvm/doc/ChangeLog-en.txt "$XVMINST_ROOT_PATH"/src/temp_changelogs/
-    sed -ri '1s/^\xef\xbb\xbf//' "$XVMBUILD_ROOT_PATH/~output/res_mods/mods/shared_resources/xvm/doc/ChangeLog-ru.txt"
-    iconv -f utf8 -t cp1251 -o "$XVMINST_ROOT_PATH/src/temp_changelogs/ChangeLog-ru.txt" "$XVMBUILD_ROOT_PATH/~output/res_mods/mods/shared_resources/xvm/doc/ChangeLog-ru.txt"
+    cp "$XVMBUILD_ROOT_PATH/~output/res_mods/mods/shared_resources/xvm/doc/ChangeLog-en.txt" "$XVMINST_ROOT_PATH/temp/changelogs/"
+    cp "$XVMBUILD_ROOT_PATH/~output/res_mods/mods/shared_resources/xvm/doc/ChangeLog-ru.txt" "$XVMINST_ROOT_PATH/temp/changelogs/"
+
+    sed -i '1s/^\xef\xbb\xbf//' "$XVMINST_ROOT_PATH/temp/changelogs/ChangeLog-ru.txt"
+    iconv --from-code=utf-8 --to-code=cp1251 "$XVMINST_ROOT_PATH/temp/changelogs/ChangeLog-ru.txt" > "$XVMINST_ROOT_PATH/temp/changelogs/ChangeLog-ru.txt.new"
+    mv "$XVMINST_ROOT_PATH/temp/changelogs/ChangeLog-ru.txt.new" "$XVMINST_ROOT_PATH/temp/changelogs/ChangeLog-ru.txt"
 }
 
-generate_languages(){
-    pushd "$XVMINST_ROOT_PATH"/src/l10n_result/ >/dev/null
+prepare_defines()
+{
+    cp "$XVMINST_ROOT_PATH/src/xvm_defines_template.iss" "$XVMINST_ROOT_PATH/temp/defines/xvm_defines.iss"
+   
+    sed -i "s/XVM_WOTVERSION/${XVMBUILD_WOT_VERSION}/g" "$XVMINST_ROOT_PATH/temp/defines/xvm_defines.iss"
+    sed -i "s/XVM_VERSION/${XVMBUILD_XVM_VERSION}/g" "$XVMINST_ROOT_PATH/temp/defines/xvm_defines.iss"
+}
+
+
+prepare_languages()
+{
+    pushd "$XVMINST_ROOT_PATH/temp/l10n_download/" > /dev/null
+
+    wget "$XVMINST_L10N_URL" --output-document=./l10n.zip
+    unzip -q -o l10n.zip -d .
+    rm l10n.zip
     
-    cp "$XVMINST_ROOT_PATH"/src/l10n/en.islu.tpl "$XVMINST_ROOT_PATH"/src/l10n_result/en.islu.tpl
+    cp "$XVMINST_ROOT_PATH/src/l10n/en.islu.tpl" "$XVMINST_ROOT_PATH/temp/l10n_download/en.islu.tpl"
+    
+    for file in *.tpl; do
+       lang="${file%.*}"
+       cp "$file" "../l10n_result/$lang"
+       sed -i "s/{#VersionWOT}/${TARGET_VERSION}/g" ../l10n_result/$lang
+       sed -i "s/{#VersionXVM}/${XVM_VERSION}/g" ../l10n_result/$lang
+    done
+
+    popd > /dev/null
+
+    pushd "$XVMINST_ROOT_PATH/temp/l10n_result/" >/dev/null
 
     echo "[Languages]" >> lang.iss    
 
-    for file in *.tpl; do
-       lang="${file%.*}"
-       cp $file $lang
-       sed -i "s/{#VersionWOT}/${TARGET_VERSION}/g" ./$lang
-       sed -i "s/{#VersionXVM}/${XVM_VERSION}/g" ./$lang
-    done
+    echo "Name: \"en\"; MessagesFile: \"l10n_inno\\en.islu,..\\temp\\l10n_result\\en.islu\"; InfoBeforeFile: \"..\\temp\\changelogs\\ChangeLog-en.txt\"" >> lang.iss
 
     for file in *.islu; do
-       lang="${file%.*}"
+        lang="${file%.*}"
        
-       #changelog
-       if [ "$lang" == "ru" ];then
-           langchg="en"
-       else 
-           langchg="en"
-       fi
+        if [ "$lang" != "en" ]; then
+            #changelog
+            if [ "$lang" == "ru" ] || [ "$lang" == "be" ] || [ "$lang" == "uk" ] || [ "$lang" == "kk" ];then
+                langchg="ru"
+            else 
+                langchg="en"
+            fi
        
-       if [ -f "$XVMINST_ROOT_PATH"/src/l10n_inno/"$lang".islu ]; then
-           echo "Name: \"$lang\"; MessagesFile: \"l10n_inno\\$lang.islu,l10n_result\\$lang.islu\"; InfoBeforeFile: \"temp_changelogs\\ChangeLog-$langchg.txt\"" >> lang.iss
-       fi
-       
+            if [ -f "$XVMINST_ROOT_PATH/src/l10n_inno/$lang.islu" ]; then
+                echo "Name: \"$lang\"; MessagesFile: \"l10n_inno\\$lang.islu,..\\temp\\l10n_result\\$lang.islu\"; InfoBeforeFile: \"..\\temp\\changelogs\\ChangeLog-$langchg.txt\"" >> lang.iss
+            fi
+        fi      
     done
 
     popd >/dev/null
 }
+
 
 build_run(){
     rm -rf "$XVMINST_ROOT_PATH"/output/
@@ -141,17 +151,16 @@ main(){
     detect_wine
     detect_wget
     detect_mercurial
+    detect_unzip
 
     load_repositorystats
-
     extend_path
+
     clean_directories
 
     prepare_changelog
-
-    download_languages
-    generate_defines
-    generate_languages
+    prepare_defines
+    prepare_languages
 
     build_run
 
