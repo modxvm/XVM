@@ -25,6 +25,7 @@ def xvm_formatDate(formatDate):
 
     global d
     d = {}
+    formatDate = formatDate.decode('utf8').encode(loc)
     if '%au' in formatDate:
         formatDate = createDict('au', formatDate)
     if '%al' in formatDate:
