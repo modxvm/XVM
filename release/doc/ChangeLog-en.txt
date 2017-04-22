@@ -1,4 +1,14 @@
-﻿XVM-6.6.1:
+﻿XVM-6.6.2:
+  [INSTALLER]
+  * fix new installation path selection
+
+  [XFW]
+  * enchanced support for CJK (Chinese, Japanese, Korean)
+
+  [АНГАР]
+  * fixed clock for CJK
+
+XVM-6.6.1:
   [INSTALLER]
   * fix installation when XVM was previously installer
 
