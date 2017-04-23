@@ -13,7 +13,7 @@
     "type": "extrafield",
     "formats": [
       {
-        "updateEvent": "ON_EVERY_100MS",
+        "updateEvent": "ON_EVERY_SECOND",
         // Horizontal position.
         // Положение по горизонтали.
         "x": -10,

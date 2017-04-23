@@ -21,7 +21,7 @@
       // Horizontal alignment
       // Выравнивание по горизонтали
       "align": "center",
-      // true - x position is binded to vehicle icon, false - binded to edge of the screen.
+      // true - x position is bound to vehicle icon, false - bound to edge of the screen.
       // true - положение по горизонтали отсчитывается от иконки танка, false - от края экрана.
       "bindToIcon": true,
       // enemy spotted status marker format.

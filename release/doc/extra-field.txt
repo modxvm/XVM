@@ -28,7 +28,7 @@ Legend:
 ├───────────────────┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────────
 │ "height"          │ X │ X │ X │ X │ X │ X │ height (macros allowed) (default: 0)
 ├───────────────────┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────────
-│ "bindToIcon"      │ X │ X │ X │   │   │   │ if enabled, X position is binded to vehicle icon (default: false)
+│ "bindToIcon"      │ X │ X │ X │   │   │   │ if enabled, X position is boundto vehicle icon (default: false)
 ├───────────────────┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────────
 │ "alpha"           │ X │ X │ X │ X │ X │ X │ transparency in percents (0..100) (macros allowed) (default: 100)
 ├───────────────────┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────────
@@ -133,7 +133,7 @@ Legend:
 │                   │   │   │   │   │   │   │   ON_EVERY_SECOND              * can reduce performance
 │                   │   │   │   │   │   │   │   PY(event_name)               - event from python, sent by as_event(event_name)
 ├───────────────────┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────────
-│ "mouseEvents"     │   │   │   │   │   │ X │ the events handlers must be binded using the function as_callback(event_name)
+│ "mouseEvents"     │   │   │   │   │   │ X │ the events handlers must be bound using the function as_callback(event_name)
 │                   │   │   │   │   │   │   │
 │                   │   │   │   │   │   │   │ allowed events:
 │                   │   │   │   │   │   │   │   "click"      - event is sent when the mouse button clicked inside the field
