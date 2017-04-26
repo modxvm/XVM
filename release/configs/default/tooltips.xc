@@ -175,7 +175,7 @@ List of possible values: (if the parameter is not relevant for some tank, it wil
 "shotDispersionAngle",                  - Разброс от расстояния \ Accuracy, shell dispersion over distance
 "aimingTime",                           - Время сведения \ Aiming time
 "reloadTimeSecs",                       - Время перезарядки (для не барабанной техники)\ Reload time
-"clipParams",                           - Время перезарядки барабана/снаряда в барабане/количество снарядов в барабане \ TO DO
+"clipParams",                           - Время перезарядки барабана/снаряда в барабане/количество снарядов в барабане \ Clip reload time/shell reload time/number of shells in the clip
 "enginePower",                          - Мощность мотора \ Engine power
 "enginePowerPerTon",                    - Удельная мощность мотора (характеризует разгон) \ Engine power-to-weight ratio (characterises acceleration)
 "speedLimits",                          - Предельная скорость вперед и назад \ Speed limit forward and backward
