@@ -1,9 +1,6 @@
 ﻿XVM-6.6.3-dev:
   [CAMERA]
   * new parameter: "camera"/"sniper"/"noBinoculars" allow to disable dimming and greening in sniper scope
-  
-  [TOOLTIPS]
-  * Updated available parameters list (tooltips.xc)   
 
 XVM-6.6.2:
   [INSTALLER]
