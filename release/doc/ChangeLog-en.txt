@@ -1,9 +1,15 @@
-﻿XVM-6.6.3-dev:
+﻿XVM-6.6.3:
+  [GENERAL]
+  * World of Tanks 9.18 worldwide release
+
   [CAMERA]
   * new parameter: "camera"/"sniper"/"noBinoculars" allow to disable dimming and greening in sniper scope
   
   [TOOLTIPS]
   * Updated available parameters list (tooltips.xc)   
+
+  [STATS]
+  * xTE and xtdb were updated
 
 XVM-6.6.2:
   [INSTALLER]
