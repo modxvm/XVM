@@ -1,4 +1,31 @@
-﻿XVM-6.6.0-dev:
+﻿XVM-6.6.3-dev:
+  [CAMERA]
+  * new parameter: "camera"/"sniper"/"noBinoculars" allow to disable dimming and greening in sniper scope
+  
+  [TOOLTIPS]
+  * Updated available parameters list (tooltips.xc)   
+
+XVM-6.6.2:
+  [INSTALLER]
+  * fix new installation path selection
+
+  [XFW]
+  * enchanced support for CJK (Chinese, Japanese, Korean)
+
+  [АНГАР]
+  * fixed clock for CJK
+
+XVM-6.6.1:
+  [INSTALLER]
+  * fix installation when XVM was previously installer
+
+  [OTHER]
+  * restore missing locales
+  * XVM-Symbol.ttf font was updated
+  * fixed tiers for Light Tanks
+  * fixed typos in tanks short name
+
+XVM-6.6.0:
   [GENERAL]
   * adaptation to World of Tanks 9.18
 

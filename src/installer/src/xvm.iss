@@ -1,5 +1,5 @@
-#include "xvm_defines.iss"
-#include "l10n_result\lang.iss"
+#include "..\temp\defines\xvm_defines.iss"
+#include "..\temp\l10n_result\lang.iss"
 
 [Setup]
 AppCopyright    = "2017 (c) XVM team"
@@ -24,6 +24,7 @@ AppendDefaultDirName=false
 ShowLanguageDialog=true
 DisableProgramGroupPage=true
 Uninstallable=true
+DisableDirPage=false
 
 OutputDir=..\output
 OutputBaseFilename=setup_xvm
@@ -173,7 +174,7 @@ begin
       end;
     end;
     
-    if not FileExists(WizardForm.DirEdit.Text) then 
+    if not FileExists(WizardForm.DirEdit.Text+'\WorldOfTanks.exe') then 
     begin
       MsgBox( ExpandConstant('{cm:wotNotFound}'), mbError, MB_OK);
       DirCombo.ItemIndex:=-1;

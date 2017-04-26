@@ -185,6 +185,12 @@ def _StrategicCamera_create(base, self, onChangeControlMode = None):
 
     base(self, onChangeControlMode)
 
+@overrideMethod(SniperControlMode, '_SniperControlMode__setupBinoculars')
+def setupBinoculars(base, self, isCoatedOptics):
+    if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/noBinoculars'):
+        return
+    base(self, isCoatedOptics)
+
 
 # PRIVATE
 
