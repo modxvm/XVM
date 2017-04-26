@@ -40,12 +40,12 @@
                     "piercingPowerAvgSummary",
                     "avgDamagePerMinute",
                     "reloadTimeSecs",
-                    "clipFireRate",
+                    "clipParams",
                     "aimingTime",
                     "shotDispersionAngle",
                     "TEXT:<font color='#DACFAD'><b>{{l10n:mobility}}</b></font>",
                     "pitchLimits",
-                    "gunYawLimits",
+                    "traverseLimits",
                     "turretRotationSpeed",
                     "chassisRotationSpeed",
                     "enginePowerPerTon",
@@ -67,12 +67,12 @@
                     "piercingPowerAvgSummary",
                     "avgDamagePerMinute",
                     "reloadTimeSecs",
-                    "clipFireRate",
+                    "clipParams",
                     "aimingTime",
                     "shotDispersionAngle",
                     "TEXT:<font color='#DACFAD'><b>{{l10n:mobility}}</b></font>",
                     "pitchLimits",
-                    "gunYawLimits",
+                    "traverseLimits",
                     "turretRotationSpeed",
                     "chassisRotationSpeed",
                     "enginePowerPerTon",
@@ -94,12 +94,12 @@
                     "piercingPowerAvgSummary",
                     "avgDamagePerMinute",
                     "reloadTimeSecs",
-                    "clipFireRate",
+                    "clipParams",
                     "aimingTime",
                     "shotDispersionAngle",
                     "TEXT:<font color='#DACFAD'><b>{{l10n:mobility}}</b></font>",
                     "pitchLimits",
-                    "gunYawLimits",
+                    "traverseLimits",
                     "turretRotationSpeed",
                     "chassisRotationSpeed",
                     "enginePowerPerTon",
@@ -120,12 +120,12 @@
                     "piercingPowerAvgSummary",
                     "avgDamagePerMinute",
                     "reloadTimeSecs",
-                    "clipFireRate",
+                    "clipParams",
                     "aimingTime",
                     "shotDispersionAngle",
                     "TEXT:<font color='#DACFAD'><b>{{l10n:mobility}}</b></font>",
                     "pitchLimits",
-                    "gunYawLimits",
+                    "traverseLimits",
                     "turretRotationSpeed",
                     "chassisRotationSpeed",
                     "enginePowerPerTon",
@@ -143,13 +143,13 @@
                     "piercingPowerAvgSummary",
                     "avgDamagePerMinute",
                     "reloadTimeSecs",
-                    "clipFireRate",
+                    "clipParams",
                     "explosionRadius",
                     "aimingTime",
                     "shotDispersionAngle",
                     "TEXT:<font color='#DACFAD'><b>{{l10n:mobility}}</b></font>",
                     "pitchLimits",
-                    "gunYawLimits",
+                    "traverseLimits",
                     "turretRotationSpeed",
                     "chassisRotationSpeed",
                     "enginePowerPerTon",
@@ -175,14 +175,14 @@ List of possible values: (if the parameter is not relevant for some tank, it wil
 "shotDispersionAngle",                  - Разброс от расстояния \ Accuracy, shell dispersion over distance
 "aimingTime",                           - Время сведения \ Aiming time
 "reloadTimeSecs",                       - Время перезарядки (для не барабанной техники)\ Reload time
-"clipFireRate",                         - Время перезарядки барабана/снаряда в барабане/количество снарядов в барабане \ TO DO
+"clipParams",                           - Время перезарядки барабана/снаряда в барабане/количество снарядов в барабане \ TO DO
 "enginePower",                          - Мощность мотора \ Engine power
 "enginePowerPerTon",                    - Удельная мощность мотора (характеризует разгон) \ Engine power-to-weight ratio (characterises acceleration)
 "speedLimits",                          - Предельная скорость вперед и назад \ Speed limit forward and backward
 "chassisRotationSpeed",                 - Скорость поворота шасси \ Chassis rotation speed
 "turretArmor",                          - Сводка брони башни (спереди, сбоку, сзади) \ Summary of turret armor (frontal, side, back)
 "hullArmor",                            - Сводка брони корпуса (спереди, сбоку, сзади) \ Summary of hull armor (frontal, side, back)
-"gunYawLimits",                       	- УГН \ Gun traverse limits
+"traverseLimits",                     	- УГН \ Gun traverse limits
 "pitchLimits",                          - УВН \ Elevation arc limits
 "pitchLimitsSide",                      - УВН (сбоку) \ Elevation arc limits (side)
 "pitchLimitsRear",                      - УВН (сзади) \ Elevation arc limits (rear)
@@ -196,8 +196,8 @@ List of possible values: (if the parameter is not relevant for some tank, it wil
 "crewRolesIcons",                       - Значки профессий экипажа танка (будут показаны в конце) \ Icons of crew roles of vehicle (will be shown at the end)
 "gravity",                              - Гравитация \ Gravity
 "shellSpeedSummary",                    - Сводка скоростей снарядов \ Summary of shell speeds
-"radioDistance",                        - Дальность связи \ Range of radio signal
-"reloadTime",                           - Скорострельность оружия \ Rate of Fire 
+"radioRange",                           - Дальность связи \ Range of radio signal
+"rateOfFire",                           - Скорострельность оружия \ Rate of Fire 
 "battleTiers",                          - Уровни боев танка \ Battle tiers of vehicle
 "maxHealth",                            - ХП танка \ HP of vehicle
 "invisibilityStillFactor"               - Незаметность неподвижной машины (%) \ Concealment of Stationary Vehicle (%)

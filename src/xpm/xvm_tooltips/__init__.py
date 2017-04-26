@@ -240,6 +240,14 @@ def CommonStatsBlockConstructor_construct(base, self):
             for paramName in params_list:
                 if paramName is None:
                     continue
+                if paramName == 'rateOfFire':
+                    paramName = 'reloadTime'
+                elif paramName == 'traverseLimits':
+                    paramName = 'gunYawLimits'
+                elif paramName == 'radioRange':
+                    paramName = 'radioDistance'
+                elif paramName == 'clipParams':
+                    paramName = 'clipFireRate'
                 if paramName in vehicleCommonParams:
                     paramInfo = comparator.getExtendedData(paramName)
                 if paramName == 'turretArmor' and not vehicle.hasTurrets:
