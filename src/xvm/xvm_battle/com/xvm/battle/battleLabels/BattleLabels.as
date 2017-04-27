@@ -38,9 +38,17 @@ package com.xvm.battle.battleLabels
             Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded, false, 0, true);
 
             _substrateHolder = battlePage.addChildAt(new Sprite(), 0) as Sprite;
+            _substrateHolder.mouseEnabled = false;
+
             _bottomHolder = battlePage.addChildAt(new Sprite(), 1) as Sprite;
+            _bottomHolder.mouseEnabled = false;
+
             _normalHolder = battlePage.addChild(new Sprite()) as Sprite;
+            _normalHolder.mouseEnabled = false;
+
             _topHolder = battlePage.addChild(new Sprite()) as Sprite;
+            _topHolder.mouseEnabled =false
+            
             createExtraFields();
         }
 
