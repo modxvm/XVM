@@ -1,6 +1,6 @@
-﻿XVM-6.6.4-dev:
+﻿XVM-6.6.4:
   [BATTLE LABELS]
-  * disabled mouse capture
+  * fix mouse capture
 
 XVM-6.6.3:
   [GENERAL]
