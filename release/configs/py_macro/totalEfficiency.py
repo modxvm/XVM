@@ -159,3 +159,8 @@ def xvm_isStuns():
 @xvm.export('xvm.numberStuns', deterministic=False)
 def xvm_numberStuns():
     return te.numberStuns
+
+
+@xvm.export('xvm.numberDamagedVehicles', deterministic=False)
+def xvm_numberDamagedVehicles():
+    return len(te.numberDamagedVehicles) if te.numberDamagedVehicles is not None else 0

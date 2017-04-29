@@ -1,5 +1,8 @@
 ﻿XVM-6.6.5-dev:
   [PYTHON MACROSES]
+  * totalEfficiency: added the macros {{py:xvm.numberDamagedVehicles}}
+  
+  [PYTHON MACROSES]
   * added macros {{py:xvm.screenWidth}}, {{py:xvm.screenHeight}}, {{py:xvm.screenVCenter}} и {{py:xvm.screenHCenter}}
   
   [DAMAGE LOG]

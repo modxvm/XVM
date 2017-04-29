@@ -37,6 +37,7 @@ isPlayerInSquad = False
 totalStun = 0
 numberStuns = 0
 isStuns = None
+numberDamagedVehicles = []
 
 
 ribbonTypes = {
@@ -184,7 +185,7 @@ def _onHide(self, ribbonType):
 
 @registerEvent(Vehicle, 'onHealthChanged')
 def onHealthChanged(self, newHealth, attackerID, attackReasonID):
-    global vehiclesHealth, numberHitsDealt, damageReceived, numberDamagesDealt
+    global vehiclesHealth, numberHitsDealt, damageReceived, numberDamagesDealt, numberDamagedVehicles
     isUpdate = False
     if self.isPlayerVehicle:
         damageReceived = maxHealth - max(0, newHealth)
@@ -199,6 +200,8 @@ def onHealthChanged(self, newHealth, attackerID, attackReasonID):
                 isUpdate = True
         if (attackerID == player.playerVehicleID) and (attackReasonID == 0):
             numberHitsDealt += 1
+            if self.id not in numberDamagedVehicles:
+                numberDamagedVehicles.append(self.id)
             isUpdate = True
     if isUpdate:
         as_event('ON_TOTAL_EFFICIENCY')
@@ -224,7 +227,7 @@ def destroyGUI(self):
     global vehiclesHealth, totalDamage, totalAssist, totalBlocked, damageReceived, damagesSquad, detection, isPlayerInSquad
     global ribbonTypes, numberHitsBlocked, player, numberHitsDealt, old_totalDamage, damage, numberShotsDealt, totalStun
     global numberDamagesDealt, numberShotsReceived, numberHitsReceived, numberHits, fragsSquad, fragsSquad_dict, isStuns
-    global numberStuns
+    global numberStuns, numberDamagedVehicles
     vehiclesHealth = {}
     totalDamage = 0
     damage = 0
@@ -248,6 +251,7 @@ def destroyGUI(self):
     totalStun = 0
     numberStuns = 0
     isStuns = None
+    numberDamagedVehicles = []
     ribbonTypes = {
         'armor': 0,
         'damage': 0,
