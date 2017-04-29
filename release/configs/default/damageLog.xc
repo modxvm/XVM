@@ -40,6 +40,9 @@
 
 {
   "damageLog": {
+    // false - Disable.
+    // false - отключить.
+    "enabled": true,
     // true - disable standard detailed damage.
     // true - отключить стандартный детальный урон.
     "disabledDetailStats": true,

@@ -86,7 +86,7 @@ SECTIONS = (SECTION_LOG, SECTION_LOG_ALT, SECTION_LOG_BACKGROUND, SECTION_LOG_AL
 def keyLower(_dict):
     if _dict is not None:
         dict_return = {}
-        for key in _dict.keys():
+        for key in _dict.iterkeys():
             dict_return[key.lower()] = _dict[key]
         return dict_return
     else:
@@ -564,7 +564,7 @@ def getValueMacroes(section, value):
              'fire-duration': value.get('fireDuration', None),
              'diff-masses': value.get('diff-masses', None),
              'nation': value.get('nation', None),
-             'my-blownup': 'blownup' if value['blownup'] else None,
+             'my-blownup': 'blownup' if value['blownup'] else None
              }
     return macro
 
@@ -803,47 +803,56 @@ _lastHit = LastHit(SECTION_LASTHIT)
 
 @overrideMethod(DamageLogPanel, '_addToTopLog')
 def DamageLogPanel_addToTopLog(base, self, value, actionTypeImg, vehicleTypeImg, vehicleName, shellTypeStr, shellTypeBG):
-    if not config.get('damageLog/disabledDetailStats'):
+    if config.get('damageLog/disabledDetailStats') and config.get('damageLog/enabled'):
+        return
+    else:
         return base(self, value, actionTypeImg, vehicleTypeImg, vehicleName, shellTypeStr, shellTypeBG)
 
 
 @overrideMethod(DamageLogPanel, '_addToBottomLog')
 def DamageLogPanel_addToBottomLog(base, self, value, actionTypeImg, vehicleTypeImg, vehicleName, shellTypeStr, shellTypeBG):
-    if not config.get('damageLog/disabledDetailStats'):
+    if config.get('damageLog/disabledDetailStats') and config.get('damageLog/enabled'):
+        return
+    else:
         return base(self, value, actionTypeImg, vehicleTypeImg, vehicleName, shellTypeStr, shellTypeBG)
 
 
 @overrideMethod(DamageLogPanel, 'as_summaryStatsS')
 def as_summaryStatsS(base, self, damage, blocked, assist, stun):
-    if not config.get('damageLog/disabledSummaryStats'):
+    if config.get('damageLog/disabledSummaryStats') and config.get('damageLog/enabled'):
+        return
+    else:
         return base(self, damage, blocked, assist, stun)
 
 
 @overrideMethod(DamageLogPanel, '_onTotalEfficiencyUpdated')
 def _onTotalEfficiencyUpdated(base, self, diff):
-    if not config.get('damageLog/disabledSummaryStats'):
+    if config.get('damageLog/disabledSummaryStats') and config.get('damageLog/enabled'):
+        return
+    else:
         return base(self, diff)
 
 
 @registerEvent(Vehicle, 'onHealthChanged')
 def onHealthChanged(self, newHealth, attackerID, attackReasonID):
     global on_fire
-    if self.isPlayerVehicle and data.data['isAlive']:
-        data.onHealthChanged(self, newHealth, attackerID, attackReasonID)
-        if newHealth <= 0:
-            on_fire = 0
-            as_event('ON_FIRE')
-    elif hasattr(BigWorld.player().inputHandler.ctrl, 'curVehicleID'):
-        vId = BigWorld.player().inputHandler.ctrl.curVehicleID
-        v = vId if isinstance(vId, Vehicle) else BigWorld.entity(vId)
-        if (v is not None) and ((self.id == v.id) and not v.isAlive()):
-            on_fire = 0
-            as_event('ON_FIRE')
+    if config.get('damageLog/enabled'):
+        if self.isPlayerVehicle and data.data['isAlive']:
+            data.onHealthChanged(self, newHealth, attackerID, attackReasonID)
+            if newHealth <= 0:
+                on_fire = 0
+                as_event('ON_FIRE')
+        elif hasattr(BigWorld.player().inputHandler.ctrl, 'curVehicleID'):
+            vId = BigWorld.player().inputHandler.ctrl.curVehicleID
+            v = vId if isinstance(vId, Vehicle) else BigWorld.entity(vId)
+            if (v is not None) and ((self.id == v.id) and not v.isAlive()):
+                on_fire = 0
+                as_event('ON_FIRE')
 
 
 @registerEvent(Vehicle, 'onEnterWorld')
 def onEnterWorld(self, prereqs):
-    if self.isPlayerVehicle:
+    if self.isPlayerVehicle and config.get('damageLog/enabled'):
         global on_fire, damageLogConfig, autoReloadConfig
         data.isReplay = BattleReplay.isPlaying()
         autoReloadConfig = config.get('autoReloadConfig')
@@ -857,25 +866,26 @@ def onEnterWorld(self, prereqs):
 
 @registerEvent(Vehicle, 'showDamageFromShot')
 def showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor):
-    if self.isPlayerVehicle and data.data['isAlive']:
+    if self.isPlayerVehicle and data.data['isAlive'] and config.get('damageLog/enabled'):
         data.showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor)
 
 
 @registerEvent(Vehicle, 'showDamageFromExplosion')
 def showDamageFromExplosion(self, attackerID, center, effectsIndex, damageFactor):
-    if self.isPlayerVehicle and data.data['isAlive']:
+    if self.isPlayerVehicle and data.data['isAlive'] and config.get('damageLog/enabled'):
         data.showDamageFromExplosion(self, attackerID, center, effectsIndex, damageFactor)
 
 
 @registerEvent(DamagePanel, 'as_setFireInVehicleS')
 def as_setFireInVehicleS(self, isInFire):
     global on_fire, beginFire
-    if isInFire:
-        on_fire = 100
-        beginFire = BigWorld.time()
-    else:
-        on_fire = 0
-    as_event('ON_FIRE')
+    if config.get('damageLog/enabled'):
+        if isInFire:
+            on_fire = 100
+            beginFire = BigWorld.time()
+        else:
+            on_fire = 0
+        as_event('ON_FIRE')
 
 
 @registerEvent(PlayerAvatar, '_PlayerAvatar__destroyGUI')
@@ -893,21 +903,22 @@ def destroyGUI(self):
 @registerEvent(PlayerAvatar, 'handleKey')
 def handleKey(self, isDown, key, mods):
     global isDownAlt
-    hotkey = config.get('hotkeys/damageLogAltMode')
-    if hotkey['enabled'] and (key == hotkey['keyCode']):
-        if isDown:
-            if hotkey['onHold']:
-                if not isDownAlt:
-                    isDownAlt = True
+    if config.get('damageLog/enabled'):
+        hotkey = config.get('hotkeys/damageLogAltMode')
+        if hotkey['enabled'] and (key == hotkey['keyCode']):
+            if isDown:
+                if hotkey['onHold']:
+                    if not isDownAlt:
+                        isDownAlt = True
+                        as_event('ON_HIT')
+                else:
+                    isDownAlt = not isDownAlt
                     as_event('ON_HIT')
             else:
-                isDownAlt = not isDownAlt
-                as_event('ON_HIT')
-        else:
-            if hotkey['onHold']:
-                if isDownAlt:
-                    isDownAlt = False
-                    as_event('ON_HIT')
+                if hotkey['onHold']:
+                    if isDownAlt:
+                        isDownAlt = False
+                        as_event('ON_HIT')
 
 
 def dLog():
