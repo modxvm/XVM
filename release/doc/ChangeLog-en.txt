@@ -1,4 +1,11 @@
-﻿XVM-6.6.4:
+﻿XVM-6.6.5-dev:
+  [PYTHON MACROSES]
+  * added macros {{py:xvm.screenWidth}}, {{py:xvm.screenHeight}}, {{py:xvm.screenVCenter}} и {{py:xvm.screenHCenter}}
+  
+  [DAMAGE LOG]
+  * added option "enabled"
+
+  XVM-6.6.4:
   [BATTLE LABELS]
   * fix mouse capture
 

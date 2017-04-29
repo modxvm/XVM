@@ -1,5 +1,6 @@
 import time
 import traceback
+import BigWorld
 
 # Import logger
 from xvm_main.python.logger import *
@@ -111,6 +112,29 @@ def total_hp_getAvgDamage(a, b, dmg_total):
 @xvm.export('xvm.total_hp.getMainGun', deterministic=False)
 def total_hp_getMainGun(a, b, dmg_total):
     return a if total_hp.mainGun(dmg_total) is not None else b
+
+
+#Screen size
+
+@xvm.export('xvm.screenWidth')
+def xvm_screenWidth():
+    return BigWorld.screenWidth()
+
+
+@xvm.export('xvm.screenHeight')
+def xvm_screenHeight():
+    return BigWorld.screenHeight()
+
+
+@xvm.export('xvm.screenVCenter')
+def xvm_screenVCenter():
+    return BigWorld.screenHeight() // 2
+
+
+@xvm.export('xvm.screenHCenter')
+def xvm_screenHCenter():
+    return BigWorld.screenWidth() // 2
+
 
 # xvm2sup
 

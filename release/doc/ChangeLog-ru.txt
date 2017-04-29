@@ -1,4 +1,11 @@
-﻿XVM-6.6.4:
+﻿XVM-6.6.5-dev:
+  [МАКРОСЫ НА PYTHON]
+  * добавлены макросы {{py:xvm.screenWidth}}, {{py:xvm.screenHeight}}, {{py:xvm.screenVCenter}} и {{py:xvm.screenHCenter}}
+  
+  [ЛОГ ПОЛУЧЕННЫХ ПОВРЕЖДЕНИЙ]
+  * добавлена опция "enabled"
+
+XVM-6.6.4:
   [BATTLE LABELS]
   * исправлен захват мыши
 
