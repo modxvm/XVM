@@ -97,6 +97,10 @@ def PlayerAvatar_showShotResults(self, results):
                 if vehID not in numberDamagedVehicles:
                     numberDamagedVehicles.append(vehID)
                     b = True
+            elif (flags & (VHF.GUN_DAMAGED_BY_PROJECTILE | VHF.GUN_DAMAGED_BY_EXPLOSION)) or (flags & (VHF.CHASSIS_DAMAGED_BY_PROJECTILE | VHF.CHASSIS_DAMAGED_BY_EXPLOSION)):
+                if vehID not in numberDamagedVehicles:
+                    numberDamagedVehicles.append(vehID)
+                    b = True
     if b:
         as_event('ON_TOTAL_EFFICIENCY')
 
