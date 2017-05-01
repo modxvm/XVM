@@ -81,10 +81,11 @@ def ArenaDataProvider_updateVehicleStats(self, vID, vStats):
 
 @registerEvent(PlayerAvatar, 'showShotResults')
 def PlayerAvatar_showShotResults(self, results):
-    global numberHits, numberStuns
+    global numberHits, numberStuns, numberDamagedVehicles
     b = False
     for r in results:
-        if self.playerVehicleID != (r & 4294967295L):
+        vehID = (r & 4294967295L)
+        if self.playerVehicleID != vehID:
             flags = r >> 32 & 4294967295L
             if flags & VHF.ATTACK_IS_DIRECT_PROJECTILE:
                 numberHits += 1
@@ -92,6 +93,10 @@ def PlayerAvatar_showShotResults(self, results):
             if flags & VHF.STUN_STARTED:
                 numberStuns += 1
                 b = True
+            if flags & VHF.MATERIAL_WITH_POSITIVE_DF_PIERCED_BY_PROJECTILE:
+                if vehID not in numberDamagedVehicles:
+                    numberDamagedVehicles.append(vehID)
+                    b = True
     if b:
         as_event('ON_TOTAL_EFFICIENCY')
 
@@ -200,8 +205,6 @@ def onHealthChanged(self, newHealth, attackerID, attackReasonID):
                 isUpdate = True
         if (attackerID == player.playerVehicleID) and (attackReasonID == 0):
             numberHitsDealt += 1
-            if self.id not in numberDamagedVehicles:
-                numberDamagedVehicles.append(self.id)
             isUpdate = True
     if isUpdate:
         as_event('ON_TOTAL_EFFICIENCY')
