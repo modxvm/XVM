@@ -28,7 +28,7 @@ Legend:
 ├───────────────────┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────────
 │ "height"          │ X │ X │ X │ X │ X │ X │ height (macros allowed) (default: 0)
 ├───────────────────┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────────
-│ "bindToIcon"      │ X │ X │ X │   │   │   │ if enabled, X position is boundto vehicle icon (default: false)
+│ "bindToIcon"      │ X │ X │ X │   │   │   │ if enabled, X position is bound to vehicle icon (default: false)
 ├───────────────────┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────────
 │ "alpha"           │ X │ X │ X │ X │ X │ X │ transparency in percents (0..100) (macros allowed) (default: 100)
 ├───────────────────┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────────

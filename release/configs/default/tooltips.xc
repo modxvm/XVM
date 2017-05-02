@@ -177,7 +177,7 @@ List of possible values: (if the parameter is not relevant for some tank, it wil
 "chassisRotationSpeed",                 - Скорость поворота шасси \ Chassis rotation speed
 "turretArmor",                          - Сводка брони башни (спереди, сбоку, сзади) \ Summary of turret armor (frontal, side, back)
 "hullArmor",                            - Сводка брони корпуса (спереди, сбоку, сзади) \ Summary of hull armor (frontal, side, back)
-"traverseLimits",                     	- УГН \ Gun traverse limits
+"traverseLimits",                       - УГН \ Gun traverse limits
 "pitchLimits",                          - УВН \ Elevation arc limits
 "pitchLimitsSide",                      - УВН (сбоку) \ Elevation arc limits (side)
 "pitchLimitsRear",                      - УВН (сзади) \ Elevation arc limits (rear)
