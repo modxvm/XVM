@@ -1,4 +1,7 @@
 ﻿XVM-6.6.5-dev:
+  [DAMAGE LOG]
+  * added macro {{stun-duration}}
+  
   [PYTHON MACROSES]
   * totalEfficiency: added the macro {{py:xvm.numberDamagedVehicles}}
 
