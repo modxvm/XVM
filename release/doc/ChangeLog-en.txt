@@ -1,12 +1,15 @@
 ﻿XVM-6.6.5-dev:
   [PYTHON MACROSES]
   * totalEfficiency: added the macro {{py:xvm.numberDamagedVehicles}}
-  
+
   [PYTHON MACROSES]
   * added macros {{py:xvm.screenWidth}}, {{py:xvm.screenHeight}}, {{py:xvm.screenVCenter}} and {{py:xvm.screenHCenter}}
-  
+
   [DAMAGE LOG]
   * added option "enabled"
+
+  [ELEMENTS]
+  * Updated avaliable parameters list (elements.xc)
 
 XVM-6.6.4:
   [BATTLE LABELS]
@@ -50,17 +53,17 @@ XVM-6.6.0:
   * part of the functionality (ping, XInput) was moved from XVM to XFW
   * partially switch to .wotmod packages format
   * XFW can now be used without XVM
-  
+
   [TOOLTIPS]
   * Updated avaliable parameters list (tooltips.xc) 
-  
+
   [DAMAGE LOG]
   * 'alive' value of a macro {{my-alive} } is renamed into 'al'
   * added macroses {{wn6}}, {{xwn6}}, {{r}}, {{c:wn6}}, {{c:xwn6}}, {{c:r}}
-  
+
   [PYTHON MACROSES]
   * totalEfficiency: added the macros {{py:xvm.totalStun}}, {{py:xvm.isStuns}}, {{py:xvm.numberStuns}}
-  
+
   [WIDGETS]
   * added new function - widgets in login and lobby
     currently only "extrafields" widget type implemented
@@ -72,7 +75,7 @@ XVM-6.6.0:
 
   [INSTALLER]
   * improvements in WoT client path detection
-  
+
   [HANGAR]
   * clock in the hangar is moved to widgets
   * removed config file "clock.xc" and references
@@ -131,7 +134,7 @@ XVM-6.5.5:
   [XMQP]
   * ignoring clicks and lines from blocked players
   * save xmqp data in replay
-  
+
   [DAMAGE LOG]
   * fix statistics for disconnected player
   * removed the option "saveLocationInBattle"
@@ -151,7 +154,7 @@ XVM-6.5.5:
       "favorite" - favorite vehicle mark
   * added hotkeys support for the extraFields in the carousel
   * added new filter icons
-  
+
   [BATTLE LOADING]
   * implemented "highlightVehicleIcon" option
   
@@ -161,7 +164,7 @@ XVM-6.5.5:
 
   [MACROSES]
   * allow formatting for recursive macros like `{{{{py:random.randint()}}==0?zero|one}}`
-  
+
   [PYTHON MACROSES]
   * added xvm.utils.smooth_transition_color() function
   * added list of available macroses with their description (/res_mods/mods/shared_resources/xvm/docs/py_macros.txt)
@@ -178,7 +181,7 @@ XVM-6.5.3-CIS:
       "personalQuests" - show/hide personal quests button or change its parameters
       "vehicleName" - show/hide current vehicle name, type and level or change their parameters
   * various bug fixes
- 
+
 XVM-6.5.2.1:
   * ONLY FOR EU, NA, ASIA, KR
   * fix clan wars
@@ -1444,10 +1447,10 @@ XVM-3.0.0:
   * xvm was refactored
   * new tank marker {{turret}}:
     Displays symbol is tank has stock turret.
-	"*" symbol - stock turret. Cant mount top gun. Subject is highly vulnerable.
-	"-" symbol - stock turret. Top gun is possible. Subject is somewhat vulnerable.
-	Stock turret can have weaker armor, lower sight distance or slower rotation speed.
-	Besides that, tank with stock turret can have weaker crew experience.
+      "*" symbol - stock turret. Cant mount top gun. Subject is highly vulnerable.
+      "-" symbol - stock turret. Top gun is possible. Subject is somewhat vulnerable.
+      Stock turret can have weaker armor, lower sight distance or slower rotation speed.
+      Besides that, tank with stock turret can have weaker crew experience.
   * separate settings for all elements in all states
   * adaptation to WoT 0.8.0
 

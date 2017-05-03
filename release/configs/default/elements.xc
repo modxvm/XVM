@@ -53,6 +53,7 @@
     */
     /*
     "battleDamageLogPanel" - Панель: Обратная связь - Урон  / Panel: Feedback - Damage
+    "battleLoading"        - Экран загрузки боя             / Battle Loading screen
     "battleMessenger"      - Чат                            / Chat
     "battleTicker"         - ?                              / ?
     "battleTimer"          - Таймер боя                     / Battle timer
@@ -63,12 +64,13 @@
     "destroyTimersPanel"   - ?                              / ?
     "endWarningPanel"      - Панель оповещяющая о конце боя / Panel informing about the imminent end of the battle
     "fragCorrelationBar"   - Счёт боя                       / Battle score
-    "fullStats"            - ?                              / ?
+    "fullStats"            - Окно статистики по клавише Tab / Battle Statistics form on the Tab key
     "minimap"              - Миникарта                      / Minimap
     "playersPanel"         - Панели игроков (уши)           / Players panels
     "prebattleTimer"       - Таймер до начала боя           / Timer before a battle start
     "radialMenu"           - Радиальное меню                / Radial menu
     "ribbonsPanel"         - Ленты боевой эффективности     / Battle performance badges
+    "siegeModePanel"       - Панель осадного режима         / Siege mode panel
     "sixthSense"           - Лампа шестого чувства          / Sixth sense lamp
     "teamBasesPanelUI"     - Полоса захвата баз             / Capture bar
     */
