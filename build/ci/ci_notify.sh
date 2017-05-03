@@ -11,6 +11,12 @@ source /var/xvm/ci_config.sh
 source "$XVMBUILD_ROOT_PATH/build/xvm-build.conf"
 source "$XVMBUILD_ROOT_PATH/build/library.sh"
 
+htmlencode()
+{
+  local result=$(echo "$1" | sed 's/&/\&amp;/g')
+  echo "$result"
+}
+
 check_variables(){
   if [ "$XVMBUILD_URL_DOWNLOAD" == "" ]; then
     echo "No download URL"
@@ -40,6 +46,7 @@ downloadlinkexe="$XVMBUILD_URL_DOWNLOAD"/"$XVMBUILD_XVM_BRANCH"/"$XVMBUILD_XVM_R
 builddate=$(date --utc +"%d.%m.%Y %H:%M (UTC)")
 
 XVMBUILD_IPB_TEXT=$(printf "[b]Build:[/b] [url=$XVMBUILD_URL_REPO/$XVMBUILD_XVM_HASH]$XVMBUILD_XVM_REVISION (branch $XVMBUILD_XVM_BRANCH)[/url] \n [b]Date:[/b] $builddate \n [b]Download:[/b] [url=$downloadlinkzip].zip archive[/url] | [url=$downloadlinkexe].exe installer[/url]  \n [b]Author:[/b] $XVMBUILD_XVM_COMMITAUTHOR \n [b]Description:[/b] $XVMBUILD_XVM_COMMITMSG [hr]")
+XVMBUILD_IPB_TEXT=$(htmlencode "$XVMBUILD_IPB_TEXT")
 
 XVMBUILD_IPB_REQURL="https://koreanrandom.com/forum/interface/board/index.php"
 XVMBUILD_IPB_REQBODY="<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
