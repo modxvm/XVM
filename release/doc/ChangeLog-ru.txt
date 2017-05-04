@@ -1,7 +1,7 @@
 ﻿XVM-6.6.5-dev:
   [ЛОГ ПОЛУЧЕННЫХ ПОВРЕЖДЕНИЙ]
   * добавлен макрос {{stun-duration}}
-  
+
   [МАКРОСЫ НА PYTHON]
   * totalEfficiency: добавлен макрос {{py:xvm.numberDamagedVehicles}}
 
