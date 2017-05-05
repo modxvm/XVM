@@ -88,6 +88,7 @@
       "y": "{{py:xvm.damageLog.dLog_y}}",
       "width": 300,
       "height": 210,
+      "layer": "bottom",
       "screenVAlign": "bottom",
       "shadow": { 
         "distance": "{{py:xvm.damageLog.dLog_shadow('distance')}}",
@@ -125,6 +126,7 @@
       "y": "{{py:xvm.damageLog.lastHit_y}}",
       "width": 200,
       "height": 100,
+      "layer": "bottom",
       "screenHAlign": "center",
       "screenVAlign": "center",
       "shadow": { 
@@ -155,6 +157,7 @@
       "width": 200,
       "height": 100,
       "alpha": "{{py:xvm.damageLog.fire}}",
+      "layer": "bottom",
       "screenHAlign": "center",
       "screenVAlign": "center",
       "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 3 },
