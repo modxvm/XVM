@@ -1,4 +1,7 @@
-﻿XVM-6.6.5-dev:
+﻿XVM-6.6.5:
+  [GENERAL]
+  * World of Tanks 9.18 micropatch
+
   [DAMAGE LOG]
   * added macro {{stun-duration}}
 
