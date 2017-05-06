@@ -24,6 +24,7 @@ from items import vehicles, _xml
 from xfw import *
 from xvm_main.python.logger import *
 from xvm_main.python.stats import _stat
+from constants import DAMAGE_INFO_CODES
 
 on_fire = 0
 beginFire = None
@@ -83,6 +84,25 @@ SECTION_LOG_ALT_BACKGROUND = 'damageLog/logAltBackground/'
 SECTION_LASTHIT = 'damageLog/lastHit/'
 SECTIONS = (SECTION_LOG, SECTION_LOG_ALT, SECTION_LOG_BACKGROUND, SECTION_LOG_ALT_BACKGROUND, SECTION_LASTHIT)
 
+damageInfoCriticals = ('DEVICE_CRITICAL',
+                         'DEVICE_CRITICAL_AT_SHOT',
+                         'DEVICE_CRITICAL_AT_RAMMING',
+                         'DEVICE_CRITICAL_AT_FIRE',
+                         'DEVICE_CRITICAL_AT_WORLD_COLLISION',
+                         'DEVICE_CRITICAL_AT_DROWNING',
+                         'ENGINE_CRITICAL_AT_UNLIMITED_RPM')
+damageInfoDestructions = ('DEVICE_DESTROYED',
+                            'DEVICE_DESTROYED_AT_SHOT',
+                            'DEVICE_DESTROYED_AT_RAMMING',
+                            'DEVICE_DESTROYED_AT_FIRE',
+                            'DEVICE_DESTROYED_AT_WORLD_COLLISION',
+                            'DEVICE_DESTROYED_AT_DROWNING')
+damageInfoTANKMAN = ('TANKMAN_HIT',
+                       'TANKMAN_HIT_AT_SHOT',
+                       'TANKMAN_HIT_AT_WORLD_COLLISION',
+                       'TANKMAN_HIT_AT_DROWNING',
+                       'ENGINE_DESTROYED_AT_UNLIMITED_RPM')
+
 def keyLower(_dict):
     if _dict is not None:
         dict_return = {}
@@ -107,7 +127,7 @@ def readyConfig(section):
                 'splashHit': keyLower(config.get(section + 'splash-hit')),
                 'criticalHit': keyLower(config.get(section + 'critical-hit')),
                 'hitEffect': keyLower(config.get(section + 'hit-effects')),
-                'c_HitEffect': keyLower(config.get(section + 'c:hit-effects')),
+                'c_hitEffect': keyLower(config.get(section + 'c:hit-effects')),
                 'typeShell': keyLower(config.get(section + 'type-shell')),
                 'c_typeShell': keyLower(config.get(section + 'c:type-shell'))
                 }
@@ -467,12 +487,13 @@ class Data(object):
         _lastHit.output()
         _logBackground.output()
         _logAltBackground.output()
+        self.data['criticalHit'] = False
 
     def showDamageFromShot(self, vehicle, attackerID, points, effectsIndex, damageFactor):
         maxHitEffectCode, decodedPoints = DamageFromShotDecoder.decodeHitPoints(points, vehicle.typeDescriptor)
         self.data['compName'] = decodedPoints[0].componentName if decodedPoints else 'unknown'
         self.data['splashHit'] = 'no-splash'
-        self.data['criticalHit'] = (maxHitEffectCode == 5)
+        # self.data['criticalHit'] = (maxHitEffectCode == 5)
         if damageFactor == 0:
             self.data['hitEffect'] = HIT_EFFECT_CODES[min(3, maxHitEffectCode)]
             self.data['isAlive'] = bool(vehicle.isCrewActive)
@@ -480,7 +501,7 @@ class Data(object):
 
     def showDamageFromExplosion(self, vehicle, attackerID, center, effectsIndex, damageFactor):
         self.data['splashHit'] = 'splash'
-        self.data['criticalHit'] = False
+        # self.data['criticalHit'] = False
         if damageFactor == 0:
             self.data['hitEffect'] = HIT_EFFECT_CODES[3]
             self.data['isAlive'] = bool(vehicle.isCrewActive)
@@ -491,6 +512,11 @@ class Data(object):
         if not self.data['isDamage']:
             self.updateData()
 
+    def showVehicleDamageInfo(self, player, vehicleID, damageIndex, extraIndex, entityID, equipmentID):
+        damageCode = DAMAGE_INFO_CODES[damageIndex]
+        if (damageCode in damageInfoCriticals) or (damageCode in damageInfoDestructions) or (damageCode in damageInfoTANKMAN):
+            self.data['criticalHit'] = True
+
     def onHealthChanged(self, vehicle, newHealth, attackerID, attackReasonID):
         if self.data['attackReasonID'] not in [24, 25]:
             self.data['attackReasonID'] = attackReasonID
@@ -499,7 +525,7 @@ class Data(object):
         self.data['hitEffect'] = HIT_EFFECT_CODES[4]
         if self.data['attackReasonID'] != 0:
             self.data['costShell'] = 'unknown'
-            self.data['criticalHit'] = False
+            # self.data['criticalHit'] = False
             self.data['shellKind'] = 'not_shell'
             self.data['splashHit'] = 'no-splash'
             self.data['reloadGun'] = 0.0
@@ -538,7 +564,7 @@ def getValueMacroes(section, value):
              'critical-hit': conf['criticalHit'].get('critical') if value['criticalHit'] else conf['criticalHit'].get('no-critical'),
              'type-shell': conf['typeShell'].get(value['shellKind'], 'unknown'),
              'c:type-shell': conf['c_typeShell'][value['shellKind']],
-             'c:hit-effects': conf['c_HitEffect'].get(value['hitEffect'], 'unknown'),
+             'c:hit-effects': conf['c_hitEffect'].get(value['hitEffect'], 'unknown'),
              'hit-effects': conf['hitEffect'].get(value['hitEffect'], 'unknown'),
              'number': value['number'],
              'dmg': value['damage'],
@@ -863,6 +889,12 @@ def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
                 as_event('ON_FIRE')
 
 
+@registerEvent(PlayerAvatar, 'showVehicleDamageInfo')
+def PlayerAvatar_showVehicleDamageInfo(self, vehicleID, damageIndex, extraIndex, entityID, equipmentID):
+    if (vehicleID == self.playerVehicleID) and config.get('damageLog/enabled'):
+        data.showVehicleDamageInfo(self, vehicleID, damageIndex, extraIndex, entityID, equipmentID)
+
+
 @registerEvent(Vehicle, 'onEnterWorld')
 def Vehicle_onEnterWorld(self, prereqs):
     if self.isPlayerVehicle and config.get('damageLog/enabled'):
@@ -891,7 +923,7 @@ def Vehicle_showDamageFromExplosion(self, attackerID, center, effectsIndex, dama
 
 @registerEvent(Vehicle, 'updateStunInfo')
 def Vehicle_updateStunInfo(self):
-    if self.isPlayerVehicle:
+    if self.isPlayerVehicle and config.get('damageLog/enabled'):
         stunDuration = self.stunInfo - BigWorld.serverTime() if self.stunInfo else None
         if stunDuration is not None:
             data.updateStunInfo(self, stunDuration)
