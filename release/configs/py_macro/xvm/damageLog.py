@@ -185,40 +185,37 @@ def formatMacro(macro, macroes):
     tempMacro = _macro
     if _macro in macroes:
         _macro = macroes[_macro]
-        if _macro is None:
-            _macro = ''
-        else:
-            if _operator:
-                if _rep and comparing(_macro, _operator, _math):
-                    _macro = _rep
-                elif not comparing(_macro, _operator, _math):
-                    _macro = _def
-            elif _rep and _macro:
+        if _operator:
+            if _rep and comparing(_macro, _operator, _math):
                 _macro = _rep
-            elif _def and not _macro:
+            elif not comparing(_macro, _operator, _math):
                 _macro = _def
-            if _macro == macroes[tempMacro]:
-                fm['flag'] = FLAG[fm['flag']]
-                fm['prec'] = ''
-                if _prec != '':
-                    if isinstance(_macro, int):
-                        _macro = int(_macro) + _prec
-                    elif isinstance(_macro, float):
-                        fm['prec'] = '.' + str(_prec)
-                    elif isinstance(_macro, basestring):
-                        u_macro = unicode(_macro, 'utf8')
-                        if len(u_macro) > _prec:
-                            if (_prec - len(unicode(fm['suf'], 'utf8'))) > 0:
-                                _macro = u_macro[:(_prec - len(fm['suf']))]
-                            else:
-                                _macro = u_macro[:_prec]
-                                fm['suf'] = ''
+        elif _rep and _macro:
+            _macro = _rep
+        elif _def and not _macro:
+            _macro = _def
+        if _macro == macroes[tempMacro]:
+            fm['flag'] = FLAG[fm['flag']]
+            fm['prec'] = ''
+            if _prec != '':
+                if isinstance(_macro, int):
+                    _macro = int(_macro) + _prec
+                elif isinstance(_macro, float):
+                    fm['prec'] = '.' + str(_prec)
+                elif isinstance(_macro, basestring):
+                    u_macro = unicode(_macro, 'utf8')
+                    if len(u_macro) > _prec:
+                        if (_prec - len(unicode(fm['suf'], 'utf8'))) > 0:
+                            _macro = u_macro[:(_prec - len(fm['suf']))]
                         else:
+                            _macro = u_macro[:_prec]
                             fm['suf'] = ''
-                if _macro is None:
-                    _macro = ''
-                else:
-                    _macro = '{0:{flag}{width}{prec}{type}}{suf}'.format(_macro, **fm)
+                    else:
+                        fm['suf'] = ''
+            if _macro is None:
+                _macro = ''
+            else:
+                _macro = '{0:{flag}{width}{prec}{type}}{suf}'.format(_macro, **fm)
         return str(_macro), False
     else:
         return macro, False
@@ -405,10 +402,8 @@ class Data(object):
             self.data['clanicon'] = None
             self.data['squadnum'] = None
             self.data['marksOnGun'] = None
-        if self.isReplay:
-            self.updateLabels()
-        else:
-            BigWorld.callback(0.03, self.updateLabels)
+        self.updateLabels()
+
 
     def typeShell(self, effectsIndex):
         self.data['costShell'] = 'unknown'
