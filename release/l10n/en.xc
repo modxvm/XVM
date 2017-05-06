@@ -143,7 +143,7 @@
     "pitchLimitsSide": "Elevation arc (side)",
     "pitchLimitsRear": "Elevation arc (rear)",
     "traverseLimits": "Gun traverse arc",
-    "terrainResistance": "Terrain resistance",
+    "terrainResistance": "Terrain resistance (hard/medium/soft)",
     "gravity": "Gravity",
     "shellSpeed": "Shell speed",
     "general": "General",
