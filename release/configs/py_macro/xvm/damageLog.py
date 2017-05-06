@@ -307,7 +307,7 @@ class Data(object):
                      'compName': 'unknown',
                      'splashHit': 'no-splash',
                      'criticalHit': False,
-                     'hitEffect': None,
+                     'hitEffect': 'unknown',
                      'damage': 0,
                      'dmgRatio': 0,
                      'oldHealth': 0,
@@ -394,10 +394,10 @@ class Data(object):
             self.data['squadnum'] = statXVM.squadnum if statXVM is not None else None
         else:
             self.data['teamDmg'] = 'unknown'
-            self.data['attackerVehicleType'] = None
-            self.data['shortUserString'] = None
-            self.data['name'] = None
-            self.data['clanAbbrev'] = None
+            self.data['attackerVehicleType'] = 'not_vehicle'
+            self.data['shortUserString'] = ''
+            self.data['name'] = ''
+            self.data['clanAbbrev'] = ''
             self.data['level'] = None
             self.data['clanicon'] = None
             self.data['squadnum'] = None
@@ -538,7 +538,7 @@ def getValueMacroes(section, value):
              'critical-hit': conf['criticalHit'].get('critical') if value['criticalHit'] else conf['criticalHit'].get('no-critical'),
              'type-shell': conf['typeShell'].get(value['shellKind'], 'unknown'),
              'c:type-shell': conf['c_typeShell'][value['shellKind']],
-             'c:hit-effects': conf['c_HitEffect'][value['hitEffect']],
+             'c:hit-effects': conf['c_HitEffect'].get(value['hitEffect'], 'unknown'),
              'hit-effects': conf['hitEffect'].get(value['hitEffect'], 'unknown'),
              'number': value['number'],
              'dmg': value['damage'],
