@@ -1,4 +1,8 @@
-﻿XVM-6.6.5:
+﻿XVM-6.6.6-dev:
+  [DAMAGE LOG]
+  * added macro {{crit-device}} and section "crit-device" 
+
+XVM-6.6.5:
   [GENERAL]
   * World of Tanks 9.18 micropatch
 

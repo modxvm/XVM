@@ -35,7 +35,6 @@
     "ramming": "ramming",
     "world_collision": "falling",
     "death_zone": "death zone",
-    "drowning": "drowning",
 
     "Hits": "Hits",
     "Total": "Total",
@@ -51,6 +50,24 @@
     "avgDamage": "Avg damage",
     "mainGun": "High caliber",
 
+    // Devices
+    "engine": "engine",
+    "ammo_bay": "ammo bay",
+    "fuel_tank": "fuel tank",
+    "radio": "radio",
+    "left_track": "left track",
+    "right_track": "right track",
+    "gun": "gun",
+    "turret_rotator": "turret rotator",
+    "surveing_device": "surveing device",
+    
+    // Tankmen
+    "commander": "commander",
+    "driver": "driver",
+    "radioman": "radioman",
+    "gunner": "gunner",
+    "loader": "loader",  
+    
     // DamageLog:
     "sec": "sec",
     "reloaded": "reloaded",
@@ -70,7 +87,6 @@
     "turret": "turret",
     "hull": "hull",
     "chassis": "chassis",
-    "gun": "gun",
 
     // BattleResults
     "Hit percent": "Hit percent",

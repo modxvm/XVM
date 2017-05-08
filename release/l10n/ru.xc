@@ -35,7 +35,6 @@
     "ramming": "таран",
     "world_collision": "падение",
     "death_zone": "death zone",
-    "drowning": "drowning",
 
     "Hits": "Пробитий",
     "Total": "Всего",
@@ -51,6 +50,24 @@
     "avgDamage": "Средний урон",
     "mainGun": "Основной калибр",
 
+    // Devices
+    "engine": "двигатель",
+    "ammo_bay": "боеукладка",
+    "fuel_tank": "топливный бак",
+    "radio": "радиостанция",
+    "left_track": "левая гусеница",
+    "right_track": "правая гусеница",
+    "gun": "орудие",
+    "turret_rotator": "вращение башни",
+    "surveing_device": "приборы наблюдения",
+    
+    // Tankmen
+    "commander": "командир экипажа",
+    "driver": "механик-водитель",
+    "radioman": "радист",
+    "gunner": "наводчик",
+    "loader": "заряжающий",    
+    
     // DamageLog:
     "sec": "сек",
     "reloaded": "перезарядился",
@@ -70,7 +87,6 @@
     "turret": "башня",
     "hull": "корпус",
     "chassis": "шасси",
-    "gun": "орудие",
 
     // BattleResults
     "Hit percent": "Процент попаданий",

@@ -62,7 +62,7 @@ MACROS_NAME = ['number', 'critical-hit', 'vehicle', 'name', 'vtype', 'c:costShel
                'level', 'clanicon', 'clannb', 'marksOnGun', 'squad-num', 'dmg-ratio', 'hit-effects', 'c:type-shell',
                'splash-hit', 'team-dmg', 'my-alive', 'gun-caliber', 'wn8', 'xwn8', 'wn6', 'xwn6', 'eff', 'xeff', 'wgr',
                'xwgr', 'xte', 'c:wn8', 'c:xwn8', 'c:wn6', 'c:xwn6', 'c:eff', 'c:xeff', 'c:wgr', 'c:xwgr', 'c:xte',
-               'fire-duration', 'diff-masses', 'nation', 'my-blownup', 'r', 'c:r', 'stun-duration']
+               'fire-duration', 'diff-masses', 'nation', 'my-blownup', 'r', 'c:r', 'stun-duration', 'crit-device']
 
 RATINGS = {
     'xvm_wgr': {'name': 'xwgr', 'size': 2},
@@ -76,6 +76,24 @@ RATINGS = {
     'basic_eff': {'name': 'eff', 'size': 4},
     'basic_xte': {'name': 'xte', 'size': 2}
 }
+
+DEVICES_TANKMAN = {61: 'engine',
+                   62: 'ammo_bay',
+                   63: 'fuel_tank',
+                   64: 'radio',
+                   65: 'left_track',
+                   66: 'right_track',
+                   67: 'gun',
+                   68: 'turret_rotator',
+                   69: 'surveing_device',
+                   70: 'commander',
+                   71: 'driver',
+                   72: 'radioman',
+                   73: 'radioman',
+                   74: 'gunner',
+                   75: 'gunner',
+                   76: 'loader',
+                   77: 'loader'}
 
 SECTION_LOG = 'damageLog/log/'
 SECTION_LOG_ALT = 'damageLog/logAlt/'
@@ -129,7 +147,8 @@ def readyConfig(section):
                 'hitEffect': keyLower(config.get(section + 'hit-effects')),
                 'c_hitEffect': keyLower(config.get(section + 'c:hit-effects')),
                 'typeShell': keyLower(config.get(section + 'type-shell')),
-                'c_typeShell': keyLower(config.get(section + 'c:type-shell'))
+                'c_typeShell': keyLower(config.get(section + 'c:type-shell')),
+                'critDevice': keyLower(config.get(section + 'crit-device'))
                 }
     else:
         return damageLogConfig[section]
@@ -350,7 +369,8 @@ class Data(object):
                      'nation': None,
                      'blownup': False,
                      'stun-duration': None,
-                     'shells_stunning': False
+                     'shells_stunning': False,
+                     'critDevice': 'no-critical'
                      }
 
     def updateData(self):
@@ -487,6 +507,7 @@ class Data(object):
         _lastHit.output()
         _logBackground.output()
         _logAltBackground.output()
+        self.data['critDevice'] = 'no-critical'
         self.data['criticalHit'] = False
 
     def showDamageFromShot(self, vehicle, attackerID, points, effectsIndex, damageFactor):
@@ -519,6 +540,8 @@ class Data(object):
             self.data['attackerID'] = entityID
             self.updateData()
         elif (damageCode in damageInfoCriticals) or (damageCode in damageInfoDestructions) or (damageCode in damageInfoTANKMAN):
+            if extraIndex in DEVICES_TANKMAN:
+                self.data['critDevice'] = DEVICES_TANKMAN[extraIndex]
             self.data['criticalHit'] = True
 
     def onHealthChanged(self, vehicle, newHealth, attackerID, attackReasonID):
@@ -570,6 +593,7 @@ def getValueMacroes(section, value):
              'c:type-shell': conf['c_typeShell'][value['shellKind']],
              'c:hit-effects': conf['c_hitEffect'].get(value['hitEffect'], 'unknown'),
              'hit-effects': conf['hitEffect'].get(value['hitEffect'], 'unknown'),
+             'crit-device': conf['critDevice'].get(value.get('critDevice', '')),
              'number': value['number'],
              'dmg': value['damage'],
              'dmg-ratio': value['dmgRatio'],

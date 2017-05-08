@@ -37,6 +37,7 @@
     {{nation}}            - vehicle nation / нация техники
     {{my-blownup}}        - value 'blownup' if own vehicle's ammunition have been blown up, '' otherwise  / возвращает 'blownup', если взорван боекомплект техники игрока, иначе пусто
     {{stun-duration}}     - stun duration / продолжительность оглушения
+    {{crit-device}}       - TO DO / поврежденный модуль или контуженный члена экипажа
 */
 
 {
@@ -159,6 +160,25 @@
         "critical": "*",  // critical hit / попадание с критическим повреждением
         "no-critical": "" // without critical hit / попадание без критического повреждения
       },
+      // TO DO
+      // Обозначение поврежденного модуля или контуженного члена экипажа (макрос {{crit-device}}).
+      "crit-device": {
+        "engine": "{{l10n:engine}}",
+        "ammo_bay": "{{l10n:ammo_bay}}",
+        "fuel_tank": "{{l10n:fuel_tank}}",
+        "radio": "{{l10n:radio}}",
+        "left_track": "{{l10n:left_track}}",
+        "right_track": "{{l10n:right_track}}",
+        "gun": "{{l10n:gun}}",
+        "turret_rotator": "{{l10n:turret_rotator}}",
+        "surveing_device": "{{l10n:surveing_device}}",
+        "commander": "{{l10n:commander}}",
+        "driver": "{{l10n:driver}}",
+        "radioman": "{{l10n:radioman}}",
+        "gunner": "{{l10n:gunner}}",
+        "loader": "{{l10n:loader}}",
+        "no-critical": ""
+      },
       // Name part of vehicle (macro {{comp-name}}).
       // Название частей техники (макрос {{comp-name}}).
       "comp-name":{
@@ -225,7 +245,7 @@
       },
       // Damage log format.
       // Формат лога повреждений.
-      "formatHistory": "<textformat tabstops='[30,135,170,185]'><font face='mono' size='12'>{{number%3d~.}}</font><tab><font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab><font color='{{c:vtype}}'>{{vtype}}</font><tab><font color='{{c:team-dmg}}'>{{vehicle}}</font></textformat>"
+      "formatHistory": "<textformat tabstops='[30,130,165,180]'><font face='mono' size='12'>{{number%3d~.}}</font><tab><font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab><font color='{{c:vtype}}'>{{vtype}}</font><tab><font color='{{c:team-dmg}}'>{{vehicle}}</font></textformat>"
     },
     // TODO.
     // Подложка лога полученного урона.
@@ -244,7 +264,7 @@
       "showHitNoDamage": true,
       // Damage log format.
       // Формат лога повреждений.
-      "formatHistory": "<textformat tabstops='[30,135,170]'><font face='mono' size='12'>{{number%3d~.}}</font><tab><font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab><font color='{{c:team-dmg}}'>{{name}}</font></textformat>"
+      "formatHistory": "<textformat tabstops='[30,130,165]'><font face='mono' size='12'>{{number%3d~.}}</font><tab><font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab><font color='{{c:team-dmg}}'>{{name}}</font></textformat>"
     },
     // TODO.
     // Подложка альтернативного лога полученного урона.
