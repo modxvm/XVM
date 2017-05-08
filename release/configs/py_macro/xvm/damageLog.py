@@ -335,7 +335,7 @@ class Data(object):
                      'costShell': 'unknown',
                      'shellKind': 'not_shell',
                      'teamDmg': 'unknown',
-                     'attackerVehicleType': '',
+                     'attackerVehicleType': 'not_vehicle',
                      'shortUserString': '',
                      'name': '',
                      'clanAbbrev': '',
@@ -381,7 +381,7 @@ class Data(object):
                     elif self.data['diff-masses'] is not None:
                         self.data['diff-masses'] = None
                 else:
-                    self.data['attackerVehicleType'] = None
+                    self.data['attackerVehicleType'] = 'not_vehicle'
                     self.data['shortUserString'] = None
                     self.data['level'] = None
                     self.data['nation'] = None
@@ -433,9 +433,9 @@ class Data(object):
         player = BigWorld.player()
         attacker = player.arena.vehicles.get(self.data['attackerID'])
         if (attacker is None) or not attacker['vehicleType']:
-            self.data['shellKind'] = None
+            self.data['shellKind'] = 'not_shell'
             self.data['caliber'] = None
-            self.data['costShell'] = None
+            self.data['costShell'] = 'unknown'
             return
         for shell in attacker['vehicleType'].gun['shots']:
             _shell = shell['shell']
@@ -553,16 +553,16 @@ def getValueMacroes(section, value):
     conf = readyConfig(section)
     macro = {'c:team-dmg': conf['c_teamDmg'][value['teamDmg']],
              'team-dmg': conf['teamDmg'].get(value['teamDmg'], ''),
-             'vtype': conf['vehicleClass'].get(value['attackerVehicleType'], 'not_vehicle'),
+             'vtype': conf['vehicleClass'][value['attackerVehicleType']],
              'c:costShell': conf['c_Shell'][value['costShell']],
              'costShell': conf['costShell'].get(value['costShell'], 'unknown'),
              'c:dmg-kind': conf['c_typeHit'][ATTACK_REASONS[value['attackReasonID']]],
              'dmg-kind': conf['typeHit'].get(ATTACK_REASONS[value['attackReasonID']], 'reason: %s' % value['attackReasonID']),
-             'c:vtype': conf['c_VehicleClass'].get(value['attackerVehicleType'], 'not_vehicle'),
+             'c:vtype': conf['c_VehicleClass'][value['attackerVehicleType']],
              'comp-name': conf['compNames'].get(value['compName'], 'unknown'),
              'splash-hit': conf['splashHit'].get(value['splashHit'], 'unknown'),
              'critical-hit': conf['criticalHit'].get('critical') if value['criticalHit'] else conf['criticalHit'].get('no-critical'),
-             'type-shell': conf['typeShell'].get(value['shellKind'], 'unknown'),
+             'type-shell': conf['typeShell'][value['shellKind']],
              'c:type-shell': conf['c_typeShell'][value['shellKind']],
              'c:hit-effects': conf['c_hitEffect'].get(value['hitEffect'], 'unknown'),
              'hit-effects': conf['hitEffect'].get(value['hitEffect'], 'unknown'),
