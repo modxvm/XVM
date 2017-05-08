@@ -62,16 +62,16 @@
       // Kind of the received damage (macro {{dmg-kind}}).
       // Вид полученного урона (макрос {{dmg-kind}}).
       "dmg-kind": {
-        "shot": "{{type-shell}}",                            // shot / попадание
-        "fire": "<font face='xvm'>&#x51;</font>",            // fire / пожар
-        "ramming": "<font face='xvm'>&#x52;</font>",         // ramming / таран
-        "world_collision": "<font face='xvm'>&#x53;</font>", // world collision / столкновение с объектами, падение
-        "drowning": "Dr",                                    // drowning / утопление
-        "overturn": "<font face='xvm'>&#x112;</font>",       // overturn / опрокидывание
-        "death_zone": "DZ",                                  // death zone / смертельная зона
-        "gas_attack": "GA",                                  // gas attack / газовая атака
-        "art_attack": "<font face='xvm'>&#x110;</font>",     // art attack / артиллерийская поддержка
-        "air_strike": "<font face='xvm'>&#x111;</font>"      // air strike / поддержка авиации
+        "shot": "{{hit-effects}}{{critical-hit}}{{splash-hit}}<tab>{{type-shell}}",                            // shot / попадание
+        "fire": "{{hit-effects}}{{critical-hit}}<tab><font face='xvm'>&#x51;</font>",                          // fire / пожар
+        "ramming": "{{hit-effects}}{{critical-hit}}<tab><font face='xvm'>&#x52;</font>",                       // ramming / таран
+        "world_collision": "{{hit-effects}}{{critical-hit}}<tab><font face='xvm'>&#x53;</font>",               // world collision / столкновение с объектами, падение
+        "drowning": "утопление<tab><font face='xvm'>&#x53;</font>",                                            // drowning / утопление
+        "overturn": "{{hit-effects}}<font face='xvm'>&#x112;</font>",                                          // overturn / опрокидывание
+        "death_zone": "DZ",                                                                                    // death zone / смертельная зона
+        "gas_attack": "GA",                                                                                    // gas attack / газовая атака
+        "art_attack": "{{hit-effects}}{{critical-hit}}{{splash-hit}}<tab><font face='xvm'>&#x110;</font>",     // art attack / артиллерийская поддержка
+        "air_strike": "{{hit-effects}}{{critical-hit}}{{splash-hit}}<tab><font face='xvm'>&#x111;</font>"      // air strike / поддержка авиации
       },
       // Color depending on the kind of damage (macro {{c:dmg-kind}}).
       // Цвет в зависимости от вида полученного урона (макрос {{c:dmg-kind}}).
@@ -225,7 +225,7 @@
       },
       // Damage log format.
       // Формат лога повреждений.
-      "formatHistory": "<textformat tabstops='[30,135,170,185]'><font face='mono' size='12'>{{number%3d~.}}</font><tab><font color='{{c:dmg-kind}}'>{{hit-effects}}{{critical-hit}}{{splash-hit}}<tab>{{dmg-kind}}</font><tab><font color='{{c:vtype}}'>{{vtype}}</font><tab><font color='{{c:team-dmg}}'>{{vehicle}}</font></textformat>"
+      "formatHistory": "<textformat tabstops='[30,135,170,185]'><font face='mono' size='12'>{{number%3d~.}}</font><tab><font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab><font color='{{c:vtype}}'>{{vtype}}</font><tab><font color='{{c:team-dmg}}'>{{vehicle}}</font></textformat>"
     },
     // TODO.
     // Подложка лога полученного урона.
@@ -244,7 +244,7 @@
       "showHitNoDamage": true,
       // Damage log format.
       // Формат лога повреждений.
-      "formatHistory": "<textformat tabstops='[30,135,170]'><font face='mono' size='12'>{{number%3d~.}}</font><tab><font color='{{c:dmg-kind}}'>{{hit-effects}}{{critical-hit}}{{splash-hit}}<tab>{{dmg-kind}}</font><tab><font color='{{c:team-dmg}}'>{{name}}</font></textformat>"
+      "formatHistory": "<textformat tabstops='[30,135,170]'><font face='mono' size='12'>{{number%3d~.}}</font><tab><font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab><font color='{{c:team-dmg}}'>{{name}}</font></textformat>"
     },
     // TODO.
     // Подложка альтернативного лога полученного урона.
@@ -278,9 +278,23 @@
         "strength": 6,
         "color": "{{dmg=0?#000000|#770000}}"
       },
+      // Kind of the received damage (macro {{dmg-kind}}).
+      // Вид полученного урона (макрос {{dmg-kind}}).
+      "dmg-kind": {
+        "shot": "{{hit-effects}}",               // shot / попадание
+        "fire": "{{hit-effects}}",               // fire / пожар
+        "ramming": "{{hit-effects}}",            // ramming / таран
+        "world_collision": "{{hit-effects}}",    // world collision / столкновение с объектами, падение
+        "drowning": "утопление",                 // drowning / утопление
+        "overturn": "{{hit-effects}}",           // overturn / опрокидывание
+        "death_zone": "DZ",                      // death zone / смертельная зона
+        "gas_attack": "GA",                      // gas attack / газовая атака
+        "art_attack": "{{hit-effects}}",         // art attack / артиллерийская поддержка
+        "air_strike": "{{hit-effects}}"          // air strike / поддержка авиации
+      },	  
       // Last damage format.
       // Формат последнего урона.
-      "formatLastHit": "<font size='36' color='{{c:dmg-kind}}'>{{hit-effects}}</font>"
+      "formatLastHit": "<font size='36' color='{{c:dmg-kind}}'>{{dmg-kind}}</font>"
     }
   }
 }

@@ -514,7 +514,11 @@ class Data(object):
 
     def showVehicleDamageInfo(self, player, vehicleID, damageIndex, extraIndex, entityID, equipmentID):
         damageCode = DAMAGE_INFO_CODES[damageIndex]
-        if (damageCode in damageInfoCriticals) or (damageCode in damageInfoDestructions) or (damageCode in damageInfoTANKMAN):
+        if damageCode == 'DEATH_FROM_DROWNING':
+            self.data['attackReasonID'] = 5
+            self.data['attackerID'] = entityID
+            self.updateData()
+        elif (damageCode in damageInfoCriticals) or (damageCode in damageInfoDestructions) or (damageCode in damageInfoTANKMAN):
             self.data['criticalHit'] = True
 
     def onHealthChanged(self, vehicle, newHealth, attackerID, attackReasonID):
@@ -703,6 +707,8 @@ class DamageLog(_Base):
                     if ('time' in key) and ('damage' in key) and ('numberLine' in key) and ((BigWorld.serverTime() - key['time']) < 1.0):
                         key['time'] = BigWorld.serverTime()
                         key['damage'] += data.data['damage']
+                        key['criticalHit'] = (key['criticalHit'] or data.data['criticalHit'])
+                        self.dataLog['criticalHit'] = key['criticalHit']
                         self.dataLog['damage'] = key['damage']
                         self.dataLog['dmgRatio'] = self.dataLog['damage'] * 100 // data.data['maxHealth']
                         self.dataLog['number'] = len(self.listLog)
@@ -719,12 +725,14 @@ class DamageLog(_Base):
                     else:
                         self.dictVehicle[attackerID][attackReasonID] = {'time': BigWorld.serverTime(),
                                                                         'damage': data.data['damage'],
+                                                                        'criticalHit': data.data['criticalHit'],
                                                                         'numberLine': 0,
                                                                         'beginFire': beginFire if attackReasonID == 1 else None}
                         self.addLine(attackerID, attackReasonID)
                 else:
                     self.dictVehicle[attackerID][attackReasonID] = {'time': BigWorld.serverTime(),
                                                                     'damage': data.data['damage'],
+                                                                    'criticalHit': data.data['criticalHit'],
                                                                     'numberLine': 0,
                                                                     'beginFire': beginFire if attackReasonID == 1 else None}
                     self.addLine(attackerID, attackReasonID)
@@ -732,6 +740,7 @@ class DamageLog(_Base):
                 self.dictVehicle[attackerID] = {}
                 self.dictVehicle[attackerID][attackReasonID] = {'time': BigWorld.serverTime(),
                                                                 'damage': data.data['damage'],
+                                                                'criticalHit': data.data['criticalHit'],
                                                                 'numberLine': 0,
                                                                 'beginFire': beginFire if attackReasonID == 1 else None}
                 self.addLine(attackerID, attackReasonID)
