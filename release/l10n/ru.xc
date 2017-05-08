@@ -54,7 +54,7 @@
     // DamageLog:
     "sec": "сек",
     "reloaded": "перезарядился",
-    "drowning": "утопление",
+    "drowning": "затоплен",
     // Shell kind (macro {{type-shell}})
     "armor_piercing": "ББ",
     "high_explosive": "ОФ",
