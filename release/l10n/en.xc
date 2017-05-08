@@ -54,6 +54,7 @@
     // DamageLog:
     "sec": "sec",
     "reloaded": "reloaded",
+    "drowning": "drowning",
     // Shell kind (macro {{type-shell}})
     "armor_piercing": "AP",
     "high_explosive": "HE",

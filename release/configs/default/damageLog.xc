@@ -66,7 +66,7 @@
         "fire": "{{hit-effects}}{{critical-hit}}<tab><font face='xvm'>&#x51;</font>",                          // fire / пожар
         "ramming": "{{hit-effects}}{{critical-hit}}<tab><font face='xvm'>&#x52;</font>",                       // ramming / таран
         "world_collision": "{{hit-effects}}{{critical-hit}}<tab><font face='xvm'>&#x53;</font>",               // world collision / столкновение с объектами, падение
-        "drowning": "утопление<tab><font face='xvm'>&#x53;</font>",                                            // drowning / утопление
+        "drowning": "{{l10n:drowning}}<tab><font face='xvm'>&#x119;</font>",                                   // drowning / утопление
         "overturn": "{{hit-effects}}<font face='xvm'>&#x112;</font>",                                          // overturn / опрокидывание
         "death_zone": "DZ",                                                                                    // death zone / смертельная зона
         "gas_attack": "GA",                                                                                    // gas attack / газовая атака
@@ -285,7 +285,7 @@
         "fire": "{{hit-effects}}",               // fire / пожар
         "ramming": "{{hit-effects}}",            // ramming / таран
         "world_collision": "{{hit-effects}}",    // world collision / столкновение с объектами, падение
-        "drowning": "утопление",                 // drowning / утопление
+        "drowning": "{{l10n:drowning}}",         // drowning / утопление
         "overturn": "{{hit-effects}}",           // overturn / опрокидывание
         "death_zone": "DZ",                      // death zone / смертельная зона
         "gas_attack": "GA",                      // gas attack / газовая атака
