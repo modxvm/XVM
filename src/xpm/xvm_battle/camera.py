@@ -75,7 +75,9 @@ def _ArcadeCamera_create(base, self, pivotPos, onChangeControlMode = None, postm
 
         value = c['distRange']
         if value is not None:
-            cfg['distRange'] = MinMax(float(value[0]), float(value[1]))
+            defMin = 2
+            defMax = 25
+            cfg['distRange'] = MinMax(float(value[0]), float(value[1])) if value[0] != value[1] else MinMax(defMin, defMax)
 
         value = c['startDist']
         if value is not None:
