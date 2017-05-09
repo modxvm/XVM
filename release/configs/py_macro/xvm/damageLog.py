@@ -540,6 +540,16 @@ class Data(object):
         if damageCode == 'DEATH_FROM_DROWNING':
             self.data['attackReasonID'] = 5
             self.data['attackerID'] = entityID
+            self.data['isAlive'] = False
+            self.data['hitEffect'] = 'unknown'
+            self.data['damage'] = 0
+            self.data['costShell'] = 'unknown'
+            self.data['criticalHit'] = False
+            self.data['shellKind'] = 'not_shell'
+            self.data['splashHit'] = 'no-splash'
+            self.data['reloadGun'] = 0.0
+            self.data['stun-duration'] = None
+            self.data['compName'] = 'unknown'
             self.updateData()
         elif (damageCode in damageInfoCriticals) or (damageCode in damageInfoDestructions) or (damageCode in damageInfoTANKMAN):
             if extraIndex in DEVICES_TANKMAN:
