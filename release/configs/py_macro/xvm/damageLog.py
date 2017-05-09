@@ -509,6 +509,8 @@ class Data(object):
         _logAltBackground.output()
         self.data['critDevice'] = 'no-critical'
         self.data['criticalHit'] = False
+        self.data['isDamage'] = False
+        self.data['hitEffect'] = 'unknown'
 
     def showDamageFromShot(self, vehicle, attackerID, points, effectsIndex, damageFactor):
         maxHitEffectCode, decodedPoints = DamageFromShotDecoder.decodeHitPoints(points, vehicle.typeDescriptor)
@@ -530,7 +532,7 @@ class Data(object):
 
     def updateStunInfo(self, vehicle, stunDuration):
         self.data['stun-duration'] = stunDuration
-        if not self.data['isDamage']:
+        if (not self.data['isDamage']) and (self.data['hitEffect'] == 'armor_pierced'):
             self.updateData()
 
     def showVehicleDamageInfo(self, player, vehicleID, damageIndex, extraIndex, entityID, equipmentID):
