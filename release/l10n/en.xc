@@ -59,7 +59,7 @@
     "right_track": "right track",
     "gun": "gun",
     "turret_rotator": "turret rotator",
-    "surveing_device": "surveing device",
+    "surveying_device": "surveying device",
     
     // Tankmen
     "commander": "commander",

@@ -171,7 +171,7 @@
         "right_track": "{{l10n:right_track}}",
         "gun": "{{l10n:gun}}",
         "turret_rotator": "{{l10n:turret_rotator}}",
-        "surveing_device": "{{l10n:surveing_device}}",
+        "surveying_device": "{{l10n:surveying_device}}",
         "commander": "{{l10n:commander}}",
         "driver": "{{l10n:driver}}",
         "radioman": "{{l10n:radioman}}",

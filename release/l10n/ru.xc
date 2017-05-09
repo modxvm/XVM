@@ -59,7 +59,7 @@
     "right_track": "правая гусеница",
     "gun": "орудие",
     "turret_rotator": "вращение башни",
-    "surveing_device": "приборы наблюдения",
+    "surveying_device": "приборы наблюдения",
     
     // Tankmen
     "commander": "командир экипажа",
