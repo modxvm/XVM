@@ -9,7 +9,6 @@ import Math
 
 import BigWorld
 from Avatar import PlayerAvatar
-from AvatarInputHandler.control_modes import ArcadeControlMode, SniperControlMode
 from AvatarInputHandler.DynamicCameras.ArcadeCamera import ArcadeCamera, MinMax
 from AvatarInputHandler.DynamicCameras.SniperCamera import SniperCamera
 from AvatarInputHandler.DynamicCameras.StrategicCamera import StrategicCamera
@@ -17,6 +16,8 @@ from helpers import dependency
 from skeletons.gui.battle_session import IBattleSessionProvider
 from gui.battle_control.battle_constants import CROSSHAIR_VIEW_ID
 from gui.Scaleform.daapi.view.battle.shared.crosshair.container import CrosshairPanelContainer
+from AvatarInputHandler.control_modes import SniperControlMode
+from helpers.EffectsList import _FlashBangEffectDesc
 
 from xfw import *
 
@@ -192,6 +193,12 @@ def setupBinoculars(base, self, isCoatedOptics):
     if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/noBinoculars'):
         return
     base(self, isCoatedOptics)
+
+@overrideMethod(_FlashBangEffectDesc, 'create')
+def create(base, self, model, list, args):
+    if config.get('battle/camera/enabled') and config.get('battle/camera/noFlashBang'):
+        return
+    base(self, model, list, args)
 
 
 # PRIVATE

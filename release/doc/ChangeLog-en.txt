@@ -1,6 +1,9 @@
 ﻿XVM-6.6.6-dev:
   [DAMAGE LOG]
-  * added macro {{crit-device}} and section "crit-device" 
+  * added macro {{crit-device}} and section "crit-device"
+
+  [CAMERA]
+  * new parameter: "camera"/"noFlashBang" allow to disable red flash when enemy hit your tank
 
 XVM-6.6.5:
   [GENERAL]

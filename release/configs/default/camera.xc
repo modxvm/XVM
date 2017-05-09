@@ -7,6 +7,9 @@
     // false - disable camera settings.
     // false - отключить настройки камеры.
     "enabled": false,
+    // true - disable red flash when enemy hit your tank.
+    // true - отключить красную вспышку когда враг попадает по вам.
+    "noFlashBang": false,
     // Arcade mode
     // Аркадный режим
     "arcade": {
