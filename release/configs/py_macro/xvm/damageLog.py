@@ -103,23 +103,26 @@ SECTION_LASTHIT = 'damageLog/lastHit/'
 SECTIONS = (SECTION_LOG, SECTION_LOG_ALT, SECTION_LOG_BACKGROUND, SECTION_LOG_ALT_BACKGROUND, SECTION_LASTHIT)
 
 damageInfoCriticals = ('DEVICE_CRITICAL',
-                         'DEVICE_CRITICAL_AT_SHOT',
-                         'DEVICE_CRITICAL_AT_RAMMING',
-                         'DEVICE_CRITICAL_AT_FIRE',
-                         'DEVICE_CRITICAL_AT_WORLD_COLLISION',
-                         'DEVICE_CRITICAL_AT_DROWNING',
-                         'ENGINE_CRITICAL_AT_UNLIMITED_RPM')
+                       'DEVICE_CRITICAL_AT_SHOT',
+                       'DEVICE_CRITICAL_AT_RAMMING',
+                       'DEVICE_CRITICAL_AT_FIRE',
+                       'DEVICE_CRITICAL_AT_WORLD_COLLISION',
+                       'DEVICE_CRITICAL_AT_DROWNING',
+                       'ENGINE_CRITICAL_AT_UNLIMITED_RPM'
+                       )
 damageInfoDestructions = ('DEVICE_DESTROYED',
-                            'DEVICE_DESTROYED_AT_SHOT',
-                            'DEVICE_DESTROYED_AT_RAMMING',
-                            'DEVICE_DESTROYED_AT_FIRE',
-                            'DEVICE_DESTROYED_AT_WORLD_COLLISION',
-                            'DEVICE_DESTROYED_AT_DROWNING')
+                          'DEVICE_DESTROYED_AT_SHOT',
+                          'DEVICE_DESTROYED_AT_RAMMING',
+                          'DEVICE_DESTROYED_AT_FIRE',
+                          'DEVICE_DESTROYED_AT_WORLD_COLLISION',
+                          'DEVICE_DESTROYED_AT_DROWNING',
+                          'ENGINE_DESTROYED_AT_UNLIMITED_RPM'
+                          )
 damageInfoTANKMAN = ('TANKMAN_HIT',
-                       'TANKMAN_HIT_AT_SHOT',
-                       'TANKMAN_HIT_AT_WORLD_COLLISION',
-                       'TANKMAN_HIT_AT_DROWNING',
-                       'ENGINE_DESTROYED_AT_UNLIMITED_RPM')
+                     'TANKMAN_HIT_AT_SHOT',
+                     'TANKMAN_HIT_AT_WORLD_COLLISION',
+                     'TANKMAN_HIT_AT_DROWNING'
+                     )
 
 def keyLower(_dict):
     if _dict is not None:
@@ -536,20 +539,41 @@ class Data(object):
             self.updateData()
 
     def showVehicleDamageInfo(self, player, vehicleID, damageIndex, extraIndex, entityID, equipmentID):
+        dataUpdate = {
+            'attackerID': entityID,
+            'costShell': 'unknown',
+            'hitEffect': 'unknown',
+            'damage': 0,
+            'shellKind': 'not_shell',
+            'splashHit': 'no-splash',
+            'reloadGun': 0.0,
+            'stun-duration': None,
+            'compName': 'unknown'
+        }
         damageCode = DAMAGE_INFO_CODES[damageIndex]
-        if damageCode == 'DEATH_FROM_DROWNING':
+        if damageCode in ('DEVICE_CRITICAL_AT_RAMMING', 'DEVICE_DESTROYED_AT_RAMMING'):
+            self.data['criticalHit'] = True
+            if extraIndex in DEVICES_TANKMAN:
+                self.data['critDevice'] = DEVICES_TANKMAN[extraIndex]
+                vehicle = BigWorld.entities.get(player.playerVehicleID)
+                if self.data['oldHealth'] == vehicle.health:
+                    self.data.update(dataUpdate)
+                    self.data['attackReasonID'] = 2
+                    self.updateData()
+        elif damageCode in ('DEVICE_CRITICAL_AT_WORLD_COLLISION', 'DEVICE_DESTROYED_AT_WORLD_COLLISION', 'TANKMAN_HIT_AT_WORLD_COLLISION'):
+            self.data['criticalHit'] = True
+            if extraIndex in DEVICES_TANKMAN:
+                self.data['critDevice'] = DEVICES_TANKMAN[extraIndex]
+                vehicle = BigWorld.entities.get(player.playerVehicleID)
+                if self.data['oldHealth'] == vehicle.health:
+                    self.data.update(dataUpdate)
+                    self.data['attackReasonID'] = 3
+                    self.updateData()
+        elif damageCode == 'DEATH_FROM_DROWNING':
+            self.data.update(dataUpdate)
             self.data['attackReasonID'] = 5
-            self.data['attackerID'] = entityID
             self.data['isAlive'] = False
-            self.data['hitEffect'] = 'unknown'
-            self.data['damage'] = 0
-            self.data['costShell'] = 'unknown'
             self.data['criticalHit'] = False
-            self.data['shellKind'] = 'not_shell'
-            self.data['splashHit'] = 'no-splash'
-            self.data['reloadGun'] = 0.0
-            self.data['stun-duration'] = None
-            self.data['compName'] = 'unknown'
             self.updateData()
         elif (damageCode in damageInfoCriticals) or (damageCode in damageInfoDestructions) or (damageCode in damageInfoTANKMAN):
             if extraIndex in DEVICES_TANKMAN:
@@ -744,6 +768,8 @@ class DamageLog(_Base):
                         key['time'] = BigWorld.serverTime()
                         key['damage'] += data.data['damage']
                         key['criticalHit'] = (key['criticalHit'] or data.data['criticalHit'])
+                        if key['damage'] > 0:
+                            self.dataLog['hitEffect'] = 'armor_pierced'
                         self.dataLog['criticalHit'] = key['criticalHit']
                         self.dataLog['damage'] = key['damage']
                         self.dataLog['dmgRatio'] = self.dataLog['damage'] * 100 // data.data['maxHealth']
