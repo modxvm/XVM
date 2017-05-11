@@ -77,15 +77,15 @@ RATINGS = {
     'basic_xte': {'name': 'xte', 'size': 2}
 }
 
-DEVICES_TANKMAN = {61: 'engine',
-                   62: 'ammo_bay',
-                   63: 'fuel_tank',
-                   64: 'radio',
-                   65: 'left_track',
-                   66: 'right_track',
-                   67: 'gun',
-                   68: 'turret_rotator',
-                   69: 'surveying_device',
+DEVICES_TANKMAN = {61: 'engine_crit',
+                   62: 'ammo_bay_crit',
+                   63: 'fuel_tank_crit',
+                   64: 'radio_crit',
+                   65: 'left_track_crit',
+                   66: 'right_track_crit',
+                   67: 'gun_crit',
+                   68: 'turret_rotator_crit',
+                   69: 'surveying_device_crit',
                    70: 'commander',
                    71: 'driver',
                    72: 'radioman',
@@ -93,7 +93,17 @@ DEVICES_TANKMAN = {61: 'engine',
                    74: 'gunner',
                    75: 'gunner',
                    76: 'loader',
-                   77: 'loader'}
+                   77: 'loader',
+                   161: 'engine_destr',
+                   162: 'ammo_bay_destr',
+                   163: 'fuel_tank_destr',
+                   164: 'radio_destr',
+                   165: 'left_track_destr',
+                   166: 'right_track_destr',
+                   167: 'gun_destr',
+                   168: 'turret_rotator_destr',
+                   169: 'surveying_device_destr'
+                   }
 
 SECTION_LOG = 'damageLog/log/'
 SECTION_LOG_ALT = 'damageLog/logAlt/'
@@ -554,7 +564,7 @@ class Data(object):
         if damageCode in ('DEVICE_CRITICAL_AT_RAMMING', 'DEVICE_DESTROYED_AT_RAMMING'):
             self.data['criticalHit'] = True
             if extraIndex in DEVICES_TANKMAN:
-                self.data['critDevice'] = DEVICES_TANKMAN[extraIndex]
+                self.data['critDevice'] = DEVICES_TANKMAN[extraIndex] if damageCode == 'DEVICE_CRITICAL_AT_RAMMING' else DEVICES_TANKMAN[extraIndex + 100]
                 vehicle = BigWorld.entities.get(player.playerVehicleID)
                 if self.data['oldHealth'] == vehicle.health:
                     self.data.update(dataUpdate)
@@ -563,7 +573,7 @@ class Data(object):
         elif damageCode in ('DEVICE_CRITICAL_AT_WORLD_COLLISION', 'DEVICE_DESTROYED_AT_WORLD_COLLISION', 'TANKMAN_HIT_AT_WORLD_COLLISION'):
             self.data['criticalHit'] = True
             if extraIndex in DEVICES_TANKMAN:
-                self.data['critDevice'] = DEVICES_TANKMAN[extraIndex]
+                self.data['critDevice'] = DEVICES_TANKMAN[extraIndex + 100] if damageCode == 'DEVICE_DESTROYED_AT_WORLD_COLLISION' else DEVICES_TANKMAN[extraIndex]
                 vehicle = BigWorld.entities.get(player.playerVehicleID)
                 if self.data['oldHealth'] == vehicle.health:
                     self.data.update(dataUpdate)
@@ -577,7 +587,7 @@ class Data(object):
             self.updateData()
         elif (damageCode in damageInfoCriticals) or (damageCode in damageInfoDestructions) or (damageCode in damageInfoTANKMAN):
             if extraIndex in DEVICES_TANKMAN:
-                self.data['critDevice'] = DEVICES_TANKMAN[extraIndex]
+                self.data['critDevice'] = DEVICES_TANKMAN[extraIndex + 100] if damageCode in damageInfoDestructions else DEVICES_TANKMAN[extraIndex]
             self.data['criticalHit'] = True
 
     def onHealthChanged(self, vehicle, newHealth, attackerID, attackReasonID):
