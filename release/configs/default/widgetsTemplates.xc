@@ -12,6 +12,12 @@
     "layer": "normal",
     "type": "extrafield",
     "formats": [
+      { // фоновая картинка
+        "x": 4,
+        "y": 51,
+        "screenHAlign": "right",
+        "format": "<img src='xvm://res/icons/clock/clockBg.png'>"
+      },
       {
         "updateEvent": "ON_EVERY_SECOND",
         // Horizontal position.
@@ -19,7 +25,7 @@
         "x": -10,
         // Vertical position.
         // Положение по вертикали.
-        "y": 41,
+        "y": 38,
         // Width.
         // Ширина.
         "width": 200,
@@ -40,7 +46,7 @@
           "blur": 4,                 // (0.0 .. 255.0)  / blur            / размытие
           "strength": 2              // (0.0 .. 255.0)  / intensity       / интенсивность
         },
-        "textFormat": { "align": "right", "valign": "center", "color": "0x959688" },
+        "textFormat": { "align": "right", "valign": "bottom", "color": "0x959688" },
         "format": "<font face='$FieldFont'><textformat leading='-38'><font size='36'>{{py:xvm.formatDate('%H:%M')}}</font><br></textformat><textformat rightMargin='85' leading='-2'>{{py:xvm.formatDate('%Au')}}<br><font size='15'>{{py:xvm.formatDate('%d %bu %Y')}}</font></textformat></font>"
       }
     ]
