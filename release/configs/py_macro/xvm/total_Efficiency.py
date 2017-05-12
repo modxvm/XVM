@@ -178,9 +178,10 @@ def _addRibbon(self, ribbonID, ribbonType='', leftFieldStr='', vehName='', vehTy
             as_event('ON_TOTAL_EFFICIENCY')
 
 
-@registerEvent(BattleRibbonsPanel, 'onHide')
-def _onHide(self, ribbonType):
+@overrideMethod(BattleRibbonsPanel, 'onHide')
+def _onHide(base, self, ribbonID):
     global ribbonTypes
+    ribbonType = self._BattleRibbonsPanel__ribbonsAggregator.getRibbon(ribbonID).getType()
     if player is not None:
         if hasattr(player.inputHandler.ctrl, 'curVehicleID'):
             vId = player.inputHandler.ctrl.curVehicleID
@@ -190,6 +191,7 @@ def _onHide(self, ribbonType):
         if player.playerVehicleID == v:
             if ribbonType in ['spotted', 'kill', 'teamKill', 'crits']:
                 ribbonTypes[ribbonType][0] = ribbonTypes[ribbonType][1]
+    base(self, ribbonID)
 
 
 @registerEvent(Vehicle, 'onHealthChanged')
