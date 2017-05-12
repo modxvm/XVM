@@ -9,7 +9,7 @@
     // Format set (extended format supported, see extra-field.txt).
     // Набор форматов (поддерживается расширенный формат, см. extra-field.txt).
     "formats": [
-      //${ "minimapLabelsTemplates.xc":"def.vtypeSpotted" },
+      ${ "minimapLabelsTemplates.xc":"def.vtypeSpotted" },
       ${ "minimapLabelsTemplates.xc":"def.vehicleSpottedCompany" },
       ${ "minimapLabelsTemplates.xc":"def.nickSpottedCompany" },
       ${ "minimapLabelsTemplates.xc":"def.xmqpEvent" },
