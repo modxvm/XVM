@@ -11,7 +11,7 @@
     // * кастомные поля можно отдельно отключать и включать с помощью "enabled" в их настройках.
     // * поддерживается расширенный формат, см. extra-field.txt
     "formats": [
-      //${ "battleLabelsTemplates.xc":"def.hitlogHeader" },
+      ${ "battleLabelsTemplates.xc":"def.hitlogHeader" },
       ${ "battleLabelsTemplates.xc":"def.hitlogBody" },
       ${ "battleLabelsTemplates.xc":"def.winChance" },
       ${ "battleLabelsTemplates.xc":"def.totalHP" },
