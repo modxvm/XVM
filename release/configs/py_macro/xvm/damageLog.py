@@ -507,8 +507,10 @@ class Data(object):
         self.data['reloadGun'] = self.timeReload(attackerID)
         self.typeShell(effectsIndex)
         self.data['damage'] = 0
-        if damageFactor or self.data['shells_stunning']:
+        if damageFactor:
             self.data['hitEffect'] = HIT_EFFECT_CODES[4]
+        elif self.data['shells_stunning']:
+            pass
         else:
             self.updateData()
 
@@ -545,7 +547,7 @@ class Data(object):
 
     def updateStunInfo(self, vehicle, stunDuration):
         self.data['stun-duration'] = stunDuration
-        if (not self.data['isDamage']) and (self.data['hitEffect'] == 'armor_pierced'):
+        if (not self.data['isDamage']) and (self.data['hitEffect'] in ('armor_pierced_no_damage', 'critical_hit')):
             self.updateData()
 
     def showVehicleDamageInfo(self, player, vehicleID, damageIndex, extraIndex, entityID, equipmentID):
