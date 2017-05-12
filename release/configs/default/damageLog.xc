@@ -4,40 +4,40 @@
    
     {{number}}            - line number / номер строки.
     {{dmg}}               - received damage / полученный урон.
-    {{dmg-kind}}          - kind of the received damage (attack, fire, ramming, ...) / вид полученного урона (атака, пожар, таран, ...).
-    {{c:dmg-kind}}        - color depending on the kind of damage / цвет в зависимости от вида полученного урона.
+    {{dmg-kind}}          - kind of the received damage (attack, fire, ramming, ...) / тип полученного урона (атака, пожар, таран, ...).
+    {{c:dmg-kind}}        - color by damage kind / цвет по типу урона.
+    {{hit-effects}}       - hit kind (with damage, ricochet, not penetrated, no damage) / тип попадания (с уроном, рикошет, не пробито, без урона).
+    {{c:hit-effects}}     - color by hit kind / цвет по типу попадания.
     {{type-shell}}        - shell kind / тип снаряда.
-    {{c:type-shell}}      - color depending on shell kind / цвет в зависимости от типа снаряда.
+    {{c:type-shell}}      - color by shell kind / цвет по типу снаряда.
     {{vtype}}             - vehicle type / тип техники.
-    {{vehicle}}           - vehicle name / название техники.
-    {{c:vtype}}           - color depending on vehicle type / цвет в зависимости от типа техники.
-    {{c:team-dmg}}        - color depending on damage source (ally , enemy, self damage) / цвет в зависимости от источника урона (союзник, противник, урон по себе).
-    {{c:costShell}}       - color depending on cost shell (gold, credits) / цвет в зависимости от стоимости снаряда (золото, кредиты).
-    {{name}}              - nickname player who caused the damage / никнейм игрока, нанесшего урон.
+    {{c:vtype}}           - color by vehicle type / цвет по типу техники.
+    {{team-dmg}}          - team attachment of the attacker (ally , enemy, self damage) / командная принадлежность атакующего (союзник, противник, урон по себе).
+    {{c:team-dmg}}        - color by team attachment of the attacker (ally , enemy, self damage) / цвет по командной принадлежности атакующего (союзник, противник, урон по себе).
+    {{costShell}}         - shell currency (gold, credits) / валюта снаряда (золото, кредиты).
+    {{c:costShell}}       - color by shell currency / цвет по валюте снаряда.
+    {{vehicle}}           - attacker vehicle name / название техники атакующего.
+    {{name}}              - attacker nickname / никнейм атакующего.
     {{critical-hit}}      - critical hit / критическое попадание.
-    {{c:hit-effects}}     - color depending on hit kind (with damage, ricochet, not penetrated, no damage) / цвет в зависимости от вида попадания (с уроном, рикошет, не пробито, без урона).
-    {{costShell}}         - text depending on cost shell (gold, credits) / текст в зависимости от стоимости снаряда (золото, кредиты).
-    {{comp-name}}         - name part of vehicle that was hit (turret, body, suspension, gun) / название части техники, в которую было попадание (башня, корпус, ходовая, орудие).
+    {{comp-name}}         - vehicle part that was hit (turret, hull, chassis, gun) / часть техники, в которую было попадание (башня, корпус, ходовая, орудие).
     {{clan}}              - clan name with brackets (empty if no clan) / название клана в скобках (пусто, если игрок не в клане).
     {{level}}             - vehicle level / уровень техники.
     {{clannb}}            - clan name without brackets / название клана без скобок.
-    {{clanicon}}          - macro with clan embed image path value / макрос со значением пути эмблемы клана.
+    {{clanicon}}          - macro with clan emblem image path value / макрос со значением пути эмблемы клана.
     {{squad-num}}         - number of squad (1,2,...), empty if not in squad / номер взвода (1,2,...), пусто - если игрок не во взводе.
-    {{hit-effects}}       - kind of hit / вид попадания.
-    {{dmg-ratio}}         - received damage in percent / полученный урон в процентах.
-    {{team-dmg}}          - source of damage (ally , enemy, self damage) / источник урона (союзник, противник, урон по себе).
-    {{splash-hit}}        - text when hit by splash damage from shell (HE/HESH) / текст при попадании осколков снаряда (ОФ/ХФ).
-    {{my-alive}}          - value 'al' if my vehicle is alive, '' for dead / возвращает 'al', если я живой, '', если не живой
-    {{reloadGun}}         - reloading time of a gun / время перезарядки орудия 
-    {{gun-caliber}}       - caliber of a gun / калибр орудия
-    {{wn8}}, {{xwn8}}, {{wn6}}, {{xwn6}}, {{eff}}, {{xeff}}, {{wgr}}, {{xwgr}}, {{xte}}, {{r}}                      - statistics macros (see macros.txt) / макросы статистика (смотрите macros_ru.txt)
-    {{c:wn8}}, {{c:xwn8}}, {{c:wn6}}, {{c:xwn6}}, {{c:eff}}, {{c:xeff}}, {{c:wgr}}, {{c:xwgr}}, {{c:xte}}, {{c:r}}  - statistics macros (see macros.txt) / макросы статистика (смотрите macros_ru.txt)
+    {{dmg-ratio}}         - received damage percent / полученный урон в процентах.
+    {{splash-hit}}        - text for damage with shell splinters (HE/HESH) / текст при уроне осколками снаряда (ОФ/ХФ).
+    {{my-alive}}          - value 'al' for alive own vehicle, '' for dead one / возвращает 'al', для живой собственной техники, '' для мертвой
+    {{reloadGun}}         - gun reloading time / время перезарядки орудия 
+    {{gun-caliber}}       - gun caliber / калибр орудия
+    {{wn8}}, {{xwn8}}, {{wn6}}, {{xwn6}}, {{eff}}, {{xeff}}, {{wgr}}, {{xwgr}}, {{xte}}, {{r}}                      - statistics macros (see macros.txt) / макросы статистики (смотрите macros_ru.txt)
+    {{c:wn8}}, {{c:xwn8}}, {{c:wn6}}, {{c:xwn6}}, {{c:eff}}, {{c:xeff}}, {{c:wgr}}, {{c:xwgr}}, {{c:xte}}, {{c:r}}  - statistics macros (see macros.txt) / макросы статистики (смотрите macros_ru.txt)
     {{fire-duration}}     - duration of fire ("groupDamagesFromFire" must be enabled to work) / продолжительность пожара (работает только при включенной опции "groupDamagesFromFire")
     {{diff-masses}}       - vehicles weights difference during collision / разность масс техники при столкновении
     {{nation}}            - vehicle nation / нация техники
-    {{my-blownup}}        - value 'blownup' if own vehicle's ammunition have been blown up, '' otherwise  / возвращает 'blownup', если взорван боекомплект техники игрока, иначе пусто
+    {{my-blownup}}        - value 'blownup' if own vehicle's ammunition have been blown up, '' otherwise  / возвращает 'blownup', если взорван боекомплект собственной техники, иначе ''
     {{stun-duration}}     - stun duration / продолжительность оглушения
-    {{crit-device}}       - TO DO / поврежденный модуль или контуженный члена экипажа
+    {{crit-device}}       - damaged module or shell-shocked crew member / поврежденный модуль или контуженный член экипажа
 */
 
 {
@@ -54,14 +54,15 @@
     // Log of the received damage.
     // Лог полученного урона.
     "log": {
-      //TO DO
-      //true - разрешено перемещать в бою лог полученного урона, макросы в "x" и "y" не работают
-      //false - запрещено перемещать в бою лог полученного урона, макросы в "x" и "y" работают
+      //true - allow to move log in battle and disallow macros for "x" and "y" settings
+      //false - disallow to move log in battle and allow macros for "x" and "y" settings
+      //true - разрешить перемещение лога в бою и запретить макросы в настройках "x" и "y"
+      //false - запретить перемещение лога в бою и разрешить макросы в настройках "x" и "y"
       "moveInBattle": false,
       "x": 240,
       "y": -23,
       // Kind of the received damage (macro {{dmg-kind}}).
-      // Вид полученного урона (макрос {{dmg-kind}}).
+      // Тип полученного урона (макрос {{dmg-kind}}).
       "dmg-kind": {
         "shot": "{{hit-effects}}{{critical-hit}}{{splash-hit}}<tab>{{type-shell}}",                            // shot / попадание
         "fire": "{{hit-effects}}{{critical-hit}}<tab><font face='xvm'>&#x51;</font>",                          // fire / пожар
@@ -74,8 +75,8 @@
         "art_attack": "{{hit-effects}}{{critical-hit}}{{splash-hit}}<tab><font face='xvm'>&#x110;</font>",     // art attack / артиллерийская поддержка
         "air_strike": "{{hit-effects}}{{critical-hit}}{{splash-hit}}<tab><font face='xvm'>&#x111;</font>"      // air strike / поддержка авиации
       },
-      // Color depending on the kind of damage (macro {{c:dmg-kind}}).
-      // Цвет в зависимости от вида полученного урона (макрос {{c:dmg-kind}}).
+      // Color by kind of the received damage (macro {{c:dmg-kind}}).
+      // Цвет по типу полученного урона (макрос {{c:dmg-kind}}).
       "c:dmg-kind": {
         "shot": "{{c:hit-effects}}",       // shot / попадание
         "fire": "#FF6655",                 // fire / пожар
@@ -88,8 +89,8 @@
         "art_attack": "{{c:hit-effects}}", // art attack / артиллерийская поддержка
         "air_strike": "{{c:hit-effects}}"  // air strike / поддержка авиации
       },
-      // Designation of hit by splash damage from shell (HE/HESH). (macro {{splash-hit}}).
-      // Обозначение попадание осколков снаряда (ОФ/ХФ). (макрос {{splash-hit}}).
+      // Damage with shell splinters (HE/HESH). (macro {{splash-hit}}).
+      // Урон осколками снаряда (ОФ/ХФ). (макрос {{splash-hit}}).
       "splash-hit":{
         "splash": "<font face='xvm'>&#x2C;</font>", // splash damage / попадание осколков
         "no-splash": ""                             // no splash damage / нет попадания осколков
@@ -104,8 +105,8 @@
         "hollow_charge": "<font color='{{c:costShell}}'>{{l10n:hollow_charge}}</font>",         // high explosive anti-tank / кумулятивный
         "not_shell": ""                                                                         // another source of damage / другой источник урона
       },
-      // Color depending on shell kind (macro {{type-shell}}).
-      // Цвет в зависимости от типа снаряда (макрос {{type-shell}}).
+      // Color by shell kind (macro {{type-shell}}).
+      // Цвет по типу снаряда (макрос {{type-shell}}).
       "c:type-shell": {
         "armor_piercing": "#CCCCCC",    // armor piercing / бронебойный
         "high_explosive": "#CCCCCC",    // high explosive / осколочно-фугасный
@@ -124,8 +125,8 @@
         "SPG": "<font face='xvm'>&#x2D;</font>",        // SPG / САУ
         "not_vehicle": ""                               // another source of damage / другой источник урона
       },
-      // Color depending on vehicle type (macro {{c:vtype}}).
-      // Цвет в зависимости от типа техники (макрос {{c:vtype}}).
+      // Color by vehicle type (macro {{c:vtype}}).
+      // Цвет по типу техники (макрос {{c:vtype}}).
       "c:vtype":{
         "mediumTank": "#FFF198", // medium tank / средний танк
         "lightTank": "#A2FF9A",  // light tank / лёгкий танк
@@ -134,8 +135,8 @@
         "SPG": "#EFAEFF",        // SPG / САУ
         "not_vehicle": "#CCCCCC" // another source of damage / другой источник урона
       },
-      // Kind of hit (macro {{hit-effects}}).
-      // Вид попадания (макрос {{hit-effects}}).
+      // Hit kind (macro {{hit-effects}}).
+      // Тип попадания (макрос {{hit-effects}}).
       "hit-effects": {
         "armor_pierced": "{{dmg}}",                                    // penetrated / пробито
         "intermediate_ricochet": "{{l10n:intermediate_ricochet}}",     // ricochet (intermediate) / рикошет (промежуточный)
@@ -144,8 +145,8 @@
         "armor_pierced_no_damage": "{{l10n:armor_pierced_no_damage}}", // no damage / без урона
         "unknown": "{{l10n:armor_pierced_no_damage}}"                  // unknown / неизвестно
       },
-      // Color depending on hit kind (with damage, ricochet, no penetration, no damage) (macro {{c:hit-effects}}).
-      // Цвет в зависимости от вида попадания (с уроном, рикошет, не пробито, без урона) (макрос {{c:hit-effects}}).
+      // Color by hit kind (macro {{c:hit-effects}}).
+      // Цвет по типу попадания (макрос {{c:hit-effects}}).
       "c:hit-effects": {
         "armor_pierced": "#FF4D3C",           // penetrated (damage) / пробито (урон)
         "intermediate_ricochet": "#CCCCCC",   // ricochet (intermediate) / рикошет (промежуточный)
@@ -154,14 +155,14 @@
         "armor_pierced_no_damage": "#CCCCCC", // no damage / без урона
         "unknown": "#CCCCCC"                  // unknown / неизвестно
       },
-      // Designation of critical hit (macro {{critical-hit}}).
-      // Обозначение критического попадания (макрос {{critical-hit}}).
+      // Critical hit (macro {{critical-hit}}).
+      // Критическое попадание (макрос {{critical-hit}}).
       "critical-hit":{
         "critical": "*",  // critical hit / попадание с критическим повреждением
         "no-critical": "" // without critical hit / попадание без критического повреждения
       },
-      // TO DO
-      // Обозначение поврежденного модуля или контуженного члена экипажа (макрос {{crit-device}}).
+      // Damaged module or shell-shocked crew member (macro {{crit-device}}).
+      // Поврежденный модуль или контуженный член экипажа (макрос {{crit-device}}).
       "crit-device": {
         "engine_crit": "{{l10n:engine}}",
         "ammo_bay_crit": "{{l10n:ammo_bay}}",
@@ -188,8 +189,8 @@
         "loader": "{{l10n:loader}}",
         "no-critical": ""
       },
-      // Name part of vehicle (macro {{comp-name}}).
-      // Название частей техники (макрос {{comp-name}}).
+      // Part of vehicle (macro {{comp-name}}).
+      // Часть техники (макрос {{comp-name}}).
       "comp-name":{
         "turret": "{{l10n:turret}}",   // turret / башня
         "hull": "{{l10n:hull}}",       // body / корпус
@@ -197,49 +198,47 @@
         "gun": "{{l10n:gun}}",         // gun / орудие
         "unknown": ""                  // unknown / неизвестно
       },
-      // Source of damage (ally , enemy, self damage) (macro {{team-dmg}}).
-      // Источник урона (союзник, противник, урон по себе) (макрос {{team-dmg}}).
+      // Team attachment of the attacker (macro {{team-dmg}}).
+      // Команданя принадлежность атакующего (макрос {{team-dmg}}).
       "team-dmg":{
         "ally-dmg": "",  // ally / союзник
         "enemy-dmg": "", // enemy / противник
         "player": "",    // self damage / урон по себе
         "unknown": ""    // unknown / неизвестно
       },
-      // Color depending on damage source (ally , enemy, self damage) (macro {{c:team-dmg}}).
-      // Цвет в зависимости от источника урона (союзник, противник, урон по себе) (макрос {{c:team-dmg}}).
+      // Color by team attachment of the attacker (macro {{c:team-dmg}}).
+      // Цвет по командной принадлежности атакующего (макрос {{c:team-dmg}}).
       "c:team-dmg":{
         "ally-dmg": "#00EAFF",  // ally / союзник
         "enemy-dmg": "#CCCCCC", // enemy / противник
         "player": "#228855",    // self damage / урон по себе
         "unknown": "#CCCCCC"    // unknown / неизвестно
       },
-      // Text depending on cost shell (gold, credits) (macro {{costShell}}).
-      // Текст в зависимости от стоимости снаряда (золото, кредиты) (макрос {{costShell}}).
+      // Shell currency (macro {{costShell}}).
+      // Валюта снаряда (макрос {{costShell}}).
       "costShell":{
         "gold-shell": "",   // gold / золото
         "silver-shell": "", // credits / кредиты
         "unknown": ""       // unknown / неизвестно
       },
-      // Color depending on cost shell (gold, credits) (macro {{c:costShell}}).
-      // Цвет в зависимости от стоимости снаряда (золото, кредиты) (макрос {{c:costShell}}).
+      // Color by shell currency (macro {{c:costShell}}).
+      // Цвет по валюте снаряда (макрос {{c:costShell}}).
       "c:costShell":{
         "gold-shell": "#FFCC66",   // gold / золото
         "silver-shell": "#CCCCCC", // credits / кредиты
         "unknown": ""              // unknown / неизвестно
       },
-      // true - show hits without damage, false - not to show.
-      // true - отображать попадания без урона, false - не отображать.
+      // true - show hits without damage.
+      // true - отображать попадания без урона.
       "showHitNoDamage": true,
-      // true - to summarize the damage from the fire.
+      // true - summarize damages from fire.
       // true - суммировать повреждения от пожара.
       "groupDamagesFromFire": true,
-      // true - to summarize the damage by ramming, collisions with objects, falling.
-      //        Damage summarized, if applied more than once a second.
-      // true - суммировать повреждения от тарана, столкновения с объектами, падения.
-      //        Урон суммируется, если наносится чаще одного раза в секунду.
+      // true - summarize damages from ramming, crash, falling (if more than one damage per second).
+      // true - суммировать повреждения от тарана, столкновения, падения (если больше одного повреждения в секунду).
       "groupDamagesFromRamming_WorldCollision": true,
-      //TO DO
-      //Настройка тени
+      // Shadow settings
+      // Настройки тени
       "shadow": { 
         "distance": 1,
         "angle": 90,
@@ -256,51 +255,52 @@
       // Формат лога повреждений.
       "formatHistory": "<textformat tabstops='[30,130,165,180]'><font face='mono' size='12'>{{number%3d~.}}</font><tab><font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab><font color='{{c:vtype}}'>{{vtype}}</font><tab><font color='{{c:team-dmg}}'>{{vehicle}}</font></textformat>"
     },
-    // TODO.
+    // Background of the log of the received damage.
     // Подложка лога полученного урона.
     "logBackground": {
       "$ref": { "path":"damageLog.log" },
-      // TODO
+      // Damage log background format.
       // Формат подложки лога повреждений.
       "formatHistory": "<img height='20' width='310' src='xvm://res/icons/damageLog/{{dmg=0?no_dmg|dmg}}.png'>"
     },    
-    // TODO.
-    // Альтернативный лог полученного урона.
+    // Log of the received damage (alternative mode).
+    // Лог полученного урона (альтернативный режим).
     "logAlt": {
       "$ref": { "path":"damageLog.log" },
-      // true - show hits without damage, false - not to show.
-      // true - отображать попадания без урона, false - не отображать.
+      // true - show hits without damage.
+      // true - отображать попадания без урона.
       "showHitNoDamage": true,
       // Damage log format.
       // Формат лога повреждений.
       "formatHistory": "<textformat tabstops='[30,130,165]'><font face='mono' size='12'>{{number%3d~.}}</font><tab><font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab><font color='{{c:team-dmg}}'>{{name}}</font></textformat>"
     },
-    // TODO.
-    // Подложка альтернативного лога полученного урона.
+    // Background of the log of the received damage (alternative mode).
+    // Подложка лога полученного урона (альтернативный режим).
     "logAltBackground": {
       "$ref": { "path":"damageLog.logAlt" },
-      // TODO
-      // Формат подложки альтернативного лога полученного урона.
+      // Damage log background format.
+      // Формат подложки лога повреждений.
       "formatHistory": "<img height='20' width='310' src='xvm://res/icons/damageLog/{{dmg=0?no_dmg|dmg}}.png'>"
     },    
-    // Display the last damage (hit).
-    // Отображение последнего урона (попадания).
+    // Last damage (hit).
+    // Последний урон (попадание).
     "lastHit": {
       "$ref": { "path":"damageLog.log" },
-      //TO DO
-      //true - разрешено перемещать поле последнего урона в бою, макросы в "x" и "y" не работают
-      //false - запрещено перемещать поле последнего урона в бою, макросы в "x" и "y" работают
+      //true - allow to move last damage in battle and disallow macros for "x" and "y" settings
+      //false - disallow to move last damage in battle and allow macros for "x" and "y" settings
+      //true - разрешить перемещение последнего урона в бою и запретить макросы в настройках "x" и "y"
+      //false - запретить перемещение последнего урона в бою и разрешить макросы в настройках "x" и "y"
       "moveInBattle": false,
       "x": -120,
       "y": 200,
-      // true - show hits without damage, false - not to show.
-      // true - отображать попадания без урона, false - не отображать.
+      // true - show hits without damage.
+      // true - отображать попадания без урона.
       "showHitNoDamage": true,
       // Display duration (seconds).
       // Продолжительность отображения (секунды).
       "timeDisplayLastHit": 7,
-      //TO DO
-      //Настройка тени
+      // Shadow settings
+      // Настройки тени
       "shadow": { 
         "distance": 0,
         "blur": 6,
@@ -308,7 +308,7 @@
         "color": "{{dmg=0?#000000|#770000}}"
       },
       // Kind of the received damage (macro {{dmg-kind}}).
-      // Вид полученного урона (макрос {{dmg-kind}}).
+      // Тип полученного урона (макрос {{dmg-kind}}).
       "dmg-kind": {
         "shot": "{{hit-effects}}",               // shot / попадание
         "fire": "{{hit-effects}}",               // fire / пожар
