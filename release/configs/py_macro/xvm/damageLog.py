@@ -501,13 +501,12 @@ class Data(object):
 
     def hitShell(self, attackerID, effectsIndex, damageFactor):
         self.data['stun-duration'] = None
-        self.data['isDamage'] = damageFactor > 0
         self.data['attackerID'] = attackerID
         self.data['attackReasonID'] = effectsIndex if effectsIndex in [24, 25] else 0
         self.data['reloadGun'] = self.timeReload(attackerID)
         self.typeShell(effectsIndex)
         self.data['damage'] = 0
-        if damageFactor:
+        if self.data['isDamage']:
             self.data['hitEffect'] = HIT_EFFECT_CODES[4]
         elif self.data['shells_stunning']:
             pass
@@ -532,7 +531,7 @@ class Data(object):
         self.data['compName'] = decodedPoints[0].componentName if decodedPoints else 'unknown'
         self.data['splashHit'] = 'no-splash'
         # self.data['criticalHit'] = (maxHitEffectCode == 5)
-        if damageFactor == 0:
+        if not self.data['isDamage']:
             self.data['hitEffect'] = HIT_EFFECT_CODES[min(3, maxHitEffectCode)]
             self.data['isAlive'] = bool(vehicle.isCrewActive)
         self.hitShell(attackerID, effectsIndex, damageFactor)
@@ -540,7 +539,7 @@ class Data(object):
     def showDamageFromExplosion(self, vehicle, attackerID, center, effectsIndex, damageFactor):
         self.data['splashHit'] = 'splash'
         # self.data['criticalHit'] = False
-        if damageFactor == 0:
+        if not self.data['isDamage']:
             self.data['hitEffect'] = HIT_EFFECT_CODES[3]
             self.data['isAlive'] = bool(vehicle.isCrewActive)
         self.hitShell(attackerID, effectsIndex, damageFactor)
@@ -976,6 +975,12 @@ def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
 def PlayerAvatar_showVehicleDamageInfo(self, vehicleID, damageIndex, extraIndex, entityID, equipmentID):
     if (vehicleID == self.playerVehicleID) and config.get('damageLog/enabled'):
         data.showVehicleDamageInfo(self, vehicleID, damageIndex, extraIndex, entityID, equipmentID)
+
+
+@registerEvent(PlayerAvatar, 'updateVehicleHealth')
+def updateVehicleHealth(self, vehicleID, health, deathReasonID, isCrewActive, isRespawn):
+    if (vehicleID == self.playerVehicleID) and config.get('damageLog/enabled'):
+        data.data['isDamage'] = (health != data.data['oldHealth'])
 
 
 @registerEvent(Vehicle, 'onEnterWorld')
