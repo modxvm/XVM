@@ -4,6 +4,7 @@
 
   [CAMERA]
   * new parameter: "camera"/"noFlashBang" allow to disable red flash when enemy hit your tank
+  * new parameter: "camera"/"hideHint" TO DO
 
 XVM-6.6.5:
   [GENERAL]

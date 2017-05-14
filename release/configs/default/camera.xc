@@ -10,6 +10,9 @@
     // true - disable red flash when enemy hit your tank.
     // true - отключить красную вспышку когда враг попадает по вам.
     "noFlashBang": false,
+    // true - TO DO.
+    // true - скрыть подсказку перехода в осадный режим.
+    "hideHint": false,    
     // Arcade mode
     // Аркадный режим
     "arcade": {
