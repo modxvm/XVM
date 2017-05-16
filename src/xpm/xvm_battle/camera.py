@@ -19,6 +19,7 @@ from gui.Scaleform.daapi.view.battle.shared.crosshair.container import Crosshair
 from AvatarInputHandler.control_modes import SniperControlMode
 from helpers.EffectsList import _FlashBangEffectDesc
 from gui.Scaleform.daapi.view.meta.SiegeModeIndicatorMeta import SiegeModeIndicatorMeta
+from gui.Scaleform.daapi.view.meta.CrosshairPanelContainerMeta import CrosshairPanelContainerMeta
 
 from xfw import *
 
@@ -205,6 +206,11 @@ def create(base, self, model, list, args):
 def SiegeModeIndicatorMeta_as_showHintS(base, self, buttonName, messageLeft, messageRight):
     if not (config.get('battle/camera/enabled') and config.get('battle/camera/hideHint')):
         base(self, buttonName, messageLeft, messageRight)
+
+@overrideMethod(CrosshairPanelContainerMeta, 'as_showHintS')
+def CrosshairPanelContainerMeta_as_showHintS(base, self, key, messageLeft, messageRight, offsetX, offsetY):
+    if not (config.get('battle/camera/enabled') and config.get('battle/camera/hideHint')):
+        base(self, key, messageLeft, messageRight, offsetX, offsetY)
 
 
 # PRIVATE
