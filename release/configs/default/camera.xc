@@ -10,7 +10,7 @@
     // true - disable red flash when enemy hit your tank.
     // true - отключить красную вспышку когда враг попадает по вам.
     "noFlashBang": false,
-    // true - TO DO.
+    // true - hide the tips about switching to siege mode and aiming mode changing in strategic mode.
     // true - скрыть подсказки перехода в осадный режим и смены режима прицеливания в стратегическом режиме.
     "hideHint": false,    
     // Arcade mode

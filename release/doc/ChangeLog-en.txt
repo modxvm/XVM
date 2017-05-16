@@ -3,8 +3,8 @@
   * added macro {{crit-device}} and section "crit-device"
 
   [CAMERA]
-  * new parameter: "camera"/"noFlashBang" allow to disable red flash when enemy hit your tank
-  * new parameter: "camera"/"hideHint" TO DO
+  * new parameter: "camera"/"noFlashBang" - switch the red flash if player's vehicle has got a hit
+  * new parameter: "camera"/"hideHint" - switch the tips about siege/marching mode and artillery aiming mode
 
 XVM-6.6.5:
   [GENERAL]
