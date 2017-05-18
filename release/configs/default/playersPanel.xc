@@ -9,6 +9,8 @@
     // Enemy spotted status marker.
     // Маркер статуса засвета противника.
     "enemySpottedMarker": {
+      // false - отключить.
+      "enabled": true,
       // Opacity percentage of spotted markers in the panels. 0 - transparent (disabled) ... 100 - opaque.
       // Прозрачность в процентах маркеров засвета в ушах. 0 - полностью прозрачные (отключены), 100 - не прозрачные.
       "alpha": "{{a:spotted}}",
@@ -34,6 +36,7 @@
     // XMQP service marker definition.
     // Шаблон маркера сервиса XMQP.
     "xmqpServiceMarker": {
+      "enabled": true,
       "x": 88, "y": -2, "align": "center", "bindToIcon": true,
       "textFormat": {
         "font": "xvm",
@@ -45,6 +48,7 @@
     // "Top tankers" rank definition.
     // Шаблон позиции в "Танковых асах".
     "topTankers": {
+      "enabled": true,
       "x": 77, "y": 6, "width": 16, "height": 16, "align": "center", "bindToIcon": true,
       "src": "{{top_tankers_emblem}}"
     },
