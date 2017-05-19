@@ -124,7 +124,13 @@
       "shotRecoilEffect": true,
       // true - disable dimming and greening in sniper scope
       // true - отключить затемнение и озеленение в снайперском прицеле
-      "noBinoculars": false
+      "noBinoculars": false,
+      // TODO: English comments
+      // Отключение предела вращения камеры в снайперском прицеле для техники с ограниченными УГН (углами горизонтальной наводки) орудия. 
+      // null - параметр не используется; 
+      // "full" - полное отключение ограничения камеры;
+      // "hotkey" - отключение ограничения камеры с зажатой правой кнопкой мыши;
+      "noCameraLimit": null
     }
   }
 }

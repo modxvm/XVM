@@ -20,6 +20,10 @@ from AvatarInputHandler.control_modes import SniperControlMode
 from helpers.EffectsList import _FlashBangEffectDesc
 from gui.Scaleform.daapi.view.meta.SiegeModeIndicatorMeta import SiegeModeIndicatorMeta
 from gui.Scaleform.daapi.view.meta.CrosshairPanelContainerMeta import CrosshairPanelContainerMeta
+from AvatarInputHandler.AimingSystems.SniperAimingSystem import SniperAimingSystem    
+from Keys import KEY_RIGHTMOUSE
+from AvatarInputHandler import mathUtils
+from gun_rotation_shared import calcPitchLimitsFromDesc
 
 from xfw import *
 
@@ -211,6 +215,20 @@ def SiegeModeIndicatorMeta_as_showHintS(base, self, buttonName, messageLeft, mes
 def CrosshairPanelContainerMeta_as_showHintS(base, self, key, messageLeft, messageRight, offsetX, offsetY):
     if not (config.get('battle/camera/enabled') and config.get('battle/camera/hideHint')):
         base(self, key, messageLeft, messageRight, offsetX, offsetY)
+
+@overrideMethod(SniperAimingSystem, '_SniperAimingSystem__clampToLimits')
+def clampToLimits(base, self, turretYaw, gunPitch):
+    if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/noCameraLimit') is not None:
+        if not BigWorld.isKeyDown(KEY_RIGHTMOUSE) and self._SniperAimingSystem__yawLimits is not None and config.get('battle/camera/sniper/noCameraLimit') == "hotkey":
+            turretYaw = mathUtils.clamp(self._SniperAimingSystem__yawLimits[0], self._SniperAimingSystem__yawLimits[1], turretYaw)
+        getPitchLimits = BigWorld.player().vehicleTypeDescriptor.gun['combinedPitchLimits']
+        pitchLimits = calcPitchLimitsFromDesc(turretYaw, getPitchLimits)
+        adjustment = max(0, self._SniperAimingSystem__returningOscillator.deviation.y)
+        pitchLimits[0] -= adjustment
+        pitchLimits[1] += adjustment
+        gunPitch = mathUtils.clamp(pitchLimits[0], pitchLimits[1] + self._SniperAimingSystem__pitchCompensating, gunPitch)
+        return (turretYaw, gunPitch)
+    return base(self, turretYaw, gunPitch)
 
 
 # PRIVATE

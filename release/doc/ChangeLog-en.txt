@@ -5,6 +5,7 @@
   [CAMERA]
   * new parameter: "camera"/"noFlashBang" - switch the red flash if player's vehicle has got a hit
   * new parameter: "camera"/"hideHint" - switch the tips about siege/marching mode and artillery aiming mode
+  * new parameter: "camera"/"noCameraLimit" - TODO: English comments
 
 XVM-6.6.5:
   [GENERAL]
