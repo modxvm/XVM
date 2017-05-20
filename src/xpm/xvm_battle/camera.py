@@ -218,8 +218,8 @@ def CrosshairPanelContainerMeta_as_showHintS(base, self, key, messageLeft, messa
 
 @overrideMethod(SniperAimingSystem, '_SniperAimingSystem__clampToLimits')
 def clampToLimits(base, self, turretYaw, gunPitch):
-    if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/noCameraLimit') is not None:
-        if not BigWorld.isKeyDown(KEY_RIGHTMOUSE) and self._SniperAimingSystem__yawLimits is not None and config.get('battle/camera/sniper/noCameraLimit') == "hotkey":
+    if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/noCameraLimit/enabled'):
+        if not BigWorld.isKeyDown(KEY_RIGHTMOUSE) and self._SniperAimingSystem__yawLimits is not None and config.get('battle/camera/sniper/noCameraLimit/mode') == "hotkey":
             turretYaw = mathUtils.clamp(self._SniperAimingSystem__yawLimits[0], self._SniperAimingSystem__yawLimits[1], turretYaw)
         getPitchLimits = BigWorld.player().vehicleTypeDescriptor.gun['combinedPitchLimits']
         pitchLimits = calcPitchLimitsFromDesc(turretYaw, getPitchLimits)
@@ -232,7 +232,7 @@ def clampToLimits(base, self, turretYaw, gunPitch):
 
 @overrideMethod(SniperControlMode, 'getPreferredAutorotationMode')
 def getPreferredAutorotationMode(base, self):
-    if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/noCameraLimit') == "full":
+    if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/noCameraLimit/enabled') and config.get('battle/camera/sniper/noCameraLimit/mode') == "full":
         vehicle = BigWorld.entities.get(BigWorld.player().playerVehicleID)
         if vehicle is None:
             return
