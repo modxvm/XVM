@@ -230,6 +230,18 @@ def clampToLimits(base, self, turretYaw, gunPitch):
         return (turretYaw, gunPitch)
     return base(self, turretYaw, gunPitch)
 
+@overrideMethod(SniperControlMode, 'getPreferredAutorotationMode')
+def getPreferredAutorotationMode(base, self):
+    if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/noCameraLimit') == "full":
+        vehicle = BigWorld.entities.get(BigWorld.player().playerVehicleID)
+        if vehicle is None:
+            return
+        else:
+            desc = vehicle.typeDescriptor
+            isRotationAroundCenter = desc.chassis['rotationIsAroundCenter']
+            return isRotationAroundCenter
+    return base(self)
+
 
 # PRIVATE
 
