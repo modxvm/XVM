@@ -173,10 +173,13 @@ package com.xvm.battle.playersPanel
             var atlasName:String = isLeftPanel ? UI_PlayersPanel.playersPanelLeftAtlas : UI_PlayersPanel.playersPanelRightAtlas;
             if (!App.atlasMgr.isAtlasInitialized(atlasName))
             {
-                atlasName = AtlasConstants.BATTLE_ATLAS;
+                atlasName = ATLAS_CONSTANTS.BATTLE_ATLAS;
             }
             ui.vehicleIcon.graphics.clear();
+            // TODO:9.19
+            /*
             App.atlasMgr.drawGraphics(atlasName, BattleAtlasItem.getVehicleIconName(vehicleImage), ui.vehicleIcon.graphics, BattleAtlasItem.VEHICLE_TYPE_UNKNOWN);
+            */
             if (_userProps)
             {
                 invalidate(INVALIDATE_UPDATE_POSITIONS);

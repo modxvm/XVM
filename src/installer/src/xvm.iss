@@ -47,7 +47,7 @@ Source: "dll\findwot\bin\findwot.dll"; Flags: dontcopy
 [InstallDelete]
 ;ver\gui\flash
 Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\battle.swf"
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\battleVehicleMarkers.swf"
+Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\battleVehicleMarkersApp.swf"
 Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\Lobby.swf"
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\gui\flash"
 
@@ -97,7 +97,7 @@ Type: files; Name: "{app}\readme-*.txt"
 [UninstallDelete]
 ;ver\gui\flash
 Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\battle.swf"
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\battleVehicleMarkers.swf"
+Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\battleVehicleMarkersApp.swf"
 Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\Lobby.swf"
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\gui\flash"
 

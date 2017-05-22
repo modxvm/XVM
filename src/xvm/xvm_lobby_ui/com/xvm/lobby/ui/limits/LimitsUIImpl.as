@@ -86,6 +86,8 @@ package com.xvm.lobby.ui.limits
         {
             try
             {
+                // TODO:9.19
+                /*
                 if (goldLocker)
                 {
                     var goldControl:HeaderButton = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_GOLD);
@@ -115,6 +117,7 @@ package com.xvm.lobby.ui.limits
                         }
                     }
                 }
+                */
             }
             catch (ex:Error)
             {

@@ -14,7 +14,7 @@ package com.xvm.battle.minimap.entries.personal
 
     public class UI_StrategicCameraEntry extends StrategicCameraEntry
     {
-        private var _loader:ImageWG = null;
+        private var _loader:ImageXVM = null;
         private var _aimScale:Number = 1;
         private var _previousVisible:Boolean = false;
         private var _previousScale:Number = NaN;
@@ -59,7 +59,7 @@ package com.xvm.battle.minimap.entries.personal
                 iconPath = Utils.fixImgTagSrc(iconPath);
                 if (!_loader)
                 {
-                    _loader = new ImageWG();
+                    _loader = new ImageXVM();
                     _loader.successCallback = onImageSuccessLoadHandler;
                     _loader.errorCallback = onImageFaultLoadHandler;
                     parent.addChild(_loader);

@@ -297,10 +297,17 @@ package com.xvm.battle
             */
         }
 
-        public function setVehicleStats(data:Object):void
+        public function setFrags(data:Object) : void
         {
-            //Logger.addObject(data, 2, '[BattleState] setVehicleStats');
-            updateVehiclesStat(data);
+            Logger.addObject(data, 2, "[BattleState] setFrags");
+            try
+            {
+                updateVehiclesStat(data);
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         public function updateVehiclesStat(data:Object):void

@@ -17,7 +17,8 @@ package com.xvm.battle.fullStats
     import flash.display.*;
     import flash.geom.*;
     import flash.text.*;
-    import net.wg.data.constants.*;
+    import net.wg.data.constants.generated.*;
+    import net.wg.gui.battle.battleloading.*;
     import net.wg.gui.battle.components.*;
     import net.wg.gui.battle.random.views.stats.components.fullStats.constants.*;
     import net.wg.gui.battle.random.views.stats.components.fullStats.tableItem.*;
@@ -263,10 +264,10 @@ package com.xvm.battle.fullStats
                 var atlasName:String = _isLeftPanel ? UI_FullStats.leftAtlas : UI_FullStats.rightAtlas;
                 if (!App.atlasMgr.isAtlasInitialized(atlasName))
                 {
-                    atlasName = AtlasConstants.BATTLE_ATLAS;
+                    atlasName = ATLAS_CONSTANTS.BATTLE_ATLAS;
                 }
                 _vehicleIcon.graphics.clear();
-                App.atlasMgr.drawGraphics(atlasName, BattleAtlasItem.getVehicleIconName(_vehicleIconName), _vehicleIcon.graphics, BattleAtlasItem.VEHICLE_TYPE_UNKNOWN);
+                App.atlasMgr.drawGraphics(atlasName, BattleLoadingHelper.getVehicleIconName(_vehicleIconName), _vehicleIcon.graphics, BattleLoadingHelper.VEHICLE_TYPE_UNKNOWN);
             }
             if (updateIgr)
             {

@@ -5,13 +5,13 @@ import com.xvm.Defines;
 import com.xvm.Macros;
 import com.xvm.Utils;
 import com.xvm.Xvm;
-import com.xvm.wg.ImageWG;
+import com.xvm.wg.ImageXVM;
 
 import flash.events.Event;
 
 public class UI_SixthSense extends sixthSenseUI {
 
-    private var _loader:ImageWG;
+    private var _loader:ImageXVM;
     private var _isPathValid:Boolean;
     private var _isLoadComplete:Boolean;
     private var _isImageLoading : Boolean;
@@ -20,7 +20,7 @@ public class UI_SixthSense extends sixthSenseUI {
 
     public function UI_SixthSense() {
         super();
-        _loader = new ImageWG();
+        _loader = new ImageXVM();
         _loader.successCallback = onImageSuccessLoadHandler;
         _loader.errorCallback = onImageFaultLoadHandler;
         _loader.alpha = 0;

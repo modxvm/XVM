@@ -77,7 +77,7 @@ package com.xvm.lobby.ui.tankcarousel
                 if (cellType != "small" && cellType != "normal")
                 {
                     var normalHelper:TankCarouselHelper = new TankCarouselHelper(cfg.normal);
-                    var h:int = (normalHelper.gap + normalHelper.rendererHeight) * _rowCount - normalHelper.gap;
+                    var h:int = (normalHelper.verticalGap + normalHelper.rendererHeight) * _rowCount - normalHelper.verticalGap;
                     if (App.appHeight - h < THRESHOLD)
                     {
                         cellType = "small";
@@ -127,7 +127,10 @@ package com.xvm.lobby.ui.tankcarousel
             {
                 Dossier.requestAccountDossier(this, onAccountDossierLoaded, PROFILE_DROPDOWN_KEYS.ALL);
 
+                // TODO:9.19
+                /*
                 leftFadeEndItem.visible = rightFadeEndItem.visible = false;
+                */
                 background.alpha = Macros.FormatNumberGlobal(cfg.backgroundAlpha, 100) / 100.0;
             }
             catch (ex:Error)
@@ -192,7 +195,7 @@ class TankCarouselHelperBase extends Object implements ITankCarouselHelper
     function TankCarouselHelperBase(cfg:CCarouselCell)
     {
         _gap = Macros.FormatNumberGlobal(cfg.gap, DEFAULT_GAP);
-        _padding = new Padding(gap);
+        _padding = new Padding(_gap);
         _width = Macros.FormatNumberGlobal(cfg.width, DEFAULT_WIDTH - 2) + 2;
         _height = Macros.FormatNumberGlobal(cfg.height, DEFAULT_HEIGHT - 2) + 2;
     }
@@ -202,17 +205,22 @@ class TankCarouselHelperBase extends Object implements ITankCarouselHelper
         throw new AbstractException("TankCarouselHelperBase.linkRenderer " + Errors.ABSTRACT_INVOKE);
     }
 
-    public function get rendererWidth():Number
+    public function get rendererWidth():int
     {
         return _width;
     }
 
-    public function get rendererHeight():Number
+    public function get rendererHeight():int
     {
         return _height;
     }
 
-    public function get gap():Number
+    public function get horizontalGap():int
+    {
+        return _gap;
+    }
+
+    public function get verticalGap():int
     {
         return _gap;
     }

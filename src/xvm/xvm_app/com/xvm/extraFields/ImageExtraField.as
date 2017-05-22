@@ -16,7 +16,7 @@ package com.xvm.extraFields
     import flash.geom.*;
     import scaleform.gfx.*;
 
-    public class ImageExtraField extends ImageWG implements IExtraField
+    public class ImageExtraField extends ImageXVM implements IExtraField
     {
         private var _cfg:CExtraField;
         private var isLeftPanel:Boolean;
@@ -70,9 +70,9 @@ package com.xvm.extraFields
             ExtraFieldsHelper.setupEvents(this);
         }
 
-        override protected function onDispose():void
+        override public function dispose():void
         {
-            super.onDispose();
+            super.dispose();
             Xfw.removeCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
             _cfg = null;
         }

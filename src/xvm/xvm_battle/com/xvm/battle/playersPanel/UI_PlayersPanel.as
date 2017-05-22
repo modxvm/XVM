@@ -36,8 +36,8 @@ package com.xvm.battle.playersPanel
             large: PLAYERS_PANEL_STATE.FULL
         }
 
-        public static var playersPanelLeftAtlas:String = AtlasConstants.BATTLE_ATLAS;
-        public static var playersPanelRightAtlas:String = AtlasConstants.BATTLE_ATLAS;
+        public static var playersPanelLeftAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
+        public static var playersPanelRightAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
 
         private var DEFAULT_PLAYERS_PANEL_LIST_ITEM_LEFT_LINKAGE:String = PlayersPanelListLeft.LINKAGE;
         private var XVM_PLAYERS_PANEL_LIST_ITEM_LEFT_LINKAGE:String = getQualifiedClassName(UI_PlayersPanelListItemLeft);

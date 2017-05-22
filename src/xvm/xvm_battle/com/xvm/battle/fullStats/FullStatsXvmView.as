@@ -7,6 +7,7 @@ package com.xvm.battle.fullStats
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
+    import flash.display.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.data.constants.generated.*;
@@ -34,18 +35,22 @@ package com.xvm.battle.fullStats
 
         private function init():void
         {
+            // TODO:9.19
+            /*
             page.unregisterComponent(BATTLE_VIEW_ALIASES.FULL_STATS);
             page.xfw_battleStatisticDataController.componentControllers.splice(page.xfw_battleStatisticDataController.componentControllers.indexOf(page.fullStats), 1);
-            var idx:int = page.getChildIndex(page.fullStats);
-            page.removeChild(page.fullStats);
+            var fullStats:DisplayObject = page.fullStats as DisplayObject
+            var idx:int = page.getChildIndex(fullStats);
+            page.removeChild(fullStats);
             var component:UI_FullStats = new UI_FullStats();
-            component.x = page.fullStats.x;
-            component.y = page.fullStats.y;
-            component.visible = page.fullStats.visible;
+            component.x = fullStats.x;
+            component.y = fullStats.y;
+            component.visible = fullStats.visible;
             page.fullStats = component;
-            page.addChildAt(page.fullStats, idx);
+            page.addChildAt(component, idx);
             page.xfw_battleStatisticDataController.registerComponentController(page.fullStats);
             page.xfw_registerComponent(page.fullStats, BATTLE_VIEW_ALIASES.FULL_STATS);
+            */
         }
     }
 }

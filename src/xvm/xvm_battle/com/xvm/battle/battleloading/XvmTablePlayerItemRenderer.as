@@ -40,11 +40,11 @@ package com.xvm.battle.battleloading
             EXTRA_FIELDS_X: 1011
         }, XvmItemRendererDefaults);
 
-        private var container:RendererContainer;
+        private var container:BaseRendererContainer;
         private var isEnemy:Boolean;
         private var proxy:XvmBattleLoadingItemRendererProxy;
 
-        public function XvmTablePlayerItemRenderer(container:RendererContainer, position:int, isEnemy:Boolean)
+        public function XvmTablePlayerItemRenderer(container:BaseRendererContainer, position:int, isEnemy:Boolean)
         {
             this.container = container;
             this.isEnemy = isEnemy;

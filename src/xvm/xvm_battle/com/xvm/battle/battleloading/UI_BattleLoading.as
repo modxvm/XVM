@@ -8,7 +8,7 @@ package com.xvm.battle.battleloading
     import com.xvm.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
-    import net.wg.data.constants.*;
+    import net.wg.data.constants.generated.*;
     import net.wg.gui.battle.battleloading.renderers.*;
     import net.wg.gui.battle.battleloading.vo.*;
     import net.wg.gui.components.containers.*;
@@ -17,8 +17,8 @@ package com.xvm.battle.battleloading
 
     public dynamic class UI_BattleLoading extends BattleLoadingUI
     {
-        public static var leftAtlas:String = AtlasConstants.BATTLE_ATLAS;
-        public static var rightAtlas:String = AtlasConstants.BATTLE_ATLAS;
+        public static var leftAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
+        public static var rightAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
 
         private var cfg:CBattleLoading;
 

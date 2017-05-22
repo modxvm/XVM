@@ -395,7 +395,7 @@ package com.xvm.lobby.ui.tankcarousel
         {
             var field:TextField = renderer.content.txtInfo;
             var tf:TextFormat = field.getTextFormat();
-            var img:Image = renderer.content.infoImg;
+            var img:Image = renderer.content.infoImg as Image;
             if (isNaN(orig_txtInfo_x))
             {
                 orig_txtInfo_x = field.x;

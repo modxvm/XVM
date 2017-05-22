@@ -3,7 +3,7 @@ XFW:
 wg_shared.swc  <- wg/shared
 wg_battle.swc  <- wg/battle wg/battle_links wg/battle_ui/* wg/common_i18n
 wg_lobby.swc   <- wg/lobby wg/lobby_links wg/lobby_ui/* wg/common_i18n
-wg_vm.swc      <- wg/battleVehicleMarkers
+wg_vm.swc      <- wg/battleVehicleMarkersApp
 xfw_shared.swc <- xfw_shared
                   + wg_shared.swc (ext)
 xfw.swf,xfw.swc<- xfw

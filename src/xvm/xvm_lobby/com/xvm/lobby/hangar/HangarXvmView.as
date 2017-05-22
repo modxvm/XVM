@@ -81,37 +81,37 @@ package com.xvm.lobby.hangar
             var cfg:CHangarElement = Config.config.hangar.vehicleName;
             if (!cfg.enabled)
             {
-                page.header.txtTankInfo.mouseEnabled = false;
-                page.header.txtTankInfo.alpha = 0;
+                page.xfw_header.txtTankInfo.mouseEnabled = false;
+                page.xfw_header.txtTankInfo.alpha = 0;
 
-                page.header.tankTypeIcon.mouseEnabled = false;
-                page.header.tankTypeIcon.mouseChildren = false;
-                page.header.tankTypeIcon.alpha = 0;
+                page.xfw_header.tankTypeIcon.mouseEnabled = false;
+                page.xfw_header.tankTypeIcon.mouseChildren = false;
+                page.xfw_header.tankTypeIcon.alpha = 0;
             }
             else
             {
-                page.header.txtTankInfo.mouseEnabled = true;
+                page.xfw_header.txtTankInfo.mouseEnabled = true;
                 if (isNaN(_orig_txtTankInfo_x))
                 {
-                    _orig_txtTankInfo_x = page.header.txtTankInfo.x;
-                    _orig_txtTankInfo_y = page.header.txtTankInfo.y;
+                    _orig_txtTankInfo_x = page.xfw_header.txtTankInfo.x;
+                    _orig_txtTankInfo_y = page.xfw_header.txtTankInfo.y;
                 }
-                page.header.txtTankInfo.x = _orig_txtTankInfo_x + cfg.shiftX;
-                page.header.txtTankInfo.y = _orig_txtTankInfo_y + cfg.shiftY;
-                page.header.txtTankInfo.alpha = cfg.alpha / 100.0;
-                page.header.txtTankInfo.rotation = cfg.rotation;
+                page.xfw_header.txtTankInfo.x = _orig_txtTankInfo_x + cfg.shiftX;
+                page.xfw_header.txtTankInfo.y = _orig_txtTankInfo_y + cfg.shiftY;
+                page.xfw_header.txtTankInfo.alpha = cfg.alpha / 100.0;
+                page.xfw_header.txtTankInfo.rotation = cfg.rotation;
 
-                page.header.tankTypeIcon.mouseEnabled = true;
-                page.header.tankTypeIcon.mouseChildren = true;
+                page.xfw_header.tankTypeIcon.mouseEnabled = true;
+                page.xfw_header.tankTypeIcon.mouseChildren = true;
                 if (isNaN(_orig_tankTypeIcon_x))
                 {
-                    _orig_tankTypeIcon_x = page.header.tankTypeIcon.x;
-                    _orig_tankTypeIcon_y = page.header.tankTypeIcon.y;
+                    _orig_tankTypeIcon_x = page.xfw_header.tankTypeIcon.x;
+                    _orig_tankTypeIcon_y = page.xfw_header.tankTypeIcon.y;
                 }
-                page.header.tankTypeIcon.x = _orig_tankTypeIcon_x + cfg.shiftX;
-                page.header.tankTypeIcon.y = _orig_tankTypeIcon_y + cfg.shiftY;
-                page.header.tankTypeIcon.alpha = cfg.alpha / 100.0;
-                page.header.tankTypeIcon.rotation = cfg.rotation;
+                page.xfw_header.tankTypeIcon.x = _orig_tankTypeIcon_x + cfg.shiftX;
+                page.xfw_header.tankTypeIcon.y = _orig_tankTypeIcon_y + cfg.shiftY;
+                page.xfw_header.tankTypeIcon.alpha = cfg.alpha / 100.0;
+                page.xfw_header.tankTypeIcon.rotation = cfg.rotation;
             }
         }
 
@@ -124,23 +124,23 @@ package com.xvm.lobby.hangar
             var cfg:CHangarElement = Config.config.hangar.commonQuests;
             if (!cfg.enabled)
             {
-                page.header.btnCommonQuests.mouseEnabled = false;
-                page.header.btnCommonQuests.mouseChildren = false;
-                page.header.btnCommonQuests.alpha = 0;
+                page.xfw_header.btnCommonQuests.mouseEnabled = false;
+                page.xfw_header.btnCommonQuests.mouseChildren = false;
+                page.xfw_header.btnCommonQuests.alpha = 0;
             }
             else
             {
-                page.header.btnCommonQuests.mouseEnabled = true;
-                page.header.btnCommonQuests.mouseChildren = true;
+                page.xfw_header.btnCommonQuests.mouseEnabled = true;
+                page.xfw_header.btnCommonQuests.mouseChildren = true;
                 if (isNaN(_orig_btnCommonQuests_x))
                 {
-                    _orig_btnCommonQuests_x = page.header.btnCommonQuests.x;
-                    _orig_btnCommonQuests_y = page.header.btnCommonQuests.y;
+                    _orig_btnCommonQuests_x = page.xfw_header.btnCommonQuests.x;
+                    _orig_btnCommonQuests_y = page.xfw_header.btnCommonQuests.y;
                 }
-                page.header.btnCommonQuests.x = _orig_btnCommonQuests_x + cfg.shiftX;
-                page.header.btnCommonQuests.y = _orig_btnCommonQuests_y + cfg.shiftY;
-                page.header.btnCommonQuests.alpha = cfg.alpha / 100.0;
-                page.header.btnCommonQuests.rotation = cfg.rotation;
+                page.xfw_header.btnCommonQuests.x = _orig_btnCommonQuests_x + cfg.shiftX;
+                page.xfw_header.btnCommonQuests.y = _orig_btnCommonQuests_y + cfg.shiftY;
+                page.xfw_header.btnCommonQuests.alpha = cfg.alpha / 100.0;
+                page.xfw_header.btnCommonQuests.rotation = cfg.rotation;
             }
         }
 
@@ -153,23 +153,23 @@ package com.xvm.lobby.hangar
             var cfg:CHangarElement = Config.config.hangar.personalQuests;
             if (!cfg.enabled)
             {
-                page.header.btnPersonalQuests.mouseEnabled = false;
-                page.header.btnPersonalQuests.mouseChildren = false;
-                page.header.btnPersonalQuests.alpha = 0;
+                page.xfw_header.btnPersonalQuests.mouseEnabled = false;
+                page.xfw_header.btnPersonalQuests.mouseChildren = false;
+                page.xfw_header.btnPersonalQuests.alpha = 0;
             }
             else
             {
-                page.header.btnPersonalQuests.mouseEnabled = true;
-                page.header.btnPersonalQuests.mouseChildren = true;
+                page.xfw_header.btnPersonalQuests.mouseEnabled = true;
+                page.xfw_header.btnPersonalQuests.mouseChildren = true;
                 if (isNaN(_orig_btnPersonalQuests_x))
                 {
-                    _orig_btnPersonalQuests_x = page.header.btnPersonalQuests.x;
-                    _orig_btnPersonalQuests_y = page.header.btnPersonalQuests.y;
+                    _orig_btnPersonalQuests_x = page.xfw_header.btnPersonalQuests.x;
+                    _orig_btnPersonalQuests_y = page.xfw_header.btnPersonalQuests.y;
                 }
-                page.header.btnPersonalQuests.x = _orig_btnPersonalQuests_x + cfg.shiftX;
-                page.header.btnPersonalQuests.y = _orig_btnPersonalQuests_y + cfg.shiftY;
-                page.header.btnPersonalQuests.alpha = cfg.alpha / 100.0;
-                page.header.btnPersonalQuests.rotation = cfg.rotation;
+                page.xfw_header.btnPersonalQuests.x = _orig_btnPersonalQuests_x + cfg.shiftX;
+                page.xfw_header.btnPersonalQuests.y = _orig_btnPersonalQuests_y + cfg.shiftY;
+                page.xfw_header.btnPersonalQuests.alpha = cfg.alpha / 100.0;
+                page.xfw_header.btnPersonalQuests.rotation = cfg.rotation;
             }
         }
 

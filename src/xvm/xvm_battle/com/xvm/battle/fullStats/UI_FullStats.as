@@ -8,15 +8,15 @@ package com.xvm.battle.fullStats
     import com.xvm.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
-    import net.wg.data.constants.*;
+    import net.wg.data.constants.generated.*;
     import net.wg.gui.components.containers.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.managers.impl.*;
 
     public dynamic class UI_FullStats extends FullStatsUI
     {
-        public static var leftAtlas:String = AtlasConstants.BATTLE_ATLAS;
-        public static var rightAtlas:String = AtlasConstants.BATTLE_ATLAS;
+        public static var leftAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
+        public static var rightAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
 
         private var cfg:CStatisticForm;
 

@@ -21,6 +21,7 @@ package com.xvm.battle.battleloading
     import flash.text.*;
     import flash.utils.*;
     import net.wg.data.constants.*;
+    import net.wg.data.constants.generated.*;
     import net.wg.data.VO.daapi.*;
     import net.wg.gui.battle.battleloading.*;
     import net.wg.gui.battle.battleloading.renderers.*;
@@ -141,11 +142,14 @@ package com.xvm.battle.battleloading
                 var atlasName:String = _isLeftPanel ? UI_BattleLoading.leftAtlas : UI_BattleLoading.rightAtlas;
                 if (!App.atlasMgr.isAtlasInitialized(atlasName))
                 {
-                    atlasName = AtlasConstants.BATTLE_ATLAS;
+                    atlasName = ATLAS_CONSTANTS.BATTLE_ATLAS;
                 }
 
                 ui.vehicleIcon.graphics.clear();
-                App.atlasMgr.drawGraphics(atlasName, BattleAtlasItem.getVehicleIconName(_model.vehicleIconName), ui.vehicleIcon.graphics, BattleAtlasItem.VEHICLE_TYPE_UNKNOWN);
+                // TODO:9.19
+                /*
+                App.atlasMgr.drawGraphics(atlasName, BattleLoadingHelper.getVehicleIconName(_model.vehicleIconName), ui.vehicleIcon.graphics, "unknown" /*BattleLoadingHelper.VEHICLE_TYPE_UNKNOWN*//*);
+                */
 
                 var schemeName:String = getSchemeNameForVehicle(currentPlayerState);
                 var scheme:IColorScheme = App.colorSchemeMgr.getScheme(schemeName);
@@ -201,7 +205,7 @@ package com.xvm.battle.battleloading
         {
             var highlightVehicleIcon:Boolean = Config.config.battle.highlightVehicleIcon;
             return PlayerStatusSchemeName.getSchemeNameForVehicle(
-                _model.isCurrentPlayer && highlightVehicleIcon,
+                UserTags.isCurrentPlayer(_model.userTags) && highlightVehicleIcon,
                 _model.isSquadPersonal() && highlightVehicleIcon,
                 _model.isTeamKiller(),
                 !_model.isAlive(),
@@ -211,7 +215,12 @@ package com.xvm.battle.battleloading
         // TODO
         public function getSchemeNameForPlayer(options:IVOMacrosOptions):String
         {
-            return PlayerStatusSchemeName.getSchemeNameForPlayer(_model.isCurrentPlayer, _model.isSquadPersonal(), _model.isTeamKiller(), !_model.isAlive(), !_model.isReady());
+            return PlayerStatusSchemeName.getSchemeNameForPlayer(
+                UserTags.isCurrentPlayer(_model.userTags),
+                _model.isSquadPersonal(),
+                _model.isTeamKiller(),
+                !_model.isAlive(),
+                !_model.isReady());
         }
 
         // XVM events handlers
