@@ -80,7 +80,7 @@ package com.xvm.vehiclemarkers.ui
             Xfw.addCommandListener("BC_updateVehiclesData", BattleState.instance.updateVehiclesData);
             Xfw.addCommandListener("BC_updateVehicleStatus", BattleState.instance.updateVehicleStatus);
             Xfw.addCommandListener("BC_updatePlayerStatus", BattleState.instance.updatePlayerStatus);
-            Xfw.addCommandListener("BC_setVehiclesStats", BattleState.instance.setVehicleStats);
+            Xfw.addCommandListener("BC_setFrags", BattleState.instance.setFrags);
             Xfw.addCommandListener("BC_updateVehiclesStat", BattleState.instance.updateVehiclesStat);
             Xfw.addCommandListener("BC_updatePersonalStatus", BattleState.instance.updatePersonalStatus);
             Xfw.addCommandListener("BC_setArenaInfo", BattleState.instance.setArenaInfo);
@@ -97,7 +97,7 @@ package com.xvm.vehiclemarkers.ui
             Xfw.removeCommandListener("BC_updateVehiclesData", BattleState.instance.updateVehiclesData);
             Xfw.removeCommandListener("BC_updateVehicleStatus", BattleState.instance.updateVehicleStatus);
             Xfw.removeCommandListener("BC_updatePlayerStatus", BattleState.instance.updatePlayerStatus);
-            Xfw.removeCommandListener("BC_setVehiclesStats", BattleState.instance.setVehicleStats);
+            Xfw.removeCommandListener("BC_setFrags", BattleState.instance.setFrags);
             Xfw.removeCommandListener("BC_updateVehiclesStat", BattleState.instance.updateVehiclesStat);
             Xfw.removeCommandListener("BC_updatePersonalStatus", BattleState.instance.updatePersonalStatus);
             Xfw.removeCommandListener("BC_setArenaInfo", BattleState.instance.setArenaInfo);
