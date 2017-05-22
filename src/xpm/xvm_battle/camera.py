@@ -208,13 +208,15 @@ def create(base, self, model, list, args):
 
 @overrideMethod(SiegeModeIndicatorMeta, 'as_showHintS')
 def SiegeModeIndicatorMeta_as_showHintS(base, self, buttonName, messageLeft, messageRight):
-    if not (config.get('battle/camera/enabled') and config.get('battle/camera/hideHint')):
-        base(self, buttonName, messageLeft, messageRight)
+    if config.get('battle/camera/enabled') and config.get('battle/camera/hideHint'):
+        return
+    base(self, buttonName, messageLeft, messageRight)
 
 @overrideMethod(CrosshairPanelContainerMeta, 'as_showHintS')
 def CrosshairPanelContainerMeta_as_showHintS(base, self, key, messageLeft, messageRight, offsetX, offsetY):
-    if not (config.get('battle/camera/enabled') and config.get('battle/camera/hideHint')):
-        base(self, key, messageLeft, messageRight, offsetX, offsetY)
+    if config.get('battle/camera/enabled') and config.get('battle/camera/hideHint'):
+        return
+    base(self, key, messageLeft, messageRight, offsetX, offsetY)
 
 @overrideMethod(SniperAimingSystem, '_SniperAimingSystem__clampToLimits')
 def clampToLimits(base, self, turretYaw, gunPitch):
