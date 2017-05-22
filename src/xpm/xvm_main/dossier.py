@@ -22,12 +22,13 @@ import BigWorld
 from helpers.i18n import makeString
 from items import vehicles
 from dossiers2.ui.achievements import ACHIEVEMENT_BLOCK as _AB
-from gui.shared import g_itemsCache
 from gui.shared.gui_items import GUI_ITEM_TYPE
 from gui.Scaleform.locale.MENU import MENU
 from gui.Scaleform.genConsts.PROFILE_DROPDOWN_KEYS import PROFILE_DROPDOWN_KEYS
 from gui.Scaleform.daapi.view.lobby.profile.QueuedVehicleDossierReceiver import QueuedVehicleDossierReceiver
-from gui.LobbyContext import g_lobbyContext
+from helpers import dependency
+from skeletons.gui.shared import IItemsCache
+from skeletons.gui.lobby_context import ILobbyContext
 
 from xfw import *
 
@@ -40,6 +41,9 @@ import vehinfo_xte
 #############################
 
 class _Dossier(object):
+
+    itemsCache = dependency.descriptor(IItemsCache)
+    lobbyContext = dependency.descriptor(ILobbyContext)
 
     def __init__(self, *args):
         self.__dataReceiver = QueuedVehicleDossierReceiver()
@@ -73,20 +77,20 @@ class _Dossier(object):
             self.accountDBID = None
 
         if self.vehCD == 0:
-            dossier = g_itemsCache.items.getAccountDossier(self.accountDBID)
+            dossier = self.itemsCache.items.getAccountDossier(self.accountDBID)
             res = self.__prepareAccountResult(dossier)
         else:
             vehCD = int(self.vehCD)
             if not self.__isVehicleDossierCached(self.accountDBID, vehCD):
                 return None
-            dossier = g_itemsCache.items.getVehicleDossier(vehCD, self.accountDBID)
-            xpVehs = g_itemsCache.items.stats.vehiclesXPs
+            dossier = self.itemsCache.items.getVehicleDossier(vehCD, self.accountDBID)
+            xpVehs = self.itemsCache.items.stats.vehiclesXPs
             earnedXP = xpVehs.get(vehCD, 0)
-            freeXP = g_itemsCache.items.stats.actualFreeXP
+            freeXP = self.itemsCache.items.stats.actualFreeXP
             #log('vehCD: {0} pVehXp: {1}'.format(vehCD, earnedXP))
 
             xpToElite = 0
-            unlocks = g_itemsCache.items.stats.unlocks
+            unlocks = self.itemsCache.items.stats.unlocks
             _, nID, invID = vehicles.parseIntCompactDescr(vehCD)
             vType = vehicles.g_cache.vehicle(nID, invID)
             for data in vType.unlocksDescrs:
@@ -117,7 +121,7 @@ class _Dossier(object):
         if accountDBID is None or accountDBID == 0:
             return True
 
-        container = g_itemsCache.items._ItemsRequester__itemsCache[GUI_ITEM_TYPE.VEHICLE_DOSSIER]
+        container = self.itemsCache.items._ItemsRequester__itemsCache[GUI_ITEM_TYPE.VEHICLE_DOSSIER]
         dossier = container.get((accountDBID, vehCD))
         return dossier is not None
 
@@ -137,7 +141,7 @@ class _Dossier(object):
         elif self._battlesType == PROFILE_DROPDOWN_KEYS.CLAN:
             return dossier.getGlobalMapStats()
         elif self._battlesType == PROFILE_DROPDOWN_KEYS.STATICTEAM_SEASON:
-            currentSeasonID = g_lobbyContext.getServerSettings().eSportCurrentSeason.getID()
+            currentSeasonID = self.lobbyContext.getServerSettings().eSportCurrentSeason.getID()
             return dossier.getSeasonRated7x7Stats(currentSeasonID)
         elif self._battlesType == PROFILE_DROPDOWN_KEYS.FORTIFICATIONS_BATTLES:
             return dossier.getFortBattlesStats()

@@ -53,11 +53,12 @@ def update_hp(vehicleID, hp):
 # night_dragon_on <http://www.koreanrandom.com/forum/user/14897-night-dragon-on/>
 # ktulho <http://www.koreanrandom.com/forum/user/17624-ktulho/>
 
+import traceback
 import BigWorld
 from CurrentVehicle import g_currentVehicle
 from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
-from gui.shared import g_itemsCache
-import traceback
+from helpers import dependency
+from skeletons.gui.shared import IItemsCache
 
 playerAvgDamage = None
 
@@ -66,7 +67,8 @@ playerAvgDamage = None
 def Hangar__updateParams(self):
     try:
         global playerAvgDamage
-        playerAvgDamage = g_itemsCache.items.getVehicleDossier(g_currentVehicle.item.intCD).getRandomStats().getAvgDamage()
+        itemsCache = dependency.instance(IItemsCache)
+        playerAvgDamage = itemsCache.items.getVehicleDossier(g_currentVehicle.item.intCD).getRandomStats().getAvgDamage()
         return playerAvgDamage
     except:
         err(traceback.format_exc())

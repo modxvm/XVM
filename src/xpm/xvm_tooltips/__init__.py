@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.18.0',
+    'VERSION':       '0.9.19',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.18.0'],
+    'GAME_VERSIONS': ['0.9.19'],
     # optional
 }
 
@@ -26,7 +26,7 @@ import gui.shared.tooltips.vehicle as tooltips_vehicle
 from gun_rotation_shared import calcPitchLimitsFromDesc
 from helpers import i18n
 from gui import g_htmlTemplates
-from gui.shared import g_eventBus, g_itemsCache
+from gui.shared import g_eventBus
 from gui.shared.formatters import text_styles
 from gui.shared.tooltips import formatters
 from gui.shared.gui_items import GUI_ITEM_TYPE
@@ -42,6 +42,9 @@ from gui.Scaleform.framework.ToolTip import ToolTip
 from gui.Scaleform.daapi.view.battle.shared.consumables_panel import ConsumablesPanel
 from gui.Scaleform.daapi.view.meta.ModuleInfoMeta import ModuleInfoMeta
 from gui.shared.tooltips.module import ModuleBlockTooltipData
+from helpers import dependency
+from skeletons.gui.shared import IItemsCache
+
 from xfw import *
 
 import xvm_main.python.config as config
@@ -523,7 +526,8 @@ def relate_shells_vehicles():
     global shells_vehicles_compatibility
     try:
         shells_vehicles_compatibility = {}
-        for vehicle in g_itemsCache.items.getVehicles().values():
+        itemsCache = dependency.instance(IItemsCache)
+        for vehicle in itemsCache.items.getVehicles().values():
             if vehicle.name.find('_IGR') > 0 or vehicle.name.find('_training') > 0:
                 continue
             for turrets in vehicle.descriptor.type.turrets:

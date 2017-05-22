@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.18.0',
+    'VERSION':       '0.9.19',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.18.0'],
+    'GAME_VERSIONS': ['0.9.19'],
     # optional
 }
 
@@ -20,12 +20,14 @@ import traceback
 import simplejson
 
 import BigWorld
-from gui.shared import event_dispatcher, g_itemsCache
+from gui.shared import event_dispatcher
 from gui.Scaleform.daapi.view.battle_results_window import BattleResultsWindow
 from gui.battle_results import composer
 from gui.battle_results.components import base
 from gui.battle_results.settings import BATTLE_RESULTS_RECORD
 from gui.shared.crits_mask_parser import critsParserGenerator
+from helpers import dependency
+from skeletons.gui.shared import IItemsCache
 
 from xfw import *
 
@@ -64,6 +66,8 @@ def BattleResultsWindow_as_setDataS(base, self, data):
 
 class XvmDataBlock(base.StatsBlock):
     __slots__ = ('xvm_data')
+
+    itemsCache = dependency.descriptor(IItemsCache)
 
     def __init__(self, meta = None, field = '', *path):
         super(XvmDataBlock, self).__init__(meta, field, *path)
@@ -109,7 +113,7 @@ class XvmDataBlock(base.StatsBlock):
             else:
                 premXP = vData['xp'] * (vData['premiumXPFactor10'] / 10.0)
                 premCrewXP = vData['tmenXP'] * (vData['premiumXPFactor10'] / 10.0)
-            ownVehicle = g_itemsCache.items.getItemByCD(typeCompDescr)
+            ownVehicle = self.itemsCache.items.getItemByCD(typeCompDescr)
             if ownVehicle and ownVehicle.isPremium:
                 origCrewXP = int(origCrewXP * 1.5)
                 premCrewXP = int(premCrewXP * 1.5)

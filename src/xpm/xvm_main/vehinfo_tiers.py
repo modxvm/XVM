@@ -9,8 +9,9 @@ def getTiers(level, cls, key):
 # PRIVATE
 
 from logger import *
-from gui.shared import g_itemsCache
 from gui.shared.utils.requesters import REQ_CRITERIA
+from helpers import dependency
+from skeletons.gui.shared import IItemsCache
 
 _special = {
     # Data from http://forum.worldoftanks.ru/index.php?/topic/41221-
@@ -98,5 +99,6 @@ def _getTiers(level, cls, key):
 
 def _test_specials():
     for veh_name in _special.keys():
-        if not g_itemsCache.items.getVehicles(REQ_CRITERIA.VEHICLE.SPECIFIC_BY_NAME(veh_name)):
+        itemsCache = dependency.instance(IItemsCache)
+        if not itemsCache.items.getVehicles(REQ_CRITERIA.VEHICLE.SPECIFIC_BY_NAME(veh_name)):
             warn('vehinfo_tiers: vehicle %s declared in _special does not exist!' % veh_name)

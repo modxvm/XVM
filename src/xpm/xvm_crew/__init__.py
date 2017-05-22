@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.18.0',
+    'VERSION':       '0.9.19',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.18.0'],
+    'GAME_VERSIONS': ['0.9.19'],
     # optional
 }
 
@@ -18,13 +18,15 @@ XFW_MOD_INFO = {
 
 import BigWorld
 import game
-from gui.shared import g_eventBus, g_itemsCache
+from gui.shared import g_eventBus
 from CurrentVehicle import g_currentVehicle
 from gui.Scaleform.daapi.view.lobby.hangar.Crew import Crew
 from gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers import CrewContextMenuHandler
 from gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers import CREW as WG_CREW
 from gui.Scaleform.daapi.view.lobby.hangar.TmenXpPanel import TmenXpPanel
 from gui.Scaleform.daapi.view.lobby.cyberSport.VehicleSelectorPopup import VehicleSelectorPopup
+from helpers import dependency
+from skeletons.gui.shared import IItemsCache
 
 from xfw import *
 
@@ -138,7 +140,8 @@ def VehicleSelectorPopup_onSelectVehicles(self, items):
     try:
         if len(items) == 1:
             cd = int(items[0])
-            vehicle = g_itemsCache.items.getItemByCD(cd)
+            itemsCache = dependency.instance(IItemsCache)
+            vehicle = itemsCache.items.getItemByCD(cd)
             if vehicle and vehicle.isInInventory and not (vehicle.isCrewFull or vehicle.isInBattle or vehicle.isLocked):
                 if config.get('hangar/enableCrewAutoReturn') and userprefs.get('xvm_crew/auto_prev_crew/%s' % vehicle.invID, True):
                     wg_compat.g_instance.processReturnCrewForVehicleSelectorPopup(vehicle)

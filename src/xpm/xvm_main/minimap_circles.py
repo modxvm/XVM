@@ -22,7 +22,8 @@ import traceback
 import BigWorld
 from adisp import async, process
 from CurrentVehicle import g_currentVehicle
-from gui.shared import g_itemsCache
+from helpers import dependency
+from skeletons.gui.shared import IItemsCache
 
 from xfw import *
 from logger import *
@@ -30,6 +31,9 @@ import userprefs
 
 
 class _MinimapCircles(object):
+
+    itemsCache = dependency.descriptor(IItemsCache)
+    
     def __init__(self):
         self.clear()
 
@@ -210,7 +214,7 @@ class _MinimapCircles(object):
         self.crew = []
         self.is_full_crew = True
 
-        tankmen = g_itemsCache.items.getTankmen()
+        tankmen = self.itemsCache.items.getTankmen()
         for tankman in tankmen.itervalues():
             for slotIdx, crewman in self.vehicleItem.crew:
                 if crewman is None:

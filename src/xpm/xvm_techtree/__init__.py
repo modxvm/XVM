@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.18.0',
+    'VERSION':       '0.9.19',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.18.0'],
+    'GAME_VERSIONS': ['0.9.19'],
     # optional
 }
 
@@ -19,9 +19,10 @@ XFW_MOD_INFO = {
 import traceback
 
 import BigWorld
-from gui.shared import g_itemsCache
 from gui.Scaleform.daapi.view.lobby.techtree.techtree_dp import _TechTreeDataProvider
 from gui.Scaleform.daapi.view.meta.ModuleInfoMeta import ModuleInfoMeta
+from helpers import dependency
+from skeletons.gui.shared import IItemsCache
 
 from xfw import *
 
@@ -47,8 +48,9 @@ def ModuleInfoWindow_as_setModuleInfoS(base, self, moduleInfo):
     try:
         if moduleInfo['type'] == 'vehicleGun':
             veh_id = self._ModuleInfoWindow__vehicleDescr.type.compactDescr
-            vehicle = g_itemsCache.items.getItemByCD(veh_id)
-            gun = g_itemsCache.items.getItemByCD(self.moduleCompactDescr).descriptor
+            itemsCache = dependency.instance(IItemsCache)
+            vehicle = itemsCache.items.getItemByCD(veh_id)
+            gun = itemsCache.items.getItemByCD(self.moduleCompactDescr).descriptor
             turret = self._ModuleInfoWindow__vehicleDescr.turret    # not accurate, but not relevant here
             (viewRange, shellRadius, artiRadius) = _getRanges(turret, gun, vehicle.nationName, vehicle.type)
             if vehicle.type == 'SPG':   # arti

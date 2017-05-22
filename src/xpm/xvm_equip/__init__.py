@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.18.0',
+    'VERSION':       '0.9.19',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.18.0'],
+    'GAME_VERSIONS': ['0.9.19'],
     # optional
 }
 
@@ -22,11 +22,13 @@ import BigWorld
 import game
 from Account import PlayerAccount
 from CurrentVehicle import g_currentVehicle
-from gui.shared import g_eventBus, g_itemsCache
+from gui.shared import g_eventBus
 from gui.shared.gui_items import GUI_ITEM_TYPE
 from gui.shared.utils.requesters import REQ_CRITERIA
 from gui.Scaleform.daapi.view.lobby.hangar.AmmunitionPanel import AmmunitionPanel
 from gui.Scaleform.daapi.view.lobby.hangar.TmenXpPanel import TmenXpPanel
+from helpers import dependency
+from skeletons.gui.shared import IItemsCache
 
 from xfw import *
 
@@ -125,20 +127,21 @@ def TmenXpPanel_onVehicleChange(*args, **kwargs):
             return
         if not (last_vehicles_id_arr and equip_settings) and not get_settings():
             return
+        itemsCache = dependency.instance(IItemsCache)
         vehicle = g_currentVehicle.item
         # get one of each type of removable devices from vehicles by FIFO order of usage
         if vehicle.intCD in last_vehicles_id_arr:
             last_vehicles_id_arr.remove(vehicle.intCD)
         last_vehicles_id_arr.append(vehicle.intCD)
         updated_inventoryCount = {}
-        for device in g_itemsCache.items.getItems(GUI_ITEM_TYPE.OPTIONALDEVICE, REQ_CRITERIA.REMOVABLE).values():
+        for device in itemsCache.items.getItems(GUI_ITEM_TYPE.OPTIONALDEVICE, REQ_CRITERIA.REMOVABLE).values():
             updated_inventoryCount[device.name] = device.inventoryCount
         devices_arr = []
         for installed_device in vehicle.optDevices:
             if installed_device and installed_device.isRemovable:
                 devices_arr.append(installed_device.name) # don't remove what is present on current vehicle
         for vehicle_id in last_vehicles_id_arr[:-1]:
-            prev_vehicle = g_itemsCache.items.getItemByCD(vehicle_id)
+            prev_vehicle = itemsCache.items.getItemByCD(vehicle_id)
             if not prev_vehicle or not prev_vehicle.isInInventory: # sold?
                 last_vehicles_id_arr.remove(vehicle_id)
                 continue
@@ -155,7 +158,7 @@ def TmenXpPanel_onVehicleChange(*args, **kwargs):
                 for slotIdx, installed_device in enumerate(vehicle.optDevices):
                     needed_device_id = equip_settings[vehicle.name][slotIdx]
                     if needed_device_id and (not installed_device or (installed_device.isRemovable and installed_device.intCD != needed_device_id)):
-                        needed_device = g_itemsCache.items.getItemByCD(needed_device_id)
+                        needed_device = itemsCache.items.getItemByCD(needed_device_id)
                         debug_str += ' %s' % needed_device.name
                         wg_compat.g_instance.processReturnEquip(vehicle, needed_device, slotIdx, True)
                 debug(debug_str)
@@ -176,7 +179,8 @@ def TmenXpPanel_onVehicleChange(*args, **kwargs):
 def get_settings():
     try:
         global last_vehicles_id_arr, equip_settings
-        inventory_vehicles_dict = dict(g_itemsCache.items.getVehicles(REQ_CRITERIA.INVENTORY))
+        itemsCache = dependency.instance(IItemsCache)
+        inventory_vehicles_dict = dict(itemsCache.items.getVehicles(REQ_CRITERIA.INVENTORY))
         last_vehicles_id_arr = inventory_vehicles_dict.keys()
         equip_settings = userprefs.get('auto_equip/%s' % player_name)
         if equip_settings is None or 'version' not in equip_settings or equip_settings['version'] != PREF_VERSION: # no prefs, or old version: get currently installed devices

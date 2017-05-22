@@ -9,14 +9,14 @@ import simplejson
 import constants
 from account_helpers.AccountSettings import DEFAULT_VALUES, KEY_FILTERS, CAROUSEL_FILTER_2, FALLOUT_CAROUSEL_FILTER_2
 from account_helpers.settings_core.ServerSettingsManager import ServerSettingsManager
-from gui.shared import g_itemsCache
 from gui.shared.gui_items.dossier.achievements import MarkOfMasteryAchievement
 from gui.shared.utils.functions import makeTooltip
 from gui.shared.utils.requesters.ItemsRequester import REQ_CRITERIA
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
-from gui.Scaleform.daapi.view.lobby.hangar import filter_popover
-from gui.Scaleform.daapi.view.lobby.hangar.filter_popover import FilterPopover, _SECTION
-from gui.Scaleform.daapi.view.lobby.hangar.carousels.basic.carousel_filter import BasicCriteriesGroup
+from gui.Scaleform.daapi.view.lobby.hangar.filter_popover import TankCarouselFilterPopover, _SECTION
+from gui.Scaleform.daapi.view.lobby.vehicle_carousel.carousel_filter import BasicCriteriesGroup
+from helpers import dependency
+from skeletons.gui.shared import IItemsCache
 
 from xfw import *
 
@@ -83,8 +83,8 @@ def _ServerSettingsManager_setSections(base, self, sections, settings):
 # Filters:
 #   Premium   Normal   Elite    NonElite    CompleteCrew
 #   NoMaster  Reserve  [igr]
-@overrideMethod(filter_popover, '_getInitialVO')
-def _filter_popover_getInitialVO(base, filters, mapping, xpRateMultiplier, switchCarouselSelected):
+@overrideMethod(TankCarouselFilterPopover, '_getInitialVO')
+def _TankCarouselFilterPopover_getInitialVO(base, filters, mapping, xpRateMultiplier, switchCarouselSelected):
     data = base(filters, mapping, xpRateMultiplier, switchCarouselSelected)
     #debug(data['specials'])
     #debug(mapping)
@@ -108,20 +108,20 @@ def _filter_popover_getInitialVO(base, filters, mapping, xpRateMultiplier, switc
         if is_igr:
             data['specials'].append(igr)
     except Exception as ex:
-        err('_filter_popover_getInitialVO() exception: ' + traceback.format_exc())
+        err('_TankCarouselFilterPopover_getInitialVO() exception: ' + traceback.format_exc())
     return data
 
-@overrideMethod(FilterPopover, '_FilterPopover__generateMapping')
-def _FilterPopover__generateMapping(base, self, hasRented, hasEvent):
-    base(self, hasRented, hasEvent)
+@overrideClassMethod(TankCarouselFilterPopover, '_generateMapping')
+def _TankCarouselFilterPopover_generateMapping(base, cls, hasRented, hasEvent):
+    mapping = base(hasRented, hasEvent)
 
-    is_igr = PREFS.IGR in self._FilterPopover__mapping[_SECTION.SPECIALS]
-    self._FilterPopover__mapping[_SECTION.SPECIALS] = [
+    is_igr = PREFS.IGR in mapping[_SECTION.SPECIALS]
+    mapping[_SECTION.SPECIALS] = [
         PREFS.PREMIUM,   PREFS.NORMAL, PREFS.ELITE, PREFS.NON_ELITE, PREFS.FULL_CREW,
         PREFS.NO_MASTER, PREFS.RESERVE]
     if is_igr:
-        self._FilterPopover__mapping[_SECTION.SPECIALS].append(PREFS.IGR)
-    self._FilterPopover__usedFilters = list(itertools.chain.from_iterable(self._FilterPopover__mapping.itervalues()))
+        mapping[_SECTION.SPECIALS].append(PREFS.IGR)
+    return mapping
 
 # Apply XVM filters
 @overrideMethod(BasicCriteriesGroup, 'update')
@@ -130,7 +130,8 @@ def _BasicCriteriesGroup_update(base, self, filters):
     (filters[PREFS.PREMIUM], filters[PREFS.ELITE]) = (False, False)
     base(self, filters)
     (filters[PREFS.PREMIUM], filters[PREFS.ELITE]) = (premium, elite)
-    vehicles_stats = g_itemsCache.items.getAccountDossier().getRandomStats().getVehicles()
+    itemsCache = dependency.instance(IItemsCache)
+    vehicles_stats = itemsCache.items.getAccountDossier().getRandomStats().getVehicles()
     self._criteria |= REQ_CRITERIA.CUSTOM(lambda x: _applyXvmFilter(x, filters, vehicles_stats))
 
 def _applyXvmFilter(item, filters, vehicles_stats):

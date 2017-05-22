@@ -11,7 +11,7 @@ import BigWorld
 import game
 from dossiers2.ui.achievements import ACHIEVEMENT_BLOCK as ACHIEVEMENT_BLOCK
 from gui import GUI_NATIONS_ORDER_INDEX
-from gui.shared import g_eventBus, g_itemsCache
+from gui.shared import g_eventBus
 from gui.shared.gui_items.Vehicle import VEHICLE_TYPES_ORDER_INDICES
 from gui.shared.utils.requesters import REQ_CRITERIA
 from gui.DialogsInterface import showDialog
@@ -23,8 +23,10 @@ from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 from gui.Scaleform.daapi.view.dialogs import SimpleDialogMeta, I18nConfirmDialogButtons
 from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
 import gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers as hangar_cm_handlers
-from gui.Scaleform.daapi.view.lobby.hangar.carousels.basic import carousel_data_provider
-from gui.Scaleform.daapi.view.lobby.hangar.carousels.basic.carousel_data_provider import CarouselDataProvider, _SUPPLY_ITEMS
+from gui.Scaleform.daapi.view.lobby.hangar.carousels.basic.carousel_data_provider import CarouselDataProvider, HangarCarouselDataProvider, _SUPPLY_ITEMS
+from gui.Scaleform.daapi.view.lobby.hangar.carousels.fallout.carousel_data_provider import FalloutCarouselDataProvider
+from helpers import dependency
+from skeletons.gui.shared import IItemsCache
 
 from xfw import *
 
@@ -75,9 +77,11 @@ def fini():
 def onXfwCommand(cmd, *args):
     try:
         if cmd == XVM_CAROUSEL_COMMAND.GET_USED_SLOTS_COUNT:
-            return (len(g_itemsCache.items.getVehicles(REQ_CRITERIA.INVENTORY)), True)
+            itemsCache = dependency.instance(IItemsCache)
+            return (len(itemsCache.items.getVehicles(REQ_CRITERIA.INVENTORY)), True)
         if cmd == XVM_CAROUSEL_COMMAND.GET_TOTAL_SLOTS_COUNT:
-            return (g_itemsCache.items.stats.vehicleSlots, True)
+            itemsCache = dependency.instance(IItemsCache)
+            return (itemsCache.items.stats.vehicleSlots, True)
     except Exception, ex:
         err(traceback.format_exc())
         return (None, True)
@@ -110,15 +114,9 @@ def onSwfLoaded(e):
 
 carousel_config = {}
 
-# for debug purposes - add all tanks to the carousel
-#@overrideMethod(carousel_data_provider.CarouselDataProvider, 'updateVehicles')
-#def updateVehicles(base, self, vehicles = None, filterCriteria = None):
-#    self._baseCriteria = REQ_CRITERIA.CUSTOM(lambda x: True)
-#    base(self, vehicles, filterCriteria)
-
 # added sorting orders for tanks in carousel
-@overrideMethod(carousel_data_provider, '_vehicleComparisonKey')
-def carousel_data_provider_vehicleComparisonKey(base, vehicle):
+@overrideClassMethod(CarouselDataProvider, '_vehicleComparisonKey')
+def _CarouselDataProvider_vehicleComparisonKey(base, cls, vehicle):
     try:
         global carousel_config
         if not 'sorting_criteria' in carousel_config:
@@ -136,7 +134,8 @@ def carousel_data_provider_vehicleComparisonKey(base, vehicle):
                 factor = 1
 
             if sort_criterion in ['winRate', 'markOfMastery']:
-                vehicles_stats = g_itemsCache.items.getAccountDossier().getRandomStats().getVehicles() # battlesCount, wins, markOfMastery, xp
+                itemsCache = dependency.instance(IItemsCache)
+                vehicles_stats = itemsCache.items.getAccountDossier().getRandomStats().getVehicles() # battlesCount, wins, markOfMastery, xp
                 stats = vehicles_stats.get(vehicle.intCD)
                 comparisonKey.append(factor if stats else 0)
                 if stats:
@@ -200,8 +199,8 @@ def _VehicleContextMenuHandler_generateOptions(base, self, ctx = None):
         err(traceback.format_exc())
     return result
 
-@overrideMethod(CarouselDataProvider, '_CarouselDataProvider__getSupplyIndices')
-def _CarouselDataProvider__getSupplyIndices(base, self):
+@overrideMethod(HangarCarouselDataProvider, '_HangarCarouselDataProvider__getSupplyIndices')
+def _HangarCarouselDataProvider__getSupplyIndices(base, self):
     supplyIndices = base(self)
     if config.get('hangar/carousel/hideBuySlot'):
         supplyIndices.pop(_SUPPLY_ITEMS.BUY_SLOT)
@@ -211,8 +210,8 @@ def _CarouselDataProvider__getSupplyIndices(base, self):
         self._supplyItems = [x for x in self._supplyItems if not x.get('buyTank', False)]
     return supplyIndices
 
-@overrideMethod(CarouselDataProvider, '_getVehicleDataVO')
-def _CarouselDataProvider_getVehicleDataVO(base, self, vehicle):
+@overrideMethod(FalloutCarouselDataProvider, '_getVehicleDataVO')
+def _FalloutCarouselDataProvider_getVehicleDataVO(base, self, vehicle):
     res = base(self, vehicle)
     #log(res)
     if not config.get('hangar/carousel/enableLockBackground', True):

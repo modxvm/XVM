@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.18.0',
+    'VERSION':       '0.9.19',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.18.0'],
+    'GAME_VERSIONS': ['0.9.19'],
     # optional
 }
 
@@ -28,8 +28,9 @@ import traceback
 
 import BigWorld
 import game
-from gui.shared import g_eventBus, g_itemsCache, tooltips
-from gui.shared.gui_items import FittingItem, GUI_ITEM_TYPE
+from gui.shared import g_eventBus, tooltips
+from gui.shared.gui_items import GUI_ITEM_TYPE
+from gui.shared.gui_items.fitting_item import FittingItem
 from gui.shared.gui_items.Vehicle import Vehicle
 from gui.shared.utils.requesters.StatsRequester import StatsRequester
 from gui.Scaleform.daapi.view.lobby.techtree.TechTree import TechTree
@@ -41,6 +42,8 @@ from gui.Scaleform.daapi.view.lobby.recruitWindow.RecruitWindow import RecruitWi
 from gui.Scaleform.daapi.view.lobby.PersonalCase import PersonalCase
 from gui.Scaleform.daapi.view.lobby.exchange.ExchangeFreeToTankmanXpWindow import ExchangeFreeToTankmanXpWindow
 from gui.Scaleform.daapi.view.lobby.customization.main_view import MainView
+from helpers import dependency
+from skeletons.gui.shared import IItemsCache
 
 from xfw import *
 
@@ -293,23 +296,24 @@ def MainView_dispose(self, *args, **kwargs):
 
 # force getUnlockPrice to look at freeXP (which is affected by lock)
 # dirty create same names for use in original function
-class g_itemsCache_dummy:
+class itemsCache_dummy:
+    itemsCache = dependency.descriptor(IItemsCache)
     class items:
         class stats_dummy:
             @property
             def actualFreeXP(*args, **kwargs):
-                return g_itemsCache.items.stats.freeXP
+                return self.itemsCache.items.stats.freeXP
 
             @property
             def unlocks(*args, **kwargs):
-                return g_itemsCache.items.stats.unlocks
+                return self.itemsCache.items.stats.unlocks
 
             @property
             def vehiclesXPs(*args, **kwargs):
-                return g_itemsCache.items.stats.vehiclesXPs
+                return self.temsCache.items.stats.vehiclesXPs
         stats = stats_dummy()
 
-tooltips.g_itemsCache = g_itemsCache_dummy
+tooltips.itemsCache = itemsCache_dummy
 
 
 # force invalidateFreeXP to look at freeXP (which is affected by lock)
@@ -317,7 +321,8 @@ tooltips.g_itemsCache = g_itemsCache_dummy
 def Research_invalidateFreeXP(base, self):
     try:
         if self._isDAAPIInited():
-            self.as_setFreeXPS(g_itemsCache.items.stats.freeXP)
+            itemsCache = dependency.instance(IItemsCache)
+            self.as_setFreeXPS(itemsCache.items.stats.freeXP)
             super(Research, self).invalidateFreeXP()
     except Exception, ex:
         err(traceback.format_exc())

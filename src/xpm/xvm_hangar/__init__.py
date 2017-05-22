@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.18.0',
+    'VERSION':       '0.9.19',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.18.0'],
+    'GAME_VERSIONS': ['0.9.19'],
     # optional
 }
 
@@ -22,12 +22,14 @@ import game
 import helpers
 import nations
 from CurrentVehicle import g_currentVehicle
-from gui.shared import g_eventBus, g_itemsCache
+from gui.shared import g_eventBus
 from gui.prb_control.entities.base.actions_validator import CurrentVehicleActionsValidator
 from gui.prb_control.items import ValidationResult
 from gui.prb_control.settings import PREBATTLE_RESTRICTION
 from gui.Scaleform.daapi.view.meta.BarracksMeta import BarracksMeta
 from gui.shared.gui_items.Vehicle import Vehicle
+from helpers import dependency
+from skeletons.gui.shared import IItemsCache
 
 from xfw import *
 
@@ -86,7 +88,8 @@ def BarracksMeta_as_setTankmenS(base, self, data):
                     tankman_role_arr.append("<img src='%s/nations/%s.png' vspace='-3'>" % (imgPath, nations.NAMES[tankman['nationID']]))
                 if show_skills:
                     tankman_role_arr.append('')
-                    tankman_full_info = g_itemsCache.items.getTankman(tankman['tankmanID'])
+                    itemsCache = dependency.instance(IItemsCache)
+                    tankman_full_info = itemsCache.items.getTankman(tankman['tankmanID'])
                     for skill in tankman_full_info.skills:
                         tankman_role_arr[-1] += "<img src='%s/skills/%s' vspace='-3'>" % (imgPath, skill.icon)
                     if len(tankman_full_info.skills):

@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.18.0',
+    'VERSION':       '0.9.19',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.18.0'],
+    'GAME_VERSIONS': ['0.9.19'],
     # optional
 }
 
@@ -30,10 +30,11 @@ import traceback
 
 import BigWorld
 import game
-from ConnectionManager import connectionManager
 from gui.shared import g_eventBus
 from predefined_hosts import g_preDefinedHosts
 from gui.Scaleform.daapi.view.meta.LobbyHeaderMeta import LobbyHeaderMeta
+from helpers import dependency
+from skeletons.connection_mgr import IConnectionManager
 
 from xfw import *
 
@@ -79,7 +80,8 @@ def onXfwCommand(cmd, *args):
 
 
 def getCurrentServer(*args, **kwargs):
-    as_xfw_cmd(XVM_PING_COMMAND.AS_CURRENTSERVER, connectionManager.serverUserName if len(connectionManager.serverUserName) < 13 else connectionManager.serverUserNameShort)
+    connectionMgr = dependency.instance(IConnectionManager)
+    as_xfw_cmd(XVM_PING_COMMAND.AS_CURRENTSERVER, connectionMgr.serverUserName if len(connectionMgr.serverUserName) < 13 else connectionMgr.serverUserNameShort)
 
 
 #####################################################################

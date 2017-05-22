@@ -5,10 +5,10 @@
 
 XFW_MOD_INFO = {
     # mandatory
-    'VERSION':       '0.9.18.0',
+    'VERSION':       '0.9.19',
     'URL':           'http://www.modxvm.com/',
     'UPDATE_URL':    'http://www.modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.18.0'],
+    'GAME_VERSIONS': ['0.9.19'],
     # optional
 }
 
@@ -18,12 +18,14 @@ XFW_MOD_INFO = {
 
 import BigWorld
 import game
-from gui.shared import g_eventBus, g_itemsCache
+from gui.shared import g_eventBus
 from gui.Scaleform.daapi.view.lobby.prb_windows.squad_view import SquadView
 from gui.Scaleform.daapi.view.dialogs import SimpleDialogMeta, I18nConfirmDialogButtons
 from gui.prb_control.entities.base.squad.actions_handler import SquadActionsHandler
 from gui.DialogsInterface import showDialog
 from functools import partial
+from helpers import dependency
+from skeletons.gui.shared import IItemsCache
 
 from xfw import *
 
@@ -102,7 +104,8 @@ def squad_update_tiers(self, *args, **kwargs):
             as_xfw_cmd(COMMANDS.AS_UPDATE_TIERS, '')
             return
         for squad_vehicle in entity.getVehicles().values():
-            veh = g_itemsCache.items.getItemByCD(squad_vehicle[0].vehTypeCompDescr)
+            itemsCache = dependency.instance(IItemsCache)
+            veh = itemsCache.items.getItemByCD(squad_vehicle[0].vehTypeCompDescr)
             (veh_tier_low, veh_tier_high) = getTiers(veh.level, veh.type, veh.name)
             min_tier = max(veh_tier_low, min_tier)
             max_tiers.append(veh_tier_high)
