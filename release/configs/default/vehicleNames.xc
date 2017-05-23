@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 19.04.2017
+    // Last update: 23.05.2017
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -38,6 +38,8 @@
     "china-Ch26_59_Patton":                  {"name": null, "short": null},
     "china-Ch28_WZ_132A":                    {"name": null, "short": null},
     "china-Ch29_Type_62C_prot":              {"name": null, "short": null},
+    "china-Ch39_WZ120_1G_FT":                {"name": null, "short": null},
+    "china-Ch40_WZ120G_FT":                  {"name": null, "short": null},
     "czech-Cz01_Skoda_T40":                  {"name": null, "short": null},
     "czech-Cz02_TVP_T50":                    {"name": null, "short": null},
     "czech-Cz03_LT_vz35":                    {"name": null, "short": null},
@@ -162,6 +164,8 @@
     "germany-G126_HWK_12":                   {"name": null, "short": null},
     "germany-G12_Ltraktor":                  {"name": null, "short": null},
     "germany-G12_Ltraktor_bot":              {"name": null, "short": null},
+    "germany-G134_PzKpfw_VII":               {"name": null, "short": null},
+    "germany-G136_Tiger_131":                {"name": null, "short": null},
     "germany-G13_VK3001H":                   {"name": null, "short": null},
     "germany-G15_VK3601H":                   {"name": null, "short": null},
     "germany-G16_PzVIB_Tiger_II":            {"name": null, "short": null},
@@ -240,7 +244,6 @@
     "germany-G90_DW_II":                     {"name": null, "short": null},
     "germany-G91_Pro_Ag_A":                  {"name": null, "short": null},
     "germany-G92_VK7201":                    {"name": null, "short": null},
-    "germany-G92_VK7201P":                   {"name": null, "short": null},
     "germany-G93_GW_Mk_VIe":                 {"name": null, "short": null},
     "germany-G94_GW_Tiger_P":                {"name": null, "short": null},
     "germany-G95_Pz_Sfl_IVb":                {"name": null, "short": null},
@@ -279,6 +282,8 @@
     "japan-J26_Type_89":                     {"name": null, "short": null},
     "japan-J27_O_I_120":                     {"name": null, "short": null},
     "japan-J28_O_I_100":                     {"name": null, "short": null},
+    "japan-J29_Nameless":                    {"name": null, "short": null},
+    "japan-J30_Edelweiss":                   {"name": null, "short": null},
     "sweden-S01_Strv_74_A2":                 {"name": null, "short": null},
     "sweden-S02_Strv_M42":                   {"name": null, "short": null},
     "sweden-S03_Strv_M38":                   {"name": null, "short": null},
@@ -529,7 +534,9 @@
     "ussr-R133_KV_122":                      {"name": null, "short": null},
     "ussr-R134_Object_252K":                 {"name": null, "short": null},
     "ussr-R134_Object_252U":                 {"name": null, "short": null},
+    "ussr-R135_T_103":                       {"name": null, "short": null},
     "ussr-R13_KV-1s":                        {"name": null, "short": null},
+    "ussr-R143_T_29":                        {"name": null, "short": null},
     "ussr-R14_SU-5":                         {"name": null, "short": null},
     "ussr-R15_S-51":                         {"name": null, "short": null},
     "ussr-R16_SU-18":                        {"name": null, "short": null},

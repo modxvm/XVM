@@ -26,7 +26,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 19.04.2017
+    # Last update: 23.05.2017
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -60,6 +60,8 @@ _data = {
     "china:Ch26_59_Patton":                  '59Pat',
     "china:Ch28_WZ_132A":                    'wz132a',
     "china:Ch29_Type_62C_prot":              'wz132·1',
+    "china:Ch39_WZ120_1G_FT":                'wz120·1ft',
+    "china:Ch40_WZ120G_FT":                  'wz120G·ft',
     "czech:Cz01_Skoda_T40":                  'skT40',
     "czech:Cz02_TVP_T50":                    'skT50',
     "czech:Cz03_LT_vz35":                    'vz.35',
@@ -184,6 +186,8 @@ _data = {
     "germany:G126_HWK_12":                   'HWK12',
     "germany:G12_Ltraktor":                  'Ltr',
     "germany:G12_Ltraktor_bot":              'Ltr',
+    "germany:G134_PzKpfw_VII":               'PzKf·VII',
+    "germany:G136_Tiger_131":                'Tig131',
     "germany:G13_VK3001H":                   '3001h',
     "germany:G15_VK3601H":                   '3601h',
     "germany:G16_PzVIB_Tiger_II":            'Tig2',
@@ -262,7 +266,6 @@ _data = {
     "germany:G90_DW_II":                     'DW2',
     "germany:G91_Pro_Ag_A":                  'LeoPrA',
     "germany:G92_VK7201":                    'vk7201',
-    "germany:G92_VK7201P":                   'PzKf·VII',
     "germany:G93_GW_Mk_VIe":                 'Gpz·VI',
     "germany:G94_GW_Tiger_P":                'GWTP',
     "germany:G95_Pz_Sfl_IVb":                'PzS4b',
@@ -301,6 +304,8 @@ _data = {
     "japan:J26_Type_89":                     'I·go',
     "japan:J27_O_I_120":                     'O·ho',
     "japan:J28_O_I_100":                     'O·ni',
+    "japan:J29_Nameless":                    'Namel',
+    "japan:J30_Edelweiss":                   'Edelw',
     "sweden:S01_Strv_74_A2":                 'm42·57',
     "sweden:S02_Strv_M42":                   'm/42',
     "sweden:S03_Strv_M38":                   'm/38',
@@ -551,7 +556,9 @@ _data = {
     "ussr:R133_KV_122":                      'Kv122',
     "ussr:R134_Object_252K":                 'zashch',
     "ussr:R134_Object_252U":                 'obj252u',
+    "ussr:R135_T_103":                       't103',
     "ussr:R13_KV-1s":                        'Kv·1s',
+    "ussr:R143_T_29":                        't·29',
     "ussr:R14_SU-5":                         'Su·5',
     "ussr:R15_S-51":                         'S·51',
     "ussr:R16_SU-18":                        'Su·18',
