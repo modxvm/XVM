@@ -190,7 +190,6 @@ def _StrategicCamera_create(base, self, onChangeControlMode = None):
         value = c['distRange']
         if value is not None:
             cfg['distRange'] = [float(i) for i in value]
-            self._StrategicCamera__aimingSystem._StrategicAimingSystem__height = cfg['distRange'][0]
 
     base(self, onChangeControlMode)
 
