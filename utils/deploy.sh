@@ -30,6 +30,9 @@ install_xfw()
   echo "=> xfw"
   rm -f "$WOT_PATH/mods/$XVMBUILD_WOT_VERSION"/com.modxvm.xfw_*.wotmod || err "[install_xfw]"
   cp -a ../src/xfw/~output_wotmod/com.modxvm.xfw*.wotmod "$WOT_PATH/mods/$XVMBUILD_WOT_VERSION/" || err "[install_xfw]"
+  # for debug only
+  mkdir -p "$WOT_PATH/res_mods/$XVMBUILD_WOT_VERSION/gui/flash/" || err "[install_xfw]"
+  cp -a ../src/xfw/~output/swf/*.swf "$WOT_PATH/res_mods/$XVMBUILD_WOT_VERSION/gui/flash/" || err "[install_xfw]"
 }
 
 install_xvm()
