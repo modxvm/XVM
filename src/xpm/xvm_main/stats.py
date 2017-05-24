@@ -75,7 +75,7 @@ class _Stat(object):
         self.req = None
         self.resp = None
         self.arenaId = None
-        self.players = None
+        self.players = {}
         self.cacheBattle = {}
         self.cacheUser = {}
         self._loadingClanIconsCount = 0

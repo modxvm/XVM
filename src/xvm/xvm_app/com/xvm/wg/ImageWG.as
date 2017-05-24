@@ -28,7 +28,7 @@ package com.xvm.wg
         public function ImageWG()
         {
             super();
-            this._mgr = App.imageMgr;
+            this._mgr = ImageManagerWG.imageManager;
             this._bitmap = new Bitmap();
             addChild(this._bitmap);
         }
