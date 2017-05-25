@@ -211,11 +211,23 @@ def SiegeModeIndicatorMeta_as_showHintS(base, self, buttonName, messageLeft, mes
         return
     base(self, buttonName, messageLeft, messageRight)
 
+@overrideMethod(SiegeModeIndicatorMeta, 'as_hideHintS')
+def SiegeModeIndicatorMeta_as_hideHintS(base, self):
+    if config.get('battle/camera/enabled') and config.get('battle/camera/hideHint'):
+        return
+    base(self)
+
 @overrideMethod(CrosshairPanelContainerMeta, 'as_showHintS')
 def CrosshairPanelContainerMeta_as_showHintS(base, self, key, messageLeft, messageRight, offsetX, offsetY):
     if config.get('battle/camera/enabled') and config.get('battle/camera/hideHint'):
         return
     base(self, key, messageLeft, messageRight, offsetX, offsetY)
+
+@overrideMethod(CrosshairPanelContainerMeta, 'as_hideHintS')
+def CrosshairPanelContainerMeta_as_hideHintS(base, self):
+    if config.get('battle/camera/enabled') and config.get('battle/camera/hideHint'):
+        return
+    base(self)
 
 @overrideMethod(SniperAimingSystem, '_SniperAimingSystem__clampToLimits')
 def clampToLimits(base, self, turretYaw, gunPitch):
