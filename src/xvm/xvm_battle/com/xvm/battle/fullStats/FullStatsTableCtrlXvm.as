@@ -19,22 +19,7 @@ package com.xvm.battle.fullStats
 
         override public function createPlayerStatsItem(col:int, row:int):StatsTableItem
         {
-            var index:int = col * NUM_ITEM_ROWS + row;
-            return new StatsTableItemXvm(
-                col == 0,
-                xfw_table.playerNameCollection[index],
-                xfw_table.vehicleNameCollection[index],
-                xfw_table.fragsCollection[index],
-                xfw_table.deadBgCollection[index],
-                xfw_table.vehicleTypeCollection[index],
-                xfw_table.icoIGRCollection[index],
-                xfw_table.vehicleIconCollection[index],
-                xfw_table.vehicleLevelCollection[index],
-                xfw_table.muteCollection[index],
-                xfw_table.disableCommunicationCollection[index],
-                xfw_table.speakAnimationCollection[index],
-                xfw_table.vehicleActionMarkerCollection[index],
-                xfw_table.playerStatusCollection[index]);
+            return new StatsTableItemXvm(xfw_table, col, row);
         }
 
         override public function createSquadItem(col:int, row:int):DynamicSquadCtrl

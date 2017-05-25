@@ -35,8 +35,6 @@ package com.xvm.battle.fullStats
 
         private function init():void
         {
-            // TODO:9.19
-            /*
             page.unregisterComponent(BATTLE_VIEW_ALIASES.FULL_STATS);
             page.xfw_battleStatisticDataController.componentControllers.splice(page.xfw_battleStatisticDataController.componentControllers.indexOf(page.fullStats), 1);
             var fullStats:DisplayObject = page.fullStats as DisplayObject
@@ -50,7 +48,6 @@ package com.xvm.battle.fullStats
             page.addChildAt(component, idx);
             page.xfw_battleStatisticDataController.registerComponentController(page.fullStats);
             page.xfw_registerComponent(page.fullStats, BATTLE_VIEW_ALIASES.FULL_STATS);
-            */
         }
     }
 }

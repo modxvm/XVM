@@ -72,49 +72,49 @@ package com.xvm.battle.fullStats
 
         private var currentPlayerState:VOPlayerState;
 
-        public function StatsTableItemXvm(isLeftPanel:Boolean, playerNameTF:TextField, vehicleNameTF:TextField, fragsTF:TextField, deadBg:BattleAtlasSprite,
-            vehicleTypeIcon:BattleAtlasSprite, icoIGR:BattleAtlasSprite, vehicleIcon:BattleAtlasSprite, vehicleLevelIcon:BattleAtlasSprite,
-            muteIcon:BattleAtlasSprite, disableCommunicationIcon:BattleAtlasSprite, speakAnimation:SpeakAnimation, vehicleActionIcon:BattleAtlasSprite, playerStatus:PlayerStatusView)
+        public function StatsTableItemXvm(table:MovieClip, col:int, row:int)
         {
             //Logger.add("StatsTableItemXvm");
-            super(playerNameTF, vehicleNameTF, fragsTF, deadBg, vehicleTypeIcon, icoIGR, vehicleIcon, vehicleLevelIcon, muteIcon, disableCommunicationIcon, speakAnimation, vehicleActionIcon, playerStatus);
 
-            _isLeftPanel = isLeftPanel;
-            _playerNameTF = playerNameTF;
-            _vehicleNameTF = vehicleNameTF;
-            _icoIGR = icoIGR;
-            _fragsTF = fragsTF;
-            _vehicleIcon = vehicleIcon;
-            _vehicleLevelIcon = vehicleLevelIcon;
-            _vehicleTypeIcon = vehicleTypeIcon;
-            _playerStatus = playerStatus;
+            super(table, col, row);
 
-            DEFAULT_PLAYER_NAME_X = playerNameTF.x;
-            DEFAULT_PLAYER_NAME_WIDTH = playerNameTF.width;
-            DEFAULT_VEHICLE_NAME_X = vehicleNameTF.x;
+            var index:int = col * NUM_ITEM_ROWS + row;
+            _isLeftPanel = col == 0;
+            _playerNameTF = table.playerNameCollection[index];
+            _vehicleNameTF = table.vehicleNameCollection[index];
+            _fragsTF = table.fragsCollection[index];
+            _vehicleTypeIcon = table.vehicleTypeCollection[index];
+            _icoIGR = table.icoIGRCollection[index];
+            _vehicleIcon = table.vehicleIconCollection[index];
+            _vehicleLevelIcon = table.vehicleLevelCollection[index];
+            _playerStatus = table.playerStatusCollection[index];
+
+            DEFAULT_PLAYER_NAME_X = _playerNameTF.x;
+            DEFAULT_PLAYER_NAME_WIDTH = _playerNameTF.width;
+            DEFAULT_VEHICLE_NAME_X = _vehicleNameTF.x;
             DEFAULT_VEHICLE_NAME_WIDTH = 105; // vehicleNameTF.width;
-            DEFAULT_FRAGS_X = fragsTF.x;
-            DEFAULT_FRAGS_WIDTH = fragsTF.width;
-            DEFAULT_VEHICLE_ICON_X = vehicleIcon.x;
-            DEFAULT_VEHICLE_LEVEL_X = vehicleLevelIcon.x;
-            DEFAULT_VEHICLE_TYPE_ICON_X = vehicleTypeIcon.x;
+            DEFAULT_FRAGS_X = _fragsTF.x;
+            DEFAULT_FRAGS_WIDTH = _fragsTF.width;
+            DEFAULT_VEHICLE_ICON_X = _vehicleIcon.x;
+            DEFAULT_VEHICLE_LEVEL_X = _vehicleLevelIcon.x;
+            DEFAULT_VEHICLE_TYPE_ICON_X = _vehicleTypeIcon.x;
 
             // align fields
-            fragsTF.y -= 1;
-            fragsTF.scaleX = fragsTF.scaleY = 1;
-            fragsTF.height = FIELD_HEIGHT;
-            TextFieldEx.setVerticalAlign(fragsTF, TextFieldEx.VALIGN_CENTER);
+            _fragsTF.y -= 1;
+            _fragsTF.scaleX = _fragsTF.scaleY = 1;
+            _fragsTF.height = FIELD_HEIGHT;
+            TextFieldEx.setVerticalAlign(_fragsTF, TextFieldEx.VALIGN_CENTER);
 
-            playerNameTF.y = fragsTF.y;
-            playerNameTF.scaleX = playerNameTF.scaleY = 1;
-            playerNameTF.height = FIELD_HEIGHT;
-            TextFieldEx.setVerticalAlign(playerNameTF, TextFieldEx.VALIGN_CENTER);
+            _playerNameTF.y = _fragsTF.y;
+            _playerNameTF.scaleX = _playerNameTF.scaleY = 1;
+            _playerNameTF.height = FIELD_HEIGHT;
+            TextFieldEx.setVerticalAlign(_playerNameTF, TextFieldEx.VALIGN_CENTER);
 
-            vehicleNameTF.y = fragsTF.y;
-            vehicleNameTF.scaleX = vehicleNameTF.scaleY = 1;
-            vehicleNameTF.height = FIELD_HEIGHT;
-            vehicleNameTF.autoSize = TextFieldAutoSize.NONE;
-            TextFieldEx.setVerticalAlign(vehicleNameTF, TextFieldEx.VALIGN_CENTER);
+            _vehicleNameTF.y = _fragsTF.y;
+            _vehicleNameTF.scaleX = _vehicleNameTF.scaleY = 1;
+            _vehicleNameTF.height = FIELD_HEIGHT;
+            _vehicleNameTF.autoSize = TextFieldAutoSize.NONE;
+            TextFieldEx.setVerticalAlign(_vehicleNameTF, TextFieldEx.VALIGN_CENTER);
 
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, disposeAndSetupExtraFields);
             Xvm.addEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
@@ -123,10 +123,10 @@ package com.xvm.battle.fullStats
             Xvm.addEventListener(BattleEvents.PLAYERS_ORDER_CHANGED, onOrderChanged);
             Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, onStatLoaded, false, 0, true);
 
-            _substrateHolder = playerNameTF.parent.addChildAt(new Sprite(), 0) as Sprite;
+            _substrateHolder = _playerNameTF.parent.addChildAt(new Sprite(), 0) as Sprite;
             _bottomHolder = _substrateHolder;
-            _normalHolder = playerNameTF.parent.addChildAt(new Sprite(), playerNameTF.parent.getChildIndex(icoIGR) + 1) as Sprite;
-            _topHolder = playerNameTF.parent.addChild(new Sprite()) as Sprite;
+            _normalHolder = _playerNameTF.parent.addChildAt(new Sprite(), _playerNameTF.parent.getChildIndex(_icoIGR) + 1) as Sprite;
+            _topHolder = _playerNameTF.parent.addChild(new Sprite()) as Sprite;
 
             setupExtraFields();
         }
@@ -267,7 +267,7 @@ package com.xvm.battle.fullStats
                     atlasName = ATLAS_CONSTANTS.BATTLE_ATLAS;
                 }
                 _vehicleIcon.graphics.clear();
-                App.atlasMgr.drawGraphics(atlasName, BattleLoadingHelper.getVehicleIconName(_vehicleIconName), _vehicleIcon.graphics, BattleLoadingHelper.VEHICLE_TYPE_UNKNOWN);
+                App.atlasMgr.drawGraphics(atlasName, _vehicleIconName, _vehicleIcon.graphics, "unknown" /*BattleLoadingHelper.VEHICLE_TYPE_UNKNOWN*/);
             }
             if (updateIgr)
             {

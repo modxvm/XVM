@@ -146,10 +146,7 @@ package com.xvm.battle.battleloading
                 }
 
                 ui.vehicleIcon.graphics.clear();
-                // TODO:9.19
-                /*
-                App.atlasMgr.drawGraphics(atlasName, BattleLoadingHelper.getVehicleIconName(_model.vehicleIconName), ui.vehicleIcon.graphics, "unknown" /*BattleLoadingHelper.VEHICLE_TYPE_UNKNOWN*//*);
-                */
+                App.atlasMgr.drawGraphics(atlasName, _model.vehicleIconName, ui.vehicleIcon.graphics, "unknown" /*BattleLoadingHelper.VEHICLE_TYPE_UNKNOWN*/);
 
                 var schemeName:String = getSchemeNameForVehicle(currentPlayerState);
                 var scheme:IColorScheme = App.colorSchemeMgr.getScheme(schemeName);

@@ -153,9 +153,10 @@ package com.xvm.battle.playersPanel
         }
 
         // TODO:9.15 remove after fix
+        // 9.19 - still present
         public function setIsInteractive(isInteractive:Boolean):void
         {
-            // fix WG bug (WoT 0.9.15.1) - cursor position remains on the item when Ctrl key unpressed.
+            // fix WG bug (WoT 0.9.15.1+) - cursor position remains on the item when Ctrl key unpressed.
             App.utils.scheduler.scheduleTask(function():void
             {
                 App.toolTipMgr.hide();
@@ -176,10 +177,7 @@ package com.xvm.battle.playersPanel
                 atlasName = ATLAS_CONSTANTS.BATTLE_ATLAS;
             }
             ui.vehicleIcon.graphics.clear();
-            // TODO:9.19
-            /*
-            App.atlasMgr.drawGraphics(atlasName, BattleAtlasItem.getVehicleIconName(vehicleImage), ui.vehicleIcon.graphics, BattleAtlasItem.VEHICLE_TYPE_UNKNOWN);
-            */
+            App.atlasMgr.drawGraphics(atlasName, vehicleImage, ui.vehicleIcon.graphics, "unknown" /*BattleAtlasItem.VEHICLE_TYPE_UNKNOWN*/);
             if (_userProps)
             {
                 invalidate(INVALIDATE_UPDATE_POSITIONS);
