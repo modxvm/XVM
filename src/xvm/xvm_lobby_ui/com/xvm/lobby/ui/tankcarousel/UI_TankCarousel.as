@@ -127,10 +127,8 @@ package com.xvm.lobby.ui.tankcarousel
             {
                 Dossier.requestAccountDossier(this, onAccountDossierLoaded, PROFILE_DROPDOWN_KEYS.ALL);
 
-                // TODO:9.19
-                /*
-                leftFadeEndItem.visible = rightFadeEndItem.visible = false;
-                */
+                endFadeMask.visible = startFadeMask.visible = false;
+
                 background.alpha = Macros.FormatNumberGlobal(cfg.backgroundAlpha, 100) / 100.0;
             }
             catch (ex:Error)
