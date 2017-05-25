@@ -14,7 +14,6 @@ package com.xvm.vehiclemarkers.ui
     import flash.utils.*;
     import flash.events.*;
     import net.wg.gui.battle.components.constants.*;
-    import net.wg.gui.battle.views.vehicleMarkers.VehicleMarker; // * - name conflict
     import net.wg.gui.battle.views.vehicleMarkers.VehicleMarkersConstants; // * - name conflict
     import net.wg.gui.battle.views.vehicleMarkers.VehicleMarkersManager; // * - name conflict
     import net.wg.gui.battle.views.vehicleMarkers.events.*;

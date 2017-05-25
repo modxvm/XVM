@@ -79,7 +79,7 @@
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
     <hidden path="obj" />
-    <hidden path="xvm_battle" />
+    <hidden path="depends.txt" />
   </hiddenPaths>
   <!-- Executed before build -->
   <preBuildCommand />
