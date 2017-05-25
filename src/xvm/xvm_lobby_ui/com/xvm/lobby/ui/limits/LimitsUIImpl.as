@@ -10,6 +10,7 @@ package com.xvm.lobby.ui.limits
     import com.xvm.lobby.ui.limits.controls.*;
     import flash.display.*;
     import flash.events.*;
+    import net.wg.data.constants.generated.*;
     import net.wg.gui.lobby.*;
     import net.wg.gui.lobby.header.events.*;
     import net.wg.gui.lobby.header.headerButtonBar.*;
@@ -86,11 +87,9 @@ package com.xvm.lobby.ui.limits
         {
             try
             {
-                // TODO:9.19
-                /*
                 if (goldLocker)
                 {
-                    var goldControl:HeaderButton = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_GOLD);
+                    var goldControl:HeaderButton = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(CURRENCIES_CONSTANTS.GOLD);
                     if (goldControl)
                     {
                         var goldContent:HBC_Finance = goldControl.content as HBC_Finance;
@@ -98,14 +97,15 @@ package com.xvm.lobby.ui.limits
                         {
                             goldLocker.visible = true;
                             goldLocker.x = goldControl.x + goldContent.x + goldContent.moneyIconText.x + 3;
-                            goldLocker.y = goldControl.y + goldContent.y + goldContent.moneyIconText.y + 20;
+                            goldLocker.y = goldControl.y + goldContent.y + goldContent.moneyIconText.y + 17;
+                            goldContent.doItTextField.x = 20;
                         }
                     }
                 }
 
                 if (freeXpLocker)
                 {
-                    var freeXpControl:HeaderButton = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_FREEXP);
+                    var freeXpControl:HeaderButton = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(CURRENCIES_CONSTANTS.FREE_XP);
                     if (freeXpControl)
                     {
                         var freeXpContent:HBC_Finance = freeXpControl.content as HBC_Finance;
@@ -113,11 +113,11 @@ package com.xvm.lobby.ui.limits
                         {
                             freeXpLocker.visible = true;
                             freeXpLocker.x = freeXpControl.x + freeXpContent.x + freeXpContent.moneyIconText.x + 3;
-                            freeXpLocker.y = freeXpControl.y + freeXpContent.y + freeXpContent.moneyIconText.y + 20;
+                            freeXpLocker.y = freeXpControl.y + freeXpContent.y + freeXpContent.moneyIconText.y + 17;
+                            freeXpContent.doItTextField.x = 20;
                         }
                     }
                 }
-                */
             }
             catch (ex:Error)
             {
