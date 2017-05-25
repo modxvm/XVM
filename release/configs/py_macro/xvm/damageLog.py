@@ -329,8 +329,8 @@ class Data(object):
         def isGoldShell(n, s):
             if n != 'icons':
                 xmlCtx = (None, xmlPath + '/' + n)
-                price = _xml.readPrice(xmlCtx, s, 'price')
-                return _xml.readInt(xmlCtx, s, 'id', 0, 65535) if price[1] else None
+                price = 'gold' in _xml.readPrice(xmlCtx, s, 'price')
+                return _xml.readInt(xmlCtx, s, 'id', 0, 65535) if price else None
 
         def isStunningShell(n, s):
             if n != 'icons':
