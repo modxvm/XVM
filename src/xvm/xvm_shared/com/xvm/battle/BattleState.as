@@ -302,7 +302,6 @@ package com.xvm.battle
             Logger.addObject(data, 2, "[BattleState] setFrags");
             try
             {
-                updateVehiclesStat(data);
             }
             catch (ex:Error)
             {
@@ -316,6 +315,14 @@ package com.xvm.battle
             Xvm.swfProfilerBegin("BattleState.updateVehiclesStat()");
             try
             {
+                if (data.leftItems)
+                {
+                    _playersDataVO.updateVehicleFrags(data.leftItems);
+                }
+                if (data.rightItems)
+                {
+                    _playersDataVO.updateVehicleFrags(data.rightItems);
+                }
                 if (data.leftFrags)
                 {
                     _playersDataVO.updateVehicleFrags(data.leftFrags);

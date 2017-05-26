@@ -38,7 +38,7 @@ package com.xvm.battle
             BattleState.instance.setArenaInfo(data);
         }
 
-		public function setFrags(data:IDAAPIDataClass) : void
+        public function setFrags(data:IDAAPIDataClass):void
         {
             BattleState.instance.setFrags(data);
         }
