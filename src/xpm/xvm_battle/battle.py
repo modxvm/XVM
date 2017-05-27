@@ -27,7 +27,6 @@ from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 from gui.Scaleform.daapi.view.battle.shared import battle_loading
 from gui.Scaleform.daapi.view.battle.shared.damage_panel import DamagePanel
 from gui.Scaleform.daapi.view.battle.shared.markers2d import settings as markers2d_settings
-from gui.Scaleform.daapi.view.battle.shared.minimap import settings as minimap_settings
 from gui.Scaleform.daapi.view.battle.shared.minimap.plugins import ArenaVehiclesPlugin
 from gui.Scaleform.daapi.view.battle.shared.page import SharedPage
 
@@ -389,10 +388,6 @@ class Battle(object):
                 n = int(args[0])
                 res = getBattleSubTypeBaseNumder(BigWorld.player().arenaTypeID, n & 0x3F, n >> 6)
                 return (res, True)
-
-            elif cmd == XVM_BATTLE_COMMAND.SET_MINIMAP_MAX_SIZE_INDEX:
-                minimap_settings.MINIMAP_MAX_SIZE_INDEX = int(args[0])
-                return (None, True)
 
             elif cmd == XVM_BATTLE_COMMAND.MINIMAP_CLICK:
                 return (xmqp_events.send_minimap_click(args[0]), True)

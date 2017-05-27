@@ -64,17 +64,6 @@ package com.xvm.battle.minimap
 
             super();
 
-            /* TODO: add zoom steps
-            if (MinimapSizeConst.MAP_SIZE.length == 6)
-            {
-                MinimapSizeConst.MAP_SIZE.push(new Rectangle(-100, -100, 728, 728));
-                MinimapSizeConst.ENTRY_CONTAINER_POINT.push(new Point(323,323));
-                MinimapSizeConst.ENTRY_SCALES.push(0.6);
-                MinimapSizeConst.ENTRY_INTERNAL_CONTENT_CONTR_SCALES.push(0.4);
-                xfw_foregrounds.push(foreground5);
-                Xfw.cmd(BattleCommands.SET_MINIMAP_MAX_SIZE_INDEX, MinimapSizeConst.MAP_SIZE.length - 1);
-            }*/
-
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
             Xvm.addEventListener(BattleEvents.MINIMAP_ALT_MODE, setAltMode);
             Xvm.addEventListener(BattleEvents.MINIMAP_ZOOM, setZoom);
