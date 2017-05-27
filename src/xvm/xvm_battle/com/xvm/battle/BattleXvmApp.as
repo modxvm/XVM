@@ -16,8 +16,10 @@ package com.xvm.battle
             Stat.clearBattleStat();
             Stat.loadBattleStat();
 
-            battleXvmMod = new BattleXvmMod();
-            addChild(battleXvmMod);
+            App.utils.scheduler.scheduleOnNextFrame(function():void {
+                battleXvmMod = new BattleXvmMod();
+                addChild(battleXvmMod);
+            });
 
             //App.utils.scheduler.scheduleTask(function():void {
             //    App.voiceChatMgr.as_onPlayerSpeak(24246126, true, true);
