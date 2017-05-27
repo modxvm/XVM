@@ -43,7 +43,9 @@ package com.xvm.lobby.hangar
 
             Xfw.addCommandListener(XvmCommands.AS_UPDATE_CURRENT_VEHICLE, onUpdateCurrentVehicle);
 
-            setup();
+            App.utils.scheduler.scheduleOnNextFrame(function():void {
+                setup();
+            });
 
             //Logger.add("ON_HANGAR_AFTER_POPULATE");
             Xvm.dispatchEvent(new Event(ON_HANGAR_AFTER_POPULATE));
