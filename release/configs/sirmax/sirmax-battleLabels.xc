@@ -56,6 +56,7 @@
     },
     */
     {
+      "enabled": true,
       "x": 235,
       "y": 0,
       "height": 230,
