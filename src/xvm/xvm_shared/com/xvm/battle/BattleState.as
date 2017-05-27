@@ -297,7 +297,7 @@ package com.xvm.battle
             */
         }
 
-        public function setFrags(data:Object) : void
+        public function setFrags(data:Object):void
         {
             Logger.addObject(data, 2, "[BattleState] setFrags");
             try
