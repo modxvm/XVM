@@ -84,8 +84,9 @@ def _ServerSettingsManager_setSections(base, self, sections, settings):
 #   Premium   Normal   Elite    NonElite    CompleteCrew
 #   NoMaster  Reserve  [igr]
 @overrideMethod(TankCarouselFilterPopover, '_getInitialVO')
-def _TankCarouselFilterPopover_getInitialVO(base, filters, mapping, xpRateMultiplier, switchCarouselSelected):
-    data = base(filters, mapping, xpRateMultiplier, switchCarouselSelected)
+def _TankCarouselFilterPopover_getInitialVO(base, self, filters, xpRateMultiplier):
+    data = base(self, filters, xpRateMultiplier)
+    mapping = self._VehiclesFilterPopover__mapping
     #debug(data['specials'])
     #debug(mapping)
     try:
