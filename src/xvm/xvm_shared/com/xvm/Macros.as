@@ -266,9 +266,9 @@ package com.xvm
          * @param clanAbbrev clan abbreviation without brackets
          * @param isAlly is player team
          */
-        public static function RegisterPlayerMacrosData(vehicleID:Number, accountDBID:Number, playerName:String, clanAbbrev:String, isAlly:Boolean):void
+        public static function RegisterPlayerMacrosData(vehicleID:Number, accountDBID:Number, playerName:String, clanAbbrev:String, isAlly:Boolean, rankBadgeId:String):void
         {
-            instance._RegisterPlayerMacrosData(vehicleID, accountDBID, playerName, clanAbbrev, isAlly);
+            instance._RegisterPlayerMacrosData(vehicleID, accountDBID, playerName, clanAbbrev, isAlly, rankBadgeId);
         }
 
         /**
@@ -1012,7 +1012,7 @@ package com.xvm
             m_globals["r_size"] = _getRatingDefaultValue().length;
         }
 
-        private function _RegisterPlayerMacrosData(vehicleID:Number, accountDBID:Number, playerName:String, clanAbbrev:String, isAlly:Boolean):void
+        private function _RegisterPlayerMacrosData(vehicleID:Number, accountDBID:Number, playerName:String, clanAbbrev:String, isAlly:Boolean, rankBadgeId:String):void
         {
             if (!playerName)
                 throw new Error("empty name");
@@ -1047,6 +1047,8 @@ package com.xvm
                     // TODO: make static macro
                     return Xfw.cmd(XvmCommandsInternal.GET_CLAN_ICON, vehicleID);
                 }
+                // {{rankBadgeId}}
+                pdata["rankBadgeId"] = rankBadgeId;
             }
         }
 
@@ -1164,7 +1166,7 @@ package com.xvm
             var pdata:Object = m_players[pname];
             if (!pdata)
             {
-                RegisterPlayerMacrosData(stat.vehicleID, stat._id, pname, stat.clan, stat.team == XfwConst.TEAM_ALLY);
+                RegisterPlayerMacrosData(stat.vehicleID, stat._id, pname, stat.clan, stat.team == XfwConst.TEAM_ALLY, stat.badgeId);
                 RegisterVehicleMacrosData(pname, stat.v.id);
                 pdata = m_players[pname];
             }

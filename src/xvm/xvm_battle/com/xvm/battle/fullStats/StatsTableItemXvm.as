@@ -167,6 +167,11 @@ package com.xvm.battle.fullStats
             _isIGR = isIGR;
         }
 
+        override public function setBadge(badgeType:String):void
+        {
+            super.setBadge(cfg.removeRankIcon ? "" : badgeType);
+        }
+
         override public function setVehicleIcon(vehicleIconName:String):void
         {
             super.setVehicleIcon(vehicleIconName);

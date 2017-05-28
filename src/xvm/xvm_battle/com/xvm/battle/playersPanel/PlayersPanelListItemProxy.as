@@ -78,6 +78,7 @@ package com.xvm.battle.playersPanel
         private var opt_removeSelectedBackground:Boolean;
         private var opt_vehicleIconAlpha:Number;
         private var mopt_removeSquadIcon:Boolean;
+        private var mopt_removeRankIcon:Boolean;
 
         private var _substrateHolder:Sprite;
         private var _bottomHolder:Sprite;
@@ -309,6 +310,7 @@ package com.xvm.battle.playersPanel
                     ui.deadBg.alpha = alpha;
 
                     mopt_removeSquadIcon = Macros.FormatBooleanGlobal(mcfg.removeSquadIcon);
+                    mopt_removeRankIcon = Macros.FormatBooleanGlobal(mcfg.removeRankIcon);
 
                     createExtraFields();
                 }
@@ -383,6 +385,7 @@ package com.xvm.battle.playersPanel
                 case PLAYERS_PANEL_STATE.SHORT:
                     mcfg = pcfg[UI_PlayersPanel.PLAYERS_PANEL_STATE_NAMES[ui.xfw_state]];
                     mopt_removeSquadIcon = Macros.FormatBooleanGlobal(mcfg.removeSquadIcon);
+                    mopt_removeRankIcon = Macros.FormatBooleanGlobal(mcfg.removeRankIcon);
                     ui.fragsTF.visible = false;
                     ui.vehicleTF.visible = false;
                     ui.playerNameCutTF.visible = false;

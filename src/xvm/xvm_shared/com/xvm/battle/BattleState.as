@@ -299,9 +299,10 @@ package com.xvm.battle
 
         public function setFrags(data:Object):void
         {
-            Logger.addObject(data, 2, "[BattleState] setFrags");
+            //Logger.addObject(data, 2, "[BattleState] setFrags");
             try
             {
+                updateVehiclesStat(data);
             }
             catch (ex:Error)
             {

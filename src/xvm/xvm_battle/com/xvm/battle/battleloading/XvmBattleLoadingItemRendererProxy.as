@@ -118,6 +118,10 @@ package com.xvm.battle.battleloading
         public function setData(model:DAAPIVehicleInfoVO):void
         {
             _model = model;
+            if (cfg.removeRankIcon)
+            {
+                _model.badgeType = "";
+            }
         }
 
         public function draw():void
@@ -134,6 +138,7 @@ package com.xvm.battle.battleloading
                 var textColor:String = XfwUtils.toHtmlColor(App.colorSchemeMgr.getScheme(getSchemeNameForPlayer(currentPlayerState)).rgb);
                 ui.nameField.visible = true;
                 ui.nameField.htmlText = "<font color='" + textColor + "'>" + Macros.FormatString(_isLeftPanel ? cfg.formatLeftNick : cfg.formatRightNick, currentPlayerState) + "</font>";
+                alignNameField();
 
                 ui.vehicleField.visible = true;
                 ui.vehicleField.htmlText = "<font color='" + textColor + "'>" + Macros.FormatString(_isLeftPanel ? cfg.formatLeftVehicle : cfg.formatRightVehicle, currentPlayerState) + "</font>";

@@ -1,4 +1,7 @@
-﻿XVM-6.6.6-dev:
+﻿XVM-6.7.0-dev:
+  [GENERAL]
+  * World of Tanks 9.19
+
   [DAMAGE LOG]
   * added macro {{crit-device}} and section "crit-device"
 
@@ -6,6 +9,15 @@
   * new parameter: "camera"/"noFlashBang" - switch the red flash if player's vehicle has got a hit
   * new parameter: "camera"/"hideHint" - switch the tips about siege/marching mode and artillery aiming mode
   * new parameter: "camera"/"noCameraLimit" - TODO: English comments
+
+  [MISC]
+  * added options in "battleLoading" and "statisticForm" sections:
+    "removeRankIcon" - disable rank icons
+  * added options in the "playersPanel" modes sections:
+    "removeRankIcon" - disable rank icon
+    "rankIconAlpha" - transparency of the rank icon
+  * added macros:
+      {{rankBadgeId}} - player's rank badge id
 
 XVM-6.6.5:
   [GENERAL]

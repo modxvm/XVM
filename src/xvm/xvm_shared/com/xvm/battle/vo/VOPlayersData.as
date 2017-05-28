@@ -132,7 +132,7 @@ package com.xvm.battle.vo
             {
                 for each (var playerState:VOPlayerState in _addedStates)
                 {
-                    Macros.RegisterPlayerMacrosData(playerState.vehicleID, playerState.accountDBID, playerState.playerName, playerState.clanAbbrev, playerState.isAlly);
+                    Macros.RegisterPlayerMacrosData(playerState.vehicleID, playerState.accountDBID, playerState.playerName, playerState.clanAbbrev, playerState.isAlly, playerState.badgeId);
                     Macros.RegisterVehicleMacrosData(playerState.playerName, playerState.vehCD);
                 }
                 _addedStates = [];

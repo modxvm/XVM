@@ -27,6 +27,8 @@ package com.xvm.battle.vo
         private var _playerFullName:String = null;
         private var _playerName:String = null;
         private var _clanAbbrev:String = null;
+        private var __badgeId:String = "";
+        private var __badgeType:String = "";
         private var _playerStatus:uint = 0;
         private var _prebattleID:Number = NaN;
         private var _region:String = null;
@@ -87,6 +89,29 @@ package com.xvm.battle.vo
         override public function get clanAbbrev():String
         {
             return _clanAbbrev;
+        }
+
+        public function get badgeId():String
+        {
+            return __badgeId;
+        }
+
+        internal function get badgeType():String
+        {
+            return __badgeType;
+        }
+
+        internal function set_badgeType(value:String):void
+        {
+            __badgeType = value;
+            if (!value)
+            {
+                __badgeId = "";
+            }
+            else
+            {
+                __badgeId = value.replace("badge_", "");
+            }
         }
 
         override public function get isAlly():Boolean
@@ -423,21 +448,28 @@ package com.xvm.battle.vo
 
         private function _updateValue(name:String, value:*):Boolean
         {
-            if (this[name] !== undefined && this[name] != value)
+            if (this[name] !== undefined)
             {
-                var k:String = "set_" + name;
-                if (this[k] !== undefined)
+                if (this[name] != value)
                 {
-                    //Logger.add(playerName + ": " + k + "(" + value + ")");
-                    this[k](value);
+                    var k:String = "set_" + name;
+                    if (this[k] !== undefined)
+                    {
+                        //Logger.add(playerName + ": " + k + "(" + value + ")");
+                        this[k](value);
+                    }
+                    else
+                    {
+                        //Logger.add(playerName + ": _" + name + " = " + value);
+                        this["_" + name] = value;
+                    }
+                    return true;
                 }
-                else
-                {
-                    //Logger.add(playerName + ": _" + name + " = " + value);
-                    this["_" + name] = value;
-                }
-                return true;
             }
+            /*else
+            {
+                Logger.add(playerName + ": " + name + " = " + value);
+            }*/
             return false;
         }
 

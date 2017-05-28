@@ -19,6 +19,9 @@
     // true - Disable Platoon icons.
     // true - убрать отображение иконки взвода.
     "removeSquadIcon": false,
+    // true - disable rank icons
+    // true - убрать отображение иконки ранга
+    "removeRankIcon": false,
     // Opacity percentage of vehicle icon. 0 - transparent ... 100 - opaque.
     // Прозрачность в процентах иконки танка. 0 - прозрачные, 100 - не прозрачные.
     "vehicleIconAlpha": 100,
@@ -43,7 +46,7 @@
     // X offset for allies squad icons
     // Cмещение по оси X значка взвода союзников
     "squadIconOffsetXLeft": 0,
-    // X offset for enemies squad icons field
+    // X offset for enemies squad icons
     // Cмещение по оси X значка взвода противников
     "squadIconOffsetXRight": 0,
     // X offset for allies player names field

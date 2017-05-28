@@ -186,6 +186,12 @@
       // transparency of the squad icon
       // прозрачность иконки взвода
       "squadIconAlpha": 100,
+      // true - disable rank icon
+      // true - убрать отображение иконки ранга
+      "removeRankIcon": false,
+      // transparency of the rank icon
+      // прозрачность иконки ранга
+      "rankIconAlpha": "{{alive?100:70}}",
       // Offset of X value for vehicle icon.
       // Смещение координаты X для иконки танка.
       "vehicleIconXOffsetLeft": 0,
@@ -294,6 +300,12 @@
       // transparency of the squad icon
       // прозрачность иконки взвода
       "squadIconAlpha": 100,
+      // true - disable rank icon
+      // true - убрать отображение иконки ранга
+      "removeRankIcon": false,
+      // transparency of the rank icon
+      // прозрачность иконки ранга
+      "rankIconAlpha": "{{alive?100:70}}",
       // Offset of X value for vehicle icon.
       // Смещение координаты X для иконки танка.
       "vehicleIconXOffsetLeft": 0,
@@ -400,6 +412,12 @@
       // transparency of the squad icon
       // прозрачность иконки взвода
       "squadIconAlpha": 100,
+      // true - disable rank icon
+      // true - убрать отображение иконки ранга
+      "removeRankIcon": false,
+      // transparency of the rank icon
+      // прозрачность иконки ранга
+      "rankIconAlpha": "{{alive?100:70}}",
       // Offset of X value for vehicle icon.
       // Смещение координаты X для иконки танка.
       "vehicleIconXOffsetLeft": 0,
@@ -503,6 +521,12 @@
       // transparency of the squad icon
       // прозрачность иконки взвода
       "squadIconAlpha": 100,
+      // true - disable rank icon
+      // true - убрать отображение иконки ранга
+      "removeRankIcon": false,
+      // transparency of the rank icon
+      // прозрачность иконки ранга
+      "rankIconAlpha": "{{alive?100:70}}",
       // Offset of X value for vehicle icon.
       // Смещение координаты X для иконки танка.
       "vehicleIconXOffsetLeft": 0,
