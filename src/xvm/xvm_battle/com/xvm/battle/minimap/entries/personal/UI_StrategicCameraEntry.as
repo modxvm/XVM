@@ -60,8 +60,8 @@ package com.xvm.battle.minimap.entries.personal
                 if (!_loader)
                 {
                     _loader = new ImageXVM();
-                    _loader.successCallback = onImageSuccessLoadHandler;
-                    _loader.errorCallback = onImageFaultLoadHandler;
+                    _loader.addEventListener(Event.COMPLETE, onImageSuccessLoadHandler, false, 0, true);
+                    _loader.addEventListener(IOErrorEvent.IO_ERROR, onImageFaultLoadHandler, false, 0, true);
                     parent.addChild(_loader);
                 }
             }

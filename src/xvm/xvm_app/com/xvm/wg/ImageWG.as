@@ -143,7 +143,8 @@ package com.xvm.wg
             }
             else
             {
-                dispatchEvent(new Event(Event.CHANGE));
+                //orig: ispatchEvent(new Event(Event.CHANGE));
+                this._loadFailed = true;
             }
         }
     }

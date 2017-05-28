@@ -5,10 +5,6 @@ package com.xvm.wg
 
     public class ImageXVM extends ImageWG
     {
-        public var successCallback : Function;
-
-        public var errorCallback : Function;
-
         public function ImageXVM()
         {
             super();
@@ -17,41 +13,35 @@ package com.xvm.wg
         override public function dispose() : void
         {
             super.dispose();
-            successCallback = null;
-            errorCallback = null;
         }
 
-        override protected function setImgData(param1:IImageData) : void
+        override protected function setImgData(data:IImageData) : void
         {
-            super.setImgData(param1);
-            if(this._imgData.ready)
+            super.setImgData(data);
+            if (this._imgData.ready)
             {
                 imageDataReady();
             }
         }
 
-        override protected function onImgDataCompleteHandler(param1:Event) : void
+        override protected function onImgDataCompleteHandler(e:Event) : void
         {
-            super.onImgDataCompleteHandler(param1);
+            super.onImgDataCompleteHandler(e);
             imageDataReady();
         }
 
-        override protected function onImgDataIoErrorHandler(param1:IOErrorEvent) : void
+        override protected function onImgDataIoErrorHandler(e:IOErrorEvent) : void
         {
-            super.onImgDataIoErrorHandler(param1);
+            super.onImgDataIoErrorHandler(e);
             if (_loadFailed)
             {
-                if (errorCallback != null) {
-                    errorCallback();
-                }
+                dispatchEvent(e);
             }
         }
 
         protected function imageDataReady() : void
         {
-            if (successCallback != null) {
-                successCallback();
-            }
+            dispatchEvent(new Event(Event.COMPLETE));
         }
     }
 }
