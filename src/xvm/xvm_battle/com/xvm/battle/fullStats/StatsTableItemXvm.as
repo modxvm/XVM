@@ -50,6 +50,7 @@ package com.xvm.battle.fullStats
         private var cfg:CStatisticForm;
 
         private var _isLeftPanel:Boolean;
+        private var _badgeIcon:BattleAtlasSprite;
         private var _playerNameTF:TextField;
         private var _vehicleNameTF:TextField;
         private var _fragsTF:TextField;
@@ -80,6 +81,7 @@ package com.xvm.battle.fullStats
 
             var index:int = col * NUM_ITEM_ROWS + row;
             _isLeftPanel = col == 0;
+            _badgeIcon = table.rankBadgesCollection[index];
             _playerNameTF = table.playerNameCollection[index];
             _vehicleNameTF = table.vehicleNameCollection[index];
             _fragsTF = table.fragsCollection[index];
@@ -194,13 +196,16 @@ package com.xvm.battle.fullStats
             var updateVehicleIcon:Boolean = false;
             var updateExtraFields:Boolean = false;
             var updateIgr:Boolean = false;
-            var needAlign:Boolean = false;
 
             currentPlayerState = BattleState.get(_vehicleID);
 
             if (isInvalid(FullStatsValidationType.USER_PROPS))
             {
                 updatePlayerNameField = true;
+            }
+            if (isInvalid(FullStatsValidationType.BADGE))
+            {
+                alignPlayerNameTF();
             }
             if (isInvalid(FullStatsValidationType.COLORS))
             {
@@ -228,7 +233,6 @@ package com.xvm.battle.fullStats
             if (isInvalid(FullStatsValidationType.IS_IGR))
             {
                 updateIgr = true;
-                needAlign = true;
             }
             if (isInvalid(INVALIDATE_PLAYER_STATE) || isInvalid(FullStatsValidationType.COLORS))
             {
@@ -405,7 +409,6 @@ package com.xvm.battle.fullStats
             }
 
             createExtraFields();
-
             alignTextFields();
         }
 
@@ -457,11 +460,22 @@ package com.xvm.battle.fullStats
             {
                 _playerNameTF.x = DEFAULT_PLAYER_NAME_X + cfg.nameFieldOffsetXLeft;
                 _playerNameTF.width = cfg.nameFieldWidthLeft;
+                if (_badgeIcon.visible)
+                {
+                    _badgeIcon.x = _playerNameTF.x;
+                    _playerNameTF.x += _badgeIcon.width + 1;
+                    _playerNameTF.width -= _badgeIcon.width + 1;
+                }
             }
             else
             {
                 _playerNameTF.x = DEFAULT_PLAYER_NAME_X - cfg.nameFieldOffsetXRight + (DEFAULT_PLAYER_NAME_WIDTH - cfg.nameFieldWidthRight);
                 _playerNameTF.width = cfg.nameFieldWidthRight;
+                if (_badgeIcon.visible)
+                {
+                    _badgeIcon.x = _playerNameTF.x + _playerNameTF.width - _badgeIcon.width;
+                    _playerNameTF.width -= _badgeIcon.width + 1;
+                }
             }
         }
 
