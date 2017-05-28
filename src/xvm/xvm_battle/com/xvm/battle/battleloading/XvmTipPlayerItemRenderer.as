@@ -91,6 +91,11 @@ package com.xvm.battle.battleloading
             return _squad;
         }
 
+        public function get badgeIcon():BattleAtlasSprite
+        {
+            return _badgeIcon;
+        }
+
         public function get nameField():TextField
         {
             return _textField;

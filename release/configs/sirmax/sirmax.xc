@@ -185,6 +185,7 @@
     //"clockFormat": "H:i",
     "showBattleTier": true,
     //"removeSquadIcon": true,
+    //"removeRankIcon": true,
     //"vehicleIconAlpha": 30,
     "removeVehicleLevel": true,
     "removeVehicleTypeIcon": true,
@@ -219,6 +220,7 @@
     //"clockFormat": "H:i",
     "showBattleTier": true,
     //"removeSquadIcon": true,
+    //"removeRankIcon": true,
     //"vehicleIconAlpha": 30,
     "removeVehicleLevel": true,
     "removeVehicleTypeIcon": true,
@@ -252,6 +254,7 @@
   "statisticForm": {
     "showBattleTier": true,
     //"removeSquadIcon": true,
+    //"removeRankIcon": true,
     //"vehicleIconAlpha": 30,
     "removeVehicleLevel": true,
     "removeVehicleTypeIcon": true,

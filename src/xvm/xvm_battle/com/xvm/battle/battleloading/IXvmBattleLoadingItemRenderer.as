@@ -14,6 +14,7 @@ package com.xvm.battle.battleloading
         function get DEFAULTS():XvmItemRendererDefaults;
 
         function get squad():BattleAtlasSprite;
+        function get badgeIcon():BattleAtlasSprite;
         function get nameField():TextField;
         function get vehicleField():TextField;
         function get vehicleIcon():BattleAtlasSprite;
