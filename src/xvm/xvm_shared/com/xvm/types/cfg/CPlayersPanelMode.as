@@ -27,6 +27,9 @@ package com.xvm.types.cfg
         public var fragsFormatRight:String;
         public var fragsShadowLeft:CShadow;
         public var fragsShadowRight:CShadow;
+        public var rankXOffsetLeft:*;
+        public var rankXOffsetRight:*;
+        public var rankWidth:*;
         public var nickXOffsetLeft:*;
         public var nickXOffsetRight:*;
         public var nickMinWidth:*;

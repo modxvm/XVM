@@ -12,12 +12,16 @@
     //"enabled": false,
     //"fixedPosition": true,
     "removeSquadIcon": true,
+    "standardFields": [ "nick", "vehicle", "rank", "frags" ],
     "vehicleIconXOffsetLeft": -15,
     "vehicleIconXOffsetRight": -15,
     "vehicleLevelXOffsetLeft": -15,
     "vehicleLevelXOffsetRight": -15,
     //"fragsXOffsetLeft": 0,
     //"fragsXOffsetRight": 0,
+    //"rankXOffsetLeft": -5,
+    //"rankXOffsetRight": -5,
+    //"rankWidth": 20,
     //"nickXOffsetLeft": 0,
     //"nickXOffsetRight": 0,
     //"vehicleXOffsetLeft": 0,
@@ -88,7 +92,7 @@
     ],
     "nickMinWidth": 120,
     "nickMaxWidth": 180,
-    "standardFields": [ "nick", "vehicle", "frags" ]
+    "__stub__": null
   },
   "medium": {
     //"enabled": false,
@@ -96,9 +100,8 @@
     "expandAreaWidth": 0,
     "nickMinWidth": 80,
     "nickMaxWidth": 80,
-    //"standardFields": [ "nick", "vehicle", "frags" ]
+    //"standardFields": [ "frags", "rank", "nick" ],
     //"removeSquadIcon": true,
-    //"squadIconAlpha": "{{alive?60|30}}",
     "vehicleIconXOffsetLeft": -15,
     "vehicleIconXOffsetRight": -15,
     "vehicleLevelXOffsetLeft": -15,
@@ -118,7 +121,7 @@
     //"enabled": false,
     "expandAreaWidth": 0,
     "vehicleWidth": 80,
-    //"standardFields": [ "nick", "vehicle", "frags" ]
+    //"standardFields": [ "frags", "rank", "vehicle" ],
     //"removeSquadIcon": true,
     "vehicleIconXOffsetLeft": -15,
     "vehicleIconXOffsetRight": -15,
@@ -139,7 +142,7 @@
     //"enabled": false,
     "expandAreaWidth": 40,
     "fragsWidth": 20,
-    //"standardFields": [ "nick", "vehicle", "frags" ]
+    //"standardFields": [ "rank", "frags" ],
     "vehicleIconXOffsetLeft": -15,
     "vehicleIconXOffsetRight": -15,
     "vehicleLevelXOffsetLeft": -15,

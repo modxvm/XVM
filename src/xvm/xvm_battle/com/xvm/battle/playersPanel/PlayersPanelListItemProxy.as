@@ -62,6 +62,7 @@ package com.xvm.battle.playersPanel
         private var DEFAULT_VEHICLE_LEVEL_X:int;
         private var DEFAULT_FRAGS_WIDTH:int;
         private var DEFAULT_VEHICLE_WIDTH:int;
+        private var DEFAULT_BADGEICON_WIDTH:int;
         private var DEFAULT_PLAYERNAMECUT_WIDTH:int;
 
         private var bcfg:CBattle;
@@ -78,7 +79,6 @@ package com.xvm.battle.playersPanel
         private var opt_removeSelectedBackground:Boolean;
         private var opt_vehicleIconAlpha:Number;
         private var mopt_removeSquadIcon:Boolean;
-        private var mopt_removeRankIcon:Boolean;
 
         private var _substrateHolder:Sprite;
         private var _bottomHolder:Sprite;
@@ -120,6 +120,7 @@ package com.xvm.battle.playersPanel
             DEFAULT_VEHICLE_LEVEL_X = ui.vehicleLevel.x;
             DEFAULT_FRAGS_WIDTH = ui.fragsTF.width;
             DEFAULT_VEHICLE_WIDTH = ui.vehicleTF.width;
+            DEFAULT_BADGEICON_WIDTH = ui.badgeIcon.width;
             DEFAULT_PLAYERNAMECUT_WIDTH = ui.playerNameCutTF.width;
 
             setup();
@@ -310,7 +311,6 @@ package com.xvm.battle.playersPanel
                     ui.deadBg.alpha = alpha;
 
                     mopt_removeSquadIcon = Macros.FormatBooleanGlobal(mcfg.removeSquadIcon);
-                    mopt_removeRankIcon = Macros.FormatBooleanGlobal(mcfg.removeRankIcon);
 
                     createExtraFields();
                 }
@@ -322,6 +322,7 @@ package com.xvm.battle.playersPanel
                     ui.fragsTF.width = DEFAULT_FRAGS_WIDTH;
                     ui.vehicleTF.width = DEFAULT_VEHICLE_WIDTH;
                     ui.dynamicSquad.squadIcon.alpha = 1;
+                    ui.badgeIcon.width = DEFAULT_BADGEICON_WIDTH;
                     ui.playerNameCutTF.width = DEFAULT_PLAYERNAMECUT_WIDTH;
                 }
 
@@ -385,9 +386,9 @@ package com.xvm.battle.playersPanel
                 case PLAYERS_PANEL_STATE.SHORT:
                     mcfg = pcfg[UI_PlayersPanel.PLAYERS_PANEL_STATE_NAMES[ui.xfw_state]];
                     mopt_removeSquadIcon = Macros.FormatBooleanGlobal(mcfg.removeSquadIcon);
-                    mopt_removeRankIcon = Macros.FormatBooleanGlobal(mcfg.removeRankIcon);
                     ui.fragsTF.visible = false;
                     ui.vehicleTF.visible = false;
+                    ui.badgeIcon.visible = false;
                     ui.playerNameCutTF.visible = false;
                     ui.playerNameFullTF.visible = false;
                     if (mcfg.standardFields)
@@ -399,6 +400,9 @@ package com.xvm.battle.playersPanel
                             {
                                 case "frags":
                                     ui.fragsTF.visible = true;
+                                    break;
+                                case "rank":
+                                    ui.badgeIcon.visible = true;
                                     break;
                                 case "nick":
                                     ui.playerNameFullTF.visible = true;
@@ -575,17 +579,18 @@ package com.xvm.battle.playersPanel
 
         private function updatePositionsLeft():void
         {
-            var field:TextField;
+            var field:DisplayObject;
             var lastX:int = VEHICLE_TF_LEFT_X;
             var newX:int;
+            var width:int;
             var len:int = mcfg.standardFields.length;
             for (var i:int = len - 1; i >= 0; --i)
             {
                 field = getFieldByConfigName(mcfg.standardFields[i]);
                 if (field)
                 {
-                    updateFieldWidth(field);
-                    lastX -= field.width - 1;
+                    width = updateFieldWidth(field);
+                    lastX -= width - 1;
                     newX = lastX + getFieldOffsetXLeft(field);
                     //Logger.add(field.name + " lastX:" + lastX + " newX:" + newX + " x:" + field.x + " offset:" + getFieldOffsetXLeft(field));
                     if (int(field.x) != newX)
@@ -602,9 +607,10 @@ package com.xvm.battle.playersPanel
 
         private function updatePositionsRight():void
         {
-            var field:TextField;
+            var field:DisplayObject;
             var lastX:int = VEHICLE_TF_RIGHT_X;
             var newX:int;
+            var width:int;
             var len:int = mcfg.standardFields.length;
             for (var i:int = len - 1; i >= 0; --i)
             {
@@ -612,12 +618,12 @@ package com.xvm.battle.playersPanel
                 newX = lastX - getFieldOffsetXRight(field);
                 if (field)
                 {
-                    updateFieldWidth(field);
+                    width = updateFieldWidth(field);
                     if (int(field.x) != newX)
                     {
                         field.x = newX;
                     }
-                    lastX += field.width - 1;
+                    lastX += width - 1;
                 }
             }
             ui.x = -(lastX + (mopt_removeSquadIcon ? 0 : SQUAD_ITEMS_AREA_WIDTH));
@@ -625,12 +631,14 @@ package com.xvm.battle.playersPanel
             BattleState.playersPanelWidthRight = WIDTH - ui.x;
         }
 
-        private function getFieldByConfigName(fieldName:String):TextField
+        private function getFieldByConfigName(fieldName:String):DisplayObject
         {
             switch (fieldName.toLowerCase())
             {
                 case "frags":
                     return ui.fragsTF;
+                case "rank":
+                    return ui.badgeIcon;
                 case "nick":
                     return ui.playerNameFullTF;
                 case "vehicle":
@@ -639,7 +647,7 @@ package com.xvm.battle.playersPanel
             return null;
         }
 
-        private function updateFieldWidth(field:TextField):void
+        private function updateFieldWidth(field:DisplayObject):int
         {
             var w:int;
             switch (field)
@@ -649,6 +657,13 @@ package com.xvm.battle.playersPanel
                     if (int(ui.fragsTF.width) != w)
                     {
                         ui.fragsTF.width = w;
+                    }
+                    break;
+                case ui.badgeIcon:
+                    w = Macros.FormatNumber(mcfg.rankWidth, currentPlayerState, 0);
+                    if (int(ui.badgeIcon.width) != w)
+                    {
+                        ui.badgeIcon.width = w;
                     }
                     break;
                 case ui.playerNameFullTF:
@@ -693,6 +708,7 @@ package com.xvm.battle.playersPanel
                     }
                     break;
             }
+            return w;
         }
 
         private function getFieldOffsetXLeft(field:*):int
@@ -705,6 +721,8 @@ package com.xvm.battle.playersPanel
                     return Macros.FormatNumber(mcfg.vehicleLevelXOffsetLeft, currentPlayerState, 0);
                 case ui.fragsTF:
                     return Macros.FormatNumber(mcfg.fragsXOffsetLeft, currentPlayerState, 0);
+                case ui.badgeIcon:
+                    return Macros.FormatNumber(mcfg.rankXOffsetLeft, currentPlayerState, 0);
                 case ui.playerNameFullTF:
                     return Macros.FormatNumber(mcfg.nickXOffsetLeft, currentPlayerState, 0);
                 case ui.vehicleTF:
@@ -723,6 +741,8 @@ package com.xvm.battle.playersPanel
                     return Macros.FormatNumber(mcfg.vehicleLevelXOffsetRight, currentPlayerState, 0);
                 case ui.fragsTF:
                     return Macros.FormatNumber(mcfg.fragsXOffsetRight, currentPlayerState, 0);
+                case ui.badgeIcon:
+                    return Macros.FormatNumber(mcfg.rankXOffsetRight, currentPlayerState, 0);
                 case ui.playerNameFullTF:
                     return Macros.FormatNumber(mcfg.nickXOffsetRight, currentPlayerState, 0);
                 case ui.vehicleTF:

@@ -13,9 +13,11 @@
   [MISC]
   * added options in "battleLoading" and "statisticForm" sections:
     "removeRankIcon" - disable rank icons
+  * added new field type "rank" in the "playersPanel"/"standardFields" modes sections
   * added options in the "playersPanel" modes sections:
-    "removeRankIcon" - disable rank icon
-    "rankIconAlpha" - transparency of the rank icon
+    "rankXOffsetLeft" - offset of X value for rank column
+    "rankXOffsetRight" - offset of X value for rank column
+    "rankWidth" - width of the rank column
   * added macros:
       {{rankBadgeId}} - player's rank badge id
 
@@ -82,7 +84,7 @@ XVM-6.6.0:
   * XFW can now be used without XVM
 
   [TOOLTIPS]
-  * Updated avaliable parameters list (tooltips.xc) 
+  * Updated avaliable parameters list (tooltips.xc)
 
   [DAMAGE LOG]
   * 'alive' value of a macro {{my-alive} } is renamed into 'al'

@@ -13,9 +13,11 @@
   [РАЗНОЕ]
   * добавлены опции в секции battleLoading, battleLoadingTips и statisticForm:
     "removeRankIcon" - убрать отображение иконки ранга
+  * добавлен новый тип поля "rank" в секциях режимов "playersPanel"/"standardFields"
   * добавлены опции в секциях режимов "playersPanel":
-    "removeRankIcon" - убрать отображение иконки ранга
-    "rankIconAlpha" - прозрачность иконки ранга
+      "rankXOffsetLeft" - смещение координаты X для поля ранга
+      "rankXOffsetRight" - смещение координаты X для поля ранга
+      "rankWidth" - ширина поля ранга
   * добавлены макросы:
       {{rankBadgeId}} - id бейджа ранга игрока
 
