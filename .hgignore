@@ -8,13 +8,6 @@ syntax: glob
 
 ~output/
 
-addons/clanicons/archives/*.*
-addons/clanicons/icons/
-addons/stat-utils/db/players-test.qvw
-addons/stat-utils/db/top.qvw
-addons/xvm-stat-log/*.xml
-addons/xvm-stat-log/work/
-
 src/xpm/*/__version__.py
 
 src/xvm/obj/
