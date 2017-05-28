@@ -24,7 +24,7 @@ from gui.Scaleform.daapi.view.dialogs import SimpleDialogMeta, I18nConfirmDialog
 from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
 import gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers as hangar_cm_handlers
 from gui.Scaleform.daapi.view.lobby.hangar.carousels.basic.carousel_data_provider import CarouselDataProvider, HangarCarouselDataProvider, _SUPPLY_ITEMS
-from gui.Scaleform.daapi.view.lobby.hangar.carousels.fallout.carousel_data_provider import FalloutCarouselDataProvider
+from gui.Scaleform.daapi.view.lobby.vehicle_carousel import carousel_data_provider
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache
 
@@ -210,13 +210,11 @@ def _HangarCarouselDataProvider__getSupplyIndices(base, self):
         self._supplyItems = [x for x in self._supplyItems if not x.get('buyTank', False)]
     return supplyIndices
 
-@overrideMethod(FalloutCarouselDataProvider, '_getVehicleDataVO')
-def _FalloutCarouselDataProvider_getVehicleDataVO(base, self, vehicle):
-    res = base(self, vehicle)
-    #log(res)
+@overrideMethod(carousel_data_provider, '_isLockedBackground')
+def _carousel_data_provider_isLockedBackground(base, vState, vStateLvl):
     if not config.get('hangar/carousel/enableLockBackground', True):
-        res['lockBackground'] = False
-    return res
+        return False
+    return base(vState, vStateLvl)
 
 
 #####################################################################
