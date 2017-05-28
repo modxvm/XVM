@@ -57,7 +57,7 @@
     },
     // Order of nations.
     // Порядок наций.
-    //"nations_order": ["ussr", "germany", "usa", "france", "uk", "china", "japan", "czech"],
+    //"nations_order": ["ussr", "germany", "usa", "china", "france", "uk", "japan", "czech", "sweden"],
     "nations_order": [],
     // Order of types of vehicles.
     // Порядок классов техники.
