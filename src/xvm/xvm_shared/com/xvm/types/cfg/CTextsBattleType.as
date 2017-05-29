@@ -29,6 +29,7 @@ package com.xvm.types.cfg
         public var fallout_multiteam:String;
         public var sortie_2:String;
         public var fort_battle_2:String;
+        public var ranked:String;
 
         public function clone():*
         {

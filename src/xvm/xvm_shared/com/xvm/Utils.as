@@ -125,6 +125,7 @@ package com.xvm
                 case 19: return 'fallout_multiteam';
                 case 20: return 'sortie_2';
                 case 21: return 'fort_battle_2';
+                case 22: return 'ranked';
                 default: return 'unknown';
             }
         }

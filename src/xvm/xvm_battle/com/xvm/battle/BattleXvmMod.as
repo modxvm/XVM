@@ -33,6 +33,15 @@ package com.xvm.battle
                 MinimapXvmView,
                 SixthSenseXvmView,
                 BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
+            ],
+            "rankedBattlePage": [
+                //TODO:9.19 BattleLoadingXvmView,
+                //TODO:9.19 FullStatsXvmView,
+                //TODO:9.19 PlayersPanelXvmView,
+                TeamBasesPanelXvmView,
+                MinimapXvmView,
+                SixthSenseXvmView,
+                BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
             ]
         }
 

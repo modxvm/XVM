@@ -92,7 +92,9 @@
       // Укрепрайон, вылазка (новый)
       "sortie_2": "sortie_2",
       // Битва за укрепрайон (новый)
-      "fort_battle_2": "fort_battle_2"
+      "fort_battle_2": "fort_battle_2",
+      // Ранговый бой
+      "ranked": "ranked"
     },
     // Text for {{topclan}} macro.
     // Текст для макроса {{topclan}}

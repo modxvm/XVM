@@ -227,7 +227,7 @@ class Battle(object):
     def onViewLoaded(self, view=None):
         if not view:
             return
-        if view.uniqueName == VIEW_ALIAS.CLASSIC_BATTLE_PAGE:
+        if view.uniqueName in [VIEW_ALIAS.CLASSIC_BATTLE_PAGE, VIEW_ALIAS.RANKED_BATTLE_PAGE]:
             self.battle_page = weakref.proxy(view)
 
     def onStartBattle(self):
