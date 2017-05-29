@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="..\..\~output\res_mods\mods\packages\xvm_battle\as_battle\xvm_battle.swf" />
+    <movie path="..\..\~output\res_mods\mods\packages\xvm_battle\as_battle_ranked\xvm_battle_ranked.swf" />
     <movie fps="50" />
     <movie width="1024" />
     <movie height="768" />
@@ -16,6 +16,7 @@
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
     <class path="xvm_battle" />
+    <class path="xvm_battle_ranked" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -59,6 +60,7 @@
   <!-- External Libraries -->
   <externalLibraryPaths>
     <element path="..\xfw\~output\swc\wg_battle.swc" />
+    <element path="..\xfw\~output\swc\wg_battle_ranked_ui.swc" />
     <element path="..\xfw\~output\swc\xfw.swc" />
   </externalLibraryPaths>
   <!-- Runtime Shared Libraries -->

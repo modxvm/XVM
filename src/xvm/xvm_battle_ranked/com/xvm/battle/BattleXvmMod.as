@@ -25,15 +25,6 @@ package com.xvm.battle
 
         private static const _views:Object =
         {
-            "classicBattlePage": [
-                BattleLoadingXvmView,
-                FullStatsXvmView,
-                PlayersPanelXvmView,
-                TeamBasesPanelXvmView,
-                MinimapXvmView,
-                SixthSenseXvmView,
-                BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
-            ],
             "rankedBattlePage": [
                 //TODO:9.19 BattleLoadingXvmView,
                 //TODO:9.19 FullStatsXvmView,
