@@ -87,6 +87,8 @@ package com.xvm.lobby.ui.limits
         {
             try
             {
+                var minWidth:int;
+
                 if (goldLocker)
                 {
                     var goldControl:HeaderButton = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(CURRENCIES_CONSTANTS.GOLD);
@@ -99,6 +101,12 @@ package com.xvm.lobby.ui.limits
                             goldLocker.x = goldControl.x + goldContent.x + goldContent.moneyIconText.x + 3;
                             goldLocker.y = goldControl.y + goldContent.y + goldContent.moneyIconText.y + 17;
                             goldContent.doItTextField.x = 20;
+                            minWidth = goldContent.doItTextField.x + goldContent.doItTextField.textWidth;
+                            if (goldContent.bounds.width < minWidth)
+                            {
+                                goldContent.bounds.width = minWidth;
+                                goldContent.dispatchEvent(new HeaderEvents(HeaderEvents.HBC_SIZE_UPDATED, goldContent.bounds.width, goldContent.xfw_leftPadding, goldContent.xfw_rightPadding));
+                            }
                         }
                     }
                 }
@@ -115,6 +123,12 @@ package com.xvm.lobby.ui.limits
                             freeXpLocker.x = freeXpControl.x + freeXpContent.x + freeXpContent.moneyIconText.x + 3;
                             freeXpLocker.y = freeXpControl.y + freeXpContent.y + freeXpContent.moneyIconText.y + 17;
                             freeXpContent.doItTextField.x = 20;
+                            minWidth = freeXpContent.doItTextField.x + freeXpContent.doItTextField.textWidth;
+                            if (freeXpContent.bounds.width < minWidth)
+                            {
+                                freeXpContent.bounds.width = minWidth;
+                                freeXpContent.dispatchEvent(new HeaderEvents(HeaderEvents.HBC_SIZE_UPDATED, freeXpContent.bounds.width, freeXpContent.xfw_leftPadding, freeXpContent.xfw_rightPadding));
+                            }
                         }
                     }
                 }
