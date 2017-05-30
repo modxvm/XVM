@@ -87,7 +87,6 @@ package com.xvm.lobby.hangar
                 page.xfw_header.txtTankInfo.alpha = 0;
 
                 page.xfw_header.tankTypeIcon.mouseEnabled = false;
-                page.xfw_header.tankTypeIcon.mouseChildren = false;
                 page.xfw_header.tankTypeIcon.alpha = 0;
             }
             else
@@ -104,7 +103,6 @@ package com.xvm.lobby.hangar
                 page.xfw_header.txtTankInfo.rotation = cfg.rotation;
 
                 page.xfw_header.tankTypeIcon.mouseEnabled = true;
-                page.xfw_header.tankTypeIcon.mouseChildren = true;
                 if (isNaN(_orig_tankTypeIcon_x))
                 {
                     _orig_tankTypeIcon_x = page.xfw_header.tankTypeIcon.x;
@@ -127,13 +125,11 @@ package com.xvm.lobby.hangar
             if (!cfg.enabled)
             {
                 page.xfw_header.btnCommonQuests.mouseEnabled = false;
-                page.xfw_header.btnCommonQuests.mouseChildren = false;
                 page.xfw_header.btnCommonQuests.alpha = 0;
             }
             else
             {
                 page.xfw_header.btnCommonQuests.mouseEnabled = true;
-                page.xfw_header.btnCommonQuests.mouseChildren = true;
                 if (isNaN(_orig_btnCommonQuests_x))
                 {
                     _orig_btnCommonQuests_x = page.xfw_header.btnCommonQuests.x;
@@ -156,13 +152,11 @@ package com.xvm.lobby.hangar
             if (!cfg.enabled)
             {
                 page.xfw_header.btnPersonalQuests.mouseEnabled = false;
-                page.xfw_header.btnPersonalQuests.mouseChildren = false;
                 page.xfw_header.btnPersonalQuests.alpha = 0;
             }
             else
             {
                 page.xfw_header.btnPersonalQuests.mouseEnabled = true;
-                page.xfw_header.btnPersonalQuests.mouseChildren = true;
                 if (isNaN(_orig_btnPersonalQuests_x))
                 {
                     _orig_btnPersonalQuests_x = page.xfw_header.btnPersonalQuests.x;
