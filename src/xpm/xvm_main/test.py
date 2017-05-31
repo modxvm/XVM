@@ -6,6 +6,13 @@
 def onHangarInit():
     # debug
     if IS_DEVELOPMENT:
+
+        #import gui.awards.event_dispatcher as shared_events
+        #from helpers import dependency
+        #from skeletons.gui.goodies import IGoodiesCache
+        #goodiesCache = dependency.instance(IGoodiesCache)
+        #shared_events.showBoosterAward(goodiesCache.getBooster(5022))
+
         import glob
         files = glob.glob("[0-9]*.dat")
         if files:
