@@ -1,4 +1,9 @@
 ﻿XVM-6.7.1:
+  [GENERAL]
+  * Fixed compatibility issues with Actionscript mods.
+
+  [HANGAR]
+  * Fixed XVM messages displaying in service channel.
 
 XVM-6.7.0:
   [KNOWN ISSUES]
