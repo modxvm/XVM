@@ -6,6 +6,7 @@ package com.xvm.battle.battleloading
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xvm.battle.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
     import net.wg.data.constants.generated.*;
@@ -61,6 +62,7 @@ package com.xvm.battle.battleloading
         override public function setCompVisible(value:Boolean):void
         {
             //value = true; // DEBUG
+            BattleGlobalData.battleLoadingVisible = value;
             super.setCompVisible(value);
         }
 

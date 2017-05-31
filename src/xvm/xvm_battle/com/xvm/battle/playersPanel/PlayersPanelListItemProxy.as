@@ -338,7 +338,7 @@ package com.xvm.battle.playersPanel
         {
             if (extraFieldsHidden)
             {
-                extraFieldsHidden.visible = e.value && (ui.xfw_state == -1 || ui.xfw_state == PLAYERS_PANEL_STATE.HIDEN);
+                extraFieldsHidden.alpha = e.value ? 1 : 0;
             }
         }
 
@@ -774,6 +774,7 @@ package com.xvm.battle.playersPanel
                     Macros.FormatStringGlobal(ncfg.layout, ExtraFields.LAYOUT_VERTICAL).toLowerCase() + (isFixedLayout ? "_fixed" : ""),
                     null,
                     defaultTextFormatConfig);
+                extraFieldsHidden.alpha = BattleGlobalData.battleLoadingVisible ? 0 : 1;
                 extraFieldsHidden.mouseEnabled = true;
                 extraFieldsHidden.mouseChildren = false;
                 extraFieldsHidden.addEventListener(MouseEvent.MOUSE_MOVE, (BattleXvmView.battlePage.playersPanel as UI_PlayersPanel).onMouseMoveHandler);

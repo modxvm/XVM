@@ -70,6 +70,16 @@ package com.xvm.battle
             return getCurentXtdb();
         }
 
+        public static function get battleLoadingVisible():Boolean
+        {
+            return _battleLoadingVisible;
+        }
+
+        public static function set battleLoadingVisible(value:Boolean):void
+        {
+            _battleLoadingVisible = value;
+        }
+
         public static function init():void
         {
             Xfw.addCommandListener(BattleCommands.AS_RESPONSE_BATTLE_GLOBAL_DATA, onRespondBattleGlobalData);
@@ -104,6 +114,7 @@ package com.xvm.battle
         private static var _mapSize:Number;
         private static var _minimapCirclesData:VOMinimapCirclesData;
         private static var _xtdb_data:Array;
+        private static var _battleLoadingVisible:Boolean;
 
         private static var _curent_xtdb:Number = 0;
 
