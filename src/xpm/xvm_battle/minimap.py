@@ -259,6 +259,7 @@ class _Minimap(object):
     enabled = True
     initialized = False
     guiType = 0
+    battleType = 0
     labelsEnabled = True
     linesEnabled = True
     circlesEnabled = True
@@ -271,11 +272,13 @@ class _Minimap(object):
         return g_battle.xvm_battle_swf_initialized and \
                self.enabled and \
                self.initialized and \
-               (self.guiType != constants.ARENA_GUI_TYPE.TUTORIAL)
+               (self.guiType != constants.ARENA_GUI_TYPE.TUTORIAL) and \
+               (self.battleType != constants.ARENA_BONUS_TYPE.TUTORIAL)
 
     def init(self, minimapComponent):
         self.initialized = True
         self.guiType = BigWorld.player().arena.guiType
+        self.battleType = BigWorld.player().arena.bonusType
         self.minimapComponent = minimapComponent
 
     def destroy(self):

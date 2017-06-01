@@ -134,6 +134,7 @@ class VehicleMarkers(object):
     enabled = True
     initialized = False
     guiType = None
+    battleType = None
     playerVehicleID = None
     manager = None
     vehiclesData = None
@@ -142,7 +143,10 @@ class VehicleMarkers(object):
 
     @property
     def active(self):
-        return self.enabled and self.initialized and (self.guiType != constants.ARENA_GUI_TYPE.TUTORIAL)
+        return self.enabled and \
+               self.initialized and \
+               (self.guiType != constants.ARENA_GUI_TYPE.TUTORIAL) and \
+               (self.battleType != constants.ARENA_BONUS_TYPE.TUTORIAL)
 
     @property
     def plugins(self):
@@ -157,6 +161,7 @@ class VehicleMarkers(object):
         self.pending_commands = []
         self.initialized = False
         self.guiType = None
+        self.battleType = None
         self.playerVehicleID = None
         self.manager.removeExternalCallback('xvm.cmd')
         self.manager = None
@@ -180,6 +185,7 @@ class VehicleMarkers(object):
             elif cmd == XVM_VM_COMMAND.INITIALIZED:
                 self.initialized = True
                 self.guiType = BigWorld.player().arena.guiType
+                self.battleType = BigWorld.player().arena.bonusType
                 log('[VM]    initialized')
             elif cmd == XVM_COMMAND.REQUEST_CONFIG:
                 self.respondConfig()
