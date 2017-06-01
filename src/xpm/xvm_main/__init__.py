@@ -51,6 +51,7 @@ import filecache
 import svcmsg
 import utils
 import vehinfo_wn8
+import mutex
 from xvm import g_xvm
 
 
