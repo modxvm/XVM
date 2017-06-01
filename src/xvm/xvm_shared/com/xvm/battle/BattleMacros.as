@@ -31,6 +31,9 @@ package com.xvm.battle
 
             var vdata:VOVehicleData = VehicleInfo.get(BattleGlobalData.playerVehCD);
 
+            if (vdata == null)
+                return;
+
             // {{my-veh-id}}
             m_globals["my-veh-id"] = vdata.vehCD;
             // {{my-vehicle}} - Chaffee
