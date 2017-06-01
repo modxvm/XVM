@@ -1,4 +1,15 @@
 ﻿XVM-6.7.2:
+  [GENERAL]
+  * World of Tanks 9.19, micropatch 03.06.2017
+  * Various bugs fixed
+
+  [HANGAR]
+  * fixed "autoReloadConfig" option
+  * fixed battle results window appearance
+
+  [MISC]
+  * added new option:
+    "tweaks/allowMultipleWotInstances": allows to run 2+ WoT clients
 
 XVM-6.7.1:
   [GENERAL]
