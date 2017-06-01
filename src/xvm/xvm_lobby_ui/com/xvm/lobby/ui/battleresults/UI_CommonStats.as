@@ -25,6 +25,7 @@ package com.xvm.lobby.ui.battleresults
         private const CSS_FIELD_CLASS:String = "xvm_bsField";
         private const XP_IMG_TXT:String = " <IMG SRC='img://gui/maps/icons/library/XpIcon-1.png' width='16' height='16' vspace='-2'/>";
 
+        private var _fieldsInitialized:Boolean = false;
         private var _data:BattleResultsVO = null;
         private var xdataList:XvmCommonStatsDataListVO = null;
         private var currentTankIndex:int = 0;
@@ -77,82 +78,73 @@ package com.xvm.lobby.ui.battleresults
             //Logger.add("update");
             try
             {
-                if (data)
+                // Use data['common']['regionNameStr'] value to transfer XVM data.
+                // Cannot add in data object because DAAPIDataClass is not dynamic.
+                var xdataStr:String = data.common.regionNameStr;
+                if (xdataStr.indexOf("\"__xvm\"") > 0)
                 {
-                    // Use data['common']['regionNameStr'] value to transfer XVM data.
-                    // Cannot add in data object because DAAPIDataClass is not dynamic.
-                    var xdataStr:String = data.common.regionNameStr;
-                    if (xdataStr.indexOf("\"__xvm\"") > 0)
-                    {
-                        xdataList = new XvmCommonStatsDataListVO(JSONx.parse(xdataStr));
-                        data.common.regionNameStr = xdataList.regionNameStr;
-                    }
-                    //Logger.addObject(data, 3);
-                    //Logger.addObject(data.personal, 5);
-                    //Logger.addObject(data.personal.details, 2);
-                    //Logger.addObject(data.common);
+                    xdataList = new XvmCommonStatsDataListVO(JSONx.parse(xdataStr));
+                    data.common.regionNameStr = xdataList.regionNameStr;
+                }
+                //Logger.addObject(data, 3);
+                //Logger.addObject(data.personal, 5);
+                //Logger.addObject(data.personal.details, 2);
+                //Logger.addObject(data.common);
 
-                    // search localized strings for tooltips and calculate total values
-                    var personal:PersonalDataVO = data.personal;
-                    for (var i:String in personal.details)
+                // search localized strings for tooltips and calculate total values
+                var personal:PersonalDataVO = data.personal;
+                for (var i:String in personal.details)
+                {
+                    var creditsData:Vector.<DetailedStatsItemVO> = personal.creditsData[i] as Vector.<DetailedStatsItemVO>;
+                    xdataList.data[i].creditsNoPremTotalStr = creditsData[creditsData.length - 1]["col1"];
+                    xdataList.data[i].creditsPremTotalStr = creditsData[creditsData.length - 1]["col3"];
+                    for each (var detail:Object in personal.details[i])
                     {
-                        var creditsData:Vector.<DetailedStatsItemVO> = personal.creditsData[i] as Vector.<DetailedStatsItemVO>;
-                        xdataList.data[i].creditsNoPremTotalStr = creditsData[creditsData.length - 1]["col1"];
-                        xdataList.data[i].creditsPremTotalStr = creditsData[creditsData.length - 1]["col3"];
-                        for each (var detail:Object in personal.details[i])
+                        if (armorNames == null)
                         {
-                            if (armorNames == null)
-                            {
-                                armorNames = detail.armorNames;
-                            }
-                            if (damageAssistedNames == null)
-                            {
-                                damageAssistedNames = detail.damageAssistedNames;
-                            }
-                            if (damageDealtNames == null)
-                            {
-                                damageDealtNames = detail.damageDealtNames;
-                            }
+                            armorNames = detail.armorNames;
+                        }
+                        if (damageAssistedNames == null)
+                        {
+                            damageAssistedNames = detail.damageAssistedNames;
+                        }
+                        if (damageDealtNames == null)
+                        {
+                            damageDealtNames = detail.damageDealtNames;
                         }
                     }
-                    //Logger.addObject(xdataList, 3);
                 }
+                //Logger.addObject(xdataList, 3);
 
+                // original update
                 super.update(data);
 
-                if (this._data == null)
+                // XVM update
+                this._data = BattleResultsVO(data);
+
+                detailsMc.validateNow();
+
+                if (!_fieldsInitialized)
                 {
-                    this._data = BattleResultsVO(data);
-
-                    detailsMc.validateNow();
-
-                    compactQuests();
-                    hideQuestsShadows();
-
-                    if (Config.config.battleResults.showExtendedInfo)
-                    {
-                        hideUselessButtons();
-                        initTextFields();
-                    }
-
-                    efficiencyHeader.summArmorTF.visible =
-                        efficiencyHeader.summAssistTF.visible =
-                        efficiencyHeader.summCritsTF.visible =
-                        efficiencyHeader.summDamageTF.visible =
-                        efficiencyHeader.summKillTF.visible =
-                        efficiencyHeader.summSpottedTF.visible = !Config.config.battleResults.showTotals;
-                    if (Config.config.battleResults.showTotals)
-                    {
-                        initTotals();
-                    }
-
-                    if (Config.config.battleResults.showCrewExperience)
-                    {
-                        initCrewExperience();
-                    }
-
-                    updateValues();
+                    _fieldsInitialized = true;
+                    initializeFields();
                 }
+
+                hideQuestsShadows();
+
+                if (Config.config.battleResults.showExtendedInfo)
+                {
+                    hideUselessButtons();
+                }
+
+                efficiencyHeader.summArmorTF.visible =
+                    efficiencyHeader.summAssistTF.visible =
+                    efficiencyHeader.summCritsTF.visible =
+                    efficiencyHeader.summDamageTF.visible =
+                    efficiencyHeader.summKillTF.visible =
+                    efficiencyHeader.summSpottedTF.visible = !Config.config.battleResults.showTotals;
+
+                updateValues();
             }
             catch (ex:Error)
             {
@@ -168,6 +160,28 @@ package com.xvm.lobby.ui.battleresults
 
         // PRIVATE
 
+        private function initializeFields():void
+        {
+            compactQuests();
+
+            if (Config.config.battleResults.showExtendedInfo)
+            {
+                initTextFields();
+            }
+
+            if (Config.config.battleResults.showTotals)
+            {
+                initTotals();
+            }
+
+            if (Config.config.battleResults.showCrewExperience)
+            {
+                initCrewExperience();
+            }
+
+            updateValues();
+        }
+
         private function get xdata():XvmCommonStatsDataVO
         {
             return xdataList.data[this.currentTankIndex];
@@ -176,7 +190,9 @@ package com.xvm.lobby.ui.battleresults
         private function compactQuests():void
         {
             if (xfw_progressReport)
+            {
                 xfw_progressReport.linkage = getQualifiedClassName(UI_BR_SubtaskComponent);
+            }
         }
 
         private function hideQuestsShadows():void
@@ -236,7 +252,7 @@ package com.xvm.lobby.ui.battleresults
                 damageTotalField = addChild(createTotalItem( { x: x + w * 4 + 1, y: y, kind: BATTLE_EFFICIENCY_TYPES.DAMAGE })) as EfficiencyIconRenderer;
 
                 // kills
-                killsTotalField = addChild(createTotalItem( { x: x + w * 5 + 1, y: y, kind: BATTLE_EFFICIENCY_TYPES.DESTRUCTION })) as EfficiencyIconRenderer;
+                killsTotalField = addChild(createTotalItem( { x: x + w * 5 + 1, y: y, kind: BATTLE_EFFICIENCY_TYPES.DESTRUCTION } )) as EfficiencyIconRenderer;
             }
             catch (ex:Error)
             {

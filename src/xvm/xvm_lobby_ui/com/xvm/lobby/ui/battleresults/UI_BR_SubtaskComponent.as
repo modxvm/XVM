@@ -13,6 +13,18 @@ package com.xvm.lobby.ui.battleresults
 
     public dynamic class UI_BR_SubtaskComponent extends BR_SubtaskComponent_UI
     {
+        private var orig_taskTF_y:Number = NaN;
+        private var orig_linkBtn_y:Number = NaN;
+        private var orig_statusMC_y:Number = NaN;
+        private var orig_counter_y:Number = NaN;
+        private var orig_alert_y:Number = NaN;
+        private var orig_progressList_y:Number = NaN;
+        private var orig_awards_y:Number = NaN;
+
+        private const offsetTop:Number = 10;
+        private const offsetMiddle:Number = 20;
+        private const offsetBottom:Number = 20;
+
         public function UI_BR_SubtaskComponent()
         {
             //Logger.add("UI_BR_SubtaskComponent");
@@ -42,18 +54,25 @@ package com.xvm.lobby.ui.battleresults
             {
                 if (this.data)
                 {
-                    var offsetTop:Number = 10;
-                    var offsetMiddle:Number = 20;
-                    var offsetBottom:Number = 20;
+                    if (isNaN(orig_taskTF_y))
+                    {
+                        orig_taskTF_y = this.taskTF.y;
+                        orig_linkBtn_y = this.linkBtn.y;
+                        orig_statusMC_y = this.statusMC.y;
+                        orig_counter_y = this.counter.y;
+                        orig_alert_y = this.alert.y;
+                        orig_progressList_y = this.progressList.y;
+                        orig_awards_y = this.awards.y;
+                    }
 
                     // move elements up
-                    this.taskTF.y -= offsetTop;
-                    this.linkBtn.y -= offsetTop;
-                    this.statusMC.y -= offsetTop;
-                    this.counter.y -= offsetTop;
-                    this.alert.y -= offsetTop;
-                    this.progressList.y -= offsetMiddle;
-                    this.awards.y -= offsetMiddle;
+                    this.taskTF.y = orig_taskTF_y - offsetTop;
+                    this.linkBtn.y = orig_linkBtn_y - offsetTop;
+                    this.statusMC.y = orig_statusMC_y - offsetTop;
+                    this.counter.y = orig_counter_y - offsetTop;
+                    this.alert.y = orig_alert_y - offsetTop;
+                    this.progressList.y = orig_progressList_y - offsetMiddle;
+                    this.awards.y = orig_awards_y - offsetMiddle;
 
                     // set bottom line
                     if (this.awards.height > 0)
