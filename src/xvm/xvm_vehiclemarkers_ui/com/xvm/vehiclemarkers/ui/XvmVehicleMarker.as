@@ -219,6 +219,12 @@ package com.xvm.vehiclemarkers.ui
             Xvm.swfProfilerEnd("XvmVehicleMarker.setSpeaking()");
         }
 
+        // Disable updateMarkerSettins() call from original code
+        override public function xvm_active():Boolean
+        {
+            return true;
+        }
+
         override public function set markerSettings(value:Object):void
         {
             // stub
