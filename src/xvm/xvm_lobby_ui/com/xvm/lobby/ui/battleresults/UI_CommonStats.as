@@ -178,8 +178,6 @@ package com.xvm.lobby.ui.battleresults
             {
                 initCrewExperience();
             }
-
-            updateValues();
         }
 
         private function get xdata():XvmCommonStatsDataVO
