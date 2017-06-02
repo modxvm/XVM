@@ -147,8 +147,6 @@ package com.xvm.vehiclemarkers.ui
                         }),
                         curHealth: newHealth
                     });
-                    if (newHealth <= 0 && damageFlag == Defines.FROM_PLAYER)
-                        BattleState.playerFrags += 1;
                     playerState.dispatchEvents();
                     invalidate(INVALIDATE_DATA);
                     validateNow(); // required to handle simultaneous shots
