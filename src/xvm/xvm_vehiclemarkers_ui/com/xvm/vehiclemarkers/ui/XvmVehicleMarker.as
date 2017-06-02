@@ -147,6 +147,12 @@ package com.xvm.vehiclemarkers.ui
                         }),
                         curHealth: newHealth
                     });
+                    // BattleState may not be updated yet, but {{my-frags}} macro should display correct value in the damage message
+                    if (newHealth <= 0 && damageFlag == Defines.FROM_PLAYER)
+                    {
+                        updatePlayerFrags();
+                        //Logger.add("frags=" + BattleState.playerFrags);
+                    }
                     playerState.dispatchEvents();
                     invalidate(INVALIDATE_DATA);
                     validateNow(); // required to handle simultaneous shots
@@ -382,6 +388,16 @@ package com.xvm.vehiclemarkers.ui
                 }
             }
             return null;
+        }
+
+        private static var _vmPlayerFrags:Number = 0;
+        private static function updatePlayerFrags():void
+        {
+            if (_vmPlayerFrags == BattleState.playerFrags)
+            {
+                BattleState.playerFrags += 1;
+            }
+            _vmPlayerFrags = BattleState.playerFrags;
         }
     }
 }

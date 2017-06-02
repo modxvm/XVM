@@ -169,9 +169,9 @@ class VehicleMarkers(object):
     #####################################################################
     # event handlers
 
+    # FIXIT: is required? It seems that updateVehiclesStat is called anyway
     def onVehicleStatisticsUpdate(self, vehicleID):
-        # HACK: add delay to make statistics update after health update
-        BigWorld.callback(0.01, lambda: self.updatePlayerState(vehicleID, INV.FRAGS))
+        self.updatePlayerState(vehicleID, INV.FRAGS)
 
 
     #####################################################################
