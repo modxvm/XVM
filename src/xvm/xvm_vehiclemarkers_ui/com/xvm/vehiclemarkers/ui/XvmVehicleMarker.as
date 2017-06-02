@@ -38,7 +38,6 @@ package com.xvm.vehiclemarkers.ui
             Xvm.swfProfilerBegin("XvmVehicleMarker.ctor()");
             //Logger.add(getQualifiedClassName(this));
             super();
-            super.markerSettings = XvmVehicleMarkerConstants.DISABLED_MARKER_SETTINGS;
             Xvm.addEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
             createComponents();
             Xvm.swfProfilerEnd("XvmVehicleMarker.ctor()");
@@ -69,10 +68,6 @@ package com.xvm.vehiclemarkers.ui
             pFullName:String, pName:String, pClan:String, pRegion:String,
             maxHealth:int, entityName:String, hunt:Boolean, squadIndex:int, locSecString:String):void
         {
-            // WORKAROUND: possible bug - marker instance not deletes on MarkersManager.destroyMarker() call.
-            if (!parent) { dispose(); return; }
-            ///
-
             Xvm.swfProfilerBegin("XvmVehicleMarker.setVehicleInfo()");
             super.setVehicleInfo.apply(this, arguments);
             try
@@ -94,10 +89,6 @@ package com.xvm.vehiclemarkers.ui
 
         override protected function draw():void
         {
-            // WORKAROUND: possible bug - marker instance not deletes on MarkersManager.destroyMarker() call.
-            if (!parent) { dispose(); return; }
-            ///
-
             Xvm.swfProfilerBegin("XvmVehicleMarker.super.draw()");
             super.draw();
             Xvm.swfProfilerEnd("XvmVehicleMarker.super.draw()");
@@ -127,10 +118,6 @@ package com.xvm.vehiclemarkers.ui
 
         override public function updateHealth(newHealth:int, damageFlag:int, damageType:String):void
         {
-            // WORKAROUND: possible bug - marker instance not deletes on MarkersManager.destroyMarker() call.
-            if (!parent) { dispose(); return; }
-            ///
-
             Xvm.swfProfilerBegin("XvmVehicleMarker.updateHealth()");
             try
             {
@@ -167,10 +154,6 @@ package com.xvm.vehiclemarkers.ui
 
         override public function setHealth(curHealth:int):void
         {
-            // WORKAROUND: possible bug - marker instance not deletes on MarkersManager.destroyMarker() call.
-            if (!parent) { dispose(); return; }
-            ///
-
             Xvm.swfProfilerBegin("XvmVehicleMarker.setHealth()");
             try
             {
@@ -198,10 +181,6 @@ package com.xvm.vehiclemarkers.ui
 
         override public function setSpeaking(value:Boolean):void
         {
-            // WORKAROUND: possible bug - marker instance not deletes on MarkersManager.destroyMarker() call.
-            if (!parent) { dispose(); return; }
-            ///
-
             Xvm.swfProfilerBegin("XvmVehicleMarker.setSpeaking()");
             super.setSpeaking(value);
             try
@@ -225,22 +204,13 @@ package com.xvm.vehiclemarkers.ui
             return true;
         }
 
-        override public function set markerSettings(value:Object):void
+        override public function get markerSettings():Object
         {
-            // stub
-        }
-
-        override protected function layoutParts(param1:Vector.<Boolean>):void
-        {
-            // stub
+            return XvmVehicleMarkerConstants.DISABLED_MARKER_SETTINGS;
         }
 
         private function onShowExInfoHandler(e:VehicleMarkersManagerEvent):void
         {
-            // WORKAROUND: possible bug - marker instance not deletes on MarkersManager.destroyMarker() call.
-            if (!parent) { dispose(); return; }
-            ///
-
             //Xvm.swfProfilerBegin("XvmVehicleMarker.onShowExInfoHandler()");
             try
             {

@@ -8,22 +8,21 @@ package com.xvm.vehiclemarkers.ui
 
     public class XvmVehicleMarkerConstants extends Object
     {
-        public static const DISABLED_MARKER_SETTINGS:Object = {
-            "markerAltVehicleName": false,
-            "markerBaseLevel": false,
-            "markerAltHp": HPDisplayMode.HIDDEN,
-            "markerAltHpIndicator": false,
-            "markerAltLevel": false,
-            "markerBasePlayerName": false,
-            "markerAltPlayerName": false,
-            "markerBaseHpIndicator": false,
-            "markerBaseHp": HPDisplayMode.HIDDEN,
-            "markerBaseVehicleName": false,
-            "markerAltIcon": false,
-            "markerAltDamage": false,
-            "markerBaseDamage": false,
-            "markerBaseIcon": false
-        };
+        public static const DISABLED_MARKER_SETTINGS:VehicleMarkerSettings = new VehicleMarkerSettings();
+        DISABLED_MARKER_SETTINGS.markerBaseHp = HPDisplayMode.HIDDEN;
+        DISABLED_MARKER_SETTINGS.markerBaseIcon = false;
+        DISABLED_MARKER_SETTINGS.markerBaseLevel = false;
+        DISABLED_MARKER_SETTINGS.markerBaseHpIndicator = false;
+        DISABLED_MARKER_SETTINGS.markerBaseDamage = false;
+        DISABLED_MARKER_SETTINGS.markerBaseVehicleName = false;
+        DISABLED_MARKER_SETTINGS.markerBasePlayerName = false;
+        DISABLED_MARKER_SETTINGS.markerAltHp = HPDisplayMode.HIDDEN;
+        DISABLED_MARKER_SETTINGS.markerAltIcon = false;
+        DISABLED_MARKER_SETTINGS.markerAltLevel = false;
+        DISABLED_MARKER_SETTINGS.markerAltHpIndicator = false;
+        DISABLED_MARKER_SETTINGS.markerAltDamage = false;
+        DISABLED_MARKER_SETTINGS.markerAltVehicleName = false;
+        DISABLED_MARKER_SETTINGS.markerAltPlayerName = false;
 
         // turret
         public static const TURRET_HIGH_VULN_DATABASE_VAL:int = 2;
