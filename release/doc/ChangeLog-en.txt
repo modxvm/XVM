@@ -1,4 +1,6 @@
 ﻿XVM-6.7.3-dev:
+  [MISC]
+  * minimized performance impact of "autoReloadConfig" option 
 
 XVM-6.7.2:
   [GENERAL]

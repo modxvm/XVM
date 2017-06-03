@@ -12,12 +12,12 @@ from gui.shared import g_eventBus, events
 
 from xfw import *
 import xfw.constants as xfw_constants
+import xfw.filewatcher as xfw_filewatcher
 
 from consts import *
 from logger import *
 from default_xvm_xc import DEFAULT_XVM_XC
 import default_config
-import configwatchdog
 import userprefs
 import utils
 import xvmapi
@@ -50,8 +50,11 @@ def load(e):
         # TODO: config selection
         filename = e.ctx.get('filename', XVM.CONFIG_FILE)
 
-        configwatchdog.stopConfigWatchdog()
         autoreload = get('autoReloadConfig', False)
+
+        if autoreload:
+            if xfw_filewatcher.watcher_is_running(XVM_EVENT.RELOAD_CONFIG):
+                xfw_filewatcher.watcher_stop(XVM_EVENT.RELOAD_CONFIG)
 
         config_data = None
         lang_data = None
@@ -73,11 +76,17 @@ def load(e):
             get('language'),
             'detected' if languageDetected else 'config'))
 
+        if get('autoReloadConfig', False):
+            if not xfw_filewatcher.watcher_is_exists(XVM_EVENT.RELOAD_CONFIG):
+                xfw_filewatcher.watcher_add(XVM_EVENT.RELOAD_CONFIG, XVM.CONFIG_DIR, \
+                    "import BigWorld;"\
+                    "from gui.shared import g_eventBus, events;" \
+                    "BigWorld.callback(0,lambda: g_eventBus.handleEvent(events.HasCtxEvent('%s', {'filename':'%s'})))" % (XVM_EVENT.RELOAD_CONFIG, XVM.CONFIG_FILE))
+            xfw_filewatcher.watcher_start(XVM_EVENT.RELOAD_CONFIG)
+
     except Exception:
         err(traceback.format_exc())
 
-    if get('autoReloadConfig', False) == True:
-        configwatchdog.startConfigWatchdog()
 
     g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.CONFIG_LOADED))
 
