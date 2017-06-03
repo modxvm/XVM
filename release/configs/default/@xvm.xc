@@ -21,8 +21,8 @@
   // Версия конфига. Не удаляйте и не изменяйте её без необходимости.
   "configVersion": "6.1.0",
 
-  // automatically reload config. Can reduce performance.
-  // автоматически перезагружать конфиг. Может понизить производительность.
+  // Automatically reload config. Requires client restart.
+  // Автоматически перезагружать конфиг. Требует перезапуска клиента.
   "autoReloadConfig": false,
 
   // Language used in mod
