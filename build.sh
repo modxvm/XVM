@@ -139,6 +139,7 @@ copy_files()
 {
     # rename version-dependent folder
     mv "$XVMBUILD_ROOT_PATH"/~output/mods/~ver/ "$XVMBUILD_ROOT_PATH"/~output/mods/"$XVMBUILD_WOT_VERSION"
+    mkdir -p "$XVMBUILD_ROOT_PATH"/~output/res_mods/"$XVMBUILD_WOT_VERSION"
 
     # cp non-binary files
     cp -rf "$XVMBUILD_ROOT_PATH"/release/* "$XVMBUILD_ROOT_PATH"/~output/res_mods/mods/shared_resources/xvm/
