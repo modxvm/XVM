@@ -639,7 +639,7 @@ _data = {
     "ussr:R98_T44_85":                       't44·85',
     "ussr:R98_T44_85M":                      't44·85m',
     "ussr:R99_T44_122":                      't44·122'
-    # Don't used
+    # Unused
     #"china:Ch04_T34_1_training":             't34·1',
     #"germany:G03_PzV_Panther_training":      'Pant',
     #"germany:G10_PzIII_AusfJ_training":      'Pz3',

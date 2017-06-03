@@ -4,7 +4,7 @@
 
 XVM-6.7.2:
   [GENERAL]
-  * World of Tanks 9.19, micropatch 03.06.2017
+  * World of Tanks 9.19, micropatch 02.06.2017
   * Various bugs fixed
 
   [HANGAR]
