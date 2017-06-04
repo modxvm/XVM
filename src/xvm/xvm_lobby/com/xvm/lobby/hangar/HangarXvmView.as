@@ -34,6 +34,8 @@ package com.xvm.lobby.hangar
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
             //Logger.add("onAfterPopulate: " + view.as_alias);
+            super.onAfterPopulate(e);
+
             //Logger.addObject(page);
 
             // fix bottomBg height - original is too high and affects carousel
@@ -53,6 +55,7 @@ package com.xvm.lobby.hangar
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
+            super.onBeforeDispose(e);
             // This method is called twice on config reload
             if (_disposed)
                 return;

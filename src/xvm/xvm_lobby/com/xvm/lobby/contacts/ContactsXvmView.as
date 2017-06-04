@@ -35,6 +35,7 @@ package com.xvm.lobby.contacts
 
         override public function onAfterPopulate(e:LifeCycleEvent):void
         {
+            super.onAfterPopulate(e);
             if (Config.networkServicesSettings.comments)
             {
                 App.instance.loaderMgr.addEventListener(LibraryLoaderEvent.LOADED, onLibLoaded, false, 0, true);
@@ -46,6 +47,7 @@ package com.xvm.lobby.contacts
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
+            super.onBeforeDispose(e);
             App.instance.loaderMgr.removeEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
             Xfw.removeCommandListener(CMD_XVM_CONTACTS_AS_EDIT_CONTACT_DATA, editContactData);
         }

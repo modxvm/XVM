@@ -31,6 +31,7 @@ package com.xvm.lobby.company
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
             //Logger.add("onAfterPopulate: " + view.as_alias);
+            super.onAfterPopulate(e);
 
             if (!Config.networkServicesSettings.statCompany)
                 return;
@@ -45,6 +46,7 @@ package com.xvm.lobby.company
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
+            super.onBeforeDispose(e);
             App.instance.loaderMgr.removeEventListener(LibraryLoaderEvent.LOADED, onLibLoaded);
             page.stack.removeEventListener(ViewStackEvent.VIEW_CHANGED, onViewChanged);
         }

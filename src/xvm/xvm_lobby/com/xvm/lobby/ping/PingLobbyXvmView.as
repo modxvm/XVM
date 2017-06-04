@@ -17,7 +17,6 @@ package com.xvm.lobby.ping
 
     public class PingLobbyXvmView extends XvmViewBase
     {
-        private var _initialized:Boolean = false;
         private var _isHangar:Boolean = false;
         private var cfg:CPingServers;
 
@@ -33,21 +32,20 @@ package com.xvm.lobby.ping
 
         override public function onConfigLoaded(e:Event):void
         {
-            if (!_initialized)
-                return;
+            super.onConfigLoaded(e);
             remove();
             init();
         }
 
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
-            _initialized = true;
+            super.onAfterPopulate(e);
             init();
         }
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
-            _initialized = false;
+            super.onBeforeDispose(e);
             remove();
         }
 

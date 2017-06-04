@@ -29,17 +29,19 @@ package com.xvm.lobby
 
         override public function onBeforePopulate(e:LifeCycleEvent):void
         {
-            Config.networkServicesSettings = new NetworkServicesSettings(Xfw.cmd(XvmCommands.GET_SVC_SETTINGS));
             super.onBeforePopulate(e);
+            Config.networkServicesSettings = new NetworkServicesSettings(Xfw.cmd(XvmCommands.GET_SVC_SETTINGS));
         }
 
         override public function onAfterPopulate(e:LifeCycleEvent):void
         {
+            super.onAfterPopulate(e);
             setup();
         }
 
         override public function onConfigLoaded(e:Event):void
         {
+            super.onConfigLoaded(e);
             setup();
         }
 

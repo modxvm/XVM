@@ -55,8 +55,9 @@ package com.xvm.battle
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
             //Logger.add("onAfterPopulate: " + view.as_alias);
-            //Xvm.swfProfilerBegin("BattleXvmView.onAfterPopulate()");
             super.onAfterPopulate(e);
+
+            //Xvm.swfProfilerBegin("BattleXvmView.onAfterPopulate()");
             try
             {
                 Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
@@ -103,6 +104,7 @@ package com.xvm.battle
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
+            super.onBeforeDispose(e);
             //Xvm.swfProfilerBegin("BattleXvmView.onBeforeDispose()");
             try
             {
@@ -149,12 +151,12 @@ package com.xvm.battle
             {
                 Logger.err(ex);
             }
-            super.onBeforeDispose(e);
             //Xvm.swfProfilerEnd("BattleXvmView.onBeforeDispose()");
         }
 
         public override function onConfigLoaded(e:Event):void
         {
+            super.onConfigLoaded(e);
             //Logger.add("BattleXvmView.onConfigLoaded()");
             Xvm.swfProfilerBegin("BattleXvmView.onConfigLoaded()");
             try

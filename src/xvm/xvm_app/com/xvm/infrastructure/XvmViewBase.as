@@ -16,7 +16,8 @@ package com.xvm.infrastructure
             super(view);
         }
 
-        public virtual function onConfigLoaded(e:Event):void
+        // virtual
+        public function onConfigLoaded(e:Event):void
         {
             //Logger.add("onConfigLoaded: " + view.as_alias);
         }

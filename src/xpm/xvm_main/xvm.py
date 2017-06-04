@@ -93,7 +93,6 @@ class Xvm(object):
             self.respondConfig()
             wgutils.reloadHangar()
 
-
     def respondConfig(self):
         trace('respondConfig')
         as_xfw_cmd(XVM_COMMAND.AS_SET_CONFIG,

@@ -43,9 +43,11 @@ package com.xvm.lobby.crew
 
         override public function onBeforePopulate(e:LifeCycleEvent):void
         {
+            //Logger.add("onBeforePopulate");
+            super.onBeforePopulate(e);
+
             page.addEventListener(Event.RESIZE, onHangarResize);
 
-            //Logger.add("onBeforePopulate");
             if (Config.config.hangar.enableCrewAutoReturn)
             {
                 Xfw.addCommandListener(COMMAND_XVM_CREW_AS_VEHICLE_CHANGED, onVehicleChanged);
@@ -55,12 +57,14 @@ package com.xvm.lobby.crew
 
         override public function onAfterPopulate(e:LifeCycleEvent):void
         {
+            super.onAfterPopulate(e);
             CrewLoader.init(page);
         }
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
             //Logger.add("onBeforeDispose");
+            super.onBeforeDispose(e);
             CrewLoader.dispose(page);
             if (enablePrevCrewCheckBox)
             {

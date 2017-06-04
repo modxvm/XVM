@@ -28,16 +28,19 @@ package com.xvm.lobby.limits
 
         override public function onAfterPopulate(e:LifeCycleEvent):void
         {
+            super.onAfterPopulate(e);
             setup();
         }
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
+            super.onBeforeDispose(e);
             dispose();
         }
 
         override public function onConfigLoaded(e:Event):void
         {
+            super.onConfigLoaded(e);
             setup();
         }
 

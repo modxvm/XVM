@@ -11,9 +11,14 @@ from xfw import *
 
 # reload hangar to apply config changes
 def reloadHangar():
-    lobby = getLobbyApp()
-    if lobby and lobby.containerManager:
-        view = lobby.containerManager.getView(ViewTypes.LOBBY_SUB, {POP_UP_CRITERIA.VIEW_ALIAS: VIEW_ALIAS.LOBBY_HANGAR})
-        if view is not None:
-            view.destroy()
-        g_eventDispatcher.loadHangar()
+    try:
+        from gui.shared.utils.HangarSpace import g_hangarSpace
+        if g_hangarSpace.inited:
+            lobby = getLobbyApp()
+            if lobby and lobby.containerManager:
+                view = lobby.containerManager.getView(ViewTypes.LOBBY_SUB, {POP_UP_CRITERIA.VIEW_ALIAS: VIEW_ALIAS.LOBBY_HANGAR})
+                if view is not None:
+                    view.destroy()
+                g_eventDispatcher.loadHangar()
+    except Exception, ex:
+        err(traceback.format_exc())

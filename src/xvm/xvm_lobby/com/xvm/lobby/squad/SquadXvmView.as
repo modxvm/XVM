@@ -30,6 +30,7 @@ package com.xvm.lobby.squad
 
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
+            super.onAfterPopulate(e);
             //page.squadView.memberList.itemRenderer = UI_SquadItemRenderer;
             //page.memberList.addEventListener(Defines.E_ITEM_UPDATED, onMemberListItemUpdated, false, 0, true);
             Xfw.addCommandListener(XVM_SQUAD_UPDATE_TIERS, updateTiers);
@@ -38,6 +39,7 @@ package com.xvm.lobby.squad
 
         public override function onBeforeDispose(e:LifeCycleEvent):void
         {
+            super.onBeforeDispose(e);
             Xfw.removeCommandListener(XVM_SQUAD_UPDATE_TIERS, updateTiers);
             Xfw.cmd(XVM_SQUAD_WINDOW_DISPOSED);
         }

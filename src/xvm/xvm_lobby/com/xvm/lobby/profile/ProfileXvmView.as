@@ -36,6 +36,8 @@ package com.xvm.lobby.profile
 
         override public function onBeforePopulate(e:LifeCycleEvent):void
         {
+            super.onBeforePopulate(e);
+
             tabNavigator.xfw_sectionsDataUtil.addEntity(Aliases.PROFILE_TECHNIQUE_PAGE, "com.xvm.lobby.ui.profile::UI_ProfileTechniquePage");
             tabNavigator.xfw_sectionsDataUtil.addEntity(Aliases.PROFILE_TECHNIQUE_WINDOW, "com.xvm.lobby.ui.profile::UI_ProfileTechniqueWindow");
             if (Config.networkServicesSettings.statAwards)

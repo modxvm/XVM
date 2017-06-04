@@ -27,6 +27,7 @@ package com.xvm.lobby.techtree
 
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
+            super.onAfterPopulate(e);
             init();
         }
 

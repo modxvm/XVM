@@ -27,12 +27,14 @@ package com.xvm.lobby.loginlayout
 
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
+            super.onAfterPopulate(e);
             page.loginViewStack.addEventListener(LoginViewStackEvent.VIEW_CHANGED, onViewChanged, false, 0, true);
             setupForm(page.loginViewStack.currentView as SimpleForm);
         }
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
+            super.onBeforeDispose(e);
             page.loginViewStack.removeEventListener(LoginViewStackEvent.VIEW_CHANGED, onViewChanged);
         }
 
