@@ -47,7 +47,7 @@
           "strength": 2              // (0.0 .. 255.0)  / intensity       / интенсивность
         },
         "textFormat": { "align": "right", "valign": "bottom", "color": "0x959688" },
-        "format": "<font face='$FieldFont'><textformat leading='-38'><font size='36'>{{py:xvm.formatDate('%H:%M')}}</font><br></textformat><textformat rightMargin='85' leading='-2'>{{py:xvm.formatDate('%Au')}}<br><font size='15'>{{py:xvm.formatDate('%d %bu %Y')}}</font></textformat></font>"
+        "format": "<font face='$FieldFont'><textformat leading='-38'><font size='36'>{{py:xvm.formatDate('%H:%M')}}</font><br></textformat><textformat rightMargin='85' leading='-2'>{{py:xvm.formatDate('%A')}}<br><font size='15'>{{py:xvm.formatDate('%d %b %Y')}}</font></textformat></font>"
       }
     ]
   }

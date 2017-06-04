@@ -1,4 +1,3 @@
-import time
 import traceback
 import BigWorld
 
@@ -12,38 +11,56 @@ from xvm import utils
 
 # Date and time
 
+import datetime
 import locale
-d = {}
-loc = locale.getdefaultlocale()[1]
+from gui.app_loader.loader import g_appLoader
+from gui.shared.formatters import time_formatters
 
+_defaultlocale = locale.getdefaultlocale()[1]
+_DIRECTIVES = [ 'au', 'al', 'Au', 'Al', 'bu', 'bl', 'Bu', 'Bl', # double
+                'a', 'A', 'b', 'B', 'p' ] # single
+
+# https://docs.python.org/2/library/time.html#time.strftime
 @xvm.export('xvm.formatDate', deterministic=False)
 def xvm_formatDate(formatDate):
-    def createDict(value, formatDate):
-        global d
-        s = time.strftime('%{}'.format(value[0])).decode(loc)
-        d[value] = s.title() if value[1] == 'u' else s.lower()
-        return formatDate.replace('%{}'.format(value), '{%s}' % value)
-
-    global d
+    dt = datetime.datetime.now()
+    app = g_appLoader.getApp()
     d = {}
-    formatDate = formatDate.decode('utf8').encode(loc)
-    if '%au' in formatDate:
-        formatDate = createDict('au', formatDate)
-    if '%al' in formatDate:
-        formatDate = createDict('al', formatDate)
-    if '%Au' in formatDate:
-        formatDate = createDict('Au', formatDate)
-    if '%Al' in formatDate:
-        formatDate = createDict('Au', formatDate)
-    if '%bu' in formatDate:
-        formatDate = createDict('bu', formatDate)
-    if '%bl' in formatDate:
-        formatDate = createDict('bl', formatDate)
-    if '%Bu' in formatDate:
-        formatDate = createDict('Bu', formatDate)
-    if '%Bl' in formatDate:
-        formatDate = createDict('Bl', formatDate)
-    t = time.strftime(formatDate).decode(loc)
+
+    def getValue(value, isUpper, isLower):
+        if value == 'a':
+            return app.utilsManager.getWeekDayNames(False, isUpper, isLower)[dt.weekday()]
+        elif value == 'A':
+            return app.utilsManager.getWeekDayNames(True, isUpper, isLower)[dt.weekday()]
+        elif value == 'b':
+            return app.utilsManager.getMonthsNames(False, isUpper, isLower)[dt.month-1]
+        elif value == 'B':
+            return app.utilsManager.getMonthsNames(True, isUpper, isLower)[dt.month-1]
+        elif value == 'p':
+            if app.utilsManager.isTwelveHoursFormat():
+                return 'AM' if dt.hour < 12 else 'PM'
+            else:
+                return ''
+        
+    def processDirective(value, formatDate):
+        directive = '%'+value
+        if directive in formatDate:
+            isUpper = False
+            isLower = False
+            if len(value) > 1:
+                if value[1] == 'u':
+                    isUpper = True
+                else:
+                    isLower = True
+            s = getValue(value[0], isUpper, isLower)
+            d[value] = s
+            formatDate = formatDate.replace('%{}'.format(value), '{%s}' % value)
+        return formatDate
+
+    formatDate = formatDate.decode('utf8').encode(_defaultlocale)
+    for directive in _DIRECTIVES:
+        formatDate = processDirective(directive, formatDate)
+    t = dt.strftime(formatDate).decode(_defaultlocale)
     return t.format(**d)
 
 
