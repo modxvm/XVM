@@ -90,9 +90,9 @@ def onConfigLoaded(self, e=None):
     global cfg_hangar_enableGoldLocker
     global cfg_hangar_enableFreeXpLocker
     global cfg_hangar_defaultBoughtForCredits
-    cfg_hangar_enableGoldLocker = config.get('hangar/enableGoldLocker') == True
-    cfg_hangar_enableFreeXpLocker = config.get('hangar/enableFreeXpLocker') == True
-    cfg_hangar_defaultBoughtForCredits = config.get('hangar/defaultBoughtForCredits') == True
+    cfg_hangar_enableGoldLocker = config.get('hangar/enableGoldLocker', False) == True
+    cfg_hangar_enableFreeXpLocker = config.get('hangar/enableFreeXpLocker', False) == True
+    cfg_hangar_defaultBoughtForCredits = config.get('hangar/defaultBoughtForCredits', False) == True
 
 g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
 
