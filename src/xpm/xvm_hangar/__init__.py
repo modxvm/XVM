@@ -45,7 +45,9 @@ import svcmsg
 # globals
 
 cfg_hangar_hangarType = None
-
+cfg_hangar_barracksShowFlags = True
+cfg_hangar_barracksShowSkills = True
+cfg_hangar_blockVehicleIfLowAmmo = False
 
 #####################################################################
 # initialization/finalization
@@ -57,6 +59,15 @@ def onConfigLoaded(self, e=None):
         cfg_hangar_hangarType = cfg_hangar_hangarType.lower()
         if cfg_hangar_hangarType not in ['premium', 'basic']:
             cfg_hangar_hangarType = None
+
+    global cfg_hangar_barracksShowFlags
+    cfg_hangar_barracksShowFlags = config.get('hangar/barracksShowFlags', True)
+
+    global cfg_hangar_barracksShowSkills
+    cfg_hangar_barracksShowSkills = config.get('hangar/barracksShowSkills', True)
+
+    global cfg_hangar_blockVehicleIfLowAmmo
+    cfg_hangar_blockVehicleIfLowAmmo = config.get('hangar/blockVehicleIfLowAmmo', False)
 
     Vehicle.NOT_FULL_AMMO_MULTIPLIER = config.get('hangar/lowAmmoPercentage', 20) / 100.0
 
@@ -87,18 +98,16 @@ def Vehicle_isAmmoFull(base, self):
 @overrideMethod(BarracksMeta, 'as_setTankmenS')
 def BarracksMeta_as_setTankmenS(base, self, data):
     try:
-        show_flags = config.get('hangar/barracksShowFlags', True)
-        show_skills = config.get('hangar/barracksShowSkills', True)
-        if show_flags or show_skills:
+        if cfg_hangar_barracksShowFlags or cfg_hangar_barracksShowSkills:
             imgPath = 'img://../mods/shared_resources/xvm/res/icons/barracks'
             for tankman in data['tankmenData']:
                 if 'role' not in tankman:
                     continue
                 tankman['rank'] = tankman['role']
                 tankman_role_arr = []
-                if show_flags:
+                if cfg_hangar_barracksShowFlags:
                     tankman_role_arr.append("<img src='%s/nations/%s.png' vspace='-3'>" % (imgPath, nations.NAMES[tankman['nationID']]))
-                if show_skills:
+                if cfg_hangar_barracksShowSkills:
                     tankman_role_arr.append('')
                     itemsCache = dependency.instance(IItemsCache)
                     tankman_full_info = itemsCache.items.getTankman(tankman['tankmanID'])
@@ -120,7 +129,7 @@ def BarracksMeta_as_setTankmenS(base, self, data):
 @overrideMethod(Vehicle, 'isReadyToPrebattle')
 def Vehicle_isReadyToPrebattle(base, self, *args, **kwargs):
     try:
-        if not self.hasLockMode() and not self.isAmmoFull and config.get('hangar/blockVehicleIfLowAmmo'):
+        if not self.hasLockMode() and not self.isAmmoFull and cfg_hangar_blockVehicleIfLowAmmo:
             return False
     except Exception as ex:
         err(traceback.format_exc())
@@ -131,7 +140,7 @@ def Vehicle_isReadyToPrebattle(base, self, *args, **kwargs):
 @overrideMethod(Vehicle, 'isReadyToFight')
 def Vehicle_isReadyToFight(base, self, *args, **kwargs):
     try:
-        if not self.hasLockMode() and not self.isAmmoFull and config.get('hangar/blockVehicleIfLowAmmo'):
+        if not self.hasLockMode() and not self.isAmmoFull and cfg_hangar_blockVehicleIfLowAmmo:
             return False
     except Exception as ex:
         err(traceback.format_exc())
@@ -144,7 +153,7 @@ def _CurrentVehicleActionsValidator_validate(base, self):
     res = base(self)
     if not res or res[0] == True:
         try:
-            if not g_currentVehicle.isReadyToFight() and g_currentVehicle.item and not g_currentVehicle.item.isAmmoFull and config.get('hangar/blockVehicleIfLowAmmo'):
+            if not g_currentVehicle.isReadyToFight() and g_currentVehicle.item and not g_currentVehicle.item.isAmmoFull and cfg_hangar_blockVehicleIfLowAmmo:
                 res = ValidationResult(False, PREBATTLE_RESTRICTION.VEHICLE_NOT_READY)
         except Exception as ex:
             err(traceback.format_exc())
