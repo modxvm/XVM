@@ -34,8 +34,8 @@ package com.xvm.types.cfg
         public var showPremiumShopButton:*;
         public var notificationsButtonType:String;
         public var carousel:CCarousel;
-        public var clock:CHangarClock;
         public var widgets:Array;
+        public var camera:CHangarCamera;
 
         public function clone():*
         {

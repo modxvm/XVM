@@ -95,6 +95,12 @@
       //"shiftX": 0,
       //"shiftY": 0
     },
+    "camera": {
+      "minDistance": 0,
+      "maxDistance": 13,
+      "startDistance": 10,
+      "zoomSensitivity": 0.5
+    },
     "widgets": ${"sirmax-widgets.xc":"widgets.lobby"}
   },
   "userInfo": {

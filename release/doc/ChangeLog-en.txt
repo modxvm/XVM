@@ -3,6 +3,11 @@
   * minimized performance impact of "autoReloadConfig" option 
   * use game locale in the xvm.formatDate() py_macro
   * added option "hangar/hangarType" with values: none (default), "premium" and "basic"
+  * added section "hangar/camera" with options:
+      "minDistance" - minimum distance
+      "maxDistance" - maximum distance
+      "startDistance" - start distance
+      "zoomSensitivity" - camera zoom sensitivity (lower is slower)
 
 XVM-6.7.2:
   [GENERAL]

@@ -359,6 +359,22 @@
     "carousel": ${"carousel.xc":"carousel"},
     // Parameters for widgets
     // Параметры виджетов
-    "widgets": ${"widgets.xc":"widgets.lobby"}
+    "widgets": ${"widgets.xc":"widgets.lobby"},
+    // Hangar camera settings
+    // Настройки камеры в ангаре
+    "camera": {
+        // Minumim distance
+        // Минимальное расстояние
+        "minDistance": 6.5,
+        // Maximum distance
+        // Максимальное расстояние
+        "maxDistance": 12,
+        // Start distance
+        // Начальное расстояние
+        "startDistance": 11,
+        // Camera zoom sensitivity (lower is slower)
+        // Чувствительность приближения камеры (меньше - медленнее)
+        "zoomSensitivity": 1
+    }
   }
 }

@@ -3,6 +3,11 @@
   * Минимизировано влияние опции "autoReloadConfig" на производительность
   * Использовать локализацию клиента в py_macro xvm.formatDate()
   * Добавлена опция "hangar/hangarType" со значениями: none (по умолчанию), "premium" и "basic"
+  * added section "hangar/camera" with options:
+      "minDistance" - минимальное расстояние
+      "maxDistance" - максимальное расстояние
+      "startDistance" - начальное расстояние
+      "zoomSensitivity" - чувствительность приближения камеры (меньше - медленнее)
 
 XVM-6.7.2:
   [ОБЩЕЕ]
