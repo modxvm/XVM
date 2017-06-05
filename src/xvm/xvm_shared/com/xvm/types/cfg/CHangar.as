@@ -9,6 +9,7 @@ package com.xvm.types.cfg
     public dynamic class CHangar extends Object implements ICloneable
     {
         public var xwnInCompany:*;
+        public var hangarType:*;
         public var enableGoldLocker:*;
         public var enableFreeXpLocker:*;
         public var defaultBoughtForCredits:*;

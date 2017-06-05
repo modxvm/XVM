@@ -46,6 +46,7 @@
     "widgets": ${"sirmax-widgets.xc":"widgets.login"}
   },
   "hangar": {
+    //"hangarType": "premium",
     "enableGoldLocker": true,
     "enableFreeXpLocker": true,
     "defaultBoughtForCredits": true,

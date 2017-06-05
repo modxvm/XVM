@@ -2,6 +2,7 @@
   [MISC]
   * minimized performance impact of "autoReloadConfig" option 
   * use game locale in the xvm.formatDate() py_macro
+  * added option "hangar/hangarType" with values: none (default), "premium" and "basic"
 
 XVM-6.7.2:
   [GENERAL]

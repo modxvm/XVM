@@ -22,6 +22,7 @@ import game
 import helpers
 import nations
 from CurrentVehicle import g_currentVehicle
+from gui import ClientHangarSpace
 from gui.shared import g_eventBus
 from gui.prb_control.entities.base.actions_validator import CurrentVehicleActionsValidator
 from gui.prb_control.items import ValidationResult
@@ -41,14 +42,25 @@ from xvm_main.python.xvm import l10n
 import svcmsg
 
 #####################################################################
+# globals
+
+cfg_hangar_hangarType = None
+
+
+#####################################################################
 # initialization/finalization
 
 def onConfigLoaded(self, e=None):
+    global cfg_hangar_hangarType
+    cfg_hangar_hangarType = config.get('hangar/hangarType', None)
+    if cfg_hangar_hangarType is not None:
+        cfg_hangar_hangarType = cfg_hangar_hangarType.lower()
+        if cfg_hangar_hangarType not in ['premium', 'basic']:
+            cfg_hangar_hangarType = None
+
     Vehicle.NOT_FULL_AMMO_MULTIPLIER = config.get('hangar/lowAmmoPercentage', 20) / 100.0
 
-
 g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
-
 
 @registerEvent(game, 'fini')
 def fini():
@@ -144,3 +156,10 @@ def i18n_makeString(base, key, *args, **kwargs):
     if key == '#menu:tankCarousel/vehicleStates/ammoNotFull': # originally returns empty string
         return l10n('lowAmmo')
     return base(key, *args, **kwargs)
+
+# handle hangar/hangarType option
+@overrideMethod(ClientHangarSpace, 'getSpaceType')
+def getSpaceType(base, isPremium):
+    if cfg_hangar_hangarType is not None:
+        isPremium = cfg_hangar_hangarType == 'premium'
+    return base(isPremium)
