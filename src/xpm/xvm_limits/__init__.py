@@ -314,14 +314,8 @@ class itemsCache_dummy:
 tooltips.itemsCache = itemsCache_dummy
 
 
-# force invalidateFreeXP to look at freeXP (which is affected by lock)
-@overrideMethod(Research, 'invalidateFreeXP')
-def Research_invalidateFreeXP(base, self):
-    try:
-        if self._isDAAPIInited():
-            itemsCache = dependency.instance(IItemsCache)
-            self.as_setFreeXPS(itemsCache.items.stats.freeXP)
-            super(Research, self).invalidateFreeXP()
-    except Exception, ex:
-        err(traceback.format_exc())
-        base(self)
+# force call invalidateFreeXP to update actualFreeXP on vehicle change
+@overrideMethod(Research, 'onResearchItemsDrawn')
+def Research_onResearchItemsDrawn(base, self):
+    base(self)
+    self.invalidateFreeXP()
