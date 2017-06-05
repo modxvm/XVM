@@ -112,6 +112,7 @@ def onXfwCommand(cmd, *args):
             global gold_enable
             gold_enable = not args[0]
             handlersInvalidate('invalidateGold()', TechTree_handler, Research_handler)
+            handlersInvalidate('onGoldChange(0)', TechnicalMaintenance_handler)
             handlersInvalidate('_PremiumWindow__onUpdateHandler()', PremiumWindow_handler)
             handlersInvalidate('onGoldChange(0)', RecruitWindow_handler)
             handlersInvalidate('_update()', Shop_handler)
