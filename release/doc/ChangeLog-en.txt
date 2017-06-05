@@ -8,6 +8,7 @@
       "maxDistance" - maximum distance
       "startDistance" - start distance
       "zoomSensitivity" - camera zoom sensitivity (lower is slower)
+  * Sorting the parameters in the hangar.xc
 
 XVM-6.7.2:
   [GENERAL]
