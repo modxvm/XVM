@@ -28,7 +28,7 @@ package com.xvm.battle
             "rankedBattlePage": [
                 //TODO:9.19 BattleLoadingXvmView,
                 //TODO:9.19 FullStatsXvmView,
-                //TODO:9.19 RankedPlayersPanelXvmView,
+                RankedPlayersPanelXvmView,
                 TeamBasesPanelXvmView,
                 MinimapXvmView,
                 SixthSenseXvmView,
