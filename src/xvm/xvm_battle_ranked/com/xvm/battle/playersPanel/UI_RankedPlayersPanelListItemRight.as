@@ -7,17 +7,17 @@ package com.xvm.battle.playersPanel
     import com.xfw.*;
     import com.xvm.*;
     import net.wg.data.constants.*;
-    import net.wg.gui.battle.random.views.stats.components.playersPanel.constants.*;
+    import net.wg.gui.battle.random.views.stats.components.playersPanel.constants.PlayersPanelInvalidationType;
     import net.wg.infrastructure.interfaces.*;
 
-    public dynamic class UI_PlayersPanelListItemLeft extends PlayersPanelListItemLeftUI
+    public dynamic class UI_RankedPlayersPanelListItemRight extends RankedPlayersPanelListItemRightUI
     {
-        private var proxy:PlayersPanelListItemProxy;
+        private var proxy:RankedPlayersPanelListItemProxy;
 
-        public function UI_PlayersPanelListItemLeft()
+        public function UI_RankedPlayersPanelListItemRight()
         {
             super();
-            proxy = new PlayersPanelListItemProxy(this, true);
+            proxy = new RankedPlayersPanelListItemProxy(this, false);
             addChildAt(proxy, getChildIndex(vehicleTF) - 1);
         }
 
@@ -37,7 +37,7 @@ package com.xvm.battle.playersPanel
 
         override public function setPlayerNameProps(userProps:IUserProps):void
         {
-            if (!proxy.isXVMEnabled)
+            if (!proxy.xvm_enabled)
             {
                 super.setPlayerNameProps(userProps);
             }
@@ -49,7 +49,7 @@ package com.xvm.battle.playersPanel
 
         override public function setPlayerNameFullWidth(param1:Number):void
         {
-            if (!proxy.isXVMEnabled)
+            if (!proxy.xvm_enabled)
             {
                 super.setPlayerNameFullWidth(param1);
             }
@@ -57,14 +57,14 @@ package com.xvm.battle.playersPanel
             {
                 // set static value to send only one event
                 super.setPlayerNameFullWidth(0);
-                proxy.invalidate(PlayersPanelListItemProxy.INVALIDATE_PANEL_STATE);
+                proxy.invalidate(RankedPlayersPanelListItemProxy.INVALIDATE_PANEL_STATE);
                 proxy.validateNow();
             }
         }
 
         override public function setVehicleName(param1:String):void
         {
-            if (!proxy.isXVMEnabled)
+            if (!proxy.xvm_enabled)
             {
                 super.setVehicleName(param1);
             }
@@ -77,7 +77,7 @@ package com.xvm.battle.playersPanel
 
         override public function setFrags(param1:int):void
         {
-            if (!proxy.isXVMEnabled)
+            if (!proxy.xvm_enabled)
             {
                 super.setFrags(param1);
             }
@@ -88,22 +88,12 @@ package com.xvm.battle.playersPanel
             }
         }
 
-        // TODO:9.15 remove after fix
-        override public function setIsInteractive(isInteractive:Boolean):void
-        {
-            super.setIsInteractive(isInteractive);
-            if (proxy.isXVMEnabled)
-            {
-                proxy.setIsInteractive(isInteractive);
-            }
-        }
-
         override public function setState(param1:int):void
         {
             if (xfw_state != param1)
             {
                 super.setState(param1);
-                proxy.invalidate(PlayersPanelListItemProxy.INVALIDATE_PANEL_STATE);
+                proxy.invalidate(RankedPlayersPanelListItemProxy.INVALIDATE_PANEL_STATE);
                 proxy.validateNow();
             }
         }
@@ -112,7 +102,7 @@ package com.xvm.battle.playersPanel
         {
             try
             {
-                if (!proxy.isXVMEnabled)
+                if (!proxy.xvm_enabled)
                 {
                     super.setVehicleIcon(vehicleImage);
                 }
@@ -132,15 +122,15 @@ package com.xvm.battle.playersPanel
             try
             {
                 super.draw();
-                if (proxy.isXVMEnabled)
+                if (proxy.xvm_enabled)
                 {
                     if (isInvalid(PlayersPanelInvalidationType.PLAYER_SCHEME))
                     {
-                        proxy.invalidate(PlayersPanelListItemProxy.INVALIDATE_UPDATE_COLORS);
+                        proxy.invalidate(RankedPlayersPanelListItemProxy.INVALIDATE_UPDATE_COLORS);
                     }
                     if (isInvalid(InvalidationType.STATE))
                     {
-                        proxy.invalidate(PlayersPanelListItemProxy.INVALIDATE_PANEL_STATE);
+                        proxy.invalidate(RankedPlayersPanelListItemProxy.INVALIDATE_PANEL_STATE);
                     }
                     proxy.validateNow();
                 }

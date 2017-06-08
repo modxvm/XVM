@@ -12,7 +12,7 @@ package com.xvm.battle
     import com.xvm.battle.battleloading.BattleLoadingXvmView;
     import com.xvm.battle.fullStats.FullStatsXvmView;
     import com.xvm.battle.minimap.MinimapXvmView;
-    import com.xvm.battle.playersPanel.PlayersPanelXvmView;
+    import com.xvm.battle.playersPanel.RankedPlayersPanelXvmView;
     import com.xvm.battle.sixthSense.SixthSenseXvmView;
     import com.xvm.battle.teamBasesPanel.TeamBasesPanelXvmView;
 
@@ -28,7 +28,7 @@ package com.xvm.battle
             "rankedBattlePage": [
                 //TODO:9.19 BattleLoadingXvmView,
                 //TODO:9.19 FullStatsXvmView,
-                //TODO:9.19 PlayersPanelXvmView,
+                //TODO:9.19 RankedPlayersPanelXvmView,
                 TeamBasesPanelXvmView,
                 MinimapXvmView,
                 SixthSenseXvmView,

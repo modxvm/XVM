@@ -37,7 +37,7 @@ package com.xvm.battle.playersPanel
 
         override public function setPlayerNameProps(userProps:IUserProps):void
         {
-            if (!proxy.xvm_enabled)
+            if (!proxy.isXVMEnabled)
             {
                 super.setPlayerNameProps(userProps);
             }
@@ -49,7 +49,7 @@ package com.xvm.battle.playersPanel
 
         override public function setPlayerNameFullWidth(param1:Number):void
         {
-            if (!proxy.xvm_enabled)
+            if (!proxy.isXVMEnabled)
             {
                 super.setPlayerNameFullWidth(param1);
             }
@@ -64,7 +64,7 @@ package com.xvm.battle.playersPanel
 
         override public function setVehicleName(param1:String):void
         {
-            if (!proxy.xvm_enabled)
+            if (!proxy.isXVMEnabled)
             {
                 super.setVehicleName(param1);
             }
@@ -77,7 +77,7 @@ package com.xvm.battle.playersPanel
 
         override public function setFrags(param1:int):void
         {
-            if (!proxy.xvm_enabled)
+            if (!proxy.isXVMEnabled)
             {
                 super.setFrags(param1);
             }
@@ -92,7 +92,7 @@ package com.xvm.battle.playersPanel
         override public function setIsInteractive(isInteractive:Boolean):void
         {
             super.setIsInteractive(isInteractive);
-            if (proxy.xvm_enabled)
+            if (proxy.isXVMEnabled)
             {
                 proxy.setIsInteractive(isInteractive);
             }
@@ -112,7 +112,7 @@ package com.xvm.battle.playersPanel
         {
             try
             {
-                if (!proxy.xvm_enabled)
+                if (!proxy.isXVMEnabled)
                 {
                     super.setVehicleIcon(vehicleImage);
                 }
@@ -132,7 +132,7 @@ package com.xvm.battle.playersPanel
             try
             {
                 super.draw();
-                if (proxy.xvm_enabled)
+                if (proxy.isXVMEnabled)
                 {
                     if (isInvalid(PlayersPanelInvalidationType.PLAYER_SCHEME))
                     {

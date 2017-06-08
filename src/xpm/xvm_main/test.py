@@ -7,18 +7,18 @@ def onHangarInit():
     # debug
     if IS_DEVELOPMENT:
 
-        #import gui.awards.event_dispatcher as shared_events
-        #from helpers import dependency
-        #from skeletons.gui.goodies import IGoodiesCache
-        #goodiesCache = dependency.instance(IGoodiesCache)
-        #shared_events.showBoosterAward(goodiesCache.getBooster(5022))
-
         import glob
         files = glob.glob("[0-9]*.dat")
         if files:
             for fn in files:
                 log('[TEST]  battle result: {}'.format(fn))
                 runTest(('battleResults', fn))
+
+        #import gui.awards.event_dispatcher as shared_events
+        #from helpers import dependency
+        #from skeletons.gui.goodies import IGoodiesCache
+        #goodiesCache = dependency.instance(IGoodiesCache)
+        #shared_events.showBoosterAward(goodiesCache.getBooster(5022))
 
 
 def runTest(args):
@@ -55,6 +55,13 @@ def _showBattleResults(arenaUniqueID):
     battleResults = dependency.instance(IBattleResultsService)
     ctx = RequestResultsContext(arenaUniqueID, showImmediately=False, showIfPosted=True, resetCache=False)
     yield battleResults.requestResults(ctx)
+
+#@decorators.process('loadStats')
+#def _showWindow(self, notification, arenaUniqueID):
+#    uniqueID = long(arenaUniqueID)
+#    result = yield self.battleResults.requestResults(RequestResultsContext(uniqueID, showImmediately=False, showIfPosted=True, resetCache=False))
+#    if not result:
+#        self._updateNotification(notification)
 
 @overrideMethod(BattleResultsCache.BattleResultsCache, 'get')
 def BattleResultsCache_get(base, self, arenaUniqueID, callback):
