@@ -2,6 +2,18 @@
   [MISC]
   * Fix level of battles for the vehicle 3rd level
 
+  [BATTLE]
+  * Added players panel in the ranked battle
+  * added options in "battleLoading" and "statisticForm" sections:
+      "removeRankBadgeIcon" - disable rank badge icons
+  * added new field type "badge" in the "playersPanel"/"standardFields" modes sections
+  * added options in the "playersPanel" modes sections:
+      "rankBadgeXOffsetLeft" - offset of X value for rank badge column
+      "rankBadgeXOffsetRight" - offset of X value for rank badge column
+      "rankBadgeWidth" - width of the rank badge column
+  * added macros:
+      {{rankBadgeId}} - player's rank badge id
+
 XVM-6.7.3:
   [GENERAL]
   * World of Tanks 9.19, micropatch 08.06.2017
@@ -23,7 +35,7 @@ XVM-6.7.3:
   * Decreased performance impact of vehicle markers
 
   [MISC]
-  * Minimized performance impact of "autoReloadConfig" option 
+  * Minimized performance impact of "autoReloadConfig" option
   * Use game locale in the xvm.formatDate() py_macro
   * Fixed compatibility with Windows XP and Wine
 
@@ -61,17 +73,6 @@ XVM-6.7.0:
   * new parameter: "camera"/"noFlashBang" - switch the red flash if player's vehicle has got a hit
   * new parameter: "camera"/"hideHint" - switch the tips about siege/marching mode and artillery aiming mode
   * new parameter: "camera"/"noCameraLimit" - TODO: English comments
-
-  [MISC]
-  * added options in "battleLoading" and "statisticForm" sections:
-    "removeRankIcon" - disable rank icons
-  * added new field type "rank" in the "playersPanel"/"standardFields" modes sections
-  * added options in the "playersPanel" modes sections:
-    "rankXOffsetLeft" - offset of X value for rank column
-    "rankXOffsetRight" - offset of X value for rank column
-    "rankWidth" - width of the rank column
-  * added macros:
-      {{rankBadgeId}} - player's rank badge id
 
 XVM-6.6.5:
   [GENERAL]

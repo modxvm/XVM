@@ -20,12 +20,12 @@
     // true - enable display of battle tier.
     // true - включить отображение уровня боя.
     "showBattleTier": false,
-    // true - disable Platoon icons. This blank space can house, for example, clan logos.
-    // true - убрать отображение иконки взвода. На пустое поле можно вывести, например, иконку клана.
+    // true - disable Platoon/rank icons. This blank space can house, for example, clan logos.
+    // true - убрать отображение иконки взвода/ранга. На пустое поле можно вывести, например, иконку клана.
     "removeSquadIcon": false,
-    // true - disable rank icons
-    // true - убрать отображение иконки ранга
-    "removeRankIcon": false,
+    // true - disable rank badge icons
+    // true - убрать отображение иконки бейджа ранга
+    "removeRankBadgeIcon": false,
     // Opacity percentage of vehicle icon. 0 - transparent ... 100 - opaque.
     // Прозрачность в процентах иконки танка. 0 - прозрачные, 100 - не прозрачные.
     "vehicleIconAlpha": 100,

@@ -11,7 +11,7 @@ package com.xvm.types.cfg
     {
         public var showBattleTier:*;
         public var removeSquadIcon:*;
-        public var removeRankIcon:*;
+        public var removeRankBadgeIcon:*;
         public var vehicleIconAlpha:*;
         public var removeVehicleLevel:*;
         public var removeVehicleTypeIcon:*;
@@ -53,7 +53,7 @@ package com.xvm.types.cfg
         {
             showBattleTier = Macros.FormatBooleanGlobal(showBattleTier, true);
             removeSquadIcon = Macros.FormatBooleanGlobal(removeSquadIcon, false);
-            removeRankIcon = Macros.FormatBooleanGlobal(removeRankIcon, false);
+            removeRankBadgeIcon = Macros.FormatBooleanGlobal(removeRankBadgeIcon, false);
             vehicleIconAlpha = Macros.FormatNumberGlobal(vehicleIconAlpha, 100);
             removeVehicleLevel = Macros.FormatBooleanGlobal(removeVehicleLevel, false);
             removeVehicleTypeIcon = Macros.FormatBooleanGlobal(removeVehicleTypeIcon, false);

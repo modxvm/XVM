@@ -118,7 +118,7 @@ package com.xvm.battle.battleloading
         public function setData(model:DAAPIVehicleInfoVO):void
         {
             _model = model;
-            if (cfg.removeRankIcon)
+            if (cfg.removeRankBadgeIcon)
             {
                 _model.badgeType = "";
             }

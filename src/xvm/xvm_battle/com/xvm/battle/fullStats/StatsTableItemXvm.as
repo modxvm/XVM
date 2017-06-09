@@ -171,7 +171,7 @@ package com.xvm.battle.fullStats
 
         override public function setBadge(badgeType:String):void
         {
-            super.setBadge(cfg.removeRankIcon ? "" : badgeType);
+            super.setBadge(cfg.removeRankBadgeIcon ? "" : badgeType);
         }
 
         override public function setVehicleIcon(vehicleIconName:String):void

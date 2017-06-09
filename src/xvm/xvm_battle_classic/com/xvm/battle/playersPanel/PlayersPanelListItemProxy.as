@@ -401,7 +401,7 @@ package com.xvm.battle.playersPanel
                                 case "frags":
                                     ui.fragsTF.visible = true;
                                     break;
-                                case "rank":
+                                case "badge":
                                     ui.badgeIcon.visible = true;
                                     break;
                                 case "nick":
@@ -637,7 +637,7 @@ package com.xvm.battle.playersPanel
             {
                 case "frags":
                     return ui.fragsTF;
-                case "rank":
+                case "badge":
                     return ui.badgeIcon;
                 case "nick":
                     return ui.playerNameFullTF;
@@ -660,7 +660,7 @@ package com.xvm.battle.playersPanel
                     }
                     break;
                 case ui.badgeIcon:
-                    w = Macros.FormatNumber(mcfg.rankWidth, currentPlayerState, 0);
+                    w = Macros.FormatNumber(mcfg.rankBadgeWidth, currentPlayerState, 0);
                     if (int(ui.badgeIcon.width) != w)
                     {
                         ui.badgeIcon.width = w;
@@ -722,7 +722,7 @@ package com.xvm.battle.playersPanel
                 case ui.fragsTF:
                     return Macros.FormatNumber(mcfg.fragsXOffsetLeft, currentPlayerState, 0);
                 case ui.badgeIcon:
-                    return Macros.FormatNumber(mcfg.rankXOffsetLeft, currentPlayerState, 0);
+                    return Macros.FormatNumber(mcfg.rankBadgeXOffsetLeft, currentPlayerState, 0);
                 case ui.playerNameFullTF:
                     return Macros.FormatNumber(mcfg.nickXOffsetLeft, currentPlayerState, 0);
                 case ui.vehicleTF:
@@ -742,7 +742,7 @@ package com.xvm.battle.playersPanel
                 case ui.fragsTF:
                     return Macros.FormatNumber(mcfg.fragsXOffsetRight, currentPlayerState, 0);
                 case ui.badgeIcon:
-                    return Macros.FormatNumber(mcfg.rankXOffsetRight, currentPlayerState, 0);
+                    return Macros.FormatNumber(mcfg.rankBadgeXOffsetRight, currentPlayerState, 0);
                 case ui.playerNameFullTF:
                     return Macros.FormatNumber(mcfg.nickXOffsetRight, currentPlayerState, 0);
                 case ui.vehicleTF:

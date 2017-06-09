@@ -13,8 +13,6 @@ package com.xvm.types.cfg
         public var expandAreaWidth:*;
         public var removeSquadIcon:*;
         public var squadIconAlpha:*;
-        public var removeRankIcon:*;
-        public var rankIconAlpha:*;
         public var vehicleIconXOffsetLeft:*;
         public var vehicleIconXOffsetRight:*;
         public var vehicleLevelXOffsetLeft:*;
@@ -27,9 +25,9 @@ package com.xvm.types.cfg
         public var fragsFormatRight:String;
         public var fragsShadowLeft:CShadow;
         public var fragsShadowRight:CShadow;
-        public var rankXOffsetLeft:*;
-        public var rankXOffsetRight:*;
-        public var rankWidth:*;
+        public var rankBadgeXOffsetLeft:*;
+        public var rankBadgeXOffsetRight:*;
+        public var rankBadgeWidth:*;
         public var nickXOffsetLeft:*;
         public var nickXOffsetRight:*;
         public var nickMinWidth:*;
