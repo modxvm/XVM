@@ -1,4 +1,8 @@
-﻿XVM-6.7.3:
+﻿XVM-6.7.4-dev:
+  [MISC]
+  * Fix level of battles for the vehicle 3rd level
+
+XVM-6.7.3:
   [GENERAL]
   * World of Tanks 9.19, micropatch 08.06.2017
 

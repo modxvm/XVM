@@ -14,23 +14,14 @@ from helpers import dependency
 from skeletons.gui.shared import IItemsCache
 
 _special = {
-    # Data from http://forum.worldoftanks.ru/index.php?/topic/41221-
-    # Last update: 23.05.2017
+    # Data from http://forum.worldoftanks.ru/index.php?/topic/1894923-
+    # Last update: 09.06.2017
 
     # level 2
     'germany:G53_PzI':                   [ 2, 2 ],
     'uk:GB76_Mk_VIC':                    [ 2, 2 ],
     'usa:A19_T2_lt':                     [ 2, 4 ],
     'usa:A93_T7_Combat_Car':             [ 2, 2 ],
-
-    # level 3
-    'germany:G36_PzII_J':                [ 3, 4 ],
-    'japan:J05_Ke_Ni_B':                 [ 3, 4 ],
-    'ussr:R34_BT-SV':                    [ 3, 4 ],
-    'ussr:R50_SU76I':                    [ 3, 4 ],
-    'ussr:R56_T-127':                    [ 3, 4 ],
-    'ussr:R67_M3_LL':                    [ 3, 4 ],
-    'ussr:R86_LTP':                      [ 3, 4 ],
 
     # level 4
     'france:F14_AMX40':                  [ 4, 6 ],
@@ -48,7 +39,6 @@ _special = {
     'germany:G32_PzV_PzIV':              [ 5, 6 ],
     'germany:G32_PzV_PzIV_ausf_Alfa':    [ 5, 6 ],
     'germany:G70_PzIV_Hydro':            [ 5, 6 ],
-    'uk:GB20_Crusader':                  [ 5, 7 ],
     'uk:GB51_Excelsior':                 [ 5, 6 ],
     'uk:GB68_Matilda_Black_Prince':      [ 5, 6 ],
     'usa:A21_T14':                       [ 5, 6 ],
@@ -89,6 +79,10 @@ _special = {
 def _getTiers(level, cls, key):
     if key in _special:
         return _special[key]
+
+    # Since update 0.9.18: (=T3 max+1)
+    if level == 3:
+        return (3, 4)
 
     # HT: (=T4 max+1)
     if level == 4 and cls == 'heavyTank':

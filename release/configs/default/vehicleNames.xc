@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 23.05.2017
+    // Last update: 09.06.2017
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
