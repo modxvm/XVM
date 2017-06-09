@@ -1,4 +1,4 @@
-﻿XVM-6.7.3-dev:
+﻿XVM-6.7.3:
   [GENERAL]
   * World of Tanks 9.19, micropatch 08.06.2017
 
