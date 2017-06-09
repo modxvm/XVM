@@ -1,7 +1,8 @@
 ﻿XVM-6.7.3-dev:
-  [MISC]
-  * minimized performance impact of "autoReloadConfig" option 
-  * use game locale in the xvm.formatDate() py_macro
+  [GENERAL]
+  * World of Tanks 9.19, micropatch 08.06.2017
+
+  [HANGAR]
   * added option "hangar/hangarType" with values: none (default), "premium" and "basic"
   * added section "hangar/camera" with options:
       "minDistance" - minimum distance
@@ -9,6 +10,18 @@
       "startDistance" - start distance
       "zoomSensitivity" - camera zoom sensitivity (lower is slower)
   * Sorting the parameters in the hangar.xc
+  * Fixed "defaultBoughtForCredits" option
+  * Fixed free XP displaying in research window
+
+  [BATTLE]
+  * Fixed {{my-frags}} macro
+  * Fixed tank contour disappearing
+  * Decreased performance impact of vehicle markers
+
+  [MISC]
+  * Minimized performance impact of "autoReloadConfig" option 
+  * Use game locale in the xvm.formatDate() py_macro
+  * Fixed compatibility with Windows XP and Wine
 
 XVM-6.7.2:
   [GENERAL]
