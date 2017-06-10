@@ -18,7 +18,7 @@ package com.xvm.battle.battleLabels
     import flash.text.*;
     import flash.geom.*;
     import net.wg.data.constants.*;
-    import net.wg.gui.battle.random.views.*;
+    import net.wg.gui.battle.views.*;
     import scaleform.clik.core.*;
     import scaleform.gfx.*;
 
@@ -30,7 +30,7 @@ package com.xvm.battle.battleLabels
         private var _topHolder:Sprite;
         private var extraFields:ExtraFieldsGroup = null;
 
-        public function BattleLabels(battlePage: BattlePage)
+        public function BattleLabels(battlePage:BaseBattlePage)
         {
             mouseEnabled = false;
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
@@ -48,7 +48,7 @@ package com.xvm.battle.battleLabels
 
             _topHolder = battlePage.addChild(new Sprite()) as Sprite;
             _topHolder.mouseEnabled =false
-            
+
             createExtraFields();
         }
 

@@ -10,36 +10,13 @@ package com.xvm.battle.battleloading
     import flash.text.*;
     import net.wg.data.constants.*;
     import net.wg.data.VO.daapi.*;
-    import net.wg.gui.battle.battleloading.renderers.*;
+    import net.wg.gui.battle.ranked.battleloading.renderers.*;
+    import net.wg.gui.battle.battleloading.renderers.BaseRendererContainer;
     import net.wg.gui.battle.components.*;
     import net.wg.gui.components.icons.*;
 
     public class XvmTipPlayerItemRenderer extends TipPlayerItemRenderer implements IXvmBattleLoadingItemRenderer
     {
-        private const _DEFAULTS_LEFT:XvmItemRendererDefaults = ObjectConverter.convertData({
-            NAME_FIELD_WIDTH: 100,
-            VEHICLE_FIELD_WIDTH: 100,
-            SQUAD_X: 8,
-            NAME_FIELD_X: 29,
-            VEHICLE_FIELD_X: 84,
-            VEHICLE_ICON_X: 204,
-            VEHICLE_LEVEL_X: 223,
-            VEHICLE_TYPE_ICON_X: 183,
-            EXTRA_FIELDS_X: 0
-        }, XvmItemRendererDefaults);
-
-        private const _DEFAULTS_RIGHT:XvmItemRendererDefaults = ObjectConverter.convertData({
-            NAME_FIELD_WIDTH: 100,
-            VEHICLE_FIELD_WIDTH: 100,
-            SQUAD_X: 992,
-            NAME_FIELD_X: 888,
-            VEHICLE_FIELD_X: 831,
-            VEHICLE_ICON_X: 815,
-            VEHICLE_LEVEL_X: 797,
-            VEHICLE_TYPE_ICON_X: 811,
-            EXTRA_FIELDS_X: 1011
-        }, XvmItemRendererDefaults);
-
         private var container:BaseRendererContainer;
         private var isEnemy:Boolean;
         private var proxy:XvmBattleLoadingItemRendererProxy;
@@ -74,7 +51,7 @@ package com.xvm.battle.battleloading
 
         override public function setData(param1:Object):void
         {
-            //param1.squadIndex = 1; param1.playerStatus |= PlayerStatus.IS_SQUAD_MAN; // DEBUG
+            //param1.rankLevel = 1; // DEBUG
             super.setData(param1);
             proxy.setData(DAAPIVehicleInfoVO(param1));
         }
@@ -83,12 +60,12 @@ package com.xvm.battle.battleloading
 
         public function get DEFAULTS():XvmItemRendererDefaults
         {
-            return isEnemy ? _DEFAULTS_RIGHT : _DEFAULTS_LEFT;
+            return isEnemy ? XvmItemRendererDefaults.DEFAULTS_RIGHT_TIP : XvmItemRendererDefaults.DEFAULTS_LEFT_TIP;
         }
 
-        public function get squad():BattleAtlasSprite
+        public function get rankIcon():BattleAtlasSprite
         {
-            return _squad;
+            return xfw_rankIcon;
         }
 
         public function get badgeIcon():BattleAtlasSprite

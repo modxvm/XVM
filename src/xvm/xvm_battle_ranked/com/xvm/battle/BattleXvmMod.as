@@ -9,8 +9,8 @@ package com.xvm.battle
     import com.xfw.events.*;
     import com.xvm.infrastructure.*;
     import com.xvm.battle.*;
-    import com.xvm.battle.battleloading.BattleLoadingXvmView;
-    import com.xvm.battle.fullStats.FullStatsXvmView;
+    import com.xvm.battle.battleloading.RankedBattleLoadingXvmView;
+    import com.xvm.battle.fullStats.RankedFullStatsXvmView;
     import com.xvm.battle.minimap.MinimapXvmView;
     import com.xvm.battle.playersPanel.RankedPlayersPanelXvmView;
     import com.xvm.battle.sixthSense.SixthSenseXvmView;
@@ -26,8 +26,8 @@ package com.xvm.battle
         private static const _views:Object =
         {
             "rankedBattlePage": [
-                //TODO:9.19 BattleLoadingXvmView,
-                //TODO:9.19 FullStatsXvmView,
+                RankedBattleLoadingXvmView,
+                RankedFullStatsXvmView,
                 RankedPlayersPanelXvmView,
                 TeamBasesPanelXvmView,
                 MinimapXvmView,

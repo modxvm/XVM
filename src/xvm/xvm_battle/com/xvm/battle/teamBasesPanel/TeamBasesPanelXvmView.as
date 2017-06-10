@@ -11,7 +11,7 @@ package com.xvm.battle.teamBasesPanel
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.data.constants.generated.*;
-    import net.wg.gui.battle.random.views.*;
+    import net.wg.gui.battle.random.views.BattlePage;
 
     public class TeamBasesPanelXvmView extends XvmViewBase
     {

@@ -3,7 +3,7 @@
   * Fix level of battles for the vehicle 3rd level
 
   [BATTLE]
-  * Added players panel in the ranked battle
+  * Added players panel, battle loading and full stats in the ranked battle
   * added options in "battleLoading" and "statisticForm" sections:
       "removeRankBadgeIcon" - disable rank badge icons
   * added new field type "badge" in the "playersPanel"/"standardFields" modes sections

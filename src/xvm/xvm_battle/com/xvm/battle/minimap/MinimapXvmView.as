@@ -8,10 +8,10 @@ package com.xvm.battle.minimap
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
+    import net.wg.gui.battle.views.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.data.constants.generated.*;
-    import net.wg.gui.battle.random.views.*;
     import net.wg.gui.battle.views.minimap.*;
     import net.wg.gui.battle.views.minimap.events.*;
 
@@ -22,9 +22,9 @@ package com.xvm.battle.minimap
             super(view);
         }
 
-        public function get page():BattlePage
+        public function get page():BaseBattlePage
         {
-            return super.view as BattlePage;
+            return super.view as BaseBattlePage;
         }
 
         public override function onAfterPopulate(e:LifeCycleEvent):void

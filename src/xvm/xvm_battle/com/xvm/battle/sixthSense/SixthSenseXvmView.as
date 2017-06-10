@@ -1,17 +1,22 @@
 package com.xvm.battle.sixthSense
 {
-    import com.xfw.Logger;
-    import com.xvm.infrastructure.XvmViewBase;
-    import net.wg.data.constants.generated.BATTLE_VIEW_ALIASES;
+    import com.xfw.*;
+    import com.xvm.infrastructure.*;
+    import net.wg.data.constants.generated.*;
+    import net.wg.infrastructure.events.*;
+    import net.wg.infrastructure.interfaces.*;
     import net.wg.gui.battle.random.views.BattlePage;
-    import net.wg.infrastructure.events.LifeCycleEvent;
-    import net.wg.infrastructure.interfaces.IView;
 
     public class SixthSenseXvmView extends XvmViewBase
     {
         public function SixthSenseXvmView(view:IView)
         {
             super(view);
+        }
+
+        public function get page():BattlePage
+        {
+            return super.view as BattlePage;
         }
 
         public override function onAfterPopulate(e:LifeCycleEvent):void
@@ -22,8 +27,6 @@ package com.xvm.battle.sixthSense
 
         private function init():void
         {
-            const page:BattlePage = super.view as BattlePage;
-
             if (page)
             {
                 page.unregisterComponent(BATTLE_VIEW_ALIASES.SIXTH_SENSE);

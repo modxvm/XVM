@@ -10,36 +10,13 @@ package com.xvm.battle.battleloading
     import flash.text.*;
     import net.wg.data.constants.*;
     import net.wg.data.VO.daapi.*;
-    import net.wg.gui.battle.battleloading.renderers.*;
+    import net.wg.gui.battle.ranked.battleloading.renderers.*;
+    import net.wg.gui.battle.battleloading.renderers.BaseRendererContainer;
     import net.wg.gui.battle.components.*;
     import net.wg.gui.components.icons.*;
 
     public class XvmTablePlayerItemRenderer extends TablePlayerItemRenderer implements IXvmBattleLoadingItemRenderer
     {
-        private const _DEFAULTS_LEFT:XvmItemRendererDefaults = ObjectConverter.convertData({
-            NAME_FIELD_WIDTH: 250,
-            VEHICLE_FIELD_WIDTH: 250,
-            SQUAD_X: 65,
-            NAME_FIELD_X: 86,
-            VEHICLE_FIELD_X: 120,
-            VEHICLE_ICON_X: 402,
-            VEHICLE_LEVEL_X: 421,
-            VEHICLE_TYPE_ICON_X: 371,
-            EXTRA_FIELDS_X: 10
-        }, XvmItemRendererDefaults);
-
-        private const _DEFAULTS_RIGHT:XvmItemRendererDefaults = ObjectConverter.convertData({
-            NAME_FIELD_WIDTH: 250,
-            VEHICLE_FIELD_WIDTH: 250,
-            SQUAD_X: 934,
-            NAME_FIELD_X: 680,
-            VEHICLE_FIELD_X: 644,
-            VEHICLE_ICON_X: 612,
-            VEHICLE_LEVEL_X: 592,
-            VEHICLE_TYPE_ICON_X: 618,
-            EXTRA_FIELDS_X: 1011
-        }, XvmItemRendererDefaults);
-
         private var container:BaseRendererContainer;
         private var isEnemy:Boolean;
         private var proxy:XvmBattleLoadingItemRendererProxy;
@@ -74,7 +51,7 @@ package com.xvm.battle.battleloading
 
         override public function setData(param1:Object):void
         {
-            //param1.squadIndex = 1; param1.playerStatus |= PlayerStatus.IS_SQUAD_MAN; // DEBUG
+            //param1.rankLevel = 1; // DEBUG
             super.setData(param1);
             proxy.setData(DAAPIVehicleInfoVO(param1));
         }
@@ -83,12 +60,12 @@ package com.xvm.battle.battleloading
 
         public function get DEFAULTS():XvmItemRendererDefaults
         {
-            return isEnemy ? _DEFAULTS_RIGHT : _DEFAULTS_LEFT;
+            return isEnemy ? XvmItemRendererDefaults.DEFAULTS_RIGHT_TABLE : XvmItemRendererDefaults.DEFAULTS_LEFT_TABLE;
         }
 
-        public function get squad():BattleAtlasSprite
+        public function get rankIcon():BattleAtlasSprite
         {
-            return _squad;
+            return xfw_rankIcon;
         }
 
         public function get badgeIcon():BattleAtlasSprite

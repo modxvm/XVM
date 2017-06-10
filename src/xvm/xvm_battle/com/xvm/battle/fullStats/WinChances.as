@@ -10,26 +10,27 @@ package com.xvm.battle.fullStats
     import com.xvm.battle.events.*;
     import com.xvm.types.cfg.*;
     import flash.text.*;
+    import flash.display.*;
     import net.wg.infrastructure.interfaces.entity.*;
     import scaleform.gfx.*;
 
     public class WinChances implements IDisposable
     {
         private var cfg:CStatisticForm;
-        private var form:UI_FullStats;
+        private var form:DisplayObjectContainer;
         private var winChanceTF:TextField = null;
 
-        public function WinChances(form:UI_FullStats)
+        public function WinChances(form:DisplayObjectContainer)
         {
             cfg = Config.config.statisticForm;
             this.form = form;
 
-            winChanceTF = createWinChanceTextField(form.battleTF);
-            winChanceTF.styleSheet = XfwUtils.createTextStyleSheet("chances", form.battleTF.defaultTextFormat);
+            winChanceTF = createWinChanceTextField(form["battleTF"]);
+            winChanceTF.styleSheet = XfwUtils.createTextStyleSheet("chances", form["battleTF"].defaultTextFormat);
             winChanceTF.x = 200;
             winChanceTF.width = 1024;
             winChanceTF.y = 20;
-            winChanceTF.height = form.battleTF.height;
+            winChanceTF.height = form["battleTF"].height;
             form.addChild(winChanceTF);
 
             if (Config.networkServicesSettings.chanceLive)
