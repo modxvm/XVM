@@ -281,7 +281,7 @@
     //"fragsFieldOffsetXRight": 30,
     //"fragsFieldWidthLeft": 100,
     //"fragsFieldWidthRight": 100,
-    "squadIconOffsetXLeft": -15,
+    "squadIconOffsetXLeft": -7,
     "squadIconOffsetXRight": -7,
     //"vehicleIconOffsetXLeft": 20,
     //"vehicleIconOffsetXRight": 20,

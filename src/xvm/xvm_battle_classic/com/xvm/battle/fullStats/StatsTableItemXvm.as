@@ -50,7 +50,6 @@ package com.xvm.battle.fullStats
         private var cfg:CStatisticForm;
 
         private var _isLeftPanel:Boolean;
-        private var _badgeIcon:BattleAtlasSprite;
         private var _playerNameTF:TextField;
         private var _vehicleNameTF:TextField;
         private var _fragsTF:TextField;
@@ -60,6 +59,7 @@ package com.xvm.battle.fullStats
         private var _vehicleTypeIcon:BattleAtlasSprite;
         private var _icoIGR:BattleAtlasSprite;
         private var _isIGR:Boolean = false;
+        private var _badgeIcon:BattleAtlasSprite;
 
         private var _vehicleID:Number = NaN;
         private var _vehicleIconName:String = null;
@@ -81,12 +81,12 @@ package com.xvm.battle.fullStats
 
             var index:int = col * NUM_ITEM_ROWS + row;
             _isLeftPanel = col == 0;
-            _badgeIcon = table.rankBadgesCollection[index];
             _playerNameTF = table.playerNameCollection[index];
             _vehicleNameTF = table.vehicleNameCollection[index];
             _fragsTF = table.fragsCollection[index];
             _vehicleTypeIcon = table.vehicleTypeCollection[index];
             _icoIGR = table.icoIGRCollection[index];
+            _badgeIcon = table.rankBadgesCollection[index];
             _vehicleIcon = table.vehicleIconCollection[index];
             _vehicleLevelIcon = table.vehicleLevelCollection[index];
             _playerStatus = table.playerStatusCollection[index];

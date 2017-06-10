@@ -13,7 +13,7 @@ package com.xvm.battle.fullStats
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.managers.impl.*;
 
-    public dynamic class UI_RankedFullStats extends RankedFullStatsUI
+    public /*dynamic*/ class UI_RankedFullStats extends RankedFullStatsUI
     {
         public static var leftAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
         public static var rightAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;

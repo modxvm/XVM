@@ -61,6 +61,7 @@ package com.xvm.battle.fullStats
         private var _vehicleTypeIcon:BattleAtlasSprite;
         private var _icoIGR:BattleAtlasSprite;
         private var _isIGR:Boolean = false;
+        private var _rankIcon:BattleAtlasSprite;
 
         private var _vehicleID:Number = NaN;
         private var _vehicleIconName:String = null;
@@ -82,17 +83,18 @@ package com.xvm.battle.fullStats
 
             var index:int = col * NUM_ITEM_ROWS + row;
             _isLeftPanel = col == 0;
-            _badgeIcon = table.rankBadgesCollection[index];
             _playerNameTF = table.playerNameCollection[index];
             _vehicleNameTF = table.vehicleNameCollection[index];
             _fragsTF = table.fragsCollection[index];
             _vehicleTypeIcon = table.vehicleTypeCollection[index];
             _icoIGR = table.icoIGRCollection[index];
+            _badgeIcon = table.rankBadgesCollection[index];
             _vehicleIcon = table.vehicleIconCollection[index];
             _vehicleLevelIcon = table.vehicleLevelCollection[index];
             _playerStatus = table.playerStatusCollection[index];
+            _rankIcon = table.rankIconsCollection[index];
 
-            DEFAULT_RANKICON_X = xfw_rankIcon.x;
+            DEFAULT_RANKICON_X = _rankIcon.x;
             DEFAULT_PLAYER_NAME_X = _playerNameTF.x;
             DEFAULT_PLAYER_NAME_WIDTH = _playerNameTF.width;
             DEFAULT_VEHICLE_NAME_X = _vehicleNameTF.x;
@@ -367,7 +369,7 @@ package com.xvm.battle.fullStats
 
             if (cfg.removeSquadIcon)
             {
-                xfw_rankIcon.alpha = 0;
+                _rankIcon.alpha = 0;
             }
 
             if (cfg.removeVehicleLevel)
@@ -466,11 +468,11 @@ package com.xvm.battle.fullStats
         {
             if (_isLeftPanel)
             {
-                xfw_rankIcon.x = DEFAULT_RANKICON_X + cfg.squadIconOffsetXLeft;
+                _rankIcon.x = DEFAULT_RANKICON_X + cfg.squadIconOffsetXLeft;
             }
             else
             {
-                xfw_rankIcon.x = DEFAULT_RANKICON_X - cfg.squadIconOffsetXRight;
+                _rankIcon.x = DEFAULT_RANKICON_X - cfg.squadIconOffsetXRight;
             }
         }
 
