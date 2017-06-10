@@ -14,6 +14,10 @@
   * added macros:
       {{rankBadgeId}} - player's rank badge id
 
+  [MACROS]
+  * new macro:
+      {{rank-level}} - rank level
+
 XVM-6.7.3:
   [GENERAL]
   * World of Tanks 9.19, micropatch 08.06.2017

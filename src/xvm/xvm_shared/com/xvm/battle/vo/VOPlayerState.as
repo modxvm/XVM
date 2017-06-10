@@ -33,6 +33,7 @@ package com.xvm.battle.vo
         private var _prebattleID:Number = NaN;
         private var _region:String = null;
         private var _squadIndex:uint = 0;
+        private var _rankLevel:uint = 0;
         private var _teamColor:String = null;
         private var _userTags:Array = null;
         private var _vehicleAction:uint = 0;
@@ -221,6 +222,11 @@ package com.xvm.battle.vo
             {
                 BattleGlobalData.playerSquad = value;
             }
+        }
+
+        override public function get rankLevel():Number
+        {
+            return _rankLevel;
         }
 
         override public function get position():Number

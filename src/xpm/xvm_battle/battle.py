@@ -327,6 +327,9 @@ class Battle(object):
                 if targets & INV.SQUAD_INDEX:
                     data['squadIndex'] = vInfoVO.squadIndex
 
+                if targets & INV.RANK_LEVEL:
+                    data['rankLevel'] = vInfoVO.ranked.rank
+
                 # why vInfoVO.playerStatus == 0?
                 #if targets & INV.PLAYER_STATUS:
                 #    data['playerStatus'] = vInfoVO.playerStatus

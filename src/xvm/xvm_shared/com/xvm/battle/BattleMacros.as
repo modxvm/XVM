@@ -225,6 +225,11 @@ package com.xvm.battle
             {
                 return o && o.squadIndex ? o.squadIndex : NaN;
             }
+            // {{rank-level}}
+            m_globals["rank-level"] = function(o:IVOMacrosOptions):Number
+            {
+                return o && o.rankLevel ? o.rankLevel : NaN;
+            }
             // {{position}}
             m_globals["position"] = function(o:IVOMacrosOptions):Number
             {

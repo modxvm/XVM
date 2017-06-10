@@ -45,7 +45,6 @@ package com.xvm.types.stat
         public var status:Number = NaN;        // XVM activation status
         public var flag:String = null;         // client flag
         public var team:Number = NaN;          // team (1 or 2)
-        public var squadnum:Number = NaN;      // squad number
         public var alive:Boolean = false;      // alive
         public var ready:Boolean = false;      // avatarReady
         public var maxHealth:Number = NaN;     // max health

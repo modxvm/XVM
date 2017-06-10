@@ -445,7 +445,6 @@ class _Stat(object):
                             stat['emblem'] = pl.clanInfo.get('emblem', None) if pl.clanInfo else None
                     stat['name'] = pl.name
                     stat['team'] = TEAM.ALLY if team == pl.team else TEAM.ENEMY
-                    stat['squadnum'] = pl.squadnum
                     stat['badgeId'] = pl.badgeId
                     if hasattr(pl, 'alive'):
                         stat['alive'] = pl.alive
@@ -618,7 +617,7 @@ class _Stat(object):
 class _Player(object):
 
     __slots__ = ('vehicleID', 'accountDBID', 'name', 'clan', 'clanInfo', 'badgeId', 'team',
-                 'squadnum', 'vehCD', 'vLevel', 'maxHealth', 'vIcon', 'vn', 'vType', 'alive',
+                 'vehCD', 'vLevel', 'maxHealth', 'vIcon', 'vn', 'vType', 'alive',
                  'ready', 'x_emblem', 'x_emblem_loading', 'clanicon')
 
     sessionProvider = dependency.descriptor(IBattleSessionProvider)
@@ -643,13 +642,6 @@ class _Player(object):
         if self.vehCD is None:
             self.vehCD = 0
         self.team = vData['team']
-        self.squadnum = 0
-        arenaDP = self.sessionProvider.getArenaDP()
-        if arenaDP is not None:
-            vInfo = arenaDP.getVehicleInfo(vID=vehicleID)
-            self.squadnum = vInfo.squadIndex
-            # if self.squadnum > 0:
-            #    log("team=%d, squad=%d %s" % (self.team, self.squadnum, self.name))
 
     def update(self, vData):
         vtype = vData['vehicleType']

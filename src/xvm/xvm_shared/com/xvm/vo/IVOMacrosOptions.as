@@ -18,6 +18,7 @@
         function get isTeamKiller():Boolean;
         function get isSquadPersonal():Boolean;
         function get squadIndex():Number;
+        function get rankLevel():Number;
         function get index():int;
         function get position():Number;
         function get vehCD():int;
