@@ -212,8 +212,8 @@ FLAG = {'': '>', "'": '>', '-': '<', "-'": '<', '0': '0', "0'": '0', "-0": '0<',
 
 def formatMacro(macro, macroes):
     _macro = macro[2:-2]
-    _macro, _, _def = _macro.partition('|')
-    _macro, _, _rep = _macro.partition('?')
+    _macro, s_def, _def = _macro.partition('|')
+    _macro, s_rep, _rep = _macro.partition('?')
     fm = {'flag': '', 'type': '', 'width': '', 'suf': ''}
     _operator = ''
     for s in ('>=', '<=', '!=', '==', '=', '<', '>'):
@@ -238,16 +238,22 @@ def formatMacro(macro, macroes):
     tempMacro = _macro
     if _macro in macroes:
         _macro = macroes[_macro]
+        b = False
         if _operator:
-            if _rep and comparing(_macro, _operator, _math):
+            compar = comparing(_macro, _operator, _math)
+            if s_rep and compar:
                 _macro = _rep
-            elif not comparing(_macro, _operator, _math):
+                b = True
+            elif s_def and not compar:
                 _macro = _def
-        elif _rep and _macro:
+                b = True
+        elif s_rep and _macro:#_rep and _macro:
             _macro = _rep
-        elif _def and not _macro:
+            b = True
+        elif s_def and not _macro:#_def and not _macro:
             _macro = _def
-        if _macro == macroes[tempMacro]:
+            b = True
+        if b:
             fm['flag'] = FLAG[fm['flag']]
             fm['prec'] = ''
             if _prec != '':
@@ -446,12 +452,12 @@ class Data(object):
                     self.data['xte'] = None
                 self.data['clanAbbrev'] = attacker['clanAbbrev']
             self.data['clanicon'] = _stat.getClanIcon(attackerID)
-            self.data['squadnum'] = None
+            self.data['squadnum'] = ''
             arenaDP = self.sessionProvider.getArenaDP()
             if arenaDP is not None:
                 vInfo = arenaDP.getVehicleInfo(vID=attackerID)
                 self.squadnum = vInfo.squadIndex
-                self.data['squadnum'] = vInfo.squadIndex if vInfo.squadIndex != 0 else None
+                self.data['squadnum'] = vInfo.squadIndex if vInfo.squadIndex != 0 else ''
         else:
             self.data['teamDmg'] = 'unknown'
             self.data['attackerVehicleType'] = 'not_vehicle'
