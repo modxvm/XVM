@@ -231,17 +231,6 @@
         "strength": 2                 //   интенсивность
       },
       "format": "<font size='{{battletype?13|0}}'>{{position}}</font>"  //  формат текста. См. описание макросов в macros.txt
-    },
-    // "Top tankers" rank.
-    // Позиция в "Танковых асах".
-    "topTankers": {
-      "name": "topTankers",
-      "enabled": true,
-      "x": 33,
-      "y": -21,
-      "alpha": 100,
-      "align": "left",
-      "format": "<img src='{{top_tankers_emblem}}' width='16' height='16'>"
     }
   },
   // Настройки для союзников.
@@ -355,7 +344,6 @@
     // Block of text fields (extended format supported, see extra-field.txt).
     // Блок текстовых полей (поддерживается расширенный формат, см. extra-field.txt).
     "textFields": [
-      ${ "def.topTankers" },
       ${ "def.tankName" },
       ${ "def.playerName" },
       ${ "def.tankHp" },
@@ -449,7 +437,6 @@
     // Block of text fields (extended format supported, see extra-field.txt).
     // Блок текстовых полей (поддерживается расширенный формат, см. extra-field.txt).
     "textFields": [
-      ${ "def.topTankers" },
       ${ "def.tankName" },
       ${ "def.tankHp" },
       ${ "def.rating" },

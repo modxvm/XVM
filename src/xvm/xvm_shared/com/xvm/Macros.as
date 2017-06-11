@@ -335,8 +335,8 @@ package com.xvm
             "c:t-rating", "c:t-battles", "c:tdb", "c:xtdb", "c:tdv", "c:tfb", "c:tsb", "a:xte", "a:xeff",
             "a:xwn6", "a:xwn8", "a:xwn", "a:xwgr", "a:eff", "a:wn6", "a:wn8", "a:wn", "a:wgr", "a:r", "a:xr",
             "a:winrate", "a:rating", "a:kb", "a:avglvl", "a:t-winrate", "a:t-rating", "a:t-battles", "a:tdb",
-            "a:xtdb", "a:tdv", "a:tfb", "a:tsb", "top_tankers_rank", "top_tankers_emblem", "chancesStatic",
-            "chancesLive", "allyStrengthStatic", "enemyStrengthStatic", "allyStrengthLive", "enemyStrengthLive"];
+            "a:xtdb", "a:tdv", "a:tfb", "a:tsb", "chancesStatic", "chancesLive",
+            "allyStrengthStatic", "enemyStrengthStatic", "allyStrengthLive", "enemyStrengthLive"];
 
         private var m_globals:Object;
         private var m_players:Object; // { PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
@@ -1365,33 +1365,6 @@ package com.xvm
             pdata["a:tfb"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TFB, stat.v.fb);
             // {{a:tsb}}
             pdata["a:tsb"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TSB, stat.v.sb);
-
-            // {{top_tankers_rank}}
-            pdata["top_tankers_rank"] = stat.v.top_tankers_rank;
-
-            // {{top_tankers_emblem}}
-            var emblem:String = null;
-            if (stat.v.top_tankers_rank > 100)
-            {
-                emblem = "xvm://res/icons/top_tankers/rank1000.png";
-            }
-            else if (stat.v.top_tankers_rank > 3)
-            {
-                emblem = "xvm://res/icons/top_tankers/rank100.png";
-            }
-            else if (stat.v.top_tankers_rank == 3)
-            {
-                emblem = "xvm://res/icons/top_tankers/rank3.png";
-            }
-            else if (stat.v.top_tankers_rank == 2)
-            {
-                emblem = "xvm://res/icons/top_tankers/rank2.png";
-            }
-            else if (stat.v.top_tankers_rank == 1)
-            {
-                emblem = "xvm://res/icons/top_tankers/rank1.png";
-            }
-            pdata["top_tankers_emblem"] = emblem;
         }
 
         /**

@@ -11,12 +11,12 @@
       "rankBadgeXOffsetLeft" - offset of X value for rank badge column
       "rankBadgeXOffsetRight" - offset of X value for rank badge column
       "rankBadgeWidth" - width of the rank badge column
-  * added macros:
-      {{rankBadgeId}} - player's rank badge id
 
   [MACROS]
-  * new macro:
+  * added macros:
       {{rank-level}} - rank level
+      {{rankBadgeId}} - player's rank badge id
+  * removed macros for "Top Tankers" event
 
 XVM-6.7.3:
   [GENERAL]

@@ -167,14 +167,6 @@ Legend:
 └───┴────────────────────┴───┴───┴───┴───┴───┴───┴─────────────────────────────────────────────────
   * Any color macro you can change to transparency macro (e.g. {{a:tdb}}).
 
-  Extra Statistic macros
-┌───┬────────────────────────┬───┬───┬───┬───┬───┬───┬─────────────────────────────────────────────────
-│SDH│ macro                  │ BL│ PP│ SF│ MM│ VM│BLb│ Description
-├───┼────────────────────────┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────────
-│ S │ {{top_tankers_rank}}   │ X │ X │ X │ X │ X │ X │ player's rank on current vehicle in the "Top Tankers" game event
-│ S │ {{top_tankers_emblem}} │ X │ X │ X │ X │ X │ X │ emblem for player's rank on current vehicle in the "Top Tankers" game event
-└───┴────────────────────────┴───┴───┴───┴───┴───┴───┴─────────────────────────────────────────────────
-
   XVM services macros (applied for player)
 ┌───┬────────────────────┬───┬───┬───┬───┬───┬───┬─────────────────────────────────────────────────
 │SDH│ macro              │ BL│ PP│ SF│ MM│ VM│BLb│ Description
