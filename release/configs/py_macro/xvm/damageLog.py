@@ -214,7 +214,7 @@ def formatMacro(macro, macroes):
     _macro = macro[2:-2]
     _macro, s_def, _def = _macro.partition('|')
     _macro, s_rep, _rep = _macro.partition('?')
-    fm = {'flag': '', 'type': '', 'width': '', 'suf': ''}
+    fm = {'flag': '', 'type': '', 'width': '', 'suf': '', 'prec': ''}
     _operator = ''
     for s in ('>=', '<=', '!=', '==', '=', '<', '>'):
         if s in _macro:
@@ -253,9 +253,8 @@ def formatMacro(macro, macroes):
         elif s_def and not _macro:#_def and not _macro:
             _macro = _def
             b = True
-        if b:
+        if not b:
             fm['flag'] = FLAG[fm['flag']]
-            fm['prec'] = ''
             if _prec != '':
                 if isinstance(_macro, int):
                     _macro = int(_macro) + _prec
@@ -292,7 +291,8 @@ def parser(strHTML, macroes):
             for s in MACROS_NAME:
                 temp_str = '{{%s}}' % s
                 if temp_str in strHTML:
-                    _macro = str(macroes.get(s, ''))
+                    value = macroes.get(s, '')
+                    _macro = str(value) if value is not None else ''
                     strHTML = strHTML.replace(temp_str, _macro)
                     b = True
         start = strHTML.rfind('{{')
@@ -452,12 +452,12 @@ class Data(object):
                     self.data['xte'] = None
                 self.data['clanAbbrev'] = attacker['clanAbbrev']
             self.data['clanicon'] = _stat.getClanIcon(attackerID)
-            self.data['squadnum'] = ''
+            self.data['squadnum'] = None
             arenaDP = self.sessionProvider.getArenaDP()
             if arenaDP is not None:
                 vInfo = arenaDP.getVehicleInfo(vID=attackerID)
                 self.squadnum = vInfo.squadIndex
-                self.data['squadnum'] = vInfo.squadIndex if vInfo.squadIndex != 0 else ''
+                self.data['squadnum'] = vInfo.squadIndex if vInfo.squadIndex != 0 else None
         else:
             self.data['teamDmg'] = 'unknown'
             self.data['attackerVehicleType'] = 'not_vehicle'
