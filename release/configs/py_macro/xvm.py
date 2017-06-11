@@ -24,14 +24,15 @@ _DIRECTIVES = [ 'au', 'al', 'Au', 'Al', 'bu', 'bl', 'Bu', 'Bl', # double
 @xvm.export('xvm.formatDate', deterministic=False)
 def xvm_formatDate(formatDate):
     dt = datetime.datetime.now()
+    weekday = (dt.weekday() - BigWorld.wg_firstDayOfWeek() + 7) % 7
     app = g_appLoader.getApp()
     d = {}
 
     def getValue(value, isUpper, isLower):
         if value == 'a':
-            return app.utilsManager.getWeekDayNames(False, isUpper, isLower)[dt.weekday()]
+            return app.utilsManager.getWeekDayNames(False, isUpper, isLower)[weekday]
         elif value == 'A':
-            return app.utilsManager.getWeekDayNames(True, isUpper, isLower)[dt.weekday()]
+            return app.utilsManager.getWeekDayNames(True, isUpper, isLower)[weekday]
         elif value == 'b':
             return app.utilsManager.getMonthsNames(False, isUpper, isLower)[dt.month-1]
         elif value == 'B':
