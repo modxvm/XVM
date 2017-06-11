@@ -214,7 +214,7 @@ def formatMacro(macro, macroes):
     _macro = macro[2:-2]
     _macro, s_def, _def = _macro.partition('|')
     _macro, s_rep, _rep = _macro.partition('?')
-    fm = {'flag': '', 'type': '', 'width': '', 'suf': ''}
+    fm = {'flag': '', 'type': '', 'width': '', 'suf': '', 'prec': ''}
     _operator = ''
     for s in ('>=', '<=', '!=', '==', '=', '<', '>'):
         if s in _macro:
@@ -253,9 +253,8 @@ def formatMacro(macro, macroes):
         elif s_def and not _macro:#_def and not _macro:
             _macro = _def
             b = True
-        if b:
+        if not b:
             fm['flag'] = FLAG[fm['flag']]
-            fm['prec'] = ''
             if _prec != '':
                 if isinstance(_macro, int):
                     _macro = int(_macro) + _prec
