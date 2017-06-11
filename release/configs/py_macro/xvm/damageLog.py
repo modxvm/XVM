@@ -292,7 +292,8 @@ def parser(strHTML, macroes):
             for s in MACROS_NAME:
                 temp_str = '{{%s}}' % s
                 if temp_str in strHTML:
-                    _macro = str(macroes.get(s, ''))
+                    value = macroes.get(s, '')
+                    _macro = str(value) if value is not None else ''
                     strHTML = strHTML.replace(temp_str, _macro)
                     b = True
         start = strHTML.rfind('{{')
@@ -452,12 +453,12 @@ class Data(object):
                     self.data['xte'] = None
                 self.data['clanAbbrev'] = attacker['clanAbbrev']
             self.data['clanicon'] = _stat.getClanIcon(attackerID)
-            self.data['squadnum'] = ''
+            self.data['squadnum'] = None
             arenaDP = self.sessionProvider.getArenaDP()
             if arenaDP is not None:
                 vInfo = arenaDP.getVehicleInfo(vID=attackerID)
                 self.squadnum = vInfo.squadIndex
-                self.data['squadnum'] = vInfo.squadIndex if vInfo.squadIndex != 0 else ''
+                self.data['squadnum'] = vInfo.squadIndex if vInfo.squadIndex != 0 else None
         else:
             self.data['teamDmg'] = 'unknown'
             self.data['attackerVehicleType'] = 'not_vehicle'
