@@ -198,9 +198,15 @@ package com.xvm.vehiclemarkers.ui
             Xvm.swfProfilerEnd("XvmVehicleMarker.setSpeaking()");
         }
 
-        // Disable updateMarkerSettins() call from original code
+        // Allow only one updateMarkerSettins() call from the original code (to hide controls)
+        private var _xvm_active_called:Boolean = false;
         override public function xvm_active():Boolean
         {
+            if (!_xvm_active_called)
+            {
+                _xvm_active_called = true;
+                return false;
+            }
             return true;
         }
 
