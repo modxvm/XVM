@@ -18,7 +18,8 @@ package com.xvm.types.cfg
 
         internal function applyGlobalBattleMacros():void
         {
-            alpha = Macros.FormatNumberGlobal(alpha, 45);
+            // do not apply Macros.FormatNumberGlobal(), because Macros.FormatNumber() used:
+            // alpha
         }
     }
 }

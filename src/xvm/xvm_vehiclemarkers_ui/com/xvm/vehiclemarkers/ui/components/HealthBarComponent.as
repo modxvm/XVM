@@ -63,19 +63,21 @@ package com.xvm.vehiclemarkers.ui.components
                 {
                     var playerState:VOPlayerState = e.playerState;
 
-                    var border_color:Number = isNaN(cfg.border.color) ? Macros.FormatNumber("{{c:system}}", playerState) : cfg.border.color;
+                    var border_color:Number = Macros.FormatNumber(cfg.border.color, playerState);
+                    var border_alpha:Number = Macros.FormatNumber(cfg.border.alpha, playerState, 100) / 100.0;
                     border.graphics.clear();
-                    border.graphics.beginFill(border_color, cfg.border.alpha / 100.0);
+                    border.graphics.beginFill(border_color, border_alpha);
                     border.graphics.drawRect(0, 0, cfg.width + cfg.border.size * 2, cfg.height + cfg.border.size * 2);
                     border.graphics.endFill();
 
-                    var color:Number = isNaN(cfg.color) ? Macros.FormatNumber("{{c:system}}", playerState) : cfg.color;
-                    var lcolor:Number = isNaN(cfg.lcolor) ? Macros.FormatNumber("{{c:system}}", playerState) : cfg.lcolor;
+                    var color:Number = Macros.FormatNumber(cfg.color, playerState);
+                    var lcolor:Number = Macros.FormatNumber(cfg.lcolor, playerState);
                     var healthRatio:Number = playerState.curHealth / playerState.maxHealth;
                     if (isNaN(healthRatio))
                         healthRatio = 1;
+                    var fill_alpha:Number = Macros.FormatNumber(cfg.fill.alpha, playerState, 100) / 100.0;
                     fill.graphics.clear();
-                    fill.graphics.beginFill(GraphicsUtil.colorByRatio(healthRatio, lcolor, color), cfg.fill.alpha / 100.0);
+                    fill.graphics.beginFill(GraphicsUtil.colorByRatio(healthRatio, lcolor, color), fill_alpha);
                     fill.graphics.drawRect(cfg.border.size, cfg.border.size, cfg.width * Math.min(healthRatio, 1.0), cfg.height);
                     fill.graphics.endFill();
 
@@ -89,7 +91,7 @@ package com.xvm.vehiclemarkers.ui.components
 
                     healthBar.x = cfg.x;
                     healthBar.y = cfg.y;
-                    healthBar.alpha = cfg.alpha / 100.0;
+                    healthBar.alpha = Macros.FormatNumber(cfg.alpha, playerState, 100) / 100.0;
                 }
             }
             catch (ex:Error)
@@ -116,8 +118,6 @@ package com.xvm.vehiclemarkers.ui.components
                         return;
                     damage.x = cfg.border.size + cfg.width * (playerState.curHealth / playerState.maxHealth) - 1;
                     damage.scaleX += playerState.damageInfo.damageDelta / playerState.maxHealth;
-                    if (cfg.damage.color == null)
-                        cfg.damage.color = "{{c:system}}";
                     var color:Number = Macros.FormatNumber(cfg.damage.color, playerState);
                     GraphicsUtil.tint(damage, color);
                     damage.alpha = Macros.FormatNumber(cfg.damage.alpha, playerState, 100) / 100.0;

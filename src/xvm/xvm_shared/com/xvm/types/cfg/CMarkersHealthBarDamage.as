@@ -21,6 +21,10 @@ package com.xvm.types.cfg
         internal function applyGlobalBattleMacros():void
         {
             fade = Macros.FormatNumberGlobal(fade);
+            if (color == null)
+            {
+                color = "{{c:system}}";
+            }
             // do not apply Macros.FormatNumberGlobal(), because Macros.FormatNumber() used:
             // alpha
             // color

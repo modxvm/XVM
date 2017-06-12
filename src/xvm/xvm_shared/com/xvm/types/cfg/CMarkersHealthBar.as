@@ -31,9 +31,6 @@ package com.xvm.types.cfg
             enabled = Macros.FormatBooleanGlobal(enabled, true);
             x = Macros.FormatNumberGlobal(x);
             y = Macros.FormatNumberGlobal(y);
-            alpha = Macros.FormatNumberGlobal(alpha, 100);
-            color = Macros.FormatNumberGlobal(color);
-            lcolor = Macros.FormatNumberGlobal(lcolor);
             width = Macros.FormatNumberGlobal(width);
             height = Macros.FormatNumberGlobal(height);
             if (border)
@@ -48,6 +45,18 @@ package com.xvm.types.cfg
             {
                 damage.applyGlobalBattleMacros();
             }
+            if (color == null)
+            {
+                color = "{{c:system}}";
+            }
+            if (lcolor == null)
+            {
+                lcolor = "{{c:system}}";
+            }
+            // do not apply Macros.FormatNumberGlobal(), because Macros.FormatNumber() used:
+            // alpha
+            // color
+            // lcolor
         }
     }
 }
