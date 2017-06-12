@@ -70,8 +70,8 @@ prepare_languages()
     for file in *.tpl; do
        lang="${file%.*}"
        cp "$file" "../l10n_result/$lang"
-       sed -i "s/{#VersionWOT}/${TARGET_VERSION}/g" ../l10n_result/$lang
-       sed -i "s/{#VersionXVM}/${XVM_VERSION}/g" ../l10n_result/$lang
+       sed -i "s/{#VersionWOT}/${XVMBUILD_WOT_VERSION}/g" ../l10n_result/$lang
+       sed -i "s/{#VersionXVM}/${XVMBUILD_XVM_VERSION}/g" ../l10n_result/$lang
     done
 
     popd > /dev/null
