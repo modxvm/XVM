@@ -75,12 +75,6 @@ MainView_handler = None
 #####################################################################
 # initialization/finalization
 
-# "reimport"
-import gui.shared.tooltips.module as tooltips_module
-import gui.shared.tooltips.vehicle as tooltips_vehicle
-tooltips_module.getUnlockPrice = tooltips.getUnlockPrice
-tooltips_vehicle.getUnlockPrice = tooltips.getUnlockPrice
-
 def start():
     g_eventBus.addListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
 
@@ -291,28 +285,18 @@ def MainView_dispose(self, *args, **kwargs):
     global MainView_handler
     MainView_handler = None
 
+@overrideMethod(tooltips, 'getUnlockPrice')
+def tooltips_getUnlockPrice(base, compactDescr, parentCD = None):
+    isAvailable, cost, need = base(compactDescr, parentCD)
+    if cfg_hangar_enableFreeXpLocker and not freeXP_enable:
+        need += dependency.instance(IItemsCache).items.stats.actualFreeXP
+    return (isAvailable, cost, need)
 
-# force getUnlockPrice to look at freeXP (which is affected by lock)
-# dirty create same names for use in original function
-class itemsCache_dummy:
-    itemsCache = dependency.descriptor(IItemsCache)
-    class items:
-        class stats_dummy:
-            @property
-            def actualFreeXP(*args, **kwargs):
-                return self.itemsCache.items.stats.freeXP
-
-            @property
-            def unlocks(*args, **kwargs):
-                return self.itemsCache.items.stats.unlocks
-
-            @property
-            def vehiclesXPs(*args, **kwargs):
-                return self.temsCache.items.stats.vehiclesXPs
-        stats = stats_dummy()
-
-tooltips.itemsCache = itemsCache_dummy
-
+# "reimport"
+import gui.shared.tooltips.module as tooltips_module
+import gui.shared.tooltips.vehicle as tooltips_vehicle
+tooltips_module.getUnlockPrice = tooltips.getUnlockPrice
+tooltips_vehicle.getUnlockPrice = tooltips.getUnlockPrice
 
 # force call invalidateFreeXP to update actualFreeXP on vehicle change
 @overrideMethod(Research, 'onResearchItemsDrawn')
