@@ -1,4 +1,6 @@
-﻿XVM-6.7.4:
+﻿XVM-6.7.5-dev:
+
+XVM-6.7.4:
   [MISC]
   * Fix level of battles for the vehicle 3rd level
   * Fix compatibility with some antivirus software and debuggers
