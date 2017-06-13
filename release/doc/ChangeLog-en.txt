@@ -1,22 +1,31 @@
-﻿XVM-6.7.4-dev:
+﻿XVM-6.7.5-dev:
+
+XVM-6.7.4:
   [MISC]
   * Fix level of battles for the vehicle 3rd level
+  * Fix compatibility with some antivirus software and debuggers
+
+  [HANGAR]
+  * Fix weekday displaying
 
   [BATTLE]
   * Added players panel, battle loading and full stats in the ranked battle
-  * added options in "battleLoading" and "statisticForm" sections:
+  * Added options in "battleLoading" and "statisticForm" sections:
       "removeRankBadgeIcon" - disable rank badge icons
-  * added new field type "badge" in the "playersPanel"/"standardFields" modes sections
-  * added options in the "playersPanel" modes sections:
+  * Added new field type "badge" in the "playersPanel"/"standardFields" modes sections
+  * Added options in the "playersPanel" modes sections:
       "rankBadgeXOffsetLeft" - offset of X value for rank badge column
       "rankBadgeXOffsetRight" - offset of X value for rank badge column
       "rankBadgeWidth" - width of the rank badge column
 
+  [DAMAGE LOG]
+  * Various bugs fixed
+
   [MACROS]
-  * added macros:
+  * Added macros:
       {{rank-level}} - rank level
       {{rankBadgeId}} - player's rank badge id
-  * removed macros for "Top Tankers" event
+  * Removed macros for "Top Tankers" event
 
 XVM-6.7.3:
   [GENERAL]
