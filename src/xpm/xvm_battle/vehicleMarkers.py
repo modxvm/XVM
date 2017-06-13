@@ -99,13 +99,13 @@ def _MarkersManager_beforeDelete(base, self):
     base(self)
 
 @overrideMethod(MarkersManager, 'createMarker')
-def _MarkersManager_createMarker(base, self, symbol, *args, **kwargs):
+def _MarkersManager_createMarker(base, self, symbol, matrixProvider = None, active = True):
     if g_markers.active:
         if symbol == 'VehicleMarker':
             symbol = 'com.xvm.vehiclemarkers.ui::XvmVehicleMarker'
     #debug('createMarker: ' + str(symbol))
-    handle = base(self, symbol, *args, **kwargs)
-    return handle
+    markerID = base(self, symbol, matrixProvider, active)
+    return markerID
 
 _exInfo = False
 @overrideMethod(MarkersManager, 'as_setShowExInfoFlagS')
