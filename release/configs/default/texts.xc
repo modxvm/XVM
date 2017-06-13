@@ -94,7 +94,7 @@
       // Битва за укрепрайон (новый)
       "fort_battle_2": "fort_battle_2",
       // Ранговый бой
-      "ranked": "ranked"
+      "ranked": ""
     },
     // Text for {{topclan}} macro.
     // Текст для макроса {{topclan}}
