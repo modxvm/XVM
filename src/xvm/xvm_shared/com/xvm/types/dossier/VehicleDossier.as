@@ -22,5 +22,7 @@ package com.xvm.types.dossier
         public var xpToEliteLeft:Number;
         public var damageRating:Number;
         public var marksOnGun:Number;
+        public var rankCount:Number;
+        public var rankSteps:Number;
     }
 }

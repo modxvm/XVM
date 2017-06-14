@@ -150,6 +150,8 @@ package com.xvm.types.dossier
         public var marksOnGun:String;
         public var damageRating:Number;
         public var c_damageRating:String;
+        public var rankCount:Number;
+        public var rankSteps:Number;
 
         // extra
         public var elite:String;
