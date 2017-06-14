@@ -7,6 +7,7 @@ package com.xvm.lobby.ui.tankcarousel
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.extraFields.*;
+    import com.xvm.lobby.*;
     import com.xvm.lobby.vo.*;
     import com.xvm.types.cfg.*;
     import com.xvm.types.dossier.*;
@@ -39,6 +40,7 @@ package com.xvm.lobby.ui.tankcarousel
             try
             {
                 _helper = new TankCarouselItemRendererHelper(this, Config.config.hangar.carousel.normal, DEFAULT_WIDTH, DEFAULT_HEIGHT);
+                Xfw.addCommandListener(LobbyXvmApp.AS_UPDATE_BATTLE_TYPE, updateData);
             }
             catch (ex:Error)
             {
@@ -50,6 +52,7 @@ package com.xvm.lobby.ui.tankcarousel
         {
             try
             {
+                Xfw.removeCommandListener(LobbyXvmApp.AS_UPDATE_BATTLE_TYPE, updateData);
                 _helper.dispose();
                 _helper = null;
             }

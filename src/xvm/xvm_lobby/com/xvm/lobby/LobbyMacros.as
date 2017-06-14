@@ -10,6 +10,12 @@ package com.xvm.lobby
 
     internal class LobbyMacros
     {
+        internal static function RegisterBattleTypeMacros(battleType:String):void
+        {
+            // {{battletype}}
+            Macros.Globals["battletype"] = battleType;
+        }
+
         internal static function RegisterVehiclesMacros():void
         {
             Macros.Globals["v"] = function(o:IVOMacrosOptions):* {
