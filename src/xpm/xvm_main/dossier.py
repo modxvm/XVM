@@ -22,18 +22,21 @@ import BigWorld
 from helpers.i18n import makeString
 from items import vehicles
 from dossiers2.ui.achievements import ACHIEVEMENT_BLOCK as _AB
+from gui.ranked_battles.ranked_models import Rank, VehicleRank
 from gui.shared.gui_items import GUI_ITEM_TYPE
 from gui.Scaleform.locale.MENU import MENU
 from gui.Scaleform.genConsts.PROFILE_DROPDOWN_KEYS import PROFILE_DROPDOWN_KEYS
 from gui.Scaleform.daapi.view.lobby.profile.QueuedVehicleDossierReceiver import QueuedVehicleDossierReceiver
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache
+from skeletons.gui.game_control import IRankedBattlesController
 from skeletons.gui.lobby_context import ILobbyContext
 
 from xfw import *
 
 from consts import *
 from logger import *
+import vehinfo
 import vehinfo_xtdb
 import vehinfo_xte
 
@@ -44,6 +47,7 @@ class _Dossier(object):
 
     itemsCache = dependency.descriptor(IItemsCache)
     lobbyContext = dependency.descriptor(ILobbyContext)
+    rankedController = dependency.instance(IRankedBattlesController)
 
     def __init__(self, *args):
         self.__dataReceiver = QueuedVehicleDossierReceiver()
@@ -84,6 +88,25 @@ class _Dossier(object):
             if not self.__isVehicleDossierCached(self.accountDBID, vehCD):
                 return None
             dossier = self.itemsCache.items.getVehicleDossier(vehCD, self.accountDBID)
+
+            rankCount = None
+            rankSteps = None
+            vdata = vehinfo.getVehicleInfoData(vehCD)
+            if vdata['level'] == 10:
+                #log(vdata['key'])
+                #log(dossier.getRankedCurrentSeason())
+
+                vehicle = self.itemsCache.items.getItemByCD(vehCD)
+                rank = self.rankedController.getCurrentRank(vehicle)
+
+                if isinstance(rank, Rank) and rank.isAcquired():
+                    if rank.hasProgress():
+                        rankSteps = len(rank.getProgress().getAcquiredSteps())
+
+                if isinstance(rank, VehicleRank) and rank.isAcquired():
+                    #log('rank.getSerialID=' + str(rank.getSerialID()))
+                    rankCount = rank.getSerialID()
+
             xpVehs = self.itemsCache.items.stats.vehiclesXPs
             earnedXP = xpVehs.get(vehCD, 0)
             freeXP = self.itemsCache.items.stats.actualFreeXP
@@ -109,7 +132,7 @@ class _Dossier(object):
                     xtdb = vehinfo_xtdb.calculateXTDB(vehCD, float(dmg) / battles)
                     xte = vehinfo_xte.calculateXTE(vehCD, float(dmg) / battles, float(frg) / battles)
 
-            res = self.__prepareVehicleResult(dossier, xtdb, xte, earnedXP, freeXP, xpToElite)
+            res = self.__prepareVehicleResult(dossier, xtdb, xte, earnedXP, freeXP, xpToElite, rankCount, rankSteps)
 
         return res
 
@@ -188,8 +211,7 @@ class _Dossier(object):
 
             'battleLifeTime': glob.getBattleLifeTime(),
             'mileage': glob.getMileage(),
-            'treesCut': glob.getTreesCut(),
-        }
+            'treesCut': glob.getTreesCut()}
 
 
     def __prepareAccountResult(self, dossier):
@@ -212,8 +234,7 @@ class _Dossier(object):
             'lastBattleTime': lbt,
             'lastBattleTimeStr': makeString(MENU.PROFILE_HEADER_LASTBATTLEDATETITLE) + ' ' +
                                  ('%s %s' % (BigWorld.wg_getLongDateFormat(lbt), BigWorld.wg_getShortTimeFormat(lbt))),
-            'vehicles': {}
-        })
+            'vehicles': {}})
 
         vehicles = stats.getVehicles()
         for (vehCD, vdata) in vehicles.iteritems():
@@ -221,12 +242,11 @@ class _Dossier(object):
                 'battles': vdata.battlesCount,
                 'wins': vdata.wins,
                 'mastery': vdata.markOfMastery,
-                'xp': vdata.xp,
-            }
+                'xp': vdata.xp}
 
         return res
 
-    def __prepareVehicleResult(self, dossier, xtdb, xte, earnedXP, freeXP, xpToElite):
+    def __prepareVehicleResult(self, dossier, xtdb, xte, earnedXP, freeXP, xpToElite, rankCount, rankSteps):
         res = {}
         if dossier is None:
             return res
@@ -240,9 +260,10 @@ class _Dossier(object):
             'earnedXP': earnedXP,
             'freeXP': freeXP,
             'xpToElite': xpToElite,
+            'rankCount': rankCount,
+            'rankSteps': rankSteps,
             'marksOnGun': int(dossier.getRecordValue(_AB.TOTAL, 'marksOnGun')),
-            'damageRating': dossier.getRecordValue(_AB.TOTAL, 'damageRating') / 100.0,
-        })
+            'damageRating': dossier.getRecordValue(_AB.TOTAL, 'damageRating') / 100.0})
 
         return res
 

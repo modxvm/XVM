@@ -1,5 +1,11 @@
 ﻿XVM-6.7.5-dev:
+  [HANGAR]
   * macro {{battletype}} can be used in hangar
+
+  [CAROUSEL]
+  * added macros:
+      {{v.rankCount}} - vehicle rank achieved in the rank battle
+      {{v.rankSteps}} - steps completed to next vehicle rank
 
 XVM-6.7.4:
   [MISC]
