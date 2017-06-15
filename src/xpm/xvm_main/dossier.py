@@ -172,6 +172,8 @@ class _Dossier(object):
             return dossier.getFortSortiesStats()
         elif self._battlesType == PROFILE_DROPDOWN_KEYS.COMPANY:
             return dossier.getCompanyStats()
+        elif self._battlesType == PROFILE_DROPDOWN_KEYS.RANKED:
+            return dossier.getRankedStats()
         raise ValueError('_Dossier: Unknown battle type: ' + self._battlesType)
 
 
