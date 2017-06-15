@@ -91,21 +91,25 @@ class _Dossier(object):
 
             rankCount = None
             rankSteps = None
+            rankStepsTotal = None
             vdata = vehinfo.getVehicleInfoData(vehCD)
             if vdata['level'] == 10:
                 #log(vdata['key'])
                 #log(dossier.getRankedCurrentSeason())
 
                 vehicle = self.itemsCache.items.getItemByCD(vehCD)
-                rank = self.rankedController.getCurrentRank(vehicle)
+                ranks = self.rankedController.getAllRanksChain(vehicle)
+                currentRank = self.rankedController.getCurrentRank(vehicle)
+                currentRankID = currentRank.getID()
+                if currentRankID < len(ranks) - 2:
+                    nextRank = ranks[currentRankID + 1]
+                    progress = nextRank.getProgress()
+                    if progress is not None:
+                        rankSteps = len(nextRank.getProgress().getAcquiredSteps())
+                        rankStepsTotal = len(nextRank.getProgress().getSteps())
 
-                if isinstance(rank, Rank) and rank.isAcquired():
-                    if rank.hasProgress():
-                        rankSteps = len(rank.getProgress().getAcquiredSteps())
-
-                if isinstance(rank, VehicleRank) and rank.isAcquired():
-                    #log('rank.getSerialID=' + str(rank.getSerialID()))
-                    rankCount = rank.getSerialID()
+                if isinstance(currentRank, VehicleRank) and currentRank.isAcquired():
+                    rankCount = currentRank.getSerialID()
 
             xpVehs = self.itemsCache.items.stats.vehiclesXPs
             earnedXP = xpVehs.get(vehCD, 0)
@@ -132,7 +136,7 @@ class _Dossier(object):
                     xtdb = vehinfo_xtdb.calculateXTDB(vehCD, float(dmg) / battles)
                     xte = vehinfo_xte.calculateXTE(vehCD, float(dmg) / battles, float(frg) / battles)
 
-            res = self.__prepareVehicleResult(dossier, xtdb, xte, earnedXP, freeXP, xpToElite, rankCount, rankSteps)
+            res = self.__prepareVehicleResult(dossier, xtdb, xte, earnedXP, freeXP, xpToElite, rankCount, rankSteps, rankStepsTotal)
 
         return res
 
@@ -248,7 +252,7 @@ class _Dossier(object):
 
         return res
 
-    def __prepareVehicleResult(self, dossier, xtdb, xte, earnedXP, freeXP, xpToElite, rankCount, rankSteps):
+    def __prepareVehicleResult(self, dossier, xtdb, xte, earnedXP, freeXP, xpToElite, rankCount, rankSteps, rankStepsTotal):
         res = {}
         if dossier is None:
             return res
@@ -264,6 +268,7 @@ class _Dossier(object):
             'xpToElite': xpToElite,
             'rankCount': rankCount,
             'rankSteps': rankSteps,
+            'rankStepsTotal': rankStepsTotal,
             'marksOnGun': int(dossier.getRecordValue(_AB.TOTAL, 'marksOnGun')),
             'damageRating': dossier.getRecordValue(_AB.TOTAL, 'damageRating') / 100.0})
 

@@ -59,7 +59,7 @@
         // level, battle tiers
         { "x": 21, "y": 0, "shadow": ${ "def.textFieldShadow" },
           "textFormat": { "size": 12, "color": "0xC8C8B5", "bold": true }, "antiAliasType": "advanced",
-          "format": "<font face='Arial'>{{v.rlevel}}</font>  {{v.battletiermin}}-{{v.battletiermax}}" },
+          "format": "<font face='Arial'>{{v.rlevel}}</font>  {{battletype-key!=ranked?{{v.battletiermin}}-{{v.battletiermax}}|{{v.rankCount|0}} + {{v.rankSteps|0}}/{{v.rankStepsTotal|0}}}}" },
         // xte
         { "x": 7, "y": 25, "height": 22,
           "valign": "center", "textFormat": { "font": "mono", "size": 12, "bold": true, "valign": "center" }, "antiAliasType": "advanced",

@@ -10,6 +10,7 @@
   * added macros:
       {{v.rankCount}} - vehicle rank achieved in the rank battle
       {{v.rankSteps}} - steps completed to next vehicle rank
+      {{v.rankStepsTotal}} - total steps count to next vehicle rank
 
 XVM-6.7.4:
   [MISC]

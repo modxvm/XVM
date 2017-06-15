@@ -24,5 +24,6 @@ package com.xvm.types.dossier
         public var marksOnGun:Number;
         public var rankCount:Number;
         public var rankSteps:Number;
+        public var rankStepsTotal:Number;
     }
 }

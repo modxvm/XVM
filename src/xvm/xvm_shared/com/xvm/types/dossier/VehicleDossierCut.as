@@ -95,6 +95,7 @@ package com.xvm.types.dossier
                     c_damageRating = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_DAMAGERATING, damageRating, "#");
                     rankCount = isNaN(vdossier.rankCount) || vdossier.rankCount == 0 ? NaN : vdossier.rankCount;
                     rankSteps = isNaN(vdossier.rankSteps) || vdossier.rankSteps == 0 ? NaN : vdossier.rankSteps;
+                    rankStepsTotal = isNaN(vdossier.rankStepsTotal) || vdossier.rankStepsTotal == 0 ? NaN : vdossier.rankStepsTotal;
                 }
             }
         }
@@ -154,6 +155,7 @@ package com.xvm.types.dossier
         public var c_damageRating:String;
         public var rankCount:Number;
         public var rankSteps:Number;
+        public var rankStepsTotal:Number;
 
         // extra
         public var elite:String;
