@@ -85,6 +85,7 @@ Legend:
 │ S │ {{r_size}}             │ X │ X │ X │ X │ X │ X │ X │ X │ размер зрачения макроса {{r}} (может быть полезен для форматирования полей)
 │ S │ {{battletier}}         │ X │ X │ X │ X │ X │ X │ X │ X │ уровень текущего боя
 │ S │ {{battletype}}         │ X │ X │ X │ X │ X │ X │ X │ X │ тип текущего боя (значения из секции texts/battletype)
+│ S │ {{battletype-key}}     │ X │ X │ X │ X │ X │ X │ X │ X │ название ключа таблицы типа текущего боя
 │ S │ {{region}}             │ X │ X │ X │ X │ X │ X │ X │ X │ игровой регион (RU, EU, NA, CN, ASIA, VTC, KR, CT)
 │ S │ {{l10n:ID}}            │ X │ X │ X │ X │ X │ X │ X │ X │ текстовое значение из файла перевода, см. папку l10n
 │ D │ {{my-alive}}           │   │ X │ X │ X │ X │ X │ X │ X │ мой танк жив

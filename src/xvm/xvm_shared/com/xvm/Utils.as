@@ -88,7 +88,7 @@ package com.xvm
 
         public static function getBattleTypeText(battleType:Number):String
         {
-            var value:String = getBattleTypeStr(battleType);
+            var value:String = getBattleTypeKey(battleType);
 
             if (!Config.config.texts.battletype[value])
                 return null;
@@ -100,7 +100,7 @@ package com.xvm
             return v;
         }
 
-        public static function getBattleTypeStr(battleType:Number):String
+        public static function getBattleTypeKey(battleType:Number):String
         {
             switch (battleType)
             {

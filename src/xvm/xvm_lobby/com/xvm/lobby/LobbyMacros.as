@@ -12,8 +12,8 @@ package com.xvm.lobby
     {
         internal static function RegisterBattleTypeMacros(battleType:String):void
         {
-            // {{battletype}}
-            Macros.Globals["battletype"] = battleType;
+            // {{battletype-key}}
+            Macros.Globals["battletype-key"] = battleType;
         }
 
         internal static function RegisterVehiclesMacros():void

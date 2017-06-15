@@ -12,7 +12,7 @@ Legend:
 ┌────────────────────────────┬───┬───┬─────────────────────────────────
 │ macro                      │ TC│ SQ│ Description
 ├────────────────────────────┼───┼───┼─────────────────────────────────
-│ {{battletype}}             │ X │ . │ selected battle type
+│ {{battletype-key}}         │ X │ . │ selected battle type
 │ {{v.vehId}}                │ X │ . │ vehicle id
 │ {{v.battles}}              │ X │ . │ total battles count for current vehicle
 │ {{v.c_battles}}            │ X │ . │ color for battles count

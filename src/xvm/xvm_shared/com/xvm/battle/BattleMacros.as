@@ -23,6 +23,8 @@ package com.xvm.battle
         {
             // {{battletype}}
             m_globals["battletype"] = Utils.getBattleTypeText(BattleGlobalData.battleType);
+            // {{battletype-key}}
+            m_globals["battletype-key"] = Utils.getBattleTypeKey(BattleGlobalData.battleType);
             // {{battletier}}
             m_globals["battletier"] = BattleGlobalData.battleLevel;
 

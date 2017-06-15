@@ -1,6 +1,10 @@
 ﻿XVM-6.7.5-dev:
+  [BATTLE]
+  * added macro:
+      {{battletype-key}}
+
   [HANGAR]
-  * macro {{battletype}} can be used in hangar
+  * macro {{battletype-key}} can be used in hangar
 
   [CAROUSEL]
   * added macros:
