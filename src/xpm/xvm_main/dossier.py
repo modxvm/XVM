@@ -100,16 +100,17 @@ class _Dossier(object):
                 vehicle = self.itemsCache.items.getItemByCD(vehCD)
                 ranks = self.rankedController.getAllRanksChain(vehicle)
                 currentRank = self.rankedController.getCurrentRank(vehicle)
-                currentRankID = currentRank.getID()
-                if currentRankID < len(ranks) - 2:
-                    nextRank = ranks[currentRankID + 1]
-                    progress = nextRank.getProgress()
-                    if progress is not None:
-                        rankSteps = len(nextRank.getProgress().getAcquiredSteps())
-                        rankStepsTotal = len(nextRank.getProgress().getSteps())
 
                 if isinstance(currentRank, VehicleRank) and currentRank.isAcquired():
                     rankCount = currentRank.getSerialID()
+
+                    currentRankID = currentRank.getID()
+                    if currentRankID < len(ranks) - 2:
+                        nextRank = ranks[currentRankID + 1]
+                        progress = nextRank.getProgress()
+                        if progress is not None:
+                            rankSteps = len(nextRank.getProgress().getAcquiredSteps())
+                            rankStepsTotal = len(nextRank.getProgress().getSteps())
 
             xpVehs = self.itemsCache.items.stats.vehiclesXPs
             earnedXP = xpVehs.get(vehCD, 0)
