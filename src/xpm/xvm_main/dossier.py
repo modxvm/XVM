@@ -105,7 +105,7 @@ class _Dossier(object):
                     rankCount = currentRank.getSerialID()
 
                 currentRankID = currentRank.getID()
-                nextRank = ranks[currentRankID + 1] if currentRankID < len(ranks) - 2 else currentRank
+                nextRank = ranks[currentRankID + 1] if currentRankID < len(ranks) - 1 else currentRank
                 if isinstance(nextRank, VehicleRank):
                     progress = nextRank.getProgress()
                     if progress is not None:
