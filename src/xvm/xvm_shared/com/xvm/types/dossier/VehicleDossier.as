@@ -4,8 +4,6 @@
  */
 package com.xvm.types.dossier
 {
-    import com.xfw.*;
-
     public class VehicleDossier extends DossierBase
     {
         public function VehicleDossier(data:Object)

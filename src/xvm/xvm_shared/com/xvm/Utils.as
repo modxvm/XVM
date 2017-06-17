@@ -5,18 +5,15 @@
 package com.xvm
 {
     import com.xfw.*;
-    import com.xvm.*;
     import com.xvm.types.cfg.*;
     import com.xvm.vo.*;
     import flash.filters.*;
-    import flash.utils.*;
     import flash.text.*;
-    import mx.utils.*;
     import scaleform.gfx.*;
 
     public class Utils
     {
-        public static const DEFAULT_TEXT_FORMAT:TextFormat = new TextFormat("$FieldFont", 14, 0xFFFFFF, null, null, null, null, null, "center");
+        private static const DEFAULT_TEXT_FORMAT:TextFormat = new TextFormat("$FieldFont", 14, 0xFFFFFF, null, null, null, null, null, "center");
 
         // Create TextFormat from config section
         // http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextFormat.html
@@ -170,44 +167,6 @@ package com.xvm
                 return "../../" + Utils.fixImgTag(str).slice(6);
             }
             return null;
-        }
-
-        // 'RU1', 'RU10', 'RU2' -> 'RU1', 'RU2', 'RU10'
-        public static function sortByServer(a:String, b:String):int
-        {
-            var name_and_number:RegExp = /^(\D+)(\d+)$/;
-            var result_a:Object = name_and_number.exec(a)
-            if (!result_a)
-                return ObjectUtil.stringCompare(a, b)
-            var result_b:Object = name_and_number.exec(b)
-            if (!result_b)
-                return ObjectUtil.stringCompare(a, b)
-            if (result_a[1] == result_b[1]) { // non-numeric part is same
-                var result_a_num:int = parseInt(result_a[2],10);
-                var result_b_num:int = parseInt(result_b[2],10);
-                return result_a_num == result_b_num ? 0 : result_a_num > result_b_num ? 1 : -1;
-            }
-            return result_a[1] > result_b[1] ? 1 : -1;
-        }
-
-        public static function createServersOrderFromAnswer(answer:Object):Array
-        {
-            var serversOrder:Array = new Array();
-            for (var name:String in answer)
-                serversOrder.push(name);
-            serversOrder.sort(Utils.sortByServer);
-            return serversOrder
-        }
-
-        public static function serversOrderMatchesAnswer(answer:Object, serversOrder:Array):Boolean
-        {
-            for (var name:String in serversOrder)
-                if (! name in answer)
-                    return false
-            for (name in answer)
-                if (serversOrder.indexOf(name) == -1)
-                    return false
-            return true
         }
 
         public static function timeStrToSec(str:String):Number

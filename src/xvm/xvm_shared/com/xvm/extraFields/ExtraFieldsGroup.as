@@ -6,7 +6,6 @@ package com.xvm.extraFields
 {
     import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.extraFields.*;
     import com.xvm.types.cfg.*;
     import com.xvm.vo.*;
     import flash.geom.*;

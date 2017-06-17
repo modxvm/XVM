@@ -216,7 +216,5 @@ def update_hp(vehicleID, hp):
         else:
             total_hp_color = color_gradient(hp_colors['neutral'], hp_colors['neutral'], 1)
             total_hp_sign = '='
-
-        as_xfw_cmd(XVM_BATTLE_COMMAND.AS_TEAMS_HP_CHANGED)
     except Exception, ex:
         err(traceback.format_exc())

@@ -8,7 +8,6 @@ package com.xvm.battle.vo
     import com.xfw.events.*;
     import com.xvm.*;
     import com.xvm.battle.*;
-    import com.xvm.vo.*;
     import flash.utils.*;
 
     public class VOPlayersData

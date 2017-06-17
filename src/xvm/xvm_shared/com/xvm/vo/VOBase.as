@@ -4,9 +4,6 @@
  */
 package com.xvm.vo
 {
-    import com.xfw.*;
-    import com.xvm.*;
-
     public class VOBase
     {
         public function VOBase(data:Object = null)

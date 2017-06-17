@@ -5,7 +5,6 @@
 package com.xvm.types.cfg
 {
     import com.xfw.*;
-    import com.xvm.*;
 
     public dynamic class CMinimapCircles implements ICloneable
     {

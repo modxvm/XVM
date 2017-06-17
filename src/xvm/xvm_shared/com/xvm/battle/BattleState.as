@@ -9,8 +9,6 @@ package com.xvm.battle
     import com.xvm.*;
     import com.xvm.battle.events.*;
     import com.xvm.battle.vo.*;
-    import com.xvm.types.cfg.*;
-    import flash.events.*;
     import scaleform.clik.constants.*;
     import scaleform.clik.core.*;
 

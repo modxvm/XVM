@@ -4,7 +4,7 @@
  */
 package com.xvm.types.stat
 {
-    import com.xvm.vo.VOVehicleData;
+    import com.xvm.vo.*;
 
     public dynamic class VData
     {

@@ -4,7 +4,6 @@
  */
 package com.xvm.battle.events
 {
-    import com.xvm.battle.*;
     import flash.events.*;
 
     public class XmqpEvent extends Event

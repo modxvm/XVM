@@ -4,7 +4,7 @@
  */
 package com.xvm
 {
-    import com.xfw.XfwConst;
+    import com.xfw.*;
 
     public class Defines
     {

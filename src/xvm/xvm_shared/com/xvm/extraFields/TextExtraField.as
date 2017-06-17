@@ -10,10 +10,9 @@ package com.xvm.extraFields
     import com.xvm.battle.events.*;
     import com.xvm.types.cfg.*;
     import com.xvm.vo.*;
-    import flash.events.*;
-    import flash.text.*;
-    import flash.geom.*;
     import flash.display.*;
+    import flash.geom.*;
+    import flash.text.*;
     import scaleform.gfx.*;
 
     public class TextExtraField extends Sprite implements IExtraField

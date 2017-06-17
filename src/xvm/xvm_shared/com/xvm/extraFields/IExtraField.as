@@ -4,10 +4,9 @@
  */
 package com.xvm.extraFields
 {
-    import com.xvm.vo.*;
     import com.xvm.battle.events.*;
     import com.xvm.types.cfg.*;
-    import flash.events.*;
+    import com.xvm.vo.*;
     import flash.geom.*;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.infrastructure.interfaces.entity.*;

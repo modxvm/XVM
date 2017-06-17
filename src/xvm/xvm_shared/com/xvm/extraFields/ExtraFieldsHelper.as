@@ -6,15 +6,10 @@ package com.xvm.extraFields
 {
     import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.battle.*;
     import com.xvm.battle.events.*;
     import com.xvm.battle.vo.*;
-    import com.xvm.types.cfg.*;
     import com.xvm.vo.*;
-    import flash.display.*;
     import flash.events.*;
-    import flash.text.*;
-    import flash.geom.*;
     import flash.utils.*;
     import mx.utils.*;
     import scaleform.gfx.*;

@@ -6,7 +6,6 @@ package com.xvm.battle
 {
     import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.types.*;
     import com.xvm.battle.vo.*;
     import com.xvm.vo.*;
 

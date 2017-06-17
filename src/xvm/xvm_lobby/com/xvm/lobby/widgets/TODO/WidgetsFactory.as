@@ -4,8 +4,6 @@
  */
 package com.xvm.lobby.widgets
 {
-    import com.xvm.*;
-
     class WidgetsFactory
     {
         /////////////////////////////////////////////////////////////////

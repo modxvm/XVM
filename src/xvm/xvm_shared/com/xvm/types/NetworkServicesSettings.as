@@ -4,7 +4,6 @@
  */
 package com.xvm.types
 {
-    import com.xvm.*;
     import com.xvm.vo.*;
 
     public dynamic class NetworkServicesSettings extends VOBase

@@ -16,7 +16,6 @@ class XVM_BATTLE_COMMAND(object):
     AS_XMQP_EVENT = "xvm.as.as_xmqp_event"
     AS_UPDATE_PLAYER_STATE = "xvm.as.update_player_state"
     AS_UPDATE_DEVICE_STATE = "xvm.as.update_device_state"
-    AS_TEAMS_HP_CHANGED = "xvm.as.teams_hp_changed"
     AS_SNIPER_CAMERA = "xvm.as.sniper_camera"
     AS_AIM_OFFSET_UPDATE = "xvm.as.aim_offset_update"
     AS_ON_TARGET_CHANGED = "xvm.as.on_target_changed"

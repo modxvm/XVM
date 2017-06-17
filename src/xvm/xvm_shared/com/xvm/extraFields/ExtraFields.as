@@ -6,17 +6,10 @@ package com.xvm.extraFields
 {
     import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.battle.*;
-    import com.xvm.types.*;
-    import com.xvm.types.dossier.*;
-    import com.xvm.vo.*;
     import com.xvm.types.cfg.*;
-    import flash.display.*;
-    import flash.filters.*;
-    import flash.text.*;
+    import com.xvm.vo.*;
     import flash.geom.*;
     import flash.utils.*;
-    import scaleform.gfx.*;
     import scaleform.clik.core.*;
 
     public class ExtraFields extends UIComponent

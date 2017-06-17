@@ -5,15 +5,14 @@
 package com.xvm.battle.vo
 {
     import com.xfw.*;
+    import com.xfw.events.*;
     import com.xvm.*;
     import com.xvm.battle.*;
-    import com.xvm.battle.wg.*;
-    import com.xfw.events.*;
-    import com.xvm.types.*;
-    import com.xvm.vo.*;
     import com.xvm.battle.events.*;
+    import com.xvm.battle.wg.*;
+    import com.xvm.types.*;
     import com.xvm.types.stat.*;
-    import flash.errors.*;
+    import com.xvm.vo.*;
     import flash.utils.*;
 
     public class VOPlayerState extends VOMacrosOptions
