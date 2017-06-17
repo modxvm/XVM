@@ -1,49 +1,27 @@
 ﻿/**
- * XVM Entry Point
- * @author Maxim Schedriviy <max(at)modxvm.com>
+ * XVM: eXtended Visualization Mod for World of Tanks.
+ * http://www.modxvm.com/
  */
 package com.xvm
 {
     import com.xfw.*;
-    import com.xvm.battle.*;
-    import com.xvm.battle.events.*;
-    import com.xvm.battle.vo.*;
-    import com.xvm.extraFields.*;
     import com.xvm.types.*;
     import com.xvm.types.cfg.*;
     import flash.display.*;
     import flash.events.*;
-    import net.wg.infrastructure.managers.*;
 
     /**
-     *  Link additional classes into xfw.swc
+     *  Link additional classes into xvm_shared.swc
      */
-    Chance;
-    Config;
-    Dossier;
-    ExtraFields;
-    ExtraFieldsGroup;
-    Locale;
-    Stat;
-    VehicleInfo;
-    XvmCommands;
-    Utils;
 
-    // Battle
-    BattleCommands;
-    BattleEvents;
+    import com.xvm.battle.*;
     BattleGlobalData;
     BattleMacros;
-    BattleState;
-    PlayerStateEvent;
     Xmqp;
-    VOArenaInfo;
-    VOCaptureBarData;
-    VODamageInfo;
-    VOMinimapCirclesData;
-    VOPlayersData;
-    VOPlayerState;
-    VOXmqpData;
+
+    import com.xvm.extraFields.*;
+    ExtraFields;
+    ExtraFieldsGroup;
 
     public class Xvm extends Sprite
     {

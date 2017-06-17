@@ -1,6 +1,6 @@
 /**
- * XVM Config
- * @author Maxim Schedriviy <max(at)modxvm.com>
+ * XVM: eXtended Visualization Mod for World of Tanks.
+ * http://www.modxvm.com/
  */
 package com.xvm.types.cfg
 {
@@ -8,7 +8,7 @@ package com.xvm.types.cfg
     import flash.text.*;
     import scaleform.gfx.*;
 
-    public dynamic class CTextFormat extends Object implements ICloneable
+    public dynamic class CTextFormat implements ICloneable
     {
         public var enabled:*;
         public var font:String;

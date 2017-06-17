@@ -1,5 +1,6 @@
 /**
- * XVM
+ * XVM: eXtended Visualization Mod for World of Tanks.
+ * http://www.modxvm.com/
  * @author Pavel Máca
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */

@@ -1,3 +1,7 @@
+/**
+ * XVM: eXtended Visualization Mod for World of Tanks.
+ * http://www.modxvm.com/
+ */
 package com.xvm.battle.wg
 {
     public class VehicleStatus extends Object

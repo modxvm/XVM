@@ -1,12 +1,12 @@
 /**
- * XVM Config
- * @author Maxim Schedriviy <max(at)modxvm.com>
+ * XVM: eXtended Visualization Mod for World of Tanks.
+ * http://www.modxvm.com/
  */
 package com.xvm.types.cfg
 {
     import com.xfw.*;
 
-    public dynamic class CMinimapCirclesInternal extends Object implements ICloneable
+    public dynamic class CMinimapCirclesInternal implements ICloneable
     {
         public var is_full_crew:Boolean;
         public var base_commander_skill:Number;

@@ -1,13 +1,12 @@
 ﻿/**
- * XVM DAAPI commands (internal for xvm_shared)
- * @author Maxim Schedriviy <max(at)modxvm.com>
+ * XVM: eXtended Visualization Mod for World of Tanks.
+ * http://www.modxvm.com/
  */
 package com.xvm
 {
     internal class XvmCommandsInternal
     {
         internal static const REQUEST_CONFIG:String = "xvm.request_config";
-        internal static const GET_ARENA_GUI_TYPE:String = "xvm.get_arena_gui_type";
         internal static const GET_CLAN_ICON:String = "xvm.get_clan_icon";
         internal static const REQUEST_DOSSIER:String = "xvm.request_dossier";
         internal static const LOAD_STAT_BATTLE:String = "xvm.load_stat_battle";

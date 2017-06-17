@@ -1,6 +1,6 @@
 ﻿/**
- * XVM
- * @author Maxim Schedriviy <max(at)modxvm.com>
+ * XVM: eXtended Visualization Mod for World of Tanks.
+ * http://www.modxvm.com/
  */
 package com.xvm.battle.elements
 {
@@ -14,7 +14,7 @@ package com.xvm.battle.elements
     import net.wg.gui.battle.views.debugPanel.DebugPanel;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
 
-    public class BattleElements extends Object implements IDisposable
+    public class BattleElements implements IDisposable
     {
         private static const CMD_LOG:String = "$log";
         private static const CMD_DELAY:String = "$delay";

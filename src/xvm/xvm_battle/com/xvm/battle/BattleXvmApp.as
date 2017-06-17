@@ -1,9 +1,13 @@
+/**
+ * XVM: eXtended Visualization Mod for World of Tanks.
+ * http://www.modxvm.com/
+ */
 package com.xvm.battle
 {
     import com.xfw.*;
     import com.xvm.*;
 
-    public class BattleXvmApp extends XvmAppBase
+    public class BattleXvmApp extends Xvm
     {
         private var battleXvmMod:BattleXvmMod;
 

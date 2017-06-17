@@ -1,6 +1,6 @@
 /**
- * XVM Macro substitutions
- * @author Maxim Schedriviy <max(at)modxvm.com>
+ * XVM: eXtended Visualization Mod for World of Tanks.
+ * http://www.modxvm.com/
  */
 package com.xvm
 {
@@ -9,7 +9,7 @@ package com.xvm
     import com.xvm.types.stat.*;
     import com.xvm.vo.*;
 
-    public class Macros extends Object
+    public class Macros
     {
         // PUBLIC STATIC
 

@@ -1,12 +1,12 @@
 /**
- * XVM Config
- * @author Maxim Schedriviy <max(at)modxvm.com>
+ * XVM: eXtended Visualization Mod for World of Tanks.
+ * http://www.modxvm.com/
  */
 package com.xvm.types.cfg
 {
     import com.xfw.*;
 
-    public dynamic class CCameraArcade extends Object implements ICloneable
+    public dynamic class CCameraArcade implements ICloneable
     {
         public var distRange:Array;
         public var startDist:*;

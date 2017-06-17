@@ -1,6 +1,6 @@
 ﻿/**
- * XVM
- * @author Maxim Schedriviy <max(at)modxvm.com>
+ * XVM: eXtended Visualization Mod for World of Tanks.
+ * http://www.modxvm.com/
  */
 package com.xvm.extraFields
 {
@@ -12,7 +12,6 @@ package com.xvm.extraFields
     import com.xvm.vo.*;
     import com.xvm.wg.*;
     import flash.text.*;
-    import flash.events.*;
     import flash.geom.*;
     import scaleform.gfx.*;
 

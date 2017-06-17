@@ -1,11 +1,11 @@
 ﻿/**
- * XVM
- * @author Maxim Schedriviy <max(at)modxvm.com>
+ * XVM: eXtended Visualization Mod for World of Tanks.
+ * http://www.modxvm.com/
  */
 package com.xvm
 {
     import com.xfw.*;
-    import com.xvm.vo.VOVehicleData;
+    import com.xvm.vo.*;
 
     public class VehicleInfo
     {
@@ -84,6 +84,7 @@ package com.xvm
             return _instance;
         }
 
+        // .ctor() should be private
         public function VehicleInfo()
         {
             //Logger.add("VehicleInfo::ctor()")

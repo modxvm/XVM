@@ -1,12 +1,12 @@
 /**
- * XVM Config
- * @author Maxim Schedriviy <max(at)modxvm.com>
+ * XVM: eXtended Visualization Mod for World of Tanks.
+ * http://www.modxvm.com/
  */
 package com.xvm.types.cfg
 {
     import com.xfw.*;
 
-    public dynamic class CCarouselCellStandardFields extends Object implements ICloneable
+    public dynamic class CCarouselCellStandardFields implements ICloneable
     {
         public var flag:CCarouselCellStandardField;
         public var tankIcon:CCarouselCellStandardField;

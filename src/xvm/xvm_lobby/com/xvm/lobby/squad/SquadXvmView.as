@@ -1,5 +1,6 @@
 /**
- * XVM - squad window
+ * XVM: eXtended Visualization Mod for World of Tanks.
+ * http://www.modxvm.com/
  * @author Pavel Máca
  */
 package com.xvm.lobby.squad

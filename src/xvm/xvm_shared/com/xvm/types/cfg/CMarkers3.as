@@ -1,12 +1,12 @@
 /**
- * XVM Config
- * @author Maxim Schedriviy <max(at)modxvm.com>
+ * XVM: eXtended Visualization Mod for World of Tanks.
+ * http://www.modxvm.com/
  */
 package com.xvm.types.cfg
 {
     import com.xfw.*;
 
-    public dynamic class CMarkers3 extends Object implements ICloneable
+    public dynamic class CMarkers3 implements ICloneable
     {
         public var normal:CMarkers4;
         public var extended:CMarkers4;

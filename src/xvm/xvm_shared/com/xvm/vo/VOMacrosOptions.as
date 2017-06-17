@@ -1,4 +1,8 @@
-﻿package com.xvm.vo
+﻿/**
+ * XVM: eXtended Visualization Mod for World of Tanks.
+ * http://www.modxvm.com/
+ */
+package com.xvm.vo
 {
     import flash.errors.*;
 

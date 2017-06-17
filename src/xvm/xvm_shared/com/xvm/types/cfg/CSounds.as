@@ -1,13 +1,13 @@
 /**
- * XVM Config
- * @author Maxim Schedriviy <max(at)modxvm.com>
+ * XVM: eXtended Visualization Mod for World of Tanks.
+ * http://www.modxvm.com/
  */
 package com.xvm.types.cfg
 {
     import com.xfw.*;
     import flash.utils.*;
 
-    public dynamic class CSounds extends Object implements ICloneable
+    public dynamic class CSounds implements ICloneable
     {
         public var enabled:*;
         public var soundBanks:CSoundsBanks;

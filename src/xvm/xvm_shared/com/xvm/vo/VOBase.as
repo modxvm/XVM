@@ -1,9 +1,13 @@
-﻿package com.xvm.vo
+﻿/**
+ * XVM: eXtended Visualization Mod for World of Tanks.
+ * http://www.modxvm.com/
+ */
+package com.xvm.vo
 {
     import com.xfw.*;
     import com.xvm.*;
 
-    public class VOBase extends Object
+    public class VOBase
     {
         public function VOBase(data:Object = null)
         {

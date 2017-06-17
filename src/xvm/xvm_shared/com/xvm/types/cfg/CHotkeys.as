@@ -1,12 +1,12 @@
 /**
- * XVM Config
- * @author Maxim Schedriviy <max(at)modxvm.com>
+ * XVM: eXtended Visualization Mod for World of Tanks.
+ * http://www.modxvm.com/
  */
 package com.xvm.types.cfg
 {
     import com.xfw.*;
 
-    public dynamic class CHotkeys extends Object implements ICloneable
+    public dynamic class CHotkeys implements ICloneable
     {
         public var minimapZoom:CHotkeysParams;
         public var minimapAltMode:CHotkeysParams;

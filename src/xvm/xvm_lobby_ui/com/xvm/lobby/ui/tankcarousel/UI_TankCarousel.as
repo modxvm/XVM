@@ -1,6 +1,6 @@
 /**
- * XVM
- * @author Maxim Schedriviy <max(at)modxvm.com>
+ * XVM: eXtended Visualization Mod for World of Tanks.
+ * http://www.modxvm.com/
  */
 package com.xvm.lobby.ui.tankcarousel
 {
@@ -183,7 +183,7 @@ import net.wg.gui.lobby.hangar.tcarousel.helper.ITankCarouselHelper;
 import net.wg.infrastructure.exceptions.*;
 import scaleform.clik.utils.Padding;
 
-class TankCarouselHelperBase extends Object implements ITankCarouselHelper
+class TankCarouselHelperBase implements ITankCarouselHelper
 {
     private var _gap:int;
     private var _padding:Padding;

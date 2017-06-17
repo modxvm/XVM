@@ -1,6 +1,6 @@
 /**
- * XVM
- * @author Maxim Schedriviy <max(at)modxvm.com>
+ * XVM: eXtended Visualization Mod for World of Tanks.
+ * http://www.modxvm.com/
  */
 package com.xvm.lobby.profile
 {

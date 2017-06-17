@@ -1,12 +1,12 @@
 /**
- * XVM
- * @author Maxim Schedriviy <max(at)modxvm.com>
+ * XVM: eXtended Visualization Mod for World of Tanks.
+ * http://www.modxvm.com/
  */
 package com.xvm.vehiclemarkers.ui
 {
     import net.wg.gui.battle.views.vehicleMarkers.VO.*;
 
-    public class XvmVehicleMarkerConstants extends Object
+    public class XvmVehicleMarkerConstants
     {
         public static const DISABLED_MARKER_SETTINGS:VehicleMarkerSettings = new VehicleMarkerSettings();
         DISABLED_MARKER_SETTINGS.markerBaseHp = HPDisplayMode.HIDDEN;

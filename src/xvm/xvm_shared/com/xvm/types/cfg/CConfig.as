@@ -1,6 +1,6 @@
 ﻿/**
- * XVM Config
- * @author Maxim Schedriviy <max(at)modxvm.com>
+ * XVM: eXtended Visualization Mod for World of Tanks.
+ * http://www.modxvm.com/
  */
 package com.xvm.types.cfg
 {
@@ -9,7 +9,7 @@ package com.xvm.types.cfg
     // add unreferenced classes
     CWidget;
 
-    public dynamic class CConfig extends Object implements ICloneable
+    public dynamic class CConfig implements ICloneable
     {
         // internal
         public var __stateInfo:Object;

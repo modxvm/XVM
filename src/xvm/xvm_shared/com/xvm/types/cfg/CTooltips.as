@@ -1,11 +1,12 @@
 /**
- * XVM Config
+ * XVM: eXtended Visualization Mod for World of Tanks.
+ * http://www.modxvm.com/
  */
 package com.xvm.types.cfg
 {
     import com.xfw.*;
 
-    public dynamic class CTooltips extends Object implements ICloneable
+    public dynamic class CTooltips implements ICloneable
     {
         public var combineIcons:*;
         public var hideSimplifiedVehParams:*;
