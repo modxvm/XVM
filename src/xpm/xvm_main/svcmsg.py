@@ -27,6 +27,8 @@ def tokenUpdated():
     elif status == 'active':
         type = SystemMessages.SM_TYPE.GameGreeting
         msg += '{{l10n:token/active}}\n'
+        s = time.time()
+        e = config.token.expires_at / 1000
         days_left = int((e - s) / 86400)
         hours_left = int((e - s) / 3600) % 24
         mins_left = int((e - s) / 60) % 60

@@ -301,7 +301,6 @@ class XvmServicesToken(object):
         #trace('config.token._apply')
         if data is None:
             data = {}
-        log(data)
         self.accountDBID = data.get('accountDBID', None)
         if self.accountDBID is None:
             self.accountDBID = data.get('_id', None) # returned from XVM API
