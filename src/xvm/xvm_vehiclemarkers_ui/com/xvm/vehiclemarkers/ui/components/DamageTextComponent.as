@@ -111,7 +111,6 @@ package com.xvm.vehiclemarkers.ui.components
 }
 
 import com.xfw.*
-import com.xvm.*
 import com.greensock.*;
 import com.greensock.easing.*;
 import com.greensock.plugins.*;

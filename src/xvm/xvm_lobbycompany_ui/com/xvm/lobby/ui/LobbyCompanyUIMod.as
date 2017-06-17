@@ -4,14 +4,9 @@
  */
 package com.xvm.lobby.ui
 {
-    /**
-     *  Link additional classes into xfw.swc
-     */
-    import com.xvm.lobby.ui.company.*;
     import flash.display.*;
 
-    // company
-    // TODO
+    import com.xvm.lobby.ui.company.*;
     UI_CompanyDropItemRenderer;
     UI_CompanyListItemRenderer;
     UI_TeamMemberRenderer;

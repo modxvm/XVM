@@ -5,7 +5,6 @@
 package com.xvm.lobby.ui.crew
 {
     import com.xfw.*;
-    import flash.display.*;
     import net.wg.gui.lobby.components.*;
 	import net.wg.gui.lobby.hangar.crew.*;
 

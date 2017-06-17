@@ -8,11 +8,9 @@ package com.xvm.lobby.ui.tankcarousel
     import com.xvm.*;
     import com.xvm.types.dossier.*;
     import com.xvm.types.cfg.*;
-    import flash.display.*;
     import net.wg.data.constants.generated.*;
     import net.wg.gui.lobby.hangar.tcarousel.helper.*;
     import scaleform.clik.constants.*;
-    import scaleform.clik.utils.*;
     import org.idmedia.as3commons.util.*;
 
     public /*dynamic*/ class UI_TankCarousel extends TankCarouselUI

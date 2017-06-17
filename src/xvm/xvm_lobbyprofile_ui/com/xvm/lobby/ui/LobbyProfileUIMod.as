@@ -4,13 +4,9 @@
  */
 package com.xvm.lobby.ui
 {
-    /**
-     *  Link additional classes into xfw.swc
-     */
-    import com.xvm.lobby.ui.profile.*;
     import flash.display.*;
 
-    // profile
+    import com.xvm.lobby.ui.profile.*;
     UI_ProfileSortingButton;
     UI_ProfileTechniquePage;
     UI_ProfileTechniqueWindow;

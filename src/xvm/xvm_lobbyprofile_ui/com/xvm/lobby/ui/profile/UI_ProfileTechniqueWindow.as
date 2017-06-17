@@ -6,8 +6,8 @@ package com.xvm.lobby.ui.profile
 {
     import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.types.dossier.*;
     import com.xvm.lobby.ui.profile.components.*;
+    import com.xvm.types.dossier.*;
     import net.wg.gui.components.windows.*;
     import net.wg.gui.lobby.window.*;
 

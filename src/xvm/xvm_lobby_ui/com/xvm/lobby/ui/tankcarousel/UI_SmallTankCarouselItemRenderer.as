@@ -7,17 +7,9 @@ package com.xvm.lobby.ui.tankcarousel
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.extraFields.*;
-    import com.xvm.lobby.vo.*;
-    import com.xvm.types.cfg.*;
-    import com.xvm.types.dossier.*;
     import com.xvm.vo.*;
     import flash.display.*;
-    import flash.geom.*;
-    import flash.text.*;
-    import flash.utils.*;
-    import net.wg.gui.lobby.hangar.tcarousel.*;
     import net.wg.gui.lobby.hangar.tcarousel.data.*;
-    import scaleform.gfx.*;
 
     public /*dynamic*/ class UI_SmallTankCarouselItemRenderer extends SmallTankCarouselItemRendererUI implements IExtraFieldGroupHolder, ITankCarouselItemRenderer
     {

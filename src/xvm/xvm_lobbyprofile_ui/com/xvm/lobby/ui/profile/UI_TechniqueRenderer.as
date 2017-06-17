@@ -6,12 +6,12 @@ package com.xvm.lobby.ui.profile
 {
     import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.types.dossier.VehicleDossier;
-    import com.xvm.vo.*;
     import com.xvm.lobby.ui.profile.components.*;
+    import com.xvm.types.dossier.*;
+    import com.xvm.vo.*;
     import flash.text.*;
+    import net.wg.gui.lobby.profile.pages.technique.*;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
-    import net.wg.gui.lobby.profile.pages.technique.ProfileTechnique;
     import scaleform.gfx.*;
 
     public dynamic class UI_TechniqueRenderer extends TechniqueRenderer_UI

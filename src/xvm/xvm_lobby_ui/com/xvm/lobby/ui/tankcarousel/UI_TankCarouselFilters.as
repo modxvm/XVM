@@ -5,7 +5,6 @@
 package com.xvm.lobby.ui.tankcarousel
 {
     import com.xfw.*;
-    import com.xvm.*;
     import flash.utils.*;
 
     public dynamic class UI_TankCarouselFilters extends TankCarouselFiltersUI

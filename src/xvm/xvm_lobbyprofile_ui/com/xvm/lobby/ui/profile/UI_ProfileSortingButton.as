@@ -6,7 +6,6 @@ package com.xvm.lobby.ui.profile
 {
     import com.xfw.*;
     import com.xvm.*;
-    import net.wg.gui.lobby.profile.pages.technique.data.*;
 
     public dynamic class UI_ProfileSortingButton extends ProfileSortingButton_UI
     {

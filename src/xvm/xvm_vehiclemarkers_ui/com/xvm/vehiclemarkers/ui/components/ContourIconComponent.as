@@ -6,8 +6,8 @@ package com.xvm.vehiclemarkers.ui.components
 {
     import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.vehiclemarkers.ui.*;
     import com.xvm.types.cfg.*;
+    import com.xvm.vehiclemarkers.ui.*;
 
     public class ContourIconComponent extends VehicleMarkerComponentBase
     {

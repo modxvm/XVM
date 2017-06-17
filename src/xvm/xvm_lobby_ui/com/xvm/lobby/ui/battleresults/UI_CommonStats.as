@@ -11,7 +11,6 @@ package com.xvm.lobby.ui.battleresults
     import flash.events.*;
     import flash.text.*;
     import flash.utils.*;
-    import net.wg.data.constants.*;
     import net.wg.data.constants.generated.*;
     import net.wg.gui.lobby.battleResults.components.*;
     import net.wg.gui.lobby.battleResults.data.*;

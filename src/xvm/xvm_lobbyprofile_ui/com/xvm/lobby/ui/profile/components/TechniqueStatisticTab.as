@@ -12,7 +12,6 @@ package com.xvm.lobby.ui.profile.components
     import com.xvm.types.stat.*;
     import flash.display.*;
     import flash.text.*;
-    import net.wg.gui.lobby.profile.components.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
     import scaleform.gfx.*;

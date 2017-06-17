@@ -8,13 +8,11 @@ package com.xvm.lobby.ui.limits
     import com.xvm.*;
     import com.xvm.lobby.limits.*;
     import com.xvm.lobby.ui.limits.controls.*;
-    import flash.display.*;
     import flash.events.*;
     import net.wg.data.constants.generated.*;
     import net.wg.gui.lobby.*;
     import net.wg.gui.lobby.header.events.*;
     import net.wg.gui.lobby.header.headerButtonBar.*;
-    import net.wg.infrastructure.interfaces.entity.*;
 
     public class LimitsUIImpl implements ILimitsUI
     {

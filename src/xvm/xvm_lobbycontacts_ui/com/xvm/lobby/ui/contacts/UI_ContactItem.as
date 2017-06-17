@@ -6,7 +6,6 @@ package com.xvm.lobby.ui.contacts
 {
     import com.xfw.*;
     import net.wg.gui.messenger.data.*;
-    import scaleform.clik.constants.*;
 
     public class UI_ContactItem extends ContactItemUI
     {

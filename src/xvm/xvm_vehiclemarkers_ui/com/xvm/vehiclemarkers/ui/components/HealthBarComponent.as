@@ -12,7 +12,6 @@ package com.xvm.vehiclemarkers.ui.components
     import com.greensock.*;
     import com.greensock.easing.*;
     import flash.display.*;
-    import flash.geom.*;
 
     public class HealthBarComponent extends VehicleMarkerComponentBase
     {

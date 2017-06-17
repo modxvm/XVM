@@ -5,14 +5,11 @@
 package com.xvm.lobby.ui.contacts
 {
     import com.xfw.*;
-    import com.xvm.*;
     import flash.display.*;
-    import flash.events.*;
     import net.wg.gui.components.controls.UILoaderAlt; // '*' conflicts with UI classes
     import net.wg.gui.messenger.controls.*;
     import net.wg.gui.messenger.data.*;
     import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
 
     public class UI_ContactsTreeItemRenderer extends ContactsTreeItemRendererUI
     {

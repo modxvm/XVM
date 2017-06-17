@@ -5,9 +5,7 @@
 package com.xvm.vehiclemarkers.ui.components
 {
     import com.xfw.*;
-    import com.xvm.*;
     import com.xvm.vehiclemarkers.ui.*;
-    import flash.events.*;
     import net.wg.infrastructure.interfaces.entity.*;
 
     public class VehicleMarkerComponentBase implements IDisposable

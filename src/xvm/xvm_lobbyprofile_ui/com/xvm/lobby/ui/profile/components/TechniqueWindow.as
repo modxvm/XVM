@@ -5,7 +5,6 @@
 package com.xvm.lobby.ui.profile.components
 {
     import com.xfw.*;
-    import com.xvm.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
 
     public class TechniqueWindow extends Technique

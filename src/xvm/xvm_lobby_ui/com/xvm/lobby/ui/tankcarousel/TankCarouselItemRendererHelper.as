@@ -10,18 +10,15 @@ package com.xvm.lobby.ui.tankcarousel
     import com.xvm.lobby.vo.*;
     import com.xvm.types.cfg.*;
     import com.xvm.types.dossier.*;
-    import com.xvm.vo.*;
     import flash.display.*;
+    import flash.filters.*;
     import flash.geom.*;
     import flash.text.*;
-    import flash.utils.*;
-    import flash.filters.*;
     import net.wg.data.constants.generated.*;
     import net.wg.gui.components.controls.*;
     import net.wg.gui.lobby.hangar.tcarousel.*;
-    import net.wg.gui.lobby.hangar.tcarousel.data.*;
+    import scaleform.clik.interfaces.*;
     import scaleform.gfx.*;
-    import scaleform.clik.interfaces.IUIComponent;
 
     public class TankCarouselItemRendererHelper
     {

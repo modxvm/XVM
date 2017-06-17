@@ -6,12 +6,8 @@ package com.xvm.lobby.ui.profile
 {
     import com.xfw.*;
     import com.xvm.lobby.ui.profile.components.*;
-    import fl.transitions.easing.*;
     import flash.utils.*;
-    import net.wg.gui.lobby.profile.pages.technique.ProfileTechnique;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
-    import net.wg.gui.utils.*;
-    import scaleform.clik.motion.*;
 
     public dynamic class UI_TechniqueStatisticTab extends TechniqueStatisticTab_UI
     {

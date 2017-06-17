@@ -5,8 +5,8 @@
 package com.xvm.lobby.ui.company.renderers
 {
     import com.xfw.*;
-    import com.xvm.*;
     import com.xfw.events.*;
+    import com.xvm.*;
     import com.xvm.types.stat.*;
     import flash.events.*;
     import flash.text.*;

@@ -6,11 +6,9 @@ package com.xvm.vehiclemarkers.ui.components
 {
     import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.types.*;
     import com.xvm.types.cfg.*;
     import com.xvm.vehiclemarkers.ui.*;
     import flash.display.*;
-    import net.wg.gui.battle.views.vehicleMarkers.*;
 
     public class VehicleTypeIconComponent extends VehicleMarkerComponentBase
     {

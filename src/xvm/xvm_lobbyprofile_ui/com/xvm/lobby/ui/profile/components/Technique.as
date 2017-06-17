@@ -11,18 +11,10 @@ package com.xvm.lobby.ui.profile.components
     import com.xvm.types.dossier.*;
     import com.xvm.types.stat.*;
     import flash.display.*;
-    import flash.events.*;
     import flash.utils.*;
     import net.wg.data.constants.*;
     import net.wg.data.constants.generated.*;
-    import net.wg.gui.events.*;
-    import net.wg.gui.components.controls.events.*;
-    import net.wg.gui.components.advanced.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
-    import net.wg.gui.lobby.profile.pages.technique.data.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.interfaces.*;
 
     public class Technique extends Sprite
     {

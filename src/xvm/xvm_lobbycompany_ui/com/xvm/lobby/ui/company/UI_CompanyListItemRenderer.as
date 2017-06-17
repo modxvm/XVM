@@ -29,7 +29,7 @@ package com.xvm.lobby.ui.company
             worker.setData(data);
         }
 
-        override protected function handleMouseRollOver(e:flash.events.MouseEvent):void
+        override protected function handleMouseRollOver(e:MouseEvent):void
         {
             super.handleMouseRollOver(e);
             worker.handleMouseRollOver(e);

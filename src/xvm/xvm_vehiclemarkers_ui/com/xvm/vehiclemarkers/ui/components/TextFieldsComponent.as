@@ -5,12 +5,10 @@
 package com.xvm.vehiclemarkers.ui.components
 {
     import com.xfw.*;
-    import com.xvm.*;
     import com.xvm.battle.vo.*;
     import com.xvm.extraFields.*;
     import com.xvm.types.cfg.*;
     import com.xvm.vehiclemarkers.ui.*;
-    import flash.display.*;
     import flash.geom.*;
     import flash.text.*;
 
