@@ -14,7 +14,6 @@ package com.xvm.battle.minimap.entries.vehicle
     import com.xvm.battle.minimap.entries.*;
     import com.xvm.battle.vo.*;
     import com.xvm.extraFields.*;
-    import flash.events.*;
     import net.wg.gui.battle.views.minimap.components.entries.vehicle.*;
 
     public class UI_VehicleEntry extends VehicleEntry implements IMinimapVehicleEntry

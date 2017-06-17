@@ -9,7 +9,6 @@ package com.xvm.battle.playersPanel
     import com.xvm.*;
     import com.xvm.battle.*;
     import com.xvm.battle.vo.*;
-    import com.xvm.battle.events.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
     import flash.utils.*;

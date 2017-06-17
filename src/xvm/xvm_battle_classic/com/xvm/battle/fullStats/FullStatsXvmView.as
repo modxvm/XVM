@@ -5,7 +5,6 @@
 package com.xvm.battle.fullStats
 {
     import com.xfw.*;
-    import com.xvm.*;
     import com.xvm.infrastructure.*;
     import flash.display.*;
     import net.wg.infrastructure.events.*;

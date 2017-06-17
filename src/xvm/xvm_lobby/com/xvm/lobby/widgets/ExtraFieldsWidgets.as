@@ -5,7 +5,6 @@
 package com.xvm.lobby.widgets
 {
     import com.xfw.*;
-    import com.xvm.*;
     import com.xvm.extraFields.*;
     import com.xvm.lobby.vo.*;
     import com.xvm.types.cfg.*;

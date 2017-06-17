@@ -4,35 +4,26 @@
  */
 package com.xvm.lobby.ui
 {
-    /**
-     *  Link additional classes into xfw.swc
-     */
-    import com.xvm.lobby.ui.battleresults.*;
-    import com.xvm.lobby.ui.crew.*;
-    import com.xvm.lobby.ui.limits.*;
-    import com.xvm.lobby.ui.squad.*;
-    import com.xvm.lobby.ui.tankcarousel.*;
-    import com.xvm.lobby.ui.techtree.*;
     import flash.display.*;
 
-    // battleresults
+    import com.xvm.lobby.ui.battleresults.*;
     UI_BattleResultsAwards;
     UI_BR_SubtaskComponent;
-    UI_ProgressElement;
     UI_CommonStats;
+    UI_ProgressElement;
 
-    // crew
+    import com.xvm.lobby.ui.crew.*;
     UI_CrewItemRenderer;
     UI_CrewItemRendererSmall;
 
-    // limits
+    import com.xvm.lobby.ui.limits.*;
     LimitsUIImpl;
 
-    // squad
     // TODO
+    //import com.xvm.lobby.ui.squad.*;
     //UI_SquadItemRenderer;
 
-    // tankcarousel
+    import com.xvm.lobby.ui.tankcarousel.*;
     UI_FalloutTankCarousel;
     UI_FalloutTankCarouselItemRenderer;
     UI_MultiselectionSlotRenderer;
@@ -42,7 +33,7 @@ package com.xvm.lobby.ui
     UI_TankCarouselFilters;
     UI_TankCarouselItemRenderer;
 
-    // techtree
+    import com.xvm.lobby.ui.techtree.*;
     UI_NationTreeNodeSkinned;
     UI_ResearchItemNode;
 

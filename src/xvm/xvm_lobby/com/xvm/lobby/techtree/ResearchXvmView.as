@@ -9,7 +9,6 @@ package com.xvm.lobby.techtree
     import net.wg.gui.lobby.techtree.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
-    import org.idmedia.as3commons.util.StringUtils;
 
     public class ResearchXvmView extends XvmViewBase
     {

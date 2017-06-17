@@ -9,11 +9,9 @@ package com.xvm.battle.playersPanel
     import com.xvm.*;
     import com.xvm.battle.*;
     import com.xvm.battle.vo.*;
-    import com.xvm.battle.events.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
     import flash.utils.*;
-    import net.wg.data.constants.*;
     import net.wg.data.constants.generated.*;
     import net.wg.data.VO.daapi.*;
     import net.wg.gui.battle.ranked.stats.components.playersPanel.list.*;

@@ -11,7 +11,6 @@ package com.xvm.lobby.ping
     import com.xvm.lobby.ping.PingServers.*;
     import flash.events.*;
     import net.wg.gui.lobby.*;
-    import net.wg.gui.lobby.hangar.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
 

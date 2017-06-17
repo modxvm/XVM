@@ -5,9 +5,8 @@
 package com.xvm.battle.playersPanel
 {
     import com.xfw.*;
-    import com.xvm.*;
     import net.wg.data.constants.*;
-    import net.wg.gui.battle.random.views.stats.components.playersPanel.constants.PlayersPanelInvalidationType;
+    import net.wg.gui.battle.random.views.stats.components.playersPanel.constants.*;
     import net.wg.infrastructure.interfaces.*;
 
     public dynamic class UI_RankedPlayersPanelListItemLeft extends RankedPlayersPanelListItemLeftUI

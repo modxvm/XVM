@@ -5,10 +5,8 @@
 package com.xvm.battle.fullStats
 {
     import com.xfw.*;
-    import com.xvm.*;
     import net.wg.gui.battle.ranked.stats.components.fullStats.*;
     import net.wg.gui.battle.ranked.stats.components.fullStats.tableItem.*;
-    import net.wg.infrastructure.base.meta.impl.*;
 
     public class FullStatsTableCtrlXvm extends FullStatsTableCtrl
     {

@@ -8,12 +8,9 @@ package com.xvm.battle.fullStats
     import com.xvm.*;
     import com.xvm.types.cfg.*;
     import flash.display.*;
-    import net.wg.data.constants.*;
     import net.wg.gui.battle.components.*;
     import net.wg.gui.battle.components.buttons.*;
     import net.wg.gui.battle.random.views.stats.components.fullStats.tableItem.*;
-    import net.wg.gui.battle.views.stats.*;
-    import net.wg.gui.battle.views.stats.constants.*;
     import net.wg.gui.battle.views.stats.fullStats.*;
 
     public class DynamicSquadCtrlXvm extends DynamicSquadCtrl

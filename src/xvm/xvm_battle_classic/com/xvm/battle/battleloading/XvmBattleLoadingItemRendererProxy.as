@@ -5,28 +5,21 @@
 package com.xvm.battle.battleloading
 {
     import com.xfw.*;
-    import com.xfw.events.*;
     import com.xvm.*;
     import com.xvm.battle.*;
     import com.xvm.battle.events.*;
     import com.xvm.battle.vo.*;
     import com.xvm.extraFields.*;
-    import com.xvm.vo.*;
-    import com.xvm.battle.vo.*;
-    import com.xvm.types.stat.*;
     import com.xvm.types.cfg.*;
+    import com.xvm.vo.*;
     import flash.display.*;
     import flash.events.*;
     import flash.geom.*;
     import flash.text.*;
-    import flash.utils.*;
     import net.wg.data.constants.*;
     import net.wg.data.constants.generated.*;
     import net.wg.data.VO.daapi.*;
-    import net.wg.gui.battle.battleloading.*;
-    import net.wg.gui.battle.battleloading.renderers.*;
     import net.wg.gui.battle.views.stats.constants.*;
-    import net.wg.gui.events.*;
     import net.wg.infrastructure.interfaces.*;
     import scaleform.gfx.*;
 

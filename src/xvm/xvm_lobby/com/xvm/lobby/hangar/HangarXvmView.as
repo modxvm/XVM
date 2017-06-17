@@ -8,7 +8,6 @@ package com.xvm.lobby.hangar
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import com.xvm.types.cfg.*;
-    import com.xvm.lobby.hangar.components.*;
     import flash.events.*;
     import net.wg.gui.lobby.hangar.*;
     import net.wg.infrastructure.events.*;

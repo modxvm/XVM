@@ -5,7 +5,6 @@
 package com.xvm.battle.fullStats
 {
     import com.xfw.*;
-    import com.xvm.*;
     import net.wg.gui.battle.random.views.stats.components.fullStats.*;
     import net.wg.gui.battle.random.views.stats.components.fullStats.tableItem.*;
     import net.wg.infrastructure.base.meta.impl.*;

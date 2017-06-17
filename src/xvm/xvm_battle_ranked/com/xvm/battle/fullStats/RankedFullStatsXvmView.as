@@ -5,13 +5,12 @@
 package com.xvm.battle.fullStats
 {
     import com.xfw.*;
-    import com.xvm.*;
     import com.xvm.infrastructure.*;
     import flash.display.*;
+    import net.wg.data.constants.generated.*;
     import net.wg.gui.battle.ranked.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
-    import net.wg.data.constants.generated.*;
 
     public class RankedFullStatsXvmView extends XvmViewBase
     {

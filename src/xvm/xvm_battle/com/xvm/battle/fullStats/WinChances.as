@@ -5,12 +5,11 @@
 package com.xvm.battle.fullStats
 {
     import com.xfw.*;
-    import com.xfw.events.*;
     import com.xvm.*;
     import com.xvm.battle.events.*;
     import com.xvm.types.cfg.*;
-    import flash.text.*;
     import flash.display.*;
+    import flash.text.*;
     import net.wg.infrastructure.interfaces.entity.*;
     import scaleform.gfx.*;
 

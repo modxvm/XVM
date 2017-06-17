@@ -9,10 +9,10 @@ package com.xvm.lobby.company
     import com.xvm.infrastructure.*;
     import flash.utils.*;
     import net.wg.data.constants.generated.*;
-    import net.wg.infrastructure.interfaces.*;
-    import net.wg.infrastructure.events.*;
     import net.wg.gui.events.*;
     import net.wg.gui.prebattle.company.*;
+    import net.wg.infrastructure.interfaces.*;
+    import net.wg.infrastructure.events.*;
 
     public class CompanyXvmView extends XvmViewBase
     {

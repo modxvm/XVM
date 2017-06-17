@@ -5,8 +5,8 @@
 package com.xvm.battle.hitlog
 {
     import com.xfw.*;
+    import com.xfw.events.*;
     import com.xvm.*;
-    import com.xfw.events.ObjectEvent;
     import com.xvm.battle.*;
     import com.xvm.battle.vo.*;
     import com.xvm.types.cfg.*;

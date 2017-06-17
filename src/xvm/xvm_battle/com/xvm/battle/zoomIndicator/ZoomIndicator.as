@@ -11,10 +11,8 @@ package com.xvm.battle.zoomIndicator
     import com.xvm.extraFields.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
-    import flash.text.*;
     import net.wg.data.constants.*;
     import scaleform.clik.core.*;
-    import scaleform.gfx.*;
 
     public class ZoomIndicator extends UIComponent
     {

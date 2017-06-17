@@ -5,7 +5,6 @@
 package com.xvm.battle.battleloading
 {
     import com.xfw.*;
-    import com.xvm.*;
     import com.xvm.infrastructure.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;

@@ -5,25 +5,23 @@
 package com.xvm.battle.fullStats
 {
     import com.xfw.*;
-    import com.xvm.*;
     import com.xfw.events.*;
+    import com.xvm.*;
     import com.xvm.battle.*;
     import com.xvm.battle.events.*;
     import com.xvm.battle.vo.*;
     import com.xvm.extraFields.*;
     import com.xvm.types.cfg.*;
     import com.xvm.vo.*;
-    import flash.events.*;
     import flash.display.*;
+    import flash.events.*;
     import flash.geom.*;
     import flash.text.*;
     import net.wg.data.constants.generated.*;
-    import net.wg.gui.battle.battleloading.*;
     import net.wg.gui.battle.components.*;
     import net.wg.gui.battle.random.views.stats.components.fullStats.tableItem.PlayerStatusView;
     import net.wg.gui.battle.random.views.stats.components.fullStats.constants.RandomFullStatsValidationType;
     import net.wg.gui.battle.ranked.stats.components.fullStats.tableItem.*;
-    import net.wg.gui.battle.views.stats.*;
     import net.wg.gui.battle.views.stats.constants.*;
     import net.wg.infrastructure.interfaces.*;
     import scaleform.gfx.*;

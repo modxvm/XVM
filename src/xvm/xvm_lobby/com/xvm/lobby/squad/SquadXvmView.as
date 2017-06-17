@@ -6,9 +6,7 @@
 package com.xvm.lobby.squad
 {
     import com.xfw.*;
-    import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import net.wg.gui.components.windows.*;
     import net.wg.gui.prebattle.squads.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;

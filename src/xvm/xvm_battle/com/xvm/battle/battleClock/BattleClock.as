@@ -11,7 +11,7 @@ package com.xvm.battle.battleClock
     import flash.filters.*;
     import flash.text.*;
     import flash.utils.*;
-    import net.wg.gui.battle.views.debugPanel.DebugPanel;
+    import net.wg.gui.battle.views.debugPanel.*;
     import net.wg.infrastructure.interfaces.entity.*;
     import scaleform.gfx.*;
 

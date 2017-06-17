@@ -5,12 +5,11 @@
 package com.xvm.battle.battleloading
 {
     import com.xfw.*;
-    import com.xvm.*;
     import com.xvm.infrastructure.*;
+    import net.wg.data.constants.generated.*;
     import net.wg.gui.battle.ranked.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
-    import net.wg.data.constants.generated.*;
 
     public class RankedBattleLoadingXvmView extends XvmViewBase
     {

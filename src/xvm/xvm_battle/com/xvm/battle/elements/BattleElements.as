@@ -8,11 +8,9 @@ package com.xvm.battle.elements
     import com.xvm.*;
     import com.xvm.battle.*;
     import flash.events.*;
-    import flash.filters.*;
     import flash.text.*;
     import flash.utils.*;
-    import net.wg.gui.battle.views.debugPanel.DebugPanel;
-    import net.wg.infrastructure.interfaces.entity.IDisposable;
+    import net.wg.infrastructure.interfaces.entity.*;
 
     public class BattleElements implements IDisposable
     {

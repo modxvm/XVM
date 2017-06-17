@@ -10,8 +10,8 @@ package com.xvm.battle.minimap.entries.personal
     import com.xvm.battle.events.*;
     import com.xvm.battle.minimap.*;
     import com.xvm.battle.minimap.entries.*;
-    import com.xvm.extraFields.*;
     import com.xvm.battle.vo.*;
+    import com.xvm.extraFields.*;
     import flash.display.*;
     import net.wg.data.constants.*;
     import net.wg.gui.battle.views.minimap.constants.*;

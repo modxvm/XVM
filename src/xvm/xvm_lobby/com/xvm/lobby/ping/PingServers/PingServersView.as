@@ -13,8 +13,8 @@ package com.xvm.lobby.ping.PingServers
     import flash.text.*;
     import net.wg.gui.components.controls.UILoaderAlt; // '*' conflicts with UI classes
     import net.wg.gui.events.*;
-    import scaleform.clik.core.*;
     import org.idmedia.as3commons.util.*;
+    import scaleform.clik.core.*;
     import scaleform.gfx.*;
 
     public class PingServersView extends UIComponent

@@ -13,14 +13,13 @@ package com.xvm.battle.minimap
     import com.xvm.battle.events.*;
     import com.xvm.battle.minimap.entries.personal.*;
     import com.xvm.battle.minimap.entries.vehicle.*;
-    import com.xvm.extraFields.*;
     import com.xvm.battle.vo.*;
+    import com.xvm.extraFields.*;
     import com.xvm.types.cfg.*;
     import com.xvm.vo.*;
     import flash.display.*;
     import flash.events.*;
     import flash.geom.*;
-    import net.wg.gui.battle.views.minimap.components.entries.constants.*;
     import net.wg.gui.battle.views.minimap.constants.*;
     import net.wg.gui.battle.views.stats.constants.*;
     import scaleform.gfx.*;

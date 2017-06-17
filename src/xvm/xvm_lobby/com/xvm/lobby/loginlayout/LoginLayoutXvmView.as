@@ -7,7 +7,6 @@ package com.xvm.lobby.loginlayout
 {
     import com.xfw.*;
     import com.xvm.infrastructure.*;
-    import net.wg.gui.events.*;
     import net.wg.gui.login.impl.*;
     import net.wg.gui.login.impl.ev.*;
     import net.wg.gui.login.impl.views.*;

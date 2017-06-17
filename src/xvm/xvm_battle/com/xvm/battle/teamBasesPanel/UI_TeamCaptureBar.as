@@ -7,11 +7,9 @@ package com.xvm.battle.teamBasesPanel
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.battle.*;
-    import com.xvm.types.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
     import flash.text.*;
-    import flash.filters.*;
     import mx.utils.*;
 
     public dynamic class UI_TeamCaptureBar extends TeamCaptureBarUI

@@ -4,8 +4,8 @@
  */
 package com.xvm.lobby.limits
 {
-    import net.wg.gui.lobby.LobbyPage;
-    import net.wg.infrastructure.interfaces.entity.IDisposable;
+    import net.wg.gui.lobby.*;
+    import net.wg.infrastructure.interfaces.entity.*;
 
     public interface ILimitsUI extends IDisposable
     {

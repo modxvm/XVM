@@ -8,7 +8,6 @@ package com.xvm.lobby.ping.PingServers
     import com.xfw.events.*;
     import flash.events.*;
     import flash.utils.*;
-    import org.idmedia.as3commons.util.*;
 
     public class PingServers extends EventDispatcher
     {

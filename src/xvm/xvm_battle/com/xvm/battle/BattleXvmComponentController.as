@@ -5,7 +5,6 @@
 package com.xvm.battle
 {
     import com.xfw.*;
-    import com.xvm.*;
     import net.wg.infrastructure.helpers.statisticsDataController.intarfaces.*;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.infrastructure.interfaces.entity.*;

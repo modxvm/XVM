@@ -2,13 +2,11 @@
  * XVM: eXtended Visualization Mod for World of Tanks.
  * http://www.modxvm.com/
  */
-package com.xvm.lobby.hangar.components
+package com.xvm.lobby.hangar
 {
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.types.cfg.*;
-    import net.wg.gui.components.controls.ScrollingListEx;
-    import net.wg.gui.lobby.hangar.*;
     import net.wg.gui.lobby.hangar.interfaces.*;
     import scaleform.clik.data.*;
 

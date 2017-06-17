@@ -10,18 +10,14 @@ package com.xvm.battle.battleLabels
     import com.xfw.events.*;
     import com.xvm.*;
     import com.xvm.battle.*;
-    import com.xvm.battle.events.*;
     import com.xvm.extraFields.*;
     import com.xvm.types.cfg.*;
     import com.xvm.vo.*;
     import flash.display.*;
     import flash.events.*;
-    import flash.text.*;
-    import flash.geom.*;
     import net.wg.data.constants.*;
     import net.wg.gui.battle.views.*;
     import scaleform.clik.core.*;
-    import scaleform.gfx.*;
 
     public class BattleLabels extends UIComponent implements IExtraFieldGroupHolder
     {

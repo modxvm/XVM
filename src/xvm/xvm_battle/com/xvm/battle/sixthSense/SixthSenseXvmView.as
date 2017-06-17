@@ -7,9 +7,9 @@ package com.xvm.battle.sixthSense
     import com.xfw.*;
     import com.xvm.infrastructure.*;
     import net.wg.data.constants.generated.*;
+    import net.wg.gui.battle.random.views.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
-    import net.wg.gui.battle.random.views.BattlePage;
 
     public class SixthSenseXvmView extends XvmViewBase
     {

@@ -5,23 +5,22 @@
 package com.xvm.battle
 {
     import com.xfw.*;
-    import com.xvm.*;
     import com.xfw.events.*;
+    import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import com.xvm.battle.battleClock.BattleClock;
-    import com.xvm.battle.battleLabels.BattleLabels;
-    import com.xvm.battle.elements.BattleElements;
+    import com.xvm.battle.battleClock.*;
+    import com.xvm.battle.battleLabels.*;
+    import com.xvm.battle.elements.*;
     import com.xvm.battle.events.*;
-    import com.xvm.battle.hitlog.Hitlog;
-    import com.xvm.battle.zoomIndicator.ZoomIndicator;
+    import com.xvm.battle.hitlog.*;
+    import com.xvm.battle.zoomIndicator.*;
     import com.xvm.types.cfg.*;
-    import flash.events.*;
     import flash.display.*;
+    import flash.events.*;
     import flash.text.*;
+    import net.wg.gui.battle.random.views.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
-    import net.wg.data.constants.generated.*;
-    import net.wg.gui.battle.random.views.BattlePage;
     import scaleform.clik.utils.*;
     import scaleform.gfx.*;
 

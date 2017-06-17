@@ -11,8 +11,6 @@ package com.xvm.battle.minimap.entries.personal
     import com.xvm.battle.minimap.*;
     import com.xvm.battle.minimap.entries.*;
     import com.xvm.battle.vo.*;
-    import com.xvm.types.cfg.*;
-    import flash.display.*;
 
     public class UI_ViewRangeCirclesEntry extends ViewRangeCirclesEntry
     {
@@ -173,10 +171,8 @@ package com.xvm.battle.minimap.entries.personal
     }
 }
 
-import com.xfw.*;
 import com.xvm.*;
 import com.xvm.battle.*;
-import com.xvm.battle.vo.*;
 import com.xvm.types.cfg.*;
 import com.xvm.battle.minimap.entries.*;
 import com.xvm.battle.minimap.entries.personal.*;

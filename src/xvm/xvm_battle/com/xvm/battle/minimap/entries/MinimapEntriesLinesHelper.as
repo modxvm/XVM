@@ -5,11 +5,9 @@
 package com.xvm.battle.minimap.entries
 {
     import com.xfw.*;
-    import com.xvm.*;
     import com.xvm.battle.*;
     import com.xvm.types.cfg.*;
     import flash.display.*;
-    import flash.geom.*;
     import net.wg.gui.battle.views.minimap.constants.*;
 
     public class MinimapEntriesLinesHelper

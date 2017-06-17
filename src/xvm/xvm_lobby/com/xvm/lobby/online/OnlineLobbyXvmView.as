@@ -11,7 +11,6 @@ package com.xvm.lobby.online
     import com.xvm.lobby.online.OnlineServers.*;
     import flash.events.*;
     import net.wg.gui.lobby.*;
-    import net.wg.gui.lobby.hangar.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
 

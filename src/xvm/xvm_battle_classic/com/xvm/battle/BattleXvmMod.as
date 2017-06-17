@@ -5,10 +5,7 @@
 package com.xvm.battle
 {
     import com.xfw.*;
-    import com.xvm.*;
-    import com.xfw.events.*;
     import com.xvm.infrastructure.*;
-    import com.xvm.battle.*;
     import com.xvm.battle.battleloading.BattleLoadingXvmView;
     import com.xvm.battle.fullStats.FullStatsXvmView;
     import com.xvm.battle.minimap.MinimapXvmView;

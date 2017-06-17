@@ -6,11 +6,10 @@ package com.xvm.battle.minimap.entries
 {
     import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.battle.*;
-    import com.xvm.battle.vo.*;
     import com.xvm.battle.events.*;
-    import com.xvm.extraFields.*;
     import com.xvm.battle.minimap.*;
+    import com.xvm.battle.vo.*;
+    import com.xvm.extraFields.*;
     import flash.events.*;
 
     public class MinimapEntriesLabelsHelper

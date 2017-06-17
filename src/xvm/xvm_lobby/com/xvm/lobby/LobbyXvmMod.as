@@ -5,8 +5,8 @@
 package com.xvm.lobby
 {
     import com.xfw.*;
-    import com.xvm.*;
     import com.xfw.infrastructure.*;
+    import com.xvm.*;
     import com.xvm.infrastructure.*;
     import com.xvm.lobby.battleresults.BattleResultsXvmView;
     import com.xvm.lobby.company.CompanyXvmView;
@@ -15,17 +15,16 @@ package com.xvm.lobby
     import com.xvm.lobby.hangar.HangarXvmView;
     import com.xvm.lobby.limits.LimitsXvmView;
     import com.xvm.lobby.loginlayout.LoginLayoutXvmView;
-    import com.xvm.lobby.online.OnlineLoginXvmView;
     import com.xvm.lobby.online.OnlineLobbyXvmView;
-    import com.xvm.lobby.ping.PingLoginXvmView;
+    import com.xvm.lobby.online.OnlineLoginXvmView;
     import com.xvm.lobby.ping.PingLobbyXvmView;
+    import com.xvm.lobby.ping.PingLoginXvmView;
     import com.xvm.lobby.profile.ProfileXvmView;
     import com.xvm.lobby.squad.SquadXvmView;
     import com.xvm.lobby.techtree.ResearchXvmView;
     import com.xvm.lobby.techtree.TechTreeXvmView;
-    import com.xvm.lobby.widgets.WidgetsLoginXvmView;
     import com.xvm.lobby.widgets.WidgetsLobbyXvmView;
-    import flash.events.*;
+    import com.xvm.lobby.widgets.WidgetsLoginXvmView;
     import net.wg.infrastructure.interfaces.*;
 
     import com.xvm.lobby.vo.VOLobbyMacrosOptions; VOLobbyMacrosOptions;

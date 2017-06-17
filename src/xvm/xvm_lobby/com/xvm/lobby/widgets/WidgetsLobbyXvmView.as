@@ -6,14 +6,9 @@ package com.xvm.lobby.widgets
 {
     import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.infrastructure.*;
-    import com.xvm.types.cfg.*;
     import flash.display.*;
-    import net.wg.gui.login.impl.*;
     import net.wg.gui.lobby.*;
-    import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.core.*;
 
     public class WidgetsLobbyXvmView extends WidgetsBaseXvmView
     {

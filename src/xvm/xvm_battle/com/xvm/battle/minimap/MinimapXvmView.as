@@ -9,12 +9,12 @@ package com.xvm.battle.minimap
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import net.wg.gui.battle.views.*;
-    import net.wg.infrastructure.events.*;
-    import net.wg.infrastructure.interfaces.*;
     import net.wg.data.constants.generated.*;
+    import net.wg.gui.battle.views.*;
     import net.wg.gui.battle.views.minimap.*;
     import net.wg.gui.battle.views.minimap.events.*;
+    import net.wg.infrastructure.events.*;
+    import net.wg.infrastructure.interfaces.*;
 
     public class MinimapXvmView extends XvmViewBase
     {

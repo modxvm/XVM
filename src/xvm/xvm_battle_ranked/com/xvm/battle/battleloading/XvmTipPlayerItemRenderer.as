@@ -5,14 +5,12 @@
 package com.xvm.battle.battleloading
 {
     import com.xfw.*;
-    import com.xvm.*;
     import flash.display.*;
     import flash.text.*;
-    import net.wg.data.constants.*;
     import net.wg.data.VO.daapi.*;
-    import net.wg.gui.battle.ranked.battleloading.renderers.*;
     import net.wg.gui.battle.battleloading.renderers.BaseRendererContainer;
     import net.wg.gui.battle.components.*;
+    import net.wg.gui.battle.ranked.battleloading.renderers.*;
     import net.wg.gui.components.icons.*;
 
     public class XvmTipPlayerItemRenderer extends TipPlayerItemRenderer implements IXvmBattleLoadingItemRenderer

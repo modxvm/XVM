@@ -5,16 +5,14 @@
 package com.xvm.lobby.contacts
 {
     import com.xfw.*;
-    import com.xfw.events.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import flash.utils.*;
     import net.wg.gui.messenger.*;
     import net.wg.gui.messenger.data.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.infrastructure.interfaces.entity.*;
-    import org.idmedia.as3commons.util.StringUtils;
+    import org.idmedia.as3commons.util.*;
 
     public class ContactsXvmView extends XvmViewBase
     {
