@@ -88,9 +88,11 @@ def _BattleReplay_stop(base, self, rewindToTime = None, delete = False):
         if self.isRecording:
             global _xvm_record_data
             if _xvm_record_data:
-                arenaInfo = simplejson.loads(self._BattleReplay__replayCtrl.getArenaInfoStr())
-                arenaInfo.update({"xvm":utils.pretty_floats(_xvm_record_data)})
-                self._BattleReplay__replayCtrl.setArenaInfoStr(simplejson.dumps(arenaInfo))
+                arenaInfoStr = self._BattleReplay__replayCtrl.getArenaInfoStr()
+                if arenaInfoStr:
+                    arenaInfo = simplejson.loads(arenaInfoStr)
+                    arenaInfo.update({"xvm":utils.pretty_floats(_xvm_record_data)})
+                    self._BattleReplay__replayCtrl.setArenaInfoStr(simplejson.dumps(arenaInfo))
                 _xvm_record_data = None
     except Exception as ex:
         err(traceback.format_exc())
