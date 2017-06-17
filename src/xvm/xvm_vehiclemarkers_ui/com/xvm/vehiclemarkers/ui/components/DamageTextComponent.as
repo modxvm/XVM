@@ -154,7 +154,7 @@ class DamageTextAnimation
         this.mc = mc;
 
         var movementDuration:Number = cfg.speed;
-        var distanceUpward:Number = mc.y - cfg.maxRange;
+        var distanceUpward:Number = mc.y - Macros.FormatNumber(cfg.maxRange, playerState, 40);
 
         timeline = new TimelineLite({onComplete:removeMovieClip});
 
