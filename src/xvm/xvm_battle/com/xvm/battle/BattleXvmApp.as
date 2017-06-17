@@ -7,7 +7,7 @@ package com.xvm.battle
     import com.xfw.*;
     import com.xvm.*;
 
-    public class BattleXvmApp extends Xvm
+    public class BattleXvmApp extends XvmAppBase
     {
         private var battleXvmMod:BattleXvmMod;
 

@@ -11,7 +11,7 @@ detect_flex
 
 #xfw.swc
 frswc="$FLEX_HOME/frameworks/libs/framework.swc"
-class="com.xvm.XvmAppStub"
+class="com.xvm.XvmAppBase"
 "$XVMBUILD_COMPC_FILEPATH" \
     -framework="$FLEX_HOME/frameworks" \
     -source-path xvm_app \

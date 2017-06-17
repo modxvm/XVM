@@ -18,7 +18,7 @@ package com.xvm
     // wg
     import com.xvm.wg.ImageXVM; ImageXVM;
 
-    internal class XvmAppStub
+    public class XvmAppBase extends Xvm
     {
         // stub
     }

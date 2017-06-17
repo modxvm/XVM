@@ -9,7 +9,7 @@ package com.xvm.lobby
     import com.xvm.lobby.online.OnlineServers.OnlineServers;
     import com.xvm.lobby.ping.PingServers.PingServers;
 
-    public class LobbyXvmApp extends Xvm
+    public class LobbyXvmApp extends XvmAppBase
     {
         public static const AS_UPDATE_BATTLE_TYPE:String = "xvm_hangar.as_update_battle_type";
 
