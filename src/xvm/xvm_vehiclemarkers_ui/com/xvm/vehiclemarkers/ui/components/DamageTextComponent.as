@@ -98,7 +98,8 @@ package com.xvm.vehiclemarkers.ui.components
                     textField.x -= (textField.width / 2.0);
                     textField.htmlText = text;
 
-                    new DamageTextAnimation(cfg, mc); // defines and starts
+                    var maxRange:Number = Macros.FormatNumber(cfg.maxRange, playerState, 40);
+                    new DamageTextAnimation(cfg, mc, maxRange); // defines and starts
                 }
             }
             catch (ex:Error)
@@ -110,6 +111,7 @@ package com.xvm.vehiclemarkers.ui.components
 }
 
 import com.xfw.*
+import com.xvm.*
 import com.greensock.*;
 import com.greensock.easing.*;
 import com.greensock.plugins.*;
@@ -149,12 +151,12 @@ class DamageTextAnimation
       * Make two movieclips?
       * Use GraphicsUtil.createShadowFilter and tween filter?
       */
-    public function DamageTextAnimation(cfg:CMarkersDamageText, mc:MovieClip)
+    public function DamageTextAnimation(cfg:CMarkersDamageText, mc:MovieClip, maxRange:Number)
     {
         this.mc = mc;
 
         var movementDuration:Number = cfg.speed;
-        var distanceUpward:Number = mc.y - Macros.FormatNumber(cfg.maxRange, playerState, 40);
+        var distanceUpward:Number = mc.y - maxRange;
 
         timeline = new TimelineLite({onComplete:removeMovieClip});
 
