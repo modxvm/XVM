@@ -1,7 +1,8 @@
 ﻿XVM-6.7.5-dev:
   [BATTLE]
-  * added macro:
-      {{battletype-key}}
+  * added macros:
+      {{battletype-key}} - current battle type table key value
+      {{premium}}, {{my-premium}} - 'premium' for premium, empty for normal vehicle
 
   [HANGAR]
   * macro {{battletype-key}} can be used in hangar

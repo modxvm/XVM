@@ -1091,6 +1091,8 @@ package com.xvm
                     pdata["level"] = function():Number { return vdata.level; }
                     // {{rlevel}}
                     pdata["rlevel"] = function():String { return Defines.ROMAN_LEVEL[vdata.level - 1]; }
+                    // {{premium}}
+                    pdata["premium"] = function():String { return vdata.premium ? "premium" : null; }
                 }
                 else
                 {
@@ -1123,9 +1125,8 @@ package com.xvm
                     pdata["level"] = vdata.level;
                     // {{rlevel}}
                     pdata["rlevel"] = Defines.ROMAN_LEVEL[vdata.level - 1];
-                    // TODO: is required?
-                    //// {{hp-max}}
-                    //pdata["hp-max"] = vdata.hpTop;
+                    // {{premium}}
+                    pdata["premium"] = vdata.premium ? "premium" : null;
                 }
             }
         }

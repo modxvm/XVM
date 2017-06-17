@@ -62,6 +62,8 @@ package com.xvm.battle
             m_globals["my-level"] = vdata.level;
             // {{my-rlevel}}
             m_globals["my-rlevel"] = Defines.ROMAN_LEVEL[vdata.level - 1];
+            // {{my-premium}}
+            m_globals["my-premium"] = vdata.premium ? "premium" : null;
 
             // {{my-clan}}
             m_globals["my-clan"] = BattleGlobalData.playerClan;
