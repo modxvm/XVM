@@ -51,10 +51,10 @@
     "squadIconOffsetXRight": 0,
     // X offset for allies player names field
     // Cмещение по оси X поля ника союзников
-    "nameFieldOffsetXLeft": 0,
+    "nameFieldOffsetXLeft": -11,
     // X offset for enemies player names field
     // Cмещение по оси X поля ника противников
-    "nameFieldOffsetXRight": -9,
+    "nameFieldOffsetXRight": -10,
     // Width of allies player names field
     // Ширина поля ника союзников
     "nameFieldWidthLeft": 200,
@@ -63,7 +63,7 @@
     "nameFieldWidthRight": 200,
     // X offset for "formatLeftVehicle" field
     // Cмещение по оси X поля названия танка союзников
-    "vehicleFieldOffsetXLeft": 8,
+    "vehicleFieldOffsetXLeft": 24,
     // X offset for "formatRightVehicle" field
     // Cмещение по оси X поля названия танка противников
     "vehicleFieldOffsetXRight": 5,
