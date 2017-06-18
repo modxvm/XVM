@@ -12,9 +12,11 @@ package com.xvm.lobby.ui.profile.components
     import com.xvm.types.stat.*;
     import flash.display.*;
     import flash.utils.*;
+    import flash.events.*;
     import net.wg.data.constants.*;
     import net.wg.data.constants.generated.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
+    import net.wg.gui.lobby.profile.pages.technique.data.*;
 
     public class Technique extends Sprite
     {
@@ -58,23 +60,11 @@ package com.xvm.lobby.ui.profile.components
             return null;
         }
 
-        public function get battlesType():String
-        {
-            var p:UI_ProfileTechniquePage = page as UI_ProfileTechniquePage;
-            if (p)
-                return p.battlesTypeXvm;
-            var w:UI_ProfileTechniqueWindow = page as UI_ProfileTechniqueWindow;
-            if (w)
-                return w.battlesTypeXvm;
-            return null;
-        }
-
         // PRIVATE FIELDS
 
         private var _disposed:Boolean = false;
         private var _selectedItemCD:Number = -1;
         private var _vdossier:VehicleDossier = null;
-        //protected var filter:FilterControl;
 
         // CTOR
 
@@ -99,6 +89,8 @@ package com.xvm.lobby.ui.profile.components
 
                 Dossier.requestAccountDossier(null, null, PROFILE_DROPDOWN_KEYS.ALL, accountDBID);
 
+                page.listComponent.addEventListener(TechniqueListComponent.SELECTED_INDEX_CHANGED, onListComponentSelectedIndexChangedHandler, false, 0, true);
+
                 // override renderers
                 page.listComponent.sortableButtonBar.itemRendererName = getQualifiedClassName(UI_ProfileSortingButton);
                 page.listComponent.techniqueList.itemRenderer = UI_TechniqueRenderer;
@@ -108,6 +100,7 @@ package com.xvm.lobby.ui.profile.components
         public function dispose():void
         {
             _disposed = true;
+            page.listComponent.removeEventListener(TechniqueListComponent.SELECTED_INDEX_CHANGED, onListComponentSelectedIndexChangedHandler);
         }
 
         public function fixInitData(param1:Object):void
@@ -140,6 +133,7 @@ package com.xvm.lobby.ui.profile.components
         public function setSelectedVehicleIntCD(itemCD:Number):void
         {
             _selectedItemCD = itemCD;
+            //Logger.add("_selectedItemCD =" + _selectedItemCD);
         }
 
         // DAAPI
@@ -157,6 +151,7 @@ package com.xvm.lobby.ui.profile.components
 
         public function applyData(data:Object):void
         {
+            //Logger.add("applyData=" + _selectedItemCD);
             page.listComponent.selectVehicleById(_selectedItemCD);
             if (_vdossier != null)
             {
@@ -217,6 +212,16 @@ package com.xvm.lobby.ui.profile.components
             Stat.instance.removeEventListener(Stat.COMPLETE_USERDATA, onStatLoaded);
 
             fixStatData();
+        }
+
+        private function onListComponentSelectedIndexChangedHandler(e:Event):void
+        {
+            var data:TechniqueListVehicleVO = page.listComponent.getSelectedItem();
+            //Logger.addObject(data, 2);
+            if (data != null)
+            {
+                _selectedItemCD = data.id;
+            }
         }
     }
 }

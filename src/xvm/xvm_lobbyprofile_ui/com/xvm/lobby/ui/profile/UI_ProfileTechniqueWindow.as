@@ -40,7 +40,7 @@ package com.xvm.lobby.ui.profile
                 // get player id from the view name.
                 var accountDBID:int = parseInt(profileWindow.as_config.name.replace("profileWindow_", ""));
 
-                technique = new TechniqueWindow(this, playerName, accountDBID)
+                technique = new Technique(this, playerName, accountDBID)
                 addChild(technique);
             }
             catch (ex:Error)
@@ -114,16 +114,6 @@ package com.xvm.lobby.ui.profile
         public function get currentDataXvm():Object
         {
             return currentData;
-        }
-
-        public function get battlesTypeXvm():String
-        {
-            return battlesType;
-        }
-
-        public function get baseDisposed():Boolean
-        {
-            return _baseDisposed;
         }
 
         public function as_responseVehicleDossierXvm(data:Object):void

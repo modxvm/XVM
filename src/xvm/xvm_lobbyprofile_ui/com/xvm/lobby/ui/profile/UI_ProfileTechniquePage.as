@@ -7,6 +7,7 @@ package com.xvm.lobby.ui.profile
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.lobby.ui.profile.components.*;
+    import net.wg.gui.lobby.profile.pages.technique.*;
     import com.xvm.types.dossier.*;
 
     public dynamic class UI_ProfileTechniquePage extends ProfileTechniquePage_UI
@@ -24,7 +25,8 @@ package com.xvm.lobby.ui.profile
             super.onPopulate();
             try
             {
-                technique = new TechniquePage(this, Xfw.cmd(XvmCommands.GET_PLAYER_NAME));
+                listComponent.addEventListener(TechniqueListComponent.DATA_CHANGED, initializeInHangarCheckBox, false, 0, true);
+                technique = new Technique(this, Xfw.cmd(XvmCommands.GET_PLAYER_NAME), 0);
                 addChild(technique);
             }
             catch (ex:Error)
@@ -35,6 +37,7 @@ package com.xvm.lobby.ui.profile
 
         override protected function onDispose():void
         {
+            listComponent.removeEventListener(TechniqueListComponent.DATA_CHANGED, initializeInHangarCheckBox);
             if (technique)
             {
                 removeChild(technique);
@@ -92,16 +95,6 @@ package com.xvm.lobby.ui.profile
             return currentData;
         }
 
-        public function get battlesTypeXvm():String
-        {
-            return battlesType;
-        }
-
-        public function get baseDisposed():Boolean
-        {
-            return _baseDisposed;
-        }
-
         public function as_responseVehicleDossierXvm(data:Object):void
         {
             if (_baseDisposed)
@@ -120,6 +113,20 @@ package com.xvm.lobby.ui.profile
             catch (ex:Error)
             {
                 Logger.err(ex);
+            }
+        }
+
+        // PRIVATE
+
+        private function initializeInHangarCheckBox():void
+        {
+            listComponent.removeEventListener(TechniqueListComponent.DATA_CHANGED, initializeInHangarCheckBox);
+            if (_baseDisposed)
+                return;
+            if (listComponent.visible)
+            {
+                checkBoxExistence.selected = Config.config.userInfo.inHangarFilterEnabled;
+                setIsInHangarSelectedS(checkBoxExistence.selected);
             }
         }
     }
