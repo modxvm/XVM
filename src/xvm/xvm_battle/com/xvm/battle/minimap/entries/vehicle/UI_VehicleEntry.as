@@ -24,6 +24,7 @@ package com.xvm.battle.minimap.entries.vehicle
 
         private var _formattedString:String = "";
         private var _labelsEnabled:Boolean;
+        private var _entryDeleted:Boolean = false;
         private var _isControlMode:Boolean = false;
 
         private var _extraFields:ExtraFieldsGroup = null;
@@ -31,7 +32,7 @@ package com.xvm.battle.minimap.entries.vehicle
 
         public function UI_VehicleEntry()
         {
-            //Logger.add("UI_VehicleEntry");
+            //Logger.add("UI_VehicleEntry.ctor()");
             super();
 
             _labelsEnabled = Config.config.minimap.labelsEnabled;
@@ -40,19 +41,28 @@ package com.xvm.battle.minimap.entries.vehicle
 
         override protected function onDispose():void
         {
-            MinimapEntriesLabelsHelper.dispose(this);
+            if (!_entryDeleted)
+            {
+                xvm_delEntry();
+            }
             super.onDispose();
         }
 
         override protected function draw():void
         {
+            if (_entryDeleted)
+            {
+                return;
+            }
+
             super.draw();
+
             if (_labelsEnabled)
             {
                 if (isInvalid(VehicleMinimapEntry.INVALID_VEHICLE_LABEL))
                 {
                     var playerState:VOPlayerState = BattleState.get(vehicleID);
-                    var isVisible:Boolean = _isControlMode || !playerState ? false : playerState.spottedStatus && playerState.spottedStatus != "neverSeen";
+                    var isVisible:Boolean = !_entryDeleted && (_isControlMode || !playerState ? false : playerState.spottedStatus && playerState.spottedStatus != "neverSeen");
                     if (visible != isVisible)
                     {
                         visible = isVisible;
@@ -70,7 +80,15 @@ package com.xvm.battle.minimap.entries.vehicle
             }
         }
 
-        public function setControlMode(value:Boolean):void
+        // DAAPI
+
+        public function xvm_delEntry():void
+        {
+            _entryDeleted = true;
+            MinimapEntriesLabelsHelper.dispose(this);
+        }
+
+        public function xvm_setControlMode(value:Boolean):void
         {
             _isControlMode = value;
             invalidate(VehicleMinimapEntry.INVALID_VEHICLE_LABEL);

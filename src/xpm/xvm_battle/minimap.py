@@ -31,13 +31,28 @@ from battle import g_battle
 
 
 #####################################################################
+# constants
+
+class XVM_ENTRY_SYMBOL_NAME(object):
+    VEHICLE = 'com.xvm.battle.minimap.entries.vehicle::UI_VehicleEntry'
+    VIEW_POINT = 'com.xvm.battle.minimap.entries.personal::UI_ViewPointEntry'
+    DEAD_POINT = 'com.xvm.battle.minimap.entries.personal::UI_DeadPointEntry'
+    VIDEO_CAMERA = 'com.xvm.battle.minimap.entries.personal::UI_VideoCameraEntry'
+    ARCADE_CAMERA = 'com.xvm.battle.minimap.entries.personal::UI_ArcadeCameraEntry'
+    STRATEGIC_CAMERA = 'com.xvm.battle.minimap.entries.personal::UI_StrategicCameraEntry'
+    VIEW_RANGE_CIRCLES = 'com.xvm.battle.minimap.entries.personal::UI_ViewRangeCirclesEntry'
+    MARK_CELL = 'com.xvm.battle.minimap.entries.personal::UI_CellFlashEntry'
+
+
+#####################################################################
 # initialization/finalization
 
 def onConfigLoaded(self, e=None):
     g_minimap.enabled = config.get('minimap/enabled', True)
-    g_minimap.labelsEnabled = config.get('minimap/labelsEnabled', True)
-    g_minimap.linesEnabled = config.get('minimap/linesEnabled', True)
-    g_minimap.circlesEnabled = config.get('minimap/circlesEnabled', True)
+    g_minimap.opt_labelsEnabled = config.get('minimap/labelsEnabled', True)
+    g_minimap.opt_linesEnabled = config.get('minimap/linesEnabled', True)
+    g_minimap.opt_circlesEnabled = config.get('minimap/circlesEnabled', True)
+    g_minimap.opt_minimapDeadSwitch = config.get('battle/minimapDeadSwitch', True)
 
 g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
 
@@ -65,60 +80,87 @@ def _MinimapComponent_dispose(base, self):
 def _MinimapComponent_addEntry(base, self, symbol, *args, **kwargs):
     if g_minimap.active:
         if symbol == ENTRY_SYMBOL_NAME.VEHICLE:
-            symbol = "com.xvm.battle.minimap.entries.vehicle::UI_VehicleEntry"
+            symbol = XVM_ENTRY_SYMBOL_NAME.VEHICLE
         elif symbol == ENTRY_SYMBOL_NAME.VIEW_POINT:
-            symbol = "com.xvm.battle.minimap.entries.personal::UI_ViewPointEntry"
+            symbol = XVM_ENTRY_SYMBOL_NAME.VIEW_POINT
         elif symbol == ENTRY_SYMBOL_NAME.DEAD_POINT:
-            symbol = "com.xvm.battle.minimap.entries.personal::UI_DeadPointEntry"
+            symbol = XVM_ENTRY_SYMBOL_NAME.DEAD_POINT
         elif symbol == ENTRY_SYMBOL_NAME.VIDEO_CAMERA:
-            symbol = "com.xvm.battle.minimap.entries.personal::UI_VideoCameraEntry"
+            symbol = XVM_ENTRY_SYMBOL_NAME.VIDEO_CAMERA
         elif symbol == ENTRY_SYMBOL_NAME.ARCADE_CAMERA:
-            symbol = "com.xvm.battle.minimap.entries.personal::UI_ArcadeCameraEntry"
+            symbol = XVM_ENTRY_SYMBOL_NAME.ARCADE_CAMERA
         elif symbol == ENTRY_SYMBOL_NAME.STRATEGIC_CAMERA:
-            symbol = "com.xvm.battle.minimap.entries.personal::UI_StrategicCameraEntry"
+            symbol = XVM_ENTRY_SYMBOL_NAME.STRATEGIC_CAMERA
         elif symbol == ENTRY_SYMBOL_NAME.VIEW_RANGE_CIRCLES:
-           symbol = "com.xvm.battle.minimap.entries.personal::UI_ViewRangeCirclesEntry"
+            symbol = XVM_ENTRY_SYMBOL_NAME.VIEW_RANGE_CIRCLES
         elif symbol == ENTRY_SYMBOL_NAME.MARK_CELL:
-            symbol = "com.xvm.battle.minimap.entries.personal::UI_CellFlashEntry"
+            symbol = XVM_ENTRY_SYMBOL_NAME.MARK_CELL
         #else:
         #    debug('add minimap entry: ' + symbol)
-    return base(self, symbol, *args, **kwargs)
+    entryID = base(self, symbol, *args, **kwargs)
+    if g_minimap.active:
+        g_minimap.addEntry(entryID, symbol)
+    return entryID
+
+@overrideMethod(MinimapComponent, 'delEntry')
+def _MinimapComponent_delEntry(base, self, entryID):
+    if g_minimap.active:
+        g_minimap.delEntry(entryID)
+    base(self, entryID)
 
 @overrideMethod(ArenaVehiclesPlugin, '_ArenaVehiclesPlugin__switchToVehicle')
 def _ArenaVehiclesPlugin__switchToVehicle(base, self, prevCtrlID):
     base(self, prevCtrlID)
-    if g_minimap.active and g_minimap.labelsEnabled:
+    if g_minimap.active and g_minimap.opt_labelsEnabled:
         if prevCtrlID != self._ctrlVehicleID:
             if prevCtrlID and prevCtrlID != self._getPlayerVehicleID() and prevCtrlID in self._entries:
-                self._invoke(self._entries[prevCtrlID].getID(), 'setControlMode', False)
+                self._invoke(self._entries[prevCtrlID].getID(), 'xvm_setControlMode', False)
             if self._ctrlVehicleID:
                 if self._ctrlVehicleID != self._getPlayerVehicleID() and self._ctrlVehicleID in self._entries:
-                    self._invoke(self._entries[self._ctrlVehicleID].getID(), 'setControlMode', True)
+                    self._invoke(self._entries[self._ctrlVehicleID].getID(), 'xvm_setControlMode', True)
                 if g_minimap.viewPointID:
-                    self._invoke(g_minimap.viewPointID, 'setVehicleID', self._ctrlVehicleID)
-
-# Disable standard features if XVM minimap is active
-
-@overrideClassMethod(ADDITIONAL_FEATURES, 'isOn')
-def _ADDITIONAL_FEATURES_isOn(base, cls, mask):
-    return False if g_minimap.active and g_minimap.labelsEnabled else base(mask)
-
-@overrideClassMethod(ADDITIONAL_FEATURES, 'isChanged')
-def _ADDITIONAL_FEATURES_isChanged(base, cls, mask):
-    return False if g_minimap.active and g_minimap.labelsEnabled else base(mask)
+                    self._invoke(g_minimap.viewPointID, 'xvm_setVehicleID', self._ctrlVehicleID)
 
 @registerEvent(PersonalEntriesPlugin, '_PersonalEntriesPlugin__updateViewPointEntry')
 def _PersonalEntriesPlugin__updateViewPointEntry(self, avatar):
    g_minimap.viewPointID = self._getViewPointID()
 
-@overrideMethod(PersonalEntriesPlugin, '_PersonalEntriesPlugin__onVehicleFeedbackReceived')
-def _PersonalEntriesPlugin__onVehicleFeedbackReceived(base, self, eventID, _, value):
-    if g_minimap.active and g_minimap.circlesEnabled:
-        VISIBILITY.MAX_RADIUS = 1000
-        base(self, eventID, _, value)
-        VISIBILITY.MAX_RADIUS = 445
-    else:
-        base(self, eventID, _, value)
+
+# Minimap dead switch
+
+@registerEvent(PostMortemControlMode, 'onMinimapClicked')
+def _PostMortemControlMode_onMinimapClicked(self, worldPos):
+    #log('_PostMortemControlMode_onMinimapClicked active=' + str(g_minimap.active))
+    if g_minimap.active and g_minimap.opt_minimapDeadSwitch:
+        try:
+            battle = getBattleApp()
+            if not battle:
+                return
+
+            if isReplay() and not IS_DEVELOPMENT:
+                return
+
+            minDistance = None
+            toID = None
+            player = BigWorld.player()
+            plugin = g_minimap.minimapComponent.getPlugin('vehicles')
+            for vehicleID, entry in plugin._entries.iteritems():
+                vData = player.arena.vehicles[vehicleID]
+                if player.team != vData['team'] or not vData['isAlive']:
+                    continue
+                matrix = entry.getMatrix()
+                if matrix is not None:
+                    pos = Math.Matrix(matrix).translation
+                    distance = Math.Vector3(worldPos - pos).length
+                    if minDistance is None or minDistance > distance:
+                        minDistance = distance
+                        toID = vehicleID
+            if toID is not None:
+                self.selectPlayer(toID)
+        except Exception as ex:
+            if IS_DEVELOPMENT:
+                err(traceback.format_exc())
+
 
 # Minimap settings
 
@@ -151,15 +193,15 @@ def _SettingsCore_getSetting(base, self, name):
         global _in_PersonalEntriesPlugin_setSettings
         if _in_PersonalEntriesPlugin_setSettings:
             if name in _LINES_SETTINGS:
-                if g_minimap.linesEnabled:
+                if g_minimap.opt_linesEnabled:
                     value = _DEFAULTS[name]
             elif name in _CIRCLES_SETTINGS:
-                if g_minimap.circlesEnabled:
+                if g_minimap.opt_circlesEnabled:
                     value = _DEFAULTS[name]
         global _in_ArenaVehiclesPlugin_setSettings
         if _in_ArenaVehiclesPlugin_setSettings:
             if name in _LABELS_SETTINGS:
-                if g_minimap.labelsEnabled:
+                if g_minimap.opt_labelsEnabled:
                     value = _DEFAULTS[name]
         #debug('getSetting: {} = {}'.format(name, value))
     return value
@@ -167,7 +209,7 @@ def _SettingsCore_getSetting(base, self, name):
 @overrideMethod(PersonalEntriesPlugin, 'start')
 def _PersonalEntriesPlugin_start(base, self):
     base(self)
-    if g_minimap.active and g_minimap.linesEnabled:
+    if g_minimap.active and g_minimap.opt_linesEnabled:
         if not self._PersonalEntriesPlugin__yawLimits:
             vehicle = BigWorld.player().arena.vehicles.get(BigWorld.player().playerVehicleID)
             staticTurretYaw = vehicle['vehicleType'].gun['staticTurretYaw']
@@ -187,12 +229,12 @@ def _PersonalEntriesPlugin_setSettings(base, self):
 @overrideMethod(PersonalEntriesPlugin, 'updateSettings')
 def _PersonalEntriesPlugin_updateSettings(base, self, diff):
     if g_minimap.active:
-        if g_minimap.linesEnabled:
+        if g_minimap.opt_linesEnabled:
             if settings_constants.GAME.SHOW_VECTOR_ON_MAP in diff:
                 diff[settings_constants.GAME.SHOW_VECTOR_ON_MAP] = _DEFAULTS[settings_constants.GAME.SHOW_VECTOR_ON_MAP]
             if settings_constants.GAME.SHOW_SECTOR_ON_MAP in diff:
                 diff[settings_constants.GAME.SHOW_SECTOR_ON_MAP] = _DEFAULTS[settings_constants.GAME.SHOW_SECTOR_ON_MAP]
-        if g_minimap.circlesEnabled:
+        if g_minimap.opt_circlesEnabled:
             if settings_constants.GAME.MINIMAP_DRAW_RANGE in diff:
                 diff[settings_constants.GAME.MINIMAP_DRAW_RANGE] = _DEFAULTS[settings_constants.GAME.MINIMAP_DRAW_RANGE]
             if settings_constants.GAME.MINIMAP_MAX_VIEW_RANGE in diff:
@@ -211,44 +253,30 @@ def _ArenaVehiclesPlugin_setSettings(base, self):
 @overrideMethod(ArenaVehiclesPlugin, 'updateSettings')
 def _ArenaVehiclesPlugin_updateSettings(base, self, diff):
     if g_minimap.active:
-        if g_minimap.labelsEnabled:
+        if g_minimap.opt_labelsEnabled:
             if settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP in diff:
                 diff[settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP] = _DEFAULTS[settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP]
     base(self, diff)
 
-# Minimap dead switch
-@registerEvent(PostMortemControlMode, 'onMinimapClicked')
-def _PostMortemControlMode_onMinimapClicked(self, worldPos):
-    #log('_PostMortemControlMode_onMinimapClicked active=' + str(g_minimap.active))
-    if g_minimap.active and config.get('battle/minimapDeadSwitch'):
-        try:
-            battle = getBattleApp()
-            if not battle:
-                return
 
-            if isReplay() and not IS_DEVELOPMENT:
-                return
+# Disable standard features if XVM minimap is active
 
-            minDistance = None
-            toID = None
-            player = BigWorld.player()
-            plugin = g_minimap.minimapComponent.getPlugin('vehicles')
-            for vehicleID, entry in plugin._entries.iteritems():
-                vData = player.arena.vehicles[vehicleID]
-                if player.team != vData['team'] or not vData['isAlive']:
-                    continue
-                matrix = entry.getMatrix()
-                if matrix is not None:
-                    pos = Math.Matrix(matrix).translation
-                    distance = Math.Vector3(worldPos - pos).length
-                    if minDistance is None or minDistance > distance:
-                        minDistance = distance
-                        toID = vehicleID
-            if toID is not None:
-                self.selectPlayer(toID)
-        except Exception as ex:
-            if IS_DEVELOPMENT:
-                err(traceback.format_exc())
+@overrideClassMethod(ADDITIONAL_FEATURES, 'isOn')
+def _ADDITIONAL_FEATURES_isOn(base, cls, mask):
+    return False if g_minimap.active and g_minimap.opt_labelsEnabled else base(mask)
+
+@overrideClassMethod(ADDITIONAL_FEATURES, 'isChanged')
+def _ADDITIONAL_FEATURES_isChanged(base, cls, mask):
+    return False if g_minimap.active and g_minimap.opt_labelsEnabled else base(mask)
+
+@overrideMethod(PersonalEntriesPlugin, '_PersonalEntriesPlugin__onVehicleFeedbackReceived')
+def _PersonalEntriesPlugin__onVehicleFeedbackReceived(base, self, eventID, _, value):
+    if g_minimap.active and g_minimap.opt_circlesEnabled:
+        VISIBILITY.MAX_RADIUS = 1000
+        base(self, eventID, _, value)
+        VISIBILITY.MAX_RADIUS = 445
+    else:
+        base(self, eventID, _, value)
 
 
 #####################################################################
@@ -260,11 +288,13 @@ class _Minimap(object):
     initialized = False
     guiType = 0
     battleType = 0
-    labelsEnabled = True
-    linesEnabled = True
-    circlesEnabled = True
+    opt_labelsEnabled = True
+    opt_linesEnabled = True
+    opt_circlesEnabled = True
+    opt_minimapDeadSwitch = True
     viewPointID = 0
     minimapComponent = None
+    entrySymbols = {}
 
     @property
     def active(self):
@@ -280,8 +310,26 @@ class _Minimap(object):
         self.guiType = BigWorld.player().arena.guiType
         self.battleType = BigWorld.player().arena.bonusType
         self.minimapComponent = minimapComponent
+        self.entrySymbols = {}
+
+    def addEntry(self, entryID, symbol):
+        #log('addEntry: ' + str(entryID))
+        self.entrySymbols[entryID] = symbol
+
+    def delEntry(self, entryID):
+        #log('delEntry: ' + str(entryID) + ' = ' + self.entrySymbols[entryID])
+        symbol = self.entrySymbols.pop(entryID)
+        if symbol in [XVM_ENTRY_SYMBOL_NAME.VEHICLE]:
+            try:
+                self.minimapComponent.invoke(entryID, 'xvm_delEntry')
+            except Exception as ex:
+                err(traceback.format_exc())
 
     def destroy(self):
+        if self.active:
+            for entryID in self.entrySymbols.keys():
+                self.delEntry(entryID)
+
         self.initialized = False
         self.minimapComponent = None
 

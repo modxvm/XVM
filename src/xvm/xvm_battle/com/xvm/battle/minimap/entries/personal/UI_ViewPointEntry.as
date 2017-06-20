@@ -154,7 +154,9 @@ package com.xvm.battle.minimap.entries.personal
             }
         }
 
-        public function setVehicleID(vehicleID:Number):void
+        // DAAPI
+
+        public function xvm_setVehicleID(vehicleID:Number):void
         {
             if (_vehicleID != vehicleID)
             {
