@@ -24,7 +24,6 @@ package com.xvm.battle.minimap.entries.vehicle
 
         private var _entryDeleted:Boolean = false;
 
-        private var _formattedString:String = "";
         private var _labelsEnabled:Boolean;
         private var _isControlMode:Boolean = false;
 
@@ -94,6 +93,11 @@ package com.xvm.battle.minimap.entries.vehicle
         public function xvm_setControlMode(value:Boolean):void
         {
             _isControlMode = value;
+            if (value == false)
+            {
+                x = MinimapEntriesLabelsHelper.viewPointEntryX;
+                y = MinimapEntriesLabelsHelper.viewPointEntryY;
+            }
             invalidate(VehicleMinimapEntry.INVALID_VEHICLE_LABEL);
         }
 

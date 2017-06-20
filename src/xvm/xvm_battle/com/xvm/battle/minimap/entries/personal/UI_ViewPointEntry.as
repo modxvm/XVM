@@ -127,7 +127,7 @@ package com.xvm.battle.minimap.entries.personal
         {
             if (_entryDeleted)
             {
-                Logger.add("WARNING: draw() on deleted VehicleEntry");
+                Logger.add("WARNING: draw() on deleted ViewPointEntry");
                 return;
             }
 

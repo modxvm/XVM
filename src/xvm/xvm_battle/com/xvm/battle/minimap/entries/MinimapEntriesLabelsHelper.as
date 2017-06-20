@@ -6,6 +6,7 @@ package com.xvm.battle.minimap.entries
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xvm.battle.*;
     import com.xvm.battle.events.*;
     import com.xvm.battle.minimap.*;
     import com.xvm.battle.vo.*;
@@ -14,6 +15,9 @@ package com.xvm.battle.minimap.entries
 
     public class MinimapEntriesLabelsHelper
     {
+        public static var viewPointEntryX:Number = 0;
+        public static var viewPointEntryY:Number = 0;
+
         public static function init(entry:IMinimapVehicleEntry):void
         {
             // Workaround: Label stays at creation point some time before first move.
@@ -40,6 +44,12 @@ package com.xvm.battle.minimap.entries
 
         public static function onEnterFrameHandler(entry:IMinimapVehicleEntry):void
         {
+            if (entry is ViewPointEntry)
+            {
+                viewPointEntryX = entry.x;
+                viewPointEntryY = entry.y;
+            }
+
             if (entry.extraFields)
             {
                 entry.extraFields.x = entry.x;
