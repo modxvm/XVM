@@ -19,6 +19,8 @@ package com.xvm.battle.minimap.entries.personal
     {
         private static const INVALID_UPDATE_XVM:int = InvalidationType.SYSTEM_FLAGS_BORDER << 10;
 
+        private var _entryDeleted:Boolean = false;
+
         private var _linesEnabled:Boolean;
 
         private var _cameraLine:Sprite = null;
@@ -54,25 +56,23 @@ package com.xvm.battle.minimap.entries.personal
 
         override protected function onDispose():void
         {
-            Xvm.removeEventListener(PlayerStateEvent.CHANGED, playerStateChanged);
-            Xvm.removeEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, update);
-            Xvm.removeEventListener(PlayerStateEvent.ON_MINIMAP_SIZE_CHANGED, updateLinesScale);
-            if (_cameraLine)
+            if (!_entryDeleted)
             {
-                removeChild(_cameraLine);
-                _cameraLine = null;
-            }
-            if (_cameraLineAlt)
-            {
-                removeChild(_cameraLineAlt);
-                _cameraLineAlt = null;
+                xvm_delEntry();
             }
             super.onDispose();
         }
 
         override protected function draw() : void
         {
+            if (_entryDeleted)
+            {
+                Logger.add("WARNING: draw() on deleted VehicleEntry");
+                return;
+            }
+
             super.draw();
+
             try
             {
                 if (isInvalid(INVALID_UPDATE_XVM))
@@ -85,6 +85,27 @@ package com.xvm.battle.minimap.entries.personal
             catch (ex:Error)
             {
                 Logger.err(ex);
+            }
+        }
+
+        // DAAPI
+
+        public function xvm_delEntry():void
+        {
+            _entryDeleted = true;
+
+            Xvm.removeEventListener(PlayerStateEvent.CHANGED, playerStateChanged);
+            Xvm.removeEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, update);
+            Xvm.removeEventListener(PlayerStateEvent.ON_MINIMAP_SIZE_CHANGED, updateLinesScale);
+            if (_cameraLine)
+            {
+                removeChild(_cameraLine);
+                _cameraLine = null;
+            }
+            if (_cameraLineAlt)
+            {
+                removeChild(_cameraLineAlt);
+                _cameraLineAlt = null;
             }
         }
 

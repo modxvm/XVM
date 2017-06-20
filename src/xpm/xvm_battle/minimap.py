@@ -42,7 +42,8 @@ class XVM_ENTRY_SYMBOL_NAME(object):
     STRATEGIC_CAMERA = 'com.xvm.battle.minimap.entries.personal::UI_StrategicCameraEntry'
     VIEW_RANGE_CIRCLES = 'com.xvm.battle.minimap.entries.personal::UI_ViewRangeCirclesEntry'
     MARK_CELL = 'com.xvm.battle.minimap.entries.personal::UI_CellFlashEntry'
-
+    DEL_ENTRY_SYMBOLS = [VEHICLE, VIEW_POINT, DEAD_POINT, VIDEO_CAMERA,
+                         ARCADE_CAMERA, STRATEGIC_CAMERA, VIEW_RANGE_CIRCLES, MARK_CELL]
 
 #####################################################################
 # initialization/finalization
@@ -319,7 +320,7 @@ class _Minimap(object):
     def delEntry(self, entryID):
         #log('delEntry: ' + str(entryID) + ' = ' + self.entrySymbols[entryID])
         symbol = self.entrySymbols.pop(entryID)
-        if symbol in [XVM_ENTRY_SYMBOL_NAME.VEHICLE]:
+        if symbol in XVM_ENTRY_SYMBOL_NAME.DEL_ENTRY_SYMBOLS:
             try:
                 self.minimapComponent.invoke(entryID, 'xvm_delEntry')
             except Exception as ex:

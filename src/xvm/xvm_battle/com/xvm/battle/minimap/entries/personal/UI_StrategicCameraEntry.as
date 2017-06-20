@@ -15,6 +15,8 @@ package com.xvm.battle.minimap.entries.personal
 
     public class UI_StrategicCameraEntry extends StrategicCameraEntry
     {
+        private var _entryDeleted:Boolean = false;
+
         private var _loader:ImageXVM = null;
         private var _aimScale:Number = 1;
         private var _previousVisible:Boolean = false;
@@ -27,14 +29,34 @@ package com.xvm.battle.minimap.entries.personal
             Xvm.addEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, update);
         }
 
+        override protected function onDispose():void
+        {
+            if (!_entryDeleted)
+            {
+                xvm_delEntry();
+            }
+            super.onDispose();
+        }
+
         override protected function configUI():void
         {
+            if (_entryDeleted)
+            {
+                Logger.add("WARNING: draw() on deleted VehicleEntry");
+                return;
+            }
+
             super.configUI();
+
             update();
         }
 
-        override protected function onDispose():void
+        // DAAPI
+
+        public function xvm_delEntry():void
         {
+            _entryDeleted = true;
+
             Xvm.removeEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, update);
             App.stage.removeEventListener(Event.ENTER_FRAME, onEnterFrame);
             if (_loader)
@@ -46,7 +68,6 @@ package com.xvm.battle.minimap.entries.personal
                 _loader.dispose();
                 _loader = null;
             }
-            super.onDispose();
         }
 
         // PRIVATE

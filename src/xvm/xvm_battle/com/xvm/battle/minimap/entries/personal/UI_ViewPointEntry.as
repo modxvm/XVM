@@ -24,6 +24,8 @@ package com.xvm.battle.minimap.entries.personal
         private static const DEFAULT_VEHICLE_ICON_HEIGHT:Number = 226;
         private static const DEFAULT_VEHICLE_ICON_SCALE:Number = 0.5;
 
+        private var _entryDeleted:Boolean = false;
+
         private var _vehicleID:Number;
 
         private var _leftYawLimit:Number = NaN;
@@ -82,44 +84,23 @@ package com.xvm.battle.minimap.entries.personal
 
         override protected function onDispose():void
         {
-            Xvm.removeEventListener(PlayerStateEvent.ON_MINIMAP_SIZE_CHANGED, updateLinesScale);
-            if (_vehicleLine)
+            if (!_entryDeleted)
             {
-                removeChild(_vehicleLine);
-                _vehicleLine = null;
+                xvm_delEntry();
             }
-            if (_vehicleLineAlt)
-            {
-                removeChild(_vehicleLineAlt);
-                _vehicleLineAlt = null;
-            }
-            if (_traverseAngle1Line)
-            {
-                removeChild(_traverseAngle1Line);
-                _traverseAngle1Line = null;
-            }
-            if (_traverseAngle1LineAlt)
-            {
-                removeChild(_traverseAngle1LineAlt);
-                _traverseAngle1LineAlt = null;
-            }
-            if (_traverseAngle2Line)
-            {
-                removeChild(_traverseAngle2Line);
-                _traverseAngle2Line = null;
-            }
-            if (_traverseAngle2LineAlt)
-            {
-                removeChild(_traverseAngle2LineAlt);
-                _traverseAngle2LineAlt = null;
-            }
-            MinimapEntriesLabelsHelper.dispose(this);
             super.onDispose();
         }
 
         override public function setYawLimit(leftYawLimit:Number, rightYawLimit:Number):void
         {
+            if (_entryDeleted)
+            {
+                Logger.add("WARNING: setYawLimit() on deleted VehicleEntry");
+                return;
+            }
+
             super.setYawLimit(leftYawLimit, rightYawLimit);
+
             _leftYawLimit = leftYawLimit;
             _rightYawLimit = rightYawLimit;
             _isLimitUpdated = true;
@@ -128,7 +109,14 @@ package com.xvm.battle.minimap.entries.personal
 
         override public function clearYawLimit():void
         {
+            if (_entryDeleted)
+            {
+                Logger.add("WARNING: crearYawLimit() on deleted VehicleEntry");
+                return;
+            }
+
             super.clearYawLimit();
+
             _leftYawLimit = NaN;
             _rightYawLimit = NaN;
             _isLimitUpdated = true;
@@ -137,7 +125,14 @@ package com.xvm.battle.minimap.entries.personal
 
         override protected function draw():void
         {
+            if (_entryDeleted)
+            {
+                Logger.add("WARNING: draw() on deleted VehicleEntry");
+                return;
+            }
+
             super.draw();
+
             try
             {
                 if (isInvalid(INVALID_UPDATE_XVM))
@@ -155,6 +150,51 @@ package com.xvm.battle.minimap.entries.personal
         }
 
         // DAAPI
+
+        public function xvm_delEntry():void
+        {
+            _entryDeleted = true;
+
+            Xvm.removeEventListener(PlayerStateEvent.ON_MINIMAP_SIZE_CHANGED, updateLinesScale);
+
+            if (_vehicleLine)
+            {
+                removeChild(_vehicleLine);
+                _vehicleLine = null;
+            }
+
+            if (_vehicleLineAlt)
+            {
+                removeChild(_vehicleLineAlt);
+                _vehicleLineAlt = null;
+            }
+
+            if (_traverseAngle1Line)
+            {
+                removeChild(_traverseAngle1Line);
+                _traverseAngle1Line = null;
+            }
+
+            if (_traverseAngle1LineAlt)
+            {
+                removeChild(_traverseAngle1LineAlt);
+                _traverseAngle1LineAlt = null;
+            }
+
+            if (_traverseAngle2Line)
+            {
+                removeChild(_traverseAngle2Line);
+                _traverseAngle2Line = null;
+            }
+
+            if (_traverseAngle2LineAlt)
+            {
+                removeChild(_traverseAngle2LineAlt);
+                _traverseAngle2LineAlt = null;
+            }
+
+            MinimapEntriesLabelsHelper.dispose(this);
+        }
 
         public function xvm_setVehicleID(vehicleID:Number):void
         {

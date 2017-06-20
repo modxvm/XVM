@@ -22,9 +22,10 @@ package com.xvm.battle.minimap.entries.vehicle
         private static const DEFAULT_VEHICLE_ICON_HEIGHT:Number = 20;
         private static const DEFAULT_VEHICLE_ICON_SCALE:Number = 0.4;
 
+        private var _entryDeleted:Boolean = false;
+
         private var _formattedString:String = "";
         private var _labelsEnabled:Boolean;
-        private var _entryDeleted:Boolean = false;
         private var _isControlMode:Boolean = false;
 
         private var _extraFields:ExtraFieldsGroup = null;
@@ -52,6 +53,7 @@ package com.xvm.battle.minimap.entries.vehicle
         {
             if (_entryDeleted)
             {
+                Logger.add("WARNING: draw() on deleted VehicleEntry");
                 return;
             }
 
@@ -62,7 +64,7 @@ package com.xvm.battle.minimap.entries.vehicle
                 if (isInvalid(VehicleMinimapEntry.INVALID_VEHICLE_LABEL))
                 {
                     var playerState:VOPlayerState = BattleState.get(vehicleID);
-                    var isVisible:Boolean = !_entryDeleted && (_isControlMode || !playerState ? false : playerState.spottedStatus && playerState.spottedStatus != "neverSeen");
+                    var isVisible:Boolean = _isControlMode || !playerState ? false : playerState.spottedStatus && playerState.spottedStatus != "neverSeen";
                     if (visible != isVisible)
                     {
                         visible = isVisible;
@@ -85,6 +87,7 @@ package com.xvm.battle.minimap.entries.vehicle
         public function xvm_delEntry():void
         {
             _entryDeleted = true;
+
             MinimapEntriesLabelsHelper.dispose(this);
         }
 

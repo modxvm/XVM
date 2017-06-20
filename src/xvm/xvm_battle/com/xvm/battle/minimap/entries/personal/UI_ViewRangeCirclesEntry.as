@@ -18,6 +18,8 @@ package com.xvm.battle.minimap.entries.personal
         public static var stereoscope_exists:Boolean;
         public static var stereoscope_enabled:Boolean;
 
+        private var _entryDeleted:Boolean = false;
+
         private var _circlesEnabled:Boolean;
 
         private var _circles:Circles;
@@ -49,21 +51,9 @@ package com.xvm.battle.minimap.entries.personal
 
         override public function dispose():void
         {
-            Xfw.removeCommandListener(XvmCommands.AS_MOVING_STATE_CHANGED, onMovingStateChanged);
-            Xfw.removeCommandListener(XvmCommands.AS_STEREOSCOPE_TOGGLED, onStereoscopeToggled);
-            Xvm.removeEventListener(PlayerStateEvent.CURRENT_VEHICLE_DESTROYED, updateCirclesVisibility);
-            Xvm.removeEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, updateCirclesVisibility);
-
-            if (_circles)
+            if (!_entryDeleted)
             {
-                _circles.dispose();
-                _circles = null;
-            }
-
-            if (_circlesAlt)
-            {
-                _circlesAlt.dispose();
-                _circlesAlt = null;
+                xvm_delEntry();
             }
 
             super.dispose();
@@ -71,6 +61,12 @@ package com.xvm.battle.minimap.entries.personal
 
         override public function as_addDrawRange(param1:Number, param2:Number, param3:Number):void
         {
+            if (_entryDeleted)
+            {
+                Logger.add("WARNING: as_addDrawRange() on deleted VehicleEntry");
+                return;
+            }
+
             if (!_circlesEnabled)
             {
                 super.as_addDrawRange(param1, param2, param3);
@@ -79,6 +75,12 @@ package com.xvm.battle.minimap.entries.personal
 
         override public function as_addDynamicViewRange(color:Number, alpha:Number, visionRadius:Number):void
         {
+            if (_entryDeleted)
+            {
+                Logger.add("WARNING: as_addDynamicViewRange() on deleted VehicleEntry");
+                return;
+            }
+
             //Logger.add("as_addDynamicViewRange: " + visionRadius);
             if (!_circlesEnabled)
             {
@@ -94,6 +96,12 @@ package com.xvm.battle.minimap.entries.personal
 
         override public function as_addMaxViewRage(param1:Number, param2:Number, param3:Number):void
         {
+            if (_entryDeleted)
+            {
+                Logger.add("WARNING: as_addMaxViewRage() on deleted VehicleEntry");
+                return;
+            }
+
             if (!_circlesEnabled)
             {
                 super.as_addMaxViewRage(param1, param2, param3);
@@ -102,6 +110,12 @@ package com.xvm.battle.minimap.entries.personal
 
         override public function as_updateDynRange(visionRadius:Number):void
         {
+            if (_entryDeleted)
+            {
+                Logger.add("WARNING: as_updateDynRange() on deleted VehicleEntry");
+                return;
+            }
+
             //Logger.add("as_updateDynRange: " + visionRadius);
             if (!_circlesEnabled)
             {
@@ -119,6 +133,30 @@ package com.xvm.battle.minimap.entries.personal
                 {
                     Logger.err(ex);
                 }
+            }
+        }
+
+        // DAAPI
+
+        public function xvm_delEntry():void
+        {
+            _entryDeleted = true;
+
+            Xfw.removeCommandListener(XvmCommands.AS_MOVING_STATE_CHANGED, onMovingStateChanged);
+            Xfw.removeCommandListener(XvmCommands.AS_STEREOSCOPE_TOGGLED, onStereoscopeToggled);
+            Xvm.removeEventListener(PlayerStateEvent.CURRENT_VEHICLE_DESTROYED, updateCirclesVisibility);
+            Xvm.removeEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, updateCirclesVisibility);
+
+            if (_circles)
+            {
+                _circles.dispose();
+                _circles = null;
+            }
+
+            if (_circlesAlt)
+            {
+                _circlesAlt.dispose();
+                _circlesAlt = null;
             }
         }
 
