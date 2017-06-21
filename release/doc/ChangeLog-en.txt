@@ -4,6 +4,9 @@
       {{battletype-key}} - current battle type table key value
       {{premium}}, {{my-premium}} - 'premium' for premium, empty for normal vehicle
 
+  [MINIMAP]
+  * added parameter "selfIconColor" - color for arrow of selected vehicle
+
   [HANGAR]
   * macro {{battletype-key}} can be used in hangar
 

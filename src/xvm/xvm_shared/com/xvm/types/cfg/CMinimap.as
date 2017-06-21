@@ -11,6 +11,7 @@ package com.xvm.types.cfg
     {
         public var enabled:*;
         public var mapBackgroundImageAlpha:*;
+        public var selfIconColor:*;
         public var selfIconAlpha:*;
         public var selfIconScale:*;
         public var iconAlpha:*;
@@ -57,6 +58,7 @@ package com.xvm.types.cfg
             //directionTriangleAlpha
             //directionLineAlpha
             //showDirectionLineAfterDeath
+            //selfIconColor
             //selfIconAlpha
             //selfIconScale
             //iconAlpha

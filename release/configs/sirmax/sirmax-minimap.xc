@@ -2,6 +2,7 @@
   "minimap": {
     //"enabled": false,
     //"mapBackgroundImageAlpha": 50,
+    //"selfIconColor": "{{player?0x0000FF|0x0000FF}}",
     //"selfIconAlpha": 70,
     //"selfIconScale": 0.5,
     //"iconAlpha": 10,

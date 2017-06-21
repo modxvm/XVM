@@ -10,6 +10,9 @@
     // Map image transparency.
     // Прозрачность изображения карты.
     "mapBackgroundImageAlpha": 100,
+    // Self icon color. White pointing arrow.
+    // Цвет своей иконки. Белая стрелка.
+    "selfIconColor": "{{player?0xFFFFFF|{{c:system}}}}",
     // Self icon transparency. White pointing arrow.
     // Прозрачность своей иконки. Белая стрелка.
     "selfIconAlpha": 75,
