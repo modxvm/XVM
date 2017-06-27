@@ -85,7 +85,7 @@ def xvm_team_strength(a, e):
 # Dynamic color
 
 @xvm.export('xvm.dynamic_color_rating', deterministic=False)
-def dynamic_color_rating(rating, value):
+def dynamic_color_rating(rating, value=None):
     return utils.dynamic_color_rating(rating, value)
 
 
