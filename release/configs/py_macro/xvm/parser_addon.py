@@ -138,7 +138,7 @@ def _parser(strHTML, macroes):
                 _macro, non = formatMacro(substr, macroes)
                 if non:
                     substr = substr.replace('{{%s' % _macro, '{{%s' % macroes[_macro], 1)
-                    for s1 in MACROS_NAME:
+                    for s1 in macroes.iterkeys():
                         if ('{{%s' % s1) in substr:
                             _macro = substr
                             break
