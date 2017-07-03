@@ -1,5 +1,6 @@
 #include "..\temp\defines\xvm_defines.iss"
 #include "..\temp\l10n_result\lang.iss"
+#include "dll\findwot\src_innosetup\findwot.iss"
 
 [Setup]
 AppCopyright    = "2017 (c) XVM team"
@@ -137,104 +138,121 @@ Type: filesandordirs; Name: "{app}\res_mods\mods\xfw"
 ;configs\xvm\py_macro
 Type: filesandordirs; Name: "{app}\res_mods\configs\xvm\py_macro\xvm\*.pyc"
 Type: filesandordirs; Name: "{app}\res_mods\configs\xvm\py_macro\*.pyc"
-Type: dirifempty; Name: "{app}\res_mods\сonfigs\xvm\py_macro\"
-Type: dirifempty; Name: "{app}\res_mods\сonfigs\xvm\"
-Type: dirifempty; Name: "{app}\res_mods\сonfigs\"
+Type: dirifempty; Name: "{app}\res_mods\configs\xvm\py_macro\"
+Type: dirifempty; Name: "{app}\res_mods\configs\xvm\"
+Type: dirifempty; Name: "{app}\res_mods\configs\"
 
 Type: filesandordirs; Name: "{app}\xvm_uninst"
 Type: files; Name: "{app}\readme-*.txt"
 
 [Code]
-procedure GetWotPreferredW(Buffer: String; Max: Integer);
-external 'GetWotPreferredW@files:findwot.dll cdecl';
-
-function GetWotPathsCount(): Integer;
-external 'GetWotPathsCount@files:findwot.dll cdecl';
-
-procedure GetWotPathsItemW(Buffer: String; Max: Integer; Index: Integer);
-external 'GetWotPathsItemW@files:findwot.dll cdecl';
 
 var
-  DirCombo: TNewComboBox;
+  WotList: TNewComboBox;
+  Buffer: String;
 
-procedure DirComboChange(Sender: TObject);
+procedure WotList_Update();
 var
-  index: Integer;
+  ClientsCount, Index, ListIndex: Integer;
+  Str: String;
 begin
-  if DirCombo.Text = ExpandConstant('{cm:browse}')  then
-  begin
-    WizardForm.DirBrowseButton.OnClick(nil);
+  ListIndex := WotList.ItemIndex;
+  ClientsCount := WOT_GetClientsCount();
 
-    for index:=0 to DirCombo.Items.Count do 
+  WotList.Items.Clear();  
+
+  if ClientsCount > 0 then
+  begin
+    for Index:=0 to ClientsCount-1 do
     begin
-      if WizardForm.DirEdit.Text=DirCombo.Items.Strings[index] then
-      begin
-        DirCombo.ItemIndex:=index;
-        exit;
+      WOT_GetClientPathW(Buffer,1024,Index);
+      Str:=Copy(Buffer,0,Pos(#0, Buffer));
+      
+      Insert(' [',Str,Pos(#0, Str));
+      
+      WOT_GetClientVersionW(Buffer,1024,Index);
+      Insert(Buffer,Str,Pos(#0, Str));
+
+      case WOT_GetClientBranch(Index) of
+         1: Insert(' Release',Str,Pos(#0, Str));
+         2: Insert(' Common Test',Str,Pos(#0, Str));
+         3: Insert(' Super Test',Str,Pos(#0, Str));
+         4: Insert(' Sandbox',Str,Pos(#0, Str));
       end;
-    end;
-    
-    if not FileExists(WizardForm.DirEdit.Text+'\WorldOfTanks.exe') then 
-    begin
-      MsgBox( ExpandConstant('{cm:wotNotFound}'), mbError, MB_OK);
-      DirCombo.ItemIndex:=-1;
-      WizardForm.DirEdit.Text:='';
-      exit;
-    end;
 
-    DirCombo.Items.Insert(DirCombo.Items.Count-1,WizardForm.DirEdit.Text)
-    DirCombo.ItemIndex := DirCombo.Items.Count-2;
+      Insert(']',Str,Pos(#0, Str));
+      WotList.Items.Add(Str);
+     end;
+  end;
 
-  end
-  else
+  WotList.Items.Add(ExpandConstant('{cm:browse}'));
+  WotList.ItemIndex := ListIndex;
+end;
+
+procedure WotList_AddClient(ClientPath: String);
+var
+  Index: Integer;
+begin
+  if Length(ClientPath) = 0 then
   begin
-    WizardForm.DirEdit.Text:=DirCombo.Text;
+    WotList.ItemIndex:=-1;
+    exit;
+  end;
+
+  Index := WOT_AddClientW(ClientPath);
+  if Index>=0 then begin
+     WotList_Update();
+     WotList.ItemIndex:=Index;
+  end else begin
+     MsgBox( ExpandConstant('{cm:wotNotFound}'), mbError, MB_OK);
+     WotList.ItemIndex:=-1;
   end;
 end;
 
+procedure WotList_OnChange(Sender: TObject);
+begin 
+  if WoTList.Text = ExpandConstant('{cm:browse}')  then
+  begin
+    WizardForm.DirBrowseButton.OnClick(nil);
+    WotList_AddClient(WizardForm.DirEdit.Text);
+  end;
+
+   WOT_GetClientPathW(Buffer,1024,WotList.ItemIndex);
+   WizardForm.DirEdit.Text:=Buffer;
+end;
 
 procedure InitializeWizard();
-var
-  WotPathsCount, Index: Integer;
-  Buffer: String;
 begin
+  SetLength(Buffer, 1024);
+
   WizardForm.DirEdit.Visible := False;
   WizardForm.DirEdit.Text := '';
   WizardForm.DirBrowseButton.Visible := False;
 
-  DirCombo := TNewComboBox.Create(WizardForm);
-  DirCombo.Parent := WizardForm.DirEdit.Parent;
-  DirCombo.Style := csDropDownList;
-  DirCombo.OnChange := @DirComboChange;
-  DirCombo.SetBounds(
+  WotList := TNewComboBox.Create(WizardForm);
+  WotList.Parent := WizardForm.DirEdit.Parent;
+  WotList.Style := csDropDownList;
+  WotList.OnChange := @WotList_OnChange;
+  WotList.SetBounds(
     WizardForm.DirEdit.Left, 
     WizardForm.DirEdit.Top,
     WizardForm.DirBrowseButton.Left + WizardForm.DirBrowseButton.Width - WizardForm.DirEdit.Left, 
     WizardForm.DirEdit.Height
   );
           
-  WotPathsCount := GetWotPathsCount();
-  if WotPathsCount > 0 then
-  begin
-    SetLength(Buffer, 512);
-    for Index:=0 to wotPathsCount-1 do
-    begin
-      GetWotPathsItemW(Buffer,512,index);
-      DirCombo.Items.Add(Buffer);
-     end;
-  end;
-
-  DirCombo.Items.Add(ExpandConstant('{cm:browse}'));
+  WotList_Update();
 end;
 
 procedure CurPageChanged(CurPage: Integer);
 begin
-	if (CurPage = wpSelectDir) then
+  if (CurPage = wpSelectDir) then
 	begin
-		if DirCombo.ItemIndex = -1 then
-			DirCombo.ItemIndex := 0;
+		if WotList.ItemIndex = -1 then 
+    begin
+      WotList.ItemIndex := 0;
+    end;
  
-		DirCombo.OnChange(nil);
+		WotList.OnChange(nil);
 	end;
 end;
 
