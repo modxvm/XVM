@@ -11,7 +11,6 @@ package com.xvm.types.cfg
         public var unknown:String;
         public var regular:String;
         public var training:String;
-        public var company:String;
         public var tournament:String;
         public var clan:String;
         public var tutorial:String;

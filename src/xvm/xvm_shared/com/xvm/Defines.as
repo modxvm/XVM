@@ -85,7 +85,6 @@ package com.xvm
         public static const BATTLE_TYPE_UNKNOWN:Number = 0;
         public static const BATTLE_TYPE_REGULAR:Number = 1;
         public static const BATTLE_TYPE_TRAINING:Number = 2;
-        public static const BATTLE_TYPE_COMPANY:Number = 3;
         public static const BATTLE_TYPE_TOURNAMENT:Number = 4;
         public static const BATTLE_TYPE_CLAN:Number = 5;
         public static const BATTLE_TYPE_TUTORIAL:Number = 6;

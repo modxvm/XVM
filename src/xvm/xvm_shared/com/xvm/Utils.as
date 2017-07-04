@@ -103,7 +103,6 @@ package com.xvm
             {
                 case 1: return 'regular';
                 case 2: return 'training';
-                case 3: return 'company';
                 case 4: return 'tournament';
                 case 5: return 'clan';
                 case 6: return 'tutorial';

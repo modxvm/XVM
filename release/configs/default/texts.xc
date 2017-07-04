@@ -57,8 +57,6 @@
       "regular": "",
       // Тренировочный бой
       "training": "training",
-      // Ротный бой
-      "company": "company",
       // Турнир
       "tournament": "tournament",
       // Клановый бой
