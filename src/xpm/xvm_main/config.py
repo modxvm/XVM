@@ -207,7 +207,6 @@ class NetworkServicesSettings(object):
         self.servicesActive = active
         self.statBattle = data.get('statBattle', True) if active else False
         self.statAwards = data.get('statAwards', True) if active else False
-        self.statCompany = data.get('statCompany', True) if active else False
         self.comments = data.get('comments', True) if active else False
         self.chance = data.get('chance', False) if active else False
         self.chanceLive = data.get('chanceLive', False) if active else False

@@ -35,10 +35,6 @@ xvm_lobbybattleloading_ui.swf <- xvm_lobbybattleloading_ui
                   + wg_lobby.swc (ext)
                   + xfw.swc (ext)
                   + xvm_lobby.swc (ext)
-xvm_lobbycompany_ui.swf <- xvm_lobbycompany_ui
-                  + wg_lobby.swc (ext)
-                  + xfw.swc (ext)
-                  + xvm_lobby.swc (ext)
 xvm_lobbycontacts_ui.swf <- xvm_lobbycontacts_ui
                   + wg_lobby.swc (ext)
                   + xfw.swc (ext)

@@ -20,7 +20,7 @@
     * Player statistics
     * Additional information in capture bar
     * Customizable minimap
-    * Extended statistics in tank company and user info windows
+    * Extended statistics in the user info windows
     * Tank info in platoon window
     * Enemy spotted status
     * Best crew auto selection

@@ -11,7 +11,6 @@ package com.xvm.types
         public var servicesActive:Boolean;
         public var statBattle:Boolean;
         public var statAwards:Boolean;
-        public var statCompany:Boolean;
         public var comments:Boolean;
         public var chance:Boolean;
         public var chanceLive:Boolean;

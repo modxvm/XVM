@@ -4,9 +4,6 @@
  */
 {
   "hangar": {
-    // true - Show XWN8 instead of XEFF in company windows
-    // true - показывать XWN8 вместо XEFF в окнах рот
-    "xwnInCompany": true,
     // hangar type: null (default), "premium", "basic"
     // тип ангара: null (по умолчанию), "premium", "basic"
     "hangarType": null,

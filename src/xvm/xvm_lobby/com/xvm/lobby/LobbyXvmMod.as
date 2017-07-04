@@ -9,7 +9,6 @@ package com.xvm.lobby
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import com.xvm.lobby.battleresults.BattleResultsXvmView;
-    import com.xvm.lobby.company.CompanyXvmView;
     import com.xvm.lobby.contacts.ContactsXvmView;
     import com.xvm.lobby.crew.CrewXvmView;
     import com.xvm.lobby.hangar.HangarXvmView;
@@ -49,7 +48,6 @@ package com.xvm.lobby
             "lobby": [ LobbyXvmView, LimitsXvmView, OnlineLobbyXvmView, PingLobbyXvmView, WidgetsLobbyXvmView ],
             "hangar": [ CrewXvmView, HangarXvmView ],
             "battleResults": [ BattleResultsXvmView ],
-            "prb_windows/companyWindow": [ CompanyXvmView ],
             "ContactsPopover": [ ContactsXvmView ],
             "profile": [ ProfileXvmView ],
             "profileWindow": [ ProfileXvmView ],

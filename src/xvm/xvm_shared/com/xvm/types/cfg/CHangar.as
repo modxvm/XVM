@@ -8,7 +8,6 @@ package com.xvm.types.cfg
 
     public dynamic class CHangar implements ICloneable
     {
-        public var xwnInCompany:*;
         public var hangarType:*;
         public var enableGoldLocker:*;
         public var enableFreeXpLocker:*;
