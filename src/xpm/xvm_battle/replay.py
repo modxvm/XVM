@@ -83,7 +83,7 @@ def fini():
     g_eventBus.removeListener(XVM_BATTLE_EVENT.XMQP_MESSAGE, onXmqpMessage)
 
 @overrideMethod(BattleReplay, 'stop')
-def _BattleReplay_stop(base, self, rewindToTime = None, delete = False):
+def _BattleReplay_stop(base, self, rewindToTime = None, delete = False, isDestroyed=False):
     try:
         if self.isRecording:
             global _xvm_record_data
@@ -97,7 +97,7 @@ def _BattleReplay_stop(base, self, rewindToTime = None, delete = False):
     except Exception as ex:
         err(traceback.format_exc())
 
-    return base(self, rewindToTime, delete)
+    return base(self, rewindToTime, delete, isDestroyed)
 
 
 # play
