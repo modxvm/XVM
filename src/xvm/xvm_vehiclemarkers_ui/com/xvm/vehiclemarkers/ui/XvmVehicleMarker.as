@@ -172,12 +172,11 @@ package com.xvm.vehiclemarkers.ui
             Xvm.swfProfilerEnd("XvmVehicleMarker.setHealth()");
         }
 
-        override public function updateState(state:String, param2:Boolean):void
+        override public function updateState(param1:String, param2:Boolean, param3:String = ""):void
         {
-            super.updateState(state, param2);
+            super.updateState(param1, param2, param3);
             invalidate(INVALIDATE_DATA);
         }
-
         override public function setSpeaking(value:Boolean):void
         {
             Xvm.swfProfilerBegin("XvmVehicleMarker.setSpeaking()");
