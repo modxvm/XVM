@@ -38,6 +38,7 @@
     {{my-blownup}}        - value 'blownup' if own vehicle's ammunition have been blown up, '' otherwise  / возвращает 'blownup', если взорван боекомплект собственной техники, иначе ''
     {{stun-duration}}     - stun duration / продолжительность оглушения
     {{crit-device}}       - damaged module or shell-shocked crew member / поврежденный модуль или контуженный член экипажа
+    {{type-shell-key}}    - TO DO / название ключа таблицы типа снаряда
 */
 
 {

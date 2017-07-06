@@ -1,4 +1,7 @@
 ﻿XVM-6.7.5-dev:
+  [DAMAGE LOG]
+  * added macro {{type-shell-key}}
+  
   [BATTLE]
   * added macros:
       {{battletype-key}} - current battle type table key value
