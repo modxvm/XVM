@@ -92,25 +92,26 @@ class _Dossier(object):
             rankCount = None
             rankSteps = None
             rankStepsTotal = None
-            vdata = vehinfo.getVehicleInfoData(vehCD)
-            if vdata['level'] == 10:
-                #log(vdata['key'])
-                #log(dossier.getRankedCurrentSeason())
+            if self.rankedController.isAvailable():
+                vdata = vehinfo.getVehicleInfoData(vehCD)
+                if vdata['level'] == 10:
+                    #log(vdata['key'])
+                    #log(dossier.getRankedCurrentSeason())
 
-                vehicle = self.itemsCache.items.getItemByCD(vehCD)
-                ranks = self.rankedController.getAllRanksChain(vehicle)
+                    vehicle = self.itemsCache.items.getItemByCD(vehCD)
+                    ranks = self.rankedController.getAllRanksChain(vehicle)
 
-                currentRank = self.rankedController.getCurrentRank(vehicle)
-                if isinstance(currentRank, VehicleRank):
-                    rankCount = currentRank.getSerialID()
+                    currentRank = self.rankedController.getCurrentRank(vehicle)
+                    if isinstance(currentRank, VehicleRank):
+                        rankCount = currentRank.getSerialID()
 
-                currentRankID = currentRank.getID()
-                nextRank = ranks[currentRankID + 1] if currentRankID < len(ranks) - 1 else currentRank
-                if isinstance(nextRank, VehicleRank):
-                    progress = nextRank.getProgress()
-                    if progress is not None:
-                        rankSteps = len(nextRank.getProgress().getAcquiredSteps())
-                        rankStepsTotal = len(nextRank.getProgress().getSteps())
+                    currentRankID = currentRank.getID()
+                    nextRank = ranks[currentRankID + 1] if currentRankID < len(ranks) - 1 else currentRank
+                    if isinstance(nextRank, VehicleRank):
+                        progress = nextRank.getProgress()
+                        if progress is not None:
+                            rankSteps = len(nextRank.getProgress().getAcquiredSteps())
+                            rankStepsTotal = len(nextRank.getProgress().getSteps())
 
             xpVehs = self.itemsCache.items.stats.vehiclesXPs
             earnedXP = xpVehs.get(vehCD, 0)
