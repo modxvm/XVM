@@ -22,6 +22,7 @@ import simplejson
 import BigWorld
 from gui.shared import event_dispatcher
 from gui.Scaleform.daapi.view.battle_results_window import BattleResultsWindow
+from gui.Scaleform.daapi.view.bootcamp.BCBattleResult import BCBattleResult
 from gui.battle_results import composer
 from gui.battle_results.components import base
 from gui.battle_results.settings import BATTLE_RESULTS_RECORD
@@ -55,6 +56,16 @@ def BattleResultsWindow_as_setDataS(base, self, data):
         #log(data['xvm_data'])
         data['xvm_data']['regionNameStr'] = data['common']['regionNameStr']
         data['common']['regionNameStr'] = simplejson.dumps(data['xvm_data'])
+        del data['xvm_data']
+    except Exception as ex:
+        err(traceback.format_exc())
+    return base(self, data)
+
+@overrideMethod(BCBattleResult, 'as_setDataS')
+def BCBattleResult_as_setDataS(base, self, data):
+    try:
+        #data['xvm_data']['regionNameStr'] = data['common']['regionNameStr']
+        #data['common']['regionNameStr'] = simplejson.dumps(data['xvm_data'])
         del data['xvm_data']
     except Exception as ex:
         err(traceback.format_exc())
