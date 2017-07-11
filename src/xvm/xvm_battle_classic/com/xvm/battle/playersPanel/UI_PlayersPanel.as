@@ -274,8 +274,8 @@ package com.xvm.battle.playersPanel
 
         private function registerPlayersPanelMacros():void
         {
-            // {{has-badges}}
-            Macros.Globals["has-badges"] = function(o:IVOMacrosOptions):* {
+            // {{hasBadges}}
+            Macros.Globals["hasBadges"] = function(o:IVOMacrosOptions):* {
                 return (o.isEnemy ? _rightHasBadges : _leftHasBadges) ? "true" : null;
             }
         }
