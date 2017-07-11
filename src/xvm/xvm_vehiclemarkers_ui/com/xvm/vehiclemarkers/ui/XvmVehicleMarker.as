@@ -177,6 +177,7 @@ package com.xvm.vehiclemarkers.ui
             super.updateState(param1, param2, param3);
             invalidate(INVALIDATE_DATA);
         }
+
         override public function setSpeaking(value:Boolean):void
         {
             Xvm.swfProfilerBegin("XvmVehicleMarker.setSpeaking()");

@@ -115,6 +115,7 @@ Legend:
 │ D │ {{pp.mode}}            │   │ X │ X │ X │   │   │   │ X │ current players panel mode (0-none, 1-small, 2-medium, 3-medium2, 4-large)
 │ D │ {{pp.widthLeft}}       │   │ X │ X │ X │   │   │   │ X │ current left players panel width
 │ D │ {{pp.widthRight}}      │   │ X │ X │ X │   │   │   │ X │ current right players panel width
+│ D │ {{hasBadges}}          │   │ X │ X │ X │   │   │   │ X │ 'true' if at least one player in the team has badge, empty if not
 └───┴────────────────────────┴───┴───┴───┴───┴───┴───┴───┴───┴──────────────────────────────────────
 
   Statistic macros

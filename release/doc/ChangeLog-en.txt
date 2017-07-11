@@ -1,4 +1,7 @@
 ﻿XVM-6.7.5-dev:
+  [GENERAL]
+  * World of Tanks 9.19.1
+
   [DAMAGE LOG]
   * added macro {{type-shell-key}}
   
@@ -6,6 +9,7 @@
   * added macros:
       {{battletype-key}} - current battle type table key value
       {{premium}}, {{my-premium}} - 'premium' for premium, empty for normal vehicle
+      {{hasBadges}} - 'true' if at least one player in the team has badge, empty if not
 
   [MINIMAP]
   * added parameter "selfIconColor" - color for arrow of selected vehicle

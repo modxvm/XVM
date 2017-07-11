@@ -278,6 +278,19 @@ package com.xvm.battle.playersPanel
 
         // PRIVATE
 
+        private function get state():int
+        {
+            switch (ui.xfw_state)
+            {
+                case PLAYERS_PANEL_STATE.MEDIUM_NO_BADGES:
+                    return PLAYERS_PANEL_STATE.MEDIUM;
+                case PLAYERS_PANEL_STATE.FULL_NO_BADGES:
+                    return PLAYERS_PANEL_STATE.FULL;
+                default:
+                    return ui.xfw_state;
+            }
+        }
+
         // XVM events handlers
 
         private function setup():void
@@ -287,7 +300,7 @@ package com.xvm.battle.playersPanel
                 //Logger.add("RankedPlayersPanelListItemProxy.onConfigLoaded()");
                 bcfg = Config.config.battle;
                 pcfg = Config.config.playersPanel;
-                mcfg = pcfg[UI_RankedPlayersPanel.PLAYERS_PANEL_STATE_NAMES[(ui.xfw_state == -1 || ui.xfw_state == PLAYERS_PANEL_STATE.HIDEN) ? PLAYERS_PANEL_STATE.LONG : ui.xfw_state]];
+                mcfg = pcfg[UI_RankedPlayersPanel.PLAYERS_PANEL_STATE_NAMES[(state == -1 || state == PLAYERS_PANEL_STATE.HIDEN) ? PLAYERS_PANEL_STATE.LONG : state]];
                 ncfg = pcfg.none;
 
                 // revert mirrored icon and X offset
@@ -375,15 +388,15 @@ package com.xvm.battle.playersPanel
 
         private function applyState():void
         {
-            //Logger.add("applyState: " + ui.xfw_state);
-            BattleState.playersPanelMode = ui.xfw_state;
-            switch (ui.xfw_state)
+            //Logger.add("applyState: " + state);
+            BattleState.playersPanelMode = state;
+            switch (state)
             {
                 case PLAYERS_PANEL_STATE.FULL:
                 case PLAYERS_PANEL_STATE.LONG:
                 case PLAYERS_PANEL_STATE.MEDIUM:
                 case PLAYERS_PANEL_STATE.SHORT:
-                    mcfg = pcfg[UI_RankedPlayersPanel.PLAYERS_PANEL_STATE_NAMES[ui.xfw_state]];
+                    mcfg = pcfg[UI_RankedPlayersPanel.PLAYERS_PANEL_STATE_NAMES[state]];
                     mopt_removeSquadIcon = Macros.FormatBooleanGlobal(mcfg.removeSquadIcon);
                     ui.fragsTF.visible = false;
                     ui.vehicleTF.visible = false;
@@ -446,8 +459,8 @@ package com.xvm.battle.playersPanel
 
         private function updateStandardFields():void
         {
-            //Logger.add("update: " + ui.xfw_state);
-            if (ui.xfw_state != -1 && ui.xfw_state != PLAYERS_PANEL_STATE.HIDEN)
+            //Logger.add("update: " + state);
+            if (state != -1 && state != PLAYERS_PANEL_STATE.HIDEN)
             {
                 if (ui.fragsTF.visible)
                 {
@@ -512,7 +525,7 @@ package com.xvm.battle.playersPanel
 
         private function updatePositions():void
         {
-            if (ui.xfw_state != -1 && ui.xfw_state != PLAYERS_PANEL_STATE.HIDEN)
+            if (state != -1 && state != PLAYERS_PANEL_STATE.HIDEN)
             {
                 if (mcfg.standardFields)
                 {
@@ -669,27 +682,27 @@ package com.xvm.battle.playersPanel
                     var maxPlayerNameTextWidth:int;
                     if (isLeftPanel)
                     {
-                        if (int(s_maxPlayerNameTextWidthsLeft[ui.xfw_state]) < int(ui.playerNameFullTF.textWidth))
+                        if (int(s_maxPlayerNameTextWidthsLeft[state]) < int(ui.playerNameFullTF.textWidth))
                         {
-                            s_maxPlayerNameTextWidthsLeft[ui.xfw_state] = int(ui.playerNameFullTF.textWidth);
+                            s_maxPlayerNameTextWidthsLeft[state] = int(ui.playerNameFullTF.textWidth);
                             App.utils.scheduler.scheduleOnNextFrame(function():void
                             {
                                 Xvm.dispatchEvent(new BooleanEvent(MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED, true));
                             });
                         }
-                        maxPlayerNameTextWidth = s_maxPlayerNameTextWidthsLeft[ui.xfw_state] + 4;
+                        maxPlayerNameTextWidth = s_maxPlayerNameTextWidthsLeft[state] + 4;
                     }
                     else
                     {
-                        if (int(s_maxPlayerNameTextWidthsRight[ui.xfw_state]) < int(ui.playerNameFullTF.textWidth))
+                        if (int(s_maxPlayerNameTextWidthsRight[state]) < int(ui.playerNameFullTF.textWidth))
                         {
-                            s_maxPlayerNameTextWidthsRight[ui.xfw_state] = int(ui.playerNameFullTF.textWidth);
+                            s_maxPlayerNameTextWidthsRight[state] = int(ui.playerNameFullTF.textWidth);
                             App.utils.scheduler.scheduleOnNextFrame(function():void
                             {
                                 Xvm.dispatchEvent(new BooleanEvent(MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED, false));
                             });
                         }
-                        maxPlayerNameTextWidth = s_maxPlayerNameTextWidthsRight[ui.xfw_state] + 4;
+                        maxPlayerNameTextWidth = s_maxPlayerNameTextWidthsRight[state] + 4;
                     }
                     var minW:int = Macros.FormatNumber(mcfg.nickMinWidth, currentPlayerState, 0);
                     var maxW:int = Macros.FormatNumber(mcfg.nickMaxWidth, currentPlayerState, 0);
@@ -841,7 +854,7 @@ package com.xvm.battle.playersPanel
         private function updateExtraFields():void
         {
             var bindToIconOffset:int = ui.vehicleIcon.x - x + (isLeftPanel || bcfg.mirroredVehicleIcons ? 0 : ICONS_AREA_WIDTH);
-            switch (ui.xfw_state)
+            switch (state)
             {
                 case -1:
                 case PLAYERS_PANEL_STATE.HIDEN:

@@ -10,6 +10,7 @@ package com.xvm.battle.playersPanel
     import com.xvm.battle.*;
     import com.xvm.battle.vo.*;
     import com.xvm.types.cfg.*;
+    import com.xvm.vo.*;
     import flash.events.*;
     import flash.utils.*;
     import net.wg.data.constants.generated.*;
@@ -56,12 +57,18 @@ package com.xvm.battle.playersPanel
         private var _isInteractive:Boolean = false;
         private var _isMouseRollOver:Boolean = false;
 
+        private var _leftHasBadges:Boolean = false;
+        private var _rightHasBadges:Boolean = false;
+
         public function UI_RankedPlayersPanel()
         {
             //Logger.add("UI_RankedPlayersPanel()");
             super();
             PlayersPanelListLeft.LINKAGE = XVM_PLAYERS_PANEL_LIST_ITEM_LEFT_LINKAGE;
             PlayersPanelListRight.LINKAGE = XVM_PLAYERS_PANEL_LIST_ITEM_RIGHT_LINKAGE;
+
+            registerPlayersPanelMacros();
+
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
 
             setup();
@@ -146,27 +153,33 @@ package com.xvm.battle.playersPanel
         override public function setVehiclesData(data:IDAAPIDataClass) : void
         {
             super.setVehiclesData(data);
+            var d:DAAPIVehiclesDataVO = DAAPIVehiclesDataVO(data);
+            updateHasBadges(d);
             if (mopt_fixedPosition)
             {
-                setFixedOrder(DAAPIVehiclesDataVO(data));
+                setFixedOrder(d);
             }
         }
 
         override public function updateVehiclesData(data:IDAAPIDataClass) : void
         {
             super.updateVehiclesData(data);
+            var d:DAAPIVehiclesDataVO = DAAPIVehiclesDataVO(data);
+            updateHasBadges(d);
             if (mopt_fixedPosition)
             {
-                setFixedOrder(DAAPIVehiclesDataVO(data));
+                setFixedOrder(d);
             }
         }
 
         override public function addVehiclesInfo(data:IDAAPIDataClass) : void
         {
             super.addVehiclesInfo(data);
+            var d:DAAPIVehiclesDataVO = DAAPIVehiclesDataVO(data);
+            updateHasBadges(d);
             if (mopt_fixedPosition)
             {
-                setFixedOrder(DAAPIVehiclesDataVO(data));
+                setFixedOrder(d);
             }
         }
 
@@ -238,6 +251,14 @@ package com.xvm.battle.playersPanel
         }
 
         // PRIVATE
+
+        private function registerPlayersPanelMacros():void
+        {
+            // {{hasBadges}}
+            Macros.Globals["hasBadges"] = function(o:IVOMacrosOptions):* {
+                return (o.isEnemy ? _rightHasBadges : _leftHasBadges) ? "true" : null;
+            }
+        }
 
         private function setup(e:Event = null):Object
         {
@@ -353,6 +374,31 @@ package com.xvm.battle.playersPanel
                     xfw_requestState(m_savedState);
                 }
                 m_savedState = PLAYERS_PANEL_STATE.NONE;
+            }
+        }
+
+        private function updateHasBadges(data:DAAPIVehiclesDataVO):void
+        {
+            _leftHasBadges = false;
+            _rightHasBadges = false;
+            var vi:DAAPIVehicleInfoVO;
+
+            for each (vi in data.leftVehicleInfos)
+            {
+                if (vi.badgeType)
+                {
+                    _leftHasBadges = true;
+                    break;
+                }
+            }
+
+            for each(vi in data.rightVehicleInfos)
+            {
+                if (vi.badgeType)
+                {
+                    _rightHasBadges = true;
+                    break;
+                }
             }
         }
 
