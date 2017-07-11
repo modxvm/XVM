@@ -58,6 +58,7 @@ import BigWorld
 from CurrentVehicle import g_currentVehicle
 from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
 from helpers import dependency
+from skeletons.gui.game_control import IBootcampController
 from skeletons.gui.shared import IItemsCache
 
 playerAvgDamage = None
@@ -66,6 +67,8 @@ playerAvgDamage = None
 @registerEvent(Hangar, '_Hangar__updateParams')
 def Hangar__updateParams(self):
     try:
+        if dependency.instance(IBootcampController).isInBootcamp():
+            return
         global playerAvgDamage
         itemsCache = dependency.instance(IItemsCache)
         playerAvgDamage = itemsCache.items.getVehicleDossier(g_currentVehicle.item.intCD).getRandomStats().getAvgDamage()

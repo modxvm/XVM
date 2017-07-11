@@ -26,6 +26,7 @@ from xvm_main.python.stats import _stat
 from constants import DAMAGE_INFO_CODES
 from helpers import dependency
 from skeletons.gui.battle_session import IBattleSessionProvider
+from skeletons.gui.game_control import IBootcampController
 import parser_addon
 
 on_fire = 0
@@ -188,6 +189,7 @@ def parser(strHTML, macroes):
 
 class Data(object):
     sessionProvider = dependency.descriptor(IBattleSessionProvider)
+    bootcampController = dependency.descriptor(IBootcampController)
 
     def __init__(self):
         def isGoldShell(n, s):
@@ -251,6 +253,8 @@ class Data(object):
                      }
 
     def updateData(self):
+        if bootcampController.isInBootcamp():
+            return
         player = BigWorld.player()
         self.data['dmgRatio'] = self.data['damage'] * 100 // self.data['maxHealth']
         attackerID = self.data['attackerID']
