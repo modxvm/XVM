@@ -253,7 +253,7 @@ class Data(object):
                      }
 
     def updateData(self):
-        if bootcampController.isInBootcamp():
+        if self.bootcampController.isInBootcamp():
             return
         player = BigWorld.player()
         self.data['dmgRatio'] = self.data['damage'] * 100 // self.data['maxHealth']
