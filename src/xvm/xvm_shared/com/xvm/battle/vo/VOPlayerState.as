@@ -189,22 +189,22 @@ package com.xvm.battle.vo
             return UserTags.isBusy(_userTags);
         }
 
-        public function get isChatBan():Boolean
+        override public function get isChatBan():Boolean
         {
             return UserTags.isChatBan(_userTags);
         }
 
-        public function get isFriend():Boolean
+        override public function get isFriend():Boolean
         {
             return UserTags.isFriend(_userTags);
         }
 
-        public function get isIgnored():Boolean
+        override public function get isIgnored():Boolean
         {
             return UserTags.isIgnored(_userTags);
         }
 
-        public function get isMuted():Boolean
+        override public function get isMuted():Boolean
         {
             return UserTags.isMuted(_userTags);
         }

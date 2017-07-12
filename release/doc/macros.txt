@@ -45,6 +45,10 @@ Legend:
 │ H │ {{alive}}          │ X │ X │ X │ X │ X │ X │   │ value 'alive' for alive, '' for dead
 │ H │ {{tk}}             │ X │ X │ X │ X │ X │   │   │ value 'tk' for teamkiller, empty for others
 │ H │ {{marksOnGun}}     │   │ X │ X │ X │ X │   │   │ marks on gun (only for spotted vehicles)
+│ H │ {{friend}}         │   │ X │ X │ X │ X │   │   │ player is in the friends list
+│ H │ {{ignored}}        │   │ X │ X │ X │ X │   │   │ player is in the ignore list
+│ H │ {{muted}}          │   │ X │ X │ X │ X │   │   │ player is muted for current battle
+│ H │ {{chatban}}        │   │ X │ X │ X │ X │   │   │ player have blocked chat by WG
 │ D │ {{spotted}}        │   │ X │ X │ X │   │   │   │ Vehicle spotted status with values from texts/spotted section
 │ D │ {{c:spotted}}      │   │ X │ X │ X │   │   │   │ Dynamic color by vehicle spotted status
 │ D │ {{a:spotted}}      │   │ X │ X │ X │   │   │   │ Dynamic transparency by vehicle spotted status

@@ -4,12 +4,16 @@
 
   [DAMAGE LOG]
   * added macro {{type-shell-key}}
-  
+
   [BATTLE]
   * added macros:
       {{battletype-key}} - current battle type table key value
       {{premium}}, {{my-premium}} - 'premium' for premium, empty for normal vehicle
       {{hasBadges}} - 'true' if at least one player in the team has badge, empty if not
+      {{friend}} - player is in the friends list
+      {{ignored}} - player is in the ignore list
+      {{muted}} - player is muted for current battle
+      {{chatban}} - player have blocked chat by WG
 
   [MINIMAP]
   * added parameter "selfIconColor" - color for arrow of selected vehicle

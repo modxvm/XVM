@@ -19,6 +19,10 @@ package com.xvm.vo
         function get isStopRespawn():Boolean;
         function get isSelected():Boolean;
         function get isCurrentPlayer():Boolean;
+        function get isFriend():Boolean;
+        function get isIgnored():Boolean;
+        function get isMuted():Boolean;
+        function get isChatBan():Boolean;
         function get isTeamKiller():Boolean;
         function get isSquadPersonal():Boolean;
         function get squadIndex():Number;

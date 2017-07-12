@@ -208,6 +208,26 @@ package com.xvm.battle
             {
                 return o && o.isSelected ? 'sel' : null;
             }
+            // {{friend}}
+            m_globals["friend"] = function(o:IVOMacrosOptions):String
+            {
+                return o && o.isFriend ? 'friend' : null;
+            }
+            // {{ignored}}
+            m_globals["ignored"] = function(o:IVOMacrosOptions):String
+            {
+                return o && o.isIgnored ? 'ignored' : null;
+            }
+            // {{muted}}
+            m_globals["muted"] = function(o:IVOMacrosOptions):String
+            {
+                return o && o.isMuted ? 'muted' : null;
+            }
+            // {{chatban}}
+            m_globals["chatban"] = function(o:IVOMacrosOptions):String
+            {
+                return o && o.isChatBan ? 'chatban' : null;
+            }
             // {{player}}
             m_globals["player"] = function(o:IVOMacrosOptions):String
             {

@@ -296,30 +296,33 @@ package com.xvm
 
         // PRIVATE
 
-        private const PART_NAME:int = 0;
-        private const PART_NORM:int = 1;
-        private const PART_FMT:int = 2;
-        private const PART_SUF:int = 3;
-        private const PART_MATCH_OP:int = 4;
-        private const PART_MATCH:int = 5;
-        private const PART_REP:int = 6;
-        private const PART_DEF:int = 7;
+        private const PART_NAME:uint     = 0;
+        private const PART_NORM:uint     = 1;
+        private const PART_FMT:uint      = 2;
+        private const PART_SUF:uint      = 3;
+        private const PART_MATCH_OP:uint = 4;
+        private const PART_MATCH:uint    = 5;
+        private const PART_REP:uint      = 6;
+        private const PART_DEF:uint      = 7;
 
-        private const CACHE_MASK_ALIVE:uint =        0x0001;
-        private const CACHE_MASK_READY:uint =        0x0002;
-        private const CACHE_MASK_SELECTED:uint =     0x0004;
-        private const CACHE_MASK_PLAYER:uint =       0x0008;
-        private const CACHE_MASK_TEAMKILLER:uint =   0x0010;
-        private const CACHE_MASK_SQUAD:uint =        0x0020;
-        private const CACHE_MASK_PERSONAL_SQ:uint =  0x0040;
-        private const CACHE_MASK_POSITION:uint =     0x0080;
-        private const CACHE_MASK_MARKSONGUN:uint =   0x0100;
-        private const CACHE_MASK_X_ENABLED:uint =    0x0200;
-        private const CACHE_MASK_X_SPOTTED:uint =    0x0400;
-        private const CACHE_MASK_X_FIRE:uint =       0x0800;
-        private const CACHE_MASK_X_OVERTURNED:uint = 0x1000;
-        private const CACHE_MASK_X_DROWNING:uint =   0x2000;
-        private const CACHE_MASK_SIZE:uint =         0x4000;
+        private const CACHE_MASK_ALIVE:uint =        1 << 0;
+        private const CACHE_MASK_READY:uint =        1 << 1;
+        private const CACHE_MASK_SELECTED:uint =     1 << 2;
+        private const CACHE_MASK_PLAYER:uint =       1 << 3;
+        private const CACHE_MASK_TEAMKILLER:uint =   1 << 4;
+        private const CACHE_MASK_SQUAD:uint =        1 << 5;
+        private const CACHE_MASK_PERSONAL_SQ:uint =  1 << 6;
+        private const CACHE_MASK_POSITION:uint =     1 << 7;
+        private const CACHE_MASK_MARKSONGUN:uint =   1 << 8;
+        private const CACHE_MASK_IS_FRIEND:uint =    1 << 9;
+        private const CACHE_MASK_IS_IGNORED:uint =   1 << 10;
+        private const CACHE_MASK_IS_MUTED:uint =     1 << 11;
+        private const CACHE_MASK_IS_CHATBAN:uint =   1 << 12;
+        private const CACHE_MASK_X_ENABLED:uint =    1 << 13;
+        private const CACHE_MASK_X_SPOTTED:uint =    1 << 14;
+        private const CACHE_MASK_X_FIRE:uint =       1 << 15;
+        private const CACHE_MASK_X_OVERTURNED:uint = 1 << 16;
+        private const CACHE_MASK_X_DROWNING:uint =   1 << 17;
 
         // special case for dynamic macros converted to static
         private const HYBRID_MACROS:Vector.<String> = new <String>["alive", "ready", "selected", "player", "tk",
@@ -341,7 +344,7 @@ package com.xvm
         private var m_globals:Object;
         private var m_players:Object; // { PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
         private var m_macros_cache_globals:Object;
-        private var m_macros_cache_players:Array; // Sparse array
+        private var m_macros_cache_players:Object;
         private var m_macros_cache_players_hybrid:Object;
         private var m_macro_parts_cache:Object;
         private var m_format_macro_fmt_suf_cache:Object;
@@ -361,7 +364,7 @@ package com.xvm
             m_globals = { };
             m_players = { };
             m_macros_cache_globals = { };
-            m_macros_cache_players = [];
+            m_macros_cache_players = { };
             m_macros_cache_players_hybrid = { };
             m_macro_parts_cache = { };
             m_format_macro_fmt_suf_cache = { };
@@ -393,6 +396,14 @@ package com.xvm
                 idx |= CACHE_MASK_POSITION;
             if (isNaN(options.marksOnGun))
                 idx |= CACHE_MASK_MARKSONGUN;
+            if (options.isFriend)
+                idx |= CACHE_MASK_IS_FRIEND;
+            if (options.isIgnored)
+                idx |= CACHE_MASK_IS_IGNORED;
+            if (options.isMuted)
+                idx |= CACHE_MASK_IS_MUTED;
+            if (options.isChatBan)
+                idx |= CACHE_MASK_IS_CHATBAN;
             var ps:VOPlayerState = options as VOPlayerState;
             if (ps != null)
             {
@@ -408,17 +419,17 @@ package com.xvm
                     idx |= CACHE_MASK_X_DROWNING;
             }
 
-            var cache:Object = m_macros_cache_players[idx];
-            if (cache == null)
+            var player_cache_array:Array = m_macros_cache_players[options.playerName];
+            if (player_cache_array == null)
             {
-                m_macros_cache_players[idx] = { };
-                cache = m_macros_cache_players[idx];
+                m_macros_cache_players[options.playerName] = [ ]; // Sparse array
+                player_cache_array = m_macros_cache_players[options.playerName];
             }
-            var player_cache:Object = cache[options.playerName];
+            var player_cache:Object = player_cache_array[idx];
             if (player_cache == null)
             {
-                cache[options.playerName] = { };
-                player_cache = cache[options.playerName];
+                player_cache_array[idx] = { };
+                player_cache = player_cache_array[idx];
             }
             return player_cache;
         }
@@ -1186,17 +1197,11 @@ package com.xvm
             pdata["comment"] = stat.xvm_contact_data ? stat.xvm_contact_data.comment : null;
             if (stat.xvm_contact_data && stat.xvm_contact_data.nick)
             {
-                // ugly hack: update static macros {{nick}} and {{name}} and clear static and hybrid cache
-                for (var idx:uint = 0; idx < CACHE_MASK_SIZE; ++idx)
-                {
-                    if (m_macros_cache_players[idx] && m_macros_cache_players[idx][pname])
-                    {
-                        m_macros_cache_players[idx][pname] = {};
-                    }
-                }
-                m_macros_cache_players_hybrid[pname] = { };
+                // update static macros {{nick}} and {{name}}
                 pdata["nick"] = stat.xvm_contact_data.nick + (pdata["clan"] || "");
                 pdata["name"] = stat.xvm_contact_data.nick;
+                // clear static cache
+                m_macros_cache_players[pname] = { };
             }
             // {{avglvl}}
             pdata["avglvl"] = stat.lvl;

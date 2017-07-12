@@ -68,6 +68,26 @@ package com.xvm.vo
             throw new IllegalOperationError("abstract method called");
         }
 
+        public function get isFriend():Boolean
+        {
+            throw new IllegalOperationError("abstract method called");
+        }
+
+        public function get isIgnored():Boolean
+        {
+            throw new IllegalOperationError("abstract method called");
+        }
+
+        public function get isMuted():Boolean
+        {
+            throw new IllegalOperationError("abstract method called");
+        }
+
+        public function get isChatBan():Boolean
+        {
+            throw new IllegalOperationError("abstract method called");
+        }
+
         public function get isSquadPersonal():Boolean
         {
             throw new IllegalOperationError("abstract method called");
