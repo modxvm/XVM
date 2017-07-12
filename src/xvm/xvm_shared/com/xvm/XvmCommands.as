@@ -11,6 +11,7 @@ package com.xvm
         public static const GET_SVC_SETTINGS:String = "xvm.get_svc_settings";
         public static const LOAD_SETTINGS:String = "xvm.load_settings";
         public static const SAVE_SETTINGS:String = "xvm.save_settings";
+        public static const IS_IN_BOOTCAMP:String = "xvm.is_in_bootcamp";
 
         public static const AS_ON_KEY_EVENT:String = "xvm.as.on_key_event";
         public static const AS_ON_TARGET_CHANGED:String = "xvm.as.on_target_changed";

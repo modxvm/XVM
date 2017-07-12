@@ -52,6 +52,7 @@ class XVM_COMMAND(object):
     LOAD_STAT_USER = "xvm.load_stat_user"
     PYTHON_MACRO = "xvm.python_macro"
     SAVE_SETTINGS = "xvm.save_settings"
+    IS_IN_BOOTCAMP = "xvm.is_in_bootcamp"
     MINIMAP_CLICK = "xvm.minimap_click"
     AS_ON_KEY_EVENT = "xvm.as.on_key_event"
     AS_ON_UPDATE_STAGE = "xvm.as.on_update_stage"
