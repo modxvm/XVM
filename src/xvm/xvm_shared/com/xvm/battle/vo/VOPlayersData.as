@@ -167,36 +167,40 @@ package com.xvm.battle.vo
             }
         }
 
-        public function updateUserTags(data:Object):void
+        public function setUserTags(data:Object/*DAAPIVehiclesUserTagsVO*/):void
         {
             var value:Object;
-            var userTags:Array;
             var playerState:VOPlayerState;
-            if (data.leftUserTags)
+            for each (value in data.leftUserTags)
             {
-                for each (value in data.leftUserTags)
+                playerState = get(value.vehicleID);
+                if (playerState)
                 {
-                    playerState = get(value.vehicleID);
-                    if (playerState)
-                    {
-                        playerState.update({
-                            userTags:value.userTags
-                        });
-                    }
+                    playerState.update({
+                        userTags:value.userTags
+                    });
                 }
             }
-            if (data.rightUserTags)
+            for each (value in data.rightUserTags)
             {
-                for each (value in data.rightUserTags)
+                playerState = get(value.vehicleID);
+                if (playerState)
                 {
-                    playerState = get(value.vehicleID);
-                    if (playerState)
-                    {
-                        playerState.update({
-                            userTags:value.userTags
-                        });
-                    }
+                    playerState.update({
+                        userTags:value.userTags
+                    });
                 }
+            }
+        }
+
+        public function updateUserTags(data:Object/*DAAPIVehicleUserTagsVO*/):void
+        {
+            var playerState:VOPlayerState = get(data.vehicleID);
+            if (playerState)
+            {
+                playerState.update({
+                    userTags:data.userTags
+                });
             }
         }
 

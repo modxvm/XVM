@@ -386,7 +386,15 @@ package com.xvm.battle
         public function setUserTags(data:Object):void
         {
             //Logger.addObject(data, 2, '[BattleState] setUserTags');
-            updateUserTags(data);
+            try
+            {
+                _playersDataVO.setUserTags(data);
+                invalidate(InvalidationType.STATE);
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         public function updateUserTags(data:Object):void
