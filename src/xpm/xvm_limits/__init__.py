@@ -76,7 +76,7 @@ MainView_handler = None
 # initialization/finalization
 
 def start():
-    g_eventBus.addListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
+    g_eventBus.addListener(XFW_COMMAND.XFW_CMD, onXfwCommand)
 
 BigWorld.callback(0, start)
 
@@ -92,7 +92,7 @@ g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
 
 @registerEvent(game, 'fini')
 def fini():
-    g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
+    g_eventBus.removeListener(XFW_COMMAND.XFW_CMD, onXfwCommand)
     g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
 
 

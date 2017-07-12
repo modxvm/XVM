@@ -131,7 +131,7 @@ def DetailedStatisticsUtils_getStatistics(base, targetData, isCurrentuser, layou
                     color = utils.getDynamicColorValue(consts.DYNAMIC_VALUE_TYPE.X, x)
                     xStr = 'XX' if x == 100 else ('0' if x < 10 else '') + str(x)
                     data = '<font color="#{}" size="12">({} {}%)</font>  <font color="{}">{}</font>'.format(
-                        XFWCOLORS.UICOLOR_LABEL, l10n('better than'), ref['xte_sup'], color, xStr)
+                        XFW_COLORS.UICOLOR_LABEL, l10n('better than'), ref['xte_sup'], color, xStr)
                     #log("xte={} color={}".format(xStr, color))
             res[0]['data'].insert(0, {
                 'label': 'xTE',
@@ -147,7 +147,7 @@ def DetailedStatisticsUtils_getStatistics(base, targetData, isCurrentuser, layou
                 if x >= 0:
                     color = utils.getDynamicColorValue(consts.DYNAMIC_VALUE_TYPE.X, x)
                     item['data'] = '<font color="#{}" size="12">({} {}%)</font>  <font color="{}">{}</font>'.format(
-                        XFWCOLORS.UICOLOR_LABEL, l10n('better than'), sup, color, item['data'])
+                        XFW_COLORS.UICOLOR_LABEL, l10n('better than'), sup, color, item['data'])
 
         except:
             err(traceback.format_exc())

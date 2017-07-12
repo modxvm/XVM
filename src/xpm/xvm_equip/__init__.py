@@ -28,7 +28,6 @@ from gui.shared.utils.requesters import REQ_CRITERIA
 from gui.Scaleform.daapi.view.lobby.hangar.AmmunitionPanel import AmmunitionPanel
 from gui.Scaleform.daapi.view.lobby.hangar.TmenXpPanel import TmenXpPanel
 from helpers import dependency
-from skeletons.gui.game_control import IBootcampController
 from skeletons.gui.shared import IItemsCache
 
 from xfw import *
@@ -98,7 +97,7 @@ def AmmunitionPanel_as_setDataS(self, data):
     try:
         if not player_name:
             return
-        if dependency.instance(IBootcampController).isInBootcamp():
+        if isInBootcamp():
             return
         global equip_settings
         veh_name = g_currentVehicle.item.name
@@ -125,7 +124,7 @@ def TmenXpPanel_onVehicleChange(*args, **kwargs):
     try:
         if not player_name:
             return
-        if dependency.instance(IBootcampController).isInBootcamp():
+        if isInBootcamp():
             return
         global last_vehicles_id_arr, equip_settings
         if last_vehicles_id_arr and last_vehicles_id_arr[-1] == g_currentVehicle.item.intCD:

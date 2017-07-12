@@ -44,9 +44,9 @@ import xmqp_events
 # initialization/finalization
 
 def start():
-    g_eventBus.addListener(XFWCOMMAND.XFW_CMD, g_battle.onXfwCommand)
-    g_eventBus.addListener(events.AppLifeCycleEvent.INITIALIZED, g_battle.onAppInitialized)
-    g_eventBus.addListener(events.AppLifeCycleEvent.DESTROYED, g_battle.onAppDestroyed)
+    g_eventBus.addListener(XFW_COMMAND.XFW_CMD, g_battle.onXfwCommand)
+    g_eventBus.addListener(XFW_EVENT.APP_INITIALIZED, g_battle.onAppInitialized)
+    g_eventBus.addListener(XFW_EVENT.APP_DESTROYED, g_battle.onAppDestroyed)
 
 BigWorld.callback(0, start)
 
@@ -55,9 +55,9 @@ g_eventBus.addListener(XVM_BATTLE_EVENT.XMQP_MESSAGE, xmqp_events.onXmqpMessage)
 
 @registerEvent(game, 'fini')
 def fini():
-    g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, g_battle.onXfwCommand)
-    g_eventBus.removeListener(events.AppLifeCycleEvent.INITIALIZED, g_battle.onAppInitialized)
-    g_eventBus.removeListener(events.AppLifeCycleEvent.DESTROYED, g_battle.onAppDestroyed)
+    g_eventBus.removeListener(XFW_COMMAND.XFW_CMD, g_battle.onXfwCommand)
+    g_eventBus.removeListener(XFW_EVENT.APP_INITIALIZED, g_battle.onAppInitialized)
+    g_eventBus.removeListener(XFW_EVENT.APP_DESTROYED, g_battle.onAppDestroyed)
     g_eventBus.removeListener(XVM_BATTLE_EVENT.XMQP_CONNECTED, xmqp_events.onXmqpConnected)
     g_eventBus.removeListener(XVM_BATTLE_EVENT.XMQP_MESSAGE, xmqp_events.onXmqpMessage)
 
@@ -211,23 +211,21 @@ class Battle(object):
         #log('onAppInitialized: ' + str(event.ns))
         if event.ns == APP_NAME_SPACE.SF_BATTLE:
             self.xvm_battle_swf_initialized = False
-        app = g_appLoader.getApp(event.ns)
-        if app is not None and app.loaderManager is not None:
-            app.loaderManager.onViewLoaded += self.onViewLoaded
+            app = g_appLoader.getApp(event.ns)
+            if app is not None and app.loaderManager is not None:
+                app.loaderManager.onViewLoaded += self.onViewLoaded
 
     def onAppDestroyed(self, event):
         #log('onAppDestroyed: ' + str(event.ns))
         if event.ns == APP_NAME_SPACE.SF_BATTLE:
             self.xvm_battle_swf_initialized = False
             self.battle_page = None
-        app = g_appLoader.getApp(event.ns)
-        if app is not None and app.loaderManager is not None:
-            app.loaderManager.onViewLoaded -= self.onViewLoaded
+            app = g_appLoader.getApp(event.ns)
+            if app is not None and app.loaderManager is not None:
+                app.loaderManager.onViewLoaded -= self.onViewLoaded
 
     def onViewLoaded(self, view=None):
-        if not view:
-            return
-        if view.uniqueName in [VIEW_ALIAS.CLASSIC_BATTLE_PAGE, VIEW_ALIAS.RANKED_BATTLE_PAGE]:
+        if view and view.uniqueName in [VIEW_ALIAS.CLASSIC_BATTLE_PAGE, VIEW_ALIAS.RANKED_BATTLE_PAGE]:
             self.battle_page = weakref.proxy(view)
 
     def onStartBattle(self):

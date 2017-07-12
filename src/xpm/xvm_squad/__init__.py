@@ -54,14 +54,14 @@ WARN_SQUAD_BATTLETIER_DIFFERENCE = 3 # warn at this difference and above
 # initialization/finalization
 
 def start():
-    g_eventBus.addListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
+    g_eventBus.addListener(XFW_COMMAND.XFW_CMD, onXfwCommand)
 
 BigWorld.callback(0, start)
 
 
 @registerEvent(game, 'fini')
 def fini():
-    g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
+    g_eventBus.removeListener(XFW_COMMAND.XFW_CMD, onXfwCommand)
 
 
 #####################################################################

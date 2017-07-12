@@ -11,8 +11,6 @@ from gui.app_loader import g_appLoader
 from gui.app_loader.settings import APP_NAME_SPACE, GUI_GLOBAL_SPACE_ID
 from gui.shared import g_eventBus, events
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
-from helpers import dependency
-from skeletons.gui.game_control import IBootcampController
 
 from xfw import *
 
@@ -79,7 +77,7 @@ def l10n(text):
     return utils.fixImgTag(lang_data.get(text, text))
 
 class Xvm(object):
-    bootcampController = dependency.descriptor(IBootcampController)
+    _initialized_apps = {}
 
     def __init__(self):
         self.xvmServicesInitialized = False
@@ -116,7 +114,12 @@ class Xvm(object):
     # state handler
 
     def onAppInitialized(self, event):
+        if self._initialized_apps.get(event.ns, None) is not None:
+            return
+        self._initialized_apps[event.ns] = True
+
         trace('onAppInitialized: {}'.format(event.ns))
+
         app = g_appLoader.getApp(event.ns)
         if app is not None and app.loaderManager is not None:
             app.loaderManager.onViewLoaded += self.onViewLoaded
@@ -126,6 +129,7 @@ class Xvm(object):
 
     def onAppDestroyed(self, event):
         trace('onAppDestroyed: {}'.format(event.ns))
+        del self._initialized_apps[event.ns]
         if event.ns == APP_NAME_SPACE.SF_LOBBY:
             self.hangarDispose()
         app = g_appLoader.getApp(event.ns)
@@ -258,7 +262,7 @@ class Xvm(object):
                 return (None, True)
 
             if cmd == XVM_COMMAND.IS_IN_BOOTCAMP:
-                return (self.bootcampController.isInBootcamp(), True)
+                return (isInBootcamp(), True)
 
             # battle
 

@@ -103,5 +103,5 @@ def ContactTooltipData_getDisplayableData(base, self, dbID, defaultName):
         #if result['xvm_contact_data']['nick']: # commented for use original nick in tooltip
         #    result['userProps']['userName'] = result['xvm_contact_data']['nick']
         if result['xvm_contact_data']['comment']:
-            result['note'] = "<font color='#%s'>%s</font>"  % (XFWCOLORS.UICOLOR_LABEL, l10n(result['xvm_contact_data']['comment']))
+            result['note'] = "<font color='#%s'>%s</font>"  % (XFW_COLORS.UICOLOR_LABEL, l10n(result['xvm_contact_data']['comment']))
     return result
