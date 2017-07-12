@@ -144,12 +144,12 @@ def _parser(strHTML, macroes):
                             break
                     else:
                         i += 1
-                        _macro = '<dl%s>' % str(i)
+                        _macro = '@dl%s@' % str(i)
                         notMacroesDL[_macro] = substr
                 break
         else:
             i += 1
-            _macro = '<dl%s>' % str(i)
+            _macro = '@dl%s@' % str(i)
             notMacroesDL[_macro] = substr
         strHTML = '%s%s%s' % (strHTML[0:start], _macro, strHTML[end:])
     b = (i > 0)
