@@ -51,7 +51,7 @@ def formatMacro(macro, macroes):
     for s in ('>=', '<=', '!=', '==', '=', '<', '>'):
         if s in _macro:
             _macro, _operator, _math = _macro.partition(s)
-            if '<dl' in _math:
+            if '@dl' in _math:
                 return _macro, True
             break
     _macro, _, fm['suf'] = _macro.partition('~')
