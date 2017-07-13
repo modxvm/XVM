@@ -44,14 +44,20 @@ def _set_canvas_visible_true(self):
     self.movie.visible = True
 
 #####################################################################
-# Disable bootcamp button
+# Restart client without mods for bootcamp mode
 
 from gui.Scaleform.daapi.view.lobby.LobbyMenu import LobbyMenu
-
-@overrideMethod(LobbyMenu,'_populate')
-def LobbyMenu__populate(base, self):
-    base(self)
+@overrideMethod(LobbyMenu,'bootcampClick')
+def LobbyMenu_bootcampClick(base, self): 
     if not self.bootcamp.isInBootcamp():
-        self.as_showBootcampButtonS(False)
+        from gui.Scaleform.daapi.view.dialogs import SimpleDialogMeta, I18nConfirmDialogButtons
+        from gui.DialogsInterface import showDialog
+        from xvm_main.python.xvm import l10n
+        showDialog(SimpleDialogMeta(l10n("bootcamp_workaround_title"), l10n("bootcamp_workaround_message"), I18nConfirmDialogButtons()), LobbyMenu_bootcampClick_dialogAction)
+
+def LobbyMenu_bootcampClick_dialogAction(result):
+    if result:
+        from xfw.mutex import restart_without_mods
+        restart_without_mods()
 
 #####################################################################
