@@ -20,18 +20,18 @@
         "message": " • WoT 9.19.1\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "ASIA": {
-        "ver": "6.8.0",
-        "wot": "0.9.19.1",
-        "message": " • WoT 9.19.1\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "6.7.4.1",
+        "wot": "0.9.19.0.2",
+        "message": " • Bugs fixed\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "CN": {
-        "ver": "6.8.0",
-        "wot": "0.9.19.1",
-        "message": " • WoT 9.19.1\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "6.7.4.1",
+        "wot": "0.9.19.0.2",
+        "message": " • Bugs fixed\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "CT":  {
-        "ver": "6.8.0",
-        "wot": "0.9.19.1",
-        "message": " • WoT 9.19.1\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "6.7.4.1",
+        "wot": "0.9.19.0.2",
+        "message": " • Bugs fixed\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     }
 }

@@ -1,4 +1,9 @@
-﻿XVM-6.8.0:
+﻿XVM-6.8.1-dev:
+  [KNOWN ISSUES]
+  * bootcamp does not work
+  * crash to desktop on battle loading if user OS is Microsoft Windows XP.
+
+XVM-6.8.0:
   [KNOWN ISSUES]
   * bootcamp does not work
   * crash to desktop on battle loading if user OS is Microsoft Windows XP.
