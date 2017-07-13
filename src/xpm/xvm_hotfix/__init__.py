@@ -44,3 +44,14 @@ def _set_canvas_visible_true(self):
     self.movie.visible = True
 
 #####################################################################
+# Disable bootcamp button
+
+from gui.Scaleform.daapi.view.lobby.LobbyMenu import LobbyMenu
+
+@overrideMethod(LobbyMenu,'_populate')
+def LobbyMenu__populate(base, self):
+    base(self)
+    if not self.bootcamp.isInBootcamp():
+        self.as_showBootcampButtonS(False)
+
+#####################################################################
