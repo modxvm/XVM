@@ -1,6 +1,12 @@
-﻿XVM-6.7.5-dev:
+﻿XVM-6.8.0-dev:
+  [KNOWN ISSUES]
+  * crash to desktop on battle loading if user OS is Microsoft Windows XP.
+  
   [GENERAL]
   * World of Tanks 9.19.1
+
+  [XFW]
+  * Implemented support for python debuggers based on PyDebugAttach library (for example, Microsoft PTVS)
 
   [DAMAGE LOG]
   * added macro {{type-shell-key}}
@@ -26,6 +32,9 @@
       {{v.rankCount}} - vehicle rank achieved in the rank battle
       {{v.rankSteps}} - steps completed to next vehicle rank
       {{v.rankStepsTotal}} - total steps count to next vehicle rank
+
+  [INSTALLER]
+  * Improved WoT client detection and path selection
 
   [MISC]
   * removed company mode functions (due to removal from the client)
