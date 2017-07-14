@@ -91,7 +91,7 @@ package com.xvm.lobby.ui.tankcarousel
         {
             if (cfg.fields.infoImg.enabled == false)
             {
-                value.infoImgSrc = null;
+                value.infoImgSrc = "";
             }
         }
 
