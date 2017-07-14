@@ -153,6 +153,7 @@ copy_files()
     wget --quiet --output-document=l10n.zip "$XVMBUILD_L10N_URL"
     unzip -o l10n.zip >/dev/null
     rm l10n.zip ru.xc
+    rm -f en.xc
     cd ..
     mv temp/* ./
     rm -rf temp/
