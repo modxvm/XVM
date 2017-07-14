@@ -1,5 +1,5 @@
 ﻿/**
- * Parameters for the alternative view of the Battle Loading screen.
+ * Parameters of the alternative view of the Battle Loading screen.
  * Параметры альтернативного представления экрана загрузки боя.
  */
 {
