@@ -1,6 +1,6 @@
 ﻿/**
- * Parameters of the Battle Loading screen.
- * Параметры экрана загрузки боя.
+ * Parameters of the alternative Battle Loading screen.
+ * Параметры альтернативного экрана загрузки боя.
  */
 {
   "templates": {
