@@ -60,4 +60,10 @@ def LobbyMenu_bootcampClick_dialogAction(result):
         from xfw.mutex import restart_without_mods
         restart_without_mods()
 
+from xvm_main.python.xvm import Xvm
+@registerEvent(Xvm, 'hangarInit')
+def onHangarInit(self):
+    if self.bootcampController.isInBootcamp():
+        self.bootcampController.stopBootcamp(False)
+
 #####################################################################
