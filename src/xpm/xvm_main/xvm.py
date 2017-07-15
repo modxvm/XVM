@@ -129,7 +129,8 @@ class Xvm(object):
 
     def onAppDestroyed(self, event):
         trace('onAppDestroyed: {}'.format(event.ctx.ns))
-        del self._initialized_apps[event.ctx.ns]
+        if event.ctx.ns in self._initialized_apps:
+            del self._initialized_apps[event.ctx.ns]
         if event.ctx.ns == APP_NAME_SPACE.SF_LOBBY:
             self.hangarDispose()
         app = g_appLoader.getApp(event.ctx.ns)
