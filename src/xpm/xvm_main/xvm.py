@@ -114,25 +114,25 @@ class Xvm(object):
     # state handler
 
     def onAppInitialized(self, event):
-        if self._initialized_apps.get(event.ns, None) is not None:
+        if self._initialized_apps.get(event.ctx.ns, None) is not None:
             return
-        self._initialized_apps[event.ns] = True
+        self._initialized_apps[event.ctx.ns] = True
 
-        trace('onAppInitialized: {}'.format(event.ns))
+        trace('onAppInitialized: {}'.format(event.ctx.ns))
 
-        app = g_appLoader.getApp(event.ns)
+        app = g_appLoader.getApp(event.ctx.ns)
         if app is not None and app.loaderManager is not None:
             app.loaderManager.onViewLoaded += self.onViewLoaded
         # initialize XVM services if game restarted after crash or in replay
-        if event.ns == APP_NAME_SPACE.SF_BATTLE:
+        if event.ctx.ns == APP_NAME_SPACE.SF_BATTLE:
             self.initializeXvmServices()
 
     def onAppDestroyed(self, event):
-        trace('onAppDestroyed: {}'.format(event.ns))
-        del self._initialized_apps[event.ns]
-        if event.ns == APP_NAME_SPACE.SF_LOBBY:
+        trace('onAppDestroyed: {}'.format(event.ctx.ns))
+        del self._initialized_apps[event.ctx.ns]
+        if event.ctx.ns == APP_NAME_SPACE.SF_LOBBY:
             self.hangarDispose()
-        app = g_appLoader.getApp(event.ns)
+        app = g_appLoader.getApp(event.ctx.ns)
         if app is not None and app.loaderManager is not None:
             app.loaderManager.onViewLoaded -= self.onViewLoaded
 

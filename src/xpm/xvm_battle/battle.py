@@ -208,19 +208,19 @@ class Battle(object):
     sessionProvider = dependency.descriptor(IBattleSessionProvider)
 
     def onAppInitialized(self, event):
-        #log('onAppInitialized: ' + str(event.ns))
-        if event.ns == APP_NAME_SPACE.SF_BATTLE:
+        #log('onAppInitialized: ' + str(event.ctx.ns))
+        if event.ctx.ns == APP_NAME_SPACE.SF_BATTLE:
             self.xvm_battle_swf_initialized = False
-            app = g_appLoader.getApp(event.ns)
+            app = g_appLoader.getApp(event.ctx.ns)
             if app is not None and app.loaderManager is not None:
                 app.loaderManager.onViewLoaded += self.onViewLoaded
 
     def onAppDestroyed(self, event):
-        #log('onAppDestroyed: ' + str(event.ns))
-        if event.ns == APP_NAME_SPACE.SF_BATTLE:
+        #log('onAppDestroyed: ' + str(event.ctx.ns))
+        if event.ctx.ns == APP_NAME_SPACE.SF_BATTLE:
             self.xvm_battle_swf_initialized = False
             self.battle_page = None
-            app = g_appLoader.getApp(event.ns)
+            app = g_appLoader.getApp(event.ctx.ns)
             if app is not None and app.loaderManager is not None:
                 app.loaderManager.onViewLoaded -= self.onViewLoaded
 
