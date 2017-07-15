@@ -60,13 +60,6 @@ HIT_EFFECT_CODES = {
     5: 'critical_hit'
 }
 
-MACROS_NAME = ['number', 'critical-hit', 'vehicle', 'name', 'vtype', 'c:costShell', 'costShell', 'comp-name', 'clan',
-               'dmg-kind', 'c:dmg-kind', 'c:vtype', 'type-shell', 'dmg', 'reloadGun', 'c:team-dmg', 'c:hit-effects',
-               'level', 'clanicon', 'clannb', 'marksOnGun', 'squad-num', 'dmg-ratio', 'hit-effects', 'c:type-shell',
-               'splash-hit', 'team-dmg', 'my-alive', 'gun-caliber', 'wn8', 'xwn8', 'wn6', 'xwn6', 'eff', 'xeff', 'wgr',
-               'xwgr', 'xte', 'c:wn8', 'c:xwn8', 'c:wn6', 'c:xwn6', 'c:eff', 'c:xeff', 'c:wgr', 'c:xwgr', 'c:xte',
-               'fire-duration', 'diff-masses', 'nation', 'my-blownup', 'r', 'c:r', 'stun-duration', 'crit-device',
-               'type-shell-key']
 
 RATINGS = {
     'xvm_wgr': {'name': 'xwgr', 'size': 2},
@@ -81,32 +74,32 @@ RATINGS = {
     'basic_xte': {'name': 'xte', 'size': 2}
 }
 
-DEVICES_TANKMAN = {76: 'engine_crit',
-                   77: 'ammo_bay_crit',
-                   78: 'fuel_tank_crit',
-                   79: 'radio_crit',
-                   80: 'left_track_crit',
-                   81: 'right_track_crit',
-                   82: 'gun_crit',
-                   83: 'turret_rotator_crit',
-                   84: 'surveying_device_crit',
-                   85: 'commander',
-                   86: 'driver',
-                   87: 'radioman',
-                   88: 'radioman',
-                   89: 'gunner',
-                   90: 'gunner',
-                   91: 'loader',
-                   92: 'loader',
-                   176: 'engine_destr',
-                   177: 'ammo_bay_destr',
-                   178: 'fuel_tank_destr',
-                   179: 'radio_destr',
-                   180: 'left_track_destr',
-                   181: 'right_track_destr',
-                   182: 'gun_destr',
-                   183: 'turret_rotator_destr',
-                   184: 'surveying_device_destr'
+DEVICES_TANKMAN = {'engineHealth': 'engine_crit',
+                   'ammoBayHealth': 'ammo_bay_crit',
+                   'fuelTankHealth': 'fuel_tank_crit',
+                   'radioHealth': 'radio_crit',
+                   'leftTrackHealth': 'left_track_crit',
+                   'rightTrackHealth': 'right_track_crit',
+                   'gunHealth': 'gun_crit',
+                   'turretRotatorHealth': 'turret_rotator_crit',
+                   'surveyingDeviceHealth': 'surveying_device_crit',
+                   'commanderHealth': 'commander',
+                   'driverHealth': 'driver',
+                   'radioman1Health': 'radioman',
+                   'radioman2Health': 'radioman',
+                   'gunner1Health': 'gunner',
+                   'gunner2Health': 'gunner',
+                   'loader1Health': 'loader',
+                   'loader2Health': 'loader',
+                   'engineHealth_destr': 'engine_destr',
+                   'ammoBayHealth_destr': 'ammo_bay_destr',
+                   'fuelTankHealth_destr': 'fuel_tank_destr',
+                   'radioHealth_destr': 'radio_destr',
+                   'leftTrackHealth_destr': 'left_track_destr',
+                   'rightTrackHealth_destr': 'right_track_destr',
+                   'gunHealth_destr': 'gun_destr',
+                   'turretRotatorHealth_destr': 'turret_rotator_destr',
+                   'surveyingDeviceHealth_destr': 'surveying_device_destr'
                    }
 
 SECTION_LOG = 'damageLog/log/'
@@ -217,7 +210,6 @@ class Data(object):
         self.initial()
 
     def initial(self):
-        self.isReplay = False
         self.data = {'isAlive': True,
                      'isDamage': False,
                      'attackReasonID': 0,
@@ -436,10 +428,11 @@ class Data(object):
             'compName': 'unknown'
         }
         damageCode = DAMAGE_INFO_CODES[damageIndex]
+        extra = player.vehicleTypeDescriptor.extras[extraIndex]
         if damageCode in ('DEVICE_CRITICAL_AT_RAMMING', 'DEVICE_DESTROYED_AT_RAMMING'):
             self.data['criticalHit'] = True
-            if extraIndex in DEVICES_TANKMAN:
-                self.data['critDevice'] = DEVICES_TANKMAN[extraIndex] if damageCode == 'DEVICE_CRITICAL_AT_RAMMING' else DEVICES_TANKMAN[extraIndex + 100]
+            if extra.name in DEVICES_TANKMAN:
+                self.data['critDevice'] = DEVICES_TANKMAN[extra.name] if damageCode == 'DEVICE_CRITICAL_AT_RAMMING' else DEVICES_TANKMAN[extra.name + '_destr']
                 vehicle = BigWorld.entities.get(player.playerVehicleID)
                 if self.data['oldHealth'] == vehicle.health:
                     self.data.update(dataUpdate)
@@ -447,8 +440,8 @@ class Data(object):
                     self.updateData()
         elif damageCode in ('DEVICE_CRITICAL_AT_WORLD_COLLISION', 'DEVICE_DESTROYED_AT_WORLD_COLLISION', 'TANKMAN_HIT_AT_WORLD_COLLISION'):
             self.data['criticalHit'] = True
-            if extraIndex in DEVICES_TANKMAN:
-                self.data['critDevice'] = DEVICES_TANKMAN[extraIndex + 100] if damageCode == 'DEVICE_DESTROYED_AT_WORLD_COLLISION' else DEVICES_TANKMAN[extraIndex]
+            if extra.name in DEVICES_TANKMAN:
+                self.data['critDevice'] = DEVICES_TANKMAN[extra.name + '_destr'] if damageCode == 'DEVICE_DESTROYED_AT_WORLD_COLLISION' else DEVICES_TANKMAN[extra.name]
                 vehicle = BigWorld.entities.get(player.playerVehicleID)
                 if self.data['oldHealth'] == vehicle.health:
                     self.data.update(dataUpdate)
@@ -461,8 +454,8 @@ class Data(object):
             self.data['criticalHit'] = False
             self.updateData()
         elif (damageCode in damageInfoCriticals) or (damageCode in damageInfoDestructions) or (damageCode in damageInfoTANKMAN):
-            if extraIndex in DEVICES_TANKMAN:
-                self.data['critDevice'] = DEVICES_TANKMAN[extraIndex + 100] if damageCode in damageInfoDestructions else DEVICES_TANKMAN[extraIndex]
+            if extra.name in DEVICES_TANKMAN:
+                self.data['critDevice'] = DEVICES_TANKMAN[extra.name + '_destr'] if damageCode in damageInfoDestructions else DEVICES_TANKMAN[extra.name]
             self.data['criticalHit'] = True
 
     def onHealthChanged(self, vehicle, newHealth, attackerID, attackReasonID):
@@ -862,7 +855,6 @@ def updateVehicleHealth(self, vehicleID, health, deathReasonID, isCrewActive, is
 def Vehicle_onEnterWorld(self, prereqs):
     if self.isPlayerVehicle and config.get('damageLog/enabled'):
         global on_fire, damageLogConfig, autoReloadConfig
-        data.isReplay = BattleReplay.isPlaying()
         autoReloadConfig = config.get('autoReloadConfig')
         if not (autoReloadConfig or damageLogConfig):
             for section in SECTIONS:
