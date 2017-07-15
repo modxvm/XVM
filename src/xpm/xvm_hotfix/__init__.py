@@ -61,9 +61,11 @@ def LobbyMenu_bootcampClick_dialogAction(result):
         restart_without_mods()
 
 from xvm_main.python.xvm import Xvm
+from skeletons.gui.game_control import IBootcampController
 @registerEvent(Xvm, 'hangarInit')
 def onHangarInit(self):
-    if self.bootcampController.isInBootcamp():
-        self.bootcampController.stopBootcamp(False)
+    bootcampController = dependency.instance(IBootcampController)
+    if bootcampController.isInBootcamp():
+        bootcampController.stopBootcamp(False)
 
 #####################################################################
