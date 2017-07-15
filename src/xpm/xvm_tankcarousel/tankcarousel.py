@@ -58,7 +58,7 @@ class VEHICLE(object):
 # initialization/finalization
 
 def start():
-    g_eventBus.addListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
+    g_eventBus.addListener(XFW_COMMAND.XFW_CMD, onXfwCommand)
     g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, update_config)
     update_config()
 
@@ -66,7 +66,7 @@ BigWorld.callback(0, start)
 
 @registerEvent(game, 'fini')
 def fini():
-    g_eventBus.removeListener(XFWCOMMAND.XFW_CMD, onXfwCommand)
+    g_eventBus.removeListener(XFW_COMMAND.XFW_CMD, onXfwCommand)
     g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, update_config)
 
 
@@ -95,21 +95,22 @@ XVM_LOBBY_UI_SWF = 'xvm_lobby_ui.swf'
 
 @overrideMethod(Hangar, 'as_setCarouselS')
 def _Hangar_as_setCarouselS(base, self, linkage, alias):
-    if xfw_mods_info.loaded_swfs.get(XVM_LOBBY_UI_SWF, 0):
-        if linkage == HANGAR_ALIASES.TANK_CAROUSEL_UI:
-            linkage = 'com.xvm.lobby.ui.tankcarousel::UI_TankCarousel'
-        if linkage == HANGAR_ALIASES.FALLOUT_TANK_CAROUSEL_UI:
-            linkage = 'com.xvm.lobby.ui.tankcarousel::UI_FalloutTankCarousel'
-    else:
-        log('WARNING: as_setCarouselS: ({}) {} is not loaded'.format(linkage, XVM_LOBBY_UI_SWF))
-        g_eventBus.removeListener(XFWEVENT.SWF_LOADED, onSwfLoaded)
-        g_eventBus.addListener(XFWEVENT.SWF_LOADED, onSwfLoaded)
+    if not isInBootcamp():
+        if xfw_mods_info.loaded_swfs.get(XVM_LOBBY_UI_SWF, 0):
+            if linkage == HANGAR_ALIASES.TANK_CAROUSEL_UI:
+                linkage = 'com.xvm.lobby.ui.tankcarousel::UI_TankCarousel'
+            if linkage == HANGAR_ALIASES.FALLOUT_TANK_CAROUSEL_UI:
+                linkage = 'com.xvm.lobby.ui.tankcarousel::UI_FalloutTankCarousel'
+        else:
+            log('WARNING: as_setCarouselS: ({}) {} is not loaded'.format(linkage, XVM_LOBBY_UI_SWF))
+            g_eventBus.removeListener(XFW_EVENT.SWF_LOADED, onSwfLoaded)
+            g_eventBus.addListener(XFW_EVENT.SWF_LOADED, onSwfLoaded)
     base(self, linkage, alias)
 
 def onSwfLoaded(e):
     log('onSwfLoaded: {}'.format(e.ctx))
     if e.ctx.lower() == XVM_LOBBY_UI_SWF:
-        g_eventBus.removeListener(XFWEVENT.SWF_LOADED, onSwfLoaded)
+        g_eventBus.removeListener(XFW_EVENT.SWF_LOADED, onSwfLoaded)
         wgutils.reloadHangar()
 
 carousel_config = {}
