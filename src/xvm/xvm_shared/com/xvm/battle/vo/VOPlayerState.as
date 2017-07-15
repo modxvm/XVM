@@ -26,7 +26,7 @@ package com.xvm.battle.vo
         private var _playerFullName:String = null;
         private var _playerName:String = null;
         private var _clanAbbrev:String = null;
-        private var __badgeId:String = "";
+        private var __badgeId:String = null;
         private var __badgeType:String = "";
         private var _playerStatus:uint = 0;
         private var _prebattleID:Number = NaN;
@@ -106,7 +106,7 @@ package com.xvm.battle.vo
             __badgeType = value;
             if (!value)
             {
-                __badgeId = "";
+                __badgeId = null;
             }
             else
             {

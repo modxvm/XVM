@@ -39,7 +39,7 @@ package com.xvm.types.stat
 
         public var clan:String = null;         // clan name ("CLAN")
         public var cid:Number = NaN;           // clan id
-        public var badgeId:String = "";        // rank badge id
+        public var badgeId:String = null;      // rank badge id
         public var rank:Number = NaN;          // clan rank (wGM)
         public var name:String = null;         // player name in current game ("sirmax2_RU" for Common Test)
         public var status:Number = NaN;        // XVM activation status

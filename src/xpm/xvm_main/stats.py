@@ -627,7 +627,7 @@ class _Player(object):
         self.accountDBID = vData['accountDBID']
         self.name = vData['name']
         self.clan = vData['clanAbbrev']
-        self.badgeId = ''
+        self.badgeId = None
         ranked = vData.get('ranked', None)
         if ranked and ranked[1]:
             self.badgeId = str(ranked[1][0])
