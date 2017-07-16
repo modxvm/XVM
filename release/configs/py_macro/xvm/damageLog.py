@@ -728,62 +728,60 @@ class LastHit(_Base):
             self.timerLastHit.stop()
         as_event('ON_LAST_HIT')
 
-    def output(self):
-        macroes = None
-        self.strLastHit = ''
-        if config.get(self.section + 'showHitNoDamage') or data.data['isDamage']:
-            if (((data.data['attackReasonID'] in [2, 3]) and config.get(self.section + 'groupDamagesFromRamming_WorldCollision'))
-                    or ((data.data['attackReasonID'] == 1) and config.get(self.section + 'groupDamagesFromFire'))):
-                dataLog = data.data.copy()
-                attackerID = data.data['attackerID']
-                attackReasonID = data.data['attackReasonID']
-                if attackerID in self.dictVehicle:
-                    if attackReasonID in self.dictVehicle[attackerID]:
-                        key = self.dictVehicle[attackerID][attackReasonID]
-                        if ('time' in key) and ('damage' in key) and ((BigWorld.serverTime() - key['time']) < 1):
-                            key['time'] = BigWorld.serverTime()
-                            key['damage'] += data.data['damage']
-                            dataLog['damage'] = key['damage']
-                            dataLog['dmgRatio'] = dataLog['damage'] * 100 // data.data['maxHealth']
-                            if (attackReasonID == 1) and (key['beginFire'] is not None):
-                                dataLog['fireDuration'] = BigWorld.time() - key['beginFire']
-                            else:
-                                dataLog['fireDuration'] = None
-                    else:
-                        self.dictVehicle[attackerID][attackReasonID] = {'time': BigWorld.serverTime(),
-                                                                        'damage': data.data['damage'],
-                                                                        'beginFire': beginFire if attackReasonID == 1 else None}
-                        dataLog['fireDuration'] = BigWorld.time() - beginFire if attackReasonID == 1 else None
+    def setOutParameters(self, dataLog):
+        macroes = getValueMacroes(self.section, dataLog)
+        self.strLastHit = parser(config.get(self.section + 'formatLastHit'), macroes)
+        if not config.get(self.section + 'moveInBattle'):
+            self.x = parser(config.get(self.section + 'x'), macroes)
+            self.y = parser(config.get(self.section + 'y'), macroes)
+        self.shadow = shadow_value(self.section, macroes)
+
+    def groupDamages(self):
+        isGroupRamming_WorldCollision = ((data.data['attackReasonID'] in [2, 3]) and config.get(self.section + 'groupDamagesFromRamming_WorldCollision'))
+        isGroupFire = ((data.data['attackReasonID'] == 1) and config.get(self.section + 'groupDamagesFromFire'))
+        if isGroupRamming_WorldCollision or isGroupFire:
+            dataLog = data.data.copy()
+            attackerID = data.data['attackerID']
+            attackReasonID = data.data['attackReasonID']
+            if attackerID in self.dictVehicle:
+                if attackReasonID in self.dictVehicle[attackerID]:
+                    key = self.dictVehicle[attackerID][attackReasonID]
+                    if ('time' in key) and ('damage' in key) and ((BigWorld.serverTime() - key['time']) < 1):
+                        key['time'] = BigWorld.serverTime()
+                        key['damage'] += data.data['damage']
+                        dataLog['damage'] = key['damage']
+                        dataLog['dmgRatio'] = dataLog['damage'] * 100 // data.data['maxHealth']
+                        if (attackReasonID == 1) and (key['beginFire'] is not None):
+                            dataLog['fireDuration'] = BigWorld.time() - key['beginFire']
+                        else:
+                            dataLog['fireDuration'] = None
                 else:
-                    self.dictVehicle[attackerID] = {}
                     self.dictVehicle[attackerID][attackReasonID] = {'time': BigWorld.serverTime(),
                                                                     'damage': data.data['damage'],
                                                                     'beginFire': beginFire if attackReasonID == 1 else None}
                     dataLog['fireDuration'] = BigWorld.time() - beginFire if attackReasonID == 1 else None
-                if config.get(self.section + 'showHitNoDamage') or data.data['isDamage']:
-                    macroes = getValueMacroes(self.section, dataLog)
-                    self.strLastHit = parser(config.get(self.section + 'formatLastHit'), macroes)
-                    if not config.get(self.section + 'moveInBattle'):
-                        self.x = parser(config.get(self.section + 'x'), macroes)
-                        self.y = parser(config.get(self.section + 'y'), macroes)
             else:
-                if config.get(self.section + 'showHitNoDamage') or data.data['isDamage']:
-                    macroes = getValueMacroes(self.section, data.data)
-                    # log('LastHit')
-                    self.strLastHit = parser(config.get(self.section + 'formatLastHit'), macroes)
-                    if not config.get(self.section + 'moveInBattle'):
-                        self.x = parser(config.get(self.section + 'x'), macroes)
-                        self.y = parser(config.get(self.section + 'y'), macroes)
-        if self.strLastHit:
-            if macroes is None:
-                macroes = getValueMacroes(self.section, data.data)
-            if (self.timerLastHit is not None) and self.timerLastHit.isStarted:
-                self.timerLastHit.stop()
-            timeDisplayLastHit = float(parser(config.get(self.section + 'timeDisplayLastHit'), macroes))
-            self.timerLastHit = TimeInterval(timeDisplayLastHit, self, 'hideLastHit')
-            self.timerLastHit.start()
-            self.shadow = shadow_value(self.section, macroes)
-            as_event('ON_LAST_HIT')
+                self.dictVehicle[attackerID] = {}
+                self.dictVehicle[attackerID][attackReasonID] = {'time': BigWorld.serverTime(),
+                                                                'damage': data.data['damage'],
+                                                                'beginFire': beginFire if attackReasonID == 1 else None}
+                dataLog['fireDuration'] = BigWorld.time() - beginFire if attackReasonID == 1 else None
+            self.setOutParameters(dataLog)
+        else:
+            self.setOutParameters(data.data)
+
+    def output(self):
+        macroes = None
+        if config.get(self.section + 'showHitNoDamage') or data.data['isDamage']:
+            self.groupDamages()
+            if self.strLastHit:
+                if (self.timerLastHit is not None) and self.timerLastHit.isStarted:
+                    self.timerLastHit.stop()
+                # log('timeDisplayLastHit')
+                timeDisplayLastHit = float(parser(config.get(self.section + 'timeDisplayLastHit'), macroes))
+                self.timerLastHit = TimeInterval(timeDisplayLastHit, self, 'hideLastHit')
+                self.timerLastHit.start()
+                as_event('ON_LAST_HIT')
 
 
 _log = DamageLog(SECTION_LOG)
