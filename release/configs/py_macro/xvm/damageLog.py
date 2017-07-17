@@ -784,13 +784,12 @@ class LastHit(_Base):
             self.setOutParameters(data.data)
 
     def output(self):
-        macroes = None
         if config.get(self.S_SHOW_HIT_NO_DAMAGE) or data.data['isDamage']:
-            self.groupDamages()
             if self.strLastHit:
                 if (self.timerLastHit is not None) and self.timerLastHit.isStarted:
                     self.timerLastHit.stop()
                 # log('timeDisplayLastHit')
+                macroes = getValueMacroes(self.section, dataLog)
                 timeDisplayLastHit = float(parser(config.get(self.S_TIME_DISPLAY_LAST_HIT), macroes))
                 self.timerLastHit = TimeInterval(timeDisplayLastHit, self, 'hideLastHit')
                 self.timerLastHit.start()
