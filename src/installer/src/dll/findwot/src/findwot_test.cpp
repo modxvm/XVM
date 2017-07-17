@@ -28,16 +28,48 @@
 
 int main()
 {
-	_setmode(_fileno(stdout), _O_U16TEXT);
-	
-	wchar_t* wbuffer = new wchar_t[BUF_SIZE];
+    _setmode(_fileno(stdout), _O_U16TEXT);
+
+    wchar_t* wbuffer = new wchar_t[BUF_SIZE];
 
 
+    //WINE
+    std::wcout << L"Wine: " << std::endl;
+    WineStatus wine_st = WINE_GetStatus();
+    if(wine_st.running_on==false)
+    {
+        std::wcout << L"    Running on    : False" << std::endl;
+    }
+    else
+    {
+        std::wcout << L"    Running on    : True" << std::endl;
+
+        std::wcout << L"    Wine build    : ";
+        if(wine_st.build!=nullptr)
+        {
+            std::wcout << wine_st.build;
+        }
+        std::wcout << std::endl;
+
+        std::wcout << L"    System        : ";
+        if (wine_st.system != nullptr)
+        {
+            std::wcout << wine_st.system;
+        }
+        std::wcout << std::endl;
+
+        std::wcout << L"    Release       : ";
+        if (wine_st.release != nullptr)
+        {
+            std::wcout << wine_st.release;
+        }
+        std::wcout << std::endl;
+    }
+    std::wcout << std::endl;
+
+    //WGC
 	std::wcout << L"WGC: " << std::endl;
-
-	//get status
 	bool wgc_isinstalled = WGC_IsInstalled();
-
 	if (wgc_isinstalled)
 	{
 		std::wcout << L"    Installed     : True" <<std::endl;
@@ -47,11 +79,11 @@ int main()
 	}
 	else
 	{
-		std::wcout << L"    Installed: False" << std::endl;
+		std::wcout << L"    Installed     : False" << std::endl;
 	}
 	std::wcout << std::endl;
 
-	//Result
+	//Clients
 	int count = WOT_GetClientsCount();
 	if (count > 0)
 	{

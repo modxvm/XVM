@@ -34,3 +34,4 @@ CMakeSettings.json
 *.wsettings
 src/installer/src/dll/findwot/bin/findwot_test.exe
 src/installer/temp/*
+.vscode/
