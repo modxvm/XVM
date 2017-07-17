@@ -21,7 +21,6 @@
 #include "filesystem.h"
 #include "wgc.h"
 #include "wotlauncher.h"
-#include "vector.h"
 
 #include <algorithm>
 #include <filesystem>
@@ -67,41 +66,34 @@ void WotDetector::FindClients()
 	//3. DRIVE:\Games\World_of_Tanks*
 	std::vector<std::wstring> drives = Filesystem::GetLogicalDrives();
 	std::vector<directory_entry> dir_entries;
+    std::vector<std::wstring> pathes{L"", L"Games\\", L"Games\\Wargaming.net\\" , L"Powder\\"};
 
-	for (auto& drive : drives)
+    for (auto& drive : drives)
+    {
+        for (auto& path : pathes)
+        {
+            for (auto& p : directory_iterator(drive + path))
+            {
+                dir_entries.push_back(p);
+            }
+        }
+    }
+
+	for (auto&p : dir_entries)
 	{
-		for (auto& p : directory_iterator(drive))
+		if (!is_directory(p))
 		{
-			dir_entries.push_back(p);
+			continue;
 		}
 
-		for (auto& p : directory_iterator(drive + L"Games\\"))
-		{
-			dir_entries.push_back(p);
-		}
+		std::wstring path = p.path().wstring();
+		std::transform(path.begin(), path.end(), path.begin(), ::tolower);
 
-		for (auto& p : directory_iterator(drive + L"Games\\Wargaming.net\\"))
+		if ((path.find(L"world_of_tanks") != std::wstring::npos) || (path.find(L"wot") != std::wstring::npos))
 		{
-			dir_entries.push_back(p);
-		}
-
-
-		for (auto&p : dir_entries)
-		{
-			if (!is_directory(p))
+			if (std::find(paths.begin(), paths.end(), p.path().wstring()) == paths.end())
 			{
-				continue;
-			}
-
-			std::wstring path = p.path().wstring();
-			std::transform(path.begin(), path.end(), path.begin(), ::tolower);
-
-			if ((path.find(L"world_of_tanks") != std::wstring::npos) || (path.find(L"wot") != std::wstring::npos))
-			{
-				if (std::find(paths.begin(), paths.end(), p.path().wstring()) == paths.end())
-				{
-					paths.push_back(p.path().wstring());
-				}
+				paths.push_back(p.path().wstring());
 			}
 		}
 	}
