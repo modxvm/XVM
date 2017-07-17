@@ -748,6 +748,7 @@ class LastHit(_Base):
             self.x = parser(config.get(self.S_X), macroes)
             self.y = parser(config.get(self.S_Y), macroes)
         self.shadow = shadow_value(self.section, macroes)
+        return macroes
 
     def groupDamages(self):
         isGroupRamming_WorldCollision = (data.data['attackReasonID'] in [2, 3]) and config.get(self.S_GROUP_DAMAGE_RAMMING_COLLISION)
@@ -779,17 +780,17 @@ class LastHit(_Base):
                                                                 'damage': data.data['damage'],
                                                                 'beginFire': beginFire if attackReasonID == 1 else None}
                 dataLog['fireDuration'] = BigWorld.time() - beginFire if attackReasonID == 1 else None
-            self.setOutParameters(dataLog)
+            return self.setOutParameters(dataLog)
         else:
-            self.setOutParameters(data.data)
+            return self.setOutParameters(data.data)
 
     def output(self):
         if config.get(self.S_SHOW_HIT_NO_DAMAGE) or data.data['isDamage']:
+            macroes = self.groupDamages()
             if self.strLastHit:
                 if (self.timerLastHit is not None) and self.timerLastHit.isStarted:
                     self.timerLastHit.stop()
                 # log('timeDisplayLastHit')
-                macroes = getValueMacroes(self.section, dataLog)
                 timeDisplayLastHit = float(parser(config.get(self.S_TIME_DISPLAY_LAST_HIT), macroes))
                 self.timerLastHit = TimeInterval(timeDisplayLastHit, self, 'hideLastHit')
                 self.timerLastHit.start()
