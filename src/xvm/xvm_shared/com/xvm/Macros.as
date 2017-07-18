@@ -1201,7 +1201,7 @@ package com.xvm
                 pdata["nick"] = stat.xvm_contact_data.nick + (pdata["clan"] || "");
                 pdata["name"] = stat.xvm_contact_data.nick;
                 // clear static cache
-                m_macros_cache_players[pname] = { };
+                m_macros_cache_players[pname] = [ ];
             }
             // {{avglvl}}
             pdata["avglvl"] = stat.lvl;
