@@ -12,7 +12,6 @@ package com.xvm.wg
     import flash.events.Event;
     import flash.events.IOErrorEvent;
     import flash.display.BitmapData;
-    import org.idmedia.as3commons.util.StringUtils;
 
     public class ImageWG extends Sprite implements IImage
     {
@@ -140,7 +139,7 @@ package com.xvm.wg
         protected function onImgDataIoErrorHandler(param1:IOErrorEvent) : void
         {
             this.removeImgDataListeners();
-            if(!this._loadFailed && StringUtils.isNotEmpty(this._sourceAlt))
+            if(!this._loadFailed && this._sourceAlt != null && this._sourceAlt.length > 0)
             {
                 this._loadFailed = true;
                 this.setImgData(this._mgr.getImageData(this._sourceAlt));
