@@ -449,7 +449,7 @@ class ImageData extends EventDispatcher implements IDisposable, IImageData
     private function onLoaderIOErrorHandler(param1:IOErrorEvent) : void
     {
         this.removeLoaderListeners();
-        DebugUtils.LOG_ERROR(param1.toString());
+        DebugUtils.LOG_WARNING(param1.toString());
         dispatchEvent(param1);
         this._weakBitmapData = new WeakRef(null);
         this._loader = null;
