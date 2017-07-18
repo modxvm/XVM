@@ -186,9 +186,8 @@ def readRating():
         return 'xwgr' if scale == 'xvm' else 'wgr'
 
 
-def parser(strHTML, macroes):
-
-    s = parser_addon.parser_addon(strHTML, macroes)
+def parser(strHTML, macros):
+    s = parser_addon.parser_addon(strHTML, macros)
     return s
 
 
@@ -263,8 +262,6 @@ class Data(object):
         self.data['dmgRatio'] = self.data['damage'] * 100 // self.data['maxHealth']
         attackerID = self.data['attackerID']
         if attackerID:
-            entity = BigWorld.entity(attackerID)
-            self.data['marksOnGun'] = '_' + str(entity.publicInfo['marksOnGun']) if (entity is not None) else None
             self.data['teamDmg'] = 'unknown'
             attacker = player.arena.vehicles.get(attackerID)
             if attacker is not None:
@@ -564,17 +561,17 @@ def getValueMacroes(section, value):
     return macro
 
 
-def shadow_value(section, macroes):
-    return {'distance': parser(config.get(section + 'shadow/distance'), macroes),
-            'angle': parser(config.get(section + 'shadow/angle'), macroes),
-            'alpha': parser(config.get(section + 'shadow/alpha'), macroes),
-            'blur': parser(config.get(section + 'shadow/blur'), macroes),
-            'strength': parser(config.get(section + 'shadow/strength'), macroes),
-            'color': parser(config.get(section + 'shadow/color'), macroes),
-            'hideObject': parser(config.get(section + 'shadow/hideObject'), macroes),
-            'inner': parser(config.get(section + 'shadow/inner'), macroes),
-            'knockout': parser(config.get(section + 'shadow/knockout'), macroes),
-            'quality': parser(config.get(section + 'shadow/quality'), macroes)
+def shadow_value(section, macros):
+    return {'distance': parser(config.get(section + 'shadow/distance'), macros),
+            'angle': parser(config.get(section + 'shadow/angle'), macros),
+            'alpha': parser(config.get(section + 'shadow/alpha'), macros),
+            'blur': parser(config.get(section + 'shadow/blur'), macros),
+            'strength': parser(config.get(section + 'shadow/strength'), macros),
+            'color': parser(config.get(section + 'shadow/color'), macros),
+            'hideObject': parser(config.get(section + 'shadow/hideObject'), macros),
+            'inner': parser(config.get(section + 'shadow/inner'), macros),
+            'knockout': parser(config.get(section + 'shadow/knockout'), macros),
+            'quality': parser(config.get(section + 'shadow/quality'), macros)
             }
 
 
@@ -643,15 +640,15 @@ class DamageLog(_Base):
         self._mouse_move(_data, 'ON_HIT')
 
     def setOutParameters(self, numberLine):
-        macroes = getValueMacroes(self.section, self.dataLog)
+        macros = getValueMacroes(self.section, self.dataLog)
         if numberLine == ADD_LINE:
-            self.listLog.insert(0, parser(config.get(self.S_FORMAT_HISTORY), macroes))
+            self.listLog.insert(0, parser(config.get(self.S_FORMAT_HISTORY), macros))
         else:
-            self.listLog[numberLine] = parser(config.get(self.S_FORMAT_HISTORY), macroes)
+            self.listLog[numberLine] = parser(config.get(self.S_FORMAT_HISTORY), macros)
         if not config.get(self.S_MOVE_IN_BATTLE):
-            self.x = parser(config.get(self.S_X), macroes)
-            self.y = parser(config.get(self.S_Y), macroes)
-        self.shadow = shadow_value(self.section, macroes)
+            self.x = parser(config.get(self.S_X), macros)
+            self.y = parser(config.get(self.S_Y), macros)
+        self.shadow = shadow_value(self.section, macros)
 
     def addLine(self, attackerID, attackReasonID):
         if not (attackerID is None or attackReasonID is None):
@@ -711,6 +708,7 @@ class LastHit(_Base):
     def __init__(self, section):
         _Base.__init__(self, section)
         self.strLastHit = ''
+        self.macros = {}
         self.S_FORMAT_LAST_HIT = section + FORMAT_LAST_HIT
         self.S_TIME_DISPLAY_LAST_HIT = section + TIME_DISPLAY_LAST_HIT
         if config.get(self.S_MOVE_IN_BATTLE):
@@ -742,13 +740,12 @@ class LastHit(_Base):
         as_event('ON_LAST_HIT')
 
     def setOutParameters(self, dataLog):
-        macroes = getValueMacroes(self.section, dataLog)
-        self.strLastHit = parser(config.get(self.S_FORMAT_LAST_HIT), macroes)
+        self.macros = getValueMacroes(self.section, dataLog)
+        self.strLastHit = parser(config.get(self.S_FORMAT_LAST_HIT), self.macros)
         if not config.get(self.S_MOVE_IN_BATTLE):
-            self.x = parser(config.get(self.S_X), macroes)
-            self.y = parser(config.get(self.S_Y), macroes)
-        self.shadow = shadow_value(self.section, macroes)
-        return macroes
+            self.x = parser(config.get(self.S_X), self.macros)
+            self.y = parser(config.get(self.S_Y), self.macros)
+        self.shadow = shadow_value(self.section, self.macros)
 
     def groupDamages(self):
         isGroupRamming_WorldCollision = (data.data['attackReasonID'] in [2, 3]) and config.get(self.S_GROUP_DAMAGE_RAMMING_COLLISION)
@@ -780,18 +777,19 @@ class LastHit(_Base):
                                                                 'damage': data.data['damage'],
                                                                 'beginFire': beginFire if attackReasonID == 1 else None}
                 dataLog['fireDuration'] = BigWorld.time() - beginFire if attackReasonID == 1 else None
-            return self.setOutParameters(dataLog)
+            self.setOutParameters(dataLog)
         else:
-            return self.setOutParameters(data.data)
+            self.setOutParameters(data.data)
 
     def output(self):
         if config.get(self.S_SHOW_HIT_NO_DAMAGE) or data.data['isDamage']:
-            macroes = self.groupDamages()
+            self.macros.clear()
+            self.groupDamages()
             if self.strLastHit:
                 if (self.timerLastHit is not None) and self.timerLastHit.isStarted:
                     self.timerLastHit.stop()
                 # log('timeDisplayLastHit')
-                timeDisplayLastHit = float(parser(config.get(self.S_TIME_DISPLAY_LAST_HIT), macroes))
+                timeDisplayLastHit = float(parser(config.get(self.S_TIME_DISPLAY_LAST_HIT), self.macros))
                 self.timerLastHit = TimeInterval(timeDisplayLastHit, self, 'hideLastHit')
                 self.timerLastHit.start()
                 as_event('ON_LAST_HIT')
