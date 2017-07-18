@@ -494,7 +494,7 @@ class Data(object):
 data = Data()
 
 
-def getValueMacroes(section, value):
+def getValueMacros(section, value):
     def readColor(sec, m):
         if m is not None:
             for val in config.get('colors/' + sec):
@@ -640,7 +640,7 @@ class DamageLog(_Base):
         self._mouse_move(_data, 'ON_HIT')
 
     def setOutParameters(self, numberLine):
-        macros = getValueMacroes(self.section, self.dataLog)
+        macros = getValueMacros(self.section, self.dataLog)
         if numberLine == ADD_LINE:
             self.listLog.insert(0, parser(config.get(self.S_FORMAT_HISTORY), macros))
         else:
@@ -740,7 +740,7 @@ class LastHit(_Base):
         as_event('ON_LAST_HIT')
 
     def setOutParameters(self, dataLog):
-        self.macros = getValueMacroes(self.section, dataLog)
+        self.macros = getValueMacros(self.section, dataLog)
         self.strLastHit = parser(config.get(self.S_FORMAT_LAST_HIT), self.macros)
         if not config.get(self.S_MOVE_IN_BATTLE):
             self.x = parser(config.get(self.S_X), self.macros)
