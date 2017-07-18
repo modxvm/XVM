@@ -1,7 +1,10 @@
 ﻿XVM-6.8.1-dev:
   [KNOWN ISSUES]
-  * bootcamp does not work
-  * crash to desktop on battle loading if user OS is Microsoft Windows XP.
+  * Bootcamp: does not work. Run WoT without mods to enter in bootcamp mode.
+  * Microsoft Windows XP: crash to desktop on battle loading if graphics mode is standard.
+
+  [INSTALLER]
+  * Implemented WoT detection for Linux and macOS
 
 XVM-6.8.0:
   [KNOWN ISSUES]
