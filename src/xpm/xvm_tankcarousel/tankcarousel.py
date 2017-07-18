@@ -255,9 +255,11 @@ def updateReserve(vehCD, isReserved):
         app = getLobbyApp()
         hangar = app.containerManager.getView(ViewTypes.LOBBY_SUB,
             criteria={POP_UP_CRITERIA.VIEW_ALIAS: VIEW_ALIAS.LOBBY_HANGAR})
-        log(str(hangar))
-        if hangar.tankCarousel is not None:
-            hangar.tankCarousel.updateVehicles()
+        #log(str(hangar))
+        if hangar:
+            tankCarousel = hangar.getComponent(hangar._Hangar__currentCarouselAlias)
+            if tankCarousel is not None:
+                tankCarousel.updateVehicles()
     except Exception as ex:
         err(traceback.format_exc())
 
