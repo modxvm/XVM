@@ -1,11 +1,12 @@
 # import c_parser_addon
 
-def parser_addon(strHTML, dict_macroes):
+
+def parser_addon(strHTML, dict_macros):
     if not isinstance(strHTML, str):
         return str(strHTML)
     if '{{' in strHTML:
-        # return c_parser_addon.parse(strHTML, dict_macroes)
-        return _parser(strHTML, dict_macroes)
+        # return c_parser_addon.parse(strHTML, dict_macros)
+        return _parser(strHTML, dict_macros)
     else:
         return strHTML
 
@@ -42,7 +43,7 @@ def comparing(_macro, _operator, _math):
 FLAG = {'': '>', "'": '>', '-': '<', "-'": '<', '0': '0', "0'": '0', "-0": '0<', "-0'": '0<'}
 
 
-def formatMacro(macro, macroes):
+def formatMacro(macro, macros):
     _macro = macro[2:-2]
     _macro, s_def, _def = _macro.partition('|')
     _macro, s_rep, _rep = _macro.partition('?')
@@ -67,9 +68,8 @@ def formatMacro(macro, macroes):
             break
     if not fm['width'] and t.isdigit():
         fm['width'] = int(t)
-    tempMacro = _macro
-    if _macro in macroes:
-        _macro = macroes[_macro]
+    if _macro in macros:
+        _macro = macros[_macro]
         b = False
         if _operator:
             compar = comparing(_macro, _operator, _math)
@@ -111,19 +111,17 @@ def formatMacro(macro, macroes):
         return macro, False
 
 
-def _parser(strHTML, macroes):
-    notMacroesDL = {}
+def _parser(strHTML, macros):
+    notMacrosDL = {}
     i = 0
-    if not isinstance(strHTML, str):
-        strHTML = str(strHTML)
     while '{{' in strHTML:
         b = True
         while b:
             b = False
-            for s in macroes.iterkeys():
+            for s in macros.iterkeys():
                 temp_str = '{{%s}}' % s
                 if temp_str in strHTML:
-                    value = macroes.get(s, '')
+                    value = macros.get(s, '')
                     _macro = str(value) if value is not None else ''
                     strHTML = strHTML.replace(temp_str, _macro)
                     b = True
@@ -132,32 +130,32 @@ def _parser(strHTML, macroes):
         if not ((start >= 0) and (end >= 2)):
             break
         substr = strHTML[start:end]
-        for s in macroes.iterkeys():
+        for s in macros.iterkeys():
             begin = substr.find(s)
             if (begin == 2) and (substr[(2 + len(s))] in ('?', '%', '|',  '>', '<', '!', '=', '~')):
-                _macro, non = formatMacro(substr, macroes)
+                _macro, non = formatMacro(substr, macros)
                 if non:
-                    substr = substr.replace('{{%s' % _macro, '{{%s' % macroes[_macro], 1)
-                    for s1 in macroes.iterkeys():
+                    substr = substr.replace('{{%s' % _macro, '{{%s' % macros[_macro], 1)
+                    for s1 in macros.iterkeys():
                         if ('{{%s' % s1) in substr:
                             _macro = substr
                             break
                     else:
                         i += 1
                         _macro = '@dl%s@' % str(i)
-                        notMacroesDL[_macro] = substr
+                        notMacrosDL[_macro] = substr
                 break
         else:
             i += 1
             _macro = '@dl%s@' % str(i)
-            notMacroesDL[_macro] = substr
+            notMacrosDL[_macro] = substr
         strHTML = '%s%s%s' % (strHTML[0:start], _macro, strHTML[end:])
     b = (i > 0)
     while b:
         b = False
-        _notMacroesDL = notMacroesDL.copy()
-        for s in _notMacroesDL:
+        _notMacrosDL = notMacrosDL.copy()
+        for s in _notMacrosDL:
             if s in strHTML:
                 b = True
-                strHTML = strHTML.replace(s, notMacroesDL.pop(s, ''), 1)
+                strHTML = strHTML.replace(s, notMacrosDL.pop(s, ''), 1)
     return strHTML
