@@ -8,10 +8,6 @@ def getToken():
     (data, errStr) = _exec('getToken/{token}/{id}')
     return (data, errStr)
 
-def getVersion():
-    (data, errStr) = _exec('getVersion/{token}/{id}')
-    return data
-
 def getVersionWithLimit(limit=50):
     (data, errStr) = _exec('getVersionWithLimit/{token}/{id}/{limit}', params={'limit':limit})
     return data
