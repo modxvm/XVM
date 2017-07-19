@@ -19,8 +19,6 @@ def init():
 from pprint import pprint
 import traceback
 
-import BigWorld
-
 import simplejson
 
 from logger import *

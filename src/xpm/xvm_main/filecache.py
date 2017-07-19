@@ -18,7 +18,6 @@ import os
 import shutil
 import traceback
 
-import BigWorld
 from account_helpers import CustomFilesCache
 
 from logger import *

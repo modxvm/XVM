@@ -3,12 +3,9 @@
 #####################################################################
 # imports
 
-import traceback
-
 from gui.Scaleform.daapi.view.battle.shared.stats_exchage import BattleStatisticsDataController
 
 from xfw import *
-from xvm_main.python.logger import *
 
 from vehicleMarkers import g_markers
 

@@ -19,7 +19,6 @@ def updateCurrentVehicle():
 import math
 import traceback
 
-import BigWorld
 from adisp import async, process
 from CurrentVehicle import g_currentVehicle
 from helpers import dependency

@@ -2,7 +2,6 @@
 
 import traceback
 
-import BigWorld
 from gui.Scaleform.daapi.view.meta.LobbyHeaderMeta import LobbyHeaderMeta
 
 from xfw import *
