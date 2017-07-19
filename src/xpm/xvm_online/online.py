@@ -111,7 +111,6 @@ class _Get_online(object):
             #    "eu":  [{"players_online":4297,"server":"EU2"},{"players_online":8331,"server":"EU1"}],
             #    "na":  [{"players_online":22740,"server":"NA EAST"},{"players_online":7431,"server":"NA WEST"}],
             #    "asia":[{"players_online":6603,"server":"ASIA"}],
-            #    "kr":  [{"players_online":868,"server":"KR"}],
             #    "ru":  [{"players_online":14845,"server":"RU8"},{"players_online":8597,"server":"RU2"},{"players_online":9847,"server":"RU1"},{"players_online":3422,"server":"RU3"},{"players_online":11508,"server":"RU6"},{"players_online":6795,"server":"RU5"},{"players_online":3354,"server":"RU4"}]
             #}
 
