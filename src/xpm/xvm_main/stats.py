@@ -237,8 +237,7 @@ class _Stat(object):
             #    log('WARNING: icons loading too long')
             #    break;
 
-        playerVehicleID = player.playerVehicleID if hasattr(player, 'playerVehicleID') else 0
-        self._load_stat(playerVehicleID)
+        self._load_stat(avatar_getter.getPlayerVehicleID())
 
         players = {}
         for (vehicleID, pl) in self.players.iteritems():
