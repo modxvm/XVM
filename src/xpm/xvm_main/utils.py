@@ -11,9 +11,10 @@ from bisect import bisect_left
 
 import BigWorld
 import Vehicle
+from gui import game_control
+from gui.battle_control import avatar_getter
 from helpers import dependency
 from skeletons.gui.battle_session import IBattleSessionProvider
-from gui import game_control
 
 from xfw import *
 
@@ -27,21 +28,17 @@ def touch(fname, times=None):
     with open(fname, 'a'):
         os.utime(fname, times)
 
-
 def rm(fname):
     if os.path.isfile(fname):
         os.remove(fname)
-
 
 def hide_guid(txt):
     return re.sub('([0-9A-Fa-f]{8}-)[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{8}([0-9A-Fa-f]{4})',
                   '\\1****-****-****-********\\2', str(txt))
 
-
 def show_threads():
     for t in threading.enumerate():
         log('Thread: %s' % t.getName())
-
 
 def openWebBrowser(url, useInternalBrowser=False):
     openBrowser = BigWorld.wg_openWebBrowser
@@ -51,13 +48,11 @@ def openWebBrowser(url, useInternalBrowser=False):
             openBrowser = browser.load
     openBrowser(url)
 
-
 def getVehicleByName(name):
     for v in BigWorld.entities.values():
         if isinstance(v, Vehicle.Vehicle) and v.publicInfo['name'] == name:
             return v
     return None
-
 
 def getVehicleByHandle(handle):
     for v in BigWorld.entities.values():
@@ -65,16 +60,13 @@ def getVehicleByHandle(handle):
             return v
     return None
 
-
 def getVehicleInfo(vehicleID):
     sessionProvider = dependency.instance(IBattleSessionProvider)
     return sessionProvider.getArenaDP().getVehicleInfo(vehicleID)
 
-
 def getVehicleStats(vehicleID):
     sessionProvider = dependency.instance(IBattleSessionProvider)
     return sessionProvider.getArenaDP().getVehicleStats(vehicleID)
-
 
 # 0 - equal, -1 - v1<v2, 1 - v1>v2, -2 - error
 def compareVersions(v1, v2):
@@ -110,7 +102,6 @@ def compareVersions(v1, v2):
         return -2
     return 0
 
-
 def getDynamicColorValue(type, value, prefix='#'):
     if value is None or math.isnan(value):
         return ''
@@ -123,21 +114,15 @@ def getDynamicColorValue(type, value, prefix='#'):
 
     return "{0}{1:06x}".format(prefix, color)
 
-
-
-
-
 def getAccountDBID():
     accountDBID = getCurrentAccountDBID() if not isReplay() else None
     if accountDBID is None:
         accountDBID = userprefs.get('tokens/lastAccountDBID')
     return accountDBID
 
-
 def getMapSize():
-    (b, l), (t, r) = BigWorld.player().arena.arenaType.boundingBox
+    (b, l), (t, r) = avatar_getter.getArena().arenaType.boundingBox
     return t - b
-
 
 # Fix <img src='xvm://...'> to <img src='img://XVM_IMG_RES_ROOT/...'> (res_mods/mods/shared_resources/xvm/res)
 # Fix <img src='cfg://...'> to <img src='img://XVM_IMG_CFG_ROOT/...'> (res_mods/configs/xvm)

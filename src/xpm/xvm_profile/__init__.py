@@ -18,7 +18,6 @@ XFW_MOD_INFO = {
 
 import traceback
 
-import BigWorld
 from gui.Scaleform.locale.PROFILE import PROFILE
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 from gui.Scaleform.daapi.view.meta.ProfileMeta import ProfileMeta

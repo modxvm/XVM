@@ -11,7 +11,6 @@ package com.xvm.wg
     import net.wg.infrastructure.interfaces.IImageData;
     import net.wg.infrastructure.managers.IImageManager;
     import net.wg.infrastructure.managers.ILoaderManager;
-    import org.idmedia.as3commons.util.StringUtils;
 
     public class ImageManagerWG extends EventDispatcher implements IImageManager
     {
@@ -135,7 +134,7 @@ package com.xvm.wg
         public function getImageData(param1:String) : IImageData
         {
             var _loc2_:ImageData = null;
-            if(StringUtils.isEmpty(param1))
+            if(param1 == null || param1.length == 0)
             {
                 return null;
             }
@@ -450,7 +449,7 @@ class ImageData extends EventDispatcher implements IDisposable, IImageData
     private function onLoaderIOErrorHandler(param1:IOErrorEvent) : void
     {
         this.removeLoaderListeners();
-        DebugUtils.LOG_ERROR(param1.toString());
+        DebugUtils.LOG_WARNING(param1.toString());
         dispatchEvent(param1);
         this._weakBitmapData = new WeakRef(null);
         this._loader = null;

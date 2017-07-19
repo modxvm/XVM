@@ -18,13 +18,18 @@
  
 #pragma once
 
-#define WOTDETECTOR_API_VERSION 2
+#include  "wine.h"
+
+#define WOTDETECTOR_API_VERSION 3
 
 #ifdef BUILD_WOTDETECTOR
 #define API_CALL __declspec(dllexport)
 #else
 #define API_CALL __declspec(dllimport)
 #endif
+
+//WINE
+extern "C" API_CALL WineStatus __cdecl WINE_GetStatus();
 
 //WGC
 extern "C" API_CALL void __cdecl WGC_GetInstallPathA(char *buffer, int buffer_size);

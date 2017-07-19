@@ -165,22 +165,19 @@ begin
   begin
     for Index:=0 to ClientsCount-1 do
     begin
-      WOT_GetClientPathW(Buffer,1024,Index);
-      Str:=Copy(Buffer,0,Pos(#0, Buffer));
-      
-      Insert(' [',Str,Pos(#0, Str));
-      
       WOT_GetClientVersionW(Buffer,1024,Index);
-      Insert(Buffer,Str,Pos(#0, Str));
+      Str:=Copy(Buffer,0,Pos(#0, Buffer));
 
       case WOT_GetClientBranch(Index) of
-         1: Insert(' Release',Str,Pos(#0, Str));
-         2: Insert(' Common Test',Str,Pos(#0, Str));
-         3: Insert(' Super Test',Str,Pos(#0, Str));
-         4: Insert(' Sandbox',Str,Pos(#0, Str));
+         1: Insert(' Release: ',Str,Pos(#0, Str));
+         2: Insert(' Common Test: ',Str,Pos(#0, Str));
+         3: Insert(' Super Test: ',Str,Pos(#0, Str));
+         4: Insert(' Sandbox: ',Str,Pos(#0, Str));
       end;
+      
+      WOT_GetClientPathW(Buffer,1024,Index);
+      Insert(Buffer,Str,Pos(#0, Str));
 
-      Insert(']',Str,Pos(#0, Str));
       WotList.Items.Add(Str);
      end;
   end;

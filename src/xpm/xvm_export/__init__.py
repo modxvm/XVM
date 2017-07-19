@@ -16,7 +16,6 @@ XFW_MOD_INFO = {
 #####################################################################
 # imports
 
-import BigWorld
 from Avatar import PlayerAvatar
 
 from xfw import *

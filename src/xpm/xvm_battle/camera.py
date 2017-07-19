@@ -14,6 +14,7 @@ from AvatarInputHandler.DynamicCameras.SniperCamera import SniperCamera
 from AvatarInputHandler.DynamicCameras.StrategicCamera import StrategicCamera
 from helpers import dependency
 from skeletons.gui.battle_session import IBattleSessionProvider
+from gui.battle_control import avatar_getter
 from gui.battle_control.battle_constants import CROSSHAIR_VIEW_ID
 from gui.Scaleform.daapi.view.battle.shared.crosshair.container import CrosshairPanelContainer
 from AvatarInputHandler.control_modes import SniperControlMode
@@ -234,7 +235,7 @@ def clampToLimits(base, self, turretYaw, gunPitch):
     if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/noCameraLimit/enabled'):
         if not BigWorld.isKeyDown(KEY_RIGHTMOUSE) and self._SniperAimingSystem__yawLimits is not None and config.get('battle/camera/sniper/noCameraLimit/mode') == "hotkey":
             turretYaw = mathUtils.clamp(self._SniperAimingSystem__yawLimits[0], self._SniperAimingSystem__yawLimits[1], turretYaw)
-        getPitchLimits = BigWorld.player().vehicleTypeDescriptor.gun['combinedPitchLimits']
+        getPitchLimits = avatar_getter.getVehicleTypeDescriptor().gun['combinedPitchLimits']
         pitchLimits = calcPitchLimitsFromDesc(turretYaw, getPitchLimits)
         adjustment = max(0, self._SniperAimingSystem__returningOscillator.deviation.y)
         pitchLimits[0] -= adjustment
@@ -246,13 +247,7 @@ def clampToLimits(base, self, turretYaw, gunPitch):
 @overrideMethod(SniperControlMode, 'getPreferredAutorotationMode')
 def getPreferredAutorotationMode(base, self):
     if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/noCameraLimit/enabled') and config.get('battle/camera/sniper/noCameraLimit/mode') == "full":
-        vehicle = BigWorld.entities.get(BigWorld.player().playerVehicleID)
-        if vehicle is None:
-            return
-        else:
-            desc = vehicle.typeDescriptor
-            isRotationAroundCenter = desc.chassis['rotationIsAroundCenter']
-            return isRotationAroundCenter
+        return avatar_getter.getVehicleTypeDescriptor().chassis['rotationIsAroundCenter']
     return base(self)
 
 

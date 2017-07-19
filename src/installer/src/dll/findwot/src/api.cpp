@@ -27,6 +27,11 @@
 #include <codecvt>
 #include <string>
 
+WineStatus WINE_GetStatus()
+{
+    return Wine::GetStatus();
+}
+
 void WGC_GetInstallPathA(char * buffer, int buffer_size)
 {
 	if (buffer_size <= 0)

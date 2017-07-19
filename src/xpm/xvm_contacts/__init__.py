@@ -31,7 +31,6 @@ class VIEW(object):
 #####################################################################
 # includes
 
-import BigWorld
 from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, ViewTypes, ScopeTemplates
 from gui.Scaleform.framework.entities.View import View
 from gui.shared.tooltips.common import ContactTooltipData

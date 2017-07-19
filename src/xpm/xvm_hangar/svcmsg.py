@@ -1,6 +1,5 @@
 ﻿import traceback
 
-import BigWorld
 from gui.Scaleform.daapi.view.lobby.messengerBar.NotificationListButton import NotificationListButton
 
 from xfw import *

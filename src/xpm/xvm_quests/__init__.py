@@ -18,7 +18,6 @@ XFW_MOD_INFO = {
 
 import traceback
 
-import BigWorld
 from gui.Scaleform.genConsts.QUEST_TASK_FILTERS_TYPES import QUEST_TASK_FILTERS_TYPES
 from gui.Scaleform.daapi.view.lobby.server_events.QuestsTileChainsView import _QuestsTileChainsView, _QuestsFilter
 

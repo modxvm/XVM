@@ -1,6 +1,5 @@
 """ XVM (c) www.modxvm.com 2013-2017 """
 
-import BigWorld
 from gui.Scaleform.framework import ViewTypes
 from gui.Scaleform.framework.managers.containers import POP_UP_CRITERIA
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS

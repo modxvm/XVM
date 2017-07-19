@@ -17,7 +17,6 @@ XFW_MOD_INFO = {
 
 import traceback
 
-import BigWorld
 import game
 import helpers
 import nations

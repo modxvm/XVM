@@ -5,9 +5,7 @@
 
 import cgi
 import re
-import traceback
 
-import BigWorld
 from gui.Scaleform.daapi.view.battle.shared.battle_loading import BattleLoading
 
 from xfw import *

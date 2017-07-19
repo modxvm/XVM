@@ -3,8 +3,8 @@
 #####################################################################
 # imports
 
-import BigWorld
 import SoundGroups
+from gui.battle_control import avatar_getter
 from gui.Scaleform.daapi.view.battle.shared.indicators import SixthSenseIndicator
 
 from xfw import *
@@ -26,7 +26,7 @@ class XVM_SOUND_EVENT(object):
 def SixthSenseIndicator_as_showS(self):
     try:
         if config.get('sounds/enabled'):
-            vehCD = getVehCD(BigWorld.player().playerVehicleID)
+            vehCD = getVehCD(avatar_getter.getPlayerVehicleID())
             # 59393 => Rudy
             soundId = XVM_SOUND_EVENT.SIXTH_SENSE_RUDY if vehCD == 59393 else XVM_SOUND_EVENT.SIXTH_SENSE
             SoundGroups.g_instance.playSound2D(soundId)

@@ -20,11 +20,15 @@
 
 #include "filesystem.h"
 #include "wgc.h"
+#include "wine.h"
 #include "wotlauncher.h"
-#include "vector.h"
 
 #include <algorithm>
 #include <filesystem>
+
+#include <Windows.h>
+#include <iostream>
+
 using namespace std::experimental::filesystem::v1;
 
 bool WotDetector::isInitialized = false;
@@ -32,129 +36,130 @@ std::vector<WotClient> WotDetector::clients;
 
 void WotDetector::FindClients()
 {
-	std::vector<std::wstring> paths;
+    // WGC
+    std::wstring wgcPath = WGC::GetWGCInstallPath();
+    if (!wgcPath.empty())
+    {
+        WotDetector::AddClient(WGC::GetWotPreferedPath());
 
-	//1.wgc
-	std::wstring wgcPath = WGC::GetWGCInstallPath();
-	if (!wgcPath.empty())
-	{
-		std::wstring preferredPath = WGC::GetWotPreferedPath();
-		if (!preferredPath.empty())
-		{
-			paths.push_back(preferredPath);
-		}
+        for (auto& path: WGC::GetWotPaths())
+            WotDetector::AddClient(path);
+    }
 
-		std::vector<std::wstring> wotPaths = WGC::GetWotPaths();
-		for (auto path : wotPaths)
-		{
-			if (std::find(paths.begin(), paths.end(), path) == paths.end())
-			{
-				paths.push_back(path);
-			}
-		}
-	}
+    // Legacy
+    for (auto& path : WotLauncher::GetWotPaths())
+        WotDetector::AddClient(path);
 
-	//2. legacy
-	std::vector<std::wstring> legacyPaths = WotLauncher::GetWotPaths();
-	for (auto path : legacyPaths)
-	{
-		if (std::find(paths.begin(), paths.end(), path) == paths.end())
-		{
-			paths.push_back(path);
-		}
-	}
+    // DRIVE:\Games\World_of_Tanks*
+    std::vector<std::wstring> pathes{L"", L"Games\\", L"Games\\Wargaming.net\\"};
 
-	//3. DRIVE:\Games\World_of_Tanks*
-	std::vector<std::wstring> drives = Filesystem::GetLogicalDrives();
-	std::vector<directory_entry> dir_entries;
+    std::vector<std::wstring> drives = Filesystem::GetLogicalDrives();
 
-	for (auto& drive : drives)
-	{
-		for (auto& p : directory_iterator(drive))
-		{
-			dir_entries.push_back(p);
-		}
+    // Non-windows additions
+    WineStatus wine_status = Wine::GetStatus();
+    if(wine_status.running_on)
+    {
+        wchar_t* buf = new wchar_t[256];
+        GetEnvironmentVariableW(L"USERNAME", buf, 256);
 
-		for (auto& p : directory_iterator(drive + L"Games\\"))
-		{
-			dir_entries.push_back(p);
-		}
+        if (wcscmp(wine_status.system, L"Linux")==0)
+        {
+            // /media/<USERNAME>/ mounted partitions
+            std::wstring linux_mounts(std::wstring(L"Z:\\media\\") + std::wstring(buf) + std::wstring(L"\\"));
+            if (exists(linux_mounts))
+            {
+                for (auto& p : directory_iterator(linux_mounts))
+                {
+                    if (!is_directory(p))
+                        continue;
 
-		for (auto& p : directory_iterator(drive + L"Games\\Wargaming.net\\"))
-		{
-			dir_entries.push_back(p);
-		}
+                    drives.push_back(p.path().wstring()+L"\\");
+                }
+            }
+        }
+        
+        if (wcscmp(wine_status.system, L"Darwin")==0)
+        {
+            // /Volumes/ mounted partitions
+            if (exists(L"Z:\\Volumes\\"))
+            {
+                for (auto& p : directory_iterator(L"Z:\\Volumes\\"))
+                {
+                    if (!is_directory(p))
+                        continue;
 
+                    drives.push_back(p.path().wstring() + L"\\");
+                }
+            }
+        }
 
-		for (auto&p : dir_entries)
-		{
-			if (!is_directory(p))
-			{
-				continue;
-			}
+        // WoT OSX edition (Wargaming.net wine wrapper)
+        std::wstring wot_osx = std::wstring(L"Z:\\Users\\") + std::wstring(buf) + std::wstring(L"\\Library\\Application Support\\World of Tanks\\Bottles\\worldoftanks\\drive_c\\Games\\World_of_Tanks\\");
+        if(exists(wot_osx))
+            WotDetector::AddClient(wot_osx);
 
-			std::wstring path = p.path().wstring();
-			std::transform(path.begin(), path.end(), path.begin(), ::tolower);
+        delete[] buf;
+    }
 
-			if ((path.find(L"world_of_tanks") != std::wstring::npos) || (path.find(L"wot") != std::wstring::npos))
-			{
-				if (std::find(paths.begin(), paths.end(), p.path().wstring()) == paths.end())
-				{
-					paths.push_back(p.path().wstring());
-				}
-			}
-		}
-	}
+    for (auto& drive : drives)
+    {
+        for (auto& path : pathes)
+        {
+            for (auto& p : directory_iterator(drive + path))
+            {
+                if (!is_directory(p))
+                    continue;
 
-	for (auto& path : paths)
-	{
-		WotDetector::AddClient(path);
-	}
+                WotDetector::AddClient(p.path().wstring());
+            }
+        }
+    }
 
-	WotDetector::isInitialized = true;
+    WotDetector::isInitialized = true;
 }
 
 int WotDetector::AddClient(std::wstring directory)
 {
-	if (directory.back() != *L"\\")
-	{
-		directory.append(L"\\");
-	}
+    if (directory.empty())
+        return -1;
 
-	auto exists = [&](const std::wstring &s) {
-		return std::find_if(
-			begin(WotDetector::clients), 
-			end(WotDetector::clients), 
-			[&](WotClient &f) { 
-				std::wstring path_1 = f.GetPath();
-				std::transform(path_1.begin(), path_1.end(), path_1.begin(), ::tolower);
+    if (directory.back() != *L"\\")
+        directory.append(L"\\");
 
-				std::wstring path_2 = s;
-				std::transform(path_2.begin(), path_2.end(), path_2.begin(), ::tolower);
+    auto exists = [&](const std::wstring &s) {
+        return std::find_if(
+            begin(WotDetector::clients), 
+            end(WotDetector::clients), 
+            [&](WotClient &f) { 
+                std::wstring path_1 = f.GetPath();
+                std::transform(path_1.begin(), path_1.end(), path_1.begin(), ::tolower);
 
-				return path_1 == path_2; 
-			});
-	};
+                std::wstring path_2 = s;
+                std::transform(path_2.begin(), path_2.end(), path_2.begin(), ::tolower);
 
-	auto dir_it = exists(directory);
-	if (dir_it!=WotDetector::clients.end())
-	{
-		return std::distance(WotDetector::clients.begin(), dir_it);
-	}
+                return path_1 == path_2; 
+            });
+    };
 
-	WotClient client(directory);
-	if (client.IsValid())
-	{
-		WotDetector::clients.push_back(client);
-		return WotDetector::clients.size() - 1;
-	}
-	else
-	{
-		return -1;
-	}
+    auto dir_it = exists(directory);
+
+    if (dir_it!=WotDetector::clients.end())
+        return std::distance(WotDetector::clients.begin(), dir_it);
+
+
+    WotClient client(directory);
+    if (client.IsValid())
+    {
+        WotDetector::clients.push_back(client);
+        return WotDetector::clients.size() - 1;
+    }
+    else
+    {
+        return -1;
+    }
 }
 
 bool WotDetector::IsInitialized()
 {
-	return isInitialized;
+    return isInitialized;
 }

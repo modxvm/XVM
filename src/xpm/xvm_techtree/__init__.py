@@ -18,7 +18,6 @@ XFW_MOD_INFO = {
 
 import traceback
 
-import BigWorld
 from gui.Scaleform.daapi.view.lobby.techtree.techtree_dp import _TechTreeDataProvider
 from gui.Scaleform.daapi.view.meta.ModuleInfoMeta import ModuleInfoMeta
 from helpers import dependency

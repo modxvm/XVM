@@ -71,14 +71,12 @@ def fini():
 def _PlayerAvatar_onBecomePlayer(base, self):
     base(self)
     try:
-        player = BigWorld.player()
-        if player is not None and hasattr(player, 'arena'):
-            arena = BigWorld.player().arena
-            if arena:
-                arena.onVehicleKilled += g_battle.onVehicleKilled
-                arena.onAvatarReady += g_battle.onAvatarReady
-                arena.onVehicleStatisticsUpdate += g_battle.onVehicleStatisticsUpdate
-                arena.onNewVehicleListReceived += xmqp.start
+        arena = avatar_getter.getArena()
+        if arena:
+            arena.onVehicleKilled += g_battle.onVehicleKilled
+            arena.onAvatarReady += g_battle.onAvatarReady
+            arena.onVehicleStatisticsUpdate += g_battle.onVehicleStatisticsUpdate
+            arena.onNewVehicleListReceived += xmqp.start
         sessionProvider = dependency.instance(IBattleSessionProvider)
         ctrl = sessionProvider.shared.feedback
         if ctrl:
@@ -97,14 +95,12 @@ def _PlayerAvatar_onBecomePlayer(base, self):
 @overrideMethod(PlayerAvatar, 'onBecomeNonPlayer')
 def _PlayerAvatar_onBecomeNonPlayer(base, self):
     try:
-        player = BigWorld.player()
-        if player is not None and hasattr(player, 'arena'):
-            arena = BigWorld.player().arena
-            if arena:
-                arena.onVehicleKilled -= g_battle.onVehicleKilled
-                arena.onAvatarReady -= g_battle.onAvatarReady
-                arena.onVehicleStatisticsUpdate -= g_battle.onVehicleStatisticsUpdate
-                arena.onNewVehicleListReceived -= xmqp.start
+        arena = avatar_getter.getArena()
+        if arena:
+            arena.onVehicleKilled -= g_battle.onVehicleKilled
+            arena.onAvatarReady -= g_battle.onAvatarReady
+            arena.onVehicleStatisticsUpdate -= g_battle.onVehicleStatisticsUpdate
+            arena.onNewVehicleListReceived -= xmqp.start
         sessionProvider = dependency.instance(IBattleSessionProvider)
         ctrl = sessionProvider.shared.feedback
         if ctrl:
@@ -159,7 +155,7 @@ def _DynSquadFunctional_updateVehiclesInfo(self, updated, arenaDP):
     # debug("> _DynSquadFunctional_updateVehiclesInfo")
     try:
         # is dynamic squad created
-        if BigWorld.player().arena.guiType == constants.ARENA_GUI_TYPE.RANDOM:
+        if avatar_getter.getArena().guiType == constants.ARENA_GUI_TYPE.RANDOM:
             for flags, vo in updated:
                 if flags & INVALIDATE_OP.PREBATTLE_CHANGED and vo.squadIndex > 0:
                     g_battle.updatePlayerState(vo.vehicleID, INV.SQUAD_INDEX) # | INV.PLAYER_STATUS
@@ -275,7 +271,7 @@ class Battle(object):
     def onVehicleHealthChanged(self, vehicleID, newHealth, attackerID, attackReasonID):
         inv = INV.CUR_HEALTH
         userData = None
-        if attackerID == BigWorld.player().playerVehicleID:
+        if attackerID == avatar_getter.getPlayerVehicleID():
             inv |= INV.HITLOG
             userData = {'damageFlag':self._getVehicleDamageType(attackerID),
                         'damageType':constants.ATTACK_REASONS[attackReasonID]}
@@ -361,7 +357,7 @@ class Battle(object):
                 ctrl.invalidateVehiclesInfo(arenaDP)
                 ctrl.invalidateVehiclesStats(arenaDP)
             # update vehicles data
-            for (vehicleID, vData) in BigWorld.player().arena.vehicles.iteritems():
+            for (vehicleID, vData) in avatar_getter.getArena().vehicles.iteritems():
                 self.updatePlayerState(vehicleID, INV.ALL)
             g_eventBus.handleEvent(events.HasCtxEvent(XVM_BATTLE_EVENT.ARENA_INFO_INVALIDATED))
 
@@ -402,7 +398,7 @@ class Battle(object):
     # misc
 
     def _getVehicleDamageType(self, attackerID):
-        entryVehicle = BigWorld.player().arena.vehicles.get(attackerID, None)
+        entryVehicle = avatar_getter.getArena().vehicles.get(attackerID, None)
         if not entryVehicle:
             return markers2d_settings.DAMAGE_TYPE.FROM_UNKNOWN
         if attackerID == avatar_getter.getPlayerVehicleID():

@@ -14,6 +14,7 @@ from Avatar import PlayerAvatar
 from messenger import MessengerEntry
 from helpers import dependency
 from skeletons.gui.battle_session import IBattleSessionProvider
+from gui.battle_control import avatar_getter
 from gui.shared import g_eventBus, events
 from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
 from gui.Scaleform.daapi.view.battle.shared.markers2d.manager import MarkersManager
@@ -57,22 +58,18 @@ def game_handleKeyEvent(event):
 def _PlayerAvatar_onBecomePlayer(base, self):
     base(self)
     try:
-        player = BigWorld.player()
-        if player is not None and hasattr(player, 'arena'):
-            arena = BigWorld.player().arena
-            if arena:
-                arena.onVehicleStatisticsUpdate += g_markers.onVehicleStatisticsUpdate
+        arena = avatar_getter.getArena()
+        if arena:
+            arena.onVehicleStatisticsUpdate += g_markers.onVehicleStatisticsUpdate
     except Exception, ex:
         err(traceback.format_exc())
 
 @overrideMethod(PlayerAvatar, 'onBecomeNonPlayer')
 def _PlayerAvatar_onBecomeNonPlayer(base, self):
     try:
-        player = BigWorld.player()
-        if player is not None and hasattr(player, 'arena'):
-            arena = BigWorld.player().arena
-            if arena:
-                arena.onVehicleStatisticsUpdate -= g_markers.onVehicleStatisticsUpdate
+        arena = avatar_getter.getArena()
+        if arena:
+            arena.onVehicleStatisticsUpdate -= g_markers.onVehicleStatisticsUpdate
     except Exception, ex:
         err(traceback.format_exc())
     base(self)
@@ -88,13 +85,13 @@ def _PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
 
 # VMM
 
-@overrideMethod(MarkersManager, '__init__')
-def _MarkersManager__init__(base, self):
+@overrideMethod(MarkersManager, '_populate')
+def _MarkersManager_populate(base, self):
     base(self)
     g_markers.init(self)
 
-@overrideMethod(MarkersManager, 'beforeDelete')
-def _MarkersManager_beforeDelete(base, self):
+@overrideMethod(MarkersManager, '_dispose')
+def _MarkersManager_dispose(base, self):
     g_markers.destroy()
     base(self)
 
@@ -135,7 +132,7 @@ class VehicleMarkers(object):
     initialized = False
     guiType = None
     battleType = None
-    playerVehicleID = None
+    playerVehicleID = 0
     manager = None
     vehiclesData = None
     sessionProvider = dependency.descriptor(IBattleSessionProvider)
@@ -162,7 +159,7 @@ class VehicleMarkers(object):
         self.initialized = False
         self.guiType = None
         self.battleType = None
-        self.playerVehicleID = None
+        self.playerVehicleID = 0
         self.manager.removeExternalCallback('xvm.cmd')
         self.manager = None
 
@@ -184,8 +181,9 @@ class VehicleMarkers(object):
                 log(*args)
             elif cmd == XVM_VM_COMMAND.INITIALIZED:
                 self.initialized = True
-                self.guiType = BigWorld.player().arena.guiType
-                self.battleType = BigWorld.player().arena.bonusType
+                arena = avatar_getter.getArena()
+                self.guiType = arena.guiType
+                self.battleType = arena.bonusType
                 log('[VM]    initialized')
             elif cmd == XVM_COMMAND.REQUEST_CONFIG:
                 self.respondConfig()
@@ -267,7 +265,7 @@ class VehicleMarkers(object):
             err(traceback.format_exc())
 
     def updatePlayerStates(self):
-        for vehicleID, vData in BigWorld.player().arena.vehicles.iteritems():
+        for vehicleID, vData in avatar_getter.getArena().vehicles.iteritems():
             g_markers.updatePlayerState(vehicleID, INV.ALL)
 
     def updatePlayerState(self, vehicleID, targets, userData=None):
