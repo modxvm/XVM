@@ -46,6 +46,7 @@ import BigWorld
 from helpers import dependency
 from skeletons.gui.battle_session import IBattleSessionProvider
 from gui.app_loader import g_appLoader
+from gui.battle_control import avatar_getter
 from items.vehicles import VEHICLE_CLASS_TAGS
 
 from xfw import *
@@ -68,7 +69,6 @@ import xvmapi
 class _Stat(object):
 
     def __init__(self):
-        player = BigWorld.player()
         self.queue = []  # HINT: Since WoT 0.9.0 use Queue() leads to Access Violation after client closing
         self.lock = threading.RLock()
         self.thread = None
@@ -171,16 +171,16 @@ class _Stat(object):
 
     def getBattleStat(self, tries=0):
         try:
-            player = BigWorld.player()
-            if player.__class__.__name__ == 'PlayerAvatar' and player.arena is not None:
+            arena = avatar_getter.getArena()
+            if arena is None:
+                debug('WARNING: arena not created, but getBattleStat() called')
+                ## Long initialization with high ping
+                #if tries < 5:
+                #    time.sleep(1)
+                #self.getBattleStat(tries+1)
+            else:
                 self._get_battle()
                 return  # required to prevent deadlock
-            else:
-                debug('WARNING: arena not created, but getBattleStat() called')
-            #    # Long initialization with high ping
-            #    if tries < 5:
-            #        time.sleep(1)
-            #    self.getBattleStat(tries+1)
         except Exception:
             err(traceback.format_exc())
         with self.lock:
@@ -210,14 +210,14 @@ class _Stat(object):
                 self.resp = {}
 
     def _get_battle(self):
-        player = BigWorld.player()
-        if player.arenaUniqueID is None or self.arenaId != player.arenaUniqueID:
-            self.arenaId = player.arenaUniqueID
+        arenaUniqueID = avatar_getter.getArenaUniqueID()
+        if arenaUniqueID is None or arenaUniqueID != self.arenaId:
+            self.arenaId = arenaUniqueID
             self.players = {}
 
         # update players
         self._loadingClanIconsCount = 0
-        vehicles = BigWorld.player().arena.vehicles
+        vehicles = avatar_getter.getArena().vehicles
         for (vehicleID, vData) in vehicles.iteritems():
             if vehicleID not in self.players:
                 pl = _Player(vehicleID, vData)
@@ -257,8 +257,7 @@ class _Stat(object):
 
     def _get_battleresults(self):
         (arenaUniqueId,) = self.req['args']
-        player = BigWorld.player()
-        player.battleResultsCache.get(int(arenaUniqueId), self._battleResultsCallback)
+        BigWorld.player().battleResultsCache.get(int(arenaUniqueId), self._battleResultsCallback)
 
     def _battleResultsCallback(self, responseCode, value=None, revision=0):
         try:
@@ -425,8 +424,7 @@ class _Stat(object):
     def _fix(self, stat, orig_name=None):
         self._fix_common(stat)
 
-        player = BigWorld.player()
-        team = player.team if hasattr(player, 'team') else 0
+        team = avatar_getter.getPlayerTeam()
 
         if self.players is not None:
             for (vehicleID, pl) in self.players.iteritems():

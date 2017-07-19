@@ -1,6 +1,6 @@
 """ XVM (c) www.modxvm.com 2013-2017 """
 
-import BigWorld
+from gui.battle_control import avatar_getter
 
 from xfw import *
 
@@ -11,9 +11,8 @@ import xvm_main.python.vehinfo_xtdb as vehinfo_xtdb
 
 
 def getGlobalBattleData():
-    player = BigWorld.player()
-    vehicleID = player.playerVehicleID
-    arena = player.arena
+    vehicleID = avatar_getter.getPlayerVehicleID()
+    arena = avatar_getter.getArena()
     arenaVehicle = arena.vehicles.get(vehicleID)
     vehCD = getVehCD(vehicleID)
     clan = arenaVehicle['clanAbbrev']

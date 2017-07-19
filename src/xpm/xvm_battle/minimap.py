@@ -7,7 +7,6 @@ import Math
 import math
 import traceback
 
-import BigWorld
 import constants
 import game
 from constants import VISIBILITY
@@ -16,6 +15,7 @@ from account_helpers.settings_core import settings_constants
 from Avatar import PlayerAvatar
 from AvatarInputHandler.control_modes import PostMortemControlMode
 from items.vehicles import VEHICLE_CLASS_TAGS
+from gui.battle_control import avatar_getter
 from gui.shared import g_eventBus, events
 from gui.Scaleform.daapi.view.battle.shared.minimap.component import MinimapComponent
 from gui.Scaleform.daapi.view.battle.shared.minimap.settings import ENTRY_SYMBOL_NAME, ADDITIONAL_FEATURES
@@ -143,11 +143,10 @@ def _PostMortemControlMode_onMinimapClicked(self, worldPos):
 
             minDistance = None
             toID = None
-            player = BigWorld.player()
             plugin = g_minimap.minimapComponent.getPlugin('vehicles')
             for vehicleID, entry in plugin._entries.iteritems():
-                vData = player.arena.vehicles[vehicleID]
-                if player.team != vData['team'] or not vData['isAlive']:
+                vData = avatar_getter.getArena().vehicles[vehicleID]
+                if avatar_getter.getPlayerTeam() != vData['team'] or not vData['isAlive']:
                     continue
                 matrix = entry.getMatrix()
                 if matrix is not None:
@@ -212,7 +211,7 @@ def _PersonalEntriesPlugin_start(base, self):
     base(self)
     if g_minimap.active and g_minimap.opt_linesEnabled:
         if not self._PersonalEntriesPlugin__yawLimits:
-            vehicle = BigWorld.player().arena.vehicles.get(BigWorld.player().playerVehicleID)
+            vehicle = avatar_getter.getArena().vehicles.get(avatar_getter.getPlayerVehicleID())
             staticTurretYaw = vehicle['vehicleType'].gun['staticTurretYaw']
             if staticTurretYaw is None:
                 vInfoVO = self._arenaDP.getVehicleInfo()
@@ -308,8 +307,9 @@ class _Minimap(object):
 
     def init(self, minimapComponent):
         self.initialized = True
-        self.guiType = BigWorld.player().arena.guiType
-        self.battleType = BigWorld.player().arena.bonusType
+        arena = avatar_getter.getArena()
+        self.guiType = arena.guiType
+        self.battleType = arena.bonusType
         self.minimapComponent = minimapComponent
         self.entrySymbols = {}
 

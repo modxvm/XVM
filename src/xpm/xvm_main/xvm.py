@@ -9,6 +9,7 @@ from messenger import MessengerEntry
 from gui import SystemMessages
 from gui.app_loader import g_appLoader
 from gui.app_loader.settings import APP_NAME_SPACE, GUI_GLOBAL_SPACE_ID
+from gui.battle_control import avatar_getter
 from gui.shared import g_eventBus, events
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 
@@ -249,7 +250,7 @@ class Xvm(object):
                 return (python_macro.process_python_macro(args[0]), True)
 
             if cmd == XVM_COMMAND.GET_PLAYER_NAME:
-                return (BigWorld.player().name, True)
+                return (avatar_getter.getPlayerName(), True)
 
             if cmd == XVM_COMMAND.GET_SVC_SETTINGS:
                 return (config.networkServicesSettings.__dict__, True)

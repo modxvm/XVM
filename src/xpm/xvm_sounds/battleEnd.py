@@ -7,15 +7,16 @@
 #####################################################################
 # imports
 
-import BigWorld
+import traceback
+
 import SoundGroups
-from gui.Scaleform.daapi.view.battle.classic.battle_end_warning_panel import BattleEndWarningPanel
 from constants import ARENA_PERIOD
+from gui.Scaleform.daapi.view.battle.classic.battle_end_warning_panel import BattleEndWarningPanel
+from gui.battle_control import avatar_getter
 
 from xfw import *
 import xvm_main.python.config as config
 from xvm_main.python.logger import *
-import traceback
 
 #####################################################################
 # constants
@@ -35,7 +36,7 @@ class XVM_SOUND_EVENT(object):
 def BattleEndWarningPanel_setCurrentTimeLeft(self, totalTime):
     try:
         if config.get('sounds/enabled'):
-          period = BigWorld.player().arena.period
+          period = avatar_getter.getArena().period
           if period == ARENA_PERIOD.BATTLE and totalTime == 300:
               SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.BATTLE_END_300)
           elif period == ARENA_PERIOD.BATTLE and totalTime == 180:

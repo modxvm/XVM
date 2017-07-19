@@ -11,6 +11,7 @@ import traceback
 import uuid
 
 import BigWorld
+from gui.battle_control import avatar_getter
 from gui.shared import g_eventBus, events
 
 import pika
@@ -38,7 +39,8 @@ def is_active():
     return _xmqp_thread and _xmqp.is_consuming
 
 def start():
-    BigWorld.player().arena.onNewVehicleListReceived -= start
+    arena = avatar_getter.getArena()
+    arena.onNewVehicleListReceived -= start
     BigWorld.callback(0, _start)
 
 def _start(e=None):
@@ -51,10 +53,9 @@ def _start(e=None):
         token = config.token.token
         if token:
             players = []
-            player = BigWorld.player()
-            for (vehicleID, vData) in player.arena.vehicles.iteritems():
+            for (vehicleID, vData) in avatar_getter.getArena().vehicles.iteritems():
                 # ally team only
-                if vData['team'] == player.team:
+                if vData['team'] == avatar_getter.getPlayerTeam():
                     players.append(vData['accountDBID'])
             if XMQP_DEVELOPMENT:
                 accountDBID = utils.getAccountDBID()

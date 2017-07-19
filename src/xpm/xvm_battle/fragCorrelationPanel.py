@@ -14,6 +14,7 @@ from skeletons.gui.battle_session import IBattleSessionProvider
 from gui import g_guiResetters
 from gui.app_loader import g_appLoader
 from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
+from gui.battle_control import avatar_getter
 from gui.battle_control.battle_constants import FEEDBACK_EVENT_ID
 from gui.Scaleform.daapi.view.battle.classic.stats_exchange import FragsCollectableStats
 from gui.Scaleform.daapi.view.battle.shared.markers2d.plugins import VehicleMarkerPlugin
@@ -76,7 +77,7 @@ def cleanup():
 def onGUISpaceEntered(spaceID):
     if spaceID == GUI_GLOBAL_SPACE_ID.BATTLE:
         cleanup()
-        for vehicleID, vData in BigWorld.player().arena.vehicles.iteritems():
+        for vehicleID, vData in avatar_getter.getArena().vehicles.iteritems():
             if vData['vehicleType']:
                 update_hp(vehicleID, vData['vehicleType'].maxHealth)
 
@@ -87,7 +88,8 @@ def onGUISpaceEntered(spaceID):
 def _PlayerAvatar_onBecomePlayer(base, self):
     base(self)
     try:
-        BigWorld.player().arena.onVehicleKilled += onVehicleKilled
+        arena = avatar_getter.getArena()
+        arena.onVehicleKilled += onVehicleKilled
         sessionProvider = dependency.instance(IBattleSessionProvider)
         ctrl = sessionProvider.shared.feedback
         if ctrl:
@@ -99,7 +101,8 @@ def _PlayerAvatar_onBecomePlayer(base, self):
 @overrideMethod(PlayerAvatar, 'onBecomeNonPlayer')
 def _PlayerAvatar_onBecomeNonPlayer(base, self):
     try:
-        BigWorld.player().arena.onVehicleKilled -= onVehicleKilled
+        arena = avatar_getter.getArena()
+        arena.onVehicleKilled -= onVehicleKilled
         sessionProvider = dependency.instance(IBattleSessionProvider)
         ctrl = sessionProvider.shared.feedback
         if ctrl:
@@ -196,8 +199,7 @@ def color_gradient(color1, color2, ratio):
 
 def update_hp(vehicleID, hp):
     try:
-        player = BigWorld.player()
-        team = 0 if player.team == player.arena.vehicles[vehicleID]['team'] else 1
+        team = 0 if avatar_getter.getPlayerTeam() == avatar_getter.getArena().vehicles[vehicleID]['team'] else 1
 
         global teams_vehicles, teams_totalhp, total_hp_color, total_hp_sign
 
