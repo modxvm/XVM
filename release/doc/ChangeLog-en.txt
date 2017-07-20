@@ -1,7 +1,16 @@
-﻿XVM-6.8.1-dev:
+﻿XVM-6.8.1:
   [KNOWN ISSUES]
   * Bootcamp: does not work. Run WoT without mods to enter in bootcamp mode.
   * Microsoft Windows XP: crash to desktop on battle loading if graphics mode is standard.
+
+  [ОБЩЕЕ]
+  * World of Tanks 9.19.1 micropatch 1
+
+  [MARKERS]
+  * fixed markers for players with comments
+
+  [TANK CAROUSEL]
+  * fixed carousel reset after battle
 
   [INSTALLER]
   * Implemented WoT detection for Linux and macOS
