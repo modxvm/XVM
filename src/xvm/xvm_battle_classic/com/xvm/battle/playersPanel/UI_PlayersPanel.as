@@ -85,6 +85,19 @@ package com.xvm.battle.playersPanel
             setup();
         }
 
+        public static function fix_state(state:int):int
+        {
+            switch (state)
+            {
+                case PLAYERS_PANEL_STATE.MEDIUM_NO_BADGES:
+                    return PLAYERS_PANEL_STATE.MEDIUM;
+                case PLAYERS_PANEL_STATE.FULL_NO_BADGES:
+                    return PLAYERS_PANEL_STATE.FULL;
+                default:
+                    return state;
+            }
+        }
+
         override protected function configUI():void
         {
             super.configUI();
@@ -403,7 +416,7 @@ package com.xvm.battle.playersPanel
                 if (m_savedState != PLAYERS_PANEL_STATE.NONE)
                 {
                     //Logger.add(String(m_savedState));
-                    xfw_requestState(m_savedState);
+                    xfw_requestState(fix_state(m_savedState));
                 }
                 m_savedState = PLAYERS_PANEL_STATE.NONE;
             }

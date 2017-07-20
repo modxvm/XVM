@@ -280,15 +280,7 @@ package com.xvm.battle.playersPanel
 
         private function get state():int
         {
-            switch (ui.xfw_state)
-            {
-                case PLAYERS_PANEL_STATE.MEDIUM_NO_BADGES:
-                    return PLAYERS_PANEL_STATE.MEDIUM;
-                case PLAYERS_PANEL_STATE.FULL_NO_BADGES:
-                    return PLAYERS_PANEL_STATE.FULL;
-                default:
-                    return ui.xfw_state;
-            }
+            return UI_RankedPlayersPanel.fix_state(ui.xfw_state);
         }
 
         // XVM events handlers
