@@ -1,4 +1,9 @@
-﻿XVM-6.8.1:
+﻿XVM-6.8.2-dev:
+  [KNOWN ISSUES]
+  * Bootcamp: does not work. Run WoT without mods to enter in bootcamp mode.
+  * Microsoft Windows XP: crash to desktop on battle loading if graphics mode is standard.
+
+XVM-6.8.1:
   [KNOWN ISSUES]
   * Bootcamp: does not work. Run WoT without mods to enter in bootcamp mode.
   * Microsoft Windows XP: crash to desktop on battle loading if graphics mode is standard.
