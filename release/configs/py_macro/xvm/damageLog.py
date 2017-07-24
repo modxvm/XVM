@@ -113,6 +113,7 @@ GROUP_DAMAGE_FIRE = 'groupDamagesFromFire'
 SHOW_HIT_NO_DAMAGE = 'showHitNoDamage'
 MOVE_IN_BATTLE = 'moveInBattle'
 TIME_DISPLAY_LAST_HIT = 'timeDisplayLastHit'
+DAMAGE_LOG_ENABLED = 'damageLog/enabled'
 
 SECTION_LOG = 'damageLog/log/'
 SECTION_LOG_ALT = 'damageLog/logAlt/'
@@ -176,7 +177,7 @@ def readyConfig(section):
     else:
         return damageLogConfig[section]
 
-def parser(strHTML, macros):
+def parser(strHTML):
     s = parser_addon.parser_addon(strHTML, macros)
     return s
 
@@ -187,7 +188,7 @@ class Data(object):
 
     def __init__(self):
         def isGoldShell(n, s):
-            if n != 'icons':
+            if (n != 'icons') and (n != 'xmlns:xmlref'):
                 xmlCtx = (None, xmlPath + '/' + n)
                 price = 'gold' in _xml.readPrice(xmlCtx, s, 'price')
                 return _xml.readInt(xmlCtx, s, 'id', 0, 65535) if price else None
@@ -198,7 +199,7 @@ class Data(object):
                 stunDuration = _xml.readStringOrNone(xmlCtx, s, 'stunDuration')
                 return _xml.readInt(xmlCtx, s, 'id', 0, 65535) if stunDuration else None
 
-        self.initial()
+        self.reset()
         self.shells = {}
         self.shells_stunning = {}
         for nation in nations.NAMES:
@@ -208,9 +209,6 @@ class Data(object):
         ResMgr.purge(xmlPath, True)
 
     def reset(self):
-        self.initial()
-
-    def initial(self):
         self.data = {'isAlive': True,
                      'isDamage': False,
                      'attackReasonID': 0,
@@ -557,17 +555,17 @@ def updateValueMacros(section, value):
                    })
 
 
-def shadow_value(section, macros):
-    return {'distance': parser(config.get(section + 'shadow/distance'), macros),
-            'angle': parser(config.get(section + 'shadow/angle'), macros),
-            'alpha': parser(config.get(section + 'shadow/alpha'), macros),
-            'blur': parser(config.get(section + 'shadow/blur'), macros),
-            'strength': parser(config.get(section + 'shadow/strength'), macros),
-            'color': parser(config.get(section + 'shadow/color'), macros),
-            'hideObject': parser(config.get(section + 'shadow/hideObject'), macros),
-            'inner': parser(config.get(section + 'shadow/inner'), macros),
-            'knockout': parser(config.get(section + 'shadow/knockout'), macros),
-            'quality': parser(config.get(section + 'shadow/quality'), macros)
+def shadow_value(section):
+    return {'distance': parser(config.get(section + 'shadow/distance')),
+            'angle': parser(config.get(section + 'shadow/angle')),
+            'alpha': parser(config.get(section + 'shadow/alpha')),
+            'blur': parser(config.get(section + 'shadow/blur')),
+            'strength': parser(config.get(section + 'shadow/strength')),
+            'color': parser(config.get(section + 'shadow/color')),
+            'hideObject': parser(config.get(section + 'shadow/hideObject')),
+            'inner': parser(config.get(section + 'shadow/inner')),
+            'knockout': parser(config.get(section + 'shadow/knockout')),
+            'quality': parser(config.get(section + 'shadow/quality'))
             }
 
 
@@ -638,13 +636,13 @@ class DamageLog(_Base):
     def setOutParameters(self, numberLine):
         updateValueMacros(self.section, self.dataLog)
         if numberLine == ADD_LINE:
-            self.listLog.insert(0, parser(config.get(self.S_FORMAT_HISTORY), macros))
+            self.listLog.insert(0, parser(config.get(self.S_FORMAT_HISTORY)))
         else:
-            self.listLog[numberLine] = parser(config.get(self.S_FORMAT_HISTORY), macros)
+            self.listLog[numberLine] = parser(config.get(self.S_FORMAT_HISTORY))
         if not config.get(self.S_MOVE_IN_BATTLE):
-            self.x = parser(config.get(self.S_X), macros)
-            self.y = parser(config.get(self.S_Y), macros)
-        self.shadow = shadow_value(self.section, macros)
+            self.x = parser(config.get(self.S_X))
+            self.y = parser(config.get(self.S_Y))
+        self.shadow = shadow_value(self.section)
 
     def addLine(self, attackerID, attackReasonID):
         if not (attackerID is None or attackReasonID is None):
@@ -736,11 +734,11 @@ class LastHit(_Base):
 
     def setOutParameters(self, dataLog):
         updateValueMacros(self.section, dataLog)
-        self.strLastHit = parser(config.get(self.S_FORMAT_LAST_HIT), macros)
+        self.strLastHit = parser(config.get(self.S_FORMAT_LAST_HIT))
         if not config.get(self.S_MOVE_IN_BATTLE):
-            self.x = parser(config.get(self.S_X), macros)
-            self.y = parser(config.get(self.S_Y), macros)
-        self.shadow = shadow_value(self.section, macros)
+            self.x = parser(config.get(self.S_X))
+            self.y = parser(config.get(self.S_Y))
+        self.shadow = shadow_value(self.section)
 
     def groupDamages(self):
         isGroupRamming_WorldCollision = (data.data['attackReasonID'] in [2, 3]) and config.get(self.S_GROUP_DAMAGE_RAMMING_COLLISION)
@@ -782,7 +780,7 @@ class LastHit(_Base):
             if self.strLastHit:
                 if (self.timerLastHit is not None) and self.timerLastHit.isStarted:
                     self.timerLastHit.stop()
-                timeDisplayLastHit = float(parser(config.get(self.S_TIME_DISPLAY_LAST_HIT), macros))
+                timeDisplayLastHit = float(parser(config.get(self.S_TIME_DISPLAY_LAST_HIT)))
                 self.timerLastHit = TimeInterval(timeDisplayLastHit, self, 'hideLastHit')
                 self.timerLastHit.start()
                 as_event('ON_LAST_HIT')
@@ -797,7 +795,7 @@ _lastHit = LastHit(SECTION_LASTHIT)
 
 @overrideMethod(DamageLogPanel, '_addToTopLog')
 def DamageLogPanel_addToTopLog(base, self, value, actionTypeImg, vehicleTypeImg, vehicleName, shellTypeStr, shellTypeBG):
-    if config.get('damageLog/disabledDetailStats') and config.get('damageLog/enabled'):
+    if config.get('damageLog/disabledDetailStats') and config.get(DAMAGE_LOG_ENABLED):
         return
     else:
         return base(self, value, actionTypeImg, vehicleTypeImg, vehicleName, shellTypeStr, shellTypeBG)
@@ -805,7 +803,7 @@ def DamageLogPanel_addToTopLog(base, self, value, actionTypeImg, vehicleTypeImg,
 
 @overrideMethod(DamageLogPanel, '_addToBottomLog')
 def DamageLogPanel_addToBottomLog(base, self, value, actionTypeImg, vehicleTypeImg, vehicleName, shellTypeStr, shellTypeBG):
-    if config.get('damageLog/disabledDetailStats') and config.get('damageLog/enabled'):
+    if config.get('damageLog/disabledDetailStats') and config.get(DAMAGE_LOG_ENABLED):
         return
     else:
         return base(self, value, actionTypeImg, vehicleTypeImg, vehicleName, shellTypeStr, shellTypeBG)
@@ -813,7 +811,7 @@ def DamageLogPanel_addToBottomLog(base, self, value, actionTypeImg, vehicleTypeI
 
 @overrideMethod(DamageLogPanel, 'as_summaryStatsS')
 def DamageLogPanel_as_summaryStatsS(base, self, damage, blocked, assist, stun):
-    if config.get('damageLog/disabledSummaryStats') and config.get('damageLog/enabled'):
+    if config.get('damageLog/disabledSummaryStats') and config.get(DAMAGE_LOG_ENABLED):
         return
     else:
         return base(self, damage, blocked, assist, stun)
@@ -821,7 +819,7 @@ def DamageLogPanel_as_summaryStatsS(base, self, damage, blocked, assist, stun):
 
 @overrideMethod(DamageLogPanel, '_onTotalEfficiencyUpdated')
 def DamageLogPanel_onTotalEfficiencyUpdated(base, self, diff):
-    if config.get('damageLog/disabledSummaryStats') and config.get('damageLog/enabled'):
+    if config.get('damageLog/disabledSummaryStats') and config.get(DAMAGE_LOG_ENABLED):
         return
     else:
         return base(self, diff)
@@ -830,7 +828,7 @@ def DamageLogPanel_onTotalEfficiencyUpdated(base, self, diff):
 @registerEvent(Vehicle, 'onHealthChanged')
 def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
     global on_fire
-    if config.get('damageLog/enabled'):
+    if config.get(DAMAGE_LOG_ENABLED):
         if self.isPlayerVehicle and data.data['isAlive']:
             data.onHealthChanged(self, newHealth, attackerID, attackReasonID)
             if newHealth <= 0:
@@ -846,19 +844,19 @@ def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
 
 @registerEvent(PlayerAvatar, 'showVehicleDamageInfo')
 def PlayerAvatar_showVehicleDamageInfo(self, vehicleID, damageIndex, extraIndex, entityID, equipmentID):
-    if (vehicleID == self.playerVehicleID) and config.get('damageLog/enabled'):
+    if (vehicleID == self.playerVehicleID) and config.get(DAMAGE_LOG_ENABLED):
         data.showVehicleDamageInfo(self, vehicleID, damageIndex, extraIndex, entityID, equipmentID)
 
 
 @registerEvent(PlayerAvatar, 'updateVehicleHealth')
 def updateVehicleHealth(self, vehicleID, health, deathReasonID, isCrewActive, isRespawn):
-    if (vehicleID == self.playerVehicleID) and config.get('damageLog/enabled'):
+    if (vehicleID == self.playerVehicleID) and config.get(DAMAGE_LOG_ENABLED):
         data.data['isDamage'] = (max(0, health) != data.data['oldHealth'])
 
 
 @registerEvent(Vehicle, 'onEnterWorld')
 def Vehicle_onEnterWorld(self, prereqs):
-    if self.isPlayerVehicle and config.get('damageLog/enabled'):
+    if self.isPlayerVehicle and config.get(DAMAGE_LOG_ENABLED):
         global on_fire, damageLogConfig, autoReloadConfig, chooseRating
 
         scale = config.networkServicesSettings.scale
@@ -880,19 +878,19 @@ def Vehicle_onEnterWorld(self, prereqs):
 
 @registerEvent(Vehicle, 'showDamageFromShot')
 def Vehicle_showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor):
-    if self.isPlayerVehicle and data.data['isAlive'] and config.get('damageLog/enabled'):
+    if self.isPlayerVehicle and data.data['isAlive'] and config.get(DAMAGE_LOG_ENABLED):
         data.showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor)
 
 
 @registerEvent(Vehicle, 'showDamageFromExplosion')
 def Vehicle_showDamageFromExplosion(self, attackerID, center, effectsIndex, damageFactor):
-    if self.isPlayerVehicle and data.data['isAlive'] and config.get('damageLog/enabled'):
+    if self.isPlayerVehicle and data.data['isAlive'] and config.get(DAMAGE_LOG_ENABLED):
         data.showDamageFromExplosion(self, attackerID, center, effectsIndex, damageFactor)
 
 
 @registerEvent(Vehicle, 'updateStunInfo')
 def Vehicle_updateStunInfo(self):
-    if self.isPlayerVehicle and config.get('damageLog/enabled'):
+    if self.isPlayerVehicle and config.get(DAMAGE_LOG_ENABLED):
         stunDuration = self.stunInfo - BigWorld.serverTime() if self.stunInfo else None
         if stunDuration is not None:
             data.updateStunInfo(self, stunDuration)
@@ -901,7 +899,7 @@ def Vehicle_updateStunInfo(self):
 @registerEvent(DamagePanelMeta, 'as_setFireInVehicleS')
 def DamagePanelMeta_as_setFireInVehicleS(self, isInFire):
     global on_fire, beginFire
-    if config.get('damageLog/enabled'):
+    if config.get(DAMAGE_LOG_ENABLED):
         if isInFire:
             on_fire = 100
             beginFire = BigWorld.time()
@@ -925,7 +923,7 @@ def PlayerAvatar__destroyGUI(self):
 @registerEvent(PlayerAvatar, 'handleKey')
 def PlayerAvatar_handleKey(self, isDown, key, mods):
     global isDownAlt
-    if config.get('damageLog/enabled'):
+    if config.get(DAMAGE_LOG_ENABLED):
         hotkey = config.get('hotkeys/damageLogAltMode')
         if hotkey['enabled'] and (key == hotkey['keyCode']):
             if isDown:
