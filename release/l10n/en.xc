@@ -187,8 +187,8 @@
     "china": "China",
     "japan": "Japan",
     "czech": "Сzech",
-    "sweden": "Sweden",
     "poland": "Poland",
+    "sweden": "Sweden",
     
     // Vehicle type
     "HT": "HT",
