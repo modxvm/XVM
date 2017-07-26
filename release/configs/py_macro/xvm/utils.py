@@ -122,3 +122,20 @@ def dynamic_color_rating(rating, value):
             r_c = v['color']
             r_v = v['value']
     return l[0]['color'][2:]
+
+def color_rating(rating, value):
+    """
+    Dynamic color by various statistical parameters. (file color.xc)
+    :param rating: str the name of dynamic color from the color.xc file.
+    :param value: int value.
+    :return: str hex "FFFFFF".
+    """
+    colors = config.get('colors')
+    rating = 'x' if rating in ['xeff', 'xte', 'xeff', 'xwn6', 'xwn8', 'xwgr', 'xtdb'] else rating
+    if (rating not in colors) or (value is None):
+        return
+    for v in colors[rating]:
+        if v['value'] > value:
+            return v['color'][2:]
+    l = len(colors[rating]) - 1
+    return colors[rating][l].get('color'[2:])

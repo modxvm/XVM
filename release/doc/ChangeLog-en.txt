@@ -3,6 +3,9 @@
   * Bootcamp: does not work. Run WoT without mods to enter in bootcamp mode.
   * Microsoft Windows XP: crash to desktop on battle loading if graphics mode is standard.
 
+  [PYTHON MACROS]
+  * added the macro {{py:xvm.color_rating(r, v)}}
+  
 XVM-6.8.1:
   [KNOWN ISSUES]
   * Bootcamp: does not work. Run WoT without mods to enter in bootcamp mode.
@@ -156,10 +159,10 @@ XVM-6.6.5:
   [DAMAGE LOG]
   * added macro {{stun-duration}}
 
-  [PYTHON MACROSES]
+  [PYTHON MACROS]
   * totalEfficiency: added the macro {{py:xvm.numberDamagedVehicles}}
 
-  [PYTHON MACROSES]
+  [PYTHON MACROS]
   * added macros {{py:xvm.screenWidth}}, {{py:xvm.screenHeight}}, {{py:xvm.screenVCenter}} and {{py:xvm.screenHCenter}}
 
   [DAMAGE LOG]
@@ -216,9 +219,9 @@ XVM-6.6.0:
 
   [DAMAGE LOG]
   * 'alive' value of a macro {{my-alive} } is renamed into 'al'
-  * added macroses {{wn6}}, {{xwn6}}, {{r}}, {{c:wn6}}, {{c:xwn6}}, {{c:r}}
+  * added macros {{wn6}}, {{xwn6}}, {{r}}, {{c:wn6}}, {{c:xwn6}}, {{c:r}}
 
-  [PYTHON MACROSES]
+  [PYTHON MACROS]
   * totalEfficiency: added the macros {{py:xvm.totalStun}}, {{py:xvm.isStuns}}, {{py:xvm.numberStuns}}
 
   [WIDGETS]
@@ -270,9 +273,9 @@ XVM-6.5.6:
   * fixed premium XP counter in the battle results window
   * fixed win chances in the battle results window
 
-  [PYTHON MACROSES]
+  [PYTHON MACROS]
   * added the macro {{py:xvm.dynamic_color_rating(rating, value)}}
-  * totalEfficiency: fixed macroses {{py:xvm.crits}} and {{py:xvm.detection}}
+  * totalEfficiency: fixed macros {{py:xvm.crits}} and {{py:xvm.detection}}
   * repairTime: fixed timers stuck on switching in observer mode
   * damageLog: fixed option "moveInBattle"
   * damageLog: fixed macros usage in the "x" and "y" parameters
@@ -319,12 +322,12 @@ XVM-6.5.5:
   * fixed battle tier calculation
   * fixed dynamic platoons
 
-  [MACROSES]
+  [MACROS]
   * allow formatting for recursive macros like `{{{{py:random.randint()}}==0?zero|one}}`
 
-  [PYTHON MACROSES]
+  [PYTHON MACROS]
   * added xvm.utils.smooth_transition_color() function
-  * added list of available macroses with their description (/res_mods/mods/shared_resources/xvm/docs/py_macros.txt)
+  * added list of available macros with their description (/res_mods/mods/shared_resources/xvm/docs/py_macros.txt)
 
 XVM-6.5.4:
   * adaptation to WoT 0.9.17.0.3

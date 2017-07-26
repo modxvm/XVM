@@ -84,9 +84,14 @@ def xvm_team_strength(a, e):
 
 # Dynamic color
 
-@xvm.export('xvm.dynamic_color_rating', deterministic=False)
+@xvm.export('xvm.dynamic_color_rating')
 def dynamic_color_rating(rating, value=None):
     return utils.dynamic_color_rating(rating, value)
+
+
+@xvm.export('xvm.color_rating')
+def color_rating(rating, value=None):
+    return utils.color_rating(rating, value)
 
 
 # TotalHP
