@@ -38,6 +38,8 @@ totalStun = 0
 numberStuns = 0
 isStuns = None
 numberDamagedVehicles = []
+hitAlly = False
+allyVehicles = []
 
 
 ribbonTypes = {
@@ -81,7 +83,7 @@ def ArenaDataProvider_updateVehicleStats(self, vID, vStats):
 
 @registerEvent(PlayerAvatar, 'showShotResults')
 def PlayerAvatar_showShotResults(self, results):
-    global numberHits, numberStuns, numberDamagedVehicles
+    global numberHits, numberStuns, numberDamagedVehicles, hitAlly
     b = False
     for r in results:
         vehID = (r & 4294967295L)
@@ -100,6 +102,10 @@ def PlayerAvatar_showShotResults(self, results):
             elif (flags & (VHF.GUN_DAMAGED_BY_PROJECTILE | VHF.GUN_DAMAGED_BY_EXPLOSION)) or (flags & (VHF.CHASSIS_DAMAGED_BY_PROJECTILE | VHF.CHASSIS_DAMAGED_BY_EXPLOSION)):
                 if vehID not in numberDamagedVehicles:
                     numberDamagedVehicles.append(vehID)
+                    b = True
+            if not hitAlly and (flags & (VHF.IS_ANY_DAMAGE_MASK | VHF.ATTACK_IS_DIRECT_PROJECTILE)):
+                if vehID in allyVehicles:
+                    hitAlly = True
                     b = True
     if b:
         as_event('ON_TOTAL_EFFICIENCY')
@@ -218,11 +224,13 @@ def onHealthChanged(self, newHealth, attackerID, attackReasonID):
 
 @registerEvent(Vehicle, 'onEnterWorld')
 def onEnterWorld(self, prereqs):
-    global player, isPlayerInSquad, isStuns
-    player = BigWorld.player()
+    global player, isPlayerInSquad, isStuns, vehiclesHealth, allyVehicles
+    if player is None:
+        player = BigWorld.player()
     if self.publicInfo['team'] != player.team:
-        global vehiclesHealth
         vehiclesHealth[self.id] = self.health
+    else:
+        allyVehicles.append(self.id)
     if self.isPlayerVehicle:
         global maxHealth, vehCD
         isPlayerInSquad = player.guiSessionProvider.getArenaDP().isSquadMan(player.playerVehicleID)
@@ -236,7 +244,7 @@ def destroyGUI(self):
     global vehiclesHealth, totalDamage, totalAssist, totalBlocked, damageReceived, damagesSquad, detection, isPlayerInSquad
     global ribbonTypes, numberHitsBlocked, player, numberHitsDealt, old_totalDamage, damage, numberShotsDealt, totalStun
     global numberDamagesDealt, numberShotsReceived, numberHitsReceived, numberHits, fragsSquad, fragsSquad_dict, isStuns
-    global numberStuns, numberDamagedVehicles
+    global numberStuns, numberDamagedVehicles, hitAlly, allyVehicles
     vehiclesHealth = {}
     totalDamage = 0
     damage = 0
@@ -260,7 +268,9 @@ def destroyGUI(self):
     totalStun = 0
     numberStuns = 0
     isStuns = None
+    hitAlly = False
     numberDamagedVehicles = []
+    allyVehicles = []
     ribbonTypes = {
         'armor': 0,
         'damage': 0,

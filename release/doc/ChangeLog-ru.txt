@@ -5,6 +5,7 @@
 
   [МАКРОСЫ НА PYTHON]
   * добавлен макрос {{py:xvm.color_rating(r, v)}}
+  * totalEfficiency: добавлен макрос {{py:xvm.hitAlly}}
   
 XVM-6.8.1:
   [ИЗВЕСТНЫЕ ПРОБЛЕМЫ]
