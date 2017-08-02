@@ -34,6 +34,9 @@
     // Show camera line after death
     // Отображать линию направления камеры после смерти
     "showDirectionLineAfterDeath": true,
+    // Show cell click animation
+    // Отображать анимацию клика по ячейке
+    "showCellClickAnimation": true,
     // Path to icon for arty aim
     // Путь к иконке для артиллерийского прицела
     "minimapAimIcon": "xvm://res/MinimapAim.png",

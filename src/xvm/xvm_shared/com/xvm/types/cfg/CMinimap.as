@@ -19,6 +19,7 @@ package com.xvm.types.cfg
         public var directionTriangleAlpha:*;
         public var directionLineAlpha:*;
         public var showDirectionLineAfterDeath:*;
+        public var showCellClickAnimation:*;
         public var minimapAimIcon:String;
         public var minimapAimIconScale:*;
         public var zoom:CMinimapZoom;
@@ -40,6 +41,7 @@ package com.xvm.types.cfg
         {
             enabled = Macros.FormatBooleanGlobal(enabled, true);
             mapBackgroundImageAlpha = Macros.FormatNumberGlobal(mapBackgroundImageAlpha);
+            showCellClickAnimation = Macros.FormatBooleanGlobal(showCellClickAnimation, false);
             minimapAimIcon = Macros.FormatStringGlobal(minimapAimIcon);
             minimapAimIconScale = Macros.FormatNumberGlobal(minimapAimIconScale);
             if (zoom)

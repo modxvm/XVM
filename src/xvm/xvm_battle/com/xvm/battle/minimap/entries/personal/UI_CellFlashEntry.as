@@ -5,6 +5,7 @@
 package com.xvm.battle.minimap.entries.personal
 {
     import com.xfw.*;
+    import com.xvm.battle.minimap.*;
 
     public class UI_CellFlashEntry extends CellFlashEntry
     {
@@ -23,6 +24,24 @@ package com.xvm.battle.minimap.entries.personal
                 xvm_delEntry();
             }
             super.onDispose();
+        }
+
+        override public function playAnimation():void
+        {
+            if (_entryDeleted)
+            {
+                return;
+            }
+
+            if (UI_Minimap.cfg.showCellClickAnimation)
+            {
+                mcAnimation.visible = true;
+                super.playAnimation();
+            }
+            else
+            {
+                mcAnimation.visible = false;
+            }
         }
 
         // DAAPI

@@ -6,7 +6,10 @@
   [PYTHON MACROS]
   * added the macro {{py:xvm.color_rating(r, v)}}
   * totalEfficiency: added the macro {{py:xvm.hitAlly}}
-  
+
+  [MINIMAP]
+  * added option "showCellClickAnimation" - allow to disable cell click animation
+
 XVM-6.8.1:
   [KNOWN ISSUES]
   * Bootcamp: does not work. Run WoT without mods to enter in bootcamp mode.
