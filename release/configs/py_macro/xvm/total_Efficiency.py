@@ -39,6 +39,7 @@ numberStuns = 0
 isStuns = None
 numberDamagedVehicles = []
 hitAlly = False
+burst = 1
 allyVehicles = []
 
 
@@ -116,7 +117,7 @@ def ShowShooting_start(self, data, burstCount):
     global numberShotsDealt
     vehicle = data['entity']
     if vehicle is not None and vehicle.isPlayerVehicle and vehicle.isAlive():
-        numberShotsDealt += 1
+        numberShotsDealt += burst
         as_event('ON_TOTAL_EFFICIENCY')
 
 
@@ -232,9 +233,10 @@ def onEnterWorld(self, prereqs):
     else:
         allyVehicles.append(self.id)
     if self.isPlayerVehicle:
-        global maxHealth, vehCD
+        global maxHealth, vehCD, burst
         isPlayerInSquad = player.guiSessionProvider.getArenaDP().isSquadMan(player.playerVehicleID)
         vehCD = self.typeDescriptor.type.compactDescr
+        burst = self.typeDescriptor.gun['burst'][0]
         maxHealth = self.health
         isStuns = 'st' if 'stunDuration' in self.typeDescriptor.shot['shell'] else None
 
@@ -244,7 +246,7 @@ def destroyGUI(self):
     global vehiclesHealth, totalDamage, totalAssist, totalBlocked, damageReceived, damagesSquad, detection, isPlayerInSquad
     global ribbonTypes, numberHitsBlocked, player, numberHitsDealt, old_totalDamage, damage, numberShotsDealt, totalStun
     global numberDamagesDealt, numberShotsReceived, numberHitsReceived, numberHits, fragsSquad, fragsSquad_dict, isStuns
-    global numberStuns, numberDamagedVehicles, hitAlly, allyVehicles
+    global numberStuns, numberDamagedVehicles, hitAlly, allyVehicles, burst
     vehiclesHealth = {}
     totalDamage = 0
     damage = 0
@@ -269,6 +271,7 @@ def destroyGUI(self):
     numberStuns = 0
     isStuns = None
     hitAlly = False
+    burst = 1
     numberDamagedVehicles = []
     allyVehicles = []
     ribbonTypes = {
