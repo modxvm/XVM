@@ -65,12 +65,23 @@ package com.xvm.lobby.ui.battleresults
 
         override protected function onDispose():void
         {
-            super.onDispose();
-
             tankSlot.removeEventListener(ListEvent.INDEX_CHANGE, onDropDownIndexChangeHandler);
 
             _data = null;
             xdataList = null;
+
+            try
+            {
+                // Some error occurs for an unknown reason
+                super.onDispose();
+            }
+            catch (ex:Error)
+            {
+                if (Config.IS_DEVELOPMENT)
+                {
+                    //Logger.err(ex);
+                }
+            }
         }
 
         override public function update(data:Object):void

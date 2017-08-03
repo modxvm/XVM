@@ -19,8 +19,6 @@ package com.xvm.lobby.battleresults
 
     public class BattleResultsXvmView extends XvmViewBase
     {
-        private static const UI_COMMON_STATS:String = "com.xvm.lobby.ui.battleresults::UI_CommonStats";
-
         private var _winChances:WinChances;
 
         public function BattleResultsXvmView(view:IView)
@@ -49,11 +47,6 @@ package com.xvm.lobby.battleresults
         private function onTabIndexChange(e:IndexEvent):void
         {
             page.tabs_mc.removeEventListener(IndexEvent.INDEX_CHANGE, this.onTabIndexChange);
-
-            var dp:Array = page.tabs_mc.dataProvider as Array;
-            dp[0]["linkage"] = UI_COMMON_STATS;
-            page.tabs_mc.dataProvider = new DataProvider(dp);
-            page.tabs_mc.selectedIndex = -1;
 
             // set startPage
             var startPage:Number = Config.config.battleResults.startPage - 1;
