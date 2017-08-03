@@ -81,6 +81,9 @@ package com.xvm.extraFields
                             case "ON_PANEL_MODE_CHANGED":
                                 Xvm.addEventListener(PlayerStateEvent.ON_PANEL_MODE_CHANGED, field.updateOnEvent);
                                 break;
+                            case "ON_MY_STAT_LOADED":
+                                Xvm.addEventListener(PlayerStateEvent.ON_MY_STAT_LOADED, field.updateOnEvent);
+                                break;
                             case "ON_EVERY_FRAME":
                                 Xvm.addEventListener(PlayerStateEvent.ON_EVERY_FRAME, field.updateOnEvent);
                                 if (!timerFrame)

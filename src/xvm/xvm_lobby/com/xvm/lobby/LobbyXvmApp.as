@@ -35,8 +35,8 @@ package com.xvm.lobby
 
             Xfw.addCommandListener(LobbyXvmApp.AS_UPDATE_BATTLE_TYPE, onUpdateBattleType);
 
+            LobbyMacros.RegisterMyStatMacros();
             LobbyMacros.RegisterVehiclesMacros();
-            LobbyMacros.RegisterClockMacros();
         }
 
         // PRIVATE

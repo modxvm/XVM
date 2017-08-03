@@ -129,6 +129,7 @@ Legend:
 │                   │   │   │   │   │   │   │   ON_TARGET_IN                 - aim at the vehicle
 │                   │   │   │   │   │   │   │   ON_TARGET_OUT                - aim not at the vehicle
 │                   │   │   │   │   │   │   │   ON_PANEL_MODE_CHANGED
+│                   │   │   │   │   │   │   │   ON_MY_STAT_LOADED            - own stat loading complete
 │                   │   │   │   │   │   │   │   ON_EVERY_FRAME               * can reduce performance
 │                   │   │   │   │   │   │   │   ON_EVERY_SECOND              * can reduce performance
 │                   │   │   │   │   │   │   │   PY(event_name)               - event from python, sent by as_event(event_name)

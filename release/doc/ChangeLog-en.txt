@@ -10,6 +10,11 @@
   [MINIMAP]
   * added option "showCellClickAnimation" - allow to disable cell click animation
 
+  [WIDGETS]
+  * added macros {{mystat.*}} with own statistics values
+  * added event:
+      ON_MY_STAT_LOADED - emitted when own stat loading complete, useful for {{mystat.*}} macros
+
 XVM-6.8.1:
   [KNOWN ISSUES]
   * Bootcamp: does not work. Run WoT without mods to enter in bootcamp mode.

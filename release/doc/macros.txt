@@ -130,14 +130,14 @@ Legend:
 │ S │ {{r}}              │ X │ X │ X │ X │ X │ X │ player's rating (type of rating can be selected in the personal cabinet: http://www.modxvm.com/)
 │ S │ {{xr}}             │ X │ X │ X │ X │ X │ X │ same as {{r}} but always in XVM Scale
 │ S │ {{xte}}            │ X │ X │ X │ X │ X │ X │ per-vehicle efficiency (xTE) (values 00-99, XX for Tops)
-│ S │ {{xeff}}           │ X │ X │ X │ X │ X │ X │ XVM Scale for efficiency (values 00-99, XX for Tops)
-│ S │ {{xwn6}}           │ X │ X │ X │ X │ X │ X │ XVM Scale for WN6 (values 00-99, XX for Tops)
-│ S │ {{xwn8}}           │ X │ X │ X │ X │ X │ X │ XVM Scale for WN8 (values 00-99, XX for Tops)
-│ S │ {{xwgr}}           │ X │ X │ X │ X │ X │ X │ XVM Scale for WG rating (values 00-99, XX for Tops)
 │ S │ {{eff}}            │ X │ X │ X │ X │ X │ X │ player efficiency: http://www.koreanrandom.com/forum/topic/13386-
 │ S │ {{wn6}}            │ X │ X │ X │ X │ X │ X │ WN6 rating: http://www.koreanrandom.com/forum/topic/13388-
 │ S │ {{wn8}}            │ X │ X │ X │ X │ X │ X │ WN8 rating: http://www.koreanrandom.com/forum/topic/13434-
-│ S │ {{wgr}}            │ X │ X │ X │ X │ X │ X │ WG rating:  http://www.koreanrandom.com/forum/topic/13433-
+│ S │ {{wgr}}            │ X │ X │ X │ X │ X │ X │ WG personal rating:  http://www.koreanrandom.com/forum/topic/13433-
+│ S │ {{xeff}}           │ X │ X │ X │ X │ X │ X │ XVM Scale for efficiency (values 00-99, XX for Tops)
+│ S │ {{xwn6}}           │ X │ X │ X │ X │ X │ X │ XVM Scale for WN6 (values 00-99, XX for Tops)
+│ S │ {{xwn8}}           │ X │ X │ X │ X │ X │ X │ XVM Scale for WN8 (values 00-99, XX for Tops)
+│ S │ {{xwgr}}           │ X │ X │ X │ X │ X │ X │ XVM Scale for WG personal rating (values 00-99, XX for Tops)
 │ S │ {{winrate}}        │ X │ X │ X │ X │ X │ X │ GWR (Global Win Ratio)
 │ S │ {{battles}}        │ X │ X │ X │ X │ X │ X │ total battles count
 │ S │ {{wins}}           │ X │ X │ X │ X │ X │ X │ total wins count

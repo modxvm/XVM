@@ -80,6 +80,30 @@ Legend:
 │ {{v.gunDispersion}}        │ . │ . │ base dispersion at 100 m for current gun
 │ {{v.gunAimingTime}}        │ . │ . │ base aiming time for current gun
 │ {{v.selected}}             │ X │ . │ 'sel' for selected, empty for others
+│ {{mystat._id}}             │ . │ . │ ID of current player
+│ {{mystat.name}}            │ . │ . │ nick of current player
+│ {{mystat.flag}}            │ . │ . │ flag selected in the personal cabinet on the www.modxvm.com site
+│ {{mystat.cid}}             │ . │ . │ clan ID
+│ {{mystat.clan}}            │ . │ . │ clan name
+│ {{mystat.winrate}}         │ . │ . │ GWR (Global Win Ratio)
+│ {{mystat.e}}               │ . │ . │ player efficiency: http://www.koreanrandom.com/forum/topic/13386-
+│ {{mystat.wgr}}             │ . │ . │ WG personal rating:  http://www.koreanrandom.com/forum/topic/13433-
+│ {{mystat.wn6}}             │ . │ . │ WN6 rating: http://www.koreanrandom.com/forum/topic/13388-
+│ {{mystat.wn8}}             │ . │ . │ WN8 rating: http://www.koreanrandom.com/forum/topic/13434-
+│ {{mystat.xeff}}            │ . │ . │ XVM Scale for efficiency (values 00-99, XX for Tops)
+│ {{mystat.xwgr}}            │ . │ . │ XVM Scale for WG personal rating (values 00-99, XX for Tops)
+│ {{mystat.xwn6}}            │ . │ . │ XVM Scale for WN6 (values 00-99, XX for Tops)
+│ {{mystat.xwn8}}            │ . │ . │ XVM Scale for WN8 (values 00-99, XX for Tops)
+│ {{mystat.lvl}}             │ . │ . │ average level (tier) of tanks
+│ {{mystat.b}}               │ . │ . │ total battles count
+│ {{mystat.w}}               │ . │ . │ total wins count
+│ {{mystat.def}}             │ . │ . │ total defense points
+│ {{mystat.frg}}             │ . │ . │ total frags count
+│ {{mystat.dmg}}             │ . │ . │ total damage points
+│ {{mystat.cap}}             │ . │ . │ total base capture points
+│ {{mystat.hip}}             │ . │ . │ total average hit percent
+│ {{mystat.spo}}             │ . │ . │ total spotted count
+│ {{mystat.ts}}              │ . │ . │ statistics update timestamp
 │ {{l10n:ID}}                │ . │ . │ localizated text, see en.xc for id
 │ {{py:f()}}                 │ . │ . │ dynamic python function call
 └────────────────────────────┴───┴───┴─────────────────────────────────

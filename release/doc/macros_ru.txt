@@ -131,15 +131,15 @@ Legend:
 │ S │ {{r}}              │ X │ X │ X │ X │ X │ X │ рейтинг игрока (тип рейтинга можно выбрать в личном кабинете: http://www.modxvm.com/)
 │ S │ {{xr}}             │ X │ X │ X │ X │ X │ X │ {{r}} всегда по шкале XVM
 │ S │ {{xte}}            │ X │ X │ X │ X │ X │ X │ потанковый рейтинг (xTE) (значения 00-99, XX для топовых показателей)
+│ S │ {{eff}}            │ X │ X │ X │ X │ X │ X │ рейтинг эффективности (РЭ) по wot-news.com: http://www.koreanrandom.com/forum/topic/13386-
+│ S │ {{wn6}}            │ X │ X │ X │ X │ X │ X │ рейтинг WN6: http://www.koreanrandom.com/forum/topic/13388-
+│ S │ {{wn8}}            │ X │ X │ X │ X │ X │ X │ рейтинг WN8: http://www.koreanrandom.com/forum/topic/13434-
+│ S │ {{wgr}}            │ X │ X │ X │ X │ X │ X │ рейтинг WG (ЛРИ): http://www.koreanrandom.com/forum/topic/13433-
 │ S │ {{xeff}}           │ X │ X │ X │ X │ X │ X │ шкала XVM для РЭ  (значения 00-99, XX для топовых показателей)
 │ S │ {{xwn6}}           │ X │ X │ X │ X │ X │ X │ шкала XVM для WN6 (значения 00-99, XX для топовых показателей)
 │ S │ {{xwn8}}           │ X │ X │ X │ X │ X │ X │ шкала XVM для WN8 (значения 00-99, XX для топовых показателей)
 │ S │ {{xwgr}}           │ X │ X │ X │ X │ X │ X │ шкала XVM для WG  (значения 00-99, XX для топовых показателей)
-│ S │ {{eff}}            │ X │ X │ X │ X │ X │ X │ рейтинг эффективности (РЭ) по wot-news.com: http://www.koreanrandom.com/forum/topic/13386-
-│ S │ {{wn6}}            │ X │ X │ X │ X │ X │ X │ рейтинг WN6: http://www.koreanrandom.com/forum/topic/13388-
-│ S │ {{wn8}}            │ X │ X │ X │ X │ X │ X │ рейтинг WN8: http://www.koreanrandom.com/forum/topic/13434-
-│ S │ {{wgr}}            │ X │ X │ X │ X │ X │ X │ рейтинг WG:  http://www.koreanrandom.com/forum/topic/13433-
-│ S │ {{winrate}}        │ X │ X │ X │ X │ X │ X │ Общий процент побед (Global Win Ratio)
+│ S │ {{winrate}}        │ X │ X │ X │ X │ X │ X │ общий процент побед (Global Win Ratio)
 │ S │ {{battles}}        │ X │ X │ X │ X │ X │ X │ общее кол-во боёв 
 │ S │ {{wins}}           │ X │ X │ X │ X │ X │ X │ общее кол-во побед
 │ S │ {{kb}}             │ X │ X │ X │ X │ X │ X │ число кило-боёв (общее кол-во боёв делённое на 1000)

@@ -6,6 +6,7 @@ package com.xvm
 {
     import com.xfw.*;
     import com.xfw.events.*;
+    import com.xvm.battle.events.*;
     import com.xvm.types.stat.*;
     import flash.events.*;
 
@@ -84,6 +85,7 @@ package com.xvm
         private var battleCache:Object;
         private var battleResultsCache:Object;
         private var userCache:Object;
+        private var activeUserRequests:Object;
 
         function Stat()
         {
@@ -92,6 +94,7 @@ package com.xvm
             battleCache = {};
             battleResultsCache = {};
             userCache = {};
+            activeUserRequests = {};
             Xfw.addCommandListener(XvmCommandsInternal.AS_STAT_BATTLE_DATA, battleLoaded);
             Xfw.addCommandListener(XvmCommandsInternal.AS_STAT_BATTLE_RESULTS_DATA, battleResultsLoaded);
             Xfw.addCommandListener(XvmCommandsInternal.AS_STAT_USER_DATA, userLoaded);
@@ -192,17 +195,21 @@ package com.xvm
             return updatedPlayers;
         }
 
-        private function loadUserData(value:String):void
+        private function loadUserData(name:String):void
         {
             //Logger.add("TRACE: loadUserData()");
             try
             {
-                if (!value)
+                if (!name)
                 {
                     dispatchEvent(new ObjectEvent(COMPLETE_USERDATA, null));
                     return;
                 }
-                Xfw.cmd(XvmCommandsInternal.LOAD_STAT_USER, value);
+                if (!activeUserRequests.hasOwnProperty(name))
+                {
+                    activeUserRequests[name] = true;
+                    Xfw.cmd(XvmCommandsInternal.LOAD_STAT_USER, name);
+                }
             }
             catch (ex:Error)
             {
@@ -227,6 +234,7 @@ package com.xvm
                 userCache[keyName] = sd;
                 keyId = "ID/" + sd._id;
                 userCache[keyId] = sd;
+                delete activeUserRequests[name];
             }
             catch (ex:Error)
             {
@@ -236,6 +244,10 @@ package com.xvm
             finally
             {
                 dispatchEvent(new ObjectEvent(COMPLETE_USERDATA, name));
+                if (name == Xfw.cmd(XvmCommands.GET_PLAYER_NAME))
+                {
+                    Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.ON_MY_STAT_LOADED));
+                }
             }
             return null;
         }
