@@ -21,6 +21,7 @@ import sys
 from math import degrees, pi
 
 import BigWorld
+from constants import SHELL_TYPES
 import game
 import gui.shared.tooltips.vehicle as tooltips_vehicle
 from gun_rotation_shared import calcPitchLimitsFromDesc
@@ -61,7 +62,7 @@ shells_vehicles_compatibility = {}
 carousel_tooltips_cache = {}
 styles_templates = {}
 toolTipDelayIntervalId = None
-weightTooHeavy = False  
+weightTooHeavy = False
 p_replacement = None # will be something like <font size... color...>
 
 #####################################################################
@@ -269,11 +270,12 @@ def CommonStatsBlockConstructor_construct(base, self):
                     explosionRadiusMin = 999
                     explosionRadiusMax = 0
                     for shot in gun.shots:
-                        if 'explosionRadius' in shot.shell:
-                            if shot.shell.explosionRadius < explosionRadiusMin:
-                                explosionRadiusMin = shot.shell.explosionRadius
-                            if shot.shell.explosionRadius > explosionRadiusMax:
-                                explosionRadiusMax = shot.shell.explosionRadius
+                        if shot.shell.kind == SHELL_TYPES.HIGH_EXPLOSIVE:
+                            explosionRadius = shot.shell.type.explosionRadius
+                            if explosionRadius < explosionRadiusMin:
+                                explosionRadiusMin = explosionRadius
+                            if explosionRadius > explosionRadiusMax:
+                                explosionRadiusMax = explosionRadius
                     if explosionRadiusMax == 0: # no HE
                         continue
                     explosionRadius_str = formatNumber(explosionRadiusMin)
