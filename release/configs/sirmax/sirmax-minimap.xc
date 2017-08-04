@@ -32,7 +32,7 @@
     "directionTriangleAlpha": 50,
     "directionLineAlpha": 50,
     "showDirectionLineAfterDeath": false,
-    "showCellClickAnimation": false,
+    //"showCellClickAnimation": false,
     "minimapAimIcon": "cfg://sirmax/img/MinimapAim2.png",
     "minimapAimIconScale": 200,
     "zoom": { "index": 5, "centered": true },
