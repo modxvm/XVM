@@ -16,7 +16,7 @@ from skeletons.gui.battle_session import IBattleSessionProvider
 from gui.app_loader import g_appLoader
 from gui.app_loader.settings import APP_NAME_SPACE, GUI_GLOBAL_SPACE_ID
 from gui.shared import g_eventBus, events
-from gui.shared.utils.functions import getBattleSubTypeBaseNumder
+from gui.shared.utils.functions import getBattleSubTypeBaseNumber
 from gui.battle_control import avatar_getter
 from gui.battle_control.arena_info.settings import INVALIDATE_OP
 from gui.battle_control.battle_constants import FEEDBACK_EVENT_ID
@@ -220,7 +220,7 @@ class Battle(object):
             if app is not None and app.loaderManager is not None:
                 app.loaderManager.onViewLoaded -= self.onViewLoaded
 
-    def onViewLoaded(self, view=None):
+    def onViewLoaded(self, view, loadParams):
         if view and view.uniqueName in [VIEW_ALIAS.CLASSIC_BATTLE_PAGE, VIEW_ALIAS.RANKED_BATTLE_PAGE]:
             self.battle_page = weakref.proxy(view)
 
@@ -383,7 +383,7 @@ class Battle(object):
 
             elif cmd == XVM_BATTLE_COMMAND.CAPTURE_BAR_GET_BASE_NUM_TEXT:
                 n = int(args[0])
-                res = getBattleSubTypeBaseNumder(BigWorld.player().arenaTypeID, n & 0x3F, n >> 6)
+                res = getBattleSubTypeBaseNumber(BigWorld.player().arenaTypeID, n & 0x3F, n >> 6)
                 return (res, True)
 
             elif cmd == XVM_BATTLE_COMMAND.MINIMAP_CLICK:

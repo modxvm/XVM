@@ -30,7 +30,6 @@ package com.xvm.lobby.ui
     UI_MultiselectionSlots;
     UI_SmallTankCarouselItemRenderer;
     UI_TankCarousel;
-    UI_TankCarouselFilters;
     UI_TankCarouselItemRenderer;
 
     import com.xvm.lobby.ui.techtree.*;

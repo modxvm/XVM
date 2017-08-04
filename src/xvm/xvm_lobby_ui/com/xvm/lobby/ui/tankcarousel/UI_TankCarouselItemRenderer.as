@@ -14,8 +14,9 @@ package com.xvm.lobby.ui.tankcarousel
 
     public /*dynamic*/ class UI_TankCarouselItemRenderer extends TankCarouselItemRendererUI implements IExtraFieldGroupHolder, ITankCarouselItemRenderer
     {
-        public static const DEFAULT_WIDTH:int = 162;
-        public static const DEFAULT_HEIGHT:int = 102;
+        public static const DEFAULT_RENDERER_WIDTH:int = 162;
+        public static const DEFAULT_RENDERER_HEIGHT:int = 110;
+        public static const DEFAULT_RENDERER_VISIBLE_HEIGHT:int = 102;
 
         private var _helper:TankCarouselItemRendererHelper;
 
@@ -31,7 +32,7 @@ package com.xvm.lobby.ui.tankcarousel
             super();
             try
             {
-                _helper = new TankCarouselItemRendererHelper(this, Config.config.hangar.carousel.normal, DEFAULT_WIDTH, DEFAULT_HEIGHT);
+                _helper = new TankCarouselItemRendererHelper(this, Config.config.hangar.carousel.normal, DEFAULT_RENDERER_WIDTH, DEFAULT_RENDERER_HEIGHT);
                 Xfw.addCommandListener(LobbyXvmApp.AS_UPDATE_BATTLE_TYPE, updateData);
             }
             catch (ex:Error)

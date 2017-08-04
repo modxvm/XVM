@@ -10,6 +10,7 @@ package com.xvm.battle.battleloading
     import com.xvm.types.cfg.*;
     import flash.events.*;
     import net.wg.data.constants.generated.*;
+    import net.wg.gui.battle.battleloading.*;
     import net.wg.gui.battle.battleloading.renderers.*;
     import net.wg.gui.battle.battleloading.vo.*;
     import net.wg.gui.components.containers.*;
@@ -29,26 +30,41 @@ package com.xvm.battle.battleloading
         private var defaultVehicleFieldXPosition:Number = NaN;
         private var defaultVehicleFieldWidth:Number = NaN;
 
+        private var battleLoadingForm:BattleLoadingForm = null;
+
         public function UI_BattleLoading()
         {
             //Logger.add("UI_BattleLoading");
             super();
 
-            logBriefConfigurationInfo();
+            //Logger.addObject(form);
 
-            Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
+            battleLoadingForm = form as BattleLoadingForm;
+
+            if (battleLoadingForm)
+            {
+                logBriefConfigurationInfo();
+
+                Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
+            }
         }
 
         override protected function configUI():void
         {
             super.configUI();
-            setup();
+            if (battleLoadingForm)
+            {
+                setup();
+            }
         }
 
         override protected function onDispose():void
         {
-            Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
-            deleteComponents();
+            if (battleLoadingForm)
+            {
+                Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
+                deleteComponents();
+            }
             super.onDispose();
         }
 
@@ -56,7 +72,10 @@ package com.xvm.battle.battleloading
         {
             //Logger.addObject(param1);
             super.setVisualTipInfo(data);
-            initRenderers();
+            if (battleLoadingForm)
+            {
+                initRenderers();
+            }
         }
 
         override public function setCompVisible(value:Boolean):void
@@ -82,12 +101,12 @@ package com.xvm.battle.battleloading
                 "                               statBattle=" + Config.networkServicesSettings.statBattle);
         }
 
-        private function setup(e:Event = null):Object
+        private function setup(e:Event = null):void
         {
             //Xvm.swfProfilerBegin("UI_BattleLoading.setup()");
             try
             {
-                cfg = form.formBackgroundTable.visible ? Config.config.battleLoading : Config.config.battleLoadingTips;
+                cfg = battleLoadingForm.formBackgroundTable.visible ? Config.config.battleLoading : Config.config.battleLoadingTips;
 
                 deleteComponents();
 
@@ -96,16 +115,15 @@ package com.xvm.battle.battleloading
                 // Components
                 if ((Config.networkServicesSettings.statBattle && Config.networkServicesSettings.chance) || cfg.showBattleTier)
                 {
-                    _winChance = new WinChances(this.form); // Winning chance info above players list. // TODO: replace with ExtraField
+                    _winChance = new WinChances(battleLoadingForm); // Winning chance info above players list. // TODO: replace with ExtraField
                 }
-                _clock = new Clock(this.form); // Realworld time at right side of TipField.
+                _clock = new Clock(battleLoadingForm); // Realworld time at right side of TipField.
             }
             catch (ex:Error)
             {
                 Logger.err(ex);
             }
             //Xvm.swfProfilerEnd("UI_BattleLoading.setup()");
-            return null;
         }
 
         private function deleteComponents():void
@@ -153,23 +171,23 @@ package com.xvm.battle.battleloading
         private function initRenderers():void
         {
             var renderer:BasePlayerItemRenderer;
-            for each(renderer in form.xfw_allyRenderers)
+            for each(renderer in battleLoadingForm.xfw_allyRenderers)
             {
                 renderer.dispose();
             }
-            form.xfw_allyRenderers.splice(0, form.xfw_allyRenderers.length);
+            battleLoadingForm.xfw_allyRenderers.splice(0, battleLoadingForm.xfw_allyRenderers.length);
 
-            for each(renderer in form.xfw_enemyRenderers)
+            for each(renderer in battleLoadingForm.xfw_enemyRenderers)
             {
                 renderer.dispose();
             }
-            form.xfw_enemyRenderers.splice(0, form.xfw_enemyRenderers.length);
+            battleLoadingForm.xfw_enemyRenderers.splice(0, battleLoadingForm.xfw_enemyRenderers.length);
 
-            var cls:Class = form.formBackgroundTable.visible ? XvmTablePlayerItemRenderer : XvmTipPlayerItemRenderer;
+            var cls:Class = battleLoadingForm.formBackgroundTable.visible ? XvmTablePlayerItemRenderer : XvmTipPlayerItemRenderer;
             for (var i:int = 0; i < 15; ++i)
             {
-                form.xfw_allyRenderers.push(new cls(form.xfw_renderersContainer, i, false));
-                form.xfw_enemyRenderers.push(new cls(form.xfw_renderersContainer, i, true));
+                battleLoadingForm.xfw_allyRenderers.push(new cls(battleLoadingForm.xfw_renderersContainer, i, false));
+                battleLoadingForm.xfw_enemyRenderers.push(new cls(battleLoadingForm.xfw_renderersContainer, i, true));
             }
         }
     }

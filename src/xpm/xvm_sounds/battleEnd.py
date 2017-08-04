@@ -32,22 +32,23 @@ class XVM_SOUND_EVENT(object):
 #####################################################################
 # handlers
 
-@registerEvent(BattleEndWarningPanel, 'setCurrentTimeLeft')
-def BattleEndWarningPanel_setCurrentTimeLeft(self, totalTime):
+@registerEvent(BattleEndWarningPanel, 'setTotalTime')
+def BattleEndWarningPanel_setTotalTime(self, totalTime):
     try:
         if config.get('sounds/enabled'):
           period = avatar_getter.getArena().period
-          if period == ARENA_PERIOD.BATTLE and totalTime == 300:
-              SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.BATTLE_END_300)
-          elif period == ARENA_PERIOD.BATTLE and totalTime == 180:
-              SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.BATTLE_END_180)
-          elif period == ARENA_PERIOD.BATTLE and totalTime == 120:
-              SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.BATTLE_END_120)
-          elif period == ARENA_PERIOD.BATTLE and totalTime == 60:
-              SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.BATTLE_END_60)
-          elif period == ARENA_PERIOD.BATTLE and totalTime == 30:
-              SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.BATTLE_END_30)
-          elif period == ARENA_PERIOD.BATTLE and totalTime == 5:
-              SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.BATTLE_END_5)
+          if period == ARENA_PERIOD.BATTLE:
+              if totalTime == 300:
+                  SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.BATTLE_END_300)
+              elif totalTime == 180:
+                  SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.BATTLE_END_180)
+              elif totalTime == 120:
+                  SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.BATTLE_END_120)
+              elif totalTime == 60:
+                  SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.BATTLE_END_60)
+              elif totalTime == 30:
+                  SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.BATTLE_END_30)
+              elif totalTime == 5:
+                  SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.BATTLE_END_5)
     except:
         err(traceback.format_exc())

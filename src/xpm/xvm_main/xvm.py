@@ -347,7 +347,7 @@ class Xvm(object):
         except Exception, ex:
             err('onUpdateStage(): ' + traceback.format_exc())
 
-    def onViewLoaded(self, view=None):
+    def onViewLoaded(self, view, loadParams):
         trace('onViewLoaded: {}'.format('(None)' if not view else view.uniqueName))
         if not view:
             return

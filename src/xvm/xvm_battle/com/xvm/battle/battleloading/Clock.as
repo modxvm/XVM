@@ -10,6 +10,7 @@ package com.xvm.battle.battleloading
     import flash.text.*;
     import flash.utils.*;
     import net.wg.gui.battle.battleloading.*;
+    import net.wg.gui.tutorial.controls.*;
     import net.wg.infrastructure.interfaces.entity.*;
     import scaleform.gfx.*;
 

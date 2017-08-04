@@ -187,13 +187,17 @@ class TankCarouselHelperBase implements ITankCarouselHelper
     private var _padding:Padding;
     private var _width:int;
     private var _height:int;
+    private var _visibleHeight:int;
+    private var _heightDiff:int;
 
     function TankCarouselHelperBase(cfg:CCarouselCell)
     {
         _gap = Macros.FormatNumberGlobal(cfg.gap, DEFAULT_GAP);
         _padding = new Padding(_gap);
-        _width = Macros.FormatNumberGlobal(cfg.width, DEFAULT_WIDTH - 2) + 2;
-        _height = Macros.FormatNumberGlobal(cfg.height, DEFAULT_HEIGHT - 2) + 2;
+        _width = Macros.FormatNumberGlobal(cfg.width, DEFAULT_RENDERER_WIDTH - 2) + 2;
+        _height = Macros.FormatNumberGlobal(cfg.height, DEFAULT_RENDERER_HEIGHT - 2) + 2;
+        _heightDiff = DEFAULT_RENDERER_HEIGHT - DEFAULT_RENDERER_VISIBLE_HEIGHT;
+        _visibleHeight = _height - _heightDiff;
     }
 
     public function get linkRenderer():String
@@ -226,6 +230,16 @@ class TankCarouselHelperBase implements ITankCarouselHelper
         return _padding;
     }
 
+    public function get rendererVisibleHeight():int
+    {
+        return _visibleHeight;
+    }
+
+    public function get rendererHeightDiff():int
+    {
+        return _heightDiff;
+    }
+
     // protected
 
     protected function get DEFAULT_GAP():int
@@ -233,14 +247,19 @@ class TankCarouselHelperBase implements ITankCarouselHelper
         return 10;
     }
 
-    protected function get DEFAULT_WIDTH():int
+    protected function get DEFAULT_RENDERER_WIDTH():int
     {
-        throw new AbstractException("TankCarouselHelperBase.DEFAULT_WIDTH " + Errors.ABSTRACT_INVOKE);
+        throw new AbstractException("TankCarouselHelperBase.DEFAULT_RENDERER_WIDTH " + Errors.ABSTRACT_INVOKE);
     }
 
-    protected function get DEFAULT_HEIGHT():int
+    protected function get DEFAULT_RENDERER_HEIGHT():int
     {
-        throw new AbstractException("TankCarouselHelperBase.DEFAULT_HEIGHT " + Errors.ABSTRACT_INVOKE);
+        throw new AbstractException("TankCarouselHelperBase.DEFAULT_RENDERER_HEIGHT " + Errors.ABSTRACT_INVOKE);
+    }
+
+    protected function get DEFAULT_RENDERER_VISIBLE_HEIGHT():int
+    {
+        throw new AbstractException("TankCarouselHelperBase.DEFAULT_RENDERER_VISIBLE_HEIGHT " + Errors.ABSTRACT_INVOKE);
     }
 }
 
@@ -258,14 +277,19 @@ class TankCarouselHelper extends TankCarouselHelperBase implements ITankCarousel
 
     // PROTECTED
 
-    override protected function get DEFAULT_WIDTH():int
+    override protected function get DEFAULT_RENDERER_WIDTH():int
     {
-        return UI_TankCarouselItemRenderer.DEFAULT_WIDTH;
+        return UI_TankCarouselItemRenderer.DEFAULT_RENDERER_WIDTH;
     }
 
-    override protected function get DEFAULT_HEIGHT():int
+    override protected function get DEFAULT_RENDERER_HEIGHT():int
     {
-        return UI_TankCarouselItemRenderer.DEFAULT_HEIGHT;
+        return UI_TankCarouselItemRenderer.DEFAULT_RENDERER_HEIGHT;
+    }
+
+    override protected function get DEFAULT_RENDERER_VISIBLE_HEIGHT():int
+    {
+        return UI_TankCarouselItemRenderer.DEFAULT_RENDERER_VISIBLE_HEIGHT;
     }
 }
 
@@ -283,13 +307,18 @@ class SmallTankCarouselHelper extends TankCarouselHelperBase implements ITankCar
 
     // PROTECTED
 
-    override protected function get DEFAULT_WIDTH():int
+    override protected function get DEFAULT_RENDERER_WIDTH():int
     {
-        return UI_SmallTankCarouselItemRenderer.DEFAULT_WIDTH;
+        return UI_SmallTankCarouselItemRenderer.DEFAULT_RENDERER_WIDTH;
     }
 
-    override protected function get DEFAULT_HEIGHT():int
+    override protected function get DEFAULT_RENDERER_HEIGHT():int
     {
-        return UI_SmallTankCarouselItemRenderer.DEFAULT_HEIGHT;
+        return UI_SmallTankCarouselItemRenderer.DEFAULT_RENDERER_HEIGHT;
+    }
+
+    override protected function get DEFAULT_RENDERER_VISIBLE_HEIGHT():int
+    {
+        return UI_SmallTankCarouselItemRenderer.DEFAULT_RENDERER_VISIBLE_HEIGHT;
     }
 }
