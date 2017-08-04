@@ -268,12 +268,12 @@ def CommonStatsBlockConstructor_construct(base, self):
                 elif paramName == 'explosionRadius':
                     explosionRadiusMin = 999
                     explosionRadiusMax = 0
-                    for shot in gun['shots']:
-                        if 'explosionRadius' in shot['shell']:
-                            if shot['shell']['explosionRadius'] < explosionRadiusMin:
-                                explosionRadiusMin = shot['shell']['explosionRadius']
-                            if shot['shell']['explosionRadius'] > explosionRadiusMax:
-                                explosionRadiusMax = shot['shell']['explosionRadius']
+                    for shot in gun.shots:
+                        if 'explosionRadius' in shot.shell:
+                            if shot.shell.explosionRadius < explosionRadiusMin:
+                                explosionRadiusMin = shot.shell.explosionRadius
+                            if shot.shell.explosionRadius > explosionRadiusMax:
+                                explosionRadiusMax = shot.shell.explosionRadius
                     if explosionRadiusMax == 0: # no HE
                         continue
                     explosionRadius_str = formatNumber(explosionRadiusMin)
@@ -283,23 +283,23 @@ def CommonStatsBlockConstructor_construct(base, self):
                 #shellSpeedSummary
                 elif paramName == 'shellSpeedSummary':
                     shellSpeedSummary_arr = []
-                    for shot in gun['shots']:
-                        shellSpeed_str = '%g' % round(shot['speed'] * 1.25)
-                        if premium_shells[shot['shell']['compactDescr']]:
+                    for shot in gun.shots:
+                        shellSpeed_str = '%g' % round(shot.speed * 1.25)
+                        if premium_shells[shot.shell.compactDescr]:
                             shellSpeed_str = gold_pad(shellSpeed_str)
                         shellSpeedSummary_arr.append(shellSpeed_str)
                     shellSpeedSummary_str = '/'.join(shellSpeedSummary_arr)
                     tooltip_add_param(self, result, tooltip_with_units(l10n('shellSpeed'), l10n('(m/sec)')), shellSpeedSummary_str)
                 #piercingPowerAvg
                 elif paramName == 'piercingPowerAvg':
-                    piercingPowerAvg = formatNumber(veh_descr.shot['piercingPower'][0])
+                    piercingPowerAvg = formatNumber(veh_descr.shot.piercingPower[0])
                     tooltip_add_param(self, result, replace_p(i18n.makeString('#menu:moduleInfo/params/avgPiercingPower')), piercingPowerAvg)
                 #piercingPowerAvgSummary
                 elif paramName == 'piercingPowerAvgSummary':
                     piercingPowerAvgSummary_arr = []
-                    for shot in gun['shots']:
-                        piercingPower_str = formatNumber(shot['piercingPower'][0])
-                        if premium_shells[shot['shell']['compactDescr']]:
+                    for shot in gun.shots:
+                        piercingPower_str = formatNumber(shot.piercingPower[0])
+                        if premium_shells[shot.shell.compactDescr]:
                             piercingPower_str = gold_pad(piercingPower_str)
                         piercingPowerAvgSummary_arr.append(piercingPower_str)
                     piercingPowerAvgSummary_str = '/'.join(piercingPowerAvgSummary_arr)
@@ -307,9 +307,9 @@ def CommonStatsBlockConstructor_construct(base, self):
                 #damageAvgSummary
                 elif paramName == 'damageAvgSummary':
                     damageAvgSummary_arr = []
-                    for shot in gun['shots']:
-                        damageAvg_str = formatNumber(shot['shell']['damage'][0])
-                        if premium_shells[shot['shell']['compactDescr']]:
+                    for shot in gun.shots:
+                        damageAvg_str = formatNumber(shot.shell.damage[0])
+                        if premium_shells[shot.shell.compactDescr]:
                             damageAvg_str = gold_pad(damageAvg_str)
                         damageAvgSummary_arr.append(damageAvg_str)
                     damageAvgSummary_str = '/'.join(damageAvgSummary_arr)
@@ -318,8 +318,8 @@ def CommonStatsBlockConstructor_construct(base, self):
                 # elif (paramName == 'reloadTimeSecs' or paramName == 'rateOfFire') and vehicle.gun.isClipGun():
                 #     if clipGunInfoShown:
                 #         continue
-                #     (shellsCount, shellReloadingTime) = gun['clip']
-                #     reloadMagazineTime = gun['reloadTime']
+                #     (shellsCount, shellReloadingTime) = gun.clip
+                #     reloadMagazineTime = gun.reloadTime
                 #     shellReloadingTime_str = formatNumber(shellReloadingTime)
                 #     reloadMagazineTime_str = formatNumber(reloadMagazineTime)
                 #     tooltip_add_param(self, result, replace_p(i18n.makeString('#menu:moduleInfo/params/shellsCount')), shellsCount)
@@ -328,28 +328,28 @@ def CommonStatsBlockConstructor_construct(base, self):
                 #     clipGunInfoShown = True
                 #rate of fire
                 # elif paramName == 'rateOfFire' and not vehicle.gun.isClipGun():
-                #     rateOfFire_str = formatNumber(60 / gun['reloadTime'])
+                #     rateOfFire_str = formatNumber(60 / gun.reloadTime)
                 #     tooltip_add_param(self, result, replace_p(i18n.makeString('#menu:moduleInfo/params/reloadTime')), rateOfFire_str)
                 # gun traverse limits
-                # elif paramName == 'traverseLimits' and gun['turretYawLimits']:
-                #     (traverseMin, traverseMax) = gun['turretYawLimits']
+                # elif paramName == 'traverseLimits' and gun.turretYawLimits:
+                #     (traverseMin, traverseMax) = gun.turretYawLimits
                 #     traverseLimits_str = '%g..+%g' % (round(degrees(traverseMin)), round(degrees(traverseMax)))
                 #     tooltip_add_param(self, result, l10n('traverseLimits'), traverseLimits_str)
                 # elevation limits (front)
                 # elif paramName == 'pitchLimits':
-                #     (pitchMax, pitchMin) = calcPitchLimitsFromDesc(0, gun['pitchLimits'])
+                #     (pitchMax, pitchMin) = calcPitchLimitsFromDesc(0, gun.pitchLimits)
                 #     pitchLimits_str = '%g..+%g' % (round(degrees(-pitchMin)), round(degrees(-pitchMax)))
                 #     tooltip_add_param(self, result, l10n('pitchLimits'), pitchLimits_str)
                 # elevation limits (side)
                 elif paramName == 'pitchLimitsSide':
-                    if gun['turretYawLimits'] and abs(degrees(gun['turretYawLimits'][0])) < 89: continue # can't look aside 90 degrees
-                    (pitchMax, pitchMin) = calcPitchLimitsFromDesc(pi / 2, gun['pitchLimits'])
+                    if gun.turretYawLimits and abs(degrees(gun.turretYawLimits[0])) < 89: continue # can't look aside 90 degrees
+                    (pitchMax, pitchMin) = calcPitchLimitsFromDesc(pi / 2, gun.pitchLimits)
                     pitchLimits_str = '%g..+%g' % (round(degrees(-pitchMin)), round(degrees(-pitchMax)))
                     tooltip_add_param(self, result, l10n('pitchLimitsSide'), pitchLimits_str)
                 # elevation limits (rear)
                 elif paramName == 'pitchLimitsRear':
-                    if gun['turretYawLimits']: continue # can't look back
-                    (pitchMax, pitchMin) = calcPitchLimitsFromDesc(pi, gun['pitchLimits'])
+                    if gun.turretYawLimits: continue # can't look back
+                    (pitchMax, pitchMin) = calcPitchLimitsFromDesc(pi, gun.pitchLimits)
                     pitchLimits_str = '%g..+%g' % (round(degrees(-pitchMin)), round(degrees(-pitchMax)))
                     tooltip_add_param(self, result, l10n('pitchLimitsRear'), pitchLimits_str)
                 # shooting range
@@ -368,22 +368,22 @@ def CommonStatsBlockConstructor_construct(base, self):
                 # elif paramName == 'turretRotationSpeed' or paramName == 'gunRotationSpeed':
                 #     if not vehicle.hasTurrets:
                 #         paramName = 'gunRotationSpeed'
-                #     turretRotationSpeed_str = str(int(degrees(veh_descr.turret['rotationSpeed'])))
+                #     turretRotationSpeed_str = str(int(degrees(veh_descr.turret.rotationSpeed)))
                 #     tooltip_add_param(self, result, tooltip_with_units(i18n.makeString('#menu:tank_params/%s' % paramName).rstrip(), i18n.makeString('#menu:tank_params/gps')), turretRotationSpeed_str)
                 #terrain resistance
                 elif paramName == 'terrainResistance':
                     resistances_arr = []
-                    for key in veh_descr.chassis['terrainResistance']:
+                    for key in veh_descr.chassis.terrainResistance:
                         resistances_arr.append(formatNumber(key))
                     terrainResistance_str = '/'.join(resistances_arr)
                     tooltip_add_param(self, result, l10n('terrainResistance'), terrainResistance_str)
                 #radioRange
                 # elif paramName == 'radioRange':
-                #     radioRange_str = '%s' % int(vehicle.radio.descriptor['distance'])
+                #     radioRange_str = '%s' % int(vehicle.radio.descriptor.distance)
                 #     tooltip_add_param(self, result, replace_p(i18n.makeString('#menu:moduleInfo/params/radioDistance')), radioRange_str)
                 #gravity
                 elif paramName == 'gravity':
-                    gravity_str = formatNumber(veh_descr.shot['gravity'])
+                    gravity_str = formatNumber(veh_descr.shot.gravity)
                     tooltip_add_param(self, result, l10n('gravity'), gravity_str)
                 #inner name, for example - ussr:R100_SU122A
                 elif paramName == 'innerName':
@@ -451,7 +451,7 @@ def ConsumablesPanel__makeShellTooltip(base, self, descriptor, piercingPower):
     try:
         if 'explosionRadius' in descriptor:
             key_str = i18n.makeString('#menu:tank_params/explosionRadius')
-            result = result.replace('{/BODY}', '\n%s: %s{/BODY}' % (key_str, formatNumber(descriptor['explosionRadius'])))
+            result = result.replace('{/BODY}', '\n%s: %s{/BODY}' % (key_str, formatNumber(descriptor.explosionRadius)))
     except Exception as ex:
         err(traceback.format_exc())
     return result
@@ -532,9 +532,9 @@ def relate_shells_vehicles():
                 continue
             for turrets in vehicle.descriptor.type.turrets:
                 for turret in turrets:
-                    for gun in turret['guns']:
-                        for shot in gun['shots']:
-                            shell_id = shot['shell']['compactDescr']
+                    for gun in turret.guns:
+                        for shot in gun.shots:
+                            shell_id = shot.shell.compactDescr
                             if shell_id in shells_vehicles_compatibility:
                                 if vehicle.userName not in shells_vehicles_compatibility[shell_id]:
                                     shells_vehicles_compatibility[shell_id].append(vehicle.userName)

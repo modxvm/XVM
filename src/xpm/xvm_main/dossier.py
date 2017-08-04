@@ -249,7 +249,7 @@ class _Dossier(object):
             res['vehicles'][str(vehCD)] = {
                 'battles': vdata.battlesCount,
                 'wins': vdata.wins,
-                'mastery': vdata.markOfMastery,
+                'mastery': stats.getMarkOfMasteryForVehicle(vehCD),
                 'xp': vdata.xp}
 
         return res

@@ -15,7 +15,7 @@ package com.xvm.lobby.ui.tankcarousel
     public /*dynamic*/ class UI_TankCarouselItemRenderer extends TankCarouselItemRendererUI implements IExtraFieldGroupHolder, ITankCarouselItemRenderer
     {
         public static const DEFAULT_RENDERER_WIDTH:int = 162;
-        public static const DEFAULT_RENDERER_HEIGHT:int = 110;
+        public static const DEFAULT_RENDERER_HEIGHT:int = 102;
         public static const DEFAULT_RENDERER_VISIBLE_HEIGHT:int = 102;
 
         private var _helper:TankCarouselItemRendererHelper;

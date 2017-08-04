@@ -195,9 +195,9 @@ class TankCarouselHelperBase implements ITankCarouselHelper
         _gap = Macros.FormatNumberGlobal(cfg.gap, DEFAULT_GAP);
         _padding = new Padding(_gap);
         _width = Macros.FormatNumberGlobal(cfg.width, DEFAULT_RENDERER_WIDTH - 2) + 2;
-        _height = Macros.FormatNumberGlobal(cfg.height, DEFAULT_RENDERER_HEIGHT - 2) + 2;
         _heightDiff = DEFAULT_RENDERER_HEIGHT - DEFAULT_RENDERER_VISIBLE_HEIGHT;
-        _visibleHeight = _height - _heightDiff;
+        _height = Macros.FormatNumberGlobal(cfg.height, DEFAULT_RENDERER_VISIBLE_HEIGHT - 2) + 2;
+        _visibleHeight = _height + _heightDiff;
     }
 
     public function get linkRenderer():String

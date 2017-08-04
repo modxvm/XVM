@@ -10,7 +10,6 @@ package com.xvm.types.cfg
     {
         public var startPage:*;
         public var showXTEColumn:*;
-        public var showExtraDataInProfile:*;
         public var inHangarFilterEnabled:*;
         public var showFilters:*;
         public var filterFocused:*;

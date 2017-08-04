@@ -8,12 +8,12 @@ def vehicle_name():
 @xvm.export('vinfo.gun_reload', deterministic=False)
 def gun_reload():
     typeDescriptor = _typeDescriptor()
-    return None if not typeDescriptor else "%.1f" % (typeDescriptor.gun['reloadTime'])
+    return None if not typeDescriptor else "%.1f" % (typeDescriptor.gun.reloadTime)
 
 @xvm.export('vinfo.vision_radius', deterministic=False)
 def vision_radius():
     typeDescriptor = _typeDescriptor()
-    return None if not typeDescriptor else "%i" % (typeDescriptor.turret['circularVisionRadius'])
+    return None if not typeDescriptor else "%i" % (typeDescriptor.turret.circularVisionRadius)
 
 # PRIVATE
 

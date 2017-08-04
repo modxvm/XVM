@@ -71,7 +71,7 @@ class _MinimapCircles(object):
         if self.vehicleItem is None:
             return
 
-        self.view_distance_vehicle = self.vehicleItem.descriptor.turret['circularVisionRadius']
+        self.view_distance_vehicle = self.vehicleItem.descriptor.turret.circularVisionRadius
         #debug('  view_distance_vehicle: %.0f' % self.view_distance_vehicle)
 
         self._updateCrew()
@@ -159,20 +159,20 @@ class _MinimapCircles(object):
 
         # View Range
         if isReplay():
-            self.view_distance_vehicle = descr.turret['circularVisionRadius']
+            self.view_distance_vehicle = descr.turret.circularVisionRadius
 
         # Shell Range & Artillery Range
         isArty = 'SPG' in descr.type.tags
         shell_range = 0
         artillery_range = 0
-        for shell in descr.gun['shots']:
-            shell_range = max(shell_range, shell['maxDistance'])
+        for shell in descr.gun.shots:
+            shell_range = max(shell_range, shell.maxDistance)
             if isArty:
-                pitchLimits = abs(descr.gun['pitchLimits']['absolute'][0])
+                pitchLimits = abs(descr.gun.pitchLimits.absolute[0])
                 if pitchLimits >= (math.pi / 4):
-                    artillery_range = max(artillery_range, round(math.pow(shell['speed'], 2) / shell['gravity']))
+                    artillery_range = max(artillery_range, round(math.pow(shell.speed, 2) / shell.gravity))
                 else:
-                    artillery_range = max(artillery_range, round(math.sin(2 * pitchLimits) * math.pow(shell['speed'], 2) / shell['gravity']))
+                    artillery_range = max(artillery_range, round(math.sin(2 * pitchLimits) * math.pow(shell.speed, 2) / shell.gravity))
 
         # do not show for range more then 707m (maximum marker visibility range)
         if shell_range >= 707:
@@ -201,8 +201,8 @@ class _MinimapCircles(object):
             'view_camouflage': self.camouflage,
             'artillery_range': artillery_range,
             'shell_range': shell_range,
-            'base_gun_reload_time': float("{0:.3f}".format(descr.gun['reloadTime'])),
-            'base_radio_distance': descr.radio['distance'],
+            'base_gun_reload_time': float("{0:.3f}".format(descr.gun.reloadTime)),
+            'base_radio_distance': descr.radio.distance,
             'commander_sixthSense': self.commander_sixthSense,
         }
 
@@ -247,17 +247,9 @@ class _MinimapCircles(object):
                 return True
         return False
 
-    # deprecated
-    def _isConsumableEquipped(self, consumable_names):
-        for item in self.vehicleItem.eqsLayout:
-            # debug(vars(item))
-            if item is not None and item.descriptor.name in consumable_names:
-                return True
-        return False
-
     # cola, chocolate etc.
     def _isStimulatorEquipped(self):
-        for item in self.vehicleItem.eqsLayout:
+        for item in self.vehicleItem._equipmentLayout.regularConsumables:
             # debug(vars(item))
             if item is not None and item.isStimulator:
                 return True

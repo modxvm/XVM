@@ -212,7 +212,7 @@ def _PersonalEntriesPlugin_start(base, self):
     if g_minimap.active and g_minimap.opt_linesEnabled:
         if not self._PersonalEntriesPlugin__yawLimits:
             vehicle = avatar_getter.getArena().vehicles.get(avatar_getter.getPlayerVehicleID())
-            staticTurretYaw = vehicle['vehicleType'].gun['staticTurretYaw']
+            staticTurretYaw = vehicle['vehicleType'].gun.staticTurretYaw
             if staticTurretYaw is None:
                 vInfoVO = self._arenaDP.getVehicleInfo()
                 yawLimits = vInfoVO.vehicleType.turretYawLimits

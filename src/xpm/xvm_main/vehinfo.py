@@ -80,34 +80,33 @@ def _init():
         for nation in nations.NAMES:
             nationID = nations.INDICES[nation]
             for (id, descr) in vehicles.g_list.getList(nationID).iteritems():
-                if descr['name'].endswith('training'):
+                if descr.name.endswith('training'):
                     continue
 
                 item = vehicles.g_cache.vehicle(nationID, id)
-                #log('%i	%i	%s	%s' % (descr['level'], descr['compactDescr'], descr['name'], descr['shortUserString']))
+                #log('%i	%i	%s	%s' % (descr.level, descr.compactDescr, descr.name, descr.shortUserString))
 
                 data = dict()
-                data['vehCD'] = descr['compactDescr']
-                data['key'] = descr['name']
+                data['vehCD'] = descr.compactDescr
+                data['key'] = descr.name
                 data['nation'] = nation
-                data['level'] = descr['level']
-                data['vclass'] = tuple(vehicles.VEHICLE_CLASS_TAGS & descr['tags'])[0]
-                data['localizedName'] = descr['shortUserString']
-                data['localizedShortName'] = descr['shortUserString']
-                data['localizedFullName'] = descr['userString']
-                data['premium'] = 'premium' in descr['tags']
+                data['level'] = descr.level
+                data['vclass'] = tuple(vehicles.VEHICLE_CLASS_TAGS & descr.tags)[0]
+                data['localizedFullName'] = descr.userString
+                data['localizedShortName'] = descr.shortUserString
+                data['premium'] = 'premium' in descr.tags
 
                 stockTurret = item.turrets[0][0]
                 topTurret = item.turrets[0][-1]
-                topGun = topTurret['guns'][-1]
+                topGun = topTurret.guns[-1]
 
                 if len(item.hulls) != 1:
-                    log('WARNING: TODO: len(hulls) != 1 for vehicle ' + descr['name'])
-                data['hpStock'] = item.hulls[0]['maxHealth'] + stockTurret['maxHealth']
-                data['hpTop'] = item.hulls[0]['maxHealth'] + topTurret['maxHealth']
+                    log('WARNING: TODO: len(hulls) != 1 for vehicle ' + descr.name)
+                data['hpStock'] = item.hulls[0].maxHealth + stockTurret.maxHealth
+                data['hpTop'] = item.hulls[0].maxHealth + topTurret.maxHealth
                 data['turret'] = _getTurretType(item, nation)
                 (data['visRadius'], data['firingRadius'], data['artyRadius']) = \
-                    _getRanges(topTurret, topGun, data['nation'], data['vclass'])
+                    _getRanges(topTurret, topGun, nation, data['vclass'])
 
                 (data['tierLo'], data['tierHi']) = getTiers(data['level'], data['vclass'], data['key'])
 
@@ -124,6 +123,7 @@ def _init():
                 # is reserved?
                 import xvm_tankcarousel.python.reserve as reserve
                 data['isReserved'] = reserve.is_reserved(data['vehCD'])
+
                 #log(data)
 
                 res.append(data)
@@ -146,25 +146,25 @@ def _getRanges(turret, gun, nation, vclass):
     gunsInfoPath = _VEHICLE_TYPE_XML_PATH + nation + '/components/guns.xml/shared/'
 
     # Turret-dependent
-    visionRadius = int(turret['circularVisionRadius'])  # 240..420
+    visionRadius = int(turret.circularVisionRadius)  # 240..420
 
     # Gun-dependent
-    shots = gun['shots']
+    shots = gun.shots
     for shot in shots:
-        radius = int(shot['maxDistance'])
+        radius = int(shot.maxDistance)
         if firingRadius < radius:
             firingRadius = radius  # 10000, 720, 395, 360, 350
 
-        if vclass == 'SPG' and shot['shell']['kind'] == 'HIGH_EXPLOSIVE':
+        if vclass == 'SPG' and shot.shell.kind == 'HIGH_EXPLOSIVE':
             try:    # faster way
-                pitchLimit_rad = min(CONST_45_IN_RADIANS, -calcPitchLimitsFromDesc(0, gun['pitchLimits']))
+                pitchLimit_rad = min(CONST_45_IN_RADIANS, -calcPitchLimitsFromDesc(0, gun.pitchLimits))
             except Exception: # old way
                 gunsInfoPath = _VEHICLE_TYPE_XML_PATH + nation + '/components/guns.xml/shared/'
-                pitchLimit = ResMgr.openSection(gunsInfoPath + gun['name']).readInt('pitchLimits')
+                pitchLimit = ResMgr.openSection(gunsInfoPath + gun.name).readInt('pitchLimits')
                 pitchLimit = min(45, -pitchLimit)  # -35..-65
                 pitchLimit_rad = radians(pitchLimit)
 
-            radius = int(pow(shot['speed'], 2) * sin(2 * pitchLimit_rad) / shot['gravity'])
+            radius = int(pow(shot.speed, 2) * sin(2 * pitchLimit_rad) / shot.gravity)
             if artyRadius < radius:
                 artyRadius = radius  # 485..1469
 
@@ -182,14 +182,14 @@ def _getTurretType(item, nation):
     #
     # As for 10 aug 2013 the screwed SPGs are:
     # gb27_sexton, amx_ob_am105, gb77_fv304, su14_1, gb29_crusader_5inch
-    if stock['maxHealth'] == top['maxHealth']:
+    if stock.maxHealth == top.maxHealth:
         return TURRET_TYPE_ONLY_ONE
 
-    if not top['unlocks']:
+    if not top.unlocks:
         return TURRET_TYPE_TOP_GUN_POSSIBLE
 
-    stockMaxPrice = _getMaxGunPrice(nation, stock['guns'])
-    topMaxPrice = _getMaxGunPrice(nation, top['guns'])
+    stockMaxPrice = _getMaxGunPrice(nation, stock.guns)
+    topMaxPrice = _getMaxGunPrice(nation, top.guns)
 
     if stockMaxPrice >= topMaxPrice:
         return TURRET_TYPE_TOP_GUN_POSSIBLE
@@ -200,7 +200,7 @@ def _getTurretType(item, nation):
 def _getMaxGunPrice(nation, guns):
     maxPrice = 0
     for gun in guns:
-        price = _getGunPrice(nation, gun['name'])
+        price = _getGunPrice(nation, gun.name)
         if maxPrice < price:
             maxPrice = price
     return maxPrice

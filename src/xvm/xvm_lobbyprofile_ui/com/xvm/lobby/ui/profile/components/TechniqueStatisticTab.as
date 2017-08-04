@@ -22,8 +22,8 @@ package com.xvm.lobby.ui.profile.components
 
         private var _raw_data:ProfileVehicleDossierVO;
 
-        public var lastBattleTimeTF:TextField;
         public var ratingTF:TextField;
+        public var winsToPercentGlobalTF:TextField;
         public var winsToPercentTF:TextField;
 
         // ENTRY POINTS
@@ -47,6 +47,7 @@ package com.xvm.lobby.ui.profile.components
             {
                 tech.addEventListener(Technique.EVENT_VEHICLE_DOSSIER_LOADED, onVehicleDossierLoaded, false, 0, true);
                 createControls();
+                updateGlobalWinsToPercent();
             }
             catch (ex:Error)
             {
@@ -95,7 +96,7 @@ package com.xvm.lobby.ui.profile.components
 
         private function get tech():Technique
         {
-            return page ? page.getChildByName("xvm_extension") as Technique : null;
+            return page.getChildByName("xvm_extension") as Technique;
         }
 
         // PRIVATE METHODS
@@ -138,13 +139,17 @@ package com.xvm.lobby.ui.profile.components
 
         private function createControls():void
         {
-            // last battle time
-            lastBattleTimeTF = _createTextField(Config.config.userInfo.showExtraDataInProfile ? 0 : -40, -30, 450, 25, 14);
-            proxy.addChild(lastBattleTimeTF);
-
             // rating
-            ratingTF = _createTextField(210, -1, 400, 200, 14);
+            ratingTF = _createTextField(220, -50, 400, 200, 14);
             proxy.addChild(ratingTF);
+
+            proxy.scrollPane.y += 10;
+            proxy.scrollPane.height -= 10;
+            proxy.scrollBar.y += 10;
+            proxy.scrollBar.height -= 10;
+
+            winsToPercentGlobalTF = _createTextField(130, -1, 271, 25, 14);
+            proxy.addChild(winsToPercentGlobalTF);
 
             winsToPercentTF = _createTextField(120, 65, 200, 25, 14);
             Sprite(proxy.scrollPane.target).addChild(winsToPercentTF);
@@ -183,7 +188,9 @@ package com.xvm.lobby.ui.profile.components
         {
             var s:String = "";
             if (data.stat == null)
+            {
                 ratingTF.htmlText = "";
+            }
             else
             {
                 var dt:String = isNaN(data.stat.ts) ? Locale.get("unknown") : XfwUtils.FormatDate("Y-m-d", new Date(data.stat.ts));
@@ -200,17 +207,19 @@ package com.xvm.lobby.ui.profile.components
                 s += Locale.get("Avg level") + ": " + (!data.stat.lvl ? "-" :
                     color(App.utils.locale.numberWithoutZeros(data.stat.lvl), MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_AVGLVL, data.stat.lvl))) + "\n";
 
-                // TODO: temporary solution
-                if (tech.accountDBID == 0)
-                {
-                    var adata:AccountDossier = tech.accountDossier;
-                    var ratingColor:int = MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_WINRATE, Math.round(adata.winPercent));
-                    s += "<font size='8'>\n</font>" +
-                        size(Locale.get("Wins"), 13) + ": " + formatHtmlText(size(App.utils.locale.float(adata.winPercent) + "%", 13), ratingColor) + "  " +
-                        formatHtmlText(size(getWinsToNextPercentStr(adata), 13), XfwConst.UICOLOR_LABEL);
-                }
-
                 ratingTF.htmlText = "<textformat leading='-2'>" + formatHtmlText(s) + "</textformat>";
+            }
+        }
+
+        private function updateGlobalWinsToPercent():void
+        {
+            if (tech.accountDBID == 0)
+            {
+                var adata:AccountDossier = tech.accountDossier;
+                var ratingColor:int = MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_WINRATE, Math.round(adata.winPercent));
+                winsToPercentGlobalTF.htmlText = "<p align='right'>" + formatHtmlText(
+                    size(Locale.get("Wins"), 13) + ": " + formatHtmlText(size(App.utils.locale.float(adata.winPercent) + "%", 13), ratingColor) + "  " +
+                    formatHtmlText(size(getWinsToNextPercentStr(adata), 13), XfwConst.UICOLOR_LABEL)) + "</p>";
             }
         }
 
@@ -248,7 +257,7 @@ package com.xvm.lobby.ui.profile.components
                     : color(App.utils.locale.integer(b2), XfwConst.UICOLOR_GOLD) + Locale.get("toWithSpaces") +
                         color(App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%", XfwConst.UICOLOR_GOLD);
 
-            if (Config.config.userInfo.showExtraDataInProfile || page is ProfileTechniquePage)
+            if (page is ProfileTechniquePage)
             {
                 // full
                 info += " / " + ((b2 > b1)

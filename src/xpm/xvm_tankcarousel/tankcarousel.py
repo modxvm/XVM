@@ -170,7 +170,7 @@ def _CarouselDataProvider_vehicleComparisonKey(base, cls, vehicle):
             elif sort_criterion == 'maxBattleTier':
                 comparisonKey.append(getTiers(vehicle.level, vehicle.type, vehicle.name)[1] * factor)
 
-        comparisonKey.extend([vehicle.buyPrice.gold, vehicle.buyPrice.credits, vehicle.userName])
+        comparisonKey.extend([vehicle.buyPrices.itemPrice.price.gold, vehicle.buyPrices.itemPrice.price.credits, vehicle.userName])
 
         return tuple(comparisonKey)
 

@@ -172,7 +172,7 @@ def as_setEquipmentS(base, self, installed, setup, modules):
 def Vehicle_parseShells(base, self, layoutList, defaultLayoutList, proxy):
     try:
         if proxy is not None:
-            invData = proxy.inventory.getItems(GUI_ITEM_TYPE.VEHICLE, self.inventoryID)
+            invData = proxy.inventory.getItems(GUI_ITEM_TYPE.VEHICLE, self._inventoryID)
             if invData is not None:
                 if 'shellsLayout' in invData and self.shellsLayoutIdx not in invData['shellsLayout']:
                     # nothing is saved for this configuration - new gun

@@ -25,6 +25,7 @@ package com.xvm.lobby.ui.profile
             super.onPopulate();
             try
             {
+                stackComponent.viewRatingBtn.y += 6;
                 listComponent.addEventListener(TechniqueListComponent.DATA_CHANGED, initializeInHangarCheckBox, false, 0, true);
                 technique = new Technique(this, Xfw.cmd(XvmCommands.GET_PLAYER_NAME), 0);
                 addChild(technique);
