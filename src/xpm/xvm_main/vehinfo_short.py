@@ -26,7 +26,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 04.07.2017
+    # Last update: 04.08.2017
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -137,6 +137,7 @@ _data = {
     "france:F62_ELC_AMX":                    'ELC',
     "france:F62_ELC_AMX_IGR":                'ELC',
     "france:F64_AMX_50Fosh_155":             'Fch155',
+    "france:F64_AMX_50Fosh_B":               'Fch·B',
     "france:F65_FCM_50t":                    'fcm50t',
     "france:F66_AMX_Ob_Am105":               '105AM',
     "france:F67_Bat_Chatillon155_55":        '155·55',
@@ -208,6 +209,7 @@ _data = {
     "germany:G134_PzKpfw_VII":               'PzKf·VII',
     "germany:G136_Tiger_131":                'Tig131',
     "germany:G137_PzVI_Tiger_217":           'Tig217',
+    "germany:G138_VK168_02":                 '168.01p',
     "germany:G13_VK3001H":                   '3001h',
     "germany:G15_VK3601H":                   '3601h',
     "germany:G16_PzVIB_Tiger_II":            'Tig2',
@@ -294,6 +296,7 @@ _data = {
     "germany:G96_VK3002M":                   '3002m',
     "germany:G97_Waffentrager_IV":           'WT4',
     "germany:G98_Waffentrager_E100":         'WT100',
+    "germany:G98_Waffentrager_E100_P":       'WT100p',
     "germany:G99_RhB_Waffentrager":          'WTRhB',
     "japan:J01_NC27":                        'R.Ots',
     "japan:J01_NC27_bot":                    'R.Ots',
@@ -593,6 +596,7 @@ _data = {
     "ussr:R13_KV-1s":                        'Kv·1s',
     "ussr:R143_T_29":                        't·29',
     "ussr:R146_STG":                         'stg',
+    "ussr:R146_STG_Tday":                    'gvard',
     "ussr:R14_SU-5":                         'Su·5',
     "ussr:R15_S-51":                         'S·51',
     "ussr:R16_SU-18":                        'Su·18',

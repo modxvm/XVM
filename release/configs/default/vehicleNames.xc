@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 04.07.2017
+    // Last update: 04.08.2017
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -115,6 +115,7 @@
     "france-F62_ELC_AMX":                    {"name": null, "short": null},
     "france-F62_ELC_AMX_IGR":                {"name": null, "short": null},
     "france-F64_AMX_50Fosh_155":             {"name": null, "short": null},
+    "france-F64_AMX_50Fosh_B":               {"name": null, "short": null},
     "france-F65_FCM_50t":                    {"name": null, "short": null},
     "france-F66_AMX_Ob_Am105":               {"name": null, "short": null},
     "france-F67_Bat_Chatillon155_55":        {"name": null, "short": null},
@@ -186,6 +187,7 @@
     "germany-G134_PzKpfw_VII":               {"name": null, "short": null},
     "germany-G136_Tiger_131":                {"name": null, "short": null},
     "germany-G137_PzVI_Tiger_217":           {"name": null, "short": null},
+    "germany-G138_VK168_02":                 {"name": null, "short": null},
     "germany-G13_VK3001H":                   {"name": null, "short": null},
     "germany-G15_VK3601H":                   {"name": null, "short": null},
     "germany-G16_PzVIB_Tiger_II":            {"name": null, "short": null},
@@ -272,6 +274,7 @@
     "germany-G96_VK3002M":                   {"name": null, "short": null},
     "germany-G97_Waffentrager_IV":           {"name": null, "short": null},
     "germany-G98_Waffentrager_E100":         {"name": null, "short": null},
+    "germany-G98_Waffentrager_E100_P":       {"name": null, "short": null},
     "germany-G99_RhB_Waffentrager":          {"name": null, "short": null},
     "japan-J01_NC27":                        {"name": null, "short": null},
     "japan-J01_NC27_bot":                    {"name": null, "short": null},
@@ -571,6 +574,7 @@
     "ussr-R13_KV-1s":                        {"name": null, "short": null},
     "ussr-R143_T_29":                        {"name": null, "short": null},
     "ussr-R146_STG":                         {"name": null, "short": null},
+    "ussr-R146_STG_Tday":                    {"name": null, "short": null},
     "ussr-R14_SU-5":                         {"name": null, "short": null},
     "ussr-R15_S-51":                         {"name": null, "short": null},
     "ussr-R16_SU-18":                        {"name": null, "short": null},
