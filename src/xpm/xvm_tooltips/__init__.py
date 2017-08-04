@@ -451,9 +451,9 @@ def CommonStatsBlockConstructor_construct(base, self):
 def ConsumablesPanel__makeShellTooltip(base, self, descriptor, piercingPower):
     result = base(self, descriptor, piercingPower)
     try:
-        if 'explosionRadius' in descriptor:
+        if descriptor.kind == SHELL_TYPES.HIGH_EXPLOSIVE:
             key_str = i18n.makeString('#menu:tank_params/explosionRadius')
-            result = result.replace('{/BODY}', '\n%s: %s{/BODY}' % (key_str, formatNumber(descriptor.explosionRadius)))
+            result = result.replace('{/BODY}', '\n%s: %s{/BODY}' % (key_str, formatNumber(descriptor.type.explosionRadius)))
     except Exception as ex:
         err(traceback.format_exc())
     return result
