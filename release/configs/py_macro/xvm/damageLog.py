@@ -304,7 +304,6 @@ class Data(object):
             arenaDP = self.sessionProvider.getArenaDP()
             if arenaDP is not None:
                 vInfo = arenaDP.getVehicleInfo(vID=attackerID)
-                self.squadnum = vInfo.squadIndex
                 self.data['squadnum'] = vInfo.squadIndex if vInfo.squadIndex != 0 else None
         else:
             self.data['teamDmg'] = 'unknown'
@@ -315,7 +314,6 @@ class Data(object):
             self.data['level'] = None
             self.data['clanicon'] = None
             self.data['squadnum'] = None
-            self.data['marksOnGun'] = None
         self.updateLabels()
 
 
@@ -331,12 +329,12 @@ class Data(object):
             self.data['caliber'] = None
             self.data['costShell'] = 'unknown'
             return
-        for shell in attacker['vehicleType'].gun['shots']:
-            _shell = shell['shell']
-            if effectsIndex == _shell['effectsIndex']:
-                self.data['shellKind'] = str(_shell['kind']).lower()
-                self.data['caliber'] = _shell['caliber']
-                _id = _shell['id']
+        for shot in attacker['vehicleType'].gun.shots:
+            _shell = shot.shell
+            if effectsIndex == _shell.effectsIndex:
+                self.data['shellKind'] = str(_shell.kind).lower()
+                self.data['caliber'] = _shell.caliber
+                _id = _shell.id
                 nation = nations.NAMES[_id[0]]
                 self.data['costShell'] = 'gold-shell' if _id[1] in self.shells[nation] else 'silver-shell'
                 self.data['shells_stunning'] = _id[1] in self.shells_stunning[nation]
@@ -639,10 +637,11 @@ class DamageLog(_Base):
             self.listLog.insert(0, parser(config.get(self.S_FORMAT_HISTORY)))
         else:
             self.listLog[numberLine] = parser(config.get(self.S_FORMAT_HISTORY))
-        if not config.get(self.S_MOVE_IN_BATTLE):
-            self.x = parser(config.get(self.S_X))
-            self.y = parser(config.get(self.S_Y))
-        self.shadow = shadow_value(self.section)
+        if (self.section == SECTION_LOG) or (self.section == SECTION_LOG_ALT):
+            if not config.get(self.S_MOVE_IN_BATTLE):
+                self.x = parser(config.get(self.S_X))
+                self.y = parser(config.get(self.S_Y))
+            self.shadow = shadow_value(self.section)
 
     def addLine(self, attackerID, attackReasonID):
         if not (attackerID is None or attackReasonID is None):
