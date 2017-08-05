@@ -236,9 +236,9 @@ def onEnterWorld(self, prereqs):
         global maxHealth, vehCD, burst
         isPlayerInSquad = player.guiSessionProvider.getArenaDP().isSquadMan(player.playerVehicleID)
         vehCD = self.typeDescriptor.type.compactDescr
-        burst = self.typeDescriptor.gun['burst'][0]
+        burst = self.typeDescriptor.gun.burst[0]
         maxHealth = self.health
-        isStuns = 'st' if 'stunDuration' in self.typeDescriptor.shot['shell'] else None
+        isStuns = 'st' if self.typeDescriptor.shot.shell.stun is not None else None
 
 
 @registerEvent(PlayerAvatar, '_PlayerAvatar__destroyGUI')
