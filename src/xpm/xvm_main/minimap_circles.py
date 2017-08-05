@@ -168,7 +168,7 @@ class _MinimapCircles(object):
         for shell in descr.gun.shots:
             shell_range = max(shell_range, shell.maxDistance)
             if isArty:
-                pitchLimits = abs(descr.gun.pitchLimits.absolute[0])
+                pitchLimits = abs(descr.gun.pitchLimits['absolute'][0])
                 if pitchLimits >= (math.pi / 4):
                     artillery_range = max(artillery_range, round(math.pow(shell.speed, 2) / shell.gravity))
                 else:
