@@ -413,7 +413,13 @@ def CommonStatsBlockConstructor_construct(base, self):
             # equipment icons, must be in the end
             if 'equipmentIcons' in params_list:
                 equipmentIcons_arr = []
-                for key in vehicle.eqs:
+                for key in vehicle.equipment.regularConsumables.getInstalledItems():
+                    if key:
+                        imgPath = 'img://gui' + key.icon.lstrip('.')
+                    else:
+                        imgPath = 'img://gui/maps/icons/artefact/empty.png'
+                    equipmentIcons_arr.append('<img src="%s" height="16" width="16">' % imgPath)
+                for key in vehicle.equipment.battleBoosterConsumables.getInstalledItems():
                     if key:
                         imgPath = 'img://gui' + key.icon.lstrip('.')
                     else:
