@@ -348,10 +348,10 @@ class Data(object):
             attacker = player.arena.vehicles.get(attackerID)
             vehicleType = attacker['vehicleType']
             if (attacker is not None) and (vehicleType):
-                reload_orig = vehicleType.gun['reloadTime']
+                reload_orig = vehicleType.gun.reloadTime
                 _miscAttrs = vehicleType.miscAttrs
                 crew = 0.94 if _miscAttrs['crewLevelIncrease'] != 0 else 1.0
-                if (vehicleType.gun['clip'][0] == 1) and (_miscAttrs['gunReloadTimeFactor'] != 0.0):
+                if (vehicleType.gun.clip[0] == 1) and (_miscAttrs['gunReloadTimeFactor'] != 0.0):
                     rammer = _miscAttrs['gunReloadTimeFactor']
                 else:
                     rammer = 1
