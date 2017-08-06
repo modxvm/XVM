@@ -169,7 +169,7 @@ package com.xvm
             var Ea:Number = isNaN(stat.xwn8) ? Config.config.consts.AVG_XVMSCALE : stat.xwn8;
             var Ean:Number = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
             var Ra:Number = stat.winrate || Config.config.consts.AVG_GWR;
-            var Ba:Number = stat.b || Config.config.consts.AVG_BATTLES;
+            var Ba:Number = stat.battles || Config.config.consts.AVG_BATTLES;
 
             // 1
             var Klvl:Number = (Tmax + Tmin) / 2 - T;
@@ -210,7 +210,7 @@ package com.xvm
             var Ea:Number = isNaN(stat.xwn8) ? Config.config.consts.AVG_XVMSCALE : stat.xwn8;
             var Ean:Number = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
             var Ra:Number = stat.winrate || Config.config.consts.AVG_GWR;
-            var Ba:Number = stat.b || Config.config.consts.AVG_BATTLES;
+            var Ba:Number = stat.battles || Config.config.consts.AVG_BATTLES;
 
             // 1
             var Klvl:Number = (Tmax + Tmin) / 2 - T;

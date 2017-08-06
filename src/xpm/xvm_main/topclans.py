@@ -20,8 +20,12 @@ def getClanInfo(clanAbbrev):
 
     res = _get(clanAbbrev)
     if res:
+        # TODO: rename cid to clan_id in XVM API
+        res['clan_id'] = res['cid']
+        del res['cid']
+        ###
         res['rank'] = int(res['rank'])
-        res['cid'] = int(res['cid'])
+        res['clan_id'] = int(res['clan_id'])
     return res
 
 def clear():
@@ -38,7 +42,7 @@ def update(data={}):
 
     # DEBUG
     #log(clans)
-    # clans['persist']['FOREX'] = {"rank":0,"cid":38503,"emblem":"http://stat.modxvm.com/emblems/persist/{size}/38503.png"}
+    # clans['persist']['FOREX'] = {"rank":0,"clan_id":38503,"emblem":"http://stat.modxvm.com/emblems/persist/{size}/38503.png"}
     # /DEBUG
 
 _clansInfo = None

@@ -283,7 +283,7 @@ class Data(object):
                     self.data['xwn8'] = stats.get('xwn8', None)
                     self.data['wn6'] = stats.get('wn6', None)
                     self.data['xwn6'] = stats.get('xwn6', None)
-                    self.data['eff'] = stats.get('e', None)
+                    self.data['eff'] = stats.get('eff', None)
                     self.data['xeff'] = stats.get('xeff', None)
                     self.data['wgr'] = stats.get('wgr', None)
                     self.data['xwgr'] = stats.get('xwgr', None)

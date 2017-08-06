@@ -11,14 +11,11 @@ package com.xvm.types.stat
         public var vehicleID:Number = NaN;
 
         // received
-        public var _id:Number = NaN;           // player account id (long int)
-        public var st:String = null;           // status ("ok")
+        public var player_id:Number = NaN;     // player account id (long int)
+        public var name_db:String = null;      // player name in DB
         public var ts:Number = NaN;            // XVM update timestamp (long)
-        public var cr:Number = NaN;            // created (int)
-        public var up:Number = NaN;            // updated (int)
-        public var nm:String = null;           // player name ("sirmax2")
-        public var b:Number = NaN;             // battles (int)
-        public var w:Number = NaN;             // wins (int)
+        public var battles:Number = NaN;       // battles (int)
+        public var wins:Number = NaN;          // wins (int)
         public var spo:Number = NaN;           // spotted (int)
         public var hip:Number = NaN;           // hit percent (int)
         public var cap:Number = NaN;           // capture (int)
@@ -26,10 +23,17 @@ package com.xvm.types.stat
         public var frg:Number = NaN;           // frags (int)
         public var def:Number = NaN;           // defence (int)
         public var lvl:Number = NaN;           // average level (float)
-        public var e:Number = NaN;             // eff (int)
+        public var eff:Number = NaN;           // eff (int)
         public var wn6:Number = NaN;           // WN6 rating (int)
         public var wn8:Number = NaN;           // WN8 rating (int)
         public var wgr:Number = NaN;           // WG rating (int)
+
+        public var winrate:Number = NaN;       // global win rate (int)
+        public var xte:Number = NaN;           // xTE (int)
+        public var xeff:Number = NaN;          // Eff in XVM Scale (int)
+        public var xwn6:Number = NaN;          // WN6 in XVM Scale (int)
+        public var xwn8:Number = NaN;          // WN8 in XVM Scale (int)
+        public var xwgr:Number = NaN;          // WG rating in XVM Scale (int)
 
         public var emblem:String = null;       // url for clan icon
         public var x_emblem:String = null;     // local cache url for clan icon
@@ -38,7 +42,7 @@ package com.xvm.types.stat
         public var vehicles:Dictionary = null; // vehicles stat data, key - vehCD
 
         public var clan:String = null;         // clan name ("CLAN")
-        public var cid:Number = NaN;           // clan id
+        public var clan_id:Number = NaN;       // clan id
         public var badgeId:String = null;      // rank badge id
         public var rank:Number = NaN;          // clan rank (wGM)
         public var name:String = null;         // player name in current game ("sirmax2_RU" for Common Test)
@@ -51,12 +55,5 @@ package com.xvm.types.stat
         public var turretType:Number = NaN;    // turret type
 
         public var xvm_contact_data:Object = null;
-
-        public var winrate:Number = NaN;       // global win rate (int)
-        public var xte:Number = NaN;           // xTE (int)
-        public var xeff:Number = NaN;          // Eff in XVM Scale (int)
-        public var xwn6:Number = NaN;          // WN6 in XVM Scale (int)
-        public var xwn8:Number = NaN;          // WN8 in XVM Scale (int)
-        public var xwgr:Number = NaN;          // WG rating in XVM Scale (int)
     }
 }

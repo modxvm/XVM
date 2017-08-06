@@ -228,11 +228,11 @@ package com.xvm
             {
                 var sd:StatData = ObjectConverter.convertData(data, StatData);
                 calculateStatValues(sd);
-                name = sd.name || sd.nm;
+                name = sd.name || sd.name_db;
                 //Logger.addObject(sd, 2);
                 keyName = Config.config.region + "/" + name;
                 userCache[keyName] = sd;
-                keyId = "ID/" + sd._id;
+                keyId = "ID/" + sd.player_id;
                 userCache[keyId] = sd;
                 delete activeUserRequests[name];
             }

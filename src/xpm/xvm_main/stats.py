@@ -331,8 +331,8 @@ class _Stat(object):
                     data = xvmapi.getStatsByNick(region, value)
                     if data is not None:
                         self._fix_user(data, orig_value)
-                        if 'nm' in data and '_id' in data:
-                            self.cacheUser[region + "/" + data['nm']] = data
+                        if 'name_db' in data and 'player_id' in data:
+                            self.cacheUser[region + "/" + data['name_db']] = data
                     else:
                         self.cacheUser[cacheKey] = {}
             except Exception:
@@ -344,8 +344,8 @@ class _Stat(object):
     def _get_battle_stub(self, pl):
         s = {
             'vehicleID': pl.vehicleID,
-            '_id': pl.accountDBID,
-            'nm': pl.name,
+            'player_id': pl.accountDBID,
+            'name_db': pl.name,
             'v': {'id': pl.vehCD},
         }
         return self._fix(s)
@@ -383,11 +383,11 @@ class _Stat(object):
             for stat in data['players']:
                 self._fix(stat)
                 #log(stat)
-                if 'nm' not in stat or not stat['nm']:
+                if 'name_db' not in stat or not stat['name_db']:
                     continue
-                if 'b' not in stat or stat['b'] <= 0:
+                if 'battles' not in stat or stat['battles'] <= 0:
                     continue
-                cacheKey = "%d=%d" % (stat['_id'], stat.get('v', {}).get('id', 0))
+                cacheKey = "%d=%d" % (stat['player_id'], stat.get('v', {}).get('id', 0))
                 self.cacheBattle[cacheKey] = stat
 
         except Exception:
@@ -427,17 +427,17 @@ class _Stat(object):
 
         if self.players is not None:
             for (vehicleID, pl) in self.players.iteritems():
-                if pl.accountDBID == stat['_id']:
+                if pl.accountDBID == stat['player_id']:
                     stat['vehicleID'] = pl.vehicleID
                     if pl.clan:
                         stat['clan'] = pl.clan
-                        cid = pl.clanInfo.get('cid', None) if pl.clanInfo else None
-                        scid = stat.get('cid', None)
-                        if (scid is None or scid == cid) and stat.get('rank') is not None and stat.get('emblem') is not None:
-                            pl.clanInfo = {'cid': scid, 'rank': stat['rank'], 'emblem': stat['emblem']}
+                        clan_id = pl.clanInfo.get('clan_id', None) if pl.clanInfo else None
+                        stat_clan_id = stat.get('clan_id', None)
+                        if (stat_clan_id is None or stat_clan_id == clan_id) and stat.get('rank') is not None and stat.get('emblem') is not None:
+                            pl.clanInfo = {'clan_id': stat_clan_id, 'rank': stat['rank'], 'emblem': stat['emblem']}
                             self._load_clanIcon(pl)
                         else:
-                            stat['cid'] = cid
+                            stat['clan_id'] = clan_id
                             stat['rank'] = pl.clanInfo.get('rank', None) if pl.clanInfo else None
                             stat['emblem'] = pl.clanInfo.get('emblem', None) if pl.clanInfo else None
                     stat['name'] = pl.name
@@ -462,10 +462,37 @@ class _Stat(object):
         return stat
 
     def _fix_common(self, stat):
+        # TODO: remove after fix in XVM API
+        if '_id' in stat:
+            stat['player_id'] = stat['_id']
+            del stat['_id']
+        if 'nm' in stat:
+            stat['name_db'] = stat['nm']
+            del stat['nm']
+        if 'cid' in stat:
+            stat['clan_id'] = stat['cid']
+            del stat['cid']
+        if 'b' in stat:
+            stat['battles'] = stat['b']
+            del stat['b']
+        if 'w' in stat:
+            stat['wins'] = stat['w']
+            del stat['w']
+        if 'e' in stat:
+            stat['eff'] = stat['e']
+            del stat['e']
+        del stat['ver']
+        del stat['st']
+        del stat['dt']
+        del stat['cr']
+        del stat['up']
+        del stat['rnd']
+        del stat['lang']
+        ###
         if 'v' not in stat:
             stat['v'] = {}
-        if stat.get('e', 0) <= 0:
-            stat['e'] = None
+        if stat.get('eff', 0) <= 0:
+            stat['eff'] = None
         if stat.get('wn6', 0) <= 0:
             stat['wn6'] = None
         if stat.get('wn8', 0) <= 0:
@@ -476,7 +503,7 @@ class _Stat(object):
     def _fix_common2(self, stat, orig_name, multiVehicles):
         if orig_name is not None:
             stat['name'] = orig_name
-        if 'b' in stat and 'w' in stat and stat['b'] > 0:
+        if 'battles' in stat and 'wins' in stat and stat['battles'] > 0:
             self._calculateGWR(stat)
             self._calculateXvmScale(stat)
             if multiVehicles:
@@ -492,15 +519,14 @@ class _Stat(object):
                     self._calculateXTDB(vData)
                     self._calculateXTE(vData)
 
-
     # Global Win Rate (GWR)
     def _calculateGWR(self, stat):
-        stat['winrate'] = float(stat['w']) / float(stat['b']) * 100.0
+        stat['winrate'] = float(stat['wins']) / float(stat['battles']) * 100.0
 
     # XVM Scale
     def _calculateXvmScale(self, stat):
-        if 'e' in stat and stat['e'] > 0:
-            stat['xeff'] = xvm_scale.XEFF(stat['e'])
+        if 'eff' in stat and stat['eff'] > 0:
+            stat['xeff'] = xvm_scale.XEFF(stat['eff'])
         if 'wn6' in stat and stat['wn6'] > 0:
             stat['xwn6'] = xvm_scale.XWN6(stat['wn6'])
         if 'wn8' in stat and stat['wn8'] > 0:
@@ -562,7 +588,7 @@ class _Stat(object):
         # try to add changed nick and comment
         try:
             import xvm_contacts.python.contacts as contacts
-            stat['xvm_contact_data'] = contacts.getXvmContactData(stat['_id'])
+            stat['xvm_contact_data'] = contacts.getXvmContactData(stat['player_id'])
         except Exception:
             #err(traceback.format_exc())
             pass
@@ -580,7 +606,7 @@ class _Stat(object):
                 # url = 'http://stat.modxvm.com:81'
                 if url and 0 <= rank <= config.networkServicesSettings.topClansCount:
                     url = url.replace('{size}', '32x32')
-                    tID = 'icons/clan/{0}'.format(pl.clanInfo['cid'])
+                    tID = 'icons/clan/{0}'.format(pl.clanInfo['clan_id'])
                     self._loadingClanIconsCount += 1
                     pl.x_emblem_loading = True
                     debug('clan={0} rank={1} url={2}'.format(pl.clan, rank, url))
