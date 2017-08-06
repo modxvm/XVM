@@ -249,8 +249,20 @@ class Xvm(object):
             if cmd == XVM_COMMAND.PYTHON_MACRO:
                 return (python_macro.process_python_macro(args[0]), True)
 
+            if cmd == XVM_COMMAND.GET_PLAYER_ID:
+                return (getCurrentAccountDBID(), True)
+
             if cmd == XVM_COMMAND.GET_PLAYER_NAME:
                 return (avatar_getter.getPlayerName(), True)
+
+            if cmd == XVM_COMMAND.GET_PLAYER_CLAN_ID:
+                return (utils.getClanDBID(), True)
+
+            if cmd == XVM_COMMAND.GET_PLAYER_CLAN_NAME:
+                return (utils.getClanAbbrev(), True)
+
+            if cmd == XVM_COMMAND.GET_PLAYER_DOSSIER_VALUE:
+                return (dossier.getAccountDossierValue(args[0]), True)
 
             if cmd == XVM_COMMAND.GET_SVC_SETTINGS:
                 return (config.networkServicesSettings.__dict__, True)

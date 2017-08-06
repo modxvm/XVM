@@ -77,7 +77,7 @@ def ProfileTechnique_getTechniqueListVehicles(base, self, targetData, addVehicle
         for x in res:
             try:
                 vehCD = x['id']
-                vDossier = dossier.getDossier((self._battlesType, _lastAccountDBID, vehCD))
+                vDossier = dossier.getDossier(self._battlesType, _lastAccountDBID, vehCD)
                 x['xvm_xte'] = int(vDossier['xte']) if vDossier is not None else -1
                 x['xvm_xte_flag'] = 0
             except:
@@ -93,7 +93,7 @@ def ProfileTechnique_receiveVehicleDossier(base, self, vehCD, accountDBID):
 
     if config.networkServicesSettings.statAwards:
         if self._isDAAPIInited():
-            vDossier = dossier.getDossier((self._battlesType, accountDBID, vehCD))
+            vDossier = dossier.getDossier(self._battlesType, accountDBID, vehCD)
             self.flashObject.as_responseVehicleDossierXvm(vDossier)
 
 @overrideStaticMethod(DetailedStatisticsUtils, 'getStatistics')

@@ -19,11 +19,13 @@ package com.xvm.types.dossier
         // Total
         public var battles:int;
         public var wins:int;
+        public var winrate:int;
         public var xp:int;
         public var losses:int;
         public var survived:int;
         public var shots:int;
         public var hits:int;
+        public var hitPercent:int;
         public var spotted:int;
         public var frags:int;
         public var damageDealt:int;
@@ -32,7 +34,6 @@ package com.xvm.types.dossier
         public var defence:int;
 
         // Total2
-
         public var originalXP:int; // what is start point?
         public var damageAssistedTrack:int; // what is start point?
         public var damageAssistedRadio:int; // what is start point?

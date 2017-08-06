@@ -120,6 +120,24 @@ def getAccountDBID():
         accountDBID = userprefs.get('tokens/lastAccountDBID')
     return accountDBID
 
+def getClanDBID():
+    player = BigWorld.player()
+    arena = getattr(player, 'arena', None)
+    if arena is not None:
+        vehID = getattr(player, 'playerVehicleID', None)
+        if vehID is not None and vehID in arena.vehicles:
+            return arena.vehicles[vehID]['clanDBID']
+    return 0
+
+def getClanAbbrev():
+    player = BigWorld.player()
+    arena = getattr(player, 'arena', None)
+    if arena is not None:
+        vehID = getattr(player, 'playerVehicleID', None)
+        if vehID is not None and vehID in arena.vehicles:
+            return arena.vehicles[vehID]['clanAbbrev']
+    return None
+
 def getMapSize():
     (b, l), (t, r) = avatar_getter.getArena().arenaType.boundingBox
     return t - b
@@ -157,5 +175,5 @@ def pretty_floats(obj):
     elif isinstance(obj, dict):
         return dict((k, pretty_floats(v)) for k, v in obj.items())
     elif isinstance(obj, (list, tuple)):
-        return map(pretty_floats, obj)             
+        return map(pretty_floats, obj)
     return obj

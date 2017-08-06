@@ -25,6 +25,36 @@ package com.xvm.lobby
                 {
                     return null;
                 }
+                switch (o.getSubname())
+                {
+                    case "player_id":
+                        return Xfw.cmd(XvmCommands.GET_PLAYER_ID);
+                    case "name":
+                        return Xfw.cmd(XvmCommands.GET_PLAYER_NAME);
+                    case "clan":
+                        return Xfw.cmd(XvmCommands.GET_PLAYER_CLAN_NAME);
+                    case "clan_id":
+                        return Xfw.cmd(XvmCommands.GET_PLAYER_CLAN_ID);
+                    case "battles":
+                        return Xfw.cmd(XvmCommands.GET_PLAYER_DOSSIER_VALUE, 'battles');
+                    case "wins":
+                        return Xfw.cmd(XvmCommands.GET_PLAYER_DOSSIER_VALUE, 'wins');
+                    case "winrate":
+                        return Xfw.cmd(XvmCommands.GET_PLAYER_DOSSIER_VALUE, 'winrate');
+                    case "def":
+                        return Xfw.cmd(XvmCommands.GET_PLAYER_DOSSIER_VALUE, 'defence');
+                    case "frg":
+                        return Xfw.cmd(XvmCommands.GET_PLAYER_DOSSIER_VALUE, 'frags');
+                    case "dmg":
+                        return Xfw.cmd(XvmCommands.GET_PLAYER_DOSSIER_VALUE, 'damageDealt');
+                    case "cap":
+                        return Xfw.cmd(XvmCommands.GET_PLAYER_DOSSIER_VALUE, 'capture');
+                    case "hip":
+                        return Xfw.cmd(XvmCommands.GET_PLAYER_DOSSIER_VALUE, 'hitPercent');
+                    case "spo":
+                        return Xfw.cmd(XvmCommands.GET_PLAYER_DOSSIER_VALUE, 'spotted');
+                }
+
                 var playerName:String = Xfw.cmd(XvmCommands.GET_PLAYER_NAME);
                 var stat:StatData = Stat.getUserDataByName(playerName);
                 //Logger.addObject(stat, 3);

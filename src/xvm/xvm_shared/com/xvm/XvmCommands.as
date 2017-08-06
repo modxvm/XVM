@@ -7,7 +7,11 @@ package com.xvm
     public class XvmCommands
     {
         public static const INITIALIZED:String = "initialized";
+        public static const GET_PLAYER_ID:String = "xvm.get_player_id";
         public static const GET_PLAYER_NAME:String = "xvm.get_player_name";
+        public static const GET_PLAYER_CLAN_ID:String = "xvm.get_player_clan_id";
+        public static const GET_PLAYER_CLAN_NAME:String = "xvm.get_player_clan_name";
+        public static const GET_PLAYER_DOSSIER_VALUE:String = "xvm.get_player_dossier_value";
         public static const GET_SVC_SETTINGS:String = "xvm.get_svc_settings";
         public static const LOAD_SETTINGS:String = "xvm.load_settings";
         public static const SAVE_SETTINGS:String = "xvm.save_settings";

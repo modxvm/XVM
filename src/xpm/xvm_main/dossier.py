@@ -3,9 +3,11 @@
 #############################
 # Command
 
-def getDossier(args):
-    return _dossier.getDossier(args)
+def getDossier(battlesType, accountDBID, vehCD):
+    return _dossier.getDossier(battlesType, accountDBID, vehCD)
 
+def getAccountDossierValue(name):
+    return _dossier.getAccountDossierValue(name)
 
 def requestDossier(args):
     _dossier.requestDossier(args)
@@ -47,11 +49,12 @@ class _Dossier(object):
 
     itemsCache = dependency.descriptor(IItemsCache)
     lobbyContext = dependency.descriptor(ILobbyContext)
-    rankedController = dependency.instance(IRankedBattlesController)
+    rankedController = dependency.descriptor(IRankedBattlesController)
 
     def __init__(self, *args):
         self.__dataReceiver = QueuedVehicleDossierReceiver()
         self.__dataReceiver.onDataReceived += self.__requestedDataReceived
+        self._cache = {}
 
     def _dispose(self):
         self.__dataReceiver.onDataReceived -= self.__requestedDataReceived
@@ -67,81 +70,100 @@ class _Dossier(object):
 
     def __requestedDataReceived(self, accountDBID, vehCD):
         # respond
-        res = self.getDossier((self._battlesType, accountDBID, vehCD))
+        res = self.getDossier(self._battlesType, accountDBID, vehCD)
         #log(res)
         as_xfw_cmd(XVM_COMMAND.AS_DOSSIER, accountDBID, vehCD, res)
 
+    def getAccountDossierValue(self, name):
+        return self.getDossier(PROFILE_DROPDOWN_KEYS.ALL).get(name, None)
 
-    def getDossier(self, args):
-        #log(str(args))
+    def getDossier(self, battlesType, accountDBID=None, vehCD=0):
+        self._battlesType = battlesType
 
-        (self._battlesType, self.accountDBID, self.vehCD) = args
+        if accountDBID == 0:
+            accountDBID = None
+        if accountDBID is not None:
+            accountDBID = int(accountDBID)
 
-        if self.accountDBID == 0:
-            self.accountDBID = None
-
-        if self.vehCD == 0:
-            dossier = self.itemsCache.items.getAccountDossier(self.accountDBID)
-            res = self.__prepareAccountResult(dossier)
+        if vehCD is None:
+            vehCD = 0
         else:
-            vehCD = int(self.vehCD)
-            if not self.__isVehicleDossierCached(self.accountDBID, vehCD):
-                return None
-            dossier = self.itemsCache.items.getVehicleDossier(vehCD, self.accountDBID)
+            vehCD = int(vehCD)
 
-            rankCount = None
-            rankSteps = None
-            rankStepsTotal = None
-            if self.rankedController.isAvailable():
-                vdata = vehinfo.getVehicleInfoData(vehCD)
-                if vdata['level'] == 10:
-                    #log(vdata['key'])
-                    #log(dossier.getRankedCurrentSeason())
+        cache_key = "{}:{}:{}".format(battlesType, 0 if accountDBID is None else accountDBID, vehCD)
 
-                    vehicle = self.itemsCache.items.getItemByCD(vehCD)
-                    ranks = self.rankedController.getAllRanksChain(vehicle)
+        if vehCD == 0:
+            # account dossier
+            dossier = self.itemsCache.items.getAccountDossier(accountDBID)
+            cache_item = self._cache.get(cache_key, None)
+            if cache_item is not None and cache_item['battles'] == dossier.getRandomStats().getBattlesCount():
+                return cache_item
+            res = self.__prepareAccountResult(accountDBID, dossier)
+            self._cache[cache_key] = res
+            return res
 
-                    currentRank = self.rankedController.getCurrentRank(vehicle)
-                    if isinstance(currentRank, VehicleRank):
-                        rankCount = currentRank.getSerialID()
+        # vehicle dossier
+        if not self.__isVehicleDossierCached(accountDBID, vehCD):
+            return None
 
-                    currentRankID = currentRank.getID()
-                    nextRank = ranks[currentRankID + 1] if currentRankID < len(ranks) - 1 else currentRank
-                    if isinstance(nextRank, VehicleRank):
-                        progress = nextRank.getProgress()
-                        if progress is not None:
-                            rankSteps = len(nextRank.getProgress().getAcquiredSteps())
-                            rankStepsTotal = len(nextRank.getProgress().getSteps())
+        dossier = self.itemsCache.items.getVehicleDossier(vehCD, accountDBID)
+        cache_item = self._cache.get(cache_key, None)
+        if cache_item is not None and cache_item['battles'] == dossier.getRandomStats().getBattlesCount():
+            return cache_item
 
-            xpVehs = self.itemsCache.items.stats.vehiclesXPs
-            earnedXP = xpVehs.get(vehCD, 0)
-            freeXP = self.itemsCache.items.stats.actualFreeXP
-            #log('vehCD: {0} pVehXp: {1}'.format(vehCD, earnedXP))
+        rankCount = None
+        rankSteps = None
+        rankStepsTotal = None
+        if self.rankedController.isAvailable():
+            vdata = vehinfo.getVehicleInfoData(vehCD)
+            if vdata['level'] == 10:
+                #log(vdata['key'])
+                #log(dossier.getRankedCurrentSeason())
 
-            xpToElite = 0
-            unlocks = self.itemsCache.items.stats.unlocks
-            _, nID, invID = vehicles.parseIntCompactDescr(vehCD)
-            vType = vehicles.g_cache.vehicle(nID, invID)
-            for data in vType.unlocksDescrs:
-                if data[1] not in unlocks:
-                    xpToElite += data[0]
+                vehicle = self.itemsCache.items.getItemByCD(vehCD)
+                ranks = self.rankedController.getAllRanksChain(vehicle)
 
-            # xTDB & xTE
-            xtdb = -1
-            xte = -1
-            if dossier is not None:
-                stats = self.__getStatsBlock(dossier)
-                battles = stats.getBattlesCount()
-                dmg = stats.getDamageDealt()
-                frg = stats.getFragsCount()
-                if battles > 0 and dmg >= 0 and frg >= 0:
-                    xtdb = vehinfo_xtdb.calculateXTDB(vehCD, float(dmg) / battles)
-                    xte = vehinfo_xte.calculateXTE(vehCD, float(dmg) / battles, float(frg) / battles)
+                currentRank = self.rankedController.getCurrentRank(vehicle)
+                if isinstance(currentRank, VehicleRank):
+                    rankCount = currentRank.getSerialID()
 
-            res = self.__prepareVehicleResult(dossier, xtdb, xte, earnedXP, freeXP, xpToElite, rankCount, rankSteps, rankStepsTotal)
+                currentRankID = currentRank.getID()
+                nextRank = ranks[currentRankID + 1] if currentRankID < len(ranks) - 1 else currentRank
+                if isinstance(nextRank, VehicleRank):
+                    progress = nextRank.getProgress()
+                    if progress is not None:
+                        rankSteps = len(nextRank.getProgress().getAcquiredSteps())
+                        rankStepsTotal = len(nextRank.getProgress().getSteps())
 
+        xpVehs = self.itemsCache.items.stats.vehiclesXPs
+        earnedXP = xpVehs.get(vehCD, 0)
+        freeXP = self.itemsCache.items.stats.actualFreeXP
+        #log('vehCD: {0} pVehXp: {1}'.format(vehCD, earnedXP))
+
+        xpToElite = 0
+        unlocks = self.itemsCache.items.stats.unlocks
+        _, nID, invID = vehicles.parseIntCompactDescr(vehCD)
+        vType = vehicles.g_cache.vehicle(nID, invID)
+        for data in vType.unlocksDescrs:
+            if data[1] not in unlocks:
+                xpToElite += data[0]
+
+        # xTDB & xTE
+        xtdb = -1
+        xte = -1
+        if dossier is not None:
+            stats = self.__getStatsBlock(dossier)
+            battles = stats.getBattlesCount()
+            dmg = stats.getDamageDealt()
+            frg = stats.getFragsCount()
+            if battles > 0 and dmg >= 0 and frg >= 0:
+                xtdb = vehinfo_xtdb.calculateXTDB(vehCD, float(dmg) / battles)
+                xte = vehinfo_xte.calculateXTE(vehCD, float(dmg) / battles, float(frg) / battles)
+
+        res = self.__prepareVehicleResult(accountDBID, vehCD, dossier, xtdb, xte, earnedXP, freeXP,
+                                          xpToElite, rankCount, rankSteps, rankStepsTotal)
+        self._cache[cache_key] = res
         return res
-
 
     # PRIVATE
 
@@ -183,19 +205,21 @@ class _Dossier(object):
         raise ValueError('_Dossier: Unknown battle type: ' + self._battlesType)
 
 
-    def __prepareCommonResult(self, dossier):
+    def __prepareCommonResult(self, accountDBID, dossier):
         stats = self.__getStatsBlock(dossier)
         glob = dossier.getGlobalStats()
         return {
-            'accountDBID': 0 if self.accountDBID is None else int(self.accountDBID),
+            'accountDBID': 0 if accountDBID is None else accountDBID,
 
             'battles': stats.getBattlesCount(),
             'wins': stats.getWinsCount(),
+            'winrate': float(stats.getWinsCount()) / float(stats.getBattlesCount()) * 100.0 if stats.getBattlesCount() > 0 else None,
             'losses': stats.getLossesCount(),
             'xp': stats.getXP(),
             'survived': stats.getSurvivedBattlesCount(),
             'shots': stats.getShotsCount(),
             'hits': stats.getHitsCount(),
+            'hitPercent': float(stats.getHitsCount()) / float(stats.getShotsCount()) * 100.0 if stats.getShotsCount() > 0 else None,
             'spotted': stats.getSpottedEnemiesCount(),
             'frags': stats.getFragsCount(),
             'damageDealt': stats.getDamageDealt(),
@@ -222,12 +246,12 @@ class _Dossier(object):
             'treesCut': glob.getTreesCut()}
 
 
-    def __prepareAccountResult(self, dossier):
+    def __prepareAccountResult(self, accountDBID, dossier):
         res = {}
         if dossier is None:
             return res
 
-        res = self.__prepareCommonResult(dossier)
+        res = self.__prepareCommonResult(accountDBID, dossier)
 
         stats = self.__getStatsBlock(dossier)
         glob = dossier.getGlobalStats()
@@ -254,15 +278,15 @@ class _Dossier(object):
 
         return res
 
-    def __prepareVehicleResult(self, dossier, xtdb, xte, earnedXP, freeXP, xpToElite, rankCount, rankSteps, rankStepsTotal):
+    def __prepareVehicleResult(self, accountDBID, vehCD, dossier, xtdb, xte, earnedXP, freeXP, xpToElite, rankCount, rankSteps, rankStepsTotal):
         res = {}
         if dossier is None:
             return res
 
-        res = self.__prepareCommonResult(dossier)
+        res = self.__prepareCommonResult(accountDBID, dossier)
 
         res.update({
-            'vehCD': int(self.vehCD),
+            'vehCD': vehCD,
             'xtdb': xtdb,
             'xte': xte,
             'earnedXP': earnedXP,

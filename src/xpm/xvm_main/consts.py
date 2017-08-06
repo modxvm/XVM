@@ -41,7 +41,11 @@ class XVM_EVENT(object):
 
 class XVM_COMMAND(object):
     REQUEST_CONFIG = "xvm.request_config"
+    GET_PLAYER_ID = "xvm.get_player_id"
     GET_PLAYER_NAME = "xvm.get_player_name"
+    GET_PLAYER_CLAN_ID = "xvm.get_player_clan_id"
+    GET_PLAYER_CLAN_NAME = "xvm.get_player_clan_name"
+    GET_PLAYER_DOSSIER_VALUE = "xvm.get_player_dossier_value"
     GET_CLAN_ICON = "xvm.get_clan_icon"
     GET_XTDB_DATA = "xvm.get_xtdb_data"
     REQUEST_DOSSIER = "xvm.request_dossier"
