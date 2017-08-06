@@ -816,12 +816,29 @@ def DamageLogPanel_as_summaryStatsS(base, self, damage, blocked, assist, stun):
         return base(self, damage, blocked, assist, stun)
 
 
-@overrideMethod(DamageLogPanel, '_onTotalEfficiencyUpdated')
-def DamageLogPanel_onTotalEfficiencyUpdated(base, self, diff):
-    if config.get('damageLog/disabledSummaryStats') and config.get(DAMAGE_LOG_ENABLED):
-        return
-    else:
-        return base(self, diff)
+
+@overrideMethod(DamageLogPanel, 'as_updateSummaryDamageValueS')
+def as_updateSummaryDamageValueS(base, self, value):
+    if not (config.get('damageLog/disabledSummaryStats') and config.get(DAMAGE_LOG_ENABLED)):
+        return base(self, value)
+
+
+@overrideMethod(DamageLogPanel, 'as_updateSummaryBlockedValueS')
+def as_updateSummaryBlockedValueS(base, self, value):
+    if not (config.get('damageLog/disabledSummaryStats') and config.get(DAMAGE_LOG_ENABLED)):
+        return base(self, value)
+
+
+@overrideMethod(DamageLogPanel, 'as_updateSummaryAssistValueS')
+def as_updateSummaryAssistValueS(base, self, value):
+    if not (config.get('damageLog/disabledSummaryStats') and config.get(DAMAGE_LOG_ENABLED)):
+        return base(self, value)
+
+
+@overrideMethod(DamageLogPanel, 'as_updateSummaryStunValueS')
+def as_updateSummaryStunValueS(base, self, value):
+    if not (config.get('damageLog/disabledSummaryStats') and config.get(DAMAGE_LOG_ENABLED)):
+        return base(self, value)
 
 
 @registerEvent(Vehicle, 'onHealthChanged')
