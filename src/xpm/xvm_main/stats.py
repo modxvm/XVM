@@ -481,13 +481,20 @@ class _Stat(object):
         if 'e' in stat:
             stat['eff'] = stat['e']
             del stat['e']
-        del stat['ver']
-        del stat['st']
-        del stat['dt']
-        del stat['cr']
-        del stat['up']
-        del stat['rnd']
-        del stat['lang']
+        if 'ver' in stat:
+            del stat['ver']
+        if 'st' in stat:
+            del stat['st']
+        if 'dt' in stat:
+            del stat['dt']
+        if 'cr' in stat:
+            del stat['cr']
+        if 'up' in stat:
+            del stat['up']
+        if 'rnd' in stat:
+            del stat['rnd']
+        if 'lang' in stat:
+            del stat['lang']
         ###
         if 'v' not in stat:
             stat['v'] = {}
