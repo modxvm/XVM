@@ -36,7 +36,7 @@ XVM-6.8.0:
   [KNOWN ISSUES]
   * bootcamp does not work
   * crash to desktop on battle loading if user OS is Microsoft Windows XP.
-  
+
   [GENERAL]
   * World of Tanks 9.19.1
 

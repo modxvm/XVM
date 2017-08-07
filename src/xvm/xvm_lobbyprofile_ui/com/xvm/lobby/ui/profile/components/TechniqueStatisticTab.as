@@ -204,8 +204,8 @@ package com.xvm.lobby.ui.profile.components
                     color((data.stat.xeff == 100 ? "XX" : (data.stat.xeff < 10 ? "0" : "") + data.stat.xeff), MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_X, data.stat.xeff)) + " (" +
                     color(App.utils.locale.integer(data.stat.eff), MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_EFF, data.stat.eff)) + ")") + "\n";
 
-                s += Locale.get("Avg level") + ": " + (!data.stat.lvl ? "-" :
-                    color(App.utils.locale.numberWithoutZeros(data.stat.lvl), MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_AVGLVL, data.stat.lvl))) + "\n";
+                s += Locale.get("Avg level") + ": " + (!data.stat.avglvl ? "-" :
+                    color(App.utils.locale.numberWithoutZeros(data.stat.avglvl), MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_AVGLVL, data.stat.avglvl))) + "\n";
 
                 ratingTF.htmlText = "<textformat leading='-2'>" + formatHtmlText(s) + "</textformat>";
             }

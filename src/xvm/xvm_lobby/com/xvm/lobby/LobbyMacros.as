@@ -58,15 +58,61 @@ package com.xvm.lobby
                 var playerName:String = Xfw.cmd(XvmCommands.GET_PLAYER_NAME);
                 var stat:StatData = Stat.getUserDataByName(playerName);
                 //Logger.addObject(stat, 3);
-                if (stat)
-                {
-                    return stat[o.getSubname()];
-                }
-                else
+                if (!stat)
                 {
                     Stat.loadUserData(playerName);
                     return null;
                 }
+
+                switch (o.getSubname())
+                {
+                    case "c_winrate":
+                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, stat.winrate, "#");
+                    case "c_eff":
+                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, stat.eff, "#");
+                    case "c_wgr":
+                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WGR, stat.wgr, "#");
+                    case "c_wn6":
+                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WN6, stat.wn6, "#");
+                    case "c_wn8":
+                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8, "#");
+                    case "c_xeff":
+                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#");
+                    case "c_xwgr":
+                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwgr, "#");
+                    case "c_xwn6":
+                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn6, "#");
+                    case "c_xwn8":
+                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8, "#");
+                    case "c_avglvl":
+                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, stat.avglvl, "#");
+                    case "c_battles":
+                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_KB, stat.battles / 1000.0, "#");
+                    case "a_winrate":
+                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WINRATE, stat.winrate);
+                    case "a_eff":
+                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_EFF, stat.eff);
+                    case "a_wgr":
+                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WGR, stat.wgr);
+                    case "a_wn6":
+                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN6, stat.wn6);
+                    case "a_wn8":
+                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN8, stat.wn8);
+                    case "a_xeff":
+                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xeff);
+                    case "a_xwgr":
+                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwgr);
+                    case "a_xwn6":
+                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn6);
+                    case "a_xwn8":
+                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn8);
+                    case "a_avglvl":
+                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_AVGLVL, stat.avglvl);
+                    case "a_battles":
+                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_KB, stat.battles / 1000);
+                }
+
+                return stat[o.getSubname()];
             }
         }
 

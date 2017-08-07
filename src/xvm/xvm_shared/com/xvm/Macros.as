@@ -1204,7 +1204,7 @@ package com.xvm
                 m_macros_cache_players[pname] = [ ];
             }
             // {{avglvl}}
-            pdata["avglvl"] = stat.lvl;
+            pdata["avglvl"] = stat.avglvl;
             // {{xte}}
             pdata["xte"] = isNaN(stat.v.xte) || stat.v.xte <= 0 ? null : stat.v.xte == 100 ? "XX" : (stat.v.xte < 10 ? "0" : "") + stat.v.xte;
             // {{xeff}}
@@ -1301,7 +1301,7 @@ package com.xvm
             // {{c:kb}}
             pdata["c:kb"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_KB, stat.battles / 1000.0, "#");
             // {{c:avglvl}}
-            pdata["c:avglvl"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, stat.lvl, "#");
+            pdata["c:avglvl"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, stat.avglvl, "#");
             // {{c:t-winrate}}
             pdata["c:t-winrate"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, stat.v.winrate, "#");
             // {{c:t-rating}} (obsolete)
@@ -1354,7 +1354,7 @@ package com.xvm
             // {{a:kb}}
             pdata["a:kb"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_KB, stat.battles / 1000);
             // {{a:avglvl}}
-            pdata["a:avglvl"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_AVGLVL, stat.lvl);
+            pdata["a:avglvl"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_AVGLVL, stat.avglvl);
             // {{a:t-winrate}}
             pdata["a:t-winrate"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WINRATE, stat.v.winrate);
             // {{a:t-rating}} (obsolete)

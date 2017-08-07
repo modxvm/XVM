@@ -62,7 +62,7 @@ Zawartość:
 
   4. Jest też możliwość instalacji tzw. "Nightly builds"(wersje testowe).
     Możesz je pobrać na http://nightly.modxvm.com/
-    
+
     *** UWAGA! Statystyki oraz szanse na wygraną należy włączyć na stronie XVM:
     a) Klikamy na "Sign UP",
     b) Wybieramy "Activate Statistics",
@@ -83,7 +83,7 @@ Zawartość:
 
   Pliki konfiguracyjne modyfikacji:
     \res_mods\xvm\configs\@Default\
-  * Możesz wybrać gotowy plik konfiguracji z katalogu \res_mods\xvm\configs\user configs\ 
+  * Możesz wybrać gotowy plik konfiguracji z katalogu \res_mods\xvm\configs\user configs\
   * Możesz utworzyć nową konfigurację lub edytować istniejącą w:
     http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 

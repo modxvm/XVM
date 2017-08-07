@@ -48,7 +48,7 @@
     See default config for all possible options:
       \res_mods\configs\xvm\default
 
-    Note: If you want to change config files manually, use plain text editor (like Notepad). 
+    Note: If you want to change config files manually, use plain text editor (like Notepad).
     DO NOT use MS Word, Wordpad or similar editors.
 
   3. If XVM incorrectly detects the language of the game client,
@@ -180,11 +180,11 @@
   For example:
       "clockFormat": "H:i"          => 01:23
       "clockFormat": "Y.m.d H:i:s"  => 2013.05.20 01:23:45
-      
+
 -----------------------------------------------------------
 5. MAKING A PERSONAL CONFIGURATION
 -----------------------------------------------------------
-  
+
   Personal configuration allows you to save individual settings and not lose them when you upgrade the mod or install custom configs
 
     1. in the res_mods\configs\xvm create a new folder and name it appropriately

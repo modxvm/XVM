@@ -94,7 +94,7 @@ Legend:
 │ {{mystat.xwgr}}            │ . │ . │ XVM Scale for WG personal rating (values 00-99, XX for Tops)
 │ {{mystat.xwn6}}            │ . │ . │ XVM Scale for WN6 (values 00-99, XX for Tops)
 │ {{mystat.xwn8}}            │ . │ . │ XVM Scale for WN8 (values 00-99, XX for Tops)
-│ {{mystat.lvl}}             │ . │ . │ average level (tier) of tanks
+│ {{mystat.avglvl}}          │ . │ . │ average level (tier) of tanks
 │ {{mystat.battles}}         │ . │ . │ total battles count
 │ {{mystat.wins}}            │ . │ . │ total wins count
 │ {{mystat.def}}             │ . │ . │ total defense points
@@ -104,6 +104,18 @@ Legend:
 │ {{mystat.hip}}             │ . │ . │ total average hit percent
 │ {{mystat.spo}}             │ . │ . │ total spotted count
 │ {{mystat.ts}}              │ . │ . │ statistics update timestamp
+│ {{mystat.c_winrate}}       │ . │ . │ color depending on GWR
+│ {{mystat.c_eff}}           │ . │ . │ color depending on player efficiency
+│ {{mystat.c_wgr}}           │ . │ . │ color depending on WG personal rating
+│ {{mystat.c_wn6}}           │ . │ . │ color depending on WN6 rating
+│ {{mystat.c_wn8}}           │ . │ . │ color depending on WN8 rating
+│ {{mystat.c_xeff}}          │ . │ . │ color depending on XVM Scale for efficiency
+│ {{mystat.c_xwgr}}          │ . │ . │ color depending on XVM Scale for WG personal rating
+│ {{mystat.c_xwn6}}          │ . │ . │ color depending on XVM Scale for WN6
+│ {{mystat.c_xwn8}}          │ . │ . │ color depending on XVM Scale for WN8
+│ {{mystat.c_avglvl}}        │ . │ . │ color depending on average level of tanks
+│ {{mystat.c_battles}}       │ . │ . │ color depending on battles
 │ {{l10n:ID}}                │ . │ . │ localizated text, see en.xc for id
 │ {{py:f()}}                 │ . │ . │ dynamic python function call
 └────────────────────────────┴───┴───┴─────────────────────────────────
+  * Any color macro you can change to transparency macro (e.g. {{mystat.a_winrate}}).

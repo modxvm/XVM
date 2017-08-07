@@ -481,6 +481,9 @@ class _Stat(object):
         if 'e' in stat:
             stat['eff'] = stat['e']
             del stat['e']
+        if 'lvl' in stat:
+            stat['avglvl'] = stat['lvl']
+            del stat['lvl']
         if 'ver' in stat:
             del stat['ver']
         if 'st' in stat:

@@ -6,7 +6,7 @@
   [МАКРОСЫ НА PYTHON]
   * добавлен макрос {{py:xvm.color_rating(r, v)}}
   * totalEfficiency: добавлен макрос {{py:xvm.hitAlly}}
-  
+
   [МИНИКАРТА]
   * добавлена опция "showCellClickAnimation" - позволяет отключить анимацию клика по ячейке
 

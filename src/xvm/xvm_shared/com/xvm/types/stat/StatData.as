@@ -22,7 +22,7 @@ package com.xvm.types.stat
         public var dmg:Number = NaN;           // damage (int)
         public var frg:Number = NaN;           // frags (int)
         public var def:Number = NaN;           // defence (int)
-        public var lvl:Number = NaN;           // average level (float)
+        public var avglvl:Number = NaN;        // average level (float)
         public var eff:Number = NaN;           // eff (int)
         public var wn6:Number = NaN;           // WN6 rating (int)
         public var wn8:Number = NaN;           // WN8 rating (int)
