@@ -92,8 +92,9 @@ def _init():
                 data['nation'] = nation
                 data['level'] = descr.level
                 data['vclass'] = tuple(vehicles.VEHICLE_CLASS_TAGS & descr.tags)[0]
-                data['localizedFullName'] = descr.userString
+                data['localizedName'] = descr.shortUserString
                 data['localizedShortName'] = descr.shortUserString
+                data['localizedFullName'] = descr.userString
                 data['premium'] = 'premium' in descr.tags
 
                 stockTurret = item.turrets[0][0]
