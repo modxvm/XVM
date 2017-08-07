@@ -11,6 +11,7 @@ package com.xvm.battle.teamBasesPanel
     import flash.events.*;
     import flash.text.*;
     import mx.utils.*;
+    import scaleform.gfx.*;
 
     public dynamic class UI_TeamCaptureBar extends TeamCaptureBarUI
     {
@@ -22,8 +23,10 @@ package com.xvm.battle.teamBasesPanel
         private var DEFAULT_TFVEHICLESCOUNT_Y:Number;
         private var DEFAULT_TFTIMELEFT_X:Number;
         private var DEFAULT_TFTIMELEFT_Y:Number;
-        private var DEFAULT_POINTSTEXTFIELD_X:Number;
-        private var DEFAULT_POINTSTEXTFIELD_Y:Number;
+        private var DEFAULT_BACKGROUNDTF_X:Number;
+        private var DEFAULT_BACKGROUNDTF_Y:Number;
+
+        private var backgroundTF:TextField;
 
         private var cfg:CCaptureBarTeam;
         private var m_captured:Boolean;
@@ -40,7 +43,30 @@ package com.xvm.battle.teamBasesPanel
 
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
 
+            backgroundTF = createBackgroundTF(textField);
+            addChildAt(backgroundTF, 0);
+
             initTextFields();
+        }
+
+        private function createBackgroundTF(tpl:TextField):TextField
+        {
+            var f:TextField = new TextField();
+            f.x = tpl.x;
+            f.y = tpl.y;
+            f.width = tpl.width;
+            f.height = tpl.height;
+            f.mouseEnabled = false;
+            f.selectable = false;
+            TextFieldEx.setNoTranslate(f, true);
+            f.antiAliasType = AntiAliasType.ADVANCED;
+            f.autoSize = TextFieldAutoSize.NONE;
+            var tf:TextFormat = tpl.getTextFormat();
+            tf.color = 0xFFFFFF;
+            tf.align = TextFormatAlign.CENTER;
+            f.defaultTextFormat = tf;
+            f.filters = tpl.filters;
+            return f;
         }
 
         override public function set y(value:Number):void
@@ -112,7 +138,7 @@ package com.xvm.battle.teamBasesPanel
                 setupTextField(textField, "title", DEFAULT_TEXTFIELD_X, DEFAULT_TEXTFIELD_Y);
                 setupTextField(tfVehiclesCount, "timer", DEFAULT_TFVEHICLESCOUNT_X, DEFAULT_TFVEHICLESCOUNT_Y);
                 setupTextField(tfTimeLeft, "players", DEFAULT_TFTIMELEFT_X, DEFAULT_TFTIMELEFT_Y);
-                //TODO:9.20 setupTextField(pointsTextField, "points", DEFAULT_POINTSTEXTFIELD_X, DEFAULT_POINTSTEXTFIELD_Y);
+                setupTextField(backgroundTF, "background", DEFAULT_BACKGROUNDTF_X, DEFAULT_BACKGROUNDTF_Y);
                 setupProgressBar();
                 m_baseNumText = Xfw.cmd(BattleCommands.CAPTURE_BAR_GET_BASE_NUM_TEXT, id);
                 updateTextFields();
@@ -130,6 +156,10 @@ package com.xvm.battle.teamBasesPanel
             textField.x -= 300;
             textField.width += 600;
             textField.height = 600;
+            // align: center
+            backgroundTF.x -= 300;
+            backgroundTF.width += 600;
+            backgroundTF.height = 600;
             // align: right
             tfVehiclesCount.x -= 200 - 271;
             tfVehiclesCount.width += 200;
@@ -138,27 +168,23 @@ package com.xvm.battle.teamBasesPanel
             tfTimeLeft.x -= 20 + 265;
             tfTimeLeft.width += 200;
             tfTimeLeft.height = 600;
-            // align: center
-            //TODO:9.20 pointsTextField.x -= 300;
-            //TODO:9.20 pointsTextField.width += 600;
-            //TODO:9.20 pointsTextField.height = 600;
 
             // hack to hide useless icons
             textField.y += HIDE_ICONS_HACK_OFFSET_Y;
             tfVehiclesCount.y += HIDE_ICONS_HACK_OFFSET_Y;
             tfTimeLeft.y += HIDE_ICONS_HACK_OFFSET_Y;
-            //TODO:9.20 pointsTextField.y += HIDE_ICONS_HACK_OFFSET_Y;
+            backgroundTF.y += HIDE_ICONS_HACK_OFFSET_Y;
             bg.y += HIDE_ICONS_HACK_OFFSET_Y;
             progressBar.y += HIDE_ICONS_HACK_OFFSET_Y;
 
             DEFAULT_TEXTFIELD_X = textField.x;
             DEFAULT_TEXTFIELD_Y = textField.y;
+            DEFAULT_BACKGROUNDTF_X = backgroundTF.x;
+            DEFAULT_BACKGROUNDTF_Y = backgroundTF.y;
             DEFAULT_TFVEHICLESCOUNT_X = tfVehiclesCount.x;
             DEFAULT_TFVEHICLESCOUNT_Y = tfVehiclesCount.y;
             DEFAULT_TFTIMELEFT_X = tfTimeLeft.x;
             DEFAULT_TFTIMELEFT_Y = tfTimeLeft.y;
-            //TODO:9.20 DEFAULT_POINTSTEXTFIELD_X = pointsTextField.x;
-            //TODO:9.20 DEFAULT_POINTSTEXTFIELD_Y = pointsTextField.y;
         }
 
         private function setupCaptureBarColor():void
@@ -228,9 +254,9 @@ package com.xvm.battle.teamBasesPanel
             value = StringUtil.substitute(value, m_baseNumText);
             tfVehiclesCount.htmlText = value;
 
-            value = Macros.FormatStringGlobal(cfg.points[name]);
+            value = Macros.FormatStringGlobal(cfg.background[name]);
             value = StringUtil.substitute(value, m_baseNumText);
-            //TODO:9.20 pointsTextField.htmlText = value;
+            backgroundTF.htmlText = value;
         }
     }
 }

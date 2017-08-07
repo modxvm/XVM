@@ -12,7 +12,7 @@ package com.xvm.types.cfg
         public var title:CCaptureBarTextField;
         public var players:CCaptureBarTextField;
         public var timer:CCaptureBarTextField;
-        public var points:CCaptureBarTextField;
+        public var background:CCaptureBarTextField;
 
         public function clone():*
         {

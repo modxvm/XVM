@@ -172,7 +172,7 @@
     //"enabled": false,
     //"distanceOffset": -20,
     //"hideProgressBar": true,
-    "enemy": {
+    "ally": {
       "title": {
         //"format": "<font size='15' color='#FFFFFF'>{{l10n:allyBaseCapture}}</font>"
       },
@@ -182,8 +182,8 @@
       "timer": {
         //"format": "<font color='#FFCC66'><font size='15' face='xvm'>&#x114;</font>  <b>{{cap.time}}</b></font>"
       },
-      "points": {
-        //"format": "<font size='15' color='#FFFFFF'>{{cap.points}}</font>"
+      "background": {
+        //"format": "<font size='35' color='#FFFFFF'>{{cap.points}}</font>"
       }
     },
     "__stub__": null

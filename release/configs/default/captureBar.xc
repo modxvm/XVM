@@ -79,15 +79,15 @@
           "strength": 1
         }
       },
-      // Capture points textfield
-      // Текстовое поле с очками захвата
-      "points": {
+      // Background field
+      // Фоновое поле
+      "background": {
         "x": 0,
         "y": 0,
         "format": "",
         "done": "",
         "shadow": {
-		  "enabled": false,
+          "enabled": false,
           "color": "0x000000",
           "alpha": 75,
           "blur": 5,
@@ -106,7 +106,7 @@
       },
       "players": ${"captureBar.enemy.players"},
       "timer": ${"captureBar.enemy.timer"},
-      "points": ${"captureBar.enemy.points"}
+      "background": ${"captureBar.enemy.background"}
     }
   }
 }
