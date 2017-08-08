@@ -41,6 +41,8 @@ package com.xvm.battle.teamBasesPanel
             //Logger.add("UI_TeamCaptureBar()");
             super();
 
+            EXIT_TWEEN_Y -= HIDE_ICONS_HACK_OFFSET_Y;
+
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
 
             backgroundTF = createBackgroundTF(textField);
