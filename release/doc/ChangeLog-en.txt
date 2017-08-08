@@ -1,4 +1,8 @@
 ﻿XVM-6.8.2-dev:
+  [GENERAL]
+  * World of Tanks 9.20
+  * updated capture bar
+
   [KNOWN ISSUES]
   * Bootcamp: does not work. Run WoT without mods to enter in bootcamp mode.
   * Microsoft Windows XP: crash to desktop on battle loading if graphics mode is standard.
@@ -15,12 +19,15 @@
   * added event:
       ON_MY_STAT_LOADED - emitted when own stat loading complete, useful for {{mystat.*}} macros
 
+  [MARKERS]
+  * options iconset/vehicleMarkerAllyAtlas and iconset/vehicleMarkerEnemyAtlas are implemented
+
 XVM-6.8.1:
   [KNOWN ISSUES]
   * Bootcamp: does not work. Run WoT without mods to enter in bootcamp mode.
   * Microsoft Windows XP: crash to desktop on battle loading if graphics mode is standard.
 
-  [ОБЩЕЕ]
+  [GENERAL]
   * World of Tanks 9.19.1 micropatch 1
 
   [MARKERS]

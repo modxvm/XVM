@@ -360,8 +360,8 @@
     "playersPanelRightAtlas": "../../../../res/atlases/BattleAtlasRight",
     "fullStatsLeftAtlas": "../../../../res/atlases/BattleAtlasLeft",
     "fullStatsRightAtlas": "../../../../res/atlases/BattleAtlasRight",
-    "vehicleMarkerAllyAtlas": "../../../../res/atlases/vehicleMarkerAtlasAlly",
-    "vehicleMarkerEnemyAtlas": "../../../../res/atlases/vehicleMarkerAtlasEnemy"
+    "vehicleMarkerAllyAtlas": "../../../../res/atlases/vehicleMarkerAtlas1",
+    "vehicleMarkerEnemyAtlas": "../../../../res/atlases/vehicleMarkerAtlas2"
   },
   "vehicleNames": {
     "ussr-T-34": { "name": "т-34.", "short": "т-34" },

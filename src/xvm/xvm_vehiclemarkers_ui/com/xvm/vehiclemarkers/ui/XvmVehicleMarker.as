@@ -11,14 +11,17 @@ package com.xvm.vehiclemarkers.ui
     import com.xvm.battle.vo.*;
     import com.xvm.vehiclemarkers.ui.components.*;
     import com.xvm.vo.*;
+    import flash.events.*;
     import net.wg.gui.battle.views.vehicleMarkers.VehicleMarkersManager; // * - name conflict
     import net.wg.gui.battle.views.vehicleMarkers.events.*;
+    import net.wg.gui.utils.*;
 
     public dynamic class XvmVehicleMarker extends VehicleMarker
     {
         private static const INVALIDATE_DATA:uint = 1 << 29;
 
         public var vehicleID:Number = NaN;
+        public var vehicleIconName:String = null;
         private var playerName:String = null;
         private var curHealth:Number = NaN;
         private var maxHealth:int = 0;
@@ -38,6 +41,7 @@ package com.xvm.vehiclemarkers.ui
             //Logger.add(getQualifiedClassName(this));
             super();
             Xvm.addEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
+            Xvm.addEventListener(Defines.XVM_EVENT_ATLAS_LOADED, onAtlasLoaded);
             createComponents();
             Xvm.swfProfilerEnd("XvmVehicleMarker.ctor()");
         }
@@ -57,6 +61,7 @@ package com.xvm.vehiclemarkers.ui
             Xvm.swfProfilerBegin("XvmVehicleMarker.onDispose()");
             super.onDispose();
             Xvm.removeEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
+            Xvm.removeEventListener(Defines.XVM_EVENT_ATLAS_LOADED, onAtlasLoaded);
             var vmManager:VehicleMarkersManager = VehicleMarkersManager.getInstance();
             vmManager.removeEventListener(VehicleMarkersManagerEvent.SHOW_EX_INFO, onShowExInfoHandler);
             deleteComponents();
@@ -71,6 +76,7 @@ package com.xvm.vehiclemarkers.ui
             super.setVehicleInfo.apply(this, arguments);
             try
             {
+                vehicleIconName = vIconSource.substr(vIconSource.lastIndexOf("/") + 1).replace(".png", "");
                 this.playerName = pName;
                 this.maxHealth = maxHealth;
                 vehicleID = BattleState.getVehicleIDByPlayerName(playerName);
@@ -84,6 +90,16 @@ package com.xvm.vehiclemarkers.ui
                 Logger.err(ex);
             }
             Xvm.swfProfilerEnd("XvmVehicleMarker.setVehicleInfo()");
+        }
+
+        override public function settingsUpdate(param1:int):void
+        {
+            super.settingsUpdate(param1);
+            var playerState:VOPlayerState = BattleState.get(vehicleID);
+            if (playerState)
+            {
+                setupVehicleIcon(playerState.isAlly);
+            }
         }
 
         override protected function draw():void
@@ -105,6 +121,7 @@ package com.xvm.vehiclemarkers.ui
                             dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE_HEALTH, playerState, exInfo));
                             playerState.damageInfo = null;
                         }
+                        setupVehicleIcon(playerState.isAlly);
                     }
                 }
             }
@@ -334,6 +351,25 @@ package com.xvm.vehiclemarkers.ui
             if (e.vehicleID == vehicleID)
             {
                 invalidate(INVALIDATE_DATA);
+            }
+        }
+
+        private function onAtlasLoaded(e:Event):void
+        {
+            if (!isNaN(vehicleID))
+            {
+                invalidate(INVALIDATE_DATA);
+            }
+        }
+
+        private function setupVehicleIcon(isAlly:Boolean):void
+        {
+            var atlasManager:RootSWFAtlasManager = RootSWFAtlasManager.instance;
+            var atlasName:String = isAlly ? XvmVehicleMarkersMod.allyAtlas : XvmVehicleMarkersMod.enemyAtlas;
+            if (atlasManager.isAtlasInitialized(atlasName))
+            {
+                RootSWFAtlasManager.instance.drawWithCenterAlign(atlasName, vehicleIconName, vehicleIcon.graphics, true, false);
+                xfw_updateIconColor();
             }
         }
 

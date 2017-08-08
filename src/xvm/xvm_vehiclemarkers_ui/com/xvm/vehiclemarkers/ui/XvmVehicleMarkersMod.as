@@ -9,6 +9,9 @@ package com.xvm.vehiclemarkers.ui
     import com.xvm.battle.*;
     import flash.external.*;
     import flash.events.*;
+    import net.wg.data.constants.generated.*;
+    import net.wg.infrastructure.events.*;
+    import net.wg.gui.utils.*;
 
     XvmVehicleMarker;
 
@@ -17,6 +20,9 @@ package com.xvm.vehiclemarkers.ui
      */
     public class XvmVehicleMarkersMod extends Xvm
     {
+        public static var allyAtlas:String = ATLAS_CONSTANTS.VEHICLE_MARKER_ATLAS;
+        public static var enemyAtlas:String = ATLAS_CONSTANTS.VEHICLE_MARKER_ATLAS;
+
         public function XvmVehicleMarkersMod():void
         {
             Xfw.registerCommandProvider(xvm_cmd);
@@ -57,6 +63,7 @@ package com.xvm.vehiclemarkers.ui
                 removeBattleControllerListeners();
                 if (Config.config.markers.enabled)
                 {
+                    registerVehicleIconAtlases();
                     createBattleControllerListeners();
                     if (!_initialized)
                     {
@@ -69,6 +76,39 @@ package com.xvm.vehiclemarkers.ui
             {
                 Logger.err(ex);
             }
+        }
+
+        private function registerVehicleIconAtlases():void
+        {
+            allyAtlas = registerVehicleIconAtlas(allyAtlas, Config.config.iconset.vehicleMarkerAllyAtlas, onAtlasInitializedAlly);
+            enemyAtlas = registerVehicleIconAtlas(enemyAtlas, Config.config.iconset.vehicleMarkerEnemyAtlas, onAtlasInitializedEnemy);
+        }
+
+        private function registerVehicleIconAtlas(currentAtlas:String, cfgAtlas:String, callback:Function):String
+        {
+            var newAtlas:String = Macros.FormatStringGlobal(cfgAtlas);
+            if (currentAtlas != newAtlas)
+            {
+                var atlasManager:RootSWFAtlasManager = RootSWFAtlasManager.instance;
+                if (!atlasManager.isAtlasInitialized(newAtlas))
+                {
+                    atlasManager.addEventListener(AtlasEvent.ATLAS_INITIALIZED, callback);
+                    atlasManager.initAtlas(newAtlas);
+                }
+            }
+            return newAtlas;
+        }
+
+        private function onAtlasInitializedAlly(e:AtlasEvent):void
+        {
+            RootSWFAtlasManager.instance.removeEventListener(AtlasEvent.ATLAS_INITIALIZED, onAtlasInitializedAlly);
+            Xvm.dispatchEvent(new Event(Defines.XVM_EVENT_ATLAS_LOADED));
+        }
+
+        private function onAtlasInitializedEnemy(e:AtlasEvent):void
+        {
+            RootSWFAtlasManager.instance.removeEventListener(AtlasEvent.ATLAS_INITIALIZED, onAtlasInitializedEnemy);
+            Xvm.dispatchEvent(new Event(Defines.XVM_EVENT_ATLAS_LOADED));
         }
 
         private function createBattleControllerListeners():void
