@@ -4,7 +4,7 @@
   //"language": "pl",
   "def": {
     "formatNick": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
-    "formatVehicle": "<font face='Consolas' size='11'><img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'><img src='xvm://res/icons/flags/{{flag|default}}.png' width='16' height='13' vspace='-2'><font color='{{c:avglvl|#666666}}'>{{avglvl%d|-}}</font> <font color='{{t-battles>19?{{c:xte|#666666}}|#666666}}'>{{xte|--}}</font>|<font color='{{c:xwgr|#666666}}'>{{xwgr|--}}</font>|<font color='{{c:xeff|#666666}}'>{{xeff|--}}</font>|<font color='{{c:xwn8|#666666}}'>{{xwn8|--}}</font> <font color='{{c:kb|#666666}}'>{{kb%2d~k|--k}}</font></font>",
+    "formatVehicle": "<font face='Consolas' size='11'><img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'><img src='xvm://res/icons/flags/{{flag|default}}.png' width='16' height='13' vspace='-2'><font color='{{c:avglvl|#666666}}'>{{avglvl%d|-}}</font> <font color='{{t-battles>19?{{c:xte|#666666}}|#666666}}'>{{xte|--}}</font>|<font color='{{c:xwgr|#666666}}'>{{xwgr|--}}</font>|<font color='{{c:xeff|#666666}}'>{{xeff|--}}</font>|<font color='{{c:xwn8|#666666}}'>{{xwn8|--}}</font> <font color='{{c:t-battles|#666666}}'>{{t-battles?{{t-battles<1000?{{t-battles%3d~}}|999}}|---}}</font></font>",
     //"formatVehicle": "{{vehicle}}",
 
     "pingServers": {
@@ -27,7 +27,7 @@
   },
   "hotkeys": {
     //"minimapZoom": { "enabled": true, "keyCode": 56, "onHold": true },
-    //"minimapAltMode": { "enabled": true, "keyCode": 56, "onHold": true },
+    "minimapAltMode": { "enabled": true, "keyCode": 56, "onHold": true },
     "playersPanelAltMode": { "enabled": true, "keyCode": 56, "onHold": true }, // LAlt
     //"markersAltMode":      { "enabled": false, "onHold": false },
     "__stub__": {}
@@ -172,7 +172,7 @@
     //"enabled": false,
     //"distanceOffset": -20,
     //"hideProgressBar": true,
-    "ally": {
+    "enemy": {
       "title": {
         //"format": "<font size='15' color='#FFFFFF'>{{l10n:allyBaseCapture}}</font>"
       },
@@ -182,8 +182,8 @@
       "timer": {
         //"format": "<font color='#FFCC66'><font size='15' face='xvm'>&#x114;</font>  <b>{{cap.time}}</b></font>"
       },
-      "background": {
-        //"format": "<font size='35' color='#FFFFFF'>{{cap.points}}</font>"
+      "points": {
+        //"format": "<font size='15' color='#FFFFFF'>{{cap.points}}</font>"
       }
     },
     "__stub__": null
@@ -360,8 +360,8 @@
     "playersPanelRightAtlas": "../../../../res/atlases/BattleAtlasRight",
     "fullStatsLeftAtlas": "../../../../res/atlases/BattleAtlasLeft",
     "fullStatsRightAtlas": "../../../../res/atlases/BattleAtlasRight",
-    "vehicleMarkerAllyAtlas": "../../../../res/atlases/vehicleMarkerAtlas1",
-    "vehicleMarkerEnemyAtlas": "../../../../res/atlases/vehicleMarkerAtlas2"
+    "vehicleMarkerAllyAtlas": "../../../../res/atlases/vehicleMarkerAtlasAlly",
+    "vehicleMarkerEnemyAtlas": "../../../../res/atlases/vehicleMarkerAtlasEnemy"
   },
   "vehicleNames": {
     "ussr-T-34": { "name": "т-34.", "short": "т-34" },

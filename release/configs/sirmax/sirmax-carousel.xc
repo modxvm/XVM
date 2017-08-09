@@ -72,6 +72,12 @@
         { "x": 20, "y": 42, "height": 22, "shadow": ${ "def.textFieldShadow" },
           "valign": "center", "textFormat": { "font": "mono", "size": 12, "bold": true }, "antiAliasType": "advanced",
           "format": "<font color='{{v.c_winrate}}'>{{v.winrate%2d~%}}</font>" },
+        // battles
+        { "x": 0, "y": 45, "width": 22, "height": 22,
+          "src": "{{v.winrate?img://gui/maps/icons/library/dossier/battles40x32.png}}" },
+        { "x": 20, "y": 57, "height": 22, "shadow": ${ "def.textFieldShadow" },
+          "valign": "center", "textFormat": { "font": "mono", "size": 12, "bold": true }, "antiAliasType": "advanced",
+          "format": "<font color='{{v.c_battles}}'>{{v.battles%d}}</font>" },
 
         // right side
 
