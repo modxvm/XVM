@@ -33,7 +33,7 @@ def sign():
     if panel.total_hp_sign == '<':
         return '&lt;'
     elif panel.total_hp_sign == '>':
-        return '&gt;';
+        return '&gt;'
     elif panel.total_hp_sign is None:
         return ''
     else:
@@ -113,7 +113,7 @@ class PlayerDamages(object):
         for r in results:
             vehicleID = r & 4294967295L
             flags = r >> 32 & 4294967295L
-            if playerAvatar.team == arenaVehicles[vehicleID]['team'] and playerAvatar.playerVehicleID != vehicleID:
+            if playerAvatar.team == arenaVehicles[vehicleID]['team'] and playerAvatar.playerVehicleID != vehicleID and arenaVehicles[vehicleID]['isAlive']:
                 if flags & (VHF.IS_ANY_DAMAGE_MASK | VHF.ATTACK_IS_DIRECT_PROJECTILE):
                     self.teamHits = False
 
