@@ -62,7 +62,7 @@ def _exec(req, data=None, showLog=True, api=XVM.API_VERSION, params={}):
 
         token = config.token.token
         if token is None:
-            token = ''
+            token = '-'
 
         url = url.format(id=accountDBID, token=token)
 
