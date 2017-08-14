@@ -73,7 +73,7 @@
         "format": "<img src='xvm://res/icons/clock/clockBg.png' width='160' height='80'>"
       },
       { // text block
-      { // текстовый блок
+        // текстовый блок
         "updateEvent": "ON_MY_STAT_LOADED",
         "x": 185,
         "y": 165,
