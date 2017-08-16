@@ -1,21 +1,21 @@
 ﻿{
     "RU": {
-        "ver": "6.8.1",
-        "wot": "0.9.19.1.1",
-        "message": " • WoT 9.19.1.1\nПодробности на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
+        "ver": "6.8.2",
+        "wot": "0.9.19.1.2",
+        "message": " • WoT 9.19.1.2\nПодробности на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
     },
     "EU": {
-        "ver": "6.8.1",
-        "wot": "0.9.19.1.1",
-        "message": " • WoT 9.19.1.1\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "6.8.2",
+        "wot": "0.9.19.1.2",
+        "message": " • WoT 9.19.1.2\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "NA": {
-        "ver": "6.8.1",
-        "wot": "0.9.19.1.1",
-        "message": " • WoT 9.19.1.1\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "6.8.2",
+        "wot": "0.9.19.1.2",
+        "message": " • WoT 9.19.1.2\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "ASIA": {
-        "ver": "6.8.1",
+        "ver": "6.8.2",
         "wot": "0.9.19.1.1",
         "message": " • WoT 9.19.1.1\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
