@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 04.07.2017
+    // Last update: 17.08.2017
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -332,6 +332,7 @@
     "sweden-S21_UDES_03":                    {"name": null, "short": null},
     "sweden-S22_Strv_S1":                    {"name": null, "short": null},
     "sweden-S23_Strv_81":                    {"name": null, "short": null},
+    "sweden-S23_Strv_81_sabaton":            {"name": null, "short": null},
     "uk-GB01_Medium_Mark_I":                 {"name": null, "short": null},
     "uk-GB01_Medium_Mark_I_bot":             {"name": null, "short": null},
     "uk-GB03_Cruiser_Mk_I":                  {"name": null, "short": null},
