@@ -1,7 +1,14 @@
-﻿XVM-6.8.2-dev:
+﻿XVM-6.9.0-dev:
   [GENERAL]
   * World of Tanks 9.20
   * updated capture bar
+
+  [MARKERS]
+  * options iconset/vehicleMarkerAllyAtlas and iconset/vehicleMarkerEnemyAtlas are implemented
+
+XVM-6.8.2:
+  [GENERAL]
+  * World of Tanks 9.19.1 micropatch 2
 
   [KNOWN ISSUES]
   * Bootcamp: does not work. Run WoT without mods to enter in bootcamp mode.
@@ -18,9 +25,6 @@
   * added macros {{mystat.*}} with own statistics values
   * added event:
       ON_MY_STAT_LOADED - emitted when own stat loading complete, useful for {{mystat.*}} macros
-
-  [MARKERS]
-  * options iconset/vehicleMarkerAllyAtlas and iconset/vehicleMarkerEnemyAtlas are implemented
 
 XVM-6.8.1:
   [KNOWN ISSUES]
