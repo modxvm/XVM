@@ -6,6 +6,9 @@
   [MARKERS]
   * options iconset/vehicleMarkerAllyAtlas and iconset/vehicleMarkerEnemyAtlas are implemented
 
+  [PYTHON MACROS]
+  * changed the names of the macros for the score panel (py_macros_ru.txt)
+
 XVM-6.8.2:
   [GENERAL]
   * World of Tanks 9.19.1 micropatch 2
