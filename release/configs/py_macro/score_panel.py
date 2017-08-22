@@ -1,25 +1,34 @@
 import xvm_battle.python.fragCorrelationPanel as panel
 
-@xvm.export('score_panel.ally_frags', deterministic=False)
+@xvm.export('sp.allyFrags', deterministic=False)
 def ally_frags():
     return panel.ally_frags
 
-@xvm.export('score_panel.enemy_frags', deterministic=False)
+@xvm.export('sp.enemyFrags', deterministic=False)
 def enemy_frags():
     return panel.enemy_frags
 
-@xvm.export('score_panel.ally_vehicles', deterministic=False)
+@xvm.export('sp.allyVeh', deterministic=False)
 def ally_vehicles():
     return panel.ally_vehicles
 
-@xvm.export('score_panel.enemy_vehicles', deterministic=False)
+@xvm.export('sp.enemyVeh', deterministic=False)
 def enemy_vehicles():
     return panel.enemy_vehicles
 
-@xvm.export('score_panel.ally_frags_inverse', deterministic=False)    
-def ally_frags_inverse():
+@xvm.export('sp.allyAlive', deterministic=False)    
+def ally_alive():
     return ally_vehicles() - enemy_frags()
 
-@xvm.export('score_panel.enemy_frags_inverse', deterministic=False)
-def enemy_frags_inverse():
+@xvm.export('sp.enemyAlive', deterministic=False)
+def enemy_alive():
     return enemy_vehicles() - ally_frags()
+
+@xvm.export('sp.signScore', deterministic=False)
+def sign_score():
+    if panel.ally_frags > panel.enemy_frags:
+        return '&gt;'
+    elif panel.ally_frags < panel.enemy_frags:
+        return '&lt;'
+    else:
+        return '&#61;'
