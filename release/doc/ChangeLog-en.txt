@@ -4,7 +4,9 @@
   * updated capture bar
 
   [MARKERS]
-  * options iconset/vehicleMarkerAllyAtlas and iconset/vehicleMarkerEnemyAtlas are implemented
+  * options are implemented:
+      "iconset"/"vehicleMarkerAllyAtlas"
+      "iconset"/"vehicleMarkerEnemyAtlas"
 
   [PYTHON MACROS]
   * changed the names of the macros for the score panel (py_macros_ru.txt)
@@ -14,7 +16,7 @@ XVM-6.8.2:
   * World of Tanks 9.19.1 micropatch 2
 
   [KNOWN ISSUES]
-  * Bootcamp: does not work. Run WoT without mods to enter in bootcamp mode.
+  * bootcamp: does not work. Run WoT without mods to enter in bootcamp mode.
   * Microsoft Windows XP: crash to desktop on battle loading if graphics mode is standard.
 
   [PYTHON MACROS]
@@ -31,7 +33,7 @@ XVM-6.8.2:
 
 XVM-6.8.1:
   [KNOWN ISSUES]
-  * Bootcamp: does not work. Run WoT without mods to enter in bootcamp mode.
+  * bootcamp: does not work. Run WoT without mods to enter in bootcamp mode.
   * Microsoft Windows XP: crash to desktop on battle loading if graphics mode is standard.
 
   [GENERAL]
@@ -44,7 +46,7 @@ XVM-6.8.1:
   * fixed carousel reset after battle
 
   [INSTALLER]
-  * Implemented WoT detection for Linux and macOS
+  * implemented WoT detection for Linux and macOS
 
 XVM-6.8.0:
   [KNOWN ISSUES]
@@ -55,7 +57,7 @@ XVM-6.8.0:
   * World of Tanks 9.19.1
 
   [XFW]
-  * Implemented support for python debuggers based on PyDebugAttach library (for example, Microsoft PTVS)
+  * implemented support for python debuggers based on PyDebugAttach library (for example, Microsoft PTVS)
 
   [DAMAGE LOG]
   * added macro {{type-shell-key}}
@@ -83,37 +85,37 @@ XVM-6.8.0:
       {{v.rankStepsTotal}} - total steps count to next vehicle rank
 
   [INSTALLER]
-  * Improved WoT client detection and path selection
+  * improved WoT client detection and path selection
 
   [MISC]
   * removed company mode functions (due to removal from the client)
 
 XVM-6.7.4:
   [MISC]
-  * Fix level of battles for the vehicle 3rd level
-  * Fix compatibility with some antivirus software and debuggers
+  * fix level of battles for the vehicle 3rd level
+  * fix compatibility with some antivirus software and debuggers
 
   [HANGAR]
-  * Fix weekday displaying
+  * fix weekday displaying
 
   [BATTLE]
-  * Added players panel, battle loading and full stats in the ranked battle
-  * Added options in "battleLoading" and "statisticForm" sections:
+  * added players panel, battle loading and full stats in the ranked battle
+  * added options in "battleLoading" and "statisticForm" sections:
       "removeRankBadgeIcon" - disable rank badge icons
-  * Added new field type "badge" in the "playersPanel"/"standardFields" modes sections
-  * Added options in the "playersPanel" modes sections:
+  * added new field type "badge" in the "playersPanel"/"standardFields" modes sections
+  * added options in the "playersPanel" modes sections:
       "rankBadgeXOffsetLeft" - offset of X value for rank badge column
       "rankBadgeXOffsetRight" - offset of X value for rank badge column
       "rankBadgeWidth" - width of the rank badge column
 
   [DAMAGE LOG]
-  * Various bugs fixed
+  * various bugs fixed
 
   [MACROS]
-  * Added macros:
+  * added macros:
       {{rank-level}} - rank level
       {{rankBadgeId}} - player's rank badge id
-  * Removed macros for "Top Tankers" event
+  * removed macros for "Top Tankers" event
 
 XVM-6.7.3:
   [GENERAL]
@@ -127,23 +129,23 @@ XVM-6.7.3:
       "startDistance" - start distance
       "zoomSensitivity" - camera zoom sensitivity (lower is slower)
   * Sorting the parameters in the hangar.xc
-  * Fixed "defaultBoughtForCredits" option
-  * Fixed free XP displaying in research window
+  * fixed "defaultBoughtForCredits" option
+  * fixed free XP displaying in research window
 
   [BATTLE]
-  * Fixed {{my-frags}} macro
-  * Fixed tank contour disappearing
-  * Decreased performance impact of vehicle markers
+  * fixed {{my-frags}} macro
+  * fixed tank contour disappearing
+  * decreased performance impact of vehicle markers
 
   [MISC]
-  * Minimized performance impact of "autoReloadConfig" option
-  * Use game locale in the xvm.formatDate() py_macro
-  * Fixed compatibility with Windows XP and Wine
+  * minimized performance impact of "autoReloadConfig" option
+  * use game locale in the xvm.formatDate() py_macro
+  * fixed compatibility with Windows XP and Wine
 
 XVM-6.7.2:
   [GENERAL]
   * World of Tanks 9.19, micropatch 02.06.2017
-  * Various bugs fixed
+  * various bugs fixed
 
   [HANGAR]
   * fixed "autoReloadConfig" option
@@ -155,14 +157,14 @@ XVM-6.7.2:
 
 XVM-6.7.1:
   [GENERAL]
-  * Fixed compatibility issues with Actionscript mods.
+  * fixed compatibility issues with Actionscript mods.
 
   [HANGAR]
-  * Fixed XVM messages displaying in service channel.
+  * fixed XVM messages displaying in service channel.
 
 XVM-6.7.0:
   [KNOWN ISSUES]
-  *  Some hangar corruptions when ModsListAPI mod is installed. XVM and ModsListAPI developers are notified about the problem and are working on a solution.
+  * some hangar corruptions when ModsListAPI mod is installed. XVM and ModsListAPI developers are notified about the problem and are working on a solution.
 
   [GENERAL]
   * World of Tanks 9.19
@@ -192,7 +194,7 @@ XVM-6.6.5:
   * added option "enabled"
 
   [ELEMENTS]
-  * Updated avaliable parameters list (elements.xc)
+  * updated avaliable parameters list (elements.xc)
 
 XVM-6.6.4:
   [BATTLE LABELS]
@@ -238,7 +240,7 @@ XVM-6.6.0:
   * XFW can now be used without XVM
 
   [TOOLTIPS]
-  * Updated avaliable parameters list (tooltips.xc)
+  * updated avaliable parameters list (tooltips.xc)
 
   [DAMAGE LOG]
   * 'alive' value of a macro {{my-alive} } is renamed into 'al'
@@ -409,25 +411,25 @@ XVM-6.5.0:
 
 XVM-6.4.9.1:
   [INSTALLER]
-  * Fix installer building
+  * fix installer building
 
 XVM-6.4.9:
   [DAMAGE LOG]
-  * Reloading timer was removed due to new "fair play" policy
+  * reloading timer was removed due to new "fair play" policy
 
   [MISC]
-  * Python part of XVM now distributed in source code (.py files)
+  * python part of XVM now distributed in source code (.py files)
 
   [CAROUSEL]
   * added option:
       "enableLockBackground" - set to false to remove background for locked vehicles
 
   [SOUNDS]
-  * Restored functionality of the extra sounds settings (sounds.xc)
+  * restored functionality of the extra sounds settings (sounds.xc)
 
 XVM-6.4.8:
   [XMQP]
-  * Initial implementation
+  * initial implementation
   * options added:
       "minimapDrawLineThickness" - thickness of the lines for minimap drawings
       "minimapDrawAlpha" - opacity of the minimap drawings
@@ -436,15 +438,15 @@ XVM-6.4.8:
       "minimapClicksColor" => "minimapDrawColor"
 
   [XFW]
-  * Added Python C Extensions (.pyd) support
-  * Use uncompiled XFW-based mods (/mods/packages/)
-  * Fix ctypes library
+  * added Python C Extensions (.pyd) support
+  * use uncompiled XFW-based mods (/mods/packages/)
+  * fix ctypes library
 
   [MISC]
-  * Various bugs fixes
+  * various bugs fixes
 
   [DOC]
-  * Added description for the parameters used in setting extra field (see extra-field.txt)
+  * added description for the parameters used in setting extra field (see extra-field.txt)
 
 XVM-6.4.7.1:
   * fixed "crewMaxPerksCount" option
@@ -676,10 +678,10 @@ XVM-6.4.0:
   * removed option "hitLog"/"direction" - not required
 
   [KNOWN ISSUES]
-  * Minimap is not ready. Some functionality may work incorrectly or may not work at all. (will be fixed in future releases)
-  * Option "carousel"/"rows" does not implemented. (postponed because it may be implemented by WG)
-  * Some functionality may work incorrectly with "autoReloadConfig": true
-  * Service record: List of tanks may scroll to the middle in some configurations
+  * minimap is not ready. Some functionality may work incorrectly or may not work at all. (will be fixed in future releases)
+  * option "carousel"/"rows" does not implemented. (postponed because it may be implemented by WG)
+  * some functionality may work incorrectly with "autoReloadConfig": true
+  * service record: List of tanks may scroll to the middle in some configurations
 
 XVM-6.3.2.1:
   * fix for 6th sense sound
@@ -728,7 +730,7 @@ XVM-6.3.0:
   [MAJOR UPDATES]
   * added new type of macro - dynamic macros calculated in the python:
     python functions are loaded from res_mods/configs/py_macro/*.py with decorator @xvm.export(a, b)
-    E. g. get %SUP for xTE:
+    E.g. get %SUP for xTE:
       {{py:xvm.xvm2sup('{{xte}}')|==}}
     res_mods/configs/py_macro/xvm.py:
         xvm2sup = [...]
@@ -842,16 +844,16 @@ XVM-6.1.6:
       "carousel"/"backgroundAlpha" - background transparency
 
 XVM-6.1.5:
-  * Minimap label settings was completely reworked. See minimapLabels.xc file.
+  * minimap label settings was completely reworked. See minimapLabels.xc file.
   * "mapSize" config section moved to the root of the "minimap" and "minimapAlt" sections
   * "revealed" renamed to "spotted" everywhere
-  * Added option "minimap"/"iconAlpha" - vehicle type icons transparency on minimap
-  * Added macros:
+  * added option "minimap"/"iconAlpha" - vehicle type icons transparency on minimap
+  * added macros:
       {{vtype-key}}     - vehicle type table key value
       {{sys-color-key}} - key value for system color table
-    These macros can be useful in conjunction with {{.}} macro
-  * Increased config version to 6.1.0
-  * Personal missions: added "Incomplete" filter (Started + Improve)
+    these macros can be useful in conjunction with {{.}} macro
+  * increased config version to 6.1.0
+  * personal missions: added "Incomplete" filter (Started + Improve)
 
 XVM-6.1.4.3:
   * fixed displaying of current base in the capture bar
@@ -920,7 +922,7 @@ XVM-6.1.2.3:
 
 XVM-6.1.2.1:
   * added new filter to the tank carousel: remove "domination"
-  * Personal missions: added "Hide with honors" and "Started" filters and saving filter settings
+  * personal missions: added "Hide with honors" and "Started" filters and saving filter settings
   * bugs fixed
   * performance optimization
 
@@ -1024,18 +1026,18 @@ XVM-6.0.0.3:
 XVM-6.0.0:
   * adaptation to Wot 0.9.6
   * XFW: XVM Framework
-  * New mod xvm_quests for personal missions.
-    Currently implemented new filters and saving filters settings
+  * new mod xvm_quests for personal missions.
+    currently implemented new filters and saving filters settings
   * added config section for winChance colors: colors/winChance
   * win chance calclulation changed - use standard normal distrubution for chance result.
-    Source: http://forum.worldoftanks.eu/index.php?/topic/468409-/
+    source: http://forum.worldoftanks.eu/index.php?/topic/468409-/
   * added texts/xvmuser section with text replacements for {{xvm-user}} macro.
-    Available values: "on", "off", "none".
+    available values: "on", "off", "none".
   * added new mod xvm_export, and config section "export".
   * top clans icons now taken from the XVM server and tops list is updated daily.
   * added macro {{clanrank}} - Global map clan rating
-    Values from 1 to 1000, and "persist" for persistent clans (WG administration and XVM friends)
-    Detailed info: http://worldoftanks.eu/leaderboard/clans/
+    values from 1 to 1000, and "persist" for persistent clans (WG administration and XVM friends)
+    detailed info: http://worldoftanks.eu/leaderboard/clans/
   * added macro {{topclan}} - returns "top" for top clans, 'persist' for persistent clans, empty for other
 
 XVM-5.5.1.1:
@@ -1049,9 +1051,9 @@ XVM-5.5.1:
 
 XVM-5.5.0:
   * adaptation to Wot 0.9.5
-  * Macro in macro allowed: {{xvm-stat?{{alive?80|30}}|0}}
+  * macro in macro allowed: {{xvm-stat?{{alive?80|30}}|0}}
   * added texts/spotted section with text replacements for vehicle spotted status.
-    Available values:
+    available values:
       for usual vehicle: "neverSeen", "lost", "revealed", "dead"
       for arty: "neverSeen_arty", "lost_arty", "revealed_arty", "dead_arty"
   * added new macros:
@@ -1186,8 +1188,8 @@ XVM-5.3.0:
       type  - type (s - string, d - decimal, f - float, ...)
       suf   - suffix added at the end
       def   - default value, set when value is absent:
-    Details: http://en.wikipedia.org/wiki/Printf
-    For example:
+    details: http://en.wikipedia.org/wiki/Printf
+    for example:
       {{name%-16.16s}}      - cut names longer 10 chars, and fill names shorter 10 chars and align left
       {{kb%4.01f~k|----}}   - width 4 chars, exactly 1 char after comma, align right
                               if kb==null, display "----"
@@ -1498,9 +1500,9 @@ XVM-3.4.0:
 
   [NEW FUNCTIONS]
   * minimap mod
-  * UserInfo mod (with functions from morotopitek's mod)
-  * TeamMemberRenderer mod
-  * FinalStatistic mod (with functions from morotopitek's mod).
+  * userInfo mod (with functions from morotopitek's mod)
+  * teamMemberRenderer mod
+  * finalStatistic mod (with functions from morotopitek's mod).
   * new win chance formula by TurinDeNar:
       http://www.koreanrandom.com/forum/topic/2598-/
 
@@ -1610,7 +1612,7 @@ XVM-3.1.0:
   * added new section to config "hitLog", which allows to display the log of own hits
   * negative x, y values in hit log settings allow to bind the text to the right
     and bottom edges for the same behavior with different screen resolutions.
-    Will work only with running xvm-stat!!!
+    will work only with running xvm-stat!!!
 
 XVM-3.0.3:
   * added possibility to change {{turret}} marker display string
@@ -1641,13 +1643,13 @@ XVM-2.5.2:
   * clan icons was reworked. Now config have only one parameter:
     battle/clanIconsFolder with path to clan icons root folder. All icons
     are loading automatically from game region subfolder (RU/EU/US/...).
-    To add your clan or player icon, just copy icon file to:
+    to add your clan or player icon, just copy icon file to:
       clanicons/[REGION]/clan/ (for clan)
       clanicons/[REGION]/nick/ (for single player)
-    Also you can create default clan and player icons:
+    also you can create default clan and player icons:
       clanicons/[REGION]/clan/default.png (for default clan)
       clanicons/[REGION]/nick/default.png (for default player)
-    Search order is:
+    search order is:
       nick/<player>.png -> clan/<clan>.png -> clan/default.png -> nick/default.png
   * added config option:
       battle/clanIconsFolder - root of clan icons folder
@@ -1655,7 +1657,7 @@ XVM-2.5.2:
       players
   * config version increased: 1.4.0 => 1.5.0, because clan icons behavior
     was changed
-  * Full archive with all clans can be downloaded separately:
+  * full archive with all clans can be downloaded separately:
       http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-ru.zip (RU)
       http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-eu.zip (EU)
       http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-us.zip (US)
@@ -1835,7 +1837,7 @@ XVM-2.0:
     only for China servers)
   * added icon sets ("iconset" config section)
   * player/clan icons added
-  * Win chances calculation added
+  * win chances calculation added
   * many other fixes
 
 XVM-1.7:
@@ -1868,48 +1870,48 @@ XVM-1.7:
   * many other bugs fixed
 
 XVM-1.6:
-  * Speed optimization
-  * Grid modified
-  * Fixed .stat link check at startup
-  * Fixed players names shifting in large panels
-  * Fixed transaprency error (playersPanelAlpha = 0)
-  * Cut nick with disabled statistics in large mode
-  * Fixed 'null' when data is not available
-  * Fixed vehicle level position with disabled mirroring
-  * Added option to load enemy stats in Fog of War (experimental).
-  * Some other bugs fixed
+  * speed optimization
+  * grid modified
+  * fixed .stat link check at startup
+  * fixed players names shifting in large panels
+  * fixed transaprency error (playersPanelAlpha = 0)
+  * cut nick with disabled statistics in large mode
+  * fixed 'null' when data is not available
+  * fixed vehicle level position with disabled mirroring
+  * added option to load enemy stats in Fog of War (experimental).
+  * some other bugs fixed
 
 XVM-1.5:
-  * Fixed playing replays with spaces in the file name
-  * Fixed damage fading in health bar
-  * Configurable players panel transparency
-  * Set players names width in panels in large mode
-  * Some other bugs fixed
+  * fixed playing replays with spaces in the file name
+  * fixed damage fading in health bar
+  * configurable players panel transparency
+  * set players names width in panels in large mode
+  * some other bugs fixed
 
 XVM-1.4:
-  * Working only with player id
-  * Macroses was added in markers: {{kb}}, {{battles}}, {{wins}}, {{eff}}, {{rating}}
-  * Statistics formatting added
-  * Added macroses for dynamic colors: {{c:eff}}, {{c:rating}}, {{c:kb}}
-  * Config parameter changed:
+  * working only with player id
+  * macroses was added in markers: {{kb}}, {{battles}}, {{wins}}, {{eff}}, {{rating}}
+  * statistics formatting added
+  * added macroses for dynamic colors: {{c:eff}}, {{c:rating}}, {{c:kb}}
+  * config parameter changed:
       rating/playersPanel/colorizeMiddle -> rating/playersPanel/middleColor
-  * Added section 'rating/colors' into config for setting up border values
+  * added section 'rating/colors' into config for setting up border values
     and color values for dynamic colors
   * fixed PostmortemTips hiding
   * added new version notification at battle loading screen
-  * Config parameter renamed and behavoir inverted to avoid mistakes:
+  * config parameter renamed and behavoir inverted to avoid mistakes:
       battle/disableMirroredVehicleIcons -> battle/mirroredVehicleIcons
-  * Force stats loading after 1 sec (for 12x12 battles or FogOfWar)
-  * Added stat macros: {kb:3}}, {{rating:3}}, {{eff:4}} - useful for aligning columns
+  * force stats loading after 1 sec (for 12x12 battles or FogOfWar)
+  * added stat macros: {kb:3}}, {{rating:3}}, {{eff:4}} - useful for aligning columns
     using monospace fonts
 
 XVM-1.3:
-  * Simple installation. Added wot-xvm-proxy.exe.
-  * It is able to work with id or nicks.
+  * simple installation. Added wot-xvm-proxy.exe.
+  * it is able to work with id or nicks.
 
 XVM-1.2:
-  * Comments was added to config file XVM.xvmconf
-  * Proxy server and protocol are changed
+  * comments was added to config file XVM.xvmconf
+  * proxy server and protocol are changed
   * XML was changed to JSON (except legacy OTMData.xml)
 
 XVM-1.1:
