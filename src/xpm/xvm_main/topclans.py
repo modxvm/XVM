@@ -6,43 +6,71 @@ from logger import *
 # PUBLIC
 
 def getClanInfo(clanAbbrev):
-    def _get(clanAbbrev):
-        global _clansInfo
-        if not _clansInfo:
-            return None
-        top = _clansInfo['top'].get(clanAbbrev, None)
-        if top:
-            rank = int(top.get('rank', None))
-            if rank:
-                if 0 < rank <= config.networkServicesSettings.topClansCount:
-                    return top
-        return _clansInfo['persist'].get(clanAbbrev, None)
-
-    res = _get(clanAbbrev)
-    if res:
-        # TODO: rename cid to clan_id in XVM API
-        res['clan_id'] = res['cid']
-        del res['cid']
-        ###
-        res['rank'] = int(res['rank'])
-        res['clan_id'] = int(res['clan_id'])
-    return res
+    global _clansInfo
+    if _clansInfo is None:
+        return None
+    rankWGM = None
+    rankWSH = None
+    topWGM = _clansInfo.getTopWGMClanInfo(clanAbbrev)
+    if topWGM is not None:
+        if not (0 < topWGM['rank'] <= config.networkServicesSettings.topClansCount):
+            topWGM = None
+    if topWSH is not None:
+        if not (0 < topWSH['rank'] <= config.networkServicesSettings.topClansCount):
+            topWSH = None
+    # get minimal rank
+    if topWGM is None and topWSH is None:
+        return _clansInfo.getPersistClanInfo(clanAbbrev)
+    else:
+        if topWGM is None:
+            return topWSH
+        elif topWSH is None:
+            return topWGM
+        else:
+            return min(topWGM, topWSH, key=lambda x: x['rank'])
 
 def clear():
     global _clansInfo
     _clansInfo = None
 
-def update(data={}):
+def update(data):
     if data is None:
         data = {}
     global _clansInfo
-    _clansInfo = {
-        'top': data.get('topClans', {}),
-        'persist': data.get('persistClans', {})}
+    _clansInfo = _ClansInfo(data)
 
     # DEBUG
-    #log(clans)
-    # clans['persist']['FOREX'] = {"rank":0,"clan_id":38503,"emblem":"http://stat.modxvm.com/emblems/persist/{size}/38503.png"}
-    # /DEBUG
+    #log(_clansInfo)
+    #_clansInfo.persist['FOREX'] = {"rank":0,"clan_id":38503,"emblem":"http://stat.modxvm.com/emblems/persist/{size}/38503.png"}
+    #/DEBUG
+
+class _ClansInfo(object):
+    __slots__ = ()
+
+    def __init__(self, data):
+        self.persist = data.get('persistClans', {})
+        self.topWGM = data.get('topClansWGM', {})
+        self.topWSH = data.get('topClansWSH', {})
+
+        # fix data
+        # TODO: rename cid to clan_id in XVM API
+        # TODO: make rank as int and clan_id as long in XVM API
+        def _fix(d):
+            for k, v in d.items():
+                v['rank'] = int(v['rank'])
+                v['clan_id'] = long(v['cid'])
+                del v['cid']
+        _fix(self.persist)
+        _fix(self.topWGM)
+        _fix(self.topWSH)
+
+    def getPersistClanInfo(self, clanAbbrev):
+        return self.persist.get(clanAbbrev, None)
+
+    def getTopWGMClanInfo(self, clanAbbrev):
+        return self.topWGM.get(clanAbbrev, None)
+
+    def getTopWSHClanInfo(self, clanAbbrev):
+        return self.topWSH.get(clanAbbrev, None)
 
 _clansInfo = None
