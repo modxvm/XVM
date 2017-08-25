@@ -45,12 +45,12 @@ def update(data):
     #/DEBUG
 
 class _ClansInfo(object):
-    __slots__ = ()
+    __slots__ = ('_persist', '_topWGM', '_topWSH')
 
     def __init__(self, data):
-        self.persist = data.get('persistClans', {})
-        self.topWGM = data.get('topClansWGM', {})
-        self.topWSH = data.get('topClansWSH', {})
+        self._persist = data.get('persistClans', {})
+        self._topWGM = data.get('topClansWGM', {})
+        self._topWSH = data.get('topClansWSH', {})
 
         # fix data
         # TODO: rename cid to clan_id in XVM API
@@ -60,17 +60,17 @@ class _ClansInfo(object):
                 v['rank'] = int(v['rank'])
                 v['clan_id'] = long(v['cid'])
                 del v['cid']
-        _fix(self.persist)
-        _fix(self.topWGM)
-        _fix(self.topWSH)
+        _fix(self._persist)
+        _fix(self._topWGM)
+        _fix(self._topWSH)
 
     def getPersistClanInfo(self, clanAbbrev):
-        return self.persist.get(clanAbbrev, None)
+        return self._persist.get(clanAbbrev, None)
 
     def getTopWGMClanInfo(self, clanAbbrev):
-        return self.topWGM.get(clanAbbrev, None)
+        return self._topWGM.get(clanAbbrev, None)
 
     def getTopWSHClanInfo(self, clanAbbrev):
-        return self.topWSH.get(clanAbbrev, None)
+        return self._topWSH.get(clanAbbrev, None)
 
 _clansInfo = None
