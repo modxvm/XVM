@@ -397,9 +397,9 @@ package com.xvm.vehiclemarkers.ui
                         switch (vdata.turret)
                         {
                             case XvmVehicleMarkerConstants.TURRET_HIGH_VULN_DATABASE_VAL:
-                                return Macros.Format(Config.config.markers.turretMarkers.highVulnerability, playerState);
+                                return Config.config.markers.turretMarkers.highVulnerability;
                             case XvmVehicleMarkerConstants.TURRET_LOW_VULN_DATABASE_VAL:
-                                return Macros.Format(Config.config.markers.turretMarkers.lowVulnerability, playerState);
+                                return Config.config.markers.turretMarkers.lowVulnerability;
                         }
                     }
                 }
@@ -418,4 +418,3 @@ package com.xvm.vehiclemarkers.ui
         }
     }
 }
-
