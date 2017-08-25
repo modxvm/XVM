@@ -13,6 +13,12 @@
   * battleLabels: добавлено событие:
       ON_MY_HP_CHANGED - вызывается при изменении HP текущего танка
 
+  [PROFILE]
+  * добавлены опции в секции "userInfo":
+      "profileStartPage" - начальная страница достижений текущего пользователя
+      "contactsStartPage" - начальная страница достижений других игроков
+  * удалена опция "userInfo"/"startPage"
+
 XVM-6.8.2:
   [ОБЩЕЕ]
   * World of Tanks 9.19.1 микропатч 2

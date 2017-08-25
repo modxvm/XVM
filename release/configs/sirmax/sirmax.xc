@@ -105,7 +105,8 @@
   },
   "userInfo": {
     "inHangarFilterEnabled": true,
-    "startPage": 4,
+    "profileStartPage": "vehicles",
+    "contactsStartPage": "vehicles",
     //"sortColumn": -9,
     //"showXTEColumn": false,
     "defaultFilterValue": "+all -premium -master -arty"

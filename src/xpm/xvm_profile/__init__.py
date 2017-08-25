@@ -25,6 +25,8 @@ from gui.Scaleform.daapi.view.meta.ProfileWindowMeta import ProfileWindowMeta
 from gui.Scaleform.daapi.view.lobby.profile.ProfileTechnique import ProfileTechnique
 from gui.Scaleform.daapi.view.lobby.profile.ProfileUtils import DetailedStatisticsUtils
 from gui.Scaleform.genConsts.PROFILE_DROPDOWN_KEYS import PROFILE_DROPDOWN_KEYS
+from helpers import dependency
+from skeletons.gui.lobby_context import ILobbyContext
 
 from xfw import *
 
@@ -164,15 +166,21 @@ def _getStartPageAlias(self, alias, isProfilePage):
     if isProfilePage and self._ProfilePage__ctx.get('itemCD'):
         return VIEW_ALIAS.PROFILE_TECHNIQUE_PAGE
 
-    startPage = config.get('userInfo/startPage')
+    startPage = config.get('userInfo/profileStartPage' if isProfilePage else 'userInfo/contactsStartPage').lower()
+
     #log('startPage={}'.format(startPage))
-    if startPage == 2:
+    if startPage == 'awards':
         return VIEW_ALIAS.PROFILE_AWARDS
 
-    if startPage == 3:
+    if startPage == 'statistics':
         return VIEW_ALIAS.PROFILE_STATISTICS
 
-    if startPage == 4:
+    if startPage == 'vehicles':
         return VIEW_ALIAS.PROFILE_TECHNIQUE_PAGE if isProfilePage else VIEW_ALIAS.PROFILE_TECHNIQUE_WINDOW
+
+    if startPage == 'hof' and isProfilePage:
+        isHofEnabled = dependency.instance(ILobbyContext).getServerSettings().isHofEnabled()
+        if isHofEnabled:
+            return VIEW_ALIAS.PROFILE_HOF
 
     return VIEW_ALIAS.PROFILE_SUMMARY_PAGE if isProfilePage else VIEW_ALIAS.PROFILE_SUMMARY_WINDOW

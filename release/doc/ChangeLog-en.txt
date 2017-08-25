@@ -13,6 +13,12 @@
   * battleLabels: added event:
       ON_MY_HP_CHANGED - emitted when current vehicle HP is changed
 
+  [PROFILE]
+  * added options in the "userInfo" section:
+      "profileStartPage" - initial page for current user service record
+      "contactsStartPage" - initial page for other players service records
+  * removed option "userInfo"/"startPage"
+
 XVM-6.8.2:
   [GENERAL]
   * World of Tanks 9.19.1 micropatch 2

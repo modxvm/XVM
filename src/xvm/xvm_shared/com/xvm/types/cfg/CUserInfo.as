@@ -8,7 +8,8 @@ package com.xvm.types.cfg
 
     public dynamic class CUserInfo implements ICloneable
     {
-        public var startPage:*;
+        public var profileStartPage:String;
+        public var contactsStartPage:String;
         public var showXTEColumn:*;
         public var inHangarFilterEnabled:*;
         public var showFilters:*;
