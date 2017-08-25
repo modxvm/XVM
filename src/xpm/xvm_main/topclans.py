@@ -15,6 +15,7 @@ def getClanInfo(clanAbbrev):
     if topWGM is not None:
         if not (0 < topWGM['rank'] <= config.networkServicesSettings.topClansCount):
             topWGM = None
+    topWSH = _clansInfo.getTopWSHClanInfo(clanAbbrev)
     if topWSH is not None:
         if not (0 < topWSH['rank'] <= config.networkServicesSettings.topClansCount):
             topWSH = None
