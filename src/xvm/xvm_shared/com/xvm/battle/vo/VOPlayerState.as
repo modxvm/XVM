@@ -357,6 +357,10 @@ package com.xvm.battle.vo
             }
             __curHealth = value;
             eventsToDispatch[PlayerStateEvent.PLAYERS_HP_CHANGED] = true;
+            if (isCurrentPlayer)
+            {
+                eventsToDispatch[PlayerStateEvent.MY_HP_CHANGED] = true;
+            }
         }
 
         public function get maxHealth():Number

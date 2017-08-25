@@ -54,6 +54,9 @@ package com.xvm.extraFields
                             case "ON_PLAYERS_HP_CHANGED":
                                 Xvm.addEventListener(PlayerStateEvent.PLAYERS_HP_CHANGED, field.updateOnEvent);
                                 break;
+                            case "ON_MY_HP_CHANGED":
+                                Xvm.addEventListener(PlayerStateEvent.MY_HP_CHANGED, field.updateOnEvent);
+                                break;
                             case "ON_VEHICLE_DESTROYED":
                                 Xvm.addEventListener(PlayerStateEvent.VEHICLE_DESTROYED, field.updateOnEvent);
                                 break;

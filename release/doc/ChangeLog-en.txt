@@ -10,6 +10,8 @@
 
   [PYTHON MACROS]
   * changed the names of the macros for the score panel (py_macros_ru.txt)
+  * battleLabels: added event:
+      ON_MY_HP_CHANGED - emitted when current vehicle HP is changed
 
 XVM-6.8.2:
   [GENERAL]
