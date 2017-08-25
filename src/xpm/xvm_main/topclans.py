@@ -37,21 +37,30 @@ def clear():
 def update(data):
     if data is None:
         data = {}
+
     global _clansInfo
     _clansInfo = _ClansInfo(data)
-
-    # DEBUG
-    #log(_clansInfo)
-    #_clansInfo.persist['FOREX'] = {"rank":0,"clan_id":38503,"emblem":"http://stat.modxvm.com/emblems/persist/{size}/38503.png"}
-    #/DEBUG
 
 class _ClansInfo(object):
     __slots__ = ('_persist', '_topWGM', '_topWSH')
 
     def __init__(self, data):
+        # fix data
+        # TODO: rename topClans to topClansWGM in XVM API
+        if 'topClansWGM' not in data and 'topClans' in data:
+            data['topClansWGM'] = data['topClans']
+            del data['topClans']
+
         self._persist = data.get('persistClans', {})
         self._topWGM = data.get('topClansWGM', {})
         self._topWSH = data.get('topClansWSH', {})
+
+        # DEBUG
+        #log(_clansInfo)
+        #self._topWGM['KTFI'] = {"rank":9,"clan_id":38503,"emblem":"http://stat.modxvm.com/emblems/persist/{size}/38503.png"}
+        #self._topWSH['KTFI'] = {"rank":4,"clan_id":38503,"emblem":"http://stat.modxvm.com/emblems/persist/{size}/38503.png"}
+        #self._persist['KTFI'] = {"rank":0,"clan_id":38503,"emblem":"http://stat.modxvm.com/emblems/persist/{size}/38503.png"}
+        #/DEBUG
 
         # fix data
         # TODO: rename cid to clan_id in XVM API
@@ -59,8 +68,10 @@ class _ClansInfo(object):
         def _fix(d):
             for k, v in d.items():
                 v['rank'] = int(v['rank'])
-                v['clan_id'] = long(v['cid'])
-                del v['cid']
+                if 'clan_id' not in v and 'cid' in v:
+                    v['clan_id'] = v['cid']
+                    del v['cid']
+                v['clan_id'] = long(v['clan_id'])
         _fix(self._persist)
         _fix(self._topWGM)
         _fix(self._topWSH)
