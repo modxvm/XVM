@@ -152,7 +152,7 @@ package com.xvm.lobby.ui.profile.components
             proxy.scrollBar.y += 18;
             proxy.scrollBar.height -= 18;
 
-            winsToPercentGlobalTF = _createTextField(159, 48, 271, 25, 14);
+            winsToPercentGlobalTF = _createTextField(210, 48, 271, 25, 14);
             proxy.addChild(winsToPercentGlobalTF);
 
             winsToPercentTF = _createTextField(120, 65, 200, 25, 14);
@@ -239,7 +239,7 @@ package com.xvm.lobby.ui.profile.components
 
             updateGlobalRatings(dossier);
 
-            winsToPercentTF.htmlText = "<p align='right'>" + formatHtmlText(size(getWinsToNextPercentStr(dossier)), XfwConst.UICOLOR_LABEL) + "</p>";
+            winsToPercentTF.htmlText = "<p align='left'>" + formatHtmlText(size(getWinsToNextPercentStr(dossier)), XfwConst.UICOLOR_LABEL) + "</p>";
         }
 
         private function getWinsToNextPercentStr(data:DossierBase):String
