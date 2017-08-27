@@ -82,18 +82,18 @@ package com.xvm.lobby.ui.profile.components
             page.listComponent.upperShadow.visible = false;
             page.listComponent.lowerShadow.visible = false;
 
+            Dossier.requestAccountDossier(null, null, PROFILE_DROPDOWN_KEYS.ALL, accountDBID);
+
+            page.listComponent.addEventListener(TechniqueListComponent.SELECTED_INDEX_CHANGED, onListComponentSelectedIndexChangedHandler, false, 0, true);
+
+            // override renderers
+            page.listComponent.sortableButtonBar.itemRendererName = getQualifiedClassName(UI_ProfileSortingButton);
+            page.listComponent.techniqueList.itemRenderer = UI_TechniqueRenderer;
+
             if (Config.networkServicesSettings.statAwards)
             {
                 Stat.instance.addEventListener(Stat.COMPLETE_USERDATA, onStatLoaded, false, 0, true);
                 Stat.loadUserData(playerName);
-
-                Dossier.requestAccountDossier(null, null, PROFILE_DROPDOWN_KEYS.ALL, accountDBID);
-
-                page.listComponent.addEventListener(TechniqueListComponent.SELECTED_INDEX_CHANGED, onListComponentSelectedIndexChangedHandler, false, 0, true);
-
-                // override renderers
-                page.listComponent.sortableButtonBar.itemRendererName = getQualifiedClassName(UI_ProfileSortingButton);
-                page.listComponent.techniqueList.itemRenderer = UI_TechniqueRenderer;
             }
         }
 
