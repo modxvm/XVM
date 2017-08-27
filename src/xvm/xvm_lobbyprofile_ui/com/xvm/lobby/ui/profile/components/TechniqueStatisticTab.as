@@ -142,20 +142,17 @@ package com.xvm.lobby.ui.profile.components
             // rating
             if (tech.accountDBID == 0)
             {
-                ratingTF = _createTextField(220, -50, 400, 200, 14);
+                page.stackComponent.viewRatingBtn.y = -30;
             }
-            else
-            {
-                ratingTF = _createTextField(220, -2, 400, 200, 14);
-            }
+            ratingTF = _createTextField(210, -2, 400, 200, 14);
             proxy.addChild(ratingTF);
 
-            proxy.scrollPane.y += 10;
-            proxy.scrollPane.height -= 10;
-            proxy.scrollBar.y += 10;
-            proxy.scrollBar.height -= 10;
+            proxy.scrollPane.y += 18;
+            proxy.scrollPane.height -= 18;
+            proxy.scrollBar.y += 18;
+            proxy.scrollBar.height -= 18;
 
-            winsToPercentGlobalTF = _createTextField(130, -1, 271, 25, 14);
+            winsToPercentGlobalTF = _createTextField(152, 48, 271, 25, 14);
             proxy.addChild(winsToPercentGlobalTF);
 
             winsToPercentTF = _createTextField(120, 65, 200, 25, 14);
