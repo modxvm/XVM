@@ -140,7 +140,14 @@ package com.xvm.lobby.ui.profile.components
         private function createControls():void
         {
             // rating
-            ratingTF = _createTextField(220, -50, 400, 200, 14);
+            if (tech.accountDBID == 0)
+            {
+                ratingTF = _createTextField(220, -50, 400, 200, 14);
+            }
+            else
+            {
+                ratingTF = _createTextField(220, -2, 400, 200, 14);
+            }
             proxy.addChild(ratingTF);
 
             proxy.scrollPane.y += 10;

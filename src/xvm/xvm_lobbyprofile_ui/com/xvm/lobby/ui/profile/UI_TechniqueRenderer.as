@@ -21,6 +21,8 @@ package com.xvm.lobby.ui.profile
         public function UI_TechniqueRenderer()
         {
             super();
+
+            xteTF = null;
         }
 
         override protected function configUI():void
@@ -80,19 +82,13 @@ package com.xvm.lobby.ui.profile
                 if (!data)
                     return;
 
-                var isSummary:Boolean = data.id == 0;
-
-                levelMC.visible = !isSummary;
-                vehicleTF.x = isSummary ? 121 : 166;
                 vehicleTF.width = 200;
 
                 vehicleTF.textColor = XfwConst.UICOLOR_VALUE;
-                if (!isSummary)
-                {
-                    var vdata:VOVehicleData = VehicleInfo.get(data.id);
-                    if (vdata && vdata.premium == 1)
-                        vehicleTF.textColor = XfwConst.UICOLOR_GOLD;
-                }
+
+                var vdata:VOVehicleData = VehicleInfo.get(data.id);
+                if (vdata && vdata.premium == 1)
+                    vehicleTF.textColor = XfwConst.UICOLOR_GOLD;
 
                 if (Config.networkServicesSettings.statAwards)
                 {
