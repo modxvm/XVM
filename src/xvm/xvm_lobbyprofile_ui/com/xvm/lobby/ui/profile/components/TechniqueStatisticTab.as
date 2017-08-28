@@ -221,7 +221,7 @@ package com.xvm.lobby.ui.profile.components
             {
                 var adata:AccountDossier = tech.accountDossier;
                 var ratingColor:int = MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_WINRATE, Math.round(adata.winPercent));
-                winsToPercentGlobalTF.htmlText = "<p align='right'>" + formatHtmlText(
+                winsToPercentGlobalTF.htmlText = "<p align='left'>" + formatHtmlText(
                     size(Locale.get("Wins"), 13) + ": " + formatHtmlText(size(App.utils.locale.float(adata.winPercent) + "%", 13), ratingColor) + "  " +
                     formatHtmlText(size(getWinsToNextPercentStr(adata), 13), XfwConst.UICOLOR_LABEL)) + "</p>";
             }
@@ -239,7 +239,7 @@ package com.xvm.lobby.ui.profile.components
 
             updateGlobalRatings(dossier);
 
-            winsToPercentTF.htmlText = "<p align='left'>" + formatHtmlText(size(getWinsToNextPercentStr(dossier)), XfwConst.UICOLOR_LABEL) + "</p>";
+            winsToPercentTF.htmlText = "<p align='right'>" + formatHtmlText(size(getWinsToNextPercentStr(dossier)), XfwConst.UICOLOR_LABEL) + "</p>";
         }
 
         private function getWinsToNextPercentStr(data:DossierBase):String
