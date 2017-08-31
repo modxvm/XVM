@@ -141,10 +141,11 @@ def _BasicCriteriesGroup_update(base, self, filters):
     base(self, filters)
     (filters[PREFS.PREMIUM], filters[PREFS.ELITE]) = (premium, elite)
     itemsCache = dependency.instance(IItemsCache)
-    vehicles_stats = itemsCache.items.getAccountDossier().getRandomStats().getVehicles()
-    self._criteria |= REQ_CRITERIA.CUSTOM(lambda x: _applyXvmFilter(x, filters, vehicles_stats))
+    total_stats = itemsCache.items.getAccountDossier().getTotalStats()
+    vehicles_stats = total_stats.getVehicles()
+    self._criteria |= REQ_CRITERIA.CUSTOM(lambda x: _applyXvmFilter(x, filters, total_stats, vehicles_stats))
 
-def _applyXvmFilter(item, filters, vehicles_stats):
+def _applyXvmFilter(item, filters, total_stats, vehicles_stats):
     premium = filters[PREFS.PREMIUM]
     normal = filters[PREFS.NORMAL]
     elite = filters[PREFS.ELITE]
@@ -170,7 +171,8 @@ def _applyXvmFilter(item, filters, vehicles_stats):
 
     stat = vehicles_stats.get(item.intCD)
     if stat:
-        remove |= filters[PREFS.NO_MASTER] and stat.markOfMastery == MarkOfMasteryAchievement.MARK_OF_MASTERY.MASTER
+        mark_of_mastery = total_stats.getMarkOfMasteryForVehicle(item.intCD)
+        remove |= filters[PREFS.NO_MASTER] and mark_of_mastery == MarkOfMasteryAchievement.MARK_OF_MASTERY.MASTER
 
     remove |= filters[PREFS.FULL_CREW] and not item.isCrewFull
 
