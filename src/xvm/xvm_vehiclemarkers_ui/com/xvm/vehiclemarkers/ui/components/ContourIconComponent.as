@@ -28,7 +28,7 @@ package com.xvm.vehiclemarkers.ui.components
                     marker.vehicleIcon.x = cfg.x;
                     marker.vehicleIcon.y = cfg.y;
                     marker.vehicleIcon.alpha = cfg.alpha / 100.0;
-                    if (cfg.amount)
+                    if (!isNaN(cfg.amount))
                     {
                         var color:Number = isNaN(cfg.color) ? Macros.FormatNumber("{{c:system}}", e.playerState) : cfg.color;
                         GraphicsUtil.tint(marker.vehicleIcon, color, cfg.amount / 100.0);
@@ -40,26 +40,5 @@ package com.xvm.vehiclemarkers.ui.components
                 Logger.err(ex);
             }
         }
-
-
-//
-        ///**
-         //* @see .ctor
-         //*/
-        //function setupContourIconComponent(team:String)
-        //{
-            //// Alternative icon set
-            //if (!m_iconset)
-            //{
-                //m_iconset = new IconLoader(this, completeLoadContourIcon);
-                //m_iconset.init(proxy.iconLoader,
-                    //[ proxy.source.split(Defines.WG_CONTOUR_ICON_PATH).join(Defines.XVMRES_ROOT + ((team == "ally")
-                    //? Config.config.iconset.vehicleMarkerAlly
-                    //: Config.config.iconset.vehicleMarkerEnemy)), proxy.source ]);
-            //}
-//
-            //proxy.iconLoader.source = m_iconset.currentIcon;
-        //}
-
     }
 }
