@@ -14,7 +14,6 @@ package com.xvm.types.cfg
         public var showNetIncome:*;
         public var showExtendedInfo:*;
         public var showTotals:*;
-        public var showBattleTier:*;
 
         public function clone():*
         {

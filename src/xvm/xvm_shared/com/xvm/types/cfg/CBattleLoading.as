@@ -10,7 +10,6 @@ package com.xvm.types.cfg
     public dynamic class CBattleLoading implements ICloneable
     {
         public var clockFormat:String;
-        public var showBattleTier:*;
         public var removeSquadIcon:*;
         public var removeRankBadgeIcon:*;
         public var vehicleIconAlpha:*;
@@ -45,7 +44,6 @@ package com.xvm.types.cfg
 
         internal function applyGlobalBattleMacros():void
         {
-            showBattleTier = Macros.FormatBooleanGlobal(showBattleTier, true);
             removeSquadIcon = Macros.FormatBooleanGlobal(removeSquadIcon, false);
             removeRankBadgeIcon = Macros.FormatBooleanGlobal(removeRankBadgeIcon, false);
             vehicleIconAlpha = Macros.FormatNumberGlobal(vehicleIconAlpha, 100);

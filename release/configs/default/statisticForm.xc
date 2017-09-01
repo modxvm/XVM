@@ -13,9 +13,6 @@
     }
   },
   "statisticForm": {
-    // true - Enable display of battle tier.
-    // true - включить отображение уровня боя.
-    "showBattleTier": false,
     // true - Disable Platoon/rank icons.
     // true - убрать отображение иконки взвода/ранга.
     "removeSquadIcon": false,

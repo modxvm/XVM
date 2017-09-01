@@ -21,9 +21,6 @@
     "showExtendedInfo": true,
     // true - Show totals for your battle efficiency in first page
     // true - Показывать итог по вашей боевой эффективности на первой странице
-    "showTotals": true,
-    // true - Enable display of battle tier.
-    // true - включить отображение уровня боя.
-    "showBattleTier": false
+    "showTotals": true
   }
 }
