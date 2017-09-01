@@ -23,12 +23,12 @@ package com.xvm.battle
         private static const _views:Object =
         {
             "epicRandomPage": [
-                //EpicRandomBattleLoadingXvmView, // TODO:EPIC
+                EpicRandomBattleLoadingXvmView, // TODO:EPIC
                 //EpicRandomFullStatsXvmView, // TODO:EPIC
                 //EpicRandomPlayersPanelXvmView, // TODO:EPIC
                 //TeamBasesPanelXvmView, // TODO:EPIC
-                //MinimapXvmView, // TODO:EPIC
-                //SixthSenseXvmView,
+                MinimapXvmView,
+                SixthSenseXvmView,
                 BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
             ]
         }
