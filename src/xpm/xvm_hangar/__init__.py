@@ -144,6 +144,8 @@ def BarracksMeta_as_setTankmenS(base, self, data):
 # low ammo => vehicle not ready
 @overrideMethod(Vehicle, 'isReadyToPrebattle')
 def Vehicle_isReadyToPrebattle(base, self, *args, **kwargs):
+    if isInBootcamp():
+        return
     try:
         if not self.hasLockMode() and not self.isAmmoFull and cfg_hangar_blockVehicleIfLowAmmo:
             return False
@@ -155,6 +157,8 @@ def Vehicle_isReadyToPrebattle(base, self, *args, **kwargs):
 # low ammo => vehicle not ready
 @overrideMethod(Vehicle, 'isReadyToFight')
 def Vehicle_isReadyToFight(base, self, *args, **kwargs):
+    if isInBootcamp():
+        return
     try:
         if not self.hasLockMode() and not self.isAmmoFull and cfg_hangar_blockVehicleIfLowAmmo:
             return False
@@ -167,6 +171,8 @@ def Vehicle_isReadyToFight(base, self, *args, **kwargs):
 @overrideMethod(CurrentVehicleActionsValidator, '_validate')
 def _CurrentVehicleActionsValidator_validate(base, self):
     res = base(self)
+    if isInBootcamp():
+        return res
     if not res or res[0] == True:
         try:
             if not g_currentVehicle.isReadyToFight() and g_currentVehicle.item and not g_currentVehicle.item.isAmmoFull and cfg_hangar_blockVehicleIfLowAmmo:

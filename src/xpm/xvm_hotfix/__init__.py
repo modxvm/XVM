@@ -45,7 +45,7 @@ def _set_canvas_visible_true(self):
 
 #####################################################################
 # Restart client without mods for bootcamp mode
-
+"""
 from gui.Scaleform.daapi.view.lobby.LobbyMenu import LobbyMenu
 @overrideMethod(LobbyMenu,'bootcampClick')
 def LobbyMenu_bootcampClick(base, self): 
@@ -68,5 +68,5 @@ def onHangarInit(self):
     bootcampController = dependency.instance(IBootcampController)
     if bootcampController.isInBootcamp():
         bootcampController.stopBootcamp(False)
-
+"""
 #####################################################################
