@@ -20,8 +20,6 @@ package com.xvm.battle.fullStats
 
         private var cfg:CStatisticForm;
 
-        private var _winChance:WinChances = null;
-
         public function UI_FullStats()
         {
             //Logger.add("UI_fullStats");
@@ -41,7 +39,6 @@ package com.xvm.battle.fullStats
         override protected function onDispose():void
         {
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
-            deleteComponents();
             super.onDispose();
         }
 
@@ -52,17 +49,9 @@ package com.xvm.battle.fullStats
             //Xvm.swfProfilerBegin("UI_FullStats.setup()");
             try
             {
-                deleteComponents();
-
                 cfg = Config.config.statisticForm;
 
                 registerVehicleIconAtlases();
-
-                // Components
-                if ((Config.networkServicesSettings.statBattle && (Config.networkServicesSettings.chance || Config.networkServicesSettings.chanceLive)) || cfg.showBattleTier)
-                {
-                    _winChance = new WinChances(this); // Winning chance info above players list. // TODO: replace with ExtraField
-                }
             }
             catch (ex:Error)
             {
@@ -70,15 +59,6 @@ package com.xvm.battle.fullStats
             }
             //Xvm.swfProfilerEnd("UI_FullStats.setup()");
             return null;
-        }
-
-        private function deleteComponents():void
-        {
-            if (_winChance != null)
-            {
-                _winChance.dispose();
-                _winChance = null;
-            }
         }
 
         private function registerVehicleIconAtlases():void

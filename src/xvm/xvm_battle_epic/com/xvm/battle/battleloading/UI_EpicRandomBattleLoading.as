@@ -10,7 +10,7 @@ package com.xvm.battle.battleloading
     import com.xvm.types.cfg.*;
     import flash.events.*;
     import net.wg.data.constants.generated.*;
-    import net.wg.gui.battle.battleloading.*;
+    import net.wg.gui.battle.epicRandom.battleloading.*;
     import net.wg.gui.battle.battleloading.renderers.*;
     import net.wg.gui.battle.battleloading.vo.*;
     import net.wg.gui.components.containers.*;
@@ -24,20 +24,19 @@ package com.xvm.battle.battleloading
 
         private var cfg:CBattleLoading;
 
-        private var _winChance:WinChances = null;
         private var _clock:Clock = null;
 
         private var defaultVehicleFieldXPosition:Number = NaN;
         private var defaultVehicleFieldWidth:Number = NaN;
 
-        private var battleLoadingForm:BattleLoadingForm = null;
+        private var battleLoadingForm:EpicRandomBattleLoadingForm = null;
 
         public function UI_EpicRandomBattleLoading()
         {
             //Logger.add("UI_EpicRandomBattleLoading");
             super();
 
-            battleLoadingForm = form as BattleLoadingForm;
+            battleLoadingForm = form as EpicRandomBattleLoadingForm;
 
             if (battleLoadingForm)
             {
@@ -111,10 +110,6 @@ package com.xvm.battle.battleloading
                 registerVehicleIconAtlases();
 
                 // Components
-                if ((Config.networkServicesSettings.statBattle && Config.networkServicesSettings.chance) || cfg.showBattleTier)
-                {
-                    _winChance = new WinChances(this.battleLoadingForm); // Winning chance info above players list. // TODO: replace with ExtraField
-                }
                 _clock = new Clock(this.battleLoadingForm); // Realworld time at right side of TipField.
             }
             catch (ex:Error)
@@ -127,11 +122,6 @@ package com.xvm.battle.battleloading
 
         private function deleteComponents():void
         {
-            if (_winChance != null)
-            {
-                _winChance.dispose();
-                _winChance = null;
-            }
             if (_clock != null)
             {
                 _clock.dispose();

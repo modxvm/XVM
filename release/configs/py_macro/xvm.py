@@ -65,23 +65,6 @@ def xvm_formatDate(formatDate):
     return t.format(**d)
 
 
-# Team Strength
-
-@xvm.export('xvm.team_strength')
-def xvm_team_strength(a, e):
-    try:
-        invalid_values = ['', '-']
-        if a in invalid_values or e in invalid_values:
-            return ''
-        sign = '&gt;' if float(a) > float(e) else '&lt;' if float(a) < float(e) else '='
-        ca = utils.brighten_color(int(config.get('colors/system/ally_alive'), 0), 50)
-        ce = utils.brighten_color(int(config.get('colors/system/enemy_alive'), 0), 50)
-        value = '<font color="#{:06x}">{}</font> {} <font color="#{:06x}">{}</font>'.format(ca, a, sign, ce, e)
-        return value
-    except Exception as ex:
-        debug(traceback.format_exc())
-        return ''
-
 # Dynamic color
 
 @xvm.export('xvm.dynamic_color_rating')

@@ -24,7 +24,6 @@ package com.xvm.battle.battleloading
 
         private var cfg:CBattleLoading;
 
-        private var _winChance:WinChances = null;
         private var _clock:Clock = null;
 
         private var defaultVehicleFieldXPosition:Number = NaN;
@@ -113,10 +112,6 @@ package com.xvm.battle.battleloading
                 registerVehicleIconAtlases();
 
                 // Components
-                if ((Config.networkServicesSettings.statBattle && Config.networkServicesSettings.chance) || cfg.showBattleTier)
-                {
-                    _winChance = new WinChances(battleLoadingForm); // Winning chance info above players list. // TODO: replace with ExtraField
-                }
                 _clock = new Clock(battleLoadingForm); // Realworld time at right side of TipField.
             }
             catch (ex:Error)
@@ -128,11 +123,6 @@ package com.xvm.battle.battleloading
 
         private function deleteComponents():void
         {
-            if (_winChance != null)
-            {
-                _winChance.dispose();
-                _winChance = null;
-            }
             if (_clock != null)
             {
                 _clock.dispose();

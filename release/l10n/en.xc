@@ -22,13 +22,6 @@
     "Ping": "Ping",
     "Online": "Online",
 
-    // Win chance
-    "Chance error": "Chance error",
-    "Chance to win": "Chance to win",
-    "Team strength": "Team strength",
-    "chanceLive": "For alive",
-    "chanceBattleTier": "Battle tier",
-
     // Hitlog
     "shot": "shot",
     "fire": "fire",

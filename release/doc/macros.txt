@@ -110,12 +110,6 @@ Legend:
 │ S │ {{my-premium}}         │ X │ X │ X │ X │ X │ X │ X │ X │ 'premium' for premium, empty for normal vehicle
 │ S │ {{my-clan}}            │ X │ X │ X │ X │ X │ X │ X │ X │ my clan
 │ S │ {{cellsize}}           │   │ X │ X │ X │ X │ X │ X │ X │ minimap cell side size
-│ S │ {{chancesStatic}}      │   │ X │ X │ X │   │   │   │ X │ win chances at battle (static)
-│ D │ {{chancesLive}}        │   │ X │ X │ X │   │   │   │ X │ win chances at battle (live)
-│ S │ {{allyStrengthStatic}} │   │ X │ X │ X │   │   │   │ X │ ally team strength (static)
-│ S │ {{enemyStrengthStatic}}│   │ X │ X │ X │   │   │   │ X │ enemy team strength (static
-│ D │ {{allyStrengthLive}}   │   │ X │ X │ X │   │   │   │ X │ ally team strength (live)
-│ D │ {{enemyStrengthLive}}  │   │ X │ X │ X │   │   │   │ X │ enemy team strength (live)
 │ D │ {{pp.mode}}            │   │ X │ X │ X │   │   │   │ X │ current players panel mode (0-none, 1-small, 2-medium, 3-medium2, 4-large)
 │ D │ {{pp.widthLeft}}       │   │ X │ X │ X │   │   │   │ X │ current left players panel width
 │ D │ {{pp.widthRight}}      │   │ X │ X │ X │   │   │   │ X │ current right players panel width

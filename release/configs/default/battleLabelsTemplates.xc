@@ -68,17 +68,6 @@
       "textFormat": { "size": 15, "align": "center" },
       "format": "{{py:xvm.total_hp.mainGun('{{l10n:mainGun}}: ',{{hitlog.dmg-total}})}}"
     },
-    // Chance of winning.
-    // Шанс на победу.
-    "winChance": {
-      "enabled": false,
-      "updateEvent": "ON_VEHICLE_DESTROYED",
-      "x": 230,
-      "y": 2,
-      "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 1.5 },
-      "textFormat": { "size": 15 },
-      "format": "{{xvm-stat?{{l10n:Team strength}}: {{py:xvm.team_strength('{{allyStrengthStatic}}','{{enemyStrengthStatic}}')}} / {{py:xvm.team_strength('{{allyStrengthLive}}','{{enemyStrengthLive}}')}}}}"
-    },
     // Log of the received damage (see damageLog.xc).
     // Лог полученного урона (см. damageLog.xc).
     "damageLog": {

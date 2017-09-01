@@ -252,11 +252,6 @@ package com.xvm
             instance._RegisterStatisticsMacros(pname, stat);
         }
 
-        public static function RegisterGlobalStatisticsMacros():void
-        {
-            instance._RegisterGlobalStatisticsMacros();
-        }
-
         // battle
 
         /**
@@ -338,8 +333,7 @@ package com.xvm
             "c:t-rating", "c:t-battles", "c:tdb", "c:xtdb", "c:tdv", "c:tfb", "c:tsb", "a:xte", "a:xeff",
             "a:xwn6", "a:xwn8", "a:xwn", "a:xwgr", "a:eff", "a:wn6", "a:wn8", "a:wn", "a:wgr", "a:r", "a:xr",
             "a:winrate", "a:rating", "a:kb", "a:avglvl", "a:t-winrate", "a:t-rating", "a:t-battles", "a:tdb",
-            "a:xtdb", "a:tdv", "a:tfb", "a:tsb", "chancesStatic", "chancesLive",
-            "allyStrengthStatic", "enemyStrengthStatic", "allyStrengthLive", "enemyStrengthLive"];
+            "a:xtdb", "a:tdv", "a:tfb", "a:tsb"];
 
         private var m_globals:Object;
         private var m_players:Object; // { PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
@@ -1139,31 +1133,6 @@ package com.xvm
                     // {{premium}}
                     pdata["premium"] = vdata.premium ? "premium" : null;
                 }
-            }
-        }
-
-        private function _RegisterGlobalStatisticsMacros():void
-        {
-            // {{chancesStatic}}
-            m_globals["chancesStatic"] = Chance.formatWinChancesText(Stat.battleStat, Chance.CHANCE_TYPE_WIN_CHANCE, true, false);
-            // {{chancesLive}}
-            m_globals["chancesLive"] = function(o:IVOMacrosOptions):String
-            {
-                return Chance.formatWinChancesText(Stat.battleStat, Chance.CHANCE_TYPE_WIN_CHANCE, false, true);
-            }
-            // {{allyStrengthStatic}}
-            m_globals["allyStrengthStatic"] = Chance.formatWinChancesText(Stat.battleStat, Chance.CHANCE_TYPE_TEAM_STRENGTH_ALLY, true, false);
-            // {{enemyStrengthStatic}}
-            m_globals["enemyStrengthStatic"] = Chance.formatWinChancesText(Stat.battleStat, Chance.CHANCE_TYPE_TEAM_STRENGTH_ENEMY, true, false);
-            // {{allyStrengthLive}}
-            m_globals["allyStrengthLive"] = function(o:IVOMacrosOptions):String
-            {
-                return Chance.formatWinChancesText(Stat.battleStat, Chance.CHANCE_TYPE_TEAM_STRENGTH_ALLY, false, true);
-            }
-            // {{enemyStrengthLive}}
-            m_globals["enemyStrengthLive"] = function(o:IVOMacrosOptions):String
-            {
-                return Chance.formatWinChancesText(Stat.battleStat, Chance.CHANCE_TYPE_TEAM_STRENGTH_ENEMY, false, true);
             }
         }
 

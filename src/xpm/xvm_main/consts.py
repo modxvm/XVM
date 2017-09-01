@@ -102,4 +102,3 @@ class DYNAMIC_VALUE_TYPE(object):
     WN8EFFD        = 'wn8effd'
     DAMAGERATING   = 'damageRating'
     HITSRATIO      = 'hitsRatio'
-    WINCHANCE      = 'winChance'

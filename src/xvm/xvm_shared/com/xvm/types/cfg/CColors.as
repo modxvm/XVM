@@ -21,7 +21,6 @@ package com.xvm.types.cfg
         public var wn6:Array;
         public var wn8:Array;
         public var wgr:Array;
-        public var winChance:Array;
         public var winrate:Array;
         public var kb:Array;
         public var avglvl:Array;

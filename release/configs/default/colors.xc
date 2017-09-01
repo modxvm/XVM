@@ -262,16 +262,6 @@
       { "value": 10175, "color": ${"def.colorRating.very_good"} },  // 8730 -10174 - very good  (better than 99% of players)
       { "value": 99999, "color": ${"def.colorRating.unique"   } }   //10175 - *    - unique     (better than 99.9% of players)
     ],
-    // Dynamic color for win chance
-    // Динамический цвет для шанса на победу
-    "winChance": [
-      { "value": 24.5, "color": ${"def.colorRating.very_bad" } },
-      { "value": 39.5, "color": ${"def.colorRating.bad"      } },
-      { "value": 59.5, "color": ${"def.colorRating.normal"   } },
-      { "value": 74.5, "color": ${"def.colorRating.good"     } },
-      { "value": 89.5, "color": ${"def.colorRating.very_good"} },
-      { "value": 101,  "color": ${"def.colorRating.unique"   } }
-    ],
     // Dynamic color by win percent
     // Динамический цвет по проценту побед
     "winrate": [

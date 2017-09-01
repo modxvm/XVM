@@ -50,7 +50,6 @@ package com.xvm
         public static const DYNAMIC_COLOR_WN8EFFD:int = 16;
         public static const DYNAMIC_COLOR_DAMAGERATING:int = 17;
         public static const DYNAMIC_COLOR_HITSRATIO:int = 18;
-        public static const DYNAMIC_COLOR_WINCHANCE:int = 19;
 
         // Dynamic alpha types
         public static const DYNAMIC_ALPHA_EFF:int = 1;

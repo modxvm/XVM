@@ -19,8 +19,6 @@ package com.xvm.lobby.battleresults
 
     public class BattleResultsXvmView extends XvmViewBase
     {
-        private var _winChances:WinChances;
-
         public function BattleResultsXvmView(view:IView)
         {
             super(view);
@@ -41,7 +39,6 @@ package com.xvm.lobby.battleresults
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
             super.onBeforeDispose(e);
-            _winChances = null;
         }
 
         private function onTabIndexChange(e:IndexEvent):void
@@ -59,12 +56,6 @@ package com.xvm.lobby.battleresults
             {
                 page.tabs_mc.selectedIndex = 0;
                 Logger.add("battleResults: startPage \"" + startPage + "\" is out of range.");
-            }
-
-            // display win chance
-            if ((Config.networkServicesSettings.statBattle && Config.networkServicesSettings.chanceResults) || Config.config.battleResults.showBattleTier)
-            {
-                _winChances = new WinChances(page); // Winning chance info above players list.
             }
         }
     }

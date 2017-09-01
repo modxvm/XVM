@@ -22,13 +22,6 @@
     "Ping": "Пинг",
     "Online": "Онлайн",
 
-    // Win chance
-    "Chance error": "Ошибка расчета шансов",
-    "Chance to win": "Шансы на победу",
-    "Team strength": "Силы команд",
-    "chanceLive": "Для живых",
-    "chanceBattleTier": "Уровень боя",
-
     // Hitlog
     "shot": "атака",
     "fire": "пожар",

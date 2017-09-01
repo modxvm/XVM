@@ -42,7 +42,6 @@ package com.xvm
                 case Defines.DYNAMIC_COLOR_WN8EFFD:         cfg = cfg_root.wn8effd; break;
                 case Defines.DYNAMIC_COLOR_DAMAGERATING:    cfg = cfg_root.damageRating; break;
                 case Defines.DYNAMIC_COLOR_HITSRATIO:       cfg = cfg_root.hitsRatio; break;
-                case Defines.DYNAMIC_COLOR_WINCHANCE:       cfg = cfg_root.winChance; break;
 
                 default: return null;
             }
