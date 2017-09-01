@@ -4,6 +4,8 @@
 
   [GENERAL]
   * fixed bootcamp mode
+  * partial support of the "Grand Battle" mode (battle loading, statistics form and 
+    players panel are not implemented)
 
   [MARKERS]
   * fixed "contourIcon"/"amount" option
