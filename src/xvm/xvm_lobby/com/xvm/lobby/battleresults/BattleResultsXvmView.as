@@ -9,7 +9,6 @@ package com.xvm.lobby.battleresults
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import com.xvm.lobby.battleresults.components.*;
     import com.xvm.types.*;
     import net.wg.gui.lobby.battleResults.*;
     import net.wg.infrastructure.events.*;

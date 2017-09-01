@@ -157,8 +157,10 @@ package com.xvm.battle.battleloading
             Xvm.dispatchEvent(new Event(Defines.XVM_EVENT_ATLAS_LOADED));
         }
 
+        // TODO:EPIC
         private function initRenderers():void
         {
+            /*
             var renderer:BasePlayerItemRenderer;
             for each(renderer in battleLoadingForm.xfw_allyRenderers)
             {
@@ -178,6 +180,7 @@ package com.xvm.battle.battleloading
                 battleLoadingForm.xfw_allyRenderers.push(new cls(battleLoadingForm.xfw_renderersContainer, i, false));
                 battleLoadingForm.xfw_enemyRenderers.push(new cls(battleLoadingForm.xfw_renderersContainer, i, true));
             }
+            */
         }
     }
 }

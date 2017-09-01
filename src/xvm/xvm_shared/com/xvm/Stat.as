@@ -190,7 +190,6 @@ package com.xvm
                     Macros.RegisterStatisticsMacros(name, sd);
                     //Logger.addObject(sd, 3, "stat[" + name + "]");
                 }
-                Macros.RegisterGlobalStatisticsMacros();
             }
             return updatedPlayers;
         }

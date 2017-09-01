@@ -16,11 +16,11 @@ package com.xvm.battle.battleloading
 
     public class Clock implements IDisposable
     {
-        private var form:BattleLoadingForm;
+        private var form:BaseTipLoadingForm;
         private var clock:TextField;
         private var clockFormat:String;
 
-        public function Clock(form:BattleLoadingForm)
+        public function Clock(form:BaseTipLoadingForm)
         {
             if (!form)
                 return;
@@ -29,7 +29,17 @@ package com.xvm.battle.battleloading
                 return;
 
             this.form = form;
-            var cfg:CBattleLoading = form.formBackgroundTable.visible ? Config.config.battleLoading : Config.config.battleLoadingTips;
+            var notTipsForm:Boolean;
+            try
+            {
+                notTipsForm = form["formBackgroundTable"].visible;
+            }
+            catch (ex:Error)
+            {
+                notTipsForm = false;
+            }
+
+            var cfg:CBattleLoading = notTipsForm ? Config.config.battleLoading : Config.config.battleLoadingTips;
 
             clockFormat = cfg.clockFormat;
             if (clockFormat)
