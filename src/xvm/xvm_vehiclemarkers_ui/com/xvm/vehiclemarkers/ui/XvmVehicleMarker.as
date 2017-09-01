@@ -115,13 +115,13 @@ package com.xvm.vehiclemarkers.ui
                     var playerState:VOPlayerState = BattleState.get(vehicleID);
                     if (playerState)
                     {
+                        setupVehicleIcon(playerState.isAlly);
                         dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE, playerState, exInfo));
                         if (playerState.damageInfo != null)
                         {
                             dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE_HEALTH, playerState, exInfo));
                             playerState.damageInfo = null;
                         }
-                        setupVehicleIcon(playerState.isAlly);
                     }
                 }
             }
