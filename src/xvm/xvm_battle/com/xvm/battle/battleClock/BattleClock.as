@@ -51,7 +51,7 @@ package com.xvm.battle.battleClock
         {
             //Xvm.swfProfilerBegin("BattleClock.setup()");
             format = Config.config.battle.clockFormat;
-            var debugPanel:DebugPanel = BattleXvmView.battlePage.debugPanel;
+            var debugPanel:DebugPanel = BattleXvmView.battlePageDebugPanel;
             x = debugPanel.lagOnlineSpr.x + debugPanel.lagOnlineSpr.width;
             y = debugPanel.fpsTF.y;
             var textFormat:TextFormat = debugPanel.fpsTF.defaultTextFormat;

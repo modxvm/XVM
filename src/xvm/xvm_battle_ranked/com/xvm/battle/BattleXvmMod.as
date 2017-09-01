@@ -12,6 +12,7 @@ package com.xvm.battle
     import com.xvm.battle.playersPanel.RankedPlayersPanelXvmView;
     import com.xvm.battle.sixthSense.SixthSenseXvmView;
     import com.xvm.battle.teamBasesPanel.TeamBasesPanelXvmView;
+    import net.wg.gui.battle.ranked.*;
 
     public class BattleXvmMod extends XvmModBase
     {
@@ -36,6 +37,11 @@ package com.xvm.battle
         public override function get views():Object
         {
             return _views;
+        }
+
+        public static function get battlePageRanked():RankedBattlePage
+        {
+            return BattleXvmView.battlePage as RankedBattlePage;
         }
     }
 }

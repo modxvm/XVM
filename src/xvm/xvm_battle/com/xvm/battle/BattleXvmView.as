@@ -18,7 +18,8 @@ package com.xvm.battle
     import flash.display.*;
     import flash.events.*;
     import flash.text.*;
-    import net.wg.gui.battle.random.views.*;
+    import net.wg.gui.battle.views.*;
+    import net.wg.gui.battle.views.debugPanel.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
     import scaleform.clik.utils.*;
@@ -27,11 +28,22 @@ package com.xvm.battle
     public class BattleXvmView extends XvmViewBase
     {
         private static var _battlePageRef:WeakReference;
-        private var hotkeys_cfg:CHotkeys;
 
-        public static function get battlePage():BattlePage
+        public static function get battlePage():BaseBattlePage
         {
-            return _battlePageRef.value as BattlePage;
+            return _battlePageRef.value as BaseBattlePage;
+        }
+
+        public static function get battlePageDebugPanel():DebugPanel
+        {
+            try
+            {
+                return battlePage["debugPanel"];
+            }
+            catch (ex:Error)
+            {
+            }
+            return null;
         }
 
         private var _battleController:BattleXvmComponentController = null;
@@ -41,6 +53,7 @@ package com.xvm.battle
         private var _hitlog:Hitlog = null;
         private var _zoomIndicator:ZoomIndicator = null;
         private var _watermark:MovieClip = null;
+        private var hotkeys_cfg:CHotkeys;
 
         public function BattleXvmView(view:IView)
         {
@@ -68,10 +81,10 @@ package com.xvm.battle
 
                 var behindMinimapIndex:int = battlePage.getChildIndex(battlePage.minimap) - 1;
 
-                if (Config.config.battle.clockFormat)
+                if (battlePageDebugPanel != null && Config.config.battle.clockFormat)
                 {
                     _battleClock = new BattleClock();
-                    battlePage.debugPanel.addChild(_battleClock);
+                    battlePageDebugPanel.addChild(_battleClock);
                 }
 
                 if (Config.config.battle.elements && Config.config.battle.elements.length)
@@ -82,11 +95,11 @@ package com.xvm.battle
                 _hitlog = new Hitlog(); // must be initialized before BattleLabels
 
                 _zoomIndicator = new ZoomIndicator();
-                _zoomIndicator.visible = battlePage.teamBasesPanelUI.visible;
+                _zoomIndicator.visible = battlePageDebugPanel != null && battlePageDebugPanel.visible;
                 battlePage.addChildAt(_zoomIndicator, behindMinimapIndex);
 
                 _battleLabels = new BattleLabels(battlePage);
-                _battleLabels.visible = battlePage.teamBasesPanelUI.visible;
+                _battleLabels.visible = battlePageDebugPanel != null && battlePageDebugPanel.visible;
                 battlePage.addChildAt(_battleLabels, behindMinimapIndex);
 
                 if (XfwUtils.endsWith(Config.config.__xvmVersion, "-dev"))

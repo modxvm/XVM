@@ -12,6 +12,7 @@ package com.xvm.battle
     import com.xvm.battle.playersPanel.PlayersPanelXvmView;
     import com.xvm.battle.sixthSense.SixthSenseXvmView;
     import com.xvm.battle.teamBasesPanel.TeamBasesPanelXvmView;
+    import net.wg.gui.battle.random.views.*;
 
     public class BattleXvmMod extends XvmModBase
     {
@@ -36,6 +37,11 @@ package com.xvm.battle
         public override function get views():Object
         {
             return _views;
+        }
+
+        public static function get battlePageClassic():BattlePage
+        {
+            return BattleXvmView.battlePage as BattlePage;
         }
     }
 }

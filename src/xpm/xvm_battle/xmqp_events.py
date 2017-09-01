@@ -93,7 +93,7 @@ def _as_xmqp_event(accountDBID, data, targets=TARGETS.ALL):
 # battle init
 
 def _sendCapabilities():
-    for accountDBID, data in xmqp.players_capabilities.iteritems():
+    for accountDBID, data in list(xmqp.players_capabilities.items()):
         #debug('_sendCapabilities: {} {}'.format(accountDBID, data))
         if xmqp.XMQP_DEVELOPMENT:
             if accountDBID == utils.getAccountDBID():

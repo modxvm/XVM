@@ -747,6 +747,7 @@ package com.xvm.extraFields
 
         public function updateOnEvent(e:PlayerStateEvent):void
         {
+            //Logger.addObject(BattleState.get(e.vehicleID));
             update(BattleState.get(e.vehicleID));
         }
 

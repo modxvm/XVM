@@ -781,10 +781,10 @@ package com.xvm.battle.playersPanel
                 extraFieldsHidden.alpha = BattleGlobalData.battleLoadingVisible ? 0 : 1;
                 extraFieldsHidden.mouseEnabled = true;
                 extraFieldsHidden.mouseChildren = false;
-                extraFieldsHidden.addEventListener(MouseEvent.MOUSE_MOVE, (BattleXvmView.battlePage.playersPanel as UI_RankedPlayersPanel).onMouseMoveHandler);
-                extraFieldsHidden.addEventListener(MouseEvent.ROLL_OVER, (BattleXvmView.battlePage.playersPanel as UI_RankedPlayersPanel).onMouseRollOverHandler);
-                extraFieldsHidden.addEventListener(MouseEvent.ROLL_OUT, (BattleXvmView.battlePage.playersPanel as UI_RankedPlayersPanel).onMouseRollOutHandler);
-                BattleXvmView.battlePage.addChildAt(extraFieldsHidden, BattleXvmView.battlePage.getChildIndex(BattleXvmView.battlePage.playersPanel));
+                extraFieldsHidden.addEventListener(MouseEvent.MOUSE_MOVE, (BattleXvmMod.battlePageRanked.playersPanel as UI_RankedPlayersPanel).onMouseMoveHandler);
+                extraFieldsHidden.addEventListener(MouseEvent.ROLL_OVER, (BattleXvmMod.battlePageRanked.playersPanel as UI_RankedPlayersPanel).onMouseRollOverHandler);
+                extraFieldsHidden.addEventListener(MouseEvent.ROLL_OUT, (BattleXvmMod.battlePageRanked.playersPanel as UI_RankedPlayersPanel).onMouseRollOutHandler);
+                BattleXvmView.battlePage.addChildAt(extraFieldsHidden, BattleXvmMod.battlePageRanked.getChildIndex(BattleXvmMod.battlePageRanked.playersPanel));
                 //_internal_createMenuForNoneState(mc);
                 //createMouseHandler(_root["extraPanels"]);
             }
