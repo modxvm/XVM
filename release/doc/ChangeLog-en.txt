@@ -1,7 +1,9 @@
 ﻿XVM-6.9.1-dev:
   [KNOWN ISSUES]
-  * bootcamp: does not work. Run WoT without mods to enter in bootcamp mode.
   * Microsoft Windows XP: crash to desktop on battle loading if graphics mode is standard.
+
+  [GENERAL]
+  * fixed bootcamp mode
 
   [MARKERS]
   * fixed "contourIcon"/"amount" option
