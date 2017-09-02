@@ -6,6 +6,12 @@
   * fixed bootcamp mode
   * partial support of the "Grand Battle" mode (battle loading, statistics form and 
     players panel are not implemented)
+  * various bugs fixes
+
+  [XFW]
+  * libpython: improved Python/C API coverage
+  * libpython: fixed some Python/C API functions
+
 
   [MARKERS]
   * fixed "contourIcon"/"amount" option
@@ -16,6 +22,7 @@
     {{v.topdmg}} - top vehicle damage (100 position of the best players)
     {{v.avgfrg}} - average vehicle frags (last month active players with 100+ battles on tank)
     {{v.topfrg}} - top vehicle frags (100 position of the best players)
+  * fix carousel when "without sign of mastery" filter is selected
 
 XVM-6.9.0:
   [KNOWN ISSUES]
