@@ -4,42 +4,42 @@
 
 def getVehicleInfoData(vehCD):
     global _vehicleInfoData
-    if _vehicleInfoData is None:
-        _init()
-    return _vehicleInfoData.get(vehCD, None)
-
+    return _vehicleInfoData.get(vehCD, None) if _vehicleInfoData is not None else None
 
 def getVehicleInfoDataArray():
     global _vehicleInfoData
-    if _vehicleInfoData is None:
-        _init()
-    return _vehicleInfoData.values()
-
+    return _vehicleInfoData.values() if _vehicleInfoData is not None else None
 
 def updateReserve(vehCD, isReserved):
     global _vehicleInfoData
-    if _vehicleInfoData is None:
-        _init()
-    else:
+    if _vehicleInfoData is not None:
         _vehicleInfoData[vehCD]['isReserved'] = isReserved
 
 
 # PRIVATE
 
-from pprint import pprint
+_WN8_DATA_URL = 'http://stat.modxvm.com/wn8.json.gz'
+_XTE_DATA_URL = 'http://stat.modxvm.com/xte.json.gz'
+_XTDB_DATA_URL = 'http://stat.modxvm.com/xtdb.json.gz'
+
+
 from math import sin, radians
+import gzip
+import StringIO
 import traceback
 
+import BigWorld
 import ResMgr
 import nations
 from items import vehicles
 
+import simplejson
+
 from logger import *
+import filecache
 import vehinfo_short
 from vehinfo_tiers import getTiers
 from gun_rotation_shared import calcPitchLimitsFromDesc
-import vehinfo_wn8
-
 
 _vehicleInfoData = None
 
@@ -72,7 +72,6 @@ _UNKNOWN_VEHICLE_DATA = {
     'shortName': 'unknown',
     'isReserved': False,
 }
-
 
 def _init():
     res = [_UNKNOWN_VEHICLE_DATA]
@@ -113,14 +112,6 @@ def _init():
 
                 data['shortName'] = vehinfo_short.getShortName(data['key'], data['level'], data['vclass'])
 
-                wn8data = vehinfo_wn8.getWN8ExpectedData(data['vehCD'])
-                if wn8data is not None:
-                    data['wn8expDamage'] = float(wn8data['expDamage'])
-                    data['wn8expSpot'] = float(wn8data['expSpot'])
-                    data['wn8expWinRate'] = float(wn8data['expWinRate'])
-                    data['wn8expDef'] = float(wn8data['expDef'])
-                    data['wn8expFrag'] = float(wn8data['expFrag'])
-
                 # is reserved?
                 import xvm_tankcarousel.python.reserve as reserve
                 data['isReserved'] = reserve.is_reserved(data['vehCD'])
@@ -133,14 +124,17 @@ def _init():
 
         vehinfo_short.checkNames(res)
 
+        global _vehicleInfoData
+        _vehicleInfoData = {x['vehCD']:x for x in res}
+
+        filecache.get_url(_WN8_DATA_URL, _load_wn8_data_callback)
+        filecache.get_url(_XTE_DATA_URL, _load_xte_data_callback)
+        filecache.get_url(_XTDB_DATA_URL, _load_xtdb_data_callback)
+
     except Exception, ex:
         err(traceback.format_exc())
 
-    # pprint(res[0])
-    # pprint(res)
-    global _vehicleInfoData
-    _vehicleInfoData = {x['vehCD']:x for x in res}
-
+BigWorld.callback(0, _init)
 
 def _getRanges(turret, gun, nation, vclass):
     visionRadius = firingRadius = artyRadius = 0
@@ -171,7 +165,6 @@ def _getRanges(turret, gun, nation, vclass):
 
     return (visionRadius, firingRadius, artyRadius)
 
-
 def _getTurretType(item, nation):
     stock = item.turrets[0][0]
     top = item.turrets[0][-1]
@@ -197,7 +190,6 @@ def _getTurretType(item, nation):
 
     return TURRET_TYPE_NO_TOP_GUN
 
-
 def _getMaxGunPrice(nation, guns):
     maxPrice = 0
     for gun in guns:
@@ -206,7 +198,58 @@ def _getMaxGunPrice(nation, guns):
             maxPrice = price
     return maxPrice
 
-
 def _getGunPrice(nation, gunName):
     xmlPath = _VEHICLE_TYPE_XML_PATH + nation + '/components/guns.xml'
     return ResMgr.openSection(xmlPath + '/shared/' + gunName).readInt('price')
+
+def _load_wn8_data_callback(url, bytes):
+    try:
+        if bytes:
+            global _vehicleInfoData
+            data = simplejson.loads(gzip.GzipFile(fileobj=StringIO.StringIO(bytes)).read())
+            for x in data['data']:
+                vinfo = getVehicleInfoData(int(x['IDNum']))
+                if vinfo is not None:
+                    vinfo['wn8expDamage'] = float(x['expDamage'])
+                    vinfo['wn8expSpot'] = float(x['expSpot'])
+                    vinfo['wn8expWinRate'] = float(x['expWinRate'])
+                    vinfo['wn8expDef'] = float(x['expDef'])
+                    vinfo['wn8expFrag'] = float(x['expFrag'])
+    except Exception, ex:
+        err(traceback.format_exc())
+    global _vehicleInfoData
+    log(_vehicleInfoData)
+
+def _load_xte_data_callback(url, bytes):
+    try:
+        if bytes:
+            global _vehicleInfoData
+            data = simplejson.loads(gzip.GzipFile(fileobj=StringIO.StringIO(bytes)).read())
+            # TODO
+            #for x in data['data']:
+            #    vinfo = getVehicleInfoData(int(x['IDNum']))
+            #    if vinfo is not None:
+            #        vinfo['wn8expDamage'] = float(x['expDamage'])
+            #        vinfo['wn8expSpot'] = float(x['expSpot'])
+            #        vinfo['wn8expWinRate'] = float(x['expWinRate'])
+            #        vinfo['wn8expDef'] = float(x['expDef'])
+            #        vinfo['wn8expFrag'] = float(x['expFrag'])
+    except Exception, ex:
+        err(traceback.format_exc())
+
+def _load_xtdb_data_callback(url, bytes):
+    try:
+        if bytes:
+            global _vehicleInfoData
+            data = simplejson.loads(gzip.GzipFile(fileobj=StringIO.StringIO(bytes)).read())
+            # TODO
+            #for x in data['data']:
+            #    vinfo = getVehicleInfoData(int(x['IDNum']))
+            #    if vinfo is not None:
+            #        vinfo['wn8expDamage'] = float(x['expDamage'])
+            #        vinfo['wn8expSpot'] = float(x['expSpot'])
+            #        vinfo['wn8expWinRate'] = float(x['expWinRate'])
+            #        vinfo['wn8expDef'] = float(x['expDef'])
+            #        vinfo['wn8expFrag'] = float(x['expFrag'])
+    except Exception, ex:
+        err(traceback.format_exc())

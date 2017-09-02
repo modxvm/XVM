@@ -50,7 +50,6 @@ import config
 import filecache
 import svcmsg
 import utils
-import vehinfo_wn8
 import mutex
 from xvm import g_xvm
 
@@ -187,6 +186,3 @@ except Exception, ex:
 
 # load config
 config.load(events.HasCtxEvent(XVM_EVENT.RELOAD_CONFIG, {'filename':XVM.CONFIG_FILE}))
-
-# load wn8 expected values
-vehinfo_wn8.init()

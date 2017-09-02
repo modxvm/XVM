@@ -78,6 +78,12 @@
         { "x": 20, "y": 57, "height": 22, "shadow": ${ "def.textFieldShadow" },
           "valign": "center", "textFormat": { "font": "mono", "size": 12, "bold": true }, "antiAliasType": "advanced",
           "format": "<font color='{{v.c_battles}}'>{{v.battles%d}}</font>" },
+        { "x": 5, "y": 64, "width": 22, "height": 22, "shadow": ${ "def.textFieldShadow" },
+          "format": "<font size='8'>exp</font>" },
+        // battles
+        { "x": 20, "y": 72, "height": 22, "shadow": ${ "def.textFieldShadow" },
+          "valign": "center", "textFormat": { "font": "mono", "size": 12, "bold": true }, "antiAliasType": "advanced",
+          "format": "<font color='{{v.c_wn8effd}}'>{{py:math.mul({{v.wn8effd|0}}, 100)%d~%}}</font> {{v.tdb%d}} => {{v.wn8expd%d}}" },
 
         // right side
 
