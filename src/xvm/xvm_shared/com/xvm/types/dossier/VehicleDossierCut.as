@@ -44,6 +44,10 @@ package com.xvm.types.dossier
                 shootRange = NaN; //TODO: vdata.artyRadius || vdata.firingRadius;
                 viewRange = NaN; //TODO: vdata.visRadius;
                 wn8expd = vdata.wn8expDamage;
+                avgdmg = vdata.avgdmg;
+                topdmg = vdata.topdmg;
+                avgfrg = vdata.avgfrg;
+                topfrg = vdata.topfrg;
             }
 
             // Calculations
@@ -144,6 +148,10 @@ package com.xvm.types.dossier
         public var wn8expd:Number;
         public var wn8effd:Number;
         public var c_wn8effd:String;
+        public var avgdmg:Number;
+        public var topdmg:Number;
+        public var avgfrg:Number;
+        public var topfrg:Number;
         public var xte:String;
         public var c_xte:String;
         public var earnedXP:Number;

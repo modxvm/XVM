@@ -205,7 +205,6 @@ def _getGunPrice(nation, gunName):
 def _load_wn8_data_callback(url, bytes):
     try:
         if bytes:
-            global _vehicleInfoData
             data = simplejson.loads(gzip.GzipFile(fileobj=StringIO.StringIO(bytes)).read())
             for x in data['data']:
                 vinfo = getVehicleInfoData(int(x['IDNum']))
@@ -217,39 +216,26 @@ def _load_wn8_data_callback(url, bytes):
                     vinfo['wn8expFrag'] = float(x['expFrag'])
     except Exception, ex:
         err(traceback.format_exc())
-    global _vehicleInfoData
-    log(_vehicleInfoData)
 
 def _load_xte_data_callback(url, bytes):
     try:
         if bytes:
-            global _vehicleInfoData
             data = simplejson.loads(gzip.GzipFile(fileobj=StringIO.StringIO(bytes)).read())
+            for k, v in data.iteritems():
+                vinfo = getVehicleInfoData(int(k))
+                if vinfo is not None:
+                    vinfo['avgdmg'] = float(v['ad'])
+                    vinfo['topdmg'] = float(v['td'])
+                    vinfo['avgfrg'] = float(v['af'])
+                    vinfo['topfrg'] = float(v['tf'])
             # TODO
-            #for x in data['data']:
-            #    vinfo = getVehicleInfoData(int(x['IDNum']))
-            #    if vinfo is not None:
-            #        vinfo['wn8expDamage'] = float(x['expDamage'])
-            #        vinfo['wn8expSpot'] = float(x['expSpot'])
-            #        vinfo['wn8expWinRate'] = float(x['expWinRate'])
-            #        vinfo['wn8expDef'] = float(x['expDef'])
-            #        vinfo['wn8expFrag'] = float(x['expFrag'])
     except Exception, ex:
         err(traceback.format_exc())
 
 def _load_xtdb_data_callback(url, bytes):
     try:
         if bytes:
-            global _vehicleInfoData
             data = simplejson.loads(gzip.GzipFile(fileobj=StringIO.StringIO(bytes)).read())
             # TODO
-            #for x in data['data']:
-            #    vinfo = getVehicleInfoData(int(x['IDNum']))
-            #    if vinfo is not None:
-            #        vinfo['wn8expDamage'] = float(x['expDamage'])
-            #        vinfo['wn8expSpot'] = float(x['expSpot'])
-            #        vinfo['wn8expWinRate'] = float(x['expWinRate'])
-            #        vinfo['wn8expDef'] = float(x['expDef'])
-            #        vinfo['wn8expFrag'] = float(x['expFrag'])
     except Exception, ex:
         err(traceback.format_exc())

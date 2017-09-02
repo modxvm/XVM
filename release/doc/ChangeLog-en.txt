@@ -10,6 +10,13 @@
   [MARKERS]
   * fixed "contourIcon"/"amount" option
 
+  [CAROUSEL]
+  * added macros:
+    {{v.avgdmg}} - average vehicle damage (last month data for players with 100+ battles on tank)
+    {{v.topdmg}} - top vehicle damage (100 position of the best players of the month)
+    {{v.avgfrg}} - average vehicle frags (last month data for players with 100+ battles on tank)
+    {{v.topfrg}} - top vehicle frags (100 position of the best players of the month)
+
 XVM-6.9.0:
   [KNOWN ISSUES]
   * bootcamp: does not work. Run WoT without mods to enter in bootcamp mode.

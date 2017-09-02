@@ -61,26 +61,36 @@
           "textFormat": { "size": 12, "color": "0xC8C8B5", "bold": true }, "antiAliasType": "advanced",
           "format": "<font face='Arial'>{{v.rlevel}}</font>  {{battletype-key!=ranked?{{v.battletiermin}}-{{v.battletiermax}}|{{v.rankCount|0}} + {{v.rankSteps|0}}/{{v.rankStepsTotal|0}}}}" },
         // xte
-        { "x": 7, "y": 25, "height": 22,
+        { "x": 7, "y": 25, "height": 22, "shadow": ${ "def.textFieldShadow" },
           "valign": "center", "textFormat": { "font": "mono", "size": 12, "bold": true, "valign": "center" }, "antiAliasType": "advanced",
-          "format": "{{v.xte?<img src='xvm://res/icons/xvm/8x8t.png'><font size='7'> </font><font color='{{v.battles>9?{{v.c_xte|#666666}}|#666666}}'>{{v.xte}}</font>}}",
-          "shadow": ${ "def.textFieldShadow" }
-        },
+          "format": "{{v.xte?<img src='xvm://res/icons/xvm/8x8t.png'><font size='7'> </font><font color='{{v.battles>9?{{v.c_xte|#666666}}|#666666}}'>{{v.xte}}</font>}}"},
         // wins
-        { "x": 0, "y": 30, "width": 22, "height": 22,
+        { "x": 32, "y": 14, "width": 22, "height": 22,
           "src": "{{v.winrate?img://gui/maps/icons/library/dossier/wins40x32.png}}" },
-        { "x": 20, "y": 42, "height": 22, "shadow": ${ "def.textFieldShadow" },
+        { "x": 52, "y": 25, "height": 22, "shadow": ${ "def.textFieldShadow" },
           "valign": "center", "textFormat": { "font": "mono", "size": 12, "bold": true }, "antiAliasType": "advanced",
           "format": "<font color='{{v.c_winrate}}'>{{v.winrate%2d~%}}</font>" },
         // battles
-        { "x": 0, "y": 45, "width": 22, "height": 22,
+        { "x": 72, "y": 14, "width": 22, "height": 22,
           "src": "{{v.winrate?img://gui/maps/icons/library/dossier/battles40x32.png}}" },
-        { "x": 20, "y": 57, "height": 22, "shadow": ${ "def.textFieldShadow" },
+        { "x": 92, "y": 25, "height": 22, "shadow": ${ "def.textFieldShadow" },
           "valign": "center", "textFormat": { "font": "mono", "size": 12, "bold": true }, "antiAliasType": "advanced",
           "format": "<font color='{{v.c_battles}}'>{{v.battles%d}}</font>" },
-        { "x": 5, "y": 64, "width": 22, "height": 22, "shadow": ${ "def.textFieldShadow" },
-          "format": "<font size='8'>exp</font>" },
-        // battles
+        // avg/top dmg
+        { "x": 5, "y": 33, "width": 22, "height": 22, "shadow": ${ "def.textFieldShadow" },
+          "format": "<font size='8'>dmg</font>" },
+        { "x": 20, "y": 42, "height": 22, "shadow": ${ "def.textFieldShadow" },
+          "valign": "center", "textFormat": { "font": "mono", "size": 12, "bold": true }, "antiAliasType": "advanced",
+          "format": "{{v.tdb%d}}  {{v.avgdmg%d}}  {{v.topdmg%d}}" },
+        // avg/top frg
+        { "x": 5, "y": 48, "width": 22, "height": 22, "shadow": ${ "def.textFieldShadow" },
+          "format": "<font size='8'>frg</font>" },
+        { "x": 20, "y": 57, "height": 22, "shadow": ${ "def.textFieldShadow" },
+          "valign": "center", "textFormat": { "font": "mono", "size": 12, "bold": true }, "antiAliasType": "advanced",
+          "format": "{{v.tfb%0.2f}}  {{v.avgfrg%0.2f}}  {{v.topfrg%0.2f}}" },
+        // wn8 exp
+        { "x": 5, "y": 63, "width": 22, "height": 22, "shadow": ${ "def.textFieldShadow" },
+          "format": "<font size='8'>wn8</font>" },
         { "x": 20, "y": 72, "height": 22, "shadow": ${ "def.textFieldShadow" },
           "valign": "center", "textFormat": { "font": "mono", "size": 12, "bold": true }, "antiAliasType": "advanced",
           "format": "<font color='{{v.c_wn8effd}}'>{{py:math.mul({{v.wn8effd|0}}, 100)%d~%}}</font> {{v.tdb%d}} => {{v.wn8expd%d}}" },
