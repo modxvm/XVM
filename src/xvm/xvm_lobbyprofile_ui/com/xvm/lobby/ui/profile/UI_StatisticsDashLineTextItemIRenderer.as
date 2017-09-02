@@ -34,12 +34,12 @@ package com.xvm.lobby.ui.profile
                 {
                     params = _toolTipParams ? _toolTipParams.body : null;
                     t = Sprintf.format("{{l10n:profile/xvm_xte_extended_tooltip:%s:%s:%s:%s:%s:%s}}",
-                        !params.currentD ? "--" : App.utils.locale.integer(Math.round(params.currentD)),
-                        !params.currentF ? "--" : App.utils.locale.float(params.currentF),
-                        !params.avgD ? "--" : App.utils.locale.integer(Math.round(params.avgD)),
-                        !params.avgF ? "--" : App.utils.locale.float(params.avgF),
-                        !params.topD ? "--" : App.utils.locale.integer(Math.round(params.topD)),
-                        !params.topF ? "--" : App.utils.locale.float(params.topF));
+                        !params.curdmg ? "--" : App.utils.locale.integer(Math.round(params.curdmg)),
+                        !params.curfrg ? "--" : App.utils.locale.float(params.curfrg),
+                        !params.avgdmg ? "--" : App.utils.locale.integer(Math.round(params.avgdmg)),
+                        !params.avgfrg ? "--" : App.utils.locale.float(params.avgfrg),
+                        !params.topdmg ? "--" : App.utils.locale.integer(Math.round(params.topdmg)),
+                        !params.topfrg ? "--" : App.utils.locale.float(params.topfrg));
                     App.toolTipMgr.show(Locale.get(t));
                 }
                 else

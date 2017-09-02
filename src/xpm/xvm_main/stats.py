@@ -59,8 +59,6 @@ from logger import *
 import topclans
 import utils
 import vehinfo
-import vehinfo_xtdb
-import vehinfo_xte
 import xvm_scale
 import xvmapi
 
@@ -582,7 +580,7 @@ class _Stat(object):
     def _calculateXTDB(self, v):
         if 'db' not in v or v['db'] < 0:
             return
-        v['xtdb'] = vehinfo_xtdb.calculateXTDB(v['id'], float(v['db']))
+        v['xtdb'] = vehinfo.calculateXTDB(v['id'], float(v['db']))
         #log(v['xtdb'])
 
     # calculate xTE
@@ -591,7 +589,7 @@ class _Stat(object):
             return
         if 'fb' not in v or v['fb'] < 0:
             return
-        v['xte'] = vehinfo_xte.calculateXTE(v['id'], float(v['db']), float(v['fb']))
+        v['xte'] = vehinfo.calculateXTE(v['id'], float(v['db']), float(v['fb']))
         #log(str(v['id']) + " xte=" + str(v['xte']))
 
     def _addContactData(self, stat):

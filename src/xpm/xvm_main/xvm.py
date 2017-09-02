@@ -30,7 +30,6 @@ import test
 import topclans
 import wgutils
 import xvmapi
-import vehinfo_xtdb
 
 _LOG_COMMANDS = (
     XVM_COMMAND.LOAD_STAT_BATTLE,

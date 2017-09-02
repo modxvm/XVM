@@ -39,8 +39,6 @@ from xfw import *
 from consts import *
 from logger import *
 import vehinfo
-import vehinfo_xtdb
-import vehinfo_xte
 
 
 #############################
@@ -157,8 +155,10 @@ class _Dossier(object):
             dmg = stats.getDamageDealt()
             frg = stats.getFragsCount()
             if battles > 0 and dmg >= 0 and frg >= 0:
-                xtdb = vehinfo_xtdb.calculateXTDB(vehCD, float(dmg) / battles)
-                xte = vehinfo_xte.calculateXTE(vehCD, float(dmg) / battles, float(frg) / battles)
+                curdmg = float(dmg) / battles
+                curfrg = float(frg) / battles
+                xtdb = vehinfo.calculateXTDB(vehCD, curdmg)
+                xte = vehinfo.calculateXTE(vehCD, curdmg, curfrg)
 
         res = self.__prepareVehicleResult(accountDBID, vehCD, dossier, xtdb, xte, earnedXP, freeXP,
                                           xpToElite, rankCount, rankSteps, rankStepsTotal)

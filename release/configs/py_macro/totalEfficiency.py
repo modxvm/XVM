@@ -1,11 +1,11 @@
 ﻿import xvm.total_Efficiency as te
-import xvm_main.python.vehinfo_xtdb as vehinfo_xtdb
+import xvm_main.python.vehinfo as vehinfo
 import xvm_main.python.config as config
 
 
 @xvm.export('xvm.totalDamageColor', deterministic=False)
 def xvm_totalDamageColor():
-    x = vehinfo_xtdb.calculateXTDB(te.vehCD, te.totalDamage)
+    x = vehinfo.calculateXTDB(te.vehCD, te.totalDamage)
     for val in config.get('colors/x'):
         if val['value'] > x:
             return '#' + val['color'][2:] if val['color'][:2] == '0x' else val['color']

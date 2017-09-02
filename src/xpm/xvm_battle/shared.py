@@ -7,7 +7,7 @@ from xfw import *
 from xvm_main.python.logger import *
 import xvm_main.python.minimap_circles as minimap_circles
 import xvm_main.python.utils as utils
-import xvm_main.python.vehinfo_xtdb as vehinfo_xtdb
+import xvm_main.python.vehinfo as vehinfo
 
 
 def getGlobalBattleData():
@@ -28,4 +28,4 @@ def getGlobalBattleData():
         arena.guiType,                              # arenaGuiType
         utils.getMapSize(),                         # mapSize
         minimap_circles.getMinimapCirclesData(),    # minimapCirclesData
-        vehinfo_xtdb.vehArrayXTDB(vehCD))           # xtdb_data
+        vehinfo.getXtdbDataArray(vehCD))            # xtdb_data

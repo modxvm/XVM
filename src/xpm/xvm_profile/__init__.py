@@ -36,8 +36,6 @@ import xvm_main.python.config as config
 import xvm_main.python.dossier as dossier
 import xvm_main.python.utils as utils
 import xvm_main.python.vehinfo as vehinfo
-import xvm_main.python.vehinfo_xtdb as vehinfo_xtdb
-import xvm_main.python.vehinfo_xte as vehinfo_xte
 from xvm_main.python.xvm import l10n
 import xvm_main.python.xvm_scale as xvm_scale
 
@@ -117,15 +115,19 @@ def DetailedStatisticsUtils_getStatistics(base, targetData, isCurrentuser, layou
             #    del res[1]['data'][4]
 
             # xTE
-            ref = vehinfo_xte.getReferenceValues(_lastVehCD)
-            if ref is None:
-                ref = {}
             data = -1
+            vinfo = vehinfo.getVehicleInfoData(_lastVehCD)
+            ref = {'avgdmg': vinfo.get('avgdmg', None),
+                   'avgfrg': vinfo.get('avgfrg', None),
+                   'topdmg': vinfo.get('topdmg', None),
+                   'topfrg': vinfo.get('topfrg', None)}
             #log('vehCD: {} b:{} d:{} f:{}'.format(_lastVehCD, battles, dmg, frg))
             if battles > 0 and dmg >= 0 and frg >= 0:
-                ref['currentD'] = float(dmg) / battles
-                ref['currentF'] = float(frg) / battles
-                x = vehinfo_xte.calculateXTE(_lastVehCD, float(dmg) / battles, float(frg) / battles)
+                curdmg = float(dmg) / battles
+                curfrg = float(frg) / battles
+                ref['curdmg'] = curdmg
+                ref['curfrg'] = curfrg
+                x = vehinfo.calculateXTE(_lastVehCD, curdmg, curfrg)
                 ref['xte'] = x
                 ref['xte_sup'] = xvm_scale.XvmScaleToSup(x)
                 if x >= 0:
@@ -143,7 +145,7 @@ def DetailedStatisticsUtils_getStatistics(base, targetData, isCurrentuser, layou
             # xTDB
             item = res[1]['data'][2]
             if battles > 0 and dmg >= 0:
-                x = vehinfo_xtdb.calculateXTDB(_lastVehCD, float(dmg) / battles)
+                x = vehinfo.calculateXTDB(_lastVehCD, float(dmg) / battles)
                 sup = xvm_scale.XvmScaleToSup(x)
                 if x >= 0:
                     color = utils.getDynamicColorValue(consts.DYNAMIC_VALUE_TYPE.X, x)
