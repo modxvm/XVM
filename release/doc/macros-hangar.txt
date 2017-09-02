@@ -52,10 +52,10 @@ Legend:
 │ {{v.wn8expd}}              │ X │ . │ WN8 expected tank damage
 │ {{v.wn8effd}}              │ X │ . │ WN8 effective tank damage (avgdmg / expected_dmg)
 │ {{v.c_wn8effd}}            │ X │ . │ dynamic color for this macro
-│ {{v.avgdmg}}               │ X │ . │ average vehicle damage (last month data for players with 100+ battles on tank)
-│ {{v.topdmg}}               │ X │ . │ top vehicle damage (100 position of the best players of the month)
-│ {{v.avgfrg}}               │ X │ . │ average vehicle frags (last month data for players with 100+ battles on tank)
-│ {{v.topfrg}}               │ X │ . │ top vehicle frags (100 position of the best players of the month)
+│ {{v.avgdmg}}               │ X │ . │ average vehicle damage (last month active players with 100+ battles on tank)
+│ {{v.topdmg}}               │ X │ . │ top vehicle damage (100 position of the best players)
+│ {{v.avgfrg}}               │ X │ . │ average vehicle frags (last month active players with 100+ battles on tank)
+│ {{v.topfrg}}               │ X │ . │ top vehicle frags (100 position of the best players)
 │ {{v.xte}}                  │ X │ . │ per-vehicle efficiency rating
 │ {{v.c_xte}}                │ X │ . │ dynamic color for this macro (xTE): http://www.koreanrandom.com/forum/topic/1643-
 │ {{v.earnedXP}}             │ X │ . │ earned XP
