@@ -209,6 +209,7 @@ package com.xvm.battle.minimap.entries.personal
     }
 }
 
+import com.xfw.*;
 import com.xvm.*;
 import com.xvm.battle.*;
 import com.xvm.types.cfg.*;
@@ -294,15 +295,17 @@ class Circles extends Sprite implements IDisposable
         if (UI_ViewRangeCirclesEntry.stereoscope_enabled)
         {
             stereoscopeVisionRadius = UI_ViewRangeCirclesEntry.visionRadius;
-            circularVisionRadius = UI_ViewRangeCirclesEntry.visionRadius / 1.25;
+            circularVisionRadius = stereoscopeVisionRadius / 1.25;
+            if (BattleGlobalData.minimapCirclesData.view_coated_optics)
+                circularVisionRadius *= 1.1;
         }
         else
         {
             circularVisionRadius = UI_ViewRangeCirclesEntry.visionRadius;
+            stereoscopeVisionRadius = circularVisionRadius;
             if (BattleGlobalData.minimapCirclesData.view_coated_optics)
-                circularVisionRadius /= 1.1;
-            stereoscopeVisionRadius = UI_ViewRangeCirclesEntry.visionRadius * 1.25;
-            circularVisionRadius = UI_ViewRangeCirclesEntry.visionRadius;
+                stereoscopeVisionRadius /= 1.1;
+            stereoscopeVisionRadius *= 1.25;
         }
 
         //Logger.add("stereoscope_enabled = " + UI_ViewRangeCirclesEntry.stereoscope_enabled);
