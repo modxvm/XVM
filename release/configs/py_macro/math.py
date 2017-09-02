@@ -29,12 +29,24 @@ def math_div(a, b):
 @xvm.export('pow')
 def math_pow(a, n):
     return a ** n
-
-#  Absolute value. Абсолютная величина
+  
+# Absolute value. Абсолютная величина
 @xvm.export('math.abs')
 @xvm.export('abs')
 def math_abs(a):
     return abs(a)
+
+# Minimum value. Минимальное значение
+@xvm.export('math.min')
+@xvm.export('min')
+def math_min(*a):
+    return min(*a)
+
+# Maximum value. Минимальное значение
+@xvm.export('math.max')
+@xvm.export('max')
+def math_max(*a):
+    return max(*a)
 
 # Random numbers
 
