@@ -10,6 +10,7 @@ package com.xvm.battle.teamBasesPanel
     import com.xvm.battle.*;
     import flash.utils.*;
     import net.wg.data.constants.*;
+    import net.wg.gui.components.common.ticker.events.*;
 
     public dynamic class UI_teamBasesPanel extends teamBasesPanelUI
     {
@@ -24,6 +25,11 @@ package com.xvm.battle.teamBasesPanel
             super();
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
             Xfw.addCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, setup);
+            if (BattleXvmView.battlePageBattleTicker)
+            {
+                BattleXvmView.battlePageBattleTicker.addEventListener(BattleTickerEvent.SHOW, setup);
+                BattleXvmView.battlePageBattleTicker.addEventListener(BattleTickerEvent.HIDE, setup);
+            }
         }
 
         override protected function configUI():void
@@ -37,6 +43,11 @@ package com.xvm.battle.teamBasesPanel
         {
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
             Xfw.removeCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, setup);
+            if (BattleXvmView.battlePageBattleTicker)
+            {
+                BattleXvmView.battlePageBattleTicker.removeEventListener(BattleTickerEvent.SHOW, setup);
+                BattleXvmView.battlePageBattleTicker.removeEventListener(BattleTickerEvent.HIDE, setup);
+            }
             super.onDispose();
         }
 

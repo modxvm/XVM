@@ -20,6 +20,7 @@ package com.xvm.battle
     import flash.text.*;
     import net.wg.gui.battle.views.*;
     import net.wg.gui.battle.views.debugPanel.*;
+    import net.wg.gui.battle.views.ticker.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
     import scaleform.clik.utils.*;
@@ -39,6 +40,18 @@ package com.xvm.battle
             try
             {
                 return battlePage["debugPanel"];
+            }
+            catch (ex:Error)
+            {
+            }
+            return null;
+        }
+
+        public static function get battlePageBattleTicker():BattleTicker
+        {
+            try
+            {
+                return battlePage["battleTicker"];
             }
             catch (ex:Error)
             {

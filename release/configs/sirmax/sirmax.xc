@@ -171,6 +171,7 @@
   },
   "captureBar": {
     //"enabled": false,
+    //"y": 200,
     //"distanceOffset": -20,
     //"hideProgressBar": true,
     "enemy": {
