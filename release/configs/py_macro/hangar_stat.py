@@ -16,11 +16,13 @@ def winrate_next(diff):
     if dependency.instance(IBootcampController).isInBootcamp():
         return
     itemsCache = dependency.instance(IItemsCache)
-    wins = itemsCache.items.getAccountDossier().getRandomStats().getWinsCount()
     battles = itemsCache.items.getAccountDossier().getRandomStats().getBattlesCount()
-    winrate = itemsCache.items.getAccountDossier().getRandomStats().getWinsEfficiency() * 100
-    if wins is None or battles is None or winrate is None:
+    if battles is None:
         return '-'
+    wins = itemsCache.items.getAccountDossier().getRandomStats().getWinsCount()
+    if wins is None:
+        return '-'
+    winrate = itemsCache.items.getAccountDossier().getRandomStats().getWinsEfficiency() * 100
     f = winrate - int(winrate)
     if f < diff:
         next = int(winrate) + diff
