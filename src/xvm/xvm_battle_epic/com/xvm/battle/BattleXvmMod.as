@@ -25,7 +25,7 @@ package com.xvm.battle
             "epicRandomPage": [
                 EpicRandomBattleLoadingXvmView, // TODO:EPIC
                 //EpicRandomFullStatsXvmView, // TODO:EPIC
-                //EpicRandomPlayersPanelXvmView, // TODO:EPIC
+                EpicRandomPlayersPanelXvmView,
                 //TeamBasesPanelXvmView, // TODO:EPIC
                 MinimapXvmView,
                 SixthSenseXvmView,
