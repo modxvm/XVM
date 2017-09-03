@@ -22,12 +22,15 @@ def winrate_next(diff):
     wins = itemsCache.items.getAccountDossier().getRandomStats().getWinsCount()
     if wins is None:
         return '-'
-    winrate = itemsCache.items.getAccountDossier().getRandomStats().getWinsEfficiency() * 100
+    winrate = itemsCache.items.getAccountDossier().getRandomStats().getWinsEfficiency()
+    if winrate is None:
+        return '-'
+    winrate *= 100
     f = winrate - int(winrate)
     if f < diff:
         next = int(winrate) + diff
     elif f + diff < 1:
-        next = round(winrate,2) + diff
+        next = round(winrate, 2) + diff
     else:
         next = int(winrate) + diff + 1
     value = int((100 * wins - next * battles) / (next - 100)) + 1

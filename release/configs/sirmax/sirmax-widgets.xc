@@ -3,6 +3,7 @@
     "login": [
     ],
     "lobby": [
+      ${ "../default/widgetsTemplates.xc":"statistics" },
       ${ "../default/widgetsTemplates.xc":"clock" }
       /*
       ,{
