@@ -5,6 +5,7 @@
 
 from functools import partial
 from operator import attrgetter
+import traceback
 import weakref
 
 import BigWorld
@@ -145,7 +146,7 @@ def _CarouselDataProvider_vehicleComparisonKey(base, cls, vehicle):
                     elif sort_criterion == 'markOfMastery':
                         comparisonKey.append(stats.markOfMastery * factor)
             elif sort_criterion in ['xtdb', 'xte', 'marksOnGun', 'damageRating']:
-                vDossier = dossier.getDossier((PROFILE_DROPDOWN_KEYS.ALL, None, vehicle.intCD))
+                vDossier = dossier.getDossier(PROFILE_DROPDOWN_KEYS.ALL, None, vehicle.intCD)
                 comparisonKey.append(factor if vDossier else 0)
                 if vDossier:
                     comparisonKey.append(vDossier[sort_criterion] * factor)
