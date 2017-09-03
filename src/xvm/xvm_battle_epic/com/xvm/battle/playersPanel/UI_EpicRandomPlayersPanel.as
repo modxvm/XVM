@@ -11,12 +11,14 @@ package com.xvm.battle.playersPanel
 
     public class UI_EpicRandomPlayersPanel extends epicRandomPlayersPanelUI
     {
+        private static const OFFSET:int = 70;
+
         override public function as_setPanelMode(param1:int):void
         {
             super.as_setPanelMode(param1);
-            BattleState.playersPanelMode = state;
-            BattleState.playersPanelWidthLeft = listLeft.getRenderersVisibleWidth();
-            BattleState.playersPanelWidthRight = listRight.getRenderersVisibleWidth();
+            BattleState.playersPanelMode = state == EPIC_RANDOM_PLAYERS_PANEL_STATE.TOGGLED_HIDDEN ? EPIC_RANDOM_PLAYERS_PANEL_STATE.HIDDEN : state;
+            BattleState.playersPanelWidthLeft = listLeft.getRenderersVisibleWidth() - OFFSET;
+            BattleState.playersPanelWidthRight = listRight.getRenderersVisibleWidth() - OFFSET;
         }
     }
 }

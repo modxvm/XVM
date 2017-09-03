@@ -704,8 +704,6 @@ package com.xvm.extraFields
                 {
                     align();
                 }
-
-                //if (Config.IS_DEVELOPMENT) { border = true; borderColor = 0xff0000; }
             }
             catch (ex:Error)
             {

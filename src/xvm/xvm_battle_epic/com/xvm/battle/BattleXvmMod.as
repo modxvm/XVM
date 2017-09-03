@@ -26,7 +26,7 @@ package com.xvm.battle
                 EpicRandomBattleLoadingXvmView, // TODO:EPIC
                 //EpicRandomFullStatsXvmView, // TODO:EPIC
                 EpicRandomPlayersPanelXvmView,
-                //TeamBasesPanelXvmView, // TODO:EPIC
+                TeamBasesPanelXvmView,
                 MinimapXvmView,
                 SixthSenseXvmView,
                 BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
