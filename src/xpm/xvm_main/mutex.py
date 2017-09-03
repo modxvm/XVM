@@ -18,17 +18,19 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 import traceback
 
-from gui.shared import g_eventBus
+from gui.Scaleform.daapi.view.login.LoginView import LoginView
 
-from consts import XVM_EVENT
+from xfw import *
+
 import config
 
-def onConfigLoaded(self, e=None):
+#WGC resets WoT mutex so we should perform mutex kill after wgc_api.dll code execution 
+
+@registerEvent(LoginView, '_LoginView__tryWGCLogin')
+def kill_wotclient_mutex(self):
     try:
-        if config.get('tweaks/allowMultipleWotInstances'):
+        if config.get('tweaks/allowMultipleWotInstances', False):
             import xfw.mutex as mutex
             mutex.allow_multiple_wot()
     except Exception:
         traceback.print_exc()
-
-g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)

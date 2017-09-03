@@ -12,7 +12,6 @@
   * libpython: improved Python/C API coverage
   * libpython: fixed some Python/C API functions
 
-
   [MARKERS]
   * fixed "contourIcon"/"amount" option
 
@@ -23,6 +22,9 @@
     {{v.avgfrg}} - average vehicle frags (last month active players with 100+ battles on tank)
     {{v.topfrg}} - top vehicle frags (100 position of the best players)
   * fix carousel when "without sign of mastery" filter is selected
+
+  [MISC]
+  * fix "tweaks/allowMultipleWotInstances" option
 
 XVM-6.9.0:
   [KNOWN ISSUES]
