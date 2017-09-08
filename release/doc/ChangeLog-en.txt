@@ -1,4 +1,6 @@
-﻿XVM-6.9.1:
+﻿XVM-6.9.2-dev:
+
+XVM-6.9.1:
   [KNOWN ISSUES]
   * Microsoft Windows XP: crash to desktop on battle loading if graphics mode is standard.
 

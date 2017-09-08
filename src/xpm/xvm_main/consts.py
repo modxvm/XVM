@@ -1,7 +1,7 @@
 """ XVM (c) www.modxvm.com 2013-2017 """
 
 class XVM(object):
-    XVM_VERSION    = '6.9.1'
+    XVM_VERSION    = '6.9.2-dev'
     WOT_VERSION    = '0.9.20.0'
     XVM_INTRO      = 'www.modxvm.com'
 
