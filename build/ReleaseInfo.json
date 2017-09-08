@@ -1,32 +1,32 @@
 ﻿{
     "RU": {
-        "ver": "6.9.0",
+        "ver": "6.9.1",
         "wot": "0.9.20.0",
-        "message": " • WoT 9.19.2.0\nПодробности на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
+        "message": " • WoT 9.20.0\nПодробности на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
     },
     "EU": {
-        "ver": "6.8.2",
-        "wot": "0.9.19.1.2",
-        "message": " • WoT 9.19.1.2\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "6.9.1",
+        "wot": "0.9.20.0",
+        "message": " • WoT 9.20.0\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "NA": {
-        "ver": "6.8.2",
-        "wot": "0.9.19.1.2",
-        "message": " • WoT 9.19.1.2\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "6.9.1",
+        "wot": "0.9.20.0",
+        "message": " • WoT 9.20.0\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "ASIA": {
-        "ver": "6.8.2",
-        "wot": "0.9.19.1.1",
-        "message": " • WoT 9.19.1.1\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "6.9.1",
+        "wot": "0.9.20.0",
+        "message": " • WoT 9.20.0\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "CN": {
-        "ver": "6.8.1",
-        "wot": "0.9.19.1.1",
-        "message": " • WoT 9.19.1.1\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "6.9.1",
+        "wot": "0.9.20.0",
+        "message": " • WoT 9.20.0\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "CT":  {
-        "ver": "6.8.1",
-        "wot": "0.9.19.1.1",
-        "message": " • WoT 9.19.1.1\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "6.9.1",
+        "wot": "0.9.20.0",
+        "message": " • WoT 9.20.0\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     }
 }
