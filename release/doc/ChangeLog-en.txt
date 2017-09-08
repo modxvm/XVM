@@ -1,4 +1,11 @@
-﻿XVM-6.9.1:
+﻿XVM-6.9.1.1:
+  [KNOWN ISSUES]
+  * Microsoft Windows XP: crash to desktop on battle loading if graphics mode is standard.
+
+  [MISC]
+  * Bypass Baidu antivirus false-positive fireAlert
+
+XVM-6.9.1:
   [KNOWN ISSUES]
   * Microsoft Windows XP: crash to desktop on battle loading if graphics mode is standard.
 
