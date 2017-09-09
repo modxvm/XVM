@@ -29,6 +29,9 @@ package com.xvm.types.cfg
         public var sortie_2:String;
         public var fort_battle_2:String;
         public var ranked:String;
+        public var bootcamp:String;
+        public var epic_random:String;
+        public var epic_random_training:String;
 
         public function clone():*
         {

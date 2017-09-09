@@ -122,6 +122,9 @@ package com.xvm
                 case 20: return 'sortie_2';
                 case 21: return 'fort_battle_2';
                 case 22: return 'ranked';
+                case 23: return 'bootcamp';
+                case 24: return 'epic_random';
+                case 25: return 'epic_random_training';
                 default: return 'unknown';
             }
         }

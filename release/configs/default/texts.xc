@@ -92,7 +92,13 @@
       // Битва за укрепрайон (новый)
       "fort_battle_2": "fort_battle_2",
       // Ранговый бой
-      "ranked": ""
+      "ranked": "",
+      // Учебный полигон
+      "bootcamp": "bootcamp",
+      // Генеральное сражение
+      "epic_random": "",
+      // Генеральное сражение (тренировка)
+      "epic_random_training": "epic_random_training"
     },
     // Text for {{topclan}} macro.
     // Текст для макроса {{topclan}}
