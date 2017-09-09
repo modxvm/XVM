@@ -89,9 +89,6 @@ package com.xvm
         public static const BATTLE_TYPE_TUTORIAL:Number = 6;
         public static const BATTLE_TYPE_CYBERSPORT:Number = 7;
         public static const BATTLE_TYPE_EVENT_BATTLES:Number = 9;
-        public static const BATTLE_TYPE_SORTIE:Number = 10;
-        public static const BATTLE_TYPE_FORT_BATTLE:Number = 11;
-        public static const BATTLE_TYPE_RATED_CYBERSPORT:Number = 12;
         public static const BATTLE_TYPE_GLOBAL_MAP:Number = 13;
         public static const BATTLE_TYPE_TOURNAMENT_REGULAR:Number = 14;
         public static const BATTLE_TYPE_TOURNAMENT_CLAN:Number = 15;
@@ -102,9 +99,9 @@ package com.xvm
         public static const BATTLE_TYPE_SORTIE_2:Number = 20;
         public static const BATTLE_TYPE_FORT_BATTLE_2:Number = 21;
         public static const BATTLE_TYPE_RANKED:Number = 22;
-        public static const BATTLE_TYPE_BOOTCAMP = 23;
-        public static const BATTLE_TYPE_EPIC_RANDOM = 24;
-        public static const BATTLE_TYPE_EPIC_RANDOM_TRAINING = 25;
+        public static const BATTLE_TYPE_BOOTCAMP:Number = 23;
+        public static const BATTLE_TYPE_EPIC_RANDOM:Number = 24;
+        public static const BATTLE_TYPE_EPIC_RANDOM_TRAINING:Number = 25;
 
         // Events
         public static const XVM_EVENT_CONFIG_LOADED:String = "xvm.config_loaded";

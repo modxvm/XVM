@@ -107,11 +107,7 @@ package com.xvm
                 case 5: return 'clan';
                 case 6: return 'tutorial';
                 case 7: return 'cybersport';
-                case 8: return 'historical';
                 case 9: return 'event_battles';
-                case 10: return 'sortie';
-                case 11: return 'fort_battle';
-                case 12: return 'rated_cybersport';
                 case 13: return 'global_map';
                 case 14: return 'tournament_regular';
                 case 15: return 'tournament_clan';

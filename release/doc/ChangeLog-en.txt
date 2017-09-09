@@ -1,11 +1,13 @@
 ﻿XVM-6.9.2-dev:
+  [MISC]
+  * updated texts/battletype section with text replacements for {{battletype}} macro
 
 XVM-6.9.1.1:
   [KNOWN ISSUES]
   * Microsoft Windows XP: crash to desktop on battle loading if graphics mode is standard.
 
   [MISC]
-  * Bypass Baidu antivirus false-positive fireAlert
+  * bypass Baidu antivirus false-positive fireAlert
 
 XVM-6.9.1:
   [KNOWN ISSUES]
