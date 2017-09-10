@@ -67,12 +67,6 @@
       "cybersport": "cybersport",
       // Бой спецрежима (гонки, футбол и т.п.)
       "event_battles": "",
-      // Укрепрайон, вылазка
-      "sortie": "sortie",
-      // Битва за укрепрайон
-      "fort_battle": "fort_battle",
-      // Командный бой: ладдер
-      "rated_cybersport": "rated_cybersport",
       // Глобальная карта (ГК)
       "global_map": "global_map",
       // Регулярный турнир (ивент) ГК
@@ -92,7 +86,13 @@
       // Битва за укрепрайон (новый)
       "fort_battle_2": "fort_battle_2",
       // Ранговый бой
-      "ranked": ""
+      "ranked": "",
+      // Учебный полигон
+      "bootcamp": "bootcamp",
+      // Генеральное сражение
+      "epic_random": "",
+      // Генеральное сражение (тренировка)
+      "epic_random_training": "epic_random_training"
     },
     // Text for {{topclan}} macro.
     // Текст для макроса {{topclan}}

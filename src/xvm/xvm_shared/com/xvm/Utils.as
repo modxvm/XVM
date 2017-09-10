@@ -107,11 +107,7 @@ package com.xvm
                 case 5: return 'clan';
                 case 6: return 'tutorial';
                 case 7: return 'cybersport';
-                case 8: return 'historical';
                 case 9: return 'event_battles';
-                case 10: return 'sortie';
-                case 11: return 'fort_battle';
-                case 12: return 'rated_cybersport';
                 case 13: return 'global_map';
                 case 14: return 'tournament_regular';
                 case 15: return 'tournament_clan';
@@ -122,6 +118,9 @@ package com.xvm
                 case 20: return 'sortie_2';
                 case 21: return 'fort_battle_2';
                 case 22: return 'ranked';
+                case 23: return 'bootcamp';
+                case 24: return 'epic_random';
+                case 25: return 'epic_random_training';
                 default: return 'unknown';
             }
         }
