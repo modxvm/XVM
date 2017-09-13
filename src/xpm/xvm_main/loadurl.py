@@ -43,7 +43,7 @@ def loadUrl(url, req=None, body=None, showLog=True, api=XVM.API_VERSION):
 
     (response, compressedSize, errStr) = _loadUrl(u, XVM.TIMEOUT, XVM.FINGERPRINTS, body)
     # repeat request on timeout
-    if 'timed out' in errStr:
+    if errStr is not None and 'timed out' in errStr:
         (response, compressedSize, errStr) = _loadUrl(u, XVM.TIMEOUT, XVM.FINGERPRINTS, body)
 
     elapsed = datetime.datetime.now() - startTime
