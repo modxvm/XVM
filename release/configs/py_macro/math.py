@@ -22,7 +22,7 @@ def math_mul(*a):
 @xvm.export('math.div')
 @xvm.export('div')
 def math_div(a, b):
-    return a / float(b)
+    return a / float(b) if b != 0 else 0
 
 # Raise to power. Возведение в степень.
 @xvm.export('math.pow')
