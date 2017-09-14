@@ -1,6 +1,9 @@
 ﻿XVM-6.9.2-dev:
   [MISC]
   * updated texts/battletype section with text replacements for {{battletype}} macro
+  
+  [PYTHON MACROS]
+  * added macros {{py:upper('str')}}, {{py:lower('str')}} и {{py:capitalize('str')}}
 
 XVM-6.9.1.1:
   [KNOWN ISSUES]
