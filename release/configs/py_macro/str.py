@@ -5,14 +5,14 @@ def str_replace(str, old, new, max=-1):
 
 @xvm.export('upper')
 def str_upper(string):
-    return string.upper()
+    return unicode(string, 'utf-8').upper()
 
 
 @xvm.export('lower')
 def str_lower(string):
-    return string.lower()
+    return unicode(string, 'utf-8').lower()
 
 
 @xvm.export('capitalize')
 def str_capitalize(string):
-    return string.capitalize()
+    return unicode(string, 'utf-8').capitalize()
