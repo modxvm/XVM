@@ -4,6 +4,7 @@
 
   [МАКРОСЫ НА PYTHON]
   * добавлены макросы {{py:upper('str')}}, {{py:lower('str')}} и {{py:capitalize('str')}}
+   добавлен макросы {{py:title('str')}}
   
 XVM-6.9.1.1:
   [ИЗВЕСТНЫЕ ПРОБЛЕМЫ]

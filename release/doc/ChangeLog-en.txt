@@ -4,6 +4,7 @@
   
   [PYTHON MACROS]
   * added macros {{py:upper('str')}}, {{py:lower('str')}} и {{py:capitalize('str')}}
+  * added macro {{py:title('str')}}
 
 XVM-6.9.1.1:
   [KNOWN ISSUES]
