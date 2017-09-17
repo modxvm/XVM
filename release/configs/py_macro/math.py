@@ -4,49 +4,54 @@
 @xvm.export('add')
 @xvm.export('sum')
 def math_sum(*a):
-    return sum(a)
+    a = [i for i in a if i is not None]
+    return sum(a) if a != [] else None
 
 # Subtraction. Вычитание.
 @xvm.export('math.sub')
 @xvm.export('sub')
 def math_sub(a, b):
-    return a - b
+    return a - b if (a is not None) and (b is not None) else None
 
 # Multiplication. Умножение.
 @xvm.export('math.mul')
 @xvm.export('mul')
 def math_mul(*a):
-    return reduce(lambda x, y: x*y, a, 1)
+    a = [i for i in a if i is not None]
+    return reduce(lambda x, y: x*y, a, 1) if a != [] else None
 
 # Division. Деление.
 @xvm.export('math.div')
 @xvm.export('div')
 def math_div(a, b):
-    return a / float(b) if b != 0 else 0
+    if (a is not None) and (b is not None):
+        return a / float(b) if b != 0 else 0
 
 # Raise to power. Возведение в степень.
 @xvm.export('math.pow')
 @xvm.export('pow')
 def math_pow(a, n):
-    return a ** n
+    return a ** n if (a is not None) and (b is not None) else None
   
 # Absolute value. Абсолютная величина
 @xvm.export('math.abs')
 @xvm.export('abs')
 def math_abs(a):
-    return abs(a)
+    return abs(a) if a is not None else None
 
 # Minimum value. Минимальное значение
 @xvm.export('math.min')
 @xvm.export('min')
 def math_min(*a):
-    return min(*a)
+    a = [i for i in a if i is not None]
+    return min(*a) if a != [] else None
 
 # Maximum value. Минимальное значение
 @xvm.export('math.max')
 @xvm.export('max')
 def math_max(*a):
-    return max(*a)
+    a = [i for i in a if i is not None]
+    return max(*a) if a != [] else None
 
 # Random numbers
 

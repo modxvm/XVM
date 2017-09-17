@@ -19,5 +19,5 @@ def str_capitalize(string):
 
 
 @xvm.export('title')
-def str_capitalize(string):
+def str_title(string):
     return unicode(string, 'utf-8').title()
