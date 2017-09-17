@@ -11,7 +11,7 @@ def math_sum(*a):
 @xvm.export('math.sub')
 @xvm.export('sub')
 def math_sub(a, b):
-    return a - b if (a is not None) and (b is not None) else None
+    return None if a is None or b is None else a - b
 
 # Multiplication. Умножение.
 @xvm.export('math.mul')
@@ -24,14 +24,14 @@ def math_mul(*a):
 @xvm.export('math.div')
 @xvm.export('div')
 def math_div(a, b):
-    if (a is not None) and (b is not None):
+    if a is not None and b is not None:
         return a / float(b) if b != 0 else 0
 
 # Raise to power. Возведение в степень.
 @xvm.export('math.pow')
 @xvm.export('pow')
 def math_pow(a, n):
-    return a ** n if (a is not None) and (n is not None) else None
+    return None if a is None or b is None else a ** n
   
 # Absolute value. Абсолютная величина
 @xvm.export('math.abs')
