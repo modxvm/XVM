@@ -31,7 +31,7 @@ def math_div(a, b):
 @xvm.export('math.pow')
 @xvm.export('pow')
 def math_pow(a, n):
-    return None if a is None or b is None else a ** n
+    return None if a is None or n is None else a ** n
   
 # Absolute value. Абсолютная величина
 @xvm.export('math.abs')
