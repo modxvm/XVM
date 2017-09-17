@@ -5,7 +5,7 @@
 @xvm.export('sum')
 def math_sum(*a):
     a = [i for i in a if i is not None]
-    return sum(a) if not a else None
+    return sum(a) if a else None
 
 # Subtraction. Вычитание.
 @xvm.export('math.sub')
@@ -44,14 +44,14 @@ def math_abs(a):
 @xvm.export('min')
 def math_min(*a):
     a = [i for i in a if i is not None]
-    return min(*a) if not a else None
+    return min(*a) if a else None
 
 # Maximum value. Минимальное значение
 @xvm.export('math.max')
 @xvm.export('max')
 def math_max(*a):
     a = [i for i in a if i is not None]
-    return max(*a) if not a else None
+    return max(*a) if a else None
 
 # Random numbers
 
