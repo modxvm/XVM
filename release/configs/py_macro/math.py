@@ -18,7 +18,7 @@ def math_sub(a, b):
 @xvm.export('mul')
 def math_mul(*a):
     a = [i for i in a if i is not None]
-    return reduce(lambda x, y: x*y, a, 1) if not a else None
+    return reduce(lambda x, y: x*y, a, 1) if a else None
 
 # Division. Деление.
 @xvm.export('math.div')
@@ -26,6 +26,7 @@ def math_mul(*a):
 def math_div(a, b):
     if a is not None and b is not None:
         return a / float(b) if b != 0 else 0
+    return
 
 # Raise to power. Возведение в степень.
 @xvm.export('math.pow')
