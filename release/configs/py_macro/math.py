@@ -26,7 +26,7 @@ def math_mul(*a):
 def math_div(a, b):
     if a is not None and b is not None:
         return a / float(b) if b != 0 else 0
-    return
+    return None
 
 # Raise to power. Возведение в степень.
 @xvm.export('math.pow')
