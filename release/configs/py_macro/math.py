@@ -47,17 +47,16 @@ def math_min(*a):
     a = [i for i in a if i is not None]
     return min(*a) if a else None
 
-# Maximum value. Минимальное значение
+# Maximum value. Максимальное значение
 @xvm.export('math.max')
 @xvm.export('max')
 def math_max(*a):
     a = [i for i in a if i is not None]
     return max(*a) if a else None
 
-# Random numbers
-
 import random
 
+# Random numbers. Рандомное (случайное) число
 @xvm.export('random.randint', deterministic=False)
 def random_randint(a=0, b=1):
     return random.randint(a, b)
