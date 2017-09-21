@@ -1,11 +1,16 @@
 ﻿XVM-6.9.2-dev:
+  [РАЗНОЕ]
+  * обновлена секция конфига texts/battletype с подстановками для макроса {{battletype}}
+
+  [МАКРОСЫ НА PYTHON]
+  * добавлены макросы {{py:upper('str')}}, {{py:lower('str')}}, {{py:capitalize('str')}} и {{py:title('str')}}
 
 XVM-6.9.1.1:
   [ИЗВЕСТНЫЕ ПРОБЛЕМЫ]
   * Windows XP: краш клиента при заходе в бой если режим графики установлен в положение "стандартный".
 
   [РАЗНОЕ]
-  * Обход ложного срабатывания Baidu antivirus
+  * обход ложного срабатывания Baidu antivirus
 
 XVM-6.9.1:
   [ИЗВЕСТНЫЕ ПРОБЛЕМЫ]
@@ -235,8 +240,6 @@ XVM-6.6.5:
 
   [МАКРОСЫ НА PYTHON]
   * totalEfficiency: добавлен макрос {{py:xvm.numberDamagedVehicles}}
-
-  [МАКРОСЫ НА PYTHON]
   * добавлены макросы {{py:xvm.screenWidth}}, {{py:xvm.screenHeight}}, {{py:xvm.screenVCenter}} и {{py:xvm.screenHCenter}}
 
   [ЛОГ ПОЛУЧЕННЫХ ПОВРЕЖДЕНИЙ]

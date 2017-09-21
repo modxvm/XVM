@@ -1,11 +1,16 @@
 ﻿XVM-6.9.2-dev:
+  [MISC]
+  * updated texts/battletype section with text replacements for {{battletype}} macro
+
+  [PYTHON MACROS]
+  * added macros {{py:upper('str')}}, {{py:lower('str')}}, {{py:capitalize('str')}} and {{py:title('str')}}
 
 XVM-6.9.1.1:
   [KNOWN ISSUES]
   * Microsoft Windows XP: crash to desktop on battle loading if graphics mode is standard.
 
   [MISC]
-  * Bypass Baidu antivirus false-positive fireAlert
+  * bypass Baidu antivirus false-positive fireAlert
 
 XVM-6.9.1:
   [KNOWN ISSUES]
@@ -235,8 +240,6 @@ XVM-6.6.5:
 
   [PYTHON MACROS]
   * totalEfficiency: added the macro {{py:xvm.numberDamagedVehicles}}
-
-  [PYTHON MACROS]
   * added macros {{py:xvm.screenWidth}}, {{py:xvm.screenHeight}}, {{py:xvm.screenVCenter}} and {{py:xvm.screenHCenter}}
 
   [DAMAGE LOG]

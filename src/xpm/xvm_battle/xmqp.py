@@ -63,6 +63,7 @@ def _start(e=None):
                     players.append(accountDBID)
                 #players.append(42)
                 #players.append(43)
+            players.sort()
             # start
             stop()
             global _xmqp_thread, _xmqp
@@ -132,6 +133,10 @@ class _XMQP(object):
 
         global players_capabilities
         players_capabilities = {}
+
+    @property
+    def server_hash(self):
+        return hash(tuple(self._players)) % 9 + 1
 
     @property
     def is_consuming(self):
@@ -246,11 +251,11 @@ class _XMQP(object):
         :rtype: pika.SelectConnection
 
         """
-        debug('[XMQP] Connecting')
-
         credentials = pika.PlainCredentials('xvm', 'xvm')
+        host = XVM.XMQP_SERVER_TEMPLATE.format(HASH=self.server_hash)
+        log('[XMQP] Connecting to %s' % host)
         params = pika.ConnectionParameters(
-            host=XVM.XMQP_SERVER,
+            host=host,
             #port=XVM.XMQP_SERVER_PORT,
             virtual_host='xvm',
             credentials=credentials,

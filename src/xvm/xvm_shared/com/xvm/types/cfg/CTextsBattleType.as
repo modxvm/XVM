@@ -16,9 +16,6 @@ package com.xvm.types.cfg
         public var tutorial:String;
         public var cybersport:String;
         public var event_battles:String;
-        public var sortie:String;
-        public var fort_battle:String;
-        public var rated_cybersport:String;
         public var global_map:String;
         public var tournament_regular:String;
         public var tournament_clan:String;
@@ -29,6 +26,9 @@ package com.xvm.types.cfg
         public var sortie_2:String;
         public var fort_battle_2:String;
         public var ranked:String;
+        public var bootcamp:String;
+        public var epic_random:String;
+        public var epic_random_training:String;
 
         public function clone():*
         {
