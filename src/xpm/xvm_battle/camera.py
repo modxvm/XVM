@@ -4,7 +4,6 @@
 # imports
 
 import traceback
-import math
 import Math
 
 import BigWorld
@@ -21,7 +20,7 @@ from AvatarInputHandler.control_modes import SniperControlMode
 from helpers.EffectsList import _FlashBangEffectDesc
 from gui.Scaleform.daapi.view.meta.SiegeModeIndicatorMeta import SiegeModeIndicatorMeta
 from gui.Scaleform.daapi.view.meta.CrosshairPanelContainerMeta import CrosshairPanelContainerMeta
-from AvatarInputHandler.AimingSystems.SniperAimingSystem import SniperAimingSystem    
+from AvatarInputHandler.AimingSystems.SniperAimingSystem import SniperAimingSystem
 from Keys import KEY_RIGHTMOUSE
 from AvatarInputHandler import mathUtils
 from gun_rotation_shared import calcPitchLimitsFromDesc
