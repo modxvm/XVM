@@ -2,6 +2,7 @@
 export XVMBUILD_IPB_APIKEY=00000000000000000000000000000000
 export XVMBUILD_IPB_USERID=00000
 export XVMBUILD_IPB_TOPICID=00000
+export XVMBUILD_IPB_SERVER=http://example.com/
 
 export XVMBUILD_URL_DOWNLOAD=http://nightly.modxvm.com/download
 export XVMBUILD_URL_REPO=https://bitbucket.org/XVM/xvm/commits
