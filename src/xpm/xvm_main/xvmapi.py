@@ -20,10 +20,6 @@ def getStatsReplay(request):
     (data, errStr) = _exec('getStatsReplay/{token}/{request}', params={'request':request})
     return data
 
-def getStatsById(id):
-    (data, errStr) = _exec('getStatsById/{token}/{id}', params={'id':id})
-    return data
-
 def getStatsByNick(region, nick):
     (data, errStr) = _exec('getStatsByNick/{token}/{region}/{nick}', params={'region':region,'nick':nick})
     return data

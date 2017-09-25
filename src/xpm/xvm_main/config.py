@@ -309,17 +309,13 @@ class XvmServicesToken(object):
                 self.token = None
             else:
                 self.token = self.token.encode('ascii')
-        self.start_at = data.get('start_at', None)
         self.expires_at = data.get('expires_at', None)
-        self.cnt = data.get('cnt', None)
         if self.expires_at is None or time.time() > self.expires_at / 1000:
             self.status = 'inactive'
             self.token = None
         else:
             self.status = data.get('status', 'inactive')
-        self.issued = data.get('issued', None)
         self.services = data.get('services', {});
-        self.verChkCnt = data.get('verChkCnt', None)
 
         active = self.token is not None
         global networkServicesSettings
