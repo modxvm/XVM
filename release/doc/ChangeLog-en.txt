@@ -7,7 +7,21 @@
 
   [RATINGS]
   * removed rating WN6
+  * removed macros:
+      {{wn6}}, {{xwn6}}, {{c:wn6}}, {{c:xwn6}}, {{a:wn6}}, {{a:xwn6}},
+      {{mystat.wn6}}, {{mystat.xwn6}}, {{mystat.c_wn6}}, {{mystat.c_xwn6}}
+  * removed config sections:
+      "alpha"/"wn6"
+      "colors"/"wn6"
   * added rating WTR
+  * added macros:
+      {{wtr}}, {{xwtr}}, {{c:wtr}}, {{c:xwtr}}, {{a:wtr}}, {{a:xwtr}},
+      {{mystat.wtr}}, {{mystat.xwtr}}, {{mystat.c_wtr}}, {{mystat.c_xwtr}}
+  * added config sections:
+      "alpha"/"wtr"
+      "colors"/"wtr"
+  * updated color and alpha values boundaries for all ratings
+  * color and alpha values boundaries for XVM scale are updated automatically every day
 
 XVM-6.9.1.1:
   [KNOWN ISSUES]

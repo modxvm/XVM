@@ -125,7 +125,7 @@ Legend:
 │ S │ {{xr}}             │ X │ X │ X │ X │ X │ X │ same as {{r}} but always in XVM Scale
 │ S │ {{xte}}            │ X │ X │ X │ X │ X │ X │ per-vehicle efficiency (xTE) (values 00-99, XX for Tops)
 │ S │ {{eff}}            │ X │ X │ X │ X │ X │ X │ player efficiency: http://www.koreanrandom.com/forum/topic/13386-
-│ S │ {{wtr}}            │ X │ X │ X │ X │ X │ X │ WTR rating: TODO: topic URL
+│ S │ {{wtr}}            │ X │ X │ X │ X │ X │ X │ WTR rating: https://koreanrandom.com/forum/topic/41382-
 │ S │ {{wn8}}            │ X │ X │ X │ X │ X │ X │ WN8 rating: http://www.koreanrandom.com/forum/topic/13434-
 │ S │ {{wgr}}            │ X │ X │ X │ X │ X │ X │ WG personal rating:  http://www.koreanrandom.com/forum/topic/13433-
 │ S │ {{xeff}}           │ X │ X │ X │ X │ X │ X │ XVM Scale for efficiency (values 00-99, XX for Tops)

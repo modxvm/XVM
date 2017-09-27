@@ -15,11 +15,23 @@ def updateReserve(vehCD, isReserved):
     if _vehicleInfoData is not None:
         _vehicleInfoData[vehCD]['isReserved'] = isReserved
 
+def getXvmScaleData(rating):
+    return _xvmscale_data.get('x%s' % rating, None) if _xvmscale_data is not None else None
+
 def getXteData(vehCD):
     return _xte_data.get(str(vehCD), None) if _xte_data is not None else None
 
 def getXtdbData(vehCD):
     return _xtdb_data.get(str(vehCD), None) if _xtdb_data is not None else None
+
+# XVM scale for global ratings
+
+def calculateXvmScale(rating, value):
+    data = getXvmScaleData(rating)
+    if data is None:
+        return -1
+    # calculate XVM Scale
+    return next((i for i,v in enumerate(data) if v > value), 100)
 
 # xte
 
@@ -72,6 +84,7 @@ def getXtdbDataArray(vehCD):
 
 # PRIVATE
 
+_XVMSCALE_DATA_URL = 'http://stat.modxvm.com/xvmscales.json.gz'
 _WN8_DATA_URL = 'http://stat.modxvm.com/wn8.json.gz'
 _XTE_DATA_URL = 'http://stat.modxvm.com/xte.json.gz'
 _XTDB_DATA_URL = 'http://stat.modxvm.com/xtdb.json.gz'
@@ -96,6 +109,7 @@ import vehinfo_tiers
 from gun_rotation_shared import calcPitchLimitsFromDesc
 
 _vehicleInfoData = None
+_xvmscale_data = None
 _xte_data = None
 _xtdb_data = None
 
@@ -183,6 +197,7 @@ def _init():
         global _vehicleInfoData
         _vehicleInfoData = {x['vehCD']:x for x in res}
 
+        filecache.get_url(_XVMSCALE_DATA_URL, _load_xvmscale_data_callback)
         filecache.get_url(_WN8_DATA_URL, _load_wn8_data_callback)
         filecache.get_url(_XTE_DATA_URL, _load_xte_data_callback)
         filecache.get_url(_XTDB_DATA_URL, _load_xtdb_data_callback)
@@ -293,5 +308,13 @@ def _load_xtdb_data_callback(url, bytes):
         if bytes:
             global _xtdb_data
             _xtdb_data = simplejson.loads(gzip.GzipFile(fileobj=StringIO.StringIO(bytes)).read())
+    except Exception, ex:
+        err(traceback.format_exc())
+
+def _load_xvmscale_data_callback(url, bytes):
+    try:
+        if bytes:
+            global _xvmscale_data
+            _xvmscale_data = simplejson.loads(gzip.GzipFile(fileobj=StringIO.StringIO(bytes)).read())
     except Exception, ex:
         err(traceback.format_exc())

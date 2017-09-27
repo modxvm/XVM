@@ -339,16 +339,16 @@
   "markers": ${"sirmax-markers.xc":"."},
   "alpha": {
     "hp": [
-      { "value": 350,  "alpha": 100 },
-      { "value": 500,  "alpha": 50 },
+      { "value": 349,  "alpha": 100 },
+      { "value": 499,  "alpha": 50 },
       { "value": 9999, "alpha": 0 }
     ],
     "hp_ratio": [
-      { "value": 1, "alpha": "00" },
-      { "value": 10, "alpha": "100" },
-      { "value": 20, "alpha": "75" },
-      { "value": 50, "alpha": "00" },
-      { "value": 101, "alpha": "00" }
+      { "value": 0, "alpha": "00" },
+      { "value": 9, "alpha": "100" },
+      { "value": 19, "alpha": "75" },
+      { "value": 49, "alpha": "00" },
+      { "value": 100, "alpha": "00" }
     ]
   },
   "iconset": {

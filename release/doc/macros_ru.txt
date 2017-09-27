@@ -126,7 +126,7 @@ Legend:
 │ S │ {{xr}}             │ X │ X │ X │ X │ X │ X │ {{r}} всегда по шкале XVM
 │ S │ {{xte}}            │ X │ X │ X │ X │ X │ X │ потанковый рейтинг (xTE) (значения 00-99, XX для топовых показателей)
 │ S │ {{eff}}            │ X │ X │ X │ X │ X │ X │ рейтинг эффективности (РЭ) по wot-news.com: http://www.koreanrandom.com/forum/topic/13386-
-│ S │ {{wtr}}            │ X │ X │ X │ X │ X │ X │ рейтинг WTR: TODO: topic URL
+│ S │ {{wtr}}            │ X │ X │ X │ X │ X │ X │ рейтинг WTR: https://koreanrandom.com/forum/topic/41382-
 │ S │ {{wn8}}            │ X │ X │ X │ X │ X │ X │ рейтинг WN8: http://www.koreanrandom.com/forum/topic/13434-
 │ S │ {{wgr}}            │ X │ X │ X │ X │ X │ X │ рейтинг WG (ЛРИ): http://www.koreanrandom.com/forum/topic/13433-
 │ S │ {{xeff}}           │ X │ X │ X │ X │ X │ X │ шкала XVM для РЭ  (значения 00-99, XX для топовых показателей)

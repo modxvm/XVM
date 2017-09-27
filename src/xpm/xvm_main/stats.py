@@ -533,14 +533,14 @@ class _Stat(object):
 
     # XVM Scale
     def _calculateXvmScale(self, stat):
-        if 'eff' in stat and stat['eff'] > 0:
-            stat['xeff'] = xvm_scale.XEFF(stat['eff'])
-        if 'wn8' in stat and stat['wn8'] > 0:
-            stat['xwn8'] = xvm_scale.XWN8(stat['wn8'])
-        if 'wgr' in stat and stat['wgr'] > 0:
-            stat['xwgr'] = xvm_scale.XWGR(stat['wgr'])
         if 'wtr' in stat and stat['wtr'] > 0:
-            stat['xwtr'] = xvm_scale.XWTR(stat['wtr'])
+            stat['xwtr'] = vehinfo.calculateXvmScale('wtr', stat['wtr'])
+        if 'wn8' in stat and stat['wn8'] > 0:
+            stat['xwn8'] = vehinfo.calculateXvmScale('wn8',stat['wn8'])
+        if 'eff' in stat and stat['eff'] > 0:
+            stat['xeff'] = vehinfo.calculateXvmScale('eff', stat['eff'])
+        if 'wgr' in stat and stat['wgr'] > 0:
+            stat['xwgr'] = vehinfo.calculateXvmScale('wgr', stat['wgr'])
 
     # calculate Vehicle values
     def _calculateVehicleValues(self, stat, v):

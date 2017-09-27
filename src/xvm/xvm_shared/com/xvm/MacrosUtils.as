@@ -46,15 +46,19 @@ package com.xvm
                 default: return null;
             }
 
-            var color:int;
             var cfg_len:int = cfg.length;
+            if (cfg_len == 0)
+                return null;
+
+            var n:int = 0;
             for (var i:int = 0; i < cfg_len; ++i)
             {
-                var cvalue:Number = cfg[i].value;
-                color = XfwUtils.toInt(cfg[i].color, 0xFFFFFF);
-                if (value < cvalue)
+                n = i;
+                if (cfg[i].value >= value)
                     break;
             }
+
+            var color:int = XfwUtils.toInt(cfg[i].color, 0xFFFFFF);
 
             if (darker)
                 color = GraphicsUtil.darkenColor(color, 50);
@@ -89,15 +93,18 @@ package com.xvm
             }
 
             var cfg_len:int = cfg.length;
+            if (cfg_len == 0)
+                return NaN;
+
+            var n:int = 0;
             for (var i:int = 0; i < cfg_len; ++i)
             {
-                var avalue:Number = cfg[i].value;
-                var alpha:Number = cfg[i].alpha;
-                if (value < avalue)
-                    return alpha;
+                n = i;
+                if (cfg[i].value >= value)
+                    break;
             }
 
-            return NaN;
+            return cfg[n].alpha;
         }
 
         public static function getVClassColorValue(vdata:VOVehicleData, prefix:String = '#', darker:Boolean = false):String

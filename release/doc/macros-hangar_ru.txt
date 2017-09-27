@@ -93,7 +93,7 @@
 │ {{mystat.winrate}}         │ . │ . │ общий процент побед (Global Win Ratio)
 │ {{mystat.eff}}             │ . │ . │ рейтинг эффективности (РЭ) по wot-news.com: http://www.koreanrandom.com/forum/topic/13386-
 │ {{mystat.wgr}}             │ . │ . │ рейтинг WG (ЛРИ): http://www.koreanrandom.com/forum/topic/13433-
-│ {{mystat.wtr}}             │ . │ . │ рейтинг WTR: TODO: topic URL
+│ {{mystat.wtr}}             │ . │ . │ рейтинг WTR: https://koreanrandom.com/forum/topic/41382-
 │ {{mystat.wn8}}             │ . │ . │ рейтинг WN8: http://www.koreanrandom.com/forum/topic/13434-
 │ {{mystat.xeff}}            │ . │ . │ шкала XVM для РЭ  (значения 00-99, XX для топовых показателей)
 │ {{mystat.xwgr}}            │ . │ . │ шкала XVM для WN8 (значения 00-99, XX для топовых показателей)

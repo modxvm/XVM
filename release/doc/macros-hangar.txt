@@ -92,7 +92,7 @@ Legend:
 │ {{mystat.winrate}}         │ . │ . │ GWR (Global Win Ratio)
 │ {{mystat.eff}}             │ . │ . │ player efficiency: http://www.koreanrandom.com/forum/topic/13386-
 │ {{mystat.wgr}}             │ . │ . │ WG personal rating:  http://www.koreanrandom.com/forum/topic/13433-
-│ {{mystat.wtr}}             │ . │ . │ WTR rating: TODO: topic URL
+│ {{mystat.wtr}}             │ . │ . │ WTR rating: https://koreanrandom.com/forum/topic/41382-
 │ {{mystat.wn8}}             │ . │ . │ WN8 rating: http://www.koreanrandom.com/forum/topic/13434-
 │ {{mystat.xeff}}            │ . │ . │ XVM Scale for efficiency (values 00-99, XX for Tops)
 │ {{mystat.xwgr}}            │ . │ . │ XVM Scale for WG personal rating (values 00-99, XX for Tops)
