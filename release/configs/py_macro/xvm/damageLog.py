@@ -65,12 +65,12 @@ HIT_EFFECT_CODES = {
 
 RATINGS = {
     'xvm_wgr': {'name': 'xwgr', 'size': 2},
-    'xvm_wn6': {'name': 'xwn6', 'size': 2},
+    'xvm_wtr': {'name': 'xwtr', 'size': 2},
     'xvm_wn8': {'name': 'xwn8', 'size': 2},
     'xvm_eff': {'name': 'xeff', 'size': 2},
     'xvm_xte': {'name': 'xte', 'size': 2},
     'basic_wgr': {'name': 'wgr', 'size': 5},
-    'basic_wn6': {'name': 'wn6', 'size': 4},
+    'basic_wtr': {'name': 'wtr', 'size': 4},
     'basic_wn8': {'name': 'wn8', 'size': 4},
     'basic_eff': {'name': 'eff', 'size': 4},
     'basic_xte': {'name': 'xte', 'size': 2}
@@ -281,8 +281,8 @@ class Data(object):
                     stats = _stat.resp['players'][attacker['name']]
                     self.data['wn8'] = stats.get('wn8', None)
                     self.data['xwn8'] = stats.get('xwn8', None)
-                    self.data['wn6'] = stats.get('wn6', None)
-                    self.data['xwn6'] = stats.get('xwn6', None)
+                    self.data['wtr'] = stats.get('wtr', None)
+                    self.data['xwtr'] = stats.get('xwtr', None)
                     self.data['eff'] = stats.get('eff', None)
                     self.data['xeff'] = stats.get('xeff', None)
                     self.data['wgr'] = stats.get('wgr', None)
@@ -291,8 +291,8 @@ class Data(object):
                 else:
                     self.data['wn8'] = None
                     self.data['xwn8'] = None
-                    self.data['wn6'] = None
-                    self.data['xwn6'] = None
+                    self.data['wtr'] = None
+                    self.data['xwtr'] = None
                     self.data['eff'] = None
                     self.data['xeff'] = None
                     self.data['wgr'] = None
@@ -505,8 +505,8 @@ def updateValueMacros(section, value):
                   'gun-caliber': value['caliber'],
                   'wn8': value.get('wn8', None),
                   'xwn8': value.get('xwn8', None),
-                  'wn6': value.get('wn6', None),
-                  'xwn6': value.get('xwn6', None),
+                  'wtr': value.get('wtr', None),
+                  'xwtr': value.get('xwtr', None),
                   'eff': value.get('eff', None),
                   'xeff': value.get('xeff', None),
                   'wgr': value.get('wgr', None),
@@ -516,8 +516,8 @@ def updateValueMacros(section, value):
                   'c:r': '{{c:%s}}' % chooseRating,
                   'c:wn8': readColor('wn8', value.get('wn8', None)),
                   'c:xwn8': readColor('x', value.get('xwn8', None)),
-                  'c:wn6': readColor('wn6', value.get('wn6', None)),
-                  'c:xwn6': readColor('x', value.get('xwn6', None)),
+                  'c:wtr': readColor('wtr', value.get('wtr', None)),
+                  'c:xwtr': readColor('x', value.get('xwtr', None)),
                   'c:eff': readColor('eff', value.get('eff', None)),
                   'c:xeff': readColor('x', value.get('xeff', None)),
                   'c:wgr': readColor('wgr', value.get('wgr', None)),

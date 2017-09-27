@@ -24,14 +24,14 @@ package com.xvm.types.stat
         public var def:Number = NaN;           // defence (int)
         public var avglvl:Number = NaN;        // average level (float)
         public var eff:Number = NaN;           // eff (int)
-        public var wn6:Number = NaN;           // WN6 rating (int)
+        public var wtr:Number = NaN;           // WTR rating (int)
         public var wn8:Number = NaN;           // WN8 rating (int)
         public var wgr:Number = NaN;           // WG rating (int)
 
         public var winrate:Number = NaN;       // global win rate (int)
         public var xte:Number = NaN;           // xTE (int)
         public var xeff:Number = NaN;          // Eff in XVM Scale (int)
-        public var xwn6:Number = NaN;          // WN6 in XVM Scale (int)
+        public var xwtr:Number = NaN;          // WTR in XVM Scale (int)
         public var xwn8:Number = NaN;          // WN8 in XVM Scale (int)
         public var xwgr:Number = NaN;          // WG rating in XVM Scale (int)
 

@@ -5,6 +5,10 @@
   [PYTHON MACROS]
   * added macros {{py:upper('str')}}, {{py:lower('str')}}, {{py:capitalize('str')}} and {{py:title('str')}}
 
+  [RATINGS]
+  * removed rating WN6
+  * added rating WTR
+
 XVM-6.9.1.1:
   [KNOWN ISSUES]
   * Microsoft Windows XP: crash to desktop on battle loading if graphics mode is standard.

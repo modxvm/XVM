@@ -232,9 +232,10 @@
       { "value": 1880, "color": ${"def.colorRating.very_good"} },  // 1540 - 1879 - very good  (better than 99% of players)
       { "value": 9999, "color": ${"def.colorRating.unique"   } }   // 1880 - *    - unique     (better than 99.9% of players)
     ],
-    // Dynamic color by WN6 rating
-    // Динамический цвет по рейтингу WN6
-    "wn6": [
+    // TODO: calculate new values
+    // Dynamic color by WTR rating
+    // Динамический цвет по рейтингу WTR
+    "wtr": [
       { "value": 470,  "color": ${"def.colorRating.very_bad" } },  //    0 - 469  - very bad   (20% of players)
       { "value": 860,  "color": ${"def.colorRating.bad"      } },  //  470 - 859  - bad        (better than 20% of players)
       { "value": 1225, "color": ${"def.colorRating.normal"   } },  //  860 - 1224 - normal     (better than 60% of players)

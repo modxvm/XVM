@@ -501,12 +501,12 @@ class _Stat(object):
             stat['v'] = {}
         if stat.get('eff', 0) <= 0:
             stat['eff'] = None
-        if stat.get('wn6', 0) <= 0:
-            stat['wn6'] = None
         if stat.get('wn8', 0) <= 0:
             stat['wn8'] = None
         if stat.get('wgr', 0) <= 0:
             stat['wgr'] = None
+        if stat.get('wtr', 0) <= 0:
+            stat['wtr'] = None
 
     def _fix_common2(self, stat, orig_name, multiVehicles):
         if orig_name is not None:
@@ -535,12 +535,12 @@ class _Stat(object):
     def _calculateXvmScale(self, stat):
         if 'eff' in stat and stat['eff'] > 0:
             stat['xeff'] = xvm_scale.XEFF(stat['eff'])
-        if 'wn6' in stat and stat['wn6'] > 0:
-            stat['xwn6'] = xvm_scale.XWN6(stat['wn6'])
         if 'wn8' in stat and stat['wn8'] > 0:
             stat['xwn8'] = xvm_scale.XWN8(stat['wn8'])
         if 'wgr' in stat and stat['wgr'] > 0:
             stat['xwgr'] = xvm_scale.XWGR(stat['wgr'])
+        if 'wtr' in stat and stat['wtr'] > 0:
+            stat['xwtr'] = xvm_scale.XWTR(stat['wtr'])
 
     # calculate Vehicle values
     def _calculateVehicleValues(self, stat, v):

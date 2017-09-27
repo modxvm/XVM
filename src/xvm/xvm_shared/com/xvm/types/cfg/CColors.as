@@ -18,7 +18,7 @@ package com.xvm.types.cfg
         public var hp_ratio:Array;
         public var x:Array;
         public var eff:Array;
-        public var wn6:Array;
+        public var wtr:Array;
         public var wn8:Array;
         public var wgr:Array;
         public var winrate:Array;

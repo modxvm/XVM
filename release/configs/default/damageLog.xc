@@ -30,8 +30,8 @@
     {{my-alive}}          - value 'al' for alive own vehicle, '' for dead one / возвращает 'al', для живой собственной техники, '' для мертвой
     {{reloadGun}}         - gun reloading time / время перезарядки орудия 
     {{gun-caliber}}       - gun caliber / калибр орудия
-    {{wn8}}, {{xwn8}}, {{wn6}}, {{xwn6}}, {{eff}}, {{xeff}}, {{wgr}}, {{xwgr}}, {{xte}}, {{r}}                      - statistics macros (see macros.txt) / макросы статистики (смотрите macros_ru.txt)
-    {{c:wn8}}, {{c:xwn8}}, {{c:wn6}}, {{c:xwn6}}, {{c:eff}}, {{c:xeff}}, {{c:wgr}}, {{c:xwgr}}, {{c:xte}}, {{c:r}}  - statistics macros (see macros.txt) / макросы статистики (смотрите macros_ru.txt)
+    {{wn8}}, {{xwn8}}, {{wtr}}, {{xwtr}}, {{eff}}, {{xeff}}, {{wgr}}, {{xwgr}}, {{xte}}, {{r}}                      - statistics macros (see macros.txt) / макросы статистики (смотрите macros_ru.txt)
+    {{c:wn8}}, {{c:xwn8}}, {{c:wtr}}, {{c:xwtr}}, {{c:eff}}, {{c:xeff}}, {{c:wgr}}, {{c:xwgr}}, {{c:xte}}, {{c:r}}  - statistics macros (see macros.txt) / макросы статистики (смотрите macros_ru.txt)
     {{fire-duration}}     - duration of fire ("groupDamagesFromFire" must be enabled to work) / продолжительность пожара (работает только при включенной опции "groupDamagesFromFire")
     {{diff-masses}}       - vehicles weights difference during collision / разность масс техники при столкновении
     {{nation}}            - vehicle nation / нация техники

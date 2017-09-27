@@ -70,9 +70,10 @@
       { "value": 1880, "color": ${"alphaRating.very_good"} },  // 1540 - 1879 - very good  (better than 99% of players)
       { "value": 9999, "color": ${"alphaRating.unique"   } }   // 1880 - *    - unique     (better than 99.9% of players)
     ],
-    // Dynamic transparency by WN6 rating
-    // Динамическая прозрачность по рейтингу WN6
-    "wn6": [
+    // TODO: calculate new values
+    // Dynamic transparency by WTR rating
+    // Динамическая прозрачность по рейтингу WTR
+    "wtr": [
       { "value": 470,  "color": ${"alphaRating.very_bad" } },  //    0 - 469  - very bad   (20% of players)
       { "value": 860,  "color": ${"alphaRating.bad"      } },  //  470 - 859  - bad        (better than 20% of players)
       { "value": 1225, "color": ${"alphaRating.normal"   } },  //  860 - 1224 - normal     (better than 60% of players)

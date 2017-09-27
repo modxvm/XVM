@@ -96,7 +96,7 @@ def dynamic_color_rating(rating, value):
     :return: str hex "FFFFFF".
     """
     colors = config.get('colors')
-    rating = 'x' if rating in ['xeff', 'xte', 'xeff', 'xwn6', 'xwn8', 'xwgr', 'xtdb'] else rating
+    rating = 'x' if rating in ['xeff', 'xte', 'xeff', 'xwtr', 'xwn8', 'xwgr', 'xtdb'] else rating
     if (rating not in colors) or (value is None):
         return
     l = []
@@ -131,7 +131,7 @@ def color_rating(rating, value):
     :return: str hex "FFFFFF".
     """
     colors = config.get('colors')
-    rating = 'x' if rating in ['xeff', 'xte', 'xeff', 'xwn6', 'xwn8', 'xwgr', 'xtdb'] else rating
+    rating = 'x' if rating in ['xeff', 'xte', 'xeff', 'xwtr', 'xwn8', 'xwgr', 'xtdb'] else rating
     if (rating not in colors) or (value is None):
         return
     for v in colors[rating]:

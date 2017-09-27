@@ -27,7 +27,7 @@ package com.xvm
                 case Defines.DYNAMIC_COLOR_HP:              cfg = cfg_root.hp; break;
                 case Defines.DYNAMIC_COLOR_HP_RATIO:        cfg = cfg_root.hp_ratio; break;
                 case Defines.DYNAMIC_COLOR_EFF:             cfg = cfg_root.eff; break;
-                case Defines.DYNAMIC_COLOR_WN6:             cfg = cfg_root.wn6; break;
+                case Defines.DYNAMIC_COLOR_WTR:             cfg = cfg_root.wtr; break;
                 case Defines.DYNAMIC_COLOR_WN8:             cfg = cfg_root.wn8; break;
                 case Defines.DYNAMIC_COLOR_WGR:             cfg = cfg_root.wgr; break;
                 case Defines.DYNAMIC_COLOR_X:               cfg = cfg_root.x; break;
@@ -73,7 +73,7 @@ package com.xvm
                 case Defines.DYNAMIC_ALPHA_HP:              cfg = cfg_root.hp; break;
                 case Defines.DYNAMIC_ALPHA_HP_RATIO:        cfg = cfg_root.hp_ratio; break;
                 case Defines.DYNAMIC_ALPHA_EFF:             cfg = cfg_root.eff; break;
-                case Defines.DYNAMIC_ALPHA_WN6:             cfg = cfg_root.wn6; break;
+                case Defines.DYNAMIC_ALPHA_WTR:             cfg = cfg_root.wtr; break;
                 case Defines.DYNAMIC_ALPHA_WN8:             cfg = cfg_root.wn8; break;
                 case Defines.DYNAMIC_ALPHA_WGR:             cfg = cfg_root.wgr; break;
                 case Defines.DYNAMIC_ALPHA_X:               cfg = cfg_root.x; break;

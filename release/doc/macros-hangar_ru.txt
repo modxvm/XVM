@@ -93,11 +93,11 @@
 │ {{mystat.winrate}}         │ . │ . │ общий процент побед (Global Win Ratio)
 │ {{mystat.eff}}             │ . │ . │ рейтинг эффективности (РЭ) по wot-news.com: http://www.koreanrandom.com/forum/topic/13386-
 │ {{mystat.wgr}}             │ . │ . │ рейтинг WG (ЛРИ): http://www.koreanrandom.com/forum/topic/13433-
-│ {{mystat.wn6}}             │ . │ . │ рейтинг WN6: http://www.koreanrandom.com/forum/topic/13388-
+│ {{mystat.wtr}}             │ . │ . │ рейтинг WTR: TODO: topic URL
 │ {{mystat.wn8}}             │ . │ . │ рейтинг WN8: http://www.koreanrandom.com/forum/topic/13434-
 │ {{mystat.xeff}}            │ . │ . │ шкала XVM для РЭ  (значения 00-99, XX для топовых показателей)
 │ {{mystat.xwgr}}            │ . │ . │ шкала XVM для WN8 (значения 00-99, XX для топовых показателей)
-│ {{mystat.xwn6}}            │ . │ . │ шкала XVM для WN6 (значения 00-99, XX для топовых показателей)
+│ {{mystat.xwtr}}            │ . │ . │ шкала XVM для WTR (значения 00-99, XX для топовых показателей)
 │ {{mystat.xwn8}}            │ . │ . │ шкала XVM для WG  (значения 00-99, XX для топовых показателей)
 │ {{mystat.avglvl}}          │ . │ . │ средний уровень техники игрока
 │ {{mystat.battles}}         │ . │ . │ общее количество боев
@@ -112,11 +112,11 @@
 │ {{mystat.c_winrate}}       │ . │ . │ динамический цвет по общему проценту побед
 │ {{mystat.c_eff}}           │ . │ . │ динамический цвет по рейтингу эффективности (РЭ)
 │ {{mystat.c_wgr}}           │ . │ . │ динамический цвет по WG
-│ {{mystat.c_wn6}}           │ . │ . │ динамический цвет по WN6
+│ {{mystat.c_wtr}}           │ . │ . │ динамический цвет по WTR
 │ {{mystat.c_wn8}}           │ . │ . │ динамический цвет по WN8
 │ {{mystat.c_xeff}}          │ . │ . │ динамический цвет по шкале XVM для РЭ
 │ {{mystat.c_xwgr}}          │ . │ . │ динамический цвет по шкале XVM для WG 
-│ {{mystat.c_xwn6}}          │ . │ . │ динамический цвет по шкале XVM для WN6
+│ {{mystat.c_xwtr}}          │ . │ . │ динамический цвет по шкале XVM для WTR
 │ {{mystat.c_xwn8}}          │ . │ . │ динамический цвет по шкале XVM для WN8
 │ {{mystat.c_avglvl}}        │ . │ . │ динамический цвет по среднему уровню техники
 │ {{mystat.c_battles}}       │ . │ . │ динамический цвет по количеству боев

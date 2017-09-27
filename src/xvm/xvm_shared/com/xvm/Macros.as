@@ -325,13 +325,13 @@ package com.xvm
             "x-enabled", "x-sense-on", "x-spotted", "x-fire", "x-overturned", "x-drowning"];
 
         private const STAT_MACROS:Vector.<String> = new <String>[
-            "xvm-user", "flag", "clanrank", "topclan", "region", "comment", "avglvl", "xte", "xeff", "xwn6",
-            "xwn8", "xwn", "xwgr", "eff", "wn6", "wn8", "wn", "wgr", "r", "xr", "winrate", "rating", "battles",
+            "xvm-user", "flag", "clanrank", "topclan", "region", "comment", "avglvl", "xte", "xeff", "xwtr",
+            "xwn8", "xwgr", "eff", "wtr", "wn8", "wgr", "r", "xr", "winrate", "rating", "battles",
             "wins", "kb", "t-winrate", "t-rating", "t-battles", "t-wins", "t-kb", "t-hb", "tdb", "xtdb", "tdv",
-            "tfb", "tsb", "c:xte", "c:xeff", "c:xwn6", "c:xwn8", "c:xwn", "c:xwgr", "c:eff", "c:wn6", "c:wn8",
-            "c:wn", "c:wgr", "c:r", "c:xr", "c:winrate", "c:rating", "c:kb", "c:avglvl", "c:t-winrate",
+            "tfb", "tsb", "c:xte", "c:xeff", "c:xwtr", "c:xwn8", "c:xwgr", "c:eff", "c:wtr", "c:wn8",
+            "c:wgr", "c:r", "c:xr", "c:winrate", "c:rating", "c:kb", "c:avglvl", "c:t-winrate",
             "c:t-rating", "c:t-battles", "c:tdb", "c:xtdb", "c:tdv", "c:tfb", "c:tsb", "a:xte", "a:xeff",
-            "a:xwn6", "a:xwn8", "a:xwn", "a:xwgr", "a:eff", "a:wn6", "a:wn8", "a:wn", "a:wgr", "a:r", "a:xr",
+            "a:xwtr", "a:xwn8", "a:xwgr", "a:eff", "a:wtr", "a:wn8", "a:wgr", "a:r", "a:xr",
             "a:winrate", "a:rating", "a:kb", "a:avglvl", "a:t-winrate", "a:t-rating", "a:t-battles", "a:tdb",
             "a:xtdb", "a:tdv", "a:tfb", "a:tsb"];
 
@@ -956,8 +956,8 @@ package com.xvm
                 case "xr":
                 case "xte":
                 case "xwgr":
-                case "xwn":
-                case "xwn6":
+                case "xwtr":
+                case "xwn8":
                 case "xeff":
                 case "xtdb":
                     if (name == "r" && Config.networkServicesSettings.scale != "xvm")
@@ -1178,22 +1178,18 @@ package com.xvm
             pdata["xte"] = isNaN(stat.v.xte) || stat.v.xte <= 0 ? null : stat.v.xte == 100 ? "XX" : (stat.v.xte < 10 ? "0" : "") + stat.v.xte;
             // {{xeff}}
             pdata["xeff"] = isNaN(stat.xeff) ? null : stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff;
-            // {{xwn6}}
-            pdata["xwn6"] = isNaN(stat.xwn6) ? null : stat.xwn6 == 100 ? "XX" : (stat.xwn6 < 10 ? "0" : "") + stat.xwn6;
+            // {{xwtr}}
+            pdata["xwtr"] = isNaN(stat.xwtr) ? null : stat.xwtr == 100 ? "XX" : (stat.xwtr < 10 ? "0" : "") + stat.xwtr;
             // {{xwn8}}
             pdata["xwn8"] = isNaN(stat.xwn8) ? null : stat.xwn8 == 100 ? "XX" : (stat.xwn8 < 10 ? "0" : "") + stat.xwn8;
-            // {{xwn}}
-            pdata["xwn"] = pdata["xwn8"];
             // {{xwgr}}
             pdata["xwgr"] = isNaN(stat.xwgr) ? null : stat.xwgr == 100 ? "XX" : (stat.xwgr < 10 ? "0" : "") + stat.xwgr;
             // {{eff}}
             pdata["eff"] = isNaN(stat.eff) ? null : Math.round(stat.eff);
-            // {{wn6}}
-            pdata["wn6"] = isNaN(stat.wn6) ? null : Math.round(stat.wn6);
+            // {{wtr}}
+            pdata["wtr"] = isNaN(stat.wtr) ? null : Math.round(stat.wtr);
             // {{wn8}}
             pdata["wn8"] = isNaN(stat.wn8) ? null : Math.round(stat.wn8);
-            // {{wn}}
-            pdata["wn"] = pdata["wn8"];
             // {{wgr}}
             pdata["wgr"] = isNaN(stat.wgr) ? null : Math.round(stat.wgr);
             // {{r}}
@@ -1240,22 +1236,18 @@ package com.xvm
             pdata["c:xte"] = isNaN(stat.v.xte) || stat.v.xte <= 0 ? null : MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xte, "#");
             // {{c:xeff}}
             pdata["c:xeff"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#");
-            // {{c:xwn6}}
-            pdata["c:xwn6"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn6, "#");
+            // {{c:xwtr}}
+            pdata["c:xwtr"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwtr, "#");
             // {{c:xwn8}}
             pdata["c:xwn8"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8, "#");
-            // {{c:xwn}}
-            pdata["c:xwn"] = pdata["c:xwn8"]
             // {{c:xwgr}}
             pdata["c:xwgr"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwgr, "#");
             // {{c:eff}}
             pdata["c:eff"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, stat.eff, "#");
-            // {{c:wn6}}
-            pdata["c:wn6"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WN6, stat.wn6, "#");
+            // {{c:wtr}}
+            pdata["c:wtr"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WTR, stat.wtr, "#");
             // {{c:wn8}}
             pdata["c:wn8"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8, "#");
-            // {{c:wn}}
-            pdata["c:wn"] = pdata["c:wn8"];
             // {{c:wgr}}
             pdata["c:wgr"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WGR, stat.wgr, "#");
             // {{c:r}}
@@ -1293,22 +1285,18 @@ package com.xvm
             pdata["a:xte"] = isNaN(stat.v.xte) || stat.v.xte <= 0 ? NaN : MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.v.xte);
             // {{a:xeff}}
             pdata["a:xeff"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xeff);
-            // {{a:xwn6}}
-            pdata["a:xwn6"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn6);
+            // {{a:xwtr}}
+            pdata["a:xwtr"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwtr);
             // {{a:xwn8}}
             pdata["a:xwn8"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn8);
-            // {{a:xwn}}
-            pdata["a:xwn"] = pdata["a:xwn8"];
             // {{a:xwgr}}
             pdata["a:xwgr"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwgr);
             // {{a:eff}}
             pdata["a:eff"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_EFF, stat.eff);
-            // {{a:wn6}}
-            pdata["a:wn6"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN6, stat.wn6);
+            // {{a:wtr}}
+            pdata["a:wtr"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WTR, stat.wtr);
             // {{a:wn8}}
             pdata["a:wn8"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN8, stat.wn8);
-            // {{a:wn}}
-            pdata["a:wn"] = pdata["a:wn8"];
             // {{a:wgr}}
             pdata["a:wgr"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WGR, stat.wgr);
             // {{a:r}}
@@ -1407,12 +1395,12 @@ package com.xvm
         private const RATING_MATRIX:Object =
         {
             xvm_wgr:   { name: "xwgr", def: "--" },
-            xvm_wn6:   { name: "xwn6", def: "--" },
+            xvm_wtr:   { name: "xwtr", def: "--" },
             xvm_wn8:   { name: "xwn8", def: "--" },
             xvm_eff:   { name: "xeff", def: "--" },
             xvm_xte:   { name: "xte",  def: "--" },
             basic_wgr: { name: "wgr",  def: "-----" },
-            basic_wn6: { name: "wn6",  def: "----" },
+            basic_wtr: { name: "wtr",  def: "----" },
             basic_wn8: { name: "wn8",  def: "----" },
             basic_eff: { name: "eff",  def: "----" },
             basic_xte: { name: "xte",  def: "--" }

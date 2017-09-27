@@ -15,7 +15,7 @@ package com.xvm.types.stat
         public var frg:Number = NaN;           // frags (int)
         public var def:Number = NaN;           // defence (int)
         public var e:Number = NaN;             // eff (int)
-        public var wn6:Number = NaN;           // WN6 rating (int)
+        public var wtr:Number = NaN;           // WTR rating (int)
         public var wn8:Number = NaN;           // WN8 rating (int)
         public var wgr:Number = NaN;           // WG rating (int)
 

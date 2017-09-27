@@ -42,9 +42,9 @@ package com.xvm
         public static const DYNAMIC_COLOR_TDV:int = 8;
         public static const DYNAMIC_COLOR_TFB:int = 9;
         public static const DYNAMIC_COLOR_TSB:int = 10;
-        public static const DYNAMIC_COLOR_WN6:int = 11;
-        public static const DYNAMIC_COLOR_WN8:int = 12;
-        public static const DYNAMIC_COLOR_WGR:int = 13;
+        public static const DYNAMIC_COLOR_WN8:int = 11;
+        public static const DYNAMIC_COLOR_WGR:int = 12;
+        public static const DYNAMIC_COLOR_WTR:int = 13;
         public static const DYNAMIC_COLOR_X:int = 14;
         public static const DYNAMIC_COLOR_AVGLVL:int = 15;
         public static const DYNAMIC_COLOR_WN8EFFD:int = 16;
@@ -62,9 +62,9 @@ package com.xvm
         public static const DYNAMIC_ALPHA_TDV:int = 8;
         public static const DYNAMIC_ALPHA_TFB:int = 9;
         public static const DYNAMIC_ALPHA_TSB:int = 10;
-        public static const DYNAMIC_ALPHA_WN6:int = 11;
-        public static const DYNAMIC_ALPHA_WN8:int = 12;
-        public static const DYNAMIC_ALPHA_WGR:int = 13;
+        public static const DYNAMIC_ALPHA_WN8:int = 11;
+        public static const DYNAMIC_ALPHA_WGR:int = 12;
+        public static const DYNAMIC_ALPHA_WTR:int = 13;
         public static const DYNAMIC_ALPHA_X:int = 14;
         public static const DYNAMIC_ALPHA_AVGLVL:int = 15;
 
