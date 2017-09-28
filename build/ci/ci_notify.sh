@@ -11,6 +11,17 @@ source /var/xvm/ci_config.sh
 source "$XVMBUILD_ROOT_PATH/build/xvm-build.conf"
 source "$XVMBUILD_ROOT_PATH/build/library.sh"
 
+load_repositorystats(){
+    #read xvm revision and hash
+    pushd "$XVMBUILD_ROOT_PATH"/ > /dev/null
+        export XVMBUILD_XVM_BRANCH=$(hg parent --template "{branch}") || exit 1
+        export XVMBUILD_XVM_HASH=$(hg parent --template "{node|short}") || exit 1
+        export XVMBUILD_XVM_REVISION=$(hg parent --template "{rev}") || exit 1
+        export XVMBUILD_XVM_COMMITMSG=$(hg parent --template "{desc}") || exit 1
+        export XVMBUILD_XVM_COMMITAUTHOR=$(hg parent --template "{author}" | sed 's/<.*//') || exit 1
+    popd > /dev/null
+}
+
 htmlencode()
 {
   local result=$(echo "$1" | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g;')

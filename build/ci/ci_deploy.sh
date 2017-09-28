@@ -12,6 +12,25 @@ source "$XVMBUILD_ROOT_PATH/build/xvm-build.conf"
 source "$XVMBUILD_ROOT_PATH/src/xfw/build/xfw-build.conf"
 source "$XVMBUILD_ROOT_PATH/build/library.sh"
 
+load_repositorystats(){
+    #read xvm revision and hash
+    pushd "$XVMBUILD_ROOT_PATH"/ > /dev/null
+        export XVMBUILD_XVM_BRANCH=$(hg parent --template "{branch}") || exit 1
+        export XVMBUILD_XVM_HASH=$(hg parent --template "{node|short}") || exit 1
+        export XVMBUILD_XVM_REVISION=$(hg parent --template "{rev}") || exit 1
+        export XVMBUILD_XVM_COMMITMSG=$(hg parent --template "{desc}") || exit 1
+        export XVMBUILD_XVM_COMMITAUTHOR=$(hg parent --template "{author}" | sed 's/<.*//') || exit 1
+    popd > /dev/null
+
+    #read xfw revision and hash
+    pushd "$XVMBUILD_ROOT_PATH"/src/xfw/ > /dev/null
+        export XVMBUILD_XFW_BRANCH=$(hg parent --template "{branch}") || exit 1
+        export XVMBUILD_XFW_HASH=$(hg parent --template "{node|short}") || exit 1
+        export XVMBUILD_XFW_REVISION=$(hg parent --template "{rev}") || exit 1
+    popd > /dev/null
+}
+
+
 pack_xvm(){
     echo ""
     echo "Packing build"
