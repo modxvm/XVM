@@ -4,7 +4,7 @@
 # XVM build system
 
 currentdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-source "$currentdir"/../../build/library.sh
+source "$currentdir"/../../src/xfw/build/library.sh
 
 detect_os
 detect_flex

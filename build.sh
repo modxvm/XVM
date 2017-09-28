@@ -6,7 +6,7 @@
 XVMBUILD_ROOT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$XVMBUILD_ROOT_PATH"
 
-source ./build/library.sh
+source ./src/xfw/build/library.sh
 source ./build/xvm-build.conf
 source ./src/xfw/build/xfw-build.conf
 
@@ -50,6 +50,25 @@ extend_path()
 {
     export PATH=$PATH:"$XVMBUILD_ROOT_PATH"/build/bin/java/:"$XVMBUILD_ROOT_PATH"/build/bin/msil/:"$XVMBUILD_ROOT_PATH"/build/bin/"$OS"_"$arch"/
 }
+
+load_repositorystats(){
+    #read xvm revision and hash
+    pushd "$XVMBUILD_ROOT_PATH"/ > /dev/null
+        export XVMBUILD_XVM_BRANCH=$(hg parent --template "{branch}") || exit 1
+        export XVMBUILD_XVM_HASH=$(hg parent --template "{node|short}") || exit 1
+        export XVMBUILD_XVM_REVISION=$(hg parent --template "{rev}") || exit 1
+        export XVMBUILD_XVM_COMMITMSG=$(hg parent --template "{desc}") || exit 1
+        export XVMBUILD_XVM_COMMITAUTHOR=$(hg parent --template "{author}" | sed 's/<.*//') || exit 1
+    popd > /dev/null
+
+    #read xfw revision and hash
+    pushd "$XVMBUILD_ROOT_PATH"/src/xfw/ > /dev/null
+        export XVMBUILD_XFW_BRANCH=$(hg parent --template "{branch}") || exit 1
+        export XVMBUILD_XFW_HASH=$(hg parent --template "{node|short}") || exit 1
+        export XVMBUILD_XFW_REVISION=$(hg parent --template "{rev}") || exit 1
+    popd > /dev/null
+}
+
 
 ##########################
 ####  BUILD FUNCTIONS ####

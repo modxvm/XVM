@@ -6,7 +6,7 @@
 XVMINST_ROOT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 XVMBUILD_ROOT_PATH="$XVMINST_ROOT_PATH/../../"
 
-source "$XVMBUILD_ROOT_PATH"/build/library.sh
+source "$XVMBUILD_ROOT_PATH"/src/xfw/build/library.sh
 source "$XVMBUILD_ROOT_PATH"/build/xvm-build.conf
 
 ##########################

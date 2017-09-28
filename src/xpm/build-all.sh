@@ -11,7 +11,7 @@ XPM_RUN_TEST=${XPM_RUN_TEST:=1}
 
 ### Find Python executable
 currentdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-source "$currentdir"/../../build/library.sh
+source "$currentdir"/../../src/xfw/build/library.sh
 
 detect_coreutils
 detect_python
