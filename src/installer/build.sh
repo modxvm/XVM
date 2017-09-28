@@ -27,6 +27,15 @@ extend_path()
     export PATH="$XVMBUILD_ROOT_PATH/build/bin/Windows_i686/innosetup/:$PATH"
 }
 
+load_repositorystats(){
+    #read xvm revision and hash
+    pushd "$XVMBUILD_ROOT_PATH"/ > /dev/null
+        export XVMBUILD_XVM_BRANCH=$(hg parent --template "{branch}") || exit 1
+        export XVMBUILD_XVM_HASH=$(hg parent --template "{node|short}") || exit 1
+        export XVMBUILD_XVM_REVISION=$(hg parent --template "{rev}") || exit 1
+    popd > /dev/null
+}
+
 clean_directories()
 {
     rm -rf "$XVMINST_ROOT_PATH/temp"
@@ -113,29 +122,6 @@ build_run(){
     popd >/dev/null
 }
 
-build_sign(){
-    pushd "$XVMINST_ROOT_PATH/output" >/dev/null
-    
-    if [ "$OS" == "Linux" ]; then
-        osslsigncode sign \
-            -certs "$XVMINST_SIGN_FILE_CERT_SHA256" \
-            -key "$XVMINST_SIGN_FILE_KEY" \
-            -pass "$XVMINST_SIGN_PASS" \
-            -h sha256 \
-            -n "$XVMINST_SIGN_APP_NAME" \
-            -i "$XVMINST_SIGN_APP_WEBSITE" \
-            -ts "$XVMINST_SIGN_TIMESTAMP_SHA256" \
-            -in "./setup_xvm.exe" \
-            -out "./setup_xvm_signed_sha256.exe"
-
-        mv ./setup_xvm_signed_sha256.exe ./setup_xvm.exe
-    else
-        echo "[WARN] [INSTALLER] Signing supported only on Linux"
-    fi
-
-    popd >/dev/null
-}
-
 build_deploy(){
     pushd "$XVMINST_ROOT_PATH/" >/dev/null
 
@@ -143,6 +129,12 @@ build_deploy(){
     mv ./output/setup_xvm.exe ./output/"$XVMBUILD_XVM_BRANCH"/latest_"$XVMBUILD_XVM_BRANCH"_xvm.exe
     cp ./output/"$XVMBUILD_XVM_BRANCH"/latest_"$XVMBUILD_XVM_BRANCH"_xvm.exe ./output/"$XVMBUILD_XVM_BRANCH"/"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_BRANCH"_xvm.exe
 
+    popd >/dev/null
+}
+
+build_sign(){
+    pushd "$XVMINST_ROOT_PATH/output" >/dev/null
+    sign_file ./setup_xvm.exe
     popd >/dev/null
 }
 
@@ -164,7 +156,7 @@ main(){
 
     build_run
 
-    if [ "$XVMINST_SIGN" != "" ]; then
+    if [ "$XVMBUILD_SIGN" != "" ]; then
         build_sign
     fi
 

@@ -9,10 +9,10 @@ export XVMBUILD_URL_REPO=https://bitbucket.org/XVM/xvm/commits
 
 export XVMBUILD_OUTPUT_PATH=/var/download
 
-export XVM_SIGN=true
-export XVM_SIGN_FILE_KEY='/key.pem'
-export XVM_SIGN_FILE_CERT_SHA256='/cert.pem'
-export XVM_SIGN_PASS='12345'
-export XVM_SIGN_TIMESTAMP_SHA256='http://timestamp.comodoca.com/?td=sha256'
-export XVM_SIGN_APP_NAME='XVM installer'
-export XVM_SIGN_APP_WEBSITE='http://modxvm.com/'
+export XVMBUILD_SIGN=true
+export XVMBUILD_SIGN_FILE_KEY='/key.pem'
+export XVMBUILD_SIGN_FILE_CERT_SHA256='/cert.pem'
+export XVMBUILD_SIGN_PASS='12345'
+export XVMBUILD_SIGN_TIMESTAMP_SHA256='http://timestamp.comodoca.com/?td=sha256'
+export XVMBUILD_SIGN_APP_NAME='XVM installer'
+export XVMBUILD_SIGN_APP_WEBSITE='http://modxvm.com/'
