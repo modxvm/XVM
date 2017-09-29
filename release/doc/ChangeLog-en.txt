@@ -1,18 +1,5 @@
-﻿XVM-6.9.2-dev:
-  [MISC]
-  * updated texts/battletype section with text replacements for {{battletype}} macro
-
-  [PYTHON MACROS]
-  * added macros {{py:upper('str')}}, {{py:lower('str')}}, {{py:capitalize('str')}} and {{py:title('str')}}
-
+﻿XVM-7.0.0:
   [RATINGS]
-  * removed rating WN6
-  * removed macros:
-      {{wn6}}, {{xwn6}}, {{c:wn6}}, {{c:xwn6}}, {{a:wn6}}, {{a:xwn6}},
-      {{mystat.wn6}}, {{mystat.xwn6}}, {{mystat.c_wn6}}, {{mystat.c_xwn6}}
-  * removed config sections:
-      "alpha"/"wn6"
-      "colors"/"wn6"
   * added rating WTR
   * added macros:
       {{wtr}}, {{xwtr}}, {{c:wtr}}, {{c:xwtr}}, {{a:wtr}}, {{a:xwtr}},
@@ -22,6 +9,19 @@
       "colors"/"wtr"
   * updated color and alpha values boundaries for all ratings
   * color and alpha values boundaries for XVM scale are updated automatically every day
+  * removed rating WN6
+  * removed macros:
+      {{wn6}}, {{xwn6}}, {{c:wn6}}, {{c:xwn6}}, {{a:wn6}}, {{a:xwn6}},
+      {{mystat.wn6}}, {{mystat.xwn6}}, {{mystat.c_wn6}}, {{mystat.c_xwn6}}
+  * removed config sections:
+      "alpha"/"wn6"
+      "colors"/"wn6"
+
+  [MISC]
+  * updated texts/battletype section with text replacements for {{battletype}} macro
+
+  [PYTHON MACROS]
+  * added macros {{py:upper('str')}}, {{py:lower('str')}}, {{py:capitalize('str')}} and {{py:title('str')}}
 
 XVM-6.9.1.1:
   [KNOWN ISSUES]
