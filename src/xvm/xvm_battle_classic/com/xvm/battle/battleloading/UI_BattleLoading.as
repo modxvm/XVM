@@ -84,6 +84,11 @@ package com.xvm.battle.battleloading
             super.setCompVisible(value);
         }
 
+        override public function set visible(value:Boolean):void
+        {
+            super.visible = value && BattleGlobalData.battleLoadingVisible;
+        }
+
         // PRIVATE
 
         private function logBriefConfigurationInfo():void
