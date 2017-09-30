@@ -70,7 +70,7 @@ post_ipb()
   XVMBUILD_IPB_REQURL="$XVMBUILD_IPB_SERVER/api/forums/posts"
   XVMBUILD_IPB_REQBODY="key=$XVMBUILD_IPB_APIKEY&author=$XVMBUILD_IPB_USERID&topic=$XVMBUILD_IPB_TOPICID&post=$XVMBUILD_IPB_TEXT"
 
-  curl -k -sS -m 1 -H "Content-Type: application/x-www-form-urlencoded" -H "User-Agent: XVM Build Server\r\n" -X POST --data "$XVMBUILD_IPB_REQBODY" "$XVMBUILD_IPB_REQURL" --output /dev/null
+  curl -k -sS -m 2 -H "Content-Type: application/x-www-form-urlencoded" -H "User-Agent: XVM Build Server\r\n" -X POST --data "$XVMBUILD_IPB_REQBODY" "$XVMBUILD_IPB_REQURL" --output /dev/null || true
 }
 
 load_repositorystats
