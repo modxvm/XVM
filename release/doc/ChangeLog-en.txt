@@ -1,4 +1,14 @@
-﻿XVM-7.0.0:
+﻿XVM-7.0.1:
+  [KNOWN ISSUES]
+  * Microsoft Windows XP: crash to desktop on battle loading if graphics mode is standard.
+ 
+  [GENERAL]
+  * fix battle initialization
+ 
+XVM-7.0.0:
+  [KNOWN ISSUES]
+  * Microsoft Windows XP: crash to desktop on battle loading if graphics mode is standard.
+
   [RATINGS]
   * added rating WTR
   * added macros:
