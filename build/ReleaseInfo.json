@@ -1,31 +1,31 @@
 ﻿{
     "RU": {
-        "ver": "7.0.1",
+        "ver": "7.0.2",
         "wot": "0.9.20.0",
         "message": " • Добавлен рейтинг WTR\nПодробности на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
     },
     "EU": {
-        "ver": "7.0.1",
+        "ver": "7.0.2",
         "wot": "0.9.20.0",
         "message": " • Added WTR rating\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "NA": {
-        "ver": "7.0.1",
+        "ver": "7.0.2",
         "wot": "0.9.20.0",
         "message": " • Added WTR rating\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "ASIA": {
-        "ver": "7.0.1",
+        "ver": "7.0.2",
         "wot": "0.9.20.0",
         "message": " • Added WTR rating\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "CN": {
-        "ver": "7.0.1",
+        "ver": "7.0.2",
         "wot": "0.9.20.0",
         "message": " • Added WTR rating\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "CT":  {
-        "ver": "7.0.1",
+        "ver": "7.0.2",
         "wot": "0.9.20.0",
         "message": " • Added WTR rating\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     }
