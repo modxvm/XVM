@@ -12,6 +12,7 @@ XPM_RUN_TEST=${XPM_RUN_TEST:=1}
 ### Find Python executable
 currentdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 source "$currentdir"/../../src/xfw/build/library.sh
+source "$currentdir"/../../build/xvm-build.conf
 
 detect_coreutils
 detect_python
@@ -100,6 +101,7 @@ version_template=$(hg parent --template "__revision__ = '{rev}'\n__branch__ = '{
 # create __version__.py files
 for dir in $(find . -maxdepth 1 -type "d" ! -path "."); do
   echo "# This file was created automatically from build script" > $dir/__version__.py
+  echo "__xvm_version__ = '$XVMBUILD_XVM_VERSION'" >> $dir/__version__.py
   echo "$version_template" >> $dir/__version__.py
 done
 #echo "$(($(date +%s%N)-$st))"
