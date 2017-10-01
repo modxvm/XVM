@@ -326,12 +326,12 @@ package com.xvm
 
         private const STAT_MACROS:Vector.<String> = new <String>[
             "xvm-user", "flag", "clanrank", "topclan", "region", "comment", "avglvl", "xte", "xeff", "xwtr",
-            "xwn8", "xwgr", "eff", "wtr", "wn8", "wgr", "r", "xr", "winrate", "rating", "battles",
+            "xwn8", "xwgr", "eff", "wtr", "wn8", "wgr", "r", "xr", "xwr", "winrate", "rating", "battles",
             "wins", "kb", "t-winrate", "t-rating", "t-battles", "t-wins", "t-kb", "t-hb", "tdb", "xtdb", "tdv",
             "tfb", "tsb", "c:xte", "c:xeff", "c:xwtr", "c:xwn8", "c:xwgr", "c:eff", "c:wtr", "c:wn8",
-            "c:wgr", "c:r", "c:xr", "c:winrate", "c:rating", "c:kb", "c:avglvl", "c:t-winrate",
+            "c:wgr", "c:r", "c:xr", "c:xwr", "c:winrate", "c:rating", "c:kb", "c:avglvl", "c:t-winrate",
             "c:t-rating", "c:t-battles", "c:tdb", "c:xtdb", "c:tdv", "c:tfb", "c:tsb", "a:xte", "a:xeff",
-            "a:xwtr", "a:xwn8", "a:xwgr", "a:eff", "a:wtr", "a:wn8", "a:wgr", "a:r", "a:xr",
+            "a:xwtr", "a:xwn8", "a:xwgr", "a:eff", "a:wtr", "a:wn8", "a:wgr", "a:r", "a:xr", "a:xwr",
             "a:winrate", "a:rating", "a:kb", "a:avglvl", "a:t-winrate", "a:t-rating", "a:t-battles", "a:tdb",
             "a:xtdb", "a:tdv", "a:tfb", "a:tsb"];
 
@@ -960,6 +960,7 @@ package com.xvm
                 case "xwn8":
                 case "xeff":
                 case "xtdb":
+                case "xwr":
                     if (name == "r" && Config.networkServicesSettings.scale != "xvm")
                         break;
                     if (value == 'XX')
@@ -1184,6 +1185,8 @@ package com.xvm
             pdata["xwn8"] = isNaN(stat.xwn8) ? null : stat.xwn8 == 100 ? "XX" : (stat.xwn8 < 10 ? "0" : "") + stat.xwn8;
             // {{xwgr}}
             pdata["xwgr"] = isNaN(stat.xwgr) ? null : stat.xwgr == 100 ? "XX" : (stat.xwgr < 10 ? "0" : "") + stat.xwgr;
+            // {{xwr}}
+            pdata["xwr"] = isNaN(stat.xwr) ? null : stat.xwr == 100 ? "XX" : (stat.xwr < 10 ? "0" : "") + stat.xwr;
             // {{eff}}
             pdata["eff"] = isNaN(stat.eff) ? null : Math.round(stat.eff);
             // {{wtr}}
@@ -1242,6 +1245,8 @@ package com.xvm
             pdata["c:xwn8"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8, "#");
             // {{c:xwgr}}
             pdata["c:xwgr"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwgr, "#");
+            // {{c:xwr}}
+            pdata["c:xwr"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwr, "#");
             // {{c:eff}}
             pdata["c:eff"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, stat.eff, "#");
             // {{c:wtr}}
@@ -1291,6 +1296,8 @@ package com.xvm
             pdata["a:xwn8"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn8);
             // {{a:xwgr}}
             pdata["a:xwgr"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwgr);
+            // {{a:xwr}}
+            pdata["a:xwr"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwr);
             // {{a:eff}}
             pdata["a:eff"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_EFF, stat.eff);
             // {{a:wtr}}

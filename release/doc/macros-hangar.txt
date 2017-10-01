@@ -94,6 +94,7 @@ Legend:
 │ {{mystat.wgr}}             │ . │ . │ WG personal rating:  http://www.koreanrandom.com/forum/topic/13433-
 │ {{mystat.wtr}}             │ . │ . │ WTR rating: https://koreanrandom.com/forum/topic/41382-
 │ {{mystat.wn8}}             │ . │ . │ WN8 rating: http://www.koreanrandom.com/forum/topic/13434-
+│ {{mystat.xwr}}             │ . │ . │ XVM Scale for GWR (values 00-99, XX for Tops)
 │ {{mystat.xeff}}            │ . │ . │ XVM Scale for efficiency (values 00-99, XX for Tops)
 │ {{mystat.xwgr}}            │ . │ . │ XVM Scale for WG personal rating (values 00-99, XX for Tops)
 │ {{mystat.xwtr}}            │ . │ . │ XVM Scale for WTR (values 00-99, XX for Tops)
@@ -113,6 +114,7 @@ Legend:
 │ {{mystat.c_wgr}}           │ . │ . │ color depending on WG personal rating
 │ {{mystat.c_wtr}}           │ . │ . │ color depending on WTR rating
 │ {{mystat.c_wn8}}           │ . │ . │ color depending on WN8 rating
+│ {{mystat.c_xwr}}           │ . │ . │ color depending on XVM Scale for GWR
 │ {{mystat.c_xeff}}          │ . │ . │ color depending on XVM Scale for efficiency
 │ {{mystat.c_xwgr}}          │ . │ . │ color depending on XVM Scale for WG personal rating
 │ {{mystat.c_xwtr}}          │ . │ . │ color depending on XVM Scale for WTR

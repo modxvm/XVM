@@ -541,6 +541,8 @@ class _Stat(object):
             stat['xeff'] = vehinfo.calculateXvmScale('eff', stat['eff'])
         if 'wgr' in stat and stat['wgr'] > 0:
             stat['xwgr'] = vehinfo.calculateXvmScale('wgr', stat['wgr'])
+        if 'winrate' in stat and stat['winrate'] > 0:
+            stat['xwr'] = vehinfo.calculateXvmScale('win', stat['winrate'])
 
     # calculate Vehicle values
     def _calculateVehicleValues(self, stat, v):

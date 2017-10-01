@@ -1,6 +1,11 @@
 ﻿XVM-7.0.3-dev:
- [KNOWN ISSUES]
+  [KNOWN ISSUES]
   * Microsoft Windows XP: crash to desktop on battle loading if graphics mode is standard.
+
+  [MACROS]
+    * added macros:
+      {{xwr}}, {{c:xwr}}, {{a:xwr}},
+      {{mystat.xwr}}, {{mystat.c_xwr}}, {{mystat.a_xwr}}
 
 XVM-7.0.2:
   [KNOWN ISSUES]

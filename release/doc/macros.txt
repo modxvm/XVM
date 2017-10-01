@@ -133,6 +133,7 @@ Legend:
 │ S │ {{xwn8}}           │ X │ X │ X │ X │ X │ X │ XVM Scale for WN8 (values 00-99, XX for Tops)
 │ S │ {{xwgr}}           │ X │ X │ X │ X │ X │ X │ XVM Scale for WG personal rating (values 00-99, XX for Tops)
 │ S │ {{winrate}}        │ X │ X │ X │ X │ X │ X │ GWR (Global Win Ratio)
+│ S │ {{xwr}}            │ X │ X │ X │ X │ X │ X │ XVM Scale for GWR
 │ S │ {{battles}}        │ X │ X │ X │ X │ X │ X │ total battles count
 │ S │ {{wins}}           │ X │ X │ X │ X │ X │ X │ total wins count
 │ S │ {{kb}}             │ X │ X │ X │ X │ X │ X │ number of kilo-battles (total battles count divided by 1000)
@@ -158,6 +159,7 @@ Legend:
 │ S │ {{c:wn8}}          │ X │ X │ X │ X │ X │ X │ color depending on WN8 rating
 │ S │ {{c:wgr}}          │ X │ X │ X │ X │ X │ X │ color depending on WG rating
 │ S │ {{c:winrate}}      │ X │ X │ X │ X │ X │ X │ color depending on GWR
+│ S │ {{c:xwr}}          │ X │ X │ X │ X │ X │ X │ color depending on XVM Scale for GWR
 │ S │ {{c:kb}}           │ X │ X │ X │ X │ X │ X │ color depending on kilo-battles
 │ S │ {{c:avglvl}}       │ X │ X │ X │ X │ X │ X │ color depending on average level of tanks
 │ S │ {{c:t-winrate}}    │ X │ X │ X │ X │ X │ X │ color depending on current vehicle win ratio

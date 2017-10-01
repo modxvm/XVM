@@ -95,6 +95,7 @@
 │ {{mystat.wgr}}             │ . │ . │ рейтинг WG (ЛРИ): http://www.koreanrandom.com/forum/topic/13433-
 │ {{mystat.wtr}}             │ . │ . │ рейтинг WTR: https://koreanrandom.com/forum/topic/41382-
 │ {{mystat.wn8}}             │ . │ . │ рейтинг WN8: http://www.koreanrandom.com/forum/topic/13434-
+│ {{mystat.xwr}}             │ . │ . │ шкала XVM для общего процента побед (значения 00-99, XX для топовых показателей)
 │ {{mystat.xeff}}            │ . │ . │ шкала XVM для РЭ  (значения 00-99, XX для топовых показателей)
 │ {{mystat.xwgr}}            │ . │ . │ шкала XVM для WN8 (значения 00-99, XX для топовых показателей)
 │ {{mystat.xwtr}}            │ . │ . │ шкала XVM для WTR (значения 00-99, XX для топовых показателей)
@@ -114,6 +115,7 @@
 │ {{mystat.c_wgr}}           │ . │ . │ динамический цвет по WG
 │ {{mystat.c_wtr}}           │ . │ . │ динамический цвет по WTR
 │ {{mystat.c_wn8}}           │ . │ . │ динамический цвет по WN8
+│ {{mystat.c_xwr}}           │ . │ . │ динамический цвет по шкале XVM для общего процента побед
 │ {{mystat.c_xeff}}          │ . │ . │ динамический цвет по шкале XVM для РЭ
 │ {{mystat.c_xwgr}}          │ . │ . │ динамический цвет по шкале XVM для WG 
 │ {{mystat.c_xwtr}}          │ . │ . │ динамический цвет по шкале XVM для WTR

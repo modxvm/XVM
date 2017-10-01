@@ -82,6 +82,8 @@ package com.xvm.lobby
                         return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwgr, "#");
                     case "c_xwtr":
                         return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwtr, "#");
+                    case "c_xwr":
+                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwr, "#");
                     case "c_xwn8":
                         return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8, "#");
                     case "c_avglvl":
@@ -104,6 +106,8 @@ package com.xvm.lobby
                         return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwgr);
                     case "a_xwtr":
                         return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwtr);
+                    case "a_xwr":
+                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwr);
                     case "a_xwn8":
                         return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn8);
                     case "a_avglvl":

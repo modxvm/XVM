@@ -34,6 +34,7 @@ package com.xvm.types.stat
         public var xwtr:Number = NaN;          // WTR in XVM Scale (int)
         public var xwn8:Number = NaN;          // WN8 in XVM Scale (int)
         public var xwgr:Number = NaN;          // WG rating in XVM Scale (int)
+        public var xwr:Number = NaN;           // GWR in XVM Scale (int)
 
         public var emblem:String = null;       // url for clan icon
         public var x_emblem:String = null;     // local cache url for clan icon
