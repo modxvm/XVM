@@ -58,7 +58,7 @@ package com.xvm
                     break;
             }
 
-            var color:int = XfwUtils.toInt(cfg[i].color, 0xFFFFFF);
+            var color:int = XfwUtils.toInt(cfg[n].color, 0xFFFFFF);
 
             if (darker)
                 color = GraphicsUtil.darkenColor(color, 50);
