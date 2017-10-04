@@ -6,6 +6,9 @@
     * added macros:
       {{xwr}}, {{c:xwr}}, {{a:xwr}},
       {{mystat.xwr}}, {{mystat.c_xwr}}, {{mystat.a_xwr}}
+      
+  [TOOLTIPS]
+  * added display appropriate vehicles in tooltips for shells
 
 XVM-7.0.2:
   [KNOWN ISSUES]
