@@ -507,8 +507,6 @@
     "usa-A80_T26_E4_SuperPershing":          {"name": null, "short": null},
     "usa-A81_T95_E2":                        {"name": null, "short": null},
     "usa-A83_T110E4":                        {"name": null, "short": null},
-    "usa-A84_M48A1":                         {"name": null, "short": null},
-    "usa-A84_M48A1_IGR":                     {"name": null, "short": null},
     "usa-A85_T110E3":                        {"name": null, "short": null},
     "usa-A86_T23E3":                         {"name": null, "short": null},
     "usa-A87_M44":                           {"name": null, "short": null},
