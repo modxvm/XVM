@@ -26,7 +26,6 @@ package com.xvm.lobby.ui.profile
             try
             {
                 stackComponent.viewRatingBtn.y += 6;
-                listComponent.addEventListener(TechniqueListComponent.DATA_CHANGED, initializeInHangarCheckBox, false, 0, true);
                 technique = new Technique(this, Xfw.cmd(XvmCommands.GET_PLAYER_NAME), 0);
                 addChild(technique);
             }
@@ -38,7 +37,6 @@ package com.xvm.lobby.ui.profile
 
         override protected function onDispose():void
         {
-            listComponent.removeEventListener(TechniqueListComponent.DATA_CHANGED, initializeInHangarCheckBox);
             if (technique)
             {
                 removeChild(technique);
@@ -55,6 +53,7 @@ package com.xvm.lobby.ui.profile
                 if (technique)
                 {
                     technique.fixInitData(param1);
+                    param1.isInHangarSelected = Config.config.userInfo.inHangarFilterEnabled;
                 }
             }
             catch (ex:Error)
@@ -114,20 +113,6 @@ package com.xvm.lobby.ui.profile
             catch (ex:Error)
             {
                 Logger.err(ex);
-            }
-        }
-
-        // PRIVATE
-
-        private function initializeInHangarCheckBox():void
-        {
-            listComponent.removeEventListener(TechniqueListComponent.DATA_CHANGED, initializeInHangarCheckBox);
-            if (_baseDisposed)
-                return;
-            if (listComponent.visible)
-            {
-                checkBoxExistence.selected = Config.config.userInfo.inHangarFilterEnabled;
-                setIsInHangarSelectedS(checkBoxExistence.selected);
             }
         }
     }
