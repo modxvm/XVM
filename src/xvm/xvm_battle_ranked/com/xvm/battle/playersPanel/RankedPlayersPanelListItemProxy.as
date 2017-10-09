@@ -292,7 +292,7 @@ package com.xvm.battle.playersPanel
                 //Logger.add("RankedPlayersPanelListItemProxy.onConfigLoaded()");
                 bcfg = Config.config.battle;
                 pcfg = Config.config.playersPanel;
-                mcfg = pcfg[UI_RankedPlayersPanel.PLAYERS_PANEL_STATE_NAMES[(state == -1 || state == PLAYERS_PANEL_STATE.HIDEN) ? PLAYERS_PANEL_STATE.LONG : state]];
+                mcfg = pcfg[UI_RankedPlayersPanel.PLAYERS_PANEL_STATE_NAMES[(state == -1 || state == PLAYERS_PANEL_STATE.HIDDEN) ? PLAYERS_PANEL_STATE.LONG : state]];
                 ncfg = pcfg.none;
 
                 // revert mirrored icon and X offset
@@ -418,7 +418,7 @@ package com.xvm.battle.playersPanel
                         }
                     }
                     break;
-                case PLAYERS_PANEL_STATE.HIDEN:
+                case PLAYERS_PANEL_STATE.HIDDEN:
                 case -1:
                     BattleState.playersPanelWidthLeft = 0;
                     BattleState.playersPanelWidthRight = 0;
@@ -452,7 +452,7 @@ package com.xvm.battle.playersPanel
         private function updateStandardFields():void
         {
             //Logger.add("update: " + state);
-            if (state != -1 && state != PLAYERS_PANEL_STATE.HIDEN)
+            if (state != -1 && state != PLAYERS_PANEL_STATE.HIDDEN)
             {
                 if (ui.fragsTF.visible)
                 {
@@ -517,7 +517,7 @@ package com.xvm.battle.playersPanel
 
         private function updatePositions():void
         {
-            if (state != -1 && state != PLAYERS_PANEL_STATE.HIDEN)
+            if (state != -1 && state != PLAYERS_PANEL_STATE.HIDDEN)
             {
                 if (mcfg.standardFields)
                 {
@@ -849,7 +849,7 @@ package com.xvm.battle.playersPanel
             switch (state)
             {
                 case -1:
-                case PLAYERS_PANEL_STATE.HIDEN:
+                case PLAYERS_PANEL_STATE.HIDDEN:
                     if (extraFieldsHidden)
                     {
                         extraFieldsHidden.visible = true;

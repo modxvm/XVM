@@ -28,7 +28,7 @@ package com.xvm.battle.playersPanel
 
         public static const PLAYERS_PANEL_STATE_NAMES:Array = [ "none", "short", "medium", "medium2", "large" ];
         public static const PLAYERS_PANEL_STATE_MAP:Object = {
-            none: PLAYERS_PANEL_STATE.HIDEN,
+            none: PLAYERS_PANEL_STATE.HIDDEN,
             short: PLAYERS_PANEL_STATE.SHORT,
             medium: PLAYERS_PANEL_STATE.MEDIUM,
             medium2: PLAYERS_PANEL_STATE.LONG,
@@ -90,13 +90,19 @@ package com.xvm.battle.playersPanel
         override protected function configUI():void
         {
             super.configUI();
-            listLeft.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMoveHandler);
-            listRight.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMoveHandler);
+            listLeft.removeEventListener(MouseEvent.ROLL_OVER, xfw_onListRollOverHandler);
+            listLeft.removeEventListener(MouseEvent.ROLL_OVER, xfw_onListRollOutHandler);
+            listLeft.addEventListener(MouseEvent.ROLL_OVER, onListRollOverHandler, false, 0, true);
+            listLeft.addEventListener(MouseEvent.ROLL_OUT, onListRollOutHandler, false, 0, true);
+            listLeft.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMoveHandler, false, 0, true);
+            listRight.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMoveHandler, false, 0, true);
         }
 
         override protected function onDispose():void
         {
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
+            listLeft.removeEventListener(MouseEvent.ROLL_OVER, onListRollOverHandler);
+            listLeft.removeEventListener(MouseEvent.ROLL_OUT, onListRollOutHandler);
             listLeft.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMoveHandler);
             listRight.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMoveHandler);
             super.onDispose();
@@ -126,7 +132,7 @@ package com.xvm.battle.playersPanel
                     {
                         if (!Macros.FormatBooleanGlobal(cfg[PLAYERS_PANEL_STATE_NAMES[state]].enabled, true))
                         {
-                            xfw_requestState((state + 1) % PLAYERS_PANEL_STATE_NAMES.length);
+                            requestState((state + 1) % PLAYERS_PANEL_STATE_NAMES.length);
                             return;
                         }
                     }
@@ -219,12 +225,12 @@ package com.xvm.battle.playersPanel
             }
         }
 
-        override protected function onListRollOverHandler(e:MouseEvent):void
+        private function onListRollOverHandler(e:MouseEvent):void
         {
             _isMouseRollOver = true;
         }
 
-        override protected function onListRollOutHandler(e:MouseEvent):void
+        private function onListRollOutHandler(e:MouseEvent):void
         {
             _isMouseRollOver = false;
         }
@@ -252,11 +258,11 @@ package com.xvm.battle.playersPanel
             if (_isInteractive && _isMouseRollOver && !_isStateRequested && mopt_expandAreaWidth > 0)
             {
                 var isInExpandArea:Boolean = (e.stageX < mopt_expandAreaWidth) || (e.stageX > App.appWidth - mopt_expandAreaWidth);
-                if (this.xfw_expandState == PLAYERS_PANEL_STATE.NONE && isInExpandArea)
+                if (this.expandState == PLAYERS_PANEL_STATE.NONE && isInExpandArea)
                 {
                     super.onListRollOverHandler(e);
                 }
-                else if (this.xfw_expandState != PLAYERS_PANEL_STATE.NONE && !isInExpandArea)
+                else if (this.expandState != PLAYERS_PANEL_STATE.NONE && !isInExpandArea)
                 {
                     super.onListRollOutHandler(e);
                 }
@@ -377,14 +383,14 @@ package com.xvm.battle.playersPanel
                 if (m_savedState == PLAYERS_PANEL_STATE.NONE)
                     m_savedState = listLeft.state;
                 //Logger.add(String(m_altMode));
-                xfw_requestState(m_altMode);
+                requestState(m_altMode);
             }
             else
             {
                 if (m_savedState != PLAYERS_PANEL_STATE.NONE)
                 {
                     //Logger.add(String(m_savedState));
-                    xfw_requestState(fix_state(m_savedState));
+                    requestState(fix_state(m_savedState));
                 }
                 m_savedState = PLAYERS_PANEL_STATE.NONE;
             }
