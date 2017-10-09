@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 17.08.2017
+    // Last update: 09.10.2017
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -163,6 +163,7 @@
     "germany-G10_PzIII_AusfJ":               {"name": null, "short": null},
     "germany-G110_Typ_205":                  {"name": null, "short": null},
     "germany-G112_KanonenJagdPanzer":        {"name": null, "short": null},
+    "germany-G112_KanonenJagdPanzer_105":    {"name": null, "short": null},
     "germany-G113_SP_I_C":                   {"name": null, "short": null},
     "germany-G114_Rheinmetall_Skorpian":     {"name": null, "short": null},
     "germany-G114_Skorpian":                 {"name": null, "short": null},
@@ -412,6 +413,7 @@
     "uk-GB86_Centurion_Action_X":            {"name": null, "short": null},
     "uk-GB87_Chieftain_T95_turret":          {"name": null, "short": null},
     "uk-GB88_T95_Chieftain_turret":          {"name": null, "short": null},
+    "uk-GB91_Super_Conqueror":               {"name": null, "short": null},
     "usa-A01_T1_Cunningham":                 {"name": null, "short": null},
     "usa-A01_T1_Cunningham_bot":             {"name": null, "short": null},
     "usa-A02_M2_lt":                         {"name": null, "short": null},
@@ -437,6 +439,7 @@
     "usa-A10_M6":                            {"name": null, "short": null},
     "usa-A111_T25_Pilot":                    {"name": null, "short": null},
     "usa-A112_T71E2":                        {"name": null, "short": null},
+    "usa-A112_T71E2R":                       {"name": null, "short": null},
     "usa-A115_Chrysler_K":                   {"name": null, "short": null},
     "usa-A116_XM551":                        {"name": null, "short": null},
     "usa-A117_T26E5":                        {"name": null, "short": null},
@@ -444,6 +447,8 @@
     "usa-A118_M4_Thunderbolt":               {"name": null, "short": null},
     "usa-A11_T29":                           {"name": null, "short": null},
     "usa-A11_T29_IGR":                       {"name": null, "short": null},
+    "usa-A120_M48A5":                        {"name": null, "short": null},
+    "usa-A120_M48A5_IGR":                    {"name": null, "short": null},
     "usa-A12_T32":                           {"name": null, "short": null},
     "usa-A13_T34_hvy":                       {"name": null, "short": null},
     "usa-A13_T34_hvy_BF":                    {"name": null, "short": null},
@@ -502,8 +507,6 @@
     "usa-A80_T26_E4_SuperPershing":          {"name": null, "short": null},
     "usa-A81_T95_E2":                        {"name": null, "short": null},
     "usa-A83_T110E4":                        {"name": null, "short": null},
-    "usa-A84_M48A1":                         {"name": null, "short": null},
-    "usa-A84_M48A1_IGR":                     {"name": null, "short": null},
     "usa-A85_T110E3":                        {"name": null, "short": null},
     "usa-A86_T23E3":                         {"name": null, "short": null},
     "usa-A87_M44":                           {"name": null, "short": null},
@@ -517,7 +520,6 @@
     "usa-A95_T95_E6":                        {"name": null, "short": null},
     "usa-A97_M41_Bulldog":                   {"name": null, "short": null},
     "usa-A99_T92_LT":                        {"name": null, "short": null},
-    "usa-Sexton_I":                          {"name": null, "short": null},
     "ussr-Observer":                         {"name": null, "short": null},
     "ussr-R01_IS":                           {"name": null, "short": null},
     "ussr-R02_SU-85":                        {"name": null, "short": null},
@@ -573,6 +575,7 @@
     "ussr-R134_Object_252U":                 {"name": null, "short": null},
     "ussr-R135_T_103":                       {"name": null, "short": null},
     "ussr-R13_KV-1s":                        {"name": null, "short": null},
+    "ussr-R140_M4_Loza":                     {"name": null, "short": null},
     "ussr-R143_T_29":                        {"name": null, "short": null},
     "ussr-R146_STG":                         {"name": null, "short": null},
     "ussr-R146_STG_Tday":                    {"name": null, "short": null},
