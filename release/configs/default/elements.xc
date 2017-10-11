@@ -58,7 +58,7 @@
     "battleTicker"           - ?                                                     / ?
     "battleTimer"            - Таймер боя                                            / Battle timer
     "consumablesPanel"       - Панель снарядов и расходников                         / Ammo bar
-    "damageInfoPanel"        - ?                                                     / ?
+    "damageInfoPanel"        - Внутриигровая панель критов от навыка "эксперт"       / Ingame crits panel by "expert" skill
     "damagePanel"            - Панель повреждений                                    / Damage panel
     "debugPanel"             - Панель пинга/лага/фпс                                 / Debug panel (ping/lag/fps)
     "destroyTimersPanel"     - Таймер до уничтожения (утопление, переворот)          / Destroy timers (drowning, overturned)
