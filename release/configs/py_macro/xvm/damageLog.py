@@ -146,13 +146,7 @@ damageInfoTANKMAN = ('TANKMAN_HIT',
 
 
 def keyLower(_dict):
-    if _dict is not None:
-        dict_return = {}
-        for key in _dict.iterkeys():
-            dict_return[key.lower()] = _dict[key]
-        return dict_return
-    else:
-        return None
+    return {key.lower(): _dict[key] for key in _dict.iterkeys()} if _dict is not None else None
 
 
 def readyConfig(section):
@@ -187,25 +181,25 @@ class Data(object):
     bootcampController = dependency.descriptor(IBootcampController)
 
     def __init__(self):
-        def isGoldShell(n, s):
-            if (n != 'icons') and (n != 'xmlns:xmlref'):
-                xmlCtx = (None, xmlPath + '/' + n)
-                price = 'gold' in _xml.readPrice(xmlCtx, s, 'price')
-                return _xml.readInt(xmlCtx, s, 'id', 0, 65535) if price else None
-
-        def isStunningShell(n, s):
-            if n != 'icons':
-                xmlCtx = (None, xmlPath + '/' + n)
-                stunDuration = _xml.readStringOrNone(xmlCtx, s, 'stunDuration')
-                return _xml.readInt(xmlCtx, s, 'id', 0, 65535) if stunDuration else None
 
         self.reset()
         self.shells = {}
         self.shells_stunning = {}
+        xmlPath = ''
         for nation in nations.NAMES:
             xmlPath = '%s%s%s%s' % (ITEM_DEFS_PATH, 'vehicles/', nation, '/components/shells.xml')
-            self.shells_stunning[nation] = [isStunningShell(name, subsection) for name, subsection in ResMgr.openSection(xmlPath).items() if isStunningShell(name, subsection) is not None]
-            self.shells[nation] = [isGoldShell(name, subsection) for name, subsection in ResMgr.openSection(xmlPath).items() if isGoldShell(name, subsection) is not None]
+            self.shells_stunning[nation] = []
+            self.shells[nation] = []
+            for n, s in ResMgr.openSection(xmlPath).items():
+                if (n != 'icons') and (n != 'xmlns:xmlref'):
+                    xmlCtx = (None, '{}/{}'.format(xmlPath, n))
+                    price = 'gold' in _xml.readPrice(xmlCtx, s, 'price')
+                    i = _xml.readInt(xmlCtx, s, 'id', 0, 65535)
+                    if price:
+                        self.shells_stunning[nation].append(i)
+                    stunDuration = _xml.readStringOrNone(xmlCtx, s, 'stunDuration')
+                    if stunDuration:
+                        self.shells[nation].append(i)
         ResMgr.purge(xmlPath, True)
 
     def reset(self):
@@ -619,7 +613,7 @@ class DamageLog(_Base):
         self.callEvent = True
 
     def reset(self, section):
-        _Base.reset(self)
+        super(DamageLog, self).reset()
         self.listLog = []
         self.section = section
         self.dataLog = {}
@@ -634,7 +628,7 @@ class DamageLog(_Base):
     def setOutParameters(self, numberLine):
         updateValueMacros(self.section, self.dataLog)
         if numberLine == ADD_LINE:
-            self.listLog.insert(0, parser(config.get(self.S_FORMAT_HISTORY)))
+            self.listLog = [parser(config.get(self.S_FORMAT_HISTORY))] + self.listLog
         else:
             self.listLog[numberLine] = parser(config.get(self.S_FORMAT_HISTORY))
         if (self.section == SECTION_LOG) or (self.section == SECTION_LOG_ALT):
@@ -643,20 +637,21 @@ class DamageLog(_Base):
                 self.y = parser(config.get(self.S_Y))
             self.shadow = shadow_value(self.section)
 
-    def addLine(self, attackerID, attackReasonID):
+    def addLine(self, attackerID=None, attackReasonID=None):
         if not (attackerID is None or attackReasonID is None):
             self.dictVehicle[attackerID][attackReasonID] = {'time': BigWorld.serverTime(),
-                                                            'damage': data.data['damage'],
-                                                            'criticalHit': data.data['criticalHit'],
+                                                            'damage':  self.dataLog['damage'],
+                                                            'criticalHit':  self.dataLog['criticalHit'],
                                                             'numberLine': 0,
                                                             'beginFire': beginFire if attackReasonID == 1 else None}
         self.dataLog['number'] = len(self.listLog) + 1
         self.dataLog['fireDuration'] = BigWorld.time() - beginFire if attackReasonID == 1 else None
         self.setOutParameters(ADD_LINE)
         for attacker in self.dictVehicle:
-            for attack in self.dictVehicle[attacker]:
+            dictAttacker = self.dictVehicle[attacker]
+            for attack in dictAttacker:
                 if (attacker != attackerID) or (attack != attackReasonID):
-                    self.dictVehicle[attacker][attack]['numberLine'] += 1
+                    dictAttacker[attack]['numberLine'] += 1
 
     def output(self):
         if config.get(self.S_SHOW_HIT_NO_DAMAGE) or data.data['isDamage']:
@@ -664,19 +659,19 @@ class DamageLog(_Base):
             isGroupFire = (data.data['attackReasonID'] == 1) and config.get(self.S_GROUP_DAMAGE_FIRE)
             if isGroupRamming_WorldCollision or isGroupFire:
                 self.dataLog = data.data.copy()
-                attackerID = data.data['attackerID']
-                attackReasonID = data.data['attackReasonID']
+                attackerID = self.dataLog['attackerID']
+                attackReasonID = self.dataLog['attackReasonID']
                 if attackerID in self.dictVehicle:
                     if (attackReasonID in self.dictVehicle[attackerID]) and ((BigWorld.serverTime() - self.dictVehicle[attackerID][attackReasonID]['time']) < 1.0):
                         key = self.dictVehicle[attackerID][attackReasonID]
                         key['time'] = BigWorld.serverTime()
-                        key['damage'] += data.data['damage']
-                        key['criticalHit'] = (key['criticalHit'] or data.data['criticalHit'])
+                        key['damage'] += self.dataLog['damage']
+                        key['criticalHit'] = (key['criticalHit'] or self.dataLog['criticalHit'])
                         if key['damage'] > 0:
                             self.dataLog['hitEffect'] = 'armor_pierced'
                         self.dataLog['criticalHit'] = key['criticalHit']
                         self.dataLog['damage'] = key['damage']
-                        self.dataLog['dmgRatio'] = self.dataLog['damage'] * 100 // data.data['maxHealth']
+                        self.dataLog['dmgRatio'] = self.dataLog['damage'] * 100 // self.dataLog['maxHealth']
                         self.dataLog['number'] = len(self.listLog)
                         if (attackReasonID == 1) and (key['beginFire'] is not None):
                             self.dataLog['fireDuration'] = BigWorld.time() - key['beginFire']
@@ -688,13 +683,12 @@ class DamageLog(_Base):
                 else:
                     self.dictVehicle[attackerID] = {}
                     self.addLine(attackerID, attackReasonID)
-                if self.callEvent:
-                    as_event('ON_HIT')
             else:
                 self.dataLog = data.data
-                self.addLine(None, None)
-                if self.callEvent:
-                    as_event('ON_HIT')
+                self.addLine()
+            if self.callEvent:
+                as_event('ON_HIT')
+
 
 
 class LastHit(_Base):
@@ -715,7 +709,7 @@ class LastHit(_Base):
         self.timerLastHit = None
 
     def reset(self):
-        _Base.reset(self)
+        super(LastHit, self).reset()
         self.strLastHit = ''
         if (self.timerLastHit is not None) and self.timerLastHit.isStarted:
             self.timerLastHit.stop()
@@ -744,29 +738,29 @@ class LastHit(_Base):
         isGroupFire = (data.data['attackReasonID'] == 1) and config.get(self.S_GROUP_DAMAGE_FIRE)
         if isGroupRamming_WorldCollision or isGroupFire:
             dataLog = data.data.copy()
-            attackerID = data.data['attackerID']
-            attackReasonID = data.data['attackReasonID']
+            attackerID = dataLog['attackerID']
+            attackReasonID = dataLog['attackReasonID']
             if attackerID in self.dictVehicle:
                 if attackReasonID in self.dictVehicle[attackerID]:
                     key = self.dictVehicle[attackerID][attackReasonID]
                     if ('time' in key) and ('damage' in key) and ((BigWorld.serverTime() - key['time']) < 1):
                         key['time'] = BigWorld.serverTime()
-                        key['damage'] += data.data['damage']
+                        key['damage'] += dataLog['damage']
                         dataLog['damage'] = key['damage']
-                        dataLog['dmgRatio'] = dataLog['damage'] * 100 // data.data['maxHealth']
+                        dataLog['dmgRatio'] = dataLog['damage'] * 100 // dataLog['maxHealth']
                         if (attackReasonID == 1) and (key['beginFire'] is not None):
                             dataLog['fireDuration'] = BigWorld.time() - key['beginFire']
                         else:
                             dataLog['fireDuration'] = None
                 else:
                     self.dictVehicle[attackerID][attackReasonID] = {'time': BigWorld.serverTime(),
-                                                                    'damage': data.data['damage'],
+                                                                    'damage': dataLog['damage'],
                                                                     'beginFire': beginFire if attackReasonID == 1 else None}
                     dataLog['fireDuration'] = BigWorld.time() - beginFire if attackReasonID == 1 else None
             else:
                 self.dictVehicle[attackerID] = {}
                 self.dictVehicle[attackerID][attackReasonID] = {'time': BigWorld.serverTime(),
-                                                                'damage': data.data['damage'],
+                                                                'damage': dataLog['damage'],
                                                                 'beginFire': beginFire if attackReasonID == 1 else None}
                 dataLog['fireDuration'] = BigWorld.time() - beginFire if attackReasonID == 1 else None
             self.setOutParameters(dataLog)
@@ -885,8 +879,7 @@ def Vehicle_onEnterWorld(self, prereqs):
 
         autoReloadConfig = config.get('autoReloadConfig')
         if not (autoReloadConfig or damageLogConfig):
-            for section in SECTIONS:
-                damageLogConfig[section] = readyConfig(section)
+            damageLogConfig = {section: readyConfig(section) for section in SECTIONS}
         on_fire = 0
         data.data['oldHealth'] = self.health
         data.data['maxHealth'] = self.health
