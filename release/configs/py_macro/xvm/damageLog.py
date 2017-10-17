@@ -196,10 +196,10 @@ class Data(object):
                     price = 'gold' in _xml.readPrice(xmlCtx, s, 'price')
                     i = _xml.readInt(xmlCtx, s, 'id', 0, 65535)
                     if price:
-                        self.shells_stunning[nation].append(i)
+                        self.shells[nation].append(i)
                     stunDuration = _xml.readStringOrNone(xmlCtx, s, 'stunDuration')
                     if stunDuration:
-                        self.shells[nation].append(i)
+                        self.shells_stunning[nation].append(i)
         ResMgr.purge(xmlPath, True)
 
     def reset(self):
