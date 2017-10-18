@@ -132,7 +132,10 @@ def _DestroyTimersPanel__setFireInVehicle(self, isInFire):
 @registerEvent(DestroyTimersPanel, '_DestroyTimersPanel__showDestroyTimer')
 def _DestroyTimersPanel__showDestroyTimer(self, value):
     if xmqp.is_active() and g_appLoader.getSpaceID() == GUI_GLOBAL_SPACE_ID.BATTLE:
-        code, totalTime, level = value
+        if len(value) == 4:
+            code, totalTime, level, startTime = value
+        else:
+            (code, totalTime, level), startTime = value, None
         xmqp.call({
             'event':EVENTS.XMQP_VEHICLE_TIMER,
             'enable':True,
