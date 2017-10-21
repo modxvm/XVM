@@ -335,9 +335,9 @@ class Data(object):
                 break
 
     def timeReload(self, attackerID):
-        if self.data['attackerID']:
-            player = BigWorld.player()
-            attacker = player.arena.vehicles.get(attackerID)
+        player = BigWorld.player()
+        attacker = player.arena.vehicles.get(attackerID)
+        if attacker is not None:
             vehicleType = attacker['vehicleType']
             if (attacker is not None) and (vehicleType):
                 reload_orig = vehicleType.gun.reloadTime
