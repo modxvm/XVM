@@ -181,25 +181,14 @@ class Data(object):
     bootcampController = dependency.descriptor(IBootcampController)
 
     def __init__(self):
-
         self.reset()
-        self.shells = {}
-        self.shells_stunning = {}
         xmlPath = ''
         for nation in nations.NAMES:
             xmlPath = '%s%s%s%s' % (ITEM_DEFS_PATH, 'vehicles/', nation, '/components/shells.xml')
-            self.shells_stunning[nation] = []
-            self.shells[nation] = []
-            for n, s in ResMgr.openSection(xmlPath).items():
-                if (n != 'icons') and (n != 'xmlns:xmlref'):
-                    xmlCtx = (None, '{}/{}'.format(xmlPath, n))
-                    price = 'gold' in _xml.readPrice(xmlCtx, s, 'price')
-                    i = _xml.readInt(xmlCtx, s, 'id', 0, 65535)
-                    if price:
-                        self.shells[nation].append(i)
-                    stunDuration = _xml.readStringOrNone(xmlCtx, s, 'stunDuration')
-                    if stunDuration:
-                        self.shells_stunning[nation].append(i)
+            xmlCtx_s = (((None, '{}/{}'.format(xmlPath, n)), s) for n, s in ResMgr.openSection(xmlPath).items() if (n != 'icons') and (n != 'xmlns:xmlref'))
+            id_xmlCtx_s = ((_xml.readInt(xmlCtx, s, 'id', 0, 65535), xmlCtx, s) for xmlCtx, s in xmlCtx_s)
+            self.shells[nation] = [i for i, xmlCtx, s in id_xmlCtx_s if 'gold' in _xml.readPrice(xmlCtx, s, 'price')]
+            self.shells_stunning[nation] = [i for i, xmlCtx, s in id_xmlCtx_s if _xml.readStringOrNone(xmlCtx, s, 'stunDuration')]
         ResMgr.purge(xmlPath, True)
 
     def reset(self):
