@@ -183,6 +183,8 @@ class Data(object):
     def __init__(self):
         self.reset()
         xmlPath = ''
+        self.shells = {}
+        self.shells_stunning = {}
         for nation in nations.NAMES:
             xmlPath = '%s%s%s%s' % (ITEM_DEFS_PATH, 'vehicles/', nation, '/components/shells.xml')
             xmlCtx_s = (((None, '{}/{}'.format(xmlPath, n)), s) for n, s in ResMgr.openSection(xmlPath).items() if (n != 'icons') and (n != 'xmlns:xmlref'))
