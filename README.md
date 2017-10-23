@@ -7,13 +7,13 @@ If you can write code, [you can help us](https://confluence.atlassian.com/displa
 
 ### Official websites
 
-* [Homepage](http://www.modxvm.com/)
-* [News](http://www.modxvm.com/en/news/)
-* [Download XVM](http://www.modxvm.com/en/download-xvm/)
+* [Homepage](https://modxvm.com/)
+* [News](https://modxvm.com/en/news/)
+* [Download XVM](https://modxvm.com/en/download-xvm/)
 * [Nightly Builds](http://nightly.modxvm.com/) Don't use it if you are not experienced tester. Nightly Builds could be unstable or not work at all.
 * [Translation](http://www.koreanrandom.com/forum/topic/27394-/)
-* [Manual: installation and configuration](http://www.modxvm.com/en/xvm-installation-and-settings/)
-* [FAQ: frequently asked questions and answers](http://www.modxvm.com/en/faq/)
+* [Manual: installation and configuration](https://modxvm.com/en/xvm-installation-and-settings/)
+* [FAQ: frequently asked questions and answers](https://modxvm.com/en/faq/)
 
 ### Official Support Forums
 
@@ -24,7 +24,7 @@ You can write in english in any topics of our forum. You can ask your questions 
 
 Also you can change the interface language to English for your convenience:
 
-![Screenshot: How to change interface Language on forums](http://www.modxvm.com/assets/additional/kr.cm_lang_menu.png)
+![Screenshot: How to change interface Language on forums](https://modxvm.com/assets/additional/kr.cm_lang_menu.png)
 
 ##### Sections about XVM:
 

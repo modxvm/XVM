@@ -1,6 +1,6 @@
 /**
  * XVM: eXtended Visualization Mod for World of Tanks.
- * http://www.modxvm.com/
+ * https://modxvm.com/
  */
 package com.xvm.battle
 {
@@ -257,7 +257,7 @@ package com.xvm.battle
                 textField.defaultTextFormat = new TextFormat("$FieldFont", 20, 0xFFFFFF, true, null, null, null, null, TextFormatAlign.CENTER);
                 textField.autoSize = HALIGN[int(i / 3)];
                 TextFieldEx.setVerticalAutoSize(textField, VALIGN[i % 3]);
-                textField.text = "XVM Nightly Build #" + Config.config.__xvmRevision + "\n" + "get stable version on\nwww.ModXVM.com";
+                textField.text = "XVM Nightly Build #" + Config.config.__xvmRevision + "\n" + "get stable version on\nhttps://modxvm.com";
                 _watermark.addChild(textField);
             }
             battlePage.prebattleTimer.addChildAt(_watermark, 0);

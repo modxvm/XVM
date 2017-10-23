@@ -1,6 +1,6 @@
 ﻿/**
  * XVM: eXtended Visualization Mod for World of Tanks.
- * http://www.modxvm.com/
+ * https://modxvm.com/
  * @author wotunion <http://www.koreanrandom.com/forum/user/27262-wotunion/>
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */

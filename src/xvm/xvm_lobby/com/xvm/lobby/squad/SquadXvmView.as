@@ -1,6 +1,6 @@
 /**
  * XVM: eXtended Visualization Mod for World of Tanks.
- * http://www.modxvm.com/
+ * https://modxvm.com/
  * @author Pavel Máca
  */
 package com.xvm.lobby.squad

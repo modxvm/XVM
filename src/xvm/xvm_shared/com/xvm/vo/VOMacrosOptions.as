@@ -1,6 +1,6 @@
 ﻿/**
  * XVM: eXtended Visualization Mod for World of Tanks.
- * http://www.modxvm.com/
+ * https://modxvm.com/
  */
 package com.xvm.vo
 {

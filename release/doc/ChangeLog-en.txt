@@ -1,4 +1,6 @@
 ﻿XVM-7.1.1-dev:
+  [GENERAL]
+  * XVM site URL changed: http://www.modxvm.com => https://modxvm.com
 
 XVM-7.1.0:
   [KNOWN ISSUES]
@@ -1102,7 +1104,7 @@ XVM-6.1.0:
   * when enableCrewAutoReturn enabled, the checkbox is shown in the hangar for enabling/disabling
     crew auto return. Checkbox settings are stored for each tank separately.
   * added macros {{r}}, {{c:r}}, {{a:r}} - player's rating
-    (type of rating can be selected in the personal cabinet: http://www.modxvm.com/)
+    (type of rating can be selected in the personal cabinet: https://modxvm.com/)
   * added macro {{r_size}} - size of the {{r}} macro value (can be useful for fields formatting)
   * macros renamed:
       {{rating}} => {{winrate}}
@@ -1208,7 +1210,7 @@ XVM-5.4.0:
   * changed token location, now it is stored in the user preferences:
       %APPDATA%\Wargaming.net\WorldOfTanks\xvm\
     You need to reactivate XVM services (use "Add client" button in the personal cabinet on the
-    www.modxvm.com site). You can remove res_mods/xvm/db/ folder.
+    https://modxvm.com site). You can remove res_mods/xvm/db/ folder.
   * added option battleLoading/darkenNotReadyIcon for customize icons are not ready players
   * added options pingServers/leading and pingServers/topmost
   * carousel: added macro {{v.selected}}, returns 'sel' for selected, empty for others
@@ -1351,7 +1353,7 @@ XVM-5.2.1:
 XVM-5.2.0:
   [MAJOR UPDATES]
   * main config file (xvm.xc) moved to res_mods/xvm/configs
-  * statistics must be enabled in the personal cabinet on the http://www.modxvm.com/ site
+  * statistics must be enabled in the personal cabinet on the https://modxvm.com/ site
 
   [NEW FUNCTIONS]
   * localization: added Chinese (Simplified)

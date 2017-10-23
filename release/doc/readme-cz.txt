@@ -27,10 +27,10 @@
     * Ping na servery na přihlašovací obrazovce, v hangáru a před bitvou
 
 
-  Stránky projektu:             http://www.modxvm.com/
+  Stránky projektu:             https://modxvm.com/
 
   Podpora (EN):                 http://www.koreanrandom.com/forum/topic/1383-xvm
-  Nejčastější dotazy (EN):      http://www.modxvm.com/en/faq/
+  Nejčastější dotazy (EN):      https://modxvm.com/en/faq/
   Různá již připravená nastavení (RU): http://www.koreanrandom.com/forum/forum/50-custom-configurations
 
 

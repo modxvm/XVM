@@ -1,4 +1,4 @@
-""" XVM (c) www.modxvm.com 2013-2017 """
+""" XVM (c) https://modxvm.com 2013-2017 """
 
 # PUBLIC
 
@@ -37,7 +37,7 @@ from xvm_main.python.xvm import l10n
 
 _CONTACTS_DATA_VERSION = '1.0'
 _SYSTEM_MESSAGE_TPL = '''<textformat tabstops="[130]"><img src="img://../xvm/res/icons/xvm/16x16t.png"
- vspace="-5">&nbsp;<a href="#XVM_SITE#"><font color="#E2D2A2">www.modxvm.com</font></a>\n\n%VALUE%</textformat>'''
+ vspace="-5">&nbsp;<a href="#XVM_SITE#"><font color="#E2D2A2">https://modxvm.com</font></a>\n\n%VALUE%</textformat>'''
 
 
 class _Contacts:

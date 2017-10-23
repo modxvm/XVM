@@ -30,11 +30,11 @@ Zawartość:
     * Własna ikona szóstego zmysłu(+ opcjonalnie dźwięk)
     * Karuzela dla listy pojazdów
 
-  Strona projektu:  http://www.modxvm.com/
+  Strona projektu:   https://modxvm.com/
 
   Wsparcie(EN):      http://www.koreanrandom.com/forum/forum/57-xvm-english-support-and-discussions/
   Wsparcie(PL):      http://forum.worldoftanks.eu/index.php?/topic/114684-pomoc-xvm-mod-temat-zbiorczy/
-  FAQ:               http://www.modxvm.com/en/faq/
+  FAQ:               https://modxvm.com/en/faq/
   Konfiguracje:      http://www.koreanrandom.com/forum/forum/50-custom-configurations
 
 -----------------------------------------------------------

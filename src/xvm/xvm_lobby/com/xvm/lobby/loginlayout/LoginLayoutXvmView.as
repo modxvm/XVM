@@ -1,6 +1,6 @@
 /**
  * XVM: eXtended Visualization Mod for World of Tanks.
- * http://www.modxvm.com/
+ * https://modxvm.com/
  * @author Mr.A
  */
 package com.xvm.lobby.loginlayout

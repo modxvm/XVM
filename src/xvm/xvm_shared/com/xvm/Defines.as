@@ -1,6 +1,6 @@
 ﻿/**
  * XVM: eXtended Visualization Mod for World of Tanks.
- * http://www.modxvm.com/
+ * https://modxvm.com/
  */
 package com.xvm
 {
@@ -74,11 +74,6 @@ package com.xvm
         public static const FROM_ENEMY:int = 2;
         public static const FROM_SQUAD:int = 3;
         public static const FROM_PLAYER:int = 4;
-
-        //// String templates
-        //public static const SYSTEM_MESSAGE_HEADER:String =
-            //'<textformat tabstops="[130]"><img src="img://../xvm/res/icons/xvm/16x16t.png" vspace="-5">' +
-            //'&nbsp;<a href="#XVM_SITE#"><font color="#E2D2A2">www.modxvm.com</font></a>\n\n%VALUE%';
 
         // sync with constants.py: ARENA_BONUS_TYPE
         public static const BATTLE_TYPE_UNKNOWN:Number = 0;

@@ -1,4 +1,4 @@
-""" XVM (c) www.modxvm.com 2013-2017 """
+""" XVM (c) https://modxvm.com 2013-2017 """
 
 def get(key, default=None):
     return _userPrefs.get(key, default)

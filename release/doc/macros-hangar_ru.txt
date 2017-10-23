@@ -87,7 +87,7 @@
 │ {{v.selected}}             │ X │   │ 'sel' для выбранной техники, пусто - для остальной
 │ {{mystat.player_id}}       │   │ X │ ID текущего игрока
 │ {{mystat.name}}            │   │ X │ ник текущего игрока
-│ {{mystat.flag}}            │   │ X │ флаг, выбранный в личном кабинете на сайте www.modxvm.com
+│ {{mystat.flag}}            │   │ X │ флаг, выбранный в личном кабинете на сайте https://modxvm.com
 │ {{mystat.clan}}            │   │ X │ название клана
 │ {{mystat.clan_id}}         │   │ X │ ID клана
 │ {{mystat.winrate}}         │   │ X │ общий процент побед (Global Win Ratio)

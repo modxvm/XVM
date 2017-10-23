@@ -26,11 +26,11 @@
     * Автоматическая посадка всего экипажа
     * Отображение пинга серверов до входа на сервер или в бой
 
-  Сайт проекта: http://www.modxvm.com/
+  Сайт проекта: https://modxvm.com/
 
   Как написать в поддержку: http://www.koreanrandom.com/forum/topic/1644-readme/
   Поддержка:    http://www.koreanrandom.com/forum/forum/43-xvm/
-  FAQ:          http://www.modxvm.com/faq/
+  FAQ:          https://modxvm.com/faq/
   Конфиги:      http://www.koreanrandom.com/forum/forum/50-custom-configurations/
 
 -----------------------------------------------------------

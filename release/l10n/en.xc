@@ -218,7 +218,7 @@
     "lobby/crew/enable_prev_crew_tooltip": "<b><font color='#FDF4CE'>{{l10n:lobby/crew/enable_prev_crew}}</font></b>\nAutomatically return the crew that fought\nin this vehicle in the previous battle",
 
     // Profile
-    "profile/xvm_xte_tooltip": "<b><font color='#FDF4CE' size='16'>xTE</font></b>\nPer-vehicle efficiency\nMore info at <font color='#FDF4CE'>www.modxvm.com/ratings/</font>",
+    "profile/xvm_xte_tooltip": "<b><font color='#FDF4CE' size='16'>xTE</font></b>\nPer-vehicle efficiency\nMore info at <font color='#FDF4CE'>https://modxvm.com/ratings/</font>",
     "profile/xvm_xte_extended_tooltip": "<textformat tabstops='[20, 85, 140]'>{{l10n:profile/xvm_xte_tooltip}}\n\nReference values:\n\t\tdamage\tfrags\n\tCurrent:\t<font color='#FDF4CE' size='14'>{0}</font>\t<font color='#FDF4CE' size='14'>{1}</font>\n\tAverage:\t<font color='#FDF4CE' size='14'>{2}</font>\t<font color='#FDF4CE' size='14'>{3}</font>\n\tTop:\t<font color='#FDF4CE' size='14'>{4}</font>\t<font color='#FDF4CE' size='14'>{5}</font>",
 
     // Carousel

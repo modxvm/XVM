@@ -395,7 +395,7 @@
   "definition": {
     "author": "sirmax2",
     "description": "Sirmax's settings for XVM",
-    "url": "http://www.modxvm.com/",
+    "url": "https://modxvm.com/",
     "date": "10.10.2012",
     "gameVersion": "0.8.0",
     "modMinVersion": "3.0.4"

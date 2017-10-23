@@ -86,7 +86,7 @@ Legend:
 │ {{v.selected}}             │ X │   │ 'sel' for selected, empty for others
 │ {{mystat.player_id}}       │   │ X │ ID of current player
 │ {{mystat.name}}            │   │ X │ nick of current player
-│ {{mystat.flag}}            │   │ X │ flag selected in the personal cabinet on the www.modxvm.com site
+│ {{mystat.flag}}            │   │ X │ flag selected in the personal cabinet on the https://modxvm.com site
 │ {{mystat.clan}}            │   │ X │ clan name
 │ {{mystat.clan_id}}         │   │ X │ clan ID
 │ {{mystat.winrate}}         │   │ X │ GWR (Global Win Ratio)

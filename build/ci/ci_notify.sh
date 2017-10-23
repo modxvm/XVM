@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# XVM team (c) www.modxvm.com 2014-2017
+# XVM team (c) https://modxvm.com 2014-2017
 # XVM nightly build system
 
 CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"

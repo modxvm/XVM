@@ -26,10 +26,10 @@
     * Best crew auto selection
     * Ping display on login screen and before a battle
 
-  Project site:  http://www.modxvm.com/
+  Project site:  https://modxvm.com/
 
   Support:       http://www.koreanrandom.com/forum/topic/1383-xvm
-  FAQ:           http://www.modxvm.com/en/faq/
+  FAQ:           https://modxvm.com/en/faq/
   User configs:  http://www.koreanrandom.com/forum/forum/50-custom-configurations
 
 -----------------------------------------------------------

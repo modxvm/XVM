@@ -28,10 +28,10 @@
     * L'affichage du ping avant de se connecter au serveur ou avant de lancer
       une partie
 
-  Site officiel :     http://www.modxvm.com/fr/
+  Site officiel :     https://modxvm.com/fr/
 
   Support :           http://www.koreanrandom.com/forum/topic/1383-xvm (en anglais)
-  FAQ :               http://www.modxvm.com/fr/faq/
+  FAQ :               https://modxvm.com/fr/faq/
   Configurations :    http://www.koreanrandom.com/forum/forum/50-custom-configurations (en anglais)
 
 -----------------------------------------------------------

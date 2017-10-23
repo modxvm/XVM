@@ -121,7 +121,7 @@ Legend:
 │SDH│ macro              │ BL│ PP│ SF│ MM│ VM│BLb│ Description
 ├───┼────────────────────┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────────
 │ S │ {{avglvl}}         │ X │ X │ X │ X │ X │ X │ average level (tier) of tanks
-│ S │ {{r}}              │ X │ X │ X │ X │ X │ X │ player's rating (type of rating can be selected in the personal cabinet: http://www.modxvm.com/)
+│ S │ {{r}}              │ X │ X │ X │ X │ X │ X │ player's rating (type of rating can be selected in the personal cabinet: https://modxvm.com/)
 │ S │ {{xr}}             │ X │ X │ X │ X │ X │ X │ same as {{r}} but always in XVM Scale
 │ S │ {{xte}}            │ X │ X │ X │ X │ X │ X │ per-vehicle efficiency (xTE) (values 00-99, XX for Tops)
 │ S │ {{eff}}            │ X │ X │ X │ X │ X │ X │ player efficiency: http://www.koreanrandom.com/forum/topic/13386-
