@@ -1,4 +1,8 @@
-﻿XVM-7.1.1-dev:
+﻿XVM-7.1.1-ASIA-dev:
+  [GENERAL]
+  * World of Tanks 9.20.1 (ASIA only)
+
+XVM-7.1.1-dev:
   [GENERAL]
   * XVM site URL changed: http://www.modxvm.com => https://modxvm.com
   * fixed bootcamp mode
