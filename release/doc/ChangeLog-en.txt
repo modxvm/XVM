@@ -1,6 +1,7 @@
 ﻿XVM-7.1.1-dev:
   [GENERAL]
   * XVM site URL changed: http://www.modxvm.com => https://modxvm.com
+  * fixed bootcamp mode
 
 XVM-7.1.0:
   [KNOWN ISSUES]

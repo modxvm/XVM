@@ -1,6 +1,7 @@
 ﻿XVM-7.1.1-dev:
   [ОБЩЕЕ]
-  * Изменен адрес сайта XVM: http://www.modxvm.com => https://modxvm.com
+  * изменен адрес сайта XVM: http://www.modxvm.com => https://modxvm.com
+  * исправлен режим учебного полигона
 
 XVM-7.1.0:
   [ИЗВЕСТНЫЕ ПРОБЛЕМЫ]
