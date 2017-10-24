@@ -60,14 +60,14 @@
       { // background image, left part
         // фоновая картинка, левая часть.
         "x": 66,
-        "y": 160,
+        "y": 193,
         "screenHAlign": "center",
         "format": "<img src='xvm://res/icons/clock/clockBg.png' width='160' height='80'>"
       },
       { // background image, right part
         // фоновая картинка, правая часть.
         "x": 390,
-        "y": 160,
+        "y": 193,
         "screenHAlign": "center",
         "scaleX": -1,
         "format": "<img src='xvm://res/icons/clock/clockBg.png' width='160' height='80'>"
@@ -76,7 +76,7 @@
         // текстовый блок
         "updateEvent": "ON_MY_STAT_LOADED",
         "x": 185,
-        "y": 165,
+        "y": 198,
         "width": 320,
         "height": 150,
         "screenHAlign": "center",
