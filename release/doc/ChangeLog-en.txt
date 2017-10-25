@@ -1,4 +1,4 @@
-﻿XVM-7.2.0-dev:
+﻿XVM-7.2.0:
   [GENERAL]
   * World of Tanks 9.20.1.1
   * XVM site URL changed: http://www.modxvm.com => https://modxvm.com
