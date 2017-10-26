@@ -121,6 +121,8 @@ package com.xvm
                 case 23: return 'bootcamp';
                 case 24: return 'epic_random';
                 case 25: return 'epic_random_training';
+                case 26: return 'event_battles_2';
+
                 default: return 'unknown';
             }
         }

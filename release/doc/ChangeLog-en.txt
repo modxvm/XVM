@@ -1,4 +1,6 @@
 ﻿XVM-7.2.1-dev:
+[MISC]
+  * updated texts/battletype section with text replacements for {{battletype}} macro
 
 XVM-7.2.0:
   [GENERAL]
