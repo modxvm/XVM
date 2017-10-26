@@ -26,7 +26,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 09.10.2017
+    # Last update: 26.10.2017
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -151,6 +151,10 @@ _data = {
     "france:F74_AMX_M4_1949":                'amx4·49',
     "france:F74_AMX_M4_1949_Liberte":        'amx4·49',
     "france:F75_Char_de_25t":                'BChatAP',
+    "france:F77_FCM_2C_HE2017":              'Stein',
+    "france:F77_FCM_2C_HE2017_Minion":       'Stein',
+    "france:F80_FCM_F1_Mle1940_HE2017":      'Frenki',
+    "france:F80_FCM_F1_Mle1940_HE2017_Minion": 'Frenki',
     "france:F84_Somua_SM":                   'Som·SM',
     "france:F87_Batignolles-Chatillon_12t":  'BChat12t',
     "france:F88_AMX_13_105":                 '13·105',
@@ -212,6 +216,7 @@ _data = {
     "germany:G137_PzVI_Tiger_217":           'Tig217',
     "germany:G138_VK168_02":                 '168.01p',
     "germany:G13_VK3001H":                   '3001h',
+    "germany:G150_Leviathan":                'LivFan',
     "germany:G15_VK3601H":                   '3601h',
     "germany:G16_PzVIB_Tiger_II":            'Tig2',
     "germany:G16_PzVIB_Tiger_II_F":          'Tig2·h',

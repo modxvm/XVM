@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 09.10.2017
+    // Last update: 26.10.2017
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -129,6 +129,10 @@
     "france-F74_AMX_M4_1949":                {"name": null, "short": null},
     "france-F74_AMX_M4_1949_Liberte":        {"name": null, "short": null},
     "france-F75_Char_de_25t":                {"name": null, "short": null},
+    "france-F77_FCM_2C_HE2017":              {"name": null, "short": null},
+    "france-F77_FCM_2C_HE2017_Minion":       {"name": null, "short": null},
+    "france-F80_FCM_F1_Mle1940_HE2017":      {"name": null, "short": null},
+    "france-F80_FCM_F1_Mle1940_HE2017_Minion": {"name": null, "short": null},
     "france-F84_Somua_SM":                   {"name": null, "short": null},
     "france-F87_Batignolles-Chatillon_12t":  {"name": null, "short": null},
     "france-F88_AMX_13_105":                 {"name": null, "short": null},
@@ -190,6 +194,7 @@
     "germany-G137_PzVI_Tiger_217":           {"name": null, "short": null},
     "germany-G138_VK168_02":                 {"name": null, "short": null},
     "germany-G13_VK3001H":                   {"name": null, "short": null},
+    "germany-G150_Leviathan":                {"name": null, "short": null},
     "germany-G15_VK3601H":                   {"name": null, "short": null},
     "germany-G16_PzVIB_Tiger_II":            {"name": null, "short": null},
     "germany-G16_PzVIB_Tiger_II_F":          {"name": null, "short": null},
