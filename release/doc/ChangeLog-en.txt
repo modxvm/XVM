@@ -1,4 +1,11 @@
-﻿XVM-7.2.1:
+﻿XVM-7.2.2:
+  [KNOWN ISSUES]
+  * Microsoft Windows XP: crash to desktop on battle loading if graphics mode is standard.
+
+  [MISC]
+  * fixed minor issues with release package
+
+XVM-7.2.1:
   [KNOWN ISSUES]
   * Microsoft Windows XP: crash to desktop on battle loading if graphics mode is standard.
 
