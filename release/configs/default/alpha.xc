@@ -45,19 +45,19 @@
     // Dynamic transparency by percentage of remaining health.                                  
     // Динамическая прозрачность по проценту оставшегося здоровья.                              
     "hp_ratio": [                                                                               
-      { "value": 10,  "alpha": ${"alphaHP.very_low"     } },  // alpha for HP <= 10%     
-      { "value": 25,  "alpha": ${"alphaHP.low"          } },  // alpha for HP <= 25%     
-      { "value": 50,  "alpha": ${"alphaHP.average"      } },  // alpha for HP <= 50%     
+      { "value": 9.4,  "alpha": ${"alphaHP.very_low"     } },  // alpha for HP <= 10%     
+      { "value": 24.4,  "alpha": ${"alphaHP.low"          } },  // alpha for HP <= 25%     
+      { "value": 49.4,  "alpha": ${"alphaHP.average"      } },  // alpha for HP <= 50%     
       { "value": 100, "alpha": ${"alphaHP.above_average"} }   // alpha for HP > 50%      
     ],
     // Dynamic transparency for XVM Scale
     // Динамическая прозрачность по шкале XVM
     "x": [
-      { "value": 16,  "alpha": ${"alphaRating.very_bad" } },  // 00 - 16 - very bad  (20% of players)              
-      { "value": 33,  "alpha": ${"alphaRating.bad"      } },  // 17 - 33 - bad       (better than 20% of players)  
-      { "value": 52,  "alpha": ${"alphaRating.normal"   } },  // 34 - 52 - normal    (better than 60% of players)  
-      { "value": 75,  "alpha": ${"alphaRating.good"     } },  // 53 - 75 - good      (better than 90% of players)  
-      { "value": 92,  "alpha": ${"alphaRating.very_good"} },  // 76 - 92 - very good (better than 99% of players)  
+      { "value": 16.4,  "alpha": ${"alphaRating.very_bad" } },  // 00 - 16 - very bad  (20% of players)              
+      { "value": 33.4,  "alpha": ${"alphaRating.bad"      } },  // 17 - 33 - bad       (better than 20% of players)  
+      { "value": 52.4,  "alpha": ${"alphaRating.normal"   } },  // 34 - 52 - normal    (better than 60% of players)  
+      { "value": 75.4,  "alpha": ${"alphaRating.good"     } },  // 53 - 75 - good      (better than 90% of players)  
+      { "value": 92.4,  "alpha": ${"alphaRating.very_good"} },  // 76 - 92 - very good (better than 99% of players)  
       { "value": 999, "alpha": ${"alphaRating.unique"   } }   // 93 - XX - unique    (better than 99.9% of players)
     ],
     // Dynamic transparency by efficiency
@@ -103,11 +103,11 @@
     // Dynamic transparency by win percent
     // Динамическая прозрачность по проценту побед
     "winrate": [
-      { "value": 46.5, "alpha": ${"alphaRating.very_bad" } },
-      { "value": 48.5, "alpha": ${"alphaRating.bad"      } },
-      { "value": 52.5, "alpha": ${"alphaRating.normal"   } },
-      { "value": 57.5, "alpha": ${"alphaRating.good"     } },
-      { "value": 64.5, "alpha": ${"alphaRating.very_good"} },
+      { "value": 46.49, "alpha": ${"alphaRating.very_bad" } },
+      { "value": 48.49, "alpha": ${"alphaRating.bad"      } },
+      { "value": 52.49, "alpha": ${"alphaRating.normal"   } },
+      { "value": 57.49, "alpha": ${"alphaRating.good"     } },
+      { "value": 64.49, "alpha": ${"alphaRating.very_good"} },
       { "value": 100,  "alpha": ${"alphaRating.unique"   } }
     ],
     // Dynamic transparency by kilo-battles
@@ -153,32 +153,32 @@
     // Dynamic transparency by average damage efficiency on current tank
     // Динамическая прозрачность по эффективности урона за бой на текущем танке
     "tdv": [
-      { "value": 0.6, "alpha": ${"alphaRating.very_bad" } },
-      { "value": 0.8, "alpha": ${"alphaRating.bad"      } },
-      { "value": 1.0, "alpha": ${"alphaRating.normal"   } },
-      { "value": 1.3, "alpha": ${"alphaRating.good"     } },
-      { "value": 2.0, "alpha": ${"alphaRating.very_good"} },
-      { "value": 15,  "alpha": ${"alphaRating.unique"   } }
+      { "value": 0.5, "color": ${"def.colorRating.very_bad" } },
+      { "value": 0.7, "color": ${"def.colorRating.bad"      } },
+      { "value": 0.9, "color": ${"def.colorRating.normal"   } },
+      { "value": 1.2, "color": ${"def.colorRating.good"     } },
+      { "value": 1.9, "color": ${"def.colorRating.very_good"} },
+      { "value": 15,  "color": ${"def.colorRating.unique"   } }
     ],
-    // Dynamic transparency by average frags per battle on current tank
-    // Динамическая прозрачность по среднему количеству фрагов за бой на текущем танке
+    // Dynamic color by average frags per battle on current tank
+    // Динамический цвет по среднему количеству фрагов за бой на текущем танке
     "tfb": [
-      { "value": 0.6, "alpha": ${"alphaRating.very_bad" } },
-      { "value": 0.8, "alpha": ${"alphaRating.bad"      } },
-      { "value": 1.0, "alpha": ${"alphaRating.normal"   } },
-      { "value": 1.3, "alpha": ${"alphaRating.good"     } },
-      { "value": 2.0, "alpha": ${"alphaRating.very_good"} },
-      { "value": 15,  "alpha": ${"alphaRating.unique"   } }
+      { "value": 0.5, "color": ${"def.colorRating.very_bad" } },
+      { "value": 0.7, "color": ${"def.colorRating.bad"      } },
+      { "value": 0.9, "color": ${"def.colorRating.normal"   } },
+      { "value": 1.2, "color": ${"def.colorRating.good"     } },
+      { "value": 1.9, "color": ${"def.colorRating.very_good"} },
+      { "value": 15,  "color": ${"def.colorRating.unique"   } }
     ],
-    // Dynamic transparency by number of spotted enemies per battle on current tank
-    // Динамическая прозрачность по среднему количеству засвеченных врагов за бой на текущем танке
+    // Dynamic color by average number of spotted enemies per battle on current tank
+    // Динамический цвет по среднему количеству засвеченных врагов за бой на текущем танке
     "tsb": [
-      { "value": 0.6, "alpha": ${"alphaRating.very_bad" } },
-      { "value": 0.8, "alpha": ${"alphaRating.bad"      } },
-      { "value": 1.0, "alpha": ${"alphaRating.normal"   } },
-      { "value": 1.3, "alpha": ${"alphaRating.good"     } },
-      { "value": 2.0, "alpha": ${"alphaRating.very_good"} },
-      { "value": 15,  "alpha": ${"alphaRating.unique"   } }
+      { "value": 0.5, "color": ${"def.colorRating.very_bad" } },
+      { "value": 0.7, "color": ${"def.colorRating.bad"      } },
+      { "value": 0.9, "color": ${"def.colorRating.normal"   } },
+      { "value": 1.2, "color": ${"def.colorRating.good"     } },
+      { "value": 1.9, "color": ${"def.colorRating.very_good"} },
+      { "value": 15,  "color": ${"def.colorRating.unique"   } }
     ]
   }
 }
