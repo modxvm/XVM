@@ -128,7 +128,7 @@
       "textFormat": {
         "font": "$FieldFont",
         "size": 13,
-        "color": "{{c:r}}",
+        "color": "{{c:xr}}",
         "bold": false,
         "italic": false
       },

@@ -155,7 +155,7 @@
       "textFormat": {
         "font": "xvm",
         "size": 17,
-        "color": "{{c:r|#999999}}",
+        "color": "{{c:xr|#999999}}",
         "bold": false,
         "italic": false
       },
