@@ -153,32 +153,32 @@
     // Dynamic transparency by average damage efficiency on current tank
     // Динамическая прозрачность по эффективности урона за бой на текущем танке
     "tdv": [
-      { "value": 0.5, "color": ${"def.colorRating.very_bad" } },
-      { "value": 0.7, "color": ${"def.colorRating.bad"      } },
-      { "value": 0.9, "color": ${"def.colorRating.normal"   } },
-      { "value": 1.2, "color": ${"def.colorRating.good"     } },
-      { "value": 1.9, "color": ${"def.colorRating.very_good"} },
-      { "value": 15,  "color": ${"def.colorRating.unique"   } }
+      { "value": 0.5, "color": ${"alphaRating.very_bad" } },
+      { "value": 0.7, "color": ${"alphaRating.bad"      } },
+      { "value": 0.9, "color": ${"alphaRating.normal"   } },
+      { "value": 1.2, "color": ${"alphaRating.good"     } },
+      { "value": 1.9, "color": ${"alphaRating.very_good"} },
+      { "value": 15,  "color": ${"alphaRating.unique"   } }
     ],
     // Dynamic color by average frags per battle on current tank
     // Динамический цвет по среднему количеству фрагов за бой на текущем танке
     "tfb": [
-      { "value": 0.5, "color": ${"def.colorRating.very_bad" } },
-      { "value": 0.7, "color": ${"def.colorRating.bad"      } },
-      { "value": 0.9, "color": ${"def.colorRating.normal"   } },
-      { "value": 1.2, "color": ${"def.colorRating.good"     } },
-      { "value": 1.9, "color": ${"def.colorRating.very_good"} },
-      { "value": 15,  "color": ${"def.colorRating.unique"   } }
+      { "value": 0.5, "color": ${"alphaRating.very_bad" } },
+      { "value": 0.7, "color": ${"alphaRating.bad"      } },
+      { "value": 0.9, "color": ${"alphaRating.normal"   } },
+      { "value": 1.2, "color": ${"alphaRating.good"     } },
+      { "value": 1.9, "color": ${"alphaRating.very_good"} },
+      { "value": 15,  "color": ${"alphaRating.unique"   } }
     ],
     // Dynamic color by average number of spotted enemies per battle on current tank
     // Динамический цвет по среднему количеству засвеченных врагов за бой на текущем танке
     "tsb": [
-      { "value": 0.5, "color": ${"def.colorRating.very_bad" } },
-      { "value": 0.7, "color": ${"def.colorRating.bad"      } },
-      { "value": 0.9, "color": ${"def.colorRating.normal"   } },
-      { "value": 1.2, "color": ${"def.colorRating.good"     } },
-      { "value": 1.9, "color": ${"def.colorRating.very_good"} },
-      { "value": 15,  "color": ${"def.colorRating.unique"   } }
+      { "value": 0.5, "color": ${"alphaRating.very_bad" } },
+      { "value": 0.7, "color": ${"alphaRating.bad"      } },
+      { "value": 0.9, "color": ${"alphaRating.normal"   } },
+      { "value": 1.2, "color": ${"alphaRating.good"     } },
+      { "value": 1.9, "color": ${"alphaRating.very_good"} },
+      { "value": 15,  "color": ${"alphaRating.unique"   } }
     ]
   }
 }
