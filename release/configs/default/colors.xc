@@ -207,8 +207,8 @@
     // Динамический цвет по проценту оставшегося здоровья.
     "hp_ratio": [
       { "value": 10.4, "color": ${"def.colorHP.very_low"     } }, // color for HP <= 10%
-      { "value": 24.4, "color": ${"def.colorHP.low"          } }, // color for HP <= 25%
-      { "value": 49.4, "color": ${"def.colorHP.average"      } }, // color for HP <= 50%
+      { "value": 25.4, "color": ${"def.colorHP.low"          } }, // color for HP <= 25%
+      { "value": 50.4, "color": ${"def.colorHP.average"      } }, // color for HP <= 50%
       { "value": 100,  "color": ${"def.colorHP.above_average"} }  // color for HP > 50%
     ],
     // Dynamic color for XVM Scale
