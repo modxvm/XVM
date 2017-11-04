@@ -358,7 +358,7 @@
       { "value": 64.99, "color": ${"def.colorRating.very_bad"} },
       { "value": 84.99, "color": ${"def.colorRating.normal"  } },
       { "value": 94.99, "color": ${"def.colorRating.good"    } },
-      { "value": 100,   "color": ${"def.colorRating.unique"  } },
+      { "value": 100,   "color": ${"def.colorRating.unique"  } }
     ],
     // Dynamic color by hit ratio (percents of hits)
     // Динамический цвет по проценту попаданий
