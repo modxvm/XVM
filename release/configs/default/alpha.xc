@@ -49,7 +49,7 @@
     // Dynamic transparency by percentage of remaining health.                                  
     // Динамическая прозрачность по проценту оставшегося здоровья.                              
     "hp_ratio": [                                                                               
-      { "value": 9.4,  "alpha": ${"def.alphaHP.very_low"     } }, // alpha for HP <= 10%     
+      { "value": 10.4, "alpha": ${"def.alphaHP.very_low"     } }, // alpha for HP <= 10%     
       { "value": 24.4, "alpha": ${"def.alphaHP.low"          } }, // alpha for HP <= 25%     
       { "value": 49.4, "alpha": ${"def.alphaHP.average"      } }, // alpha for HP <= 50%     
       { "value": 100,  "alpha": ${"def.alphaHP.above_average"} }  // alpha for HP > 50%      

@@ -206,21 +206,21 @@
     // Dynamic color by remaining health percent.
     // Динамический цвет по проценту оставшегося здоровья.
     "hp_ratio": [
-      { "value": 9.4,  "color": ${"def.colorHP.very_low"     } },  // color for HP <= 10%
-      { "value": 24.4,  "color": ${"def.colorHP.low"          } },  // color for HP <= 25%
-      { "value": 49.4,  "color": ${"def.colorHP.average"      } },  // color for HP <= 50%
-      { "value": 100, "color": ${"def.colorHP.above_average"} }   // color for HP > 50%
+      { "value": 10.4, "color": ${"def.colorHP.very_low"     } }, // color for HP <= 10%
+      { "value": 24.4, "color": ${"def.colorHP.low"          } }, // color for HP <= 25%
+      { "value": 49.4, "color": ${"def.colorHP.average"      } }, // color for HP <= 50%
+      { "value": 100,  "color": ${"def.colorHP.above_average"} }  // color for HP > 50%
     ],
     // Dynamic color for XVM Scale
     // Динамический цвет по шкале XVM
     // http://www.koreanrandom.com/forum/topic/2625-/
     "x": [
-      { "value": 16.4,  "color": ${"def.colorRating.very_bad" } },  // 00 - 16 - very bad  (20% of players)
-      { "value": 33.4,  "color": ${"def.colorRating.bad"      } },  // 17 - 33 - bad       (better than 20% of players)
-      { "value": 52.4,  "color": ${"def.colorRating.normal"   } },  // 34 - 52 - normal    (better than 60% of players)
-      { "value": 75.4,  "color": ${"def.colorRating.good"     } },  // 53 - 75 - good      (better than 90% of players)
-      { "value": 92.4,  "color": ${"def.colorRating.very_good"} },  // 76 - 92 - very good (better than 99% of players)
-      { "value": 999, "color": ${"def.colorRating.unique"   } }   // 93 - XX - unique    (better than 99.9% of players)
+      { "value": 16.4, "color": ${"def.colorRating.very_bad" } }, // 00 - 16 - very bad  (20% of players)
+      { "value": 33.4, "color": ${"def.colorRating.bad"      } }, // 17 - 33 - bad       (better than 20% of players)
+      { "value": 52.4, "color": ${"def.colorRating.normal"   } }, // 34 - 52 - normal    (better than 60% of players)
+      { "value": 75.4, "color": ${"def.colorRating.good"     } }, // 53 - 75 - good      (better than 90% of players)
+      { "value": 92.4, "color": ${"def.colorRating.very_good"} }, // 76 - 92 - very good (better than 99% of players)
+      { "value": 999,  "color": ${"def.colorRating.unique"   } }  // 93 - XX - unique    (better than 99.9% of players)
     ],
     // Dynamic color by efficiency
     // Динамический цвет по эффективности
