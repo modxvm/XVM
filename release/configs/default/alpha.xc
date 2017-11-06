@@ -164,8 +164,8 @@
       { "value": 1.9, "color": ${"def.alphaRating.very_good"} },
       { "value": 15,  "color": ${"def.alphaRating.unique"   } }
     ],
-    // Dynamic color by average frags per battle on current tank
-    // Динамический цвет по среднему количеству фрагов за бой на текущем танке
+    // Dynamic transparency by average frags per battle on current tank
+    // Динамическая прозрачность по среднему количеству фрагов за бой на текущем танке
     "tfb": [
       { "value": 0.5, "color": ${"def.alphaRating.very_bad" } },
       { "value": 0.7, "color": ${"def.alphaRating.bad"      } },
@@ -174,8 +174,8 @@
       { "value": 1.9, "color": ${"def.alphaRating.very_good"} },
       { "value": 15,  "color": ${"def.alphaRating.unique"   } }
     ],
-    // Dynamic color by average number of spotted enemies per battle on current tank
-    // Динамический цвет по среднему количеству засвеченных врагов за бой на текущем танке
+    // Dynamic transparency by average number of spotted enemies per battle on current tank
+    // Динамическая прозрачность по среднему количеству засвеченных врагов за бой на текущем танке
     "tsb": [
       { "value": 0.5, "color": ${"def.alphaRating.very_bad" } },
       { "value": 0.7, "color": ${"def.alphaRating.bad"      } },
