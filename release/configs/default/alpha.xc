@@ -157,32 +157,32 @@
     // Dynamic transparency by average damage efficiency on current tank
     // Динамическая прозрачность по эффективности урона за бой на текущем танке
     "tdv": [
-      { "value": 0.5, "color": ${"def.alphaRating.very_bad" } },
-      { "value": 0.7, "color": ${"def.alphaRating.bad"      } },
-      { "value": 0.9, "color": ${"def.alphaRating.normal"   } },
-      { "value": 1.2, "color": ${"def.alphaRating.good"     } },
-      { "value": 1.9, "color": ${"def.alphaRating.very_good"} },
-      { "value": 15,  "color": ${"def.alphaRating.unique"   } }
+      { "value": 0.5, "alpha": ${"def.alphaRating.very_bad" } },
+      { "value": 0.7, "alpha": ${"def.alphaRating.bad"      } },
+      { "value": 0.9, "alpha": ${"def.alphaRating.normal"   } },
+      { "value": 1.2, "alpha": ${"def.alphaRating.good"     } },
+      { "value": 1.9, "alpha": ${"def.alphaRating.very_good"} },
+      { "value": 15,  "alpha": ${"def.alphaRating.unique"   } }
     ],
     // Dynamic transparency by average frags per battle on current tank
     // Динамическая прозрачность по среднему количеству фрагов за бой на текущем танке
     "tfb": [
-      { "value": 0.5, "color": ${"def.alphaRating.very_bad" } },
-      { "value": 0.7, "color": ${"def.alphaRating.bad"      } },
-      { "value": 0.9, "color": ${"def.alphaRating.normal"   } },
-      { "value": 1.2, "color": ${"def.alphaRating.good"     } },
-      { "value": 1.9, "color": ${"def.alphaRating.very_good"} },
-      { "value": 15,  "color": ${"def.alphaRating.unique"   } }
+      { "value": 0.5, "alpha": ${"def.alphaRating.very_bad" } },
+      { "value": 0.7, "alpha": ${"def.alphaRating.bad"      } },
+      { "value": 0.9, "alpha": ${"def.alphaRating.normal"   } },
+      { "value": 1.2, "alpha": ${"def.alphaRating.good"     } },
+      { "value": 1.9, "alpha": ${"def.alphaRating.very_good"} },
+      { "value": 15,  "alpha": ${"def.alphaRating.unique"   } }
     ],
     // Dynamic transparency by average number of spotted enemies per battle on current tank
     // Динамическая прозрачность по среднему количеству засвеченных врагов за бой на текущем танке
     "tsb": [
-      { "value": 0.5, "color": ${"def.alphaRating.very_bad" } },
-      { "value": 0.7, "color": ${"def.alphaRating.bad"      } },
-      { "value": 0.9, "color": ${"def.alphaRating.normal"   } },
-      { "value": 1.2, "color": ${"def.alphaRating.good"     } },
-      { "value": 1.9, "color": ${"def.alphaRating.very_good"} },
-      { "value": 15,  "color": ${"def.alphaRating.unique"   } }
+      { "value": 0.5, "alpha": ${"def.alphaRating.very_bad" } },
+      { "value": 0.7, "alpha": ${"def.alphaRating.bad"      } },
+      { "value": 0.9, "alpha": ${"def.alphaRating.normal"   } },
+      { "value": 1.2, "alpha": ${"def.alphaRating.good"     } },
+      { "value": 1.9, "alpha": ${"def.alphaRating.very_good"} },
+      { "value": 15,  "alpha": ${"def.alphaRating.unique"   } }
     ]
   }
 }
