@@ -67,42 +67,42 @@
     // Dynamic transparency by efficiency
     // Динамическая прозрачность по эффективности
     "eff": [
-      { "value": 598,  "alpha": ${"def.alphaRating.very_bad" } }, //    0 - 598  - very bad  (20% of players)
-      { "value": 874,  "alpha": ${"def.alphaRating.bad"      } }, //  599 - 874  - bad       (better than 20% of players)
-      { "value": 1079, "alpha": ${"def.alphaRating.normal"   } }, //  875 - 1079 - normal    (better than 60% of players)
-      { "value": 1540, "alpha": ${"def.alphaRating.good"     } }, // 1080 - 1540 - good      (better than 90% of players)
-      { "value": 1868, "alpha": ${"def.alphaRating.very_good"} }, // 1541 - 1868 - very good (better than 99% of players)
-      { "value": 9999, "alpha": ${"def.alphaRating.unique"   } }  // 1869 - *    - unique    (better than 99.9% of players)
+      { "value": 597,  "alpha": ${"def.alphaRating.very_bad" } }, //    0 - 597  - very bad  (20% of players)
+      { "value": 874,  "alpha": ${"def.alphaRating.bad"      } }, //  598 - 874  - bad       (better than 20% of players)
+      { "value": 1179, "alpha": ${"def.alphaRating.normal"   } }, //  875 - 1179 - normal    (better than 60% of players)
+      { "value": 1540, "alpha": ${"def.alphaRating.good"     } }, // 1180 - 1540 - good      (better than 90% of players)
+      { "value": 1867, "alpha": ${"def.alphaRating.very_good"} }, // 1541 - 1867 - very good (better than 99% of players)
+      { "value": 9999, "alpha": ${"def.alphaRating.unique"   } }  // 1868 - *    - unique    (better than 99.9% of players)
     ],
     // Dynamic transparency by WTR rating
     // Динамическая прозрачность по рейтингу WTR
     "wtr": [
-      { "value": 2631,  "alpha": ${"def.alphaRating.very_bad" } }, //    0 - 2631 - very bad  (20% of players)
-      { "value": 4464,  "alpha": ${"def.alphaRating.bad"      } }, // 2632 - 4464 - bad       (better than 20% of players)
-      { "value": 6249,  "alpha": ${"def.alphaRating.normal"   } }, // 4465 - 6249 - normal    (better than 60% of players)
-      { "value": 8141,  "alpha": ${"def.alphaRating.good"     } }, // 6250 - 8141 - good      (better than 90% of players)
-      { "value": 9460,  "alpha": ${"def.alphaRating.very_good"} }, // 8142 - 9460 - very good (better than 99% of players)
-      { "value": 99999, "alpha": ${"def.alphaRating.unique"   } }  // 9461 - *    - unique    (better than 99.9% of players)
+      { "value": 2671,  "alpha": ${"def.alphaRating.very_bad" } }, //    0 - 2671 - very bad  (20% of players)
+      { "value": 4276,  "alpha": ${"def.alphaRating.bad"      } }, // 2672 - 4276 - bad       (better than 20% of players)
+      { "value": 6123,  "alpha": ${"def.alphaRating.normal"   } }, // 4277 - 6123 - normal    (better than 60% of players)
+      { "value": 8116,  "alpha": ${"def.alphaRating.good"     } }, // 6124 - 8116 - good      (better than 90% of players)
+      { "value": 9496,  "alpha": ${"def.alphaRating.very_good"} }, // 8117 - 9496 - very good (better than 99% of players)
+      { "value": 99999, "alpha": ${"def.alphaRating.unique"   } }  // 9497 - *    - unique    (better than 99.9% of players)
     ],
     // Dynamic transparency by WN8 rating
     // Динамическая прозрачность по рейтингу WN8
     "wn8": [
-      { "value": 397,  "alpha": ${"def.alphaRating.very_bad" } }, //    0 - 397  - very bad  (20% of players)
-      { "value": 914,  "alpha": ${"def.alphaRating.bad"      } }, //  398 - 914  - bad       (better than 20% of players)
-      { "value": 1489, "alpha": ${"def.alphaRating.normal"   } }, //  915 - 1489 - normal    (better than 60% of players)
-      { "value": 2231, "alpha": ${"def.alphaRating.good"     } }, // 1490 - 2231 - good      (better than 90% of players)
-      { "value": 2979, "alpha": ${"def.alphaRating.very_good"} }, // 2232 - 2979 - very good (better than 99% of players)
-      { "value": 9999, "alpha": ${"def.alphaRating.unique"   } }  // 2980 - *    - unique    (better than 99.9% of players)
+      { "value": 411,  "alpha": ${"def.alphaRating.very_bad" } }, //    0 - 411  - very bad  (20% of players)
+      { "value": 941,  "alpha": ${"def.alphaRating.bad"      } }, //  412 - 941  - bad       (better than 20% of players)
+      { "value": 1536, "alpha": ${"def.alphaRating.normal"   } }, //  942 - 1536 - normal    (better than 60% of players)
+      { "value": 2311, "alpha": ${"def.alphaRating.good"     } }, // 1537 - 2311 - good      (better than 90% of players)
+      { "value": 3095, "alpha": ${"def.alphaRating.very_good"} }, // 2312 - 3095 - very good (better than 99% of players)
+      { "value": 9999, "alpha": ${"def.alphaRating.unique"   } }  // 3096 - *    - unique    (better than 99.9% of players)
     ],
     // Dynamic transparency by WG rating
     // Динамическая прозрачность по рейтингу WG
     "wgr": [
-      { "value": 2578,  "alpha": ${"def.alphaRating.very_bad" } }, //     0 - 2578  - very bad  (20% of players)
-      { "value": 4521,  "alpha": ${"def.alphaRating.bad"      } }, //  2579 - 4521  - bad       (better than 20% of players)
-      { "value": 6630,  "alpha": ${"def.alphaRating.normal"   } }, //  4522 - 6630  - normal    (better than 60% of players)
-      { "value": 8884,  "alpha": ${"def.alphaRating.good"     } }, //  6631 - 8884  - good      (better than 90% of players)
-      { "value": 10347, "alpha": ${"def.alphaRating.very_good"} }, //  8885 - 10347 - very good (better than 99% of players)
-      { "value": 99999, "alpha": ${"def.alphaRating.unique"   } }  // 10348 - *     - unique    (better than 99.9% of players)
+      { "value": 2579,  "alpha": ${"def.alphaRating.very_bad" } }, //     0 - 2579  - very bad  (20% of players)
+      { "value": 4525,  "alpha": ${"def.alphaRating.bad"      } }, //  2580 - 4525  - bad       (better than 20% of players)
+      { "value": 6637,  "alpha": ${"def.alphaRating.normal"   } }, //  4526 - 6637  - normal    (better than 60% of players)
+      { "value": 8899,  "alpha": ${"def.alphaRating.good"     } }, //  6638 - 8899  - good      (better than 90% of players)
+      { "value": 10358, "alpha": ${"def.alphaRating.very_good"} }, //  8900 - 10358 - very good (better than 99% of players)
+      { "value": 99999, "alpha": ${"def.alphaRating.unique"   } }  // 10359 - *     - unique    (better than 99.9% of players)
     ],
     // Dynamic transparency by win percent
     // Динамическая прозрачность по проценту побед
