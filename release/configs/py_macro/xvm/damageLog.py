@@ -444,7 +444,6 @@ class Data(object):
         if self.data['attackReasonID'] not in [24, 25]:
             self.data['attackReasonID'] = attackReasonID
         self.data['blownup'] = (newHealth == -13) or (newHealth == -5)
-
         self.data['hitEffect'] = HIT_EFFECT_CODES[4]
         if self.data['attackReasonID'] != 0:
             self.data['costShell'] = 'unknown'
@@ -663,11 +662,8 @@ class DamageLog(_Base):
                         self.dataLog['criticalHit'] = key['criticalHit']
                         self.dataLog['damage'] = key['damage']
                         self.dataLog['dmgRatio'] = self.dataLog['damage'] * 100 // self.dataLog['maxHealth']
-                        self.dataLog['number'] = len(self.listLog)
-                        if (attackReasonID == 1) and (key['beginFire'] is not None):
-                            self.dataLog['fireDuration'] = BigWorld.time() - key['beginFire']
-                        else:
-                            self.dataLog['fireDuration'] = None
+                        self.dataLog['number'] = len(self.listLog) - key['numberLine']
+                        self.dataLog['fireDuration'] = BigWorld.time() - key['beginFire'] if (attackReasonID == 1) and (key['beginFire'] is not None) else None
                         self.setOutParameters(key['numberLine'])
                     else:
                         self.addLine(attackerID, attackReasonID)
@@ -679,7 +675,6 @@ class DamageLog(_Base):
                 self.addLine()
             if self.callEvent:
                 as_event('ON_HIT')
-
 
 
 class LastHit(_Base):
