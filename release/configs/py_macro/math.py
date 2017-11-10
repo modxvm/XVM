@@ -60,3 +60,13 @@ import random
 @xvm.export('random.randint', deterministic=False)
 def random_randint(a=0, b=1):
     return random.randint(a, b)
+
+# Number divided by 1000. Число делённое на 1000.
+@xvm.export('kval')
+def kv(a=None):
+    return a / 1000.0 if a is not None else None
+
+# Number divided by 100. Число делённое на 100.
+@xvm.export('hval')
+def hv(a=None):
+    return a / 100.0 if a else None
