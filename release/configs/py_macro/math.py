@@ -33,7 +33,7 @@ def math_div(a, b):
 @xvm.export('pow')
 def math_pow(a, n):
     return None if a is None or n is None else a ** n
-  
+
 # Absolute value. Абсолютная величина
 @xvm.export('math.abs')
 @xvm.export('abs')
@@ -61,12 +61,12 @@ import random
 def random_randint(a=0, b=1):
     return random.randint(a, b)
 
-# Number divided by 1000. Число делённое на 1000.
+# Number divided by 1000. Число, делённое на 1000.
 @xvm.export('kval')
-def kv(a=None):
+def kval(a=None):
     return a / 1000.0 if a is not None else None
 
-# Number divided by 100. Число делённое на 100.
+# Number divided by 100. Число, делённое на 100.
 @xvm.export('hval')
-def hv(a=None):
-    return a / 100.0 if a else None
+def hval(a=None):
+    return a / 100.0 if a is not None else None
