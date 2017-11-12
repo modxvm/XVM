@@ -161,6 +161,7 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
 log("XVM: eXtended Visualization Mod ( %s )" % XFW_MOD_INFO['URL'])
 
 try:
+    from datetime import datetime
     from __version__ import __branch__, __revision__, __node__
     
     wot_ver = ResMgr.openSection(VERSION_FILE_PATH).readString('version')
@@ -175,6 +176,8 @@ try:
     log("    XVM Hash      : %s" % __node__)
     log("    WoT Supported : %s" % ", ".join(XFW_MOD_INFO['GAME_VERSIONS']))
     log("    WoT Current   : %s" % wot_ver)
+    log("    Current Time  : %s %+05d" % (datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+        round((round((datetime.now()-datetime.utcnow()).total_seconds())/1800)/2) * 100))
 
     xvm_fonts_arr = glob(os.environ['WINDIR'] + '/Fonts/*xvm*')
     if len(xvm_fonts_arr):
