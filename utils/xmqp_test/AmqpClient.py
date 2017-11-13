@@ -8,7 +8,7 @@ lobby_queue = 'com.xvm.xmqp.2v0.lobby'
 class AmqpClient(object):
     def __init__(self):
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(
-            host='xmqp1.modxvm.com', virtual_host='xvm', credentials=credentials))
+            host='xmqp1.modxvm.com', port=5601, virtual_host='xvm', credentials=credentials))
 
         self.channel = self.connection.channel()
 
