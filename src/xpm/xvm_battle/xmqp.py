@@ -257,7 +257,7 @@ class _XMQP(object):
         log('[XMQP] Connecting to %s' % host)
         params = pika.ConnectionParameters(
             host=host,
-            port=port,
+            #port=port, # TODO
             virtual_host='xvm',
             credentials=credentials,
             #channel_max=None,
