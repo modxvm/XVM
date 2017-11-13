@@ -46,6 +46,9 @@ package com.xvm
                 default: return null;
             }
 
+            if (cfg == null)
+                return null;
+
             var cfg_len:int = cfg.length;
             if (cfg_len == 0)
                 return null;
@@ -91,6 +94,9 @@ package com.xvm
                 case Defines.DYNAMIC_ALPHA_TSB:             cfg = cfg_root.tsb; break;
                 default: return NaN;
             }
+
+            if (cfg == null)
+                return NaN;
 
             var cfg_len:int = cfg.length;
             if (cfg_len == 0)
