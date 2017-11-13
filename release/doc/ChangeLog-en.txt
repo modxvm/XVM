@@ -1,4 +1,17 @@
 ﻿XVM-7.2.3-dev:
+  [HANGAR]
+  * renamed option in the "hangar"/"serverInfo" sections:
+      "shiftX" -> "offsetX"
+      "shiftY" -> "offsetY"
+  * renamed option in the "hangar"/"commonQuests" sections:
+      "shiftX" -> "offsetX"
+      "shiftY" -> "offsetY"      
+  * renamed option in the "hangar"/"personalQuests" sections:
+      "shiftX" -> "offsetX"
+      "shiftY" -> "offsetY"
+  * renamed option in the "hangar"/"vehicleName" sections:
+      "shiftX" -> "offsetX"
+      "shiftY" -> "offsetY"
 
 XVM-7.2.2:
   [KNOWN ISSUES]

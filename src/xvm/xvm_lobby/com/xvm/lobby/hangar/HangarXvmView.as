@@ -99,8 +99,8 @@ package com.xvm.lobby.hangar
                     _orig_txtTankInfo_x = page.xfw_header.txtTankInfo.x;
                     _orig_txtTankInfo_y = page.xfw_header.txtTankInfo.y;
                 }
-                page.xfw_header.txtTankInfo.x = _orig_txtTankInfo_x + cfg.shiftX;
-                page.xfw_header.txtTankInfo.y = _orig_txtTankInfo_y + cfg.shiftY;
+                page.xfw_header.txtTankInfo.x = _orig_txtTankInfo_x + cfg.offsetX;
+                page.xfw_header.txtTankInfo.y = _orig_txtTankInfo_y + cfg.offsetY;
                 page.xfw_header.txtTankInfo.alpha = cfg.alpha / 100.0;
                 page.xfw_header.txtTankInfo.rotation = cfg.rotation;
 
@@ -110,8 +110,8 @@ package com.xvm.lobby.hangar
                     _orig_tankTypeIcon_x = page.xfw_header.tankTypeIcon.x;
                     _orig_tankTypeIcon_y = page.xfw_header.tankTypeIcon.y;
                 }
-                page.xfw_header.tankTypeIcon.x = _orig_tankTypeIcon_x + cfg.shiftX;
-                page.xfw_header.tankTypeIcon.y = _orig_tankTypeIcon_y + cfg.shiftY;
+                page.xfw_header.tankTypeIcon.x = _orig_tankTypeIcon_x + cfg.offsetX;
+                page.xfw_header.tankTypeIcon.y = _orig_tankTypeIcon_y + cfg.offsetY;
                 page.xfw_header.tankTypeIcon.alpha = cfg.alpha / 100.0;
                 page.xfw_header.tankTypeIcon.rotation = cfg.rotation;
             }
@@ -137,8 +137,8 @@ package com.xvm.lobby.hangar
                     _orig_btnCommonQuests_x = page.xfw_header.btnCommonQuests.x;
                     _orig_btnCommonQuests_y = page.xfw_header.btnCommonQuests.y;
                 }
-                page.xfw_header.btnCommonQuests.x = _orig_btnCommonQuests_x + cfg.shiftX;
-                page.xfw_header.btnCommonQuests.y = _orig_btnCommonQuests_y + cfg.shiftY;
+                page.xfw_header.btnCommonQuests.x = _orig_btnCommonQuests_x + cfg.offsetX;
+                page.xfw_header.btnCommonQuests.y = _orig_btnCommonQuests_y + cfg.offsetY;
                 page.xfw_header.btnCommonQuests.alpha = cfg.alpha / 100.0;
                 page.xfw_header.btnCommonQuests.rotation = cfg.rotation;
             }
@@ -164,8 +164,8 @@ package com.xvm.lobby.hangar
                     _orig_btnPersonalQuests_x = page.xfw_header.btnPersonalQuests.x;
                     _orig_btnPersonalQuests_y = page.xfw_header.btnPersonalQuests.y;
                 }
-                page.xfw_header.btnPersonalQuests.x = _orig_btnPersonalQuests_x + cfg.shiftX;
-                page.xfw_header.btnPersonalQuests.y = _orig_btnPersonalQuests_y + cfg.shiftY;
+                page.xfw_header.btnPersonalQuests.x = _orig_btnPersonalQuests_x + cfg.offsetX;
+                page.xfw_header.btnPersonalQuests.y = _orig_btnPersonalQuests_y + cfg.offsetY;
                 page.xfw_header.btnPersonalQuests.alpha = cfg.alpha / 100.0;
                 page.xfw_header.btnPersonalQuests.rotation = cfg.rotation;
             }

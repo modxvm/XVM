@@ -47,12 +47,12 @@
       // Rotation in degrees [0..360].
       // Угол поворота в градусах [0..360].
       "rotation": 0,
-      // Shift X position
-      // Сдвиг по оси X
-      "shiftX": 0,
-      // Shift Y position
-      // Сдвиг по оси Y
-      "shiftY": 0
+      // X offset
+      // Cмещение по оси X
+      "offsetX": 0,
+      // Y offset
+      // Cмещение по оси Y
+      "offsetY": 0
     },
     // true - Enable crew auto return function
     // true - Включить функцию автовозврата экипажа
@@ -75,12 +75,12 @@
       // Rotation in degrees [0..360].
       // Угол поворота в градусах [0..360].
       "rotation": 0,
-      // Shift X position
-      // Сдвиг по оси X
-      "shiftX": 0,
-      // Shift Y position
-      // Сдвиг по оси Y
-      "shiftY": 0
+      // X offset
+      // Cмещение по оси X
+      "offsetX": 0,
+      // Y offset
+      // Cмещение по оси Y
+      "offsetY": 0
     },
     // Show/hide personal quests button or change its parameters
     // Показать/спрятать кнопку персональных задач, или изменить ее параметры
@@ -94,12 +94,12 @@
       // Rotation in degrees [0..360].
       // Угол поворота в градусах [0..360].
       "rotation": 0,
-      // Shift X position
-      // Сдвиг по оси X
-      "shiftX": 0,
-      // Shift Y position
-      // Сдвиг по оси Y
-      "shiftY": 0
+      // X offset
+      // Cмещение по оси X
+      "offsetX": 0,
+      // Y offset
+      // Cмещение по оси Y
+      "offsetY": 0
     },
     // Show/hide current vehicle name, type and level or change their parameters
     // Показать/спрятать название, тип и уровень текущего танка, или изменить их параметры
@@ -113,12 +113,12 @@
       // Rotation in degrees [0..360].
       // Угол поворота в градусах [0..360].
       "rotation": 0,
-      // Shift X position
-      // Сдвиг по оси X
-      "shiftX": 0,
-      // Shift Y position
-      // Сдвиг по оси Y
-      "shiftY": 0
+      // X offset
+      // Cмещение по оси X
+      "offsetX": 0,
+      // Y offset
+      // Cмещение по оси Y
+      "offsetY": 0
     },
     // true - Use credits instead of gold as default currency for ammo and equipment
     // true - Использовать кредиты, а не золото как валюту по умолчанию для снарядов и снаряжения

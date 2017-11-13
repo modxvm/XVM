@@ -75,8 +75,8 @@ package com.xvm.lobby
                     _orig_onlineCounter_x = page.header.onlineCounter.x;
                     _orig_onlineCounter_y = page.header.onlineCounter.y;
                 }
-                page.header.onlineCounter.x = _orig_onlineCounter_x + cfg.shiftX;
-                page.header.onlineCounter.y = _orig_onlineCounter_y + cfg.shiftY;
+                page.header.onlineCounter.x = _orig_onlineCounter_x + cfg.offsetX;
+                page.header.onlineCounter.y = _orig_onlineCounter_y + cfg.offsetY;
                 page.header.onlineCounter.alpha = cfg.alpha / 100.0;
                 page.header.onlineCounter.rotation = cfg.rotation;
             }
