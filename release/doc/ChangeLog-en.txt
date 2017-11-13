@@ -12,6 +12,10 @@
   * renamed option in the "hangar"/"vehicleName" sections:
       "shiftX" -> "offsetX"
       "shiftY" -> "offsetY"
+(hangar.xc)
+
+  [RATINGS]
+  * disabled original color and alpha settings for ratings since XVM scale is used by default (colors.xc, alpha.xc)
 
 XVM-7.2.2:
   [KNOWN ISSUES]
