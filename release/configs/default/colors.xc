@@ -222,54 +222,20 @@
       { "value": 92.4, "color": ${"def.colorRating.very_good"} }, // 76 - 92 - very good (better than 99% of players)
       { "value": 999,  "color": ${"def.colorRating.unique"   } }  // 93 - XX - unique    (better than 99.9% of players)
     ],
-    // Dynamic color by efficiency (remove /* and */ to use this block)
-    // Динамический цвет по эффективности (чтобы использовать этот блок удалите /* и */)
-    /*
-    "eff": [
-      { "value": 597,  "color": ${"def.colorRating.very_bad" } }, //    0 - 597  - very bad  (20% of players)
-      { "value": 874,  "color": ${"def.colorRating.bad"      } }, //  598 - 874  - bad       (better than 20% of players)
-      { "value": 1179, "color": ${"def.colorRating.normal"   } }, //  875 - 1179 - normal    (better than 60% of players)
-      { "value": 1540, "color": ${"def.colorRating.good"     } }, // 1180 - 1540 - good      (better than 90% of players)
-      { "value": 1867, "color": ${"def.colorRating.very_good"} }, // 1541 - 1867 - very good (better than 99% of players)
-      { "value": 9999, "color": ${"def.colorRating.unique"   } }  // 1868 - *    - unique    (better than 99.9% of players)
-    ],
-    */
-    // Dynamic color by WTR rating (remove /* and */ to use this block)
-    // Динамический цвет по рейтингу WTR (чтобы использовать этот блок удалите /* и */)
-    /*
-    "wtr": [
-      { "value": 2671,  "color": ${"def.colorRating.very_bad" } }, //    0 - 2671 - very bad  (20% of players)
-      { "value": 4276,  "color": ${"def.colorRating.bad"      } }, // 2672 - 4276 - bad       (better than 20% of players)
-      { "value": 6123,  "color": ${"def.colorRating.normal"   } }, // 4277 - 6123 - normal    (better than 60% of players)
-      { "value": 8116,  "color": ${"def.colorRating.good"     } }, // 6124 - 8116 - good      (better than 90% of players)
-      { "value": 9496,  "color": ${"def.colorRating.very_good"} }, // 8117 - 9496 - very good (better than 99% of players)
-      { "value": 99999, "color": ${"def.colorRating.unique"   } }  // 9497 - *    - unique    (better than 99.9% of players)
-    ],
-    */
-    // Dynamic color by WN8 rating (remove /* and */ to use this block)
-    // Динамический цвет по рейтингу WN8 (чтобы использовать этот блок удалите /* и */)
-    /*
-    "wn8": [
-      { "value": 411,  "color": ${"def.colorRating.very_bad" } }, //    0 - 411  - very bad  (20% of players)
-      { "value": 941,  "color": ${"def.colorRating.bad"      } }, //  412 - 941  - bad       (better than 20% of players)
-      { "value": 1536, "color": ${"def.colorRating.normal"   } }, //  942 - 1536 - normal    (better than 60% of players)
-      { "value": 2311, "color": ${"def.colorRating.good"     } }, // 1537 - 2311 - good      (better than 90% of players)
-      { "value": 3095, "color": ${"def.colorRating.very_good"} }, // 2312 - 3095 - very good (better than 99% of players)
-      { "value": 9999, "color": ${"def.colorRating.unique"   } }  // 3096 - *    - unique    (better than 99.9% of players)
-    ],
-    */
-    // Dynamic color by WG rating (remove /* and */ to use this block)
-    // Динамический цвет по рейтингу WG (чтобы использовать этот блок удалите /* и */)
-    /*
-    "wgr": [
-      { "value": 2579,  "color": ${"def.colorRating.very_bad" } }, //     0 - 2579  - very bad  (20% of players)
-      { "value": 4525,  "color": ${"def.colorRating.bad"      } }, //  2580 - 4525  - bad       (better than 20% of players)
-      { "value": 6637,  "color": ${"def.colorRating.normal"   } }, //  4526 - 6637  - normal    (better than 60% of players)
-      { "value": 8899,  "color": ${"def.colorRating.good"     } }, //  6638 - 8899  - good      (better than 90% of players)
-      { "value": 10358, "color": ${"def.colorRating.very_good"} }, //  8900 - 10358 - very good (better than 99% of players)
-      { "value": 99999, "color": ${"def.colorRating.unique"   } }  // 10359 - *     - unique    (better than 99.9% of players)
-    ],
-    */
+    // Custom dynamic colors by ratings.
+    // If you want use your own color scales,
+    // uncomment this block and replace "rating_name" to one of this values: "eff", "wn8", "wtr", "wgr"
+    // Динамический цвет по указанному рейтингу.
+    // Если вы хотите использовать свои собственные границы цветов вместо стандартных, 
+    // раскомментируйте блок и замените "rating_name" на одно из следующих значений: "eff", "wn8", "wtr", "wgr"
+    // "rating_name": [
+    //  { "value": 500,   "color": ${"def.colorRating.very_bad" } }, //    0 - 500   - very bad
+    //  { "value": 1000,  "color": ${"def.colorRating.bad"      } }, //  501 - 1000  - bad
+    //  { "value": 2000,  "color": ${"def.colorRating.normal"   } }, // 1001 - 2000  - normal
+    //  { "value": 3000,  "color": ${"def.colorRating.good"     } }, // 2001 - 3000  - good
+    //  { "value": 5000,  "color": ${"def.colorRating.very_good"} }, // 3001 - 5000  - very good
+    //  { "value": 99999, "color": ${"def.colorRating.unique"   } }  // 5001 - 99999 - uniquе
+    // ],
     // Dynamic color by win percent
     // Динамический цвет по проценту побед
     "winrate": [

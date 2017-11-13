@@ -64,54 +64,20 @@
       { "value": 92.4, "alpha": ${"def.alphaRating.very_good"} }, // 76 - 92 - very good (better than 99% of players)  
       { "value": 999,  "alpha": ${"def.alphaRating.unique"   } }  // 93 - XX - unique    (better than 99.9% of players)
     ],
-    // Dynamic transparency by efficiency (remove /* and */ to use this block)
-    // Динамическая прозрачность по эффективности (чтобы использовать этот блок удалите /* и */)
-    /*
-    "eff": [
-      { "value": 597,  "alpha": ${"def.alphaRating.very_bad" } }, //    0 - 597  - very bad  (20% of players)
-      { "value": 874,  "alpha": ${"def.alphaRating.bad"      } }, //  598 - 874  - bad       (better than 20% of players)
-      { "value": 1179, "alpha": ${"def.alphaRating.normal"   } }, //  875 - 1179 - normal    (better than 60% of players)
-      { "value": 1540, "alpha": ${"def.alphaRating.good"     } }, // 1180 - 1540 - good      (better than 90% of players)
-      { "value": 1867, "alpha": ${"def.alphaRating.very_good"} }, // 1541 - 1867 - very good (better than 99% of players)
-      { "value": 9999, "alpha": ${"def.alphaRating.unique"   } }  // 1868 - *    - unique    (better than 99.9% of players)
-    ],
-    */
-    // Dynamic transparency by WTR rating (remove /* and */ to use this block)
-    // Динамическая прозрачность по рейтингу WTR (чтобы использовать этот блок удалите /* и */)
-    /*
-    "wtr": [
-      { "value": 2671,  "alpha": ${"def.alphaRating.very_bad" } }, //    0 - 2671 - very bad  (20% of players)
-      { "value": 4276,  "alpha": ${"def.alphaRating.bad"      } }, // 2672 - 4276 - bad       (better than 20% of players)
-      { "value": 6123,  "alpha": ${"def.alphaRating.normal"   } }, // 4277 - 6123 - normal    (better than 60% of players)
-      { "value": 8116,  "alpha": ${"def.alphaRating.good"     } }, // 6124 - 8116 - good      (better than 90% of players)
-      { "value": 9496,  "alpha": ${"def.alphaRating.very_good"} }, // 8117 - 9496 - very good (better than 99% of players)
-      { "value": 99999, "alpha": ${"def.alphaRating.unique"   } }  // 9497 - *    - unique    (better than 99.9% of players)
-    ],
-    */
-    // Dynamic transparency by WN8 rating (remove /* and */ to use this block)
-    // Динамическая прозрачность по рейтингу WN8 (чтобы использовать этот блок удалите /* и */)
-    /*
-    "wn8": [
-      { "value": 411,  "alpha": ${"def.alphaRating.very_bad" } }, //    0 - 411  - very bad  (20% of players)
-      { "value": 941,  "alpha": ${"def.alphaRating.bad"      } }, //  412 - 941  - bad       (better than 20% of players)
-      { "value": 1536, "alpha": ${"def.alphaRating.normal"   } }, //  942 - 1536 - normal    (better than 60% of players)
-      { "value": 2311, "alpha": ${"def.alphaRating.good"     } }, // 1537 - 2311 - good      (better than 90% of players)
-      { "value": 3095, "alpha": ${"def.alphaRating.very_good"} }, // 2312 - 3095 - very good (better than 99% of players)
-      { "value": 9999, "alpha": ${"def.alphaRating.unique"   } }  // 3096 - *    - unique    (better than 99.9% of players)
-    ],
-    */
-    // Dynamic transparency by WG rating (remove /* and */ to use this block)
-    // Динамическая прозрачность по рейтингу WG (чтобы использовать этот блок удалите /* и */)
-    /*
-    "wgr": [
-      { "value": 2579,  "alpha": ${"def.alphaRating.very_bad" } }, //     0 - 2579  - very bad  (20% of players)
-      { "value": 4525,  "alpha": ${"def.alphaRating.bad"      } }, //  2580 - 4525  - bad       (better than 20% of players)
-      { "value": 6637,  "alpha": ${"def.alphaRating.normal"   } }, //  4526 - 6637  - normal    (better than 60% of players)
-      { "value": 8899,  "alpha": ${"def.alphaRating.good"     } }, //  6638 - 8899  - good      (better than 90% of players)
-      { "value": 10358, "alpha": ${"def.alphaRating.very_good"} }, //  8900 - 10358 - very good (better than 99% of players)
-      { "value": 99999, "alpha": ${"def.alphaRating.unique"   } }  // 10359 - *     - unique    (better than 99.9% of players)
-    ],
-    */
+    // Custom dynamic transparency by ratings.
+    // If you want use your own transparency scales,
+    // uncomment this block and replace "rating_name" to one of this values: "eff", "wn8", "wtr", "wgr"
+    // Динамическая прозрачность по указанному рейтингу.
+    // Если вы хотите использовать свои собственные границы прозрачности вместо стандартных, 
+    // раскомментируйте блок и замените "rating_name" на одно из следующих значений: "eff", "wn8", "wtr", "wgr" 
+    // "rating_name": [
+    //  { "value": 500,  "color": ${"def.colorRating.very_bad" } },  //    0 - 500   - very bad
+    //  { "value": 1000,  "color": ${"def.colorRating.bad"      } }, //  501 - 1000  - bad
+    //  { "value": 2000, "color": ${"def.colorRating.normal"   } },  // 1001 - 2000  - normal
+    //  { "value": 3000, "color": ${"def.colorRating.good"     } },  // 2001 - 3000  - good
+    //  { "value": 5000, "color": ${"def.colorRating.very_good"} },  // 3001 - 5000  - very good
+    //  { "value": 99999, "color": ${"def.colorRating.unique"   } }  // 5001 - 99999 - uniquе
+    // ],
     // Dynamic transparency by win percent
     // Динамическая прозрачность по проценту побед
     "winrate": [
