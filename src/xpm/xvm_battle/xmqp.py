@@ -253,10 +253,11 @@ class _XMQP(object):
         """
         credentials = pika.PlainCredentials('xvm', 'xvm')
         host = XVM.XMQP_SERVER_TEMPLATE.format(HASH=self.server_hash)
+        port = XVM.XMQP_SERVER_PORT_BASE + self.server_hash
         log('[XMQP] Connecting to %s' % host)
         params = pika.ConnectionParameters(
             host=host,
-            #port=XVM.XMQP_SERVER_PORT,
+            port=port,
             virtual_host='xvm',
             credentials=credentials,
             #channel_max=None,

@@ -16,6 +16,7 @@ class XVM(object):
     TIMEOUT = 5000
 
     XMQP_SERVER_TEMPLATE = 'xmqp{HASH}.modxvm.com'
+    XMQP_SERVER_PORT_BASE = 15600
     XMQP_API_VERSION = '2v0'
     XMQP_LOBBY_EXCHANGE = 'com.xvm.xmqp.%s.lobby' % XMQP_API_VERSION
     XMQP_LOBBY_ROUTING_KEY = 'query.battle.channel'
