@@ -64,8 +64,9 @@
       { "value": 92.4, "alpha": ${"def.alphaRating.very_good"} }, // 76 - 92 - very good (better than 99% of players)  
       { "value": 999,  "alpha": ${"def.alphaRating.unique"   } }  // 93 - XX - unique    (better than 99.9% of players)
     ],
-    // Dynamic transparency by efficiency
-    // Динамическая прозрачность по эффективности
+    // Dynamic transparency by efficiency (remove /* and */ to use this block)
+    // Динамическая прозрачность по эффективности (чтобы использовать этот блок удалите /* и */)
+    /*
     "eff": [
       { "value": 597,  "alpha": ${"def.alphaRating.very_bad" } }, //    0 - 597  - very bad  (20% of players)
       { "value": 874,  "alpha": ${"def.alphaRating.bad"      } }, //  598 - 874  - bad       (better than 20% of players)
@@ -74,8 +75,10 @@
       { "value": 1867, "alpha": ${"def.alphaRating.very_good"} }, // 1541 - 1867 - very good (better than 99% of players)
       { "value": 9999, "alpha": ${"def.alphaRating.unique"   } }  // 1868 - *    - unique    (better than 99.9% of players)
     ],
-    // Dynamic transparency by WTR rating
-    // Динамическая прозрачность по рейтингу WTR
+    */
+    // Dynamic transparency by WTR rating (remove /* and */ to use this block)
+    // Динамическая прозрачность по рейтингу WTR (чтобы использовать этот блок удалите /* и */)
+    /*
     "wtr": [
       { "value": 2671,  "alpha": ${"def.alphaRating.very_bad" } }, //    0 - 2671 - very bad  (20% of players)
       { "value": 4276,  "alpha": ${"def.alphaRating.bad"      } }, // 2672 - 4276 - bad       (better than 20% of players)
@@ -84,8 +87,10 @@
       { "value": 9496,  "alpha": ${"def.alphaRating.very_good"} }, // 8117 - 9496 - very good (better than 99% of players)
       { "value": 99999, "alpha": ${"def.alphaRating.unique"   } }  // 9497 - *    - unique    (better than 99.9% of players)
     ],
-    // Dynamic transparency by WN8 rating
-    // Динамическая прозрачность по рейтингу WN8
+    */
+    // Dynamic transparency by WN8 rating (remove /* and */ to use this block)
+    // Динамическая прозрачность по рейтингу WN8 (чтобы использовать этот блок удалите /* и */)
+    /*
     "wn8": [
       { "value": 411,  "alpha": ${"def.alphaRating.very_bad" } }, //    0 - 411  - very bad  (20% of players)
       { "value": 941,  "alpha": ${"def.alphaRating.bad"      } }, //  412 - 941  - bad       (better than 20% of players)
@@ -94,8 +99,10 @@
       { "value": 3095, "alpha": ${"def.alphaRating.very_good"} }, // 2312 - 3095 - very good (better than 99% of players)
       { "value": 9999, "alpha": ${"def.alphaRating.unique"   } }  // 3096 - *    - unique    (better than 99.9% of players)
     ],
-    // Dynamic transparency by WG rating
-    // Динамическая прозрачность по рейтингу WG
+    */
+    // Dynamic transparency by WG rating (remove /* and */ to use this block)
+    // Динамическая прозрачность по рейтингу WG (чтобы использовать этот блок удалите /* и */)
+    /*
     "wgr": [
       { "value": 2579,  "alpha": ${"def.alphaRating.very_bad" } }, //     0 - 2579  - very bad  (20% of players)
       { "value": 4525,  "alpha": ${"def.alphaRating.bad"      } }, //  2580 - 4525  - bad       (better than 20% of players)
@@ -104,6 +111,7 @@
       { "value": 10358, "alpha": ${"def.alphaRating.very_good"} }, //  8900 - 10358 - very good (better than 99% of players)
       { "value": 99999, "alpha": ${"def.alphaRating.unique"   } }  // 10359 - *     - unique    (better than 99.9% of players)
     ],
+    */
     // Dynamic transparency by win percent
     // Динамическая прозрачность по проценту побед
     "winrate": [
