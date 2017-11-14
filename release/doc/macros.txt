@@ -144,6 +144,8 @@ Legend:
 │ S │ {{t-hb}}           │ X │ X │ X │ X │ X │ X │ number of hecto-battles for current vehicle (hecto = 100)
 │ S │ {{tdb}}            │ X │ X │ X │ X │ X │ X │ average damage for current tank - damage/battles
 │ S │ {{xtdb}}           │ X │ X │ X │ X │ X │ X │ average damage for current tank in XVM Scale
+│ S │ {{vwtr}}           │ X │ X │ X │ X │ X │ X │ WTR rating for current vehicle
+│ S │ {{xvwtr}}          │ X │ X │ X │ X │ X │ X │ WTR rating for current vehicle in XVM Scale
 │ S │ {{tdv}}            │ X │ X │ X │ X │ X │ X │ average damage efficiency for tank - damage/(battles*maxHP)
 │ S │ {{tfb}}            │ X │ X │ X │ X │ X │ X │ average frags per battle for current tank
 │ S │ {{tsb}}            │ X │ X │ X │ X │ X │ X │ average number of spotted enemies per battle for current tank
@@ -166,6 +168,7 @@ Legend:
 │ S │ {{c:t-battles}}    │ X │ X │ X │ X │ X │ X │ color depending on current vehicle battles
 │ S │ {{c:tdb}}          │ X │ X │ X │ X │ X │ X │ dynamic colors for tdb
 │ S │ {{c:xtdb}}         │ X │ X │ X │ X │ X │ X │ dynamic colors for xtdb
+│ S │ {{c:xvwtr}}        │ X │ X │ X │ X │ X │ X │ dynamic colors for xvwtr
 │ S │ {{c:tdv}}          │ X │ X │ X │ X │ X │ X │ dynamic colors for tdv
 │ S │ {{c:tfb}}          │ X │ X │ X │ X │ X │ X │ dynamic colors for tfb
 │ S │ {{c:tsb}}          │ X │ X │ X │ X │ X │ X │ dynamic colors for tsb

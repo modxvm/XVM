@@ -146,9 +146,11 @@ class _Dossier(object):
             if data[1] not in unlocks:
                 xpToElite += data[0]
 
-        # xTDB & xTE
+        # xTDB, xTE, WTR, xWTR
         xtdb = -1
         xte = -1
+        wtr = -1
+        xwtr = -1
         if dossier is not None:
             stats = self.__getStatsBlock(dossier)
             battles = stats.getBattlesCount()
@@ -159,9 +161,14 @@ class _Dossier(object):
                 curfrg = float(frg) / battles
                 xtdb = vehinfo.calculateXTDB(vehCD, curdmg)
                 xte = vehinfo.calculateXTE(vehCD, curdmg, curfrg)
-
-        res = self.__prepareVehicleResult(accountDBID, vehCD, dossier, xtdb, xte, earnedXP, freeXP,
-                                          xpToElite, rankCount, rankSteps, rankStepsTotal)
+                #TODO: how to get WTR value from dossier?
+                #wtr = stats.getWTR()
+                #if wtr is None:
+                #    wtr = -1
+                #else:
+                #    xwtr = vehinfo.calculateXvmScale('wtr', wtr)
+        res = self.__prepareVehicleResult(accountDBID, vehCD, dossier, xtdb, xte, wtr, xwtr, earnedXP,
+                                          freeXP, xpToElite, rankCount, rankSteps, rankStepsTotal)
         self._cache[cache_key] = res
         return res
 
@@ -278,7 +285,8 @@ class _Dossier(object):
 
         return res
 
-    def __prepareVehicleResult(self, accountDBID, vehCD, dossier, xtdb, xte, earnedXP, freeXP, xpToElite, rankCount, rankSteps, rankStepsTotal):
+    def __prepareVehicleResult(self, accountDBID, vehCD, dossier, xtdb, xte, wtr, xwtr, earnedXP,
+                               freeXP, xpToElite, rankCount, rankSteps, rankStepsTotal):
         res = {}
         if dossier is None:
             return res
@@ -289,6 +297,8 @@ class _Dossier(object):
             'vehCD': vehCD,
             'xtdb': xtdb,
             'xte': xte,
+            'wtr': wtr,
+            'xwtr': xwtr,
             'earnedXP': earnedXP,
             'freeXP': freeXP,
             'xpToElite': xpToElite,

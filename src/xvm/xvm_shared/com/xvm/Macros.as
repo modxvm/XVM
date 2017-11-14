@@ -328,6 +328,7 @@ package com.xvm
             "xvm-user", "flag", "clanrank", "topclan", "region", "comment", "avglvl", "xte", "xeff", "xwtr",
             "xwn8", "xwgr", "eff", "wtr", "wn8", "wgr", "r", "xr", "xwr", "winrate", "rating", "battles",
             "wins", "kb", "t-winrate", "t-rating", "t-battles", "t-wins", "t-kb", "t-hb", "tdb", "xtdb", "tdv",
+            "vwtr", "xvwtr", "c:xvwtr", "a:xvwtr",
             "tfb", "tsb", "c:xte", "c:xeff", "c:xwtr", "c:xwn8", "c:xwgr", "c:eff", "c:wtr", "c:wn8",
             "c:wgr", "c:r", "c:xr", "c:xwr", "c:winrate", "c:rating", "c:kb", "c:avglvl", "c:t-winrate",
             "c:t-rating", "c:t-battles", "c:tdb", "c:xtdb", "c:tdv", "c:tfb", "c:tsb", "a:xte", "a:xeff",
@@ -960,6 +961,7 @@ package com.xvm
                 case "xwn8":
                 case "xeff":
                 case "xtdb":
+                case "xvwtr":
                 case "xwr":
                     if (name == "r" && Config.networkServicesSettings.scale != "xvm")
                         break;
@@ -1227,6 +1229,10 @@ package com.xvm
             pdata["tdb"] = stat.v.db;
             // {{xtdb}}
             pdata["xtdb"] = isNaN(stat.v.xtdb) || stat.v.xtdb <= 0 ? null : stat.v.xtdb == 100 ? "XX" : (stat.v.xtdb < 10 ? "0" : "") + stat.v.xtdb;
+            // {{vwtr}}
+            pdata["vwtr"] = isNaN(stat.v.wtr) || stat.v.wtr <= 0 ? null : stat.v.wtr;
+            // {{xvwtr}}
+            pdata["xvwtr"] = isNaN(stat.v.xwtr) || stat.v.xwtr <= 0 ? null : stat.v.xwtr == 100 ? "XX" : (stat.v.xwtr < 10 ? "0" : "") + stat.v.xwtr;
             // {{tdv}}
             pdata["tdv"] = stat.v.dv;
             // {{tfb}}
@@ -1278,6 +1284,8 @@ package com.xvm
             pdata["c:tdb"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, stat.v.db, NaN, "#");
             // {{c:xtdb}}
             pdata["c:xtdb"] = isNaN(stat.v.xtdb) || stat.v.xtdb <= 0 ? null : MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xtdb, NaN, "#");
+            // {{c:xvwtr}}
+            pdata["c:xvwtr"] = isNaN(stat.v.xwtr) || stat.v.xwtr <= 0 ? null : MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.v.xwtr, NaN, "#");
             // {{c:tdv}}
             pdata["c:tdv"] = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, stat.v.dv, NaN, "#");
             // {{c:tfb}}
@@ -1329,6 +1337,8 @@ package com.xvm
             pdata["a:tdb"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDB, stat.v.db, NaN);
             // {{a:xtdb}}
             pdata["a:xtdb"] = isNaN(stat.v.xtdb) || stat.v.xtdb <= 0 ? NaN : MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.v.xtdb, NaN);
+            // {{a:xvwtr}}
+            pdata["a:xvwtr"] = isNaN(stat.v.xwtr) || stat.v.xwtr <= 0 ? NaN : MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.v.xwtr, NaN);
             // {{a:tdv}}
             pdata["a:tdv"] = MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDV, stat.v.dv, NaN);
             // {{a:tfb}}

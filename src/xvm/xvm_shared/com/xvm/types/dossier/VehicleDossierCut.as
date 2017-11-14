@@ -89,6 +89,13 @@ package com.xvm.types.dossier
                         c_xte = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, vdossier.xte, NaN, "#");
                     }
 
+                    wtr = vdossier.wtr;
+                    if (!isNaN(vdossier.xwtr) && vdossier.xwtr > 0)
+                    {
+                        xwtr = vdossier.xwtr == 100 ? "XX" : (vdossier.xwtr < 10 ? "0" : "") + vdossier.xwtr;
+                        c_xwtr = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, vdossier.xwtr, NaN, "#");
+                    }
+
                     earnedXP = isNaN(vdossier.earnedXP) || vdossier.earnedXP == 0 ? NaN : vdossier.earnedXP;
                     freeXP = isNaN(vdossier.freeXP) || vdossier.freeXP == 0 ? NaN : vdossier.freeXP;
                     xpToElite = isNaN(vdossier.xpToElite) || vdossier.xpToElite == 0 ? NaN : vdossier.xpToElite;
@@ -154,6 +161,9 @@ package com.xvm.types.dossier
         public var topfrg:Number;
         public var xte:String;
         public var c_xte:String;
+        public var wtr:Number;
+        public var xwtr:String;
+        public var c_xwtr:String;
         public var earnedXP:Number;
         public var freeXP:Number;
         public var xpToElite:Number;

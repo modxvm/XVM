@@ -27,6 +27,16 @@
   (colors.xc, alpha.xc)
   * disabled original color and alpha settings for ratings since XVM scale is used by default
 
+  [MACROS]
+  * added macros in battle:
+    {{vwtr}} - WTR rating for current vehicle
+    {{xvwtr}} - WTR rating for current vehicle
+    {{c:xvwtr}}, {{a:xvwtr}} - dynamic color and transparency for {{xvwtr}} macro
+  * added macros in hangar:
+    {{v.wtr}} - WTR rating for current vehicle
+    {{v.xwtr}} - WTR rating for current vehicle in XVM Scale
+    {{v.c_xwtr}}, {{v.a_xwtr}} - dynamic color and transparency for {{v.xwtr}} macro
+
   [PYTHON MACROS]
   * damageLog: added macros {{xr}} and {{c:xr}}
 
@@ -130,7 +140,7 @@ XVM-6.9.1:
 
   [GENERAL]
   * fixed bootcamp mode
-  * partial support of the "Grand Battle" mode (battle loading, statistics form and 
+  * partial support of the "Grand Battle" mode (battle loading, statistics form and
     players panel are not implemented)
   * various bugs fixes
 
