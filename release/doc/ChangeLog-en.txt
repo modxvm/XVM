@@ -16,6 +16,9 @@
 
   [RATINGS]
   * disabled original color and alpha settings for ratings since XVM scale is used by default (colors.xc, alpha.xc)
+  
+  [PYTHON MACROS]
+  * damageLog: added macros {{xr}} and {{c:xr}}
 
 XVM-7.2.2:
   [KNOWN ISSUES]
