@@ -470,7 +470,7 @@ def updateValueMacros(section, value):
     global macros
 
     def readColor(sec, m):
-        if m is not None:
+        if m is not None and config.get('colors/' + sec) is not None:
             for val in config.get('colors/' + sec):
                 if val['value'] > m:
                     return '#' + val['color'][2:] if val['color'][:2] == '0x' else val['color']
