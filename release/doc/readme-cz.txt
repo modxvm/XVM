@@ -29,9 +29,9 @@
 
   Stránky projektu:             https://modxvm.com/
 
-  Podpora (EN):                 http://www.koreanrandom.com/forum/topic/1383-xvm
+  Podpora (EN):                 https://www.koreanrandom.com/forum/topic/1383-xvm
   Nejčastější dotazy (EN):      https://modxvm.com/en/faq/
-  Různá již připravená nastavení (RU): http://www.koreanrandom.com/forum/forum/50-custom-configurations
+  Různá již připravená nastavení (RU): https://www.koreanrandom.com/forum/forum/50-custom-configurations
 
 
 -----------------------------------------------------------
@@ -61,7 +61,7 @@
 
   4. Je tu možnost používání "nočních" verzí XVM.
     Tyto verze jsou vytvořeny automaticky z aktuálního zdrojového kódu, nemusí být testovány a mohou obsahovat chyby!
-    Stahovat je můžete ze stránek http://nightly.modxvm.com/
+    Stahovat je můžete ze stránek https://nightly.modxvm.com/
 
 -----------------------------------------------------------
 3. Aktualizace
@@ -88,7 +88,7 @@
     "\res_mods\xvm\configs\@Default\"
 
   Podporované HTML tagy:
-    http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText
+    https://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText
 
   Obrázek šestého smyslu:
     Chcete-li změnit ikonu šestého smyslu, uložte svůj obrázek takto:

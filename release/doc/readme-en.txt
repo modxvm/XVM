@@ -28,9 +28,9 @@
 
   Project site:  https://modxvm.com/
 
-  Support:       http://www.koreanrandom.com/forum/topic/1383-xvm
+  Support:       https://www.koreanrandom.com/forum/topic/1383-xvm
   FAQ:           https://modxvm.com/en/faq/
-  User configs:  http://www.koreanrandom.com/forum/forum/50-custom-configurations
+  User configs:  https://www.koreanrandom.com/forum/forum/50-custom-configurations
 
 -----------------------------------------------------------
 2. INSTALLATION
@@ -57,7 +57,7 @@
     The language code must match the name of the file in the res_mods\mods\shared_resources\xvm\l10n\ (for example, "en").
 
   4. It is also possible to install nightly builds of XVM.
-    You can download nightly builds on http://nightly.modxvm.com/
+    You can download nightly builds on https://nightly.modxvm.com/
 
 -----------------------------------------------------------
 3. UPDATE
@@ -81,7 +81,7 @@
 
 
   Supported HTML tags:
-    http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText
+    https://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText
 
   List of all available macros is presented in macros.txt and macros-hangar.txt.
 
@@ -117,7 +117,7 @@
       {{kb%4.01f~k|----}}   - width 4 chars, exactly 1 char after the decimal point, right aligned
                               if kb==null, display "----"
 
-      Details: http://en.wikipedia.org/wiki/Printf
+      Details: https://en.wikipedia.org/wiki/Printf_format_string
 
     Using localization macros - {{l10n:localizationKey}}
       Macros are links to translations in \res_mods\mods\shared_resources\xvm\l10n\XX.xc file (XX is a language code).
@@ -148,9 +148,9 @@
     "alpha": "{{a:hp}}" - transparency depending on current health
 
   Clan and players icons.
-    Global map rating is used to rate clans http://worldoftanks.eu/leaderboard/clans/ (wGM column).
-      Formula used for the rating: http://worldoftanks.ru/ru/content/cr_formulae/
-      Principles of the Elo rating system: http://en.wikipedia.org/wiki/Elo_rating_system
+    Global map rating is used to rate clans https://worldoftanks.eu/leaderboard/clans/ (wGM column).
+      Formula used for the rating: https://worldoftanks.ru/ru/content/cr_formulae/
+      Principles of the Elo rating system: https://en.wikipedia.org/wiki/Elo_rating_system
     XVM server monitors the list of top clans and downloads it at client launch. If a player in top clan is encounter in a battle, that clan's icon is downloaded from the XVM server.
     The list is updated 8 times a day.
     There is an option to use custom clan/player icons.
@@ -197,5 +197,5 @@
     5. Personal configuration is created, you can start editing
 
     Attention! File encoding must remain encoded in UTF8+BOM.
-    For editing use Notepad++. http://goo.gl/y6iet
+    For editing use Notepad++. https://goo.gl/y6iet
     In the case of Windows Notepad: Save as -> Encoding: utf.

@@ -30,9 +30,9 @@
 
   Site officiel :     https://modxvm.com/fr/
 
-  Support :           http://www.koreanrandom.com/forum/topic/1383-xvm (en anglais)
+  Support :           https://www.koreanrandom.com/forum/topic/1383-xvm (en anglais)
   FAQ :               https://modxvm.com/fr/faq/
-  Configurations :    http://www.koreanrandom.com/forum/forum/50-custom-configurations (en anglais)
+  Configurations :    https://www.koreanrandom.com/forum/forum/50-custom-configurations (en anglais)
 
 -----------------------------------------------------------
 2. INSTALLATION
@@ -64,7 +64,7 @@
 
   4. Vous pouvez installer des versions journalières de développement d'XVM.
     Vous pouvez télécharger ces versions spéciales ici :
-      http://nightly.modxvm.com/ (en anglais)
+      https://nightly.modxvm.com/ (en anglais)
 
 -----------------------------------------------------------
 3. MISE A JOUR
@@ -89,7 +89,7 @@
   Vous pouvez créer une nouvelle configuration ou en éditer une déjà existante à
 
   Balises HTML supportées :
-    http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText (en anglais)
+    https://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText (en anglais)
 
   L'image Sixième Sens.
   Pour changer l'image de l'indicateur Sixième Sens, placez votre image PNG

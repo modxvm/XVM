@@ -1,6 +1,6 @@
 /**
  * Author: demon2597
- * http://www.koreanrandom.com/forum/topic/2172-5361-51014-demon2597-config-ru-en-more/
+ * https://koreanrandom.com/forum/topic/2172-722-271017-demon2597-config-ru-en-more/
  */
 {
   "def": {

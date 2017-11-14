@@ -32,10 +32,10 @@ Zawartość:
 
   Strona projektu:   https://modxvm.com/
 
-  Wsparcie(EN):      http://www.koreanrandom.com/forum/forum/57-xvm-english-support-and-discussions/
-  Wsparcie(PL):      http://forum.worldoftanks.eu/index.php?/topic/114684-pomoc-xvm-mod-temat-zbiorczy/
+  Wsparcie(EN):      https://www.koreanrandom.com/forum/forum/57-xvm-english-support-and-discussions/
+  Wsparcie(PL):      https://forum.worldoftanks.eu/index.php?/topic/114684-pomoc-xvm-mod-temat-zbiorczy/
   FAQ:               https://modxvm.com/en/faq/
-  Konfiguracje:      http://www.koreanrandom.com/forum/forum/50-custom-configurations
+  Konfiguracje:      https://www.koreanrandom.com/forum/forum/50-custom-configurations
 
 -----------------------------------------------------------
 2. INSTALACJA
@@ -52,7 +52,7 @@ Zawartość:
 
     Wszystkie możliwe opcje konfiguracji możesz znaleźć w:
       \res_mods\xvm\configs\@Default\
-    lub możesz użyć edytora: http://www.koreanrandom.com/forum/topic/1422-/#entry11316
+    lub możesz użyć edytora: https://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
     WAŻNE: Jeśli konfigurujesz manualnie, używaj programów typu notatnik(czy innego edytora, który nie modyfikuje kodowania pliku - przykładowo notepad++), NIGDY nie używaj edytorów typu Word/Wordpad.
 
@@ -61,7 +61,7 @@ Zawartość:
     zmień wartość "language" z "auto" na kod języka(np. pl).
 
   4. Jest też możliwość instalacji tzw. "Nightly builds"(wersje testowe).
-    Możesz je pobrać na http://nightly.modxvm.com/
+    Możesz je pobrać na https://nightly.modxvm.com/
 
     *** UWAGA! Statystyki oraz szanse na wygraną należy włączyć na stronie XVM:
     a) Klikamy na "Sign UP",
@@ -85,14 +85,14 @@ Zawartość:
     \res_mods\xvm\configs\@Default\
   * Możesz wybrać gotowy plik konfiguracji z katalogu \res_mods\xvm\configs\user configs\
   * Możesz utworzyć nową konfigurację lub edytować istniejącą w:
-    http://www.koreanrandom.com/forum/topic/1422-/#entry11316
+    https://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
   Wszystkie możliwe opcje konfiguracji znajdziesz tutaj:
     \res_mods\xvm\configs\@Default\
 
 
   Wspierane tagi html:
-    http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText
+    https://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText
 
   Ikona szóstego zmysłu.
   Aby zmienić ikonę szóstego zmysłu przekopiuj obrazek do:

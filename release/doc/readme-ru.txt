@@ -28,10 +28,10 @@
 
   Сайт проекта: https://modxvm.com/
 
-  Как написать в поддержку: http://www.koreanrandom.com/forum/topic/1644-readme/
-  Поддержка:    http://www.koreanrandom.com/forum/forum/43-xvm/
+  Как написать в поддержку: https://www.koreanrandom.com/forum/topic/1644-readme/
+  Поддержка:    https://www.koreanrandom.com/forum/forum/43-xvm/
   FAQ:          https://modxvm.com/faq/
-  Конфиги:      http://www.koreanrandom.com/forum/forum/50-custom-configurations/
+  Конфиги:      https://www.koreanrandom.com/forum/forum/50-custom-configurations/
 
 -----------------------------------------------------------
 2. УСТАНОВКА
@@ -50,7 +50,7 @@
       \res_mods\configs\xvm\default\
 
     Внимание:
-    Для редактирования используйте Notepad++. http://goo.gl/y6iet
+    Для редактирования используйте Notepad++. https://goo.gl/y6iet
     В случае блокнота Windows: Сохранить как -> Кодировка: UTF.
     НЕ используйте word, wordpad и подобные редакторы
 
@@ -60,7 +60,7 @@
     Код языка должен совпадать с именем файла в папке \res_mods\mods\shared_resources\xvm\l10n\ (например, "en").
 
   4. Существует возможность установки ночных сборок XVM.
-    Скачать ночные сборки можно на http://nightly.modxvm.com/
+    Скачать ночные сборки можно на https://nightly.modxvm.com/
 
 -----------------------------------------------------------
 3. ОБНОВЛЕНИЕ
@@ -84,7 +84,7 @@
     \res_mods\configs\xvm\default\
 
   Поддерживаемые теги HTML:
-    http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText
+    https://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText
 
   Список используемых макросов в macros.txt и macros-hangar.txt (для ангарной части).
 
@@ -121,7 +121,7 @@
                                 до 10 символов и выровнять влево
         {{kb%4.01f~k|----}}   - ширина 4 символа, обязательно 1 символ после запятой, выравнивание вправо
                                 если kb==null, будет отображаться "----"
-      Подробнее: http://ru.wikipedia.org/wiki/Printf
+      Подробнее: https://ru.wikipedia.org/wiki/Printf
 
     Использование макросов перевода - {{l10n:localizationKey}}
       Макросы представляют собой ссылки на перевод в файлах \res_mods\mods\shared_resources\xvm\l10n\XX.xc file (XX означает код языка).
@@ -152,8 +152,8 @@
     "alpha": "{{a:hp}}" - прозрачность в зависимости от количества здоровья
 
   Иконки кланов и игроков.
-    В качестве рейтинга кланов используется Эло-рейтинг клана на Глобальной карте http://worldoftanks.ru/leaderboard/clans/ (колонка wGM).
-      Формула: http://worldoftanks.ru/ru/content/cr_formulae/
+    В качестве рейтинга кланов используется Эло-рейтинг клана на Глобальной карте https://worldoftanks.ru/leaderboard/clans/ (колонка wGM).
+      Формула: https://worldoftanks.ru/ru/content/cr_formulae/
       Принцип рейтинга ЭЛО: https://ru.wikipedia.org/wiki/%D0%E5%E9%F2%E8%ED%E3_%DD%EB%EE
     Сервер XVM мониторит список топ-кланов и при запуске клиента этот список скачивается. При появлении топового клана в бою, с сервера XVM скачивается его иконка.
     Обновление списка на сервере происходит 8 раз в сутки.
@@ -201,5 +201,5 @@
     5. Персональный конфиг создан, можно приступать к редактированию
 
    Внимание! Кодировка файлов должна оставаться UTF8+BOM.
-   Для редактирования используйте Notepad++. http://goo.gl/y6iet
+   Для редактирования используйте Notepad++. https://goo.gl/y6iet
    В случае блокнота Windows: Сохранить как -> Кодировка: UTF.

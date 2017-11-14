@@ -15,8 +15,18 @@
   (hangar.xc)
 
   [RATINGS]
-  * disabled original color and alpha settings for ratings since XVM scale is used by default (colors.xc, alpha.xc)
-  
+  * removed config sections:
+      "alpha"/"eff"
+      "alpha"/"wn8"
+      "alpha"/"wtr"
+      "alpha"/"wgr"
+      "colors"/"eff"
+      "colors"/"wn8"
+      "colors"/"wtr"
+      "colors"/"wgr"
+  (colors.xc, alpha.xc)
+  * disabled original color and alpha settings for ratings since XVM scale is used by default
+
   [PYTHON MACROS]
   * damageLog: added macros {{xr}} and {{c:xr}}
 
