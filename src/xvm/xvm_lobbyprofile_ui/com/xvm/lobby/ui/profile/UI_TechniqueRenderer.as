@@ -93,7 +93,7 @@ package com.xvm.lobby.ui.profile
                 if (Config.networkServicesSettings.statAwards)
                 {
                     winsTF.htmlText = "<p align='center'><font color='" +
-                        MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, data.winsEfficiency) + "'>" +
+                        MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, data.winsEfficiency, NaN) + "'>" +
                         data.winsEfficiencyStr +
                         "</font></p>";
                 }
@@ -128,7 +128,7 @@ package com.xvm.lobby.ui.profile
                         if (data.xvm_xte_flag & 0x01 != 0)
                             value = "<font alpha='#50'>(</font>" + value + "<font alpha='#50'>)</font>";
                         xteTF.htmlText = Sprintf.format("<p align='center'><font face='$FieldFont' size='15' color='%s'>%s</font></p>",
-                            MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, xte), value);
+                            MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, xte, NaN), value);
                     }
                 }
             }

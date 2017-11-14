@@ -10,12 +10,12 @@ package com.xvm
 
     public class MacrosUtils
     {
-        public static function getDynamicColorValueInt(type:Number, value:Number, darker:Boolean = false):int
+        public static function getDynamicColorValueInt(type:Number, value:Number, xvalue:Number, darker:Boolean = false):int
         {
-            return parseInt(getDynamicColorValue(type, value, "0x", darker));
+            return parseInt(getDynamicColorValue(type, value, xvalue, "0x", darker));
         }
 
-        public static function getDynamicColorValue(type:Number, value:Number, prefix:String = '#', darker:Boolean = false):String
+        public static function getDynamicColorValue(type:Number, value:Number, xvalue:Number, prefix:String = '#', darker:Boolean = false):String
         {
             if (isNaN(value))
                 return null;
@@ -47,7 +47,12 @@ package com.xvm
             }
 
             if (cfg == null)
-                return null;
+            {
+                if (isNaN(xvalue))
+                    return null;
+                cfg = cfg_root.x;
+                value = xvalue;
+            }
 
             var cfg_len:int = cfg.length;
             if (cfg_len == 0)
@@ -68,7 +73,7 @@ package com.xvm
             return XfwUtils.toHtmlColor(color, prefix);
         }
 
-        public static function getDynamicAlphaValue(type:Number, value:Number):Number
+        public static function getDynamicAlphaValue(type:Number, value:Number, xvalue:Number):Number
         {
             if (isNaN(value))
                 return NaN;
@@ -96,7 +101,12 @@ package com.xvm
             }
 
             if (cfg == null)
-                return NaN;
+            {
+                if (isNaN(xvalue))
+                    return NaN;
+                cfg = cfg_root.x;
+                value = xvalue;
+            }
 
             var cfg_len:int = cfg.length;
             if (cfg_len == 0)

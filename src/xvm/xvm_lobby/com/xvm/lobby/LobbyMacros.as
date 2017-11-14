@@ -67,53 +67,53 @@ package com.xvm.lobby
                 switch (o.getSubname())
                 {
                     case "c_winrate":
-                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, stat.winrate, "#");
+                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, stat.winrate, stat.xwr, "#");
                     case "c_eff":
-                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, stat.eff, "#");
+                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, stat.eff, stat.xeff, "#");
                     case "c_wgr":
-                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WGR, stat.wgr, "#");
+                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WGR, stat.wgr, stat.xwgr, "#");
                     case "c_wtr":
-                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WTR, stat.wtr, "#");
+                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WTR, stat.wtr, stat.xwtr, "#");
                     case "c_wn8":
-                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8, "#");
+                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8, stat.xwn8, "#");
                     case "c_xeff":
-                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#");
+                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, NaN, "#");
                     case "c_xwgr":
-                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwgr, "#");
+                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwgr, NaN, "#");
                     case "c_xwtr":
-                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwtr, "#");
+                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwtr, NaN, "#");
                     case "c_xwr":
-                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwr, "#");
+                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwr, NaN, "#");
                     case "c_xwn8":
-                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8, "#");
+                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8, NaN, "#");
                     case "c_avglvl":
-                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, stat.avglvl, "#");
+                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, stat.avglvl, NaN, "#");
                     case "c_battles":
-                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_KB, stat.battles / 1000.0, "#");
+                        return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_KB, stat.battles / 1000.0, NaN, "#");
                     case "a_winrate":
-                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WINRATE, stat.winrate);
+                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WINRATE, stat.winrate, stat.xwr);
                     case "a_eff":
-                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_EFF, stat.eff);
+                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_EFF, stat.eff, stat.xeff);
                     case "a_wgr":
-                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WGR, stat.wgr);
+                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WGR, stat.wgr, stat.xwgr);
                     case "a_wtr":
-                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WTR, stat.wtr);
+                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WTR, stat.wtr, stat.xwtr);
                     case "a_wn8":
-                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN8, stat.wn8);
+                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN8, stat.wn8, stat.xwn8);
                     case "a_xeff":
-                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xeff);
+                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xeff, NaN);
                     case "a_xwgr":
-                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwgr);
+                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwgr, NaN);
                     case "a_xwtr":
-                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwtr);
+                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwtr, NaN);
                     case "a_xwr":
-                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwr);
+                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwr, NaN);
                     case "a_xwn8":
-                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn8);
+                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn8, NaN);
                     case "a_avglvl":
-                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_AVGLVL, stat.avglvl);
+                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_AVGLVL, stat.avglvl, NaN);
                     case "a_battles":
-                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_KB, stat.battles / 1000);
+                        return MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_KB, stat.battles / 1000, NaN);
                 }
 
                 return stat[o.getSubname()];

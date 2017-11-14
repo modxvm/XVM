@@ -118,7 +118,7 @@ package com.xvm.battle
                 {
                     case "n": return BattleState.hitlogHits.length;
                     case "dmg-total": return BattleState.hitlogTotalDamage;
-                    case "dmg-total-color": return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, BattleGlobalData.curentXtdb, "#", false);
+                    case "dmg-total-color": return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, BattleGlobalData.curentXtdb, NaN, "#", false);
                     case "dmg-avg": return BattleState.hitlogHits.length ? Math.round(BattleState.hitlogTotalDamage / BattleState.hitlogHits.length) : NaN;
                     case "dead": return o.isBlown ? Config.config.hitLog.blowupMarker : o.isDead ? Config.config.hitLog.deadMarker : null;
                     case "n-player": return o.hitlogHits.length;
@@ -321,25 +321,25 @@ package com.xvm.battle
             // {{c:hp}}
             m_globals["c:hp"] = function(o:VOPlayerState):String
             {
-                return o && !isNaN(o.curHealth) ? MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_HP, o.curHealth) : null;
+                return o && !isNaN(o.curHealth) ? MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_HP, o.curHealth, NaN) : null;
             }
 
             // {{c:hp-ratio}}
             m_globals["c:hp-ratio"] = function(o:VOPlayerState):String
             {
-                return o && !isNaN(o.curHealth) ? MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, getHpRatioFunc(o)) : null;
+                return o && !isNaN(o.curHealth) ? MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, getHpRatioFunc(o), NaN) : null;
             }
 
             // {{a:hp}}
             m_globals["a:hp"] = function(o:VOPlayerState):Number
             {
-                return o && !isNaN(o.curHealth) ? MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, o.curHealth) : NaN;
+                return o && !isNaN(o.curHealth) ? MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, o.curHealth, NaN) : NaN;
             }
 
             // {{a:hp-ratio}}
             m_globals["a:hp-ratio"] = function(o:VOPlayerState):Number
             {
-                return o && !isNaN(o.curHealth) ? MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, getHpRatioFunc(o)) : NaN;
+                return o && !isNaN(o.curHealth) ? MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, getHpRatioFunc(o), NaN) : NaN;
             }
 
             // dmg

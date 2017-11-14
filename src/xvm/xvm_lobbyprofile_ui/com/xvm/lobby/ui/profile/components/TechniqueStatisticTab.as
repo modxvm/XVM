@@ -201,19 +201,19 @@ package com.xvm.lobby.ui.profile.components
 
                 s += size(Locale.get("General stats") + " (" + color(dt, 0xCCCCCC) + ")", 13) + "\n";
 
-                var xwn8_color:int = MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_X, data.stat.xwn8);
+                var xwn8_color:int = MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_X, data.stat.xwn8, NaN);
                 s += Locale.get("WN8") + ": " + (!data.stat.wn8 ? "-- (-)" :
                     color((data.stat.xwn8 == 100 ? "XX" : (data.stat.xwn8 < 10 ? "0" : "") + data.stat.xwn8), xwn8_color) + " (" +
                     color(App.utils.locale.integer(data.stat.wn8), xwn8_color) + ")") + " ";
 
-                var xeff_color:int = MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_X, data.stat.xeff);
+                var xeff_color:int = MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_X, data.stat.xeff, NaN);
                 s += Locale.get("EFF") + ": " + (!data.stat.eff ? "-- (-)" :
                     color((data.stat.xeff == 100 ? "XX" : (data.stat.xeff < 10 ? "0" : "") + data.stat.xeff), xeff_color) + " (" +
                     color(App.utils.locale.integer(data.stat.eff), xeff_color) + ")") + "\n";
 
                 s += Locale.get("Avg level") + ": " + (!data.stat.avglvl ? "-" :
                     color(App.utils.locale.numberWithoutZeros(data.stat.avglvl),
-                        MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_AVGLVL, data.stat.avglvl))) + "\n";
+                        MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_AVGLVL, data.stat.avglvl, NaN))) + "\n";
 
                 ratingTF.htmlText = "<textformat leading='-2'>" + formatHtmlText(s) + "</textformat>";
             }
@@ -224,7 +224,7 @@ package com.xvm.lobby.ui.profile.components
             if (tech.accountDBID == 0)
             {
                 var adata:AccountDossier = tech.accountDossier;
-                var ratingColor:int = MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_WINRATE, Math.round(adata.winPercent));
+                var ratingColor:int = MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_WINRATE, Math.round(adata.winPercent), NaN);
                 winsToPercentGlobalTF.htmlText = "<p align='left'>" + formatHtmlText(
                     size(Locale.get("Wins"), 13) + ": " + formatHtmlText(size(App.utils.locale.float(adata.winPercent) + "%", 13), ratingColor) + "  " +
                     formatHtmlText(size(getWinsToNextPercentStr(adata), 13), XfwConst.UICOLOR_LABEL)) + "</p>";
