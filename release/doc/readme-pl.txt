@@ -32,10 +32,10 @@ Zawartość:
 
   Strona projektu:   https://modxvm.com/
 
-  Wsparcie(EN):      https://www.koreanrandom.com/forum/forum/57-xvm-english-support-and-discussions/
+  Wsparcie(EN):      https://koreanrandom.com/forum/forum/57-xvm-english-support-and-discussions/
   Wsparcie(PL):      https://forum.worldoftanks.eu/index.php?/topic/114684-pomoc-xvm-mod-temat-zbiorczy/
   FAQ:               https://modxvm.com/en/faq/
-  Konfiguracje:      https://www.koreanrandom.com/forum/forum/50-custom-configurations
+  Konfiguracje:      https://koreanrandom.com/forum/forum/50-/
 
 -----------------------------------------------------------
 2. INSTALACJA
@@ -52,7 +52,7 @@ Zawartość:
 
     Wszystkie możliwe opcje konfiguracji możesz znaleźć w:
       \res_mods\xvm\configs\@Default\
-    lub możesz użyć edytora: https://www.koreanrandom.com/forum/topic/1422-/#entry11316
+    lub możesz użyć edytora: https://koreanrandom.com/forum/topic/1422-/#entry11316
 
     WAŻNE: Jeśli konfigurujesz manualnie, używaj programów typu notatnik(czy innego edytora, który nie modyfikuje kodowania pliku - przykładowo notepad++), NIGDY nie używaj edytorów typu Word/Wordpad.
 
@@ -85,7 +85,7 @@ Zawartość:
     \res_mods\xvm\configs\@Default\
   * Możesz wybrać gotowy plik konfiguracji z katalogu \res_mods\xvm\configs\user configs\
   * Możesz utworzyć nową konfigurację lub edytować istniejącą w:
-    https://www.koreanrandom.com/forum/topic/1422-/#entry11316
+    https://koreanrandom.com/forum/topic/1422-/#entry11316
 
   Wszystkie możliwe opcje konfiguracji znajdziesz tutaj:
     \res_mods\xvm\configs\@Default\

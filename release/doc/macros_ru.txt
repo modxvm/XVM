@@ -69,7 +69,7 @@ Legend:
 │ S │ {{xvm-user}}       │ X │ X │ X │ X │ X │ X │ X │ статус использования XVM, значение из секции texts/xvmuser
 │ S │ {{flag}}           │ X │ X │ X │ X │ X │ X │ X │ флаг для обозначения языка, определённого по локализации клиента либо выбранного в личном кабинете
 │ D │ {{clanicon}}       │ X │ X │ X │ X │ X │ X │ X │ макрос со значением пути эмблемы клана
-│ S │ {{clanrank}}       │ X │ X │ X │ X │ X │ X │ X │ рейтинг клана на Глобальной карте, от 1 до 1000 (https://worldoftanks.eu/leaderboard/clans/)
+│ S │ {{clanrank}}       │ X │ X │ X │ X │ X │ X │ X │ рейтинг клана на Глобальной карте, от 1 до 1000 (https://ru.wargaming.net/clans/wot/leaderboards)
 │ S │ {{topclan}}        │ X │ X │ X │ X │ X │ X │ X │ возвращает 'top' для топ кланов, 'persist' для постоянных кланов, пусто - для остальных (значения из texts/topclan section)
 │ S │ {{comment}}        │ X │ X │ X │ X │ X │ X │ X │ комментарий к игроку из контактов
 │ S │ {{vehicle-class}}  │   │   │   │ X │   │   │   │ подстановка спец. символа для типа техники
@@ -125,10 +125,10 @@ Legend:
 │ S │ {{r}}              │ X │ X │ X │ X │ X │ X │ рейтинг игрока (тип рейтинга можно выбрать в личном кабинете: https://modxvm.com/)
 │ S │ {{xr}}             │ X │ X │ X │ X │ X │ X │ {{r}} всегда по шкале XVM
 │ S │ {{xte}}            │ X │ X │ X │ X │ X │ X │ потанковый рейтинг (xTE) (значения 00-99, XX для топовых показателей)
-│ S │ {{eff}}            │ X │ X │ X │ X │ X │ X │ рейтинг эффективности (РЭ) по wot-news.com: https://www.koreanrandom.com/forum/topic/13386-
-│ S │ {{wtr}}            │ X │ X │ X │ X │ X │ X │ рейтинг WTR: https://koreanrandom.com/forum/topic/41382-
-│ S │ {{wn8}}            │ X │ X │ X │ X │ X │ X │ рейтинг WN8: https://www.koreanrandom.com/forum/topic/13434-
-│ S │ {{wgr}}            │ X │ X │ X │ X │ X │ X │ рейтинг WG (ЛРИ): https://www.koreanrandom.com/forum/topic/13433-
+│ S │ {{eff}}            │ X │ X │ X │ X │ X │ X │ рейтинг эффективности (РЭ) по wot-news.com: https://koreanrandom.com/forum/topic/13386-/
+│ S │ {{wtr}}            │ X │ X │ X │ X │ X │ X │ рейтинг WTR: https://koreanrandom.com/forum/topic/41382-/
+│ S │ {{wn8}}            │ X │ X │ X │ X │ X │ X │ рейтинг WN8: https://koreanrandom.com/forum/topic/13434-/
+│ S │ {{wgr}}            │ X │ X │ X │ X │ X │ X │ рейтинг WG (ЛРИ): https://koreanrandom.com/forum/topic/13433-/
 │ S │ {{xeff}}           │ X │ X │ X │ X │ X │ X │ шкала XVM для РЭ  (значения 00-99, XX для топовых показателей)
 │ S │ {{xwtr}}           │ X │ X │ X │ X │ X │ X │ шкала XVM для WTR (значения 00-99, XX для топовых показателей)
 │ S │ {{xwn8}}           │ X │ X │ X │ X │ X │ X │ шкала XVM для WN8 (значения 00-99, XX для топовых показателей)

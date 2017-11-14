@@ -24,8 +24,8 @@
     //   "blindarea_motion" - реальная граница слепой зоны танка в движении (50<=X<=445)
     //   "blindarea_standing" - реальная граница слепой зоны танка стоя (50<=X<=445)
     // Источник:
-    //   https://www.koreanrandom.com/forum/topic/15467-/page-5#entry187139
-    //   https://www.koreanrandom.com/forum/topic/15467-/page-4#entry186794
+    //   https://koreanrandom.com/forum/topic/15467-/?do=findComment&comment=187139
+    //   https://koreanrandom.com/forum/topic/15467-/?do=findComment&comment=186794
     "view": [
       // Main circles:
       // Основные круги:

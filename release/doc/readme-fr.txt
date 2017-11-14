@@ -30,9 +30,9 @@
 
   Site officiel :     https://modxvm.com/fr/
 
-  Support :           https://www.koreanrandom.com/forum/topic/1383-xvm (en anglais)
+  Support :           https://koreanrandom.com/forum/topic/1383-xvm (en anglais)
   FAQ :               https://modxvm.com/fr/faq/
-  Configurations :    https://www.koreanrandom.com/forum/forum/50-custom-configurations (en anglais)
+  Configurations :    https://koreanrandom.com/forum/forum/50-/ (en anglais)
 
 -----------------------------------------------------------
 2. INSTALLATION

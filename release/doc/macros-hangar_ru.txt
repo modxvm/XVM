@@ -58,7 +58,7 @@
 │ {{v.avgfrg}}               │ X │   │ средние фраги на танке (для активных за месяц игроков с 100+ боями на танке)
 │ {{v.topfrg}}               │ X │   │ топовые фраги на танке (позиция 100 из лучших игроков)
 │ {{v.xte}}                  │ X │   │ потанковый рейтинг (xTE)
-│ {{v.c_xte}}                │ X │   │ Динамический цвет для этого макроса (xTE): https://www.koreanrandom.com/forum/topic/1643-
+│ {{v.c_xte}}                │ X │   │ Динамический цвет для этого макроса (xTE): https://koreanrandom.com/forum/topic/1643-/
 │ {{v.earnedXP}}             │ X │   │ полученый опыт
 │ {{v.xpToElite}}            │ X │   │ опыт, необходимый для элитного танка
 │ {{v.xpToEliteLeft}}        │ X │   │ количество опыта, которое осталость набрать для элитного танка
@@ -91,10 +91,10 @@
 │ {{mystat.clan}}            │   │ X │ название клана
 │ {{mystat.clan_id}}         │   │ X │ ID клана
 │ {{mystat.winrate}}         │   │ X │ общий процент побед (Global Win Ratio)
-│ {{mystat.eff}}             │   │ X │ рейтинг эффективности (РЭ) по wot-news.com: https://www.koreanrandom.com/forum/topic/13386-
-│ {{mystat.wgr}}             │   │ X │ рейтинг WG (ЛРИ): https://www.koreanrandom.com/forum/topic/13433-
-│ {{mystat.wtr}}             │   │ X │ рейтинг WTR: https://koreanrandom.com/forum/topic/41382-
-│ {{mystat.wn8}}             │   │ X │ рейтинг WN8: https://www.koreanrandom.com/forum/topic/13434-
+│ {{mystat.eff}}             │   │ X │ рейтинг эффективности (РЭ) по wot-news.com: https://koreanrandom.com/forum/topic/13386-/
+│ {{mystat.wgr}}             │   │ X │ рейтинг WG (ЛРИ): https://koreanrandom.com/forum/topic/13433-/
+│ {{mystat.wtr}}             │   │ X │ рейтинг WTR: https://koreanrandom.com/forum/topic/41382-/
+│ {{mystat.wn8}}             │   │ X │ рейтинг WN8: https://koreanrandom.com/forum/topic/13434-/
 │ {{mystat.xwr}}             │   │ X │ шкала XVM для общего процента побед (значения 00-99, XX для топовых показателей)
 │ {{mystat.xeff}}            │   │ X │ шкала XVM для РЭ  (значения 00-99, XX для топовых показателей)
 │ {{mystat.xwgr}}            │   │ X │ шкала XVM для WN8 (значения 00-99, XX для топовых показателей)

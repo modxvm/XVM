@@ -69,7 +69,7 @@ Legend:
 │ S │ {{xvm-user}}       │ X │ X │ X │ X │ X │ X │ X │ Player's XVM status with values from texts/xvmuser section
 │ S │ {{flag}}           │ X │ X │ X │ X │ X │ X │ X │ Flag for player selected in the personal cabinet or determined from the client language
 │ D │ {{clanicon}}       │ X │ X │ X │ X │ X │ X │ X │ macro with clan embled image path value
-│ S │ {{clanrank}}       │ X │ X │ X │ X │ X │ X │ X │ Global map clan rating, from 1 to 1000 (https://worldoftanks.eu/leaderboard/clans/)
+│ S │ {{clanrank}}       │ X │ X │ X │ X │ X │ X │ X │ Global map clan rating, from 1 to 1000 (https://eu.wargaming.net/clans/wot/leaderboards/)
 │ S │ {{topclan}}        │ X │ X │ X │ X │ X │ X │ X │ clan indicator (values from texts/topclan section)
 │ S │ {{comment}}        │ X │ X │ X │ X │ X │ X │ X │ comment for player from contacts
 │ S │ {{turret}}         │   │   │   │   │ X │   │   │ stock turret marker
@@ -124,10 +124,10 @@ Legend:
 │ S │ {{r}}              │ X │ X │ X │ X │ X │ X │ player's rating (type of rating can be selected in the personal cabinet: https://modxvm.com/)
 │ S │ {{xr}}             │ X │ X │ X │ X │ X │ X │ same as {{r}} but always in XVM Scale
 │ S │ {{xte}}            │ X │ X │ X │ X │ X │ X │ per-vehicle efficiency (xTE) (values 00-99, XX for Tops)
-│ S │ {{eff}}            │ X │ X │ X │ X │ X │ X │ player efficiency: https://www.koreanrandom.com/forum/topic/13386-
-│ S │ {{wtr}}            │ X │ X │ X │ X │ X │ X │ WTR rating: https://koreanrandom.com/forum/topic/41382-
-│ S │ {{wn8}}            │ X │ X │ X │ X │ X │ X │ WN8 rating: https://www.koreanrandom.com/forum/topic/13434-
-│ S │ {{wgr}}            │ X │ X │ X │ X │ X │ X │ WG personal rating:  https://www.koreanrandom.com/forum/topic/13433-
+│ S │ {{eff}}            │ X │ X │ X │ X │ X │ X │ player efficiency: https://koreanrandom.com/forum/topic/13386-/
+│ S │ {{wtr}}            │ X │ X │ X │ X │ X │ X │ WTR rating: https://koreanrandom.com/forum/topic/41382-/
+│ S │ {{wn8}}            │ X │ X │ X │ X │ X │ X │ WN8 rating: https://koreanrandom.com/forum/topic/13434-/
+│ S │ {{wgr}}            │ X │ X │ X │ X │ X │ X │ WG personal rating:  https://koreanrandom.com/forum/topic/13433-/
 │ S │ {{xeff}}           │ X │ X │ X │ X │ X │ X │ XVM Scale for efficiency (values 00-99, XX for Tops)
 │ S │ {{xwtr}}           │ X │ X │ X │ X │ X │ X │ XVM Scale for WTR (values 00-99, XX for Tops)
 │ S │ {{xwn8}}           │ X │ X │ X │ X │ X │ X │ XVM Scale for WN8 (values 00-99, XX for Tops)

@@ -29,9 +29,9 @@
 
   Stránky projektu:             https://modxvm.com/
 
-  Podpora (EN):                 https://www.koreanrandom.com/forum/topic/1383-xvm
+  Podpora (EN):                 https://koreanrandom.com/forum/topic/1383-xvm
   Nejčastější dotazy (EN):      https://modxvm.com/en/faq/
-  Různá již připravená nastavení (RU): https://www.koreanrandom.com/forum/forum/50-custom-configurations
+  Různá již připravená nastavení (RU): https://koreanrandom.com/forum/forum/50-/
 
 
 -----------------------------------------------------------

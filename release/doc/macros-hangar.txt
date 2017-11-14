@@ -57,7 +57,7 @@ Legend:
 │ {{v.avgfrg}}               │ X │   │ average vehicle frags (last month active players with 100+ battles on tank)
 │ {{v.topfrg}}               │ X │   │ top vehicle frags (100 position of the best players)
 │ {{v.xte}}                  │ X │   │ per-vehicle efficiency rating
-│ {{v.c_xte}}                │ X │   │ dynamic color for this macro (xTE): https://www.koreanrandom.com/forum/topic/1643-
+│ {{v.c_xte}}                │ X │   │ dynamic color for this macro (xTE): https://koreanrandom.com/forum/topic/1643-/
 │ {{v.earnedXP}}             │ X │   │ earned XP
 │ {{v.xpToElite}}            │ X │   │ XP required for elite vehicle
 │ {{v.xpToEliteLeft}}        │ X │   │ XP left to gain for elite vehicle
@@ -90,10 +90,10 @@ Legend:
 │ {{mystat.clan}}            │   │ X │ clan name
 │ {{mystat.clan_id}}         │   │ X │ clan ID
 │ {{mystat.winrate}}         │   │ X │ GWR (Global Win Ratio)
-│ {{mystat.eff}}             │   │ X │ player efficiency: https://www.koreanrandom.com/forum/topic/13386-
-│ {{mystat.wgr}}             │   │ X │ WG personal rating:  https://www.koreanrandom.com/forum/topic/13433-
-│ {{mystat.wtr}}             │   │ X │ WTR rating: https://koreanrandom.com/forum/topic/41382-
-│ {{mystat.wn8}}             │   │ X │ WN8 rating: https://www.koreanrandom.com/forum/topic/13434-
+│ {{mystat.eff}}             │   │ X │ player efficiency: https://koreanrandom.com/forum/topic/13386-/
+│ {{mystat.wgr}}             │   │ X │ WG personal rating:  https://koreanrandom.com/forum/topic/13433-/
+│ {{mystat.wtr}}             │   │ X │ WTR rating: https://koreanrandom.com/forum/topic/41382-/
+│ {{mystat.wn8}}             │   │ X │ WN8 rating: https://koreanrandom.com/forum/topic/13434-/
 │ {{mystat.xwr}}             │   │ X │ XVM Scale for GWR (values 00-99, XX for Tops)
 │ {{mystat.xeff}}            │   │ X │ XVM Scale for efficiency (values 00-99, XX for Tops)
 │ {{mystat.xwgr}}            │   │ X │ XVM Scale for WG personal rating (values 00-99, XX for Tops)

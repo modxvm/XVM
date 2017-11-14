@@ -28,10 +28,10 @@
 
   Сайт проекта: https://modxvm.com/
 
-  Как написать в поддержку: https://www.koreanrandom.com/forum/topic/1644-readme/
-  Поддержка:    https://www.koreanrandom.com/forum/forum/43-xvm/
+  Как написать в поддержку: https://koreanrandom.com/forum/topic/1644-readme/
+  Поддержка:    https://koreanrandom.com/forum/forum/43-xvm/
   FAQ:          https://modxvm.com/faq/
-  Конфиги:      https://www.koreanrandom.com/forum/forum/50-custom-configurations/
+  Конфиги:      https://koreanrandom.com/forum/forum/50-/
 
 -----------------------------------------------------------
 2. УСТАНОВКА
@@ -152,8 +152,8 @@
     "alpha": "{{a:hp}}" - прозрачность в зависимости от количества здоровья
 
   Иконки кланов и игроков.
-    В качестве рейтинга кланов используется Эло-рейтинг клана на Глобальной карте https://worldoftanks.ru/leaderboard/clans/ (колонка wGM).
-      Формула: https://worldoftanks.ru/ru/content/cr_formulae/
+    В качестве рейтинга кланов используется Эло-рейтинг клана на Глобальной карте https://ru.wargaming.net/clans/wot/leaderboards/#ratingssearch&order=-egm (колонка wGM).
+      Формула: https://ru.wargaming.net/clans/wot/leaderboards/#ratingssearch&offset=0&limit=25&order=-esh&guide-slug=ratings&guide-anchor=1
       Принцип рейтинга ЭЛО: https://ru.wikipedia.org/wiki/%D0%E5%E9%F2%E8%ED%E3_%DD%EB%EE
     Сервер XVM мониторит список топ-кланов и при запуске клиента этот список скачивается. При появлении топового клана в бою, с сервера XVM скачивается его иконка.
     Обновление списка на сервере происходит 8 раз в сутки.

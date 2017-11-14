@@ -28,9 +28,9 @@
 
   Project site:  https://modxvm.com/
 
-  Support:       https://www.koreanrandom.com/forum/topic/1383-xvm
+  Support:       https://koreanrandom.com/forum/topic/1383-xvm
   FAQ:           https://modxvm.com/en/faq/
-  User configs:  https://www.koreanrandom.com/forum/forum/50-custom-configurations
+  User configs:  https://koreanrandom.com/forum/forum/50-/
 
 -----------------------------------------------------------
 2. INSTALLATION
@@ -148,8 +148,8 @@
     "alpha": "{{a:hp}}" - transparency depending on current health
 
   Clan and players icons.
-    Global map rating is used to rate clans https://worldoftanks.eu/leaderboard/clans/ (wGM column).
-      Formula used for the rating: https://worldoftanks.ru/ru/content/cr_formulae/
+    Global map rating is used to rate clans https://eu.wargaming.net/clans/wot/leaderboards/#ratingssearch&order=-egm (wGM column).
+      Formula used for the rating: https://eu.wargaming.net/clans/wot/leaderboards/#ratingssearch&offset=0&limit=25&order=-esh&guide-slug=ratings&guide-anchor=1
       Principles of the Elo rating system: https://en.wikipedia.org/wiki/Elo_rating_system
     XVM server monitors the list of top clans and downloads it at client launch. If a player in top clan is encounter in a battle, that clan's icon is downloaded from the XVM server.
     The list is updated 8 times a day.
