@@ -6,9 +6,9 @@ lobby_queue = 'com.xvm.xmqp.2v0.lobby'
 
 
 class AmqpClient(object):
-    def __init__(self):
+    def __init__(self, host='xmqp1.modxvm.com', port=5672):
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(
-            host='xmqp1.modxvm.com', port=5601, virtual_host='xvm', credentials=credentials))
+            host=host, port=port, virtual_host='xvm', credentials=credentials))
 
         self.channel = self.connection.channel()
 
@@ -19,7 +19,7 @@ class AmqpClient(object):
                                    queue=self.private_queue)
 
     def on_response(self, ch, method, props, body):
-        print('Message received: ', body, props)
+        #print('Message received: ', body, props)
         if self.corr_id == props.correlation_id:
             self.response = body
 
