@@ -4,7 +4,7 @@ from __version__ import __xvm_version__
 
 class XVM(object):
     XVM_VERSION    = __xvm_version__
-    WOT_VERSION    = '0.9.20.1.2'
+    WOT_VERSION    = '0.9.20.1.3'
     XVM_INTRO      = 'https://modxvm.com'
 
     API_VERSION = '4.0'

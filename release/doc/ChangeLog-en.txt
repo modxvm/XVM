@@ -52,7 +52,7 @@ XVM-7.2.1:
   * Microsoft Windows XP: crash to desktop on battle loading if graphics mode is standard.
 
   [GENERAL]
-  * World of Tanks 9.20.1.2
+  * World of Tanks 9.20.1.3
 
   [MISC]
   * updated texts/battletype section with text replacements for {{battletype}} macro
