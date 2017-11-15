@@ -1,4 +1,4 @@
-﻿XVM-7.2.3-dev:
+﻿XVM-7.2.3:
   [HANGAR]
   * renamed option in the "hangar"/"serverInfo" sections:
       "shiftX" -> "offsetX"

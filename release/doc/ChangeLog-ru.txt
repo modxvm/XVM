@@ -1,4 +1,4 @@
-﻿XVM-7.2.3-dev:
+﻿XVM-7.2.3:
   [АНГАР]
   * переименованы опции в секциях "hangar"/"serverInfo":
       "shiftX" -> "offsetX"
