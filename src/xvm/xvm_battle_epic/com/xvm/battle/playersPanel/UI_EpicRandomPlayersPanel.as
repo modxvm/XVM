@@ -16,7 +16,7 @@ package com.xvm.battle.playersPanel
         override public function as_setPanelMode(param1:int):void
         {
             super.as_setPanelMode(param1);
-            BattleState.playersPanelMode = state == PLAYERS_PANEL_STATE.EPIC_RANDOM_TOGGLED_HIDDEN ? PLAYERS_PANEL_STATE.HIDDEN : state;
+            BattleState.playersPanelMode = state == PLAYERS_PANEL_STATE.EPIC_RANDOM_THREE_COLUMN_HIDDEN ? PLAYERS_PANEL_STATE.HIDDEN : state;
             BattleState.playersPanelWidthLeft = listLeft.getRenderersVisibleWidth() - OFFSET;
             BattleState.playersPanelWidthRight = listRight.getRenderersVisibleWidth() - OFFSET;
         }
