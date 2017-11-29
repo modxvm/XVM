@@ -1,11 +1,11 @@
 node {
 
     dir("$WORKSPACE@script") {
-
         try { 
-
-            sh 'hg pull'
-            sh 'hg update'
+            stage 'checkout'
+                checkout scm
+                sh 'hg pull'
+                sh 'hg update'
 
             stage 'XVM'
                 sh './build/ci/ci_build_xvm.sh'
