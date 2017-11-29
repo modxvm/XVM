@@ -1,32 +1,32 @@
 ﻿{
     "RU": {
-        "ver": "7.2.3",
-        "wot": "0.9.20.1.3",
-        "message": " • WoT 9.20.1.3\nПодробности на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
+        "ver": "7.2.4",
+        "wot": "0.9.20.1.4",
+        "message": " • WoT 9.20.1.4\nПодробности на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
     },
     "EU": {
-        "ver": "7.2.3",
-        "wot": "0.9.20.1.3",
-        "message": " • WoT 9.20.1.3\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "7.2.4",
+        "wot": "0.9.20.1.4",
+        "message": " • WoT 9.20.1.4\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "NA": {
-        "ver": "7.2.3",
-        "wot": "0.9.20.1.3",
-        "message": " • WoT 9.20.1.3\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "7.2.4",
+        "wot": "0.9.20.1.4",
+        "message": " • WoT 9.20.1.4\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "ASIA": {
-        "ver": "7.2.3",
-        "wot": "0.9.20.1.3",
-        "message": " • WoT 9.20.1.3\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "7.2.4",
+        "wot": "0.9.20.1.4",
+        "message": " • WoT 9.20.1.4\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "CN": {
-        "ver": "7.2.3",
-        "wot": "0.9.20.1.3",
-        "message": " • WoT 9.20.1.3\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "7.2.4",
+        "wot": "0.9.20.1.4",
+        "message": " • WoT 9.20.1.4\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "CT":  {
-        "ver": "7.2.3",
-        "wot": "0.9.20.1.3",
-        "message": " • WoT 9.20.1.3\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "7.2.4",
+        "wot": "0.9.20.1.4",
+        "message": " • WoT 9.20.1.4\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     }
 }
