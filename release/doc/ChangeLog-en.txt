@@ -1,9 +1,13 @@
-﻿XVM-7.2.4-dev:
+﻿XVM-7.2.5-dev:
   [GENERAL]
   * World of Tanks 9.21
 
   [MACROS]
   * macros {{v.wtr}}, {{v.xwtr}}, {{v.c_xwtr}}, {{v.a_xwtr}} are turned off due to difficult implementation
+
+XVM-7.2.4:
+  [GENERAL]
+  * World of Tanks 9.20.1.4
 
 XVM-7.2.3:
   [HANGAR]
