@@ -1,4 +1,11 @@
-﻿XVM-7.2.3:
+﻿XVM-7.2.4:
+  [KNOWN ISSUES]
+  * Microsoft Windows XP: crash to desktop on battle loading if graphics mode is standard.
+
+  [GENERAL]
+  * World of Tanks 9.20.1.4
+
+XVM-7.2.3:
   [HANGAR]
   * renamed option in the "hangar"/"serverInfo" sections:
       "shiftX" -> "offsetX"
