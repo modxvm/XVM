@@ -107,6 +107,10 @@ package com.xvm.types.dossier
                     rankCount = isNaN(vdossier.rankCount) || vdossier.rankCount == 0 ? NaN : vdossier.rankCount;
                     rankSteps = isNaN(vdossier.rankSteps) || vdossier.rankSteps == 0 ? NaN : vdossier.rankSteps;
                     rankStepsTotal = isNaN(vdossier.rankStepsTotal) || vdossier.rankStepsTotal == 0 ? NaN : vdossier.rankStepsTotal;
+                    camouflageSummer = vdossier.camouflageSummer;
+                    camouflageWinter = vdossier.camouflageWinter;
+                    camouflageDesert = vdossier.camouflageDesert;
+                    camouflageCount = vdossier.camouflageCount;
                 }
             }
         }
@@ -174,6 +178,10 @@ package com.xvm.types.dossier
         public var rankCount:Number;
         public var rankSteps:Number;
         public var rankStepsTotal:Number;
+        public var camouflageSummer:String;
+        public var camouflageWinter:String;
+        public var camouflageDesert:String;
+        public var camouflageCount:int;
 
         // extra
         public var elite:String;

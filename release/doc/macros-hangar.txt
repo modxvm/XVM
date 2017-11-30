@@ -68,6 +68,10 @@ Legend:
 │ {{v.rankCount}}            │ X │   │ vehicle rank achieved in the rank battle
 │ {{v.rankSteps}}            │ X │   │ steps completed to next vehicle rank
 │ {{v.rankStepsTotal}}       │ X │   │ total steps count to next vehicle rank
+│ {{v.camouflageSummer}}     │ X │   │ value 'summer' if summer camouflage installed
+│ {{v.camouflageWinter}}     │ X │   │ value 'winter' if winter camouflage installed
+│ {{v.camouflageDesert}}     │ X │   │ value 'desert' if desert camouflage installed
+│ {{v.camouflageCount}}      │ X │   │ count of camouflages installed
 │ {{v.equipment1}}           │ . │   │ small icon of equipment in 1st slot
 │ {{v.equipment2}}           │ . │   │ small icon of equipment in 2nd slot
 │ {{v.equipment3}}           │ . │   │ small icon of equipment in 3rd slot

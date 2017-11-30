@@ -29,6 +29,7 @@ from gui.shared.gui_items import GUI_ITEM_TYPE
 from gui.Scaleform.locale.MENU import MENU
 from gui.Scaleform.genConsts.PROFILE_DROPDOWN_KEYS import PROFILE_DROPDOWN_KEYS
 from gui.Scaleform.daapi.view.lobby.profile.QueuedVehicleDossierReceiver import QueuedVehicleDossierReceiver
+from items.components.c11n_constants import SeasonType
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache
 from skeletons.gui.game_control import IRankedBattlesController
@@ -61,7 +62,7 @@ class _Dossier(object):
 
     def requestDossier(self, args):
         (self._battlesType, accountDBID, vehCD) = args
-        if vehCD == 0 or self.__isVehicleDossierCached(accountDBID, vehCD):
+        if vehCD == 0 or self.__isVehicleDossierLoaded(accountDBID, vehCD):
             self.__requestedDataReceived(accountDBID, vehCD)
         else:
             self.__dataReceiver.invoke(accountDBID, vehCD)
@@ -101,12 +102,22 @@ class _Dossier(object):
             return res
 
         # vehicle dossier
-        if not self.__isVehicleDossierCached(accountDBID, vehCD):
+        if not self.__isVehicleDossierLoaded(accountDBID, vehCD):
             return None
+
+        vehicle = self.itemsCache.items.getItemByCD(vehCD)
+
+        outfit = vehicle.getOutfit(SeasonType.SUMMER)
+        summer_camo = outfit and bool(outfit.hull.slotFor(GUI_ITEM_TYPE.CAMOUFLAGE).getItem())
+        outfit = vehicle.getOutfit(SeasonType.WINTER)
+        winter_camo = outfit and bool(outfit.hull.slotFor(GUI_ITEM_TYPE.CAMOUFLAGE).getItem())
+        outfit = vehicle.getOutfit(SeasonType.DESERT)
+        desert_camo = outfit and bool(outfit.hull.slotFor(GUI_ITEM_TYPE.CAMOUFLAGE).getItem())
 
         dossier = self.itemsCache.items.getVehicleDossier(vehCD, accountDBID)
         cache_item = self._cache.get(cache_key, None)
         if cache_item is not None and cache_item['battles'] == dossier.getRandomStats().getBattlesCount():
+            self.__updateCamouflageResult(cache_item, summer_camo, winter_camo, desert_camo)
             return cache_item
 
         rankCount = None
@@ -118,7 +129,6 @@ class _Dossier(object):
                 #log(vdata['key'])
                 #log(dossier.getRankedCurrentSeason())
 
-                vehicle = self.itemsCache.items.getItemByCD(vehCD)
                 ranks = self.rankedController.getAllRanksChain(vehicle)
 
                 currentRank = self.rankedController.getCurrentRank(vehicle)
@@ -169,13 +179,14 @@ class _Dossier(object):
                 #    xwtr = vehinfo.calculateXvmScale('wtr', wtr)
         res = self.__prepareVehicleResult(accountDBID, vehCD, dossier, xtdb, xte, wtr, xwtr, earnedXP,
                                           freeXP, xpToElite, rankCount, rankSteps, rankStepsTotal)
+        self.__updateCamouflageResult(res, summer_camo, winter_camo, desert_camo)
         self._cache[cache_key] = res
         return res
 
     # PRIVATE
 
     # check vehicle dossier already loaded and cached
-    def __isVehicleDossierCached(self, accountDBID, vehCD):
+    def __isVehicleDossierLoaded(self, accountDBID, vehCD):
         if accountDBID is None or accountDBID == 0:
             return True
 
@@ -254,9 +265,8 @@ class _Dossier(object):
 
 
     def __prepareAccountResult(self, accountDBID, dossier):
-        res = {}
         if dossier is None:
-            return res
+            return {}
 
         res = self.__prepareCommonResult(accountDBID, dossier)
 
@@ -287,9 +297,8 @@ class _Dossier(object):
 
     def __prepareVehicleResult(self, accountDBID, vehCD, dossier, xtdb, xte, wtr, xwtr, earnedXP,
                                freeXP, xpToElite, rankCount, rankSteps, rankStepsTotal):
-        res = {}
         if dossier is None:
-            return res
+            return {}
 
         res = self.__prepareCommonResult(accountDBID, dossier)
 
@@ -310,6 +319,12 @@ class _Dossier(object):
 
         return res
 
+    def __updateCamouflageResult(self, res, summer_camo, winter_camo, desert_camo):
+        res.update({
+          'camouflageSummer': 'summer' if summer_camo else None,
+          'camouflageWinter': 'winter' if winter_camo else None,
+          'camouflageDesert': 'desert' if desert_camo else None,
+          'camouflageCount': int(summer_camo) + int(winter_camo) + int(desert_camo)})
 
 _dossier = None
 

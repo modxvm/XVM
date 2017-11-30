@@ -4,6 +4,11 @@
 
   [MACROS]
   * macros {{v.wtr}}, {{v.xwtr}}, {{v.c_xwtr}}, {{v.a_xwtr}} are turned off due to difficult implementation
+  * added macros in carousel:
+      {{v.camouflageSummer}} - value 'summer' if summer camouflage installed
+      {{v.camouflageWinter}} - value 'winter' if winter camouflage installed
+      {{v.camouflageDesert}} - value 'desert' if desert camouflage installed
+      {{v.camouflageCount}} - count of camouflages installed
 
 XVM-7.2.4:
   [GENERAL]
