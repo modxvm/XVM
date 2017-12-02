@@ -15,6 +15,9 @@ XVM-7.2.4:
   * World of Tanks 9.20.1.4
 
 XVM-7.2.3:
+  [GENERAL]
+  * World of Tanks 9.20.1.3
+
   [HANGAR]
   * renamed option in the "hangar"/"serverInfo" sections:
       "shiftX" -> "offsetX"
@@ -68,7 +71,7 @@ XVM-7.2.1:
   * Microsoft Windows XP: crash to desktop on battle loading if graphics mode is standard.
 
   [GENERAL]
-  * World of Tanks 9.20.1.3
+  * World of Tanks 9.20.1.2
 
   [MISC]
   * updated texts/battletype section with text replacements for {{battletype}} macro
