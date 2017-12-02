@@ -123,7 +123,7 @@ def _ArenaVehiclesPlugin__switchToVehicle(base, self, prevCtrlID):
                     self._invoke(g_minimap.viewPointID, 'xvm_setVehicleID', self._ctrlVehicleID)
 
 @registerEvent(PersonalEntriesPlugin, '_PersonalEntriesPlugin__updateViewPointEntry')
-def _PersonalEntriesPlugin__updateViewPointEntry(self, avatar):
+def _PersonalEntriesPlugin__updateViewPointEntry(self, vehicleID=0):
    g_minimap.viewPointID = self._getViewPointID()
 
 

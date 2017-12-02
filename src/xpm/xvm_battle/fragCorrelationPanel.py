@@ -116,9 +116,10 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
 # BATTLE
 
 @overrideMethod(FragsCollectableStats, 'getTotalStats')
-def _FragCorrelationPanel_getTotalStats(base, self, arenaDP):
+def _FragCorrelationPanel_getTotalStats(base, self, arenaVisitor, sessionProvider):
     try:
         global ally_frags, enemy_frags, ally_vehicles, enemy_vehicles
+        arenaDP = sessionProvider.getArenaDP()
         isEnemyTeam = arenaDP.isEnemyTeam
 
         ally_frags, enemy_frags = (0, 0)
@@ -147,7 +148,7 @@ def _FragCorrelationPanel_getTotalStats(base, self, arenaDP):
             return {}
     except Exception, ex:
         err(traceback.format_exc())
-    base(self, arenaDP)
+    base(self, arenaVisitor, sessionProvider)
 
 @registerEvent(Vehicle, 'onHealthChanged')
 def onHealthChanged(self, newHealth, attackerID, attackReasonID):
