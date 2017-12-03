@@ -14,6 +14,8 @@ package com.xvm.types.dossier
         public var vehCD:int;
         public var xtdb:int;
         public var xte:int;
+        public var wtr:int;
+        public var xwtr:int;
         public var earnedXP:Number;
         public var freeXP:Number;
         public var xpToElite:Number;
@@ -23,5 +25,9 @@ package com.xvm.types.dossier
         public var rankCount:Number;
         public var rankSteps:Number;
         public var rankStepsTotal:Number;
+        public var camouflageSummer:String;
+        public var camouflageWinter:String;
+        public var camouflageDesert:String;
+        public var camouflageCount:int;
     }
 }

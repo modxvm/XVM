@@ -213,7 +213,7 @@
     ],
     // Dynamic color for XVM Scale
     // Динамический цвет по шкале XVM
-    // http://www.koreanrandom.com/forum/topic/2625-/
+    // https://koreanrandom.com/forum/topic/2625-/
     "x": [
       { "value": 16.4, "color": ${"def.colorRating.very_bad" } }, // 00 - 16 - very bad  (20% of players)
       { "value": 33.4, "color": ${"def.colorRating.bad"      } }, // 17 - 33 - bad       (better than 20% of players)
@@ -222,6 +222,9 @@
       { "value": 92.4, "color": ${"def.colorRating.very_good"} }, // 76 - 92 - very good (better than 99% of players)
       { "value": 999,  "color": ${"def.colorRating.unique"   } }  // 93 - XX - unique    (better than 99.9% of players)
     ],
+    // Текущие граничные значения для рейтингов указаны на данной странице: (TODO) https://nightly.modxvm.com/xvmscales/
+    // Current scales values ​​for ratings are listed on this page: (TODO) https://nightly.modxvm.com/xvmscales/
+    //
     // Custom dynamic colors by ratings.
     // If you want use your own color scales,
     // uncomment this block and replace "rating_name" to one of this values: "eff", "wn8", "wtr", "wgr"

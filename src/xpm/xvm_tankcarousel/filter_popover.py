@@ -8,7 +8,7 @@ import simplejson
 
 import constants
 from account_helpers.AccountSettings import AccountSettings, DEFAULT_VALUES, KEY_FILTERS
-from account_helpers.AccountSettings import CAROUSEL_FILTER_2, FALLOUT_CAROUSEL_FILTER_2, RANKED_CAROUSEL_FILTER_2
+from account_helpers.AccountSettings import CAROUSEL_FILTER_2, RANKED_CAROUSEL_FILTER_2
 from account_helpers.AccountSettings import CAROUSEL_FILTER_CLIENT_1, RANKED_CAROUSEL_FILTER_CLIENT_1
 from account_helpers.settings_core.ServerSettingsManager import ServerSettingsManager
 from gui.shared.gui_items.dossier.achievements import MarkOfMasteryAchievement
@@ -55,7 +55,6 @@ USERPREFS_CAROUSEL_FILTERS_KEY = "tankcarousel/filters"
 # Update original settings
 
 DEFAULT_VALUES[KEY_FILTERS][CAROUSEL_FILTER_2].update({x:False for x in PREFS.XVM_KEYS})
-DEFAULT_VALUES[KEY_FILTERS][FALLOUT_CAROUSEL_FILTER_2].update({x:False for x in PREFS.XVM_KEYS})
 DEFAULT_VALUES[KEY_FILTERS][RANKED_CAROUSEL_FILTER_2].update({x:False for x in PREFS.XVM_KEYS})
 
 
@@ -65,7 +64,7 @@ DEFAULT_VALUES[KEY_FILTERS][RANKED_CAROUSEL_FILTER_2].update({x:False for x in P
 @overrideMethod(ServerSettingsManager, 'getSection')
 def _ServerSettingsManager_getSection(base, self, section, defaults = None):
     res = base(self, section, defaults)
-    if section in (CAROUSEL_FILTER_2, FALLOUT_CAROUSEL_FILTER_2, RANKED_CAROUSEL_FILTER_2):
+    if section in (CAROUSEL_FILTER_2, RANKED_CAROUSEL_FILTER_2):
         try:
             filterData = simplejson.loads(userprefs.get(USERPREFS_CAROUSEL_FILTERS_KEY, '{}'))
             prefs = filterData.get('prefs', [])
@@ -77,7 +76,7 @@ def _ServerSettingsManager_getSection(base, self, section, defaults = None):
 @overrideMethod(ServerSettingsManager, 'setSections')
 def _ServerSettingsManager_setSections(base, self, sections, settings):
     for section in sections:
-        if section in (CAROUSEL_FILTER_2, FALLOUT_CAROUSEL_FILTER_2, RANKED_CAROUSEL_FILTER_2):
+        if section in (CAROUSEL_FILTER_2, RANKED_CAROUSEL_FILTER_2):
             prefs = [key for key, value in settings.iteritems() if key in PREFS.XVM_KEYS and value]
             settings = {key: value for key, value in settings.iteritems() if key not in PREFS.XVM_KEYS}
             userprefs.set(USERPREFS_CAROUSEL_FILTERS_KEY, simplejson.dumps({'prefs':prefs}))

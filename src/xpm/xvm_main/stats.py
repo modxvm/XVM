@@ -520,12 +520,14 @@ class _Stat(object):
                     self._calculateVehicleValues(stat, vData)
                     self._calculateXTDB(vData)
                     self._calculateXTE(vData)
+                    self._calculateVXWTR(vData)
             else:
                 vData = stat['v']
                 if 'id' in vData:
                     self._calculateVehicleValues(stat, vData)
                     self._calculateXTDB(vData)
                     self._calculateXTE(vData)
+                    self._calculateVXWTR(vData)
 
     # Global Win Rate (GWR)
     def _calculateGWR(self, stat):
@@ -593,6 +595,11 @@ class _Stat(object):
             return
         v['xte'] = vehinfo.calculateXTE(v['id'], float(v['db']), float(v['fb']))
         #log(str(v['id']) + " xte=" + str(v['xte']))
+
+    # calculate per-vehicle xWTR
+    def _calculateVXWTR(self, v):
+        if 'wtr' in v and v['wtr'] > 0:
+            v['xwtr'] = vehinfo.calculateXvmScale('wtr', v['wtr'])
 
     def _addContactData(self, stat):
         # try to add changed nick and comment

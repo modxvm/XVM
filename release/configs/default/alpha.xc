@@ -64,6 +64,9 @@
       { "value": 92.4, "alpha": ${"def.alphaRating.very_good"} }, // 76 - 92 - very good (better than 99% of players)  
       { "value": 999,  "alpha": ${"def.alphaRating.unique"   } }  // 93 - XX - unique    (better than 99.9% of players)
     ],
+    // Текущие граничные значения для рейтингов указаны на данной странице: (TODO) https://nightly.modxvm.com/xvmscales/
+    // Current scales values ​​for ratings are listed on this page: (TODO) https://nightly.modxvm.com/xvmscales/
+    //
     // Custom dynamic transparency by ratings.
     // If you want use your own transparency scales,
     // uncomment this block and replace "rating_name" to one of this values: "eff", "wn8", "wtr", "wgr"
@@ -71,12 +74,12 @@
     // Если вы хотите использовать свои собственные границы прозрачности вместо стандартных, 
     // раскомментируйте блок и замените "rating_name" на одно из следующих значений: "eff", "wn8", "wtr", "wgr" 
     // "rating_name": [
-    //  { "value": 500,  "color": ${"def.colorRating.very_bad" } },  //    0 - 500   - very bad
-    //  { "value": 1000,  "color": ${"def.colorRating.bad"      } }, //  501 - 1000  - bad
-    //  { "value": 2000, "color": ${"def.colorRating.normal"   } },  // 1001 - 2000  - normal
-    //  { "value": 3000, "color": ${"def.colorRating.good"     } },  // 2001 - 3000  - good
-    //  { "value": 5000, "color": ${"def.colorRating.very_good"} },  // 3001 - 5000  - very good
-    //  { "value": 99999, "color": ${"def.colorRating.unique"   } }  // 5001 - 99999 - uniquе
+    //  { "value": 500,   "alpha": ${"def.colorRating.very_bad" } }, //    0 - 500   - very bad
+    //  { "value": 1000,  "alpha": ${"def.colorRating.bad"      } }, //  501 - 1000  - bad
+    //  { "value": 2000,  "alpha": ${"def.colorRating.normal"   } }, // 1001 - 2000  - normal
+    //  { "value": 3000,  "alpha": ${"def.colorRating.good"     } }, // 2001 - 3000  - good
+    //  { "value": 5000,  "alpha": ${"def.colorRating.very_good"} }, // 3001 - 5000  - very good
+    //  { "value": 99999, "alpha": ${"def.colorRating.unique"   } }  // 5001 - 99999 - uniquе
     // ],
     // Dynamic transparency by win percent
     // Динамическая прозрачность по проценту побед

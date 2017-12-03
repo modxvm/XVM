@@ -104,6 +104,7 @@ import simplejson
 
 from logger import *
 import filecache
+import userprefs
 import vehinfo_short
 import vehinfo_tiers
 from gun_rotation_shared import calcPitchLimitsFromDesc
@@ -197,6 +198,13 @@ def _init():
         global _vehicleInfoData
         _vehicleInfoData = {x['vehCD']:x for x in res}
 
+        # load cached values
+        _load_xvmscale_data_callback(None, userprefs.get('cache/xvmscales.json.gz'))
+        _load_wn8_data_callback(None, userprefs.get('cache/wn8exp.json.gz'))
+        _load_xte_data_callback(None, userprefs.get('cache/xte.json.gz'))
+        _load_xtdb_data_callback(None, userprefs.get('cache/xtdb.json.gz'))
+
+        # request latest values
         filecache.get_url(_XVMSCALE_DATA_URL, _load_xvmscale_data_callback)
         filecache.get_url(_WN8_DATA_URL, _load_wn8_data_callback)
         filecache.get_url(_XTE_DATA_URL, _load_xte_data_callback)
@@ -273,9 +281,21 @@ def _getGunPrice(nation, gunName):
     xmlPath = _VEHICLE_TYPE_XML_PATH + nation + '/components/guns.xml'
     return ResMgr.openSection(xmlPath + '/shared/' + gunName).readInt('price')
 
+def _load_xvmscale_data_callback(url, bytes):
+    try:
+        if bytes:
+            if url is not None:
+                userprefs.set('cache/xvmscales.json.gz', bytes)
+            global _xvmscale_data
+            _xvmscale_data = simplejson.loads(gzip.GzipFile(fileobj=StringIO.StringIO(bytes)).read())
+    except Exception, ex:
+        err(traceback.format_exc())
+
 def _load_wn8_data_callback(url, bytes):
     try:
         if bytes:
+            if url is not None:
+                userprefs.set('cache/wn8exp.json.gz', bytes)
             data = simplejson.loads(gzip.GzipFile(fileobj=StringIO.StringIO(bytes)).read())
             for x in data['data']:
                 vinfo = getVehicleInfoData(int(x['IDNum']))
@@ -291,6 +311,8 @@ def _load_wn8_data_callback(url, bytes):
 def _load_xte_data_callback(url, bytes):
     try:
         if bytes:
+            if url is not None:
+                userprefs.set('cache/xte.json.gz', bytes)
             global _xte_data
             _xte_data = simplejson.loads(gzip.GzipFile(fileobj=StringIO.StringIO(bytes)).read())
             for k, v in _xte_data.iteritems():
@@ -306,15 +328,9 @@ def _load_xte_data_callback(url, bytes):
 def _load_xtdb_data_callback(url, bytes):
     try:
         if bytes:
+            if url is not None:
+                userprefs.set('cache/xtdb.json.gz', bytes)
             global _xtdb_data
             _xtdb_data = simplejson.loads(gzip.GzipFile(fileobj=StringIO.StringIO(bytes)).read())
-    except Exception, ex:
-        err(traceback.format_exc())
-
-def _load_xvmscale_data_callback(url, bytes):
-    try:
-        if bytes:
-            global _xvmscale_data
-            _xvmscale_data = simplejson.loads(gzip.GzipFile(fileobj=StringIO.StringIO(bytes)).read())
     except Exception, ex:
         err(traceback.format_exc())

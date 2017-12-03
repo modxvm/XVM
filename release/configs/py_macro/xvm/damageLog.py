@@ -375,7 +375,7 @@ class Data(object):
         self.data['splashHit'] = 'no-splash'
 
     def showDamageFromShot(self, vehicle, attackerID, points, effectsIndex, damageFactor):
-        maxHitEffectCode, decodedPoints = DamageFromShotDecoder.decodeHitPoints(points, vehicle.typeDescriptor)
+        maxHitEffectCode, decodedPoints, maxDamagedComponent = DamageFromShotDecoder.decodeHitPoints(points, vehicle.typeDescriptor)
         self.data['compName'] = decodedPoints[0].componentName if decodedPoints else 'unknown'
 
         # self.data['criticalHit'] = (maxHitEffectCode == 5)

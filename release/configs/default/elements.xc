@@ -1,7 +1,7 @@
 ﻿/**
  * GUI elements settings (experts only)
  * Настройки графических элементов (только для экспертов!)
- * http://www.koreanrandom.com/forum/topic/1761-
+ * https://koreanrandom.com/forum/topic/1761-/
  *
  * TODO: doc
  *

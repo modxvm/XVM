@@ -26,7 +26,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 26.10.2017
+    # Last update: 19.11.2017
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -151,14 +151,14 @@ _data = {
     "france:F74_AMX_M4_1949":                'amx4·49',
     "france:F74_AMX_M4_1949_Liberte":        'amx4·49',
     "france:F75_Char_de_25t":                'BChatAP',
-    "france:F77_FCM_2C_HE2017":              'Stein',
-    "france:F77_FCM_2C_HE2017_Minion":       'Stein',
-    "france:F80_FCM_F1_Mle1940_HE2017":      'Frenki',
-    "france:F80_FCM_F1_Mle1940_HE2017_Minion": 'Frenki',
+    "france:F81_Char_de_65t":                'amx65t',
+    "france:F82_AMX_M4_Mle1949_Ter":         'amx4·54',
+    "france:F83_AMX_M4_Mle1949_Bis":         'amx4·51',
     "france:F84_Somua_SM":                   'Som·SM',
     "france:F87_Batignolles-Chatillon_12t":  'BChat12t',
     "france:F88_AMX_13_105":                 '13·105',
     "france:F89_Canon_dassaut_de_105":       'amx·cda',
+    "france:F97_ELC_EVEN_90":                'elcEv90',
     "germany:Env_Artillery":                 'E.Art',
     "germany:G02_Hummel":                    'Humml',
     "germany:G03_PzV_Panther":               'Pant',
@@ -216,7 +216,6 @@ _data = {
     "germany:G137_PzVI_Tiger_217":           'Tig217',
     "germany:G138_VK168_02":                 '168.01p',
     "germany:G13_VK3001H":                   '3001h',
-    "germany:G150_Leviathan":                'LivFan',
     "germany:G15_VK3601H":                   '3601h',
     "germany:G16_PzVIB_Tiger_II":            'Tig2',
     "germany:G16_PzVIB_Tiger_II_F":          'Tig2·h',
@@ -289,6 +288,7 @@ _data = {
     "germany:G82_Pz_II_AusfG":               'Pz2g',
     "germany:G83_Pz_IV_AusfA":               'Pz4a',
     "germany:G85_Auf_Panther":               'AufPan',
+    "germany:G85_Aufklarungspanzer_V":       'AufPz5',
     "germany:G86_VK2001DB":                  'vk2001',
     "germany:G87_VK3002DB_V1":               '3001d',
     "germany:G88_Indien_Panzer":             'IndPz',
@@ -441,6 +441,8 @@ _data = {
     "uk:GB87_Chieftain_T95_turret":          'Chief/T95',
     "uk:GB88_T95_Chieftain_turret":          'T95/Chief',
     "uk:GB91_Super_Conqueror":               'S.Conq',
+    "uk:GB92_FV217":                         'Badger',
+    "uk:GB93_Caernarvon_AX":                 'CaerAX',
     "usa:A01_T1_Cunningham":                 'T1',
     "usa:A01_T1_Cunningham_bot":             'T1',
     "usa:A02_M2_lt":                         'M2lt',

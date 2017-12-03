@@ -1,6 +1,6 @@
 ﻿/**
  * General parameters for minimap.
- * Общие параметры миникарты. Видео по некоторым аспектам редактирования http://www.youtube.com/watch?feature=player_embedded&v=NBJcqWuEoLo
+ * Общие параметры миникарты. Видео по некоторым аспектам редактирования https://www.youtube.com/watch?feature=player_embedded&v=NBJcqWuEoLo
  */
 {
   "minimap": {

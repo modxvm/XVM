@@ -145,7 +145,7 @@ def _CarouselDataProvider_vehicleComparisonKey(base, cls, vehicle):
                         comparisonKey.append(float(stats.wins) / stats.battlesCount * factor)
                     elif sort_criterion == 'markOfMastery':
                         comparisonKey.append(stats.markOfMastery * factor)
-            elif sort_criterion in ['xtdb', 'xte', 'marksOnGun', 'damageRating']:
+            elif sort_criterion in ['wtr', 'xtdb', 'xte', 'marksOnGun', 'damageRating']:
                 vDossier = dossier.getDossier(PROFILE_DROPDOWN_KEYS.ALL, None, vehicle.intCD)
                 comparisonKey.append(factor if vDossier else 0)
                 if vDossier:

@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 26.10.2017
+    // Last update: 19.11.2017
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -129,14 +129,14 @@
     "france-F74_AMX_M4_1949":                {"name": null, "short": null},
     "france-F74_AMX_M4_1949_Liberte":        {"name": null, "short": null},
     "france-F75_Char_de_25t":                {"name": null, "short": null},
-    "france-F77_FCM_2C_HE2017":              {"name": null, "short": null},
-    "france-F77_FCM_2C_HE2017_Minion":       {"name": null, "short": null},
-    "france-F80_FCM_F1_Mle1940_HE2017":      {"name": null, "short": null},
-    "france-F80_FCM_F1_Mle1940_HE2017_Minion": {"name": null, "short": null},
+    "france-F81_Char_de_65t":                {"name": null, "short": null},
+    "france-F82_AMX_M4_Mle1949_Ter":         {"name": null, "short": null},
+    "france-F83_AMX_M4_Mle1949_Bis":         {"name": null, "short": null},
     "france-F84_Somua_SM":                   {"name": null, "short": null},
     "france-F87_Batignolles-Chatillon_12t":  {"name": null, "short": null},
     "france-F88_AMX_13_105":                 {"name": null, "short": null},
     "france-F89_Canon_dassaut_de_105":       {"name": null, "short": null},
+    "france-F97_ELC_EVEN_90":                {"name": null, "short": null},
     "germany-Env_Artillery":                 {"name": null, "short": null},
     "germany-G02_Hummel":                    {"name": null, "short": null},
     "germany-G03_PzV_Panther":               {"name": null, "short": null},
@@ -194,7 +194,6 @@
     "germany-G137_PzVI_Tiger_217":           {"name": null, "short": null},
     "germany-G138_VK168_02":                 {"name": null, "short": null},
     "germany-G13_VK3001H":                   {"name": null, "short": null},
-    "germany-G150_Leviathan":                {"name": null, "short": null},
     "germany-G15_VK3601H":                   {"name": null, "short": null},
     "germany-G16_PzVIB_Tiger_II":            {"name": null, "short": null},
     "germany-G16_PzVIB_Tiger_II_F":          {"name": null, "short": null},
@@ -267,6 +266,7 @@
     "germany-G82_Pz_II_AusfG":               {"name": null, "short": null},
     "germany-G83_Pz_IV_AusfA":               {"name": null, "short": null},
     "germany-G85_Auf_Panther":               {"name": null, "short": null},
+    "germany-G85_Aufklarungspanzer_V":       {"name": null, "short": null},
     "germany-G86_VK2001DB":                  {"name": null, "short": null},
     "germany-G87_VK3002DB_V1":               {"name": null, "short": null},
     "germany-G88_Indien_Panzer":             {"name": null, "short": null},
@@ -419,6 +419,8 @@
     "uk-GB87_Chieftain_T95_turret":          {"name": null, "short": null},
     "uk-GB88_T95_Chieftain_turret":          {"name": null, "short": null},
     "uk-GB91_Super_Conqueror":               {"name": null, "short": null},
+    "uk-GB92_FV217":                         {"name": null, "short": null},
+    "uk-GB93_Caernarvon_AX":                 {"name": null, "short": null},
     "usa-A01_T1_Cunningham":                 {"name": null, "short": null},
     "usa-A01_T1_Cunningham_bot":             {"name": null, "short": null},
     "usa-A02_M2_lt":                         {"name": null, "short": null},

@@ -46,7 +46,7 @@ package com.xvm.battle.playersPanel
             }
         }
 
-        override public function setPlayerNameFullWidth(param1:Number):void
+        override public function setPlayerNameFullWidth(param1:uint):void
         {
             if (!proxy.xvm_enabled)
             {
@@ -87,7 +87,7 @@ package com.xvm.battle.playersPanel
             }
         }
 
-        override public function setState(param1:int):void
+        override public function setState(param1:uint):void
         {
             if (xfw_state != param1)
             {

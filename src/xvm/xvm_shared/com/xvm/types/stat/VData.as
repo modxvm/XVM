@@ -26,6 +26,8 @@ package com.xvm.types.stat
         public var dv:Number = NaN;      // db/vehicleHP (float)
         public var xtdb:Number = NaN;    // xTDB (int, 1-100)
         public var xte:Number = NaN;     // xTE tank eff (int, 1-100)
+        public var wtr:Number = NaN;     // per-vehicle WTR (int)
+        public var xwtr:Number = NaN;    // per-vehicle WTR in XVM scale (int, 1-100)
 
         public var data:VOVehicleData = null;
     }
