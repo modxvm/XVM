@@ -9,6 +9,7 @@
       {{v.camouflageWinter}} - value 'winter' if winter camouflage installed
       {{v.camouflageDesert}} - value 'desert' if desert camouflage installed
       {{v.camouflageCount}} - count of camouflages installed
+  * vehicle macros {{v.*}} works in widgets for current vehicle
 
 XVM-7.2.4:
   [GENERAL]

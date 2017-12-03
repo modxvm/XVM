@@ -173,7 +173,7 @@ package com.xvm.lobby.hangar
 
         //
 
-        private function onUpdateCurrentVehicle(data:Object):Object
+        private function onUpdateCurrentVehicle(vehCD:int, data:Object):Object
         {
             try
             {

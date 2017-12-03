@@ -27,6 +27,7 @@ package com.xvm.extraFields
         private var _bounds:Rectangle;
         private var _layout:String;
         private var _defaultTextFormatConfig:CTextFormat;
+        private var _lastOptions:IVOMacrosOptions = null;
 
         private var _initialized:Boolean = false;
 
@@ -539,6 +540,8 @@ package com.xvm.extraFields
         {
             try
             {
+                _lastOptions = options;
+
                 _visibilityFlag = ExtraFieldsHelper.checkVisibilityFlags(cfg.flags, options);
                 if (!_visibilityFlag)
                 {
@@ -745,8 +748,8 @@ package com.xvm.extraFields
 
         public function updateOnEvent(e:PlayerStateEvent):void
         {
-            //Logger.addObject(BattleState.get(e.vehicleID));
-            update(BattleState.get(e.vehicleID));
+            //Logger.addObject(e);
+            update(isNaN(e.vehicleID) ? _lastOptions : BattleState.get(e.vehicleID));
         }
 
         public function onKeyEvent(key:Number, isDown:Boolean):void
