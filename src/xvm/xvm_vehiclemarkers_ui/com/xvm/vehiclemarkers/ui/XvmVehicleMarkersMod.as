@@ -25,6 +25,8 @@ package com.xvm.vehiclemarkers.ui
 
         public function XvmVehicleMarkersMod():void
         {
+            Xvm.appType = Defines.APP_TYPE_VEHICLE_MARKERS;
+
             Xfw.registerCommandProvider(xvm_cmd);
             Logger.counterPrefix = "V";
 

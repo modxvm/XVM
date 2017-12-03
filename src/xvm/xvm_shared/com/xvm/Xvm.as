@@ -25,6 +25,8 @@ package com.xvm
 
     public class Xvm extends Sprite
     {
+        public static var appType:int = Defines.APP_TYPE_UNKNOWN;
+
         public static function addEventListener(type:String, listener:Function, useWeakReference:Boolean = true):void
         {
             _instance.addEventListener(type, listener, false, 0, useWeakReference);

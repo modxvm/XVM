@@ -11,6 +11,9 @@
       {{v.camouflageCount}} - count of camouflages installed
   * vehicle macros {{v.*}} works in widgets for current vehicle
 
+  [WIDGETS]
+  * mouseEvents can be used in hangar widgets
+
 XVM-7.2.4:
   [GENERAL]
   * World of Tanks 9.20.1.4

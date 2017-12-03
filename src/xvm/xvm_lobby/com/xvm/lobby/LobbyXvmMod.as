@@ -32,6 +32,7 @@ package com.xvm.lobby
     {
         public function LobbyXvmMod()
         {
+            Xvm.appType = Defines.APP_TYPE_LOBBY;
             super();
             Xvm.addEventListener(HangarXvmView.ON_HANGAR_AFTER_POPULATE, onHangarAfterPopulate);
             Xvm.addEventListener(HangarXvmView.ON_HANGAR_BEFORE_DISPOSE, onHangarBeforeDispose);
