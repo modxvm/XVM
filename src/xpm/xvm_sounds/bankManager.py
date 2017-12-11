@@ -3,7 +3,7 @@
 #####################################################################
 # imports
 
-from xfw.wwise import g_wwise as wwise
+from xfw_wwise.python import g_wwise as wwise
 
 from gui.shared import g_eventBus
 

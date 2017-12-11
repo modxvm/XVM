@@ -1,0 +1,16 @@
+{
+    "id": "com.modxvm.xvm.hangar",
+    "name": "XVM Hangar",
+    "description": "XVM Hangar Module",
+
+    "version": "XVM_VERSION",
+    "dependencies": ["com.modxvm.xvm"],
+
+    "url": "http://modxvm.com/",
+    "url_update": "http://modxvm.com/",
+    
+    "wot_versions"         : ["WOT_VERSION"],
+    "wot_versions_strategy": "",
+
+    "features": ["python"]
+}

@@ -20,7 +20,7 @@ import ResMgr
 from gui.shared.utils.HangarSpace import g_hangarSpace
 
 from xfw import *
-from xfw.ping import ping as xfw_ping
+from xfw_ping.python import ping as xfw_ping
 
 from xvm_main.python.logger import *
 import xvm_main.python.config as config

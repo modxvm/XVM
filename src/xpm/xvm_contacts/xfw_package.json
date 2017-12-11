@@ -1,0 +1,16 @@
+{
+    "id": "com.modxvm.xvm.contacts",
+    "name": "XVM Contacts",
+    "description": "XVM Contacts",
+
+    "version": "XVM_VERSION",
+    "dependencies": ["com.modxvm.xvm"],
+
+    "url": "http://modxvm.com/",
+    "url_update": "http://modxvm.com/",
+    
+    "wot_versions"         : ["WOT_VERSION"],
+    "wot_versions_strategy": "",
+
+    "features": ["python"]
+}

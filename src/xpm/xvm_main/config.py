@@ -13,7 +13,7 @@ from gui.shared import g_eventBus, events
 
 from xfw import *
 import xfw.constants as xfw_constants
-import xfw.filewatcher as xfw_filewatcher
+import xfw_filewatcher.python as xfw_filewatcher
 
 from consts import *
 from logger import *

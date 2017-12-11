@@ -144,7 +144,7 @@ calc_hash_for_xvm_integrity()
     echo "Calculating hashes for xvm_integrity"
 
     pushd ~output > /dev/null
-    hash_file='res_mods/mods/packages/xvm_integrity/python/hash_table.py'
+    hash_file='res_mods/mods/xfw_packages/xvm_integrity/python/hash_table.py'
     echo -e '""" Generated automatically by XVM builder """\nHASH_DATA = {' > $hash_file
     find res_mods -name *.py -print0 -o -name *.pyc -print0 -o -name *.swf -print0 | while read -d $'\0' file
     do

@@ -9,14 +9,15 @@ XPM_RUN_TEST=${XPM_RUN_TEST:=1}
 #############################
 # INTERNAL
 
-### Find Python executable
 currentdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 source "$currentdir"/../../src/xfw/build/library.sh
 source "$currentdir"/../../build/xvm-build.conf
 
 detect_coreutils
 detect_python
-###
+detect_mercurial
+
+XVMBUILD_XVM_REVISION=$(hg parent --template "{rev}")
 
 clear()
 {
@@ -112,16 +113,30 @@ echo 'building xvm'
 for fn in $(find . -type "f" -name "*.py"); do
   f=${fn#./}
   m=${f%%/*}
-  build $f mods/packages/$m
+  build $f mods/xfw_packages/$m
   if [[ $fn = */__version__.py ]]; then
       rm -f "$fn"
   fi
 done
+
+# build *.json file
+for fn in $(find . -type "f" -name "*xfw_package.json"); do
+  f=${fn#./}
+  m=${f%%/*}
+
+  echo "$f"
+
+  outpath="../../~output/res_mods/mods/xfw_packages/$m/xfw_package.json"
+  cp "$fn" "$outpath"
+  sed -i "s/XVM_VERSION/$XVMBUILD_XVM_VERSION.$XVMBUILD_XVM_REVISION/g" "$outpath"
+  sed -i "s/WOT_VERSION/$XVMBUILD_WOT_VERSION/g" "$outpath"
+done
+
 #echo "$(($(date +%s%N)-$st))"
 
 # generate default config from .xc files and xvm.xc.sample
 echo 'generate default_config.py and xvm.xc.sample'
-dc_fn=../../~output/res_mods/mods/packages/xvm_main/python/default_config.py
+dc_fn=../../~output/res_mods/mods/xfw_packages/xvm_main/python/default_config.py
 rm -f "${dc_fn}c"
 "$XVMBUILD_PYTHON_FILEPATH" -c "
 import sys
@@ -138,7 +153,7 @@ rm -f "${dc_fn}c"
 [ ! -f ${dc_fn} ] && exit
 
 xvm_xc_sample_src=../../release/configs/xvm.xc.sample
-xvm_xc_sample_trgt=../../~output/res_mods/mods/packages/xvm_main/python/default_xvm_xc.py
+xvm_xc_sample_trgt=../../~output/res_mods/mods/xfw_packages/xvm_main/python/default_xvm_xc.py
 echo -e -n "# -*- coding: utf-8 -*-\n''' Generated automatically by XVM builder '''\nDEFAULT_XVM_XC = '''" > $xvm_xc_sample_trgt
 cat $xvm_xc_sample_src >> $xvm_xc_sample_trgt
 echo "'''" >> $xvm_xc_sample_trgt

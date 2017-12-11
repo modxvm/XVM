@@ -1,19 +1,6 @@
 """ XVM (c) https://modxvm.com 2013-2017 """
 
 #####################################################################
-# MOD INFO
-
-XFW_MOD_INFO = {
-    # mandatory
-    'VERSION':       '0.9.21',
-    'URL':           'https://modxvm.com/',
-    'UPDATE_URL':    'https://modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.21'],
-    # optional
-}
-
-
-#####################################################################
 # imports
 
 from pprint import pprint
@@ -158,7 +145,7 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
 #####################################################################
 # Log version info + warn about installed XVM fonts
 
-log("XVM: eXtended Visualization Mod ( %s )" % XFW_MOD_INFO['URL'])
+log("XVM: eXtended Visualization Mod ( https://modxvm.com/ )")
 
 try:
     from datetime import datetime
@@ -174,7 +161,7 @@ try:
     log("    XVM Revision  : %s" % __revision__)
     log("    XVM Branch    : %s" % __branch__)
     log("    XVM Hash      : %s" % __node__)
-    log("    WoT Supported : %s" % ", ".join(XFW_MOD_INFO['GAME_VERSIONS']))
+#    log("    WoT Supported : %s" % ", ".join(XFW_MOD_INFO['GAME_VERSIONS']))
     log("    WoT Current   : %s" % wot_ver)
     log("    Current Time  : %s %+05d" % (datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
         round((round((datetime.now()-datetime.utcnow()).total_seconds())/1800)/2) * 100))
