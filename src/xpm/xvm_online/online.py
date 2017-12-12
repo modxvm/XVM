@@ -115,7 +115,10 @@ class _Get_online(object):
             #}
 
             data_dict = {}
-            for data_host in data.get(self.region, []):
+            data_region = data.get(self.region, None)
+            if not data_region:
+                return
+            for data_host in data_region:
                 server = data_host['server']
                 if server.startswith('NA '): # API returns "NA EAST" instead of "US East" => can't determine current server
                     server = 'US ' + server[3:].capitalize()
