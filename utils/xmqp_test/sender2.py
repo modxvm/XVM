@@ -6,7 +6,9 @@ from AmqpClient import AmqpClient
 with open('data/2/0.query.battle.channel.json','r') as f:
     get_exchange_name_query = f.read()
 
-amqp_client = AmqpClient()
+host = 'xmqp1.modxvm.com'
+port = 5601
+amqp_client = AmqpClient(host, port)
 
 print(" [x] Requesting battle channel name")
 response = json.loads(amqp_client.call(get_exchange_name_query, 'query.battle.channel'))
@@ -21,4 +23,3 @@ def send(fn):
 
 send('data/2/1.data.json')
 send('data/2/2.data.json')
-send('data/2/3.data.json')
