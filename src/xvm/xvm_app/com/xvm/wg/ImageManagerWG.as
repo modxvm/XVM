@@ -19,6 +19,9 @@ package com.xvm.wg
             }
             return _imageManager;
         }
+
+        private static const MAX_CACHE_SIZE:int = 100 * 1024 * 1024; // 100 MB
+        private static const MIN_CACHE_SIZE:int = 10 * 1024 * 1024; // 10 MB
         /// </xvm>
 
         private var _webCache:Dictionary = null;
@@ -42,7 +45,10 @@ package com.xvm.wg
             super();
             this._webCache = new Dictionary();
             this._cache = new Dictionary();
-            this._queue = new Vector.<ImageManagerWG>();
+            this._queue = new Vector.<ImageData>();
+            /// <xvm>
+            as_setImageCacheSettings(MAX_CACHE_SIZE, MIN_CACHE_SIZE);
+            /// </xvm>
         }
 
         override protected function loadImages(param1:Array) : void
