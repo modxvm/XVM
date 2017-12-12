@@ -1,4 +1,4 @@
-﻿XVM-7.2.5-dev:
+﻿XVM-7.3.0-dev:
   [ОБЩЕЕ]
   * World of Tanks 9.21
 
