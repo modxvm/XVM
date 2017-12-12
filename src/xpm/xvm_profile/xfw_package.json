@@ -4,7 +4,7 @@
     "description": "XVM Profile module",
 
     "version": "XVM_VERSION",
-    "dependencies": ["com.modxvm.xvm"],
+    "dependencies": ["com.modxvm.xvm", "com.modxvm.xvm.ping"],
 
     "url": "http://modxvm.com/",
     "url_update": "http://modxvm.com/",

@@ -5,7 +5,7 @@
 
     "version": "XVM_VERSION",
     "dependencies": ["com.modxvm.xfw"],
-    "dependencies_optional": ["com.modxvm.xfw.filewatcher"],
+    "dependencies_optional": ["com.modxvm.xfw.filewatcher", "com.modxvm.xfw.mutex"],
 
     "url": "http://modxvm.com/",
     "url_update": "http://modxvm.com/",

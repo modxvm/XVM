@@ -4,7 +4,7 @@
     "description": "XVM Integrity Module",
 
     "version": "XVM_VERSION",
-    "dependencies": ["com.modxvm.xvm"],
+    "dependencies": ["com.modxvm.xvm", "com.modxvm.xvm.hotfix"],
 
     "url": "http://modxvm.com/",
     "url_update": "http://modxvm.com/",

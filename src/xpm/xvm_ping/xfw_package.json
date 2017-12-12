@@ -4,7 +4,8 @@
     "description": "XVM Ping module",
 
     "version": "XVM_VERSION",
-    "dependencies": ["com.modxvm.xvm"],
+    "dependencies": ["com.modxvm.xvm", "com.modxvm.xvm.online"],
+    "dependencies_optional": ["com.modxvm.xfw.ping"],
 
     "url": "http://modxvm.com/",
     "url_update": "http://modxvm.com/",

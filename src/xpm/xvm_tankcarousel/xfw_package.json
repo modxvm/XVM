@@ -4,7 +4,7 @@
     "description": "XVM Tankcarousel module",
 
     "version": "XVM_VERSION",
-    "dependencies": ["com.modxvm.xvm"],
+    "dependencies": ["com.modxvm.xvm", "com.modxvm.xvm.squad"],
 
     "url": "http://modxvm.com/",
     "url_update": "http://modxvm.com/",

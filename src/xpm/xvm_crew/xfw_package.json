@@ -4,7 +4,7 @@
     "description": "XVM Crew Module",
 
     "version": "XVM_VERSION",
-    "dependencies": ["com.modxvm.xvm"],
+    "dependencies": ["com.modxvm.xvm", "com.modxvm.xvm.contacts"],
 
     "url": "http://modxvm.com/",
     "url_update": "http://modxvm.com/",

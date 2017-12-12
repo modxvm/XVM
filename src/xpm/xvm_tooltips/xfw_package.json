@@ -4,7 +4,7 @@
     "description": "XVM Tooltips module",
 
     "version": "XVM_VERSION",
-    "dependencies": ["com.modxvm.xvm"],
+    "dependencies": ["com.modxvm.xvm", "com.modxvm.xvm.techtree"],
 
     "url": "http://modxvm.com/",
     "url_update": "http://modxvm.com/",
