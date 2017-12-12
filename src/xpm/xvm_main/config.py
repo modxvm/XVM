@@ -13,7 +13,6 @@ from gui.shared import g_eventBus, events
 
 from xfw import *
 import xfw.constants as xfw_constants
-import xfw_filewatcher.python as xfw_filewatcher
 
 from consts import *
 from logger import *
@@ -77,13 +76,17 @@ def load(e):
             config_autoreload = get('autoReloadConfig', False)
 
         if config_autoreload:
-            if not xfw_filewatcher.watcher_is_exists(XVM_EVENT.RELOAD_CONFIG):
-                xfw_filewatcher.watcher_add(XVM_EVENT.RELOAD_CONFIG, XVM.CONFIG_DIR, \
-                    "import BigWorld;"\
-                    "from gui.shared import g_eventBus, events;" \
-                    "BigWorld.callback(0,lambda: g_eventBus.handleEvent(events.HasCtxEvent('%s', {'filename':'%s'})))" % (XVM_EVENT.RELOAD_CONFIG, XVM.CONFIG_FILE), \
-                    True)
-            xfw_filewatcher.watcher_start(XVM_EVENT.RELOAD_CONFIG)
+            try:
+                import xfw_filewatcher.python as xfw_filewatcher
+                if not xfw_filewatcher.watcher_is_exists(XVM_EVENT.RELOAD_CONFIG):
+                    xfw_filewatcher.watcher_add(XVM_EVENT.RELOAD_CONFIG, XVM.CONFIG_DIR, \
+                        "import BigWorld;"\
+                        "from gui.shared import g_eventBus, events;" \
+                        "BigWorld.callback(0,lambda: g_eventBus.handleEvent(events.HasCtxEvent('%s', {'filename':'%s'})))" % (XVM_EVENT.RELOAD_CONFIG, XVM.CONFIG_FILE), \
+                        True)
+                xfw_filewatcher.watcher_start(XVM_EVENT.RELOAD_CONFIG)
+            except Exception:
+                log('[WARNING] XFW Filewatcher is not available. Config reload was disabled.')
 
     except Exception:
         err(traceback.format_exc())
