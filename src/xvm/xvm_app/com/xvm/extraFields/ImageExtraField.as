@@ -70,7 +70,7 @@ package com.xvm.extraFields
             ExtraFieldsHelper.setupEvents(this);
         }
 
-        override public function dispose():void
+        override protected function onDispose():void
         {
             super.dispose();
             Xfw.removeCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
