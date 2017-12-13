@@ -50,6 +50,16 @@ package com.xvm.types.dossier
                 topfrg = vdata.topfrg;
             }
 
+            var vdossier:VehicleDossier = Dossier.getVehicleDossier(vehCD);
+
+            if (vdossier)
+            {
+                camouflageSummer = vdossier.camouflageSummer;
+                camouflageWinter = vdossier.camouflageWinter;
+                camouflageDesert = vdossier.camouflageDesert;
+                camouflageCount = vdossier.camouflageCount;
+            }
+
             // Calculations
             if (battles > 0)
             {
@@ -59,7 +69,6 @@ package com.xvm.types.dossier
                 winrate = wins / battles * 100;
                 c_winrate = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WINRATE, winrate, NaN, "#");
 
-                var vdossier:VehicleDossier = Dossier.getVehicleDossier(vehCD);
                 if (vdossier)
                 {
                     hitsRatio = vdossier.hitsRatio * 100;
@@ -107,10 +116,6 @@ package com.xvm.types.dossier
                     rankCount = isNaN(vdossier.rankCount) || vdossier.rankCount == 0 ? NaN : vdossier.rankCount;
                     rankSteps = isNaN(vdossier.rankSteps) || vdossier.rankSteps == 0 ? NaN : vdossier.rankSteps;
                     rankStepsTotal = isNaN(vdossier.rankStepsTotal) || vdossier.rankStepsTotal == 0 ? NaN : vdossier.rankStepsTotal;
-                    camouflageSummer = vdossier.camouflageSummer;
-                    camouflageWinter = vdossier.camouflageWinter;
-                    camouflageDesert = vdossier.camouflageDesert;
-                    camouflageCount = vdossier.camouflageCount;
                 }
             }
         }
