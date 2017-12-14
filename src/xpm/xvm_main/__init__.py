@@ -74,8 +74,6 @@ def fini():
     g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, g_xvm.onConfigLoaded)
     g_eventBus.removeListener(XVM_EVENT.SYSTEM_MESSAGE, g_xvm.onSystemMessage)
 
-    filecache.fin()
-
 
 #####################################################################
 # handlers
