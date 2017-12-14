@@ -1,19 +1,15 @@
-/**
- * XVM: eXtended Visualization Mod for World of Tanks.
- * https://modxvm.com/
- */
 package com.xvm.wg
 {
-    import com.xvm.wg.*;
     import flash.events.*;
     import flash.utils.*;
-    import net.wg.infrastructure.events.LoaderEvent;
-    import net.wg.infrastructure.interfaces.IImageData;
     import net.wg.infrastructure.managers.IImageManager;
     import net.wg.infrastructure.managers.ILoaderManager;
+    import net.wg.infrastructure.events.LoaderEvent;
+    import net.wg.infrastructure.interfaces.IImageData;
 
-    public class ImageManagerWG extends EventDispatcher implements IImageManager
+    public class ImageManagerWG extends ImageManagerMetaWG implements IImageManager
     {
+        // <xvm>
         private static var _imageManager:IImageManager = null;
         public static function get imageManager():IImageManager
         {
@@ -24,10 +20,11 @@ package com.xvm.wg
             return _imageManager;
         }
 
-        ///
+        private static const MAX_CACHE_SIZE:int = 100 * 1024 * 1024; // 100 MB
+        private static const MIN_CACHE_SIZE:int = 10 * 1024 * 1024; // 10 MB
+        /// </xvm>
 
-        private static const MAX_CACHE_SIZE:int = 4096 * 1024;
-        private static const MIN_CACHE_SIZE:int = 1024 * 1024;
+        private var _webCache:Dictionary = null;
 
         private var _cache:Dictionary = null;
 
@@ -37,7 +34,7 @@ package com.xvm.wg
 
         private var _loaderMgr:ILoaderManager = null;
 
-        private var _size:uint = 0;
+        private var _cacheSize:uint = 0;
 
         private var _maxCacheSize:int = 0;
 
@@ -46,55 +43,52 @@ package com.xvm.wg
         public function ImageManagerWG()
         {
             super();
+            this._webCache = new Dictionary();
             this._cache = new Dictionary();
             this._queue = new Vector.<ImageData>();
+            /// <xvm>
             as_setImageCacheSettings(MAX_CACHE_SIZE, MIN_CACHE_SIZE);
+            /// </xvm>
         }
 
-        public function as_loadImages(param1:Array) : void
+        override protected function loadImages(param1:Array) : void
         {
-            var _loc3_:String = null;
-            var _loc2_:ImageData = null;
-            for each(_loc3_ in param1)
+            var _loc4_:String = null;
+            var _loc2_:* = true;
+            var _loc3_:ImageData = null;
+            for each(_loc4_ in param1)
             {
-                if(this._cache.hasOwnProperty(_loc3_))
+                if(this._webCache.hasOwnProperty(_loc4_))
                 {
-                    _loc2_ = ImageData(this._cache[_loc3_]);
-                    if(!_loc2_.isLockData())
+                    _loc3_ = ImageData(this._webCache[_loc4_]);
+                    if(!_loc3_.isLockData())
                     {
-                        if(!_loc2_.lockData())
+                        if(!_loc3_.lockData())
                         {
-                            _loc2_.dispose();
-                            _loc2_ = new ImageData(_loc3_);
+                            _loc3_.dispose();
+                            _loc3_ = new ImageData(_loc4_,_loc2_);
                         }
                     }
                 }
                 else
                 {
-                    _loc2_ = new ImageData(_loc3_);
+                    _loc3_ = new ImageData(_loc4_,_loc2_);
                 }
-                _loc2_.permanent = true;
-                this._cache[_loc3_] = _loc2_;
+                _loc3_.permanent = true;
+                this._webCache[_loc4_] = _loc3_;
             }
             param1.splice(0,param1.length);
         }
 
-        public function as_setImageCacheSettings(param1:int, param2:int) : void
-        {
-            this._maxCacheSize = param1;
-            this._minCacheSize = param2;
-            this.initCache();
-        }
-
-        public function as_unloadImages(param1:Array) : void
+        override protected function unloadImages(param1:Array) : void
         {
             var _loc3_:String = null;
             var _loc2_:ImageData = null;
             for each(_loc3_ in param1)
             {
-                if(this._cache.hasOwnProperty(_loc3_))
+                if(this._webCache.hasOwnProperty(_loc3_))
                 {
-                    _loc2_ = this._cache[_loc3_];
+                    _loc2_ = this._webCache[_loc3_];
                     _loc2_.permanent = false;
                     if(_loc2_.ready)
                     {
@@ -103,7 +97,7 @@ package com.xvm.wg
                     else
                     {
                         _loc2_.addEventListener(Event.COMPLETE,this.onLoaderCompleteHandler);
-                        _loc2_.addEventListener(IOErrorEvent.IO_ERROR,this.onLoaderIOErrorHandler);
+                        _loc2_.addEventListener(IOErrorEvent.IO_ERROR,this.onLoaderIoErrorHandler);
                     }
                 }
                 else
@@ -113,7 +107,14 @@ package com.xvm.wg
             }
         }
 
-        public function dispose() : void
+        public function as_setImageCacheSettings(param1:int, param2:int) : void
+        {
+            this._maxCacheSize = param1;
+            this._minCacheSize = param2;
+            this.initCache();
+        }
+
+        override protected function onDispose() : void
         {
             var _loc1_:ImageData = null;
             if(this._init)
@@ -123,69 +124,94 @@ package com.xvm.wg
             }
             this._queue.splice(0,this._queue.length);
             this._queue = null;
+            for each(_loc1_ in this._webCache)
+            {
+                delete this._webCache[_loc1_.source];
+                _loc1_.dispose();
+            }
+            this._webCache = null;
             for each(_loc1_ in this._cache)
             {
                 delete this._cache[_loc1_.source];
                 _loc1_.dispose();
             }
             this._cache = null;
+
+            super.onDispose();
         }
 
-        public function getImageData(param1:String) : IImageData
+        public function getImageData(param1:String, param2:Boolean) : IImageData
         {
-            var _loc2_:ImageData = null;
+            var _loc3_:ImageData = null;
             if(param1 == null || param1.length == 0)
             {
                 return null;
             }
-            _loc2_ = this.getLoader(param1);
-            if(!_loc2_.ready)
+            _loc3_ = this.getLoader(param1,param2);
+            if(!_loc3_.ready)
             {
-                _loc2_.addEventListener(Event.COMPLETE,this.onLoaderCompleteHandler);
-                _loc2_.addEventListener(IOErrorEvent.IO_ERROR,this.onLoaderIOErrorHandler);
+                _loc3_.addEventListener(Event.COMPLETE,this.onLoaderCompleteHandler);
+                _loc3_.addEventListener(IOErrorEvent.IO_ERROR,this.onLoaderIoErrorHandler);
             }
-            return _loc2_;
+            return _loc3_;
         }
 
-        private function getLoader(param1:String) : ImageData
+        private function getLoader(param1:String, param2:Boolean) : ImageData
         {
             App.utils.asserter.assert(this._init,"ImageManager not been initialized");
-            var _loc2_:ImageData = null;
-            if(this._cache.hasOwnProperty(param1))
+            var _loc3_:ImageData = null;
+            if(param2 && this._webCache.hasOwnProperty(param1))
             {
-                _loc2_ = ImageData(this._cache[param1]);
-                if(!_loc2_.isLockData())
+                _loc3_ = ImageData(this._webCache[param1]);
+            }
+            else if(!param2 && this._cache.hasOwnProperty(param1))
+            {
+                _loc3_ = ImageData(this._cache[param1]);
+            }
+            if(_loc3_)
+            {
+                if(!_loc3_.isLockData())
                 {
-                    if(_loc2_.lockData())
+                    if(_loc3_.lockData())
                     {
-                        this.pushQueue(_loc2_);
+                        this.pushQueue(_loc3_);
                     }
                     else
                     {
-                        _loc2_.dispose();
-                        _loc2_ = this.createImageLoader(param1);
+                        _loc3_.dispose();
+                        _loc3_ = this.createImageLoader(param1,param2);
                     }
                 }
             }
             else
             {
-                _loc2_ = this.createImageLoader(param1);
+                _loc3_ = this.createImageLoader(param1,param2);
             }
-            return _loc2_;
+            return _loc3_;
         }
 
-        private function createImageLoader(param1:String) : ImageData
+        private function createImageLoader(param1:String, param2:Boolean) : ImageData
         {
-            var _loc2_:ImageData = new ImageData(param1);
-            this._cache[param1] = _loc2_;
-            return _loc2_;
+            var _loc3_:ImageData = new ImageData(param1,param2);
+            if(param2)
+            {
+                this._webCache[param1] = _loc3_;
+            }
+            else
+            {
+                this._cache[param1] = _loc3_;
+            }
+            return _loc3_;
         }
 
         private function pushQueue(param1:ImageData) : void
         {
-            this._queue.push(param1);
             App.utils.asserter.assert(this._minCacheSize > param1.size,"Image size exceeds the buffer cache: " + param1.source);
-            this._size = this._size + param1.size;
+            if(!param1.useWebCache)
+            {
+                this._queue.push(param1);
+                this._cacheSize = this._cacheSize + param1.size;
+            }
         }
 
         private function clearCache() : void
@@ -193,10 +219,10 @@ package com.xvm.wg
             var _loc1_:ImageData = null;
             var _loc3_:String = null;
             var _loc2_:Vector.<String> = new Vector.<String>();
-            while(this._size > this._minCacheSize)
+            while(this._cacheSize > this._minCacheSize)
             {
                 _loc1_ = this._queue.shift();
-                this._size = this._size - _loc1_.size;
+                this._cacheSize = this._cacheSize - _loc1_.size;
                 _loc1_.unlockData();
             }
             for each(_loc1_ in this._cache)
@@ -227,23 +253,23 @@ package com.xvm.wg
         {
             var _loc2_:ImageData = ImageData(param1.target);
             _loc2_.removeEventListener(Event.COMPLETE,this.onLoaderCompleteHandler);
-            _loc2_.removeEventListener(IOErrorEvent.IO_ERROR,this.onLoaderIOErrorHandler);
+            _loc2_.removeEventListener(IOErrorEvent.IO_ERROR,this.onLoaderIoErrorHandler);
             if(!_loc2_.permanent)
             {
                 this.pushQueue(_loc2_);
             }
         }
 
-        private function onLoaderIOErrorHandler(param1:IOErrorEvent) : void
+        private function onLoaderIoErrorHandler(param1:IOErrorEvent) : void
         {
             var _loc2_:ImageData = ImageData(param1.target);
             _loc2_.removeEventListener(Event.COMPLETE,this.onLoaderCompleteHandler);
-            _loc2_.removeEventListener(IOErrorEvent.IO_ERROR,this.onLoaderIOErrorHandler);
+            _loc2_.removeEventListener(IOErrorEvent.IO_ERROR,this.onLoaderIoErrorHandler);
         }
 
         private function onLoaderMgrViewLoadingHandler(param1:LoaderEvent) : void
         {
-            if(this._size > this._maxCacheSize)
+            if(this._cacheSize > this._maxCacheSize)
             {
                 this.clearCache();
             }
@@ -330,16 +356,22 @@ class WeakRef extends Object implements IDisposable
     }
 }
 
-import flash.display.*;
-import flash.events.*;
-import flash.net.*;
-import flash.system.*;
-import net.wg.infrastructure.interfaces.IImage;
-import net.wg.infrastructure.interfaces.IImageData;
+import flash.events.EventDispatcher;
 import net.wg.infrastructure.interfaces.entity.IDisposable;
+import net.wg.infrastructure.interfaces.IImageData;
+import flash.display.Loader;
+import net.wg.infrastructure.interfaces.IImage;
+import flash.events.Event;
+import flash.display.Bitmap;
+import flash.display.BitmapData;
+import flash.events.IOErrorEvent;
+import flash.net.URLRequest;
+import flash.system.LoaderContext;
+import flash.system.ApplicationDomain;
 
 class ImageData extends EventDispatcher implements IDisposable, IImageData
 {
+
     private static const BYTE_PER_PIXEL:int = 4;
 
     private static const CONTENT_TYPE_SWF:String = "application/x-shockwave-flash";
@@ -356,15 +388,18 @@ class ImageData extends EventDispatcher implements IDisposable, IImageData
 
     private var _source:String = "";
 
-    function ImageData(param1:String)
+    private var _useWebCache:Boolean = false;
+
+    function ImageData(param1:String, param2:Boolean)
     {
         super();
         this._source = param1;
-        var _loc2_:URLRequest = new URLRequest(param1);
-        var _loc3_:LoaderContext = new LoaderContext(false,ApplicationDomain.currentDomain);
+        this._useWebCache = param2;
+        var _loc3_:URLRequest = new URLRequest(param1);
+        var _loc4_:LoaderContext = new LoaderContext(false,ApplicationDomain.currentDomain);
         this._loader = new Loader();
         this.addLoaderListeners();
-        this._loader.load(_loc2_,_loc3_);
+        this._loader.load(_loc3_,_loc4_);
     }
 
     public function dispose() : void
@@ -428,6 +463,11 @@ class ImageData extends EventDispatcher implements IDisposable, IImageData
         return this._ready;
     }
 
+    public function get useWebCache() : Boolean
+    {
+        return this._useWebCache;
+    }
+
     public function showTo(param1:IImage) : void
     {
         param1.bitmapData = this._weakBitmapData.target;
@@ -449,7 +489,7 @@ class ImageData extends EventDispatcher implements IDisposable, IImageData
     private function onLoaderIOErrorHandler(param1:IOErrorEvent) : void
     {
         this.removeLoaderListeners();
-        DebugUtils.LOG_WARNING(param1.toString());
+        DebugUtils.LOG_ERROR(param1.toString());
         dispatchEvent(param1);
         this._weakBitmapData = new WeakRef(null);
         this._loader = null;

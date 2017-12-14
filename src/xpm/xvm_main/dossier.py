@@ -26,6 +26,7 @@ from items import vehicles
 from dossiers2.ui.achievements import ACHIEVEMENT_BLOCK as _AB
 from gui.ranked_battles.ranked_models import Rank, VehicleRank
 from gui.shared.gui_items import GUI_ITEM_TYPE
+from gui.shared.utils.requesters import REQ_CRITERIA
 from gui.Scaleform.locale.MENU import MENU
 from gui.Scaleform.genConsts.PROFILE_DROPDOWN_KEYS import PROFILE_DROPDOWN_KEYS
 from gui.Scaleform.daapi.view.lobby.profile.QueuedVehicleDossierReceiver import QueuedVehicleDossierReceiver
@@ -43,6 +44,54 @@ import vehinfo
 
 
 #############################
+
+class _DummyStats(object):
+    def getBattlesCount(self): return 0
+    def getWinsCount(self): return 0
+    def getLossesCount(self): return 0
+    def getXP(self): return 0
+    def getSurvivedBattlesCount(self): return 0
+    def getShotsCount(self): return 0
+    def getHitsCount(self): return 0
+    def getShotsCount(self): return 0
+    def getSpottedEnemiesCount(self): return 0
+    def getFragsCount(self): return 0
+    def getDamageDealt(self): return 0
+    def getDamageReceived(self): return 0
+    def getCapturePoints(self): return 0
+    def getDroppedCapturePoints(self): return 0
+    def getOriginalXP(self): return 0
+    def getDamageAssistedTrack(self): return 0
+    def getDamageAssistedRadio(self): return 0
+    def getShotsReceived(self): return 0
+    def getNoDamageShotsReceived(self): return 0
+    def getPiercedReceived(self): return 0
+    def getHeHitsReceived(self): return 0
+    def getHeHits(self): return 0
+    def getPierced(self): return 0
+    def getMaxXp(self): return 0
+    def getMaxFrags(self): return 0
+    def getMaxDamage(self): return 0
+    def getBattleLifeTime(self): return 0
+    def getMileage(self): return 0
+    def getTreesCut(self): return 0
+
+class _DummyDossier(object):
+    _dummyStats = _DummyStats()
+    def getRecordValue(*a, **k): return None
+    def getGlobalStats(): return _dummyStats
+    def getRandomStats(): return _dummyStats
+    def getFalloutStats(): return _dummyStats
+    def getHistoricalStats(): return _dummyStats
+    def getTeam7x7Stats(): return _dummyStats
+    def getRated7x7Stats(): return _dummyStats
+    def getFortSortiesStats(): return _dummyStats
+    def getGlobalMapStats(): return _dummyStats
+    def getSeasonRated7x7Stats(*a, **k): return _dummyStats
+    def getFortBattlesStats(): return _dummyStats
+    def getFortSortiesStats(): return _dummyStats
+    def getCompanyStats(): return _dummyStats
+    def getRankedStats(): return _dummyStats
 
 class _Dossier(object):
 
@@ -70,7 +119,6 @@ class _Dossier(object):
     def __requestedDataReceived(self, accountDBID, vehCD):
         # respond
         res = self.getDossier(self._battlesType, accountDBID, vehCD)
-        #log(res)
         as_xfw_cmd(XVM_COMMAND.AS_DOSSIER, accountDBID, vehCD, res)
 
     def getAccountDossierValue(self, name):
@@ -102,9 +150,6 @@ class _Dossier(object):
             return res
 
         # vehicle dossier
-        if not self.__isVehicleDossierLoaded(accountDBID, vehCD):
-            return None
-
         vehicle = self.itemsCache.items.getItemByCD(vehCD)
 
         outfit = vehicle.getOutfit(SeasonType.SUMMER)
@@ -114,9 +159,15 @@ class _Dossier(object):
         outfit = vehicle.getOutfit(SeasonType.DESERT)
         desert_camo = outfit and bool(outfit.hull.slotFor(GUI_ITEM_TYPE.CAMOUFLAGE).getItem())
 
-        dossier = self.itemsCache.items.getVehicleDossier(vehCD, accountDBID)
+        if self.__isVehicleDossierLoaded(accountDBID, vehCD):
+            dossier = self.itemsCache.items.getVehicleDossier(vehCD, accountDBID)
+            battles = dossier.getRandomStats().getBattlesCount()
+        else:
+            dossier = _DummyDossier()
+            battles = 0
+
         cache_item = self._cache.get(cache_key, None)
-        if cache_item is not None and cache_item['battles'] == dossier.getRandomStats().getBattlesCount():
+        if cache_item is not None and cache_item['battles'] == battles:
             self.__updateCamouflageResult(cache_item, summer_camo, winter_camo, desert_camo)
             return cache_item
 
@@ -127,7 +178,6 @@ class _Dossier(object):
             vdata = vehinfo.getVehicleInfoData(vehCD)
             if vdata['level'] == 10:
                 #log(vdata['key'])
-                #log(dossier.getRankedCurrentSeason())
 
                 ranks = self.rankedController.getAllRanksChain(vehicle)
 
@@ -161,12 +211,11 @@ class _Dossier(object):
         xte = -1
         wtr = -1
         xwtr = -1
-        if dossier is not None:
+        if battles > 0:
             stats = self.__getStatsBlock(dossier)
-            battles = stats.getBattlesCount()
             dmg = stats.getDamageDealt()
             frg = stats.getFragsCount()
-            if battles > 0 and dmg >= 0 and frg >= 0:
+            if dmg >= 0 and frg >= 0:
                 curdmg = float(dmg) / battles
                 curfrg = float(frg) / battles
                 xtdb = vehinfo.calculateXTDB(vehCD, curdmg)
@@ -293,15 +342,21 @@ class _Dossier(object):
                 'mastery': stats.getMarkOfMasteryForVehicle(vehCD),
                 'xp': vdata.xp}
 
+        # add tanks with 0 battles
+        vehicles = self.itemsCache.items.getVehicles(REQ_CRITERIA.INVENTORY)
+        for (vehCD, vdata) in vehicles.iteritems():
+            if str(vehCD) not in res['vehicles']:
+                res['vehicles'][str(vehCD)] = {
+                    'battles': 0,
+                    'wins': 0,
+                    'mastery': 0,
+                    'xp': 0}
+
         return res
 
     def __prepareVehicleResult(self, accountDBID, vehCD, dossier, xtdb, xte, wtr, xwtr, earnedXP,
                                freeXP, xpToElite, rankCount, rankSteps, rankStepsTotal):
-        if dossier is None:
-            return {}
-
         res = self.__prepareCommonResult(accountDBID, dossier)
-
         res.update({
             'vehCD': vehCD,
             'xtdb': xtdb,
@@ -316,7 +371,6 @@ class _Dossier(object):
             'rankStepsTotal': rankStepsTotal,
             'marksOnGun': int(dossier.getRecordValue(_AB.TOTAL, 'marksOnGun')),
             'damageRating': dossier.getRecordValue(_AB.TOTAL, 'damageRating') / 100.0})
-
         return res
 
     def __updateCamouflageResult(self, res, summer_camo, winter_camo, desert_camo):

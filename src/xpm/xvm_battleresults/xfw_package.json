@@ -1,0 +1,16 @@
+{
+    "id": "com.modxvm.xvm.battleresults",
+    "name": "XVM Battle Results",
+    "description": "XVM Battle Results module",
+
+    "version": "XVM_VERSION",
+    "dependencies": ["com.modxvm.xvm", "com.modxvm.xvm.battle"],
+
+    "url": "http://modxvm.com/",
+    "url_update": "http://modxvm.com/",
+    
+    "wot_versions"         : ["WOT_VERSION"],
+    "wot_versions_strategy": "",
+
+    "features": ["python"]
+}

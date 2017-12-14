@@ -12,6 +12,7 @@ package com.xvm
         public static const GET_PLAYER_CLAN_ID:String = "xvm.get_player_clan_id";
         public static const GET_PLAYER_CLAN_NAME:String = "xvm.get_player_clan_name";
         public static const GET_PLAYER_DOSSIER_VALUE:String = "xvm.get_player_dossier_value";
+        public static const GET_CURRENT_VEH_CD:String = "xvm.get_current_veh_cd";
         public static const GET_SVC_SETTINGS:String = "xvm.get_svc_settings";
         public static const LOAD_SETTINGS:String = "xvm.load_settings";
         public static const SAVE_SETTINGS:String = "xvm.save_settings";

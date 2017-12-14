@@ -14,11 +14,6 @@ package com.xvm.wg
             super();
         }
 
-        override public function dispose() : void
-        {
-            super.dispose();
-        }
-
         override protected function setImgData(data:IImageData) : void
         {
             super.setImgData(data);

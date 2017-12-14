@@ -1,18 +1,6 @@
 """ XVM (c) https://modxvm.com 2013-2017 """
 
 #####################################################################
-# MOD INFO
-
-XFW_MOD_INFO = {
-    # mandatory
-    'VERSION':       '0.9.21',
-    'URL':           'https://modxvm.com/',
-    'UPDATE_URL':    'https://modxvm.com/en/download-xvm/',
-    'GAME_VERSIONS': ['0.9.21'],
-    # optional
-}
-
-#####################################################################
 # imports
 
 import traceback
@@ -20,6 +8,7 @@ import traceback
 import BigWorld
 from gui.Scaleform.daapi.view.login.IntroPage import IntroPage
 from gui.Scaleform.daapi.view.login.LoginView import LoginView
+from gui.login.Servers import Servers 
 
 from xfw import *
 
@@ -37,30 +26,26 @@ firsttime = True
 def LoginView_as_setVersionS(base, self, version):
     base(self, '{} | XVM {} (WoT {})'.format(version, config.get('__xvmVersion'), config.get('__wotVersion')))
 
+@overrideMethod(Servers, '_setServerList')
+def Servers_setServerList(base, self, baseServerList):
+    if config.get('login/saveLastServer'):
+        if 'server_name' not in self._loginPreferences:
+            serverName = userprefs.get('autologin/server', 0)
+            for idx, (hostName, friendlyName, csisStatus, peripheryID) in enumerate(baseServerList):
+                if serverName == hostName:
+                    self._loginPreferences['server_name'] = serverName
+                    break
+    base(self, baseServerList)
 
 @overrideMethod(LoginView, '_populate')
 def LoginView_populate(base, self):
-    # log('LoginView_populate')
-
-    if isReplay():
-        base(self)
-        return
-
-    if config.get('login/saveLastServer'):
-        if self._servers.selectedServerIdx == 0:
-            serverName = userprefs.get('autologin/server', 0)
-            for idx, value in enumerate(self._servers.serverList):
-                if serverName == value['data']:
-                    self._servers._selectedServerIdx = idx
-                    break
-
     base(self)
-
-    global firsttime
-    if firsttime:
-        firsttime = False
-        if config.get('login/autologin'):
-            BigWorld.callback(0, self.as_doAutoLoginS)
+    if not isReplay():
+        global firsttime
+        if firsttime:
+            firsttime = False
+            if config.get('login/autologin'):
+                BigWorld.callback(0, self.as_doAutoLoginS)
 
 @registerEvent(LoginView, 'saveLastSelectedServer')
 def LoginView_saveLastSelectedServer(self, server):

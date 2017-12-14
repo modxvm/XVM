@@ -1,0 +1,16 @@
+{
+    "id": "com.modxvm.xvm.tooltips",
+    "name": "XVM Tooltips",
+    "description": "XVM Tooltips module",
+
+    "version": "XVM_VERSION",
+    "dependencies": ["com.modxvm.xvm", "com.modxvm.xvm.techtree"],
+
+    "url": "http://modxvm.com/",
+    "url_update": "http://modxvm.com/",
+    
+    "wot_versions"         : ["WOT_VERSION"],
+    "wot_versions_strategy": "",
+
+    "features": ["python"]
+}

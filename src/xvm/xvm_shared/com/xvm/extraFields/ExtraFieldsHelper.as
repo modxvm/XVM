@@ -286,7 +286,7 @@ package com.xvm.extraFields
 
         private static function handleMouseEvent(e:MouseEventEx):void
         {
-            if (e.ctrlKey)
+            if (e.ctrlKey || Xvm.appType == Defines.APP_TYPE_LOBBY)
             {
                 //Logger.addObject(e);
                 var eventName:String = e.target.cfg.mouseEvents[e.type];
@@ -298,7 +298,10 @@ package com.xvm.extraFields
                     int(e.stageX),      // 4
                     int(e.stageY),      // 5
                     int(e.buttonIdx),   // 6
-                    int(e.delta)        // 7
+                    int(e.delta),       // 7
+                    int(e.ctrlKey),     // 8
+                    int(e.altKey),      // 9
+                    int(e.shiftKey)     // 10
                 );
             }
         }

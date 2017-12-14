@@ -6,6 +6,8 @@ package com.xvm.lobby.widgets
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xvm.lobby.vo.*;
+    import com.xvm.types.dossier.*;
     import flash.display.*;
     import net.wg.gui.lobby.*;
     import net.wg.infrastructure.interfaces.*;
@@ -41,6 +43,8 @@ package com.xvm.lobby.widgets
 
             //XfwUtils.logChilds(page);
 
+            Xfw.addCommandListener(XvmCommands.AS_UPDATE_CURRENT_VEHICLE, onUpdateCurrentVehicle);
+
             cfg = Config.config.hangar.widgets;
 
             var page:LobbyPage = view as LobbyPage;
@@ -69,6 +73,45 @@ package com.xvm.lobby.widgets
                 extraFieldsWidgetsTop = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
                 extraFieldsWidgetsTop.visible = false;
             }
+
+            onUpdateCurrentVehicle(Xfw.cmd(XvmCommands.GET_CURRENT_VEH_CD), null);
+        }
+
+        override protected function remove():void
+        {
+            Xfw.removeCommandListener(XvmCommands.AS_UPDATE_CURRENT_VEHICLE, onUpdateCurrentVehicle);
+            super.remove();
+        }
+
+        // PRIVATE
+
+        private function onUpdateCurrentVehicle(vehCD:int, data:Object):Object
+        {
+            //Logger.add("onUpdateCurrentVehicle: " + vehCD);
+            var options:VOLobbyMacrosOptions = new VOLobbyMacrosOptions();
+            options.vehCD = vehCD;
+            var dossier:AccountDossier = Dossier.getAccountDossier();
+            if (dossier)
+            {
+                if (options.vehicleData)
+                {
+                    options.vehicleData.__vehicleDossierCut = dossier.getVehicleDossierCut(options.vehCD);
+                }
+                if (extraFieldsWidgetsBottom)
+                {
+                    extraFieldsWidgetsBottom.update(options);
+                }
+                if (extraFieldsWidgetsNormal)
+                {
+                    extraFieldsWidgetsNormal.update(options);
+                }
+                if (extraFieldsWidgetsTop)
+                {
+                    extraFieldsWidgetsTop.update(options);
+                }
+            }
+            //Logger.addObject(options, 3);
+            return null;
         }
     }
 }

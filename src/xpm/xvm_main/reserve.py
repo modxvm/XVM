@@ -13,8 +13,9 @@ def set_reserved(vehCD, to_reserve):
 # Private
 
 import traceback
-from xvm_main.python.logger import *
-import xvm_main.python.userprefs as userprefs
+import config
+from logger import *
+import userprefs
 
 #############################
 

@@ -79,8 +79,8 @@ Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts\client"
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts"
 
 ;mods\packages
-Type: filesandordirs; Name: "{app}\res_mods\mods\packages\xvm_*"
-Type: dirifempty; Name: "{app}\res_mods\mods\packages\"
+Type: filesandordirs; Name: "{app}\res_mods\mods\xfw_packages\xvm_*"
+Type: dirifempty; Name: "{app}\res_mods\mods\xfw_packages\"
 
 ;mods\xfw
 Type: filesandordirs; Name: "{app}\res_mods\mods\xfw"
@@ -129,8 +129,8 @@ Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts\client"
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts"
 
 ;mods\packages
-Type: filesandordirs; Name: "{app}\res_mods\mods\packages\xvm_*"
-Type: dirifempty; Name: "{app}\res_mods\mods\packages\"
+Type: filesandordirs; Name: "{app}\res_mods\mods\xfw_packages\xvm_*"
+Type: dirifempty; Name: "{app}\res_mods\mods\xfw_packages\"
 
 ;mods\xfw
 Type: filesandordirs; Name: "{app}\res_mods\mods\xfw"

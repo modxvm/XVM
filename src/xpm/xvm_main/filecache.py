@@ -8,16 +8,13 @@ def save(name, bytes):
     _fileCache.save(name, bytes)
 
 
-def fin():
-    _fileCache.fin()
-
-
 # PRIVATE
 
 import os
 import shutil
 import traceback
 
+import game
 from account_helpers import CustomFilesCache
 
 from logger import *
@@ -57,3 +54,7 @@ class _FileCache():
             err(traceback.format_exc())
 
 _fileCache = _FileCache()
+
+@registerEvent(game, 'fini')
+def fini():
+    _fileCache.fin()

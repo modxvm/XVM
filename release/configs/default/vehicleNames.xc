@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 19.11.2017
+    // Last update: 04.12.2017
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -193,6 +193,7 @@
     "germany-G136_Tiger_131":                {"name": null, "short": null},
     "germany-G137_PzVI_Tiger_217":           {"name": null, "short": null},
     "germany-G138_VK168_02":                 {"name": null, "short": null},
+    "germany-G138_VK168_02_Mauerbrecher":    {"name": null, "short": null},
     "germany-G13_VK3001H":                   {"name": null, "short": null},
     "germany-G15_VK3601H":                   {"name": null, "short": null},
     "germany-G16_PzVIB_Tiger_II":            {"name": null, "short": null},

@@ -130,5 +130,14 @@ package com.xvm
 
         // widgets types
         public static const WIDGET_TYPE_EXTRAFIELD:String = "extrafield";
+
+        // App types
+        public static const APP_TYPE_UNKNOWN:int =         0x0000;
+        public static const APP_TYPE_LOBBY:int =           0x0001;
+        public static const APP_TYPE_BATTLE_CLASSIC:int =  0x0002;
+        public static const APP_TYPE_BATTLE_EPIC:int =     0x0004;
+        public static const APP_TYPE_BATTLE_RANKED:int =   0x0008;
+        public static const APP_TYPE_VEHICLE_MARKERS:int = 0x0010;
+        public static const APP_TYPE_BATTLE:int =          APP_TYPE_BATTLE_CLASSIC | APP_TYPE_BATTLE_EPIC | APP_TYPE_BATTLE_RANKED;
     }
 }

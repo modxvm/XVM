@@ -1,4 +1,4 @@
-﻿XVM-7.2.5-dev:
+﻿XVM-7.3.0-dev:
   [GENERAL]
   * World of Tanks 9.21
 
@@ -9,6 +9,10 @@
       {{v.camouflageWinter}} - value 'winter' if winter camouflage installed
       {{v.camouflageDesert}} - value 'desert' if desert camouflage installed
       {{v.camouflageCount}} - count of camouflages installed
+  * vehicle macros {{v.*}} works in widgets for current vehicle
+
+  [WIDGETS]
+  * mouseEvents can be used in hangar widgets
 
 XVM-7.2.4:
   [GENERAL]

@@ -1,0 +1,16 @@
+{
+    "id": "com.modxvm.xvm.hotfix",
+    "name": "XVM Hotfix",
+    "description": "XVM Hotfix Module",
+
+    "version": "XVM_VERSION",
+    "dependencies": ["com.modxvm.xvm", "com.modxvm.xvm.hangar"],
+
+    "url": "http://modxvm.com/",
+    "url_update": "http://modxvm.com/",
+    
+    "wot_versions"         : ["WOT_VERSION"],
+    "wot_versions_strategy": "",
+
+    "features": ["python"]
+}

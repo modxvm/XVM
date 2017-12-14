@@ -193,7 +193,9 @@ class Xvm(object):
             minimap_circles.updateCurrentVehicle()
             lobby = getLobbyApp()
             if lobby is not None:
-                as_xfw_cmd(XVM_COMMAND.AS_UPDATE_CURRENT_VEHICLE, minimap_circles.getMinimapCirclesData())
+                as_xfw_cmd(XVM_COMMAND.AS_UPDATE_CURRENT_VEHICLE,
+                           g_currentVehicle.item.intCD,
+                           minimap_circles.getMinimapCirclesData())
         except Exception, ex:
             err(traceback.format_exc())
 
@@ -262,6 +264,9 @@ class Xvm(object):
 
             if cmd == XVM_COMMAND.GET_PLAYER_DOSSIER_VALUE:
                 return (dossier.getAccountDossierValue(args[0]), True)
+
+            if cmd == XVM_COMMAND.GET_CURRENT_VEH_CD:
+                return (g_currentVehicle.item.intCD if g_currentVehicle.item else 0, True)
 
             if cmd == XVM_COMMAND.GET_SVC_SETTINGS:
                 return (config.networkServicesSettings.__dict__, True)

@@ -26,7 +26,9 @@ package com.xvm.wg
 
         protected var _loadFailed:Boolean = false;
 
-        protected var _mgr:IImageManager = null;
+        private var _mgr:IImageManager = null;
+
+        private var _useWebCache:Boolean = true;
 
         public function ImageWG()
         {
@@ -36,7 +38,12 @@ package com.xvm.wg
             addChild(this._bitmap);
         }
 
-        public function dispose() : void
+        public final function dispose() : void
+        {
+            this.onDispose();
+        }
+
+        protected function onDispose() : void
         {
             this.removeImgData();
             removeChild(this._bitmap);
@@ -96,7 +103,7 @@ package com.xvm.wg
                 this.removeImgData();
                 if(this._source)
                 {
-                    this.setImgData(this._mgr.getImageData(this._source));
+                    this.setImgData(this._mgr.getImageData(this._source,this._useWebCache));
                 }
             }
         }
@@ -116,7 +123,7 @@ package com.xvm.wg
                     this.removeImgData();
                     if(this._sourceAlt)
                     {
-                        this.setImgData(this._mgr.getImageData(this._sourceAlt));
+                        this.setImgData(this._mgr.getImageData(this._sourceAlt,this._useWebCache));
                     }
                 }
             }
@@ -127,6 +134,11 @@ package com.xvm.wg
             this._bitmap.bitmapData = param1;
             this._bitmap.visible = param1 != null;
             dispatchEvent(new Event(Event.CHANGE));
+        }
+
+        public function set useWebCache(param1:Boolean) : void
+        {
+            this._useWebCache = param1;
         }
 
         protected function onImgDataCompleteHandler(param1:Event) : void
@@ -142,11 +154,11 @@ package com.xvm.wg
             if(!this._loadFailed && this._sourceAlt != null && this._sourceAlt.length > 0)
             {
                 this._loadFailed = true;
-                this.setImgData(this._mgr.getImageData(this._sourceAlt));
+                this.setImgData(this._mgr.getImageData(this._sourceAlt,this._useWebCache));
             }
             else
             {
-                //orig: ispatchEvent(new Event(Event.CHANGE));
+                //orig: dispatchEvent(new Event(Event.CHANGE));
                 this._loadFailed = true;
             }
         }

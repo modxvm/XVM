@@ -1,0 +1,17 @@
+{
+    "id": "com.modxvm.xvm",
+    "name": "XVM",
+    "description": "XVM",
+
+    "version": "XVM_VERSION",
+    "dependencies": ["com.modxvm.xfw"],
+    "dependencies_optional": ["com.modxvm.xfw.filewatcher", "com.modxvm.xfw.mutex"],
+
+    "url": "http://modxvm.com/",
+    "url_update": "http://modxvm.com/",
+    
+    "wot_versions"         : ["WOT_VERSION"],
+    "wot_versions_strategy": "",
+
+    "features": ["python"]
+}

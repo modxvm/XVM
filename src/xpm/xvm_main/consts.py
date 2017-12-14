@@ -49,6 +49,7 @@ class XVM_COMMAND(object):
     GET_PLAYER_CLAN_ID = "xvm.get_player_clan_id"
     GET_PLAYER_CLAN_NAME = "xvm.get_player_clan_name"
     GET_PLAYER_DOSSIER_VALUE = "xvm.get_player_dossier_value"
+    GET_CURRENT_VEH_CD = "xvm.get_current_veh_cd"
     GET_CLAN_ICON = "xvm.get_clan_icon"
     GET_XTDB_DATA = "xvm.get_xtdb_data"
     REQUEST_DOSSIER = "xvm.request_dossier"

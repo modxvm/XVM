@@ -5,6 +5,7 @@
 package com.xvm.battle
 {
     import com.xfw.*;
+    import com.xvm.*;
     import com.xvm.infrastructure.*;
     import com.xvm.battle.battleloading.RankedBattleLoadingXvmView;
     import com.xvm.battle.fullStats.RankedFullStatsXvmView;
@@ -16,6 +17,12 @@ package com.xvm.battle
 
     public class BattleXvmMod extends XvmModBase
     {
+        public function BattleXvmMod():void
+        {
+            Xvm.appType = Defines.APP_TYPE_BATTLE_RANKED;
+            super();
+        }
+
         public override function get logPrefix():String
         {
             return "[XVM:BATTLE]";

@@ -1,0 +1,16 @@
+{
+    "id": "com.modxvm.xvm.battle",
+    "name": "XVM Battle",
+    "description": "XVM Battle module",
+
+    "version": "XVM_VERSION",
+    "dependencies": ["com.modxvm.xvm", "com.modxvm.xvm.autologin"],
+
+    "url": "http://modxvm.com/",
+    "url_update": "http://modxvm.com/",
+    
+    "wot_versions"         : ["WOT_VERSION"],
+    "wot_versions_strategy": "",
+
+    "features": ["actionscript", "python"]
+}

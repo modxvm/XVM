@@ -1,0 +1,16 @@
+{
+    "id": "com.modxvm.xvm.online",
+    "name": "XVM Online",
+    "description": "XVM Online module",
+
+    "version": "XVM_VERSION",
+    "dependencies": ["com.modxvm.xvm", "com.modxvm.xvm.limits"],
+
+    "url": "http://modxvm.com/",
+    "url_update": "http://modxvm.com/",
+    
+    "wot_versions"         : ["WOT_VERSION"],
+    "wot_versions_strategy": "",
+
+    "features": ["python"]
+}

@@ -27,8 +27,6 @@ package com.xvm.lobby.widgets
             super();
             this.cfg = cfg;
             mouseEnabled = false;
-            mouseChildren = false;
-            buttonMode = false;
             _createExtraFields();
         }
 
@@ -44,6 +42,14 @@ package com.xvm.lobby.widgets
             _normalHolder = null;
             _topHolder = null;
             super.onDispose();
+        }
+
+        public function update(options:IVOMacrosOptions):void
+        {
+            if (_extraFields)
+            {
+                _extraFields.update(options);
+            }
         }
 
         // IExtraFieldGroupHolder
@@ -92,7 +98,6 @@ package com.xvm.lobby.widgets
             _normalHolder = _createExtraFieldsHolder();
             _topHolder = _createExtraFieldsHolder();
             _extraFields = new ExtraFieldsGroup(this, cfg, true, CTextFormat.GetDefaultConfigForLobby());
-            _extraFields.update(new VOLobbyMacrosOptions());
         }
 
         private function _createExtraFieldsHolder():Sprite
@@ -101,8 +106,6 @@ package com.xvm.lobby.widgets
             sprite.x = 0;
             sprite.y = 0;
             sprite.mouseEnabled = false;
-            sprite.mouseChildren = false;
-            sprite.buttonMode = false;
             sprite.scaleX = 1;
             sprite.scaleY = 1;
             this.addChild(sprite);
