@@ -37,10 +37,9 @@ import xvm_main.python.config as config
 import xvm_main.python.dossier as dossier
 import xvm_main.python.vehinfo as vehinfo
 import xvm_main.python.wgutils as wgutils
+import xvm_main.python.reserve as reserve
 from xvm_main.python.vehinfo_tiers import getTiers
 from xvm_main.python.xvm import l10n
-
-import reserve
 
 
 #####################################################################

@@ -104,6 +104,7 @@ import simplejson
 
 from logger import *
 import filecache
+import reserve
 import userprefs
 import vehinfo_short
 import vehinfo_tiers
@@ -184,7 +185,6 @@ def _init():
                 data['shortName'] = vehinfo_short.getShortName(data['key'], data['level'], data['vclass'])
 
                 # is reserved?
-                import xvm_tankcarousel.python.reserve as reserve
                 data['isReserved'] = reserve.is_reserved(data['vehCD'])
 
                 #log(data)

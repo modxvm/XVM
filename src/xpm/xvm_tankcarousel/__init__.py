@@ -4,4 +4,3 @@ import xvm_main.python.config as config
 if config.get('hangar/carousel/enabled'):
     import tankcarousel
     import filter_popover
-    import reserve
