@@ -7,6 +7,14 @@ from xfw import *
 from xvm_main.python.logger import *
 
 
+from gui.Scaleform.framework.application import SFApplication
+@overrideMethod(SFApplication, 'beforeDelete')
+def SFApplication_beforeDelete(base, self):
+    log('SFApplication_beforeDelete: start')
+    base(self)
+    log('SFApplication_beforeDelete: end')
+
+
 #####################################################################
 # fix WG's bug with markers appearing in the top corner on battle start
 # https://koreanrandom.com/forum/topic/32423-/page-86#entry395145
@@ -35,7 +43,7 @@ def _set_canvas_visible_true(self):
 """
 from gui.Scaleform.daapi.view.lobby.LobbyMenu import LobbyMenu
 @overrideMethod(LobbyMenu,'bootcampClick')
-def LobbyMenu_bootcampClick(base, self): 
+def LobbyMenu_bootcampClick(base, self):
     if not self.bootcamp.isInBootcamp():
         from gui.Scaleform.daapi.view.dialogs import SimpleDialogMeta, I18nConfirmDialogButtons
         from gui.DialogsInterface import showDialog
