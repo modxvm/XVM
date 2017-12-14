@@ -106,7 +106,8 @@ def PlayerAvatar_showShotResults(self, results):
                     b = True
             if not hitAlly and (flags & (VHF.IS_ANY_DAMAGE_MASK | VHF.ATTACK_IS_DIRECT_PROJECTILE)):
                 if vehID in allyVehicles:
-                    hitAlly = True
+                    vehicleDesc = self.arena.vehicles.get(vehID)
+                    hitAlly = vehicleDesc['isAlive']
                     b = True
     if b:
         as_event('ON_TOTAL_EFFICIENCY')
@@ -238,7 +239,7 @@ def onEnterWorld(self, prereqs):
         vehCD = self.typeDescriptor.type.compactDescr
         burst = self.typeDescriptor.gun.burst[0]
         maxHealth = self.health
-        isStuns = 'st' if self.typeDescriptor.shot.shell.stun is not None else None
+        isStuns = 'st' if self.typeDescriptor.shot.shell.hasStun else None
 
 
 @registerEvent(PlayerAvatar, '_PlayerAvatar__destroyGUI')
