@@ -3,7 +3,7 @@ node {
     dir("$WORKSPACE@script") {
 
         try { 
-
+            checkout scm
             sh 'hg pull'
             sh 'hg update'
 
