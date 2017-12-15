@@ -85,6 +85,16 @@ def _PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
 
 # VMM
 
+@overrideMethod(MarkersManager, '__init__')
+def _MarkersManager_populate(base, self):
+    log('markers: __init__ ' + str(self))
+    base(self)
+
+@overrideMethod(MarkersManager, '__del__')
+def _MarkersManager_populate(base, self):
+    log('markers: __del__ ' + str(self))
+    base(self)
+
 @overrideMethod(MarkersManager, 'startPlugins')
 def _MarkersManager_populate(base, self):
     log('markers: startPlugins ' + str(self))
@@ -107,6 +117,8 @@ def _MarkersManager_populate(base, self):
 @overrideMethod(MarkersManager, '_dispose')
 def _MarkersManager_dispose(base, self):
     log('markers: dispose')
+    for id in list(self._MarkersManager__ids):
+        self.destroyMarker(id)
     g_markers.destroy()
     base(self)
 
