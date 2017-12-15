@@ -30,7 +30,7 @@ import config
 def kill_wotclient_mutex(self):
     try:
         if config.get('tweaks/allowMultipleWotInstances', False):
-            import xfw.mutex as mutex
+            import xfw_mutex.python as mutex
             mutex.allow_multiple_wot()
     except Exception:
         traceback.print_exc()
