@@ -85,13 +85,28 @@ def _PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
 
 # VMM
 
+@overrideMethod(MarkersManager, 'startPlugins')
+def _MarkersManager_populate(base, self):
+    log('markers: startPlugins ' + str(self))
+    for id in list(self._MarkersManager__ids):
+        self.destroyMarker(id)
+    #self.stopPlugins()
+    base(self)
+
+@overrideMethod(MarkersManager, 'stopPlugins')
+def _MarkersManager_populate(base, self):
+    log('markers: stopPlugins ' + str(self))
+    base(self)
+
 @overrideMethod(MarkersManager, '_populate')
 def _MarkersManager_populate(base, self):
+    log('markers: populate')
     base(self)
     g_markers.init(self)
 
 @overrideMethod(MarkersManager, '_dispose')
 def _MarkersManager_dispose(base, self):
+    log('markers: dispose')
     g_markers.destroy()
     base(self)
 
@@ -100,9 +115,15 @@ def _MarkersManager_createMarker(base, self, symbol, matrixProvider = None, acti
     if g_markers.active:
         if symbol == 'VehicleMarker':
             symbol = 'com.xvm.vehiclemarkers.ui::XvmVehicleMarker'
-    #debug('createMarker: ' + str(symbol))
+    #log(traceback.format_stack())
     markerID = base(self, symbol, matrixProvider, active)
+    debug('createMarker: ' + str(symbol) + ' markerID=' + str(markerID))
     return markerID
+
+@overrideMethod(MarkersManager, 'destroyMarker')
+def destroyMarker(base, self, markerID):
+    debug('destroyMarker:  markerID=' + str(markerID))
+    base(self, markerID)
 
 _exInfo = False
 @overrideMethod(MarkersManager, 'as_setShowExInfoFlagS')
