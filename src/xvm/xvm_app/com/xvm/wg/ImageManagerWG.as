@@ -20,8 +20,8 @@ package com.xvm.wg
             return _imageManager;
         }
 
-        private static const MAX_CACHE_SIZE:int = 100 * 1024 * 1024; // 100 MB
-        private static const MIN_CACHE_SIZE:int = 10 * 1024 * 1024; // 10 MB
+        private static const MAX_CACHE_SIZE:int = 8 * 1024 * 1024; // 8 MB // 8 MB default in GUI_SETTINGS
+        private static const MIN_CACHE_SIZE:int = 1 * 1024 * 1024; // 1 MB // 1 MB default in GUI_SETTINGS
         /// </xvm>
 
         private var _webCache:Dictionary = null;
