@@ -86,39 +86,29 @@ def _PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
 # VMM
 
 @overrideMethod(MarkersManager, '__init__')
-def _MarkersManager_populate(base, self):
-    log('markers: __init__ ' + str(self))
-    base(self)
-
-@overrideMethod(MarkersManager, '__del__')
-def _MarkersManager_populate(base, self):
-    log('markers: __del__ ' + str(self))
-    base(self)
-
-@overrideMethod(MarkersManager, 'startPlugins')
-def _MarkersManager_populate(base, self):
-    log('markers: startPlugins ' + str(self))
-    for id in list(self._MarkersManager__ids):
-        self.destroyMarker(id)
-    #self.stopPlugins()
-    base(self)
-
-@overrideMethod(MarkersManager, 'stopPlugins')
-def _MarkersManager_populate(base, self):
-    log('markers: stopPlugins ' + str(self))
-    base(self)
-
-@overrideMethod(MarkersManager, '_populate')
-def _MarkersManager_populate(base, self):
-    log('markers: populate')
+def _MarkersManager__init__(base, self):
+    debug('markers: __init__ ' + str(self))
     base(self)
     g_markers.init(self)
 
+#@overrideMethod(MarkersManager, 'startPlugins')
+#def _MarkersManager_startPlugins(base, self):
+#    debug('markers: startPlugins ' + str(self))
+#    for id in list(self._MarkersManager__ids):
+#        self.destroyMarker(id)
+#    base(self)
+
+@overrideMethod(MarkersManager, '_populate')
+def _MarkersManager_populate(base, self):
+    debug('markers: populate')
+    g_markers.populate()
+    base(self)
+
 @overrideMethod(MarkersManager, '_dispose')
 def _MarkersManager_dispose(base, self):
-    log('markers: dispose')
-    for id in list(self._MarkersManager__ids):
-        self.destroyMarker(id)
+    debug('markers: dispose')
+#    for id in list(self._MarkersManager__ids):
+#        self.destroyMarker(id)
     g_markers.destroy()
     base(self)
 
@@ -154,7 +144,9 @@ def _MarkersManager_as_setShowExInfoFlagS(base, self, flag):
 def as_xvm_cmdS(self, *args):
     if self._isDAAPIInited():
         return self.flashObject.as_xvm_cmd(*args)
+
 MarkersManager.as_xvm_cmdS = as_xvm_cmdS
+
 
 #####################################################################
 # VehicleMarkers
@@ -163,6 +155,7 @@ class VehicleMarkers(object):
 
     enabled = True
     initialized = False
+    populated = False
     guiType = None
     battleType = None
     playerVehicleID = 0
@@ -187,9 +180,15 @@ class VehicleMarkers(object):
         self.manager.addExternalCallback('xvm.cmd', self.onVMCommand)
         self.playerVehicleID = self.sessionProvider.getArenaDP().getPlayerVehicleID()
 
+    def populate(self):
+        self.populated = True
+        self.respondConfig()
+        self.process_pending_commands()
+
     def destroy(self):
         self.pending_commands = []
         self.initialized = False
+        self.populated = False
         self.guiType = None
         self.battleType = None
         self.playerVehicleID = 0
@@ -219,7 +218,8 @@ class VehicleMarkers(object):
                 self.battleType = arena.bonusType
                 log('[VM]    initialized')
             elif cmd == XVM_COMMAND.REQUEST_CONFIG:
-                self.respondConfig()
+                #self.respondConfig()
+                pass # vehicle markers config loading controlled by python 
             elif cmd == XVM_BATTLE_COMMAND.REQUEST_BATTLE_GLOBAL_DATA:
                 self.respondGlobalBattleData()
             elif cmd == XVM_COMMAND.PYTHON_MACRO:
@@ -239,9 +239,11 @@ class VehicleMarkers(object):
 
     def call(self, *args):
         try:
-            if self.manager and self.initialized:
+            if self.manager and self.populated:
+                #debug('as_xvm_cmdS: ' + str(args))
                 self.manager.as_xvm_cmdS(*args)
             elif self.enabled:
+                #debug('pending: ' + str(args))
                 self.pending_commands.append(args)
         except Exception, ex:
             err(traceback.format_exc())
@@ -277,7 +279,6 @@ class VehicleMarkers(object):
         try:
             if self.active:
                 self.call(XVM_BATTLE_COMMAND.AS_RESPONSE_BATTLE_GLOBAL_DATA, *shared.getGlobalBattleData())
-                self.process_pending_commands()
                 self.updatePlayerStates()
         except Exception, ex:
             err(traceback.format_exc())
