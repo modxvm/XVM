@@ -55,6 +55,8 @@ def fini():
 
 def xvm_equip_init(*args, **kwargs):
     try:
+        if isReplay():
+            return
         global player_name, last_vehicles_id_arr, equip_settings
         last_vehicles_id_arr = []
         equip_settings = {}
