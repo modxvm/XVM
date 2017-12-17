@@ -1,6 +1,13 @@
-﻿XVM-7.3.0-dev:
+﻿XVM-7.3.1-dev:
+
+XVM-7.3.0:
+  [KNOWN ISSUES]
+  * Possible game client crash when leaving the battle
+  * To minimize crash possibility, markers were disabled by default.
+  * Microsoft Windows XP: crash to desktop on battle loading if graphics mode is standard.
+
   [GENERAL]
-  * World of Tanks 9.21
+  * World of Tanks 9.21.0.1
 
   [MACROS]
   * macros {{v.wtr}}, {{v.xwtr}}, {{v.c_xwtr}}, {{v.a_xwtr}} are turned off due to difficult implementation
