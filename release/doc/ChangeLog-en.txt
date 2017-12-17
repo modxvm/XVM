@@ -1,4 +1,6 @@
 ﻿XVM-7.3.1-dev:
+  [GENERAL]
+  * fix crash when leaving the battle
 
 XVM-7.3.0:
   [KNOWN ISSUES]
