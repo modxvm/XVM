@@ -1,6 +1,9 @@
-﻿XVM-7.3.1-dev:
+﻿XVM-7.3.1:
   [GENERAL]
-  * fix crash when leaving the battle
+  * Fixed crash when leaving the battle
+
+  [KNOWN ISSUES]
+  * Microsoft Windows XP: crash to desktop on battle loading if graphics mode is standard.
 
 XVM-7.3.0:
   [KNOWN ISSUES]
