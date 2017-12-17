@@ -92,10 +92,14 @@ package com.xvm.battle.playersPanel
         {
             switch (state)
             {
+                case PLAYERS_PANEL_STATE.SHORT_NO_BADGES:
+                    return PLAYERS_PANEL_STATE.SHORT;
                 case PLAYERS_PANEL_STATE.MEDIUM_NO_BADGES:
                     return PLAYERS_PANEL_STATE.MEDIUM;
                 case PLAYERS_PANEL_STATE.FULL_NO_BADGES:
                     return PLAYERS_PANEL_STATE.FULL;
+                case PLAYERS_PANEL_STATE.LONG_NO_BADGES:
+                    return PLAYERS_PANEL_STATE.LONG;
                 default:
                     return state;
             }
