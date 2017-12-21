@@ -1,13 +1,13 @@
 ﻿{
     "RU": {
-        "ver": "7.3.1",
-        "wot": "0.9.21.0.1",
-        "message": " • WoT 9.21.0.1\n • Fixed crash when leaving the battle\nПодробности на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
+        "ver": "7.3.2",
+        "wot": "0.9.21.0.2",
+        "message": " • WoT 9.21.0.2\nПодробности на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
     },
     "EU": {
-        "ver": "7.3.1",
-        "wot": "0.9.21.0.1",
-        "message": " • WoT 9.21.0.1\n • Fixed crash when leaving the battle\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "7.3.2",
+        "wot": "0.9.21.0.2",
+        "message": " • WoT 9.21.0.2\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "NA": {
         "ver": "7.3.1",
@@ -15,18 +15,18 @@
         "message": " • WoT 9.21.0.1\n • Fixed crash when leaving the battle\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "ASIA": {
-        "ver": "7.2.4",
-        "wot": "0.9.20.1.4",
-        "message": " • WoT 9.20.1.4\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "7.3.2",
+        "wot": "0.9.21.0.2",
+        "message": " • WoT 9.21.0.2\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "CN": {
-        "ver": "7.3.1",
-        "wot": "0.9.21.0.1",
-        "message": " • WoT 9.21.0.1\n • Fixed crash when leaving the battle\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "7.3.2",
+        "wot": "0.9.21.0.2",
+        "message": " • WoT 9.21.0.2\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "CT":  {
-        "ver": "7.3.1",
-        "wot": "0.9.21.0.1",
-        "message": " • WoT 9.21.0.1\n • Fixed crash when leaving the battle\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "7.3.2",
+        "wot": "0.9.21.0.2",
+        "message": " • WoT 9.21.0.2\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     }
 }
