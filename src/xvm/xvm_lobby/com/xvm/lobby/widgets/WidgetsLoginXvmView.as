@@ -6,6 +6,7 @@ package com.xvm.lobby.widgets
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xvm.lobby.vo.*;
     import net.wg.gui.login.impl.*;
     import net.wg.infrastructure.interfaces.*;
 
@@ -25,11 +26,13 @@ package com.xvm.lobby.widgets
             var page:LoginPage = view as LoginPage;
             var index:int;
 
+            var options:VOLobbyMacrosOptions = new VOLobbyMacrosOptions();
             var widgets:Array = filterWidgets(cfg, Defines.WIDGET_TYPE_EXTRAFIELD, Defines.LAYER_BOTTOM);
             if (widgets != null && widgets.length > 0)
             {
                 index = 0;
                 extraFieldsWidgetsBottom = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
+                extraFieldsWidgetsBottom.update(options);
             }
 
             widgets = filterWidgets(cfg, Defines.WIDGET_TYPE_EXTRAFIELD, Defines.LAYER_NORMAL);
@@ -37,6 +40,7 @@ package com.xvm.lobby.widgets
             {
                 index = page.getChildIndex(page.loginViewStack);
                 extraFieldsWidgetsNormal = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
+                extraFieldsWidgetsNormal.update(options);
             }
 
             widgets = filterWidgets(cfg, Defines.WIDGET_TYPE_EXTRAFIELD, Defines.LAYER_TOP);
@@ -44,6 +48,7 @@ package com.xvm.lobby.widgets
             {
                 index = page.numChildren;
                 extraFieldsWidgetsTop = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
+                extraFieldsWidgetsTop.update(options);
             }
         }
     }
