@@ -60,6 +60,7 @@ def _checkAndReplace(event):
 # imports new sound events dispatchers
 
 import bankManager
+import remoteCommunication
 
 import sixthSense
 import fireAlert
