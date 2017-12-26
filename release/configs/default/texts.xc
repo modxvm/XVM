@@ -92,9 +92,7 @@
       // Генеральное сражение
       "epic_random": "",
       // Генеральное сражение (тренировка)
-      "epic_random_training": "epic_random_training",
-      // Бой спецрежима (новый)(гонки, футбол и т.п.)
-      "event_battles_2": ""
+      "epic_random_training": "epic_random_training"
     },
     // Text for {{topclan}} macro.
     // Текст для макроса {{topclan}}
