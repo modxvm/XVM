@@ -1,9 +1,12 @@
 ﻿XVM-7.3.3-dev:
-  [РАЗНОЕ]
-  * обновлена секция конфига "texts"/"battletype" с подстановками для макроса {{battletype}}
+  [АНГАР]
+  * новая опция "hangar"/"showGeneralChatButton" - показать кнопку "Общий чат"
 
   [ЗВУКИ]
   * новая опция "sounds"/"remote_communication option" - коммуникация между клиентом WoT и WWISE Authoring Tools
+
+  [РАЗНОЕ]
+  * обновлена секция конфига "texts"/"battletype" с подстановками для макроса {{battletype}}
 
 XVM-7.3.2:
   [ОБЩЕЕ]

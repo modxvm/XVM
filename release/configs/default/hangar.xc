@@ -29,6 +29,9 @@
     // Show "Premium shop" button
     // Показать кнопку "Премиум магазин"
     "showPremiumShopButton": true,
+    // Show "General chat" button
+    // Показать кнопку "Общий чат"
+    "showGeneralChatButton": true,
     // true - enable locker for gold
     // true - включить замок для золота
     "enableGoldLocker": false,

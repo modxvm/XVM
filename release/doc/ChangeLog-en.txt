@@ -1,9 +1,12 @@
 ﻿XVM-7.3.3-dev:
-  [MISC]
-  * updated "texts"/"battletype" section with text replacements for {{battletype}} macro
+  [HANGAR]
+  * new options "hangar"/"showGeneralChatButton" - show "General chat" button
 
   [SOUNDS]
   * new options "sounds"/"remote_communication option" - remote communication between WoT client and WWISE Authoring Tools
+
+  [MISC]
+  * updated "texts"/"battletype" section with text replacements for {{battletype}} macro
 
 XVM-7.3.2:
   [GENERAL]
