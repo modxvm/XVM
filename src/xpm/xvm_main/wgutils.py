@@ -1,4 +1,4 @@
-""" XVM (c) https://modxvm.com 2013-2017 """
+""" XVM (c) https://modxvm.com 2013-2018 """
 
 from gui.Scaleform.framework import ViewTypes
 from gui.Scaleform.framework.managers.containers import POP_UP_CRITERIA

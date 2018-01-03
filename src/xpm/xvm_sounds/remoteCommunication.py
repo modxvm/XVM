@@ -1,4 +1,4 @@
-""" XVM (c) https://modxvm.com 2013-2017 """
+""" XVM (c) https://modxvm.com 2013-2018 """
 
 from xfw_wwise.python import g_wwise as wwise
 import xvm_main.python.config as config

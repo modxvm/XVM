@@ -1,4 +1,4 @@
-""" XVM (c) https://modxvm.com 2013-2017 """
+""" XVM (c) https://modxvm.com 2013-2018 """
 
 # Authors:
 # night_dragon_on <http://www.koreanrandom.com/forum/user/14897-night-dragon-on/>

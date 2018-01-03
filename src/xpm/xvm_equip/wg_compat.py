@@ -1,4 +1,4 @@
-""" XVM (c) https://modxvm.com 2013-2017 """
+""" XVM (c) https://modxvm.com 2013-2018 """
 
 from gui.shared.utils.decorators import process
 from gui.shared.gui_items.processors.module import OptDeviceInstaller
