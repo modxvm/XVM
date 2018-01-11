@@ -1,4 +1,7 @@
-﻿XVM-7.3.3-dev:
+﻿XVM-7.3.3:
+  [GENERAL]
+  * World of Tanks 9.21.0.3
+
   [HANGAR]
   * new options "hangar"/"showGeneralChatButton" - show "General chat" button
 

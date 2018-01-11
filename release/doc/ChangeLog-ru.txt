@@ -1,4 +1,7 @@
-﻿XVM-7.3.3-dev:
+﻿XVM-7.3.3:
+  [ОБЩЕЕ]
+  * World of Tanks 9.21.0.3
+
   [АНГАР]
   * новая опция "hangar"/"showGeneralChatButton" - показать кнопку "Общий чат"
 
