@@ -36,4 +36,4 @@ def winrate_next(diff):
     value = int((100 * wins - next * battles) / (next - 100)) + 1
     if next == int(next):
         next = int(next)
-    return '<font color="#F8F400">{}</font>{}<font color="#F8F400">{}%</font>'.format(value, '{{l10n:toWithSpaces}}', next)
+    return '<font color="#FFC133">{}</font>{}<font color="#FFC133">{}%</font>'.format(value, '{{l10n:toWithSpaces}}', next)

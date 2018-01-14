@@ -41,38 +41,38 @@
     // Dynamic transparency by remaining health.
     // Динамическая прозрачность по оставшемуся здоровью.
     "hp": [
-      { "value": 200,  "alpha": ${"def.alphaHP.very_low"     } }, // alpha for HP <= 200     
-      { "value": 400,  "alpha": ${"def.alphaHP.low"          } }, // alpha for HP <= 400     
-      { "value": 1000, "alpha": ${"def.alphaHP.average"      } }, // alpha for HP <= 1000    
-      { "value": 9999, "alpha": ${"def.alphaHP.above_average"} }  // alpha for HP > 1000     
-    ],                                                                                          
-    // Dynamic transparency by percentage of remaining health.                                  
-    // Динамическая прозрачность по проценту оставшегося здоровья.                              
-    "hp_ratio": [                                                                               
-      { "value": 10.4, "alpha": ${"def.alphaHP.very_low"     } }, // alpha for HP <= 10%     
-      { "value": 25.4, "alpha": ${"def.alphaHP.low"          } }, // alpha for HP <= 25%     
-      { "value": 50.4, "alpha": ${"def.alphaHP.average"      } }, // alpha for HP <= 50%     
-      { "value": 100,  "alpha": ${"def.alphaHP.above_average"} }  // alpha for HP > 50%      
+      { "value": 200,  "alpha": ${"def.alphaHP.very_low"     } }, // alpha for HP <= 200
+      { "value": 400,  "alpha": ${"def.alphaHP.low"          } }, // alpha for HP <= 400
+      { "value": 1000, "alpha": ${"def.alphaHP.average"      } }, // alpha for HP <= 1000
+      { "value": 9999, "alpha": ${"def.alphaHP.above_average"} }  // alpha for HP > 1000
+    ],
+    // Dynamic transparency by percentage of remaining health.
+    // Динамическая прозрачность по проценту оставшегося здоровья.
+    "hp_ratio": [
+      { "value": 10.4, "alpha": ${"def.alphaHP.very_low"     } }, // alpha for HP <= 10%
+      { "value": 25.4, "alpha": ${"def.alphaHP.low"          } }, // alpha for HP <= 25%
+      { "value": 50.4, "alpha": ${"def.alphaHP.average"      } }, // alpha for HP <= 50%
+      { "value": 100,  "alpha": ${"def.alphaHP.above_average"} }  // alpha for HP > 50%
     ],
     // Dynamic transparency for XVM Scale
     // Динамическая прозрачность по шкале XVM
     "x": [
-      { "value": 16.4, "alpha": ${"def.alphaRating.very_bad" } }, // 00 - 16 - very bad  (20% of players)              
-      { "value": 33.4, "alpha": ${"def.alphaRating.bad"      } }, // 17 - 33 - bad       (better than 20% of players)  
-      { "value": 52.4, "alpha": ${"def.alphaRating.normal"   } }, // 34 - 52 - normal    (better than 60% of players)  
-      { "value": 75.4, "alpha": ${"def.alphaRating.good"     } }, // 53 - 75 - good      (better than 90% of players)  
-      { "value": 92.4, "alpha": ${"def.alphaRating.very_good"} }, // 76 - 92 - very good (better than 99% of players)  
+      { "value": 16.4, "alpha": ${"def.alphaRating.very_bad" } }, // 00 - 16 - very bad  (20% of players)
+      { "value": 33.4, "alpha": ${"def.alphaRating.bad"      } }, // 17 - 33 - bad       (better than 20% of players)
+      { "value": 52.4, "alpha": ${"def.alphaRating.normal"   } }, // 34 - 52 - normal    (better than 60% of players)
+      { "value": 75.4, "alpha": ${"def.alphaRating.good"     } }, // 53 - 75 - good      (better than 90% of players)
+      { "value": 92.4, "alpha": ${"def.alphaRating.very_good"} }, // 76 - 92 - very good (better than 99% of players)
       { "value": 999,  "alpha": ${"def.alphaRating.unique"   } }  // 93 - XX - unique    (better than 99.9% of players)
     ],
-    // Текущие граничные значения для рейтингов указаны на данной странице: https://modxvm.com/ru/ratings/xvm-scale/colors/
     // Current scales values ​​for ratings are listed on this page: https://modxvm.com/en/ratings/xvm-scale/colors/
+    // Текущие граничные значения для рейтингов указаны на данной странице: https://modxvm.com/ru/ratings/xvm-scale/colors/
     //
     // Custom dynamic transparency by ratings.
     // If you want use your own transparency scales,
     // uncomment this block and replace "rating_name" to one of this values: "eff", "wn8", "wtr", "wgr"
     // Динамическая прозрачность по указанному рейтингу.
-    // Если вы хотите использовать свои собственные границы прозрачности вместо стандартных, 
-    // раскомментируйте блок и замените "rating_name" на одно из следующих значений: "eff", "wn8", "wtr", "wgr" 
+    // Если вы хотите использовать свои собственные границы прозрачности вместо стандартных,
+    // раскомментируйте блок и замените "rating_name" на одно из следующих значений: "eff", "wn8", "wtr", "wgr"
     // "rating_name": [
     //  { "value": 500,   "alpha": ${"def.colorRating.very_bad" } }, //    0 - 500   - very bad
     //  { "value": 1000,  "alpha": ${"def.colorRating.bad"      } }, //  501 - 1000  - bad
