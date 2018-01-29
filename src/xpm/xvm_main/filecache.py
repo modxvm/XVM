@@ -1,4 +1,4 @@
-""" XVM (c) https://modxvm.com 2013-2017 """
+""" XVM (c) https://modxvm.com 2013-2018 """
 
 def get_url(url, callback):
     _fileCache.get_url(url, callback)

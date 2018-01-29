@@ -1,4 +1,4 @@
-""" XVM (c) https://modxvm.com 2013-2017 """
+""" XVM (c) https://modxvm.com 2013-2018 """
 
 #####################################################################
 # imports
@@ -60,6 +60,7 @@ def _checkAndReplace(event):
 # imports new sound events dispatchers
 
 import bankManager
+import remoteCommunication
 
 import sixthSense
 import fireAlert

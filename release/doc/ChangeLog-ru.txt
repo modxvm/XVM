@@ -2,6 +2,19 @@
   [ОБЩЕЕ]
   * World of Tanks 9.22
 
+XVM-7.3.3:
+  [ОБЩЕЕ]
+  * World of Tanks 9.21.0.3
+
+  [АНГАР]
+  * новая опция "hangar"/"showGeneralChatButton" - показать кнопку "Общий чат"
+
+  [ЗВУКИ]
+  * новая опция "sounds"/"remote_communication option" - коммуникация между клиентом WoT и WWISE Authoring Tools
+
+  [РАЗНОЕ]
+  * обновлена секция конфига "texts"/"battletype" с подстановками для макроса {{battletype}}
+
 XVM-7.3.2:
   [ОБЩЕЕ]
   * World of Tanks 9.21.0.2
@@ -101,7 +114,7 @@ XVM-7.2.1:
   * World of Tanks 9.20.1.2
 
   [РАЗНОЕ]
-  * обновлена секция конфига texts/battletype с подстановками для макроса {{battletype}}
+  * обновлена секция конфига "texts"/"battletype" с подстановками для макроса {{battletype}}
 
 XVM-7.2.0:
   [ОБЩЕЕ]
@@ -165,7 +178,7 @@ XVM-7.0.0:
       "colors"/"wn6"
 
   [РАЗНОЕ]
-  * обновлена секция конфига texts/battletype с подстановками для макроса {{battletype}}
+  * обновлена секция конфига "texts"/"battletype" с подстановками для макроса {{battletype}}
 
   [МАКРОСЫ НА PYTHON]
   * добавлены макросы {{py:upper('str')}}, {{py:lower('str')}}, {{py:capitalize('str')}} и {{py:title('str')}}

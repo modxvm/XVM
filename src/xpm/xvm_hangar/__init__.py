@@ -1,4 +1,4 @@
-﻿""" XVM (c) https://modxvm.com 2013-2017 """
+﻿""" XVM (c) https://modxvm.com 2013-2018 """
 
 #####################################################################
 # imports
@@ -18,6 +18,7 @@ from gui.Scaleform.daapi.view.meta.BarracksMeta import BarracksMeta
 from gui.shared.gui_items.Vehicle import Vehicle
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache
+from messenger.gui.Scaleform.lobby_entry import LobbyEntry
 
 from xfw import *
 
@@ -98,7 +99,7 @@ def Vehicle_isAmmoFull(base, self):
         err(traceback.format_exc())
         return base(self)
 
-#barracks: add nation flag and skills for tanksman
+# barracks: add nation flag and skills for tanksman
 @overrideMethod(BarracksMeta, 'as_setTankmenS')
 def BarracksMeta_as_setTankmenS(base, self, data):
     try:
@@ -198,3 +199,17 @@ def _ClientHangarSpace_loadConfig(base, cfg, xml, defaultCfg = None):
 def _ClientHangarSpace_updateCameraByMouseMove(base, self, dx, dy, dz):
     dz *= cfg_hangar_camera_zoomSensitivity
     base(self, dx, dy, dz)
+
+# hide shared chat button
+@overrideMethod(LobbyEntry, '_LobbyEntry__handleLazyChannelCtlInited')
+def handleLazyChannelCtlInited(base, self, event):
+    if not config.get('hangar/showGeneralChatButton', True):
+        ctx = event.ctx
+        controller = ctx.get('controller')
+        if controller is None:
+            log('Controller is not defined', ctx)
+            return
+        else:
+            ctx.clear()
+            return
+    return base(self, event)

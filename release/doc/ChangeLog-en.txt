@@ -2,6 +2,19 @@
   [GENERAL]
   * World of Tanks 9.22
 
+XVM-7.3.3:
+  [GENERAL]
+  * World of Tanks 9.21.0.3
+
+  [HANGAR]
+  * new options "hangar"/"showGeneralChatButton" - show "General chat" button
+
+  [SOUNDS]
+  * new options "sounds"/"remote_communication option" - remote communication between WoT client and WWISE Authoring Tools
+
+  [MISC]
+  * updated "texts"/"battletype" section with text replacements for {{battletype}} macro
+
 XVM-7.3.2:
   [GENERAL]
   * World of Tanks 9.21.0.2
@@ -101,7 +114,7 @@ XVM-7.2.1:
   * World of Tanks 9.20.1.2
 
   [MISC]
-  * updated texts/battletype section with text replacements for {{battletype}} macro
+  * updated "texts"/"battletype" section with text replacements for {{battletype}} macro
 
 XVM-7.2.0:
   [GENERAL]
@@ -168,7 +181,7 @@ XVM-7.0.0:
       "colors"/"wn6"
 
   [MISC]
-  * updated texts/battletype section with text replacements for {{battletype}} macro
+  * updated "texts"/"battletype" section with text replacements for {{battletype}} macro
 
   [PYTHON MACROS]
   * added macros {{py:upper('str')}}, {{py:lower('str')}}, {{py:capitalize('str')}} and {{py:title('str')}}

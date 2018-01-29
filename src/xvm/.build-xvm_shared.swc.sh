@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# XVM team (c) https://modxvm.com 2014-2017
+# XVM team (c) https://modxvm.com 2014-2018
 # XVM build system
 
 currentdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )

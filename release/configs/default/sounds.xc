@@ -6,6 +6,9 @@
 {
   "sounds": {
     "enabled": true,
+    // true to enable remote communication between WoT client and WWISE Authoring Tools
+    // установите в true для включения коммуникации между клиентом WoT и WWISE Authoring Tools
+    "remote_communication": false,
     // List of extra banks to load
     // Use comma for multiple values: ["bank1.bnk", "bank2.bnk"]. Path is relative to ./res_mods/x.x.x/audioww/
     // You can use xvm:// (path relative to /res_mods/mods/shared_resources/xvm/ ) and cfg:// (path relative to /res_mods/configs/xvm/ )
