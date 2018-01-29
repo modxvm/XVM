@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 04.12.2017
+    // Last update: 29.01.2018
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -582,12 +582,18 @@
     "ussr-R134_Object_252K":                 {"name": null, "short": null},
     "ussr-R134_Object_252U":                 {"name": null, "short": null},
     "ussr-R135_T_103":                       {"name": null, "short": null},
+    "ussr-R139_IS_2_Sh":                     {"name": null, "short": null},
     "ussr-R13_KV-1s":                        {"name": null, "short": null},
     "ussr-R140_M4_Loza":                     {"name": null, "short": null},
     "ussr-R143_T_29":                        {"name": null, "short": null},
+    "ussr-R145_Object_705_A":                {"name": null, "short": null},
     "ussr-R146_STG":                         {"name": null, "short": null},
     "ussr-R146_STG_Tday":                    {"name": null, "short": null},
+    "ussr-R148_Object_430_U":                {"name": null, "short": null},
+    "ussr-R149_Object_268_4":                {"name": null, "short": null},
     "ussr-R14_SU-5":                         {"name": null, "short": null},
+    "ussr-R151_Object_257_2":                {"name": null, "short": null},
+    "ussr-R153_Object_705":                  {"name": null, "short": null},
     "ussr-R15_S-51":                         {"name": null, "short": null},
     "ussr-R16_SU-18":                        {"name": null, "short": null},
     "ussr-R17_SU-100":                       {"name": null, "short": null},
@@ -664,9 +670,11 @@
     "ussr-R90_IS_4M":                        {"name": null, "short": null},
     "ussr-R91_SU14_1":                       {"name": null, "short": null},
     "ussr-R93_Object263":                    {"name": null, "short": null},
+    "ussr-R93_Object263B":                   {"name": null, "short": null},
     "ussr-R95_Object_907":                   {"name": null, "short": null},
     "ussr-R95_Object_907A":                  {"name": null, "short": null},
     "ussr-R96_Object_430":                   {"name": null, "short": null},
+    "ussr-R96_Object_430B":                  {"name": null, "short": null},
     "ussr-R97_Object_140":                   {"name": null, "short": null},
     "ussr-R98_T44_85":                       {"name": null, "short": null},
     "ussr-R98_T44_85M":                      {"name": null, "short": null},

@@ -26,7 +26,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 04.12.2017
+    # Last update: 29.01.2018
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -596,7 +596,7 @@ _data = {
     "ussr:R126_Object_730_5":                'obj268v5',
     "ussr:R127_T44_100_P":                   't44·100P',
     "ussr:R128_KV4_Kreslavskiy":             'Kv·4·Kresl',
-    "ussr:R129_Object_257":                  'obj257',
+    "ussr:R129_Object_257":                  'obj257p',
     "ussr:R12_A-20":                         'A·20',
     "ussr:R131_Tank_Gavalov":                'ltg',
     "ussr:R132_VNII_100LT":                  't100lt',
@@ -604,12 +604,18 @@ _data = {
     "ussr:R134_Object_252K":                 'zashch',
     "ussr:R134_Object_252U":                 'obj252u',
     "ussr:R135_T_103":                       't103',
+    "ussr:R139_IS_2_Sh":                     'Is·M',
     "ussr:R13_KV-1s":                        'Kv·1s',
     "ussr:R140_M4_Loza":                     'M4·Lo',
     "ussr:R143_T_29":                        't·29',
+    "ussr:R145_Object_705_A":                'obj705a',
     "ussr:R146_STG":                         'stg',
     "ussr:R146_STG_Tday":                    'gvard',
+    "ussr:R148_Object_430_U":                'obj430u',
+    "ussr:R149_Object_268_4":                'obj268/4',
     "ussr:R14_SU-5":                         'Su·5',
+    "ussr:R151_Object_257_2":                'obj257',
+    "ussr:R153_Object_705":                  'obj705',
     "ussr:R15_S-51":                         'S·51',
     "ussr:R16_SU-18":                        'Su·18',
     "ussr:R17_SU-100":                       'Su100',
@@ -686,9 +692,11 @@ _data = {
     "ussr:R90_IS_4M":                        'Is·4',
     "ussr:R91_SU14_1":                       'Su14·1',
     "ussr:R93_Object263":                    'obj263',
+    "ussr:R93_Object263B":                   'obj263b',
     "ussr:R95_Object_907":                   'obj907',
     "ussr:R95_Object_907A":                  'obj907a',
     "ussr:R96_Object_430":                   'obj430',
+    "ussr:R96_Object_430B":                  'obj430b',
     "ussr:R97_Object_140":                   'obj140',
     "ussr:R98_T44_85":                       't44·85',
     "ussr:R98_T44_85M":                      't44·85m',
