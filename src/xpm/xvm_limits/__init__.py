@@ -20,8 +20,8 @@ from gui.shared.gui_items import GUI_ITEM_TYPE
 from gui.shared.gui_items.Vehicle import Vehicle
 from gui.shared.money import Currency
 from gui.shared.utils.requesters.StatsRequester import StatsRequester
-from gui.Scaleform.daapi.view.lobby.techtree.TechTree import TechTree
-from gui.Scaleform.daapi.view.lobby.techtree.Research import Research
+from gui.Scaleform.daapi.view.lobby.techtree.techtree_page import TechTree
+from gui.Scaleform.daapi.view.lobby.techtree.research_page import Research
 from gui.Scaleform.daapi.view.lobby.hangar.TechnicalMaintenance import TechnicalMaintenance
 from gui.Scaleform.daapi.view.lobby.PremiumWindow import PremiumWindow
 from gui.Scaleform.daapi.view.lobby.store.Shop import Shop
