@@ -1,4 +1,11 @@
-﻿XVM-7.4.0:
+﻿XVM-7.4.1:
+  [GENERAL]
+  * World of Tanks 9.22 micropatch 1
+
+  [XFW]
+  * Fixed check for native components loading before using them
+
+XVM-7.4.0:
   [GENERAL]
   * World of Tanks 9.22
 
