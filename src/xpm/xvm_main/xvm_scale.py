@@ -11,4 +11,4 @@ import xvm_scale_data
 def XvmScaleToSup(x=None):
     if x is None:
         return None
-    return xvm_scale_data.xvm2sup[max(0, min(100, x-1))]
+    return xvm_scale_data.xvm2sup[min(100, x)-1] if x>0 else 0.0
