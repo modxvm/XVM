@@ -196,6 +196,7 @@ package com.xvm.battle.fullStats
             var updateVehicleNameField:Boolean = false;
             var updateFragsField:Boolean = false;
             var updateVehicleIcon:Boolean = false;
+            var updateVehicleLevelIcon:Boolean = false;
             var updateExtraFields:Boolean = false;
             var updateIgr:Boolean = false;
 
@@ -221,11 +222,18 @@ package com.xvm.battle.fullStats
                 updateVehicleNameField = true;
                 updateIgr = true;
             }
-            if(isInvalid(RandomFullStatsValidationType.VEHICLE_ICON))
+            if (isInvalid(RandomFullStatsValidationType.VEHICLE_ICON))
             {
                 if (this._vehicleIconName)
                 {
                     updateVehicleIcon = true;
+                }
+            }
+            if (isInvalid(RandomFullStatsValidationType.VEHICLE_LEVEL))
+            {
+                if (this._vehicleLevelIcon.visible)
+                {
+                    updateVehicleLevelIcon = true;
                 }
             }
             if (isInvalid(FullStatsValidationType.FRAGS))
@@ -429,7 +437,7 @@ package com.xvm.battle.fullStats
 
         private function onAtlasLoaded(e:Event):void
         {
-            invalidate(RandomFullStatsValidationType.VEHICLE_ICON);
+            invalidate(RandomFullStatsValidationType.VEHICLE_ICON | RandomFullStatsValidationType.VEHICLE_LEVEL);
         }
 
         private function onClanIconLoaded(vehicleID:Number, playerName:String):void
@@ -532,7 +540,6 @@ package com.xvm.battle.fullStats
             if (_isLeftPanel)
             {
                 _vehicleIcon.x = DEFAULT_VEHICLE_ICON_X + cfg.vehicleIconOffsetXLeft;
-                _vehicleLevelIcon.x = DEFAULT_VEHICLE_LEVEL_X + cfg.vehicleIconOffsetXLeft;
                 _vehicleTypeIcon.x = DEFAULT_VEHICLE_TYPE_ICON_X + cfg.vehicleIconOffsetXLeft;
             }
             else
@@ -540,14 +547,32 @@ package com.xvm.battle.fullStats
                 if (Config.config.battle.mirroredVehicleIcons)
                 {
                     _vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight;
-                    _vehicleLevelIcon.x = DEFAULT_VEHICLE_LEVEL_X - cfg.vehicleIconOffsetXRight;
                 }
                 else
                 {
                     _vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH;
-                    _vehicleLevelIcon.x = 39 + DEFAULT_VEHICLE_LEVEL_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH;
                 }
                 _vehicleTypeIcon.x = DEFAULT_VEHICLE_TYPE_ICON_X - cfg.vehicleIconOffsetXRight;
+            }
+            alignVehicleLevelIcon();
+        }
+
+        private function alignVehicleLevelIcon():void
+        {
+            if (_isLeftPanel)
+            {
+                _vehicleLevelIcon.x = DEFAULT_VEHICLE_LEVEL_X + cfg.vehicleIconOffsetXLeft;
+            }
+            else
+            {
+                if (Config.config.battle.mirroredVehicleIcons)
+                {
+                    _vehicleLevelIcon.x = DEFAULT_VEHICLE_LEVEL_X - cfg.vehicleIconOffsetXRight;
+                }
+                else
+                {
+                    _vehicleLevelIcon.x = 39 + DEFAULT_VEHICLE_LEVEL_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH;
+                }
             }
             _vehicleLevelIcon.isCetralize = true;
         }
