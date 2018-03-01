@@ -18,6 +18,7 @@ package com.xvm.types.dossier
 
         // Total
         public var battles:int;
+        public var totalBattles:int;
         public var wins:int;
         public var winrate:int;
         public var xp:int;
