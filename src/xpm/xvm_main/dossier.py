@@ -143,7 +143,7 @@ class _Dossier(object):
             # account dossier
             dossier = self.itemsCache.items.getAccountDossier(accountDBID)
             cache_item = self._cache.get(cache_key, None)
-            if cache_item is not None and cache_item['battles'] == dossier.getRandomStats().getBattlesCount():
+            if cache_item is not None and cache_item['totalBattles'] == dossier.getTotalStats().getBattlesCount():
                 return cache_item
             res = self.__prepareAccountResult(accountDBID, dossier)
             self._cache[cache_key] = res
@@ -161,13 +161,15 @@ class _Dossier(object):
 
         if self.__isVehicleDossierLoaded(accountDBID, vehCD):
             dossier = self.itemsCache.items.getVehicleDossier(vehCD, accountDBID)
-            battles = dossier.getRandomStats().getBattlesCount()
+            totalBattles = dossier.getTotalStats().getBattlesCount()
+            randomBattles = dossier.getRandomStats().getBattlesCount()
         else:
             dossier = _DummyDossier()
-            battles = 0
+            totalBattles = 0
+            randomBattles = 0
 
         cache_item = self._cache.get(cache_key, None)
-        if cache_item is not None and cache_item['battles'] == battles:
+        if cache_item is not None and cache_item['totalBattles'] == totalBattles:
             self.__updateCamouflageResult(cache_item, summer_camo, winter_camo, desert_camo)
             return cache_item
 
@@ -211,13 +213,13 @@ class _Dossier(object):
         xte = -1
         wtr = -1
         xwtr = -1
-        if battles > 0:
+        if randomBattles > 0:
             stats = self.__getStatsBlock(dossier)
             dmg = stats.getDamageDealt()
             frg = stats.getFragsCount()
             if dmg >= 0 and frg >= 0:
-                curdmg = float(dmg) / battles
-                curfrg = float(frg) / battles
+                curdmg = float(dmg) / randomBattles
+                curfrg = float(frg) / randomBattles
                 xtdb = vehinfo.calculateXTDB(vehCD, curdmg)
                 xte = vehinfo.calculateXTE(vehCD, curdmg, curfrg)
                 #TODO: how to get WTR value from dossier?
@@ -279,6 +281,7 @@ class _Dossier(object):
             'accountDBID': 0 if accountDBID is None else accountDBID,
 
             'battles': stats.getBattlesCount(),
+            'totalBattles': dossier.getTotalStats().getBattlesCount(),
             'wins': stats.getWinsCount(),
             'winrate': float(stats.getWinsCount()) / float(stats.getBattlesCount()) * 100.0 if stats.getBattlesCount() > 0 else None,
             'losses': stats.getLossesCount(),
