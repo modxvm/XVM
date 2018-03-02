@@ -26,7 +26,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 29.01.2018
+    # Last update: 02.03.2018
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -75,6 +75,7 @@ _data = {
     "china:Ch39_WZ120_1G_FT":                '120·1ft',
     "china:Ch40_WZ120G_FT":                  '120G·ft',
     "china:Ch41_WZ_111_5A":                  '111·5a',
+    "china:Ch41_WZ_111_QL":                  '111·lq',
     "czech:Cz01_Skoda_T40":                  'skT40',
     "czech:Cz02_TVP_T50":                    'skT50',
     "czech:Cz03_LT_vz35":                    'vz.35',
@@ -305,6 +306,7 @@ _data = {
     "germany:G98_Waffentrager_E100":         'WT100',
     "germany:G98_Waffentrager_E100_P":       'WT100p',
     "germany:G99_RhB_Waffentrager":          'WTRhB',
+    "italy:It13_Progetto_M35_mod_46":        'ProgM35',
     "japan:J01_NC27":                        'R.Ots',
     "japan:J01_NC27_bot":                    'R.Ots',
     "japan:J02_Te_Ke":                       'TeKe',

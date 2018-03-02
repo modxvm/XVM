@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 29.01.2018
+    // Last update: 02.03.2018
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -53,6 +53,7 @@
     "china-Ch39_WZ120_1G_FT":                {"name": null, "short": null},
     "china-Ch40_WZ120G_FT":                  {"name": null, "short": null},
     "china-Ch41_WZ_111_5A":                  {"name": null, "short": null},
+    "china-Ch41_WZ_111_QL":                  {"name": null, "short": null},
     "czech-Cz01_Skoda_T40":                  {"name": null, "short": null},
     "czech-Cz02_TVP_T50":                    {"name": null, "short": null},
     "czech-Cz03_LT_vz35":                    {"name": null, "short": null},
@@ -283,6 +284,7 @@
     "germany-G98_Waffentrager_E100":         {"name": null, "short": null},
     "germany-G98_Waffentrager_E100_P":       {"name": null, "short": null},
     "germany-G99_RhB_Waffentrager":          {"name": null, "short": null},
+    "italy-It13_Progetto_M35_mod_46":        {"name": null, "short": null},
     "japan-J01_NC27":                        {"name": null, "short": null},
     "japan-J01_NC27_bot":                    {"name": null, "short": null},
     "japan-J02_Te_Ke":                       {"name": null, "short": null},
