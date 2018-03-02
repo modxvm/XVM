@@ -26,7 +26,7 @@ from gui.shared.items_parameters.params_helper import idealCrewComparator as ide
 from gui.shared.utils.requesters.ItemsRequester import ItemsRequester
 from gui.Scaleform.genConsts.TOOLTIPS_CONSTANTS import TOOLTIPS_CONSTANTS
 from gui.Scaleform.locale.TOOLTIPS import TOOLTIPS
-from gui.Scaleform.framework.ToolTip import ToolTip
+from gui.Scaleform.framework.tooltip_mgr import ToolTip
 from gui.Scaleform.daapi.view.battle.shared.consumables_panel import ConsumablesPanel
 from gui.Scaleform.daapi.view.meta.ModuleInfoMeta import ModuleInfoMeta
 from gui.shared.tooltips.module import ModuleBlockTooltipData

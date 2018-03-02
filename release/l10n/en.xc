@@ -182,6 +182,7 @@
     "czech": "Сzech",
     "poland": "Poland",
     "sweden": "Sweden",
+    "italy": "Italy",
     
     // Vehicle type
     "HT": "HT",
