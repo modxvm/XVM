@@ -9,7 +9,7 @@ import gui.shared.tooltips.shell as tooltips_shell
 from gui.shared.tooltips import formatters
 from gui.shared.formatters import text_styles
 from gui.Scaleform.daapi.view.lobby.store.StoreView import StoreView
-from gui.Scaleform.daapi.view.lobby.vehicle_carousel.carousel_data_provider import CarouselDataProvider
+from gui.Scaleform.daapi.view.common.vehicle_carousel.carousel_data_provider import CarouselDataProvider
 from gui.Scaleform.daapi.view.lobby.ModuleInfoWindow import ModuleInfoWindow
 
 from xvm_main.python.logger import *

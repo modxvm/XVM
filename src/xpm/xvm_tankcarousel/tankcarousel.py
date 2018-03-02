@@ -25,7 +25,7 @@ from gui.Scaleform.daapi.view.dialogs import SimpleDialogMeta, I18nConfirmDialog
 from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
 import gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers as hangar_cm_handlers
 from gui.Scaleform.daapi.view.lobby.hangar.carousels.basic.carousel_data_provider import CarouselDataProvider, HangarCarouselDataProvider, _SUPPLY_ITEMS
-from gui.Scaleform.daapi.view.lobby.vehicle_carousel import carousel_data_provider
+from gui.Scaleform.daapi.view.common.vehicle_carousel import carousel_data_provider
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache
 
