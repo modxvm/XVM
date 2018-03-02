@@ -24,8 +24,6 @@ package com.xvm.lobby.ui
     //UI_SquadItemRenderer;
 
     import com.xvm.lobby.ui.tankcarousel.*;
-    UI_FalloutTankCarousel;
-    UI_FalloutTankCarouselItemRenderer;
     UI_MultiselectionSlotRenderer;
     UI_MultiselectionSlots;
     UI_SmallTankCarouselItemRenderer;

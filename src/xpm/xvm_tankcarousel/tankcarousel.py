@@ -99,8 +99,6 @@ def _Hangar_as_setCarouselS(base, self, linkage, alias):
         if xfw_mods_info.loaded_swfs.get(XVM_LOBBY_UI_SWF, 0):
             if linkage == HANGAR_ALIASES.TANK_CAROUSEL_UI:
                 linkage = 'com.xvm.lobby.ui.tankcarousel::UI_TankCarousel'
-            if linkage == HANGAR_ALIASES.FALLOUT_TANK_CAROUSEL_UI:
-                linkage = 'com.xvm.lobby.ui.tankcarousel::UI_FalloutTankCarousel'
         else:
             log('WARNING: as_setCarouselS: ({}) {} is not loaded'.format(linkage, XVM_LOBBY_UI_SWF))
             g_eventBus.removeListener(XFW_EVENT.SWF_LOADED, onSwfLoaded)

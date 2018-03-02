@@ -1,4 +1,8 @@
-﻿XVM-7.4.1:
+﻿XVM-7.5.0-dev:
+  [GENERAL]
+  * World of Tanks 1.0
+
+XVM-7.4.1:
   [GENERAL]
   * World of Tanks 9.22 micropatch 1
 

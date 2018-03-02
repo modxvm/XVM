@@ -7,7 +7,7 @@ package com.xvm.lobby.ui.tankcarousel
     import com.xfw.*;
     import com.xvm.extraFields.*;
     import flash.display.*;
-    import net.wg.gui.lobby.hangar.tcarousel.data.*;
+    import net.wg.gui.components.carousels.data.*;
     import scaleform.clik.interfaces.*;
 
     public /*dynamic*/ interface ITankCarouselItemRenderer extends IUIComponent
