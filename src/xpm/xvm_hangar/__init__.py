@@ -38,9 +38,9 @@ cfg_hangar_hangarType = None
 cfg_hangar_barracksShowFlags = True
 cfg_hangar_barracksShowSkills = True
 cfg_hangar_blockVehicleIfLowAmmo = False
-cfg_hangar_camera_minDistance = 6.5
+cfg_hangar_camera_minDistance = 4
 cfg_hangar_camera_maxDistance = 12
-cfg_hangar_camera_startDistance = 11
+cfg_hangar_camera_startDistance = 10
 cfg_hangar_camera_zoomSensitivity = 1
 
 #####################################################################
@@ -64,13 +64,13 @@ def onConfigLoaded(self, e=None):
     cfg_hangar_blockVehicleIfLowAmmo = config.get('hangar/blockVehicleIfLowAmmo', False)
 
     global cfg_hangar_camera_minDistance
-    cfg_hangar_camera_minDistance = config.get('hangar/camera/minDistance', 6.5)
+    cfg_hangar_camera_minDistance = config.get('hangar/camera/minDistance', 4)
 
     global cfg_hangar_camera_maxDistance
     cfg_hangar_camera_maxDistance = config.get('hangar/camera/maxDistance', 12)
 
     global cfg_hangar_camera_startDistance
-    cfg_hangar_camera_startDistance = config.get('hangar/camera/startDistance', 11)
+    cfg_hangar_camera_startDistance = config.get('hangar/camera/startDistance', 10)
 
     global cfg_hangar_camera_zoomSensitivity
     cfg_hangar_camera_zoomSensitivity = config.get('hangar/camera/zoomSensitivity', 1)

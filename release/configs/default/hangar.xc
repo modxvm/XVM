@@ -12,13 +12,13 @@
     "camera": {
       // Minumim distance
       // Минимальное расстояние
-      "minDistance": 6.5,
+      "minDistance": 4,
       // Maximum distance
       // Максимальное расстояние
       "maxDistance": 12,
       // Start distance
       // Начальное расстояние
-      "startDistance": 11,
+      "startDistance": 10,
       // Camera zoom sensitivity (lower is slower)
       // Чувствительность приближения камеры (меньше - медленнее)
       "zoomSensitivity": 1
