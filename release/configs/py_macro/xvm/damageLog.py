@@ -5,7 +5,6 @@ import copy
 
 import BigWorld
 import GUI
-import Keys
 import ResMgr
 import nations
 import BattleReplay
@@ -375,7 +374,7 @@ class Data(object):
         self.data['splashHit'] = 'no-splash'
 
     def showDamageFromShot(self, vehicle, attackerID, points, effectsIndex, damageFactor):
-        maxHitEffectCode, decodedPoints, maxDamagedComponent = DamageFromShotDecoder.decodeHitPoints(points, vehicle.typeDescriptor)
+        maxHitEffectCode, decodedPoints, maxDamagedComponent = DamageFromShotDecoder.decodeHitPoints(points, vehicle.appearance.collisions)
         self.data['compName'] = decodedPoints[0].componentName if decodedPoints else 'unknown'
 
         # self.data['criticalHit'] = (maxHitEffectCode == 5)
