@@ -15,8 +15,8 @@ from gui.shared.gui_items.dossier.achievements import MarkOfMasteryAchievement
 from gui.shared.utils.functions import makeTooltip
 from gui.shared.utils.requesters.ItemsRequester import REQ_CRITERIA
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
-from gui.Scaleform.daapi.view.lobby.hangar.filter_popover import TankCarouselFilterPopover, _SECTION
-from gui.Scaleform.daapi.view.lobby.vehicle_carousel.carousel_filter import BasicCriteriesGroup
+from gui.Scaleform.daapi.view.common.filter_popover import TankCarouselFilterPopover, _SECTION
+from gui.Scaleform.daapi.view.common.vehicle_carousel.carousel_filter import BasicCriteriesGroup
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache
 
