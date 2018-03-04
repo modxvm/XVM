@@ -23,17 +23,18 @@ from xvm_main.python.logger import *
 import xvm_main.python.config as config
 
 
-# wait for loading xvm_battleresults_ui.swf
-@overrideMethod(event_dispatcher, 'showBattleResultsWindow')
-def event_dispatcher_showBattleResultsWindow_proxy(base, arenaUniqueID):
-    event_dispatcher_showBattleResultsWindow(base, arenaUniqueID)
-
-def event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, cnt=0):
-    is_swf = 'swf_file_name' in xfw_mods_info.info.get('xvm_battleresults', {})
-    if cnt < 2 or (cnt < 5 and is_swf and not 'xvm_battleresults_ui.swf' in xfw_mods_info.loaded_swfs):
-        BigWorld.callback(0, lambda:event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, cnt+1))
-    else:
-        base(arenaUniqueID)
+# DEPRECATED: remove if battle results window works as expected
+## wait for loading xvm_battleresults_ui.swf
+#@overrideMethod(event_dispatcher, 'showBattleResultsWindow')
+#def event_dispatcher_showBattleResultsWindow_proxy(base, arenaUniqueID):
+#    event_dispatcher_showBattleResultsWindow(base, arenaUniqueID)
+#
+#def event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, cnt=0):
+#    is_swf = 'swf_file_name' in xfw_mods_info.info.get('xvm_battleresults', {})
+#    if cnt < 2 or (cnt < 5 and is_swf and not 'xvm_battleresults_ui.swf' in xfw_mods_info.loaded_swfs):
+#        BigWorld.callback(0, lambda:event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, cnt+1))
+#    else:
+#        base(arenaUniqueID)
 
 @overrideMethod(BattleResultsWindow, 'as_setDataS')
 def BattleResultsWindow_as_setDataS(base, self, data):
