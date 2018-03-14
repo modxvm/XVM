@@ -24,11 +24,9 @@ class XVM_SOUND_EVENT(object):
 #####################################################################
 # handlers
 
-@registerEvent(PlayerAvatar, 'updateVehicleGunReloadTime')
-def updateVehicleGunReloadTime(self, vehicleID, timeLeft, baseTime):
-    try:
-        self.__prevGunReloadTimeLeft = -1.0
-        if self.__prevGunReloadTimeLeft != timeLeft and timeLeft == 0.0:
-            SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.GUN_RELOADED)
-    except:
-        err(traceback.format_exc())
+@overrideMethod(PlayerAvatar, 'updateVehicleGunReloadTime')
+def updateVehicleGunReloadTime(base, self, vehicleID, timeLeft, baseTime):
+    if self._PlayerAvatar__prevGunReloadTimeLeft != timeLeft and timeLeft == 0.0:
+        try: SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.GUN_RELOADED)
+        except: err(traceback.format_exc())
+    base(self, vehicleID, timeLeft, baseTime) 
