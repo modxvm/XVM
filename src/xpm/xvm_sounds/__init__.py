@@ -63,8 +63,9 @@ import bankManager
 import remoteCommunication
 
 import sixthSense
+import enemySighted
 import fireAlert
 import ammoBay
-import enemySighted
+import gunReloaded
 import battleEnd
 import test
