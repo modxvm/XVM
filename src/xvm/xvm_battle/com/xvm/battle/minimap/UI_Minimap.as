@@ -1,4 +1,4 @@
-/**
+    /**
  * XVM: eXtended Visualization Mod for World of Tanks.
  * https://modxvm.com/
  * @author s_sorochich
@@ -22,6 +22,7 @@ package com.xvm.battle.minimap
     import flash.geom.*;
     import net.wg.gui.battle.views.minimap.constants.*;
     import net.wg.gui.battle.views.stats.constants.*;
+    import net.wg.infrastructure.events.*;
     import scaleform.gfx.*;
 
     UI_ArcadeCameraEntry;
@@ -120,6 +121,7 @@ package com.xvm.battle.minimap
                 super.as_setSize(sizeIndex);
 
                 alignMinimap();
+                dispatchEvent(new LifeCycleEvent(LifeCycleEvent.ON_GRAPHICS_RECTANGLES_UPDATE));
                 Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.ON_MINIMAP_SIZE_CHANGED));
             }
             catch (ex:Error)
