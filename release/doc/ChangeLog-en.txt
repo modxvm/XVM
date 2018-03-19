@@ -4,6 +4,9 @@
 
   [SOUNDS]
   * new options "sounds"/"xvm_gunReloaded" - the sound of the end of recharging the gun.
+  
+  [PYTHON MACROS]
+  * damageLog: added macro {{hitTime}}
 
 XVM-7.4.1:
   [GENERAL]

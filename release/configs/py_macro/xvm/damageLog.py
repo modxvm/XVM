@@ -30,7 +30,6 @@ import xvm_main.python.userprefs as userprefs
 import parser_addon
 
 on_fire = 0
-beginFire = None
 isDownAlt = False
 autoReloadConfig = None
 damageLogConfig = {}
@@ -224,7 +223,8 @@ class Data(object):
                      'blownup': False,
                      'stun-duration': None,
                      'shells_stunning': False,
-                     'critDevice': 'no-critical'
+                     'critDevice': 'no-critical',
+                     'hitTime': 0
                      }
 
     def updateData(self):
@@ -233,6 +233,8 @@ class Data(object):
         player = BigWorld.player()
         self.data['dmgRatio'] = self.data['damage'] * 100 // self.data['maxHealth']
         attackerID = self.data['attackerID']
+        minutes, seconds = divmod(int(self.sessionProvider.shared.arenaPeriod.getEndTime() - BigWorld.serverTime()), 60)
+        self.data['hitTime'] = '{:02d}:{:02d}'.format(minutes, seconds)
         if attackerID:
             self.data['teamDmg'] = 'unknown'
             attacker = player.arena.vehicles.get(attackerID)
@@ -521,6 +523,7 @@ def updateValueMacros(section, value):
                   'diff-masses': value.get('diff-masses', None),
                   'nation': value.get('nation', None),
                   'my-blownup': 'blownup' if value['blownup'] else None,
+                  'type-shell-key': value['shellKind'],
                   'stun-duration': value.get('stun-duration', None)
                   }
 
@@ -536,7 +539,6 @@ def updateValueMacros(section, value):
                    'splash-hit': conf['splashHit'].get(value['splashHit'], 'unknown'),
                    'critical-hit': conf['criticalHit'].get('critical') if value['criticalHit'] else conf['criticalHit'].get('no-critical'),
                    'type-shell': conf['typeShell'][value['shellKind']],
-                   'type-shell-key': value['shellKind'],
                    'c:type-shell': conf['c_typeShell'][value['shellKind']],
                    'c:hit-effects': conf['c_hitEffect'].get(value['hitEffect'], 'unknown'),
                    'hit-effects': conf['hitEffect'].get(value['hitEffect'], 'unknown'),
@@ -544,7 +546,8 @@ def updateValueMacros(section, value):
                    'number': value['number'],
                    'dmg': value['damage'],
                    'dmg-ratio': value['dmgRatio'],
-                   'fire-duration': value.get('fireDuration', None)
+                   'fire-duration': value.get('fireDuration', None),
+                   'hitTime': value['hitTime']
                    })
 
 
@@ -644,9 +647,11 @@ class DamageLog(_Base):
                                                             'damage':  self.dataLog['damage'],
                                                             'criticalHit':  self.dataLog['criticalHit'],
                                                             'numberLine': 0,
-                                                            'beginFire': beginFire if attackReasonID == 1 else None}
+                                                            'startAction': BigWorld.time() if attackReasonID == 1 else None,
+                                                            'hitTime': self.dataLog['hitTime']
+                                                            }
         self.dataLog['number'] = len(self.listLog) + 1
-        self.dataLog['fireDuration'] = BigWorld.time() - beginFire if attackReasonID == 1 else None
+        self.dataLog['fireDuration'] = BigWorld.time() - self.dictVehicle[attackerID][attackReasonID]['startAction'] if attackReasonID == 1 else None
         self.setOutParameters(ADD_LINE)
         for attacker in self.dictVehicle:
             dictAttacker = self.dictVehicle[attacker]
@@ -663,7 +668,8 @@ class DamageLog(_Base):
                 attackerID = self.dataLog['attackerID']
                 attackReasonID = self.dataLog['attackReasonID']
                 if attackerID in self.dictVehicle:
-                    if (attackReasonID in self.dictVehicle[attackerID]) and ((BigWorld.serverTime() - self.dictVehicle[attackerID][attackReasonID]['time']) < 1.0):
+                    isFrequent = (BigWorld.serverTime() - self.dictVehicle[attackerID][attackReasonID]['time']) < 1.0
+                    if (attackReasonID in self.dictVehicle[attackerID]) and isFrequent:
                         key = self.dictVehicle[attackerID][attackReasonID]
                         key['time'] = BigWorld.serverTime()
                         key['damage'] += self.dataLog['damage']
@@ -674,9 +680,12 @@ class DamageLog(_Base):
                         self.dataLog['damage'] = key['damage']
                         self.dataLog['dmgRatio'] = self.dataLog['damage'] * 100 // self.dataLog['maxHealth']
                         self.dataLog['number'] = len(self.listLog) - key['numberLine']
-                        self.dataLog['fireDuration'] = BigWorld.time() - key['beginFire'] if (attackReasonID == 1) and (key['beginFire'] is not None) else None
+                        self.dataLog['fireDuration'] = BigWorld.time() - key['startAction'] if (attackReasonID == 1) and (key['startAction'] is not None) else None
+                        self.dataLog['hitTime'] = key['hitTime']
                         self.setOutParameters(key['numberLine'])
                     else:
+                        if attackReasonID in self.dictVehicle[attackerID]:
+                            del self.dictVehicle[attackerID][attackReasonID]
                         self.addLine(attackerID, attackReasonID)
                 else:
                     self.dictVehicle[attackerID] = {}
@@ -745,21 +754,21 @@ class LastHit(_Base):
                         key['damage'] += dataLog['damage']
                         dataLog['damage'] = key['damage']
                         dataLog['dmgRatio'] = dataLog['damage'] * 100 // dataLog['maxHealth']
-                        if (attackReasonID == 1) and (key['beginFire'] is not None):
-                            dataLog['fireDuration'] = BigWorld.time() - key['beginFire']
-                        else:
-                            dataLog['fireDuration'] = None
+                        dataLog['fireDuration'] = BigWorld.time() - key['startAction'] if (attackReasonID == 1) and (key['startAction'] is not None) else None
+                        dataLog['hitTime'] = key['hitTime']
                 else:
                     self.dictVehicle[attackerID][attackReasonID] = {'time': BigWorld.serverTime(),
                                                                     'damage': dataLog['damage'],
-                                                                    'beginFire': beginFire if attackReasonID == 1 else None}
-                    dataLog['fireDuration'] = BigWorld.time() - beginFire if attackReasonID == 1 else None
+                                                                    'startAction': BigWorld.time() if attackReasonID == 1 else None,
+                                                                    'hitTime': dataLog['hitTime']}
+                    dataLog['fireDuration'] = 0 if attackReasonID == 1 else None
             else:
                 self.dictVehicle[attackerID] = {}
                 self.dictVehicle[attackerID][attackReasonID] = {'time': BigWorld.serverTime(),
                                                                 'damage': dataLog['damage'],
-                                                                'beginFire': beginFire if attackReasonID == 1 else None}
-                dataLog['fireDuration'] = BigWorld.time() - beginFire if attackReasonID == 1 else None
+                                                                'startAction': BigWorld.time() if attackReasonID == 1 else None,
+                                                                'hitTime': dataLog['hitTime']}
+                dataLog['fireDuration'] = 0 if attackReasonID == 1 else None
             self.setOutParameters(dataLog)
         else:
             self.setOutParameters(data.data)
@@ -904,13 +913,9 @@ def Vehicle_updateStunInfo(self):
 
 @registerEvent(DamagePanelMeta, 'as_setFireInVehicleS')
 def DamagePanelMeta_as_setFireInVehicleS(self, isInFire):
-    global on_fire, beginFire
+    global on_fire
     if config.get(DAMAGE_LOG_ENABLED):
-        if isInFire:
-            on_fire = 100
-            beginFire = BigWorld.time()
-        else:
-            on_fire = 0
+        on_fire = 100 if isInFire else 0
         as_event('ON_FIRE')
 
 
