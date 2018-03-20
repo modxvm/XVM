@@ -67,12 +67,12 @@ playerAvgDamage = None
 @registerEvent(Hangar, '_Hangar__updateParams')
 def Hangar__updateParams(self):
     try:
-        if dependency.instance(IBootcampController).isInBootcamp():
+        if dependency.instance(IBootcampController).isInBootcamp() or not g_currentVehicle.isPresent():
             return
         global playerAvgDamage
         itemsCache = dependency.instance(IItemsCache)
         playerAvgDamage = itemsCache.items.getVehicleDossier(g_currentVehicle.item.intCD).getRandomStats().getAvgDamage()
-        return playerAvgDamage
+        return
     except:
         err(traceback.format_exc())
 
