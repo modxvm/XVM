@@ -46,7 +46,6 @@
     "widgets": ${"sirmax-widgets.xc":"widgets.login"}
   },
   "hangar": {
-    //"hangarType": "premium",
     "enableGoldLocker": true,
     "enableFreeXpLocker": true,
     "defaultBoughtForCredits": true,
@@ -94,12 +93,6 @@
       //"rotation": 0,
       //"offsetX": 0,
       //"offsetY": 0
-    },
-    "camera": {
-      "minDistance": 0,
-      "maxDistance": 13,
-      "startDistance": 10,
-      "zoomSensitivity": 0.5
     },
     "widgets": ${"sirmax-widgets.xc":"widgets.lobby"}
   },

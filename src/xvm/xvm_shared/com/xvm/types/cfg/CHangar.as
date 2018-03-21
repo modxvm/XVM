@@ -8,7 +8,6 @@ package com.xvm.types.cfg
 
     public dynamic class CHangar implements ICloneable
     {
-        public var hangarType:*;
         public var enableGoldLocker:*;
         public var enableFreeXpLocker:*;
         public var defaultBoughtForCredits:*;
@@ -34,7 +33,6 @@ package com.xvm.types.cfg
         public var notificationsButtonType:String;
         public var carousel:CCarousel;
         public var widgets:Array;
-        public var camera:CHangarCamera;
 
         public function clone():*
         {

@@ -34,26 +34,14 @@ import battletype
 #####################################################################
 # globals
 
-cfg_hangar_hangarType = None
 cfg_hangar_barracksShowFlags = True
 cfg_hangar_barracksShowSkills = True
 cfg_hangar_blockVehicleIfLowAmmo = False
-cfg_hangar_camera_minDistance = 4
-cfg_hangar_camera_maxDistance = 12
-cfg_hangar_camera_startDistance = 10
-cfg_hangar_camera_zoomSensitivity = 1
 
 #####################################################################
 # initialization/finalization
 
 def onConfigLoaded(self, e=None):
-    global cfg_hangar_hangarType
-    cfg_hangar_hangarType = config.get('hangar/hangarType', None)
-    if cfg_hangar_hangarType is not None:
-        cfg_hangar_hangarType = cfg_hangar_hangarType.lower()
-        if cfg_hangar_hangarType not in ['premium', 'basic']:
-            cfg_hangar_hangarType = None
-
     global cfg_hangar_barracksShowFlags
     cfg_hangar_barracksShowFlags = config.get('hangar/barracksShowFlags', True)
 
@@ -62,18 +50,6 @@ def onConfigLoaded(self, e=None):
 
     global cfg_hangar_blockVehicleIfLowAmmo
     cfg_hangar_blockVehicleIfLowAmmo = config.get('hangar/blockVehicleIfLowAmmo', False)
-
-    global cfg_hangar_camera_minDistance
-    cfg_hangar_camera_minDistance = config.get('hangar/camera/minDistance', 4)
-
-    global cfg_hangar_camera_maxDistance
-    cfg_hangar_camera_maxDistance = config.get('hangar/camera/maxDistance', 12)
-
-    global cfg_hangar_camera_startDistance
-    cfg_hangar_camera_startDistance = config.get('hangar/camera/startDistance', 10)
-
-    global cfg_hangar_camera_zoomSensitivity
-    cfg_hangar_camera_zoomSensitivity = config.get('hangar/camera/zoomSensitivity', 1)
 
     Vehicle.NOT_FULL_AMMO_MULTIPLIER = config.get('hangar/lowAmmoPercentage', 20) / 100.0
 
@@ -177,35 +153,6 @@ def i18n_makeString(base, key, *args, **kwargs):
     if key == '#menu:tankCarousel/vehicleStates/ammoNotFull': # originally returns empty string
         return l10n('lowAmmo')
     return base(key, *args, **kwargs)
-
-
-# handle hangar/hangarType option
-@overrideMethod(ClientHangarSpace, '_getHangarPath')
-def _ClientHangarSpace_getHangarPath(base, isPremium, isPremIGR):
-    if cfg_hangar_hangarType is not None:
-        isPremium = cfg_hangar_hangarType == 'premium'
-    return base(isPremium, isPremIGR)
-
-@overrideMethod(ClientHangarSpace, '_getHangarType')
-def _ClientHangarSpace_getHangarType(base, isPremium):
-    if cfg_hangar_hangarType is not None:
-        isPremium = cfg_hangar_hangarType == 'premium'
-    return base(isPremium)
-
-
-# handle hangar/camera/* options
-@overrideMethod(ClientHangarSpace, 'loadConfig')
-def _ClientHangarSpace_loadConfig(base, cfg, xml, defaultCfg = None):
-    base(cfg, xml, defaultCfg)
-    cfg['cam_dist_constr'] = (cfg_hangar_camera_minDistance, cfg_hangar_camera_maxDistance)
-    cfg['cam_start_dist'] = cfg_hangar_camera_startDistance
-    # increase pitch angles
-    cfg['cam_pitch_constr'] = (-89, 5)
-
-@overrideMethod(HangarCameraManager, '_HangarCameraManager__updateCameraByMouseMove')
-def _HangarCameraManager_updateCameraByMouseMove(base, self, dx, dy, dz):
-    dz *= cfg_hangar_camera_zoomSensitivity
-    base(self, dx, dy, dz)
 
 # hide shared chat button
 @overrideMethod(LobbyEntry, '_LobbyEntry__handleLazyChannelCtlInited')

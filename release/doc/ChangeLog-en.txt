@@ -4,7 +4,10 @@
 
   [SOUNDS]
   * new options "sounds"/"xvm_gunReloaded" - the sound of the end of recharging the gun.
-  
+
+  [HANGAR]
+  * removed option "hangar/hangarType" and section "hangar/camera"
+
   [PYTHON MACROS]
   * damageLog: added macro {{hitTime}}
 
@@ -81,7 +84,7 @@ XVM-7.2.3:
       "shiftY" -> "offsetY"
   * renamed option in the "hangar"/"commonQuests" sections:
       "shiftX" -> "offsetX"
-      "shiftY" -> "offsetY"      
+      "shiftY" -> "offsetY"
   * renamed option in the "hangar"/"personalQuests" sections:
       "shiftX" -> "offsetX"
       "shiftY" -> "offsetY"
