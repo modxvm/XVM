@@ -12,7 +12,7 @@ from CurrentVehicle import g_currentVehicle
 from gui.shared import g_eventBus
 from gui.shared.gui_items import GUI_ITEM_TYPE
 from gui.shared.utils.requesters import REQ_CRITERIA
-from gui.Scaleform.daapi.view.lobby.hangar.AmmunitionPanel import AmmunitionPanel
+from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
 from gui.Scaleform.daapi.view.lobby.hangar.TmenXpPanel import TmenXpPanel
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache
@@ -81,30 +81,30 @@ def PlayerAccount_onBecomePlayer(*args, **kwargs):
 
 
 # devices are changed on vehicle, save the setting
-@registerEvent(AmmunitionPanel, 'as_setDataS')
-def AmmunitionPanel_as_setDataS(self, data):
-    try:
-        if not player_name:
-            return
-        if isInBootcamp():
-            return
-        global equip_settings
-        veh_name = g_currentVehicle.item.name
-        settings_changed = False
-        for info in data['devices']:
-            if info['slotType'] == 'optionalDevice':
-                slotIndex = info['slotIndex']
-                id = info['id'] if info['removable'] else -1
-                if id == -1:
-                    id = None
-                if equip_settings[veh_name][slotIndex] != id:
+@overrideMethod(Hangar, 'onCacheResync')
+def _Hangar_onCacheResync(base, self, reason, diff):
+    base(self, reason, diff)
+    if diff is not None and GUI_ITEM_TYPE.VEHICLE in diff:
+        try:
+            if not player_name:
+                return
+            if isInBootcamp():
+                return
+            global equip_settings
+            vehicle = g_currentVehicle.item
+            veh_name = vehicle.name
+            settings_changed = False
+            global equip_settings
+            for slotIdx, installed_device in enumerate(vehicle.optDevices):
+                id = installed_device.intCD if installed_device and installed_device.isRemovable else None
+                if equip_settings[veh_name][slotIdx] != id:
                     settings_changed = True
-                    equip_settings[veh_name][slotIndex] = id
-        if settings_changed:
-            debug('xvm_equip: devices changed on %s, new set: %s' % (veh_name, equip_settings[veh_name]))
-            save_settings()
-    except Exception, ex:
-        err(traceback.format_exc())
+                    equip_settings[veh_name][slotIdx] = id
+            if settings_changed:
+                debug('xvm_equip: devices changed on %s, new set: %s' % (veh_name, equip_settings[veh_name]))
+                save_settings()
+        except Exception, ex:
+            err(traceback.format_exc())
 
 
 # vehicle switched, remove removable devices from previous and put on new one
