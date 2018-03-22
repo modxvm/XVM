@@ -8,8 +8,10 @@ package com.xvm.lobby.ui.tankcarousel
     import com.xvm.*;
     import com.xvm.types.dossier.*;
     import com.xvm.types.cfg.*;
+    import flash.geom.*;
     import net.wg.data.constants.generated.*;
     import net.wg.gui.lobby.hangar.tcarousel.helper.*;
+    import net.wg.infrastructure.events.*;
     import scaleform.clik.constants.*;
     import org.idmedia.as3commons.util.*;
 
@@ -117,6 +119,11 @@ package com.xvm.lobby.ui.tankcarousel
             }
         }
 
+        override public function getRectangles():Vector.<Rectangle>
+        {
+            return (background.alpha < 1) ? null : super.getRectangles();
+        }
+
         // PRIVATE
 
         private function init():void
@@ -128,6 +135,8 @@ package com.xvm.lobby.ui.tankcarousel
                 endFadeMask.visible = startFadeMask.visible = false;
 
                 background.alpha = Macros.FormatNumberGlobal(cfg.backgroundAlpha, 100) / 100.0;
+
+                dispatchEvent(new LifeCycleEvent(LifeCycleEvent.ON_GRAPHICS_RECTANGLES_UPDATE));
             }
             catch (ex:Error)
             {
