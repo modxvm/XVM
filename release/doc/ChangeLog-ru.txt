@@ -1,4 +1,4 @@
-﻿XVM-7.5.0-dev:
+﻿XVM-7.5.0:
   [ОБЩЕЕ]
   * World of Tanks 1.0
 
