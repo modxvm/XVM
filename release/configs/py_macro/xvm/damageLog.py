@@ -35,6 +35,7 @@ autoReloadConfig = None
 damageLogConfig = {}
 macros = None
 chooseRating = None
+isImpact = False
 
 ATTACK_REASONS = {
     0: 'shot',
