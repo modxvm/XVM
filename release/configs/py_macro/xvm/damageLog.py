@@ -843,7 +843,10 @@ def as_updateSummaryStunValueS(base, self, value):
 
 @registerEvent(Vehicle, 'onHealthChanged')
 def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
-    global on_fire
+    global on_fire, isImpact
+    if not isImpact and self.isPlayerVehicle:
+        isImpact = True
+        as_event('ON_IMPACT')
     if config.get(DAMAGE_LOG_ENABLED):
         if self.isPlayerVehicle and data.data['isAlive']:
             data.onHealthChanged(self, newHealth, attackerID, attackReasonID)
@@ -860,6 +863,11 @@ def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
 
 @registerEvent(PlayerAvatar, 'showVehicleDamageInfo')
 def PlayerAvatar_showVehicleDamageInfo(self, vehicleID, damageIndex, extraIndex, entityID, equipmentID):
+    global isImpact
+    if not isImpact and (self.playerVehicleID == vehicleID):
+        isImpact = damageIndex not in [18, 19, 22, 37]
+        if isImpact:
+            as_event('ON_IMPACT')
     if (vehicleID == self.playerVehicleID) and config.get(DAMAGE_LOG_ENABLED):
         data.showVehicleDamageInfo(self, vehicleID, damageIndex, extraIndex, entityID, equipmentID)
 
@@ -893,12 +901,20 @@ def Vehicle_onEnterWorld(self, prereqs):
 
 @registerEvent(Vehicle, 'showDamageFromShot')
 def Vehicle_showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor):
+    global isImpact
+    if not isImpact and self.isPlayerVehicle:
+        isImpact = True
+        as_event('ON_IMPACT')
     if self.isPlayerVehicle and data.data['isAlive'] and config.get(DAMAGE_LOG_ENABLED):
         data.showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor)
 
 
 @registerEvent(Vehicle, 'showDamageFromExplosion')
 def Vehicle_showDamageFromExplosion(self, attackerID, center, effectsIndex, damageFactor):
+    global isImpact
+    if not isImpact and self.isPlayerVehicle:
+        isImpact = True
+        as_event('ON_IMPACT')
     if self.isPlayerVehicle and data.data['isAlive'] and config.get(DAMAGE_LOG_ENABLED):
         data.showDamageFromExplosion(self, attackerID, center, effectsIndex, damageFactor)
 
@@ -921,7 +937,8 @@ def DamagePanelMeta_as_setFireInVehicleS(self, isInFire):
 
 @registerEvent(PlayerAvatar, '_PlayerAvatar__destroyGUI')
 def PlayerAvatar__destroyGUI(self):
-    global on_fire
+    global on_fire, isImpact
+    isImpact = False
     on_fire = 0
     data.reset()
     _log.reset(_log.section)

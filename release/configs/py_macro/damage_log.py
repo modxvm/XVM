@@ -51,3 +51,7 @@ def xvm_damageLog_lastHit_y():
 def damageLog_fire():
     return damageLog.fire()
 
+
+@xvm.export('xvm.isImpact', deterministic=False)
+def damageLog_isImpact():
+    return 'Impact' if damageLog.isImpact else None

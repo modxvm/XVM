@@ -1,5 +1,6 @@
 ﻿XVM-7.5.1-dev:
-
+  [PYTHON MACROS]
+  * added macro {{py:xvm.isImpact}}
 
 XVM-7.5.0:
   [GENERAL]
