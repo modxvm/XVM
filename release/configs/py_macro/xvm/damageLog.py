@@ -866,7 +866,8 @@ def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
 def PlayerAvatar_showVehicleDamageInfo(self, vehicleID, damageIndex, extraIndex, entityID, equipmentID):
     global isImpact
     if not isImpact and (self.playerVehicleID == vehicleID):
-        isImpact = damageIndex not in [18, 19, 22, 37]
+        damageCode = DAMAGE_INFO_CODES[damageIndex]
+        isImpact = damageCode not in ['DEVICE_REPAIRED_TO_CRITICAL', 'DEVICE_REPAIRED', 'TANKMAN_RESTORED', 'FIRE_STOPPED']
         if isImpact:
             as_event('ON_IMPACT')
     if (vehicleID == self.playerVehicleID) and config.get(DAMAGE_LOG_ENABLED):
