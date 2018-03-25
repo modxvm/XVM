@@ -36,7 +36,7 @@ def getGuns():
     vehicles = ResMgr.openSection(xmlPath)
     result = {}
     for veh, v_v in vehicles.items():
-        if veh == 'Observer':
+        if (veh == 'Observer') or (veh == 'xmlns:xmlref'):
             continue
         i18n_veh = v_v['userString'].asString
         xmlPath = '%svehicles/%s/%s.xml' % (ITEM_DEFS_PATH, nation, veh)
