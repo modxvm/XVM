@@ -32,17 +32,17 @@
     //    "statistics" - страница "Статистика"
     //    "vehicles"   - страница "Техника"
     "contactsStartPage": "summary",
-    // true - Show xTE column in the vehicle list
-    // true - Показывать колонку xTE в списке техники
+    // true - show xTE column in the vehicle list
+    // true - воказывать колонку xTE в списке техники
     "showXTEColumn": true,
-    // true - Enable filter tanks in hangar by default.
+    // true - enable filter tanks in hangar by default.
     // true - включить фильтр отображения танков в ангаре по умолчанию.
     "inHangarFilterEnabled": false,
-    // true - Show filters on tanks.
+    // true - show filters on tanks.
     // true - показывать фильтры отображения танков.
     "showFilters": true,
-    // true - Set the default focus to the filter text input
-    // true - Выбрать поле ввода фильтра по умолчанию
+    // true - set the default focus to the filter text input
+    // true - выбрать поле ввода фильтра по умолчанию
     "filterFocused": true,
     // TODO: description of the substitutions (+all, -premium, ...)
     // default value of the filter

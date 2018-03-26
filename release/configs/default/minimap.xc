@@ -4,7 +4,7 @@
  */
 {
   "minimap": {
-    // false - Disable.
+    // false - disable.
     // false - отключить.
     "enabled": true,
     // Map image transparency.

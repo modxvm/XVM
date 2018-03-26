@@ -16,7 +16,7 @@
     // Ping servers
     // Пинг серверов
     "pingServers": {
-      // true - Enable display of ping to the servers
+      // true - enable display of ping to the servers
       // true - показывать пинг до серверов
       "enabled": false,
       // Update interval, in ms
@@ -117,7 +117,7 @@
       }
     },
     "onlineServers": {
-      // true - Enable display online of servers
+      // true - enable display online of servers
       // true - показывать онлайн серверов
       "enabled": false,
       // Axis field coordinates

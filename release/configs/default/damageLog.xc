@@ -44,7 +44,7 @@
 
 {
   "damageLog": {
-    // false - Disable.
+    // false - disable.
     // false - отключить.
     "enabled": true,
     // true - disable standard detailed damage.
