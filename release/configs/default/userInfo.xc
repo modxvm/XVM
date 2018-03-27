@@ -33,7 +33,7 @@
     //    "vehicles"   - страница "Техника"
     "contactsStartPage": "summary",
     // true - show xTE column in the vehicle list
-    // true - воказывать колонку xTE в списке техники
+    // true - показывать колонку xTE в списке техники
     "showXTEColumn": true,
     // true - enable filter tanks in hangar by default.
     // true - включить фильтр отображения танков в ангаре по умолчанию.
