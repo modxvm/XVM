@@ -41,7 +41,7 @@ Legend:
 │ {{v.c_winrate}}            │ X │ X │ color for win rate
 │ {{v.tdb}}                  │ X │ X │ average damage - damage / battles
 │ {{v.c_tdb}}                │ X │ X │ dynamic color for this macro
-│ {{v.xtdb}}                 │ X │ X │ average damage in XVM Scale
+│ {{v.xtdb}}                 │ X │ X │ average damage in xUI Scale
 │ {{v.c_xtdb}}               │ X │ X │ dynamic color for this macro
 │ {{v.tdv}}                  │ X │ X │ average damage efficiency - damage / (battles * maxHP)
 │ {{v.c_tdv}}                │ X │ X │ dynamic color for this macro
@@ -98,11 +98,11 @@ Legend:
 │ {{mystat.wgr}}             │   │ X │ WG personal rating:  https://koreanrandom.com/forum/topic/13433-/
 │ {{mystat.wtr}}             │   │ X │ WTR rating: https://koreanrandom.com/forum/topic/41382-/
 │ {{mystat.wn8}}             │   │ X │ WN8 rating: https://koreanrandom.com/forum/topic/13434-/
-│ {{mystat.xwr}}             │   │ X │ XVM Scale for GWR (values 00-99, XX for Tops)
-│ {{mystat.xeff}}            │   │ X │ XVM Scale for efficiency (values 00-99, XX for Tops)
-│ {{mystat.xwgr}}            │   │ X │ XVM Scale for WG personal rating (values 00-99, XX for Tops)
-│ {{mystat.xwtr}}            │   │ X │ XVM Scale for WTR (values 00-99, XX for Tops)
-│ {{mystat.xwn8}}            │   │ X │ XVM Scale for WN8 (values 00-99, XX for Tops)
+│ {{mystat.xwr}}             │   │ X │ xUI Scale for GWR (values 00-99, XX for Tops)
+│ {{mystat.xeff}}            │   │ X │ xUI Scale for efficiency (values 00-99, XX for Tops)
+│ {{mystat.xwgr}}            │   │ X │ xUI Scale for WG personal rating (values 00-99, XX for Tops)
+│ {{mystat.xwtr}}            │   │ X │ xUI Scale for WTR (values 00-99, XX for Tops)
+│ {{mystat.xwn8}}            │   │ X │ xUI Scale for WN8 (values 00-99, XX for Tops)
 │ {{mystat.avglvl}}          │   │ X │ average level (tier) of tanks
 │ {{mystat.battles}}         │   │ X │ total battles count
 │ {{mystat.wins}}            │   │ X │ total wins count
@@ -118,11 +118,11 @@ Legend:
 │ {{mystat.c_wgr}}           │   │ X │ color depending on WG personal rating
 │ {{mystat.c_wtr}}           │   │ X │ color depending on WTR rating
 │ {{mystat.c_wn8}}           │   │ X │ color depending on WN8 rating
-│ {{mystat.c_xwr}}           │   │ X │ color depending on XVM Scale for GWR
-│ {{mystat.c_xeff}}          │   │ X │ color depending on XVM Scale for efficiency
-│ {{mystat.c_xwgr}}          │   │ X │ color depending on XVM Scale for WG personal rating
-│ {{mystat.c_xwtr}}          │   │ X │ color depending on XVM Scale for WTR
-│ {{mystat.c_xwn8}}          │   │ X │ color depending on XVM Scale for WN8
+│ {{mystat.c_xwr}}           │   │ X │ color depending on xUI Scale for GWR
+│ {{mystat.c_xeff}}          │   │ X │ color depending on xUI Scale for efficiency
+│ {{mystat.c_xwgr}}          │   │ X │ color depending on xUI Scale for WG personal rating
+│ {{mystat.c_xwtr}}          │   │ X │ color depending on xUI Scale for WTR
+│ {{mystat.c_xwn8}}          │   │ X │ color depending on xUI Scale for WN8
 │ {{mystat.c_avglvl}}        │   │ X │ color depending on average level of tanks
 │ {{mystat.c_battles}}       │   │ X │ color depending on battles
 │ {{l10n:ID}}                │ X │ X │ localizated text, see en.xc for id

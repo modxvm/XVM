@@ -53,8 +53,8 @@
       "src": "{{clanicon}}"
       //"format": "<img src='{{clanicon}}' width='16' height='16'>"
     },
-    // XVM user marker.
-    // Маркер пользователя XVM.
+    // xUI user marker.
+    // Маркер пользователя xUI.
     "xvmUserMarker": {
       "enabled": false,
       "x": 10, "y": 5, "bindToIcon": true,
