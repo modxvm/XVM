@@ -211,8 +211,8 @@
       { "value": 50.4, "color": ${"def.colorHP.average"      } }, // color for HP <= 50%
       { "value": 100,  "color": ${"def.colorHP.above_average"} }  // color for HP > 50%
     ],
-    // Dynamic color for XVM Scale
-    // Динамический цвет по шкале XVM
+    // Dynamic color for xUI Scale
+    // Динамический цвет по шкале xUI
     // https://koreanrandom.com/forum/topic/2625-/
     "x": [
       { "value": 16.4, "color": ${"def.colorRating.very_bad" } }, // 00 - 16 - very bad  (20% of players)

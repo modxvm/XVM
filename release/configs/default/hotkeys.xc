@@ -1,6 +1,6 @@
 ﻿/**
- * Special XVM hotkeys.
- * Специальные горячие клавиши XVM.
+ * Special xUI hotkeys.
+ * Специальные горячие клавиши xUI.
  */
 {
   "hotkeys": {

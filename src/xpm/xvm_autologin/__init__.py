@@ -24,7 +24,7 @@ firsttime = True
 
 @overrideMethod(LoginView, 'as_setVersionS')
 def LoginView_as_setVersionS(base, self, version):
-    base(self, '{} | XVM {} (WoT {})'.format(version, config.get('__xvmVersion'), config.get('__wotVersion')))
+    base(self, '{} | xUI {} (WoT {})'.format(version, config.get('__xvmVersion'), config.get('__wotVersion')))
 
 @overrideMethod(Servers, '_setServerList')
 def Servers_setServerList(base, self, baseServerList):

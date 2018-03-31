@@ -19,7 +19,7 @@ import xvm_main.python.config as config
 
 @overrideMethod(BattleLoading, 'as_setTipTitleS')
 def BattleLoading_as_setTipTitleS(base, self, title):
-    title = cgi.escape('XVM v{}     {}'.format(config.get('__xvmVersion'), config.get('__xvmIntro')))
+    title = cgi.escape('xUI v{}     {}'.format(config.get('__xvmVersion'), config.get('__xvmIntro')))
     stateInfo = config.get('__stateInfo')
     if 'error' in stateInfo:
         title = '<font color="#FF4040">{}</font>'.format(title)

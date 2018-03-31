@@ -54,8 +54,8 @@
       { "value": 50.4, "alpha": ${"def.alphaHP.average"      } }, // alpha for HP <= 50%
       { "value": 100,  "alpha": ${"def.alphaHP.above_average"} }  // alpha for HP > 50%
     ],
-    // Dynamic transparency for XVM Scale
-    // Динамическая прозрачность по шкале XVM
+    // Dynamic transparency for xUI Scale
+    // Динамическая прозрачность по шкале xUI
     "x": [
       { "value": 16.4, "alpha": ${"def.alphaRating.very_bad" } }, // 00 - 16 - very bad  (20% of players)
       { "value": 33.4, "alpha": ${"def.alphaRating.bad"      } }, // 17 - 33 - bad       (better than 20% of players)
