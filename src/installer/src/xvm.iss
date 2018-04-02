@@ -3,10 +3,10 @@
 #include "dll\findwot\src_innosetup\findwot.iss"
 
 [Setup]
-AppCopyright    = "2018 (c) xUI team"
+AppCopyright    = "2018 (c) XVM team"
 AppId           = {{2865cd27-6b8b-4413-8272-cd968f316050}
-AppName         = "xUI"
-AppPublisher    = "xUI team"
+AppName         = "XVM"
+AppPublisher    = "XVM team"
 AppPublisherURL = "http://modxvm.com/"
 AppSupportURL   = "http://modxvm.com/"
 AppUpdatesURL   = "http://modxvm.com/"

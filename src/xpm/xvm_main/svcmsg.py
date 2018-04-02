@@ -89,21 +89,21 @@ def _getVersionText():
             if config.get('region').lower() == 'ru':
                 msg += """
 <font color='#FF0000'>Внимание!</font>
-Установлена тестовая сборка xUI, не рекомендуемая для неопытных пользователей.
+Установлена тестовая сборка XVM, не рекомендуемая для неопытных пользователей.
 Некоторые функции могут работать неправильно, или не работать вообще.
 
-Если вы тестируете xUI, проигнорируйте это сообщение.
+Если вы тестируете XVM, проигнорируйте это сообщение.
 
-<b>Если вы простой пользователь, пожалуйста, используйте стабильную версию с официального сайта мода xUI: <a href='#XVM_SITE_DL#'>https://modxvm.com</a></b>
+<b>Если вы простой пользователь, пожалуйста, используйте стабильную версию с официального сайта мода XVM: <a href='#XVM_SITE_DL#'>https://modxvm.com</a></b>
 """
             else:
                 msg += """
 <font color='#FF0000'>Warning!</font>
-You've installed nightly build of xUI, which is not recommended for inexperienced users.
+You've installed nightly build of XVM, which is not recommended for inexperienced users.
 Some functionality may work incorrectly or may not work at all.
 
-If you are testing xUI, you can ignore this message.
+If you are testing XVM, you can ignore this message.
 
-<b>If you're just a player and not a tester of xUI, please use a stable version instead of nightly builds. Download the stable version from the official website of xUI: <a href='#XVM_SITE_DL#'>https://modxvm.com</a></b>
+<b>If you're just a player and not a tester of XVM, please use a stable version instead of nightly builds. Download the stable version from the official website of XVM: <a href='#XVM_SITE_DL#'>https://modxvm.com</a></b>
 """
     return msg

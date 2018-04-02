@@ -46,11 +46,11 @@
   "definition": {
     // Config author.
     // Автор конфига.
-    "author": "xUI team",
+    "author": "XVM team",
 
     // Config description.
     // Описание конфига.
-    "description": "Default settings for xUI",
+    "description": "Default settings for XVM",
 
     // Address to config updates.
     // Адрес, где выкладываются обновления конфига.
@@ -64,8 +64,8 @@
     // Поддерживаемая версия игры.
     "gameVersion": "1.0.0",
 
-    // The minimum required version of the xUI mod.
-    // Минимально необходимая версия мода xUI.
+    // The minimum required version of the XVM mod.
+    // Минимально необходимая версия мода XVM.
     "modMinVersion": "7.5.0"
   },
 
@@ -101,8 +101,8 @@
   // Лог полученных попаданий.
   "damageLog": ${"damageLog.xc":"damageLog"},
 
-  // Special xUI hotkeys.
-  // Специальные горячие клавиши xUI.
+  // Special XVM hotkeys.
+  // Специальные горячие клавиши XVM.
   "hotkeys": ${"hotkeys.xc":"hotkeys"},
 
   // Parameters for squad window.

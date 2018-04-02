@@ -195,10 +195,10 @@
     "blownUp": "Blown-up!",
 
     // Check version
-    // xUI 5.3.4 (4321)
-    "ver/currentVersion": "xUI {0} ({1})",
+    // XVM 5.3.4 (4321)
+    "ver/currentVersion": "XVM {0} ({1})",
     "ver/newVersion": "Update available:<tab/><a href='#XVM_SITE_DL#'><font color='#00FF00'>v{0}</font></a>\n{1}",
-    "xvmsvc/not_connected": "<font color='#FFFF00'>no connection to xUI server</font>",
+    "xvmsvc/not_connected": "<font color='#FFFF00'>no connection to XVM server</font>",
 
     // Token
     "token/services_unavailable": "Network services unavailable.&nbsp;&nbsp;<a href='#XVM_SITE_UNAVAILABLE#'><font size='11'>more info</font></a>",
@@ -265,12 +265,12 @@
     "Incomplete": "Incomplete",
 
     // Config loading
-    "XVM config reloaded": "xUI config reloaded",
+    "XVM config reloaded": "XVM config reloaded",
     "Config file xvm.xc was not found, using the built-in config": "Config file xvm.xc was not found, using the built-in config",
-    "Error loading XVM config": "Error loading xUI config",
+    "Error loading XVM config": "Error loading XVM config",
 
     //Bootcamp workaround
     "bootcamp_workaround_title": "Warning",
-    "bootcamp_workaround_message": "Currently xUI is not compatible with the \"boot camp\" game mode.\n\nTo enter the \"boot camp\" mode, you must restart the World of Tanks client in safe mode, which does not load modifications.\n\nDo you want to restart World of Tanks without mods right now?"
+    "bootcamp_workaround_message": "Currently XVM is not compatible with the \"boot camp\" game mode.\n\nTo enter the \"boot camp\" mode, you must restart the World of Tanks client in safe mode, which does not load modifications.\n\nDo you want to restart World of Tanks without mods right now?"
   }
 }

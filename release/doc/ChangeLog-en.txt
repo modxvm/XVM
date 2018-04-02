@@ -1,8 +1,4 @@
-﻿xUI-7.5.3:
-  [GENERAL]
-  * XVM was renamed to xUI
-  
-XVM-7.5.2:
+﻿XVM-7.5.2:
   [XFW]
   * XFW.Native was updated 1.0.9-39
 

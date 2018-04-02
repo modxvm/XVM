@@ -195,10 +195,10 @@
     "blownUp": "Взрыв БК!",
 
     // Check version
-    // xUI 5.3.4 (4321)
-    "ver/currentVersion": "xUI {0} ({1})",
+    // XVM 5.3.4 (4321)
+    "ver/currentVersion": "XVM {0} ({1})",
     "ver/newVersion": "Доступно обновление:<tab/><a href='#XVM_SITE_DL#'><font color='#00FF00'>v{0}</font></a>\n{1}",
-    "xvmsvc/not_connected": "<font color='#FFFF00'>нет подключения к серверу xUI</font>",
+    "xvmsvc/not_connected": "<font color='#FFFF00'>нет подключения к серверу XVM</font>",
 
     // Token
     "token/services_unavailable": "Сетевые сервисы недоступны.&nbsp;&nbsp;<a href='#XVM_SITE_UNAVAILABLE#'><font size='11'>подробнее</font></a>",
@@ -265,12 +265,12 @@
     "Incomplete": "Незавершенные",
 
     // Config loading
-    "XVM config reloaded": "Конфиг xUI перезагружен",
+    "XVM config reloaded": "Конфиг XVM перезагружен",
     "Config file xvm.xc was not found, using the built-in config": "Файл конфигурации xvm.xc не найден, используем встроенную конфигурацию",
-    "Error loading XVM config": "Ошибка загрузки конфига xUI",
+    "Error loading XVM config": "Ошибка загрузки конфига XVM",
 
     //Bootcamp workaround
     "bootcamp_workaround_title": "Предупреждение",
-    "bootcamp_workaround_message": "В настоящий момент модификация xUI не совместима с режимом «учебный полигон».\n\nДля входа в режим «учебный полигон» необходимо перезапустить клиент World of Tanks в безопасном режиме, при использовании которого не происходит загрузка модификаций.\n\nВы хотите перезапустить игру без модификаций прямо сейчас?"
+    "bootcamp_workaround_message": "В настоящий момент модификация XVM не совместима с режимом «учебный полигон».\n\nДля входа в режим «учебный полигон» необходимо перезапустить клиент World of Tanks в безопасном режиме, при использовании которого не происходит загрузка модификаций.\n\nВы хотите перезапустить игру без модификаций прямо сейчас?"
   }
 }
