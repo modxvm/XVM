@@ -5,7 +5,7 @@
  * // - comment out the line (will not be used)
  *
  * ---------------------------------------------------------------
- * Fichier de lancement de la configuration xUI.
+ * Fichier de lancement de la configuration XVM.
  * Pour l'utiliser, renommer ce fichier en 'xvm.xc'.
  *
  * Format à utiliser : ${"chemin vers fichier de config":"."}

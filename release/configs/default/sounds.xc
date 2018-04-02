@@ -55,8 +55,8 @@
       //"time_buzzer_01": "",
       //"time_buzzer_02": "",
       //
-      // Sound events added by xUI
-      // Звуковые события, добавленные в xUI
+      // Sound events added by XVM
+      // Звуковые события, добавленные в XVM
       //
       // Sixth sense perk
       // Перк Шестое чувство

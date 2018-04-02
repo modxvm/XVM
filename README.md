@@ -1,5 +1,5 @@
-**xUI: eXtended User Interface** is the most popular modification for MMO World of Tanks.
-Millions of players worldwide are using xUI.
+**XVM: eXtended Visualization Mod** is the most popular modification for MMO World of Tanks.
+Millions of players worldwide are using XVM.
 
 If you can write code, [you can help us](https://confluence.atlassian.com/display/BITBUCKET/Work+with+pull+requests).
 
@@ -9,7 +9,7 @@ If you can write code, [you can help us](https://confluence.atlassian.com/displa
 
 * [Homepage](https://modxvm.com/)
 * [News](https://modxvm.com/en/news/)
-* [Download xUI](https://modxvm.com/en/download-xvm/)
+* [Download XVM](https://modxvm.com/en/download-xvm/)
 * [Nightly Builds](http://nightly.modxvm.com/) Don't use it if you are not experienced tester. Nightly Builds could be unstable or not work at all.
 * [Translation](http://www.koreanrandom.com/forum/topic/27394-/)
 * [Manual: installation and configuration](https://modxvm.com/en/xvm-installation-and-settings/)
@@ -43,15 +43,15 @@ Discussions about the functionality in development at the moment.
 
 * [Suggestions](http://www.koreanrandom.com/forum/forum/49-%D0%BF%D1%80%D0%B5%D0%B4%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F-suggestions/)
 
-Place where you can find suggestions from xUI users and submit your own suggestion to developers.
+Place where you can find suggestions from XVM users and submit your own suggestion to developers.
 
 * [Ratings in XVM](http://www.koreanrandom.com/forum/forum/55-%D1%80%D0%B5%D0%B9%D1%82%D0%B8%D0%BD%D0%B3%D0%B8-%D0%B2-xvm-ratings-in-xvm/)
 
-Discussions about ratings used in xUI (efficiency, performance, wn, etc.)
+Discussions about ratings used in XVM(efficiency, performance, wn, etc.)
 
 * [Components of XVM](http://www.koreanrandom.com/forum/forum/54-%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82%D1%8B-xvm-components-of-xvm/)
 
-Discussions about existing functionality of xUI.
+Discussions about existing functionality of XVM.
 
 * [Custom configurations](http://www.koreanrandom.com/forum/forum/50-%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B3%D1%83%D1%80%D0%B0%D1%86%D0%B8%D0%B8-xvm-custom-configurations/)
 
