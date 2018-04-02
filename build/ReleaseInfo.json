@@ -2,31 +2,31 @@
     "RU": {
         "ver": "7.5.4",
         "wot": "1.0.0.1",
-        "message": " • WoT 1.0.0.1\nПодробности на <a href='#XVM_SITE#'>официальном сайте xUI</a>"
+        "message": " • WoT 1.0.0.1\nПодробности на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
     },
     "EU": {
         "ver": "7.5.4",
         "wot": "1.0.0.1",
-        "message": " • WoT 1.0.0.1\nMore information on the <a href='#XVM_SITE#'>official website of xUI</a>"
+        "message": " • WoT 1.0.0.1\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "NA": {
         "ver": "7.5.4",
         "wot": "1.0.0.1",
-        "message": " • WoT 1.0.0.1\nMore information on the <a href='#XVM_SITE#'>official website of xUI</a>"
+        "message": " • WoT 1.0.0.1\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "ASIA": {
         "ver": "7.4.0",
         "wot": "0.9.22.0",
-        "message": " • WoT 9.22.0\nMore information on the <a href='#XVM_SITE#'>official website of xUI</a>"
+        "message": " • WoT 9.22.0\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
      },
     "CN": {
         "ver": "7.4.0",
         "wot": "0.9.22.0",
-        "message": " • WoT 9.22.0\nMore information on the <a href='#XVM_SITE#'>official website of xUI</a>"
+        "message": " • WoT 9.22.0\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "CT": {
         "ver": "7.5.4",
         "wot": "1.0.0.1",
-        "message": " • WoT 1.0.0.1\nMore information on the <a href='#XVM_SITE#'>official website of xUI</a>"
+        "message": " • WoT 1.0.0.1\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
 }
