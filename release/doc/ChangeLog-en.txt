@@ -1,4 +1,8 @@
-﻿XVM-7.5.4:
+﻿XVM-7.5.5:
+  [GENERAL]
+  * World of Tanks 1.0.0 micropatch 2
+
+XVM-7.5.4:
   [GENERAL]
   * xUI was renamed to XVM (suprisingly, it was offensive in Russian)
 
