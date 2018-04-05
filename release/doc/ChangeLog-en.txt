@@ -4,7 +4,7 @@
 
 XVM-7.5.4:
   [GENERAL]
-  * xUI was renamed to XVM (suprisingly, it was offensive in Russian)
+  * xUI was renamed to XVM (xUI was a joke for April 1st)
 
 xUI-7.5.3:
   [GENERAL]
