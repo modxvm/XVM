@@ -19,9 +19,9 @@
     // Enemies capturing ally base
     // Противник захватывает базу союзников
     "enemy": {
-      // Сapture bar color (default: use system color)
+      // Capture bar color (default: use system color)
       // Цвет полосы захвата (по умолчанию используется системный цвет)
-      "сolor": null,
+      "color": null,
       // Title textfield (center)
       // Текстовое поле с заголовком (среднее)
       "title": {
@@ -98,7 +98,7 @@
     // Allies capturing enemy base
     // Союзники захватывают базу противника
     "ally": {
-      "сolor": null,
+      "color": null,
       "title": {
         "$ref": { "path":"captureBar.enemy.title" },
         "format": "<font size='15' color='#FFFFFF'>{{l10n:enemyBaseCapture}}</font> <font size='14' color='#F0F0F0'>({{cap.points}})</font>",

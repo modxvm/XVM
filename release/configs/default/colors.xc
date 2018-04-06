@@ -237,7 +237,7 @@
     //  { "value": 2000,  "color": ${"def.colorRating.normal"   } }, // 1001 - 2000  - normal
     //  { "value": 3000,  "color": ${"def.colorRating.good"     } }, // 2001 - 3000  - good
     //  { "value": 5000,  "color": ${"def.colorRating.very_good"} }, // 3001 - 5000  - very good
-    //  { "value": 99999, "color": ${"def.colorRating.unique"   } }  // 5001 - 99999 - uniquе
+    //  { "value": 99999, "color": ${"def.colorRating.unique"   } }  // 5001 - 99999 - unique
     // ],
     // Dynamic color by win percent
     // Динамический цвет по проценту побед

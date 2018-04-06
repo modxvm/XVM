@@ -41,16 +41,16 @@
     // Показывать рамку для поля фрагов (полезно для настройки конфига)
     "fragsFieldShowBorder": false,
     // X offset for allies squad icons
-    // Cмещение по оси X значка взвода союзников
+    // Смещение по оси X значка взвода союзников
     "squadIconOffsetXLeft": 0,
     // X offset for enemies squad icons
-    // Cмещение по оси X значка взвода противников
+    // Смещение по оси X значка взвода противников
     "squadIconOffsetXRight": 0,
     // X offset for allies player names field
-    // Cмещение по оси X поля ника союзников
+    // Смещение по оси X поля ника союзников
     "nameFieldOffsetXLeft": -11,
     // X offset for enemies player names field
-    // Cмещение по оси X поля ника противников
+    // Смещение по оси X поля ника противников
     "nameFieldOffsetXRight": -10,
     // Width of allies player names field
     // Ширина поля ника союзников
@@ -59,10 +59,10 @@
     // Ширина поля ника противников
     "nameFieldWidthRight": 200,
     // X offset for "formatLeftVehicle" field
-    // Cмещение по оси X поля названия танка союзников
+    // Смещение по оси X поля названия танка союзников
     "vehicleFieldOffsetXLeft": 24,
     // X offset for "formatRightVehicle" field
-    // Cмещение по оси X поля названия танка противников
+    // Смещение по оси X поля названия танка противников
     "vehicleFieldOffsetXRight": 5,
     // Width of "formatLeftVehicle" field
     // Ширина поля названия танка союзников

@@ -59,7 +59,7 @@
     "driver": "driver",
     "radioman": "radioman",
     "gunner": "gunner",
-    "loader": "loader",  
+    "loader": "loader",
     
     // DamageLog:
     "sec": "sec",
@@ -179,7 +179,7 @@
     "uk": "UK",
     "china": "China",
     "japan": "Japan",
-    "czech": "Сzech",
+    "czech": "Czech",
     "poland": "Poland",
     "sweden": "Sweden",
     "italy": "Italy",

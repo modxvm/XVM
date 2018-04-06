@@ -79,7 +79,7 @@
     //  { "value": 2000,  "alpha": ${"def.colorRating.normal"   } }, // 1001 - 2000  - normal
     //  { "value": 3000,  "alpha": ${"def.colorRating.good"     } }, // 2001 - 3000  - good
     //  { "value": 5000,  "alpha": ${"def.colorRating.very_good"} }, // 3001 - 5000  - very good
-    //  { "value": 99999, "alpha": ${"def.colorRating.unique"   } }  // 5001 - 99999 - uniquе
+    //  { "value": 99999, "alpha": ${"def.colorRating.unique"   } }  // 5001 - 99999 - unique
     // ],
     // Dynamic transparency by win percent
     // Динамическая прозрачность по проценту побед
