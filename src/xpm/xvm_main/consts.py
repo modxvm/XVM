@@ -1,10 +1,10 @@
 """ XVM (c) https://modxvm.com 2013-2018 """
 
-from __version__ import __xvm_version__
+from __version__ import __xvm_version__, __wot_version__
 
 class XVM(object):
     XVM_VERSION    = __xvm_version__
-    WOT_VERSION    = '1.0.0.2'
+    WOT_VERSION    = __wot_version__
     XVM_INTRO      = 'https://modxvm.com'
 
     API_VERSION = '4.0'

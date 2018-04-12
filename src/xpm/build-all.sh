@@ -103,6 +103,7 @@ version_template=$(hg parent --template "__revision__ = '{rev}'\n__branch__ = '{
 for dir in $(find . -maxdepth 1 -type "d" ! -path "."); do
   echo "# This file was created automatically from build script" > $dir/__version__.py
   echo "__xvm_version__ = '$XVMBUILD_XVM_VERSION'" >> $dir/__version__.py
+  echo "__wot_version__ = '$XVMBUILD_WOT_VERSION'" >> $dir/__version__.py
   echo "$version_template" >> $dir/__version__.py
 done
 #echo "$(($(date +%s%N)-$st))"
