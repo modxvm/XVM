@@ -189,9 +189,9 @@ package com.xvm.vehiclemarkers.ui
             Xvm.swfProfilerEnd("XvmVehicleMarker.setHealth()");
         }
 
-        override public function updateState(param1:String, param2:Boolean, param3:String = ""):void
+        override public function updateState(param1:String, param2:Boolean, param3:String = "", param4:String = ""):void
         {
-            super.updateState(param1, param2, param3);
+            super.updateState(param1, param2, param3, param4);
             invalidate(INVALIDATE_DATA);
         }
 

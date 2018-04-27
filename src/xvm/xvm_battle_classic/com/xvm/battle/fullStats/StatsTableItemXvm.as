@@ -51,7 +51,7 @@ package com.xvm.battle.fullStats
         private var _playerNameTF:TextField;
         private var _vehicleNameTF:TextField;
         private var _fragsTF:TextField;
-        private var _vehicleIcon:BattleAtlasSprite;
+        //private var _vehicleIcon:BattleAtlasSprite;
         private var _vehicleLevelIcon:BattleAtlasSprite;
         private var _playerStatus:PlayerStatusView;
         private var _vehicleTypeIcon:BattleAtlasSprite;
@@ -85,7 +85,7 @@ package com.xvm.battle.fullStats
             _vehicleTypeIcon = table.vehicleTypeCollection[index];
             _icoIGR = table.icoIGRCollection[index];
             _badgeIcon = table.rankBadgesCollection[index];
-            _vehicleIcon = table.vehicleIconCollection[index];
+            //_vehicleIcon = table.vehicleIconCollection[index];
             _vehicleLevelIcon = table.vehicleLevelCollection[index];
             _playerStatus = table.playerStatusCollection[index];
 

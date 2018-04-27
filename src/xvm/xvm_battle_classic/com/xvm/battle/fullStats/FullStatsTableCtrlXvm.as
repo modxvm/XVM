@@ -7,6 +7,7 @@ package com.xvm.battle.fullStats
     import com.xfw.*;
     import net.wg.gui.battle.random.views.stats.components.fullStats.*;
     import net.wg.gui.battle.random.views.stats.components.fullStats.tableItem.*;
+    import net.wg.gui.battle.views.stats.fullStats.*;
     import net.wg.infrastructure.base.meta.impl.*;
 
     public class FullStatsTableCtrlXvm extends FullStatsTableCtrl
@@ -23,7 +24,7 @@ package com.xvm.battle.fullStats
 
         override public function createSquadItem(col:int, row:int):DynamicSquadCtrl
         {
-            var index:int = col * NUM_ITEM_ROWS + row;
+            var index:int = col * StatsTableItemBase.NUM_ITEM_ROWS + row;
             return new DynamicSquadCtrlXvm(
                 col == 0,
                 xfw_table.squadStatusCollection[index],
