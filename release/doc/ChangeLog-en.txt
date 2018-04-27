@@ -1,4 +1,8 @@
-﻿XVM-7.5.6:
+﻿XVM-7.6.0:
+  [GENERAL]
+  * World of Tanks 1.0.1
+
+XVM-7.5.6:
   [GENERAL]
   * World of Tanks 1.0.0 micropatch 3
 
