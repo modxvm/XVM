@@ -30,6 +30,7 @@ package com.xvm.types.cfg
         public var epic_random:String;
         public var epic_random_training:String;
         public var event_battles_2:String;
+        public var epic_battle:String;
 
         public function clone():*
         {

@@ -122,6 +122,7 @@ package com.xvm
                 case 24: return 'epic_random';
                 case 25: return 'epic_random_training';
                 case 26: return 'event_battles_2';
+                case 27: return 'epic_battle';
                 default: return 'unknown';
             }
         }

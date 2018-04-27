@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 02.03.2018
+    // Last update: 27.04.2018
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -284,7 +284,18 @@
     "germany-G98_Waffentrager_E100":         {"name": null, "short": null},
     "germany-G98_Waffentrager_E100_P":       {"name": null, "short": null},
     "germany-G99_RhB_Waffentrager":          {"name": null, "short": null},
+    "italy-It03_M15_42":                     {"name": null, "short": null},
+    "italy-It04_Fiat_3000":                  {"name": null, "short": null},
+    "italy-It05_Carro_L6_40":                {"name": null, "short": null},
+    "italy-It06_M14_41":                     {"name": null, "short": null},
+    "italy-It07_P26_40":                     {"name": null, "short": null},
+    "italy-It08_Progetto_M40_mod_65":        {"name": null, "short": null},
+    "italy-It09_P43_ter":                    {"name": null, "short": null},
+    "italy-It10_P43_bis":                    {"name": null, "short": null},
+    "italy-It11_P43":                        {"name": null, "short": null},
+    "italy-It12_Prototipo_Standard_B":       {"name": null, "short": null},
     "italy-It13_Progetto_M35_mod_46":        {"name": null, "short": null},
+    "italy-It14_P44_Pantera":                {"name": null, "short": null},
     "japan-J01_NC27":                        {"name": null, "short": null},
     "japan-J01_NC27_bot":                    {"name": null, "short": null},
     "japan-J02_Te_Ke":                       {"name": null, "short": null},
@@ -424,6 +435,7 @@
     "uk-GB91_Super_Conqueror":               {"name": null, "short": null},
     "uk-GB92_FV217":                         {"name": null, "short": null},
     "uk-GB93_Caernarvon_AX":                 {"name": null, "short": null},
+    "uk-GB94_Centurion_Mk5-1_RAAC":          {"name": null, "short": null},
     "usa-A01_T1_Cunningham":                 {"name": null, "short": null},
     "usa-A01_T1_Cunningham_bot":             {"name": null, "short": null},
     "usa-A02_M2_lt":                         {"name": null, "short": null},
@@ -460,6 +472,7 @@
     "usa-A120_M48A5":                        {"name": null, "short": null},
     "usa-A120_M48A5_IGR":                    {"name": null, "short": null},
     "usa-A12_T32":                           {"name": null, "short": null},
+    "usa-A12_T32_FL":                        {"name": null, "short": null},
     "usa-A13_T34_hvy":                       {"name": null, "short": null},
     "usa-A13_T34_hvy_BF":                    {"name": null, "short": null},
     "usa-A13_T34_hvy_IGR":                   {"name": null, "short": null},
@@ -604,6 +617,7 @@
     "ussr-R19_IS-3":                         {"name": null, "short": null},
     "ussr-R19_IS-3_IGR":                     {"name": null, "short": null},
     "ussr-R20_T-44":                         {"name": null, "short": null},
+    "ussr-R20_T-44_FL":                      {"name": null, "short": null},
     "ussr-R20_T-44_IGR":                     {"name": null, "short": null},
     "ussr-R22_T-46":                         {"name": null, "short": null},
     "ussr-R22_T-46_bootcamp":                {"name": null, "short": null},
