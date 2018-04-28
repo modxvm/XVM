@@ -30,6 +30,7 @@ package com.xvm.battle.battleloading
         private var defaultVehicleFieldWidth:Number = NaN;
 
         private var battleLoadingForm:BattleLoadingForm = null;
+        private var isTipsForm:Boolean = false;
 
         public function UI_BattleLoading()
         {
@@ -39,31 +40,20 @@ package com.xvm.battle.battleloading
             //Logger.addObject(form);
 
             battleLoadingForm = form as BattleLoadingForm;
-
-            if (battleLoadingForm)
-            {
-                logBriefConfigurationInfo();
-
-                Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
-            }
+            logBriefConfigurationInfo();
+            Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
         }
 
         override protected function configUI():void
         {
             super.configUI();
-            if (battleLoadingForm)
-            {
-                setup();
-            }
+            setup();
         }
 
         override protected function onDispose():void
         {
-            if (battleLoadingForm)
-            {
-                Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
-                deleteComponents();
-            }
+            Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
+            deleteComponents();
             super.onDispose();
         }
 
@@ -71,10 +61,9 @@ package com.xvm.battle.battleloading
         {
             //Logger.addObject(param1);
             super.setVisualTipInfo(data);
-            if (battleLoadingForm)
-            {
-                initRenderers();
-            }
+            isTipsForm = data.showTipsBackground;
+            setup();
+            initRenderers();
         }
 
         override public function setCompVisible(value:Boolean):void
@@ -110,7 +99,7 @@ package com.xvm.battle.battleloading
             //Xvm.swfProfilerBegin("UI_BattleLoading.setup()");
             try
             {
-                cfg = battleLoadingForm.formBackgroundTable.visible ? Config.config.battleLoading : Config.config.battleLoadingTips;
+                cfg = isTipsForm ? Config.config.battleLoadingTips : Config.config.battleLoading;
 
                 deleteComponents();
 
@@ -178,7 +167,7 @@ package com.xvm.battle.battleloading
             }
             battleLoadingForm.xfw_enemyRenderers.splice(0, battleLoadingForm.xfw_enemyRenderers.length);
 
-            var cls:Class = battleLoadingForm.formBackgroundTable.visible ? XvmTablePlayerItemRenderer : XvmTipPlayerItemRenderer;
+            var cls:Class = isTipsForm ? XvmTipPlayerItemRenderer : XvmTablePlayerItemRenderer;
             for (var i:int = 0; i < 15; ++i)
             {
                 battleLoadingForm.xfw_allyRenderers.push(new cls(battleLoadingForm.xfw_renderersContainer, i, false));
