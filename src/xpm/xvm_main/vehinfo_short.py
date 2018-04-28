@@ -26,7 +26,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 02.03.2018
+    # Last update: 27.04.2018
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -306,7 +306,18 @@ _data = {
     "germany:G98_Waffentrager_E100":         'WT100',
     "germany:G98_Waffentrager_E100_P":       'WT100p',
     "germany:G99_RhB_Waffentrager":          'WTRhB',
-    "italy:It13_Progetto_M35_mod_46":        'ProgM35',
+    "italy-It03_M15_42":                     'M15/42',
+    "italy-It04_Fiat_3000":                  'Fiat3000',
+    "italy-It05_Carro_L6_40":                'L6/40',
+    "italy-It06_M14_41":                     'M14/41',
+    "italy-It07_P26_40":                     'M26/40',
+    "italy-It08_Progetto_M40_mod_65":        'Prog65',
+    "italy-It09_P43_ter":                    'P43·ter',
+    "italy-It10_P43_bis":                    'P43·bis',
+    "italy-It11_P43":                        'P43',
+    "italy-It12_Prototipo_Standard_B":       'Stand·B',
+    "italy-It13_Progetto_M35_mod_46":        'Prog46',
+    "italy-It14_P44_Pantera":                'P44·Pant',
     "japan:J01_NC27":                        'R.Ots',
     "japan:J01_NC27_bot":                    'R.Ots',
     "japan:J02_Te_Ke":                       'TeKe',
@@ -446,6 +457,7 @@ _data = {
     "uk:GB91_Super_Conqueror":               'S.Conq',
     "uk:GB92_FV217":                         'Badger',
     "uk:GB93_Caernarvon_AX":                 'CaerAX',
+    "uk:GB94_Centurion_Mk5-1_RAAC":          'Sent5/1',
     "usa:A01_T1_Cunningham":                 'T1',
     "usa:A01_T1_Cunningham_bot":             'T1',
     "usa:A02_M2_lt":                         'M2lt',
@@ -482,6 +494,7 @@ _data = {
     "usa:A120_M48A5":                        'M48Pt',
     "usa:A120_M48A5_IGR":                    'M48Pt',
     "usa:A12_T32":                           'T32',
+    "usa:A12_T32_FL":                        'T32·fl',
     "usa:A13_T34_hvy":                       'T34',
     "usa:A13_T34_hvy_BF":                    'T34bf',
     "usa:A13_T34_hvy_IGR":                   'T34',
@@ -626,6 +639,7 @@ _data = {
     "ussr:R19_IS-3":                         'Is·3',
     "ussr:R19_IS-3_IGR":                     'Is·3',
     "ussr:R20_T-44":                         't44',
+    "ussr:R20_T-44":                         't44·fl',
     "ussr:R20_T-44_IGR":                     't44',
     "ussr:R22_T-46":                         't46',
     "ussr:R22_T-46_bootcamp":                't46',
