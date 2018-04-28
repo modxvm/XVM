@@ -1,6 +1,7 @@
 ﻿XVM-7.6.0:
   [GENERAL]
   * World of Tanks 1.0.1
+  * removed option hangar/defaultBoughtForCredits - no longer needed
 
 XVM-7.5.6:
   [GENERAL]

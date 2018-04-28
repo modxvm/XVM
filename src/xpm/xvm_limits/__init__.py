@@ -17,7 +17,6 @@ import BigWorld
 import game
 from gui.shared import g_eventBus, tooltips
 from gui.shared.gui_items import GUI_ITEM_TYPE
-from gui.shared.gui_items.Vehicle import Vehicle
 from gui.shared.money import Currency
 from gui.shared.utils.requesters.StatsRequester import StatsRequester
 from gui.Scaleform.daapi.view.lobby.techtree.techtree_page import TechTree
@@ -44,7 +43,6 @@ import xvm_main.python.config as config
 
 cfg_hangar_enableGoldLocker = False
 cfg_hangar_enableFreeXpLocker = False
-cfg_hangar_defaultBoughtForCredits = False
 
 gold_enable = True
 freeXP_enable = True
@@ -70,10 +68,8 @@ BigWorld.callback(0, start)
 def onConfigLoaded(self, e=None):
     global cfg_hangar_enableGoldLocker
     global cfg_hangar_enableFreeXpLocker
-    global cfg_hangar_defaultBoughtForCredits
     cfg_hangar_enableGoldLocker = config.get('hangar/enableGoldLocker', False) == True
     cfg_hangar_enableFreeXpLocker = config.get('hangar/enableFreeXpLocker', False) == True
-    cfg_hangar_defaultBoughtForCredits = config.get('hangar/defaultBoughtForCredits', False) == True
 
 g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
 
@@ -144,33 +140,6 @@ def StatsRequester_freeXP(base, self):
     if not cfg_hangar_enableFreeXpLocker or freeXP_enable:
         return max(self.actualFreeXP, 0)
     return 0
-
-# by default use credits for equipment
-@overrideMethod(TechnicalMaintenance, 'as_setEquipmentS')
-def as_setEquipmentS(base, self, installed, setup, modules):
-    if cfg_hangar_defaultBoughtForCredits:
-        for module in modules:
-            if module['compactDescr'] not in setup:
-                module['currency'] = Currency.CREDITS
-    base(self, installed, setup, modules)
-
-# by default use credits for ammo
-@overrideMethod(Vehicle, '_parseShells')
-def Vehicle_parseShells(base, self, layoutList, defaultLayoutList, proxy):
-    try:
-        if proxy is not None:
-            invData = proxy.inventory.getItems(GUI_ITEM_TYPE.VEHICLE, self._inventoryID)
-            if invData is not None:
-                if 'shellsLayout' in invData and self.shellsLayoutIdx not in invData['shellsLayout']:
-                    # nothing is saved for this configuration - new gun
-                    for n in xrange(0, len(defaultLayoutList), 2):
-                        defaultLayoutList[n] = abs(defaultLayoutList[n])
-                        if cfg_hangar_defaultBoughtForCredits:
-                            defaultLayoutList[n] *= -1
-    except Exception as ex:
-        err(traceback.format_exc())
-
-    return base(self, layoutList, defaultLayoutList, proxy)
 
 
 ##############################################################

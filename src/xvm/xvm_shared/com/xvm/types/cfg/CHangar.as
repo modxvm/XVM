@@ -10,7 +10,6 @@ package com.xvm.types.cfg
     {
         public var enableGoldLocker:*;
         public var enableFreeXpLocker:*;
-        public var defaultBoughtForCredits:*;
         public var hidePricesInTechTree:*;
         public var masteryMarkInTechTree:*;
         public var allowExchangeXPInTechTree:*;

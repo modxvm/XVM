@@ -30,6 +30,18 @@ def _set_canvas_visible_true(self):
     markersVisibleCallbackID = None
     self.movie.visible = True
 
+
+#####################################################################
+# Hide "_updateToLatestVersion" in python.log
+
+import debug_utils
+
+@overrideMethod(debug_utils, 'LOG_DEBUG')
+def _LOG_DEBUG(base, self, msg, *args, **kwargs):
+    if msg != '_updateToLatestVersion':
+        base(self, msg, *args, **kwargs)
+
+
 #####################################################################
 # Restart client without mods for bootcamp mode
 """

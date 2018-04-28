@@ -104,9 +104,6 @@
       // Смещение по оси Y
       "offsetY": 0
     },
-    // true - use credits instead of gold as default currency for ammo and equipment
-    // true - использовать кредиты, а не золото как валюту по умолчанию для снарядов и снаряжения
-    "defaultBoughtForCredits": false,
     // true - enable removable equipment auto return (Camouflage net, Stereoscope, Toolbox)
     // true - включить автовозврат съемного оборудования (Маскировочная сеть, Стереотруба, Ящик с инструментами)
     "enableEquipAutoReturn": false,
