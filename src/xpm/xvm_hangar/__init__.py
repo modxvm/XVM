@@ -10,7 +10,7 @@ import helpers
 import nations
 from CurrentVehicle import g_currentVehicle
 from gui import ClientHangarSpace
-from gui.hangar_camera_manager import HangarCameraManager
+from gui.hangar_cameras.hangar_camera_manager import HangarCameraManager
 from gui.shared import g_eventBus
 from gui.prb_control.entities.base.actions_validator import CurrentVehicleActionsValidator
 from gui.prb_control.items import ValidationResult

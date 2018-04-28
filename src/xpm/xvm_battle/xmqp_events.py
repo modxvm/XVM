@@ -158,8 +158,8 @@ def _DestroyTimersPanel__hideDestroyTimer(self, value):
 #   zoneID: death_zone, gas_attack, ALL
 #   enable: True, False
 
-@registerEvent(DestroyTimersPanel, '_DestroyTimersPanel__showDeathZoneTimer')
-def _DestroyTimersPanel__showDeathZoneTimer(self, value):
+@registerEvent(DestroyTimersPanel, '_showDeathZoneTimer')
+def _DestroyTimersPanel_showDeathZoneTimer(self, value):
     if xmqp.is_active() and g_appLoader.getSpaceID() == GUI_GLOBAL_SPACE_ID.BATTLE:
         code, totalTime, level = value
         xmqp.call({
@@ -169,8 +169,8 @@ def _DestroyTimersPanel__showDeathZoneTimer(self, value):
             'totalTime':totalTime,
             'level':level})
 
-@registerEvent(DestroyTimersPanel, '_DestroyTimersPanel__hideDeathZoneTimer')
-def _DestroyTimersPanel__hideDeathZoneTimer(self, value):
+@registerEvent(DestroyTimersPanel, '_hideDeathZoneTimer')
+def _DestroyTimersPanel_hideDeathZoneTimer(self, value):
     if xmqp.is_active() and g_appLoader.getSpaceID() == GUI_GLOBAL_SPACE_ID.BATTLE:
         code = value
         if code is None:
