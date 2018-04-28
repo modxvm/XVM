@@ -22,12 +22,15 @@ package com.xvm.vehiclemarkers.ui.components
             {
                 super.update(e);
                 var cfg:CMarkersStunMarker = e.cfg.stunMarker;
-                marker.stunMarker.visible = cfg.enabled;
                 if (cfg.enabled)
                 {
-                    marker.stunMarker.x = Macros.FormatNumber(cfg.x, e.playerState);
-                    marker.stunMarker.y = Macros.FormatNumber(cfg.y, e.playerState) - 38;
-                    marker.stunMarker.alpha = Macros.FormatNumber(cfg.alpha, e.playerState) / 100.0;
+                    marker.statusContainer.stunMarker.x = Macros.FormatNumber(cfg.x, e.playerState);
+                    marker.statusContainer.stunMarker.y = Macros.FormatNumber(cfg.y, e.playerState) - 38;
+                    marker.statusContainer.stunMarker.alpha = Macros.FormatNumber(cfg.alpha, e.playerState) / 100.0;
+                }
+                else
+                {
+                    marker.statusContainer.stunMarker.alpha = 0;
                 }
             }
             catch (ex:Error)
