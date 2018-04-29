@@ -32,14 +32,16 @@ def _set_canvas_visible_true(self):
 
 
 #####################################################################
-# Hide "_updateToLatestVersion" in python.log
+# hide '_updateToLatestVersion' debug message
 
 import debug_utils
 
-@overrideMethod(debug_utils, 'LOG_DEBUG')
-def _LOG_DEBUG(base, self, msg, *args, **kwargs):
-    if msg != '_updateToLatestVersion':
-        base(self, msg, *args, **kwargs)
+@overrideMethod(debug_utils, '_doLog')
+def _doLog(base, category, msg, args=None, kwargs={}):
+    if category == 'DEBUG':
+        if msg == '_updateToLatestVersion':
+            return
+    base(category, msg, args, kwargs)
 
 
 #####################################################################
