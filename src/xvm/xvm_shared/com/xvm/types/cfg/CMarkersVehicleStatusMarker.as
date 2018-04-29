@@ -7,7 +7,7 @@ package com.xvm.types.cfg
     import com.xfw.*;
     import com.xvm.*;
 
-    public dynamic class CMarkersStunMarker implements ICloneable
+    public dynamic class CMarkersVehicleStatusMarker implements ICloneable
     {
         public var enabled:*;
         public var x:*;

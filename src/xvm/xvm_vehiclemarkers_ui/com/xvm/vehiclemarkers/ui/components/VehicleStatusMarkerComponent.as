@@ -9,9 +9,9 @@ package com.xvm.vehiclemarkers.ui.components
     import com.xvm.types.cfg.*;
     import com.xvm.vehiclemarkers.ui.*;
 
-    public class StunMarkerComponent extends VehicleMarkerComponentBase
+    public class VehicleStatusMarkerComponent extends VehicleMarkerComponentBase
     {
-        public function StunMarkerComponent(marker:XvmVehicleMarker)
+        public function VehicleStatusMarkerComponent(marker:XvmVehicleMarker)
         {
             super(marker);
         }
@@ -21,16 +21,13 @@ package com.xvm.vehiclemarkers.ui.components
             try
             {
                 super.update(e);
-                var cfg:CMarkersStunMarker = e.cfg.stunMarker;
+                var cfg:CMarkersVehicleStatusMarker = e.cfg.vehicleStatusMarker;
+                marker.statusContainer.visible = cfg.enabled;
                 if (cfg.enabled)
                 {
-                    marker.statusContainer.stunMarker.x = Macros.FormatNumber(cfg.x, e.playerState);
-                    marker.statusContainer.stunMarker.y = Macros.FormatNumber(cfg.y, e.playerState) - 38;
-                    marker.statusContainer.stunMarker.alpha = Macros.FormatNumber(cfg.alpha, e.playerState) / 100.0;
-                }
-                else
-                {
-                    marker.statusContainer.stunMarker.alpha = 0;
+                    marker.statusContainer.x = Macros.FormatNumber(cfg.x, e.playerState);
+                    marker.statusContainer.y = Macros.FormatNumber(cfg.y, e.playerState) - 38;
+                    marker.statusContainer.alpha = Macros.FormatNumber(cfg.alpha, e.playerState) / 100.0;
                 }
             }
             catch (ex:Error)

@@ -52,7 +52,7 @@
         "actionMarker": {
           "y": -55
         },
-        "stunMarker": {
+        "vehicleStatusMarker": {
           "y": -60
         },
         "textFields": [
@@ -110,7 +110,7 @@
         "actionMarker": {
           "y": -55
         },
-        "stunMarker": {
+        "vehicleStatusMarker": {
           "y": -60
         },
         "clanIcon": {
@@ -160,7 +160,7 @@
         "actionMarker": {
           "y": -55
         },
-        "stunMarker": {
+        "vehicleStatusMarker": {
           "y": -60
         }
       },
@@ -179,7 +179,7 @@
         "actionMarker": {
           "y": -55
         },
-        "stunMarker": {
+        "vehicleStatusMarker": {
           "y": -60
         },
         "textFields": [
@@ -234,7 +234,7 @@
         "actionMarker": {
           "y": -55
         },
-        "stunMarker": {
+        "vehicleStatusMarker": {
           "y": -60
         },
         "textFields": [
@@ -292,7 +292,7 @@
         "actionMarker": {
           "y": -55
         },
-        "stunMarker": {
+        "vehicleStatusMarker": {
           "y": -60
         },
         "clanIcon": {
@@ -341,7 +341,7 @@
         "actionMarker": {
           "y": -55
         },
-        "stunMarker": {
+        "vehicleStatusMarker": {
           "y": -60
         }
       },
@@ -360,7 +360,7 @@
         "actionMarker": {
           "y": -55
         },
-        "stunMarker": {
+        "vehicleStatusMarker": {
           "y": -60
         },
         "textFields": [

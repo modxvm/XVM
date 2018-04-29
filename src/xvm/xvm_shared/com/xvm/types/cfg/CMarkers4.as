@@ -16,7 +16,7 @@ package com.xvm.types.cfg
         public var contourIcon:CMarkersContourIcon;
         public var levelIcon:CMarkersLevelIcon;
         public var actionMarker:CMarkersActionMarker;
-        public var stunMarker:CMarkersStunMarker;
+        public var vehicleStatusMarker:CMarkersVehicleStatusMarker;
         public var textFields:Array;
 
         public function clone():*
@@ -46,9 +46,9 @@ package com.xvm.types.cfg
             {
                 actionMarker.applyGlobalBattleMacros();
             }
-            if (stunMarker)
+            if (vehicleStatusMarker)
             {
-                stunMarker.applyGlobalBattleMacros();
+                vehicleStatusMarker.applyGlobalBattleMacros();
             }
         }
     }
