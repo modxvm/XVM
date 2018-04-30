@@ -39,16 +39,11 @@ def onConfigLoaded(e=None):
     g_markers.enabled = config.get('markers/enabled', True)
     g_markers.respondConfig()
 
-def onArenaInfoInvalidated(e=None):
-    g_markers.updatePlayerStates()
-
 g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
-g_eventBus.addListener(XVM_BATTLE_EVENT.ARENA_INFO_INVALIDATED, onArenaInfoInvalidated)
 
 @registerEvent(game, 'fini')
 def fini():
     g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
-    g_eventBus.removeListener(XVM_BATTLE_EVENT.ARENA_INFO_INVALIDATED, onArenaInfoInvalidated)
 
 @registerEvent(game, 'handleKeyEvent')
 def game_handleKeyEvent(event):
@@ -160,7 +155,6 @@ class VehicleMarkers(object):
     battleType = None
     playerVehicleID = 0
     manager = None
-    vehiclesData = None
     sessionProvider = dependency.descriptor(IBattleSessionProvider)
     pending_commands = []
 
@@ -184,6 +178,7 @@ class VehicleMarkers(object):
         self.populated = True
         self.respondConfig()
         self.process_pending_commands()
+        self.updatePlayerStates()
 
     def destroy(self):
         self.pending_commands = []
@@ -219,7 +214,7 @@ class VehicleMarkers(object):
                 log('[VM]    initialized')
             elif cmd == XVM_COMMAND.REQUEST_CONFIG:
                 #self.respondConfig()
-                pass # vehicle markers config loading controlled by python 
+                pass # vehicle markers config loading controlled by python
             elif cmd == XVM_BATTLE_COMMAND.REQUEST_BATTLE_GLOBAL_DATA:
                 self.respondGlobalBattleData()
             elif cmd == XVM_COMMAND.PYTHON_MACRO:
@@ -279,7 +274,6 @@ class VehicleMarkers(object):
         try:
             if self.active:
                 self.call(XVM_BATTLE_COMMAND.AS_RESPONSE_BATTLE_GLOBAL_DATA, *shared.getGlobalBattleData())
-                self.updatePlayerStates()
         except Exception, ex:
             err(traceback.format_exc())
         #debug('vm:respondGlobalBattleData: {:>8.3f} s'.format(time.clock() - s))
