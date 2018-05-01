@@ -1031,33 +1031,35 @@ package com.xvm
             }
 
             // register player macros
-
             var pdata:Object = m_players[playerName];
-            if (!pdata.hasOwnProperty("name"))
-            {
-                var name:String = getCustomPlayerName(playerName, accountDBID);
-                var clanWithoutBrackets:String = clanAbbrev;
-                var clanWithBrackets:String = clanAbbrev ? ("[" + clanAbbrev + "]") : null;
 
-                // {{nick}}
-                pdata["nick"] = name + (clanWithBrackets || "");
-                // {{name}}
-                pdata["name"] = name;
-                // {{clan}}
-                pdata["clan"] = clanWithBrackets;
-                // {{clannb}}
-                pdata["clannb"] = clanWithoutBrackets;
-                // {{ally}}
-                pdata["ally"] = isAlly ? 'ally' : null;
-                // {{clanicon}}
-                pdata["clanicon"] = function():String
-                {
-                    // TODO: make static macro
-                    return Xfw.cmd(XvmCommandsInternal.GET_CLAN_ICON, vehicleID);
-                }
-                // {{rankBadgeId}}
-                pdata["rankBadgeId"] = rankBadgeId;
+            //Logger.add("_RegisterPlayerMacrosData: " + playerName);
+
+            // clear static cache
+            m_macros_cache_players[playerName] = [ ];
+
+            var name:String = getCustomPlayerName(playerName, accountDBID);
+            var clanWithoutBrackets:String = clanAbbrev;
+            var clanWithBrackets:String = clanAbbrev ? ("[" + clanAbbrev + "]") : null;
+
+            // {{nick}}
+            pdata["nick"] = name + (clanWithBrackets || "");
+            // {{name}}
+            pdata["name"] = name;
+            // {{clan}}
+            pdata["clan"] = clanWithBrackets;
+            // {{clannb}}
+            pdata["clannb"] = clanWithoutBrackets;
+            // {{ally}}
+            pdata["ally"] = isAlly ? 'ally' : null;
+            // {{clanicon}}
+            pdata["clanicon"] = function():String
+            {
+                // TODO: make static macro
+                return Xfw.cmd(XvmCommandsInternal.GET_CLAN_ICON, vehicleID);
             }
+            // {{rankBadgeId}}
+            pdata["rankBadgeId"] = rankBadgeId;
         }
 
         private function _RegisterVehicleMacrosData(playerName:String, vehCD:Number):void
@@ -1067,76 +1069,50 @@ package com.xvm
             if (!pdata)
                 return;
 
-            if (!pdata.hasOwnProperty("veh-id") || (vehCD != 0 && pdata["veh-id"] is Function))
+            if (pdata["veh-id"] == vehCD)
+                return;
+
+            // clear static cache
+            m_macros_cache_players[playerName] = [ ];
+
+            //Logger.add("_RegisterVehicleMacrosData: " + playerName + " " + vehCD);
+
+            var vdata:VOVehicleData = VehicleInfo.get(vehCD);
+            if (vehCD == 0)
             {
-                var vdata:VOVehicleData = VehicleInfo.get(vehCD);
-                if (vehCD == 0)
-                {
-                    // unknown vehicle in the For of War mode - register macros as dynamic
-                    // {{veh-id}}
-                    pdata["veh-id"] = function():Number { return vehCD; }
-                    // {{vehicle}} - Chaffee
-                    pdata["vehicle"] = function():String { return vdata.localizedName; }
-                    // {{vehiclename}} - usa-M24_Chaffee
-                    pdata["vehiclename"] = function():String { return VehicleInfo.getVIconName(vdata.key); }
-                    // {{vehicle-short}} - Chaff
-                    pdata["vehicle-short"] = function():String { return vdata.shortName || vdata.localizedName; }
-                    // {{vtype-key}} - MT
-                    pdata["vtype-key"] = function():String { return vdata.vtype; }
-                    // {{vtype}}
-                    pdata["vtype"] = function():String { return VehicleInfo.getVTypeText(vdata.vtype); }
-                    // {{vtype-l}} - Medium Tank
-                    pdata["vtype-l"] = function():String { return Locale.get(vdata.vtype); }
-                    // {{c:vtype}}
-                    pdata["c:vtype"] = function():String { return MacrosUtils.getVClassColorValue(vdata); }
-                    // {{battletier-min}}
-                    pdata["battletier-min"] = function():Number { return vdata.tierLo; }
-                    // {{battletier-max}}
-                    pdata["battletier-max"] = function():Number { return vdata.tierHi; }
-                    // {{nation}}
-                    pdata["nation"] = function():String { return vdata.nation; }
-                    // {{level}}
-                    pdata["level"] = function():Number { return vdata.level; }
-                    // {{rlevel}}
-                    pdata["rlevel"] = function():String { return Defines.ROMAN_LEVEL[vdata.level - 1]; }
-                    // {{premium}}
-                    pdata["premium"] = function():String { return vdata.premium ? "premium" : null; }
-                }
-                else
-                {
-                    //Logger.addObject(vdata);
-                    if (!m_globals["maxhp"] || m_globals["maxhp"] < vdata.hpTop)
-                        m_globals["maxhp"] = vdata.hpTop;
-                    // {{veh-id}}
-                    pdata["veh-id"] = vehCD;
-                    // {{vehicle}} - Chaffee
-                    pdata["vehicle"] = vdata.localizedName;
-                    // {{vehiclename}} - usa-M24_Chaffee
-                    pdata["vehiclename"] = VehicleInfo.getVIconName(vdata.key);
-                    // {{vehicle-short}} - Chaff
-                    pdata["vehicle-short"] = vdata.shortName || vdata.localizedName;
-                    // {{vtype-key}} - MT
-                    pdata["vtype-key"] = vdata.vtype;
-                    // {{vtype}}
-                    pdata["vtype"] = VehicleInfo.getVTypeText(vdata.vtype);
-                    // {{vtype-l}} - Medium Tank
-                    pdata["vtype-l"] = Locale.get(vdata.vtype);
-                    // {{c:vtype}}
-                    pdata["c:vtype"] = MacrosUtils.getVClassColorValue(vdata);
-                    // {{battletier-min}}
-                    pdata["battletier-min"] = vdata.tierLo;
-                    // {{battletier-max}}
-                    pdata["battletier-max"] = vdata.tierHi;
-                    // {{nation}}
-                    pdata["nation"] = vdata.nation;
-                    // {{level}}
-                    pdata["level"] = vdata.level;
-                    // {{rlevel}}
-                    pdata["rlevel"] = Defines.ROMAN_LEVEL[vdata.level - 1];
-                    // {{premium}}
-                    pdata["premium"] = vdata.premium ? "premium" : null;
-                }
+                // unknown vehicle in the For of War mode
+                //Logger.addObject(vdata);
+                if (!m_globals["maxhp"] || m_globals["maxhp"] < vdata.hpTop)
+                    m_globals["maxhp"] = vdata.hpTop;
             }
+            // {{veh-id}}
+            pdata["veh-id"] = vehCD;
+            // {{vehicle}} - Chaffee
+            pdata["vehicle"] = vdata.localizedName;
+            // {{vehiclename}} - usa-M24_Chaffee
+            pdata["vehiclename"] = VehicleInfo.getVIconName(vdata.key);
+            // {{vehicle-short}} - Chaff
+            pdata["vehicle-short"] = vdata.shortName || vdata.localizedName;
+            // {{vtype-key}} - MT
+            pdata["vtype-key"] = vdata.vtype;
+            // {{vtype}}
+            pdata["vtype"] = VehicleInfo.getVTypeText(vdata.vtype);
+            // {{vtype-l}} - Medium Tank
+            pdata["vtype-l"] = Locale.get(vdata.vtype);
+            // {{c:vtype}}
+            pdata["c:vtype"] = MacrosUtils.getVClassColorValue(vdata);
+            // {{battletier-min}}
+            pdata["battletier-min"] = vdata.tierLo;
+            // {{battletier-max}}
+            pdata["battletier-max"] = vdata.tierHi;
+            // {{nation}}
+            pdata["nation"] = vdata.nation;
+            // {{level}}
+            pdata["level"] = vdata.level;
+            // {{rlevel}}
+            pdata["rlevel"] = Defines.ROMAN_LEVEL[vdata.level - 1];
+            // {{premium}}
+            pdata["premium"] = vdata.premium ? "premium" : null;
         }
 
         private function _RegisterStatisticsMacros(pname:String, stat:StatData):void

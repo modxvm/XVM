@@ -21,8 +21,8 @@ package com.xvm.vehiclemarkers.ui
     {
         private static const INVALIDATE_DATA:uint = 1 << 29;
 
-        public var vehicleID:Number = NaN;
-        public var vehicleIconName:String = null;
+        private var vehicleID:Number = NaN;
+        private var vehicleIconName:String = null;
         private var playerName:String = null;
         private var curHealth:Number = NaN;
         private var maxHealth:int = 0;

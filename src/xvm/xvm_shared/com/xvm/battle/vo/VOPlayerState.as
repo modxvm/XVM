@@ -260,11 +260,11 @@ package com.xvm.battle.vo
             _vehicleData = VehicleInfo.getByIconName(value);
             if (_vehicleData)
             {
-                if (_vehCD == 0 && _vehicleData.vehCD != 0)
+                if (_vehCD != _vehicleData.vehCD)
                 {
                     Macros.RegisterVehicleMacrosData(playerName, _vehicleData.vehCD);
+                    _vehCD = _vehicleData.vehCD;
                 }
-                _vehCD = _vehicleData.vehCD;
             }
         }
 
