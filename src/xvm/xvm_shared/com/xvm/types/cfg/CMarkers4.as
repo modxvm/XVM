@@ -17,6 +17,7 @@ package com.xvm.types.cfg
         public var levelIcon:CMarkersLevelIcon;
         public var actionMarker:CMarkersActionMarker;
         public var vehicleStatusMarker:CMarkersVehicleStatusMarker;
+        public var damageIndicator:CMarkersDamageIndicator;
         public var textFields:Array;
 
         public function clone():*

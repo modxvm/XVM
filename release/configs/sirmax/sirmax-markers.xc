@@ -55,6 +55,13 @@
         "vehicleStatusMarker": {
           "y": -60
         },
+        "damageIndicator": {
+          "enabled": true,
+          "showText": false,
+          "x": 0,
+          "y": -65,
+          "alpha": 75
+        },
         "textFields": [
           {
             "enabled": true,
@@ -113,6 +120,13 @@
         "vehicleStatusMarker": {
           "y": -60
         },
+        "damageIndicator": {
+          "enabled": true,
+          "showText": false,
+          "x": 0,
+          "y": -65,
+          "alpha": 75
+        },
         "clanIcon": {
           "enabled": true,
           "x": 0,
@@ -162,6 +176,13 @@
         },
         "vehicleStatusMarker": {
           "y": -60
+        },
+        "damageIndicator": {
+          "enabled": true,
+          "showText": false,
+          "x": 0,
+          "y": -65,
+          "alpha": 75
         }
       },
       "extended": {
@@ -181,6 +202,13 @@
         },
         "vehicleStatusMarker": {
           "y": -60
+        },
+        "damageIndicator": {
+          "enabled": true,
+          "showText": false,
+          "x": 0,
+          "y": -65,
+          "alpha": 75
         },
         "textFields": [
           {
@@ -236,6 +264,13 @@
         },
         "vehicleStatusMarker": {
           "y": -60
+        },
+        "damageIndicator": {
+          "enabled": true,
+          "showText": false,
+          "x": 0,
+          "y": -65,
+          "alpha": 75
         },
         "textFields": [
           {
@@ -295,6 +330,13 @@
         "vehicleStatusMarker": {
           "y": -60
         },
+        "damageIndicator": {
+          "enabled": true,
+          "showText": false,
+          "x": 0,
+          "y": -65,
+          "alpha": 75
+        },
         "clanIcon": {
           "enabled": true,
           "x": 0,
@@ -343,6 +385,13 @@
         },
         "vehicleStatusMarker": {
           "y": -60
+        },
+        "damageIndicator": {
+          "enabled": true,
+          "showText": false,
+          "x": 0,
+          "y": -65,
+          "alpha": 75
         }
       },
       "extended": {
@@ -362,6 +411,13 @@
         },
         "vehicleStatusMarker": {
           "y": -60
+        },
+        "damageIndicator": {
+          "enabled": true,
+          "showText": false,
+          "x": 0,
+          "y": -65,
+          "alpha": 75
         },
         "textFields": [
           {

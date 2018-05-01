@@ -6,9 +6,10 @@
   * removed option hangar/defaultBoughtForCredits - no longer needed
 
   [MARKERS]
-  * added "vehicleStatusMarker" setting: stun marker and consumables marker
+  * added "damageIndicator" settings - damage indicator (ricochet, critical hit, ...)
+  * added "vehicleStatusMarker" settings - stun marker and consumables marker
     in "Frontline Returns" mode (smoke screen, morale boost, engineering crew)
-  * removed "stunMarker" setting (replaced by "vehicleStatusMarker")
+  * removed "stunMarker" settings (replaced by "vehicleStatusMarker")
 
 XVM-7.5.6:
   [GENERAL]
