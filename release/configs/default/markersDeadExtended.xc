@@ -223,6 +223,15 @@
       "y": -67,          // Position on the Y axis / Положение по оси Y.
       "alpha": 100       // Opacity                / Прозрачность.
     },
+    // Damage indicator (ricochet, critical hit, ...)
+    // Индикатор урона (рикошет, критический урон, ...)
+    "damageIndicator": {
+      "enabled": true,   // false - disable        / не отображать.
+      "showText": true,  // false - show only icon / показывать только инонку
+      "x": 53,           // Position on the X axis / Положение по оси X.
+      "y": -27,          // Position on the Y axis / Положение по оси Y.
+      "alpha": 100       // Opacity                / Прозрачность.
+    },
     // Block of text fields (extended format supported, see extra-field.txt).
     // Блок текстовых полей (поддерживается расширенный формат, см. extra-field.txt).
     "textFields": [
@@ -312,6 +321,15 @@
       "x": 0,
       "y": -67,
       "alpha": 100
+    },
+    // Damage indicator (ricochet, critical hit, ...)
+    // Индикатор урона (рикошет, критический урон, ...)
+    "damageIndicator": {
+      "enabled": true,   // false - disable        / не отображать.
+      "showText": true,  // false - show only icon / показывать только инонку
+      "x": 53,           // Position on the X axis / Положение по оси X.
+      "y": -27,          // Position on the Y axis / Положение по оси Y.
+      "alpha": 100       // Opacity                / Прозрачность.
     },
     // Block of text fields (extended format supported, see extra-field.txt).
     // Блок текстовых полей (поддерживается расширенный формат, см. extra-field.txt).

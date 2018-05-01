@@ -12,6 +12,7 @@ package com.xvm.vehiclemarkers.ui
     import com.xvm.vehiclemarkers.ui.components.*;
     import com.xvm.vo.*;
     import flash.events.*;
+    import net.wg.data.constants.Values;
     import net.wg.gui.battle.views.vehicleMarkers.VehicleMarkersManager; // * - name conflict
     import net.wg.gui.battle.views.vehicleMarkers.events.*;
     import net.wg.gui.utils.*;
@@ -29,6 +30,7 @@ package com.xvm.vehiclemarkers.ui
         private var actionMarkerComponent:ActionMarkerComponent = null;
         private var vehicleStatusMarkerComponent:VehicleStatusMarkerComponent = null;
         private var contourIconComponent:ContourIconComponent = null;
+        private var damageIndicatorComponent:DamageIndicatorComponent = null;
         private var damageTextComponent:DamageTextComponent = null;
         private var healthBarComponent:HealthBarComponent = null;
         private var levelIconComponent:LevelIconComponent = null;
@@ -122,6 +124,11 @@ package com.xvm.vehiclemarkers.ui
                             dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE_HEALTH, playerState, exInfo));
                             playerState.damageInfo = null;
                         }
+                        if (playerState.markerState != null)
+                        {
+                            dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE_STATE, playerState, exInfo));
+                            playerState.markerState = null;
+                        }
                     }
                 }
             }
@@ -192,6 +199,19 @@ package com.xvm.vehiclemarkers.ui
         override public function updateState(param1:String, param2:Boolean, param3:String = "", param4:String = ""):void
         {
             super.updateState(param1, param2, param3, param4);
+            if (param4 != Values.EMPTY_STR)
+            {
+                var playerState:VOPlayerState = BattleState.get(vehicleID);
+                if (playerState)
+                {
+                    playerState.update({
+                        markerState: new VOMarkerState({
+                            criticalHitLabelText: param3,
+                            hitExplosionAnimationType: param4
+                        })
+                    });
+                }
+            }
             invalidate(INVALIDATE_DATA);
         }
 
@@ -262,6 +282,7 @@ package com.xvm.vehiclemarkers.ui
                 vehicleStatusMarkerComponent = new VehicleStatusMarkerComponent(this);
                 healthBarComponent = new HealthBarComponent(this);
                 textFieldsComponent = new TextFieldsComponent(this);
+                damageIndicatorComponent = new DamageIndicatorComponent(this);
                 damageTextComponent = new DamageTextComponent(this);
             }
             catch (ex:Error)
@@ -308,6 +329,11 @@ package com.xvm.vehiclemarkers.ui
                 {
                     textFieldsComponent.dispose();
                     textFieldsComponent = null;
+                }
+                if (damageIndicatorComponent)
+                {
+                    damageIndicatorComponent.dispose();
+                    damageIndicatorComponent = null;
                 }
                 if (damageTextComponent)
                 {

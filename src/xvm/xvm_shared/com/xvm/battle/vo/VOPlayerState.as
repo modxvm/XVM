@@ -54,6 +54,7 @@ package com.xvm.battle.vo
         private var _maxHealth:Number = NaN;
 
         private var _damageInfo:VODamageInfo = null;
+        private var _markerState:VOMarkerState = null;
         private var _xmqpData:VOXmqpData = new VOXmqpData();
 
         private var __hitlogDamage:int = 0;
@@ -376,6 +377,16 @@ package com.xvm.battle.vo
         public function set damageInfo(value:VODamageInfo):void
         {
             _damageInfo = value;
+        }
+
+        public function get markerState():VOMarkerState
+        {
+            return _markerState;
+        }
+
+        public function set markerState(value:VOMarkerState):void
+        {
+            _markerState = value;
         }
 
         public function get xmqpData():VOXmqpData
