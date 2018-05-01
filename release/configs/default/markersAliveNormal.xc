@@ -345,7 +345,7 @@
     // Индикатор урона (рикошет, критический урон, ...)
     "damageIndicator": {
       "enabled": true,   // false - disable        / не отображать.
-      "showText": true,  // false - show only icon / показывать только инонку
+      "showText": true,  // false - show only icon / показывать только иконку.
       "x": 53,           // Position on the X axis / Положение по оси X.
       "y": -27,          // Position on the Y axis / Положение по оси Y.
       "alpha": 100       // Opacity                / Прозрачность.
@@ -447,7 +447,7 @@
     // Индикатор урона (рикошет, критический урон, ...)
     "damageIndicator": {
       "enabled": true,   // false - disable        / не отображать.
-      "showText": true,  // false - show only icon / показывать только инонку
+      "showText": true,  // false - show only icon / показывать только иконку.
       "x": 53,           // Position on the X axis / Положение по оси X.
       "y": -27,          // Position on the Y axis / Положение по оси Y.
       "alpha": 100       // Opacity                / Прозрачность.
