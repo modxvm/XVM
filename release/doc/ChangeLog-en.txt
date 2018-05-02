@@ -1,6 +1,6 @@
 ﻿XVM-7.6.0:
   [GENERAL]
-  * World of Tanks 1.0.1
+  * World of Tanks 1.0.1.0
 
   [HANGAR]
   * removed option hangar/defaultBoughtForCredits - no longer needed
@@ -10,6 +10,10 @@
   * added "vehicleStatusMarker" settings - stun marker and consumables marker
     in "Frontline Returns" mode (smoke screen, morale boost, engineering crew)
   * removed "stunMarker" settings (replaced by "vehicleStatusMarker")
+
+  [XFW]
+  * fixed ctypes module 
+  * fixed CJK languages support
 
 XVM-7.5.6:
   [GENERAL]
