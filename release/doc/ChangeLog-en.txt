@@ -3,17 +3,17 @@
   * World of Tanks 1.0.1.0
 
   [HANGAR]
-  * removed option hangar/defaultBoughtForCredits - no longer needed
+  * removed option "hangar"/"defaultBoughtForCredits" - no longer needed.
 
   [MARKERS]
-  * added "damageIndicator" settings - damage indicator (ricochet, critical hit, ...)
+  * added "damageIndicator" settings - damage indicator (ricochet, critical hit, ...);
   * added "vehicleStatusMarker" settings - stun marker and consumables marker
-    in "Frontline Returns" mode (smoke screen, morale boost, engineering crew)
-  * removed "stunMarker" settings (replaced by "vehicleStatusMarker")
+    in "Frontline Returns" mode (smoke screen, morale boost, engineering crew);
+  * removed "stunMarker" settings (replaced by "vehicleStatusMarker").
 
   [XFW]
-  * fixed ctypes module 
-  * fixed CJK languages support
+  * fixed ctypes module;
+  * fixed CJK languages support.
 
 XVM-7.5.6:
   [GENERAL]
@@ -25,7 +25,7 @@ XVM-7.5.5:
 
 XVM-7.5.4:
   [GENERAL]
-  * xUI was renamed to XVM (xUI was a joke for April 1st)
+  * xUI was renamed to XVM (xUI was a joke for April 1st).
 
 xUI-7.5.3:
   [GENERAL]
@@ -50,7 +50,7 @@ XVM-7.5.0:
   * new options "sounds"/"xvm_gunReloaded" - the sound of the end of recharging the gun.
 
   [HANGAR]
-  * removed option "hangar/hangarType" and section "hangar/camera"
+  * removed option "hangar/hangarType" and section "hangar/camera".
 
   [PYTHON MACROS]
   * damageLog: added macro {{hitTime}}
