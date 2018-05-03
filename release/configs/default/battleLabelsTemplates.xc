@@ -180,7 +180,7 @@
       "enabled": true,
       "updateEvent": "PY(ON_ENGINE_UPDATE)",
       "x": 4,
-      "y": -147,
+      "y": -141,
       "format": "<b>{{py:repairTimeEngine%0.1f}}</b>"
     },
     // Repair timer for gun
@@ -190,7 +190,7 @@
       "enabled": true,
       "updateEvent": "PY(ON_GUN_UPDATE)",
       "x": 4,
-      "y": -69,
+      "y": -63,
       "format": "<b>{{py:repairTimeGun%0.1f}}</b>"
     },
     // Repair timer for turret rotator
@@ -200,7 +200,7 @@
       "enabled": true,
       "updateEvent": "PY(ON_TURRET_UPDATE)",
       "x": 4,
-      "y": -30,
+      "y": -24,
       "format": "<b>{{py:repairTimeTurret%0.1f}}</b>"
     },
     // Repair timer for tracks
@@ -210,7 +210,7 @@
       "enabled": true,
       "updateEvent": "PY(ON_TRACKS_UPDATE)",
       "x": 177,
-      "y": -147,
+      "y": -141,
       "format": "<b>{{py:repairTimeTracks%0.1f}}</b>"
     },
     // Repair timer for surveying device
@@ -220,7 +220,7 @@
       "enabled": true,
       "updateEvent": "PY(ON_SURVEYING_UPDATE)",
       "x": 177,
-      "y": -108,
+      "y": -102,
       "format": "<b>{{py:repairTimeSurveying%0.1f}}</b>"
     },
     // Repair timer for radio
@@ -230,7 +230,7 @@
       "enabled": true,
       "updateEvent": "PY(ON_RADIO_UPDATE)",
       "x": 177,
-      "y": -69,
+      "y": -63,
       "format": "<b>{{py:repairTimeRadio%0.1f}}</b>"
     }
   }
