@@ -1078,10 +1078,8 @@ package com.xvm
             //Logger.add("_RegisterVehicleMacrosData: " + playerName + " " + vehCD);
 
             var vdata:VOVehicleData = VehicleInfo.get(vehCD);
-            if (vehCD == 0)
+            if (vehCD != 0)
             {
-                // unknown vehicle in the For of War mode
-                //Logger.addObject(vdata);
                 if (!m_globals["maxhp"] || m_globals["maxhp"] < vdata.hpTop)
                     m_globals["maxhp"] = vdata.hpTop;
             }
