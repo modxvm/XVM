@@ -19,7 +19,7 @@ package com.xvm.battle.vo
         public var questTipsMainCondition : String;
         public var questTipsTitle : String;
 
-        public function VOArenaInfo(data:Object)
+        public function VOArenaInfo(data:Object/*net.wg.data.VO.daapi.DAAPIArenaInfoVO*/)
         {
             allyTeamName = data.allyTeamName;
             battleTypeFrameLabel = data.battleTypeFrameLabel;
@@ -28,17 +28,11 @@ package com.xvm.battle.vo
             mapIcon = data.mapIcon;
             mapName = data.mapName;
             winText = data.winText;
-            if (data.getQuestTipsAdditionalCondition != null)
-            {
-                questTipsAdditionalCondition = data.getQuestTipsAdditionalCondition();
-            }
-            if (data.getQuestTipsMainCondition != null)
-            {
-                questTipsMainCondition = data.getQuestTipsMainCondition();
-            }
-            if (data.getQuestTipsTitle != null)
+            if (data.questTipsVO)
             {
                 questTipsTitle = data.getQuestTipsTitle();
+                questTipsMainCondition = data.getQuestTipsMainCondition();
+                questTipsAdditionalCondition = data.getQuestTipsAdditionalCondition();
             }
         }
     }

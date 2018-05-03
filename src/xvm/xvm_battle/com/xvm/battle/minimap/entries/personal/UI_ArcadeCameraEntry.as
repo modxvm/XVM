@@ -78,8 +78,11 @@ package com.xvm.battle.minimap.entries.personal
                 if (isInvalid(INVALID_UPDATE_XVM))
                 {
                     var playerState:VOPlayerState = BattleState.get(BattleGlobalData.playerVehicleID);
-                    updateDirectionAlpha(playerState);
-                    updateDirectionLineVisibility(playerState);
+                    if (playerState)
+                    {
+                        updateDirectionAlpha(playerState);
+                        updateDirectionLineVisibility(playerState);
+                    }
                 }
             }
             catch (ex:Error)
