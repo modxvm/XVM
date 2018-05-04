@@ -15,7 +15,7 @@
     "url": "http://modxvm.com/",
     "url_update": "http://modxvm.com/",
     
-    "wot_versions"         : ["WOT_VERSION"],
+    "wot_versions" : ["WOT_VERSION"],
     "wot_versions_strategy": "",
 
     "features": ["python"]

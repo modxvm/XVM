@@ -284,6 +284,7 @@
       "fill": {
         "alpha": 50                     //     прозрачность
       },
+      // Decreasing HP animation parameters.
       // Параметры анимации отнимаемого здоровья.
       "damage": {
         "alpha": 100,                   //     прозрачность
