@@ -188,7 +188,7 @@ class Data(object):
             xmlPath = '%s%s%s%s' % (ITEM_DEFS_PATH, 'vehicles/', nation, '/components/shells.xml')
             xmlCtx_s = (((None, '{}/{}'.format(xmlPath, n)), s) for n, s in ResMgr.openSection(xmlPath).items() if (n != 'icons') and (n != 'xmlns:xmlref'))
             id_xmlCtx_s = ((_xml.readInt(xmlCtx, s, 'id', 0, 65535), xmlCtx, s) for xmlCtx, s in xmlCtx_s)
-            self.shells[nation] = [i for i, xmlCtx, s in id_xmlCtx_s if 'gold' in _xml.readPrice(xmlCtx, s, 'price')]
+            self.shells[nation] = [i for i, xmlCtx, s in id_xmlCtx_s if s.readBool('improved', False)]
             self.shells_stunning[nation] = [i for i, xmlCtx, s in id_xmlCtx_s if _xml.readStringOrNone(xmlCtx, s, 'stunDuration')]
         ResMgr.purge(xmlPath, True)
 
