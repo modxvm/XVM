@@ -138,9 +138,12 @@ package com.xvm.battle.minimap.entries.personal
                 if (isInvalid(INVALID_UPDATE_XVM))
                 {
                     var playerState:VOPlayerState = BattleState.get(_vehicleID);
-                    updateVehicleIcon(playerState);
-                    updateLines(playerState);
-                    updateLabels(playerState);
+                    if (playerState)
+                    {
+                        updateVehicleIcon(playerState);
+                        updateLines(playerState);
+                        updateLabels(playerState);
+                    }
                 }
             }
             catch (ex:Error)
