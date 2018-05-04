@@ -112,17 +112,18 @@ package com.xvm.battle
             // {{hitlog.dead}}
             // {{hitlog.n-player}}
             // {{hitlog.dmg-player}}
-            m_globals["hitlog"] = function(o:VOPlayerState):*
+            m_globals["hitlog"] = function(o:IVOMacrosOptions):*
             {
+                var ps:VOPlayerState = o as VOPlayerState;
                 switch (o.getSubname())
                 {
                     case "n": return BattleState.hitlogHits.length;
                     case "dmg-total": return BattleState.hitlogTotalDamage;
                     case "dmg-total-color": return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, BattleGlobalData.curentXtdb, NaN, "#", false);
                     case "dmg-avg": return BattleState.hitlogHits.length ? Math.round(BattleState.hitlogTotalDamage / BattleState.hitlogHits.length) : NaN;
-                    case "dead": return o.isBlown ? Config.config.hitLog.blowupMarker : o.isDead ? Config.config.hitLog.deadMarker : null;
-                    case "n-player": return o.hitlogHits.length;
-                    case "dmg-player": return o.hitlogDamage;
+                    case "dead": return ps ? (ps.isBlown ? Config.config.hitLog.blowupMarker : (ps.isDead ? Config.config.hitLog.deadMarker : null)) : null;
+                    case "n-player": return ps ? ps.hitlogHits.length : null;
+                    case "dmg-player": return ps ? ps.hitlogDamage : null;
                 }
                 return null;
             }
@@ -146,39 +147,45 @@ package com.xvm.battle
             if (Config.networkServicesSettings.xmqp)
             {
                 // {{x-enabled}}
-                m_globals["x-enabled"] = function(o:VOPlayerState):String
+                m_globals["x-enabled"] = function(o:IVOMacrosOptions):String
                 {
-                    return o && o.xmqpData && o.xmqpData.x_enabled == true ? "true" : null;
+                    var ps:VOPlayerState = o as VOPlayerState;
+                    return ps && ps.xmqpData && ps.xmqpData.x_enabled == true ? "true" : null;
                 }
 
                 // {{x-sense-on}}
-                m_globals["x-sense-on"] = function(o:VOPlayerState):String
+                m_globals["x-sense-on"] = function(o:IVOMacrosOptions):String
                 {
-                    return o && o.xmqpData && o.xmqpData.x_sense_on == true ? "true" : null;
+                    var ps:VOPlayerState = o as VOPlayerState;
+                    return ps && ps.xmqpData && ps.xmqpData.x_sense_on == true ? "true" : null;
                 }
 
                 // {{x-fire}}
-                m_globals["x-fire"] = function(o:VOPlayerState):String
+                m_globals["x-fire"] = function(o:IVOMacrosOptions):String
                 {
-                    return o && o.xmqpData && o.xmqpData.x_fire == true ? "true" : null;
+                    var ps:VOPlayerState = o as VOPlayerState;
+                    return ps && ps.xmqpData && ps.xmqpData.x_fire == true ? "true" : null;
                 }
 
                 // {{x-overturned}}
-                m_globals["x-overturned"] = function(o:VOPlayerState):String
+                m_globals["x-overturned"] = function(o:IVOMacrosOptions):String
                 {
-                    return o && o.xmqpData && o.xmqpData.x_overturned == true ? "true" : null;
+                    var ps:VOPlayerState = o as VOPlayerState;
+                    return ps && ps.xmqpData && ps.xmqpData.x_overturned == true ? "true" : null;
                 }
 
                 // {{x-drowning}}
-                m_globals["x-drowning"] = function(o:VOPlayerState):String
+                m_globals["x-drowning"] = function(o:IVOMacrosOptions):String
                 {
-                    return o && o.xmqpData && o.xmqpData.x_drowning == true ? "true" : null;
+                    var ps:VOPlayerState = o as VOPlayerState;
+                    return ps && ps.xmqpData && ps.xmqpData.x_drowning == true ? "true" : null;
                 }
 
                 // {{x-spotted}}
-                m_globals["x-spotted"] = function(o:VOPlayerState):String
+                m_globals["x-spotted"] = function(o:IVOMacrosOptions):String
                 {
-                    return o && o.xmqpData && o.xmqpData.x_spotted == true ? "true" : null;
+                    var ps:VOPlayerState = o as VOPlayerState;
+                    return ps && ps.xmqpData && ps.xmqpData.x_spotted == true ? "true" : null;
                 }
             }
             else
@@ -262,13 +269,14 @@ package com.xvm.battle
             // stats
 
             // {{frags}}
-            m_globals["frags"] = function(o:VOPlayerState):Number
+            m_globals["frags"] = function(o:IVOMacrosOptions):Number
             {
-                return o && o.frags ? o.frags : NaN;
+                var ps:VOPlayerState = o as VOPlayerState;
+                return ps && ps.frags ? ps.frags : NaN;
             }
 
             // {{marksOnGun}}
-            m_globals["marksOnGun"] = function(o:VOPlayerState):String
+            m_globals["marksOnGun"] = function(o:IVOMacrosOptions):String
             {
                 return o && !isNaN(o.marksOnGun) && o.vehicleData && o.vehicleData.level > 4 ? Utils.getMarksOnGunText(o.marksOnGun) : null;
             }
@@ -276,114 +284,131 @@ package com.xvm.battle
             // spotted
 
             // {{spotted}}
-            m_globals["spotted"] = function(o:VOPlayerState):String
+            m_globals["spotted"] = function(o:IVOMacrosOptions):String
             {
-                return o ? Utils.getSpottedText(o.getSpottedStatus(), o.isSPG) : null;
+                var ps:VOPlayerState = o as VOPlayerState;
+                return ps ? Utils.getSpottedText(ps.getSpottedStatus(), ps.isSPG) : null;
             }
 
             // {{c:spotted}}
-            m_globals["c:spotted"] = function(o:VOPlayerState):String
+            m_globals["c:spotted"] = function(o:IVOMacrosOptions):String
             {
-                return o ? getSpottedColorValue(o.getSpottedStatus(), o.isSPG) : null;
+                var ps:VOPlayerState = o as VOPlayerState;
+                return ps ? getSpottedColorValue(ps.getSpottedStatus(), ps.isSPG) : null;
             }
 
             // {{a:spotted}}
-            m_globals["a:spotted"] = function(o:VOPlayerState):Number
+            m_globals["a:spotted"] = function(o:IVOMacrosOptions):Number
             {
-                return o ? getSpottedAlphaValue(o.getSpottedStatus(), o.isSPG) : NaN;
+                var ps:VOPlayerState = o as VOPlayerState;
+                return ps ? getSpottedAlphaValue(ps.getSpottedStatus(), ps.isSPG) : NaN;
             }
 
             // hp
 
-            var getHpRatioFunc:Function = function(o:VOPlayerState):Number
+            var getHpRatioFunc:Function = function(ps:VOPlayerState):Number
             {
-                return o ? o.curHealth / o.maxHealth * 100 : NaN;
+                return ps ? ps.curHealth / ps.maxHealth * 100 : NaN;
             }
 
             // {{hp}}
-            m_globals["hp"] = function(o:VOPlayerState):Number
+            m_globals["hp"] = function(o:IVOMacrosOptions):Number
             {
-                return o ? o.curHealth : NaN;
+                var ps:VOPlayerState = o as VOPlayerState;
+                return ps ? ps.curHealth : NaN;
             }
 
             // {{hp-max}}
-            m_globals["hp-max"] = function(o:VOPlayerState):Number
+            m_globals["hp-max"] = function(o:IVOMacrosOptions):Number
             {
-                return o ? o.maxHealth : NaN;
+                var ps:VOPlayerState = o as VOPlayerState;
+                return ps ? ps.maxHealth : NaN;
             }
 
             // {{hp-ratio}}
-            m_globals["hp-ratio"] = function(o:VOPlayerState):Number
+            m_globals["hp-ratio"] = function(o:IVOMacrosOptions):Number
             {
-                return o && !isNaN(o.curHealth) ? Math.round(getHpRatioFunc(o)) : NaN;
+                var ps:VOPlayerState = o as VOPlayerState;
+                return ps && !isNaN(ps.curHealth) ? Math.round(getHpRatioFunc(ps)) : NaN;
             }
 
             // {{c:hp}}
-            m_globals["c:hp"] = function(o:VOPlayerState):String
+            m_globals["c:hp"] = function(o:IVOMacrosOptions):String
             {
-                return o && !isNaN(o.curHealth) ? MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_HP, o.curHealth, NaN) : null;
+                var ps:VOPlayerState = o as VOPlayerState;
+                return ps && !isNaN(ps.curHealth) ? MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_HP, ps.curHealth, NaN) : null;
             }
 
             // {{c:hp-ratio}}
-            m_globals["c:hp-ratio"] = function(o:VOPlayerState):String
+            m_globals["c:hp-ratio"] = function(o:IVOMacrosOptions):String
             {
-                return o && !isNaN(o.curHealth) ? MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, getHpRatioFunc(o), NaN) : null;
+                var ps:VOPlayerState = o as VOPlayerState;
+                return ps && !isNaN(ps.curHealth) ? MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, getHpRatioFunc(ps), NaN) : null;
             }
 
             // {{a:hp}}
-            m_globals["a:hp"] = function(o:VOPlayerState):Number
+            m_globals["a:hp"] = function(o:IVOMacrosOptions):Number
             {
-                return o && !isNaN(o.curHealth) ? MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, o.curHealth, NaN) : NaN;
+                var ps:VOPlayerState = o as VOPlayerState;
+                return ps && !isNaN(ps.curHealth) ? MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, ps.curHealth, NaN) : NaN;
             }
 
             // {{a:hp-ratio}}
-            m_globals["a:hp-ratio"] = function(o:VOPlayerState):Number
+            m_globals["a:hp-ratio"] = function(o:IVOMacrosOptions):Number
             {
-                return o && !isNaN(o.curHealth) ? MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, getHpRatioFunc(o), NaN) : NaN;
+                var ps:VOPlayerState = o as VOPlayerState;
+                return ps && !isNaN(ps.curHealth) ? MacrosUtils.getDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, getHpRatioFunc(ps), NaN) : NaN;
             }
 
             // dmg
 
             // {{dmg}}
-            m_globals["dmg"] = function(o:VOPlayerState):Number
+            m_globals["dmg"] = function(o:IVOMacrosOptions):Number
             {
-                return o && o.damageInfo ? o.damageInfo.damageDelta : NaN;
+                var ps:VOPlayerState = o as VOPlayerState;
+                return ps && ps.damageInfo ? ps.damageInfo.damageDelta : NaN;
             }
 
             // {{dmg-ratio}}
-            m_globals["dmg-ratio"] = function(o:VOPlayerState):Number
+            m_globals["dmg-ratio"] = function(o:IVOMacrosOptions):Number
             {
-                return o && o.damageInfo && o.damageInfo.damageDelta ? Math.round(o.damageInfo.damageDelta / o.maxHealth * 100) : NaN;
+                var ps:VOPlayerState = o as VOPlayerState;
+                return ps && ps.damageInfo && ps.damageInfo.damageDelta ? Math.round(ps.damageInfo.damageDelta / ps.maxHealth * 100) : NaN;
             }
 
             // {{dmg-kind}}
-            m_globals["dmg-kind"] = function(o:VOPlayerState):String
+            m_globals["dmg-kind"] = function(o:IVOMacrosOptions):String
             {
-                return o && o.damageInfo && o.damageInfo.damageType ? Locale.get(o.damageInfo.damageType) : null;
+                var ps:VOPlayerState = o as VOPlayerState;
+                return ps && ps.damageInfo && ps.damageInfo.damageType ? Locale.get(ps.damageInfo.damageType) : null;
             }
 
             // {{c:dmg}}
-            m_globals["c:dmg"] = function(o:VOPlayerState):String
+            m_globals["c:dmg"] = function(o:IVOMacrosOptions):String
             {
-                return o ? XfwUtils.toHtmlColor(getDamageSystemColor(o)) : null;
+                var ps:VOPlayerState = o as VOPlayerState;
+                return ps ? XfwUtils.toHtmlColor(getDamageSystemColor(ps)) : null;
             }
 
             // {{c:dmg-kind}}
-            m_globals["c:dmg-kind"] = function(o:VOPlayerState):String
+            m_globals["c:dmg-kind"] = function(o:IVOMacrosOptions):String
             {
-                return o && o.damageInfo && o.damageInfo.damageType ? XfwUtils.toHtmlColor(getDmgKindValue(o.damageInfo.damageType)) : null;
+                var ps:VOPlayerState = o as VOPlayerState;
+                return ps && ps.damageInfo && ps.damageInfo.damageType ? XfwUtils.toHtmlColor(getDmgKindValue(ps.damageInfo.damageType)) : null;
             }
 
             // {{sys-color-key}}
-            m_globals["sys-color-key"] = function(o:VOPlayerState):String
+            m_globals["sys-color-key"] = function(o:IVOMacrosOptions):String
             {
-                return o ? getSystemColorKey(o) : null;
+                var ps:VOPlayerState = o as VOPlayerState;
+                return ps ? getSystemColorKey(ps) : null;
             }
 
             // {{c:system}}
-            m_globals["c:system"] = function(o:VOPlayerState):String
+            m_globals["c:system"] = function(o:IVOMacrosOptions):String
             {
-                return o ? XfwUtils.toHtmlColor(getSystemColor(o)) : null;
+                var ps:VOPlayerState = o as VOPlayerState;
+                return ps ? XfwUtils.toHtmlColor(getSystemColor(ps)) : null;
             }
         }
 
@@ -405,7 +430,7 @@ package com.xvm.battle
             return o ? parseInt(Config.config.colors.system[getSystemColorKey(o/*, isBase*/)]) : NaN;
         }
 
-        public static function getDamageSystemColor(o:VOPlayerState):Number
+        private static function getDamageSystemColor(o:VOPlayerState):Number
         {
             if (o && o.damageInfo && o.damageInfo.damageDelta)
             {

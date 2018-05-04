@@ -540,11 +540,6 @@ package com.xvm.extraFields
         {
             try
             {
-                if (options == null)
-                {
-                    return;
-                }
-
                 _lastOptions = options;
 
                 _visibilityFlag = ExtraFieldsHelper.checkVisibilityFlags(cfg.flags, options);
