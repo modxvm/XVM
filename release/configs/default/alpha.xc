@@ -88,7 +88,7 @@
       { "value": 48.49, "alpha": ${"def.alphaRating.bad"      } },
       { "value": 52.49, "alpha": ${"def.alphaRating.normal"   } },
       { "value": 57.49, "alpha": ${"def.alphaRating.good"     } },
-      { "value": 64.49, "alpha": ${"def.alphaRating.very_good"} },
+      { "value": 63.49, "alpha": ${"def.alphaRating.very_good"} },
       { "value": 100,   "alpha": ${"def.alphaRating.unique"   } }
     ],
     // Dynamic transparency by kilo-battles
