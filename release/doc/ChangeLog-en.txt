@@ -1,4 +1,7 @@
 ﻿XVM-7.6.1-dev:
+  [PYTHON MACROS]
+  * damageLog: disabled panel in the frontline mode
+  * damageLog: fix macros {{costShell}} and {{c:costShell}}
 
 XVM-7.6.0:
   [GENERAL]

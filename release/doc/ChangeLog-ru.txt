@@ -1,4 +1,7 @@
 ﻿XVM-7.6.1-dev:
+  [МАКРОСЫ НА PYTHON]
+  * damageLog: отключен в режиме "Линия фронта"
+  * damageLog: исправлена работа макросов {{costShell}} и {{c:costShell}}
 
 XVM-7.6.0:
   [ОБЩЕЕ]
