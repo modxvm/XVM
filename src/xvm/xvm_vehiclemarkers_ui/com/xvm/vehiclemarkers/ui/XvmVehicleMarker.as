@@ -39,42 +39,42 @@ package com.xvm.vehiclemarkers.ui
 
         public function XvmVehicleMarker()
         {
-            Xvm.swfProfilerBegin("XvmVehicleMarker.ctor()");
+            //Xvm.swfProfilerBegin("XvmVehicleMarker.ctor()");
             //Logger.add(getQualifiedClassName(this));
             super();
             Xvm.addEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
             Xvm.addEventListener(Defines.XVM_EVENT_ATLAS_LOADED, onAtlasLoaded);
             createComponents();
-            Xvm.swfProfilerEnd("XvmVehicleMarker.ctor()");
+            //Xvm.swfProfilerEnd("XvmVehicleMarker.ctor()");
         }
 
         override protected function configUI():void
         {
-            Xvm.swfProfilerBegin("XvmVehicleMarker.configUI()");
+            //Xvm.swfProfilerBegin("XvmVehicleMarker.configUI()");
             super.configUI();
             var vmManager:VehicleMarkersManager = VehicleMarkersManager.getInstance();
             vmManager.addEventListener(VehicleMarkersManagerEvent.SHOW_EX_INFO, onShowExInfoHandler, false, 0, true);
             // TODO: removeStandardFields();
-            Xvm.swfProfilerEnd("XvmVehicleMarker.configUI()");
+            //Xvm.swfProfilerEnd("XvmVehicleMarker.configUI()");
         }
 
         override protected function onDispose():void
         {
-            Xvm.swfProfilerBegin("XvmVehicleMarker.onDispose()");
+            //Xvm.swfProfilerBegin("XvmVehicleMarker.onDispose()");
             super.onDispose();
             Xvm.removeEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
             Xvm.removeEventListener(Defines.XVM_EVENT_ATLAS_LOADED, onAtlasLoaded);
             var vmManager:VehicleMarkersManager = VehicleMarkersManager.getInstance();
             vmManager.removeEventListener(VehicleMarkersManagerEvent.SHOW_EX_INFO, onShowExInfoHandler);
             deleteComponents();
-            Xvm.swfProfilerEnd("XvmVehicleMarker.onDispose()");
+            //Xvm.swfProfilerEnd("XvmVehicleMarker.onDispose()");
         }
 
         override public function setVehicleInfo(vClass:String, vIconSource:String, vType:String, vLevel:int,
             pFullName:String, pName:String, pClan:String, pRegion:String,
             maxHealth:int, entityName:String, hunt:Boolean, squadIndex:int, locSecString:String):void
         {
-            Xvm.swfProfilerBegin("XvmVehicleMarker.setVehicleInfo()");
+            //Xvm.swfProfilerBegin("XvmVehicleMarker.setVehicleInfo()");
             super.setVehicleInfo.apply(this, arguments);
             try
             {
@@ -91,7 +91,7 @@ package com.xvm.vehiclemarkers.ui
             {
                 Logger.err(ex);
             }
-            Xvm.swfProfilerEnd("XvmVehicleMarker.setVehicleInfo()");
+            //Xvm.swfProfilerEnd("XvmVehicleMarker.setVehicleInfo()");
         }
 
         override public function settingsUpdate(param1:int):void
@@ -106,10 +106,10 @@ package com.xvm.vehiclemarkers.ui
 
         override protected function draw():void
         {
-            Xvm.swfProfilerBegin("XvmVehicleMarker.super.draw()");
+            //Xvm.swfProfilerBegin("XvmVehicleMarker.super.draw()");
             super.draw();
-            Xvm.swfProfilerEnd("XvmVehicleMarker.super.draw()");
-            Xvm.swfProfilerBegin("XvmVehicleMarker.draw()");
+            //Xvm.swfProfilerEnd("XvmVehicleMarker.super.draw()");
+            //Xvm.swfProfilerBegin("XvmVehicleMarker.draw()");
             try
             {
                 if (isInvalid(INVALIDATE_DATA))
@@ -136,12 +136,12 @@ package com.xvm.vehiclemarkers.ui
             {
                 Logger.err(ex);
             }
-            Xvm.swfProfilerEnd("XvmVehicleMarker.draw()");
+            //Xvm.swfProfilerEnd("XvmVehicleMarker.draw()");
         }
 
         override public function updateHealth(newHealth:int, damageFlag:int, damageType:String):void
         {
-            Xvm.swfProfilerBegin("XvmVehicleMarker.updateHealth()");
+            //Xvm.swfProfilerBegin("XvmVehicleMarker.updateHealth()");
             try
             {
                 this.curHealth = newHealth;
@@ -172,12 +172,12 @@ package com.xvm.vehiclemarkers.ui
             {
                 Logger.err(ex);
             }
-            Xvm.swfProfilerEnd("XvmVehicleMarker.updateHealth()");
+            //Xvm.swfProfilerEnd("XvmVehicleMarker.updateHealth()");
         }
 
         override public function setHealth(curHealth:int):void
         {
-            Xvm.swfProfilerBegin("XvmVehicleMarker.setHealth()");
+            //Xvm.swfProfilerBegin("XvmVehicleMarker.setHealth()");
             try
             {
                 //Logger.add("curHealth=" + curHealth);
@@ -193,7 +193,7 @@ package com.xvm.vehiclemarkers.ui
             {
                 Logger.err(ex);
             }
-            Xvm.swfProfilerEnd("XvmVehicleMarker.setHealth()");
+            //Xvm.swfProfilerEnd("XvmVehicleMarker.setHealth()");
         }
 
         override public function updateState(param1:String, param2:Boolean, param3:String = "", param4:String = ""):void
@@ -217,7 +217,7 @@ package com.xvm.vehiclemarkers.ui
 
         override public function setSpeaking(value:Boolean):void
         {
-            Xvm.swfProfilerBegin("XvmVehicleMarker.setSpeaking()");
+            //Xvm.swfProfilerBegin("XvmVehicleMarker.setSpeaking()");
             super.setSpeaking(value);
             try
             {
@@ -231,7 +231,7 @@ package com.xvm.vehiclemarkers.ui
             {
                 Logger.err(ex);
             }
-            Xvm.swfProfilerEnd("XvmVehicleMarker.setSpeaking()");
+            //Xvm.swfProfilerEnd("XvmVehicleMarker.setSpeaking()");
         }
 
         // Allow only one updateMarkerSettins() call from the original code (to hide controls)
