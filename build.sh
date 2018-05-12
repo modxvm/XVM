@@ -86,7 +86,8 @@ build_as3(){
         "_xvm_app.as3proj"
         "xvm_lobby.as3proj"
         "xvm_battle_classic.as3proj"
-        "xvm_battle_epic.as3proj"
+        "xvm_battle_epicbattle.as3proj"
+        "xvm_battle_epicrandom.as3proj"
         "xvm_battle_ranked.as3proj"
     )
 
