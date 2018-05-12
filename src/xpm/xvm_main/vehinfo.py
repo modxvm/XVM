@@ -172,8 +172,8 @@ def _init():
                 topTurret = item.turrets[0][-1]
                 topGun = topTurret.guns[-1]
 
-                if len(item.hulls) != 1:
-                    log('WARNING: TODO: len(hulls) != 1 for vehicle ' + descr.name)
+                #if len(item.hulls) != 1:
+                #    log('WARNING: TODO: len(hulls) != 1 for vehicle ' + descr.name)
                 data['hpStock'] = item.hulls[0].maxHealth + stockTurret.maxHealth
                 data['hpTop'] = item.hulls[0].maxHealth + topTurret.maxHealth
                 data['turret'] = _getTurretType(item, nation)
