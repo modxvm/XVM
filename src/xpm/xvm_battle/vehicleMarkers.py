@@ -82,7 +82,7 @@ def _PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
 
 @overrideMethod(MarkersManager, '__init__')
 def _MarkersManager__init__(base, self):
-    debug('markers: __init__ ' + str(self))
+    #debug('markers: __init__ ' + str(self))
     base(self)
     g_markers.init(self)
 
@@ -95,13 +95,13 @@ def _MarkersManager__init__(base, self):
 
 @overrideMethod(MarkersManager, '_populate')
 def _MarkersManager_populate(base, self):
-    debug('markers: populate')
+    #debug('markers: populate')
     g_markers.populate()
     base(self)
 
 @overrideMethod(MarkersManager, '_dispose')
 def _MarkersManager_dispose(base, self):
-    debug('markers: dispose')
+    #debug('markers: dispose')
 #    for id in list(self._MarkersManager__ids):
 #        self.destroyMarker(id)
     g_markers.destroy()
@@ -119,7 +119,7 @@ def _MarkersManager_createMarker(base, self, symbol, matrixProvider = None, acti
 
 @overrideMethod(MarkersManager, 'destroyMarker')
 def destroyMarker(base, self, markerID):
-    debug('destroyMarker:  markerID=' + str(markerID))
+    #debug('destroyMarker:  markerID=' + str(markerID))
     base(self, markerID)
 
 _exInfo = False

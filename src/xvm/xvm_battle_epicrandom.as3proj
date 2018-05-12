@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="..\..\~output\res_mods\mods\xfw_packages\xvm_battle\as_battle_epic\xvm_battle_epic.swf" />
+    <movie path="..\..\~output\res_mods\mods\xfw_packages\xvm_battle\as_battle_epicrandom\xvm_battle_epicrandom.swf" />
     <movie fps="50" />
     <movie width="1024" />
     <movie height="768" />
@@ -16,7 +16,7 @@
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
     <class path="xvm_battle" />
-    <class path="xvm_battle_epic" />
+    <class path="xvm_battle_epicrandom" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -60,7 +60,7 @@
   <!-- External Libraries -->
   <externalLibraryPaths>
     <element path="..\xfw\~output\swc\wg_battle.swc" />
-    <element path="..\xfw\~output\swc\wg_battle_epic_ui.swc" />
+    <element path="..\xfw\~output\swc\wg_battle_epicrandom_ui.swc" />
     <element path="..\xfw\~output\swc\xfw.swc" />
   </externalLibraryPaths>
   <!-- Runtime Shared Libraries -->
