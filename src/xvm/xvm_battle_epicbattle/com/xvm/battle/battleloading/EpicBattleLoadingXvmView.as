@@ -26,7 +26,7 @@ package com.xvm.battle.battleloading
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
             super.onAfterPopulate(e);
-            init();
+            //init(); // TODO:EPIC
         }
 
         // PRIVATE

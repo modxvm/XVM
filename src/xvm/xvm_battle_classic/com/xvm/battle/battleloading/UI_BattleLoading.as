@@ -40,7 +40,6 @@ package com.xvm.battle.battleloading
             //Logger.addObject(form);
 
             battleLoadingForm = form as BattleLoadingForm;
-            logBriefConfigurationInfo();
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
         }
 
@@ -79,20 +78,6 @@ package com.xvm.battle.battleloading
         }
 
         // PRIVATE
-
-        private function logBriefConfigurationInfo():void
-        {
-            Logger.add(
-                "[BattleLoading]\n" +
-                "                               XVM_VERSION=" + Config.config.__xvmVersion + " #" + Config.config.__xvmRevision + " for WoT " + Config.config.__wotVersion +"\n" +
-                "                               gameRegion=" + Config.config.region + "\n" +
-                "                               configVersion=" + Config.config.configVersion + "\n" +
-                "                               autoReloadConfig=" + Config.config.autoReloadConfig + "\n" +
-                "                               markers.enabled=" + Config.config.markers.enabled + "\n" +
-                "                               servicesActive=" + Config.networkServicesSettings.servicesActive + "\n" +
-                "                               xmqp=" + Config.networkServicesSettings.xmqp + "\n" +
-                "                               statBattle=" + Config.networkServicesSettings.statBattle);
-        }
 
         private function setup(e:Event = null):void
         {

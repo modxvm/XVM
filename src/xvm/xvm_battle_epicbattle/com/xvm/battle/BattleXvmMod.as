@@ -30,9 +30,8 @@ package com.xvm.battle
         {
             "epicBattlePage": [
                 EpicBattleLoadingXvmView, // TODO:EPIC
-                EpicFullStatsXvmView, // TODO:EPIC
+                //EpicFullStatsXvmView, // TODO:EPIC
                 TeamBasesPanelXvmView,
-                MinimapXvmView,
                 SixthSenseXvmView,
                 BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
             ]

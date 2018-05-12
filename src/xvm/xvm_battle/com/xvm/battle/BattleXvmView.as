@@ -85,6 +85,8 @@ package com.xvm.battle
             //Xvm.swfProfilerBegin("BattleXvmView.onAfterPopulate()");
             try
             {
+                logBriefConfigurationInfo();
+
                 Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
                 Xfw.addCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
                 Xfw.addCommandListener(XvmCommands.AS_ON_TARGET_CHANGED, onTargetChanged);
@@ -200,6 +202,20 @@ package com.xvm.battle
         }
 
         // PRIVATE
+
+        private function logBriefConfigurationInfo():void
+        {
+            Logger.add(
+                "[XVM INFO]\n" +
+                "                               XVM_VERSION=" + Config.config.__xvmVersion + " #" + Config.config.__xvmRevision + " for WoT " + Config.config.__wotVersion +"\n" +
+                "                               gameRegion=" + Config.config.region + "\n" +
+                "                               configVersion=" + Config.config.configVersion + "\n" +
+                "                               autoReloadConfig=" + Config.config.autoReloadConfig + "\n" +
+                "                               markers.enabled=" + Config.config.markers.enabled + "\n" +
+                "                               servicesActive=" + Config.networkServicesSettings.servicesActive + "\n" +
+                "                               xmqp=" + Config.networkServicesSettings.xmqp + "\n" +
+                "                               statBattle=" + Config.networkServicesSettings.statBattle);
+        }
 
         private function onKeyEvent(key:Number, isDown:Boolean):void
         {
