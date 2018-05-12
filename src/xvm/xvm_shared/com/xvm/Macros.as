@@ -309,20 +309,26 @@ package com.xvm
         private const CACHE_MASK_PERSONAL_SQ:uint =  1 << 6;
         private const CACHE_MASK_POSITION:uint =     1 << 7;
         private const CACHE_MASK_MARKSONGUN:uint =   1 << 8;
-        private const CACHE_MASK_IS_FRIEND:uint =    1 << 9;
-        private const CACHE_MASK_IS_IGNORED:uint =   1 << 10;
-        private const CACHE_MASK_IS_MUTED:uint =     1 << 11;
-        private const CACHE_MASK_IS_CHATBAN:uint =   1 << 12;
-        private const CACHE_MASK_X_ENABLED:uint =    1 << 13;
-        private const CACHE_MASK_X_SPOTTED:uint =    1 << 14;
-        private const CACHE_MASK_X_FIRE:uint =       1 << 15;
-        private const CACHE_MASK_X_OVERTURNED:uint = 1 << 16;
-        private const CACHE_MASK_X_DROWNING:uint =   1 << 17;
+        private const CACHE_MASK_X_ENABLED:uint =    1 << 9;
+        private const CACHE_MASK_X_SPOTTED:uint =    1 << 10;
+        private const CACHE_MASK_X_FIRE:uint =       1 << 11;
+        private const CACHE_MASK_X_OVERTURNED:uint = 1 << 12;
+        private const CACHE_MASK_X_DROWNING:uint =   1 << 13;
+        private const CACHE_MASK_IS_FRIEND:uint =    1 << 14;
+        private const CACHE_MASK_IS_IGNORED:uint =   1 << 15;
+        private const CACHE_MASK_IS_MUTED:uint =     1 << 16;
+        private const CACHE_MASK_IS_CHATBAN:uint =   1 << 17;
 
         // special case for dynamic macros converted to static
-        private const HYBRID_MACROS:Vector.<String> = new <String>["alive", "ready", "selected", "player", "tk",
-            "squad", "squad-num", "position", "sys-color-key", "c:system", "marksOnGun", "my-alive",
-            "x-enabled", "x-sense-on", "x-spotted", "x-fire", "x-overturned", "x-drowning"];
+        private const HYBRID_MACROS:Vector.<String> = new <String>[
+            "alive", "ready", "selected", "player", "tk", "squad", "squad-num", "position", "marksOnGun",
+            "x-enabled", "x-sense-on", "x-spotted", "x-fire", "x-overturned", "x-drowning",
+            // vehicle macros (can be changed during the battle in some game modes)
+            "veh-id", "vehicle", "vehiclename", "vehicle-short", "vtype-key", "vtype", "vtype-l", "c:vtype",
+            "battletier-min", "battletier-max", "nation", "level", "rlevel", "premium",
+            // global macros
+            "sys-color-key", "c:system", "my-alive"
+            ];
 
         private const STAT_MACROS:Vector.<String> = new <String>[
             "xvm-user", "flag", "clanrank", "topclan", "region", "comment", "avglvl", "xte", "xeff", "xwtr",
@@ -631,17 +637,16 @@ package com.xvm
                 return prepareValue(NaN, macroName, parts[PART_NORM], parts[PART_DEF], vehCD);
             }
 
-            // is static macro
-            if (value is Function)
+            // is hybrid or dynamic macro
+            if (HYBRID_MACROS.indexOf(macroName) >= 0)
             {
-                //__out.isStaticMacro = HYBRID_MACROS.indexOf(macroName) != -1;
-                if (HYBRID_MACROS.indexOf(macroName) == -1)
+                __out.isHybridMacro = true;
+            }
+            else
+            {
+                if (value is Function)
                 {
                     __out.isStaticMacro = false;
-                }
-                else
-                {
-                    __out.isHybridMacro = true;
                 }
             }
 
@@ -1036,7 +1041,7 @@ package com.xvm
             //Logger.add("_RegisterPlayerMacrosData: " + playerName);
 
             // clear static cache
-            m_macros_cache_players[playerName] = [ ];
+            m_macros_cache_players[playerName] = null;
 
             var name:String = getCustomPlayerName(playerName, accountDBID);
             var clanWithoutBrackets:String = clanAbbrev;
@@ -1073,16 +1078,18 @@ package com.xvm
                 return;
 
             // clear static cache
-            m_macros_cache_players[playerName] = [ ];
-
-            //Logger.add("_RegisterVehicleMacrosData: " + playerName + " " + vehCD);
+            m_macros_cache_players[playerName] = null;
 
             var vdata:VOVehicleData = VehicleInfo.get(vehCD);
+
+            //Logger.add("_RegisterVehicleMacrosData: " + playerName + " " + vdata.localizedName);
+
             if (vehCD != 0)
             {
                 if (!m_globals["maxhp"] || m_globals["maxhp"] < vdata.hpTop)
                     m_globals["maxhp"] = vdata.hpTop;
             }
+
             // {{veh-id}}
             pdata["veh-id"] = vehCD;
             // {{vehicle}} - Chaffee
@@ -1147,7 +1154,7 @@ package com.xvm
                 pdata["nick"] = stat.xvm_contact_data.nick + (pdata["clan"] || "");
                 pdata["name"] = stat.xvm_contact_data.nick;
                 // clear static cache
-                m_macros_cache_players[pname] = [ ];
+                m_macros_cache_players[pname] = null;
             }
             // {{avglvl}}
             pdata["avglvl"] = stat.avglvl;

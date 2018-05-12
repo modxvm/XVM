@@ -25,20 +25,20 @@ Legend:
 │ S │ {{clannb}}         │ X │ X │ X │ X │ X │ X │ X │ clan name without brackets
 │ S │ {{ally}}           │ X │ X │ X │ X │ X │ X │ X │ value 'ally' for ally team, '' for enemy team
 │ H │ {{player}}         │ X │ X │ X │ X │   │   │ X │ value 'pl' for player, empty for others
-│ S │ {{veh-id}}         │ X │ X │ X │ X │ X │ X │ X │ vehicle id
-│ S │ {{vehicle}}        │ X │ X │ X │ X │ X │ X │ X │ vehicle name
-│ S │ {{vehiclename}}    │ X │ X │ X │ X │ X │ X │ X │ vehicle system name (usa-M24_Chaffee)
-│ S │ {{vehicle-short}}  │   │ X │ X │ X │ X │ X │ X │ shortened vehicle name
-│ S │ {{vtype}}          │ X │ X │ X │ X │ X │ X │ X │ vehicle type (text substitution from config)
-│ S │ {{vtype-l}}        │ X │ X │ X │ X │ X │ X │ X │ vehicle class (text substitution from locale)
-│ S │ {{vtype-key}}      │ X │ X │ X │ X │ X │ X │ X │ vehicle type table key value (LT, MT, HT, TD, SPG)
-│ S │ {{c:vtype}}        │ X │ X │ X │ X │ X │ X │ X │ color depending on vehicle type
-│ S │ {{battletier-min}} │ X │ X │ X │ X │ X │ X │ X │ minimal vehicle battle tier
-│ S │ {{battletier-max}} │ X │ X │ X │ X │ X │ X │ X │ maximal vehicle battle tier
-│ S │ {{nation}}         │ X │ X │ X │ X │ X │ X │ X │ vehicle nation
-│ S │ {{level}}          │ X │ X │ X │ X │ X │ X │ X │ vehicle level (Arabic numerals)
-│ S │ {{rlevel}}         │ X │ X │ X │ X │ X │ X │ X │ vehicle level (Roman numerals)
-│ S │ {{premium}}        │ X │ X │ X │ X │ X │ X │ X │ 'premium' for premium, empty for normal vehicle
+│ H │ {{veh-id}}         │ X │ X │ X │ X │ X │ X │ X │ vehicle id
+│ H │ {{vehicle}}        │ X │ X │ X │ X │ X │ X │ X │ vehicle name
+│ H │ {{vehiclename}}    │ X │ X │ X │ X │ X │ X │ X │ vehicle system name (usa-M24_Chaffee)
+│ H │ {{vehicle-short}}  │   │ X │ X │ X │ X │ X │ X │ shortened vehicle name
+│ H │ {{vtype}}          │ X │ X │ X │ X │ X │ X │ X │ vehicle type (text substitution from config)
+│ H │ {{vtype-l}}        │ X │ X │ X │ X │ X │ X │ X │ vehicle class (text substitution from locale)
+│ H │ {{vtype-key}}      │ X │ X │ X │ X │ X │ X │ X │ vehicle type table key value (LT, MT, HT, TD, SPG)
+│ H │ {{c:vtype}}        │ X │ X │ X │ X │ X │ X │ X │ color depending on vehicle type
+│ H │ {{battletier-min}} │ X │ X │ X │ X │ X │ X │ X │ minimal vehicle battle tier
+│ H │ {{battletier-max}} │ X │ X │ X │ X │ X │ X │ X │ maximal vehicle battle tier
+│ H │ {{nation}}         │ X │ X │ X │ X │ X │ X │ X │ vehicle nation
+│ H │ {{level}}          │ X │ X │ X │ X │ X │ X │ X │ vehicle level (Arabic numerals)
+│ H │ {{rlevel}}         │ X │ X │ X │ X │ X │ X │ X │ vehicle level (Roman numerals)
+│ H │ {{premium}}        │ X │ X │ X │ X │ X │ X │ X │ 'premium' for premium, empty for normal vehicle
 │ H │ {{squad}}          │ X │ X │ X │ X │ X │ X │   │ value 'sq' for own squad, empty for others
 │ D │ {{frags}}          │   │ X │ X │ X │ X │   │   │ current frags
 │ H │ {{ready}}          │ X │ X │ X │ X │ X │   │   │ value 'ready' if player loaded to the game, '' if not
@@ -92,7 +92,7 @@ Legend:
 │ S │ {{battletype-key}}     │ X │ X │ X │ X │ X │ X │ X │ X │ current battle type table key value
 │ S │ {{region}}             │ X │ X │ X │ X │ X │ X │ X │ X │ current game region (RU, EU, NA, ASIA, KR, CN, CT)
 │ S │ {{l10n:ID}}            │ X │ X │ X │ X │ X │ X │ X │ X │ localizated text, see en.xc for id
-│ D │ {{my-alive}}           │   │ X │ X │ X │ X │ X │ X │ X │ is my vehicle alive
+│ H │ {{my-alive}}           │   │ X │ X │ X │ X │ X │ X │ X │ is my vehicle alive
 │ D │ {{my-frags}}           │   │ X │ X │ X │ X │ X │ X │ X │ my frags
 │ S │ {{my-veh-id}}          │ X │ X │ X │ X │ X │ X │ X │ X │ my vehicle id
 │ S │ {{my-vehicle}}         │ X │ X │ X │ X │ X │ X │ X │ X │ my vehicle name
