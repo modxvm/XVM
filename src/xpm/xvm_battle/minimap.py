@@ -302,6 +302,7 @@ class _Minimap(object):
         return g_battle.xvm_battle_swf_initialized and \
                self.enabled and \
                self.initialized and \
+               (self.guiType != constants.ARENA_GUI_TYPE.EPIC_BATTLE) and \
                (self.guiType != constants.ARENA_GUI_TYPE.TUTORIAL) and \
                (self.battleType != constants.ARENA_BONUS_TYPE.TUTORIAL)
 
