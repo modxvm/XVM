@@ -87,6 +87,7 @@ package com.xvm
             //Logger.addObject(config_data, 5);
             //Logger.addObject(lang_data, 3);
             //Logger.addObject(vehInfo_data, 3);
+            Logger.isDebug = IS_DEVELOPMENT;
             Config.IS_DEVELOPMENT = IS_DEVELOPMENT;
             Config.config = ObjectConverter.convertData(config_data, CConfig);
             Locale.setupLanguage(lang_data);

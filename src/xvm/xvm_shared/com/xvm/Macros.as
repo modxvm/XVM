@@ -1082,7 +1082,7 @@ package com.xvm
 
             var vdata:VOVehicleData = VehicleInfo.get(vehCD);
 
-            //Logger.add("_RegisterVehicleMacrosData: " + playerName + " " + vdata.localizedName);
+            Logger.debug("_RegisterVehicleMacrosData: " + playerName + " " + vdata.localizedName);
 
             if (vehCD != 0)
             {
