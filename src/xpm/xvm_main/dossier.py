@@ -80,6 +80,7 @@ class _DummyDossier(object):
     _dummyStats = _DummyStats()
     def getRecordValue(*a, **k): return 0
     def getGlobalStats(self): return self._dummyStats
+    def getTotalStats(self): return self._dummyStats
     def getRandomStats(self): return self._dummyStats
     def getFalloutStats(self): return self._dummyStats
     def getHistoricalStats(self): return self._dummyStats
