@@ -1,13 +1,15 @@
 """ XVM (c) https://modxvm.com 2013-2018 """
 
-import httplib
-from urlparse import urlparse
-import traceback
-import gzip
-import StringIO
-import re
-import locale
+import base64
 import datetime
+import gzip
+import httplib
+import locale
+import os
+import re
+import StringIO
+import traceback
+from urlparse import urlparse
 
 from xfw import IS_DEVELOPMENT, XFW_NO_TOKEN_MASKING
 
@@ -15,6 +17,13 @@ from consts import *
 from logger import *
 import utils
 
+try:
+    _proxy = os.environ.get('XVM_HTTPS_PROXY')
+    if _proxy:
+        _proxy = urlparse(_proxy)
+except Exception, ex:
+    _proxy = None
+    err(traceback.format_exc())
 
 _USER_AGENT = 'xvm'
 try:
@@ -63,11 +72,21 @@ def _loadUrl(u, timeout, body, content_type): # timeout in msec
     errStr = None
     conn = None
     try:
-        # log(u)
-        if u.scheme.lower() == 'https':
-            conn = httplib.HTTPSConnection(u.netloc, timeout=timeout / 1000)
+        #log(u)
+        cls = httplib.HTTPSConnection if u.scheme.lower() == 'https' else httplib.HTTPConnection
+        global _proxy
+        #log(_proxy)
+        if _proxy:
+            conn = cls(_proxy.hostname, _proxy.port, timeout=timeout/1000)
+            headers = {}
+            if _proxy.username and _proxy.password:
+                auth = '%s:%s' % (_proxy.username, _proxy.password)
+                headers['Proxy-Authorization'] = 'Basic ' + base64.b64encode(auth)
+            #log(headers)
+            conn.set_tunnel(u.hostname, u.port, headers=headers)
         else:
-            conn = httplib.HTTPConnection(u.netloc, timeout=timeout / 1000)
+            conn = cls(u.netloc, timeout=timeout/1000)
+
         global _USER_AGENT
         headers = {
             "User-Agent": _USER_AGENT,
