@@ -2,7 +2,6 @@
 
 import httplib
 from urlparse import urlparse
-import tlslite
 import traceback
 import gzip
 import StringIO
@@ -25,7 +24,7 @@ except Exception, ex:
     pass
 
 # result: (response, duration)
-def loadUrl(url, req=None, body=None, showLog=True, api=XVM.API_VERSION):
+def loadUrl(url, req=None, body=None, content_type='text/plain; charset=utf-8', showLog=True, api=XVM.API_VERSION):
     url = url.replace("{API}", api)
     if req is not None:
         url = url.replace("{REQ}", req)
@@ -41,10 +40,10 @@ def loadUrl(url, req=None, body=None, showLog=True, api=XVM.API_VERSION):
     #import time
     #time.sleep(3)
 
-    (response, compressedSize, errStr) = _loadUrl(u, XVM.TIMEOUT, XVM.FINGERPRINTS, body)
+    (response, compressedSize, errStr) = _loadUrl(u, XVM.TIMEOUT, body, content_type)
     # repeat request on timeout
     if errStr is not None and 'timed out' in errStr:
-        (response, compressedSize, errStr) = _loadUrl(u, XVM.TIMEOUT, XVM.FINGERPRINTS, body)
+        (response, compressedSize, errStr) = _loadUrl(u, XVM.TIMEOUT, body, content_type)
 
     elapsed = datetime.datetime.now() - startTime
     msec = elapsed.seconds * 1000 + elapsed.microseconds / 1000
@@ -58,7 +57,7 @@ def loadUrl(url, req=None, body=None, showLog=True, api=XVM.API_VERSION):
 
     return (response, duration, errStr)
 
-def _loadUrl(u, timeout, fingerprints, body):  # timeout in msec
+def _loadUrl(u, timeout, body, content_type): # timeout in msec
     response = None
     compressedSize = None
     errStr = None
@@ -66,16 +65,14 @@ def _loadUrl(u, timeout, fingerprints, body):  # timeout in msec
     try:
         # log(u)
         if u.scheme.lower() == 'https':
-            checker = tlslite.CheckerXfw(x509Fingerprint=fingerprints) if fingerprints else None
-            conn = tlslite.HTTPTLSConnection(u.netloc, timeout=timeout / 1000, checker=checker)
+            conn = httplib.HTTPSConnection(u.netloc, timeout=timeout / 1000)
         else:
             conn = httplib.HTTPConnection(u.netloc, timeout=timeout / 1000)
         global _USER_AGENT
         headers = {
             "User-Agent": _USER_AGENT,
-            "Connection": "Keep-Alive",
             "Accept-Encoding": "gzip",
-            "Content-Type": "text/plain; charset=utf-8"}
+            "Content-Type": content_type}
         conn.request("POST" if body else "GET", u.path, body, headers)
         resp = conn.getresponse()
         # log(resp.status)
@@ -102,16 +99,6 @@ def _loadUrl(u, timeout, fingerprints, body):  # timeout in msec
             response = response.strip()
             raise Exception('HTTP Error: [%i] %s. Response: %s' % (resp.status, resp.reason, response[:256]))
 
-    except tlslite.TLSLocalAlert as ex:
-        response = None
-        err('loadUrl failed: %s' % utils.hide_guid(traceback.format_exc()))
-        errStr = str(ex)
-
-    except tlslite.TLSFingerprintError as ex:
-        response = None
-        err('loadUrl failed: %s' % utils.hide_guid(traceback.format_exc()))
-        errStr = str(ex)
-
     except Exception as ex:
         response = None
         errStr = str(ex)
@@ -121,8 +108,8 @@ def _loadUrl(u, timeout, fingerprints, body):  # timeout in msec
         tb = traceback.format_exc(1).split('\n')
         err('loadUrl failed: %s%s' % (utils.hide_guid(errStr), tb[1]))
 
-    #finally:
-    #    if conn is not None:
-    #       conn.close()
+    finally:
+        if conn is not None:
+           conn.close()
 
     return (response, compressedSize, errStr)

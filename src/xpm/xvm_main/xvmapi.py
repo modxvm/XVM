@@ -63,7 +63,7 @@ def _exec(req, data=None, showLog=True, api=XVM.API_VERSION, params={}):
 
         url = url.format(id=accountDBID, token=token)
 
-        (response, duration, errStr) = loadUrl(url, None, data)
+        (response, duration, errStr) = loadUrl(url, body=data)
 
         return (None if not response else unicode_to_ascii(simplejson.loads(response)), errStr)
     except Exception as ex:
