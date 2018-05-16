@@ -377,6 +377,8 @@ class Data(object):
         self.data['splashHit'] = 'no-splash'
 
     def showDamageFromShot(self, vehicle, attackerID, points, effectsIndex, damageFactor):
+        if not vehicle.isStarted:
+            return
         maxHitEffectCode, decodedPoints, maxDamagedComponent = DamageFromShotDecoder.decodeHitPoints(points, vehicle.appearance.collisions)
         self.data['compName'] = decodedPoints[0].componentName if decodedPoints else 'unknown'
 
@@ -669,8 +671,7 @@ class DamageLog(_Base):
                 attackerID = self.dataLog['attackerID']
                 attackReasonID = self.dataLog['attackReasonID']
                 if attackerID in self.dictVehicle:
-                    isFrequent = (BigWorld.serverTime() - self.dictVehicle[attackerID][attackReasonID]['time']) < 1.0
-                    if (attackReasonID in self.dictVehicle[attackerID]) and isFrequent:
+                    if (attackReasonID in self.dictVehicle[attackerID]) and ((BigWorld.serverTime() - self.dictVehicle[attackerID][attackReasonID]['time']) < 1.0):
                         key = self.dictVehicle[attackerID][attackReasonID]
                         key['time'] = BigWorld.serverTime()
                         key['damage'] += self.dataLog['damage']
