@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 27.04.2018
+    // Last update: 16.05.2018
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -608,6 +608,7 @@
     "ussr-R149_Object_268_4":                {"name": null, "short": null},
     "ussr-R14_SU-5":                         {"name": null, "short": null},
     "ussr-R151_Object_257_2":                {"name": null, "short": null},
+    "ussr-R152_KV2_W":                       {"name": null, "short": null},
     "ussr-R153_Object_705":                  {"name": null, "short": null},
     "ussr-R15_S-51":                         {"name": null, "short": null},
     "ussr-R16_SU-18":                        {"name": null, "short": null},
