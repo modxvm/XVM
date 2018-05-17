@@ -26,11 +26,10 @@
     * Automatické osazení posádky
     * Ping na servery na přihlašovací obrazovce, v hangáru a před bitvou
 
+  Stránky projektu:                    https://modxvm.com/
 
-  Stránky projektu:             https://modxvm.com/
-
-  Podpora (EN):                 https://koreanrandom.com/forum/topic/1383-xvm
-  Nejčastější dotazy (EN):      https://modxvm.com/en/faq/
+  Podpora (EN):                        https://koreanrandom.com/forum/topic/1383-xvm
+  Nejčastější dotazy (EN):             https://modxvm.com/en/faq/
   Různá již připravená nastavení (RU): https://koreanrandom.com/forum/forum/50-/
 
 

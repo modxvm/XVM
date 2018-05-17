@@ -6,10 +6,10 @@
     "version": "XVM_VERSION",
     "dependencies": ["com.modxvm.xvm", "com.modxvm.xvm.techtree"],
 
-    "url": "http://modxvm.com/",
-    "url_update": "http://modxvm.com/",
+    "url": "https://modxvm.com/",
+    "url_update": "https://modxvm.com/",
     
-    "wot_versions" : ["WOT_VERSION"],
+    "wot_versions": ["WOT_VERSION"],
     "wot_versions_strategy": "",
 
     "features": ["python"]
