@@ -16,8 +16,8 @@ package com.xvm.lobby.ui.limits
 
     public class LimitsUIImpl implements ILimitsUI
     {
-        private static const SETTINGS_GOLD_LOCK_STATUS:String = "xvm_limits/gold_lock_status";
-        private static const SETTINGS_FREEXP_LOCK_STATUS:String = "xvm_limits/freexp_lock_status";
+        private static const SETTINGS_GOLD_LOCK_STATUS:String = "xvm_limits/{accountDBID}/gold_lock_status";
+        private static const SETTINGS_FREEXP_LOCK_STATUS:String = "xvm_limits/{accountDBID}/freexp_lock_status";
 
         private static const XVM_LIMITS_COMMAND_SET_GOLD_LOCK_STATUS:String = "xvm_limits.set_gold_lock_status";
         private static const XVM_LIMITS_COMMAND_SET_FREEXP_LOCK_STATUS:String = "xvm_limits.set_freexp_lock_status";

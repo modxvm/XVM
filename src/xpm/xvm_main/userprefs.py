@@ -20,6 +20,7 @@ import BigWorld
 from fs.osfs import OSFS
 from fs.zipfs import ZipFS
 from logger import *
+import utils
 
 
 class _UserPrefs():
@@ -36,6 +37,9 @@ class _UserPrefs():
     def get(self, key, default):
         fs = None
         try:
+            if not key:
+                return default
+            key = key.format(accountDBID=utils.getAccountDBID())
             fullFileName = os.path.join(self.cache_dir, '{0}.dat'.format(key))
             dirName = os.path.dirname(fullFileName)
             pkg = os.path.basename(dirName)
@@ -69,6 +73,9 @@ class _UserPrefs():
     def set(self, key, value):
         fs = None
         try:
+            if not key:
+                return
+            key = key.format(accountDBID=utils.getAccountDBID())
             fullFileName = os.path.join(self.cache_dir, '{0}.dat'.format(key))
             dirName = os.path.dirname(fullFileName)
             pkg = os.path.basename(dirName)

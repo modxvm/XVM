@@ -43,6 +43,8 @@ class COMMANDS(object):
     AS_PUT_BEST_CREW = 'xvm_crew.as_put_best_crew'
     AS_PUT_CLASS_CREW = 'xvm_crew.as_put_class_crew'
 
+USERPREFS_AUTO_PREV_CREW_KEY = "xvm_crew/{accountDBID}/auto_prev_crew/"
+
 
 #####################################################################
 # initialization/finalization
@@ -130,8 +132,9 @@ def VehicleSelectorPopup_onSelectVehicles(self, items):
             itemsCache = dependency.instance(IItemsCache)
             vehicle = itemsCache.items.getItemByCD(cd)
             if vehicle and vehicle.isInInventory and not (vehicle.isCrewFull or vehicle.isInBattle or vehicle.isLocked):
-                if config.get('hangar/enableCrewAutoReturn') and userprefs.get('xvm_crew/auto_prev_crew/%s' % vehicle.invID, True):
-                    wg_compat.g_instance.processReturnCrewForVehicleSelectorPopup(vehicle)
+                if config.get('hangar/enableCrewAutoReturn'):
+                    if userprefs.get(USERPREFS_AUTO_PREV_CREW_KEY + str(vehicle.invID), True):
+                        wg_compat.g_instance.processReturnCrewForVehicleSelectorPopup(vehicle)
     except Exception, ex:
         err(traceback.format_exc())
 
