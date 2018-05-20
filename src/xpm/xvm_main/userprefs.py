@@ -39,7 +39,8 @@ class _UserPrefs():
         try:
             if not key:
                 return default
-            key = key.format(accountDBID=utils.getAccountDBID())
+            if '{accountDBID}' in key:
+                key = key.format(accountDBID=utils.getAccountDBID())
             fullFileName = os.path.join(self.cache_dir, '{0}.dat'.format(key))
             dirName = os.path.dirname(fullFileName)
             pkg = os.path.basename(dirName)
