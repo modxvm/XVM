@@ -90,7 +90,6 @@ package com.xvm.battle
                 Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
                 Xfw.addCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
                 Xfw.addCommandListener(XvmCommands.AS_ON_TARGET_CHANGED, onTargetChanged);
-                Xfw.addCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
 
                 onConfigLoaded(null);
 
@@ -138,7 +137,6 @@ package com.xvm.battle
                 Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
                 Xfw.removeCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
                 Xfw.removeCommandListener(XvmCommands.AS_ON_TARGET_CHANGED, onTargetChanged);
-                Xfw.removeCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
                 if (_battleController)
                 {
                     _battleController.dispose();
@@ -239,45 +237,23 @@ package com.xvm.battle
             }
         }
 
-        private function onUpdateStage():void
-        {
-            alignWatermark();
-        }
-
-        private function alignWatermark():void
-        {
-            if (_watermark)
-            {
-                _watermark.x = -battlePage.prebattleTimer.x + (App.appWidth - 1024) / 2;
-                _watermark.y = -battlePage.prebattleTimer.y + (App.appHeight - 768)/ 2;
-            }
-        }
-
         private function createWatermark():void
         {
-            const HALIGN:Vector.<String> = new <String>[TextFieldAutoSize.LEFT, TextFieldAutoSize.CENTER, TextFieldAutoSize.RIGHT];
-            const VALIGN:Vector.<String> = new <String>[TextFieldEx.VAUTOSIZE_TOP, TextFieldEx.VAUTOSIZE_CENTER, TextFieldEx.VAUTOSIZE_BOTTOM];
             _watermark = new MovieClip();
-            for (var i:Number = 0; i < 9; ++i)
-            {
-                if (i == 4)
-                    continue;
-                var textField:TextField = new TextField();
-                textField.alpha = 0.15;
-                textField.width = 1024;
-                textField.height = 768;
-                textField.mouseEnabled = false;
-                textField.selectable = false;
-                textField.multiline = true;
-                textField.wordWrap = false;
-                textField.defaultTextFormat = new TextFormat("$FieldFont", 20, 0xFFFFFF, true, null, null, null, null, TextFormatAlign.CENTER);
-                textField.autoSize = HALIGN[int(i / 3)];
-                TextFieldEx.setVerticalAutoSize(textField, VALIGN[i % 3]);
-                textField.text = "XVM Nightly Build #" + Config.config.__xvmRevision + "\n" + "get stable version on\nhttps://modxvm.com";
-                _watermark.addChild(textField);
-            }
-            battlePage.prebattleTimer.addChildAt(_watermark, 0);
-            alignWatermark();
+            var textField:TextField = new TextField();
+            textField.alpha = 0.2;
+            textField.width = 300;
+            textField.height = 100;
+            textField.mouseEnabled = false;
+            textField.selectable = false;
+            textField.multiline = true;
+            textField.wordWrap = false;
+            textField.defaultTextFormat = new TextFormat("$FieldFont", 12, 0xFFFFFF, null, null, null, null, null, TextFormatAlign.CENTER, null, null, null, -2);
+            textField.text = "XVM Nightly Build #" + Config.config.__xvmRevision + "\nget stable version on\nhttps://modxvm.com";
+            _watermark.addChild(textField);
+            battlePage.prebattleTimer.background.addChildAt(_watermark, 0);
+            _watermark.x = battlePage.prebattleTimer.background.width / 2 + 230;
+            _watermark.y = -68;
         }
     }
 }
