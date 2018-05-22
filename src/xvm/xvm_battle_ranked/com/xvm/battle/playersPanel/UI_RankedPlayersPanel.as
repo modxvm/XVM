@@ -53,8 +53,6 @@ package com.xvm.battle.playersPanel
         private var mopt_fixedPosition:Boolean = false;
         private var mopt_expandAreaWidth:Number = EXPAND_AREA_WIDTH;
 
-        private var _isStateRequested:Boolean = false;
-        private var _isInteractive:Boolean = false;
         private var _isMouseRollOver:Boolean = false;
 
         private var _leftHasBadges:Boolean = false;
@@ -108,12 +106,6 @@ package com.xvm.battle.playersPanel
             super.onDispose();
         }
 
-        override public function as_setIsIntaractive(value:Boolean):void
-        {
-            _isInteractive = value;
-            super.as_setIsIntaractive(value);
-        }
-
         override public function as_setPanelMode(state:int):void
         {
             //Logger.add("UI_PlayersPanel.as_setPanelMode(): " + state);
@@ -137,8 +129,6 @@ package com.xvm.battle.playersPanel
                         }
                     }
                 }
-
-                _isStateRequested = false;
 
                 super.as_setPanelMode(state);
 
@@ -235,12 +225,6 @@ package com.xvm.battle.playersPanel
             _isMouseRollOver = false;
         }
 
-        override public function tryToSetPanelModeByMouseS(state:int):void
-        {
-            _isStateRequested = true;
-            super.tryToSetPanelModeByMouseS(state);
-        }
-
         // for extraFields in the "none" mode
         public function onMouseRollOverHandler(e:MouseEvent):void
         {
@@ -255,14 +239,14 @@ package com.xvm.battle.playersPanel
 
         public function onMouseMoveHandler(e:MouseEvent):void
         {
-            if (_isInteractive && _isMouseRollOver && !_isStateRequested && mopt_expandAreaWidth > 0)
+            if (mopt_expandAreaWidth > 0 && _isMouseRollOver)
             {
                 var isInExpandArea:Boolean = (e.stageX < mopt_expandAreaWidth) || (e.stageX > App.appWidth - mopt_expandAreaWidth);
-                if (this.expandState == PLAYERS_PANEL_STATE.NONE && isInExpandArea)
+                if (isInExpandArea)
                 {
                     super.onListRollOverHandler(e);
                 }
-                else if (this.expandState != PLAYERS_PANEL_STATE.NONE && !isInExpandArea)
+                else
                 {
                     super.onListRollOutHandler(e);
                 }
