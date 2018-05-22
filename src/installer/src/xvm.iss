@@ -47,20 +47,10 @@ Source: "dll\findwot\bin\findwot.dll"; Flags: dontcopy
 
 [InstallDelete]
 ;ver\gui\flash
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\battle.swf"
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\battleVehicleMarkersApp.swf"
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\Lobby.swf"
+Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\xfw_battle.swf"
+Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\xfw_battleVehicleMarkersApp.swf"
+Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\xfw_lobby.swf"
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\gui\flash"
-
-;ver\gui\scaleform
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform\battle.swf"
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform\Minimap.swf"
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform\PlayersPanel.swf"
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform\StatisticForm.swf"
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform\TeamBasesPanel.swf"
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform\VehicleMarkersManager.swf"
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform\xvm.swf"
-Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform"
 
 ;ver\gui
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\gui"
@@ -97,20 +87,10 @@ Type: files; Name: "{app}\readme-*.txt"
 
 [UninstallDelete]
 ;ver\gui\flash
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\battle.swf"
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\battleVehicleMarkersApp.swf"
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\Lobby.swf"
+Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\xfw_battle.swf"
+Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\xfw_battleVehicleMarkersApp.swf"
+Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\xfw_lobby.swf"
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\gui\flash"
-
-;ver\gui\scaleform
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform\battle.swf"
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform\Minimap.swf"
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform\PlayersPanel.swf"
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform\StatisticForm.swf"
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform\TeamBasesPanel.swf"
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform\VehicleMarkersManager.swf"
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform\xvm.swf"
-Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\gui\scaleform"
 
 ;ver\gui
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\gui"

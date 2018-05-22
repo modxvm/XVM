@@ -153,7 +153,7 @@ log("XVM: eXtended Visualization Mod ( https://modxvm.com/ )")
 try:
     from datetime import datetime
     from __version__ import __branch__, __revision__, __node__
-    
+
     wot_ver = ResMgr.openSection(VERSION_FILE_PATH).readString('version')
     if 'Supertest v.ST ' in wot_ver:
         wot_ver = wot_ver.replace('Supertest v.ST ', 'v.')
