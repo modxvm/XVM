@@ -5,6 +5,7 @@
 package com.xvm.battle.playersPanel
 {
     import com.xfw.*;
+    import flash.events.*;
     import net.wg.data.constants.*;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.constants.*;
     import net.wg.infrastructure.interfaces.*;
@@ -87,13 +88,21 @@ package com.xvm.battle.playersPanel
             }
         }
 
-        // TODO:9.15 remove after fix
         override public function setIsInteractive(isInteractive:Boolean):void
         {
             super.setIsInteractive(isInteractive);
             if (proxy.isXVMEnabled)
             {
                 proxy.setIsInteractive(isInteractive);
+            }
+        }
+
+        override protected function onMouseOver(e:MouseEvent):void
+        {
+            super.onMouseOver(e);
+            if (proxy.isXVMEnabled)
+            {
+                proxy.onMouseOver(e);
             }
         }
 

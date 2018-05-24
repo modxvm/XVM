@@ -153,15 +153,16 @@ package com.xvm.battle.playersPanel
             invalidate(INVALIDATE_PLAYER_STATE, INVALIDATE_PANEL_STATE);
         }
 
-        // TODO:9.15 remove after fix
-        // 9.19 - still present
+        // hide useless tooltip
         public function setIsInteractive(isInteractive:Boolean):void
         {
-            // fix WG bug (WoT 0.9.15.1+) - cursor position remains on the item when Ctrl key unpressed.
-            App.utils.scheduler.scheduleTask(function():void
-            {
-                App.toolTipMgr.hide();
-            }, 500);
+            App.toolTipMgr.hide();
+        }
+
+        // hide useless tooltip
+        public function onMouseOver(e:MouseEvent):void
+        {
+            App.toolTipMgr.hide();
         }
 
         public function setVehicleIcon(vehicleImage:String):void
