@@ -248,7 +248,6 @@ def uncheckReserveVehicle(self):
 def updateReserve(vehCD, isReserved):
     try:
         reserve.set_reserved(vehCD, isReserved)
-        vehinfo.updateReserve(vehCD, isReserved)
         as_xfw_cmd(XVM_COMMAND.AS_UPDATE_RESERVE, vehinfo.getVehicleInfoDataArray())
         app = getLobbyApp()
         hangar = app.containerManager.getView(ViewTypes.LOBBY_SUB,

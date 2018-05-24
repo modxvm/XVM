@@ -10,6 +10,11 @@ def getVehicleInfoDataArray():
     global _vehicleInfoData
     return _vehicleInfoData.values() if _vehicleInfoData is not None else None
 
+def resetReserve():
+    global _vehicleInfoData
+    for v in _vehicleInfoData.itervalues():
+        v['isReserved'] = False
+
 def updateReserve(vehCD, isReserved):
     global _vehicleInfoData
     if _vehicleInfoData is not None:
@@ -184,8 +189,7 @@ def _init():
 
                 data['shortName'] = vehinfo_short.getShortName(data['key'], data['level'], data['vclass'])
 
-                # is reserved?
-                data['isReserved'] = reserve.is_reserved(data['vehCD'])
+                data['isReserved'] = False
 
                 #log(data)
 

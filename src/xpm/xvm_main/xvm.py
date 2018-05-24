@@ -26,6 +26,7 @@ import userprefs
 import dossier
 import minimap_circles
 import python_macro
+import reserve
 import test
 import topclans
 import wgutils
@@ -155,6 +156,7 @@ class Xvm(object):
         if self.currentAccountDBID is not None:
             self.currentAccountDBID = None
             config.token = config.XvmServicesToken()
+        reserve.init(None)
 
 
     # LOBBY
@@ -169,7 +171,7 @@ class Xvm(object):
                 config.token.saveLastAccountDBID()
                 self.xvmServicesInitialized = False
                 self.initializeXvmServices()
-
+            reserve.init(self.currentAccountDBID)
         except Exception, ex:
             err(traceback.format_exc())
 

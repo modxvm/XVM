@@ -3,6 +3,9 @@
 #############################
 # Command
 
+def init(accountDBID):
+    _reserve._update_reserve_cache(accountDBID)
+
 def is_reserved(vehCD):
     return _reserve._is_reserved(vehCD)
 
@@ -16,7 +19,7 @@ import traceback
 import config
 from logger import *
 import userprefs
-import utils
+import vehinfo
 
 #############################
 
@@ -31,19 +34,20 @@ class _Reserve(object):
 
     def _update_reserve_cache(self, accountDBID):
         self.accountDBID = accountDBID
+        vehinfo.resetReserve()
         if self.accountDBID is None:
             self.reserve_cache = []
         else:
             self.reserve_cache = userprefs.get(USERPREFS.CAROUSEL_RESERVE, [])
+            for vehCD in self.reserve_cache:
+                vehinfo.updateReserve(vehCD, True)
 
     def _is_reserved(self, vehCD):
-        accountDBID = utils.getAccountDBID()
-        if accountDBID != self.accountDBID:
-            self._update_reserve_cache(accountDBID)
         return vehCD in self.reserve_cache
 
     def _set_reserved(self, vehCD, to_reserve):
         try:
+            vehinfo.updateReserve(vehCD, to_reserve)
             if to_reserve:
                 if vehCD not in self.reserve_cache:
                     self.reserve_cache.append(vehCD)
