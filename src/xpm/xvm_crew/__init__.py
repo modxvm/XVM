@@ -35,7 +35,6 @@ class CREW(object):
     PUT_CLASS_CREW = 'PutClassCrew'
     PUT_PREVIOUS_CREW = 'PutPreviousCrew'
 
-
 class COMMANDS(object):
     PUT_PREVIOUS_CREW = 'xvm_crew.put_previous_crew'
     AS_VEHICLE_CHANGED = 'xvm_crew.as_vehicle_changed'
@@ -43,7 +42,8 @@ class COMMANDS(object):
     AS_PUT_BEST_CREW = 'xvm_crew.as_put_best_crew'
     AS_PUT_CLASS_CREW = 'xvm_crew.as_put_class_crew'
 
-USERPREFS_AUTO_PREV_CREW_KEY = "xvm_crew/{accountDBID}/auto_prev_crew/"
+class USERPREFS(object):
+    AUTO_PREV_CREW = "users/{accountDBID}/crew/auto_prev_crew/"
 
 
 #####################################################################
@@ -133,7 +133,7 @@ def VehicleSelectorPopup_onSelectVehicles(self, items):
             vehicle = itemsCache.items.getItemByCD(cd)
             if vehicle and vehicle.isInInventory and not (vehicle.isCrewFull or vehicle.isInBattle or vehicle.isLocked):
                 if config.get('hangar/enableCrewAutoReturn'):
-                    if userprefs.get(USERPREFS_AUTO_PREV_CREW_KEY + str(vehicle.invID), True):
+                    if userprefs.get(USERPREFS.AUTO_PREV_CREW + str(vehicle.invID), True):
                         wg_compat.g_instance.processReturnCrewForVehicleSelectorPopup(vehicle)
     except Exception, ex:
         err(traceback.format_exc())

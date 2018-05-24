@@ -20,7 +20,8 @@ import utils
 
 #############################
 
-USERPREFS_CAROUSEL_RESERVE_KEY = "tankcarousel/{accountDBID}/reserve"
+class USERPREFS(object):
+    CAROUSEL_RESERVE = "users/{accountDBID}/tankcarousel/reserve"
 
 class _Reserve(object):
 
@@ -33,7 +34,7 @@ class _Reserve(object):
         if self.accountDBID is None:
             self.reserve_cache = []
         else:
-            self.reserve_cache = userprefs.get(USERPREFS_CAROUSEL_RESERVE_KEY, [])
+            self.reserve_cache = userprefs.get(USERPREFS.CAROUSEL_RESERVE, [])
 
     def _is_reserved(self, vehCD):
         accountDBID = utils.getAccountDBID()
@@ -46,11 +47,11 @@ class _Reserve(object):
             if to_reserve:
                 if vehCD not in self.reserve_cache:
                     self.reserve_cache.append(vehCD)
-                    userprefs.set(USERPREFS_CAROUSEL_RESERVE_KEY, self.reserve_cache)
+                    userprefs.set(USERPREFS.CAROUSEL_RESERVE, self.reserve_cache)
             else:
                 if vehCD in self.reserve_cache:
                     self.reserve_cache.remove(vehCD)
-                    userprefs.set(USERPREFS_CAROUSEL_RESERVE_KEY, self.reserve_cache)
+                    userprefs.set(USERPREFS.CAROUSEL_RESERVE, self.reserve_cache)
         except Exception as ex:
             err('_set_reserved() exception: ' + traceback.format_exc())
 

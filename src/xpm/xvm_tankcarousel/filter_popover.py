@@ -46,7 +46,8 @@ class PREFS(object):
     RESERVE = 'reserve'
     XVM_KEYS = (NORMAL, NON_ELITE, FULL_CREW, NO_MASTER, RESERVE)
 
-USERPREFS_CAROUSEL_FILTERS_KEY = "tankcarousel/{accountDBID}/filters"
+class USERPREFS(object):
+    CAROUSEL_FILTERS = "users/{accountDBID}/tankcarousel/filters"
 
 
 #####################################################################
@@ -66,7 +67,7 @@ def _ServerSettingsManager_getSection(base, self, section, defaults = None):
     res = base(self, section, defaults)
     if section in (CAROUSEL_FILTER_2, RANKED_CAROUSEL_FILTER_2, EPICBATTLE_CAROUSEL_FILTER_2):
         try:
-            filterData = simplejson.loads(userprefs.get(USERPREFS_CAROUSEL_FILTERS_KEY, '{}'))
+            filterData = simplejson.loads(userprefs.get(USERPREFS.CAROUSEL_FILTERS, '{}'))
             prefs = filterData.get('prefs', [])
         except Exception as ex:
             err(traceback.format_exc())
@@ -81,7 +82,7 @@ def _ServerSettingsManager_setSections(base, self, sections, settings):
             try:
                 prefs = [key for key, value in settings.iteritems() if key in PREFS.XVM_KEYS and value]
                 settings = {key: value for key, value in settings.iteritems() if key not in PREFS.XVM_KEYS}
-                userprefs.set(USERPREFS_CAROUSEL_FILTERS_KEY, simplejson.dumps({'prefs':prefs}))
+                userprefs.set(USERPREFS.CAROUSEL_FILTERS, simplejson.dumps({'prefs':prefs}))
             except Exception as ex:
                 err(traceback.format_exc())
     return base(self, sections, settings)

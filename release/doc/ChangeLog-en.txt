@@ -1,4 +1,6 @@
 ﻿XVM-7.6.2-dev:
+  [GENERAL]
+  * changed structure of the settings cache files, need to re-configure the filters and tanks in reserve.
 
 XVM-7.6.1:
   [GENERAL]

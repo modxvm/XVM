@@ -17,7 +17,7 @@ package com.xvm.lobby.crew
 
     public class CrewXvmView extends XvmViewBase
     {
-        private static const SETTINGS_AUTO_PREV_CREW:String = "xvm_crew/{accountDBID}/auto_prev_crew/";
+        private static const SETTINGS_AUTO_PREV_CREW:String = "users/{accountDBID}/crew/auto_prev_crew/";
 
         private static const COMMAND_XVM_CREW_PUT_PREVIOUS_CREW:String = 'xvm_crew.put_previous_crew';
         private static const COMMAND_XVM_CREW_AS_VEHICLE_CHANGED:String = 'xvm_crew.as_vehicle_changed';
