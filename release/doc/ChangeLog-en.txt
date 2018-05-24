@@ -1,4 +1,6 @@
-﻿XVM-7.6.2:
+﻿XVM-7.6.3-dev:
+
+XVM-7.6.2:
   [GENERAL]
   * World of Tanks 1.0.1.1 nanopatch 2
   * changed structure of the settings cache files, need to re-configure the filters and tanks in reserve.
