@@ -75,7 +75,6 @@ def ToolTip_onCreateComplexTooltip(base, self, tooltipId, stateType):
     # log('ToolTip_onCreateComplexTooltip')
     _createTooltip(self, lambda:_onCreateComplexTooltip_callback(base, self, tooltipId, stateType))
 
-
 # tooltip delay to resolve performance issue
 # suppress carousel tooltips
 @overrideMethod(ToolTip, 'onCreateTypedTooltip')
@@ -89,6 +88,10 @@ def ToolTip_onCreateTypedTooltip(base, self, type, *args):
 
     _createTooltip(self, lambda:_onCreateTypedTooltip_callback(base, self, type, *args))
 
+@overrideMethod(ToolTip, 'onHideTooltip')
+def _ToolTip_onHideTooltip(base, self, tooltipId):
+    self.xvm_hide()
+    base(self, tooltipId)
 
 # adds delay for tooltip appearance
 def _createTooltip(self, func):
@@ -100,20 +103,17 @@ def _createTooltip(self, func):
     except Exception as ex:
         err(traceback.format_exc())
 
-
 def _onCreateTypedTooltip_callback(base, self, type, *args):
     # log('ToolTip_onCreateTypedTooltip_callback')
     global toolTipDelayIntervalId
     toolTipDelayIntervalId = None
     base(self, type, *args)
 
-
 def _onCreateComplexTooltip_callback(base, self, tooltipId, stateType):
     # log('_onCreateComplexTooltip_callback')
     global toolTipDelayIntervalId
     toolTipDelayIntervalId = None
     base(self, tooltipId, stateType)
-
 
 def _ToolTip_xvm_hide(self):
     # log('_ToolTip_xvm_hide')
