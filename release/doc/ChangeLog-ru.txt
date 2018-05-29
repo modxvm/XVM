@@ -5,6 +5,7 @@
       "currentServerFormat" - html формат для текущего сервера
   * удалена опция в "hangar"/"pingServers" и "hangar"/"onlineServers":
       "markCurrentServer" - заменена на "currentServerFormat"
+  * добавлена опция "login"/"disabledServers" - не показывать заданные серверы в выпадающем списке серверов
 
   [РАЗНОЕ]
   * исправлено отображение всплывающих подсказок в бою

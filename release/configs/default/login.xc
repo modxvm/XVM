@@ -13,6 +13,9 @@
     // Auto confirm old replays playing
     // Автоматически подтверждать проигрывание старых реплеев
     "confirmOldReplays": false,
+    // Do not show the specified servers in the servers list, for example, ["RU1", "RU3"]
+    // Не показывать заданные серверы в выпадающем списке серверов, например, ["RU1", "RU3"]
+    "disabledServers": [],
     // Ping servers
     // Пинг серверов
     "pingServers": {

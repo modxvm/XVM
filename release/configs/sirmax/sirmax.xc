@@ -43,6 +43,7 @@
     "saveLastServer": true,
     "autologin": true,
     "confirmOldReplays": true,
+    //"disabledServers": ["RU10"],
     "pingServers": ${"def.pingServers"},
     "onlineServers": ${"def.onlineServers"},
     "widgets": ${"sirmax-widgets.xc":"widgets.login"}

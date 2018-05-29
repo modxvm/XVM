@@ -5,6 +5,7 @@
       "currentServerFormat" - html format for current server
   * removed option in "hangar"/"pingServers" and "hangar"/"onlineServers":
       "markCurrentServer" - replaced with "currentServerFormat"
+  * added option "login"/"disabledServers" - do not show the specified servers in the servers list
 
   [MISC]
   * fixed display of tooltips in battle

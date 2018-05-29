@@ -23,6 +23,7 @@ import svcmsg
 import vehinfo
 import utils
 import userprefs
+import disabled_servers
 import dossier
 import minimap_circles
 import python_macro
@@ -90,6 +91,7 @@ class Xvm(object):
         trace('onConfigLoaded')
 
         python_macro.initialize()
+        disabled_servers.initialize()
 
         if not e or not e.ctx.get('fromInitStage', False):
             self.respondConfig()
