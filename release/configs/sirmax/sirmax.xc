@@ -58,6 +58,7 @@
     "enableEquipAutoReturn": true,
     "notificationsButtonType": "blink",
     "blockVehicleIfLowAmmo": true,
+    "restoreBattleType": true,
     "pingServers": {
       "$ref": { "path":"def.pingServers" },
       "x": 5

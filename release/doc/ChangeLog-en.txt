@@ -1,4 +1,7 @@
 ﻿XVM-7.6.3-dev:
+  [HANGAR]
+  * added option "hangar"/"restoreBattleType" - restore selected battle type on switching to another server
+
   [MISC]
   * fixed display of tooltips in battle
   * added option "tooltips"/"hideTooltips" - list of tooltips to hide
