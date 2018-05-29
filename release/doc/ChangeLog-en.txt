@@ -1,4 +1,6 @@
 ﻿XVM-7.6.3-dev:
+  [MISC]
+  * fixed display of tooltips in battle
 
 XVM-7.6.2:
   [GENERAL]
@@ -11,7 +13,7 @@ XVM-7.6.2:
 
   [MISC]
   * fixes in hangar filters
-  * removed useless tooltip in players panel
+  * disabled tooltip in players panel
 
 XVM-7.6.1:
   [GENERAL]
@@ -23,7 +25,7 @@ XVM-7.6.1:
 
   [РАЗНОЕ]
   * fixed old replays playback
-  * fixed reload timer position
+  * fixed repair modules timer position
   * player profile: fixed xTE column
   * implemented HTTP-proxy support through environment variable XVM_HTTP_PROXY=http://[login:password@]domain.com:3128
 
