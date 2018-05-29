@@ -1,6 +1,8 @@
 ﻿XVM-7.6.3-dev:
   [MISC]
   * fixed display of tooltips in battle
+  * added option "tooltips"/"hideTooltips" - list of tooltips to hide
+  * added option "tooltips"/"logLocalization" - log all localization keys to the xvm.log file
 
 XVM-7.6.2:
   [GENERAL]
@@ -23,7 +25,7 @@ XVM-7.6.1:
   * damageLog: disabled panel in the frontline mode
   * damageLog: fix macros {{costShell}} and {{c:costShell}}
 
-  [РАЗНОЕ]
+  [MISC]
   * fixed old replays playback
   * fixed repair modules timer position
   * player profile: fixed xTE column

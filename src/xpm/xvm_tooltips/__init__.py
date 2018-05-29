@@ -52,6 +52,9 @@ toolTipDelayIntervalId = None
 weightTooHeavy = False
 p_replacement = None # will be something like <font size... color...>
 
+class XVM_TOOLTIPS(object):
+    HIDE = 'xvm_hide_tooltip'
+
 #####################################################################
 # initialization/finalization
 
@@ -69,16 +72,24 @@ def fini():
 #####################################################################
 # handlers
 
+@overrideMethod(i18n, 'makeString')
+def _i18n_makeString(base, key, *args, **kwargs):
+    if config.get('tooltips/logLocalization', False):
+        log('l10n key: ' + key + ', value: ' + base(key, *args, **kwargs))
+    if key in config.get('tooltips/hideTooltips', []):
+        return XVM_TOOLTIPS.HIDE
+    return base(key, *args, **kwargs)
+
 # tooltip delay to resolve performance issue
 @overrideMethod(ToolTip, 'onCreateComplexTooltip')
-def ToolTip_onCreateComplexTooltip(base, self, tooltipId, stateType):
-    # log('ToolTip_onCreateComplexTooltip')
-    _createTooltip(self, lambda:_onCreateComplexTooltip_callback(base, self, tooltipId, stateType))
+def _ToolTip_onCreateComplexTooltip(base, self, tooltipId, stateType):
+    if XVM_TOOLTIPS.HIDE not in tooltipId:
+        _createTooltip(self, lambda:_onCreateComplexTooltip_callback(base, self, tooltipId, stateType))
 
 # tooltip delay to resolve performance issue
 # suppress carousel tooltips
 @overrideMethod(ToolTip, 'onCreateTypedTooltip')
-def ToolTip_onCreateTypedTooltip(base, self, type, *args):
+def _ToolTip_onCreateTypedTooltip(base, self, type, *args):
     # log('ToolTip_onCreateTypedTooltip')
     try:
         if type == TOOLTIPS_CONSTANTS.CAROUSEL_VEHICLE and config.get('hangar/carousel/suppressCarouselTooltips'):
@@ -86,7 +97,8 @@ def ToolTip_onCreateTypedTooltip(base, self, type, *args):
     except Exception as ex:
         err(traceback.format_exc())
 
-    _createTooltip(self, lambda:_onCreateTypedTooltip_callback(base, self, type, *args))
+    if XVM_TOOLTIPS.HIDE not in tooltipId:
+        _createTooltip(self, lambda:_onCreateTypedTooltip_callback(base, self, type, *args))
 
 @overrideMethod(ToolTip, 'onHideTooltip')
 def _ToolTip_onHideTooltip(base, self, tooltipId):

@@ -153,18 +153,6 @@ package com.xvm.battle.playersPanel
             invalidate(INVALIDATE_PLAYER_STATE, INVALIDATE_PANEL_STATE);
         }
 
-        // hide useless tooltip
-        public function setIsInteractive(isInteractive:Boolean):void
-        {
-            App.toolTipMgr.hide();
-        }
-
-        // hide useless tooltip
-        public function onMouseOver(e:MouseEvent):void
-        {
-            App.toolTipMgr.hide();
-        }
-
         public function setVehicleIcon(vehicleImage:String):void
         {
             if (_vehicleImage != vehicleImage)

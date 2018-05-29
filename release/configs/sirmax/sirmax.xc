@@ -412,7 +412,7 @@
     //"minimapDrawTime": 7
   },
   "tooltips": {
-    //"hideSimplifiedVehParams": false
+    //"logLocalization": true
   },
   "battleLabels": ${"sirmax-battleLabels.xc":"."},
   "tweaks": {
