@@ -88,6 +88,24 @@ package com.xvm.battle.playersPanel
             }
         }
 
+        override public function setIsInteractive(isInteractive:Boolean):void
+        {
+            super.setIsInteractive(isInteractive);
+            if (proxy.isXVMEnabled)
+            {
+                proxy.setIsInteractive(isInteractive);
+            }
+        }
+
+        override protected function onMouseOver(e:MouseEvent):void
+        {
+            super.onMouseOver(e);
+            if (proxy.isXVMEnabled)
+            {
+                proxy.onMouseOver(e);
+            }
+        }
+
         override public function setState(param1:uint):void
         {
             if (xfw_state != param1)

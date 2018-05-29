@@ -5,6 +5,7 @@
 package com.xvm.battle.playersPanel
 {
     import com.xfw.*;
+    import flash.events.*;
     import net.wg.data.constants.*;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.constants.*;
     import net.wg.infrastructure.interfaces.*;
@@ -36,7 +37,7 @@ package com.xvm.battle.playersPanel
 
         override public function setPlayerNameProps(userProps:IUserProps):void
         {
-            if (!proxy.xvm_enabled)
+            if (!proxy.isXVMEnabled)
             {
                 super.setPlayerNameProps(userProps);
             }
@@ -48,7 +49,7 @@ package com.xvm.battle.playersPanel
 
         override public function setPlayerNameFullWidth(param1:uint):void
         {
-            if (!proxy.xvm_enabled)
+            if (!proxy.isXVMEnabled)
             {
                 super.setPlayerNameFullWidth(param1);
             }
@@ -63,7 +64,7 @@ package com.xvm.battle.playersPanel
 
         override public function setVehicleName(param1:String):void
         {
-            if (!proxy.xvm_enabled)
+            if (!proxy.isXVMEnabled)
             {
                 super.setVehicleName(param1);
             }
@@ -76,7 +77,7 @@ package com.xvm.battle.playersPanel
 
         override public function setFrags(param1:int):void
         {
-            if (!proxy.xvm_enabled)
+            if (!proxy.isXVMEnabled)
             {
                 super.setFrags(param1);
             }
@@ -84,6 +85,24 @@ package com.xvm.battle.playersPanel
             {
                 // set static value to send only one event
                 super.setFrags(0);
+            }
+        }
+
+        override public function setIsInteractive(isInteractive:Boolean):void
+        {
+            super.setIsInteractive(isInteractive);
+            if (proxy.isXVMEnabled)
+            {
+                proxy.setIsInteractive(isInteractive);
+            }
+        }
+
+        override protected function onMouseOver(e:MouseEvent):void
+        {
+            super.onMouseOver(e);
+            if (proxy.isXVMEnabled)
+            {
+                proxy.onMouseOver(e);
             }
         }
 
@@ -101,7 +120,7 @@ package com.xvm.battle.playersPanel
         {
             try
             {
-                if (!proxy.xvm_enabled)
+                if (!proxy.isXVMEnabled)
                 {
                     super.setVehicleIcon(vehicleImage);
                 }
@@ -121,7 +140,7 @@ package com.xvm.battle.playersPanel
             try
             {
                 super.draw();
-                if (proxy.xvm_enabled)
+                if (proxy.isXVMEnabled)
                 {
                     if (isInvalid(PlayersPanelInvalidationType.PLAYER_SCHEME))
                     {

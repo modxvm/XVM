@@ -52,7 +52,7 @@ package com.xvm.battle.playersPanel
         private static var s_maxPlayerNameTextWidthsRight:Dictionary = new Dictionary();
 
         public var _isLeftPanel:Boolean;
-        public var xvm_enabled:Boolean;
+        public var isXVMEnabled:Boolean;
 
         private var DEFAULT_BG_ALPHA:Number;
         private var DEFAULT_SELFBG_ALPHA:Number;
@@ -153,15 +153,16 @@ package com.xvm.battle.playersPanel
             invalidate(INVALIDATE_PLAYER_STATE, INVALIDATE_PANEL_STATE);
         }
 
-        // TODO:9.15 remove after fix
-        // 9.19 - still present
+        // hide useless tooltip
         public function setIsInteractive(isInteractive:Boolean):void
         {
-            // fix WG bug (WoT 0.9.15.1+) - cursor position remains on the item when Ctrl key unpressed.
-            App.utils.scheduler.scheduleTask(function():void
-            {
-                App.toolTipMgr.hide();
-            }, 500);
+            App.toolTipMgr.hide();
+        }
+
+        // hide useless tooltip
+        public function onMouseOver(e:MouseEvent):void
+        {
+            App.toolTipMgr.hide();
         }
 
         public function setVehicleIcon(vehicleImage:String):void
@@ -193,7 +194,7 @@ package com.xvm.battle.playersPanel
             {
                 super.draw();
 
-                if (!xvm_enabled || mcfg == null || _userProps == null)
+                if (!isXVMEnabled || mcfg == null || _userProps == null)
                     return;
 
                 if (isInvalid(INVALIDATE_PLAYER_STATE))
@@ -302,9 +303,9 @@ package com.xvm.battle.playersPanel
 
                 disposeExtraFields();
 
-                xvm_enabled = Macros.FormatBooleanGlobal(pcfg.enabled, true);
+                isXVMEnabled = Macros.FormatBooleanGlobal(pcfg.enabled, true);
                 //Logger.add("xvm_enabled = " + xvm_enabled);
-                if (xvm_enabled)
+                if (isXVMEnabled)
                 {
                     opt_removeSelectedBackground = Macros.FormatBooleanGlobal(pcfg.removeSelectedBackground, false);
                     opt_vehicleIconAlpha = Macros.FormatNumberGlobal(pcfg.iconAlpha, 100) / 100.0;
@@ -348,7 +349,7 @@ package com.xvm.battle.playersPanel
 
         private function onPlayerStateChanged(e:PlayerStateEvent):void
         {
-            if (xvm_enabled && _userProps && e.vehicleID == _vehicleID)
+            if (isXVMEnabled && _userProps && e.vehicleID == _vehicleID)
             {
                 invalidate(INVALIDATE_PLAYER_STATE);
             }
@@ -356,7 +357,7 @@ package com.xvm.battle.playersPanel
 
         private function onMaxPlayerNameTextWidthChanged(e:BooleanEvent):void
         {
-            if (xvm_enabled && _userProps && e.value == isLeftPanel)
+            if (isXVMEnabled && _userProps && e.value == isLeftPanel)
             {
                 invalidate(INVALIDATE_UPDATE_POSITIONS);
             }
@@ -364,7 +365,7 @@ package com.xvm.battle.playersPanel
 
         private function onAtlasLoaded(e:Event):void
         {
-            if (xvm_enabled)
+            if (isXVMEnabled)
             {
                 setVehicleIcon(_vehicleImage);
             }
@@ -372,7 +373,7 @@ package com.xvm.battle.playersPanel
 
         private function onClanIconLoaded(vehicleID:Number, playerName:String):void
         {
-            if (xvm_enabled && _userProps && playerName == _userProps.userName)
+            if (isXVMEnabled && _userProps && playerName == _userProps.userName)
             {
                 invalidate(INVALIDATE_PLAYER_STATE);
             }
