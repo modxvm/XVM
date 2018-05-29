@@ -154,10 +154,10 @@
     ],
     // List of tooltipId to hide
     // Possible values can be found in this files: ingame_gui.mo, tooltips.mo (or INGAME_GUI.py, TOOLTIPS.py)
-    // or enable "logTooltips" option and search them in the xvm.log file
+    // or enable "logLocalization" option and search them in the xvm.log file
     // Список tooltipId, которые необходимо спрятать
     // Возможные значения можно найти в файлах: ingame_gui.mo, tooltips.mo (или INGAME_GUI.py, TOOLTIPS.py)
-    // или включите опцию "logTooltips" и ищите их в файле xvm.log
+    // или включите опцию "logLocalization" и ищите их в файле xvm.log
     "hideTooltips": [
       "#ingame_gui:dynamicSquad/ally/add",
       "#ingame_gui:dynamicSquad/ally/disabled",
