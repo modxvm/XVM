@@ -66,6 +66,9 @@
       // text to show in case of error
       // текст показываемый в случае ошибки
       "errorString": "--",
+      // List of ignored servers, for example, ["RU1", "RU3"]
+      // Список игнорируемых серверов, например, ["RU1", "RU3"]
+      "ignoredServers": [],
       // Text style
       // Стиль текста
       "fontStyle": {
@@ -164,6 +167,9 @@
       // text to show in case of error
       // текст показываемый в случае ошибки
       "errorString": "--k",
+      // List of ignored servers, for example, ["RU1", "RU3"]
+      // Список игнорируемых серверов, например, ["RU1", "RU3"]
+      "ignoredServers": [],
       // Text style
       // Стиль текста
       "fontStyle": {

@@ -41,7 +41,8 @@ class _Ping(object):
         self.hangarErrorString = l10n(config.get('hangar/pingServers/errorString', '--'))
         self.loginShowTitle = config.get('login/pingServers/showTitle', True)
         self.hangarShowTitle = config.get('hangar/pingServers/showTitle', True)
-        ignoredServers = config.get('hangar/pingServers/ignoredServers', [])
+        ignoredServersLogin = config.get('login/pingServers/ignoredServers', [])
+        ignoredServersHangar = config.get('hangar/pingServers/ignoredServers', [])
 
         self.hosts_urls = {}
         self.loginHosts = []
@@ -50,8 +51,9 @@ class _Ping(object):
             for (name, subSec) in self.loginSection.items():
                 host_name = subSec.readStrings('short_name')[0]
                 self.hosts_urls[host_name] = subSec.readStrings('url')[0]
-                self.loginHosts.append(host_name)
-                if host_name not in ignoredServers:
+                if host_name not in ignoredServersLogin:
+                    self.loginHosts.append(host_name)
+                if host_name not in ignoredServersHangar:
                     self.hangarHosts.append(host_name)
             alphanumeric_sort(self.loginHosts)
             alphanumeric_sort(self.hangarHosts)

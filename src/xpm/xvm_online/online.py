@@ -51,15 +51,17 @@ class _Get_online(object):
         self.hangarErrorString = l10n(config.get('hangar/onlineServers/errorString', '--k'))
         self.loginShowTitle = config.get('login/onlineServers/showTitle', True)
         self.hangarShowTitle = config.get('hangar/onlineServers/showTitle', True)
-        ignoredServers = config.get('hangar/onlineServers/ignoredServers', [])
+        ignoredServersLogin = config.get('login/onlineServers/ignoredServers', [])
+        ignoredServersHangar = config.get('hangar/onlineServers/ignoredServers', [])
 
         self.loginHosts = []
         self.hangarHosts = []
         if self.loginSection is not None:
             for (name, subSec) in self.loginSection.items():
                 host_name = subSec.readStrings('short_name')[0]
-                self.loginHosts.append(host_name)
-                if host_name not in ignoredServers:
+                if host_name not in ignoredServersLogin:
+                    self.loginHosts.append(host_name)
+                if host_name not in ignoredServersHangar:
                     self.hangarHosts.append(host_name)
             alphanumeric_sort(self.loginHosts)
             alphanumeric_sort(self.hangarHosts)
