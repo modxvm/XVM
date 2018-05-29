@@ -131,14 +131,14 @@ package com.xvm.lobby.online.OnlineServers
         {
             try
             {
-                var responseTimeList:Array = e.result as Array;
-                if (!responseTimeList.length)
+                var responseList:Array = e.result as Array;
+                if (!responseList.length)
                     return;
                 clearAllFields();
-                var len:int = responseTimeList.length;
+                var len:int = responseList.length;
                 var currentServer:String = Xfw.cmd(COMMAND_GETCURRENTSERVER);
                 for (var i:int = 0; i < len; ++i)
-                    appendRowToFields(makeStyledRow(responseTimeList[i], currentServer));
+                    appendRowToFields(makeStyledRow(responseList[i], currentServer));
             }
             catch (ex:Error)
             {
