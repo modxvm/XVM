@@ -57,11 +57,7 @@ class _Get_online(object):
         self.hangarHosts = []
         if self.loginSection is not None:
             for (name, subSec) in self.loginSection.items():
-                host_name = subSec.readStrings('name')[0]
-                if len(host_name) >= 13:
-                    host_name = subSec.readStrings('short_name')[0]
-                elif host_name.startswith('WOT '):
-                    host_name = host_name[4:]
+                host_name = subSec.readStrings('short_name')[0]
                 self.loginHosts.append(host_name)
                 if host_name not in ignoredServers:
                     self.hangarHosts.append(host_name)
