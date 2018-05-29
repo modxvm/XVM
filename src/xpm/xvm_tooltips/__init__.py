@@ -97,7 +97,7 @@ def _ToolTip_onCreateTypedTooltip(base, self, type, *args):
     except Exception as ex:
         err(traceback.format_exc())
 
-    if XVM_TOOLTIPS.HIDE not in tooltipId:
+    if args and XVM_TOOLTIPS.HIDE not in args[0]:
         _createTooltip(self, lambda:_onCreateTypedTooltip_callback(base, self, type, *args))
 
 @overrideMethod(ToolTip, 'onHideTooltip')
