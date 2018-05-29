@@ -24,15 +24,12 @@ package com.xvm.lobby.online.OnlineServers
         private static const QUALITY_POOR:String = "poor";
         private static const QUALITY_GOOD:String = "good";
         private static const QUALITY_GREAT:String = "great";
-        private static const CURRENT_SERVER:String = "current";
         private static const SERVER_COLOR:String = "server"; // actually it's server + delimiter
         private static const STYLE_NAME_PREFIX:String = "xvm_online_";
         private static const COMMAND_GETCURRENTSERVER:String = "xvm_online.getcurrentserver";
-        private static const COMMAND_AS_CURRENTSERVER:String = "xvm_online.as.currentserver";
 
         private var cfg:COnlineServers;
         private var fields:Vector.<TextField>;
-        private var currentServer:String;
         private var serverColor:Number;
         private var bgImage:UILoaderAlt;
 
@@ -40,7 +37,6 @@ package com.xvm.lobby.online.OnlineServers
         {
             mouseEnabled = false;
             this.cfg = cfg;
-            this.currentServer = currentServer;
             this.serverColor = parseInt(cfg.fontStyle.serverColor, 16);
             if (cfg.bgImage != null)
                 createBackgroundImage(cfg.bgImage);
@@ -50,8 +46,6 @@ package com.xvm.lobby.online.OnlineServers
             updatePositions();
             OnlineServers.addEventListener(update);
             this.addEventListener(Event.RESIZE, updatePositions, false, 0, true);
-            Xfw.addCommandListener(COMMAND_AS_CURRENTSERVER, currentServerCallback);
-            Xfw.cmd(COMMAND_GETCURRENTSERVER);
         }
 
         override protected function onDispose():void
@@ -62,11 +56,6 @@ package com.xvm.lobby.online.OnlineServers
         }
 
         // -- Private
-
-        private function currentServerCallback(name:String):void
-        {
-            currentServer = StringUtils.startsWith(name, "WOT ") ? name.slice(4) : name;
-        }
 
         private function get_x_offset():int
         {
@@ -147,8 +136,9 @@ package com.xvm.lobby.online.OnlineServers
                     return;
                 clearAllFields();
                 var len:int = responseTimeList.length;
+                var currentServer:String = Xfw.cmd(COMMAND_GETCURRENTSERVER);
                 for (var i:int = 0; i < len; ++i)
-                    appendRowToFields(makeStyledRow(responseTimeList[i]));
+                    appendRowToFields(makeStyledRow(responseTimeList[i], currentServer));
             }
             catch (ex:Error)
             {
@@ -173,7 +163,7 @@ package com.xvm.lobby.online.OnlineServers
             updatePositions();
         }
 
-        private function makeStyledRow(onlineObj:Object):String
+        private function makeStyledRow(onlineObj:Object, currentServer:String = null):String
         {
             var cluster:String = onlineObj.cluster;
             var people_online:String = onlineObj.people_online;
@@ -201,8 +191,8 @@ package com.xvm.lobby.online.OnlineServers
                 else
                     raw = cluster + cfg.delimiter + raw;
             //mark current server
-            if (onlineObj.cluster == currentServer && cfg.fontStyle.markCurrentServer != "none")
-                raw = "<span class='" + STYLE_NAME_PREFIX + CURRENT_SERVER + "'>" + raw + "</span>";
+            if (onlineObj.cluster == currentServer)
+                raw = cfg.currentServerFormat.replace("{server}", raw);
             return "<textformat leading='" + cfg.leading + "'><span class='" + STYLE_NAME_PREFIX + defineQuality(people_online) + "'>" + raw + "</span></textformat>";
         }
 
@@ -301,7 +291,6 @@ package com.xvm.lobby.online.OnlineServers
             css += createQualityCss(OnlineServersView.QUALITY_GOOD);
             css += createQualityCss(OnlineServersView.QUALITY_POOR);
             css += createQualityCss(OnlineServersView.QUALITY_BAD);
-            css += createCurrentServerCss();
             if (!isNaN(serverColor))
                 css += createServerColorCss();
 
@@ -317,19 +306,6 @@ package com.xvm.lobby.online.OnlineServers
             var color:Number = parseInt(cfg.fontStyle.color[quality], 16);
 
             return XfwUtils.createCSS(OnlineServersView.STYLE_NAME_PREFIX + quality, color, name, size, "left", bold, italic);
-        }
-
-        private function createCurrentServerCss():String
-        {
-            var css_string:String = "." + STYLE_NAME_PREFIX + CURRENT_SERVER + " {";
-            if(cfg.fontStyle.markCurrentServer == "bold" || cfg.fontStyle.markCurrentServer == "normal")
-                css_string += "font-weight: " + cfg.fontStyle.markCurrentServer + ";"
-            if(cfg.fontStyle.markCurrentServer == "italic" || cfg.fontStyle.markCurrentServer == "normal")
-                css_string += "font-style: " + cfg.fontStyle.markCurrentServer + ";"
-            if (cfg.fontStyle.markCurrentServer == "underline")
-                css_string += "text-decoration: underline;"
-            css_string += "}";
-            return css_string;
         }
 
         private function createServerColorCss():String

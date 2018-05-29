@@ -1,6 +1,10 @@
 ﻿XVM-7.6.3-dev:
   [АНГАР]
   * добавлена опция "hangar"/"restoreBattleType" - восстанавливать выбранный тип боя при переключении на другой сервер
+  * новая опция в "hangar"/"pingServers" и "hangar"/"onlineServers":
+      "currentServerFormat" - html формат для текущего сервера
+  * удалена опция в "hangar"/"pingServers" и "hangar"/"onlineServers":
+      "markCurrentServer" - заменена на "currentServerFormat"
 
   [РАЗНОЕ]
   * исправлено отображение всплывающих подсказок в бою

@@ -13,7 +13,6 @@ package com.xvm.types.cfg
         public var bold:*;
         public var italic:*;
         public var color: CPingServersFontStyleColors;
-        public var markCurrentServer:*;
         public var serverColor:*;
 
         public function clone():*

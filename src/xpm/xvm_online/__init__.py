@@ -7,7 +7,6 @@ class XVM_ONLINE_COMMAND(object):
     ONLINE = "xvm_online.online"
     AS_ONLINEDATA = "xvm_online.as.onlinedata"
     GETCURRENTSERVER = "xvm_online.getcurrentserver"
-    AS_CURRENTSERVER = "xvm_online.as.currentserver"
 
 
 #####################################################################
@@ -57,22 +56,10 @@ def onXfwCommand(cmd, *args):
             online.online()
             return (None, True)
         if cmd == XVM_ONLINE_COMMAND.GETCURRENTSERVER:
-            getCurrentServer()
-            return (None, True)
+            connectionMgr = dependency.instance(IConnectionManager)
+            serverName = connectionMgr.serverUserNameShort if connectionMgr.isConnected() else None
+            return (serverName, True)
     except Exception, ex:
         err(traceback.format_exc())
         return (None, True)
     return (None, False)
-
-def getCurrentServer(*args, **kwargs):
-    connectionMgr = dependency.instance(IConnectionManager)
-    as_xfw_cmd(XVM_ONLINE_COMMAND.AS_CURRENTSERVER, connectionMgr.serverUserName if len(connectionMgr.serverUserName) < 13 else connectionMgr.serverUserNameShort)
-
-
-#####################################################################
-# handlers
-
-@registerEvent(LobbyHeaderMeta, 'as_setServerS')
-def LobbyHeaderMeta_as_setServerS(*args, **kwargs):
-    getCurrentServer()
-

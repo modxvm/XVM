@@ -28,6 +28,7 @@ package com.xvm.types.cfg
         public var errorString:String;
         public var ignoredServers:Array;
         public var fontStyle:CPingServersFontStyle;
+        public var currentServerFormat:String;
         public var threshold:CPingServersThreshold;
         public var shadow:CShadow;
 

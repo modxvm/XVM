@@ -1,6 +1,10 @@
 ﻿XVM-7.6.3-dev:
   [HANGAR]
   * added option "hangar"/"restoreBattleType" - restore selected battle type on switching to another server
+  * added option in "hangar"/"pingServers" and "hangar"/"onlineServers":
+      "currentServerFormat" - html format for current server
+  * removed option in "hangar"/"pingServers" and "hangar"/"onlineServers":
+      "markCurrentServer" - replaced with "currentServerFormat"
 
   [MISC]
   * fixed display of tooltips in battle

@@ -23,15 +23,12 @@ package com.xvm.lobby.ping.PingServers
         private static const QUALITY_POOR:String = "poor";
         private static const QUALITY_GOOD:String = "good";
         private static const QUALITY_GREAT:String = "great";
-        private static const CURRENT_SERVER:String = "current";
         private static const SERVER_COLOR:String = "server"; // actually it's server + delimiter
         private static const STYLE_NAME_PREFIX:String = "xvm_ping_";
         private static const COMMAND_GETCURRENTSERVER:String = "xvm_ping.getcurrentserver";
-        private static const COMMAND_AS_CURRENTSERVER:String = "xvm_ping.as.currentserver";
 
         private var cfg:CPingServers;
         private var fields:Vector.<TextField>;
-        private var currentServer:String;
         private var serverColor:Number;
         private var bgImage:UILoaderAlt;
 
@@ -39,7 +36,6 @@ package com.xvm.lobby.ping.PingServers
         {
             mouseEnabled = false;
             this.cfg = cfg;
-            this.currentServer = currentServer;
             this.serverColor = parseInt(cfg.fontStyle.serverColor, 16);
             if (cfg.bgImage != null)
                 createBackgroundImage(cfg.bgImage);
@@ -49,8 +45,6 @@ package com.xvm.lobby.ping.PingServers
             updatePositions();
             PingServers.addEventListener(update);
             this.addEventListener(Event.RESIZE, updatePositions, false, 0, true);
-            Xfw.addCommandListener(COMMAND_AS_CURRENTSERVER, currentServerCallback);
-            Xfw.cmd(COMMAND_GETCURRENTSERVER);
         }
 
         override protected function onDispose():void
@@ -61,11 +55,6 @@ package com.xvm.lobby.ping.PingServers
         }
 
         // -- Private
-
-        private function currentServerCallback(name:String):void
-        {
-            currentServer = StringUtils.startsWith(name, "WOT ") ? name.slice(4) : name;
-        }
 
         private function get_x_offset():int
         {
@@ -146,8 +135,9 @@ package com.xvm.lobby.ping.PingServers
                     return;
                 clearAllFields();
                 var len:int = responseTimeList.length;
+                var currentServer:String = Xfw.cmd(COMMAND_GETCURRENTSERVER);
                 for (var i:int = 0; i < len; ++i)
-                    appendRowToFields(makeStyledRow(responseTimeList[i]));
+                    appendRowToFields(makeStyledRow(responseTimeList[i], currentServer));
             }
             catch (ex:Error)
             {
@@ -172,7 +162,7 @@ package com.xvm.lobby.ping.PingServers
             updatePositions();
         }
 
-        private function makeStyledRow(pingObj:Object):String
+        private function makeStyledRow(pingObj:Object, currentServer:String = null):String
         {
             var cluster:String = pingObj.cluster;
             var time:String = pingObj.time;
@@ -197,8 +187,8 @@ package com.xvm.lobby.ping.PingServers
                 else
                     raw = cluster + cfg.delimiter + raw;
             //mark current server
-            if (pingObj.cluster == currentServer && cfg.fontStyle.markCurrentServer != "none")
-                raw = "<span class='" + STYLE_NAME_PREFIX + CURRENT_SERVER + "'>" + raw + "</span>";
+            if (pingObj.cluster == currentServer)
+                raw = cfg.currentServerFormat.replace("{server}", raw);
             return "<textformat leading='" + cfg.leading + "'><span class='" + STYLE_NAME_PREFIX + defineQuality(time) + "'>" + raw + "</span></textformat>";
         }
 
@@ -297,7 +287,6 @@ package com.xvm.lobby.ping.PingServers
             css += createQualityCss(PingServersView.QUALITY_GOOD)
             css += createQualityCss(PingServersView.QUALITY_POOR);
             css += createQualityCss(PingServersView.QUALITY_BAD);
-            css += createCurrentServerCss()
             if (!isNaN(serverColor))
                 css += createServerColorCss();
 
@@ -313,19 +302,6 @@ package com.xvm.lobby.ping.PingServers
             var color:Number = parseInt(cfg.fontStyle.color[quality], 16);
 
             return XfwUtils.createCSS(PingServersView.STYLE_NAME_PREFIX + quality, color, name, size, "left", bold, italic);
-        }
-
-        private function createCurrentServerCss():String
-        {
-            var css_string:String = "." + STYLE_NAME_PREFIX + CURRENT_SERVER + " {";
-            if(cfg.fontStyle.markCurrentServer == "bold" || cfg.fontStyle.markCurrentServer == "normal")
-                css_string += "font-weight: " + cfg.fontStyle.markCurrentServer + ";"
-            if(cfg.fontStyle.markCurrentServer == "italic" || cfg.fontStyle.markCurrentServer == "normal")
-                css_string += "font-style: " + cfg.fontStyle.markCurrentServer + ";"
-            if (cfg.fontStyle.markCurrentServer == "underline")
-                css_string += "text-decoration: underline;"
-            css_string += "}";
-            return css_string;
         }
 
         private function createServerColorCss():String
