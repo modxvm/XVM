@@ -17,7 +17,8 @@ import threading
 
 import BigWorld
 import ResMgr
-from gui.shared.utils.HangarSpace import g_hangarSpace
+from helpers import dependency
+from skeletons.gui.shared.utils import IHangarSpace
 
 from xfw import *
 from xfw.constants import URLS
@@ -31,6 +32,7 @@ import xvm_main.python.xvmapi as xvmapi
 #############################
 
 class _Get_online(object):
+    hangarSpace = dependency.descriptor(IHangarSpace)
 
     def __init__(self):
         self.loginSection = None
@@ -126,10 +128,10 @@ class _Get_online(object):
 
             res = []
             best_online = 0
-            for host in (self.hangarHosts if g_hangarSpace.inited else self.loginHosts):
+            for host in (self.hangarHosts if self.hangarSpace.inited else self.loginHosts):
                 best_online = max(best_online, int(data_dict.get(host, 0)))
-                res.append({'cluster': host, 'people_online': data_dict.get(host, self.hangarErrorString if g_hangarSpace.inited else self.loginErrorString)})
-            if (g_hangarSpace.inited and self.hangarShowTitle) or (not g_hangarSpace.inited and self.loginShowTitle):
+                res.append({'cluster': host, 'people_online': data_dict.get(host, self.hangarErrorString if self.hangarSpace.inited else self.loginErrorString)})
+            if (self.hangarSpace.inited and self.hangarShowTitle) or (not self.hangarSpace.inited and self.loginShowTitle):
                 res.insert(0, {'cluster': '###best_online###', 'people_online': best_online})  # will appear first, key is replaced by localized "Online"
         except Exception, ex:
             err('_getOnlineAsync() exception: ' + traceback.format_exc())
