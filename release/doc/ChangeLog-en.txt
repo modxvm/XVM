@@ -1,4 +1,4 @@
-﻿XVM-7.6.3-dev:
+﻿XVM-7.6.3:
   [HANGAR]
   * added option "hangar"/"restoreBattleType" - restore selected battle type on switching to another server
   * added option in "hangar"/"pingServers" and "hangar"/"onlineServers":

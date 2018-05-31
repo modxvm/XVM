@@ -1,4 +1,4 @@
-﻿XVM-7.6.3-dev:
+﻿XVM-7.6.3:
   [АНГАР]
   * добавлена опция "hangar"/"restoreBattleType" - восстанавливать выбранный тип боя при переключении на другой сервер
   * новая опция в "hangar"/"pingServers" и "hangar"/"onlineServers":
