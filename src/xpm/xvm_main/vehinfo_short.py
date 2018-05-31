@@ -26,7 +26,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 28.05.2018
+    # Last update: 31.05.2018
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -201,7 +201,7 @@ _data = {
     "germany:G117_Toldi_III_bootcamp":       'Told3',
     "germany:G118_VK4503":                   '4503',
     "germany:G119_Panzer58":                 'Pz58',
-    "germany:G119_Panzer58_BF":              'Pz58bf',    
+    "germany:G119_Panzer58_BF":              'Pz58bf',
     "germany:G119_Pz58_Mutz":                'mutz',
     "germany:G11_Bison_I":                   'Bison',
     "germany:G120_M41_90":                   'M41·90',
@@ -354,7 +354,7 @@ _data = {
     "japan:J29_Nameless":                    'Namel',
     "japan:J30_Edelweiss":                   'Edelw',
     "poland:Pl03_PzV_Poland":                'Pudel',
-    #"poland:Pl08_Czolg_T_wz51":              'CzTwz51', # Add in 1.0.2
+    "poland:Pl08_Czolg_T_wz51":              'CzTwz51',
     "sweden:S01_Strv_74_A2":                 'm42·57',
     "sweden:S02_Strv_M42":                   'm/42',
     "sweden:S03_Strv_M38":                   'm/38',
@@ -495,7 +495,6 @@ _data = {
     "usa:A120_M48A5":                        'M48Pt',
     "usa:A120_M48A5_IGR":                    'M48Pt',
     "usa:A12_T32":                           'T32',
-    "usa:A12_T32_FL":                        'T32·fl', # Delete in 1.0.2
     "usa:A13_T34_hvy":                       'T34',
     "usa:A13_T34_hvy_BF":                    'T34bf',
     "usa:A13_T34_hvy_IGR":                   'T34',
@@ -624,7 +623,7 @@ _data = {
     "ussr:R13_KV-1s":                        'Kv·1s',
     "ussr:R140_M4_Loza":                     'M4·Lo',
     "ussr:R143_T_29":                        't·29',
-    #"ussr:R144_K_91":                        'k91', # Add in 1.0.2
+    "ussr:R144_K_91":                        'k91',
     "ussr:R145_Object_705_A":                'obj705a',
     "ussr:R146_STG":                         'stg',
     "ussr:R146_STG_Tday":                    'gvard',
@@ -634,8 +633,8 @@ _data = {
     "ussr:R151_Object_257_2":                'obj257',
     "ussr:R152_KV2_W":                       'Kv·2p',
     "ussr:R153_Object_705":                  'obj705',
-    #"ussr-R154_T_34E_1943":                  't34·e', # Add in 1.0.2
-    #"ussr-R155_Object_277":                  'obj777', # Add in 1.0.2
+    "ussr-R154_T_34E_1943":                  't34·e',
+    "ussr-R155_Object_277":                  'obj777',
     "ussr:R15_S-51":                         'S·51',
     "ussr:R16_SU-18":                        'Su·18',
     "ussr:R17_SU-100":                       'Su100',
@@ -644,7 +643,6 @@ _data = {
     "ussr:R19_IS-3":                         'Is·3',
     "ussr:R19_IS-3_IGR":                     'Is·3',
     "ussr:R20_T-44":                         't44',
-    "ussr:R20_T-44_FL":                      't44·fl', # Delete in 1.0.2
     "ussr:R20_T-44_IGR":                     't44',
     "ussr:R22_T-46":                         't46',
     "ussr:R22_T-46_bootcamp":                't46',
