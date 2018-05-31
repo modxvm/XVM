@@ -62,11 +62,11 @@
 
     // Supported version of the game.
     // Поддерживаемая версия игры.
-    "gameVersion": "1.0.1.1",
+    "gameVersion": "1.0.2",
 
     // The minimum required version of the XVM mod.
     // Минимально необходимая версия мода XVM.
-    "modMinVersion": "7.6.3"
+    "modMinVersion": "7.6.4"
   },
 
   // Parameters for login screen.

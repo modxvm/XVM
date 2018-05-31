@@ -1,4 +1,7 @@
-﻿XVM-7.6.3:
+﻿XVM-7.6.4:
+  * World of Tanks 1.0.2
+
+XVM-7.6.3:
   [HANGAR]
   * added option "hangar"/"restoreBattleType" - restore selected battle type on switching to another server
   * added option in "hangar"/"pingServers" and "hangar"/"onlineServers":
