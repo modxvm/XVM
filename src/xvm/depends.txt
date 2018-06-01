@@ -9,8 +9,6 @@ xfw_shared.swc <- xfw_shared
 xfw.swf,xfw.swc<- xfw
                   + wg_lobby.swc (ext)    TODO: wg_app.swc
                   + xfw_shared.swc (inc)
-xfwfonts.swf   <- xfwfonts
-
 
 XVM:
 
