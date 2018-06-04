@@ -180,7 +180,7 @@
       "leading": 2,
       // layer - "bottom", "normal" (default), "top".
       // слой - "bottom", "normal" (по-умолчанию), "top".
-      "layer": "top",
+      "layer": "normal",
       // true - show title "Ping"
       // true - показывать заголовок "Пинг"
       "showTitle": true,
@@ -288,7 +288,7 @@
       "leading": 0,
       // layer - "bottom", "normal" (default), "top".
       // слой - "bottom", "normal" (по-умолчанию), "top".
-      "layer": "top",
+      "layer": "normal",
       // true - show title "Online"
       // true - показывать заголовок "Онлайн"
       "showTitle": true,
