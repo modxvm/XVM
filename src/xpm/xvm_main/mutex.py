@@ -26,7 +26,7 @@ import config
 
 #WGC resets WoT mutex so we should perform mutex kill after wgc_api.dll code execution 
 
-@registerEvent(LoginView, '_LoginView__tryWGCLogin')
+#@registerEvent(LoginView, '_LoginView__tryWGCLogin')
 def kill_wotclient_mutex(self):
     try:
         if config.get('tweaks/allowMultipleWotInstances', False):
