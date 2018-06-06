@@ -14,7 +14,8 @@ import traceback
 import BigWorld
 import Settings
 from predefined_hosts import g_preDefinedHosts
-from gui.shared.utils.HangarSpace import g_hangarSpace
+from helpers import dependency
+from skeletons.connection_mgr import IConnectionManager
 
 from xfw import *
 
@@ -31,6 +32,7 @@ DUMMY_ADDRESS = 'localhost' # for distinguishing our requests
 #############################
 
 class _Ping(object):
+    hangarSpace = dependency.descriptor(IHangarSpace)
 
     def __init__(self):
         self.url_to_serverName = {}
@@ -71,7 +73,7 @@ class _Ping(object):
                 else:
                     ping_results[server_name] = smoothed_ping
                     best_ping = min(best_ping, smoothed_ping)
-            if (g_hangarSpace.spaceInited and config.get('hangar/pingServers/showTitle')) or (not g_hangarSpace.spaceInited and config.get('login/pingServers/showTitle')):
+            if (self.hangarSpace.spaceInited and config.get('hangar/pingServers/showTitle')) or (not self.hangarSpace.spaceInited and config.get('login/pingServers/showTitle')):
                 ping_results['###best_ping###'] = best_ping # will be first in sorting by server, key is replaced by localized "Ping"
             as_xfw_cmd(XVM_PING_COMMAND.AS_PINGDATA, ping_results)
         except Exception as ex:

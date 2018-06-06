@@ -25,12 +25,12 @@ from xfw import *
 import config
 
 #WGC resets WoT mutex so we should perform mutex kill after wgc_api.dll code execution 
-
-@registerEvent(LoginView, '_LoginView__tryWGCLogin')
-def kill_wotclient_mutex(self):
+@registerEvent(LoginView, 'onLogin')
+def kill_wotclient_mutex(self, *args):
     try:
         if config.get('tweaks/allowMultipleWotInstances', False):
             import xfw_mutex.python as mutex
             mutex.allow_multiple_wot()
     except Exception:
         traceback.print_exc()
+

@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 28.05.2018
+    // Last update: 31.05.2018
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -332,7 +332,7 @@
     "japan-J29_Nameless":                    {"name": null, "short": null},
     "japan-J30_Edelweiss":                   {"name": null, "short": null},
     "poland-Pl03_PzV_Poland":                {"name": null, "short": null},
-    //"poland-Pl08_Czolg_T_wz51":              {"name": null, "short": null}, // Add in 1.0.2
+    "poland-Pl08_Czolg_T_wz51":              {"name": null, "short": null},
     "sweden-S01_Strv_74_A2":                 {"name": null, "short": null},
     "sweden-S02_Strv_M42":                   {"name": null, "short": null},
     "sweden-S03_Strv_M38":                   {"name": null, "short": null},
@@ -473,7 +473,6 @@
     "usa-A120_M48A5":                        {"name": null, "short": null},
     "usa-A120_M48A5_IGR":                    {"name": null, "short": null},
     "usa-A12_T32":                           {"name": null, "short": null},
-    "usa-A12_T32_FL":                        {"name": null, "short": null}, // Delete in 1.0.2
     "usa-A13_T34_hvy":                       {"name": null, "short": null},
     "usa-A13_T34_hvy_BF":                    {"name": null, "short": null},
     "usa-A13_T34_hvy_IGR":                   {"name": null, "short": null},
@@ -602,7 +601,7 @@
     "ussr-R13_KV-1s":                        {"name": null, "short": null},
     "ussr-R140_M4_Loza":                     {"name": null, "short": null},
     "ussr-R143_T_29":                        {"name": null, "short": null},
-    //"ussr-R144_K_91":                        {"name": null, "short": null}, // Add in 1.0.2
+    "ussr-R144_K_91":                        {"name": null, "short": null},
     "ussr-R145_Object_705_A":                {"name": null, "short": null},
     "ussr-R146_STG":                         {"name": null, "short": null},
     "ussr-R146_STG_Tday":                    {"name": null, "short": null},
@@ -612,8 +611,8 @@
     "ussr-R151_Object_257_2":                {"name": null, "short": null},
     "ussr-R152_KV2_W":                       {"name": null, "short": null},
     "ussr-R153_Object_705":                  {"name": null, "short": null},
-    //"ussr-R154_T_34E_1943":                  {"name": null, "short": null}, // Add in 1.0.2
-    //"ussr-R155_Object_277":                  {"name": null, "short": null}, // Add in 1.0.2
+    "ussr-R154_T_34E_1943":                  {"name": null, "short": null},
+    "ussr-R155_Object_277":                  {"name": null, "short": null},
     "ussr-R15_S-51":                         {"name": null, "short": null},
     "ussr-R16_SU-18":                        {"name": null, "short": null},
     "ussr-R17_SU-100":                       {"name": null, "short": null},
@@ -622,7 +621,6 @@
     "ussr-R19_IS-3":                         {"name": null, "short": null},
     "ussr-R19_IS-3_IGR":                     {"name": null, "short": null},
     "ussr-R20_T-44":                         {"name": null, "short": null},
-    "ussr-R20_T-44_FL":                      {"name": null, "short": null}, // Delete in 1.0.2
     "ussr-R20_T-44_IGR":                     {"name": null, "short": null},
     "ussr-R22_T-46":                         {"name": null, "short": null},
     "ussr-R22_T-46_bootcamp":                {"name": null, "short": null},
