@@ -28,6 +28,7 @@ package com.xvm.types.cfg
         public var rankBadgeXOffsetLeft:*;
         public var rankBadgeXOffsetRight:*;
         public var rankBadgeWidth:*;
+        public var rankBadgeAlpha:*;
         public var nickXOffsetLeft:*;
         public var nickXOffsetRight:*;
         public var nickMinWidth:*;

@@ -1,4 +1,7 @@
-﻿XVM-7.6.3:
+﻿  * добавлены опция в секциях режимов "playersPanel":
+      "rankBadgeAlpha" - прозрачность бейджа ранга
+
+XVM-7.6.3:
   [АНГАР]
   * добавлена опция "hangar"/"restoreBattleType" - восстанавливать выбранный тип боя при переключении на другой сервер
   * новая опция в "hangar"/"pingServers" и "hangar"/"onlineServers":

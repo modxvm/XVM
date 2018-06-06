@@ -457,6 +457,7 @@ package com.xvm.battle.playersPanel
                 }
                 updateVehicleLevel();
                 updateSquadIcon();
+                updateBadgeIcon();
             }
         }
 
@@ -500,6 +501,11 @@ package com.xvm.battle.playersPanel
             {
                 ui.dynamicSquad.squadIcon.alpha = Macros.FormatNumber(mcfg.squadIconAlpha, currentPlayerState, 100) / 100.0;
             }
+        }
+
+        private function updateBadgeIcon():void
+        {
+            ui.badgeIcon.alpha = Macros.FormatNumber(mcfg.rankBadgeAlpha, currentPlayerState, currentPlayerState.isAlive ? 100 : 70) / 100.0;
         }
 
         // update positions
