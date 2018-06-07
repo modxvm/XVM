@@ -1,8 +1,9 @@
 ﻿﻿XVM-7.6.4:
+  [GENERAL]
   * World of Tanks 1.0.2
 
   [BATTLE]
-  * added option in the "playersPanel" modes sections:
+  * added options in the "playersPanel" modes sections:
       "rankBadgeAlpha" - transparency of the rank badge
 
 XVM-7.6.3:
