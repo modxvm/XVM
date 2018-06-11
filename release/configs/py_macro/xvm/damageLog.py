@@ -794,6 +794,12 @@ _logAltBackground = DamageLog(SECTION_LOG_ALT_BACKGROUND)
 _lastHit = LastHit(SECTION_LASTHIT)
 
 
+@registerEvent(PlayerAvatar, 'onBecomePlayer')
+def _PlayerAvatar_onBecomePlayer(self):
+    global isEpicBattle
+    isEpicBattle = self.arenaGuiType == ARENA_GUI_TYPE.EPIC_BATTLE
+
+
 @overrideMethod(DamageLogPanel, '_addToTopLog')
 def DamageLogPanel_addToTopLog(base, self, value, actionTypeImg, vehicleTypeImg, vehicleName, shellTypeStr, shellTypeBG):
     if config.get('damageLog/disabledDetailStats') and config.get(DAMAGE_LOG_ENABLED) and not isEpicBattle:
@@ -884,10 +890,7 @@ def updateVehicleHealth(self, vehicleID, health, deathReasonID, isCrewActive, is
 @registerEvent(Vehicle, 'onEnterWorld')
 def Vehicle_onEnterWorld(self, prereqs):
     if self.isPlayerVehicle and config.get(DAMAGE_LOG_ENABLED):
-        global on_fire, damageLogConfig, autoReloadConfig, chooseRating, isEpicBattle
-
-        isEpicBattle = (BigWorld.player().arenaGuiType == ARENA_GUI_TYPE.EPIC_BATTLE)
-
+        global on_fire, damageLogConfig, autoReloadConfig, chooseRating
         scale = config.networkServicesSettings.scale
         name = config.networkServicesSettings.rating
         r = '{}_{}'.format(scale, name)
