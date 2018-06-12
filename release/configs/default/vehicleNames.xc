@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 31.05.2018
+    // Last update: 12.06.2018
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -437,6 +437,7 @@
     "uk-GB92_FV217":                         {"name": null, "short": null},
     "uk-GB93_Caernarvon_AX":                 {"name": null, "short": null},
     "uk-GB94_Centurion_Mk5-1_RAAC":          {"name": null, "short": null},
+    "uk-GB95_Ekins_Firefly_M4A4":            {"name": null, "short": null},
     "usa-A01_T1_Cunningham":                 {"name": null, "short": null},
     "usa-A01_T1_Cunningham_bot":             {"name": null, "short": null},
     "usa-A02_M2_lt":                         {"name": null, "short": null},
@@ -472,6 +473,7 @@
     "usa-A11_T29_IGR":                       {"name": null, "short": null},
     "usa-A120_M48A5":                        {"name": null, "short": null},
     "usa-A120_M48A5_IGR":                    {"name": null, "short": null},
+    "usa-A121_M26_Cologne":                  {"name": null, "short": null},
     "usa-A12_T32":                           {"name": null, "short": null},
     "usa-A13_T34_hvy":                       {"name": null, "short": null},
     "usa-A13_T34_hvy_BF":                    {"name": null, "short": null},
@@ -597,7 +599,7 @@
     "ussr-R134_Object_252K":                 {"name": null, "short": null},
     "ussr-R134_Object_252U":                 {"name": null, "short": null},
     "ussr-R135_T_103":                       {"name": null, "short": null},
-    "ussr-R139_IS_2_Sh":                     {"name": null, "short": null},
+    "ussr-R139_IS_M":                        {"name": null, "short": null},
     "ussr-R13_KV-1s":                        {"name": null, "short": null},
     "ussr-R140_M4_Loza":                     {"name": null, "short": null},
     "ussr-R143_T_29":                        {"name": null, "short": null},

@@ -26,7 +26,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 31.05.2018
+    # Last update: 12.06.2018
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -459,6 +459,7 @@ _data = {
     "uk:GB92_FV217":                         'Badger',
     "uk:GB93_Caernarvon_AX":                 'CaerAX',
     "uk:GB94_Centurion_Mk5-1_RAAC":          'Sent5/1',
+    "uk:GB95_Ekins_Firefly_M4A4":            'FirefVC',
     "usa:A01_T1_Cunningham":                 'T1',
     "usa:A01_T1_Cunningham_bot":             'T1',
     "usa:A02_M2_lt":                         'M2lt',
@@ -494,6 +495,7 @@ _data = {
     "usa:A11_T29_IGR":                       'T29',
     "usa:A120_M48A5":                        'M48Pt',
     "usa:A120_M48A5_IGR":                    'M48Pt',
+    "usa:A121_M26_Cologne":                  'Eagle7',
     "usa:A12_T32":                           'T32',
     "usa:A13_T34_hvy":                       'T34',
     "usa:A13_T34_hvy_BF":                    'T34bf',
@@ -619,7 +621,7 @@ _data = {
     "ussr:R134_Object_252K":                 'zashch',
     "ussr:R134_Object_252U":                 'obj252u',
     "ussr:R135_T_103":                       't103',
-    "ussr:R139_IS_2_Sh":                     'Is·M',
+    "ussr:R139_IS_M":                        'Is·M',
     "ussr:R13_KV-1s":                        'Kv·1s',
     "ussr:R140_M4_Loza":                     'M4·Lo',
     "ussr:R143_T_29":                        't·29',
