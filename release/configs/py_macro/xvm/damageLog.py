@@ -13,6 +13,7 @@ from Vehicle import Vehicle
 from VehicleEffects import DamageFromShotDecoder
 from constants import ITEM_DEFS_PATH, DAMAGE_INFO_CODES, ARENA_GUI_TYPE
 from gui.Scaleform.daapi.view.battle.shared.damage_log_panel import DamageLogPanel
+from gui.Scaleform.daapi.view.battle.shared.battle_loading import BattleLoading
 from gui.Scaleform.daapi.view.meta.DamagePanelMeta import DamagePanelMeta
 from gui.shared.utils.TimeInterval import TimeInterval
 from items import vehicles, _xml
@@ -35,7 +36,8 @@ damageLogConfig = {}
 macros = None
 chooseRating = None
 isImpact = False
-isEpicBattle = True
+isShowDamageLog = True
+
 
 ATTACK_REASONS = {
     0: 'shot',
@@ -46,6 +48,14 @@ ATTACK_REASONS = {
     5: 'drowning',
     6: 'gas_attack',
     7: 'overturn',
+    8: 'manual',
+    9: 'artillery_protection',
+    10: 'artillery_sector',
+    11: 'bombers',
+    12: 'recovery',
+    13: 'artillery_eq',
+    14: 'bomber_eq',
+    15: 'none',
     24: 'art_attack',
     25: 'air_strike'
 }
@@ -794,57 +804,53 @@ _logAltBackground = DamageLog(SECTION_LOG_ALT_BACKGROUND)
 _lastHit = LastHit(SECTION_LASTHIT)
 
 
+def _isShowDamageLog(player):
+    global isShowDamageLog
+    isShowDamageLog = config.get(DAMAGE_LOG_ENABLED) and not (player.arenaGuiType == ARENA_GUI_TYPE.EPIC_BATTLE)
+
 @registerEvent(PlayerAvatar, 'onBecomePlayer')
 def _PlayerAvatar_onBecomePlayer(self):
-    global isEpicBattle
-    isEpicBattle = self.arenaGuiType == ARENA_GUI_TYPE.EPIC_BATTLE
-
+    _isShowDamageLog(self)
 
 @overrideMethod(DamageLogPanel, '_addToTopLog')
 def DamageLogPanel_addToTopLog(base, self, value, actionTypeImg, vehicleTypeImg, vehicleName, shellTypeStr, shellTypeBG):
-    if config.get('damageLog/disabledDetailStats') and config.get(DAMAGE_LOG_ENABLED) and not isEpicBattle:
-        return
-    else:
+    if not (config.get('damageLog/disabledDetailStats') and isShowDamageLog):
         return base(self, value, actionTypeImg, vehicleTypeImg, vehicleName, shellTypeStr, shellTypeBG)
 
 
 @overrideMethod(DamageLogPanel, '_addToBottomLog')
 def DamageLogPanel_addToBottomLog(base, self, value, actionTypeImg, vehicleTypeImg, vehicleName, shellTypeStr, shellTypeBG):
-    if config.get('damageLog/disabledDetailStats') and config.get(DAMAGE_LOG_ENABLED) and not isEpicBattle:
-        return
-    else:
+    if not (config.get('damageLog/disabledDetailStats') and isShowDamageLog):
         return base(self, value, actionTypeImg, vehicleTypeImg, vehicleName, shellTypeStr, shellTypeBG)
 
 
 @overrideMethod(DamageLogPanel, 'as_summaryStatsS')
 def DamageLogPanel_as_summaryStatsS(base, self, damage, blocked, assist, stun):
-    if config.get('damageLog/disabledSummaryStats') and config.get(DAMAGE_LOG_ENABLED) and not isEpicBattle:
-        return
-    else:
+    if not (config.get('damageLog/disabledSummaryStats') and isShowDamageLog):
         return base(self, damage, blocked, assist, stun)
 
 
 @overrideMethod(DamageLogPanel, 'as_updateSummaryDamageValueS')
 def as_updateSummaryDamageValueS(base, self, value):
-    if not (config.get('damageLog/disabledSummaryStats') and config.get(DAMAGE_LOG_ENABLED)) or isEpicBattle:
+    if not (config.get('damageLog/disabledSummaryStats') and isShowDamageLog):
         return base(self, value)
 
 
 @overrideMethod(DamageLogPanel, 'as_updateSummaryBlockedValueS')
 def as_updateSummaryBlockedValueS(base, self, value):
-    if not (config.get('damageLog/disabledSummaryStats') and config.get(DAMAGE_LOG_ENABLED)) or isEpicBattle:
+    if not (config.get('damageLog/disabledSummaryStats') and isShowDamageLog):
         return base(self, value)
 
 
 @overrideMethod(DamageLogPanel, 'as_updateSummaryAssistValueS')
 def as_updateSummaryAssistValueS(base, self, value):
-    if not (config.get('damageLog/disabledSummaryStats') and config.get(DAMAGE_LOG_ENABLED)) or isEpicBattle:
+    if not (config.get('damageLog/disabledSummaryStats') and isShowDamageLog):
         return base(self, value)
 
 
 @overrideMethod(DamageLogPanel, 'as_updateSummaryStunValueS')
 def as_updateSummaryStunValueS(base, self, value):
-    if not (config.get('damageLog/disabledSummaryStats') and config.get(DAMAGE_LOG_ENABLED)) or isEpicBattle:
+    if not (config.get('damageLog/disabledSummaryStats') and isShowDamageLog):
         return base(self, value)
 
 
@@ -854,7 +860,7 @@ def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
     if not isImpact and self.isPlayerVehicle:
         isImpact = True
         as_event('ON_IMPACT')
-    if config.get(DAMAGE_LOG_ENABLED) and not isEpicBattle:
+    if isShowDamageLog:
         if self.isPlayerVehicle and data.data['isAlive']:
             data.onHealthChanged(self, newHealth, attackerID, attackReasonID)
             if newHealth <= 0:
@@ -871,7 +877,7 @@ def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
 @registerEvent(PlayerAvatar, 'showVehicleDamageInfo')
 def PlayerAvatar_showVehicleDamageInfo(self, vehicleID, damageIndex, extraIndex, entityID, equipmentID):
     global isImpact
-    if config.get(DAMAGE_LOG_ENABLED) and not isEpicBattle:
+    if isShowDamageLog:
         if not isImpact and (self.playerVehicleID == vehicleID):
             damageCode = DAMAGE_INFO_CODES[damageIndex]
             isImpact = damageCode not in ['DEVICE_REPAIRED_TO_CRITICAL', 'DEVICE_REPAIRED', 'TANKMAN_RESTORED', 'FIRE_STOPPED']
@@ -883,7 +889,7 @@ def PlayerAvatar_showVehicleDamageInfo(self, vehicleID, damageIndex, extraIndex,
 
 @registerEvent(PlayerAvatar, 'updateVehicleHealth')
 def updateVehicleHealth(self, vehicleID, health, deathReasonID, isCrewActive, isRespawn):
-    if (vehicleID == self.playerVehicleID) and config.get(DAMAGE_LOG_ENABLED) and not isEpicBattle:
+    if (vehicleID == self.playerVehicleID) and isShowDamageLog:
         data.data['isDamage'] = (max(0, health) != data.data['oldHealth'])
 
 
@@ -891,6 +897,7 @@ def updateVehicleHealth(self, vehicleID, health, deathReasonID, isCrewActive, is
 def Vehicle_onEnterWorld(self, prereqs):
     if self.isPlayerVehicle and config.get(DAMAGE_LOG_ENABLED):
         global on_fire, damageLogConfig, autoReloadConfig, chooseRating
+        _isShowDamageLog(BigWorld.player())
         scale = config.networkServicesSettings.scale
         name = config.networkServicesSettings.rating
         r = '{}_{}'.format(scale, name)
@@ -913,7 +920,7 @@ def Vehicle_showDamageFromShot(self, attackerID, points, effectsIndex, damageFac
     if not isImpact and self.isPlayerVehicle:
         isImpact = True
         as_event('ON_IMPACT')
-    if self.isPlayerVehicle and data.data['isAlive'] and config.get(DAMAGE_LOG_ENABLED) and not isEpicBattle:
+    if self.isPlayerVehicle and data.data['isAlive'] and isShowDamageLog:
         data.showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor)
 
 
@@ -923,13 +930,13 @@ def Vehicle_showDamageFromExplosion(self, attackerID, center, effectsIndex, dama
     if not isImpact and self.isPlayerVehicle:
         isImpact = True
         as_event('ON_IMPACT')
-    if self.isPlayerVehicle and data.data['isAlive'] and config.get(DAMAGE_LOG_ENABLED) and not isEpicBattle:
+    if self.isPlayerVehicle and data.data['isAlive'] and isShowDamageLog:
         data.showDamageFromExplosion(self, attackerID, center, effectsIndex, damageFactor)
 
 
 @registerEvent(Vehicle, 'updateStunInfo')
 def Vehicle_updateStunInfo(self):
-    if self.isPlayerVehicle and config.get(DAMAGE_LOG_ENABLED) and not isEpicBattle:
+    if self.isPlayerVehicle and isShowDamageLog:
         stunDuration = self.stunInfo - BigWorld.serverTime() if self.stunInfo else None
         if stunDuration is not None:
             data.updateStunInfo(self, stunDuration)
@@ -938,7 +945,7 @@ def Vehicle_updateStunInfo(self):
 @registerEvent(DamagePanelMeta, 'as_setFireInVehicleS')
 def DamagePanelMeta_as_setFireInVehicleS(self, isInFire):
     global on_fire
-    if config.get(DAMAGE_LOG_ENABLED) and not isEpicBattle:
+    if isShowDamageLog:
         on_fire = 100 if isInFire else 0
         as_event('ON_FIRE')
 
@@ -959,7 +966,7 @@ def PlayerAvatar__destroyGUI(self):
 @registerEvent(PlayerAvatar, 'handleKey')
 def PlayerAvatar_handleKey(self, isDown, key, mods):
     global isDownAlt
-    if config.get(DAMAGE_LOG_ENABLED) and not isEpicBattle:
+    if isShowDamageLog:
         hotkey = config.get('hotkeys/damageLogAltMode')
         if hotkey['enabled'] and (key == hotkey['keyCode']):
             if isDown:
