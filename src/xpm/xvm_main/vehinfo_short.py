@@ -26,7 +26,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 12.06.2018
+    # Last update: 14.06.2018
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -158,6 +158,7 @@ _data = {
     "france:F84_Somua_SM":                   'Som·SM',
     "france:F87_Batignolles-Chatillon_12t":  'BChat12t',
     "france:F88_AMX_13_105":                 '13·105',
+    "france:F88_AMX_13_105_sport":           '13·105·sp',
     "france:F89_Canon_dassaut_de_105":       'amx·cda',
     "france:F97_ELC_EVEN_90":                'elcEv90',
     "germany:Env_Artillery":                 'E.Art',
@@ -265,6 +266,7 @@ _data = {
     "germany:G54_E-50":                      'E·50',
     "germany:G55_E-75":                      'E·75',
     "germany:G56_E-100":                     'E·100',
+    "germany:G56_E-100_sport":               'E·100·sp',
     "germany:G57_PzVI_Tiger_P":              'TigP',
     "germany:G58_VK4502P":                   '4502b',
     "germany:G58_VK4502P7":                  '4502b7',
@@ -708,6 +710,7 @@ _data = {
     "ussr:R86_LTP_bootcamp":                 'Ltp',
     "ussr:R87_T62A":                         't62a',
     "ussr:R87_T62A_fallout":                 't62a',
+    "ussr:R87_T62A_sport":                   't62a·sp',
     "ussr:R88_Object268":                    'obj268',
     "ussr:R89_SU122_44":                     '122·44',
     "ussr:R90_IS_4M":                        'Is·4',

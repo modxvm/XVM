@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 12.06.2018
+    // Last update: 14.06.2018
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -136,6 +136,7 @@
     "france-F84_Somua_SM":                   {"name": null, "short": null},
     "france-F87_Batignolles-Chatillon_12t":  {"name": null, "short": null},
     "france-F88_AMX_13_105":                 {"name": null, "short": null},
+    "france-F88_AMX_13_105_sport":           {"name": null, "short": null},
     "france-F89_Canon_dassaut_de_105":       {"name": null, "short": null},
     "france-F97_ELC_EVEN_90":                {"name": null, "short": null},
     "germany-Env_Artillery":                 {"name": null, "short": null},
@@ -243,6 +244,7 @@
     "germany-G54_E-50":                      {"name": null, "short": null},
     "germany-G55_E-75":                      {"name": null, "short": null},
     "germany-G56_E-100":                     {"name": null, "short": null},
+    "germany-G56_E-100_sport":               {"name": null, "short": null},
     "germany-G57_PzVI_Tiger_P":              {"name": null, "short": null},
     "germany-G58_VK4502P":                   {"name": null, "short": null},
     "germany-G58_VK4502P7":                  {"name": null, "short": null},
@@ -686,6 +688,7 @@
     "ussr-R86_LTP_bootcamp":                 {"name": null, "short": null},
     "ussr-R87_T62A":                         {"name": null, "short": null},
     "ussr-R87_T62A_fallout":                 {"name": null, "short": null},
+    "ussr-R87_T62A_sport":                   {"name": null, "short": null},
     "ussr-R88_Object268":                    {"name": null, "short": null},
     "ussr-R89_SU122_44":                     {"name": null, "short": null},
     "ussr-R90_IS_4M":                        {"name": null, "short": null},
