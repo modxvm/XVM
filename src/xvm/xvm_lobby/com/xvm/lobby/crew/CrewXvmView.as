@@ -31,6 +31,12 @@ package com.xvm.lobby.crew
         private var savedValue:Boolean = false;
         private var xpToTmenCheckbox_y:Number;
 
+        private static var SPORT_VEH_IDS:Array = [
+            46145, // france:F88_AMX_13_105_sport
+            46353, // germany:G56_E-100_sport
+            64001  // ussr:R87_T62A_sport
+        ];
+
         public function CrewXvmView(view:IView)
         {
             super(view);
@@ -110,13 +116,13 @@ package com.xvm.lobby.crew
             }
         }
 
-        private function onVehicleChanged(invID:Number, isElite:Boolean):Object
+        private function onVehicleChanged(invID:Number, isElite:Boolean, vehID:Number):Object
         {
             //Logger.add('onVehicleChanged: ' + invID);
 
             currentInvID = invID;
 
-            enablePrevCrewCheckBox.enabled = enablePrevCrewCheckBox.visible = invID > 0;
+            enablePrevCrewCheckBox.enabled = enablePrevCrewCheckBox.visible = invID > 0 && SPORT_VEH_IDS.indexOf(vehID) == -1;
             if (!enablePrevCrewCheckBox.enabled)
             {
                 page.tmenXpPanel.xpToTmenCheckbox.y = xpToTmenCheckbox_y;

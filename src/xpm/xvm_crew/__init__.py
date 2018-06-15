@@ -121,7 +121,8 @@ def TmenXpPanel_onVehicleChange(self):
         vehicle = g_currentVehicle.item
         invID = g_currentVehicle.invID if vehicle is not None else 0
         isElite = vehicle.isElite if vehicle is not None else 0
-        as_xfw_cmd(COMMANDS.AS_VEHICLE_CHANGED, invID, isElite)
+        vehCD = g_currentVehicle.item.intCD if vehicle is not None else 0
+        as_xfw_cmd(COMMANDS.AS_VEHICLE_CHANGED, invID, isElite, vehCD)
 
 
 @registerEvent(VehicleSelectorPopup, 'onSelectVehicles', True)
