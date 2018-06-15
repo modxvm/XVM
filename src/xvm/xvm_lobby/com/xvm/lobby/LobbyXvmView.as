@@ -88,19 +88,30 @@ package com.xvm.lobby
         {
             App.utils.scheduler.scheduleOnNextFrame(function():void
             {
-                var prem:HeaderButton = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_PREM);
-                if (prem)
+                var btn:HeaderButton;
+
+                btn = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_PREM);
+                if (btn)
                 {
-                    prem.mouseEnabled = Config.config.hangar.showBuyPremiumButton;
-                    prem.mouseChildren = Config.config.hangar.showBuyPremiumButton;
-                    prem.alpha = Config.config.hangar.showBuyPremiumButton ? 1 : 0;
+                    btn.mouseEnabled = Config.config.hangar.showBuyPremiumButton;
+                    btn.mouseChildren = Config.config.hangar.showBuyPremiumButton;
+                    btn.alpha = Config.config.hangar.showBuyPremiumButton ? 1 : 0;
                 }
-                var premShop:HeaderButton = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_PREMSHOP);
-                if (premShop)
+
+                btn = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_PREMSHOP);
+                if (btn)
                 {
-                    premShop.mouseEnabled = Config.config.hangar.showPremiumShopButton;
-                    premShop.mouseChildren = Config.config.hangar.showPremiumShopButton;
-                    premShop.alpha = Config.config.hangar.showPremiumShopButton ? 1 : 0;
+                    btn.mouseEnabled = Config.config.hangar.showPremiumShopButton;
+                    btn.mouseChildren = Config.config.hangar.showPremiumShopButton;
+                    btn.alpha = Config.config.hangar.showPremiumShopButton ? 1 : 0;
+                }
+
+                btn = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_SQUAD);
+                if (btn)
+                {
+                    btn.mouseEnabled = Config.config.hangar.showCreateSquadButton;
+                    btn.mouseChildren = Config.config.hangar.showCreateSquadButton;
+                    btn.alpha = Config.config.hangar.showCreateSquadButton ? 1 : 0;
                 }
             });
         }

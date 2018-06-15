@@ -29,6 +29,7 @@ package com.xvm.types.cfg
         public var vehicleName: CHangarElement;
         public var showBuyPremiumButton:*;
         public var showPremiumShopButton:*;
+        public var showCreateSquadButton:*;
         public var notificationsButtonType:String;
         public var carousel:CCarousel;
         public var widgets:Array;
