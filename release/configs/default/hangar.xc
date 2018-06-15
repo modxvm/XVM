@@ -353,6 +353,14 @@
         "strength": 2
       }
     },
+    // Show/hide notifications counters in the main menu
+    // Показывать/прятать счетчики уведомлений в главном меню
+    "notificationCounter": {
+      "store": true,                        // Store / Магазин
+      "missions": true,                     // Missions / Задачи
+      "profile": true,                      // Profile / Достижения
+      "PersonalMissionOperationsPage": true // Campains / Кампании
+    },
     // Parameters for tank carousel
     // Параметры карусели танков
     "carousel": ${"carousel.xc":"carousel"},

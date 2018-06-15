@@ -1,6 +1,9 @@
-﻿﻿XVM-7.6.4:
+﻿XVM-7.6.4:
   [GENERAL]
   * World of Tanks 1.0.2
+
+  [HANGAR]
+  * added section "hangar"/"notificationCounter" - show/hide notifications counters in the main menu
 
   [BATTLE]
   * added options in the "playersPanel" modes sections:

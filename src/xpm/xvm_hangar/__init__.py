@@ -30,6 +30,7 @@ from xvm_main.python.xvm import l10n
 
 import svcmsg
 import battletype
+import counters
 
 #####################################################################
 # globals
