@@ -98,6 +98,14 @@ def _ArcadeCamera_create(base, self, pivotPos, onChangeControlMode = None, postm
 
     base(self, pivotPos, onChangeControlMode, postmortemMode)
 
+@overrideMethod(ArcadeCamera, 'setToVehicleDirectionFootball')
+def _ArcadeCamera_setToVehicleDirectionFootball(base, self):
+    if config.get('battle/camera/enabled'):
+        distRange = self._ArcadeCamera__cfg['distRange']
+        self._ArcadeCamera__cfg['distRange'] = (2, 25)
+        base(self)
+        self._ArcadeCamera__cfg['distRange'] = distRange
+
 @registerEvent(ArcadeCamera, 'enable')
 def _ArcadeCamera_enable(self, *args, **kwargs):
     #debug('_ArcadeCamera_enable: {}'.format(self._ArcadeCamera__postmortemMode))
