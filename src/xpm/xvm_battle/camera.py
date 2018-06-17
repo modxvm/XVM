@@ -105,6 +105,8 @@ def _ArcadeCamera_setToVehicleDirectionFootball(base, self):
         self._ArcadeCamera__cfg['distRange'] = (2, 25)
         base(self)
         self._ArcadeCamera__cfg['distRange'] = distRange
+    else:
+        base(self)
 
 @registerEvent(ArcadeCamera, 'enable')
 def _ArcadeCamera_enable(self, *args, **kwargs):
