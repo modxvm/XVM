@@ -48,7 +48,7 @@ package com.xvm.wg
             super();
             this._webCache = new Dictionary();
             this._cache = new Dictionary();
-            this._queue = new Vector.<ImageManagerWG>();
+            this._queue = new Vector.<ImageData>();
         }
 
         /// <xvm>
