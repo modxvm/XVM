@@ -4,7 +4,9 @@
 
   [HANGAR]
   * added section "hangar"/"notificationCounter" - show/hide notifications counters in the main menu
-  * added option "hangar"/"showCreateSquadButtonText" - show "Create squad" text on the squad creation button
+  * added options:
+      "hangar"/"showCreateSquadButtonText" - show "Create squad" text on the squad creation button
+      "hangar"/"showBattleTypeSelectorText" - show selected battle mode text
 
   [BATTLE]
   * added options in the "playersPanel" modes sections:

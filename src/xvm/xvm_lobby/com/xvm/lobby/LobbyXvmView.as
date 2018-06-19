@@ -12,6 +12,7 @@ package com.xvm.lobby
     import flash.events.*;
     import net.wg.gui.lobby.*;
     import net.wg.gui.lobby.header.headerButtonBar.*;
+    import net.wg.gui.lobby.header.vo.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
     import scaleform.clik.constants.*;
@@ -115,18 +116,37 @@ package com.xvm.lobby
                     btn.mouseChildren = Config.config.hangar.showPremiumShopButton;
                     btn.alpha = Config.config.hangar.showPremiumShopButton ? 1 : 0;
                 }
+
+                btn = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_BATTLE_SELECTOR);
+                if (btn)
+                {
+                    btn.headerButtonData.isUseFreeSize = false;
+                }
             });
         }
 
         private function onGraphicsRectanglesUpdateHandler(e:Event):void
         {
+            var btn:HeaderButton;
+
             if (!Config.config.hangar.showCreateSquadButtonText)
             {
-                var btn:HeaderButton = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_SQUAD);
+                btn = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_SQUAD);
                 if (btn)
                 {
                     var ctxSquad:HBC_Squad = btn.content as HBC_Squad;
                     ctxSquad.wideScreenPrc = 0;
+                }
+            }
+
+            if (!Config.config.hangar.showBattleTypeSelectorText)
+            {
+                btn = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_BATTLE_SELECTOR);
+                if (btn)
+                {
+                    var ctxBattleSelector:HBC_BattleSelector = btn.content as HBC_BattleSelector;
+                    ctxBattleSelector.wideScreenPrc = 0;
+                    ctxBattleSelector.availableWidth = 0;
                 }
             }
         }

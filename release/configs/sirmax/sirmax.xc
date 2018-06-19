@@ -70,6 +70,7 @@
     //"showBuyPremiumButton": false,
     //"showPremiumShopButton": false,
     "showCreateSquadButtonText": false,
+    //"showBattleTypeSelectorText": false,
     "serverInfo": {
       "enabled": false
       //"alpha": 75,

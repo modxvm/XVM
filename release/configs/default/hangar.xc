@@ -13,6 +13,9 @@
     // Show "Create squad" text on the squad creation button
     // Показать текст "Создать взвод" на кнопке создания взвода
     "showCreateSquadButtonText": true,
+    // Show selected battle mode text
+    // Показать текст с названием выбранного режима боя
+    "showBattleTypeSelectorText": true,
     // Show "General chat" button
     // Показать кнопку "Общий чат"
     "showGeneralChatButton": true,

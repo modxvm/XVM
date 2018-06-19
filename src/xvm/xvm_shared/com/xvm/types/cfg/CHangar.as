@@ -30,6 +30,7 @@ package com.xvm.types.cfg
         public var showBuyPremiumButton:*;
         public var showPremiumShopButton:*;
         public var showCreateSquadButtonText:*;
+        public var showBattleTypeSelectorText:*;
         public var notificationsButtonType:String;
         public var carousel:CCarousel;
         public var widgets:Array;
