@@ -16,6 +16,7 @@ from gui.prb_control.entities.base.actions_validator import CurrentVehicleAction
 from gui.prb_control.items import ValidationResult
 from gui.prb_control.settings import PREBATTLE_RESTRICTION
 from gui.Scaleform.daapi.view.meta.BarracksMeta import BarracksMeta
+from gui.Scaleform.locale.MENU import MENU
 from gui.shared.gui_items.Vehicle import Vehicle
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache
@@ -150,8 +151,8 @@ def _CurrentVehicleActionsValidator_validate(base, self):
 
 # low ammo => write on carousel's vehicle 'low ammo'
 @overrideMethod(helpers.i18n, 'makeString')
-def i18n_makeString(base, key, *args, **kwargs):
-    if key == '#menu:tankCarousel/vehicleStates/ammoNotFull': # originally returns empty string
+def _i18n_makeString(base, key, *args, **kwargs):
+    if key == MENU.TANKCAROUSEL_VEHICLESTATES_AMMONOTFULL: # originally returns empty string
         return l10n('lowAmmo')
     return base(key, *args, **kwargs)
 
