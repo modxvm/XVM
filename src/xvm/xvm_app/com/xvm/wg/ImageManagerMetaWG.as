@@ -1,11 +1,10 @@
 package com.xvm.wg
 {
-    import flash.events.*;
     //import net.wg.infrastructure.base.BaseDAAPIModule;
-    //import net.wg.data.constants.Errors;
+    import net.wg.data.constants.Errors;
     //import net.wg.infrastructure.exceptions.AbstractException;
 
-    public class ImageManagerMetaWG extends EventDispatcher
+    public class ImageManagerMetaWG extends BaseDAAPIModuleWG
     {
 
         private var _array:Array;
@@ -17,12 +16,7 @@ package com.xvm.wg
             super();
         }
 
-        public final function dispose() : void
-        {
-            this.onDispose();
-        }
-
-        protected function onDispose() : void
+        override protected function onDispose() : void
         {
             if(this._array)
             {
@@ -34,6 +28,7 @@ package com.xvm.wg
                 this._array1.splice(0,this._array1.length);
                 this._array1 = null;
             }
+            super.onDispose();
         }
 
         public final function as_loadImages(param1:Array) : void

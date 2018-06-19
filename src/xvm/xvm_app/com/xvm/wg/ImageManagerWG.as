@@ -1,11 +1,14 @@
 package com.xvm.wg
 {
-    import flash.events.*;
-    import flash.utils.*;
+    //import net.wg.infrastructure.base.meta.impl.ImageManagerMeta;
     import net.wg.infrastructure.managers.IImageManager;
+    import flash.utils.Dictionary;
     import net.wg.infrastructure.managers.ILoaderManager;
+    import flash.events.Event;
+    import flash.events.IOErrorEvent;
     import net.wg.infrastructure.events.LoaderEvent;
     import net.wg.infrastructure.interfaces.IImageData;
+    //import org.idmedia.as3commons.util.StringUtils;
 
     public class ImageManagerWG extends ImageManagerMetaWG implements IImageManager
     {
@@ -45,11 +48,16 @@ package com.xvm.wg
             super();
             this._webCache = new Dictionary();
             this._cache = new Dictionary();
-            this._queue = new Vector.<ImageData>();
-            /// <xvm>
-            as_setImageCacheSettings(MAX_CACHE_SIZE, MIN_CACHE_SIZE);
-            /// </xvm>
+            this._queue = new Vector.<ImageManagerWG>();
         }
+
+        /// <xvm>
+        override protected function onPopulate():void
+        {
+            super.onPopulate();
+            as_setImageCacheSettings(MAX_CACHE_SIZE, MIN_CACHE_SIZE);
+        }
+        /// </xvm>
 
         override protected function loadImages(param1:Array) : void
         {
@@ -114,7 +122,7 @@ package com.xvm.wg
             this.initCache();
         }
 
-        override protected function onDispose() : void
+        public final function dispose() : void
         {
             var _loc1_:ImageData = null;
             if(this._init)
@@ -136,8 +144,6 @@ package com.xvm.wg
                 _loc1_.dispose();
             }
             this._cache = null;
-
-            super.onDispose();
         }
 
         public function getImageData(param1:String, param2:Boolean) : IImageData
@@ -206,7 +212,7 @@ package com.xvm.wg
 
         private function pushQueue(param1:ImageData) : void
         {
-            App.utils.asserter.assert(this._minCacheSize > param1.size,"Image size exceeds the buffer cache: " + param1.source);
+            App.utils.asserter.assert(this._minCacheSize > param1.size,"Image size exceeds the buffer cache: " + param1.source + " " + this._minCacheSize);
             if(!param1.useWebCache)
             {
                 this._queue.push(param1);
