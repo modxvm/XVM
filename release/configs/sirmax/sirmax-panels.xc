@@ -26,7 +26,7 @@
     //"nickXOffsetRight": 0,
     //"vehicleXOffsetLeft": 0,
     //"vehicleXOffsetRight": 0,
-    "vehicleLevelAlpha": 0,
+    //"vehicleLevelAlpha": 0,
     "nickFormatLeft": "        {{r_size=2?|{{r_size=4?   |    }}}}<img src='cfg://sirmax/img/icons/{{comment}}.png'>{{name%.18s~..}}<font alpha='#A0'>{{clan}}</font>",
     "nickFormatRight": "{{name%.18s~..}}<font alpha='#A0'>{{clan}}</font><img src='cfg://sirmax/img/icons/{{comment}}.png'>{{r_size=2?|{{r_size=4?   |    }}}}       &nbsp;",
     "vehicleFormatLeft": "{{hp|---}} / {{hp-max}}",
@@ -104,7 +104,7 @@
     "vehicleIconXOffsetRight": -15,
     "vehicleLevelXOffsetLeft": -15,
     "vehicleLevelXOffsetRight": -15,
-    "vehicleLevelAlpha": 0,
+    //"vehicleLevelAlpha": 0,
     "nickFormatLeft": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{nick}}</font>",
     "nickFormatRight": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{nick}}</font>",
     //"extraFieldsLeft": [
@@ -125,7 +125,7 @@
     "vehicleIconXOffsetRight": -15,
     "vehicleLevelXOffsetLeft": -15,
     "vehicleLevelXOffsetRight": -15,
-    "vehicleLevelAlpha": 0,
+    //"vehicleLevelAlpha": 0,
     "vehicleFormatLeft": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
     "vehicleFormatRight": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
     //"extraFieldsLeft": [

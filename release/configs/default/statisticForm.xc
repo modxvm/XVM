@@ -72,13 +72,13 @@
     "vehicleFieldWidthRight": 250,
     // X offset for allies vehicle icons
     // Смещение по оси X иконки танка союзников
-    "vehicleIconOffsetXLeft": 4,
+    "vehicleIconOffsetXLeft": 0,
     // X offset for enemies vehicle icons
     // Смещение по оси X иконки танка противников
     "vehicleIconOffsetXRight": 0,
     // X offset for allies frags
     // Смещение по оси X фрагов союзников
-    "fragsFieldOffsetXLeft": 5,
+    "fragsFieldOffsetXLeft": 0,
     // X offset for enemies frags
     // Смещение по оси X фрагов противников
     "fragsFieldOffsetXRight": 0,

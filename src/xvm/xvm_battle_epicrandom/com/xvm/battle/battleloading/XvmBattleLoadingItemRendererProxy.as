@@ -33,6 +33,8 @@ package com.xvm.battle.battleloading
         private static const FIELD_HEIGHT:int = 26;
         private static const ICONS_AREA_WIDTH:int = 80;
 
+        private static const MIRRORED_VEHICLE_LEVEL_ICON_OFFSET:int = 36;
+
         private var ui:IXvmBattleLoadingItemRenderer;
         private var uiType:String;
         private var _isLeftPanel:Boolean;
@@ -406,7 +408,7 @@ package com.xvm.battle.battleloading
                 else
                 {
                     ui.f_vehicleIcon.x = ui.DEFAULTS.VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH;
-                    ui.f_vehicleLevelIcon.x = 39 + ui.DEFAULTS.VEHICLE_LEVEL_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH;
+                    ui.f_vehicleLevelIcon.x = ui.DEFAULTS.VEHICLE_LEVEL_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH + MIRRORED_VEHICLE_LEVEL_ICON_OFFSET;
                 }
                 ui.f_vehicleTypeIcon.x = ui.DEFAULTS.VEHICLE_TYPE_ICON_X - cfg.vehicleIconOffsetXRight;
             }

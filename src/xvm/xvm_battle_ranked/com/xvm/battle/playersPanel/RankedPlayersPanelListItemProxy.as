@@ -28,18 +28,18 @@ package com.xvm.battle.playersPanel
     {
         // from PlayersPanelListItem.as
         private static const WIDTH:int = 339;
-        private static const ICONS_AREA_WIDTH_WG:int = 65;
         private static const ICONS_AREA_WIDTH:int = 80;
-        private static const XVM_ICONS_AREA_WIDTH:int = 80;
         private static const RANK_ICON_AREA_WIDTH:int = 24;
+
+        private static const MIRRORED_VEHICLE_LEVEL_ICON_OFFSET:int = 36;
 
         private static const VEHICLE_TF_LEFT_X:int = WIDTH - 63 /* default ICONS_AREA_WIDTH */;
         private static const VEHICLE_ICON_LEFT_X:int = VEHICLE_TF_LEFT_X + 15;
-        private static const VEHICLE_LEVEL_LEFT_X:int = VEHICLE_TF_LEFT_X + 30;
+        private static const VEHICLE_LEVEL_LEFT_X:int = VEHICLE_TF_LEFT_X + 34;
 
         private static const VEHICLE_TF_RIGHT_X:int = -WIDTH + 63 /* default ICONS_AREA_WIDTH */;
         private static const VEHICLE_ICON_RIGHT_X:int = VEHICLE_TF_RIGHT_X - 17;
-        private static const VEHICLE_LEVEL_RIGHT_X:int = VEHICLE_TF_RIGHT_X - 47;
+        private static const VEHICLE_LEVEL_RIGHT_X:int = VEHICLE_TF_RIGHT_X - 35;
 
         public static const INVALIDATE_PLAYER_STATE:String = "PLAYER_STATE";
         public static const INVALIDATE_PANEL_STATE:String = "PANEL_STATE";
@@ -528,7 +528,7 @@ package com.xvm.battle.playersPanel
         private function updateVehicleIconPositionLeft():void
         {
             var vehicleIconX:int = VEHICLE_ICON_LEFT_X + getFieldOffsetXLeft(ui.vehicleIcon);
-            var vehicleLevelX:int = VEHICLE_LEVEL_LEFT_X + getFieldOffsetXLeft(ui.vehicleLevel);
+            var vehicleLevelX:int = VEHICLE_LEVEL_LEFT_X + getFieldOffsetXLeft(ui.vehicleLevel) - ui.vehicleLevel.width / 2;
             if (int(ui.vehicleIcon.x) != vehicleIconX)
             {
                 ui.vehicleIcon.x = vehicleIconX;
@@ -548,13 +548,13 @@ package com.xvm.battle.playersPanel
             {
                 vehicleIconScaleX = 1;
                 vehicleIconX = VEHICLE_ICON_RIGHT_X - getFieldOffsetXRight(ui.vehicleIcon);
-                vehicleLevelX = VEHICLE_LEVEL_RIGHT_X - getFieldOffsetXRight(ui.vehicleLevel);
+                vehicleLevelX = VEHICLE_LEVEL_RIGHT_X - getFieldOffsetXRight(ui.vehicleLevel) - ui.vehicleLevel.width / 2;
             }
             else
             {
                 vehicleIconScaleX = -1;
                 vehicleIconX =  VEHICLE_ICON_RIGHT_X - getFieldOffsetXRight(ui.vehicleIcon) - ICONS_AREA_WIDTH;
-                vehicleLevelX = VEHICLE_ICON_RIGHT_X - getFieldOffsetXRight(ui.vehicleLevel) - ICONS_AREA_WIDTH_WG;
+                vehicleLevelX = VEHICLE_LEVEL_RIGHT_X - getFieldOffsetXRight(ui.vehicleLevel) - ICONS_AREA_WIDTH - ui.vehicleLevel.width / 2 + MIRRORED_VEHICLE_LEVEL_ICON_OFFSET;
             }
             if (ui.vehicleIcon.scaleX != vehicleIconScaleX)
             {

@@ -52,9 +52,9 @@ package com.xvm.battle.battleloading
             RANKICON_X: 5,
             NAME_FIELD_X: 29,
             VEHICLE_FIELD_X: 84,
-            VEHICLE_ICON_X: 204,
-            VEHICLE_LEVEL_X: 223,
-            VEHICLE_TYPE_ICON_X: 183,
+            VEHICLE_ICON_X: 201,
+            VEHICLE_LEVEL_X: 220,
+            VEHICLE_TYPE_ICON_X: 182,
             EXTRA_FIELDS_X: 0
         }, XvmItemRendererDefaults);
 
@@ -66,8 +66,8 @@ package com.xvm.battle.battleloading
             NAME_FIELD_X: 888,
             VEHICLE_FIELD_X: 831,
             VEHICLE_ICON_X: 815,
-            VEHICLE_LEVEL_X: 797,
-            VEHICLE_TYPE_ICON_X: 811,
+            VEHICLE_LEVEL_X: 798,
+            VEHICLE_TYPE_ICON_X: 810,
             EXTRA_FIELDS_X: 1011
         }, XvmItemRendererDefaults);
     }

@@ -35,6 +35,8 @@ package com.xvm.battle.fullStats
         private static const EXTRA_FIELDS_X_LEFT:int = 10;
         private static const EXTRA_FIELDS_X_RIGHT:int = 1011;
 
+        private static const MIRRORED_VEHICLE_LEVEL_ICON_OFFSET:int = 36;
+
         private var DEFAULT_RANKICON_X:Number;
         private var DEFAULT_PLAYER_NAME_X:Number;
         private var DEFAULT_PLAYER_NAME_WIDTH:Number;
@@ -575,10 +577,11 @@ package com.xvm.battle.fullStats
                 }
                 else
                 {
-                    _vehicleLevelIcon.x = 39 + DEFAULT_VEHICLE_LEVEL_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH;
+                    _vehicleLevelIcon.x = DEFAULT_VEHICLE_LEVEL_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH + MIRRORED_VEHICLE_LEVEL_ICON_OFFSET;
                 }
             }
             _vehicleLevelIcon.isCetralize = true;
+            _vehicleLevelIcon.x = _vehicleLevelIcon.x - _vehicleLevelIcon.width / 2;
         }
 
         // extra fields
