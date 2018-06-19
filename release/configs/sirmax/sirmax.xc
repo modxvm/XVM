@@ -69,7 +69,7 @@
     "carousel": ${"sirmax-carousel.xc":"carousel"},
     //"showBuyPremiumButton": false,
     //"showPremiumShopButton": false,
-    //"showCreateSquadButton": false,
+    "showCreateSquadButtonText": false,
     "serverInfo": {
       "enabled": false
       //"alpha": 75,

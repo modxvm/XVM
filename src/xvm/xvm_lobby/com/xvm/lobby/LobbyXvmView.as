@@ -14,6 +14,7 @@ package com.xvm.lobby
     import net.wg.gui.lobby.header.headerButtonBar.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
+    import scaleform.clik.constants.*;
 
     public class LobbyXvmView extends XvmViewBase
     {
@@ -37,6 +38,13 @@ package com.xvm.lobby
         {
             super.onAfterPopulate(e);
             setup();
+            page.header.addEventListener(LifeCycleEvent.ON_GRAPHICS_RECTANGLES_UPDATE, onGraphicsRectanglesUpdateHandler);
+        }
+
+        override public function onBeforeDispose(e:LifeCycleEvent):void
+        {
+            page.header.removeEventListener(LifeCycleEvent.ON_GRAPHICS_RECTANGLES_UPDATE, onGraphicsRectanglesUpdateHandler);
+            super.onBeforeDispose(e);
         }
 
         override public function onConfigLoaded(e:Event):void
@@ -88,6 +96,8 @@ package com.xvm.lobby
         {
             App.utils.scheduler.scheduleOnNextFrame(function():void
             {
+                onGraphicsRectanglesUpdateHandler(null);
+
                 var btn:HeaderButton;
 
                 btn = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_PREM);
@@ -105,15 +115,20 @@ package com.xvm.lobby
                     btn.mouseChildren = Config.config.hangar.showPremiumShopButton;
                     btn.alpha = Config.config.hangar.showPremiumShopButton ? 1 : 0;
                 }
+            });
+        }
 
-                btn = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_SQUAD);
+        private function onGraphicsRectanglesUpdateHandler(e:Event):void
+        {
+            if (!Config.config.hangar.showCreateSquadButtonText)
+            {
+                var btn:HeaderButton = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_SQUAD);
                 if (btn)
                 {
-                    btn.mouseEnabled = Config.config.hangar.showCreateSquadButton;
-                    btn.mouseChildren = Config.config.hangar.showCreateSquadButton;
-                    btn.alpha = Config.config.hangar.showCreateSquadButton ? 1 : 0;
+                    var ctxSquad:HBC_Squad = btn.content as HBC_Squad;
+                    ctxSquad.wideScreenPrc = 0;
                 }
-            });
+            }
         }
     }
 }

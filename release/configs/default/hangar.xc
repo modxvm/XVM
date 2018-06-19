@@ -10,9 +10,9 @@
     // Show "Premium shop" button
     // Показать кнопку "Премиум магазин"
     "showPremiumShopButton": true,
-    // Show "Create squad" button
-    // Показать кнопку "Создать взвод"
-    "showCreateSquadButton": true,
+    // Show "Create squad" text on the squad creation button
+    // Показать текст "Создать взвод" на кнопке создания взвода
+    "showCreateSquadButtonText": true,
     // Show "General chat" button
     // Показать кнопку "Общий чат"
     "showGeneralChatButton": true,
