@@ -361,8 +361,8 @@
     "notificationCounter": {
       "store": true,                        // Store / Магазин
       "missions": true,                     // Missions / Задачи
-      "profile": true,                      // Profile / Достижения
-      "PersonalMissionOperationsPage": true // Campains / Кампании
+      "profile": true,                      // Service Record / Достижения
+      "PersonalMissionOperationsPage": true // Campaigns / Кампании
     },
     // Parameters for tank carousel
     // Параметры карусели танков
