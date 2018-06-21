@@ -7,7 +7,7 @@
   * добавлены опции:
       "hangar"/"showCreateSquadButtonText" - показать текст "Создать взвод" на кнопке создания взвода
       "hangar"/"showBattleTypeSelectorText" - показать текст с названием выбранного режима боя
-      "hangar"/"hidePromoPremVehicle" - отключить отображение рекламы премиум техники (на фоне в ангаре)
+      "hangar"/"showPromoPremVehicle" - отключить отображение рекламы премиум техники (на фоне в ангаре)
 
   [БОЙ]
   * добавлены опции в секциях режимов "playersPanel":

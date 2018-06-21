@@ -19,6 +19,9 @@
     // Show "General chat" button
     // Показать кнопку "Общий чат"
     "showGeneralChatButton": true,
+    // false - disable display promo of premium vehicle (on the background in the hangar)
+    // false - отключить отображение рекламы премиум техники (на фоне в ангаре)
+    "showPromoPremVehicle": true,
     // true - enable locker for gold
     // true - включить замок для золота
     "enableGoldLocker": false,
@@ -367,9 +370,6 @@
       "profile": true,                      // Service Record / Достижения
       "PersonalMissionOperationsPage": true // Campaigns / Кампании
     },
-    // true - disable display promo of premium vehicle (on the background in the hangar)
-    // true - отключить отображение рекламы премиум техники (на фоне в ангаре)
-    "hidePromoPremVehicle": false,
     // Parameters for tank carousel
     // Параметры карусели танков
     "carousel": ${"carousel.xc":"carousel"},

@@ -174,6 +174,6 @@ def handleLazyChannelCtlInited(base, self, event):
 # hide premium vehicle on the background in the hangar
 @overrideMethod(HeroTankController, '_HeroTankController__updateSettings')
 def updateSettings(base, self):
-    if config.get('hangar/hidePromoPremVehicle'):
+    if not config.get('hangar/showPromoPremVehicle', True):
         return
     base(self)

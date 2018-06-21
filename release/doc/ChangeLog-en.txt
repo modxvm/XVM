@@ -7,7 +7,7 @@
   * added options:
       "hangar"/"showCreateSquadButtonText" - show "Create squad" text on the squad creation button
       "hangar"/"showBattleTypeSelectorText" - show selected battle mode text
-      "hangar"/"hidePromoPremVehicle" - disable display promo of premium vehicle (on the background in the hangar)
+      "hangar"/"showPromoPremVehicle" - disable display promo of premium vehicle (on the background in the hangar)
 
   [BATTLE]
   * added options in the "playersPanel" modes sections:
