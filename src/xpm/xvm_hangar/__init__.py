@@ -21,6 +21,7 @@ from gui.shared.gui_items.Vehicle import Vehicle
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache
 from messenger.gui.Scaleform.lobby_entry import LobbyEntry
+from gui.game_control.hero_tank_controller import HeroTankController
 
 from xfw import *
 
@@ -169,3 +170,10 @@ def handleLazyChannelCtlInited(base, self, event):
             ctx.clear()
             return
     return base(self, event)
+
+# hide premium vehicle on the background in the hangar
+@overrideMethod(HeroTankController, '_HeroTankController__updateSettings')
+def updateSettings(base, self):
+    if config.get('hangar/hidePromoPremVehicle'):
+        return
+    base(self)

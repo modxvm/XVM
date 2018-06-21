@@ -1,12 +1,13 @@
 ﻿XVM-7.6.4:
   [GENERAL]
-  * World of Tanks 1.0.2
+  * World of Tanks 1.0.2.1
 
   [HANGAR]
   * added section "hangar"/"notificationCounter" - show/hide notifications counters in the main menu
   * added options:
       "hangar"/"showCreateSquadButtonText" - show "Create squad" text on the squad creation button
       "hangar"/"showBattleTypeSelectorText" - show selected battle mode text
+      "hangar"/"hidePromoPremVehicle" - disable display promo of premium vehicle (on the background in the hangar)
 
   [BATTLE]
   * added options in the "playersPanel" modes sections:

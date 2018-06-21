@@ -1,12 +1,13 @@
 ﻿XVM-7.6.4:
   [ОБЩЕЕ]
-  * World of Tanks 1.0.2
+  * World of Tanks 1.0.2.1
 
   [АНГАР]
   * добавлена секция "hangar"/"notificationCounter" - показывать/прятать счетчики уведомлений в главном меню
   * добавлены опции:
       "hangar"/"showCreateSquadButtonText" - показать текст "Создать взвод" на кнопке создания взвода
       "hangar"/"showBattleTypeSelectorText" - показать текст с названием выбранного режима боя
+      "hangar"/"hidePromoPremVehicle" - отключить отображение рекламы премиум техники (на фоне в ангаре)
 
   [БОЙ]
   * добавлены опции в секциях режимов "playersPanel":

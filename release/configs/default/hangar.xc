@@ -367,6 +367,9 @@
       "profile": true,                      // Service Record / Достижения
       "PersonalMissionOperationsPage": true // Campaigns / Кампании
     },
+    // true - disable display promo of premium vehicle (on the background in the hangar)
+    // true - отключить отображение рекламы премиум техники (на фоне в ангаре)
+    "hidePromoPremVehicle": false,
     // Parameters for tank carousel
     // Параметры карусели танков
     "carousel": ${"carousel.xc":"carousel"},
