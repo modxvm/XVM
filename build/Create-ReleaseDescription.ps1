@@ -1,3 +1,4 @@
+﻿$PSDefaultParameterValues['*:Encoding'] = 'utf8'
 Set-Location $PSScriptRoot
 
 $header_en = '<a href=\"https://bitbucket.org/XVM/xvm/src/default/release/doc/ChangeLog-en.txt\">Full ChangeLog</a><br/><br/>'
