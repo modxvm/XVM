@@ -1,4 +1,20 @@
-""" XVM (c) https://modxvm.com 2013-2018 """
+"""
+This file is part of the XVM project.
+
+Copyright (c) 2013-2018 XVM Team
+
+XVM is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as
+published by the Free Software Foundation, version 3.
+
+XVM is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>.
+"""
 
 #####################################################################
 # imports
@@ -16,6 +32,11 @@ from gui.Scaleform.daapi.view.battle.shared.markers2d.manager import MarkersMana
 
 markersVisibleCallbackID = None
 
+def _set_canvas_visible_true(self):
+    global markersVisibleCallbackID
+    markersVisibleCallbackID = None
+    self.movie.visible = True
+
 @overrideMethod(MarkersManager, 'createMarker')
 def _MarkersManager_createMarker(base, self, *args, **kwargs):
     global markersVisibleCallbackID
@@ -24,50 +45,3 @@ def _MarkersManager_createMarker(base, self, *args, **kwargs):
         BigWorld.cancelCallback(markersVisibleCallbackID)
     markersVisibleCallbackID = BigWorld.callback(0, lambda: _set_canvas_visible_true(self))
     return base(self, *args, **kwargs)
-
-def _set_canvas_visible_true(self):
-    global markersVisibleCallbackID
-    markersVisibleCallbackID = None
-    self.movie.visible = True
-
-
-#####################################################################
-# hide '_updateToLatestVersion' debug message
-
-import debug_utils
-
-@overrideMethod(debug_utils, '_doLog')
-def _doLog(base, category, msg, args=None, kwargs={}):
-    if category == 'DEBUG':
-        if msg == '_updateToLatestVersion':
-            return
-    base(category, msg, args, kwargs)
-
-
-#####################################################################
-# Restart client without mods for bootcamp mode
-"""
-from gui.Scaleform.daapi.view.lobby.LobbyMenu import LobbyMenu
-@overrideMethod(LobbyMenu,'bootcampClick')
-def LobbyMenu_bootcampClick(base, self):
-    if not self.bootcamp.isInBootcamp():
-        from gui.Scaleform.daapi.view.dialogs import SimpleDialogMeta, I18nConfirmDialogButtons
-        from gui.DialogsInterface import showDialog
-        from xvm_main.python.xvm import l10n
-        showDialog(SimpleDialogMeta(l10n("bootcamp_workaround_title"), l10n("bootcamp_workaround_message"), I18nConfirmDialogButtons()), LobbyMenu_bootcampClick_dialogAction)
-
-def LobbyMenu_bootcampClick_dialogAction(result):
-    if result:
-        from xfw.mutex import restart_without_mods
-        restart_without_mods()
-
-from helpers import dependency
-from skeletons.gui.game_control import IBootcampController
-from xvm_main.python.xvm import Xvm
-@registerEvent(Xvm, 'hangarInit')
-def onHangarInit(self):
-    bootcampController = dependency.instance(IBootcampController)
-    if bootcampController.isInBootcamp():
-        bootcampController.stopBootcamp(False)
-"""
-#####################################################################
