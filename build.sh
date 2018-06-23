@@ -188,6 +188,16 @@ copy_files()
     rm -r "$XVMBUILD_ROOT_PATH"/~output/swc/
 }
 
+copy_microsoft_redist()
+{
+    mkdir -p "$XVMBUILD_ROOT_PATH/~output/"
+    find "$XVMBUILD_ROOT_PATH/src/microsoft/msvc/" -name *.dll -exec cp {} "$XVMBUILD_ROOT_PATH/~output/" \;
+
+    mkdir -p "$XVMBUILD_ROOT_PATH/~output/system/"
+    find "$XVMBUILD_ROOT_PATH/src/microsoft/ucrt/" -name *.dll -exec cp {} "$XVMBUILD_ROOT_PATH/~output/system/" \;
+    find "$XVMBUILD_ROOT_PATH/src/microsoft/ucrt/" -name *.manifest -exec cp {} "$XVMBUILD_ROOT_PATH/~output/system/" \;
+}
+
 ##########################
 ####  BUILD PIPELINE  ####
 ##########################
@@ -224,6 +234,7 @@ if [[ "$XFW_DEVELOPMENT" == "" ]]; then
   clean_sha1
   copy_files
   calc_hash_for_xvm_integrity
+  copy_microsoft_redist
 fi
 
 popd >/dev/null
