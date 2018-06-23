@@ -2,6 +2,11 @@
   [ОБЩЕЕ]
   * World of Tanks 1.0.2.1
 
+  [ВЫЛЕТЫ]
+  * добавлены исправления вылетов Autodesk Scaleform
+  * исправлен вылет при включенном пинге или онлайне в ангаре
+  * в комплект XVM включены обновленные версии Microsoft Universal CRT и Microsoft Visual C++ Redistributable
+ 
   [АНГАР]
   * добавлена секция "hangar"/"notificationCounter" - показывать/прятать счетчики уведомлений в главном меню
   * добавлены опции:

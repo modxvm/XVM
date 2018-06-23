@@ -2,6 +2,11 @@
   [GENERAL]
   * World of Tanks 1.0.2.1
 
+  [CRASHES]
+  * added fixes for Autodesk Scaleform crashes
+  * fixed crash in case when there is ping or online counters in lobby
+  * added updated Microsoft Universal CRT and Microsoft Visual C++ Redistributable versions
+
   [HANGAR]
   * added section "hangar"/"notificationCounter" - show/hide notifications counters in the main menu
   * added options:
