@@ -7,6 +7,7 @@ class XVM_PING_COMMAND(object):
     PING = "xvm_ping.ping"
     AS_PINGDATA = "xvm_ping.as.pingdata"
     GETCURRENTSERVER = "xvm_ping.getcurrentserver"
+    AS_CURRENTSERVER = "xvm_ping.as.currentserver"
 
 
 #####################################################################
@@ -57,13 +58,25 @@ def onXfwCommand(cmd, *args):
             pinger.ping()
             return (None, True)
         if cmd == XVM_PING_COMMAND.GETCURRENTSERVER:
-            connectionMgr = dependency.instance(IConnectionManager)
-            serverName = connectionMgr.serverUserNameShort if connectionMgr.isConnected() else None
-            return (serverName, True)
+            getCurrentServer()
+            return (None, True)
     except Exception, ex:
         err(traceback.format_exc())
         return (None, True)
     return (None, False)
+
+
+def getCurrentServer(*args, **kwargs):
+    connectionMgr = dependency.instance(IConnectionManager)
+    as_xfw_cmd(XVM_PING_COMMAND.AS_CURRENTSERVER, connectionMgr.serverUserName if len(connectionMgr.serverUserName) < 13 else connectionMgr.serverUserNameShort)
+
+
+#####################################################################
+# handlers
+
+@registerEvent(LobbyHeaderMeta, 'as_setServerS')
+def LobbyHeaderMeta_as_setServerS(*args, **kwargs):
+    getCurrentServer()
 
 
 #####################################################################
