@@ -18,7 +18,8 @@ def resetReserve():
 def updateReserve(vehCD, isReserved):
     global _vehicleInfoData
     if _vehicleInfoData is not None:
-        _vehicleInfoData[vehCD]['isReserved'] = isReserved
+        if vehCD in _vehicleInfoData:
+            _vehicleInfoData[vehCD]['isReserved'] = isReserved
 
 def getXvmScaleData(rating):
     return _xvmscale_data.get('x%s' % rating, None) if _xvmscale_data is not None else None
