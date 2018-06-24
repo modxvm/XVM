@@ -1,4 +1,6 @@
-﻿XVM-7.6.5-dev:
+﻿XVM-7.6.5:
+  [INSTALLER]
+  * Fixed XVM uninstallation process
 
 XVM-7.6.4:
   [GENERAL]

@@ -41,8 +41,20 @@ Name: "xvmbackup"; Description: "{cm:backupXVM}"; Flags: unchecked
 Filename: http://modxvm.com/; Description: "{cm:websiteXVM}"; Flags: postinstall nowait shellexec;
 
 [Files]
+;backup
 Source: "{app}\res_mods\configs\*"; DestDir: "{app}\xvm_backup\configs"; Tasks: xvmbackup; Flags: external skipifsourcedoesntexist createallsubdirs recursesubdirs uninsneveruninstall
-Source: "..\..\..\~output\*"; DestDir: "{app}"; Flags: createallsubdirs recursesubdirs
+
+;xvm
+Source: "..\..\..\~output\mods\*"; DestDir: "{app}\mods"; Flags: createallsubdirs recursesubdirs
+Source: "..\..\..\~output\res_mods\*"; DestDir: "{app}\res_mods"; Flags: createallsubdirs recursesubdirs
+Source: "..\..\..\~output\readme*.*"; DestDir: "{app}"; Flags: createallsubdirs
+
+;microsoft runtime
+Source: "..\..\..\src\microsoft\msvc\*.dll"; DestDir: "{app}"; Flags: createallsubdirs uninsneveruninstall
+Source: "..\..\..\src\microsoft\ucrt\*.dll"; DestDir: "{app}\system"; Flags: createallsubdirs uninsneveruninstall
+Source: "..\..\..\src\microsoft\ucrt\*.manifest"; DestDir: "{app}\system"; Flags: createallsubdirs uninsneveruninstall
+
+;installer libs
 Source: "dll\findwot\bin\findwot.dll"; Flags: dontcopy                                             
 
 [InstallDelete]
