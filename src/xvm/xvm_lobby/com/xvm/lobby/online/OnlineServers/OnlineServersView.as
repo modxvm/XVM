@@ -24,7 +24,6 @@ package com.xvm.lobby.online.OnlineServers
         private static const QUALITY_POOR:String = "poor";
         private static const QUALITY_GOOD:String = "good";
         private static const QUALITY_GREAT:String = "great";
-        private static const CURRENT_SERVER:String = "current";
         private static const SERVER_COLOR:String = "server"; // actually it's server + delimiter
         private static const STYLE_NAME_PREFIX:String = "xvm_online_";
         private static const COMMAND_GETCURRENTSERVER:String = "xvm_online.getcurrentserver";
@@ -40,7 +39,6 @@ package com.xvm.lobby.online.OnlineServers
         {
             mouseEnabled = false;
             this.cfg = cfg;
-            this.currentServer = currentServer;
             this.serverColor = parseInt(cfg.fontStyle.serverColor, 16);
             if (cfg.bgImage != null)
                 createBackgroundImage(cfg.bgImage);
@@ -142,13 +140,13 @@ package com.xvm.lobby.online.OnlineServers
         {
             try
             {
-                var responseTimeList:Array = e.result as Array;
-                if (!responseTimeList.length)
+                var responseList:Array = e.result as Array;
+                if (!responseList.length)
                     return;
                 clearAllFields();
-                var len:int = responseTimeList.length;
+                var len:int = responseList.length;
                 for (var i:int = 0; i < len; ++i)
-                    appendRowToFields(makeStyledRow(responseTimeList[i]));
+                    appendRowToFields(makeStyledRow(responseList[i]));
             }
             catch (ex:Error)
             {
