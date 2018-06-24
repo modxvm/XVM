@@ -40,19 +40,23 @@ Name: "xvmbackup"; Description: "{cm:backupXVM}"; Flags: unchecked
 [Run]
 Filename: http://modxvm.com/; Description: "{cm:websiteXVM}"; Flags: postinstall nowait shellexec;
 
+[Components]
+Name: "XVM"; Description: "{cm:component_XVM}"; Types: full compact custom; Flags: fixed
+Name: "MSRuntime"; Description: "{cm:component_MSRuntime}"; Types: full
+
 [Files]
 ;backup
 Source: "{app}\res_mods\configs\*"; DestDir: "{app}\xvm_backup\configs"; Tasks: xvmbackup; Flags: external skipifsourcedoesntexist createallsubdirs recursesubdirs uninsneveruninstall
 
 ;xvm
-Source: "..\..\..\~output\mods\*"; DestDir: "{app}\mods"; Flags: createallsubdirs recursesubdirs
-Source: "..\..\..\~output\res_mods\*"; DestDir: "{app}\res_mods"; Flags: createallsubdirs recursesubdirs
-Source: "..\..\..\~output\readme*.*"; DestDir: "{app}"
+Source: "..\..\..\~output\mods\*"; DestDir: "{app}\mods"; Flags: createallsubdirs recursesubdirs; Components: XVM
+Source: "..\..\..\~output\res_mods\*"; DestDir: "{app}\res_mods"; Flags: createallsubdirs recursesubdirs; Components: XVM
+Source: "..\..\..\~output\readme*.*"; DestDir: "{app}"; Components: XVM
 
 ;microsoft runtime
-Source: "..\..\..\src\microsoft\msvc\*.dll"; DestDir: "{app}"; Flags: createallsubdirs recursesubdirs uninsneveruninstall
-Source: "..\..\..\src\microsoft\ucrt\*.dll"; DestDir: "{app}\system"; Flags: createallsubdirs recursesubdirs uninsneveruninstall
-Source: "..\..\..\src\microsoft\ucrt\*.manifest"; DestDir: "{app}\system"; Flags: createallsubdirs recursesubdirs uninsneveruninstall
+Source: "..\..\..\src\microsoft\msvc\*.dll"; DestDir: "{app}"; Flags: createallsubdirs recursesubdirs uninsneveruninstall; Components: MSRuntime
+Source: "..\..\..\src\microsoft\ucrt\*.dll"; DestDir: "{app}\system"; Flags: createallsubdirs recursesubdirs uninsneveruninstall; Components: MSRuntime
+Source: "..\..\..\src\microsoft\ucrt\*.manifest"; DestDir: "{app}\system"; Flags: createallsubdirs recursesubdirs uninsneveruninstall; Components: MSRuntime
 
 ;installer libs
 Source: "dll\findwot\bin\findwot.dll"; Flags: dontcopy                                             
