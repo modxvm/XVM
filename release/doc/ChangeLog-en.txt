@@ -1,6 +1,11 @@
-﻿XVM-7.6.5:
+﻿XVM-7.6.6-dev:
+
+XVM-7.6.5:
   [INSTALLER]
-  * Fixed XVM uninstallation process
+  * Fixed XVM installer uninstallation process.
+
+  [OTHER]
+  * fixed "updateReserve" function error
 
 XVM-7.6.4:
   [GENERAL]
