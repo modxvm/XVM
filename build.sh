@@ -234,7 +234,7 @@ if [[ "$XFW_DEVELOPMENT" == "" ]]; then
   clean_sha1
   copy_files
   calc_hash_for_xvm_integrity
-  copy_microsoft_redist
+  #copy_microsoft_redist
 fi
 
 popd >/dev/null
