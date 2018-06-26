@@ -41,14 +41,17 @@ package com.xvm.lobby.widgets
         {
             //Logger.add("[widgets] init lobby");
 
-            //XfwUtils.logChilds(page);
-
             Xfw.addCommandListener(XvmCommands.AS_UPDATE_CURRENT_VEHICLE, onUpdateCurrentVehicle);
 
             cfg = Config.config.hangar.widgets;
 
             var page:LobbyPage = view as LobbyPage;
             var index:int;
+
+            if (!page.isDAAPIInited)
+                return;
+
+            //XfwUtils.logChilds(page);
 
             var widgets:Array = filterWidgets(cfg, Defines.WIDGET_TYPE_EXTRAFIELD, Defines.LAYER_BOTTOM);
             if (widgets != null && widgets.length > 0)
@@ -61,8 +64,6 @@ package com.xvm.lobby.widgets
             widgets = filterWidgets(cfg, Defines.WIDGET_TYPE_EXTRAFIELD, Defines.LAYER_NORMAL);
             if (widgets != null && widgets.length > 0)
             {
-                if (!page.subViewContainer)
-                    XfwUtils.logChilds(page);
                 index = page.getChildIndex(page.subViewContainer as DisplayObject) + 1;
                 extraFieldsWidgetsNormal = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
                 extraFieldsWidgetsNormal.visible = false;
