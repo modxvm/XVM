@@ -26,6 +26,9 @@ package com.xvm.lobby.widgets
             var page:LoginPage = view as LoginPage;
             var index:int;
 
+            if (!page.isDAAPIInited)
+                return;
+
             var options:VOLobbyMacrosOptions = new VOLobbyMacrosOptions();
             var widgets:Array = filterWidgets(cfg, Defines.WIDGET_TYPE_EXTRAFIELD, Defines.LAYER_BOTTOM);
             if (widgets != null && widgets.length > 0)
