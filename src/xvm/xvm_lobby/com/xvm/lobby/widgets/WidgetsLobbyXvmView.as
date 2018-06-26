@@ -61,6 +61,8 @@ package com.xvm.lobby.widgets
             widgets = filterWidgets(cfg, Defines.WIDGET_TYPE_EXTRAFIELD, Defines.LAYER_NORMAL);
             if (widgets != null && widgets.length > 0)
             {
+                if (!page.subViewContainer)
+                    XfwUtils.logChilds(page);
                 index = page.getChildIndex(page.subViewContainer as DisplayObject) + 1;
                 extraFieldsWidgetsNormal = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
                 extraFieldsWidgetsNormal.visible = false;
