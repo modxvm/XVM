@@ -48,10 +48,8 @@ package com.xvm.lobby.widgets
             var page:LobbyPage = view as LobbyPage;
             var index:int;
 
-            if (!page.isDAAPIInited)
-                return;
-
-            //XfwUtils.logChilds(page);
+            Logger.add("page.subViewContainer = " + page.subViewContainer);
+            XfwUtils.logChilds(page);
 
             var widgets:Array = filterWidgets(cfg, Defines.WIDGET_TYPE_EXTRAFIELD, Defines.LAYER_BOTTOM);
             if (widgets != null && widgets.length > 0)
