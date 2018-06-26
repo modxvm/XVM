@@ -46,13 +46,14 @@ package com.xvm.lobby.widgets
             cfg = Config.config.hangar.widgets;
 
             var page:LobbyPage = view as LobbyPage;
-            var index:int;
 
-            Logger.add("page.subViewContainer = " + page.subViewContainer);
-            XfwUtils.logChilds(page);
+            //XfwUtils.logChilds(page);
 
+            //Logger.add("page.subViewContainer = " + page.subViewContainer);
             if (page.subViewContainer == null)
                 return;
+
+            var index:int;
 
             var widgets:Array = filterWidgets(cfg, Defines.WIDGET_TYPE_EXTRAFIELD, Defines.LAYER_BOTTOM);
             if (widgets != null && widgets.length > 0)
