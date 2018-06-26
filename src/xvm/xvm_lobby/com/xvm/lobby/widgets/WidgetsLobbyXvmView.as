@@ -51,6 +51,9 @@ package com.xvm.lobby.widgets
             Logger.add("page.subViewContainer = " + page.subViewContainer);
             XfwUtils.logChilds(page);
 
+            if (page.subViewContainer == null)
+                return;
+
             var widgets:Array = filterWidgets(cfg, Defines.WIDGET_TYPE_EXTRAFIELD, Defines.LAYER_BOTTOM);
             if (widgets != null && widgets.length > 0)
             {
