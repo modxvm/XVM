@@ -1,4 +1,6 @@
 ﻿XVM-7.6.6-dev:
+  [HANGAR]
+  * fixed widgets disappearing after battle
 
 XVM-7.6.5:
   [INSTALLER]
