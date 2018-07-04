@@ -209,7 +209,7 @@ def onHealthChanged(self, newHealth, attackerID, attackReasonID):
     if self.isPlayerVehicle:
         damageReceived = maxHealth - max(0, newHealth)
         isUpdate = True
-    if player is not None:
+    if player is not None and hasattr(player, 'playerVehicleID'):
         if self.id in vehiclesHealth:
             damage = vehiclesHealth[self.id] - max(0, newHealth)
             vehiclesHealth[self.id] = newHealth
