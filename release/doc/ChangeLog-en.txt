@@ -1,4 +1,20 @@
-﻿XVM-7.6.6-dev:
+﻿XVM-7.6.7:
+  [GENERAL]
+  * World of Tanks 1.0.2.2
+  * added semi-automatic crash reporting
+
+  [HANGAR]
+  * fixed widgets disappearing after battle
+
+  [OTHER]
+  * refactored online and ping displaying
+  * builtin fonts are case-insensetive now
+  * added check for isDAAPIInited flag on flash loading
+  
+  [INSTALLER]
+  * removed Microsoft C++ Runtime from archive (it is available for download on modxvm.com)
+
+XVM-7.6.6-dev:
   [HANGAR]
   * fixed widgets disappearing after battle
 
