@@ -75,12 +75,12 @@ package com.xvm.battle
 
         // zoom
 
-        public static function get currentAimZoom():int
+        public static function get currentAimZoom():Number
         {
             return instance._currentAimZoom;
         }
 
-        public static function set currentAimZoom(value:int):void
+        public static function set currentAimZoom(value:Number):void
         {
             instance._currentAimZoom = value;
         }
@@ -158,7 +158,7 @@ package com.xvm.battle
         private var _personalStatus:uint;
         private var _playerIsAlive:Boolean = true;
         private var _playerFrags:int = 0;
-        private var _currentAimZoom:int = 0;
+        private var _currentAimZoom:Number = 0;
         private var _playersPanelMode:int = 0;
         private var _playersPanelWidthLeft:int = 0;
         private var _playersPanelWidthRight:int = 0;

@@ -90,7 +90,7 @@ package com.xvm.battle.zoomIndicator
             //Xvm.swfProfilerEnd("ZoomIndicator.setup()");
         }
 
-        private function onSniperCamera(enable:Boolean, zoom:int):void
+        private function onSniperCamera(enable:Boolean, zoom:Number):void
         {
             if (_enable != enable || BattleState.currentAimZoom != zoom)
             {

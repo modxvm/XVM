@@ -80,7 +80,7 @@ package com.xvm.battle
             }
 
             // {{zoom}}
-            m_globals["zoom"] = function(o:IVOMacrosOptions):int
+            m_globals["zoom"] = function(o:IVOMacrosOptions):Number
             {
                 return BattleState.currentAimZoom;
             }
