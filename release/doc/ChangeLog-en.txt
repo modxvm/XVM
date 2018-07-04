@@ -14,9 +14,9 @@
   [INSTALLER]
   * removed Microsoft C++ Runtime from archive (it is available for download on modxvm.com)
 
-XVM-7.6.6-dev:
-  [HANGAR]
-  * fixed widgets disappearing after battle
+XVM-7.6.6:
+  [OTHER]
+  * skip version due to technical reasons
 
 XVM-7.6.5:
   [INSTALLER]
