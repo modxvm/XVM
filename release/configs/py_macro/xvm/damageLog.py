@@ -806,7 +806,7 @@ _lastHit = LastHit(SECTION_LASTHIT)
 
 def _isShowDamageLog(player):
     global isShowDamageLog
-    isShowDamageLog = config.get(DAMAGE_LOG_ENABLED) and not (player.arenaGuiType == ARENA_GUI_TYPE.EPIC_BATTLE)
+    isShowDamageLog = config.get(DAMAGE_LOG_ENABLED) and (player.arenaGuiType not in [ARENA_GUI_TYPE.EPIC_BATTLE, ARENA_GUI_TYPE.EVENT_BATTLES])
 
 @registerEvent(PlayerAvatar, 'onBecomePlayer')
 def _PlayerAvatar_onBecomePlayer(self):
@@ -877,13 +877,13 @@ def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
 @registerEvent(PlayerAvatar, 'showVehicleDamageInfo')
 def PlayerAvatar_showVehicleDamageInfo(self, vehicleID, damageIndex, extraIndex, entityID, equipmentID):
     global isImpact
-    if isShowDamageLog:
-        if not isImpact and (self.playerVehicleID == vehicleID):
+    if self.playerVehicleID == vehicleID:
+        if not isImpact:
             damageCode = DAMAGE_INFO_CODES[damageIndex]
             isImpact = damageCode not in ['DEVICE_REPAIRED_TO_CRITICAL', 'DEVICE_REPAIRED', 'TANKMAN_RESTORED', 'FIRE_STOPPED']
             if isImpact:
                 as_event('ON_IMPACT')
-        if (vehicleID == self.playerVehicleID) and config.get(DAMAGE_LOG_ENABLED):
+        if isShowDamageLog:
             data.showVehicleDamageInfo(self, vehicleID, damageIndex, extraIndex, entityID, equipmentID)
 
 
@@ -895,23 +895,23 @@ def updateVehicleHealth(self, vehicleID, health, deathReasonID, isCrewActive, is
 
 @registerEvent(Vehicle, 'onEnterWorld')
 def Vehicle_onEnterWorld(self, prereqs):
-    if self.isPlayerVehicle and config.get(DAMAGE_LOG_ENABLED):
-        global on_fire, damageLogConfig, autoReloadConfig, chooseRating
+    if self.isPlayerVehicle:
         _isShowDamageLog(BigWorld.player())
-        scale = config.networkServicesSettings.scale
-        name = config.networkServicesSettings.rating
-        r = '{}_{}'.format(scale, name)
-        if r in RATINGS:
-            chooseRating = RATINGS[r]['name']
-        else:
-            chooseRating = 'xwgr' if scale == 'xvm' else 'wgr'
-
-        autoReloadConfig = config.get('autoReloadConfig')
-        if not (autoReloadConfig or damageLogConfig):
-            damageLogConfig = {section: readyConfig(section) for section in SECTIONS}
-        on_fire = 0
-        data.data['oldHealth'] = self.health
-        data.data['maxHealth'] = self.health
+        if isShowDamageLog:
+            global on_fire, damageLogConfig, autoReloadConfig, chooseRating
+            scale = config.networkServicesSettings.scale
+            name = config.networkServicesSettings.rating
+            r = '{}_{}'.format(scale, name)
+            if r in RATINGS:
+                chooseRating = RATINGS[r]['name']
+            else:
+                chooseRating = 'xwgr' if scale == 'xvm' else 'wgr'
+            autoReloadConfig = config.get('autoReloadConfig')
+            if not (autoReloadConfig or damageLogConfig):
+                damageLogConfig = {section: readyConfig(section) for section in SECTIONS}
+            on_fire = 0
+            data.data['oldHealth'] = self.health
+            data.data['maxHealth'] = self.health
 
 
 @registerEvent(Vehicle, 'showDamageFromShot')
