@@ -1,4 +1,6 @@
-﻿XVM-7.6.7:
+﻿XVM-7.6.8-dev:
+
+XVM-7.6.7:
   [GENERAL]
   * World of Tanks 1.0.2.2
   * added semi-automatic crash reporting
