@@ -1,4 +1,20 @@
-﻿XVM-7.6.8-dev:
+﻿XVM-7.6.8:
+  [CRASHES]
+  * fixed compatibility with MacOS
+  * fixed compatibility with Windows XP
+  * fixed compatibility with Wargaming Error Monitor
+  * improved crashfix #2
+
+  [XFW]
+  * fixed xfw_package.json/dependencies_optional option behavior 
+  * added version info for binary files (.pyd)
+
+  [BATTLE]
+  * added displaying of the fractional part of the magnification.
+
+  [PYTHON MACROS]
+  * damageLog: various bugs fixed
+  * totalEfficiency: various bugs fixed
 
 XVM-7.6.7:
   [GENERAL]
