@@ -1,4 +1,8 @@
-﻿XVM-7.6.8:
+﻿XVM-7.6.9:
+  [GENERAL]
+  * World of Tanks 1.0.2.3
+
+XVM-7.6.8:
   [CRASHES]
   * fixed compatibility with MacOS
   * fixed compatibility with Windows XP
