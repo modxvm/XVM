@@ -26,7 +26,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 14.06.2018
+    # Last update: 26.07.2018
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -356,7 +356,7 @@ _data = {
     "japan:J29_Nameless":                    'Namel',
     "japan:J30_Edelweiss":                   'Edelw',
     "poland:Pl03_PzV_Poland":                'Pudel',
-    "poland:Pl08_Czolg_T_wz51":              'CzTwz51',
+    "poland:Pl08_50TP_prototyp":             '50TP·pr',
     "sweden:S01_Strv_74_A2":                 'm42·57',
     "sweden:S02_Strv_M42":                   'm/42',
     "sweden:S03_Strv_M38":                   'm/38',
@@ -462,6 +462,8 @@ _data = {
     "uk:GB93_Caernarvon_AX":                 'CaerAX',
     "uk:GB94_Centurion_Mk5-1_RAAC":          'Sent5/1',
     "uk:GB95_Ekins_Firefly_M4A4":            'FirefVC',
+    "uk:GB96_Excalibur":                     'Excalib',
+    "uk:GB97_Chimera":                       'Chimera',
     "usa:A01_T1_Cunningham":                 'T1',
     "usa:A01_T1_Cunningham_bot":             'T1',
     "usa:A02_M2_lt":                         'M2lt',
@@ -639,6 +641,7 @@ _data = {
     "ussr:R153_Object_705":                  'obj705',
     "ussr:R154_T_34E_1943":                  't34·e',
     "ussr:R155_Object_277":                  'obj777',
+    "ussr:R157_Object_279R":                 'obj279R',
     "ussr:R15_S-51":                         'S·51',
     "ussr:R16_SU-18":                        'Su·18',
     "ussr:R17_SU-100":                       'Su100',

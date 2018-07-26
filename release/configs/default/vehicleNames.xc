@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 14.06.2018
+    // Last update: 26.07.2018
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -334,7 +334,7 @@
     "japan-J29_Nameless":                    {"name": null, "short": null},
     "japan-J30_Edelweiss":                   {"name": null, "short": null},
     "poland-Pl03_PzV_Poland":                {"name": null, "short": null},
-    "poland-Pl08_Czolg_T_wz51":              {"name": null, "short": null},
+    "poland-Pl08_50TP_prototyp":             {"name": null, "short": null},
     "sweden-S01_Strv_74_A2":                 {"name": null, "short": null},
     "sweden-S02_Strv_M42":                   {"name": null, "short": null},
     "sweden-S03_Strv_M38":                   {"name": null, "short": null},
@@ -440,6 +440,8 @@
     "uk-GB93_Caernarvon_AX":                 {"name": null, "short": null},
     "uk-GB94_Centurion_Mk5-1_RAAC":          {"name": null, "short": null},
     "uk-GB95_Ekins_Firefly_M4A4":            {"name": null, "short": null},
+    "uk-GB96_Excalibur":                     {"name": null, "short": null},
+    "uk-GB97_Chimera":                       {"name": null, "short": null},
     "usa-A01_T1_Cunningham":                 {"name": null, "short": null},
     "usa-A01_T1_Cunningham_bot":             {"name": null, "short": null},
     "usa-A02_M2_lt":                         {"name": null, "short": null},
@@ -617,6 +619,7 @@
     "ussr-R153_Object_705":                  {"name": null, "short": null},
     "ussr-R154_T_34E_1943":                  {"name": null, "short": null},
     "ussr-R155_Object_277":                  {"name": null, "short": null},
+    "ussr-R157_Object_279R":                 {"name": null, "short": null},
     "ussr-R15_S-51":                         {"name": null, "short": null},
     "ussr-R16_SU-18":                        {"name": null, "short": null},
     "ussr-R17_SU-100":                       {"name": null, "short": null},
