@@ -145,7 +145,7 @@ def _CarouselDataProvider_vehicleComparisonKey(base, cls, vehicle):
             elif sort_criterion in ['wtr', 'xtdb', 'xte', 'marksOnGun', 'damageRating']:
                 vDossier = dossier.getDossier(PROFILE_DROPDOWN_KEYS.ALL, None, vehicle.intCD)
                 comparisonKey.append(factor if vDossier else 0)
-                if vDossier:
+                if vDossier and vDossier.get(sort_criterion, None) is not None:
                     comparisonKey.append(vDossier[sort_criterion] * factor)
             elif sort_criterion == 'nation':
                 if 'nations_order' in carousel_config and len(carousel_config['nations_order']):
