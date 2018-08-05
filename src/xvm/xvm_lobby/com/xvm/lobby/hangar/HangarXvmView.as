@@ -70,8 +70,8 @@ package com.xvm.lobby.hangar
         private function setup():void
         {
             setupTxtTankInfo();
-            setupBtnCommonQuests();
-            setupBtnPersonalQuests();
+            //setupBtnCommonQuests(); // TODO:1.1
+            //setupBtnPersonalQuests(); // TODO:1.1
         }
 
         // txtTankInfo
@@ -118,7 +118,8 @@ package com.xvm.lobby.hangar
         }
 
         // btnCommonQuests
-
+        // TODO:1.1
+        /*
         private var _orig_btnCommonQuests_x:Number = NaN;
         private var _orig_btnCommonQuests_y:Number = NaN;
         private function setupBtnCommonQuests():void
@@ -143,9 +144,11 @@ package com.xvm.lobby.hangar
                 page.xfw_header.btnCommonQuests.rotation = cfg.rotation;
             }
         }
+        */
 
         // btnPersonalQuests
-
+        // TODO:1.1
+        /*
         private var _orig_btnPersonalQuests_x:Number = NaN;
         private var _orig_btnPersonalQuests_y:Number = NaN;
         private function setupBtnPersonalQuests():void
@@ -170,6 +173,7 @@ package com.xvm.lobby.hangar
                 page.xfw_header.btnPersonalQuests.rotation = cfg.rotation;
             }
         }
+        */
 
         //
 

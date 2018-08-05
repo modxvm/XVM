@@ -47,6 +47,11 @@ package com.xvm.battle
             BattleState.instance.setPersonalStatus(param1);
         }
 
+        public function setQuestStatus(data:IDAAPIDataClass):void
+        {
+            BattleState.instance.setQuestStatus(data);
+        }
+
         public function setUserTags(data:IDAAPIDataClass):void
         {
             BattleState.instance.setUserTags(data);

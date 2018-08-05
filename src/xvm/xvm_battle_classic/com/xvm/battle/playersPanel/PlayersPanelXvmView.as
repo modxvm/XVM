@@ -34,7 +34,7 @@ package com.xvm.battle.playersPanel
         private function init():void
         {
             page.unregisterComponent(BATTLE_VIEW_ALIASES.PLAYERS_PANEL);
-            page.xfw_battleStatisticDataController.componentControllers.splice(page.xfw_battleStatisticDataController.componentControllers.indexOf(page.playersPanel), 1);
+            page.xfw_battleStatisticDataController.xfw_componentControllers.splice(page.xfw_battleStatisticDataController.xfw_componentControllers.indexOf(page.playersPanel), 1);
             var idx:int = page.getChildIndex(page.playersPanel);
             page.removeChild(page.playersPanel);
             var component:UI_PlayersPanel = new UI_PlayersPanel();

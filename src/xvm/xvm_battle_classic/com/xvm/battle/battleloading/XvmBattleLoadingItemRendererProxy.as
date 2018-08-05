@@ -412,7 +412,7 @@ package com.xvm.battle.battleloading
                 }
                 ui.vehicleTypeIcon.x = ui.DEFAULTS.VEHICLE_TYPE_ICON_X - cfg.vehicleIconOffsetXRight;
             }
-            ui.vehicleLevelIcon.isCetralize = true;
+            ui.vehicleLevelIcon.isCentralize = true;
         }
 
         // extra fields

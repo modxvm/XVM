@@ -9,6 +9,7 @@ package com.xvm.battle.fullStats
     import com.xvm.types.cfg.*;
     import flash.events.*;
     import net.wg.data.constants.generated.*;
+    import net.wg.gui.battle.ranked.stats.components.fullStats.*;
     import net.wg.gui.components.containers.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.managers.impl.*;
@@ -25,7 +26,7 @@ package com.xvm.battle.fullStats
             //Logger.add("UI_RankedFullStats");
             super();
 
-            this.xfw_tableCtrl = new FullStatsTableCtrlXvm(this.statsTable);
+            this.xfw_tableCtrl = new FullStatsTableCtrlXvm(FullStatsTable(statsTable));
 
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
         }

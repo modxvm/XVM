@@ -437,13 +437,11 @@ package com.xvm.battle
         public function updateInvitationsStatuses(data:Object) : void
         {
             //Logger.addObject(data, 2, "[BattleState] updateInvitationsStatuses");
-            try
-            {
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
+        }
+
+        public function setQuestStatus(data:Object):void
+        {
+            //Logger.addObject(data, 2, "[BattleState] setQuestStatus");
         }
 
         // XVM events

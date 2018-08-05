@@ -19,8 +19,7 @@ package com.xvm.battle.fullStats
     import flash.text.*;
     import net.wg.data.constants.generated.*;
     import net.wg.gui.battle.components.*;
-    import net.wg.gui.battle.random.views.stats.components.fullStats.tableItem.PlayerStatusView;
-    import net.wg.gui.battle.random.views.stats.components.fullStats.constants.RandomFullStatsValidationType;
+    import net.wg.gui.battle.random.views.stats.components.fullStats.constants.*;
     import net.wg.gui.battle.ranked.stats.components.fullStats.tableItem.*;
     import net.wg.gui.battle.views.stats.constants.*;
     import net.wg.infrastructure.interfaces.*;
@@ -576,7 +575,7 @@ package com.xvm.battle.fullStats
                     _vehicleLevelIcon.x = DEFAULT_VEHICLE_LEVEL_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH + MIRRORED_VEHICLE_LEVEL_ICON_OFFSET;
                 }
             }
-            _vehicleLevelIcon.isCetralize = true;
+            _vehicleLevelIcon.isCentralize = true;
             _vehicleLevelIcon.x = _vehicleLevelIcon.x - _vehicleLevelIcon.width / 2;
         }
 
