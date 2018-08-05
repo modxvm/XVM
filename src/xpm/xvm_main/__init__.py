@@ -24,7 +24,7 @@ from notification.settings import NOTIFICATION_TYPE
 from gui.app_loader import g_appLoader
 from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
 from gui.shared import g_eventBus, events
-from gui.Scaleform.framework.application import SFApplication
+from gui.Scaleform.framework.application import AppEntry
 from gui.Scaleform.daapi.view.lobby.profile.ProfileTechniqueWindow import ProfileTechniqueWindow
 from gui.Scaleform.daapi.view.lobby.hangar.AmmunitionPanel import AmmunitionPanel
 from helpers import dependency, VERSION_FILE_PATH
@@ -84,8 +84,8 @@ def fini():
 def game_handleKeyEvent(event):
     g_xvm.onKeyEvent(event)
 
-@registerEvent(SFApplication, 'as_updateStageS')
-def SFApplication_as_updateStageS(*args, **kwargs):
+@registerEvent(AppEntry, 'as_updateStageS')
+def AppEntry_as_updateStageS(*args, **kwargs):
     g_xvm.onUpdateStage()
 
 @overrideMethod(MessageDecorator, 'getListVO')
