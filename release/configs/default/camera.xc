@@ -10,9 +10,19 @@
     // true - disable red flash when enemy hit your tank.
     // true - отключить красную вспышку когда враг попадает по вам.
     "noFlashBang": false,
-    // true - hide the tips about switching to siege mode and aiming mode changing in strategic mode.
-    // true - скрыть подсказки перехода в осадный режим и смены режима прицеливания в стратегическом режиме.
-    "hideHint": false,    
+    // true - hide the tips in battle.
+    // true - скрыть подсказки в бою.
+    "battleHint": {
+      // true - hide the tips aiming mode changing in strategic mode.
+      // true - скрыть подсказку смены режима прицеливания в стратегическом режиме.
+      "hideTrajectoryView": false,
+      // true - hide the tips about switching to siege mode.
+      // true - скрыть подсказку перехода в осадный режим.
+      "hideSiegeIndicator": false,
+      // true - hide the tips about switching to menu Personal Missions.
+      // true - скрыть подсказку перехода в меню ЛБЗ.
+      "hideQuestProgress": false
+    },    
     // Arcade mode
     // Аркадный режим
     "arcade": {

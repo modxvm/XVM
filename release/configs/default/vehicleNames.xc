@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 26.07.2018
+    // Last update: 06.08.2018
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -136,7 +136,6 @@
     "france-F84_Somua_SM":                   {"name": null, "short": null},
     "france-F87_Batignolles-Chatillon_12t":  {"name": null, "short": null},
     "france-F88_AMX_13_105":                 {"name": null, "short": null},
-    "france-F88_AMX_13_105_sport":           {"name": null, "short": null},
     "france-F89_Canon_dassaut_de_105":       {"name": null, "short": null},
     "france-F97_ELC_EVEN_90":                {"name": null, "short": null},
     "germany-Env_Artillery":                 {"name": null, "short": null},
@@ -244,7 +243,6 @@
     "germany-G54_E-50":                      {"name": null, "short": null},
     "germany-G55_E-75":                      {"name": null, "short": null},
     "germany-G56_E-100":                     {"name": null, "short": null},
-    "germany-G56_E-100_sport":               {"name": null, "short": null},
     "germany-G57_PzVI_Tiger_P":              {"name": null, "short": null},
     "germany-G58_VK4502P":                   {"name": null, "short": null},
     "germany-G58_VK4502P7":                  {"name": null, "short": null},
@@ -334,7 +332,17 @@
     "japan-J29_Nameless":                    {"name": null, "short": null},
     "japan-J30_Edelweiss":                   {"name": null, "short": null},
     "poland-Pl03_PzV_Poland":                {"name": null, "short": null},
+    "poland-Pl05_50TP_Tyszkiewicza":         {"name": null, "short": null},
+    "poland-Pl06_10TP":                      {"name": null, "short": null},
+    "poland-Pl07_14TP":                      {"name": null, "short": null},
     "poland-Pl08_50TP_prototyp":             {"name": null, "short": null},
+    "poland-Pl09_7TP":                       {"name": null, "short": null},
+    "poland-Pl10_40TP_Habicha":              {"name": null, "short": null},
+    "poland-Pl11_45TP_Habicha":              {"name": null, "short": null},
+    "poland-Pl12_25TP_KSUST_II":             {"name": null, "short": null},
+    "poland-Pl13_53TP_Markowskiego":         {"name": null, "short": null},
+    "poland-Pl14_4TP":                       {"name": null, "short": null},
+    "poland-Pl15_60TP_Lewandowskiego":       {"name": null, "short": null},
     "sweden-S01_Strv_74_A2":                 {"name": null, "short": null},
     "sweden-S02_Strv_M42":                   {"name": null, "short": null},
     "sweden-S03_Strv_M38":                   {"name": null, "short": null},
@@ -619,6 +627,7 @@
     "ussr-R153_Object_705":                  {"name": null, "short": null},
     "ussr-R154_T_34E_1943":                  {"name": null, "short": null},
     "ussr-R155_Object_277":                  {"name": null, "short": null},
+    "ussr-R156_IS_2M":                       {"name": null, "short": null},
     "ussr-R157_Object_279R":                 {"name": null, "short": null},
     "ussr-R15_S-51":                         {"name": null, "short": null},
     "ussr-R16_SU-18":                        {"name": null, "short": null},
@@ -691,7 +700,6 @@
     "ussr-R86_LTP_bootcamp":                 {"name": null, "short": null},
     "ussr-R87_T62A":                         {"name": null, "short": null},
     "ussr-R87_T62A_fallout":                 {"name": null, "short": null},
-    "ussr-R87_T62A_sport":                   {"name": null, "short": null},
     "ussr-R88_Object268":                    {"name": null, "short": null},
     "ussr-R89_SU122_44":                     {"name": null, "short": null},
     "ussr-R90_IS_4M":                        {"name": null, "short": null},

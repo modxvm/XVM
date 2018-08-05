@@ -19,8 +19,9 @@ from gui.battle_control.battle_constants import CROSSHAIR_VIEW_ID
 from gui.Scaleform.daapi.view.battle.shared.crosshair.container import CrosshairPanelContainer
 from AvatarInputHandler.control_modes import SniperControlMode
 from helpers.EffectsList import _FlashBangEffectDesc
-from gui.Scaleform.daapi.view.meta.SiegeModeIndicatorMeta import SiegeModeIndicatorMeta
-from gui.Scaleform.daapi.view.meta.CrosshairPanelContainerMeta import CrosshairPanelContainerMeta
+from gui.Scaleform.daapi.view.battle.shared.hint_panel.plugins import TrajectoryViewHintPlugin, SiegeIndicatorHintPlugin, QuestProgressHintPlugin
+from account_helpers import AccountSettings
+from account_helpers.AccountSettings import TRAJECTORY_VIEW_HINT_COUNTER, QUEST_PROGRESS_SHOWS_COUNT
 from AvatarInputHandler.AimingSystems.SniperAimingSystem import SniperAimingSystem
 from Keys import KEY_RIGHTMOUSE
 from AvatarInputHandler import mathUtils
@@ -97,16 +98,6 @@ def _ArcadeCamera_create(base, self, pivotPos, onChangeControlMode = None, postm
             cfg['scrollSensitivity'] = float(value) * ucfg['scrollSensitivity']
 
     base(self, pivotPos, onChangeControlMode, postmortemMode)
-
-@overrideMethod(ArcadeCamera, 'setToVehicleDirectionFootball')
-def _ArcadeCamera_setToVehicleDirectionFootball(base, self):
-    if config.get('battle/camera/enabled'):
-        distRange = self._ArcadeCamera__cfg['distRange']
-        self._ArcadeCamera__cfg['distRange'] = (2, 25)
-        base(self)
-        self._ArcadeCamera__cfg['distRange'] = distRange
-    else:
-        base(self)
 
 @registerEvent(ArcadeCamera, 'enable')
 def _ArcadeCamera_enable(self, *args, **kwargs):
@@ -216,28 +207,22 @@ def create(base, self, model, list, args):
         return
     base(self, model, list, args)
 
-@overrideMethod(SiegeModeIndicatorMeta, 'as_showHintS')
-def SiegeModeIndicatorMeta_as_showHintS(base, self, buttonName, messageLeft, messageRight):
-    if config.get('battle/camera/enabled') and config.get('battle/camera/hideHint'):
-        return
-    base(self, buttonName, messageLeft, messageRight)
-
-@overrideMethod(SiegeModeIndicatorMeta, 'as_hideHintS')
-def SiegeModeIndicatorMeta_as_hideHintS(base, self):
-    if config.get('battle/camera/enabled') and config.get('battle/camera/hideHint'):
-        return
+@overrideMethod(TrajectoryViewHintPlugin, 'start')
+def start(base, self):
+    if config.get('battle/camera/enabled') and config.get('battle/camera/battleHint/hideTrajectoryView'):
+        AccountSettings.setSettings(TRAJECTORY_VIEW_HINT_COUNTER, 0)
     base(self)
 
-@overrideMethod(CrosshairPanelContainerMeta, 'as_showHintS')
-def CrosshairPanelContainerMeta_as_showHintS(base, self, key, messageLeft, messageRight, offsetX, offsetY):
-    if config.get('battle/camera/enabled') and config.get('battle/camera/hideHint'):
-        return
-    base(self, key, messageLeft, messageRight, offsetX, offsetY)
+@overrideMethod(SiegeIndicatorHintPlugin, 'start')
+def start(base, self):
+    if config.get('battle/camera/enabled') and config.get('battle/camera/battleHint/hideSiegeIndicator'):
+        AccountSettings.setSettings('siegeModeHintCounter', 0)
+    base(self)
 
-@overrideMethod(CrosshairPanelContainerMeta, 'as_hideHintS')
-def CrosshairPanelContainerMeta_as_hideHintS(base, self):
-    if config.get('battle/camera/enabled') and config.get('battle/camera/hideHint'):
-        return
+@overrideMethod(QuestProgressHintPlugin, 'start')
+def start(base, self):
+    if config.get('battle/camera/enabled') and config.get('battle/camera/battleHint/hideQuestProgress'):
+        AccountSettings.setSettings(QUEST_PROGRESS_SHOWS_COUNT, 0)
     base(self)
 
 @overrideMethod(SniperAimingSystem, '_SniperAimingSystem__clampToLimits')
