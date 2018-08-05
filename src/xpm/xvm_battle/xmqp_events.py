@@ -8,6 +8,7 @@ from gui.app_loader import g_appLoader
 from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
 
 from xfw import *
+from xfw_actionscript.python import *
 
 import xvm_main.python.config as config
 from xvm_main.python.logger import *

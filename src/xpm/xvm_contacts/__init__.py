@@ -26,6 +26,8 @@ from messenger.gui.Scaleform.data.contacts_vo_converter import ContactConverter
 from messenger.gui.Scaleform.data.contacts_cm_handlers import PlayerContactsCMHandler
 
 from xfw import *
+from xfw_actionscript.python import *
+
 from xvm_main.python.logger import *
 from xvm_main.python.xvm import l10n
 
