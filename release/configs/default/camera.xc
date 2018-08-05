@@ -22,7 +22,7 @@
       // true - hide the tips about switching to menu Personal Missions.
       // true - скрыть подсказку перехода в меню ЛБЗ.
       "hideQuestProgress": false
-    },    
+    },
     // Arcade mode
     // Аркадный режим
     "arcade": {
