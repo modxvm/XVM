@@ -57,7 +57,7 @@ pipeline
         {
             script {
                 def previousResult = currentBuild.previousBuild?.result
-                if (previousResult && previousResult != currentBuild.result) {
+                if (previousResult && previousResult != 'SUCCESS') {
                     slackSend (color: '#00FF00', message: "FIXED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
                 }
             }
