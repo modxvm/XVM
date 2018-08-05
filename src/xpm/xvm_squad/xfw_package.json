@@ -4,7 +4,7 @@
     "description": "XVM Squad module",
 
     "version": "XVM_VERSION",
-    "dependencies": ["com.modxvm.xvm", "com.modxvm.xvm.sounds"],
+    "dependencies": ["com.modxvm.xvm"],
 
     "url": "https://modxvm.com/",
     "url_update": "https://modxvm.com/",

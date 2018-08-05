@@ -31,6 +31,8 @@ from gui.Scaleform.daapi.view.battle.shared.minimap.plugins import ArenaVehicles
 from gui.Scaleform.daapi.view.battle.shared.page import SharedPage
 
 from xfw import *
+from xfw_actionscript.python import *
+
 import xvm_main.python.config as config
 from xvm_main.python.logger import *
 

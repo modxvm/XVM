@@ -1,5 +1,6 @@
 import xvm_battle.python.fragCorrelationPanel as panel
 from xfw import *
+from xfw_actionscript.python import *
 
 max_hp_enemy = 0
 max_hp_ally = 0

@@ -4,7 +4,7 @@
     "description": "XVM Hotfix Module",
 
     "version": "XVM_VERSION",
-    "dependencies": ["com.modxvm.xvm", "com.modxvm.xvm.hangar"],
+    "dependencies": ["com.modxvm.xvm"],
 
     "url": "https://modxvm.com/",
     "url_update": "https://modxvm.com/",

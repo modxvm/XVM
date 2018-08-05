@@ -1,5 +1,6 @@
 import BigWorld
 from xfw import *
+from xfw_actionscript.python import *
 from xvm_main.python.logger import *
 from Vehicle import Vehicle
 from Avatar import PlayerAvatar

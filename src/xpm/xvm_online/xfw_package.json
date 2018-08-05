@@ -4,7 +4,7 @@
     "description": "XVM Online module",
 
     "version": "XVM_VERSION",
-    "dependencies": ["com.modxvm.xvm", "com.modxvm.xvm.limits"],
+    "dependencies": ["com.modxvm.xvm"],
 
     "url": "https://modxvm.com/",
     "url_update": "https://modxvm.com/",

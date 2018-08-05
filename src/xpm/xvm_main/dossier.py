@@ -37,6 +37,7 @@ from skeletons.gui.game_control import IRankedBattlesController
 from skeletons.gui.lobby_context import ILobbyContext
 
 from xfw import *
+from xfw_actionscript.python import *
 
 from consts import *
 from logger import *

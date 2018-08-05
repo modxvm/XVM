@@ -18,5 +18,5 @@
     "wot_versions": ["WOT_VERSION"],
     "wot_versions_strategy": "",
 
-    "features": ["python"]
+    "features": ["actionscript", "python"]
 }

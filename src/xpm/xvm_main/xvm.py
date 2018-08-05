@@ -14,6 +14,7 @@ from gui.shared import g_eventBus, events
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 
 from xfw import *
+from xfw_actionscript.python import *
 
 from consts import *
 from logger import *

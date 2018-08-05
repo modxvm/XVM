@@ -22,6 +22,8 @@ from skeletons.gui.battle_session import IBattleSessionProvider
 from skeletons.gui.game_control import IBootcampController
 
 from xfw import *
+from xfw_actionscript.python import *
+
 from xvm_main.python.logger import *
 from xvm_main.python.stats import _stat
 import xvm_main.python.config as config

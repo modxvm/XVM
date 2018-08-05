@@ -1,6 +1,7 @@
 import BigWorld
 import traceback
 from xfw import *
+from xfw_actionscript.python import *
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
 

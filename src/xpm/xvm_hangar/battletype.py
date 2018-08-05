@@ -8,6 +8,8 @@ from gui.Scaleform.daapi.view.lobby.header import battle_selector_items
 from gui.Scaleform.daapi.view.lobby.header.LobbyHeader import LobbyHeader
 
 from xfw import *
+from xfw_actionscript.python import *
+
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
 import xvm_main.python.userprefs as userprefs

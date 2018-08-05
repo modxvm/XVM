@@ -1,5 +1,6 @@
 ﻿from Avatar import PlayerAvatar
-from xfw import registerEvent, as_event
+from xfw import registerEvent
+from xfw_actionscript.python import as_event
 from gui.battle_control.battle_constants import VEHICLE_DEVICES
 from gui.shared.utils.TimeInterval import TimeInterval
 from gui.Scaleform.daapi.view.battle.shared.damage_panel import DamagePanel
