@@ -26,7 +26,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 26.07.2018
+    # Last update: 06.08.2018
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -158,7 +158,6 @@ _data = {
     "france:F84_Somua_SM":                   'Som·SM',
     "france:F87_Batignolles-Chatillon_12t":  'BChat12t',
     "france:F88_AMX_13_105":                 '13·105',
-    "france:F88_AMX_13_105_sport":           '13·105·sp',
     "france:F89_Canon_dassaut_de_105":       'amx·cda',
     "france:F97_ELC_EVEN_90":                'elcEv90',
     "germany:Env_Artillery":                 'E.Art',
@@ -266,7 +265,6 @@ _data = {
     "germany:G54_E-50":                      'E·50',
     "germany:G55_E-75":                      'E·75',
     "germany:G56_E-100":                     'E·100',
-    "germany:G56_E-100_sport":               'E·100·sp',
     "germany:G57_PzVI_Tiger_P":              'TigP',
     "germany:G58_VK4502P":                   '4502b',
     "germany:G58_VK4502P7":                  '4502b7',
@@ -356,7 +354,17 @@ _data = {
     "japan:J29_Nameless":                    'Namel',
     "japan:J30_Edelweiss":                   'Edelw',
     "poland:Pl03_PzV_Poland":                'Pudel',
+    "poland:Pl05_50TP_Tyszkiewicza":         '50TP',
+    "poland:Pl06_10TP":                      '10TP',
+    "poland:Pl07_14TP":                      '14TP',
     "poland:Pl08_50TP_prototyp":             '50TP·pr',
+    "poland:Pl09_7TP":                       '7TP',
+    "poland:Pl10_40TP_Habicha":              '40TP',
+    "poland:Pl11_45TP_Habicha":              '45TP',
+    "poland:Pl12_25TP_KSUST_II":             '25TP',
+    "poland:Pl13_53TP_Markowskiego":         '53TP',
+    "poland:Pl14_4TP":                       '4TP',
+    "poland:Pl15_60TP_Lewandowskiego":       '60TP',
     "sweden:S01_Strv_74_A2":                 'm42·57',
     "sweden:S02_Strv_M42":                   'm/42',
     "sweden:S03_Strv_M38":                   'm/38',
@@ -641,6 +649,7 @@ _data = {
     "ussr:R153_Object_705":                  'obj705',
     "ussr:R154_T_34E_1943":                  't34·e',
     "ussr:R155_Object_277":                  'obj777',
+    "ussr-R156_IS_2M":                       'Is·2M',
     "ussr:R157_Object_279R":                 'obj279R',
     "ussr:R15_S-51":                         'S·51',
     "ussr:R16_SU-18":                        'Su·18',
@@ -713,7 +722,6 @@ _data = {
     "ussr:R86_LTP_bootcamp":                 'Ltp',
     "ussr:R87_T62A":                         't62a',
     "ussr:R87_T62A_fallout":                 't62a',
-    "ussr:R87_T62A_sport":                   't62a·sp',
     "ussr:R88_Object268":                    'obj268',
     "ussr:R89_SU122_44":                     '122·44',
     "ussr:R90_IS_4M":                        'Is·4',

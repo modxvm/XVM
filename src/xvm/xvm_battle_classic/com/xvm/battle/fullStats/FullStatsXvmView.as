@@ -35,7 +35,7 @@ package com.xvm.battle.fullStats
         private function init():void
         {
             page.unregisterComponent(BATTLE_VIEW_ALIASES.FULL_STATS);
-            page.xfw_battleStatisticDataController.componentControllers.splice(page.xfw_battleStatisticDataController.componentControllers.indexOf(page.fullStats), 1);
+            page.xfw_battleStatisticDataController.xfw_componentControllers.splice(page.xfw_battleStatisticDataController.xfw_componentControllers.indexOf(page.fullStats), 1);
             var fullStats:DisplayObject = page.fullStats as DisplayObject
             var idx:int = page.getChildIndex(fullStats);
             page.removeChild(fullStats);

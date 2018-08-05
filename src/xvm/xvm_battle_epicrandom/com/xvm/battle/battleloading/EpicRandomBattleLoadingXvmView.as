@@ -34,7 +34,7 @@ package com.xvm.battle.battleloading
         private function init():void
         {
             page.unregisterComponent(BATTLE_VIEW_ALIASES.BATTLE_LOADING);
-            page.xfw_battleStatisticDataController.componentControllers.splice(page.xfw_battleStatisticDataController.componentControllers.indexOf(page.battleLoading), 1);
+            page.xfw_battleStatisticDataController.xfw_componentControllers.splice(page.xfw_battleStatisticDataController.xfw_componentControllers.indexOf(page.battleLoading), 1);
             var idx:int = page.getChildIndex(page.battleLoading);
             page.removeChild(page.battleLoading);
             var component:UI_EpicRandomBattleLoading = new UI_EpicRandomBattleLoading();

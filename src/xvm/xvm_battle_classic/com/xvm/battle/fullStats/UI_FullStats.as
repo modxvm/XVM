@@ -12,6 +12,7 @@ package com.xvm.battle.fullStats
     import net.wg.gui.components.containers.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.managers.impl.*;
+    import net.wg.gui.battle.random.views.stats.components.fullStats.*;
 
     public dynamic class UI_FullStats extends FullStatsUI
     {
@@ -25,7 +26,7 @@ package com.xvm.battle.fullStats
             //Logger.add("UI_fullStats");
             super();
 
-            this.xfw_tableCtrl = new FullStatsTableCtrlXvm(this.statsTable, this);
+            this.xfw_tableCtrl = new FullStatsTableCtrlXvm(FullStatsTable(statsTable), this);
 
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
         }

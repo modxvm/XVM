@@ -1,4 +1,15 @@
-﻿XVM-7.6.9:
+﻿XVM-7.7.0-dev:
+  [GENERAL]
+  * World of Tanks 1.1.0
+
+  [CAMERA]
+  * added options:
+      "camera"/"battleHint"/"hideTrajectoryView" - hide the tips aiming mode changing in strategic mode
+      "camera"/"battleHint"/"hideSiegeIndicator" - hide the tips about switching to siege mode
+      "camera"/"battleHint"/"hideQuestProgress" - hide the tips about switching to menu Personal Missions
+  * removed option "camera"/"hideHint"
+
+XVM-7.6.9:
   [GENERAL]
   * World of Tanks 1.0.2.3
 
@@ -42,7 +53,7 @@ XVM-7.6.6:
 
 XVM-7.6.5:
   [INSTALLER]
-  * Fixed XVM installer uninstallation process.
+  * fixed XVM installer uninstallation process.
 
   [OTHER]
   * fixed "updateReserve" function error

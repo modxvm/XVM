@@ -34,7 +34,7 @@ package com.xvm.battle.playersPanel
         private function init():void
         {
             page.unregisterComponent(BATTLE_VIEW_ALIASES.PLAYERS_PANEL);
-            page.xfw_battleStatisticDataController.componentControllers.splice(page.xfw_battleStatisticDataController.componentControllers.indexOf(page.epicRandomPlayersPanel), 1);
+            page.xfw_battleStatisticDataController.xfw_componentControllers.splice(page.xfw_battleStatisticDataController.xfw_componentControllers.indexOf(page.epicRandomPlayersPanel), 1);
             var idx:int = page.getChildIndex(page.epicRandomPlayersPanel);
             page.removeChild(page.epicRandomPlayersPanel);
             var component:UI_EpicRandomPlayersPanel = new UI_EpicRandomPlayersPanel();
