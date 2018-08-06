@@ -9,7 +9,7 @@
     "dependencies_optional": [
         "com.modxvm.xfw.filewatcher", 
         "com.modxvm.xfw.mutex",
-        "com.modxvm.xfw.wotfix"    
+        "com.modxvm.xfw.xpfix"    
     ],
 
     "url": "https://modxvm.com/",
