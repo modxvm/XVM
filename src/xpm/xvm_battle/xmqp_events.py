@@ -144,6 +144,9 @@ def _DestroyTimersPanel__showDestroyTimer(self, value):
             'totalTime':totalTime,
             'level':level})
 
+# TODO: 1.1-CT, need to replace (function is missing)
+
+""" *************************************
 @registerEvent(DestroyTimersPanel, '_DestroyTimersPanel__hideDestroyTimer')
 def _DestroyTimersPanel__hideDestroyTimer(self, value):
     if xmqp.is_active() and g_appLoader.getSpaceID() == GUI_GLOBAL_SPACE_ID.BATTLE:
@@ -154,6 +157,7 @@ def _DestroyTimersPanel__hideDestroyTimer(self, value):
             'event':EVENTS.XMQP_VEHICLE_TIMER,
             'enable':False,
             'code':code})
+************************************* """
 
 # death zone timers
 #   zoneID: death_zone, gas_attack, ALL
@@ -170,6 +174,9 @@ def _DestroyTimersPanel_showDeathZoneTimer(self, value):
             'totalTime':totalTime,
             'level':level})
 
+# TODO: 1.1-CT, need to replace (function is missing)
+
+""" *************************************
 @registerEvent(DestroyTimersPanel, '_hideDeathZoneTimer')
 def _DestroyTimersPanel_hideDeathZoneTimer(self, value):
     if xmqp.is_active() and g_appLoader.getSpaceID() == GUI_GLOBAL_SPACE_ID.BATTLE:
@@ -180,6 +187,7 @@ def _DestroyTimersPanel_hideDeathZoneTimer(self, value):
             'event':EVENTS.XMQP_DEATH_ZONE_TIMER,
             'enable':False,
             'code':code})
+************************************* """
 
 # sixth sense indicator
 
