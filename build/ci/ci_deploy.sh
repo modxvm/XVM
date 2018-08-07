@@ -59,8 +59,7 @@ pack_xfw(){
     mkdir -p "~output_zip/"
 
     mkdir -p "~output_zip/mods/$XVMBUILD_WOT_VERSION/"
-    cp -rf "~output_wotmod/com.modxvm.xfw_$XVMBUILD_XFW_VERSION.$XVMBUILD_XFW_REVISION.wotmod" "~output_zip/mods/$XVMBUILD_WOT_VERSION/"
-
+    cp -rf "~output_wotmod/*.wotmod" "~output_zip/mods/$XVMBUILD_WOT_VERSION/"
     cp -r "~output/swc/" "~output_zip/"
 
     popd > /dev/null
