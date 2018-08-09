@@ -1,31 +1,31 @@
 ﻿{
     "RU": {
-        "ver": "7.6.10",
+        "ver": "7.6.11",
         "wot": "1.0.2.4",
         "message": " • WoT 1.0.2.4\n *исправления вылетов \nПодробности на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
     },
     "EU": {
-        "ver": "7.6.10",
+        "ver": "7.6.11",
         "wot": "1.0.2.4",
         "message": " • WoT 1.0.2.4\n *crash fixes \nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "NA": {
-        "ver": "7.6.10",
+        "ver": "7.6.11",
         "wot": "1.0.2.4",
         "message": " • WoT 1.0.2.4\n *crash fixes \nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "ASIA": {
-        "ver": "7.6.10",
+        "ver": "7.6.11",
         "wot": "1.0.2.4",
         "message": " • WoT 1.0.2.4\n *crash fixes \nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "CN": {
-        "ver": "7.6.10",
+        "ver": "7.6.11",
         "wot": "1.0.2.4",
         "message": " • WoT 1.0.2.4\n *crash fixes \nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "CT": {
-        "ver": "7.6.10",
+        "ver": "7.6.11",
         "wot": "1.0.2.4",
         "message": " • WoT 1.0.2.4\n *crash fixes \nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     }
