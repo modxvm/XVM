@@ -26,7 +26,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 06.08.2018
+    # Last update: 16.08.2018
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -353,6 +353,7 @@ _data = {
     "japan:J28_O_I_100":                     'O·ni',
     "japan:J29_Nameless":                    'Namel',
     "japan:J30_Edelweiss":                   'Edelw',
+    "poland:Pl01_TKS_20mm":                  'tks20',
     "poland:Pl03_PzV_Poland":                'Pudel',
     "poland:Pl05_50TP_Tyszkiewicza":         '50TP',
     "poland:Pl06_10TP":                      '10TP',

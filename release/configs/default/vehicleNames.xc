@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 06.08.2018
+    // Last update: 16.08.2018
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -331,6 +331,7 @@
     "japan-J28_O_I_100":                     {"name": null, "short": null},
     "japan-J29_Nameless":                    {"name": null, "short": null},
     "japan-J30_Edelweiss":                   {"name": null, "short": null},
+    "poland-Pl01_TKS_20mm":                  {"name": null, "short": null},
     "poland-Pl03_PzV_Poland":                {"name": null, "short": null},
     "poland-Pl05_50TP_Tyszkiewicza":         {"name": null, "short": null},
     "poland-Pl06_10TP":                      {"name": null, "short": null},
