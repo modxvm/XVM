@@ -32,7 +32,7 @@ package com.xvm.battle
         {
             "rankedBattlePage": [
                 RankedBattleLoadingXvmView,
-                RankedFullStatsXvmView,
+                //RankedFullStatsXvmView, //TODO: 1.1.0 CT
                 RankedPlayersPanelXvmView,
                 TeamBasesPanelXvmView,
                 MinimapXvmView,

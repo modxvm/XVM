@@ -32,7 +32,7 @@ package com.xvm.battle
         {
             "classicBattlePage": [
                 BattleLoadingXvmView,
-                FullStatsXvmView,
+                //FullStatsXvmView, //TODO: 1.1.0
                 PlayersPanelXvmView,
                 TeamBasesPanelXvmView,
                 MinimapXvmView,
