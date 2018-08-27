@@ -29,6 +29,9 @@ from gui.Scaleform.daapi.view.battle.shared.damage_panel import DamagePanel
 from gui.Scaleform.daapi.view.battle.shared.markers2d import settings as markers2d_settings
 from gui.Scaleform.daapi.view.battle.shared.minimap.plugins import ArenaVehiclesPlugin
 from gui.Scaleform.daapi.view.battle.shared.page import SharedPage
+from gui.Scaleform.daapi.view.battle.shared.hint_panel.plugins import TrajectoryViewHintPlugin, SiegeIndicatorHintPlugin, QuestProgressHintPlugin
+from account_helpers import AccountSettings
+from account_helpers.AccountSettings import TRAJECTORY_VIEW_HINT_COUNTER, QUEST_PROGRESS_SHOWS_COUNT
 
 from xfw import *
 from xfw_actionscript.python import *
@@ -190,6 +193,24 @@ def _SharedPage_as_setPostmortemTipsVisibleS(base, self, value):
 def _switchToPostmortem(base, self):
     if config.get('battle/showPostmortemTips'):
         base(self)
+
+@overrideMethod(TrajectoryViewHintPlugin, 'start')
+def start(base, self):
+    if config.get('battle/battleHint/hideTrajectoryView'):
+        AccountSettings.setSettings(TRAJECTORY_VIEW_HINT_COUNTER, 0)
+    base(self)
+
+@overrideMethod(SiegeIndicatorHintPlugin, 'start')
+def start(base, self):
+    if config.get('battle/battleHint/hideSiegeIndicator'):
+        AccountSettings.setSettings('siegeModeHintCounter', 0)
+    base(self)
+
+@overrideMethod(QuestProgressHintPlugin, 'start')
+def start(base, self):
+    if config.get('battle/battleHint/hideQuestProgress'):
+        AccountSettings.setSettings(QUEST_PROGRESS_SHOWS_COUNT, 0)
+    base(self)
 
 
 #####################################################################

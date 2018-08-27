@@ -2,11 +2,13 @@
   [ОБЩЕЕ]
   * World of Tanks 1.1.0
 
-  [КАМЕРА]
+  [БОЙ]
   * добавлены опции:
-      "camera"/"battleHint"/"hideTrajectoryView" - скрыть подсказку смены режима прицеливания в стратегическом режиме
-      "camera"/"battleHint"/"hideSiegeIndicator" -  скрыть подсказку перехода в осадный режим
-      "camera"/"battleHint"/"hideQuestProgress" - скрыть подсказку перехода в меню ЛБЗ
+      "battle"/"battleHint"/"hideTrajectoryView" - скрыть подсказку смены режима прицеливания в стратегическом режиме
+      "battle"/"battleHint"/"hideSiegeIndicator" -  скрыть подсказку перехода в осадный режим
+      "battle"/"battleHint"/"hideQuestProgress" - скрыть подсказку перехода в меню ЛБЗ
+
+  [КАМЕРА]
   * удалена опция "camera"/"hideHint"
 
 XVM-7.6.9:

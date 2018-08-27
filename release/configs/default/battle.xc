@@ -26,6 +26,19 @@
     // Duration of the sixth sense indicator (msec).
     // Длительность отображения индикатора 6-го чувства (мсек).
     "sixthSenseDuration": 2000,
+    // true - hide the tips in battle.
+    // true - скрыть подсказки в бою.
+    "battleHint": {
+      // true - hide the tips aiming mode changing in strategic mode.
+      // true - скрыть подсказку смены режима прицеливания в стратегическом режиме.
+      "hideTrajectoryView": false,
+      // true - hide the tips about switching to siege mode.
+      // true - скрыть подсказку перехода в осадный режим.
+      "hideSiegeIndicator": false,
+      // true - hide the tips about switching to menu Personal Missions.
+      // true - скрыть подсказку перехода в меню ЛБЗ.
+      "hideQuestProgress": false
+    },
     // GUI elements settings (experts only)
     // Настройки графических элементов (только для экспертов!)
     "elements": ${"elements.xc":"elements"},

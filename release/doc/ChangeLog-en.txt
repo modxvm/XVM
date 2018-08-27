@@ -2,11 +2,13 @@
   [GENERAL]
   * World of Tanks 1.1.0
 
-  [CAMERA]
+  [BATTLE]
   * added options:
-      "camera"/"battleHint"/"hideTrajectoryView" - hide the tips aiming mode changing in strategic mode
-      "camera"/"battleHint"/"hideSiegeIndicator" - hide the tips about switching to siege mode
-      "camera"/"battleHint"/"hideQuestProgress" - hide the tips about switching to menu Personal Missions
+      "battle"/"battleHint"/"hideTrajectoryView" - hide the tips aiming mode changing in strategic mode
+      "battle"/"battleHint"/"hideSiegeIndicator" - hide the tips about switching to siege mode
+      "battle"/"battleHint"/"hideQuestProgress" - hide the tips about switching to menu Personal Missions
+
+  [CAMERA]
   * removed option "camera"/"hideHint"
 
 XVM-7.6.9:

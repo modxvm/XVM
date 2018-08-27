@@ -19,9 +19,6 @@ from gui.battle_control.battle_constants import CROSSHAIR_VIEW_ID
 from gui.Scaleform.daapi.view.battle.shared.crosshair.container import CrosshairPanelContainer
 from AvatarInputHandler.control_modes import SniperControlMode
 from helpers.EffectsList import _FlashBangEffectDesc
-from gui.Scaleform.daapi.view.battle.shared.hint_panel.plugins import TrajectoryViewHintPlugin, SiegeIndicatorHintPlugin, QuestProgressHintPlugin
-from account_helpers import AccountSettings
-from account_helpers.AccountSettings import TRAJECTORY_VIEW_HINT_COUNTER, QUEST_PROGRESS_SHOWS_COUNT
 from AvatarInputHandler.AimingSystems.SniperAimingSystem import SniperAimingSystem
 from Keys import KEY_RIGHTMOUSE
 from AvatarInputHandler import mathUtils
@@ -207,24 +204,6 @@ def create(base, self, model, list, args):
     if config.get('battle/camera/enabled') and config.get('battle/camera/noFlashBang'):
         return
     base(self, model, list, args)
-
-@overrideMethod(TrajectoryViewHintPlugin, 'start')
-def start(base, self):
-    if config.get('battle/camera/enabled') and config.get('battle/camera/battleHint/hideTrajectoryView'):
-        AccountSettings.setSettings(TRAJECTORY_VIEW_HINT_COUNTER, 0)
-    base(self)
-
-@overrideMethod(SiegeIndicatorHintPlugin, 'start')
-def start(base, self):
-    if config.get('battle/camera/enabled') and config.get('battle/camera/battleHint/hideSiegeIndicator'):
-        AccountSettings.setSettings('siegeModeHintCounter', 0)
-    base(self)
-
-@overrideMethod(QuestProgressHintPlugin, 'start')
-def start(base, self):
-    if config.get('battle/camera/enabled') and config.get('battle/camera/battleHint/hideQuestProgress'):
-        AccountSettings.setSettings(QUEST_PROGRESS_SHOWS_COUNT, 0)
-    base(self)
 
 @overrideMethod(SniperAimingSystem, '_SniperAimingSystem__clampToLimits')
 def clampToLimits(base, self, turretYaw, gunPitch):
