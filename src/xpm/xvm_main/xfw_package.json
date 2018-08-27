@@ -8,8 +8,7 @@
     "dependencies": ["com.modxvm.xfw"],
     "dependencies_optional": [
         "com.modxvm.xfw.filewatcher", 
-        "com.modxvm.xfw.mutex",
-        "com.modxvm.xfw.xpfix"    
+        "com.modxvm.xfw.mutex"
     ],
 
     "url": "https://modxvm.com/",
