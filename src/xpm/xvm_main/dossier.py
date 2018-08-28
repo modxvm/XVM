@@ -379,6 +379,7 @@ class _Dossier(object):
         return res
 
     def __updateCamouflageResult(self, res, summer_camo, winter_camo, desert_camo):
+        print "xvm_main::dosier::_Dossier::__updateCamouflageResult()"
         res.update({
           'camouflageSummer': 'summer' if summer_camo else None,
           'camouflageWinter': 'winter' if winter_camo else None,
