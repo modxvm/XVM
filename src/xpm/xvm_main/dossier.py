@@ -155,11 +155,11 @@ class _Dossier(object):
         vehicle = self.itemsCache.items.getItemByCD(vehCD)
 
         outfit = vehicle.getOutfit(SeasonType.SUMMER)
-        summer_camo = outfit and bool(outfit.hull.slotFor(GUI_ITEM_TYPE.CAMOUFLAGE).getItem())
+        summer_camo = outfit is not None and bool(outfit.hull.slotFor(GUI_ITEM_TYPE.CAMOUFLAGE).getItem())
         outfit = vehicle.getOutfit(SeasonType.WINTER)
-        winter_camo = outfit and bool(outfit.hull.slotFor(GUI_ITEM_TYPE.CAMOUFLAGE).getItem())
+        winter_camo = outfit is not None and bool(outfit.hull.slotFor(GUI_ITEM_TYPE.CAMOUFLAGE).getItem())
         outfit = vehicle.getOutfit(SeasonType.DESERT)
-        desert_camo = outfit and bool(outfit.hull.slotFor(GUI_ITEM_TYPE.CAMOUFLAGE).getItem())
+        desert_camo = outfit is not None and bool(outfit.hull.slotFor(GUI_ITEM_TYPE.CAMOUFLAGE).getItem())
 
         if self.__isVehicleDossierLoaded(accountDBID, vehCD):
             dossier = self.itemsCache.items.getVehicleDossier(vehCD, accountDBID)
