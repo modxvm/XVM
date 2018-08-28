@@ -1,7 +1,19 @@
 ﻿XVM-7.7.0-dev:
+  [KNOWN ISSUES]
+  * on the battle loading screen, vehicle levels can be shifted along the vertical axis
+  * there is no player statistics on the Tab key
+
   [GENERAL]
   * World of Tanks 1.1.0
 
+  [XFW]
+  * refactored package loading algorithm
+  * updated "xfw_package.swf" file format:
+      - implented "wot_version_min" and "wot_version_exactmatch" fields for specifiyng target WoT client version
+      - implented support for masks in "dependencies_optional" field, for example "com.modxvm.xfw.wotfix.*"
+  * XFW.Native was updated to 1.3.1-65
+      - implented support for subscribing on some D3D9 and DXGI functions
+  * actionscript files now stores in "com.modxvm.xfw.actionscript" package
   [BATTLE]
   * added options:
       "battle"/"battleHint"/"hideTrajectoryView" - hide the tips aiming mode changing in strategic mode
@@ -10,6 +22,18 @@
 
   [CAMERA]
   * removed option "camera"/"hideHint"
+
+  [OTHER]
+  * crashreports: we now using https for crashreports uploading
+  * crashreports: now crash upload window should use the client language
+
+XVM-7.6.11:
+  [GENERAL]
+  * fix incompability with unbound-based UI windows (e.g. new ingame store)
+
+XVM-7.6.10:
+  [GENERAL]
+  * World of Tanks 1.0.2.4
 
 XVM-7.6.9:
   [GENERAL]
