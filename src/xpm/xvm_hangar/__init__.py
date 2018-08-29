@@ -96,12 +96,13 @@ def BarracksMeta_as_setTankmenS(base, self, data):
                     tankman_role_arr.append('')
                     itemsCache = dependency.instance(IItemsCache)
                     tankman_full_info = itemsCache.items.getTankman(tankman['tankmanID'])
-                    for skill in tankman_full_info.skills:
-                        tankman_role_arr[-1] += "<img src='%s/skills/%s' vspace='-3'>" % (imgPath, skill.icon)
-                    if len(tankman_full_info.skills):
-                        tankman_role_arr[-1] += "%s%%" % tankman_full_info.descriptor.lastSkillLevel
-                    if tankman_full_info.hasNewSkill and tankman_full_info.newSkillCount[0] > 0:
-                        tankman_role_arr[-1] += "<img src='%s/skills/new_skill.png' vspace='-3'>x%s" % (imgPath, tankman_full_info.newSkillCount[0])
+                    if tankman_full_info is not None:
+                        for skill in tankman_full_info.skills:
+                            tankman_role_arr[-1] += "<img src='%s/skills/%s' vspace='-3'>" % (imgPath, skill.icon)
+                        if len(tankman_full_info.skills):
+                            tankman_role_arr[-1] += "%s%%" % tankman_full_info.descriptor.lastSkillLevel
+                        if tankman_full_info.hasNewSkill and tankman_full_info.newSkillCount[0] > 0:
+                            tankman_role_arr[-1] += "<img src='%s/skills/new_skill.png' vspace='-3'>x%s" % (imgPath, tankman_full_info.newSkillCount[0])
                     if not tankman_role_arr[-1]:
                         tankman_role_arr[-1] = l10n('noSkills')
                 tankman['role'] = ' '.join(tankman_role_arr)
