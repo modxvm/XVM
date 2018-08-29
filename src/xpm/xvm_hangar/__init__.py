@@ -86,7 +86,7 @@ def BarracksMeta_as_setTankmenS(base, self, data):
         if cfg_hangar_barracksShowFlags or cfg_hangar_barracksShowSkills:
             imgPath = 'img://../mods/shared_resources/xvm/res/icons/barracks'
             for tankman in data['tankmenData']:
-                if 'role' not in tankman:
+                if ('role' not in tankman) or tankman['notRecruited']:
                     continue
                 tankman['rank'] = tankman['role']
                 tankman_role_arr = []
