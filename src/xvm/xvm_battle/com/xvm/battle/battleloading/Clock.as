@@ -73,8 +73,11 @@ package com.xvm.battle.battleloading
 
         protected function onDispose():void
         {
-            form.removeChild(clock);
-            clock = null;
+            if(clock)
+            {
+                form.removeChild(clock);
+                clock = null;
+            }
         }
 
         // PRIVATE
