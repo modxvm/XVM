@@ -8,7 +8,6 @@ cd "$XVMBUILD_ROOT_PATH"
 
 source ./src/xfw/build/library.sh
 source ./build/xvm-build.conf
-source ./src/xfw/build/xfw-build.conf
 
 ##########################
 ####      CONFIG      ####
