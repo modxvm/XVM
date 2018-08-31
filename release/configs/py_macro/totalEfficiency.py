@@ -78,17 +78,17 @@ def xvm_fragsSquad():
 
 @xvm.export('xvm.totalFragsSquad', deterministic=False)
 def xvm_totalFragsSquad():
-    return te.fragsSquad + te.ribbonTypes['kill'][1]
+    return te.fragsSquad + te.ribbonTypes['kill']
 
 
 @xvm.export('xvm.detection', deterministic=False)
 def xvm_detection():
-    return te.ribbonTypes['spotted'][1]
+    return te.ribbonTypes['spotted']
 
 
 @xvm.export('xvm.frags', deterministic=False)
 def xvm_frags():
-    return te.ribbonTypes['kill'][1]
+    return te.ribbonTypes['kill']
 
 
 @xvm.export('xvm.assistTrack', deterministic=False)
@@ -103,7 +103,7 @@ def xvm_assistSpot():
 
 @xvm.export('xvm.crits', deterministic=False)
 def xvm_crits():
-    return te.ribbonTypes['crits'][1]
+    return te.ribbonTypes['crits']
 
 
 @xvm.export('xvm.numberHitsBlocked', deterministic=False)

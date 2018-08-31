@@ -49,12 +49,12 @@ ribbonTypes = {
     'damage': 0,
     'ram': 0,
     'burn': 0,
-    'kill': [0, 0],
-    'teamKill': [0, 0],
-    'spotted': [0, 0],
+    'kill': 0,
+    'teamKill': 0,
+    'spotted': 0,
     'assistTrack': 0,
     'assistSpot': 0,
-    'crits': [0, 0],
+    'crits': 0,
     'capture': 0,
     'defence': 0,
     'assist': 0
@@ -133,74 +133,55 @@ def showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor):
         as_event('ON_TOTAL_EFFICIENCY')
 
 
+def isPlayerVehicle():
+    if player is not None:
+        if hasattr(player.inputHandler.ctrl, 'curVehicleID'):
+            vId = player.inputHandler.ctrl.curVehicleID
+            v = vId.id if isinstance(vId, Vehicle) else vId
+            return player.playerVehicleID == v
+        else:
+            return True
+    else:
+        return False
+
+
 @registerEvent(DamageLogPanel, '_onTotalEfficiencyUpdated')
 def _onTotalEfficiencyUpdated(self, diff):
     global totalDamage, totalAssist, totalBlocked, numberHitsBlocked, old_totalDamage, damage, totalStun
-    if player is not None:
-        if hasattr(player.inputHandler.ctrl, 'curVehicleID'):
-            vId = player.inputHandler.ctrl.curVehicleID
-            v = vId.id if isinstance(vId, Vehicle) else vId
-        else:
-            v = player.playerVehicleID
-        if player.playerVehicleID == v:
-            if PERSONAL_EFFICIENCY_TYPE.DAMAGE in diff:
-                totalDamage = diff[PERSONAL_EFFICIENCY_TYPE.DAMAGE]
-                damage = totalDamage - old_totalDamage
-                old_totalDamage = totalDamage
-            if PERSONAL_EFFICIENCY_TYPE.ASSIST_DAMAGE in diff:
-                totalAssist = diff[PERSONAL_EFFICIENCY_TYPE.ASSIST_DAMAGE]
-            if PERSONAL_EFFICIENCY_TYPE.STUN in diff:
-                totalStun = diff[PERSONAL_EFFICIENCY_TYPE.STUN]
-            if PERSONAL_EFFICIENCY_TYPE.BLOCKED_DAMAGE in diff:
-                totalBlocked = diff[PERSONAL_EFFICIENCY_TYPE.BLOCKED_DAMAGE]
-                if totalBlocked == 0:
-                    numberHitsBlocked = 0
-                else:
-                    numberHitsBlocked += 1
-            as_event('ON_TOTAL_EFFICIENCY')
+    if isPlayerVehicle():
+        if PERSONAL_EFFICIENCY_TYPE.DAMAGE in diff:
+            totalDamage = diff[PERSONAL_EFFICIENCY_TYPE.DAMAGE]
+            damage = totalDamage - old_totalDamage
+            old_totalDamage = totalDamage
+        if PERSONAL_EFFICIENCY_TYPE.ASSIST_DAMAGE in diff:
+            totalAssist = diff[PERSONAL_EFFICIENCY_TYPE.ASSIST_DAMAGE]
+        if PERSONAL_EFFICIENCY_TYPE.STUN in diff:
+            totalStun = diff[PERSONAL_EFFICIENCY_TYPE.STUN]
+        if PERSONAL_EFFICIENCY_TYPE.BLOCKED_DAMAGE in diff:
+            totalBlocked = diff[PERSONAL_EFFICIENCY_TYPE.BLOCKED_DAMAGE]
+            if totalBlocked == 0:
+                numberHitsBlocked = 0
+            else:
+                numberHitsBlocked += 1
+        as_event('ON_TOTAL_EFFICIENCY')
 
 
-@registerEvent(BattleRibbonsPanel, '_addRibbon')
-def _addRibbon(self, ribbonID, ribbonType='', leftFieldStr='', vehName='', vehType='', rightFieldStr=''):
+@registerEvent(BattleRibbonsPanel, '_BattleRibbonsPanel__onRibbonAdded')
+def BattleRibbonsPanel__onRibbonAdded(self, ribbon):
     global ribbonTypes, numberDamagesDealt
-    if player is not None:
-        if hasattr(player.inputHandler.ctrl, 'curVehicleID'):
-            vId = player.inputHandler.ctrl.curVehicleID
-            v = vId.id if isinstance(vId, Vehicle) else vId
-        else:
-            v = player.playerVehicleID
-        if player.playerVehicleID == v:
-            if ribbonType in ['assistTrack']:
-                ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistSpot']) if totalAssist else 0
-            if ribbonType in ['assistSpot']:
-                ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistTrack']) if totalAssist else 0
-            if ribbonType in ['spotted', 'crits']:
-                if leftFieldStr:
-                    ribbonTypes[ribbonType][1] = ribbonTypes[ribbonType][0] + int(leftFieldStr[1:])
-                else:
-                    ribbonTypes[ribbonType][1] += 1
-                    ribbonTypes[ribbonType][0] = ribbonTypes[ribbonType][1]
-            if ribbonType in ['kill', 'teamKill']:
-                ribbonTypes[ribbonType][1] += 1
-            if ribbonType in ['damage', 'ram', 'burn']:
-                numberDamagesDealt += 1
-            as_event('ON_TOTAL_EFFICIENCY')
-
-
-@overrideMethod(BattleRibbonsPanel, 'onHide')
-def _onHide(base, self, ribbonID):
-    global ribbonTypes
-    ribbonType = self._BattleRibbonsPanel__ribbonsAggregator.getRibbon(ribbonID).getType()
-    if player is not None:
-        if hasattr(player.inputHandler.ctrl, 'curVehicleID'):
-            vId = player.inputHandler.ctrl.curVehicleID
-            v = vId.id if isinstance(vId, Vehicle) else vId
-        else:
-            v = player.playerVehicleID
-        if player.playerVehicleID == v:
-            if ribbonType in ['spotted', 'kill', 'teamKill', 'crits']:
-                ribbonTypes[ribbonType][0] = ribbonTypes[ribbonType][1]
-    base(self, ribbonID)
+    if isPlayerVehicle():
+        ribbonType = ribbon.getType()
+        if ribbonType == 'assistTrack':
+            ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistSpot']) if totalAssist else 0
+        if ribbonType == 'assistSpot':
+            ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistTrack']) if totalAssist else 0
+        if ribbonType in ['crits', 'kill']:
+            ribbonTypes[ribbonType] += ribbon.getExtraValue()
+        if ribbonType == 'spotted':
+            ribbonTypes[ribbonType] += ribbon.getCount()
+        if ribbonType in ['damage', 'ram', 'burn']:
+            numberDamagesDealt += 1
+        as_event('ON_TOTAL_EFFICIENCY')
 
 
 @registerEvent(Vehicle, 'onHealthChanged')
@@ -281,12 +262,12 @@ def destroyGUI(self):
         'damage': 0,
         'ram': 0,
         'burn': 0,
-        'kill': [0, 0],
-        'teamKill': [0, 0],
-        'spotted': [0, 0],
+        'kill': 0,
+        'teamKill': 0,
+        'spotted': 0,
         'assistTrack': 0,
         'assistSpot': 0,
-        'crits': [0, 0],
+        'crits': 0,
         'capture': 0,
         'defence': 0,
         'assist': 0
