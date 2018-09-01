@@ -86,31 +86,31 @@ def ArenaDataProvider_updateVehicleStats(self, vID, vStats):
 @registerEvent(PlayerAvatar, 'showShotResults')
 def PlayerAvatar_showShotResults(self, results):
     global numberHits, numberStuns, numberDamagedVehicles, hitAlly
-    b = False
+    isUpdate = False
     for r in results:
         vehID = (r & 4294967295L)
         if self.playerVehicleID != vehID:
             flags = r >> 32 & 4294967295L
             if flags & VHF.ATTACK_IS_DIRECT_PROJECTILE:
                 numberHits += 1
-                b = True
+                isUpdate = True
             if flags & VHF.STUN_STARTED:
                 numberStuns += 1
-                b = True
+                isUpdate = True
             if flags & VHF.MATERIAL_WITH_POSITIVE_DF_PIERCED_BY_PROJECTILE:
                 if vehID not in numberDamagedVehicles:
                     numberDamagedVehicles.append(vehID)
-                    b = True
+                    isUpdate = True
             elif (flags & (VHF.GUN_DAMAGED_BY_PROJECTILE | VHF.GUN_DAMAGED_BY_EXPLOSION)) or (flags & (VHF.CHASSIS_DAMAGED_BY_PROJECTILE | VHF.CHASSIS_DAMAGED_BY_EXPLOSION)):
                 if vehID not in numberDamagedVehicles:
                     numberDamagedVehicles.append(vehID)
-                    b = True
+                    isUpdate = True
             if not hitAlly and (flags & (VHF.IS_ANY_DAMAGE_MASK | VHF.ATTACK_IS_DIRECT_PROJECTILE)):
                 if vehID in allyVehicles:
                     vehicleDesc = self.arena.vehicles.get(vehID)
                     hitAlly = vehicleDesc['isAlive']
-                    b = True
-    if b:
+                    isUpdate = True
+    if isUpdate:
         as_event('ON_TOTAL_EFFICIENCY')
 
 
@@ -149,21 +149,27 @@ def isPlayerVehicle():
 def _onTotalEfficiencyUpdated(self, diff):
     global totalDamage, totalAssist, totalBlocked, numberHitsBlocked, old_totalDamage, damage, totalStun
     if isPlayerVehicle():
+        isUpdate = False
         if PERSONAL_EFFICIENCY_TYPE.DAMAGE in diff:
             totalDamage = diff[PERSONAL_EFFICIENCY_TYPE.DAMAGE]
             damage = totalDamage - old_totalDamage
             old_totalDamage = totalDamage
+            isUpdate = True
         if PERSONAL_EFFICIENCY_TYPE.ASSIST_DAMAGE in diff:
             totalAssist = diff[PERSONAL_EFFICIENCY_TYPE.ASSIST_DAMAGE]
+            isUpdate = True
         if PERSONAL_EFFICIENCY_TYPE.STUN in diff:
             totalStun = diff[PERSONAL_EFFICIENCY_TYPE.STUN]
+            isUpdate = True
         if PERSONAL_EFFICIENCY_TYPE.BLOCKED_DAMAGE in diff:
             totalBlocked = diff[PERSONAL_EFFICIENCY_TYPE.BLOCKED_DAMAGE]
             if totalBlocked == 0:
                 numberHitsBlocked = 0
             else:
                 numberHitsBlocked += 1
-        as_event('ON_TOTAL_EFFICIENCY')
+            isUpdate = True
+        if isUpdate:
+            as_event('ON_TOTAL_EFFICIENCY')
 
 
 @registerEvent(BattleRibbonsPanel, '_BattleRibbonsPanel__onRibbonAdded')
@@ -173,15 +179,19 @@ def BattleRibbonsPanel__onRibbonAdded(self, ribbon):
         ribbonType = ribbon.getType()
         if ribbonType == 'assistTrack':
             ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistSpot']) if totalAssist else 0
-        if ribbonType == 'assistSpot':
+            as_event('ON_TOTAL_EFFICIENCY')
+        elif ribbonType == 'assistSpot':
             ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistTrack']) if totalAssist else 0
-        if ribbonType in ['crits', 'kill']:
+            as_event('ON_TOTAL_EFFICIENCY')
+        elif ribbonType in ['crits', 'kill']:
             ribbonTypes[ribbonType] += ribbon.getExtraValue()
-        if ribbonType == 'spotted':
+            as_event('ON_TOTAL_EFFICIENCY')
+        elif ribbonType == 'spotted':
             ribbonTypes[ribbonType] += ribbon.getCount()
-        if ribbonType in ['damage', 'ram', 'burn']:
+            as_event('ON_TOTAL_EFFICIENCY')
+        elif ribbonType in ['damage', 'ram', 'burn']:
             numberDamagesDealt += 1
-        as_event('ON_TOTAL_EFFICIENCY')
+            as_event('ON_TOTAL_EFFICIENCY')
 
 
 @registerEvent(Vehicle, 'onHealthChanged')
