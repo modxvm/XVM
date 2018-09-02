@@ -73,15 +73,21 @@ package com.xvm.battle.battleloading
 
         protected function onDispose():void
         {
-            form.removeChild(clock);
-            clock = null;
+            if(clock)
+            {
+                form.removeChild(clock);
+                clock = null;
+            }
         }
 
         // PRIVATE
 
         private function update():void
         {
-            clock.text = XfwUtils.FormatDate(clockFormat, new Date());
+            if(clock && clockFormat)
+            {
+                clock.text = XfwUtils.FormatDate(clockFormat, new Date());
+            }
         }
     }
 

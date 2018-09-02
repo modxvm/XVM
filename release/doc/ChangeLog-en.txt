@@ -1,4 +1,23 @@
-﻿XVM-7.7.0:
+﻿XVM-7.7.1:
+  [KNOWN ISSUES]
+  * on the battle loading screen, vehicle levels can be shifted along the vertical axis
+  * there is no player statistics on the Tab key
+
+ [OTHER]
+  * xfw: fixed crashfixes applying
+  * xvm_main/dossier: fixed None dereferencing
+  * xvm_battle/battleloading: fixed null dereferencing
+  * updated vehicle names
+  * fixed displaying of tankmen in barracks
+
+  [CRASH REPORTS]
+  * title was changed from "WoT" to "WoT+XVM"
+  * disclaimer font was increased
+  * disclaimer text was improved
+  * added XVM build to client version
+  * fixed crashreports sending in case when MSVC Redistributable 2015/2017 was not installed
+
+XVM-7.7.0:
   [KNOWN ISSUES]
   * on the battle loading screen, vehicle levels can be shifted along the vertical axis
   * there is no player statistics on the Tab key
