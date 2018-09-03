@@ -197,18 +197,21 @@ def _switchToPostmortem(base, self):
 @overrideMethod(TrajectoryViewHintPlugin, 'start')
 def start(base, self):
     if config.get('battle/battleHint/hideTrajectoryView'):
+        # default counter: 6
         AccountSettings.setSettings(TRAJECTORY_VIEW_HINT_COUNTER, 0)
     base(self)
 
 @overrideMethod(SiegeIndicatorHintPlugin, 'start')
 def start(base, self):
     if config.get('battle/battleHint/hideSiegeIndicator'):
+        # default counter: 10
         AccountSettings.setSettings('siegeModeHintCounter', 0)
     base(self)
 
 @overrideMethod(QuestProgressHintPlugin, 'start')
 def start(base, self):
     if config.get('battle/battleHint/hideQuestProgress'):
+        # default counter: 10
         AccountSettings.setSettings(QUEST_PROGRESS_SHOWS_COUNT, 0)
     base(self)
 
