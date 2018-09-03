@@ -97,12 +97,10 @@ def PlayerAvatar_showShotResults(self, results):
             if flags & VHF.STUN_STARTED:
                 numberStuns += 1
                 isUpdate = True
-            if flags & VHF.MATERIAL_WITH_POSITIVE_DF_PIERCED_BY_PROJECTILE:
-                if vehID not in numberDamagedVehicles:
-                    numberDamagedVehicles.append(vehID)
-                    isUpdate = True
-            elif (flags & (VHF.GUN_DAMAGED_BY_PROJECTILE | VHF.GUN_DAMAGED_BY_EXPLOSION)) or (flags & (VHF.CHASSIS_DAMAGED_BY_PROJECTILE | VHF.CHASSIS_DAMAGED_BY_EXPLOSION)):
-                if vehID not in numberDamagedVehicles:
+            if vehID not in numberDamagedVehicles:
+                if flags & (VHF.MATERIAL_WITH_POSITIVE_DF_PIERCED_BY_PROJECTILE | VHF.MATERIAL_WITH_POSITIVE_DF_PIERCED_BY_EXPLOSION
+                            | VHF.GUN_DAMAGED_BY_PROJECTILE | VHF.GUN_DAMAGED_BY_EXPLOSION
+                            | VHF.CHASSIS_DAMAGED_BY_PROJECTILE | VHF.CHASSIS_DAMAGED_BY_EXPLOSION):
                     numberDamagedVehicles.append(vehID)
                     isUpdate = True
             if not hitAlly and (flags & (VHF.IS_ANY_DAMAGE_MASK | VHF.ATTACK_IS_DIRECT_PROJECTILE)):
