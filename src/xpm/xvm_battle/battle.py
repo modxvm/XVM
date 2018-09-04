@@ -380,11 +380,8 @@ class Battle(object):
                         battleLoading.invalidateArenaInfo()
             ctrl = self.battle_page.getComponent(BATTLE_VIEW_ALIASES.BATTLE_STATISTIC_DATA_CONTROLLER)
             if ctrl:
-                ctrl._BattleStatisticsDataController__setPersonalStatus()
-                ctrl._BattleStatisticsDataController__setArenaDescription()
-                arenaDP = ctrl._battleCtx.getArenaDP()
-                ctrl.invalidateVehiclesInfo(arenaDP)
-                ctrl.invalidateVehiclesStats(arenaDP)
+                ctrl._dispose()
+                ctrl._populate()
             # update vehicles data
             for (vehicleID, vData) in avatar_getter.getArena().vehicles.iteritems():
                 self.updatePlayerState(vehicleID, INV.ALL)
