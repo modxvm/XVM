@@ -45,3 +45,25 @@ def _MarkersManager_createMarker(base, self, *args, **kwargs):
         BigWorld.cancelCallback(markersVisibleCallbackID)
     markersVisibleCallbackID = BigWorld.callback(0, lambda: _set_canvas_visible_true(self))
     return base(self, *args, **kwargs)
+
+
+#####################################################################
+# Debug FullStats
+
+from gui.Scaleform.daapi.view.battle.shared.stats_exchage import BattleStatisticsDataController
+
+@registerEvent(BattleStatisticsDataController, '_BattleStatisticsDataController__setArenaDescription')
+def __setArenaDescription(self):
+    log('BattleStatisticsDataController.__setArenaDescription()')
+
+@registerEvent(BattleStatisticsDataController, '_BattleStatisticsDataController__onQuestProgressUpdate')
+def __onQuestProgressUpdate(self, progressID, conditionVO):
+    log('BattleStatisticsDataController.__onQuestProgressUpdate({0}, "{1}")'.format(progressID, conditionVO))
+
+@registerEvent(BattleStatisticsDataController, '_BattleStatisticsDataController__onFullConditionsUpdate')
+def __onFullConditionsUpdate(self, *args):
+    log('BattleStatisticsDataController.__onFullConditionsUpdate({0})'.format(args))
+
+@registerEvent(BattleStatisticsDataController, '_BattleStatisticsDataController__onHeaderProgressesUpdate')
+def __onHeaderProgressesUpdate(self, *args):
+    log('BattleStatisticsDataController.__onHeaderProgressesUpdate({0})'.format(args))
