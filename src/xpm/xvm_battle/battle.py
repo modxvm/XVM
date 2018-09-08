@@ -26,10 +26,11 @@ from gui.Scaleform.genConsts.BATTLE_VIEW_ALIASES import BATTLE_VIEW_ALIASES
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 from gui.Scaleform.daapi.view.battle.shared import battle_loading
 from gui.Scaleform.daapi.view.battle.shared.damage_panel import DamagePanel
+from gui.Scaleform.daapi.view.battle.shared.hint_panel.plugins import TrajectoryViewHintPlugin, SiegeIndicatorHintPlugin, QuestProgressHintPlugin
 from gui.Scaleform.daapi.view.battle.shared.markers2d import settings as markers2d_settings
 from gui.Scaleform.daapi.view.battle.shared.minimap.plugins import ArenaVehiclesPlugin
 from gui.Scaleform.daapi.view.battle.shared.page import SharedPage
-from gui.Scaleform.daapi.view.battle.shared.hint_panel.plugins import TrajectoryViewHintPlugin, SiegeIndicatorHintPlugin, QuestProgressHintPlugin
+from gui.Scaleform.daapi.view.battle.shared.stats_exchage import BattleStatisticsDataController
 from account_helpers import AccountSettings
 from account_helpers.AccountSettings import TRAJECTORY_VIEW_HINT_COUNTER, QUEST_PROGRESS_SHOWS_COUNT
 
@@ -214,6 +215,11 @@ def start(base, self):
         # default counter: 10
         AccountSettings.setSettings(QUEST_PROGRESS_SHOWS_COUNT, 0)
     base(self)
+
+# force update quests in FullStats
+@overrideMethod(BattleStatisticsDataController, 'as_setQuestsInfoS')
+def _BattleStatisticsDataController_as_setQuestsInfoS(base, self, data, setForce):
+    base(self, data, True)
 
 
 #####################################################################
