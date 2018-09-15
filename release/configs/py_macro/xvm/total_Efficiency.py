@@ -170,6 +170,22 @@ def _onTotalEfficiencyUpdated(self, diff):
             as_event('ON_TOTAL_EFFICIENCY')
 
 
+@registerEvent(BattleRibbonsPanel, '_BattleRibbonsPanel__onRibbonUpdated')
+def BattleRibbonsPanel__onRibbonUpdated(self, ribbon):
+    global ribbonTypes
+    if isPlayerVehicle():
+        ribbonType = ribbon.getType()
+        if ribbonType == 'assistTrack':
+            ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistSpot']) if totalAssist else 0
+            as_event('ON_TOTAL_EFFICIENCY')
+        elif ribbonType == 'assistSpot':
+            ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistTrack']) if totalAssist else 0
+            as_event('ON_TOTAL_EFFICIENCY')
+        elif ribbonType in ['damage']:
+            numberDamagesDealt += 1
+            as_event('ON_TOTAL_EFFICIENCY')
+
+
 @registerEvent(BattleRibbonsPanel, '_BattleRibbonsPanel__onRibbonAdded')
 def BattleRibbonsPanel__onRibbonAdded(self, ribbon):
     global ribbonTypes, numberDamagesDealt
