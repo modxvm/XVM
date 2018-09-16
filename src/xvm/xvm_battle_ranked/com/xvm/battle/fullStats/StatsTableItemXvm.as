@@ -575,7 +575,7 @@ package com.xvm.battle.fullStats
                     _vehicleLevelIcon.x = DEFAULT_VEHICLE_LEVEL_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH + MIRRORED_VEHICLE_LEVEL_ICON_OFFSET;
                 }
             }
-            _vehicleLevelIcon.isCentralize = true;
+            _vehicleLevelIcon.isCentralizeByX = true;
             _vehicleLevelIcon.x = _vehicleLevelIcon.x - _vehicleLevelIcon.width / 2;
         }
 
