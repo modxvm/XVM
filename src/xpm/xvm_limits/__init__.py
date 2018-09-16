@@ -15,6 +15,7 @@ import traceback
 
 import BigWorld
 import game
+from gui import ingame_shop
 from gui.shared import g_eventBus, tooltips
 from gui.shared.gui_items import GUI_ITEM_TYPE
 from gui.shared.money import Currency
@@ -128,6 +129,18 @@ def handlersInvalidate(function, *handlers):
 # handlers
 
 # enable or disable active usage of gold (does not affect auto-refill ammo/equip)
+@overrideMethod(ingame_shop, 'canBuyGoldForItemThroughWeb')
+def canBuyGoldForItemThroughWeb(base, itemID, *args, **kwargs):
+    if not cfg_hangar_enableGoldLocker or gold_enable:
+        return base(itemID, *args, **kwargs)
+    return False
+
+@overrideMethod(ingame_shop, 'canBuyGoldForVehicleThroughWeb')
+def canBuyGoldForVehicleThroughWeb(base, vehicle, *args, **kwargs):
+    if not cfg_hangar_enableGoldLocker or gold_enable:
+        return base(vehicle, *args, **kwargs)
+    return False
+
 @overrideMethod(StatsRequester, 'gold')
 def StatsRequester_gold(base, self):
     if not cfg_hangar_enableGoldLocker or gold_enable:
