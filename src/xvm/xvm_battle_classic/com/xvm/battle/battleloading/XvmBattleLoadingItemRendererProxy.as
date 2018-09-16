@@ -32,6 +32,7 @@ package com.xvm.battle.battleloading
 
         private static const FIELD_HEIGHT:int = 26;
         private static const ICONS_AREA_WIDTH:int = 80;
+        private static const BADGE_ICON_WIDTH:int = 24;
 
         private static const MIRRORED_VEHICLE_LEVEL_ICON_OFFSET:int = 36;
 
@@ -350,20 +351,20 @@ package com.xvm.battle.battleloading
             if (_isLeftPanel)
             {
                 ui.nameField.x = ui.DEFAULTS.NAME_FIELD_X + cfg.nameFieldOffsetXLeft;
-                if (ui.badgeIcon.visible)
+                if (!cfg.removeRankBadgeIcon)
                 {
                     ui.badgeIcon.x = ui.nameField.x;
-                    ui.nameField.x += ui.badgeIcon.width + 1;
-                    ui.nameField.width -= ui.badgeIcon.width + 1;
+                    ui.nameField.x += BADGE_ICON_WIDTH + 1;
+                    ui.nameField.width -= BADGE_ICON_WIDTH + 1;
                 }
             }
             else
             {
                 ui.nameField.x = ui.DEFAULTS.NAME_FIELD_X - cfg.nameFieldOffsetXRight + (ui.DEFAULTS.NAME_FIELD_WIDTH - ui.nameField.width);
-                if (ui.badgeIcon.visible)
+                if (!cfg.removeRankBadgeIcon)
                 {
-                    ui.badgeIcon.x = ui.nameField.x + ui.nameField.width - ui.badgeIcon.width;
-                    ui.nameField.width -= ui.badgeIcon.width + 1;
+                    ui.badgeIcon.x = ui.nameField.x + ui.nameField.width - BADGE_ICON_WIDTH;
+                    ui.nameField.width -= BADGE_ICON_WIDTH + 1;
                 }
             }
         }
