@@ -32,8 +32,8 @@ package com.xvm.battle.fullStats
 
         private static const FIELD_HEIGHT:int = 26;
         private static const ICONS_AREA_WIDTH:int = 80;
-        private static const EXTRA_FIELDS_X_LEFT:int = 10;
-        private static const EXTRA_FIELDS_X_RIGHT:int = 1011;
+        private static const EXTRA_FIELDS_X_LEFT:int = -500;
+        private static const EXTRA_FIELDS_X_RIGHT:int = 500;
 
         private static const MIRRORED_VEHICLE_LEVEL_ICON_OFFSET:int = 36;
 
