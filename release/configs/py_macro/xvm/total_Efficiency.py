@@ -172,7 +172,7 @@ def _onTotalEfficiencyUpdated(self, diff):
 
 @registerEvent(BattleRibbonsPanel, '_BattleRibbonsPanel__onRibbonUpdated')
 def BattleRibbonsPanel__onRibbonUpdated(self, ribbon):
-    global ribbonTypes
+    global ribbonTypes, numberDamagesDealt
     if isPlayerVehicle():
         ribbonType = ribbon.getType()
         if ribbonType == 'assistTrack':
