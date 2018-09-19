@@ -1,32 +1,32 @@
 ﻿{
     "RU": {
-        "ver": "7.7.1",
+        "ver": "7.7.2",
         "wot": "1.1.0",
-        "message": " • Исправления вылетов\nПодробности на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
+        "message": " • Исправления\nПодробности на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
     },
     "EU": {
-        "ver": "7.7.1",
+        "ver": "7.7.2",
         "wot": "1.1.0",
-        "message": " • Crash fixes \nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "message": " • fixes\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "NA": {
-        "ver": "7.7.1",
+        "ver": "7.7.2",
         "wot": "1.1.0",
-        "message": " • Crash fixes \nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "message": " • fixes\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "ASIA": {
-        "ver": "7.6.11",
-        "wot": "1.0.2.4",
-        "message": " • WoT 1.0.2.4\n *crash fixes \nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "7.7.2",
+        "wot": "1.1.0",
+        "message": " • fixes\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "CN": {
-        "ver": "7.6.11",
-        "wot": "1.0.2.4",
-        "message": " • WoT 1.0.2.4\n *crash fixes \nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "7.7.2",
+        "wot": "1.1.0",
+        "message": " • fixes\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "CT": {
-        "ver": "7.6.11",
-        "wot": "1.0.2.4",
-        "message": " • WoT 1.0.2.4\n *crash fixes \nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "7.7.2",
+        "wot": "1.1.0",
+        "message": " • fixes\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     }
 }
