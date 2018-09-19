@@ -1,4 +1,15 @@
-﻿XVM-7.7.1:
+﻿XVM-7.7.2:
+  [GENERAL]
+  * adaptation screen on the Tab key
+  * fixed offset of the vehicle level on the battle loading screen
+
+  [HANGAR]
+  * fixed the possibility of buying premium vehicle if the "enableGoldLocker" option is active
+
+  [PYTHON MACROS]
+  * totalEfficiency: various bugs fixed
+
+XVM-7.7.1:
   [KNOWN ISSUES]
   * on the battle loading screen, vehicle levels can be shifted along the vertical axis
   * there is no player statistics on the Tab key
