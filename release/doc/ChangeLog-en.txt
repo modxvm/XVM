@@ -1,6 +1,10 @@
-﻿XVM-7.7.3:
+﻿XVM-7.7.4:
   [GENERAL]
   * World of Tanks 1.2.0
+
+XVM-7.7.3:
+  [GENERAL]
+  * World of Tanks 1.1.0.1
 
 XVM-7.7.2:
   [GENERAL]
