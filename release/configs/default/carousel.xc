@@ -31,6 +31,9 @@
     // true - hide cell "Buy slot".
     // true - скрыть ячейку "Купить слот".
     "hideBuySlot": false,
+    // true - hide cell "Restore Tank".
+    // true - скрыть ячейку "Восстановить машину".
+    "hideRestoreTank": false,
     // true - show total slots count in the "Buy vehicle" cell.
     // true - показывать общее количество слотов в ячейке "Купить машину".
     "showTotalSlots": false,

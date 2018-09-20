@@ -2,6 +2,9 @@
   [GENERAL]
   * World of Tanks 1.1.0.1
 
+  [HANGAR]
+  * added option "carousel"/"hideRestoreTank" - hide cell "Restore Tank"
+
 XVM-7.7.2:
   [GENERAL]
   * adaptation screen on the Tab key
