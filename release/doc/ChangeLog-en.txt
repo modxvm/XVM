@@ -1,4 +1,8 @@
-﻿XVM-7.7.2:
+﻿XVM-7.7.3:
+  [GENERAL]
+  * World of Tanks 1.1.0.1
+
+XVM-7.7.2:
   [GENERAL]
   * adaptation screen on the Tab key
   * fixed offset of the vehicle level on the battle loading screen
