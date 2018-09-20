@@ -208,6 +208,9 @@ def _HangarCarouselDataProvider__getSupplyIndices(base, self):
     if config.get('hangar/carousel/hideBuyTank') and self._emptySlotsCount:
         supplyIndices.pop(_SUPPLY_ITEMS.BUY_TANK)
         self._supplyItems = [x for x in self._supplyItems if not x.get('buyTank', False)]
+    if config.get('hangar/carousel/hideRestoreTank'):
+        supplyIndices.pop(_SUPPLY_ITEMS.RESTORE_TANK)
+        self._supplyItems = [x for x in self._supplyItems if not x.get('restoreTank', False)]
     return supplyIndices
 
 @overrideMethod(carousel_data_provider, '_isLockedBackground')
