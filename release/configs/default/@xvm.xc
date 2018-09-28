@@ -58,7 +58,7 @@
 
     // Config last modified.
     // Дата последней модификации конфига.
-    "date": "20.09.2018",
+    "date": "29.09.2018",
 
     // Supported version of the game.
     // Поддерживаемая версия игры.
