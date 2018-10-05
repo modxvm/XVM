@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 29.09.2018
+    // Last update: 05.10.2018
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -478,6 +478,7 @@
     "usa-A112_T71E2":                        {"name": null, "short": null},
     "usa-A112_T71E2R":                       {"name": null, "short": null},
     "usa-A115_Chrysler_K":                   {"name": null, "short": null},
+    "usa-A115_Chrysler_K_GF":                {"name": null, "short": null},
     "usa-A116_XM551":                        {"name": null, "short": null},
     "usa-A117_T26E5":                        {"name": null, "short": null},
     "usa-A117_T26E5_Patriot":                {"name": null, "short": null},
