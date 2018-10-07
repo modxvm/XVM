@@ -197,8 +197,11 @@ def BattleRibbonsPanel__onRibbonAdded(self, ribbon):
         elif ribbonType == 'assistSpot':
             ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistTrack']) if totalAssist else 0
             as_event('ON_TOTAL_EFFICIENCY')
-        elif ribbonType in ['crits', 'kill']:
+        elif ribbonType == 'crits':
             ribbonTypes[ribbonType] += ribbon.getExtraValue()
+            as_event('ON_TOTAL_EFFICIENCY')
+        elif ribbonType == 'kill':
+            ribbonTypes[ribbonType] += 1
             as_event('ON_TOTAL_EFFICIENCY')
         elif ribbonType == 'spotted':
             ribbonTypes[ribbonType] += ribbon.getCount()
