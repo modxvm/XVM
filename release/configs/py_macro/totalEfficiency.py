@@ -161,6 +161,26 @@ def xvm_numberStuns():
     return te.numberStuns
 
 
+@xvm.export('xvm.numberAssistSpot', deterministic=False)
+def xvm_numberAssistSpot():
+    return te.numberAssistSpot
+
+
+@xvm.export('xvm.numberAssistTrack', deterministic=False)
+def xvm_numberAssistTrack():
+    return te.numberAssistTrack
+
+
+@xvm.export('xvm.numberAssistStun', deterministic=False)
+def xvm_numberAssistStun():
+    return te.numberAssistTrack + te.numberAssistSpot + te.numberStuns
+
+
+@xvm.export('xvm.totalAssistStun', deterministic=False)
+def xvm_totalAssistStun():
+    return te.totalAssist + te.totalStun
+
+
 @xvm.export('xvm.numberDamagedVehicles', deterministic=False)
 def xvm_numberDamagedVehicles():
     return len(te.numberDamagedVehicles) if te.numberDamagedVehicles is not None else 0

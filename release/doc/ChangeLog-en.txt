@@ -1,5 +1,7 @@
 ﻿XVM-7.7.5-dev:
-
+  [PYTHON MACROS]
+  * totalEfficiency: added macros {{py:xvm.numberAssistSpot}}, {{py:xvm.numberAssistTrack}}, {{py:xvm.numberAssistStun}}, {{py:xvm.totalAssistStun}}
+  
 XVM-7.7.4:
   [GENERAL]
   * World of Tanks 1.2.0
