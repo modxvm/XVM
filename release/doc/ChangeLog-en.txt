@@ -1,6 +1,6 @@
 ﻿XVM-7.7.5-dev:
   [PYTHON MACROS]
-  * totalEfficiency: added macros {{py:xvm.numberAssistSpot}}, {{py:xvm.numberAssistTrack}}, {{py:xvm.numberAssistAndStuns}}, {{py:xvm.totalAssistAndStuns}}
+  * totalEfficiency: added macros {{py:xvm.numberAssistStun}}, {{py:xvm.numberAssistSpot}}, {{py:xvm.numberAssistTrack}}, {{py:xvm.numberAssistAndStuns}}, {{py:xvm.totalAssistAndStuns}}
 
 XVM-7.7.4:
   [GENERAL]
