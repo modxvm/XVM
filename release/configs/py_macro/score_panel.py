@@ -16,7 +16,7 @@ def ally_vehicles():
 def enemy_vehicles():
     return panel.enemy_vehicles
 
-@xvm.export('sp.allyAlive', deterministic=False)    
+@xvm.export('sp.allyAlive', deterministic=False)
 def ally_alive():
     return ally_vehicles() - enemy_frags()
 
