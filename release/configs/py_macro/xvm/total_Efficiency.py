@@ -7,6 +7,7 @@ from Avatar import PlayerAvatar
 from gui.battle_control.battle_constants import PERSONAL_EFFICIENCY_TYPE
 from gui.Scaleform.daapi.view.battle.shared.damage_log_panel import DamageLogPanel
 from gui.Scaleform.daapi.view.battle.shared.ribbons_panel import BattleRibbonsPanel
+from gui.Scaleform.daapi.view.battle.shared.ribbons_aggregator import RibbonsAggregator
 from vehicle_extras import ShowShooting
 from constants import VEHICLE_HIT_FLAGS as VHF
 from gui.battle_control.arena_info.arena_dp import ArenaDataProvider
