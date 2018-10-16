@@ -308,3 +308,8 @@ def destroyGUI(self):
         'assist': 0
     }
 
+
+@overrideMethod(RibbonsAggregator, 'suspend')
+def suspend(base, self):
+    self.resume()
+
