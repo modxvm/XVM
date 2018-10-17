@@ -51,7 +51,7 @@ def _MarkersManager_createMarker(base, self, *args, **kwargs):
 ######################
 
 from account_helpers import CustomFilesCache
-@overrideMethod(MarkersManager, '_CustomFilesCache__onReadLocalFile')
+@overrideMethod(CustomFilesCache, '_CustomFilesCache__onReadLocalFile')
 def _CustomFilesCache__onReadLocalFile(base, self, url, showImmediately):
     try:
         base(self, url, showImmediately)
