@@ -23,13 +23,13 @@ package com.xvm
 
         public static function getAccountDossier(accountDBID:int = 0):AccountDossier
         {
-            Logger.add("getAccountDossier: accountDBID=" + accountDBID);
+            //Logger.add("getAccountDossier: accountDBID=" + accountDBID);
             return getDossier(accountDBID, 0);
         }
 
         public static function getVehicleDossier(vehCD:int, accountDBID:int = 0):VehicleDossier
         {
-            Logger.add("getVehicleDossier: vehCD=" + vehCD + ", accountDBID=" + accountDBID);
+            //Logger.add("getVehicleDossier: vehCD=" + vehCD + ", accountDBID=" + accountDBID);
             return getDossier(accountDBID, vehCD);
         }
 
