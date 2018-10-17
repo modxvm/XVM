@@ -17,6 +17,7 @@ package com.xvm.types.cfg
         public var scrollingSpeed:*;
         public var hideBuyTank:Boolean;
         public var hideBuySlot:Boolean;
+        public var hideRestoreTank:Boolean;
         public var showTotalSlots:Boolean;
         public var showUsedSlots:Boolean;
         public var enableLockBackground:Boolean;

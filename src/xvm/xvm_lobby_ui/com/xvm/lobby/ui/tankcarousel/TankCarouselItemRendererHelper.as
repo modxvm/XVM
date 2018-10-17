@@ -102,7 +102,7 @@ package com.xvm.lobby.ui.tankcarousel
                 var isExtraFieldsVisible:Boolean = false;
                 if (item.vehicleCarouselVO)
                 {
-                    if (!(item.vehicleCarouselVO.buySlot || item.vehicleCarouselVO.buyTank))
+                    if (!(item.vehicleCarouselVO.buySlot || item.vehicleCarouselVO.buyTank || item.vehicleCarouselVO.restoreTank))
                     {
                         _setupStandardFieldInfo(cfg.fields.info);
                         if (item.extraFields)
