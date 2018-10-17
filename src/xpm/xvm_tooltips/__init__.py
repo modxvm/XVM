@@ -117,15 +117,21 @@ def _createTooltip(self, func):
 
 def _onCreateTypedTooltip_callback(base, self, type, *args):
     # log('ToolTip_onCreateTypedTooltip_callback')
-    global toolTipDelayIntervalId
-    toolTipDelayIntervalId = None
-    base(self, type, *args)
+    try:
+        global toolTipDelayIntervalId
+        toolTipDelayIntervalId = None
+        base(self, type, *args)
+    except Exception as ex:
+        err(traceback.format_exc())
 
 def _onCreateComplexTooltip_callback(base, self, tooltipId, stateType):
     # log('_onCreateComplexTooltip_callback')
-    global toolTipDelayIntervalId
-    toolTipDelayIntervalId = None
-    base(self, tooltipId, stateType)
+    try:
+        global toolTipDelayIntervalId
+        toolTipDelayIntervalId = None
+        base(self, tooltipId, stateType)
+    except Exception as ex:
+        err(traceback.format_exc())
 
 def _ToolTip_xvm_hide(self):
     # log('_ToolTip_xvm_hide')
