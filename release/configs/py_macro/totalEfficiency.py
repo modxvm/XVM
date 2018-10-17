@@ -171,9 +171,14 @@ def xvm_numberAssistTrack():
     return te.numberAssistTrack
 
 
+@xvm.export('xvm.numberAssistStun', deterministic=False)
+def xvm_numberAssistStun():
+    return te.numberAssistStun
+
+
 @xvm.export('xvm.numberAssistAndStuns', deterministic=False)
 def xvm_numberAssistAndStuns():
-    return te.numberAssistTrack + te.numberAssistSpot + te.numberStuns
+    return te.numberAssistTrack + te.numberAssistSpot + te.numberAssistStun
 
 
 @xvm.export('xvm.totalAssistAndStuns', deterministic=False)
