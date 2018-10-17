@@ -39,8 +39,12 @@ class _FileCache():
             shutil.rmtree(self.cache_dir)
 
     def get_url(self, url, callback):
-        if self.customFilesCache:
-            self.customFilesCache.get(url, callback)
+        try:
+            if self.customFilesCache:
+                self.customFilesCache.get(url, callback)
+        except Exception:
+            err('filecache.get_url: ' + str(url))
+            err(traceback.format_exc())
 
     def save(self, name, bytes):
         try:
@@ -51,6 +55,7 @@ class _FileCache():
             with open(path, 'wb') as f:
                 f.write(bytes)
         except Exception:
+            err('filecache.save: ' + str(name))
             err(traceback.format_exc())
 
 _fileCache = _FileCache()
