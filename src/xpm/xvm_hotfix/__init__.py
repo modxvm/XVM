@@ -46,3 +46,15 @@ def _MarkersManager_createMarker(base, self, *args, **kwargs):
         BigWorld.cancelCallback(markersVisibleCallbackID)
     markersVisibleCallbackID = BigWorld.callback(0, lambda: _set_canvas_visible_true(self))
     return base(self, *args, **kwargs)
+
+
+######################
+
+from account_helpers import CustomFilesCache
+@overrideMethod(MarkersManager, '_CustomFilesCache__onReadLocalFile')
+def _CustomFilesCache__onReadLocalFile(base, self, url, showImmediately):
+    try:
+        base(self, url, showImmediately)
+    except Exception:
+        err('CustomFilesCache.__onReadLocalFile: url="{0}", showImmediately={1}'.format(url, showImmediately))
+        err(traceback.format_exc())
