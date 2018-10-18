@@ -26,7 +26,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 05.10.2018
+    # Last update: 18.10.2018
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -94,6 +94,7 @@ _data = {
     "france:F04_B1":                         'B1',
     "france:F04_B1_bootcamp":                'B1',
     "france:F05_BDR_G1B":                    'BDR',
+    "france:F05_BDR_G1B_Halloween":          'BDR·H',
     "france:F06_ARL_44":                     'Arl44',
     "france:F07_AMX_M4_1945":                'amx4·45',
     "france:F08_AMX_50_100":                 '50100',
@@ -392,6 +393,7 @@ _data = {
     "sweden:S23_Strv_81_sabaton":            'Pr.Vict',
     "uk:GB01_Medium_Mark_I":                 'Med1',
     "uk:GB01_Medium_Mark_I_bot":             'Med1',
+    "uk:GB01_Medium_Mark_I_Halloween":       'Med1·H',
     "uk:GB03_Cruiser_Mk_I":                  'Crus1',
     "uk:GB04_Valentine":                     'Valnt',
     "uk:GB05_Vickers_Medium_Mk_II":          'Med2',
@@ -590,6 +592,7 @@ _data = {
     "ussr:R05_KV":                           'KV',
     "ussr:R06_T-28":                         't28',
     "ussr:R06_T-28_bootcamp":                't28',
+    "ussr:R06_T-28_Halloween":               't28·H',
     "ussr:R07_T-34-85":                      't34·85',
     "ussr:R07_T-34-85_bootcamp":             't34·85',
     "ussr:R08_BT-2":                         'Bt2',
@@ -598,6 +601,7 @@ _data = {
     "ussr:R09_T-26_bot":                     't26',
     "ussr:R100_SU122A":                      'Su122',
     "ussr:R101_MT25":                        'Mt·25',
+    "ussr:R101_MT25_Halloween":              'Mt·25·H',
     "ussr:R104_Object_430_II":               'obj430v2',
     "ussr:R105_BT_7A":                       'Bt7a',
     "ussr:R106_KV85":                        'Kv·85',
@@ -656,8 +660,10 @@ _data = {
     "ussr:R155_Object_277":                  'obj777',
     "ussr-R156_IS_2M":                       'Is·2M',
     "ussr:R157_Object_279R":                 'obj279R',
+    "ussr:R158_LT_432":                      'lt432',
     "ussr:R15_S-51":                         'S·51',
     "ussr:R16_SU-18":                        'Su·18',
+    "ussr:R160_T_50_2":                      't50·2',
     "ussr:R17_SU-100":                       'Su100',
     "ussr:R18_SU-152":                       'Su152',
     "ussr:R18_SU-152_IGR":                   'Su152',
