@@ -25,7 +25,7 @@ class _FileCache():
         try:
             self.cache_dir = 'res_mods/mods/shared_resources/xvm/cache'
             self.clean()
-            self.customFilesCache = CustomFilesCache.CustomFilesCache('custom_data')
+            self.customFilesCache = CustomFilesCache.CustomFilesCache('xvm_data')
         except Exception:
             err(traceback.format_exc())
 
