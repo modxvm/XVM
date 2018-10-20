@@ -1,4 +1,9 @@
-﻿XVM-7.7.5-dev:
+﻿XVM-7.7.5:
+  [GENERAL]
+  * World of Tanks 1.2.0.1
+  * fixed crashes BF-3, BF-5
+  * various bugs fixed
+
   [PYTHON MACROS]
   * totalEfficiency: added macros {{py:xvm.numberAssistStun}}, {{py:xvm.numberAssistSpot}}, {{py:xvm.numberAssistTrack}}, {{py:xvm.numberAssistAndStuns}}, {{py:xvm.totalAssistAndStuns}}
 
