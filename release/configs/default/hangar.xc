@@ -22,6 +22,9 @@
     // false - disable display promo of premium vehicle (on the background in the hangar)
     // false - отключить отображение рекламы премиум техники (на фоне в ангаре)
     "showPromoPremVehicle": true,
+    // false - disable display of the widget with ads
+    // false - отключить отображение виджета с рекламой
+    "showTeaserWidget": true,
     // true - enable locker for gold
     // true - включить замок для золота
     "enableGoldLocker": false,

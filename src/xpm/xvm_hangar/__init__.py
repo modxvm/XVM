@@ -22,6 +22,7 @@ from helpers import dependency
 from skeletons.gui.shared import IItemsCache
 from messenger.gui.Scaleform.lobby_entry import LobbyEntry
 from gui.game_control.hero_tank_controller import HeroTankController
+from gui.promo.hangar_teaser_widget import TeaserViewer
 
 from xfw import *
 
@@ -178,3 +179,10 @@ def updateSettings(base, self):
     if not config.get('hangar/showPromoPremVehicle', True):
         return
     base(self)
+
+# hide display of the widget with ads
+@overrideMethod(TeaserViewer, 'show')
+def show(base, self, teaserData, promoCount):
+    if not config.get('hangar/showTeaserWidget', True):
+        return
+    base(self, teaserData, promoCount)
