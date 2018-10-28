@@ -25,30 +25,7 @@ from xvm_main.python.logger import *
 
 
 #####################################################################
-# fix WG's bug with markers appearing in the top corner on battle start
-# https://koreanrandom.com/forum/topic/32423-/page-86#entry395145
-
-import BigWorld
-from gui.Scaleform.daapi.view.battle.shared.markers2d.manager import MarkersManager
-
-markersVisibleCallbackID = None
-
-def _set_canvas_visible_true(self):
-    global markersVisibleCallbackID
-    markersVisibleCallbackID = None
-    self.movie.visible = True
-
-@overrideMethod(MarkersManager, 'createMarker')
-def _MarkersManager_createMarker(base, self, *args, **kwargs):
-    global markersVisibleCallbackID
-    self.movie.visible = False
-    if markersVisibleCallbackID is not None:
-        BigWorld.cancelCallback(markersVisibleCallbackID)
-    markersVisibleCallbackID = BigWorld.callback(0, lambda: _set_canvas_visible_true(self))
-    return base(self, *args, **kwargs)
-
-
-######################
+#
 
 import base64
 from account_helpers.CustomFilesCache import CustomFilesCache
