@@ -1,4 +1,7 @@
 ﻿XVM-7.7.6:
+  [GENERAL]
+  * changed the location of the file cache folder
+
   [HANGAR]
   * added option "hangar"/"showTeaserWidget" - disable display of the widget with ads
 
