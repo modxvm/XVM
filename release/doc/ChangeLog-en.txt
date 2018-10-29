@@ -1,6 +1,10 @@
 ﻿XVM-7.7.6:
   [GENERAL]
   * changed the location of the file cache folder
+  * changed text in the crashreporting form
+  * fixed Audiokinetic error #66 on the first WoT launch
+  * fixed issues related to file cache
+  * updated SWF to the latest micropatch
 
   [HANGAR]
   * added option "hangar"/"showTeaserWidget" - disable display of the widget with ads
