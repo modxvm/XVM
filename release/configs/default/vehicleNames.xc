@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 18.10.2018
+    // Last update: 01.11.2018
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -369,6 +369,7 @@
     "sweden-S22_Strv_S1":                    {"name": null, "short": null},
     "sweden-S23_Strv_81":                    {"name": null, "short": null},
     "sweden-S23_Strv_81_sabaton":            {"name": null, "short": null},
+    "sweden-S25_EMIL_51":                    {"name": null, "short": null},
     "uk-GB01_Medium_Mark_I":                 {"name": null, "short": null},
     "uk-GB01_Medium_Mark_I_bot":             {"name": null, "short": null},
     "uk-GB01_Medium_Mark_I_Halloween":       {"name": null, "short": null},
@@ -639,6 +640,7 @@
     "ussr-R156_IS_2M":                       {"name": null, "short": null},
     "ussr-R157_Object_279R":                 {"name": null, "short": null},
     "ussr-R158_LT_432":                      {"name": null, "short": null},
+    "ussr-R159_SU_130PM":                    {"name": null, "short": null},
     "ussr-R15_S-51":                         {"name": null, "short": null},
     "ussr-R16_SU-18":                        {"name": null, "short": null},
     "ussr-R160_T_50_2":                      {"name": null, "short": null},
