@@ -34,6 +34,8 @@ def smooth_transition_color(rules, color_100, color_0, percent, maximum=100):
     r_100, g_100, b_100 = hex_to_rgb(color_100)
     r_delta, g_delta, b_delta = (r_100 - r_0, g_100 - g_0, b_100 - b_0)
     sum_rgb = float((- r_delta if r_delta < 0 else r_delta) + (- g_delta if g_delta < 0 else g_delta) + (- b_delta if b_delta < 0 else b_delta))
+    if sum_rgb == 0:
+        return '{:06x}'.format(color_0)
     r_k = - r_delta / sum_rgb if r_delta < 0 else r_delta / sum_rgb
     g_k = - g_delta / sum_rgb if g_delta < 0 else g_delta / sum_rgb
     b_k = - b_delta / sum_rgb if b_delta < 0 else b_delta / sum_rgb
