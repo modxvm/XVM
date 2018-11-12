@@ -147,7 +147,8 @@ damageInfoDestructions = ('DEVICE_DESTROYED',
                           'DEVICE_DESTROYED_AT_FIRE',
                           'DEVICE_DESTROYED_AT_WORLD_COLLISION',
                           'DEVICE_DESTROYED_AT_DROWNING',
-                          'ENGINE_DESTROYED_AT_UNLIMITED_RPM'
+                          'ENGINE_DESTROYED_AT_UNLIMITED_RPM',
+                          'DEATH_FROM_DEVICE_EXPLOSION_AT_SHOT'
                           )
 damageInfoTANKMAN = ('TANKMAN_HIT',
                      'TANKMAN_HIT_AT_SHOT',
