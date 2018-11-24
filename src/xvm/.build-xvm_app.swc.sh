@@ -13,6 +13,8 @@ detect_flex
 frswc="$FLEX_HOME/frameworks/libs/framework.swc"
 class="com.xvm.XvmAppBase"
 "$XVMBUILD_COMPC_FILEPATH" \
+    -target-player $SWC_PLAYER_VERSION \
+    -swf-version $SWC_SWF_VERSION \
     -framework="$FLEX_HOME/frameworks" \
     -source-path xvm_app \
     -external-library-path+="$frswc" \
