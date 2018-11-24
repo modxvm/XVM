@@ -26,13 +26,11 @@ from gui.Scaleform.genConsts.BATTLE_VIEW_ALIASES import BATTLE_VIEW_ALIASES
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 from gui.Scaleform.daapi.view.battle.shared import battle_loading
 from gui.Scaleform.daapi.view.battle.shared.damage_panel import DamagePanel
-from gui.Scaleform.daapi.view.battle.shared.hint_panel.plugins import TrajectoryViewHintPlugin, SiegeIndicatorHintPlugin, QuestProgressHintPlugin
 from gui.Scaleform.daapi.view.battle.shared.markers2d import settings as markers2d_settings
 from gui.Scaleform.daapi.view.battle.shared.minimap.plugins import ArenaVehiclesPlugin
 from gui.Scaleform.daapi.view.battle.shared.page import SharedPage
 from gui.Scaleform.daapi.view.battle.shared.stats_exchage import BattleStatisticsDataController
-from account_helpers import AccountSettings
-from account_helpers.AccountSettings import TRAJECTORY_VIEW_HINT_COUNTER, QUEST_PROGRESS_SHOWS_COUNT
+from gui.Scaleform.daapi.view.battle.shared.hint_panel.plugins import TrajectoryViewHintPlugin, SiegeIndicatorHintPlugin, QuestProgressHintPlugin
 
 from xfw import *
 from xfw_actionscript.python import *
@@ -195,31 +193,34 @@ def _switchToPostmortem(base, self):
     if config.get('battle/showPostmortemTips'):
         base(self)
 
-@overrideMethod(TrajectoryViewHintPlugin, 'start')
-def start(base, self):
-    if config.get('battle/battleHint/hideTrajectoryView'):
-        # default counter: 6
-        AccountSettings.setSettings(TRAJECTORY_VIEW_HINT_COUNTER, 0)
-    base(self)
-
-@overrideMethod(SiegeIndicatorHintPlugin, 'start')
-def start(base, self):
-    if config.get('battle/battleHint/hideSiegeIndicator'):
-        # default counter: 10
-        AccountSettings.setSettings('siegeModeHintCounter', 0)
-    base(self)
-
-@overrideMethod(QuestProgressHintPlugin, 'start')
-def start(base, self):
-    if config.get('battle/battleHint/hideQuestProgress'):
-        # default counter: 10
-        AccountSettings.setSettings(QUEST_PROGRESS_SHOWS_COUNT, 0)
-    base(self)
-
 # force update quests in FullStats
 @overrideMethod(BattleStatisticsDataController, 'as_setQuestsInfoS')
 def _BattleStatisticsDataController_as_setQuestsInfoS(base, self, data, setForce):
     base(self, data, True)
+
+@overrideMethod(TrajectoryViewHintPlugin, '_TrajectoryViewHintPlugin__addHint')
+def addHint(base, self):
+    if config.get('battle/battleHint/hideTrajectoryView'):
+        return
+    base(self)
+
+@overrideMethod(SiegeIndicatorHintPlugin, '_SiegeIndicatorHintPlugin__updateHint')
+def updateHint(base, self):
+    if config.get('battle/battleHint/hideSiegeIndicator'):
+        return
+    base(self)
+
+@overrideMethod(PreBattleHintPlugin, '_PreBattleHintPlugin__canDisplayQuestHint')
+def canDisplayQuestHint(base, self):
+    if config.get('battle/battleHint/hideQuestProgress'):
+        return False
+    base(self)
+
+@overrideMethod(PreBattleHintPlugin, '_PreBattleHintPlugin__canDisplayHelpHint')
+def canDisplayHelpHint(base, self, typeDescriptor):
+    if config.get('battle/battleHint/hideHelpScreen'):
+        return False
+    base(self, typeDescriptor)
 
 
 #####################################################################

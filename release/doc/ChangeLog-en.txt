@@ -1,4 +1,20 @@
-﻿XVM-7.7.6:
+﻿XVM-7.7.7:
+  [GENERAL]
+  * World of Tanks 1.3.0
+
+  [BATTLE]
+  * added option "battle"/"battleHint"/"hideHelpScreen" - hide the tips of the transition to the window of exploring the features of the machine (for wheeled vehicles)
+  * updated option "battle"/"battleHint"/"hideSiegeIndicator" - hide the tips about switching to siege mode and changing the driving mode (for wheeled vehicles)
+
+  [MACROS]
+  * added macros in hangar:
+    {{v.type_l}} - vehicle type (text substitution from config)
+    {{v.type_key}} - vehicle class (text substitution from locale)
+
+  [OTHER]
+  * updated vehicle names
+
+XVM-7.7.6:
   [GENERAL]
   * changed the location of the file cache folder
   * changed text in the crashreporting form
@@ -108,7 +124,7 @@ XVM-7.6.8:
   * improved crashfix #2
 
   [XFW]
-  * fixed xfw_package.json/dependencies_optional option behavior 
+  * fixed xfw_package.json/dependencies_optional option behavior
   * added version info for binary files (.pyd)
 
   [BATTLE]
@@ -130,7 +146,7 @@ XVM-7.6.7:
   * refactored online and ping displaying
   * builtin fonts are case-insensetive now
   * added check for isDAAPIInited flag on flash loading
-  
+
   [INSTALLER]
   * removed Microsoft C++ Runtime from archive (it is available for download on modxvm.com)
 

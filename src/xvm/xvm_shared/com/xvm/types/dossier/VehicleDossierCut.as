@@ -33,6 +33,8 @@ package com.xvm.types.dossier
                 sysname = vdata.key.replace(":", "-");
                 shortname = vdata.shortName;
                 type = VehicleInfo.getVTypeText(vdata.vtype);
+                type_l = Locale.get(vdata.vtype);
+                type_key = vdata.vtype;
                 c_type = MacrosUtils.getVClassColorValue(vdata);
                 level = vdata.level;
                 rlevel = Defines.ROMAN_LEVEL[vdata.level - 1];
@@ -134,6 +136,8 @@ package com.xvm.types.dossier
         public var sysname:String;
         public var shortname:String;
         public var type:String;
+        public var type_l:String;
+        public var type_key:String;
         public var c_type:String;
         public var level:int;
         public var rlevel:String;

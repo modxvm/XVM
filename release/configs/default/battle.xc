@@ -32,12 +32,15 @@
       // true - hide the tips aiming mode changing in strategic mode.
       // true - скрыть подсказку смены режима прицеливания в стратегическом режиме.
       "hideTrajectoryView": false,
-      // true - hide the tips about switching to siege mode.
-      // true - скрыть подсказку перехода в осадный режим.
+      // true - hide the tips about switching to siege mode and changing the driving mode (for wheeled vehicles).
+      // true - скрыть подсказку перехода в осадный режим и смены режима движения (для колесной техники).
       "hideSiegeIndicator": false,
       // true - hide the tips about switching to menu Personal Missions.
       // true - скрыть подсказку перехода в меню ЛБЗ.
-      "hideQuestProgress": false
+      "hideQuestProgress": false,
+      // true - hide the tips of the transition to the window of exploring the features of the machine (for wheeled vehicles).
+      // true - скрыть подсказку перехода к окну знакомства с особенностями машины (для колесной техники).
+      "hideHelpScreen": false
     },
     // GUI elements settings (experts only)
     // Настройки графических элементов (только для экспертов!)

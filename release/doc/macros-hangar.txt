@@ -26,6 +26,8 @@ Legend:
 │ {{v.sysname}}              │ X │ X │ vehicle system name (usa-M24_Chaffee)
 │ {{v.shortname}}            │ X │ X │ localized short vehicle name
 │ {{v.type}}                 │ X │ X │ vehicle type (text substitution from config)
+│ {{v.type_l}}               │ X │ X │ vehicle class (text substitution from locale)
+│ {{v.type_key}}             │ X │ X │ vehicle type table key value (LT, MT, HT, TD, SPG)
 │ {{v.c_type}}               │ X │ X │ color for vehicle type
 │ {{v.level}}                │ X │ X │ vehicle level (Arabic numerals)
 │ {{v.rlevel}}               │ X │ X │ vehicle level (Roman numerals)
