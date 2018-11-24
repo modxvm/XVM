@@ -344,8 +344,5 @@
   "battleLabels": ${"sirmax-battleLabels.xc":"."},
   "tweaks": {
     //"allowMultipleWotInstances": true
-  },
-  "consts": {
-      "VM_COEFF_VMM_DEAD": 0.75
   }
 }

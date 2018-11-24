@@ -12,9 +12,6 @@ package com.xvm.types
         public var statBattle:Boolean;
         public var statAwards:Boolean;
         public var comments:Boolean;
-        public var chance:Boolean;
-        public var chanceLive:Boolean;
-        public var chanceResults:Boolean;
         public var scale:String = null;
         public var rating:String = null;
         public var topClansCount:Number;

@@ -101,7 +101,6 @@ def _load_xvm_xc(filename, autoreload):
     # debug('_load_xvm_xc: "{}", {}'.format(filename, autoreload))
     try:
         config = deepcopy(default_config.DEFAULT_CONFIG)
-        config['consts'] = _constsSection()
         if not os.path.isfile(filename):
             log('[WARNING] xvm.xc was not found, building new')
             with open(filename, 'w') as f:
@@ -188,20 +187,6 @@ def _tuneup_config(config):
         if v and (v['short'] is not None or v['name'] is not None)}
 
 
-def _constsSection():
-    return {
-        'AVG_GWR': 48,              # Average GWR. Source: http://wot-news.com/stat/server/ru/norm/en
-        'AVG_XVMSCALE': 30,         # Average XVM Scale. Source: http://www.koreanrandom.com/forum/topic/2625-/
-        'AVG_BATTLES': 2000,        # Averate number of battles. Source: http://wot-news.com/stat/server/ru/norm/en
-        'MAX_EBN': 200,             # Maximum Ebn value for win-chance formula
-        'VM_COEFF_VMM': 0.88,       # vehicle markers manager (alive)
-        'VM_COEFF_VMM_DEAD': 0.50,  # vehicle markers manager (dead)
-        'VM_COEFF_MM_PLAYER': 0.93, # minimap (player)
-        'VM_COEFF_MM_BASE': 0.8,    # minimap (base)
-        'VM_COEFF_FC': 0.93         # frag correlation
-    }
-
-
 # config.networkServicesSettings
 
 class NetworkServicesSettings(object):
@@ -211,9 +196,6 @@ class NetworkServicesSettings(object):
         self.statBattle = data.get('statBattle', True) if active else False
         self.statAwards = data.get('statAwards', True) if active else False
         self.comments = data.get('comments', True) if active else False
-        self.chance = data.get('chance', False) if active else False
-        self.chanceLive = data.get('chanceLive', False) if active else False
-        self.chanceResults = data.get('chanceResults', False) if active else False
         self.scale = data.get('scale', 'xvm')
         self.rating = data.get('rating', 'wgr')
         self.topClansCount = int(data.get('topClansCount', 50))

@@ -49,9 +49,6 @@ package com.xvm.vehiclemarkers.ui.components
                     //marker.marker.vehicleTypeIcon.scaleX = maxScale;
                     //marker.marker.vehicleTypeIcon.scaleY = maxScale;
 
-                    // TODO: colorize
-                    // colorizeMarkerIcon(icon, cfg.color);
-
                     // TODO: change dynamic to vehicle type marker for dead while speaking
                     //if (proxy.isDead && proxy.isSpeaking) // change dynamic to vehicle type marker for dead while speaking
                     //    this.setVehicleClass();
@@ -62,21 +59,5 @@ package com.xvm.vehiclemarkers.ui.components
                 Logger.err(ex);
             }
         }
-
-        /* TODO
-        private function colorizeMarkerIcon(icon:MovieClip, color:String)
-        {
-            if (proxy.isSpeaking)
-            {
-                icon.transform.colorTransform = new flash.geom.ColorTransform();
-            }
-            else
-            {
-                // filters are not applicable to the MovieClip in Scaleform. Only ColorTransform can be used.
-                GraphicsUtil.colorize(icon, proxy.formatDynamicColor(proxy.formatStaticColorText(color)),
-                    proxy.isDead ? Config.config.consts.VM_COEFF_VMM_DEAD : Config.config.consts.VM_COEFF_VMM);
-            }
-        }
-        */
     }
 }
