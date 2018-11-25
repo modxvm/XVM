@@ -27,6 +27,7 @@ package com.xvm.types.dossier
         public var rankCount:Number;
         public var rankSteps:Number;
         public var rankStepsTotal:Number;
+        public var rent:String = Values.EMPTY_STR;
         public var camouflageSummer:String = Values.EMPTY_STR;
         public var camouflageWinter:String = Values.EMPTY_STR;
         public var camouflageDesert:String = Values.EMPTY_STR;

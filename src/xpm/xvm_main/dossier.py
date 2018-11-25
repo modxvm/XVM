@@ -154,6 +154,7 @@ class _Dossier(object):
         # vehicle dossier
         vehicle = self.itemsCache.items.getItemByCD(vehCD)
 
+        rentVehicle = vehicle.isRented
         outfit = vehicle.getOutfit(SeasonType.SUMMER)
         summer_camo = outfit is not None and bool(outfit.hull.slotFor(GUI_ITEM_TYPE.CAMOUFLAGE).getItem())
         outfit = vehicle.getOutfit(SeasonType.WINTER)
@@ -231,7 +232,7 @@ class _Dossier(object):
                 #else:
                 #    xwtr = vehinfo.calculateXvmScale('wtr', wtr)
         res = self.__prepareVehicleResult(accountDBID, vehCD, dossier, xtdb, xte, wtr, xwtr, earnedXP,
-                                          freeXP, xpToElite, rankCount, rankSteps, rankStepsTotal)
+                                          freeXP, xpToElite, rankCount, rankSteps, rankStepsTotal, rentVehicle)
         self.__updateCamouflageResult(res, summer_camo, winter_camo, desert_camo)
         self._cache[cache_key] = res
         return res
@@ -360,7 +361,7 @@ class _Dossier(object):
         return res
 
     def __prepareVehicleResult(self, accountDBID, vehCD, dossier, xtdb, xte, wtr, xwtr, earnedXP,
-                               freeXP, xpToElite, rankCount, rankSteps, rankStepsTotal):
+                               freeXP, xpToElite, rankCount, rankSteps, rankStepsTotal, rentVehicle):
         res = self.__prepareCommonResult(accountDBID, dossier)
         res.update({
             'vehCD': vehCD,
@@ -374,6 +375,7 @@ class _Dossier(object):
             'rankCount': rankCount,
             'rankSteps': rankSteps,
             'rankStepsTotal': rankStepsTotal,
+            'rentVehicle': 'rent' if rentVehicle else None,
             'marksOnGun': int(dossier.getRecordValue(_AB.TOTAL, 'marksOnGun')),
             'damageRating': dossier.getRecordValue(_AB.TOTAL, 'damageRating') / 100.0})
         return res
