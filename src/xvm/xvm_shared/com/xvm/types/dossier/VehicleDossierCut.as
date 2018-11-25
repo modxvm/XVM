@@ -56,7 +56,7 @@ package com.xvm.types.dossier
 
             if (vdossier)
             {
-                rent = vdossier.rentVehicle;
+                rent = vdossier.rent;
                 camouflageSummer = vdossier.camouflageSummer;
                 camouflageWinter = vdossier.camouflageWinter;
                 camouflageDesert = vdossier.camouflageDesert;
