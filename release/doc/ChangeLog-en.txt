@@ -1,4 +1,9 @@
-﻿XVM-7.7.6:
+﻿XVM-7.7.7:
+  [GENERAL]
+  * World of Tanks 1.2.0.2
+  * various fixes
+
+XVM-7.7.6:
   [GENERAL]
   * changed the location of the file cache folder
   * changed text in the crashreporting form
