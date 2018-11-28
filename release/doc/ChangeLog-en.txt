@@ -1,4 +1,4 @@
-﻿XVM-7.7.7:
+﻿XVM-7.7.8:
   [GENERAL]
   * World of Tanks 1.3.0
 
@@ -14,6 +14,10 @@
 
   [OTHER]
   * updated vehicle names
+
+XVM-7.7.7:
+  [GENERAL]
+  * World of Tanks 1.2.0.2
 
 XVM-7.7.6:
   [GENERAL]
