@@ -11,6 +11,7 @@
     {{v.type_l}} - vehicle type (text substitution from config)
     {{v.type_key}} - vehicle class (text substitution from locale)
     {{v.rent}} - 'rent' for rented, empty for normal vehicle
+  * damageLog: log scrolling added
 
   [OTHER]
   * updated vehicle names
