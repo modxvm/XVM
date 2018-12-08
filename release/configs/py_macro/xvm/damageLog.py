@@ -619,6 +619,7 @@ class DamageLog(_Base):
         self.S_FORMAT_HISTORY = section + FORMAT_HISTORY
         self.listLog = []
         self.dataLog = {}
+        self.scrollList = []
         if config.get(self.S_MOVE_IN_BATTLE):
             _data = userprefs.get('DamageLog/dlog', {'x': config.get(self.S_X), 'y': config.get(self.S_Y)})
             if section == SECTION_LOG:
@@ -627,6 +628,7 @@ class DamageLog(_Base):
                 as_callback("dLog_mouseMove", self.mouse_move)
         else:
             _data = {'x': config.get(self.S_X), 'y': config.get(self.S_Y)}
+        as_callback("dLog_mouseWheel", self.mouse_wheel)
         self.x = _data['x']
         self.y = _data['y']
         self.section = section
@@ -635,6 +637,7 @@ class DamageLog(_Base):
     def reset(self, section):
         super(DamageLog, self).reset()
         self.listLog = []
+        self.scrollList = []
         self.section = section
         self.dataLog = {}
         self.callEvent = True
@@ -644,6 +647,16 @@ class DamageLog(_Base):
 
     def mouse_move(self, _data):
         self._mouse_move(_data, 'ON_HIT')
+
+    def mouse_wheel(self, _data):
+        if _data['delta'] < 0:
+            if self.listLog:
+                self.scrollList.append(self.listLog.pop(0))
+                as_event('ON_HIT')
+        else:
+            if self.scrollList:
+                self.listLog.insert(0, self.scrollList.pop())
+                as_event('ON_HIT')
 
     def setOutParameters(self, numberLine):
         updateValueMacros(self.section, self.dataLog)
@@ -675,8 +688,15 @@ class DamageLog(_Base):
                 if (attacker != attackerID) or (attack != attackReasonID):
                     dictAttacker[attack]['numberLine'] += 1
 
+    def reset_scrolling(self):
+        if self.scrollList:
+            self.scrollList.extend(self.listLog)
+            self.listLog = self.scrollList
+            self.scrollList = []
+
     def output(self):
         if config.get(self.S_SHOW_HIT_NO_DAMAGE) or data.data['isDamage']:
+            self.reset_scrolling()
             isGroupRamming_WorldCollision = (data.data['attackReasonID'] in [2, 3]) and config.get(self.S_GROUP_DAMAGE_RAMMING_COLLISION)
             isGroupFire = (data.data['attackReasonID'] == 1) and config.get(self.S_GROUP_DAMAGE_FIRE)
             if isGroupRamming_WorldCollision or isGroupFire:
