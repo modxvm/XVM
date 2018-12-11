@@ -26,7 +26,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 24.11.2018
+    # Last update: 11.12.2018
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -219,6 +219,8 @@ _data = {
     "germany:G137_PzVI_Tiger_217":           'Tig217',
     "germany:G138_VK168_02":                 '168.01p',
     "germany:G138_VK168_02_Mauerbrecher":    'MaurBrec',
+    "germany:G139_MKA":                      'MKA',
+    "germany:G140_HWK_30":                   'HWK30',
     "germany:G13_VK3001H":                   '3001h',
     "germany:G15_VK3601H":                   '3601h',
     "germany:G16_PzVIB_Tiger_II":            'Tig2',
@@ -476,6 +478,7 @@ _data = {
     "uk:GB95_Ekins_Firefly_M4A4":            'FirefVC',
     "uk:GB96_Excalibur":                     'Excalib',
     "uk:GB97_Chimera":                       'Chimera',
+    "uk:GB98_T95_FV4201_Chieftain":          'T95/4201',
     "usa:A01_T1_Cunningham":                 'T1',
     "usa:A01_T1_Cunningham_bot":             'T1',
     "usa:A02_M2_lt":                         'M2lt',

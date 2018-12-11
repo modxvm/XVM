@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 24.11.2018
+    // Last update: 11.12.2018
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -197,6 +197,8 @@
     "germany-G137_PzVI_Tiger_217":           {"name": null, "short": null},
     "germany-G138_VK168_02":                 {"name": null, "short": null},
     "germany-G138_VK168_02_Mauerbrecher":    {"name": null, "short": null},
+    "germany-G139_MKA":                      {"name": null, "short": null},
+    "germany-G140_HWK_30":                   {"name": null, "short": null},
     "germany-G13_VK3001H":                   {"name": null, "short": null},
     "germany-G15_VK3601H":                   {"name": null, "short": null},
     "germany-G16_PzVIB_Tiger_II":            {"name": null, "short": null},
@@ -454,6 +456,7 @@
     "uk-GB95_Ekins_Firefly_M4A4":            {"name": null, "short": null},
     "uk-GB96_Excalibur":                     {"name": null, "short": null},
     "uk-GB97_Chimera":                       {"name": null, "short": null},
+    "uk-GB98_T95_FV4201_Chieftain":          {"name": null, "short": null},
     "usa-A01_T1_Cunningham":                 {"name": null, "short": null},
     "usa-A01_T1_Cunningham_bot":             {"name": null, "short": null},
     "usa-A02_M2_lt":                         {"name": null, "short": null},
