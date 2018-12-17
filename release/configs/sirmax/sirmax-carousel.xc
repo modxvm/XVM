@@ -46,7 +46,7 @@
         //"xp":       { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
         //"tankName": { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
         //"rentInfo": { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-        //"info":     { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+        "info":     { "enabled": true,  "dx": 0, "dy": 2, "alpha": 100, "scale": 1 },
         //"infoImg":  { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
         //"infoBuy":  { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
         //"clanLock": { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100 },

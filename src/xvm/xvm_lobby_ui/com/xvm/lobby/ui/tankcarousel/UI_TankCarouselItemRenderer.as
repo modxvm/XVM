@@ -10,6 +10,7 @@ package com.xvm.lobby.ui.tankcarousel
     import com.xvm.lobby.*;
     import com.xvm.vo.*;
     import flash.display.*;
+    import flash.events.*;
     import net.wg.gui.components.carousels.data.*;
 
     public /*dynamic*/ class UI_TankCarouselItemRenderer extends TankCarouselItemRendererUI implements IExtraFieldGroupHolder, ITankCarouselItemRenderer
@@ -53,10 +54,19 @@ package com.xvm.lobby.ui.tankcarousel
             }
         }
 
+        override protected function configUI():void
+        {
+            super.configUI();
+            addEventListener(MouseEvent.ROLL_OVER, onSlotMouseRollOverHandler, false, 0, true);
+            addEventListener(MouseEvent.ROLL_OUT, onSlotMouseRollOutHandler, false, 0, true);
+        }
+
         override protected function onDispose():void
         {
             try
             {
+                removeEventListener(MouseEvent.ROLL_OVER, onSlotMouseRollOverHandler);
+                removeEventListener(MouseEvent.ROLL_OUT, onSlotMouseRollOutHandler);
                 Xfw.removeCommandListener(LobbyXvmApp.AS_UPDATE_BATTLE_TYPE, updateData);
                 _helper.dispose();
                 _helper = null;
@@ -172,6 +182,18 @@ package com.xvm.lobby.ui.tankcarousel
         public function get vehicleCarouselVO():VehicleCarouselVO
         {
             return dataVO;
+        }
+
+        // PRIVATE
+
+        private function onSlotMouseRollOverHandler(param1:MouseEvent) : void
+        {
+            _helper.handleRollOver();
+        }
+
+        private function onSlotMouseRollOutHandler(param1:MouseEvent) : void
+        {
+            _helper.handleRollOut();
         }
     }
 }

@@ -102,9 +102,9 @@ package com.xvm.lobby.ui.tankcarousel
                 var isExtraFieldsVisible:Boolean = false;
                 if (item.vehicleCarouselVO)
                 {
+                    _setupStandardFieldInfo();
                     if (!(item.vehicleCarouselVO.buySlot || item.vehicleCarouselVO.buyTank || item.vehicleCarouselVO.restoreTank))
                     {
-                        _setupStandardFieldInfo(cfg.fields.info);
                         if (item.extraFields)
                         {
                             if (item.vehicleCarouselVO.icon)
@@ -130,7 +130,6 @@ package com.xvm.lobby.ui.tankcarousel
                     }
                     else
                     {
-                        _setupStandardFieldInfo(cfg.fields.infoBuy);
                         // Add used slots count
                         if (item.vehicleCarouselVO.buySlot && Config.config.hangar.carousel.showUsedSlots)
                         {
@@ -157,6 +156,16 @@ package com.xvm.lobby.ui.tankcarousel
             {
                 Logger.err(ex);
             }
+        }
+
+        public function handleRollOver():void
+        {
+            _setupStandardFieldInfo();
+        }
+
+        public function handleRollOut():void
+        {
+            _setupStandardFieldInfo();
         }
 
         // PRIVATE
@@ -388,8 +397,25 @@ package com.xvm.lobby.ui.tankcarousel
         private var orig_txtInfo_y:Number = NaN;
         private var orig_infoImg_x:Number = NaN;
         private var orig_infoImg_y:Number = NaN;
-        public function _setupStandardFieldInfo(cfgInfo:CCarouselCellStandardField):void
+        public function _setupStandardFieldInfo():void
         {
+            var cfgInfo:CCarouselCellStandardField = null;
+            if (item.vehicleCarouselVO)
+            {
+                if (!(item.vehicleCarouselVO.buySlot || item.vehicleCarouselVO.buyTank || item.vehicleCarouselVO.restoreTank))
+                {
+                    cfgInfo = cfg.fields.info;
+                }
+                else
+                {
+                    cfgInfo = cfg.fields.infoBuy;
+                }
+            }
+            else
+            {
+                return;
+            }
+
             var field:TextField = renderer.content.txtInfo;
             var tf:TextFormat = field.getTextFormat();
             var img:Image = renderer.content.infoImg as Image;
