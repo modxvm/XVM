@@ -36,7 +36,6 @@ package com.xvm.lobby.ui.tankcarousel
                 Xfw.addCommandListener(LobbyXvmApp.AS_UPDATE_BATTLE_TYPE, updateData);
                 if (bgMc)
                 {
-                    XfwUtils.logChilds(this);
                     bgMc.alpha = Macros.FormatNumberGlobal(Config.config.hangar.carousel.slotBackgroundAlpha, 100) / 100.0;
                 }
                 if (content)
