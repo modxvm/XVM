@@ -11,7 +11,7 @@
     "onlineServers": {
       "enabled": true,
       "x": 5,
-      "y": 80,
+      "y": 86,
       "hAlign": "left",
       "ignoredServers": ["RU4", "RU8", "RU9"],
       //"currentServerFormat": "<b><font size='16'>{server}</font></b>",
