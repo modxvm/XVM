@@ -34,6 +34,19 @@ package com.xvm.lobby.ui.tankcarousel
             {
                 _helper = new TankCarouselItemRendererHelper(this, Config.config.hangar.carousel.normal, DEFAULT_RENDERER_WIDTH, DEFAULT_RENDERER_HEIGHT);
                 Xfw.addCommandListener(LobbyXvmApp.AS_UPDATE_BATTLE_TYPE, updateData);
+                if (bgMc)
+                {
+                    XfwUtils.logChilds(this);
+                    bgMc.alpha = Macros.FormatNumberGlobal(Config.config.hangar.carousel.slotBackgroundAlpha, 100) / 100.0;
+                }
+                if (content)
+                {
+                    var border:MovieClip = getChildAt(getChildIndex(content) + 1) as MovieClip;
+                    if (border)
+                    {
+                        border.alpha = Macros.FormatNumberGlobal(Config.config.hangar.carousel.slotBorderAlpha, 100) / 100.0;
+                    }
+                }
             }
             catch (ex:Error)
             {

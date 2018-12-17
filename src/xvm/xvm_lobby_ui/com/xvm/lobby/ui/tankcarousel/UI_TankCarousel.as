@@ -28,9 +28,9 @@ package com.xvm.lobby.ui.tankcarousel
             //Logger.add(getQualifiedClassName(this));
             super();
 
-            this.cfg = Config.config.hangar.carousel;
+            cfg = Config.config.hangar.carousel;
 
-            _enabled = Macros.FormatBooleanGlobal(Config.config.hangar.carousel.enabled, true);
+            _enabled = Macros.FormatBooleanGlobal(cfg.enabled, true);
             if (_enabled)
             {
                 init();
@@ -132,7 +132,7 @@ package com.xvm.lobby.ui.tankcarousel
             {
                 Dossier.requestAccountDossier(this, onAccountDossierLoaded, PROFILE_DROPDOWN_KEYS.ALL);
 
-                endFadeMask.visible = startFadeMask.visible = false;
+                startFadeMask.alpha = endFadeMask.alpha = Macros.FormatNumberGlobal(Config.config.hangar.carousel.edgeFadeAlpha, 100) / 100.0;
 
                 background.alpha = Macros.FormatNumberGlobal(cfg.backgroundAlpha, 100) / 100.0;
 
