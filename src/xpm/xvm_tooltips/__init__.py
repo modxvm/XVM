@@ -32,7 +32,11 @@ from gui.Scaleform.daapi.view.meta.ModuleInfoMeta import ModuleInfoMeta
 from gui.shared.tooltips.module import ModuleBlockTooltipData
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache
-
+import ResMgr
+import nations
+import BigWorld
+from items import _xml
+from constants import ITEM_DEFS_PATH
 from xfw import *
 
 import xvm_main.python.config as config
@@ -215,6 +219,32 @@ def replace_p(text):
         p_replacement = text_styles.standard('').split('>', 1)[0] + '>'
     return text.replace('<p>', p_replacement).replace('</p>', '</font>').replace('<h>', '').replace('</h>', '')
 
+class ShellData(object):
+
+    def __init__(self):
+        self.shells = {}
+        self.shell()
+        self.data = {'costShell': {}}
+    
+    def shell(self):                
+        xmlPath = ''
+        for nation in nations.NAMES:
+            xmlPath = '%s%s%s%s' % (ITEM_DEFS_PATH, 'vehicles/', nation, '/components/shells.xml')
+            xmlCtx_s = (((None, '{}/{}'.format(xmlPath, n)), s) for n, s in ResMgr.openSection(xmlPath).items() if (n != 'icons') and (n != 'xmlns:xmlref'))
+            id_xmlCtx_s = ((_xml.readInt(xmlCtx, s, 'id', 0, 65535), xmlCtx, s) for xmlCtx, s in xmlCtx_s)
+            self.shells[nation] = [i for i, xmlCtx, s in id_xmlCtx_s if s.readBool('improved', False)]
+        ResMgr.purge(xmlPath, True)
+              
+    def typeShell(self, gun):
+        self.data['costShell'] = {}
+        for shell in gun.shots:
+            shell_id = shell.shell.id
+            self.data['costShell'][shell.shell.compactDescr] = 'gold' if shell_id[1] in self.shells[nations.NAMES[shell_id[0]]] else 'silver'
+        return self.data['costShell']
+
+                                         
+shellData = ShellData()
+
 # overriding tooltips for tanks in hangar, configuration in tooltips.xc
 @overrideMethod(tooltips_vehicle.CommonStatsBlockConstructor, 'construct')
 def CommonStatsBlockConstructor_construct(base, self):
@@ -235,10 +265,7 @@ def CommonStatsBlockConstructor_construct(base, self):
         vehicleCommonParams = getParameters_helper(vehicle)
         veh_type_inconfig = vehicle.type.replace('AT-SPG', 'TD')
         clipGunInfoShown = False
-        premium_shells = {}
-
-        for shell in vehicle.shells:
-            premium_shells[shell.intCompactDescr] = shell.isPremium
+        costShell = shellData.typeShell(gun)
         if params:
             values = config.get('tooltips/%s' % veh_type_inconfig)
             if values and len(values):
@@ -292,7 +319,7 @@ def CommonStatsBlockConstructor_construct(base, self):
                     shellSpeedSummary_arr = []
                     for shot in gun.shots:
                         shellSpeed_str = '%g' % round(shot.speed * 1.25)
-                        if premium_shells[shot.shell.compactDescr]:
+                        if costShell[shot.shell.compactDescr] == 'gold':
                             shellSpeed_str = gold_pad(shellSpeed_str)
                         shellSpeedSummary_arr.append(shellSpeed_str)
                     shellSpeedSummary_str = '/'.join(shellSpeedSummary_arr)
@@ -306,7 +333,7 @@ def CommonStatsBlockConstructor_construct(base, self):
                     piercingPowerAvgSummary_arr = []
                     for shot in gun.shots:
                         piercingPower_str = formatNumber(shot.piercingPower[0])
-                        if premium_shells[shot.shell.compactDescr]:
+                        if costShell[shot.shell.compactDescr] == 'gold':
                             piercingPower_str = gold_pad(piercingPower_str)
                         piercingPowerAvgSummary_arr.append(piercingPower_str)
                     piercingPowerAvgSummary_str = '/'.join(piercingPowerAvgSummary_arr)
@@ -316,7 +343,7 @@ def CommonStatsBlockConstructor_construct(base, self):
                     damageAvgSummary_arr = []
                     for shot in gun.shots:
                         damageAvg_str = formatNumber(shot.shell.damage[0])
-                        if premium_shells[shot.shell.compactDescr]:
+                        if costShell[shot.shell.compactDescr] == 'gold':
                             damageAvg_str = gold_pad(damageAvg_str)
                         damageAvgSummary_arr.append(damageAvg_str)
                     damageAvgSummary_str = '/'.join(damageAvgSummary_arr)
