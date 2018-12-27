@@ -23,7 +23,6 @@ maxHealth = 0
 damageReceived = 0
 vehiclesHealth = {}
 damagesSquad = 0
-detection = 0
 numberHitsBlocked = 0
 vehCD = None
 player = None
@@ -267,10 +266,10 @@ def onEnterWorld(self, prereqs):
 
 @registerEvent(PlayerAvatar, '_PlayerAvatar__destroyGUI')
 def destroyGUI(self):
-    global vehiclesHealth, totalDamage, totalAssist, totalBlocked, damageReceived, damagesSquad, detection, isPlayerInSquad
-    global ribbonTypes, numberHitsBlocked, player, numberHitsDealt, old_totalDamage, damage, numberShotsDealt, totalStun
-    global numberDamagesDealt, numberShotsReceived, numberHitsReceived, numberHits, fragsSquad, fragsSquad_dict, isStuns
-    global numberStuns, numberDamagedVehicles, hitAlly, allyVehicles, burst, numberAssistTrack, numberAssistSpot, numberAssistStun
+    global vehiclesHealth, totalDamage, totalAssist, totalBlocked, damageReceived, damagesSquad, isPlayerInSquad, ribbonTypes
+    global numberHitsBlocked, player, numberHitsDealt, old_totalDamage, damage, numberShotsDealt, totalStun, numberDamagesDealt
+    global numberShotsReceived, numberHitsReceived, numberHits, fragsSquad, fragsSquad_dict, isStuns, numberStuns
+    global numberDamagedVehicles, hitAlly, allyVehicles, burst, numberAssistTrack, numberAssistSpot, numberAssistStun
     vehiclesHealth = {}
     totalDamage = 0
     damage = 0
@@ -279,7 +278,6 @@ def destroyGUI(self):
     totalBlocked = 0
     damageReceived = 0
     damagesSquad = 0
-    detection = 0
     numberHitsBlocked = 0
     player = None
     numberHitsDealt = 0
