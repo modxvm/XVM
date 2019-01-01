@@ -1,4 +1,4 @@
-""" XVM (c) https://modxvm.com 2013-2018 """
+""" XVM (c) https://modxvm.com 2013-2019 """
 
 from __version__ import __xvm_version__, __wot_version__
 

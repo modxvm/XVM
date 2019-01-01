@@ -1,4 +1,4 @@
-""" XVM (c) https://modxvm.com 2013-2018 """
+""" XVM (c) https://modxvm.com 2013-2019 """
 
 __all__ = ['load', 'get', 'config_data', 'lang_data']
 

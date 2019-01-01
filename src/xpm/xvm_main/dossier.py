@@ -1,4 +1,4 @@
-""" XFW Library (c) https://modxvm.com 2013-2018 """
+""" XFW Library (c) https://modxvm.com 2013-2019 """
 
 #############################
 # Command

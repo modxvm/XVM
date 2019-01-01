@@ -1,4 +1,4 @@
-""" XVM (c) https://modxvm.com 2013-2018 """
+""" XVM (c) https://modxvm.com 2013-2019 """
 # This Python file uses the following encoding: utf-8
 from xfw import *
 
@@ -26,12 +26,12 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 19.12.2018
+    # Last update: 01.01.2019
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
     "china:Ch03_WZ-111":                     '111',
-    "china:Ch03_WZ_111_A":                   '111',
+    "china:Ch03_WZ_111_A":                   '111a',
     "china:Ch04_T34_1":                      't34·1',
     "china:Ch05_T34_2":                      't34·2',
     "china:Ch06_Renault_NC31":               'NC31',

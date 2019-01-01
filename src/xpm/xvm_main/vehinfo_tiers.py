@@ -1,4 +1,4 @@
-""" XVM (c) https://modxvm.com 2013-2018 """
+""" XVM (c) https://modxvm.com 2013-2019 """
 
 # PUBLIC
 
@@ -15,23 +15,16 @@ from skeletons.gui.shared import IItemsCache
 
 _special = {
     # Data from http://forum.worldoftanks.ru/index.php?/topic/1894923-
-    # Last update: 19.12.2018
+    # Last update: 01.01.2019
 
     # level 2
     'germany:G53_PzI':                   [ 2, 2 ],
     'uk:GB76_Mk_VIC':                    [ 2, 2 ],
-    'usa:A19_T2_lt':                     [ 2, 4 ],
     'usa:A93_T7_Combat_Car':             [ 2, 2 ],
 
     # level 4
-    'france:F14_AMX40':                  [ 4, 6 ],
     'germany:G35_B-1bis_captured':       [ 4, 4 ],
-    'japan:J06_Ke_Ho':                   [ 4, 6 ],
-    'uk:GB04_Valentine':                 [ 4, 6 ],
-    'uk:GB60_Covenanter':                [ 4, 6 ],
-    'ussr:R12_A-20':                     [ 4, 6 ],
     'ussr:R31_Valentine_LL':             [ 4, 4 ],
-    'ussr:R44_T80':                      [ 4, 6 ],
     'ussr:R68_A-32':                     [ 4, 5 ],
 
     # level 5
@@ -59,7 +52,6 @@ _special = {
     'germany:G78_Panther_M10':           [ 7, 8 ],
     'uk:GB71_AT_15A':                    [ 7, 8 ],
     'usa:A86_T23E3':                     [ 7, 8 ],
-    'ussr:R98_T44_85':                   [ 7, 8 ],
     'ussr:R99_T44_122':                  [ 7, 8 ],
 
     # level 8
@@ -81,16 +73,13 @@ def _getTiers(level, cls, key):
     if key in _special:
         return _special[key]
 
-    # Since update 0.9.18: (=T3 max+1)
-    if level == 3:
-        return (3, 4)
-
     # HT: (=T4 max+1)
     if level == 4 and cls == 'heavyTank':
         return (4, 5)
 
-    # default: (<T3 max+1) & (>=T3 max+2) & (>T9 max=11)
-    return (level, level + 1 if level < 3 else 11 if level > 9 else level + 2)
+    # Since update 0.9.18
+    # default: (<=T3 max+1) & (>=T4 max+2) & (>T9 max=11)
+    return (level, level + 1 if level < 4 else 11 if level > 9 else level + 2)
 
 def _test_specials():
     for veh_name in _special.keys():
