@@ -1,8 +1,7 @@
 """ XVM (c) https://modxvm.com 2013-2019 """
 
 # Authors:
-# night_dragon_on <http://www.koreanrandom.com/forum/user/14897-night-dragon-on/>
-# Ekspoint <http://www.koreanrandom.com/forum/user/24406-ekspoint/>
+# night_dragon_on <https://kr.cm/f/p/14897/>
 # sirmax <max(at)modxvm.com>
 
 #####################################################################

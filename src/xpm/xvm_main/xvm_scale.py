@@ -1,7 +1,7 @@
 """ XVM (c) https://modxvm.com 2013-2019 """
 """
  XVM Scale for ratings
- http://www.koreanrandom.com/forum/topic/2625-/
+ https://kr.cm/f/t/2625/
  @author seriych <seriych(at)modxvm.com>
  @author Maxim Schedriviy <max(at)modxvm.com>
 """

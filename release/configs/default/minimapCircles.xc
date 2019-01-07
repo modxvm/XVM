@@ -24,8 +24,8 @@
     //   "blindarea_motion" - реальная граница слепой зоны танка в движении (50<=X<=445)
     //   "blindarea_standing" - реальная граница слепой зоны танка стоя (50<=X<=445)
     // Источник:
-    //   https://koreanrandom.com/forum/topic/15467-/?do=findComment&comment=187139
-    //   https://koreanrandom.com/forum/topic/15467-/?do=findComment&comment=186794
+    //   https://kr.cm/f/t/15467/c/187139/
+    //   https://kr.cm/f/t/15467/c/186794/
     "view": [
       // Main circles:
       // Основные круги:
@@ -44,12 +44,12 @@
     // Maximum range of fire for artillery
     // Artillery gun fire range may differ depending on vehicle angle relative to ground
     // and vehicle height positioning relative to target. These factors are not considered.
-    // See pics at https://goo.gl/ZqlPa
+    // See pics at https://kr.cm/f/t/2076/c/35697/
     // ------------------------------------------------------------------------------------------------
     // Максимальная дальность стрельбы для артиллерии
     // Дальнобойность арты может меняться в зависимости от углов постановки машины на склонах местности
     // и высоте расположения машины относительно цели. На миникарте эти факторы не учитываются.
-    // Подробнее по ссылке: https://goo.gl/ZqlPa
+    // Подробнее по ссылке: https://kr.cm/f/t/2076/c/35697/
     "artillery": { "enabled": true, "alpha": 55, "color": "0xFF6666", "thickness": 0.5 },
     // Maximum range of shooting for machine gun
     // Максимальная дальность полета снаряда для пулеметных танков
@@ -57,12 +57,12 @@
     // Special circles dependent on vehicle type.
     // Many configuration lines for the same vehicle make many circles.
     // See other vehicle types at (replace : symbol with -):
-    // http://code.google.com/p/wot-xvm/source/browse/trunk/src/xpm/xvmstat/vehinfo_short.py
+    // https://bitbucket.org/XVM/xvm/src/default/src/xpm/xvm_main/vehinfo_short.py
     // ------------------------------------------------------------------------------------------------
     // Специальные круги, зависящие от модели техники.
     // Несколько строк для одной техники делают несколько кругов.
     // Названия танков для дополнения брать по ссылке (символ : заменяется -):
-    // http://code.google.com/p/wot-xvm/source/browse/trunk/src/xpm/xvmstat/vehinfo_short.py
+    // https://bitbucket.org/XVM/xvm/src/default/src/xpm/xvm_main/vehinfo_short.py
     "special": [
       // Example: Artillery gun fire range circle
       // Пример: Круг дальности стрельбы арты

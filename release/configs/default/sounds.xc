@@ -1,7 +1,7 @@
 ﻿/**
  * Extra sounds settings.
  * Настройки дополнительных звуков.
- * https://koreanrandom.com/forum/topic/18955-/
+ * https://kr.cm/f/t/18955/
  */
 {
   "sounds": {

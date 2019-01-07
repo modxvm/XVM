@@ -72,7 +72,7 @@ def cleanup():
 # handlers
 
 # show quantity of alive instead of dead in frags panel
-# night_dragon_on <http://www.koreanrandom.com/forum/user/14897-night-dragon-on/>
+# night_dragon_on <https://kr.cm/f/p/14897/>
 
 def onGUISpaceEntered(spaceID):
     if spaceID == GUI_GLOBAL_SPACE_ID.BATTLE:

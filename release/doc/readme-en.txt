@@ -197,5 +197,5 @@
     5. Personal configuration is created, you can start editing
 
     Attention! File encoding must remain encoded in UTF8+BOM.
-    For editing use Notepad++. https://goo.gl/y6iet
+    For editing use Notepad++. https://kr.cm/f/t/1382/c/25815/
     In the case of Windows Notepad: Save as -> Encoding: utf.

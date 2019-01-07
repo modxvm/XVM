@@ -213,7 +213,7 @@
     ],
     // Dynamic color for XVM Scale
     // Динамический цвет по шкале XVM
-    // https://koreanrandom.com/forum/topic/2625-/
+    // https://kr.cm/f/t/2625/
     "x": [
       { "value": 16.4, "color": ${"def.colorRating.very_bad" } }, // 00 - 16 - very bad  (20% of players)
       { "value": 33.4, "color": ${"def.colorRating.bad"      } }, // 17 - 33 - bad       (better than 20% of players)

@@ -1,7 +1,7 @@
 ﻿/**
  * XVM: eXtended Visualization Mod for World of Tanks.
  * https://modxvm.com/
- * @author wotunion <http://www.koreanrandom.com/forum/user/27262-wotunion/>
+ * @author wotunion <https://kr.cm/f/p/27262/>
  * @author Maxim Schedriviy <max(at)modxvm.com>
  */
 package com.xvm.battle.battleLabels

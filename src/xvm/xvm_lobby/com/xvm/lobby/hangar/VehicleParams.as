@@ -147,7 +147,7 @@ package com.xvm.lobby.hangar
             };
         }
 
-        // http://www.koreanrandom.com/forum/topic/15831-/
+        // https://kr.cm/f/t/15831/
         private static function getReloadTime():Number
         {
             var ci:CMinimapCirclesInternal = Config.config.minimap.circles._internal;
@@ -165,7 +165,7 @@ package com.xvm.lobby.hangar
             return Kram * ci.base_gun_reload_time / (0.57 + 0.43 * K);
         }
 
-        // http://www.koreanrandom.com/forum/topic/15831-/
+        // https://kr.cm/f/t/15831/
         private static function getRadioRange():Number
         {
             var ci:CMinimapCirclesInternal = Config.config.minimap.circles._internal;
