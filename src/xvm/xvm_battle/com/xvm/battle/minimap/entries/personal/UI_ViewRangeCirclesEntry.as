@@ -400,7 +400,7 @@ class Circles extends Sprite implements IDisposable
         }
 
         // Special vehicle key dependent circle configs
-        var vehicleKey:String = VehicleInfo.get(BattleGlobalData.playerVehCD).key;
+        var vehicleKey:String = VehicleInfo.get(BattleGlobalData.playerVehCD).key.replace(":", "-");
         len = cfg.special.length;
         for (i = 0; i < len; ++i)
         {
