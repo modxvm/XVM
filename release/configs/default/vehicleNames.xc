@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 01.01.2019
+    // Last update: 16.01.2019
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -78,9 +78,15 @@
     "france-F08_AMX_50_100":                 {"name": null, "short": null},
     "france-F08_AMX_50_100_IGR":             {"name": null, "short": null},
     "france-F09_AMX_50_120":                 {"name": null, "short": null},
+    //"france-F100_Panhard_EBR_90":            {"name": null, "short": null},
     "france-F106_Panhard_EBR_75_Mle1954":    {"name": null, "short": null},
+    //"france-F107_Hotchkiss_EBR":             {"name": null, "short": null},
+    //"france-F108_Panhard_EBR_105":           {"name": null, "short": null},
+    //"france-F109_AMD_Panhard_178B":          {"name": null, "short": null},
     "france-F10_AMX_50B":                    {"name": null, "short": null},
     "france-F10_AMX_50B_fallout":            {"name": null, "short": null},
+    //"france-F110_Lynx_6x6":                  {"name": null, "short": null},
+    //"france-F111_AM39_Gendron_Somua":        {"name": null, "short": null},
     "france-F11_Renault_G1R":                {"name": null, "short": null},
     "france-F12_Hotchkiss_H35":              {"name": null, "short": null},
     "france-F13_AMX38":                      {"name": null, "short": null},
@@ -198,8 +204,8 @@
     "germany-G138_VK168_02":                 {"name": null, "short": null},
     "germany-G138_VK168_02_Mauerbrecher":    {"name": null, "short": null},
     "germany-G139_MKA":                      {"name": null, "short": null},
-    "germany-G140_HWK_30":                   {"name": null, "short": null},
     "germany-G13_VK3001H":                   {"name": null, "short": null},
+    "germany-G140_HWK_30":                   {"name": null, "short": null},
     "germany-G15_VK3601H":                   {"name": null, "short": null},
     "germany-G16_PzVIB_Tiger_II":            {"name": null, "short": null},
     "germany-G16_PzVIB_Tiger_II_F":          {"name": null, "short": null},
@@ -373,6 +379,7 @@
     "sweden-S23_Strv_81":                    {"name": null, "short": null},
     "sweden-S23_Strv_81_sabaton":            {"name": null, "short": null},
     "sweden-S25_EMIL_51":                    {"name": null, "short": null},
+    //"sweden-S26_Lansen_C":                   {"name": null, "short": null},
     "uk-GB01_Medium_Mark_I":                 {"name": null, "short": null},
     "uk-GB01_Medium_Mark_I_bot":             {"name": null, "short": null},
     "uk-GB03_Cruiser_Mk_I":                  {"name": null, "short": null},

@@ -26,7 +26,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 01.01.2019
+    # Last update: 16.01.2019
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -100,9 +100,15 @@ _data = {
     "france:F08_AMX_50_100":                 '50100',
     "france:F08_AMX_50_100_IGR":             '50100',
     "france:F09_AMX_50_120":                 '50120',
+    #"france:F100_Panhard_EBR_90":            'ebr90',
     "france:F106_Panhard_EBR_75_Mle1954":    'ebr75',
+    #"france:F107_Hotchkiss_EBR":             'ebrHotch',
+    #"france:F108_Panhard_EBR_105":           'ebr105',
+    #"france:F109_AMD_Panhard_178B":          'amd178b',
     "france:F10_AMX_50B":                    '50B',
     "france:F10_AMX_50B_fallout":            '50B',
+    #"france:F110_Lynx_6x6":                  'lynx6x6',
+    #"france:F111_AM39_Gendron_Somua":        'am.Gedr',
     "france:F11_Renault_G1R":                'G1R',
     "france:F12_Hotchkiss_H35":              'h35',
     "france:F13_AMX38":                      'amx38',
@@ -220,8 +226,8 @@ _data = {
     "germany:G138_VK168_02":                 '168.01p',
     "germany:G138_VK168_02_Mauerbrecher":    'MaurBrec',
     "germany:G139_MKA":                      'MKA',
-    "germany:G140_HWK_30":                   'HWK30',
     "germany:G13_VK3001H":                   '3001h',
+    "germany:G140_HWK_30":                   'HWK30',
     "germany:G15_VK3601H":                   '3601h',
     "germany:G16_PzVIB_Tiger_II":            'Tig2',
     "germany:G16_PzVIB_Tiger_II_F":          'Tig2·h',
@@ -395,6 +401,7 @@ _data = {
     "sweden:S23_Strv_81":                    'strv·81',
     "sweden:S23_Strv_81_sabaton":            'Pr.Vict',
     "sweden:S25_EMIL_51":                    'emil·1951',
+    #"sweden:S26_Lansen_C":                   'lans·C',
     "uk:GB01_Medium_Mark_I":                 'Med1',
     "uk:GB01_Medium_Mark_I_bot":             'Med1',
     "uk:GB03_Cruiser_Mk_I":                  'Crus1',
