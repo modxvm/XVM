@@ -120,20 +120,20 @@
       // Vehicle type (macro {{vtype}}).
       // Тип техники (макрос {{vtype}}).
       "vtype": {
-        "mediumTank": "<font face='xvm'>&#x3B;</font>", // medium tank / средний танк
-        "lightTank": "<font face='xvm'>&#x3A;</font>",  // light tank / лёгкий танк
-        "heavyTank": "<font face='xvm'>&#x3F;</font>",  // heavy tank / тяжёлый танк
-        "AT-SPG": "<font face='xvm'>&#x2E;</font>",     // tank destroyer / ПТ-САУ
+        "HT": "<font face='xvm'>&#x3F;</font>",  // heavy tank / тяжёлый танк
+        "MT": "<font face='xvm'>&#x3B;</font>", // medium tank / средний танк
+        "LT": "<font face='xvm'>&#x3A;</font>",  // light tank / лёгкий танк
+        "TD": "<font face='xvm'>&#x2E;</font>",     // tank destroyer / ПТ-САУ
         "SPG": "<font face='xvm'>&#x2D;</font>",        // SPG / САУ
         "not_vehicle": ""                               // another source of damage / другой источник урона
       },
       // Color by vehicle type (macro {{c:vtype}}).
       // Цвет по типу техники (макрос {{c:vtype}}).
       "c:vtype":{
-        "mediumTank": "#FFF198", // medium tank / средний танк
-        "lightTank": "#A2FF9A",  // light tank / лёгкий танк
-        "heavyTank": "#FFACAC",  // heavy tank / тяжёлый танк
-        "AT-SPG": "#A0CFFF",     // tank destroyer / ПТ-САУ
+        "HT": "#FFACAC",  // heavy tank / тяжёлый танк
+        "MT": "#FFF198", // medium tank / средний танк
+        "LT": "#A2FF9A",  // light tank / лёгкий танк
+        "TD": "#A0CFFF",     // tank destroyer / ПТ-САУ
         "SPG": "#EFAEFF",        // SPG / САУ
         "not_vehicle": "#CCCCCC" // another source of damage / другой источник урона
       },
