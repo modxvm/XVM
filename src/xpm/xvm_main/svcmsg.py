@@ -26,7 +26,7 @@ def tokenUpdated():
         msg += '{{l10n:token/blocked}}'
     elif status == 'active':
         type = SystemMessages.SM_TYPE.GameGreeting
-        msg += '{{l10n:token/active}}\n'
+        msg += '{{l10n:token/active}} '
         s = time.time()
         e = config.token.expires_at / 1000
         days_left = int((e - s) / 86400)
@@ -65,8 +65,8 @@ def fixData(value):
 # PRIVATE
 
 def _getXvmMessageHeader():
-    msg = '<textformat tabstops="[100]"><img src="img://../mods/shared_resources/xvm/res/icons/xvm/16x16t.png" ' \
-          'vspace="-5">&nbsp;<a href="#XVM_SITE#"><font color="#E2D2A2">https://modxvm.com</font></a>\n\n'
+    msg = '<textformat tabstops="[50]"><img src="img://../mods/shared_resources/xvm/res/icons/xvm/16x16t.png" ' \
+          'vspace="-5">&nbsp;<a href="#XVM_SITE#"><font color="#E2D2A2">modxvm.com</font></a> - '
     rev = ''
     try:
         from __version__ import __revision__
