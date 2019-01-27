@@ -194,3 +194,8 @@ def xvm_numberDamagedVehicles():
 @xvm.export('xvm.hitAlly', deterministic=False)
 def xvm_hitAlly():
     return 'hitAlly' if te.hitAlly else None
+
+
+@xvm.export('xvm.dmgAlly', deterministic=False)
+def xvm_dmgAlly():
+    return 'dmgAlly' if te.dmgAlly else None

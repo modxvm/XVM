@@ -1,6 +1,7 @@
 ﻿XVM-7.7.10:
   [PYTHON MACROS]
   * damageLog: changed the names of the parameters in the "vtype" and "c: vtype" sections
+  * totalEfficiency: added macro {{py:xvm.dmgAlly}}
   
 XVM-7.7.9:
   [GENERAL]
