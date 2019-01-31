@@ -1,177 +1,194 @@
 ﻿from Avatar import PlayerAvatar
 from xfw import registerEvent
 from xfw_actionscript.python import as_event
-from gui.battle_control.battle_constants import VEHICLE_DEVICES
 from gui.shared.utils.TimeInterval import TimeInterval
 from gui.Scaleform.daapi.view.battle.shared.damage_panel import DamagePanel
 
-ENGINE = VEHICLE_DEVICES[0]
-GUN = VEHICLE_DEVICES[2]
-TURRET = VEHICLE_DEVICES[3]
-LEFTTRACK = VEHICLE_DEVICES[4]
-RIGHTTRACK = VEHICLE_DEVICES[5]
-SURVEYING = VEHICLE_DEVICES[6]
-RADIO = VEHICLE_DEVICES[7]
+ENGINE     = 'engine'
+GUN        = 'gun'
+TURRET     = 'turretRotator'
+SURVEYING  = 'surveyingDevice'
+RADIO      = 'radio'
+COMPLEX    = 'complex' #custom
+LEFTTRACK  = 'leftTrack'
+RIGHTTRACK = 'rightTrack'
+WHEEL      = 'wheel' #custom
 
 DEVICES = {
-    ENGINE, GUN, TURRET, LEFTTRACK, RIGHTTRACK, SURVEYING, RADIO
+    ENGINE, GUN, TURRET, SURVEYING, RADIO,
+    LEFTTRACK, RIGHTTRACK,
+    WHEEL
 }
 
-EVENTS = {
-    ENGINE: 'ON_ENGINE_UPDATE',
-    GUN: 'ON_GUN_UPDATE',
-    TURRET: 'ON_TURRET_UPDATE',
-    LEFTTRACK: 'ON_TRACKS_UPDATE',
-    RIGHTTRACK: 'ON_TRACKS_UPDATE',
-    SURVEYING: 'ON_SURVEYING_UPDATE',
-    RADIO: 'ON_RADIO_UPDATE'
-}
-
-def resetAll():
-    for device in DEVICES:
-        RepairTimers.stopTimer(device)
-        as_event(EVENTS[device])
+EVENT_TEMPLATE = 'ON_{}_UPDATE'
 
 #TIMERS
 
 class RepairTimers(object):
-    
+
     def __init__(self):
-        self.TIMERS = {
-            ENGINE: {
-                'timer': None,
-                'duration': None
-            },
-            GUN: {
-                'timer': None,
-                'duration': None
-            },
-            TURRET: {
-                'timer': None,
-                'duration': None
-            },
-            LEFTTRACK: {
-                'timer': None,
-                'duration': None
-            },
-            RIGHTTRACK: {
-                'timer': None,
-                'duration': None
-            },
-            SURVEYING: {
-                'timer': None,
-                'duration': None
-            },
-            RADIO: {
-                'timer': None,
-                'duration': None
+        self.timers = {}
+        self.isWheeledTech = False
+
+    def reset(self):
+        for device in self.timers.copy():
+            self.delTimer(device)
+            self.eventHandler(device)
+        self.timers = {}
+        self.isWheeledTech = False
+
+    def eventHandler(self, device):
+        if device in [LEFTTRACK, RIGHTTRACK, WHEEL]:
+            event = EVENT_TEMPLATE.format(COMPLEX)
+        else:
+            event = EVENT_TEMPLATE.format(device)
+        as_event(event.upper())
+
+    def addTimer(self, device, duration):
+        if device in self.timers:
+            self.timers[device]['timer'].stop()
+        
+        self.timers.update({
+            device: {
+                'duration': duration,
+                'timer': TimeInterval(0.1, self, '{}OnTimer'.format(device))
             }
-        }
-    
-    def startTimer(self, device, duration):
-        self.TIMERS[device]['duration'] = duration
-        if self.TIMERS[device]['timer'] is not None:
+        })
+        self.timers[device]['timer'].start()
+        self.eventHandler(device)
+
+    def delTimer(self, device):
+        if device not in self.timers:
             return
-        self.TIMERS[device]['timer'] = TimeInterval(0.1, self, '{}OnTimer'.format(device))
-        self.TIMERS[device]['timer'].start()
-        as_event(EVENTS[device])
-    
-    def stopTimer(self, device):
-        if self.TIMERS[device]['timer'] is None:
-            return
-        self.TIMERS[device]['timer'].stop()
-        self.TIMERS[device]['timer'] = None
-        self.TIMERS[device]['duration'] = None
-    
+        
+        self.timers[device]['timer'].stop()
+        self.timers.pop(device, None)
+
     def onTimer(self, device):
-        self.TIMERS[device]['duration'] -= 0.1
-        as_event(EVENTS[device])
-    
+        self.timers[device]['duration'] -= 0.1
+        self.eventHandler(device)
+
     def engineOnTimer(self):
         self.onTimer(ENGINE)
-    
+
     def gunOnTimer(self):
         self.onTimer(GUN)
-    
+
     def turretRotatorOnTimer(self):
         self.onTimer(TURRET)
-    
+
     def leftTrackOnTimer(self):
         self.onTimer(LEFTTRACK)
-        if self.TIMERS[RIGHTTRACK]['timer'] is not None and self.TIMERS[LEFTTRACK]['duration'] > self.TIMERS[RIGHTTRACK]['duration']:
-            self.stopTimer(RIGHTTRACK)
-    
+        if RIGHTTRACK in self.timers:
+            if self.timers[RIGHTTRACK]['timer'] is not None and self.timers[LEFTTRACK]['duration'] > self.timers[RIGHTTRACK]['duration']:
+                self.delTimer(RIGHTTRACK)
+
     def rightTrackOnTimer(self):
         self.onTimer(RIGHTTRACK)
-        if self.TIMERS[LEFTTRACK]['timer'] is not None and self.TIMERS[RIGHTTRACK]['duration'] > self.TIMERS[LEFTTRACK]['duration']:
-            self.stopTimer(LEFTTRACK)
-    
+        if LEFTTRACK in self.timers:
+            if self.timers[LEFTTRACK]['timer'] is not None and self.timers[RIGHTTRACK]['duration'] > self.timers[LEFTTRACK]['duration']:
+                self.delTimer(LEFTTRACK)
+
+    def wheelOnTimer(self):
+        self.onTimer(WHEEL)
+
     def surveyingDeviceOnTimer(self):
         self.onTimer(SURVEYING)
-    
+
     def radioOnTimer(self):
         self.onTimer(RADIO)
-    
-    def getLastTrack(self):
-        return LEFTTRACK if self.TIMERS[LEFTTRACK]['duration'] > self.TIMERS[RIGHTTRACK]['duration'] else RIGHTTRACK
+
+    def getTime(self, device):
+        if not self.timers:
+            result = None
+        elif device == COMPLEX:
+            if self.isWheeledTech:
+                result = self.timers[WHEEL].get('duration', None)
+            else:
+                keys = self.timers.keys()
+                if LEFTTRACK in keys and not RIGHTTRACK in keys:
+                    result = self.timers[LEFTTRACK].get('duration', None)
+                elif RIGHTTRACK in keys and not LEFTTRACK in keys:
+                    result = self.timers[RIGHTTRACK].get('duration', None)
+                else:
+                    device = LEFTTRACK if self.timers.get(LEFTTRACK, {}).get('duration', 0.0) > self.timers.get(RIGHTTRACK, {}).get('duration', 0.0) else RIGHTTRACK
+                    result = self.timers[device].get('duration', None)
+        elif device in self.timers:
+            result = self.timers[device].get('duration', None)
+        else:
+            result = None
+        return '%.1f' % result if result is not None else None
 
 RepairTimers = RepairTimers()
 
-#EXPORTS
-
-@xvm.export('repairTimeEngine', deterministic=False)
-def repairTimeEngine():
-    return RepairTimers.TIMERS[ENGINE]['duration']
-
-@xvm.export('repairTimeGun', deterministic=False)
-def repairTimeGun():
-    return RepairTimers.TIMERS[GUN]['duration']
-
-@xvm.export('repairTimeTurret', deterministic=False)
-def repairTimeTurret():
-    return RepairTimers.TIMERS[TURRET]['duration']
-
-@xvm.export('repairTimeTracks', deterministic=False)
-def repairTimeTracks():
-    return RepairTimers.TIMERS[RepairTimers.getLastTrack()]['duration']
-
-@xvm.export('repairTimeSurveying', deterministic=False)
-def repairTimeSurveying():
-    return RepairTimers.TIMERS[SURVEYING]['duration']
-
-@xvm.export('repairTimeRadio', deterministic=False)
-def repairTimeRadio():
-    return RepairTimers.TIMERS[RADIO]['duration']
-
 #REGISTERS
+
+@registerEvent(PlayerAvatar, 'onVehicleChanged')
+def onVehicleChanged(self):
+    if self.vehicle is not None:
+        RepairTimers.isWheeledTech = self.vehicle.isWheeledTech
 
 @registerEvent(DamagePanel, '_switching')
 def _switching(self, _):
-    resetAll()
+    RepairTimers.reset()
 
 @registerEvent(DamagePanel, '_updateRepairingDevice')
 def _updateRepairingDevice(self, value):
     device = value[0]
+    
+    if device.find('wheel') > -1: #remove all indices, e.g.: "wheel0", "wheel1" etc.
+        device = 'wheel'
+    
     if device in DEVICES:
-        RepairTimers.startTimer(device, float(value[2]))
+        RepairTimers.addTimer(device, float(value[2]))
 
 @registerEvent(DamagePanel, '_updateDeviceState')
 def _updateDeviceState(self, value):
     device = value[0]
     state = value[2]
+    
+    if device.find('wheel') > -1: #remove all indices, e.g.: "wheel0", "wheel1" etc.
+        device = 'wheel'
+    
     if device in DEVICES:
         if 'destroyed' != state:
-            RepairTimers.stopTimer(device)
-        as_event(EVENTS[device])
+            RepairTimers.delTimer(device)
+        RepairTimers.eventHandler(device)
 
 @registerEvent(DamagePanel, '_updateCrewDeactivated')
 def _updateCrewDeactivated(self, _):
-    resetAll()
+    RepairTimers.reset()
 
 @registerEvent(DamagePanel, '_updateDestroyed')
 def _updateDestroyed(self, _ = None):
-    resetAll()
+    RepairTimers.reset()
 
 @registerEvent(PlayerAvatar, '_PlayerAvatar__destroyGUI')
 def __destroyGUI(self):
-    resetAll()
+    RepairTimers.reset()
+
+#EXPORTS
+
+@xvm.export('repairTimeEngine', deterministic=False)
+def repairTimeEngine():
+    return RepairTimers.getTime(ENGINE)
+
+@xvm.export('repairTimeGun', deterministic=False)
+def repairTimeGun():
+    return RepairTimers.getTime(GUN)
+
+@xvm.export('repairTimeTurret', deterministic=False)
+def repairTimeTurret():
+    return RepairTimers.getTime(TURRET)
+
+@xvm.export('repairTimeComplex', deterministic=False)
+def repairTimeComplex():
+    return RepairTimers.getTime(COMPLEX)
+
+@xvm.export('repairTimeSurveying', deterministic=False)
+def repairTimeSurveying():
+    return RepairTimers.getTime(SURVEYING)
+
+@xvm.export('repairTimeRadio', deterministic=False)
+def repairTimeRadio():
+    return RepairTimers.getTime(RADIO)
