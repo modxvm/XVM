@@ -140,7 +140,7 @@ def _CarouselDataProvider_vehicleComparisonKey(base, cls, vehicle):
                 comparisonKey.append(factor if stats else 0)
                 if stats:
                     if sort_criterion == 'battles':
-                        comparisonKey.append(stats.battlesCount * factor)                  
+                        comparisonKey.append(stats.battlesCount * factor)
                     elif sort_criterion == 'winRate':
                         comparisonKey.append(float(stats.wins) / stats.battlesCount * factor)
                     elif sort_criterion == 'markOfMastery':

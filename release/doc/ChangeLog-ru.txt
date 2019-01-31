@@ -1,4 +1,10 @@
-﻿XVM-7.7.10:
+﻿XVM-7.8.0:
+  [ОБЩЕЕ]
+  * World of Tanks 1.4.0.0
+
+  [КАРУСЕЛЬ]
+  * добавлена сортировка по "battles", "-battles"
+
   [МАКРОСЫ]
   * damageLog: изменены названия параметров в секциях "vtype" и "c:vtype"
   * totalEfficiency: добавлен макрос {{py:xvm.dmgAlly}}
@@ -1131,7 +1137,7 @@ XVM-6.4.1:
   * исправлены некоторые ошибки
   * statisticForm: добавлены extraFields
   * карусель: восстановлена многорядность
-  * карусель: добавлена сортировка по markOfMastery, xtdb, xte, damageRating и marksOnGun
+  * карусель: добавлена сортировка по "markOfMastery", "xtdb", "xte", "damageRating" и "marksOnGun"
   * добавлена опция в секции "battleLoading" и "statisticForm":
       "vehicleIconAlpha" - прозрачность в процентах иконки танка
   * добавлены макросы:
@@ -1405,7 +1411,7 @@ XVM-6.1.4.1:
 
 XVM-6.1.4:
   * адаптация к WoT 0.9.10
-  * добавлена сортировка карусели winRate
+  * карусель: добавлена сортировка по "winRate"
   * удалена устаревшая опция "fragCorrelation"/"sortByType"
   * добавлены опции в секции battleLoading и statisticForm:
       "removeVehicleLevel" - убрать отображение уровня танка
