@@ -133,13 +133,15 @@ def _CarouselDataProvider_vehicleComparisonKey(base, cls, vehicle):
             else:
                 factor = 1
 
-            if sort_criterion in ['winRate', 'markOfMastery']:
+            if sort_criterion in ['battles', 'winRate', 'markOfMastery']:
                 itemsCache = dependency.instance(IItemsCache)
                 vehicles_stats = itemsCache.items.getAccountDossier().getRandomStats().getVehicles() # battlesCount, wins, markOfMastery, xp
                 stats = vehicles_stats.get(vehicle.intCD)
                 comparisonKey.append(factor if stats else 0)
                 if stats:
-                    if sort_criterion == 'winRate':
+                    if sort_criterion == 'battles':
+                        comparisonKey.append(stats.battlesCount * factor)                  
+                    elif sort_criterion == 'winRate':
                         comparisonKey.append(float(stats.wins) / stats.battlesCount * factor)
                     elif sort_criterion == 'markOfMastery':
                         comparisonKey.append(stats.markOfMastery * factor)
