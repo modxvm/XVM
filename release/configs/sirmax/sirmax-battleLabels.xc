@@ -31,7 +31,7 @@
       ${ "../default/battleLabelsTemplates.xc":"def.repairTimeEngine" },
       ${ "../default/battleLabelsTemplates.xc":"def.repairTimeGun" },
       ${ "../default/battleLabelsTemplates.xc":"def.repairTimeTurret" },
-      ${ "../default/battleLabelsTemplates.xc":"def.repairTimeTracks" }, 
+      ${ "../default/battleLabelsTemplates.xc":"def.repairTimeComplex" }, 
       ${ "../default/battleLabelsTemplates.xc":"def.repairTimeSurveying" },
       ${ "../default/battleLabelsTemplates.xc":"def.repairTimeRadio" }
   ]
