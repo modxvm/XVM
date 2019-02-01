@@ -32,6 +32,11 @@ package com.xvm.battle
             BattleState.instance.addVehiclesInfo(data);
         }
 
+        public function resetFrags():void
+        {
+            BattleState.instance.resetFrags();
+        }
+
         public function setArenaInfo(data:IDAAPIDataClass):void
         {
             BattleState.instance.setArenaInfo(data);
