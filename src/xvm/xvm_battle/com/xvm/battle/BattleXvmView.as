@@ -181,7 +181,6 @@ package com.xvm.battle
 
         public override function onConfigLoaded(e:Event):void
         {
-            super.onConfigLoaded(e);
             //Logger.add("BattleXvmView.onConfigLoaded()");
             Xvm.swfProfilerBegin("BattleXvmView.onConfigLoaded()");
             try
