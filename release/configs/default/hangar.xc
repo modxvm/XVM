@@ -16,6 +16,9 @@
     // Show selected battle mode text
     // Показать текст с названием выбранного режима боя
     "showBattleTypeSelectorText": true,
+    // Show "Referral Program" button
+    // Показать кнопку "Реферальная программа"
+    "showReferralButton": true,
     // Show "General chat" button
     // Показать кнопку "Общий чат"
     "showGeneralChatButton": true,

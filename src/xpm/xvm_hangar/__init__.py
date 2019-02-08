@@ -20,6 +20,7 @@ from gui.Scaleform.locale.MENU import MENU
 from gui.shared.gui_items.Vehicle import Vehicle
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache
+from gui.Scaleform.daapi.view.meta.MessengerBarMeta import MessengerBarMeta
 from messenger.gui.Scaleform.lobby_entry import LobbyEntry
 from gui.game_control.hero_tank_controller import HeroTankController
 from gui.promo.hangar_teaser_widget import TeaserViewer
@@ -158,6 +159,13 @@ def _i18n_makeString(base, key, *args, **kwargs):
     if key == MENU.TANKCAROUSEL_VEHICLESTATES_AMMONOTFULL: # originally returns empty string
         return l10n('lowAmmo')
     return base(key, *args, **kwargs)
+
+# hide referral program button
+@overrideMethod(MessengerBarMeta, 'as_setInitDataS')
+def MessengerBarMeta_as_setInitDataS(base, self, data):
+    if not config.get('hangar/showReferralButton', True) and ('isReferralEnabled' in data):
+        data['isReferralEnabled'] = False
+    return base(self, data)
 
 # hide shared chat button
 @overrideMethod(LobbyEntry, '_LobbyEntry__handleLazyChannelCtlInited')
