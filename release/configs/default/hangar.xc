@@ -25,9 +25,16 @@
     // false - disable display promo of premium vehicle (on the background in the hangar)
     // false - отключить отображение рекламы премиум техники (на фоне в ангаре)
     "showPromoPremVehicle": true,
-    // false - disable display of the widget with ads
-    // false - отключить отображение виджета с рекламой
-    "showTeaserWidget": true,
+    // "Combat Intelligence" - show/hide notifications in the main window and counters in the menu
+    // "Полевая почта" - показывать/прятать уведомления в главном окне и счетчики в меню
+    "combatIntelligence": {
+      // false - disable display pop-up messages in the hangar
+      // false - отключить отображение всплывающих сообщений в ангаре
+      "showPopUpMessages": true,
+      // false - disable display unread notifications counter in the menu
+      // false - отключить отображение счетчика непрочитанных уведомлений в меню
+      "showUnreadCounter": true
+    },
     // true - enable locker for gold
     // true - включить замок для золота
     "enableGoldLocker": false,

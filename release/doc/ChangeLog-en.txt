@@ -1,6 +1,10 @@
 ﻿XVM-7.8.1:
   [HANGAR]
-  * new options "hangar"/"showReferralButton" - show "Referral Program" button.
+  * added options:
+      "hangar"/"showReferralButton" - show "Referral Program" button
+      "hangar"/"combatIntelligence"/"showPopUpMessages" - disable display pop-up messages in the hangar
+      "hangar"/"combatIntelligence"/"showUnreadCounter" - disable display unread notifications counter in the menu
+  * removed option "hangar"/"showTeaserWidget"
 
 XVM-7.8.0:
   [GENERAL]

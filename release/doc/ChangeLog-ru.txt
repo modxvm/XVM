@@ -1,6 +1,10 @@
 ﻿XVM-7.8.1:
   [АНГАР]
-  * новая опция "hangar"/"showReferralButton" - показать кнопку "Реферальная программа".
+  * добавлены опции:
+      "hangar"/"showReferralButton" - показать кнопку "Реферальная программа"
+      "hangar"/"combatIntelligence"/"showPopUpMessages" - отключить отображение всплывающих сообщений в ангаре
+      "hangar"/"combatIntelligence"/"showUnreadCounter" - отключить отображение счетчика непрочитанных уведомлений в меню
+  * удалена опция "hangar"/"showTeaserWidget"
 
 XVM-7.8.0:
   [ОБЩЕЕ]
