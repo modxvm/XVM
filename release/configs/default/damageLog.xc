@@ -1,4 +1,4 @@
-/**
+﻿/**
   * Macros used in damageLog:
   * Макросы используемые в damageLog:
 
