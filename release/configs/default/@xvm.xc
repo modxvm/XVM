@@ -27,16 +27,16 @@
 
   // Language used in mod
   // "auto" - automatically detect language from game client,
-  // or specify file name located in res_mods/mods/shared_resources/xvm/l10n/ (ex: "en")
+  // or specify file name located in res_mods/mods/shared_resources/xvm/l10n/ (ex: "en").
   // Используемый язык в моде
   // "auto" - автоматически определять язык клиента игры,
-  // или укажите имя файла в папке res_mods/mods/shared_resources/xvm/l10n/ (например, "en")
+  // или укажите имя файла в папке res_mods/mods/shared_resources/xvm/l10n/ (например, "en").
   "language": "auto",
 
-  // Game Region
+  // Game Region:
   // "auto" - automatically detect game region from game client,
   // or specify one of: "RU", "EU", "NA", "ASIA", "KR", "CN"
-  // Регион (игровой кластер)
+  // Регион (игровой кластер):
   // "auto" - автоматически определять регион из клиента игры,
   // или укажите один из: "RU", "EU", "NA", "ASIA", "KR", "CN"
   "region": "auto",
@@ -169,23 +169,23 @@
   // Замена названий танков.
   "vehicleNames": ${"vehicleNames.xc":"vehicleNames"},
 
-  // Export data
-  // Выгрузка данных
+  // Export data.
+  // Выгрузка данных.
   "export": ${"export.xc":"export"},
 
-  // Parameters for tooltips
-  // Параметры всплывающих подсказок
+  // Parameters for tooltips.
+  // Параметры всплывающих подсказок.
   "tooltips": ${"tooltips.xc":"tooltips"},
 
-  // Extra sounds settings
-  // Настройки дополнительных звуков
+  // Extra sounds settings.
+  // Настройки дополнительных звуков.
   "sounds": ${"sounds.xc":"sounds"},
 
-  // XMQP services settings
-  // Настройки сервисов XMQP
+  // XMQP services settings.
+  // Настройки сервисов XMQP.
   "xmqp": ${"xmqp.xc":"xmqp"},
 
-  // Various settings for advanced users
-  // Различные настройки для продвинутых пользоватей
+  // Various settings for advanced users.
+  // Различные настройки для продвинутых пользоватей.
   "tweaks": ${"tweaks.xc":"tweaks"}
 }

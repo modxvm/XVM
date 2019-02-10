@@ -1,6 +1,6 @@
 ﻿/**
- * Various settings for advanced users
- * Различные настройки для продвинутых пользоватей
+ * Various settings for advanced users.
+ * Различные настройки для продвинутых пользоватей.
  */
 {
   "tweaks": {

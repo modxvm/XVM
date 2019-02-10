@@ -9,20 +9,20 @@
     // Dynamic transparency by various statistical parameters.
     // Динамическая прозрачность по различным статистическим показателям.
     "alphaRating": {
-      "very_bad":      "100",  // very bad   / очень плохо
-      "bad":           "70",   // bad        / плохо
-      "normal":        "40",   // normal     / средне
-      "good":          "10",   // good       / хорошо
-      "very_good":     "0",    // very good  / очень хорошо
-      "unique":        "0"     // unique     / уникально
+      "very_bad":      "100",  // very bad  / очень плохо
+      "bad":           "70",   // bad       / плохо
+      "normal":        "40",   // normal    / средне
+      "good":          "10",   // good      / хорошо
+      "very_good":     "0",    // very good / очень хорошо
+      "unique":        "0"     // unique    / уникально
     },
     // Dynamic transparency by remaining health points.
     // Динамическая прозрачность по оставшемуся запасу прочности.
     "alphaHP": {
-      "very_low":      "100",  // very low       / очень низкий
-      "low":           "75",   // low            / низкий
-      "average":       "50",   // average        / средний
-      "above_average": "0"     // above-average  / выше среднего
+      "very_low":      "100",  // very low      / очень низкий
+      "low":           "75",   // low           / низкий
+      "average":       "50",   // average       / средний
+      "above_average": "0"     // above-average / выше среднего
     }
   },
   "alpha": {

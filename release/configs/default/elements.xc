@@ -18,10 +18,10 @@
  *
  */
 {
-  // TODO: elements
+  // TODO: elements.
   //
-  // Interface elements
-  // Элементы интерфейса
+  // Interface elements.
+  // Элементы интерфейса.
   "elements": [
     // "x"     - положение по горизонтали / horizontal position
     // "y"     - положение по вертикали   / vertical position

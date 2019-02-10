@@ -1,6 +1,6 @@
 ﻿/**
- * Parameters for login screen
- * Параметры экрана логина
+ * Parameters for login screen.
+ * Параметры экрана логина.
  */
 {
   "login": {

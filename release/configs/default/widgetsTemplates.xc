@@ -12,8 +12,9 @@
     "layer": "normal",
     "type": "extrafield",
     "formats": [
-      { // background image
-        // фоновая картинка
+      {
+        // Background image.
+        // Фоновая картинка.
         "x": 4,
         "y": 51,
         "screenHAlign": "right",
@@ -37,15 +38,15 @@
         // Горизонтальное выравнивание поля на экране ("left", "center", "right").
         "screenHAlign": "right",
         "shadow": {
-          // false - no shadow
-          // false - без тени
+          // false - no shadow.
+          // false - без тени.
           "enabled": true,
-          "distance": 0,             // (in pixels)     / offset distance / дистанция смещения
-          "angle": 0,                // (0.0 .. 360.0)  / offset angle    / угол смещения
-          "color": "0x000000",       // "0xXXXXXX"      / color           / цвет
-          "alpha": 70,               // (0 .. 100)      / opacity         / прозрачность
-          "blur": 4,                 // (0.0 .. 255.0)  / blur            / размытие
-          "strength": 2              // (0.0 .. 255.0)  / intensity       / интенсивность
+          "distance": 0,       // (in pixels)    / offset distance / дистанция смещения
+          "angle": 0,          // (0.0 .. 360.0) / offset angle    / угол смещения
+          "color": "0x000000", // "0xXXXXXX"     / color           / цвет
+          "alpha": 70,         // (0 .. 100)     / opacity         / прозрачность
+          "blur": 4,           // (0.0 .. 255.0) / blur            / размытие
+          "strength": 2        // (0.0 .. 255.0) / intensity       / интенсивность
         },
         "textFormat": { "align": "right", "valign": "bottom", "color": "0x959688" },
         "format": "<font face='$FieldFont'><textformat leading='-38'><font size='36'>{{py:xvm.formatDate('%H:%M')}}</font><br></textformat><textformat rightMargin='85' leading='-2'>{{py:xvm.formatDate('%A')}}<br><font size='15'>{{py:xvm.formatDate('%d %b %Y')}}</font></textformat></font>"
@@ -57,23 +58,26 @@
     "layer": "normal",
     "type": "extrafield",
     "formats": [
-      { // background image, left part
-        // фоновая картинка, левая часть.
+      {
+        // Background image, left part
+        // Фоновая картинка, левая часть.
         "x": 66,
         "y": 193,
         "screenHAlign": "center",
         "format": "<img src='xvm://res/icons/clock/clockBg.png' width='160' height='80'>"
       },
-      { // background image, right part
-        // фоновая картинка, правая часть.
+      {
+        // Background image, right part
+        // Фоновая картинка, правая часть.
         "x": 390,
         "y": 193,
         "screenHAlign": "center",
         "scaleX": -1,
         "format": "<img src='xvm://res/icons/clock/clockBg.png' width='160' height='80'>"
       },
-      { // text block
-        // текстовый блок
+      {
+        // Text block.
+        // Текстовый блок.
         "updateEvent": "ON_MY_STAT_LOADED",
         "x": 185,
         "y": 198,

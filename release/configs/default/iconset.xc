@@ -1,6 +1,10 @@
 ﻿/**
- * Icons set atlases. Path relative to res_mods/x.x.x/gui/flash/atlases.
- * Атласы с набором иконок. Пути относительно res_mods/x.x.x/gui/flash/atlases.
+ * Icons set atlases.
+ * Атласы с набором иконок.
+ *
+ * Path relative to:
+ * Пути относительно:
+ *   res_mods/x.x.x/gui/flash/atlases.
  */
 {
   "iconset": {

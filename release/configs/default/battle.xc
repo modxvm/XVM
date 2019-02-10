@@ -42,21 +42,21 @@
       // true - скрыть подсказку перехода к окну знакомства с особенностями машины (для колесной техники).
       "hideHelpScreen": false
     },
-    // GUI elements settings (experts only)
-    // Настройки графических элементов (только для экспертов!)
+    // GUI elements settings (experts only).
+    // Настройки графических элементов (только для экспертов!).
     "elements": ${"elements.xc":"elements"},
     // Camera settings
     // Настройки камеры
     "camera": ${"camera.xc":"camera"},
-    // Switching between players on the minimap after death
-    // Переключение между игроками по миникарте после смерти
+    // Switching between players on the minimap after death.
+    // Переключение между игроками по миникарте после смерти.
     "minimapDeadSwitch": true
   },
   // Frag counter panel at top side of battle windows interface.
   // Панель счёта в бою.
   "fragCorrelation": {
-    // true - show quantity of alive instead of dead
-    // true - показывать количество живых танков вместо убитых
+    // true - show quantity of alive instead of dead.
+    // true - показывать количество живых танков вместо убитых.
     "showAliveNotFrags": false
   },
   // Ingame crits panel by "expert" skill.

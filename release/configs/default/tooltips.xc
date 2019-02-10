@@ -7,23 +7,23 @@
     // true - combine icons of equipment and optional devices into one row.
     // true - объединить значки оборудования и доп.модулей в одну строку.
     "combineIcons": true,
-    // true - hide simplified vehicle parameters
-    // true - спрятать упрощенные ТТХ
+    // true - hide simplified vehicle parameters.
+    // true - спрятать упрощенные ТТХ.
     "hideSimplifiedVehParams": true,
     // true - hide text at bottom of tooltip showing quantity of used eqipment, optional devices and crew.
     // true - спрятать текст внизу подсказки показывающий количество используемого оборудования, доп. модулей и экипаж.
     "hideBottomText": true,
-    // delay in tooltips appearance: increase in case of freezes, default is 0.4 sec
-    // задержка отображения подсказок: увеличьте в случае фризов, по-умолчанию 0.4 сек
+    // delay in tooltips appearance: increase in case of freezes, default is 0.4 sec.
+    // задержка отображения подсказок: увеличьте в случае фризов, по-умолчанию 0.4 сек.
     "tooltipsDelay": 0.4,
-    // size of the font in vehicle tooltips
-    // размер шрифта во всплывающих подсказках к танкам
+    // size of the font in vehicle tooltips.
+    // размер шрифта во всплывающих подсказках к танкам.
     "fontSize": 12,
-    // name of the font in vehicle tooltips
-    // название шрифта во всплывающих подсказках к танкам
+    // name of the font in vehicle tooltips.
+    // название шрифта во всплывающих подсказках к танкам.
     "fontName": "$TextFont",
-    // color for premium shells etc. in vehicle tooltips
-    // цвет премиумных снарядов и т.д. во всплывающих подсказках к танкам
+    // color for premium shells etc. in vehicle tooltips.
+    // цвет премиумных снарядов и т.д. во всплывающих подсказках к танкам.
     "goldColor": "#FFC363",
 
     "lightTank": [
@@ -175,8 +175,8 @@
       "#tooltips:header/info/players_unavailable/body",
       "#tooltips:header/info/players_unavailable/header"
     ],
-    // Log all localization keys to the xvm.log file, can be helpful to search required tooltipId 
-    // Логгировать все ключи локализации в файл xvm.log, может быть полезно для поиска необходимых tooltipId
+    // Log all localization keys to the xvm.log file, can be helpful to search required tooltipId.
+    // Логгировать все ключи локализации в файл xvm.log, может быть полезно для поиска необходимых tooltipId.
     "logLocalization": false
   }
 }

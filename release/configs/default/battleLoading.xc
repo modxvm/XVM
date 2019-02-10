@@ -32,47 +32,47 @@
     // true - disable vehicle type icon. This space will be used for formatted vehicle field.
     // true - убрать отображение типа танка. Пустое место будет использовано под форматируемое поле.
     "removeVehicleTypeIcon": false,
-    // Show border for name field (useful for config tuning)
-    // Показывать рамку для поля имени игрока (полезно для настройки конфига)
+    // Show border for name field (useful for config tuning).
+    // Показывать рамку для поля имени игрока (полезно для настройки конфига).
     "nameFieldShowBorder": false,
-    // Show border for vehicle field (useful for config tuning)
-    // Показывать рамку для поля имени танка (полезно для настройки конфига)
+    // Show border for vehicle field (useful for config tuning).
+    // Показывать рамку для поля имени танка (полезно для настройки конфига).
     "vehicleFieldShowBorder": false,
-    // X offset for allies squad icons
-    // Смещение по оси X значка взвода союзников
+    // X offset for allies squad icons.
+    // Смещение по оси X значка взвода союзников.
     "squadIconOffsetXLeft": 0,
-    // X offset for enemies squad icons
-    // Смещение по оси X значка взвода противников
+    // X offset for enemies squad icons.
+    // Смещение по оси X значка взвода противников.
     "squadIconOffsetXRight": 0,
-    // X offset for allies player names field
-    // Смещение по оси X поля ника союзников
+    // X offset for allies player names field.
+    // Смещение по оси X поля ника союзников.
     "nameFieldOffsetXLeft": 0,
-    // Width delta for allies player names field
-    // Изменение ширины поля ника союзников
+    // Width delta for allies player names field.
+    // Изменение ширины поля ника союзников.
     "nameFieldWidthDeltaLeft": 0,
-    // X offset for enemies player names field
-    // Смещение по оси X поля ника противников
+    // X offset for enemies player names field.
+    // Смещение по оси X поля ника противников.
     "nameFieldOffsetXRight": 0,
-    // Width delta for enemies player names field
-    // Изменение ширины поля ника противников
+    // Width delta for enemies player names field.
+    // Изменение ширины поля ника противников.
     "nameFieldWidthDeltaRight": 0,
-    // X offset for allies vehicle names field
-    // Смещение по оси X поля названия танка союзников
+    // X offset for allies vehicle names field.
+    // Смещение по оси X поля названия танка союзников.
     "vehicleFieldOffsetXLeft": 0,
-    // Width delta for allies vehicle names field
-    // Изменение ширины поля названия танка союзников
+    // Width delta for allies vehicle names field.
+    // Изменение ширины поля названия танка союзников.
     "vehicleFieldWidthDeltaLeft": 0,
-    // X offset for enemies vehicle names field
-    // Смещение по оси X поля названия танка противников
+    // X offset for enemies vehicle names field.
+    // Смещение по оси X поля названия танка противников.
     "vehicleFieldOffsetXRight": 0,
-    // Width delta for enemies vehicle names field
-    // Изменение ширины поля названия танка противников
+    // Width delta for enemies vehicle names field.
+    // Изменение ширины поля названия танка противников.
     "vehicleFieldWidthDeltaRight": 0,
-    // X offset for allies vehicle icons
-    // Смещение по оси X иконки танка союзников
+    // X offset for allies vehicle icons.
+    // Смещение по оси X иконки танка союзников.
     "vehicleIconOffsetXLeft": 0,
-    // X offset for enemies vehicle icons
-    // Смещение по оси X иконки танка противников
+    // X offset for enemies vehicle icons.
+    // Смещение по оси X иконки танка противников.
     "vehicleIconOffsetXRight": 0,
     // false - disable highlight of icons during battle start depends on ready state.
     // false - отключить затемнение иконки не загрузившегося игрока.
@@ -91,13 +91,13 @@
     "formatRightVehicle": "<font face='mono' size='{{xvm-stat?13|0}}'><font color='{{c:winrate}}'>{{winrate%2d~%|--%}}</font> <font color='{{c:xr}}'>{{r}}</font> <font color='{{c:kb}}'>{{kb%2d~k|--k}}</font> </font>{{vehicle}}",
     // Extra fields. Fields are placed one above the other.
     // Дополнительные поля. Поля располагаются друг над другом.
-    // Set of formats for left panel (extended format supported, see extra-field.txt)
-    // Набор форматов для левой панели (поддерживается расширенный формат, см. extra-field.txt)
+    // Set of formats for left panel (extended format supported, see extra-field.txt).
+    // Набор форматов для левой панели (поддерживается расширенный формат, см. extra-field.txt).
     "extraFieldsLeft": [
       ${"templates.clanIcon"}
     ],
-    // Set of formats for right panel (extended format supported, see extra-field.txt)
-    // Набор форматов для правой панели (поддерживается расширенный формат, см. extra-field.txt)
+    // Set of formats for right panel (extended format supported, see extra-field.txt).
+    // Набор форматов для правой панели (поддерживается расширенный формат, см. extra-field.txt).
     "extraFieldsRight": [
       ${"templates.clanIcon"}
     ]

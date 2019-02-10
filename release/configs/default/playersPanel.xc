@@ -105,23 +105,23 @@
     "none": {
       // false - disable (отключить)
       "enabled": true,
-      // Width of area for switching to "large" mode on mouse over
-      // Ширина области переключения в режим "large" при наведении мыши
+      // Width of area for switching to "large" mode on mouse over.
+      // Ширина области переключения в режим "large" при наведении мыши.
       "expandAreaWidth": 230,
-      // Layout ("vertical" or "horizontal")
-      // Размещение ("vertical" - вертикально, или "horizontal" - горизонтально)
+      // Layout ("vertical" or "horizontal").
+      // Размещение ("vertical" - вертикально, или "horizontal" - горизонтально).
       "layout": "vertical",
-      // true - don't change players positions on dead (default false)
-      // true - не изменять позиции игроков при уничтожении (по умолчанию false)
+      // true - don't change players positions on dead (default false).
+      // true - не изменять позиции игроков при уничтожении (по умолчанию false).
       "fixedPosition": false,
-      // Opacity of dynamic squad invite indicator
-      // Прозрачность индикатора приглашения в динамический взвод
+      // Opacity of dynamic squad invite indicator.
+      // Прозрачность индикатора приглашения в динамический взвод.
       "inviteIndicatorAlpha": 100,
-      // X position offset of dynamic squad invite indicator
-      // Позиция X индикатора приглашения в динамический взвод
+      // X position offset of dynamic squad invite indicator.
+      // Позиция X индикатора приглашения в динамический взвод.
       "inviteIndicatorX": 0,
-      // Y position offset of dynamic squad invite indicator
-      // Позиция Y индикатора приглашения в динамический взвод
+      // Y position offset of dynamic squad invite indicator.
+      // Позиция Y индикатора приглашения в динамический взвод.
       "inviteIndicatorY": 0,
       // Extra fields.
       // Дополнительные поля.
@@ -131,8 +131,8 @@
           "y": 65,
           "width": 350,
           "height": 25,
-          // Set of formats for left panel
-          // Набор форматов для левой панели
+          // Set of formats for left panel.
+          // Набор форматов для левой панели.
           // example:
           // "formats": [
           //   // simple format (just a text)
@@ -154,8 +154,8 @@
           "y": 65,
           "width": 350,
           "height": 25,
-          // Set of formats for right panel (extended format supported, see above)
-          // Набор форматов для правой панели (поддерживается расширенный формат, см. выше)
+          // Set of formats for right panel (extended format supported, see above).
+          // Набор форматов для правой панели (поддерживается расширенный формат, см. выше).
           "formats": []
         }
       }
@@ -170,14 +170,14 @@
       // Отображаемые стандартные поля в данном режиме, и их порядок.
       // Допустимые названия: "frags", "badge", "nick", "vehicle".
       "standardFields": [ "frags" ],
-      // Width of area for switching to "large" mode on mouse over
-      // Ширина области переключения в режим "large" при наведении мыши
+      // Width of area for switching to "large" mode on mouse over.
+      // Ширина области переключения в режим "large" при наведении мыши.
       "expandAreaWidth": 230,
-      // true - disable platoon icons
-      // true - убрать отображение иконок взвода
+      // true - disable platoon icons.
+      // true - убрать отображение иконок взвода.
       "removeSquadIcon": false,
-      // Transparency of the squad icon
-      // Прозрачность иконки взвода
+      // Transparency of the squad icon.
+      // Прозрачность иконки взвода.
       "squadIconAlpha": 100,
       // Offset of X value for vehicle icon.
       // Смещение координаты X для иконки танка.
@@ -187,8 +187,8 @@
       // Смещение координаты X для уровня танка.
       "vehicleLevelXOffsetLeft": 0,
       "vehicleLevelXOffsetRight": 0,
-      // Transparency of vehicle level
-      // Прозрачность уровня танка
+      // Transparency of vehicle level.
+      // Прозрачность уровня танка.
       "vehicleLevelAlpha": 100,
       // Offset of X value for frags column.
       // Смещение координаты X для поля фрагов.
@@ -212,8 +212,8 @@
       // Width of the rank badge column. Default is 24.
       // Ширина поля бейджа ранга. По умолчанию: 24.
       "rankBadgeWidth": 24,
-      // Transparency of the rank badge
-      // Прозрачность бейджа ранга
+      // Transparency of the rank badge.
+      // Прозрачность бейджа ранга.
       "rankBadgeAlpha": "{{alive?100|70}}",
       // Offset of X value for player name column.
       // Смещение координаты X для поля имени игрока.
@@ -248,15 +248,15 @@
       // Тень для поля названия танка (по умолчанию null = без тени, как в чистом клиенте).
       "vehicleShadowLeft": null,
       "vehicleShadowRight": null,
-      // true - don't change players positions on dead (default false)
-      // true - не изменять позиции игроков при уничтожении (по умолчанию false)
+      // true - don't change players positions on dead (default false).
+      // true - не изменять позиции игроков при уничтожении (по умолчанию false).
       "fixedPosition": false,
       // Extra fields. Each field have default size 350x25.
       // Fields are placed one above the other.
       // Дополнительные поля. Каждое поле имеет размер по умолчанию 350x25.
       // Поля располагаются друг над другом.
-      // Set of formats for left panel (extended format supported, see above)
-      // Набор форматов для левой панели (поддерживается расширенный формат, см. выше)
+      // Set of formats for left panel (extended format supported, see above).
+      // Набор форматов для левой панели (поддерживается расширенный формат, см. выше).
       "extraFieldsLeft": [
         ${"def.hpBarBg"},
         ${"def.hpBar"},
@@ -265,8 +265,8 @@
         ${"def.xvmUserMarker"},
         ${"def.xmqpServiceMarker"}
       ],
-      // Set of formats for right panel (extended format supported, see above)
-      // Набор форматов для правой панели (поддерживается расширенный формат, см. выше)
+      // Set of formats for right panel (extended format supported, see above).
+      // Набор форматов для правой панели (поддерживается расширенный формат, см. выше).
       "extraFieldsRight": [
         ${"def.hpBarBg"},
         ${"def.hpBar"},
@@ -286,14 +286,14 @@
       // Отображаемые стандартные поля в данном режиме, и их порядок.
       // Допустимые названия: "frags", "badge", "nick", "vehicle".
       "standardFields": [ "frags", "badge", "nick" ],
-      // Width of area for switching to "large" mode on mouse over
-      // Ширина области переключения в режим "large" при наведении мыши
+      // Width of area for switching to "large" mode on mouse over.
+      // Ширина области переключения в режим "large" при наведении мыши.
       "expandAreaWidth": 230,
-      // true - disable platoon icons
-      // true - убрать отображение иконок взвода
+      // true - disable platoon icons.
+      // true - убрать отображение иконок взвода.
       "removeSquadIcon": false,
-      // Transparency of the squad icon
-      // Прозрачность иконки взвода
+      // Transparency of the squad icon.
+      // Прозрачность иконки взвода.
       "squadIconAlpha": 100,
       // Offset of X value for vehicle icon.
       // Смещение координаты X для иконки танка.
@@ -303,8 +303,8 @@
       // Смещение координаты X для уровня танка.
       "vehicleLevelXOffsetLeft": 0,
       "vehicleLevelXOffsetRight": 0,
-      // Transparency of vehicle level
-      // Прозрачность уровня танка
+      // Transparency of vehicle level.
+      // Прозрачность уровня танка.
       "vehicleLevelAlpha": 100,
       // Offset of X value for frags column.
       // Смещение координаты X для поля фрагов.
@@ -328,8 +328,8 @@
       // Width of the rank badge column. Default is 24.
       // Ширина поля бейджа ранга. По умолчанию: 24.
       "rankBadgeWidth": 24,
-      // Transparency of the rank badge
-      // Прозрачность бейджа ранга
+      // Transparency of the rank badge.
+      // Прозрачность бейджа ранга.
       "rankBadgeAlpha": "{{alive?100|70}}",
       // Offset of X value for player name column.
       // Смещение координаты X для поля имени игрока.
@@ -364,13 +364,13 @@
       // Тень для поля названия танка (по умолчанию null = без тени, как в чистом клиенте).
       "vehicleShadowLeft": null,
       "vehicleShadowRight": null,
-      // true - don't change players positions on dead (default false)
-      // true - не изменять позиции игроков при уничтожении (по умолчанию false)
+      // true - don't change players positions on dead (default false).
+      // true - не изменять позиции игроков при уничтожении (по умолчанию false).
       "fixedPosition": false,
       // Extra fields. Each field have size 350x25. Fields are placed one above the other.
       // Дополнительные поля. Каждое поле имеет размер 350x25. Поля располагаются друг над другом.
-      // Set of formats for left panel (extended format supported, see above)
-      // Набор форматов для левой панели (поддерживается расширенный формат, см. выше)
+      // Set of formats for left panel (extended format supported, see above).
+      // Набор форматов для левой панели (поддерживается расширенный формат, см. выше).
       "extraFieldsLeft": [
         ${"def.hpBarBg"},
         ${"def.hpBar"},
@@ -379,8 +379,8 @@
         ${"def.xvmUserMarker"},
         ${"def.xmqpServiceMarker"}
       ],
-      // Set of formats for right panel (extended format supported, see above)
-      // Набор форматов для правой панели (поддерживается расширенный формат, см. выше)
+      // Set of formats for right panel (extended format supported, see above).
+      // Набор форматов для правой панели (поддерживается расширенный формат, см. выше).
       "extraFieldsRight": [
         ${"def.hpBarBg"},
         ${"def.hpBar"},
@@ -393,21 +393,21 @@
     // Options for the "medium2" panels - the second of the medium panels.
     // Режим ушей "medium2" - вторые средние уши в игре.
     "medium2": {
-      // false - disable (отключить)
+      // false - disable (отключить).
       "enabled": true,
       // Displayed standard fields in this mode and their order.
       // Available names: "frags", "badge", "nick", "vehicle".
       // Отображаемые стандартные поля в данном режиме, и их порядок.
       // Допустимые названия: "frags", "badge", "nick", "vehicle".
       "standardFields": [ "frags", "vehicle" ],
-      // Width of area for switching to "large" mode on mouse over
-      // Ширина области переключения в режим "large" при наведении мыши
+      // Width of area for switching to "large" mode on mouse over.
+      // Ширина области переключения в режим "large" при наведении мыши.
       "expandAreaWidth": 230,
-      // true - disable platoon icons
-      // true - убрать отображение иконок взвода
+      // true - disable platoon icons.
+      // true - убрать отображение иконок взвода.
       "removeSquadIcon": false,
-      // Transparency of the squad icon
-      // Прозрачность иконки взвода
+      // Transparency of the squad icon.
+      // Прозрачность иконки взвода.
       "squadIconAlpha": 100,
       // Offset of X value for vehicle icon.
       // Смещение координаты X для иконки танка.
@@ -417,8 +417,8 @@
       // Смещение координаты X для уровня танка.
       "vehicleLevelXOffsetLeft": 0,
       "vehicleLevelXOffsetRight": 0,
-      // Transparency of vehicle level
-      // Прозрачность уровня танка
+      // Transparency of vehicle level.
+      // Прозрачность уровня танка.
       "vehicleLevelAlpha": 100,
       // Offset of X value for frags column.
       // Смещение координаты X для поля фрагов.
@@ -442,8 +442,8 @@
       // Width of the rank badge column. Default is 24.
       // Ширина поля бейджа ранга. По умолчанию: 24.
       "rankBadgeWidth": 24,
-      // Transparency of the rank badge
-      // Прозрачность бейджа ранга
+      // Transparency of the rank badge.
+      // Прозрачность бейджа ранга.
       "rankBadgeAlpha": "{{alive?100|70}}",
       // Offset of X value for player name column.
       // Смещение координаты X для поля имени игрока.
@@ -478,13 +478,13 @@
       // Тень для поля названия танка (по умолчанию null = без тени, как в чистом клиенте).
       "vehicleShadowLeft": null,
       "vehicleShadowRight": null,
-      // true - don't change players positions on dead (default false)
-      // true - не изменять позиции игроков при уничтожении (по умолчанию false)
+      // true - don't change players positions on dead (default false).
+      // true - не изменять позиции игроков при уничтожении (по умолчанию false).
       "fixedPosition": false,
       // Extra fields. Each field have size 350x25. Fields are placed one above the other.
       // Дополнительные поля. Каждое поле имеет размер 350x25. Поля располагаются друг над другом.
-      // Set of formats for left panel (extended format supported, see above)
-      // Набор форматов для левой панели (поддерживается расширенный формат, см. выше)
+      // Set of formats for left panel (extended format supported, see above).
+      // Набор форматов для левой панели (поддерживается расширенный формат, см. выше).
       "extraFieldsLeft": [
         ${"def.hpBarBg"},
         ${"def.hpBar"},
@@ -493,8 +493,8 @@
         ${"def.xvmUserMarker"},
         ${"def.xmqpServiceMarker"}
       ],
-      // Set of formats for right panel (extended format supported, see above)
-      // Набор форматов для правой панели (поддерживается расширенный формат, см. выше)
+      // Set of formats for right panel (extended format supported, see above).
+      // Набор форматов для правой панели (поддерживается расширенный формат, см. выше).
       "extraFieldsRight": [
         ${"def.hpBarBg"},
         ${"def.hpBar"},
@@ -514,11 +514,11 @@
       // Отображаемые стандартные поля в данном режиме, и их порядок.
       // Допустимые названия: "frags", "badge", "nick", "vehicle".
       "standardFields": [ "frags", "badge", "nick", "vehicle" ],
-      // true - disable platoon icons
-      // true - убрать отображение иконок взвода
+      // true - disable platoon icons.
+      // true - убрать отображение иконок взвода.
       "removeSquadIcon": false,
-      // Transparency of the squad icon
-      // Прозрачность иконки взвода
+      // Transparency of the squad icon.
+      // Прозрачность иконки взвода.
       "squadIconAlpha": 100,
       // Offset of X value for vehicle icon.
       // Смещение координаты X для иконки танка.
@@ -528,8 +528,8 @@
       // Смещение координаты X для уровня танка.
       "vehicleLevelXOffsetLeft": 0,
       "vehicleLevelXOffsetRight": 0,
-      // Transparency of vehicle level
-      // Прозрачность уровня танка
+      // Transparency of vehicle level.
+      // Прозрачность уровня танка.
       "vehicleLevelAlpha": 100,
       // Offset of X value for frags column.
       // Смещение координаты X для поля фрагов.
@@ -553,8 +553,8 @@
       // Width of the rank badge column. Default is 24.
       // Ширина поля бейджа ранга. По умолчанию: 24.
       "rankBadgeWidth": 24,
-      // Transparency of the rank badge
-      // Прозрачность бейджа ранга
+      // Transparency of the rank badge.
+      // Прозрачность бейджа ранга.
       "rankBadgeAlpha": "{{alive?100|70}}",
       // Offset of X value for player name column.
       // Смещение координаты X для поля имени игрока.
@@ -589,13 +589,13 @@
       // Тень для поля названия танка (по умолчанию null = без тени, как в чистом клиенте).
       "vehicleShadowLeft": null,
       "vehicleShadowRight": null,
-      // true - don't change players positions on dead (default false)
-      // true - не изменять позиции игроков при уничтожении (по умолчанию false)
+      // true - don't change players positions on dead (default false).
+      // true - не изменять позиции игроков при уничтожении (по умолчанию false).
       "fixedPosition": false,
       // Extra fields. Each field have size 350x25. Fields are placed one above the other.
       // Дополнительные поля. Каждое поле имеет размер 350x25. Поля располагаются друг над другом.
-      // Set of formats for left panel (extended format supported, see above)
-      // Набор форматов для левой панели (поддерживается расширенный формат, см. выше)
+      // Set of formats for left panel (extended format supported, see above).
+      // Набор форматов для левой панели (поддерживается расширенный формат, см. выше).
       "extraFieldsLeft": [
         ${"def.hpBarBg"},
         ${"def.hpBar"},
@@ -604,8 +604,8 @@
         ${"def.xvmUserMarker"},
         ${"def.xmqpServiceMarker"}
       ],
-      // Set of formats for right panel (extended format supported, see above)
-      // Набор форматов для правой панели (поддерживается расширенный формат, см. выше)
+      // Set of formats for right panel (extended format supported, see above).
+      // Набор форматов для правой панели (поддерживается расширенный формат, см. выше).
       "extraFieldsRight": [
         ${"def.hpBarBg"},
         ${"def.hpBar"},
