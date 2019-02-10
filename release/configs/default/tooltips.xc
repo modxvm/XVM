@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Tooltips of vehicles in hangar.
  * Всплывающие подсказки танков в ангаре.
  */
@@ -25,7 +25,8 @@
     // color for premium shells etc. in vehicle tooltips.
     // цвет премиумных снарядов и т.д. во всплывающих подсказках к танкам.
     "goldColor": "#FFC363",
-
+    // Substitutions for light tanks.
+    // Подстановки для легких танков.
     "lightTank": [
       "maxHealth",
       "circularVisionRadius",
@@ -52,6 +53,8 @@
       "terrainResistance",
       "crewRolesIcons"
     ],
+    // Substitutions for medium tanks.
+    // Подстановки для средних танков.
     "mediumTank": [
       "maxHealth",
       "circularVisionRadius",
@@ -78,6 +81,8 @@
       "terrainResistance",
       "crewRolesIcons"
     ],
+    // Substitutions for heavy tanks.
+    // Подстановки для тяжелых танков.
     "heavyTank": [
       "maxHealth",
       "circularVisionRadius",
@@ -103,6 +108,8 @@
       "speedLimits",
       "crewRolesIcons"
     ],
+    // Substitutions for tank destroyers.
+    // Подстановки для ПТ-САУ.
     "TD": [
       "maxHealth",
       "circularVisionRadius",
@@ -128,6 +135,8 @@
       "speedLimits",
       "crewRolesIcons"
     ],
+    // Substitutions for SPG.
+    // Подстановки для САУ.
     "SPG": [
       "maxHealth",
       "circularVisionRadius",
@@ -152,10 +161,10 @@
       "speedLimits",
       "crewRolesIcons"
     ],
-    // List of tooltipId to hide
+    // List of tooltipId to hide.
     // Possible values can be found in this files: ingame_gui.mo, tooltips.mo (or INGAME_GUI.py, TOOLTIPS.py)
     // or enable "logLocalization" option and search them in the xvm.log file
-    // Список tooltipId, которые необходимо спрятать
+    // Список tooltipId, которые необходимо спрятать.
     // Возможные значения можно найти в файлах: ingame_gui.mo, tooltips.mo (или INGAME_GUI.py, TOOLTIPS.py)
     // или включите опцию "logLocalization" и ищите их в файле xvm.log
     "hideTooltips": [
