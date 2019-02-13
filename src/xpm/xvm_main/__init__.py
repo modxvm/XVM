@@ -104,10 +104,6 @@ def _NotificationsActionsHandlers_handleAction(base, self, model, typeID, entity
 # LOGIN
 
 def onClientVersionDiffers():
-    if BigWorld.wg_isFpsInfoStoreEnabled():
-        BigWorld.wg_markFpsStoreFileAsFailed(g_replayCtrl._BattleReplay__fileName)
-        g_replayCtrl.stop()
-        return
     if not (g_replayCtrl.scriptModalWindowsEnabled and not config.get('login/confirmOldReplays')):
         g_replayCtrl.acceptVersionDiffering()
         return
