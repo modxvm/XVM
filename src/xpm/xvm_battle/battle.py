@@ -44,6 +44,8 @@ import xmqp
 import xmqp_events
 
 
+NOT_SUPPORT_BATTLE_TYPE = [constants.ARENA_GUI_TYPE.EPIC_BATTLE, constants.ARENA_GUI_TYPE.EVENT_BATTLES]
+
 #####################################################################
 # initialization/finalization
 
@@ -71,12 +73,15 @@ def fini():
 
 # PRE-BATTLE
 
+isBattleTypeSupported = True
 @overrideMethod(PlayerAvatar, 'onBecomePlayer')
 def _PlayerAvatar_onBecomePlayer(base, self):
+    global isBattleModeSupported
     base(self)
     try:
         arena = avatar_getter.getArena()
         if arena:
+            isBattleTypeSupported = arena.guiType not in NOT_SUPPORT_BATTLE_MODE
             arena.onVehicleKilled += g_battle.onVehicleKilled
             arena.onAvatarReady += g_battle.onAvatarReady
             arena.onVehicleStatisticsUpdate += g_battle.onVehicleStatisticsUpdate
