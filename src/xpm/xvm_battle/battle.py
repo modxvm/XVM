@@ -76,7 +76,7 @@ def fini():
 isBattleTypeSupported = True
 @overrideMethod(PlayerAvatar, 'onBecomePlayer')
 def _PlayerAvatar_onBecomePlayer(base, self):
-    global isBattleModeSupported
+    global isBattleTypeSupported
     base(self)
     try:
         arena = avatar_getter.getArena()
