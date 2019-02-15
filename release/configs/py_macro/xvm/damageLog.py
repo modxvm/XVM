@@ -12,7 +12,7 @@ from Avatar import PlayerAvatar
 from Vehicle import Vehicle
 from VehicleEffects import DamageFromShotDecoder
 from vehicle_systems.tankStructure import TankPartIndexes
-from constants import ITEM_DEFS_PATH, DAMAGE_INFO_CODES, ARENA_GUI_TYPE, VEHICLE_CLASSES
+from constants import ITEM_DEFS_PATH, DAMAGE_INFO_CODES, VEHICLE_CLASSES
 from gui.Scaleform.daapi.view.battle.shared.damage_log_panel import DamageLogPanel
 from gui.Scaleform.daapi.view.battle.shared.battle_loading import BattleLoading
 from gui.Scaleform.daapi.view.meta.DamagePanelMeta import DamagePanelMeta
@@ -29,6 +29,7 @@ from xvm_main.python.logger import *
 from xvm_main.python.stats import _stat
 import xvm_main.python.config as config
 import xvm_main.python.userprefs as userprefs
+from xvm_battle.python.battle import isBattleTypeSupported
 
 import parser_addon
 
@@ -840,13 +841,10 @@ _logAltBackground = DamageLog(SECTION_LOG_ALT_BACKGROUND)
 _lastHit = LastHit(SECTION_LASTHIT)
 
 
-def _isShowDamageLog(player):
-    global isShowDamageLog
-    isShowDamageLog = config.get(DAMAGE_LOG_ENABLED) and (player.arenaGuiType not in [ARENA_GUI_TYPE.EPIC_BATTLE, ARENA_GUI_TYPE.EVENT_BATTLES])
-
 @registerEvent(PlayerAvatar, 'onBecomePlayer')
 def _PlayerAvatar_onBecomePlayer(self):
-    _isShowDamageLog(self)
+    global isShowDamageLog
+    isShowDamageLog = config.get(DAMAGE_LOG_ENABLED) and isBattleTypeSupported
 
 @overrideMethod(DamageLogPanel, '_addToTopLog')
 def DamageLogPanel_addToTopLog(base, self, value, actionTypeImg, vehicleTypeImg, vehicleName, shellTypeStr, shellTypeBG):
@@ -932,7 +930,8 @@ def updateVehicleHealth(self, vehicleID, health, deathReasonID, isCrewActive, is
 @registerEvent(Vehicle, 'onEnterWorld')
 def Vehicle_onEnterWorld(self, prereqs):
     if self.isPlayerVehicle:
-        _isShowDamageLog(BigWorld.player())
+        global isShowDamageLog
+        isShowDamageLog = config.get(DAMAGE_LOG_ENABLED) and isBattleTypeSupported
         if isShowDamageLog:
             global on_fire, damageLogConfig, autoReloadConfig, chooseRating
             scale = config.networkServicesSettings.scale
