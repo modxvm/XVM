@@ -51,8 +51,8 @@ def update_hp(vehicleID, hp):
 
 
 # Addons: "avgDamage" and "mainGun"
-# night_dragon_on <http://www.koreanrandom.com/forum/user/14897-night-dragon-on/>
-# ktulho <http://www.koreanrandom.com/forum/user/17624-ktulho/>
+# night_dragon_on <https://kr.cm/f/p/14897/>
+# ktulho <https://kr.cm/f/p/17624/>
 
 import traceback
 import BigWorld

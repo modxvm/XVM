@@ -1,5 +1,5 @@
 # Addons: "DamageLog"
-# ktulho <http://www.koreanrandom.com/forum/user/17624-ktulho/>
+# ktulho <https://kr.cm/f/p/17624/>
 
 import copy
 
