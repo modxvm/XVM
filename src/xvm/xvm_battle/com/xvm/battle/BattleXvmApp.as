@@ -13,7 +13,7 @@ package com.xvm.battle
 
         public function BattleXvmApp():void
         {
-            Logger.counterPrefix = "B";
+            Logger.setCounterPrefix("B");
 
             battleXvmMod = new BattleXvmMod();
             addChild(battleXvmMod);

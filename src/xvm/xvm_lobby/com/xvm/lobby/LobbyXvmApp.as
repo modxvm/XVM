@@ -20,7 +20,7 @@ package com.xvm.lobby
             lobbyXvmMod = new LobbyXvmMod();
             addChild(lobbyXvmMod);
 
-            Logger.counterPrefix = "L";
+            Logger.setCounterPrefix("L");
 
             // loading ui mods
             XfwComponent.try_load_ui_swf("xvm_lobby", "xvm_lobby_ui.swf", [ "battleResults.swf", "TankCarousel.swf", "nodesLib.swf", "crew.swf" ]);
