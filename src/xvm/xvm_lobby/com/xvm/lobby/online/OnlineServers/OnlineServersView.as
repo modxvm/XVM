@@ -38,10 +38,10 @@ package com.xvm.lobby.online.OnlineServers
         public function OnlineServersView(cfg:COnlineServers)
         {
             // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
-            _init();
+            _init(cfg);
         }
 
-        private function _init():void
+        private function _init(cfg:COnlineServers):void
         {
             mouseEnabled = false;
             this.cfg = cfg;

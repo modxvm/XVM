@@ -8,7 +8,7 @@ import traceback
 import BigWorld
 from gui.Scaleform.daapi.view.login.IntroPage import IntroPage
 from gui.Scaleform.daapi.view.login.LoginView import LoginView
-from gui.login.Servers import Servers 
+from gui.login.Servers import Servers
 
 from xfw import *
 

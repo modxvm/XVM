@@ -37,10 +37,10 @@ package com.xvm.lobby.ping.PingServers
         public function PingServersView(cfg:CPingServers)
         {
             // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
-            _init();
+            _init(cfg);
         }
 
-        private function _init():void
+        private function _init(cfg:CPingServers):void
         {
             mouseEnabled = false;
             this.cfg = cfg;
