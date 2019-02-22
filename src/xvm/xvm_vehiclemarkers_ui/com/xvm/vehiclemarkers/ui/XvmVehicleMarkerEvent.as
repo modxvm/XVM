@@ -52,7 +52,7 @@ package com.xvm.vehiclemarkers.ui
             _userData = userData;
         }
 
-        override public function clone():flash.events.Event
+        override public function clone():Event
         {
             return new XvmVehicleMarkerEvent(type, playerState, exInfo, userData);
         }
