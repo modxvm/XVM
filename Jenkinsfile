@@ -18,6 +18,7 @@ pipeline
                 sh 'hg update'
             }
         }
+
         stage('XVM')
         {
             steps
@@ -47,6 +48,18 @@ pipeline
             steps
             {
                 sh './build/ci/ci_notify.sh'
+            }
+        }
+
+        stage('SonarQube')
+        {
+            steps {
+                script {
+                    scannerHome = tool 'SonarQube Scanner'
+                }
+                withSonarQubeEnv('SonarQube') {
+                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.sources=. -Dsonar.projectKey=xvm-client -Dsonar.exclusions=src/xfw/src/actionscript/wg/**,src/xfw/src/python/mods/xfw/python/lib/**"
+                }
             }
         }
     }
