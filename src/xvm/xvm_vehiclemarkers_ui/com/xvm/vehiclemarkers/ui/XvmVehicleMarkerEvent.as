@@ -51,6 +51,11 @@ package com.xvm.vehiclemarkers.ui
             _cfg = XvmVehicleMarkerState.getCurrentConfig(playerState, exInfo);
             _userData = userData;
         }
+
+        override public function clone():flash.events.Event
+        {
+            return new XvmVehicleMarkerEvent(type, playerState, exInfo, userData);
+        }
     }
 }
 

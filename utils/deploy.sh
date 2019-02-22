@@ -85,7 +85,6 @@ pushd "$CURRENT_DIR" >/dev/null
 # load config
 . ../build/xvm-build.conf
 
-XVMBUILD_WOT_VERSION_PATH=$WOT_PATH/res_mods/$XVMBUILD_WOT_VERSION
 SHARED_RESOURCES_PATH=$WOT_PATH/res_mods/mods/shared_resources/xvm
 
 # check config
