@@ -36,9 +36,8 @@ package com.xvm.battle.minimap
 
     public /*dynamic*/ class UI_Minimap extends minimapUI implements IExtraFieldGroupHolder
     {
-        private static const MAX_MINIMAP_PATH_LENGTH:int = 20;
-
-        public static var cfg:CMinimap;
+        static private const _MAX_MINIMAP_PATH_LENGTH:int = 20;
+        static private var _cfg:CMinimap;
 
         private var xvm_enabled:Boolean;
         private var _isAltMode:Boolean = false;
@@ -53,10 +52,16 @@ package com.xvm.battle.minimap
         private var _normalHolder:Sprite;
         private var _topHolder:Sprite;
 
-        private static var _instance:UI_Minimap = null;
-        public static function get instance():UI_Minimap
+        static private var _instance:UI_Minimap = null;
+
+        static public function get instance():UI_Minimap
         {
             return _instance;
+        }
+
+        static public function get cfg():CMinimap
+        {
+            return _cfg;
         }
 
         public function UI_Minimap()
@@ -214,7 +219,7 @@ package com.xvm.battle.minimap
 
         private function setCfg():void
         {
-            cfg = isAltMode ? Config.config.minimapAlt : Config.config.minimap;
+            _cfg = isAltMode ? Config.config.minimapAlt : Config.config.minimap;
         }
 
         private function setAltMode(e:ObjectEvent):void
@@ -395,7 +400,7 @@ package com.xvm.battle.minimap
 
         private function onMouseMove(e:MouseEventEx):void
         {
-            if (minimap_path != null && minimap_path.length < MAX_MINIMAP_PATH_LENGTH)
+            if (minimap_path != null && minimap_path.length < _MAX_MINIMAP_PATH_LENGTH)
             {
                 var target:Sprite = e.target as Sprite;
                 if (target != null && target.hitArea == mapHit)

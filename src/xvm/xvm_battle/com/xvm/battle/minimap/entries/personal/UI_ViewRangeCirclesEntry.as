@@ -14,9 +14,9 @@ package com.xvm.battle.minimap.entries.personal
 
     public class UI_ViewRangeCirclesEntry extends ViewRangeCirclesEntry
     {
-        public static var visionRadius:Number;
-        public static var stereoscope_exists:Boolean;
-        public static var stereoscope_enabled:Boolean;
+        static private var _visionRadius:Number;
+        static private var _stereoscope_exists:Boolean;
+        static private var _stereoscope_enabled:Boolean;
 
         private var _entryDeleted:Boolean = false;
 
@@ -24,6 +24,21 @@ package com.xvm.battle.minimap.entries.personal
 
         private var _circles:Circles;
         private var _circlesAlt:Circles;
+
+        static public function get visionRadius():Number
+        {
+            return _visionRadius;
+        }
+
+        static public function get stereoscope_exists():Boolean
+        {
+            return _stereoscope_exists;
+        }
+
+        static public function get stereoscope_enabled():Boolean
+        {
+            return _stereoscope_enabled;
+        }
 
         public function UI_ViewRangeCirclesEntry()
         {
@@ -38,7 +53,7 @@ package com.xvm.battle.minimap.entries.personal
                 Xvm.addEventListener(PlayerStateEvent.CURRENT_VEHICLE_DESTROYED, updateCirclesVisibility);
                 Xvm.addEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, updateCirclesVisibility);
 
-                UI_ViewRangeCirclesEntry.stereoscope_exists = UI_ViewRangeCirclesEntry.stereoscope_enabled = BattleGlobalData.minimapCirclesData.view_stereoscope == true;
+                UI_ViewRangeCirclesEntry._stereoscope_exists = UI_ViewRangeCirclesEntry._stereoscope_enabled = BattleGlobalData.minimapCirclesData.view_stereoscope == true;
 
                 _circles = new Circles(Config.config.minimap.circles);
                 //circles.visible = false;
@@ -88,7 +103,7 @@ package com.xvm.battle.minimap.entries.personal
             }
             else
             {
-                UI_ViewRangeCirclesEntry.visionRadius = visionRadius;
+                UI_ViewRangeCirclesEntry._visionRadius = visionRadius;
                 _circles.update();
                 _circlesAlt.update();
             }
@@ -125,7 +140,7 @@ package com.xvm.battle.minimap.entries.personal
             {
                 try
                 {
-                    UI_ViewRangeCirclesEntry.visionRadius = visionRadius;
+                    UI_ViewRangeCirclesEntry._visionRadius = visionRadius;
                     _circles.update();
                     _circlesAlt.update();
                 }
@@ -192,11 +207,10 @@ package com.xvm.battle.minimap.entries.personal
             try
             {
                 // workaround for stereoscope
-                if (!UI_ViewRangeCirclesEntry.stereoscope_exists)
-                    UI_ViewRangeCirclesEntry.stereoscope_exists = true;
+                if (!UI_ViewRangeCirclesEntry._stereoscope_exists)
+                    UI_ViewRangeCirclesEntry._stereoscope_exists = true;
 
-                UI_ViewRangeCirclesEntry.stereoscope_enabled = isOn != 0;
-                UI_ViewRangeCirclesEntry.visionRadius = visionRadius;
+                UI_ViewRangeCirclesEntry._stereoscope_enabled = isOn != 0;
 
                 _circles.update();
                 _circlesAlt.update();

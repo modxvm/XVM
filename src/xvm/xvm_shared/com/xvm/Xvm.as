@@ -25,21 +25,36 @@ package com.xvm
 
     public class Xvm extends Sprite
     {
-        public static var appType:int = Defines.APP_TYPE_UNKNOWN;
+        private static var _appType:int = Defines.APP_TYPE_UNKNOWN;
+
+        public static function get appType():int
+        {
+            return _appType;
+        }
+
+        public static function set appType(value:int):void
+        {
+            _appType = value;
+        }
 
         public static function addEventListener(type:String, listener:Function, useWeakReference:Boolean = true):void
         {
-            _instance.addEventListener(type, listener, false, 0, useWeakReference);
+            instance.addEventListener(type, listener, false, 0, useWeakReference);
         }
 
         public static function removeEventListener(type:String, listener:Function):void
         {
-            _instance.removeEventListener(type, listener);
+            instance.removeEventListener(type, listener);
         }
 
         public static function dispatchEvent(e:Event):void
         {
-            _instance.dispatchEvent(e);
+            instance.dispatchEvent(e);
+        }
+
+        private static function get instance():Xvm
+        {
+            return _instance;
         }
 
         // SWF Profiler
@@ -87,12 +102,12 @@ package com.xvm
             //Logger.addObject(config_data, 5);
             //Logger.addObject(lang_data, 3);
             //Logger.addObject(vehInfo_data, 3);
-            Logger.isDebug = IS_DEVELOPMENT;
-            Config.IS_DEVELOPMENT = IS_DEVELOPMENT;
-            Config.config = ObjectConverter.convertData(config_data, CConfig);
+            Logger.setIsDebug(IS_DEVELOPMENT);
+            Config.setIsDevelopment(IS_DEVELOPMENT);
+            Config.setConfig(ObjectConverter.convertData(config_data, CConfig));
             Locale.setupLanguage(lang_data);
             VehicleInfo.setVehicleInfoData(vehInfo_data);
-            Config.networkServicesSettings = new NetworkServicesSettings(networkServicesSettings);
+            Config.setNetworkServicesSettings(new NetworkServicesSettings(networkServicesSettings));
             if (BattleGlobalData.initialized)
             {
                 Config.applyGlobalBattleMacros();

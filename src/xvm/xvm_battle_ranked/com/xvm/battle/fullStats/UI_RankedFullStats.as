@@ -17,10 +17,20 @@ package com.xvm.battle.fullStats
 
     public /*dynamic*/ class UI_RankedFullStats extends RankedFullStatsUI
     {
-        public static var leftAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
-        public static var rightAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
+        static private var _leftAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
+        static private var _rightAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
 
         private var cfg:CStatisticForm;
+
+        static public function get leftAtlas():String
+        {
+            return _leftAtlas;
+        }
+
+        static public function get rightAtlas():String
+        {
+            return _rightAtlas;
+        }
 
         public function UI_RankedFullStats()
         {
@@ -67,8 +77,8 @@ package com.xvm.battle.fullStats
 
         private function registerVehicleIconAtlases():void
         {
-            leftAtlas = registerVehicleIconAtlas(leftAtlas, Config.config.iconset.fullStatsLeftAtlas);
-            rightAtlas = registerVehicleIconAtlas(rightAtlas, Config.config.iconset.fullStatsRightAtlas);
+            _leftAtlas = registerVehicleIconAtlas(leftAtlas, Config.config.iconset.fullStatsLeftAtlas);
+            _rightAtlas = registerVehicleIconAtlas(rightAtlas, Config.config.iconset.fullStatsRightAtlas);
         }
 
         private function registerVehicleIconAtlas(currentAtlas:String, cfgAtlas:String):String

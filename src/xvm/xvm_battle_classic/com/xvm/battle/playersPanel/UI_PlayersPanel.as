@@ -36,8 +36,8 @@ package com.xvm.battle.playersPanel
             large: PLAYERS_PANEL_STATE.FULL
         }
 
-        public static var playersPanelLeftAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
-        public static var playersPanelRightAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
+        private static var _leftAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
+        private static var _rightAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
 
         private var DEFAULT_PLAYERS_PANEL_LIST_ITEM_LEFT_LINKAGE:String = PlayersPanelListLeft.LINKAGE;
         private var XVM_PLAYERS_PANEL_LIST_ITEM_LEFT_LINKAGE:String = getQualifiedClassName(UI_PlayersPanelListItemLeft);
@@ -63,6 +63,16 @@ package com.xvm.battle.playersPanel
 
         private var _leftHasBadges:Boolean = false;
         private var _rightHasBadges:Boolean = false;
+
+        public static function get leftAtlas():String
+        {
+            return _leftAtlas;
+        }
+
+        public static function get rightAtlas():String
+        {
+            return _rightAtlas;
+        }
 
         public function UI_PlayersPanel()
         {
@@ -371,8 +381,8 @@ package com.xvm.battle.playersPanel
 
         private function registerVehicleIconAtlases():void
         {
-            playersPanelLeftAtlas = registerVehicleIconAtlas(playersPanelLeftAtlas, Config.config.iconset.playersPanelLeftAtlas);
-            playersPanelRightAtlas = registerVehicleIconAtlas(playersPanelRightAtlas, Config.config.iconset.playersPanelRightAtlas);
+            _leftAtlas = registerVehicleIconAtlas(_leftAtlas, Config.config.iconset.playersPanelLeftAtlas);
+            _rightAtlas = registerVehicleIconAtlas(_rightAtlas, Config.config.iconset.playersPanelRightAtlas);
         }
 
         private function registerVehicleIconAtlas(currentAtlas:String, cfgAtlas:String):String

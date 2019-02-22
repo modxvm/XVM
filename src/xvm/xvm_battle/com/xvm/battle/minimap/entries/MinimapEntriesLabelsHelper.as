@@ -15,8 +15,18 @@ package com.xvm.battle.minimap.entries
 
     public class MinimapEntriesLabelsHelper
     {
-        public static var viewPointEntryX:Number = 0;
-        public static var viewPointEntryY:Number = 0;
+        private static var _viewPointEntryX:Number = 0;
+        private static var _viewPointEntryY:Number = 0;
+
+        public static function get viewPointEntryX():Number
+        {
+            return _viewPointEntryX;
+        }
+
+        public static function get viewPointEntryY():Number
+        {
+            return _viewPointEntryY;
+        }
 
         public static function init(entry:IMinimapVehicleEntry):void
         {
@@ -46,8 +56,8 @@ package com.xvm.battle.minimap.entries
         {
             if (entry is ViewPointEntry)
             {
-                viewPointEntryX = entry.x;
-                viewPointEntryY = entry.y;
+                _viewPointEntryX = entry.x;
+                _viewPointEntryY = entry.y;
             }
 
             if (entry.extraFields)

@@ -32,7 +32,7 @@ package com.xvm.lobby
         override public function onBeforePopulate(e:LifeCycleEvent):void
         {
             super.onBeforePopulate(e);
-            Config.networkServicesSettings = new NetworkServicesSettings(Xfw.cmd(XvmCommands.GET_SVC_SETTINGS));
+            Config.setNetworkServicesSettings(new NetworkServicesSettings(Xfw.cmd(XvmCommands.GET_SVC_SETTINGS)));
         }
 
         override public function onAfterPopulate(e:LifeCycleEvent):void

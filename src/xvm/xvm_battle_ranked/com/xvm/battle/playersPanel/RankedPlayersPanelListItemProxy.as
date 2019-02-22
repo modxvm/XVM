@@ -161,7 +161,7 @@ package com.xvm.battle.playersPanel
             }
             if (mcfg == null)
                 return;
-            var atlasName:String = isLeftPanel ? UI_RankedPlayersPanel.playersPanelLeftAtlas : UI_RankedPlayersPanel.playersPanelRightAtlas;
+            var atlasName:String = isLeftPanel ? UI_RankedPlayersPanel.leftAtlas : UI_RankedPlayersPanel.rightAtlas;
             if (!App.atlasMgr.isAtlasInitialized(atlasName))
             {
                 atlasName = ATLAS_CONSTANTS.BATTLE_ATLAS;

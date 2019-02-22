@@ -15,8 +15,8 @@ package com.xvm.battle.fullStats
 
     public /*dynamic*/ class UI_EpicRandomFullStats extends epicRandomFullStatsUI
     {
-        public static var leftAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
-        public static var rightAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
+        public static const leftAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
+        public static const rightAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
 
         private var cfg:CStatisticForm;
 

@@ -32,7 +32,7 @@ package com.xvm.lobby.battleresults
         {
             super.onAfterPopulate(e);
             page.tabs_mc.addEventListener(IndexEvent.INDEX_CHANGE, this.onTabIndexChange, false, 0, true);
-            Config.networkServicesSettings = new NetworkServicesSettings(Xfw.cmd(XvmCommands.GET_SVC_SETTINGS));
+            Config.setNetworkServicesSettings(new NetworkServicesSettings(Xfw.cmd(XvmCommands.GET_SVC_SETTINGS)));
         }
 
         override public function onBeforeDispose(e:LifeCycleEvent):void

@@ -19,8 +19,8 @@ package com.xvm.battle.battleloading
 
     public dynamic class UI_EpicBattleLoading extends EpicBattleLoadingUI
     {
-        public static var leftAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
-        public static var rightAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
+        public static const leftAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
+        public static const rightAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
 
         private var cfg:CBattleLoading;
 

@@ -20,15 +20,25 @@ package com.xvm.vehiclemarkers.ui
      */
     public class XvmVehicleMarkersMod extends Xvm
     {
-        public static var allyAtlas:String = ATLAS_CONSTANTS.VEHICLE_MARKER_ATLAS;
-        public static var enemyAtlas:String = ATLAS_CONSTANTS.VEHICLE_MARKER_ATLAS;
+        static private var _allyAtlas:String = ATLAS_CONSTANTS.VEHICLE_MARKER_ATLAS;
+        static private var _enemyAtlas:String = ATLAS_CONSTANTS.VEHICLE_MARKER_ATLAS;
+
+        static public function get allyAtlas():String
+        {
+            return _allyAtlas;
+        }
+
+        static public function get enemyAtlas():String
+        {
+            return _enemyAtlas;
+        }
 
         public function XvmVehicleMarkersMod():void
         {
             Xvm.appType = Defines.APP_TYPE_VEHICLE_MARKERS;
 
             Xfw.registerCommandProvider(xvm_cmd);
-            Logger.counterPrefix = "V";
+            Logger.setCounterPrefix("V");
 
             this.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded, false, 0, true);
 
@@ -82,8 +92,8 @@ package com.xvm.vehiclemarkers.ui
 
         private function registerVehicleIconAtlases():void
         {
-            allyAtlas = registerVehicleIconAtlas(allyAtlas, Config.config.iconset.vehicleMarkerAllyAtlas, onAtlasInitializedAlly);
-            enemyAtlas = registerVehicleIconAtlas(enemyAtlas, Config.config.iconset.vehicleMarkerEnemyAtlas, onAtlasInitializedEnemy);
+            _allyAtlas = registerVehicleIconAtlas(_allyAtlas, Config.config.iconset.vehicleMarkerAllyAtlas, onAtlasInitializedAlly);
+            _enemyAtlas = registerVehicleIconAtlas(_enemyAtlas, Config.config.iconset.vehicleMarkerEnemyAtlas, onAtlasInitializedEnemy);
         }
 
         private function registerVehicleIconAtlas(currentAtlas:String, cfgAtlas:String, callback:Function):String

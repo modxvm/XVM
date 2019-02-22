@@ -19,8 +19,8 @@ package com.xvm.battle.battleloading
 
     public dynamic class UI_BattleLoading extends BattleLoadingUI
     {
-        public static var leftAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
-        public static var rightAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
+        static private var _leftAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
+        static private var _rightAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
 
         private var cfg:CBattleLoading;
 
@@ -31,6 +31,16 @@ package com.xvm.battle.battleloading
 
         private var battleLoadingForm:BattleLoadingForm = null;
         private var isTipsForm:Boolean = false;
+
+        static public function get leftAtlas():String
+        {
+            return _leftAtlas;
+        }
+
+        static public function get rightAtlas():String
+        {
+            return _rightAtlas;
+        }
 
         public function UI_BattleLoading()
         {
@@ -111,8 +121,8 @@ package com.xvm.battle.battleloading
 
         private function registerVehicleIconAtlases():void
         {
-            leftAtlas = registerVehicleIconAtlas(leftAtlas, Config.config.iconset.battleLoadingLeftAtlas);
-            rightAtlas = registerVehicleIconAtlas(rightAtlas, Config.config.iconset.battleLoadingRightAtlas);
+            _leftAtlas = registerVehicleIconAtlas(_leftAtlas, Config.config.iconset.battleLoadingLeftAtlas);
+            _rightAtlas = registerVehicleIconAtlas(_rightAtlas, Config.config.iconset.battleLoadingRightAtlas);
         }
 
         private function registerVehicleIconAtlas(currentAtlas:String, cfgAtlas:String):String
