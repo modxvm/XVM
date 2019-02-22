@@ -9,7 +9,7 @@ package com.xvm.lobby.ui.profile
     import flash.utils.*;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
 
-    public dynamic class UI_TechniqueStatisticTab extends TechniqueStatisticTab_UI
+    public class UI_TechniqueStatisticTab extends TechniqueStatisticTab_UI
     {
         private var worker:TechniqueStatisticTab;
 

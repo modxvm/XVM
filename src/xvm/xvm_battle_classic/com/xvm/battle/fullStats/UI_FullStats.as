@@ -15,7 +15,7 @@ package com.xvm.battle.fullStats
     import net.wg.infrastructure.managers.impl.*;
     import net.wg.gui.battle.random.views.stats.components.fullStats.*;
 
-    public dynamic class UI_FullStats extends FullStatsUI
+    public class UI_FullStats extends FullStatsUI
     {
         private static var _leftAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
         private static var _rightAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;

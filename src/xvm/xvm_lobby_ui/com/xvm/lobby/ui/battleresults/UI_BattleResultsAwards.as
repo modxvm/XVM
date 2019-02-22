@@ -8,7 +8,7 @@ package com.xvm.lobby.ui.battleresults
     import flash.events.*;
     import scaleform.clik.constants.*;
 
-    public dynamic class UI_BattleResultsAwards extends BattleResultsAwards_UI
+    public class UI_BattleResultsAwards extends BattleResultsAwards_UI
     {
         private var orig_awardTF_y:Number = NaN;
         private var orig_container_y:Number = NaN;

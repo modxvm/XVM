@@ -4,7 +4,7 @@
  */
 package com.xvm.lobby.ui.squad
 {
-    public dynamic class UI_SquadItemRenderer extends squadItemRendererUI
+    public class UI_SquadItemRenderer extends squadItemRendererUI
     {
         private var worker:SquadItemRenderer;
 

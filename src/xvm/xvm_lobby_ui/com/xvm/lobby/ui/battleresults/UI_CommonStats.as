@@ -17,7 +17,7 @@ package com.xvm.lobby.ui.battleresults
     import scaleform.clik.events.*;
     import scaleform.gfx.*;
 
-    public dynamic class UI_CommonStats extends CommonStats
+    public class UI_CommonStats extends CommonStats
     {
         private const FIELD_POS_TITLE:String = "fieldPosTitle";
         private const FIELD_POS_NON_PREM:String = "fieldPosNonPrem";

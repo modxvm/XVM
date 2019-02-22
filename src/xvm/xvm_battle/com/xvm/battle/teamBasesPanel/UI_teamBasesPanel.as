@@ -12,7 +12,7 @@ package com.xvm.battle.teamBasesPanel
     import net.wg.data.constants.*;
     import net.wg.gui.components.common.ticker.events.*;
 
-    public dynamic class UI_teamBasesPanel extends teamBasesPanelUI
+    public class UI_teamBasesPanel extends teamBasesPanelUI
     {
         private var DEFAULT_RENDERER_LENGTH:Number = xfw_RENDERER_HEIGHT;
         private var DEFAULT_CAPTURE_BAR_LINKAGE:String = Linkages.CAPTURE_BAR_LINKAGE;

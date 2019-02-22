@@ -17,7 +17,7 @@ package com.xvm.vehiclemarkers.ui
     import net.wg.gui.battle.views.vehicleMarkers.events.*;
     import net.wg.gui.utils.*;
 
-    public dynamic class XvmVehicleMarker extends VehicleMarker
+    public class XvmVehicleMarker extends VehicleMarker
     {
         private static const INVALIDATE_DATA:uint = 1 << 29;
 

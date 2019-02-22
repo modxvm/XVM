@@ -6,7 +6,7 @@ package com.xvm.types
 {
     import com.xvm.vo.*;
 
-    public dynamic class NetworkServicesSettings extends VOBase
+    public class NetworkServicesSettings extends VOBase
     {
         public var servicesActive:Boolean;
         public var statBattle:Boolean;

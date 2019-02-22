@@ -10,7 +10,7 @@ package com.xvm.battle.playersPanel
     import net.wg.gui.battle.random.views.stats.components.playersPanel.constants.*;
     import net.wg.infrastructure.interfaces.*;
 
-    public dynamic class UI_RankedPlayersPanelListItemLeft extends RankedPlayersPanelListItemLeftUI
+    public class UI_RankedPlayersPanelListItemLeft extends RankedPlayersPanelListItemLeftUI
     {
         private var proxy:RankedPlayersPanelListItemProxy;
 

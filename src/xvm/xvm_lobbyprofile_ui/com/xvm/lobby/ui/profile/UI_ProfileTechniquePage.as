@@ -10,7 +10,7 @@ package com.xvm.lobby.ui.profile
     import net.wg.gui.lobby.profile.pages.technique.*;
     import com.xvm.types.dossier.*;
 
-    public dynamic class UI_ProfileTechniquePage extends ProfileTechniquePage_UI
+    public class UI_ProfileTechniquePage extends ProfileTechniquePage_UI
     {
         private var technique:Technique;
 

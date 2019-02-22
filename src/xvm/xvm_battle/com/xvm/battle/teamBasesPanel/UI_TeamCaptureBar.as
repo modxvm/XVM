@@ -13,7 +13,7 @@ package com.xvm.battle.teamBasesPanel
     import mx.utils.*;
     import scaleform.gfx.*;
 
-    public dynamic class UI_TeamCaptureBar extends TeamCaptureBarUI
+    public class UI_TeamCaptureBar extends TeamCaptureBarUI
     {
         private static const HIDE_ICONS_HACK_OFFSET_Y:Number = -10000;
 

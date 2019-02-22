@@ -17,7 +17,7 @@ package com.xvm.battle.battleloading
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.managers.impl.*;
 
-    public dynamic class UI_EpicRandomBattleLoading extends epicRandomBattleLoadingUI
+    public class UI_EpicRandomBattleLoading extends epicRandomBattleLoadingUI
     {
         static private var _leftAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
         static private var _rightAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;

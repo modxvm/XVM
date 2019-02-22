@@ -9,7 +9,7 @@ package com.xvm.vehiclemarkers.ui
     import com.xvm.types.cfg.*;
     import flash.events.*;
 
-    public dynamic class XvmVehicleMarkerEvent extends Event
+    public class XvmVehicleMarkerEvent extends Event
     {
         public static const INIT:String = "VM_INIT";
         public static const UPDATE:String = "VM_UPDATE";

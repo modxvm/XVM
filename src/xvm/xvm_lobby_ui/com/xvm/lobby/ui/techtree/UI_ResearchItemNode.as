@@ -9,7 +9,7 @@ package com.xvm.lobby.ui.techtree
     import flash.events.*;
     import net.wg.gui.lobby.techtree.data.state.*;
 
-    public dynamic class UI_ResearchItemNode extends ResearchItemNode
+    public class UI_ResearchItemNode extends ResearchItemNode
     {
         public function UI_ResearchItemNode()
         {

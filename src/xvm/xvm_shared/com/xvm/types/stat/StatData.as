@@ -6,7 +6,7 @@ package com.xvm.types.stat
 {
     import flash.utils.*;
 
-    public dynamic class StatData
+    public class StatData
     {
         public var vehicleID:Number = NaN;
 

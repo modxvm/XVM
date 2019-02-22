@@ -14,7 +14,7 @@ package com.xvm.lobby.ui.techtree
     import net.wg.gui.lobby.techtree.math.*;
     import scaleform.gfx.*;
 
-    public dynamic class UI_NationTreeNodeSkinned extends NationTreeNodeSkinned
+    public class UI_NationTreeNodeSkinned extends NationTreeNodeSkinned
     {
         private var masteryTF:TextField;
 

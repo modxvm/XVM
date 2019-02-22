@@ -6,7 +6,7 @@ package com.xvm.types.stat
 {
     import com.xvm.vo.*;
 
-    public dynamic class VData
+    public class VData
     {
         // received
         public var id:int = 0;           // vehicle id

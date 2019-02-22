@@ -7,7 +7,7 @@ package com.xvm.lobby.ui.battleresults
     import net.wg.data.constants.*;
     import net.wg.data.daapi.base.*;
 
-    public dynamic class XvmCommonStatsDataVO extends DAAPIDataClass
+    public class XvmCommonStatsDataVO extends DAAPIDataClass
     {
         public var origXP:int = 0;
         public var premXP:int = 0;

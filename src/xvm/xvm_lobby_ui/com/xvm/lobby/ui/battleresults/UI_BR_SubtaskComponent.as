@@ -9,10 +9,11 @@ package com.xvm.lobby.ui.battleresults
     import com.xfw.*;
     import flash.events.*;
     import flash.utils.*;
+    import net.wg.data.VO.*;
     import net.wg.gui.lobby.questsWindow.*;
     import scaleform.clik.constants.*;
 
-    public dynamic class UI_BR_SubtaskComponent extends BR_SubtaskComponent_UI
+    public class UI_BR_SubtaskComponent extends BR_SubtaskComponent_UI
     {
         private var orig_taskTF_y:Number = NaN;
         private var orig_linkBtn_y:Number = NaN;
@@ -21,6 +22,8 @@ package com.xvm.lobby.ui.battleresults
         private var orig_alert_y:Number = NaN;
         private var orig_progressList_y:Number = NaN;
         private var orig_awards_y:Number = NaN;
+
+        private var _data:BattleResultsQuestVO = null;
 
         private const offsetTop:Number = 10;
         private const offsetMiddle:Number = 20;
@@ -46,6 +49,15 @@ package com.xvm.lobby.ui.battleresults
             progressList.linkage = getQualifiedClassName(UI_ProgressElement);
         }
 
+        override protected function onDispose() : void
+        {
+            if (this._data)
+            {
+                this._data.dispose();
+                this._data = null;
+            }
+        }
+
         override protected function draw():void
         {
             super.draw();
@@ -53,7 +65,7 @@ package com.xvm.lobby.ui.battleresults
 
             if (isInvalid(InvalidationType.DATA))
             {
-                if (this.data)
+                if (this._data != null)
                 {
                     if (isNaN(orig_taskTF_y))
                     {
@@ -90,6 +102,15 @@ package com.xvm.lobby.ui.battleresults
                     dispatchEvent(new Event(Event.RESIZE));
                 }
             }
+        }
+
+        override public function setData(value:Object):void
+        {
+            if (value != null)
+            {
+                this._data = new BattleResultsQuestVO(value);
+            }
+            super.setData(value);
         }
     }
 }
