@@ -24,10 +24,13 @@ package com.xvm.battle.playersPanel
     public /*dynamic*/ class UI_RankedPlayersPanel extends RankedPlayersPanelUI
     {
         // from PlayersPanel.as
-        private static const EXPAND_AREA_WIDTH:Number = 230;
+        static private const EXPAND_AREA_WIDTH:Number = 230;
 
-        public static const PLAYERS_PANEL_STATE_NAMES:Array = [ "none", "short", "medium", "medium2", "large" ];
-        public static const PLAYERS_PANEL_STATE_MAP:Object = {
+        static private const XVM_PLAYERS_PANEL_LIST_ITEM_LEFT_LINKAGE:String = getQualifiedClassName(UI_RankedPlayersPanelListItemLeft);
+        static private const XVM_PLAYERS_PANEL_LIST_ITEM_RIGHT_LINKAGE:String = getQualifiedClassName(UI_RankedPlayersPanelListItemRight);
+
+        static public const PLAYERS_PANEL_STATE_NAMES:Array = [ "none", "short", "medium", "medium2", "large" ];
+        static public const PLAYERS_PANEL_STATE_MAP:Object = {
             none: PLAYERS_PANEL_STATE.HIDDEN,
             short: PLAYERS_PANEL_STATE.SHORT,
             medium: PLAYERS_PANEL_STATE.MEDIUM,
@@ -37,11 +40,6 @@ package com.xvm.battle.playersPanel
 
         static private var _leftAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
         static private var _rightAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
-
-        private var DEFAULT_PLAYERS_PANEL_LIST_ITEM_LEFT_LINKAGE:String = PlayersPanelListLeft.LINKAGE;
-        private var XVM_PLAYERS_PANEL_LIST_ITEM_LEFT_LINKAGE:String = getQualifiedClassName(UI_RankedPlayersPanelListItemLeft);
-        private var DEFAULT_PLAYERS_PANEL_LIST_ITEM_RIGHT_LINKAGE:String = PlayersPanelListRight.LINKAGE;
-        private var XVM_PLAYERS_PANEL_LIST_ITEM_RIGHT_LINKAGE:String = getQualifiedClassName(UI_RankedPlayersPanelListItemRight);
 
         private var cfg:CPlayersPanel;
         private var xvm_enabled:Boolean;
