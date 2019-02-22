@@ -46,9 +46,13 @@ package com.xvm.battle.minimap.entries.personal
 
         public function UI_ViewPointEntry()
         {
-            //Logger.add("UI_ViewPointEntry");
             super();
+            // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
+            _init();
+        }
 
+        private function _init():void
+        {
             _vehicleID = BattleGlobalData.playerVehicleID;
 
             _linesEnabled = Config.config.minimap.linesEnabled;

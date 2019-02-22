@@ -45,11 +45,17 @@ package com.xvm.extraFields
         private var _visibleOnHotKeyEnabled:Boolean = true;
         private var _visibilityFlag:Boolean = true;
 
-        public function TextExtraField(format:CExtraField, isLeftPanel:Boolean = true, getColorSchemeName:Function = null, bounds:Rectangle = null, layout:String = null,
-            defaultAlign:String = null, defaultTextFormatConfig:CTextFormat = null)
+        public function TextExtraField(format:CExtraField, isLeftPanel:Boolean = true, getColorSchemeName:Function = null, bounds:Rectangle = null,
+            layout:String = null, defaultAlign:String = null, defaultTextFormatConfig:CTextFormat = null)
         {
             super();
+            // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
+            _init(format, isLeftPanel, getColorSchemeName, bounds, layout, defaultAlign, defaultTextFormatConfig);
+        }
 
+        private function _init(format:CExtraField, isLeftPanel:Boolean, getColorSchemeName:Function, bounds:Rectangle,
+            layout:String, defaultAlign:String, defaultTextFormatConfig:CTextFormat):void
+        {
             mouseEnabled = false;
             mouseChildren = false;
             buttonMode = false;

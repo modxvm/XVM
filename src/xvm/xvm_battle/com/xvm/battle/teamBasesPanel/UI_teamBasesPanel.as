@@ -23,6 +23,12 @@ package com.xvm.battle.teamBasesPanel
         {
             //Logger.add("UI_teamBasesPanel()");
             super();
+            // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
+            _init();
+        }
+
+        private function _init():void
+        {
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
             Xfw.addCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, setup);
             if (BattleXvmView.battlePageBattleTicker)

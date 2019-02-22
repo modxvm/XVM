@@ -28,9 +28,13 @@ package com.xvm.battle.minimap.entries.personal
 
         public function UI_ArcadeCameraEntry()
         {
-            //Logger.add("UI_ArcadeCameraEntry");
             super();
+            // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
+            _init();
+        }
 
+        private function _init():void
+        {
             Xvm.addEventListener(PlayerStateEvent.CHANGED, playerStateChanged);
             Xvm.addEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, update);
 

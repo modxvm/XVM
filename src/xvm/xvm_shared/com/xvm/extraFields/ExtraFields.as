@@ -28,6 +28,13 @@ package com.xvm.extraFields
         public function ExtraFields(formats:Array, isLeftPanel:Boolean = true, getSchemeNameForText:Function = null, getSchemeNameForImage:Function = null,
             bounds:Rectangle = null, layout:String = null, defaultAlign:String = null, defaultTextFormatConfig:CTextFormat = null):void
         {
+            // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
+            _init(formats, isLeftPanel, getSchemeNameForText, getSchemeNameForImage, bounds, layout, defaultAlign, defaultTextFormatConfig);
+        }
+
+        private function _init(formats:Array, isLeftPanel:Boolean, getSchemeNameForText:Function, getSchemeNameForImage:Function,
+            bounds:Rectangle, layout:String, defaultAlign:String, defaultTextFormatConfig:CTextFormat):void
+        {
             mouseEnabled = false;
             _bounds = bounds;
             if (layout == LAYOUT_HORIZONTAL_FIXED)

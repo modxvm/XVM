@@ -36,11 +36,19 @@ package com.xvm.lobby.ping.PingServers
 
         public function PingServersView(cfg:CPingServers)
         {
+            // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
+            _init();
+        }
+
+        private function _init():void
+        {
             mouseEnabled = false;
             this.cfg = cfg;
             this.serverColor = parseInt(cfg.fontStyle.serverColor, 16);
             if (cfg.bgImage != null)
+            {
                 createBackgroundImage(cfg.bgImage);
+            }
             fields = new Vector.<TextField>();
             var f:TextField = createNewField();
             f.htmlText = makeStyledRow( { cluster: Locale.get("Initialization"), time: "..." } );

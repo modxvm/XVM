@@ -21,6 +21,12 @@ package com.xvm.battle.vo
 
         public function VOArenaInfo(data:Object/*net.wg.data.VO.daapi.DAAPIArenaInfoVO*/)
         {
+            // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
+            _init(data);
+        }
+
+        private function _init(data:Object):void
+        {
             allyTeamName = data.allyTeamName;
             battleTypeFrameLabel = data.battleTypeFrameLabel;
             battleTypeLocaleStr = data.battleTypeLocaleStr;

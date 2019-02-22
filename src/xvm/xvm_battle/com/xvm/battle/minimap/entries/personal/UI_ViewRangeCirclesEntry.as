@@ -44,7 +44,12 @@ package com.xvm.battle.minimap.entries.personal
         {
             //Logger.add("UI_ViewRangeCirclesEntry");
             super();
+            // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
+            _init();
+        }
 
+        private function _init():void
+        {
             _circlesEnabled = Config.config.minimap.circlesEnabled;
             if (_circlesEnabled)
             {
@@ -245,6 +250,12 @@ class Circles extends Sprite implements IDisposable
     private var _shellRangeCircle:Shape = null;
 
     public function Circles(cfg:CMinimapCircles)
+    {
+        // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
+        _init(cfg);
+    }
+
+    private function _init(cfg:CMinimapCircles):void
     {
         this.cfg = cfg;
 

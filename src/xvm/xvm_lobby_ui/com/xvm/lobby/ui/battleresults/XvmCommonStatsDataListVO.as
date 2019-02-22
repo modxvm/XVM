@@ -15,6 +15,13 @@ package com.xvm.lobby.ui.battleresults
 
         public function XvmCommonStatsDataListVO(data:Object)
         {
+            // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
+            _init(data);
+            super(data);
+        }
+
+        private function _init(data:Object):void
+        {
             this.data = [];
             var d:Array = data.data;
             var len:int = d.length;
@@ -23,8 +30,6 @@ package com.xvm.lobby.ui.battleresults
                 this.data.push(new XvmCommonStatsDataVO(d[i]));
             }
             delete data.data;
-
-            super(data);
         }
     }
 }

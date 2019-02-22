@@ -29,7 +29,13 @@ package com.xvm.battle.fullStats
         {
             //Logger.add("DynamicSquadCtrl");
             super(squadStatus, squadIcon, squadAcceptBt, squadAddBt, hit, noSound);
+            // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
+            _init(isLeftPanel, squadStatus, squadIcon, squadAcceptBt, squadAddBt, hit, noSound);
+        }
 
+        private function _init(isLeftPanel:Boolean, squadStatus:SquadInviteStatusView, squadIcon:BattleAtlasSprite,
+            squadAcceptBt:BattleButton, squadAddBt:BattleButton, hit:Sprite, noSound:BattleAtlasSprite):void
+        {
             _isLeftPanel = isLeftPanel;
             _squadStatus = squadStatus;
             _squadIcon = squadIcon;

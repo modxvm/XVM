@@ -45,9 +45,13 @@ package com.xvm.battle.battleloading
         {
             //Logger.add("UI_EpicRandomBattleLoading");
             super();
+            // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
+            _init();
+        }
 
+        private function _init():void
+        {
             battleLoadingForm = form as EpicRandomBattleLoadingForm;
-
             if (battleLoadingForm)
             {
                 Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);

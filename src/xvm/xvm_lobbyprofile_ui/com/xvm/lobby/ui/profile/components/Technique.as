@@ -70,6 +70,12 @@ package com.xvm.lobby.ui.profile.components
 
         public function Technique(page:ProfileTechnique, playerName:String, accountDBID:int):void
         {
+            // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
+            _init(page, playerName, accountDBID);
+        }
+
+        private function _init(page:ProfileTechnique, playerName:String, accountDBID:int):void
+        {
             this.name = "xvm_extension";
             this._page = page;
             this._playerName = playerName;

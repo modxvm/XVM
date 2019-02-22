@@ -17,6 +17,12 @@ package com.xvm.types.dossier
 
             super(data);
 
+            // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
+            _init(vehiclesData, data);
+        }
+
+        private function _init(vehiclesData:Object, data:Object):void
+        {
             if (data.maxXPVehCD)
                 _maxXPVehicleName = VehicleInfo.get(maxXPVehCD).localizedFullName;
             if (data.maxFragsVehCD)

@@ -33,6 +33,12 @@ package com.xvm.lobby.ui.tankcarousel
 
         public function TankCarouselItemRendererHelper(item:ITankCarouselItemRenderer, cfg:CCarouselCell, defaultWidth:int, defaultHeight:int):void
         {
+            // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
+            _init(item, cfg, defaultWidth, defaultHeight);
+        }
+
+        private function _init(item:ITankCarouselItemRenderer, cfg:CCarouselCell, defaultWidth:int, defaultHeight:int):void
+        {
             this.cfg = cfg;
             this.item = item;
             this.DEFAULT_WIDTH = defaultWidth;

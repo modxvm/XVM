@@ -22,6 +22,12 @@ package com.xvm.battle.battleloading
 
         public function Clock(form:BaseTipLoadingForm)
         {
+            // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
+            _init(form);
+        }
+
+        private function _init(form:BaseTipLoadingForm):void
+        {
             if (!form)
                 return;
 

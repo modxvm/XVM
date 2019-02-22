@@ -14,11 +14,14 @@ package com.xvm.types.dossier
         public function VehicleDossierCut(vehCD:int, data:Object)
         {
             super(data);
+            // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
+            _init(vehCD, data);
+        }
 
-            this.vehCD  = vehCD;
-
+        private function _init(vehCD:int, data:Object):void
+        {
+            this.vehCD = vehCD;
             this.xp /= battles;
-
             update();
         }
 

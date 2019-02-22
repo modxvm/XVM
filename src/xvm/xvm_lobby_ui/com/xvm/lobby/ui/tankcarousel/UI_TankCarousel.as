@@ -27,7 +27,12 @@ package com.xvm.lobby.ui.tankcarousel
         {
             //Logger.add(getQualifiedClassName(this));
             super();
+            // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
+            _init();
+        }
 
+        private function _init():void
+        {
             cfg = Config.config.hangar.carousel;
 
             _enabled = Macros.FormatBooleanGlobal(cfg.enabled, true);

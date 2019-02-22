@@ -298,6 +298,12 @@ class WeakRef extends Object implements IDisposable
     function WeakRef(param1:*, param2:Boolean = false)
     {
         super();
+        // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
+        _init(param1, param2);
+    }
+
+    private function _init(param1:*, param2:Boolean):void
+    {
         this._dict = new Dictionary(true);
         this._dict[param1] = 1;
         if(param2)

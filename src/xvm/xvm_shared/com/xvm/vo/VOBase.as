@@ -8,6 +8,12 @@ package com.xvm.vo
     {
         public function VOBase(data:Object = null)
         {
+            // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
+            _init(data);
+        }
+
+        private function _init(data:Object):void
+        {
             if (data)
                 update(data);
         }

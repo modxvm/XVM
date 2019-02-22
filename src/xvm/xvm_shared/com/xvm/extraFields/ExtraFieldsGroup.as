@@ -24,7 +24,14 @@ package com.xvm.extraFields
         private var _x:Number = 0;
         private var _y:Number = 0;
 
-        public function ExtraFieldsGroup(item:IExtraFieldGroupHolder, formats:Array, isRootLayout:Boolean = false, defaultTextFormatConfig:CTextFormat = null)
+        public function ExtraFieldsGroup(item:IExtraFieldGroupHolder, formats:Array, isRootLayout:Boolean = false,
+            defaultTextFormatConfig:CTextFormat = null)
+        {
+            // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
+            _init(item, formats, isRootLayout, defaultTextFormatConfig);
+        }
+
+        private function _init(item:IExtraFieldGroupHolder, formats:Array, isRootLayout:Boolean, defaultTextFormatConfig:CTextFormat):void
         {
             const createNewExtraFields:Function = function():ExtraFields
             {

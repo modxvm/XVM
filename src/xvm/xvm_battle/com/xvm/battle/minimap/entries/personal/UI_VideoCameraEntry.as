@@ -23,7 +23,12 @@ package com.xvm.battle.minimap.entries.personal
         {
             //Logger.add("UI_VideoCameraEntry");
             super();
+            // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
+            _init();
+        }
 
+        private function _init():void
+        {
             // Workaround: Label stays at creation point some time before first move.
             // It makes unpleasant label positioning at map center.
             x = MinimapEntriesConstants.OFFMAP_COORDINATE;

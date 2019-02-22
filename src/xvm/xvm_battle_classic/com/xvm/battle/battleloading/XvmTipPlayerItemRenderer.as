@@ -20,6 +20,14 @@ package com.xvm.battle.battleloading
 
         public function XvmTipPlayerItemRenderer(container:BaseRendererContainer, position:int, isEnemy:Boolean)
         {
+            // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
+            _init1(container, position, isEnemy);
+            super(container, position, isEnemy);
+            _init2(isEnemy);
+        }
+
+        private function _init1(container:BaseRendererContainer, position:int, isEnemy:Boolean):void
+        {
             this.container = container;
             this.isEnemy = isEnemy;
 
@@ -29,7 +37,10 @@ package com.xvm.battle.battleloading
             {
                 vehicleField.x = container.vehicleTypeIconsAlly[position].x - vehicleField.width;
             }
-            super(container, position, isEnemy);
+        }
+
+        private function _init2(isEnemy:Boolean):void
+        {
             proxy = new XvmBattleLoadingItemRendererProxy(this, XvmBattleLoadingItemRendererProxy.UI_TYPE_TIPS, !isEnemy);
         }
 
