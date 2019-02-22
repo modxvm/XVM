@@ -9,7 +9,7 @@ package com.xvm.battle
     import net.wg.infrastructure.interfaces.*;
     import net.wg.infrastructure.interfaces.entity.*;
 
-    public dynamic class BattleXvmComponentController implements IBattleComponentDataController, IDisposable
+    public class BattleXvmComponentController implements IBattleComponentDataController, IDisposable
     {
         public function BattleXvmComponentController()
         {
