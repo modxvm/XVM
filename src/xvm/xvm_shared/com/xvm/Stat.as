@@ -43,19 +43,19 @@ package com.xvm
         public static function isUserDataCachedByName(name:String):Boolean
         {
             var key:String = Config.config.region + "/" + name;
-            return instance.userCache.hasOwnProperty(key);
+            return (key in instance.userCache);
         }
 
         public static function getUserDataByName(name:String):StatData
         {
             var key:String = Config.config.region + "/" + name;
-            return instance.userCache.hasOwnProperty(key) ? instance.userCache[key] : null;
+            return (key in instance.userCache) ? instance.userCache[key] : null;
         }
 
         public static function getUserDataById(id:uint):StatData
         {
             var key:String = "ID/" + id.toString();
-            return instance.userCache.hasOwnProperty(key) ? instance.userCache[key] : null;
+            return (key in instance.userCache) ? instance.userCache[key] : null;
         }
 
         public static function clearBattleStat():void
@@ -204,7 +204,7 @@ package com.xvm
                     dispatchEvent(new ObjectEvent(COMPLETE_USERDATA, null));
                     return;
                 }
-                if (!activeUserRequests.hasOwnProperty(name))
+                if (!(name in activeUserRequests))
                 {
                     activeUserRequests[name] = true;
                     Xfw.cmd(XvmCommandsInternal.LOAD_STAT_USER, name);

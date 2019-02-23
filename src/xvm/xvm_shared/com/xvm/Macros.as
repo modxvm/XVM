@@ -1027,15 +1027,15 @@ package com.xvm
                 var hybrid_cache:Object = m_macros_cache_players_hybrid[playerName];
                 if (hybrid_cache != null)
                 {
-                    if (hybrid_cache.hasOwnProperty(format_str))
+                    if (format_str in hybrid_cache)
                     {
                         return false;
                     }
                 }
                 var player_cache:Object = _getPlayerCache(options);
-                return player_cache.hasOwnProperty(format_str);
+                return (format_str in player_cache);
             }
-            return m_macros_cache_globals.hasOwnProperty(format_str);
+            return (format_str in m_macros_cache_globals);
         }
 
         // Macros registration
@@ -1053,7 +1053,7 @@ package com.xvm
             if (!playerName)
                 throw new Error("empty name");
 
-            if (!m_players.hasOwnProperty(playerName))
+            if (!(playerName in m_players))
             {
                 m_players[playerName] = {};
             }
@@ -1456,7 +1456,7 @@ package com.xvm
         {
             var sc:String = (scale == null) ? Config.networkServicesSettings.scale : scale;
             var name:String = sc + "_" + Config.networkServicesSettings.rating;
-            if (!RATING_MATRIX.hasOwnProperty(name))
+            if (!(name in RATING_MATRIX))
                 name = (scale != null ? scale : "basic") + "_wgr";
             return name;
         }

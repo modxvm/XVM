@@ -129,7 +129,7 @@ package com.xvm
                 return null;
             var usePremium:Boolean = Config.config.colors.vtype.usePremiumColor == true;
             var vtype:String = (usePremium && vdata.premium == 1) ? "premium" : vdata.vtype;
-            if (!vtype || !Config.config.colors.vtype.hasOwnProperty(vtype))
+            if (!vtype || !(vtype in Config.config.colors.vtype))
                 return null;
             var value:int = XfwUtils.toInt(Config.config.colors.vtype[vtype], -1);
             if (value < 0)

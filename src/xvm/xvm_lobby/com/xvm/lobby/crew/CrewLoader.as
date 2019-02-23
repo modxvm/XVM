@@ -125,7 +125,7 @@ package com.xvm.lobby.crew
                         var tankman:Object = renderer.recruitList[i];
 
                         // already in tank or selected for other slot
-                        if (tankman.inTank == true || selectedTankmans.hasOwnProperty(tankman.tankmanID))
+                        if (tankman.inTank == true || (tankman.tankmanID in selectedTankmans))
                             continue;
 
                         // first tankman in RecruitRendererVO.recruitList contain tank info
@@ -202,7 +202,7 @@ package com.xvm.lobby.crew
             var lastSkill:Object = (tankman.skills.length ? tankman.skills[tankman.skills.length - 1] : null);
             if (lastSkill)
             {
-                if (!lastSkill.hasOwnProperty("id"))
+                if (!("id" in lastSkill))
                 {
                     return false;
                 }

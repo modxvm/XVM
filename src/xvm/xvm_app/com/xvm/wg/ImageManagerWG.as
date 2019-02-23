@@ -66,7 +66,7 @@ package com.xvm.wg
             var _loc3_:ImageData = null;
             for each(_loc4_ in param1)
             {
-                if(this._webCache.hasOwnProperty(_loc4_))
+                if(_loc4_ in this._webCache)
                 {
                     _loc3_ = ImageData(this._webCache[_loc4_]);
                     if(!_loc3_.isLockData())
@@ -94,7 +94,7 @@ package com.xvm.wg
             var _loc2_:ImageData = null;
             for each(_loc3_ in param1)
             {
-                if(this._webCache.hasOwnProperty(_loc3_))
+                if(_loc3_ in this._webCache)
                 {
                     _loc2_ = this._webCache[_loc3_];
                     _loc2_.permanent = false;
@@ -166,11 +166,11 @@ package com.xvm.wg
         {
             App.utils.asserter.assert(this._init,"ImageManager not been initialized");
             var _loc3_:ImageData = null;
-            if(param2 && this._webCache.hasOwnProperty(param1))
+            if(param2 && (param1 in this._webCache))
             {
                 _loc3_ = ImageData(this._webCache[param1]);
             }
-            else if(!param2 && this._cache.hasOwnProperty(param1))
+            else if(!param2 && (param1 in this._cache))
             {
                 _loc3_ = ImageData(this._cache[param1]);
             }

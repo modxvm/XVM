@@ -66,7 +66,7 @@ package com.xvm.types.dossier
 
         public function getVehicleDossierCut(vehCD:int):VehicleDossierCut
         {
-            if (!vehicles.hasOwnProperty(vehCD))
+            if (!(vehCD in vehicles))
                 vehicles[vehCD] = new VehicleDossierCut(vehCD, { } );
             return vehicles[vehCD];
         }

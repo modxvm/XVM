@@ -237,7 +237,7 @@ package com.xvm.battle.vo
         private function addOrUpdatePlayerState(value:Object, isAlly:Boolean, index:int):void
         {
             var playerState:VOPlayerState;
-            if (!playerStates.hasOwnProperty(value.vehicleID))
+            if (!(value.vehicleID in playerStates))
             {
                 playerState = new VOPlayerState(value);
                 playerState.update({

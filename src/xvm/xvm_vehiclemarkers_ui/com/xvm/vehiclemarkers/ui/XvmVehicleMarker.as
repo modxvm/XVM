@@ -405,7 +405,7 @@ package com.xvm.vehiclemarkers.ui
         private function RegisterVehicleMarkerData():void
         {
             var dict:Object = Macros.Players;
-            if (!dict.hasOwnProperty(playerName))
+            if (!(playerName in dict))
                 dict[playerName] = {};
             var pdata:Object = dict[playerName];
 
