@@ -481,7 +481,7 @@ package com.xvm.lobby.ui.battleresults
 
         private function merge(obj1:Object, obj2:Object):Object
         {
-            var result:Object = new Object();
+            var result:Object = {};
             for (var param:String in obj1)
                 result[param] = obj1[param];
             for (param in obj2)

@@ -1032,7 +1032,7 @@ package com.xvm
 
             if (!m_players.hasOwnProperty(playerName))
             {
-                m_players[playerName] = new Object();
+                m_players[playerName] = {};
             }
 
             // register player macros

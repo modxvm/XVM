@@ -24,7 +24,7 @@
     <option allowSourcePathOverlap="False" />
     <option benchmark="False" />
     <option es="False" />
-    <option inline="False" />
+    <option inline="True" />
     <option locale="" />
     <option loadConfig="" />
     <option optimize="True" />
@@ -38,7 +38,7 @@
     <option useNetwork="False" />
     <option useResourceBundleMetadata="True" />
     <option warnings="True" />
-    <option verboseStackTraces="True" />
+    <option verboseStackTraces="False" />
     <option linkReport="" />
     <option loadExterns="" />
     <option staticLinkRSL="True" />

@@ -907,7 +907,7 @@ package com.xvm.battle.playersPanel
 
     private static function createMouseHandler(extraPanels:MovieClip):Void
     {
-        var mouseHandler:Object = new Object();
+        var mouseHandler:Object = {};
         Mouse.addListener(mouseHandler);
         mouseHandler.onMouseDown = function(button, target)
         {
