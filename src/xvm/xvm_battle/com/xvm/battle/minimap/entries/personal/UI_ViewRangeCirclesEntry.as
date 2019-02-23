@@ -244,8 +244,8 @@ class Circles extends Sprite implements IDisposable
 
     private var _mapSizeCoeff:Number = 0;
 
-    private var _staticCircles:Vector.<CMinimapCircle>;
-    private var _dynamicCircles:Vector.<CMinimapCircle>;
+    private var _staticCircles:Vector.<MinimapCircleData>;
+    private var _dynamicCircles:Vector.<MinimapCircleData>;
     private var _artilleryCircle:Shape = null;
     private var _shellRangeCircle:Shape = null;
 
@@ -263,23 +263,23 @@ class Circles extends Sprite implements IDisposable
 
         _mapSizeCoeff = MinimapSizeConst.MAP_SIZE[0].width / BattleGlobalData.mapSize;
 
-        _staticCircles = _defineStaticCirclesCfg(cfg);
+        _staticCircles = _defineStaticCircles(cfg);
         var len:int = _staticCircles.length;
         for (var i:int = 0; i < len; ++i)
         {
-            var circleCfg:CMinimapCircle = _staticCircles[i];
-            radius = circleCfg.distance;
-            if (circleCfg.scale)
-                radius *= circleCfg.scale;
-            circleCfg._state.radius = radius;
-            circleCfg._state.shape = _drawCircle(radius, circleCfg.thickness, circleCfg.color, circleCfg.alpha);
-            addChild(circleCfg._state.shape);
+            var data:MinimapCircleData = _staticCircles[i];
+            radius = data.cfg.distance;
+            if (data.cfg.scale)
+                radius *= data.cfg.scale;
+            data.radius = radius;
+            data.shape = _drawCircle(radius, data.cfg.thickness, data.cfg.color, data.cfg.alpha);
+            addChild(data.shape);
         }
 
         //Logger.addObject(cfg, 2);
         //Logger.addObject(ci);
 
-        _dynamicCircles = _defineDynamicCirclesCfg(cfg);
+        _dynamicCircles = _defineDynamicCircles(cfg);
 
         _artilleryCircle = null;
         if (cfg.artillery.enabled)
@@ -340,11 +340,11 @@ class Circles extends Sprite implements IDisposable
         var len:int = _dynamicCircles.length;
         for (var i:int = 0; i < len; ++i)
         {
-            var dc:CMinimapCircle = _dynamicCircles[i];
+            var data:MinimapCircleData = _dynamicCircles[i];
             //Logger.addObject(dc);
 
             var radius:int = 0;
-            switch (dc.distance)
+            switch (data.cfg.distance)
             {
                 case "dynamic":
                     radius = UI_ViewRangeCirclesEntry.stereoscope_enabled ? stereoscopeVisionRadius : circularVisionRadius;
@@ -378,11 +378,11 @@ class Circles extends Sprite implements IDisposable
             if (radius <= 0)
                 continue;
 
-            if (dc.scale != null)
-                radius *= dc.scale;
+            if (data.cfg.scale != null)
+                radius *= data.cfg.scale;
 
-            var shape:Shape = dc._state.shape;
-            if (shape == null || dc._state.radius != radius)
+            var shape:Shape = data.shape;
+            if (shape == null || data.radius != radius)
             {
                 var visible:Boolean = true;
                 if (shape != null)
@@ -391,10 +391,10 @@ class Circles extends Sprite implements IDisposable
                     removeChild(shape);
                     shape = null;
                 }
-                dc._state.radius = radius;
-                dc._state.shape = _drawCircle(radius, dc.thickness, dc.color, dc.alpha);
-                dc._state.shape.visible = visible;
-                addChild(dc._state.shape);
+                data.radius = radius;
+                data.shape = _drawCircle(radius, data.cfg.thickness, data.cfg.color, data.cfg.alpha);
+                data.shape.visible = visible;
+                addChild(data.shape);
             }
         }
     }
@@ -407,21 +407,20 @@ class Circles extends Sprite implements IDisposable
 
     // PRIVATE
 
-    private function _defineStaticCirclesCfg(cfg:CMinimapCircles):Vector.<CMinimapCircle>
+    private function _defineStaticCircles(cfg:CMinimapCircles):Vector.<MinimapCircleData>
     {
-        var res:Vector.<CMinimapCircle> = new Vector.<CMinimapCircle>();
+        var res:Vector.<MinimapCircleData> = new Vector.<MinimapCircleData>();
 
         var i:int;
         var c:CMinimapCircle;
+        var data:MinimapCircleData;
         var len:int = cfg.parsedView.length;
         for (i = 0; i < len; ++i)
         {
             c = cfg.parsedView[i];
-            if (c.enabled == null || !c.enabled || isNaN(c.distance))
+            if (!c.enabled || isNaN(c.distance))
                 continue;
-            if (!c._state.state)
-                c._state.state = MinimapEntriesConstants.MOVING_STATE_ALL;
-            res.push(c);
+            res.push(new MinimapCircleData(c));
         }
 
         // Special vehicle key dependent circle configs
@@ -435,9 +434,7 @@ class Circles extends Sprite implements IDisposable
                 c = CMinimapCircle(cfg.special[i][vehicleKey]);
                 if (!c.enabled)
                     continue;
-                if (!c._state.state)
-                    c._state.state = MinimapEntriesConstants.MOVING_STATE_ALL;
-                res.push(c);
+                res.push(new MinimapCircleData(c));
             }
         }
 
@@ -445,20 +442,18 @@ class Circles extends Sprite implements IDisposable
         return res;
     }
 
-    private function _defineDynamicCirclesCfg(cfg:CMinimapCircles):Vector.<CMinimapCircle>
+    private function _defineDynamicCircles(cfg:CMinimapCircles):Vector.<MinimapCircleData>
     {
-        var res:Vector.<CMinimapCircle> = new Vector.<CMinimapCircle>();
+        var res:Vector.<MinimapCircleData> = new Vector.<MinimapCircleData>();
 
         var len:int = cfg.parsedView.length;
         for (var i:int = 0; i < len; ++i)
         {
             var c:CMinimapCircle = cfg.parsedView[i];
-            if (!c.enabled)
-                continue;
-            if (!c._state.state)
-                c._state.state = MinimapEntriesConstants.MOVING_STATE_ALL;
-            if (isNaN(c.distance))
-                res.push(c);
+            if (c.enabled && isNaN(c.distance))
+            {
+                res.push(new MinimapCircleData(c));
+            }
         }
 
         //Logger.addObject(res, 2, "dynamic");
@@ -477,17 +472,31 @@ class Circles extends Sprite implements IDisposable
         return circle;
     }
 
-    private function _updateCirclesMovingState(circles:Vector.<CMinimapCircle>, moving_state:int):void
+    private function _updateCirclesMovingState(circles:Vector.<MinimapCircleData>, moving_state:int):void
     {
         var len:int = circles.length;
         for (var i:int = 0; i < len; ++i)
         {
-            var cfg:CMinimapCircle = circles[i];
-            var shape:Shape = cfg._state.shape;
+            var data:MinimapCircleData = circles[i];
+            var shape:Shape = data.shape;
             if (shape)
             {
-                shape.visible = (int(cfg._state.state) & moving_state) != 0;
+                shape.visible = (data.state & moving_state) != 0;
             }
         }
+    }
+}
+
+class MinimapCircleData
+{
+    public var cfg:CMinimapCircle;
+    public var radius:Number;
+    public var shape:Shape;
+    public var state:int;
+
+    public function MinimapCircleData(cfg:CMinimapCircle):void
+    {
+        this.cfg = cfg;
+        this.state = MinimapEntriesConstants.MOVING_STATE_ALL;
     }
 }

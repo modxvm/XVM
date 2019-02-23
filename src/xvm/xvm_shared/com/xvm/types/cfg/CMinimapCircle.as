@@ -15,8 +15,6 @@ package com.xvm.types.cfg
         public var enabled:*;
         public var scale:*;
         public var thickness:*;
-        // internal
-        public var _state:Object = {};
 
         public function clone():*
         {

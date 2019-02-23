@@ -15,13 +15,14 @@ package com.xvm.types.cfg
         private var _camera:Vector.<CMinimapLine> = null;
         public function get parsedCamera():Vector.<CMinimapLine>
         {
-            if (!_camera)
+            if (camera)
             {
                 _camera = new Vector.<CMinimapLine>();
                 for each (var value:Object in camera)
                 {
                     _camera.push(ObjectConverter.convertData(value, CMinimapLine));
                 }
+                camera = null;
             }
             return _camera;
         }
@@ -29,13 +30,14 @@ package com.xvm.types.cfg
         private var _traverseAngle:Vector.<CMinimapLine> = null;
         public function get parsedTraverseAngle():Vector.<CMinimapLine>
         {
-            if (!_traverseAngle)
+            if (traverseAngle)
             {
                 _traverseAngle = new Vector.<CMinimapLine>();
                 for each (var value:Object in traverseAngle)
                 {
                     _traverseAngle.push(ObjectConverter.convertData(value, CMinimapLine));
                 }
+                traverseAngle = null;
             }
             return _traverseAngle;
         }
@@ -43,13 +45,14 @@ package com.xvm.types.cfg
         private var _vehicle:Vector.<CMinimapLine> = null;
         public function get parsedVehicle():Vector.<CMinimapLine>
         {
-            if (!_vehicle)
+            if (vehicle)
             {
                 _vehicle = new Vector.<CMinimapLine>();
                 for each (var value:Object in vehicle)
                 {
                     _vehicle.push(ObjectConverter.convertData(value, CMinimapLine));
                 }
+                vehicle = null;
             }
             return _vehicle;
         }

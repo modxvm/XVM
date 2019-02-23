@@ -18,13 +18,14 @@ package com.xvm.types.cfg
         private var _view:Vector.<CMinimapCircle> = null;
         public function get parsedView():Vector.<CMinimapCircle>
         {
-            if (!_view)
+            if (view)
             {
-                _view = new Vector.<CMinimapLine>();
+                _view = new Vector.<CMinimapCircle>();
                 for each (var value:Object in view)
                 {
-                    _view.push(ObjectConverter.convertData(value, CMinimapLine));
+                    _view.push(ObjectConverter.convertData(value, CMinimapCircle));
                 }
+                view = null;
             }
             return _view;
         }
@@ -51,7 +52,13 @@ package com.xvm.types.cfg
                 for (var i:int = 0; i < len; ++i)
                 {
                     var items:Object = special[i];
-                    for (var key:String in items)
+                    var keys:Array = [];
+                    var key:String;
+                    for (key in items)
+                    {
+                        keys.push(key);
+                    }
+                    for (key in keys)
                     {
                         var item:CMinimapCircle = ObjectConverter.convertData(items[key], CMinimapCircle);
                         item.applyGlobalBattleMacros();
