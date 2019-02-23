@@ -17,7 +17,7 @@ package com.xvm.lobby.ui.battleresults
     import scaleform.clik.events.*;
     import scaleform.gfx.*;
 
-    public class UI_CommonStats extends CommonStats
+    public dynamic class UI_CommonStats extends CommonStats
     {
         private const FIELD_POS_TITLE:String = "fieldPosTitle";
         private const FIELD_POS_NON_PREM:String = "fieldPosNonPrem";
@@ -163,13 +163,13 @@ package com.xvm.lobby.ui.battleresults
             }
         }
 
+        // PRIVATE
+
         private function onDropDownIndexChangeHandler(e:ListEvent) : void
         {
             this.currentTankIndex = e.index;
             updateValues();
         }
-
-        // PRIVATE
 
         private function initializeFields():void
         {
