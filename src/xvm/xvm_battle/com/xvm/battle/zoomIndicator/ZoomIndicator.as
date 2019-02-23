@@ -63,8 +63,13 @@ package com.xvm.battle.zoomIndicator
 
         private function onUpdateStage():void
         {
-            if (cfg && cfg.enabled)
-                invalidate(InvalidationType.POSITION);
+            if (cfg)
+            {
+                if (cfg.enabled)
+                {
+                    invalidate(InvalidationType.POSITION);
+                }
+            }
         }
 
         private function setup():void
@@ -105,9 +110,12 @@ package com.xvm.battle.zoomIndicator
             {
                 _enable = enable;
                 BattleState.currentAimZoom = zoom;
-                if (cfg && cfg.enabled)
+                if (cfg)
                 {
-                    invalidate(InvalidationType.STATE);
+                    if (cfg.enabled)
+                    {
+                        invalidate(InvalidationType.STATE);
+                    }
                 }
             }
         }
@@ -118,8 +126,13 @@ package com.xvm.battle.zoomIndicator
             {
                 _offsetX = offsetX;
                 _offsetY = offsetY;
-                if (cfg && cfg.enabled)
-                    invalidate(InvalidationType.POSITION);
+                if (cfg)
+                {
+                    if (cfg.enabled)
+                    {
+                        invalidate(InvalidationType.POSITION);
+                    }
+                }
             }
         }
 

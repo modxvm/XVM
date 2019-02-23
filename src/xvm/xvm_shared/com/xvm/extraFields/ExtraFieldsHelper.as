@@ -106,9 +106,12 @@ package com.xvm.extraFields
                                 var pattern:RegExp = /PY\s*\(\s*(\w+)\s*\)/i;
                                 var matches:Array = event.match(pattern);
                                 //Logger.addObject(matches, 1, event);
-                                if (matches && matches.length > 1)
+                                if (matches)
                                 {
-                                    py_events.push(matches[1]);
+                                    if (matches.length > 1)
+                                    {
+                                        py_events.push(matches[1]);
+                                    }
                                 }
                                 break;
                         }
@@ -206,8 +209,13 @@ package com.xvm.extraFields
                 }
             }
 
-            if (entryPresent && !entryFound)
-                return false;
+            if (entryPresent)
+            {
+                if (!entryFound)
+                {
+                    return false;
+                }
+            }
 
             if (!aliveFlags)
                 aliveFlags = ALIVE_FLAG_ANY;

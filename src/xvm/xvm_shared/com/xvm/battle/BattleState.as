@@ -547,11 +547,17 @@ package com.xvm.battle
             });
 
             var lastHit:VOHit = _hitlogHits.length ? _hitlogHits[_hitlogHits.length - 1] : new VOHit();
-            if ((damageType == "fire" || damageType == "ramming") && lastHit.vehicleID == playerState.vehicleID && lastHit.damageType == damageType)
+            if (damageType == "fire" || damageType == "ramming")
             {
-                damage += lastHit.damage;
-                _hitlogHits.pop();
-                playerState.hitlogHits.pop();
+                if (lastHit.vehicleID == playerState.vehicleID)
+                {
+                    if (lastHit.damageType == damageType)
+                    {
+                        damage += lastHit.damage;
+                        _hitlogHits.pop();
+                        playerState.hitlogHits.pop();
+                    }
+                }
             }
 
             var hitIndex:Number = _hitlogHits.push(new VOHit(playerState.vehicleID, damage, damageType)) - 1;

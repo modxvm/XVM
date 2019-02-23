@@ -29,32 +29,35 @@ package com.xvm.lobby.ui.battleresults
             super.draw();
             //return;
 
-            if (isInvalid(InvalidationType.DATA) && this.height > 0)
+            if (isInvalid(InvalidationType.DATA))
             {
-                if (isNaN(orig_awardTF_y))
+                if (this.height > 0)
                 {
-                    orig_awardTF_y = this.awardTF.y;
-                    orig_container_y = this.container.y;
-                    orig_maskMC_height= this.maskMC.height;
-                }
-
-                this.awardTF.y = orig_awardTF_y - offsetTop;
-                this.container.y = orig_container_y - offsetTop;
-
-                if (this.flagBottom)
-                {
-                    if (isNaN(orig_flagBottom_y))
+                    if (isNaN(orig_awardTF_y))
                     {
-                        orig_flagBottom_y = this.flagBottom.y;
+                        orig_awardTF_y = this.awardTF.y;
+                        orig_container_y = this.container.y;
+                        orig_maskMC_height= this.maskMC.height;
                     }
-                    this.flagBottom.y = orig_flagBottom_y - offsetTop;
+
+                    this.awardTF.y = orig_awardTF_y - offsetTop;
+                    this.container.y = orig_container_y - offsetTop;
+
+                    if (this.flagBottom)
+                    {
+                        if (isNaN(orig_flagBottom_y))
+                        {
+                            orig_flagBottom_y = this.flagBottom.y;
+                        }
+                        this.flagBottom.y = orig_flagBottom_y - offsetTop;
+                    }
+
+                    this.maskMC.height = orig_maskMC_height - offsetBottom;
+
+                    _height = this.maskMC.height;
+                    setSize(this.width, _height);
+                    dispatchEvent(new Event(Event.RESIZE));
                 }
-
-                this.maskMC.height = orig_maskMC_height - offsetBottom;
-
-                _height = this.maskMC.height;
-                setSize(this.width, _height);
-                dispatchEvent(new Event(Event.RESIZE));
             }
         }
     }

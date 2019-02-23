@@ -52,13 +52,16 @@ package com.xvm.lobby.ui.tankcarousel
             renderer.scrollRect = new Rectangle(0, 0, DEFAULT_WIDTH, DEFAULT_HEIGHT);
 
             var formats:Array = cfg.extraFields;
-            if (formats && formats.length)
+            if (formats)
             {
-                item.substrateHolder = _createExtraFieldsHolder(renderer, 0);
-                item.bottomHolder = _createExtraFieldsHolder(renderer, renderer.getChildIndex(renderer.content));
-                item.normalHolder = _createExtraFieldsHolder(renderer.content, renderer.content.getChildIndex(renderer.content.clanLock));
-                item.topHolder = _createExtraFieldsHolder(renderer, renderer.getChildIndex(renderer.focusIndicator) + 1);
-                item.extraFields = new ExtraFieldsGroup(item as IExtraFieldGroupHolder, formats, false, CTextFormat.GetDefaultConfigForLobby());
+                if (formats.length)
+                {
+                    item.substrateHolder = _createExtraFieldsHolder(renderer, 0);
+                    item.bottomHolder = _createExtraFieldsHolder(renderer, renderer.getChildIndex(renderer.content));
+                    item.normalHolder = _createExtraFieldsHolder(renderer.content, renderer.content.getChildIndex(renderer.content.clanLock));
+                    item.topHolder = _createExtraFieldsHolder(renderer, renderer.getChildIndex(renderer.focusIndicator) + 1);
+                    item.extraFields = new ExtraFieldsGroup(item as IExtraFieldGroupHolder, formats, false, CTextFormat.GetDefaultConfigForLobby());
+                }
             }
 
             //App.utils.scheduler.scheduleTask(function():void {
@@ -137,19 +140,25 @@ package com.xvm.lobby.ui.tankcarousel
                     else
                     {
                         // Add used slots count
-                        if (item.vehicleCarouselVO.buySlot && Config.config.hangar.carousel.showUsedSlots)
+                        if (item.vehicleCarouselVO.buySlot)
                         {
-                            renderer.content.txtInfo.htmlText =
-                                "<p align='center'>" + item.vehicleCarouselVO.infoText + "\n" +
-                                "<font face='$TextFont' size='12' color='#8C8C7E'>" +
-                                Locale.get("Used slots") + ": " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_USED_SLOTS_COUNT) + "</font></p>";
+                            if (Config.config.hangar.carousel.showUsedSlots)
+                            {
+                                renderer.content.txtInfo.htmlText =
+                                    "<p align='center'>" + item.vehicleCarouselVO.infoText + "\n" +
+                                    "<font face='$TextFont' size='12' color='#8C8C7E'>" +
+                                    Locale.get("Used slots") + ": " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_USED_SLOTS_COUNT) + "</font></p>";
+                            }
                         }
-                        if (item.vehicleCarouselVO.buyTank && Config.config.hangar.carousel.showTotalSlots)
+                        if (item.vehicleCarouselVO.buyTank)
                         {
-                            renderer.content.txtInfo.htmlText =
-                                "<p align='center'>" + item.vehicleCarouselVO.infoText + " " +
-                                "<font face='$TextFont' size='12' color='#8C8C7E'>" +
-                                Locale.get("from") + " " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_TOTAL_SLOTS_COUNT) + "</font></p>";
+                            if (Config.config.hangar.carousel.showTotalSlots)
+                            {
+                                renderer.content.txtInfo.htmlText =
+                                    "<p align='center'>" + item.vehicleCarouselVO.infoText + " " +
+                                    "<font face='$TextFont' size='12' color='#8C8C7E'>" +
+                                    Locale.get("from") + " " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_TOTAL_SLOTS_COUNT) + "</font></p>";
+                            }
                         }
                     }
                 }

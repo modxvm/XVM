@@ -202,10 +202,12 @@ package com.xvm.lobby.online.OnlineServers
                 cluster = cluster + " ";
             //put everything together: server + delimiter + padded value
             if ((cfg.showServerName && !isTitle) || people_online == "..." || (cfg.showTitle && isTitle))
+            {
                 if (!isNaN(serverColor) && people_online != "...")
                     raw = "<span class='" + STYLE_NAME_PREFIX + SERVER_COLOR + "'>" + cluster + cfg.delimiter + "</span>" + raw;
                 else
                     raw = cluster + cfg.delimiter + raw;
+            }
             //mark current server
             if (onlineObj.cluster == currentServer)
                 raw = cfg.currentServerFormat.replace("{server}", raw);

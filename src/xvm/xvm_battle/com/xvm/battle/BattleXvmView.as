@@ -95,15 +95,21 @@ package com.xvm.battle
 
                 var behindMinimapIndex:int = battlePage.getChildIndex(battlePage.minimap) - 1;
 
-                if (battlePageDebugPanel != null && Config.config.battle.clockFormat)
+                if (battlePageDebugPanel != null)
                 {
-                    _battleClock = new BattleClock();
-                    battlePageDebugPanel.addChild(_battleClock);
+                    if (Config.config.battle.clockFormat)
+                    {
+                        _battleClock = new BattleClock();
+                        battlePageDebugPanel.addChild(_battleClock);
+                    }
                 }
 
-                if (Config.config.battle.elements && Config.config.battle.elements.length)
+                if (Config.config.battle.elements)
                 {
-                    _battleElements = new BattleElements();
+                    if (Config.config.battle.elements.length)
+                    {
+                        _battleElements = new BattleElements();
+                    }
                 }
 
                 _hitlog = new Hitlog(); // must be initialized before BattleLabels
@@ -216,12 +222,27 @@ package com.xvm.battle
 
         private function onKeyEvent(key:Number, isDown:Boolean):void
         {
-            if (hotkeys_cfg.minimapZoom.enabled && hotkeys_cfg.minimapZoom.keyCode == key)
-                Xvm.dispatchEvent(new ObjectEvent(BattleEvents.MINIMAP_ZOOM, { isDown: isDown }));
-            if (hotkeys_cfg.minimapAltMode.enabled && hotkeys_cfg.minimapAltMode.keyCode == key)
-                Xvm.dispatchEvent(new ObjectEvent(BattleEvents.MINIMAP_ALT_MODE, { isDown: isDown } ));
-            if (hotkeys_cfg.playersPanelAltMode.enabled && hotkeys_cfg.playersPanelAltMode.keyCode == key)
-                Xvm.dispatchEvent(new ObjectEvent(BattleEvents.PLAYERS_PANEL_ALT_MODE, { isDown: isDown } ));
+            if (hotkeys_cfg.minimapZoom.enabled)
+            {
+                if (hotkeys_cfg.minimapZoom.keyCode == key)
+                {
+                    Xvm.dispatchEvent(new ObjectEvent(BattleEvents.MINIMAP_ZOOM, { isDown: isDown }));
+                }
+            }
+            if (hotkeys_cfg.minimapAltMode.enabled)
+            {
+                if (hotkeys_cfg.minimapAltMode.keyCode == key)
+                {
+                    Xvm.dispatchEvent(new ObjectEvent(BattleEvents.MINIMAP_ALT_MODE, { isDown: isDown } ));
+                }
+            }
+            if (hotkeys_cfg.playersPanelAltMode.enabled)
+            {
+                if (hotkeys_cfg.playersPanelAltMode.keyCode == key)
+                {
+                    Xvm.dispatchEvent(new ObjectEvent(BattleEvents.PLAYERS_PANEL_ALT_MODE, { isDown: isDown } ));
+                }
+            }
         }
 
         private function onTargetChanged(vehicleID:Number):void

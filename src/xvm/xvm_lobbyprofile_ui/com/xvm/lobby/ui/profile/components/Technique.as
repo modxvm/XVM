@@ -111,28 +111,31 @@ package com.xvm.lobby.ui.profile.components
 
         public function fixInitData(param1:Object):void
         {
-            if (Config.networkServicesSettings.statAwards && Config.config.userInfo.showXTEColumn)
+            if (Config.networkServicesSettings.statAwards)
             {
-                var bi:Object = {
-                    id: "xvm_xte",
-                    label: "xTE",
-                    toolTip: "xvm_xte",
-                    buttonWidth: 50,
-                    sortOrder: 8,
-                    defaultSortDirection: SortingInfo.DESCENDING_SORT,
-                    ascendingIconSource: RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_ASCPROFILESORTARROW,
-                    descendingIconSource: RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_DESCPROFILESORTARROW,
-                    buttonHeight: 40,
-                    enabled: true
-                };
+                if (Config.config.userInfo.showXTEColumn)
+                {
+                    var bi:Object = {
+                        id: "xvm_xte",
+                        label: "xTE",
+                        toolTip: "xvm_xte",
+                        buttonWidth: 50,
+                        sortOrder: 8,
+                        defaultSortDirection: SortingInfo.DESCENDING_SORT,
+                        ascendingIconSource: RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_ASCPROFILESORTARROW,
+                        descendingIconSource: RES_ICONS.MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_DESCPROFILESORTARROW,
+                        buttonHeight: 40,
+                        enabled: true
+                    };
 
-                var tableHeader:Array = param1.tableHeader;
-                tableHeader[4].buttonWidth = 64; // BATTLES_COUNT,74
-                tableHeader[5].buttonWidth = 64; // WINS_EFFICIENCY,74
-                tableHeader[6].buttonWidth = 75; // AVG_EXPERIENCE,90
-                tableHeader.push(tableHeader[7]);
-                tableHeader[7] = bi;             // xvm_xte
-                tableHeader[8].buttonWidth = 68; // MARK_OF_MASTERY,83
+                    var tableHeader:Array = param1.tableHeader;
+                    tableHeader[4].buttonWidth = 64; // BATTLES_COUNT,74
+                    tableHeader[5].buttonWidth = 64; // WINS_EFFICIENCY,74
+                    tableHeader[6].buttonWidth = 75; // AVG_EXPERIENCE,90
+                    tableHeader.push(tableHeader[7]);
+                    tableHeader[7] = bi;             // xvm_xte
+                    tableHeader[8].buttonWidth = 68; // MARK_OF_MASTERY,83
+                }
             }
         }
 
@@ -173,21 +176,30 @@ package com.xvm.lobby.ui.profile.components
             try
             {
                 var stat:StatData = accountDBID == 0 ? Stat.getUserDataByName(playerName) : Stat.getUserDataById(accountDBID);
-                if (stat && stat.v)
+                if (stat)
                 {
-                    for each (var data:Object in currentData)
+                    if (stat.v)
                     {
-                        if (data == null)
-                            continue;
-                        var vdata:Object = stat.v[data.id];
-                        if (data.xvm_xte < 0)
+                        for each (var data:Object in currentData)
                         {
-                            if (vdata && !isNaN(vdata.xte) && vdata.xte > 0)
+                            if (data == null)
+                                continue;
+                            var vdata:Object = stat.v[data.id];
+                            if (data.xvm_xte < 0)
                             {
-                                data.xvm_xte = vdata.xte;
-                                if (vdata.b != data.battlesCount)
+                                if (vdata)
                                 {
-                                    data.xvm_xte_flag |= 0x01;
+                                    if (!isNaN(vdata.xte))
+                                    {
+                                        if (vdata.xte > 0)
+                                        {
+                                            data.xvm_xte = vdata.xte;
+                                            if (vdata.b != data.battlesCount)
+                                            {
+                                                data.xvm_xte_flag |= 0x01;
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }

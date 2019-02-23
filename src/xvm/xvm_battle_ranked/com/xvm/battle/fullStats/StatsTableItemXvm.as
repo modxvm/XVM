@@ -584,9 +584,12 @@ package com.xvm.battle.fullStats
         private function createExtraFields():void
         {
             var formats:Array = _isLeftPanel ? cfg.extraFieldsLeft : cfg.extraFieldsRight;
-            if (formats && formats.length)
+            if (formats)
             {
-                extraFields = new ExtraFieldsGroup(this, formats);
+                if (formats.length)
+                {
+                    extraFields = new ExtraFieldsGroup(this, formats);
+                }
             }
         }
 

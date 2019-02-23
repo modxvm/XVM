@@ -91,13 +91,16 @@ package com.xvm.battle.minimap.entries.personal
             {
                 iconPath = null;
             }
-            if (_loader && _loader.source != iconPath)
+            if (_loader)
             {
-                App.stage.removeEventListener(Event.ENTER_FRAME, onEnterFrame);
-                _previousScale = 0;
-                _previousVisible = false;
-                _loader.visible = false;
-                _loader.source = iconPath;
+                if (_loader.source != iconPath)
+                {
+                    App.stage.removeEventListener(Event.ENTER_FRAME, onEnterFrame);
+                    _previousScale = 0;
+                    _previousVisible = false;
+                    _loader.visible = false;
+                    _loader.source = iconPath;
+                }
             }
         }
 

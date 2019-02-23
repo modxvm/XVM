@@ -198,10 +198,12 @@ package com.xvm.lobby.ping.PingServers
                 cluster = cluster + " ";
             //put everything together: server + delimiter + padded value
             if ((cfg.showServerName && !isTitle) || time == "..." || (cfg.showTitle && isTitle))
+            {
                 if (!isNaN(serverColor) && time != "...")
                     raw = "<span class='" + STYLE_NAME_PREFIX + SERVER_COLOR + "'>" + cluster + cfg.delimiter + "</span>" + raw;
                 else
                     raw = cluster + cfg.delimiter + raw;
+            }
             //mark current server
             if (pingObj.cluster == currentServer)
                 raw = cfg.currentServerFormat.replace("{server}", raw);

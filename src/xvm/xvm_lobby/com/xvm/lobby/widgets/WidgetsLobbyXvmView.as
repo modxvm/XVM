@@ -56,27 +56,36 @@ package com.xvm.lobby.widgets
             var index:int;
 
             var widgets:Array = filterWidgets(cfg, Defines.WIDGET_TYPE_EXTRAFIELD, Defines.LAYER_BOTTOM);
-            if (widgets != null && widgets.length > 0)
+            if (widgets != null)
             {
-                index = 0;
-                extraFieldsWidgetsBottom = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
-                extraFieldsWidgetsBottom.visible = false;
+                if (widgets.length > 0)
+                {
+                    index = 0;
+                    extraFieldsWidgetsBottom = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
+                    extraFieldsWidgetsBottom.visible = false;
+                }
             }
 
             widgets = filterWidgets(cfg, Defines.WIDGET_TYPE_EXTRAFIELD, Defines.LAYER_NORMAL);
-            if (widgets != null && widgets.length > 0)
+            if (widgets != null)
             {
-                index = page.getChildIndex(page.subViewContainer as DisplayObject) + 1;
-                extraFieldsWidgetsNormal = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
-                extraFieldsWidgetsNormal.visible = false;
+                if (widgets.length > 0)
+                {
+                    index = page.getChildIndex(page.subViewContainer as DisplayObject) + 1;
+                    extraFieldsWidgetsNormal = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
+                    extraFieldsWidgetsNormal.visible = false;
+                }
             }
 
             widgets = filterWidgets(cfg, Defines.WIDGET_TYPE_EXTRAFIELD, Defines.LAYER_TOP);
-            if (widgets != null && widgets.length > 0)
+            if (widgets != null)
             {
-                index = page.getChildIndex(page.header) + 1;
-                extraFieldsWidgetsTop = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
-                extraFieldsWidgetsTop.visible = false;
+                if (widgets.length > 0)
+                {
+                    index = page.getChildIndex(page.header) + 1;
+                    extraFieldsWidgetsTop = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
+                    extraFieldsWidgetsTop.visible = false;
+                }
             }
 
             onUpdateCurrentVehicle(Xfw.cmd(XvmCommands.GET_CURRENT_VEH_CD), null);

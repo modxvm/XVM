@@ -67,21 +67,24 @@ package com.xvm.lobby
             try
             {
                 var mods:Vector.<IXfwView> = super.processView(view, populated);
-                if (view.as_config.alias == "lobby" && mods)
+                if (view.as_config.alias == "lobby")
                 {
-                    for each (var mod:IXfwView in mods)
+                    if (mods)
                     {
-                        if (mod is OnlineLobbyXvmView)
+                        for each (var mod:IXfwView in mods)
                         {
-                            _onlineLobbyXvmView = mod as OnlineLobbyXvmView;
-                        }
-                        else if (mod is PingLobbyXvmView)
-                        {
-                            _pingLobbyXvmView = mod as PingLobbyXvmView;
-                        }
-                        else if (mod is WidgetsLobbyXvmView)
-                        {
-                            _widgetsLobbyXvmView = mod as WidgetsLobbyXvmView;
+                            if (mod is OnlineLobbyXvmView)
+                            {
+                                _onlineLobbyXvmView = mod as OnlineLobbyXvmView;
+                            }
+                            else if (mod is PingLobbyXvmView)
+                            {
+                                _pingLobbyXvmView = mod as PingLobbyXvmView;
+                            }
+                            else if (mod is WidgetsLobbyXvmView)
+                            {
+                                _widgetsLobbyXvmView = mod as WidgetsLobbyXvmView;
+                            }
                         }
                     }
                 }

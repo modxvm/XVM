@@ -144,10 +144,13 @@ package com.xvm.battle.battleLabels
             {
                 var cfg:CBattleLabels = Config.config.battleLabels;
                 var formats:Array = cfg.formats;
-                if (formats && formats.length)
+                if (formats)
                 {
-                    extraFields = new ExtraFieldsGroup(this, formats, true, CTextFormat.GetDefaultConfigForBattle());
-                    invalidate(InvalidationType.ALL);
+                    if (formats.length)
+                    {
+                        extraFields = new ExtraFieldsGroup(this, formats, true, CTextFormat.GetDefaultConfigForBattle());
+                        invalidate(InvalidationType.ALL);
+                    }
                 }
             }
             catch (ex:Error)

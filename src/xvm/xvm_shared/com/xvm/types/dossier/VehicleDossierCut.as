@@ -81,10 +81,13 @@ package com.xvm.types.dossier
                     c_hitsRatio = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_HITSRATIO, hitsRatio, NaN, "#");
                     tdb = vdossier.avgDamageDealt;
                     c_tdb = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, tdb, NaN, "#");
-                    if (!isNaN(vdossier.xtdb) && vdossier.xtdb > 0)
+                    if (!isNaN(vdossier.xtdb))
                     {
-                        xtdb = vdossier.xtdb == 100 ? "XX" : (vdossier.xtdb < 10 ? "0" : "") + vdossier.xtdb;
-                        c_xtdb = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, vdossier.xtdb, NaN, "#");
+                        if (vdossier.xtdb > 0)
+                        {
+                            xtdb = vdossier.xtdb == 100 ? "XX" : (vdossier.xtdb < 10 ? "0" : "") + vdossier.xtdb;
+                            c_xtdb = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, vdossier.xtdb, NaN, "#");
+                        }
                     }
                     tdv = vdossier.damageDealt / (battles * maxHP);
                     c_tdv = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, tdv, NaN, "#");
@@ -98,17 +101,23 @@ package com.xvm.types.dossier
                         c_wn8effd = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_WN8EFFD, wn8effd, NaN, "#");
                     }
 
-                    if (!isNaN(vdossier.xte) && vdossier.xte > 0)
+                    if (!isNaN(vdossier.xte))
                     {
-                        xte = vdossier.xte == 100 ? "XX" : (vdossier.xte < 10 ? "0" : "") + vdossier.xte;
-                        c_xte = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, vdossier.xte, NaN, "#");
+                        if (vdossier.xte > 0)
+                        {
+                            xte = vdossier.xte == 100 ? "XX" : (vdossier.xte < 10 ? "0" : "") + vdossier.xte;
+                            c_xte = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, vdossier.xte, NaN, "#");
+                        }
                     }
 
                     wtr = vdossier.wtr;
-                    if (!isNaN(vdossier.xwtr) && vdossier.xwtr > 0)
+                    if (!isNaN(vdossier.xwtr))
                     {
-                        xwtr = vdossier.xwtr == 100 ? "XX" : (vdossier.xwtr < 10 ? "0" : "") + vdossier.xwtr;
-                        c_xwtr = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, vdossier.xwtr, NaN, "#");
+                        if (vdossier.xwtr > 0)
+                        {
+                            xwtr = vdossier.xwtr == 100 ? "XX" : (vdossier.xwtr < 10 ? "0" : "") + vdossier.xwtr;
+                            c_xwtr = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, vdossier.xwtr, NaN, "#");
+                        }
                     }
 
                     earnedXP = isNaN(vdossier.earnedXP) || vdossier.earnedXP == 0 ? NaN : vdossier.earnedXP;

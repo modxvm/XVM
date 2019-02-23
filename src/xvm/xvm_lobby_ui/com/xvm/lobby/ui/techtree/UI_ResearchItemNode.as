@@ -21,13 +21,20 @@ package com.xvm.lobby.ui.techtree
         {
             if (Config.config.hangar.hidePricesInTechTree)
             {
-                if (stateProps && stateProps.visible && stateProps.animation == null)
+                if (stateProps)
                 {
-                    if (stateProps.label == "creditsPriceLabel")
-                        stateProps.animation = new AnimationProperties(150, { alpha:0 }, { alpha:1 } );
+                    if (stateProps.visible)
+                    {
+                        if (stateProps.animation == null)
+                        {
+                            if (stateProps.label == "creditsPriceLabel")
+                            {
+                                stateProps.animation = new AnimationProperties(150, { alpha:0 }, { alpha:1 } );
+                            }
+                        }
+                    }
                 }
             }
-
             super.populateUI();
         }
 

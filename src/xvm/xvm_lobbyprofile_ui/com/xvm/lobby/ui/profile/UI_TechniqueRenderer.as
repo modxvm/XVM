@@ -29,32 +29,35 @@ package com.xvm.lobby.ui.profile
         {
             super.configUI();
 
-            if (Config.networkServicesSettings.statAwards && Config.config.userInfo.showXTEColumn)
+            if (Config.networkServicesSettings.statAwards)
             {
-                // xTE
-                xteTF = new TextField();
-                xteTF.mouseEnabled = false;
-                xteTF.selectable = false;
-                TextFieldEx.setNoTranslate(xteTF, true);
-                xteTF.antiAliasType = AntiAliasType.ADVANCED;
-                xteTF.name = "xteTF";
-                xteTF.multiline = true;
-                xteTF.wordWrap = false;
-                xteTF.y = winsTF.y;
-                xteTF.width = 50;
-                xteTF.height = 25;
-                addChild(xteTF);
+                if (Config.config.userInfo.showXTEColumn)
+                {
+                    // xTE
+                    xteTF = new TextField();
+                    xteTF.mouseEnabled = false;
+                    xteTF.selectable = false;
+                    TextFieldEx.setNoTranslate(xteTF, true);
+                    xteTF.antiAliasType = AntiAliasType.ADVANCED;
+                    xteTF.name = "xteTF";
+                    xteTF.multiline = true;
+                    xteTF.wordWrap = false;
+                    xteTF.y = winsTF.y;
+                    xteTF.width = 50;
+                    xteTF.height = 25;
+                    addChild(xteTF);
 
-                battlesTF.x -= 5;
-                winsTF.x -= 15;
-                winsTF.width += 10;
-                avgExpTF.x -= 30;
-                xteTF.x = masteryIcon.x - 55;
-                masteryIcon.x += 5;
-                //battlesTF.border = true; battlesTF.borderColor = 0x00FFFF;
-                //winsTF.border = true; winsTF.borderColor = 0xFF00FF;
-                //avgExpTF.border = true; avgExpTF.borderColor = 0xFFFF00;
-                //xteTF.border = true; xteTF.borderColor = 0xFFFFFF;
+                    battlesTF.x -= 5;
+                    winsTF.x -= 15;
+                    winsTF.width += 10;
+                    avgExpTF.x -= 30;
+                    xteTF.x = masteryIcon.x - 55;
+                    masteryIcon.x += 5;
+                    //battlesTF.border = true; battlesTF.borderColor = 0x00FFFF;
+                    //winsTF.border = true; winsTF.borderColor = 0xFF00FF;
+                    //avgExpTF.border = true; avgExpTF.borderColor = 0xFFFF00;
+                    //xteTF.border = true; xteTF.borderColor = 0xFFFFFF;
+                }
             }
         }
 
@@ -87,8 +90,13 @@ package com.xvm.lobby.ui.profile
                 vehicleTF.textColor = XfwConst.UICOLOR_VALUE;
 
                 var vdata:VOVehicleData = VehicleInfo.get(data.id);
-                if (vdata && vdata.premium == 1)
-                    vehicleTF.textColor = XfwConst.UICOLOR_GOLD;
+                if (vdata)
+                {
+                    if (vdata.premium == 1)
+                    {
+                        vehicleTF.textColor = XfwConst.UICOLOR_GOLD;
+                    }
+                }
 
                 if (Config.networkServicesSettings.statAwards)
                 {

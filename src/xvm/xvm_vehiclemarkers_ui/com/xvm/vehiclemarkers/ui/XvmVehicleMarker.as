@@ -158,10 +158,13 @@ package com.xvm.vehiclemarkers.ui
                         curHealth: newHealth
                     });
                     // BattleState may not be updated yet, but {{my-frags}} macro should display correct value in the damage message
-                    if (newHealth <= 0 && damageFlag == Defines.FROM_PLAYER)
+                    if (newHealth <= 0)
                     {
-                        updatePlayerFrags();
-                        //Logger.add("frags=" + BattleState.playerFrags);
+                        if (damageFlag == Defines.FROM_PLAYER)
+                        {
+                            updatePlayerFrags();
+                            //Logger.add("frags=" + BattleState.playerFrags);
+                        }
                     }
                     playerState.dispatchEvents();
                     invalidate(INVALIDATE_DATA);

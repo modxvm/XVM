@@ -82,9 +82,24 @@ package com.xvm.lobby.widgets
             for (var i:int = 0; i < cfg.length; ++i)
             {
                 var w:CWidget = ObjectConverter.convertData(cfg[i], CWidget);
-                if (w != null && w.enabled && w.type == type && w.layer.toLowerCase() == layer && w.formats && w.formats.length > 0)
+                if (w != null)
                 {
-                    res.push.apply(this, w.clone().formats); // faster than Array.concat()
+                    if (w.enabled)
+                    {
+                        if (w.type == type)
+                        {
+                            if (w.layer.toLowerCase() == layer)
+                            {
+                                if (w.formats)
+                                {
+                                    if (w.formats.length > 0)
+                                    {
+                                        res.push.apply(this, w.clone().formats); // faster than Array.concat()
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
             return res;

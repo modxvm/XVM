@@ -55,9 +55,12 @@ package com.xvm.lobby.ui.profile
             try
             {
                 super.draw();
-                if (xfw_group && xfw_group.unitRendererLinkage != getQualifiedClassName(UI_StatisticsDashLineTextItemIRenderer))
+                if (xfw_group)
                 {
-                    xfw_group.unitRendererLinkage = getQualifiedClassName(UI_StatisticsDashLineTextItemIRenderer);
+                    if (xfw_group.unitRendererLinkage != getQualifiedClassName(UI_StatisticsDashLineTextItemIRenderer))
+                    {
+                        xfw_group.unitRendererLinkage = getQualifiedClassName(UI_StatisticsDashLineTextItemIRenderer);
+                    }
                 }
             }
             catch (ex:Error)

@@ -90,9 +90,12 @@ package com.xvm.battle.battleloading
 
         private function update():void
         {
-            if(clock && clockFormat)
+            if (clock)
             {
-                clock.text = XfwUtils.FormatDate(clockFormat, new Date());
+                if (clockFormat)
+                {
+                    clock.text = XfwUtils.FormatDate(clockFormat, new Date());
+                }
             }
         }
     }

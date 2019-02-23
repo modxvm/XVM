@@ -36,9 +36,12 @@ package com.xvm.infrastructure
             for (var i:int = 0; i < len; ++i)
             {
                 var mod:IXvmView = mods[i] as IXvmView;
-                if (mod && mod.isActive)
+                if (mod)
                 {
-                    XfwUtils.safeCall(mod, mod.onConfigLoaded, [e]);
+                    if (mod.isActive)
+                    {
+                        XfwUtils.safeCall(mod, mod.onConfigLoaded, [e]);
+                    }
                 }
             }
         }

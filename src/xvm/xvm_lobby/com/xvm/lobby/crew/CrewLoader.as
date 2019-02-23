@@ -78,10 +78,13 @@ package com.xvm.lobby.crew
 
             var data:TankmanRoleVO = TankmanRoleVO(renderer.data);
 
-            if (App.utils.commons.isRightButton(e) && renderer.enabled)
+            if (App.utils.commons.isRightButton(e))
             {
-                App.contextMenuMgr.show(CONTEXT_MENU_HANDLER_TYPE.CREW, this, { "tankmanID": (!data.tankmanID || data.tankmanID < 0) ? 0 : data.tankmanID });
-                App.toolTipMgr.hide();
+                if (renderer.enabled)
+                {
+                    App.contextMenuMgr.show(CONTEXT_MENU_HANDLER_TYPE.CREW, this, { "tankmanID": (!data.tankmanID || data.tankmanID < 0) ? 0 : data.tankmanID });
+                    App.toolTipMgr.hide();
+                }
             }
         }
 
@@ -197,8 +200,13 @@ package com.xvm.lobby.crew
             //CASE 2.3 : actual tankman has last skill unset
             //conserve the bestTankman
             var lastSkill:Object = (tankman.skills.length ? tankman.skills[tankman.skills.length - 1] : null);
-            if (lastSkill && !lastSkill.hasOwnProperty("id"))
-                return false;
+            if (lastSkill)
+            {
+                if (!lastSkill.hasOwnProperty("id"))
+                {
+                    return false;
+                }
+            }
 
             //CASE 2.4 : bestTankman has the same number of skills that the actualTankman
             //if the bestTankman's lastskilllevel is < that actualTankman's

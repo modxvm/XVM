@@ -270,9 +270,12 @@ package com.xvm.battle.battleloading
 
         private function onPlayerStateChanged(e:PlayerStateEvent):void
         {
-            if (_model && _model.vehicleID == e.vehicleID)
+            if (_model)
             {
-                ui.invalidate2(INVALIDATE_PLAYER_STATE);
+                if (_model.vehicleID == e.vehicleID)
+                {
+                    ui.invalidate2(INVALIDATE_PLAYER_STATE);
+                }
             }
         }
 
@@ -283,9 +286,12 @@ package com.xvm.battle.battleloading
 
         private function onClanIconLoaded(vehicleID:Number, playerName:String):void
         {
-            if (_model && _model.vehicleID == vehicleID)
+            if (_model)
             {
-                ui.invalidate2(INVALIDATE_PLAYER_STATE);
+                if (_model.vehicleID == vehicleID)
+                {
+                    ui.invalidate2(INVALIDATE_PLAYER_STATE);
+                }
             }
         }
 
@@ -375,18 +381,24 @@ package com.xvm.battle.battleloading
             if (_isLeftPanel)
             {
                 ui.f_vehicleField.x = ui.DEFAULTS.VEHICLE_FIELD_X + cfg.vehicleFieldOffsetXLeft + (ui.DEFAULTS.VEHICLE_FIELD_WIDTH - ui.f_vehicleField.width);
-                if (_model && _model.isIGR)
+                if (_model)
                 {
-                    var bounds:Rectangle = ui.f_vehicleField.getCharBoundaries(0);
-                    ui.f_icoIGR.x = ui.f_vehicleField.x + (bounds ? bounds.x : 0) - ui.f_icoIGR.width >> 0;
+                    if (_model.isIGR)
+                    {
+                        var bounds:Rectangle = ui.f_vehicleField.getCharBoundaries(0);
+                        ui.f_icoIGR.x = ui.f_vehicleField.x + (bounds ? bounds.x : 0) - ui.f_icoIGR.width >> 0;
+                    }
                 }
             }
             else
             {
                 ui.f_vehicleField.x = ui.DEFAULTS.VEHICLE_FIELD_X - cfg.vehicleFieldOffsetXRight;
-                if (_model && _model.isIGR)
+                if (_model)
                 {
-                    ui.f_icoIGR.x = ui.f_vehicleField.x - ui.f_icoIGR.width >> 0;
+                    if (_model.isIGR)
+                    {
+                        ui.f_icoIGR.x = ui.f_vehicleField.x - ui.f_icoIGR.width >> 0;
+                    }
                 }
             }
         }
@@ -421,9 +433,12 @@ package com.xvm.battle.battleloading
         private function createExtraFields():void
         {
             var formats:Array = _isLeftPanel ? cfg.extraFieldsLeft : cfg.extraFieldsRight;
-            if (formats && formats.length)
+            if (formats)
             {
-                extraFields = new ExtraFieldsGroup(this, formats);
+                if (formats.length)
+                {
+                    extraFields = new ExtraFieldsGroup(this, formats);
+                }
             }
         }
 

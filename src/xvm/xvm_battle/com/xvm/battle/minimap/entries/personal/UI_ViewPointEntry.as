@@ -272,30 +272,34 @@ package com.xvm.battle.minimap.entries.personal
                 sectorRight.visible = false;
                 if (_vehicleID == BattleGlobalData.playerVehicleID)
                 {
-                    if (_isLimitUpdated && !isNaN(_leftYawLimit) && !isNaN(_rightYawLimit))
+                    if (_isLimitUpdated)
                     {
-                        _traverseAngle1Line.rotation = _traverseAngle1LineAlt.rotation = _leftYawLimit;
-                        _traverseAngle2Line.rotation = _traverseAngle2LineAlt.rotation = _rightYawLimit;
-                        this._isLimitUpdated = false;
+                        if (!isNaN(_leftYawLimit))
+                        {
+                            if (!isNaN(_rightYawLimit))
+                            {
+                                _traverseAngle1Line.rotation = _traverseAngle1LineAlt.rotation = _leftYawLimit;
+                                _traverseAngle2Line.rotation = _traverseAngle2LineAlt.rotation = _rightYawLimit;
+                                this._isLimitUpdated = false;
+                            }
+                        }
                     }
                     var showVehicleLine:Boolean = playerState.isAlive;
                     var showTraverseAngleLine:Boolean = playerState.isAlive && !isNaN(_leftYawLimit) && !isNaN(_rightYawLimit);
                     var isAltMode:Boolean = UI_Minimap.instance.isAltMode;
                     _vehicleLine.visible = showVehicleLine && !isAltMode;
                     _vehicleLineAlt.visible = showVehicleLine && isAltMode;
-                    _traverseAngle1Line.visible = showTraverseAngleLine && !isAltMode;
-                    _traverseAngle1LineAlt.visible = showTraverseAngleLine && isAltMode;
-                    _traverseAngle2Line.visible = showTraverseAngleLine && !isAltMode;
-                    _traverseAngle2LineAlt.visible = showTraverseAngleLine && isAltMode;
+                    _traverseAngle1Line.visible = _traverseAngle2Line.visible = showTraverseAngleLine && !isAltMode;
+                    _traverseAngle1LineAlt.visible = _traverseAngle2LineAlt.visible = showTraverseAngleLine && isAltMode;
                 }
                 else
                 {
-                    _vehicleLine.visible = false;
-                    _vehicleLineAlt.visible = false;
-                    _traverseAngle1Line.visible = false;
-                    _traverseAngle1LineAlt.visible = false;
-                    _traverseAngle2Line.visible = false;
-                    _traverseAngle2LineAlt.visible = false;
+                    _vehicleLine.visible =
+                        _vehicleLineAlt.visible =
+                        _traverseAngle1Line.visible =
+                        _traverseAngle1LineAlt.visible =
+                        _traverseAngle2Line.visible =
+                        _traverseAngle2LineAlt.visible = false;
                 }
             }
         }

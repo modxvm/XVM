@@ -63,9 +63,12 @@ package com.xvm.lobby.ui.tankcarousel
         {
             if (_enabled)
             {
-                if (!isNaN(cfg.rows) && cfg.rows > 0)
+                if (!isNaN(cfg.rows))
                 {
-                    rows = cfg.rows;
+                    if (cfg.rows > 0)
+                    {
+                        rows = cfg.rows;
+                    }
                 }
             }
             _rowCount = rows;
@@ -79,17 +82,20 @@ package com.xvm.lobby.ui.tankcarousel
                 try
                 {
                 var cellType:String = StringUtils.trim(cfg.cellType.toLowerCase());
-                if (cellType != "small" && cellType != "normal")
+                if (cellType != "small")
                 {
-                    var normalHelper:TankCarouselHelper = new TankCarouselHelper(cfg.normal);
-                    var h:int = (normalHelper.verticalGap + normalHelper.rendererHeight) * _rowCount - normalHelper.verticalGap;
-                    if (App.appHeight - h < THRESHOLD)
+                    if (cellType != "normal")
                     {
-                        cellType = "small";
-                    }
-                    else
-                    {
-                        cellType = "normal";
+                        var normalHelper:TankCarouselHelper = new TankCarouselHelper(cfg.normal);
+                        var h:int = (normalHelper.verticalGap + normalHelper.rendererHeight) * _rowCount - normalHelper.verticalGap;
+                        if (App.appHeight - h < THRESHOLD)
+                        {
+                            cellType = "small";
+                        }
+                        else
+                        {
+                            cellType = "normal";
+                        }
                     }
                 }
 

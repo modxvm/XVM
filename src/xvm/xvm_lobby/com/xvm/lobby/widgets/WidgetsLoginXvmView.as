@@ -28,27 +28,36 @@ package com.xvm.lobby.widgets
 
             var options:VOLobbyMacrosOptions = new VOLobbyMacrosOptions();
             var widgets:Array = filterWidgets(cfg, Defines.WIDGET_TYPE_EXTRAFIELD, Defines.LAYER_BOTTOM);
-            if (widgets != null && widgets.length > 0)
+            if (widgets != null)
             {
-                index = 0;
-                extraFieldsWidgetsBottom = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
-                extraFieldsWidgetsBottom.update(options);
+                if (widgets.length > 0)
+                {
+                    index = 0;
+                    extraFieldsWidgetsBottom = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
+                    extraFieldsWidgetsBottom.update(options);
+                }
             }
 
             widgets = filterWidgets(cfg, Defines.WIDGET_TYPE_EXTRAFIELD, Defines.LAYER_NORMAL);
-            if (widgets != null && widgets.length > 0)
+            if (widgets != null)
             {
-                index = page.getChildIndex(page.loginViewStack);
-                extraFieldsWidgetsNormal = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
-                extraFieldsWidgetsNormal.update(options);
+                if (widgets.length > 0)
+                {
+                    index = page.getChildIndex(page.loginViewStack);
+                    extraFieldsWidgetsNormal = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
+                    extraFieldsWidgetsNormal.update(options);
+                }
             }
 
             widgets = filterWidgets(cfg, Defines.WIDGET_TYPE_EXTRAFIELD, Defines.LAYER_TOP);
-            if (widgets != null && widgets.length > 0)
+            if (widgets != null)
             {
-                index = page.numChildren;
-                extraFieldsWidgetsTop = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
-                extraFieldsWidgetsTop.update(options);
+                if (widgets.length > 0)
+                {
+                    index = page.numChildren;
+                    extraFieldsWidgetsTop = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
+                    extraFieldsWidgetsTop.update(options);
+                }
             }
         }
     }

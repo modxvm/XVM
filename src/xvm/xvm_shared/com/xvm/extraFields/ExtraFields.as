@@ -139,20 +139,23 @@ package com.xvm.extraFields
                 if (child)
                 {
                     child.update(options, bindToIconOffset, offsetX, offsetY, _bounds);
-                    if (_bounds && _layout)
+                    if (_bounds)
                     {
-                        var position:Number = _isFixedLayout ? options.position : (options.index + 1);
-                        switch (_layout)
+                        if (_layout)
                         {
-                            case LAYOUT_HORIZONTAL:
-                                var vx:Number = _bounds.x + (position - 1) * _bounds.width;
-                                x = _isLeftPanel ? vx : App.appWidth - vx;
-                                y = _bounds.y;
-                                break;
-                            case LAYOUT_VERTICAL:
-                                x = _isLeftPanel ? _bounds.x : App.appWidth - _bounds.x;
-                                y = _bounds.y + (position - 1) * _bounds.height;
-                                break;
+                            var position:Number = _isFixedLayout ? options.position : (options.index + 1);
+                            switch (_layout)
+                            {
+                                case LAYOUT_HORIZONTAL:
+                                    var vx:Number = _bounds.x + (position - 1) * _bounds.width;
+                                    x = _isLeftPanel ? vx : App.appWidth - vx;
+                                    y = _bounds.y;
+                                    break;
+                                case LAYOUT_VERTICAL:
+                                    x = _isLeftPanel ? _bounds.x : App.appWidth - _bounds.x;
+                                    y = _bounds.y + (position - 1) * _bounds.height;
+                                    break;
+                            }
                         }
                     }
                 }

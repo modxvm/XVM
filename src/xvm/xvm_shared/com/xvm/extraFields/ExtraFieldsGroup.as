@@ -53,35 +53,50 @@ package com.xvm.extraFields
                 defaultTextFormatConfig = CTextFormat.GetDefaultConfigForBattle(item.isLeftPanel ? TextFormatAlign.LEFT : TextFormatAlign.RIGHT);
             }
             var filteredFormats:Array;
-            if (formats && formats.length)
+            if (formats)
             {
-                filteredFormats = filterFormats(formats, Defines.LAYER_SUBSTRATE);
-                if (filteredFormats && filteredFormats.length)
+                if (formats.length)
                 {
-                    substrate = createNewExtraFields();
-                    substrate.name = "ef_substrate";
-                    item.substrateHolder.addChild(substrate);
-                }
-                filteredFormats = filterFormats(formats, Defines.LAYER_BOTTOM);
-                if (filteredFormats && filteredFormats.length)
-                {
-                    bottom = createNewExtraFields();
-                    bottom.name = "ef_bottom";
-                    item.bottomHolder.addChild(bottom);
-                }
-                filteredFormats = filterFormats(formats, Defines.LAYER_NORMAL);
-                if (filteredFormats && filteredFormats.length)
-                {
-                    normal = createNewExtraFields();
-                    normal.name = "ef_normal";
-                    item.normalHolder.addChild(normal);
-                }
-                filteredFormats = filterFormats(formats, Defines.LAYER_TOP);
-                if (filteredFormats && filteredFormats.length)
-                {
-                    top = createNewExtraFields();
-                    top.name = "ef_top";
-                    item.topHolder.addChild(top);
+                    filteredFormats = filterFormats(formats, Defines.LAYER_SUBSTRATE);
+                    if (filteredFormats)
+                    {
+                        if (filteredFormats.length)
+                        {
+                            substrate = createNewExtraFields();
+                            substrate.name = "ef_substrate";
+                            item.substrateHolder.addChild(substrate);
+                        }
+                    }
+                    filteredFormats = filterFormats(formats, Defines.LAYER_BOTTOM);
+                    if (filteredFormats)
+                    {
+                        if (filteredFormats.length)
+                        {
+                            bottom = createNewExtraFields();
+                            bottom.name = "ef_bottom";
+                            item.bottomHolder.addChild(bottom);
+                        }
+                    }
+                    filteredFormats = filterFormats(formats, Defines.LAYER_NORMAL);
+                    if (filteredFormats)
+                    {
+                        if (filteredFormats.length)
+                        {
+                            normal = createNewExtraFields();
+                            normal.name = "ef_normal";
+                            item.normalHolder.addChild(normal);
+                        }
+                    }
+                    filteredFormats = filterFormats(formats, Defines.LAYER_TOP);
+                    if (filteredFormats)
+                    {
+                        if (filteredFormats.length)
+                        {
+                            top = createNewExtraFields();
+                            top.name = "ef_top";
+                            item.topHolder.addChild(top);
+                        }
+                    }
                 }
             }
 

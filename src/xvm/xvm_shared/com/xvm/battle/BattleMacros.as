@@ -432,16 +432,22 @@ package com.xvm.battle
 
         private static function getDamageSystemColor(o:VOPlayerState):Number
         {
-            if (o && o.damageInfo && o.damageInfo.damageDelta)
+            if (o)
             {
-                switch (o.damageInfo.damageType)
+                if (o.damageInfo)
                 {
-                    case "world_collision":
-                    case "death_zone":
-                    case "drowning":
-                        return getDmgKindValue(o.damageInfo.damageType);
-                    default:
-                        return getDmgSrcColorValue(o);
+                    if (o.damageInfo.damageDelta)
+                    {
+                        switch (o.damageInfo.damageType)
+                        {
+                            case "world_collision":
+                            case "death_zone":
+                            case "drowning":
+                                return getDmgKindValue(o.damageInfo.damageType);
+                            default:
+                                return getDmgSrcColorValue(o);
+                        }
+                    }
                 }
             }
             return NaN;
@@ -550,8 +556,6 @@ package com.xvm.battle
         /*
         public static function getMarkerColorAlias(entityName):String
         {
-            //if (m_entityName != "ally" && m_entityName != "enemy" && m_entityName != "squadman" && m_entityName != "teamKiller")
-            //  Logger.add("m_entityName=" + m_entityName);
             if (entityName == "ally")
                 return "green";
             if (entityName == "squadman")

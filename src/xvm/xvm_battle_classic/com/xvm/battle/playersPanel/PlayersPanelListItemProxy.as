@@ -337,17 +337,29 @@ package com.xvm.battle.playersPanel
 
         private function onPlayerStateChanged(e:PlayerStateEvent):void
         {
-            if (isXVMEnabled && _userProps && e.vehicleID == _vehicleID)
+            if (isXVMEnabled)
             {
-                invalidate(INVALIDATE_PLAYER_STATE);
+                if (_userProps)
+                {
+                    if (e.vehicleID == _vehicleID)
+                    {
+                        invalidate(INVALIDATE_PLAYER_STATE);
+                    }
+                }
             }
         }
 
         private function onMaxPlayerNameTextWidthChanged(e:BooleanEvent):void
         {
-            if (isXVMEnabled && _userProps && e.value == isLeftPanel)
+            if (isXVMEnabled)
             {
-                invalidate(INVALIDATE_UPDATE_POSITIONS);
+                if (_userProps)
+                {
+                    if (e.value == isLeftPanel)
+                    {
+                        invalidate(INVALIDATE_UPDATE_POSITIONS);
+                    }
+                }
             }
         }
 
@@ -361,9 +373,15 @@ package com.xvm.battle.playersPanel
 
         private function onClanIconLoaded(vehicleID:Number, playerName:String):void
         {
-            if (isXVMEnabled && _userProps && playerName == _userProps.userName)
+            if (isXVMEnabled)
             {
-                invalidate(INVALIDATE_PLAYER_STATE);
+                if (_userProps)
+                {
+                    if (playerName == _userProps.userName)
+                    {
+                        invalidate(INVALIDATE_PLAYER_STATE);
+                    }
+                }
             }
         }
 
@@ -441,23 +459,26 @@ package com.xvm.battle.playersPanel
         private function updateStandardFields():void
         {
             //Logger.add("update: " + state);
-            if (state != -1 && state != PLAYERS_PANEL_STATE.HIDDEN)
+            if (state != -1)
             {
-                if (ui.fragsTF.visible)
+                if (state != PLAYERS_PANEL_STATE.HIDDEN)
                 {
-                    updateStandardTextField(ui.fragsTF, isLeftPanel ? mcfg.fragsFormatLeft : mcfg.fragsFormatRight, isLeftPanel ? mcfg.fragsShadowLeft : mcfg.fragsShadowRight);
+                    if (ui.fragsTF.visible)
+                    {
+                        updateStandardTextField(ui.fragsTF, isLeftPanel ? mcfg.fragsFormatLeft : mcfg.fragsFormatRight, isLeftPanel ? mcfg.fragsShadowLeft : mcfg.fragsShadowRight);
+                    }
+                    if (ui.playerNameFullTF.visible)
+                    {
+                        updateStandardTextField(ui.playerNameFullTF, isLeftPanel ? mcfg.nickFormatLeft : mcfg.nickFormatRight, isLeftPanel ? mcfg.nickShadowLeft : mcfg.nickShadowRight);
+                    }
+                    if (ui.vehicleTF.visible)
+                    {
+                        updateStandardTextField(ui.vehicleTF, isLeftPanel ? mcfg.vehicleFormatLeft : mcfg.vehicleFormatRight, isLeftPanel ? mcfg.vehicleShadowLeft : mcfg.vehicleShadowRight);
+                    }
+                    updateVehicleLevel();
+                    updateSquadIcon();
+                    updateBadgeIcon();
                 }
-                if (ui.playerNameFullTF.visible)
-                {
-                    updateStandardTextField(ui.playerNameFullTF, isLeftPanel ? mcfg.nickFormatLeft : mcfg.nickFormatRight, isLeftPanel ? mcfg.nickShadowLeft : mcfg.nickShadowRight);
-                }
-                if (ui.vehicleTF.visible)
-                {
-                    updateStandardTextField(ui.vehicleTF, isLeftPanel ? mcfg.vehicleFormatLeft : mcfg.vehicleFormatRight, isLeftPanel ? mcfg.vehicleShadowLeft : mcfg.vehicleShadowRight);
-                }
-                updateVehicleLevel();
-                updateSquadIcon();
-                updateBadgeIcon();
             }
         }
 
@@ -512,19 +533,22 @@ package com.xvm.battle.playersPanel
 
         private function updatePositions():void
         {
-            if (state != -1 && state != PLAYERS_PANEL_STATE.HIDDEN)
+            if (state != -1)
             {
-                if (mcfg.standardFields)
+                if (state != PLAYERS_PANEL_STATE.HIDDEN)
                 {
-                    if (isLeftPanel)
+                    if (mcfg.standardFields)
                     {
-                        updateVehicleIconPositionLeft();
-                        updatePositionsLeft();
-                    }
-                    else
-                    {
-                        updateVehicleIconPositionRight();
-                        updatePositionsRight();
+                        if (isLeftPanel)
+                        {
+                            updateVehicleIconPositionLeft();
+                            updatePositionsLeft();
+                        }
+                        else
+                        {
+                            updateVehicleIconPositionRight();
+                            updatePositionsRight();
+                        }
                     }
                 }
             }
@@ -762,50 +786,65 @@ package com.xvm.battle.playersPanel
                 Macros.FormatNumberGlobal(cfg.width, 380),
                 Macros.FormatNumberGlobal(cfg.height, 28));
             var isFixedLayout:Boolean = Macros.FormatBooleanGlobal(ncfg.fixedPosition, false);
-            if (cfg.formats && cfg.formats.length)
+            if (cfg.formats)
             {
-                extraFieldsHidden = new ExtraFields(
-                    cfg.formats,
-                    isLeftPanel,
-                    getSchemeNameForPlayer,
-                    getSchemeNameForVehicle,
-                    bounds,
-                    Macros.FormatStringGlobal(ncfg.layout, ExtraFields.LAYOUT_VERTICAL).toLowerCase() + (isFixedLayout ? "_fixed" : ""),
-                    null,
-                    defaultTextFormatConfig);
-                extraFieldsHidden.alpha = BattleGlobalData.battleLoadingVisible ? 0 : 1;
-                extraFieldsHidden.mouseEnabled = true;
-                extraFieldsHidden.mouseChildren = false;
-                extraFieldsHidden.addEventListener(MouseEvent.MOUSE_MOVE, (BattleXvmMod.battlePageClassic.playersPanel as UI_PlayersPanel).onMouseMoveHandler);
-                extraFieldsHidden.addEventListener(MouseEvent.ROLL_OVER, (BattleXvmMod.battlePageClassic.playersPanel as UI_PlayersPanel).onMouseRollOverHandler);
-                extraFieldsHidden.addEventListener(MouseEvent.ROLL_OUT, (BattleXvmMod.battlePageClassic.playersPanel as UI_PlayersPanel).onMouseRollOutHandler);
-                BattleXvmView.battlePage.addChildAt(extraFieldsHidden, BattleXvmMod.battlePageClassic.getChildIndex(BattleXvmMod.battlePageClassic.playersPanel));
-                //_internal_createMenuForNoneState(mc);
-                //createMouseHandler(_root["extraPanels"]);
+                if (cfg.formats.length)
+                {
+                    extraFieldsHidden = new ExtraFields(
+                        cfg.formats,
+                        isLeftPanel,
+                        getSchemeNameForPlayer,
+                        getSchemeNameForVehicle,
+                        bounds,
+                        Macros.FormatStringGlobal(ncfg.layout, ExtraFields.LAYOUT_VERTICAL).toLowerCase() + (isFixedLayout ? "_fixed" : ""),
+                        null,
+                        defaultTextFormatConfig);
+                    extraFieldsHidden.alpha = BattleGlobalData.battleLoadingVisible ? 0 : 1;
+                    extraFieldsHidden.mouseEnabled = true;
+                    extraFieldsHidden.mouseChildren = false;
+                    extraFieldsHidden.addEventListener(MouseEvent.MOUSE_MOVE, (BattleXvmMod.battlePageClassic.playersPanel as UI_PlayersPanel).onMouseMoveHandler);
+                    extraFieldsHidden.addEventListener(MouseEvent.ROLL_OVER, (BattleXvmMod.battlePageClassic.playersPanel as UI_PlayersPanel).onMouseRollOverHandler);
+                    extraFieldsHidden.addEventListener(MouseEvent.ROLL_OUT, (BattleXvmMod.battlePageClassic.playersPanel as UI_PlayersPanel).onMouseRollOutHandler);
+                    BattleXvmView.battlePage.addChildAt(extraFieldsHidden, BattleXvmMod.battlePageClassic.getChildIndex(BattleXvmMod.battlePageClassic.playersPanel));
+                    //_internal_createMenuForNoneState(mc);
+                    //createMouseHandler(_root["extraPanels"]);
+                }
             }
 
             var formats:Array = isLeftPanel ? pcfg.short.extraFieldsLeft : pcfg.short.extraFieldsRight;
-            if (formats && formats.length)
+            if (formats)
             {
-                extraFieldsShort = new ExtraFieldsGroup(this, formats);
+                if (formats.length)
+                {
+                    extraFieldsShort = new ExtraFieldsGroup(this, formats);
+                }
             }
 
             formats = isLeftPanel ? pcfg.medium.extraFieldsLeft : pcfg.medium.extraFieldsRight;
-            if (formats && formats.length)
+            if (formats)
             {
-                extraFieldsMedium = new ExtraFieldsGroup(this, formats);
+                if (formats.length)
+                {
+                    extraFieldsMedium = new ExtraFieldsGroup(this, formats);
+                }
             }
 
             formats = isLeftPanel ? pcfg.medium2.extraFieldsLeft : pcfg.medium2.extraFieldsRight;
-            if (formats && formats.length)
+            if (formats)
             {
-                extraFieldsLong = new ExtraFieldsGroup(this, formats);
+                if (formats.length)
+                {
+                    extraFieldsLong = new ExtraFieldsGroup(this, formats);
+                }
             }
 
             formats = isLeftPanel ? pcfg.large.extraFieldsLeft : pcfg.large.extraFieldsRight;
-            if (formats && formats.length)
+            if (formats)
             {
-                extraFieldsFull = new ExtraFieldsGroup(this, formats);
+                if (formats.length)
+                {
+                    extraFieldsFull = new ExtraFieldsGroup(this, formats);
+                }
             }
         }
 

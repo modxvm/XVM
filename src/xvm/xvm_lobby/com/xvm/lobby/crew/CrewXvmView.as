@@ -149,11 +149,14 @@ package com.xvm.lobby.crew
 
         private function onEnablePrevCrewSwitched(e:Event):void
         {
-            if (enablePrevCrewCheckBox.enabled && enablePrevCrewCheckBox.selected != savedValue)
+            if (enablePrevCrewCheckBox.enabled)
             {
-                Xfw.cmd(XvmCommands.SAVE_SETTINGS, SETTINGS_AUTO_PREV_CREW + currentInvID, enablePrevCrewCheckBox.selected);
-                savedValue = enablePrevCrewCheckBox.selected;
-                tryPutPrevCrew();
+                if (enablePrevCrewCheckBox.selected != savedValue)
+                {
+                    Xfw.cmd(XvmCommands.SAVE_SETTINGS, SETTINGS_AUTO_PREV_CREW + currentInvID, enablePrevCrewCheckBox.selected);
+                    savedValue = enablePrevCrewCheckBox.selected;
+                    tryPutPrevCrew();
+                }
             }
         }
 

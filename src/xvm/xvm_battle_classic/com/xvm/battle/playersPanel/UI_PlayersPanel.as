@@ -149,12 +149,15 @@ package com.xvm.battle.playersPanel
                 if (xvm_enabled)
                 {
                     // skip disabled modes
-                    if (state != PLAYERS_PANEL_STATE.NONE && m_savedState == PLAYERS_PANEL_STATE.NONE)
+                    if (state != PLAYERS_PANEL_STATE.NONE)
                     {
-                        if (!Macros.FormatBooleanGlobal(cfg[PLAYERS_PANEL_STATE_NAMES[state]].enabled, true))
+                        if (m_savedState == PLAYERS_PANEL_STATE.NONE)
                         {
-                            requestState((state + 1) % PLAYERS_PANEL_STATE_NAMES.length);
-                            return;
+                            if (!Macros.FormatBooleanGlobal(cfg[PLAYERS_PANEL_STATE_NAMES[state]].enabled, true))
+                            {
+                                requestState((state + 1) % PLAYERS_PANEL_STATE_NAMES.length);
+                                return;
+                            }
                         }
                     }
                 }
@@ -279,16 +282,19 @@ package com.xvm.battle.playersPanel
         {
             try
             {
-                if (mopt_expandAreaWidth > 0 && _isMouseRollOver)
+                if (mopt_expandAreaWidth > 0)
                 {
-                    var isInExpandArea:Boolean = (e.stageX < mopt_expandAreaWidth) || (e.stageX > App.appWidth - mopt_expandAreaWidth);
-                    if (isInExpandArea)
+                    if (_isMouseRollOver)
                     {
-                        super.xfw_onListRollOverHandler(e);
-                    }
-                    else
-                    {
-                        super.xfw_onListRollOutHandler(e);
+                        var isInExpandArea:Boolean = (e.stageX < mopt_expandAreaWidth) || (e.stageX > App.appWidth - mopt_expandAreaWidth);
+                        if (isInExpandArea)
+                        {
+                            super.xfw_onListRollOverHandler(e);
+                        }
+                        else
+                        {
+                            super.xfw_onListRollOutHandler(e);
+                        }
                     }
                 }
             }

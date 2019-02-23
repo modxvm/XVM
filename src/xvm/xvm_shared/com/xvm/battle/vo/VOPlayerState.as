@@ -283,13 +283,16 @@ package com.xvm.battle.vo
             var wasAlive:Boolean = VehicleStatus.isAlive(vehicleStatus);
             __vehicleStatus = value;
             updateStatData();
-            if (wasAlive && isDead)
+            if (wasAlive)
             {
-                eventsToDispatch[PlayerStateEvent.VEHICLE_DESTROYED] = true;
-                if (isCurrentPlayer)
+                if (isDead)
                 {
-                    BattleState.playerIsAlive = false;
-                    eventsToDispatch[PlayerStateEvent.CURRENT_VEHICLE_DESTROYED] = true;
+                    eventsToDispatch[PlayerStateEvent.VEHICLE_DESTROYED] = true;
+                    if (isCurrentPlayer)
+                    {
+                        BattleState.playerIsAlive = false;
+                        eventsToDispatch[PlayerStateEvent.CURRENT_VEHICLE_DESTROYED] = true;
+                    }
                 }
             }
         }

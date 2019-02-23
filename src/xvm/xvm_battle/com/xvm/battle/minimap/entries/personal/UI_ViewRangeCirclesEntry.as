@@ -429,12 +429,15 @@ class Circles extends Sprite implements IDisposable
         for (i = 0; i < len; ++i)
         {
             var rule:Object = cfg.special[i];
-            if (rule && rule[vehicleKey])
+            if (rule)
             {
-                c = CMinimapCircle(cfg.special[i][vehicleKey]);
-                if (!c.enabled)
-                    continue;
-                res.push(new MinimapCircleData(c));
+                if (rule[vehicleKey])
+                {
+                    c = CMinimapCircle(cfg.special[i][vehicleKey]);
+                    if (!c.enabled)
+                        continue;
+                    res.push(new MinimapCircleData(c));
+                }
             }
         }
 
@@ -450,9 +453,12 @@ class Circles extends Sprite implements IDisposable
         for (var i:int = 0; i < len; ++i)
         {
             var c:CMinimapCircle = cfg.parsedView[i];
-            if (c.enabled && isNaN(c.distance))
+            if (c.enabled)
             {
-                res.push(new MinimapCircleData(c));
+                if (isNaN(c.distance))
+                {
+                    res.push(new MinimapCircleData(c));
+                }
             }
         }
 

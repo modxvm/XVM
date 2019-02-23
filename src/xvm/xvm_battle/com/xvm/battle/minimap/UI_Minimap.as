@@ -372,24 +372,33 @@ package com.xvm.battle.minimap
             try
             {
                 var target:Sprite = e.target as Sprite;
-                if (target != null && target.hitArea == mapHit && e.buttonIdx == MouseEventEx.LEFT_BUTTON && Config.networkServicesSettings.xmqp)
+                if (target != null)
                 {
-                    //Logger.addObject(e);
-                    var minimap_mouse_x:int = int(mapHit.mouseX);
-                    var minimap_mouse_y:int = int(mapHit.mouseY);
-                    minimap_path = [[minimap_mouse_x, minimap_mouse_y]];
-                    if (!minimap_path_mc)
+                    if (target.hitArea == mapHit)
                     {
-                        minimap_path_mc = new Sprite();
+                        if (e.buttonIdx == MouseEventEx.LEFT_BUTTON)
+                        {
+                            if (Config.networkServicesSettings.xmqp)
+                            {
+                                //Logger.addObject(e);
+                                var minimap_mouse_x:int = int(mapHit.mouseX);
+                                var minimap_mouse_y:int = int(mapHit.mouseY);
+                                minimap_path = [[minimap_mouse_x, minimap_mouse_y]];
+                                if (!minimap_path_mc)
+                                {
+                                    minimap_path_mc = new Sprite();
+                                }
+                                else
+                                {
+                                    minimap_path_mc.graphics.clear();
+                                }
+                                minimap_path_mc.graphics.lineStyle(1, Config.networkServicesSettings.x_minimap_clicks_color, 0.3);
+                                minimap_path_mc.graphics.moveTo(minimap_mouse_x, minimap_mouse_y);
+                                minimap_path_mc.graphics.lineTo(minimap_mouse_x + 0.1, minimap_mouse_y + 0.1);
+                                mapHit.addChild(minimap_path_mc);
+                            }
+                        }
                     }
-                    else
-                    {
-                        minimap_path_mc.graphics.clear();
-                    }
-                    minimap_path_mc.graphics.lineStyle(1, Config.networkServicesSettings.x_minimap_clicks_color, 0.3);
-                    minimap_path_mc.graphics.moveTo(minimap_mouse_x, minimap_mouse_y);
-                    minimap_path_mc.graphics.lineTo(minimap_mouse_x + 0.1, minimap_mouse_y + 0.1);
-                    mapHit.addChild(minimap_path_mc);
                 }
             }
             catch (ex:Error)
@@ -400,21 +409,27 @@ package com.xvm.battle.minimap
 
         private function onMouseMove(e:MouseEventEx):void
         {
-            if (minimap_path != null && minimap_path.length < _MAX_MINIMAP_PATH_LENGTH)
+            if (minimap_path != null)
             {
-                var target:Sprite = e.target as Sprite;
-                if (target != null && target.hitArea == mapHit)
+                if (minimap_path.length < _MAX_MINIMAP_PATH_LENGTH)
                 {
-                    //Logger.addObject(e);
-                    var minimap_mouse_x:int = int(mapHit.mouseX);
-                    var minimap_mouse_y:int = int(mapHit.mouseY);
-
-                    var lastpos:Array = minimap_path[minimap_path.length - 1];
-                    var distance:Number = Math.sqrt(Math.pow(lastpos[0] - minimap_mouse_x, 2) + Math.pow(lastpos[1] - minimap_mouse_y, 2));
-                    if (distance > 10)
+                    var target:Sprite = e.target as Sprite;
+                    if (target != null)
                     {
-                        minimap_path.push([minimap_mouse_x, minimap_mouse_y]);
-                        minimap_path_mc.graphics.lineTo(minimap_mouse_x, minimap_mouse_y);
+                        if (target.hitArea == mapHit)
+                        {
+                            //Logger.addObject(e);
+                            var minimap_mouse_x:int = int(mapHit.mouseX);
+                            var minimap_mouse_y:int = int(mapHit.mouseY);
+
+                            var lastpos:Array = minimap_path[minimap_path.length - 1];
+                            var distance:Number = Math.sqrt(Math.pow(lastpos[0] - minimap_mouse_x, 2) + Math.pow(lastpos[1] - minimap_mouse_y, 2));
+                            if (distance > 10)
+                            {
+                                minimap_path.push([minimap_mouse_x, minimap_mouse_y]);
+                                minimap_path_mc.graphics.lineTo(minimap_mouse_x, minimap_mouse_y);
+                            }
+                        }
                     }
                 }
             }

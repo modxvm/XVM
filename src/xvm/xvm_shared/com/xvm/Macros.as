@@ -491,13 +491,16 @@ package com.xvm
                 if (res != format_str)
                 {
                     var iMacroPos:int = res.indexOf("{{");
-                    if (iMacroPos >= 0 && res.indexOf("}}", iMacroPos) >= 0)
+                    if (iMacroPos >= 0)
                     {
-                        //Logger.add("recursive: " + playerName + " " + res);
-                        var _Format_out:MacrosResult = new MacrosResult();
-                        res = _Format(res, options, _Format_out);
-                        __out.isStaticMacro &&= _Format_out.isStaticMacro;
-                        __out.isHybridMacro ||= _Format_out.isHybridMacro;
+                        if (res.indexOf("}}", iMacroPos) >= 0)
+                        {
+                            //Logger.add("recursive: " + playerName + " " + res);
+                            var _Format_out:MacrosResult = new MacrosResult();
+                            res = _Format(res, options, _Format_out);
+                            __out.isStaticMacro &&= _Format_out.isStaticMacro;
+                            __out.isHybridMacro ||= _Format_out.isHybridMacro;
+                        }
                     }
                 }
             }
@@ -613,13 +616,16 @@ package com.xvm
                 {
                     //Logger.add(parts + " | " + options.getSubname());
                     var py_result:Array = Xfw.cmd(XvmCommandsInternal.PYTHON_MACRO, options.getSubname());
-                    if (py_result && py_result.length == 2)
+                    if (py_result)
                     {
-                        if (!py_result[1])
+                        if (py_result.length == 2)
                         {
-                            __out.isStaticMacro = false;
+                            if (!py_result[1])
+                            {
+                                __out.isStaticMacro = false;
+                            }
+                            value = py_result[0];
                         }
-                        value = py_result[0];
                     }
                 }
                 else
@@ -722,10 +728,13 @@ package com.xvm
                     case "<":
                         if (section < 4)
                         {
-                            if (i < len - 1 && macroArr[i + 1] == "=")
+                            if (i < len - 1)
                             {
-                                ++i;
-                                ch += macroArr[i];
+                                if (macroArr[i + 1] == "=")
+                                {
+                                    ++i;
+                                    ch += macroArr[i];
+                                }
                             }
                             parts[PART_MATCH_OP] = ch;
                             nextSection = 5;
@@ -800,9 +809,12 @@ package com.xvm
             // substitute
             //Logger.add("type:" + (typeof value) + " value:" + value + "name:" + name + " norm:" + norm + " def:" + def);
 
-            if (typeof value == "number" && isNaN(value))
+            if (typeof value == "number")
             {
-                return prepareValue(NaN, name, norm, def, vehCD);
+                if (isNaN(value))
+                {
+                    return prepareValue(NaN, name, norm, def, vehCD);
+                }
             }
 
             var res:String = value;
@@ -813,9 +825,12 @@ package com.xvm
                 {
                     return prepareValue(NaN, name, norm, def, vehCD);
                 }
-                if (typeof value == "number" && isNaN(value))
+                if (typeof value == "number")
                 {
-                    return prepareValue(NaN, name, norm, def, vehCD);
+                    if (isNaN(value))
+                    {
+                        return prepareValue(NaN, name, norm, def, vehCD);
+                    }
                 }
                 res = value;
             }
@@ -866,9 +881,12 @@ package com.xvm
 
             var fmt:String = parts[PART_FMT];
             var suf:String = parts[PART_SUF];
-            if (fmt == null && suf == null)
+            if (fmt == null)
             {
-                return res;
+                if (suf == null)
+                {
+                    return res;
+                }
             }
 
             var fmt_suf_key:String = fmt + "," + suf + "," + res;
@@ -968,8 +986,13 @@ package com.xvm
                 case "xtdb":
                 case "xvwtr":
                 case "xwr":
-                    if (name == "r" && Config.networkServicesSettings.scale != "xvm")
-                        break;
+                    if (name == "r")
+                    {
+                        if (Config.networkServicesSettings.scale != "xvm")
+                        {
+                            break;
+                        }
+                    }
                     if (value == 'XX')
                     {
                         value = 100;
@@ -1148,13 +1171,16 @@ package com.xvm
             pdata["region"] = Config.config.region;
             // {{comment}}
             pdata["comment"] = stat.xvm_contact_data ? stat.xvm_contact_data.comment : null;
-            if (stat.xvm_contact_data && stat.xvm_contact_data.nick)
+            if (stat.xvm_contact_data)
             {
-                // update static macros {{nick}} and {{name}}
-                pdata["nick"] = stat.xvm_contact_data.nick + (pdata["clan"] || "");
-                pdata["name"] = stat.xvm_contact_data.nick;
-                // clear static cache
-                m_macros_cache_players[pname] = null;
+                if (stat.xvm_contact_data.nick)
+                {
+                    // update static macros {{nick}} and {{name}}
+                    pdata["nick"] = stat.xvm_contact_data.nick + (pdata["clan"] || "");
+                    pdata["name"] = stat.xvm_contact_data.nick;
+                    // clear static cache
+                    m_macros_cache_players[pname] = null;
+                }
             }
             // {{avglvl}}
             pdata["avglvl"] = stat.avglvl;

@@ -38,11 +38,17 @@ package com.xvm.lobby.ui.contacts
                 if (isInvalid(InvalidationType.DATA))
                 {
                     var myData:ITreeItemInfo = this.getData() as ITreeItemInfo;
-                    if (myData && !myData.isBrunch && myData.data)
+                    if (myData)
                     {
-                        if (this.xfw_contactItem == null)
+                        if (!myData.isBrunch)
                         {
-                            this.xfw_contactItem = new UI_ContactItem();
+                            if (myData.data)
+                            {
+                                if (this.xfw_contactItem == null)
+                                {
+                                    this.xfw_contactItem = new UI_ContactItem();
+                                }
+                            }
                         }
                     }
                 }
@@ -55,10 +61,13 @@ package com.xvm.lobby.ui.contacts
                 if (this.xfw_currentContentItem is ContactItem)
                 {
                     var d:ContactsListTreeItemInfo = data as ContactsListTreeItemInfo;
-                    if (d && d.data.xvm_contact_data)
+                    if (d)
                     {
-                        nickImg.visible = Boolean(d.data.xvm_contact_data.nick);
-                        commentImg.visible = Boolean(d.data.xvm_contact_data.comment);
+                        if (d.data.xvm_contact_data)
+                        {
+                            nickImg.visible = Boolean(d.data.xvm_contact_data.nick);
+                            commentImg.visible = Boolean(d.data.xvm_contact_data.comment);
+                        }
                     }
                 }
             }
@@ -75,15 +84,18 @@ package com.xvm.lobby.ui.contacts
             if (currentContentItem is ContactItem)
             {
                 var d:ContactsListTreeItemInfo = data as ContactsListTreeItemInfo;
-                if (d && d.data.xvm_contact_data)
+                if (d)
                 {
-                    var comment:String = d.data.xvm_contact_data.comment;
-                    if (comment)
+                    if (d.data.xvm_contact_data)
                     {
-                        App.toolTipMgr.show(d.data.userProps.userName +
-                            (d.data.userProps.clanAbbrev ? "[" + d.data.userProps.clanAbbrev + "]" : "") +
-                            "\n\n<font color='" + XfwUtils.toHtmlColor(XfwConst.UICOLOR_LABEL) + "'>" + Utils.fixImgTag(comment) + "</font>");
-                        return;
+                        var comment:String = d.data.xvm_contact_data.comment;
+                        if (comment)
+                        {
+                            App.toolTipMgr.show(d.data.userProps.userName +
+                                (d.data.userProps.clanAbbrev ? "[" + d.data.userProps.clanAbbrev + "]" : "") +
+                                "\n\n<font color='" + XfwUtils.toHtmlColor(XfwConst.UICOLOR_LABEL) + "'>" + Utils.fixImgTag(comment) + "</font>");
+                            return;
+                        }
                     }
                 }
             }

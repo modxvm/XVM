@@ -82,14 +82,20 @@ package com.xvm.battle.minimap.entries
         private static function createExtraFields(entry:IMinimapVehicleEntry):void
         {
             var formats:Array = Config.config.minimap.labels.formats;
-            if (formats && formats.length)
+            if (formats)
             {
-                entry.extraFields = new ExtraFieldsGroup(UI_Minimap.instance, formats);
+                if (formats.length)
+                {
+                    entry.extraFields = new ExtraFieldsGroup(UI_Minimap.instance, formats);
+                }
             }
             formats = Config.config.minimapAlt.labels.formats;
-            if (formats && formats.length)
+            if (formats)
             {
-                entry.extraFieldsAlt = new ExtraFieldsGroup(UI_Minimap.instance, formats);
+                if (formats.length)
+                {
+                    entry.extraFieldsAlt = new ExtraFieldsGroup(UI_Minimap.instance, formats);
+                }
             }
         }
 

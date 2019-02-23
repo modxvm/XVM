@@ -565,10 +565,13 @@ package com.xvm.extraFields
                     needAlign = true;
                 }
 
-                if (bounds && _bounds != bounds)
+                if (bounds)
                 {
-                    _bounds = bounds;
-                    needAlign = true;
+                    if (_bounds != bounds)
+                    {
+                        _bounds = bounds;
+                        needAlign = true;
+                    }
                 }
 
                 var value:*;
@@ -604,19 +607,25 @@ package com.xvm.extraFields
                 if (_cfg.width != null)
                 {
                     value = Macros.FormatNumber(_cfg.width, options);
-                    if (!isNaN(value) && _widthValue != value)
+                    if (!isNaN(value))
                     {
-                        _widthValue = value;
-                        needAlign = true;
+                        if (_widthValue != value)
+                        {
+                            _widthValue = value;
+                            needAlign = true;
+                        }
                     }
                 }
                 if (_cfg.height != null)
                 {
                     value = Macros.FormatNumber(_cfg.height, options);
-                    if (!isNaN(value) && _heightValue != value)
+                    if (!isNaN(value))
                     {
-                        _heightValue = value;
-                        needAlign = true;
+                        if (_heightValue != value)
+                        {
+                            _heightValue = value;
+                            needAlign = true;
+                        }
                     }
                 }
                 if (_cfg.alpha != null)
@@ -669,10 +678,13 @@ package com.xvm.extraFields
                         _textField.backgroundColor = value;
                     }
                 }
-                if (_cfg.bindToIcon && _bindToIconOffset != bindToIconOffset)
+                if (_cfg.bindToIcon)
                 {
-                    _bindToIconOffset = bindToIconOffset;
-                    needAlign = true;
+                    if (_bindToIconOffset != bindToIconOffset)
+                    {
+                        _bindToIconOffset = bindToIconOffset;
+                        needAlign = true;
+                    }
                 }
                 if (_cfg.textFormat)
                 {

@@ -57,9 +57,12 @@ package com.xvm.lobby.online
             var cfg:COnlineServers = Config.config.login.onlineServers;
             cfg.currentServerFormat = "{server}"; // at login screen it's not relevant
             OnlineServers.initFeature(cfg.enabled && Config.config.__wgApiAvailable, UPDATE_INTERVAL);
-            if (cfg.enabled && Config.config.__wgApiAvailable)
+            if (cfg.enabled)
             {
-                onlineControl = page.addChild(new OnlineServersView(cfg)) as OnlineServersView;
+                if (Config.config.__wgApiAvailable)
+                {
+                    onlineControl = page.addChild(new OnlineServersView(cfg)) as OnlineServersView;
+                }
             }
         }
 

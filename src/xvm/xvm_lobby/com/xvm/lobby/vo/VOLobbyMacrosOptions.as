@@ -169,9 +169,12 @@ package com.xvm.lobby.vo
         public function set vehicleData(value:VOVehicleData):void
         {
             _vehicleData = value;
-            if (_vehicleData != null && vehCD != _vehicleData.vehCD)
+            if (_vehicleData != null)
             {
-                vehCD = _vehicleData.vehCD;
+                if (vehCD != _vehicleData.vehCD)
+                {
+                    vehCD = _vehicleData.vehCD;
+                }
             }
         }
 
