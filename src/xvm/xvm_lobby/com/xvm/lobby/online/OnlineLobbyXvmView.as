@@ -16,6 +16,9 @@ package com.xvm.lobby.online
 
     public class OnlineLobbyXvmView extends XvmViewBase
     {
+        // currently data is updated once per minute on XVM server
+        private static const UPDATE_INTERVAL:int = 60000;
+
         private var _isHangar:Boolean = false;
         private var cfg:COnlineServers;
 
@@ -64,8 +67,7 @@ package com.xvm.lobby.online
         private function init():void
         {
             cfg = Config.config.hangar.onlineServers;
-            cfg.updateInterval = 60000; // currently data is updated once per minute on XVM server
-            OnlineServers.initFeature(cfg.enabled && Config.config.__wgApiAvailable, cfg.updateInterval);
+            OnlineServers.initFeature(cfg.enabled && Config.config.__wgApiAvailable, UPDATE_INTERVAL);
             if (cfg.enabled && Config.config.__wgApiAvailable)
             {
                 var layer:String = cfg.layer.toLowerCase();

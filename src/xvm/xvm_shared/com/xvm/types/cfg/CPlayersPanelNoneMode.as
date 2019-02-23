@@ -10,12 +10,12 @@ package com.xvm.types.cfg
     {
         public var enabled:*;
         public var expandAreaWidth:*;
-        public var layout:String;
+        public var extraFields:CPlayersPanelNoneModeExtraFields;
         public var fixedPosition:*;
         public var inviteIndicatorAlpha:*;
         public var inviteIndicatorX:*;
         public var inviteIndicatorY:*;
-        public var extraFields:CPlayersPanelNoneModeExtraFields;
+        public var layout:String;
 
         public function clone():*
         {

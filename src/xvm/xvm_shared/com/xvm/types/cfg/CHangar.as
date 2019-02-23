@@ -12,26 +12,17 @@ package com.xvm.types.cfg
         public var enableFreeXpLocker:*;
         public var hidePricesInTechTree:*;
         public var masteryMarkInTechTree:*;
-        public var allowExchangeXPInTechTree:*;
         public var enableCrewAutoReturn:*;
         public var crewReturnByDefault:*;
         public var crewMaxPerksCount:*;
-        public var barracksShowFlags:*;
-        public var barracksShowSkills:*;
-        public var enableEquipAutoReturn:*;
-        public var blockVehicleIfLowAmmo:*;
-        public var lowAmmoPercentage:*;
         public var pingServers:CPingServers;
         public var onlineServers:COnlineServers;
         public var serverInfo:CHangarElement;
-        public var commonQuests: CHangarElement;
-        public var personalQuests: CHangarElement;
         public var vehicleName: CHangarElement;
         public var showBuyPremiumButton:*;
         public var showPremiumShopButton:*;
         public var showCreateSquadButtonText:*;
         public var showBattleTypeSelectorText:*;
-        public var notificationsButtonType:String;
         public var carousel:CCarousel;
         public var widgets:Array;
 

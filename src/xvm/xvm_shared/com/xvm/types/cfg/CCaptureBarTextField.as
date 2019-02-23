@@ -8,11 +8,11 @@ package com.xvm.types.cfg
 
     public dynamic class CCaptureBarTextField implements ICloneable
     {
+        public var done:*;
+        public var format:*;
+        public var shadow:CShadow;
         public var x:*;
         public var y:*;
-        public var format:*;
-        public var done:*;
-        public var shadow:CShadow;
 
         public function clone():*
         {

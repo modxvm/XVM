@@ -8,13 +8,13 @@ package com.xvm.types.cfg
 
     public dynamic class CCarouselCellStandardField implements ICloneable
     {
-        public var enabled:*;
+        public var alpha:*;
         public var dx:*;
         public var dy:*;
-        public var alpha:*;
+        public var enabled:*;
         public var scale:*;
-        public var textFormat:CTextFormat;
         public var shadow:CShadow;
+        public var textFormat:CTextFormat;
 
         public function clone():*
         {

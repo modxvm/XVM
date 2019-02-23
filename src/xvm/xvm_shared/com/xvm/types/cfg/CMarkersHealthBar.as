@@ -9,17 +9,17 @@ package com.xvm.types.cfg
 
     public dynamic class CMarkersHealthBar implements ICloneable
     {
-        public var enabled:*;
-        public var x:*;
-        public var y:*;
         public var alpha:*;
+        public var border:CMarkersHealthBarBorder;
         public var color:*;
+        public var damage:CMarkersHealthBarDamage;
+        public var enabled:*;
+        public var fill:CMarkersHealthBarFill;
+        public var height:*;
         public var lcolor:*;
         public var width:*;
-        public var height:*;
-        public var border:CMarkersHealthBarBorder;
-        public var fill:CMarkersHealthBarFill;
-        public var damage:CMarkersHealthBarDamage;
+        public var x:*;
+        public var y:*;
 
         public function clone():*
         {
@@ -28,35 +28,27 @@ package com.xvm.types.cfg
 
         internal function applyGlobalBattleMacros():void
         {
-            enabled = Macros.FormatBooleanGlobal(enabled, true);
-            x = Macros.FormatNumberGlobal(x);
-            y = Macros.FormatNumberGlobal(y);
-            width = Macros.FormatNumberGlobal(width);
-            height = Macros.FormatNumberGlobal(height);
             if (border)
             {
                border.applyGlobalBattleMacros();
-            }
-            if (fill)
-            {
-                fill.applyGlobalBattleMacros();
-            }
-            if (damage)
-            {
-                damage.applyGlobalBattleMacros();
             }
             if (color == null)
             {
                 color = "{{c:system}}";
             }
+            if (damage)
+            {
+                damage.applyGlobalBattleMacros();
+            }
+            enabled = Macros.FormatBooleanGlobal(enabled, true);
+            height = Macros.FormatNumberGlobal(height);
             if (lcolor == null)
             {
                 lcolor = "{{c:system}}";
             }
-            // do not apply Macros.FormatNumberGlobal(), because Macros.FormatNumber() used:
-            // alpha
-            // color
-            // lcolor
+            width = Macros.FormatNumberGlobal(width);
+            x = Macros.FormatNumberGlobal(x);
+            y = Macros.FormatNumberGlobal(y);
         }
     }
 }

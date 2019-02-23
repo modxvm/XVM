@@ -8,9 +8,9 @@ package com.xvm.types.cfg
 
     public dynamic class CTextsXvmUser implements ICloneable
     {
-        public var on:String;
-        public var off:String;
         public var none:String;
+        public var off:String;
+        public var on:String;
 
         public function clone():*
         {

@@ -34,7 +34,7 @@ package com.xvm.battle.minimap
     UI_ViewRangeCirclesEntry;
     UI_VehicleEntry;
 
-    public /*dynamic*/ class UI_Minimap extends minimapUI implements IExtraFieldGroupHolder
+    public class UI_Minimap extends minimapUI implements IExtraFieldGroupHolder
     {
         static private const _MAX_MINIMAP_PATH_LENGTH:int = 20;
         static private var _cfg:CMinimap;

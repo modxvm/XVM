@@ -14,7 +14,6 @@ package com.xvm.types.cfg
         public var x:*;
         public var y:*;
         public var alpha:*;
-        public var color:*;
         public var maxScale:*;
         public var offsetX:*;
         public var offsetY:*;
@@ -30,12 +29,9 @@ package com.xvm.types.cfg
             showSpeaker = Macros.FormatBooleanGlobal(showSpeaker, true);
             x = Macros.FormatNumberGlobal(x);
             y = Macros.FormatNumberGlobal(y);
-            color = Macros.FormatNumberGlobal(color);
             maxScale = Macros.FormatNumberGlobal(maxScale, 100);
             offsetX = Macros.FormatNumberGlobal(offsetX, 0);
             offsetY = Macros.FormatNumberGlobal(offsetY, 0);
-            // do not apply Macros.FormatNumberGlobal(), because Macros.FormatNumber() used:
-            // alpha
         }
     }
 }

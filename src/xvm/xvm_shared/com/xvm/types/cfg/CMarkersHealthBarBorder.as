@@ -20,14 +20,11 @@ package com.xvm.types.cfg
 
         internal function applyGlobalBattleMacros():void
         {
-            size = Macros.FormatNumberGlobal(size, 1);
             if (color == null)
             {
                 color = "{{c:system}}";
             }
-            // do not apply Macros.FormatNumberGlobal(), because Macros.FormatNumber() used:
-            // alpha
-            // color
+            size = Macros.FormatNumberGlobal(size, 1);
         }
     }
 }

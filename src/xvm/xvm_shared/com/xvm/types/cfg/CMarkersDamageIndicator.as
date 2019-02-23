@@ -9,11 +9,11 @@ package com.xvm.types.cfg
 
     public dynamic class CMarkersDamageIndicator implements ICloneable
     {
+        public var alpha:*;
         public var enabled:*;
         public var showText:*;
         public var x:*;
         public var y:*;
-        public var alpha:*;
 
         public function clone():*
         {
@@ -24,10 +24,6 @@ package com.xvm.types.cfg
         {
             enabled = Macros.FormatBooleanGlobal(enabled, true);
             showText = Macros.FormatBooleanGlobal(showText, true);
-            // do not apply Macros.FormatNumberGlobal(), because Macros.FormatNumber() used:
-            // x
-            // y
-            // alpha
         }
     }
 }

@@ -9,33 +9,28 @@ package com.xvm.types.cfg
 
     public dynamic class CMinimapLine implements ICloneable
     {
-        public var enabled:*;
-        public var inmeters:*;
-        public var color:*;
-        public var from:*;
-        public var to:*;
-        public var thickness:*;
         public var alpha:*;
+        public var color:*;
+        public var enabled:*;
+        public var from:*;
+        public var inmeters:*;
+        public var thickness:*;
+        public var to:*;
 
         public function clone():*
         {
             throw new Error("clone() method is not implemented");
         }
 
-        internal static function parse(format:Object):CMinimapLine
-        {
-            return ObjectConverter.convertData(format, CMinimapLine);
-        }
-
         internal function applyGlobalBattleMacros():void
         {
-            enabled = Macros.FormatBooleanGlobal(enabled, true);
-            inmeters = Macros.FormatBooleanGlobal(inmeters, true);
-            color = Macros.FormatNumberGlobal(color);
-            from = Macros.FormatNumberGlobal(from);
-            to = Macros.FormatNumberGlobal(to);
-            thickness = Macros.FormatNumberGlobal(thickness);
             alpha = Macros.FormatNumberGlobal(alpha);
+            color = Macros.FormatNumberGlobal(color);
+            enabled = Macros.FormatBooleanGlobal(enabled, true);
+            from = Macros.FormatNumberGlobal(from);
+            inmeters = Macros.FormatBooleanGlobal(inmeters, true);
+            thickness = Macros.FormatNumberGlobal(thickness);
+            to = Macros.FormatNumberGlobal(to);
         }
     }
 }

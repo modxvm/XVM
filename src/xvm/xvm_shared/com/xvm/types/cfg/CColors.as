@@ -8,30 +8,29 @@ package com.xvm.types.cfg
 
     public dynamic class CColors implements ICloneable
     {
-        public var system:Object;
-        public var dmg_kind:Object;
-        public var vtype:Object;
-        public var spotted:Object;
-        public var totalHP:Object;
+        public var avglvl:Array;
         public var damage:Object;
+        public var damageRating:Array;
+        public var dmg_kind:Object;
+        public var eff:Array;
+        public var hitsRatio:Array;
         public var hp:Array;
         public var hp_ratio:Array;
-        public var x:Array;
-        public var eff:Array;
-        public var wtr:Array;
-        public var wn8:Array;
-        public var wgr:Array;
-        public var winrate:Array;
         public var kb:Array;
-        public var avglvl:Array;
+        public var spotted:Object;
+        public var system:Object;
         public var t_battles:Array;
         public var tdb:Array;
         public var tdv:Array;
         public var tfb:Array;
         public var tsb:Array;
+        public var vtype:Object;
+        public var wgr:Array;
+        public var winrate:Array;
+        public var wn8:Array;
         public var wn8effd:Array;
-        public var damageRating:Array;
-        public var hitsRatio:Array;
+        public var wtr:Array;
+        public var x:Array;
 
         public function clone():*
         {

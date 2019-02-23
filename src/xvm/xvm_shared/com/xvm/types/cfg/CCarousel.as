@@ -18,17 +18,8 @@ package com.xvm.types.cfg
         public var slotBorderAlpha:*;
         public var edgeFadeAlpha:*;
         public var scrollingSpeed:*;
-        public var hideBuyTank:Boolean;
-        public var hideBuySlot:Boolean;
-        public var hideRestoreTank:Boolean;
         public var showTotalSlots:Boolean;
         public var showUsedSlots:Boolean;
-        public var filters:Object; // TODO
-        public var filtersPadding:CPadding;
-        public var nations_order:Array;
-        public var types_order:Array;
-        public var sorting_criteria:Array;
-        public var suppressCarouselTooltips:*;
 
         public function clone():*
         {

@@ -11,7 +11,6 @@ package com.xvm.types.cfg
         public var minimapZoom:CHotkeysParams;
         public var minimapAltMode:CHotkeysParams;
         public var playersPanelAltMode:CHotkeysParams;
-        public var markersAltMode:CHotkeysParams;
 
         public function clone():*
         {

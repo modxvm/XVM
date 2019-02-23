@@ -9,8 +9,8 @@ package com.xvm.types.cfg
 
     public dynamic class CMinimapZoom implements ICloneable
     {
-        public var index:*;
         public var centered:*;
+        public var index:*;
 
         public function clone():*
         {
@@ -19,8 +19,8 @@ package com.xvm.types.cfg
 
         internal function applyGlobalBattleMacros():void
         {
-            index = Macros.FormatNumberGlobal(index);
             centered = Macros.FormatBooleanGlobal(centered, false);
+            index = Macros.FormatNumberGlobal(index);
         }
     }
 }

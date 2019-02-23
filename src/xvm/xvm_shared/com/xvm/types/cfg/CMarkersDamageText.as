@@ -8,17 +8,16 @@ package com.xvm.types.cfg
 
     public dynamic class CMarkersDamageText implements ICloneable
     {
-        public var enabled:*;
-        public var x:*;
-        public var y:*;
         public var alpha:*;
-        public var color:*;
-        public var textFormat:CTextFormat;
+        public var blowupMessage:String;
+        public var damageMessage:String;
+        public var enabled:*;
+        public var maxRange:*;
         public var shadow:CShadow;
         public var speed:*;
-        public var maxRange:*;
-        public var damageMessage:String;
-        public var blowupMessage:String;
+        public var textFormat:CTextFormat;
+        public var x:*;
+        public var y:*;
 
         public function clone():*
         {

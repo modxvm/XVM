@@ -8,10 +8,10 @@ package com.xvm.types.cfg
 
     public dynamic class CMarkers implements ICloneable
     {
-        public var enabled:*;
-        public var turretMarkers:CMarkersTurretMarkers;
         public var ally:CMarkers2;
+        public var enabled:*;
         public var enemy:CMarkers2;
+        public var turretMarkers:CMarkersTurretMarkers;
 
         public function clone():*
         {

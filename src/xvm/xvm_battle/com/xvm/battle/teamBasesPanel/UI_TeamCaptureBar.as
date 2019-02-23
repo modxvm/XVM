@@ -242,21 +242,20 @@ package com.xvm.battle.teamBasesPanel
             });
 
             var value:String;
-            var name:String = m_captured ? "done" : "format";
 
-            value = Macros.FormatStringGlobal(cfg.title[name]);
+            value = Macros.FormatStringGlobal(m_captured ? cfg.title.done : cfg.title.format);
             value = StringUtil.substitute(value, m_baseNumText);
             textField.htmlText = value;
 
-            value = Macros.FormatStringGlobal(cfg.players[name]);
+            value = Macros.FormatStringGlobal(m_captured ? cfg.players.done : cfg.players.format);
             value = StringUtil.substitute(value, m_baseNumText);
             tfTimeLeft.htmlText = value;
 
-            value = Macros.FormatStringGlobal(cfg.timer[name]);
+            value = Macros.FormatStringGlobal(m_captured ? cfg.timer.done : cfg.timer.format);
             value = StringUtil.substitute(value, m_baseNumText);
             tfVehiclesCount.htmlText = value;
 
-            value = Macros.FormatStringGlobal(cfg.background[name]);
+            value = Macros.FormatStringGlobal(m_captured ? cfg.background.done : cfg.background.format);
             value = StringUtil.substitute(value, m_baseNumText);
             backgroundTF.htmlText = value;
         }

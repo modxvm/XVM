@@ -10,38 +10,38 @@ package com.xvm.types.cfg
 
     public dynamic class CTextFormat implements ICloneable
     {
+        public var align:String;
+        public var bold:*;
+        public var color:*;
         public var enabled:*;
         public var font:String;
-        public var size:*;
-        public var color:*;
-        public var bold:*;
+        public var indent:*;
         public var italic:*;
-        public var underline:*;
-        public var align:String;
-        public var valign:String;
+        public var leading:*;
         public var leftMargin:*;
         public var rightMargin:*;
-        public var indent:*;
-        public var leading:*;
+        public var size:*;
         public var tabStops:Array;
+        public var underline:*;
+        public var valign:String;
 
         public function clone():*
         {
             var cloned:CTextFormat = new CTextFormat();
+            cloned.align = align;
+            cloned.bold = bold;
+            cloned.color = color;
             cloned.enabled = enabled;
             cloned.font = font;
-            cloned.size = size;
-            cloned.color = color;
-            cloned.bold = bold;
+            cloned.indent = indent;
             cloned.italic = italic;
-            cloned.underline = undefined;
-            cloned.align = align;
-            cloned.valign = valign;
+            cloned.leading = leading;
             cloned.leftMargin = leftMargin;
             cloned.rightMargin = rightMargin;
-            cloned.indent = indent;
-            cloned.leading = leading;
+            cloned.size = size;
             cloned.tabStops = tabStops ? tabStops.concat() : null;
+            cloned.underline = undefined;
+            cloned.valign = valign;
             return cloned;
         }
 

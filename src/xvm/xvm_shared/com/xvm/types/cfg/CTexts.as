@@ -8,12 +8,12 @@ package com.xvm.types.cfg
 
     public dynamic class CTexts implements ICloneable
     {
-        public var vtype:CTextsVType;
+        public var battletype:CTextsBattleType;
         public var marksOnGun:CTextsMarksOnGun;
         public var spotted:CTextsSpotted;
-        public var xvmuser:CTextsXvmUser;
-        public var battletype:CTextsBattleType;
         public var topclan:CTextsTopClan;
+        public var vtype:CTextsVType;
+        public var xvmuser:CTextsXvmUser;
 
         public function clone():*
         {

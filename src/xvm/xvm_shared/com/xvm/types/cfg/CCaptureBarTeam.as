@@ -8,11 +8,11 @@ package com.xvm.types.cfg
 
     public dynamic class CCaptureBarTeam implements ICloneable
     {
-        public var сolor:*;
-        public var title:CCaptureBarTextField;
+        public var background:CCaptureBarTextField;
         public var players:CCaptureBarTextField;
         public var timer:CCaptureBarTextField;
-        public var background:CCaptureBarTextField;
+        public var title:CCaptureBarTextField;
+        public var сolor:*;
 
         public function clone():*
         {

@@ -9,9 +9,9 @@ package com.xvm.types.cfg
 
     public dynamic class CMinimapCirclesRange implements ICloneable
     {
-        public var enabled:*;
         public var alpha:*;
         public var color:*;
+        public var enabled:*;
         public var thickness:*;
 
         public function clone():*
@@ -21,9 +21,9 @@ package com.xvm.types.cfg
 
         internal function applyGlobalBattleMacros():void
         {
-            enabled = Macros.FormatBooleanGlobal(enabled, true);
             alpha = Macros.FormatNumberGlobal(alpha);
             color = Macros.FormatNumberGlobal(color);
+            enabled = Macros.FormatBooleanGlobal(enabled, true);
             thickness = Macros.FormatNumberGlobal(thickness);
         }
     }

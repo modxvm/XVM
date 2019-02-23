@@ -8,9 +8,9 @@ package com.xvm.types.cfg
 
     public dynamic class CTextsTopClan implements ICloneable
     {
-        public var top:String;
         public var persist:String;
         public var regular:String;
+        public var top:String;
 
         public function clone():*
         {

@@ -8,11 +8,11 @@ package com.xvm.types.cfg
 
     public dynamic class CHangarElement implements ICloneable
     {
-        public var enabled:*;
         public var alpha:*;
-        public var rotation:*;
+        public var enabled:*;
         public var offsetX:*;
         public var offsetY:*;
+        public var rotation:*;
 
         public function clone():*
         {

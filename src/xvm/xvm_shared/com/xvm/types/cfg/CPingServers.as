@@ -8,29 +8,27 @@ package com.xvm.types.cfg
 
     public dynamic class CPingServers implements ICloneable
     {
-        public var enabled:*;
-        public var updateInterval:*;
-        public var x:*;
-        public var y:*;
-        public var hAlign:String;
-        public var vAlign:String;
         public var alpha:*;
         public var bgImage:String;
-        public var delimiter:String;
-        public var maxRows:*;
         public var columnGap:*;
-        public var leading:*;
+        public var currentServerFormat:String;
+        public var delimiter:String;
+        public var enabled:*;
+        public var fontStyle:CPingServersFontStyle;
+        public var hAlign:String;
         public var layer:String;
-        public var showTitle:*;
-        public var showServerName:*;
+        public var leading:*;
+        public var maxRows:*;
         public var minimalNameLength:*;
         public var minimalValueLength:*;
-        public var errorString:String;
-        public var ignoredServers:Array;
-        public var fontStyle:CPingServersFontStyle;
-        public var currentServerFormat:String;
-        public var threshold:CPingServersThreshold;
         public var shadow:CShadow;
+        public var showServerName:*;
+        public var showTitle:*;
+        public var threshold:Object;
+        public var updateInterval:*;
+        public var vAlign:String;
+        public var x:*;
+        public var y:*;
 
         public function clone():*
         {

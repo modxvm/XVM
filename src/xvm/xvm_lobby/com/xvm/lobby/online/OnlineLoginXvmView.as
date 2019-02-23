@@ -16,6 +16,9 @@ package com.xvm.lobby.online
 
     public class OnlineLoginXvmView extends XvmViewBase
     {
+        // currently data is updated once per minute on XVM server
+        private static const UPDATE_INTERVAL:int = 60000;
+
         public function OnlineLoginXvmView(view:IView)
         {
             super(view);
@@ -53,8 +56,7 @@ package com.xvm.lobby.online
         {
             var cfg:COnlineServers = Config.config.login.onlineServers;
             cfg.currentServerFormat = "{server}"; // at login screen it's not relevant
-            cfg.updateInterval = 60000; // currently data is updated once per minute on XVM server
-            OnlineServers.initFeature(cfg.enabled && Config.config.__wgApiAvailable, cfg.updateInterval);
+            OnlineServers.initFeature(cfg.enabled && Config.config.__wgApiAvailable, UPDATE_INTERVAL);
             if (cfg.enabled && Config.config.__wgApiAvailable)
             {
                 onlineControl = page.addChild(new OnlineServersView(cfg)) as OnlineServersView;

@@ -8,38 +8,50 @@ package com.xvm.types.cfg
 
     public dynamic class CMinimapLines implements ICloneable
     {
-        public var vehicle:Array;
         public var camera:Array;
         public var traverseAngle:Array;
+        public var vehicle:Array;
 
-        public function get parsedVehicle():Vector.<CMinimapLine>
-        {
-            var res:Vector.<CMinimapLine> = new Vector.<CMinimapLine>();
-            for each (var value:Object in vehicle)
-            {
-                res.push(ObjectConverter.convertData(value, CMinimapLine));
-            }
-            return res;
-        }
-
+        private var _camera:Vector.<CMinimapLine> = null;
         public function get parsedCamera():Vector.<CMinimapLine>
         {
-            var res:Vector.<CMinimapLine> = new Vector.<CMinimapLine>();
-            for each (var value:Object in camera)
+            if (!_camera)
             {
-                res.push(ObjectConverter.convertData(value, CMinimapLine));
+                _camera = new Vector.<CMinimapLine>();
+                for each (var value:Object in camera)
+                {
+                    _camera.push(ObjectConverter.convertData(value, CMinimapLine));
+                }
             }
-            return res;
+            return _camera;
         }
 
+        private var _traverseAngle:Vector.<CMinimapLine> = null;
         public function get parsedTraverseAngle():Vector.<CMinimapLine>
         {
-            var res:Vector.<CMinimapLine> = new Vector.<CMinimapLine>();
-            for each (var value:Object in traverseAngle)
+            if (!_traverseAngle)
             {
-                res.push(ObjectConverter.convertData(value, CMinimapLine));
+                _traverseAngle = new Vector.<CMinimapLine>();
+                for each (var value:Object in traverseAngle)
+                {
+                    _traverseAngle.push(ObjectConverter.convertData(value, CMinimapLine));
+                }
             }
-            return res;
+            return _traverseAngle;
+        }
+
+        private var _vehicle:Vector.<CMinimapLine> = null;
+        public function get parsedVehicle():Vector.<CMinimapLine>
+        {
+            if (!_vehicle)
+            {
+                _vehicle = new Vector.<CMinimapLine>();
+                for each (var value:Object in vehicle)
+                {
+                    _vehicle.push(ObjectConverter.convertData(value, CMinimapLine));
+                }
+            }
+            return _vehicle;
         }
 
         public function clone():*
@@ -49,25 +61,21 @@ package com.xvm.types.cfg
 
         internal function applyGlobalBattleMacros():void
         {
-            vehicle = parseArray(vehicle);
-            camera = parseArray(camera);
-            traverseAngle = parseArray(traverseAngle);
+            applyGlobalBattleMacrosVector(parsedCamera);
+            applyGlobalBattleMacrosVector(parsedTraverseAngle);
+            applyGlobalBattleMacrosVector(parsedVehicle);
         }
 
-        private function parseArray(items:Array):Array
+        private function applyGlobalBattleMacrosVector(items:Vector.<CMinimapLine>):void
         {
-            var a:Array = [];
-            if (items && items.length)
+            if (items)
             {
                 var len:int = items.length;
                 for (var i:int = 0; i < len; ++i)
                 {
-                    var item:CMinimapLine = CMinimapLine.parse(items[i]);
-                    item.applyGlobalBattleMacros();
-                    a.push(item);
+                    items[i].applyGlobalBattleMacros();
                 }
             }
-            return a;
         }
     }
 }

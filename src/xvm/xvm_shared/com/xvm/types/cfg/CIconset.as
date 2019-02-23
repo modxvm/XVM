@@ -10,10 +10,10 @@ package com.xvm.types.cfg
     {
         public var battleLoadingLeftAtlas:String;
         public var battleLoadingRightAtlas:String;
-        public var playersPanelLeftAtlas:String;
-        public var playersPanelRightAtlas:String;
         public var fullStatsLeftAtlas:String;
         public var fullStatsRightAtlas:String;
+        public var playersPanelLeftAtlas:String;
+        public var playersPanelRightAtlas:String;
         public var vehicleMarkerAllyAtlas:String;
         public var vehicleMarkerEnemyAtlas:String;
 

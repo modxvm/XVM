@@ -8,12 +8,12 @@ package com.xvm.types.cfg
 
     public dynamic class CBattleResults implements ICloneable
     {
-        public var startPage:*;
-        public var showTotalExperience:*;
         public var showCrewExperience:*;
-        public var showNetIncome:*;
         public var showExtendedInfo:*;
+        public var showNetIncome:*;
+        public var showTotalExperience:*;
         public var showTotals:*;
+        public var startPage:*;
 
         public function clone():*
         {

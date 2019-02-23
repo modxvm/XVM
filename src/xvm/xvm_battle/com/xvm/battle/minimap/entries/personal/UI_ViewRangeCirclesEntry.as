@@ -271,9 +271,9 @@ class Circles extends Sprite implements IDisposable
             radius = circleCfg.distance;
             if (circleCfg.scale)
                 radius *= circleCfg.scale;
-            circleCfg.$radius = radius;
-            circleCfg.$shape = _drawCircle(radius, circleCfg.thickness, circleCfg.color, circleCfg.alpha);
-            addChild(circleCfg.$shape);
+            circleCfg._state.radius = radius;
+            circleCfg._state.shape = _drawCircle(radius, circleCfg.thickness, circleCfg.color, circleCfg.alpha);
+            addChild(circleCfg._state.shape);
         }
 
         //Logger.addObject(cfg, 2);
@@ -381,8 +381,8 @@ class Circles extends Sprite implements IDisposable
             if (dc.scale != null)
                 radius *= dc.scale;
 
-            var shape:Shape = dc.$shape;
-            if (shape == null || dc.$radius != radius)
+            var shape:Shape = dc._state.shape;
+            if (shape == null || dc._state.radius != radius)
             {
                 var visible:Boolean = true;
                 if (shape != null)
@@ -391,10 +391,10 @@ class Circles extends Sprite implements IDisposable
                     removeChild(shape);
                     shape = null;
                 }
-                dc.$radius = radius;
-                dc.$shape = _drawCircle(radius, dc.thickness, dc.color, dc.alpha);
-                dc.$shape.visible = visible;
-                addChild(dc.$shape);
+                dc._state.radius = radius;
+                dc._state.shape = _drawCircle(radius, dc.thickness, dc.color, dc.alpha);
+                dc._state.shape.visible = visible;
+                addChild(dc._state.shape);
             }
         }
     }
@@ -419,8 +419,8 @@ class Circles extends Sprite implements IDisposable
             c = cfg.parsedView[i];
             if (c.enabled == null || !c.enabled || isNaN(c.distance))
                 continue;
-            if (!c.state)
-                c.state = MinimapEntriesConstants.MOVING_STATE_ALL;
+            if (!c._state.state)
+                c._state.state = MinimapEntriesConstants.MOVING_STATE_ALL;
             res.push(c);
         }
 
@@ -435,8 +435,8 @@ class Circles extends Sprite implements IDisposable
                 c = CMinimapCircle(cfg.special[i][vehicleKey]);
                 if (!c.enabled)
                     continue;
-                if (!c.state)
-                    c.state = MinimapEntriesConstants.MOVING_STATE_ALL;
+                if (!c._state.state)
+                    c._state.state = MinimapEntriesConstants.MOVING_STATE_ALL;
                 res.push(c);
             }
         }
@@ -455,8 +455,8 @@ class Circles extends Sprite implements IDisposable
             var c:CMinimapCircle = cfg.parsedView[i];
             if (!c.enabled)
                 continue;
-            if (!c.state)
-                c.state = MinimapEntriesConstants.MOVING_STATE_ALL;
+            if (!c._state.state)
+                c._state.state = MinimapEntriesConstants.MOVING_STATE_ALL;
             if (isNaN(c.distance))
                 res.push(c);
         }
@@ -483,10 +483,10 @@ class Circles extends Sprite implements IDisposable
         for (var i:int = 0; i < len; ++i)
         {
             var cfg:CMinimapCircle = circles[i];
-            var shape:Shape = cfg.$shape;
+            var shape:Shape = cfg._state.shape;
             if (shape)
             {
-                shape.visible = (int(cfg.state) & moving_state) != 0;
+                shape.visible = (int(cfg._state.state) & moving_state) != 0;
             }
         }
     }

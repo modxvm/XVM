@@ -8,17 +8,17 @@ package com.xvm.types.cfg
 
     public dynamic class CMarkers4 implements ICloneable
     {
-        public var vehicleIcon:CMarkersVehicleIcon;
-        public var healthBar:CMarkersHealthBar;
+        public var actionMarker:CMarkersActionMarker;
+        public var contourIcon:CMarkersContourIcon;
+        public var damageIndicator:CMarkersDamageIndicator;
         public var damageText:CMarkersDamageText;
         public var damageTextPlayer:CMarkersDamageText;
         public var damageTextSquadman:CMarkersDamageText;
-        public var contourIcon:CMarkersContourIcon;
+        public var healthBar:CMarkersHealthBar;
         public var levelIcon:CMarkersLevelIcon;
-        public var actionMarker:CMarkersActionMarker;
-        public var vehicleStatusMarker:CMarkersVehicleStatusMarker;
-        public var damageIndicator:CMarkersDamageIndicator;
         public var textFields:Array;
+        public var vehicleIcon:CMarkersVehicleIcon;
+        public var vehicleStatusMarker:CMarkersVehicleStatusMarker;
 
         public function clone():*
         {
@@ -27,25 +27,29 @@ package com.xvm.types.cfg
 
         internal function applyGlobalBattleMacros():void
         {
-            if (vehicleIcon)
+            if (actionMarker)
             {
-                vehicleIcon.applyGlobalBattleMacros();
-            }
-            if (healthBar)
-            {
-                healthBar.applyGlobalBattleMacros();
+                actionMarker.applyGlobalBattleMacros();
             }
             if (contourIcon)
             {
                 contourIcon.applyGlobalBattleMacros();
             }
+            if (damageIndicator)
+            {
+                damageIndicator.applyGlobalBattleMacros();
+            }
+            if (healthBar)
+            {
+                healthBar.applyGlobalBattleMacros();
+            }
             if (levelIcon)
             {
                 levelIcon.applyGlobalBattleMacros();
             }
-            if (actionMarker)
+            if (vehicleIcon)
             {
-                actionMarker.applyGlobalBattleMacros();
+                vehicleIcon.applyGlobalBattleMacros();
             }
             if (vehicleStatusMarker)
             {

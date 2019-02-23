@@ -8,11 +8,11 @@ package com.xvm.types.cfg
 
     public dynamic class CCarouselCell implements ICloneable
     {
-        public var width:*;
-        public var height:*;
-        public var gap:*;
-        public var fields:CCarouselCellStandardFields;
         public var extraFields:Array;
+        public var fields:CCarouselCellStandardFields;
+        public var gap:*;
+        public var height:*;
+        public var width:*;
 
         public function clone():*
         {

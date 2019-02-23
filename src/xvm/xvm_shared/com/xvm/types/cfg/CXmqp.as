@@ -8,11 +8,11 @@ package com.xvm.types.cfg
 
     public dynamic class CXmqp implements ICloneable
     {
-        public var spottedTime:*;
-        public var minimapDrawTime:*;
-        public var minimapDrawLineThickness:*;
-        public var minimapDrawColor:*;
         public var minimapDrawAlpha:*;
+        public var minimapDrawColor:*;
+        public var minimapDrawLineThickness:*;
+        public var minimapDrawTime:*;
+        public var spottedTime:*;
 
         public function clone():*
         {

@@ -19,6 +19,7 @@ package com.xvm.battle.zoomIndicator
         private var cfg:CExtraField = null;
         private var indicator:TextExtraField;
 
+        private var _camera_enabled:Boolean;
         private var _enable:Boolean;
         private var _offsetX:Number;
         private var _offsetY:Number;
@@ -72,15 +73,23 @@ package com.xvm.battle.zoomIndicator
             try
             {
                 visible = false;
-                cfg = Config.config.battle.camera.sniper.zoomIndicator.clone();
-                cfg.enabled = Macros.FormatBooleanGlobal(cfg.enabled, true);
-                if (cfg.enabled)
+                _camera_enabled = Macros.FormatBooleanGlobal(Config.config.battle.camera.enabled, true);
+                if (_camera_enabled)
                 {
-                    if (indicator)
-                        removeChild(indicator);
-                    indicator = new TextExtraField(cfg);
-                    addChild(indicator);
-                    invalidate(InvalidationType.STATE);
+                    cfg = Config.config.battle.camera.sniper.zoomIndicator.clone();
+                    cfg.enabled = Macros.FormatBooleanGlobal(cfg.enabled, true);
+                    if (cfg.enabled)
+                    {
+                        if (indicator)
+                            removeChild(indicator);
+                        indicator = new TextExtraField(cfg);
+                        addChild(indicator);
+                        invalidate(InvalidationType.STATE);
+                    }
+                }
+                else
+                {
+                    cfg = null;
                 }
             }
             catch (ex:Error)

@@ -25,7 +25,7 @@ package com.xvm.vehiclemarkers.ui.components
         {
             if (this.initialized)
                 return;
-            showSpeaker = XfwUtils.toBool(e.cfg.showSpeaker, false);
+            showSpeaker = XfwUtils.toBool(e.cfg.vehicleIcon.showSpeaker, false);
             super.init(e);
         }
 

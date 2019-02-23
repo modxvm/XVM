@@ -8,11 +8,11 @@ package com.xvm.types.cfg
 
     public dynamic class CPlayersPanelNoneModeExtraField implements ICloneable
     {
+        public var formats:Array;
+        public var height:*;
+        public var width:*;
         public var x:*;
         public var y:*;
-        public var width:*;
-        public var height:*;
-        public var formats:Array;
 
         public function clone():*
         {

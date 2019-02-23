@@ -8,15 +8,25 @@ package com.xvm.types.cfg
 
     public dynamic class CMinimapCircles implements ICloneable
     {
-        public var view:Array;
         public var artillery:CMinimapCirclesRange;
         public var shell:CMinimapCirclesRange;
         public var special:Array;
+        public var view:Array;
+        // internal
         public var _internal:CMinimapCirclesInternal;
 
+        private var _view:Vector.<CMinimapCircle> = null;
         public function get parsedView():Vector.<CMinimapCircle>
         {
-            return Vector.<CMinimapCircle>(view);
+            if (!_view)
+            {
+                _view = new Vector.<CMinimapLine>();
+                for each (var value:Object in view)
+                {
+                    _view.push(ObjectConverter.convertData(value, CMinimapLine));
+                }
+            }
+            return _view;
         }
 
         public function clone():*
@@ -26,20 +36,16 @@ package com.xvm.types.cfg
 
         internal function applyGlobalBattleMacros():void
         {
-            view = parseArray(view);
-
             if (artillery)
             {
                 artillery.applyGlobalBattleMacros();
             }
-
             if (shell)
             {
                 shell.applyGlobalBattleMacros();
             }
-
             // parse "special"
-            if (special && special.length)
+            if (special)
             {
                 var len:int = special.length;
                 for (var i:int = 0; i < len; ++i)
@@ -47,28 +53,25 @@ package com.xvm.types.cfg
                     var items:Object = special[i];
                     for (var key:String in items)
                     {
-                        var item:CMinimapCircle = CMinimapCircle.parse(items[key]);
+                        var item:CMinimapCircle = ObjectConverter.convertData(items[key], CMinimapCircle);
                         item.applyGlobalBattleMacros();
                         items[key] = item;
                     }
                 }
             }
+            applyGlobalBattleMacrosVector(parsedView);
         }
 
-        private function parseArray(items:Array):Array
+        private function applyGlobalBattleMacrosVector(items:Vector.<CMinimapCircle>):void
         {
-            var a:Array = [];
-            if (items && items.length)
+            if (items)
             {
                 var len:int = items.length;
                 for (var i:int = 0; i < len; ++i)
                 {
-                    var item:CMinimapCircle = CMinimapCircle.parse(items[i]);
-                    item.applyGlobalBattleMacros();
-                    a.push(item);
+                    items[i].applyGlobalBattleMacros();
                 }
             }
-            return a;
         }
     }
 }

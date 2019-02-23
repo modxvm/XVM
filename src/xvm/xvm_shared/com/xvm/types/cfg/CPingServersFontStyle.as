@@ -8,12 +8,12 @@ package com.xvm.types.cfg
 
     public dynamic class CPingServersFontStyle implements ICloneable
     {
-        public var name:String;
-        public var size:*;
         public var bold:*;
+        public var color:Object;
         public var italic:*;
-        public var color: CPingServersFontStyleColors;
+        public var name:String;
         public var serverColor:*;
+        public var size:*;
 
         public function clone():*
         {

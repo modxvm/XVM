@@ -8,32 +8,32 @@ package com.xvm.types.cfg
 
     public dynamic class CShadow implements ICloneable
     {
-        public var enabled:*;
-        public var distance:*;
-        public var angle:*;
-        public var color:*;
         public var alpha:*;
+        public var angle:*;
         public var blur:*;
-        public var strength:*;
-        public var quality:*;
+        public var color:*;
+        public var distance:*;
+        public var enabled:*;
+        public var hideObject:*;
         public var inner:*;
         public var knockout:*;
-        public var hideObject:*;
+        public var quality:*;
+        public var strength:*;
 
         public function clone():*
         {
             var cloned:CShadow = new CShadow();
-            cloned.enabled = enabled;
-            cloned.distance = distance;
-            cloned.angle = angle;
-            cloned.color = color;
             cloned.alpha = alpha;
+            cloned.angle = angle;
             cloned.blur = blur;
-            cloned.strength = strength;
-            cloned.quality = quality;
+            cloned.color = color;
+            cloned.distance = distance;
+            cloned.enabled = enabled;
+            cloned.hideObject = hideObject;
             cloned.inner = inner;
             cloned.knockout = knockout;
-            cloned.hideObject = hideObject;
+            cloned.quality = quality;
+            cloned.strength = strength;
             return cloned;
         }
 
@@ -43,17 +43,17 @@ package com.xvm.types.cfg
             if (_defaultConfig == null)
             {
                 _defaultConfig = new CShadow();
-                _defaultConfig.enabled = true;
-                _defaultConfig.distance = 0;
-                _defaultConfig.angle = 0;
-                _defaultConfig.color = 0x000000;
                 _defaultConfig.alpha = 70;
+                _defaultConfig.angle = 0;
                 _defaultConfig.blur = 4;
-                _defaultConfig.strength = 2;
-                _defaultConfig.quality = 3;
+                _defaultConfig.color = 0x000000;
+                _defaultConfig.distance = 0;
+                _defaultConfig.enabled = true;
+                _defaultConfig.hideObject = false;
                 _defaultConfig.inner = false;
                 _defaultConfig.knockout = false;
-                _defaultConfig.hideObject = false;
+                _defaultConfig.quality = 3;
+                _defaultConfig.strength = 2;
             }
             return _defaultConfig;
         }
