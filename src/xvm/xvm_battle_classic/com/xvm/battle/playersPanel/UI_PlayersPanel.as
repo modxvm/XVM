@@ -22,7 +22,7 @@ package com.xvm.battle.playersPanel
     import net.wg.infrastructure.interfaces.*;
     import net.wg.infrastructure.managers.impl.*;
 
-    public /*dynamic*/ class UI_PlayersPanel extends PlayersPanelUI
+    public class UI_PlayersPanel extends PlayersPanelUI
     {
         // from PlayersPanel.as
         static private const EXPAND_AREA_WIDTH:Number = 230;

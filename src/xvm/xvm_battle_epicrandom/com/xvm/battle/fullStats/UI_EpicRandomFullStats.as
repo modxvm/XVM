@@ -13,7 +13,7 @@ package com.xvm.battle.fullStats
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.managers.impl.*;
 
-    public /*dynamic*/ class UI_EpicRandomFullStats extends epicRandomFullStatsUI
+    public class UI_EpicRandomFullStats extends epicRandomFullStatsUI
     {
         public static const leftAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
         public static const rightAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;

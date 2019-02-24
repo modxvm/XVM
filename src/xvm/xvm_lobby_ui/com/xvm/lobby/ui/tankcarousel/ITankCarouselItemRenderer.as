@@ -10,7 +10,7 @@ package com.xvm.lobby.ui.tankcarousel
     import net.wg.gui.components.carousels.data.*;
     import scaleform.clik.interfaces.*;
 
-    public /*dynamic*/ interface ITankCarouselItemRenderer extends IUIComponent
+    public interface ITankCarouselItemRenderer extends IUIComponent
     {
         function get substrateHolder():Sprite;
         function set substrateHolder(value:Sprite):void;

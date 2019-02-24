@@ -11,7 +11,7 @@ package com.xvm.lobby.ui.tankcarousel
     import flash.display.*;
     import net.wg.gui.components.carousels.data.*;
 
-    public /*dynamic*/ class UI_SmallTankCarouselItemRenderer extends SmallTankCarouselItemRendererUI implements IExtraFieldGroupHolder, ITankCarouselItemRenderer
+    public class UI_SmallTankCarouselItemRenderer extends SmallTankCarouselItemRendererUI implements IExtraFieldGroupHolder, ITankCarouselItemRenderer
     {
         public static const DEFAULT_RENDERER_WIDTH:int = 162;
         public static const DEFAULT_RENDERER_HEIGHT:int = 37;

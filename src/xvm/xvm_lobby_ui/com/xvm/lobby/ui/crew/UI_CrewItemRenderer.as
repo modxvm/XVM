@@ -6,7 +6,7 @@ package com.xvm.lobby.ui.crew
 {
     import com.xfw.*;
 
-    public /*dynamic*/ class UI_CrewItemRenderer extends CrewItemRendererUI
+    public class UI_CrewItemRenderer extends CrewItemRendererUI
     {
         private var orig_skills_x:int = 0;
         private var orig_skills_y:int = 0;

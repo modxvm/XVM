@@ -21,7 +21,7 @@ package com.xvm.battle.playersPanel
     import net.wg.infrastructure.interfaces.*;
     import net.wg.infrastructure.managers.impl.*;
 
-    public /*dynamic*/ class UI_RankedPlayersPanel extends RankedPlayersPanelUI
+    public class UI_RankedPlayersPanel extends RankedPlayersPanelUI
     {
         // from PlayersPanel.as
         static private const EXPAND_AREA_WIDTH:Number = 230;

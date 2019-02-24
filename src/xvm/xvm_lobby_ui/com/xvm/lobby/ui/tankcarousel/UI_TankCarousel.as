@@ -15,7 +15,7 @@ package com.xvm.lobby.ui.tankcarousel
     import scaleform.clik.constants.*;
     import org.idmedia.as3commons.util.*;
 
-    public /*dynamic*/ class UI_TankCarousel extends TankCarouselUI
+    public class UI_TankCarousel extends TankCarouselUI
     {
         private static const THRESHOLD:int = 650;
 

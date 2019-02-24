@@ -8,7 +8,7 @@ package com.xvm.lobby.ui.crew
     import com.xvm.*;
     import net.wg.gui.lobby.components.data.*;
 
-    public /*dynamic*/ class UI_SmallSkillsList extends SmallSkillsListUI
+    public class UI_SmallSkillsList extends SmallSkillsListUI
     {
         public function UI_SmallSkillsList()
         {
