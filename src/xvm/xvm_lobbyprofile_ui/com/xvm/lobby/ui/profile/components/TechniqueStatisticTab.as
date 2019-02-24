@@ -190,32 +190,32 @@ package com.xvm.lobby.ui.profile.components
 
         private function updateGlobalRatings(data:DossierBase):void
         {
-            var s:String = "";
             if (data.stat == null)
             {
                 ratingTF.htmlText = "";
             }
             else
             {
+                var result:Array = [];
                 var dt:String = isNaN(data.stat.ts) ? Locale.get("unknown") : XfwUtils.FormatDate("Y-m-d", new Date(data.stat.ts));
 
-                s += size(Locale.get("General stats") + " (" + color(dt, 0xCCCCCC) + ")", 13) + "\n";
+                result.push(size(Locale.get("General stats") + " (" + color(dt, 0xCCCCCC) + ")", 13) + "\n");
 
                 var xwn8_color:int = MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_X, data.stat.xwn8, NaN);
-                s += Locale.get("WN8") + ": " + (!data.stat.wn8 ? "-- (-)" :
+                result.push(Locale.get("WN8") + ": " + (!data.stat.wn8 ? "-- (-)" :
                     color((data.stat.xwn8 == 100 ? "XX" : (data.stat.xwn8 < 10 ? "0" : "") + data.stat.xwn8), xwn8_color) + " (" +
-                    color(App.utils.locale.integer(data.stat.wn8), xwn8_color) + ")") + " ";
+                    color(App.utils.locale.integer(data.stat.wn8), xwn8_color) + ")") + " ");
 
                 var xeff_color:int = MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_X, data.stat.xeff, NaN);
-                s += Locale.get("EFF") + ": " + (!data.stat.eff ? "-- (-)" :
+                result.push(Locale.get("EFF") + ": " + (!data.stat.eff ? "-- (-)" :
                     color((data.stat.xeff == 100 ? "XX" : (data.stat.xeff < 10 ? "0" : "") + data.stat.xeff), xeff_color) + " (" +
-                    color(App.utils.locale.integer(data.stat.eff), xeff_color) + ")") + "\n";
+                    color(App.utils.locale.integer(data.stat.eff), xeff_color) + ")") + "\n");
 
-                s += Locale.get("Avg level") + ": " + (!data.stat.avglvl ? "-" :
+                result.push(Locale.get("Avg level") + ": " + (!data.stat.avglvl ? "-" :
                     color(App.utils.locale.numberWithoutZeros(data.stat.avglvl),
-                        MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_AVGLVL, data.stat.avglvl, NaN))) + "\n";
+                        MacrosUtils.getDynamicColorValueInt(Defines.DYNAMIC_COLOR_AVGLVL, data.stat.avglvl, NaN))) + "\n");
 
-                ratingTF.htmlText = "<textformat leading='-2'>" + formatHtmlText(s) + "</textformat>";
+                ratingTF.htmlText = "<textformat leading='-2'>" + formatHtmlText(result.join("")) + "</textformat>";
             }
         }
 
@@ -259,23 +259,25 @@ package com.xvm.lobby.ui.profile.components
             b1 = Math.max(0, b1 % 1 == 0 ? b1 : (int(b1) + 1));
             b2 = Math.max(0, b2 % 1 == 0 ? b2 : (int(b2) + 1));
 
-            var info:String = (b2 > b1)
+            var info:Array = [
+                (b2 > b1)
                     ? color(App.utils.locale.integer(b1), XfwConst.UICOLOR_GOLD) + Locale.get("toWithSpaces") +
                         color(App.utils.locale.numberWithoutZeros((r2 * 100 - 0.5).toFixed(1)) + "%", XfwConst.UICOLOR_GOLD)
                     : color(App.utils.locale.integer(b2), XfwConst.UICOLOR_GOLD) + Locale.get("toWithSpaces") +
-                        color(App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%", XfwConst.UICOLOR_GOLD);
+                        color(App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%", XfwConst.UICOLOR_GOLD)
+            ];
 
             if (page is ProfileTechniquePage)
             {
                 // full
-                info += " / " + ((b2 > b1)
+                info.push(" / " + ((b2 > b1)
                     ? color(App.utils.locale.integer(b2), XfwConst.UICOLOR_GOLD) + Locale.get("toWithSpaces") +
                         color(App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%", XfwConst.UICOLOR_GOLD)
                     : color(App.utils.locale.integer(b1), XfwConst.UICOLOR_GOLD) + Locale.get("toWithSpaces") +
-                        color(App.utils.locale.numberWithoutZeros((r2 * 100 + 0.5).toFixed(1)) + "%", XfwConst.UICOLOR_GOLD));
+                        color(App.utils.locale.numberWithoutZeros((r2 * 100 + 0.5).toFixed(1)) + "%", XfwConst.UICOLOR_GOLD)));
             }
 
-            return info;
+            return info.join("");
         }
     }
 }

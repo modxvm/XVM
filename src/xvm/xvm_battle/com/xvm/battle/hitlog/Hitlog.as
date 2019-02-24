@@ -100,7 +100,7 @@ package com.xvm.battle.hitlog
                 //Logger.addObject(hits, 2);
 
                 var skip:Vector.<Number> = new Vector.<Number>();
-                _bodyText = "";
+                var bodyTextArr:Array = [];
                 for (var n:int = hits.length - 1; n >= 0; --n)
                 {
                     var hit:VOHit = hits[n];
@@ -110,16 +110,18 @@ package com.xvm.battle.hitlog
                             continue;
                         skip.push(hit.vehicleID);
                     }
-                    var br:String = (_bodyText == "") ? "" : "<br/>";
+                    var br:String = (bodyTextArr.length == 0) ? "" : "<br/>";
                     if (cfg.insertOrder.toLowerCase() == INSERTORDER_BEGIN)
                     {
-                        _bodyText += br + hit.hist;
+                        bodyTextArr.push(br);
+                        bodyTextArr.push(hit.hist);
                     }
                     else
                     {
-                        _bodyText = hit.hist + br + _bodyText;
+                        bodyTextArr.unshift(hit.hist + br);
                     }
                 }
+                _bodyText = bodyTextArr.join("");
             }
             return _bodyText;
         }

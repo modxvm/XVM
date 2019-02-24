@@ -300,15 +300,15 @@ package com.xvm.lobby.ping.PingServers
 
         private function createCss():String
         {
-            var css:String = "";
-            css += createQualityCss(PingServersView.QUALITY_GREAT);
-            css += createQualityCss(PingServersView.QUALITY_GOOD)
-            css += createQualityCss(PingServersView.QUALITY_POOR);
-            css += createQualityCss(PingServersView.QUALITY_BAD);
+            var css:Array = [];
+            css.push(createQualityCss(PingServersView.QUALITY_GREAT));
+            css.push(createQualityCss(PingServersView.QUALITY_GOOD));
+            css.push(createQualityCss(PingServersView.QUALITY_POOR));
+            css.push(createQualityCss(PingServersView.QUALITY_BAD));
             if (!isNaN(serverColor))
-                css += createServerColorCss();
+                css.push(createServerColorCss());
 
-            return css;
+            return css.join("");
         }
 
         private function createQualityCss(quality:String):String

@@ -42,7 +42,7 @@ package com.xvm
             var formatParts:Vector.<String> = Vector.<String>(format.split("{{" + MACRO_PREFIX + ":"));
 
             // begin part until first macro start
-            var res:String = formatParts[0];
+            var res:Array = [formatParts[0]];
             var len:int = formatParts.length;
             for (var i:int = 1; i < len; ++i)
             {
@@ -53,7 +53,7 @@ package com.xvm
                 var macroEnd:Number = part.indexOf("}}", 1);
                 if (macroEnd == -1) {
                     // no end chars => write everythink back
-                    res += "{{" + MACRO_PREFIX + ":" + part;
+                    res.push("{{" + MACRO_PREFIX + ":" + part);
                     continue;
                 }
 
@@ -67,13 +67,13 @@ package com.xvm
                     stringParts.unshift(macro);
                     macro = StringUtil.substitute.apply(null, stringParts);
                 }
-                res += macro;
+                res.push(macro);
 
                 // write rest of text after macro, without }}
-                res += part.slice(macroEnd + 2, part.length);
+                res.push(part.slice(macroEnd + 2, part.length));
             }
 
-            return res;
+            return res.join("");
         }
     }
 }

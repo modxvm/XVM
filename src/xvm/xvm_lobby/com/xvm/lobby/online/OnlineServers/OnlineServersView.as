@@ -304,15 +304,15 @@ package com.xvm.lobby.online.OnlineServers
 
         private function createCss():String
         {
-            var css:String = "";
-            css += createQualityCss(OnlineServersView.QUALITY_GREAT);
-            css += createQualityCss(OnlineServersView.QUALITY_GOOD);
-            css += createQualityCss(OnlineServersView.QUALITY_POOR);
-            css += createQualityCss(OnlineServersView.QUALITY_BAD);
+            var css:Array = [];
+            css.push(createQualityCss(OnlineServersView.QUALITY_GREAT));
+            css.push(createQualityCss(OnlineServersView.QUALITY_GOOD));
+            css.push(createQualityCss(OnlineServersView.QUALITY_POOR));
+            css.push(createQualityCss(OnlineServersView.QUALITY_BAD));
             if (!isNaN(serverColor))
-                css += createServerColorCss();
+                css.push(createServerColorCss());
 
-            return css;
+            return css.join("");
         }
 
         private function createQualityCss(quality:String):String

@@ -127,21 +127,21 @@ package com.xvm.vehiclemarkers.ui.components
         public static const OFFLINE_POSTFIX:String = "_offline";
         private function getColorSchemeName():String
         {
-            var schemeName:String =
+            var schemeName:Array = [
                 currentPlayerState.isCurrentPlayer ? SELECTED
                 : currentPlayerState.isSquadPersonal ? SQUAD_PERSONAL
                 : currentPlayerState.isTeamKiller ? TEAM_KILLER
-                : NORMAL;
+                : NORMAL
+            ];
             if (currentPlayerState.isDead)
             {
-                schemeName += DEAD_POSTFIX;
+                schemeName.push(DEAD_POSTFIX);
             }
             if (currentPlayerState.isOffline)
             {
-                schemeName += OFFLINE_POSTFIX;
+                schemeName.push(OFFLINE_POSTFIX);
             }
-            //Logger.add("getColorSchemeName: " + schemeName);
-            return schemeName;
+            return schemeName.join("");
         }
     }
 }
