@@ -16,8 +16,7 @@ package com.xvm.vehiclemarkers.ui
 
         public static function getCurrentState(playerState:VOPlayerState, exInfo:Boolean):String
         {
-            return
-                (playerState.isAlly ? "ally/" : "enemy/") +
+            return (playerState.isAlly ? "ally/" : "enemy/") +
                 (playerState.isAlive ? "alive/" : "dead/") +
                 (exInfo ? "extended" : "normal");
         }
