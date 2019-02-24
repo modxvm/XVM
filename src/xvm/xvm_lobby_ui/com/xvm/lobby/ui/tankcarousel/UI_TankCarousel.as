@@ -81,42 +81,42 @@ package com.xvm.lobby.ui.tankcarousel
             {
                 try
                 {
-                var cellType:String = StringUtils.trim(cfg.cellType.toLowerCase());
-                if (cellType != "small")
-                {
-                    if (cellType != "normal")
+                    var cellType:String = StringUtils.trim(cfg.cellType.toLowerCase());
+                    if (cellType != "small")
                     {
-                        var normalHelper:TankCarouselHelper = new TankCarouselHelper(cfg.normal);
-                        var h:int = (normalHelper.verticalGap + normalHelper.rendererHeight) * _rowCount - normalHelper.verticalGap;
-                        if (App.appHeight - h < THRESHOLD)
+                        if (cellType != "normal")
                         {
-                            cellType = "small";
-                        }
-                        else
-                        {
-                            cellType = "normal";
+                            var normalHelper:TankCarouselHelper = new TankCarouselHelper(cfg.normal);
+                            var h:int = (normalHelper.verticalGap + normalHelper.rendererHeight) * _rowCount - normalHelper.verticalGap;
+                            if (App.appHeight - h < THRESHOLD)
+                            {
+                                cellType = "small";
+                            }
+                            else
+                            {
+                                cellType = "normal";
+                            }
                         }
                     }
-                }
 
-                var newHelper:ITankCarouselHelper = this.helper;
-                switch (cellType)
-                {
-                    case "small":
-                        if (!(newHelper is SmallTankCarouselHelper))
-                        {
-                            newHelper = new SmallTankCarouselHelper(cfg.small);
-                            invalidate(InvalidationType.SETTINGS);
-                        }
-                        break;
-                    case "normal":
-                        if (!(newHelper is TankCarouselHelper))
-                        {
-                            newHelper = new TankCarouselHelper(cfg.normal);
-                            invalidate(InvalidationType.SETTINGS);
-                        }
-                        break;
-                }
+                    var newHelper:ITankCarouselHelper = this.helper;
+                    switch (cellType)
+                    {
+                        case "small":
+                            if (!(newHelper is SmallTankCarouselHelper))
+                            {
+                                newHelper = new SmallTankCarouselHelper(cfg.small);
+                                invalidate(InvalidationType.SETTINGS);
+                            }
+                            break;
+                        case "normal":
+                            if (!(newHelper is TankCarouselHelper))
+                            {
+                                newHelper = new TankCarouselHelper(cfg.normal);
+                                invalidate(InvalidationType.SETTINGS);
+                            }
+                            break;
+                    }
                 }
                 catch (ex:Error)
                 {
@@ -142,11 +142,8 @@ package com.xvm.lobby.ui.tankcarousel
             try
             {
                 Dossier.requestAccountDossier(this, onAccountDossierLoaded, PROFILE_DROPDOWN_KEYS.ALL);
-
                 startFadeMask.alpha = endFadeMask.alpha = Macros.FormatNumberGlobal(Config.config.hangar.carousel.edgeFadeAlpha, 100) / 100.0;
-
                 background.alpha = Macros.FormatNumberGlobal(cfg.backgroundAlpha, 100) / 100.0;
-
                 dispatchEvent(new LifeCycleEvent(LifeCycleEvent.ON_GRAPHICS_RECTANGLES_UPDATE));
             }
             catch (ex:Error)
@@ -189,156 +186,5 @@ package com.xvm.lobby.ui.tankcarousel
             call_setVehiclesFilter();
             */
         }
-    }
-}
-
-import com.xvm.*;
-import com.xvm.lobby.ui.tankcarousel.*;
-import com.xvm.types.cfg.*;
-import flash.utils.*;
-import net.wg.data.constants.*;
-import net.wg.gui.lobby.hangar.tcarousel.helper.ITankCarouselHelper;
-import net.wg.infrastructure.exceptions.*;
-import scaleform.clik.utils.Padding;
-
-class TankCarouselHelperBase implements ITankCarouselHelper
-{
-    private var _gap:int;
-    private var _padding:Padding;
-    private var _width:int;
-    private var _height:int;
-    private var _visibleHeight:int;
-    private var _heightDiff:int;
-
-    function TankCarouselHelperBase(cfg:CCarouselCell)
-    {
-        _gap = Macros.FormatNumberGlobal(cfg.gap, DEFAULT_GAP);
-        _padding = new Padding(_gap);
-        _width = Macros.FormatNumberGlobal(cfg.width, DEFAULT_RENDERER_WIDTH - 2) + 2;
-        _heightDiff = DEFAULT_RENDERER_HEIGHT - DEFAULT_RENDERER_VISIBLE_HEIGHT;
-        _height = Macros.FormatNumberGlobal(cfg.height, DEFAULT_RENDERER_VISIBLE_HEIGHT - 2) + 2;
-        _visibleHeight = _height + _heightDiff;
-    }
-
-    public function get linkRenderer():String
-    {
-        throw new AbstractException("TankCarouselHelperBase.linkRenderer " + Errors.ABSTRACT_INVOKE);
-    }
-
-    public function get rendererWidth():int
-    {
-        return _width;
-    }
-
-    public function get rendererHeight():int
-    {
-        return _height;
-    }
-
-    public function get horizontalGap():int
-    {
-        return _gap;
-    }
-
-    public function get verticalGap():int
-    {
-        return _gap;
-    }
-
-    public function get padding():Padding
-    {
-        return _padding;
-    }
-
-    public function get rendererVisibleHeight():int
-    {
-        return _visibleHeight;
-    }
-
-    public function get rendererHeightDiff():int
-    {
-        return _heightDiff;
-    }
-
-    // protected
-
-    protected function get DEFAULT_GAP():int
-    {
-        return 10;
-    }
-
-    protected function get DEFAULT_RENDERER_WIDTH():int
-    {
-        throw new AbstractException("TankCarouselHelperBase.DEFAULT_RENDERER_WIDTH " + Errors.ABSTRACT_INVOKE);
-    }
-
-    protected function get DEFAULT_RENDERER_HEIGHT():int
-    {
-        throw new AbstractException("TankCarouselHelperBase.DEFAULT_RENDERER_HEIGHT " + Errors.ABSTRACT_INVOKE);
-    }
-
-    protected function get DEFAULT_RENDERER_VISIBLE_HEIGHT():int
-    {
-        throw new AbstractException("TankCarouselHelperBase.DEFAULT_RENDERER_VISIBLE_HEIGHT " + Errors.ABSTRACT_INVOKE);
-    }
-}
-
-class TankCarouselHelper extends TankCarouselHelperBase implements ITankCarouselHelper
-{
-    function TankCarouselHelper(cfg:CCarouselCell)
-    {
-        super(cfg);
-    }
-
-    override public function get linkRenderer():String
-    {
-        return getQualifiedClassName(UI_TankCarouselItemRenderer);
-    }
-
-    // PROTECTED
-
-    override protected function get DEFAULT_RENDERER_WIDTH():int
-    {
-        return UI_TankCarouselItemRenderer.DEFAULT_RENDERER_WIDTH;
-    }
-
-    override protected function get DEFAULT_RENDERER_HEIGHT():int
-    {
-        return UI_TankCarouselItemRenderer.DEFAULT_RENDERER_HEIGHT;
-    }
-
-    override protected function get DEFAULT_RENDERER_VISIBLE_HEIGHT():int
-    {
-        return UI_TankCarouselItemRenderer.DEFAULT_RENDERER_VISIBLE_HEIGHT;
-    }
-}
-
-class SmallTankCarouselHelper extends TankCarouselHelperBase implements ITankCarouselHelper
-{
-    function SmallTankCarouselHelper(cfg:CCarouselCell)
-    {
-        super(cfg);
-    }
-
-    override public function get linkRenderer():String
-    {
-        return getQualifiedClassName(UI_SmallTankCarouselItemRenderer);
-    }
-
-    // PROTECTED
-
-    override protected function get DEFAULT_RENDERER_WIDTH():int
-    {
-        return UI_SmallTankCarouselItemRenderer.DEFAULT_RENDERER_WIDTH;
-    }
-
-    override protected function get DEFAULT_RENDERER_HEIGHT():int
-    {
-        return UI_SmallTankCarouselItemRenderer.DEFAULT_RENDERER_HEIGHT;
-    }
-
-    override protected function get DEFAULT_RENDERER_VISIBLE_HEIGHT():int
-    {
-        return UI_SmallTankCarouselItemRenderer.DEFAULT_RENDERER_VISIBLE_HEIGHT;
     }
 }
