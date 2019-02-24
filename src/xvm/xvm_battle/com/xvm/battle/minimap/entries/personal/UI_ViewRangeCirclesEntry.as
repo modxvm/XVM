@@ -309,7 +309,10 @@ class Circles extends Sprite implements IDisposable
 
     public function dispose():void
     {
-        removeChildren();
+        while (numChildren > 0)
+        {
+            removeChildAt(0);
+        }
     }
 
     // http://forum.worldoftanks.ru/index.php?/topic/1047590-/

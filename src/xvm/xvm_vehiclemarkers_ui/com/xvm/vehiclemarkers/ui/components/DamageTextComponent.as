@@ -187,7 +187,10 @@ class DamageTextAnimation
 
     private function removeMovieClip():void
     {
-        mc.removeChildren();
+        while (mc.numChildren > 0)
+        {
+            mc.removeChildAt(0);
+        }
         mc.parent.removeChild(mc);
         mc = null;
     }
