@@ -14,7 +14,7 @@ package com.xvm.lobby.ui.profile
     import net.wg.gui.lobby.profile.pages.technique.data.*;
     import scaleform.gfx.*;
 
-    public class UI_TechniqueRenderer extends TechniqueRenderer_UI
+    public dynamic class UI_TechniqueRenderer extends TechniqueRenderer_UI
     {
         private var xteTF:TextField;
 

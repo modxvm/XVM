@@ -8,7 +8,7 @@ package com.xvm.lobby.ui.profile
     import com.xvm.*;
     import net.wg.data.managers.*;
 
-    public class UI_StatisticsDashLineTextItemIRenderer extends StatisticsDashLineTextItemIRenderer_UI
+    public dynamic class UI_StatisticsDashLineTextItemIRenderer extends StatisticsDashLineTextItemIRenderer_UI
     {
         private var _toolTipParams:IToolTipParams;
 

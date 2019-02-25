@@ -11,7 +11,7 @@ package com.xvm.lobby.ui.profile
     import net.wg.gui.components.windows.*;
     import net.wg.gui.lobby.window.*;
 
-    public class UI_ProfileTechniqueWindow extends ProfileTechniqueWindow_UI
+    public dynamic class UI_ProfileTechniqueWindow extends ProfileTechniqueWindow_UI
     {
         private var technique:Technique;
 
