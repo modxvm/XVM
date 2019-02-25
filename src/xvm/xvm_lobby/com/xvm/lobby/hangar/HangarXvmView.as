@@ -32,15 +32,11 @@ package com.xvm.lobby.hangar
 
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
-            //Logger.add("onAfterPopulate: " + view.as_alias);
             super.onAfterPopulate(e);
 
-            //Logger.addObject(page);
-
-            // fix bottomBg height - original is too high and affects carousel
-            page.bottomBg.height = 45; // MESSENGER_BAR_PADDING
-
-            //XfwUtils.logChilds(page);
+            // fix bottomBg height and position - original is too high and affects carousel
+            page.bottomBg.height = 47; // MESSENGER_BAR_PADDING + 2
+            page.bottomBg.y = App.appHeight - 90; // MESSENGER_BAR_PADDING * 2
 
             Xfw.addCommandListener(XvmCommands.AS_UPDATE_CURRENT_VEHICLE, onUpdateCurrentVehicle);
 
@@ -48,7 +44,6 @@ package com.xvm.lobby.hangar
                 setup();
             });
 
-            //Logger.add("ON_HANGAR_AFTER_POPULATE");
             Xvm.dispatchEvent(new Event(ON_HANGAR_AFTER_POPULATE));
         }
 
