@@ -472,9 +472,21 @@ class Data(object):
             self.data['criticalHit'] = True
 
     def onHealthChanged(self, vehicle, newHealth, attackerID, attackReasonID):
-        if self.data['attackReasonID'] not in [24, 25]:
+        self.data['blownup'] = (newHealth <= -5)
+        newHealth = max(0, newHealth)
+        self.data['damage'] = self.data['oldHealth'] - newHealth
+        self.data['oldHealth'] = newHealth
+        if self.data['damage'] < 0:
+            return
+        if attackReasonID < 8:
             self.data['attackReasonID'] = attackReasonID
-        self.data['blownup'] = (newHealth == -13) or (newHealth == -5)
+        elif attackReasonID in [9, 10, 13, 24]:
+            self.data['attackReasonID'] = 24
+        elif attackReasonID in [11, 14, 25]:
+            self.data['attackReasonID'] = 25
+
+        self.data['isDamage'] = (self.data['damage'] > 0)
+        self.data['isAlive'] = (newHealth > 0) and bool(vehicle.isCrewActive)
         self.data['hitEffect'] = HIT_EFFECT_CODES[4]
         if self.data['attackReasonID'] != 0:
             self.data['costShell'] = 'unknown'
@@ -486,11 +498,6 @@ class Data(object):
         else:
             self.data['reloadGun'] = self.timeReload(attackerID)
         self.data['attackerID'] = attackerID
-        newHealth = max(0, newHealth)
-        self.data['isDamage'] = (newHealth != self.data['oldHealth'])
-        self.data['damage'] = self.data['oldHealth'] - newHealth
-        self.data['isAlive'] = (newHealth > 0) and bool(vehicle.isCrewActive)
-        self.data['oldHealth'] = newHealth
         self.updateData()
 
 
@@ -947,6 +954,7 @@ def Vehicle_onEnterWorld(self, prereqs):
             on_fire = 0
             data.data['oldHealth'] = self.health
             data.data['maxHealth'] = self.health
+            data.data['isAlive'] = (self.health > 0) and bool(self.isCrewActive)
 
 
 @registerEvent(Vehicle, 'showDamageFromShot')
