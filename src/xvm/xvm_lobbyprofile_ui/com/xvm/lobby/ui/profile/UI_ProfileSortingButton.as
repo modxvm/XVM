@@ -7,7 +7,7 @@ package com.xvm.lobby.ui.profile
     import com.xfw.*;
     import com.xvm.*;
 
-    public class UI_ProfileSortingButton extends ProfileSortingButton_UI
+    public dynamic class UI_ProfileSortingButton extends ProfileSortingButton_UI
     {
         public function UI_ProfileSortingButton()
         {
