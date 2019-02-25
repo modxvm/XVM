@@ -462,15 +462,13 @@ package com.xvm
             }
             if (cached_value !== undefined)
             {
-                //Logger.add("cached: " + cached_value);
                 return cached_value;
             }
 
             // Split tags
             var parts:Vector.<String> = Vector.<String>(format_str.split("{{"));
             var len:uint = parts.length;
-            var resArr:Array = [parts[0]];
-            var resStr:String;
+            var res:String = parts[0];
             if (len > 1)
             {
                 for (var i:uint = 1; i < len; ++i)
@@ -479,27 +477,25 @@ package com.xvm
                     var idx:int = part.indexOf("}}");
                     if (idx == -1)
                     {
-                        resArr.push("{{" + part);
+                        res += "{{" + part;
                     }
                     else
                     {
                         var _FormatPart_out:MacrosResult = new MacrosResult();
-                        resArr.push(_FormatPart(part.slice(0, idx), options, _FormatPart_out) + part.slice(idx + 2));
+                        res += _FormatPart(part.slice(0, idx), options, _FormatPart_out) + part.slice(idx + 2);
                         __out.isStaticMacro &&= _FormatPart_out.isStaticMacro;
                         __out.isHybridMacro ||= _FormatPart_out.isHybridMacro;
                     }
                 }
-                resStr = resArr.join("");
-                if (resStr != format_str)
+                if (res != format_str)
                 {
-                    var iMacroPos:int = resStr.indexOf("{{");
+                    var iMacroPos:int = res.indexOf("{{");
                     if (iMacroPos >= 0)
                     {
-                        if (resStr.indexOf("}}", iMacroPos) >= 0)
+                        if (res.indexOf("}}", iMacroPos) >= 0)
                         {
-                            //Logger.add("recursive: " + playerName + " " + resStr);
                             var _Format_out:MacrosResult = new MacrosResult();
-                            resStr = _Format(resStr, options, _Format_out);
+                            res = _Format(res, options, _Format_out);
                             __out.isStaticMacro &&= _Format_out.isStaticMacro;
                             __out.isHybridMacro ||= _Format_out.isHybridMacro;
                         }
@@ -507,17 +503,15 @@ package com.xvm
                 }
             }
 
-            resStr = Utils.fixImgTag(resStr);
+            res = Utils.fixImgTag(res);
 
             if (__out.isStaticMacro)
             {
                 if (playerName)
                 {
-                    //Logger.add("add to cache: " + playerName + "> " + format_str + " => " + resStr);
-                    player_cache[format_str] = resStr;
+                    player_cache[format_str] = res;
                     if (__out.isHybridMacro)
                     {
-                        //Logger.add("add to hybrid: " + playerName + "> " + format_str + " => " + resStr);
                         var hybrid_cache:Object = m_macros_cache_players_hybrid[options.playerName];
                         if (hybrid_cache == null)
                         {
@@ -529,19 +523,11 @@ package com.xvm
                 }
                 else
                 {
-                    //Logger.add("add to global cache: " + playerName + "> " + format_str + " => " + resStr);
-                    m_macros_cache_globals[format_str] = resStr;
+                    m_macros_cache_globals[format_str] = res;
                 }
             }
-            else
-            {
-                //Logger.add("dynamic " + playerName + "> " + format_str + " => " + resStr);
-            }
 
-            //Logger.add(playerName + "> " + format);
-            //Logger.add(playerName + "= " + resStr);
-
-            return resStr;
+            return res;
         }
 
         private function _FormatPart(macro:String, options:IVOMacrosOptions, __out:MacrosResult):String
