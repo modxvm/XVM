@@ -73,8 +73,8 @@ package com.xvm.types.cfg
         {
             if (items)
             {
-                var len:int = items.length;
-                for (var i:int = 0; i < len; ++i)
+                var i:int = items.length;
+                while (--i > -1)
                 {
                     items[i].applyGlobalBattleMacros();
                 }
