@@ -37,7 +37,7 @@ package com.xvm.wg
 
         private var _loaderMgr:ILoaderManager = null;
 
-        private var _cacheSize:uint = 0;
+        private var _cacheSize:int = 0;
 
         private var _maxCacheSize:int = 0;
 

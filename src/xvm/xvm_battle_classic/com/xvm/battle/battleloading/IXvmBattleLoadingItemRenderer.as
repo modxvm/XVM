@@ -26,7 +26,7 @@ package com.xvm.battle.battleloading
 
         function setData(data:Object):void;
 
-        function invalidate2(param1:uint=4294967295):void;
+        function invalidate2(param1:uint = uint.MAX_VALUE):void;
 
         function addChild(child:DisplayObject):DisplayObject;
         function addChildAt(child:DisplayObject, index:int):DisplayObject;

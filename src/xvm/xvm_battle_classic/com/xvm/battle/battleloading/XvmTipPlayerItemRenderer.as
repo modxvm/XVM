@@ -120,7 +120,7 @@ package com.xvm.battle.battleloading
             return _icoIGR;
         }
 
-		public function invalidate2(id:uint = uint.MAX_VALUE):void
+        public function invalidate2(id:uint = uint.MAX_VALUE):void
         {
             invalidate(id);
         }

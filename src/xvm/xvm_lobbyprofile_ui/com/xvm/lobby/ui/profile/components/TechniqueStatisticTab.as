@@ -103,7 +103,7 @@ package com.xvm.lobby.ui.profile.components
 
         // helpers
 
-        private static function size(txt:String, sz:uint=12):String
+        private static function size(txt:String, sz:int=12):String
         {
             return "<font size='" + sz.toString() + "'>" + txt + "</font>";
         }

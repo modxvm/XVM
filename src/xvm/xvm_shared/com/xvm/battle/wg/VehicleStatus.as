@@ -6,7 +6,6 @@ package com.xvm.battle.wg
 {
     public class VehicleStatus extends Object
     {
-
         public static const DEFAULT:uint = 0;
 
         public static const IS_ALIVE:uint = 1;

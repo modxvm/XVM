@@ -25,7 +25,7 @@ package com.xvm.wg
 
         private var _ready:Boolean = false;
 
-        private var _size:uint = 0;
+        private var _size:int = 0;
 
         private var _permanent:Boolean = false;
 
@@ -87,7 +87,7 @@ package com.xvm.wg
             return this._source;
         }
 
-        public function get size() : uint
+        public function get size() : int
         {
             return this._size;
         }

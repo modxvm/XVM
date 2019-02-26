@@ -291,33 +291,33 @@ package com.xvm
 
         // PRIVATE
 
-        private const PART_NAME:uint     = 0;
-        private const PART_NORM:uint     = 1;
-        private const PART_FMT:uint      = 2;
-        private const PART_SUF:uint      = 3;
-        private const PART_MATCH_OP:uint = 4;
-        private const PART_MATCH:uint    = 5;
-        private const PART_REP:uint      = 6;
-        private const PART_DEF:uint      = 7;
+        private const PART_NAME:int     = 0;
+        private const PART_NORM:int     = 1;
+        private const PART_FMT:int      = 2;
+        private const PART_SUF:int      = 3;
+        private const PART_MATCH_OP:int = 4;
+        private const PART_MATCH:int    = 5;
+        private const PART_REP:int      = 6;
+        private const PART_DEF:int      = 7;
 
-        private const CACHE_MASK_ALIVE:uint =        1 << 0;
-        private const CACHE_MASK_READY:uint =        1 << 1;
-        private const CACHE_MASK_SELECTED:uint =     1 << 2;
-        private const CACHE_MASK_PLAYER:uint =       1 << 3;
-        private const CACHE_MASK_TEAMKILLER:uint =   1 << 4;
-        private const CACHE_MASK_SQUAD:uint =        1 << 5;
-        private const CACHE_MASK_PERSONAL_SQ:uint =  1 << 6;
-        private const CACHE_MASK_POSITION:uint =     1 << 7;
-        private const CACHE_MASK_MARKSONGUN:uint =   1 << 8;
-        private const CACHE_MASK_X_ENABLED:uint =    1 << 9;
-        private const CACHE_MASK_X_SPOTTED:uint =    1 << 10;
-        private const CACHE_MASK_X_FIRE:uint =       1 << 11;
-        private const CACHE_MASK_X_OVERTURNED:uint = 1 << 12;
-        private const CACHE_MASK_X_DROWNING:uint =   1 << 13;
-        private const CACHE_MASK_IS_FRIEND:uint =    1 << 14;
-        private const CACHE_MASK_IS_IGNORED:uint =   1 << 15;
-        private const CACHE_MASK_IS_MUTED:uint =     1 << 16;
-        private const CACHE_MASK_IS_CHATBAN:uint =   1 << 17;
+        private const CACHE_MASK_ALIVE:int =        1 << 0;
+        private const CACHE_MASK_READY:int =        1 << 1;
+        private const CACHE_MASK_SELECTED:int =     1 << 2;
+        private const CACHE_MASK_PLAYER:int =       1 << 3;
+        private const CACHE_MASK_TEAMKILLER:int =   1 << 4;
+        private const CACHE_MASK_SQUAD:int =        1 << 5;
+        private const CACHE_MASK_PERSONAL_SQ:int =  1 << 6;
+        private const CACHE_MASK_POSITION:int =     1 << 7;
+        private const CACHE_MASK_MARKSONGUN:int =   1 << 8;
+        private const CACHE_MASK_X_ENABLED:int =    1 << 9;
+        private const CACHE_MASK_X_SPOTTED:int =    1 << 10;
+        private const CACHE_MASK_X_FIRE:int =       1 << 11;
+        private const CACHE_MASK_X_OVERTURNED:int = 1 << 12;
+        private const CACHE_MASK_X_DROWNING:int =   1 << 13;
+        private const CACHE_MASK_IS_FRIEND:int =    1 << 14;
+        private const CACHE_MASK_IS_IGNORED:int =   1 << 15;
+        private const CACHE_MASK_IS_MUTED:int =     1 << 16;
+        private const CACHE_MASK_IS_CHATBAN:int =   1 << 17;
 
         // special case for dynamic macros converted to static
         private const HYBRID_MACROS:Vector.<String> = new <String>[
@@ -378,7 +378,7 @@ package com.xvm
 
         private function _getPlayerCache(options:IVOMacrosOptions):Object
         {
-            var idx:uint = 0;
+            var idx:int = 0;
             if (options.isAlive)
                 idx |= CACHE_MASK_ALIVE;
             if (options.isReady)
@@ -467,11 +467,11 @@ package com.xvm
 
             // Split tags
             var parts:Vector.<String> = Vector.<String>(format_str.split("{{"));
-            var len:uint = parts.length;
+            var len:int = parts.length;
             var res:String = parts[0];
             if (len > 1)
             {
-                for (var i:uint = 1; i < len; ++i)
+                for (var i:int = 1; i < len; ++i)
                 {
                     var part:String = parts[i];
                     var idx:int = part.indexOf("}}");
@@ -662,11 +662,11 @@ package com.xvm
 
             // split parts: name[:norm][%[flag][width][.prec]type][~suf][(=|!=|<|<=|>|>=)match][?rep][|def]
             var macroArr:Vector.<String> = Vector.<String>(macro.split(""));
-            var len:uint = macroArr.length;
+            var len:int = macroArr.length;
             var part:String = "";
             var section:int = 0;
             var nextSection:int = section;
-            for (var i:uint = 0; i < len; ++i)
+            for (var i:int = 0; i < len; ++i)
             {
                 var ch:String = macroArr[i];
                 switch (ch)

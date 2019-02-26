@@ -16,8 +16,8 @@ package com.xvm.types.cfg
             if (formats)
             {
                 cloned.formats = [];
-                var len:uint = formats.length;
-                for (var i:uint = 0; i < len; ++i)
+                var len:int = formats.length;
+                for (var i:int = 0; i < len; ++i)
                 {
                     var format:CExtraField = formats[i] as CExtraField;
                     if (format)
