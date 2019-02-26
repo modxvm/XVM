@@ -13,8 +13,6 @@ detect_actionscript_sdk
 
 class="com.xvm.Xvm"
 build_as3_swc \
-    -target-player $SWC_PLAYER_VERSION \
-    -swf-version $SWC_SWF_VERSION \
     -source-path xvm_shared \
     -external-library-path+=../xfw/~output/swc/wg_shared.swc \
     -external-library-path+=../xfw/~output/swc/xfw_shared.swc \

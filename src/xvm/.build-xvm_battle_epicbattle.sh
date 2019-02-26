@@ -13,8 +13,6 @@ detect_actionscript_sdk
 
 doc="xvm_battle/com/xvm/battle/BattleXvmApp.as"
 build_as3_swf \
-    -target-player $SWC_PLAYER_VERSION \
-    -swf-version $SWC_SWF_VERSION \
     -source-path xvm_battle \
     -source-path xvm_battle_epicbattle \
     -external-library-path+=../xfw/~output/swc/wg_battle.swc \

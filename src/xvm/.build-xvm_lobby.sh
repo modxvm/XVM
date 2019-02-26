@@ -13,8 +13,6 @@ detect_actionscript_sdk
 
 class="com.xvm.lobby.LobbyXvmApp"
 build_as3_swc \
-    -target-player $SWC_PLAYER_VERSION \
-    -swf-version $SWC_SWF_VERSION \
     -source-path xvm_lobby \
     -external-library-path+=../xfw/~output/swc/wg_lobby.swc \
     -external-library-path+=../xfw/~output/swc/xfw.swc \
@@ -25,8 +23,6 @@ build_as3_swc \
 
 doc="xvm_lobby/com/xvm/lobby/LobbyXvmApp.as"
 build_as3_swf \
-    -target-player $SWC_PLAYER_VERSION \
-    -swf-version $SWC_SWF_VERSION \
     -source-path xvm_lobby \
     -external-library-path+=../xfw/~output/swc/wg_lobby.swc \
     -external-library-path+=../xfw/~output/swc/xfw.swc \
