@@ -3,7 +3,7 @@
 #############################
 # CONFIG
 
-XVM_DIRS="res/icons audioww"
+XVM_DIRS="res/icons res/locker audioww"
 XVM_FILES="l10n/en.xc l10n/ru.xc"
 
 #############################
