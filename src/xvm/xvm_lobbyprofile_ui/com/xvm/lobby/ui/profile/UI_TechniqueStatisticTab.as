@@ -11,12 +11,12 @@ package com.xvm.lobby.ui.profile
 
     public dynamic class UI_TechniqueStatisticTab extends TechniqueStatisticTab_UI
     {
-        private var worker:TechniqueStatisticTab;
+        private var worker:TechniqueStatisticTabXvm;
 
         public function UI_TechniqueStatisticTab()
         {
             super();
-            worker = new TechniqueStatisticTab(this);
+            worker = new TechniqueStatisticTabXvm(this);
         }
 
         override protected function configUI():void

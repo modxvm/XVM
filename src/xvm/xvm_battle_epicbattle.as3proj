@@ -2,7 +2,7 @@
 <project version="2">
   <!-- Output SWF options -->
   <output>
-    <movie outputType="Application" />
+    <movie outputType="CustomBuild" />
     <movie input="" />
     <movie path="..\..\~output\res_mods\mods\xfw_packages\xvm_battle\as_battle_epicbattle\xvm_battle_epicbattle.swf" />
     <movie fps="50" />
@@ -87,7 +87,7 @@
   <!-- Executed before build -->
   <preBuildCommand />
   <!-- Executed after build -->
-  <postBuildCommand alwaysRun="False" />
+  <postBuildCommand alwaysRun="False">bash .build-xvm_battle_epicbattle.sh</postBuildCommand>
   <!-- Other project options -->
   <options>
     <option showHiddenPaths="False" />

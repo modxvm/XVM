@@ -16,11 +16,11 @@ package com.xvm.lobby.ui.limits.controls
     {
         // Embedded images
 
-        [Embed(source = 'resources/locked.png')]
+        //[Embed(source = 'resources/locked.png')]
         private var imgLockedClass:Class;
         private var imgLocked:Bitmap = new imgLockedClass();
 
-        [Embed(source = 'resources/unlocked.png')]
+        //[Embed(source = 'resources/unlocked.png')]
         private var imgUnlockedClass:Class;
         private var imgUnlocked:Bitmap = new imgUnlockedClass();
 
