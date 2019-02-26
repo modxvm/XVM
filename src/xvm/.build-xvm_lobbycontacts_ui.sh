@@ -13,8 +13,6 @@ detect_actionscript_sdk
 
 doc="xvm_lobbycontacts_ui/com/xvm/lobby/ui/LobbyContactsUIMod.as"
 build_as3_swf \
-    -target-player $SWC_PLAYER_VERSION \
-    -swf-version $SWC_SWF_VERSION \
     -source-path xvm_lobbycontacts_ui \
     -external-library-path+=../xfw/~output/swc/wg_lobby.swc \
     -external-library-path+=../xfw/~output/swc/xfw.swc \
