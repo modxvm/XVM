@@ -17,7 +17,8 @@ package com.xvm.lobby.ui.crew
                 if (!(r.skills is UI_SmallSkillsList))
                 {
                     var ui:UI_SmallSkillsList = null;
-                    for (var i:int = r.numChildren - 1; i >= 0; --i)
+                    var len:int = r.numChildren;
+                    for (var i:int = len - 1; i >= 0; --i)
                     {
                         var skills:SmallSkillsList = r.getChildAt(i) as SmallSkillsList;
                         if (skills)

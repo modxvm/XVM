@@ -303,11 +303,13 @@ package com.xvm.lobby.ui.tankcarousel
                 if (Macros.FormatBooleanGlobal(cfg.enabled, true))
                 {
                     var filter:DropShadowFilter = null;
-                    if (field.filters)
+                    var filters:Array = field.filters;
+                    if (filters)
                     {
-                        for (var i:int = 0; i < field.filters.length; ++i)
+                        var len:int = filters.length;
+                        for (var i:int = 0; i < len; ++i)
                         {
-                            filter = field.filters[i] as DropShadowFilter;
+                            filter = filters[i] as DropShadowFilter;
                             if (filter != null)
                             {
                                 break;

@@ -79,7 +79,8 @@ package com.xvm.lobby.widgets
         protected function filterWidgets(cfg:Array, type:String, layer:String):Array
         {
             var res:Array = [];
-            for (var i:int = 0; i < cfg.length; ++i)
+            var len:int = cfg.length;
+            for (var i:int = 0; i < len; ++i)
             {
                 var w:CWidget = ObjectConverter.convertData(cfg[i], CWidget);
                 if (w != null)
