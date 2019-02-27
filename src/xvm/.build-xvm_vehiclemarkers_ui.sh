@@ -13,6 +13,7 @@ detect_actionscript_sdk
 
 doc="xvm_vehiclemarkers_ui/com/xvm/vehiclemarkers/ui/XvmVehicleMarkersMod.as"
 build_as3_swf \
+    -inline \
     -source-path xvm_vehiclemarkers_ui \
     -external-library-path+=../xfw/~output/swc/wg_vm.swc \
     -include-libraries+=../xfw/~output/swc/xfw_shared.swc \

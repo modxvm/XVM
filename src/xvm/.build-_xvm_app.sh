@@ -13,6 +13,7 @@ detect_actionscript_sdk
 
 class="com.xvm.XvmAppBase"
 build_as3_swc \
+    -inline \
     -source-path xvm_app \
     -external-library-path+=../xfw/~output/swc/wg_shared.swc \
     -external-library-path+=../xfw/~output/swc/xfw.swc \

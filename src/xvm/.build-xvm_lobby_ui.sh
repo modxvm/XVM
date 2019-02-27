@@ -13,6 +13,7 @@ detect_actionscript_sdk
 
 doc="xvm_lobby_ui/com/xvm/lobby/ui/LobbyUIMod.as"
 build_as3_swf \
+    -inline \
     -source-path xvm_lobby_ui \
     -external-library-path+=../xfw/~output/swc/wg_lobby.swc \
     -external-library-path+=../xfw/~output/swc/xfw.swc \

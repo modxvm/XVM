@@ -14,6 +14,7 @@ package com.xvm.vehiclemarkers.ui
         public static const ALLY_STATES:Array = ["ally/alive/normal", "ally/alive/extended", "ally/dead/normal", "ally/dead/extended"];
         public static const ENEMY_STATES:Array = ["enemy/alive/normal", "enemy/alive/extended", "enemy/dead/normal", "enemy/dead/extended"];
 
+        [Inline]
         public static function getCurrentState(playerState:VOPlayerState, exInfo:Boolean):String
         {
             return (playerState.isAlly ? "ally/" : "enemy/") +
@@ -54,6 +55,7 @@ package com.xvm.vehiclemarkers.ui
             return null;
         }
 
+        [Inline]
         public static function getAllStates(isAlly:Boolean):Array
         {
             return isAlly ? ALLY_STATES : ENEMY_STATES;
