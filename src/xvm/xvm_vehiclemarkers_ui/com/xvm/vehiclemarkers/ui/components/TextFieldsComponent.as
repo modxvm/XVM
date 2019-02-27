@@ -5,6 +5,7 @@
 package com.xvm.vehiclemarkers.ui.components
 {
     import com.xfw.*;
+    import com.xvm.*;
     import com.xvm.battle.vo.*;
     import com.xvm.extraFields.*;
     import com.xvm.types.cfg.*;
@@ -12,29 +13,25 @@ package com.xvm.vehiclemarkers.ui.components
     import flash.geom.*;
     import flash.text.*;
 
-    public class TextFieldsComponent extends VehicleMarkerComponentBase
+    public final class TextFieldsComponent extends VehicleMarkerComponentBase implements IVehicleMarkerComponent
     {
+        // from net.wg.gui.battle.views.stats.constants::PlayerStatusSchemeName
+        private static const NORMAL:String = "normal";
+        private static const TEAM_KILLER:String = "teamkiller";
+        private static const SQUAD_PERSONAL:String = "squad";
+        private static const SELECTED:String = "selected";
+        private static const DEAD_POSTFIX:String = "_dead";
+        private static const OFFLINE_POSTFIX:String = "_offline";
+
         private var extraFieldsHolders:Object;
         private var isAlly:Boolean;
         private var exInfoDirty:Boolean;
         private var lastState:String;
         private var currentPlayerState:VOPlayerState;
 
-        public function TextFieldsComponent(marker:XvmVehicleMarker)
+        public final function TextFieldsComponent(marker:XvmVehicleMarker)
         {
             super(marker);
-        }
-
-        override protected function init(e:XvmVehicleMarkerEvent):void
-        {
-            if (this.initialized)
-                return;
-            var playerState:VOPlayerState = e.playerState;
-            isAlly = playerState.isAlly;
-            exInfoDirty = true;
-            lastState = null;
-            extraFieldsHolders = { };
-            super.init(e);
         }
 
         override protected function onDispose():void
@@ -53,19 +50,20 @@ package com.xvm.vehiclemarkers.ui.components
             super.onDispose();
         }
 
-        override protected function update(e:XvmVehicleMarkerEvent):void
+        public final function init(e:XvmVehicleMarkerEvent):void
         {
-            //Logger.addObject(e, 1, "update: " + (currentPlayerState ? currentPlayerState.playerName : "null"));
-            super.update(e);
-            if (extraFieldsHolders)
+            if (!this.initialized)
             {
-                updateExtraFieldsVisibility(e.playerState, e.exInfo);
-                extraFieldsHolders[lastState].update(e.playerState, 0, 0, -15.5); // -15.5 is used for configs compatibility
+                this.initialized = true;
+                isAlly = e.playerState.isAlly;
                 exInfoDirty = true;
+                lastState = null;
+                extraFieldsHolders = { };
             }
         }
 
-        override protected function onExInfo(e:XvmVehicleMarkerEvent):void
+        [Inline]
+        public final function onExInfo(e:XvmVehicleMarkerEvent):void
         {
             if (extraFieldsHolders)
             {
@@ -78,6 +76,18 @@ package com.xvm.vehiclemarkers.ui.components
                 {
                     updateExtraFieldsVisibility(e.playerState, e.exInfo);
                 }
+            }
+        }
+
+        [Inline]
+        public final function update(e:XvmVehicleMarkerEvent):void
+        {
+            if (extraFieldsHolders)
+            {
+                var playerState:VOPlayerState = e.playerState;
+                updateExtraFieldsVisibility(playerState, e.exInfo);
+                extraFieldsHolders[lastState].update(playerState, 0, 0, -15.5); // -15.5 is used for configs compatibility
+                exInfoDirty = true;
             }
         }
 
@@ -95,7 +105,6 @@ package com.xvm.vehiclemarkers.ui.components
 
         private function updateExtraFieldsVisibility(playerState:VOPlayerState, exInfo:Boolean):void
         {
-            //Xvm.swfProfilerBegin("TextFieldsComponent.updateExtraFieldsVisibility()");
             currentPlayerState = playerState;
             var currentState:String = XvmVehicleMarkerState.getCurrentState(playerState, exInfo);
             var extraFields:ExtraFields = extraFieldsHolders[lastState];
@@ -115,19 +124,11 @@ package com.xvm.vehiclemarkers.ui.components
                 extraFields.visible = true;
                 lastState = currentState;
             }
-            //Xvm.swfProfilerEnd("TextFieldsComponent.updateExtraFieldsVisibility()");
         }
 
-        // from net.wg.gui.battle.views.stats.constants::PlayerStatusSchemeName
-        public static const NORMAL:String = "normal";
-        public static const TEAM_KILLER:String = "teamkiller";
-        public static const SQUAD_PERSONAL:String = "squad";
-        public static const SELECTED:String = "selected";
-        public static const DEAD_POSTFIX:String = "_dead";
-        public static const OFFLINE_POSTFIX:String = "_offline";
         private function getColorSchemeName():String
         {
-            var schemeName:Array = [
+            var schemeName:Vector.<String> = new Vector.<String>[
                 currentPlayerState.isCurrentPlayer ? SELECTED
                 : currentPlayerState.isSquadPersonal ? SQUAD_PERSONAL
                 : currentPlayerState.isTeamKiller ? TEAM_KILLER

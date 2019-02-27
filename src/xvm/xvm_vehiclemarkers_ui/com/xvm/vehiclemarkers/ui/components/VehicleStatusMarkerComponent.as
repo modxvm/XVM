@@ -6,33 +6,42 @@ package com.xvm.vehiclemarkers.ui.components
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xvm.battle.vo.VOPlayerState;
     import com.xvm.types.cfg.*;
     import com.xvm.vehiclemarkers.ui.*;
+    import net.wg.gui.battle.views.vehicleMarkers.VehicleStatusContainerMarker;
 
-    public class VehicleStatusMarkerComponent extends VehicleMarkerComponentBase
+    public final class VehicleStatusMarkerComponent extends VehicleMarkerComponentBase implements IVehicleMarkerComponent
     {
-        public function VehicleStatusMarkerComponent(marker:XvmVehicleMarker)
+        public final function VehicleStatusMarkerComponent(marker:XvmVehicleMarker)
         {
             super(marker);
         }
 
-        override protected function update(e:XvmVehicleMarkerEvent):void
+        [Inline]
+        public final function init(e:XvmVehicleMarkerEvent):void
         {
-            try
+            // stub
+        }
+
+        [Inline]
+        public final function onExInfo(e:XvmVehicleMarkerEvent):void
+        {
+            update(e);
+        }
+
+        public final function update(e:XvmVehicleMarkerEvent):void
+        {
+            var cfg:CMarkersVehicleStatusMarker = e.cfg.vehicleStatusMarker;
+            var enabled:Boolean = cfg.enabled;
+            var marker_statusContainer:VehicleStatusContainerMarker = marker.statusContainer;
+            marker_statusContainer.visible = enabled;
+            if (enabled)
             {
-                super.update(e);
-                var cfg:CMarkersVehicleStatusMarker = e.cfg.vehicleStatusMarker;
-                marker.statusContainer.visible = cfg.enabled;
-                if (cfg.enabled)
-                {
-                    marker.statusContainer.x = Macros.FormatNumber(cfg.x, e.playerState);
-                    marker.statusContainer.y = Macros.FormatNumber(cfg.y, e.playerState) - 38;
-                    marker.statusContainer.alpha = Macros.FormatNumber(cfg.alpha, e.playerState) / 100.0;
-                }
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
+                var playerState:VOPlayerState = e.playerState;
+                marker_statusContainer.x = Macros.FormatNumber(cfg.x, playerState);
+                marker_statusContainer.y = Macros.FormatNumber(cfg.y, playerState) - 38;
+                marker_statusContainer.alpha = Macros.FormatNumber(cfg.alpha, playerState) / 100.0;
             }
         }
     }

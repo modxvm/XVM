@@ -9,26 +9,26 @@ package com.xvm.vehiclemarkers.ui
     import com.xvm.battle.vo.*;
     import com.xvm.types.cfg.*;
 
-    public class XvmVehicleMarkerState
+    public final class XvmVehicleMarkerState
     {
-        public static const ALLY_STATES:Array = ["ally/alive/normal", "ally/alive/extended", "ally/dead/normal", "ally/dead/extended"];
-        public static const ENEMY_STATES:Array = ["enemy/alive/normal", "enemy/alive/extended", "enemy/dead/normal", "enemy/dead/extended"];
+        public static const PLAYER_STATES:Vector.<String> = new <String>[
+            "enemy/dead/extended", "enemy/dead/normal", "enemy/alive/extended", "enemy/alive/normal",
+            "ally/dead/extended", "ally/dead/normal", "ally/alive/extended", "ally/alive/normal"];
+        public static const ALLY_STATES:Vector.<String> = new <String>[
+            "ally/alive/normal", "ally/alive/extended", "ally/dead/normal", "ally/dead/extended"];
+        public static const ENEMY_STATES:Vector.<String> = new <String>[
+            "enemy/alive/normal", "enemy/alive/extended", "enemy/dead/normal", "enemy/dead/extended"];
 
         [Inline]
         public static function getCurrentState(playerState:VOPlayerState, exInfo:Boolean):String
         {
-            return (playerState.isAlly ? "ally/" : "enemy/") +
-                (playerState.isAlive ? "alive/" : "dead/") +
-                (exInfo ? "extended" : "normal");
+            return PLAYER_STATES[(int(playerState.isAlly) << 2) | (int(playerState.isAlive) << 1) | int(exInfo)];
         }
 
+        [Inline]
         public static function getCurrentConfig(playerState:VOPlayerState, exInfo:Boolean):CMarkers4
         {
-            var result1:CMarkers = Config.config.markers;
-            var result2:CMarkers2 = playerState.isAlly ? result1.ally : result1.enemy;
-            var result3:CMarkers3 = playerState.isAlive ? result2.alive : result2.dead;
-            var result4:CMarkers4 = exInfo ? result3.extended : result3.normal;
-            return result4;
+            return Config.config.markers[playerState.isAlly ? "ally" : "enemy"][playerState.isAlive ? "alive" : "dead"][exInfo ? "extended" : "normal"];
         }
 
         public static function getConfig(stateString:String):CMarkers4
@@ -56,7 +56,7 @@ package com.xvm.vehiclemarkers.ui
         }
 
         [Inline]
-        public static function getAllStates(isAlly:Boolean):Array
+        public static function getAllStates(isAlly:Boolean):Vector.<String>
         {
             return isAlly ? ALLY_STATES : ENEMY_STATES;
         }

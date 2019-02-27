@@ -5,6 +5,7 @@
 package com.xvm.vehiclemarkers.ui.components
 {
     import com.xfw.*;
+    import com.xvm.*;
     import com.xvm.vehiclemarkers.ui.*;
     import net.wg.infrastructure.interfaces.entity.*;
 
@@ -17,39 +18,24 @@ package com.xvm.vehiclemarkers.ui.components
         {
             this.marker = marker;
             this.initialized = false;
-            marker.addEventListener(XvmVehicleMarkerEvent.INIT, init, false, 0, true);
-            marker.addEventListener(XvmVehicleMarkerEvent.UPDATE, update, false, 0, true);
-            marker.addEventListener(XvmVehicleMarkerEvent.EX_INFO, onExInfo, false, 0, true);
+            var instance:IVehicleMarkerComponent = this as IVehicleMarkerComponent;
+            marker.addEventListener(XvmVehicleMarkerEvent.INIT, instance.init, false, 0, true);
+            marker.addEventListener(XvmVehicleMarkerEvent.UPDATE, instance.update, false, 0, true);
+            marker.addEventListener(XvmVehicleMarkerEvent.EX_INFO, instance.onExInfo, false, 0, true);
         }
 
         public final function dispose():void
         {
             onDispose();
-            marker.removeEventListener(XvmVehicleMarkerEvent.INIT, init);
-            marker.removeEventListener(XvmVehicleMarkerEvent.UPDATE, update);
-            marker.removeEventListener(XvmVehicleMarkerEvent.EX_INFO, onExInfo);
+            var instance:IVehicleMarkerComponent = this as IVehicleMarkerComponent;
+            marker.removeEventListener(XvmVehicleMarkerEvent.INIT, instance.init);
+            marker.removeEventListener(XvmVehicleMarkerEvent.UPDATE, instance.update);
+            marker.removeEventListener(XvmVehicleMarkerEvent.EX_INFO, instance.onExInfo);
         }
 
         protected function onDispose():void
         {
             // virtual
-            //Logger.add("onDispose()");
-        }
-
-        protected function init(e:XvmVehicleMarkerEvent):void
-        {
-            // virtual
-            this.initialized = true;
-        }
-
-        protected function update(e:XvmVehicleMarkerEvent):void
-        {
-            // virtual
-        }
-
-        protected function onExInfo(e:XvmVehicleMarkerEvent):void
-        {
-            update(e);
         }
     }
 }

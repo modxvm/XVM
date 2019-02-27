@@ -13,89 +13,103 @@ package com.xvm.vehiclemarkers.ui.components
     import com.greensock.easing.*;
     import flash.display.*;
 
-    public class HealthBarComponent extends VehicleMarkerComponentBase
+    public final class HealthBarComponent extends VehicleMarkerComponentBase implements IVehicleMarkerComponent
     {
-        public function HealthBarComponent(marker:XvmVehicleMarker)
-        {
-            super(marker);
-            marker.addEventListener(XvmVehicleMarkerEvent.UPDATE_HEALTH, showDamage, false, 0, true);
-        }
-
         private var healthBar:Sprite = null;
         private var border:Sprite;
         private var fill:Sprite;
         private var damage:MovieClip;
 
-        override protected function init(e:XvmVehicleMarkerEvent):void
+        public final function HealthBarComponent(marker:XvmVehicleMarker)
         {
-            if (this.initialized)
-                return;
-            healthBar = new Sprite();
-            marker.addChild(healthBar);
-            border = new Sprite();
-            healthBar.addChild(border);
-            fill = new Sprite();
-            healthBar.addChild(fill);
-            damage = new MovieClip();
-            healthBar.addChild(damage);
-            super.init(e);
+            super(marker);
+            marker.addEventListener(XvmVehicleMarkerEvent.UPDATE_HEALTH, showDamage, false, 0, true);
         }
 
         override protected function onDispose():void
         {
             if (healthBar)
             {
+                var i:int = healthBar.numChildren;
+                while (--i > -1)
+                {
+                    healthBar.removeChildAt(0);
+                }
                 marker.removeChild(healthBar);
+                border = null;
+                fill = null;
+                damage = null;
                 healthBar = null;
             }
             super.onDispose();
         }
 
-        override protected function update(e:XvmVehicleMarkerEvent):void
+        public final function init(e:XvmVehicleMarkerEvent):void
         {
-            try
+            if (!this.initialized)
             {
-                super.update(e);
-                var cfg:CMarkersHealthBar = e.cfg.healthBar;
-                healthBar.visible = cfg.enabled;
-                if (cfg.enabled)
-                {
-                    var playerState:VOPlayerState = e.playerState;
-
-                    var border_color:Number = Macros.FormatNumber(cfg.border.color, playerState);
-                    var border_alpha:Number = Macros.FormatNumber(cfg.border.alpha, playerState, 100) / 100.0;
-                    border.graphics.clear();
-                    border.graphics.beginFill(border_color, border_alpha);
-                    border.graphics.drawRect(0, 0, cfg.width + cfg.border.size * 2, cfg.height + cfg.border.size * 2);
-                    border.graphics.endFill();
-
-                    var color:Number = Macros.FormatNumber(cfg.color, playerState);
-                    var lcolor:Number = Macros.FormatNumber(cfg.lcolor, playerState);
-                    var healthRatio:Number = playerState.curHealth / playerState.maxHealth;
-                    if (isNaN(healthRatio))
-                        healthRatio = 1;
-                    var fill_alpha:Number = Macros.FormatNumber(cfg.fill.alpha, playerState, 100) / 100.0;
-                    fill.graphics.clear();
-                    fill.graphics.beginFill(GraphicsUtil.colorByRatio(healthRatio, lcolor, color), fill_alpha);
-                    fill.graphics.drawRect(cfg.border.size, cfg.border.size, cfg.width * Math.min(healthRatio, 1.0), cfg.height);
-                    fill.graphics.endFill();
-
-                    //Logger.add(String(cfg.width * Math.min(healthRatio, 1.0)));
-
-                    damage.graphics.clear();
-                    damage.scaleX = 0;
-                    damage.graphics.beginFill(0);
-                    damage.graphics.drawRect(cfg.border.size, cfg.border.size, cfg.width, cfg.height);
-                    damage.graphics.endFill();
-
-                    healthBar.x = cfg.x;
-                    healthBar.y = cfg.y;
-                    healthBar.alpha = Macros.FormatNumber(cfg.alpha, playerState, 100) / 100.0;
-                }
+                this.initialized = true;
+                healthBar = new Sprite();
+                marker.addChild(healthBar);
+                border = new Sprite();
+                healthBar.addChild(border);
+                fill = new Sprite();
+                healthBar.addChild(fill);
+                damage = new MovieClip();
+                healthBar.addChild(damage);
             }
-            catch (ex:Error)
+        }
+
+        [Inline]
+        public final function onExInfo(e:XvmVehicleMarkerEvent):void
+        {
+            update(e);
+        }
+
+        public final function update(e:XvmVehicleMarkerEvent):void
+        {
+            var cfg:CMarkersHealthBar = e.cfg.healthBar;
+            var enabled:Boolean = cfg.enabled;
+            healthBar.visible = enabled;
+            if (enabled)
             {
-                Logger.err(ex);
+                var playerState:VOPlayerState = e.playerState;
+
+                var cfg_border:CMarkersHealthBarBorder = cfg.border;
+                var cfg_border_size:Number = cfg_border.size;
+                var cfg_width:Number = cfg.width;
+                var cfg_height:Number = cfg.height;
+
+                var border_color:Number = Macros.FormatNumber(cfg_border.color, playerState);
+                var border_alpha:Number = Macros.FormatNumber(cfg_border.alpha, playerState, 100) / 100.0;
+                var border_graphics:Graphics = border.graphics;
+                border_graphics.clear();
+                border_graphics.beginFill(border_color, border_alpha);
+                border_graphics.drawRect(0, 0, cfg_width + cfg_border_size * 2, cfg_height + cfg_border_size * 2);
+                border_graphics.endFill();
+
+                var color:Number = Macros.FormatNumber(cfg.color, playerState);
+                var lcolor:Number = Macros.FormatNumber(cfg.lcolor, playerState);
+                var healthRatio:Number = playerState.curHealth / playerState.maxHealth;
+                if (isNaN(healthRatio))
+                    healthRatio = 1;
+                var fill_alpha:Number = Macros.FormatNumber(cfg.fill.alpha, playerState, 100) / 100.0;
+                var fill_graphics:Graphics = fill.graphics;
+                fill_graphics.clear();
+                fill_graphics.beginFill(GraphicsUtil.colorByRatio(healthRatio, lcolor, color), fill_alpha);
+                fill_graphics.drawRect(cfg_border_size, cfg_border_size, cfg_width * Math.min(healthRatio, 1.0), cfg_height);
+                fill_graphics.endFill();
+
+                var damage_graphics:Graphics = damage.graphics;
+                damage_graphics.clear();
+                damage.scaleX = 0;
+                damage_graphics.beginFill(0);
+                damage_graphics.drawRect(cfg_border_size, cfg_border_size, cfg_width, cfg_height);
+                damage_graphics.endFill();
+
+                healthBar.x = cfg.x;
+                healthBar.y = cfg.y;
+                healthBar.alpha = Macros.FormatNumber(cfg.alpha, playerState, 100) / 100.0;
             }
         }
 
@@ -106,26 +120,22 @@ package com.xvm.vehiclemarkers.ui.components
          */
         private function showDamage(e:XvmVehicleMarkerEvent):void
         {
-            try
+            if (healthBar.visible)
             {
-                if (healthBar.visible)
+                var cfg:CMarkersHealthBar = e.cfg.healthBar;
+                var playerState:VOPlayerState = e.playerState;
+                TweenLite.killTweensOf(damage);
+                var damageInfo:VODamageInfo = playerState.damageInfo;
+                if (damageInfo && damageInfo.damageDelta > 0)
                 {
-                    var cfg:CMarkersHealthBar = e.cfg.healthBar;
-                    var playerState:VOPlayerState = e.playerState;
-                    TweenLite.killTweensOf(damage);
-                    if (!playerState.damageInfo || playerState.damageInfo.damageDelta <= 0)
-                        return;
                     damage.x = cfg.border.size + cfg.width * (playerState.curHealth / playerState.maxHealth) - 1;
-                    damage.scaleX += playerState.damageInfo.damageDelta / playerState.maxHealth;
-                    var color:Number = Macros.FormatNumber(cfg.damage.color, playerState);
+                    damage.scaleX += damageInfo.damageDelta / playerState.maxHealth;
+                    var cfg_damage:CMarkersHealthBarDamage = cfg.damage;
+                    var color:Number = Macros.FormatNumber(cfg_damage.color, playerState);
                     GraphicsUtil.tint(damage, color);
-                    damage.alpha = Macros.FormatNumber(cfg.damage.alpha, playerState, 100) / 100.0;
-                    TweenLite.to(damage, cfg.damage.fade, { scaleX: 0, ease: Cubic.easeIn } );
+                    damage.alpha = Macros.FormatNumber(cfg_damage.alpha, playerState, 100) / 100.0;
+                    TweenLite.to(damage, cfg_damage.fade, { scaleX: 0, ease: Cubic.easeIn } );
                 }
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
             }
         }
     }

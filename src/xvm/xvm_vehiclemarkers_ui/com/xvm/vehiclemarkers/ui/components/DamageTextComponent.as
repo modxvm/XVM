@@ -13,23 +13,14 @@ package com.xvm.vehiclemarkers.ui.components
     import flash.text.*;
     import scaleform.gfx.*;
 
-    public class DamageTextComponent extends VehicleMarkerComponentBase
+    public final class DamageTextComponent extends VehicleMarkerComponentBase implements IVehicleMarkerComponent
     {
-        public function DamageTextComponent(marker:XvmVehicleMarker)
+        private var damage:MovieClip;
+
+        public final function DamageTextComponent(marker:XvmVehicleMarker)
         {
             super(marker);
             marker.addEventListener(XvmVehicleMarkerEvent.UPDATE_HEALTH, showDamage, false, 0, true);
-        }
-
-        private var damage:MovieClip;
-
-        override protected function init(e:XvmVehicleMarkerEvent):void
-        {
-            if (this.initialized)
-                return;
-            damage = new MovieClip();
-            marker.addChild(damage);
-            super.init(e);
         }
 
         override protected function onDispose():void
@@ -42,6 +33,28 @@ package com.xvm.vehiclemarkers.ui.components
             super.onDispose();
         }
 
+        public final function init(e:XvmVehicleMarkerEvent):void
+        {
+            if (!this.initialized)
+            {
+                this.initialized = true;
+                damage = new MovieClip();
+                marker.addChild(damage);
+            }
+        }
+
+        [Inline]
+        public final function onExInfo(e:XvmVehicleMarkerEvent):void
+        {
+            // stub
+        }
+
+        [Inline]
+        public final function update(e:XvmVehicleMarkerEvent):void
+        {
+            // stub
+        }
+
         // PRIVATE
 
         /**
@@ -49,15 +62,18 @@ package com.xvm.vehiclemarkers.ui.components
          */
         private function showDamage(e:XvmVehicleMarkerEvent):void
         {
-            try
+            var e_cfg:CMarkers4 = e.cfg;
+            var playerState:VOPlayerState = e.playerState;
+            var damageInfo:VODamageInfo = playerState.damageInfo;
+            if (damageInfo && damageInfo.damageDelta > 0)
             {
-                var playerState:VOPlayerState = e.playerState;
-                if (!playerState.damageInfo || playerState.damageInfo.damageDelta <= 0)
-                    return;
-                var damageFlag:Number = playerState.damageInfo.damageFlag;
-                var cfg:CMarkersDamageText = damageFlag == Defines.FROM_PLAYER ? e.cfg.damageTextPlayer : damageFlag == Defines.FROM_SQUAD ? e.cfg.damageTextSquadman : e.cfg.damageText;
-                damage.visible = Macros.FormatBoolean(cfg.enabled, e.playerState, true);
-                if (damage.visible)
+                var damageFlag:Number = damageInfo.damageFlag;
+                var cfg:CMarkersDamageText = damageFlag == Defines.FROM_PLAYER ? e_cfg.damageTextPlayer
+                    : damageFlag == Defines.FROM_SQUAD ? e_cfg.damageTextSquadman
+                    : e_cfg.damageText;
+                var visible:Boolean = Macros.FormatBoolean(cfg.enabled, playerState, true);
+                damage.visible = visible;
+                if (visible)
                 {
                     var text:String = Macros.FormatString(playerState.isBlown ? Locale.get(cfg.blowupMessage) : Locale.get(cfg.damageMessage), playerState);
                     var alpha:Number = Macros.FormatNumber(cfg.alpha, playerState, 1) / 100.0;
@@ -101,10 +117,6 @@ package com.xvm.vehiclemarkers.ui.components
                     var maxRange:Number = Macros.FormatNumber(cfg.maxRange, playerState, 40);
                     new DamageTextAnimation(cfg, mc, maxRange); // defines and starts
                 }
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
             }
         }
     }
