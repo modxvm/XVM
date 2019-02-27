@@ -21,7 +21,6 @@ class BC(object):
     setFrags = 'BC_setFrags'
     updateVehiclesStat = 'BC_updateVehiclesStat'
     updatePersonalStatus = 'BC_updatePersonalStatus'
-    setArenaInfo = 'BC_setArenaInfo'
     setUserTags = 'BC_setUserTags'
     updateUserTags = 'BC_updateUserTags'
     setPersonalStatus = 'BC_setPersonalStatus'
@@ -62,10 +61,6 @@ def as_updateVehiclesStatsS(self, data):
 @registerEvent(BattleStatisticsDataController, 'as_updatePersonalStatusS')
 def as_updatePersonalStatusS(self, added, removed):
     g_markers.call(BC.updatePersonalStatus, added, removed)
-
-@registerEvent(BattleStatisticsDataController, 'as_setArenaInfoS')
-def as_setArenaInfoS(self, data):
-    g_markers.call(BC.setArenaInfo, data)
 
 @registerEvent(BattleStatisticsDataController, 'as_setUserTagsS')
 def as_setUserTagsS(self, data):

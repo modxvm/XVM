@@ -15,39 +15,16 @@ package com.xvm.battle.vo
         public var playerStates:Dictionary;
 
         // DAAPIVehiclesDataVO
-        private var _leftCorrelationIDs:Vector.<Number>;
-        private var _rightCorrelationIDs:Vector.<Number>;
         private var _leftVehiclesIDs:Vector.<Number>;
         private var _rightVehiclesIDs:Vector.<Number>;
-
-        // DAAPITotalStatsVO
-        public var leftScope:int = 0;
-        public var rightScope:int = 0;
 
         private var lastPositionAlly:int = 0;
         private var lastPositionEnemy:int = 0;
 
         private var _addedStates:Array = [];
 
-        public function get leftCorrelationIDs():Vector.<Number>
-        {
-            return _leftCorrelationIDs;
-        }
-
-        public function set leftCorrelationIDs(value:Vector.<Number>):void
-        {
-            _leftCorrelationIDs = value.concat(); // clone vector
-        }
-
-        public function get rightCorrelationIDs():Vector.<Number>
-        {
-            return _rightCorrelationIDs;
-        }
-
-        public function set rightCorrelationIDs(value:Vector.<Number>):void
-        {
-            _rightCorrelationIDs = value.concat(); // clone vector
-        }
+        private var _playerNameToVehicleIDMap:Dictionary;
+        private var _accountDBIDToVehicleIDMap:Dictionary;
 
         public function get leftVehiclesIDs():Vector.<Number>
         {
@@ -75,42 +52,33 @@ package com.xvm.battle.vo
             checkOrderChanged(old_ids, value);
         }
 
-        // private
-        private var playerNameToVehicleIDMap:Dictionary;
-        private var accountDBIDToVehicleIDMap:Dictionary;
-
         public function VOPlayersData()
         {
             playerStates = new Dictionary();
-            playerNameToVehicleIDMap = new Dictionary();
-            accountDBIDToVehicleIDMap = new Dictionary();
+            _playerNameToVehicleIDMap = new Dictionary();
+            _accountDBIDToVehicleIDMap = new Dictionary();
         }
 
-        public function get(vehicleID:Number):VOPlayerState
+        [Inline]
+        public final function get(vehicleID:Number):VOPlayerState
         {
             return isNaN(vehicleID) ? null : playerStates[vehicleID];
         }
 
-        public function getVehicleIDByPlayerName(playerName:String):Number
+        [Inline]
+        public final function getVehicleIDByPlayerName(playerName:String):Number
         {
-            return playerName ? playerNameToVehicleIDMap[playerName] : NaN;
+            return playerName ? _playerNameToVehicleIDMap[playerName] : NaN;
         }
 
-        public function getVehicleIDByAccountDBID(accountDBID:Number):Number
+        [Inline]
+        public final function getVehicleIDByAccountDBID(accountDBID:Number):Number
         {
-            return !isNaN(accountDBID) ? accountDBIDToVehicleIDMap[accountDBID] : NaN;
+            return !isNaN(accountDBID) ? _accountDBIDToVehicleIDMap[accountDBID] : NaN;
         }
 
         public function updateVehiclesData(data:Object):void
         {
-            if (data.leftCorrelationIDs)
-            {
-                leftCorrelationIDs = Vector.<Number>(data.leftCorrelationIDs);
-            }
-            if (data.rightCorrelationIDs)
-            {
-                rightCorrelationIDs = Vector.<Number>(data.rightCorrelationIDs);
-            }
             if (data.leftVehiclesIDs || data.leftItemsIDs)
             {
                 leftVehiclesIDs = Vector.<Number>(data.leftVehiclesIDs || data.leftItemsIDs);
@@ -218,12 +186,6 @@ package com.xvm.battle.vo
             }
         }
 
-        public function updateTotalStats(data:Object):void
-        {
-            leftScope = data.leftScope;
-            rightScope = data.rightScope;
-        }
-
         public function dispatchEvents():void
         {
             for each (var playerState:VOPlayerState in playerStates)
@@ -246,8 +208,8 @@ package com.xvm.battle.vo
                    index:index
                 });
                 playerStates[value.vehicleID] = playerState;
-                playerNameToVehicleIDMap[value.playerName] = value.vehicleID;
-                accountDBIDToVehicleIDMap[value.accountDBID] = value.vehicleID;
+                _playerNameToVehicleIDMap[value.playerName] = value.vehicleID;
+                _accountDBIDToVehicleIDMap[value.accountDBID] = value.vehicleID;
                 _addedStates.push(playerState);
             }
             else

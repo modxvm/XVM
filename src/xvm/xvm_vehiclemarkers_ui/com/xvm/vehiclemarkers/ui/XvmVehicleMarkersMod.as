@@ -132,7 +132,6 @@ package com.xvm.vehiclemarkers.ui
             Xfw.addCommandListener("BC_setFrags", BattleState.instance.setFrags);
             Xfw.addCommandListener("BC_updateVehiclesStat", BattleState.instance.updateVehiclesStat);
             Xfw.addCommandListener("BC_updatePersonalStatus", BattleState.instance.updatePersonalStatus);
-            Xfw.addCommandListener("BC_setArenaInfo", BattleState.instance.setArenaInfo);
             Xfw.addCommandListener("BC_setUserTags", BattleState.instance.setUserTags);
             Xfw.addCommandListener("BC_updateUserTags", BattleState.instance.updateUserTags);
             Xfw.addCommandListener("BC_setPersonalStatus", BattleState.instance.setPersonalStatus);
@@ -149,7 +148,6 @@ package com.xvm.vehiclemarkers.ui
             Xfw.removeCommandListener("BC_setFrags", BattleState.instance.setFrags);
             Xfw.removeCommandListener("BC_updateVehiclesStat", BattleState.instance.updateVehiclesStat);
             Xfw.removeCommandListener("BC_updatePersonalStatus", BattleState.instance.updatePersonalStatus);
-            Xfw.removeCommandListener("BC_setArenaInfo", BattleState.instance.setArenaInfo);
             Xfw.removeCommandListener("BC_setUserTags", BattleState.instance.setUserTags);
             Xfw.removeCommandListener("BC_updateUserTags", BattleState.instance.updateUserTags);
             Xfw.removeCommandListener("BC_setPersonalStatus", BattleState.instance.setPersonalStatus);
