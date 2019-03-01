@@ -13,7 +13,6 @@ package com.xvm.lobby
     import com.xvm.lobby.crew.CrewXvmView;
     import com.xvm.lobby.hangar.HangarXvmView;
     import com.xvm.lobby.limits.LimitsXvmView;
-    import com.xvm.lobby.loginlayout.LoginLayoutXvmView;
     import com.xvm.lobby.online.OnlineLobbyXvmView;
     import com.xvm.lobby.online.OnlineLoginXvmView;
     import com.xvm.lobby.ping.PingLobbyXvmView;
@@ -45,7 +44,7 @@ package com.xvm.lobby
 
         private static const _views:Object =
         {
-            "login": [ LoginLayoutXvmView, OnlineLoginXvmView, PingLoginXvmView, WidgetsLoginXvmView ],
+            "login": [ OnlineLoginXvmView, PingLoginXvmView, WidgetsLoginXvmView ],
             "lobby": [ LobbyXvmView, LimitsXvmView, OnlineLobbyXvmView, PingLobbyXvmView, WidgetsLobbyXvmView ],
             "hangar": [ CrewXvmView, HangarXvmView ],
             "battleResults": [ BattleResultsXvmView ],
