@@ -12,8 +12,8 @@ package com.xvm.vehiclemarkers.ui
     public final class XvmVehicleMarkerState
     {
         public static const PLAYER_STATES:Vector.<String> = new <String>[
-            "enemy/dead/extended", "enemy/dead/normal", "enemy/alive/extended", "enemy/alive/normal",
-            "ally/dead/extended", "ally/dead/normal", "ally/alive/extended", "ally/alive/normal"];
+            "enemy/dead/normal", "enemy/dead/extended", "enemy/alive/normal", "enemy/alive/extended",
+            "ally/dead/normal", "ally/dead/extended", "ally/alive/normal", "ally/alive/extended"];
         public static const ALLY_STATES:Vector.<String> = new <String>[
             "ally/alive/normal", "ally/alive/extended", "ally/dead/normal", "ally/dead/extended"];
         public static const ENEMY_STATES:Vector.<String> = new <String>[
