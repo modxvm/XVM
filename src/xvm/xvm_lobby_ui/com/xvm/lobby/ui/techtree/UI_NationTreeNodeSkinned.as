@@ -30,15 +30,20 @@ package com.xvm.lobby.ui.techtree
             //Logger.add("0x" + StringUtils.leftPad(nodeData.state.toString(16), 8, "0") + " " + nodeData.nameString);
             if (Config.config.hangar.hidePricesInTechTree)
             {
+                // TODO:1.4.1
+                /*
                 if (nodeData.shopPrice.gold == 0)
                 {
                     if ((nodeData.state & NODE_STATE_FLAGS.UNLOCKED) != 0)
                         nodeData.state |= NODE_STATE_FLAGS.WAS_IN_BATTLE;
                 }
+                */
             }
             super.setup(index, nodeData, entityType, matrixPosition);
         }
 
+        // TODO:1.4.1
+        /*
         override public function populateUI():void
         {
             if (Config.config.hangar.hidePricesInTechTree)
@@ -60,6 +65,7 @@ package com.xvm.lobby.ui.techtree
 
             super.populateUI();
         }
+        */
 
         override protected function draw():void
         {
@@ -103,7 +109,10 @@ package com.xvm.lobby.ui.techtree
             masteryTF.width = 32;
             masteryTF.height = 32;
             masteryTF.selectable = false;
+            // TODO:1.4.1
+            /*
             this.nameAndXp.addChild(masteryTF);
+            */
         }
 
     }

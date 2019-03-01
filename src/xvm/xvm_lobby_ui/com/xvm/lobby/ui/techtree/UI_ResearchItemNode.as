@@ -17,6 +17,8 @@ package com.xvm.lobby.ui.techtree
             super();
         }
 
+        // TODO:1.4.1
+        /*
         override public function populateUI():void
         {
             if (Config.config.hangar.hidePricesInTechTree)
@@ -37,6 +39,7 @@ package com.xvm.lobby.ui.techtree
             }
             super.populateUI();
         }
+        */
 
         override public function showContextMenu():void
         {
