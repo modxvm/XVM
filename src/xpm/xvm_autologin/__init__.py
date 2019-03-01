@@ -47,7 +47,8 @@ def LoginView_populate(base, self):
             if config.get('login/autologin'):
                 BigWorld.callback(0, self.as_doAutoLoginS)
 
-@registerEvent(LoginView, 'saveLastSelectedServer')
-def LoginView_saveLastSelectedServer(self, server):
-    if config.get('login/saveLastServer'):
-        userprefs.set('autologin/server', server)
+# TODO:1.4.1
+#@registerEvent(LoginView, 'saveLastSelectedServer')
+#def LoginView_saveLastSelectedServer(self, server):
+#    if config.get('login/saveLastServer'):
+#        userprefs.set('autologin/server', server)

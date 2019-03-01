@@ -268,7 +268,8 @@ tooltips_module.getUnlockPrice = tooltips.getUnlockPrice
 tooltips_vehicle.getUnlockPrice = tooltips.getUnlockPrice
 
 # force call invalidateFreeXP to update actualFreeXP on vehicle change
-@overrideMethod(Research, 'onResearchItemsDrawn')
-def Research_onResearchItemsDrawn(base, self):
-    base(self)
-    self.invalidateFreeXP()
+# TODO:1.4.1
+#@overrideMethod(Research, 'onResearchItemsDrawn')
+#def Research_onResearchItemsDrawn(base, self):
+#    base(self)
+#    self.invalidateFreeXP()
