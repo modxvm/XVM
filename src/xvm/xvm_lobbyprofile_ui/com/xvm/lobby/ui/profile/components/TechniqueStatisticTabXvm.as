@@ -16,7 +16,7 @@ package com.xvm.lobby.ui.profile.components
     import net.wg.gui.lobby.profile.pages.technique.data.*;
     import scaleform.gfx.*;
 
-    public class TechniqueStatisticTab
+    public class TechniqueStatisticTabXvm
     {
         private var proxy:UI_TechniqueStatisticTab;
 
@@ -28,7 +28,7 @@ package com.xvm.lobby.ui.profile.components
 
         // ENTRY POINTS
 
-        public function TechniqueStatisticTab(proxy:UI_TechniqueStatisticTab)
+        public function TechniqueStatisticTabXvm(proxy:UI_TechniqueStatisticTab)
         {
             //Logger.add("TechniqueStatisticTab");
             try
@@ -115,7 +115,7 @@ package com.xvm.lobby.ui.profile.components
 
         private static function formatHtmlText(txt:String, color:uint=1):String
         {
-            return TechniqueStatisticTab.color(size("<span class='txt'>" + (color == 1 ? txt : TechniqueStatisticTab.color(txt, color)) + "</span>"));
+            return TechniqueStatisticTabXvm.color(size("<span class='txt'>" + (color == 1 ? txt : TechniqueStatisticTabXvm.color(txt, color)) + "</span>"));
         }
 
         // create controls

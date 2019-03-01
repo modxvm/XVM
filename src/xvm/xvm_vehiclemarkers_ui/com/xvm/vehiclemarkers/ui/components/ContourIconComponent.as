@@ -8,36 +8,43 @@ package com.xvm.vehiclemarkers.ui.components
     import com.xvm.*;
     import com.xvm.types.cfg.*;
     import com.xvm.vehiclemarkers.ui.*;
+    import flash.display.MovieClip;
 
-    public class ContourIconComponent extends VehicleMarkerComponentBase
+    public final class ContourIconComponent extends VehicleMarkerComponentBase implements IVehicleMarkerComponent
     {
-        public function ContourIconComponent(marker:XvmVehicleMarker)
+        public final function ContourIconComponent(marker:XvmVehicleMarker)
         {
             super(marker);
         }
 
-        override protected function update(e:XvmVehicleMarkerEvent):void
+        [Inline]
+        public final function init(e:XvmVehicleMarkerEvent):void
         {
-            try
+            // stub
+        }
+
+        [Inline]
+        public final function onExInfo(e:XvmVehicleMarkerEvent):void
+        {
+            update(e);
+        }
+
+        public final function update(e:XvmVehicleMarkerEvent):void
+        {
+            var cfg:CMarkersContourIcon = e.cfg.contourIcon;
+            var enabled:Boolean = cfg.enabled;
+            var marker_vehicleIcon:MovieClip = marker.vehicleIcon;
+            marker_vehicleIcon.visible = enabled;
+            if (enabled)
             {
-                super.update(e);
-                var cfg:CMarkersContourIcon = e.cfg.contourIcon;
-                marker.vehicleIcon.visible = cfg.enabled;
-                if (cfg.enabled)
+                marker_vehicleIcon.x = cfg.x;
+                marker_vehicleIcon.y = cfg.y;
+                marker_vehicleIcon.alpha = cfg.alpha / 100.0;
+                if (!isNaN(cfg.amount))
                 {
-                    marker.vehicleIcon.x = cfg.x;
-                    marker.vehicleIcon.y = cfg.y;
-                    marker.vehicleIcon.alpha = cfg.alpha / 100.0;
-                    if (!isNaN(cfg.amount))
-                    {
-                        var color:Number = isNaN(cfg.color) ? Macros.FormatNumber("{{c:system}}", e.playerState) : cfg.color;
-                        GraphicsUtil.tint(marker.vehicleIcon, color, cfg.amount / 100.0);
-                    }
+                    var color:Number = isNaN(cfg.color) ? Macros.FormatNumber("{{c:system}}", e.playerState) : cfg.color;
+                    GraphicsUtil.tint(marker_vehicleIcon, color, cfg.amount / 100.0);
                 }
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
             }
         }
     }

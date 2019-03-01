@@ -5,6 +5,8 @@
 package com.xvm.lobby.ui.limits.controls
 {
     import com.xfw.*;
+    import com.xvm.*;
+    import com.xvm.wg.*;
     import flash.display.*;
     import flash.events.*;
     import flash.geom.*;
@@ -14,24 +16,21 @@ package com.xvm.lobby.ui.limits.controls
 
     public class LockerControl extends LabelControl implements ISoundable
     {
-        // Embedded images
+        // Images
 
-        [Embed(source = 'resources/locked.png')]
-        private var imgLockedClass:Class;
-        private var imgLocked:Bitmap = new imgLockedClass();
-
-        [Embed(source = 'resources/unlocked.png')]
-        private var imgUnlockedClass:Class;
-        private var imgUnlocked:Bitmap = new imgUnlockedClass();
+        private static const imgLockedPath:String = "xvm://res/locker/locked.png";
+        private static const imgUnlockedPath:String = "xvm://res/locker/unlocked.png";
+        private const imgLocked:ImageXVM = new ImageXVM();
+        private const imgUnlocked:ImageXVM = new ImageXVM();
 
         // Constants
 
         private static const ALPHA_MOUSE_OUT:Number = 0.8;
         private static const ALPHA_MOUSE_OVER:Number = 1.0;
 
-        // Protected vars
+        // Private vars
 
-        protected var _selected:Boolean = false;
+        private var _selected:Boolean = false;
 
         // Initialization
 
@@ -40,6 +39,17 @@ package com.xvm.lobby.ui.limits.controls
             scrollRect = new Rectangle(0, 0, 16, 16);
             setSize(16, 16);
             _selected = false;
+
+            try
+            {
+                Logger.add(Utils.fixImgTagSrc(imgLockedPath));
+                imgLocked.source = Utils.fixImgTagSrc(imgLockedPath);
+                Logger.add(Utils.fixImgTagSrc(imgUnlockedPath));
+                imgUnlocked.source = Utils.fixImgTagSrc(imgUnlockedPath);
+            } catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         // ISoundable

@@ -17,17 +17,22 @@ package com.xvm.vehiclemarkers.ui
 
     /**
      * This class is used as wrapper for Flash->Python communication.
+     *
+     * Use this code to log calls count:
+     *     var __stack:String = XfwUtils.stack(); Xvm.swfProfilerBegin(__stack); Xvm.swfProfilerEnd(__stack);
      */
     public class XvmVehicleMarkersMod extends Xvm
     {
         static private var _allyAtlas:String = ATLAS_CONSTANTS.VEHICLE_MARKER_ATLAS;
         static private var _enemyAtlas:String = ATLAS_CONSTANTS.VEHICLE_MARKER_ATLAS;
 
+        [Inline]
         static public function get allyAtlas():String
         {
             return _allyAtlas;
         }
 
+        [Inline]
         static public function get enemyAtlas():String
         {
             return _enemyAtlas;
@@ -69,25 +74,19 @@ package com.xvm.vehiclemarkers.ui
 
         private function onConfigLoaded(e:Event):void
         {
-            try
+            Xvm.swfProfilerBegin(XfwUtils.stack());
+            removeBattleControllerListeners();
+            if (Config.config.markers.enabled)
             {
-                //Logger.add("onConfigLoaded: enabled=" + Config.config.markers.enabled);
-                removeBattleControllerListeners();
-                if (Config.config.markers.enabled)
+                registerVehicleIconAtlases();
+                createBattleControllerListeners();
+                if (!_initialized)
                 {
-                    registerVehicleIconAtlases();
-                    createBattleControllerListeners();
-                    if (!_initialized)
-                    {
-                        _initialized = true;
-                        initialize();
-                    }
+                    _initialized = true;
+                    initialize();
                 }
             }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
+            Xvm.swfProfilerEnd(XfwUtils.stack());
         }
 
         private function registerVehicleIconAtlases():void
@@ -133,7 +132,6 @@ package com.xvm.vehiclemarkers.ui
             Xfw.addCommandListener("BC_setFrags", BattleState.instance.setFrags);
             Xfw.addCommandListener("BC_updateVehiclesStat", BattleState.instance.updateVehiclesStat);
             Xfw.addCommandListener("BC_updatePersonalStatus", BattleState.instance.updatePersonalStatus);
-            Xfw.addCommandListener("BC_setArenaInfo", BattleState.instance.setArenaInfo);
             Xfw.addCommandListener("BC_setUserTags", BattleState.instance.setUserTags);
             Xfw.addCommandListener("BC_updateUserTags", BattleState.instance.updateUserTags);
             Xfw.addCommandListener("BC_setPersonalStatus", BattleState.instance.setPersonalStatus);
@@ -150,7 +148,6 @@ package com.xvm.vehiclemarkers.ui
             Xfw.removeCommandListener("BC_setFrags", BattleState.instance.setFrags);
             Xfw.removeCommandListener("BC_updateVehiclesStat", BattleState.instance.updateVehiclesStat);
             Xfw.removeCommandListener("BC_updatePersonalStatus", BattleState.instance.updatePersonalStatus);
-            Xfw.removeCommandListener("BC_setArenaInfo", BattleState.instance.setArenaInfo);
             Xfw.removeCommandListener("BC_setUserTags", BattleState.instance.setUserTags);
             Xfw.removeCommandListener("BC_updateUserTags", BattleState.instance.updateUserTags);
             Xfw.removeCommandListener("BC_setPersonalStatus", BattleState.instance.setPersonalStatus);

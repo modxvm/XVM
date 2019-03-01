@@ -39,59 +39,42 @@ package com.xvm.vehiclemarkers.ui
 
         public function XvmVehicleMarker()
         {
-            //Xvm.swfProfilerBegin("XvmVehicleMarker.ctor()");
-            //Logger.add(getQualifiedClassName(this));
             super();
             Xvm.addEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
             Xvm.addEventListener(Defines.XVM_EVENT_ATLAS_LOADED, onAtlasLoaded);
             createComponents();
-            //Xvm.swfProfilerEnd("XvmVehicleMarker.ctor()");
         }
 
         override protected function configUI():void
         {
-            //Xvm.swfProfilerBegin("XvmVehicleMarker.configUI()");
             super.configUI();
             var vmManager:VehicleMarkersManager = VehicleMarkersManager.getInstance();
             vmManager.addEventListener(VehicleMarkersManagerEvent.SHOW_EX_INFO, onShowExInfoHandler, false, 0, true);
-            // TODO: removeStandardFields();
-            //Xvm.swfProfilerEnd("XvmVehicleMarker.configUI()");
         }
 
         override protected function onDispose():void
         {
-            //Xvm.swfProfilerBegin("XvmVehicleMarker.onDispose()");
-            super.onDispose();
             Xvm.removeEventListener(PlayerStateEvent.CHANGED, onPlayerStateChanged);
             Xvm.removeEventListener(Defines.XVM_EVENT_ATLAS_LOADED, onAtlasLoaded);
             var vmManager:VehicleMarkersManager = VehicleMarkersManager.getInstance();
             vmManager.removeEventListener(VehicleMarkersManagerEvent.SHOW_EX_INFO, onShowExInfoHandler);
             deleteComponents();
-            //Xvm.swfProfilerEnd("XvmVehicleMarker.onDispose()");
+            super.onDispose();
         }
 
         override public function setVehicleInfo(vClass:String, vIconSource:String, vType:String, vLevel:int,
             pFullName:String, pName:String, pClan:String, pRegion:String,
             maxHealth:int, entityName:String, hunt:Boolean, squadIndex:int, locSecString:String):void
         {
-            //Xvm.swfProfilerBegin("XvmVehicleMarker.setVehicleInfo()");
             super.setVehicleInfo.apply(this, arguments);
-            try
+            vehicleIconName = vIconSource.substr(vIconSource.lastIndexOf("/") + 1).replace(".png", "");
+            this.playerName = pName;
+            this.maxHealth = maxHealth;
+            vehicleID = BattleState.getVehicleIDByPlayerName(playerName);
+            if (!isNaN(vehicleID))
             {
-                vehicleIconName = vIconSource.substr(vIconSource.lastIndexOf("/") + 1).replace(".png", "");
-                this.playerName = pName;
-                this.maxHealth = maxHealth;
-                vehicleID = BattleState.getVehicleIDByPlayerName(playerName);
-                if (!isNaN(vehicleID))
-                {
-                    init(vehicleID);
-                }
+                init(vehicleID);
             }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-            //Xvm.swfProfilerEnd("XvmVehicleMarker.setVehicleInfo()");
         }
 
         override public function settingsUpdate(param1:int):void
@@ -106,97 +89,65 @@ package com.xvm.vehiclemarkers.ui
 
         override protected function draw():void
         {
-            //Xvm.swfProfilerBegin("XvmVehicleMarker.super.draw()");
             super.draw();
-            //Xvm.swfProfilerEnd("XvmVehicleMarker.super.draw()");
-            //Xvm.swfProfilerBegin("XvmVehicleMarker.draw()");
-            try
+            if (isInvalid(INVALIDATE_DATA))
             {
-                if (isInvalid(INVALIDATE_DATA))
+                var playerState:VOPlayerState = BattleState.get(vehicleID);
+                if (playerState)
                 {
-                    var playerState:VOPlayerState = BattleState.get(vehicleID);
-                    if (playerState)
+                    setupVehicleIcon(playerState.isAlly);
+                    dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE, playerState, exInfo));
+                    if (playerState.damageInfo != null)
                     {
-                        setupVehicleIcon(playerState.isAlly);
-                        dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE, playerState, exInfo));
-                        if (playerState.damageInfo != null)
-                        {
-                            dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE_HEALTH, playerState, exInfo));
-                            playerState.damageInfo = null;
-                        }
-                        if (playerState.markerState != null)
-                        {
-                            dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE_STATE, playerState, exInfo));
-                            playerState.markerState = null;
-                        }
+                        dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE_HEALTH, playerState, exInfo));
+                        playerState.damageInfo = null;
+                    }
+                    if (playerState.markerState != null)
+                    {
+                        dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE_STATE, playerState, exInfo));
+                        playerState.markerState = null;
                     }
                 }
             }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-            //Xvm.swfProfilerEnd("XvmVehicleMarker.draw()");
         }
 
         override public function updateHealth(newHealth:int, damageFlag:int, damageType:String):void
         {
-            //Xvm.swfProfilerBegin("XvmVehicleMarker.updateHealth()");
-            try
+            this.curHealth = newHealth;
+            var playerState:VOPlayerState = BattleState.get(vehicleID);
+            if (playerState)
             {
-                this.curHealth = newHealth;
-                var playerState:VOPlayerState = BattleState.get(vehicleID);
-                if (playerState)
+                playerState.update({
+                    damageInfo: new VODamageInfo({
+                        damageDelta: playerState.getCurHealthValue() - Math.max(newHealth, 0),
+                        damageType: damageType,
+                        damageFlag: damageFlag
+                    }),
+                    curHealth: newHealth
+                });
+                // BattleState may not be updated yet, but {{my-frags}} macro should display correct value in the damage message
+                if (newHealth <= 0)
                 {
-                    //Logger.add("updateHealth: " + playerState.playerName + " " + newHealth);
-                    playerState.update({
-                        damageInfo: new VODamageInfo({
-                            damageDelta: playerState.getCurHealthValue() - Math.max(newHealth, 0),
-                            damageType: damageType,
-                            damageFlag: damageFlag
-                        }),
-                        curHealth: newHealth
-                    });
-                    // BattleState may not be updated yet, but {{my-frags}} macro should display correct value in the damage message
-                    if (newHealth <= 0)
+                    if (damageFlag == Defines.FROM_PLAYER)
                     {
-                        if (damageFlag == Defines.FROM_PLAYER)
-                        {
-                            updatePlayerFrags();
-                            //Logger.add("frags=" + BattleState.playerFrags);
-                        }
+                        updatePlayerFrags();
                     }
-                    playerState.dispatchEvents();
-                    invalidate(INVALIDATE_DATA);
-                    validateNow(); // required to handle simultaneous shots
                 }
+                playerState.dispatchEvents();
+                invalidate(INVALIDATE_DATA);
+                validateNow(); // required to handle simultaneous shots
             }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-            //Xvm.swfProfilerEnd("XvmVehicleMarker.updateHealth()");
         }
 
         override public function setHealth(curHealth:int):void
         {
-            //Xvm.swfProfilerBegin("XvmVehicleMarker.setHealth()");
-            try
+            this.curHealth = curHealth;
+            var playerState:VOPlayerState = BattleState.get(vehicleID);
+            if (playerState)
             {
-                //Logger.add("curHealth=" + curHealth);
-                this.curHealth = curHealth;
-                var playerState:VOPlayerState = BattleState.get(vehicleID);
-                if (playerState)
-                {
-                    playerState.update( { damageInfo:null, curHealth: curHealth } );
-                    playerState.dispatchEvents();
-                }
+                playerState.update( { damageInfo:null, curHealth: curHealth } );
+                playerState.dispatchEvents();
             }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-            //Xvm.swfProfilerEnd("XvmVehicleMarker.setHealth()");
         }
 
         override public function updateState(param1:String, param2:Boolean, param3:String = "", param4:String = ""):void
@@ -220,26 +171,19 @@ package com.xvm.vehiclemarkers.ui
 
         override public function setSpeaking(value:Boolean):void
         {
-            //Xvm.swfProfilerBegin("XvmVehicleMarker.setSpeaking()");
-            super.setSpeaking(value);
-            try
+            var playerState:VOPlayerState = BattleState.get(vehicleID);
+            if (playerState)
             {
-                var playerState:VOPlayerState = BattleState.get(vehicleID);
-                if (playerState)
-                {
-                    dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.SET_SPEAKING, playerState, exInfo));
-                }
+                dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.SET_SPEAKING, playerState, exInfo));
             }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-            //Xvm.swfProfilerEnd("XvmVehicleMarker.setSpeaking()");
         }
 
-        // Allow only one updateMarkerSettins() call from the original code (to hide controls)
         private var _xvm_active_called:Boolean = false;
-        override public function xvm_active():Boolean
+
+        /**
+         * Allow only one updateMarkerSettings() call from the original code (to hide controls)
+         */
+        override public final function xvm_active():Boolean
         {
             if (!_xvm_active_called)
             {
@@ -254,99 +198,76 @@ package com.xvm.vehiclemarkers.ui
             return XvmVehicleMarkerConstants.DISABLED_MARKER_SETTINGS;
         }
 
+        // PRIVATE
+
         private function onShowExInfoHandler(e:VehicleMarkersManagerEvent):void
         {
-            //Xvm.swfProfilerBegin("XvmVehicleMarker.onShowExInfoHandler()");
-            try
+            var playerState:VOPlayerState = BattleState.get(vehicleID);
+            if (playerState)
             {
-                var playerState:VOPlayerState = BattleState.get(vehicleID);
-                if (playerState)
-                {
-                    dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.EX_INFO, playerState, exInfo));
-                }
+                dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.EX_INFO, playerState, exInfo));
             }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-            //Xvm.swfProfilerEnd("XvmVehicleMarker.onShowExInfoHandler()");
         }
-
-        // PRIVATE
 
         private function createComponents():void
         {
-            try
-            {
-                vehicleTypeIconComponent = new VehicleTypeIconComponent(this);
-                contourIconComponent = new ContourIconComponent(this);
-                levelIconComponent = new LevelIconComponent(this);
-                actionMarkerComponent = new ActionMarkerComponent(this);
-                vehicleStatusMarkerComponent = new VehicleStatusMarkerComponent(this);
-                healthBarComponent = new HealthBarComponent(this);
-                textFieldsComponent = new TextFieldsComponent(this);
-                damageIndicatorComponent = new DamageIndicatorComponent(this);
-                damageTextComponent = new DamageTextComponent(this);
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
+            vehicleTypeIconComponent = new VehicleTypeIconComponent(this);
+            contourIconComponent = new ContourIconComponent(this);
+            levelIconComponent = new LevelIconComponent(this);
+            actionMarkerComponent = new ActionMarkerComponent(this);
+            vehicleStatusMarkerComponent = new VehicleStatusMarkerComponent(this);
+            healthBarComponent = new HealthBarComponent(this);
+            textFieldsComponent = new TextFieldsComponent(this);
+            damageIndicatorComponent = new DamageIndicatorComponent(this);
+            damageTextComponent = new DamageTextComponent(this);
         }
 
         private function deleteComponents():void
         {
-            try
+            if (vehicleTypeIconComponent)
             {
-                if (vehicleTypeIconComponent)
-                {
-                    vehicleTypeIconComponent.dispose();
-                    vehicleTypeIconComponent = null;
-                }
-                if (contourIconComponent)
-                {
-                    contourIconComponent.dispose();
-                    contourIconComponent = null;
-                }
-                if (levelIconComponent)
-                {
-                    levelIconComponent.dispose();
-                    levelIconComponent = null;
-                }
-                if (actionMarkerComponent)
-                {
-                    actionMarkerComponent.dispose();
-                    actionMarkerComponent = null;
-                }
-                if (vehicleStatusMarkerComponent)
-                {
-                    vehicleStatusMarkerComponent.dispose();
-                    vehicleStatusMarkerComponent = null;
-                }
-                if (healthBarComponent)
-                {
-                    healthBarComponent.dispose();
-                    healthBarComponent = null;
-                }
-                if (textFieldsComponent)
-                {
-                    textFieldsComponent.dispose();
-                    textFieldsComponent = null;
-                }
-                if (damageIndicatorComponent)
-                {
-                    damageIndicatorComponent.dispose();
-                    damageIndicatorComponent = null;
-                }
-                if (damageTextComponent)
-                {
-                    damageTextComponent.dispose();
-                    damageTextComponent = null;
-                }
+                vehicleTypeIconComponent.dispose();
+                vehicleTypeIconComponent = null;
             }
-            catch (ex:Error)
+            if (contourIconComponent)
             {
-                Logger.err(ex);
+                contourIconComponent.dispose();
+                contourIconComponent = null;
+            }
+            if (levelIconComponent)
+            {
+                levelIconComponent.dispose();
+                levelIconComponent = null;
+            }
+            if (actionMarkerComponent)
+            {
+                actionMarkerComponent.dispose();
+                actionMarkerComponent = null;
+            }
+            if (vehicleStatusMarkerComponent)
+            {
+                vehicleStatusMarkerComponent.dispose();
+                vehicleStatusMarkerComponent = null;
+            }
+            if (healthBarComponent)
+            {
+                healthBarComponent.dispose();
+                healthBarComponent = null;
+            }
+            if (textFieldsComponent)
+            {
+                textFieldsComponent.dispose();
+                textFieldsComponent = null;
+            }
+            if (damageIndicatorComponent)
+            {
+                damageIndicatorComponent.dispose();
+                damageIndicatorComponent = null;
+            }
+            if (damageTextComponent)
+            {
+                damageTextComponent.dispose();
+                damageTextComponent = null;
             }
         }
 
@@ -391,7 +312,8 @@ package com.xvm.vehiclemarkers.ui
             }
         }
 
-        private function setupVehicleIcon(isAlly:Boolean):void
+        [Inline]
+        private final function setupVehicleIcon(isAlly:Boolean):void
         {
             var atlasManager:RootSWFAtlasManager = RootSWFAtlasManager.instance;
             var atlasName:String = isAlly ? XvmVehicleMarkersMod.allyAtlas : XvmVehicleMarkersMod.enemyAtlas;
@@ -408,7 +330,6 @@ package com.xvm.vehiclemarkers.ui
             if (!(playerName in dict))
                 dict[playerName] = {};
             var pdata:Object = dict[playerName];
-
             // {{turret}}
             pdata["turret"] = getTurretData();
         }
@@ -437,6 +358,7 @@ package com.xvm.vehiclemarkers.ui
         }
 
         private static var _vmPlayerFrags:Number = 0;
+        [Inline]
         private static function updatePlayerFrags():void
         {
             if (_vmPlayerFrags == BattleState.playerFrags)

@@ -14,7 +14,7 @@ package com.xvm.battle
 
     public class BattleState extends UIComponent // implements IBattleComponentDataController
     {
-        private static var INVALIDATE_PLAYERS_PANEL_MODE:String = "INVALIDATE_PLAYERS_PANEL_MODE";
+        private static const INVALIDATE_PLAYERS_PANEL_MODE:String = "INVALIDATE_PLAYERS_PANEL_MODE";
 
         public static function get(vehicleID:Number):VOPlayerState
         {
@@ -29,11 +29,6 @@ package com.xvm.battle
         public static function getVehicleIDByAccountDBID(accountDBID:Number):Number
         {
             return instance._playersDataVO ? instance._playersDataVO.getVehicleIDByAccountDBID(accountDBID) : NaN;
-        }
-
-        public static function get arenaInfoVO():VOArenaInfo
-        {
-            return instance._arenaInfoVO;
         }
 
         public static function get playersDataVO():VOPlayersData
@@ -152,7 +147,6 @@ package com.xvm.battle
             return _instance;
         }
 
-        private var _arenaInfoVO:VOArenaInfo = null;
         private var _playersDataVO:VOPlayersData = null;
         private var _captureBarDataVO:VOCaptureBarData = new VOCaptureBarData();
         private var _personalStatus:uint;
@@ -254,16 +248,10 @@ package com.xvm.battle
                 if (_playersDataVO == null)
                     return;
                 _playersDataVO.updatePlayerState(data.vehicleID, { vehicleStatus: data.status });
-                if (data.rightCorrelationIDs)
-                    _playersDataVO.rightCorrelationIDs = Vector.<Number>(data.rightCorrelationIDs);
                 if (data.rightVehiclesIDs || data.rightItemsIDs)
                     _playersDataVO.rightVehiclesIDs = Vector.<Number>(data.rightVehiclesIDs || data.rightItemsIDs);
-                if (data.leftCorrelationIDs)
-                    _playersDataVO.leftCorrelationIDs = Vector.<Number>(data.leftCorrelationIDs);
                 if (data.leftVehiclesIDs || data.leftItemsIDs)
                     _playersDataVO.leftVehiclesIDs = Vector.<Number>(data.leftVehiclesIDs || data.leftItemsIDs);
-                if (data.totalStats)
-                    _playersDataVO.updateTotalStats(data.totalStats);
                 invalidate(InvalidationType.STATE);
             }
             catch (ex:Error)
@@ -339,10 +327,6 @@ package com.xvm.battle
                 {
                     _playersDataVO.updateVehicleFrags(data.rightFrags);
                 }
-                if (data.totalStats)
-                {
-                    _playersDataVO.updateTotalStats(data.totalStats);
-                }
                 invalidate(InvalidationType.STATE);
             }
             catch (ex:Error)
@@ -373,24 +357,6 @@ package com.xvm.battle
             finally
             {
                 //Xvm.swfProfilerEnd("BattleState.updatePlayerStatus()");
-            }
-        }
-
-        public function setArenaInfo(data:Object):void
-        {
-            //Logger.addObject(data, 2, '[BattleState] setArenaInfo');
-            //Xvm.swfProfilerBegin("BattleState.setArenaInfo()");
-            try
-            {
-                _arenaInfoVO = new VOArenaInfo(data);
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-            finally
-            {
-                //Xvm.swfProfilerEnd("BattleState.setArenaInfo()");
             }
         }
 

@@ -3,6 +3,8 @@
 # XVM team (c) https://modxvm.com 2014-2019
 # XVM nightly build system
 
+set -e
+
 XVMBUILD_ROOT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$XVMBUILD_ROOT_PATH"
 
@@ -80,27 +82,24 @@ build_as3(){
 
     pushd "$XVMBUILD_ROOT_PATH"/src/xvm/ > /dev/null
 
-    top=(
-        "_xvm_shared.as3proj"
-        "_xvm_app.as3proj"
-        "xvm_lobby.as3proj"
-        "xvm_battle_classic.as3proj"
-        "xvm_battle_epicbattle.as3proj"
-        "xvm_battle_epicrandom.as3proj"
-        "xvm_battle_ranked.as3proj"
-    )
+    top="
+        _xvm_shared
+        _xvm_app
+        xvm_lobby
+    "
 
-    for proj in "${top[@]}"; do
+    for proj in $top; do
         echo "Building $proj"
-        build_as3_h "$proj" || exit $?
+        . .build-${proj}.sh
     done
 
     for proj in *.as3proj; do
         exists=0
-        for e in "${top[@]}"; do [[ "$e" == "$proj" ]] && { exists=1; break; } done
+        proj=${proj%.*}
+        for e in $top; do [[ "$e" == "$proj" ]] && { exists=1; break; } done
         if [ $exists -eq 0 ]; then
             echo "Building $proj"
-            build_as3_h "$proj" || exit $?
+            . .build-${proj}.sh
         fi
     done
 
@@ -208,9 +207,8 @@ detect_arch
 
 extend_path
 
-detect_fdbuild
+detect_actionscript_sdk
 detect_ffdec
-detect_flex
 detect_java
 detect_mono
 detect_patch
@@ -221,7 +219,7 @@ detect_zip
 
 load_repositorystats
 
-clean_repodir
+#clean_repodir
 
 create_directories
 

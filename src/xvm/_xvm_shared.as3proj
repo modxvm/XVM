@@ -12,6 +12,7 @@
     <movie minorVersion="2" />
     <movie platform="Flash Player" />
     <movie background="#6D6178" />
+    <movie preferredSDK="Apache Royale 0.9.4 FP11.1 AIR14.0 en_US;4.14.1;" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
@@ -83,7 +84,7 @@
   <!-- Executed before build -->
   <preBuildCommand />
   <!-- Executed after build -->
-  <postBuildCommand alwaysRun="True">bash .build-xvm_shared.swc.sh</postBuildCommand>
+  <postBuildCommand alwaysRun="True">bash .build-_xvm_shared.sh</postBuildCommand>
   <!-- Other project options -->
   <options>
     <option showHiddenPaths="False" />

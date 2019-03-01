@@ -1,13 +1,14 @@
 package com.xvm.vehiclemarkers.ui.components
 {
     import com.xfw.*
+    import com.xvm.*;
     import com.greensock.*;
     import com.greensock.easing.*;
     import com.greensock.plugins.*;
     import com.xvm.types.cfg.*;
     import flash.display.*;
 
-    internal class DamageTextAnimation
+    internal final class DamageTextAnimation
     {
         // Animates textField and cleans it up.
 
@@ -40,7 +41,7 @@ package com.xvm.vehiclemarkers.ui.components
           * Make two movieclips?
           * Use GraphicsUtil.createShadowFilter and tween filter?
           */
-        public function DamageTextAnimation(cfg:CMarkersDamageText, mc:MovieClip, maxRange:Number)
+        public final function DamageTextAnimation(cfg:CMarkersDamageText, mc:MovieClip, maxRange:Number)
         {
             this.mc = mc;
 
@@ -55,27 +56,34 @@ package com.xvm.vehiclemarkers.ui.components
             timeline.append(fadeOut(), FADEOUT_TIME_OFFSET);
         }
 
-        private function emerge():TweenLite
+        // PRIVATE
+
+        [Inline]
+        private final function emerge():TweenLite
         {
             return TweenLite.from(mc, EMERGE_DURATION, { alpha:0, ease:Linear.easeNone, cacheAsBitmap:true } );
         }
 
-        private function tint():TweenLite
+        [Inline]
+        private final function tint():TweenLite
         {
             return TweenLite.from(mc, TINT_DURATION, { tint:"0xFFFFFF", ease: Linear.easeNone, cacheAsBitmap:true } );
         }
 
-        private function moveUpward(movementDuration:Number, distanceUpward:Number):TweenLite
+        [Inline]
+        private final function moveUpward(movementDuration:Number, distanceUpward:Number):TweenLite
         {
             return TweenLite.to(mc, movementDuration, { y:distanceUpward, ease:Linear.easeNone, cacheAsBitmap:true } );
         }
 
-        private function fadeOut():TweenLite
+        [Inline]
+        private final function fadeOut():TweenLite
         {
             return TweenLite.to(mc, FADEOUT_DURATION, { alpha:0, ease:Linear.easeNone, cacheAsBitmap:true } );
         }
 
-        private function removeMovieClip():void
+        [Inline]
+        private final function removeMovieClip():void
         {
             while (mc.numChildren > 0)
             {
