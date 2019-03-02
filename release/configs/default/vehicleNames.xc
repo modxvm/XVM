@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 30.01.2019
+    // Last update: 02.03.2019
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -88,6 +88,7 @@
     "france-F10_AMX_50B_fallout":            {"name": null, "short": null},
     "france-F110_Lynx_6x6":                  {"name": null, "short": null},
     "france-F111_AM39_Gendron_Somua":        {"name": null, "short": null},
+    "france-F112_M10_RBFM":                  {"name": null, "short": null},
     "france-F11_Renault_G1R":                {"name": null, "short": null},
     "france-F12_Hotchkiss_H35":              {"name": null, "short": null},
     "france-F13_AMX38":                      {"name": null, "short": null},
