@@ -242,7 +242,7 @@ package com.xvm.lobby.ui.battleresults
             try
             {
                 // TODO: Need add 'stun' column
-                var x:int = efficiencyTitle.x + 276;
+                var x:int = efficiencyTitle.x + 269;
                 var y:int = efficiencyTitle.y + 34;
                 var w:Number = 33;
 
