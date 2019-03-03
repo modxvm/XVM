@@ -102,13 +102,13 @@ class _Stat(object):
             prefix = 'res_mods/mods/shared_resources/xvm/res/{}'.format(
                 xfwutils.fix_path_slashes(config.get('battle/clanIconsFolder')))
             yield '{}ID/{}.png'.format(prefix, pl.accountDBID)
-            yield '{}{}/nick/{}.png'.format(prefix, GAME_REGION, pl.name)
+            yield '{}{}/nick/{}.png'.format(prefix, getRegion(), pl.name)
             if hasattr(pl, 'x_emblem'):
                 yield pl.x_emblem
             if pl.clan:
-                yield '{}{}/clan/{}.png'.format(prefix, GAME_REGION, pl.clan)
-                yield '{}{}/clan/default.png'.format(prefix, GAME_REGION)
-            yield '{}{}/nick/default.png'.format(prefix, GAME_REGION)
+                yield '{}{}/clan/{}.png'.format(prefix, getRegion(), pl.clan)
+                yield '{}{}/clan/default.png'.format(prefix, getRegion())
+            yield '{}{}/nick/default.png'.format(prefix, getRegion())
 
         for fn in paths_gen():
             if os.path.isfile(fn):
@@ -309,7 +309,7 @@ class _Stat(object):
     def _get_user(self):
         (value,) = self.req['args']
         orig_value = value
-        region = GAME_REGION
+        region = getRegion()
         if region == "CT":
             suf = value[-3:]
             if suf in ('_RU', '_EU', '_NA', '_US', '_SG'):

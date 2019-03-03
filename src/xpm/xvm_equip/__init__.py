@@ -64,7 +64,7 @@ def xvm_equip_init(*args, **kwargs):
             debug('xvm_equip: disabled')
             player_name = None
             return
-        player_name = '%s_%s' % (BigWorld.player().name, GAME_REGION)
+        player_name = '%s_%s' % (BigWorld.player().name, getRegion())
         debug('xvm_equip: enabled, using name %s' % player_name)
     except Exception, ex:
         err(traceback.format_exc())

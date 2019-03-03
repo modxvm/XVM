@@ -59,11 +59,11 @@ def load(e):
 
         regionDetected = 'region' not in config_data or config_data['region'].lower() == XVM.REGION_AUTO_DETECTION
         if regionDetected:
-            config_data['region'] = GAME_REGION
+            config_data['region'] = getRegion()
 
         languageDetected = 'language' not in config_data or config_data['language'] == XVM.LOCALE_AUTO_DETECTION
         if languageDetected:
-            config_data['language'] = GAME_LANGUAGE
+            config_data['language'] = getLanguage()
         lang_data = _load_locale_file()
 
         log('Config loaded. Region: {} ({}), Language: {} ({})'.format(
@@ -175,7 +175,7 @@ def _tuneup_config(config):
     config['__xvmVersion'] = XVM.XVM_VERSION
     config['__wotVersion'] = XVM.WOT_VERSION
     config['__xvmIntro'] = XVM.XVM_INTRO
-    config['__wgApiAvailable'] = GAME_REGION in xfw_constants.URLS.WG_API_SERVERS
+    config['__wgApiAvailable'] = getRegion() in xfw_constants.URLS.WG_API_SERVERS
     try:
         from __version__ import __revision__
         config['__xvmRevision'] = __revision__

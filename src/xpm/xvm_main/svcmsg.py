@@ -45,7 +45,7 @@ def tokenUpdated():
 def fixData(value):
     if value and 'message' in value and 'message' in value['message']:
         message = l10n(value['message']['message'])
-        if GAME_REGION == "RU":
+        if getRegion() == "RU":
             message = message \
               .replace('#XVM_SITE#',             'event:https://modxvm.com/#wot-main') \
               .replace('#XVM_SITE_DL#',		 'event:https://modxvm.com/%d1%81%d0%ba%d0%b0%d1%87%d0%b0%d1%82%d1%8c-xvm/#wot-main') \

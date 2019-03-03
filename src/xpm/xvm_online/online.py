@@ -38,7 +38,7 @@ class _Get_online(object):
 
     def __init__(self):
         self.loginSection = None
-        if GAME_REGION not in URLS.WG_API_SERVERS:
+        if getRegion() not in URLS.WG_API_SERVERS:
             warn('xvm_online: no API available for this server')
             return
         self.lock = threading.RLock()
@@ -46,7 +46,7 @@ class _Get_online(object):
         self.resp = None
         self.done_config = False
         self.loginSection = ResMgr.openSection('scripts_config.xml')['login']
-        self.region = GAME_REGION.lower()
+        self.region = getRegion().lower()
         if 'CT' in URLS.WG_API_SERVERS and self.region == 'ct': # CT is uncommented in xfw.constants to check on test server
             self.region = 'ru'
 
