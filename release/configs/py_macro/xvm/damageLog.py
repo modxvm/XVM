@@ -407,7 +407,11 @@ class Data(object):
         if wheelsConfig:
             maxComponentIdx += wheelsConfig.getWheelsCount()
         maxHitEffectCode, decodedPoints, maxDamagedComponent = DamageFromShotDecoder.decodeHitPoints(points, vehicle.appearance.collisions, maxComponentIdx)
-        self.data['compName'] = decodedPoints[0].componentName if decodedPoints else 'unknown'
+        compName = decodedPoints[0].componentName
+        if decodedPoints:
+            self.data['compName'] = compName if compName[0] != 'W' else 'wheel'
+        else:
+            self.data['compName'] = 'unknown'
 
         # self.data['criticalHit'] = (maxHitEffectCode == 5)
         if not self.data['isDamage']:
@@ -486,7 +490,7 @@ class Data(object):
             self.data['attackReasonID'] = 25
 
         self.data['isDamage'] = (self.data['damage'] > 0)
-        self.data['isAlive'] = (newHealth > 0) and bool(vehicle.isCrewActive)
+        self.data['isAlive'] = vehicle.isAlive()
         self.data['hitEffect'] = HIT_EFFECT_CODES[4]
         if self.data['attackReasonID'] != 0:
             self.data['costShell'] = 'unknown'
@@ -954,7 +958,7 @@ def Vehicle_onEnterWorld(self, prereqs):
             on_fire = 0
             data.data['oldHealth'] = self.health
             data.data['maxHealth'] = self.health
-            data.data['isAlive'] = (self.health > 0) and bool(self.isCrewActive)
+            data.data['isAlive'] = self.isAlive()
 
 
 @registerEvent(Vehicle, 'showDamageFromShot')

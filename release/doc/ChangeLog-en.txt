@@ -5,6 +5,9 @@
   [HANGAR]
   * added option:
       "hangar"/"enableCrystalLocker" - enable locker for bonds
+  
+  [PYTHON MACROS]
+  * damageLog: the "wheel" parameter has been added to the "comp-name"section.
 
 XVM-7.8.2:
   [GENERAL]

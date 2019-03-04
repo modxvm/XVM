@@ -197,6 +197,7 @@
         "turret": "{{l10n:turret}}",   // turret / башня.
         "hull": "{{l10n:hull}}",       // body / корпус.
         "chassis": "{{l10n:chassis}}", // suspension / ходовая.
+        "wheel": "{{l10n:wheel}}",     // wheel / колесо.
         "gun": "{{l10n:gun}}",         // gun / орудие.
         "unknown": ""                  // unknown / неизвестно.
       },

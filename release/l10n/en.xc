@@ -80,6 +80,7 @@
     "turret": "turret",
     "hull": "hull",
     "chassis": "chassis",
+    "wheel": "wheel",
 
     // BattleResults
     "Hit percent": "Hit percent",

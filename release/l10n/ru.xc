@@ -80,6 +80,7 @@
     "turret": "башня",
     "hull": "корпус",
     "chassis": "шасси",
+    "wheel": "колесо",
 
     // BattleResults
     "Hit percent": "Процент попаданий",
