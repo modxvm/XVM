@@ -5,7 +5,7 @@
   [АНГАР]
   * добавлена опция:
       "hangar"/"enableCrystalLocker" - включить замок для бонов
-      
+
   [МАКРОСЫ]
   * damageLog: в секцию "comp-name" добавлен параметр "wheel"
 
