@@ -58,7 +58,7 @@ package com.xvm.types.cfg
                     {
                         keys.push(key);
                     }
-                    for (key in keys)
+                    for each (key in keys)
                     {
                         var item:CMinimapCircle = ObjectConverter.convertData(items[key], CMinimapCircle);
                         item.applyGlobalBattleMacros();
