@@ -1,4 +1,4 @@
-﻿XVM-7.8.3-dev:
+﻿XVM-7.8.4-dev:
   [GENERAL]
   * World of Tanks 1.4.1.0
 
@@ -7,7 +7,11 @@
       "hangar"/"enableCrystalLocker" - enable locker for bonds
 
   [PYTHON MACROS]
-  * damageLog: the "wheel" parameter has been added to the "comp-name"section.
+  * damageLog: the "wheel" parameter has been added to the "comp-name" section
+
+XVM-7.8.3
+  [GENERAL]
+  * World of Tanks 1.4.0.1 micropatch 2019.03.06
 
 XVM-7.8.2:
   [GENERAL]
@@ -32,7 +36,7 @@ XVM-7.8.0:
   * added sorting on "battles", "-battles"
 
   [PYTHON MACROS]
-  * damageLog: changed the names of the parameters in the "vtype" and "c: vtype" sections
+  * damageLog: changed the names of the parameters in the "vtype" and "c:vtype" sections
   * totalEfficiency: added macro {{py:xvm.dmgAlly}}
   
 XVM-7.7.9:
