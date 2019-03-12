@@ -29,7 +29,7 @@ from xvm_main.python.logger import *
 from xvm_main.python.stats import _stat
 import xvm_main.python.config as config
 import xvm_main.python.userprefs as userprefs
-from xvm_battle.python.battle import isBattleTypeSupported
+import xvm_battle.python.battle as battle
 
 import parser_addon
 
@@ -855,7 +855,7 @@ _lastHit = LastHit(SECTION_LASTHIT)
 @registerEvent(PlayerAvatar, 'onBecomePlayer')
 def _PlayerAvatar_onBecomePlayer(self):
     global isShowDamageLog
-    isShowDamageLog = config.get(DAMAGE_LOG_ENABLED) and isBattleTypeSupported
+    isShowDamageLog = config.get(DAMAGE_LOG_ENABLED) and battle.isBattleTypeSupported
 
 @overrideMethod(DamageLogPanel, '_addToTopLog')
 def DamageLogPanel_addToTopLog(base, self, value, actionTypeImg, vehicleTypeImg, vehicleName, shellTypeStr, shellTypeBG):
@@ -942,7 +942,7 @@ def updateVehicleHealth(self, vehicleID, health, deathReasonID, isCrewActive, is
 def Vehicle_onEnterWorld(self, prereqs):
     if self.isPlayerVehicle:
         global isShowDamageLog
-        isShowDamageLog = config.get(DAMAGE_LOG_ENABLED) and isBattleTypeSupported
+        isShowDamageLog = config.get(DAMAGE_LOG_ENABLED) and battle.isBattleTypeSupported
         if isShowDamageLog:
             global on_fire, damageLogConfig, autoReloadConfig, chooseRating
             scale = config.networkServicesSettings.scale
