@@ -9,11 +9,11 @@
     {{c:type-shell}}       - color by shell kind / цвет по типу снаряда.
     {{vtype}}              - vehicle type / тип техники.
     {{c:vtype}}            - color by vehicle type / цвет по типу техники.
-    {{team-dmg}}           - TODO / командная принадлежность цели (союзник, противник, урон по себе).
-    {{c:team-dmg}}         - TODO / цвет по командной принадлежности цели (союзник, противник, урон по себе).
+    {{team-dmg}}           - team attachment of the targets / командная принадлежность цели (союзник, противник, урон по себе).
+    {{c:team-dmg}}         - color by team attachment of the targets / цвет по командной принадлежности цели (союзник, противник, урон по себе).
     {{costShell}}          - shell currency (gold, credits) / валюта снаряда (золото, кредиты).
     {{c:costShell}}        - color by shell currency / цвет по валюте снаряда.
-    {{vehicle}}            - attacker vehicle name / название техники цели (для огневых точек название берется из файлов локализации, параметр "pillbox").
+    {{vehicle}}            - attacker vehicle name (for firing points, the name is taken from the localization files, the "pillbox" parameter) / название техники цели (для огневых точек название берется из файлов локализации, параметр "pillbox").
     {{name}}               - nickname target / никнейм цели.
     {{comp-name}}          - vehicle part that was hit (turret, hull, chassis, gun) / часть техники, в которую было попадание (башня, корпус, ходовая, орудие).
     {{clan}}               - clan name with brackets (empty if no clan) / название клана в скобках (пусто, если игрок не в клане).
@@ -22,33 +22,32 @@
     {{clanicon}}           - macro with clan emblem image path value / макрос со значением пути эмблемы клана.
     {{squad-num}}          - number of squad (1,2,...), empty if not in squad / номер взвода (1,2,...), пусто - если игрок не во взводе.
     {{dmg-ratio}}          - last damage in percent / последний нанесенный урон в процентах.
-    {{splash-hit}}         - TODO / возвращает 'splash', если урон нанесен осколками снаряда (ОФ/ХФ), иначе пусто.
-    {{critical-hit}}       - TODO / возвращает 'crit', если было нанесено критическое повреждение, иначе пусто.    
-    {{alive}}              - TODO / возвращает 'al', если техника после атаки не разрушена, пусто для разрушенной.
+    {{splash-hit}}         - value 'splash', if damage is caused by shell splinters (HE/HESH), empty if not / возвращает 'splash', если урон нанесен осколками снаряда (ОФ/ХФ), иначе пусто.
+    {{critical-hit}}       - value 'crit', if critical damage was done, empty if not / возвращает 'crit', если было нанесено критическое повреждение, иначе пусто.    
+    {{alive}}              - value 'al', if the vehicle after the attack is not destroyed, empty if destroyed / возвращает 'al', если техника после атаки не разрушена, пусто для разрушенной.
     {{wn8}}, {{xwn8}}, {{wtr}}, {{xwtr}}, {{eff}}, {{xeff}}, {{wgr}}, {{xwgr}}, {{xte}}, {{r}}, {{xr}}                        - statistics macros (see macros.txt) / макросы статистики (смотрите macros_ru.txt).
     {{c:wn8}}, {{c:xwn8}}, {{c:wtr}}, {{c:xwtr}}, {{c:eff}}, {{c:xeff}}, {{c:wgr}}, {{c:xwgr}}, {{c:xte}}, {{c:r}}, {{c:xr}}  - statistics macros (see macros.txt) / макросы статистики (смотрите macros_ru.txt).
     {{diff-masses}}        - vehicles weights difference during collision / разность масс техники при столкновении.
     {{nation}}             - vehicle nation / нация техники.
-    {{blownup}}            - TODO / возвращает 'blownup', если взорван боекомплект цели, иначе ''.
+    {{blownup}}            - value 'blownup', if target ammoBay is blown up, '' if not / возвращает 'blownup', если взорван боекомплект цели, иначе ''.
     {{type-shell-key}}     - shell kind table key value / название ключа таблицы типа снаряда.
     {{n-player}}           - number of hits for each player / число повреждений по каждому игроку.
     {{dmg-player}}         - sum of hits for each player / суммарный урон по цели.
-    {{dmg-ratio-player}}   - TODO / суммарный урон по цели в процентах.
-    {{c:dmg-ratio-player}} - TODO / цвет по суммарному урону по цели (задается в colors.xc).
-    {{dmg-kind-player}}    - TODO (attack, fire, ramming, ...) / все типы нанесенного урона по цели (атака, пожар, таран, ...).
+    {{dmg-ratio-player}}   - total damage to targets in percent / суммарный урон по цели в процентах.
+    {{c:dmg-ratio-player}} - color by total damage to targets (set in colors.xc) / цвет по суммарному урону по цели (задается в colors.xc).
+    {{dmg-kind-player}}    - all kinds of damage done to targets (attack, fire, ramming, ...) / все типы нанесенного урона по цели (атака, пожар, таран, ...).
     {{dmg-deviation}}      - TODO / отклонение нанесенного урона от номинального урона снаряда в процентах. Возвращает 0.0, если техника была уничтожена выстрелом, или выстрел был фугасом и отклонение составило больше 25%.
 */
 
 {
   "hitLog": {
-    // TODO: better description and translation.
     // false - disable.
     // false - отключить.
     "enabled": true,
-    // TODO
+    // true - show damage by oneself.
     // true - отображать урон по себе.
     "showSelfDamage": true,
-    // TODO
+    // true - show damage by allies.
     // true - отображать урон по союзникам.
     "showAllyDamage": true,
     // Log of applied damage.
@@ -162,7 +161,7 @@
         "gun": "{{l10n:gun}}",         // gun / орудие.
         "unknown": ""                  // unknown / неизвестно.
       },
-      // TODO
+      // Team attachment of the targets (macro {{team-dmg}}).
       // Командная принадлежность цели (макрос {{team-dmg}}).
       "team-dmg":{
         "ally-dmg": "",  // ally / союзник.
@@ -170,7 +169,7 @@
         "player": "",    // self damage / урон по себе.
         "unknown": ""    // unknown / неизвестно.
       },
-      // TODO
+      // Color by team attachment of the targets (macro {{c:team-dmg}}).
       // Цвет по командной принадлежности цели (макрос {{c:team-dmg}}).
       "c:team-dmg":{
         "ally-dmg": "#00EAFF",  // ally / союзник.
