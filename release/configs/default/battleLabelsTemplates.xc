@@ -6,29 +6,30 @@
   // Definitions.
   // Шаблоны.
   "def": {
-    "hitlogHeader": {
-      "enabled": false,
-      "updateEvent": "ON_DAMAGE_CAUSED, ON_PANEL_MODE_CHANGED",
-      "x": "{{pp.mode=0?5|{{py:sum({{pp.widthLeft}},50)}}}}",
-      "y": "{{pp.mode=0?65|40}}",
-      "width": 500,
-      "height": 1000,
-      "textFormat": { "color": "0xF4EFE8", "size": 15 },
-      "format": "{{hitlog-header}}"
-      // Format of the full hitlog (header and body).
-      // Формат полного хит-лога (шапка и тело).
-      // "format": "{{hitlog-header}}\n{{hitlog-body}}"
-    },
-    "hitlogBody": {
+    // Log of applied damage.
+    // Лог нанесенного урона.
+    "hitLog": {
       "enabled": true,
-      "hotKeyCode": 56, "onHold": "true", "visibleOnHotKey": false,
-      "updateEvent": "ON_DAMAGE_CAUSED, ON_PANEL_MODE_CHANGED",
-      "x": "{{pp.mode=0?5|{{py:sum({{pp.widthLeft}},50)}}}}",
-      "y": "{{pp.mode=0?95|65}}",
+      "updateEvent": "PY(ON_HIT_LOG), ON_PANEL_MODE_CHANGED",
+      "x": "{{pp.mode=0?5|{{py:sum({{pp.widthLeft}},{{py:xvm.hitLog_x}})}}}}",
+      "y": "{{pp.mode=0?90|{{py:xvm.hitLog_y}}}}",
       "width": 500,
       "height": 1000,
-      "textFormat": { "color": "0xF4EFE8", "size": 15 },
-      "format": "{{hitlog-body}}"
+      "layer": "bottom",
+      "textFormat": { "color": "0xF4EFE8", "size": 15},
+      "format": "{{py:xvm.hitLog}}",
+      "mouseEvents": {
+        "mouseDown": "hitLog_mouseDown",
+        "mouseUp": "hitLog_mouseUp",
+        "mouseMove": "hitLog_mouseMove"
+      }
+    },
+    // Background of the log of applied damage.
+    // Подложка лога нанесенного урона.
+    "hitLogBackground": {
+      "enabled": false,
+      "$ref": { "path":"def.hitLog" },
+      "format": "{{py:xvm.hitLog_Background}}"
     },
     // Total hp indicator.
     // Индикатор общего HP команд.
@@ -100,7 +101,7 @@
         "mouseWheel": "dLog_mouseWheel"
       }
     },
-    // TODO (see damageLog.xc).
+    // Background of the log of the received damage (see damageLog.xc).
     // Подложка лога полученного урона (см. damageLog.xc).    
     "damageLogBackground": {
       "enabled": false,

@@ -28,6 +28,7 @@
     "ramming": "ramming",
     "world_collision": "falling",
     "death_zone": "death zone",
+    "pillbox": "Pillboxes",
 
     "Hits": "Hits",
     "Total": "Total",

@@ -28,6 +28,7 @@
     "ramming": "таран",
     "world_collision": "падение",
     "death_zone": "death zone",
+    "pillbox": "Огневая точка",
 
     "Hits": "Пробитий",
     "Total": "Всего",

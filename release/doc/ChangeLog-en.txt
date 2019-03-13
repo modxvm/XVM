@@ -2,6 +2,20 @@
   [GENERAL]
   * World of Tanks 1.4.1.0
 
+  [HIT LOG]
+  * hitlog settings was completely reworked;
+      see "hitLog.xc" file.
+  * added sections:
+      "battleLabels"/"hitLog"
+      "battleLabels"/"hitLogBackground"
+      "battleLabelsTemplates"/"hitLog"
+      "battleLabelsTemplates"/"hitLogBackground"
+  * removed sections:
+      "battleLabels"/"hitlogHeader"
+      "battleLabels"/"hitlogBody"
+      "battleLabelsTemplates"/"hitlogHeader"
+      "battleLabelsTemplates"/"hitlogBody"
+
   [HANGAR]
   * added option:
       "hangar"/"enableCrystalLocker" - enable locker for bonds
@@ -62,6 +76,8 @@ XVM-7.7.8:
       {{v.type_l}} - vehicle type (text substitution from config)
       {{v.type_key}} - vehicle class (text substitution from locale)
       {{v.rent}} - 'rent' for rented, empty for normal vehicle
+
+  [PYTHON MACROS]
   * damageLog: log scrolling added
 
   [OTHER]
@@ -148,6 +164,7 @@ XVM-7.7.0:
   * XFW.Native was updated to 1.3.1-65
       - implented support for subscribing on some D3D9 and DXGI functions
   * actionscript files now stores in "com.modxvm.xfw.actionscript" package
+
   [BATTLE]
   * added options:
       "battle"/"battleHint"/"hideTrajectoryView" - hide the tips aiming mode changing in strategic mode

@@ -67,6 +67,16 @@
       "drowning": "0xCCCCCC",        // drowning / затопление
       "other": "0xCCCCCC"            // other / другое
     },
+    // Dynamic color by percentage of damage caused.
+    // Динамический цвет по проценту нанесенного урона цели.
+    "dmg_ratio_player": [
+      { "value": 16.5, "color": ${"def.colorRating.very_bad" } },   
+      { "value": 33.5, "color": ${"def.colorRating.bad"      } },   
+      { "value": 49.5, "color": ${"def.colorRating.normal"   } },   
+      { "value": 66.5, "color": ${"def.colorRating.good"     } },   
+      { "value": 83.5, "color": ${"def.colorRating.very_good"} },  
+      { "value": 999,  "color": ${"def.colorRating.unique"   } }    
+    ],
     // Dynamic color by vehicle type.
     // Динамический цвет по типу техники.
     "vtype": {

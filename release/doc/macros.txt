@@ -7,7 +7,6 @@ Legend:
   SF  - statistic form (Tab)
   MM  - minimap
   VM  - vehicle markers
-  HI  - hitlog
   BLb - custom labels on battle interface window
 
   'X' - available
@@ -16,105 +15,105 @@ Legend:
   '-' - Obsoleted (will be replaced with other macro)
 
   Personal macros (applied for player)
-┌───┬────────────────────┬───┬───┬───┬───┬───┬───┬───┬─────────────────────────────────────────
-│SDH│ macro              │ BL│ PP│ SF│ MM│ VM│ HI│BLb│ Description
-├───┼────────────────────┼───┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────
-│ S │ {{nick}}           │ X │ X │ X │ X │ X │ X │ X │ player nickname with clan name
-│ S │ {{name}}           │ X │ X │ X │ X │ X │ X │ X │ player nickname without clan name
-│ S │ {{clan}}           │ X │ X │ X │ X │ X │ X │ X │ clan name with brackets (empty if no clan)
-│ S │ {{clannb}}         │ X │ X │ X │ X │ X │ X │ X │ clan name without brackets
-│ S │ {{ally}}           │ X │ X │ X │ X │ X │ X │ X │ value 'ally' for ally team, '' for enemy team
-│ H │ {{player}}         │ X │ X │ X │ X │   │   │ X │ value 'pl' for player, empty for others
-│ H │ {{veh-id}}         │ X │ X │ X │ X │ X │ X │ X │ vehicle id
-│ H │ {{vehicle}}        │ X │ X │ X │ X │ X │ X │ X │ vehicle name
-│ H │ {{vehiclename}}    │ X │ X │ X │ X │ X │ X │ X │ vehicle system name (usa-M24_Chaffee)
-│ H │ {{vehicle-short}}  │   │ X │ X │ X │ X │ X │ X │ shortened vehicle name
-│ H │ {{vtype}}          │ X │ X │ X │ X │ X │ X │ X │ vehicle type (text substitution from config)
-│ H │ {{vtype-l}}        │ X │ X │ X │ X │ X │ X │ X │ vehicle class (text substitution from locale)
-│ H │ {{vtype-key}}      │ X │ X │ X │ X │ X │ X │ X │ vehicle type table key value (LT, MT, HT, TD, SPG)
-│ H │ {{c:vtype}}        │ X │ X │ X │ X │ X │ X │ X │ color depending on vehicle type
-│ H │ {{battletier-min}} │ X │ X │ X │ X │ X │ X │ X │ minimal vehicle battle tier
-│ H │ {{battletier-max}} │ X │ X │ X │ X │ X │ X │ X │ maximal vehicle battle tier
-│ H │ {{nation}}         │ X │ X │ X │ X │ X │ X │ X │ vehicle nation
-│ H │ {{level}}          │ X │ X │ X │ X │ X │ X │ X │ vehicle level (Arabic numerals)
-│ H │ {{rlevel}}         │ X │ X │ X │ X │ X │ X │ X │ vehicle level (Roman numerals)
-│ H │ {{premium}}        │ X │ X │ X │ X │ X │ X │ X │ 'premium' for premium, empty for normal vehicle
-│ H │ {{squad}}          │ X │ X │ X │ X │ X │ X │   │ value 'sq' for own squad, empty for others
-│ D │ {{frags}}          │   │ X │ X │ X │ X │   │   │ current frags
-│ H │ {{ready}}          │ X │ X │ X │ X │ X │   │   │ value 'ready' if player loaded to the game, '' if not
-│ H │ {{alive}}          │ X │ X │ X │ X │ X │ X │   │ value 'alive' for alive, '' for dead
-│ H │ {{tk}}             │ X │ X │ X │ X │ X │   │   │ value 'tk' for teamkiller, empty for others
-│ H │ {{marksOnGun}}     │   │ X │ X │ X │ X │   │   │ marks on gun (only for spotted vehicles)
-│ H │ {{friend}}         │   │ X │ X │ X │ X │   │   │ player is in the friends list
-│ H │ {{ignored}}        │   │ X │ X │ X │ X │   │   │ player is in the ignore list
-│ H │ {{muted}}          │   │ X │ X │ X │ X │   │   │ player is muted for current battle
-│ H │ {{chatban}}        │   │ X │ X │ X │ X │   │   │ player have blocked chat by WG
-│ D │ {{spotted}}        │   │ X │ X │ X │   │   │   │ Vehicle spotted status with values from texts/spotted section
-│ D │ {{c:spotted}}      │   │ X │ X │ X │   │   │   │ Dynamic color by vehicle spotted status
-│ D │ {{a:spotted}}      │   │ X │ X │ X │   │   │   │ Dynamic transparency by vehicle spotted status
-│ H │ {{selected}}       │ X │ X │ X │ X │   │   │   │ value 'sel' for selected player, empty for others
-│ H │ {{position}}       │ X │ X │ X │ X │ X │ X │   │ position of the player in the beginning of the battle (1-15)
-│ D │ {{hp}}             │   │ X │ X │ X │ X │ X │   │ current health points
-│ D │ {{hp-max}}         │ X │ X │ X │ X │ X │ X │   │ maximum health points
-│ D │ {{hp-ratio}}       │   │ X │ X │ X │ X │ X │   │ current health ratio (without '%' sign)
-│ D │ {{c:hp}}           │   │ X │ X │ X │ X │ X │   │ color depending on current health points (only in vehicle markers)
-│ D │ {{c:hp-ratio}}     │   │ X │ X │ X │ X │ X │   │ color depending on current health ratio (only in vehicle markers)
-│ D │ {{a:hp}}           │   │ X │ X │ X │ X │ X │   │ transparency depending on current health points (only in vehicle markers)
-│ D │ {{a:hp-ratio}}     │   │ X │ X │ X │ X │ X │   │ transparency depending on current health ratio (only in vehicle markers)
-│ H │ {{sys-color-key}}  │   │ X │ X │ X │ X │   │   │ key value for system color table
-│ H │ {{c:system}}       │   │ X │ X │ X │ X │   │   │ system color
-│ H │ {{squad-num}}      │ X │ X │ X │ X │ X │ X │   │ number of squad (1,2,...), empty if not in squad
-│ S │ {{rank-level}}     │ X │ X │ X │ X │ X │ X │   │ rank level, empty if no rank
-│ S │ {{rankBadgeId}}    │ X │ X │ X │ X │ X │ X │   │ player's rank badge id
-│ S │ {{xvm-user}}       │ X │ X │ X │ X │ X │ X │ X │ player's XVM status with values from texts/xvmuser section
-│ S │ {{flag}}           │ X │ X │ X │ X │ X │ X │ X │ flag for player selected in the personal cabinet or determined from the client language
-│ D │ {{clanicon}}       │ X │ X │ X │ X │ X │ X │ X │ macro with clan embled image path value
-│ S │ {{clanrank}}       │ X │ X │ X │ X │ X │ X │ X │ Global map clan rating, from 1 to 1000 (https://eu.wargaming.net/clans/wot/leaderboards/)
-│ S │ {{topclan}}        │ X │ X │ X │ X │ X │ X │ X │ clan indicator (values from texts/topclan section)
-│ S │ {{comment}}        │ X │ X │ X │ X │ X │ X │ X │ comment for player from contacts
-│ S │ {{turret}}         │   │   │   │   │ X │   │   │ stock turret marker
-│ D │ {{dmg}}            │   │   │   │   │ X │ X │   │ damage health points / last hit value
-│ D │ {{dmg-ratio}}      │   │   │   │   │ X │ X │   │ damage health ratio (without '%' sign)
-│ D │ {{dmg-kind}}       │   │   │   │   │ X │ X │   │ damage kind (attack, fire, ramming, ...)
-│ D │ {{c:dmg}}          │   │   │   │   │ X │ X │   │ color depending on damage source
-│ D │ {{c:dmg-kind}}     │   │   │   │   │ X │ X │   │ color depending on damage kind
-│S/D│ {{py:f()}}         │ X │ X │ X │ X │ X │ X │ X │ dynamic python function call
-└───┴────────────────────┴───┴───┴───┴───┴───┴───┴───┴─────────────────────────────────────────
+┌───┬────────────────────┬───┬───┬───┬───┬───┬───┬─────────────────────────────────────────
+│SDH│ macro              │ BL│ PP│ SF│ MM│ VM│BLb│ Description
+├───┼────────────────────┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────
+│ S │ {{nick}}           │ X │ X │ X │ X │ X │ X │ player nickname with clan name
+│ S │ {{name}}           │ X │ X │ X │ X │ X │ X │ player nickname without clan name
+│ S │ {{clan}}           │ X │ X │ X │ X │ X │ X │ clan name with brackets (empty if no clan)
+│ S │ {{clannb}}         │ X │ X │ X │ X │ X │ X │ clan name without brackets
+│ S │ {{ally}}           │ X │ X │ X │ X │ X │ X │ value 'ally' for ally team, '' for enemy team
+│ H │ {{player}}         │ X │ X │ X │ X │   │ X │ value 'pl' for player, empty for others
+│ H │ {{veh-id}}         │ X │ X │ X │ X │ X │ X │ vehicle id
+│ H │ {{vehicle}}        │ X │ X │ X │ X │ X │ X │ vehicle name
+│ H │ {{vehiclename}}    │ X │ X │ X │ X │ X │ X │ vehicle system name (usa-M24_Chaffee)
+│ H │ {{vehicle-short}}  │   │ X │ X │ X │ X │ X │ shortened vehicle name
+│ H │ {{vtype}}          │ X │ X │ X │ X │ X │ X │ vehicle type (text substitution from config)
+│ H │ {{vtype-l}}        │ X │ X │ X │ X │ X │ X │ vehicle class (text substitution from locale)
+│ H │ {{vtype-key}}      │ X │ X │ X │ X │ X │ X │ vehicle type table key value (LT, MT, HT, TD, SPG)
+│ H │ {{c:vtype}}        │ X │ X │ X │ X │ X │ X │ color depending on vehicle type
+│ H │ {{battletier-min}} │ X │ X │ X │ X │ X │ X │ minimal vehicle battle tier
+│ H │ {{battletier-max}} │ X │ X │ X │ X │ X │ X │ maximal vehicle battle tier
+│ H │ {{nation}}         │ X │ X │ X │ X │ X │ X │ vehicle nation
+│ H │ {{level}}          │ X │ X │ X │ X │ X │ X │ vehicle level (Arabic numerals)
+│ H │ {{rlevel}}         │ X │ X │ X │ X │ X │ X │ vehicle level (Roman numerals)
+│ H │ {{premium}}        │ X │ X │ X │ X │ X │ X │ 'premium' for premium, empty for normal vehicle
+│ H │ {{squad}}          │ X │ X │ X │ X │ X │   │ value 'sq' for own squad, empty for others
+│ D │ {{frags}}          │   │ X │ X │ X │ X │   │ current frags
+│ H │ {{ready}}          │ X │ X │ X │ X │ X │   │ value 'ready' if player loaded to the game, '' if not
+│ H │ {{alive}}          │ X │ X │ X │ X │ X │   │ value 'alive' for alive, '' for dead
+│ H │ {{tk}}             │ X │ X │ X │ X │ X │   │ value 'tk' for teamkiller, empty for others
+│ H │ {{marksOnGun}}     │   │ X │ X │ X │ X │   │ marks on gun (only for spotted vehicles)
+│ H │ {{friend}}         │   │ X │ X │ X │ X │   │ player is in the friends list
+│ H │ {{ignored}}        │   │ X │ X │ X │ X │   │ player is in the ignore list
+│ H │ {{muted}}          │   │ X │ X │ X │ X │   │ player is muted for current battle
+│ H │ {{chatban}}        │   │ X │ X │ X │ X │   │ player have blocked chat by WG
+│ D │ {{spotted}}        │   │ X │ X │ X │   │   │ vehicle spotted status with values from texts/spotted section
+│ D │ {{c:spotted}}      │   │ X │ X │ X │   │   │ dynamic color by vehicle spotted status
+│ D │ {{a:spotted}}      │   │ X │ X │ X │   │   │ dynamic transparency by vehicle spotted status
+│ H │ {{selected}}       │ X │ X │ X │ X │   │   │ value 'sel' for selected player, empty for others
+│ H │ {{position}}       │ X │ X │ X │ X │ X │   │ position of the player in the beginning of the battle (1-15)
+│ D │ {{hp}}             │   │ X │ X │ X │ X │   │ current health points
+│ D │ {{hp-max}}         │ X │ X │ X │ X │ X │   │ maximum health points
+│ D │ {{hp-ratio}}       │   │ X │ X │ X │ X │   │ current health ratio (without '%' sign)
+│ D │ {{c:hp}}           │   │ X │ X │ X │ X │   │ color depending on current health points (only in vehicle markers)
+│ D │ {{c:hp-ratio}}     │   │ X │ X │ X │ X │   │ color depending on current health ratio (only in vehicle markers)
+│ D │ {{a:hp}}           │   │ X │ X │ X │ X │   │ transparency depending on current health points (only in vehicle markers)
+│ D │ {{a:hp-ratio}}     │   │ X │ X │ X │ X │   │ transparency depending on current health ratio (only in vehicle markers)
+│ H │ {{sys-color-key}}  │   │ X │ X │ X │ X │   │ key value for system color table
+│ H │ {{c:system}}       │   │ X │ X │ X │ X │   │ system color
+│ H │ {{squad-num}}      │ X │ X │ X │ X │ X │   │ number of squad (1,2,...), empty if not in squad
+│ S │ {{rank-level}}     │ X │ X │ X │ X │ X │   │ rank level, empty if no rank
+│ S │ {{rankBadgeId}}    │ X │ X │ X │ X │ X │   │ player's rank badge id
+│ S │ {{xvm-user}}       │ X │ X │ X │ X │ X │ X │ player's XVM status with values from texts/xvmuser section
+│ S │ {{flag}}           │ X │ X │ X │ X │ X │ X │ flag for player selected in the personal cabinet or determined from the client language
+│ D │ {{clanicon}}       │ X │ X │ X │ X │ X │ X │ macro with clan embled image path value
+│ S │ {{clanrank}}       │ X │ X │ X │ X │ X │ X │ global map clan rating, from 1 to 1000 (https://eu.wargaming.net/clans/wot/leaderboards/)
+│ S │ {{topclan}}        │ X │ X │ X │ X │ X │ X │ clan indicator (values from texts/topclan section)
+│ S │ {{comment}}        │ X │ X │ X │ X │ X │ X │ comment for player from contacts
+│ S │ {{turret}}         │   │   │   │   │ X │   │ stock turret marker
+│ D │ {{dmg}}            │   │   │   │   │ X │   │ damage health points / last hit value
+│ D │ {{dmg-ratio}}      │   │   │   │   │ X │   │ damage health ratio (without '%' sign)
+│ D │ {{dmg-kind}}       │   │   │   │   │ X │   │ damage kind (attack, fire, ramming, ...)
+│ D │ {{c:dmg}}          │   │   │   │   │ X │   │ color depending on damage source
+│ D │ {{c:dmg-kind}}     │   │   │   │   │ X │   │ color depending on damage kind
+│S/D│ {{py:f()}}         │ X │ X │ X │ X │ X │ X │ dynamic python function call
+└───┴────────────────────┴───┴───┴───┴───┴───┴───┴─────────────────────────────────────────
 
   Global macros (does not depend on the player)
-┌───┬────────────────────────┬───┬───┬───┬───┬───┬───┬───┬───┬──────────────────────────────────────
-│SDH│ macro                  │ BL│ PP│ SF│ MM│ VM│ HI│ HL│BLb│ Description
-├───┼────────────────────────┼───┼───┼───┼───┼───┼───┼───┼───┼──────────────────────────────────────
-│ S │ {{xvm-stat}}           │ X │ X │ X │ X │ X │ X │ X │ X │ value 'stat' is statistic is active, empty if not
-│ S │ {{r_size}}             │ X │ X │ X │ X │ X │ X │ X │ X │ size of the {{r}} macro value (can be useful for fields formatting)
-│ S │ {{battletier}}         │ X │ X │ X │ X │ X │ X │ X │ X │ current battle tier
-│ S │ {{battletype}}         │ X │ X │ X │ X │ X │ X │ X │ X │ current battle type (values from texts/battletype section)
-│ S │ {{battletype-key}}     │ X │ X │ X │ X │ X │ X │ X │ X │ current battle type table key value
-│ S │ {{region}}             │ X │ X │ X │ X │ X │ X │ X │ X │ current game region (RU, EU, NA, ASIA, KR, CN, CT)
-│ S │ {{l10n:ID}}            │ X │ X │ X │ X │ X │ X │ X │ X │ localizated text, see en.xc for id
-│ H │ {{my-alive}}           │   │ X │ X │ X │ X │ X │ X │ X │ is my vehicle alive
-│ D │ {{my-frags}}           │   │ X │ X │ X │ X │ X │ X │ X │ my frags
-│ S │ {{my-veh-id}}          │ X │ X │ X │ X │ X │ X │ X │ X │ my vehicle id
-│ S │ {{my-vehicle}}         │ X │ X │ X │ X │ X │ X │ X │ X │ my vehicle name
-│ S │ {{my-vehiclename}}     │ X │ X │ X │ X │ X │ X │ X │ X │ my vehicle system name (usa-M24_Chaffee)
-│ S │ {{my-vehicle-short}}   │   │ X │ X │ X │ X │ X │ X │ X │ my shortened vehicle name
-│ S │ {{my-vtype}}           │ X │ X │ X │ X │ X │ X │ X │ X │ my vehicle type (text substitution from config)
-│ S │ {{my-vtype-l}}         │ X │ X │ X │ X │ X │ X │ X │ X │ my vehicle class (text substitution from locale)
-│ S │ {{my-vtype-key}}       │ X │ X │ X │ X │ X │ X │ X │ X │ my vehicle type table key value (LT, MT, HT, TD, SPG)
-│ S │ {{c:my-vtype}}         │ X │ X │ X │ X │ X │ X │ X │ X │ my color depending on vehicle type
-│ S │ {{my-battletier-min}}  │ X │ X │ X │ X │ X │ X │ X │ X │ my minimal vehicle battle tier
-│ S │ {{my-battletier-max}}  │ X │ X │ X │ X │ X │ X │ X │ X │ my maximal vehicle battle tier
-│ S │ {{my-nation}}          │ X │ X │ X │ X │ X │ X │ X │ X │ my vehicle nation
-│ S │ {{my-level}}           │ X │ X │ X │ X │ X │ X │ X │ X │ my vehicle level (Arabic numerals)
-│ S │ {{my-rlevel}}          │ X │ X │ X │ X │ X │ X │ X │ X │ my vehicle level (Roman numerals)
-│ S │ {{my-premium}}         │ X │ X │ X │ X │ X │ X │ X │ X │ 'premium' for premium, empty for normal vehicle
-│ S │ {{my-clan}}            │ X │ X │ X │ X │ X │ X │ X │ X │ my clan
-│ S │ {{cellsize}}           │   │ X │ X │ X │ X │ X │ X │ X │ minimap cell side size
-│ D │ {{pp.mode}}            │   │ X │ X │ X │   │   │   │ X │ current players panel mode (0-none, 1-small, 2-medium, 3-medium2, 4-large)
-│ D │ {{pp.widthLeft}}       │   │ X │ X │ X │   │   │   │ X │ current left players panel width
-│ D │ {{pp.widthRight}}      │   │ X │ X │ X │   │   │   │ X │ current right players panel width
-│ D │ {{hasBadges}}          │   │ X │ X │ X │   │   │   │ X │ 'true' if at least one player in the team has badge, empty if not
-└───┴────────────────────────┴───┴───┴───┴───┴───┴───┴───┴───┴──────────────────────────────────────
+┌───┬────────────────────────┬───┬───┬───┬───┬───┬───┬──────────────────────────────────────
+│SDH│ macro                  │ BL│ PP│ SF│ MM│ VM│BLb│ Description
+├───┼────────────────────────┼───┼───┼───┼───┼───┼───┼──────────────────────────────────────
+│ S │ {{xvm-stat}}           │ X │ X │ X │ X │ X │ X │ value 'stat' is statistic is active, empty if not
+│ S │ {{r_size}}             │ X │ X │ X │ X │ X │ X │ size of the {{r}} macro value (can be useful for fields formatting)
+│ S │ {{battletier}}         │ X │ X │ X │ X │ X │ X │ current battle tier
+│ S │ {{battletype}}         │ X │ X │ X │ X │ X │ X │ current battle type (values from texts/battletype section)
+│ S │ {{battletype-key}}     │ X │ X │ X │ X │ X │ X │ current battle type table key value
+│ S │ {{region}}             │ X │ X │ X │ X │ X │ X │ current game region (RU, EU, NA, ASIA, KR, CN, CT)
+│ S │ {{l10n:ID}}            │ X │ X │ X │ X │ X │ X │ localizated text, see en.xc for id
+│ H │ {{my-alive}}           │   │ X │ X │ X │ X │ X │ is my vehicle alive
+│ D │ {{my-frags}}           │   │ X │ X │ X │ X │ X │ my frags
+│ S │ {{my-veh-id}}          │ X │ X │ X │ X │ X │ X │ my vehicle id
+│ S │ {{my-vehicle}}         │ X │ X │ X │ X │ X │ X │ my vehicle name
+│ S │ {{my-vehiclename}}     │ X │ X │ X │ X │ X │ X │ my vehicle system name (usa-M24_Chaffee)
+│ S │ {{my-vehicle-short}}   │   │ X │ X │ X │ X │ X │ my shortened vehicle name
+│ S │ {{my-vtype}}           │ X │ X │ X │ X │ X │ X │ my vehicle type (text substitution from config)
+│ S │ {{my-vtype-l}}         │ X │ X │ X │ X │ X │ X │ my vehicle class (text substitution from locale)
+│ S │ {{my-vtype-key}}       │ X │ X │ X │ X │ X │ X │ my vehicle type table key value (LT, MT, HT, TD, SPG)
+│ S │ {{c:my-vtype}}         │ X │ X │ X │ X │ X │ X │ my color depending on vehicle type
+│ S │ {{my-battletier-min}}  │ X │ X │ X │ X │ X │ X │ my minimal vehicle battle tier
+│ S │ {{my-battletier-max}}  │ X │ X │ X │ X │ X │ X │ my maximal vehicle battle tier
+│ S │ {{my-nation}}          │ X │ X │ X │ X │ X │ X │ my vehicle nation
+│ S │ {{my-level}}           │ X │ X │ X │ X │ X │ X │ my vehicle level (Arabic numerals)
+│ S │ {{my-rlevel}}          │ X │ X │ X │ X │ X │ X │ my vehicle level (Roman numerals)
+│ S │ {{my-premium}}         │ X │ X │ X │ X │ X │ X │ 'premium' for premium, empty for normal vehicle
+│ S │ {{my-clan}}            │ X │ X │ X │ X │ X │ X │ my clan
+│ S │ {{cellsize}}           │   │ X │ X │ X │ X │ X │ minimap cell side size
+│ D │ {{pp.mode}}            │   │ X │ X │ X │   │ X │ current players panel mode (0-none, 1-small, 2-medium, 3-medium2, 4-large)
+│ D │ {{pp.widthLeft}}       │   │ X │ X │ X │   │ X │ current left players panel width
+│ D │ {{pp.widthRight}}      │   │ X │ X │ X │   │ X │ current right players panel width
+│ D │ {{hasBadges}}          │   │ X │ X │ X │   │ X │ 'true' if at least one player in the team has badge, empty if not
+└───┴────────────────────────┴───┴───┴───┴───┴───┴───┴──────────────────────────────────────
 
   Statistic macros
 ┌───┬────────────────────┬───┬───┬───┬───┬───┬───┬─────────────────────────────────────────────────
@@ -197,21 +196,6 @@ Legend:
 │ {{cap.time-sec}} │ time left to full capture; seconds only
 └──────────────────┴───────────────────────────────────────────────────────────────────────────────
 
-  Hitlog macros
-┌────────────────────────────┬─────────────────────────────────────────────────────────────────────
-│ macro                      │ Description
-├────────────────────────────┼─────────────────────────────────────────────────────────────────────
-│ {{hitlog-header}}          │ formatted hitlog header
-│ {{hitlog-body}}            │ formatted hitlog body
-│ {{hitlog.n}}               │ total number of hits
-│ {{hitlog.dmg-total}}       │ total sum of hits
-│ {{hitlog.dmg-total-color}} │ color depending on total sum of hits
-│ {{hitlog.dmg-avg}}         │ average damage during the battle
-│ {{hitlog.dead}}            │ tank's death marker
-│ {{hitlog.n-player}}        │ number of hits for each player
-│ {{hitlog.dmg-player}}      │ sum of hits for each player
-└────────────────────────────┴─────────────────────────────────────────────────────────────────────
-
   Zoom indicator macros
 ┌──────────────────┬───────────────────────────────────────────────────────────────────────────────
 │ macro            │ Description
@@ -220,8 +204,8 @@ Legend:
 └──────────────────┴───────────────────────────────────────────────────────────────────────────────
 
   Special macros
-┌───┬──────────┬───┬───┬───┬───┬───┬───┬───┬───────────────────────────────────────────────────────
-│SDH│ macro    │ BL│ PP│ SF│ MM│ VM│ HI│ HL│ Description
-├───┼──────────┼───┼───┼───┼───┼───┼───┼───┼───────────────────────────────────────────────────────
-│ S │ {{.}}    │ X │ X │ X │ X │ X │ X │ X │ config value substitution: {{.path.to.config.value}}
-└───┴──────────┴───┴───┴───┴───┴───┴───┴───┴───────────────────────────────────────────────────────
+┌───┬──────────┬───┬───┬───┬───┬───┬───────────────────────────────────────────────────────
+│SDH│ macro    │ BL│ PP│ SF│ MM│ VM│ Description
+├───┼──────────┼───┼───┼───┼───┼───┼───────────────────────────────────────────────────────
+│ S │ {{.}}    │ X │ X │ X │ X │ X │ config value substitution: {{.path.to.config.value}}
+└───┴──────────┴───┴───┴───┴───┴───┴───────────────────────────────────────────────────────

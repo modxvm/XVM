@@ -2,11 +2,25 @@
   [ОБЩЕЕ]
   * World of Tanks 1.4.1.0
 
+  [ЛОГ НАНЕСЕННЫХ ПОВРЕЖДЕНИЙ]
+  * полностью переработаны настройки лога нанесенного урона;
+      смотрите файл "hitLog.xc"
+  * добавлены секции:
+      "battleLabels"/"hitLog"
+      "battleLabels"/"hitLogBackground"
+      "battleLabelsTemplates"/"hitLog"
+      "battleLabelsTemplates"/"hitLogBackground"
+  * удалены секции:
+      "battleLabels"/"hitlogHeader"
+      "battleLabels"/"hitlogBody"
+      "battleLabelsTemplates"/"hitlogHeader"
+      "battleLabelsTemplates"/"hitlogBody"
+
   [АНГАР]
   * добавлена опция:
       "hangar"/"enableCrystalLocker" - включить замок для бонов
 
-  [МАКРОСЫ]
+  [МАКРОСЫ НА PYTHON]
   * damageLog: в секцию "comp-name" добавлен параметр "wheel"
 
 XVM-7.8.3:
@@ -35,7 +49,7 @@ XVM-7.8.0:
   [КАРУСЕЛЬ]
   * добавлена сортировка по "battles", "-battles"
 
-  [МАКРОСЫ]
+  [МАКРОСЫ НА PYTHON]
   * damageLog: изменены названия параметров в секциях "vtype" и "c:vtype"
   * totalEfficiency: добавлен макрос {{py:xvm.dmgAlly}}
 
@@ -62,6 +76,8 @@ XVM-7.7.8:
       {{v.type_l}} - тип техники (текстовые подстановки из файлов перевода)
       {{v.type_key}} - название ключа таблицы типа танка (LT, MT, HT, TD, SPG)
       {{v.rent}} - 'rent' для арендной техники, пусто - для обычной
+
+  [МАКРОСЫ НА PYTHON]
   * damageLog: добавлена прокрутка лога
 
   [РАЗНОЕ]
@@ -88,7 +104,7 @@ XVM-7.7.5:
   * исправлены вылеты BF-3, BF-5
   * исправлено множество ошибок
 
-  [МАКРОСЫ]
+  [МАКРОСЫ НА PYTHON]
   * totalEfficiency: добавлены макросы {{py:xvm.numberAssistStun}}, {{py:xvm.numberAssistSpot}}, {{py:xvm.numberAssistTrack}}, {{py:xvm.numberAssistAndStuns}}, {{py:xvm.totalAssistAndStuns}}
 
 XVM-7.7.4:
@@ -110,7 +126,7 @@ XVM-7.7.2:
   [АНГАР]
   * исправлена возможность покупки премиум техники если активна опция "enableGoldLocker"
 
-  [МАКРОСЫ]
+  [МАКРОСЫ НА PYTHON]
   * totalEfficiency: исправлены некоторые ошибки
 
 XVM-7.7.1:
@@ -188,7 +204,7 @@ XVM-7.6.8:
   [БОЙ]
   * добавлено отображение дробной части кратности зума
 
-  [МАКРОСЫ]
+  [МАКРОСЫ НА PYTHON]
   * damageLog: исправлены некоторые ошибки
   * totalEfficiency: исправлены некоторые ошибки
 
