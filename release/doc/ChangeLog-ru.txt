@@ -10,6 +10,7 @@
       "battleLabels"/"hitLogBackground"
       "battleLabelsTemplates"/"hitLog"
       "battleLabelsTemplates"/"hitLogBackground"
+      "colors"/"dmg_ratio_player"
   * удалены секции:
       "battleLabels"/"hitlogHeader"
       "battleLabels"/"hitlogBody"
