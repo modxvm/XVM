@@ -1,4 +1,4 @@
-﻿XVM-7.8.4-dev:
+﻿XVM-7.8.5-dev:
   [GENERAL]
   * World of Tanks 1.4.1.0
 
@@ -22,6 +22,10 @@
 
   [PYTHON MACROS]
   * damageLog: the "wheel" parameter has been added to the "comp-name" section
+
+XVM-7.8.4
+  [GENERAL]
+  * World of Tanks 1.4.0.2
 
 XVM-7.8.3
   [GENERAL]
