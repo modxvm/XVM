@@ -65,11 +65,6 @@ package com.xvm.battle
             return _minimapCirclesData;
         }
 
-        public static function get curentXtdb():Number
-        {
-            return getCurentXtdb();
-        }
-
         public static function get battleLoadingVisible():Boolean
         {
             return _battleLoadingVisible;
@@ -144,18 +139,6 @@ package com.xvm.battle
             _mapSize = mapSize;
             _minimapCirclesData = new VOMinimapCirclesData(minimapCirclesData);
             _xtdb_data = xtdb_data;
-        }
-
-        private static function getCurentXtdb():Number
-        {
-                var xtdb_data_len:Number = _xtdb_data.length;
-                while (_curent_xtdb < xtdb_data_len - 1)
-                {
-                    if (BattleState.hitlogTotalDamage < _xtdb_data[_curent_xtdb])
-                        break;
-                    ++_curent_xtdb;
-                }
-                return _curent_xtdb;
         }
     }
 }

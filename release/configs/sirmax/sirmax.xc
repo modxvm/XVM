@@ -244,17 +244,7 @@
   },
   "minimap": ${"sirmax-minimap.xc":"minimap"},
   "minimapAlt": ${"sirmax-minimap.xc":"minimapAlt"},
-  "hitLog": {
-    //"insertOrder": "begin",
-    "groupHitsByPlayer": true,
-    "deadMarker": "<font face='xvm'>\u002B</font>",
-    "blowupMarker": "<font face='xvm'>\u007C</font>",
-//  TEST
-//    "formatHistory": "<textformat tabstops='[20,50,90,150]'><font size='12'>#19</font>:<tab>9999<tab>| 2222<tab>| ramming<tab>| {{hitlog.n}} {{hitlog.n-player}} {{nick}}</textformat>",
-    "defaultHeader": "<textformat leading='-2'><font color='#CCCCCC'>Total:</font> <font size='13'>#0</font></textformat>",
-    "formatHeader":  "<textformat leading='-2'><font color='#CCCCCC'>Total:</font> <font size='13'>#{{hitlog.n}}</font> <b>{{hitlog.dmg-total}}</b>  <font color='#CCCCCC'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b></font></textformat>",
-    "formatHistory": "<textformat leading='-4' tabstops='[20,50,90,150]'><font size='12'>\u00D7{{hitlog.n-player}}:</font><tab>{{hitlog.dmg-player}}<tab>| <font color='{{c:dmg-kind}}'>{{dmg}}</font><tab>| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab>| <font color='{{c:vtype}}'>{{vehicle}} {{hitlog.dead}}</font></textformat>"
-  },
+  "hitLog": ${"../default/hitLog.xc":"hitLog"},
   "markers": ${"sirmax-markers.xc":"."},
   "alpha": {
     "hp": [

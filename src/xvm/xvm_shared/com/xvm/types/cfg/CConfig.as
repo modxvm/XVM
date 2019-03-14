@@ -23,7 +23,6 @@ package com.xvm.types.cfg
         public var colors:CColors;
         public var configVersion:String;
         public var hangar:CHangar;
-        public var hitLog:CHitlog;
         public var hotkeys:CHotkeys;
         public var iconset:CIconset;
         public var login:CLogin;

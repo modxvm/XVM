@@ -12,7 +12,6 @@ package com.xvm.battle
     import com.xvm.battle.battleLabels.*;
     import com.xvm.battle.elements.*;
     import com.xvm.battle.events.*;
-    import com.xvm.battle.hitlog.*;
     import com.xvm.battle.zoomIndicator.*;
     import com.xvm.types.cfg.*;
     import flash.display.*;
@@ -63,7 +62,6 @@ package com.xvm.battle
         private var _battleClock:BattleClock = null;
         private var _battleElements:BattleElements = null;
         private var _battleLabels:BattleLabels = null;
-        private var _hitlog:Hitlog = null;
         private var _zoomIndicator:ZoomIndicator = null;
         private var _watermark:MovieClip = null;
         private var hotkeys_cfg:CHotkeys;
@@ -111,8 +109,6 @@ package com.xvm.battle
                         _battleElements = new BattleElements();
                     }
                 }
-
-                _hitlog = new Hitlog(); // must be initialized before BattleLabels
 
                 _zoomIndicator = new ZoomIndicator();
                 _zoomIndicator.visible = battlePageDebugPanel != null && battlePageDebugPanel.visible;
@@ -162,11 +158,6 @@ package com.xvm.battle
                 {
                     _battleLabels.dispose();
                     _battleLabels = null;
-                }
-                if (_hitlog)
-                {
-                    _hitlog.dispose();
-                    _hitlog = null;
                 }
                 if (_zoomIndicator)
                 {

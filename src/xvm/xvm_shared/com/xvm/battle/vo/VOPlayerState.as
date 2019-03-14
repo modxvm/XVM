@@ -57,9 +57,6 @@ package com.xvm.battle.vo
         private var _markerState:VOMarkerState = null;
         private var _xmqpData:VOXmqpData = new VOXmqpData();
 
-        private var __hitlogDamage:int = 0;
-        private var __hitlogHits:Vector.<int> = new Vector.<int>();
-
         private var _index:int = -1;
         private var _position:Number = NaN;
         private var _vehCD:int = 0;
@@ -395,22 +392,6 @@ package com.xvm.battle.vo
         public function get xmqpData():VOXmqpData
         {
             return _xmqpData;
-        }
-
-        public function get hitlogDamage():int
-        {
-            return __hitlogDamage;
-        }
-
-        internal function set_hitlogDamage(value:int):void
-        {
-            __hitlogDamage = value;
-            eventsToDispatch[PlayerStateEvent.DAMAGE_CAUSED] = true;
-        }
-
-        public function get hitlogHits():Vector.<int>
-        {
-            return __hitlogHits;
         }
 
         //

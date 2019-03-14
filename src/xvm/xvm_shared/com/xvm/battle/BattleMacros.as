@@ -103,31 +103,6 @@ package com.xvm.battle
                 return null;
             }
 
-            // Hitlog
-
-            // {{hitlog.n}}
-            // {{hitlog.dmg-total}}
-            // {{hitlog.dmg-total-color}}
-            // {{hitlog.dmg-avg}}
-            // {{hitlog.dead}}
-            // {{hitlog.n-player}}
-            // {{hitlog.dmg-player}}
-            m_globals["hitlog"] = function(o:IVOMacrosOptions):*
-            {
-                var ps:VOPlayerState = o as VOPlayerState;
-                switch (o.getSubname())
-                {
-                    case "n": return BattleState.hitlogHits.length;
-                    case "dmg-total": return BattleState.hitlogTotalDamage;
-                    case "dmg-total-color": return MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, BattleGlobalData.curentXtdb, NaN, "#", false);
-                    case "dmg-avg": return BattleState.hitlogHits.length ? Math.round(BattleState.hitlogTotalDamage / BattleState.hitlogHits.length) : NaN;
-                    case "dead": return ps ? (ps.isBlown ? Config.config.hitLog.blowupMarker : (ps.isDead ? Config.config.hitLog.deadMarker : null)) : null;
-                    case "n-player": return ps ? ps.hitlogHits.length : null;
-                    case "dmg-player": return ps ? ps.hitlogDamage : null;
-                }
-                return null;
-            }
-
             // {{pp.mode}}
             // {{pp.widthLeft}}
             // {{pp.widthRight}}

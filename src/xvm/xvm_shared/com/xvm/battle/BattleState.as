@@ -124,18 +124,6 @@ package com.xvm.battle
             }
         }
 
-        // hitlog
-
-        public static function get hitlogHits():Array
-        {
-            return instance._hitlogHits;
-        }
-
-        public static function get hitlogTotalDamage():int
-        {
-            return instance._hitlogTotalDamage;
-        }
-
         // instance
         private static var _instance:BattleState = null;
         public static function get instance():BattleState
@@ -426,27 +414,17 @@ package com.xvm.battle
                 var playerState:VOPlayerState = get(vehicleID);
                 if (playerState)
                 {
-                    if (data.__hitlogData)
+                    var damageCaused:Boolean = data.__damageCaused;
+                    if (damageCaused)
                     {
-                        if (playerState.isEnemy)
-                        {
-                            onUpdateHitlogData(playerState, data.curHealth, data.__hitlogData.damageFlag, data.__hitlogData.damageType);
-                        }
-                        delete data.__hitlogData;
-                        playerState.update(data);
-                        if (playerState.isEnemy)
-                        {
-                            Xvm.dispatchEvent(new ObjectEvent(BattleEvents.HITLOG_UPDATED, playerState));
-                        }
-                        else
-                        {
-                            Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.DAMAGE_CAUSED_ALLY));
-                        }
-                        delete data.__hitlogData;
+                        delete data.__damageCaused;
                     }
-                    else
+                    playerState.update(data);
+                    if (damageCaused)
                     {
-                        playerState.update(data);
+                        Xvm.dispatchEvent(new PlayerStateEvent(playerState.isEnemy
+                            ? PlayerStateEvent.DAMAGE_CAUSED
+                            : PlayerStateEvent.DAMAGE_CAUSED_ALLY));
                     }
                     _invalidationStates[playerState.vehicleID] = true;
                     invalidate(InvalidationType.DATA);
@@ -489,45 +467,6 @@ package com.xvm.battle
             {
                 Logger.err(ex);
             }
-        }
-
-        // hitlog
-
-        private var _hitlogTotalDamage:int = 0;
-        private var _hitlogHits:Array = [];
-
-        private function onUpdateHitlogData(playerState:VOPlayerState, newHealth:Number, damageFlag:int, damageType:String):void
-        {
-            //Logger.add("[BattleState] onUpdateHitlogData: " + arguments);
-            var damage:int = playerState.getCurHealthValue() - Math.max(0, newHealth);
-
-            _hitlogTotalDamage += damage;
-
-            playerState.update( {
-                hitlogDamage: playerState.hitlogDamage + damage,
-                damageInfo: new VODamageInfo({
-                    damageDelta: damage,
-                    damageType: damageType,
-                    damageFlag: damageFlag
-                })
-            });
-
-            var lastHit:VOHit = _hitlogHits.length ? _hitlogHits[_hitlogHits.length - 1] : new VOHit();
-            if (damageType == "fire" || damageType == "ramming")
-            {
-                if (lastHit.vehicleID == playerState.vehicleID)
-                {
-                    if (lastHit.damageType == damageType)
-                    {
-                        damage += lastHit.damage;
-                        _hitlogHits.pop();
-                        playerState.hitlogHits.pop();
-                    }
-                }
-            }
-
-            var hitIndex:Number = _hitlogHits.push(new VOHit(playerState.vehicleID, damage, damageType)) - 1;
-            playerState.hitlogHits.push(hitIndex);
         }
     }
 }

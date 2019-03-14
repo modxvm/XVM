@@ -314,9 +314,7 @@ class Battle(object):
         inv = INV.CUR_HEALTH
         userData = None
         if attackerID == avatar_getter.getPlayerVehicleID():
-            inv |= INV.HITLOG
-            userData = {'damageFlag':self._getVehicleDamageType(attackerID),
-                        'damageType':constants.ATTACK_REASONS[attackReasonID]}
+            inv |= INV.DAMAGE_CAUSED
         self.updatePlayerState(vehicleID, inv, userData)
 
     def updateSpottedStatus(self, vehicleID, active):
@@ -332,8 +330,8 @@ class Battle(object):
             if targets & INV.SPOTTED_STATUS:
                 data['spottedStatus'] = self.getSpottedStatus(vehicleID)
 
-            if targets & INV.HITLOG:
-                data['__hitlogData'] = userData
+            if targets & INV.DAMAGE_CAUSED:
+                data['__damageCaused'] = 1
 
             if targets & INV.ALL_ENTITY:
                 entity = BigWorld.entity(vehicleID)

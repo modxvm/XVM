@@ -18,8 +18,8 @@
     }
   },
   "formats": [
-      ${ "../default/battleLabelsTemplates.xc":"def.hitlogHeader" },
-      ${ "../default/battleLabelsTemplates.xc":"def.hitlogBody" },
+      ${ "../default/battleLabelsTemplates.xc":"def.hitLog" },
+      ${ "../default/battleLabelsTemplates.xc":"def.hitLogBackground" },
       ${ "../default/battleLabelsTemplates.xc":"def.totalHP" },
       ${ "../default/battleLabelsTemplates.xc":"def.avgDamage" },
       ${ "../default/battleLabelsTemplates.xc":"def.mainGun" },
