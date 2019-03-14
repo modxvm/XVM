@@ -10,9 +10,6 @@ from skeletons.gui.battle_session import IBattleSessionProvider
 from VehicleEffects import DamageFromShotDecoder
 from vehicle_systems.tankStructure import TankPartIndexes
 from items import _xml
-# from gui.battle_control.battle_constants import PERSONAL_EFFICIENCY_TYPE
-# from gui.Scaleform.daapi.view.battle.shared.damage_log_panel import DamageLogPanel
-# from gui.Scaleform.daapi.view.battle.shared.minimap.entries import VehicleEntry
 
 from xfw import *
 from xfw_actionscript.python import *
@@ -29,94 +26,6 @@ macros = None
 autoReloadConfig = None
 hitLogConfig = {}
 isDownAlt = False
-
-#-----------------------
-VTYPE = {"mt": "<font face='xvm'>&#x3B;</font>",
-         "lt": "<font face='xvm'>&#x3A;</font>",
-         "ht": "<font face='xvm'>&#x3F;</font>",
-         "td": "<font face='xvm'>&#x2E;</font>",
-         "spg": "<font face='xvm'>&#x2D;</font>",
-         "not_vehicle": ""
-        }
-C_VTYPE = {"mt": "#FFF198",
-           "lt": "#A2FF9A",
-           "ht": "#FFACAC",
-           "td": "#A0CFFF",
-           "spg": "#EFAEFF",
-           "not_vehicle": "#CCCCCC"
-           }
-C_COSTSHELL = {"gold-shell": "#FFCC66",
-               "silver-shell": "#CCCCCC",
-               "unknown": ""
-               }
-COSTSHELL = {"gold-shell": "",
-             "silver-shell": "",
-             "unknown": ""
-             }
-C_DMGKIND = {"shot": "#CCCCCC",
-             "fire": "#FF6655",
-             "ramming": "#998855",
-             "world_collision": "#228855",
-             "drowning": "#CCCCCC",
-             "overturn": "#CCCCCC",
-             "death_zone": "#CCCCCC",
-             "gas_attack": "#CCCCCC "
-             }
-DMGKIND = {"shot": "",
-           "fire": "",
-           "ramming": "",
-           "world_collision": "",
-           "drowning": "",
-           "overturn": "",
-           "death_zone": "DZ",
-           "gas_attack": "GA",
-           "art_attack": "",
-           "air_strike": ""
-           }
-DMGKINDPLAYER = {"shot": "",
-                 "fire": "",
-                 "ramming": "",
-                 "world_collision": "",
-                 "drowning": "",
-                 "overturn": "",
-                 "death_zone": "DZ",
-                 "gas_attack": "GA",
-                 "art_attack": "",
-                 "air_strike": ""
-                 }
-C_TEAMDMG = {"ally-dmg": "#00EAFF",
-             "enemy-dmg": "#CCCCCC",
-             "player": "#228855",
-             "unknown": "#CCCCCC"
-             }
-TEAMDMG = {"ally-dmg": "",
-           "enemy-dmg": "",
-           "player": "",
-           "unknown": ""
-           }
-COMPNAME ={"turret": "{{l10n:turret}}",
-          "hull": "{{l10n:hull}}",
-          "chassis": "{{l10n:chassis}}",
-          "wheel": "",
-          "gun": "{{l10n:gun}}",
-          "unknown": ""
-          }
-TYPESHELL = {"armor_piercing": "{{l10n:armor_piercing}}",
-             "high_explosive": "{{l10n:high_explosive}}",
-             "armor_piercing_cr": "{{l10n:armor_piercing_cr}}",
-             "armor_piercing_he": "{{l10n:armor_piercing_he}}",
-             "hollow_charge": "{{l10n:hollow_charge}}",
-             "not_shell": ""
-             }
-C_TYPESHELL = {"armor_piercing": "#CCCCCC",
-               "high_explosive": "#CCCCCC",
-               "armor_piercing_cr": "#CCCCCC",
-               "armor_piercing_he": "#CCCCCC",
-               "hollow_charge": "#CCCCCC",
-               "not_shell": "#CCCCCC"
-               }
-HOTKEYS = {"enabled": True, "keyCode": 56, "onHold": True}
-#-----------------------
 
 
 HIT_LOG = 'hitLog/'
@@ -144,23 +53,18 @@ CHANGE = 2
 
 def readyConfig(section):
     if autoReloadConfig or (section not in hitLogConfig):
-        return {'vehicleClass': keyLower(config.get(section + 'vtype', VTYPE)),
-                'c_Shell': keyLower(config.get(section + 'c:costShell', C_COSTSHELL)),
-                'costShell': keyLower(config.get(section + 'costShell', COSTSHELL)),
-                'c_dmg-kind': keyLower(config.get(section + 'c:dmg-kind', C_DMGKIND)),
-                'c_VehicleClass': keyLower(config.get(section + 'c:vtype', C_VTYPE)),
-                'dmg-kind': keyLower(config.get(section + 'dmg-kind', DMGKIND)),
-                'dmg-kind-player': keyLower(config.get(section + 'dmg-kind-player', DMGKINDPLAYER)),
-                'c_teamDmg': keyLower(config.get(section + 'c:team-dmg', C_TEAMDMG)),
-                'teamDmg': keyLower(config.get(section + 'team-dmg', TEAMDMG)),
-                'compNames': keyLower(config.get(section + 'comp-name', COMPNAME)),
-                # 'splashHit': keyLower(config.get(section + 'splash-hit')),
-                # 'criticalHit': keyLower(config.get(section + 'critical-hit')),
-                # 'hitEffect': keyLower(config.get(section + 'hit-effects')),
-                # 'c_hitEffect': keyLower(config.get(section + 'c:hit-effects')),
-                'typeShell': keyLower(config.get(section + 'type-shell', TYPESHELL)),
-                'c_typeShell': keyLower(config.get(section + 'c:type-shell', C_TYPESHELL)),
-                # 'critDevice': keyLower(config.get(section + 'crit-device'))
+        return {'vehicleClass': keyLower(config.get(section + 'vtype')),
+                'c_Shell': keyLower(config.get(section + 'c:costShell')),
+                'costShell': keyLower(config.get(section + 'costShell')),
+                'c_dmg-kind': keyLower(config.get(section + 'c:dmg-kind')),
+                'c_VehicleClass': keyLower(config.get(section + 'c:vtype')),
+                'dmg-kind': keyLower(config.get(section + 'dmg-kind')),
+                'dmg-kind-player': keyLower(config.get(section + 'dmg-kind-player')),
+                'c_teamDmg': keyLower(config.get(section + 'c:team-dmg')),
+                'teamDmg': keyLower(config.get(section + 'team-dmg')),
+                'compNames': keyLower(config.get(section + 'comp-name')),
+                'typeShell': keyLower(config.get(section + 'type-shell')),
+                'c_typeShell': keyLower(config.get(section + 'c:type-shell')),
                 }
     else:
         return hitLogConfig[section]
@@ -194,9 +98,7 @@ def updateValueMacros(section, value):
                   'level': value['level'],
                   'clanicon': value['clanicon'],
                   'squad-num': value['squadnum'],
-                  # 'reloadGun': value['reloadGun'],
                   'alive': 'al' if value['isAlive'] else None,
-                  # 'gun-caliber': value['caliber'],
                   'splash-hit': 'splash' if value['splashHit'] else None,
                   'critical-hit': 'crit' if value['criticalHit'] else None,
                   'wn8': value.get('wn8', None),
@@ -238,11 +140,6 @@ def updateValueMacros(section, value):
                    'type-shell': conf['typeShell'].get(value['shellKind'], None),
                    'type-shell-key': value['shellKind'] if value['shellKind'] is not None else 'not_shell',
                    'c:type-shell': conf['c_typeShell'].get(value['shellKind'], None),
-
-                   # 'c:hit-effects': conf['c_hitEffect'].get(value['hitEffect'], 'unknown'),
-                   # 'hit-effects': conf['hitEffect'].get(value['hitEffect'], 'unknown'),
-                   # 'crit-device': conf['critDevice'].get(value.get('critDevice', '')),
-                   # 'number': value['number'],
                    'dmg': value['damage'],
                    'dmg-ratio': value['dmgRatio'],
                    'n-player': value['n-player'],
@@ -256,6 +153,18 @@ def updateValueMacros(section, value):
 def parser(strHTML):
     s = parser_addon.parser_addon(strHTML, macros)
     return s
+
+
+def removePlayerFromLogs(vehicleID):
+    def del_key(_dict, key):
+        if key in _dict:
+            _dict[key].clear()
+            del _dict[key]
+
+    del_key(_log.players, vehicleID)
+    del_key(_logAlt.players, vehicleID)
+    del_key(_logBackground.players, vehicleID)
+    del_key(_logAltBackground.players, vehicleID)
 
 
 class DataHitLog(object):
@@ -323,6 +232,8 @@ class DataHitLog(object):
         # log('time_func = %.6f         |        total_time = %.6f' % (time.clock() - start_t, prof_time))
         _logBackground.output()
         _logAltBackground.output()
+        if not self.data['isAlive']:
+            removePlayerFromLogs(self.data['vehicleID'])
         self.data['splashHit'] = False
 
     def resetDataStats(self):
@@ -343,37 +254,26 @@ class DataHitLog(object):
         self.data['nation'] = None
         self.data['diff-masses'] = None
 
-    def updateData(self):
-        # player = BigWorld.player()
-        vehicleID = self.data['vehicleID']
+    def getTeamDmg(self, vehicleID):
         pl = _stat.players.get(vehicleID, None)
-        # pl = ('vehicleID', 'accountDBID', 'name', 'clan', 'clanInfo', 'badgeId', 'team', 'vehCD', 'vLevel', 'maxHealth', 'vIcon', 'vn', 'vType', 'alive', 'ready', 'x_emblem', 'x_emblem_loading', 'clanicon')
-
         if pl is not None:
             if pl.team != self.player.team:
-                self.data['teamDmg'] = 'enemy-dmg'
-            elif pl.name == self.player.name:
-                self.data['teamDmg'] = 'player'
-            else:
-                self.data['teamDmg'] = 'ally-dmg'
-        elif not self.isVehicle:
-            pass
-        else:
-            self.data['teamDmg'] = 'unknown'
-        # self.data['shellKind'] = None
+                return 'enemy-dmg'
+            return 'player' if pl.name == self.player.name else 'ally-dmg'
+        return self.data['teamDmg'] if not self.isVehicle else 'unknown'
 
+
+    def updateData(self):
+        vehicleID = self.data['vehicleID']
+        self.data['teamDmg'] = self.getTeamDmg(vehicleID)
         maxHealth = self.vehHealth[vehicleID]['maxHealth'] if vehicleID in self.vehHealth else 0
         self.data['dmgRatio'] = self.data['damage'] * 100 // maxHealth if maxHealth != 0 else 0
         if vehicleID:
-            # entity = BigWorld.entity(vehicleID)
-            # self.data['marksOnGun'] = '_' + str(entity.publicInfo['marksOnGun']) if (entity is not None) else None
             attacked = self.player.arena.vehicles.get(vehicleID)
-            # attacked = {'forbidInBattleInvitations': False, 'vehicleType': <items.vehicles.VehicleDescriptor object at 0x2F88D430>, 'isAlive': True, 'name': 'DeFo1', 'igrType': 0, 'prebattleID': 0, 'potapovQuestIDs': [], 'accountDBID': 1356443, 'isPrebattleCreator': False, 'clanAbbrev': 'M3X1C', 'ranked': ((0, 0), []), 'isAvatarReady': True, 'team': 2, 'clanDBID': 222563, 'events': {}, 'isTeamKiller': False, 'crewGroup': 0}
             if attacked is not None:
                 vehicleType = attacked['vehicleType']
                 self.data['name'] = attacked['name']
                 self.data['clanAbbrev'] = attacked['clanAbbrev']
-                # vehicleType = ['_VehicleDescriptor__activeGunShotIdx', '_VehicleDescriptor__activeTurretPos', '_VehicleDescriptor__computeWeight', '_VehicleDescriptor__getChassisEffectNames', '_VehicleDescriptor__getIsHullAimingAvailable', '_VehicleDescriptor__get_boundingRadius', '_VehicleDescriptor__haveIncompatibleOptionalDevices', '_VehicleDescriptor__hornID', '_VehicleDescriptor__initFromCompactDescr', '_VehicleDescriptor__installGun', '_VehicleDescriptor__selectBestHull', '_VehicleDescriptor__selectTurretForGun', '_VehicleDescriptor__setHullAndCall', '_VehicleDescriptor__set_activeGunShotIndex', '_VehicleDescriptor__set_activeTurretPos', '_VehicleDescriptor__set_hornID', '_VehicleDescriptor__updateAttributes', 'activeGunShotIndex', 'activeTurretPosition', 'boundingRadius', 'camouflages', 'chassis', 'computeBaseInvisibility', 'engine', 'extras', 'extrasDict', 'fuelTank', 'getComponentsByType', 'getCost', 'getDevices', 'getHitTesters', 'getMaxRepairCost', 'gun', 'hasSiegeMode', 'hornID', 'hull', 'installComponent', 'installOptionalDevice', 'installTurret', 'isHullAimingAvailable', 'isPitchHullAimingAvailable', 'isYawHullAimingAvailable', 'keepPrereqs', 'level', 'makeCompactDescr', 'maxHealth', 'mayInstallComponent', 'mayInstallOptionalDevice', 'mayInstallTurret', 'mayRemoveOptionalDevice', 'miscAttrs', 'name', 'onSiegeStateChanged', 'optionalDevices', 'physics', 'playerEmblems', 'playerInscriptions', 'prerequisites', 'radio', 'removeOptionalDevice', 'setCamouflage', 'setPlayerEmblem', 'setPlayerInscription', 'shot', 'turret', 'turrets', 'type']
                 if vehicleType:
                     _type = vehicleType.type
                     self.data['attackedVehicleType'] = list(_type.tags.intersection(VEHICLE_CLASSES))[0]
@@ -464,7 +364,6 @@ class DataHitLog(object):
                     if (_shells['shellKind'] in ['high_explosive', 'armor_piercing_he']) and (self.data['damageDeviation'] < -0.25):
                         self.data['damageDeviation'] = 0.0
         if not self.isVehicle:
-            self.data['teamDmg'] = 'ally-dmg' if vehicle.isPlayerTeam else 'enemy-dmg'
             self.entityID = vehicle.destructibleEntityID
         self.data['vehicleID'] = vehicle.id
         self.data['isAlive'] = vehicle.isAlive()
@@ -546,7 +445,6 @@ class HitLog(object):
         self.listLog = []
         self.countLines = 0
         self.maxCountLines = None
-        # self.numberLine = 0
         if (None not in [self.x, self.y]) and config.get(self.S_MOVE_IN_BATTLE, False) and (self.section == SECTION_LOG):
             userprefs.set('hitLog/log', {'x': self.x, 'y': self.y})
 
@@ -581,8 +479,6 @@ class HitLog(object):
             if not config.get(self.S_MOVE_IN_BATTLE, False):
                 self.x = parser(config.get(self.S_X, DEFAULT_X))
                 self.y = parser(config.get(self.S_Y, DEFAULT_Y))
-        # if not playerData['isAlive']:
-        #     self.del_key(self.players, _data.data['vehicleID'])
 
 
     def updateGroupFireRamming(self, playerData):
@@ -630,7 +526,6 @@ class HitLog(object):
             else:
                 if (pl['numberLine'] >= 0) and (pl['numberLine'] < self.countLines):
                     self.listLog.pop(pl['numberLine'])
-                # log('self.players = {}'.format(self.players))
                 for v in self.players:
                     if self.players[v]['numberLine'] > pl['numberLine']:
                         self.players[v]['numberLine'] -= 1
@@ -779,7 +674,6 @@ class HitLog(object):
     def output(self):
         self.countLines = len(self.listLog)
         self.maxCountLines = config.get(self.S_LINES, 7)
-        # log('maxCountLines = %s' % self.maxCountLines)
         if not self.maxCountLines:
             return
         self.isAddToEnd = config.get(self.S_ADD_TO_END, False)
@@ -788,7 +682,6 @@ class HitLog(object):
             self.groupHitsPlayer()
         else:
             self.notGroupHitsPlayer()
-        # log('listLog = %s' % '\n'.join(self.listLog))
         if self.callEvent:
             as_event('ON_HIT_LOG')
 
@@ -804,13 +697,17 @@ def _PlayerAvatar_updateVehicleGunReloadTime(self, vehicleID, timeLeft, baseTime
         _data.reload()
 
 
+@registerEvent(DestructibleEntity, 'onEnterWorld')
+def DestructibleEntity_onEnterWorld(self, prereqs):
+    if self.isAlive():
+        _data.updateVehInfo(self)
+
+
 @registerEvent(DestructibleEntity, 'onHealthChanged')
 def DestructibleEntity_onHealthChanged(self, newHealth, attackerID, attackReasonID, hitFlags):
-
     destructibleEntityComponent = BigWorld.player().arena.componentSystem.destructibleEntityComponent
     if config.get(ENABLED, True) and battle.isBattleTypeSupported and (destructibleEntityComponent is not None):
         if (_data.playerVehicleID == attackerID) and (self.id not in _data.vehDead):
-            # log('destructibleEntityID = %s' % self.destructibleEntityID)
             if not self.isPlayerTeam or config.get(SHOW_ALLY_DAMAGE, True):
                 _data.onHealthChanged(self, newHealth, attackerID, attackReasonID, False)
         _data.updateVehInfo(self)
@@ -818,8 +715,6 @@ def DestructibleEntity_onHealthChanged(self, newHealth, attackerID, attackReason
 
 @registerEvent(Vehicle, 'showDamageFromShot')
 def _Vehicle_showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor):
-    # if _data.playerVehicleID == attackerID:
-    #     log('attackerID = %s, points = %s, effectsIndex = %s, damageFactor = %s' % (attackerID, points, effectsIndex, damageFactor))
     if battle.isBattleTypeSupported and (_data.playerVehicleID == attackerID) and self.isAlive() and config.get(ENABLED, True):
         _data.showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor)
 
@@ -833,16 +728,8 @@ def _Vehicle_showDamageFromExplosion(self, attackerID, center, effectsIndex, dam
 
 @registerEvent(PlayerAvatar, '_PlayerAvatar__onArenaVehicleKilled')
 def __onArenaVehicleKilled(self, targetID, attackerID, equipmentID, reason):
-
-    def del_key(_dict, key):
-        if key in _dict:
-            _dict[key].clear()
-            del _dict[key]
-
-    del_key(_log.players, targetID)
-    del_key(_logAlt.players, targetID)
-    del_key(_logBackground.players, targetID)
-    del_key(_logAltBackground.players, targetID)
+    if self.playerVehicleID != attackerID:
+        removePlayerFromLogs(targetID)
 
 
 @registerEvent(Vehicle, 'onEnterWorld')
@@ -875,8 +762,6 @@ def _Vehicle_startVisual(self):
 
 @registerEvent(Vehicle, 'onHealthChanged')
 def _Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
-    # if (_data.playerVehicleID == attackerID):
-    #     log('id = %s, newHealth = %s, attackerID = %s, attackReasonID = %s' % (self.id, newHealth, attackerID, attackReasonID))
     if config.get(ENABLED, True) and battle.isBattleTypeSupported:
         if (_data.playerVehicleID == attackerID) and (self.id not in _data.vehDead):
             attacked = _data.player.arena.vehicles.get(self.id)
@@ -903,7 +788,7 @@ def PlayerAvatar__destroyGUI(self):
 def PlayerAvatar_handleKey(self, isDown, key, mods):
     global isDownAlt
     if config.get(ENABLED, True) and battle.isBattleTypeSupported:
-        hotkey = config.get('hotkeys/hitLogAltMode', HOTKEYS)
+        hotkey = config.get('hotkeys/hitLogAltMode')
         if hotkey['enabled'] and (key == hotkey['keyCode']):
             if isDown:
                 if hotkey['onHold']:
