@@ -15,6 +15,7 @@ from xfw import *
 from xfw_actionscript.python import *
 from xvm_main.python.logger import *
 from xvm_main.python.stats import _stat
+from xvm_main.python.xvm import l10n
 import xvm_main.python.config as config
 import xvm_main.python.userprefs as userprefs
 import xvm_battle.python.battle as battle
@@ -45,6 +46,8 @@ SECTION_ALT_LOG = HIT_LOG + 'logAlt/'
 SECTION_BACKGROUND = HIT_LOG + 'logBackground/'
 SECTION_ALT_BACKGROUND = HIT_LOG + 'logAltBackground/'
 SECTIONS = (SECTION_LOG, SECTION_ALT_LOG, SECTION_BACKGROUND, SECTION_ALT_BACKGROUND)
+
+PILLBOX = 'pillbox'
 
 APPEND = 0
 INSERT = 1
@@ -299,7 +302,7 @@ class DataHitLog(object):
             elif not self.isVehicle:
                 self.resetDataStats()
                 self.resetDataVehInfo()
-                self.data['shortUserString'] = '{}{}'.format('{{l10n:pillbox}}', self.entityID)
+                self.data['shortUserString'] = l10n(PILLBOX).format(self.entityID)
                 self.data['name'] = ''
                 self.data['clanAbbrev'] = ''
                 self.data['clanicon'] = None
