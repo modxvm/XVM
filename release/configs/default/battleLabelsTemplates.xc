@@ -55,7 +55,7 @@
       "align": "right",
       "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 1.5 },
       "textFormat": { "size": 15, "align": "center" },
-      "format": "{{py:xvm.total_hp.avgDamage('{{l10n:avgDamage}}: ',{{hitlog.dmg-total}})}}"
+      "format": "{{py:xvm.total_hp.avgDamage('{{l10n:avgDamage}}: ',{{py:xvm.totalDamage}})}}"
     },
     // Threshold necessary for achievements "High caliber".
     // Порог необходимый для получения достижения "Основной калибр".
@@ -67,7 +67,7 @@
       "screenHAlign": "center",
       "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 1.5 },
       "textFormat": { "size": 15, "align": "center" },
-      "format": "{{py:xvm.total_hp.mainGun('{{l10n:mainGun}}: ',{{hitlog.dmg-total}})}}"
+      "format": "{{py:xvm.total_hp.mainGun('{{l10n:mainGun}}: ',{{py:xvm.totalDamage}})}}"
     },
     // Log of the received damage (see damageLog.xc).
     // Лог полученного урона (см. damageLog.xc).
