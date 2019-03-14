@@ -16,6 +16,9 @@
       "battleLabels"/"hitlogBody"
       "battleLabelsTemplates"/"hitlogHeader"
       "battleLabelsTemplates"/"hitlogBody"
+  * обновлены секции:
+      "battleLabelsTemplates"/"avgDamage"
+      "battleLabelsTemplates"/"mainGun"
 
   [АНГАР]
   * добавлена опция:

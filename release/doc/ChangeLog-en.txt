@@ -16,6 +16,9 @@
       "battleLabels"/"hitlogBody"
       "battleLabelsTemplates"/"hitlogHeader"
       "battleLabelsTemplates"/"hitlogBody"
+  * updated sections:
+      "battleLabelsTemplates"/"avgDamage"
+      "battleLabelsTemplates"/"mainGun"
 
   [HANGAR]
   * added option:
