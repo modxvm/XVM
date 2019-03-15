@@ -81,7 +81,7 @@ package com.xvm.battle.teamBasesPanel
             try
             {
                 cfg = null;
-				m_captured = (param5 < 100.0) ? false:true;
+                m_captured = (param5 < 100.0) ? false:true;
                 super.setData.apply(this, arguments);
                 onConfigLoaded(null);
             }
