@@ -45,7 +45,7 @@ package com.xvm.battle.shared.playersPanel
     {
         // PUBLIC CONSTS
 
-        static public const PLAYERS_PANEL_STATE_NAMES:Array = [ "none", "short", "medium", "medium2", "large" ];
+        static public const PLAYERS_PANEL_STATE_NAMES:Vector.<String> = new <String>[ "none", "short", "medium", "medium2", "large" ];
 
         static public const PLAYERS_PANEL_STATE_MAP:Object = {
             none: PLAYERS_PANEL_STATE.HIDDEN,
@@ -120,7 +120,7 @@ package com.xvm.battle.shared.playersPanel
         private var _userProps:IUserProps = null;
         private var _vehicleID:Number = NaN;
 
-        private var _standardTextFieldsTexts:Object = {};
+        private var _standardTextFieldsTexts:Dictionary = new Dictionary();
 
         private var opt_removeSelectedBackground:Boolean;
         private var opt_vehicleIconAlpha:Number;
@@ -233,7 +233,7 @@ package com.xvm.battle.shared.playersPanel
                 if (isInvalid(INVALIDATE_UPDATE_COLORS))
                 {
                     _updateVehicleIcon();
-                    _standardTextFieldsTexts = { };
+                    _standardTextFieldsTexts = new Dictionary();
                 }
                 if (isInvalid(INVALIDATE_PANEL_STATE))
                 {
@@ -528,6 +528,8 @@ package com.xvm.battle.shared.playersPanel
                                 case "vehicle":
                                     ui.vehicleTF.visible = true;
                                     break;
+                                default:
+                                    break;
                             }
                         }
                     }
@@ -538,6 +540,8 @@ package com.xvm.battle.shared.playersPanel
                     BattleState.playersPanelWidthRight = 0;
                     ui.visible = false;
                     //ui.x = isLeftPanel ? -WIDTH : WIDTH;
+                    break;
+                default:
                     break;
             }
             if (extraFieldsHidden)
@@ -757,6 +761,8 @@ package com.xvm.battle.shared.playersPanel
                     return ui.playerNameFullTF;
                 case "vehicle":
                     return  ui.vehicleTF;
+                default:
+                    break;
             }
             return null;
         }
@@ -821,6 +827,8 @@ package com.xvm.battle.shared.playersPanel
                         ui.vehicleTF.width = w;
                     }
                     break;
+                default:
+                    break;
             }
             return w;
         }
@@ -841,6 +849,8 @@ package com.xvm.battle.shared.playersPanel
                     return Macros.FormatNumber(mcfg.nickXOffsetLeft, currentPlayerState, 0);
                 case ui.vehicleTF:
                     return Macros.FormatNumber(mcfg.vehicleXOffsetLeft, currentPlayerState, 0);
+                default:
+                    break;
             }
             return 0;
         }
@@ -861,6 +871,8 @@ package com.xvm.battle.shared.playersPanel
                     return Macros.FormatNumber(mcfg.nickXOffsetRight, currentPlayerState, 0);
                 case ui.vehicleTF:
                     return Macros.FormatNumber(mcfg.vehicleXOffsetRight, currentPlayerState, 0);
+                default:
+                    break;
             }
             return 0;
         }
@@ -1005,6 +1017,8 @@ package com.xvm.battle.shared.playersPanel
                         extraFieldsFull.visible = true;
                         extraFieldsFull.update(currentPlayerState, bindToIconOffset);
                     }
+                    break;
+                default:
                     break;
             }
         }

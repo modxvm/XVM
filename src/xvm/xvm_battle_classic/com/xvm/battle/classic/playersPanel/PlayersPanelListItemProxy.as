@@ -55,6 +55,8 @@ package com.xvm.battle.classic.playersPanel
                 case PLAYERS_PANEL_STATE.SHORT:
                     mopt_removeSquadIcon = Macros.FormatBooleanGlobal(mcfg.removeSquadIcon);
                     break;
+                default:
+                    break;
             }
         }
 

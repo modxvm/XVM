@@ -146,6 +146,8 @@ package com.xvm.battle.shared.minimap.entries.personal
                             if (radius < 50) radius = 50; else if (radius > 445) radius = 445;
                         }
                         break;
+                    default:
+                        break;
                 }
 
                 //Logger.add("distance=" + dc.distance + " radius=" + radius);

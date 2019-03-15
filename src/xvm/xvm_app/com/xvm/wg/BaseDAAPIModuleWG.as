@@ -25,10 +25,12 @@ package com.xvm.wg
 
         protected function onPopulate() : void
         {
+            // virtual
         }
 
         protected function onDispose() : void
         {
+            // virtual
         }
 
         public final function as_populate() : void

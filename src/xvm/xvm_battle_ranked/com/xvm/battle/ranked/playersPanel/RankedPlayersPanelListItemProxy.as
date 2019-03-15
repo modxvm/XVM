@@ -56,6 +56,8 @@ package com.xvm.battle.ranked.playersPanel
                     // TODO: use separate option (removeRankIcon)
                     mopt_removeRankIcon = Macros.FormatBooleanGlobal(mcfg.removeSquadIcon);
                     break;
+                default:
+                    break;
             }
         }
 
