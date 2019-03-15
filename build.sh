@@ -98,7 +98,8 @@ build_as3(){
 
     for proj in $top; do
         echo "Building $proj"
-        . .build-${proj}.sh
+        # shellcheck source=/dev/null
+        . ".build-${proj}.sh"
     done
 
     for proj in *.as3proj; do
@@ -107,7 +108,7 @@ build_as3(){
         for e in $top; do [[ "$e" == "$proj" ]] && { exists=1; break; } done
         if [ $exists -eq 0 ]; then
             echo "Building $proj"
-            . .build-${proj}.sh
+            . ".build-${proj}.sh"
         fi
     done
 
@@ -153,7 +154,7 @@ calc_hash_for_xvm_integrity()
     pushd ~output > /dev/null
     hash_file='res_mods/mods/xfw_packages/xvm_integrity/python/hash_table.py'
     echo -e '""" Generated automatically by XVM builder """\nHASH_DATA = {' > $hash_file
-    find res_mods -name *.py -print0 -o -name *.pyc -print0 -o -name *.swf -print0 | while read -d $'\0' file
+    find res_mods -name '*.py' -print0 -o -name '*.pyc' -print0 -o -name '*.swf' -print0 | while read -d $'\0' file
     do
         sha1sum "$file" | sed -r "s/(\S+)\s+\*?(.+)/'\2': '\1',/" >> $hash_file
     done
@@ -197,11 +198,11 @@ copy_files()
 copy_microsoft_redist()
 {
     mkdir -p "$XVMBUILD_ROOT_PATH/~output/"
-    find "$XVMBUILD_ROOT_PATH/src/microsoft/msvc/" -name *.dll -exec cp {} "$XVMBUILD_ROOT_PATH/~output/" \;
+    find "$XVMBUILD_ROOT_PATH/src/microsoft/msvc/" -name '*.dll' -exec cp {} "$XVMBUILD_ROOT_PATH/~output/" \;
 
     mkdir -p "$XVMBUILD_ROOT_PATH/~output/system/"
-    find "$XVMBUILD_ROOT_PATH/src/microsoft/ucrt/" -name *.dll -exec cp {} "$XVMBUILD_ROOT_PATH/~output/system/" \;
-    find "$XVMBUILD_ROOT_PATH/src/microsoft/ucrt/" -name *.manifest -exec cp {} "$XVMBUILD_ROOT_PATH/~output/system/" \;
+    find "$XVMBUILD_ROOT_PATH/src/microsoft/ucrt/" -name '*.dll' -exec cp {} "$XVMBUILD_ROOT_PATH/~output/system/" \;
+    find "$XVMBUILD_ROOT_PATH/src/microsoft/ucrt/" -name '*.manifest' -exec cp {} "$XVMBUILD_ROOT_PATH/~output/system/" \;
 }
 
 ##########################
