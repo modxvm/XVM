@@ -55,18 +55,26 @@ extend_path()
 load_repositorystats(){
     #read xvm revision and hash
     pushd "$XVMBUILD_ROOT_PATH"/ > /dev/null
-        export XVMBUILD_XVM_BRANCH=$(hg parent --template "{branch}")
-        export XVMBUILD_XVM_HASH=$(hg parent --template "{node|short}")
-        export XVMBUILD_XVM_REVISION=$(hg parent --template "{rev}")
-        export XVMBUILD_XVM_COMMITMSG=$(hg parent --template "{desc}")
-        export XVMBUILD_XVM_COMMITAUTHOR=$(hg parent --template "{author}" | sed 's/<.*//')
+        XVMBUILD_XVM_BRANCH=$(hg parent --template "{branch}")
+        export XVMBUILD_XVM_BRANCH
+        XVMBUILD_XVM_HASH=$(hg parent --template "{node|short}")
+        export XVMBUILD_XVM_HASH
+        XVMBUILD_XVM_REVISION=$(hg parent --template "{rev}")
+        export XVMBUILD_XVM_REVISION
+        XVMBUILD_XVM_COMMITMSG=$(hg parent --template "{desc}")
+        export XVMBUILD_XVM_COMMITMSG
+        XVMBUILD_XVM_COMMITAUTHOR=$(hg parent --template "{author}" | sed 's/<.*//')
+        export XVMBUILD_XVM_COMMITAUTHOR
     popd > /dev/null
 
     #read xfw revision and hash
     pushd "$XVMBUILD_ROOT_PATH"/src/xfw/ > /dev/null
-        export XVMBUILD_XFW_BRANCH=$(hg parent --template "{branch}")
-        export XVMBUILD_XFW_HASH=$(hg parent --template "{node|short}")
-        export XVMBUILD_XFW_REVISION=$(hg parent --template "{rev}")
+        XVMBUILD_XFW_BRANCH=$(hg parent --template "{branch}")
+        export XVMBUILD_XFW_BRANCH
+        XVMBUILD_XFW_HASH=$(hg parent --template "{node|short}")
+        export XVMBUILD_XFW_HASH
+        XVMBUILD_XFW_REVISION=$(hg parent --template "{rev}")
+        export XVMBUILD_XFW_REVISION
     popd > /dev/null
 }
 
