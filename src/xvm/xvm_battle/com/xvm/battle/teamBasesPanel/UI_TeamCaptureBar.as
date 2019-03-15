@@ -81,6 +81,7 @@ package com.xvm.battle.teamBasesPanel
             try
             {
                 cfg = null;
+				m_captured = (param5 < 100.0) ? false:true;
                 super.setData.apply(this, arguments);
                 onConfigLoaded(null);
             }
@@ -235,7 +236,7 @@ package com.xvm.battle.teamBasesPanel
                 return;
 
             BattleState.captureBarDataVO.update({
-                points: m_points,
+                points: Math.round(m_points),
                 vehiclesCount: m_vehiclesCount,
                 timeLeft: m_timeLeft,
                 timeLeftSec: m_timeLeft ? Utils.timeStrToSec(m_timeLeft) : -1
