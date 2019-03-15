@@ -28,7 +28,7 @@ package com.xvm.battle
             return "[XVM:BATTLE]";
         }
 
-        private static const _views:Object =
+        private static const VIEWS:Object =
         {
             "classicBattlePage": [
                 BattleLoadingXvmView,
@@ -43,7 +43,7 @@ package com.xvm.battle
 
         public override function get views():Object
         {
-            return _views;
+            return VIEWS;
         }
 
         public static function get battlePageClassic():BattlePage

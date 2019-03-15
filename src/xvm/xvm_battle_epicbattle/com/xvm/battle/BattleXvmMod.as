@@ -26,7 +26,7 @@ package com.xvm.battle
             return "[XVM:BATTLE]";
         }
 
-        private static const _views:Object =
+        private static const VIEWS:Object =
         {
             "epicBattlePage": [
                 //EpicBattleLoadingXvmView, // TODO:EPIC
@@ -39,7 +39,7 @@ package com.xvm.battle
 
         public override function get views():Object
         {
-            return _views;
+            return VIEWS;
         }
     }
 }
