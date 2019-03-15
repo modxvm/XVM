@@ -1,5 +1,6 @@
 package com.xvm.lobby.ui.tankcarousel
 {
+    import com.xfw.*;
     import com.xvm.*;
     import com.xvm.types.cfg.*;
     import net.wg.data.constants.*;
