@@ -139,7 +139,7 @@ def updateValueMacros(section, value):
                    'dmg-kind': conf['dmg-kind'].get(ATTACK_REASONS[value['attackReasonID']], 'reason: %s' % value['attackReasonID']),
                    'dmg-kind-player': ''.join([conf['dmg-kind-player'].get(ATTACK_REASONS[i], None) for i in value['dmg-kind-player']]),
                    'c:vtype': conf['c_VehicleClass'].get(VEHICLE_CLASSES_SHORT[value['attackedVehicleType']], '#CCCCCC'),
-                   'comp-name': conf['compNames'].get(value['compName'], 'unknown'),
+                   'comp-name': conf['compNames'].get(value['compName'], None),
                    'type-shell': conf['typeShell'].get(value['shellKind'], None),
                    'type-shell-key': value['shellKind'] if value['shellKind'] is not None else 'not_shell',
                    'c:type-shell': conf['c_typeShell'].get(value['shellKind'], None),
@@ -192,7 +192,9 @@ class DataHitLog(object):
         self.totalDamage = 0
         self.old_totalDamage = 0
         self.isVehicle = True
-        self.entityID = None
+        self.entityNumber = None
+        self.vehicleID = None
+        self.intCD = None
         self.data = {'damage': 0,
                      'dmgRatio': 0,
                      'attackReasonID': 0,
@@ -202,7 +204,6 @@ class DataHitLog(object):
                      'shellKind': None,
                      'splashHit': False,
                      'criticalHit': False,
-                     'vehicleID': None,
                      'isAlive': True,
                      'compName': None,
                      'attackedVehicleType': 'not_vehicle',
@@ -215,9 +216,7 @@ class DataHitLog(object):
                      'clanicon': None,
                      'squadnum': None,
                      'teamDmg': 'unknown',
-                     'intCD': None,
                      'damageDeviation': None
-
                      }
 
     def updateLabels(self):
@@ -236,7 +235,7 @@ class DataHitLog(object):
         _logBackground.output()
         _logAltBackground.output()
         if not self.data['isAlive']:
-            removePlayerFromLogs(self.data['vehicleID'])
+            removePlayerFromLogs(self.vehicleID)
         self.data['splashHit'] = False
 
     def resetDataStats(self):
@@ -267,12 +266,11 @@ class DataHitLog(object):
 
 
     def updateData(self):
-        vehicleID = self.data['vehicleID']
-        self.data['teamDmg'] = self.getTeamDmg(vehicleID)
-        maxHealth = self.vehHealth[vehicleID]['maxHealth'] if vehicleID in self.vehHealth else 0
+        self.data['teamDmg'] = self.getTeamDmg(self.vehicleID)
+        maxHealth = self.vehHealth[self.vehicleID]['maxHealth'] if self.vehicleID in self.vehHealth else 0
         self.data['dmgRatio'] = self.data['damage'] * 100 // maxHealth if maxHealth != 0 else 0
-        if vehicleID:
-            attacked = self.player.arena.vehicles.get(vehicleID)
+        if self.vehicleID:
+            attacked = self.player.arena.vehicles.get(self.vehicleID)
             if attacked is not None:
                 vehicleType = attacked['vehicleType']
                 self.data['name'] = attacked['name']
@@ -302,23 +300,23 @@ class DataHitLog(object):
             elif not self.isVehicle:
                 self.resetDataStats()
                 self.resetDataVehInfo()
-                self.data['shortUserString'] = l10n(PILLBOX).format(self.entityID)
+                self.data['shortUserString'] = l10n(PILLBOX).format(self.entityNumber)
                 self.data['name'] = ''
                 self.data['clanAbbrev'] = ''
                 self.data['clanicon'] = None
                 self.data['squadnum'] = None
-                self.data['compName'] = 'unknown'
+                self.data['compName'] = None
                 self.data['criticalHit'] = None
             else:
                 self.data['name'] = ''
                 self.data['clanAbbrev'] = ''
                 self.resetDataStats()
                 self.resetDataVehInfo()
-            self.data['clanicon'] = _stat.getClanIcon(vehicleID)
+            self.data['clanicon'] = _stat.getClanIcon(self.vehicleID)
 
             arenaDP = self.guiSessionProvider.getArenaDP()
             if arenaDP is not None:
-                vInfo = arenaDP.getVehicleInfo(vID=vehicleID)
+                vInfo = arenaDP.getVehicleInfo(vID=self.vehicleID)
                 self.data['squadnum'] = vInfo.squadIndex if vInfo.squadIndex != 0 else None
             else:
                 self.data['squadnum'] = None
@@ -332,7 +330,7 @@ class DataHitLog(object):
         self.updateLabels()
 
     def reload(self):
-        self.data['intCD'] = self.ammo.getCurrentShellCD()
+        self.intCD = self.ammo.getCurrentShellCD()
 
     def onHealthChanged(self, vehicle, newHealth, attackerID, attackReasonID, isVehicle=True):
         self.isVehicle = isVehicle
@@ -351,14 +349,13 @@ class DataHitLog(object):
             self.data['criticalHit'] = False
             self.data['shellKind'] = 'not_shell'
             self.data['splashHit'] = False
-            self.data['compName'] = 'unknown'
+            self.data['compName'] = None
         else:
-            intCD = self.data['intCD']
-            if intCD is None:
+            if self.intCD is None:
                 self.data['costShell'] = 'unknown'
                 self.data['shellKind'] = 'not_shell'
             else:
-                _shells = self.shells[intCD]
+                _shells = self.shells[self.intCD]
                 self.data['shellKind'] = _shells['shellKind']
                 self.data['costShell'] = _shells['costShell']
                 self.data['damageDeviation'] = 0.0
@@ -367,8 +364,8 @@ class DataHitLog(object):
                     if (_shells['shellKind'] in ['high_explosive', 'armor_piercing_he']) and (self.data['damageDeviation'] < -0.25):
                         self.data['damageDeviation'] = 0.0
         if not self.isVehicle:
-            self.entityID = vehicle.destructibleEntityID
-        self.data['vehicleID'] = vehicle.id
+            self.entityNumber = vehicle.destructibleEntityID
+        self.vehicleID = vehicle.id
         self.data['isAlive'] = vehicle.isAlive()
         self.updateData()
 
@@ -581,14 +578,14 @@ class HitLog(object):
             self.updateList(self.players[vehID], INSERT)
 
     def groupHitsPlayer(self):
-        vehID = _data.data['vehicleID']
+        vehID = _data.vehicleID
         if vehID in self.players:
             self.updatePlayers(vehID)
         else:
             self.addPlayers(vehID)
 
     def notGroupHitsPlayer(self):
-        vehID = _data.data['vehicleID']
+        vehID = _data.vehicleID
         isGroupFire = False
         isGroupRamming = False
         if vehID in self.players:
@@ -696,7 +693,7 @@ _logAltBackground = HitLog(SECTION_ALT_BACKGROUND)
 
 @registerEvent(PlayerAvatar, 'updateVehicleGunReloadTime')
 def _PlayerAvatar_updateVehicleGunReloadTime(self, vehicleID, timeLeft, baseTime):
-    if battle.isBattleTypeSupported and (vehicleID == self.playerVehicleID) and (timeLeft <= 0.0) and config.get(ENABLED, True):
+    if battle.isBattleTypeSupported and (timeLeft <= 0.0) and config.get(ENABLED, True):
         _data.reload()
 
 
