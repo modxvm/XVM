@@ -108,6 +108,7 @@ build_as3(){
         for e in $top; do [[ "$e" == "$proj" ]] && { exists=1; break; } done
         if [ $exists -eq 0 ]; then
             echo "Building $proj"
+            # shellcheck source=/dev/null
             . ".build-${proj}.sh"
         fi
     done

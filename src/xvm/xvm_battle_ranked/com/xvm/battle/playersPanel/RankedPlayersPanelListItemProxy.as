@@ -883,6 +883,7 @@ package com.xvm.battle.playersPanel
                         extraFieldsHidden.visible = true;
                         extraFieldsHidden.update(currentPlayerState);
                     }
+                    break;
                 case PLAYERS_PANEL_STATE.SHORT:
                     if (extraFieldsShort)
                     {
