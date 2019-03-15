@@ -7,11 +7,11 @@ package com.xvm.battle
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import com.xvm.battle.battleloading.EpicBattleLoadingXvmView;
-    import com.xvm.battle.fullStats.EpicFullStatsXvmView;
-    import com.xvm.battle.minimap.MinimapXvmView;
-    import com.xvm.battle.sixthSense.SixthSenseXvmView;
-    import com.xvm.battle.teamBasesPanel.TeamBasesPanelXvmView;
+    import com.xvm.battle.epicbattle.battleloading.EpicBattleLoadingXvmView;
+    import com.xvm.battle.epicbattle.fullStats.EpicFullStatsXvmView;
+    import com.xvm.battle.shared.minimap.MinimapXvmView;
+    import com.xvm.battle.shared.sixthSense.SixthSenseXvmView;
+    import com.xvm.battle.shared.teamBasesPanel.TeamBasesPanelXvmView;
 
     public class BattleXvmMod extends XvmModBase
     {

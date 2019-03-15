@@ -10,25 +10,25 @@ package com.xvm.vo
     {
         public function get vehicleID():Number
         {
-            //throw new IllegalOperationError("abstract method called");
+            //throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
             return NaN;
         }
 
         public function get playerName():String
         {
-            //throw new IllegalOperationError("abstract method called");
+            //throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
             return null;
         }
 
         public function get clanAbbrev():String
         {
-            //throw new IllegalOperationError("abstract method called");
+            //throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
             return null;
         }
 
         public function get isAlly():Boolean
         {
-            //throw new IllegalOperationError("abstract method called");
+            //throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
             return true;
         }
 
@@ -39,7 +39,7 @@ package com.xvm.vo
 
         public function get isAlive():Boolean
         {
-            //throw new IllegalOperationError("abstract method called");
+            //throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
             return true;
         }
 
@@ -50,7 +50,7 @@ package com.xvm.vo
 
         public function get isReady():Boolean
         {
-            //throw new IllegalOperationError("abstract method called");
+            //throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
             return true;
         }
 
@@ -61,103 +61,103 @@ package com.xvm.vo
 
         public function get isNotAvailable():Boolean
         {
-            //throw new IllegalOperationError("abstract method called");
+            //throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
             return false;
         }
 
         public function get isStopRespawn():Boolean
         {
-            //throw new IllegalOperationError("abstract method called");
+            //throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
             return false;
         }
 
         public function get isSelected():Boolean
         {
-            //throw new IllegalOperationError("abstract method called");
+            //throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
             return false;
         }
 
         public function get isFriend():Boolean
         {
-            //throw new IllegalOperationError("abstract method called");
+            //throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
             return false;
         }
 
         public function get isIgnored():Boolean
         {
-            //throw new IllegalOperationError("abstract method called");
+            //throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
             return false;
         }
 
         public function get isMuted():Boolean
         {
-            //throw new IllegalOperationError("abstract method called");
+            //throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
             return false;
         }
 
         public function get isChatBan():Boolean
         {
-            //throw new IllegalOperationError("abstract method called");
+            //throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
             return false;
         }
 
         public function get isSquadPersonal():Boolean
         {
-            //throw new IllegalOperationError("abstract method called");
+            //throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
             return false;
         }
 
         public function get isTeamKiller():Boolean
         {
-            //throw new IllegalOperationError("abstract method called");
+            //throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
             return false;
         }
 
         public function get isCurrentPlayer():Boolean
         {
-            //throw new IllegalOperationError("abstract method called");
+            //throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
             return false;
         }
 
         public function get squadIndex():Number
         {
-            //throw new IllegalOperationError("abstract method called");
+            //throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
             return NaN;
         }
 
         public function get rankLevel():Number
         {
-            //throw new IllegalOperationError("abstract method called");
+            //throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
             return NaN;
         }
 
         public function get index():int
         {
-            //throw new IllegalOperationError("abstract method called");
+            //throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
             return -1;
         }
 
         public function get position():Number
         {
-            //throw new IllegalOperationError("abstract method called");
+            //throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
             return NaN;
         }
 
         public function get vehCD():int
         {
-            //throw new IllegalOperationError("abstract method called");
+            //throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
             return 0;
         }
 
         public function get vehicleData():VOVehicleData
         {
-            //throw new IllegalOperationError("abstract method called");
+            //throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
             return null;
         }
 
         public function get marksOnGun():Number
         {
-            //throw new IllegalOperationError("abstract method called");
+            //throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
             return NaN;
         }
 

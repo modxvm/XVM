@@ -7,12 +7,12 @@ package com.xvm.battle
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import com.xvm.battle.battleloading.BattleLoadingXvmView;
-    import com.xvm.battle.fullStats.FullStatsXvmView;
-    import com.xvm.battle.minimap.MinimapXvmView;
-    import com.xvm.battle.playersPanel.PlayersPanelXvmView;
-    import com.xvm.battle.sixthSense.SixthSenseXvmView;
-    import com.xvm.battle.teamBasesPanel.TeamBasesPanelXvmView;
+    import com.xvm.battle.classic.battleloading.BattleLoadingXvmView;
+    import com.xvm.battle.classic.fullStats.FullStatsXvmView;
+    import com.xvm.battle.classic.playersPanel.PlayersPanelXvmView;
+    import com.xvm.battle.shared.minimap.MinimapXvmView;
+    import com.xvm.battle.shared.sixthSense.SixthSenseXvmView;
+    import com.xvm.battle.shared.teamBasesPanel.TeamBasesPanelXvmView;
     import net.wg.gui.battle.random.views.*;
 
     public class BattleXvmMod extends XvmModBase

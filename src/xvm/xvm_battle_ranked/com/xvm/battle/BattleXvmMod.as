@@ -7,13 +7,13 @@ package com.xvm.battle
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import com.xvm.battle.battleloading.RankedBattleLoadingXvmView;
-    import com.xvm.battle.fullStats.RankedFullStatsXvmView;
-    import com.xvm.battle.minimap.MinimapXvmView;
-    import com.xvm.battle.playersPanel.RankedPlayersPanelXvmView;
-    import com.xvm.battle.sixthSense.SixthSenseXvmView;
-    import com.xvm.battle.teamBasesPanel.TeamBasesPanelXvmView;
-    import net.wg.gui.battle.ranked.*;
+    import com.xvm.battle.ranked.battleloading.RankedBattleLoadingXvmView;
+    import com.xvm.battle.ranked.fullStats.RankedFullStatsXvmView;
+    import com.xvm.battle.ranked.playersPanel.RankedPlayersPanelXvmView;
+    import com.xvm.battle.shared.minimap.MinimapXvmView;
+    import com.xvm.battle.shared.sixthSense.SixthSenseXvmView;
+    import com.xvm.battle.shared.teamBasesPanel.TeamBasesPanelXvmView;
+    import net.wg.gui.battle.ranked.RankedBattlePage;
 
     public class BattleXvmMod extends XvmModBase
     {

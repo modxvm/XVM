@@ -34,7 +34,7 @@ package com.xvm.lobby.ui.tankcarousel
 
         public function get linkRenderer():String
         {
-            throw new AbstractException("TankCarouselHelperBase.linkRenderer " + Errors.ABSTRACT_INVOKE);
+            throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
         }
 
         public function get rendererWidth():int
@@ -81,17 +81,17 @@ package com.xvm.lobby.ui.tankcarousel
 
         protected function get DEFAULT_RENDERER_WIDTH():int
         {
-            throw new AbstractException("TankCarouselHelperBase.DEFAULT_RENDERER_WIDTH " + Errors.ABSTRACT_INVOKE);
+            throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
         }
 
         protected function get DEFAULT_RENDERER_HEIGHT():int
         {
-            throw new AbstractException("TankCarouselHelperBase.DEFAULT_RENDERER_HEIGHT " + Errors.ABSTRACT_INVOKE);
+            throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
         }
 
         protected function get DEFAULT_RENDERER_VISIBLE_HEIGHT():int
         {
-            throw new AbstractException("TankCarouselHelperBase.DEFAULT_RENDERER_VISIBLE_HEIGHT " + Errors.ABSTRACT_INVOKE);
+            throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
         }
     }
 }

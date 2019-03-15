@@ -8,11 +8,11 @@ package com.xvm.battle
     import com.xfw.events.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import com.xvm.battle.battleClock.*;
-    import com.xvm.battle.battleLabels.*;
-    import com.xvm.battle.elements.*;
     import com.xvm.battle.events.*;
-    import com.xvm.battle.zoomIndicator.*;
+    import com.xvm.battle.shared.battleClock.BattleClock;
+    import com.xvm.battle.shared.battleLabels.BattleLabels;
+    import com.xvm.battle.shared.elements.BattleElements;
+    import com.xvm.battle.shared.zoomIndicator.ZoomIndicator;
     import com.xvm.types.cfg.*;
     import flash.display.*;
     import flash.events.*;
