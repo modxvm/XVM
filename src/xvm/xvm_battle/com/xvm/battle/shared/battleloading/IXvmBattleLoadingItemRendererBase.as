@@ -1,0 +1,34 @@
+﻿/**
+ * XVM: eXtended Visualization Mod for World of Tanks.
+ * https://modxvm.com/
+ */
+package com.xvm.battle.shared.battleloading
+{
+    import flash.display.*;
+    import flash.text.*;
+    import net.wg.gui.battle.components.*;
+    import net.wg.gui.components.icons.*;
+
+    public interface IXvmBattleLoadingItemRendererBase
+    {
+        function get DEFAULTS():XvmItemRendererDefaults;
+
+        function get badgeIcon():BattleAtlasSprite;
+        function get nameField():TextField;
+        function get vehicleField():TextField;
+        function get vehicleIcon():BattleAtlasSprite;
+        function get vehicleLevelIcon():BattleAtlasSprite;
+        function get vehicleTypeIcon():BattleAtlasSprite;
+        function get playerActionMarker():PlayerActionMarker;
+        function get selfBg():BattleAtlasSprite;
+        function get icoIGR():BattleAtlasSprite;
+
+        function setData(data:Object):void;
+
+        function invalidate2(param1:uint = uint.MAX_VALUE):void;
+
+        function addChild(child:DisplayObject):DisplayObject;
+        function addChildAt(child:DisplayObject, index:int):DisplayObject;
+        function getChildIndex(child:DisplayObject):int;
+    }
+}

@@ -8,6 +8,7 @@ package com.xvm.battle.ranked.battleloading
     import com.xvm.*;
     import com.xvm.battle.*;
     import com.xvm.battle.shared.battleloading.Clock;
+    import com.xvm.battle.shared.battleloading.XvmBattleLoadingItemRendererProxyBase;
     import com.xvm.types.cfg.*;
     import flash.events.*;
     import net.wg.data.constants.generated.*;
@@ -20,9 +21,6 @@ package com.xvm.battle.ranked.battleloading
 
     public class UI_RankedBattleLoading extends RankedBattleLoadingUI
     {
-        static private var _leftAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
-        static private var _rightAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
-
         private var cfg:CBattleLoading;
 
         private var _clock:Clock = null;
@@ -31,16 +29,6 @@ package com.xvm.battle.ranked.battleloading
         private var defaultVehicleFieldWidth:Number = NaN;
 
         private var battleLoadingForm:BattleLoadingForm = null;
-
-        static public function get leftAtlas():String
-        {
-            return _leftAtlas;
-        }
-
-        static public function get rightAtlas():String
-        {
-            return _rightAtlas;
-        }
 
         public function UI_RankedBattleLoading()
         {
@@ -135,8 +123,8 @@ package com.xvm.battle.ranked.battleloading
 
         private function registerVehicleIconAtlases():void
         {
-            _leftAtlas = registerVehicleIconAtlas(leftAtlas, Config.config.iconset.battleLoadingLeftAtlas);
-            _rightAtlas = registerVehicleIconAtlas(rightAtlas, Config.config.iconset.battleLoadingRightAtlas);
+            XvmBattleLoadingItemRendererProxyBase.leftAtlas = registerVehicleIconAtlas(XvmBattleLoadingItemRendererProxyBase.leftAtlas, Config.config.iconset.battleLoadingLeftAtlas);
+            XvmBattleLoadingItemRendererProxyBase.rightAtlas = registerVehicleIconAtlas(XvmBattleLoadingItemRendererProxyBase.rightAtlas, Config.config.iconset.battleLoadingRightAtlas);
         }
 
         private function registerVehicleIconAtlas(currentAtlas:String, cfgAtlas:String):String

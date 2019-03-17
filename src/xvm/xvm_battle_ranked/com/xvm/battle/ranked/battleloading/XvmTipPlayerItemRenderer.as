@@ -6,6 +6,7 @@ package com.xvm.battle.ranked.battleloading
 {
     import com.xfw.*;
     import com.xvm.battle.shared.battleloading.XvmItemRendererDefaults;
+    import com.xvm.battle.shared.battleloading.XvmBattleLoadingItemRendererProxyBase;
     import flash.display.*;
     import flash.text.*;
     import net.wg.data.VO.daapi.*;
@@ -43,7 +44,7 @@ package com.xvm.battle.ranked.battleloading
 
         private function _init2(isEnemy:Boolean):void
         {
-            proxy = new XvmBattleLoadingItemRendererProxy(this, XvmBattleLoadingItemRendererProxy.UI_TYPE_TIPS, !isEnemy);
+            proxy = new XvmBattleLoadingItemRendererProxy(this, XvmBattleLoadingItemRendererProxyBase.UI_TYPE_TIPS, !isEnemy);
         }
 
         override protected function onDispose():void

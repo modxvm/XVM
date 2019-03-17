@@ -6,6 +6,7 @@ package com.xvm.battle.classic.battleloading
 {
     import com.xfw.*;
     import com.xvm.battle.shared.battleloading.XvmItemRendererDefaults;
+    import com.xvm.battle.shared.battleloading.XvmBattleLoadingItemRendererProxyBase;
     import flash.display.*;
     import flash.text.*;
     import net.wg.data.VO.daapi.*;
@@ -42,7 +43,7 @@ package com.xvm.battle.classic.battleloading
 
         private function _init2(isEnemy:Boolean):void
         {
-            proxy = new XvmBattleLoadingItemRendererProxy(this, XvmBattleLoadingItemRendererProxy.UI_TYPE_TABLE, !isEnemy);
+            proxy = new XvmBattleLoadingItemRendererProxy(this, XvmBattleLoadingItemRendererProxyBase.UI_TYPE_TABLE, !isEnemy);
         }
 
         override protected function onDispose():void
