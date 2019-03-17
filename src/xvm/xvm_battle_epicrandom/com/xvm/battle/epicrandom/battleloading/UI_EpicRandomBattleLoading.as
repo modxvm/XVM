@@ -8,6 +8,7 @@ package com.xvm.battle.epicrandom.battleloading
     import com.xvm.*;
     import com.xvm.battle.*;
     import com.xvm.battle.shared.battleloading.Clock;
+    import com.xvm.battle.shared.battleloading.XvmBattleLoadingItemRendererProxyBase;
     import com.xvm.types.cfg.*;
     import flash.events.*;
     import net.wg.data.constants.generated.*;
@@ -20,9 +21,6 @@ package com.xvm.battle.epicrandom.battleloading
 
     public class UI_EpicRandomBattleLoading extends epicRandomBattleLoadingUI
     {
-        static private var _leftAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
-        static private var _rightAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
-
         private var cfg:CBattleLoading;
 
         private var _clock:Clock = null;
@@ -31,16 +29,6 @@ package com.xvm.battle.epicrandom.battleloading
         private var defaultVehicleFieldWidth:Number = NaN;
 
         private var battleLoadingForm:EpicRandomBattleLoadingForm = null;
-
-        static public function get leftAtlas():String
-        {
-            return _leftAtlas;
-        }
-
-        static public function get rightAtlas():String
-        {
-            return _rightAtlas;
-        }
 
         public function UI_EpicRandomBattleLoading()
         {
@@ -135,8 +123,8 @@ package com.xvm.battle.epicrandom.battleloading
 
         private function registerVehicleIconAtlases():void
         {
-            _leftAtlas = registerVehicleIconAtlas(leftAtlas, Config.config.iconset.battleLoadingLeftAtlas);
-            _rightAtlas = registerVehicleIconAtlas(rightAtlas, Config.config.iconset.battleLoadingRightAtlas);
+            XvmBattleLoadingItemRendererProxyBase.leftAtlas = registerVehicleIconAtlas(XvmBattleLoadingItemRendererProxyBase.leftAtlas, Config.config.iconset.battleLoadingLeftAtlas);
+            XvmBattleLoadingItemRendererProxyBase.rightAtlas = registerVehicleIconAtlas(XvmBattleLoadingItemRendererProxyBase.rightAtlas, Config.config.iconset.battleLoadingRightAtlas);
         }
 
         private function registerVehicleIconAtlas(currentAtlas:String, cfgAtlas:String):String
@@ -164,27 +152,6 @@ package com.xvm.battle.epicrandom.battleloading
         // TODO:EPIC
         private function initRenderers():void
         {
-            /*
-            var renderer:BasePlayerItemRenderer;
-            for each(renderer in battleLoadingForm.xfw_allyRenderers)
-            {
-                renderer.dispose();
-            }
-            battleLoadingForm.xfw_allyRenderers.splice(0, battleLoadingForm.xfw_allyRenderers.length);
-
-            for each(renderer in battleLoadingForm.xfw_enemyRenderers)
-            {
-                renderer.dispose();
-            }
-            battleLoadingForm.xfw_enemyRenderers.splice(0, battleLoadingForm.xfw_enemyRenderers.length);
-
-            var cls:Class = battleLoadingForm.formBackgroundTable.visible ? XvmTablePlayerItemRenderer : XvmTipPlayerItemRenderer;
-            for (var i:int = 0; i < 15; ++i)
-            {
-                battleLoadingForm.xfw_allyRenderers.push(new cls(battleLoadingForm.xfw_renderersContainer, i, false));
-                battleLoadingForm.xfw_enemyRenderers.push(new cls(battleLoadingForm.xfw_renderersContainer, i, true));
-            }
-            */
         }
     }
 }
