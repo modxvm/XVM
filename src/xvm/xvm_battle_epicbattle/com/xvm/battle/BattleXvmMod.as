@@ -7,8 +7,6 @@ package com.xvm.battle
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import com.xvm.battle.epicbattle.battleloading.EpicBattleLoadingXvmView;
-    import com.xvm.battle.epicbattle.fullStats.EpicFullStatsXvmView;
     import com.xvm.battle.shared.minimap.MinimapXvmView;
     import com.xvm.battle.shared.sixthSense.SixthSenseXvmView;
     import com.xvm.battle.shared.teamBasesPanel.TeamBasesPanelXvmView;
@@ -29,8 +27,6 @@ package com.xvm.battle
         private static const VIEWS:Object =
         {
             "epicBattlePage": [
-                //EpicBattleLoadingXvmView, // TODO:EPIC
-                //EpicFullStatsXvmView, // TODO:EPIC
                 //TeamBasesPanelXvmView,
                 //SixthSenseXvmView,
                 //BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)

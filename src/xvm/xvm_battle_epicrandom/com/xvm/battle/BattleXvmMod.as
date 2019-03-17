@@ -8,7 +8,6 @@ package com.xvm.battle
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import com.xvm.battle.epicrandom.battleloading.EpicRandomBattleLoadingXvmView;
-    import com.xvm.battle.epicrandom.fullStats.EpicRandomFullStatsXvmView;
     import com.xvm.battle.epicrandom.playersPanel.EpicRandomPlayersPanelXvmView;
     import com.xvm.battle.shared.minimap.MinimapXvmView;
     import com.xvm.battle.shared.sixthSense.SixthSenseXvmView;
@@ -30,8 +29,7 @@ package com.xvm.battle
         private static const VIEWS:Object =
         {
             "epicRandomPage": [
-                EpicRandomBattleLoadingXvmView, // TODO:EPIC
-                //EpicRandomFullStatsXvmView, // TODO:EPIC
+                EpicRandomBattleLoadingXvmView,
                 EpicRandomPlayersPanelXvmView,
                 TeamBasesPanelXvmView,
                 MinimapXvmView,
