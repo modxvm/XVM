@@ -42,7 +42,7 @@ package com.xvm.lobby
             return "[XVM:LOBBY]";
         }
 
-        private static const _views:Object =
+        private static const VIEWS:Object =
         {
             "login": [ OnlineLoginXvmView, PingLoginXvmView, WidgetsLoginXvmView ],
             "lobby": [ LobbyXvmView, LimitsXvmView, OnlineLobbyXvmView, PingLobbyXvmView, WidgetsLobbyXvmView ],
@@ -58,7 +58,7 @@ package com.xvm.lobby
 
         public override function get views():Object
         {
-            return _views;
+            return VIEWS;
         }
 
         override protected function processView(view:IView, populated:Boolean):Vector.<IXfwView>

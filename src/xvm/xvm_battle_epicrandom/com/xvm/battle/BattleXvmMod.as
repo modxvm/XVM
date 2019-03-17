@@ -7,12 +7,11 @@ package com.xvm.battle
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import com.xvm.battle.battleloading.EpicRandomBattleLoadingXvmView;
-    import com.xvm.battle.fullStats.EpicRandomFullStatsXvmView;
-    import com.xvm.battle.minimap.MinimapXvmView;
-    import com.xvm.battle.playersPanel.EpicRandomPlayersPanelXvmView;
-    import com.xvm.battle.sixthSense.SixthSenseXvmView;
-    import com.xvm.battle.teamBasesPanel.TeamBasesPanelXvmView;
+    import com.xvm.battle.epicrandom.battleloading.EpicRandomBattleLoadingXvmView;
+    import com.xvm.battle.epicrandom.playersPanel.EpicRandomPlayersPanelXvmView;
+    import com.xvm.battle.shared.minimap.MinimapXvmView;
+    import com.xvm.battle.shared.sixthSense.SixthSenseXvmView;
+    import com.xvm.battle.shared.teamBasesPanel.TeamBasesPanelXvmView;
 
     public class BattleXvmMod extends XvmModBase
     {
@@ -27,11 +26,10 @@ package com.xvm.battle
             return "[XVM:BATTLE]";
         }
 
-        private static const _views:Object =
+        private static const VIEWS:Object =
         {
             "epicRandomPage": [
-                EpicRandomBattleLoadingXvmView, // TODO:EPIC
-                //EpicRandomFullStatsXvmView, // TODO:EPIC
+                EpicRandomBattleLoadingXvmView,
                 EpicRandomPlayersPanelXvmView,
                 TeamBasesPanelXvmView,
                 MinimapXvmView,
@@ -42,7 +40,7 @@ package com.xvm.battle
 
         public override function get views():Object
         {
-            return _views;
+            return VIEWS;
         }
     }
 }

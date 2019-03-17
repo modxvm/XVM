@@ -7,11 +7,9 @@ package com.xvm.battle
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import com.xvm.battle.battleloading.EpicBattleLoadingXvmView;
-    import com.xvm.battle.fullStats.EpicFullStatsXvmView;
-    import com.xvm.battle.minimap.MinimapXvmView;
-    import com.xvm.battle.sixthSense.SixthSenseXvmView;
-    import com.xvm.battle.teamBasesPanel.TeamBasesPanelXvmView;
+    import com.xvm.battle.shared.minimap.MinimapXvmView;
+    import com.xvm.battle.shared.sixthSense.SixthSenseXvmView;
+    import com.xvm.battle.shared.teamBasesPanel.TeamBasesPanelXvmView;
 
     public class BattleXvmMod extends XvmModBase
     {
@@ -26,11 +24,9 @@ package com.xvm.battle
             return "[XVM:BATTLE]";
         }
 
-        private static const _views:Object =
+        private static const VIEWS:Object =
         {
             "epicBattlePage": [
-                //EpicBattleLoadingXvmView, // TODO:EPIC
-                //EpicFullStatsXvmView, // TODO:EPIC
                 //TeamBasesPanelXvmView,
                 //SixthSenseXvmView,
                 //BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
@@ -39,7 +35,7 @@ package com.xvm.battle
 
         public override function get views():Object
         {
-            return _views;
+            return VIEWS;
         }
     }
 }

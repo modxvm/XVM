@@ -50,7 +50,7 @@ package com.xvm.lobby.widgets
 
         protected function init():void
         {
-            throw new AbstractException("WidgetsXvmView.init " + Errors.ABSTRACT_INVOKE);
+            throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
         }
 
         protected function remove():void
