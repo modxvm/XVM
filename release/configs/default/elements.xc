@@ -52,6 +52,9 @@
     },
     */
     /*
+    ┌─────────┐
+    │ regular │
+    └─────────┘
     "battleDamageLogPanel"          - Панель: Информирование в бою - История событий         / Panel: Battle Notifications - Log
     "battleLoading"                 - Экран загрузки боя                                     / Battle Loading screen
     "battleMessenger"               - Чат                                                    / Chat
@@ -63,8 +66,6 @@
     "debugPanel"                    - Панель пинга/лага/фпс                                  / Debug panel (ping/lag/fps)
     "destroyTimersPanel"            - Таймер до уничтожения (утопление, переворот)           / Destroy timers (drowning, overturned)
     "endWarningPanel"               - Панель оповещяющая о конце боя                         / Panel informing about the imminent end of the battle
-    "epicRandomPlayersPanel"        - Панели игроков/уши (Генеральное сражение)              / Players panels (Grand Battles)
-    "epicRandomScorePanel"          - Счёт боя (Генеральное сражение)                        / Battle score (Grand Battles)
     "fragCorrelationBar"            - Счёт боя                                               / Battle score
     "fullStats"                     - Окно статистики по клавише Tab                         / Battle Statistics form on the Tab key
     "gameMessagesPanel"             - Сообщение о результате боя (победа, поражение, ничья)  / Messages on the outcome of the battle (victory, defeat, draw)
@@ -79,6 +80,25 @@
     "siegeModePanel"                - Панель осадного режима                                 / Siege mode panel
     "sixthSense"                    - Лампа шестого чувства                                  / Sixth sense lamp
     "teamBasesPanelUI"              - Полоса захвата баз                                     / Capture bar
+    ┌─────────────┐
+    │ epic_random │
+    └─────────────┘
+    "epicRandomPlayersPanel"        - Панели игроков/уши                                     / Players panels
+    "epicRandomScorePanel"          - Счёт боя                                               / Battle score
+    ┌─────────────┐
+    │ epic_battle │
+    └─────────────┘
+    "epicDeploymentMap"             - ?                                                      / ?
+    "epicDestroyTimersPanel"        - ?                                                      / ?
+    "epicInGameRank"                - ?                                                      / ?
+    "epicMissionsPanel"             - ?                                                      / ?
+    "epicOverviewMapScreen"         - ?                                                      / ?
+    "epicReinforcementPanel"        - ?                                                      / ?
+    "epicRespawnView"               - ?                                                      / ?
+    "epicSpectatorViewUI"           - ?                                                      / ?
+    "epicScorePanelUI"              - ?                                                      / ?
+    "recoveryPanel"                 - ?                                                      / ?
+    "superPlatoonPanel"             - ?                                                      / ?
     */
   ]
 }
