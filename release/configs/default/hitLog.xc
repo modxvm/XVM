@@ -193,13 +193,13 @@
       },
       // List of hits format (macros allowed, see macros.txt).
       // Формат лога попаданий (допускаются макроподстановки, см. macros.txt)
-      "formatHistory": "<textformat leading='-4' tabstops='[20,50,90,190]'><font size='12'>\u00D7{{n-player}}:</font><tab><font color='{{c:dmg-kind}}'>{{dmg}}</font><tab>| {{dmg-player}}<tab>|<font color='{{c:vtype}}'>{{vehicle}}</font> <font face='xvm' color='#FF0000'>{{alive? |{{blownup?<font size='15'>&#x7C;</font>|<font size='19'>&#x77;</font>}}}}<tab>|{{name%.15s~..}} <font alpha='#A0'>{{clan}}</font></textformat>"
+      "formatHistory": "<textformat leading='-4' tabstops='[20,50,90,190]'><font size='12'>\u00D7{{n-player}}:</font><tab><font color='{{c:dmg-kind}}'>{{dmg}}</font><tab>| {{dmg-player}}<tab>|<font color='{{c:vtype}}'>{{vehicle}}</font> <font face='xvm' size='15' color='#FF0000'>{{alive? |{{blownup?&#x7C;|<font size='19'>&#x77;</font>}}}}</font><tab>|{{name%.15s~..}} <font alpha='#A0'>{{clan}}</font></textformat>"
     },
     // Log of applied damage (alternative mode).
     // Лог нанесенного урона (альтернативный режим).
     "logAlt": {
       "$ref": { "path":"hitLog.log" },
-      "formatHistory": "<textformat leading='-4' tabstops='[20,50,90,190]'><font size='12'>\u00D7{{n-player}}:</font><tab><font color='{{c:dmg-kind}}'>{{dmg-ratio~%}}</font><tab>| {{dmg-ratio-player~%}}<tab>|<font color='{{c:vtype}}'>{{vehicle}}</font> <font face='xvm' color='#FF0000'>{{alive? |{{blownup?<font size='15'>&#x7C;</font>|<font size='19'>&#x77;</font>}}}}<tab>|{{name%.15s~..}} <font alpha='#A0'>{{clan}}</font></textformat>"
+      "formatHistory": "<textformat leading='-4' tabstops='[20,50,90,190]'><font size='12'>\u00D7{{n-player}}:</font><tab><font color='{{c:dmg-kind}}'>{{dmg-ratio~%}}</font><tab>| {{dmg-ratio-player~%}}<tab>|<font color='{{c:vtype}}'>{{vehicle}}</font> <font face='xvm' size='15' color='#FF0000'>{{alive? |{{blownup?&#x7C;|<font size='19'>&#x77;</font>}}}}</font><tab>|{{name%.15s~..}} <font alpha='#A0'>{{clan}}</font></textformat>"
     },
     // Background of the log of applied damage.
     // Подложка лога нанесенного урона.
