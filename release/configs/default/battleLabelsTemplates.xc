@@ -23,13 +23,13 @@
     "hitLogBody": {
       "enabled": true,
       "updateEvent": "PY(ON_HIT_LOG), ON_PANEL_MODE_CHANGED",
-      "x": "{{pp.mode=0?5|{{py:sum({{pp.widthLeft}},{{py:xvm.hitLog_x}})}}}}",
-      "y": "{{pp.mode=0?90|{{py:xvm.hitLog_y}}}}",
+      "x": "{{pp.mode=0?5|{{py:sum({{pp.widthLeft}},{{py:xvm.hitLog.hLog_x}})}}}}",
+      "y": "{{pp.mode=0?90|{{py:xvm.hitLog.hLog_y}}}}",
       "width": 500,
       "height": 1000,
       "layer": "bottom",
       "textFormat": { "color": "0xF4EFE8", "size": 15 },
-      "format": "{{py:xvm.hitLog}}",
+      "format": "{{py:xvm.hitLog.hLog}}",
       "mouseEvents": {
         "mouseDown": "hitLog_mouseDown",
         "mouseUp": "hitLog_mouseUp",
@@ -41,7 +41,7 @@
     "hitLogBackground": {
       "enabled": false,
       "$ref": { "path":"def.hitLogBody" },
-      "format": "{{py:xvm.hitLog_Background}}"
+      "format": "{{py:xvm.hitLog.hLogBackground}}"
     },
     "totalEfficiency": {
       "enabled": true,

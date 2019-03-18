@@ -1,3 +1,6 @@
+# Addons: "HitLog"
+# ktulho <https://kr.cm/f/p/17624/>
+
 import BigWorld
 from Vehicle import Vehicle
 from DestructibleEntity import DestructibleEntity

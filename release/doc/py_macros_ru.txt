@@ -2,10 +2,10 @@
 │         Имя файла          │ Название события по которому │            Название py_macro             │                                             Описание
 │                            │      обновляется макрос      │                                          │
 ├────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────
-│hit_log.py (hitLog.py)      │PY(ON_HIT_LOG)                │{{py:xvm.hitLog}}                         │значение "formatHistory" из секции "log" файла hitLog.xc
-│                            │---//---                      │{{py:xvm.hitLog_Background}}              │значение "formatHistory" из секции "logBackground" файла hitLog.xc
-│                            │---//---                      │{{py:xvm.hitLog_x}}                       │значение "x" из секции "log" файла hitLog.xc или сохраненное значение координаты х в бою
-│                            │---//---                      │{{py:xvm.hitLog_y}}                       │значение "y" из секции "log" файла hitLog.xc или сохраненное значение координаты y в бою
+│hit_log.py (hitLog.py)      │PY(ON_HIT_LOG)                │{{py:xvm.hitLog.hLog}}                    │значение "formatHistory" из секции "log" файла hitLog.xc
+│                            │---//---                      │{{py:xvm.hitLog.hLogBackground}}          │значение "formatHistory" из секции "logBackground" файла hitLog.xc
+│                            │---//---                      │{{py:xvm.hitLog.hLog_x}}                  │значение "x" из секции "log" файла hitLog.xc или сохраненное значение координаты х в бою
+│                            │---//---                      │{{py:xvm.hitLog.hLog_y}}                  │значение "y" из секции "log" файла hitLog.xc или сохраненное значение координаты y в бою
 ├────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────
 │damage_Log.py (damageLog.py)│PY(ON_HIT)                    │{{py:xvm.damageLog.dLog}}                 │значение "formatHistory" из секции "log" файла damageLog.xc
 │                            │---//---                      │{{py:xvm.damageLog.dLog_shadow('XXX')}}   │значение "XXX" из секции "log\shadow" файла damageLog.xc
