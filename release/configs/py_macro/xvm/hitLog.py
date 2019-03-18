@@ -490,7 +490,6 @@ class HitLog(object):
                 self.x = parser(config.get(self.S_X, DEFAULT_X))
                 self.y = parser(config.get(self.S_Y, DEFAULT_Y))
 
-
     def updateGroupFireRamming(self, playerData):
 
         def updateDmg(typeTime, typeDmg):
@@ -539,17 +538,6 @@ class HitLog(object):
                 self.updateList(pl, INSERT)
 
     def addPlayers(self, vehID):
-
-        def addLine(mode):
-            shift = mode - 1
-            if self.countLines >= self.maxCountLines:
-                if 0 < self.countLines:
-                    self.listLog.pop(0)
-                for v in self.players:
-                    self.players[v]['numberLine'] += shift
-            self.players[vehID]['numberLine'] = 0 if mode == INSERT else min(self.countLines, self.maxCountLines - 1) #self.countLines if self.countLines < self.maxCountLines else (self.maxCountLines - 1)
-            self.updateList(self.players[vehID], mode)
-
         self.players[vehID] = {'dmg-player': _data.data['damage'],
                                'dmg-ratio-player': _data.data['dmgRatio'],
                                'n-player': 1,
@@ -567,9 +555,21 @@ class HitLog(object):
             self.players[vehID]['numberLine'] = 0
             self.updateList(self.players[vehID], CHANGE if self.countLines else APPEND)
         elif self.isAddToEnd:
-            addLine(APPEND)
+            if self.countLines >= self.maxCountLines:
+                if 0 < self.countLines:
+                    self.listLog.pop(0)
+                for v in self.players:
+                    self.players[v]['numberLine'] -= 1
+            self.players[vehID]['numberLine'] = min(self.countLines, self.maxCountLines - 1)
+            self.updateList(self.players[vehID], APPEND)
         else:
-            addLine(INSERT)
+            if self.countLines >= self.maxCountLines:
+                if 0 < self.countLines:
+                    self.listLog.pop(self.countLines - 1)
+            for v in self.players:
+                self.players[v]['numberLine'] += 1
+            self.players[vehID]['numberLine'] = 0
+            self.updateList(self.players[vehID], INSERT)
 
     def groupHitsPlayer(self):
         vehID = _data.vehicleID
@@ -734,7 +734,6 @@ def _Vehicle_onEnterWorld(self, prereqs):
                 chooseRating = RATINGS[r]['name']
             else:
                 chooseRating = 'xwgr' if scale == 'xvm' else 'wgr'
-
             _data.onEnterWorld(self)
             autoReloadConfig = config.get('autoReloadConfig')
             if not (autoReloadConfig or hitLogConfig):
