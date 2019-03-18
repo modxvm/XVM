@@ -12,7 +12,9 @@
     // * поддерживается расширенный формат, см. extra-field.txt
     "formats": [
       ${"battleLabelsTemplates.xc":"def.hitLogBackground"},
-      ${"battleLabelsTemplates.xc":"def.hitLog"},
+      ${"battleLabelsTemplates.xc":"def.hitLogBody"},
+      ${"battleLabelsTemplates.xc":"def.hitLogHeader"},
+      ${"battleLabelsTemplates.xc":"def.totalEfficiency"},
       ${"battleLabelsTemplates.xc":"def.totalHP"},
       ${"battleLabelsTemplates.xc":"def.avgDamage"},
       ${"battleLabelsTemplates.xc":"def.mainGun"},
@@ -20,7 +22,6 @@
       ${"battleLabelsTemplates.xc":"def.damageLog"},
       ${"battleLabelsTemplates.xc":"def.lastHit"},
       ${"battleLabelsTemplates.xc":"def.fire"},
-      ${"battleLabelsTemplates.xc":"def.totalEfficiency"},
       ${"battleLabelsTemplates.xc":"def.repairTimeEngine"},
       ${"battleLabelsTemplates.xc":"def.repairTimeGun"},
       ${"battleLabelsTemplates.xc":"def.repairTimeTurret"},

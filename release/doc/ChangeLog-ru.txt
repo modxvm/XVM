@@ -6,16 +6,14 @@
   * полностью переработаны настройки лога нанесенного урона;
       смотрите файл "hitLog.xc"
   * добавлены секции:
-      "battleLabels"/"hitLog"
       "battleLabels"/"hitLogBackground"
-      "battleLabelsTemplates"/"hitLog"
       "battleLabelsTemplates"/"hitLogBackground"
       "colors"/"dmg_ratio_player"
-  * удалены секции:
-      "battleLabels"/"hitlogHeader"
-      "battleLabels"/"hitlogBody"
-      "battleLabelsTemplates"/"hitlogHeader"
-      "battleLabelsTemplates"/"hitlogBody"
+  * переименованы секции:
+      "battleLabels"/"hitlogHeader" > "battleLabels"/"hitLogHeader"
+      "battleLabels"/"hitlogBody" > "battleLabels"/"hitLogBody"
+      "battleLabelsTemplates"/"hitlogHeader" > "battleLabelsTemplates"/"hitLogHeader"
+      "battleLabelsTemplates"/"hitlogBody" > "battleLabelsTemplates"/"hitLogBody"
   * обновлены секции:
       "battleLabelsTemplates"/"avgDamage"
       "battleLabelsTemplates"/"mainGun"
