@@ -499,17 +499,6 @@ class HitLog(object):
                 playerData['n-player'] += 1
             playerData['rammingTime'] = BigWorld.time()
 
-    def isOneLine(self):
-        if self.maxCountLines == 0:
-            return True
-        if self.maxCountLines == 1:
-            if self.countLines == 1:
-                self.listLog[0] = parser(config.get(self.S_FORMAT_HISTORY, ''))
-            else:
-                self.listLog.append(parser(config.get(self.S_FORMAT_HISTORY, '')))
-            return True
-        return False
-
     def updatePlayers(self, vehID):
         pl = self.players[vehID]
         pl['dmg-player'] += _data.data['damage']
@@ -518,8 +507,12 @@ class HitLog(object):
         maxHealth = _data.vehHealth[vehID]['maxHealth'] if vehID in _data.vehHealth else 0
         pl['dmg-ratio-player'] = pl['dmg-player'] * 100 // maxHealth if maxHealth != 0 else 0
         self.updateGroupFireRamming(pl)
-        if self.isOneLine():
-            return
+        if self.maxCountLines == 1:
+            self.players[vehID]['numberLine'] = 0
+            if self.countLines == 0:
+                self.updateList(pl, APPEND)
+            else:
+                self.updateList(pl, CHANGE)
         elif self.isAddToEnd:
             if pl['numberLine'] == self.countLines - 1:
                 self.updateList(pl, CHANGE)
@@ -557,8 +550,12 @@ class HitLog(object):
         if _data.data['attackReasonID'] == 2:
             self.players[vehID]['rammingDmg'] = _data.data['damage']
             self.players[vehID]['rammingTime'] = BigWorld.time()
-        if self.isOneLine():
-            return
+        if self.maxCountLines == 1:
+            self.players[vehID]['numberLine'] = 0
+            if self.countLines == 0:
+                self.updateList(self.players[vehID], APPEND)
+            else:
+                self.updateList(self.players[vehID], CHANGE)
         elif self.isAddToEnd:
             numberLine = self.countLines if self.countLines < self.maxCountLines else (self.maxCountLines - 1)
             if self.countLines >= self.maxCountLines:
@@ -649,8 +646,6 @@ class HitLog(object):
         else:
             pl['n-player'] = pl['n-playerShot']
         updateValueMacros(self.section, pl)
-        if self.isOneLine():
-            return
         if isGroupFire and ((pl['numberLineFire'] >= 0) or (pl['numberLineFire'] < self.maxCountLines)):
             self.listLog[pl['numberLineFire']] = parser(config.get(self.S_FORMAT_HISTORY, ''))
         elif isGroupRamming and ((pl['numberLineRamming'] >= 0) or (pl['numberLineRamming'] < self.maxCountLines)):
