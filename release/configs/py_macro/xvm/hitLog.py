@@ -20,6 +20,7 @@ import xvm_main.python.config as config
 import xvm_main.python.userprefs as userprefs
 import xvm_battle.python.battle as battle
 
+
 from xvm.damageLog import HIT_EFFECT_CODES, keyLower, chooseRating, ATTACK_REASONS, RATINGS, VEHICLE_CLASSES_SHORT
 import parser_addon
 
@@ -50,9 +51,8 @@ SECTIONS = (SECTION_LOG, SECTION_ALT_LOG, SECTION_BACKGROUND, SECTION_ALT_BACKGR
 PILLBOX = 'pillbox'
 
 APPEND = 0
-INSERT = 1
-CHANGE = 2
-
+CHANGE = 1
+INSERT = 2
 
 def readyConfig(section):
     if autoReloadConfig or (section not in hitLogConfig):
@@ -462,6 +462,16 @@ class HitLog(object):
             self.y += (_data['y'] - self._data['y'])
             as_event('ON_HIT_LOG')
 
+    def sumDmg(self, vehID):
+        pl = self.players[vehID]
+        pl['dmg-player'] += _data.data['damage']
+        if _data.data['attackReasonID'] not in pl['dmg-kind-player']:
+            pl['dmg-kind-player'].append(_data.data['attackReasonID'])
+        maxHealth = _data.vehHealth[vehID]['maxHealth'] if vehID in _data.vehHealth else 0
+        pl['dmg-ratio-player'] = (pl['dmg-player'] * 100 // maxHealth) if maxHealth != 0 else 0
+
+##------------Group hits by players name----------------
+
     def updateList(self, playerData, mode):
         playerData.update(_data.data)
         if playerData['attackReasonID'] == 1:
@@ -482,37 +492,29 @@ class HitLog(object):
 
 
     def updateGroupFireRamming(self, playerData):
+
+        def updateDmg(typeTime, typeDmg):
+            if (BigWorld.time() - playerData[typeTime]) < 1.0:
+                playerData[typeDmg] += _data.data['damage']
+            else:
+                playerData[typeDmg] = _data.data['damage']
+                playerData['n-player'] += 1
+            playerData[typeTime] = BigWorld.time()
+
         if _data.data['attackReasonID'] == 0:
             playerData['n-player'] += 1
         elif _data.data['attackReasonID'] == 1:
-            if (BigWorld.time() - playerData['fireTime']) < 1.0:
-                playerData['fireDmg'] += _data.data['damage']
-            else:
-                playerData['fireDmg'] = _data.data['damage']
-                playerData['n-player'] += 1
-            playerData['fireTime'] = BigWorld.time()
+            updateDmg('fireTime', 'fireDmg')
         elif _data.data['attackReasonID'] == 2:
-            if (BigWorld.time() - playerData['rammingTime']) < 1.0:
-                playerData['rammingDmg'] += _data.data['damage']
-            else:
-                playerData['rammingDmg'] = _data.data['damage']
-                playerData['n-player'] += 1
-            playerData['rammingTime'] = BigWorld.time()
+            updateDmg('rammingTime', 'rammingDmg')
 
     def updatePlayers(self, vehID):
+        self.sumDmg(vehID)
         pl = self.players[vehID]
-        pl['dmg-player'] += _data.data['damage']
-        if _data.data['attackReasonID'] not in pl['dmg-kind-player']:
-            pl['dmg-kind-player'].append(_data.data['attackReasonID'])
-        maxHealth = _data.vehHealth[vehID]['maxHealth'] if vehID in _data.vehHealth else 0
-        pl['dmg-ratio-player'] = pl['dmg-player'] * 100 // maxHealth if maxHealth != 0 else 0
         self.updateGroupFireRamming(pl)
         if self.maxCountLines == 1:
             self.players[vehID]['numberLine'] = 0
-            if self.countLines == 0:
-                self.updateList(pl, APPEND)
-            else:
-                self.updateList(pl, CHANGE)
+            self.updateList(self.players[vehID], CHANGE if self.countLines else APPEND)
         elif self.isAddToEnd:
             if pl['numberLine'] == self.countLines - 1:
                 self.updateList(pl, CHANGE)
@@ -537,6 +539,17 @@ class HitLog(object):
                 self.updateList(pl, INSERT)
 
     def addPlayers(self, vehID):
+
+        def addLine(mode):
+            shift = mode - 1
+            if self.countLines >= self.maxCountLines:
+                if 0 < self.countLines:
+                    self.listLog.pop(0)
+                for v in self.players:
+                    self.players[v]['numberLine'] += shift
+            self.players[vehID]['numberLine'] = 0 if mode == INSERT else min(self.countLines, self.maxCountLines - 1) #self.countLines if self.countLines < self.maxCountLines else (self.maxCountLines - 1)
+            self.updateList(self.players[vehID], mode)
+
         self.players[vehID] = {'dmg-player': _data.data['damage'],
                                'dmg-ratio-player': _data.data['dmgRatio'],
                                'n-player': 1,
@@ -552,27 +565,11 @@ class HitLog(object):
             self.players[vehID]['rammingTime'] = BigWorld.time()
         if self.maxCountLines == 1:
             self.players[vehID]['numberLine'] = 0
-            if self.countLines == 0:
-                self.updateList(self.players[vehID], APPEND)
-            else:
-                self.updateList(self.players[vehID], CHANGE)
+            self.updateList(self.players[vehID], CHANGE if self.countLines else APPEND)
         elif self.isAddToEnd:
-            numberLine = self.countLines if self.countLines < self.maxCountLines else (self.maxCountLines - 1)
-            if self.countLines >= self.maxCountLines:
-                if 0 < self.countLines:
-                    self.listLog.pop(0)
-                for v in self.players:
-                    self.players[v]['numberLine'] -= 1
-            self.players[vehID]['numberLine'] = numberLine
-            self.updateList(self.players[vehID], APPEND)
+            addLine(APPEND)
         else:
-            if self.countLines >= self.maxCountLines:
-                if 0 < self.countLines:
-                    self.listLog.pop(self.countLines - 1)
-            for v in self.players:
-                self.players[v]['numberLine'] += 1
-            self.players[vehID]['numberLine'] = 0
-            self.updateList(self.players[vehID], INSERT)
+            addLine(INSERT)
 
     def groupHitsPlayer(self):
         vehID = _data.vehicleID
@@ -581,40 +578,36 @@ class HitLog(object):
         else:
             self.addPlayers(vehID)
 
+##------------Not group hits by player names----------------
+
     def notGroupHitsPlayer(self):
+
+        def upGroupFireRamming(pl, typeTime, typeDmg, typeNumberLine, typeNPlayer):
+            if (BigWorld.time() - pl[typeTime]) < 1.0:
+                isGroup = True
+                pl[typeDmg] += _data.data['damage']
+            else:
+                pl[typeDmg] = _data.data['damage']
+                pl['n-player'] += 1
+                pl[typeNPlayer] = pl['n-playerShot'] = pl['n-player']
+                pl[typeNumberLine] = self.countLines + 1 if self.isAddToEnd else -1
+                isGroup = False
+            pl[typeTime] = BigWorld.time()
+            return isGroup
+
         vehID = _data.vehicleID
         isGroupFire = False
         isGroupRamming = False
         if vehID in self.players:
+            self.sumDmg(vehID)
             pl = self.players[vehID]
-            pl['dmg-player'] += _data.data['damage']
-            if _data.data['attackReasonID'] not in pl['dmg-kind-player']:
-                pl['dmg-kind-player'].append(_data.data['attackReasonID'])
-            maxHealth = _data.vehHealth[vehID]['maxHealth'] if vehID in _data.vehHealth else 0
-            pl['dmg-ratio-player'] = pl['dmg-player'] * 100 // maxHealth if maxHealth != 0 else 0
             if _data.data['attackReasonID'] == 0:
                 pl['n-playerShot'] += 1
                 pl['n-player'] = pl['n-playerShot']
             elif _data.data['attackReasonID'] == 1:
-                if (BigWorld.time() - pl['fireTime']) < 1.0:
-                    isGroupFire = True
-                    pl['fireDmg'] += _data.data['damage']
-                else:
-                    pl['fireDmg'] = _data.data['damage']
-                    pl['n-player'] += 1
-                    pl['n-playerFire'] = pl['n-playerShot'] = pl['n-player']
-                    pl['numberLineFire'] = self.countLines + 1 if self.isAddToEnd else -1
-                pl['fireTime'] = BigWorld.time()
+                isGroupFire = upGroupFireRamming(pl, 'fireTime', 'fireDmg', 'numberLineFire', 'n-playerFire')
             elif _data.data['attackReasonID'] == 2:
-                if (BigWorld.time() - pl['rammingTime']) < 1.0:
-                    isGroupRamming = True
-                    pl['rammingDmg'] += _data.data['damage']
-                else:
-                    pl['rammingDmg'] = _data.data['damage']
-                    pl['n-player'] += 1
-                    pl['n-playerRamming'] = pl['n-playerShot'] = pl['n-player']
-                    pl['numberLineRamming'] = self.countLines + 1 if self.isAddToEnd else -1
-                pl['rammingTime'] = BigWorld.time()
+                isGroupFire = upGroupFireRamming(pl, 'rammingTime', 'rammingDmg', 'numberLineRamming', 'n-playerRamming')
         else:
             pl = {'dmg-player': _data.data['damage'],
                   'dmg-ratio-player': _data.data['dmgRatio'],
@@ -801,11 +794,15 @@ def PlayerAvatar_handleKey(self, isDown, key, mods):
 
 
 def getLog():
-    return '\n'.join(_logAlt.listLog) if isDownAlt else '\n'.join(_log.listLog)
+    listLog = '\n'.join(_log.listLog) if _log.listLog else None
+    listLogAlt = '\n'.join(_logAlt.listLog) if _logAlt.listLog else None
+    return listLogAlt if isDownAlt else listLog
 
 
 def getLogBackground():
-    return '\n'.join(_logAltBackground.listLog) if isDownAlt else '\n'.join(_logBackground.listLog)
+    listLog = '\n'.join(_logBackground.listLog) if _logBackground.listLog else None
+    listLogAlt = '\n'.join(_logAltBackground.listLog) if _logAltBackground.listLog else None
+    return listLogAlt if isDownAlt else listLog
 
 
 def getLogX():
