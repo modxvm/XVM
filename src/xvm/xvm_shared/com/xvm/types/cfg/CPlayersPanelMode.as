@@ -18,35 +18,35 @@ package com.xvm.types.cfg
         public var fragsShadowLeft:CShadow;
         public var fragsShadowRight:CShadow;
         public var fragsWidth:*;
-        public var fragsXOffsetLeft:*;
-        public var fragsXOffsetRight:*;
+        public var fragsOffsetXLeft:*;
+        public var fragsOffsetXRight:*;
         public var nickFormatLeft:String;
         public var nickFormatRight:String;
         public var nickMaxWidth:*;
         public var nickMinWidth:*;
         public var nickShadowLeft:CShadow;
         public var nickShadowRight:CShadow;
-        public var nickXOffsetLeft:*;
-        public var nickXOffsetRight:*;
+        public var nickOffsetXLeft:*;
+        public var nickOffsetXRight:*;
         public var rankBadgeAlpha:*;
         public var rankBadgeWidth:*;
-        public var rankBadgeXOffsetLeft:*;
-        public var rankBadgeXOffsetRight:*;
+        public var rankBadgeOffsetXLeft:*;
+        public var rankBadgeOffsetXRight:*;
         public var removeSquadIcon:*;
         public var squadIconAlpha:*;
         public var standardFields:Array;
         public var vehicleFormatLeft:String;
         public var vehicleFormatRight:String;
-        public var vehicleIconXOffsetLeft:*;
-        public var vehicleIconXOffsetRight:*;
+        public var vehicleIconOffsetXLeft:*;
+        public var vehicleIconOffsetXRight:*;
         public var vehicleLevelAlpha:*;
-        public var vehicleLevelXOffsetLeft:*;
-        public var vehicleLevelXOffsetRight:*;
+        public var vehicleLevelOffsetXLeft:*;
+        public var vehicleLevelOffsetXRight:*;
         public var vehicleShadowLeft:CShadow;
         public var vehicleShadowRight:CShadow;
         public var vehicleWidth:*;
-        public var vehicleXOffsetLeft:*;
-        public var vehicleXOffsetRight:*;
+        public var vehicleOffsetXLeft:*;
+        public var vehicleOffsetXRight:*;
 
         public function clone():*
         {

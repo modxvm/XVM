@@ -29,6 +29,21 @@
       "battleLabelsTemplates"/"damageLogBackground"
       "battleLabelsTemplates"/"lastHit"
 
+  [ПАНЕЛИ ИГРОКОВ]
+  * переименованы опции в секциях "playersPanel"/"short", "medium", "medium2", "large":
+      "vehicleIconXOffsetLeft"   -> "vehicleIconOffsetXLeft"
+      "vehicleIconXOffsetRight"  -> "vehicleIconOffsetXRight"
+      "vehicleLevelXOffsetLeft"  -> "vehicleLevelOffsetXLeft"
+      "vehicleLevelXOffsetRight" -> "vehicleLevelOffsetXRight"
+      "fragsXOffsetLeft"         -> "fragsOffsetXLeft"
+      "fragsXOffsetRight"        -> "fragsOffsetXRight"
+      "rankBadgeXOffsetLeft"     -> "rankBadgeOffsetXLeft"
+      "rankBadgeXOffsetRight"    -> "rankBadgeOffsetXRight"
+      "nickXOffsetLeft"          -> "nickOffsetXLeft"
+      "nickXOffsetRight"         -> "nickOffsetXRight"
+      "vehicleXOffsetLeft"       -> "vehicleOffsetXLeft"
+      "vehicleXOffsetRight"      -> "vehicleOffsetXRight"
+
   [АНГАР]
   * добавлена опция:
       "hangar"/"enableCrystalLocker" - включить замок для бонов

@@ -31,6 +31,21 @@
       "battleLabelsTemplates"/"damageLogBackground"
       "battleLabelsTemplates"/"lastHit"
 
+  [PLAYERS PANEL]
+  * renamed option in the sections "playersPanel"/"short", "medium", "medium2", "large":
+      "vehicleIconXOffsetLeft"   -> "vehicleIconOffsetXLeft"
+      "vehicleIconXOffsetRight"  -> "vehicleIconOffsetXRight"
+      "vehicleLevelXOffsetLeft"  -> "vehicleLevelOffsetXLeft"
+      "vehicleLevelXOffsetRight" -> "vehicleLevelOffsetXRight"
+      "fragsXOffsetLeft"         -> "fragsOffsetXLeft"
+      "fragsXOffsetRight"        -> "fragsOffsetXRight"
+      "rankBadgeXOffsetLeft"     -> "rankBadgeOffsetXLeft"
+      "rankBadgeXOffsetRight"    -> "rankBadgeOffsetXRight"
+      "nickXOffsetLeft"          -> "nickOffsetXLeft"
+      "nickXOffsetRight"         -> "nickOffsetXRight"
+      "vehicleXOffsetLeft"       -> "vehicleOffsetXLeft"
+      "vehicleXOffsetRight"      -> "vehicleOffsetXRight"
+
   [HANGAR]
   * added option:
       "hangar"/"enableCrystalLocker" - enable locker for bonds

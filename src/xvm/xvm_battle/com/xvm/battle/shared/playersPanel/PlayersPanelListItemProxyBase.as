@@ -836,17 +836,17 @@ package com.xvm.battle.shared.playersPanel
             switch (field)
             {
                 case ui.vehicleIcon:
-                    return Macros.FormatNumber(mcfg.vehicleIconXOffsetLeft, currentPlayerState, 0);
+                    return Macros.FormatNumber(mcfg.vehicleIconOffsetXLeft, currentPlayerState, 0);
                 case ui.vehicleLevel:
-                    return Macros.FormatNumber(mcfg.vehicleLevelXOffsetLeft, currentPlayerState, 0);
+                    return Macros.FormatNumber(mcfg.vehicleLevelOffsetXLeft, currentPlayerState, 0);
                 case ui.fragsTF:
-                    return Macros.FormatNumber(mcfg.fragsXOffsetLeft, currentPlayerState, 0);
+                    return Macros.FormatNumber(mcfg.fragsOffsetXLeft, currentPlayerState, 0);
                 case ui.badgeIcon:
-                    return Macros.FormatNumber(mcfg.rankBadgeXOffsetLeft, currentPlayerState, 0);
+                    return Macros.FormatNumber(mcfg.rankBadgeOffsetXLeft, currentPlayerState, 0);
                 case ui.playerNameFullTF:
-                    return Macros.FormatNumber(mcfg.nickXOffsetLeft, currentPlayerState, 0);
+                    return Macros.FormatNumber(mcfg.nickOffsetXLeft, currentPlayerState, 0);
                 case ui.vehicleTF:
-                    return Macros.FormatNumber(mcfg.vehicleXOffsetLeft, currentPlayerState, 0);
+                    return Macros.FormatNumber(mcfg.vehicleOffsetXLeft, currentPlayerState, 0);
                 default:
                     break;
             }
@@ -858,17 +858,17 @@ package com.xvm.battle.shared.playersPanel
             switch (field)
             {
                 case ui.vehicleIcon:
-                    return Macros.FormatNumber(mcfg.vehicleIconXOffsetRight, currentPlayerState, 0);
+                    return Macros.FormatNumber(mcfg.vehicleIconOffsetXRight, currentPlayerState, 0);
                 case ui.vehicleLevel:
-                    return Macros.FormatNumber(mcfg.vehicleLevelXOffsetRight, currentPlayerState, 0);
+                    return Macros.FormatNumber(mcfg.vehicleLevelOffsetXRight, currentPlayerState, 0);
                 case ui.fragsTF:
-                    return Macros.FormatNumber(mcfg.fragsXOffsetRight, currentPlayerState, 0);
+                    return Macros.FormatNumber(mcfg.fragsOffsetXRight, currentPlayerState, 0);
                 case ui.badgeIcon:
-                    return Macros.FormatNumber(mcfg.rankBadgeXOffsetRight, currentPlayerState, 0);
+                    return Macros.FormatNumber(mcfg.rankBadgeOffsetXRight, currentPlayerState, 0);
                 case ui.playerNameFullTF:
-                    return Macros.FormatNumber(mcfg.nickXOffsetRight, currentPlayerState, 0);
+                    return Macros.FormatNumber(mcfg.nickOffsetXRight, currentPlayerState, 0);
                 case ui.vehicleTF:
-                    return Macros.FormatNumber(mcfg.vehicleXOffsetRight, currentPlayerState, 0);
+                    return Macros.FormatNumber(mcfg.vehicleOffsetXRight, currentPlayerState, 0);
                 default:
                     break;
             }
