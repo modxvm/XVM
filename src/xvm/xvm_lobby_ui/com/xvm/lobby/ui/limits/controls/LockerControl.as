@@ -40,16 +40,8 @@ package com.xvm.lobby.ui.limits.controls
             setSize(16, 16);
             _selected = false;
 
-            try
-            {
-                Logger.add(Utils.fixImgTagSrc(imgLockedPath));
-                imgLocked.source = Utils.fixImgTagSrc(imgLockedPath);
-                Logger.add(Utils.fixImgTagSrc(imgUnlockedPath));
-                imgUnlocked.source = Utils.fixImgTagSrc(imgUnlockedPath);
-            } catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
+            imgLocked.source = Utils.fixImgTagSrc(imgLockedPath);
+            imgUnlocked.source = Utils.fixImgTagSrc(imgUnlockedPath);
         }
 
         // ISoundable
