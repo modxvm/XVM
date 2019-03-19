@@ -21,6 +21,7 @@ from gui.shared import g_eventBus, tooltips
 from gui.shared.gui_items import GUI_ITEM_TYPE
 from gui.shared.money import Currency
 from gui.shared.utils.requesters.StatsRequester import StatsRequester
+from gui.Scaleform.daapi.view.lobby.techtree.settings import UNKNOWN_VEHICLE_LEVEL
 from gui.Scaleform.daapi.view.lobby.techtree.techtree_page import TechTree
 from gui.Scaleform.daapi.view.lobby.techtree.research_page import Research
 from gui.Scaleform.daapi.view.lobby.hangar.TechnicalMaintenance import TechnicalMaintenance
@@ -274,11 +275,12 @@ def MainView_dispose(self, *args, **kwargs):
     MainView_handler = None
 
 @overrideMethod(tooltips, 'getUnlockPrice')
-def tooltips_getUnlockPrice(base, compactDescr, parentCD = None):
-    isAvailable, cost, need = base(compactDescr, parentCD)
+@dependency.replace_none_kwargs(itemsCache=IItemsCache)
+def getUnlockPrice(base, compactDescr, parentCD = None, vehicleLevel = UNKNOWN_VEHICLE_LEVEL, itemsCache = None):
+    isAvailable, cost, need, defCost, discount = base(compactDescr, parentCD, vehicleLevel)
     if cfg_hangar_enableFreeXpLocker and not freeXP_enable:
-        need += dependency.instance(IItemsCache).items.stats.actualFreeXP
-    return (isAvailable, cost, need)
+        need += itemsCache.items.stats.actualFreeXP
+    return (isAvailable, cost, need, defCost, discount)
 
 # "reimport"
 import gui.shared.tooltips.module as tooltips_module
