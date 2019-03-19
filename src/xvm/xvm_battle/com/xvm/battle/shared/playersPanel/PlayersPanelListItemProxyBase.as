@@ -134,7 +134,7 @@ package com.xvm.battle.shared.playersPanel
 
         // STATIC PROPERTIES
 
-        static private var _leftAtlas:String;
+        static private var _leftAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
 
         static public function get leftAtlas():String
         {
@@ -146,7 +146,7 @@ package com.xvm.battle.shared.playersPanel
             _leftAtlas = value;
         }
 
-        static private var _rightAtlas:String;
+        static private var _rightAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
 
         static public function get rightAtlas():String
         {
@@ -166,8 +166,6 @@ package com.xvm.battle.shared.playersPanel
             mouseEnabled = false;
             mouseChildren = false;
             _isLeftPanel = isLeftPanel;
-
-            _leftAtlas = _rightAtlas = ATLAS_CONSTANTS.BATTLE_ATLAS;
 
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, _setup);
             Xvm.addEventListener(BattleEvents.TEAM_BASES_PANEL_VISIBLE, _onBattleComponentsVisible);

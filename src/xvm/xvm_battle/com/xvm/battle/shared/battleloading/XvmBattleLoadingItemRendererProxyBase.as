@@ -66,7 +66,7 @@ package com.xvm.battle.shared.battleloading
 
         // STATIC PROPERTIES
 
-        static private var _leftAtlas:String;
+        static private var _leftAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
 
         static public function get leftAtlas():String
         {
@@ -78,7 +78,7 @@ package com.xvm.battle.shared.battleloading
             _leftAtlas = value;
         }
 
-        static private var _rightAtlas:String;
+        static private var _rightAtlas:String = ATLAS_CONSTANTS.BATTLE_ATLAS;
 
         static public function get rightAtlas():String
         {
@@ -97,8 +97,6 @@ package com.xvm.battle.shared.battleloading
             this._ui = ui;
             this._uiType = uiType;
             this._isLeftPanel = isLeftPanel;
-
-            _leftAtlas = _rightAtlas = ATLAS_CONSTANTS.BATTLE_ATLAS;
 
             // align fields
 
@@ -172,7 +170,7 @@ package com.xvm.battle.shared.battleloading
                 _ui.vehicleField.htmlText = "<font color='" + textColor + "'>" + Macros.FormatString(_isLeftPanel ? cfg.formatLeftVehicle : cfg.formatRightVehicle, _currentPlayerState) + "</font>";
                 _alignVehicleField();
 
-                var atlasName:String = _isLeftPanel ? _leftAtlas : _rightAtlas;
+                var atlasName:String = isLeftPanel ? leftAtlas : rightAtlas;
                 if (!App.atlasMgr.isAtlasInitialized(atlasName))
                 {
                     atlasName = ATLAS_CONSTANTS.BATTLE_ATLAS;
