@@ -1,22 +1,21 @@
-from xvm_main.python.logger import *
 from xvm import hitLog
 
 
-@xvm.export('xvm.hitLog.hLog', deterministic=False)
-def hitLog_hLog():
-    return hitLog.getLog()
+@xvm.export('xvm.hitLog.log', deterministic=False)
+def hitLog_log():
+    return hitLog.hLog()
 
 
-@xvm.export('xvm.hitLog.hLogBackground', deterministic=False)
-def hitLog_hLogBackground():
-    return hitLog.getLogBackground()
+@xvm.export('xvm.hitLog.log.bg', deterministic=False)
+def hitLog_log_bg():
+    return hitLog.hLog_bg()
 
 
-@xvm.export('xvm.hitLog.hLog_x', deterministic=False)
-def hitLog_hLog_x():
-    return hitLog.getLogX()
+@xvm.export('xvm.hitLog.log.x', deterministic=False)
+def hitLog_log_x():
+    return hitLog.hLog_x()
 
 
-@xvm.export('xvm.hitLog.hLog_y', deterministic=False)
-def hitLog_hLog_y():
-    return hitLog.getLogY()
+@xvm.export('xvm.hitLog.log.y', deterministic=False)
+def hitLog_log_y():
+    return hitLog.hLog_y()

@@ -337,5 +337,3 @@ def destroyGUI(self):
 @overrideMethod(RibbonsAggregator, 'suspend')
 def suspend(base, self):
     self.resume() if isBattleTypeSupported else base(self)
-
-

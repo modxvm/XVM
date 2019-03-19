@@ -2,20 +2,20 @@
 │         Имя файла          │ Название события по которому │            Название py_macro             │                                             Описание
 │                            │      обновляется макрос      │                                          │
 ├────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────
-│hit_log.py (hitLog.py)      │PY(ON_HIT_LOG)                │{{py:xvm.hitLog.hLog}}                    │значение "formatHistory" из секции "log" файла hitLog.xc
-│                            │---//---                      │{{py:xvm.hitLog.hLogBackground}}          │значение "formatHistory" из секции "logBackground" файла hitLog.xc
-│                            │---//---                      │{{py:xvm.hitLog.hLog_x}}                  │значение "x" из секции "log" файла hitLog.xc или сохраненное значение координаты х в бою
-│                            │---//---                      │{{py:xvm.hitLog.hLog_y}}                  │значение "y" из секции "log" файла hitLog.xc или сохраненное значение координаты y в бою
+│hit_log.py (hitLog.py)      │PY(ON_HIT_LOG)                │{{py:xvm.hitLog.log}}                     │значение "formatHistory" из секции "log" файла hitLog.xc
+│                            │---//---                      │{{py:xvm.hitLog.log.bg}}                  │значение "formatHistory" из секции "logBackground" файла hitLog.xc
+│                            │---//---                      │{{py:xvm.hitLog.log.x}}                   │значение "x" из секции "log" файла hitLog.xc или сохраненное значение координаты х в бою
+│                            │---//---                      │{{py:xvm.hitLog.log.y}}                   │значение "y" из секции "log" файла hitLog.xc или сохраненное значение координаты y в бою
 ├────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────
-│damage_Log.py (damageLog.py)│PY(ON_HIT)                    │{{py:xvm.damageLog.dLog}}                 │значение "formatHistory" из секции "log" файла damageLog.xc
-│                            │---//---                      │{{py:xvm.damageLog.dLog_shadow('XXX')}}   │значение "XXX" из секции "log\shadow" файла damageLog.xc
-│                            │---//---                      │{{py:xvm.damageLog.dLog_x}}               │значение "x" из секции "log" файла damageLog.xc или сохраненное значение координаты х в бою
-│                            │---//---                      │{{py:xvm.damageLog.dLog_y}}               │значение "y" из секции "log" файла damageLog.xc или сохраненное значение координаты y в бою
-│                            │---//---                      │{{py:xvm.damageLog.dLogBackground}}       │значение "formatHistory" из секции "logBackground" файла damageLog.xc
+│damage_Log.py (damageLog.py)│PY(ON_HIT)                    │{{py:xvm.damageLog.log}}                  │значение "formatHistory" из секции "log" файла damageLog.xc
+│                            │---//---                      │{{py:xvm.damageLog.log.bg}}               │значение "formatHistory" из секции "logBackground" файла damageLog.xc
+│                            │---//---                      │{{py:xvm.damageLog.log.x}}                │значение "x" из секции "log" файла damageLog.xc или сохраненное значение координаты х в бою
+│                            │---//---                      │{{py:xvm.damageLog.log.y}}                │значение "y" из секции "log" файла damageLog.xc или сохраненное значение координаты y в бою
+│                            │---//---                      │{{py:xvm.damageLog.log.shadow('XXX')}}    │значение "XXX" из секции "log\shadow" файла damageLog.xc
 │                            │PY(ON_LAST_HIT)               │{{py:xvm.damageLog.lastHit}}              │значение "formatLastHit" из файла damageLog.xc
-│                            │---//---                      │{{py:xvm.damageLog.lastHit_shadow('XXX')}}│значение "XXX" из секции "lastHit\shadow" файла damageLog.xc
-│                            │---//---                      │{{py:xvm.damageLog.lastHit_x}}            │значение "x" из секции "lastHit" файла damageLog.xc или сохраненное значение координаты х в бою
-│                            │---//---                      │{{py:xvm.damageLog.lastHit_y}}            │значение "y" из секции "lastHit" файла damageLog.xc или сохраненное значение координаты y в бою
+│                            │---//---                      │{{py:xvm.damageLog.lastHit.x}}            │значение "x" из секции "lastHit" файла damageLog.xc или сохраненное значение координаты х в бою
+│                            │---//---                      │{{py:xvm.damageLog.lastHit.y}}            │значение "y" из секции "lastHit" файла damageLog.xc или сохраненное значение координаты y в бою
+│                            │---//---                      │{{py:xvm.damageLog.lastHit.shadow('XXX')}}│значение "XXX" из секции "lastHit\shadow" файла damageLog.xc
 │                            │PY(ON_FIRE)                   │{{py:xvm.damageLog.fire}}                 │если танк горит равен 100, иначе 0
 │                            │PY(ON_IMPACT)                 │{{py:xvm.isImpact}}                       │возвращает 'Impact' если было воздействие на технику игрока, иначе - пусто (оглушение экипажа не
 │                            │                              │                                          │учитывается).

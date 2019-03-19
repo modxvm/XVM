@@ -646,14 +646,14 @@ class DamageLog(_Base):
         self.dataLog = {}
         self.scrollList = []
         if config.get(self.S_MOVE_IN_BATTLE):
-            _data = userprefs.get('DamageLog/dlog', {'x': config.get(self.S_X), 'y': config.get(self.S_Y)})
+            _data = userprefs.get('damageLog/log', {'x': config.get(self.S_X), 'y': config.get(self.S_Y)})
             if section == SECTION_LOG:
-                as_callback("dLog_mouseDown", self.mouse_down)
-                as_callback("dLog_mouseUp", self.mouse_up)
-                as_callback("dLog_mouseMove", self.mouse_move)
+                as_callback("damageLog_mouseDown", self.mouse_down)
+                as_callback("damageLog_mouseUp", self.mouse_up)
+                as_callback("damageLog_mouseMove", self.mouse_move)
         else:
             _data = {'x': config.get(self.S_X), 'y': config.get(self.S_Y)}
-        as_callback("dLog_mouseWheel", self.mouse_wheel)
+        as_callback("damageLog_mouseWheel", self.mouse_wheel)
         self.x = _data['x']
         self.y = _data['y']
         self.section = section
@@ -668,7 +668,7 @@ class DamageLog(_Base):
         self.callEvent = True
         self.dictVehicle.clear()
         if (None not in [self.x, self.y]) and config.get(self.S_MOVE_IN_BATTLE) and section == SECTION_LOG:
-            userprefs.set('DamageLog/dLog', {'x': self.x, 'y': self.y})
+            userprefs.set('damageLog/log', {'x': self.x, 'y': self.y})
 
     def mouse_move(self, _data):
         self._mouse_move(_data, 'ON_HIT')
@@ -764,7 +764,7 @@ class LastHit(_Base):
         self.S_FORMAT_LAST_HIT = section + FORMAT_LAST_HIT
         self.S_TIME_DISPLAY_LAST_HIT = section + TIME_DISPLAY_LAST_HIT
         if config.get(self.S_MOVE_IN_BATTLE):
-            _data = userprefs.get('DamageLog/lastHit', {'x': config.get(self.S_X), 'y': config.get(self.S_Y)})
+            _data = userprefs.get('damageLog/lastHit', {'x': config.get(self.S_X), 'y': config.get(self.S_Y)})
             as_callback("lastHit_mouseDown", self.mouse_down)
             as_callback("lastHit_mouseUp", self.mouse_up)
             as_callback("lastHit_mouseMove", self.mouse_move)
@@ -780,7 +780,7 @@ class LastHit(_Base):
         if (self.timerLastHit is not None) and self.timerLastHit.isStarted:
             self.timerLastHit.stop()
         if (None not in [self.x, self.y]) and config.get(self.S_MOVE_IN_BATTLE):
-            userprefs.set('DamageLog/lastHit', {'x': self.x, 'y': self.y})
+            userprefs.set('damageLog/lastHit', {'x': self.x, 'y': self.y})
 
     def mouse_move(self, _data):
         self._mouse_move(_data, 'ON_LAST_HIT')
@@ -1035,13 +1035,20 @@ def dLog():
     return '\n'.join(_logAlt.listLog) if isDownAlt else '\n'.join(_log.listLog)
 
 
-def dLogBackground():
+def dLog_bg():
     return '\n'.join(_logAltBackground.listLog) if isDownAlt else '\n'.join(_logBackground.listLog)
 
 
 def dLog_shadow(setting):
     return _logAlt.shadow.get(setting, None) if isDownAlt else _log.shadow.get(setting, None)
 
+
+def dLog_x():
+    return _log.x
+
+
+def dLog_y():
+    return _log.y
 
 def lastHit():
     return _lastHit.strLastHit
@@ -1051,6 +1058,13 @@ def lastHit_shadow(setting):
     return _lastHit.shadow.get(setting, None)
 
 
+def lastHit_x():
+    return _lastHit.x
+
+
+def lastHit_y():
+    return _lastHit.y
+
+
 def fire():
     return on_fire
-

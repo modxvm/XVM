@@ -23,7 +23,6 @@ import xvm_main.python.config as config
 import xvm_main.python.userprefs as userprefs
 import xvm_battle.python.battle as battle
 
-
 from xvm.damageLog import HIT_EFFECT_CODES, keyLower, chooseRating, ATTACK_REASONS, RATINGS, VEHICLE_CLASSES_SHORT
 import parser_addon
 
@@ -795,21 +794,21 @@ def PlayerAvatar_handleKey(self, isDown, key, mods):
                         as_event('ON_HIT_LOG')
 
 
-def getLog():
+def hLog():
     listLog = '\n'.join(_log.listLog) if _log.listLog else None
     listLogAlt = '\n'.join(_logAlt.listLog) if _logAlt.listLog else None
     return listLogAlt if isDownAlt else listLog
 
 
-def getLogBackground():
+def hLog_bg():
     listLog = '\n'.join(_logBackground.listLog) if _logBackground.listLog else None
     listLogAlt = '\n'.join(_logAltBackground.listLog) if _logAltBackground.listLog else None
     return listLogAlt if isDownAlt else listLog
 
 
-def getLogX():
+def hLog_x():
     return _log.x
 
 
-def getLogY():
+def hLog_y():
     return _log.y

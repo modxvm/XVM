@@ -2,6 +2,11 @@
   [ОБЩЕЕ]
   * World of Tanks 1.4.1.0
 
+  [МАКРОСЫ НА PYTHON]
+  * damageLog: в секцию "comp-name" добавлен параметр "wheel"
+  * damageLog: обновлен перечень доступных макросов с их описанием:
+      (/res_mods/mods/shared_resources/xvm/docs/py_macros_ru.txt)
+
   [ЛОГ НАНЕСЕННЫХ ПОВРЕЖДЕНИЙ]
   * полностью переработаны настройки лога нанесенного урона;
       смотрите файл "hitLog.xc"
@@ -18,12 +23,15 @@
       "battleLabelsTemplates"/"avgDamage"
       "battleLabelsTemplates"/"mainGun"
 
+  [ЛОГ ПОЛУЧЕННЫХ ПОВРЕЖДЕНИЙ]
+  * обновлены секции:
+      "battleLabelsTemplates"/"damageLog"
+      "battleLabelsTemplates"/"damageLogBackground"
+      "battleLabelsTemplates"/"lastHit"
+
   [АНГАР]
   * добавлена опция:
       "hangar"/"enableCrystalLocker" - включить замок для бонов
-
-  [МАКРОСЫ НА PYTHON]
-  * damageLog: в секцию "comp-name" добавлен параметр "wheel"
 
 XVM-7.8.4:
   [ОБЩЕЕ]

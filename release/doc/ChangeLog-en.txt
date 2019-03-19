@@ -2,6 +2,11 @@
   [GENERAL]
   * World of Tanks 1.4.1.0
 
+  [PYTHON MACROS]
+  * damageLog: the "wheel" parameter has been added to the "comp-name" section
+  * damageLog: updated list of available macros with their description:
+      (/res_mods/mods/shared_resources/xvm/docs/py_macros_ru.txt)
+
   [HIT LOG]
   * hitlog settings was completely reworked;
       see "hitLog.xc" file.
@@ -18,12 +23,17 @@
       "battleLabelsTemplates"/"avgDamage"
       "battleLabelsTemplates"/"mainGun"
 
+  [DAMAGE LOG]
+  * added parameter:
+      "damageLog"/"comp-name"/"wheel"
+  * updated sections:
+      "battleLabelsTemplates"/"damageLog"
+      "battleLabelsTemplates"/"damageLogBackground"
+      "battleLabelsTemplates"/"lastHit"
+
   [HANGAR]
   * added option:
       "hangar"/"enableCrystalLocker" - enable locker for bonds
-
-  [PYTHON MACROS]
-  * damageLog: the "wheel" parameter has been added to the "comp-name" section
 
 XVM-7.8.4
   [GENERAL]
