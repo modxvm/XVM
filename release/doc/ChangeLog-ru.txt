@@ -3,6 +3,7 @@
   * World of Tanks 1.4.1.0
 
   [МАКРОСЫ НА PYTHON]
+  * totalEfficiency: добавлен макрос {{py:xvm.dmgKindColor}}
   * damageLog: в секцию "comp-name" добавлен параметр "wheel"
   * damageLog: обновлен перечень доступных макросов с их описанием:
       (/res_mods/mods/shared_resources/xvm/docs/py_macros_ru.txt)

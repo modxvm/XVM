@@ -199,3 +199,8 @@ def xvm_hitAlly():
 @xvm.export('xvm.dmgAlly', deterministic=False)
 def xvm_dmgAlly():
     return 'dmgAlly' if te.dmgAlly else None
+
+
+@xvm.export('xvm.dmgKindColor', deterministic=False)
+def xvm_dmgAlly():
+    return '#' + config.get('colors/dmg_kind').get(te.damageKind, '')[2:]

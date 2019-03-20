@@ -15,6 +15,8 @@ from xfw_actionscript.python import *
 from xvm_main.python.logger import *
 from xvm_battle.python.battle import isBattleTypeSupported
 
+from xvm.damageLog import ATTACK_REASONS
+
 
 totalDamage = 0
 damage = 0
@@ -48,6 +50,7 @@ hitAlly = False
 dmgAlly = False
 burst = 1
 allyVehicles = []
+damageKind = None
 
 
 ribbonTypes = {
@@ -235,7 +238,7 @@ def BattleRibbonsPanel__onRibbonAdded(self, ribbon):
 
 @registerEvent(Vehicle, 'onHealthChanged')
 def onHealthChanged(self, newHealth, attackerID, attackReasonID):
-    global vehiclesHealth, numberHitsDealt, damageReceived, numberDamagesDealt, numberDamagedVehicles, dmgAlly
+    global vehiclesHealth, numberHitsDealt, damageReceived, numberDamagesDealt, numberDamagedVehicles, dmgAlly, damageKind
     if not isBattleTypeSupported:
         return
     isUpdate = False
@@ -253,10 +256,10 @@ def onHealthChanged(self, newHealth, attackerID, attackReasonID):
         if attackerID == player.playerVehicleID:
             if not dmgAlly and self.id in allyVehicles:
                 dmgAlly = True
-                isUpdate = True
             if attackReasonID == 0:
                 numberHitsDealt += 1
-                isUpdate = True
+            damageKind = ATTACK_REASONS[min(attackReasonID, 6)]
+            isUpdate = True
     if isUpdate:
         as_event('ON_TOTAL_EFFICIENCY')
 
@@ -287,6 +290,7 @@ def destroyGUI(self):
     global ribbonTypes, numberHitsBlocked, player, numberHitsDealt, old_totalDamage, damage, numberShotsDealt, totalStun
     global numberDamagesDealt, numberShotsReceived, numberHitsReceived, numberHits, fragsSquad, fragsSquad_dict, isStuns
     global numberStuns, numberDamagedVehicles, hitAlly, allyVehicles, burst, numberAssistTrack, numberAssistSpot, numberAssistStun
+    global damageKind
     vehiclesHealth = {}
     totalDamage = 0
     damage = 0
@@ -317,6 +321,7 @@ def destroyGUI(self):
     burst = 1
     numberDamagedVehicles = []
     allyVehicles = []
+    damageKind = None
     ribbonTypes = {
         'armor': 0,
         'damage': 0,
