@@ -42,7 +42,7 @@
     {{c:dmg-ratio-player}} - color by total damage to targets (set in colors.xc) / цвет по суммарному урону по цели (задается в colors.xc).
     {{dmg-kind-player}}    - all kinds of damage done to targets (attack, fire, ramming, ...) / все типы нанесенного урона по цели (атака, пожар, таран, ...).
     {{dmg-deviation}}      - TODO / отклонение нанесенного урона от номинального урона снаряда в процентах. Возвращает 0.0, если техника была уничтожена выстрелом, или выстрел был фугасом и отклонение составило больше 25%.
-    {{vehiclename}}         - vehicle system name (usa-A34_M24_Chaffee) / название техники в системе (usa-A34_M24_Chaffee).
+    {{vehiclename}}        - vehicle system name (usa-A34_M24_Chaffee) / название техники в системе (usa-A34_M24_Chaffee).
 */
 
 {
@@ -149,7 +149,7 @@
       },
       // Color by vehicle type (macro {{c:vtype}}).
       // Цвет по типу техники (макрос {{c:vtype}}).
-      "c:vtype":{
+      "c:vtype": {
         "HT": "#FFACAC",         // heavy tank / тяжёлый танк.
         "MT": "#FFF198",         // medium tank / средний танк.
         "LT": "#A2FF9A",         // light tank / лёгкий танк.
@@ -159,7 +159,7 @@
       },
       // Part of vehicle (macro {{comp-name}}).
       // Часть техники (макрос {{comp-name}}).
-      "comp-name":{
+      "comp-name": {
         "turret": "{{l10n:turret}}",   // turret / башня.
         "hull": "{{l10n:hull}}",       // body / корпус.
         "chassis": "{{l10n:chassis}}", // suspension / ходовая.
@@ -169,7 +169,7 @@
       },
       // Team attachment of the targets (macro {{team-dmg}}).
       // Командная принадлежность цели (макрос {{team-dmg}}).
-      "team-dmg":{
+      "team-dmg": {
         "ally-dmg": "",  // ally / союзник.
         "enemy-dmg": "", // enemy / противник.
         "player": "",    // self damage / урон по себе.
@@ -177,7 +177,7 @@
       },
       // Color by team attachment of the targets (macro {{c:team-dmg}}).
       // Цвет по командной принадлежности цели (макрос {{c:team-dmg}}).
-      "c:team-dmg":{
+      "c:team-dmg": {
         "ally-dmg": "#00EAFF",  // ally / союзник.
         "enemy-dmg": "#CCCCCC", // enemy / противник.
         "player": "#228855",    // self damage / урон по себе.
@@ -185,14 +185,14 @@
       },
       // Shell currency (macro {{costShell}}).
       // Валюта снаряда (макрос {{costShell}}).
-      "costShell":{
+      "costShell": {
         "gold-shell": "",   // gold / золото.
         "silver-shell": "", // credits / кредиты.
         "unknown": ""       // unknown / неизвестно.
       },
       // Color by shell currency (macro {{c:costShell}}).
       // Цвет по валюте снаряда (макрос {{c:costShell}}).
-      "c:costShell":{
+      "c:costShell": {
         "gold-shell":   "#FFCC66", // gold / золото.
         "silver-shell": "#CCCCCC", // credits / кредиты.
         "unknown":      "#FFFFFF"  // unknown / неизвестно.
