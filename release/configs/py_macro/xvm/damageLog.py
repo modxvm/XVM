@@ -248,7 +248,8 @@ class Data(object):
                      'stun-duration': None,
                      'shells_stunning': False,
                      'critDevice': 'no-critical',
-                     'hitTime': 0
+                     'hitTime': 0,
+                     'attackerVehicleName': ''
                      }
 
     def updateData(self):
@@ -272,6 +273,7 @@ class Data(object):
                 vehicleType = attacker['vehicleType']
                 if vehicleType:
                     _type = vehicleType.type
+                    self.data['attackerVehicleName'] = vehicleType.name.replace(':', '-', 1) if vehicleType.name else ''
                     self.data['attackerVehicleType'] = list(_type.tags.intersection(VEHICLE_CLASSES))[0]
                     self.data['shortUserString'] = _type.shortUserString
                     self.data['level'] = vehicleType.level
@@ -282,6 +284,7 @@ class Data(object):
                         self.data['diff-masses'] = None
                 else:
                     self.data['attackerVehicleType'] = 'not_vehicle'
+                    self.data['attackerVehicleName'] = ''
                     self.data['shortUserString'] = None
                     self.data['level'] = None
                     self.data['nation'] = None
@@ -318,6 +321,7 @@ class Data(object):
         else:
             self.data['teamDmg'] = 'unknown'
             self.data['attackerVehicleType'] = 'not_vehicle'
+            self.data['attackerVehicleName'] = ''
             self.data['shortUserString'] = ''
             self.data['name'] = ''
             self.data['clanAbbrev'] = ''
@@ -565,7 +569,8 @@ def updateValueMacros(section, value):
                   'nation': value.get('nation', None),
                   'my-blownup': 'blownup' if value['blownup'] else None,
                   'type-shell-key': value['shellKind'],
-                  'stun-duration': value.get('stun-duration', None)
+                  'stun-duration': value.get('stun-duration', None),
+                  'vehiclename': value.get('attackerVehicleName', None)
                   }
 
     macros.update({'c:team-dmg': conf['c_teamDmg'][value['teamDmg']],

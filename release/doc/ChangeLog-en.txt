@@ -4,6 +4,7 @@
 
   [PYTHON MACROS]
   * totalEfficiency: added macro {{py:xvm.dmgKindColor}}
+  * damageLog: added macro {{vehiclename}}
   * damageLog: the "wheel" parameter has been added to the "comp-name" section
   * damageLog: updated list of available macros with their description:
       (/res_mods/mods/shared_resources/xvm/docs/py_macros_ru.txt)
