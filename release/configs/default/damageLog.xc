@@ -1,6 +1,11 @@
 ﻿/**
-  * Macros used in damageLog:
-  * Макросы используемые в damageLog:
+  * Log of the received damage.
+  * For additional settings see battleLabelsTemplates.xc
+  * Лог полученного урона.
+  * Дополнительные настройки см. в battleLabelsTemplates.xc
+
+  Macros used in damageLog:
+  Макросы используемые в damageLog:
 
     {{number}}         - line number / номер строки.
     {{dmg}}            - received damage / полученный урон.

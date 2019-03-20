@@ -1,6 +1,11 @@
 ﻿/**
-  * Macros used in hitLog:
-  * Макросы используемые в hitLog:
+  * Log of applied damage.
+  * For additional settings see battleLabelsTemplates.xc
+  * Лог нанесенного урона.
+  * Дополнительные настройки см. в battleLabelsTemplates.xc
+
+  Macros used in hitLog:
+  Макросы используемые в hitLog:
    
     {{dmg}}                - last damage / последний нанесенный урон.
     {{dmg-kind}}           - type of damage / тип нанесенного урона (атака, пожар, таран, ...).

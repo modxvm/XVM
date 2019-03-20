@@ -18,8 +18,8 @@
       "textFormat": { "color": "0xF4EFE8", "size": 15 },
       "format": "{{py:xvm.totalDamage=0?{{l10n:Hits}}: <font size='13'>#0</font>|{{l10n:Hits}}: <font size='13'>#{{py:xvm.numberHitsDealt}}</font> {{l10n:Total}}: <font color='{{py:xvm.totalDamageColor}}'><b>{{py:xvm.totalDamage}}</b></font> {{l10n:Last}}: <font color='{{py:xvm.dmgKindColor}}'><b>{{py:xvm.dmg}}</b></font>}}"
     },
-    // Log of applied damage.
-    // Лог нанесенного урона.
+    // Log of applied damage (see hitLog.xc).
+    // Лог нанесенного урона (см. hitLog.xc).
     "hitLogBody": {
       "enabled": true,
       "updateEvent": "PY(ON_HIT_LOG), ON_PANEL_MODE_CHANGED",
