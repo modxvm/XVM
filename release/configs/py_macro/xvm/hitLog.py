@@ -130,7 +130,8 @@ def updateValueMacros(section, value):
                   'c:xte': readColor('x', value.get('xte', None)),
                   'diff-masses': value.get('diff-masses', None),
                   'nation': value.get('nation', None),
-                  'blownup': 'blownup' if value['blownup'] else None
+                  'blownup': 'blownup' if value['blownup'] else None,
+                  'vehiclename': value.get('attackerVehicleName', None)
                   }
     macros.update({'c:team-dmg': conf['c_teamDmg'].get(value['teamDmg'], '#FFFFFF'),
                    'team-dmg': conf['teamDmg'].get(value['teamDmg'], ''),
@@ -218,7 +219,8 @@ class DataHitLog(object):
                      'clanicon': None,
                      'squadnum': None,
                      'teamDmg': 'unknown',
-                     'damageDeviation': None
+                     'damageDeviation': None,
+                     'attackerVehicleName': ''
                      }
 
     def updateLabels(self):
@@ -254,6 +256,7 @@ class DataHitLog(object):
     def resetDataVehInfo(self):
         self.data['attackedVehicleType'] = 'not_vehicle'
         self.data['shortUserString'] = ''
+        self.data['attackerVehicleName'] = ''
         self.data['level'] = None
         self.data['nation'] = None
         self.data['diff-masses'] = None
@@ -280,6 +283,7 @@ class DataHitLog(object):
                 if vehicleType:
                     _type = vehicleType.type
                     self.data['attackedVehicleType'] = list(_type.tags.intersection(VEHICLE_CLASSES))[0]
+                    self.data['attackerVehicleName'] = vehicleType.name.replace(':', '-', 1) if vehicleType.name else ''
                     self.data['shortUserString'] = _type.shortUserString
                     self.data['level'] = vehicleType.level
                     self.data['nation'] = nations.NAMES[_type.customizationNationID]

@@ -4,6 +4,7 @@
 
   [МАКРОСЫ НА PYTHON]
   * totalEfficiency: добавлен макрос {{py:xvm.dmgKindColor}}
+  * hitLog: добавлен макрос {{vehiclename}}
   * damageLog: добавлен макрос {{vehiclename}}
   * damageLog: в секцию "comp-name" добавлен параметр "wheel"
   * damageLog: обновлен перечень доступных макросов с их описанием:
