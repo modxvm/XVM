@@ -202,5 +202,5 @@ def xvm_dmgAlly():
 
 
 @xvm.export('xvm.dmgKindColor', deterministic=False)
-def xvm_dmgAlly():
+def xvm_dmgKindColor():
     return '#' + config.get('colors/dmg_kind').get(te.damageKind, '')[2:]
