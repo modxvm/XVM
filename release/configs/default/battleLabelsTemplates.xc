@@ -70,7 +70,7 @@
     // Средний урон на текущей технике.
     "avgDamage": {
       "enabled": true,
-      "updateEvent": "PY(ON_UPDATE_HP)",
+      "updateEvent": "PY(ON_TOTAL_EFFICIENCY)",
       "x": -170,
       "y": 30,
       "screenHAlign": "center",
@@ -83,7 +83,7 @@
     // Порог необходимый для получения достижения "Основной калибр".
     "mainGun": {
       "enabled": true,
-      "updateEvent": "PY(ON_UPDATE_HP)",
+      "updateEvent": "PY(ON_TOTAL_EFFICIENCY)",
       "x": 170,
       "y": 30,
       "screenHAlign": "center",
