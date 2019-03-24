@@ -215,7 +215,7 @@
       "formatHistory": "<img height='17' width='310' src='xvm://res/icons/damageLog/{{alive?no_dmg|dmg}}.png'>"
     },
     // Background of the log of applied damage (alternative mode).
-    // Подложка лога полученного урона (альтернативный режим).
+    // Подложка лога нанесенного урона (альтернативный режим).
     "logAltBackground": {
       "$ref": { "path":"hitLog.log" },
       "formatHistory": ""
