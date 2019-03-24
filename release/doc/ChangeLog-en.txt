@@ -53,6 +53,13 @@
   * added option:
       "hangar"/"enableCrystalLocker" - enable locker for bonds
 
+  [KNOWN ISSUES]
+  * disabled options:
+      "login"/"saveLastServer" - save last server
+      "hangar"/"hidePricesInTechTree" - hide price button in tech tree
+      "hangar"/"masteryMarkInTechTree" - show mastery mark in tech tree
+    Will be reprocessed in future releases.
+
 XVM-7.8.4
   [GENERAL]
   * World of Tanks 1.4.0.2
