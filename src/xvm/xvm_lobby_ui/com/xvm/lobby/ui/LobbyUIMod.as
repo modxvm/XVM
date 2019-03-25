@@ -32,7 +32,6 @@ package com.xvm.lobby.ui
 
     import com.xvm.lobby.ui.techtree.*;
     UI_NationTreeNodeSkinned;
-    UI_ResearchItemNode;
 
     public class LobbyUIMod extends Sprite
     {

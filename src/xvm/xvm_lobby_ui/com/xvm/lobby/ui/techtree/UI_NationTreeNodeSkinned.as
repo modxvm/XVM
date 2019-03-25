@@ -25,47 +25,27 @@ package com.xvm.lobby.ui.techtree
             createControls();
         }
 
-        override public function setup(index:uint, nodeData:NodeData, entityType:uint = 0, matrixPosition:MatrixPosition = null):void
-        {
-            //Logger.add("0x" + StringUtils.leftPad(nodeData.state.toString(16), 8, "0") + " " + nodeData.nameString);
-            if (Config.config.hangar.hidePricesInTechTree)
-            {
-                // TODO:1.4.1
-                /*
-                if (nodeData.shopPrice.gold == 0)
-                {
-                    if ((nodeData.state & NODE_STATE_FLAGS.UNLOCKED) != 0)
-                        nodeData.state |= NODE_STATE_FLAGS.WAS_IN_BATTLE;
-                }
-                */
-            }
-            super.setup(index, nodeData, entityType, matrixPosition);
-        }
-
-        // TODO:1.4.1
-        /*
-        override public function populateUI():void
+        override protected function validateData():void
         {
             if (Config.config.hangar.hidePricesInTechTree)
             {
                 if (stateProps)
                 {
-                    if (stateProps.visible)
+                    switch (stateProps.state)
                     {
-                        if (stateProps.animation == null)
-                        {
-                            if (stateProps.label == "goldPriceLabel" || stateProps.label == "creditsPriceLabel")
-                            {
-                                stateProps.animation = new AnimationProperties(150, { alpha:0 }, { alpha:1 } );
-                            }
-                        }
+                        case "locked":
+                        case "inventory":
+                        case "inventory_premium":
+                            break;
+                        default:
+                            stateProps.visible = false;
+                            stateProps.animation = new AnimationProperties(150, { alpha:0 }, { alpha:1 } );
+                            break;
                     }
                 }
             }
-
-            super.populateUI();
+            super.validateData();
         }
-        */
 
         override protected function draw():void
         {
@@ -104,16 +84,11 @@ package com.xvm.lobby.ui.techtree
             masteryTF.selectable = false;
             TextFieldEx.setNoTranslate(masteryTF, true);
             masteryTF.antiAliasType = AntiAliasType.ADVANCED;
-            masteryTF.x = 3;
-            masteryTF.y = 14;
+            masteryTF.x = -1;
+            masteryTF.y = 11;
             masteryTF.width = 32;
             masteryTF.height = 32;
-            masteryTF.selectable = false;
-            // TODO:1.4.1
-            /*
-            this.nameAndXp.addChild(masteryTF);
-            */
+            this.addChild(masteryTF);
         }
-
     }
 }
