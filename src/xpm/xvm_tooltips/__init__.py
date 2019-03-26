@@ -87,7 +87,7 @@ def _i18n_makeString(base, key, *args, **kwargs):
 # tooltip delay to resolve performance issue
 @overrideMethod(ToolTip, 'onCreateComplexTooltip')
 def _ToolTip_onCreateComplexTooltip(base, self, tooltipId, stateType):
-    if XVM_TOOLTIPS.HIDE not in tooltipId:
+    if tooltipId is None or XVM_TOOLTIPS.HIDE not in tooltipId:
         _createTooltip(self, lambda:_onCreateComplexTooltip_callback(base, self, tooltipId, stateType))
 
 # tooltip delay to resolve performance issue
