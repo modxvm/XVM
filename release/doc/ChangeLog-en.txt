@@ -1,4 +1,6 @@
-﻿XVM-7.8.6:
+﻿XVM-7.8.7:
+
+XVM-7.8.6:
   [GENERAL]
   * World of Tanks 1.4.1.1
 
