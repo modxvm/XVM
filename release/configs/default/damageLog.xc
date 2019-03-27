@@ -113,8 +113,8 @@
         "hollow_charge": "<font color='{{c:costShell}}'>{{l10n:hollow_charge}}</font>",         // high explosive anti-tank / кумулятивный.
         "not_shell": ""                                                                         // another source of damage / другой источник урона.
       },
-      // Color by shell kind (macro {{type-shell}}).
-      // Цвет по типу снаряда (макрос {{type-shell}}).
+      // Color by shell kind (macro {{c:type-shell}}).
+      // Цвет по типу снаряда (макрос {{c:type-shell}}).
       "c:type-shell": {
         "armor_piercing": "#CCCCCC",    // armor piercing / бронебойный.
         "high_explosive": "#CCCCCC",    // high explosive / осколочно-фугасный.
