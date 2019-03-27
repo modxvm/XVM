@@ -1,7 +1,12 @@
 ﻿XVM-7.8.6:
+  [GENERAL]
+  * World of Tanks 1.4.1.1
+
   [HANGAR]
   * restored functionality of the options:
       "login"/"saveLastServer" - save last server
+      "hangar"/"hidePricesInTechTree" - hide price button in tech tree
+      "hangar"/"masteryMarkInTechTree" - show mastery mark in tech tree
 
 XVM-7.8.5:
   [GENERAL]
