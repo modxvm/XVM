@@ -63,11 +63,11 @@ class wot.utils.DefaultConfig
       colors: {
         /* values - from min to max, colors are for values 'lesser then ...' */
         eff: [
-          { value: 600,  color: 0xDD0000 },
-          { value: 900,  color: 0xDD3333 },
-          { value: 1200, color: 0xFFCC33 },
-          { value: 1500, color: 0x99FF33 },
-          { value: 1800, color: 0x33FF33 },
+          { value: 449,  color: 0xDD0000 },
+          { value: 979,  color: 0xDD3333 },
+          { value: 1574, color: 0xFFCC33 },
+          { value: 2372, color: 0x99FF33 },
+          { value: 3192, color: 0x33FF33 },
           { value: 9999, color: 0xCC66CC }
         ],
         rating: [

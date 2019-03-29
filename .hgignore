@@ -1,0 +1,6 @@
+syntax: glob
+*/.vs/
+src/wot-xvm-proxy/bin/
+src/wot-xvm-proxy/obj/
+src/wot-xvm-proxy/packages/
+*.csproj.user
