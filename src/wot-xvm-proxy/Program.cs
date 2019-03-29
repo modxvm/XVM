@@ -104,7 +104,6 @@ namespace wot
 
                 // CD to game dir
                 string game_dir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-                game_dir = @"D:\Games\Wargaming.net\World_of_Tanks_Classic";
                 Debug("Change dir: " + game_dir);
                 Directory.SetCurrentDirectory(game_dir);
 

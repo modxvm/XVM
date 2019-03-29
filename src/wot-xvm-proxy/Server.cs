@@ -554,7 +554,7 @@ namespace wot
                 {
                     xvm = new XVMInfo
                     {
-                        message = "Ne, ne lychse",
+                        message = "Ne, ne lychshe",
                         ver = "1.9"
                     }
                 };
