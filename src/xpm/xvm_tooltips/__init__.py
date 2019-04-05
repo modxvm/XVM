@@ -7,7 +7,6 @@ import traceback
 import sys
 from math import degrees, pi
 
-import BigWorld
 from constants import SHELL_TYPES
 import game
 import gui.shared.tooltips.vehicle as tooltips_vehicle
@@ -24,8 +23,11 @@ from gui.shared.items_parameters.formatters import measureUnitsForParameter
 from gui.shared.items_parameters.params_helper import getParameters as getParameters_helper
 from gui.shared.items_parameters.params_helper import idealCrewComparator as idealCrewComparator_helper
 from gui.shared.utils.requesters.ItemsRequester import ItemsRequester
-from gui.Scaleform.genConsts.TOOLTIPS_CONSTANTS import TOOLTIPS_CONSTANTS
+from gui.shared.tooltips import getUnlockPrice
 from gui.Scaleform.locale.TOOLTIPS import TOOLTIPS
+from gui.Scaleform.locale.STORAGE import STORAGE
+from gui.Scaleform.locale.RES_ICONS import RES_ICONS
+from gui.Scaleform.genConsts.TOOLTIPS_CONSTANTS import TOOLTIPS_CONSTANTS
 from gui.Scaleform.framework.tooltip_mgr import ToolTip
 from gui.Scaleform.daapi.view.battle.shared.consumables_panel import ConsumablesPanel
 from gui.Scaleform.daapi.view.meta.ModuleInfoMeta import ModuleInfoMeta
@@ -37,6 +39,7 @@ import nations
 import BigWorld
 from items import _xml
 from constants import ITEM_DEFS_PATH
+
 from xfw import *
 
 import xvm_main.python.config as config
@@ -244,6 +247,28 @@ class ShellData(object):
 
                                          
 shellData = ShellData()
+
+# add to hangar tooltips display the missing experience to unlock the vehicle
+@overrideMethod(tooltips_vehicle.StatusBlockConstructor, 'construct')
+def StatusBlockConstructor_construct(base, self):
+    block, result = base(self)
+    if not block:
+        return block, result
+    try:
+        techTreeNode = self.configuration.node
+        vehicle = self.vehicle
+        isUnlocked = vehicle.isUnlocked
+        parentCD = techTreeNode.unlockProps.parentID if techTreeNode is not None else None
+        if parentCD is not None:
+            isAvailable, cost, need, defCost, discount = getUnlockPrice(vehicle.intCD, parentCD, vehicle.level)
+            if isAvailable and not isUnlocked and need > 0 and techTreeNode is not None:
+                icon = "<img src='{}' vspace='{}'".format(RES_ICONS.MAPS_ICONS_LIBRARY_XPCOSTICON_1.replace('..', 'img://gui'), -3)
+                template = "<font face='$TitleFont' size='14'><font color='#ff2717'>{}</font> {}</font> {}"
+                block[0]['data']['text'] = template.format(i18n.makeString(STORAGE.BLUEPRINTS_CARD_CONVERTREQUIRED), need, icon)
+        return block, result
+    except Exception as ex:
+        err(traceback.format_exc())
+        return block, result
 
 # overriding tooltips for tanks in hangar, configuration in tooltips.xc
 @overrideMethod(tooltips_vehicle.CommonStatsBlockConstructor, 'construct')
