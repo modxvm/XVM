@@ -103,8 +103,8 @@
         "art_attack": "#CCCCCC",      // art attack / артиллерийская поддержка.
         "air_strike": "#CCCCCC"       // air strike / поддержка авиации.        
       },
-      // Type of damage (macro {{dmg-kind-player}}). 
-      // Тип нанесенного урона (макрос {{dmg-kind-player}}). 
+      // Type of damage (macro {{dmg-kind-player}}).
+      // Тип нанесенного урона (макрос {{dmg-kind-player}}).
       "dmg-kind-player": {
         "shot":            "<font size='6'> </font><font face='xvm'>&#x50;</font>",  // shot / попадание.
         "fire":            "<font size='6'> </font><font face='xvm'>&#x51;</font>",  // fire / пожар.
@@ -116,7 +116,7 @@
         "gas_attack":      "GA",                                                     // gas attack / газовая атака.
         "art_attack":      "<font face='xvm'>&#x110;</font>",                        // art attack / артиллерийская поддержка.
         "air_strike":      "<font face='xvm'>&#x111;</font>"                         // air strike / поддержка авиации.
-      },  
+      },
       // Shell kind (macro {{type-shell}}).
       // Тип снаряда (макрос {{type-shell}}).
       "type-shell": {

@@ -102,7 +102,7 @@
       "height": 210,
       "layer": "bottom",
       "screenVAlign": "bottom",
-      "shadow": { 
+      "shadow": {
         "distance": "{{py:xvm.damageLog.log.shadow('distance')}}",
         "angle": "{{py:xvm.damageLog.log.shadow('angle')}}",
         "color": "{{py:xvm.damageLog.log.shadow('color')}}",
@@ -112,7 +112,7 @@
         "hideObject": "{{py:xvm.damageLog.log.shadow('hideObject')}}",
         "inner": "{{py:xvm.damageLog.log.shadow('inner')}}",
         "knockout": "{{py:xvm.damageLog.log.shadow('knockout')}}",
-        "quality": "{{py:xvm.damageLog.log.shadow('quality')}}" 
+        "quality": "{{py:xvm.damageLog.log.shadow('quality')}}"
       },
       "textFormat": { "color": "0xF4EFE8", "size": 16 },
       "format": "{{py:xvm.damageLog.log}}",
@@ -124,12 +124,12 @@
       }
     },
     // Background of the log of the received damage (see damageLog.xc).
-    // Подложка лога полученного урона (см. damageLog.xc).    
+    // Подложка лога полученного урона (см. damageLog.xc).
     "damageLogBackground": {
       "enabled": false,
       "$ref": { "path":"def.damageLog" },
       "format": "{{py:xvm.damageLog.log.bg}}"
-    },    
+    },
     // Display the last damage (hit) (see damageLog.xc).
     // Отображение последнего урона (попадания) (см. damageLog.xc).
     "lastHit": {
@@ -142,7 +142,7 @@
       "layer": "bottom",
       "screenHAlign": "center",
       "screenVAlign": "center",
-      "shadow": { 
+      "shadow": {
         "distance": "{{py:xvm.damageLog.lastHit.shadow('distance')}}",
         "angle": "{{py:xvm.damageLog.lastHit.shadow('angle')}}",
         "color": "{{py:xvm.damageLog.lastHit.shadow('color')}}",
@@ -152,7 +152,7 @@
         "hideObject": "{{py:xvm.damageLog.lastHit.shadow('hideObject')}}",
         "inner": "{{py:xvm.damageLog.lastHit.shadow('inner')}}",
         "knockout": "{{py:xvm.damageLog.lastHit.shadow('knockout')}}",
-        "quality": "{{py:xvm.damageLog.lastHit.shadow('quality')}}" 
+        "quality": "{{py:xvm.damageLog.lastHit.shadow('quality')}}"
       },
       "textFormat": {"align": "center", "color": "0xF4EFE8", "size": 16 },
       "format": "{{py:xvm.damageLog.lastHit}}",
