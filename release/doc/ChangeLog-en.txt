@@ -1,4 +1,7 @@
 ﻿XVM-7.8.7:
+  [PYTHON MACROS]
+  * totalEfficiency: normalization added in the macros {{py:xvm.totalDamage(norm)}}, 
+    {{py:xvm.totalAssist(norm)}}, {{py:xvm.damagesSquad(norm)}}, {{py:xvm.totalDamagesSquad(norm)}}
 
 XVM-7.8.6:
   [GENERAL]
@@ -14,7 +17,7 @@ XVM-7.8.5:
   [GENERAL]
   * World of Tanks 1.4.1.0
 
-  [PYTHON MACROS]
+  
   * totalEfficiency: added macro {{py:xvm.dmgKindColor}}
   * hitLog: added macro {{vehiclename}}
   * damageLog: added macro {{vehiclename}}

@@ -9,6 +9,7 @@ from gui.battle_control.battle_ctx import BattleContext
 from gui.Scaleform.daapi.view.battle.shared.damage_log_panel import DamageLogPanel
 from gui.Scaleform.daapi.view.battle.shared.ribbons_panel import BattleRibbonsPanel
 from gui.Scaleform.daapi.view.battle.shared.ribbons_aggregator import RibbonsAggregator
+from gui.Scaleform.daapi.view.battle.classic.stats_exchange import FragsCollectableStats
 
 from xfw import *
 from xfw_actionscript.python import *
@@ -26,6 +27,8 @@ totalBlocked = 0
 maxHealth = 0
 damageReceived = 0
 vehiclesHealth = {}
+enemyVehiclesMaxHP = {}
+enemyVehiclesSumMaxHP = 0
 damagesSquad = 0
 numberHitsBlocked = 0
 vehCD = None
@@ -266,13 +269,18 @@ def onHealthChanged(self, newHealth, attackerID, attackReasonID):
 
 @registerEvent(Vehicle, 'onEnterWorld')
 def onEnterWorld(self, prereqs):
-    global player, isPlayerInSquad, isStuns, vehiclesHealth, allyVehicles
+    global player, isPlayerInSquad, isStuns, vehiclesHealth, allyVehicles, enemyVehiclesMaxHP, enemyVehiclesSumMaxHP
     if not isBattleTypeSupported:
         return
     if player is None:
         player = BigWorld.player()
+    if not enemyVehiclesMaxHP:
+        pass
     if self.publicInfo['team'] != player.team:
         vehiclesHealth[self.id] = self.health
+        if self.id in enemyVehiclesMaxHP and enemyVehiclesMaxHP[self.id] < self.health:
+            enemyVehiclesMaxHP[self.id] = self.health
+            enemyVehiclesSumMaxHP = sum(enemyVehiclesMaxHP.values())
     else:
         allyVehicles.append(self.id)
     if self.isPlayerVehicle:
@@ -283,6 +291,14 @@ def onEnterWorld(self, prereqs):
         maxHealth = self.health
         isStuns = 'st' if self.typeDescriptor.shot.shell.hasStun else None
 
+@registerEvent(FragsCollectableStats, 'addVehicleStatusUpdate')
+def FragsCollectableStats_addVehicleStatusUpdate(self, vInfoVO):
+    global enemyVehiclesMaxHP, enemyVehiclesSumMaxHP, player
+    if player is None:
+        player = BigWorld.player()
+    if vInfoVO.vehicleID not in enemyVehiclesMaxHP and vInfoVO.team != player.team:
+        enemyVehiclesMaxHP[vInfoVO.vehicleID] = vInfoVO.vehicleType.maxHealth
+        enemyVehiclesSumMaxHP = sum(enemyVehiclesMaxHP.values())
 
 @registerEvent(PlayerAvatar, '_PlayerAvatar__destroyGUI')
 def destroyGUI(self):
@@ -290,8 +306,10 @@ def destroyGUI(self):
     global ribbonTypes, numberHitsBlocked, player, numberHitsDealt, old_totalDamage, damage, numberShotsDealt, totalStun
     global numberDamagesDealt, numberShotsReceived, numberHitsReceived, numberHits, fragsSquad, fragsSquad_dict, isStuns
     global numberStuns, numberDamagedVehicles, hitAlly, allyVehicles, burst, numberAssistTrack, numberAssistSpot, numberAssistStun
-    global damageKind
+    global damageKind, enemyVehiclesMaxHP, enemyVehiclesSumMaxHP
     vehiclesHealth = {}
+    enemyVehiclesMaxHP = {}
+    enemyVehiclesSumMaxHP = 0
     totalDamage = 0
     damage = 0
     old_totalDamage = 0
