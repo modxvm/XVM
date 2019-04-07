@@ -68,7 +68,7 @@ def xvm_totalDamagesSquad(norm=None):
 
 
 @xvm.export('xvm.damagesSquad', deterministic=False)
-def xvm_damagesSquad():
+def xvm_damagesSquad(norm=None):
     return te.damagesSquad if norm is None or (te.enemyVehiclesSumMaxHP == 0) else int(te.damagesSquad * norm / te.enemyVehiclesSumMaxHP)
 
 
