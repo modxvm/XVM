@@ -59,8 +59,8 @@ Legend:
 │ {{v.topdmg}}               │ X │ X │ top vehicle damage (100 position of the best players)
 │ {{v.avgfrg}}               │ X │ X │ average vehicle frags (last month active players with 100+ battles on tank)
 │ {{v.topfrg}}               │ X │ X │ top vehicle frags (100 position of the best players)
-│ {{v.xte}}                  │ X │ X │ per-vehicle efficiency rating
-│ {{v.c_xte}}                │ X │ X │ dynamic color for this macro (xTE): https://koreanrandom.com/forum/topic/1643-/
+│ {{v.xte}}                  │ X │ X │ per-vehicle efficiency rating (xTE): https://koreanrandom.com/forum/topic/23829-/
+│ {{v.c_xte}}                │ X │ X │ dynamic color for macro {{v.xte}}
 │ {{v.earnedXP}}             │ X │ X │ earned XP
 │ {{v.xpToElite}}            │ X │ X │ XP required for elite vehicle
 │ {{v.xpToEliteLeft}}        │ X │ X │ XP left to gain for elite vehicle

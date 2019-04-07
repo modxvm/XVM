@@ -245,29 +245,30 @@ class ShellData(object):
             self.data['costShell'][shell.shell.compactDescr] = 'gold' if shell_id[1] in self.shells[nations.NAMES[shell_id[0]]] else 'silver'
         return self.data['costShell']
 
-                                         
+
 shellData = ShellData()
 
 # add to hangar tooltips display the missing experience to unlock the vehicle
 @overrideMethod(tooltips_vehicle.StatusBlockConstructor, 'construct')
 def StatusBlockConstructor_construct(base, self):
     block, result = base(self)
-    if not block:
-        return block, result
-    try:
-        techTreeNode = self.configuration.node
-        vehicle = self.vehicle
-        isUnlocked = vehicle.isUnlocked
-        parentCD = techTreeNode.unlockProps.parentID if techTreeNode is not None else None
-        if parentCD is not None:
-            isAvailable, cost, need, defCost, discount = getUnlockPrice(vehicle.intCD, parentCD, vehicle.level)
-            if isAvailable and not isUnlocked and need > 0 and techTreeNode is not None:
-                icon = "<img src='{}' vspace='{}'".format(RES_ICONS.MAPS_ICONS_LIBRARY_XPCOSTICON_1.replace('..', 'img://gui'), -3)
-                template = "<font face='$TitleFont' size='14'><font color='#ff2717'>{}</font> {}</font> {}"
-                block[0]['data']['text'] = template.format(i18n.makeString(STORAGE.BLUEPRINTS_CARD_CONVERTREQUIRED), need, icon)
-        return block, result
-    except Exception as ex:
-        err(traceback.format_exc())
+    if config.get('tooltips/showXpToUnlockVeh') and block:
+        try:
+            techTreeNode = self.configuration.node
+            vehicle = self.vehicle
+            isUnlocked = vehicle.isUnlocked
+            parentCD = techTreeNode.unlockProps.parentID if techTreeNode is not None else None
+            if parentCD is not None:
+                isAvailable, cost, need, defCost, discount = getUnlockPrice(vehicle.intCD, parentCD, vehicle.level)
+                if isAvailable and not isUnlocked and need > 0 and techTreeNode is not None:
+                    icon = "<img src='{}' vspace='{}'".format(RES_ICONS.MAPS_ICONS_LIBRARY_XPCOSTICON_1.replace('..', 'img://gui'), -3)
+                    template = "<font face='$TitleFont' size='14'><font color='#ff2717'>{}</font> {}</font> {}"
+                    block[0]['data']['text'] = template.format(i18n.makeString(STORAGE.BLUEPRINTS_CARD_CONVERTREQUIRED), need, icon)
+            return block, result
+        except Exception as ex:
+            err(traceback.format_exc())
+            return block, result
+    else:
         return block, result
 
 # overriding tooltips for tanks in hangar, configuration in tooltips.xc
