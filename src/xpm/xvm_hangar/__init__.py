@@ -25,6 +25,7 @@ from messenger.gui.Scaleform.lobby_entry import LobbyEntry
 from gui.game_control.hero_tank_controller import HeroTankController
 from gui.promo.hangar_teaser_widget import TeaserViewer
 from gui.game_control.PromoController import PromoController
+from gui.game_control.AwardController import ProgressiveRewardHandler
 
 from xfw import *
 
@@ -199,4 +200,10 @@ def getPromoCount(base, self):
     if not config.get('hangar/combatIntelligence/showUnreadCounter', True):
         return
     base(self)
-    
+
+# hide display window when reward is received
+@overrideMethod(ProgressiveRewardHandler, '_showAward')
+def _showAward(base, self, ctx):
+    if not config.get('hangar/showRewardWindow', True):
+        return
+    base(self, ctx)

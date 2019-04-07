@@ -252,7 +252,7 @@ shellData = ShellData()
 @overrideMethod(tooltips_vehicle.StatusBlockConstructor, 'construct')
 def StatusBlockConstructor_construct(base, self):
     block, result = base(self)
-    if config.get('tooltips/showXpToUnlockVeh') and block:
+    if block and config.get('tooltips/showXpToUnlockVeh'):
         try:
             techTreeNode = self.configuration.node
             vehicle = self.vehicle

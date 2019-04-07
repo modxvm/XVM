@@ -25,6 +25,9 @@
     // false - disable display promo of premium vehicle (on the background in the hangar).
     // false - отключить отображение рекламы премиум техники (на фоне в ангаре).
     "showPromoPremVehicle": true,
+    // false - disable display window when reward is received.
+    // false - отключить отображение окна при получении довольствия.
+    "showRewardWindow": true,
     // "Combat Intelligence" - show/hide notifications in the main window and counters in the menu.
     // "Полевая почта" - показывать/прятать уведомления в главном окне и счетчики в меню.
     "combatIntelligence": {
