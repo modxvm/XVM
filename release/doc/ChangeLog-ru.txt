@@ -1,4 +1,7 @@
 ﻿XVM-7.8.7:
+  [МАКРОСЫ НА PYTHON]
+  * totalEfficiency: добавлена нормализация в макросы {{py:xvm.totalDamage(norm)}}, 
+    {{py:xvm.totalAssist(norm)}}, {{py:xvm.damagesSquad(norm)}}, {{py:xvm.totalDamagesSquad(norm)}}
 
 XVM-7.8.6:
   [ОБЩЕЕ]

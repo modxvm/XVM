@@ -12,13 +12,13 @@ def xvm_totalDamageColor():
 
 
 @xvm.export('xvm.totalDamage', deterministic=False)
-def xvm_totalDamage():
-    return te.totalDamage
+def xvm_totalDamage(norm=None):
+    return te.totalDamage if norm is None or (te.enemyVehiclesSumMaxHP == 0) else int(te.totalDamage * norm / te.enemyVehiclesSumMaxHP)
 
 
 @xvm.export('xvm.totalAssist', deterministic=False)
-def xvm_totalAssist():
-    return te.totalAssist
+def xvm_totalAssist(norm=None):
+    return te.totalAssist if norm is None or (te.enemyVehiclesSumMaxHP == 0) else int(te.totalAssist * norm / te.enemyVehiclesSumMaxHP)
 
 
 @xvm.export('xvm.totalStun', deterministic=False)
@@ -62,13 +62,14 @@ def xvm_totalBlockedReceived():
 
 
 @xvm.export('xvm.totalDamagesSquad', deterministic=False)
-def xvm_totalDamagesSquad():
-    return te.damagesSquad + te.totalDamage
+def xvm_totalDamagesSquad(norm=None):
+    dmg = te.damagesSquad + te.totalDamage
+    return dmg if norm is None or (te.enemyVehiclesSumMaxHP == 0) else int(dmg * norm / te.enemyVehiclesSumMaxHP)
 
 
 @xvm.export('xvm.damagesSquad', deterministic=False)
 def xvm_damagesSquad():
-    return te.damagesSquad
+    return te.damagesSquad if norm is None or (te.enemyVehiclesSumMaxHP == 0) else int(te.damagesSquad * norm / te.enemyVehiclesSumMaxHP)
 
 
 @xvm.export('xvm.fragsSquad', deterministic=False)
