@@ -24,7 +24,7 @@ import BigWorld
 from helpers.i18n import makeString
 from items import vehicles
 from dossiers2.ui.achievements import ACHIEVEMENT_BLOCK as _AB
-from gui.ranked_battles.ranked_models import Rank, VehicleRank
+from gui.ranked_battles.ranked_models import Rank
 from gui.shared.gui_items import GUI_ITEM_TYPE
 from gui.shared.utils.requesters import REQ_CRITERIA
 from gui.Scaleform.locale.MENU import MENU
@@ -187,16 +187,18 @@ class _Dossier(object):
                 ranks = self.rankedController.getAllRanksChain(vehicle)
 
                 currentRank = self.rankedController.getCurrentRank(vehicle)
-                if isinstance(currentRank, VehicleRank):
-                    rankCount = currentRank.getSerialID()
+                #TODO: 1.5.0
+                #if isinstance(currentRank, VehicleRank):
+                #    rankCount = currentRank.getSerialID()
 
                 currentRankID = currentRank.getID()
                 nextRank = ranks[currentRankID + 1] if currentRankID < len(ranks) - 1 else currentRank
-                if isinstance(nextRank, VehicleRank):
-                    progress = nextRank.getProgress()
-                    if progress is not None:
-                        rankSteps = len(nextRank.getProgress().getAcquiredSteps())
-                        rankStepsTotal = len(nextRank.getProgress().getSteps())
+                #TODO: 1.5.0
+                #if isinstance(nextRank, VehicleRank):
+                #    progress = nextRank.getProgress()
+                #    if progress is not None:
+                #        rankSteps = len(nextRank.getProgress().getAcquiredSteps())
+                #        rankStepsTotal = len(nextRank.getProgress().getSteps())
 
         xpVehs = self.itemsCache.items.stats.vehiclesXPs
         earnedXP = xpVehs.get(vehCD, 0)
