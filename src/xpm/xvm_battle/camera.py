@@ -210,8 +210,7 @@ def clampToLimits(base, self, turretYaw, gunPitch):
     if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/noCameraLimit/enabled'):
         if not BigWorld.isKeyDown(KEY_RIGHTMOUSE) and self._SniperAimingSystem__yawLimits is not None and config.get('battle/camera/sniper/noCameraLimit/mode') == "hotkey":
             turretYaw = mathUtils.clamp(self._SniperAimingSystem__yawLimits[0], self._SniperAimingSystem__yawLimits[1], turretYaw)
-        getPitchLimits = avatar_getter.getVehicleTypeDescriptor().gun.combinedPitchLimits
-        pitchLimits = calcPitchLimitsFromDesc(turretYaw, getPitchLimits)
+        pitchLimits = calcPitchLimitsFromDesc(turretYaw, self.getPitchLimits(turretYaw))
         adjustment = max(0, self._SniperAimingSystem__returningOscillator.deviation.y)
         pitchLimits[0] -= adjustment
         pitchLimits[1] += adjustment
