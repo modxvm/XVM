@@ -12,13 +12,13 @@ from Vehicle import Vehicle
 from helpers import dependency
 from skeletons.gui.battle_session import IBattleSessionProvider
 from gui import g_guiResetters
-from gui.app_loader import g_appLoader
-from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
 from gui.battle_control import avatar_getter
 from gui.battle_control.battle_constants import FEEDBACK_EVENT_ID
 from gui.Scaleform.daapi.view.battle.classic.stats_exchange import FragsCollectableStats
 from gui.Scaleform.daapi.view.battle.shared.markers2d.plugins import VehicleMarkerPlugin
 from gui.shared import g_eventBus, events, EVENT_BUS_SCOPE
+from helpers import dependency
+from skeletons.gui.app_loader import IAppLoader, GuiGlobalSpaceID
 
 from xfw import *
 
@@ -33,7 +33,7 @@ from consts import *
 # initialization/finalization
 
 def start():
-    g_appLoader.onGUISpaceEntered += onGUISpaceEntered
+    dependency.instance(IAppLoader).onGUISpaceEntered += onGUISpaceEntered
     g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, update_conf_hp)
     update_conf_hp()
 
@@ -41,7 +41,11 @@ BigWorld.callback(0, start)
 
 @registerEvent(game, 'fini')
 def fini():
-    g_appLoader.onGUISpaceEntered -= onGUISpaceEntered
+    try:
+        dependency.instance(IAppLoader).onGUISpaceEntered -= onGUISpaceEntered
+    except(dependency.DependencyError):
+        pass
+
     g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, update_conf_hp)
 
 #####################################################################
@@ -75,7 +79,7 @@ def cleanup():
 # night_dragon_on <https://kr.cm/f/p/14897/>
 
 def onGUISpaceEntered(spaceID):
-    if spaceID == GUI_GLOBAL_SPACE_ID.BATTLE:
+    if spaceID == GuiGlobalSpaceID.BATTLE:
         cleanup()
         for vehicleID, vData in avatar_getter.getArena().vehicles.iteritems():
             if vData['vehicleType']:

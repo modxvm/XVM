@@ -13,8 +13,7 @@ from Avatar import PlayerAvatar
 from Vehicle import Vehicle
 from helpers import dependency
 from skeletons.gui.battle_session import IBattleSessionProvider
-from gui.app_loader import g_appLoader
-from gui.app_loader.settings import APP_NAME_SPACE, GUI_GLOBAL_SPACE_ID
+from gui.app_loader.settings import APP_NAME_SPACE
 from gui.shared import g_eventBus, events
 from gui.shared.utils.functions import getBattleSubTypeBaseNumber
 from gui.battle_control import avatar_getter
@@ -31,6 +30,8 @@ from gui.Scaleform.daapi.view.battle.shared.minimap.plugins import ArenaVehicles
 from gui.Scaleform.daapi.view.battle.shared.page import SharedPage
 from gui.Scaleform.daapi.view.battle.shared.stats_exchage import BattleStatisticsDataController
 from gui.Scaleform.daapi.view.battle.shared.hint_panel.plugins import TrajectoryViewHintPlugin, SiegeIndicatorHintPlugin, PreBattleHintPlugin
+from helpers import dependency
+from skeletons.gui.app_loader import IAppLoader
 
 from xfw import *
 from xfw_actionscript.python import *
@@ -246,7 +247,7 @@ class Battle(object):
         #log('onAppInitialized: ' + str(event.ctx.ns))
         if event.ctx.ns == APP_NAME_SPACE.SF_BATTLE:
             self.xvm_battle_swf_initialized = False
-            app = g_appLoader.getApp(event.ctx.ns)
+            app = dependency.instance(IAppLoader).getApp(event.ctx.ns)
             if app is not None and app.loaderManager is not None:
                 app.loaderManager.onViewLoaded += self.onViewLoaded
 
@@ -255,7 +256,7 @@ class Battle(object):
         if event.ctx.ns == APP_NAME_SPACE.SF_BATTLE:
             self.xvm_battle_swf_initialized = False
             self.battle_page = None
-            app = g_appLoader.getApp(event.ctx.ns)
+            app = dependency.instance(IAppLoader).getApp(event.ctx.ns)
             if app is not None and app.loaderManager is not None:
                 app.loaderManager.onViewLoaded -= self.onViewLoaded
 

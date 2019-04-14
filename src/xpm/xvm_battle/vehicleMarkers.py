@@ -16,7 +16,6 @@ from helpers import dependency
 from skeletons.gui.battle_session import IBattleSessionProvider
 from gui.battle_control import avatar_getter
 from gui.shared import g_eventBus, events
-from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
 from gui.Scaleform.daapi.view.battle.shared.markers2d.manager import MarkersManager
 
 from xfw import *
