@@ -2,6 +2,9 @@
   [GENERAL]
   * World of Tanks 1.5.0.0
 
+  [CAROUSEL]
+  * removed macros: {{v.rankCount}}, {{v.rankSteps}}, {{v.rankStepsTotal}}
+
 XVM-7.8.7:
   [GENERAL]
   * World of Tanks 1.4.1.2

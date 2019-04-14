@@ -24,7 +24,6 @@ import BigWorld
 from helpers.i18n import makeString
 from items import vehicles
 from dossiers2.ui.achievements import ACHIEVEMENT_BLOCK as _AB
-from gui.ranked_battles.ranked_models import Rank
 from gui.shared.gui_items import GUI_ITEM_TYPE
 from gui.shared.utils.requesters import REQ_CRITERIA
 from gui.Scaleform.locale.MENU import MENU
@@ -99,7 +98,6 @@ class _Dossier(object):
 
     itemsCache = dependency.descriptor(IItemsCache)
     lobbyContext = dependency.descriptor(ILobbyContext)
-    rankedController = dependency.descriptor(IRankedBattlesController)
 
     def __init__(self, *args):
         self.__dataReceiver = QueuedVehicleDossierReceiver()
@@ -176,30 +174,6 @@ class _Dossier(object):
             self.__updateCamouflageResult(cache_item, summer_camo, winter_camo, desert_camo)
             return cache_item
 
-        rankCount = None
-        rankSteps = None
-        rankStepsTotal = None
-        if self.rankedController.isAvailable():
-            vdata = vehinfo.getVehicleInfoData(vehCD)
-            if vdata['level'] == 10:
-                #log(vdata['key'])
-
-                ranks = self.rankedController.getAllRanksChain(vehicle)
-
-                currentRank = self.rankedController.getCurrentRank(vehicle)
-                #TODO: 1.5.0
-                #if isinstance(currentRank, VehicleRank):
-                #    rankCount = currentRank.getSerialID()
-
-                currentRankID = currentRank.getID()
-                nextRank = ranks[currentRankID + 1] if currentRankID < len(ranks) - 1 else currentRank
-                #TODO: 1.5.0
-                #if isinstance(nextRank, VehicleRank):
-                #    progress = nextRank.getProgress()
-                #    if progress is not None:
-                #        rankSteps = len(nextRank.getProgress().getAcquiredSteps())
-                #        rankStepsTotal = len(nextRank.getProgress().getSteps())
-
         xpVehs = self.itemsCache.items.stats.vehiclesXPs
         earnedXP = xpVehs.get(vehCD, 0)
         freeXP = self.itemsCache.items.stats.actualFreeXP
@@ -233,8 +207,7 @@ class _Dossier(object):
                 #    wtr = -1
                 #else:
                 #    xwtr = vehinfo.calculateXvmScale('wtr', wtr)
-        res = self.__prepareVehicleResult(accountDBID, vehCD, dossier, xtdb, xte, wtr, xwtr, earnedXP,
-                                          freeXP, xpToElite, rankCount, rankSteps, rankStepsTotal, rent)
+        res = self.__prepareVehicleResult(accountDBID, vehCD, dossier, xtdb, xte, wtr, xwtr, earnedXP, freeXP, xpToElite, rent)
         self.__updateCamouflageResult(res, summer_camo, winter_camo, desert_camo)
         self._cache[cache_key] = res
         return res
@@ -362,8 +335,7 @@ class _Dossier(object):
 
         return res
 
-    def __prepareVehicleResult(self, accountDBID, vehCD, dossier, xtdb, xte, wtr, xwtr, earnedXP,
-                               freeXP, xpToElite, rankCount, rankSteps, rankStepsTotal, rent):
+    def __prepareVehicleResult(self, accountDBID, vehCD, dossier, xtdb, xte, wtr, xwtr, earnedXP, freeXP, xpToElite, rent):
         res = self.__prepareCommonResult(accountDBID, dossier)
         res.update({
             'vehCD': vehCD,
@@ -374,9 +346,6 @@ class _Dossier(object):
             'earnedXP': earnedXP,
             'freeXP': freeXP,
             'xpToElite': xpToElite,
-            'rankCount': rankCount,
-            'rankSteps': rankSteps,
-            'rankStepsTotal': rankStepsTotal,
             'rent': 'rent' if rent else None,
             'marksOnGun': int(dossier.getRecordValue(_AB.TOTAL, 'marksOnGun')),
             'damageRating': dossier.getRecordValue(_AB.TOTAL, 'damageRating') / 100.0})

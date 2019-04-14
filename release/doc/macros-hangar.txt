@@ -68,9 +68,6 @@ Legend:
 │ {{v.marksOnGun}}           │ X │ X │ marks on gun
 │ {{v.damageRating}}         │ X │ X │ damage rating in percents for marks on gun
 │ {{v.c_damageRating}}       │ X │ X │ dynamic color for this macro
-│ {{v.rankCount}}            │ X │ X │ vehicle rank achieved in the rank battle
-│ {{v.rankSteps}}            │ X │ X │ steps completed to next vehicle rank
-│ {{v.rankStepsTotal}}       │ X │ X │ total steps count to next vehicle rank
 │ {{v.camouflageSummer}}     │ X │ X │ value 'summer' if summer camouflage installed
 │ {{v.camouflageWinter}}     │ X │ X │ value 'winter' if winter camouflage installed
 │ {{v.camouflageDesert}}     │ X │ X │ value 'desert' if desert camouflage installed
