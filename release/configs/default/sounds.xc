@@ -68,7 +68,7 @@
       // Enemy detection (Use in together with disable original enemy detection event).
       // Обнаружение противника (Используйте вместе с отключением оригинального звука обнаружения противника).
       "xvm_enemySighted": "",
-      //"xvm_enemySighted": "xvm_enemySighted",      
+      //"xvm_enemySighted": "xvm_enemySighted",
       // Fire alert (Use in together with disable original event).
       // Пожар (Используйте вместе с отключением оригинального звука).
       //"xvm_fireAlert": "",

@@ -28,7 +28,8 @@ class XVM_SOUND_EVENT(object):
 def updateVehicleGunReloadTime(base, self, vehicleID, timeLeft, baseTime):
     if (self._PlayerAvatar__prevGunReloadTimeLeft != timeLeft and timeLeft == 0.0) and not self.guiSessionProvider.shared.vehicleState.isInPostmortem:
         try:
-            SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.GUN_RELOADED)
+            if config.get('sounds/enabled'):
+                SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.GUN_RELOADED)
         except:
             err(traceback.format_exc())
     base(self, vehicleID, timeLeft, baseTime)

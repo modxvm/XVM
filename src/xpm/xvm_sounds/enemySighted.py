@@ -17,13 +17,11 @@ from xfw import *
 import xvm_main.python.config as config
 from xvm_main.python.logger import *
 
-
 #####################################################################
 # constants
 
 class XVM_SOUND_EVENT(object):
     ENEMY_SIGHTED = "xvm_enemySighted"
-
 
 #####################################################################
 # handlers
