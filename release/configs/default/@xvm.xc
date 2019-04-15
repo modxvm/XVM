@@ -58,11 +58,11 @@
 
     // Config last modified.
     // Дата последней модификации конфига.
-    "date": "07.04.2019",
+    "date": "15.04.2019",
 
     // Supported version of the game.
     // Поддерживаемая версия игры.
-    "gameVersion": "1.4.1.0",
+    "gameVersion": "1.4.1.2",
 
     // The minimum required version of the XVM mod.
     // Минимально необходимая версия мода XVM.
