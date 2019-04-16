@@ -13,7 +13,8 @@ from xvm import utils
 
 import datetime
 import locale
-from gui.app_loader.loader import g_appLoader
+from helpers import dependency
+from skeletons.gui.app_loader import IAppLoader
 from gui.shared.formatters import time_formatters
 
 _defaultlocale = locale.getdefaultlocale()[1]
@@ -25,7 +26,7 @@ _DIRECTIVES = [ 'au', 'al', 'Au', 'Al', 'bu', 'bl', 'Bu', 'Bl', # double
 def xvm_formatDate(formatDate):
     dt = datetime.datetime.now()
     weekday = (dt.weekday() - BigWorld.wg_firstDayOfWeek() + 7) % 7
-    app = g_appLoader.getApp()
+    app = dependency.instance(IAppLoader).getApp()
     d = {}
 
     def getValue(value, isUpper, isLower):
