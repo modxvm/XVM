@@ -31,7 +31,10 @@ package com.xvm.battle
         private static const VIEWS:Object =
         {
             "classicBattlePage": [
+                // TODO:1.5.0
+                /*
                 BattleLoadingXvmView,
+                */
                 FullStatsXvmView,
                 PlayersPanelXvmView,
                 TeamBasesPanelXvmView,

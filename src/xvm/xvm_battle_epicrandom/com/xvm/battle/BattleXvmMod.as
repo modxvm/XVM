@@ -29,7 +29,10 @@ package com.xvm.battle
         private static const VIEWS:Object =
         {
             "epicRandomPage": [
+                // TODO:1.5.0
+                /*
                 EpicRandomBattleLoadingXvmView,
+                */
                 EpicRandomPlayersPanelXvmView,
                 TeamBasesPanelXvmView,
                 MinimapXvmView,
