@@ -118,7 +118,7 @@ package com.xvm.battle.shared.battleloading
             Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, _onStatLoaded, false, 0, true);
 
             _substrateHolder = ui.addChildAt(new Sprite(), 0) as Sprite;
-            _bottomHolder = ui.addChildAt(new Sprite(), ui.selfBg ? ui.getChildIndex(ui.selfBg) + 1 : 0) as Sprite;
+            _bottomHolder = ui.addChildAt(new Sprite(), ui.selfBg_pub ? ui.getChildIndex(ui.selfBg_pub) + 1 : 0) as Sprite;
             _normalHolder = ui.addChildAt(new Sprite(), ui.getChildIndex(ui.playerActionMarker) + 1) as Sprite;
             _topHolder = ui.addChild(new Sprite()) as Sprite;
 

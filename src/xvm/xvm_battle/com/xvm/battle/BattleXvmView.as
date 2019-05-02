@@ -262,8 +262,9 @@ package com.xvm.battle
             textField.defaultTextFormat = new TextFormat("$FieldFont", 12, 0xFFFFFF, null, null, null, null, null, TextFormatAlign.CENTER, null, null, null, -2);
             textField.text = "XVM Nightly Build #" + Config.config.__xvmRevision + "\nget stable version on\nhttps://modxvm.com";
             _watermark.addChild(textField);
-            battlePage.prebattleTimer.background.addChildAt(_watermark, 0);
-            _watermark.x = battlePage.prebattleTimer.background.width / 2 + 230;
+            // TODO:1.5.0
+            battlePage.prebattleTimer.addChildAt(_watermark, 0);
+            _watermark.x = battlePage.prebattleTimer.width / 2 + 230;
             _watermark.y = -68;
         }
     }

@@ -27,9 +27,9 @@ package com.xvm.battle
         private static const VIEWS:Object =
         {
             "epicBattlePage": [
-                //TeamBasesPanelXvmView,
-                //SixthSenseXvmView,
-                //BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
+                TeamBasesPanelXvmView,
+                SixthSenseXvmView,
+                BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
             ]
         }
 

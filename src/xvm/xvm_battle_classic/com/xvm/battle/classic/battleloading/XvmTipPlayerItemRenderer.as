@@ -16,6 +16,19 @@ package com.xvm.battle.classic.battleloading
 
     public class XvmTipPlayerItemRenderer extends TipPlayerItemRenderer implements IXvmBattleLoadingItemRenderer
     {
+        private var _badgeIcon:BattleAtlasSprite;
+        private var _nameField:TextField;
+        private var _vehicleField:TextField;
+        private var _textField:TextField;
+        private var _vehicleIcon:BattleAtlasSprite;
+        private var _vehicleLevelIcon:BattleAtlasSprite;
+        private var _vehicleTypeIcon:BattleAtlasSprite;
+        private var _playerActionMarker:PlayerActionMarker;
+        private var _icoIGR:BattleAtlasSprite;
+        private var _icoTester:BattleAtlasSprite;
+        private var _backTester:MovieClip;
+        private var _squad:BattleAtlasSprite;
+
         private var container:BaseRendererContainer;
         private var isEnemy:Boolean;
         private var proxy:XvmBattleLoadingItemRendererProxy;
@@ -33,6 +46,33 @@ package com.xvm.battle.classic.battleloading
             this.container = container;
             this.isEnemy = isEnemy;
 
+            if (isEnemy)
+            {
+                this._vehicleField = container.vehicleFieldsEnemy[position];
+                this._textField = container.textFieldsEnemy[position];
+                this._vehicleIcon = container.vehicleIconsEnemy[position];
+                this._vehicleTypeIcon = container.vehicleTypeIconsEnemy[position];
+                this._vehicleLevelIcon = container.vehicleLevelIconsEnemy[position];
+                this._playerActionMarker = container.playerActionMarkersEnemy[position];
+                this._icoIGR = container.icoIGRsEnemy[position];
+                this._icoTester = container.icoTestersEnemy[position];
+                this._backTester = container.backTestersEnemy[position];
+                this._badgeIcon = container.badgesEnemy[position];
+            }
+            else
+            {
+                this._vehicleField = container.vehicleFieldsAlly[position];
+                this._textField = container.textFieldsAlly[position];
+                this._vehicleIcon = container.vehicleIconsAlly[position];
+                this._vehicleTypeIcon = container.vehicleTypeIconsAlly[position];
+                this._vehicleLevelIcon = container.vehicleLevelIconsAlly[position];
+                this._playerActionMarker = container.playerActionMarkersAlly[position];
+                this._icoIGR = container.icoIGRsAlly[position];
+                this._icoTester = container.icoTestersAlly[position];
+                this._backTester = container.backTestersAlly[position];
+                this._badgeIcon = container.badgesAlly[position];
+            }
+
             //Logger.add("XvmTipPlayerItemRenderer");
             var vehicleField:TextField = container.vehicleFieldsAlly[position];
             if (!isEnemy)
@@ -48,6 +88,15 @@ package com.xvm.battle.classic.battleloading
 
         override protected function onDispose():void
         {
+            _badgeIcon = null;
+            _nameField = null;
+            _vehicleField = null;
+            _vehicleIcon = null;
+            _vehicleLevelIcon = null;
+            _vehicleTypeIcon = null;
+            _playerActionMarker = null;
+            _icoIGR = null;
+            _squad = null;
             container = null;
             proxy.onDispose();
             super.onDispose();
@@ -112,9 +161,9 @@ package com.xvm.battle.classic.battleloading
             return _playerActionMarker;
         }
 
-        public function get selfBg():BattleAtlasSprite
+        public function get selfBg_pub():BattleAtlasSprite
         {
-            return _selfBg;
+            return selfBg;
         }
 
         public function get icoIGR():BattleAtlasSprite

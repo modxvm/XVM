@@ -20,7 +20,7 @@ package com.xvm.battle.shared.battleloading
         function get vehicleLevelIcon():BattleAtlasSprite;
         function get vehicleTypeIcon():BattleAtlasSprite;
         function get playerActionMarker():PlayerActionMarker;
-        function get selfBg():BattleAtlasSprite;
+        function get selfBg_pub():BattleAtlasSprite;
         function get icoIGR():BattleAtlasSprite;
 
         function setData(data:Object):void;
