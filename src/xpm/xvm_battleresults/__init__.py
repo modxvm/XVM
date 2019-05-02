@@ -37,7 +37,9 @@ def event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, cnt=0):
 @overrideMethod(BattleResultsWindow, 'as_setDataS')
 def BattleResultsWindow_as_setDataS(base, self, data):
     try:
-        data['tabInfo'][0]['linkage'] = 'com.xvm.lobby.ui.battleresults::UI_CommonStats'
+        # TODO:1.5.0
+        #data['tabInfo'][0]['linkage'] = 'com.xvm.lobby.ui.battleresults::UI_CommonStats'
+
         # Use data['common']['regionNameStr'] value to transfer XVM data.
         # Cannot add in data object because DAAPIDataClass is not dynamic.
         #log(data['xvm_data'])

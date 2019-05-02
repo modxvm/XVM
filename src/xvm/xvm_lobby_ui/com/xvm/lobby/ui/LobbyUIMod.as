@@ -9,7 +9,10 @@ package com.xvm.lobby.ui
     import com.xvm.lobby.ui.battleresults.*;
     UI_BattleResultsAwards;
     UI_BR_SubtaskComponent;
+    // TODO:1.5.0
+    /*
     UI_CommonStats;
+    */
     UI_ProgressElement;
 
     import com.xvm.lobby.ui.crew.*;
