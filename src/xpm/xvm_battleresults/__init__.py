@@ -102,17 +102,19 @@ class XvmDataBlock(base.StatsBlock):
             'nonPenetrationsCount': 0}
 
         for typeCompDescr, vData in reusable.personal.getVehicleCDsIterator(result):
-            #log(vData)
+            log(vData)
+            
+            #TODO 1.5: add support for premiumPlus and premiumVip
             origXP = vData['xp']
             premXP = vData['xp']
             origCrewXP = vData['tmenXP']
             premCrewXP = vData['tmenXP']
             if vData['isPremium']:
-                origXP = vData['xp'] / (vData['premiumXPFactor10'] / 10.0)
-                origCrewXP = vData['tmenXP'] / (vData['premiumXPFactor10'] / 10.0)
+                origXP = vData['xp'] / (vData['premiumXPFactor100'] / 100.0)
+                origCrewXP = vData['tmenXP'] / (vData['premiumXPFactor100'] / 100.0)
             else:
-                premXP = vData['xp'] * (vData['premiumXPFactor10'] / 10.0)
-                premCrewXP = vData['tmenXP'] * (vData['premiumXPFactor10'] / 10.0)
+                premXP = vData['xp'] * (vData['premiumXPFactor100'] / 100.0)
+                premCrewXP = vData['tmenXP'] * (vData['premiumXPFactor100'] / 100.0)
             ownVehicle = self.itemsCache.items.getItemByCD(typeCompDescr)
             if ownVehicle and ownVehicle.isPremium:
                 origCrewXP = int(origCrewXP * 1.5)
