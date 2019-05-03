@@ -173,7 +173,8 @@ def AdditionalStatsBlockConstructor_construct(base, self):
     else:
         return base(self)
 
-@overrideMethod(text_styles, "_getStyle")
+# TODO:1.5.0: disabled, is required?
+#@overrideMethod(text_styles, "_getStyle")
 def text_styles_getStyle(base, style, ctx = None):
     if ctx is None:
         ctx = {}
