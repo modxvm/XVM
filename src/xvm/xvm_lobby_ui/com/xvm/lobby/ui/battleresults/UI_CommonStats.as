@@ -27,8 +27,8 @@ package com.xvm.lobby.ui.battleresults
 
         private var _fieldsInitialized:Boolean = false;
         private var _data:BattleResultsVO = null;
-        private var xdataList:XvmCommonStatsDataListVO = null;
-        private var currentTankIndex:int = 0;
+        private var _xdataList:XvmCommonStatsDataListVO = null;
+        private var _currentTankIndex:int = 0;
 
         private var armorNames:Array = null;
         private var damageAssistedNames:Array = null;
@@ -68,7 +68,7 @@ package com.xvm.lobby.ui.battleresults
             tankSlot.removeEventListener(ListEvent.INDEX_CHANGE, onDropDownIndexChangeHandler);
 
             _data = null;
-            xdataList = null;
+            _xdataList = null;
 
             try
             {
@@ -79,8 +79,22 @@ package com.xvm.lobby.ui.battleresults
             {
                 if (Config.IS_DEVELOPMENT)
                 {
-                    //Logger.err(ex);
+                    Logger.err(ex);
                 }
+            }
+        }
+
+        override protected function draw():void
+        {
+            super.draw();
+
+            if (detailsMc.compareState.noPremTitleLbl.defaultTextFormat.leading == 2)
+            {
+                var textFormat:TextFormat = detailsMc.compareState.noPremTitleLbl.defaultTextFormat;
+                textFormat.leading = -4;
+                textFormat.align = TEXT_ALIGN.CENTER;
+                detailsMc.compareState.noPremTitleLbl.setTextFormat(textFormat);
+                detailsMc.compareState.premTitleLbl.setTextFormat(textFormat);
             }
         }
 
@@ -94,21 +108,17 @@ package com.xvm.lobby.ui.battleresults
                 var xdataStr:String = data.common.regionNameStr;
                 if (xdataStr.indexOf("\"__xvm\"") > 0)
                 {
-                    xdataList = new XvmCommonStatsDataListVO(JSONx.parse(xdataStr));
-                    data.common.regionNameStr = xdataList.regionNameStr;
+                    _xdataList = new XvmCommonStatsDataListVO(JSONx.parse(xdataStr));
+                    data.common.regionNameStr = _xdataList.regionNameStr;
                 }
-                //Logger.addObject(data, 3);
-                //Logger.addObject(data.personal, 5);
-                //Logger.addObject(data.personal.details, 2);
-                //Logger.addObject(data.common);
 
                 // search localized strings for tooltips and calculate total values
                 var personal:PersonalDataVO = data.personal;
                 for (var i:String in personal.details)
                 {
                     var creditsData:Vector.<DetailedStatsItemVO> = personal.creditsData[i] as Vector.<DetailedStatsItemVO>;
-                    xdataList.data[i].creditsNoPremTotalStr = creditsData[creditsData.length - 1]["col1"];
-                    xdataList.data[i].creditsPremTotalStr = creditsData[creditsData.length - 1]["col3"];
+                    _xdataList.data[i].creditsNoPremTotalStr = creditsData[creditsData.length - 1]["col1"];
+                    _xdataList.data[i].creditsPremTotalStr = creditsData[creditsData.length - 1]["col3"];
                     for each (var detail:Object in personal.details[i])
                     {
                         if (armorNames == null)
@@ -125,7 +135,6 @@ package com.xvm.lobby.ui.battleresults
                         }
                     }
                 }
-                //Logger.addObject(xdataList, 3);
 
                 // original update
                 super.update(data);
@@ -142,11 +151,6 @@ package com.xvm.lobby.ui.battleresults
                 }
 
                 hideQuestsShadows();
-
-                if (Config.config.battleResults.showExtendedInfo)
-                {
-                    hideUselessButtons();
-                }
 
                 efficiencyHeader.summArmorTF.visible =
                     efficiencyHeader.summAssistTF.visible =
@@ -167,7 +171,7 @@ package com.xvm.lobby.ui.battleresults
 
         private function onDropDownIndexChangeHandler(e:ListEvent) : void
         {
-            this.currentTankIndex = e.index;
+            _currentTankIndex = e.index;
             updateValues();
         }
 
@@ -191,9 +195,9 @@ package com.xvm.lobby.ui.battleresults
             }
         }
 
-        private function get xdata():XvmCommonStatsDataVO
+        private function get _xdata():XvmCommonStatsDataVO
         {
-            return xdataList.data[this.currentTankIndex];
+            return _xdataList.data[_currentTankIndex];
         }
 
         private function compactQuests():void
@@ -210,20 +214,22 @@ package com.xvm.lobby.ui.battleresults
             lowerShadow.visible = false;
         }
 
-        private function hideUselessButtons():void
-        {
-            detailsMc.detailedReportBtn.visible = false;
-            detailsMc.getPremBtn.visible = false;
-        }
-
         private function initTextFields():void
         {
+            // align standard fields
+            detailsMc.compareState.noPremTitleLbl.y -= 13;
+            detailsMc.compareState.premTitleLbl.y -= 13;
+            detailsMc.compareState.creditsTitle.y -= 24;
+            detailsMc.compareState.creditsLbl.y -= 24;
+            detailsMc.compareState.premCreditsLbl.y -= 24;
+            detailsMc.compareState.xpTitleLbl.y -= 24;
+            detailsMc.compareState.xpLbl.y -= 24;
+            detailsMc.compareState.premXpLbl.y -= 24;
+
+            // add new fields
             shotsTitle = createTextField(FIELD_POS_TITLE, 1);
-
             shotsCount = createTextField(FIELD_POS_NON_PREM, 1);
-
             shotsPercent = createTextField(FIELD_POS_PREM, 1);
-
             damageAssistedTitle = createTextField(FIELD_POS_TITLE, 2);
 
             damageAssistedValue = createTextField(FIELD_POS_NON_PREM, 2);
@@ -273,16 +279,14 @@ package com.xvm.lobby.ui.battleresults
         private static const CREW_EXP_OFFSET_X:int = 30;
         private function initCrewExperience():void
         {
-            if (detailsMc.xpTitleLbl)
-                detailsMc.xpTitleLbl.width += 50;
-            if (detailsMc.noPremTitleLbl)
-                detailsMc.noPremTitleLbl.x += CREW_EXP_OFFSET_X;
-            if (detailsMc.creditsLbl)
-                detailsMc.creditsLbl.x += CREW_EXP_OFFSET_X;
-            if (detailsMc.xpLbl)
-                detailsMc.xpLbl.x += CREW_EXP_OFFSET_X;
-            if (detailsMc.resLbl)
-                detailsMc.resLbl.x += CREW_EXP_OFFSET_X;
+            if (detailsMc.compareState.xpTitleLbl)
+                detailsMc.compareState.xpTitleLbl.width += 50;
+            if (detailsMc.compareState.noPremTitleLbl)
+                detailsMc.compareState.noPremTitleLbl.x += CREW_EXP_OFFSET_X;
+            if (detailsMc.compareState.creditsLbl)
+                detailsMc.compareState.creditsLbl.x += CREW_EXP_OFFSET_X;
+            if (detailsMc.compareState.xpLbl)
+                detailsMc.compareState.xpLbl.x += CREW_EXP_OFFSET_X;
             if (shotsCount)
                 shotsCount.x += CREW_EXP_OFFSET_X;
             if (damageAssistedValue)
@@ -320,14 +324,14 @@ package com.xvm.lobby.ui.battleresults
         private function showExtendedInfo():void
         {
             shotsTitle.htmlText = formatText(Locale.get("Hit percent"), "#C9C9B6");
-            shotsCount.htmlText = formatText(xdata.hits + "/" + xdata.shots, "#C9C9B6", TextFormatAlign.RIGHT);
+            shotsCount.htmlText = formatText(_xdata.hits + "/" + _xdata.shots, "#C9C9B6", TextFormatAlign.RIGHT);
 
-            var hitsRatio:Number = (xdata.shots <= 0) ? 0 : (xdata.hits / xdata.shots) * 100;
+            var hitsRatio:Number = (_xdata.shots <= 0) ? 0 : (_xdata.hits / _xdata.shots) * 100;
             shotsPercent.htmlText = formatText(App.utils.locale.float(hitsRatio) + "%", "#C9C9B6", TextFormatAlign.RIGHT);
 
             damageAssistedTitle.htmlText = formatText(Locale.get("Damage (assisted / own)"), "#C9C9B6");
-            damageAssistedValue.htmlText = formatText(App.utils.locale.integer(xdata.damageAssisted), "#408CCF", TextFormatAlign.RIGHT);
-            damageValue.htmlText = formatText(App.utils.locale.integer(xdata.damageDealt), "#FFC133", TextFormatAlign.RIGHT);
+            damageAssistedValue.htmlText = formatText(App.utils.locale.integer(_xdata.damageAssisted), "#408CCF", TextFormatAlign.RIGHT);
+            damageValue.htmlText = formatText(App.utils.locale.integer(_xdata.damageDealt), "#FFC133", TextFormatAlign.RIGHT);
         }
 
         private function showTotals():void
@@ -335,73 +339,73 @@ package com.xvm.lobby.ui.battleresults
             var tooltipData:IconEfficiencyTooltipData;
 
             // spotted
-            spottedTotalField.value = xdata.spotted;
-            spottedTotalField.enabled = xdata.spotted > 0;
+            spottedTotalField.value = _xdata.spotted;
+            spottedTotalField.enabled = _xdata.spotted > 0;
             tooltips[BATTLE_EFFICIENCY_TYPES.DETECTION] = new IconEfficiencyTooltipData();
 
             // kills
-            killsTotalField.value = xdata.kills;
-            killsTotalField.enabled = xdata.kills > 0;
+            killsTotalField.value = _xdata.kills;
+            killsTotalField.enabled = _xdata.kills > 0;
             tooltips[BATTLE_EFFICIENCY_TYPES.DESTRUCTION] = new IconEfficiencyTooltipData();
 
             // damage
-            damageTotalField.value = xdata.piercings;
-            damageTotalField.enabled = xdata.piercings > 0;
+            damageTotalField.value = _xdata.piercings;
+            damageTotalField.enabled = _xdata.piercings > 0;
             tooltipData = new IconEfficiencyTooltipData();
             tooltipData.setBaseValues(
-                [App.utils.locale.integer(xdata.damageDealt), xdata.piercings],
+                [App.utils.locale.integer(_xdata.damageDealt), _xdata.piercings],
                 damageDealtNames,
                 2);
             tooltips[BATTLE_EFFICIENCY_TYPES.DAMAGE] = tooltipData;
 
             // armor
-            armorTotalField.value = xdata.nonPenetrationsCount;
-            armorTotalField.enabled = xdata.nonPenetrationsCount > 0;
+            armorTotalField.value = _xdata.nonPenetrationsCount;
+            armorTotalField.enabled = _xdata.nonPenetrationsCount > 0;
             tooltipData = new IconEfficiencyTooltipData();
             tooltipData.setBaseValues(
-                [xdata.ricochetsCount, xdata.nonPenetrationsCount, App.utils.locale.integer(xdata.damageBlockedByArmor)],
+                [_xdata.ricochetsCount, _xdata.nonPenetrationsCount, App.utils.locale.integer(_xdata.damageBlockedByArmor)],
                 armorNames,
                 3);
             tooltips[BATTLE_EFFICIENCY_TYPES.ARMOR] = tooltipData;
 
             // assist (radio/tracks)
-            damageAssistedTotalField.value = xdata.damageAssistedCount;
-            damageAssistedTotalField.enabled = xdata.damageAssistedCount > 0;
+            damageAssistedTotalField.value = _xdata.damageAssistedCount;
+            damageAssistedTotalField.enabled = _xdata.damageAssistedCount > 0;
             tooltipData = new IconEfficiencyTooltipData();
-            tooltipData.totalAssistedDamage = xdata.damageAssisted;
+            tooltipData.totalAssistedDamage = _xdata.damageAssisted;
             tooltipData.setBaseValues(
-                [App.utils.locale.integer(xdata.damageAssistedRadio), App.utils.locale.integer(xdata.damageAssistedTrack), App.utils.locale.integer(xdata.damageAssisted)],
+                [App.utils.locale.integer(_xdata.damageAssistedRadio), App.utils.locale.integer(_xdata.damageAssistedTrack), App.utils.locale.integer(_xdata.damageAssisted)],
                 damageAssistedNames,
                 3);
             tooltips[BATTLE_EFFICIENCY_TYPES.ASSIST] = tooltipData;
 
             // crits
-            critsTotalField.value = xdata.critsCount;
-            critsTotalField.enabled = xdata.critsCount > 0;
+            critsTotalField.value = _xdata.critsCount;
+            critsTotalField.enabled = _xdata.critsCount > 0;
             tooltipData = new IconEfficiencyTooltipData();
-            //tooltipData.setCritValues(xdata.criticalDevices, xdata.destroyedTankmen, xdata.destroyedDevices, xdata.critsCount);
+            //tooltipData.setCritValues(_xdata.criticalDevices, _xdata.destroyedTankmen, _xdata.destroyedDevices, _xdata.critsCount);
             tooltips[BATTLE_EFFICIENCY_TYPES.CRITS] = tooltipData;
         }
 
         private function showTotalExperience():void
         {
-            detailsMc.xpLbl.htmlText = App.utils.locale.integer(xdata.origXP) + XP_IMG_TXT;
-            detailsMc.premXpLbl.htmlText = App.utils.locale.integer(xdata.premXP) + XP_IMG_TXT;
+            detailsMc.compareState.xpLbl.htmlText = App.utils.locale.integer(_xdata.origXP) + XP_IMG_TXT;
+            detailsMc.compareState.premXpLbl.htmlText = App.utils.locale.integer(_xdata.premXP) + XP_IMG_TXT;
         }
 
         private function showCrewExperience():void
         {
-            detailsMc.xpTitleLbl.htmlText += " / " + Locale.get("BR_xpCrew");
-            detailsMc.xpLbl.htmlText = detailsMc.xpLbl.htmlText.replace("<IMG SRC",
-                "/ " + App.utils.locale.integer(xdata.origCrewXP) + " <IMG SRC");
-            detailsMc.premXpLbl.htmlText = detailsMc.premXpLbl.htmlText.replace("<IMG SRC",
-                "/ " + App.utils.locale.integer(xdata.premCrewXP) + " <IMG SRC");
+            detailsMc.compareState.xpTitleLbl.htmlText += " / " + Locale.get("BR_xpCrew");
+            detailsMc.compareState.xpLbl.htmlText = detailsMc.compareState.xpLbl.htmlText.replace("<IMG SRC",
+                "/ " + App.utils.locale.integer(_xdata.origCrewXP) + " <IMG SRC");
+            detailsMc.compareState.premXpLbl.htmlText = detailsMc.compareState.premXpLbl.htmlText.replace("<IMG SRC",
+                "/ " + App.utils.locale.integer(_xdata.premCrewXP) + " <IMG SRC");
         }
 
         private function showNetIncome():void
         {
-            detailsMc.creditsLbl.htmlText = xdata.creditsNoPremTotalStr;
-            detailsMc.premCreditsLbl.htmlText = xdata.creditsPremTotalStr;
+            detailsMc.compareState.creditsLbl.htmlText = _xdata.creditsNoPremTotalStr;
+            detailsMc.compareState.premCreditsLbl.htmlText = _xdata.creditsPremTotalStr;
         }
 
         // helpers
@@ -413,30 +417,30 @@ package com.xvm.lobby.ui.battleresults
             switch (position)
             {
                 case FIELD_POS_TITLE:
-                    orig = detailsMc.xpTitleLbl;
+                    orig = detailsMc.compareState.xpTitleLbl;
                     newTf.autoSize = TextFieldAutoSize.LEFT;
                     break;
                 case FIELD_POS_NON_PREM:
-                    orig = detailsMc.xpLbl;
+                    orig = detailsMc.compareState.xpLbl;
                     break;
                 case FIELD_POS_PREM:
-                    orig = detailsMc.premXpLbl;
+                    orig = detailsMc.compareState.premXpLbl;
                     break;
                 default:
                     return null;
             }
             newTf.x = orig.x;
-            newTf.height = detailsMc.xpTitleLbl.height;
+            newTf.height = detailsMc.compareState.xpTitleLbl.height;
             newTf.alpha = 1;
 
-            newTf.styleSheet = XfwUtils.createTextStyleSheet(CSS_FIELD_CLASS, detailsMc.xpTitleLbl.defaultTextFormat);
+            newTf.styleSheet = XfwUtils.createTextStyleSheet(CSS_FIELD_CLASS, detailsMc.compareState.xpTitleLbl.defaultTextFormat);
             newTf.mouseEnabled = false;
             newTf.selectable = false;
             TextFieldEx.setNoTranslate(newTf, true);
             newTf.antiAliasType = AntiAliasType.ADVANCED;
 
-            var y_space:Number = detailsMc.xpTitleLbl.height;
-            var y_pos:Number = detailsMc.resTitleLbl && detailsMc.resTitleLbl.visible ? detailsMc.resTitleLbl.y : detailsMc.xpTitleLbl.y;
+            var y_space:Number = detailsMc.compareState.xpTitleLbl.height;
+            var y_pos:Number = detailsMc.compareState.xpTitleLbl.y;
 
             newTf.y = y_pos + line * y_space;
 
@@ -477,16 +481,6 @@ package com.xvm.lobby.ui.battleresults
             {
                 App.toolTipMgr.hide();
             }
-        }
-
-        private function merge(obj1:Object, obj2:Object):Object
-        {
-            var result:Object = {};
-            for (var param:String in obj1)
-                result[param] = obj1[param];
-            for (param in obj2)
-                result[param] = obj2[param];
-            return result;
         }
     }
 }
