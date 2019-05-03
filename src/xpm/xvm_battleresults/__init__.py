@@ -102,7 +102,8 @@ class XvmDataBlock(base.StatsBlock):
             'nonPenetrationsCount': 0}
 
         for typeCompDescr, vData in reusable.personal.getVehicleCDsIterator(result):
-            log(vData)
+            #log(vData)
+            #log from 1.5.0.0: https://koreanrandom.com/forum/topic/49651-
             
             #TODO 1.5: add support for premiumPlus and premiumVip
             origXP = vData['xp']
