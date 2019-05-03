@@ -27,7 +27,6 @@ package com.xvm.lobby.ui.battleresults
 
         private const offsetTop:Number = 10;
         private const offsetMiddle:Number = 20;
-        private const offsetBottom:Number = 20;
 
         public function UI_BR_SubtaskComponent()
         {
@@ -88,17 +87,17 @@ package com.xvm.lobby.ui.battleresults
                     this.awards.y = orig_awards_y - offsetMiddle;
 
                     // set bottom line
-                    if (this.awards.height > 0)
+                    if (_data.awards && _data.awards.length)
                     {
                         this.lineMC.y = this.awards.y + this.awards.height;
                     }
                     else
                     {
-                        this.lineMC.y -= offsetBottom;
+                        this.lineMC.y = this.progressList.y + this.progressList.height;
                     }
 
                     // resize
-                    setSize(this.width, Math.round(this.lineMC.y));
+                    setSize(this.width, this.lineMC.y);
                     dispatchEvent(new Event(Event.RESIZE));
                 }
             }

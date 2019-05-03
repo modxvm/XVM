@@ -37,8 +37,7 @@ def event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, cnt=0):
 @overrideMethod(BattleResultsWindow, 'as_setDataS')
 def BattleResultsWindow_as_setDataS(base, self, data):
     try:
-        # TODO:1.5.0
-        #data['tabInfo'][0]['linkage'] = 'com.xvm.lobby.ui.battleresults::UI_CommonStats'
+        data['tabInfo'][0]['linkage'] = 'com.xvm.lobby.ui.battleresults::UI_CommonStats'
 
         # Use data['common']['regionNameStr'] value to transfer XVM data.
         # Cannot add in data object because DAAPIDataClass is not dynamic.
@@ -104,7 +103,7 @@ class XvmDataBlock(base.StatsBlock):
         for typeCompDescr, vData in reusable.personal.getVehicleCDsIterator(result):
             #log(vData)
             #log from 1.5.0.0: https://koreanrandom.com/forum/topic/49651-
-            
+
             #TODO 1.5: add support for premiumPlus and premiumVip
             origXP = vData['xp']
             premXP = vData['xp']
