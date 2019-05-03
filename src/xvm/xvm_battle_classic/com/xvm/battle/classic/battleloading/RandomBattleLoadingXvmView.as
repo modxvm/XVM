@@ -5,15 +5,15 @@
 package com.xvm.battle.classic.battleloading
 {
     import com.xfw.*;
-    import com.xvm.infrastructure.*;
-    import net.wg.infrastructure.events.*;
-    import net.wg.infrastructure.interfaces.*;
-    import net.wg.data.constants.generated.*;
-    import net.wg.gui.battle.random.views.*;
+    import com.xvm.infrastructure.XvmViewBase;
+    import net.wg.data.constants.generated.BATTLE_VIEW_ALIASES;
+    import net.wg.gui.battle.random.views.BattlePage;
+    import net.wg.infrastructure.events.LifeCycleEvent;
+    import net.wg.infrastructure.interfaces.IView;
 
-    public class BattleLoadingXvmView extends XvmViewBase
+    public class RandomBattleLoadingXvmView extends XvmViewBase
     {
-        public function BattleLoadingXvmView(view:IView)
+        public function RandomBattleLoadingXvmView(view:IView)
         {
             super(view);
         }
@@ -37,7 +37,7 @@ package com.xvm.battle.classic.battleloading
             page.xfw_battleStatisticDataController.xfw_componentControllers.splice(page.xfw_battleStatisticDataController.xfw_componentControllers.indexOf(page.battleLoading), 1);
             var idx:int = page.getChildIndex(page.battleLoading);
             page.removeChild(page.battleLoading);
-            var component:UI_BattleLoading = new UI_BattleLoading();
+            var component:UI_RandomBattleLoading = new UI_RandomBattleLoading();
             component.x = page.battleLoading.x;
             component.y = page.battleLoading.y;
             component.setCompVisible(page.battleLoading.visible);
