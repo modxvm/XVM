@@ -8,14 +8,24 @@ package com.xvm.lobby.ui.battleresults
 {
     import com.xfw.*;
     import com.xvm.*;
-    import flash.events.*;
-    import flash.text.*;
-    import flash.utils.*;
-    import net.wg.data.constants.generated.*;
-    import net.wg.gui.lobby.battleResults.components.*;
-    import net.wg.gui.lobby.battleResults.data.*;
-    import scaleform.clik.events.*;
-    import scaleform.gfx.*;
+    import flash.events.MouseEvent;
+    import flash.text.AntiAliasType;
+    import flash.text.TextField;
+    import flash.text.TextFieldAutoSize;
+    import flash.text.TextFormat;
+    import flash.text.TextFormatAlign;
+    import flash.utils.getQualifiedClassName;
+    import net.wg.data.constants.generated.BATTLE_EFFICIENCY_TYPES;
+    import net.wg.data.constants.generated.BATTLE_RESULTS_PREMIUM_STATES;
+    import net.wg.data.constants.generated.TEXT_ALIGN;
+    import net.wg.data.constants.generated.TOOLTIPS_CONSTANTS;
+    import net.wg.gui.lobby.battleResults.components.EfficiencyIconRenderer;
+    import net.wg.gui.lobby.battleResults.data.BattleResultsVO;
+    import net.wg.gui.lobby.battleResults.data.DetailedStatsItemVO;
+    import net.wg.gui.lobby.battleResults.data.IconEfficiencyTooltipData;
+    import net.wg.gui.lobby.battleResults.data.PersonalDataVO;
+    import scaleform.clik.events.ListEvent;
+    import scaleform.gfx.TextFieldEx;
 
     public dynamic class UI_CommonStats extends CommonStats
     {
@@ -179,19 +189,22 @@ package com.xvm.lobby.ui.battleresults
         {
             compactQuests();
 
-            if (Config.config.battleResults.showExtendedInfo)
-            {
-                initTextFields();
-            }
-
             if (Config.config.battleResults.showTotals)
             {
                 initTotals();
             }
 
-            if (Config.config.battleResults.showCrewExperience)
+            if (_data.personal.dynamicPremiumState == BATTLE_RESULTS_PREMIUM_STATES.PREMIUM_EARNINGS)
             {
-                initCrewExperience();
+                if (Config.config.battleResults.showExtendedInfo)
+                {
+                    initTextFields();
+                }
+
+                if (Config.config.battleResults.showCrewExperience)
+                {
+                    initCrewExperience();
+                }
             }
         }
 
@@ -295,29 +308,32 @@ package com.xvm.lobby.ui.battleresults
 
         private function updateValues():void
         {
-            if (Config.config.battleResults.showExtendedInfo)
-            {
-                showExtendedInfo();
-            }
-
             if (Config.config.battleResults.showTotals)
             {
                 showTotals();
             }
 
-            if (Config.config.battleResults.showTotalExperience)
+            if (_data.personal.dynamicPremiumState == BATTLE_RESULTS_PREMIUM_STATES.PREMIUM_EARNINGS)
             {
-                showTotalExperience();
-            }
+                if (Config.config.battleResults.showExtendedInfo)
+                {
+                    showExtendedInfo();
+                }
 
-            if (Config.config.battleResults.showCrewExperience)
-            {
-                showCrewExperience();
-            }
+                if (Config.config.battleResults.showTotalExperience)
+                {
+                    showTotalExperience();
+                }
 
-            if (Config.config.battleResults.showNetIncome)
-            {
-                showNetIncome();
+                if (Config.config.battleResults.showCrewExperience)
+                {
+                    showCrewExperience();
+                }
+
+                if (Config.config.battleResults.showNetIncome)
+                {
+                    showNetIncome();
+                }
             }
         }
 

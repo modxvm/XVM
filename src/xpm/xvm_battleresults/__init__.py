@@ -10,8 +10,10 @@ import BigWorld
 from gui.shared import event_dispatcher
 from gui.Scaleform.daapi.view.battle_results_window import BattleResultsWindow
 from gui.Scaleform.daapi.view.bootcamp.BCBattleResult import BCBattleResult
+from gui.Scaleform.genConsts.BATTLE_RESULTS_PREMIUM_STATES import BATTLE_RESULTS_PREMIUM_STATES
 from gui.battle_results import composer
 from gui.battle_results.components import base
+from gui.battle_results.components.personal import DynamicPremiumState
 from gui.battle_results.settings import BATTLE_RESULTS_RECORD
 from gui.shared.crits_mask_parser import critsParserGenerator
 from helpers import dependency
@@ -59,6 +61,14 @@ def BCBattleResult_as_setDataS(base, self, data):
         err(traceback.format_exc())
     return base(self, data)
 
+@overrideMethod(DynamicPremiumState, 'getVO')
+def _DynamicPremiumState_getVO(base, self):
+    res = base(self)
+    # BATTLE_RESULTS_PREMIUM_STATES.PREMIUM_BONUS
+    if self._value in [BATTLE_RESULTS_PREMIUM_STATES.PREMIUM_ADVERTISING, BATTLE_RESULTS_PREMIUM_STATES.PREMIUM_INFO]:
+        self._value = BATTLE_RESULTS_PREMIUM_STATES.PREMIUM_EARNINGS
+        return super(DynamicPremiumState, self).getVO()
+    return res
 
 #####################################################################
 # collect data for XVM
