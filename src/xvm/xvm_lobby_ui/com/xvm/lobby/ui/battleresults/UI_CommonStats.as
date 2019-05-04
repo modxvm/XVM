@@ -9,6 +9,7 @@ package com.xvm.lobby.ui.battleresults
     import com.xfw.*;
     import com.xvm.*;
     import flash.events.MouseEvent;
+    import flash.geom.Rectangle;
     import flash.text.AntiAliasType;
     import flash.text.TextField;
     import flash.text.TextFieldAutoSize;
@@ -20,6 +21,8 @@ package com.xvm.lobby.ui.battleresults
     import net.wg.data.constants.generated.TEXT_ALIGN;
     import net.wg.data.constants.generated.TOOLTIPS_CONSTANTS;
     import net.wg.gui.lobby.battleResults.components.EfficiencyIconRenderer;
+    import net.wg.gui.lobby.battleResults.components.detailsBlockStates.ComparePremiumState;
+    import net.wg.gui.lobby.battleResults.components.detailsBlockStates.PremiumBonusState;
     import net.wg.gui.lobby.battleResults.data.BattleResultsVO;
     import net.wg.gui.lobby.battleResults.data.DetailedStatsItemVO;
     import net.wg.gui.lobby.battleResults.data.IconEfficiencyTooltipData;
@@ -44,6 +47,7 @@ package com.xvm.lobby.ui.battleresults
         private var armorNames:Array = null;
         private var damageAssistedNames:Array = null;
         private var damageDealtNames:Array = null;
+        private var stunNames:Array = null;
 
         private var shotsTitle:TextField;
         private var shotsCount:TextField;
@@ -52,12 +56,15 @@ package com.xvm.lobby.ui.battleresults
         private var damageAssistedValue:TextField;
         private var damageValue:TextField;
 
+        private var stunTotalField:EfficiencyIconRenderer;
         private var spottedTotalField:EfficiencyIconRenderer;
         private var damageAssistedTotalField:EfficiencyIconRenderer;
         private var armorTotalField:EfficiencyIconRenderer;
         private var critsTotalField:EfficiencyIconRenderer;
         private var damageTotalField:EfficiencyIconRenderer;
         private var killsTotalField:EfficiencyIconRenderer;
+
+        private var bonusState:PremiumBonusState;
 
         private var tooltips:Object;
 
@@ -81,6 +88,12 @@ package com.xvm.lobby.ui.battleresults
             _data = null;
             _xdataList = null;
 
+            if (bonusState)
+            {
+                removeChild(bonusState);
+                bonusState = null;
+            }
+
             try
             {
                 // Some error occurs for an unknown reason
@@ -98,11 +111,17 @@ package com.xvm.lobby.ui.battleresults
         override protected function draw():void
         {
             super.draw();
-            if (this._data != null)
+            if (_data != null)
             {
                 if (isInvalid(InvalidationType.DATA, InvalidationType.SIZE))
                 {
-                    detailsMc.compareState.validateNow();
+                    var compareState:ComparePremiumState = detailsMc.compareState;
+                    if (!compareState.visible)
+                    {
+                        compareState.visible = true;
+                        compareState.setData(_data.personal);
+                    }
+                    compareState.validateNow();
                     updateValues();
                 }
             }
@@ -143,6 +162,10 @@ package com.xvm.lobby.ui.battleresults
                         {
                             damageDealtNames = detail.damageDealtNames;
                         }
+                        if (stunNames == null)
+                        {
+                            stunNames = detail.stunNames;
+                        }
                     }
                 }
 
@@ -167,7 +190,8 @@ package com.xvm.lobby.ui.battleresults
                     efficiencyHeader.summCritsTF.visible =
                     efficiencyHeader.summDamageTF.visible =
                     efficiencyHeader.summKillTF.visible =
-                    efficiencyHeader.summSpottedTF.visible = !Config.config.battleResults.showTotals;
+                    efficiencyHeader.summSpottedTF.visible =
+                    efficiencyHeader.summStunTF.visible = !Config.config.battleResults.showTotals;
 
                 updateValues();
             }
@@ -194,17 +218,19 @@ package com.xvm.lobby.ui.battleresults
                 initTotals();
             }
 
-            if (_data.personal.dynamicPremiumState == BATTLE_RESULTS_PREMIUM_STATES.PREMIUM_EARNINGS)
+            if (_data.personal.dynamicPremiumState == BATTLE_RESULTS_PREMIUM_STATES.PREMIUM_BONUS)
             {
-                if (Config.config.battleResults.showExtendedInfo)
-                {
-                    initTextFields();
-                }
+                initPremiumBonusFields();
+            }
 
-                if (Config.config.battleResults.showCrewExperience)
-                {
-                    initCrewExperience();
-                }
+            if (Config.config.battleResults.showExtendedInfo)
+            {
+                initTextFields();
+            }
+
+            if (Config.config.battleResults.showCrewExperience)
+            {
+                initCrewExperience();
             }
         }
 
@@ -227,26 +253,42 @@ package com.xvm.lobby.ui.battleresults
             lowerShadow.visible = false;
         }
 
+        private function initPremiumBonusFields():void
+        {
+            if (!bonusState)
+            {
+                bonusState = addChild(detailsMc.bonusState) as PremiumBonusState;
+                bonusState.scrollRect = new Rectangle(190, 13, 320, 90);
+                bonusState.x = 25;
+                bonusState.y = 60;
+                bonusState.backgroundIcon.alpha = 0.7;
+            }
+        }
+
         private function initTextFields():void
         {
+            var compareState:ComparePremiumState = detailsMc.compareState;
             // align standard fields
-            detailsMc.compareState.noPremTitleLbl.y -= 13;
-            detailsMc.compareState.premTitleLbl.y -= 13;
-            detailsMc.compareState.creditsTitle.y -= 24;
-            detailsMc.compareState.creditsLbl.y -= 24;
-            detailsMc.compareState.premCreditsLbl.y -= 24;
-            detailsMc.compareState.xpTitleLbl.y -= 24;
-            detailsMc.compareState.xpLbl.y -= 24;
-            detailsMc.compareState.premXpLbl.y -= 24;
+            compareState.noPremTitleLbl.y -= 13;
+            compareState.premTitleLbl.y -= 13;
+            compareState.creditsTitle.y -= 24;
+            compareState.creditsLbl.y -= 24;
+            compareState.premCreditsLbl.y -= 24;
+            compareState.xpTitleLbl.y -= 24;
+            compareState.xpLbl.y -= 24;
+            compareState.premXpLbl.y -= 24;
 
             if (Config.config.battleResults.showCrewExperience)
             {
-                detailsMc.compareState.noPremTitleLbl.x -= 20;
-                detailsMc.compareState.premTitleLbl.x += 15;
-                detailsMc.compareState.creditsLbl.x -= 20;
-                detailsMc.compareState.premCreditsLbl.x += 15;
-                detailsMc.compareState.xpLbl.x -= 20;
-                detailsMc.compareState.premXpLbl.x += 15;
+                compareState.noPremTitleLbl.x -= 20;
+                compareState.premTitleLbl.x += 15;
+                compareState.creditsTitle.x -= 10;
+                compareState.creditsLbl.x -= 20;
+                compareState.premCreditsLbl.x += 15;
+                compareState.xpTitleLbl.x -= 10;
+                compareState.xpTitleLbl.scrollRect = new Rectangle(0, 0, 137, 20);
+                compareState.xpLbl.x -= 20;
+                compareState.premXpLbl.x += 15;
             }
 
             // add new fields
@@ -270,28 +312,30 @@ package com.xvm.lobby.ui.battleresults
         {
             try
             {
-                // TODO: Need add 'stun' column
-                var x:int = efficiencyTitle.x + 269;
+                var x:int = efficiencyTitle.x + 236;
                 var y:int = efficiencyTitle.y + 34;
                 var w:Number = 33;
 
+                // stun
+                stunTotalField = addChild(createTotalItem( { x: x, y: y, kind: BATTLE_EFFICIENCY_TYPES.STUN })) as EfficiencyIconRenderer;
+
                 // spotted
-                spottedTotalField = addChild(createTotalItem( { x: x, y: y, kind: BATTLE_EFFICIENCY_TYPES.DETECTION })) as EfficiencyIconRenderer;
+                spottedTotalField = addChild(createTotalItem( { x: x + w * 1, y: y, kind: BATTLE_EFFICIENCY_TYPES.DETECTION })) as EfficiencyIconRenderer;
 
                 // damage assisted (radio/tracks)
-                damageAssistedTotalField = addChild(createTotalItem( { x: x + w * 1, y: y, kind: BATTLE_EFFICIENCY_TYPES.ASSIST })) as EfficiencyIconRenderer;
+                damageAssistedTotalField = addChild(createTotalItem( { x: x + w * 2, y: y, kind: BATTLE_EFFICIENCY_TYPES.ASSIST })) as EfficiencyIconRenderer;
 
                 // armor
-                armorTotalField = addChild(createTotalItem( { x: x + w * 2, y: y, kind: BATTLE_EFFICIENCY_TYPES.ARMOR })) as EfficiencyIconRenderer;
+                armorTotalField = addChild(createTotalItem( { x: x + w * 3, y: y, kind: BATTLE_EFFICIENCY_TYPES.ARMOR })) as EfficiencyIconRenderer;
 
                 // crits
-                critsTotalField = addChild(createTotalItem( { x: x + w * 3, y: y, kind: BATTLE_EFFICIENCY_TYPES.CRITS })) as EfficiencyIconRenderer;
+                critsTotalField = addChild(createTotalItem( { x: x + w * 4, y: y, kind: BATTLE_EFFICIENCY_TYPES.CRITS })) as EfficiencyIconRenderer;
 
                 // piercings
-                damageTotalField = addChild(createTotalItem( { x: x + w * 4 + 1, y: y, kind: BATTLE_EFFICIENCY_TYPES.DAMAGE })) as EfficiencyIconRenderer;
+                damageTotalField = addChild(createTotalItem( { x: x + w * 5 + 1, y: y, kind: BATTLE_EFFICIENCY_TYPES.DAMAGE })) as EfficiencyIconRenderer;
 
                 // kills
-                killsTotalField = addChild(createTotalItem( { x: x + w * 5 + 1, y: y, kind: BATTLE_EFFICIENCY_TYPES.DESTRUCTION } )) as EfficiencyIconRenderer;
+                killsTotalField = addChild(createTotalItem( { x: x + w * 6 + 1, y: y, kind: BATTLE_EFFICIENCY_TYPES.DESTRUCTION } )) as EfficiencyIconRenderer;
             }
             catch (ex:Error)
             {
@@ -302,14 +346,15 @@ package com.xvm.lobby.ui.battleresults
         private static const CREW_EXP_OFFSET_X:int = 30;
         private function initCrewExperience():void
         {
-            if (detailsMc.compareState.xpTitleLbl)
-                detailsMc.compareState.xpTitleLbl.width += 50;
-            if (detailsMc.compareState.noPremTitleLbl)
-                detailsMc.compareState.noPremTitleLbl.x += CREW_EXP_OFFSET_X;
-            if (detailsMc.compareState.creditsLbl)
-                detailsMc.compareState.creditsLbl.x += CREW_EXP_OFFSET_X;
-            if (detailsMc.compareState.xpLbl)
-                detailsMc.compareState.xpLbl.x += CREW_EXP_OFFSET_X;
+            var compareState:ComparePremiumState = detailsMc.compareState;
+            if (compareState.xpTitleLbl)
+                compareState.xpTitleLbl.width += 50;
+            if (compareState.noPremTitleLbl)
+                compareState.noPremTitleLbl.x += CREW_EXP_OFFSET_X;
+            if (compareState.creditsLbl)
+                compareState.creditsLbl.x += CREW_EXP_OFFSET_X;
+            if (compareState.xpLbl)
+                compareState.xpLbl.x += CREW_EXP_OFFSET_X;
             if (shotsCount)
                 shotsCount.x += CREW_EXP_OFFSET_X;
             if (damageAssistedValue)
@@ -318,13 +363,14 @@ package com.xvm.lobby.ui.battleresults
 
         private function updateValues():void
         {
-            if (detailsMc.compareState.noPremTitleLbl.defaultTextFormat.leading == 2)
+            var compareState:ComparePremiumState = detailsMc.compareState;
+            if (compareState.noPremTitleLbl.defaultTextFormat.leading == 2)
             {
-                var textFormat:TextFormat = detailsMc.compareState.noPremTitleLbl.defaultTextFormat;
+                var textFormat:TextFormat = compareState.noPremTitleLbl.defaultTextFormat;
                 textFormat.leading = -4;
                 textFormat.align = TEXT_ALIGN.CENTER;
-                detailsMc.compareState.noPremTitleLbl.setTextFormat(textFormat);
-                detailsMc.compareState.premTitleLbl.setTextFormat(textFormat);
+                compareState.noPremTitleLbl.setTextFormat(textFormat);
+                compareState.premTitleLbl.setTextFormat(textFormat);
             }
 
             if (Config.config.battleResults.showTotals)
@@ -332,33 +378,40 @@ package com.xvm.lobby.ui.battleresults
                 showTotals();
             }
 
-            if (_data.personal.dynamicPremiumState == BATTLE_RESULTS_PREMIUM_STATES.PREMIUM_EARNINGS)
+            if (Config.config.battleResults.showExtendedInfo)
             {
-                if (Config.config.battleResults.showExtendedInfo)
-                {
-                    showExtendedInfo();
-                }
+                showExtendedInfo();
+            }
 
-                if (Config.config.battleResults.showTotalExperience)
-                {
-                    showTotalExperience();
-                }
+            if (Config.config.battleResults.showTotalExperience)
+            {
+                showTotalExperience();
+            }
 
-                if (Config.config.battleResults.showCrewExperience)
-                {
-                    showCrewExperience();
-                }
+            if (Config.config.battleResults.showCrewExperience)
+            {
+                showCrewExperience();
+            }
 
-                if (Config.config.battleResults.showNetIncome)
-                {
-                    showNetIncome();
-                }
+            if (Config.config.battleResults.showNetIncome)
+            {
+                showNetIncome();
             }
         }
 
         private function showTotals():void
         {
             var tooltipData:IconEfficiencyTooltipData;
+
+            // stun
+            stunTotalField.value = _xdata.stunNum;
+            stunTotalField.enabled = _xdata.stunNum > 0;
+            tooltipData = new IconEfficiencyTooltipData();
+            tooltipData.setBaseValues(
+                [App.utils.locale.integer(_xdata.damageAssistedStun), _xdata.stunNum, App.utils.locale.float(_xdata.stunDuration)],
+                stunNames,
+                3);
+            tooltips[BATTLE_EFFICIENCY_TYPES.STUN] = tooltipData;
 
             // spotted
             spottedTotalField.value = _xdata.spotted;
@@ -424,62 +477,66 @@ package com.xvm.lobby.ui.battleresults
 
         private function showTotalExperience():void
         {
-            detailsMc.compareState.xpLbl.htmlText = App.utils.locale.integer(_xdata.origXP) + XP_IMG_TXT;
-            detailsMc.compareState.premXpLbl.htmlText = App.utils.locale.integer(_xdata.premXP) + XP_IMG_TXT;
+            var compareState:ComparePremiumState = detailsMc.compareState;
+            compareState.xpLbl.htmlText = App.utils.locale.integer(_xdata.origXP) + XP_IMG_TXT;
+            compareState.premXpLbl.htmlText = App.utils.locale.integer(_xdata.premXP) + XP_IMG_TXT;
         }
 
         private function showCrewExperience():void
         {
-            detailsMc.compareState.xpTitleLbl.htmlText += " / " + Locale.get("BR_xpCrew");
-            detailsMc.compareState.xpLbl.htmlText = detailsMc.compareState.xpLbl.htmlText.replace("<IMG SRC",
+            var compareState:ComparePremiumState = detailsMc.compareState;
+            compareState.xpTitleLbl.htmlText += " / " + Locale.get("BR_xpCrew");
+            compareState.xpLbl.htmlText = compareState.xpLbl.htmlText.replace("<IMG SRC",
                 "/ " + App.utils.locale.integer(_xdata.origCrewXP) + " <IMG SRC");
-            detailsMc.compareState.premXpLbl.htmlText = detailsMc.compareState.premXpLbl.htmlText.replace("<IMG SRC",
+            compareState.premXpLbl.htmlText = compareState.premXpLbl.htmlText.replace("<IMG SRC",
                 "/ " + App.utils.locale.integer(_xdata.premCrewXP) + " <IMG SRC");
         }
 
         private function showNetIncome():void
         {
-            detailsMc.compareState.creditsLbl.htmlText = _xdata.creditsNoPremTotalStr;
-            detailsMc.compareState.premCreditsLbl.htmlText = _xdata.creditsPremTotalStr;
+            var compareState:ComparePremiumState = detailsMc.compareState;
+            compareState.creditsLbl.htmlText = _xdata.creditsNoPremTotalStr;
+            compareState.premCreditsLbl.htmlText = _xdata.creditsPremTotalStr;
         }
 
         // helpers
 
         private function createTextField(position:String, line:Number):TextField
         {
+            var compareState:ComparePremiumState = detailsMc.compareState;
             var newTf:TextField = new TextField();
             var orig:TextField;
             switch (position)
             {
                 case FIELD_POS_TITLE:
-                    orig = detailsMc.compareState.xpTitleLbl;
+                    orig = compareState.xpTitleLbl;
                     newTf.autoSize = TextFieldAutoSize.LEFT;
                     break;
                 case FIELD_POS_NON_PREM:
-                    orig = detailsMc.compareState.xpLbl;
+                    orig = compareState.xpLbl;
                     break;
                 case FIELD_POS_PREM:
-                    orig = detailsMc.compareState.premXpLbl;
+                    orig = compareState.premXpLbl;
                     break;
                 default:
                     return null;
             }
             newTf.x = orig.x;
-            newTf.height = detailsMc.compareState.xpTitleLbl.height;
+            newTf.height = compareState.xpTitleLbl.height;
             newTf.alpha = 1;
 
-            newTf.styleSheet = XfwUtils.createTextStyleSheet(CSS_FIELD_CLASS, detailsMc.compareState.xpTitleLbl.defaultTextFormat);
-            newTf.mouseEnabled = false;
+            newTf.styleSheet = XfwUtils.createTextStyleSheet(CSS_FIELD_CLASS, compareState.xpTitleLbl.defaultTextFormat);
+            newTf.mouseEnabled = true;
             newTf.selectable = false;
             TextFieldEx.setNoTranslate(newTf, true);
             newTf.antiAliasType = AntiAliasType.ADVANCED;
 
-            var y_space:Number = detailsMc.compareState.xpTitleLbl.height;
-            var y_pos:Number = detailsMc.compareState.xpTitleLbl.y;
+            var y_space:Number = compareState.xpTitleLbl.height;
+            var y_pos:Number = compareState.xpTitleLbl.y;
 
             newTf.y = y_pos + line * y_space;
 
-            detailsMc.addChild(newTf);
+            compareState.addChild(newTf);
 
             return newTf;
         }

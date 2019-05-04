@@ -64,10 +64,10 @@ def BCBattleResult_as_setDataS(base, self, data):
 @overrideMethod(DynamicPremiumState, 'getVO')
 def _DynamicPremiumState_getVO(base, self):
     res = base(self)
-    # BATTLE_RESULTS_PREMIUM_STATES.PREMIUM_BONUS
     if self._value in [BATTLE_RESULTS_PREMIUM_STATES.PREMIUM_ADVERTISING, BATTLE_RESULTS_PREMIUM_STATES.PREMIUM_INFO]:
         self._value = BATTLE_RESULTS_PREMIUM_STATES.PREMIUM_EARNINGS
         return super(DynamicPremiumState, self).getVO()
+    #res = self._value = BATTLE_RESULTS_PREMIUM_STATES.PREMIUM_BONUS
     return res
 
 #####################################################################
@@ -100,12 +100,15 @@ class XvmDataBlock(base.StatsBlock):
             'damageAssistedCount': 0,
             'damageAssistedRadio': 0,
             'damageAssistedTrack': 0,
+            'damageAssistedStun': 0,
             'damageBlockedByArmor': 0,
             'shots': 0,
             'hits': 0,
             'piercings': 0,
             'kills': 0,
             'spotted': 0,
+            'stunNum': 0,
+            'stunDuration': 0,
             'critsCount': 0,
             'ricochetsCount': 0,
             'nonPenetrationsCount': 0}
@@ -140,12 +143,15 @@ class XvmDataBlock(base.StatsBlock):
                 'damageAssistedCount': calcDetailsCount(vData['details'], ['damageAssistedRadio', 'damageAssistedTrack']),
                 'damageAssistedRadio': vData['damageAssistedRadio'],
                 'damageAssistedTrack': vData['damageAssistedTrack'],
+                'damageAssistedStun': vData['damageAssistedStun'],
                 'damageBlockedByArmor': vData['damageBlockedByArmor'],
                 'shots': vData['shots'],
                 'hits': vData['directHits'],
                 'piercings': vData['piercings'],
                 'kills': vData['kills'],
                 'spotted': vData['spotted'],
+                'stunNum': vData['stunNum'],
+                'stunDuration': vData['stunDuration'],
                 'critsCount': calcCritsCount(vData['details']),
                 'ricochetsCount': calcDetailsSum(vData['details'], 'rickochetsReceived'),
                 'nonPenetrationsCount': vData['noDamageDirectHitsReceived']
@@ -165,12 +171,15 @@ def appendTotalData(total, data):
     total['damageAssistedCount'] += data['damageAssistedCount']
     total['damageAssistedRadio'] += data['damageAssistedRadio']
     total['damageAssistedTrack'] += data['damageAssistedTrack']
+    total['damageAssistedStun'] += data['damageAssistedStun']
     total['damageBlockedByArmor'] += data['damageBlockedByArmor']
     total['shots'] += data['shots']
     total['hits'] += data['hits']
     total['piercings'] += data['piercings']
     total['kills'] += data['kills']
     total['spotted'] += data['spotted']
+    total['stunNum'] += data['stunNum']
+    total['stunDuration'] += data['stunDuration']
     total['critsCount'] += data['critsCount']
     total['ricochetsCount'] += data['ricochetsCount']
     total['nonPenetrationsCount'] += data['nonPenetrationsCount']
