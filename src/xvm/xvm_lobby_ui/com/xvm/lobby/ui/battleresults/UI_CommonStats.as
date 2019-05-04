@@ -24,6 +24,7 @@ package com.xvm.lobby.ui.battleresults
     import net.wg.gui.lobby.battleResults.data.DetailedStatsItemVO;
     import net.wg.gui.lobby.battleResults.data.IconEfficiencyTooltipData;
     import net.wg.gui.lobby.battleResults.data.PersonalDataVO;
+    import scaleform.clik.constants.InvalidationType;
     import scaleform.clik.events.ListEvent;
     import scaleform.gfx.TextFieldEx;
 
@@ -97,14 +98,13 @@ package com.xvm.lobby.ui.battleresults
         override protected function draw():void
         {
             super.draw();
-
-            if (detailsMc.compareState.noPremTitleLbl.defaultTextFormat.leading == 2)
+            if (this._data != null)
             {
-                var textFormat:TextFormat = detailsMc.compareState.noPremTitleLbl.defaultTextFormat;
-                textFormat.leading = -4;
-                textFormat.align = TEXT_ALIGN.CENTER;
-                detailsMc.compareState.noPremTitleLbl.setTextFormat(textFormat);
-                detailsMc.compareState.premTitleLbl.setTextFormat(textFormat);
+                if (isInvalid(InvalidationType.DATA, InvalidationType.SIZE))
+                {
+                    detailsMc.compareState.validateNow();
+                    updateValues();
+                }
             }
         }
 
@@ -239,6 +239,16 @@ package com.xvm.lobby.ui.battleresults
             detailsMc.compareState.xpLbl.y -= 24;
             detailsMc.compareState.premXpLbl.y -= 24;
 
+            if (Config.config.battleResults.showCrewExperience)
+            {
+                detailsMc.compareState.noPremTitleLbl.x -= 20;
+                detailsMc.compareState.premTitleLbl.x += 15;
+                detailsMc.compareState.creditsLbl.x -= 20;
+                detailsMc.compareState.premCreditsLbl.x += 15;
+                detailsMc.compareState.xpLbl.x -= 20;
+                detailsMc.compareState.premXpLbl.x += 15;
+            }
+
             // add new fields
             shotsTitle = createTextField(FIELD_POS_TITLE, 1);
             shotsCount = createTextField(FIELD_POS_NON_PREM, 1);
@@ -308,6 +318,15 @@ package com.xvm.lobby.ui.battleresults
 
         private function updateValues():void
         {
+            if (detailsMc.compareState.noPremTitleLbl.defaultTextFormat.leading == 2)
+            {
+                var textFormat:TextFormat = detailsMc.compareState.noPremTitleLbl.defaultTextFormat;
+                textFormat.leading = -4;
+                textFormat.align = TEXT_ALIGN.CENTER;
+                detailsMc.compareState.noPremTitleLbl.setTextFormat(textFormat);
+                detailsMc.compareState.premTitleLbl.setTextFormat(textFormat);
+            }
+
             if (Config.config.battleResults.showTotals)
             {
                 showTotals();
@@ -335,19 +354,6 @@ package com.xvm.lobby.ui.battleresults
                     showNetIncome();
                 }
             }
-        }
-
-        private function showExtendedInfo():void
-        {
-            shotsTitle.htmlText = formatText(Locale.get("Hit percent"), "#C9C9B6");
-            shotsCount.htmlText = formatText(_xdata.hits + "/" + _xdata.shots, "#C9C9B6", TextFormatAlign.RIGHT);
-
-            var hitsRatio:Number = (_xdata.shots <= 0) ? 0 : (_xdata.hits / _xdata.shots) * 100;
-            shotsPercent.htmlText = formatText(App.utils.locale.float(hitsRatio) + "%", "#C9C9B6", TextFormatAlign.RIGHT);
-
-            damageAssistedTitle.htmlText = formatText(Locale.get("Damage (assisted / own)"), "#C9C9B6");
-            damageAssistedValue.htmlText = formatText(App.utils.locale.integer(_xdata.damageAssisted), "#408CCF", TextFormatAlign.RIGHT);
-            damageValue.htmlText = formatText(App.utils.locale.integer(_xdata.damageDealt), "#FFC133", TextFormatAlign.RIGHT);
         }
 
         private function showTotals():void
@@ -401,6 +407,19 @@ package com.xvm.lobby.ui.battleresults
             tooltipData = new IconEfficiencyTooltipData();
             //tooltipData.setCritValues(_xdata.criticalDevices, _xdata.destroyedTankmen, _xdata.destroyedDevices, _xdata.critsCount);
             tooltips[BATTLE_EFFICIENCY_TYPES.CRITS] = tooltipData;
+        }
+
+        private function showExtendedInfo():void
+        {
+            shotsTitle.htmlText = formatText(Locale.get("Hit percent"), "#C9C9B6");
+            shotsCount.htmlText = formatText(_xdata.hits + "/" + _xdata.shots, "#C9C9B6", TextFormatAlign.RIGHT);
+
+            var hitsRatio:Number = (_xdata.shots <= 0) ? 0 : (_xdata.hits / _xdata.shots) * 100;
+            shotsPercent.htmlText = formatText(App.utils.locale.float(hitsRatio) + "%", "#C9C9B6", TextFormatAlign.RIGHT);
+
+            damageAssistedTitle.htmlText = formatText(Locale.get("Damage (assisted / own)"), "#C9C9B6");
+            damageAssistedValue.htmlText = formatText(App.utils.locale.integer(_xdata.damageAssisted), "#408CCF", TextFormatAlign.RIGHT);
+            damageValue.htmlText = formatText(App.utils.locale.integer(_xdata.damageDealt), "#FFC133", TextFormatAlign.RIGHT);
         }
 
         private function showTotalExperience():void
