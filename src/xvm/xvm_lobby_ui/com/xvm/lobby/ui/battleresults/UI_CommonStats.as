@@ -146,8 +146,8 @@ package com.xvm.lobby.ui.battleresults
                 for (var i:String in personal.details)
                 {
                     var creditsData:Vector.<DetailedStatsItemVO> = personal.creditsData[i] as Vector.<DetailedStatsItemVO>;
-                    _xdataList.data[i].creditsNoPremTotalStr = creditsData[creditsData.length - 1]["col1"];
-                    _xdataList.data[i].creditsPremTotalStr = creditsData[creditsData.length - 1]["col3"];
+                    _xdataList.data[i].creditsNoPremTotalStr = creditsData[creditsData.length - 3]["col1"];
+                    _xdataList.data[i].creditsPremTotalStr = creditsData[creditsData.length - 3]["col3"];
                     for each (var detail:Object in personal.details[i])
                     {
                         if (armorNames == null)
