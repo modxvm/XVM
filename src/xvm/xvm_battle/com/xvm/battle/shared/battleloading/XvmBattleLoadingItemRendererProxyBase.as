@@ -52,7 +52,7 @@ package com.xvm.battle.shared.battleloading
         protected var cfg:CBattleLoading;
 
         // PRIVATE VARS
-        private var _invaludateFunc:Function;
+        private var _invalidateFunc:Function;
 
         private var _ui:BasePlayerItemRenderer;
         private var _uiType:String;
@@ -113,9 +113,13 @@ package com.xvm.battle.shared.battleloading
         // CTOR
 
         public function XvmBattleLoadingItemRendererProxyBase(ui:BasePlayerItemRenderer, uiType:String,
-            container:BaseRendererContainer, position:int, isEnemy:Boolean, selfBg:BattleAtlasSprite, invaludateFunc:Function)
+            container:BaseRendererContainer, position:int, isEnemy:Boolean, selfBg:BattleAtlasSprite, invalidateFunc:Function)
         {
-            _invaludateFunc = invaludateFunc;
+            _ui = ui;
+            _uiType = uiType;
+            _isEnemy = isEnemy;
+
+            _invalidateFunc = invalidateFunc;
 
             if (uiType == XvmBattleLoadingItemRendererProxyBase.UI_TYPE_TABLE)
             {
@@ -126,6 +130,7 @@ package com.xvm.battle.shared.battleloading
                 _defaults = _isEnemy ? XvmItemRendererDefaults.DEFAULTS_RIGHT_TIP : XvmItemRendererDefaults.DEFAULTS_LEFT_TIP;
             }
 
+            _selfBg = selfBg;
             if (_isEnemy)
             {
                 _vehicleField = container.vehicleFieldsEnemy[position];
@@ -152,14 +157,8 @@ package com.xvm.battle.shared.battleloading
                 _backTester = container.backTestersAlly[position];
                 _badgeIcon = container.badgesAlly[position];
             }
-            _selfBg = selfBg;
-
-            _ui = ui;
-            _uiType = uiType;
-            _isEnemy = isEnemy;
 
             // align fields
-
             nameField.y -= 3;
             nameField.scaleX = nameField.scaleY = 1;
             nameField.height = _FIELD_HEIGHT;
@@ -439,14 +438,14 @@ package com.xvm.battle.shared.battleloading
             {
                 if (_model.vehicleID == e.vehicleID)
                 {
-                    _invaludateFunc(_INVALIDATE_PLAYER_STATE);
+                    _invalidateFunc(_INVALIDATE_PLAYER_STATE);
                 }
             }
         }
 
         private function _onAtlasLoaded(e:Event):void
         {
-            _invaludateFunc(_INVALIDATE_PLAYER_STATE);
+            _invalidateFunc(_INVALIDATE_PLAYER_STATE);
         }
 
         private function _onClanIconLoaded(vehicleID:Number, playerName:String):void
@@ -455,7 +454,7 @@ package com.xvm.battle.shared.battleloading
             {
                 if (_model.vehicleID == vehicleID)
                 {
-                    _invaludateFunc(_INVALIDATE_PLAYER_STATE);
+                    _invalidateFunc(_INVALIDATE_PLAYER_STATE);
                 }
             }
         }
@@ -463,7 +462,7 @@ package com.xvm.battle.shared.battleloading
         private function _onStatLoaded():void
         {
             //Logger.add("onStatLoaded: " + _model.playerName);
-            _invaludateFunc(_INVALIDATE_PLAYER_STATE);
+            _invalidateFunc(_INVALIDATE_PLAYER_STATE);
         }
 
         private function _getNameFieldWidth():int

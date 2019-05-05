@@ -15,10 +15,10 @@ package com.xvm.battle.ranked.battleloading
         private var _rankIcon:BattleAtlasSprite;
 
         public function XvmRankedBattleLoadingItemRendererProxy(ui:BasePlayerItemRenderer, uiType:String,
-            container:BaseRendererContainer, position:int, isEnemy:Boolean, selfBg:BattleAtlasSprite, invaludateFunc:Function)
+            container:BaseRendererContainer, position:int, isEnemy:Boolean, selfBg:BattleAtlasSprite, invalidateFunc:Function)
         {
             _rankIcon = (ui as RankedPlayerItemRenderer).xfw_rankIcon;
-            super(ui, uiType, container, position, isEnemy, selfBg, invaludateFunc);
+            super(ui, uiType, container, position, isEnemy, selfBg, invalidateFunc);
         }
 
         // OVERRIDES

@@ -15,7 +15,7 @@ package com.xvm.battle.classic.battleloading
         private var _squad:BattleAtlasSprite;
 
         public function XvmRandomBattleLoadingItemRendererProxy(ui:BasePlayerItemRenderer, uiType:String,
-            container:BaseRendererContainer, position:int, isEnemy:Boolean, selfBg:BattleAtlasSprite, invaludateFunc:Function)
+            container:BaseRendererContainer, position:int, isEnemy:Boolean, selfBg:BattleAtlasSprite, invalidateFunc:Function)
         {
             var randomContainer:RandomRendererContainer = container as RandomRendererContainer;
             if (isEnemy)
@@ -27,7 +27,7 @@ package com.xvm.battle.classic.battleloading
                 _squad = randomContainer.squadsAlly[position];
             }
 
-            super(ui, uiType, container, position, isEnemy, selfBg, invaludateFunc);
+            super(ui, uiType, container, position, isEnemy, selfBg, invalidateFunc);
         }
 
         // OVERRIDES
