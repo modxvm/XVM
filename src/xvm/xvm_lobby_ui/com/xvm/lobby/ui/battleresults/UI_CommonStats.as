@@ -33,11 +33,12 @@ package com.xvm.lobby.ui.battleresults
 
     public dynamic class UI_CommonStats extends CommonStats
     {
-        private const FIELD_POS_TITLE:String = "fieldPosTitle";
-        private const FIELD_POS_NON_PREM:String = "fieldPosNonPrem";
-        private const FIELD_POS_PREM:String = "fieldPosPrem";
-        private const CSS_FIELD_CLASS:String = "xvm_bsField";
-        private const XP_IMG_TXT:String = " <IMG SRC='img://gui/maps/icons/library/XpIcon-1.png' width='16' height='16' vspace='-2'/>";
+        private static const FIELD_POS_TITLE:String = "fieldPosTitle";
+        private static const FIELD_POS_NON_PREM:String = "fieldPosNonPrem";
+        private static const FIELD_POS_PREM:String = "fieldPosPrem";
+        private static const CSS_FIELD_CLASS:String = "xvm_bsField";
+        private static const XP_IMG_TXT:String = " <IMG SRC='img://gui/maps/icons/library/XpIcon-1.png' width='16' height='16' vspace='-2'/>";
+        private static const HEADER_INVALID:String = "headerInvalid";
 
         private var _fieldsInitialized:Boolean = false;
         private var _data:BattleResultsVO = null;
@@ -125,6 +126,16 @@ package com.xvm.lobby.ui.battleresults
                     updateValues();
                 }
             }
+            if (_fieldsInitialized && Config.config.battleResults.showTotals && isInvalid(HEADER_INVALID))
+            {
+                stunTotalField.visible =
+                    spottedTotalField.visible =
+                    damageAssistedTotalField.visible =
+                    armorTotalField.visible =
+                    critsTotalField.visible =
+                    damageTotalField.visible =
+                    killsTotalField.visible = efficiencyHeader.visible;
+            }
         }
 
         override public function update(data:Object):void
@@ -184,14 +195,6 @@ package com.xvm.lobby.ui.battleresults
                 }
 
                 hideQuestsShadows();
-
-                efficiencyHeader.summArmorTF.visible =
-                    efficiencyHeader.summAssistTF.visible =
-                    efficiencyHeader.summCritsTF.visible =
-                    efficiencyHeader.summDamageTF.visible =
-                    efficiencyHeader.summKillTF.visible =
-                    efficiencyHeader.summSpottedTF.visible =
-                    efficiencyHeader.summStunTF.visible = !Config.config.battleResults.showTotals;
 
                 updateValues();
             }
@@ -312,30 +315,44 @@ package com.xvm.lobby.ui.battleresults
         {
             try
             {
-                var x:int = efficiencyTitle.x + 236;
-                var y:int = efficiencyTitle.y + 34;
-                var w:Number = 33;
+                efficiencyHeader.summArmorTF.visible =
+                    efficiencyHeader.summAssistTF.visible =
+                    efficiencyHeader.summCritsTF.visible =
+                    efficiencyHeader.summDamageTF.visible =
+                    efficiencyHeader.summKillTF.visible =
+                    efficiencyHeader.summSpottedTF.visible =
+                    efficiencyHeader.summStunTF.visible = false;
+
+                var x:int = efficiencyHeader.x + 5;
+                var y:int = efficiencyHeader.y - 2;
 
                 // stun
-                stunTotalField = addChild(createTotalItem( { x: x, y: y, kind: BATTLE_EFFICIENCY_TYPES.STUN })) as EfficiencyIconRenderer;
+                stunTotalField = addChild(createTotalItem(
+                    { x: x + efficiencyHeader.summStunTF.x - 1, y: y, kind: BATTLE_EFFICIENCY_TYPES.STUN })) as EfficiencyIconRenderer;
 
                 // spotted
-                spottedTotalField = addChild(createTotalItem( { x: x + w * 1, y: y, kind: BATTLE_EFFICIENCY_TYPES.DETECTION })) as EfficiencyIconRenderer;
+                spottedTotalField = addChild(createTotalItem(
+                    { x: x + efficiencyHeader.summSpottedTF.x, y: y, kind: BATTLE_EFFICIENCY_TYPES.DETECTION })) as EfficiencyIconRenderer;
 
                 // damage assisted (radio/tracks)
-                damageAssistedTotalField = addChild(createTotalItem( { x: x + w * 2, y: y, kind: BATTLE_EFFICIENCY_TYPES.ASSIST })) as EfficiencyIconRenderer;
+                damageAssistedTotalField = addChild(createTotalItem(
+                    { x: x + efficiencyHeader.summAssistTF.x, y: y, kind: BATTLE_EFFICIENCY_TYPES.ASSIST })) as EfficiencyIconRenderer;
 
                 // armor
-                armorTotalField = addChild(createTotalItem( { x: x + w * 3, y: y, kind: BATTLE_EFFICIENCY_TYPES.ARMOR })) as EfficiencyIconRenderer;
+                armorTotalField = addChild(createTotalItem(
+                    { x: x + efficiencyHeader.summArmorTF.x + 1, y: y, kind: BATTLE_EFFICIENCY_TYPES.ARMOR })) as EfficiencyIconRenderer;
 
                 // crits
-                critsTotalField = addChild(createTotalItem( { x: x + w * 4, y: y, kind: BATTLE_EFFICIENCY_TYPES.CRITS })) as EfficiencyIconRenderer;
+                critsTotalField = addChild(createTotalItem(
+                    { x: x + efficiencyHeader.summCritsTF.x, y: y, kind: BATTLE_EFFICIENCY_TYPES.CRITS })) as EfficiencyIconRenderer;
 
                 // piercings
-                damageTotalField = addChild(createTotalItem( { x: x + w * 5 + 1, y: y, kind: BATTLE_EFFICIENCY_TYPES.DAMAGE })) as EfficiencyIconRenderer;
+                damageTotalField = addChild(createTotalItem(
+                    { x: x + efficiencyHeader.summDamageTF.x, y: y, kind: BATTLE_EFFICIENCY_TYPES.DAMAGE })) as EfficiencyIconRenderer;
 
                 // kills
-                killsTotalField = addChild(createTotalItem( { x: x + w * 6 + 1, y: y, kind: BATTLE_EFFICIENCY_TYPES.DESTRUCTION } )) as EfficiencyIconRenderer;
+                killsTotalField = addChild(createTotalItem(
+                    { x: x + efficiencyHeader.summKillTF.x, y: y, kind: BATTLE_EFFICIENCY_TYPES.DESTRUCTION } )) as EfficiencyIconRenderer;
             }
             catch (ex:Error)
             {
