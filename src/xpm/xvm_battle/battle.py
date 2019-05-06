@@ -45,8 +45,12 @@ import shared
 import xmqp
 import xmqp_events
 
+#####################################################################
+# constants
 
-NOT_SUPPORT_BATTLE_TYPE = [constants.ARENA_GUI_TYPE.EPIC_BATTLE, constants.ARENA_GUI_TYPE.EVENT_BATTLES]
+NOT_SUPPORT_BATTLE_TYPE = [constants.ARENA_GUI_TYPE.TUTORIAL,\
+                           constants.ARENA_GUI_TYPE.EVENT_BATTLES,\
+                           constants.ARENA_GUI_TYPE.BOOTCAMP]
 
 #####################################################################
 # initialization/finalization
