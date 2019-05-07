@@ -3,7 +3,11 @@
   * World of Tanks 1.5.0.0
 
   [БОЙ]
-  * адаптация для типа боя "Линия Фронта"
+  * адаптация для режима боя "Линия Фронта"
+  * обновлены секции:
+      "battleLabelsTemplates"/"hitLogHeader"
+      "battleLabelsTemplates"/"hitLogBody"
+      "battleLabelsTemplates"/"totalEfficiency"
 
   [КАРУСЕЛЬ]
   * удалены макросы: {{v.rankCount}}, {{v.rankSteps}}, {{v.rankStepsTotal}}

@@ -3,7 +3,11 @@
   * World of Tanks 1.5.0.0
 
   [BATTLE]
-  * adaptation to battle type "Frontline"
+  * adaptation for the battle mode "Frontline"
+  * updated sections:
+      "battleLabelsTemplates"/"hitLogHeader"
+      "battleLabelsTemplates"/"hitLogBody"
+      "battleLabelsTemplates"/"totalEfficiency"
 
   [CAROUSEL]
   * removed macros: {{v.rankCount}}, {{v.rankSteps}}, {{v.rankStepsTotal}}
