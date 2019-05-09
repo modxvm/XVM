@@ -128,9 +128,6 @@ package com.xvm.types.dossier
                     marksOnGun = isNaN(vdossier.marksOnGun) || level < 5 ? null : Utils.getMarksOnGunText(vdossier.marksOnGun);
                     damageRating = level < 5 ? NaN : vdossier.damageRating;
                     c_damageRating = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_DAMAGERATING, damageRating, NaN, "#");
-                    rankCount = isNaN(vdossier.rankCount) || vdossier.rankCount == 0 ? NaN : vdossier.rankCount;
-                    rankSteps = isNaN(vdossier.rankSteps) || vdossier.rankSteps == 0 ? NaN : vdossier.rankSteps;
-                    rankStepsTotal = isNaN(vdossier.rankStepsTotal) || vdossier.rankStepsTotal == 0 ? NaN : vdossier.rankStepsTotal;
                 }
             }
         }
@@ -197,9 +194,6 @@ package com.xvm.types.dossier
         public var marksOnGun:String;
         public var damageRating:Number;
         public var c_damageRating:String;
-        public var rankCount:Number;
-        public var rankSteps:Number;
-        public var rankStepsTotal:Number;
         public var rent:String;
         public var camouflageSummer:String;
         public var camouflageWinter:String;

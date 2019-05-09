@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 02.03.2019
+    // Last update: 03.05.2019
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -67,6 +67,7 @@
     "czech-Cz09_T_24":                       {"name": null, "short": null},
     "czech-Cz10_LT_vz38":                    {"name": null, "short": null},
     "czech-Cz11_V_8_H":                      {"name": null, "short": null},
+    "czech-Cz13_T_27":                       {"name": null, "short": null},
     "france-F01_RenaultFT":                  {"name": null, "short": null},
     "france-F01_RenaultFT_bot":              {"name": null, "short": null},
     "france-F02_D1":                         {"name": null, "short": null},
@@ -146,6 +147,7 @@
     "france-F82_AMX_M4_Mle1949_Ter":         {"name": null, "short": null},
     "france-F83_AMX_M4_Mle1949_Bis":         {"name": null, "short": null},
     "france-F84_Somua_SM":                   {"name": null, "short": null},
+    "france-F85_M4A1_FL10":                  {"name": null, "short": null},
     "france-F87_Batignolles-Chatillon_12t":  {"name": null, "short": null},
     "france-F88_AMX_13_105":                 {"name": null, "short": null},
     "france-F89_Canon_dassaut_de_105":       {"name": null, "short": null},
@@ -386,6 +388,9 @@
     "sweden-S23_Strv_81_sabaton":            {"name": null, "short": null},
     "sweden-S25_EMIL_51":                    {"name": null, "short": null},
     "sweden-S26_Lansen_C":                   {"name": null, "short": null},
+    "sweden-S27_UDES_16":                    {"name": null, "short": null},
+    "sweden-S28_UDES_15_16":                 {"name": null, "short": null},
+    "sweden-S29_UDES_14_5":                  {"name": null, "short": null},
     "uk-GB01_Medium_Mark_I":                 {"name": null, "short": null},
     "uk-GB01_Medium_Mark_I_bot":             {"name": null, "short": null},
     "uk-GB03_Cruiser_Mk_I":                  {"name": null, "short": null},
@@ -509,6 +514,7 @@
     "usa-A120_M48A5_IGR":                    {"name": null, "short": null},
     "usa-A121_M26_Cologne":                  {"name": null, "short": null},
     "usa-A122_TS-5":                         {"name": null, "short": null},
+    "usa-A123_T78":                          {"name": null, "short": null},
     "usa-A12_T32":                           {"name": null, "short": null},
     "usa-A13_T34_hvy":                       {"name": null, "short": null},
     "usa-A13_T34_hvy_BF":                    {"name": null, "short": null},

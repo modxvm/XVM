@@ -12,7 +12,7 @@ package com.xvm.battle.classic.fullStats
 
     public class FullStatsTableCtrlXvm extends FullStatsTableCtrl
     {
-        public function FullStatsTableCtrlXvm(table:FullStatsTable, meta:FullStatsMeta)
+        public function FullStatsTableCtrlXvm(table:FullStatsTable, meta:StatsBaseMeta)
         {
             super(table, meta);
         }

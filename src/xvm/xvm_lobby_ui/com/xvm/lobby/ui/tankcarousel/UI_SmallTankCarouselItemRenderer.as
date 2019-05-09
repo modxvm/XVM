@@ -31,6 +31,7 @@ package com.xvm.lobby.ui.tankcarousel
             super();
             try
             {
+                preventAutosizing = false;
                 _helper = new TankCarouselItemRendererHelper(this, Config.config.hangar.carousel.small, DEFAULT_RENDERER_WIDTH, DEFAULT_RENDERER_HEIGHT);
             }
             catch (ex:Error)

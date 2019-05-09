@@ -26,7 +26,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 02.03.2019
+    # Last update: 03.05.2019
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -89,6 +89,7 @@ _data = {
     "czech:Cz09_T_24":                       'skT24',
     "czech:Cz10_LT_vz38":                    'vz.38',
     "czech:Cz11_V_8_H":                      'vz.39',
+    "czech:Cz13_T_27":                       'skT27',
     "france:F01_RenaultFT":                  'FT',
     "france:F01_RenaultFT_bot":              'FT',
     "france:F02_D1":                         'D1',
@@ -168,6 +169,7 @@ _data = {
     "france:F82_AMX_M4_Mle1949_Ter":         'amx4·54',
     "france:F83_AMX_M4_Mle1949_Bis":         'amx4·51',
     "france:F84_Somua_SM":                   'Som·SM',
+    "france:F85_M4A1_FL10":                  'm4a1·fl10',
     "france:F87_Batignolles-Chatillon_12t":  'BChat12t',
     "france:F88_AMX_13_105":                 '13·105',
     "france:F89_Canon_dassaut_de_105":       'amx·cda',
@@ -408,6 +410,9 @@ _data = {
     "sweden:S23_Strv_81_sabaton":            'Pr.Vict',
     "sweden:S25_EMIL_51":                    'emil·1951',
     "sweden:S26_Lansen_C":                   'lans·C',
+    "sweden:S27_UDES_16":                    'udes·16',
+    "sweden:S28_UDES_15_16":                 'udes·15/16',
+    "sweden:S29_UDES_14_5":                  'udes·14·5',
     "uk:GB01_Medium_Mark_I":                 'Med1',
     "uk:GB01_Medium_Mark_I_bot":             'Med1',
     "uk:GB03_Cruiser_Mk_I":                  'Crus1',
@@ -531,6 +536,7 @@ _data = {
     "usa:A120_M48A5_IGR":                    'M48Pt',
     "usa:A121_M26_Cologne":                  'Eagle7',
     "usa:A122_TS-5":                         'TS-5',
+    "usa:A123_T78":                          'T78',
     "usa:A12_T32":                           'T32',
     "usa:A13_T34_hvy":                       'T34',
     "usa:A13_T34_hvy_BF":                    'T34bf',

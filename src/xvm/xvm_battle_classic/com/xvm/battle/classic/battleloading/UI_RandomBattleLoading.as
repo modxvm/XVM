@@ -6,20 +6,19 @@ package com.xvm.battle.classic.battleloading
 {
     import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.battle.*;
+    import com.xvm.battle.BattleGlobalData;
     import com.xvm.battle.shared.battleloading.Clock;
     import com.xvm.battle.shared.battleloading.XvmBattleLoadingItemRendererProxyBase;
-    import com.xvm.types.cfg.*;
-    import flash.events.*;
-    import net.wg.data.constants.generated.*;
-    import net.wg.gui.battle.battleloading.*;
-    import net.wg.gui.battle.battleloading.renderers.*;
-    import net.wg.gui.battle.battleloading.vo.*;
-    import net.wg.gui.components.containers.*;
-    import net.wg.infrastructure.events.*;
-    import net.wg.infrastructure.managers.impl.*;
+    import com.xvm.types.cfg.CBattleLoading;
+    import flash.events.Event;
+    import net.wg.gui.battle.battleloading.BattleLoadingForm;
+    import net.wg.gui.battle.battleloading.renderers.BasePlayerItemRenderer;
+    import net.wg.gui.battle.battleloading.vo.VisualTipInfoVO;
+    import net.wg.gui.components.containers.Atlas;
+    import net.wg.infrastructure.events.AtlasEvent;
+    import net.wg.infrastructure.managers.impl.AtlasManager;
 
-    public class UI_BattleLoading extends BattleLoadingUI
+    public class UI_RandomBattleLoading extends BattleLoadingUI
     {
         private var cfg:CBattleLoading;
 
@@ -31,9 +30,9 @@ package com.xvm.battle.classic.battleloading
         private var battleLoadingForm:BattleLoadingForm = null;
         private var isTipsForm:Boolean = false;
 
-        public function UI_BattleLoading()
+        public function UI_RandomBattleLoading()
         {
-            //Logger.add("UI_BattleLoading");
+            //Logger.add("UI_RandomBattleLoading");
             super();
 
             //Logger.addObject(form);
@@ -151,7 +150,7 @@ package com.xvm.battle.classic.battleloading
             }
             battleLoadingForm.xfw_enemyRenderers.splice(0, battleLoadingForm.xfw_enemyRenderers.length);
 
-            var cls:Class = isTipsForm ? XvmTipPlayerItemRenderer : XvmTablePlayerItemRenderer;
+            var cls:Class = isTipsForm ? XvmRandomTipPlayerItemRenderer : XvmRandomTablePlayerItemRenderer;
             for (var i:int = 0; i < 15; ++i)
             {
                 battleLoadingForm.xfw_allyRenderers.push(new cls(battleLoadingForm.xfw_renderersContainer, i, false));

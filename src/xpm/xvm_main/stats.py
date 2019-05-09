@@ -45,7 +45,6 @@ import imghdr
 import BigWorld
 from helpers import dependency
 from skeletons.gui.battle_session import IBattleSessionProvider
-from gui.app_loader import g_appLoader
 from gui.battle_control import avatar_getter
 from items.vehicles import VEHICLE_CLASS_TAGS
 

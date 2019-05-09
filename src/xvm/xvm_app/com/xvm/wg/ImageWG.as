@@ -12,28 +12,29 @@ package com.xvm.wg
     import flash.events.Event;
     import flash.events.IOErrorEvent;
     import flash.display.BitmapData;
+    //import org.idmedia.as3commons.util.StringUtils;
 
     public class ImageWG extends Sprite implements IImage
     {
 
-        protected var _bitmap:Bitmap = null;
+        /*private*/ protected var _bitmap:Bitmap = null;
 
-        protected var _imgData:IImageData = null;
+        /*private*/ protected var _imgData:IImageData = null;
 
         private var _source:String = "";
 
         private var _sourceAlt:String = "";
 
-        protected var _loadFailed:Boolean = false;
+        /*private*/ protected var _loadFailed:Boolean = false;
 
         private var _mgr:IImageManager = null;
 
-        private var _useWebCache:Boolean = true;
+        private var _cacheType:int = 2;
 
         public function ImageWG()
         {
             super();
-            this._mgr = ImageManagerWG.imageManager;
+            this._mgr = /*App*/ImageManagerWG.imageMgr;
             this._bitmap = new Bitmap();
             addChild(this._bitmap);
         }
@@ -41,6 +42,11 @@ package com.xvm.wg
         public final function dispose() : void
         {
             this.onDispose();
+        }
+
+        public function readjustSize() : void
+        {
+            scaleX = scaleY = this._bitmap.scaleX = this._bitmap.scaleY = 1;
         }
 
         protected function onDispose() : void
@@ -59,12 +65,12 @@ package com.xvm.wg
                 {
                     this.removeImgDataListeners();
                 }
+                this._imgData.removeFrom(this);
                 this._imgData = null;
-                this.bitmapData = null;
             }
         }
 
-        protected function setImgData(param1:IImageData) : void
+        /*private*/ protected function setImgData(param1:IImageData) : void
         {
             this._imgData = param1;
             if(this._imgData.ready)
@@ -103,7 +109,7 @@ package com.xvm.wg
                 this.removeImgData();
                 if(this._source)
                 {
-                    this.setImgData(this._mgr.getImageData(this._source,this._useWebCache));
+                    this.setImgData(this._mgr.getImageData(this._source,this._cacheType));
                 }
             }
         }
@@ -123,7 +129,7 @@ package com.xvm.wg
                     this.removeImgData();
                     if(this._sourceAlt)
                     {
-                        this.setImgData(this._mgr.getImageData(this._sourceAlt,this._useWebCache));
+                        this.setImgData(this._mgr.getImageData(this._sourceAlt,this._cacheType));
                     }
                 }
             }
@@ -136,29 +142,60 @@ package com.xvm.wg
             dispatchEvent(new Event(Event.CHANGE));
         }
 
-        public function set useWebCache(param1:Boolean) : void
+        public function get ready() : Boolean
         {
-            this._useWebCache = param1;
+            return this._bitmap.bitmapData != null;
         }
 
-        protected function onImgDataCompleteHandler(param1:Event) : void
+        public function get cacheType() : int
+        {
+            return this._cacheType;
+        }
+
+        public function set cacheType(param1:int) : void
+        {
+            this._cacheType = param1;
+        }
+
+        public function get bitmapWidth() : int
+        {
+            return this.ready?this._bitmap.bitmapData.width:0;
+        }
+
+        public function get bitmapHeight() : int
+        {
+            return this.ready?this._bitmap.bitmapData.height:0;
+        }
+
+        public function get smoothing() : Boolean
+        {
+            return this._bitmap.smoothing;
+        }
+
+        public function set smoothing(param1:Boolean) : void
+        {
+            this._bitmap.smoothing = param1;
+        }
+
+        /*private*/ protected function onImgDataCompleteHandler(param1:Event) : void
         {
             this._loadFailed = false;
             this.removeImgDataListeners();
             this._imgData.showTo(this);
         }
 
-        protected function onImgDataIoErrorHandler(param1:IOErrorEvent) : void
+        /*private*/ protected function onImgDataIoErrorHandler(param1:IOErrorEvent) : void
         {
             this.removeImgDataListeners();
-            if(!this._loadFailed && this._sourceAlt != null && this._sourceAlt.length > 0)
+            if(!this._loadFailed && /*StringUtils.isNotEmpty(this._sourceAlt)*/this._sourceAlt != null && this._sourceAlt.length > 0)
             {
                 this._loadFailed = true;
-                this.setImgData(this._mgr.getImageData(this._sourceAlt,this._useWebCache));
+                dispatchEvent(param1);
+                this.setImgData(this._mgr.getImageData(this._sourceAlt,this._cacheType));
             }
             else
             {
-                //orig: dispatchEvent(new Event(Event.CHANGE));
+                /*dispatchEvent(new Event(Event.CHANGE));*/
                 this._loadFailed = true;
             }
         }

@@ -4,10 +4,10 @@
  */
 package com.xvm.battle.shared.battleloading
 {
-    import flash.display.*;
-    import flash.text.*;
-    import net.wg.gui.battle.components.*;
-    import net.wg.gui.components.icons.*;
+    import flash.text.TextField;
+    import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
+    import net.wg.gui.battle.components.BattleAtlasSprite;
+    import net.wg.gui.components.icons.PlayerActionMarker;
 
     public interface IXvmBattleLoadingItemRendererBase
     {
@@ -23,12 +23,6 @@ package com.xvm.battle.shared.battleloading
         function get selfBg():BattleAtlasSprite;
         function get icoIGR():BattleAtlasSprite;
 
-        function setData(data:Object):void;
-
-        function invalidate2(param1:uint = uint.MAX_VALUE):void;
-
-        function addChild(child:DisplayObject):DisplayObject;
-        function addChildAt(child:DisplayObject, index:int):DisplayObject;
-        function getChildIndex(child:DisplayObject):int;
+        function setData(data:DAAPIVehicleInfoVO):void;
     }
 }

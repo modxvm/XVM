@@ -1,4 +1,18 @@
-﻿XVM-7.8.7:
+﻿XVM-7.9.0:
+  [ОБЩЕЕ]
+  * World of Tanks 1.5.0.0
+
+  [БОЙ]
+  * адаптация для режима боя "Линия Фронта"
+  * обновлены секции:
+      "battleLabelsTemplates"/"hitLogHeader"
+      "battleLabelsTemplates"/"hitLogBody"
+      "battleLabelsTemplates"/"totalEfficiency"
+
+  [КАРУСЕЛЬ]
+  * удалены макросы: {{v.rankCount}}, {{v.rankSteps}}, {{v.rankStepsTotal}}
+
+XVM-7.8.7:
   [ОБЩЕЕ]
   * World of Tanks 1.4.1.2
 

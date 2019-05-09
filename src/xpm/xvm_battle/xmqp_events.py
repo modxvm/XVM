@@ -4,8 +4,8 @@ import traceback
 import simplejson
 
 from gui.shared import g_eventBus, events
-from gui.app_loader import g_appLoader
-from gui.app_loader.settings import GUI_GLOBAL_SPACE_ID
+from helpers import dependency
+from skeletons.gui.app_loader import IAppLoader, GuiGlobalSpaceID
 
 from xfw import *
 from xfw_actionscript.python import *
@@ -132,7 +132,7 @@ def _DestroyTimersPanel__setFireInVehicle(self, isInFire):
 
 @registerEvent(DestroyTimersPanel, '_DestroyTimersPanel__showDestroyTimer')
 def _DestroyTimersPanel__showDestroyTimer(self, value):
-    if xmqp.is_active() and g_appLoader.getSpaceID() == GUI_GLOBAL_SPACE_ID.BATTLE:
+    if xmqp.is_active() and dependency.instance(IAppLoader).getSpaceID() == GuiGlobalSpaceID.BATTLE:
         if value.needToCloseAll():
             xmqp.call({
                 'event':EVENTS.XMQP_VEHICLE_TIMER,
@@ -157,7 +157,7 @@ def _DestroyTimersPanel__showDestroyTimer(self, value):
 
 @registerEvent(DestroyTimersPanel, '_showDeathZoneTimer')
 def _DestroyTimersPanel_showDeathZoneTimer(self, value):
-    if xmqp.is_active() and g_appLoader.getSpaceID() == GUI_GLOBAL_SPACE_ID.BATTLE:
+    if xmqp.is_active() and dependency.instance(IAppLoader).getSpaceID() == GuiGlobalSpaceID.BATTLE:
         if value.needToCloseAll():
             xmqp.call({
                 'event':EVENTS.XMQP_DEATH_ZONE_TIMER,

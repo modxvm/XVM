@@ -6,18 +6,17 @@ package com.xvm.battle.ranked.battleloading
 {
     import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.battle.*;
+    import com.xvm.battle.BattleGlobalData;
     import com.xvm.battle.shared.battleloading.Clock;
     import com.xvm.battle.shared.battleloading.XvmBattleLoadingItemRendererProxyBase;
-    import com.xvm.types.cfg.*;
-    import flash.events.*;
-    import net.wg.data.constants.generated.*;
-    import net.wg.gui.battle.battleloading.*;
-    import net.wg.gui.battle.battleloading.renderers.*;
-    import net.wg.gui.battle.battleloading.vo.*;
-    import net.wg.gui.components.containers.*;
-    import net.wg.infrastructure.events.*;
-    import net.wg.infrastructure.managers.impl.*;
+    import com.xvm.types.cfg.CBattleLoading;
+    import flash.events.Event;
+    import net.wg.gui.battle.battleloading.BattleLoadingForm;
+    import net.wg.gui.battle.battleloading.renderers.BasePlayerItemRenderer;
+    import net.wg.gui.battle.battleloading.vo.VisualTipInfoVO;
+    import net.wg.gui.components.containers.Atlas;
+    import net.wg.infrastructure.events.AtlasEvent;
+    import net.wg.infrastructure.managers.impl.AtlasManager;
 
     public class UI_RankedBattleLoading extends RankedBattleLoadingUI
     {
@@ -164,7 +163,7 @@ package com.xvm.battle.ranked.battleloading
             }
             battleLoadingForm.xfw_enemyRenderers.splice(0, battleLoadingForm.xfw_enemyRenderers.length);
 
-            var cls:Class = battleLoadingForm.formBackgroundTable.visible ? XvmTablePlayerItemRenderer : XvmTipPlayerItemRenderer;
+            var cls:Class = battleLoadingForm.formBackgroundTable.visible ? XvmRankedTablePlayerItemRenderer : XvmRankedTipPlayerItemRenderer;
             for (var i:int = 0; i < 15; ++i)
             {
                 battleLoadingForm.xfw_allyRenderers.push(new cls(battleLoadingForm.xfw_renderersContainer, i, false));

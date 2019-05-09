@@ -73,8 +73,9 @@ package com.xvm.lobby.contacts
 
         private function editContactData(name:String, dbID:Number):Object
         {
+            const cls:String = "com.xvm.lobby.ui.contacts::UI_EditContactDataView";
             var data:ContactListMainInfo = new ContactListMainInfo(name, dbID);
-            IUpdatable(page.viewStack.show("com.xvm.lobby.ui.contacts::UI_EditContactDataView")).update(data);
+            IUpdatable(page.viewStack.show(cls, cls)).update(data);
             return null;
         }
     }

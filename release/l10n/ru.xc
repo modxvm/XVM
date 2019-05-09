@@ -85,7 +85,7 @@
 
     // BattleResults
     "Hit percent": "Процент попаданий",
-    "Damage (assisted / own)": "Урон (с вашей помощью / свой)",
+    "Damage (assisted / own)": "Урон (ассист / свой)",
     "BR_xpCrew": "экипажу",
 
     // TeamRenderers

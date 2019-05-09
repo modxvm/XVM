@@ -11,8 +11,8 @@
     "hitLogHeader": {
       "enabled": false,
       "updateEvent": "PY(ON_TOTAL_EFFICIENCY), ON_PANEL_MODE_CHANGED",
-      "x": "{{pp.mode=0?5|{{py:sum({{pp.widthLeft}},50)}}}}",
-      "y": "{{pp.mode=0?65|35}}",
+      "x": "{{pp.mode=0?{{battletype-key=epic_battle?240|5}}|{{py:sum({{pp.widthLeft}},50)}}}}",
+      "y": "{{pp.mode=0?{{battletype-key=epic_battle?55|65}}|35}}",
       "width": 300,
       "height": 22,
       "textFormat": { "color": "0xF4EFE8", "size": 15 },
@@ -23,8 +23,8 @@
     "hitLogBody": {
       "enabled": true,
       "updateEvent": "PY(ON_HIT_LOG), ON_PANEL_MODE_CHANGED",
-      "x": "{{pp.mode=0?5|{{py:sum({{pp.widthLeft}},{{py:xvm.hitLog.log.x}})}}}}",
-      "y": "{{pp.mode=0?90|{{py:xvm.hitLog.log.y}}}}",
+      "x": "{{pp.mode=0?{{battletype-key=epic_battle?240|5}}|{{py:sum({{pp.widthLeft}},{{py:xvm.hitLog.log.x}})}}}}",
+      "y": "{{pp.mode=0?{{battletype-key=epic_battle?80|90}}|{{py:xvm.hitLog.log.y}}}}",
       "width": 500,
       "height": 1000,
       "layer": "bottom",
@@ -46,8 +46,8 @@
     "totalEfficiency": {
       "enabled": true,
       "updateEvent": "PY(ON_TOTAL_EFFICIENCY), ON_PANEL_MODE_CHANGED",
-      "x": "{{pp.mode=0?5|{{py:sum({{pp.widthLeft}},50)}}}}",
-      "y": "{{pp.mode=0?65|35}}",
+      "x": "{{pp.mode=0?{{battletype-key=epic_battle?240|5}}|{{py:sum({{pp.widthLeft}},50)}}}}",
+      "y": "{{pp.mode=0?{{battletype-key=epic_battle?55|65}}|35}}",
       "width": "{{py:xvm.isStuns?350|260}}",
       "height": 22,
       "textFormat": { "size": 16 },

@@ -2,13 +2,13 @@
  * XVM: eXtended Visualization Mod for World of Tanks.
  * https://modxvm.com/
  */
-package com.xvm.battle.ranked.battleloading
+package com.xvm.battle.classic.battleloading
 {
     import com.xvm.battle.shared.battleloading.IXvmBattleLoadingItemRendererBase;
     import net.wg.gui.battle.components.BattleAtlasSprite;
 
-    public interface IXvmBattleLoadingItemRenderer extends IXvmBattleLoadingItemRendererBase
+    public interface IXvmRandomBattleLoadingItemRenderer extends IXvmBattleLoadingItemRendererBase
     {
-        function get rankIcon():BattleAtlasSprite;
+        function get squad():BattleAtlasSprite;
     }
 }

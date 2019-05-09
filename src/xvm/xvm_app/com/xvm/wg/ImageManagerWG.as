@@ -4,6 +4,7 @@ package com.xvm.wg
     import net.wg.infrastructure.managers.IImageManager;
     import flash.utils.Dictionary;
     import net.wg.infrastructure.managers.ILoaderManager;
+    import net.wg.data.constants.ImageCacheTypes;
     import flash.events.Event;
     import flash.events.IOErrorEvent;
     import net.wg.infrastructure.events.LoaderEvent;
@@ -13,14 +14,14 @@ package com.xvm.wg
     public class ImageManagerWG extends ImageManagerMetaWG implements IImageManager
     {
         // <xvm>
-        private static var _imageManager:IImageManager = null;
-        public static function get imageManager():IImageManager
+        private static var _imageMgr:IImageManager = null;
+        public static function get imageMgr():IImageManager
         {
-            if (!_imageManager)
+            if (!_imageMgr)
             {
-                _imageManager = App.imageMgr || new ImageManagerWG();
+                _imageMgr = App.imageMgr || new ImageManagerWG();
             }
-            return _imageManager;
+            return _imageMgr;
         }
 
         private static const MAX_CACHE_SIZE:int = 8 * 1024 * 1024; // 8 MB // 8 MB default in GUI_SETTINGS
@@ -37,7 +38,7 @@ package com.xvm.wg
 
         private var _loaderMgr:ILoaderManager = null;
 
-        private var _cacheSize:int = 0;
+        private var _cacheSize:uint = 0;
 
         private var _maxCacheSize:int = 0;
 
@@ -61,29 +62,28 @@ package com.xvm.wg
 
         override protected function loadImages(param1:Array) : void
         {
-            var _loc4_:String = null;
-            var _loc2_:* = true;
-            var _loc3_:ImageData = null;
-            for each(_loc4_ in param1)
+            var _loc3_:String = null;
+            var _loc2_:ImageData = null;
+            for each(_loc3_ in param1)
             {
-                if(_loc4_ in this._webCache)
+                if(this._webCache.hasOwnProperty(_loc3_))
                 {
-                    _loc3_ = ImageData(this._webCache[_loc4_]);
-                    if(!_loc3_.isLockData())
+                    _loc2_ = ImageData(this._webCache[_loc3_]);
+                    if(!_loc2_.isLockData())
                     {
-                        if(!_loc3_.lockData())
+                        if(!_loc2_.lockData())
                         {
-                            _loc3_.dispose();
-                            _loc3_ = new ImageData(_loc4_,_loc2_);
+                            _loc2_.dispose();
+                            _loc2_ = new ImageData(_loc3_,ImageCacheTypes.USE_WEB_CACHE);
                         }
                     }
                 }
                 else
                 {
-                    _loc3_ = new ImageData(_loc4_,_loc2_);
+                    _loc2_ = new ImageData(_loc3_,ImageCacheTypes.USE_WEB_CACHE);
                 }
-                _loc3_.permanent = true;
-                this._webCache[_loc4_] = _loc3_;
+                _loc2_.permanent = true;
+                this._webCache[_loc3_] = _loc2_;
             }
             param1.splice(0,param1.length);
         }
@@ -94,7 +94,7 @@ package com.xvm.wg
             var _loc2_:ImageData = null;
             for each(_loc3_ in param1)
             {
-                if(_loc3_ in this._webCache)
+                if(this._webCache.hasOwnProperty(_loc3_))
                 {
                     _loc2_ = this._webCache[_loc3_];
                     _loc2_.permanent = false;
@@ -146,10 +146,10 @@ package com.xvm.wg
             this._cache = null;
         }
 
-        public function getImageData(param1:String, param2:Boolean) : IImageData
+        public function getImageData(param1:String, param2:int = 1) : IImageData
         {
             var _loc3_:ImageData = null;
-            if(param1 == null || param1.length == 0)
+            if(param1 == null || param1.length == 0) // orig: if(StringUtils.isEmpty(param1))
             {
                 return null;
             }
@@ -162,15 +162,15 @@ package com.xvm.wg
             return _loc3_;
         }
 
-        private function getLoader(param1:String, param2:Boolean) : ImageData
+        private function getLoader(param1:String, param2:int = 1) : ImageData
         {
             App.utils.asserter.assert(this._init,"ImageManager not been initialized");
             var _loc3_:ImageData = null;
-            if(param2 && (param1 in this._webCache))
+            if(param2 == ImageCacheTypes.USE_WEB_CACHE && this._webCache.hasOwnProperty(param1))
             {
                 _loc3_ = ImageData(this._webCache[param1]);
             }
-            else if(!param2 && (param1 in this._cache))
+            else if(param2 == ImageCacheTypes.USE_CACHE && this._cache.hasOwnProperty(param1))
             {
                 _loc3_ = ImageData(this._cache[param1]);
             }
@@ -196,14 +196,14 @@ package com.xvm.wg
             return _loc3_;
         }
 
-        private function createImageLoader(param1:String, param2:Boolean) : ImageData
+        private function createImageLoader(param1:String, param2:int = 1) : ImageData
         {
             var _loc3_:ImageData = new ImageData(param1,param2);
-            if(param2)
+            if(param2 == ImageCacheTypes.USE_WEB_CACHE)
             {
                 this._webCache[param1] = _loc3_;
             }
-            else
+            else if(param2 == ImageCacheTypes.USE_CACHE)
             {
                 this._cache[param1] = _loc3_;
             }
@@ -212,8 +212,11 @@ package com.xvm.wg
 
         private function pushQueue(param1:ImageData) : void
         {
-            App.utils.asserter.assert(this._minCacheSize > param1.size,"Image size exceeds the buffer cache: " + param1.source + " " + this._minCacheSize);
-            if(!param1.useWebCache)
+            if(param1.cacheType != ImageCacheTypes.NOT_USE_CACHE)
+            {
+                App.utils.asserter.assert(this._minCacheSize > param1.size,"Image size exceeds the buffer cache: " + param1.source + " " + this._minCacheSize);
+            }
+            if(param1.cacheType == ImageCacheTypes.USE_CACHE)
             {
                 this._queue.push(param1);
                 this._cacheSize = this._cacheSize + param1.size;

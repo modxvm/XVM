@@ -13,23 +13,29 @@ package com.xvm.battle.shared.battleloading
     import com.xvm.extraFields.IExtraFieldGroupHolder;
     import com.xvm.types.cfg.CBattleLoading;
     import com.xvm.vo.IVOMacrosOptions;
+    import flash.display.MovieClip;
     import flash.display.Sprite;
     import flash.events.Event;
     import flash.geom.Rectangle;
+    import flash.text.TextField;
     import flash.text.TextFieldAutoSize;
+    import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
     import net.wg.data.constants.UserTags;
     import net.wg.data.constants.generated.ATLAS_CONSTANTS;
-    import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
+    import net.wg.gui.battle.battleloading.renderers.BasePlayerItemRenderer;
+    import net.wg.gui.battle.battleloading.renderers.BaseRendererContainer;
+    import net.wg.gui.battle.components.BattleAtlasSprite;
     import net.wg.gui.battle.views.stats.constants.PlayerStatusSchemeName;
+    import net.wg.gui.components.icons.PlayerActionMarker;
     import net.wg.infrastructure.interfaces.IColorScheme;
     import scaleform.gfx.TextFieldEx;
 
-    public class XvmBattleLoadingItemRendererProxyBase implements IExtraFieldGroupHolder
+    public class XvmBattleLoadingItemRendererProxyBase implements IXvmBattleLoadingItemRendererBase, IExtraFieldGroupHolder
     {
         // PUBLIC CONSTS
 
         public static const UI_TYPE_TABLE:String = "table";
-        public static const UI_TYPE_TIPS:String = "tips";
+        public static const UI_TYPE_TIP:String = "tip";
 
         // PRIVATE CONSTS
 
@@ -46,14 +52,28 @@ package com.xvm.battle.shared.battleloading
         protected var cfg:CBattleLoading;
 
         // PRIVATE VARS
+        private var _invalidateFunc:Function;
 
-        private var _ui:IXvmBattleLoadingItemRendererBase;
+        private var _ui:BasePlayerItemRenderer;
         private var _uiType:String;
-        private var _isLeftPanel:Boolean;
+        private var _isEnemy:Boolean;
 
         private var _model:DAAPIVehicleInfoVO;
 
         private var _vehicleIconLoaded:Boolean = false;
+
+        private var _defaults:XvmItemRendererDefaults;
+        private var _badgeIcon:BattleAtlasSprite;
+        private var _nameField:TextField;
+        private var _vehicleField:TextField;
+        private var _vehicleIcon:BattleAtlasSprite;
+        private var _vehicleLevelIcon:BattleAtlasSprite;
+        private var _vehicleTypeIcon:BattleAtlasSprite;
+        private var _playerActionMarker:PlayerActionMarker;
+        private var _icoIGR:BattleAtlasSprite;
+        private var _icoTester:BattleAtlasSprite;
+        private var _backTester:MovieClip;
+        private var _selfBg:BattleAtlasSprite;
 
         private var _substrateHolder:Sprite;
         private var _bottomHolder:Sprite;
@@ -92,24 +112,63 @@ package com.xvm.battle.shared.battleloading
 
         // CTOR
 
-        public function XvmBattleLoadingItemRendererProxyBase(ui:IXvmBattleLoadingItemRendererBase, uiType:String, isLeftPanel:Boolean)
+        public function XvmBattleLoadingItemRendererProxyBase(ui:BasePlayerItemRenderer, uiType:String,
+            container:BaseRendererContainer, position:int, isEnemy:Boolean, selfBg:BattleAtlasSprite, invalidateFunc:Function)
         {
-            this._ui = ui;
-            this._uiType = uiType;
-            this._isLeftPanel = isLeftPanel;
+            _ui = ui;
+            _uiType = uiType;
+            _isEnemy = isEnemy;
+
+            _invalidateFunc = invalidateFunc;
+
+            if (uiType == XvmBattleLoadingItemRendererProxyBase.UI_TYPE_TABLE)
+            {
+                _defaults = _isEnemy ? XvmItemRendererDefaults.DEFAULTS_RIGHT_TABLE : XvmItemRendererDefaults.DEFAULTS_LEFT_TABLE;
+            }
+            else
+            {
+                _defaults = _isEnemy ? XvmItemRendererDefaults.DEFAULTS_RIGHT_TIP : XvmItemRendererDefaults.DEFAULTS_LEFT_TIP;
+            }
+
+            _selfBg = selfBg;
+            if (_isEnemy)
+            {
+                _vehicleField = container.vehicleFieldsEnemy[position];
+                _nameField = container.textFieldsEnemy[position];
+                _vehicleIcon = container.vehicleIconsEnemy[position];
+                _vehicleTypeIcon = container.vehicleTypeIconsEnemy[position];
+                _vehicleLevelIcon = container.vehicleLevelIconsEnemy[position];
+                _playerActionMarker = container.playerActionMarkersEnemy[position];
+                _icoIGR = container.icoIGRsEnemy[position];
+                _icoTester = container.icoTestersEnemy[position];
+                _backTester = container.backTestersEnemy[position];
+                _badgeIcon = container.badgesEnemy[position];
+            }
+            else
+            {
+                _vehicleField = container.vehicleFieldsAlly[position];
+                _nameField = container.textFieldsAlly[position];
+                _vehicleIcon = container.vehicleIconsAlly[position];
+                _vehicleTypeIcon = container.vehicleTypeIconsAlly[position];
+                _vehicleLevelIcon = container.vehicleLevelIconsAlly[position];
+                _playerActionMarker = container.playerActionMarkersAlly[position];
+                _icoIGR = container.icoIGRsAlly[position];
+                _icoTester = container.icoTestersAlly[position];
+                _backTester = container.backTestersAlly[position];
+                _badgeIcon = container.badgesAlly[position];
+            }
 
             // align fields
+            nameField.y -= 3;
+            nameField.scaleX = nameField.scaleY = 1;
+            nameField.height = _FIELD_HEIGHT;
+            TextFieldEx.setVerticalAlign(nameField, TextFieldEx.VALIGN_CENTER);
 
-            ui.nameField.y -= 3;
-            ui.nameField.scaleX = ui.nameField.scaleY = 1;
-            ui.nameField.height = _FIELD_HEIGHT;
-            TextFieldEx.setVerticalAlign(ui.nameField, TextFieldEx.VALIGN_CENTER);
-
-            ui.vehicleField.y = ui.nameField.y;
-            ui.vehicleField.scaleX = ui.vehicleField.scaleY = 1;
-            ui.vehicleField.height = _FIELD_HEIGHT;
-            ui.vehicleField.autoSize = TextFieldAutoSize.NONE;
-            TextFieldEx.setVerticalAlign(ui.vehicleField, TextFieldEx.VALIGN_CENTER);
+            vehicleField.y = nameField.y;
+            vehicleField.scaleX = vehicleField.scaleY = 1;
+            vehicleField.height = _FIELD_HEIGHT;
+            vehicleField.autoSize = TextFieldAutoSize.NONE;
+            TextFieldEx.setVerticalAlign(vehicleField, TextFieldEx.VALIGN_CENTER);
 
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, _setup);
             Xvm.addEventListener(PlayerStateEvent.CHANGED, _onPlayerStateChanged);
@@ -117,10 +176,10 @@ package com.xvm.battle.shared.battleloading
             Xfw.addCommandListener(XvmCommands.AS_ON_CLAN_ICON_LOADED, _onClanIconLoaded);
             Stat.instance.addEventListener(Stat.COMPLETE_BATTLE, _onStatLoaded, false, 0, true);
 
-            _substrateHolder = ui.addChildAt(new Sprite(), 0) as Sprite;
-            _bottomHolder = ui.addChildAt(new Sprite(), ui.selfBg ? ui.getChildIndex(ui.selfBg) + 1 : 0) as Sprite;
-            _normalHolder = ui.addChildAt(new Sprite(), ui.getChildIndex(ui.playerActionMarker) + 1) as Sprite;
-            _topHolder = ui.addChild(new Sprite()) as Sprite;
+            _substrateHolder = container.addChildAt(new Sprite(), 0) as Sprite;
+            _bottomHolder = container.addChildAt(new Sprite(), selfBg ? container.getChildIndex(selfBg) + 1 : 0) as Sprite;
+            _normalHolder = container.addChildAt(new Sprite(), container.getChildIndex(playerActionMarker) + 1) as Sprite;
+            _topHolder = container.addChild(new Sprite()) as Sprite;
 
             _setup();
         }
@@ -139,6 +198,20 @@ package com.xvm.battle.shared.battleloading
             _bottomHolder = null;
             _normalHolder = null;
             _topHolder = null;
+
+            _badgeIcon = null;
+            _nameField = null;
+            _vehicleField = null;
+            _vehicleIcon = null;
+            _vehicleLevelIcon = null;
+            _vehicleTypeIcon = null;
+            _playerActionMarker = null;
+            _icoIGR = null;
+            _icoTester = null;
+            _backTester = null;
+            _selfBg = null;
+
+            _ui = null;
         }
 
         public function setData(model:DAAPIVehicleInfoVO):void
@@ -162,37 +235,37 @@ package com.xvm.battle.shared.battleloading
                 _currentPlayerState = BattleState.get(_model.vehicleID);
 
                 var textColor:String = XfwUtils.toHtmlColor(App.colorSchemeMgr.getScheme(getSchemeNameForPlayer(_currentPlayerState)).rgb);
-                _ui.nameField.visible = true;
-                _ui.nameField.htmlText = "<font color='" + textColor + "'>" + Macros.FormatString(_isLeftPanel ? cfg.formatLeftNick : cfg.formatRightNick, _currentPlayerState) + "</font>";
+                nameField.visible = true;
+                nameField.htmlText = "<font color='" + textColor + "'>" + Macros.FormatString(_isEnemy ? cfg.formatRightNick : cfg.formatLeftNick, _currentPlayerState) + "</font>";
                 _alignNameField();
 
-                _ui.vehicleField.visible = true;
-                _ui.vehicleField.htmlText = "<font color='" + textColor + "'>" + Macros.FormatString(_isLeftPanel ? cfg.formatLeftVehicle : cfg.formatRightVehicle, _currentPlayerState) + "</font>";
+                vehicleField.visible = true;
+                vehicleField.htmlText = "<font color='" + textColor + "'>" + Macros.FormatString(_isEnemy ? cfg.formatRightVehicle : cfg.formatLeftVehicle, _currentPlayerState) + "</font>";
                 _alignVehicleField();
 
-                var atlasName:String = isLeftPanel ? leftAtlas : rightAtlas;
+                var atlasName:String = _isEnemy ? rightAtlas : leftAtlas;
                 if (!App.atlasMgr.isAtlasInitialized(atlasName))
                 {
                     atlasName = ATLAS_CONSTANTS.BATTLE_ATLAS;
                 }
 
-                _ui.vehicleIcon.graphics.clear();
-                App.atlasMgr.drawGraphics(atlasName, _model.vehicleIconName, _ui.vehicleIcon.graphics, "unknown" /*BattleLoadingHelper.VEHICLE_TYPE_UNKNOWN*/);
+                vehicleIcon.graphics.clear();
+                App.atlasMgr.drawGraphics(atlasName, _model.vehicleIconName, vehicleIcon.graphics, "unknown" /*BattleLoadingHelper.VEHICLE_TYPE_UNKNOWN*/);
 
                 var schemeName:String = getSchemeNameForVehicle(_currentPlayerState);
                 var scheme:IColorScheme = App.colorSchemeMgr.getScheme(schemeName);
                 if (scheme)
                 {
-                    _ui.vehicleIcon.transform.colorTransform = scheme.colorTransform;
+                    vehicleIcon.transform.colorTransform = scheme.colorTransform;
                 }
                 schemeName = PlayerStatusSchemeName.getSchemeForVehicleLevel(!_model.isAlive());
                 scheme = App.colorSchemeMgr.getScheme(schemeName);
                 if (scheme)
                 {
-                    _ui.vehicleLevelIcon.transform.colorTransform = scheme.colorTransform;
+                    vehicleLevelIcon.transform.colorTransform = scheme.colorTransform;
                 }
-                _ui.vehicleIcon.alpha = cfg.vehicleIconAlpha / 100.0;
-                _ui.vehicleLevelIcon.alpha = cfg.removeVehicleLevel ? 0 : cfg.vehicleIconAlpha / 100.0;
+                vehicleIcon.alpha = cfg.vehicleIconAlpha / 100.0;
+                vehicleLevelIcon.alpha = cfg.removeVehicleLevel ? 0 : cfg.vehicleIconAlpha / 100.0;
 
                 _updateExtraFields();
             }
@@ -202,11 +275,63 @@ package com.xvm.battle.shared.battleloading
             }
         }
 
+        // IXvmBattleLoadingItemRendererBase
+
+        public function get DEFAULTS():XvmItemRendererDefaults
+        {
+            return _defaults;
+        }
+
+        public function get badgeIcon():BattleAtlasSprite
+        {
+            return _badgeIcon;
+        }
+
+        public function get nameField():TextField
+        {
+            return _nameField;
+        }
+
+        public function get vehicleField():TextField
+        {
+            return _vehicleField;
+        }
+
+        public function get vehicleIcon():BattleAtlasSprite
+        {
+            return _vehicleIcon;
+        }
+
+        public function get vehicleLevelIcon():BattleAtlasSprite
+        {
+            return _vehicleLevelIcon;
+        }
+
+        public function get vehicleTypeIcon():BattleAtlasSprite
+        {
+            return _vehicleTypeIcon;
+        }
+
+        public function get playerActionMarker():PlayerActionMarker
+        {
+            return _playerActionMarker;
+        }
+
+        public function get selfBg():BattleAtlasSprite
+        {
+            return _selfBg;
+        }
+
+        public function get icoIGR():BattleAtlasSprite
+        {
+            return _icoIGR;
+        }
+
         // IExtraFieldGroupHolder
 
         public function get isLeftPanel():Boolean
         {
-            return _isLeftPanel;
+            return !_isEnemy;
         }
 
         public function get substrateHolder():Sprite
@@ -275,30 +400,30 @@ package com.xvm.battle.shared.battleloading
 
             if (cfg.removeVehicleTypeIcon)
             {
-                _ui.vehicleTypeIcon.alpha = 0;
+                vehicleTypeIcon.alpha = 0;
             }
 
             if (cfg.nameFieldShowBorder)
             {
-                _ui.nameField.border = true;
-                _ui.nameField.borderColor = 0x00FF00;
+                nameField.border = true;
+                nameField.borderColor = 0x00FF00;
             }
 
             if (cfg.vehicleFieldShowBorder)
             {
-                _ui.vehicleField.border = true;
-                _ui.vehicleField.borderColor = 0xFFFF00;
+                vehicleField.border = true;
+                vehicleField.borderColor = 0xFFFF00;
             }
 
-            if (!_isLeftPanel)
+            if (_isEnemy)
             {
                 if (Config.config.battle.mirroredVehicleIcons)
                 {
-                    _ui.vehicleIcon.scaleX = 1;
+                    vehicleIcon.scaleX = 1;
                 }
                 else
                 {
-                    _ui.vehicleIcon.scaleX = -1;
+                    vehicleIcon.scaleX = -1;
                 }
             }
 
@@ -313,14 +438,14 @@ package com.xvm.battle.shared.battleloading
             {
                 if (_model.vehicleID == e.vehicleID)
                 {
-                    _ui.invalidate2(_INVALIDATE_PLAYER_STATE);
+                    _invalidateFunc(_INVALIDATE_PLAYER_STATE);
                 }
             }
         }
 
         private function _onAtlasLoaded(e:Event):void
         {
-            _ui.invalidate2(_INVALIDATE_PLAYER_STATE);
+            _invalidateFunc(_INVALIDATE_PLAYER_STATE);
         }
 
         private function _onClanIconLoaded(vehicleID:Number, playerName:String):void
@@ -329,7 +454,7 @@ package com.xvm.battle.shared.battleloading
             {
                 if (_model.vehicleID == vehicleID)
                 {
-                    _ui.invalidate2(_INVALIDATE_PLAYER_STATE);
+                    _invalidateFunc(_INVALIDATE_PLAYER_STATE);
                 }
             }
         }
@@ -337,33 +462,33 @@ package com.xvm.battle.shared.battleloading
         private function _onStatLoaded():void
         {
             //Logger.add("onStatLoaded: " + _model.playerName);
-            _ui.invalidate2(_INVALIDATE_PLAYER_STATE);
+            _invalidateFunc(_INVALIDATE_PLAYER_STATE);
         }
 
         private function _getNameFieldWidth():int
         {
-            var w:Number = _ui.DEFAULTS.NAME_FIELD_WIDTH;
-            if (isLeftPanel)
+            var w:Number = DEFAULTS.NAME_FIELD_WIDTH;
+            if (_isEnemy)
             {
-                w += cfg.nameFieldWidthDeltaLeft;
+                w += cfg.nameFieldWidthDeltaRight;
             }
             else
             {
-                w += cfg.nameFieldWidthDeltaRight;
+                w += cfg.nameFieldWidthDeltaLeft;
             }
             return w;
         }
 
         private function _getVehicleFieldWidth():int
         {
-            var w:Number = _ui.DEFAULTS.VEHICLE_FIELD_WIDTH;
-            if (isLeftPanel)
+            var w:Number = DEFAULTS.VEHICLE_FIELD_WIDTH;
+            if (_isEnemy)
             {
-                w += cfg.vehicleFieldWidthDeltaLeft;
+                w += cfg.vehicleFieldWidthDeltaRight;
             }
             else
             {
-                w += cfg.vehicleFieldWidthDeltaRight;
+                w += cfg.vehicleFieldWidthDeltaLeft;
             }
             return w;
         }
@@ -379,51 +504,51 @@ package com.xvm.battle.shared.battleloading
 
         private function _alignNameField():void
         {
-            _ui.nameField.width = _getNameFieldWidth();
-            if (_isLeftPanel)
+            nameField.width = _getNameFieldWidth();
+            if (_isEnemy)
             {
-                _ui.nameField.x = _ui.DEFAULTS.NAME_FIELD_X + cfg.nameFieldOffsetXLeft;
+                nameField.x = DEFAULTS.NAME_FIELD_X - cfg.nameFieldOffsetXRight + (DEFAULTS.NAME_FIELD_WIDTH - nameField.width);
                 if (!cfg.removeRankBadgeIcon)
                 {
-                    _ui.badgeIcon.x = _ui.nameField.x;
-                    _ui.nameField.x += _BADGE_ICON_WIDTH + 1;
-                    _ui.nameField.width -= _BADGE_ICON_WIDTH + 1;
+                    badgeIcon.x = nameField.x + nameField.width - _BADGE_ICON_WIDTH;
+                    nameField.width -= _BADGE_ICON_WIDTH + 1;
                 }
             }
             else
             {
-                _ui.nameField.x = _ui.DEFAULTS.NAME_FIELD_X - cfg.nameFieldOffsetXRight + (_ui.DEFAULTS.NAME_FIELD_WIDTH - _ui.nameField.width);
+                nameField.x = DEFAULTS.NAME_FIELD_X + cfg.nameFieldOffsetXLeft;
                 if (!cfg.removeRankBadgeIcon)
                 {
-                    _ui.badgeIcon.x = _ui.nameField.x + _ui.nameField.width - _BADGE_ICON_WIDTH;
-                    _ui.nameField.width -= _BADGE_ICON_WIDTH + 1;
+                    badgeIcon.x = nameField.x;
+                    nameField.x += _BADGE_ICON_WIDTH + 1;
+                    nameField.width -= _BADGE_ICON_WIDTH + 1;
                 }
             }
         }
 
         private function _alignVehicleField():void
         {
-            _ui.vehicleField.width = _getVehicleFieldWidth();
-            if (_isLeftPanel)
+            vehicleField.width = _getVehicleFieldWidth();
+            if (_isEnemy)
             {
-                _ui.vehicleField.x = _ui.DEFAULTS.VEHICLE_FIELD_X + cfg.vehicleFieldOffsetXLeft + (_ui.DEFAULTS.VEHICLE_FIELD_WIDTH - _ui.vehicleField.width);
+                vehicleField.x = DEFAULTS.VEHICLE_FIELD_X - cfg.vehicleFieldOffsetXRight;
                 if (_model)
                 {
                     if (_model.isIGR)
                     {
-                        var bounds:Rectangle = _ui.vehicleField.getCharBoundaries(0);
-                        _ui.icoIGR.x = _ui.vehicleField.x + (bounds ? bounds.x : 0) - _ui.icoIGR.width >> 0;
+                        icoIGR.x = vehicleField.x - icoIGR.width >> 0;
                     }
                 }
             }
             else
             {
-                _ui.vehicleField.x = _ui.DEFAULTS.VEHICLE_FIELD_X - cfg.vehicleFieldOffsetXRight;
+                vehicleField.x = DEFAULTS.VEHICLE_FIELD_X + cfg.vehicleFieldOffsetXLeft + (DEFAULTS.VEHICLE_FIELD_WIDTH - vehicleField.width);
                 if (_model)
                 {
                     if (_model.isIGR)
                     {
-                        _ui.icoIGR.x = _ui.vehicleField.x - _ui.icoIGR.width >> 0;
+                        var bounds:Rectangle = vehicleField.getCharBoundaries(0);
+                        icoIGR.x = vehicleField.x + (bounds ? bounds.x : 0) - icoIGR.width >> 0;
                     }
                 }
             }
@@ -431,34 +556,34 @@ package com.xvm.battle.shared.battleloading
 
         private function _alignVehicleIcon():void
         {
-            if (_isLeftPanel)
-            {
-                _ui.vehicleIcon.x = _ui.DEFAULTS.VEHICLE_ICON_X + cfg.vehicleIconOffsetXLeft;
-                _ui.vehicleLevelIcon.x = _ui.DEFAULTS.VEHICLE_LEVEL_X + cfg.vehicleIconOffsetXLeft;
-                _ui.vehicleTypeIcon.x = _ui.DEFAULTS.VEHICLE_TYPE_ICON_X + cfg.vehicleIconOffsetXLeft;
-            }
-            else
+            if (_isEnemy)
             {
                 if (Config.config.battle.mirroredVehicleIcons)
                 {
-                    _ui.vehicleIcon.x = _ui.DEFAULTS.VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight;
-                    _ui.vehicleLevelIcon.x = _ui.DEFAULTS.VEHICLE_LEVEL_X - cfg.vehicleIconOffsetXRight;
+                    vehicleIcon.x = DEFAULTS.VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight;
+                    vehicleLevelIcon.x = DEFAULTS.VEHICLE_LEVEL_X - cfg.vehicleIconOffsetXRight;
                 }
                 else
                 {
-                    _ui.vehicleIcon.x = _ui.DEFAULTS.VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight - _ICONS_AREA_WIDTH;
-                    _ui.vehicleLevelIcon.x = _ui.DEFAULTS.VEHICLE_LEVEL_X - cfg.vehicleIconOffsetXRight - _ICONS_AREA_WIDTH + _MIRRORED_VEHICLE_LEVEL_ICON_OFFSET;
+                    vehicleIcon.x = DEFAULTS.VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight - _ICONS_AREA_WIDTH;
+                    vehicleLevelIcon.x = DEFAULTS.VEHICLE_LEVEL_X - cfg.vehicleIconOffsetXRight - _ICONS_AREA_WIDTH + _MIRRORED_VEHICLE_LEVEL_ICON_OFFSET;
                 }
-                _ui.vehicleTypeIcon.x = _ui.DEFAULTS.VEHICLE_TYPE_ICON_X - cfg.vehicleIconOffsetXRight;
+                vehicleTypeIcon.x = DEFAULTS.VEHICLE_TYPE_ICON_X - cfg.vehicleIconOffsetXRight;
             }
-            _ui.vehicleLevelIcon.isCentralizeByX = true;
+            else
+            {
+                vehicleIcon.x = DEFAULTS.VEHICLE_ICON_X + cfg.vehicleIconOffsetXLeft;
+                vehicleLevelIcon.x = DEFAULTS.VEHICLE_LEVEL_X + cfg.vehicleIconOffsetXLeft;
+                vehicleTypeIcon.x = DEFAULTS.VEHICLE_TYPE_ICON_X + cfg.vehicleIconOffsetXLeft;
+            }
+            vehicleLevelIcon.isCentralizeByX = true;
         }
 
         // extra fields
 
         private function _createExtraFields():void
         {
-            var formats:Array = _isLeftPanel ? cfg.extraFieldsLeft : cfg.extraFieldsRight;
+            var formats:Array = _isEnemy ? cfg.extraFieldsRight : cfg.extraFieldsLeft;
             if (formats)
             {
                 if (formats.length)
@@ -481,18 +606,18 @@ package com.xvm.battle.shared.battleloading
         {
             if (_extraFields)
             {
-                var offsetX:int = _ui.DEFAULTS.EXTRA_FIELDS_X;
+                var offsetX:int = DEFAULTS.EXTRA_FIELDS_X;
                 var bindToIconOffset:Number;
-                if (_isLeftPanel)
+                if (_isEnemy)
                 {
-                    bindToIconOffset = _ui.vehicleIcon.x - offsetX;
+                    bindToIconOffset = vehicleIcon.x - offsetX + (Config.config.battle.mirroredVehicleIcons ? 0 : _ICONS_AREA_WIDTH);
                 }
                 else
                 {
-                    bindToIconOffset = _ui.vehicleIcon.x - offsetX + (Config.config.battle.mirroredVehicleIcons ? 0 : _ICONS_AREA_WIDTH);
+                    bindToIconOffset = vehicleIcon.x - offsetX;
                 }
                 _extraFields.visible = true;
-                _extraFields.update(_currentPlayerState, bindToIconOffset, offsetX, _ui.vehicleIcon.y);
+                _extraFields.update(_currentPlayerState, bindToIconOffset, offsetX, vehicleIcon.y);
             }
         }
     }

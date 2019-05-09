@@ -10,8 +10,10 @@ import BigWorld
 from gui.shared import event_dispatcher
 from gui.Scaleform.daapi.view.battle_results_window import BattleResultsWindow
 from gui.Scaleform.daapi.view.bootcamp.BCBattleResult import BCBattleResult
+from gui.Scaleform.genConsts.BATTLE_RESULTS_PREMIUM_STATES import BATTLE_RESULTS_PREMIUM_STATES
 from gui.battle_results import composer
 from gui.battle_results.components import base
+from gui.battle_results.components.personal import DynamicPremiumState
 from gui.battle_results.settings import BATTLE_RESULTS_RECORD
 from gui.shared.crits_mask_parser import critsParserGenerator
 from helpers import dependency
@@ -38,6 +40,7 @@ def event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, cnt=0):
 def BattleResultsWindow_as_setDataS(base, self, data):
     try:
         data['tabInfo'][0]['linkage'] = 'com.xvm.lobby.ui.battleresults::UI_CommonStats'
+
         # Use data['common']['regionNameStr'] value to transfer XVM data.
         # Cannot add in data object because DAAPIDataClass is not dynamic.
         #log(data['xvm_data'])
@@ -58,6 +61,14 @@ def BCBattleResult_as_setDataS(base, self, data):
         err(traceback.format_exc())
     return base(self, data)
 
+@overrideMethod(DynamicPremiumState, 'getVO')
+def _DynamicPremiumState_getVO(base, self):
+    res = base(self)
+    if self._value in [BATTLE_RESULTS_PREMIUM_STATES.PREMIUM_ADVERTISING, BATTLE_RESULTS_PREMIUM_STATES.PREMIUM_INFO]:
+        self._value = BATTLE_RESULTS_PREMIUM_STATES.PREMIUM_EARNINGS
+        return super(DynamicPremiumState, self).getVO()
+    #res = self._value = BATTLE_RESULTS_PREMIUM_STATES.PREMIUM_BONUS
+    return res
 
 #####################################################################
 # collect data for XVM
@@ -89,28 +100,34 @@ class XvmDataBlock(base.StatsBlock):
             'damageAssistedCount': 0,
             'damageAssistedRadio': 0,
             'damageAssistedTrack': 0,
+            'damageAssistedStun': 0,
             'damageBlockedByArmor': 0,
             'shots': 0,
             'hits': 0,
             'piercings': 0,
             'kills': 0,
             'spotted': 0,
+            'stunNum': 0,
+            'stunDuration': 0,
             'critsCount': 0,
             'ricochetsCount': 0,
             'nonPenetrationsCount': 0}
 
         for typeCompDescr, vData in reusable.personal.getVehicleCDsIterator(result):
             #log(vData)
+            #log from 1.5.0.0: https://koreanrandom.com/forum/topic/49651-
+
+            #TODO 1.5: add support for premiumPlus and premiumVip
             origXP = vData['xp']
             premXP = vData['xp']
             origCrewXP = vData['tmenXP']
             premCrewXP = vData['tmenXP']
             if vData['isPremium']:
-                origXP = vData['xp'] / (vData['premiumXPFactor10'] / 10.0)
-                origCrewXP = vData['tmenXP'] / (vData['premiumXPFactor10'] / 10.0)
+                origXP = vData['xp'] / (vData['premiumXPFactor100'] / 100.0)
+                origCrewXP = vData['tmenXP'] / (vData['premiumXPFactor100'] / 100.0)
             else:
-                premXP = vData['xp'] * (vData['premiumXPFactor10'] / 10.0)
-                premCrewXP = vData['tmenXP'] * (vData['premiumXPFactor10'] / 10.0)
+                premXP = vData['xp'] * (vData['premiumXPFactor100'] / 100.0)
+                premCrewXP = vData['tmenXP'] * (vData['premiumXPFactor100'] / 100.0)
             ownVehicle = self.itemsCache.items.getItemByCD(typeCompDescr)
             if ownVehicle and ownVehicle.isPremium:
                 origCrewXP = int(origCrewXP * 1.5)
@@ -126,12 +143,15 @@ class XvmDataBlock(base.StatsBlock):
                 'damageAssistedCount': calcDetailsCount(vData['details'], ['damageAssistedRadio', 'damageAssistedTrack']),
                 'damageAssistedRadio': vData['damageAssistedRadio'],
                 'damageAssistedTrack': vData['damageAssistedTrack'],
+                'damageAssistedStun': vData['damageAssistedStun'],
                 'damageBlockedByArmor': vData['damageBlockedByArmor'],
                 'shots': vData['shots'],
                 'hits': vData['directHits'],
                 'piercings': vData['piercings'],
                 'kills': vData['kills'],
                 'spotted': vData['spotted'],
+                'stunNum': vData['stunNum'],
+                'stunDuration': vData['stunDuration'],
                 'critsCount': calcCritsCount(vData['details']),
                 'ricochetsCount': calcDetailsSum(vData['details'], 'rickochetsReceived'),
                 'nonPenetrationsCount': vData['noDamageDirectHitsReceived']
@@ -151,12 +171,15 @@ def appendTotalData(total, data):
     total['damageAssistedCount'] += data['damageAssistedCount']
     total['damageAssistedRadio'] += data['damageAssistedRadio']
     total['damageAssistedTrack'] += data['damageAssistedTrack']
+    total['damageAssistedStun'] += data['damageAssistedStun']
     total['damageBlockedByArmor'] += data['damageBlockedByArmor']
     total['shots'] += data['shots']
     total['hits'] += data['hits']
     total['piercings'] += data['piercings']
     total['kills'] += data['kills']
     total['spotted'] += data['spotted']
+    total['stunNum'] += data['stunNum']
+    total['stunDuration'] += data['stunDuration']
     total['critsCount'] += data['critsCount']
     total['ricochetsCount'] += data['ricochetsCount']
     total['nonPenetrationsCount'] += data['nonPenetrationsCount']
