@@ -24,9 +24,6 @@ package com.xvm.battle.ranked.battleloading
 
         private var _clock:Clock = null;
 
-        private var defaultVehicleFieldXPosition:Number = NaN;
-        private var defaultVehicleFieldWidth:Number = NaN;
-
         private var battleLoadingForm:BattleLoadingForm = null;
 
         public function UI_RankedBattleLoading()

@@ -24,9 +24,6 @@ package com.xvm.battle.classic.battleloading
 
         private var _clock:Clock = null;
 
-        private var defaultVehicleFieldXPosition:Number = NaN;
-        private var defaultVehicleFieldWidth:Number = NaN;
-
         private var battleLoadingForm:BattleLoadingForm = null;
         private var isTipsForm:Boolean = false;
 

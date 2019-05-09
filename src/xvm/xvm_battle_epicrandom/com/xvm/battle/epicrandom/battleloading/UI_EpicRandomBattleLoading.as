@@ -25,9 +25,6 @@ package com.xvm.battle.epicrandom.battleloading
 
         private var _clock:Clock = null;
 
-        private var defaultVehicleFieldXPosition:Number = NaN;
-        private var defaultVehicleFieldWidth:Number = NaN;
-
         private var battleLoadingForm:EpicRandomBattleLoadingForm = null;
 
         public function UI_EpicRandomBattleLoading()
