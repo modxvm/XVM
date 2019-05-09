@@ -38,7 +38,7 @@ package com.xvm.lobby.contacts
             {
                 App.instance.loaderMgr.addEventListener(LibraryLoaderEvent.LOADED, onLibLoaded, false, 0, true);
 
-                if (XfwComponent.try_load_ui_swf("xvm_lobby", "xvm_lobbycontacts_ui.swf") != XfwConst.SWF_START_LOADING)
+                if (XfwComponent.tryLoadUISWF("xvm_lobby", "xvm_lobbycontacts_ui.swf") != XfwConst.SWF_START_LOADING)
                     init();
             }
         }
