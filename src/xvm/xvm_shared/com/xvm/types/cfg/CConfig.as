@@ -61,6 +61,10 @@ package com.xvm.types.cfg
             {
                 battleLoadingTips.applyGlobalBattleMacros();
             }
+            if (battleResults)
+            {
+                battleResults.applyGlobalBattleMacros();
+            }
             if (markers)
             {
                 markers.applyGlobalBattleMacros();

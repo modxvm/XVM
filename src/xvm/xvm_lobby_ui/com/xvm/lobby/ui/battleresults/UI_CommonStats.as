@@ -8,6 +8,7 @@ package com.xvm.lobby.ui.battleresults
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xvm.types.cfg.CBattleResults;
     import flash.events.MouseEvent;
     import flash.geom.Rectangle;
     import flash.text.AntiAliasType;
@@ -66,6 +67,7 @@ package com.xvm.lobby.ui.battleresults
         private var killsTotalField:EfficiencyIconRenderer;
 
         private var bonusState:PremiumBonusState;
+        protected var cfg:CBattleResults;
 
         private var tooltips:Object;
 
@@ -260,13 +262,13 @@ package com.xvm.lobby.ui.battleresults
 
         private function initPremiumBonusFields():void
         {
-            if (!bonusState)
+            if (!bonusState && cfg.enabled)
             {
                 bonusState = addChild(detailsMc.bonusState) as PremiumBonusState;
                 bonusState.scrollRect = new Rectangle(190, 13, 320, 90);
-                bonusState.x = 25;
-                bonusState.y = 60;
-                bonusState.backgroundIcon.alpha = 0.7;
+                bonusState.x = cfg.offsetX;
+                bonusState.y = cfg.offsetY;
+                bonusState.backgroundIcon.alpha = cfg.backgroundAlpha;
             }
         }
 

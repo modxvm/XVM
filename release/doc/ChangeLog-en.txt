@@ -1,4 +1,12 @@
-﻿XVM-7.9.0:
+﻿XVM-7.9.1:
+  [GENERAL]
+  * World of Tanks 1.5.0.1
+
+  [HANGAR]
+  * added section:
+      "battleResults"/"bonusState" - customize "Manageable bonus to experience" panel
+
+XVM-7.9.0:
   [GENERAL]
   * World of Tanks 1.5.0.0
 
