@@ -45,6 +45,11 @@ package com.xvm
             Macros.RegisterXvmServicesMacrosData();
         }
 
+        public static function applyGlobalLobbyMacros():void
+        {
+            s_config.applyGlobalLobbyMacros();
+        }
+
         public static function applyGlobalBattleMacros():void
         {
             s_config.applyGlobalBattleMacros();

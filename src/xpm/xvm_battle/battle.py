@@ -246,13 +246,14 @@ class Battle(object):
     xvm_battle_swf_initialized = False
     is_moving = False
 
+    appLoader = dependency.descriptor(IAppLoader)
     sessionProvider = dependency.descriptor(IBattleSessionProvider)
 
     def onAppInitialized(self, event):
         #log('onAppInitialized: ' + str(event.ctx.ns))
         if event.ctx.ns == APP_NAME_SPACE.SF_BATTLE:
             self.xvm_battle_swf_initialized = False
-            app = dependency.instance(IAppLoader).getApp(event.ctx.ns)
+            app = self.appLoader.getApp(event.ctx.ns)
             if app is not None and app.loaderManager is not None:
                 app.loaderManager.onViewLoaded += self.onViewLoaded
 
@@ -261,7 +262,7 @@ class Battle(object):
         if event.ctx.ns == APP_NAME_SPACE.SF_BATTLE:
             self.xvm_battle_swf_initialized = False
             self.battle_page = None
-            app = dependency.instance(IAppLoader).getApp(event.ctx.ns)
+            app = self.appLoader.getApp(event.ctx.ns)
             if app is not None and app.loaderManager is not None:
                 app.loaderManager.onViewLoaded -= self.onViewLoaded
 

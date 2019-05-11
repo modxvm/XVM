@@ -254,6 +254,7 @@ class VehicleMarkers(object):
                         config.lang_data,
                         vehinfo.getVehicleInfoDataArray(),
                         config.networkServicesSettings.__dict__,
+                        True,
                         IS_DEVELOPMENT)
                 else:
                     self.call(

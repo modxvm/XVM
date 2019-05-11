@@ -47,6 +47,14 @@ package com.xvm.types.cfg
             throw new Error("clone() method is not implemented");
         }
 
+        public function applyGlobalLobbyMacros():void
+        {
+            if (battleResults)
+            {
+                battleResults.applyGlobalLobbyMacros();
+            }
+        }
+
         public function applyGlobalBattleMacros():void
         {
             if (battle)
@@ -60,10 +68,6 @@ package com.xvm.types.cfg
             if (battleLoadingTips)
             {
                 battleLoadingTips.applyGlobalBattleMacros();
-            }
-            if (battleResults)
-            {
-                battleResults.applyGlobalBattleMacros();
             }
             if (markers)
             {

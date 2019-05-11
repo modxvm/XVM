@@ -83,6 +83,8 @@ def l10n(text):
 class Xvm(object):
     _initialized_apps = {}
 
+    appLoader = dependency.descriptor(IAppLoader)
+
     def __init__(self):
         self.xvmServicesInitialized = False
         self.currentAccountDBID = None
@@ -106,6 +108,7 @@ class Xvm(object):
                    config.lang_data,
                    vehinfo.getVehicleInfoDataArray(),
                    config.networkServicesSettings.__dict__,
+                   self.appLoader.getSpaceID() == GuiGlobalSpaceID.BATTLE,
                    IS_DEVELOPMENT)
 
     # System Message
@@ -125,7 +128,7 @@ class Xvm(object):
 
         trace('onAppInitialized: {}'.format(event.ctx.ns))
 
-        app = dependency.instance(IAppLoader).getApp(event.ctx.ns)
+        app = self.appLoader.getApp(event.ctx.ns)
         if app is not None and app.loaderManager is not None:
             app.loaderManager.onViewLoaded += self.onViewLoaded
         # initialize XVM services if game restarted after crash or in replay
@@ -138,7 +141,7 @@ class Xvm(object):
             del self._initialized_apps[event.ctx.ns]
         if event.ctx.ns == APP_NAME_SPACE.SF_LOBBY:
             self.hangarDispose()
-        app = dependency.instance(IAppLoader).getApp(event.ctx.ns)
+        app = self.appLoader.getApp(event.ctx.ns)
         if app is not None and app.loaderManager is not None:
             app.loaderManager.onViewLoaded -= self.onViewLoaded
 
@@ -342,7 +345,7 @@ class Xvm(object):
         topclans.update(data)
         config.verinfo = config.XvmVersionInfo(data)
 
-        if dependency.instance(IAppLoader).getSpaceID() == GuiGlobalSpaceID.LOBBY:
+        if self.appLoader.getSpaceID() == GuiGlobalSpaceID.LOBBY:
             svcmsg.tokenUpdated()
 
         g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.XVM_SERVICES_INITIALIZED))
@@ -351,7 +354,7 @@ class Xvm(object):
         try:
             if not event.isRepeatedEvent():
                 # debug("key=" + str(event.key) + ' ' + ('down' if event.isKeyDown() else 'up'))
-                spaceID = dependency.instance(IAppLoader).getSpaceID()
+                spaceID = self.appLoader.getSpaceID()
                 if spaceID == GuiGlobalSpaceID.BATTLE:
                     app = getBattleApp()
                     if app and not MessengerEntry.g_instance.gui.isFocused():

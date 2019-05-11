@@ -96,7 +96,7 @@ package com.xvm
         }
 
         private function onSetConfig(config_data:Object, lang_data:Object, vehInfo_data:Array,
-            networkServicesSettings:Object, IS_DEVELOPMENT:Boolean):void
+            networkServicesSettings:Object, isBattle:Boolean, IS_DEVELOPMENT:Boolean):void
         {
             //Logger.add("onSetConfig");
             //Logger.addObject(config_data, 5);
@@ -108,7 +108,11 @@ package com.xvm
             Locale.setupLanguage(lang_data);
             VehicleInfo.setVehicleInfoData(vehInfo_data);
             Config.setNetworkServicesSettings(new NetworkServicesSettings(networkServicesSettings));
-            if (BattleGlobalData.initialized)
+            if (!isBattle)
+            {
+                Config.applyGlobalLobbyMacros();
+            }
+            if (isBattle && BattleGlobalData.initialized)
             {
                 Config.applyGlobalBattleMacros();
             }
