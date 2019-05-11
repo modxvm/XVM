@@ -285,14 +285,15 @@ package com.xvm.lobby.ui.battleresults
 
             if (Config.config.battleResults.showCrewExperience)
             {
-                compareState.noPremTitleLbl.x -= 20;
+                compareState.backgroundIcon.scrollRect = new Rectangle(20, 0, width, height);
+                compareState.noPremTitleLbl.x -= 30;
                 compareState.premTitleLbl.x += 15;
-                compareState.creditsTitle.x -= 10;
-                compareState.creditsLbl.x -= 20;
+                compareState.creditsTitle.x -= 30;
+                compareState.creditsLbl.x -= 30;
                 compareState.premCreditsLbl.x += 15;
-                compareState.xpTitleLbl.x -= 10;
-                compareState.xpTitleLbl.scrollRect = new Rectangle(0, 0, 137, 20);
-                compareState.xpLbl.x -= 20;
+                compareState.xpTitleLbl.x -= 30;
+                compareState.xpTitleLbl.scrollRect = new Rectangle(0, 0, 147, 20);
+                compareState.xpLbl.x -= 30;
                 compareState.premXpLbl.x += 15;
             }
 
