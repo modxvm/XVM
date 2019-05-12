@@ -1,8 +1,10 @@
 ﻿/**
-  * Log of the received damage.
-  * For additional settings see battleLabelsTemplates.xc
-  * Лог полученного урона.
-  * Дополнительные настройки см. в battleLabelsTemplates.xc
+ * Log of the received damage.
+ * For additional settings see battleLabelsTemplates.xc
+ * Лог полученного урона.
+ * Дополнительные настройки см. в battleLabelsTemplates.xc
+ * 
+ * https://kr.cm/f/t/35169/
 
   Macros used in damageLog:
   Макросы используемые в damageLog:
