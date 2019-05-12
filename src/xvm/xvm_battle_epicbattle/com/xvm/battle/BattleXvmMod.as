@@ -13,11 +13,7 @@ package com.xvm.battle
 
     public class BattleXvmMod extends XvmModBase
     {
-        public function BattleXvmMod():void
-        {
-            Xvm.appType = Defines.APP_TYPE_BATTLE_EPIC;
-            super();
-        }
+        public static const APP_TYPE:int = Defines.APP_TYPE_BATTLE_EPICBATTLE;
 
         public override function get logPrefix():String
         {

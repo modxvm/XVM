@@ -17,11 +17,7 @@ package com.xvm.battle
 
     public class BattleXvmMod extends XvmModBase
     {
-        public function BattleXvmMod():void
-        {
-            Xvm.appType = Defines.APP_TYPE_BATTLE_RANKED;
-            super();
-        }
+        public static const APP_TYPE:int = Defines.APP_TYPE_BATTLE_RANKED;
 
         public override function get logPrefix():String
         {

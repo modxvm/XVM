@@ -25,7 +25,7 @@ package com.xvm.types.cfg
             throw new Error("clone() method is not implemented");
         }
 
-        internal function applyGlobalLobbyMacros():void
+        internal function applyGlobalMacros():void
         {
             enabled = Macros.FormatBooleanGlobal(Config.config.battleResults.bonusState.enabled, true);
             offsetX = Macros.FormatNumberGlobal(Config.config.battleResults.bonusState.offsetX, 25);

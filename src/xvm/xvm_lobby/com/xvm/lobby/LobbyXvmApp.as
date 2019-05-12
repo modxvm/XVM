@@ -17,10 +17,11 @@ package com.xvm.lobby
 
         public function LobbyXvmApp():void
         {
+            Logger.setCounterPrefix("L");
+            super(Defines.APP_TYPE_LOBBY);
+
             lobbyXvmMod = new LobbyXvmMod();
             addChild(lobbyXvmMod);
-
-            Logger.setCounterPrefix("L");
 
             // loading ui mods
             XfwComponent.tryLoadUISWF("xvm_lobby", "xvm_lobby_ui.swf", [ "battleResults.swf", "TankCarousel.swf", "nodesLib.swf", "crew.swf" ]);

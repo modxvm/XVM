@@ -26,11 +26,11 @@ package com.xvm.types.cfg
             throw new Error("clone() method is not implemented");
         }
 
-        internal function applyGlobalBattleMacros():void
+        internal function applyGlobalMacros():void
         {
             if (border)
             {
-               border.applyGlobalBattleMacros();
+               border.applyGlobalMacros();
             }
             if (color == null)
             {
@@ -38,7 +38,7 @@ package com.xvm.types.cfg
             }
             if (damage)
             {
-                damage.applyGlobalBattleMacros();
+                damage.applyGlobalMacros();
             }
             enabled = Macros.FormatBooleanGlobal(enabled, true);
             height = Macros.FormatNumberGlobal(height);

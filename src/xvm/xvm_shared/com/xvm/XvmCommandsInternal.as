@@ -17,7 +17,6 @@ package com.xvm
         internal static const XVM_PROFILER_COMMAND_END:String = "xvm.profiler.end";
 
         internal static const AS_DOSSIER:String = "xvm.as.dossier";
-        internal static const AS_L10N:String = "xvm.as.l10n";
         internal static const AS_SET_CONFIG:String = "xvm.as.set_config";
         internal static const AS_UPDATE_RESERVE:String = "xvm.as.update_reserve";
         internal static const AS_STAT_BATTLE_DATA:String = "xvm.as.stat_battle_data";

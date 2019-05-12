@@ -25,35 +25,35 @@ package com.xvm.types.cfg
             throw new Error("clone() method is not implemented");
         }
 
-        internal function applyGlobalBattleMacros():void
+        internal function applyGlobalMacros():void
         {
             if (actionMarker)
             {
-                actionMarker.applyGlobalBattleMacros();
+                actionMarker.applyGlobalMacros();
             }
             if (contourIcon)
             {
-                contourIcon.applyGlobalBattleMacros();
+                contourIcon.applyGlobalMacros();
             }
             if (damageIndicator)
             {
-                damageIndicator.applyGlobalBattleMacros();
+                damageIndicator.applyGlobalMacros();
             }
             if (healthBar)
             {
-                healthBar.applyGlobalBattleMacros();
+                healthBar.applyGlobalMacros();
             }
             if (levelIcon)
             {
-                levelIcon.applyGlobalBattleMacros();
+                levelIcon.applyGlobalMacros();
             }
             if (vehicleIcon)
             {
-                vehicleIcon.applyGlobalBattleMacros();
+                vehicleIcon.applyGlobalMacros();
             }
             if (vehicleStatusMarker)
             {
-                vehicleStatusMarker.applyGlobalBattleMacros();
+                vehicleStatusMarker.applyGlobalMacros();
             }
         }
     }

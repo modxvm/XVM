@@ -78,18 +78,14 @@ package com.xvm.battle
         public static function init():void
         {
             Xfw.addCommandListener(BattleCommands.AS_RESPONSE_BATTLE_GLOBAL_DATA, onRespondBattleGlobalData);
-            try
-            {
-                Xfw.cmd(BattleCommands.REQUEST_BATTLE_GLOBAL_DATA);
-                _curent_xtdb = 0;
-                BattleMacros.RegisterGlobalMacrosData();
-                Config.applyGlobalBattleMacros();
-                _initialized = true;
-            }
-            finally
-            {
-                Xfw.removeCommandListener(BattleCommands.AS_RESPONSE_BATTLE_GLOBAL_DATA, onRespondBattleGlobalData);
-            }
+            Xfw.cmd(BattleCommands.REQUEST_BATTLE_GLOBAL_DATA);
+            Xfw.removeCommandListener(BattleCommands.AS_RESPONSE_BATTLE_GLOBAL_DATA, onRespondBattleGlobalData);
+
+            _curent_xtdb = 0;
+            _initialized = true;
+
+            BattleMacros.RegisterGlobalMacrosData();
+            Config.applyGlobalMacros();
         }
 
         private static var _initialized:Boolean = false;

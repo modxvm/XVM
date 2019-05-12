@@ -5,6 +5,8 @@
 package com.xvm.types.cfg
 {
     import com.xfw.*;
+    import com.xvm.*;
+    import com.xvm.battle.BattleGlobalData;
 
     // add unreferenced classes
     CWidget;
@@ -47,43 +49,48 @@ package com.xvm.types.cfg
             throw new Error("clone() method is not implemented");
         }
 
-        public function applyGlobalLobbyMacros():void
+        public function applyGlobalMacros():void
         {
-            if (battleResults)
+            if (Xvm.appType & Defines.APP_TYPE_LOBBY)
             {
-                battleResults.applyGlobalLobbyMacros();
+                if (battleResults)
+                {
+                    battleResults.applyGlobalMacros();
+                }
             }
-        }
-
-        public function applyGlobalBattleMacros():void
-        {
-            if (battle)
+            else if (Xvm.appType & Defines.APP_TYPE_BATTLE && BattleGlobalData.initialized)
             {
-                battle.applyGlobalBattleMacros();
+                if (battle)
+                {
+                    battle.applyGlobalMacros();
+                }
+                if (battleLoading)
+                {
+                    battleLoading.applyGlobalMacros();
+                }
+                if (battleLoadingTips)
+                {
+                    battleLoadingTips.applyGlobalMacros();
+                }
+                if (minimap)
+                {
+                    minimap.applyGlobalMacros();
+                }
+                if (minimapAlt)
+                {
+                    minimapAlt.applyGlobalMacros();
+                }
+                if (statisticForm)
+                {
+                    statisticForm.applyGlobalMacros();
+                }
             }
-            if (battleLoading)
+            else if (Xvm.appType & Defines.APP_TYPE_VEHICLE_MARKERS && BattleGlobalData.initialized)
             {
-                battleLoading.applyGlobalBattleMacros();
-            }
-            if (battleLoadingTips)
-            {
-                battleLoadingTips.applyGlobalBattleMacros();
-            }
-            if (markers)
-            {
-                markers.applyGlobalBattleMacros();
-            }
-            if (minimap)
-            {
-                minimap.applyGlobalBattleMacros();
-            }
-            if (minimapAlt)
-            {
-                minimapAlt.applyGlobalBattleMacros();
-            }
-            if (statisticForm)
-            {
-                statisticForm.applyGlobalBattleMacros();
+                if (markers)
+                {
+                    markers.applyGlobalMacros();
+                }
             }
         }
     }

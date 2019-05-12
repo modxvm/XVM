@@ -19,7 +19,7 @@ package com.xvm.types.cfg
             throw new Error("clone() method is not implemented");
         }
 
-        internal function applyGlobalBattleMacros():void
+        internal function applyGlobalMacros():void
         {
             alpha = Macros.FormatNumberGlobal(alpha, 100);
             enabled = Macros.FormatBooleanGlobal(enabled, true);

@@ -35,15 +35,15 @@ package com.xvm.types.cfg
             throw new Error("clone() method is not implemented");
         }
 
-        internal function applyGlobalBattleMacros():void
+        internal function applyGlobalMacros():void
         {
             if (artillery)
             {
-                artillery.applyGlobalBattleMacros();
+                artillery.applyGlobalMacros();
             }
             if (shell)
             {
-                shell.applyGlobalBattleMacros();
+                shell.applyGlobalMacros();
             }
             // parse "special"
             if (special)
@@ -61,22 +61,22 @@ package com.xvm.types.cfg
                     for each (key in keys)
                     {
                         var item:CMinimapCircle = ObjectConverter.convertData(items[key], CMinimapCircle);
-                        item.applyGlobalBattleMacros();
+                        item.applyGlobalMacros();
                         items[key] = item;
                     }
                 }
             }
-            applyGlobalBattleMacrosVector(parsedView);
+            applyGlobalMacrosVector(parsedView);
         }
 
-        private function applyGlobalBattleMacrosVector(items:Vector.<CMinimapCircle>):void
+        private function applyGlobalMacrosVector(items:Vector.<CMinimapCircle>):void
         {
             if (items)
             {
                 var i:int = items.length;
                 while (--i > -1)
                 {
-                    items[i].applyGlobalBattleMacros();
+                    items[i].applyGlobalMacros();
                 }
             }
         }

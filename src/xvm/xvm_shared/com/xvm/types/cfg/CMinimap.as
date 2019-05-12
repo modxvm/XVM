@@ -36,16 +36,16 @@ package com.xvm.types.cfg
             throw new Error("clone() method is not implemented");
         }
 
-        internal function applyGlobalBattleMacros():void
+        internal function applyGlobalMacros():void
         {
             if (circles)
             {
-                circles.applyGlobalBattleMacros();
+                circles.applyGlobalMacros();
             }
             enabled = Macros.FormatBooleanGlobal(enabled, true);
             if (lines)
             {
-                lines.applyGlobalBattleMacros();
+                lines.applyGlobalMacros();
             }
             mapBackgroundImageAlpha = Macros.FormatNumberGlobal(mapBackgroundImageAlpha);
             minimapAimIcon = Macros.FormatStringGlobal(minimapAimIcon);
@@ -53,7 +53,7 @@ package com.xvm.types.cfg
             showCellClickAnimation = Macros.FormatBooleanGlobal(showCellClickAnimation, false);
             if (zoom)
             {
-                zoom.applyGlobalBattleMacros();
+                zoom.applyGlobalMacros();
             }
         }
     }

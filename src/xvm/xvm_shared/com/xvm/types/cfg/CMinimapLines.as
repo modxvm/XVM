@@ -62,21 +62,21 @@ package com.xvm.types.cfg
             throw new Error("clone() method is not implemented");
         }
 
-        internal function applyGlobalBattleMacros():void
+        internal function applyGlobalMacros():void
         {
-            applyGlobalBattleMacrosVector(parsedCamera);
-            applyGlobalBattleMacrosVector(parsedTraverseAngle);
-            applyGlobalBattleMacrosVector(parsedVehicle);
+            applyGlobalMacrosVector(parsedCamera);
+            applyGlobalMacrosVector(parsedTraverseAngle);
+            applyGlobalMacrosVector(parsedVehicle);
         }
 
-        private function applyGlobalBattleMacrosVector(items:Vector.<CMinimapLine>):void
+        private function applyGlobalMacrosVector(items:Vector.<CMinimapLine>):void
         {
             if (items)
             {
                 var i:int = items.length;
                 while (--i > -1)
                 {
-                    items[i].applyGlobalBattleMacros();
+                    items[i].applyGlobalMacros();
                 }
             }
         }

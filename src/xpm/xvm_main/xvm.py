@@ -108,7 +108,6 @@ class Xvm(object):
                    config.lang_data,
                    vehinfo.getVehicleInfoDataArray(),
                    config.networkServicesSettings.__dict__,
-                   self.appLoader.getSpaceID() == GuiGlobalSpaceID.BATTLE,
                    IS_DEVELOPMENT)
 
     # System Message

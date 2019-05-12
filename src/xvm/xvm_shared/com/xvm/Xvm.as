@@ -32,11 +32,6 @@ package com.xvm
             return _appType;
         }
 
-        public static function set appType(value:int):void
-        {
-            _appType = value;
-        }
-
         public static function addEventListener(type:String, listener:Function, useWeakReference:Boolean = true):void
         {
             instance.addEventListener(type, listener, false, 0, useWeakReference);
@@ -76,27 +71,31 @@ package com.xvm
         private static var _instance:Xvm;
         private var _battleState:BattleState;
 
-        public function Xvm():void
+        public function Xvm(appType:int)
         {
+            _appType = appType;
             _instance = this;
-            _battleState = BattleState.instance;
-            this.addChild(_battleState);
+
             Macros.clear();
-            Xfw.addCommandListener(XvmCommandsInternal.AS_L10N, onL10n);
+
+            if (appType & Defines.APP_TYPE_BATTLE)
+            {
+                _battleState = BattleState.instance;
+                this.addChild(_battleState);
+            }
+            else if (appType & Defines.APP_TYPE_LOBBY)
+            {
+                Xfw.addCommandListener(XvmCommandsInternal.AS_UPDATE_RESERVE, onUpdateReserve);
+            }
+
             Xfw.addCommandListener(XvmCommandsInternal.AS_SET_CONFIG, onSetConfig);
-            Xfw.addCommandListener(XvmCommandsInternal.AS_UPDATE_RESERVE, onUpdateReserve);
             Xfw.cmd(XvmCommandsInternal.REQUEST_CONFIG);
         }
 
         // DAAPI Python-Flash interface
 
-        private function onL10n(value:String):String
-        {
-            return Utils.fixImgTag(Locale.get(value));
-        }
-
         private function onSetConfig(config_data:Object, lang_data:Object, vehInfo_data:Array,
-            networkServicesSettings:Object, isBattle:Boolean, IS_DEVELOPMENT:Boolean):void
+            networkServicesSettings:Object, IS_DEVELOPMENT:Boolean):void
         {
             //Logger.add("onSetConfig");
             //Logger.addObject(config_data, 5);
@@ -108,14 +107,7 @@ package com.xvm
             Locale.setupLanguage(lang_data);
             VehicleInfo.setVehicleInfoData(vehInfo_data);
             Config.setNetworkServicesSettings(new NetworkServicesSettings(networkServicesSettings));
-            if (!isBattle)
-            {
-                Config.applyGlobalLobbyMacros();
-            }
-            if (isBattle && BattleGlobalData.initialized)
-            {
-                Config.applyGlobalBattleMacros();
-            }
+            Config.applyGlobalMacros();
             Xvm.dispatchEvent(new Event(Defines.XVM_EVENT_CONFIG_LOADED));
         }
 

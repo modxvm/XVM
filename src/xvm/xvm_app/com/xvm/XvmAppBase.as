@@ -20,6 +20,9 @@ package com.xvm
 
     public class XvmAppBase extends Xvm
     {
-        // stub
+        public function XvmAppBase(appType:int)
+        {
+            super(appType);
+        }
     }
 }

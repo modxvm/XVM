@@ -62,7 +62,6 @@ class XVM_COMMAND(object):
     AS_ON_KEY_EVENT = "xvm.as.on_key_event"
     AS_ON_UPDATE_STAGE = "xvm.as.on_update_stage"
     AS_DOSSIER = "xvm.as.dossier"
-    AS_L10N = "xvm.as.l10n"
     AS_SET_CONFIG = "xvm.as.set_config"
     AS_UPDATE_RESERVE = "xvm.as.update_reserve"
     AS_STAT_BATTLE_DATA = "xvm.as.stat_battle_data"

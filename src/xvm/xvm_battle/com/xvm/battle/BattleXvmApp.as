@@ -14,6 +14,7 @@ package com.xvm.battle
         public function BattleXvmApp():void
         {
             Logger.setCounterPrefix("B");
+            super(BattleXvmMod.APP_TYPE);
 
             battleXvmMod = new BattleXvmMod();
             addChild(battleXvmMod);
