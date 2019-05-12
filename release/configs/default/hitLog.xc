@@ -1,8 +1,10 @@
 ﻿/**
-  * Log of applied damage.
-  * For additional settings see battleLabelsTemplates.xc
-  * Лог нанесенного урона.
-  * Дополнительные настройки см. в battleLabelsTemplates.xc
+ * Log of applied damage.
+ * For additional settings see battleLabelsTemplates.xc
+ * Лог нанесенного урона.
+ * Дополнительные настройки см. в battleLabelsTemplates.xc
+ * 
+ * https://kr.cm/f/t/40466/
 
   Macros used in hitLog:
   Макросы используемые в hitLog:

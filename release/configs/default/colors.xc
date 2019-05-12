@@ -227,10 +227,10 @@
     //
     // Custom dynamic colors by ratings.
     // If you want use your own color scales,
-    // uncomment this block and replace "rating_name" to one of this values: "eff", "wn8", "wtr", "wgr"
+    // uncomment this block and replace "rating_name" to one of this values: "eff", "wn8", "wtr", "wgr".
     // Динамический цвет по указанному рейтингу.
     // Если вы хотите использовать свои собственные границы цветов вместо стандартных,
-    // раскомментируйте блок и замените "rating_name" на одно из следующих значений: "eff", "wn8", "wtr", "wgr"
+    // раскомментируйте блок и замените "rating_name" на одно из следующих значений: "eff", "wn8", "wtr", "wgr".
     // "rating_name": [
     //  { "value": 500,   "color": ${"def.colorRating.very_bad" } }, //    0 - 500   - very bad
     //  { "value": 1000,  "color": ${"def.colorRating.bad"      } }, //  501 - 1000  - bad
