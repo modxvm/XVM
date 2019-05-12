@@ -15,10 +15,7 @@ package com.xvm.types.cfg
         public var showTotalExperience:*;
         public var showTotals:*;
         public var startPage:*;
-        public var enabled:*;
-        public var offsetX:*;
-        public var offsetY:*;
-        public var backgroundAlpha:*;
+        public var bonusState:CBattleResultsBonusState;
 
         public function clone():*
         {
@@ -27,10 +24,10 @@ package com.xvm.types.cfg
 
         internal function applyGlobalMacros():void
         {
-            enabled = Macros.FormatBooleanGlobal(Config.config.battleResults.bonusState.enabled, true);
-            offsetX = Macros.FormatNumberGlobal(Config.config.battleResults.bonusState.offsetX, 25);
-            offsetY = Macros.FormatNumberGlobal(Config.config.battleResults.bonusState.offsetY, 60);
-            backgroundAlpha = Macros.FormatNumberGlobal(Config.config.battleResults.bonusState.backgroundAlpha, 70) / 100.0;
+            if (bonusState)
+            {
+                bonusState.applyGlobalMacros();
+            }
         }
     }
 }
