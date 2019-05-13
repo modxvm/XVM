@@ -82,7 +82,7 @@ post_telegram()
   XVMBUILD_XVM_COMMITAUTHOR=$(htmlencode "$XVMBUILD_XVM_COMMITAUTHOR")
   XVMBUILD_XVM_COMMITMSG=$(htmlencode "$XVMBUILD_XVM_COMMITMSG")
   
-  printf "<b>Build: </b><a href='$XVMBUILD_URL_REPO/$XVMBUILD_XVM_HASH'>$XVMBUILD_XVM_REVISION (branch $XVMBUILD_XVM_BRANCH)</a>\n<b>Date:</b> $builddate\n<b>Download: </b><a href='$downloadlinkzip'>.zip archive</a> | <a href='$downloadlinkexe'>.exe installer</a>\n<b>Author:</b>$XVMBUILD_XVM_COMMITAUTHOR\n<b>Description:</b> $XVMBUILD_XVM_COMMITMSG" | telegram-send --stdin --format html --config /var/xvm/telegram-send.conf
+  printf "<b>Build: </b><a href='$XVMBUILD_URL_REPO/$XVMBUILD_XVM_HASH'>$XVMBUILD_XVM_REVISION (branch $XVMBUILD_XVM_BRANCH)</a>\n<b>Date:</b> $builddate\n<b>Download: </b><a href='$downloadlinkzip'>.zip archive</a> | <a href='$downloadlinkexe'>.exe installer</a>\n<b>Author:</b>$XVMBUILD_XVM_COMMITAUTHOR\n<b>Description:</b> $XVMBUILD_XVM_COMMITMSG" | telegram-send --stdin --disable-web-page-preview --format html --config /var/xvm/telegram-send.conf
 }
 
 load_repositorystats
