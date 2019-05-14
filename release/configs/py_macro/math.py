@@ -28,6 +28,13 @@ def math_div(a, b):
         return a / float(b) if b != 0 else 0
     return None
 
+# Modulo. Деление по модулю.
+@xvm.export('mod')
+def math_mod(a, b):
+    if a is not None and b is not None:
+        return a % b if b != 0 else 0
+    return None
+
 # Raise to power. Возведение в степень.
 @xvm.export('math.pow')
 @xvm.export('pow')

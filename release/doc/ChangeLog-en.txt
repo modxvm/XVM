@@ -1,5 +1,6 @@
 ﻿XVM-7.9.2:
   [PYTHON MACROS]
+  * added macros {{py:mod(a, b)}}, {{py:strip(string, chars)}}, {{py:lstrip(string, chars)}}, {{py:rstrip(string, chars)}}
   * damageLog: added option "groupDamageFromArtAndAirstrike"
   
 XVM-7.9.1:
