@@ -71,6 +71,18 @@
       "moveInBattle": false,
       "x": 240,
       "y": -23,
+      // true - show hits without damage.
+      // true - отображать попадания без урона.
+      "showHitNoDamage": true,
+      // true - summarize damages from fire.
+      // true - суммировать повреждения от пожара.
+      "groupDamagesFromFire": true,
+      // true - summarize damages from ramming, crash, falling (if more than one damage per second).
+      // true - суммировать повреждения от тарана, столкновения, падения (если больше одного повреждения в секунду).
+      "groupDamagesFromRamming_WorldCollision": true,
+      // true - summarize damages from artillery strike and airstrike (if more than one damage per second).
+      // true - суммировать повреждения от артудара и авионалета (если больше одного повреждения в секунду).
+      "groupDamageFromArtAndAirstrike": true,
       // Kind of the received damage (macro {{dmg-kind}}).
       // Тип полученного урона (макрос {{dmg-kind}}).
       "dmg-kind": {
@@ -239,15 +251,6 @@
         "silver-shell": "#CCCCCC", // credits / кредиты.
         "unknown": ""              // unknown / неизвестно.
       },
-      // true - show hits without damage.
-      // true - отображать попадания без урона.
-      "showHitNoDamage": true,
-      // true - summarize damages from fire.
-      // true - суммировать повреждения от пожара.
-      "groupDamagesFromFire": true,
-      // true - summarize damages from ramming, crash, falling (if more than one damage per second).
-      // true - суммировать повреждения от тарана, столкновения, падения (если больше одного повреждения в секунду).
-      "groupDamagesFromRamming_WorldCollision": true,
       // Shadow settings.
       // Настройки тени.
       "shadow": {
@@ -288,7 +291,7 @@
     // Background of the log of the received damage (alternative mode).
     // Подложка лога полученного урона (альтернативный режим).
     "logAltBackground": {
-      "$ref": { "path":"damageLog.logAlt" },
+      "$ref": { "path":"damageLog.logBackground" }
       // Damage log background format.
       // Формат подложки лога повреждений.
       "formatHistory": "<img height='20' width='310' src='xvm://res/icons/damageLog/{{dmg=0?no_dmg|dmg}}.png'>"

@@ -131,6 +131,7 @@ FORMAT_HISTORY = 'formatHistory'
 FORMAT_LAST_HIT = 'formatLastHit'
 GROUP_DAMAGE_RAMMING_COLLISION = 'groupDamagesFromRamming_WorldCollision'
 GROUP_DAMAGE_FIRE = 'groupDamagesFromFire'
+GROUP_DAMAGE_ART_AND_AIRSTRIKE = 'groupDamageFromArtAndAirstrike'
 SHOW_HIT_NO_DAMAGE = 'showHitNoDamage'
 MOVE_IN_BATTLE = 'moveInBattle'
 TIME_DISPLAY_LAST_HIT = 'timeDisplayLastHit'
@@ -617,6 +618,7 @@ class _Base(object):
         self.S_SHOW_HIT_NO_DAMAGE = section + SHOW_HIT_NO_DAMAGE
         self.S_GROUP_DAMAGE_RAMMING_COLLISION = section + GROUP_DAMAGE_RAMMING_COLLISION
         self.S_GROUP_DAMAGE_FIRE = section + GROUP_DAMAGE_FIRE
+        self.S_GROUP_DAMAGE_ART_AND_AIRSTRIKE = section + GROUP_DAMAGE_ART_AND_AIRSTRIKE
         self.S_X = section + 'x'
         self.S_Y = section + 'y'
         self.section = section
@@ -729,7 +731,8 @@ class DamageLog(_Base):
             self.reset_scrolling()
             isGroupRamming_WorldCollision = (data.data['attackReasonID'] in [2, 3]) and config.get(self.S_GROUP_DAMAGE_RAMMING_COLLISION)
             isGroupFire = (data.data['attackReasonID'] == 1) and config.get(self.S_GROUP_DAMAGE_FIRE)
-            if isGroupRamming_WorldCollision or isGroupFire:
+            isGroupArtAndAirstrike = (data.data['attackReasonID'] in [23, 24]) and config.get(self.S_GROUP_DAMAGE_ART_AND_AIRSTRIKE)
+            if isGroupRamming_WorldCollision or isGroupFire or isGroupArtAndAirstrike:
                 self.dataLog = data.data.copy()
                 attackerID = self.dataLog['attackerID']
                 attackReasonID = self.dataLog['attackReasonID']
@@ -807,7 +810,8 @@ class LastHit(_Base):
     def groupDamages(self):
         isGroupRamming_WorldCollision = (data.data['attackReasonID'] in [2, 3]) and config.get(self.S_GROUP_DAMAGE_RAMMING_COLLISION)
         isGroupFire = (data.data['attackReasonID'] == 1) and config.get(self.S_GROUP_DAMAGE_FIRE)
-        if isGroupRamming_WorldCollision or isGroupFire:
+        isGroupArtAndAirstrike = (data.data['attackReasonID'] in [23, 24]) and config.get(self.S_GROUP_DAMAGE_ART_AND_AIRSTRIKE)
+        if isGroupRamming_WorldCollision or isGroupFire or isGroupArtAndAirstrike:
             dataLog = data.data.copy()
             attackerID = dataLog['attackerID']
             attackReasonID = dataLog['attackReasonID']
