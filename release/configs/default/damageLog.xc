@@ -291,7 +291,7 @@
     // Background of the log of the received damage (alternative mode).
     // Подложка лога полученного урона (альтернативный режим).
     "logAltBackground": {
-      "$ref": { "path":"damageLog.logBackground" }
+      "$ref": { "path":"damageLog.logBackground" },
       // Damage log background format.
       // Формат подложки лога повреждений.
       "formatHistory": "<img height='20' width='310' src='xvm://res/icons/damageLog/{{dmg=0?no_dmg|dmg}}.png'>"
