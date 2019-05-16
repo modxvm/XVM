@@ -731,7 +731,7 @@ class DamageLog(_Base):
             self.reset_scrolling()
             isGroupRamming_WorldCollision = (data.data['attackReasonID'] in [2, 3]) and config.get(self.S_GROUP_DAMAGE_RAMMING_COLLISION)
             isGroupFire = (data.data['attackReasonID'] == 1) and config.get(self.S_GROUP_DAMAGE_FIRE)
-            isGroupArtAndAirstrike = (data.data['attackReasonID'] in [23, 24]) and config.get(self.S_GROUP_DAMAGE_ART_AND_AIRSTRIKE)
+            isGroupArtAndAirstrike = (data.data['attackReasonID'] in [24, 25]) and config.get(self.S_GROUP_DAMAGE_ART_AND_AIRSTRIKE)
             if isGroupRamming_WorldCollision or isGroupFire or isGroupArtAndAirstrike:
                 self.dataLog = data.data.copy()
                 attackerID = self.dataLog['attackerID']
@@ -810,7 +810,7 @@ class LastHit(_Base):
     def groupDamages(self):
         isGroupRamming_WorldCollision = (data.data['attackReasonID'] in [2, 3]) and config.get(self.S_GROUP_DAMAGE_RAMMING_COLLISION)
         isGroupFire = (data.data['attackReasonID'] == 1) and config.get(self.S_GROUP_DAMAGE_FIRE)
-        isGroupArtAndAirstrike = (data.data['attackReasonID'] in [23, 24]) and config.get(self.S_GROUP_DAMAGE_ART_AND_AIRSTRIKE)
+        isGroupArtAndAirstrike = (data.data['attackReasonID'] in [24, 25]) and config.get(self.S_GROUP_DAMAGE_ART_AND_AIRSTRIKE)
         if isGroupRamming_WorldCollision or isGroupFire or isGroupArtAndAirstrike:
             dataLog = data.data.copy()
             attackerID = dataLog['attackerID']
