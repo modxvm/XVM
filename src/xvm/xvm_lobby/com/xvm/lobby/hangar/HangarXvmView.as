@@ -71,33 +71,49 @@ package com.xvm.lobby.hangar
 
         // txtTankInfo
 
-        private var _orig_txtTankInfo_x:Number = NaN;
-        private var _orig_txtTankInfo_y:Number = NaN;
+        private var _orig_txtTankInfoName_x:Number = NaN;
+        private var _orig_txtTankInfoName_y:Number = NaN;
+        private var _orig_txtTankInfoLevel_x:Number = NaN;
+        private var _orig_txtTankInfoLevel_y:Number = NaN;
         private var _orig_tankTypeIcon_x:Number = NaN;
         private var _orig_tankTypeIcon_y:Number = NaN;
         private function setupTxtTankInfo():void
         {
+            try
+            {
             var cfg:CHangarElement = Config.config.hangar.vehicleName;
             if (!cfg.enabled)
             {
-                page.xfw_header.txtTankInfo.mouseEnabled = false;
-                page.xfw_header.txtTankInfo.alpha = 0;
-
+                page.xfw_header.txtTankInfoName.mouseEnabled = false;
+                page.xfw_header.txtTankInfoName.alpha = 0;
+                page.xfw_header.txtTankInfoLevel.mouseEnabled = false;
+                page.xfw_header.txtTankInfoLevel.alpha = 0;
                 page.xfw_header.tankTypeIcon.mouseEnabled = false;
                 page.xfw_header.tankTypeIcon.alpha = 0;
             }
             else
             {
-                page.xfw_header.txtTankInfo.mouseEnabled = true;
-                if (isNaN(_orig_txtTankInfo_x))
+                page.xfw_header.txtTankInfoName.mouseEnabled = true;
+                if (isNaN(_orig_txtTankInfoName_x))
                 {
-                    _orig_txtTankInfo_x = page.xfw_header.txtTankInfo.x;
-                    _orig_txtTankInfo_y = page.xfw_header.txtTankInfo.y;
+                    _orig_txtTankInfoName_x = page.xfw_header.txtTankInfoName.x;
+                    _orig_txtTankInfoName_y = page.xfw_header.txtTankInfoName.y;
                 }
-                page.xfw_header.txtTankInfo.x = _orig_txtTankInfo_x + cfg.offsetX;
-                page.xfw_header.txtTankInfo.y = _orig_txtTankInfo_y + cfg.offsetY;
-                page.xfw_header.txtTankInfo.alpha = cfg.alpha / 100.0;
-                page.xfw_header.txtTankInfo.rotation = cfg.rotation;
+                page.xfw_header.txtTankInfoName.x = _orig_txtTankInfoName_x + cfg.offsetX;
+                page.xfw_header.txtTankInfoName.y = _orig_txtTankInfoName_y + cfg.offsetY;
+                page.xfw_header.txtTankInfoName.alpha = cfg.alpha / 100.0;
+                page.xfw_header.txtTankInfoName.rotation = cfg.rotation;
+
+                page.xfw_header.txtTankInfoLevel.mouseEnabled = true;
+                if (isNaN(_orig_txtTankInfoLevel_x))
+                {
+                    _orig_txtTankInfoLevel_x = page.xfw_header.txtTankInfoLevel.x;
+                    _orig_txtTankInfoLevel_y = page.xfw_header.txtTankInfoLevel.y;
+                }
+                page.xfw_header.txtTankInfoLevel.x = _orig_txtTankInfoLevel_x + cfg.offsetX;
+                page.xfw_header.txtTankInfoLevel.y = _orig_txtTankInfoLevel_y + cfg.offsetY;
+                page.xfw_header.txtTankInfoLevel.alpha = cfg.alpha / 100.0;
+                page.xfw_header.txtTankInfoLevel.rotation = cfg.rotation;
 
                 page.xfw_header.tankTypeIcon.mouseEnabled = true;
                 if (isNaN(_orig_tankTypeIcon_x))
@@ -109,6 +125,11 @@ package com.xvm.lobby.hangar
                 page.xfw_header.tankTypeIcon.y = _orig_tankTypeIcon_y + cfg.offsetY;
                 page.xfw_header.tankTypeIcon.alpha = cfg.alpha / 100.0;
                 page.xfw_header.tankTypeIcon.rotation = cfg.rotation;
+            }
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
             }
         }
 
