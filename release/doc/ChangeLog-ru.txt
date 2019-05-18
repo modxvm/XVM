@@ -2,6 +2,10 @@
   [ОБЩЕЕ]
   * World of Tanks 1.5.0.2
 
+  [РЕЗУЛЬТАТЫ БОЯ]
+  * добавлена опция:
+    "battleResults"/"showStandardFrontLineInterface" - отображать стандартный интерфейс для режима "Линия фронта".
+
   [МАКРОСЫ НА PYTHON]
   * добавлены макросы {{py:mod(a, b)}}, {{py:strip(string, chars)}}, {{py:lstrip(string, chars)}}, {{py:rstrip(string, chars)}}
   * damageLog: добавлена опция "groupDamageFromArtAndAirstrike"

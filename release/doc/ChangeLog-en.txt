@@ -2,6 +2,10 @@
   [GENERAL]
   * World of Tanks 1.5.0.2
 
+  [BATTLE RESULTS]
+  * added option:
+    "battleResults"/"showStandardFrontLineInterface" - display standard interface for the "FrontLine" mode.
+
   [PYTHON MACROS]
   * added macros {{py:mod(a, b)}}, {{py:strip(string, chars)}}, {{py:lstrip(string, chars)}}, {{py:rstrip(string, chars)}}
   * damageLog: added option "groupDamageFromArtAndAirstrike"

@@ -40,13 +40,18 @@ def event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, cnt=0):
 @overrideMethod(BattleResultsWindow, 'as_setDataS')
 def BattleResultsWindow_as_setDataS(base, self, data):
     try:
-        data['tabInfo'][0]['linkage'] = 'com.xvm.lobby.ui.battleresults::UI_CommonStats'
+        linkage = data['tabInfo'][0]['linkage']
+        if linkage == 'EpicStatsUI' and not config.get('battleResults/showStandardFrontLineInterface', True):
+            linkage = 'CommonStats'
 
-        # Use data['common']['regionNameStr'] value to transfer XVM data.
-        # Cannot add in data object because DAAPIDataClass is not dynamic.
-        #log(data['xvm_data'])
-        data['xvm_data']['regionNameStr'] = data['common']['regionNameStr']
-        data['common']['regionNameStr'] = simplejson.dumps(data['xvm_data'])
+        if linkage == 'CommonStats':
+            data['tabInfo'][0]['linkage'] = 'com.xvm.lobby.ui.battleresults::UI_CommonStats'
+            # Use data['common']['regionNameStr'] value to transfer XVM data.
+            # Cannot add in data object because DAAPIDataClass is not dynamic.
+            #log(data['xvm_data'])
+            data['xvm_data']['regionNameStr'] = data['common']['regionNameStr']
+            data['common']['regionNameStr'] = simplejson.dumps(data['xvm_data'])
+
         del data['xvm_data']
     except Exception as ex:
         err(traceback.format_exc())
