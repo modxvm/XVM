@@ -141,7 +141,7 @@ package com.xvm.extraFields
                     child.update(options, bindToIconOffset, offsetX, offsetY, _bounds);
                     if (_bounds)
                     {
-                        if (_layout)
+                        if (_layout && options != null)
                         {
                             var position:Number = _isFixedLayout ? options.position : (options.index + 1);
                             switch (_layout)
