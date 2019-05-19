@@ -385,6 +385,11 @@ package com.xvm.lobby.ui.battleresults
 
         private function updateValues():void
         {
+            if (!_fieldsInitialized)
+            {
+                return;
+            }
+
             var compareState:ComparePremiumState = detailsMc.compareState;
             if (compareState.noPremTitleLbl.defaultTextFormat.leading == 2)
             {

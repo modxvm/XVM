@@ -41,11 +41,15 @@ def event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, cnt=0):
 def BattleResultsWindow_as_setDataS(base, self, data):
     try:
         linkage = data['tabInfo'][0]['linkage']
+
         if linkage == 'EpicStatsUI' and not config.get('battleResults/showStandardFrontLineInterface', True):
             linkage = 'CommonStats'
 
-        if linkage == 'CommonStats' or linkage == 'com.xvm.lobby.ui.battleresults::UI_CommonStats':
-            data['tabInfo'][0]['linkage'] = 'com.xvm.lobby.ui.battleresults::UI_CommonStats'
+        if linkage == 'CommonStats':
+            linkage = 'com.xvm.lobby.ui.battleresults::UI_CommonStats'
+
+        if linkage == 'com.xvm.lobby.ui.battleresults::UI_CommonStats':
+            data['tabInfo'][0]['linkage'] = linkage
             # Use data['common']['regionNameStr'] value to transfer XVM data.
             # Cannot add in data object because DAAPIDataClass is not dynamic.
             #log(data['xvm_data'])
