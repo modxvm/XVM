@@ -91,7 +91,7 @@ def _i18n_makeString(base, key, *args, **kwargs):
 @overrideMethod(ToolTip, 'onCreateComplexTooltip')
 def _ToolTip_onCreateComplexTooltip(base, self, tooltipId, stateType):
     if tooltipId is None or XVM_TOOLTIPS.HIDE not in tooltipId:
-        _createTooltip(self, lambda:_onCreateComplexTooltip_callback(base, self, tooltipId, stateType))
+        _createTooltip(self, lambda: _onCreateComplexTooltip_callback(base, self, tooltipId, stateType))
 
 # tooltip delay to resolve performance issue
 # suppress carousel tooltips
@@ -105,7 +105,7 @@ def _ToolTip_onCreateTypedTooltip(base, self, type, *args):
         err(traceback.format_exc())
 
     if args and XVM_TOOLTIPS.HIDE not in args[0]:
-        _createTooltip(self, lambda:_onCreateTypedTooltip_callback(base, self, type, *args))
+        _createTooltip(self, lambda: _onCreateTypedTooltip_callback(base, self, type, *args))
 
 @overrideMethod(ToolTip, 'onHideTooltip')
 def _ToolTip_onHideTooltip(base, self, tooltipId):

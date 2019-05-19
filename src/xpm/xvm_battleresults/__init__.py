@@ -33,7 +33,7 @@ def event_dispatcher_showBattleResultsWindow_proxy(base, arenaUniqueID):
 
 def event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, cnt=0):
     if cnt < 5 and not 'xvm_lobby_ui.swf' in map(str.lower, xfw_mods_info.loaded_swfs):
-        BigWorld.callback(0, lambda:event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, cnt+1))
+        BigWorld.callback(0, lambda: event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, cnt + 1))
     else:
         base(arenaUniqueID)
 
@@ -44,7 +44,7 @@ def BattleResultsWindow_as_setDataS(base, self, data):
         if linkage == 'EpicStatsUI' and not config.get('battleResults/showStandardFrontLineInterface', True):
             linkage = 'CommonStats'
 
-        if linkage == 'CommonStats':
+        if linkage == 'CommonStats' or linkage == 'com.xvm.lobby.ui.battleresults::UI_CommonStats':
             data['tabInfo'][0]['linkage'] = 'com.xvm.lobby.ui.battleresults::UI_CommonStats'
             # Use data['common']['regionNameStr'] value to transfer XVM data.
             # Cannot add in data object because DAAPIDataClass is not dynamic.
@@ -91,7 +91,7 @@ class XvmDataBlock(base.StatsBlock):
     def getVO(self):
         return {
             '__xvm': True, # XVM data marker
-            'regionNameStr':'',
+            'regionNameStr': '',
             'data': self.xvm_data}
 
     def setRecord(self, result, reusable):

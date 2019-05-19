@@ -45,7 +45,7 @@ def _LobbyHeader_populate(base, self):
             items = battle_selector_items.getItems().getItems()
             if actionName in items:
                 item = items[actionName]
-                BigWorld.callback(0, lambda:_restore_battle_type(item))
+                BigWorld.callback(0, lambda: _restore_battle_type(item))
                 return
 
     global _populated

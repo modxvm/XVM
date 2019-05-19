@@ -82,7 +82,7 @@ def load(e):
                     xfw_filewatcher.watcher_add(XVM_EVENT.RELOAD_CONFIG, XVM.CONFIG_DIR, \
                         "import BigWorld;"\
                         "from gui.shared import g_eventBus, events;" \
-                        "BigWorld.callback(0,lambda: g_eventBus.handleEvent(events.HasCtxEvent('%s', {'filename':'%s'})))" % (XVM_EVENT.RELOAD_CONFIG, XVM.CONFIG_FILE), \
+                        "BigWorld.callback(0, lambda: g_eventBus.handleEvent(events.HasCtxEvent('%s', {'filename':'%s'})))" % (XVM_EVENT.RELOAD_CONFIG, XVM.CONFIG_FILE), \
                         True)
                 xfw_filewatcher.watcher_start(XVM_EVENT.RELOAD_CONFIG)
             except Exception:
