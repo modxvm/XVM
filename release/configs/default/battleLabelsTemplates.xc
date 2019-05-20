@@ -64,7 +64,7 @@
       "align": "center",
       "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 1.5 },
       "textFormat": { "font": "mono", "size": 18, "align": "center" },
-      "format": "{{py:xvm.total_hp.text}}"
+      "format": "{{battletype-key!=epic_battle?{{py:xvm.total_hp.text}}}}"
     },
     // Avg damage on current vehicle.
     // Средний урон на текущей технике.

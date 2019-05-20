@@ -1,4 +1,6 @@
 ﻿XVM-7.9.3:
+  [GENERAL]
+  * adaptation for the battle mode "Ranked Battle"
 
 XVM-7.9.2:
   [GENERAL]
