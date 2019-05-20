@@ -1,6 +1,6 @@
 ﻿XVM-7.9.2:
   [GENERAL]
-  * World of Tanks 1.5.0.2
+  * World of Tanks 1.5.0.3
 
   [BATTLE RESULTS]
   * added option:
