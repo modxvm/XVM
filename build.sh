@@ -127,7 +127,8 @@ build_xfw()
     popd >/dev/null
 
     pushd "$XVMBUILD_ROOT_PATH" >/dev/null
-    cp -rf src/xfw/~output_wotmod/*.wotmod ~output/mods/~ver/
+    mkdir -p ~output/mods/~ver/com.modxvm.xfw/
+    cp -rf src/xfw/~output_wotmod/*.wotmod ~output/mods/~ver/com.modxvm.xfw/
     popd >/dev/null
 }
 
