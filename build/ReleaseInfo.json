@@ -1,32 +1,32 @@
 ﻿{
     "RU": {
-        "ver": "7.9.1",
-        "wot": "1.5.0.1",
-        "message": " • World of Tanks 1.5.0.1\nПодробности на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
+        "ver": "7.9.2",
+        "wot": "1.5.0.3",
+        "message": " • World of Tanks 1.5.0.3\nПодробности на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
     },
     "EU": {
-        "ver": "7.9.1",
-        "wot": "1.5.0.1",
-        "message": " • World of Tanks 1.5.0.1\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "7.9.2",
+        "wot": "1.5.0.3",
+        "message": " • World of Tanks 1.5.0.3\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "NA": {
-        "ver": "7.9.1",
-        "wot": "1.5.0.1",
-        "message": " • World of Tanks 1.5.0.1\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "7.9.2",
+        "wot": "1.5.0.3",
+        "message": " • World of Tanks 1.5.0.3\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "ASIA": {
-        "ver": "7.9.1",
-        "wot": "1.5.0.1",
-        "message": " • World of Tanks 1.5.0.1\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "7.9.2",
+        "wot": "1.5.0.3",
+        "message": " • World of Tanks 1.5.0.3\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "CN": {
-        "ver": "7.9.1",
-        "wot": "1.5.0.1",
-        "message": " • World of Tanks 1.5.0.1\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "7.9.2",
+        "wot": "1.5.0.3",
+        "message": " • World of Tanks 1.5.0.3\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "CT": {
-        "ver": "7.9.1",
-        "wot": "1.5.0.1",
-        "message": " • World of Tanks 1.5.0.1\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "7.9.2",
+        "wot": "1.5.0.3",
+        "message": " • World of Tanks 1.5.0.3\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     }
 }
