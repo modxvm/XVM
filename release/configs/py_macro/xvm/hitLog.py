@@ -2,17 +2,18 @@
 # ktulho <https://kr.cm/f/p/17624/>
 
 import BigWorld
+import nations
+import ResMgr
 from Vehicle import Vehicle
 from DestructibleEntity import DestructibleEntity
 from Avatar import PlayerAvatar
-import nations
-import ResMgr
 from constants import ITEM_DEFS_PATH, ARENA_GUI_TYPE, VEHICLE_CLASSES
 from helpers import dependency
-from skeletons.gui.battle_session import IBattleSessionProvider
-from VehicleEffects import DamageFromShotDecoder
-from vehicle_systems.tankStructure import TankPartIndexes
 from items import _xml
+from VehicleEffects import DamageFromShotDecoder
+from skeletons.gui.battle_session import IBattleSessionProvider
+from vehicle_systems.tankStructure import TankPartIndexes
+from gui.battle_control import avatar_getter
 
 from xfw import *
 from xfw_actionscript.python import *
@@ -31,6 +32,24 @@ autoReloadConfig = None
 hitLogConfig = {}
 isDownAlt = False
 
+BATTLE_TYPE = {ARENA_GUI_TYPE.UNKNOWN: "unknown",
+               ARENA_GUI_TYPE.RANDOM: "regular",
+               ARENA_GUI_TYPE.TRAINING: "training",
+               ARENA_GUI_TYPE.TUTORIAL: "tutorial",
+               ARENA_GUI_TYPE.CYBERSPORT: "cybersport",
+               ARENA_GUI_TYPE.EVENT_BATTLES: "event_battles",
+               ARENA_GUI_TYPE.RATED_SANDBOX: "rated_sandbox",
+               ARENA_GUI_TYPE.SANDBOX: "sandbox",
+               ARENA_GUI_TYPE.FALLOUT_CLASSIC: "fallout_classic",
+               ARENA_GUI_TYPE.FALLOUT_MULTITEAM: "fallout_multiteam",
+               ARENA_GUI_TYPE.SORTIE_2: "sortie_2",
+               ARENA_GUI_TYPE.FORT_BATTLE_2: "fort_battle_2",
+               ARENA_GUI_TYPE.RANKED: "ranked",
+               ARENA_GUI_TYPE.BOOTCAMP: "bootcamp",
+               ARENA_GUI_TYPE.EPIC_RANDOM: "epic_random",
+               ARENA_GUI_TYPE.EPIC_RANDOM_TRAINING: "epic_random_training",
+               ARENA_GUI_TYPE.EPIC_BATTLE:  "epic_battle",
+               ARENA_GUI_TYPE.EPIC_TRAINING:  "epic_battle"}
 
 HIT_LOG = 'hitLog/'
 FORMAT_HISTORY = 'formatHistory'
@@ -131,7 +150,8 @@ def updateValueMacros(section, value):
                   'diff-masses': value.get('diff-masses', None),
                   'nation': value.get('nation', None),
                   'blownup': 'blownup' if value['blownup'] else None,
-                  'vehiclename': value.get('attackerVehicleName', None)
+                  'vehiclename': value.get('attackerVehicleName', None),
+                  'battletype-key': value.get('battletype-key', 'unknown')
                   }
     macros.update({'c:team-dmg': conf['c_teamDmg'].get(value['teamDmg'], '#FFFFFF'),
                    'team-dmg': conf['teamDmg'].get(value['teamDmg'], ''),
@@ -140,7 +160,7 @@ def updateValueMacros(section, value):
                    'costShell': conf['costShell'].get(value['costShell'], None),
                    'c:dmg-kind': conf['c_dmg-kind'][ATTACK_REASONS[value['attackReasonID']]],
                    'dmg-kind': conf['dmg-kind'].get(ATTACK_REASONS[value['attackReasonID']], 'reason: %s' % value['attackReasonID']),
-                   'dmg-kind-player': ''.join([conf['dmg-kind-player'].get(ATTACK_REASONS[i], None) for i in value['dmg-kind-player']]),
+                   'dmg-kind-player': ''.join([conf['dmg-kind-player'].get(ATTACK_REASONS[i], None) for i in value.get('dmg-kind-player', [])]),
                    'c:vtype': conf['c_VehicleClass'].get(VEHICLE_CLASSES_SHORT[value['attackedVehicleType']], '#CCCCCC'),
                    'comp-name': conf['compNames'].get(value['compName'], None),
                    'type-shell': conf['typeShell'].get(value['shellKind'], None),
@@ -148,17 +168,21 @@ def updateValueMacros(section, value):
                    'c:type-shell': conf['c_typeShell'].get(value['shellKind'], None),
                    'dmg': value['damage'],
                    'dmg-ratio': value['dmgRatio'],
-                   'n-player': value['n-player'],
-                   'dmg-player': value['dmg-player'],
-                   'dmg-ratio-player': value['dmg-ratio-player'],
+                   'n-player': value.get('n-player', 0),
+                   'dmg-player': value.get('dmg-player', 0),
+                   'dmg-ratio-player': value.get('dmg-ratio-player', 0),
                    'c:dmg-ratio-player': readColor('dmg_ratio_player', value.get('dmg-ratio-player', None)),
                    'dmg-deviation': value['damageDeviation'] * 100 if value['damageDeviation'] is not None else None
                    })
 
 
-def parser(strHTML):
-    s = parser_addon.parser_addon(strHTML, macros)
-    return s
+def parser(strHTML, _macros=None):
+    if strHTML:
+        if _macros is not None:
+            return parser_addon.parser_addon(strHTML, _macros)
+        if macros is not None:
+            return parser_addon.parser_addon(strHTML, macros)
+    return strHTML
 
 
 def removePlayerFromLogs(vehicleID):
@@ -220,7 +244,8 @@ class DataHitLog(object):
                      'squadnum': None,
                      'teamDmg': 'unknown',
                      'damageDeviation': None,
-                     'attackerVehicleName': ''
+                     'attackerVehicleName': '',
+                     'battletype-key': 'unknown'
                      }
 
     def updateLabels(self):
@@ -405,6 +430,8 @@ class DataHitLog(object):
             self.shells[intCD]['shellDamage'] = shell.damage[0]
             self.shells[intCD]['costShell'] = 'gold-shell' if shell.id[1] in goldShells else 'silver-shell'
         ResMgr.purge(xmlPath, True)
+        arena = avatar_getter.getArena()
+        self.data['battletype-key'] = BATTLE_TYPE.get(arena.guiType, 'unknown')
 
     def updateVehInfo(self, vehicle):
         if vehicle.id not in self.vehHealth:
@@ -667,7 +694,7 @@ class HitLog(object):
 
     def output(self):
         self.countLines = len(self.listLog)
-        self.maxCountLines = config.get(self.S_LINES, 7)
+        self.maxCountLines = int(parser(config.get(self.S_LINES, 7), {'battletype-key': _data.data.get('battletype-key', None)}))
         if not self.maxCountLines:
             return
         self.isAddToEnd = config.get(self.S_ADD_TO_END, False)

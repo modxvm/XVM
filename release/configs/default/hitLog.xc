@@ -45,6 +45,7 @@
     {{dmg-kind-player}}    - all kinds of damage done to targets (attack, fire, ramming, ...) / все типы нанесенного урона по цели (атака, пожар, таран, ...).
     {{dmg-deviation}}      - TODO / отклонение нанесенного урона от номинального урона снаряда в процентах. Возвращает 0.0, если техника была уничтожена выстрелом, или выстрел был фугасом и отклонение составило больше 25%.
     {{vehiclename}}        - vehicle system name (usa-A34_M24_Chaffee) / название техники в системе (usa-A34_M24_Chaffee).
+    {{battletype-key}}     - название ключа таблицы типа текущего боя / current battle type table key value
 */
 
 {
@@ -71,8 +72,8 @@
       // Group hits by players name.
       // Группировать попадания по имени игрока.
       "groupHitsByPlayer": true,
-      // Number of lines.
-      // Количество строк.
+      // Number of lines. //TO DO.
+      // Количество строк. Можно использовать макрос {{battletype-key}}.
       "lines": 15,
       // Insert order: false - insert new values to begin, true - add to end.
       // Сортировка попаданий: false - новые значения добавляются сверху, true - снизу.
