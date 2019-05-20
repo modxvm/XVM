@@ -45,7 +45,10 @@ package com.xvm.battle.ranked.fullStats
             component.x = fullStats.x;
             component.y = fullStats.y;
             component.visible = fullStats.visible;
-            page.xfw_battleStatisticDataController.xfw_questProgressViews[qidx] = component.getStatsProgressView();
+            if (qidx >= 0)
+            {
+                page.xfw_battleStatisticDataController.xfw_questProgressViews[qidx] = component.getStatsProgressView();
+            }
             page.fullStats = component;
             page.addChildAt(component, idx);
             page.xfw_battleStatisticDataController.registerComponentController(page.fullStats);
