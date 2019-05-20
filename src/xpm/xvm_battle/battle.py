@@ -48,10 +48,9 @@ import xmqp_events
 #####################################################################
 # constants
 
-NOT_SUPPORT_BATTLE_TYPE = [constants.ARENA_GUI_TYPE.TUTORIAL,\
-                           constants.ARENA_GUI_TYPE.EVENT_BATTLES,\
-                           constants.ARENA_GUI_TYPE.BOOTCAMP,\
-                           constants.ARENA_GUI_TYPE.RANKED ]
+NOT_SUPPORT_BATTLE_TYPE = [constants.ARENA_GUI_TYPE.TUTORIAL,
+                           constants.ARENA_GUI_TYPE.EVENT_BATTLES,
+                           constants.ARENA_GUI_TYPE.BOOTCAMP]
 
 #####################################################################
 # initialization/finalization

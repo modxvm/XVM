@@ -303,7 +303,6 @@ class _Minimap(object):
                self.enabled and \
                self.initialized and \
                (self.guiType != constants.ARENA_GUI_TYPE.EPIC_BATTLE) and \
-               (self.guiType != constants.ARENA_GUI_TYPE.RANKED) and \
                (self.guiType != constants.ARENA_GUI_TYPE.TUTORIAL) and \
                (self.battleType != constants.ARENA_BONUS_TYPE.TUTORIAL)
 
