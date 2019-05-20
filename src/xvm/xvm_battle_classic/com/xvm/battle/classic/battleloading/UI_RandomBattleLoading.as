@@ -32,8 +32,6 @@ package com.xvm.battle.classic.battleloading
             //Logger.add("UI_RandomBattleLoading");
             super();
 
-            //Logger.addObject(form);
-
             battleLoadingForm = form as BattleLoadingForm;
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
         }
@@ -76,7 +74,7 @@ package com.xvm.battle.classic.battleloading
 
         private function setup(e:Event = null):void
         {
-            //Xvm.swfProfilerBegin("UI_BattleLoading.setup()");
+            //Xvm.swfProfilerBegin("UI_RandomBattleLoading.setup()");
             try
             {
                 cfg = isTipsForm ? Config.config.battleLoadingTips : Config.config.battleLoading;
@@ -92,7 +90,7 @@ package com.xvm.battle.classic.battleloading
             {
                 Logger.err(ex);
             }
-            //Xvm.swfProfilerEnd("UI_BattleLoading.setup()");
+            //Xvm.swfProfilerEnd("UI_RandomBattleLoading.setup()");
         }
 
         private function deleteComponents():void

@@ -25,40 +25,27 @@ package com.xvm.battle.ranked.battleloading
         private var _clock:Clock = null;
 
         private var battleLoadingForm:BattleLoadingForm = null;
+        private var isTipsForm:Boolean = false;
 
         public function UI_RankedBattleLoading()
         {
             //Logger.add("UI_RankedBattleLoading");
             super();
-            // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
-            _init();
-        }
 
-        private function _init():void
-        {
             battleLoadingForm = form as BattleLoadingForm;
-            if (battleLoadingForm)
-            {
-                Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
-            }
+            Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
         }
 
         override protected function configUI():void
         {
             super.configUI();
-            if (battleLoadingForm)
-            {
-                setup();
-            }
+            setup();
         }
 
         override protected function onDispose():void
         {
-            if (battleLoadingForm)
-            {
-                Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
-                deleteComponents();
-            }
+            Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
+            deleteComponents();
             super.onDispose();
         }
 
@@ -66,10 +53,9 @@ package com.xvm.battle.ranked.battleloading
         {
             //Logger.addObject(param1);
             super.setVisualTipInfo(data);
-            if (battleLoadingForm)
-            {
-                initRenderers();
-            }
+            isTipsForm = data.showTipsBackground;
+            setup();
+            initRenderers();
         }
 
         override public function setCompVisible(value:Boolean):void
@@ -86,26 +72,25 @@ package com.xvm.battle.ranked.battleloading
 
         // PRIVATE
 
-        private function setup(e:Event = null):Object
+        private function setup(e:Event = null):void
         {
             //Xvm.swfProfilerBegin("UI_RankedBattleLoading.setup()");
             try
             {
-                cfg = battleLoadingForm.formBackgroundTable.visible ? Config.config.battleLoading : Config.config.battleLoadingTips;
+                cfg = isTipsForm ? Config.config.battleLoadingTips : Config.config.battleLoading;
 
                 deleteComponents();
 
                 registerVehicleIconAtlases();
 
                 // Components
-                _clock = new Clock(this.battleLoadingForm); // Realworld time at right side of TipField.
+                _clock = new Clock(battleLoadingForm); // Realworld time at right side of TipField.
             }
             catch (ex:Error)
             {
                 Logger.err(ex);
             }
             //Xvm.swfProfilerEnd("UI_RankedBattleLoading.setup()");
-            return null;
         }
 
         private function deleteComponents():void
@@ -160,7 +145,7 @@ package com.xvm.battle.ranked.battleloading
             }
             battleLoadingForm.xfw_enemyRenderers.splice(0, battleLoadingForm.xfw_enemyRenderers.length);
 
-            var cls:Class = battleLoadingForm.formBackgroundTable.visible ? XvmRankedTablePlayerItemRenderer : XvmRankedTipPlayerItemRenderer;
+            var cls:Class = isTipsForm ? XvmRankedTipPlayerItemRenderer : XvmRankedTablePlayerItemRenderer;
             for (var i:int = 0; i < 15; ++i)
             {
                 battleLoadingForm.xfw_allyRenderers.push(new cls(battleLoadingForm.xfw_renderersContainer, i, false));
