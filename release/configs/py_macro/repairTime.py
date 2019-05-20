@@ -31,14 +31,15 @@ class RepairTimers(object):
         self.isWheeledTech = False
 
     def reset(self):
-        for device in self.timers.copy():
-            self.delTimer(device)
-            self.eventHandler(device)
-        self.timers = {}
+        if self.timers:
+            for device in self.timers.copy():
+                self.delTimer(device)
+                self.eventHandler(device)
+            self.timers = {}
         self.isWheeledTech = False
 
     def eventHandler(self, device):
-        if device in [LEFTTRACK, RIGHTTRACK, WHEEL]:
+        if device in (LEFTTRACK, RIGHTTRACK, WHEEL):
             event = EVENT_TEMPLATE.format(COMPLEX)
         else:
             event = EVENT_TEMPLATE.format(device)
@@ -58,11 +59,8 @@ class RepairTimers(object):
         self.eventHandler(device)
 
     def delTimer(self, device):
-        if device not in self.timers:
-            return
-        
         self.timers[device]['timer'].stop()
-        self.timers.pop(device, None)
+        del self.timers[device]
 
     def onTimer(self, device):
         self.timers[device]['duration'] -= 0.1
@@ -100,19 +98,22 @@ class RepairTimers(object):
 
     def getTime(self, device):
         if not self.timers:
-            result = None
+            return None
         elif device == COMPLEX:
             if self.isWheeledTech:
                 result = self.timers[WHEEL].get('duration', None)
             else:
-                keys = self.timers.keys()
-                if LEFTTRACK in keys and not RIGHTTRACK in keys:
+                isLeftTrackInTimers = LEFTTRACK in self.timers
+                isRightTrackInTimers = RIGHTTRACK in self.timers
+                if isLeftTrackInTimers and not isRightTrackInTimers:
                     result = self.timers[LEFTTRACK].get('duration', None)
-                elif RIGHTTRACK in keys and not LEFTTRACK in keys:
+                elif isRightTrackInTimers and not isLeftTrackInTimers:
                     result = self.timers[RIGHTTRACK].get('duration', None)
-                else:
+                elif isRightTrackInTimers and isLeftTrackInTimers:
                     device = LEFTTRACK if self.timers.get(LEFTTRACK, {}).get('duration', 0.0) > self.timers.get(RIGHTTRACK, {}).get('duration', 0.0) else RIGHTTRACK
                     result = self.timers[device].get('duration', None)
+                else:
+                    return None
         elif device in self.timers:
             result = self.timers[device].get('duration', None)
         else:
@@ -151,7 +152,7 @@ def _updateDeviceState(self, value):
         device = 'wheel'
     
     if device in DEVICES:
-        if 'destroyed' != state:
+        if ('destroyed' != state) and (device in RepairTimers.timers):
             RepairTimers.delTimer(device)
         RepairTimers.eventHandler(device)
 
