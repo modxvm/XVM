@@ -9,7 +9,7 @@ package com.xvm.battle.ranked.battleloading
     import flash.text.TextField;
     import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
     import net.wg.gui.battle.battleloading.renderers.BaseRendererContainer;
-    import net.wg.gui.battle.battleloading.renderers.TipPlayerItemRenderer;
+    import net.wg.gui.battle.ranked.battleloading.renderers.TipPlayerItemRenderer;
 
     public class XvmRankedTipPlayerItemRenderer extends TipPlayerItemRenderer
     {
