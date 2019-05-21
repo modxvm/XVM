@@ -4,6 +4,7 @@
 
   [PYTHON MACROS]
   * hitLog: added macro {{battletype-key}}. Added support for {{battletype-key}} macro in "lines" option.
+  * hitLog: if you are allowed to move the log with the mouse, the coordinates are stored separately for each type of battle.
 
 XVM-7.9.2:
   [GENERAL]

@@ -458,28 +458,35 @@ class HitLog(object):
         self.S_ADD_TO_END = section + ADD_TO_END
         self.S_LINES = section + LINES
         self.S_FORMAT_HISTORY = section + FORMAT_HISTORY
-        self.S_MOVE_IN_BATTLE = section + MOVE_IN_BATTLE
-        self.S_X = section + 'x'
-        self.S_Y = section + 'y'
+        self.S_MOVE_IN_BATTLE = SECTION_LOG + MOVE_IN_BATTLE
+        self.S_X = SECTION_LOG + 'x'
+        self.S_Y = SECTION_LOG + 'y'
+        self.x = 0
+        self.y = 0
+
+    def setPosition(self, battleTipe):
         self._data = None
+        positon = {'x': config.get(self.S_X, DEFAULT_X), 'y': config.get(self.S_Y, DEFAULT_Y)}
         if config.get(self.S_MOVE_IN_BATTLE, False):
-            _data = userprefs.get('hitLog/log', {'x': config.get(self.S_X, DEFAULT_X), 'y': config.get(self.S_Y, DEFAULT_Y)})
-            if section == SECTION_LOG:
-                as_callback("hitLog_mouseDown", self.mouse_down)
-                as_callback("hitLog_mouseUp", self.mouse_up)
-                as_callback("hitLog_mouseMove", self.mouse_move)
+            _data = userprefs.get('hitLog/log/{}'.format(battleTipe), positon)
+            as_callback("hitLog_mouseDown", self.mouse_down)
+            as_callback("hitLog_mouseUp", self.mouse_up)
+            as_callback("hitLog_mouseMove", self.mouse_move)
         else:
-            _data = {'x': config.get(self.S_X, DEFAULT_X), 'y': config.get(self.S_Y, DEFAULT_Y)}
+            _data = positon
         self.x = _data['x']
         self.y = _data['y']
+
+    def savePosition(self, battleTipe):
+        if (None not in [self.x, self.y]) and config.get(self.S_MOVE_IN_BATTLE, False):
+            userprefs.set('hitLog/log/{}'.format(battleTipe), {'x': self.x, 'y': self.y})
 
     def reset(self):
         self.players = {}
         self.listLog = []
         self.countLines = 0
         self.maxCountLines = None
-        if (None not in [self.x, self.y]) and config.get(self.S_MOVE_IN_BATTLE, False) and (self.section == SECTION_LOG):
-            userprefs.set('hitLog/log', {'x': self.x, 'y': self.y})
+
 
     def mouse_down(self, _data):
         if _data['buttonIdx'] == 0:
@@ -772,6 +779,7 @@ def _Vehicle_onEnterWorld(self, prereqs):
             if not (autoReloadConfig or hitLogConfig):
                 for section in SECTIONS:
                     hitLogConfig[section] = readyConfig(section)
+            _log.setPosition(_data.data.get('battletype-key', None))
 
 
 @registerEvent(Vehicle, 'startVisual')
@@ -797,11 +805,12 @@ def _Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
 @registerEvent(PlayerAvatar, '_PlayerAvatar__destroyGUI')
 def PlayerAvatar__destroyGUI(self):
     if config.get(ENABLED, True) and battle.isBattleTypeSupported:
-        _data.reset()
+        _log.savePosition(_data.data.get('battletype-key', None))
         _log.reset()
         _logAlt.reset()
         _logBackground.reset()
         _logAltBackground.reset()
+        _data.reset()
 
 
 @registerEvent(PlayerAvatar, 'handleKey')
