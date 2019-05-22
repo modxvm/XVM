@@ -464,11 +464,11 @@ class HitLog(object):
         self.x = 0
         self.y = 0
 
-    def setPosition(self, battleTipe):
+    def setPosition(self, battleType):
         self._data = None
         positon = {'x': config.get(self.S_X, DEFAULT_X), 'y': config.get(self.S_Y, DEFAULT_Y)}
         if config.get(self.S_MOVE_IN_BATTLE, False):
-            _data = userprefs.get('hitLog/log/{}'.format(battleTipe), positon)
+            _data = userprefs.get('hitLog/log/{}'.format(battleType), positon)
             as_callback("hitLog_mouseDown", self.mouse_down)
             as_callback("hitLog_mouseUp", self.mouse_up)
             as_callback("hitLog_mouseMove", self.mouse_move)
@@ -477,9 +477,9 @@ class HitLog(object):
         self.x = _data['x']
         self.y = _data['y']
 
-    def savePosition(self, battleTipe):
+    def savePosition(self, battleType):
         if (None not in [self.x, self.y]) and config.get(self.S_MOVE_IN_BATTLE, False):
-            userprefs.set('hitLog/log/{}'.format(battleTipe), {'x': self.x, 'y': self.y})
+            userprefs.set('hitLog/log/{}'.format(battleType), {'x': self.x, 'y': self.y})
 
     def reset(self):
         self.players = {}
