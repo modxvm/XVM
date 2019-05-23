@@ -295,7 +295,7 @@ def FragsCollectableStats_addVehicleStatusUpdate(self, vInfoVO):
     if player is None:
         player = BigWorld.player()
     if vInfoVO.vehicleID not in enemyVehiclesMaxHP and vInfoVO.team != player.team:
-        enemyVehiclesMaxHP[vInfoVO.vehicleID] = vInfoVO.vehicleType.maxHealth
+        enemyVehiclesMaxHP[vInfoVO.vehicleID] = vInfoVO.vehicleType.maxHealth if vInfoVO.vehicleType.maxHealth is not None else 0
         enemyVehiclesSumMaxHP = sum(enemyVehiclesMaxHP.values())
 
 @registerEvent(PlayerAvatar, '_PlayerAvatar__destroyGUI')
