@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 03.05.2019
+    // Last update: 23.05.2019
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -515,6 +515,7 @@
     "usa-A121_M26_Cologne":                  {"name": null, "short": null},
     "usa-A122_TS-5":                         {"name": null, "short": null},
     "usa-A123_T78":                          {"name": null, "short": null},
+    "usa-A126_PzVI_Tiger_II_capt":           {"name": null, "short": null},
     "usa-A12_T32":                           {"name": null, "short": null},
     "usa-A13_T34_hvy":                       {"name": null, "short": null},
     "usa-A13_T34_hvy_BF":                    {"name": null, "short": null},
