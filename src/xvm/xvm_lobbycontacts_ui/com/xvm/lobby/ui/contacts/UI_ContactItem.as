@@ -7,7 +7,8 @@ package com.xvm.lobby.ui.contacts
     import com.xfw.*;
     import net.wg.gui.messenger.data.*;
 
-    public class UI_ContactItem extends ContactItemUI
+    // must be dynamic
+    public dynamic class UI_ContactItem extends ContactItemUI
     {
         private var xvm_contact_data:Object = null;
 
