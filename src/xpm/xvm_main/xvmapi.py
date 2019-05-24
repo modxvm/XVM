@@ -8,8 +8,8 @@ def getToken():
     (data, errStr) = _exec('getToken/{token}/{id}')
     return (data, errStr)
 
-def getVersionWithLimit(limit=50):
-    (data, errStr) = _exec('getVersionWithLimit/{token}/{id}/{limit}', params={'limit':limit})
+def getVersionWithLimit(wgmLimit=50, wshLimit=50):
+    (data, errStr) = _exec('getVersionWithLimit/{token}/{id}/{wgm}/{wsh}', params={'wgm':wgmLimit,'wsh':wshLimit})
     return data
 
 def getStats(request):

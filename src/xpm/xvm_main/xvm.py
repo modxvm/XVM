@@ -340,7 +340,7 @@ class Xvm(object):
         config.token = config.XvmServicesToken.restore()
         config.token.updateTokenFromApi()
 
-        data = xvmapi.getVersionWithLimit(config.networkServicesSettings.topClansCount)
+        data = xvmapi.getVersionWithLimit(config.networkServicesSettings.topClansCountWgm, config.networkServicesSettings.topClansCountWsh)
         topclans.update(data)
         config.verinfo = config.XvmVersionInfo(data)
 

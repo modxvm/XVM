@@ -14,7 +14,8 @@ package com.xvm.types
         public var comments:Boolean;
         public var scale:String = null;
         public var rating:String = null;
-        public var topClansCount:Number;
+        public var topClansCountWgm:Number;
+        public var topClansCountWsh:Number;
         public var flag:String = null;
         public var xmqp:Boolean;
         public var x_minimap_clicks_color:Number;

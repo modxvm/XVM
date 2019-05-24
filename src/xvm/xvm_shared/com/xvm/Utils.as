@@ -129,8 +129,8 @@ package com.xvm
 
         public static function getTopClanText(rank:Number):String
         {
-            var value:String = isNaN(rank) ? "regular" : rank == 0 ? "persist" :
-                rank <= Config.networkServicesSettings.topClansCount ? "top" : "regular";
+            var isTop:Boolean = rank <= Config.networkServicesSettings.topClansCountWsh || rank <= Config.networkServicesSettings.topClansCountWgm;
+            var value:String = isNaN(rank) ? "regular" : rank == 0 ? "persist" : isTop ? "top" : "regular";
 
             if (!Config.config.texts.topclan[value])
                 return null;

@@ -620,8 +620,7 @@ class _Stat(object):
             elif pl.clanInfo:
                 rank = pl.clanInfo.get('rank', -1)
                 url = pl.clanInfo.get('emblem', None)
-                # url = 'http://stat.modxvm.com:81'
-                if url and 0 <= rank <= config.networkServicesSettings.topClansCount:
+                if url and rank >= 0:
                     url = url.replace('{size}', '32x32')
                     tID = 'icons/clan/{0}'.format(pl.clanInfo['clan_id'])
                     self._loadingClanIconsCount += 1
