@@ -78,7 +78,7 @@ package com.xvm
 
             Macros.clear();
 
-            if (appType & Defines.APP_TYPE_BATTLE)
+            if (appType & (Defines.APP_TYPE_BATTLE | Defines.APP_TYPE_VEHICLE_MARKERS))
             {
                 _battleState = BattleState.instance;
                 this.addChild(_battleState);

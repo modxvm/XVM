@@ -84,6 +84,13 @@
             "x": 0, "y": -43, "alpha": "{{a:hp}}",
             "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 1.5, "distance": 0, "size": 3 },
             "format": "<font face='$FieldFont' size='11' color='{{c:hp}}'><b>{{hp}}</b></font>"
+          },
+          {
+            "enabled": true,
+            "name": "xmqp event",
+            "x": 0, "y": "{{battletype?-73|{{squad?-73|-58}}}}", "alpha": 100, "align": "center",
+            "textFormat": { "font": "xvm", "size": 16, "color": "0xFFBB00" },
+            "format": "{{x-spotted?&#x70;}}{{x-overturned?&#x112;}}"
           }
         ]
       },
