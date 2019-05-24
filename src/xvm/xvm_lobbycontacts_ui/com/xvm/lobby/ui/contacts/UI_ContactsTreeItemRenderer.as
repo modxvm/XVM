@@ -5,11 +5,12 @@
 package com.xvm.lobby.ui.contacts
 {
     import com.xfw.*;
-    import flash.display.*;
-    import net.wg.gui.components.controls.UILoaderAlt; // '*' conflicts with UI classes
-    import net.wg.gui.messenger.controls.*;
-    import net.wg.gui.messenger.data.*;
-    import scaleform.clik.constants.*;
+    import flash.display.Sprite;
+    import net.wg.gui.components.controls.UILoaderAlt;
+    import net.wg.gui.messenger.controls.ContactItem;
+    import net.wg.gui.messenger.data.ContactsListTreeItemInfo;
+    import net.wg.gui.messenger.data.ITreeItemInfo;
+    import scaleform.clik.constants.InvalidationType;
 
     public class UI_ContactsTreeItemRenderer extends ContactsTreeItemRendererUI
     {
@@ -33,8 +34,6 @@ package com.xvm.lobby.ui.contacts
         {
             try
             {
-                //Logger.addObject(data, 3);
-
                 if (isInvalid(InvalidationType.DATA))
                 {
                     var myData:ITreeItemInfo = this.getData() as ITreeItemInfo;
@@ -61,7 +60,7 @@ package com.xvm.lobby.ui.contacts
                 if (this.xfw_currentContentItem is ContactItem)
                 {
                     var d:ContactsListTreeItemInfo = data as ContactsListTreeItemInfo;
-                    if (d)
+                    if (d != null)
                     {
                         if (d.data.xvm_contact_data)
                         {
@@ -76,32 +75,6 @@ package com.xvm.lobby.ui.contacts
                 Logger.err(ex);
             }
         }
-
-/* using original tooltip form
-        override protected function showTooltip():void
-        {
-            var currentContentItem:UIComponent = this.getCurrentContentItem();
-            if (currentContentItem is ContactItem)
-            {
-                var d:ContactsListTreeItemInfo = data as ContactsListTreeItemInfo;
-                if (d)
-                {
-                    if (d.data.xvm_contact_data)
-                    {
-                        var comment:String = d.data.xvm_contact_data.comment;
-                        if (comment)
-                        {
-                            App.toolTipMgr.show(d.data.userProps.userName +
-                                (d.data.userProps.clanAbbrev ? "[" + d.data.userProps.clanAbbrev + "]" : "") +
-                                "\n\n<font color='" + XfwUtils.toHtmlColor(XfwConst.UICOLOR_LABEL) + "'>" + Utils.fixImgTag(comment) + "</font>");
-                            return;
-                        }
-                    }
-                }
-            }
-            super.showTooltip();
-        }
-*/
 
         // PRIVATE
 
@@ -136,35 +109,3 @@ package com.xvm.lobby.ui.contacts
         }
     }
 }
-/*
-data: { // net.wg.gui.messenger.data::ContactsListTreeItemInfo
-  "id": 13494688,
-  "isBrunch": false,
-  "isOpened": false,
-  "data": {
-    "isOnline": false,
-    "userProps": {
-      "rgb": 5263440,
-      "userName": "Tracks_Destroyer_RU",
-      "tags": [
-        "sub/none",
-        "friend"
-      ],
-      "clanAbbrev": null,
-      "region": null,
-      "suffix": " <IMG SRC='img://gui/maps/icons/messenger/contactConfirmNeeded.png' width='16' height='16' vspace='-6' hspace='0'/>"
-    },
-    "note": "",
-    "xvm_contact_data": {
-      "nick": "nick",
-      "comment": "comment"
-    },
-    "dbID": 7027996
-  },
-  "gui": { "id": 13494688 },
-  "parent": {...}, // net.wg.gui.messenger.data::ContactsListTreeItemInfo
-  "children": null,
-  "parentItemData": null
-}
-*/
-
