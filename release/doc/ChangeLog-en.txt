@@ -1,5 +1,6 @@
 ﻿XVM-7.9.3:
   [GENERAL]
+  * World of Tanks 1.5.0.4
   * adaptation for the battle mode "Ranked Battle"
 
   [PYTHON MACROS]
