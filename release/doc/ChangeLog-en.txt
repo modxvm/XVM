@@ -1,4 +1,13 @@
 ﻿XVM-7.9.4:
+  [XFW]
+  * backport Python HTTP and SSL stacks from CPython 2.7.16
+  * update 3rdparty libraries
+    - decorator: 4.1.2 -> 4.4.0
+    - dpath: 1.3.3 -> 1.4.2
+    - pika: 0.10.0 -> 1.0.1
+    - simplejson: 3.4.0 -> 3.16.1
+    - six: 1.8.0 -> 1.12.0
+  * replaced networkX with py-dag for dependencies resolving
 
 XVM-7.9.3:
   [GENERAL]
