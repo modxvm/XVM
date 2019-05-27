@@ -141,7 +141,7 @@ dc_fn=../../~output/res_mods/mods/xfw_packages/xvm_main/python/default_config.py
 rm -f "${dc_fn}c"
 "$XVMBUILD_PYTHON_FILEPATH" -c "
 import sys
-sys.path.insert(0, '../xfw/~output/python/mods/xfw/python/lib')
+sys.path.insert(0, '../xfw/~output/xfw_packages/xfw_libraries/res/mods/xfw_libraries')
 import JSONxLoader
 cfg = JSONxLoader.load('../../release/configs/default/@xvm.xc')
 en = JSONxLoader.load('../../release/l10n/en.xc')
