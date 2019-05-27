@@ -1,12 +1,17 @@
 """ XVM (c) https://modxvm.com 2013-2019 """
 
+from xfw import *
+
 #############################
 # Command
+
+from gui.shared import events, g_eventBus
+from gui.shared import event_dispatcher as shared_events
+from gui.shared.event_bus import EVENT_BUS_SCOPE
 
 def onHangarInit():
     # debug
     if IS_DEVELOPMENT:
-
         import glob
         files = glob.glob("[0-9]*.dat")
         if files:
@@ -19,6 +24,14 @@ def onHangarInit():
         #from skeletons.gui.goodies import IGoodiesCache
         #goodiesCache = dependency.instance(IGoodiesCache)
         #shared_events.showBoosterAward(goodiesCache.getBooster(5022))
+
+        # Load Views
+        #g_eventBus.handleEvent(events.LoadViewEvent('profileWindow', 'profileWindow_519821', {'userName': 'TurinDeNar', 'databaseID': 519821}), 1)
+
+        # Show User profile
+        def onDossierReceived(databaseID, userName):
+            shared_events.showProfileWindow(databaseID, userName)
+        #shared_events.requestProfile(519821, 'TurinDeNar', successCallback=onDossierReceived)
 
 
 def runTest(args):
@@ -41,8 +54,6 @@ from helpers import dependency
 from gui.shared.utils import decorators
 from gui.battle_results import RequestResultsContext
 from skeletons.gui.battle_results import IBattleResultsService
-
-from xfw import *
 
 from logger import *
 
@@ -84,3 +95,18 @@ def BattleResultsCache_get(base, self, arenaUniqueID, callback):
 
     if fileHandler is not None:
         fileHandler.close()
+
+#############################
+# DEBUG events
+
+#from gui.shared import events
+#from gui.shared.event_bus import EventBus, EVENT_BUS_SCOPE
+#@overrideMethod(EventBus, 'handleEvent')
+#def _EventBus_handleEvent(base, self, event, scope=EVENT_BUS_SCOPE.DEFAULT):
+#    if isinstance(event, events.LoadViewEvent):
+#        log('EVENT: class={} alias={} name={} ctx={} scope={}'.format(event.__class__.__name__, event.eventType, event.name, event.ctx, scope))
+#    elif isinstance(event, events.HasCtxEvent):
+#        log('EVENT: class={} eventType={} ctx={} scope={}'.format(event.__class__.__name__, event.eventType, event.ctx, scope))
+#    #else:
+#    #    log('EVENT: class={} scope={}'.format(event.__class__.__name__, scope))
+#    base(self, event, scope)

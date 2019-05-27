@@ -30,10 +30,10 @@ import dossier
 import minimap_circles
 import python_macro
 import reserve
-import test
 import topclans
 import wgutils
 import xvmapi
+import xvm_debug
 
 _LOG_COMMANDS = (
     XVM_COMMAND.LOAD_STAT_BATTLE,
@@ -190,7 +190,7 @@ class Xvm(object):
         BigWorld.callback(0, self.updateTankParams)
 
         if IS_DEVELOPMENT:
-            test.onHangarInit()
+            xvm_debug.onHangarInit()
 
     def hangarDispose(self):
         trace('hangarDispose')
