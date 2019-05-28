@@ -185,7 +185,14 @@ package com.xvm
                 {
                     var sd:StatData = ObjectConverter.convertData(data.players[name], StatData);
                     updatedPlayers.push(name);
-                    calculateStatValues(sd);
+                    if (sd.v == null)
+                    {
+                        sd.v = new VData();
+                    }
+                    else
+                    {
+                        sd.v.data = VehicleInfo.get(sd.v.id);
+                    }
                     cache[name] = sd;
                     Macros.RegisterStatisticsMacros(name, sd);
                     //Logger.addObject(sd, 3, "stat[" + name + "]");
@@ -226,9 +233,14 @@ package com.xvm
             try
             {
                 var sd:StatData = ObjectConverter.convertData(data, StatData);
-                calculateStatValues(sd);
+                if (sd.vehicles != null)
+                {
+                    for (var tankId:String in sd.vehicles)
+                    {
+                        sd.vehicles[tankId] = ObjectConverter.convertData(sd.vehicles[tankId], VData);
+                    }
+                }
                 name = sd.name || sd.name_db;
-                //Logger.addObject(sd, 2);
                 keyName = Config.config.region + "/" + name;
                 userCache[keyName] = sd;
                 keyId = "ID/" + sd.player_id;
@@ -249,19 +261,6 @@ package com.xvm
                 }
             }
             return null;
-        }
-
-        // TODO: remove
-        public function calculateStatValues(stat:StatData):void
-        {
-            if (stat.v == null)
-            {
-                stat.v = new VData();
-            }
-            else
-            {
-                stat.v.data = VehicleInfo.get(stat.v.id);
-            }
         }
     }
 }

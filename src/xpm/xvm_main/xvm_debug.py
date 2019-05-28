@@ -31,7 +31,7 @@ def onHangarInit():
         # Show User profile
         def onDossierReceived(databaseID, userName):
             shared_events.showProfileWindow(databaseID, userName)
-        #shared_events.requestProfile(519821, 'TurinDeNar', successCallback=onDossierReceived)
+        #shared_events.requestProfile(31996, 'Jade', successCallback=onDossierReceived)
 
 
 def runTest(args):

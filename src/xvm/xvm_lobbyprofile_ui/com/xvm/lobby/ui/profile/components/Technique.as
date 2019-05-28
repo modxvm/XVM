@@ -178,15 +178,15 @@ package com.xvm.lobby.ui.profile.components
                 var stat:StatData = accountDBID == 0 ? Stat.getUserDataByName(playerName) : Stat.getUserDataById(accountDBID);
                 if (stat)
                 {
-                    if (stat.v)
+                    if (stat.vehicles)
                     {
                         for each (var data:Object in currentData)
                         {
                             if (data == null)
                                 continue;
-                            var vdata:Object = stat.v[data.id];
                             if (data.xvm_xte < 0)
                             {
+                                var vdata:VData = stat.vehicles[data.id];
                                 if (vdata)
                                 {
                                     if (!isNaN(vdata.xte))
