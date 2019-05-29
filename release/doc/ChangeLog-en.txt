@@ -1,4 +1,7 @@
 ﻿XVM-7.9.4:
+  [HANGAR]
+  * fixed display of xte column in player profiles
+
   [XFW]
   * backport Python HTTP and SSL stacks from CPython 2.7.16
   * update 3rdparty libraries
