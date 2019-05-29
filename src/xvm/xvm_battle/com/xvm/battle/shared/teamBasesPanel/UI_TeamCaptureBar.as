@@ -91,7 +91,7 @@ package com.xvm.battle.shared.teamBasesPanel
             }
         }
 
-        override public function updateCaptureData(points:Number, param2:Boolean, param3:Boolean, param4:Number, timeLeft:String, vehiclesCount:String, title:String, param8:Boolean=true):void
+        override public function updateCaptureData(points:Number, param2:Boolean, param3:Boolean, param4:Number, timeLeft:String, vehiclesCount:String, title:String, param8:String, param9:Boolean=true):void
         {
             try
             {
