@@ -38,6 +38,16 @@
       // false - отключить отображение счетчика непрочитанных уведомлений в меню.
       "showUnreadCounter": true
     },
+    // Parameters of the "Session statistics" button.
+    // Параметры кнопки "Сессионная статистика".
+    "sessionStatsButton": {
+      // false - disable display "Session statistics" button.
+      // false - отключить отображение кнопки "Сессионная статистика".
+      "showButton": true,
+      // false - disable display the counter of spent battles on the button.
+      // false - отключить отображение счетчика проведенных боев на кнопке.
+      "showBattleCount": true
+    },
     // true - enable locker for gold.
     // true - включить замок для золота.
     "enableGoldLocker": false,

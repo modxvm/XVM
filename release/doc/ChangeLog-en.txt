@@ -2,9 +2,14 @@
   [GENERAL]
   * World of Tanks 1.5.1.0
 
+  [HANGAR]
+  * added options:
+      "hangar"/"sessionStatsButton"/"showButton" - display "Session statistics" button
+      "hangar"/"sessionStatsButton"/"showBattleCount" - display the counter of spent battles on the button
+
 XVM-7.9.4:
   [HANGAR]
-  * fixed display of xte column in player profiles
+  * fixed display of xTE column in player profiles
 
   [XFW]
   * backport Python HTTP and SSL stacks from CPython 2.7.16
@@ -31,7 +36,7 @@ XVM-7.9.2:
 
   [BATTLE RESULTS]
   * added option:
-    "battleResults"/"showStandardFrontLineInterface" - display standard interface for the "FrontLine" mode.
+      "battleResults"/"showStandardFrontLineInterface" - display standard interface for the "FrontLine" mode.
 
   [PYTHON MACROS]
   * added macros {{py:mod(a, b)}}, {{py:strip(string, chars)}}, {{py:lstrip(string, chars)}}, {{py:rstrip(string, chars)}}

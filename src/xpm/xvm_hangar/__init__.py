@@ -26,6 +26,8 @@ from gui.game_control.hero_tank_controller import HeroTankController
 from gui.promo.hangar_teaser_widget import TeaserViewer
 from gui.game_control.PromoController import PromoController
 from gui.game_control.AwardController import ProgressiveRewardHandler
+from gui.Scaleform.daapi.view.lobby.messengerBar.messenger_bar import MessengerBar
+from gui.Scaleform.daapi.view.lobby.messengerBar.session_stats_button import SessionStatsButton
 
 from xfw import *
 
@@ -207,3 +209,18 @@ def _showAward(base, self, ctx):
     if not config.get('hangar/showRewardWindow', True):
         return
     base(self, ctx)
+
+# hide display session statistics button
+@overrideMethod(MessengerBar, '_MessengerBar__updateSessionStatsBtn')
+def updateSessionStatsBtn(base, self):
+    if not config.get('hangar/sessionStatsButton/showButton', True):
+        self.as_setSessionStatsButtonVisibleS(False)
+        return
+    base(self)
+
+# hide display the counter of spent battles on the button
+@overrideMethod(SessionStatsButton, '_SessionStatsButton__updateBatteleCount')
+def updateBatteleCount(base, self):
+    if not config.get('hangar/sessionStatsButton/showBattleCount', True):
+        return
+    base(self)
