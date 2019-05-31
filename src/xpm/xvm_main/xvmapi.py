@@ -1,6 +1,7 @@
 """ XVM (c) https://modxvm.com 2013-2019 """
 
 from consts import *
+import urllib
 
 # PUBLIC
 
@@ -8,8 +9,9 @@ def getToken():
     (data, errStr) = _exec('getToken/{token}/{id}')
     return (data, errStr)
 
-def getVersionWithLimit(wgmLimit=50, wshLimit=50):
-    (data, errStr) = _exec('getVersionWithLimit/{token}/{id}/{wgm}/{wsh}', params={'wgm':wgmLimit,'wsh':wshLimit})
+def getVersion(wgmLimit=50, wshLimit=50):
+    (data, errStr) = _exec('getVersion/{id}/{ver}/{wgm}/{wsh}',
+        params={'ver':urllib.quote(XVM.XVM_VERSION),'wgm':wgmLimit,'wsh':wshLimit})
     return data
 
 def getStats(request):
