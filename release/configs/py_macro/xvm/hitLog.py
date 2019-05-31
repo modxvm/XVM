@@ -443,11 +443,11 @@ class HitLog(object):
                 return None
 
             colors = config.get('colors/' + sec)
-            if value is not None and colors is not None:
-                return getColor(colors, value)
-            elif xvalue is not None:
+            if _value is not None and colors is not None:
+                return getColor(colors, _value)
+            elif _xvalue is not None:
                 colors_x = config.get('colors/x')
-                return getColor(colors_x, xvalue)
+                return getColor(colors_x, _xvalue)
 
         conf = readyConfig(self.section)
         if macros is None:
@@ -784,7 +784,7 @@ def _Vehicle_onEnterWorld(self, prereqs):
             _data.onEnterWorld(self)
             autoReloadConfig = config.get('autoReloadConfig')
             if not (autoReloadConfig or hitLogConfig):
-                for section in SECTIONS:
+                for section in HIT_LOG_SECTIONS.SECTIONS:
                     hitLogConfig[section] = readyConfig(section)
             _log.setPosition(_data.data.get('battletype-key', None))
 
