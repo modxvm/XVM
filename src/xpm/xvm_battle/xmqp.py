@@ -275,8 +275,9 @@ class _XMQP(object):
 
         return pika.SelectConnection(
             params,
+            on_open_error_callback=self.on_open_connection_error,
             on_open_callback=self.on_connection_open,
-            on_open_error_callback=self.on_open_connection_error)
+            stop_ioloop_on_close=False)
 
     def on_open_connection_error(self, unused_connection, error_message=None):
         err('[XMQP] on_open_connection_error %s' % repr(pika_exceptions.AMQPConnectionError(error_message or
