@@ -2,6 +2,12 @@
   [GENERAL]
   * World of Tanks 1.5.1.0
 
+  [MACROS]
+  * added macros in battle:
+      {{special}}, {{my-special}} - value 'special' for award and event (excluding premium vehicles with increased income on credits) vehicle, empty for normal vehicle
+  * added macros in hangar:
+      {{v.special}} - value 'special' for award and event (excluding premium vehicles with increased income on credits) vehicle, empty for normal vehicle
+
   [HANGAR]
   * added options:
       "hangar"/"sessionStatsButton"/"showButton" - display "Session statistics" button

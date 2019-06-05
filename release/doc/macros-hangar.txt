@@ -34,9 +34,10 @@ Legend:
 │ {{v.battletiermin}}        │ X │ X │ minimal vehicle battle tier
 │ {{v.battletiermax}}        │ X │ X │ maximal vehicle battle tier
 │ {{v.nation}}               │ X │ X │ vehicle nation
-│ {{v.premium}}              │ X │ X │ 'premium' for premium, empty for normal vehicle
-│ {{v.elite}}                │ X │   │ 'elite' for elite, empty for normal vehicle
-│ {{v.rent}}                 │ X │ X │ 'rent' for rented, empty for normal vehicle
+│ {{v.premium}}              │ X │ X │ value 'premium' for premium, empty for normal vehicle
+│ {{v.special}}              │ X │ X │ value 'special' for award and event (excluding premium vehicles with increased income on credits) vehicle, empty for normal vehicle
+│ {{v.elite}}                │ X │   │ value 'elite' for elite, empty for normal vehicle
+│ {{v.rent}}                 │ X │ X │ value 'rent' for rented, empty for normal vehicle
 │ {{v.maxHP}}                │ X │ X │ maximum vehicle health points
 │ {{v.hitsRatio}}            │ X │ X │ percent of hits
 │ {{v.c_hitsRatio}}          │ X │ X │ dynamic color for this macro
@@ -87,7 +88,7 @@ Legend:
 │ {{v.gunAvgHit}}            │ . │ . │ average penetration for current gun AP/CR/HE
 │ {{v.gunDispersion}}        │ . │ . │ base dispersion at 100 m for current gun
 │ {{v.gunAimingTime}}        │ . │ . │ base aiming time for current gun
-│ {{v.selected}}             │ X │   │ 'sel' for selected, empty for others
+│ {{v.selected}}             │ X │   │ value 'sel' for selected, empty for others
 │ {{mystat.player_id}}       │   │ X │ ID of current player
 │ {{mystat.name}}            │   │ X │ nick of current player
 │ {{mystat.flag}}            │   │ X │ flag selected in the personal cabinet on the https://modxvm.com site

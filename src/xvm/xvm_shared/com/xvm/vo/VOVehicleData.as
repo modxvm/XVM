@@ -16,6 +16,7 @@ package com.xvm.vo
         private var _vclass:String;
         public var nation:String;
         public var premium:Boolean;
+        public var special:Boolean;
         public var isReserved:Boolean;
 
         public var hpStock:int;

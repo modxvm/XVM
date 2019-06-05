@@ -43,6 +43,7 @@ package com.xvm.types.dossier
                 rlevel = Defines.ROMAN_LEVEL[vdata.level - 1];
                 nation = vdata.nation;
                 premium = vdata.premium ? "premium" : null;
+                special = vdata.special ? "special" : null;
                 maxHP = vdata.hpTop;
                 battletiermin = vdata.tierLo;
                 battletiermax = vdata.tierHi;
@@ -153,6 +154,7 @@ package com.xvm.types.dossier
         public var rlevel:String;
         public var nation:String;
         public var premium:String;
+        public var special:String;
         public var maxHP:Number;
         public var battletiermin:int;
         public var battletiermax:int;

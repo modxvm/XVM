@@ -37,7 +37,8 @@ Legend:
 │ H │ {{nation}}         │ X │ X │ X │ X │ X │ X │ vehicle nation
 │ H │ {{level}}          │ X │ X │ X │ X │ X │ X │ vehicle level (Arabic numerals)
 │ H │ {{rlevel}}         │ X │ X │ X │ X │ X │ X │ vehicle level (Roman numerals)
-│ H │ {{premium}}        │ X │ X │ X │ X │ X │ X │ 'premium' for premium, empty for normal vehicle
+│ H │ {{premium}}        │ X │ X │ X │ X │ X │ X │ value 'premium' for premium, empty for normal vehicle
+│ H │ {{special}}        │ X │ X │ X │ X │ X │ X │ value 'special' for award and event (excluding premium vehicles with increased income on credits) vehicle, empty for normal vehicle
 │ H │ {{squad}}          │ X │ X │ X │ X │ X │   │ value 'sq' for own squad, empty for others
 │ D │ {{frags}}          │   │ X │ X │ X │ X │   │ current frags
 │ H │ {{ready}}          │ X │ X │ X │ X │ X │   │ value 'ready' if player loaded to the game, '' if not
@@ -106,13 +107,14 @@ Legend:
 │ S │ {{my-nation}}          │ X │ X │ X │ X │ X │ X │ my vehicle nation
 │ S │ {{my-level}}           │ X │ X │ X │ X │ X │ X │ my vehicle level (Arabic numerals)
 │ S │ {{my-rlevel}}          │ X │ X │ X │ X │ X │ X │ my vehicle level (Roman numerals)
-│ S │ {{my-premium}}         │ X │ X │ X │ X │ X │ X │ 'premium' for premium, empty for normal vehicle
+│ S │ {{my-premium}}         │ X │ X │ X │ X │ X │ X │ value 'premium' for premium, empty for normal vehicle
+│ S │ {{my-special}}         │ X │ X │ X │ X │ X │ X │ value 'special' for award and event (excluding premium vehicles with increased income on credits) vehicle, empty for normal vehicle
 │ S │ {{my-clan}}            │ X │ X │ X │ X │ X │ X │ my clan
 │ S │ {{cellsize}}           │   │ X │ X │ X │ X │ X │ minimap cell side size
 │ D │ {{pp.mode}}            │   │ X │ X │ X │   │ X │ current players panel mode (0-none, 1-small, 2-medium, 3-medium2, 4-large)
 │ D │ {{pp.widthLeft}}       │   │ X │ X │ X │   │ X │ current left players panel width
 │ D │ {{pp.widthRight}}      │   │ X │ X │ X │   │ X │ current right players panel width
-│ D │ {{hasBadges}}          │   │ X │ X │ X │   │ X │ 'true' if at least one player in the team has badge, empty if not
+│ D │ {{hasBadges}}          │   │ X │ X │ X │   │ X │ value 'true' if at least one player in the team has badge, empty if not
 └───┴────────────────────────┴───┴───┴───┴───┴───┴───┴──────────────────────────────────────
 
   Statistic macros

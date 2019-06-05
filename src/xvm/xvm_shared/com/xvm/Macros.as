@@ -325,7 +325,7 @@ package com.xvm
             "x-enabled", "x-sense-on", "x-spotted", "x-fire", "x-overturned", "x-drowning",
             // vehicle macros (can be changed during the battle in some game modes)
             "veh-id", "vehicle", "vehiclename", "vehicle-short", "vtype-key", "vtype", "vtype-l", "c:vtype",
-            "battletier-min", "battletier-max", "nation", "level", "rlevel", "premium",
+            "battletier-min", "battletier-max", "nation", "level", "rlevel", "premium", "special",
             // global macros
             "sys-color-key", "c:system", "my-alive"
             ];
@@ -1129,6 +1129,8 @@ package com.xvm
             pdata["rlevel"] = Defines.ROMAN_LEVEL[vdata.level - 1];
             // {{premium}}
             pdata["premium"] = vdata.premium ? "premium" : null;
+            // {{special}}
+            pdata["special"] = vdata.special ? "special" : null;
         }
 
         private function _RegisterStatisticsMacros(pname:String, stat:StatData):void
