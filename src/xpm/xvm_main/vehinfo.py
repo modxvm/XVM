@@ -138,9 +138,10 @@ _UNKNOWN_VEHICLE_DATA = {
     'localizedName': 'unknown',
     'localizedShortName': 'unknown',
     'localizedFullName': 'unknown',
-    'premium':False,
-    'hpStock':0,
-    'hpTop':0,
+    'premium': False,
+    'special': False,
+    'hpStock': 0,
+    'hpTop': 0,
     'turret': TURRET_TYPE_ONLY_ONE,
     'visRadius': 0,
     'firingRadius': 0,
@@ -173,6 +174,7 @@ def _init():
                 data['localizedShortName'] = descr.shortUserString
                 data['localizedFullName'] = descr.userString
                 data['premium'] = 'premium' in descr.tags
+                data['special'] = 'special' in descr.tags
 
                 stockTurret = item.turrets[0][0]
                 topTurret = item.turrets[0][-1]
