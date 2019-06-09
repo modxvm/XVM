@@ -1,4 +1,4 @@
-﻿﻿""" XVM (c) https://modxvm.com 2013-2019 """
+﻿""" XVM (c) https://modxvm.com 2013-2019 """
 
 #####################################################################
 # imports
@@ -229,8 +229,8 @@ class ShellData(object):
         self.shells = {}
         self.shell()
         self.data = {'costShell': {}}
-    
-    def shell(self):                
+
+    def shell(self):
         xmlPath = ''
         for nation in nations.NAMES:
             xmlPath = '%s%s%s%s' % (ITEM_DEFS_PATH, 'vehicles/', nation, '/components/shells.xml')
@@ -238,7 +238,7 @@ class ShellData(object):
             id_xmlCtx_s = ((_xml.readInt(xmlCtx, s, 'id', 0, 65535), xmlCtx, s) for xmlCtx, s in xmlCtx_s)
             self.shells[nation] = [i for i, xmlCtx, s in id_xmlCtx_s if s.readBool('improved', False)]
         ResMgr.purge(xmlPath, True)
-              
+
     def typeShell(self, gun):
         self.data['costShell'] = {}
         for shell in gun.shots:
