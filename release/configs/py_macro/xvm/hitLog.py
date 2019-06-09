@@ -728,7 +728,7 @@ _logAltBackground = HitLog(HIT_LOG_SECTIONS.ALT_BACKGROUND)
 
 @registerEvent(PlayerAvatar, '_PlayerAvatar__processVehicleAmmo')
 def PlayerAvatar__processVehicleAmmo(self, vehicleID, compactDescr, quantity, quantityInClip, _, __):
-    if battle.isBattleTypeSupported and config.get(HIT_LOG_ENABLED, True):
+    if battle.isBattleTypeSupported and config.get(ENABLED_HIT_LOG, True):
         _data.loaded()
 
 
