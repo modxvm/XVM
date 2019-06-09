@@ -280,7 +280,7 @@ class DataHitLog(object):
             self.data['squadnum'] = None
         self.updateLabels()
 
-    def reload(self):
+    def loaded(self):
         self.intCD = self.ammo.getCurrentShellCD()
 
     def onHealthChanged(self, vehicle, newHealth, attackerID, attackReasonID, isVehicle=True):
@@ -726,10 +726,10 @@ _logBackground = HitLog(HIT_LOG_SECTIONS.BACKGROUND)
 _logAltBackground = HitLog(HIT_LOG_SECTIONS.ALT_BACKGROUND)
 
 
-@registerEvent(PlayerAvatar, 'updateVehicleGunReloadTime')
-def _PlayerAvatar_updateVehicleGunReloadTime(self, vehicleID, timeLeft, baseTime):
-    if battle.isBattleTypeSupported and (timeLeft <= 0.0) and config.get(ENABLED_HIT_LOG, True):
-        _data.reload()
+@registerEvent(PlayerAvatar, '_PlayerAvatar__processVehicleAmmo')
+def PlayerAvatar__processVehicleAmmo(self, vehicleID, compactDescr, quantity, quantityInClip, _, __):
+    if battle.isBattleTypeSupported and config.get(HIT_LOG_ENABLED, True):
+        _data.loaded()
 
 
 @registerEvent(DestructibleEntity, 'onEnterWorld')
