@@ -1,4 +1,4 @@
-﻿""" XVM (c) https://modxvm.com 2013-2019 """
+﻿﻿""" XVM (c) https://modxvm.com 2013-2019 """
 
 #####################################################################
 # imports
@@ -555,10 +555,8 @@ def formatters_formatModuleParamName(base, paramName):
     if weightTooHeavy and paramName == 'weight':
         builder.addStyledText(text_styles.error, MENU.moduleinfo_params(paramName))
         builder.addStyledText(text_styles.error, param_formatter.MEASURE_UNITS.get(paramName, ''))
-    else:
-        builder.addStyledText(text_styles.main, MENU.moduleinfo_params(paramName))
-        builder.addStyledText(text_styles.standard, param_formatter.MEASURE_UNITS.get(paramName, ''))
-    return builder.render()
+        return builder.render()
+    return base (paramName)
 
 @overrideMethod(ModuleBlockTooltipData, '_packBlocks')
 def ModuleBlockTooltipData_packBlocks(base, self, *args, **kwargs):
