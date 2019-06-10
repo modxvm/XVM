@@ -208,11 +208,11 @@ class ConfigCache(object):
     def __init__(self):
         self.__configCache = {}
 
-    def get(self, key):
+    def get(self, key, default=None):
         if config.config_autoreload:
-            return config.get(key)
+            return config.get(key, default)
         else:
-            return self.__configCache.setdefault(key, config.get(key))
+            return self.__configCache.setdefault(key, config.get(key, default))
 
 
 _config = ConfigCache()
