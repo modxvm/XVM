@@ -738,6 +738,7 @@ class HitLog(object):
             userprefs.set(HIT_LOG_SECTIONS.LOG + '{}'.format(battleType), {'x': self.x, 'y': self.y})
 
     def reset(self):
+        self.listLog = []
         self.groupHitByPlayer.reset()
         self.groupHitByFireRamming.reset()
 
