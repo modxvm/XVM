@@ -791,7 +791,7 @@ class DamageLog(_Base):
         self.dataLog['damage'] = parametersDmg['damage']
         self.dataLog['dmgRatio'] = self.dataLog['damage'] * 100 // self.dataLog['maxHealth']
         self.dataLog['number'] = len(self.listLog) - parametersDmg['numberLine']
-        self.dataLog['fireDuration'] = BigWorld.time() - parametersDmg['startAction'] if (attackReasonID == 1) and (parametersDmg['startAction'] is not None) else None
+        self.dataLog['fireDuration'] = BigWorld.time() - parametersDmg['startAction'] if (self.dataLog['attackReasonID'] == 1) and (parametersDmg['startAction'] is not None) else None
         self.dataLog['hitTime'] = parametersDmg['hitTime']
         self.setOutParameters(parametersDmg['numberLine'])
 
