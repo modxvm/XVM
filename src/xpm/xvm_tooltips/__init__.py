@@ -255,14 +255,12 @@ def StatusBlockConstructor_construct(base, self):
     block, result = base(self)
     if block and config.get('tooltips/showXpToUnlockVeh'):
         try:
-            itemsCache = dependency.instance(IItemsCache)
             techTreeNode = self.configuration.node
             vehicle = self.vehicle
             isUnlocked = vehicle.isUnlocked
             parentCD = techTreeNode.unlockProps.parentID if techTreeNode is not None else None
             if parentCD is not None:
                 isAvailable, cost, need, defCost, discount = getUnlockPrice(vehicle.intCD, parentCD, vehicle.level)
-                need += itemsCache.items.stats.actualFreeXP - itemsCache.items.stats.freeXP
                 if isAvailable and not isUnlocked and need > 0 and techTreeNode is not None:
                     icon = "<img src='{}' vspace='{}'".format(RES_ICONS.MAPS_ICONS_LIBRARY_XPCOSTICON_1.replace('..', 'img://gui'), -3)
                     template = "<font face='$TitleFont' size='14'><font color='#ff2717'>{}</font> {}</font> {}"
