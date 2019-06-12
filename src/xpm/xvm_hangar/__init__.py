@@ -9,8 +9,6 @@ import game
 import helpers
 import nations
 from CurrentVehicle import g_currentVehicle
-from gui import ClientHangarSpace
-from gui.hangar_cameras.hangar_camera_manager import HangarCameraManager
 from gui.shared import g_eventBus
 from gui.prb_control.entities.base.actions_validator import CurrentVehicleActionsValidator
 from gui.prb_control.items import ValidationResult
@@ -26,6 +24,9 @@ from gui.game_control.hero_tank_controller import HeroTankController
 from gui.promo.hangar_teaser_widget import TeaserViewer
 from gui.game_control.PromoController import PromoController
 from gui.game_control.AwardController import ProgressiveRewardHandler
+from PlayerEvents import g_playerEvents
+from skeletons.account_helpers.settings_core import ISettingsCore
+from account_helpers.settings_core.ServerSettingsManager import SETTINGS_SECTIONS
 from gui.Scaleform.daapi.view.lobby.messengerBar.messenger_bar import MessengerBar
 from gui.Scaleform.daapi.view.lobby.messengerBar.session_stats_button import SessionStatsButton
 
@@ -209,6 +210,14 @@ def _showAward(base, self, ctx):
     if not config.get('hangar/showRewardWindow', True):
         return
     base(self, ctx)
+
+# hide display session statistics help hints
+def hideSessionStatsHint(ctx):
+    if not config.get('hangar/sessionStatsButton/showButton', True):
+        settingsCore = dependency.instance(ISettingsCore)
+        settingsCore.serverSettings.setSectionSettings(SETTINGS_SECTIONS.ONCE_ONLY_HINTS, {'SessionStatsOpenBtnHint': 1})
+
+g_playerEvents.onAccountShowGUI += hideSessionStatsHint
 
 # hide display session statistics button
 @overrideMethod(MessengerBar, '_MessengerBar__updateSessionStatsBtn')
