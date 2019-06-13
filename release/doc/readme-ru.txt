@@ -26,12 +26,12 @@
     * Автоматическая посадка всего экипажа
     * Отображение пинга серверов до входа на сервер или в бой
 
-  Сайт проекта: https://modxvm.com/
+  Сайт проекта:             https://modxvm.com/
 
   Как написать в поддержку: https://koreanrandom.com/forum/topic/1644-readme/
-  Поддержка:    https://koreanrandom.com/forum/forum/43-xvm/
-  FAQ:          https://modxvm.com/faq/
-  Конфиги:      https://koreanrandom.com/forum/forum/50-/
+  Поддержка:                https://koreanrandom.com/forum/forum/43-xvm/
+  FAQ:                      https://modxvm.com/faq/
+  Конфиги:                  https://koreanrandom.com/forum/forum/50-/
 
 -----------------------------------------------------------
 2. УСТАНОВКА
@@ -131,11 +131,11 @@
         \l10n\en.xc
           "enemyBaseCaptured": "Base captured by allies!"
         captureBar.xc
-          "captureDoneFormat":    "<font size='17' color='#FFCC66'>{{l10n:enemyBaseCaptured}}</font>"
+          "captureDoneFormat": "<font size='17' color='#FFCC66'>{{l10n:enemyBaseCaptured}}</font>"
 
         Как будет отображаться: "<font size='17' color='#FFCC66'>Base captured by allies!</font>"
 
-      Узнать больше о переводах: https://code.google.com/p/wot-xvm/wiki/LocalizingXVM
+      Узнать больше о переводах: https://koreanrandom.com/forum/topic/27394-xvm-localization/
 
   Примеры поля "format":
     1. Отобразить количество кило-боев, эффективность и процент побед без изменения цвета:

@@ -1,4 +1,4 @@
-﻿Contenu :
+﻿Contenu:
   1. Présentation
   2. Installation
   3. Mise à jour
@@ -8,7 +8,7 @@
 1. PRESENTATION
 -----------------------------------------------------------
 
-  Ce mod propose de nombreuses fonctionnalités, comme :
+  Ce mod propose de nombreuses fonctionnalités, comme:
     * Des marqueurs au-dessus des tanks personnalisables
     * La possibilité de désactiver les panneaux postmortem
     * Le contrôle de l'orientation des icônes des tanks
@@ -28,11 +28,11 @@
     * L'affichage du ping avant de se connecter au serveur ou avant de lancer
       une partie
 
-  Site officiel :     https://modxvm.com/fr/
+  Site officiel:  https://modxvm.com/fr/
 
-  Support :           https://koreanrandom.com/forum/topic/1383-xvm (en anglais)
-  FAQ :               https://modxvm.com/fr/faq/
-  Configurations :    https://koreanrandom.com/forum/forum/50-/ (en anglais)
+  Support:        https://koreanrandom.com/forum/topic/1383-xvm (en anglais)
+  FAQ:            https://modxvm.com/fr/faq/
+  Configurations: https://koreanrandom.com/forum/forum/50-/ (en anglais)
 
 -----------------------------------------------------------
 2. INSTALLATION
@@ -45,14 +45,14 @@
   2. Vous n'avez rien à faire de plus pour que le mod fonctionne.
 
     Si vous voulez personnaliser votre configuration, vous devez renommer le
-    fichier de démarrage de la config :
+    fichier de démarrage de la config:
       \res_mods\xvm\xvm.xc.sample en xvm.xc
     Les consignes pour modifier les paramêtres sont à l'intérieur.
 
     Toutes les options de configuration sont localisées dans
       \res_mods\xvm\configs\@Default\
 
-    Note : Si vous voulez modifier la configuration manuellement, utilisez le
+    Note: Si vous voulez modifier la configuration manuellement, utilisez le
     Bloc-notes Windows ou Notepad++, mais n'utilisez PAS de logiciels de
     traitement de texte comme MS Word ou WordPad.
 
@@ -63,14 +63,14 @@
     nom du fichier dans \res_mods\xvm\l10n\.
 
   4. Vous pouvez installer des versions journalières de développement d'XVM.
-    Vous pouvez télécharger ces versions spéciales ici :
+    Vous pouvez télécharger ces versions spéciales ici:
       https://nightly.modxvm.com/ (en anglais)
 
 -----------------------------------------------------------
 3. MISE A JOUR
 -----------------------------------------------------------
 
-  1. Extraire l'archive dans le dossier de jeu :
+  1. Extraire l'archive dans le dossier de jeu:
     Clic droit sur l'archive -> "Extraire tout..." -> sélectionner le dossier du
     jeu -> "Extraire".
 
@@ -82,13 +82,13 @@
 4. INFORMATIONS SUPPLEMENTAIRES POUR LA CONFIGURATION
 -----------------------------------------------------------
 
-  Fichiers de configuration par défaut :
+  Fichiers de configuration par défaut:
     \res_mods\xvm\configs\@Default\
   Vous pouvez utiliser des configurations toutes faites dans le dossier
     \res_mods\xvm\configs\user configs\
   Vous pouvez créer une nouvelle configuration ou en éditer une déjà existante à
 
-  Balises HTML supportées :
+  Balises HTML supportées:
     https://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText (en anglais)
 
   L'image Sixième Sens.
@@ -100,7 +100,7 @@
   bas de l'écran pour avoir le même affichage sur différentes résolutions d'écran.
 
   Horloge en bataille et sur l'écran de chargement.
-  Format : Date PHP : http://php.net/date
+  Format: Date PHP: http://php.net/date
   Par exemple:
       "clockFormat": "H:i"          => 01:23
       "clockFormat": "Y.m.d H:i:s"  => 2013.05.20 01:23:45

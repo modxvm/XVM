@@ -127,13 +127,13 @@ Legend:
 │ S │ {{xr}}             │ X │ X │ X │ X │ X │ X │ {{r}} всегда по шкале XVM
 │ S │ {{xte}}            │ X │ X │ X │ X │ X │ X │ потанковый рейтинг (xTE) (значения 00-99, XX для топовых показателей)
 │ S │ {{eff}}            │ X │ X │ X │ X │ X │ X │ рейтинг эффективности (РЭ) по wot-news.com: https://koreanrandom.com/forum/topic/13386-/
-│ S │ {{wtr}}            │ X │ X │ X │ X │ X │ X │ рейтинг WTR: https://koreanrandom.com/forum/topic/41382-/
+│ S │ {{wtr}}            │ X │ X │ X │ X │ X │ X │ рейтинг WTR: https://koreanrandom.com/forum/topic/41383-/
 │ S │ {{wn8}}            │ X │ X │ X │ X │ X │ X │ рейтинг WN8: https://koreanrandom.com/forum/topic/13434-/
-│ S │ {{wgr}}            │ X │ X │ X │ X │ X │ X │ рейтинг WG (ЛРИ): https://koreanrandom.com/forum/topic/13433-/
+│ S │ {{wgr}}            │ X │ X │ X │ X │ X │ X │ рейтинг WGR (ЛРИ): https://koreanrandom.com/forum/topic/13433-/
 │ S │ {{xeff}}           │ X │ X │ X │ X │ X │ X │ шкала XVM для РЭ  (значения 00-99, XX для топовых показателей)
 │ S │ {{xwtr}}           │ X │ X │ X │ X │ X │ X │ шкала XVM для WTR (значения 00-99, XX для топовых показателей)
 │ S │ {{xwn8}}           │ X │ X │ X │ X │ X │ X │ шкала XVM для WN8 (значения 00-99, XX для топовых показателей)
-│ S │ {{xwgr}}           │ X │ X │ X │ X │ X │ X │ шкала XVM для WG  (значения 00-99, XX для топовых показателей)
+│ S │ {{xwgr}}           │ X │ X │ X │ X │ X │ X │ шкала XVM для WGR (значения 00-99, XX для топовых показателей)
 │ S │ {{winrate}}        │ X │ X │ X │ X │ X │ X │ общий процент побед (Global Win Ratio)
 │ S │ {{xwr}}            │ X │ X │ X │ X │ X │ X │ шкала XVM для общего процента побед
 │ S │ {{battles}}        │ X │ X │ X │ X │ X │ X │ общее кол-во боёв
@@ -157,11 +157,11 @@ Legend:
 │ S │ {{c:xeff}}         │ X │ X │ X │ X │ X │ X │ динамический цвет по шкале XVM для РЭ
 │ S │ {{c:xwtr}}         │ X │ X │ X │ X │ X │ X │ динамический цвет по шкале XVM для WTR
 │ S │ {{c:xwn8}}         │ X │ X │ X │ X │ X │ X │ динамический цвет по шкале XVM для WN8
-│ S │ {{c:xwgr}}         │ X │ X │ X │ X │ X │ X │ динамический цвет по шкале XVM для WG
+│ S │ {{c:xwgr}}         │ X │ X │ X │ X │ X │ X │ динамический цвет по шкале XVM для WGR
 │ S │ {{c:eff}}          │ X │ X │ X │ X │ X │ X │ динамический цвет по рейтингу эффективности (РЭ)
 │ S │ {{c:wtr}}          │ X │ X │ X │ X │ X │ X │ динамический цвет по WTR
 │ S │ {{c:wn8}}          │ X │ X │ X │ X │ X │ X │ динамический цвет по WN8
-│ S │ {{c:wgr}}          │ X │ X │ X │ X │ X │ X │ динамический цвет по WG
+│ S │ {{c:wgr}}          │ X │ X │ X │ X │ X │ X │ динамический цвет по WGR
 │ S │ {{c:winrate}}      │ X │ X │ X │ X │ X │ X │ динамический цвет по общему проценту побед
 │ S │ {{c:xwr}}          │ X │ X │ X │ X │ X │ X │ динамический цвет по шкале XVM для общего процента побед
 │ S │ {{c:kb}}           │ X │ X │ X │ X │ X │ X │ динамический цвет по кило-боям

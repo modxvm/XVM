@@ -116,12 +116,12 @@ Legend:
 │ {{mystat.ts}}              │   │ X │ statistics update timestamp
 │ {{mystat.c_winrate}}       │   │ X │ color depending on GWR
 │ {{mystat.c_eff}}           │   │ X │ color depending on player efficiency
-│ {{mystat.c_wgr}}           │   │ X │ color depending on WG personal rating
+│ {{mystat.c_wgr}}           │   │ X │ color depending on WGR personal rating
 │ {{mystat.c_wtr}}           │   │ X │ color depending on WTR rating
 │ {{mystat.c_wn8}}           │   │ X │ color depending on WN8 rating
 │ {{mystat.c_xwr}}           │   │ X │ color depending on XVM Scale for GWR
 │ {{mystat.c_xeff}}          │   │ X │ color depending on XVM Scale for efficiency
-│ {{mystat.c_xwgr}}          │   │ X │ color depending on XVM Scale for WG personal rating
+│ {{mystat.c_xwgr}}          │   │ X │ color depending on XVM Scale for WGR personal rating
 │ {{mystat.c_xwtr}}          │   │ X │ color depending on XVM Scale for WTR
 │ {{mystat.c_xwn8}}          │   │ X │ color depending on XVM Scale for WN8
 │ {{mystat.c_avglvl}}        │   │ X │ color depending on average level of tanks

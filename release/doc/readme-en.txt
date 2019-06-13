@@ -26,11 +26,11 @@
     * Best crew auto selection
     * Ping display on login screen and before a battle
 
-  Project site:  https://modxvm.com/
+  Project site: https://modxvm.com/
 
-  Support:       https://koreanrandom.com/forum/topic/1383-xvm
-  FAQ:           https://modxvm.com/en/faq/
-  User configs:  https://koreanrandom.com/forum/forum/50-/
+  Support:      https://koreanrandom.com/forum/topic/1383-xvm
+  FAQ:          https://modxvm.com/en/faq/
+  User configs: https://koreanrandom.com/forum/forum/50-/
 
 -----------------------------------------------------------
 2. INSTALLATION
@@ -131,7 +131,7 @@
 
         Will be formatted as "<font size='17' color='#FFCC66'>Base captured by allies!</font>"
 
-      More about localization at wiki: https://code.google.com/p/wot-xvm/wiki/LocalizingXVM
+      More about localization at wiki: https://koreanrandom.com/forum/topic/27394-xvm-localization/
 
   "format" field examples:
     1. Show number of kilo-battles, efficiency and GWR without changing a color:

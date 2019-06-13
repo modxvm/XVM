@@ -126,13 +126,13 @@ Legend:
 │ S │ {{xr}}             │ X │ X │ X │ X │ X │ X │ same as {{r}} but always in XVM Scale
 │ S │ {{xte}}            │ X │ X │ X │ X │ X │ X │ per-vehicle efficiency (xTE) (values 00-99, XX for Tops)
 │ S │ {{eff}}            │ X │ X │ X │ X │ X │ X │ player efficiency: https://koreanrandom.com/forum/topic/13386-/
-│ S │ {{wtr}}            │ X │ X │ X │ X │ X │ X │ WTR rating: https://koreanrandom.com/forum/topic/41382-/
+│ S │ {{wtr}}            │ X │ X │ X │ X │ X │ X │ WTR rating: https://koreanrandom.com/forum/topic/41383-/
 │ S │ {{wn8}}            │ X │ X │ X │ X │ X │ X │ WN8 rating: https://koreanrandom.com/forum/topic/13434-/
-│ S │ {{wgr}}            │ X │ X │ X │ X │ X │ X │ WG personal rating:  https://koreanrandom.com/forum/topic/13433-/
+│ S │ {{wgr}}            │ X │ X │ X │ X │ X │ X │ WGR rating: https://koreanrandom.com/forum/topic/13433-/
 │ S │ {{xeff}}           │ X │ X │ X │ X │ X │ X │ XVM Scale for efficiency (values 00-99, XX for Tops)
 │ S │ {{xwtr}}           │ X │ X │ X │ X │ X │ X │ XVM Scale for WTR (values 00-99, XX for Tops)
 │ S │ {{xwn8}}           │ X │ X │ X │ X │ X │ X │ XVM Scale for WN8 (values 00-99, XX for Tops)
-│ S │ {{xwgr}}           │ X │ X │ X │ X │ X │ X │ XVM Scale for WG personal rating (values 00-99, XX for Tops)
+│ S │ {{xwgr}}           │ X │ X │ X │ X │ X │ X │ XVM Scale for WGR (values 00-99, XX for Tops)
 │ S │ {{winrate}}        │ X │ X │ X │ X │ X │ X │ GWR (Global Win Ratio)
 │ S │ {{xwr}}            │ X │ X │ X │ X │ X │ X │ XVM Scale for GWR
 │ S │ {{battles}}        │ X │ X │ X │ X │ X │ X │ total battles count
@@ -156,11 +156,11 @@ Legend:
 │ S │ {{c:xeff}}         │ X │ X │ X │ X │ X │ X │ color depending on XVM Scale for efficiency
 │ S │ {{c:xwtr}}         │ X │ X │ X │ X │ X │ X │ color depending on XVM Scale for WTR
 │ S │ {{c:xwn8}}         │ X │ X │ X │ X │ X │ X │ color depending on XVM Scale for WN8
-│ S │ {{c:xwgr}}         │ X │ X │ X │ X │ X │ X │ color depending on XVM Scale for WG rating
+│ S │ {{c:xwgr}}         │ X │ X │ X │ X │ X │ X │ color depending on XVM Scale for WGR
 │ S │ {{c:eff}}          │ X │ X │ X │ X │ X │ X │ color depending on player efficiency
 │ S │ {{c:wtr}}          │ X │ X │ X │ X │ X │ X │ color depending on WTR rating
 │ S │ {{c:wn8}}          │ X │ X │ X │ X │ X │ X │ color depending on WN8 rating
-│ S │ {{c:wgr}}          │ X │ X │ X │ X │ X │ X │ color depending on WG rating
+│ S │ {{c:wgr}}          │ X │ X │ X │ X │ X │ X │ color depending on WGR rating
 │ S │ {{c:winrate}}      │ X │ X │ X │ X │ X │ X │ color depending on GWR
 │ S │ {{c:xwr}}          │ X │ X │ X │ X │ X │ X │ color depending on XVM Scale for GWR
 │ S │ {{c:kb}}           │ X │ X │ X │ X │ X │ X │ color depending on kilo-battles

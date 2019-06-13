@@ -1,7 +1,4 @@
-﻿// Plik readme dla XVM, tłumaczenie na język polski - Nikodemsky
-
-
-Zawartość:
+﻿Zawartość:
   1. Informacje ogólne
   2. Instalacja
   3. Aktualizacja
@@ -30,12 +27,12 @@ Zawartość:
     * Własna ikona szóstego zmysłu(+ opcjonalnie dźwięk)
     * Karuzela dla listy pojazdów
 
-  Strona projektu:   https://modxvm.com/
+  Strona projektu: https://modxvm.com/
 
-  Wsparcie(EN):      https://koreanrandom.com/forum/forum/57-xvm-english-support-and-discussions/
-  Wsparcie(PL):      https://forum.worldoftanks.eu/index.php?/topic/114684-pomoc-xvm-mod-temat-zbiorczy/
-  FAQ:               https://modxvm.com/en/faq/
-  Konfiguracje:      https://koreanrandom.com/forum/forum/50-/
+  Wsparcie(EN):    https://koreanrandom.com/forum/forum/57-xvm-english-support-and-discussions/
+  Wsparcie(PL):    https://forum.worldoftanks.eu/index.php?/topic/114684-pomoc-xvm-mod-temat-zbiorczy/
+  FAQ:             https://modxvm.com/en/faq/
+  Konfiguracje:    https://koreanrandom.com/forum/forum/50-/
 
 -----------------------------------------------------------
 2. INSTALACJA
@@ -106,3 +103,6 @@ Zawartość:
   Np:
   "clockFormat": "H:i"          => 01:23
   "clockFormat": "Y.m.d H:i:s"  => 2013.05.20 01:23:45
+
+// Plik readme dla XVM, tłumaczenie na język polski - Nikodemsky
+http://forum.worldoftanks.eu/index.php?/user/nikodemsky-501974216/
