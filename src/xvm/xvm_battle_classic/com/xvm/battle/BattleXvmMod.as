@@ -10,9 +10,9 @@ package com.xvm.battle
     import com.xvm.battle.classic.battleloading.RandomBattleLoadingXvmView;
     import com.xvm.battle.classic.fullStats.FullStatsXvmView;
     import com.xvm.battle.classic.playersPanel.PlayersPanelXvmView;
+    import com.xvm.battle.classic.teamBasesPanel.TeamBasesPanelXvmView;
     import com.xvm.battle.shared.minimap.MinimapXvmView;
     import com.xvm.battle.shared.sixthSense.SixthSenseXvmView;
-    import com.xvm.battle.shared.teamBasesPanel.TeamBasesPanelXvmView;
     import net.wg.gui.battle.random.views.*;
 
     public class BattleXvmMod extends XvmModBase

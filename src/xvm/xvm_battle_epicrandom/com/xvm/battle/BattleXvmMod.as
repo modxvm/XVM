@@ -9,9 +9,9 @@ package com.xvm.battle
     import com.xvm.infrastructure.*;
     import com.xvm.battle.epicrandom.battleloading.EpicRandomBattleLoadingXvmView;
     import com.xvm.battle.epicrandom.playersPanel.EpicRandomPlayersPanelXvmView;
+    import com.xvm.battle.epicrandom.teamBasesPanel.TeamBasesPanelXvmView;
     import com.xvm.battle.shared.minimap.MinimapXvmView;
     import com.xvm.battle.shared.sixthSense.SixthSenseXvmView;
-    import com.xvm.battle.shared.teamBasesPanel.TeamBasesPanelXvmView;
 
     public class BattleXvmMod extends XvmModBase
     {

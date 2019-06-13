@@ -2,15 +2,17 @@
  * XVM: eXtended Visualization Mod for World of Tanks.
  * https://modxvm.com/
  */
-package com.xvm.battle.shared.teamBasesPanel
+package com.xvm.battle.classic.teamBasesPanel
 {
     import com.xfw.*;
+    import com.xvm.battle.shared.teamBasesPanel.UI_teamBasesPanel;
     import com.xvm.infrastructure.*;
-    import net.wg.data.constants.generated.*;
-    import net.wg.gui.battle.random.views.teamBasesPanel.*;
-    import net.wg.gui.battle.views.*;
-    import net.wg.infrastructure.events.*;
-    import net.wg.infrastructure.interfaces.*;
+    import flash.events.Event;
+    import net.wg.data.constants.generated.BATTLE_VIEW_ALIASES;
+    import net.wg.gui.battle.random.views.BattlePage;
+    import net.wg.gui.battle.random.views.teamBasesPanel.TeamBasesPanel;
+    import net.wg.infrastructure.events.LifeCycleEvent;
+    import net.wg.infrastructure.interfaces.IView;
 
     public class TeamBasesPanelXvmView extends XvmViewBase
     {
@@ -19,9 +21,9 @@ package com.xvm.battle.shared.teamBasesPanel
             super(view);
         }
 
-        public function get battlePage():BaseBattlePage
+        public function get battlePage():BattlePage
         {
-            return super.view as BaseBattlePage;
+            return super.view as BattlePage;
         }
 
         public function get battlePageTeamBasesPanelUI():TeamBasesPanel
@@ -57,7 +59,7 @@ package com.xvm.battle.shared.teamBasesPanel
 
         private function init():void
         {
-            //page.unregisterComponent(BATTLE_VIEW_ALIASES.TEAM_BASES_PANEL);
+            battlePage.unregisterComponent(BATTLE_VIEW_ALIASES.TEAM_BASES_PANEL);
             var idx:int = battlePage.getChildIndex(battlePageTeamBasesPanelUI);
             battlePage.removeChild(battlePageTeamBasesPanelUI);
             var component:UI_teamBasesPanel = new UI_teamBasesPanel();
@@ -67,6 +69,7 @@ package com.xvm.battle.shared.teamBasesPanel
             battlePageTeamBasesPanelUI = component;
             battlePage.addChildAt(battlePageTeamBasesPanelUI, idx);
             battlePage.xfw_registerComponent(battlePageTeamBasesPanelUI, BATTLE_VIEW_ALIASES.TEAM_BASES_PANEL);
+            component.addEventListener(Event.CHANGE, battlePage.xfw_onTeamBasesPanelUIChangeHandler);
         }
     }
 }
