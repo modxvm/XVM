@@ -3,10 +3,9 @@
 #####################################################################
 # imports
 
-import traceback
-
 import SoundGroups
 from gui.Scaleform.daapi.view.battle.shared.destroy_timers_panel import DestroyTimersPanel
+import traceback
 
 from xfw import *
 import xvm_main.python.config as config
@@ -23,5 +22,8 @@ class XVM_SOUND_EVENT(object):
 
 @registerEvent(DestroyTimersPanel, '_DestroyTimersPanel__setFireInVehicle')
 def _DestroyTimersPanel__setFireInVehicle(self, isInFire):
-    if isInFire and config.get('sounds/enabled'):
-        SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.FIRE_ALERT)
+    try:
+        if isInFire and config.get('sounds/enabled'):
+            SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.FIRE_ALERT)
+    except:
+        err(traceback.format_exc())

@@ -6,11 +6,11 @@
 import SoundGroups
 from gui.battle_control import avatar_getter
 from gui.Scaleform.daapi.view.battle.shared.indicators import SixthSenseIndicator
+import traceback
 
 from xfw import *
 import xvm_main.python.config as config
 from xvm_main.python.logger import *
-import traceback
 
 #####################################################################
 # constants
