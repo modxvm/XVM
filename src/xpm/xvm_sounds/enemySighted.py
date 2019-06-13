@@ -7,11 +7,10 @@
 #####################################################################
 # imports
 
-import traceback
-
 import SoundGroups
 from Avatar import PlayerAvatar
 from gui.Scaleform.daapi.view.battle.shared.minimap.entries import VehicleEntry
+import traceback
 
 from xfw import *
 import xvm_main.python.config as config

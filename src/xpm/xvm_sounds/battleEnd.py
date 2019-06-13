@@ -6,12 +6,11 @@
 #####################################################################
 # imports
 
-import traceback
-
 import SoundGroups
 from constants import ARENA_PERIOD
 from gui.Scaleform.daapi.view.battle.classic.battle_end_warning_panel import BattleEndWarningPanel
 from gui.battle_control import avatar_getter
+import traceback
 
 from xfw import *
 import xvm_main.python.config as config
