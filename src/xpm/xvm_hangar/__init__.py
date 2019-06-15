@@ -24,7 +24,6 @@ from gui.game_control.hero_tank_controller import HeroTankController
 from gui.promo.hangar_teaser_widget import TeaserViewer
 from gui.game_control.PromoController import PromoController
 from gui.game_control.AwardController import ProgressiveRewardHandler
-from PlayerEvents import g_playerEvents
 from skeletons.account_helpers.settings_core import ISettingsCore
 from account_helpers.settings_core.ServerSettingsManager import SETTINGS_SECTIONS
 from gui.Scaleform.daapi.view.lobby.messengerBar.messenger_bar import MessengerBar
@@ -212,18 +211,17 @@ def _showAward(base, self, ctx):
     base(self, ctx)
 
 # hide display session statistics help hints
-def hideSessionStatsHint(ctx):
-    if not config.get('hangar/sessionStatsButton/showButton', True):
-        settingsCore = dependency.instance(ISettingsCore)
-        settingsCore.serverSettings.setSectionSettings(SETTINGS_SECTIONS.ONCE_ONLY_HINTS, {'SessionStatsOpenBtnHint': 1})
-
-g_playerEvents.onAccountShowGUI += hideSessionStatsHint
+def hideSessionStatsHint():
+    settingsCore = dependency.instance(ISettingsCore)
+    settingsCore.serverSettings.setSectionSettings(SETTINGS_SECTIONS.ONCE_ONLY_HINTS, {'SessionStatsOpenBtnHint': 1})
+    return
 
 # hide display session statistics button
 @overrideMethod(MessengerBar, '_MessengerBar__updateSessionStatsBtn')
 def updateSessionStatsBtn(base, self):
     if not config.get('hangar/sessionStatsButton/showButton', True):
         self.as_setSessionStatsButtonVisibleS(False)
+        hideSessionStatsHint()
         return
     base(self)
 
