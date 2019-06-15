@@ -1,6 +1,6 @@
 ﻿XVM-7.9.5:
   [GENERAL]
-  * World of Tanks 1.5.1.0
+  * World of Tanks 1.5.1.1
 
   [MACROS]
   * added macros in battle:
