@@ -11,7 +11,7 @@ def getToken():
 
 def getVersion(wgmLimit=50, wshLimit=50):
     (data, errStr) = _exec('getVersion/{id}/{ver}/{wgm}/{wsh}',
-        params={'ver':urllib.quote(XVM.XVM_VERSION),'wgm':wgmLimit,'wsh':wshLimit})
+        params={'ver':urllib.quote('{0}#{1}'.format(XVM.XVM_VERSION,XVM.XVM_REVISION)),'wgm':wgmLimit,'wsh':wshLimit})
     return data
 
 def getStats(request):
