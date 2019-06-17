@@ -26,29 +26,6 @@ package com.xvm.battle.classic.teamBasesPanel
             return super.view as BattlePage;
         }
 
-        public function get battlePageTeamBasesPanelUI():TeamBasesPanel
-        {
-            try
-            {
-                return battlePage["teamBasesPanelUI"];
-            }
-            catch (ex:Error)
-            {
-            }
-            return null;
-        }
-
-        public function set battlePageTeamBasesPanelUI(value:TeamBasesPanel):void
-        {
-            try
-            {
-                battlePage["teamBasesPanelUI"] = value;
-            }
-            catch (ex:Error)
-            {
-            }
-        }
-
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
             super.onAfterPopulate(e);
@@ -60,15 +37,15 @@ package com.xvm.battle.classic.teamBasesPanel
         private function init():void
         {
             battlePage.unregisterComponent(BATTLE_VIEW_ALIASES.TEAM_BASES_PANEL);
-            var idx:int = battlePage.getChildIndex(battlePageTeamBasesPanelUI);
-            battlePage.removeChild(battlePageTeamBasesPanelUI);
+            var idx:int = battlePage.getChildIndex(battlePage.teamBasesPanelUI);
+            battlePage.removeChild(battlePage.teamBasesPanelUI);
             var component:UI_teamBasesPanel = new UI_teamBasesPanel();
-            component.x = battlePageTeamBasesPanelUI.x;
-            component.y = battlePageTeamBasesPanelUI.y;
-            component.visible = battlePageTeamBasesPanelUI.visible;
-            battlePageTeamBasesPanelUI = component;
-            battlePage.addChildAt(battlePageTeamBasesPanelUI, idx);
-            battlePage.xfw_registerComponent(battlePageTeamBasesPanelUI, BATTLE_VIEW_ALIASES.TEAM_BASES_PANEL);
+            component.x = battlePage.teamBasesPanelUI.x;
+            component.y = battlePage.teamBasesPanelUI.y;
+            component.visible = battlePage.teamBasesPanelUI.visible;
+            battlePage.teamBasesPanelUI = component;
+            battlePage.addChildAt(battlePage.teamBasesPanelUI, idx);
+            battlePage.xfw_registerComponent(battlePage.teamBasesPanelUI, BATTLE_VIEW_ALIASES.TEAM_BASES_PANEL);
             component.addEventListener(Event.CHANGE, battlePage.xfw_onTeamBasesPanelUIChangeHandler);
         }
     }
