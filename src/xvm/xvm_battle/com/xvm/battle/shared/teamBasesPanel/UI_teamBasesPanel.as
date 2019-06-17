@@ -82,7 +82,11 @@ package com.xvm.battle.shared.teamBasesPanel
                     y = DEFAULT_Y;
                     xfw_RENDERER_HEIGHT = DEFAULT_RENDERER_LENGTH;
                 }
-                xfw_updatePositions();
+                // TODO: The game crashes on replay of EpicRandom when xfw_updatePositions() is called
+                if (Xvm.appType != Defines.APP_TYPE_BATTLE_EPICRANDOM)
+                {
+                    xfw_updatePositions();
+                }
             }
             catch (ex:Error)
             {
