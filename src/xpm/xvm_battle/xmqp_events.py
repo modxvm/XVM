@@ -158,25 +158,28 @@ def _DestroyTimersPanel__showDestroyTimer(self, value):
 @registerEvent(DestroyTimersPanel, '_showDeathZoneTimer')
 def _DestroyTimersPanel_showDeathZoneTimer(self, value):
     if xmqp.is_active() and dependency.instance(IAppLoader).getSpaceID() == GuiGlobalSpaceID.BATTLE:
-        if value.needToCloseAll():
-            xmqp.call({
-                'event':EVENTS.XMQP_DEATH_ZONE_TIMER,
-                'enable':False,
-                'code':'ALL'})
-        elif value.needToCloseTimer():
-            try:
+        try:
+            if value.needToCloseAll():
                 xmqp.call({
                     'event':EVENTS.XMQP_DEATH_ZONE_TIMER,
                     'enable':False,
-                    'code':value.code})
-            except: pass
-        else:
-            xmqp.call({
-                'event': EVENTS.XMQP_DEATH_ZONE_TIMER,
-                'enable': True,
-                'code': value.code,
-                'totalTime': value.totalTime,
-                'level': value.level})
+                    'zoneID':'ALL'})
+            elif value.needToCloseTimer():
+                xmqp.call({
+                    'event':EVENTS.XMQP_DEATH_ZONE_TIMER,
+                    'enable':False,
+                    'zoneID':value.zoneID})
+            elif value.needToShow():
+                xmqp.call({
+                    'event': EVENTS.XMQP_DEATH_ZONE_TIMER,
+                    'enable': True,
+                    'zoneID': value.zoneID,
+                    'totalTime': value.totalTime,
+                    'level': value.level,
+                    'finishTime': value.finishTime})
+        except Exception as ex:
+            err(traceback.format_exc())
+            err('value: ' + str(value))
 
 # sixth sense indicator
 
