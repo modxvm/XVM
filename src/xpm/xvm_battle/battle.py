@@ -48,7 +48,7 @@ import xmqp_events
 #####################################################################
 # constants
 
-NOT_SUPPORT_BATTLE_TYPE = [constants.ARENA_GUI_TYPE.TUTORIAL,
+NOT_SUPPORTED_BATTLE_TYPES = [constants.ARENA_GUI_TYPE.TUTORIAL,
                            constants.ARENA_GUI_TYPE.EVENT_BATTLES,
                            constants.ARENA_GUI_TYPE.BOOTCAMP]
 
@@ -88,7 +88,7 @@ def _PlayerAvatar_onBecomePlayer(base, self):
     try:
         arena = avatar_getter.getArena()
         if arena:
-            isBattleTypeSupported = arena.guiType not in NOT_SUPPORT_BATTLE_TYPE
+            isBattleTypeSupported = arena.guiType not in NOT_SUPPORTED_BATTLE_TYPES
             arena.onVehicleKilled += g_battle.onVehicleKilled
             arena.onAvatarReady += g_battle.onAvatarReady
             arena.onVehicleStatisticsUpdate += g_battle.onVehicleStatisticsUpdate
