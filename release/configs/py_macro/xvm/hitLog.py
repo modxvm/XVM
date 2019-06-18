@@ -561,8 +561,7 @@ class GroupHitByPlayer(GroupHit):
         self.players[self.vehID] = self.addPlayer()
         vehicle = self.players[self.vehID]
         if self.attackReasonID in [1, 2]:
-            vehicle[self.attackReasonID]['damage'] = self.damage
-            vehicle[self.attackReasonID]['time'] = BigWorld.time()
+            vehicle[self.attackReasonID] = self.addAttackReasonID()
         if self.maxCountLines == 1:
             self.updateList(self.CHANGE if self.countLines else self.APPEND)
         elif self.isAddToEnd:
