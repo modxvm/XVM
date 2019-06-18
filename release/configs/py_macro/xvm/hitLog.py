@@ -305,8 +305,8 @@ class DataHitLog(object):
             self.data['costShell'] = _shells['costShell']
 
     def getDamageDeviation(self, newHealth):
-        result = 0.0
-        if newHealth > 0:
+        result = None
+        if newHealth > 0 and self.intCD in self.shells:
             _shells = self.shells[self.intCD]
             result = (self.data['damage'] - _shells['shellDamage']) / float(_shells['shellDamage'])
             if (_shells['shellKind'] in ['high_explosive', 'armor_piercing_he']) and (result < -0.25):
@@ -327,7 +327,6 @@ class DataHitLog(object):
         self.data['blownup'] = newHealth <= -5
         newHealth = max(0, newHealth)
         self.data['damage'] = (self.vehHealth[vehicle.id]['health'] - newHealth) if vehicle.id in self.vehHealth else (- newHealth)
-        self.data['damageDeviation'] = None
         if self.data['attackReasonID'] != 0:
             self.criticalHit = False
             self.splashHit = False
