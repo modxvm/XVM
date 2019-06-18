@@ -259,6 +259,7 @@ class DataHitLog(object):
         self.data['teamDmg'] = 'unknown'
         self.data['costShell'] = 'unknown'
         self.data['shellKind'] = 'not_shell'
+        self.data['damageDeviation'] = None
 
     def updateData(self):
         maxHealth = self.vehHealth[self.vehicleID]['maxHealth'] if self.vehicleID in self.vehHealth else 0
@@ -346,8 +347,8 @@ class DataHitLog(object):
         if wheelsConfig:
             maxComponentIdx += wheelsConfig.getWheelsCount()
         maxHitEffectCode, decodedPoints, maxDamagedComponent = DamageFromShotDecoder.decodeHitPoints(points, vehicle.appearance.collisions, maxComponentIdx)
-        compName = decodedPoints[0].componentName
         if decodedPoints:
+            compName = decodedPoints[0].componentName
             self.compName = compName if compName[0] != 'W' else 'wheel'
         else:
             self.compName = 'unknown'
