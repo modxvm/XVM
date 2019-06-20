@@ -26,7 +26,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 11.06.2019
+    # Last update: 20.06.2019
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -112,6 +112,7 @@ _data = {
     "france:F110_Lynx_6x6":                  'lynx6x6',
     "france:F111_AM39_Gendron_Somua":        'am.Gedr',
     "france:F112_M10_RBFM":                  'M10.rbfm',
+    "france:F113_Bretagne_Panther":          'Bret.Pant',
     "france:F11_Renault_G1R":                'G1R',
     "france:F12_Hotchkiss_H35":              'h35',
     "france:F13_AMX38":                      'amx38',
