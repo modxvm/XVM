@@ -581,6 +581,8 @@ class GroupHitByPlayer(GroupHit):
 
     def getListLog(self):
         self.setParametrsHitLog()
+        if self.maxCountLines <= 0:
+            return []
         vehID = g_dataHitLog.vehicleID
         if vehID in self.players:
             self.updatePlayers()
