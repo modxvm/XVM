@@ -454,8 +454,8 @@ class Data(object):
         if wheelsConfig:
             maxComponentIdx += wheelsConfig.getWheelsCount()
         maxHitEffectCode, decodedPoints, maxDamagedComponent = DamageFromShotDecoder.decodeHitPoints(points, vehicle.appearance.collisions, maxComponentIdx)
-        compName = decodedPoints[0].componentName
         if decodedPoints:
+            compName = decodedPoints[0].componentName
             self.data['compName'] = compName if compName[0] != 'W' else 'wheel'
         else:
             self.data['compName'] = 'unknown'
