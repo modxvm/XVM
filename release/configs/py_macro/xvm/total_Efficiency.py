@@ -5,7 +5,7 @@ from constants import VEHICLE_HIT_FLAGS as VHF
 from vehicle_extras import ShowShooting
 from gui.battle_control.battle_constants import PERSONAL_EFFICIENCY_TYPE
 from gui.battle_control.arena_info.arena_dp import ArenaDataProvider
-from gui.battle_control.battle_ctx import BattleContext
+from gui.battle_control.arena_info.arena_vos import VehicleArenaInfoVO
 from gui.Scaleform.daapi.view.battle.shared.damage_log_panel import DamageLogPanel
 from gui.Scaleform.daapi.view.battle.shared.ribbons_panel import BattleRibbonsPanel
 from gui.Scaleform.daapi.view.battle.shared.ribbons_aggregator import RibbonsAggregator
@@ -14,7 +14,7 @@ from gui.Scaleform.daapi.view.battle.classic.stats_exchange import FragsCollecta
 from xfw import *
 from xfw_actionscript.python import *
 from xvm_main.python.logger import *
-from xvm_battle.python.battle import isBattleTypeSupported
+import xvm_battle.python.battle as battle
 
 from xvm.damageLog import ATTACK_REASONS
 
@@ -73,20 +73,19 @@ ribbonTypes = {
 }
 
 
-@overrideMethod(BattleContext, 'hasSquadRestrictions')
-def _hasSquadRestrictions(base, self):
-    result = base(self)
+@registerEvent(VehicleArenaInfoVO, 'updatePlayerStatus')
+def totalEfficiency_updatePlayerStatus(self, **kwargs):
     global isPlayerInSquad
-    if isBattleTypeSupported and result:
-        isPlayerInSquad = True
-        as_event('ON_TOTAL_EFFICIENCY')
-    return result
+    if battle.isBattleTypeSupported and self.vehicleID == player.playerVehicleID:
+        if kwargs.get('isSquadMan', False) and not isPlayerInSquad:
+            isPlayerInSquad = True
+            as_event('ON_TOTAL_EFFICIENCY')
 
 
 @registerEvent(ArenaDataProvider, 'updateVehicleStats')
 def ArenaDataProvider_updateVehicleStats(self, vID, vStats):
     global fragsSquad, fragsSquad_dict
-    if not isBattleTypeSupported:
+    if not battle.isBattleTypeSupported:
         return
     if vID and player is not None:
         if player.guiSessionProvider.getArenaDP().isSquadMan(vID=vID) and vID != player.playerVehicleID:
@@ -100,7 +99,7 @@ def ArenaDataProvider_updateVehicleStats(self, vID, vStats):
 @registerEvent(PlayerAvatar, 'showShotResults')
 def PlayerAvatar_showShotResults(self, results):
     global numberHits, numberStuns, numberDamagedVehicles, hitAlly
-    if not isBattleTypeSupported:
+    if not battle.isBattleTypeSupported:
         return
     isUpdate = False
     for r in results:
@@ -131,7 +130,7 @@ def PlayerAvatar_showShotResults(self, results):
 @registerEvent(ShowShooting, '_start')
 def ShowShooting_start(self, data, burstCount):
     global numberShotsDealt
-    if not isBattleTypeSupported:
+    if not battle.isBattleTypeSupported:
         return
     vehicle = data['entity']
     if vehicle is not None and vehicle.isPlayerVehicle and vehicle.isAlive():
@@ -142,7 +141,7 @@ def ShowShooting_start(self, data, burstCount):
 @registerEvent(Vehicle, 'showDamageFromShot')
 def showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor):
     global numberShotsReceived, numberHitsReceived
-    if isBattleTypeSupported and self.isPlayerVehicle and self.isAlive:
+    if battle.isBattleTypeSupported and self.isPlayerVehicle and self.isAlive:
         numberShotsReceived += 1
         if damageFactor != 0:
             numberHitsReceived += 1
@@ -164,7 +163,7 @@ def isPlayerVehicle():
 @registerEvent(DamageLogPanel, '_onTotalEfficiencyUpdated')
 def _onTotalEfficiencyUpdated(self, diff):
     global totalDamage, totalAssist, totalBlocked, numberHitsBlocked, old_totalDamage, damage, totalStun
-    if isBattleTypeSupported and isPlayerVehicle():
+    if battle.isBattleTypeSupported and isPlayerVehicle():
         isUpdate = False
         if PERSONAL_EFFICIENCY_TYPE.DAMAGE in diff:
             totalDamage = diff[PERSONAL_EFFICIENCY_TYPE.DAMAGE]
@@ -191,7 +190,7 @@ def _onTotalEfficiencyUpdated(self, diff):
 @registerEvent(BattleRibbonsPanel, '_BattleRibbonsPanel__onRibbonUpdated')
 def BattleRibbonsPanel__onRibbonUpdated(self, ribbon):
     global ribbonTypes, numberDamagesDealt, numberAssistTrack, numberAssistSpot, numberAssistStun
-    if isBattleTypeSupported and isPlayerVehicle():
+    if battle.isBattleTypeSupported and isPlayerVehicle():
         ribbonType = ribbon.getType()
         if ribbonType == 'assistTrack':
             ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistSpot']) if totalAssist else 0
@@ -212,7 +211,7 @@ def BattleRibbonsPanel__onRibbonUpdated(self, ribbon):
 @registerEvent(BattleRibbonsPanel, '_BattleRibbonsPanel__onRibbonAdded')
 def BattleRibbonsPanel__onRibbonAdded(self, ribbon):
     global ribbonTypes, numberDamagesDealt, numberAssistTrack, numberAssistSpot, numberAssistStun
-    if isBattleTypeSupported and isPlayerVehicle():
+    if battle.isBattleTypeSupported and isPlayerVehicle():
         ribbonType = ribbon.getType()
         if ribbonType == 'assistTrack':
             ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistSpot']) if totalAssist else 0
@@ -242,7 +241,7 @@ def BattleRibbonsPanel__onRibbonAdded(self, ribbon):
 @registerEvent(Vehicle, 'onHealthChanged')
 def onHealthChanged(self, newHealth, attackerID, attackReasonID):
     global vehiclesHealth, numberHitsDealt, damageReceived, numberDamagesDealt, numberDamagedVehicles, dmgAlly, damageKind
-    if not isBattleTypeSupported:
+    if not battle.isBattleTypeSupported:
         return
     isUpdate = False
     if self.isPlayerVehicle:
@@ -270,7 +269,7 @@ def onHealthChanged(self, newHealth, attackerID, attackReasonID):
 @registerEvent(Vehicle, 'onEnterWorld')
 def onEnterWorld(self, prereqs):
     global player, isPlayerInSquad, isStuns, vehiclesHealth, allyVehicles, enemyVehiclesMaxHP, enemyVehiclesSumMaxHP
-    if not isBattleTypeSupported:
+    if not battle.isBattleTypeSupported:
         return
     if player is None:
         player = BigWorld.player()
@@ -357,4 +356,6 @@ def destroyGUI(self):
 
 @overrideMethod(RibbonsAggregator, 'suspend')
 def suspend(base, self):
-    self.resume() if isBattleTypeSupported else base(self)
+    self.resume() if battle.isBattleTypeSupported else base(self)
+
+
