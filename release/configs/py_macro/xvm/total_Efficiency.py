@@ -76,7 +76,7 @@ ribbonTypes = {
 @registerEvent(VehicleArenaInfoVO, 'updatePlayerStatus')
 def totalEfficiency_updatePlayerStatus(self, **kwargs):
     global isPlayerInSquad
-    if battle.isBattleTypeSupported and self.vehicleID == player.playerVehicleID:
+    if battle.isBattleTypeSupported and player is not None and self.vehicleID == player.playerVehicleID:
         if kwargs.get('isSquadMan', False) and not isPlayerInSquad:
             isPlayerInSquad = True
             as_event('ON_TOTAL_EFFICIENCY')
