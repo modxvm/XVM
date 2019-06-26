@@ -118,7 +118,8 @@ package com.xvm.lobby.ui.battleresults
                 if (isInvalid(InvalidationType.DATA, InvalidationType.SIZE))
                 {
                     var compareState:ComparePremiumState = detailsMc.compareState;
-                    if (!compareState.visible)
+                    var cfg:CBattleResultsBonusState = Config.config.battleResults.bonusState;
+                    if (!compareState.visible && cfg.enabled)
                     {
                         compareState.visible = true;
                         compareState.setData(_data.personal);
