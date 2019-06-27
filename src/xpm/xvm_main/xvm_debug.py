@@ -63,9 +63,10 @@ from logger import *
 
 @decorators.process('loadStats')
 def _showBattleResults(arenaUniqueID):
-    battleResults = dependency.instance(IBattleResultsService)
-    ctx = RequestResultsContext(arenaUniqueID, showImmediately=False, showIfPosted=True, resetCache=False)
-    yield battleResults.requestResults(ctx)
+    if IS_DEVELOPMENT:
+        battleResults = dependency.instance(IBattleResultsService)
+        ctx = RequestResultsContext(arenaUniqueID, showImmediately=False, showIfPosted=True, resetCache=False)
+        yield battleResults.requestResults(ctx)
 
 #@decorators.process('loadStats')
 #def _showWindow(self, notification, arenaUniqueID):
@@ -76,6 +77,9 @@ def _showBattleResults(arenaUniqueID):
 
 @overrideMethod(BattleResultsCache.BattleResultsCache, 'get')
 def BattleResultsCache_get(base, self, arenaUniqueID, callback):
+    if not IS_DEVELOPMENT:
+        return base(self, arenaUniqueID, callback)
+
     fileHandler = None
     try:
         #log('get: ' + str(callback))
