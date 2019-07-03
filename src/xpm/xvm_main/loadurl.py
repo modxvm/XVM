@@ -42,7 +42,7 @@ def loadUrl(url, req=None, body=None, content_type='text/plain; charset=utf-8', 
     if showLog:
         # hide some chars of token in the log
         path_log = utils.hide_guid(u.path) if not XFW_NO_TOKEN_MASKING else u.path
-        log('  HTTP%s: %s' % ('S' if ssl else '', path_log), '[INFO]  ')
+        log('  HTTP%s: %s%s' % ('S' if ssl else '', path_log, '?' + u.query if u.query else ''), '[INFO]  ')
 
     startTime = datetime.datetime.now()
 
@@ -92,7 +92,7 @@ def _loadUrl(u, timeout, body, content_type): # timeout in msec
             "User-Agent": _USER_AGENT,
             "Accept-Encoding": "gzip",
             "Content-Type": content_type}
-        conn.request("POST" if body else "GET", u.path, body, headers)
+        conn.request("POST" if body else "GET", u.path + ('?' + u.query if u.query else ''), body, headers)
         resp = conn.getresponse()
         # log(resp.status)
 

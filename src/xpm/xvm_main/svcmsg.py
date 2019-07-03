@@ -84,7 +84,10 @@ def _getVersionText():
     msg = ''
     if ver is not None:
         if utils.compareVersions(ver, cur) == 1:
-            msg += '{{l10n:ver/newVersion:%s:%s}}\n' % (ver, config.verinfo.message)
+            msg += '\n{{l10n:ver/newVersion:%s:%s}}\n' % (ver, config.verinfo.message)
+        elif config.verinfo.message:
+            msg += '\n%s\n' % config.verinfo.message
+
         if cur.endswith('-dev'):
             if config.get('region').lower() == 'ru':
                 msg += """
