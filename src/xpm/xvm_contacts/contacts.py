@@ -115,7 +115,7 @@ class _Contacts:
             else:
                 self.cached_data['players'][str(uid)] = value
 
-            json_data = simplejson.dumps(self.cached_data)
+            json_data = simplejson.dumps(self.cached_data, separators=(',',':'))
             #log(json_data)
             self._doRequest('addComments', json_data)
 

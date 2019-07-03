@@ -181,7 +181,7 @@ class _XMQP(object):
         if self.is_consuming and self._exchange_name is not None:
             try:
                 #self._correlation_id = str(uuid.uuid4())
-                message = simplejson.dumps({'accountDBID': utils.getAccountDBID(), 'data': data})
+                message = simplejson.dumps({'accountDBID': utils.getAccountDBID(), 'data': data}, separators=(',',':'))
                 debug('[XMQP] call: %s' % utils.hide_guid(message))
                 self._channel.basic_publish(
                     exchange=self._exchange_name,
@@ -404,7 +404,8 @@ class _XMQP(object):
         message = simplejson.dumps({
             'token': config.token.token,
             'players': self._players,
-            'capabilities': simplejson.dumps(getCapabilitiesData())})
+            'capabilities': simplejson.dumps(getCapabilitiesData(), separators=(',',':'))},
+            separators=(',',':'))
         debug('[XMQP] %s' % utils.hide_guid(message))
         self._channel.basic_publish(
             exchange=XVM.XMQP_LOBBY_EXCHANGE,

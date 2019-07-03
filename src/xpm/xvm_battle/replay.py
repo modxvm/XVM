@@ -92,7 +92,7 @@ def _BattleReplay_stop(base, self, rewindToTime = None, delete = False, isDestro
                 if arenaInfoStr:
                     arenaInfo = simplejson.loads(arenaInfoStr)
                     arenaInfo.update({"xvm":utils.pretty_floats(_xvm_record_data)})
-                    self._BattleReplay__replayCtrl.setArenaInfoStr(simplejson.dumps(arenaInfo))
+                    self._BattleReplay__replayCtrl.setArenaInfoStr(simplejson.dumps(arenaInfo, separators=(',',':')))
                 _xvm_record_data = None
     except Exception as ex:
         err(traceback.format_exc())

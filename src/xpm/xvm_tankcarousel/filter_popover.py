@@ -83,7 +83,7 @@ def _ServerSettingsManager_setSections(base, self, sections, settings):
             try:
                 prefs = [key for key, value in settings.iteritems() if key in PREFS.XVM_KEYS and value]
                 settings = {key: value for key, value in settings.iteritems() if key not in PREFS.XVM_KEYS}
-                userprefs.set(USERPREFS.CAROUSEL_FILTERS, simplejson.dumps({'prefs':prefs}))
+                userprefs.set(USERPREFS.CAROUSEL_FILTERS, simplejson.dumps({'prefs':prefs}, separators=(',',':')))
             except Exception as ex:
                 err(traceback.format_exc())
     return base(self, sections, settings)

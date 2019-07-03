@@ -54,7 +54,7 @@ def BattleResultsWindow_as_setDataS(base, self, data):
             # Cannot add in data object because DAAPIDataClass is not dynamic.
             #log(data['xvm_data'])
             data['xvm_data']['regionNameStr'] = data['common']['regionNameStr']
-            data['common']['regionNameStr'] = simplejson.dumps(data['xvm_data'])
+            data['common']['regionNameStr'] = simplejson.dumps(data['xvm_data'], separators=(',',':'))
 
         del data['xvm_data']
     except Exception as ex:
@@ -65,7 +65,7 @@ def BattleResultsWindow_as_setDataS(base, self, data):
 def BCBattleResult_as_setDataS(base, self, data):
     try:
         #data['xvm_data']['regionNameStr'] = data['common']['regionNameStr']
-        #data['common']['regionNameStr'] = simplejson.dumps(data['xvm_data'])
+        #data['common']['regionNameStr'] = simplejson.dumps(data['xvm_data'], separators=(',',':'))
         del data['xvm_data']
     except Exception as ex:
         err(traceback.format_exc())
