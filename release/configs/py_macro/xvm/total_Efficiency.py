@@ -1,4 +1,4 @@
-import BigWorld
+from BigWorld import player, cancelCallback, callback
 from Vehicle import Vehicle
 from Avatar import PlayerAvatar
 from constants import VEHICLE_HIT_FLAGS as VHF
@@ -11,6 +11,7 @@ from gui.Scaleform.daapi.view.battle.shared.ribbons_panel import BattleRibbonsPa
 from gui.Scaleform.daapi.view.battle.shared.ribbons_aggregator import RibbonsAggregator
 from gui.Scaleform.daapi.view.battle.classic.stats_exchange import FragsCollectableStats
 
+
 from xfw import *
 from xfw_actionscript.python import *
 from xvm_main.python.logger import *
@@ -18,6 +19,7 @@ import xvm_battle.python.battle as battle
 
 from xvm.damageLog import ATTACK_REASONS
 
+ON_TOTAL_EFFICIENCY = 'ON_TOTAL_EFFICIENCY'
 
 totalDamage = 0
 damage = 0
@@ -32,7 +34,7 @@ enemyVehiclesSumMaxHP = 0
 damagesSquad = 0
 numberHitsBlocked = 0
 vehCD = None
-player = None
+_player = None
 numberHitsDealt = 0
 numberShotsDealt = 0
 numberDamagesDealt = 0
@@ -54,6 +56,7 @@ dmgAlly = False
 burst = 1
 allyVehicles = []
 damageKind = None
+arenaDP = None
 
 
 ribbonTypes = {
@@ -73,13 +76,47 @@ ribbonTypes = {
 }
 
 
+class UpdateLabels(object):
+    DELAY = 0.1
+
+    def __init__(self, eventName):
+        self.eventName = eventName
+        self.callbackID = None
+
+    def __refresh(self):
+        self.callbackID = None
+        as_event(self.eventName)
+
+    def update(self):
+        if self.callbackID is None:
+            self.callbackID = callback(self.DELAY, self.__refresh)
+
+    def cancelUpdate(self):
+        if self.callbackID is not None:
+            cancelCallback(self.callbackID)
+            self.callbackID = None
+
+    def reset(self):
+        self.update()
+        self.cancelUpdate()
+
+
+updateLabels = UpdateLabels(ON_TOTAL_EFFICIENCY)
+
+
 @registerEvent(VehicleArenaInfoVO, 'updatePlayerStatus')
 def totalEfficiency_updatePlayerStatus(self, **kwargs):
-    global isPlayerInSquad
-    if battle.isBattleTypeSupported and player is not None and self.vehicleID == player.playerVehicleID:
-        if kwargs.get('isSquadMan', False) and not isPlayerInSquad:
+    global isPlayerInSquad, fragsSquad, fragsSquad_dict
+    if battle.isBattleTypeSupported and _player is not None:
+        playerVehicleID = _player.playerVehicleID
+        isPlayerVehicle = self.vehicleID == playerVehicleID
+        if isPlayerVehicle and kwargs.get('isSquadMan', False):
             isPlayerInSquad = True
-            as_event('ON_TOTAL_EFFICIENCY')
+        if kwargs.get('isSquadMan', False) and isPlayerInSquad:
+            vehicles = arenaDP.getVehiclesStatsIterator()
+            fragsSquad_dict = {stats.vehicleID: stats.frags for stats in vehicles if not isPlayerVehicle and arenaDP.isSquadMan(vID=stats.vehicleID)}
+            fragsSquad = sum(fragsSquad_dict.itervalues())
+            updateLabels.update()
 
 
 @registerEvent(ArenaDataProvider, 'updateVehicleStats')
@@ -87,13 +124,11 @@ def ArenaDataProvider_updateVehicleStats(self, vID, vStats):
     global fragsSquad, fragsSquad_dict
     if not battle.isBattleTypeSupported:
         return
-    if vID and player is not None:
-        if player.guiSessionProvider.getArenaDP().isSquadMan(vID=vID) and vID != player.playerVehicleID:
+    if vID and _player is not None:
+        if arenaDP.isSquadMan(vID=vID) and vID != _player.playerVehicleID:
             fragsSquad_dict[vID] = vStats.get('frags', 0)
-            fragsSquad = 0
-            for value in fragsSquad_dict.itervalues():
-                fragsSquad += value
-            as_event('ON_TOTAL_EFFICIENCY')
+            fragsSquad = sum(fragsSquad_dict.itervalues())
+            updateLabels.update()
 
 
 @registerEvent(PlayerAvatar, 'showShotResults')
@@ -124,7 +159,7 @@ def PlayerAvatar_showShotResults(self, results):
                     hitAlly = vehicleDesc['isAlive']
                     isUpdate = True
     if isUpdate:
-        as_event('ON_TOTAL_EFFICIENCY')
+        updateLabels.update()
 
 
 @registerEvent(ShowShooting, '_start')
@@ -135,7 +170,7 @@ def ShowShooting_start(self, data, burstCount):
     vehicle = data['entity']
     if vehicle is not None and vehicle.isPlayerVehicle and vehicle.isAlive():
         numberShotsDealt += burst
-        as_event('ON_TOTAL_EFFICIENCY')
+        updateLabels.update()
 
 
 @registerEvent(Vehicle, 'showDamageFromShot')
@@ -145,15 +180,15 @@ def showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor):
         numberShotsReceived += 1
         if damageFactor != 0:
             numberHitsReceived += 1
-        as_event('ON_TOTAL_EFFICIENCY')
+        updateLabels.update()
 
 
 def isPlayerVehicle():
-    if player is not None:
-        if hasattr(player.inputHandler.ctrl, 'curVehicleID'):
-            vId = player.inputHandler.ctrl.curVehicleID
+    if _player is not None:
+        if hasattr(_player.inputHandler.ctrl, 'curVehicleID'):
+            vId = _player.inputHandler.ctrl.curVehicleID
             v = vId.id if isinstance(vId, Vehicle) else vId
-            return player.playerVehicleID == v
+            return _player.playerVehicleID == v
         else:
             return True
     else:
@@ -178,13 +213,10 @@ def _onTotalEfficiencyUpdated(self, diff):
             isUpdate = True
         if PERSONAL_EFFICIENCY_TYPE.BLOCKED_DAMAGE in diff:
             totalBlocked = diff[PERSONAL_EFFICIENCY_TYPE.BLOCKED_DAMAGE]
-            if totalBlocked == 0:
-                numberHitsBlocked = 0
-            else:
-                numberHitsBlocked += 1
+            numberHitsBlocked = (numberHitsBlocked + 1) if totalBlocked else 0
             isUpdate = True
         if isUpdate:
-            as_event('ON_TOTAL_EFFICIENCY')
+            updateLabels.update()
 
 
 @registerEvent(BattleRibbonsPanel, '_BattleRibbonsPanel__onRibbonUpdated')
@@ -195,17 +227,17 @@ def BattleRibbonsPanel__onRibbonUpdated(self, ribbon):
         if ribbonType == 'assistTrack':
             ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistSpot']) if totalAssist else 0
             numberAssistTrack += 1
-            as_event('ON_TOTAL_EFFICIENCY')
+            updateLabels.update()
         elif ribbonType == 'assistSpot':
             ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistTrack']) if totalAssist else 0
             numberAssistSpot += 1
-            as_event('ON_TOTAL_EFFICIENCY')
+            updateLabels.update()
         elif ribbonType == 'damage':
             numberDamagesDealt += 1
-            as_event('ON_TOTAL_EFFICIENCY')
+            updateLabels.update()
         elif ribbonType == 'stun':
             numberAssistStun += 1
-            as_event('ON_TOTAL_EFFICIENCY')
+            updateLabels.update()
 
 
 @registerEvent(BattleRibbonsPanel, '_BattleRibbonsPanel__onRibbonAdded')
@@ -216,46 +248,45 @@ def BattleRibbonsPanel__onRibbonAdded(self, ribbon):
         if ribbonType == 'assistTrack':
             ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistSpot']) if totalAssist else 0
             numberAssistTrack += 1
-            as_event('ON_TOTAL_EFFICIENCY')
+            updateLabels.update()
         elif ribbonType == 'assistSpot':
             ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistTrack']) if totalAssist else 0
             numberAssistSpot += 1
-            as_event('ON_TOTAL_EFFICIENCY')
+            updateLabels.update()
         elif ribbonType == 'crits':
             ribbonTypes[ribbonType] += ribbon.getExtraValue()
-            as_event('ON_TOTAL_EFFICIENCY')
+            updateLabels.update()
         elif ribbonType == 'kill':
             ribbonTypes[ribbonType] += 1
-            as_event('ON_TOTAL_EFFICIENCY')
+            updateLabels.update()
         elif ribbonType == 'spotted':
             ribbonTypes[ribbonType] += ribbon.getCount()
-            as_event('ON_TOTAL_EFFICIENCY')
+            updateLabels.update()
         elif ribbonType in ['damage', 'ram', 'burn']:
             numberDamagesDealt += 1
-            as_event('ON_TOTAL_EFFICIENCY')
+            updateLabels.update()
         elif ribbonType == 'stun':
             numberAssistStun += 1
-            as_event('ON_TOTAL_EFFICIENCY')
+            updateLabels.update()
 
 
 @registerEvent(Vehicle, 'onHealthChanged')
 def onHealthChanged(self, newHealth, attackerID, attackReasonID):
-    global vehiclesHealth, numberHitsDealt, damageReceived, numberDamagesDealt, numberDamagedVehicles, dmgAlly, damageKind
+    global vehiclesHealth, numberHitsDealt, damageReceived, numberDamagesDealt, numberDamagedVehicles, dmgAlly, damageKind, damagesSquad
     if not battle.isBattleTypeSupported:
         return
     isUpdate = False
     if self.isPlayerVehicle:
         damageReceived = maxHealth - max(0, newHealth)
         isUpdate = True
-    if player is not None and hasattr(player, 'playerVehicleID'):
+    if _player is not None and hasattr(_player, 'playerVehicleID'):
         if self.id in vehiclesHealth:
             damage = vehiclesHealth[self.id] - max(0, newHealth)
             vehiclesHealth[self.id] = newHealth
-            if player.guiSessionProvider.getArenaDP().isSquadMan(vID=attackerID) and attackerID != player.playerVehicleID:
-                global damagesSquad
+            if arenaDP.isSquadMan(vID=attackerID) and attackerID != _player.playerVehicleID:
                 damagesSquad += damage
                 isUpdate = True
-        if attackerID == player.playerVehicleID:
+        if attackerID == _player.playerVehicleID:
             if not dmgAlly and self.id in allyVehicles:
                 dmgAlly = True
             if attackReasonID == 0:
@@ -263,17 +294,18 @@ def onHealthChanged(self, newHealth, attackerID, attackReasonID):
             damageKind = ATTACK_REASONS[min(attackReasonID, 6)]
             isUpdate = True
     if isUpdate:
-        as_event('ON_TOTAL_EFFICIENCY')
+        updateLabels.update()
 
 
 @registerEvent(Vehicle, 'onEnterWorld')
 def onEnterWorld(self, prereqs):
-    global player, isPlayerInSquad, isStuns, vehiclesHealth, allyVehicles, enemyVehiclesMaxHP, enemyVehiclesSumMaxHP
+    global _player, isPlayerInSquad, isStuns, vehiclesHealth, allyVehicles, enemyVehiclesMaxHP, enemyVehiclesSumMaxHP, arenaDP
     if not battle.isBattleTypeSupported:
         return
-    if player is None:
-        player = BigWorld.player()
-    if self.publicInfo['team'] != player.team:
+    if _player is None:
+        _player = player()
+        arenaDP = _player.guiSessionProvider.getArenaDP()
+    if self.publicInfo['team'] != _player.team:
         vehiclesHealth[self.id] = self.health if self.health is not None else 0
         if self.id in enemyVehiclesMaxHP and enemyVehiclesMaxHP[self.id] < self.health:
             enemyVehiclesMaxHP[self.id] = self.health if self.health is not None else 0
@@ -282,7 +314,7 @@ def onEnterWorld(self, prereqs):
         allyVehicles.append(self.id)
     if self.isPlayerVehicle:
         global maxHealth, vehCD, burst
-        isPlayerInSquad = player.guiSessionProvider.getArenaDP().isSquadMan(player.playerVehicleID)
+        isPlayerInSquad = arenaDP.isSquadMan(_player.playerVehicleID)
         vehCD = self.typeDescriptor.type.compactDescr
         burst = self.typeDescriptor.gun.burst[0]
         maxHealth = self.health
@@ -290,20 +322,21 @@ def onEnterWorld(self, prereqs):
 
 @registerEvent(FragsCollectableStats, 'addVehicleStatusUpdate')
 def FragsCollectableStats_addVehicleStatusUpdate(self, vInfoVO):
-    global enemyVehiclesMaxHP, enemyVehiclesSumMaxHP, player
-    if player is None:
-        player = BigWorld.player()
-    if vInfoVO.vehicleID not in enemyVehiclesMaxHP and vInfoVO.team != player.team:
+    global enemyVehiclesMaxHP, enemyVehiclesSumMaxHP, _player, arenaDP
+    if _player is None:
+        _player = player()
+        arenaDP = _player.guiSessionProvider.getArenaDP()
+    if vInfoVO.vehicleID not in enemyVehiclesMaxHP and vInfoVO.team != _player.team:
         enemyVehiclesMaxHP[vInfoVO.vehicleID] = vInfoVO.vehicleType.maxHealth if vInfoVO.vehicleType.maxHealth is not None else 0
         enemyVehiclesSumMaxHP = sum(enemyVehiclesMaxHP.values())
 
 @registerEvent(PlayerAvatar, '_PlayerAvatar__destroyGUI')
-def destroyGUI(self):
+def totalEfficiency_destroyGUI(self):
     global vehiclesHealth, totalDamage, totalAssist, totalBlocked, damageReceived, damagesSquad, isPlayerInSquad, dmgAlly
-    global ribbonTypes, numberHitsBlocked, player, numberHitsDealt, old_totalDamage, damage, numberShotsDealt, totalStun
+    global ribbonTypes, numberHitsBlocked, _player, numberHitsDealt, old_totalDamage, damage, numberShotsDealt, totalStun
     global numberDamagesDealt, numberShotsReceived, numberHitsReceived, numberHits, fragsSquad, fragsSquad_dict, isStuns
     global numberStuns, numberDamagedVehicles, hitAlly, allyVehicles, burst, numberAssistTrack, numberAssistSpot, numberAssistStun
-    global damageKind, enemyVehiclesMaxHP, enemyVehiclesSumMaxHP
+    global damageKind, enemyVehiclesMaxHP, enemyVehiclesSumMaxHP, arenaDP
     vehiclesHealth = {}
     enemyVehiclesMaxHP = {}
     enemyVehiclesSumMaxHP = 0
@@ -315,7 +348,8 @@ def destroyGUI(self):
     damageReceived = 0
     damagesSquad = 0
     numberHitsBlocked = 0
-    player = None
+    _player = None
+    arenaDP = None
     numberHitsDealt = 0
     numberShotsDealt = 0
     numberDamagesDealt = 0
@@ -352,10 +386,14 @@ def destroyGUI(self):
         'defence': 0,
         'assist': 0
     }
+    updateLabels.cancelUpdate()
 
 
 @overrideMethod(RibbonsAggregator, 'suspend')
 def suspend(base, self):
-    self.resume() if battle.isBattleTypeSupported else base(self)
+    if battle.isBattleTypeSupported:
+        self.resume()
+    else:
+        base(self)
 
 
