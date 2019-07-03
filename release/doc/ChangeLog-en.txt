@@ -1,4 +1,6 @@
 ﻿XVM-7.9.7:
+  [GENERAL]
+  * bugfixes and optimization
 
 XVM-7.9.6:
   [GENERAL]
