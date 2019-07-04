@@ -88,9 +88,9 @@ Type: filesandordirs; Name: "{app}\res_mods\mods\xfw"
 ;configs\xvm\py_macro
 Type: filesandordirs; Name: "{app}\res_mods\configs\xvm\py_macro\xvm\*.pyc"
 Type: filesandordirs; Name: "{app}\res_mods\configs\xvm\py_macro\*.pyc"
-Type: dirifempty; Name: "{app}\res_mods\сonfigs\xvm\py_macro\"
-Type: dirifempty; Name: "{app}\res_mods\сonfigs\xvm\"
-Type: dirifempty; Name: "{app}\res_mods\сonfigs\"
+Type: dirifempty; Name: "{app}\res_mods\configs\xvm\py_macro\"
+Type: dirifempty; Name: "{app}\res_mods\configs\xvm\"
+Type: dirifempty; Name: "{app}\res_mods\configs\"
 
 Type: filesandordirs; Name: "{app}\xvm_uninst"
 Type: files; Name: "{app}\readme-*.txt"
