@@ -80,7 +80,6 @@ Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\audioww\"
 ;configs\xvm\py_macro
 Type: filesandordirs; Name: "{app}\res_mods\configs\xvm\py_macro\xvm\*.pyc"
 Type: filesandordirs; Name: "{app}\res_mods\configs\xvm\py_macro\*.pyc"
-Type: filesandordirs; Name: "{app}\res_mods\configs\xvm\xvm.xc"
 Type: dirifempty; Name: "{app}\res_mods\configs\xvm\py_macro\"
 Type: dirifempty; Name: "{app}\res_mods\configs\xvm\"
 Type: dirifempty; Name: "{app}\res_mods\configs\"
