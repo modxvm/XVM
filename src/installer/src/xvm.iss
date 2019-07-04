@@ -56,38 +56,31 @@ Source: "..\..\..\~output\readme*.*"; DestDir: "{app}"; Components: XVM
 Source: "dll\findwot\bin\findwot.dll"; Flags: dontcopy                                             
 
 [InstallDelete]
-;ver\gui\flash
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\xfw_battle.swf"
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\xfw_battleVehicleMarkersApp.swf"
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\xfw_lobby.swf"
-Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\gui\flash"
+;mods\ver\com.modxvm.xfw\*.wotmod
+Type: filesandordirs; Name: "{app}\mods\{#VersionWOT}\com.modxvm.xfw\com.modxvm.*.wotmod"
+Type: dirifempty; Name: "{app}\mods\{#VersionWOT}\com.modxvm.xfw\"
 
-;ver\gui
-Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\gui"
+;mods\ver\temp
+Type: filesandordirs; Name: "{app}\mods\temp\com.modxvm.*"
+Type: dirifempty; Name: "{app}\mods\temp\"
 
-;ver\scripts\client\gui\scaleform
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\scripts\client\gui\scaleform\locale"
-Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts\clients\gui\scaleform"
+;res_mods\mods\shared_resources
+Type: filesandordirs; Name: "{app}\res_mods\mods\shared_resources\xvm"
+Type: dirifempty; Name: "{app}\res_mods\mods\shared_resources\"
 
-;ver\scripts\client\gui\mods
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\scripts\client\gui\mods\mod_.pyc"
-Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts\client\gui\mods"
-
-;ver\scripts\client\gui
-Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts\client\gui"
-Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts\client"
-Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts"
-
-;mods\packages
+;res_mods\mods\packages
 Type: filesandordirs; Name: "{app}\res_mods\mods\xfw_packages\xvm_*"
 Type: dirifempty; Name: "{app}\res_mods\mods\xfw_packages\"
+Type: dirifempty; Name: "{app}\res_mods\mods\"
 
-;mods\xfw
-Type: filesandordirs; Name: "{app}\res_mods\mods\xfw"
+;res_mods\ver\audioww
+Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\audioww\xvm.bnk"
+Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\audioww\"
 
 ;configs\xvm\py_macro
 Type: filesandordirs; Name: "{app}\res_mods\configs\xvm\py_macro\xvm\*.pyc"
 Type: filesandordirs; Name: "{app}\res_mods\configs\xvm\py_macro\*.pyc"
+Type: filesandordirs; Name: "{app}\res_mods\configs\xvm\xvm.xc"
 Type: dirifempty; Name: "{app}\res_mods\configs\xvm\py_macro\"
 Type: dirifempty; Name: "{app}\res_mods\configs\xvm\"
 Type: dirifempty; Name: "{app}\res_mods\configs\"
@@ -96,38 +89,31 @@ Type: filesandordirs; Name: "{app}\xvm_uninst"
 Type: files; Name: "{app}\readme-*.txt"
 
 [UninstallDelete]
-;ver\gui\flash
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\xfw_battle.swf"
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\xfw_battleVehicleMarkersApp.swf"
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\gui\flash\xfw_lobby.swf"
-Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\gui\flash"
+;mods\ver\com.modxvm.xfw\*.wotmod
+Type: filesandordirs; Name: "{app}\mods\{#VersionWOT}\com.modxvm.xfw\com.modxvm.*.wotmod"
+Type: dirifempty; Name: "{app}\mods\{#VersionWOT}\com.modxvm.xfw\"
 
-;ver\gui
-Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\gui"
+;mods\ver\temp
+Type: filesandordirs; Name: "{app}\mods\temp\com.modxvm.*"
+Type: dirifempty; Name: "{app}\mods\temp\"
 
-;ver\scripts\client\gui\scaleform
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\scripts\client\gui\scaleform\locale"
-Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts\clients\gui\scaleform"
+;res_mods\mods\shared_resources
+Type: filesandordirs; Name: "{app}\res_mods\mods\shared_resources\xvm"
+Type: dirifempty; Name: "{app}\res_mods\mods\shared_resources\"
 
-;ver\scripts\client\gui\mods
-Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\scripts\client\gui\mods\mod_.pyc"
-Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts\client\gui\mods"
-
-;ver\scripts\client\gui
-Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts\client\gui"
-Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts\client"
-Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\scripts"
-
-;mods\packages
+;res_mods\mods\packages
 Type: filesandordirs; Name: "{app}\res_mods\mods\xfw_packages\xvm_*"
 Type: dirifempty; Name: "{app}\res_mods\mods\xfw_packages\"
+Type: dirifempty; Name: "{app}\res_mods\mods\"
 
-;mods\xfw
-Type: filesandordirs; Name: "{app}\res_mods\mods\xfw"
+;res_mods\ver\audioww
+Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\audioww\xvm.bnk"
+Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\audioww\"
 
 ;configs\xvm\py_macro
 Type: filesandordirs; Name: "{app}\res_mods\configs\xvm\py_macro\xvm\*.pyc"
 Type: filesandordirs; Name: "{app}\res_mods\configs\xvm\py_macro\*.pyc"
+Type: filesandordirs; Name: "{app}\res_mods\configs\xvm\xvm.xc"
 Type: dirifempty; Name: "{app}\res_mods\configs\xvm\py_macro\"
 Type: dirifempty; Name: "{app}\res_mods\configs\xvm\"
 Type: dirifempty; Name: "{app}\res_mods\configs\"
