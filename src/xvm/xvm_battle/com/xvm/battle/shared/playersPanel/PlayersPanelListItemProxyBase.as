@@ -60,6 +60,8 @@ package com.xvm.battle.shared.playersPanel
         public static const INVALIDATE_UPDATE_COLORS:String = "UPDATE_COLORS";
         public static const INVALIDATE_UPDATE_POSITIONS:String = "UPDATE_POSITIONS";
 
+        public static const PLAYERS_PANEL_WIDTH_OFFSET:int = -20;
+
         // PRIVATE CONSTS
 
         // from PlayersPanelListItem.as
@@ -77,6 +79,11 @@ package com.xvm.battle.shared.playersPanel
         private static const VEHICLE_LEVEL_RIGHT_X:int = VEHICLE_TF_RIGHT_X - 35;
 
         private static const MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED:String = "MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED";
+
+        // PUBLIC STATIC VARS
+
+        public static var s_widthLeft:int = 0;
+        public static var s_widthRight:int = 0;
 
         // PRIVATE STATIC VARS
 
@@ -494,7 +501,6 @@ package com.xvm.battle.shared.playersPanel
         private function _applyState():void
         {
             //Logger.add("_applyState: " + state);
-            BattleState.playersPanelMode = state;
             switch (state)
             {
                 case PLAYERS_PANEL_STATE.FULL:
@@ -534,8 +540,8 @@ package com.xvm.battle.shared.playersPanel
                     break;
                 case PLAYERS_PANEL_STATE.HIDDEN:
                 case -1:
-                    BattleState.playersPanelWidthLeft = 0;
-                    BattleState.playersPanelWidthRight = 0;
+                    s_widthLeft = 0;
+                    s_widthRight = 0;
                     ui.visible = false;
                     //ui.x = isLeftPanel ? -WIDTH : WIDTH;
                     break;
@@ -719,7 +725,7 @@ package com.xvm.battle.shared.playersPanel
                 }
             }
             updatePositionsLeft(lastX);
-            BattleState.playersPanelWidthLeft = WIDTH + ui.x;
+            s_widthLeft = WIDTH + ui.x;
         }
 
         private function _updatePositionsRight():void
@@ -744,7 +750,7 @@ package com.xvm.battle.shared.playersPanel
                 }
             }
             updatePositionsRight(lastX);
-            BattleState.playersPanelWidthRight = WIDTH - ui.x;
+            s_widthRight = WIDTH - ui.x;
         }
 
         private function _getFieldByConfigName(fieldName:String):DisplayObject

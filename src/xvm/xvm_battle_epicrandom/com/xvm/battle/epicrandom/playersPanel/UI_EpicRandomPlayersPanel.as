@@ -8,6 +8,7 @@ package com.xvm.battle.epicrandom.playersPanel
     import com.xvm.*;
     import com.xvm.battle.*;
     import net.wg.data.constants.generated.*;
+    import net.wg.infrastructure.interfaces.IDAAPIDataClass;
 
     public class UI_EpicRandomPlayersPanel extends epicRandomPlayersPanelUI
     {
@@ -16,6 +17,19 @@ package com.xvm.battle.epicrandom.playersPanel
         override public function as_setPanelMode(param1:int):void
         {
             super.as_setPanelMode(param1);
+            updateBattleStatePlayersPanelData();
+        }
+
+        override protected function applyVehicleData(param1:IDAAPIDataClass):void
+        {
+            super.applyVehicleData(param1);
+            updateBattleStatePlayersPanelData();
+        }
+
+        // PRIVATE
+
+        private function updateBattleStatePlayersPanelData():void
+        {
             BattleState.playersPanelMode = state == PLAYERS_PANEL_STATE.EPIC_RANDOM_THREE_COLUMN_HIDDEN ? PLAYERS_PANEL_STATE.HIDDEN : state;
             BattleState.playersPanelWidthLeft = listLeft.getRenderersVisibleWidth() - OFFSET;
             BattleState.playersPanelWidthRight = listRight.getRenderersVisibleWidth() - OFFSET;

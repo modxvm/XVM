@@ -5,12 +5,13 @@
 package com.xvm.battle
 {
     import com.xfw.*;
-    import com.xfw.events.*;
-    import com.xvm.*;
-    import com.xvm.battle.events.*;
-    import com.xvm.battle.vo.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
+    import com.xvm.Xvm;
+    import com.xvm.battle.events.PlayerStateEvent;
+    import com.xvm.battle.vo.VOPlayersData;
+    import com.xvm.battle.vo.VOPlayerState;
+    import com.xvm.battle.vo.VOCaptureBarData;
+    import scaleform.clik.constants.InvalidationType;
+    import scaleform.clik.core.UIComponent;
 
     public class BattleState extends UIComponent // implements IBattleComponentDataController
     {

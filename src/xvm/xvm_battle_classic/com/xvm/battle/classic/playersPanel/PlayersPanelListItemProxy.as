@@ -24,8 +24,8 @@ package com.xvm.battle.classic.playersPanel
 
         public function PlayersPanelListItemProxy(ui:PlayersPanelListItem, isLeftPanel:Boolean)
         {
-            super(ui, isLeftPanel);
             this.ui = ui;
+            super(ui, isLeftPanel);
         }
 
         override protected function fix_state(state:int):int

@@ -163,6 +163,8 @@ package com.xvm.battle.classic.playersPanel
                 }
 
                 mopt_expandAreaWidth = state == PLAYERS_PANEL_STATE.FULL ? 0 : Macros.FormatNumberGlobal(mcfg.expandAreaWidth, EXPAND_AREA_WIDTH);
+
+                updateBattleStatePlayersPanelData();
             }
             catch (ex:Error)
             {
@@ -235,14 +237,10 @@ package com.xvm.battle.classic.playersPanel
             }
         }
 
-        private function onListRollOverHandler(e:MouseEvent):void
+        override protected function applyVehicleData(param1:IDAAPIDataClass):void
         {
-            _isMouseRollOver = true;
-        }
-
-        private function onListRollOutHandler(e:MouseEvent):void
-        {
-            _isMouseRollOver = false;
+            super.applyVehicleData(param1);
+            updateBattleStatePlayersPanelData();
         }
 
         // for extraFields in the "none" mode
@@ -284,6 +282,16 @@ package com.xvm.battle.classic.playersPanel
         }
 
         // PRIVATE
+
+        private function onListRollOverHandler(e:MouseEvent):void
+        {
+            _isMouseRollOver = true;
+        }
+
+        private function onListRollOutHandler(e:MouseEvent):void
+        {
+            _isMouseRollOver = false;
+        }
 
         private function registerPlayersPanelMacros():void
         {
@@ -474,6 +482,21 @@ package com.xvm.battle.classic.playersPanel
                 res[playerState.position - 1] = id;
             }
             return res;
+        }
+
+        private function updateBattleStatePlayersPanelData():void
+        {
+            BattleState.playersPanelMode = state;
+            if (xvm_enabled)
+            {
+                BattleState.playersPanelWidthLeft = PlayersPanelListItemProxyBase.s_widthLeft;
+                BattleState.playersPanelWidthRight = PlayersPanelListItemProxyBase.s_widthRight;
+            }
+            else
+            {
+                BattleState.playersPanelWidthLeft = listLeft.getRenderersVisibleWidth() + PlayersPanelListItemProxyBase.PLAYERS_PANEL_WIDTH_OFFSET;
+                BattleState.playersPanelWidthRight = listRight.getRenderersVisibleWidth() + PlayersPanelListItemProxyBase.PLAYERS_PANEL_WIDTH_OFFSET;
+            }
         }
     }
 }
