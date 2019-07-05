@@ -7,7 +7,7 @@ package com.xvm.types.cfg
     import com.xfw.*;
     import com.xvm.*;
 
-    public class CStatisticForm implements ICloneable
+    public dynamic class CStatisticForm implements ICloneable
     {
         public var extraFieldsLeft:Array;
         public var extraFieldsRight:Array;
