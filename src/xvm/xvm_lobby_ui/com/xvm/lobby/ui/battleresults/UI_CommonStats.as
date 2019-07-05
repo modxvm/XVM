@@ -194,8 +194,9 @@ package com.xvm.lobby.ui.battleresults
 
                 if (!_fieldsInitialized)
                 {
-                    _fieldsInitialized = true;
+                    validateNow();
                     initializeFields();
+                    _fieldsInitialized = true;
                 }
 
                 hideQuestsShadows();
