@@ -117,6 +117,9 @@ package com.xvm.battle.vo
 
         public function updateVehicleInfos(vehiclesIds:Vector.<Number>, data:*, isAlly:Boolean):void
         {
+            if (vehiclesIds == null)
+                return;
+
             var vehicleID:Number;
             var ids_len:int = vehiclesIds.length;
             var data_len:int = data.length;
