@@ -1,4 +1,7 @@
 ﻿XVM-7.9.8:
+  [БОЙ]
+  * добавлены опции в секции battleLoading, battleLoadingTips и statisticForm:
+      "removeTesterIcon" - убрать отображение иконки альфа/бета тестеров
 
 XVM-7.9.7:
   [ОБЩЕЕ]

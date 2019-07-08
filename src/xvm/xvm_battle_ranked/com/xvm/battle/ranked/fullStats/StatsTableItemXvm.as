@@ -177,6 +177,11 @@ package com.xvm.battle.ranked.fullStats
             super.setBadge(cfg.removeRankBadgeIcon ? "" : badgeType);
         }
 
+        override public function setSuffixBadge(suffixBadgeType:String):void
+        {
+            super.setSuffixBadge(cfg.removeTesterIcon ? "" : suffixBadgeType);
+        }
+
         override public function setVehicleIcon(vehicleIconName:String):void
         {
             super.setVehicleIcon(vehicleIconName);

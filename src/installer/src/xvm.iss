@@ -46,6 +46,7 @@ Name: "XVM"; Description: "{cm:component_XVM}"; Types: full compact custom; Flag
 [Files]
 ;backup
 Source: "{app}\res_mods\configs\*"; DestDir: "{app}\xvm_backup\configs"; Tasks: xvmbackup; Flags: external skipifsourcedoesntexist createallsubdirs recursesubdirs uninsneveruninstall
+Source: "{app}\res_mods\mods\shared_resources\xvm\res\*"; DestDir: "{app}\xvm_backup\mods\shared_resources\xvm\res"; Tasks: xvmbackup; Flags: external skipifsourcedoesntexist createallsubdirs recursesubdirs uninsneveruninstall
 
 ;xvm
 Source: "..\..\..\~output\mods\*"; DestDir: "{app}\mods"; Flags: createallsubdirs recursesubdirs; Components: XVM
@@ -63,10 +64,6 @@ Type: dirifempty; Name: "{app}\mods\{#VersionWOT}\com.modxvm.xfw\"
 ;mods\ver\temp
 Type: filesandordirs; Name: "{app}\mods\temp\com.modxvm.*"
 Type: dirifempty; Name: "{app}\mods\temp\"
-
-;res_mods\mods\shared_resources
-Type: filesandordirs; Name: "{app}\res_mods\mods\shared_resources\xvm"
-Type: dirifempty; Name: "{app}\res_mods\mods\shared_resources\"
 
 ;res_mods\mods\packages
 Type: filesandordirs; Name: "{app}\res_mods\mods\xfw_packages\xvm_*"

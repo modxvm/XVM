@@ -221,6 +221,10 @@ package com.xvm.battle.shared.battleloading
             {
                 _model.badgeType = "";
             }
+            if (cfg.removeTesterIcon)
+            {
+                _model.suffixBadgeType = "";
+            }
         }
 
         public function draw():void
