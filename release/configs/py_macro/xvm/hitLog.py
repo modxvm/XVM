@@ -583,8 +583,7 @@ class GroupHitByPlayer(GroupHit):
         self.setParametrsHitLog()
         if self.maxCountLines <= 0:
             return []
-        vehID = g_dataHitLog.vehicleID
-        if vehID in self.players:
+        if self.vehID in self.players:
             self.updatePlayers()
         else:
             self.addPlayers()
@@ -610,7 +609,10 @@ class GroupHitByFireRamming(GroupHit):
             player = self.players[self.vehID]
             self.listLog[player[self.attackReasonID]['numberLine']] = formattedString
         elif self.maxCountLines == 1:
-            self.listLog[0] = formattedString
+            if self.listLog:
+                self.listLog[0] = formattedString
+            else:
+                self.listLog.append(formattedString)
         elif self.isAddToEnd:
             if self.maxCountLines <= self.countLines:
                 self.listLog.pop(0)
