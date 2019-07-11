@@ -32,6 +32,7 @@ package com.xvm.types.cfg
         public var removeSquadIcon:*;
         public var removeVehicleLevel:*;
         public var removeVehicleTypeIcon:*;
+        public var removeTesterIcon:*;
         public var squadIconOffsetXLeft:*;
         public var squadIconOffsetXRight:*;
         public var vehicleFieldOffsetXLeft:*;
@@ -65,6 +66,7 @@ package com.xvm.types.cfg
             removeSquadIcon = Macros.FormatBooleanGlobal(removeSquadIcon, false);
             removeVehicleLevel = Macros.FormatBooleanGlobal(removeVehicleLevel, false);
             removeVehicleTypeIcon = Macros.FormatBooleanGlobal(removeVehicleTypeIcon, false);
+            removeTesterIcon = Macros.FormatBooleanGlobal(removeTesterIcon, false);
             squadIconOffsetXLeft = Macros.FormatNumberGlobal(squadIconOffsetXLeft, 0);
             squadIconOffsetXRight = Macros.FormatNumberGlobal(squadIconOffsetXRight, 0);
             vehicleFieldOffsetXLeft = Macros.FormatNumberGlobal(vehicleFieldOffsetXLeft, 0);

@@ -1,4 +1,7 @@
 ﻿XVM-7.9.8:
+  [BATTLE]
+  * added options in "battleLoading" and "statisticForm" sections:
+      "removeTesterIcon" - disable alpha/beta testers icons
 
 XVM-7.9.7:
   [GENERAL]
