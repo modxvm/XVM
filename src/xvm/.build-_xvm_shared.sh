@@ -17,5 +17,6 @@ build_as3_swc \
     -source-path xvm_shared \
     -external-library-path+=../xfw/~output/swc/wg_shared.swc \
     -external-library-path+=../xfw/~output/swc/xfw_shared.swc \
+    -include-libraries+=swc/greensock.swc \
     -output ../../~output/swc/xvm_shared.swc \
     -include-classes $class

@@ -4,12 +4,13 @@
  */
 package com.xvm.extraFields
 {
-    import com.xvm.battle.events.*;
-    import com.xvm.types.cfg.*;
-    import com.xvm.vo.*;
-    import flash.geom.*;
-    import net.wg.infrastructure.interfaces.*;
-    import net.wg.infrastructure.interfaces.entity.*;
+    import com.greensock.TimelineLite;
+    import com.xvm.battle.events.PlayerStateEvent;
+    import com.xvm.types.cfg.CExtraField;
+    import com.xvm.vo.IVOMacrosOptions;
+    import flash.geom.Rectangle;
+    import net.wg.infrastructure.interfaces.IDisplayObject;
+    import net.wg.infrastructure.interfaces.entity.IDisposable;
 
     public interface IExtraField extends IDisplayObject, IDisposable
     {
@@ -20,6 +21,8 @@ package com.xvm.extraFields
         function get cfg():CExtraField;
         function set mouseEnabled(value:Boolean):void;
         function set buttonMode(value:Boolean):void;
+        function get tweens():TimelineLite;
+        function set tweens(value:TimelineLite):void;
         function update(options:IVOMacrosOptions, bindToIconOffset:int = 0, offsetX:int = 0, offsetY:int = 0, bounds:Rectangle = null):void;
         function updateOnEvent(e:PlayerStateEvent):void;
         function onKeyEvent(key:Number, isDown:Boolean):void

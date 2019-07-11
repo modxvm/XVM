@@ -31,6 +31,7 @@ package com.xvm.types.cfg
         public var shadow:CShadow;
         public var src:String;
         public var textFormat:CTextFormat;
+        public var tweens:Array;
         public var updateEvent:String;
         public var valign:String;
         public var visibleOnHotKey:*;
@@ -64,6 +65,7 @@ package com.xvm.types.cfg
             cloned.shadow = shadow ? shadow.clone() : null;
             cloned.src = src;
             cloned.textFormat = textFormat ? textFormat.clone() : null;
+            cloned.tweens = tweens ? tweens.concat() : null;
             cloned.updateEvent = updateEvent;
             cloned.valign = valign;
             cloned.visibleOnHotKey = visibleOnHotKey;

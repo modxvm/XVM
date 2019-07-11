@@ -6,13 +6,16 @@ package com.xvm.extraFields
 {
     import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.battle.events.*;
-    import com.xvm.battle.vo.*;
-    import com.xvm.vo.*;
-    import flash.events.*;
-    import flash.utils.*;
-    import mx.utils.*;
-    import scaleform.gfx.*;
+    import com.greensock.TimelineLite;
+    import com.greensock.TweenLite;
+    import com.xvm.battle.events.PlayerStateEvent;
+    import com.xvm.battle.vo.VOPlayerState;
+    import com.xvm.vo.IVOMacrosOptions;
+    import flash.events.MouseEvent;
+    import flash.events.TimerEvent;
+    import flash.utils.Timer;
+    import mx.utils.StringUtil;
+    import scaleform.gfx.MouseEventEx;
 
     public class ExtraFieldsHelper
     {
@@ -145,6 +148,26 @@ package com.xvm.extraFields
                 registerMouseEvent(field, field.cfg.mouseEvents.mouseOver, MouseEvent.MOUSE_OVER, false);
                 registerMouseEvent(field, field.cfg.mouseEvents.mouseUp, MouseEvent.MOUSE_UP, true);
                 registerMouseEvent(field, field.cfg.mouseEvents.mouseWheel, MouseEvent.MOUSE_WHEEL, false);
+            }
+
+            if (field.cfg.tweens)
+            {
+                try
+                {
+                    var tw:Array = field.cfg.tweens;
+                    var len:int = tw.length;
+                    var tl:TimelineLite = new TimelineLite({paused: true});
+                    for (var i:int = 0; i < len; ++i)
+                    {
+                        tl.add(createTween(field, tw[i]));
+                    }
+                    field.tweens = tl;
+                }
+                catch (e:Error)
+                {
+                    Logger.add("WARNING: Error creating tweens");
+                    Logger.err(e);
+                }
             }
         }
 
@@ -312,6 +335,26 @@ package com.xvm.extraFields
                     int(e.shiftKey)     // 10
                 );
             }
+        }
+
+        private static function createTween(field: IExtraField, cfg:Array):TweenLite
+        {
+            var tween:TweenLite = null;
+            var method:String = cfg.shift();
+            switch(method)
+            {
+                case "delay":
+                    return TweenLite.to(field, cfg[0], {});
+                case "from":
+                    return TweenLite.from(field, cfg[0], cfg[1]);
+                case "fromTo":
+                    return TweenLite.fromTo(field, cfg[0], cfg[1], cfg[2]);
+                case "set":
+                    return TweenLite.set(field, cfg[0]);
+                case "to":
+                    return TweenLite.to(field, cfg[0], cfg[1]);
+            }
+            throw new Error("Tween method is not supported: " + method);
         }
     }
 }

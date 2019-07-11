@@ -4,16 +4,18 @@
  */
 package com.xvm.extraFields
 {
+    import com.greensock.TimelineLite;
     import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.battle.*;
-    import com.xvm.battle.events.*;
-    import com.xvm.types.cfg.*;
-    import com.xvm.vo.*;
-    import com.xvm.wg.*;
-    import flash.text.*;
-    import flash.geom.*;
-    import scaleform.gfx.*;
+    import com.xvm.battle.BattleState;
+    import com.xvm.battle.events.PlayerStateEvent;
+    import com.xvm.extraFields.IExtraField;
+    import com.xvm.types.cfg.CExtraField;
+    import com.xvm.vo.IVOMacrosOptions;
+    import com.xvm.wg.ImageXVM;
+    import flash.geom.Rectangle;
+    import flash.text.TextFormatAlign;
+    import scaleform.gfx.TextFieldEx;
 
     public class ImageExtraField extends ImageXVM implements IExtraField
     {
@@ -41,6 +43,7 @@ package com.xvm.extraFields
         private var _keyHolded:Boolean = false;
         private var _visibleOnHotKeyEnabled:Boolean = true;
         private var _visibilityFlag:Boolean = true;
+        private var _tweens:TimelineLite = null;
 
         public function ImageExtraField(format:CExtraField, isLeftPanel:Boolean = true, getColorSchemeName:Function = null,
             bounds:Rectangle = null, layout:String = null)
@@ -112,6 +115,16 @@ package com.xvm.extraFields
         public function get heightValue():Number
         {
             return isNaN(_heightValue) ? _bitmap.height : _heightValue;
+        }
+
+        public function get tweens():TimelineLite
+        {
+            return _tweens;
+        }
+
+        public function set tweens(value:TimelineLite):void
+        {
+            _tweens = value;
         }
 
         private function setup(options:IVOMacrosOptions):void
@@ -420,6 +433,10 @@ package com.xvm.extraFields
         public function updateOnEvent(e:PlayerStateEvent):void
         {
             update(isNaN(e.vehicleID) ? _lastOptions : BattleState.get(e.vehicleID));
+            if (tweens != null)
+            {
+                tweens.restart();
+            }
         }
 
         public function onKeyEvent(key:Number, isDown:Boolean):void
@@ -442,6 +459,10 @@ package com.xvm.extraFields
                 }
                 visible = _visibleOnHotKeyEnabled && _visibilityFlag;
                 //updateOnEvent(new PlayerStateEvent(PlayerStateEvent.ON_HOTKEY_PRESSED)); // need current vehicle id for players panel
+                if (tweens != null)
+                {
+                    tweens.restart();
+                }
             }
         }
     }
