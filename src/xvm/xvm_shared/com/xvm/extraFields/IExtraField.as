@@ -23,6 +23,10 @@ package com.xvm.extraFields
         function set buttonMode(value:Boolean):void;
         function get tweens():TimelineLite;
         function set tweens(value:TimelineLite):void;
+        function get tweensIn():TimelineLite;
+        function set tweensIn(value:TimelineLite):void;
+        function get tweensOut():TimelineLite;
+        function set tweensOut(value:TimelineLite):void;
         function update(options:IVOMacrosOptions, bindToIconOffset:int = 0, offsetX:int = 0, offsetY:int = 0, bounds:Rectangle = null):void;
         function updateOnEvent(e:PlayerStateEvent):void;
         function onKeyEvent(key:Number, isDown:Boolean):void

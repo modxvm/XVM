@@ -32,6 +32,8 @@ package com.xvm.types.cfg
         public var src:String;
         public var textFormat:CTextFormat;
         public var tweens:Array;
+        public var tweensIn:Array;
+        public var tweensOut:Array;
         public var updateEvent:String;
         public var valign:String;
         public var visibleOnHotKey:*;
@@ -66,6 +68,8 @@ package com.xvm.types.cfg
             cloned.src = src;
             cloned.textFormat = textFormat ? textFormat.clone() : null;
             cloned.tweens = tweens ? tweens.concat() : null;
+            cloned.tweensIn = tweensIn ? tweensIn.concat() : null;
+            cloned.tweensOut = tweensOut ? tweensOut.concat() : null;
             cloned.updateEvent = updateEvent;
             cloned.valign = valign;
             cloned.visibleOnHotKey = visibleOnHotKey;

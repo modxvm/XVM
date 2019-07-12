@@ -44,6 +44,8 @@ package com.xvm.extraFields
         private var _visibleOnHotKeyEnabled:Boolean = true;
         private var _visibilityFlag:Boolean = true;
         private var _tweens:TimelineLite = null;
+        private var _tweensIn:TimelineLite = null;
+        private var _tweensOut:TimelineLite = null;
 
         public function ImageExtraField(format:CExtraField, isLeftPanel:Boolean = true, getColorSchemeName:Function = null,
             bounds:Rectangle = null, layout:String = null)
@@ -58,6 +60,7 @@ package com.xvm.extraFields
             mouseEnabled = false;
             mouseChildren = false;
             buttonMode = false;
+            visible = false;
 
             this._cfg = format.clone();
             this.isLeftPanel = isLeftPanel;
@@ -125,6 +128,26 @@ package com.xvm.extraFields
         public function set tweens(value:TimelineLite):void
         {
             _tweens = value;
+        }
+
+        public function get tweensIn():TimelineLite
+        {
+            return _tweensIn;
+        }
+
+        public function set tweensIn(value:TimelineLite):void
+        {
+            _tweensIn = value;
+        }
+
+        public function get tweensOut():TimelineLite
+        {
+            return _tweensOut;
+        }
+
+        public function set tweensOut(value:TimelineLite):void
+        {
+            _tweensOut = value;
         }
 
         private function setup(options:IVOMacrosOptions):void
@@ -219,10 +242,11 @@ package com.xvm.extraFields
                 _visibilityFlag = ExtraFieldsHelper.checkVisibilityFlags(cfg.flags, options);
                 if (!_visibilityFlag)
                 {
-                    visible = false;
+                    ExtraFieldsHelper.changeVisible(this, false);
                     return;
                 }
-                visible = _visibleOnHotKeyEnabled && _visibilityFlag;
+
+                ExtraFieldsHelper.changeVisible(this, _visibleOnHotKeyEnabled && _visibilityFlag);
 
                 var needAlign:Boolean = false;
 
@@ -457,12 +481,8 @@ package com.xvm.extraFields
                 {
                     _visibleOnHotKeyEnabled = !_keyHolded;
                 }
-                visible = _visibleOnHotKeyEnabled && _visibilityFlag;
+                ExtraFieldsHelper.changeVisible(this, _visibleOnHotKeyEnabled && _visibilityFlag);
                 //updateOnEvent(new PlayerStateEvent(PlayerStateEvent.ON_HOTKEY_PRESSED)); // need current vehicle id for players panel
-                if (tweens != null)
-                {
-                    tweens.restart();
-                }
             }
         }
     }

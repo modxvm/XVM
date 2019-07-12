@@ -150,24 +150,12 @@ package com.xvm.extraFields
                 registerMouseEvent(field, field.cfg.mouseEvents.mouseWheel, MouseEvent.MOUSE_WHEEL, false);
             }
 
-            if (field.cfg.tweens)
+            field.tweens = createTweens(field, field.cfg.tweens);
+            field.tweensIn = createTweens(field, field.cfg.tweensIn);
+            field.tweensOut = createTweens(field, field.cfg.tweensOut);
+            if (field.tweensOut)
             {
-                try
-                {
-                    var tw:Array = field.cfg.tweens;
-                    var len:int = tw.length;
-                    var tl:TimelineLite = new TimelineLite({paused: true});
-                    for (var i:int = 0; i < len; ++i)
-                    {
-                        tl.add(createTween(field, tw[i]));
-                    }
-                    field.tweens = tl;
-                }
-                catch (e:Error)
-                {
-                    Logger.add("WARNING: Error creating tweens");
-                    Logger.err(e);
-                }
+                field.tweensOut.call(function():void { field.visible = false } );
             }
         }
 
@@ -277,6 +265,57 @@ package com.xvm.extraFields
             return true;
         }
 
+        public static function changeVisible(field:IExtraField, value: Boolean):void
+        {
+            if (value)
+            {
+                var outActive:Boolean = false;
+                if (field.tweensOut)
+                {
+                    if (field.tweensOut.isActive())
+                    {
+                        outActive = true;
+                        field.tweensOut.pause();
+                    }
+                }
+                if (!field.visible || outActive)
+                {
+                    field.visible = true;
+                    if (field.tweensIn)
+                    {
+                        if (!field.tweensIn.isActive())
+                        {
+                            field.tweensIn.restart();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (field.tweensIn)
+                {
+                    if (field.tweensIn.isActive())
+                    {
+                        field.tweensIn.pause();
+                    }
+                }
+                if (field.visible)
+                {
+                    if (field.tweensOut)
+                    {
+                        if (!field.tweensOut.isActive())
+                        {
+                            field.tweensOut.restart();
+                        }
+                    }
+                    else
+                    {
+                        field.visible = false;
+                    }
+                }
+            }
+        }
+
         // PRIVATE
 
         private static var timerFrame:Timer = null;
@@ -337,22 +376,45 @@ package com.xvm.extraFields
             }
         }
 
+        private static function createTweens(field: IExtraField, cfg:Array):TimelineLite
+        {
+            if (cfg)
+            {
+                try
+                {
+                    var tweens:TimelineLite = new TimelineLite({paused: true});
+                    var len:int = cfg.length;
+                    for (var i:int = 0; i < len; ++i)
+                    {
+                        tweens.add(createTween(field, cfg[i]));
+                    }
+                    return tweens;
+                }
+                catch (e:Error)
+                {
+                    Logger.add("WARNING: Error creating tweens");
+                    Logger.err(e);
+                }
+            }
+            return null;
+        }
+
         private static function createTween(field: IExtraField, cfg:Array):TweenLite
         {
             var tween:TweenLite = null;
-            var method:String = cfg.shift();
+            var method:String = cfg[0];
             switch(method)
             {
                 case "delay":
-                    return TweenLite.to(field, cfg[0], {});
+                    return TweenLite.to(field, cfg[1], {});
                 case "from":
-                    return TweenLite.from(field, cfg[0], cfg[1]);
+                    return TweenLite.from(field, cfg[1], cfg[2]);
                 case "fromTo":
-                    return TweenLite.fromTo(field, cfg[0], cfg[1], cfg[2]);
+                    return TweenLite.fromTo(field, cfg[1], cfg[2], cfg[3]);
                 case "set":
-                    return TweenLite.set(field, cfg[0]);
+                    return TweenLite.set(field, cfg[1]);
                 case "to":
-                    return TweenLite.to(field, cfg[0], cfg[1]);
+                    return TweenLite.to(field, cfg[1], cfg[2]);
             }
             throw new Error("Tween method is not supported: " + method);
         }
