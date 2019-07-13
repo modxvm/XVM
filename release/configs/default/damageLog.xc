@@ -312,7 +312,7 @@
       "showHitNoDamage": true,
       // Display duration (seconds).
       // Продолжительность отображения (секунды).
-      "timeDisplayLastHit": 7,
+      "timeDisplayLastHit": 5,
       // Shadow settings.
       // Настройки тени.
       "shadow": {
