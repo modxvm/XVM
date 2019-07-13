@@ -39,6 +39,10 @@ Legend:
 ├───────────────────┼───┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────
 │ "valign"          │ X │ X │ X │ X │ X │ X │ X │ vertical alignment of the field relative to its position ("top" [default], "center", "bottom")
 ├───────────────────┼───┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────
+│ "screenHAlign"    │   │   │   │   │   │ X │ X │ horizontal alignment of the field on the screen ("left" [default], "center", "right")
+├───────────────────┼───┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────
+│ "screenVAlign"    │   │   │   │   │   │ X │ X │ vertical alignment of the field on the screen ("top" [default], "center", "bottom")
+├───────────────────┼───┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────
 │ "scaleX"          │ X │ X │ X │ X │ X │ X │ X │ scaling axis X in % (use negative values for mirroring) (default: 1)
 ├───────────────────┼───┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────
 │ "scaleY"          │ X │ X │ X │ X │ X │ X │ X │ scaling axis Y in % (use negative values for mirroring) (default: 1)
@@ -147,7 +151,28 @@ Legend:
 │                   │   │   │   │   │   │   │   │   "mouseMove"  - event is sent when mouse pointer moves inside the field
 │                   │   │   │   │   │   │   │   │   "mouseWheel" - event is sent when mouse wheel rolled inside the field
 ├───────────────────┼───┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────
-│ "screenHAlign"    │   │   │   │   │   │ X │ X │ horizontal alignment of the field on the screen ("left" [default], "center", "right")
-├───────────────────┼───┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────
-│ "screenVAlign"    │   │   │   │   │   │ X │ X │ vertical alignment of the field on the screen ("top" [default], "center", "bottom")
+│ "tweens"          │   │   │   │   │   │ X │ X │ animation elements:
+│ "tweensIn"        │   │   │   │   │   │   │   │   "tweens"    - triggered by update events from "updateEvent"
+│ "tweensOut"       │   │   │   │   │   │   │   │   "tweensIn"  - triggered by changing the "visibleOnHotKey", emerging element
+│                   │   │   │   │   │   │   │   │   "tweensOut" - triggered by changing the "visibleOnHotKey", disappearing element
+│                   │   │   │   │   │   │   │   │
+│                   │   │   │   │   │   │   │   │ available methods:
+│                   │   │   │   │   │   │   │   │   [ "to", duration:Number, vars:Object]
+│                   │   │   │   │   │   │   │   │   [ "from", duration:Number, vars:Object]
+│                   │   │   │   │   │   │   │   │   [ "set", vars:Object]
+│                   │   │   │   │   │   │   │   │   [ "fromTo", duration:Number, fromVars:Object, toVars:Object]
+│                   │   │   │   │   │   │   │   │   [ "delay", duration:Number ]
+│                   │   │   │   │   │   │   │   │
+│                   │   │   │   │   │   │   │   │ each method - is an array, where the first element - is the name of the method, and the following are - the arguments, depending on the method
+│                   │   │   │   │   │   │   │   │ a description of the methods can be found in the documentation: https://greensock.com/asdocs/com/greensock/TweenLite.html
+│                   │   │   │   │   │   │   │   │ example:
+│                   │   │   │   │   │   │   │   │
+│                   │   │   │   │   │   │   │   │   "tweens": [
+│                   │   │   │   │   │   │   │   │     [ "to", 1, { "alpha": 1 } ],
+│                   │   │   │   │   │   │   │   │     [ "delay", 3 ],
+│                   │   │   │   │   │   │   │   │     [ "to", 1, { "alpha": 0.5 } ]
+│                   │   │   │   │   │   │   │   │   ],
+│                   │   │   │   │   │   │   │   │
+│                   │   │   │   │   │   │   │   │ in this example, field by the event from "updateEvent" becomes non-transparent during 1 second;
+│                   │   │   │   │   │   │   │   │ with a delay of 3 seconds, the field fades out during 1 second becomes translucent
 └───────────────────┴───┴───┴───┴───┴───┴───┴───┴─────────────────────────────────────────────
