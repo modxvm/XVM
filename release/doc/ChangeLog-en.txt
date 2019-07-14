@@ -1,6 +1,13 @@
 ﻿XVM-7.9.8:
   [BATTLE]
-  * added options in "battleLoading" and "statisticForm" sections:
+  * added options to extra-fields:
+      "tweens"
+      "tweensIn"
+      "tweensOut"
+  * description for the parameters see extra-field.txt
+
+  [BATTLE]
+  * added options in "battleLoading", "battleLoadingTips" and "statisticForm" sections:
       "removeTesterIcon" - disable alpha/beta testers icons
 
 XVM-7.9.7:
@@ -849,7 +856,7 @@ XVM-6.7.4:
 
   [BATTLE]
   * added players panel, battle loading and full stats in the ranked battle
-  * added options in "battleLoading" and "statisticForm" sections:
+  * added options in "battleLoading", "battleLoadingTips" and "statisticForm" sections:
       "removeRankBadgeIcon" - disable rank badge icons
   * added new field type "badge" in the "playersPanel"/"standardFields" modes sections
   * added options in the "playersPanel" modes sections:
@@ -999,7 +1006,7 @@ XVM-6.6.0:
 
   [WIDGETS]
   * added new function - widgets in login and lobby
-    currently only "extrafields" widget type implemented
+    currently only "extra-fields" widget type implemented
     configuration files: widgets.xc, widgetsTemplates.xc
     referenced from login.xc, hangar.xc
 
@@ -1075,7 +1082,7 @@ XVM-6.5.5:
       "moveInBattle" - to allow movement of battleLabels by a mouse in battle
 
   [MARKERS]
-  * added image scaling for extrafields
+  * added image scaling for extra-fields
 
   [MINIMAP]
   * save circles data in replay
@@ -1085,7 +1092,7 @@ XVM-6.5.5:
   * added new options in the "carousel"/"normal"/"fields" and "carousel"/"small"/"fields" sections:
       "stats" - settings for the stats field that appears on the mouse hover
       "favorite" - favorite vehicle mark
-  * added hotkeys support for the extraFields in the carousel
+  * added hotkeys support for the extra-fields in the carousel
   * added new filter icons
 
   [BATTLE LOADING]
@@ -1254,7 +1261,7 @@ XVM-6.4.6:
   * added new sections in the "carousel" section:
       "normal" - normal cells settings
       "small" - small cells settings
-  * sections "padding", "fields" and "extraFields" moved from "carousel" to
+  * sections "padding", "fields" and "extra-fields" moved from "carousel" to
     "carousel"/"normal" and "carousel"/"small" sections to allow separate settings
   * added new options in the "carousel"/"normal" and "carousel"/"small" sections:
       "width" - cell width
@@ -1299,7 +1306,7 @@ XVM-6.4.3:
       "zoom"/"pixelsBack"
   * renamed options in the "minimap" and "minimapAlt" sections:
       "showCameraLineAfterDeath" => "showDirectionLineAfterDeath"
-  * extra fields alignment options behavior changed:
+  * extra-fields alignment options behavior changed:
       "align"               - horizontal alignment of the text field relative to its position
       "valign"              - vertical alignment of the text field relative to its position
       "textFormat"/"align"  - horizontal alignment of the text inside the field
@@ -1322,7 +1329,7 @@ XVM-6.4.2:
       "inviteIndicatorY" - Y position offset of dynamic squad invite indicator
   * ping: fixed a memory leak on old Windows versions if ping in hangar was enabled
   * ping: no longer requires additional configuration to work under Wine
-  * battleLoading: extraFields added
+  * battleLoading: extra-fields added
   * battleLabels: added events:
       ON_DAMAGE_CAUSED_ALLY - damage to ally
       ON_TARGET_IN  - aim at the vehicle
@@ -1341,7 +1348,7 @@ XVM-6.4.1.1:
 XVM-6.4.1:
   * adaptation to WoT 0.9.15.1.1
   * some bugs fixed
-  * statisticForm: extraFields added
+  * statisticForm: extra-fields added
   * carousel: restored multi rows
   * carousel: added sorting on "markOfMastery", "xtdb", "xte", "damageRating" and "marksOnGun"
   * added option in "battleLoading" and "statisticForm" sections:
@@ -1414,11 +1421,11 @@ XVM-6.4.0:
   * option "markers"/*/"vehicleIcon"/"scaleY" renamed to "offsetY"
   * default value for "vehicleIcon"/"offsetY" changed fro 16 to 0
   * config format of the text fields in markers and battleLabels are changed to
-    common extraFields config format
+    common extra-fields config format
   * option "visible" everywhere changed to "enabled" for unification
   * removed option "hotkeys"/"battleLabelsHotKeys" - not required
   * removed option "battle"/"allowLabelsOnBattleInterface" - not required
-  * changed anchor for "bindToIcon" option in the extra fields
+  * changed anchor for "bindToIcon" option in the extra-fields
   * changed hitlog macros - added "hitlog." prefix (see macros.txt)
   * removed "hpLeft" section - use {{hp*}} macros
   * added {{comment}} macro to show comment for player from contacts
@@ -1438,7 +1445,7 @@ XVM-6.3.2.1:
 XVM-6.3.2:
   * update for WoT 0.9.15.0.1 micropatch
   * changed "shadow"/"alpha" parameter values range from 0..1 to 0..100 in the carousel
-    and players panel extra fields
+    and players panel extra-fields
 
 XVM-6.3.1.1:
   * update for WoT 0.9.15 #30 micropatch
@@ -1693,7 +1700,7 @@ XVM-6.1.1.1:
   * localization files were updated
 
 XVM-6.1.1:
-  * in extrafields in the players panels added "enabled" parameter with global macros support
+  * in extra-fields in the players panels added "enabled" parameter with global macros support
   * added section hangar/serverInfo for changing server info visibility
   * added parameters in carousel config: fields/statusText and fields/clanLock
   * performance optimization and some bugfixes
@@ -1809,8 +1816,8 @@ XVM-5.5.0:
       {{region}} - current game region (RU, EU, NA, ASIA, KR, CN, CT)
       {{spotted}} with values from texts/spotted section
       {{c:spotted}}, {{a:spotted}} for color and transparency by spotted status
-  * removed section "playersPanel"/"enemySpottedMarker" (use extra fields with {{spotted}} macro instead)
-  * added new option to extraFields: "bindToIcon" - if enabled, x position is bound to vehicle icon (default false)
+  * removed section "playersPanel"/"enemySpottedMarker" (use extra-fields with {{spotted}} macro instead)
+  * added new option to extra-fields: "bindToIcon" - if enabled, x position is bound to vehicle icon (default false)
 
 XVM-5.4.1.3:
   * new in-battle macros:
@@ -1847,9 +1854,9 @@ XVM-5.4.0:
     You need to reactivate XVM services (use "Add client" button in the personal cabinet on the
     https://modxvm.com site). You can remove res_mods/xvm/db/ folder.
   * added option "battleLoading"/"darkenNotReadyIcon" for customize icons are not ready players
-  * added options "pingServers"/"leading" and pingServers/topmost
+  * added options "pingServers"/"leading" and "pingServers"/"topmost"
   * carousel: added macro {{v.selected}}, returns 'sel' for selected, empty for others
-  * playersPanel: in extra fields added options "scaleX" and "scaleY"
+  * playersPanel: in extra-fields added options "scaleX" and "scaleY"
 
 XVM-5.3.6.1:
   * fixed bug when xvm.xc is absent
