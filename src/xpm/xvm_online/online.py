@@ -60,6 +60,7 @@ class _Get_online(object):
 
         self.loginHosts = []
         self.hangarHosts = []
+        self.peripheryIdMap = {}
         if self.loginSection is not None:
             for (name, subSec) in self.loginSection.items():
                 host_name = subSec.readStrings('short_name')[0]
@@ -67,6 +68,7 @@ class _Get_online(object):
                     self.loginHosts.append(host_name)
                 if host_name not in ignoredServersHangar:
                     self.hangarHosts.append(host_name)
+                self.peripheryIdMap[subSec.readStrings('periphery_id')[0]] = host_name
             alphanumeric_sort(self.loginHosts)
             alphanumeric_sort(self.hangarHosts)
             self.done_config = True
@@ -121,14 +123,7 @@ class _Get_online(object):
                 return
             for data_host in data_region:
                 server = data_host['server']
-                if self.region == 'NA':
-                    if server == '303':
-                        server = 'NA1'
-                elif self.region == 'ASIA':
-                    if server == '502':
-                        server = 'ASIA1'
-                    elif server == '503':
-                        server = 'ASIA2'
+                server = self.peripheryIdMap.get(server, server)
                 data_dict[server] = data_host['players_online']
 
             res = []
