@@ -50,7 +50,7 @@ def LoginView_populate(base, self):
 @overrideMethod(Manager, 'tryWgcLogin')
 def tryWgcLogin(base, self, serverName=None):
     if not serverName and not config.get('login/autologin'): return
-    base(self)
+    base(self, serverName)
     
 @registerEvent(LoginView, 'onLogin')
 def LoginView_onLogin(self, userName, password, serverName, isSocialToken2Login):
