@@ -9,7 +9,7 @@ import BigWorld
 from gui.Scaleform.daapi.view.login.IntroPage import IntroPage
 from gui.Scaleform.daapi.view.login.LoginView import LoginView
 from gui.login.Servers import Servers
-
+from gui.login.Manager import Manager
 from xfw import *
 
 from xvm_main.python.logger import *
@@ -47,6 +47,11 @@ def LoginView_populate(base, self):
             if config.get('login/autologin'):
                 BigWorld.callback(0, self.as_doAutoLoginS)
 
+@overrideMethod(Manager, 'tryWgcLogin')
+def tryWgcLogin(base, self, serverName=None):
+    if not serverName and not config.get('login/autologin'): return
+    base(self)
+    
 @registerEvent(LoginView, 'onLogin')
 def LoginView_onLogin(self, userName, password, serverName, isSocialToken2Login):
     if config.get('login/saveLastServer'):
