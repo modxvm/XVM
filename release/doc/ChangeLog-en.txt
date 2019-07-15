@@ -1,4 +1,6 @@
-﻿XVM-7.9.8:
+﻿XVM-7.9.9:
+
+XVM-7.9.8:
   [GENERAL]
   * World of Tanks 1.5.1.2
   * added options to extra-fields:
