@@ -9,7 +9,6 @@ class XVM(object):
     XVM_INTRO      = 'https://modxvm.com'
 
     API_VERSION = '4.0'
-    API_VERSION_OLD = '3.0'
     SERVERS = ['https://stat.modxvm.com:443/{API}/{REQ}']
     TIMEOUT = 5000
 
