@@ -1,10 +1,16 @@
 ﻿XVM-7.9.8:
   [ОБЩЕЕ]
+  * World of Tanks 1.5.1.2
   * добавлены опции в экстра-поля:
       "tweens"
       "tweensIn"
       "tweensOut"
   * описание для параметров см. extra-field_ru.txt
+
+  [АНГАР]
+  * восстановлена функциональность опций:
+      "login"/"onlineServers"
+      "hangar"/"onlineServers"
 
   [БОЙ]
   * добавлены опции в секции "battleLoading", "battleLoadingTips" и "statisticForm":
@@ -111,7 +117,7 @@ XVM-7.8.6:
   * World of Tanks 1.4.1.1
 
   [АНГАР]
-  * восстановлена функциональность опции:
+  * восстановлена функциональность опций:
       "login"/"saveLastServer" - сохранять последний сервер
       "hangar"/"hidePricesInTechTree" - прятать кнопку с ценой в дереве исследований
       "hangar"/"masteryMarkInTechTree" - показывать знак мастерства в дереве исследований
@@ -1037,7 +1043,7 @@ XVM-6.5.7:
       радиус круга расчитывается для техники стоящей на горизонтально поверхности, с учетом максимального угла подъема орудия
 
   [АНГАР]
-  * добавлены опции hangar/pingServers/bgImage и hangar/onlineServers/bgImage
+  * добавлены опции "hangar"/"pingServers"/"bgImage" и "hangar"/"onlineServers"/"bgImage"
 
 XVM-6.5.6:
   [XFW]

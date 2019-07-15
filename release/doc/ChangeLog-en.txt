@@ -1,10 +1,16 @@
 ﻿XVM-7.9.8:
-  [BATTLE]
+  [GENERAL]
+  * World of Tanks 1.5.1.2
   * added options to extra-fields:
       "tweens"
       "tweensIn"
       "tweensOut"
   * description for the parameters see extra-field.txt
+
+  [HANGAR]
+  * restored functionality of the options:
+      "login"/"onlineServers"
+      "hangar"/"onlineServers"
 
   [BATTLE]
   * added options in "battleLoading", "battleLoadingTips" and "statisticForm" sections:
@@ -1041,7 +1047,7 @@ XVM-6.5.7:
       circle radius consider vertical gun constraints
 
   [HANGAR]
-  * added options hangar/pingServers/bgImage and hangar/onlineServers/bgImage
+  * added options "hangar"/"pingServers"/"bgImage" и "hangar"/"onlineServers"/"bgImage"
 
 XVM-6.5.6:
   [XFW]
