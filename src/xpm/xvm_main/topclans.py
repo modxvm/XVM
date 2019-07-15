@@ -57,9 +57,9 @@ class _ClansInfo(object):
 
         # DEBUG
         #log(_clansInfo)
-        #self._topWGM['KTFI'] = {"rank":9,"clan_id":38503,"emblem":"http://stat.modxvm.com/emblems/persist/{size}/38503.png"}
-        #self._topWSH['KTFI'] = {"rank":4,"clan_id":38503,"emblem":"http://stat.modxvm.com/emblems/persist/{size}/38503.png"}
-        #self._persist['KTFI'] = {"rank":0,"clan_id":38503,"emblem":"http://stat.modxvm.com/emblems/persist/{size}/38503.png"}
+        #self._topWGM['KTFI'] = {"rank":9,"clan_id":38503,"emblem":"http://static.modxvm.com/emblems/persist/{size}/38503.png"}
+        #self._topWSH['KTFI'] = {"rank":4,"clan_id":38503,"emblem":"http://static.modxvm.com/emblems/persist/{size}/38503.png"}
+        #self._persist['KTFI'] = {"rank":0,"clan_id":38503,"emblem":"http://static.modxvm.com/emblems/persist/{size}/38503.png"}
         #/DEBUG
 
         # fix data
