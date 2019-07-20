@@ -62,20 +62,6 @@ class _ClansInfo(object):
         #self._persist['KTFI'] = {"rank":0,"clan_id":38503,"emblem":"http://static.modxvm.com/emblems/persist/{size}/38503.png"}
         #/DEBUG
 
-        # fix data
-        # TODO: rename cid to clan_id in XVM API
-        # TODO: make rank as int and clan_id as long in XVM API
-        def _fix(d):
-            for k, v in d.items():
-                v['rank'] = int(v['rank'])
-                if 'clan_id' not in v and 'cid' in v:
-                    v['clan_id'] = v['cid']
-                    del v['cid']
-                v['clan_id'] = long(v['clan_id'])
-        _fix(self._persist)
-        _fix(self._topWGM)
-        _fix(self._topWSH)
-
     def getPersistClanInfo(self, clanAbbrev):
         return self._persist.get(clanAbbrev, None)
 
