@@ -63,12 +63,15 @@ class _Get_online(object):
         self.peripheryIdMap = {}
         if self.loginSection is not None:
             for (name, subSec) in self.loginSection.items():
-                host_name = subSec.readStrings('short_name')[0]
-                if host_name not in ignoredServersLogin:
-                    self.loginHosts.append(host_name)
-                if host_name not in ignoredServersHangar:
-                    self.hangarHosts.append(host_name)
-                self.peripheryIdMap[subSec.readStrings('periphery_id')[0]] = host_name
+                host_name = subSec.readStrings('short_name')
+                if len(host_name) > 0:
+                    host_name = host_name[0]
+                    if host_name not in ignoredServersLogin:
+                        self.loginHosts.append(host_name)
+                    if host_name not in ignoredServersHangar:
+                        self.hangarHosts.append(host_name)
+                    self.peripheryIdMap[subSec.readStrings('periphery_id')[0]] = host_name
+
             alphanumeric_sort(self.loginHosts)
             alphanumeric_sort(self.hangarHosts)
             self.done_config = True
