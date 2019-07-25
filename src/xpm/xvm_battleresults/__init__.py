@@ -28,12 +28,12 @@ import xvm_main.python.config as config
 
 # wait for loading xvm_battleresults_ui.swf
 @overrideMethod(event_dispatcher, 'showBattleResultsWindow')
-def event_dispatcher_showBattleResultsWindow_proxy(base, arenaUniqueID):
-    event_dispatcher_showBattleResultsWindow(base, arenaUniqueID)
+def event_dispatcher_showBattleResultsWindow_proxy(base, arenaUniqueID, arenaBonusType):
+    event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, arenaBonusType)
 
-def event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, cnt=0):
+def event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, arenaBonusType, cnt=0):
     if cnt < 5 and not 'xvm_lobby_ui.swf' in map(str.lower, xfw_mods_info.loaded_swfs):
-        BigWorld.callback(0, lambda: event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, cnt + 1))
+        BigWorld.callback(0, lambda: event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, arenaBonusType, cnt + 1))
     else:
         base(arenaUniqueID)
 
