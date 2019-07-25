@@ -35,7 +35,7 @@ def event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, arenaBonusType
     if cnt < 5 and not 'xvm_lobby_ui.swf' in map(str.lower, xfw_mods_info.loaded_swfs):
         BigWorld.callback(0, lambda: event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, arenaBonusType, cnt + 1))
     else:
-        base(arenaUniqueID)
+        base(arenaUniqueID, arenaBonusType)
 
 @overrideMethod(BattleResultsWindow, 'as_setDataS')
 def BattleResultsWindow_as_setDataS(base, self, data):
