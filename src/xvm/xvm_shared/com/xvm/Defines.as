@@ -99,6 +99,7 @@ package com.xvm
         public static const BATTLE_TYPE_EPIC_RANDOM_TRAINING:Number = 25;
         public static const BATTLE_TYPE_EVENT_BATTLES_2:Number = 26;
         public static const BATTLE_TYPE_EPIC_BATTLE:Number = 27;
+        public static const BATTLE_TYPE_EPIC_BATTLE_TRAINING:Number = 28;
 
         // Events
         public static const XVM_EVENT_CONFIG_LOADED:String = "xvm.config_loaded";

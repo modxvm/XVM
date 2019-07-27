@@ -1,4 +1,7 @@
-﻿XVM-7.9.9:
+﻿XVM-8.0.0:
+  * World of Tanks 1.6.0.0
+
+XVM-7.9.9:
   * World of Tanks 1.5.1.3
 
 XVM-7.9.8:

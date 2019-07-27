@@ -12,6 +12,7 @@ package com.xvm.types.cfg
         public var clan:String;
         public var cybersport:String;
         public var epic_battle:String;
+        public var epic_battle_training:String;
         public var epic_random:String;
         public var epic_random_training:String;
         public var event_battles:String;

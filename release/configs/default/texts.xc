@@ -104,7 +104,9 @@
       // Бой спецрежима (новый)(гонки, футбол и т.п.).
       "event_battles_2": "",
       // Режим «Линия фронта».
-      "epic_battle": ""
+      "epic_battle": "",
+      // Режим «Линия фронта» (тренировка).
+      "epic_battle_training": ""
     },
     // Text for {{topclan}} macro.
     // Текст для макроса {{topclan}}.

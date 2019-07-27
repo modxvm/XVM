@@ -21,7 +21,7 @@ from AvatarInputHandler.control_modes import SniperControlMode
 from helpers.EffectsList import _FlashBangEffectDesc
 from AvatarInputHandler.AimingSystems.SniperAimingSystem import SniperAimingSystem
 from Keys import KEY_RIGHTMOUSE
-from AvatarInputHandler import mathUtils
+import math_utils
 from gun_rotation_shared import calcPitchLimitsFromDesc
 
 from xfw import *
@@ -209,12 +209,12 @@ def create(base, self, model, list, args):
 def clampToLimits(base, self, turretYaw, gunPitch):
     if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/noCameraLimit/enabled'):
         if not BigWorld.isKeyDown(KEY_RIGHTMOUSE) and self._SniperAimingSystem__yawLimits is not None and config.get('battle/camera/sniper/noCameraLimit/mode') == "hotkey":
-            turretYaw = mathUtils.clamp(self._SniperAimingSystem__yawLimits[0], self._SniperAimingSystem__yawLimits[1], turretYaw)
+            turretYaw = math_utils.clamp(self._SniperAimingSystem__yawLimits[0], self._SniperAimingSystem__yawLimits[1], turretYaw)
         pitchLimits = calcPitchLimitsFromDesc(turretYaw, self.getPitchLimits(turretYaw))
         adjustment = max(0, self._SniperAimingSystem__returningOscillator.deviation.y)
         pitchLimits[0] -= adjustment
         pitchLimits[1] += adjustment
-        gunPitch = mathUtils.clamp(pitchLimits[0], pitchLimits[1] + self._SniperAimingSystem__pitchCompensating, gunPitch)
+        gunPitch = math_utils.clamp(pitchLimits[0], pitchLimits[1] + self._SniperAimingSystem__pitchCompensating, gunPitch)
         return (turretYaw, gunPitch)
     return base(self, turretYaw, gunPitch)
 
