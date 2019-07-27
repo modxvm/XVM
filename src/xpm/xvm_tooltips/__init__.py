@@ -1,4 +1,4 @@
-﻿""" XVM (c) https://modxvm.com 2013-2019 """
+﻿﻿""" XVM (c) https://modxvm.com 2013-2019 """
 
 #####################################################################
 # imports
@@ -32,6 +32,7 @@ from gui.Scaleform.framework.tooltip_mgr import ToolTip
 from gui.Scaleform.daapi.view.battle.shared.consumables_panel import ConsumablesPanel
 from gui.Scaleform.daapi.view.meta.ModuleInfoMeta import ModuleInfoMeta
 from gui.shared.tooltips.module import ModuleBlockTooltipData
+from gui.impl.backport.backport_system_locale import getNiceNumberFormat
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache
 import ResMgr
@@ -214,7 +215,7 @@ def formatNumber(value):
         value = round(value, 1)
     else:
         value = round(value, 2)
-    return str(BigWorld.wg_getNiceNumberFormat(value))
+    return str(getNiceNumberFormat(value))
 
 # replace <h>text1 <p>text2</p></h> with: text1 text_styles.standard(text2)
 def replace_p(text):
