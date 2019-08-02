@@ -24,6 +24,7 @@ import BigWorld
 from helpers.i18n import makeString
 from items import vehicles
 from dossiers2.ui.achievements import ACHIEVEMENT_BLOCK as _AB
+from gui.impl import backport
 from gui.shared.gui_items import GUI_ITEM_TYPE
 from gui.shared.utils.requesters import REQ_CRITERIA
 from gui.Scaleform.locale.MENU import MENU
@@ -312,7 +313,7 @@ class _Dossier(object):
             'creationTime': glob.getCreationTime(),
             'lastBattleTime': lbt,
             'lastBattleTimeStr': makeString(MENU.PROFILE_HEADER_LASTBATTLEDATETITLE) + ' ' +
-                                 ('%s %s' % (BigWorld.wg_getLongDateFormat(lbt), BigWorld.wg_getShortTimeFormat(lbt))),
+                                 ('%s %s' % (backport.getLongDateFormat(lbt), backport.getShortTimeFormat(lbt))),
             'vehicles': {}})
 
         vehicles = stats.getVehicles()
