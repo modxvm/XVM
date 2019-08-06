@@ -59,53 +59,77 @@
     // Text for {{battletype}} macro.
     // Текст для макроса {{battletype}}.
     "battletype": {
+      // Unknown battle.
       // Неизвестный бой.
       "unknown": "",
+      // Random battle.
       // Случайный бой.
       "regular": "",
+      // Team training.
       // Тренировочный бой.
       "training": "training",
+      // Tournament.
       // Турнир.
       "tournament": "tournament",
+      // Clan wars.
       // Клановый бой.
       "clan": "clan",
-      // Учебный бой.
+      // Battle training.
+      // Боевое обучение.
       "tutorial": "",
+      // Team battles.      
       // Командный бой.
       "cybersport": "cybersport",
+      // Special game mode (racing, football and other).
       // Бой спецрежима (гонки, футбол и т.п.).
       "event_battles": "",
+      // Global map (GM).
       // Глобальная карта (ГК).
       "global_map": "global_map",
+      // Regular tournament (event) GM.
       // Регулярный турнир (ивент) ГК.
       "tournament_regular": "tournament_regular",
+      // Periodic Tournament (event) GM.
       // Периодический турнир (ивент) ГК.
       "tournament_clan": "tournament_clan",
+      // Sandbox PVE, <10 battles.
       // Песочный PVE, <10 боев.
       "rated_sandbox": "",
+      // Sandbox PVE, >10 battles.
       // Песочный PVE, >10 боев.
       "sandbox": "",
+      // Steel Hunt.
       // Стальная охота.
       "fallout_classic": "",
+      // Domination.
       // Превосходство.
       "fallout_multiteam": "",
+      // Strongholds, skirmish.
       // Укрепрайон, вылазка.
       "sortie_2": "sortie_2",
+      // Strongholds, advance.
       // Укрепрайон, наступление.
       "fort_battle_2": "fort_battle_2",
+      // Ranked battle.
       // Ранговый бой.
       "ranked": "",
-      // Учебный полигон.
+      // Proving ground.
+      // Учебный бой.
       "bootcamp": "",
+      // Grand battles.
       // Генеральное сражение.
       "epic_random": "",
+      // Grand battles (training).
       // Генеральное сражение (тренировка).
       "epic_random_training": "",
+      // Special game mode (new)(racing, football and other).
       // Бой спецрежима (новый)(гонки, футбол и т.п.).
       "event_battles_2": "",
-      // Режим «Линия фронта».
+      // Frontline.
+      // Линия фронта.
       "epic_battle": "",
-      // Режим «Линия фронта» (тренировка).
+      // Frontline (training).
+      // Линия фронта (тренировка).
       "epic_battle_training": ""
     },
     // Text for {{topclan}} macro.
