@@ -234,6 +234,13 @@ def canDisplayHelpHint(base, self, typeDescriptor):
         return False
     base(self, typeDescriptor)
 
+@overrideMethod(SharedPage, '_definePostmortemPanel')
+def _definePostmortemPanel(base, self):
+    if not config.get('battle/showPostmortemDogtag'):
+        self.as_useEventPostmortemPanelS(False)
+        return
+    base(self)
+
 
 #####################################################################
 # Battle

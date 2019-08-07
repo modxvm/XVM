@@ -1,6 +1,14 @@
 ﻿XVM-8.0.0:
   * World of Tanks 1.6.0.0
 
+  [HANGAR]
+  * added option:
+      "hangar"/"showDogtagWidget" - display of the dog tag widget
+
+  [BATTLE]
+  * added option:
+      "battle"/"showPostmortemDogtag" - display pop-up panel with a dog tag
+
 XVM-7.9.9:
   * World of Tanks 1.5.1.3
 
