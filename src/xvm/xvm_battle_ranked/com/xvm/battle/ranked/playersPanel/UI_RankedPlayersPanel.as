@@ -93,9 +93,9 @@ package com.xvm.battle.ranked.playersPanel
             super.onDispose();
         }
 
-        override public function as_setPanelMode(state:int):void
+        override protected function setListsState(state:int):void
         {
-            //Logger.add("UI_PlayersPanel.as_setPanelMode(): " + state);
+            //Logger.add("UI_PlayersPanel.setListsState(): " + state);
             try
             {
                 if (!isNaN(m_startModePending))
@@ -120,7 +120,7 @@ package com.xvm.battle.ranked.playersPanel
                     }
                 }
 
-                super.as_setPanelMode(state);
+                super.setListsState(state);
 
                 var mcfg:* = cfg[PlayersPanelListItemProxyBase.PLAYERS_PANEL_STATE_NAMES[state]];
                 var new_mopt_fixedPosition:Boolean = Macros.FormatBooleanGlobal(mcfg.fixedPosition, false);

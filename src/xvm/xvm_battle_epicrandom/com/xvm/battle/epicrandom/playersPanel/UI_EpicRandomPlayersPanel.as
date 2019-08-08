@@ -14,9 +14,9 @@ package com.xvm.battle.epicrandom.playersPanel
     {
         private static const OFFSET:int = 70;
 
-        override public function as_setPanelMode(param1:int):void
+        override protected function setListsState(state:int):void
         {
-            super.as_setPanelMode(param1);
+            super.setListsState(state);
             updateBattleStatePlayersPanelData();
         }
 
