@@ -48,6 +48,9 @@
       // false - отключить отображение счетчика проведенных боев на кнопке.
       "showBattleCount": true
     },
+    // false - disable display of the dog tag widget.
+    // false - отключить отображение виджета личного жетона.
+    "showDogtagWidget": true,
     // true - enable locker for gold.
     // true - включить замок для золота.
     "enableGoldLocker": false,

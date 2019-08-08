@@ -7,9 +7,12 @@
     // false - disable tank icon mirroring (good for alternative icons).
     // false - отключить зеркалирования иконок танков (полезно для альтернативных иконок).
     "mirroredVehicleIcons": true,
-    // false - disable pop-up panel at the bottom after death.
-    // false - отключить всплывающую внизу панель после смерти.
+    // false - disable pop-up panel at the bottom after death (includes a dog tag and description).
+    // false - отключить всплывающую внизу панель после смерти (включает в себя личный жетон и описание).
     "showPostmortemTips": true,
+    // false - disable pop-up panel with a dog tag.
+    // false - отключить всплывающую внизу панель с личным жетоном.
+    "showPostmortemDogtag": true,
     // false - disable highlighting of own vehicle icon and squad.
     // false - отключить подсветку иконки своего танка и взвода.
     "highlightVehicleIcon": true,

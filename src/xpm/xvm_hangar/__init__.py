@@ -28,6 +28,7 @@ from skeletons.account_helpers.settings_core import ISettingsCore
 from account_helpers.settings_core.ServerSettingsManager import SETTINGS_SECTIONS
 from gui.Scaleform.daapi.view.lobby.messengerBar.messenger_bar import MessengerBar
 from gui.Scaleform.daapi.view.lobby.messengerBar.session_stats_button import SessionStatsButton
+from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
 
 from xfw import *
 
@@ -229,5 +230,13 @@ def updateSessionStatsBtn(base, self):
 @overrideMethod(SessionStatsButton, '_SessionStatsButton__updateBatteleCount')
 def updateBatteleCount(base, self):
     if not config.get('hangar/sessionStatsButton/showBattleCount', True):
+        return
+    base(self)
+
+# hide display of the dog tag widget
+@overrideMethod(Hangar, '_Hangar__updateFestivityState')
+def updateFestivityState(base, self):
+    if not config.get('hangar/showDogtagWidget'):
+        self.as_setFestivalWidgetVisibleS(False)
         return
     base(self)
