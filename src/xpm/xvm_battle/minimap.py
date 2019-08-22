@@ -269,8 +269,8 @@ def _ADDITIONAL_FEATURES_isOn(base, cls, mask):
 def _ADDITIONAL_FEATURES_isChanged(base, cls, mask):
     return False if g_minimap.active and g_minimap.opt_labelsEnabled else base(mask)
 
-@overrideMethod(PersonalEntriesPlugin, '_PersonalEntriesPlugin__onVehicleFeedbackReceived')
-def _PersonalEntriesPlugin__onVehicleFeedbackReceived(base, self, eventID, _, value):
+@overrideMethod(PersonalEntriesPlugin, '_onVehicleFeedbackReceived')
+def _PersonalEntriesPlugin_onVehicleFeedbackReceived(base, self, eventID, _, value):
     if g_minimap.active and g_minimap.opt_circlesEnabled:
         VISIBILITY.MAX_RADIUS = 1000
         base(self, eventID, _, value)
