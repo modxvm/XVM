@@ -1,9 +1,17 @@
 ﻿XVM-8.0.2:
+  [GENERAL]
+  * World of Tanks 1.6.0.2
+
+  [BATTLE]
+  * added option:
+      "battle"/"battleHint"/"hideRadarHint" - hide the tips about radar activation ("Steel Hunter" mode)
 
 XVM-8.0.1:
+  [GENERAL]
   * World of Tanks 1.6.0.1
 
 XVM-8.0.0:
+  [GENERAL]
   * World of Tanks 1.6.0.0
 
   [HANGAR]
@@ -15,6 +23,7 @@ XVM-8.0.0:
       "battle"/"showPostmortemDogtag" - display pop-up panel with a dog tag
 
 XVM-7.9.9:
+  [GENERAL]
   * World of Tanks 1.5.1.3
 
 XVM-7.9.8:

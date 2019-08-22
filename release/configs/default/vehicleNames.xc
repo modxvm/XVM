@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 19.08.2019
+    // Last update: 22.08.2019
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -156,6 +156,7 @@
     "germany-Env_Artillery":                 {"name": null, "short": null},
     "germany-G02_Hummel":                    {"name": null, "short": null},
     "germany-G03_PzV_Panther":               {"name": null, "short": null},
+    "germany-G03_PzV_Panther_BR":            {"name": null, "short": null},
     "germany-G03_PzV_Panther_IGR":           {"name": null, "short": null},
     "germany-G03_PzV_Panther_bootcamp":      {"name": null, "short": null},
     "germany-G04_PzVI_Tiger_I":              {"name": null, "short": null},
@@ -583,6 +584,7 @@
     "usa-A69_T110E5":                        {"name": null, "short": null},
     "usa-A71_T21":                           {"name": null, "short": null},
     "usa-A72_T25_2":                         {"name": null, "short": null},
+    "usa-A72_T25_2_BR":                      {"name": null, "short": null},
     "usa-A74_T1_E6":                         {"name": null, "short": null},
     "usa-A78_M4_Improved":                   {"name": null, "short": null},
     "usa-A80_T26_E4_SuperPershing":          {"name": null, "short": null},
@@ -696,6 +698,7 @@
     "ussr-R22_T-46":                         {"name": null, "short": null},
     "ussr-R22_T-46_bootcamp":                {"name": null, "short": null},
     "ussr-R23_T-43":                         {"name": null, "short": null},
+    "ussr-R23_T-43_BR":                      {"name": null, "short": null},
     "ussr-R24_SU-76":                        {"name": null, "short": null},
     "ussr-R25_GAZ-74b":                      {"name": null, "short": null},
     "ussr-R26_SU-8":                         {"name": null, "short": null},

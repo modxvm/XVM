@@ -26,7 +26,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 19.08.2019
+    # Last update: 22.08.2019
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -178,6 +178,7 @@ _data = {
     "germany:Env_Artillery":                 'E.Art',
     "germany:G02_Hummel":                    'Humml',
     "germany:G03_PzV_Panther":               'Pant',
+    "germany:G03_PzV_Panther_BR":            'Flamm.',
     "germany:G03_PzV_Panther_IGR":           'Pant',
     "germany:G03_PzV_Panther_bootcamp":      'Pant',
     "germany:G04_PzVI_Tiger_I":              'Tig1',
@@ -237,8 +238,8 @@ _data = {
     "germany:G13_VK3001H":                   '3001h',
     "germany:G140_HWK_30":                   'HWK30',
     "germany:G141_VK7501K":                  '7501k',
-"germany:G142_M48RPz":                  '7501k',
-"germany:G143_E75_TS":                  '7501k',
+    "germany:G142_M48RPz":                   '7501k',
+    "germany:G143_E75_TS":                   '7501k',
     "germany:G15_VK3601H":                   '3601h',
     "germany:G16_PzVIB_Tiger_II":            'Tig2',
     "germany:G16_PzVIB_Tiger_II_F":          'Tig2·h',
@@ -605,6 +606,7 @@ _data = {
     "usa:A69_T110E5":                        '110e5',
     "usa:A71_T21":                           'T21',
     "usa:A72_T25_2":                         'T25/2',
+    "usa:A72_T25_2_BR":                      'Rattle.',
     "usa:A74_T1_E6":                         'T1e6',
     "usa:A78_M4_Improved":                   'M4·Imp',
     "usa:A80_T26_E4_SuperPershing":          'T26e4',
@@ -718,6 +720,7 @@ _data = {
     "ussr:R22_T-46":                         't46',
     "ussr:R22_T-46_bootcamp":                't46',
     "ussr:R23_T-43":                         't43',
+    "ussr:R23_T-43_BR":                      'Red.Dawn',
     "ussr:R24_SU-76":                        'Su76',
     "ussr:R25_GAZ-74b":                      'Su85b',
     "ussr:R26_SU-8":                         'Su·8',
