@@ -28,7 +28,7 @@ from skeletons.account_helpers.settings_core import ISettingsCore
 from account_helpers.settings_core.ServerSettingsManager import SETTINGS_SECTIONS
 from gui.Scaleform.daapi.view.lobby.messengerBar.messenger_bar import MessengerBar
 from gui.Scaleform.daapi.view.lobby.messengerBar.session_stats_button import SessionStatsButton
-from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
+from gui.Scaleform.daapi.view.meta.HangarMeta import HangarMeta
 
 from xfw import *
 
@@ -234,9 +234,8 @@ def updateBatteleCount(base, self):
     base(self)
 
 # hide display of the dog tag widget
-@overrideMethod(Hangar, '_Hangar__updateFestivityState')
-def updateFestivityState(base, self):
+@overrideMethod(HangarMeta, 'as_setFestivalWidgetVisibleS')
+def as_setFestivalWidgetVisibleS(base, self, value):
     if not config.get('hangar/showDogtagWidget'):
-        self.as_setFestivalWidgetVisibleS(False)
         return
-    base(self)
+    base(self, value)
