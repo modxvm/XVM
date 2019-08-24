@@ -207,8 +207,9 @@ package com.xvm.lobby.ui.tankcarousel
 
         private function _setupStandardFieldScale(field:InteractiveObject, cfg:CCarouselCellStandardField):void
         {
-            field.scaleX = DEFAULT_WIDTH / item.width * cfg.scale;
-            field.scaleY = DEFAULT_HEIGHT / item.height * cfg.scale;
+            var scale:Number = isNaN(cfg.scale) ? 1 : cfg.scale;
+            field.scaleX = DEFAULT_WIDTH / item.width * scale;
+            field.scaleY = DEFAULT_HEIGHT / item.height * scale;
             field.x = (field.x * field.scaleX) + cfg.dx;
             field.y = (field.y * field.scaleY) + cfg.dy;
         }
@@ -222,7 +223,9 @@ package com.xvm.lobby.ui.tankcarousel
         public function _setupStandardFieldTankIcon():void
         {
             _setupStandardFieldAlpha(renderer.content.imgIcon, cfg.fields.tankIcon);
-            _setupStandardFieldScale(renderer.content.imgIcon, cfg.fields.tankIcon);
+            //_setupStandardFieldScale(renderer.content.imgIcon, cfg.fields.tankIcon);
+            renderer.content.imgIcon.x += cfg.dx;
+            renderer.content.imgIcon.y += cfg.dy;
         }
 
         private function _setupStandardFieldTankType():void

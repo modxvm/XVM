@@ -164,11 +164,11 @@
         //"info":     { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
         //"infoImg":  { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
         "infoBuy":  { "enabled": true,  "dx": 0, "dy": -8, "alpha": 100, "scale": 1 },
-        //"clanLock": { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100 },
-        //"price":    { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100 },
-        //"actionPrice": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100 },
-        //"favorite": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100 },
-        "stats": { "enabled": false, "dx": 0, "dy": 0, "alpha": 100 },
+        //"clanLock": { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+        //"price":    { "enabled": true,  "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+        //"actionPrice": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+        //"favorite": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
+        "stats": { "enabled": false, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
         "__stub__": {}
       },
       "extraFields": [

@@ -58,19 +58,19 @@
       "infoBuy": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1, "textFormat": {}, "shadow": {} },
       // Clan lock timer.
       // Таймер блокировки танка.
-      "clanLock": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100 },
+      "clanLock": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       // Price.
       // Цена.
-      "price": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100 },
+      "price": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       // Action price.
       // Акционная цена.
-      "actionPrice": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100 },
+      "actionPrice": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       // Favorite vehicle mark.
       // Маркер основной техники.
-      "favorite": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100 },
+      "favorite": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       // Stats field that appears on the mouse hover.
       // Поле статистики, отображаемое при наведении мыши.
-      "stats": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "textFormat": {}, "shadow": {} }
+      "stats": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1, "textFormat": {}, "shadow": {} }
     },
     // Extra cell fields (extended format supported, see extra-field.txt).
     // Дополнительные поля ячеек (поддерживается расширенный формат, см. extra-field.txt).
