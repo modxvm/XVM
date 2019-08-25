@@ -85,11 +85,21 @@ package com.xvm.vehiclemarkers.ui.components
         [Inline]
         private final function removeMovieClip():void
         {
+            if(mc == null) 
+            {
+                return;
+            }
+
             while (mc.numChildren > 0)
             {
                 mc.removeChildAt(0);
             }
-            mc.parent.removeChild(mc);
+
+            if(mc.parent != null) 
+            {
+                mc.parent.removeChild(mc);
+            }
+
             mc = null;
         }
     }
