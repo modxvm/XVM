@@ -130,7 +130,13 @@
       "epic_battle": "",
       // Frontline (training).
       // Линия фронта (тренировка).
-      "epic_battle_training": ""
+      "epic_battle_training": "",
+      // Steel Hunter (solo).
+      // Стальной охотник (соло).
+      "battle_royale_solo": "",
+      // Steel Hunter (squad).
+      // Стальной охотник (взвод).
+      "battle_royale_squad": ""
     },
     // Text for {{topclan}} macro.
     // Текст для макроса {{topclan}}.
