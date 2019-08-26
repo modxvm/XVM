@@ -151,6 +151,9 @@ def _BasicCriteriesGroup_update(base, self, filters):
     self._criteria |= REQ_CRITERIA.CUSTOM(lambda x: _applyXvmFilter(x, filters, total_stats, vehicles_stats))
 
 def _applyXvmFilter(item, filters, total_stats, vehicles_stats):
+    if 'battleRoyale' in filters:
+        return True
+
     premium = filters[PREFS.PREMIUM]
     normal = filters[PREFS.NORMAL]
     elite = filters[PREFS.ELITE]
