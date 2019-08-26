@@ -1,6 +1,6 @@
 ﻿XVM-8.0.2:
   [GENERAL]
-  * World of Tanks 1.6.0.2
+  * World of Tanks 1.6.0.3
 
   [BATTLE]
   * added option:
