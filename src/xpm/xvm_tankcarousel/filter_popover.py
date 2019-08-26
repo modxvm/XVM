@@ -50,15 +50,15 @@ class PREFS(object):
 class USERPREFS(object):
     CAROUSEL_FILTERS = "users/{accountDBID}/tankcarousel/filters"
 
+_SUPPORTED_SECTIONS = (CAROUSEL_FILTER_2, RANKED_CAROUSEL_FILTER_2, EPICBATTLE_CAROUSEL_FILTER_2)
 
 #####################################################################
 # initialization/finalization
 
 # Update original settings
 
-DEFAULT_VALUES[KEY_FILTERS][CAROUSEL_FILTER_2].update({x:False for x in PREFS.XVM_KEYS})
-DEFAULT_VALUES[KEY_FILTERS][RANKED_CAROUSEL_FILTER_2].update({x:False for x in PREFS.XVM_KEYS})
-DEFAULT_VALUES[KEY_FILTERS][EPICBATTLE_CAROUSEL_FILTER_2].update({x:False for x in PREFS.XVM_KEYS})
+for section in _SUPPORTED_SECTIONS:
+    DEFAULT_VALUES[KEY_FILTERS][section].update({x:False for x in PREFS.XVM_KEYS})
 
 #####################################################################
 # handlers
@@ -66,7 +66,7 @@ DEFAULT_VALUES[KEY_FILTERS][EPICBATTLE_CAROUSEL_FILTER_2].update({x:False for x 
 @overrideMethod(ServerSettingsManager, 'getSection')
 def _ServerSettingsManager_getSection(base, self, section, defaults = None):
     res = base(self, section, defaults)
-    if section in (CAROUSEL_FILTER_2, RANKED_CAROUSEL_FILTER_2, EPICBATTLE_CAROUSEL_FILTER_2):
+    if section in _SUPPORTED_SECTIONS:
         try:
             filterData = simplejson.loads(userprefs.get(USERPREFS.CAROUSEL_FILTERS, '{}'))
             prefs = filterData.get('prefs', [])
@@ -79,7 +79,7 @@ def _ServerSettingsManager_getSection(base, self, section, defaults = None):
 @overrideMethod(ServerSettingsManager, 'setSections')
 def _ServerSettingsManager_setSections(base, self, sections, settings):
     for section in sections:
-        if section in (CAROUSEL_FILTER_2, RANKED_CAROUSEL_FILTER_2, EPICBATTLE_CAROUSEL_FILTER_2):
+        if section in _SUPPORTED_SECTIONS:
             try:
                 prefs = [key for key, value in settings.iteritems() if key in PREFS.XVM_KEYS and value]
                 settings = {key: value for key, value in settings.iteritems() if key not in PREFS.XVM_KEYS}
@@ -100,47 +100,51 @@ def _AccountSettings_setFilter(base, name, value):
 @overrideMethod(TankCarouselFilterPopover, '_getInitialVO')
 def _TankCarouselFilterPopover_getInitialVO(base, self, filters, xpRateMultiplier):
     data = base(self, filters, xpRateMultiplier)
-    mapping = self._VehiclesFilterPopover__mapping
-    #debug(data['specials'])
-    #debug(mapping)
-    try:
-        premium = data['specials'][mapping[_SECTION.SPECIALS].index(PREFS.PREMIUM)]
-        premium['value'] = '../../../mods/shared_resources/xvm/res/icons/carousel/filter/premium.png'
-        normal = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/normal.png', 'tooltip': makeTooltip(l10n('NormalTooltipHeader'), l10n('NormalTooltipBody')), 'selected': filters[PREFS.NORMAL]}
-        elite = data['specials'][mapping[_SECTION.SPECIALS].index(PREFS.ELITE)]
-        elite['value'] = '../../../mods/shared_resources/xvm/res/icons/carousel/filter/elite.png'
-        non_elite = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/nonelite.png', 'tooltip': makeTooltip(l10n('NonEliteTooltipHeader'), l10n('NonEliteTooltipBody')), 'selected': filters[PREFS.NON_ELITE]}
-        complete_crew = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/fullcrew.png', 'tooltip': makeTooltip(l10n('CompleteCrewTooltipHeader'), l10n('CompleteCrewTooltipBody')), 'selected': filters[PREFS.FULL_CREW]}
-        no_master = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/nomaster.png', 'tooltip': makeTooltip(l10n('NoMasterTooltipHeader'), l10n('NoMasterTooltipBody')), 'selected': filters[PREFS.NO_MASTER]}
-        reserve = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/reserve.png', 'tooltip': makeTooltip(l10n('ReserveFilterTooltipHeader'), l10n('ReserveFilterTooltipBody')), 'selected': filters[PREFS.RESERVE]}
+    if PREFS.NORMAL in filters:
+        mapping = self._VehiclesFilterPopover__mapping
+        #debug(data['specials'])
+        #debug(mapping)
+        try:
+            premium = data['specials'][mapping[_SECTION.SPECIALS].index(PREFS.PREMIUM)]
+            premium['value'] = '../../../mods/shared_resources/xvm/res/icons/carousel/filter/premium.png'
+            normal = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/normal.png', 'tooltip': makeTooltip(l10n('NormalTooltipHeader'), l10n('NormalTooltipBody')), 'selected': filters[PREFS.NORMAL]}
+            elite = data['specials'][mapping[_SECTION.SPECIALS].index(PREFS.ELITE)]
+            elite['value'] = '../../../mods/shared_resources/xvm/res/icons/carousel/filter/elite.png'
+            non_elite = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/nonelite.png', 'tooltip': makeTooltip(l10n('NonEliteTooltipHeader'), l10n('NonEliteTooltipBody')), 'selected': filters[PREFS.NON_ELITE]}
+            complete_crew = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/fullcrew.png', 'tooltip': makeTooltip(l10n('CompleteCrewTooltipHeader'), l10n('CompleteCrewTooltipBody')), 'selected': filters[PREFS.FULL_CREW]}
+            no_master = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/nomaster.png', 'tooltip': makeTooltip(l10n('NoMasterTooltipHeader'), l10n('NoMasterTooltipBody')), 'selected': filters[PREFS.NO_MASTER]}
+            reserve = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/reserve.png', 'tooltip': makeTooltip(l10n('ReserveFilterTooltipHeader'), l10n('ReserveFilterTooltipBody')), 'selected': filters[PREFS.RESERVE]}
 
-        is_igr = PREFS.IGR in mapping[_SECTION.SPECIALS]
-        if is_igr:
-            igr = data['specials'][-1]
-        data['specials'] = [
-            premium, normal, elite, non_elite, complete_crew,
-            no_master, reserve]
-        if is_igr:
-            data['specials'].append(igr)
-    except Exception as ex:
-        err('_TankCarouselFilterPopover_getInitialVO() exception: ' + traceback.format_exc())
+            is_igr = PREFS.IGR in mapping[_SECTION.SPECIALS]
+            if is_igr:
+                igr = data['specials'][-1]
+            data['specials'] = [
+                premium, normal, elite, non_elite, complete_crew,
+                no_master, reserve]
+            if is_igr:
+                data['specials'].append(igr)
+        except Exception as ex:
+            err('_TankCarouselFilterPopover_getInitialVO() exception: ' + traceback.format_exc())
     return data
 
 @overrideClassMethod(TankCarouselFilterPopover, '_generateMapping')
 def _TankCarouselFilterPopover_generateMapping(base, cls, hasRented, hasEvent, isBattleRoyaleEnabled=False):
     mapping = base(hasRented, hasEvent, isBattleRoyaleEnabled=False)
-
-    is_igr = PREFS.IGR in mapping[_SECTION.SPECIALS]
-    mapping[_SECTION.SPECIALS] = [
-        PREFS.PREMIUM,   PREFS.NORMAL, PREFS.ELITE, PREFS.NON_ELITE, PREFS.FULL_CREW,
-        PREFS.NO_MASTER, PREFS.RESERVE]
-    if is_igr:
-        mapping[_SECTION.SPECIALS].append(PREFS.IGR)
+    if not isBattleRoyaleEnabled:
+        is_igr = PREFS.IGR in mapping[_SECTION.SPECIALS]
+        mapping[_SECTION.SPECIALS] = [
+            PREFS.PREMIUM,   PREFS.NORMAL, PREFS.ELITE, PREFS.NON_ELITE, PREFS.FULL_CREW,
+            PREFS.NO_MASTER, PREFS.RESERVE]
+        if is_igr:
+            mapping[_SECTION.SPECIALS].append(PREFS.IGR)
     return mapping
 
 # Apply XVM filters
 @overrideMethod(BasicCriteriesGroup, 'update')
 def _BasicCriteriesGroup_update(base, self, filters):
+    if not PREFS.NORMAL in filters:
+        return base(self, filters)
+
     (premium, elite) = (filters[PREFS.PREMIUM], filters[PREFS.ELITE])
     (filters[PREFS.PREMIUM], filters[PREFS.ELITE]) = (False, False)
     base(self, filters)
@@ -151,9 +155,6 @@ def _BasicCriteriesGroup_update(base, self, filters):
     self._criteria |= REQ_CRITERIA.CUSTOM(lambda x: _applyXvmFilter(x, filters, total_stats, vehicles_stats))
 
 def _applyXvmFilter(item, filters, total_stats, vehicles_stats):
-    if 'battleRoyale' in filters:
-        return True
-
     premium = filters[PREFS.PREMIUM]
     normal = filters[PREFS.NORMAL]
     elite = filters[PREFS.ELITE]
