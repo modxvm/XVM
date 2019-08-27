@@ -217,9 +217,9 @@ def addHint(base, self):
         return
     base(self)
 
-@overrideMethod(RadarHintPlugin, '_RadarHintPlugin__showHint')
-def showHint(base, self):
-    if config.get('battle/battleHint/hideRadarHint'):
+@overrideMethod(SiegeIndicatorHintPlugin, '_SiegeIndicatorHintPlugin__updateHint')
+def updateHint(base, self):
+    if config.get('battle/battleHint/hideSiegeIndicator'):
         return
     base(self)
 
@@ -235,8 +235,8 @@ def canDisplayHelpHint(base, self, typeDescriptor):
         return False
     base(self, typeDescriptor)
 
-@overrideMethod(RadarHintPlugin, '_RadarHintPlugin__updateHint')
-def updateHint(base, self):
+@overrideMethod(RadarHintPlugin, '_RadarHintPlugin__showHint')
+def showHint(base, self):
     if config.get('battle/battleHint/hideRadarHint'):
         return
     base(self)
