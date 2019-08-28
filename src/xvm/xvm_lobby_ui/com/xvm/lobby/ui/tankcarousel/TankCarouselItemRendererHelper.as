@@ -224,8 +224,8 @@ package com.xvm.lobby.ui.tankcarousel
         {
             _setupStandardFieldAlpha(renderer.content.imgIcon, cfg.fields.tankIcon);
             //_setupStandardFieldScale(renderer.content.imgIcon, cfg.fields.tankIcon);
-            renderer.content.imgIcon.x += cfg.dx;
-            renderer.content.imgIcon.y += cfg.dy;
+            renderer.content.imgIcon.x += cfg.fields.tankIcon.dx;
+            renderer.content.imgIcon.y += cfg.fields.tankIcon.dy;
         }
 
         private function _setupStandardFieldTankType():void
