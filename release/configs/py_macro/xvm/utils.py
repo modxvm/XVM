@@ -4,9 +4,9 @@ import xvm_main.python.config as config
 def brighten_color(color, percent):
     r, g, b = hex_to_rgb(color)
     percent /= 100.0
-    r += (255 - r) * percent;
-    b += (255 - b) * percent;
-    g += (255 - g) * percent;
+    r += (255 - r) * percent
+    b += (255 - b) * percent
+    g += (255 - g) * percent
     return rgb_to_hex(int(r), int(g), int(b))
 
 def hex_to_rgb(value):
@@ -14,6 +14,29 @@ def hex_to_rgb(value):
 
 def rgb_to_hex(r, g, b):
     return r << 16 | g << 8 | b
+
+
+def arabic_to_roman(data):
+    """
+    Convert a number written in Arabic numerals to Roman numerals.
+    :param data: int or str number written in Arabic numerals
+    :return: str number written in Roman numerals
+    """
+    if isinstance(data, basestring) and data.isdigit():
+        data = int(data)
+    if isinstance(data, int) and 0 < data < 4000:
+        ones = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"]
+        tens = ["", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"]
+        hounds = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"]
+        thous = ["", "M", "MM", "MMM"]
+
+        t = thous[data // 1000]
+        h = hounds[data // 100 % 10]
+        te = tens[data // 10 % 10]
+        o = ones[data % 10]
+
+        return "%s%s%s%s" % (t, h, te, o)
+    return ""
 
 
 def smooth_transition_color(rules, color_100, color_0, percent, maximum=100):

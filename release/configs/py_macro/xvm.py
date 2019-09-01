@@ -78,6 +78,12 @@ def color_rating(rating, value=None):
     return utils.color_rating(rating, value)
 
 
+# Converting
+
+@xvm.export('xvm.arabic_to_roman')
+def arabic_to_roman(data=None):
+    return utils.arabic_to_roman(data)
+
 # TotalHP
 
 from xvm import total_hp
