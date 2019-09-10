@@ -1,4 +1,4 @@
-﻿import traceback
+import traceback
 
 from gui.Scaleform.daapi.view.lobby.messengerBar.NotificationListButton import NotificationListButton
 
