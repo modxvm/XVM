@@ -50,8 +50,7 @@ import xmqp_events
 
 NOT_SUPPORTED_BATTLE_TYPES = [constants.ARENA_GUI_TYPE.TUTORIAL,
                            constants.ARENA_GUI_TYPE.EVENT_BATTLES,
-                           constants.ARENA_GUI_TYPE.BOOTCAMP,
-                           constants.ARENA_GUI_TYPE.BATTLE_ROYALE]
+                           constants.ARENA_GUI_TYPE.BOOTCAMP]
 
 #####################################################################
 # initialization/finalization
@@ -284,8 +283,7 @@ class Battle(object):
         if view and view.uniqueName in [VIEW_ALIAS.CLASSIC_BATTLE_PAGE,
                                         VIEW_ALIAS.EPIC_RANDOM_PAGE,
                                         VIEW_ALIAS.EPIC_BATTLE_PAGE,
-                                        VIEW_ALIAS.RANKED_BATTLE_PAGE,
-                                        VIEW_ALIAS.BATTLE_ROYALE_PAGE]:
+                                        VIEW_ALIAS.RANKED_BATTLE_PAGE]:
             self.battle_page = weakref.proxy(view)
 
     def onStartBattle(self):

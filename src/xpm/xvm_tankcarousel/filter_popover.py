@@ -128,15 +128,14 @@ def _TankCarouselFilterPopover_getInitialVO(base, self, filters, xpRateMultiplie
     return data
 
 @overrideClassMethod(TankCarouselFilterPopover, '_generateMapping')
-def _TankCarouselFilterPopover_generateMapping(base, cls, hasRented, hasEvent, isBattleRoyaleEnabled=False):
-    mapping = base(hasRented, hasEvent, isBattleRoyaleEnabled=False)
-    if not isBattleRoyaleEnabled:
-        is_igr = PREFS.IGR in mapping[_SECTION.SPECIALS]
-        mapping[_SECTION.SPECIALS] = [
-            PREFS.PREMIUM,   PREFS.NORMAL, PREFS.ELITE, PREFS.NON_ELITE, PREFS.FULL_CREW,
-            PREFS.NO_MASTER, PREFS.RESERVE]
-        if is_igr:
-            mapping[_SECTION.SPECIALS].append(PREFS.IGR)
+def _TankCarouselFilterPopover_generateMapping(base, cls, hasRented, hasEvent):
+    mapping = base(hasRented, hasEvent)
+    is_igr = PREFS.IGR in mapping[_SECTION.SPECIALS]
+    mapping[_SECTION.SPECIALS] = [
+        PREFS.PREMIUM,   PREFS.NORMAL, PREFS.ELITE, PREFS.NON_ELITE, PREFS.FULL_CREW,
+        PREFS.NO_MASTER, PREFS.RESERVE]
+    if is_igr:
+        mapping[_SECTION.SPECIALS].append(PREFS.IGR)
     return mapping
 
 # Apply XVM filters
