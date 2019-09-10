@@ -30,7 +30,7 @@ from gui.Scaleform.daapi.view.battle.shared.markers2d import settings as markers
 from gui.Scaleform.daapi.view.battle.shared.minimap.plugins import ArenaVehiclesPlugin
 from gui.Scaleform.daapi.view.battle.shared.page import SharedPage
 from gui.Scaleform.daapi.view.battle.shared.stats_exchage import BattleStatisticsDataController
-from gui.Scaleform.daapi.view.battle.shared.hint_panel.plugins import TrajectoryViewHintPlugin, SiegeIndicatorHintPlugin, PreBattleHintPlugin  # , RadarHintPlugin
+from gui.Scaleform.daapi.view.battle.shared.hint_panel.plugins import TrajectoryViewHintPlugin, SiegeIndicatorHintPlugin, PreBattleHintPlugin
 from helpers import dependency
 from skeletons.gui.app_loader import IAppLoader
 
@@ -201,12 +201,6 @@ def _SharedPage_as_setPostmortemTipsVisibleS(base, self, value):
     base(self, value)
 
 
-# Removed WOT 1.6.1
-# @overrideMethod(SharedPage, '_switchToPostmortem')
-# def _switchToPostmortem(base, self):
-#    if config.get('battle/showPostmortemTips'):
-#        base(self)
-
 # force update quests in FullStats
 @overrideMethod(BattleStatisticsDataController, 'as_setQuestsInfoS')
 def _BattleStatisticsDataController_as_setQuestsInfoS(base, self, data, setForce):
@@ -235,22 +229,6 @@ def canDisplayHelpHint(base, self, typeDescriptor):
     if config.get('battle/battleHint/hideHelpScreen'):
         return False
     base(self, typeDescriptor)
-
-
-# Removed WOT 1.6.1
-# @overrideMethod(RadarHintPlugin, '_RadarHintPlugin__showHint')
-# def showHint(base, self):
-#    if config.get('battle/battleHint/hideRadarHint'):
-#        return
-#    base(self)
-
-# Removed WOT 1.6.1
-# @overrideMethod(SharedPage, '_definePostmortemPanel')
-# def _definePostmortemPanel(base, self):
-#    if not config.get('battle/showPostmortemDogtag'):
-#        self.as_useEventPostmortemPanelS(False)
-#        return
-#    base(self)
 
 
 #####################################################################
