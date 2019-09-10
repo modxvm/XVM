@@ -2,6 +2,15 @@
   [ОБЩЕЕ]
   * World of Tanks 1.6.1.0
 
+  [БОЙ]
+  * удалены опции:
+      "battle"/"battleHint"/"hideRadarHint"
+      "battle"/"showPostmortemDogtag"
+
+  [АНГАР]
+  * удалена опция:
+      "hangar"/"showDogtagWidget"
+
   [МАКРОСЫ НА PYTHON]
   * добавлен макрос {{py:xvm.arabic_to_roman(number)}}
 

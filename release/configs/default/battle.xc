@@ -7,12 +7,9 @@
     // false - disable tank icon mirroring (good for alternative icons).
     // false - отключить зеркалирования иконок танков (полезно для альтернативных иконок).
     "mirroredVehicleIcons": true,
-    // false - disable pop-up panel at the bottom after death (includes a dog tag and description).
-    // false - отключить всплывающую внизу панель после смерти (включает в себя личный жетон и описание).
+    // false - disable pop-up panel at the bottom after death.
+    // false - отключить всплывающую внизу панель после смерти.
     "showPostmortemTips": true,
-    // false - disable pop-up panel with a dog tag.
-    // false - отключить всплывающую внизу панель с личным жетоном.
-    "showPostmortemDogtag": true,
     // false - disable highlighting of own vehicle icon and squad.
     // false - отключить подсветку иконки своего танка и взвода.
     "highlightVehicleIcon": true,
@@ -43,10 +40,7 @@
       "hideQuestProgress": false,
       // true - hide the tips of the transition to the window of exploring the features of the machine (for wheeled vehicles).
       // true - скрыть подсказку перехода к окну знакомства с особенностями машины (для колесной техники).
-      "hideHelpScreen": false,
-      // true - hide the tips about radar activation ("Steel Hunter" mode).
-      // true - скрыть подсказку активации радара (режим "Стальной охотник").
-      "hideRadarHint": false
+      "hideHelpScreen": false
     },
     // GUI elements settings (experts only).
     // Настройки графических элементов (только для экспертов!).

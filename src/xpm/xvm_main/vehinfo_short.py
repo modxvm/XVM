@@ -26,7 +26,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 22.08.2019
+    # Last update: 10.09.2019
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -178,7 +178,6 @@ _data = {
     "germany:Env_Artillery":                 'E.Art',
     "germany:G02_Hummel":                    'Humml',
     "germany:G03_PzV_Panther":               'Pant',
-    "germany:G03_PzV_Panther_BR":            'Flamm.',
     "germany:G03_PzV_Panther_IGR":           'Pant',
     "germany:G03_PzV_Panther_bootcamp":      'Pant',
     "germany:G04_PzVI_Tiger_I":              'Tig1',
@@ -240,6 +239,7 @@ _data = {
     "germany:G141_VK7501K":                  '7501k',
     "germany:G142_M48RPz":                   '7501k',
     "germany:G143_E75_TS":                   '7501k',
+    "germany:G144_Kpz_50t":                  'Kpz50t',
     "germany:G15_VK3601H":                   '3601h',
     "germany:G16_PzVIB_Tiger_II":            'Tig2',
     "germany:G16_PzVIB_Tiger_II_F":          'Tig2·h',
@@ -389,6 +389,7 @@ _data = {
     "poland:Pl13_53TP_Markowskiego":         '53TP',
     "poland:Pl14_4TP":                       '4TP',
     "poland:Pl15_60TP_Lewandowskiego":       '60TP',
+    "poland:Pl16_T34_85_Rudy":               'Rudy',
     "sweden:S01_Strv_74_A2":                 'm42·57',
     "sweden:S02_Strv_M42":                   'm/42',
     "sweden:S03_Strv_M38":                   'm/38',
@@ -509,6 +510,7 @@ _data = {
     "uk:GB96_Excalibur":                     'Excalib',
     "uk:GB97_Chimera":                       'Chimera',
     "uk:GB98_T95_FV4201_Chieftain":          'T95/4201',
+    "uk:GB99_Turtle_Mk1":                    'Tur.Mk1',
     "usa:A01_T1_Cunningham":                 'T1',
     "usa:A01_T1_Cunningham_bot":             'T1',
     "usa:A02_M2_lt":                         'M2lt',
@@ -606,7 +608,6 @@ _data = {
     "usa:A69_T110E5":                        '110e5',
     "usa:A71_T21":                           'T21',
     "usa:A72_T25_2":                         'T25/2',
-    "usa:A72_T25_2_BR":                      'Rattle.',
     "usa:A74_T1_E6":                         'T1e6',
     "usa:A78_M4_Improved":                   'M4·Imp',
     "usa:A80_T26_E4_SuperPershing":          'T26e4',
@@ -720,7 +721,6 @@ _data = {
     "ussr:R22_T-46":                         't46',
     "ussr:R22_T-46_bootcamp":                't46',
     "ussr:R23_T-43":                         't43',
-    "ussr:R23_T-43_BR":                      'Red.Dawn',
     "ussr:R24_SU-76":                        'Su76',
     "ussr:R25_GAZ-74b":                      'Su85b',
     "ussr:R26_SU-8":                         'Su·8',
