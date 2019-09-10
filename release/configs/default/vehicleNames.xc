@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 22.08.2019
+    // Last update: 10.09.2019
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -156,7 +156,6 @@
     "germany-Env_Artillery":                 {"name": null, "short": null},
     "germany-G02_Hummel":                    {"name": null, "short": null},
     "germany-G03_PzV_Panther":               {"name": null, "short": null},
-    "germany-G03_PzV_Panther_BR":            {"name": null, "short": null},
     "germany-G03_PzV_Panther_IGR":           {"name": null, "short": null},
     "germany-G03_PzV_Panther_bootcamp":      {"name": null, "short": null},
     "germany-G04_PzVI_Tiger_I":              {"name": null, "short": null},
@@ -218,6 +217,7 @@
     "germany-G141_VK7501K":                  {"name": null, "short": null},
     "germany-G142_M48RPz":                   {"name": null, "short": null},
     "germany-G143_E75_TS":                   {"name": null, "short": null},
+    "germany-G144_Kpz_50t":                  {"name": null, "short": null},
     "germany-G15_VK3601H":                   {"name": null, "short": null},
     "germany-G16_PzVIB_Tiger_II":            {"name": null, "short": null},
     "germany-G16_PzVIB_Tiger_II_F":          {"name": null, "short": null},
@@ -367,6 +367,7 @@
     "poland-Pl13_53TP_Markowskiego":         {"name": null, "short": null},
     "poland-Pl14_4TP":                       {"name": null, "short": null},
     "poland-Pl15_60TP_Lewandowskiego":       {"name": null, "short": null},
+    "poland-Pl16_T34_85_Rudy":               {"name": null, "short": null},
     "sweden-S01_Strv_74_A2":                 {"name": null, "short": null},
     "sweden-S02_Strv_M42":                   {"name": null, "short": null},
     "sweden-S03_Strv_M38":                   {"name": null, "short": null},
@@ -487,6 +488,7 @@
     "uk-GB96_Excalibur":                     {"name": null, "short": null},
     "uk-GB97_Chimera":                       {"name": null, "short": null},
     "uk-GB98_T95_FV4201_Chieftain":          {"name": null, "short": null},
+    "uk-GB99_Turtle_Mk1":                    {"name": null, "short": null},
     "usa-A01_T1_Cunningham":                 {"name": null, "short": null},
     "usa-A01_T1_Cunningham_bot":             {"name": null, "short": null},
     "usa-A02_M2_lt":                         {"name": null, "short": null},
@@ -584,7 +586,6 @@
     "usa-A69_T110E5":                        {"name": null, "short": null},
     "usa-A71_T21":                           {"name": null, "short": null},
     "usa-A72_T25_2":                         {"name": null, "short": null},
-    "usa-A72_T25_2_BR":                      {"name": null, "short": null},
     "usa-A74_T1_E6":                         {"name": null, "short": null},
     "usa-A78_M4_Improved":                   {"name": null, "short": null},
     "usa-A80_T26_E4_SuperPershing":          {"name": null, "short": null},
@@ -698,7 +699,6 @@
     "ussr-R22_T-46":                         {"name": null, "short": null},
     "ussr-R22_T-46_bootcamp":                {"name": null, "short": null},
     "ussr-R23_T-43":                         {"name": null, "short": null},
-    "ussr-R23_T-43_BR":                      {"name": null, "short": null},
     "ussr-R24_SU-76":                        {"name": null, "short": null},
     "ussr-R25_GAZ-74b":                      {"name": null, "short": null},
     "ussr-R26_SU-8":                         {"name": null, "short": null},

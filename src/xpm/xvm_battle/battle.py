@@ -200,7 +200,6 @@ def _SharedPage_as_setPostmortemTipsVisibleS(base, self, value):
         value = False
     base(self, value)
 
-
 # force update quests in FullStats
 @overrideMethod(BattleStatisticsDataController, 'as_setQuestsInfoS')
 def _BattleStatisticsDataController_as_setQuestsInfoS(base, self, data, setForce):
