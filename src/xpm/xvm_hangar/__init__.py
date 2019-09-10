@@ -1,4 +1,4 @@
-﻿""" XVM (c) https://modxvm.com 2013-2019 """
+﻿﻿""" XVM (c) https://modxvm.com 2013-2019 """
 
 #####################################################################
 # imports
@@ -28,7 +28,7 @@ from skeletons.account_helpers.settings_core import ISettingsCore
 from account_helpers.settings_core.ServerSettingsManager import SETTINGS_SECTIONS
 from gui.Scaleform.daapi.view.lobby.messengerBar.messenger_bar import MessengerBar
 from gui.Scaleform.daapi.view.lobby.messengerBar.session_stats_button import SessionStatsButton
-from gui.Scaleform.daapi.view.meta.HangarMeta import HangarMeta
+# from gui.Scaleform.daapi.view.meta.HangarMeta import HangarMeta
 
 from xfw import *
 
@@ -233,9 +233,10 @@ def updateBatteleCount(base, self):
         return
     base(self)
 
+# Removed WOT 1.6.1
 # hide display of the dog tag widget
-@overrideMethod(HangarMeta, 'as_setFestivalWidgetVisibleS')
-def as_setFestivalWidgetVisibleS(base, self, value):
-    if not config.get('hangar/showDogtagWidget'):
-        return
-    base(self, value)
+# @overrideMethod(HangarMeta, 'as_setFestivalWidgetVisibleS')
+# def as_setFestivalWidgetVisibleS(base, self, value):
+#    if not config.get('hangar/showDogtagWidget'):
+#        return
+#    base(self, value)
