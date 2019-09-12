@@ -1,4 +1,7 @@
 ﻿XVM-8.0.4:
+  [ОБЩЕЕ]
+  * World of Tanks 1.6.0.5
+
   [МАКРОСЫ НА PYTHON]
   * добавлен макрос {{py:xvm.arabic_to_roman(number)}}
 
