@@ -1,4 +1,4 @@
-﻿XVM-8.0.4:
+﻿XVM-8.0.5:
   [GENERAL]
   * World of Tanks 1.6.1.0
 
@@ -10,6 +10,10 @@
   [HANGAR]
   * removed option:
       "hangar"/"showDogtagWidget"
+
+XVM-8.0.4:
+  [GENERAL]
+  * World of Tanks 1.6.0.5
 
   [PYTHON MACROS]
   * added macro {{py:xvm.arabic_to_roman(number)}}
