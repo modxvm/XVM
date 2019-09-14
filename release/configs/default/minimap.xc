@@ -26,7 +26,7 @@
     // Прозрачность иконок типа техники.
     "iconAlpha": 100,
     // Vehicles icon scale. Does not affect attached geometry and textfields. Floating point allowed: 0.7, 1.4.
-    // Масштаб иконки техники. Не влияет на прикрепленную к геометрию и текстовые поля. Можно дробные: 0.7, 1.4.
+    // Масштаб иконки техники. Не влияет на прикрепленную геометрию и текстовые поля. Можно дробные: 0.7, 1.4.
     "iconScale": 1,
     // Camera direction green triangle transparency.
     // Прозрачность зеленого треугольника направления камеры.
