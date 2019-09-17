@@ -1,6 +1,10 @@
 ﻿XVM-8.0.5:
   [ОБЩЕЕ]
-  * World of Tanks 1.6.0.6
+  * World of Tanks 1.6.0.7
+
+  [БОЙ]
+  * удалены опции:
+      "battle"/"battleHint"/"hideRadarHint"
 
 XVM-8.0.4:
   [ОБЩЕЕ]

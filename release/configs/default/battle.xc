@@ -43,10 +43,7 @@
       "hideQuestProgress": false,
       // true - hide the tips of the transition to the window of exploring the features of the machine (for wheeled vehicles).
       // true - скрыть подсказку перехода к окну знакомства с особенностями машины (для колесной техники).
-      "hideHelpScreen": false,
-      // true - hide the tips about radar activation ("Steel Hunter" mode).
-      // true - скрыть подсказку активации радара (режим "Стальной охотник").
-      "hideRadarHint": false
+      "hideHelpScreen": false
     },
     // GUI elements settings (experts only).
     // Настройки графических элементов (только для экспертов!).
