@@ -185,7 +185,7 @@ def _DamagePanel_updateDeviceState(self, value):
     except:
         err(traceback.format_exc())
 
-@registerEvent(ArenaVehiclesPlugin, '__setInAoI')
+@registerEvent(ArenaVehiclesPlugin, '_ArenaVehiclesPlugin__setInAoI')
 def _ArenaVehiclesPlugin_setInAoI(self, entry, isInAoI):
     try:
         for vehicleID, entry2 in self._entries.iteritems():
@@ -199,6 +199,11 @@ def _SharedPage_as_setPostmortemTipsVisibleS(base, self, value):
     if not config.get('battle/showPostmortemTips'):
         value = False
     base(self, value)
+
+@overrideMethod(SharedPage, '_switchToPostmortem')
+def _switchToPostmortem(base, self):
+    if config.get('battle/showPostmortemTips'):
+        base(self)
 
 # force update quests in FullStats
 @overrideMethod(BattleStatisticsDataController, 'as_setQuestsInfoS')
