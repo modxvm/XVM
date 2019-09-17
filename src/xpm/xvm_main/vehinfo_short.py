@@ -26,7 +26,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 22.08.2019
+    # Last update: 17.09.2019
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -176,9 +176,9 @@ _data = {
     "france:F89_Canon_dassaut_de_105":       'amx·cda',
     "france:F97_ELC_EVEN_90":                'elcEv90',
     "germany:Env_Artillery":                 'E.Art',
+    "germany:G00_VK1602_race":               'Leo·sp',
     "germany:G02_Hummel":                    'Humml',
     "germany:G03_PzV_Panther":               'Pant',
-    "germany:G03_PzV_Panther_BR":            'Flamm.',
     "germany:G03_PzV_Panther_IGR":           'Pant',
     "germany:G03_PzV_Panther_bootcamp":      'Pant',
     "germany:G04_PzVI_Tiger_I":              'Tig1',
@@ -509,6 +509,7 @@ _data = {
     "uk:GB96_Excalibur":                     'Excalib',
     "uk:GB97_Chimera":                       'Chimera',
     "uk:GB98_T95_FV4201_Chieftain":          'T95/4201',
+    "usa:A00_M24_Chaffee_race":              'Chaff·sp',
     "usa:A01_T1_Cunningham":                 'T1',
     "usa:A01_T1_Cunningham_bot":             'T1',
     "usa:A02_M2_lt":                         'M2lt',
@@ -606,7 +607,6 @@ _data = {
     "usa:A69_T110E5":                        '110e5',
     "usa:A71_T21":                           'T21',
     "usa:A72_T25_2":                         'T25/2',
-    "usa:A72_T25_2_BR":                      'Rattle.',
     "usa:A74_T1_E6":                         'T1e6',
     "usa:A78_M4_Improved":                   'M4·Imp',
     "usa:A80_T26_E4_SuperPershing":          'T26e4',
@@ -627,6 +627,7 @@ _data = {
     "usa:A97_M41_Bulldog":                   'Buldog',
     "usa:A99_T92_LT":                        't92lt',
     "ussr:Observer":                         '',
+    "ussr:R00_T-50_race":                    't50·sp',
     "ussr:R01_IS":                           'Is',
     "ussr:R02_SU-85":                        'Su85',
     "ussr:R03_BT-7":                         'Bt7',
@@ -720,7 +721,6 @@ _data = {
     "ussr:R22_T-46":                         't46',
     "ussr:R22_T-46_bootcamp":                't46',
     "ussr:R23_T-43":                         't43',
-    "ussr:R23_T-43_BR":                      'Red.Dawn',
     "ussr:R24_SU-76":                        'Su76',
     "ussr:R25_GAZ-74b":                      'Su85b',
     "ussr:R26_SU-8":                         'Su·8',
