@@ -185,7 +185,7 @@ def _DamagePanel_updateDeviceState(self, value):
     except:
         err(traceback.format_exc())
 
-@registerEvent(ArenaVehiclesPlugin, '_setInAoI')
+@registerEvent(ArenaVehiclesPlugin, '_ArenaVehiclesPlugin__setInAoI')
 def _ArenaVehiclesPlugin_setInAoI(self, entry, isInAoI):
     try:
         for vehicleID, entry2 in self._entries.iteritems():
