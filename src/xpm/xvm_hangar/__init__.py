@@ -1,4 +1,4 @@
-﻿""" XVM (c) https://modxvm.com 2013-2019 """
+""" XVM (c) https://modxvm.com 2013-2019 """
 
 #####################################################################
 # imports
@@ -219,7 +219,7 @@ def hideSessionStatsHint():
 
 # hide display session statistics button
 @overrideMethod(MessengerBar, '_MessengerBar__updateSessionStatsBtn')
-def updateSessionStatsBtn(base, self):
+def updateSessionStatsBtn(base, self, *_):
     if not config.get('hangar/sessionStatsButton/showButton', True):
         self.as_setSessionStatsButtonVisibleS(False)
         hideSessionStatsHint()
