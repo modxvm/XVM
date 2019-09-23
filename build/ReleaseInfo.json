@@ -1,23 +1,23 @@
 ﻿{
     "RU": {
-        "ver": "8.0.4",
-        "wot": "1.6.0.5",
-        "message": " • World of Tanks 1.6.0.5\nПодробности на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
+        "ver": "8.0.6",
+        "wot": "1.6.0.8",
+        "message": " • World of Tanks 1.6.0.8\nПодробности на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
     },
     "EU": {
-        "ver": "8.0.4",
-        "wot": "1.6.0.5",
-        "message": " • World of Tanks 1.6.0.5\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "8.0.6",
+        "wot": "1.6.0.8",
+        "message": " • World of Tanks 1.6.0.8\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "NA": {
-        "ver": "8.0.4",
-        "wot": "1.6.0.5",
-        "message": " • World of Tanks 1.6.0.5\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "8.0.6",
+        "wot": "1.6.0.8",
+        "message": " • World of Tanks 1.6.0.8\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "ASIA": {
-        "ver": "8.0.4",
-        "wot": "1.6.0.5",
-        "message": " • World of Tanks 1.6.0.5\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "8.0.6",
+        "wot": "1.6.0.8",
+        "message": " • World of Tanks 1.6.0.8\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "CN": {
         "ver": "7.4.1",
@@ -25,8 +25,8 @@
         "message": " • World of Tanks 0.9.22.0.1\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "CT": {
-        "ver": "8.0.4",
-        "wot": "1.6.0.5",
-        "message": " • World of Tanks 1.6.0.5\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
+        "ver": "8.0.6",
+        "wot": "1.6.0.8",
+        "message": " • World of Tanks 1.6.0.8\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     }
 }
