@@ -20,15 +20,16 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 # imports
 
 import traceback
-from xfw import *
-from xvm_main.python.logger import *
-
-
-#####################################################################
-#
 
 import base64
 from account_helpers.CustomFilesCache import CustomFilesCache
+
+from xfw import *
+from xvm_main.python.logger import *
+
+#####################################################################
+# handlers
+
 @overrideMethod(CustomFilesCache, '_CustomFilesCache__onReadLocalFile')
 def _CustomFilesCache__onReadLocalFile(base, self, url, showImmediately):
     try:
@@ -68,3 +69,22 @@ def _FestivalController_isEnabled(base, self):
         return False
     festival_config = self._FestivalController__lobbyContext.getServerSettings().getFestivalConfig()
     return festival_config.get(FEST_CONFIG.FESTIVAL_ENABLED, False) and festival_config.get(FEST_CONFIG.PLAYER_CARDS_ENABLED, False)
+
+#####################################################################
+# Festival race error fix
+# -------------------------
+# Fixed typical error:
+#    Traceback (most recent call last):
+#      File "scripts/common/Event.py", line 44, in __call__
+#      File "scripts/client/gui/Scaleform/daapi/view/battle/event/festival_race/minimap.py", line 191, in __onVehicleStateUpdated
+#    AttributeError: 'NoneType' object has no attribute 'raceList'
+# -------------------------
+# Author: night_dragon_on
+
+import BigWorld
+from gui.Scaleform.daapi.view.battle.event.festival_race.minimap import FestivalRaceMinimapComponent
+
+@overrideMethod(FestivalRaceMinimapComponent, '_FestivalRaceMinimapComponent__onVehicleStateUpdated')
+def _FestivalRaceMinimapComponent_onVehicleStateUpdated(base, self, state, value):
+    if hasattr(BigWorld.player().arena.arenaInfo, 'raceList'):
+        base(self, state, value)
