@@ -10,6 +10,10 @@
   * removed option:
       "hangar"/"showDogtagWidget"
 
+XVM-8.0.6:
+  [GENERAL]
+  * World of Tanks 1.6.0.8
+
 XVM-8.0.5:
   [GENERAL]
   * World of Tanks 1.6.0.7
