@@ -20,15 +20,16 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 # imports
 
 import traceback
-from xfw import *
-from xvm_main.python.logger import *
-
-
-#####################################################################
-#
 
 import base64
 from account_helpers.CustomFilesCache import CustomFilesCache
+
+from xfw import *
+from xvm_main.python.logger import *
+
+#####################################################################
+# handlers
+
 @overrideMethod(CustomFilesCache, '_CustomFilesCache__onReadLocalFile')
 def _CustomFilesCache__onReadLocalFile(base, self, url, showImmediately):
     try:
@@ -42,29 +43,3 @@ def _CustomFilesCache__onReadLocalFile(base, self, url, showImmediately):
             base(self, url, showImmediately)
         except Exception:
             err(traceback.format_exc())
-
-#####################################################################
-# Festival config key error fix
-# -------------------------
-# Fixed typical error:
-#    Traceback (most recent call last):
-#      File "scripts/common/Event.py", line 44, in __call__
-#      File "scripts/client/gui/Scaleform/framework/managers/containers.py", line 1328, in __onViewLoaded
-#      File "scripts/client/gui/Scaleform/framework/managers/containers.py", line 1285, in __showAndInitializeView
-#      File "scripts/client/gui/Scaleform/framework/entities/DisposableEntity.py", line 63, in create
-#      File "scripts/client/helpers/uniprof/regions.py", line 84, in wrapper
-#      File "scripts/client/gui/Scaleform/daapi/view/battle/shared/page.py", line 194, in _populate
-#      File "scripts/client/gui/Scaleform/daapi/view/battle/shared/page.py", line 256, in _definePostmortemPanel
-#      File "controller", line 72, in isEnabled
-#    KeyError: 'isEnabled'
-# -------------------------
-# Author: Pavel3333
-
-from festivity.festival.controller import FestivalController, FEST_CONFIG
-
-@overrideMethod(FestivalController, 'isEnabled')
-def _FestivalController_isEnabled(base, self):
-    if self._FestivalController__bootcampController.isInBootcamp():
-        return False
-    festival_config = self._FestivalController__lobbyContext.getServerSettings().getFestivalConfig()
-    return festival_config.get(FEST_CONFIG.FESTIVAL_ENABLED, False) and festival_config.get(FEST_CONFIG.PLAYER_CARDS_ENABLED, False)
