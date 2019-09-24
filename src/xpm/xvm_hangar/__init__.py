@@ -122,7 +122,7 @@ def Vehicle_isReadyToPrebattle(base, self, *args, **kwargs):
     if isInBootcamp():
         return
     elif self.isOnlyForEventBattles:
-        return
+        return True
     try:
         if not self.hasLockMode() and not self.isAmmoFull and cfg_hangar_blockVehicleIfLowAmmo:
             return False
