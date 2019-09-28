@@ -3,12 +3,16 @@
   * World of Tanks 1.6.1.0
 
   [BATTLE]
-  * removed options:
+  * removed option:
       "battle"/"showPostmortemDogtag"
 
   [HANGAR]
   * removed option:
       "hangar"/"showDogtagWidget"
+
+XVM-8.0.7:
+  [GENERAL]
+  * Fix platoons for Grand Race
 
 XVM-8.0.6:
   [GENERAL]
