@@ -16,6 +16,7 @@ source "$currentdir"/../../build/xvm-build.conf
 detect_coreutils
 detect_python
 detect_git
+git_get_repostats "$currentdir/../../"
 
 #TODO
 XVMBUILD_XVM_REVISION="0000"
@@ -103,9 +104,9 @@ for dir in $(find . -maxdepth 1 -type "d" ! -path "."); do
   echo "# This file was created automatically from build script" > $dir/__version__.py
   echo "__xvm_version__ = '$XVMBUILD_XVM_VERSION'" >> $dir/__version__.py
   echo "__wot_version__ = '$XVMBUILD_WOT_VERSION'" >> $dir/__version__.py
-  echo "__revision__ = '0000'" >> $dir/__version__.py
-  echo "__branch__ = 'todo_branch'" >> $dir/__version__.py
-  echo "__node__ = 'todo_node'" >> $dir/__version__.py
+  echo "__revision__ = '$REPOSITORY_COMMITS_NUMBER'" >> $dir/__version__.py
+  echo "__branch__ = '$REPOSITORY_BRANCH'" >> $dir/__version__.py
+  echo "__node__ = '$REPOSITORY_HASH'" >> $dir/__version__.py
 done
 
 # build *.py files
@@ -128,7 +129,7 @@ for fn in $(find . -type "f" -name "*xfw_package.json"); do
 
   outpath="../../~output/res_mods/mods/xfw_packages/$m/xfw_package.json"
   cp "$fn" "$outpath"
-  sed -i "s/XVM_VERSION/$XVMBUILD_XVM_VERSION.$XVMBUILD_XVM_REVISION/g" "$outpath"
+  sed -i "s/XVM_VERSION/$XVMBUILD_XVM_VERSION.$REPOSITORY_COMMITS_NUMBER$REPOSITORY_BRANCH/g" "$outpath"
   sed -i "s/WOT_VERSION/$XVMBUILD_WOT_VERSION/g" "$outpath"
 done
 

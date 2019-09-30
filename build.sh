@@ -52,25 +52,6 @@ extend_path()
     export PATH=$PATH:"$XVMBUILD_ROOT_PATH"/build/bin/java/:"$XVMBUILD_ROOT_PATH"/build/bin/msil/:"$XVMBUILD_ROOT_PATH"/build/bin/"$OS"_"$arch"/
 }
 
-load_repositorystats(){
-    #read xvm revision and hash
-    pushd "$XVMBUILD_ROOT_PATH"/ > /dev/null
-        export XVMBUILD_XVM_BRANCH="TODO: xvm_branch"
-        export XVMBUILD_XVM_HASH="TODO: xvm_hash"
-        export XVMBUILD_XVM_REVISION="0000"
-        export XVMBUILD_XVM_COMMITMSG="TODO: xvm_msg"
-        export XVMBUILD_XVM_COMMITAUTHOR="TODO: xvm_author"
-    popd > /dev/null
-
-    #read xfw revision and hash
-    pushd "$XVMBUILD_ROOT_PATH"/src/xfw/ > /dev/null
-        export XVMBUILD_XFW_BRANCH="TODO: xfw_branch"
-        export XVMBUILD_XFW_HASH="TODO: xfw_hash"
-        export XVMBUILD_XFW_REVISION="0000"
-    popd > /dev/null
-}
-
-
 ##########################
 ####  BUILD FUNCTIONS ####
 ##########################
@@ -220,8 +201,6 @@ detect_python
 detect_unzip
 detect_wget
 detect_zip
-
-load_repositorystats
 
 create_directories
 
