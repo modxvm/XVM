@@ -1,7 +1,7 @@
 **XVM: eXtended Visualization Mod** is the most popular modification for MMO World of Tanks.
 Millions of players worldwide are using XVM.
 
-If you can write code, [you can help us](https://confluence.atlassian.com/display/BITBUCKET/Work+with+pull+requests).
+If you can write code, [you can help us](https://docs.gitlab.com/ee/gitlab-basics/add-merge-request.html).
 
 # Official Resources
 
