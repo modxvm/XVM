@@ -1,0 +1,3 @@
+[submodule "src/xfw"]
+	path = src/xfw
+	url = https://gitlab.com/xvm/xfw/xfw

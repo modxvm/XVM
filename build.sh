@@ -55,26 +55,18 @@ extend_path()
 load_repositorystats(){
     #read xvm revision and hash
     pushd "$XVMBUILD_ROOT_PATH"/ > /dev/null
-        XVMBUILD_XVM_BRANCH=$(hg parent --template "{branch}")
-        export XVMBUILD_XVM_BRANCH
-        XVMBUILD_XVM_HASH=$(hg parent --template "{node|short}")
-        export XVMBUILD_XVM_HASH
-        XVMBUILD_XVM_REVISION=$(hg parent --template "{rev}")
-        export XVMBUILD_XVM_REVISION
-        XVMBUILD_XVM_COMMITMSG=$(hg parent --template "{desc}")
-        export XVMBUILD_XVM_COMMITMSG
-        XVMBUILD_XVM_COMMITAUTHOR=$(hg parent --template "{author}" | sed 's/<.*//')
-        export XVMBUILD_XVM_COMMITAUTHOR
+        export XVMBUILD_XVM_BRANCH="TODO: xvm_branch"
+        export XVMBUILD_XVM_HASH="TODO: xvm_hash"
+        export XVMBUILD_XVM_REVISION="0000"
+        export XVMBUILD_XVM_COMMITMSG="TODO: xvm_msg"
+        export XVMBUILD_XVM_COMMITAUTHOR="TODO: xvm_author"
     popd > /dev/null
 
     #read xfw revision and hash
     pushd "$XVMBUILD_ROOT_PATH"/src/xfw/ > /dev/null
-        XVMBUILD_XFW_BRANCH=$(hg parent --template "{branch}")
-        export XVMBUILD_XFW_BRANCH
-        XVMBUILD_XFW_HASH=$(hg parent --template "{node|short}")
-        export XVMBUILD_XFW_HASH
-        XVMBUILD_XFW_REVISION=$(hg parent --template "{rev}")
-        export XVMBUILD_XFW_REVISION
+        export XVMBUILD_XFW_BRANCH="TODO: xfw_branch"
+        export XVMBUILD_XFW_HASH="TODO: xfw_hash"
+        export XVMBUILD_XFW_REVISION="0000"
     popd > /dev/null
 }
 
@@ -220,6 +212,7 @@ extend_path
 
 detect_actionscript_sdk
 detect_ffdec
+detect_git
 detect_java
 detect_mono
 detect_patch
@@ -229,8 +222,6 @@ detect_wget
 detect_zip
 
 load_repositorystats
-
-#clean_repodir
 
 create_directories
 
@@ -242,7 +233,6 @@ if [[ "$XFW_DEVELOPMENT" == "" ]]; then
   clean_sha1
   copy_files
   calc_hash_for_xvm_integrity
-  #copy_microsoft_redist
 fi
 
 popd >/dev/null

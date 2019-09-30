@@ -15,9 +15,10 @@ source "$currentdir"/../../build/xvm-build.conf
 
 detect_coreutils
 detect_python
-detect_mercurial
+detect_git
 
-XVMBUILD_XVM_REVISION=$(hg parent --template "{rev}")
+#TODO
+XVMBUILD_XVM_REVISION="0000"
 
 clear()
 {
@@ -97,20 +98,18 @@ echo 'building xfw'
 build_xfw
 
 echo 'updating versions'
-#st=$(date +%s%N)
-version_template=$(hg parent --template "__revision__ = '{rev}'\n__branch__ = '{branch}'\n__node__ = '{node}'")
 # create __version__.py files
 for dir in $(find . -maxdepth 1 -type "d" ! -path "."); do
   echo "# This file was created automatically from build script" > $dir/__version__.py
   echo "__xvm_version__ = '$XVMBUILD_XVM_VERSION'" >> $dir/__version__.py
   echo "__wot_version__ = '$XVMBUILD_WOT_VERSION'" >> $dir/__version__.py
-  echo "$version_template" >> $dir/__version__.py
+  echo "__revision__ = '0000'" >> $dir/__version__.py
+  echo "__branch__ = 'todo_branch'" >> $dir/__version__.py
+  echo "__node__ = 'todo_node'" >> $dir/__version__.py
 done
-#echo "$(($(date +%s%N)-$st))"
 
 # build *.py files
 echo 'building xvm'
-#st=$(date +%s%N)
 for fn in $(find . -type "f" -name "*.py"); do
   f=${fn#./}
   m=${f%%/*}
