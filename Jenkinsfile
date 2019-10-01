@@ -10,14 +10,6 @@ pipeline
 
     stages
     {
-        stage('Checkout')
-        {
-            steps
-            {
-                sh 'hg pull'
-                sh 'hg update'
-            }
-        }
 
         stage('XVM')
         {
