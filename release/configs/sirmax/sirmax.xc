@@ -271,9 +271,9 @@
     "vehicleMarkerEnemyAtlas": "../../../../res/atlases/vehicleMarkerAtlasEnemy"
   },
   "vehicleNames": {
-    "ussr-T-34": { "name": "т-34.", "short": "т-34" },
-    "usa-T34_hvy": { "name": "т34.", "short": "т34" },
-    "ussr-KV-1s": { "name": "квас", "short": "квс" }
+    "usa-A13_T34_hvy": { "name": "т34.", "short": "т34" },
+    "ussr-R04_T-34": { "name": "т-34.", "short": "т-34" },
+    "ussr-R13_KV-1s": { "name": "квас", "short": "квс" }
   },
   "texts": {
     //"vtype": { "LT":  "ЛТ" },
