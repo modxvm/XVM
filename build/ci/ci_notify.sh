@@ -11,16 +11,8 @@ source /var/xvm/ci_config.sh
 source "$XVMBUILD_ROOT_PATH/build/xvm-build.conf"
 source "$XVMBUILD_ROOT_PATH/src/xfw/build/library.sh"
 
-load_repositorystats(){
-    #read xvm revision and hash
-    pushd "$XVMBUILD_ROOT_PATH"/ > /dev/null
-        export XVMBUILD_XVM_BRANCH=$(hg parent --template "{branch}") || exit 1
-        export XVMBUILD_XVM_HASH=$(hg parent --template "{node|short}") || exit 1
-        export XVMBUILD_XVM_REVISION=$(hg parent --template "{rev}") || exit 1
-        export XVMBUILD_XVM_COMMITMSG=$(hg parent --template "{desc}") || exit 1
-        export XVMBUILD_XVM_COMMITAUTHOR=$(hg parent --template "{author}" | sed 's/<.*//') || exit 1
-    popd > /dev/null
-}
+detect_git
+git_get_repostats
 
 htmlencode()
 {
@@ -58,8 +50,8 @@ check_variables()
 
 post_ipb()
 {
-  downloadlinkzip="$XVMBUILD_URL_DOWNLOAD"/"$XVMBUILD_XVM_BRANCH"/"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_HASH"_xvm.zip
-  downloadlinkexe="$XVMBUILD_URL_DOWNLOAD"/"$XVMBUILD_XVM_BRANCH"/"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_BRANCH"_xvm.exe
+  downloadlinkzip="$XVMBUILD_URL_DOWNLOAD"/"$REPOSITORY_BRANCH"/xvm_"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_HASH"_xvm.zip
+  downloadlinkexe="$XVMBUILD_URL_DOWNLOAD"/"$REPOSITORY_BRANCH"/xvm_"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_BRANCH"_xvm.exe
   builddate=$(date --utc +"%d.%m.%Y %H:%M (UTC)")
 
   XVMBUILD_XVM_COMMITAUTHOR=$(htmlencode "$XVMBUILD_XVM_COMMITAUTHOR")

@@ -118,7 +118,7 @@ build_deploy(){
 
     mkdir -p ./output/"$REPOSITORY_BRANCH"/
     cp ./output/setup_xvm.exe ./output/"$REPOSITORY_BRANCH"/xvm_latest_"$REPOSITORY_BRANCH".exe
-    cp ./output/setup_xvm.exe ./output/"$REPOSITORY_BRANCH"/xvm_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH".exe
+    cp ./output/setup_xvm.exe ./output/"$REPOSITORY_BRANCH"/xvm_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".exe
     rm ./output/setup_xvm.exe
     popd >/dev/null
 }

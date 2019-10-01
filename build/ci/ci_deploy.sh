@@ -12,35 +12,20 @@ source "$XVMBUILD_ROOT_PATH/build/xvm-build.conf"
 source "$XVMBUILD_ROOT_PATH/src/xfw/build/xfw-build.conf"
 source "$XVMBUILD_ROOT_PATH/src/xfw/build/library.sh"
 
-load_repositorystats(){
-    #read xvm revision and hash
-    pushd "$XVMBUILD_ROOT_PATH"/ > /dev/null
-        export XVMBUILD_XVM_BRANCH=$(hg parent --template "{branch}") || exit 1
-        export XVMBUILD_XVM_HASH=$(hg parent --template "{node|short}") || exit 1
-        export XVMBUILD_XVM_REVISION=$(hg parent --template "{rev}") || exit 1
-        export XVMBUILD_XVM_COMMITMSG=$(hg parent --template "{desc}") || exit 1
-        export XVMBUILD_XVM_COMMITAUTHOR=$(hg parent --template "{author}" | sed 's/<.*//') || exit 1
-    popd > /dev/null
-
-    #read xfw revision and hash
-    pushd "$XVMBUILD_ROOT_PATH"/src/xfw/ > /dev/null
-        export XVMBUILD_XFW_BRANCH=$(hg parent --template "{branch}") || exit 1
-        export XVMBUILD_XFW_HASH=$(hg parent --template "{node|short}") || exit 1
-        export XVMBUILD_XFW_REVISION=$(hg parent --template "{rev}") || exit 1
-    popd > /dev/null
-}
-
-
 pack_xvm(){
     echo ""
     echo "Packing build"
 
-    echo "$XVMBUILD_XVM_REVISION" >> "$XVMBUILD_ROOT_PATH"/~output/"$XVMBUILD_XVM_REVISION"
-    echo "$XVMBUILD_XVM_HASH" >> "$XVMBUILD_ROOT_PATH"/~output/"$XVMBUILD_XVM_REVISION"
-    echo "$XVMBUILD_XVM_BRANCH" >> "$XVMBUILD_ROOT_PATH"/~output/"$XVMBUILD_XVM_REVISION"
+    git_get_repostats "$XVMBUILD_ROOT_PATH"
+
+    echo "$XVMBUILD_XVM_VERSION" >> "$XVMBUILD_ROOT_PATH"/~output/"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"
+    echo "$REPOSITORY_COMMITS_NUMBER" >> "$XVMBUILD_ROOT_PATH"/~output/"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"
+    echo "$REPOSITORY_HASH" >> "$XVMBUILD_ROOT_PATH"/~output/"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"
+    echo "$REPOSITORY_BRANCH" >> "$XVMBUILD_ROOT_PATH"/~output/"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"
 
     pushd "$XVMBUILD_ROOT_PATH"/~output/ > /dev/null
-    zip -9 -r -q "$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_HASH"_xvm.zip ./
+    zip -9 -r -q xvm_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".zip ./
+    rm "$XVMBUILD_XVM_VERSION_$REPOSITORY_COMMITS_NUMBER"
     popd > /dev/null
 }
 
@@ -48,10 +33,12 @@ pack_xfw(){
     echo ""
     echo "Packing XFW"
 
+    git_get_repostats "$XVMBUILD_ROOT_PATH"/src/xfw
 
-    echo "$XVMBUILD_XFW_REVISION" >> "$XVMBUILD_ROOT_PATH"/src/xfw/~output/"$XVMBUILD_XFW_REVISION"
-    echo "$XVMBUILD_XFW_HASH" >> "$XVMBUILD_ROOT_PATH"/src/xfw/~output/"$XVMBUILD_XFW_REVISION"
-    echo "$XVMBUILD_XFW_BRANCH" >> "$XVMBUILD_ROOT_PATH"/src/xfw/~output/"$XVMBUILD_XFW_REVISION"
+    echo "$XVMBUILD_XVM_VERSION" >> "$XVMBUILD_ROOT_PATH"/src/xfw/~output/"$XVMBUILD_XVM_VERSION_$REPOSITORY_COMMITS_NUMBER"
+    echo "$REPOSITORY_COMMITS_NUMBER" >> "$XVMBUILD_ROOT_PATH"/src/xfw/~output/"$XVMBUILD_XVM_VERSION_$REPOSITORY_COMMITS_NUMBER"
+    echo "$REPOSITORY_HASH" >> "$XVMBUILD_ROOT_PATH"/src/xfw/~output/"$XVMBUILD_XVM_VERSION_$REPOSITORY_COMMITS_NUMBER"
+    echo "$REPOSITORY_BRANCH" >> "$XVMBUILD_ROOT_PATH"/src/xfw/~output/"$XVMBUILD_XVM_VERSION_$REPOSITORY_COMMITS_NUMBER"
 
     pushd "$XVMBUILD_ROOT_PATH"/src/xfw/ > /dev/null
 
@@ -65,49 +52,66 @@ pack_xfw(){
     popd > /dev/null
 
     pushd "$XVMBUILD_ROOT_PATH"/src/xfw/~output_zip/ > /dev/null
-    zip -9 -r -q "$XVMBUILD_XFW_REVISION"_"$XVMBUILD_XFW_HASH"_xfw.zip ./
-    rm "$XVMBUILD_XFW_REVISION"
+    zip -9 -r -q xfw_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_HASH".zip ./
+    rm "$XVMBUILD_XVM_VERSION_$REPOSITORY_COMMITS_NUMBER"
     popd > /dev/null
 }
 
 
 deploy_xvm(){
     echo ""
-    echo "Deploying build"
+    echo "Deploying XVM"
 
-    mkdir -p "$XVMBUILD_OUTPUT_PATH"/
+    git_get_repostats "$XVMBUILD_ROOT_PATH"
 
-    mv -f "$XVMBUILD_ROOT_PATH"/src/xfw/~output_zip/"$XVMBUILD_XFW_REVISION"_"$XVMBUILD_XFW_HASH"_xfw.zip "$XVMBUILD_OUTPUT_PATH"/
-    mv -f "$XVMBUILD_ROOT_PATH"/~output/"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_HASH"_xvm.zip "$XVMBUILD_OUTPUT_PATH"/
+    mkdir -p "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/
 
-    cp -f "$XVMBUILD_OUTPUT_PATH"/"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_HASH"_xvm.zip "$XVMBUILD_OUTPUT_PATH"/latest_xvm.zip
-    cp -f "$XVMBUILD_OUTPUT_PATH"/"$XVMBUILD_XFW_REVISION"_"$XVMBUILD_XFW_HASH"_xfw.zip "$XVMBUILD_OUTPUT_PATH"/latest_xfw.zip
+    mv -f "$XVMBUILD_ROOT_PATH"/~output/xvm_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".zip "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/
 
-    echo $XVMBUILD_XVM_REVISION > "$XVMBUILD_OUTPUT_PATH"/xvm_revision.txt
-    echo $XVMBUILD_XVM_HASH > "$XVMBUILD_OUTPUT_PATH"/xvm_hash.txt
-    echo $XVMBUILD_XVM_BRANCH > "$XVMBUILD_OUTPUT_PATH"/xvm_branch.txt
-    echo $XVMBUILD_XFW_REVISION > "$XVMBUILD_OUTPUT_PATH"/xfw_revision.txt
-    echo $XVMBUILD_XFW_HASH > "$XVMBUILD_OUTPUT_PATH"/xfw_hash.txt
-    echo $XVMBUILD_XFW_BRANCH > "$XVMBUILD_OUTPUT_PATH"/xfw_branch.txt
+    cp -f "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/xvm_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".zip "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/latest_xvm.zip
 
-    echo "$XVMBUILD_XVM_VERSION" > "$XVMBUILD_OUTPUT_PATH"/xvm_version.txt
-    echo "$XVMBUILD_WOT_VERSION" > "$XVMBUILD_OUTPUT_PATH"/wot_version.txt
+    echo "$XVMBUILD_XVM_VERSION_$REPOSITORY_COMMITS_NUMBER" > "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/xvm_revision.txt
+    echo $REPOSITORY_HASH > "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/xvm_hash.txt
+    echo $REPOSITORY_BRANCH > "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/xvm_branch.txt
+    echo $REPOSITORY_COMMITS_NUMBER > "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/xvm_commits.txt
+
+    echo "$XVMBUILD_XVM_VERSION" > "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/xvm_version.txt
+    echo "$XVMBUILD_WOT_VERSION" > "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/wot_version.txt
 }
+
+deploy_xfw(){
+    echo ""
+    echo "Deploying XFW"
+
+    git_get_repostats "$XVMBUILD_ROOT_PATH"/src/xfw
+
+    mkdir -p "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/
+
+    mv -f "$XVMBUILD_ROOT_PATH"/src/xfw/~output_zip/xfw_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_HASH".zip "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/
+    cp -f "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/xfw_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_HASH".zip "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/latest_xfw.zip
+
+    echo "$XVMBUILD_XVM_VERSION_$REPOSITORY_COMMITS_NUMBER" > "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/xfw_revision.txt
+    echo $REPOSITORY_HASH > "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/xfw_hash.txt
+    echo $REPOSITORY_BRANCH > "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/xfw_branch.txt
+    echo $REPOSITORY_COMMITS_NUMBER > "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/xfw_commits.txt
+}
+
 
 deploy_xvminst()
 {
-    mv -f "$XVMBUILD_ROOT_PATH"/src/installer/output/"$XVMBUILD_XVM_BRANCH"/"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_BRANCH"_xvm.exe "$XVMBUILD_OUTPUT_PATH"/
-    mv -f "$XVMBUILD_ROOT_PATH"/src/installer/output/"$XVMBUILD_XVM_BRANCH"/latest_"$XVMBUILD_XVM_BRANCH"_xvm.exe "$XVMBUILD_OUTPUT_PATH"/
-}
+    git_get_repostats "$XVMBUILD_ROOT_PATH"
 
-load_repositorystats
+    mkdir -p "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/
+
+    mv -f "$XVMBUILD_ROOT_PATH"/src/installer/output/"$REPOSITORY_BRANCH"/xvm_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".exe "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/
+    mv -f "$XVMBUILD_ROOT_PATH"/src/installer/output/"$REPOSITORY_BRANCH"/xvm_latest_"$REPOSITORY_BRANCH".exe "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/
+}
 
 pack_xvm
 pack_xfw
 
-XVMBUILD_OUTPUT_PATH="$XVMBUILD_OUTPUT_PATH"/"$XVMBUILD_XVM_BRANCH"
-
 deploy_xvm
+deploy_xfw
 deploy_xvminst
 
 clean_repodir
