@@ -27,15 +27,6 @@ extend_path()
     export PATH="$XVMBUILD_ROOT_PATH/build/bin/Windows_i686/innosetup/:$PATH"
 }
 
-load_repositorystats(){
-    #read xvm revision and hash
-    pushd "$XVMBUILD_ROOT_PATH"/ > /dev/null
-        export XVMBUILD_XVM_BRANCH=$(hg parent --template "{branch}") || exit 1
-        export XVMBUILD_XVM_HASH=$(hg parent --template "{node|short}") || exit 1
-        export XVMBUILD_XVM_REVISION=$(hg parent --template "{rev}") || exit 1
-    popd > /dev/null
-}
-
 clean_directories()
 {
     rm -rf "$XVMINST_ROOT_PATH/temp"
@@ -125,10 +116,10 @@ build_run(){
 build_deploy(){
     pushd "$XVMINST_ROOT_PATH/" >/dev/null
 
-    mkdir -p ./output/"$XVMBUILD_XVM_BRANCH"/
-    mv ./output/setup_xvm.exe ./output/"$XVMBUILD_XVM_BRANCH"/latest_"$XVMBUILD_XVM_BRANCH"_xvm.exe
-    cp ./output/"$XVMBUILD_XVM_BRANCH"/latest_"$XVMBUILD_XVM_BRANCH"_xvm.exe ./output/"$XVMBUILD_XVM_BRANCH"/"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_BRANCH"_xvm.exe
-
+    mkdir -p ./output/"$REPOSITORY_BRANCH"/
+    cp ./output/setup_xvm.exe ./output/"$REPOSITORY_BRANCH"/xvm_latest_"$REPOSITORY_BRANCH".exe
+    cp ./output/setup_xvm.exe ./output/"$REPOSITORY_BRANCH"/xvm_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH".exe
+    rm ./output/setup_xvm.exe
     popd >/dev/null
 }
 
@@ -142,10 +133,10 @@ main(){
     detect_os
     detect_wine
     detect_wget
-    detect_mercurial
+    detect_git
     detect_unzip
 
-    load_repositorystats
+    git_get_repostats
     extend_path
 
     clean_directories
