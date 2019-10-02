@@ -9,7 +9,6 @@ export XVMBUILD_ROOT_PATH="$CURRENT_PATH/../.."
 
 source /var/xvm/ci_config.sh
 source "$XVMBUILD_ROOT_PATH/build/xvm-build.conf"
-source "$XVMBUILD_ROOT_PATH/src/xfw/build/xfw-build.conf"
 source "$XVMBUILD_ROOT_PATH/src/xfw/build/library.sh"
 
 pack_xvm(){
@@ -33,7 +32,7 @@ pack_xfw(){
     echo ""
     echo "Packing XFW"
 
-    git_get_repostats "$XVMBUILD_ROOT_PATH"/src/xfw
+    git_get_repostats "$XVMBUILD_ROOT_PATH"
 
     echo "$XVMBUILD_XVM_VERSION" >> "$XVMBUILD_ROOT_PATH"/src/xfw/~output/"$XVMBUILD_XVM_VERSION_$REPOSITORY_COMMITS_NUMBER"
     echo "$REPOSITORY_COMMITS_NUMBER" >> "$XVMBUILD_ROOT_PATH"/src/xfw/~output/"$XVMBUILD_XVM_VERSION_$REPOSITORY_COMMITS_NUMBER"
@@ -83,7 +82,7 @@ deploy_xfw(){
     echo ""
     echo "Deploying XFW"
 
-    git_get_repostats "$XVMBUILD_ROOT_PATH"/src/xfw
+    git_get_repostats "$XVMBUILD_ROOT_PATH"
 
     mkdir -p "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/
 
