@@ -50,14 +50,14 @@ check_variables()
 
 post_ipb()
 {
-  downloadlinkzip="$XVMBUILD_URL_DOWNLOAD"/"$REPOSITORY_BRANCH"/xvm_"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_HASH"_xvm.zip
-  downloadlinkexe="$XVMBUILD_URL_DOWNLOAD"/"$REPOSITORY_BRANCH"/xvm_"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_BRANCH"_xvm.exe
+  downloadlinkzip="$XVMBUILD_URL_DOWNLOAD"/"$REPOSITORY_BRANCH"/xvm_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".zip
+  downloadlinkexe="$XVMBUILD_URL_DOWNLOAD"/"$REPOSITORY_BRANCH"/xvm_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".exe
   builddate=$(date --utc +"%d.%m.%Y %H:%M (UTC)")
 
   XVMBUILD_XVM_COMMITAUTHOR=$(htmlencode "$XVMBUILD_XVM_COMMITAUTHOR")
   XVMBUILD_XVM_COMMITMSG=$(htmlencode "$XVMBUILD_XVM_COMMITMSG")
   
-  XVMBUILD_IPB_TEXT=$(printf "<b>Build: </b><a href='$XVMBUILD_URL_REPO/$XVMBUILD_XVM_HASH'>$XVMBUILD_XVM_REVISION (branch $XVMBUILD_XVM_BRANCH)</a><br/><b>Date:</b> $builddate <br/> <b>Download: </b><a href='$downloadlinkzip'>.zip archive</a> | <a href='$downloadlinkexe'>.exe installer</a> <br/> <b>Author:</b> $XVMBUILD_XVM_COMMITAUTHOR <br/> <b>Description:</b> $XVMBUILD_XVM_COMMITMSG <hr>")
+  XVMBUILD_IPB_TEXT=$(printf "<b>Build: </b><a href='$XVMBUILD_URL_REPO/$REPOSITORY_HASH'>$XVMBUILD_XVM_REVISION (branch $REPOSITORY_BRANCH)</a><br/><b>Date:</b> $builddate <br/> <b>Download: </b><a href='$downloadlinkzip'>.zip archive</a> | <a href='$downloadlinkexe'>.exe installer</a> <br/> <b>Author:</b> $REPOSITORY_AUTHOR <br/> <b>Description:</b> $REPOSITORY_SUBJECT <hr>")
 
   XVMBUILD_IPB_REQURL="$XVMBUILD_IPB_SERVER/api/forums/posts"
   XVMBUILD_IPB_REQBODY="key=$XVMBUILD_IPB_APIKEY&author=$XVMBUILD_IPB_USERID&topic=$XVMBUILD_IPB_TOPICID&post=$XVMBUILD_IPB_TEXT"
@@ -67,17 +67,16 @@ post_ipb()
 
 post_telegram()
 {
-  downloadlinkzip="$XVMBUILD_URL_DOWNLOAD"/"$XVMBUILD_XVM_BRANCH"/"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_HASH"_xvm.zip
-  downloadlinkexe="$XVMBUILD_URL_DOWNLOAD"/"$XVMBUILD_XVM_BRANCH"/"$XVMBUILD_XVM_REVISION"_"$XVMBUILD_XVM_BRANCH"_xvm.exe
+  downloadlinkzip="$XVMBUILD_URL_DOWNLOAD"/"$REPOSITORY_BRANCH"/xvm_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".zip
+  downloadlinkexe="$XVMBUILD_URL_DOWNLOAD"/"$REPOSITORY_BRANCH"/xvm_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".exe
   builddate=$(date --utc +"%d.%m.%Y %H:%M (UTC)")
 
-  XVMBUILD_XVM_COMMITAUTHOR=$(htmlencode "$XVMBUILD_XVM_COMMITAUTHOR")
-  XVMBUILD_XVM_COMMITMSG=$(htmlencode "$XVMBUILD_XVM_COMMITMSG")
+  XVMBUILD_XVM_COMMITAUTHOR=$(htmlencode "$REPOSITORY_AUTHOR")
+  XVMBUILD_XVM_COMMITMSG=$(htmlencode "$REPOSITORY_SUBJECT")
   
-  printf "<b>Build: </b><a href='$XVMBUILD_URL_REPO/$XVMBUILD_XVM_HASH'>$XVMBUILD_XVM_REVISION (branch $XVMBUILD_XVM_BRANCH)</a>\n<b>Date:</b> $builddate\n<b>Download: </b><a href='$downloadlinkzip'>.zip archive</a> | <a href='$downloadlinkexe'>.exe installer</a>\n<b>Author:</b>$XVMBUILD_XVM_COMMITAUTHOR\n<b>Description:</b> $XVMBUILD_XVM_COMMITMSG" | telegram-send --stdin --disable-web-page-preview --format html --config /var/xvm/telegram-send.conf
+  printf "<b>Build: </b><a href='$XVMBUILD_URL_REPO/$REPOSITORY_HASH'>$XVMBUILD_XVM_REVISION (branch $REPOSITORY_BRANCH)</a>\n<b>Date:</b> $builddate\n<b>Download: </b><a href='$downloadlinkzip'>.zip archive</a> | <a href='$downloadlinkexe'>.exe installer</a>\n<b>Author:</b>$REPOSITORY_AUTHOR\n<b>Description:</b> $REPOSITORY_SUBJECT" | telegram-send --stdin --disable-web-page-preview --format html --config /var/xvm/telegram-send.conf
 }
 
-load_repositorystats
 check_variables
 
 post_ipb

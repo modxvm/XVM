@@ -24,7 +24,7 @@ pack_xvm(){
 
     pushd "$XVMBUILD_ROOT_PATH"/~output/ > /dev/null
     zip -9 -r -q xvm_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".zip ./
-    rm "$XVMBUILD_XVM_VERSION_$REPOSITORY_COMMITS_NUMBER"
+    rm "$XVMBUILD_ROOT_PATH"/~output/"$XVMBUILD_XVM_VERSION_$REPOSITORY_COMMITS_NUMBER"
     popd > /dev/null
 }
 
@@ -32,7 +32,7 @@ pack_xfw(){
     echo ""
     echo "Packing XFW"
 
-    git_get_repostats "$XVMBUILD_ROOT_PATH"
+    git_get_repostats "$XVMBUILD_ROOT_PATH"/src/xfw/
 
     echo "$XVMBUILD_XVM_VERSION" >> "$XVMBUILD_ROOT_PATH"/src/xfw/~output/"$XVMBUILD_XVM_VERSION_$REPOSITORY_COMMITS_NUMBER"
     echo "$REPOSITORY_COMMITS_NUMBER" >> "$XVMBUILD_ROOT_PATH"/src/xfw/~output/"$XVMBUILD_XVM_VERSION_$REPOSITORY_COMMITS_NUMBER"
@@ -52,7 +52,7 @@ pack_xfw(){
 
     pushd "$XVMBUILD_ROOT_PATH"/src/xfw/~output_zip/ > /dev/null
     zip -9 -r -q xfw_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_HASH".zip ./
-    rm "$XVMBUILD_XVM_VERSION_$REPOSITORY_COMMITS_NUMBER"
+    rm "$XVMBUILD_ROOT_PATH"/src/xfw/~output/"$XVMBUILD_XVM_VERSION_$REPOSITORY_COMMITS_NUMBER"
     popd > /dev/null
 }
 
@@ -82,7 +82,7 @@ deploy_xfw(){
     echo ""
     echo "Deploying XFW"
 
-    git_get_repostats "$XVMBUILD_ROOT_PATH"
+    git_get_repostats "$XVMBUILD_ROOT_PATH"/src/xfw/
 
     mkdir -p "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/
 
