@@ -1,0 +1,14 @@
+package net.wg.infrastructure.base.meta
+{
+    import flash.events.IEventDispatcher;
+
+    public interface IBCOutroVideoPageMeta extends IEventDispatcher
+    {
+
+        function videoFinishedS() : void;
+
+        function handleErrorS(param1:String) : void;
+
+        function as_playVideo(param1:Object) : void;
+    }
+}

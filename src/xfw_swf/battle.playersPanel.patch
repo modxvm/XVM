@@ -1,0 +1,115 @@
+diff -Naur battle.orig-0.orig/net/wg/gui/battle/components/PlayersPanelBase.class.asasm battle.orig-0/net/wg/gui/battle/components/PlayersPanelBase.class.asasm
+--- battle.orig-0.orig/net/wg/gui/battle/components/PlayersPanelBase.class.asasm	2017-11-18 20:58:48.523993600 +0200
++++ battle.orig-0/net/wg/gui/battle/components/PlayersPanelBase.class.asasm	2017-11-18 21:46:01.048917000 +0200
+@@ -25,12 +25,24 @@
+      initproperty        QName(ProtectedNamespace("net.wg.gui.battle.components:PlayersPanelBase"), "contextMenuMgr")
+ 
+      getlocal0
++     getlocal0
++     getproperty         QName(PrivateNamespace(null, "net.wg.gui.battle.components:PlayersPanelBase/instance"), "onListRollOverHandler")
++     initproperty        QName(PackageNamespace(""), "xfw_onListRollOverHandler")
++
++     getlocal0
++     getlocal0
++     getproperty         QName(PrivateNamespace(null, "net.wg.gui.battle.components:PlayersPanelBase/instance"), "onListRollOutHandler")
++     initproperty        QName(PackageNamespace(""), "xfw_onListRollOutHandler")
++
++     getlocal0
+      constructsuper      0
+ 
+      returnvoid
+     end ; code
+    end ; body
+   end ; method
++  trait slot QName(PackageNamespace(""), "xfw_onListRollOverHandler") type QName(PackageNamespace(""), "Function") end
++  trait slot QName(PackageNamespace(""), "xfw_onListRollOutHandler") type QName(PackageNamespace(""), "Function") end
+   trait slot QName(PackageNamespace(""), "listLeft") type QName(PackageNamespace("net.wg.gui.battle.random.views.stats.components.playersPanel.interfaces"), "IPlayersPanelList") value Null() end
+   trait slot QName(PackageNamespace(""), "listRight") type QName(PackageNamespace("net.wg.gui.battle.random.views.stats.components.playersPanel.interfaces"), "IPlayersPanelList") value Null() end
+   trait slot QName(PackageNamespace(""), "panelSwitch") type QName(PackageNamespace("net.wg.gui.battle.components"), "PlayersPanelSwitchBase") value Null() end
+diff -Naur battle.orig-0.orig/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.class.asasm battle.orig-0/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.class.asasm
+--- battle.orig-0.orig/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.class.asasm	2017-11-18 20:58:46.988473800 +0200
++++ battle.orig-0/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.class.asasm	2017-11-18 21:48:37.163528000 +0200
+@@ -48,6 +48,25 @@
+   trait slot QName(PackageNamespace(""), "disableCommunication") type QName(PackageNamespace("net.wg.gui.battle.components"), "BattleAtlasSprite") value Null() end
+   trait slot QName(ProtectedNamespace("net.wg.gui.battle.components.stats.playersPanel.list:BasePlayersPanelListItem"), "maxPlayerNameWidth") type QName(PackageNamespace(""), "uint") value Integer(0) end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.components.stats.playersPanel.list:BasePlayersPanelListItem"), "_holderItemID") type QName(PackageNamespace(""), "int") value Integer(-1) end
++  trait getter QName(PackageNamespace(""), "xfw_state")
++   method
++    returns QName(PackageNamespace(""), "int")
++    body
++     maxstack 1
++     localcount 1
++     initscopedepth 11
++     maxscopedepth 12
++     code
++      getlocal0
++      pushscope
++
++      getlocal0
++      getproperty         QName(PrivateNamespace(null, "net.wg.gui.battle.components.stats.playersPanel.list:BasePlayersPanelListItem"), "_state")
++      returnvalue
++     end ; code
++    end ; body
++   end ; method
++  end ; trait
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.components.stats.playersPanel.list:BasePlayersPanelListItem"), "_state") type QName(PackageNamespace(""), "int") value Integer(-1) end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.components.stats.playersPanel.list:BasePlayersPanelListItem"), "_vehicleName") type QName(PackageNamespace(""), "String") value Null() end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.components.stats.playersPanel.list:BasePlayersPanelListItem"), "_frags") type QName(PackageNamespace(""), "int") value Integer(0) end
+diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListLeft.class.asasm battle.orig-0/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListLeft.class.asasm
+--- battle.orig-0.orig/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListLeft.class.asasm	2017-11-18 20:58:56.575996100 +0200
++++ battle.orig-0/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListLeft.class.asasm	2017-11-18 21:46:01.088418900 +0200
+@@ -36,7 +36,7 @@
+       getlocal0
+       pushscope
+ 
+-      getlex              QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.stats.components.playersPanel.list:PlayersPanelListLeft"), "LINKAGE")
++      getlex              QName(PackageNamespace(""), "LINKAGE")
+       returnvalue
+      end ; code
+     end ; body
+@@ -92,13 +92,13 @@
+     getlocal0
+     pushscope
+ 
+-    findproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.stats.components.playersPanel.list:PlayersPanelListLeft"), "LINKAGE")
++    findproperty        QName(PackageNamespace(""), "LINKAGE")
+     pushstring          "PlayersPanelListItemLeftUI"
+-    initproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.stats.components.playersPanel.list:PlayersPanelListLeft"), "LINKAGE")
++    initproperty        QName(PackageNamespace(""), "LINKAGE")
+ 
+     returnvoid
+    end ; code
+   end ; body
+  end ; method
+- trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.stats.components.playersPanel.list:PlayersPanelListLeft"), "LINKAGE") slotid 1 type QName(PackageNamespace(""), "String") value Utf8("PlayersPanelListItemLeftUI") end
++ trait slot QName(PackageNamespace(""), "LINKAGE") slotid 1 type QName(PackageNamespace(""), "String") value Utf8("PlayersPanelListItemLeftUI") end
+ end ; class
+diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListRight.class.asasm battle.orig-0/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListRight.class.asasm
+--- battle.orig-0.orig/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListRight.class.asasm	2017-11-18 20:58:57.919994100 +0200
++++ battle.orig-0/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListRight.class.asasm	2017-11-18 21:46:01.097420200 +0200
+@@ -36,7 +36,7 @@
+       getlocal0
+       pushscope
+ 
+-      getlex              QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.stats.components.playersPanel.list:PlayersPanelListRight"), "LINKAGE")
++      getlex              QName(PackageNamespace(""), "LINKAGE")
+       returnvalue
+      end ; code
+     end ; body
+@@ -92,13 +92,13 @@
+     getlocal0
+     pushscope
+ 
+-    findproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.stats.components.playersPanel.list:PlayersPanelListRight"), "LINKAGE")
++    findproperty        QName(PackageNamespace(""), "LINKAGE")
+     pushstring          "PlayersPanelListItemRightUI"
+-    initproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.stats.components.playersPanel.list:PlayersPanelListRight"), "LINKAGE")
++    initproperty        QName(PackageNamespace(""), "LINKAGE")
+ 
+     returnvoid
+    end ; code
+   end ; body
+  end ; method
+- trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.stats.components.playersPanel.list:PlayersPanelListRight"), "LINKAGE") slotid 1 type QName(PackageNamespace(""), "String") value Utf8("PlayersPanelListItemRightUI") end
++ trait slot QName(PackageNamespace(""), "LINKAGE") slotid 1 type QName(PackageNamespace(""), "String") value Utf8("PlayersPanelListItemRightUI") end
+ end ; class

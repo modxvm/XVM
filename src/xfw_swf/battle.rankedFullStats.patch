@@ -1,0 +1,82 @@
+diff -Naur battle.orig-0.orig/net/wg/gui/battle/ranked/stats/components/fullStats/FullStats.class.asasm.rej battle.orig-0/net/wg/gui/battle/ranked/stats/components/fullStats/FullStats.class.asasm.rej
+--- battle.orig-0.orig/net/wg/gui/battle/ranked/stats/components/fullStats/FullStats.class.asasm.rej	1970-01-01 02:00:00.000000000 +0200
++++ battle.orig-0/net/wg/gui/battle/ranked/stats/components/fullStats/FullStats.class.asasm.rej	2018-08-05 20:37:13.424608800 +0300
+@@ -0,0 +1,31 @@
++--- battle.orig-0.orig/net/wg/gui/battle/ranked/stats/components/fullStats/FullStats.class.asasm	2018-04-27 11:01:37.817728100 +0300
+++++ battle.orig-0/net/wg/gui/battle/ranked/stats/components/fullStats/FullStats.class.asasm	2018-04-27 11:17:13.044288500 +0300
++@@ -99,6 +99,28 @@
++   trait slot QName(PackageNamespace(""), "rightFrag") type QName(PackageNamespace("net.wg.gui.battle.components"), "BattleAtlasSprite") value Null() end
++   trait slot QName(PackageNamespace(""), "rightTank") type QName(PackageNamespace("net.wg.gui.battle.components"), "BattleAtlasSprite") value Null() end
++   trait slot QName(PackageNamespace(""), "rightSquad") type QName(PackageNamespace("net.wg.gui.battle.components"), "BattleAtlasSprite") value Null() end
+++  trait setter QName(PackageNamespace(""), "xfw_tableCtrl")
+++   method
+++    param QName(PackageNamespace("net.wg.gui.battle.ranked.stats.components.fullStats"), "FullStatsTableCtrl")
+++    returns QName(PackageNamespace(""), "void")
+++    body
+++     maxstack 2
+++     localcount 2
+++     initscopedepth 11
+++     maxscopedepth 12
+++     code
+++      getlocal0
+++      pushscope
+++
+++      getlocal0
+++      getlocal1
+++      initproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.stats.components.fullStats:FullStats"), "_tableCtrl")
+++
+++      returnvoid
+++     end ; code
+++    end ; body
+++   end ; method
+++  end ; trait
++   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.stats.components.fullStats:FullStats"), "_tableCtrl") type QName(PackageNamespace("net.wg.gui.battle.ranked.stats.components.fullStats"), "FullStatsTableCtrl") value Null() end
++   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.stats.components.fullStats:FullStats"), "_battleTips") type QName(PackageNamespace("net.wg.gui.battle.views.stats"), "BattleTipsController") value Null() end
++   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.stats.components.fullStats:FullStats"), "_personalStatus") type QName(PackageNamespace(""), "uint") value Integer(0) end
+diff -Naur battle.orig-0.orig/net/wg/gui/battle/ranked/stats/components/fullStats/FullStatsTableCtrl.class.asasm battle.orig-0/net/wg/gui/battle/ranked/stats/components/fullStats/FullStatsTableCtrl.class.asasm
+--- battle.orig-0.orig/net/wg/gui/battle/ranked/stats/components/fullStats/FullStatsTableCtrl.class.asasm	2018-08-05 20:22:46.252495700 +0300
++++ battle.orig-0/net/wg/gui/battle/ranked/stats/components/fullStats/FullStatsTableCtrl.class.asasm	2018-08-05 20:37:13.443596100 +0300
+@@ -52,6 +52,25 @@
+     end ; code
+    end ; body
+   end ; method
++  trait getter QName(PackageNamespace(""), "xfw_table")
++   method
++    returns QName(PackageNamespace("net.wg.gui.battle.ranked.stats.components.fullStats"), "FullStatsTable")
++    body
++     maxstack 1
++     localcount 1
++     initscopedepth 11
++     maxscopedepth 12
++     code
++      getlocal0
++      pushscope
++
++      getlocal0
++      getproperty         QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.stats.components.fullStats:FullStatsTableCtrl"), "_table")
++      returnvalue
++     end ; code
++    end ; body
++   end ; method
++  end ; trait
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.stats.components.fullStats:FullStatsTableCtrl"), "_table") type QName(PackageNamespace("net.wg.gui.battle.ranked.stats.components.fullStats"), "FullStatsTable") value Null() end
+   trait method QName(PackageNamespace(""), "setTeamsInfo") flag OVERRIDE
+    method
+@@ -103,7 +122,7 @@
+       getlocal0
+       getlocal1
+       getlocal2
+-      callproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.stats.components.fullStats:FullStatsTableCtrl"), "createPlayerStatsItem"), 2
++      callproperty        QName(PackageNamespace(""), "createPlayerStatsItem"), 2
+       coerce              QName(PackageNamespace("net.wg.gui.battle.ranked.stats.components.fullStats.tableItem"), "StatsTableItem")
+       setlocal3
+ 
+@@ -384,7 +403,7 @@
+     end ; body
+    end ; method
+   end ; trait
+-  trait method QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.stats.components.fullStats:FullStatsTableCtrl"), "createPlayerStatsItem")
++  trait method QName(PackageNamespace(""), "createPlayerStatsItem")
+    method
+     refid "net.wg.gui.battle.ranked.stats.components.fullStats:FullStatsTableCtrl/instance/net.wg.gui.battle.ranked.stats.components.fullStats:FullStatsTableCtrl/createPlayerStatsItem"
+     param QName(PackageNamespace(""), "int")
