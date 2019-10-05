@@ -37,3 +37,7 @@ src/installer/temp/*
 .vscode/
 
 src/installer/output/
+
+*.pyc
+
+*.asasm

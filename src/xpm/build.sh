@@ -1,16 +1,19 @@
 #!/bin/bash
 
-#############################
-# CONFIG
+##########################
+####      CONFIG      ####
+##########################
 
 XPM_CLEAR=${XPM_CLEAR:=0}
 XPM_RUN_TEST=${XPM_RUN_TEST:=1}
 
-#############################
-# INTERNAL
+
+##########################
+#  PREPARE ENVIRONMENT   #
+##########################
 
 currentdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-source "$currentdir"/../../src/xfw/build/library.sh
+source "$currentdir"/../../build_lib/library.sh
 source "$currentdir"/../../build/xvm-build.conf
 
 detect_coreutils
@@ -18,14 +21,14 @@ detect_python
 detect_git
 git_get_repostats "$currentdir/../../"
 
-#TODO
-XVMBUILD_XVM_REVISION="0000"
+
+##########################
+####  BUILD FUNCTIONS ####
+##########################
 
 clear()
 {
-  rm -rf "../../~output/res_mods/~ver/gui/flash"
-  rm -rf "../../~output/res_mods/~ver/scripts"
-  rm -rf "../../~output/res_mods/mods/xfw"
+  rm -rf "../../~output/xvm/res_mods/~ver/scripts"
 
   # remove _version_.py files
   for dir in $(find . -maxdepth 1 -type "d" ! -path "."); do
@@ -37,19 +40,8 @@ clear()
 
 make_dirs()
 {
-  mkdir -p ../../~output/res_mods/configs/xvm/
-  mkdir -p ../../~output/res_mods/mods/shared_resources/
-}
-
-build_xfw()
-{
-  pushd ../xfw/ >/dev/null
-  export XFW_BUILD_CLEAR=0
-  export XFW_BUILD_LIBS=0
-  ./build.sh python || exit 1
-  unset XFW_BUILD_CLEAR
-  unset XFW_BUILD_LIBS
-  popd >/dev/null
+  mkdir -p ../../~output/xvm/res_mods/configs/xvm/
+  mkdir -p ../../~output/xvm/res_mods/mods/shared_resources/
 }
 
 build()
@@ -59,10 +51,10 @@ build()
 
   [ "$d" = "$f" ] && d=""
 
-  py_dir="../../~output/res_mods/$2/python/$d"
-  py_file="../../~output/res_mods/$2/python/$f"
-  cmp_dir="../../~output/res_mods/cmp/$2/python/$d"
-  cmp_file="../../~output/res_mods/cmp/$2/python/$f.tmp"
+  py_dir="../../~output/xvm/res_mods/$2/python/$d"
+  py_file="../../~output/xvm/res_mods/$2/python/$f"
+  cmp_dir="../../~output/xvm/res_mods/cmp/$2/python/$d"
+  cmp_file="../../~output/xvm/res_mods/cmp/$2/python/$f.tmp"
 
   if [ -f "$py_file" ] && [ -f "$cmp_file" ] && cmp "$1" "$cmp_file" >/dev/null 2>&1; then
     return 0
@@ -85,7 +77,9 @@ build()
   rm -f $1c
 }
 
-# MAIN
+##########################
+####  BUILD PIPELINE  ####
+##########################
 
 pushd $(dirname $0) >/dev/null
 
@@ -94,9 +88,6 @@ if [ "$XPM_CLEAR" = "1" ]; then
 fi
 
 make_dirs
-
-echo 'building xfw'
-build_xfw
 
 echo 'updating versions'
 # create __version__.py files
@@ -107,6 +98,7 @@ for dir in $(find . -maxdepth 1 -type "d" ! -path "."); do
   echo "__revision__ = '$REPOSITORY_COMMITS_NUMBER'" >> $dir/__version__.py
   echo "__branch__ = '$REPOSITORY_BRANCH'" >> $dir/__version__.py
   echo "__node__ = '$REPOSITORY_HASH'" >> $dir/__version__.py
+  echo "__development__ = '$XVMBUILD_DEVELOPMENT'" >> $dir/__version__.py
 done
 
 # build *.py files
@@ -127,21 +119,19 @@ for fn in $(find . -type "f" -name "*xfw_package.json"); do
 
   echo "$f"
 
-  outpath="../../~output/res_mods/mods/xfw_packages/$m/xfw_package.json"
+  outpath="../../~output/xvm/res_mods/mods/xfw_packages/$m/xfw_package.json"
   cp "$fn" "$outpath"
   sed -i "s/XVM_VERSION/$XVMBUILD_XVM_VERSION.$REPOSITORY_COMMITS_NUMBER$REPOSITORY_BRANCH/g" "$outpath"
   sed -i "s/WOT_VERSION/$XVMBUILD_WOT_VERSION/g" "$outpath"
 done
 
-#echo "$(($(date +%s%N)-$st))"
-
 # generate default config from .xc files and xvm.xc.sample
 echo 'generate default_config.py and xvm.xc.sample'
-dc_fn=../../~output/res_mods/mods/xfw_packages/xvm_main/python/default_config.py
+dc_fn=../../~output/xvm/res_mods/mods/xfw_packages/xvm_main/python/default_config.py
 rm -f "${dc_fn}c"
 "$XVMBUILD_PYTHON_FILEPATH" -c "
 import sys
-sys.path.insert(0, '../xfw/~output/xfw_packages/xfw_libraries/res/mods/xfw_libraries')
+sys.path.insert(0, '../xfw_packages/xfw_libraries/python_libraries')
 import JSONxLoader
 cfg = JSONxLoader.load('../../release/configs/default/@xvm.xc')
 en = JSONxLoader.load('../../release/l10n/en.xc')
@@ -154,7 +144,7 @@ rm -f "${dc_fn}c"
 [ ! -f ${dc_fn} ] && exit
 
 xvm_xc_sample_src=../../release/configs/xvm.xc.sample
-xvm_xc_sample_trgt=../../~output/res_mods/mods/xfw_packages/xvm_main/python/default_xvm_xc.py
+xvm_xc_sample_trgt=../../~output/xvm/res_mods/mods/xfw_packages/xvm_main/python/default_xvm_xc.py
 echo -e -n "# -*- coding: utf-8 -*-\n''' Generated automatically by XVM builder '''\nDEFAULT_XVM_XC = '''" > $xvm_xc_sample_trgt
 cat $xvm_xc_sample_src >> $xvm_xc_sample_trgt
 echo "'''" >> $xvm_xc_sample_trgt

@@ -6,7 +6,7 @@
 set -e
 
 currentdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-source "$currentdir"/../../src/xfw/build/library.sh
+source "$currentdir/../../build_lib/library.sh"
 
 detect_os
 detect_actionscript_sdk
@@ -16,12 +16,12 @@ build_as3_swf \
     -inline \
     -source-path xvm_battle \
     -source-path xvm_battle_ranked \
-    -external-library-path+=../xfw/~output/swc/wg_battle.swc \
-    -external-library-path+=../xfw/~output/swc/wg_battle_ranked_ui.swc \
-    -external-library-path+=../xfw/~output/swc/xfw.swc \
-    -include-libraries+=../../~output/swc/xvm_shared.swc \
-    -include-libraries+=../../~output/swc/xvm_app.swc \
+    -external-library-path+=../../~output/xfw/swc/wg_battle.swc \
+    -external-library-path+=../../~output/xfw/swc/wg_battle_ranked_ui.swc \
+    -external-library-path+=../../~output/xfw/swc/xfw.swc \
+    -include-libraries+=../../~output/xvm/swc/xvm_shared.swc \
+    -include-libraries+=../../~output/xvm/swc/xvm_app.swc \
     -include-libraries+=swc/greensock.swc \
-    -output ../../~output/res_mods/mods/xfw_packages/xvm_battle/as_battle_ranked/xvm_battle_ranked.swf \
+    -output ../../~output/xvm/res_mods/mods/xfw_packages/xvm_battle/as_battle_ranked/xvm_battle_ranked.swf \
     $doc
 
