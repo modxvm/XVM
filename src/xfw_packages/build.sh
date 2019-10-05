@@ -1,34 +1,51 @@
 #!/bin/bash
 
-# XVM team (c) https://modxvm.com 2014-2019
-# XFW Framework build system
+# This file is part of the XVM Framework project.
+#
+# Copyright (c) 2013-2019 XVM Team.
+#
+# XVM Framework is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as
+# published by the Free Software Foundation, version 3.
+#
+# XVM Framework is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+#
+
+
+##########################
+#  PREPARE ENVIRONMENT   #
+##########################
 
 currentdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
-source "$currentdir"/../../build/library.sh
-source $currentdir/../../../../build/xvm-build.conf
+source "$currentdir/../../build_lib/library.sh"
+source "$currentdir/../../build/xvm-build.conf"
 
-detect_git
-git_get_repostats "$XVMBUILD_XFWROOT_PATH"
 
-if [ "$XVMBUILD_XFWROOT_PATH" == "" ]; then
-  XVMBUILD_XFWROOT_PATH="$currentdir/../.."
+##########################
+####      CONFIG      ####
+##########################
+
+if [ "$XVMBUILD_ROOT_PATH" == "" ]; then
+  XVMBUILD_ROOT_PATH="$currentdir/../.."
 fi
 
 if [ "$XVMBUILD_XFW_PACKAGES_OUTPUTPATH" == "" ]; then
-  XVMBUILD_XFW_PACKAGES_OUTPUTPATH="~output/xfw_packages/"
-fi
-
-if [ "$XVMBUILD_XFW_LIBRARIES_OUTPUTPATH" == "" ]; then
-  XVMBUILD_XFW_LIBRARIES_OUTPUTPATH="~output/xfw_libraries/"
+  XVMBUILD_XFW_PACKAGES_OUTPUTPATH="~output/xfw/packages/"
 fi
 
 if [ "$XVMBUILD_XFW_WOTMOD_OUTPUTPATH" == "" ]; then
-  XVMBUILD_XFW_WOTMOD_OUTPUTPATH="~output_wotmod/"
+  XVMBUILD_XFW_WOTMOD_OUTPUTPATH="~output/xfw/wotmod/"
 fi
 
-outputpath="$XVMBUILD_XFWROOT_PATH/$XVMBUILD_XFW_PACKAGES_OUTPUTPATH"
-wotmodpath="$XVMBUILD_XFWROOT_PATH/$XVMBUILD_XFW_WOTMOD_OUTPUTPATH"
+outputpath="$XVMBUILD_ROOT_PATH/$XVMBUILD_XFW_PACKAGES_OUTPUTPATH"
+wotmodpath="$XVMBUILD_ROOT_PATH/$XVMBUILD_XFW_WOTMOD_OUTPUTPATH"
 
 libraries=(
   'xfw_meta'
@@ -45,7 +62,10 @@ libraries=(
   'xfw_wwise'
 )
 
-###############
+
+##########################
+####  BUILD FUNCTIONS ####
+##########################
 
 copy_binaries()
 {
@@ -66,14 +86,14 @@ copy_fonts()
 copy_swf()
 {
   mkdir -p "$1/res/gui/flash/"
-  cp -rf "$XVMBUILD_XFWROOT_PATH/~output/swf_wg/." "$1/res/gui/flash"
-  cp -rf "$XVMBUILD_XFWROOT_PATH/~output/swf/." "$1/res/gui/flash"
+  cp -rf "$XVMBUILD_ROOT_PATH/~output/xfw/swf_wg/." "$1/res/gui/flash"
+  cp -rf "$XVMBUILD_ROOT_PATH/~output/xfw/swf/." "$1/res/gui/flash"
 }
 
 copy_license()
 {
   mkdir -p "$1"
-  cp -rf "$XVMBUILD_XFWROOT_PATH/LICENSE.txt" "$1/"
+  cp -rf "$XVMBUILD_ROOT_PATH/LICENSE.txt" "$1/"
 }
 
 build_python()
@@ -121,14 +141,14 @@ copy_files()
 prepare_json()
 {
   cp "$1" "$2"
-  sed -i s/XFW_VERSION/$XVMBUILD_XFW_VERSION.$REPOSITORY_COMMITS_NUMBER$REPOSITORY_BRANCH_FORFILE/g "$2"
+  sed -i s/XFW_VERSION/$XVMBUILD_XVM_VERSION.$REPOSITORY_COMMITS_NUMBER$REPOSITORY_BRANCH_FORFILE/g "$2"
   sed -i "s/WOT_VERSION/$XVMBUILD_WOT_VERSION/g" "$2"
 }
 
 prepare_metaxml()
 {
   cp "$1" "$2"
-  sed -i s/XFW_VERSION/$XVMBUILD_XFW_VERSION.$REPOSITORY_COMMITS_NUMBER$REPOSITORY_BRANCH_FORFILE/g "$2"
+  sed -i s/XFW_VERSION/$XVMBUILD_XVM_VERSION.$REPOSITORY_COMMITS_NUMBER$REPOSITORY_BRANCH_FORFILE/g "$2"
 }
 
 install_wotmod()
@@ -155,7 +175,7 @@ build_package()
 {
   package_name="$1"
   package_dir="./$1"
-  wotmod_filename="com.modxvm.${package_name//_/.}_$XVMBUILD_XFW_VERSION.$REPOSITORY_COMMITS_NUMBER$REPOSITORY_BRANCH_FORFILE.wotmod"
+  wotmod_filename="com.modxvm.${package_name//_/.}_$XVMBUILD_XVM_VERSION.$REPOSITORY_COMMITS_NUMBER$REPOSITORY_BRANCH_FORFILE.wotmod"
   output_dir="$outputpath/$package_name"
   mkdir -p "$output_dir"
   
@@ -185,11 +205,16 @@ build_package()
 }
 
 
-###############
+##########################
+####  BUILD PIPELINE  ####
+##########################
 
 detect_coreutils
 detect_os
 detect_python
+detect_git
+
+git_get_repostats "$XVMBUILD_ROOT_PATH"
 
 rm -rf "$outputpath"
 rm -rf "$wotmodpath"

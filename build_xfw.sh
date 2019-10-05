@@ -87,29 +87,26 @@ build_wotmod()
 {
     git_get_repostats "$XVMBUILD_ROOT_PATH"
 
-    rm -rf "~output_wotmod/xfw/"
+    rm -rf "~output/xfw/wotmod_tmp"
 
-    mkdir -p "~output_wotmod/xfw/"
-    mkdir -p "~output_wotmod/xfw/res/scripts/client/gui/mods/"
-    mkdir -p "~output_wotmod/xfw/res/mods/"
-    mkdir -p "~output_wotmod/xfw/res/mods/xfw/python/"
+    mkdir -p "~output/xfw/wotmod_tmp"
+    mkdir -p "~output/xfw/wotmod_tmp/res/scripts/client/gui/mods/"
+    mkdir -p "~output/xfw/wotmod_tmp/res/mods/"
+    mkdir -p "~output/xfw/wotmod_tmp/res/mods/xfw/python/"
 
-    cp -rf "~output/python/scripts/." "~output_wotmod/xfw/res/scripts/"
+    cp -rf "~output/xfw/python/scripts/." "~output/xfw/wotmod_tmp/res/scripts/"
 
-    cp -rf "~output/python/mods/xfw/." "~output_wotmod/xfw/res/mods/xfw/"
+    cp -rf "~output/xfw/python/mods/xfw/." "~output/xfw/wotmod_tmp/res/mods/xfw/"
 
-    cp "src/wotmod/meta.xml.in" "~output_wotmod/xfw/meta.xml"
-    sed -i s/XFW_VERSION/$XVMBUILD_XVM_VERSION.$REPOSITORY_COMMITS_NUMBER$REPOSITORY_BRANCH_FORFILE/g "~output_wotmod/xfw/meta.xml"
-
-    cp "LICENSE.txt" "~output_wotmod/xfw/LICENSE" 
+    cp "LICENSE.txt" "~output/xfw/wotmod_tmp/LICENSE" 
     
-    echo "$XVMBUILD_XVM_VERSION" > '~output_wotmod/xfw/res/mods/xfw/VERSION'
+    echo "$XVMBUILD_XVM_VERSION" > '~output/xfw/wotmod_tmp/res/mods/xfw/VERSION'
 
-    pushd ~output_wotmod/xfw/ > /dev/null
-    zip -0 -X -q -r ../com.modxvm.xfw_$XVMBUILD_XVM_VERSION.$REPOSITORY_COMMITS_NUMBER$REPOSITORY_BRANCH_FORFILE.wotmod ./*
+    pushd ~output/xfw/wotmod_tmp/ > /dev/null
+    zip -0 -X -q -r ../wotmod/com.modxvm.xfw_$XVMBUILD_XVM_VERSION.$REPOSITORY_COMMITS_NUMBER$REPOSITORY_BRANCH_FORFILE.wotmod ./*
     popd > /dev/null
 
-    rm -r ~output_wotmod/xfw/
+    rm -r ~output/xfw/wotmod_tmp/
 }
 
 

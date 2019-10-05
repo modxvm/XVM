@@ -115,8 +115,8 @@ build_xfw()
     echo ""
     echo "Building XFW"
 
-    pushd "$XVMBUILD_ROOT_PATH"/src/xfw/ >/dev/null
-    ./build.sh
+    pushd "$XVMBUILD_ROOT_PATH" >/dev/null
+    ./build_xfw.sh
     popd >/dev/null
 
     pushd "$XVMBUILD_ROOT_PATH" >/dev/null

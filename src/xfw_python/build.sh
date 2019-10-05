@@ -1,17 +1,38 @@
 #!/bin/bash
 
-# XVM team (c) https://modxvm.com 2014-2019
-# XFW Framework build system
+# This file is part of the XVM Framework project.
+#
+# Copyright (c) 2013-2019 XVM Team.
+#
+# XVM Framework is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as
+# published by the Free Software Foundation, version 3.
+#
+# XVM Framework is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+#
+
+##########################
+#  PREPARE ENVIRONMENT   #
+##########################
 
 set -e
 
 currentdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-source "$currentdir"/../../build/library.sh
+source "$currentdir"/../../build_lib/library.sh
 
 detect_coreutils
 detect_python
 
-#setup environment
+##########################
+####      CONFIG      ####
+##########################
+
 if [ "$XFW_BUILD_CLEAR" == "" ]; then
   XFW_BUILD_CLEAR=0
 fi
@@ -20,12 +41,17 @@ if [ "$XFW_BUILD_LIBS" == "" ]; then
   XFW_BUILD_LIBS=0
 fi
 
-cmp_dir="../../~output/cmp"
+cmp_dir="../../~output/xfw/cmp"
 cmp_file="$cmp_dir/python.sum"
+py_rootdir="../../~output/xfw/python"
+
+##########################
+####  BUILD FUNCTIONS ####
+##########################
 
 clear()
 {
-  rm -rf ../../~output/python/
+  rm -rf "$py_rootdir"
   rm -f "$cmp_file"
 }
 
@@ -36,8 +62,8 @@ build()
 
   [ "$d" = "$f" ] && d=""
 
-  local py_dir="../../~output/python/$d"
-  local py_file="../../~output/python/$f"
+  local py_dir="$py_rootdir/$d"
+  local py_file="$py_rootdir/$f"
 
   local cmp=$(cksum "$1")
   cmp=${cmp% *}
@@ -66,9 +92,11 @@ build()
   rm -f $1c
 }
 
-[ "$XFW_DEVELOPMENT" != "" -a "$XFW_BUILD_CLEAR" != "0" ] && clear
+##########################
+####  BUILD PIPELINE  ####
+##########################
 
-#st=$(date +%s%N)
+[ "$XFW_DEVELOPMENT" != "" -a "$XFW_BUILD_CLEAR" != "0" ] && clear
 
 # load cmp
 if [ -f "$cmp_file" ]; then
@@ -87,5 +115,3 @@ for fn in $(find . -type "f" -name "*.py" ! -path "./output*"); do
 
   build $f
 done
-
-#echo "$(($(date +%s%N)-$st)) sec"
