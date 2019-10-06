@@ -163,10 +163,14 @@ copy_files()
     mkdir -p "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/$XVMBUILD_WOT_VERSION"
     mkdir -p  "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/shared_resources/xvm/"
     mkdir -p  "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/xfw_packages/"
+    mkdir -p  "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/configs/xvm/"
 
     # cp non-binary files
     cp -rf "$XVMBUILD_ROOT_PATH"/~output/xvm/res_mods/mods/xfw_packages/* "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/xfw_packages/"
     cp -rf "$XVMBUILD_ROOT_PATH"/release/* "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/shared_resources/xvm/"
+
+    #move config
+    mv "$XVMBUILD_ROOT_PATH"/~output/deploy/res_mods/mods/shared_resources/xvm/configs/* "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/configs/xvm/"
 
     # get l10n files from translation server
     pushd "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/shared_resources/xvm/l10n/" >/dev/null
