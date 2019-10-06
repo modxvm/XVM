@@ -49,9 +49,9 @@ Source: "{app}\res_mods\configs\*"; DestDir: "{app}\xvm_backup\configs"; Tasks: 
 Source: "{app}\res_mods\mods\shared_resources\xvm\res\*"; DestDir: "{app}\xvm_backup\mods\shared_resources\xvm\res"; Tasks: xvmbackup; Flags: external skipifsourcedoesntexist createallsubdirs recursesubdirs uninsneveruninstall
 
 ;xvm
-Source: "..\..\..\~output\mods\*"; DestDir: "{app}\mods"; Flags: createallsubdirs recursesubdirs; Components: XVM
-Source: "..\..\..\~output\res_mods\*"; DestDir: "{app}\res_mods"; Flags: createallsubdirs recursesubdirs; Components: XVM
-Source: "..\..\..\~output\readme*.*"; DestDir: "{app}"; Components: XVM
+Source: "..\..\..\~output\deploy\mods\*"; DestDir: "{app}\mods"; Flags: createallsubdirs recursesubdirs; Components: XVM
+Source: "..\..\..\~output\deploy\res_mods\*"; DestDir: "{app}\res_mods"; Flags: createallsubdirs recursesubdirs; Components: XVM
+Source: "..\..\..\~output\deploy\readme*.*"; DestDir: "{app}"; Components: XVM
 
 ;installer libs
 Source: "dll\findwot\bin\findwot.dll"; Flags: dontcopy                                             
