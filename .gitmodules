@@ -1,5 +1,0 @@
-[submodule "src/xfw"]
-	path = src/xfw
-	url = git@gitlab.com:xvm/xfw/xfw.git
-	branch = master
-	update = merge

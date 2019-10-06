@@ -6,7 +6,7 @@
 XVMINST_ROOT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 XVMBUILD_ROOT_PATH="$XVMINST_ROOT_PATH/../../"
 
-source "$XVMBUILD_ROOT_PATH"/src/xfw/build/library.sh
+source "$XVMBUILD_ROOT_PATH"/build_lib/library.sh
 source "$XVMBUILD_ROOT_PATH"/build/xvm-build.conf
 
 ##########################
@@ -40,8 +40,8 @@ clean_directories()
 
 prepare_changelog()
 {
-    cp "$XVMBUILD_ROOT_PATH/~output/res_mods/mods/shared_resources/xvm/doc/ChangeLog-en.txt" "$XVMINST_ROOT_PATH/temp/changelogs/"
-    cp "$XVMBUILD_ROOT_PATH/~output/res_mods/mods/shared_resources/xvm/doc/ChangeLog-ru.txt" "$XVMINST_ROOT_PATH/temp/changelogs/"
+    cp "$XVMBUILD_ROOT_PATH/release/doc/ChangeLog-en.txt" "$XVMINST_ROOT_PATH/temp/changelogs/"
+    cp "$XVMBUILD_ROOT_PATH/release/doc/ChangeLog-ru.txt" "$XVMINST_ROOT_PATH/temp/changelogs/"
 
     sed -i '1s/^\xef\xbb\xbf//' "$XVMINST_ROOT_PATH/temp/changelogs/ChangeLog-ru.txt"
     iconv --from-code=utf-8 --to-code=cp1251 "$XVMINST_ROOT_PATH/temp/changelogs/ChangeLog-ru.txt" > "$XVMINST_ROOT_PATH/temp/changelogs/ChangeLog-ru.txt.new"
@@ -108,7 +108,7 @@ build_run(){
 
     pushd "$XVMINST_ROOT_PATH"/src/ >/dev/null
 
-    $XVMBUILD_WINE_FILENAME "$XVMBUILD_ROOT_PATH/build/bin/Windows_i686/innosetup/ISCC.exe" "xvm.iss"
+    $XVMBUILD_WINE_FILENAME "$XVMBUILD_ROOT_PATH/build_lib/bin/Windows_i686/innosetup/ISCC.exe" "xvm.iss"
 
     popd >/dev/null
 }
@@ -116,9 +116,9 @@ build_run(){
 build_deploy(){
     pushd "$XVMINST_ROOT_PATH/" >/dev/null
 
-    mkdir -p ./output/"$REPOSITORY_BRANCH"/
-    cp ./output/setup_xvm.exe ./output/"$REPOSITORY_BRANCH"/xvm_latest_"$REPOSITORY_BRANCH".exe
-    cp ./output/setup_xvm.exe ./output/"$REPOSITORY_BRANCH"/xvm_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".exe
+    mkdir -p ../../~output/installer
+    cp ./output/setup_xvm.exe ../../~output/installer/xvm_latest_"$REPOSITORY_BRANCH".exe
+    cp ./output/setup_xvm.exe ../../~output/installer/xvm_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".exe
     rm ./output/setup_xvm.exe
     popd >/dev/null
 }
@@ -136,7 +136,7 @@ main(){
     detect_git
     detect_unzip
 
-    git_get_repostats
+    git_get_repostats "$XVMINST_ROOT_PATH"
     extend_path
 
     clean_directories

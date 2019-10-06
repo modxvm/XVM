@@ -1,0 +1,12 @@
+diff -Naur battle.orig-0.orig/net/wg/data/constants/Linkages.class.asasm battle.orig-0/net/wg/data/constants/Linkages.class.asasm
+--- battle.orig-0.orig/net/wg/data/constants/Linkages.class.asasm	2019-09-10 14:49:32.996330700 +0300
++++ battle.orig-0/net/wg/data/constants/Linkages.class.asasm	2019-09-10 15:11:29.113190000 +0300
+@@ -1999,7 +1999,7 @@
+  trait const QName(PackageNamespace(""), "BATTLE_PROGRESS_ITEM_LABEL") slotid 246 type QName(PackageNamespace(""), "String") value Utf8("battleProgressItemLabelUI") end
+  trait const QName(PackageNamespace(""), "BATTLE_PROGRESS_ITEM_LINE") slotid 247 type QName(PackageNamespace(""), "String") value Utf8("battleProgressItemLineUI") end
+  trait const QName(PackageNamespace(""), "BATTLE_PROGRESS_TASK_SEPARATOR") slotid 248 type QName(PackageNamespace(""), "String") value Utf8("battleProgressTaskSeparatorUI") end
+- trait const QName(PackageNamespace(""), "CAPTURE_BAR_LINKAGE") slotid 249 type QName(PackageNamespace(""), "String") value Utf8("TeamCaptureBarUI") end
++ trait slot QName(PackageNamespace(""), "CAPTURE_BAR_LINKAGE") slotid 249 type QName(PackageNamespace(""), "String") value Utf8("TeamCaptureBarUI") end
+  trait const QName(PackageNamespace(""), "VEH_CMP_WINDOW_BG_UI") slotid 250 type QName(PackageNamespace(""), "String") value Utf8("WindowBgUI") end
+  trait const QName(PackageNamespace(""), "VEH_CMP_BUBBLE_UI") slotid 251 type QName(PackageNamespace(""), "String") value Utf8("VehCompareBubbleUI") end
+  trait const QName(PackageNamespace(""), "DIP_ENGINE_DAMAGED") slotid 252 type QName(PackageNamespace(""), "String") value Utf8("DipEngineDamagedUI") end

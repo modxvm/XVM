@@ -1,0 +1,100 @@
+package net.wg.gui.lobby.vehicleCustomization.data.customizationPanel
+{
+    import net.wg.data.daapi.base.DAAPIDataClass;
+    import net.wg.gui.components.controls.VO.ItemPriceVO;
+
+    public class CustomizationCarouselRendererVO extends DAAPIDataClass
+    {
+
+        private static const BUY_PRICE:String = "buyPrice";
+
+        public var intCD:int = -1;
+
+        public var index:int = -1;
+
+        public var typeId:int = -1;
+
+        public var isWide:Boolean = false;
+
+        public var isPlaceHolder:Boolean = false;
+
+        public var icon:String = "";
+
+        public var styleName:String = "";
+
+        public var styleNameSmall:String = "";
+
+        public var locked:Boolean = false;
+
+        public var showDetailItems:Boolean = false;
+
+        public var quantity:String = "";
+
+        public var rentalInfoText:String = "";
+
+        public var isRental:Boolean = false;
+
+        public var autoRentEnabled:Boolean = false;
+
+        public var buyPrice:ItemPriceVO = null;
+
+        public var formIconSource:String = "";
+
+        public var buyOperationAllowed:Boolean = true;
+
+        public var isNonHistoric:Boolean = false;
+
+        public var showAlert:Boolean = false;
+
+        public var showRareIcon:Boolean = false;
+
+        public var isEquipped:Boolean = false;
+
+        public var isSpecial:Boolean = false;
+
+        public var isDarked:Boolean = false;
+
+        public var isAlreadyUsed:Boolean = false;
+
+        public var isUnsupportedForm:Boolean = false;
+
+        public var lockText:String = "";
+
+        public var imageCached:Boolean = true;
+
+        public var isAllSeasons:Boolean = true;
+
+        public var noveltyCounter:int = 0;
+
+        public var defaultIconAlpha:Number = 1.0;
+
+        public var isDim:Boolean = false;
+
+        public var formFactor:int = -1;
+
+        public function CustomizationCarouselRendererVO(param1:Object)
+        {
+            super(param1);
+        }
+
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
+            if(param1 == BUY_PRICE)
+            {
+                this.buyPrice = new ItemPriceVO(param2);
+                return false;
+            }
+            return super.onDataWrite(param1,param2);
+        }
+
+        override protected function onDispose() : void
+        {
+            if(this.buyPrice != null)
+            {
+                this.buyPrice.dispose();
+                this.buyPrice = null;
+            }
+            super.onDispose();
+        }
+    }
+}

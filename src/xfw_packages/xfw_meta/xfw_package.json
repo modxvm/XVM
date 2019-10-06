@@ -1,0 +1,20 @@
+{
+    "id": "com.modxvm.xfw",
+    "name": "XFW",
+    "description": "XVM Framework",
+
+    "version": "XFW_VERSION",
+    "dependencies": [],
+    "dependencies_optional": [
+        "com.modxvm.xfw.wotfix.*",
+        "com.modxvm.xfw.fonts"    
+    ],
+
+    "url": "https://modxvm.com/",
+    "url_update": "https://modxvm.com/",
+    
+    "wot_version_min": "WOT_VERSION",
+    "wot_version_exactmatch": false,
+
+    "features": []
+}

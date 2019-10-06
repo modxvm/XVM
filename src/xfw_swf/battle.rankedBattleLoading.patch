@@ -1,0 +1,29 @@
+diff -Naur battle.orig-0.orig/net/wg/gui/battle/ranked/battleloading/renderers/RankedPlayerItemRenderer.class.asasm battle.orig-0/net/wg/gui/battle/ranked/battleloading/renderers/RankedPlayerItemRenderer.class.asasm
+--- battle.orig-0.orig/net/wg/gui/battle/ranked/battleloading/renderers/RankedPlayerItemRenderer.class.asasm	2017-06-08 23:04:47.427792600 +0300
++++ battle.orig-0/net/wg/gui/battle/ranked/battleloading/renderers/RankedPlayerItemRenderer.class.asasm	2017-06-10 23:00:28.904938700 +0300
+@@ -56,6 +56,25 @@
+     end ; code
+    end ; body
+   end ; method
++  trait getter QName(PackageNamespace(""), "xfw_rankIcon")
++   method
++    returns QName(PackageNamespace("net.wg.gui.battle.components"), "BattleAtlasSprite")
++    body
++     maxstack 1
++     localcount 1
++     initscopedepth 11
++     maxscopedepth 12
++     code
++      getlocal0
++      pushscope
++
++      getlocal0
++      getproperty         QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.battleloading.renderers:RankedPlayerItemRenderer/instance"), "_rankIcon")
++      returnvalue
++     end ; code
++    end ; body
++   end ; method
++  end ; trait
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.battleloading.renderers:RankedPlayerItemRenderer/instance"), "_rankIcon") type QName(PackageNamespace("net.wg.gui.battle.components"), "BattleAtlasSprite") end
+   trait method QName(ProtectedNamespace("net.wg.gui.battle.ranked.battleloading.renderers:RankedPlayerItemRenderer"), "onDispose") flag OVERRIDE
+    method

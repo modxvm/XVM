@@ -1,15 +1,35 @@
 #!/bin/bash
 
-# XVM team (c) https://modxvm.com 2014-2019
-# XVM nightly build system
+# This file is part of the XVM project.
+#
+# Copyright (c) 2014-2019 Team.
+#
+# XVM is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as
+# published by the Free Software Foundation, version 3.
+#
+# XVM is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+#
+
+
+##########################
+#  PREPARE ENVIRONMENT   #
+##########################
 
 set -e
 
 XVMBUILD_ROOT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$XVMBUILD_ROOT_PATH"
 
-source ./src/xfw/build/library.sh
+source ./build_lib/library.sh
 source ./build/xvm-build.conf
+
 
 ##########################
 ####      CONFIG      ####
@@ -28,11 +48,11 @@ fi
 clean_sha1()
 {
     pushd "$XVMBUILD_ROOT_PATH" > /dev/null
-    rm -rf ~output/cmp/
-    rm -rf ~output/res_mods/cmp/
-    rm -rf ~output/sha1/
-    rm -rf src/xfw/~output/sha1/
-    rm -rf src/xfw/~output/cmp/
+    rm -rf ~output/xvm/cmp/
+    rm -rf ~output/xvm/res_mods/cmp/
+    rm -rf ~output/xvm/sha1/
+    rm -rf ~output/xfw/sha1/
+    rm -rf ~output/xfw/cmp/
     popd > /dev/null
 }
 
@@ -40,16 +60,15 @@ clean_sha1()
 create_directories()
 {
     pushd "$XVMBUILD_ROOT_PATH" > /dev/null
-    mkdir -p ~output/mods/~ver/
-    mkdir -p ~output/res_mods/configs/xvm
-    mkdir -p ~output/res_mods/mods/shared_resources/xvm/
+    mkdir -p ~output/xvm/res_mods/configs/xvm
+    mkdir -p ~output/xvm/res_mods/mods/shared_resources/xvm/
     popd > /dev/null
 }
 
 #extends PATH system environment variable
 extend_path()
 {
-    export PATH=$PATH:"$XVMBUILD_ROOT_PATH"/build/bin/java/:"$XVMBUILD_ROOT_PATH"/build/bin/msil/:"$XVMBUILD_ROOT_PATH"/build/bin/"$OS"_"$arch"/
+    export PATH=$PATH:"$XVMBUILD_ROOT_PATH"/build_lib/bin/java/:"$XVMBUILD_ROOT_PATH"/build_lib/bin/msil/:"$XVMBUILD_ROOT_PATH"/build_lib/bin/"$OS"_"$arch"/
 }
 
 ##########################
@@ -95,13 +114,13 @@ build_xfw()
     echo ""
     echo "Building XFW"
 
-    pushd "$XVMBUILD_ROOT_PATH"/src/xfw/ >/dev/null
-    ./build.sh
+    pushd "$XVMBUILD_ROOT_PATH" >/dev/null
+    ./build_xfw.sh
     popd >/dev/null
 
     pushd "$XVMBUILD_ROOT_PATH" >/dev/null
-    mkdir -p ~output/mods/~ver/com.modxvm.xfw/
-    cp -rf src/xfw/~output_wotmod/*.wotmod ~output/mods/~ver/com.modxvm.xfw/
+    mkdir -p "~output/deploy/mods/$XVMBUILD_WOT_VERSION/com.modxvm.xfw/"
+    cp -rf ~output/xfw/wotmod/*.wotmod "~output/deploy/mods/$XVMBUILD_WOT_VERSION/com.modxvm.xfw/"
     popd >/dev/null
 }
 
@@ -114,7 +133,7 @@ build_xpm()
     pushd "$XVMBUILD_ROOT_PATH"/src/xpm/ >/dev/null
     export XPM_CLEAR=0
     export XPM_RUN_TEST=0
-    ./build-all.sh
+    ./build.sh
     unset XPM_CLEAR
     unset XPM_RUN_TEST
     popd >/dev/null
@@ -126,7 +145,7 @@ calc_hash_for_xvm_integrity()
     echo ""
     echo "Calculating hashes for xvm_integrity"
 
-    pushd ~output > /dev/null
+    pushd ~output/deploy > /dev/null
     hash_file='res_mods/mods/xfw_packages/xvm_integrity/python/hash_table.py'
     echo -e '""" Generated automatically by XVM builder """\nHASH_DATA = {' > $hash_file
     find res_mods -name '*.py' -print0 -o -name '*.pyc' -print0 -o -name '*.swf' -print0 | while read -d $'\0' file
@@ -141,16 +160,16 @@ calc_hash_for_xvm_integrity()
 copy_files()
 {
     # rename version-dependent folder
-    mv "$XVMBUILD_ROOT_PATH"/~output/mods/~ver/ "$XVMBUILD_ROOT_PATH"/~output/mods/"$XVMBUILD_WOT_VERSION"
-    mkdir -p "$XVMBUILD_ROOT_PATH"/~output/res_mods/"$XVMBUILD_WOT_VERSION"
+    mkdir -p "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/$XVMBUILD_WOT_VERSION"
+    mkdir -p  "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/shared_resources/xvm/"
+    mkdir -p  "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/xfw_packages/"
 
     # cp non-binary files
-    cp -rf "$XVMBUILD_ROOT_PATH"/release/* "$XVMBUILD_ROOT_PATH"/~output/res_mods/mods/shared_resources/xvm/
-    mv "$XVMBUILD_ROOT_PATH"/~output/res_mods/mods/shared_resources/xvm/configs/* "$XVMBUILD_ROOT_PATH"/~output/res_mods/configs/xvm
-    rm -rf "$XVMBUILD_ROOT_PATH"/~output/res_mods/mods/shared_resources/xvm/configs/
+    cp -rf "$XVMBUILD_ROOT_PATH"/~output/xvm/res_mods/mods/xfw_packages/* "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/xfw_packages/"
+    cp -rf "$XVMBUILD_ROOT_PATH"/release/* "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/shared_resources/xvm/"
 
     # get l10n files from translation server
-    pushd "$XVMBUILD_ROOT_PATH"/~output/res_mods/mods/shared_resources/xvm/l10n/ >/dev/null
+    pushd "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/shared_resources/xvm/l10n/" >/dev/null
     mkdir -p temp
     cd temp
     wget --quiet --output-document=l10n.zip "$XVMBUILD_L10N_URL"
@@ -163,21 +182,9 @@ copy_files()
     popd >/dev/null
 
     # put readmes on root
-    pushd "$XVMBUILD_ROOT_PATH"/~output/res_mods/mods/shared_resources/xvm/doc/ > /dev/null
+    pushd "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/shared_resources/xvm/doc/" > /dev/null
     find . -name "readme-*.txt" -exec cp {} ../../../../../ \;
     popd > /dev/null
-
-    rm -r "$XVMBUILD_ROOT_PATH"/~output/swc/
-}
-
-copy_microsoft_redist()
-{
-    mkdir -p "$XVMBUILD_ROOT_PATH/~output/"
-    find "$XVMBUILD_ROOT_PATH/src/microsoft/msvc/" -name '*.dll' -exec cp {} "$XVMBUILD_ROOT_PATH/~output/" \;
-
-    mkdir -p "$XVMBUILD_ROOT_PATH/~output/system/"
-    find "$XVMBUILD_ROOT_PATH/src/microsoft/ucrt/" -name '*.dll' -exec cp {} "$XVMBUILD_ROOT_PATH/~output/system/" \;
-    find "$XVMBUILD_ROOT_PATH/src/microsoft/ucrt/" -name '*.manifest' -exec cp {} "$XVMBUILD_ROOT_PATH/~output/system/" \;
 }
 
 ##########################

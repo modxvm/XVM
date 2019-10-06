@@ -1,0 +1,25 @@
+package net.wg.gui.battle.views.gameMessagesPanel.components
+{
+    import flash.display.MovieClip;
+    import net.wg.infrastructure.interfaces.entity.IDisposable;
+    import flash.text.TextField;
+
+    public class EndGameMessageTextfields extends MovieClip implements IDisposable
+    {
+
+        public var titleTF:TextField = null;
+
+        public var subtitleTF:TextField = null;
+
+        public function EndGameMessageTextfields()
+        {
+            super();
+        }
+
+        public final function dispose() : void
+        {
+            this.titleTF = null;
+            this.subtitleTF = null;
+        }
+    }
+}

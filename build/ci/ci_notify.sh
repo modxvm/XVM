@@ -9,7 +9,7 @@ export XVMBUILD_ROOT_PATH="$CURRENT_PATH/../.."
 
 source /var/xvm/ci_config.sh
 source "$XVMBUILD_ROOT_PATH/build/xvm-build.conf"
-source "$XVMBUILD_ROOT_PATH/src/xfw/build/library.sh"
+source "$XVMBUILD_ROOT_PATH/build_lib/library.sh"
 
 detect_git
 git_get_repostats

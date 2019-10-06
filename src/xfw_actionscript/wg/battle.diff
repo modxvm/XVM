@@ -1,0 +1,539 @@
+diff -Naur battle.orig/App.as battle/App.as
+--- battle.orig/App.as	2019-09-10 14:52:44.210227300 +0300
++++ battle/App.as	2019-09-10 15:06:50.987764700 +0300
+@@ -1,5 +1,6 @@
+ package
+ {
++    $AppLinks;
+     import net.wg.app.IApplication;
+     import scaleform.gfx.Extensions;
+     import net.wg.mock.MockApplication;
+@@ -43,7 +44,7 @@
+         {
+             if(ms_instance == null && (!Extensions.isScaleform || Extensions.isGFxPlayer))
+             {
+-                ms_instance = new MockApplication();
++                //ms_instance = new MockApplication();
+             }
+             return ms_instance;
+         }
+diff -Naur battle.orig/net/wg/data/constants/Linkages.as battle/net/wg/data/constants/Linkages.as
+--- battle.orig/net/wg/data/constants/Linkages.as	2019-09-10 14:52:46.740235400 +0300
++++ battle/net/wg/data/constants/Linkages.as	2019-09-10 15:06:51.007764200 +0300
+@@ -499,7 +499,7 @@
+ 
+         public static const BATTLE_PROGRESS_TASK_SEPARATOR:String = "battleProgressTaskSeparatorUI";
+ 
+-        public static const CAPTURE_BAR_LINKAGE:String = "TeamCaptureBarUI";
++        public static var CAPTURE_BAR_LINKAGE:String = "TeamCaptureBarUI";
+ 
+         public static const VEH_CMP_WINDOW_BG_UI:String = "WindowBgUI";
+ 
+diff -Naur battle.orig/net/wg/gui/battle/battleloading/BattleLoadingForm.as battle/net/wg/gui/battle/battleloading/BattleLoadingForm.as
+--- battle.orig/net/wg/gui/battle/battleloading/BattleLoadingForm.as	2019-09-10 14:53:03.060299300 +0300
++++ battle/net/wg/gui/battle/battleloading/BattleLoadingForm.as	2019-09-10 15:06:51.022765300 +0300
+@@ -84,10 +84,25 @@
+ 
+         private var _rightTeamName:String = "";
+ 
++        public function get xfw_allyRenderers():Vector.<IBattleLoadingRenderer>
++        {
++            return _allyRenderers;
++        }
++
+         private var _allyRenderers:Vector.<IBattleLoadingRenderer>;
+ 
++        public function get xfw_enemyRenderers():Vector.<IBattleLoadingRenderer>
++        {
++            return _enemyRenderers;
++        }
++
+         private var _enemyRenderers:Vector.<IBattleLoadingRenderer>;
+ 
++        public function get xfw_renderersContainer():BaseRendererContainer
++        {
++            return _renderersContainer;
++        }
++
+         private var _renderersContainer:BaseRendererContainer;
+ 
+         public function BattleLoadingForm()
+diff -Naur battle.orig/net/wg/gui/battle/battleloading/data/VehiclesDataProvider.as battle/net/wg/gui/battle/battleloading/data/VehiclesDataProvider.as
+--- battle.orig/net/wg/gui/battle/battleloading/data/VehiclesDataProvider.as	2019-09-10 14:53:03.039299200 +0300
++++ battle/net/wg/gui/battle/battleloading/data/VehiclesDataProvider.as	2019-09-10 15:06:51.042764400 +0300
+@@ -82,7 +82,7 @@
+             }
+             for each(_loc3_ in param1)
+             {
+-                this.addUpdatedIndex(push(this.makeVO(_loc3_)) - 1);
++                this.addUpdatedIndex((this as Array).push(this.makeVO(_loc3_)) - 1);
+             }
+             this.setSorting(param2);
+             return true;
+@@ -109,7 +109,7 @@
+             }
+             this.vehicleIDs.splice(0,this.vehicleIDs.length);
+             this.vehicleIDs = param1.slice();
+-            sort(this.compare);
++            (this as Array).sort(this.compare);
+             return true;
+         }
+ 
+diff -Naur battle.orig/net/wg/gui/battle/components/PlayersPanelBase.as battle/net/wg/gui/battle/components/PlayersPanelBase.as
+--- battle.orig/net/wg/gui/battle/components/PlayersPanelBase.as	2019-09-10 14:53:01.781294700 +0300
++++ battle/net/wg/gui/battle/components/PlayersPanelBase.as	2019-09-10 15:06:51.061764500 +0300
+@@ -55,6 +55,9 @@
+ 
+         private var _isInteractive:Boolean = false;
+ 
++        public var xfw_onListRollOverHandler:Function = onListRollOverHandler;
++        public var xfw_onListRollOutHandler:Function = onListRollOutHandler;
++
+         public function PlayersPanelBase()
+         {
+             this.contextMenuMgr = App.contextMenuMgr;
+diff -Naur battle.orig/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.as battle/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.as
+--- battle.orig/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.as	2019-09-10 14:53:05.372308500 +0300
++++ battle/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.as	2019-09-10 15:06:51.084766300 +0300
+@@ -79,6 +79,11 @@
+ 
+         private var _holderItemID:int = -1;
+ 
++        public function get xfw_state():Number
++        {
++            return _state;
++        }
++
+         private var _state:int = -1;
+ 
+         private var _vehicleName:String = null;
+diff -Naur battle.orig/net/wg/gui/battle/epicRandom/views/EpicRandomPage.as battle/net/wg/gui/battle/epicRandom/views/EpicRandomPage.as
+--- battle.orig/net/wg/gui/battle/epicRandom/views/EpicRandomPage.as	2019-09-10 14:53:02.988299700 +0300
++++ battle/net/wg/gui/battle/epicRandom/views/EpicRandomPage.as	2019-09-10 15:06:51.104765600 +0300
+@@ -346,6 +346,11 @@
+             this.updatePositionForQuestProgress();
+         }
+ 
++        public function xfw_onTeamBasesPanelUIChangeHandler(e:Event) : void
++        {
++            this.onTeamBasesPanelUIChangeHandler(e);
++        }
++
+         private function onTeamBasesPanelUIChangeHandler(param1:Event) : void
+         {
+             this.updatePositionForQuestProgress();
+diff -Naur battle.orig/net/wg/gui/battle/random/views/BattlePage.as battle/net/wg/gui/battle/random/views/BattlePage.as
+--- battle.orig/net/wg/gui/battle/random/views/BattlePage.as	2019-09-10 14:53:03.367300500 +0300
++++ battle/net/wg/gui/battle/random/views/BattlePage.as	2019-09-10 15:06:51.126764200 +0300
+@@ -46,7 +46,7 @@
+ 
+         private static const CONSUMABLES_POPUP_OFFSET:int = 60;
+ 
+-        private static const MINIMAP_MARGIN_HEIGHT:int = 6;
++        private static const MINIMAP_MARGIN_HEIGHT:int = -100;
+ 
+         private static const MINIMAP_MARGIN_WIDTH:int = 0;
+ 
+@@ -370,6 +370,11 @@
+             this.updatePositionForQuestProgress();
+         }
+ 
++        public function xfw_onTeamBasesPanelUIChangeHandler(e:Event) : void
++        {
++            this.onTeamBasesPanelUIChangeHandler(e);
++        }
++
+         private function onTeamBasesPanelUIChangeHandler(param1:Event) : void
+         {
+             this.updatePositionForQuestProgress();
+diff -Naur battle.orig/net/wg/gui/battle/random/views/stats/components/fullStats/FullStats.as battle/net/wg/gui/battle/random/views/stats/components/fullStats/FullStats.as
+--- battle.orig/net/wg/gui/battle/random/views/stats/components/fullStats/FullStats.as	2019-09-10 14:53:01.533300400 +0300
++++ battle/net/wg/gui/battle/random/views/stats/components/fullStats/FullStats.as	2019-09-10 15:06:51.148766200 +0300
+@@ -11,6 +11,11 @@
+     public class FullStats extends TabbedFullStats
+     {
+ 
++        public function set xfw_tableCtrl(value:FullStatsTableCtrl):void
++        {
++            _tableCtrl = value;
++        }
++
+         private var _tableCtrl:FullStatsTableCtrl = null;
+ 
+         public function FullStats()
+diff -Naur battle.orig/net/wg/gui/battle/random/views/stats/components/fullStats/FullStatsTableCtrl.as battle/net/wg/gui/battle/random/views/stats/components/fullStats/FullStatsTableCtrl.as
+--- battle.orig/net/wg/gui/battle/random/views/stats/components/fullStats/FullStatsTableCtrl.as	2019-09-10 14:53:07.225317200 +0300
++++ battle/net/wg/gui/battle/random/views/stats/components/fullStats/FullStatsTableCtrl.as	2019-09-10 15:06:51.179764700 +0300
+@@ -29,6 +29,11 @@
+ 
+         private static const SQUAD_BT_Y_START:int = 38;
+ 
++        public function get xfw_table():FullStatsTable
++        {
++            return _table;
++        }
++
+         private var _table:FullStatsTable = null;
+ 
+         private var _squadHandler:StatsBaseMeta = null;
+@@ -240,12 +245,12 @@
+             }
+         }
+ 
+-        private function createPlayerStatsItem(param1:int, param2:int) : StatsTableItem
++        public function createPlayerStatsItem(param1:int, param2:int) : StatsTableItem
+         {
+             return new StatsTableItem(this._table,param1,param2);
+         }
+ 
+-        private function createSquadItem(param1:int, param2:int) : DynamicSquadCtrl
++        public function createSquadItem(param1:int, param2:int) : DynamicSquadCtrl
+         {
+             var _loc3_:int = param1 * numRows + param2;
+             return new DynamicSquadCtrl(this._table.squadStatusCollection[_loc3_],this._table.squadCollection[_loc3_],this._table.squadAcceptBt,this._table.squadAddBt,this._table.hitCollection[_loc3_],this._table.noSoundCollection[_loc3_]);
+diff -Naur battle.orig/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListLeft.as battle/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListLeft.as
+--- battle.orig/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListLeft.as	2019-09-10 14:53:11.291332800 +0300
++++ battle/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListLeft.as	2019-09-10 15:06:51.201765400 +0300
+@@ -3,7 +3,7 @@
+     public class PlayersPanelListLeft extends PlayersPanelList
+     {
+ 
+-        private static const LINKAGE:String = "PlayersPanelListItemLeftUI";
++        public static var LINKAGE:String = "PlayersPanelListItemLeftUI";
+ 
+         public function PlayersPanelListLeft()
+         {
+diff -Naur battle.orig/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListRight.as battle/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListRight.as
+--- battle.orig/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListRight.as	2019-09-10 14:53:06.395310400 +0300
++++ battle/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListRight.as	2019-09-10 15:06:51.218765500 +0300
+@@ -3,7 +3,7 @@
+     public class PlayersPanelListRight extends PlayersPanelList
+     {
+ 
+-        private static const LINKAGE:String = "PlayersPanelListItemRightUI";
++        public static var LINKAGE:String = "PlayersPanelListItemRightUI";
+ 
+         public function PlayersPanelListRight()
+         {
+diff -Naur battle.orig/net/wg/gui/battle/random/views/teamBasesPanel/TeamBasesPanel.as battle/net/wg/gui/battle/random/views/teamBasesPanel/TeamBasesPanel.as
+--- battle.orig/net/wg/gui/battle/random/views/teamBasesPanel/TeamBasesPanel.as	2019-09-10 14:53:10.906331100 +0300
++++ battle/net/wg/gui/battle/random/views/teamBasesPanel/TeamBasesPanel.as	2019-09-10 15:06:51.232765400 +0300
+@@ -12,8 +12,16 @@
+ 
+     public class TeamBasesPanel extends TeamBasesPanelMeta implements ITeamBasesPanelMeta
+     {
++        public function get xfw_RENDERER_HEIGHT():Number
++        {
++            return RENDERER_HEIGHT;
++        }
++        public function set xfw_RENDERER_HEIGHT(value:Number):void
++        {
++            RENDERER_HEIGHT = value;
++        }
+ 
+-        private static const RENDERER_HEIGHT:Number = 34;
++        private var RENDERER_HEIGHT:Number = 34;
+ 
+         private static const ASSERT_MSG:String = "[TeamBasesPanel] Can\'t find teamCaptureBar with id=";
+ 
+@@ -251,6 +259,11 @@
+             }
+         }
+ 
++        public function xfw_updatePositions() : void
++        {
++            updatePositions();
++        }
++
+         private function updatePositions() : void
+         {
+             var _loc2_:* = NaN;
+diff -Naur battle.orig/net/wg/gui/battle/random/views/teamBasesPanel/TeamCaptureBar.as battle/net/wg/gui/battle/random/views/teamBasesPanel/TeamCaptureBar.as
+--- battle.orig/net/wg/gui/battle/random/views/teamBasesPanel/TeamCaptureBar.as	2019-09-10 14:53:06.450316000 +0300
++++ battle/net/wg/gui/battle/random/views/teamBasesPanel/TeamCaptureBar.as	2019-09-10 15:06:51.249765000 +0300
+@@ -21,7 +21,7 @@
+ 
+         private static const ALPHA_FADE_SPEED:Number = 500;
+ 
+-        private static const EXIT_TWEEN_Y:int = -10;
++        public static var EXIT_TWEEN_Y:int = -10;
+ 
+         private static const EXIT_TWEEN_DELAY:Number = 4500;
+ 
+diff -Naur battle.orig/net/wg/gui/battle/ranked/battleloading/renderers/RankedPlayerItemRenderer.as battle/net/wg/gui/battle/ranked/battleloading/renderers/RankedPlayerItemRenderer.as
+--- battle.orig/net/wg/gui/battle/ranked/battleloading/renderers/RankedPlayerItemRenderer.as	2019-09-10 14:53:04.389303800 +0300
++++ battle/net/wg/gui/battle/ranked/battleloading/renderers/RankedPlayerItemRenderer.as	2019-09-10 15:06:51.272764500 +0300
+@@ -9,6 +9,11 @@
+     public class RankedPlayerItemRenderer extends BasePlayerItemRenderer
+     {
+ 
++        public function get xfw_rankIcon():BattleAtlasSprite
++        {
++            return _rankIcon;
++        }
++
+         private var _rankIcon:BattleAtlasSprite;
+ 
+         public function RankedPlayerItemRenderer(param1:BaseRendererContainer, param2:int, param3:Boolean)
+diff -Naur battle.orig/net/wg/gui/battle/ranked/stats/components/fullStats/FullStats.as battle/net/wg/gui/battle/ranked/stats/components/fullStats/FullStats.as
+--- battle.orig/net/wg/gui/battle/ranked/stats/components/fullStats/FullStats.as	2019-09-10 14:53:05.756309400 +0300
++++ battle/net/wg/gui/battle/ranked/stats/components/fullStats/FullStats.as	2019-09-10 15:06:51.288764300 +0300
+@@ -11,6 +11,11 @@
+     public class FullStats extends StatsBase
+     {
+ 
++        public function set xfw_tableCtrl(value:FullStatsTableCtrl):void
++        {
++            _tableCtrl = value;
++        }
++
+         private var _tableCtrl:FullStatsTableCtrl = null;
+ 
+         public function FullStats()
+diff -Naur battle.orig/net/wg/gui/battle/ranked/stats/components/fullStats/FullStatsTableCtrl.as battle/net/wg/gui/battle/ranked/stats/components/fullStats/FullStatsTableCtrl.as
+--- battle.orig/net/wg/gui/battle/ranked/stats/components/fullStats/FullStatsTableCtrl.as	2019-09-10 14:53:08.878323700 +0300
++++ battle/net/wg/gui/battle/ranked/stats/components/fullStats/FullStatsTableCtrl.as	2019-09-10 15:06:51.309765300 +0300
+@@ -20,6 +20,11 @@
+ 
+         private static const TABLE_START_POINT:int = 33;
+ 
++        public function get xfw_table():FullStatsTable
++        {
++            return _table;
++        }
++
+         private var _table:FullStatsTable = null;
+ 
+         public function FullStatsTableCtrl(param1:FullStatsTable)
+@@ -110,7 +115,7 @@
+             }
+         }
+ 
+-        private function createPlayerStatsItem(param1:int, param2:int) : StatsTableItem
++        public function createPlayerStatsItem(param1:int, param2:int) : StatsTableItem
+         {
+             return new StatsTableItem(this._table,param1,param2);
+         }
+diff -Naur battle.orig/net/wg/gui/battle/ranked/stats/components/playersPanel/list/PlayersPanelListLeft.as battle/net/wg/gui/battle/ranked/stats/components/playersPanel/list/PlayersPanelListLeft.as
+--- battle.orig/net/wg/gui/battle/ranked/stats/components/playersPanel/list/PlayersPanelListLeft.as	2019-09-10 14:53:11.594332200 +0300
++++ battle/net/wg/gui/battle/ranked/stats/components/playersPanel/list/PlayersPanelListLeft.as	2019-09-10 15:06:51.335765500 +0300
+@@ -3,7 +3,7 @@
+     public class PlayersPanelListLeft extends PlayersPanelList
+     {
+ 
+-        private static const LINKAGE:String = "RankedPlayersPanelListItemLeftUI";
++        public static var LINKAGE:String = "RankedPlayersPanelListItemLeftUI";
+ 
+         public function PlayersPanelListLeft()
+         {
+diff -Naur battle.orig/net/wg/gui/battle/ranked/stats/components/playersPanel/list/PlayersPanelListRight.as battle/net/wg/gui/battle/ranked/stats/components/playersPanel/list/PlayersPanelListRight.as
+--- battle.orig/net/wg/gui/battle/ranked/stats/components/playersPanel/list/PlayersPanelListRight.as	2019-09-10 14:53:06.895313000 +0300
++++ battle/net/wg/gui/battle/ranked/stats/components/playersPanel/list/PlayersPanelListRight.as	2019-09-10 15:06:51.349765800 +0300
+@@ -3,7 +3,7 @@
+     public class PlayersPanelListRight extends PlayersPanelList
+     {
+ 
+-        private static const LINKAGE:String = "RankedPlayersPanelListItemRightUI";
++        public static var LINKAGE:String = "RankedPlayersPanelListItemRightUI";
+ 
+         public function PlayersPanelListRight()
+         {
+diff -Naur battle.orig/net/wg/gui/battle/views/BaseBattlePage.as battle/net/wg/gui/battle/views/BaseBattlePage.as
+--- battle.orig/net/wg/gui/battle/views/BaseBattlePage.as	2019-09-10 14:53:01.359292100 +0300
++++ battle/net/wg/gui/battle/views/BaseBattlePage.as	2019-09-10 15:06:51.399765900 +0300
+@@ -64,6 +64,11 @@
+ 
+         protected var playerMessageList:MessageListDAAPI;
+ 
++        public function get xfw_battleStatisticDataController():BattleStatisticDataController
++        {
++            return battleStatisticDataController;
++        }
++
+         protected var battleStatisticDataController:BattleStatisticDataController;
+ 
+         protected var postmortemTips:PostmortemPanel = null;
+@@ -301,6 +306,11 @@
+             this.playerMessageList.setLocation(_originalWidth - PLAYER_MESSAGES_LIST_OFFSET.x | 0,_originalHeight - this.minimap.getMessageCoordinate() + PLAYER_MESSAGES_LIST_OFFSET.y);
+         }
+ 
++        public function xfw_registerComponent(param1:IDAAPIModule, param2:String) : void
++        {
++            registerComponent(param1,param2);
++        }
++
+         protected function registerComponent(param1:IDAAPIModule, param2:String) : void
+         {
+             this._componentsStorage[param2] = param1;
+@@ -355,6 +365,11 @@
+             return false;
+         }
+ 
++        public function xfw_onMiniMapChangeHandler(param1:MinimapEvent) : void
++        {
++            onMiniMapChangeHandler(param1);
++        }
++
+         protected function onMiniMapChangeHandler(param1:MinimapEvent) : void
+         {
+             this.playerMessageListPositionUpdate();
+@@ -380,6 +395,11 @@
+             this.ribbonsPanel.x = (_originalWidth >> 1) + this.ribbonsPanel.offsetX;
+         }
+ 
++        public function xfw_onMiniMapTrySizeChangeHandler(param1:MinimapEvent) : void
++        {
++            onMiniMapTrySizeChangeHandler(param1);
++        }
++
+         private function onMiniMapTrySizeChangeHandler(param1:MinimapEvent) : void
+         {
+             this.updateMinimapSizeIndex(param1.sizeIndex);
+diff -Naur battle.orig/net/wg/gui/battle/views/minimap/Minimap.as battle/net/wg/gui/battle/views/minimap/Minimap.as
+--- battle.orig/net/wg/gui/battle/views/minimap/Minimap.as	2019-09-10 14:53:06.792313200 +0300
++++ battle/net/wg/gui/battle/views/minimap/Minimap.as	2019-09-10 15:06:51.433766200 +0300
+@@ -41,6 +41,11 @@
+ 
+         public var background:UILoaderAlt = null;
+ 
++        public function get xfw_foregrounds():Vector.<Sprite>
++        {
++            return _foregrounds;
++        }
++
+         private var _foregrounds:Vector.<Sprite> = null;
+ 
+         private var _currForeground:Sprite = null;
+diff -Naur battle.orig/net/wg/gui/battle/views/minimap/MinimapEntryController.as battle/net/wg/gui/battle/views/minimap/MinimapEntryController.as
+--- battle.orig/net/wg/gui/battle/views/minimap/MinimapEntryController.as	2019-09-10 14:53:11.240333000 +0300
++++ battle/net/wg/gui/battle/views/minimap/MinimapEntryController.as	2019-09-10 15:06:51.464766200 +0300
+@@ -13,8 +13,18 @@
+ 
+         private static var _instance:MinimapEntryController = null;
+ 
++        public function get xfw_vehicleEntries():Vector.<IVehicleMinimapEntry>
++        {
++            return _vehicleEntries;
++        }
++
+         private var _vehicleEntries:Vector.<IVehicleMinimapEntry> = null;
+ 
++        public function get xfw_vehicleLabelsEntries():Vector.<IVehicleMinimapEntry>
++        {
++            return _vehicleLabelsEntries;
++        }
++
+         private var _vehicleLabelsEntries:Vector.<IVehicleMinimapEntry> = null;
+ 
+         private var _isDisposed:Boolean = false;
+@@ -25,6 +35,11 @@
+ 
+         private var _isShowVehicleNamesTurnedOn:Boolean = false;
+ 
++        public function get xfw_scalableEntries():Vector.<DisplayObject>
++        {
++            return _scalableEntries;
++        }
++
+         private var _scalableEntries:Vector.<DisplayObject>;
+ 
+         private var _scalableEntriesWithNonScaleContent:Vector.<IMinimapEntryWithNonScaleContent>;
+@@ -164,7 +179,7 @@
+             }
+             if(param2)
+             {
+-                _loc3_ = this._scalableEntriesWithNonScaleContent.indexOf(param1);
++                _loc3_ = this._scalableEntriesWithNonScaleContent.indexOf(param1 as IMinimapEntryWithNonScaleContent);
+                 if(_loc3_ != -1)
+                 {
+                     this._scalableEntriesWithNonScaleContent.splice(_loc3_,1);
+diff -Naur battle.orig/net/wg/gui/battle/views/minimap/components/entries/vehicle/VehicleMinimapEntry.as battle/net/wg/gui/battle/views/minimap/components/entries/vehicle/VehicleMinimapEntry.as
+--- battle.orig/net/wg/gui/battle/views/minimap/components/entries/vehicle/VehicleMinimapEntry.as	2019-09-10 14:53:11.029333200 +0300
++++ battle/net/wg/gui/battle/views/minimap/components/entries/vehicle/VehicleMinimapEntry.as	2019-09-10 15:06:51.513771600 +0300
+@@ -76,6 +76,11 @@
+ 
+         public var allyGreenAnimation:VehicleAnimationMinimapEntry = null;
+ 
++        public function get xfw_currVehicleAnimation():VehicleAnimationMinimapEntry
++        {
++            return _currVehicleAnimation;
++        }
++
+         private var _currVehicleAnimation:VehicleAnimationMinimapEntry = null;
+ 
+         private var _currentTextField:TextField = null;
+diff -Naur battle.orig/net/wg/infrastructure/helpers/statisticsDataController/BattleStatisticDataController.as battle/net/wg/infrastructure/helpers/statisticsDataController/BattleStatisticDataController.as
+--- battle.orig/net/wg/infrastructure/helpers/statisticsDataController/BattleStatisticDataController.as	2019-09-10 14:53:04.929303800 +0300
++++ battle/net/wg/infrastructure/helpers/statisticsDataController/BattleStatisticDataController.as	2019-09-10 15:06:51.539766400 +0300
+@@ -25,8 +25,18 @@
+     public class BattleStatisticDataController extends BattleStatisticDataControllerMeta implements IBattleStatisticDataControllerMeta, IDAAPIModule, IQuestProgressDataHub
+     {
+ 
++        public function get xfw_componentControllers():Vector.<IBattleComponentDataController>
++        {
++            return _componentControllers;
++        }
++
+         private var _componentControllers:Vector.<IBattleComponentDataController>;
+ 
++        public function get xfw_questProgressViews():Vector.<IQuestProgressViewUpdatable>
++        {
++            return _questProgressViews;
++        }
++
+         private var _questProgressViews:Vector.<IQuestProgressViewUpdatable>;
+ 
+         private var _container:DisplayObjectContainer;
+diff -Naur battle.orig/net/wg/infrastructure/managers/IContainerManager.as battle/net/wg/infrastructure/managers/IContainerManager.as
+--- battle.orig/net/wg/infrastructure/managers/IContainerManager.as	2019-09-10 14:52:44.547226400 +0300
++++ battle/net/wg/infrastructure/managers/IContainerManager.as	2019-09-10 15:06:51.562768200 +0300
+@@ -23,6 +23,8 @@
+ 
+         function storeVisibleContainers() : void;
+ 
++        function get loader() : ILoaderManager;
++
+         function set loader(param1:ILoaderManager) : void;
+ 
+         function get lastFocusedView() : IView;
+diff -Naur battle.orig/net/wg/infrastructure/managers/impl/AtlasManager.as battle/net/wg/infrastructure/managers/impl/AtlasManager.as
+--- battle.orig/net/wg/infrastructure/managers/impl/AtlasManager.as	2019-09-10 14:52:45.691230700 +0300
++++ battle/net/wg/infrastructure/managers/impl/AtlasManager.as	2019-09-10 15:06:51.579767600 +0300
+@@ -182,6 +182,11 @@
+             }
+         }
+ 
++        public function xfw_getAtlas(param1:String) : IAtlas
++        {
++            return getAtlas(param1);
++        }
++
+         private function getAtlas(param1:String) : IAtlas
+         {
+             if(this._lastAtlas && this._lastAtlas.atlasName == param1)
+diff -Naur battle.orig/scaleform/clik/data/DataProvider.as battle/scaleform/clik/data/DataProvider.as
+--- battle.orig/scaleform/clik/data/DataProvider.as	2019-09-10 14:53:03.013296300 +0300
++++ battle/scaleform/clik/data/DataProvider.as	2019-09-10 15:06:51.601767100 +0300
+@@ -5,8 +5,9 @@
+     import flash.events.EventDispatcher;
+     import flash.events.Event;
+ 
+-    public dynamic class DataProvider extends Array implements IDataProvider, IEventDispatcher
++    public dynamic class DataProvider extends Object implements IDataProvider, IEventDispatcher
+     {
++        public function get length() : uint { return 0; };
+ 
+         protected var dispatcher:EventDispatcher;
+ 
+diff -Naur battle.orig/scaleform/clik/ui/InputDetails.as battle/scaleform/clik/ui/InputDetails.as
+--- battle.orig/scaleform/clik/ui/InputDetails.as	2019-09-10 14:52:46.328240900 +0300
++++ battle/scaleform/clik/ui/InputDetails.as	2019-09-10 15:06:51.619766400 +0300
+@@ -7,7 +7,7 @@
+ 
+         public var code:Number;
+ 
+-        public var value;
++        public var value:*;
+ 
+         public var navEquivalent:String;
+ 
