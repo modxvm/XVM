@@ -14,8 +14,13 @@ syntax: glob
 ~output/
 
 #Actionscript disasm
+*.abc
 *.asasm
 
 #Python
 *.pyc
 __version__.py
+
+#Difftools
+*.orig
+*.rej
