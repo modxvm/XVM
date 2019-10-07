@@ -50,7 +50,7 @@ _LOG_COMMANDS = [
     XFW_COMMAND.MESSAGEBOX,
 ]
 
-_WOT_ROOT = '../../../../../'
+_WOT_ROOT = '../../../'
 
 
 class _XfwInjectorView(View):
