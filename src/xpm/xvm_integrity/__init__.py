@@ -30,8 +30,8 @@ integrity_result = None
 lock = threading.RLock()
 # check incorrect hash, missing and extra files
 check_xvm_dirs = [
-    'res_mods/mods/xfw',
-    'res_mods/mods/xfw_packages',
+    '../res_mods/mods/xfw',
+    '../res_mods/mods/xfw_packages',
     ]
 
 
