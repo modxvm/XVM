@@ -52,6 +52,7 @@ build_xfw_wotmod()
     echo "$XVMBUILD_XVM_VERSION" > '~output/xfw/wotmod_tmp/res/mods/xfw/VERSION'
 
     pushd ~output/xfw/wotmod_tmp/ > /dev/null
+    rm -f ../wotmod/com.modxvm.xfw_*
     zip -0 -X -q -r ../wotmod/com.modxvm.xfw_$XVMBUILD_XVM_VERSION.$REPOSITORY_COMMITS_NUMBER$REPOSITORY_BRANCH_FORFILE.wotmod ./*
     popd > /dev/null
 
