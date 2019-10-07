@@ -16,6 +16,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
+import compileall
 import glob
 import json
 import logging
@@ -293,6 +294,7 @@ def xfw_mods_load():
         if 'python' in mod['features']:
             if mod['fs'] == 'realfs':
                 open(mod['dir_path'] + '/__init__.py', 'a').close()
+                compileall.compile_dir(mod['dir_path'], quiet = 1)
 
             try:
                 __import__('%s.python' % mod['dir_name'])
@@ -300,13 +302,6 @@ def xfw_mods_load():
                 print "[XFW] Loading mod: '%s' FAILED: %s" % (mod_name, err.message)
                 traceback.print_exc()
                 mods_failed.append(mod_name)
-
-            if mod['fs'] == 'realfs':
-                try:
-                    os.remove(mod['dir_path'] + '/__init__.py')
-                    os.remove(mod['dir_path'] + '/__init__.pyc')
-                except (IOError, WindowsError):
-                    pass
 
 ##############################
 
