@@ -42,8 +42,8 @@ def xfw_initialize_constants():
     Fills path and version constants in xfw.constants
     '''
 
-    # "res_mods/0.9.20.1/""
-    PATH.WOT_RESMODS_DIR = ResMgr.openSection('../paths.xml')['Paths'].values()[0].asString.lstrip('./')
+    # "../res_mods/0.9.20.1/""
+    PATH.WOT_RESMODS_DIR = '../%s' % ResMgr.openSection('../paths.xml')['Paths'].values()[0].asString.lstrip('./')
 
     # ver = 
     #   * 'v.0.8.7'
