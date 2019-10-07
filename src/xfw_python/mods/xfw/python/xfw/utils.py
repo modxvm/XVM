@@ -78,18 +78,18 @@ def resolve_path(path, basepath=None):
     """
     Resolves path to file
 
-    'xvm://*' --> './res_mods/mods/shared_resources/xvm/*'
-    'res://*' --> './res_mods/mods/shared_resources/*'
-    'cfg://*' --> './res_mods/configs/xvm/*'
+    'xvm://*' --> '../res_mods/mods/shared_resources/xvm/*'
+    'res://*' --> '../res_mods/mods/shared_resources/*'
+    'cfg://*' --> '../res_mods/configs/xvm/*'
     '*'       --> 'basepath/*'
     """
 
     if path[:6].lower() == "res://":
-        path = path.replace("res://", "./res_mods/mods/shared_resources/", 1)
+        path = path.replace("res://", "../res_mods/mods/shared_resources/", 1)
     elif path[:6].lower() == "xvm://":
-        path = path.replace("xvm://", "./res_mods/mods/shared_resources/xvm/", 1)
+        path = path.replace("xvm://", "../res_mods/mods/shared_resources/xvm/", 1)
     elif path[:6].lower() == "cfg://":
-        path = path.replace("cfg://", "./res_mods/configs/xvm/", 1)
+        path = path.replace("cfg://", "../res_mods/configs/xvm/", 1)
     elif basepath:
         path = fix_path_slashes(basepath) + path
 
