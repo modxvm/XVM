@@ -16,39 +16,20 @@ You should have received a copy of the GNU Lesser General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
-import os
 import sys
 import traceback
 
-import ResMgr
-
-if os.path.isfile(ResMgr.resolveToAbsolutePath('scripts/client/gui/mods/mod_xfw.pyc')):
-    XFW_IN_PACKAGE = False
-    XFW_ROOT_DIR = '../res_mods/mods/xfw'
-    XFW_LIB_DIR  = '../res_mods/mods/xfw_libraries'
-else:
-    XFW_IN_PACKAGE = True
-    XFW_ROOT_DIR = '../mods/xfw'
-    XFW_LIB_DIR  = '../mods/xfw_libraries'
-
 try:
-    # native libraries loading
-    try:
-        import mod_xfw_native
-        XFW_NATIVE_AVAILABLE = True
-    except Exception:
-        print "[XFW/Entrypoint] Native modules loading error. Some features will be unavailable."
-        XFW_NATIVE_AVAILABLE = False
+    #Files in VFS
+    sys.path.insert(0, 'mods/xfw/python')
+    sys.path.insert(0, 'mods/xfw_libraries')
 
-    sys.path.insert(0, '%s/python'     % XFW_ROOT_DIR)
-    sys.path.insert(0, XFW_LIB_DIR)
+    #Files in RealFS
+    sys.path.insert(0, '../res_mods/mods/xfw/python')
+    sys.path.insert(0, '../res_mods/mods/xfw_libraries')
 
     import xfw
     import xfw.vfs as vfs
-
-    xfw.constants.PATH.XFW_ROOT_DIR = XFW_ROOT_DIR
-    xfw.constants.FLAGS.XFW_IN_PACKAGE = XFW_IN_PACKAGE
-    xfw.constants.FLAGS.XFW_NATIVE_AVAILABLE = XFW_NATIVE_AVAILABLE
 
     import xfw_loader
 
