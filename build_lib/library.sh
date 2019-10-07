@@ -30,6 +30,36 @@ build_as3_swc(){
     fi
 }
 
+build_xfw_wotmod()
+{
+    pushd "$XVMBUILD_ROOT_PATH" > /dev/null
+
+    git_get_repostats "$XVMBUILD_ROOT_PATH"
+
+    rm -rf "~output/xfw/wotmod_tmp"
+
+    mkdir -p "~output/xfw/wotmod_tmp"
+    mkdir -p "~output/xfw/wotmod_tmp/res/scripts/client/gui/mods/"
+    mkdir -p "~output/xfw/wotmod_tmp/res/mods/"
+    mkdir -p "~output/xfw/wotmod_tmp/res/mods/xfw/python/"
+
+    cp -rf "~output/xfw/python/scripts/." "~output/xfw/wotmod_tmp/res/scripts/"
+
+    cp -rf "~output/xfw/python/mods/xfw/." "~output/xfw/wotmod_tmp/res/mods/xfw/"
+
+    cp "LICENSE.txt" "~output/xfw/wotmod_tmp/LICENSE" 
+    
+    echo "$XVMBUILD_XVM_VERSION" > '~output/xfw/wotmod_tmp/res/mods/xfw/VERSION'
+
+    pushd ~output/xfw/wotmod_tmp/ > /dev/null
+    zip -0 -X -q -r ../wotmod/com.modxvm.xfw_$XVMBUILD_XVM_VERSION.$REPOSITORY_COMMITS_NUMBER$REPOSITORY_BRANCH_FORFILE.wotmod ./*
+    popd > /dev/null
+
+    rm -r ~output/xfw/wotmod_tmp/
+
+    popd > /dev/null
+}
+
 #Arch and OS detection
 detect_arch(){
     if [ "$(uname -m)" == "i686" ] || [ "$OS" == "Windows" ]; then

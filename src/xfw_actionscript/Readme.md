@@ -27,8 +27,8 @@ You should run
 ```
 And grab
 
- * *.swc* files - in *[xfw_root]/~output/swc* directory
- * *.swf* files - in *[xfw_root]/~output/swf* directory
+ * *.swc* files - in *[repo_root]/~output/xfw/swc* directory
+ * *.swf* files - in *[repo_root]/~output/xfw/swf* directory
 
 Do not run **.build-swc-** files, use **build.sh** instead.
 

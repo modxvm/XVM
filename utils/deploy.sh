@@ -28,8 +28,8 @@ check_config()
 install_xfw()
 {
   echo "=> xfw"
-  rm -f "$WOT_PATH/mods/$XVMBUILD_WOT_VERSION"/com.modxvm.xfw_*.wotmod || err "[install_xfw]"
-  cp -a ../~output/xfw/wotmod/com.modxvm.xfw*.wotmod "$WOT_PATH/mods/$XVMBUILD_WOT_VERSION/" || err "[install_xfw]"
+  rm -f "$WOT_PATH/mods/$XVMBUILD_WOT_VERSION"/com.modxvm.*.wotmod || err "[install_xfw]"
+  cp -a ../~output/xfw/wotmod/com.modxvm.*.wotmod "$WOT_PATH/mods/$XVMBUILD_WOT_VERSION/" || err "[install_xfw]"
   # for debug only
   mkdir -p "$WOT_PATH/res_mods/$XVMBUILD_WOT_VERSION/gui/flash/" || err "[install_xfw]"
   cp -a ../~output/xfw/swf/*.swf "$WOT_PATH/res_mods/$XVMBUILD_WOT_VERSION/gui/flash/" || err "[install_xfw]"

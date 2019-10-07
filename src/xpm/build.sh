@@ -102,6 +102,16 @@ for dir in $(find . -maxdepth 1 -type "d" ! -path "."); do
 done
 
 # build *.py files
+
+echo 'building xfw'
+pushd ../xfw_python > /dev/null
+./build.sh || exit 1
+popd > /dev/null
+if [ "$XVMBUILD_ROOT_PATH" == "" ]; then
+  XVMBUILD_ROOT_PATH="$currentdir/../.."
+fi
+build_xfw_wotmod
+
 echo 'building xvm'
 for fn in $(find . -type "f" -name "*.py"); do
   f=${fn#./}

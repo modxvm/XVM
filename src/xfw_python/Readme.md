@@ -17,7 +17,7 @@ You should run
 ```
 ./build.sh
 ```
-And grab your .py files in *[xfw_root]/~output/python/* directory
+And grab your .py files in *[repo_root]/~output/xfw/python/* directory
 
 ## How to create your own mod ##
  * Create folder **mods/[mod name]**
