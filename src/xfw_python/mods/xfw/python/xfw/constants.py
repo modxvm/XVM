@@ -42,9 +42,6 @@ class XFW_COLORS(object): #in hex, 6 symbols
 
 # INTERNAL
 
-class FLAGS(object):
-    XFW_IN_PACKAGE = False
-
 class VERSION(object):
     WOT_VERSION_FULL = ''  #initialized in xfw_loader.py
     WOT_VERSION_SHORT = '' #initialized in xfw_loader.py
@@ -58,7 +55,6 @@ class PATH(object):
     XFWLOADER_PACKAGES_VFS = 'mods/xfw_packages'
 
     WOT_RESMODS_DIR = '' # will be filled in later with 'res_mods/0.9.9' in xfw_loader.py.
-    XFW_ROOT_DIR = '' # XFW work dir, will be filled in later in mod_.pyc. Fall back to /res_mods/mods/
     XFW_SWF_URL = "xfw.swf"
 
     XVM_LOG_FILE_NAME = "xvm.log"

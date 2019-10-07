@@ -17,6 +17,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 import glob
+import json
 import logging
 import os
 import sys
@@ -29,9 +30,8 @@ from helpers import VERSION_FILE_PATH
 import xfw
 import xfw.vfs as vfs
 import xfw.utils as utils
-from xfw.constants import FLAGS, PATH, VERSION
+from xfw.constants import PATH, VERSION
 
-import simplejson as json
 from dag import DAG, DAGValidationError
 
 ##### xfw initializers
@@ -311,8 +311,4 @@ def xfw_mods_load():
 ##############################
 
 xfw_initialize_constants()
-
-print "[XFW] Root dir   : %s" % PATH.XFW_ROOT_DIR
-print "[XFW] In .wotmod : %s" % FLAGS.XFW_IN_PACKAGE
-
 xfw_mods_load()
