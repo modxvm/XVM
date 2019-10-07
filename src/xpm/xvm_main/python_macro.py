@@ -11,7 +11,7 @@ from consts import *
 from logger import *
 
 
-sys.path.append("res_mods/configs/xvm/py_macro")
+sys.path.append("../res_mods/configs/xvm/py_macro")
 
 # Globals
 _container = {}
