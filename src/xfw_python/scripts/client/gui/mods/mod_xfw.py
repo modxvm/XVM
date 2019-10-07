@@ -24,12 +24,13 @@ import ResMgr
 
 if os.path.isfile(ResMgr.resolveToAbsolutePath('scripts/client/gui/mods/mod_xfw.pyc')):
     XFW_IN_PACKAGE = False
-    XFW_ROOT_DIR = 'res_mods/mods/xfw'
-    XFW_LIB_DIR  = 'res_mods/mods/xfw_libraries'
+    XFW_ROOT_DIR = '../res_mods/mods/xfw'
+    XFW_LIB_DIR  = '../res_mods/mods/xfw_libraries'
 else:
     XFW_IN_PACKAGE = True
-    XFW_ROOT_DIR = 'mods/xfw'
-    XFW_LIB_DIR  = 'mods/xfw_libraries'
+    XFW_ROOT_DIR = '../mods/xfw'
+    XFW_LIB_DIR  = '../mods/xfw_libraries'
+
 try:
     # native libraries loading
     try:
