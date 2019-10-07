@@ -1,5 +1,6 @@
 """ XVM (c) https://modxvm.com 2013-2019 """
 
+import compileall
 import traceback
 import ast
 import sys
@@ -11,6 +12,7 @@ from consts import *
 from logger import *
 
 
+compileall.compile_dir("../res_mods/configs/xvm/py_macro/xvm", quiet = 1)
 sys.path.append("../res_mods/configs/xvm/py_macro")
 
 # Globals
