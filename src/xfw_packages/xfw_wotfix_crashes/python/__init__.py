@@ -26,6 +26,8 @@ from xfw.constants import PATH
 class XFWCrashFix(object):
 
     def __init__(self):
+        self.__native = None
+
         try:
             if "python27" in sys.modules:
                 path_realfs = PATH.XFWLOADER_PACKAGES_REALFS + '/xfw_wotfix_crashes/native/xfw_crashfix.pyd'
@@ -33,10 +35,10 @@ class XFWCrashFix(object):
 
                 is_in_realfs = os.path.isfile(path_realfs)
                 if is_in_realfs:
-                    self.native = imp.load_dynamic('xfw_crashfix', path_realfs)
+                    self.__native = imp.load_dynamic('xfw_crashfix', path_realfs)
                 else:
                     import xfw.vfs as vfs
-                    self.native = vfs.c_extension_load('xfw_crashfix', path_vfs, 'com.modxvm.xfw.wotfix.crashes')
+                    self.__native = vfs.c_extension_load('xfw_crashfix', path_vfs, 'com.modxvm.xfw.wotfix.crashes')
             else:
                 print "[XFW/Crashfix] was not loaded because of python27 error"
         except Exception:
@@ -44,14 +46,14 @@ class XFWCrashFix(object):
             traceback.print_exc()
 
     def apply_fix(self):
-        if self.native is None:
+        if self.__native is None:
             print "[XFW/Crashfix] Crash fixes not applied."
             return
         else:
             print "[XFW/Crashfix] Applying crashfixes:"
 
-        for bf_num in range(1, self.native.fix_count()+1):
-            err_code = self.native.fix_apply(bf_num)
+        for bf_num in range(1, self.__native.fix_count()+1):
+            err_code = self.__native.fix_apply(bf_num)
             result = "OK" if err_code >= 0 else "FAIL"
             print "[XFW/Crashfix]    BugFix %i: %s, %i" % (bf_num, result, err_code)
 
