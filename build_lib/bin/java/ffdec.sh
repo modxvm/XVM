@@ -71,7 +71,7 @@ fi
 
 popd > /dev/null
 
-args=(-Djava.net.preferIPv4Stack=true -Xmx$MEMORY -jar $JAR_FILE "$@")
+args=(-Dline.separator=$'\n' -Djava.net.preferIPv4Stack=true -Xmx$MEMORY -jar $JAR_FILE "$@")
 
 if [ "`uname`" = "Darwin" ]; then
 	args=(-Xdock:name=FFDec -Xdock:icon=icon.png "${args[@]}")
