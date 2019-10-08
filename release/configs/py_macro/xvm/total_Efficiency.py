@@ -260,7 +260,7 @@ def BattleRibbonsPanel__onRibbonAdded(self, ribbon):
             ribbonTypes[ribbonType] += 1
             updateLabels.update()
         elif ribbonType == 'spotted':
-            ribbonTypes[ribbonType] += ribbon.getCount()
+            ribbonTypes[ribbonType] += ribbon.getTargetsAmount()
             updateLabels.update()
         elif ribbonType in ['damage', 'ram', 'burn']:
             numberDamagesDealt += 1
