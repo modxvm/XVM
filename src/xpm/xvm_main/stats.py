@@ -98,7 +98,7 @@ class _Stat(object):
 
         def paths_gen():
             # Search icons
-            prefix = 'res_mods/mods/shared_resources/xvm/res/{}'.format(
+            prefix = '../res_mods/mods/shared_resources/xvm/res/{}'.format(
                 xfwutils.fix_path_slashes(config.get('battle/clanIconsFolder')))
             yield '{}ID/{}.png'.format(prefix, pl.accountDBID)
             yield '{}{}/nick/{}.png'.format(prefix, getRegion(), pl.name)
@@ -111,7 +111,7 @@ class _Stat(object):
 
         for fn in paths_gen():
             if os.path.isfile(fn):
-                pl.clanicon = utils.fixImgTag('xvm://' + fn[len('res_mods/mods/shared_resources/xvm/'):])
+                pl.clanicon = utils.fixImgTag('xvm://' + fn[len('../res_mods/mods/shared_resources/xvm/'):])
                 return pl.clanicon
         pl.clanicon = None
         return pl.clanicon
@@ -640,7 +640,7 @@ class _Stat(object):
                 imgid = 'icons/{0}.png'.format(pl.clan)
                 filecache.save(imgid, bytes)
                 del pl.x_emblem_loading
-                pl.x_emblem = 'res_mods/mods/shared_resources/xvm/cache/%s' % imgid
+                pl.x_emblem = '../res_mods/mods/shared_resources/xvm/cache/%s' % imgid
                 if hasattr(pl, 'clanicon'):
                     del pl.clanicon
                 as_xfw_cmd(XVM_COMMAND.AS_ON_CLAN_ICON_LOADED, pl.vehicleID, pl.name)

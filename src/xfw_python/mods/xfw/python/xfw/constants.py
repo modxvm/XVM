@@ -54,7 +54,7 @@ class PATH(object):
     XFWLOADER_PACKAGES_REALFS = '../res_mods/mods/xfw_packages'
     XFWLOADER_PACKAGES_VFS = 'mods/xfw_packages'
 
-    WOT_RESMODS_DIR = '' # will be filled in later with 'res_mods/0.9.9' in xfw_loader.py.
+    WOT_RESMODS_DIR = '' # will be filled in later with '../res_mods/0.9.9' in xfw_loader.py.
     XFW_SWF_URL = "xfw.swf"
 
     XVM_LOG_FILE_NAME = "xvm.log"

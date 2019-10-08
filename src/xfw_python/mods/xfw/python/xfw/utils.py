@@ -15,7 +15,7 @@ def load_file(fn):
         # debug("[XFW][LIB][load_file] " + fn)
         return codecs.open(fn, 'r', 'utf-8-sig').read()
     except:
-        if fn != 'res_mods/configs/xvm/xvm.xc':
+        if fn != '../res_mods/configs/xvm/xvm.xc':
             logtrace(__file__)
         return None
 

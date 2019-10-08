@@ -23,7 +23,7 @@ from logger import *
 class _FileCache():
     def __init__(self):
         try:
-            self.cache_dir = 'res_mods/mods/shared_resources/xvm/cache'
+            self.cache_dir = '../res_mods/mods/shared_resources/xvm/cache'
             self.clean()
             self.customFilesCache = CustomFilesCache.CustomFilesCache('xvm/custom_data')
         except Exception:

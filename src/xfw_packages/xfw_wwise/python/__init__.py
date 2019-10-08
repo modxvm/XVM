@@ -24,7 +24,7 @@ class XFWWWise(object):
 
     Example:
         from xfw.wwise import g_wwise as wwise
-        wwise.bank_add("./res_mods/audioww/mybank.bnk,True,True)
+        wwise.bank_add("../res_mods/audioww/mybank.bnk,True,True)
         wwise.reload_banks()
     """
 
@@ -69,7 +69,7 @@ class XFWWWise(object):
         Add bank to loading list.
         Use reload() to perform bank load.
 
-        bank_path     -- path to bank relative to res_mods/x.x.x/audioww/
+        bank_path     -- path to bank relative to ../res_mods/x.x.x/audioww/
         add_to_battle -- true to load bank in battle
         add_to_hangar -- true to load bank in hangar
         _from_config  -- do not use this
@@ -94,7 +94,7 @@ class XFWWWise(object):
         Remove bank from loading list.
         Use reload() to perform bank unload.
 
-        bank_path          -- path to bank relative to res_mods/x.x.x/audioww/
+        bank_path          -- path to bank relative to ../res_mods/x.x.x/audioww/
         remove_from_battle -- true to unload bank from battle
         remove_from_hangar -- true to unload bank from hangar
         _from_config       -- do not use this
@@ -215,10 +215,10 @@ class XFWWWise(object):
         """
         Normalize path to sound bank:
 
-        cfg://* -> /res_mods/configs/xvm/*
-        res://* -> /res_mods/mods/shared_resources/*
-        xvm://* -> /res_mods/mods/shared_resources/xvm/*
-        *       -> /res_mods/x.x.x/audioww/*
+        cfg://* -> ../res_mods/configs/xvm/*
+        res://* -> ../res_mods/mods/shared_resources/*
+        xvm://* -> ../res_mods/mods/shared_resources/xvm/*
+        *       -> ../res_mods/x.x.x/audioww/*
         """
         return resolve_path(path, PATH.WOT_RESMODS_DIR + '/audioww/').lower()
 

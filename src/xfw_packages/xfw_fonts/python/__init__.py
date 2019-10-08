@@ -165,9 +165,9 @@ class XFWFonts(object):
         """
         Get absolute path to font:
 
-        cfg://* -> /res_mods/configs/xvm/*
-        res://* -> /res_mods/mods/shared_resources/*
-        xvm://* -> /res_mods/mods/shared_resources/xvm/*
+        cfg://* -> ../res_mods/configs/xvm/*
+        res://* -> ../res_mods/mods/shared_resources/*
+        xvm://* -> ../res_mods/mods/shared_resources/xvm/*
         """
            
         font_path = resolve_path(path).lower()
