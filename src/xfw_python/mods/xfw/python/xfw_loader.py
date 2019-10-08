@@ -21,6 +21,7 @@ import glob
 import json
 import logging
 import os
+import platform
 import sys
 import shutil
 import traceback
@@ -244,6 +245,19 @@ def xfw_mods_load():
                 print "[XFW] Error with mod: '%s'. Client version is higher than required: current: '%s', required: '%s'" % (mod_name, VERSION.WOT_VERSION_SHORT, mod['wot_version_min'])
                 mods_failed.append(mod_name)
                 continue
+
+        #Check architecture
+        failed = False
+        if 'architecture' in mod:
+            failed = True
+            for arch in mod['architecture']:
+                if arch == platform.architecture()[0]:
+                    failed = False
+
+        if failed == True:
+            print "[XFW] Error with mod: '%s'. Current architecture is not supported: '%s'" % (mod_name, platform.architecture()[0])
+            mods_failed.append(mod_name)
+            continue
 
         #check features
         failed = False   
