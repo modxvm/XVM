@@ -11,8 +11,11 @@ from xfw.constants import PATH
 from consts import *
 from logger import *
 
+#Compile subdirectories
+for element in glob.iglob("../res_mods/configs/xvm/py_macro/**", recursive=True):
+    if os.path.isdir(element):
+        compileall.compile_dir(element, quiet = 1)
 
-compileall.compile_dir("../res_mods/configs/xvm/py_macro/xvm", quiet = 1)
 sys.path.append("../res_mods/configs/xvm/py_macro")
 
 # Globals
