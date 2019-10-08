@@ -9,7 +9,10 @@
   [HANGAR]
   * removed option:
       "hangar"/"showDogtagWidget"
-
+  
+  [PYTHON MACROS]
+  * totalEfficiency: added macro {{py:xvm.assistStun}}
+  
 XVM-8.0.7:
   [GENERAL]
   * Fix platoons for Grand Race
