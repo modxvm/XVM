@@ -6,6 +6,7 @@
 from pprint import pprint
 from glob import glob
 import os
+import platform
 import re
 import time
 import traceback
@@ -158,13 +159,14 @@ try:
     wot_ver = wot_ver[2:wot_ver.index('#') - 1]
     wot_ver = wot_ver if not ' ' in wot_ver else wot_ver[:wot_ver.index(' ')]  # X.Y.Z or X.Y.Z.a
 
-    log("    XVM Version   : %s" % XVM.XVM_VERSION)
-    log("    XVM Revision  : %s" % __revision__)
-    log("    XVM Branch    : %s" % __branch__)
-    log("    XVM Hash      : %s" % __node__)
-#    log("    WoT Supported : %s" % ", ".join(XFW_MOD_INFO['GAME_VERSIONS']))
-    log("    WoT Current   : %s" % wot_ver)
-    log("    Current Time  : %s %+05d" % (datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+    log("    XVM Version     : %s" % XVM.XVM_VERSION)
+    log("    XVM Revision    : %s" % __revision__)
+    log("    XVM Branch      : %s" % __branch__)
+    log("    XVM Hash        : %s" % __node__)
+#   log("    WoT Supported   : %s" % ", ".join(XFW_MOD_INFO['GAME_VERSIONS']))
+    log("    WoT Current     : %s" % wot_ver)
+    log("    WoT Architecture: %s" % platform.architecture()[0])
+    log("    Current Time    : %s %+05d" % (datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
         round((round((datetime.now()-datetime.utcnow()).total_seconds())/1800)/2) * 100))
 
     xvm_fonts_arr = glob(os.environ['WINDIR'] + '/Fonts/*xvm*')
