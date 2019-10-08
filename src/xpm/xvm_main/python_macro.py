@@ -12,9 +12,9 @@ from consts import *
 from logger import *
 
 #Compile subdirectories
-for element in glob.iglob("../res_mods/configs/xvm/py_macro/**", recursive=True):
-    if os.path.isdir(element):
-        compileall.compile_dir(element, quiet = 1)
+for root, dirnames, filenames in os.walk("../res_mods/configs/xvm/py_macro/"):
+    for dirname in dirnames:
+        compileall.compile_dir(os.path.join(root, dirname), quiet = 1)
 
 sys.path.append("../res_mods/configs/xvm/py_macro")
 
