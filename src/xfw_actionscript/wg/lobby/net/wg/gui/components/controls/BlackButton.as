@@ -115,7 +115,7 @@ package net.wg.gui.components.controls
             var _loc1_:* = NaN;
             if(textField != null && StringUtils.isNotEmpty(textField.text))
             {
-                _loc1_ = textField.textWidth + (this.image.visible?this.image.width:_paddingHorizontal + _textFieldPaddingHorizontal << 1);
+                _loc1_ = textField.textWidth + (this.image.visible?this.image.width:_paddingHorizontal + textFieldPaddingHorizontal << 1);
                 if(this.canChangeSize(_loc1_))
                 {
                     this.width = _loc1_;

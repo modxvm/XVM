@@ -221,6 +221,96 @@ package
 
         public static const SPACE06_DESCR:String = "#crew_skins:Space06/Descr";
 
+        public static const RACE01_NAME:String = "#crew_skins:Race01/Name";
+
+        public static const RACE01_LASTNAME:String = "#crew_skins:Race01/LastName";
+
+        public static const RACE01_DESCR:String = "#crew_skins:Race01/Descr";
+
+        public static const RACE02_NAME:String = "#crew_skins:Race02/Name";
+
+        public static const RACE02_LASTNAME:String = "#crew_skins:Race02/LastName";
+
+        public static const RACE02_DESCR:String = "#crew_skins:Race02/Descr";
+
+        public static const RACE03_NAME:String = "#crew_skins:Race03/Name";
+
+        public static const RACE03_LASTNAME:String = "#crew_skins:Race03/LastName";
+
+        public static const RACE03_DESCR:String = "#crew_skins:Race03/Descr";
+
+        public static const RACE04_NAME:String = "#crew_skins:Race04/Name";
+
+        public static const RACE04_LASTNAME:String = "#crew_skins:Race04/LastName";
+
+        public static const RACE04_DESCR:String = "#crew_skins:Race04/Descr";
+
+        public static const RACE05_NAME:String = "#crew_skins:Race05/Name";
+
+        public static const RACE05_LASTNAME:String = "#crew_skins:Race05/LastName";
+
+        public static const RACE05_DESCR:String = "#crew_skins:Race05/Descr";
+
+        public static const RACE06_NAME:String = "#crew_skins:Race06/Name";
+
+        public static const RACE06_LASTNAME:String = "#crew_skins:Race06/LastName";
+
+        public static const RACE06_DESCR:String = "#crew_skins:Race06/Descr";
+
+        public static const RACE07_NAME:String = "#crew_skins:Race07/Name";
+
+        public static const RACE07_LASTNAME:String = "#crew_skins:Race07/LastName";
+
+        public static const RACE07_DESCR:String = "#crew_skins:Race07/Descr";
+
+        public static const RACE08_NAME:String = "#crew_skins:Race08/Name";
+
+        public static const RACE08_LASTNAME:String = "#crew_skins:Race08/LastName";
+
+        public static const RACE08_DESCR:String = "#crew_skins:Race08/Descr";
+
+        public static const RACE09_NAME:String = "#crew_skins:Race09/Name";
+
+        public static const RACE09_LASTNAME:String = "#crew_skins:Race09/LastName";
+
+        public static const RACE09_DESCR:String = "#crew_skins:Race09/Descr";
+
+        public static const RACE10_NAME:String = "#crew_skins:Race10/Name";
+
+        public static const RACE10_LASTNAME:String = "#crew_skins:Race10/LastName";
+
+        public static const RACE10_DESCR:String = "#crew_skins:Race10/Descr";
+
+        public static const RACE11_NAME:String = "#crew_skins:Race11/Name";
+
+        public static const RACE11_LASTNAME:String = "#crew_skins:Race11/LastName";
+
+        public static const RACE11_DESCR:String = "#crew_skins:Race11/Descr";
+
+        public static const RACE12_NAME:String = "#crew_skins:Race12/Name";
+
+        public static const RACE12_LASTNAME:String = "#crew_skins:Race12/LastName";
+
+        public static const RACE12_DESCR:String = "#crew_skins:Race12/Descr";
+
+        public static const RACE13_NAME:String = "#crew_skins:Race13/Name";
+
+        public static const RACE13_LASTNAME:String = "#crew_skins:Race13/LastName";
+
+        public static const RACE13_DESCR:String = "#crew_skins:Race13/Descr";
+
+        public static const RACE14_NAME:String = "#crew_skins:Race14/Name";
+
+        public static const RACE14_LASTNAME:String = "#crew_skins:Race14/LastName";
+
+        public static const RACE14_DESCR:String = "#crew_skins:Race14/Descr";
+
+        public static const RACE15_NAME:String = "#crew_skins:Race15/Name";
+
+        public static const RACE15_LASTNAME:String = "#crew_skins:Race15/LastName";
+
+        public static const RACE15_DESCR:String = "#crew_skins:Race15/Descr";
+
         public function CREW_SKINS()
         {
             super();

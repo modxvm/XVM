@@ -49,8 +49,6 @@ package net.wg.infrastructure.base.meta
 
         function as_reset() : void;
 
-        function as_switchToPosmortem() : void;
-
         function as_updateEntityState(param1:String, param2:String) : int;
 
         function as_setPanelSettings(param1:int) : void;

@@ -113,6 +113,8 @@ package net.wg.gui.lobby.rankedBattles19.components.divisionsContainer
 
         public var hit:Sprite = null;
 
+        private var _nameContainer:Sprite = null;
+
         private var _iconTweenParamsStateNormal:Object;
 
         private var _iconTweenParamsStateHover:Object;
@@ -142,6 +144,9 @@ package net.wg.gui.lobby.rankedBattles19.components.divisionsContainer
             this._statusPositionSelected = STATUS_SELECTED_POSITION_BIG;
             super();
             this._tweensPool = new Vector.<Tween>(0);
+            this._nameContainer = new Sprite();
+            addChild(this._nameContainer);
+            this._nameContainer.addChild(this.nameTf);
         }
 
         private static function onTweenCompleteHandler(param1:Tween) : void
@@ -196,9 +201,9 @@ package net.wg.gui.lobby.rankedBattles19.components.divisionsContainer
                 if(_loc1_)
                 {
                     this.playTween(TWEEN_TIME_DEF,this.icon,this._iconTweenParamsStateSelected);
-                    this.nameTf.alpha = 0;
-                    this.nameTf.visible = true;
-                    this.playTween(TWEEN_TIME_DEF,this.nameTf,TWEEN_NAMETF_SELECTED_PARAMS);
+                    this._nameContainer.alpha = 0;
+                    this._nameContainer.visible = true;
+                    this.playTween(TWEEN_TIME_DEF,this._nameContainer,TWEEN_NAMETF_SELECTED_PARAMS);
                     this.playTween(TWEEN_TIME_DEF,this.status,this._statusPositionSelected);
                 }
                 else if(this._currentState == NORMAL_STATE)
@@ -206,7 +211,7 @@ package net.wg.gui.lobby.rankedBattles19.components.divisionsContainer
                     if(this._oldState == SELECTED_STATE)
                     {
                         this.playTween(TWEEN_TIME_DEF,this.icon,this._iconTweenParamsStateNormal);
-                        this.playTween(TWEEN_TIME_DEF,this.nameTf,TWEEN_NAMETF_NORMAL_PARAMS,{
+                        this.playTween(TWEEN_TIME_DEF,this._nameContainer,TWEEN_NAMETF_NORMAL_PARAMS,{
                             "paused":false,
                             "onComplete":this.onTweenNameTfNormalCompleteHandler
                         });
@@ -220,7 +225,7 @@ package net.wg.gui.lobby.rankedBattles19.components.divisionsContainer
                     {
                         this.icon.alpha = ICON_NORMAL_ALPHA;
                         this.icon.width = this.icon.height = this._isSmall?SIZE_NORMAL_SMALL:SIZE_NORMAL_BIG;
-                        this.nameTf.visible = false;
+                        this._nameContainer.visible = false;
                         if(this.status.visible)
                         {
                             this.status.x = this._statusPositionNormal.x;
@@ -242,6 +247,7 @@ package net.wg.gui.lobby.rankedBattles19.components.divisionsContainer
             removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
             this.icon.dispose();
             this.icon = null;
+            this._nameContainer.removeChild(this.nameTf);
             this.nameTf = null;
             this.status.dispose();
             this.status = null;
@@ -259,6 +265,8 @@ package net.wg.gui.lobby.rankedBattles19.components.divisionsContainer
             }
             this._tweensPool.splice(0,this._tweensPool.length);
             this._tweensPool = null;
+            removeChild(this._nameContainer);
+            this._nameContainer = null;
             super.onDispose();
         }
 
@@ -300,7 +308,7 @@ package net.wg.gui.lobby.rankedBattles19.components.divisionsContainer
 
         private function onTweenNameTfNormalCompleteHandler(param1:Tween) : void
         {
-            this.nameTf.visible = false;
+            this._nameContainer.visible = false;
             onTweenCompleteHandler(param1);
         }
 

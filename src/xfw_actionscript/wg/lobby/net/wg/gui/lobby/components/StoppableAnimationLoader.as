@@ -46,7 +46,7 @@ package net.wg.gui.lobby.components
         override protected function draw() : void
         {
             super.draw();
-            if(this._data != null && isInvalid(InvalidationType.DATA) && this._playAnimation)
+            if(this._data != null && isInvalid(InvalidationType.DATA))
             {
                 this.loadBackAnimation();
             }

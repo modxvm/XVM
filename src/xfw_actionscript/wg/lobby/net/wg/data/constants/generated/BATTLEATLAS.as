@@ -247,6 +247,16 @@ package net.wg.data.constants.generated
 
         public static const BADGE_80:String = "badge_80";
 
+        public static const BADGE_81:String = "badge_81";
+
+        public static const BADGE_82:String = "badge_82";
+
+        public static const BADGE_83:String = "badge_83";
+
+        public static const BADGE_84:String = "badge_84";
+
+        public static const BADGE_85:String = "badge_85";
+
         public static const BADGE_9:String = "badge_9";
 
         public static const BATTLE_LOADING_FORM_BG_TABLE:String = "battleLoadingFormBgTable";
@@ -2672,6 +2682,10 @@ package net.wg.data.constants.generated
         public static const USSR_R160_T_50_2:String = "ussr-R160_T_50_2";
 
         public static const USSR_R161_T_116:String = "ussr-R161_T_116";
+
+        public static const USSR_R165_OBJECT_703_II:String = "ussr-R165_Object_703_II";
+
+        public static const USSR_R165_OBJECT_703_II_2:String = "ussr-R165_Object_703_II_2";
 
         public static const USSR_R17_SU_100:String = "ussr-R17_SU-100";
 

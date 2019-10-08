@@ -3,12 +3,13 @@ package net.wg.gui.components.tooltips
     import flash.text.TextField;
     import flash.display.Sprite;
     import net.wg.gui.cyberSport.controls.CSVehicleButton;
+    import net.wg.infrastructure.base.UIComponentEx;
     import net.wg.data.managers.ITooltipProps;
     import net.wg.utils.ILocale;
     import net.wg.gui.components.tooltips.VO.SuitableVehicleVO;
     import flash.text.TextFieldAutoSize;
-    import net.wg.gui.components.tooltips.helpers.Utils;
     import net.wg.data.constants.generated.TOOLTIPS_CONSTANTS;
+    import net.wg.gui.components.tooltips.helpers.Utils;
     import flash.display.MovieClip;
     import net.wg.gui.rally.vo.VehicleVO;
     import net.wg.gui.rally.vo.SettingRosterVO;
@@ -24,15 +25,15 @@ package net.wg.gui.components.tooltips
 
         public var alertSuitable:TextField = null;
 
+        private var _conditionBtnList:Vector.<CSVehicleButton> = null;
+
+        private var _vehicleBlockItems:Vector.<UIComponentEx> = null;
+
         private const MARGIN_BEETWEEN_BLOCKS:Number = 3;
 
         private const MARGIN_AFTER_SUBHEADER:Number = 20;
 
-        private var i:uint = 0;
-
         private const MIN_CONTENT_WIDTH:Number = 275;
-
-        private var conditionCSVehicleButtonList:Vector.<CSVehicleButton> = null;
 
         private const MAX_CONDITIONS_CS_VEHICLES_BUTTONS:Number = 2;
 
@@ -43,44 +44,9 @@ package net.wg.gui.components.tooltips
             this.notEnoughTF = content.notEnoughTF;
             this.whiteBg = content.whiteBg;
             this.alertSuitable = content.alertSuitable;
-            this.conditionCSVehicleButtonList = new Vector.<CSVehicleButton>();
+            this._conditionBtnList = new Vector.<CSVehicleButton>();
+            this._vehicleBlockItems = new Vector.<UIComponentEx>();
             this.addVehicleButtons();
-        }
-
-        private function addVehicleButtons() : void
-        {
-            this.i = 0;
-            while(this.i < this.MAX_CONDITIONS_CS_VEHICLES_BUTTONS)
-            {
-                this.conditionCSVehicleButtonList[this.i] = this.createVehicleButton();
-                this.i++;
-            }
-        }
-
-        private function createVehicleButton() : CSVehicleButton
-        {
-            var _loc1_:CSVehicleButton = null;
-            _loc1_ = App.utils.classFactory.getComponent("CSVehicleButtonUI",CSVehicleButton);
-            _loc1_.visible = false;
-            _loc1_.enabled = false;
-            content.addChild(_loc1_);
-            return _loc1_;
-        }
-
-        override protected function onDispose() : void
-        {
-            var _loc1_:CSVehicleButton = null;
-            if(this.conditionCSVehicleButtonList)
-            {
-                while(this.conditionCSVehicleButtonList.length > 0)
-                {
-                    _loc1_ = this.conditionCSVehicleButtonList.pop();
-                    _loc1_.dispose();
-                    content.removeChild(_loc1_);
-                    _loc1_ = null;
-                }
-            }
-            super.onDispose();
         }
 
         override public function build(param1:Object, param2:ITooltipProps) : void
@@ -93,33 +59,57 @@ package net.wg.gui.components.tooltips
             return "[WG ToolTipSuitableVehicle " + name + "]";
         }
 
-        override protected function configUI() : void
+        override protected function onDispose() : void
         {
-            super.configUI();
+            var _loc1_:UIComponentEx = null;
+            var _loc2_:CSVehicleButton = null;
+            if(this._conditionBtnList)
+            {
+                while(this._conditionBtnList.length > 0)
+                {
+                    _loc2_ = this._conditionBtnList.pop();
+                    _loc2_.dispose();
+                    content.removeChild(_loc2_);
+                    _loc2_ = null;
+                }
+                this._conditionBtnList = null;
+            }
+            for each(_loc1_ in this._vehicleBlockItems)
+            {
+                content.removeChild(_loc1_);
+                _loc1_.dispose();
+            }
+            this._vehicleBlockItems.splice(0,this._vehicleBlockItems.length);
+            this._vehicleBlockItems = null;
+            this.headerTF = null;
+            this.notEnoughTF = null;
+            this.whiteBg = null;
+            this.alertSuitable = null;
+            super.onDispose();
         }
 
         override protected function redraw() : void
         {
             var _loc1_:ILocale = null;
             var _loc2_:SuitableVehicleVO = null;
-            var _loc4_:Separator = null;
-            var _loc5_:TextField = null;
-            var _loc6_:* = 0;
-            var _loc7_:uint = 0;
-            var _loc8_:TextField = null;
+            var _loc4_:uint = 0;
+            var _loc5_:uint = 0;
+            var _loc6_:TextField = null;
+            var _loc7_:* = 0;
+            var _loc8_:uint = 0;
+            var _loc9_:TextField = null;
             _loc1_ = App.utils.locale;
             _loc2_ = new SuitableVehicleVO(_data);
-            var _loc3_:Number = 300;
-            _loc4_ = null;
+            var _loc3_:Separator = null;
             separators = new Vector.<Separator>();
             this.headerTF.autoSize = TextFieldAutoSize.LEFT;
             if(!_loc2_.isCreator)
             {
-                this.headerTF.htmlText = Utils.instance.htmlWrapper(_loc1_.makeString(_loc2_.toolTipType == TOOLTIPS_CONSTANTS.CYBER_SPORT_SLOT?TOOLTIPS.SUITABLEVEHICLE_HEADER:TOOLTIPS.CSAUTOSEARCHVEHICLE_HEADER),Utils.instance.COLOR_HEADER,18,"$TitleFont");
+                this.headerTF.htmlText = _loc1_.makeString(_loc2_.toolTipType == TOOLTIPS_CONSTANTS.CYBER_SPORT_SLOT?TOOLTIPS.SUITABLEVEHICLE_HEADER:TOOLTIPS.CSAUTOSEARCHVEHICLE_HEADER);
             }
             else
             {
-                this.headerTF.htmlText = Utils.instance.htmlWrapper(_loc1_.makeString(_loc2_.toolTipType == TOOLTIPS_CONSTANTS.CYBER_SPORT_SLOT || _loc2_.toolTipType == TOOLTIPS_CONSTANTS.FORT_SORTIE_SLOT?TOOLTIPS.SUITABLEVEHICLE_CONDITIONSTITLE:TOOLTIPS.CSAUTOSEARCHVEHICLE_CONDITIONSTITLE),Utils.instance.COLOR_HEADER,18,"$TitleFont");
+                this.headerTF.htmlText = _loc1_.makeString(_loc2_.toolTipType == TOOLTIPS_CONSTANTS.CYBER_SPORT_SLOT || _loc2_.toolTipType == TOOLTIPS_CONSTANTS.FORT_SORTIE_SLOT?TOOLTIPS.SUITABLEVEHICLE_CONDITIONSTITLE:TOOLTIPS.CSAUTOSEARCHVEHICLE_CONDITIONSTITLE);
             }
             this.headerTF.width = this.headerTF.textWidth + 5;
             this.headerTF.x = bgShadowMargin.left + contentMargin.left;
@@ -127,50 +117,52 @@ package net.wg.gui.components.tooltips
             topPosition = topPosition + (this.headerTF.textHeight + Utils.instance.MARGIN_AFTER_BLOCK);
             if(_loc2_.conditions)
             {
-                _loc4_ = Utils.instance.createSeparate(content);
-                _loc4_.y = topPosition ^ 0;
-                separators.push(_loc4_);
+                _loc3_ = Utils.instance.createSeparate(content);
+                _loc3_.y = topPosition ^ 0;
+                separators.push(_loc3_);
                 topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
                 if(!_loc2_.isCreator)
                 {
-                    _loc5_ = Utils.instance.addHeader("conditionsHeader",contentMargin.left + bgShadowMargin.left,topPosition,_loc1_.makeString(_loc2_.toolTipType == TOOLTIPS_CONSTANTS.CYBER_SPORT_SLOT?TOOLTIPS.SUITABLEVEHICLE_CONDITIONSTITLE:TOOLTIPS.CSAUTOSEARCHVEHICLE_CONDITIONSTITLE));
-                    content.addChild(_loc5_);
-                    topPosition = topPosition + (_loc5_.textHeight + this.MARGIN_AFTER_SUBHEADER ^ 0);
+                    _loc6_ = Utils.instance.addHeader("conditionsHeader",contentMargin.left + bgShadowMargin.left,topPosition,_loc1_.makeString(_loc2_.toolTipType == TOOLTIPS_CONSTANTS.CYBER_SPORT_SLOT?TOOLTIPS.SUITABLEVEHICLE_CONDITIONSTITLE:TOOLTIPS.CSAUTOSEARCHVEHICLE_CONDITIONSTITLE));
+                    content.addChild(_loc6_);
+                    topPosition = topPosition + (_loc6_.textHeight + this.MARGIN_AFTER_SUBHEADER ^ 0);
                 }
-                if(this.conditionCSVehicleButtonList.length < _loc2_.conditions.length && _loc2_.toolTipType == TOOLTIPS_CONSTANTS.FORT_SORTIE_SLOT)
+                if(this._conditionBtnList.length < _loc2_.conditions.length && _loc2_.toolTipType == TOOLTIPS_CONSTANTS.FORT_SORTIE_SLOT)
                 {
-                    _loc6_ = this.conditionCSVehicleButtonList.length;
-                    _loc7_ = _loc2_.conditions.length;
-                    while(_loc6_++ < _loc7_)
+                    _loc7_ = this._conditionBtnList.length;
+                    _loc8_ = _loc2_.conditions.length;
+                    while(_loc7_++ < _loc8_)
                     {
-                        this.conditionCSVehicleButtonList.push(this.createVehicleButton());
+                        this._conditionBtnList.push(this.createVehicleButton());
                     }
                 }
-                this.i = 0;
-                while(this.i < _loc2_.conditions.length)
+                _loc5_ = _loc2_.conditions.length;
+                _loc4_ = 0;
+                while(_loc4_ < _loc5_)
                 {
-                    if(_loc2_.conditions[this.i])
+                    if(_loc2_.conditions[_loc4_])
                     {
-                        topPosition = this.addCondition(content,_loc2_.conditions[this.i],topPosition,this.conditionCSVehicleButtonList[this.i]);
+                        topPosition = this.addCondition(content,_loc2_.conditions[_loc4_],topPosition,this._conditionBtnList[_loc4_]);
                     }
-                    this.i++;
+                    _loc4_++;
                 }
             }
             if(!_loc2_.isCreator && _loc2_.vehiclesList && _loc2_.vehiclesList.length > 0)
             {
-                _loc4_ = Utils.instance.createSeparate(content);
-                _loc4_.y = topPosition ^ 0;
-                separators.push(_loc4_);
-                this.whiteBg.y = _loc4_.y;
+                _loc3_ = Utils.instance.createSeparate(content);
+                _loc3_.y = topPosition ^ 0;
+                separators.push(_loc3_);
+                this.whiteBg.y = _loc3_.y;
                 topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
-                _loc8_ = Utils.instance.addHeader("suitableHeader",contentMargin.left + bgShadowMargin.left,topPosition,_loc1_.makeString(_loc2_.toolTipType == TOOLTIPS_CONSTANTS.CYBER_SPORT_SLOT?TOOLTIPS.SUITABLEVEHICLE_SUITABLETITLE:TOOLTIPS.CSAUTOSEARCHVEHICLE_SUITABLETITLE));
-                content.addChild(_loc8_);
-                topPosition = topPosition + (_loc8_.textHeight + this.MARGIN_AFTER_SUBHEADER ^ 0);
-                this.i = 0;
-                while(this.i < _loc2_.vehiclesList.length)
+                _loc9_ = Utils.instance.addHeader("suitableHeader",contentMargin.left + bgShadowMargin.left,topPosition,_loc1_.makeString(_loc2_.toolTipType == TOOLTIPS_CONSTANTS.CYBER_SPORT_SLOT?TOOLTIPS.SUITABLEVEHICLE_SUITABLETITLE:TOOLTIPS.CSAUTOSEARCHVEHICLE_SUITABLETITLE));
+                content.addChild(_loc9_);
+                topPosition = topPosition + (_loc9_.textHeight + this.MARGIN_AFTER_SUBHEADER ^ 0);
+                _loc5_ = _loc2_.vehiclesList.length;
+                _loc4_ = 0;
+                while(_loc4_ < _loc5_)
                 {
-                    topPosition = this.addSuitableVehicleBlockItem(content,_loc2_.vehiclesList[this.i],topPosition);
-                    this.i++;
+                    topPosition = this.addSuitableVehicleBlockItem(_loc2_.vehiclesList[_loc4_],topPosition);
+                    _loc4_++;
                 }
                 this.alertSuitable.x = this.alertSuitable.y = 0;
                 this.alertSuitable.width = this.alertSuitable.height = 1;
@@ -178,10 +170,10 @@ package net.wg.gui.components.tooltips
             }
             else if(!_loc2_.isCreator)
             {
-                _loc4_ = Utils.instance.createSeparate(content);
-                _loc4_.y = topPosition ^ 0;
-                separators.push(_loc4_);
-                this.whiteBg.y = _loc4_.y;
+                _loc3_ = Utils.instance.createSeparate(content);
+                _loc3_.y = topPosition ^ 0;
+                separators.push(_loc3_);
+                this.whiteBg.y = _loc3_.y;
                 topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
                 this.alertSuitable.multiline = true;
                 this.alertSuitable.wordWrap = true;
@@ -238,6 +230,25 @@ package net.wg.gui.components.tooltips
             }
         }
 
+        private function addVehicleButtons() : void
+        {
+            var _loc1_:uint = 0;
+            while(_loc1_ < this.MAX_CONDITIONS_CS_VEHICLES_BUTTONS)
+            {
+                this._conditionBtnList[_loc1_] = this.createVehicleButton();
+                _loc1_++;
+            }
+        }
+
+        private function createVehicleButton() : CSVehicleButton
+        {
+            var _loc1_:CSVehicleButton = App.utils.classFactory.getComponent("CSVehicleButtonUI",CSVehicleButton);
+            _loc1_.visible = false;
+            _loc1_.enabled = false;
+            content.addChild(_loc1_);
+            return _loc1_;
+        }
+
         private function addCondition(param1:MovieClip, param2:Object, param3:Number, param4:CSVehicleButton) : Number
         {
             var _loc5_:* = false;
@@ -272,15 +283,16 @@ package net.wg.gui.components.tooltips
             return param3;
         }
 
-        private function addSuitableVehicleBlockItem(param1:MovieClip, param2:VehicleVO, param3:Number) : Number
+        private function addSuitableVehicleBlockItem(param1:VehicleVO, param2:Number) : Number
         {
-            var _loc4_:SuitableVehicleBlockItem = App.utils.classFactory.getComponent("SuitableVehicleBlockItemUI",SuitableVehicleBlockItem);
-            _loc4_.setData(App.utils.nations.getNationIcon(param2.nationID),param2.level,param2.smallIconPath,"../maps/icons/filters/tanks/" + param2.type + ".png",param2.shortUserName);
-            _loc4_.x = contentMargin.left + bgShadowMargin.left;
-            _loc4_.y = param3 ^ 0;
-            param1.addChild(_loc4_);
-            var param3:Number = param3 + (_loc4_.height + this.MARGIN_BEETWEEN_BLOCKS);
-            return param3;
+            var _loc3_:SuitableVehicleBlockItem = App.utils.classFactory.getComponent("SuitableVehicleBlockItemUI",SuitableVehicleBlockItem);
+            this._vehicleBlockItems.push(_loc3_);
+            _loc3_.setData(App.utils.nations.getNationIcon(param1.nationID),param1.level,param1.smallIconPath,"../maps/icons/filters/tanks/" + param1.type + ".png",param1.shortUserName);
+            _loc3_.x = contentMargin.left + bgShadowMargin.left;
+            _loc3_.y = param2 ^ 0;
+            content.addChild(_loc3_);
+            var param2:Number = param2 + (_loc3_.height + this.MARGIN_BEETWEEN_BLOCKS);
+            return param2;
         }
     }
 }

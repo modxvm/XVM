@@ -121,7 +121,7 @@ package net.wg.gui.components.carousels
             rest.unshift(param1);
             if(this._enabled)
             {
-                this._mgr.showWulfTooltip(param1);
+                this._mgr.showWulfTooltip.apply(this._mgr,rest);
             }
             else
             {

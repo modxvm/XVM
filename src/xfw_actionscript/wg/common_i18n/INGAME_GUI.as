@@ -1351,6 +1351,14 @@ package
 
         public static const REWARDWINDOW_PIGGYBANK_BTNLABEL:String = "#ingame_gui:rewardWindow/piggyBank/btnLabel";
 
+        public static const REWARDWINDOW_COMMANDER_MARINA_HEADERTEXT:String = "#ingame_gui:rewardWindow/commander_marina/headerText";
+
+        public static const REWARDWINDOW_COMMANDER_MARINA_SUBHEADERTEXT:String = "#ingame_gui:rewardWindow/commander_marina/subHeaderText";
+
+        public static const REWARDWINDOW_COMMANDER_MARINA_DESCTEXT:String = "#ingame_gui:rewardWindow/commander_marina/descText";
+
+        public static const REWARDWINDOW_COMMANDER_MARINA_BTNLABEL:String = "#ingame_gui:rewardWindow/commander_marina/btnLabel";
+
         public function INGAME_GUI()
         {
             super();

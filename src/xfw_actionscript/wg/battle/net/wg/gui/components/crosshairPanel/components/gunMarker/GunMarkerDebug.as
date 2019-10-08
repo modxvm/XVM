@@ -19,6 +19,7 @@ package net.wg.gui.components.crosshairPanel.components.gunMarker
 
         override protected function onDispose() : void
         {
+            radiusMC.filters = null;
             this.devModeFilterMatrix.splice(0);
             this.devModeFilterMatrix = null;
             this.devModeColorFilter = null;

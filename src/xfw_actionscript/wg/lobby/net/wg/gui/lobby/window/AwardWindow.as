@@ -28,19 +28,19 @@ package net.wg.gui.lobby.window
     public class AwardWindow extends AwardWindowMeta implements IAwardWindow
     {
 
-        private static const DASH_LINE_HORIZONTAL_OFFSET:Number = 20;
+        private static const DASH_LINE_HORIZONTAL_OFFSET:uint = 20;
 
-        private static const DASH_LINE_VERTICAL_TOP_PADDING:Number = 6;
+        private static const DASH_LINE_VERTICAL_TOP_PADDING:uint = 6;
 
-        private static const DASH_LINE_VERTICAL_BOTTOM_PADDING:Number = 17;
+        private static const DASH_LINE_VERTICAL_BOTTOM_PADDING:uint = 17;
 
-        private static const DEFAULT_VERTICAL_OFFSET:Number = 10;
+        private static const DEFAULT_VERTICAL_OFFSET:uint = 10;
 
-        private static const TEXTAREA_VERTICAL_OFFSET:Number = 8;
+        private static const TEXTAREA_VERTICAL_OFFSET:uint = 8;
 
-        private static const AWARD_IMAGE_BOTTOM_OFFSET:Number = 40;
+        private static const AWARD_IMAGE_BOTTOM_OFFSET:uint = 40;
 
-        private static const MIN_BUTTON_WIDTH:Number = 136;
+        private static const MIN_BUTTON_WIDTH:uint = 136;
 
         private static const MIN_WINDOW_HEIGHT:uint = 390;
 

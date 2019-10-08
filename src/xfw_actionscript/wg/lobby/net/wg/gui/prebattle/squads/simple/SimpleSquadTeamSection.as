@@ -34,6 +34,8 @@ package net.wg.gui.prebattle.squads.simple
 
         private static const BONUSES_Y:int = 5;
 
+        private static const HEADER_MESSAGE_OFFSET:int = 10;
+
         public var infoIcon:Sprite = null;
 
         public var headerIcon:Image = null;
@@ -91,6 +93,10 @@ package net.wg.gui.prebattle.squads.simple
             {
                 this._bonuses.validateNow();
                 this._bonuses.x = width - this._bonuses.width - BONUSES_OFFSET ^ 0;
+                if(!this._sectionData.isVisibleHeaderIcon)
+                {
+                    this.headerMessage.x = width - this.headerMessage.width - HEADER_MESSAGE_OFFSET;
+                }
             }
         }
 

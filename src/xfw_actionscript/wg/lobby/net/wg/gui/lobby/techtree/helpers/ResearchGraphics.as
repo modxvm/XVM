@@ -18,7 +18,9 @@ package net.wg.gui.lobby.techtree.helpers
 
         private static const LOCKED_LINE_COMP_NAME:String = "ResearchLineLocked";
 
-        private static const LOCKED_LINES_COMP_NAME:String = "ResearchLinesLocked";
+        private static const LOCKED_TWO_LINES_COMP_NAME:String = "ResearchTwoLinesLocked";
+
+        private static const LOCKED_THREE_LINES_COMP_NAME:String = "ResearchThreeLinesLocked";
 
         private static const FADE_OUT_ARROW_LOCKED:String = "ResearchArrowDisFadeOut";
 
@@ -40,7 +42,8 @@ package net.wg.gui.lobby.techtree.helpers
         override public function buildRendererLines(param1:IRenderer, param2:Vector.<IRenderer>) : void
         {
             var _loc4_:Vector.<IRenderer> = null;
-            var _loc5_:Sprite = null;
+            var _loc5_:String = null;
+            var _loc6_:Sprite = null;
             super.buildRendererLines(param1,param2);
             var _loc3_:Object = null;
             if(param1 == rootRenderer)
@@ -56,7 +59,17 @@ package net.wg.gui.lobby.techtree.helpers
                         "x":param1.getInX(),
                         "y":param1.getY()
                     };
-                    this._lockedOverlay = App.utils.classFactory.getComponent(_loc4_.length == 1?LOCKED_LINE_COMP_NAME:LOCKED_LINES_COMP_NAME,Sprite,_loc3_);
+                    _loc5_ = LOCKED_THREE_LINES_COMP_NAME;
+                    switch(_loc4_.length)
+                    {
+                        case 1:
+                            _loc5_ = LOCKED_LINE_COMP_NAME;
+                            break;
+                        case 2:
+                            _loc5_ = LOCKED_TWO_LINES_COMP_NAME;
+                            break;
+                    }
+                    this._lockedOverlay = App.utils.classFactory.getComponent(_loc5_,Sprite,_loc3_);
                     this._lockedOverlay.addEventListener(MouseEvent.ROLL_OVER,this.onLockedRollOverHandler,false,0,true);
                     this._lockedOverlay.addEventListener(MouseEvent.ROLL_OUT,this.onLockedRollOutHandler,false,0,true);
                     getSubSprite(param1).addChild(this._lockedOverlay);
@@ -68,8 +81,8 @@ package net.wg.gui.lobby.techtree.helpers
                     "x":param1.getOutX(),
                     "y":param1.getY()
                 };
-                _loc5_ = App.utils.classFactory.getComponent(FADE_OUT_ARROW_LOCKED,Sprite,_loc3_);
-                getSubSprite(param1).addChild(_loc5_);
+                _loc6_ = App.utils.classFactory.getComponent(FADE_OUT_ARROW_LOCKED,Sprite,_loc3_);
+                getSubSprite(param1).addChild(_loc6_);
             }
             param1.addEventListener(TechTreeEvent.STATE_CHANGED,this.onRendererStateChangedHandler,false,0,true);
             setBlendMode(param1,RESEARCH_ARROWS_BLEND_MODE);
@@ -90,6 +103,12 @@ package net.wg.gui.lobby.techtree.helpers
         {
             param1.removeEventListener(TechTreeEvent.STATE_CHANGED,this.onTopLevelRendererStateChangedHandler);
             param1.removeEventListener(TechTreeEvent.STATE_CHANGED,this.onRendererStateChangedHandler);
+        }
+
+        override protected function onDispose() : void
+        {
+            this._lockedOverlay = null;
+            super.onDispose();
         }
 
         public function buildTopRenderersLines(param1:Vector.<IRenderer>) : void

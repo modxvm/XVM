@@ -167,7 +167,7 @@ package net.wg.gui.components.controls.universalBtn
             var _loc1_:int = this.height;
             if(textField.text || this.image.visible)
             {
-                _loc1_ = textField.textWidth + (_paddingHorizontal + _textFieldPaddingHorizontal << 1);
+                _loc1_ = textField.textWidth + (_paddingHorizontal + textFieldPaddingHorizontal << 1);
                 if(this.image.visible)
                 {
                     _loc1_ = _loc1_ + (this.image.width + this._iconOffsetText);

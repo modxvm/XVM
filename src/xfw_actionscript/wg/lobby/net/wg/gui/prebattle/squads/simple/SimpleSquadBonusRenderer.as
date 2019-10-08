@@ -90,7 +90,7 @@ package net.wg.gui.prebattle.squads.simple
             {
                 if(this._dataVO.tooltipType == TOOLTIPS_CONSTANTS.SPECIAL)
                 {
-                    App.toolTipMgr.showWulfTooltip(this._dataVO.tooltip,null);
+                    App.toolTipMgr.showWulfTooltip(this._dataVO.tooltip);
                 }
                 else
                 {

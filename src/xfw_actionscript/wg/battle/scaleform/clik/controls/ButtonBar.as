@@ -250,23 +250,30 @@ package scaleform.clik.controls
 
         public function set selectedIndex(param1:int) : void
         {
+            var _loc3_:Button = null;
             if(param1 == this._selectedIndex)
             {
                 return;
             }
             var _loc2_:int = this._selectedIndex;
-            var _loc3_:Button = this._renderers[_loc2_] as Button;
-            if(_loc3_)
+            if(_loc2_ >= 0)
             {
-                _loc3_.selected = false;
+                _loc3_ = this._renderers[_loc2_] as Button;
+                if(_loc3_)
+                {
+                    _loc3_.selected = false;
+                }
             }
             this._selectedIndex = param1;
-            _loc3_ = this._renderers[this._selectedIndex] as Button;
-            if(_loc3_)
+            if(this._selectedIndex >= 0)
             {
-                _loc3_.selected = true;
+                _loc3_ = this._renderers[this._selectedIndex] as Button;
+                if(_loc3_)
+                {
+                    _loc3_.selected = true;
+                }
+                dispatchEventAndSound(new IndexEvent(IndexEvent.INDEX_CHANGE,true,true,this._selectedIndex,_loc2_,this._dataProvider[this._selectedIndex]));
             }
-            dispatchEventAndSound(new IndexEvent(IndexEvent.INDEX_CHANGE,true,true,this._selectedIndex,_loc2_,this._dataProvider[this._selectedIndex]));
         }
 
         public function get selectedItem() : Object

@@ -4,6 +4,7 @@ package net.wg.gui.components.tooltips
     import flash.text.TextField;
     import flash.display.MovieClip;
     import net.wg.gui.components.controls.UILoaderAlt;
+    import scaleform.clik.constants.InvalidationType;
 
     public class SuitableVehicleBlockItem extends UIComponentEx
     {
@@ -28,22 +29,17 @@ package net.wg.gui.components.tooltips
 
         private var _vIco:String = null;
 
-        private var dataDirty:Boolean = false;
+        private var _dataDirty:Boolean = false;
 
         public function SuitableVehicleBlockItem()
         {
             super();
         }
 
-        override protected function configUI() : void
-        {
-            super.configUI();
-        }
-
         override protected function draw() : void
         {
             super.draw();
-            if(this.dataDirty)
+            if(this._dataDirty && isInvalid(InvalidationType.DATA))
             {
                 this.levelMc.gotoAndStop(this._lNum);
                 this.vehicleType.source = this._vType;
@@ -51,8 +47,21 @@ package net.wg.gui.components.tooltips
                 this.vehicleIco.source = this._vIco;
                 this.vehicleName.htmlText = this._vName;
                 this.vehicleName.width = this.vehicleName.textWidth + 3;
-                this.dataDirty = false;
+                this._dataDirty = false;
             }
+        }
+
+        override protected function onDispose() : void
+        {
+            this.vehicleType.dispose();
+            this.vehicleType = null;
+            this.nationIco.dispose();
+            this.nationIco = null;
+            this.vehicleIco.dispose();
+            this.vehicleIco = null;
+            this.vehicleName = null;
+            this.levelMc = null;
+            super.onDispose();
         }
 
         public function setData(param1:String, param2:uint, param3:String, param4:String, param5:String) : void
@@ -62,8 +71,8 @@ package net.wg.gui.components.tooltips
             this._vIco = param3;
             this._vType = param4;
             this._vName = param5;
-            this.dataDirty = true;
-            validateNow();
+            this._dataDirty = true;
+            invalidateData();
         }
     }
 }

@@ -31,6 +31,8 @@ package net.wg.gui.lobby.techtree.data
 
         public var itemPrices:Array = null;
 
+        public var compareBtnVisible:Boolean = true;
+
         public var compareBtnEnabled:Boolean = false;
 
         public var compareBtnLabel:String = "";

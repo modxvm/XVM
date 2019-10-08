@@ -44,6 +44,8 @@ package net.wg.gui.components.crosshairPanel
 
         function setVisibleNet(param1:int) : void;
 
+        function setNetSeparatorVisible(param1:Boolean) : void;
+
         function autoloaderUpdate(param1:Number, param2:Number, param3:Boolean) : void;
 
         function autoloaderShowShot() : void;

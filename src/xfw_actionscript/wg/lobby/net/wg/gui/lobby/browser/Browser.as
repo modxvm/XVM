@@ -25,6 +25,11 @@ package net.wg.gui.lobby.browser
             this.serviceView.visible = false;
         }
 
+        public function as_invalidateView() : void
+        {
+            invalidateViewS();
+        }
+
         override public function setSize(param1:Number, param2:Number) : void
         {
             super.setSize(param1,param2);

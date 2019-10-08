@@ -19,6 +19,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.data.constants.generated.BATTLE_TYPES;
     import net.wg.data.constants.generated.BATTLE_VIEW_ALIASES;
     import net.wg.data.constants.generated.CONSUMABLES_PANEL_SETTINGS;
+    import net.wg.data.constants.generated.CROSSHAIR_VIEW_ID;
     import net.wg.data.constants.generated.DAMAGE_INFO_PANEL_CONSTS;
     import net.wg.data.constants.generated.EPIC_CONSTS;
     import net.wg.data.constants.generated.GAME_MESSAGES_CONSTS;
@@ -358,6 +359,12 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.battle.views.directionIndicator.DirectionIndicatorImage;
     import net.wg.gui.battle.views.directionIndicator.DirectionIndicatorShape;
     import net.wg.gui.battle.views.directionIndicator.DirnIndicatorDistance;
+    import net.wg.gui.battle.views.dualGunPanel.DualGunBulletState;
+    import net.wg.gui.battle.views.dualGunPanel.DualGunChangingProgressIndicator;
+    import net.wg.gui.battle.views.dualGunPanel.DualGunPanel;
+    import net.wg.gui.battle.views.dualGunPanel.DualGunPanelGunIndicator;
+    import net.wg.gui.battle.views.dualGunPanel.DualGunPanelState;
+    import net.wg.gui.battle.views.dualGunPanel.DualGunPanelTimer;
     import net.wg.gui.battle.views.epicDeploymentMap.EpicDeploymentMap;
     import net.wg.gui.battle.views.epicDeploymentMap.components.EpicDeploymentMapEntriesContainer;
     import net.wg.gui.battle.views.epicDeploymentMap.components.EpicMapContainer;
@@ -701,6 +708,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.infrastructure.base.meta.IDebugPanelMeta;
     import net.wg.infrastructure.base.meta.IDeserterDialogMeta;
     import net.wg.infrastructure.base.meta.IDestroyTimersPanelMeta;
+    import net.wg.infrastructure.base.meta.IDualGunPanelMeta;
     import net.wg.infrastructure.base.meta.IEpicBattlePageMeta;
     import net.wg.infrastructure.base.meta.IEpicBattleStatisticDataControllerMeta;
     import net.wg.infrastructure.base.meta.IEpicBattleTimerMeta;
@@ -786,6 +794,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_DATA_CONSTANTS_GENERATED_BATTLE_VIEW_ALIASES:Class = BATTLE_VIEW_ALIASES;
 
         public static const NET_WG_DATA_CONSTANTS_GENERATED_CONSUMABLES_PANEL_SETTINGS:Class = CONSUMABLES_PANEL_SETTINGS;
+
+        public static const NET_WG_DATA_CONSTANTS_GENERATED_CROSSHAIR_VIEW_ID:Class = CROSSHAIR_VIEW_ID;
 
         public static const NET_WG_DATA_CONSTANTS_GENERATED_DAMAGE_INFO_PANEL_CONSTS:Class = DAMAGE_INFO_PANEL_CONSTS;
 
@@ -1464,6 +1474,18 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_BATTLE_VIEWS_DIRECTIONINDICATOR_DIRECTIONINDICATORSHAPE:Class = DirectionIndicatorShape;
 
         public static const NET_WG_GUI_BATTLE_VIEWS_DIRECTIONINDICATOR_DIRNINDICATORDISTANCE:Class = DirnIndicatorDistance;
+
+        public static const NET_WG_GUI_BATTLE_VIEWS_DUALGUNPANEL_DUALGUNBULLETSTATE:Class = DualGunBulletState;
+
+        public static const NET_WG_GUI_BATTLE_VIEWS_DUALGUNPANEL_DUALGUNCHANGINGPROGRESSINDICATOR:Class = DualGunChangingProgressIndicator;
+
+        public static const NET_WG_GUI_BATTLE_VIEWS_DUALGUNPANEL_DUALGUNPANEL:Class = DualGunPanel;
+
+        public static const NET_WG_GUI_BATTLE_VIEWS_DUALGUNPANEL_DUALGUNPANELGUNINDICATOR:Class = DualGunPanelGunIndicator;
+
+        public static const NET_WG_GUI_BATTLE_VIEWS_DUALGUNPANEL_DUALGUNPANELSTATE:Class = DualGunPanelState;
+
+        public static const NET_WG_GUI_BATTLE_VIEWS_DUALGUNPANEL_DUALGUNPANELTIMER:Class = DualGunPanelTimer;
 
         public static const NET_WG_GUI_BATTLE_VIEWS_EPICDEPLOYMENTMAP_EPICDEPLOYMENTMAP:Class = EpicDeploymentMap;
 
@@ -2151,6 +2173,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IDESTROYTIMERSPANELMETA:Class = IDestroyTimersPanelMeta;
 
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IDUALGUNPANELMETA:Class = IDualGunPanelMeta;
+
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IEPICBATTLEPAGEMETA:Class = IEpicBattlePageMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IEPICBATTLESTATISTICDATACONTROLLERMETA:Class = IEpicBattleStatisticDataControllerMeta;
@@ -2278,6 +2302,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_DESERTERDIALOGMETA:Class = DeserterDialogMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_DESTROYTIMERSPANELMETA:Class = DestroyTimersPanelMeta;
+
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_DUALGUNPANELMETA:Class = DualGunPanelMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_EPICBATTLEPAGEMETA:Class = EpicBattlePageMeta;
 

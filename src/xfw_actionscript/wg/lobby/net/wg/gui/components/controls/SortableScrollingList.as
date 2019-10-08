@@ -53,7 +53,7 @@ package net.wg.gui.components.controls
             {
                 this.applySorting(this._sortProps);
             }
-            if(isInvalid(COLUMNS_INVALID))
+            if(isInvalid(COLUMNS_INVALID) && this._columnsData != null)
             {
                 this.invalidateColumnsData();
             }
@@ -229,9 +229,12 @@ package net.wg.gui.components.controls
                         _loc7_ = _loc3_.hasOwnProperty("defaultSortDir")?_loc3_.defaultSortDir:0;
                         _loc8_ = _loc3_.hasOwnProperty("sortOrder")?_loc3_.sortOrder:_loc9_;
                     }
-                    this._sortingOrder[_loc8_] = _loc5_;
-                    this._sortingTypes[_loc5_] = _loc6_;
-                    this._sortingDefaults[_loc5_] = _loc7_;
+                    if(_loc8_ >= 0)
+                    {
+                        this._sortingOrder[_loc8_] = _loc5_;
+                        this._sortingTypes[_loc5_] = _loc6_;
+                        this._sortingDefaults[_loc5_] = _loc7_;
+                    }
                 }
             }
             var _loc1_:uint = 0;

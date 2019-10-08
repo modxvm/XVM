@@ -156,6 +156,12 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
         }
 
+        override protected function updateSelectedIndex() : void
+        {
+            super.updateSelectedIndex();
+            goToSelectedItem();
+        }
+
         override protected function onDispose() : void
         {
             removeEventListener(TankItemEvent.SELECT_BUY_SLOT,this.onSelectBuySlotHandler);

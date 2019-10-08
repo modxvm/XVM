@@ -242,10 +242,10 @@ package net.wg.gui.lobby.vehicleCustomization
         override protected function onDispose() : void
         {
             App.popoverMgr.hide();
-            App.stage.dispatchEvent(new LobbyEvent(LobbyEvent.UNREGISTER_DRAGGING));
             App.stage.removeEventListener(LobbyEvent.DRAGGING_START,this.onStageDraggingStartHandler);
             App.stage.removeEventListener(LobbyEvent.DRAGGING_END,this.onStageDraggingEndHandler);
             App.stage.removeEventListener(LobbyEvent.DRAGGING,this.onLobbyDraggingHandler);
+            App.stage.dispatchEvent(new LobbyEvent(LobbyEvent.UNREGISTER_DRAGGING));
             App.stage.removeEventListener(MouseEvent.MOUSE_WHEEL,this.onMouseWheelHandler);
             App.stage.removeEventListener(MouseEvent.MOUSE_UP,this.onMouseUpHandler);
             this.customizationHeader.removeEventListener(CustomizationEvent.CLOSE_VIEW,this.onCloseViewHandler);

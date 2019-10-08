@@ -103,6 +103,8 @@ package
 
         public static const PERSONALRESERVES_CARD_ACTIVATED:String = "#storage:personalreserves/card/activated";
 
+        public static const PERSONALRESERVES_CARD_NOTAVAILABLE:String = "#storage:personalreserves/card/notAvailable";
+
         public static const MODULECOMPATIBLE_LABEL:String = "#storage:moduleCompatible/label";
 
         public static const MODULECOMPATIBLE_MOREVEHICLES:String = "#storage:moduleCompatible/moreVehicles";

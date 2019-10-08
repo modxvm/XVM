@@ -12,8 +12,9 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
     import net.wg.utils.IScheduler;
     import net.wg.utils.ICounterManager;
     import net.wg.infrastructure.events.ChildVisibilityEvent;
-    import scaleform.clik.events.ButtonEvent;
     import flash.events.MouseEvent;
+    import flash.events.Event;
+    import scaleform.clik.events.ButtonEvent;
     import net.wg.gui.lobby.hangar.ammunitionPanel.events.AmmunitionPanelEvents;
     import net.wg.data.constants.generated.FITTING_TYPES;
     import net.wg.gui.lobby.components.data.DeviceSlotVO;
@@ -24,7 +25,6 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
     import net.wg.utils.helpLayout.HelpLayoutVO;
     import net.wg.infrastructure.managers.counter.CounterProps;
     import net.wg.data.constants.Linkages;
-    import flash.events.Event;
     import net.wg.data.constants.Directions;
     import net.wg.infrastructure.events.FocusRequestEvent;
     import scaleform.gfx.MouseEventEx;
@@ -62,8 +62,6 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         private static const BATTLE_ABILITIES_HIGHLIGHTER_NAME:String = "battleAbilitiesHighlighter";
 
         private static const HIGHLIGHTER_CREATE_DELAY:int = 1000;
-
-        private static const BUTTON_REAL_WIDTH:int = 131;
 
         private static const INDENT_BETWEEN_BUTTONS:int = 11;
 
@@ -169,6 +167,10 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
 
         private var _changeNationIsNew:Boolean;
 
+        private var _buttonWidth:Number = 131;
+
+        private var _buttonsList:Array;
+
         public function AmmunitionPanel()
         {
             this._toolTipMgr = App.toolTipMgr;
@@ -182,6 +184,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this._battleAbilities = new <DeviceSlot>[this.battleAbility1,this.battleAbility2,this.battleAbility3];
             this._fakeWidth = this.booster.x + this.booster.width >> 0;
             this.lastElementFocusFix.x = this.booster.x + OFFSET_LAST_ELEMENT_FOCUS_FIX;
+            this._buttonsList = [this.maintenanceBtn,this.tuningBtn,this.changeNationBtn];
             this._counterManager = App.utils.counterManager;
         }
 
@@ -195,21 +198,22 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
 
         override protected function onBeforeDispose() : void
         {
+            var _loc1_:IconTextButton = null;
+            for each(_loc1_ in this._buttonsList)
+            {
+                _loc1_.removeEventListener(MouseEvent.ROLL_OVER,this.onBtnRollOverHandler);
+                _loc1_.removeEventListener(MouseEvent.ROLL_OUT,this.onBtnRollOutHandler);
+                _loc1_.removeEventListener(Event.RESIZE,this.onResizeHandler);
+            }
+            this.maintenanceBtn.removeEventListener(ButtonEvent.CLICK,this.onMaintenanceBtnClickHandler);
             this.tuningBtn.removeEventListener(ButtonEvent.CLICK,this.onTuningBtnClickHandler);
-            this.tuningBtn.removeEventListener(MouseEvent.ROLL_OVER,this.onBtnRollOverHandler);
-            this.tuningBtn.removeEventListener(MouseEvent.ROLL_OUT,this.onBtnRollOutHandler);
             this.changeNationBtn.removeEventListener(ButtonEvent.CLICK,this.onChangeNationBtnClickHandler);
-            this.changeNationBtn.removeEventListener(MouseEvent.ROLL_OVER,this.onBtnRollOverHandler);
-            this.changeNationBtn.removeEventListener(MouseEvent.ROLL_OUT,this.onBtnRollOutHandler);
             this._scheduler.cancelTask(this.createBattleAbilitiesHighlighter);
             this.disposeSlots();
             this._shellsData = null;
             App.waiting.removeEventListener(ChildVisibilityEvent.CHILD_SHOWN,this.onChildShownHandler);
             App.waiting.removeEventListener(ChildVisibilityEvent.CHILD_HIDDEN,this.onChildHiddenHandler);
             removeEventListener(AmmunitionPanelEvents.VEHICLE_STATE_MSG_RESIZE,this.onAmmunitionPanelVehicleStateMsgResizeHandler);
-            this.maintenanceBtn.removeEventListener(ButtonEvent.CLICK,this.onMaintenanceBtnClickHandler);
-            this.maintenanceBtn.removeEventListener(MouseEvent.ROLL_OVER,this.onBtnRollOverHandler);
-            this.maintenanceBtn.removeEventListener(MouseEvent.ROLL_OUT,this.onBtnRollOutHandler);
             this.toRent.removeEventListener(MouseEvent.ROLL_OVER,this.onBtnRollOverHandler);
             this.toRent.removeEventListener(MouseEvent.ROLL_OUT,this.onBtnRollOutHandler);
             this.toRent.removeEventListener(ButtonEvent.CLICK,this.onToRentClickHandler);
@@ -240,6 +244,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this._toolTipMgr = null;
             this._utils = null;
             this._scheduler = null;
+            this._buttonsList = null;
             super.onDispose();
         }
 
@@ -277,24 +282,9 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             var _loc2_:ShellButton = null;
             var _loc3_:DeviceSlot = null;
             super.configUI();
-            this.maintenanceBtn.label = MENU.HANGAR_AMMUNITIONPANEL_MAITENANCEBTN;
-            this.maintenanceBtn.iconSource = RES_ICONS.MAPS_ICONS_BUTTONS_MAITENANCE;
-            this.tuningBtn.label = MENU.HANGAR_AMMUNITIONPANEL_TUNINGBTN;
-            this.tuningBtn.iconSource = RES_ICONS.MAPS_ICONS_BUTTONS_TUNING;
-            this.changeNationBtn.label = MENU.HANGAR_AMMUNITIONPANEL_NATIONCHANGEBTN;
-            this.changeNationBtn.iconSource = RES_ICONS.MAPS_ICONS_BUTTONS_NATION_CHANGE;
-            this.maintenanceBtn.addEventListener(ButtonEvent.CLICK,this.onMaintenanceBtnClickHandler);
-            this.maintenanceBtn.addEventListener(MouseEvent.ROLL_OVER,this.onBtnRollOverHandler);
-            this.maintenanceBtn.addEventListener(MouseEvent.ROLL_OUT,this.onBtnRollOutHandler);
-            this.tuningBtn.addEventListener(ButtonEvent.CLICK,this.onTuningBtnClickHandler);
-            this.tuningBtn.addEventListener(MouseEvent.ROLL_OVER,this.onBtnRollOverHandler);
-            this.tuningBtn.addEventListener(MouseEvent.ROLL_OUT,this.onBtnRollOutHandler);
-            this.changeNationBtn.addEventListener(ButtonEvent.CLICK,this.onChangeNationBtnClickHandler);
-            this.changeNationBtn.addEventListener(MouseEvent.ROLL_OVER,this.onBtnRollOverHandler);
-            this.changeNationBtn.addEventListener(MouseEvent.ROLL_OUT,this.onBtnRollOutHandler);
-            this.maintenanceBtn.mouseEnabledOnDisabled = true;
-            this.tuningBtn.mouseEnabledOnDisabled = true;
-            this.changeNationBtn.mouseEnabledOnDisabled = true;
+            this.configButton(this.maintenanceBtn,MENU.HANGAR_AMMUNITIONPANEL_MAITENANCEBTN,RES_ICONS.MAPS_ICONS_BUTTONS_MAITENANCE,this.onMaintenanceBtnClickHandler);
+            this.configButton(this.tuningBtn,MENU.HANGAR_AMMUNITIONPANEL_TUNINGBTN,RES_ICONS.MAPS_ICONS_BUTTONS_TUNING,this.onTuningBtnClickHandler);
+            this.configButton(this.changeNationBtn,MENU.HANGAR_AMMUNITIONPANEL_NATIONCHANGEBTN,RES_ICONS.MAPS_ICONS_BUTTONS_NATION_CHANGE,this.onChangeNationBtnClickHandler);
             for each(_loc1_ in this._optionalDevices)
             {
                 _loc1_.slotIndex = this._optionalDevices.indexOf(_loc1_);
@@ -633,15 +623,29 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                 _loc1_ = this._fakeWidth - this.vehicleStateMsg.width >> 1;
             }
             this.vehicleStateMsg.x = _loc1_;
-            var _loc2_:Number = 2 * BUTTON_REAL_WIDTH + INDENT_BETWEEN_BUTTONS;
+            var _loc2_:Number = 2 * this._buttonWidth + INDENT_BETWEEN_BUTTONS;
             if(this._changeNationBtnVisible)
             {
-                _loc2_ = _loc2_ + (BUTTON_REAL_WIDTH + INDENT_BETWEEN_BUTTONS);
+                _loc2_ = _loc2_ + (this._buttonWidth + INDENT_BETWEEN_BUTTONS);
             }
             this.maintenanceBtn.x = this._fakeWidth - _loc2_ >> 1;
-            this.tuningBtn.x = this.maintenanceBtn.x + BUTTON_REAL_WIDTH + INDENT_BETWEEN_BUTTONS;
-            this.changeNationBtn.x = this.tuningBtn.x + BUTTON_REAL_WIDTH + INDENT_BETWEEN_BUTTONS;
+            this.tuningBtn.x = this.maintenanceBtn.x + this._buttonWidth + INDENT_BETWEEN_BUTTONS;
+            this.changeNationBtn.x = this.tuningBtn.x + this._buttonWidth + INDENT_BETWEEN_BUTTONS;
             dispatchEvent(new Event(Event.RESIZE));
+        }
+
+        private function configButton(param1:IconTextButton, param2:String, param3:String, param4:Function) : void
+        {
+            param1.label = param2;
+            param1.iconSource = param3;
+            param1.textFieldPaddingHorizontal = 16;
+            param1.dynamicSizeByText = true;
+            param1.changeSizeOnlyUpwards = true;
+            param1.addEventListener(ButtonEvent.CLICK,param4);
+            param1.addEventListener(MouseEvent.ROLL_OVER,this.onBtnRollOverHandler);
+            param1.addEventListener(MouseEvent.ROLL_OUT,this.onBtnRollOutHandler);
+            param1.addEventListener(Event.RESIZE,this.onResizeHandler);
+            param1.mouseEnabledOnDisabled = true;
         }
 
         private function setHelpLayoutIds() : void
@@ -864,6 +868,27 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         {
             this.updateTuningButton(this._tuningBtnEnabled,this._tuningTooltip);
             this.updateChangeNationButton(this._changeNationBtnVisible,this._changeNationBtnEnabled,this._changeNationTooltip,this._changeNationIsNew);
+        }
+
+        private function onResizeHandler(param1:Event) : void
+        {
+            var _loc2_:IconTextButton = null;
+            var _loc3_:* = 0;
+            if(param1.currentTarget.width > this._buttonWidth)
+            {
+                this._buttonWidth = param1.currentTarget.width;
+                _loc3_ = 0;
+                while(_loc3_ < this._buttonsList.length)
+                {
+                    _loc2_ = this._buttonsList[_loc3_];
+                    if(_loc2_.width != this._buttonWidth)
+                    {
+                        _loc2_.setSize(this._buttonWidth,_loc2_.height);
+                    }
+                    _loc3_++;
+                }
+                this.centerPanel();
+            }
         }
     }
 }

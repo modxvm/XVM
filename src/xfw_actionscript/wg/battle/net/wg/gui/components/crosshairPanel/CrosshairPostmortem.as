@@ -90,6 +90,10 @@ package net.wg.gui.components.crosshairPanel
         {
         }
 
+        public function setNetSeparatorVisible(param1:Boolean) : void
+        {
+        }
+
         public function setZoom(param1:String) : void
         {
         }

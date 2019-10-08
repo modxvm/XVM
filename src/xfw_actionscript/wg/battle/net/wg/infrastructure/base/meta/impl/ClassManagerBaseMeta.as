@@ -31,6 +31,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.data.constants.generated.CUSTOMIZATION_DIALOGS;
     import net.wg.data.constants.generated.DAMAGE_LOG_SHELL_BG_TYPES;
     import net.wg.data.constants.generated.DAMAGE_SOURCE_TYPES;
+    import net.wg.data.constants.generated.DUAL_GUN_MARKER_STATE;
     import net.wg.data.constants.generated.EQUIPMENT_ITEM_TARGET;
     import net.wg.data.constants.generated.GUN_MARKER_VIEW_CONSTANTS;
     import net.wg.data.constants.generated.MISSIONS_STATES;
@@ -55,6 +56,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.data.VO.IconVO;
     import net.wg.data.VO.PaddingVO;
     import net.wg.data.VO.ProgressSimpleInfo;
+    import net.wg.data.VO.RunningTimerData;
     import net.wg.data.VO.SeparateItem;
     import net.wg.data.VO.TankCarouselFilterInitVO;
     import net.wg.data.VO.TankCarouselFilterSelectedVO;
@@ -372,6 +374,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.components.crosshairPanel.CrosshairSniper;
     import net.wg.gui.components.crosshairPanel.CrosshairStrategic;
     import net.wg.gui.components.crosshairPanel.CrosshairWithCassette;
+    import net.wg.gui.components.crosshairPanel.GunMarkersManager;
     import net.wg.gui.components.crosshairPanel.ICrosshair;
     import net.wg.gui.components.crosshairPanel.ICrosshairPanelContainer;
     import net.wg.gui.components.crosshairPanel.components.CrosshairClipQuantityBar;
@@ -379,7 +382,10 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.components.crosshairPanel.components.autoloader.AutoloaderIndicator;
     import net.wg.gui.components.crosshairPanel.components.autoloader.AutoloaderShellsCassette;
     import net.wg.gui.components.crosshairPanel.components.autoloader.AutoloaderTimer;
+    import net.wg.gui.components.crosshairPanel.components.gunMarker.DualGunMarkerArcade;
+    import net.wg.gui.components.crosshairPanel.components.gunMarker.DualGunMarkerArcadeDebug;
     import net.wg.gui.components.crosshairPanel.components.gunMarker.GunMarker;
+    import net.wg.gui.components.crosshairPanel.components.gunMarker.GunMarkerArcadeDualGunCharge;
     import net.wg.gui.components.crosshairPanel.components.gunMarker.GunMarkerArtillery;
     import net.wg.gui.components.crosshairPanel.components.gunMarker.GunMarkerDebug;
     import net.wg.gui.components.crosshairPanel.components.gunMarker.GunMarkerDebugStrategic;
@@ -388,6 +394,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.components.crosshairPanel.components.gunMarker.GunMarkerMixingSolid;
     import net.wg.gui.components.crosshairPanel.components.gunMarker.GunMarkerMixingStepPoints;
     import net.wg.gui.components.crosshairPanel.components.gunMarker.GunMarkerMixingWithoutProgress;
+    import net.wg.gui.components.crosshairPanel.components.gunMarker.GunMarkerSniperDualGunCharge;
     import net.wg.gui.components.crosshairPanel.components.gunMarker.GunMarkerStrategic;
     import net.wg.gui.components.crosshairPanel.components.gunMarker.GunMarkerTag;
     import net.wg.gui.components.crosshairPanel.components.gunMarker.IGunMarker;
@@ -731,6 +738,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.tutorial.windows.TutorialDialog;
     import net.wg.gui.utils.ExcludeTweenManager;
     import net.wg.gui.utils.FrameHelper;
+    import net.wg.gui.utils.GraphicsUtilities;
     import net.wg.gui.utils.LoaderCppCalled;
     import net.wg.gui.utils.RootSWFAtlasManager;
     import net.wg.infrastructure.base.AbstractPopOverView;
@@ -858,6 +866,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_DATA_CONSTANTS_GENERATED_DAMAGE_SOURCE_TYPES:Class = DAMAGE_SOURCE_TYPES;
 
+        public static const NET_WG_DATA_CONSTANTS_GENERATED_DUAL_GUN_MARKER_STATE:Class = DUAL_GUN_MARKER_STATE;
+
         public static const NET_WG_DATA_CONSTANTS_GENERATED_EQUIPMENT_ITEM_TARGET:Class = EQUIPMENT_ITEM_TARGET;
 
         public static const NET_WG_DATA_CONSTANTS_GENERATED_GUN_MARKER_VIEW_CONSTANTS:Class = GUN_MARKER_VIEW_CONSTANTS;
@@ -905,6 +915,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_DATA_VO_PADDINGVO:Class = PaddingVO;
 
         public static const NET_WG_DATA_VO_PROGRESSSIMPLEINFO:Class = net.wg.data.VO.ProgressSimpleInfo;
+
+        public static const NET_WG_DATA_VO_RUNNINGTIMERDATA:Class = RunningTimerData;
 
         public static const NET_WG_DATA_VO_SEPARATEITEM:Class = SeparateItem;
 
@@ -1540,6 +1552,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_COMPONENTS_CROSSHAIRPANEL_CROSSHAIRWITHCASSETTE:Class = CrosshairWithCassette;
 
+        public static const NET_WG_GUI_COMPONENTS_CROSSHAIRPANEL_GUNMARKERSMANAGER:Class = GunMarkersManager;
+
         public static const NET_WG_GUI_COMPONENTS_CROSSHAIRPANEL_ICROSSHAIR:Class = ICrosshair;
 
         public static const NET_WG_GUI_COMPONENTS_CROSSHAIRPANEL_ICROSSHAIRPANELCONTAINER:Class = ICrosshairPanelContainer;
@@ -1554,7 +1568,13 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_COMPONENTS_CROSSHAIRPANEL_COMPONENTS_AUTOLOADER_AUTOLOADERTIMER:Class = AutoloaderTimer;
 
+        public static const NET_WG_GUI_COMPONENTS_CROSSHAIRPANEL_COMPONENTS_GUNMARKER_DUALGUNMARKERARCADE:Class = DualGunMarkerArcade;
+
+        public static const NET_WG_GUI_COMPONENTS_CROSSHAIRPANEL_COMPONENTS_GUNMARKER_DUALGUNMARKERARCADEDEBUG:Class = DualGunMarkerArcadeDebug;
+
         public static const NET_WG_GUI_COMPONENTS_CROSSHAIRPANEL_COMPONENTS_GUNMARKER_GUNMARKER:Class = GunMarker;
+
+        public static const NET_WG_GUI_COMPONENTS_CROSSHAIRPANEL_COMPONENTS_GUNMARKER_GUNMARKERARCADEDUALGUNCHARGE:Class = GunMarkerArcadeDualGunCharge;
 
         public static const NET_WG_GUI_COMPONENTS_CROSSHAIRPANEL_COMPONENTS_GUNMARKER_GUNMARKERARTILLERY:Class = GunMarkerArtillery;
 
@@ -1571,6 +1591,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_COMPONENTS_CROSSHAIRPANEL_COMPONENTS_GUNMARKER_GUNMARKERMIXINGSTEPPOINTS:Class = GunMarkerMixingStepPoints;
 
         public static const NET_WG_GUI_COMPONENTS_CROSSHAIRPANEL_COMPONENTS_GUNMARKER_GUNMARKERMIXINGWITHOUTPROGRESS:Class = GunMarkerMixingWithoutProgress;
+
+        public static const NET_WG_GUI_COMPONENTS_CROSSHAIRPANEL_COMPONENTS_GUNMARKER_GUNMARKERSNIPERDUALGUNCHARGE:Class = GunMarkerSniperDualGunCharge;
 
         public static const NET_WG_GUI_COMPONENTS_CROSSHAIRPANEL_COMPONENTS_GUNMARKER_GUNMARKERSTRATEGIC:Class = GunMarkerStrategic;
 
@@ -2257,6 +2279,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_UTILS_EXCLUDETWEENMANAGER:Class = ExcludeTweenManager;
 
         public static const NET_WG_GUI_UTILS_FRAMEHELPER:Class = FrameHelper;
+
+        public static const NET_WG_GUI_UTILS_GRAPHICSUTILITIES:Class = GraphicsUtilities;
 
         public static const NET_WG_GUI_UTILS_LOADERCPPCALLED:Class = LoaderCppCalled;
 

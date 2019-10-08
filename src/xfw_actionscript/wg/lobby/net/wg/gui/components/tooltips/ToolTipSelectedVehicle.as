@@ -2,11 +2,11 @@ package net.wg.gui.components.tooltips
 {
     import flash.text.TextField;
     import flash.display.Sprite;
-    import net.wg.utils.ILocale;
+    import net.wg.infrastructure.base.UIComponentEx;
     import net.wg.gui.rally.vo.VehicleVO;
+    import net.wg.utils.ILocale;
     import flash.text.TextFieldAutoSize;
     import net.wg.gui.components.tooltips.helpers.Utils;
-    import flash.display.MovieClip;
 
     public class ToolTipSelectedVehicle extends ToolTipSpecial
     {
@@ -15,7 +15,7 @@ package net.wg.gui.components.tooltips
 
         public var whiteBg:Sprite = null;
 
-        public var vehicle:SuitableVehicleBlockItem = null;
+        private var _vehicleBlockItems:Vector.<UIComponentEx> = null;
 
         private const MIN_CONTENT_WIDTH:Number = 275;
 
@@ -26,6 +26,7 @@ package net.wg.gui.components.tooltips
             super();
             this.headerTF = content.headerTF;
             this.whiteBg = content.whiteBg;
+            this._vehicleBlockItems = new Vector.<UIComponentEx>();
         }
 
         override public function toString() : String
@@ -51,14 +52,13 @@ package net.wg.gui.components.tooltips
 
         override protected function redraw() : void
         {
-            var _loc1_:ILocale = null;
             var _loc2_:VehicleVO = null;
             var _loc3_:Separator = null;
-            _loc1_ = App.utils.locale;
+            var _loc1_:ILocale = App.utils.locale;
             _loc2_ = new VehicleVO(_data);
             separators = new Vector.<Separator>();
             this.headerTF.autoSize = TextFieldAutoSize.LEFT;
-            this.headerTF.htmlText = Utils.instance.htmlWrapper(_loc1_.makeString(TOOLTIPS.SELECTEDVEHICLE_HEADER),Utils.instance.COLOR_HEADER,18,"$TitleFont");
+            this.headerTF.htmlText = _loc1_.makeString(TOOLTIPS.SELECTEDVEHICLE_HEADER);
             this.headerTF.width = this.headerTF.textWidth + 5;
             this.headerTF.x = bgShadowMargin.left + contentMargin.left;
             this.headerTF.y = topPosition;
@@ -68,7 +68,7 @@ package net.wg.gui.components.tooltips
             separators.push(_loc3_);
             this.whiteBg.y = _loc3_.y;
             topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
-            topPosition = this.addSuitableVehicleBlockItem(content,_loc2_,topPosition);
+            topPosition = this.addSuitableVehicleBlockItem(_loc2_,topPosition);
             contentMargin.bottom = Utils.instance.MARGIN_AFTER_BLOCK;
             _loc2_.dispose();
             _loc2_ = null;
@@ -76,16 +76,32 @@ package net.wg.gui.components.tooltips
             super.redraw();
         }
 
-        private function addSuitableVehicleBlockItem(param1:MovieClip, param2:VehicleVO, param3:Number) : Number
+        override protected function onDispose() : void
         {
-            var _loc4_:SuitableVehicleBlockItem = null;
-            _loc4_ = App.utils.classFactory.getComponent("SuitableVehicleBlockItemUI",SuitableVehicleBlockItem);
-            _loc4_.setData(App.utils.nations.getNationIcon(param2.nationID),param2.level,param2.smallIconPath,"../maps/icons/filters/tanks/" + param2.type + ".png",param2.shortUserName);
-            _loc4_.x = contentMargin.left + bgShadowMargin.left;
-            _loc4_.y = param3 ^ 0;
-            param1.addChild(_loc4_);
-            var param3:Number = param3 + (_loc4_.height + this.MARGIN_BEETWEEN_BLOCKS);
-            return param3;
+            var _loc1_:UIComponentEx = null;
+            for each(_loc1_ in this._vehicleBlockItems)
+            {
+                content.removeChild(_loc1_);
+                _loc1_.dispose();
+            }
+            this._vehicleBlockItems.splice(0,this._vehicleBlockItems.length);
+            this._vehicleBlockItems = null;
+            this.headerTF = null;
+            this.whiteBg = null;
+            super.onDispose();
+        }
+
+        private function addSuitableVehicleBlockItem(param1:VehicleVO, param2:Number) : Number
+        {
+            var _loc3_:SuitableVehicleBlockItem = null;
+            _loc3_ = App.utils.classFactory.getComponent("SuitableVehicleBlockItemUI",SuitableVehicleBlockItem);
+            this._vehicleBlockItems.push(_loc3_);
+            _loc3_.setData(App.utils.nations.getNationIcon(param1.nationID),param1.level,param1.smallIconPath,"../maps/icons/filters/tanks/" + param1.type + ".png",param1.shortUserName);
+            _loc3_.x = contentMargin.left + bgShadowMargin.left;
+            _loc3_.y = param2 ^ 0;
+            content.addChild(_loc3_);
+            var param2:Number = param2 + (_loc3_.height + this.MARGIN_BEETWEEN_BLOCKS);
+            return param2;
         }
     }
 }

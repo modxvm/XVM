@@ -81,6 +81,10 @@ package net.wg.gui.components.crosshairPanel
 
         private var _isUseFrameAnimation:Boolean = true;
 
+        private var _netSeparatorVisible:Boolean = true;
+
+        private var _visibleNetMask:int = 3;
+
         public function CrosshairBase()
         {
             super();
@@ -166,7 +170,7 @@ package net.wg.gui.components.crosshairPanel
         public function setClipsParam(param1:Number, param2:Number, param3:Boolean = false) : void
         {
             this._isAutoloader = param3;
-            this.setNetSeparatorVisible();
+            this.updateNetSeparatorVisibility();
             if(this._isAutoloader)
             {
                 this.autoloaderComponent.updateTotalAmmo(param1);
@@ -240,7 +244,7 @@ package net.wg.gui.components.crosshairPanel
                 this.updateHealthBarMC();
                 this.setReloadingBarFrame();
                 this.updateAmmoCount();
-                this.setNetSeparatorVisible();
+                this.updateNetSeparatorVisibility();
             }
         }
 
@@ -295,8 +299,10 @@ package net.wg.gui.components.crosshairPanel
 
         public function setVisibleNet(param1:int) : void
         {
-            this.netMC.visible = (param1 & CROSSHAIR_CONSTANTS.VISIBLE_NET) != 0;
-            this.showAmmoCountField((param1 & CROSSHAIR_CONSTANTS.VISIBLE_AMMO_COUNT) != 0);
+            this._visibleNetMask = param1;
+            this.updateNetVisibility();
+            this.updateAmmoCountVisibility();
+            this.updateNetSeparatorVisibility();
         }
 
         public function setZoom(param1:String) : void
@@ -396,12 +402,24 @@ package net.wg.gui.components.crosshairPanel
             }
         }
 
-        private function setNetSeparatorVisible() : void
+        public function setNetSeparatorVisible(param1:Boolean) : void
+        {
+            this._netSeparatorVisible = param1;
+            this.updateNetSeparatorVisibility();
+            this.updateAmmoCountVisibility();
+        }
+
+        private function updateNetSeparatorVisibility() : void
         {
             if(this.netSeparator)
             {
-                this.netSeparator.visible = !this._isAutoloader;
+                this.netSeparator.visible = !this._isAutoloader && this._netSeparatorVisible;
             }
+        }
+
+        private function updateNetVisibility() : void
+        {
+            this.netMC.visible = (this._visibleNetMask & CROSSHAIR_CONSTANTS.VISIBLE_NET) != 0;
         }
 
         private function setAmmoCount(param1:Number, param2:Boolean) : void
@@ -415,7 +433,7 @@ package net.wg.gui.components.crosshairPanel
                     this.ammoNormalTextField.visible = false;
                 }
                 this._currentAmmoTextField = this._isLow?this.ammoLowTextField:this.ammoNormalTextField;
-                this._currentAmmoTextField.visible = !this._isAutoloader;
+                this.updateAmmoCountVisibility();
             }
             if(this._count != param1)
             {
@@ -429,8 +447,14 @@ package net.wg.gui.components.crosshairPanel
             this.ammoLowTextField.visible = false;
             this.ammoNormalTextField.visible = false;
             this._currentAmmoTextField = this._isLow?this.ammoLowTextField:this.ammoNormalTextField;
-            this._currentAmmoTextField.visible = !this._isAutoloader;
             this._currentAmmoTextField.text = this._count.toString();
+            this.updateAmmoCountVisibility();
+        }
+
+        private function updateAmmoCountVisibility() : void
+        {
+            var _loc1_:Boolean = this._netSeparatorVisible && (this._visibleNetMask & CROSSHAIR_CONSTANTS.VISIBLE_AMMO_COUNT) != 0;
+            this.showAmmoCountField(_loc1_);
         }
 
         private function setReloadingAlpha(param1:Number) : void

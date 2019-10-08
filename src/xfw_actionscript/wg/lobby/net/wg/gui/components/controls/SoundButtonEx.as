@@ -35,11 +35,11 @@ package net.wg.gui.components.controls
 
         protected var _paddingHorizontal:Number = 5;
 
-        protected var _textFieldPaddingHorizontal:Number = 4;
-
         protected var _helpText:String = "";
 
         protected var _helpDirection:String = "T";
+
+        private var _textFieldPaddingHorizontal:Number = 4;
 
         private var _minWidth:Number = NaN;
 
@@ -545,6 +545,20 @@ package net.wg.gui.components.controls
                 this._usePreventUpdateTextScale = param1;
                 invalidateSize();
             }
+        }
+
+        public function set textFieldPaddingHorizontal(param1:Number) : void
+        {
+            if(this._textFieldPaddingHorizontal != param1)
+            {
+                this._textFieldPaddingHorizontal = param1;
+                invalidateSize();
+            }
+        }
+
+        public function get textFieldPaddingHorizontal() : Number
+        {
+            return this._textFieldPaddingHorizontal;
         }
 
         protected function onMouseDownHandler(param1:MouseEvent) : void

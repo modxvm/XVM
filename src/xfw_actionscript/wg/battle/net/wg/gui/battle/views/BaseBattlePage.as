@@ -6,6 +6,7 @@ package net.wg.gui.battle.views
     import net.wg.gui.battle.battleloading.BaseBattleLoading;
     import net.wg.gui.battle.interfaces.IPrebattleTimerBase;
     import net.wg.gui.battle.views.damagePanel.DamagePanel;
+    import net.wg.gui.battle.views.dualGunPanel.DualGunPanel;
     import net.wg.gui.battle.views.minimap.BaseMinimap;
     import net.wg.infrastructure.base.meta.impl.BattleTimerMeta;
     import net.wg.gui.battle.views.ribbonsPanel.RibbonsPanel;
@@ -49,6 +50,8 @@ package net.wg.gui.battle.views
         public var prebattleTimer:IPrebattleTimerBase = null;
 
         public var damagePanel:DamagePanel = null;
+
+        public var dualGunPanel:DualGunPanel = null;
 
         public var minimap:BaseMinimap = null;
 
@@ -103,6 +106,10 @@ package net.wg.gui.battle.views
             this.damagePanel.y = param2 - this.damagePanel.initedHeight;
             this.battleTimer.x = param1 - this.battleTimer.initedWidth;
             this.battleTimer.y = 0;
+            if(this.dualGunPanel)
+            {
+                this.dualGunPanel.updateStage(param1,param2);
+            }
             this.ribbonsPanel.x = _loc3_ + this.ribbonsPanel.offsetX;
             var _loc5_:int = this.getRibbonsCenterOffset();
             var _loc6_:Number = _loc4_ - _loc5_ - RIBBONS_MIN_BOTTOM_PADDING_Y;
@@ -153,6 +160,10 @@ package net.wg.gui.battle.views
             this.registerComponent(this.vehicleErrorMessageList,BATTLE_VIEW_ALIASES.VEHICLE_ERROR_MESSAGES);
             this.registerComponent(this.playerMessageList,BATTLE_VIEW_ALIASES.PLAYER_MESSAGES);
             this.registerComponent(this.gameMessagesPanel,BATTLE_VIEW_ALIASES.GAME_MESSAGES_PANEL);
+            if(this.dualGunPanel)
+            {
+                this.registerComponent(this.dualGunPanel,BATTLE_VIEW_ALIASES.DUAL_GUN_PANEL);
+            }
             this.postmortemTips = App.utils.classFactory.getComponent(Linkages.POSTMORTEN_PANEL,PostmortemPanel);
             this.postmortemTips.setCompVisible(false);
             this.updatePostmortemTipsPosition();
@@ -171,6 +182,7 @@ package net.wg.gui.battle.views
             this.battleTimer = null;
             this.ribbonsPanel.removeEventListener(Event.CHANGE,this.onRibbonsPanelChangeHandler);
             this.ribbonsPanel = null;
+            this.dualGunPanel = null;
             this.gameMessagesPanel.removeEventListener(GameMessagesPanelEvent.MESSAGES_STARTED_PLAYING,this.onMessagesStartedPlayingHandler);
             this.gameMessagesPanel.removeEventListener(GameMessagesPanelEvent.MESSAGES_ENDED_PLAYING,this.onMessagesEndedPlayingHandler);
             this.gameMessagesPanel.removeEventListener(GameMessagesPanelEvent.ALL_MESSAGES_ENDED_PLAYING,this.onAllMessagesEndedPlayingHandler);

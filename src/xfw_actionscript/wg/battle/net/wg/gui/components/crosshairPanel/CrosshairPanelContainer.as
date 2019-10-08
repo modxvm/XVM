@@ -5,13 +5,13 @@ package net.wg.gui.components.crosshairPanel
     import flash.utils.getDefinitionByName;
     import net.wg.data.constants.Linkages;
     import net.wg.gui.components.crosshairPanel.components.speedometer.Speedometer;
-    import net.wg.gui.components.crosshairPanel.components.gunMarker.IGunMarker;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import flash.display.BlendMode;
     import flash.utils.getTimer;
     import net.wg.gui.components.crosshairPanel.constants.CrosshairConsts;
     import flash.utils.setInterval;
     import net.wg.data.constants.Values;
+    import net.wg.gui.components.crosshairPanel.components.gunMarker.IGunMarker;
     import net.wg.gui.components.crosshairPanel.VO.CrosshairSettingsVO;
     import flash.display.StageScaleMode;
     import flash.display.StageAlign;
@@ -25,13 +25,15 @@ package net.wg.gui.components.crosshairPanel
 
         private static const CROSSHAIRS_LINAKGES:Vector.<String> = new <String>[Linkages.CROSSHAIR_ARCADE_UI,Linkages.CROSSHAIR_SNIPER_UI,Linkages.CROSSHAIR_STRATEGIC_UI,Linkages.CROSSHAIR_POSTMORTEM_UI];
 
-        protected var gunMarkers:Object = null;
+        private var _gunMarkersContainer:GunMarkersManager;
 
         private var _currentCrosshair:ICrosshair = null;
 
         private var _viewId:int = -1;
 
         private var _visibleNet:int = 3;
+
+        private var _visibleNetSeparator:Boolean = true;
 
         private var _settingId:int = -1;
 
@@ -135,7 +137,6 @@ package net.wg.gui.components.crosshairPanel
         {
             super();
             this._settings = [];
-            this.gunMarkers = {};
         }
 
         private static function createComponent(param1:String) : DisplayObject
@@ -144,29 +145,14 @@ package net.wg.gui.components.crosshairPanel
             return new _loc2_();
         }
 
-        private static function cleanupObject(param1:Object) : Object
-        {
-            var _loc3_:String = null;
-            var _loc2_:Array = [];
-            for(_loc3_ in param1)
-            {
-                _loc2_.push(_loc3_);
-            }
-            for each(_loc3_ in _loc2_)
-            {
-                delete param1[_loc3_];
-            }
-            _loc2_.splice(0,_loc2_.length);
-            return null;
-        }
-
         override protected function onDispose() : void
         {
-            var _loc1_:IGunMarker = null;
-            var _loc2_:IDisposable = null;
+            var _loc1_:IDisposable = null;
             this.clearReloadingTimer();
             this.clearAutoloaderReloadTimer();
             this.clearAutoloaderAtimationTimer();
+            this._gunMarkersContainer.dispose();
+            this._gunMarkersContainer = null;
             if(this._speedometer)
             {
                 this._speedometer.dispose();
@@ -174,14 +160,9 @@ package net.wg.gui.components.crosshairPanel
             }
             this._currentCrosshair = null;
             this._settings = null;
-            for each(_loc1_ in this.gunMarkers)
+            for each(_loc1_ in this._crosshairs)
             {
                 _loc1_.dispose();
-            }
-            this.gunMarkers = cleanupObject(this.gunMarkers);
-            for each(_loc2_ in this._crosshairs)
-            {
-                _loc2_.dispose();
             }
             this._crosshairs.length = 0;
             this._crosshairs = null;
@@ -239,23 +220,17 @@ package net.wg.gui.components.crosshairPanel
         public function as_createGunMarker(param1:Number, param2:String, param3:String) : Boolean
         {
             var gunMarker:IGunMarker = null;
-            var settings:CrosshairSettingsVO = null;
             var viewID:Number = param1;
             var linkageName:String = param2;
             var sceneName:String = param3;
             try
             {
-                gunMarker = IGunMarker(addChild(createComponent(linkageName)));
-                gunMarker.name = sceneName;
-                gunMarker.setScale(this._scale);
-                this.gunMarkers[sceneName] = gunMarker;
-                settings = this._settings[this._settingId];
-                if(settings)
+                gunMarker = createComponent(linkageName) as IGunMarker;
+                if(gunMarker != null && this._gunMarkersContainer != null)
                 {
-                    gunMarker.setSettings(settings.gunTagType,settings.mixingType,settings.gunTagAlpha,settings.mixingAlpha);
+                    this._gunMarkersContainer.addGunMarker(gunMarker,sceneName);
+                    return true;
                 }
-                gunMarker.setReloadingParams(this._currReloadingPercent,this._currReloadingState);
-                return true;
             }
             catch(e:ReferenceError)
             {
@@ -265,13 +240,9 @@ package net.wg.gui.components.crosshairPanel
 
         public function as_destroyGunMarker(param1:String) : Boolean
         {
-            var _loc2_:IGunMarker = this.gunMarkers[param1];
-            if(_loc2_)
+            if(this._gunMarkersContainer != null)
             {
-                _loc2_.dispose();
-                removeChild(DisplayObject(_loc2_));
-                delete this.gunMarkers[param1];
-                return true;
+                return this._gunMarkersContainer.destroyGunMarker(param1);
             }
             return false;
         }
@@ -390,10 +361,9 @@ package net.wg.gui.components.crosshairPanel
 
         public function as_setGunMarkerColor(param1:String, param2:String) : void
         {
-            var _loc3_:IGunMarker = this.gunMarkers[param1];
-            if(_loc3_)
+            if(this._gunMarkersContainer != null)
             {
-                _loc3_.setColor(param2);
+                this._gunMarkersContainer.setGunMarkerColor(param1,param2);
             }
         }
 
@@ -403,6 +373,19 @@ package net.wg.gui.components.crosshairPanel
             if(this._currentCrosshair != null)
             {
                 this._currentCrosshair.setHealth(this._healthInPercents);
+            }
+        }
+
+        public function as_setNetSeparatorVisible(param1:Boolean) : void
+        {
+            if(this._visibleNetSeparator == param1)
+            {
+                return;
+            }
+            this._visibleNetSeparator = param1;
+            if(this._currentCrosshair != null)
+            {
+                this._currentCrosshair.setNetSeparatorVisible(this._visibleNetSeparator);
             }
         }
 
@@ -518,7 +501,6 @@ package net.wg.gui.components.crosshairPanel
         public function as_setScale(param1:Number) : void
         {
             var _loc2_:ICrosshair = null;
-            var _loc3_:IGunMarker = null;
             if(this._scale == param1)
             {
                 return;
@@ -528,12 +510,9 @@ package net.wg.gui.components.crosshairPanel
             {
                 _loc2_.scaleX = _loc2_.scaleY = this._scale;
             }
-            if(this.gunMarkers)
+            if(this._gunMarkersContainer != null)
             {
-                for each(_loc3_ in this.gunMarkers)
-                {
-                    _loc3_.setScale(this._scale);
-                }
+                this._gunMarkersContainer.setScale(this._scale);
             }
         }
 
@@ -582,6 +561,7 @@ package net.wg.gui.components.crosshairPanel
                 this._currentCrosshair = this._crosshairs[this._viewId - 1];
                 this._currentCrosshair.visible = true;
                 this._currentCrosshair.setVisibleNet(this._visibleNet);
+                this._currentCrosshair.setNetSeparatorVisible(this._visibleNetSeparator);
             }
             this.applySettings();
             this.applyData();
@@ -601,6 +581,30 @@ package net.wg.gui.components.crosshairPanel
             if(this._isAutoloader && this._currentCrosshair != null)
             {
                 this._currentCrosshair.autoloaderShowShot();
+            }
+        }
+
+        public function as_startDualGunCharging(param1:Number, param2:Number) : void
+        {
+            if(this._gunMarkersContainer != null)
+            {
+                this._gunMarkersContainer.startDualGunCharging(param1,param2);
+            }
+        }
+
+        public function as_cancelDualGunCharge() : void
+        {
+            if(this._gunMarkersContainer != null)
+            {
+                this._gunMarkersContainer.cancelDualGunCharge();
+            }
+        }
+
+        public function as_updateDualGunMarkerState(param1:int) : void
+        {
+            if(this._gunMarkersContainer != null)
+            {
+                this._gunMarkersContainer.updateDualGunMarkerState(param1);
             }
         }
 
@@ -671,6 +675,7 @@ package net.wg.gui.components.crosshairPanel
                 this._crosshairs.push(_loc1_);
                 addChild(DisplayObject(_loc1_));
             }
+            this._gunMarkersContainer = new GunMarkersManager(this);
             this._currentCrosshair = this._crosshairs[0];
             this.hideAll();
         }
@@ -795,17 +800,13 @@ package net.wg.gui.components.crosshairPanel
 
         private function applySettings() : void
         {
-            var _loc2_:IGunMarker = null;
             var _loc1_:CrosshairSettingsVO = this._settings[this._settingId];
             if(_loc1_ && this._currentCrosshair != null)
             {
                 this._currentCrosshair.setNetType(this._netType != -1?this._netType:_loc1_.netType);
                 this._currentCrosshair.setComponentsAlpha(_loc1_.netAlphaValue,_loc1_.centerAlphaValue,_loc1_.reloaderAlphaValue,_loc1_.conditionAlphaValue,_loc1_.cassetteAlphaValue,_loc1_.reloaderTimerAlphaValue,_loc1_.zoomIndicatorAlphaValue);
                 this._currentCrosshair.setCenterType(_loc1_.centerType);
-                for each(_loc2_ in this.gunMarkers)
-                {
-                    _loc2_.setSettings(_loc1_.gunTagType,_loc1_.mixingType,_loc1_.gunTagAlpha,_loc1_.mixingAlpha);
-                }
+                this._gunMarkersContainer.updateSettings(_loc1_);
             }
         }
 
@@ -828,7 +829,6 @@ package net.wg.gui.components.crosshairPanel
 
         private function updateCurrentCrosshairReloadingParams() : void
         {
-            var _loc1_:IGunMarker = null;
             if(this._currentCrosshair != null)
             {
                 if(this._isReloadingTimeFieldShown)
@@ -838,10 +838,7 @@ package net.wg.gui.components.crosshairPanel
                 this._currentCrosshair.setReloadingAsPercent(this._currReloadingPercent);
                 this._currentCrosshair.setReloadingState(this._currReloadingState);
             }
-            for each(_loc1_ in this.gunMarkers)
-            {
-                _loc1_.setReloadingParams(this._currReloadingPercent,this._currReloadingState);
-            }
+            this._gunMarkersContainer.updateReloadingParams(this._currReloadingPercent,this._currReloadingState);
         }
 
         private function clearReloadingTimer() : void

@@ -1,8 +1,8 @@
 package net.wg.gui.lobby.storage.categories.cards
 {
     import net.wg.gui.components.controls.BitmapFill;
-    import flash.display.MovieClip;
     import flash.text.TextField;
+    import net.wg.infrastructure.managers.ITooltipMgr;
     import flash.text.TextFieldAutoSize;
     import flash.geom.Rectangle;
     import flash.display.Graphics;
@@ -20,14 +20,17 @@ package net.wg.gui.lobby.storage.categories.cards
 
         public var disabled:BitmapFill;
 
-        public var activatedIcon:MovieClip;
-
         public var activatedTF:TextField;
+
+        public var disabledTF:TextField;
 
         public var alertTF:TextField;
 
+        private var _toolTipMgr:ITooltipMgr;
+
         public function PersonalReservesCard()
         {
+            this._toolTipMgr = App.toolTipMgr;
             super();
         }
 
@@ -35,19 +38,22 @@ package net.wg.gui.lobby.storage.categories.cards
         {
             this.disabled.dispose();
             this.disabled = null;
-            this.activatedIcon = null;
             this.activatedTF = null;
             this.alertTF = null;
+            this.disabledTF = null;
+            this._toolTipMgr = null;
             super.onDispose();
         }
 
         override protected function configUI() : void
         {
             super.configUI();
-            this.activatedIcon.mouseEnabled = this.activatedIcon.mouseChildren = false;
             this.activatedTF.mouseEnabled = this.activatedTF.mouseWheelEnabled = false;
             this.activatedTF.text = STORAGE.PERSONALRESERVES_CARD_ACTIVATED;
             this.activatedTF.autoSize = TextFieldAutoSize.LEFT;
+            this.disabledTF.mouseEnabled = this.disabledTF.mouseWheelEnabled = false;
+            this.disabledTF.text = STORAGE.PERSONALRESERVES_CARD_NOTAVAILABLE;
+            this.disabledTF.autoSize = TextFieldAutoSize.LEFT;
             sellButton.label = STORAGE.BUTTONLABEL_ACTIVATE;
         }
 
@@ -66,7 +72,8 @@ package net.wg.gui.lobby.storage.categories.cards
                 this.alertTF.htmlText = _data.additionalInfo;
                 inInventoryCountTF.visible = inInventoryIcon.visible = _data.count > 0;
                 inInventoryCountTF.text = _data.count.toString();
-                this.activatedIcon.visible = this.activatedTF.visible = _data.active;
+                this.activatedTF.visible = _data.active;
+                this.disabledTF.visible = !_data.available;
                 sellButton.visible = _data.enabled;
                 if(_resetViewOnDataChange)
                 {
@@ -130,10 +137,8 @@ package net.wg.gui.lobby.storage.categories.cards
                 this.alertTF.x = _loc1_.right - this.alertTF.width;
                 this.alertTF.y = ALERT_TOP;
                 _container.y = this.getContainerYRolloutPosition();
-                this.activatedIcon.x = _loc1_.left;
-                this.activatedIcon.y = _loc1_.top;
-                this.activatedTF.x = this.activatedIcon.x + this.activatedIcon.width;
-                this.activatedTF.y = this.activatedIcon.y + (this.activatedIcon.height - this.activatedTF.height >> 1);
+                this.disabledTF.x = this.activatedTF.x = _loc1_.left;
+                this.disabledTF.y = this.activatedTF.y = ALERT_TOP;
                 sellButton.x = _loc1_.right - sellButton.width >> 0;
                 sellButton.y = _loc1_.bottom - sellButton.height >> 0;
                 sellButton.alpha = 0;
@@ -203,9 +208,13 @@ package net.wg.gui.lobby.storage.categories.cards
             {
                 super.onRollOver();
             }
+            else if(_data.available)
+            {
+                this._toolTipMgr.show(TOOLTIPS.BOOSTER_ACTIVEBTN_DISABLED_BODY);
+            }
             else
             {
-                App.toolTipMgr.show(TOOLTIPS.BOOSTER_ACTIVEBTN_DISABLED_BODY);
+                this._toolTipMgr.show(TOOLTIPS.BOOSTER_ACTIVEBTN_NOTAVAILABLE_BODY);
             }
         }
 
@@ -217,7 +226,7 @@ package net.wg.gui.lobby.storage.categories.cards
             }
             else
             {
-                App.toolTipMgr.hide();
+                this._toolTipMgr.hide();
             }
         }
     }

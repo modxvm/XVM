@@ -43,6 +43,8 @@ package net.wg.infrastructure.base.meta
 
         function as_setNetVisible(param1:int) : void;
 
+        function as_setNetSeparatorVisible(param1:Boolean) : void;
+
         function as_setNetType(param1:int) : void;
 
         function as_autoloaderUpdate(param1:Number, param2:Number, param3:Boolean, param4:Boolean, param5:Boolean) : void;
@@ -72,5 +74,11 @@ package net.wg.infrastructure.base.meta
         function as_setEngineCrushError(param1:String) : void;
 
         function as_stopEngineCrushError() : void;
+
+        function as_startDualGunCharging(param1:Number, param2:Number) : void;
+
+        function as_cancelDualGunCharge() : void;
+
+        function as_updateDualGunMarkerState(param1:int) : void;
     }
 }

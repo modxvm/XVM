@@ -1715,6 +1715,12 @@ package
 
         public static const SERVICECHANNELMESSAGES_CREWBOOKSCOUNT:String = "#messenger:serviceChannelMessages/crewBooksCount";
 
+        public static const SERVICECHANNELMESSAGES_FLEXCHANGE_QUESTS:String = "#messenger:serviceChannelMessages/flExchange/quests";
+
+        public static const SERVICECHANNELMESSAGES_FLEXCHANGE_QUESTS_POINTS:String = "#messenger:serviceChannelMessages/flExchange/quests/points";
+
+        public static const SERVICECHANNELMESSAGES_FLEXCHANGE_QUESTS_REWARD:String = "#messenger:serviceChannelMessages/flExchange/quests/reward";
+
         public function MESSENGER()
         {
             super();

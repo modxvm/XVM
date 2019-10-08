@@ -1267,6 +1267,10 @@ package
 
         public static const CAMOUFLAGE_BR_PAID_LABEL:String = "#vehicle_customization:camouflage/br_paid/label";
 
+        public static const CAMOUFLAGE_CHAFFEE_LABEL:String = "#vehicle_customization:camouflage/chaffee/label";
+
+        public static const CAMOUFLAGE_CHAFFEE_DESCRIPTION:String = "#vehicle_customization:camouflage/chaffee/description";
+
         public static const CAMOUFLAGE_BR_PAID_DESCRIPTION:String = "#vehicle_customization:camouflage/br_paid/description";
 
         public static const CAMOUFLAGE_BR_AWARD_15_LABEL:String = "#vehicle_customization:camouflage/br_award_15/label";
@@ -1286,6 +1290,18 @@ package
         public static const CAMOUFLAGE_WG_FEST_2019_DESCRIPTION:String = "#vehicle_customization:camouflage/wg_fest_2019/description";
 
         public static const CAMOUFLAGE_WOT_FEST_2019_LABEL:String = "#vehicle_customization:camouflage/wot_fest_2019/label";
+
+        public static const CAMOUFLAGE_RACING_2019_TEAM_C_LABEL:String = "#vehicle_customization:camouflage/racing_2019_team_c/label";
+
+        public static const CAMOUFLAGE_RACING_2019_TEAM_C_DESCRIPTION:String = "#vehicle_customization:camouflage/racing_2019_team_c/description";
+
+        public static const CAMOUFLAGE_RACING_2019_TEAM_B_LABEL:String = "#vehicle_customization:camouflage/racing_2019_team_b/label";
+
+        public static const CAMOUFLAGE_RACING_2019_TEAM_B_DESCRIPTION:String = "#vehicle_customization:camouflage/racing_2019_team_b/description";
+
+        public static const CAMOUFLAGE_RACING_2019_TEAM_A_LABEL:String = "#vehicle_customization:camouflage/racing_2019_team_a/label";
+
+        public static const CAMOUFLAGE_RACING_2019_TEAM_A_DESCRIPTION:String = "#vehicle_customization:camouflage/racing_2019_team_a/description";
 
         public static const CAMOUFLAGE_WOT_FEST_2019_DESCRIPTION:String = "#vehicle_customization:camouflage/wot_fest_2019/description";
 
@@ -1440,6 +1456,10 @@ package
         public static const CAMOUFLAGE_HISTORICAL_CUSTOM_LOOK_KOREA_LABEL:String = "#vehicle_customization:camouflage/historical_custom_look_korea/label";
 
         public static const CAMOUFLAGE_HISTORICAL_CUSTOM_LOOK_KOREA_DESCRIPTION:String = "#vehicle_customization:camouflage/historical_custom_look_korea/description";
+
+        public static const CAMOUFLAGE_T_OCTOBER_LABEL:String = "#vehicle_customization:camouflage/t_october/label";
+
+        public static const CAMOUFLAGE_T_OCTOBER_DESCRIPTION:String = "#vehicle_customization:camouflage/t_october/description";
 
         public static const EMBLEM:String = "#vehicle_customization:emblem";
 
@@ -2549,6 +2569,12 @@ package
 
         public static const EMBLEM_SPECIAL_STICKER_493_DESCRIPTION:String = "#vehicle_customization:emblem/special/sticker_493/description";
 
+        public static const EMBLEM_SPECIAL_STICKER_494:String = "#vehicle_customization:emblem/special/sticker_494";
+
+        public static const EMBLEM_SPECIAL_STICKER_495:String = "#vehicle_customization:emblem/special/sticker_495";
+
+        public static const EMBLEM_SPECIAL_STICKER_496:String = "#vehicle_customization:emblem/special/sticker_496";
+
         public static const EMBLEM_SPECIAL_STICKER_497:String = "#vehicle_customization:emblem/special/sticker_497";
 
         public static const EMBLEM_SPECIAL_STICKER_497_DESCRIPTION:String = "#vehicle_customization:emblem/special/sticker_497/description";
@@ -2584,6 +2610,8 @@ package
         public static const EMBLEM_SPECIAL_STICKER_513:String = "#vehicle_customization:emblem/special/sticker_513";
 
         public static const EMBLEM_SPECIAL_STICKER_514:String = "#vehicle_customization:emblem/special/sticker_514";
+
+        public static const EMBLEM_SPECIAL_STICKER_515:String = "#vehicle_customization:emblem/special/sticker_515";
 
         public static const INSCRIPTION:String = "#vehicle_customization:inscription";
 
@@ -3821,6 +3849,10 @@ package
 
         public static const INSCRIPTION_SPECIAL_INSCRIPTION_267:String = "#vehicle_customization:inscription/special/inscription_267";
 
+        public static const INSCRIPTION_SPECIAL_INSCRIPTION_268:String = "#vehicle_customization:inscription/special/inscription_268";
+
+        public static const INSCRIPTION_SPECIAL_INSCRIPTION_269:String = "#vehicle_customization:inscription/special/inscription_269";
+
         public static const INSCRIPTION_SPECIAL_INSCRIPTION_270:String = "#vehicle_customization:inscription/special/inscription_270";
 
         public static const INSCRIPTION_SPECIAL_INSCRIPTION_271:String = "#vehicle_customization:inscription/special/inscription_271";
@@ -4857,9 +4889,17 @@ package
 
         public static const REPAINT_WOT_FEST_2019:String = "#vehicle_customization:repaint/wot_fest_2019";
 
+        public static const REPAINT_RACING_2019_TEAM_A:String = "#vehicle_customization:repaint/racing_2019_team_a";
+
+        public static const REPAINT_RACING_2019_TEAM_C:String = "#vehicle_customization:repaint/racing_2019_team_c";
+
+        public static const REPAINT_RACING_2019_TEAM_B:String = "#vehicle_customization:repaint/racing_2019_team_b";
+
         public static const REPAINT_HISTORICAL_CUSTOM_LOOK_VIETNAM:String = "#vehicle_customization:repaint/historical_custom_look_vietnam";
 
         public static const REPAINT_HISTORICAL_CUSTOM_LOOK_KOREA:String = "#vehicle_customization:repaint/historical_custom_look_korea";
+
+        public static const REPAINT_T_OCTOBER:String = "#vehicle_customization:repaint/t_october";
 
         public static const MODIFICATIONS_AGE_EFFECT_01:String = "#vehicle_customization:modifications/age_effect_01";
 
@@ -5475,6 +5515,10 @@ package
 
         public static const MAIN_STYLE_SKI_PATROL_DESC:String = "#vehicle_customization:main_style/ski_patrol_desc";
 
+        public static const SPECIAL_STYLE_CHAFFEE:String = "#vehicle_customization:special_style/chaffee";
+
+        public static const SPECIAL_STYLE_CHAFFEE_DESC:String = "#vehicle_customization:special_style/chaffee_desc";
+
         public static const SPECIAL_STYLE_BR_PAID:String = "#vehicle_customization:special_style/br_paid";
 
         public static const SPECIAL_STYLE_BR_PAID_DESC:String = "#vehicle_customization:special_style/br_paid_desc";
@@ -5490,6 +5534,18 @@ package
         public static const SPECIAL_STYLE_WG_FEST_2019:String = "#vehicle_customization:special_style/wg_fest_2019";
 
         public static const SPECIAL_STYLE_WOT_FEST_2019:String = "#vehicle_customization:special_style/wot_fest_2019";
+
+        public static const SPECIAL_STYLE_RACING_2019_TEAM_C:String = "#vehicle_customization:special_style/racing_2019_team_c";
+
+        public static const SPECIAL_STYLE_RACING_2019_TEAM_C_DESC:String = "#vehicle_customization:special_style/racing_2019_team_c_desc";
+
+        public static const SPECIAL_STYLE_RACING_2019_TEAM_B:String = "#vehicle_customization:special_style/racing_2019_team_b";
+
+        public static const SPECIAL_STYLE_RACING_2019_TEAM_B_DESC:String = "#vehicle_customization:special_style/racing_2019_team_b_desc";
+
+        public static const SPECIAL_STYLE_RACING_2019_TEAM_A:String = "#vehicle_customization:special_style/racing_2019_team_a";
+
+        public static const SPECIAL_STYLE_RACING_2019_TEAM_A_DESC:String = "#vehicle_customization:special_style/racing_2019_team_a_desc";
 
         public static const SPECIAL_STYLE_WOT_FEST_2019_DESC:String = "#vehicle_customization:special_style/wot_fest_2019_desc";
 
@@ -5562,6 +5618,14 @@ package
         public static const MAIN_STYLE_HISTORICAL_CUSTOM_LOOK_KOREA:String = "#vehicle_customization:main_style/historical_custom_look_korea";
 
         public static const MAIN_STYLE_HISTORICAL_CUSTOM_LOOK_KOREA_DESC:String = "#vehicle_customization:main_style/historical_custom_look_korea_desc";
+
+        public static const SPECIAL_STYLE_T_OCTOBER:String = "#vehicle_customization:special_style/t_october";
+
+        public static const SPECIAL_STYLE_T_OCTOBER_DESC:String = "#vehicle_customization:special_style/t_october_desc";
+
+        public static const MAIN_STYLE_A127_TL_1_LPC_3DST_OFFSPRING:String = "#vehicle_customization:main_style/A127_TL_1_LPC_3Dst_Offspring";
+
+        public static const MAIN_STYLE_A127_TL_1_LPC_3DST_OFFSPRING_DESC:String = "#vehicle_customization:main_style/A127_TL_1_LPC_3Dst_Offspring_desc";
 
         public static const CUSTOMIZATION_POPOVER_STYLE_SUMMER:String = "#vehicle_customization:customization/popover/style/summer";
 
@@ -6221,6 +6285,10 @@ package
 
         public static const PROJECTION_DECALS_HOLIDAY_PROJECTION_DECAL_07:String = "#vehicle_customization:projection_decals/holiday/projection_decal_07";
 
+        public static const PROJECTION_DECALS_COOL_PROJECTION_DECAL_32:String = "#vehicle_customization:projection_decals/cool/projection_decal_32";
+
+        public static const PROJECTION_DECALS_COOL_PROJECTION_DECAL_33:String = "#vehicle_customization:projection_decals/cool/projection_decal_33";
+
         public static const PROJECTION_DECALS_COOL_PROJECTION_DECAL_34:String = "#vehicle_customization:projection_decals/cool/projection_decal_34";
 
         public static const PROJECTION_DECALS_LANDSCAPE_PROJECTION_DECAL_04:String = "#vehicle_customization:projection_decals/landscape/projection_decal_04";
@@ -6230,6 +6298,10 @@ package
         public static const PROJECTION_DECALS_HOLIDAY_PROJECTION_DECAL_08:String = "#vehicle_customization:projection_decals/holiday/projection_decal_08";
 
         public static const PROJECTION_DECALS_SPECIAL_PROJECTION_DECAL_29_DESCRIPTION:String = "#vehicle_customization:projection_decals/special/projection_decal_29/description";
+
+        public static const PROJECTION_DECALS_SPECIAL_PROJECTION_DECAL_30:String = "#vehicle_customization:projection_decals/special/projection_decal_30";
+
+        public static const PROJECTION_DECALS_SPECIAL_PROJECTION_DECAL_31:String = "#vehicle_customization:projection_decals/special/projection_decal_31";
 
         public static const PROPERTYSHEET_KEYBOARD_HINT:String = "#vehicle_customization:propertySheet/keyboard/hint";
 

@@ -19,6 +19,8 @@ package net.wg.infrastructure.base.meta
 
         function onBrowserHideS() : void;
 
+        function invalidateViewS() : void;
+
         function setBrowserSizeS(param1:int, param2:int) : void;
 
         function as_loadingStart() : void;

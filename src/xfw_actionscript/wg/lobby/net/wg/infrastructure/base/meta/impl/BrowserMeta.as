@@ -20,6 +20,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public var onBrowserHide:Function;
 
+        public var invalidateView:Function;
+
         public var setBrowserSize:Function;
 
         public function BrowserMeta()
@@ -67,6 +69,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.onBrowserHide,"onBrowserHide" + Errors.CANT_NULL);
             this.onBrowserHide();
+        }
+
+        public function invalidateViewS() : void
+        {
+            App.utils.asserter.assertNotNull(this.invalidateView,"invalidateView" + Errors.CANT_NULL);
+            this.invalidateView();
         }
 
         public function setBrowserSizeS(param1:int, param2:int) : void

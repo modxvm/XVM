@@ -61,8 +61,6 @@ package net.wg.data.constants.generated
 
         public static const STORAGE_VEHICLES_RENTED_ITEM:String = "storageVehiclesRentedItem";
 
-        public static const STORAGE_VEHICLES_MULTI_NATION_ITEM:String = "storageVehiclesMultiNationItem";
-
         public static const STORAGE_PERSONAL_RESERVE_ITEM:String = "storagePersonalReserveItem";
 
         public static const STORAGE_CUSTOMZIZATION_ITEM:String = "storageCustomizationItem";

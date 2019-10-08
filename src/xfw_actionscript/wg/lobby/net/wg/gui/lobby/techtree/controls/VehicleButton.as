@@ -50,6 +50,8 @@ package net.wg.gui.lobby.techtree.controls
 
         private var _imageSource:String = "";
 
+        private var _comparisonVisible:Boolean = true;
+
         private var _comparisonEnabled:Boolean = false;
 
         private var _comparisonLabel:String = "";
@@ -111,7 +113,7 @@ package net.wg.gui.lobby.techtree.controls
             this.addToComparisonBtn = null;
             if(this.goToVehicleViewBtn != null)
             {
-                this.goToVehicleViewBtn.removeEventListener(ButtonEvent.CLICK,this.onGoToVehicleViewBtnClick);
+                this.goToVehicleViewBtn.removeEventListener(ButtonEvent.CLICK,this.onGoToVehicleBtnClickHandler);
                 this.goToVehicleViewBtn.dispose();
                 this.goToVehicleViewBtn = null;
             }
@@ -119,6 +121,7 @@ package net.wg.gui.lobby.techtree.controls
             this.vehicleOverlay = null;
             this.premiumBg = null;
             this.premiumAnimation = null;
+            super.onDispose();
         }
 
         override protected function draw() : void
@@ -132,14 +135,18 @@ package net.wg.gui.lobby.techtree.controls
             {
                 this.goToVehicleViewBtn.soundType = ICON_BUTTON_SOUND_TYPE;
                 this.goToVehicleViewBtn.focusable = false;
-                this.goToVehicleViewBtn.addEventListener(ButtonEvent.CLICK,this.onGoToVehicleViewBtnClick,false,0,true);
+                this.goToVehicleViewBtn.addEventListener(ButtonEvent.CLICK,this.onGoToVehicleBtnClickHandler,false,0,true);
             }
             if(isInvalid(InvalidationType.DATA))
             {
                 this.vehicleImage.source = this._imageSource;
-                this.addToComparisonBtn.enabled = this._comparisonEnabled;
-                this.addToComparisonBtn.label = this._comparisonLabel;
-                this.addToComparisonBtn.tooltip = this._comparisonTooltip;
+                this.addToComparisonBtn.visible = this._comparisonVisible;
+                if(this._comparisonVisible)
+                {
+                    this.addToComparisonBtn.enabled = this._comparisonEnabled;
+                    this.addToComparisonBtn.label = this._comparisonLabel;
+                    this.addToComparisonBtn.tooltip = this._comparisonTooltip;
+                }
                 if(this.goToVehicleViewBtn != null)
                 {
                     this.goToVehicleViewBtn.enabled = this._previewEnabled;
@@ -156,6 +163,7 @@ package net.wg.gui.lobby.techtree.controls
         public function setData(param1:ResearchRootVO, param2:NodeData, param3:Boolean = false) : void
         {
             this._imageSource = param1.shopIconPath;
+            this._comparisonVisible = param1.compareBtnVisible;
             this._comparisonEnabled = param1.compareBtnEnabled;
             this._comparisonLabel = param1.compareBtnLabel;
             this._comparisonTooltip = param1.compareBtnTooltip;
@@ -218,7 +226,7 @@ package net.wg.gui.lobby.techtree.controls
             this.updatePrefixes();
         }
 
-        private function onGoToVehicleViewBtnClick(param1:ButtonEvent) : void
+        private function onGoToVehicleBtnClickHandler(param1:ButtonEvent) : void
         {
             dispatchEvent(new TechTreeEvent(TechTreeEvent.GO_TO_VEHICLE_VIEW,null,0,NodeEntityType.RESEARCH_ROOT));
         }

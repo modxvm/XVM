@@ -3,11 +3,11 @@ package net.wg.gui.components.tooltips
     import flash.text.TextField;
     import flash.display.Sprite;
     import net.wg.data.managers.ITooltipProps;
-    import net.wg.gui.components.tooltips.VO.PrivateQuestsVO;
     import net.wg.gui.components.tooltips.VO.ToolTipBlockVO;
     import net.wg.gui.components.tooltips.VO.ToolTipStatusColorsVO;
     import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
     import net.wg.utils.ILocale;
+    import net.wg.gui.components.tooltips.VO.PrivateQuestsVO;
     import flash.text.TextFieldAutoSize;
     import net.wg.gui.components.tooltips.helpers.Utils;
     import net.wg.data.constants.Values;
@@ -53,7 +53,6 @@ package net.wg.gui.components.tooltips
 
         override protected function redraw() : void
         {
-            var _loc8_:PrivateQuestsVO = null;
             var _loc9_:ToolTipBlockVO = null;
             var _loc10_:String = null;
             var _loc11_:String = null;
@@ -68,7 +67,7 @@ package net.wg.gui.components.tooltips
             var _loc6_:Number = bgShadowMargin.left + contentMargin.left;
             var _loc7_:ILocale = App.utils.locale;
             App.utils.asserter.assertNotNull(_loc7_,"App.utils.locale is Null");
-            _loc8_ = new PrivateQuestsVO(_data);
+            var _loc8_:PrivateQuestsVO = new PrivateQuestsVO(_data);
             this.headerTF.autoSize = TextFieldAutoSize.LEFT;
             this.headerTF.htmlText = Utils.instance.htmlWrapper(_loc8_.name,Utils.instance.COLOR_HEADER,18,"$TitleFont");
             this.headerTF.width = this.headerTF.textWidth + 5 | 0;

@@ -6,11 +6,10 @@ package net.wg.gui.lobby.modulesPanel.components
     import net.wg.gui.lobby.modulesPanel.data.OptionalDeviceVO;
     import net.wg.utils.ICommons;
     import net.wg.infrastructure.managers.ITooltipMgr;
-    import scaleform.clik.events.ButtonEvent;
     import flash.events.MouseEvent;
+    import scaleform.clik.events.ButtonEvent;
     import net.wg.data.constants.SoundTypes;
     import org.idmedia.as3commons.util.StringUtils;
-    import scaleform.clik.constants.InvalidationType;
     import net.wg.gui.events.DeviceEvent;
 
     public class OptDeviceFittingItemRenderer extends FittingListItemRenderer
@@ -43,6 +42,8 @@ package net.wg.gui.lobby.modulesPanel.components
         private var _commons:ICommons;
 
         private var _toolTipMgr:ITooltipMgr;
+
+        private var _needToolTip:Boolean = false;
 
         public function OptDeviceFittingItemRenderer()
         {
@@ -90,27 +91,21 @@ package net.wg.gui.lobby.modulesPanel.components
 
         override protected function onBeforeDispose() : void
         {
+            removeEventListener(MouseEvent.MOUSE_OVER,this.onMouseOverHandler);
             this.destroyButton.removeEventListener(ButtonEvent.CLICK,this.onDestroyButtonClickHandler);
-            this.destroyButton.removeEventListener(MouseEvent.ROLL_OVER,this.onDestroyButtonRollOverHandler);
-            this.destroyButton.removeEventListener(MouseEvent.ROLL_OUT,this.onDestroyButtonRollOutHandler);
             this.removeButton.removeEventListener(ButtonEvent.CLICK,this.onRemoveButtonClickHandler);
-            this.removeButton.removeEventListener(MouseEvent.ROLL_OVER,this.onRemoveButtonRollOverHandler);
-            this.removeButton.removeEventListener(MouseEvent.ROLL_OUT,this.onRemoveButtonRollOutHandler);
             super.onBeforeDispose();
         }
 
         override protected function configUI() : void
         {
             super.configUI();
-            this.destroyButton.focusTarget = this;
+            addEventListener(MouseEvent.MOUSE_OVER,this.onMouseOverHandler);
+            this.destroyButton.focusable = false;
             this.destroyButton.addEventListener(ButtonEvent.CLICK,this.onDestroyButtonClickHandler);
-            this.destroyButton.addEventListener(MouseEvent.ROLL_OVER,this.onDestroyButtonRollOverHandler);
-            this.destroyButton.addEventListener(MouseEvent.ROLL_OUT,this.onDestroyButtonRollOutHandler);
             this.destroyButton.soundType = SoundTypes.ITEM_RDR;
-            this.removeButton.focusTarget = this;
+            this.removeButton.focusable = false;
             this.removeButton.addEventListener(ButtonEvent.CLICK,this.onRemoveButtonClickHandler);
-            this.removeButton.addEventListener(MouseEvent.ROLL_OVER,this.onRemoveButtonRollOverHandler);
-            this.removeButton.addEventListener(MouseEvent.ROLL_OUT,this.onRemoveButtonRollOutHandler);
             this.removeButton.soundType = SoundTypes.ITEM_RDR;
             this.locked.visible = false;
             this.locked.mouseEnabled = this.locked.mouseChildren = false;
@@ -183,15 +178,6 @@ package net.wg.gui.lobby.modulesPanel.components
             }
         }
 
-        override protected function draw() : void
-        {
-            super.draw();
-            if(isInvalid(InvalidationType.LAYOUT))
-            {
-                this.showItemTooltip();
-            }
-        }
-
         private function setTruncatedHtmlText(param1:TextField, param2:String, param3:uint) : void
         {
             var _loc4_:String = param2;
@@ -216,26 +202,6 @@ package net.wg.gui.lobby.modulesPanel.components
             }
         }
 
-        private function onDestroyButtonRollOverHandler(param1:MouseEvent) : void
-        {
-            hideTooltip();
-        }
-
-        private function onDestroyButtonRollOutHandler(param1:MouseEvent) : void
-        {
-            invalidate(InvalidationType.LAYOUT);
-        }
-
-        private function onRemoveButtonRollOverHandler(param1:MouseEvent) : void
-        {
-            hideTooltip();
-        }
-
-        private function onRemoveButtonRollOutHandler(param1:MouseEvent) : void
-        {
-            invalidate(InvalidationType.LAYOUT);
-        }
-
         private function onDestroyButtonClickHandler(param1:ButtonEvent) : void
         {
             dispatchEvent(new DeviceEvent(DeviceEvent.DEVICE_DESTROY,this._optDevData.id));
@@ -244,6 +210,20 @@ package net.wg.gui.lobby.modulesPanel.components
         private function onRemoveButtonClickHandler(param1:ButtonEvent) : void
         {
             dispatchEvent(new DeviceEvent(DeviceEvent.DEVICE_REMOVE,this._optDevData.id));
+        }
+
+        private function onMouseOverHandler(param1:MouseEvent) : void
+        {
+            if(param1.target == this.removeButton || param1.target == this.destroyButton)
+            {
+                this._needToolTip = true;
+                hideTooltip();
+            }
+            else if(this._needToolTip)
+            {
+                this._needToolTip = false;
+                this.showItemTooltip();
+            }
         }
     }
 }

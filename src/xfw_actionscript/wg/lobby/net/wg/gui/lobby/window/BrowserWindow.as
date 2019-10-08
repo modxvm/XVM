@@ -197,6 +197,7 @@ package net.wg.gui.lobby.window
             window.x = App.appWidth - window.width >> 1;
             window.y = App.appHeight - window.height >> 1;
             window.visible = true;
+            this.browser.invalidateViewS();
         }
 
         private function updateCloseBtnVisibility() : void

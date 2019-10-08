@@ -91,7 +91,7 @@ package net.wg.gui.components.controls
                     _loc2_ = _paddingHorizontal;
                 }
                 _loc3_ = textField.visible?textField:this.textFieldWithoutIcon;
-                _loc1_ = Math.ceil(_loc3_.textWidth + (_loc2_ + _textFieldPaddingHorizontal << 1) + 5);
+                _loc1_ = Math.ceil(_loc3_.textWidth + (_loc2_ + textFieldPaddingHorizontal << 1) + 5);
             }
             if(!isNaN(minWidth))
             {

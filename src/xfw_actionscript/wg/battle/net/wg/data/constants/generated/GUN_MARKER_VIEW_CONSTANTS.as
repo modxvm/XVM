@@ -5,6 +5,14 @@ package net.wg.data.constants.generated
 
         public static const GUN_MARKER_LINKAGE:String = "GunMarkerUI";
 
+        public static const DUAL_GUN_ARCADE_MARKER_LINKAGE:String = "DualGunArcadeMarkerUI";
+
+        public static const DUAL_GUN_SNIPER_MARKER_LINKAGE:String = "DualGunSniperMarkerUI";
+
+        public static const DUAL_GUN_ARCADE_MARKER_DEBUG_LINKAGE:String = "DualGunArcadeMarkerDebugUI";
+
+        public static const DUAL_GUN_SNIPER_MARKER_DEBUG_LINKAGE:String = "DualGunSniperMarkerDebugUI";
+
         public static const GUN_MARKER_DEBUG_LINKAGE:String = "GunMarkerDebugUI";
 
         public static const GUN_MARKER_SPG_LINKAGE:String = "GunMarkerSPGUI";
@@ -17,6 +25,10 @@ package net.wg.data.constants.generated
 
         public static const SNIPER_GUN_MARKER_NAME:String = "sniperGunMarker";
 
+        public static const DUAL_GUN_ARCADE_MARKER_NAME:String = "arcadeDualGunMarker";
+
+        public static const DUAL_GUN_SNIPER_MARKER_NAME:String = "sniperDualGunMarker";
+
         public static const SPG_GUN_MARKER_NAME:String = "spgGunMarker";
 
         public static const VIDEO_GUN_MARKER_NAME:String = "videoGunMarker";
@@ -28,6 +40,10 @@ package net.wg.data.constants.generated
         public static const DEBUG_SNIPER_GUN_MARKER_NAME:String = "sniperGunDebugMarker";
 
         public static const DEBUG_SPG_GUN_MARKER_NAME:String = "spgDebugGunMarker";
+
+        public static const DEBUG_DUAL_GUN_ARCADE_MARKER_NAME:String = "arcadeDebugDualGunMarker";
+
+        public static const DEBUG_DUAL_GUN_SNIPER_MARKER_NAME:String = "sniperDebugDualGunMarker";
 
         public static const GUN_TAG_RELOADING_TYPES:Array = [1,4,7,10,13];
 

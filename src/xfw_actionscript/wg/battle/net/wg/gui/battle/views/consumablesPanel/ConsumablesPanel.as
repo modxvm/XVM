@@ -406,18 +406,6 @@ package net.wg.gui.battle.views.consumablesPanel
             }
         }
 
-        public function as_switchToPosmortem() : void
-        {
-            var _loc1_:IConsumablesButton = this.getRendererBySlotIdx(this._shellCurrentIdx);
-            if(_loc1_)
-            {
-                _loc1_.setCoolDownTime(0,0,0,false);
-            }
-            this._shellCurrentIdx = -1;
-            this._shellNextIdx = -1;
-            this.collapsePopup();
-        }
-
         public function as_updateEntityState(param1:String, param2:String) : int
         {
             var _loc3_:* = -1;
@@ -431,7 +419,8 @@ package net.wg.gui.battle.views.consumablesPanel
 
         public function getRendererBySlotIdx(param1:int) : IConsumablesButton
         {
-            return IConsumablesButton(this.renderers[this.slotIdxMap[param1]]);
+            var _loc2_:int = this.slotIdxMap[param1];
+            return _loc2_ >= 0?IConsumablesButton(this.renderers[_loc2_]):null;
         }
 
         public function onButtonClick(param1:Object) : void

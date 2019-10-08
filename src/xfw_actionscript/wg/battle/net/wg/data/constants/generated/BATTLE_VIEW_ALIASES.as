@@ -39,6 +39,8 @@ package net.wg.data.constants.generated
 
         public static const DESTROY_TIMERS_PANEL:String = "destroyTimersPanel";
 
+        public static const DUAL_GUN_PANEL:String = "dualGunPanel";
+
         public static const REPORT_BUG:String = "reportBug";
 
         public static const FULL_STATS:String = "fullStats";

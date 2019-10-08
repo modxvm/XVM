@@ -32,6 +32,8 @@ package net.wg.gui.lobby.storage.categories.cards
 
         public var enabled:Boolean = true;
 
+        public var available:Boolean = true;
+
         public var active:Boolean = false;
 
         public var isMoneyEnough:Boolean = true;

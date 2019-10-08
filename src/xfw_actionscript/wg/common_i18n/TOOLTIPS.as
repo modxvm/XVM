@@ -3267,6 +3267,8 @@ package
 
         public static const BOOSTER_ACTIVEBTN_DISABLED_BODY:String = "#tooltips:booster/activeBtn/disabled/body";
 
+        public static const BOOSTER_ACTIVEBTN_NOTAVAILABLE_BODY:String = "#tooltips:booster/activeBtn/notAvailable/body";
+
         public static const BOOSTER_FILTERS_QUALITYSMALL_BODY:String = "#tooltips:booster/filters/qualitySmall/body";
 
         public static const BOOSTER_FILTERS_QUALITYMEDIUM_BODY:String = "#tooltips:booster/filters/qualityMedium/body";
@@ -5353,6 +5355,8 @@ package
 
         public static const STORAGE_MAINMENU_BLUEPRINTS_BODY:String = "#tooltips:storage/mainMenu/blueprints/body";
 
+        public static const NOTRECRUITEDTANKMAN_HOWTOGET:String = "#tooltips:notrecruitedtankman/howToGet";
+
         public static const NOTRECRUITEDTANKMAN_SKILLSTITLE:String = "#tooltips:notrecruitedtankman/skillsTitle";
 
         public static const NOTRECRUITEDTANKMAN_EXPIRETITLE:String = "#tooltips:notrecruitedtankman/expireTitle";
@@ -5406,6 +5410,36 @@ package
         public static const NOTRECRUITEDTANKMAN_NY19WOMAN_LABEL:String = "#tooltips:notrecruitedtankman/ny19woman/label";
 
         public static const NOTRECRUITEDTANKMAN_NY19WOMAN_DESC:String = "#tooltips:notrecruitedtankman/ny19woman/desc";
+
+        public static const NOTRECRUITEDTANKMAN_RACE19_COMMANDERA_LABEL:String = "#tooltips:notrecruitedtankman/race19_commanderA/label";
+
+        public static const NOTRECRUITEDTANKMAN_RACE19_COMMANDERA_DESC:String = "#tooltips:notrecruitedtankman/race19_commanderA/desc";
+
+        public static const NOTRECRUITEDTANKMAN_RACE19_COMMANDERA_HOWTOGETINFO:String = "#tooltips:notrecruitedtankman/race19_commanderA/howToGetInfo";
+
+        public static const NOTRECRUITEDTANKMAN_RACE19_COMMANDERB_LABEL:String = "#tooltips:notrecruitedtankman/race19_commanderB/label";
+
+        public static const NOTRECRUITEDTANKMAN_RACE19_COMMANDERB_DESC:String = "#tooltips:notrecruitedtankman/race19_commanderB/desc";
+
+        public static const NOTRECRUITEDTANKMAN_RACE19_COMMANDERB_HOWTOGETINFO:String = "#tooltips:notrecruitedtankman/race19_commanderB/howToGetInfo";
+
+        public static const NOTRECRUITEDTANKMAN_RACE19_COMMANDERC_LABEL:String = "#tooltips:notrecruitedtankman/race19_commanderC/label";
+
+        public static const NOTRECRUITEDTANKMAN_RACE19_COMMANDERC_DESC:String = "#tooltips:notrecruitedtankman/race19_commanderC/desc";
+
+        public static const NOTRECRUITEDTANKMAN_RACE19_COMMANDERC_HOWTOGETINFO:String = "#tooltips:notrecruitedtankman/race19_commanderC/howToGetInfo";
+
+        public static const NOTRECRUITEDTANKMAN_OFFSPRING_COMMANDER_DESC:String = "#tooltips:notrecruitedtankman/offspring_commander/desc";
+
+        public static const NOTRECRUITEDTANKMAN_OFFSPRING_GUNNER_DESC:String = "#tooltips:notrecruitedtankman/offspring_gunner/desc";
+
+        public static const NOTRECRUITEDTANKMAN_OFFSPRING_DRIVER_DESC:String = "#tooltips:notrecruitedtankman/offspring_driver/desc";
+
+        public static const NOTRECRUITEDTANKMAN_OFFSPRING_LOADER_DESC:String = "#tooltips:notrecruitedtankman/offspring_loader/desc";
+
+        public static const NOTRECRUITEDTANKMAN_COMMANDER_MARINA_LABEL:String = "#tooltips:notrecruitedtankman/commander_marina/label";
+
+        public static const NOTRECRUITEDTANKMAN_COMMANDER_MARINA_DESC:String = "#tooltips:notrecruitedtankman/commander_marina/desc";
 
         public static const QUESTS_AWARDS_VEHICLERENT_HEADER:String = "#tooltips:quests/awards/vehicleRent/header";
 
