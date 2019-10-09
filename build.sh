@@ -171,6 +171,7 @@ copy_files()
 
     #move config
     mv "$XVMBUILD_ROOT_PATH"/~output/deploy/res_mods/mods/shared_resources/xvm/configs/* "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/configs/xvm/"
+    rm -r "$XVMBUILD_ROOT_PATH"/~output/deploy/res_mods/mods/shared_resources/xvm/configs/
 
     # get l10n files from translation server
     pushd "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/shared_resources/xvm/l10n/" >/dev/null
