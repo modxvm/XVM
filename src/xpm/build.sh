@@ -131,7 +131,7 @@ for fn in $(find . -type "f" -name "*xfw_package.json"); do
 
   outpath="../../~output/xvm/res_mods/mods/xfw_packages/$m/xfw_package.json"
   cp "$fn" "$outpath"
-  sed -i "s/XVM_VERSION/$XVMBUILD_XVM_VERSION.$REPOSITORY_COMMITS_NUMBER$REPOSITORY_BRANCH/g" "$outpath"
+  sed -i "s/XVM_VERSION/$XVMBUILD_XVM_VERSION.$REPOSITORY_COMMITS_NUMBER$REPOSITORY_BRANCH_FORFILE/g" "$outpath"
   sed -i "s/WOT_VERSION/$XVMBUILD_WOT_VERSION/g" "$outpath"
 done
 
