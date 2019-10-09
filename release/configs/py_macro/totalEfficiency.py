@@ -107,6 +107,11 @@ def xvm_crits():
     return te.ribbonTypes['crits']
 
 
+@xvm.export('xvm.assistStun', deterministic=False)
+def xvm_crits():
+    return te.ribbonTypes['assistStun']
+
+
 @xvm.export('xvm.numberHitsBlocked', deterministic=False)
 def xvm_numberHitsBlocked():
     return te.numberHitsBlocked
