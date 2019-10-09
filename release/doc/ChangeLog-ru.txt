@@ -10,6 +10,9 @@
   * удалена опция:
       "hangar"/"showDogtagWidget"
 
+  [МАКРОСЫ НА PYTHON]
+  * totalEfficiency: добавлен макрос {{py:xvm.assistStun}}
+
 XVM-8.0.7:
   [Общее]
   * Исправлена работа взводов для режима гонок

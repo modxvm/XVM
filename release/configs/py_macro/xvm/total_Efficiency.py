@@ -72,7 +72,8 @@ ribbonTypes = {
     'crits': 0,
     'capture': 0,
     'defence': 0,
-    'assist': 0
+    'assist': 0,
+    'assistStun': 0
 }
 
 
@@ -253,7 +254,7 @@ def BattleRibbonsPanel__onRibbonAdded(self, ribbon):
             ribbonTypes[ribbonType] = (totalAssist - ribbonTypes['assistTrack']) if totalAssist else 0
             numberAssistSpot += 1
             updateLabels.update()
-        elif ribbonType == 'crits':
+        elif ribbonType in ['crits', 'assistStun']:
             ribbonTypes[ribbonType] += ribbon.getExtraValue()
             updateLabels.update()
         elif ribbonType == 'kill':
@@ -384,7 +385,8 @@ def totalEfficiency_destroyGUI(self):
         'crits': 0,
         'capture': 0,
         'defence': 0,
-        'assist': 0
+        'assist': 0,
+        'assistStun': 0
     }
     updateLabels.cancelUpdate()
 
