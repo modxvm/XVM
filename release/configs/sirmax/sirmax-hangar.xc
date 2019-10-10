@@ -31,6 +31,7 @@
   "hangar": {
     "enableGoldLocker": true,
     "enableFreeXpLocker": true,
+    "enableCrystalLocker": true,
     "hidePricesInTechTree": true,
     "masteryMarkInTechTree": true,
     "allowExchangeXPInTechTree": false,
