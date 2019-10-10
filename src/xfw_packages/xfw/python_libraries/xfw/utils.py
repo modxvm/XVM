@@ -94,11 +94,3 @@ def resolve_path(path, basepath=None):
         path = fix_path_slashes(basepath) + path
 
     return path.replace('\\', '/')
-
-# https://stackoverflow.com/a/1714190
-# gnud, 2009
-# haridsv, 2014
-def version_cmp(version1, version2):
-    def normalize(v):
-        return [int(x) for x in re.sub(r'(\.0+)*$','', v.split(" ", 1)[0]).split(".")]
-    return cmp(normalize(version1), normalize(version2))

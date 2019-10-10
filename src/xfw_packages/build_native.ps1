@@ -62,7 +62,7 @@ function Build-CmakeProject($Name)
 
     Push-Location "$root/_build/$Name/"
 
-    cmake -T v141_xp "$root/$Name/native/" -DVER_VERSION="${version}" -DVER_VERSION_STR="${version_str}" -DCMAKE_INSTALL_PREFIX="$root/_binaries/$Name/" -DCMAKE_PREFIX_PATH="$root/_devel/" | Out-File -FilePath "$root/_logs/$Name-cmake-config.log"
+    cmake -A Win32 -T v141_xp "$root/$Name/native/" -DVER_VERSION="${version}" -DVER_VERSION_STR="${version_str}" -DCMAKE_INSTALL_PREFIX="$root/_binaries/$Name/native_32bit/" -DCMAKE_PREFIX_PATH="$root/_devel/" | Out-File -FilePath "$root/_logs/$Name-cmake-config.log"
     if ($LastExitCode -ne 0) {
         Write-Error "Configure failed"
         Pop-Location

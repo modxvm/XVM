@@ -48,12 +48,13 @@ outputpath="$XVMBUILD_ROOT_PATH/$XVMBUILD_XFW_PACKAGES_OUTPUTPATH"
 wotmodpath="$XVMBUILD_ROOT_PATH/$XVMBUILD_XFW_WOTMOD_OUTPUTPATH"
 
 libraries=(
-  'xfw_meta'
+  'xfw'
   'xfw_actionscript'
   'xfw_crashreport'
   'xfw_filewatcher'
   'xfw_fonts'
   'xfw_libraries'
+  'xfw_loader'
   'xfw_mutex'
   'xfw_ping'
   'xfw_powermanagement'
@@ -71,7 +72,7 @@ copy_binaries()
 {
   if [ -d "$currentdir/_binaries/$1/" ]; then
     mkdir -p "$2/native/"
-    cp -rf "$currentdir/_binaries/$1/." "$2/native/"
+    cp -rf "$currentdir/_binaries/$1/." "$2/"
   fi
 }
 
@@ -140,9 +141,11 @@ copy_files()
 
 prepare_json()
 {
-  cp "$1" "$2"
-  sed -i s/XFW_VERSION/$XVMBUILD_XVM_VERSION.$REPOSITORY_COMMITS_NUMBER$REPOSITORY_BRANCH_FORFILE/g "$2"
-  sed -i "s/WOT_VERSION/$XVMBUILD_WOT_VERSION/g" "$2"
+  if [[ -f "$1" ]]; then
+    cp "$1" "$2"
+    sed -i s/XFW_VERSION/$XVMBUILD_XVM_VERSION.$REPOSITORY_COMMITS_NUMBER$REPOSITORY_BRANCH_FORFILE/g "$2"
+    sed -i "s/WOT_VERSION/$XVMBUILD_WOT_VERSION/g" "$2"
+  fi
 }
 
 prepare_metaxml()
@@ -180,6 +183,7 @@ build_package()
   mkdir -p "$output_dir"
   
   output_dir_xfwlibraries="$output_dir/res/mods/xfw_libraries"
+  output_dir_guimods="$output_dir/res/scripts/client/gui/mods"
   output_dir_xfwpackage="$output_dir/res/mods/xfw_packages/$package_name"
   mkdir -p "$output_dir_xfwpackage"
 
@@ -194,6 +198,7 @@ build_package()
   fi
 
   build_python  "$package_dir/python_libraries" "$output_dir_xfwlibraries"
+  build_python  "$package_dir/python_guimods" "$output_dir_guimods"
   build_python  "$package_dir/python" "$output_dir_xfwpackage/python"
   build_python_empty "$output_dir_xfwpackage"
   copy_files "$package_dir/python_libraries" "$output_dir_xfwlibraries" "*.pem"
