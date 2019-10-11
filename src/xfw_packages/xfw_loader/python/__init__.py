@@ -20,6 +20,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 import compileall
 import glob
 import json
+import importlib
 import logging
 import os
 import platform
@@ -87,7 +88,7 @@ def get_mod_directory_path(mod_name):
 def get_mod_module(mod_name):
     if mod_name not in mods_loaded:
         return None
-    return __import__('%s.python' % mods[mod_name]['dir_name'])
+    return importlib.import_module('%s.python' % mods[mod_name]['dir_name'])
 
 def get_mod_ids():
     result = dict()
@@ -419,7 +420,7 @@ def mods_load():
                 
                 try:
                     #try to load module
-                    module = __import__('%s.python' % mod['dir_name'])
+                    module = importlib.import_module('%s.python' % mod['dir_name'])
 
                     #call `xfw_module_init()`
                     if hasattr(module, 'xfw_module_init'):
@@ -439,5 +440,7 @@ def mods_load():
         #add mod to loaded list
         if not failed:
             mods_loaded.append(mod_name)
+        else: 
+            mods_failed.append(mod_name)
             
     __are_mods_loaded = True
