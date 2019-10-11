@@ -4,7 +4,7 @@
     "description": "XFW WWISE module",
 
     "version": "XFW_VERSION",
-    "dependencies": ["com.modxvm.xfw.native"],
+    "dependencies": ["com.modxvm.xfw.native", "com.modxvm.xfw.libraries"],
 
     "url": "https://modxvm.com/",
     "url_update": "https://modxvm.com/",
@@ -12,5 +12,6 @@
     "wot_version_min": "WOT_VERSION",
     "wot_version_exactmatch": false,
 
-    "features": ["native", "python"]
+    "features": ["native", "python"],
+    "architecture": ["32bit"]
 }
