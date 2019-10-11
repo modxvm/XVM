@@ -28,7 +28,8 @@ try:
     sys.path.insert(0, '../res_mods/mods/xfw_packages')
     sys.path.insert(0, '../res_mods/mods/xfw_libraries')
     
-    import xfw_loader.python
+    import xfw_loader.python as loader
+    loader.mods_load()
 
 except Exception:
     logging.exception('[XFW/Entrypoint] Error on executing XFW entry point')

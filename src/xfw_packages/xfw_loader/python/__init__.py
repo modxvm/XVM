@@ -254,11 +254,19 @@ def __dag_build(mods, mods_features):
 
 ## Mods loading
 
-def __mods_load():
+__are_mods_loaded = False
+
+def mods_load():
     """
     Loads XFW-powered mods from work_folder
     """
 
+    global __are_mods_loaded
+    if __are_mods_loaded:
+        logging.error("[XFW/Loader]: Mods were already loaded")
+        return
+
+    __initialize_constants()
     __read_realfs()
     __read_vfs()
 
@@ -389,8 +397,4 @@ def __mods_load():
         if not failed:
             mods_loaded.append(mod_name)
             
-
-##############################
-
-__initialize_constants()
-__mods_load()
+    __are_mods_loaded = True
