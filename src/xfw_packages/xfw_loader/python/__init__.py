@@ -416,10 +416,23 @@ def mods_load():
                     open(mod['dir_path'] + '/__init__.py', 'a').close()
                     compileall.compile_dir(mod['dir_path'], quiet = 1)
 
+                
                 try:
-                    __import__('%s.python' % mod['dir_name'])
+                    #try to load module
+                    module = __import__('%s.python' % mod['dir_name'])
+
+                    #call `xfw_module_init()`
+                    if hasattr(module, 'xfw_module_init'):
+                        module.xfw_module_init()
+
+                    #check xfw_is_module_loaded() function if module provides it
+                    if hasattr(module, 'xfw_is_module_loaded'):
+                        if not module.xfw_is_module_loaded():
+                            logging.error("[XFW/Loader] Loading mod: '%s' FAILED (flag)" % mod_name)
+                            failed = True
+
                 except Exception:
-                    logging.exception("[XFW/Loader] Loading mod: '%s' FAILED" % mod_name)
+                    logging.exception("[XFW/Loader] Loading mod: '%s' FAILED (exception)" % mod_name)
                     failed = True
 
 
