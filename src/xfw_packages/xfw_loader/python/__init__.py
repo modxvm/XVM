@@ -261,15 +261,25 @@ def mods_load():
     Loads XFW-powered mods from work_folder
     """
 
+    #set globals
+    global mods
+    global mods_failed
+    global mods_loaded
     global __are_mods_loaded
+
+    #check that we are not loading mods second time
     if __are_mods_loaded:
         logging.error("[XFW/Loader]: Mods were already loaded")
         return
 
+    #initialize constants
     __initialize_constants()
+
+    #read FS
     __read_realfs()
     __read_vfs()
 
+    #update path
     sys.path.insert(0, XFWLOADER_PACKAGES_VFS)
     sys.path.insert(0, XFWLOADER_PACKAGES_REALFS)
 
@@ -285,6 +295,7 @@ def mods_load():
                 mods_features[provided_feature] = mod_id
 
 
+    #build DAG
     mods_dag = __dag_build(mods, mods_features)
 
     # load modifications in topological order
