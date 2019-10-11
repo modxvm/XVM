@@ -169,25 +169,3 @@ def directory_copy(vfs_path, realfs_path, recursive=True):
         print "================="
         return False
 
-def c_extension_load(name, vfs_path, package_id='com.modxvm.xfw'):
-    """
-    Loads C extension
-
-    * name: module name
-    * vfs_path: path to module file relative to VFS root ('/res/' for real FS)
-    * package_id: package ID defined in meta.xml
-    """
-
-    try:
-        realfs_path = 'mods\\temp\\%s\\native\\%s' % (package_id, os.path.basename(vfs_path))
-
-        if file_copy(vfs_path, realfs_path):
-            return imp.load_dynamic(name, realfs_path)
-
-        return None
-
-    except Exception:
-        print "[XFW/VFS][c_extension_load] Native module loading error:"
-        traceback.print_exc()
-        print "============================="
-        return None

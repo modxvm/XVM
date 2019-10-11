@@ -38,15 +38,25 @@ from dag import DAG, DAGValidationError
 
 #Exports
 __all__ = [
+    'XFWLOADER_PACKAGES_REALFS',
+    'XFWLOADER_PACKAGES_VFS',
+    'XFWLOADER_TEMPDIR',
     'WOT_RESMODS_DIR', 
     'WOT_VERSION_FULL',
     'WOT_VERSION_SHORT',
+
+    'get_mod_directory_name',
+    'get_mod_directory_path',
+    'is_mod_in_realfs',
     'is_mod_loaded'
 ]
 
 #####################################################
 
 #### PUBLIC VARIABLES
+XFWLOADER_PACKAGES_REALFS = '../res_mods/mods/xfw_packages'
+XFWLOADER_PACKAGES_VFS    = 'mods/xfw_packages'
+XFWLOADER_TEMPDIR         = '../mods/temp'
 WOT_RESMODS_DIR = None
 WOT_VERSION_FULL = None
 WOT_VERSION_SHORT = None
@@ -59,16 +69,27 @@ mods_loaded   = list()
 
 
 #### PUBLIC FUNCTIONS
+def get_mod_directory_name(mod_name):
+    if mod_name not in mods:
+        return None
+    return mods[mod_name]['dir_name']
+
+def get_mod_directory_path(mod_name):
+    if mod_name not in mods:
+        return None
+    return mods[mod_name]['dir_path']
+
 def is_mod_loaded(mod_name):
     return mod_name in mods_loaded
 
+def is_mod_in_realfs(mod_name):
+    if mod_name not in mods:
+        return False
+
+    return mods[mod_name]['fs'] == 'realfs'
+
+
 #####################################################
-
-
-# Private Constants
-__XFWLOADER_PACKAGES_REALFS = '../res_mods/mods/xfw_packages'
-__XFWLOADER_PACKAGES_VFS    = 'mods/xfw_packages'
-
 
 # Helper functions
 
@@ -133,7 +154,7 @@ def __read_realfs():
     fills mods list with modifications in realfs
     path to search: [WoT]/res_mods/mods/xfw_packages/*/xfw_package.json
     """
-    m_configs = [i.replace("\\", "/").replace("//", "/") for i in glob.iglob(__XFWLOADER_PACKAGES_REALFS + '/*/xfw_package.json')]
+    m_configs = [i.replace("\\", "/").replace("//", "/") for i in glob.iglob(XFWLOADER_PACKAGES_REALFS + '/*/xfw_package.json')]
     for m_config in m_configs:
         m_dir = m_config[0:m_config.rfind("/")] # module directory
 
@@ -161,9 +182,9 @@ def __read_vfs():
     path to search: [VFS_root]/mods/xfw_packages/*/xfw_package.json
     """
 
-    for m_dir_name in vfs.directory_list_subdirs(__XFWLOADER_PACKAGES_VFS):
+    for m_dir_name in vfs.directory_list_subdirs(XFWLOADER_PACKAGES_VFS):
         try:
-            m_dir = __XFWLOADER_PACKAGES_VFS + '/' + m_dir_name
+            m_dir = XFWLOADER_PACKAGES_VFS + '/' + m_dir_name
 
             mod_config = vfs.file_read(m_dir + '/xfw_package.json', True)
             if mod_config is not None:
@@ -241,8 +262,8 @@ def __mods_load():
     __read_realfs()
     __read_vfs()
 
-    sys.path.insert(0, __XFWLOADER_PACKAGES_VFS)
-    sys.path.insert(0, __XFWLOADER_PACKAGES_REALFS)
+    sys.path.insert(0, XFWLOADER_PACKAGES_VFS)
+    sys.path.insert(0, XFWLOADER_PACKAGES_REALFS)
 
     if not any(mods):
         logging.warning("[XFW/Loader]: No mods were found")
