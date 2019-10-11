@@ -47,6 +47,10 @@ __all__ = [
 
     'get_mod_directory_name',
     'get_mod_directory_path',
+    'get_mod_module',
+    'get_mod_ids',
+
+    'is_mod_exists',
     'is_mod_in_realfs',
     'is_mod_loaded'
 ]
@@ -69,6 +73,7 @@ mods_loaded   = list()
 
 
 #### PUBLIC FUNCTIONS
+
 def get_mod_directory_name(mod_name):
     if mod_name not in mods:
         return None
@@ -78,6 +83,20 @@ def get_mod_directory_path(mod_name):
     if mod_name not in mods:
         return None
     return mods[mod_name]['dir_path']
+
+def get_mod_module(mod_name):
+    if mod_name not in mods_loaded:
+        return None
+    return __import__('%s.python' % mods[mod_name]['dir_name'])
+
+def get_mod_ids():
+    result = dict()
+    for mod_id, mod_config in mods.iteritems():
+        result[mod_id] = mod_config['version']
+    return result
+
+def is_mod_exists(mod_name):
+    return mod_name in mods
 
 def is_mod_loaded(mod_name):
     return mod_name in mods_loaded
