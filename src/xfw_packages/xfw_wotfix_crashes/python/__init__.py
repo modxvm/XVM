@@ -16,46 +16,65 @@ You should have received a copy of the GNU Lesser General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
-import imp
-import os
-import traceback
-import sys
+#cpython
+import logging
 
-from xfw.constants import PATH
+#xfw.loader
+import xfw_loader.python as loader
 
+
+g_crashfix = None
 class XFWCrashFix(object):
 
     def __init__(self):
         self.__native = None
+        self.__package_name = 'com.modxvm.xfw.wotfix.crashes'
+        self.__initialized = False
 
         try:
-            if "python27" in sys.modules:
-                path_realfs = PATH.XFWLOADER_PACKAGES_REALFS + '/xfw_wotfix_crashes/native/xfw_crashfix.pyd'
-                path_vfs = PATH.XFWLOADER_PACKAGES_VFS + '/xfw_wotfix_crashes/native/xfw_crashfix.pyd'
+            xfwnative = loader.get_mod_module('com.modxvm.xfw.native')
+            if not xfwnative:
+                logging.error('[XFW/Crashfix] Failed to load native module. XFW Native is not available')
+                return
 
-                is_in_realfs = os.path.isfile(path_realfs)
-                if is_in_realfs:
-                    self.__native = imp.load_dynamic('xfw_crashfix', path_realfs)
-                else:
-                    import xfw.vfs as vfs
-                    self.__native = vfs.c_extension_load('xfw_crashfix', path_vfs, 'com.modxvm.xfw.wotfix.crashes')
-            else:
-                print "[XFW/Crashfix] was not loaded because of python27 error"
+            if not xfwnative.unpack_native(self.__package_name):
+                logging.error('[XFW/Crashfix] Failed to load native module. Failed to unpack native module')
+                return
+
+            self.__native = xfwnative.load_native(self.__package_name, 'xfw_crashfix.pyd', 'xfw_crashfix')
+            if not self.__native:
+                logging.error("[XFW/Crashfix] Failed to load native module. Crash report were not enabled")   
+                return
+
+            self.__initialized = True
         except Exception:
-            print "[XFW/Crashfix] Error on loading native components"
-            traceback.print_exc()
+            logging.exception("[XFW/Crashfix] Error when loading native library:")
+
+
+    def is_initialized(self):
+        return self.__initialized
+
 
     def apply_fix(self):
         if self.__native is None:
-            print "[XFW/Crashfix] Crash fixes not applied."
+            logging.warning("[XFW/Crashfix] Crash fixes not applied.")
             return
-        else:
-            print "[XFW/Crashfix] Applying crashfixes:"
+        
+        logging.info("[XFW/Crashfix] Applying crashfixes:")
 
         for bf_num in range(1, self.__native.fix_count()+1):
             err_code = self.__native.fix_apply(bf_num)
-            result = "OK" if err_code >= 0 else "FAIL"
-            print "[XFW/Crashfix]    BugFix %i: %s, %i" % (bf_num, result, err_code)
+            if err_code >= 0:
+                logging.info("[XFW/Crashfix]    BugFix %i: OK, %i" % (bf_num, err_code))
+            else:
+                logging.warning("[XFW/Crashfix]    BugFix %i: FAIL, %i" % (bf_num, err_code))
+
+
+def xfw_is_module_loaded():
+    if not g_crashfix:
+        return False
+
+    return g_crashfix.is_initialized()
 
 g_crashfix = XFWCrashFix()
 g_crashfix.apply_fix()
