@@ -16,57 +16,58 @@ You should have received a copy of the GNU Lesser General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
-import imp
-import os
+#cpython
+import logging
 import platform
-import traceback
-import sys
 
-from xfw.constants import PATH
+#xfw.loader
+import xfw_loader.python as loader
 
-_native = None
+g_xfwdpi = None
 
-def _native_load():
-    """
-    Loads WoTFix C Python extension.
+class XFWDPIFix(object):
+    def __init__(self):
+        self.__native = None
+        self.__initialized = False
+        self.__package_name = 'com.modxvm.xfw.wotfix.hidpi'
 
-    Do not use this function directly.
-    """
-    try:
-        global _native
+        try:
+            xfwnative = loader.get_mod_module('com.modxvm.xfw.native')
+            if not xfwnative:
+                logging.error('[XFW/HiDPI] Failed to load native module. XFW Native is not available')
+                return
 
-        if _native is None:
+            if not xfwnative.unpack_native(self.__package_name):
+                logging.error('[XFW/HiDPI] Failed to load native module. Failed to unpack native module')
+                return
 
-            if "python27" not in sys.modules:
-                return False
+            self.__native = xfwnative.load_native(self.__package_name, 'xfw_hidpi.pyd', 'XFW_HiDPI')
+            if not self.__native:
+                logging.error("[XFW/HiDPI] Failed to load native module. Crash report were not enabled")   
+                return
 
-            path_realfs = PATH.XFWLOADER_PACKAGES_REALFS + '/xfw_wotfix_hidpi/native/xfw_hidpi.pyd'
-            path_vfs = PATH.XFWLOADER_PACKAGES_VFS + '/xfw_wotfix_hidpi/native/xfw_hidpi.pyd'
+            self.__initialized = True
 
-            if os.path.isfile(path_realfs):
-                _native = imp.load_dynamic('XFW_HiDPI', path_realfs)
-            else:
-                import xfw.vfs as vfs
-                _native = vfs.c_extension_load('XFW_HiDPI', path_vfs, 'com.modxvm.xfw.wotfix.hidpi')
+        except Exception:
+            logging.exception("[XFW/HiDPI] Error when loading native library:")
 
-        return True
-    except Exception:
-        print "[XFW/HiDPI][_native_load] Error when loading native library:"
-        traceback.print_exc()
-        print "======================="
+    def is_initialized(self):
+        return self.__initialized
+
+    def fix_dpi(self):
+        try:
+            if not platform.version().startswith('5.'):
+                if self.__native.fix_dpi():
+                    logging.info("[XFW/HiDPI] HiDPI fix applied")
+
+        except Exception:
+            logging.info("[XFW/HiDPI] [fix_dpi]:")
+
+def xfw_is_module_loaded():
+    if not g_xfwdpi:
         return False
 
-def fix_dpi():
-    try:
-        if not platform.version().startswith('5.'):
-            if not _native_load():
-                return
-            if _native.fix_dpi():
-                print "[XFW/HiDPI] HiDPI fix applied"
+    return g_xfwdpi.is_initialized()
 
-    except Exception:
-        print "[XFW/HiDPI][fix_dpi] Error:"
-        traceback.print_exc()
-        print "======================="
-
-fix_dpi()
+g_xfwdpi = XFWDPIFix()
+g_xfwdpi.fix_dpi()
