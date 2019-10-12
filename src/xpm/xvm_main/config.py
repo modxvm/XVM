@@ -1,19 +1,43 @@
-""" XVM (c) https://modxvm.com 2013-2019 """
+"""
+This file is part of the XVM project.
+
+Copyright (c) 2013-2019 XVM Team.
+
+XVM is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as
+published by the Free Software Foundation, version 3.
+
+XVM is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>.
+"""
 
 __all__ = ['load', 'get', 'config_data', 'lang_data']
 
+#cpython
 from copy import deepcopy
+import logging
 import os
 import time
 import traceback
 import collections
-import JSONxLoader
 
+#BigWorld
 from gui.shared import g_eventBus, events
 
+#xfw.loader
+import xfw_loader.python as loader
+
+#xfw.libraries
+import JSONxLoader
 from xfw import *
 import xfw.constants as xfw_constants
 
+#xvm.main
 from consts import *
 from logger import *
 from default_xvm_xc import DEFAULT_XVM_XC
@@ -77,14 +101,17 @@ def load(e):
 
         if config_autoreload:
             try:
-                import xfw_filewatcher.python as xfw_filewatcher
-                if not xfw_filewatcher.watcher_is_exists(XVM_EVENT.RELOAD_CONFIG):
-                    xfw_filewatcher.watcher_add(XVM_EVENT.RELOAD_CONFIG, XVM.CONFIG_DIR, \
-                        "import BigWorld;"\
-                        "from gui.shared import g_eventBus, events;" \
-                        "BigWorld.callback(0, lambda: g_eventBus.handleEvent(events.HasCtxEvent('%s', {'filename':'%s'})))" % (XVM_EVENT.RELOAD_CONFIG, XVM.CONFIG_FILE), \
-                        True)
-                xfw_filewatcher.watcher_start(XVM_EVENT.RELOAD_CONFIG)
+                xfw_filewatcher = loader.get_mod_module('com.modxvm.xfw.filewatcher')
+                if not xfw_filewatcher:
+                    logging.error("[XVM/Main] [config/load]: failed to start filewatcher because XFW.Filewatcher is not loaded")
+                else:
+                    if not xfw_filewatcher.watcher_is_exists(XVM_EVENT.RELOAD_CONFIG):
+                        xfw_filewatcher.watcher_add(XVM_EVENT.RELOAD_CONFIG, XVM.CONFIG_DIR, \
+                            "import BigWorld;"\
+                            "from gui.shared import g_eventBus, events;" \
+                            "BigWorld.callback(0, lambda: g_eventBus.handleEvent(events.HasCtxEvent('%s', {'filename':'%s'})))" % (XVM_EVENT.RELOAD_CONFIG, XVM.CONFIG_FILE), \
+                            True)
+                    xfw_filewatcher.watcher_start(XVM_EVENT.RELOAD_CONFIG)
             except Exception:
                 log('[WARNING] XFW Filewatcher is not available. Config reload was disabled.')
 

@@ -5,7 +5,7 @@
 
     "version": "XVM_VERSION",
 
-    "dependencies": ["com.modxvm.xfw"],
+    "dependencies": ["com.modxvm.xfw.libraries"],
     "dependencies_optional": [
         "com.modxvm.xfw.filewatcher", 
         "com.modxvm.xfw.mutex"
