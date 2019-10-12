@@ -4,7 +4,7 @@
     "description": "XFW Actionscript module",
 
     "version": "XFW_VERSION",
-    "dependencies": [],
+    "dependencies": ["com.modxvm.xfw.libraries"],
 
     "url": "https://modxvm.com/",
     "url_update": "https://modxvm.com/",

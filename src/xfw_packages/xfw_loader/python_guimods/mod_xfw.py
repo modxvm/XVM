@@ -16,23 +16,20 @@ You should have received a copy of the GNU Lesser General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
+import logging
 import sys
-import traceback
 
 try:
     #Files in VFS
-    sys.path.insert(0, 'mods/xfw/python')
+    sys.path.insert(0, 'mods/xfw_packages')
     sys.path.insert(0, 'mods/xfw_libraries')
 
     #Files in RealFS
-    sys.path.insert(0, '../res_mods/mods/xfw/python')
+    sys.path.insert(0, '../res_mods/mods/xfw_packages')
     sys.path.insert(0, '../res_mods/mods/xfw_libraries')
-
-    import xfw
-    import xfw.vfs as vfs
-
-    import xfw_loader
+    
+    import xfw_loader.python as loader
+    loader.mods_load()
 
 except Exception:
-    print "[XFW/Entrypoint] Error:"
-    traceback.print_exc()
+    logging.exception('[XFW/Entrypoint] Error on executing XFW entry point')

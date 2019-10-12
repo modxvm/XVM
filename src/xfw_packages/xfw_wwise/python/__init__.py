@@ -1,21 +1,36 @@
-""" XVM (c) https://modxvm.com 2013-2019 """
+"""
+This file is part of the XVM Framework project.
 
-#####################################################################
-# imports
+Copyright (c) 2013-2019 XVM Team.
 
-import imp
-import os
-import traceback
-import sys
+XVM Framework is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as
+published by the Free Software Foundation, version 3.
 
-from xfw.events import overrideMethod
-from xfw.constants import PATH
-from xfw.utils import resolve_path
+XVM Framework is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+Lesser General Public License for more details.
 
+You should have received a copy of the GNU Lesser General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>.
+"""
+
+#cpython
+import logging
+
+#BigWorld
 from Avatar import PlayerAvatar
 
-#####################################################################
-# bank manager
+#xfw.loader
+import xfw_loader.python as loader
+
+#xfw.libraries
+from xfw.events import overrideMethod
+from xfw.utils import resolve_path
+
+
+g_wwise = None
 
 class XFWWWise(object):
     """
@@ -34,24 +49,25 @@ class XFWWWise(object):
         """
         #print('XFW_WWISE/__init__')
 
-        self.native = None
+        self.__native = None
+        self.__package_name = 'com.modxvm.xfw.wwise'
 
         try:
-            if "python27" in sys.modules:
-                path_realfs = PATH.XFWLOADER_PACKAGES_REALFS + '/xfw_wwise/native/xfw_wwise.pyd'
-                path_vfs = PATH.XFWLOADER_PACKAGES_VFS + '/xfw_wwise/native/xfw_wwise.pyd'
+            xfwnative = loader.get_mod_module('com.modxvm.xfw.native')
+            if not xfwnative:
+                logging.error('[XFW/WWISE] Failed to load native module. XFW Native is not available')
+                return
 
-                is_in_realfs = os.path.isfile(path_realfs)
-                if is_in_realfs:
-                    self.native = imp.load_dynamic('XFW_WWISE', path_realfs)
-                else:
-                    import xfw.vfs as vfs
-                    self.native = vfs.c_extension_load('XFW_WWISE', path_vfs, 'com.modxvm.xfw.wwise')
-            else:
-                print "[WWISE/Native] was not loaded because of python27 error"
+            if not xfwnative.unpack_native(self.__package_name):
+                logging.error('[XFW/WWISE] Failed to load native module. Failed to unpack native module')
+                return
+
+            self.__native = xfwnative.load_native(self.__package_name, 'xfw_wwise.pyd', 'XFW_WWISE')
+            if not self.__native:
+                logging.error("[XFW/WWISE] Failed to load native module. Crash report were not enabled")   
+                return
         except Exception:
-            print "[WWISE/Native] Error on loading native components"
-            traceback.print_exc()
+            logging.exception("[XFW/WWISE] Error when loading native library:")
 
         self.battle_config = set()
         self.hangar_config = set()
@@ -64,6 +80,9 @@ class XFWWWise(object):
 
         self.banks_loaded = dict()
 
+    def is_initialized(self):
+        return self.__native is not None
+
     def bank_add(self, bank_path, add_to_battle, add_to_hangar, _from_config=False):
         """
         Add bank to loading list.
@@ -74,9 +93,7 @@ class XFWWWise(object):
         add_to_hangar -- true to load bank in hangar
         _from_config  -- do not use this
         """
-        #print('XFW_WWISE/bank_add')
-
-        normalized_path = self._normalize_path(bank_path)
+        normalized_path = self.__normalize_path(bank_path)
         if add_to_battle:
             if _from_config:
                 self.battle_config.add(normalized_path)
@@ -101,7 +118,7 @@ class XFWWWise(object):
         """
         #print('XFW_WWISE/bank_remove')
 
-        normalized_path = self._normalize_path(bank_path)
+        normalized_path = self.__normalize_path(bank_path)
         if remove_from_battle:
             if _from_config:
                 if normalized_path in self.battle_config:
@@ -158,60 +175,58 @@ class XFWWWise(object):
                 banks_to_unload.add(key)
 
         for bank in banks_to_unload:
-            self._bank_unload(bank)
+            self.__bank_unload(bank)
 
         for bank in banks_to_load:
             if bank not in self.banks_loaded:
-                self._bank_load(bank)
+                self.__bank_load(bank)
 
     def comm_init(self):
         """
         Enable WWISE Remote communication.
         """
         try:
-            if self.native is None:
+            if self.__native is None:
                 return
-            self.native.comm_init()
+            self.__native.comm_init()
         except Exception:
-            traceback.print_exc()
+            logging.exception("[XFW/WWISE] [comm_init]")
 
-    def _bank_load(self, bank_path):
+
+    def __bank_load(self, bank_path):
         """
         Load bank using WWise Native API.
         Do not use it directly. Add bank with bank_add() and then reload() instead.
 
         bank_path -- path relative to game root (WorldOfTanks.exe directory)
         """
-        #print('XFW_WWISE/_bank_load: bankPath=%s' % bank_path)
-
         try:
-            if self.native is None:
+            if self.__native is None:
                 return
-            bank_id = self.native.bank_load(unicode(bank_path), unicode(PATH.WOT_RESMODS_DIR + '/audioww/'))
+
+            bank_id = self.__native.bank_load(unicode(bank_path), unicode(loader.WOT_RESMODS_DIR + '/audioww/'))
             if bank_id:
                 self.banks_loaded[bank_path] = bank_id
         except Exception:
-            traceback.print_exc()
+            logging.exception("[XFW/WWISE] [__bank_load]")
 
-    def _bank_unload(self, bank_path):
+    def __bank_unload(self, bank_path):
         """
         Unload bank using WWise Native API.
         Do not use it directly. Remove bank with bank_remove() and then reload() instead.
 
         bank_path -- path relative to game root (WorldOfTanks.exe directory)
         """
-        #print('XFW_WWISE/_bank_unload: bankPath=%s' % bank_path)
-
         try:
             bank_id = self.banks_loaded.pop(bank_path)
             if bank_id:
-                if self.native is None:
+                if self.__native is None:
                     return
-                self.native.bank_unload(bank_id)
+                self.__native.bank_unload(bank_id)
         except Exception:
-            traceback.print_exc()
+            logging.exception("[XFW/WWISE] [__bank_unload]")
 
-    def _normalize_path(self, path):
+    def __normalize_path(self, path):
         """
         Normalize path to sound bank:
 
@@ -220,9 +235,20 @@ class XFWWWise(object):
         xvm://* -> ../res_mods/mods/shared_resources/xvm/*
         *       -> ../res_mods/x.x.x/audioww/*
         """
-        return resolve_path(path, PATH.WOT_RESMODS_DIR + '/audioww/').lower()
+        return resolve_path(path, loader.WOT_RESMODS_DIR + '/audioww/').lower()
+
+
+#####################################################################
+# initialization
+
+def xfw_is_module_loaded():
+    if not g_wwise:
+        return False
+
+    return g_wwise.is_initialized()
 
 g_wwise = XFWWWise()
+
 
 #####################################################################
 # handlers

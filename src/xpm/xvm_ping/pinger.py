@@ -1,4 +1,20 @@
-""" XVM (c) https://modxvm.com 2013-2019 """
+"""
+This file is part of the XVM project.
+
+Copyright (c) 2013-2019 XVM Team.
+
+XVM is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as
+published by the Free Software Foundation, version 3.
+
+XVM is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>.
+"""
 
 #############################
 # Public
@@ -12,18 +28,27 @@ def update_config(*args, **kwargs):
 #############################
 # Private
 
+#cpython
+import logging
 import traceback
 import threading
 
+#BigWorld
 import BigWorld
 import ResMgr
 from helpers import dependency
 from skeletons.gui.shared.utils import IHangarSpace
 
-from xfw import *
-from xfw_actionscript.python import *
-from xfw_ping.python import ping as xfw_ping
+#xfw.loader
+import xfw_loader.python as loader
 
+#xfw.libraries
+from xfw import *
+
+#xfw.actionscript
+from xfw_actionscript.python import *
+
+#xvm.main
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
 from xvm_main.python.xvm import l10n
@@ -33,11 +58,17 @@ class _Ping(object):
     hangarSpace = dependency.descriptor(IHangarSpace)
 
     def __init__(self):
+        self.xfwping = None
         self.lock = threading.RLock()
         self.thread = None
         self.resp = None
         self.done_config = False
         self.loginSection = ResMgr.openSection('scripts_config.xml')['login']
+
+        #import XFW.Ping
+        self.xfwping = loader.get_mod_module('com.modxvm.xfw.ping')
+        if not self.xfwping:
+            logging.warning("[XVM/Ping] [pinger/init]: failed to import XFW.Ping. Ping results will be unavailable.")
 
     def update_config(self):
         self.loginErrorString = l10n(config.get('login/pingServers/errorString', '--'))
@@ -107,7 +138,10 @@ class _Ping(object):
             # Parse ping output
             best_ping = 999
             for host in (self.hangarHosts if self.hangarSpace.inited else self.loginHosts):
-                hostping = xfw_ping(self.hosts_urls[host].split(':')[0])
+                if self.xfwping is not None:
+                    hostping = self.xfwping.ping(self.hosts_urls[host].split(':')[0])
+                else:
+                    hostping = 0
 
                 if hostping<0:
                     res.append({'cluster': host, 'time': (self.hangarErrorString if self.hangarSpace.inited else self.loginErrorString)})

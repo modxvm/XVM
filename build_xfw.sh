@@ -36,10 +36,10 @@ source ./build/xvm-build.conf
 if [ "$XFW_BUILD_CLEAR" == "" ]; then
   export XFW_BUILD_CLEAR=1
 fi
+
 if [ "$XFW_BUILD_LIBS" == "" ]; then
   export XFW_BUILD_LIBS=1
 fi
-
 
 ##########################
 ####  BUILD FUNCTIONS ####
@@ -48,7 +48,7 @@ fi
 build_source()
 {
     args="$*"
-    args="${args:=actionscript swf python packages}" # default - build all
+    args="${args:=actionscript swf packages}" # default - build all
 
     if [[ " $args " =~ " actionscript " ]]; then
       # build actionscript
@@ -62,14 +62,6 @@ build_source()
       # patch swfs
       echo "building xfw: swf"
       pushd src/xfw_swf > /dev/null
-      ./build.sh || exit 1
-      popd > /dev/null
-    fi
-
-    if [[ " $args " =~ " python " ]]; then
-      # build python
-      echo "building xfw: python"
-      pushd src/xfw_python > /dev/null
       ./build.sh || exit 1
       popd > /dev/null
     fi
@@ -90,4 +82,3 @@ build_source()
 detect_git
 
 build_source $*
-build_xfw_wotmod
