@@ -10,6 +10,9 @@
   * removed option:
       "hangar"/"showDogtagWidget"
 
+  [KNOWN ISSUES]
+  * XVM is not compatible with the 64-bit version of the client
+
 XVM-8.0.7:
   [GENERAL]
   * Fix platoons for Grand Race
@@ -251,11 +254,11 @@ XVM-7.8.5:
       "hangar"/"masteryMarkInTechTree" - show mastery mark in tech tree
     Will be reprocessed in future releases.
 
-XVM-7.8.4
+XVM-7.8.4:
   [GENERAL]
   * World of Tanks 1.4.0.2
 
-XVM-7.8.3
+XVM-7.8.3:
   [GENERAL]
   * World of Tanks 1.4.0.1 micropatch 2019.03.06
 
