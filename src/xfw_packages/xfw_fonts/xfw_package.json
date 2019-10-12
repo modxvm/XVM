@@ -4,7 +4,7 @@
     "description": "XFW Font Manager module",
 
     "version": "XFW_VERSION",
-    "dependencies": ["com.modxvm.xfw.native"],
+    "dependencies": ["com.modxvm.xfw.native", "com.modxvm.xfw.libraries"],
 
     "url": "https://modxvm.com/",
     "url_update": "https://modxvm.com/",
@@ -13,5 +13,6 @@
     "wot_version_exactmatch": false,
 
     "features": ["fonts", "native", "python"],
-    "features_provide": ["fonts"]
+    "features_provide": ["fonts"],
+    "architecture": ["32bit"]
 }
