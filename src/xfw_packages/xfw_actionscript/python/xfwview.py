@@ -38,6 +38,8 @@ from gui.Scaleform.genConsts.BATTLE_VIEW_ALIASES import BATTLE_VIEW_ALIASES
 from helpers import dependency
 from skeletons.gui.app_loader import IAppLoader
 
+import xfw_loader.python as loader
+
 from xfw import IS_DEVELOPMENT
 from xfw.constants import *
 from xfw.logger import *
@@ -170,7 +172,7 @@ class _XfwComponent(BaseDAAPIComponent):
 
             #TODO: add VFS support
             #TODO: process only successful loaded mods
-            mods_dir = PATH.XFWLOADER_PACKAGES_REALFS
+            mods_dir = loader.XFWLOADER_PACKAGES_REALFS
             if not os.path.isdir(mods_dir):
                 return None
 

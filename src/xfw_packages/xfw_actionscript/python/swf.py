@@ -35,7 +35,7 @@ from skeletons.gui.app_loader import IAppLoader, GuiGlobalSpaceID
 from xfw.constants import *
 from xfw.events import *
 from xfw.logger import *
-import xfw.vfs as vfs
+import xfw_vfs as vfs
 from xfw import isInBootcamp, IS_DEVELOPMENT
 
 from .xfwmodsinfo import xfw_mods_info
