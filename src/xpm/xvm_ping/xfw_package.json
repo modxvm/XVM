@@ -4,7 +4,7 @@
     "description": "XVM Ping module",
 
     "version": "XVM_VERSION",
-    "dependencies": ["com.modxvm.xvm"],
+    "dependencies": ["com.modxvm.xvm", "com.modxvm.xfw.actionscript"],
     "dependencies_optional": ["com.modxvm.xfw.ping"],
 
     "url": "https://modxvm.com/",
