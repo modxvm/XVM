@@ -48,7 +48,6 @@ outputpath="$XVMBUILD_ROOT_PATH/$XVMBUILD_XFW_PACKAGES_OUTPUTPATH"
 wotmodpath="$XVMBUILD_ROOT_PATH/$XVMBUILD_XFW_WOTMOD_OUTPUTPATH"
 
 libraries=(
-  'xfw'
   'xfw_actionscript'
   'xfw_crashreport'
   'xfw_filewatcher'
@@ -57,7 +56,6 @@ libraries=(
   'xfw_loader'
   'xfw_mutex'
   'xfw_ping'
-  'xfw_powermanagement'
   'xfw_wotfix_crashes'
   'xfw_wotfix_hidpi'
   'xfw_wwise'
