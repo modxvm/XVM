@@ -4,7 +4,6 @@
     "description": "XVM",
 
     "version": "XVM_VERSION",
-
     "dependencies": ["com.modxvm.xfw.libraries"],
     "dependencies_optional": [
         "com.modxvm.xfw.filewatcher", 
