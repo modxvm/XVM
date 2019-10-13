@@ -61,6 +61,7 @@ package com.xvm.types.dossier
             if (vdossier)
             {
                 rent = vdossier.rent;
+                multiNation = vdossier.multiNation;
                 camouflageSummer = vdossier.camouflageSummer;
                 camouflageWinter = vdossier.camouflageWinter;
                 camouflageDesert = vdossier.camouflageDesert;
@@ -197,6 +198,7 @@ package com.xvm.types.dossier
         public var damageRating:Number;
         public var c_damageRating:String;
         public var rent:String;
+        public var multiNation:String;
         public var camouflageSummer:String;
         public var camouflageWinter:String;
         public var camouflageDesert:String;
