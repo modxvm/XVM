@@ -1,4 +1,12 @@
-﻿XVM-8.1.0:
+﻿XVM-8.1.1:
+  [GENERAL]
+  * World of Tanks 1.6.1.1
+
+  [MACROS]
+  * added macros in hangar:
+      {{v.multiNation}} - 'multi' for vehicle on which it is possible to change the nation, empty for normal vehicle
+
+XVM-8.1.0:
   [GENERAL]
   * World of Tanks 1.6.1.0
 
