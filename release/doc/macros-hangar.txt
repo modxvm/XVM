@@ -38,6 +38,7 @@ Legend:
 │ {{v.special}}              │ X │ X │ value 'special' for award and event (excluding premium vehicles with increased income on credits) vehicle, empty for normal vehicle
 │ {{v.elite}}                │ X │   │ value 'elite' for elite, empty for normal vehicle
 │ {{v.rent}}                 │ X │ X │ value 'rent' for rented, empty for normal vehicle
+│ {{v.multiNation}}          │ X │ X │ value 'multi' for vehicle on which it is possible to change the nation, empty for normal vehicle
 │ {{v.maxHP}}                │ X │ X │ maximum vehicle health points
 │ {{v.hitsRatio}}            │ X │ X │ percent of hits
 │ {{v.c_hitsRatio}}          │ X │ X │ dynamic color for this macro
