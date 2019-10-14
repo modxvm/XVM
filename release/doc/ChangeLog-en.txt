@@ -2,9 +2,18 @@
   [GENERAL]
   * World of Tanks 1.6.1.1
 
+  [XFW]
+  * Refactored XFW Loader. More info: https://gitlab.com/xvm/xvm/wikis
+  * Changes in `.wotmod` names:
+      * `com.modxvm.xfw.loader` was added
+      * `com.modxvm.xfw` was removed
+
   [MACROS]
   * added macros in hangar:
       {{v.multiNation}} - 'multi' for vehicle on which it is possible to change the nation, empty for normal vehicle
+
+  [KNOWN ISSUES]
+  * XVM is not compatible with the 64-bit version of the client
 
 XVM-8.1.0:
   [GENERAL]
