@@ -74,12 +74,12 @@
     // Если вы хотите использовать свои собственные границы прозрачности вместо стандартных,
     // раскомментируйте блок и замените "rating_name" на одно из следующих значений: "eff", "wn8", "wtr", "wgr".
     // "rating_name": [
-    //  { "value": 500,   "alpha": ${"def.colorRating.very_bad" } }, //    0 - 500   - very bad
-    //  { "value": 1000,  "alpha": ${"def.colorRating.bad"      } }, //  501 - 1000  - bad
-    //  { "value": 2000,  "alpha": ${"def.colorRating.normal"   } }, // 1001 - 2000  - normal
-    //  { "value": 3000,  "alpha": ${"def.colorRating.good"     } }, // 2001 - 3000  - good
-    //  { "value": 5000,  "alpha": ${"def.colorRating.very_good"} }, // 3001 - 5000  - very good
-    //  { "value": 99999, "alpha": ${"def.colorRating.unique"   } }  // 5001 - 99999 - unique
+    //  { "value": 500,   "alpha": ${"def.alphaRating.very_bad" } }, //    0 - 500   - very bad
+    //  { "value": 1000,  "alpha": ${"def.alphaRating.bad"      } }, //  501 - 1000  - bad
+    //  { "value": 2000,  "alpha": ${"def.alphaRating.normal"   } }, // 1001 - 2000  - normal
+    //  { "value": 3000,  "alpha": ${"def.alphaRating.good"     } }, // 2001 - 3000  - good
+    //  { "value": 5000,  "alpha": ${"def.alphaRating.very_good"} }, // 3001 - 5000  - very good
+    //  { "value": 99999, "alpha": ${"def.alphaRating.unique"   } }  // 5001 - 99999 - unique
     // ],
     // Dynamic transparency by win percent.
     // Динамическая прозрачность по проценту побед.
