@@ -17,9 +17,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 import logging
+import os
 import sys
 
 try:
+    logging.info('[XFW/Entrypoint]')
+    logging.info('[XFW/Entrypoint] WoT Working Directory: %s' % os.getcwd())
+
     #Files in VFS
     sys.path.insert(0, 'mods/xfw_packages')
     sys.path.insert(0, 'mods/xfw_libraries')
