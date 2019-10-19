@@ -259,7 +259,7 @@ def StatusBlockConstructor_construct(base, self):
             techTreeNode = self.configuration.node
             vehicle = self.vehicle
             isUnlocked = vehicle.isUnlocked
-            parentCD = techTreeNode.unlockProps.parentID if techTreeNode is not None else None
+            parentCD = int(techTreeNode.unlockProps.parentID) if techTreeNode is not None else None
             if parentCD is not None:
                 isAvailable, cost, need, defCost, discount = getUnlockPrice(vehicle.intCD, parentCD, vehicle.level)
                 if isAvailable and not isUnlocked and need > 0 and techTreeNode is not None:
