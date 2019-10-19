@@ -8,8 +8,6 @@
 #include "dllMain.h"
 #include "common.h"
 
-using namespace std::experimental;
-
 class CrashReporter {
 
 private:
@@ -74,7 +72,7 @@ public:
     {
         auto langfile = std::wstring(L"crashrpt_lang_") + language + L".ini";
         auto langpath = GetModuleDirectory(hDLL) / L"lang_files" / langfile;
-        if (filesystem::exists(langpath))
+        if (std::filesystem::exists(langpath))
         {
             CrashRpt_langpath = langpath;
             return true;
@@ -84,7 +82,7 @@ public:
         {
             langfile = std::wstring(L"crashrpt_lang_RU.ini");
             langpath = GetModuleDirectory(hDLL) / L"lang_files" / langfile;
-            if (filesystem::exists(langpath))
+            if (std::filesystem::exists(langpath))
             {
                 CrashRpt_langpath = langpath;
                 return true;
@@ -93,7 +91,7 @@ public:
 
         langfile = std::wstring(L"crashrpt_lang_EN.ini");
         langpath = GetModuleDirectory(hDLL) / L"lang_files" / langfile;
-        if (filesystem::exists(langpath))
+        if (std::filesystem::exists(langpath))
         {
             CrashRpt_langpath = langpath;
             return true;
@@ -227,7 +225,7 @@ PyObject* Py_CrashRpt_Install(PyObject* self, PyObject* args)
         return nullptr;
     }
 
-    if(filesystem::exists(GetModuleDirectory(static_cast<HMODULE>(nullptr)) / L"wargaming_qa.conf"))
+    if(std::filesystem::exists(GetModuleDirectory(static_cast<HMODULE>(nullptr)) / L"wargaming_qa.conf"))
     {
         crashreporter->SetSilentMode(true);
     }

@@ -1,8 +1,11 @@
-cmake_minimum_required (VERSION 3.0)
+cmake_minimum_required (VERSION 3.10)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 project(xfw_crashreport LANGUAGES C CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(libpython REQUIRED)
 
@@ -25,7 +28,9 @@ set(VER_INTERNALNAME_STR "xfw_crashreport")
 configure_file("../../library.h.in" "library.h" @ONLY)
 target_include_directories(xfw_crashreport PRIVATE "${CMAKE_BUILD_DIR}")
 
-target_compile_definitions(xfw_crashreport PRIVATE "_CRT_SECURE_NO_WARNINGS")
+target_compile_definitions(xfw_crashreport PRIVATE "-D_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING")	
+target_compile_definitions(xfw_crashreport PRIVATE "-D_CRT_SECURE_NO_WARNINGS")
+
 set_target_properties(xfw_crashreport PROPERTIES LINK_FLAGS "/INCREMENTAL:NO")
 
 #dep: python

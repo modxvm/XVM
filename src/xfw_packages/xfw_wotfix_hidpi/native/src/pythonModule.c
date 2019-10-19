@@ -16,7 +16,6 @@
  */
  
 #include "Python.h"
-#include "PythonWot.h"
 
 #include <Windows.h>
 #include <Shlwapi.h>

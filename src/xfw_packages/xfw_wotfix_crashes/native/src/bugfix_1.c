@@ -16,10 +16,10 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "bugfix_1.h"
-
 #include <Python.h>
-#include <PythonWoT.h>
+#include <XfwNativeApi.h>
+
+#include "bugfix_1.h"
 #include "common.h"
 
 //search string: 55 8B EC 83 EC 18 53 8B D9 56 57 8D 7B 08 89 5D
@@ -62,12 +62,11 @@ int bugfix1_apply()
     WCHAR lpFilename[2048];
     GetModuleFileNameW(NULL, lpFilename, 2048);
     DWORD startpos = (DWORD)GetModuleHandleW(lpFilename);
-    DWORD endpos = startpos + WOTPYTHON_GetModuleSize(lpFilename);
-    DWORD curpos = startpos;
+    DWORD endpos = startpos + XFWNATIVE_GetModuleSize(lpFilename);
 
     char *test = NULL;
 
-    DWORD crashfunction_addr = WOTPYTHON_FindFunction(startpos, endpos, &curpos, function_signature, function_signature_mask);
+    DWORD crashfunction_addr = XFWNATIVE_FindFunction(startpos, endpos, function_signature, function_signature_mask);
     if (crashfunction_addr == 0) {
         return -1;
     }

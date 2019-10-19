@@ -16,6 +16,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <codecvt>
 #include <vector>
 
 #include <Shlwapi.h>
@@ -80,16 +81,16 @@ std::wstring GetModuleVersion(const wchar_t* moduleName)
    return GetModuleVersion(GetModuleHandleW(moduleName));
 }
 
-filesystem::path GetModuleDirectory(HMODULE hModule)
+std::filesystem::path GetModuleDirectory(HMODULE hModule)
 {
     WCHAR Path[MAX_PATH];
     GetModuleFileNameW(hModule, Path, MAX_PATH);
     PathRemoveFileSpecW(Path);
 
-    return filesystem::path(Path);
+    return std::filesystem::path(Path);
 }
 
-filesystem::path GetModuleDirectory(const wchar_t* moduleName)
+std::filesystem::path GetModuleDirectory(const wchar_t* moduleName)
 {
     return GetModuleDirectory(GetModuleHandleW(moduleName));
 }

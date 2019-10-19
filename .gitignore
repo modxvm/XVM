@@ -12,6 +12,9 @@ syntax: glob
 
 #Build output
 ~output/
+_build/
+_devel/
+_logs/
 
 #Actionscript disasm
 *.abc

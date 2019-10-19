@@ -17,37 +17,28 @@
 
 Push-Location $PSScriptRoot
 
-Import-Module ../../build/library.psm1 -Force -DisableNameChecking
+Import-Module ../../build_lib/library.psm1 -Force -DisableNameChecking
 
 #version
-$repostats = Get-MercurialRepoStats
-$xfw_version = "7.7.0"
-
-$version_str = "${xfw_version}.$($repostats.Revision)"
+$version_str = "8.1.2.0"
 $version = $version_str -replace "\.",","
 
-$xfwnative_version="1.4.1.00076"
+$xfwnative_url="https://ci.appveyor.com/api/buildjobs/o7mfpjq3iimkwj9n/artifacts/output%2Fdeploy%2Fcom.modxvm.xfw.native_1.4.9-devel.zip"
 
 $projects=@(
-    "xfw_console"
     "xfw_crashreport"
     "xfw_filewatcher"
     "xfw_fonts"
     "xfw_mutex"
     "xfw_ping"
-    "xfw_powermanagement"
     "xfw_wotfix_crashes"
     "xfw_wotfix_hidpi"
     "xfw_wwise"
 )
 
-$projects=@(
-    "xfw_wotfix_crashes"
-)
-
 function Download-DevelPackage()
 {
-    Invoke-WebRequest "https://bitbucket.org/XVM/xfw.native/downloads/com.modxvm.xfw.native_${xfwnative_version}-devel.zip" -OutFile devel.zip
+    Invoke-WebRequest $xfwnative_url -OutFile devel.zip
     Expand-Archive -Path ./devel.zip -DestinationPath ./_devel/
     Remove-Item -Path "./devel.zip"
 }

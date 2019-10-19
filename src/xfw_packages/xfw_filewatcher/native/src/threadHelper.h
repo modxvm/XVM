@@ -20,6 +20,7 @@
 
 #include <Windows.h>
 
+#include <string>
 #include <thread>
 
 void SetThreadName(DWORD dwThreadID, const char* threadName);
