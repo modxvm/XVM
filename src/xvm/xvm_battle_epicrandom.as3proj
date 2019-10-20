@@ -59,9 +59,9 @@
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
-    <element path="..\xfw\~output\swc\wg_battle.swc" />
-    <element path="..\xfw\~output\swc\wg_battle_epicrandom_ui.swc" />
-    <element path="..\xfw\~output\swc\xfw.swc" />
+    <element path="..\..\~output\xfw\swc\wg_battle.swc" />
+    <element path="..\..\~output\xfw\swc\wg_battle_epicrandom_ui.swc" />
+    <element path="..\..\~output\xfw\swc\xfw.swc" />
   </externalLibraryPaths>
   <!-- Runtime Shared Libraries -->
   <rslPaths>
