@@ -80,11 +80,6 @@ package com.xvm.battle.shared.playersPanel
 
         private static const MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED:String = "MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED";
 
-        // PUBLIC STATIC VARS
-
-        public static var s_widthLeft:int = 0;
-        public static var s_widthRight:int = 0;
-
         // PRIVATE STATIC VARS
 
         private static var s_maxPlayerNameTextWidthsLeft:Dictionary = new Dictionary();
@@ -540,8 +535,8 @@ package com.xvm.battle.shared.playersPanel
                     break;
                 case PLAYERS_PANEL_STATE.HIDDEN:
                 case -1:
-                    s_widthLeft = 0;
-                    s_widthRight = 0;
+                    BattleState.playersPanelWidthLeft = 0;
+                    BattleState.playersPanelWidthLeft = 0;
                     ui.visible = false;
                     //ui.x = isLeftPanel ? -WIDTH : WIDTH;
                     break;
@@ -725,7 +720,7 @@ package com.xvm.battle.shared.playersPanel
                 }
             }
             updatePositionsLeft(lastX);
-            s_widthLeft = WIDTH + ui.x;
+            BattleState.playersPanelWidthLeft = WIDTH + ui.x;
         }
 
         private function _updatePositionsRight():void
@@ -750,7 +745,7 @@ package com.xvm.battle.shared.playersPanel
                 }
             }
             updatePositionsRight(lastX);
-            s_widthRight = WIDTH - ui.x;
+            BattleState.playersPanelWidthRight = WIDTH - ui.x;
         }
 
         private function _getFieldByConfigName(fieldName:String):DisplayObject

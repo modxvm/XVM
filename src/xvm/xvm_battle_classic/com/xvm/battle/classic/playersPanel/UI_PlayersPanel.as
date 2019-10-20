@@ -487,12 +487,7 @@ package com.xvm.battle.classic.playersPanel
         private function updateBattleStatePlayersPanelData():void
         {
             BattleState.playersPanelMode = state;
-            if (xvm_enabled)
-            {
-                BattleState.playersPanelWidthLeft = PlayersPanelListItemProxyBase.s_widthLeft;
-                BattleState.playersPanelWidthRight = PlayersPanelListItemProxyBase.s_widthRight;
-            }
-            else
+            if (!xvm_enabled)
             {
                 BattleState.playersPanelWidthLeft = listLeft.getRenderersVisibleWidth() + PlayersPanelListItemProxyBase.PLAYERS_PANEL_WIDTH_OFFSET;
                 BattleState.playersPanelWidthRight = listRight.getRenderersVisibleWidth() + PlayersPanelListItemProxyBase.PLAYERS_PANEL_WIDTH_OFFSET;
