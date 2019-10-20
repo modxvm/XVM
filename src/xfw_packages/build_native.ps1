@@ -23,9 +23,9 @@ Import-Module ../../build_lib/library.psm1 -Force -DisableNameChecking
 $version_str = "8.1.2.0"
 $version = $version_str -replace "\.",","
 
-$xfwnative_url="https://ci.appveyor.com/api/buildjobs/o7mfpjq3iimkwj9n/artifacts/output%2Fdeploy%2Fcom.modxvm.xfw.native_1.4.9-devel.zip"
+$xfwnative_url="https://ci.appveyor.com/api/buildjobs/albqamggiit0xp6w/artifacts/output%2Fdeploy%2Fcom.modxvm.xfw.native_1.5.1-devel.zip"
 
-$projects=@(
+$projects_32=@(
     "xfw_crashreport"
     "xfw_filewatcher"
     "xfw_fonts"
@@ -36,6 +36,11 @@ $projects=@(
     "xfw_wwise"
 )
 
+
+$projects_64=@(
+    "xfw_fonts"
+)
+
 function Download-DevelPackage()
 {
     Invoke-WebRequest $xfwnative_url -OutFile devel.zip
@@ -43,24 +48,31 @@ function Download-DevelPackage()
     Remove-Item -Path "./devel.zip"
 }
 
-function Build-CmakeProject($Name)
+function Build-CmakeProject($Name, $Arch = "32bit")
 {
     Write-Output "  * $Name"
 
-    New-Item -ItemType Directory -Path ./_build/$Name/native/ | Out-Null
-
     $root = (Get-Location).Path -replace "\\","/"
 
-    Push-Location "$root/_build/$Name/"
+    if($Arch -eq "64bit") {
+        $msvcarch = "x64"
+    } else {
+        $msvcarch = "Win32"
+    }
 
-    cmake -A Win32 -T v141_xp "$root/$Name/native/" -DVER_VERSION="${version}" -DVER_VERSION_STR="${version_str}" -DCMAKE_INSTALL_PREFIX="$root/_binaries/$Name/native_32bit/" -DCMAKE_PREFIX_PATH="$root/_devel/" | Out-File -FilePath "$root/_logs/$Name-cmake-config.log"
+    New-Item -ItemType Directory -Path ./_build/${Name}_${msvcarch}/ | Out-Null
+    Push-Location "$root/_build/${Name}_${msvcarch}/"
+
+
+
+    cmake -A $msvcarch -T v141_xp "$root/$Name/native/" -DVER_VERSION="${version}" -DVER_VERSION_STR="${version_str}" -DCMAKE_INSTALL_PREFIX="$root/_binaries/$Name/native_$Arch/" -DCMAKE_PREFIX_PATH="$root/_devel/$msvcarch"
     if ($LastExitCode -ne 0) {
         Write-Error "Configure failed"
         Pop-Location
         exit $LastExitCode
     }
 
-    cmake --build . --target INSTALL --config RelWithDebInfo | Out-File -FilePath "$root/_logs/$Name-cmake-build.log"
+    cmake --build . --target INSTALL --config RelWithDebInfo
     if ($LastExitCode -ne 0) {
         Write-Error "Build failed"
         Pop-Location
@@ -73,14 +85,15 @@ function Build-CmakeProject($Name)
 
 Remove-Item -Path "./_build/*" -Recurse -Force -ErrorAction SilentlyContinue
 Remove-Item -Path "./_binaries/*" -Recurse -Force -ErrorAction SilentlyContinue
-Remove-Item -Path "./_logs/*" -Force -Recurse -ErrorAction SilentlyContinue
-New-Item -Path "./_logs/" -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null
-
 Remove-Item -Path "./_devel/*" -Force -Recurse -ErrorAction SilentlyContinue
 Download-DevelPackage
 
-foreach ($project in $projects) {
-    Build-CmakeProject -Name $project
+foreach ($project in $projects_32) {
+#    Build-CmakeProject -Name $project -Arch "32bit"   
+}
+
+foreach ($project in $projects_64) {
+    Build-CmakeProject -Name $project -Arch "64bit"  
 }
 
 #Remove-Item -Path "./_build/*" -Recurse -Force -ErrorAction SilentlyContinue

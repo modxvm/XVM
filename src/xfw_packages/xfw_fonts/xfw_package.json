@@ -14,5 +14,5 @@
 
     "features": ["fonts", "native", "python"],
     "features_provide": ["fonts"],
-    "architecture": ["32bit"]
+    "architecture": ["32bit", "64bit"]
 }
