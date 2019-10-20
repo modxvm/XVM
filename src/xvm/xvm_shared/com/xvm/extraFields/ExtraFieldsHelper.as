@@ -169,8 +169,6 @@ package com.xvm.extraFields
                 entry = FLAG_ENTRY_PLAYER;
             else if (options.isSquadPersonal)
                 entry = FLAG_ENTRY_SQUADMAN;
-            else if (options.isTeamKiller)
-                entry = FLAG_ENTRY_TEAMKILLER;
             else if (options.isAlly)
                 entry = FLAG_ENTRY_ALLY;
             else
@@ -180,6 +178,7 @@ package com.xvm.extraFields
             var entryFound:Boolean = false;
             var spottedFlags:int = 0;
             var aliveFlags:int = 0;
+            var teamKillerFlagPresent:Boolean = false;
             var len:int = flags.length;
             for (var i:int = 0; i < len; ++i)
             {
@@ -202,9 +201,11 @@ package com.xvm.extraFields
                     case FLAG_ALIVE_DEAD:
                         aliveFlags |= ALIVE_FLAG_DEAD;
                         break;
+                    case FLAG_ENTRY_TEAMKILLER:
+                        teamKillerFlagPresent = true;
+                        break;
                     case FLAG_ENTRY_PLAYER:
                     case FLAG_ENTRY_SQUADMAN:
-                    case FLAG_ENTRY_TEAMKILLER:
                     case FLAG_ENTRY_ALLY:
                     case FLAG_ENTRY_ENEMY:
                         entryPresent = true;
@@ -227,7 +228,18 @@ package com.xvm.extraFields
                     return false;
                 }
             }
+            else
+            {
+                if (teamKillerFlagPresent)
+                {
+                    if (!options.isTeamKiller)
+                    {
+                        return false;
+                    }
+                }
+            }
 
+            // alive
             if (!aliveFlags)
                 aliveFlags = ALIVE_FLAG_ANY;
 
@@ -245,6 +257,7 @@ package com.xvm.extraFields
             if (!playerState)
                 return true;
 
+            // spotted
             var spottedValue:int = 0;
             switch (playerState.spottedStatus)
             {
