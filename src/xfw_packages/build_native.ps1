@@ -23,7 +23,7 @@ Import-Module ../../build_lib/library.psm1 -Force -DisableNameChecking
 $version_str = "8.1.2.0"
 $version = $version_str -replace "\.",","
 
-$xfwnative_url="https://ci.appveyor.com/api/buildjobs/albqamggiit0xp6w/artifacts/output%2Fdeploy%2Fcom.modxvm.xfw.native_1.5.1-devel.zip"
+$xfwnative_url="https://ci.appveyor.com/api/buildjobs/aruibqrst0bpyhbd/artifacts/output%2Fdeploy%2Fcom.modxvm.xfw.native_1.5.2-devel.zip"
 
 $projects_32=@(
     "xfw_crashreport"
@@ -38,7 +38,11 @@ $projects_32=@(
 
 
 $projects_64=@(
+    "xfw_filewatcher"
     "xfw_fonts"
+    "xfw_mutex"
+    "xfw_ping"
+    "xfw_wotfix_hidpi"
 )
 
 function Download-DevelPackage()
@@ -84,7 +88,7 @@ function Build-CmakeProject($Name, $Arch = "32bit")
 
 
 Remove-Item -Path "./_build/*" -Recurse -Force -ErrorAction SilentlyContinue
-Remove-Item -Path "./_binaries/*" -Recurse -Force -ErrorAction SilentlyContinue
+#Remove-Item -Path "./_binaries/*" -Recurse -Force -ErrorAction SilentlyContinue
 Remove-Item -Path "./_devel/*" -Force -Recurse -ErrorAction SilentlyContinue
 Download-DevelPackage
 
