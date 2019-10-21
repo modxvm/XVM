@@ -1,4 +1,19 @@
-﻿XVM-8.1.1:
+﻿XVM-8.1.2:
+  [GENERAL]
+  * World of Tanks 1.6.1.1.1 nanopatch 1
+
+  [XFW.Native]
+  * Added initial support for 64-bit clients
+  * Reduced first start time on systems with a large number of processor cores.
+
+  [BUGFIXES]
+  * Fixed crash to desktop in "Grand Battles"
+  * Fixed extrafields for timkillers
+  * Fixed pp.widthLeft and pp.widthRight macros
+  * Fixed display of vehicle name in tank carousel
+  * Fixed typpos in configuration files
+
+XVM-8.1.1:
   [GENERAL]
   * World of Tanks 1.6.1.1
 
