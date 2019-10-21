@@ -53,7 +53,7 @@
   <!-- SWC Libraries -->
   <libraryPaths>
     <element path="..\..\~output\xfw\swc\xfw_shared.swc" />
-    <element path="..\..\~output\swc\xvm_shared.swc" />
+    <element path="..\..\~output\xvm\swc\xvm_shared.swc" />
     <element path="swc\greensock.swc" />
   </libraryPaths>
   <!-- External Libraries -->

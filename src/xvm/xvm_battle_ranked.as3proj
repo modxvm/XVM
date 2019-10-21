@@ -53,8 +53,8 @@
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>
-    <element path="..\..\~output\swc\xvm_shared.swc" />
-    <element path="..\..\~output\swc\xvm_app.swc" />
+    <element path="..\..\~output\xvm\swc\xvm_shared.swc" />
+    <element path="..\..\~output\xvm\swc\xvm_app.swc" />
     <element path="swc\greensock.swc" />
   </libraryPaths>
   <!-- External Libraries -->

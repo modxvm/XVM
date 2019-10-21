@@ -48,8 +48,8 @@
   </build>
   <!-- SWC Include Libraries -->
   <includeLibraries>
-    <element path="..\..\~output\swc\xvm_shared.swc" />
-    <element path="..\..\~output\swc\xvm_app.swc" />
+    <element path="..\..\~output\xvm\swc\xvm_shared.swc" />
+    <element path="..\..\~output\xvm\swc\xvm_app.swc" />
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>
