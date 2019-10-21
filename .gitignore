@@ -27,3 +27,6 @@ __version__.py
 #Difftools
 *.orig
 *.rej
+
+#Test files
+utils/replays/*
