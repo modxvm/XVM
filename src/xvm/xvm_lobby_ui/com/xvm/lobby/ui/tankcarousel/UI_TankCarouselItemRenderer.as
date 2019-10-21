@@ -79,6 +79,12 @@ package com.xvm.lobby.ui.tankcarousel
             super.onDispose();
         }
 
+        override protected function draw():void
+        {
+            super.draw();
+            _helper.draw();
+        }
+
         override public function set data(value:Object):void
         {
             if (!value)

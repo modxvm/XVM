@@ -94,6 +94,11 @@ package com.xvm.lobby.ui.tankcarousel
             item.topHolder = null;
         }
 
+        public function draw():void
+        {
+            _setupStandardFieldAlpha(renderer.content.txtTankName, cfg.fields.tankName);
+        }
+
         // extra fields
 
         public function fixData(value:Object):void
@@ -214,13 +219,13 @@ package com.xvm.lobby.ui.tankcarousel
             field.y = (field.y * field.scaleY) + cfg.dy;
         }
 
-        public function _setupStandardFieldFlag():void
+        private function _setupStandardFieldFlag():void
         {
             _setupStandardFieldAlpha(renderer.content.mcFlag, cfg.fields.flag);
             _setupStandardFieldScale(renderer.content.mcFlag, cfg.fields.flag);
         }
 
-        public function _setupStandardFieldTankIcon():void
+        private function _setupStandardFieldTankIcon():void
         {
             _setupStandardFieldAlpha(renderer.content.imgIcon, cfg.fields.tankIcon);
             //_setupStandardFieldScale(renderer.content.imgIcon, cfg.fields.tankIcon);
@@ -348,14 +353,14 @@ package com.xvm.lobby.ui.tankcarousel
             }
         }
 
-        public function _setupStandardFieldTankName():void
+        private function _setupStandardFieldTankName():void
         {
             _setupStandardFieldAlpha(renderer.content.txtTankName, cfg.fields.tankName);
             _setupStandardFieldScale(renderer.content.txtTankName, cfg.fields.tankName);
             _setupStandardTextField(renderer.content.txtTankName, cfg.fields.tankName, 0);
         }
 
-        public function _setupStandardFieldRentInfo():void
+        private function _setupStandardFieldRentInfo():void
         {
             var tankicon:TankIcon = renderer.content as TankIcon;
             if (tankicon)
@@ -368,7 +373,7 @@ package com.xvm.lobby.ui.tankcarousel
             }
         }
 
-        public function _setupStandardFieldClanLock():void
+        private function _setupStandardFieldClanLock():void
         {
             _setupStandardFieldAlpha(renderer.content.clanLock, cfg.fields.clanLock);
             renderer.content.clanLock.x += cfg.fields.clanLock.dx;
@@ -382,7 +387,7 @@ package com.xvm.lobby.ui.tankcarousel
             */
         }
 
-        public function _setupStandardFieldPrice():void
+        private function _setupStandardFieldPrice():void
         {
             _setupStandardFieldAlpha(renderer.content.price, cfg.fields.price);
             renderer.content.price.x += cfg.fields.price.dx;
@@ -390,7 +395,7 @@ package com.xvm.lobby.ui.tankcarousel
             //renderer.content.price.visible = true; renderer.content.price.text = "price"; // DEBUG
         }
 
-        public function _setupStandardFieldActionPrice():void
+        private function _setupStandardFieldActionPrice():void
         {
             _setupStandardFieldAlpha(renderer.content.actionPrice, cfg.fields.actionPrice);
             renderer.content.actionPrice.x += cfg.fields.actionPrice.dx;
@@ -398,13 +403,13 @@ package com.xvm.lobby.ui.tankcarousel
             //renderer.content.actionPrice.visible = true; renderer.content.actionPrice.iconText.text = "act"; // DEBUG
         }
 
-        public function _setupStandardFieldFavorite():void
+        private function _setupStandardFieldFavorite():void
         {
             _setupStandardFieldAlpha(renderer.content.imgFavorite, cfg.fields.favorite);
             _setupStandardFieldScale(renderer.content.imgFavorite, cfg.fields.favorite);
         }
 
-        public function _setupStandardFieldStats():void
+        private function _setupStandardFieldStats():void
         {
             _setupStandardFieldAlpha(renderer.content.statsBg, cfg.fields.stats);
             _setupStandardFieldScale(renderer.content.statsBg, cfg.fields.stats);
@@ -417,7 +422,7 @@ package com.xvm.lobby.ui.tankcarousel
         private var orig_txtInfo_y:Number = NaN;
         private var orig_infoImg_x:Number = NaN;
         private var orig_infoImg_y:Number = NaN;
-        public function _setupStandardFieldInfo():void
+        private function _setupStandardFieldInfo():void
         {
             var cfgInfo:CCarouselCellStandardField = null;
             if (item.vehicleCarouselVO)
