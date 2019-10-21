@@ -11,7 +11,7 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/epicRandom/views/EpicRandomPage.
 +    returns QName(PackageNamespace(""), "void")
 +    body
 +     maxstack 1
-+     localcount 1
++     localcount 2
 +     initscopedepth 15
 +     maxscopedepth 16
 +     code

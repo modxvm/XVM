@@ -68,7 +68,7 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/views/BaseBattlePage.class.asasm
 +    returns QName(PackageNamespace(""), "void")
 +    body
 +     maxstack 3
-+     localcount 3
++     localcount 2
 +     initscopedepth 15
 +     maxscopedepth 16
 +     code
@@ -100,7 +100,7 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/views/BaseBattlePage.class.asasm
 +    returns QName(PackageNamespace(""), "void")
 +    body
 +     maxstack 3
-+     localcount 3
++     localcount 2
 +     initscopedepth 15
 +     maxscopedepth 16
 +     code
