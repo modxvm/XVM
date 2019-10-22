@@ -1,21 +1,21 @@
 ﻿{
     "RU": {
-        "ver": "8.1.2",
+        "ver": "8.1.3",
         "wot": "1.6.1.1",
         "message": " • World of Tanks 1.6.1.1\nПодробности на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
     },
     "EU": {
-        "ver": "8.1.2",
+        "ver": "8.1.3",
         "wot": "1.6.1.1",
         "message": " • World of Tanks 1.6.1.1\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "NA": {
-        "ver": "8.1.2",
+        "ver": "8.1.3",
         "wot": "1.6.1.1",
         "message": " • World of Tanks 1.6.1.1\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "ASIA": {
-        "ver": "8.1.2",
+        "ver": "8.1.3",
         "wot": "1.6.1.1",
         "message": " • World of Tanks 1.6.1.1\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
@@ -25,7 +25,7 @@
         "message": " • World of Tanks 0.9.22.0.1\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     },
     "CT": {
-        "ver": "8.1.2",
+        "ver": "8.1.3",
         "wot": "1.6.1.1",
         "message": " • World of Tanks 1.6.1.1\nMore information on the <a href='#XVM_SITE#'>official website of XVM</a>"
     }
