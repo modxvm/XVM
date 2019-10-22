@@ -1,8 +1,8 @@
 ﻿$PSDefaultParameterValues['*:Encoding'] = 'utf8'
 Set-Location $PSScriptRoot
 
-$header_en = '<a href=\"https://bitbucket.org/XVM/xvm/src/default/release/doc/ChangeLog-en.txt\">Full ChangeLog</a><br/><br/>'
-$header_ru = '<a href=\"https://bitbucket.org/XVM/xvm/src/default/release/doc/ChangeLog-ru.txt\">Полный список изменений</a><br/><br/>'
+$header_en = '<a href=\"https://gitlab.com/xvm/xvm/raw/master/release/doc/ChangeLog-en.txt\">Full ChangeLog</a><br/><br/>'
+$header_ru = '<a href=\"https://gitlab.com/xvm/xvm/raw/master/release/doc/ChangeLog-en.txt\">Полный список изменений</a><br/><br/>'
 
 $changelog_en = ((Get-Content -Path ../release/doc/ChangeLog-en.txt -Raw) -replace '\r','' -split '\n\nXVM-')[0]
 $changelog_ru = ((Get-Content -Path ../release/doc/ChangeLog-ru.txt -Raw) -replace '\r','' -split '\n\nXVM-')[0]
