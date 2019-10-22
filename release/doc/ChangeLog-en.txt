@@ -1,15 +1,17 @@
-﻿XVM-8.1.2:
+﻿XVM-8.1.3:
+
+XVM-8.1.2:
   [GENERAL]
-  * World of Tanks 1.6.1.1.1 nanopatch 1
+  * World of Tanks 1.6.1.1 nanopatch 1
 
   [XFW.Native]
   * Added initial support for 64-bit clients
-  * Reduced first start time on systems with a large number of processor cores.
+  * Reduced first start time on systems with a large number of processor cores
 
   [BUGFIXES]
   * Fixed crash to desktop in "Grand Battles"
   * Fixed extrafields for timkillers
-  * Fixed pp.widthLeft and pp.widthRight macros
+  * Fixed {{pp.widthLeft}} and {{pp.widthRight}} macros
   * Fixed display of vehicle name in tank carousel
   * Fixed typpos in configuration files
 
@@ -18,7 +20,8 @@ XVM-8.1.1:
   * World of Tanks 1.6.1.1
 
   [XFW]
-  * Refactored XFW Loader. More info: https://gitlab.com/xvm/xvm/wikis
+  * Refactored XFW Loader.
+      More info: https://gitlab.com/xvm/xvm/wikis
   * Changes in `.wotmod` names:
       * `com.modxvm.xfw.loader` was added
       * `com.modxvm.xfw` was removed
