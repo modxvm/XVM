@@ -20,20 +20,38 @@ import logging
 import os
 import sys
 
-try:
-    logging.info('[XFW/Entrypoint]')
-    logging.info('[XFW/Entrypoint] WoT Working Directory: %s' % os.getcwd())
+def path_to_the_gameroot():
+    if os.path.exists('version.xml'):
+        return './'
+    if os.path.exists('../version.xml'):
+        return '../'
+    return None
 
-    #Files in VFS
-    sys.path.insert(0, 'mods/xfw_packages')
-    sys.path.insert(0, 'mods/xfw_libraries')
 
-    #Files in RealFS
-    sys.path.insert(0, '../res_mods/mods/xfw_packages')
-    sys.path.insert(0, '../res_mods/mods/xfw_libraries')
-    
-    import xfw_loader.python as loader
-    loader.mods_load()
+def start_xfw():
+    try:
+        logging.info('[XFW/Entrypoint]')
+        logging.info('[XFW/Entrypoint] WoT Working Directory: %s' % os.getcwd())
 
-except Exception:
-    logging.exception('[XFW/Entrypoint] Error on executing XFW entry point')
+        path_to_root = path_to_the_gameroot()
+        if not path_to_root:
+            logging.warning('[XFW/Entrypoint] Unsupported working directory')
+            return
+
+        #Files in VFS
+        sys.path.insert(0, 'mods/xfw_packages')
+        sys.path.insert(0, 'mods/xfw_libraries')
+
+        #Files in RealFS
+        sys.path.insert(0, '../res_mods/mods/xfw_packages')
+        sys.path.insert(0, '../res_mods/mods/xfw_libraries')
+        
+        import xfw_loader.python as loader
+        loader.init(path_to_root)
+        loader.mods_load()
+
+    except Exception:
+        logging.exception('[XFW/Entrypoint] Error on executing XFW entry point')
+
+
+start_xfw()

@@ -1,5 +1,7 @@
 """ XVM (c) https://modxvm.com 2013-2019 """
 
+from xfw_loader.python import XFWLOADER_PATH_TO_ROOT
+
 from __version__ import __xvm_version__, __wot_version__, __revision__, __development__
 
 class XVM(object):
@@ -18,10 +20,10 @@ class XVM(object):
     XMQP_LOBBY_EXCHANGE = 'com.xvm.xmqp.%s.lobby' % XMQP_API_VERSION
     XMQP_LOBBY_ROUTING_KEY = 'query.battle.channel'
 
-    CONFIG_DIR = '../res_mods/configs/xvm'
+    CONFIG_DIR = XFWLOADER_PATH_TO_ROOT + 'res_mods/configs/xvm'
     CONFIG_FILE = CONFIG_DIR + '/xvm.xc'
     PY_MACRO_DIR = CONFIG_DIR + '/py_macro'
-    SHARED_RESOURCES_DIR = '../res_mods/mods/shared_resources/xvm'
+    SHARED_RESOURCES_DIR = XFWLOADER_PATH_TO_ROOT + 'res_mods/mods/shared_resources/xvm'
     LOCALE_DIR = SHARED_RESOURCES_DIR + '/l10n'
 
     LOCALE_AUTO_DETECTION = 'auto'

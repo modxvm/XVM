@@ -39,6 +39,7 @@ from dag import DAG, DAGValidationError
 
 #Exports
 __all__ = [
+    'XFWLOADER_PATH_TO_ROOT',
     'XFWLOADER_PACKAGES_REALFS',
     'XFWLOADER_PACKAGES_VFS',
     'XFWLOADER_TEMPDIR',
@@ -58,10 +59,12 @@ __all__ = [
 
 #####################################################
 
-#### PUBLIC VARIABLES
-XFWLOADER_PACKAGES_REALFS = '../res_mods/mods/xfw_packages'
-XFWLOADER_PACKAGES_VFS    = 'mods/xfw_packages'
-XFWLOADER_TEMPDIR         = '../mods/temp'
+### PUBLIC CONSTANTS
+XFWLOADER_PATH_TO_ROOT    = None
+XFWLOADER_PACKAGES_REALFS = None
+XFWLOADER_PACKAGES_VFS    = None
+XFWLOADER_TEMPDIR         = None
+
 WOT_RESMODS_DIR = None
 WOT_VERSION_FULL = None
 WOT_VERSION_SHORT = None
@@ -127,44 +130,6 @@ def __compare_versions(version1, version2):
     def normalize(v):
         return [int(x) for x in re.sub(r'(\.0+)*$','', v.split(" ", 1)[0]).split(".")]
     return cmp(normalize(version1), normalize(version2))
-
-
-# Initialize constants
-
-def __initialize_constants():
-    '''
-    Fills path and version constants in xfw.constants
-    '''
-
-    global WOT_RESMODS_DIR
-    global WOT_VERSION_FULL
-    global WOT_VERSION_SHORT
-
-    # "../res_mods/0.9.20.1/""
-    WOT_RESMODS_DIR = '../%s' % ResMgr.openSection('../paths.xml')['Paths'].values()[0].asString.lstrip('./')
-
-    # ver = 
-    #   * 'v.0.8.7'
-    #   * 'v.0.8.7 #512'
-    #   * 'v.0.8.7 Common Test #499'
-    #   * 'Supertest v.ST 0.9.15.1 #366'
-    #   * 'Supertest v.1.5.1.0 #546'
-    ver = ResMgr.openSection(VERSION_FILE_PATH).readString('version')
-    if 'Supertest v.ST' in ver:
-        tokens = ver.split(" ", 2)
-        ver = tokens[2] + ' ' + tokens[1]
-    elif 'Supertest v.' in ver:
-        tokens = ver.split(' ', 1)
-        ver = '%s %s' % (tokens[1][2:tokens[1].index('#') - 1], tokens[0])
-    elif '#' in ver:
-        ver = ver[2:ver.index('#') - 1]
-    else:
-        ver = ver[2:]
-
-    short_ver = ver if not ' ' in ver else ver[:ver.index(' ')]  # X.Y.Z or X.Y.Z.a
-
-    WOT_VERSION_FULL = ver
-    WOT_VERSION_SHORT = short_ver
 
 
 # Read FS
@@ -272,6 +237,56 @@ def __dag_build(mods, mods_features):
     return dag
 
 
+## Public
+
+
+def init(path_to_root):
+    '''
+    Fills path and version constants in xfw.constants
+    '''
+
+    global XFWLOADER_PATH_TO_ROOT
+    XFWLOADER_PATH_TO_ROOT = path_to_root
+
+    global XFWLOADER_PACKAGES_REALFS
+    XFWLOADER_PACKAGES_REALFS = XFWLOADER_PATH_TO_ROOT + 'res_mods/mods/xfw_packages'
+
+    global XFWLOADER_PACKAGES_VFS
+    XFWLOADER_PACKAGES_VFS = 'mods/xfw_packages'
+
+    global XFWLOADER_TEMPDIR
+    XFWLOADER_TEMPDIR = XFWLOADER_PATH_TO_ROOT + 'mods/temp'
+
+    # "../res_mods/0.9.20.1/""
+    global WOT_RESMODS_DIR
+    WOT_RESMODS_DIR = XFWLOADER_PATH_TO_ROOT + '%s' % ResMgr.openSection('../paths.xml')['Paths'].values()[0].asString.lstrip('./')    
+
+    # ver = 
+    #   * 'v.0.8.7'
+    #   * 'v.0.8.7 #512'
+    #   * 'v.0.8.7 Common Test #499'
+    #   * 'Supertest v.ST 0.9.15.1 #366'
+    #   * 'Supertest v.1.5.1.0 #546'
+    ver = ResMgr.openSection(VERSION_FILE_PATH).readString('version')
+    if 'Supertest v.ST' in ver:
+        tokens = ver.split(" ", 2)
+        ver = tokens[2] + ' ' + tokens[1]
+    elif 'Supertest v.' in ver:
+        tokens = ver.split(' ', 1)
+        ver = '%s %s' % (tokens[1][2:tokens[1].index('#') - 1], tokens[0])
+    elif '#' in ver:
+        ver = ver[2:ver.index('#') - 1]
+    else:
+        ver = ver[2:]
+
+    short_ver = ver if not ' ' in ver else ver[:ver.index(' ')]  # X.Y.Z or X.Y.Z.a
+
+    global WOT_VERSION_FULL
+    WOT_VERSION_FULL = ver
+    
+    global WOT_VERSION_SHORT
+    WOT_VERSION_SHORT = short_ver
+
 ## Mods loading
 
 __are_mods_loaded = False
@@ -291,9 +306,6 @@ def mods_load():
     if __are_mods_loaded:
         logging.error("[XFW/Loader]: Mods were already loaded")
         return
-
-    #initialize constants
-    __initialize_constants()
 
     #read FS
     __read_realfs()

@@ -1,4 +1,20 @@
-""" XFW Library (c) https://modxvm.com 2013-2019 """
+"""
+This file is part of the XVM Framework project.
+
+Copyright (c) 2013-2019 XVM Team.
+
+XVM Framework is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as
+published by the Free Software Foundation, version 3.
+
+XVM Framework is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>.
+"""
 
 import base64
 import codecs
@@ -6,6 +22,8 @@ import json
 import re
 from logger import *
 from HTMLParser import HTMLParser
+
+from xfw_loader.python import XFWLOADER_PATH_TO_ROOT
 
 #####################################################################
 # Common methods
@@ -15,7 +33,7 @@ def load_file(fn):
         # debug("[XFW][LIB][load_file] " + fn)
         return codecs.open(fn, 'r', 'utf-8-sig').read()
     except:
-        if fn != '../res_mods/configs/xvm/xvm.xc':
+        if fn != XFWLOADER_PATH_TO_ROOT+'res_mods/configs/xvm/xvm.xc':
             logtrace(__file__)
         return None
 
@@ -85,11 +103,11 @@ def resolve_path(path, basepath=None):
     """
 
     if path[:6].lower() == "res://":
-        path = path.replace("res://", "../res_mods/mods/shared_resources/", 1)
+        path = path.replace("res://", XFWLOADER_PATH_TO_ROOT+"res_mods/mods/shared_resources/", 1)
     elif path[:6].lower() == "xvm://":
-        path = path.replace("xvm://", "../res_mods/mods/shared_resources/xvm/", 1)
+        path = path.replace("xvm://", XFWLOADER_PATH_TO_ROOT+"res_mods/mods/shared_resources/xvm/", 1)
     elif path[:6].lower() == "cfg://":
-        path = path.replace("cfg://", "../res_mods/configs/xvm/", 1)
+        path = path.replace("cfg://", XFWLOADER_PATH_TO_ROOT+"res_mods/configs/xvm/", 1)
     elif basepath:
         path = fix_path_slashes(basepath) + path
 
