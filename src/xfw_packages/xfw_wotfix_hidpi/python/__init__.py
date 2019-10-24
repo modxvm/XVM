@@ -43,7 +43,7 @@ class XFWDPIFix(object):
 
             self.__native = xfwnative.load_native(self.__package_name, 'xfw_hidpi.pyd', 'XFW_HiDPI')
             if not self.__native:
-                logging.error("[XFW/HiDPI] Failed to load native module. Crash report were not enabled")   
+                logging.error("[XFW/HiDPI] Failed to load native module. Crash report were not enabled")
                 return
 
             self.__initialized = True

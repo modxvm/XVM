@@ -127,10 +127,10 @@ static PyObject* python_watcher_add(PyObject* self, PyObject* args)
 
 	watcherList.insert({
 		std::string(watcherID),
-		new FileWatcher(std::string(watcherID), std::wstring(directory), 
+		new FileWatcher(std::string(watcherID), std::wstring(directory),
 			std::string(eventCallText), static_cast<bool>(stopWatcherAfterEvent))
 	});
-    
+
 	Py_RETURN_NONE;
 }
 
@@ -281,7 +281,7 @@ static PyObject* python_watcher_stop_all(PyObject* self, PyObject* args)
 static PyMethodDef XFW_FileWatcherMethods[] = {
 	{ "watcher_is_exists"  , python_watcher_is_exists , METH_VARARGS, python_watcher_is_exists_docstring  },
 	{ "watcher_is_running" , python_watcher_is_running, METH_VARARGS, python_watcher_is_running_docstring },
-    
+
 	{ "watcher_add"        , python_watcher_add       , METH_VARARGS, python_watcher_add_docstring        },
 
 	{ "watcher_delete"     , python_watcher_delete    , METH_VARARGS, python_watcher_delete_docstring     },
@@ -292,7 +292,7 @@ static PyMethodDef XFW_FileWatcherMethods[] = {
 
 	{ "watcher_stop"       , python_watcher_stop      , METH_VARARGS, python_watcher_stop_docstring       },
 	{ "watcher_stopall"    , python_watcher_stop_all  , METH_VARARGS, python_watcher_stop_all_docstring   },
-    { NULL, NULL, 0, NULL} 
+    { NULL, NULL, 0, NULL}
 };
 
 

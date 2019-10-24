@@ -72,7 +72,7 @@ def __init():
 
         __native = xfwnative.load_native(package_name, 'xfw_mutex.pyd', 'XFW_Mutex')
         if not __native:
-            logging.error("[XFW/Mutex] Failed to load native module. Crash report were not enabled")   
+            logging.error("[XFW/Mutex] Failed to load native module. Crash report were not enabled")
             return
 
     except Exception:

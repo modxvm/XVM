@@ -2,20 +2,20 @@
  * This file is part of the XVM Framework project.
  *
  * Copyright (c) 2018-2019 XVM Team.
- * 
- * XVM Framework is free software: you can redistribute it and/or modify  
- * it under the terms of the GNU Lesser General Public License as   
+ *
+ * XVM Framework is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as
  * published by the Free Software Foundation, version 3.
  *
- * XVM Framework is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of 
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU 
+ * XVM Framework is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
- 
+
 #include <algorithm>
 
 #include "pythonModule.h"
@@ -97,7 +97,7 @@ PyObject* Py_RegisterFont(PyObject* self, PyObject* args)
     }
 
 	Py_RETURN_FALSE;
-	
+
 }
 
 PyObject* Py_UnregisterFont(PyObject* self, PyObject* args)
@@ -149,7 +149,7 @@ PyObject* Py_AddAlias(PyObject* self, PyObject* args)
 PyObject* Py_RemoveAlias(PyObject* self, PyObject* args)
 {
     wchar_t* alias = nullptr;
-    
+
     if (!PyArg_ParseTuple(args, "u", &alias))
     {
         PyErr_SetString(PyExc_RuntimeError, "[XFW_Fonts/RemoveAlias] Cannot parse tuple\n");
@@ -175,7 +175,7 @@ PyMethodDef XFWFontManagerMethods[] = {
     { "add_alias", Py_AddAlias, METH_VARARGS, "Register font name alias." },
     { "remove_alias", Py_RemoveAlias, METH_VARARGS, "Unregister font name alias." },
 
-    { NULL, NULL, 0, NULL} 
+    { NULL, NULL, 0, NULL}
 };
 
 PyMODINIT_FUNC initXFW_Fonts(void)

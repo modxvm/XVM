@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
- 
+
 #pragma once
 
 #include <string>
@@ -23,7 +23,7 @@
 #include "wotclient.h"
 
 class WotDetector {
-private: 
+private:
 	static bool isInitialized;
 public:
 	static std::vector<WotClient> clients;

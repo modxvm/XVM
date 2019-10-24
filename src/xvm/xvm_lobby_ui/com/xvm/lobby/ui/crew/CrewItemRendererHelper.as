@@ -6,7 +6,7 @@ package com.xvm.lobby.ui.crew
 {
     import com.xfw.*;
     import net.wg.gui.lobby.components.*;
-	import net.wg.gui.lobby.hangar.crew.*;
+    import net.wg.gui.lobby.hangar.crew.*;
 
     public class CrewItemRendererHelper
     {

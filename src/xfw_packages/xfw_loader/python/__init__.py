@@ -43,7 +43,7 @@ __all__ = [
     'XFWLOADER_PACKAGES_REALFS',
     'XFWLOADER_PACKAGES_VFS',
     'XFWLOADER_TEMPDIR',
-    'WOT_RESMODS_DIR', 
+    'WOT_RESMODS_DIR',
     'WOT_VERSION_FULL',
     'WOT_VERSION_SHORT',
 
@@ -123,7 +123,7 @@ def __get_keys_by_mask(dict, mask):
     for key in dict:
         if key.startswith(prefix):
             keys_found.append(key)
-   
+
     return keys_found
 
 def __compare_versions(version1, version2):
@@ -193,7 +193,7 @@ def __read_vfs():
 
 def __dag_add_edge(dag, u, v):
     try:
-        dag.add_node_if_not_exists(u)   
+        dag.add_node_if_not_exists(u)
         dag.add_node_if_not_exists(v)
         dag.add_edge(u, v)
     except DAGValidationError:
@@ -206,18 +206,18 @@ def __dag_build(mods, mods_features):
 
     for mod_id, mod_config in mods.iteritems():
         dependency_added = False
-    
-        #dependencies       
+
+        #dependencies
         if 'dependencies' in mod_config:
-            for dependency in mod_config['dependencies']: 
+            for dependency in mod_config['dependencies']:
                 result = __dag_add_edge(dag, dependency, mod_id)
                 if result:
-                    dependency_added = True         
+                    dependency_added = True
 
         #features
         if 'features' in mod_config:
-            for feature in mod_config['features']: 
-                if feature in mods_features:  
+            for feature in mod_config['features']:
+                if feature in mods_features:
                     result = __dag_add_edge(dag, mods_features[feature], mod_id)
                     if result:
                         dependency_added = True
@@ -259,9 +259,9 @@ def init(path_to_root):
 
     # "../res_mods/0.9.20.1/""
     global WOT_RESMODS_DIR
-    WOT_RESMODS_DIR = XFWLOADER_PATH_TO_ROOT + '%s' % ResMgr.openSection('../paths.xml')['Paths'].values()[0].asString.lstrip('./')    
+    WOT_RESMODS_DIR = XFWLOADER_PATH_TO_ROOT + '%s' % ResMgr.openSection('../paths.xml')['Paths'].values()[0].asString.lstrip('./')
 
-    # ver = 
+    # ver =
     #   * 'v.0.8.7'
     #   * 'v.0.8.7 #512'
     #   * 'v.0.8.7 Common Test #499'
@@ -283,7 +283,7 @@ def init(path_to_root):
 
     global WOT_VERSION_FULL
     WOT_VERSION_FULL = ver
-    
+
     global WOT_VERSION_SHORT
     WOT_VERSION_SHORT = short_ver
 
@@ -378,7 +378,7 @@ def mods_load():
             continue
 
         #check features
-        failed = False   
+        failed = False
         if 'features' in mod:
             for feature in mod['features']:
                 #python feature is always available
@@ -396,7 +396,7 @@ def mods_load():
                 if mods_features[feature] in mods_failed:
                     logging.warning("[XFW/Loader] Error with mod: '%s'. Feature failed: '%s' in package '%s'" % (mod_name, feature, mods_features[feature]))
                     failed = True
-        
+
         if failed == True:
             mods_failed.append(mod_name)
             continue
@@ -412,14 +412,14 @@ def mods_load():
                 if dependency in mods_failed:
                     logging.warning("[XFW/Loader] Error with mod: '%s'. Dependency failed: '%s'" % (mod_name, dependency))
                     failed = True
-        
+
         if failed == True:
             mods_failed.append(mod_name)
             continue
-        
+
         #load
         logging.info("[XFW/Loader] Loading mod: %s, v. %s" % (mod_name, mod['version']))
-        
+
         #check for features
         if 'features' in mod:
 
@@ -429,7 +429,7 @@ def mods_load():
                     open(mod['dir_path'] + '/__init__.py', 'a').close()
                     compileall.compile_dir(mod['dir_path'], quiet = 1)
 
-                
+
                 try:
                     #try to load module
                     module = importlib.import_module('%s.python' % mod['dir_name'])
@@ -452,7 +452,7 @@ def mods_load():
         #add mod to loaded list
         if not failed:
             mods_loaded.append(mod_name)
-        else: 
+        else:
             mods_failed.append(mod_name)
-            
+
     __are_mods_loaded = True

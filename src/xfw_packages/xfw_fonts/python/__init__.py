@@ -59,12 +59,12 @@ class XFWFonts(object):
 
             self.__native = xfwnative.load_native(self.__package_name, 'xfw_fonts.pyd', 'XFW_Fonts')
             if not self.__native:
-                logging.error("[XFW/Ping] Failed to load native module. Crash report were not enabled")   
+                logging.error("[XFW/Ping] Failed to load native module. Crash report were not enabled")
                 return
 
             self.__native.init_hooks()
             self.__register_builtin()
-    
+
             self.__initialized = True
         except Exception:
             logging.exception("[XFW/Ping] Error when loading native library:")
@@ -77,12 +77,12 @@ class XFWFonts(object):
     def register_font(self, font_path, private = True, non_enumerable = False):
         """
         Register font to system or game.
-      
+
         font_path      -- path to font relative to TODO
         private        -- false to install font global to system
         non_enumerable -- true to hide font for EnumFonts* WinAPI functions
         """
-        
+
         logging.info("[XFW/Fonts][register_font]: register %s" % font_path)
 
         if self.__native is None:
@@ -99,7 +99,7 @@ class XFWFonts(object):
         except Exception:
             logging.exception("[XFW/Fonts][register_font]")
 
-        
+
     def add_alias(self, alias, font_name):
         """
         TODO
@@ -112,7 +112,7 @@ class XFWFonts(object):
         except Exception:
             logging.exception("[XFW/Fonts][add_alias]")
 
-        
+
     def remove_alias(self, alias):
         """
         TODO
@@ -129,12 +129,12 @@ class XFWFonts(object):
     def unregister_font(self, font_path, private = True, non_enumerable = False):
         """
         Unregister font from system or game.
-      
+
         font_path      -- path to font relative to TODO
         private        -- false to install font global to system
         non_enumerable -- true to hide font for EnumFonts* WinAPI functions
         """
-        
+
         if self.__native is None:
             return
 
@@ -157,7 +157,7 @@ class XFWFonts(object):
             for font in os.listdir(dir_fonts):
                 self.register_font(font)
         else:
-            for font in vfs.directory_list_files(dir_fonts, True):            
+            for font in vfs.directory_list_files(dir_fonts, True):
                 self.register_font(font)
 
 
@@ -176,7 +176,7 @@ class XFWFonts(object):
         res://* -> ../res_mods/mods/shared_resources/*
         xvm://* -> ../res_mods/mods/shared_resources/xvm/*
         """
-           
+
         font_path = resolve_path(path).lower()
         if not vfs.file_exists(font_path):
             logging.warning("[XFW/Fonts][__get_file] Font does not exists %s" % font_path)
@@ -185,7 +185,7 @@ class XFWFonts(object):
         #do not copy RealFS fonts
         if os.path.isfile(font_path):
             return font_path
-    
+
         realfs_path = loader.XFWLOADER_TEMPDIR+'/'+self.__package_name + '/fonts/%s' % os.path.basename(font_path)
         if vfs.file_copy(font_path, realfs_path):
             return realfs_path

@@ -14,7 +14,7 @@ private:
     CR_INSTALL_INFOW info{};
     bool installed = false;
     bool silentMode = false;
-    
+
     std::wstring CrashRpt_langpath = L"";
     std::wstring PrivacyPolicy = L"";
 
@@ -43,7 +43,7 @@ public:
         return LoadLibraryW((GetModuleDirectory(hDLL) / L"CrashRpt1500.dll").wstring().c_str()) != nullptr;
     }
 
-    bool IsInstalled() 
+    bool IsInstalled()
     {
         return installed;
     }
@@ -96,12 +96,12 @@ public:
             CrashRpt_langpath = langpath;
             return true;
         }
-        
+
         return false;
     }
 
     int Install(const std::wstring& version)
-    {   
+    {
         info.cb = sizeof(info);
 
         if(silentMode)
@@ -176,7 +176,7 @@ PyObject * Py_CrashRpt_SetLanguage(PyObject * self, PyObject * args)
 {
     wchar_t* prop_lang = nullptr;
     wchar_t* prop_region = nullptr;
-    
+
     if (!PyArg_ParseTuple(args, "uu", &prop_lang, &prop_region))
     {
         PyErr_SetString(PyExc_RuntimeError, "[XFW/Crashreport] [SetLanguage] Cannot parse tuple (expected uu)\n");
@@ -185,7 +185,7 @@ PyObject * Py_CrashRpt_SetLanguage(PyObject * self, PyObject * args)
 
     if (crashreporter->SetLangugage(prop_lang, prop_region) && crashreporter->SetPrivacyPolicy(prop_lang,prop_region))
         Py_RETURN_TRUE;
-    
+
     Py_RETURN_FALSE;
 }
 
@@ -258,7 +258,7 @@ PyObject* Py_CrashRpt_AddFile(PyObject* self, PyObject* args)
         PyErr_SetString(PyExc_RuntimeError, "[XFW/Crashreport] [AddFile] CrashRpt is not registered\n");
         return NULL;
     }
-   
+
     if (crAddFile2W(prop_path, prop_name, prop_desc, CR_AF_MAKE_FILE_COPY | CR_AF_ALLOW_DELETE | CR_AF_MISSING_FILE_OK) != 0)
     {
         char buff[256]{};

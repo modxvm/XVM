@@ -19,12 +19,12 @@ project(xfw_ping LANGUAGES C)
 
 find_package(libpython REQUIRED)
 
-add_library(xfw_ping SHARED 
+add_library(xfw_ping SHARED
         "src/ping.c"
         "src/pythonModule.c"
-        "../../library.rc"	
-)  
-        
+        "../../library.rc"
+)
+
 set(VER_PRODUCTNAME_STR "XFW Ping")
 set(VER_FILEDESCRIPTION_STR "XFW Ping module for World of Tanks")
 set(VER_ORIGINALFILENAME_STR "xfw_ping.pyd")
@@ -33,7 +33,7 @@ configure_file("../../library.h.in" "library.h" @ONLY)
 
 target_include_directories(xfw_ping PRIVATE "${CMAKE_BUILD_DIR}")
 
-target_compile_options(xfw_ping PRIVATE "/d2FH4-") 
+target_compile_options(xfw_ping PRIVATE "/d2FH4-")
 
 target_link_libraries(xfw_ping "iphlpapi")
 target_link_libraries(xfw_ping "ws2_32")

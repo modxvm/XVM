@@ -185,7 +185,7 @@ def __init():
 
         __native = xfwnative.load_native(package_name, 'xfw_filewatcher.pyd', 'XFW_FileWatcher')
         if not __native:
-            logging.error("[XFW/FileWatcher] Failed to load native module. Crash report were not enabled")   
+            logging.error("[XFW/FileWatcher] Failed to load native module. Crash report were not enabled")
             return
 
     except Exception:

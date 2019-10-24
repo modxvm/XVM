@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
- 
+
 #include "registry.h"
 
 #include <Windows.h>
@@ -25,7 +25,7 @@ std::wstring Registry::GetStringValue(const wchar_t* subkey, const wchar_t* valu
 	HKEY hKey = 0;
 	wchar_t val[1024] { 0 };
 	DWORD value_length = 1024;
-	
+
 	if (RegOpenKeyW(HKEY_CURRENT_USER, subkey, &hKey) != ERROR_SUCCESS)
 	{
 		if(RegOpenKeyW(HKEY_LOCAL_MACHINE, subkey, &hKey) != ERROR_SUCCESS)

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
- 
+
 #pragma once
 
 #include <string>
@@ -42,7 +42,7 @@ private:
 	bool isValid = false;
 
 	std::wstring path;
-	
+
 	ClientBranch clientBranch = ClientBranch::WoT_Unknown;
 	ClientType clientType = ClientType::WoTType_Unknown;
 

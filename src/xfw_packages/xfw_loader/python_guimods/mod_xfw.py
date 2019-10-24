@@ -45,7 +45,7 @@ def start_xfw():
         #Files in RealFS
         sys.path.insert(0, '../res_mods/mods/xfw_packages')
         sys.path.insert(0, '../res_mods/mods/xfw_libraries')
-        
+
         import xfw_loader.python as loader
         loader.init(path_to_root)
         loader.mods_load()

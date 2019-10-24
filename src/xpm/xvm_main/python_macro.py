@@ -13,12 +13,12 @@ from xfw_loader.python import XFWLOADER_PATH_TO_ROOT
 from consts import *
 from logger import *
 
-#Compile subdirectories
-for root, dirnames, filenames in os.walk(XFWLOADER_PATH_TO_ROOT+"res_mods/configs/xvm/py_macro/"):
+# Compile subdirectories
+for root, dirnames, filenames in os.walk(XFWLOADER_PATH_TO_ROOT + "res_mods/configs/xvm/py_macro/"):
     for dirname in dirnames:
         compileall.compile_dir(os.path.join(root, dirname), quiet = 1)
 
-sys.path.append(XFWLOADER_PATH_TO_ROOT+"res_mods/configs/xvm/py_macro")
+sys.path.append(XFWLOADER_PATH_TO_ROOT + "res_mods/configs/xvm/py_macro")
 
 # Globals
 _container = {}

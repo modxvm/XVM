@@ -11,7 +11,7 @@
 ; two periods being displayed).
 
 [LangOptions]
-; The following three entries are very important. Be sure to read and 
+; The following three entries are very important. Be sure to read and
 ; understand the '[LangOptions] section' topic in the help file.
 LanguageName=Hrvatski
 LanguageID=$041a
@@ -307,7 +307,7 @@ OnlyAdminCanUninstall=Ova instalacija može biti uklonjena samo od korisnika sa 
 UninstallStatusLabel=Pričekajte dok %1 ne bude uklonjen s vašeg računala.
 UninstalledAll=Program %1 je uspješno uklonjen sa vašeg računala.
 UninstalledMost=Deinstalacija programa %1 je završena.%n%nNeke elemente nije bilo moguće ukloniti. Učinite to ručno.
-UninstalledAndNeedsRestart=Kako bi završili deinstalaciju %1, Vaše računalo morate ponovno pokrenuti%n%nŽelite li to učiniti sada? 
+UninstalledAndNeedsRestart=Kako bi završili deinstalaciju %1, Vaše računalo morate ponovno pokrenuti%n%nŽelite li to učiniti sada?
 UninstallDataCorrupted="%1" datoteka je oštećena. Deinstalacija nije moguća.
 
 ; *** Uninstallation phase messages

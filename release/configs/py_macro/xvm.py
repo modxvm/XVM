@@ -43,7 +43,7 @@ def xvm_formatDate(formatDate):
                 return 'AM' if dt.hour < 12 else 'PM'
             else:
                 return ''
-        
+
     def processDirective(value, formatDate):
         directive = '%'+value
         if directive in formatDate:

@@ -43,7 +43,7 @@ typedef struct _tagTT_NAME_RECORD{
 #define SWAPLONG(x)		MAKELONG(SWAPWORD(HIWORD(x)), SWAPWORD(LOWORD(x)))
 
 
- 
+
 std::string GetFontFamilyFromFile(std::wstring& filePath)
 {
     std::ifstream fileStream;
@@ -108,13 +108,13 @@ std::string GetFontFamilyFromFile(std::wstring& filePath)
         ttRecord.uNameID = SWAPWORD(ttRecord.uNameID);
         if(ttRecord.uNameID != 1)
             continue;
-        
+
         ttRecord.uStringLength = SWAPWORD(ttRecord.uStringLength);
         ttRecord.uStringOffset = SWAPWORD(ttRecord.uStringOffset);
         const auto n_pos = fileStream.tellg();
 
         fileStream.seekg(tblDir.uOffset + ttRecord.uStringOffset + ttNTHeader.uStorageOffset);
-    
+
 
         const auto buf = static_cast<char*>(calloc(ttRecord.uStringLength + 1, sizeof(char)));
         fileStream.read(buf, ttRecord.uStringLength);

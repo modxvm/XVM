@@ -162,7 +162,7 @@ def _init():
                     continue
 
                 item = vehicles.g_cache.vehicle(nationID, id)
-                #log('%i	%i	%s	%s' % (descr.level, descr.compactDescr, descr.name, descr.shortUserString))
+                #log('%i    %i  %s  %s' % (descr.level, descr.compactDescr, descr.name, descr.shortUserString))
 
                 data = dict()
                 data['vehCD'] = descr.compactDescr

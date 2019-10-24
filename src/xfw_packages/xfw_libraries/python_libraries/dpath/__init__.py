@@ -8,6 +8,6 @@ else:
   python_major_version = sys.version_info[0]
 
 PY2 = ( python_major_version == 2 )
-PY3 = ( python_major_version == 3 )  
+PY3 = ( python_major_version == 3 )
 
 from .util import *

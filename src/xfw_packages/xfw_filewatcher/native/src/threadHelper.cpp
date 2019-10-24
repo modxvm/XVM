@@ -20,15 +20,15 @@
 
 const DWORD MS_VC_EXCEPTION = 0x406D1388;
 
-#pragma pack(push,8)  
+#pragma pack(push,8)
 typedef struct tagTHREADNAME_INFO
 {
-	DWORD dwType; // Must be 0x1000.  
-	LPCSTR szName; // Pointer to name (in user addr space).  
-	DWORD dwThreadID; // Thread ID (-1=caller thread).  
-	DWORD dwFlags; // Reserved for future use, must be zero.  
+	DWORD dwType; // Must be 0x1000.
+	LPCSTR szName; // Pointer to name (in user addr space).
+	DWORD dwThreadID; // Thread ID (-1=caller thread).
+	DWORD dwFlags; // Reserved for future use, must be zero.
 } THREADNAME_INFO;
-#pragma pack(pop) 
+#pragma pack(pop)
 
 void SetThreadName(DWORD dwThreadID, const char* threadName) {
 	THREADNAME_INFO info;
@@ -36,14 +36,14 @@ void SetThreadName(DWORD dwThreadID, const char* threadName) {
 	info.szName = threadName;
 	info.dwThreadID = dwThreadID;
 	info.dwFlags = 0;
-#pragma warning(push)  
-#pragma warning(disable: 6320 6322)  
+#pragma warning(push)
+#pragma warning(disable: 6320 6322)
 	__try {
 		RaiseException(MS_VC_EXCEPTION, 0, sizeof(info) / sizeof(ULONG_PTR), (ULONG_PTR*)&info);
 	}
 	__except (EXCEPTION_EXECUTE_HANDLER) {
 	}
-#pragma warning(pop)  
+#pragma warning(pop)
 }
 
 typedef BOOL (*GetThreadIdProc)(HANDLE);
@@ -53,7 +53,7 @@ void SetThreadName(std::thread* thread, std::string threadName)
 	//GetThreadId appeared in Windows NT 5.2
 	HMODULE hlib = LoadLibraryA("Kernel32.dll");
 	GetThreadIdProc GetThreadId = (GetThreadIdProc)GetProcAddress(hlib, "GetThreadId");
-	
+
 	if(GetThreadId!=NULL)
 	{
 		DWORD threadId = GetThreadId(static_cast<HANDLE>(thread->native_handle()));
