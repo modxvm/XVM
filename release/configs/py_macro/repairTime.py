@@ -48,7 +48,7 @@ class RepairTimers(object):
     def addTimer(self, device, duration):
         if device in self.timers:
             self.timers[device]['timer'].stop()
-        
+
         self.timers.update({
             device: {
                 'duration': duration,
@@ -136,10 +136,10 @@ def _switching(self, _):
 @registerEvent(DamagePanel, '_updateRepairingDevice')
 def _updateRepairingDevice(self, value):
     device = value[0]
-    
+
     if device.find('wheel') > -1: #remove all indices, e.g.: "wheel0", "wheel1" etc.
         device = 'wheel'
-    
+
     if device in DEVICES:
         RepairTimers.addTimer(device, float(value[2]))
 
@@ -147,10 +147,10 @@ def _updateRepairingDevice(self, value):
 def _updateDeviceState(self, value):
     device = value[0]
     state = value[2]
-    
+
     if device.find('wheel') > -1: #remove all indices, e.g.: "wheel0", "wheel1" etc.
         device = 'wheel'
-    
+
     if device in DEVICES:
         if ('destroyed' != state) and (device in RepairTimers.timers):
             RepairTimers.delTimer(device)

@@ -9,7 +9,7 @@
 ; two periods being displayed).
 
 [LangOptions]
-; The following three entries are very important. Be sure to read and 
+; The following three entries are very important. Be sure to read and
 ; understand the '[LangOptions] section' topic in the help file.
 LanguageName=Беларуская
 LanguageID=$0423
@@ -188,7 +188,7 @@ NoProgramGroupCheck2=Не ствараць каталог у Пачатковы�
 
 ; *** "Ready to Install" wizard page
 WizardReady=Гатовы да ўсталявання
-ReadyLabel1=Усталёўнік цяпер гатовы да пачатку ўсталявання [name] на ваш камп’ютар. 
+ReadyLabel1=Усталёўнік цяпер гатовы да пачатку ўсталявання [name] на ваш камп’ютар.
 ReadyLabel2a=Пстрыкніце «Усталяваць», каб працягнуць усталяванне, ці «Назад», калі вы жадаеце прагледзець ці змяніць некаторыя налады.
 ReadyLabel2b=Пстрыкніце «Усталяваць», каб працягнуць усталяванне.
 ReadyMemoUserInfo=Інфармацыя карыстальніка:

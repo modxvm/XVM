@@ -58,7 +58,7 @@ static void bugfix_asm()
         call    eax
         test    al, al
         jz      check_failed
-    
+
         jmp return_addr
 
         check_failed:

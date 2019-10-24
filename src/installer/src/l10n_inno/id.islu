@@ -4,11 +4,11 @@
 ;   http://www.jrsoftware.org/files/istrans/
 ;
 ; Alih bahasa oleh: Muchammad Ulil Wafa (wmuchammadulil@yahoo.co.id)
-;   http://muchammadulilwafa.blogspot.com/ 
-;	http://mozaik-tkj.blogspot.com/
+;   http://muchammadulilwafa.blogspot.com/
+;   http://mozaik-tkj.blogspot.com/
 ;
 ; Catatan: Ketika menerjemahkan teks ini, jangan masukkan titik (.) di akhir
-; pesan tersebut, karena di Inno Setup akan otomatis memasukkan titik. 
+; pesan tersebut, karena di Inno Setup akan otomatis memasukkan titik.
 ; (menambahkan titik bisa menampilkan dua titik.)
 
 [LangOptions]

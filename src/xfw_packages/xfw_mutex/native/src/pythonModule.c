@@ -3,20 +3,20 @@
  *
  * Copyright (c) 2009 wj32
  * Copyright (c) 2018-2019 XVM Team.
- * 
- * XVM Framework is free software: you can redistribute it and/or modify  
- * it under the terms of the GNU Lesser General Public License as   
+ *
+ * XVM Framework is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as
  * published by the Free Software Foundation, version 3.
  *
- * XVM Framework is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of 
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU 
+ * XVM Framework is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
- 
+
 #include "Python.h"
 
 #include <Windows.h>
@@ -204,7 +204,7 @@ PyObject* Py_AllowMultiWot(PyObject* self, PyObject* args)
 					wcsstr(objectName.Buffer, L"wgc_game_mtx_") ||
 					wcsstr(objectName.Buffer, L"wgc_running_games_mtx"))
 				{
-					CloseHandle(handle.Handle);					
+					CloseHandle(handle.Handle);
 					flag = TRUE;
 				}
 			}
@@ -230,7 +230,7 @@ PyObject* Py_RestartWithoutMods(PyObject* self, PyObject* args)
 
 	if(wcsstr(cmdline,L" -safe")==NULL)
 		wcscat(cmdline,L" -safe");
-	
+
 	if(wcsstr(cmdline,L"-wot_wait_for_mutex")==NULL)
 		wcscat(cmdline,L" -wot_wait_for_mutex");
 
@@ -243,7 +243,7 @@ PyObject* Py_RestartWithoutMods(PyObject* self, PyObject* args)
 PyMethodDef XFWMutexMethods[] = {
     { "allow_multiple_wot", Py_AllowMultiWot, METH_VARARGS, "Allow to run another World of Tanks instance."},
     { "restart_without_mods", Py_RestartWithoutMods, METH_VARARGS, "Restart World of Tanks without mods"},
-    { NULL, NULL, 0, NULL} 
+    { NULL, NULL, 0, NULL}
 };
 
 PyMODINIT_FUNC initXFW_Mutex(void)

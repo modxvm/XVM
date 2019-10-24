@@ -80,7 +80,7 @@ detect_mercurial(){
 git_get_repostats(){
     pushd $1 >/dev/null
     export REPOSITORY_AUTHOR=$(git log -1 --pretty=format:'%an')
-    
+
     export REPOSITORY_BRANCH=$(git rev-parse --abbrev-ref HEAD)
     if [ "$REPOSITORY_BRANCH" = "master" ]; then
         export REPOSITORY_BRANCH_FORFILE=""

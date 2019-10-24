@@ -22,13 +22,13 @@ find_package(minhook REQUIRED)
 
 include_directories("src")
 
-add_library(xfw_fonts SHARED 
+add_library(xfw_fonts SHARED
 	"src/pythonModule.cpp"
 	"src/ttfInfo.cpp"
 	"src/winapi_CreateFont.cpp"
 	"src/winapi_EnumFontsFamiliesEx.cpp"
-	"../../library.rc"	
-)  
+	"../../library.rc"
+)
 
 set(VER_PRODUCTNAME_STR "XFW Fonts")
 set(VER_FILEDESCRIPTION_STR "XFW Fonts module for World of Tanks")
@@ -40,7 +40,7 @@ target_include_directories(xfw_fonts PRIVATE "${CMAKE_BUILD_DIR}")
 
 target_compile_definitions(xfw_fonts PRIVATE "_CRT_SECURE_NO_WARNINGS")
 
-target_compile_options(xfw_fonts PRIVATE "/d2FH4-") 
+target_compile_options(xfw_fonts PRIVATE "/d2FH4-")
 
 target_link_libraries(xfw_fonts libpython::python27)
 target_link_libraries(xfw_fonts minhook::minhook)

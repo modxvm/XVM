@@ -99,9 +99,9 @@ build_python()
 {
   if [ -d "$1/" ]; then
     mkdir -p "$2"
-    
+
     pushd "$1" > /dev/null
-    
+
     for fn in $(find "./" -type "f" -name "*.py"); do
 
       echo "building $1/$fn"
@@ -112,7 +112,7 @@ build_python()
       #copy to output
       out_py_file="$2/$fn"
       out_py_dir=$(dirname "${out_py_file}")
- 
+
       mkdir -p "$out_py_dir"
       mv "$fn"c "${out_py_file}c"
     done
@@ -129,7 +129,7 @@ build_python_empty()
 }
 
 copy_files()
-{  
+{
   if [ -d "$1/" ]; then
     pushd "$1" > /dev/null
     find . -name "$3" -exec cp --parents \{\} "$2" \;
@@ -158,7 +158,7 @@ install_wotmod()
     cp -rf "$currentdir/_wotmod/." "$wotmodpath/"
 }
 
-pack_package() 
+pack_package()
 {
     pushd $1 > /dev/null
     zip -0 -X -q -r "$2" ./*
@@ -179,7 +179,7 @@ build_package()
   wotmod_filename="com.modxvm.${package_name//_/.}_$XVMBUILD_XVM_VERSION.$REPOSITORY_COMMITS_NUMBER$REPOSITORY_BRANCH_FORFILE.wotmod"
   output_dir="$outputpath/$package_name"
   mkdir -p "$output_dir"
-  
+
   output_dir_xfwlibraries="$output_dir/res/mods/xfw_libraries"
   output_dir_guimods="$output_dir/res/scripts/client/gui/mods"
   output_dir_xfwpackage="$output_dir/res/mods/xfw_packages/$package_name"
@@ -187,7 +187,7 @@ build_package()
 
   prepare_metaxml "$package_dir/meta.xml" "$output_dir/meta.xml"
   prepare_json  "$package_dir/xfw_package.json" "$output_dir_xfwpackage/xfw_package.json"
-  
+
   copy_license  "$output_dir"
   copy_binaries $package_name "$output_dir_xfwpackage"
   copy_fonts    $package_name "$output_dir_xfwpackage"

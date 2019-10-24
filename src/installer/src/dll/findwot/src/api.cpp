@@ -135,7 +135,7 @@ void WOT_GetPreferredClientPathA(char *buffer, int buffer_size)
 	}
 
 	wchar_t* wbuffer = (wchar_t*)malloc(buffer_size * sizeof(wchar_t));
-	
+
 	if (wbuffer != nullptr)
 	{
 		WOT_GetPreferredClientPathW(wbuffer, buffer_size);

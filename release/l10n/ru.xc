@@ -54,14 +54,14 @@
     "gun": "орудие",
     "turret_rotator": "вращение башни",
     "surveying_device": "приборы наблюдения",
-    
+
     // Tankmen
     "commander": "командир экипажа",
     "driver": "механик-водитель",
     "radioman": "радист",
     "gunner": "наводчик",
     "loader": "заряжающий",
-    
+
     // DamageLog:
     "sec": "сек",
     "reloaded": "перезарядился",
@@ -172,7 +172,7 @@
     "Battle tiers": "Уровень боёв",
     "Type": "Тип",
     "Nation": "Нация",
-    
+
     // Nation
     "ussr": "СССР",
     "germany": "Германия",
@@ -185,7 +185,7 @@
     "poland": "Польша",
     "sweden": "Швеция",
     "italy": "Италия",
-    
+
     // Vehicle type
     "HT": "ТТ",
     "MT": "СТ",

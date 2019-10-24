@@ -87,7 +87,7 @@
       },
       // Vehicle name.
       // Название танка.
-      { 
+      {
         "enabled": true,
         "x": 159, "y": 14, "align": "right",
         "format": "<font face='$FieldFont' size='15' color='{{v.premium?#FFA759|#C8C8B5}}'>{{v.name}}</font>",

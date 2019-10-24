@@ -47,7 +47,7 @@ class XFWCrashReport(object):
 
             self.__native = xfwnative.load_native(self.__package_name, 'xfw_crashreport.pyd', 'XFW_CrashReport')
             if not self.__native:
-                logging.error("[XFW/Crashreport] Failed to load native module. Crash report were not enabled")   
+                logging.error("[XFW/Crashreport] Failed to load native module. Crash report were not enabled")
                 return
 
             self.__native_configure()
@@ -68,11 +68,11 @@ class XFWCrashReport(object):
         if not self.__native.crashrpt_set_language(unicode(getLanguage()), unicode(getRegion())):
             logging.error("[XFW/Crashreport] Crash reports failed to find language files.")
             return
-        
+
         if not self.__native.crashrpt_install():
             logging.error("[XFW/Crashreport] Crash reports failed to install.")
             return
-        
+
         logging.info("[XFW/Crashreport] Crash reports were registered.")
         self.__initialized = True
 

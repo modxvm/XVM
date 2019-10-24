@@ -51,7 +51,7 @@ prepare_changelog()
 prepare_defines()
 {
     cp "$XVMINST_ROOT_PATH/src/xvm_defines_template.iss" "$XVMINST_ROOT_PATH/temp/defines/xvm_defines.iss"
-   
+
     sed -i "s/XVM_WOTVERSION/${XVMBUILD_WOT_VERSION}/g" "$XVMINST_ROOT_PATH/temp/defines/xvm_defines.iss"
     sed -i "s/XVM_VERSION/${XVMBUILD_XVM_VERSION}/g" "$XVMINST_ROOT_PATH/temp/defines/xvm_defines.iss"
 }
@@ -64,9 +64,9 @@ prepare_languages()
     wget "$XVMINST_L10N_URL" --output-document=./l10n.zip
     unzip -q -o l10n.zip -d .
     rm l10n.zip
-    
+
     cp "$XVMINST_ROOT_PATH/src/l10n/en.islu.tpl" "$XVMINST_ROOT_PATH/temp/l10n_download/en.islu.tpl"
-    
+
     for file in *.tpl; do
        lang="${file%.*}"
        cp "$file" "../l10n_result/$lang"
@@ -78,25 +78,25 @@ prepare_languages()
 
     pushd "$XVMINST_ROOT_PATH/temp/l10n_result/" >/dev/null
 
-    echo "[Languages]" >> lang.iss    
+    echo "[Languages]" >> lang.iss
 
     echo "Name: \"en\"; MessagesFile: \"l10n_inno\\en.islu,..\\temp\\l10n_result\\en.islu\"; InfoBeforeFile: \"..\\temp\\changelogs\\ChangeLog-en.txt\"" >> lang.iss
 
     for file in *.islu; do
         lang="${file%.*}"
-       
+
         if [ "$lang" != "en" ]; then
             #changelog
             if [ "$lang" == "ru" ] || [ "$lang" == "be" ] || [ "$lang" == "uk" ] || [ "$lang" == "kk" ];then
                 langchg="ru"
-            else 
+            else
                 langchg="en"
             fi
-       
+
             if [ -f "$XVMINST_ROOT_PATH/src/l10n_inno/$lang.islu" ]; then
                 echo "Name: \"$lang\"; MessagesFile: \"l10n_inno\\$lang.islu,..\\temp\\l10n_result\\$lang.islu\"; InfoBeforeFile: \"..\\temp\\changelogs\\ChangeLog-$langchg.txt\"" >> lang.iss
             fi
-        fi      
+        fi
     done
 
     popd >/dev/null

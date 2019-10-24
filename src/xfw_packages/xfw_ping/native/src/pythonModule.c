@@ -58,7 +58,7 @@ static PyObject* python_ping(PyObject* self, PyObject* args)
 
 static PyMethodDef XFW_PingMethods[] = {
     { "ping", python_ping, METH_VARARGS, python_ping_docstring},
-    { NULL, NULL, 0, NULL} 
+    { NULL, NULL, 0, NULL}
 };
 
 

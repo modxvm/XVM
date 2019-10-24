@@ -37,7 +37,7 @@ def _reload_config(e=None):
     wwise_module = loader.get_mod_module('com.modxvm.xfw.wwise')
     if not wwise_module:
         logging.error("[XVM/Sounds] [bankmanager/reload_config] XFW.WWISE is failed to load")
-    
+
     wwise = getattr(wwise_module, 'g_wwise')
     wwise.battle_config.clear()
     wwise.hangar_config.clear()

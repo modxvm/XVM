@@ -922,7 +922,7 @@ class LastHit(_Base):
                 self.timerLastHit = TimeInterval(timeDisplayLastHit, self, 'hideLastHit')
                 self.timerLastHit.start()
                 as_event(EVENTS_NAMES.ON_LAST_HIT)
-        return 
+        return
 
 
 _log = DamageLog(DAMAGE_LOG_SECTIONS.LOG)

@@ -245,7 +245,7 @@
       ${ "def.tankName" },
       ${ "def.playerName" }
     ]
-  }, 
+  },
   // Settings for enemies.
   // Настройки для противников.
   "enemy": {

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
- 
+
 #include "wotdetector.h"
 
 #include "filesystem.h"
@@ -77,7 +77,7 @@ void WotDetector::FindClients()
                 }
             }
         }
-        
+
         if (wcscmp(wine_status.system, L"Darwin")==0)
         {
             // /Volumes/ mounted partitions
@@ -128,16 +128,16 @@ int WotDetector::AddClient(std::wstring directory)
 
     auto exists = [&](const std::wstring &s) {
         return std::find_if(
-            begin(WotDetector::clients), 
-            end(WotDetector::clients), 
-            [&](WotClient &f) { 
+            begin(WotDetector::clients),
+            end(WotDetector::clients),
+            [&](WotClient &f) {
                 std::wstring path_1 = f.GetPath();
                 std::transform(path_1.begin(), path_1.end(), path_1.begin(), ::tolower);
 
                 std::wstring path_2 = s;
                 std::transform(path_2.begin(), path_2.end(), path_2.begin(), ::tolower);
 
-                return path_1 == path_2; 
+                return path_1 == path_2;
             });
     };
 

@@ -6,8 +6,8 @@ find_package(libpython REQUIRED)
 
 add_library(xfw_hidpi SHARED
 	"src/pythonModule.c"
-	"../../library.rc"	
-)  
+	"../../library.rc"
+)
 
 set(VER_PRODUCTNAME_STR "XFW HiDPI")
 set(VER_FILEDESCRIPTION_STR "XFW HiDPI module for World of Tanks")
@@ -19,7 +19,7 @@ target_include_directories(xfw_hidpi PRIVATE "${CMAKE_BUILD_DIR}")
 
 target_compile_definitions(xfw_hidpi PRIVATE "_CRT_SECURE_NO_WARNINGS")
 
-target_compile_options(xfw_hidpi PRIVATE "/d2FH4-") 
+target_compile_options(xfw_hidpi PRIVATE "/d2FH4-")
 
 set_target_properties(xfw_hidpi PROPERTIES LINK_FLAGS "/INCREMENTAL:NO")
 

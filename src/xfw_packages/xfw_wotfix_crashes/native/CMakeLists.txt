@@ -23,7 +23,7 @@ add_library(xfw_crashfix SHARED
         "src/bugfix_4.h"
 
         "../../library.rc"
-)  
+)
 
 set(VER_PRODUCTNAME_STR "XFW Crashfix")
 set(VER_FILEDESCRIPTION_STR "XFW Crashfix module for World of Tanks")
@@ -33,7 +33,7 @@ configure_file("../../library.h.in" "library.h" @ONLY)
 
 target_compile_definitions(xfw_crashfix PRIVATE "_CRT_SECURE_NO_WARNINGS")
 
-target_compile_options(xfw_crashfix PRIVATE "/d2FH4-") 
+target_compile_options(xfw_crashfix PRIVATE "/d2FH4-")
 
 set_target_properties(xfw_crashfix PROPERTIES LINK_FLAGS "/INCREMENTAL:NO")
 

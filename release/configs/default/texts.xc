@@ -77,7 +77,7 @@
       // Battle training.
       // Боевое обучение.
       "tutorial": "",
-      // Team battles.      
+      // Team battles.
       // Командный бой.
       "cybersport": "cybersport",
       // Special game mode (racing, football and other).

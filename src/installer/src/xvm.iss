@@ -54,7 +54,7 @@ Source: "..\..\..\~output\deploy\res_mods\*"; DestDir: "{app}\res_mods"; Flags: 
 Source: "..\..\..\~output\deploy\readme*.*"; DestDir: "{app}"; Components: XVM
 
 ;installer libs
-Source: "dll\findwot\bin\findwot.dll"; Flags: dontcopy                                             
+Source: "dll\findwot\bin\findwot.dll"; Flags: dontcopy
 
 [InstallDelete]
 ;mods\ver\com.modxvm.xfw\*.wotmod
@@ -131,7 +131,7 @@ begin
   ListIndex := WotList.ItemIndex;
   ClientsCount := WOT_GetClientsCount();
 
-  WotList.Items.Clear();  
+  WotList.Items.Clear();
 
   if ClientsCount > 0 then
   begin
@@ -146,7 +146,7 @@ begin
          3: Insert(' Super Test: ',Str,Pos(#0, Str));
          4: Insert(' Sandbox: ',Str,Pos(#0, Str));
       end;
-      
+
       WOT_GetClientPathW(Buffer,1024,Index);
       Insert(Buffer,Str,Pos(#0, Str));
 
@@ -179,7 +179,7 @@ begin
 end;
 
 procedure WotList_OnChange(Sender: TObject);
-begin 
+begin
   if WoTList.Text = ExpandConstant('{cm:browse}')  then
   begin
     WizardForm.DirBrowseButton.OnClick(nil);
@@ -203,35 +203,35 @@ begin
   WotList.Style := csDropDownList;
   WotList.OnChange := @WotList_OnChange;
   WotList.SetBounds(
-    WizardForm.DirEdit.Left, 
+    WizardForm.DirEdit.Left,
     WizardForm.DirEdit.Top,
-    WizardForm.DirBrowseButton.Left + WizardForm.DirBrowseButton.Width - WizardForm.DirEdit.Left, 
+    WizardForm.DirBrowseButton.Left + WizardForm.DirBrowseButton.Width - WizardForm.DirEdit.Left,
     WizardForm.DirEdit.Height
   );
-          
+
   WotList_Update();
 end;
 
 procedure CurPageChanged(CurPage: Integer);
 begin
   if (CurPage = wpSelectDir) then
-	begin
-		if WotList.ItemIndex = -1 then 
+  begin
+    if WotList.ItemIndex = -1 then
     begin
       WotList.ItemIndex := 0;
     end;
- 
-		WotList.OnChange(nil);
-	end;
+
+    WotList.OnChange(nil);
+  end;
 end;
 
 function NextButtonClick(CurPage: Integer): Boolean;
-begin                      
+begin
   Result := True;
-  
+
   if CurPage = wpSelectDir then
   begin
-   if not FileExists(ExpandConstant('{app}\WorldOfTanks.exe')) then 
+   if not FileExists(ExpandConstant('{app}\WorldOfTanks.exe')) then
    begin
       MsgBox( ExpandConstant('{cm:wotNotFound}'), mbError, MB_OK);
       Result := False;

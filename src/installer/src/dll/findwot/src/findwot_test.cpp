@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
- 
+
 #include <iostream>
 #include <vector>
 
@@ -73,7 +73,7 @@ int main()
 	if (wgc_isinstalled)
 	{
 		std::wcout << L"    Installed     : True" <<std::endl;
-		
+
 		WGC_GetInstallPathW(wbuffer, BUF_SIZE);
 		std::wcout << L"    Path          : " << wbuffer << std::endl<<std::endl;
 	}
@@ -156,7 +156,7 @@ int main()
 
 	std::wcout<<std::endl << L"Press any key..." << std::endl;
 	std::wcin.get();
-	
+
 	delete[] wbuffer;
 	return 0;
 }

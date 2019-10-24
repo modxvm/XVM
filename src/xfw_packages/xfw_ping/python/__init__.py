@@ -48,7 +48,7 @@ class XFWPing(object):
 
             self.__native = xfwnative.load_native(self.__package_name, 'xfw_ping.pyd', 'XFW_Ping')
             if not self.__native:
-                logging.error("[XFW/Ping] Failed to load native module. Crash report were not enabled")   
+                logging.error("[XFW/Ping] Failed to load native module. Crash report were not enabled")
                 return
 
             self.__initialized = True

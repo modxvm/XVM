@@ -33,7 +33,7 @@ def load_file(fn):
         # debug("[XFW][LIB][load_file] " + fn)
         return codecs.open(fn, 'r', 'utf-8-sig').read()
     except:
-        if fn != XFWLOADER_PATH_TO_ROOT+'res_mods/configs/xvm/xvm.xc':
+        if fn != XFWLOADER_PATH_TO_ROOT + 'res_mods/configs/xvm/xvm.xc':
             logtrace(__file__)
         return None
 
@@ -103,11 +103,11 @@ def resolve_path(path, basepath=None):
     """
 
     if path[:6].lower() == "res://":
-        path = path.replace("res://", XFWLOADER_PATH_TO_ROOT+"res_mods/mods/shared_resources/", 1)
+        path = path.replace("res://", XFWLOADER_PATH_TO_ROOT + "res_mods/mods/shared_resources/", 1)
     elif path[:6].lower() == "xvm://":
-        path = path.replace("xvm://", XFWLOADER_PATH_TO_ROOT+"res_mods/mods/shared_resources/xvm/", 1)
+        path = path.replace("xvm://", XFWLOADER_PATH_TO_ROOT + "res_mods/mods/shared_resources/xvm/", 1)
     elif path[:6].lower() == "cfg://":
-        path = path.replace("cfg://", XFWLOADER_PATH_TO_ROOT+"res_mods/configs/xvm/", 1)
+        path = path.replace("cfg://", XFWLOADER_PATH_TO_ROOT + "res_mods/configs/xvm/", 1)
     elif basepath:
         path = fix_path_slashes(basepath) + path
 
