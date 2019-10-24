@@ -1,4 +1,9 @@
-﻿XVM-8.1.3:
+﻿XVM-8.1.4: 
+  [GENERAL] 
+  * World of Tanks 1.6.1.2 
+  * Added support for <WoT_DIR> working directory
+ 
+XVM-8.1.3:
   [XFW.Native] 
   * Fixed loading error if vcomp140.dll is not present in the operating systems
 
