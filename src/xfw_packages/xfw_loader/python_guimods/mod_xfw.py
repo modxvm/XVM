@@ -31,7 +31,7 @@ def path_to_the_gameroot():
 def start_xfw():
     try:
         logging.info('[XFW/Entrypoint]')
-        logging.info('[XFW/Entrypoint] WoT Working Directory: %s' % os.getcwd())
+        logging.info(u'[XFW/Entrypoint] WoT Working Directory: %s' % os.getcwdu())
 
         path_to_root = path_to_the_gameroot()
         if not path_to_root:
