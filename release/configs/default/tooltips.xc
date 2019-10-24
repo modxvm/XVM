@@ -231,7 +231,7 @@
   "gravity",                              - Гравитация \ Gravity
   "shellSpeedSummary",                    - Сводка скоростей снарядов \ Summary of shell speeds
   "radioRange",                           - Дальность связи \ Range of radio signal
-  "rateOfFire",                           - Скорострельность оружия \ Rate of Fire 
+  "rateOfFire",                           - Скорострельность оружия \ Rate of Fire
   "battleTiers",                          - Уровни боев танка \ Battle tiers of vehicle
   "maxHealth",                            - ХП танка \ HP of vehicle
   "invisibilityStillFactor"               - Незаметность неподвижной машины (%) \ Concealment of Stationary Vehicle (%)

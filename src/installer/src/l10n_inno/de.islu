@@ -216,7 +216,7 @@ ApplicationsFound=Die folgenden Anwendungen benutzen Dateien, die aktualisiert w
 ApplicationsFound2=Die folgenden Anwendungen benutzen Dateien, die aktualisiert werden müssen. Es wird empfohlen, Setup zu erlauben, diese Anwendungen zu schließen. Nachdem die Installation fertiggestellt wurde, versucht Setup diese Anwendungen wieder zu starten.
 CloseApplications=&Schließe automatisch die Anwendungen
 DontCloseApplications=&Schließe die Anwendungen nicht
-ErrorCloseApplications=Das Setup konnte nicht alle Anwendungen automatisch schließen. Es wird empfohlen, alle Anwendungen zu schließen, die Dateien benutzen, die vom Setup vor einer Fortsetzung aktualisiert werden müssen.  
+ErrorCloseApplications=Das Setup konnte nicht alle Anwendungen automatisch schließen. Es wird empfohlen, alle Anwendungen zu schließen, die Dateien benutzen, die vom Setup vor einer Fortsetzung aktualisiert werden müssen.
 
 ; *** "Installing" wizard page
 WizardInstalling=Installiere ...

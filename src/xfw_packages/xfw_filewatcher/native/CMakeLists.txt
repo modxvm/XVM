@@ -19,12 +19,12 @@ cmake_minimum_required (VERSION 3.0)
 
 find_package(libpython REQUIRED)
 
-add_library(xfw_filewatcher SHARED 
+add_library(xfw_filewatcher SHARED
         "src/fileWatcher.cpp"
         "src/pythonModule.cpp"
         "src/threadHelper.cpp"
         "../../library.rc"
-)  
+)
 
 set(VER_PRODUCTNAME_STR "XFW Filewatcher")
 set(VER_FILEDESCRIPTION_STR "XFW Filewatcher module for World of Tanks")
@@ -33,8 +33,8 @@ set(VER_INTERNALNAME_STR "xfw_filewatcher")
 configure_file("../../library.h.in" "library.h" @ONLY)
 
 target_include_directories(xfw_filewatcher PRIVATE "${CMAKE_BUILD_DIR}")
-                       
-target_compile_options(xfw_filewatcher PRIVATE "/d2FH4-") 
+
+target_compile_options(xfw_filewatcher PRIVATE "/d2FH4-")
 
 target_link_libraries(xfw_filewatcher PRIVATE libpython::python27)
 set_target_properties(xfw_filewatcher PROPERTIES SUFFIX ".pyd")

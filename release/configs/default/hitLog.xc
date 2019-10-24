@@ -3,12 +3,12 @@
  * For additional settings see battleLabelsTemplates.xc
  * Лог нанесенного урона.
  * Дополнительные настройки см. в battleLabelsTemplates.xc
- * 
+ *
  * https://kr.cm/f/t/40466/
 
   Macros used in hitLog:
   Макросы используемые в hitLog:
-   
+
     {{dmg}}                - last damage / последний нанесенный урон.
     {{dmg-kind}}           - type of damage / тип нанесенного урона (атака, пожар, таран, ...).
     {{c:dmg-kind}}         - color by damage kind / цвет по типу урона.
@@ -30,7 +30,7 @@
     {{squad-num}}          - number of squad (1,2,...), empty if not in squad / номер взвода (1,2,...), пусто - если игрок не во взводе.
     {{dmg-ratio}}          - last damage in percent / последний нанесенный урон в процентах.
     {{splash-hit}}         - value 'splash', if damage is caused by shell splinters (HE/HESH), empty if not / возвращает 'splash', если урон нанесен осколками снаряда (ОФ/ХФ), иначе пусто.
-    {{critical-hit}}       - value 'crit', if critical damage was done, empty if not / возвращает 'crit', если было нанесено критическое повреждение, иначе пусто.    
+    {{critical-hit}}       - value 'crit', if critical damage was done, empty if not / возвращает 'crit', если было нанесено критическое повреждение, иначе пусто.
     {{alive}}              - value 'al', if the vehicle after the attack is not destroyed, empty if destroyed / возвращает 'al', если техника после атаки не разрушена, пусто для разрушенной.
     {{wn8}}, {{xwn8}}, {{wtr}}, {{xwtr}}, {{eff}}, {{xeff}}, {{wgr}}, {{xwgr}}, {{xte}}, {{r}}, {{xr}} - statistics macros (see macros.txt) / макросы статистики (смотрите macros_ru.txt).
     {{c:wn8}}, {{c:xwn8}}, {{c:wtr}}, {{c:xwtr}}, {{c:eff}}, {{c:xeff}}, {{c:wgr}}, {{c:xwgr}}, {{c:xte}}, {{c:r}}, {{c:xr}} - color according to the corresponding statistics macro (see macros.txt) / цвет по соответствующему макросу статистики (смотрите macros_ru.txt).
@@ -104,7 +104,7 @@
         "death_zone": "#CCCCCC",      // death zone / смертельная зона.
         "gas_attack": "#CCCCCC",      // gas attack / газовая атака.
         "art_attack": "#CCCCCC",      // art attack / артиллерийская поддержка.
-        "air_strike": "#CCCCCC"       // air strike / поддержка авиации.        
+        "air_strike": "#CCCCCC"       // air strike / поддержка авиации.
       },
       // Type of damage (macro {{dmg-kind-player}}).
       // Тип нанесенного урона (макрос {{dmg-kind-player}}).

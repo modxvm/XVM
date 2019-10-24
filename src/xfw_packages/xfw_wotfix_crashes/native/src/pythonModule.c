@@ -49,7 +49,7 @@ PyObject* fix_apply(PyObject* self, PyObject* args)
             break;
         case 3:
             result = bugfix3_apply();
-            break;   
+            break;
         case 4:
             result = bugfix4_apply();
             break;

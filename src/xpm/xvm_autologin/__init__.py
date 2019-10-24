@@ -51,7 +51,7 @@ def LoginView_populate(base, self):
 def tryWgcLogin(base, self, serverName=None):
     if not serverName and not config.get('login/autologin'): return
     base(self, serverName)
-    
+
 @registerEvent(LoginView, 'onLogin')
 def LoginView_onLogin(self, userName, password, serverName, isSocialToken2Login):
     if config.get('login/saveLastServer'):

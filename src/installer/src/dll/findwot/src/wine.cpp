@@ -52,12 +52,12 @@ WineStatus Wine::GetStatus()
             st.system = new wchar_t[strlen(sys) + 1]{};
             if (sys!=nullptr)
                 mbstowcs(st.system, sys, strlen(sys));
-            
+
             st.release = new wchar_t[strlen(rel) + 1]{};
             if (rel!=nullptr)
                 mbstowcs(st.release, rel, strlen(rel));
         }
-    } 
+    }
 
     return st;
 }

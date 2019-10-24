@@ -12,14 +12,14 @@
  |.build-swc-xfw.sh| build xvm.swc file    |
 
 ####other files and folders####
- 
+
  |file or folder | action                             |
  |---------------|------------------------------------|
  |src            | XVM Framework sources              |
  |wg             | lobby.swf decompiled sources       |
  |wg.as3proj     | project for wg.swc                 |
  |xvm.as3proj    | project for xvm.swc and xvm.swf    |
- 
+
 ## How to build ##
 You should run
 ```

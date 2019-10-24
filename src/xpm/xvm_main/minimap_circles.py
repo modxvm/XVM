@@ -32,7 +32,7 @@ import userprefs
 class _MinimapCircles(object):
 
     itemsCache = dependency.descriptor(IItemsCache)
-    
+
     def __init__(self):
         self.clear()
 

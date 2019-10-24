@@ -19,10 +19,10 @@ project(xfw_mutex LANGUAGES C)
 
 find_package(libpython REQUIRED)
 
-add_library(xfw_mutex SHARED 
+add_library(xfw_mutex SHARED
         "src/pythonModule.c"
-        "../../library.rc"	
-)  
+        "../../library.rc"
+)
 
 set(VER_PRODUCTNAME_STR "XFW Mutex")
 set(VER_FILEDESCRIPTION_STR "XFW Mutex module for World of Tanks")
@@ -34,7 +34,7 @@ target_include_directories(xfw_mutex PRIVATE "${CMAKE_BUILD_DIR}")
 
 target_compile_definitions(xfw_mutex PRIVATE "_CRT_SECURE_NO_WARNINGS")
 
-target_compile_options(xfw_mutex PRIVATE "/d2FH4-") 
+target_compile_options(xfw_mutex PRIVATE "/d2FH4-")
 
 target_link_libraries(xfw_mutex libpython::python27)
 set_target_properties(xfw_mutex PROPERTIES SUFFIX ".pyd")

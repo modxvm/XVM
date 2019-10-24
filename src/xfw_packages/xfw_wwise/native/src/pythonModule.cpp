@@ -87,7 +87,7 @@ bool Bank_Load_UpdateFile(const wchar_t* path_bank, const wchar_t* dir_audioww, 
 		return false;
 	}
 
-	if (Path::DirectoryExists(path_audioww)) 
+	if (Path::DirectoryExists(path_audioww))
 	{
 		if (Path::FileExists(path_new))
 		{
@@ -166,7 +166,7 @@ static PyObject* Py_Bank_Load(PyObject* self, PyObject* args)
 
 	Py_BEGIN_ALLOW_THREADS;
 	result = Bank_Load_FromPath(str_bankname.c_str(), returnCode, bankID);
-	
+
 	if (returnCode == AK_FileNotFound) {
 		result = Bank_Load_FromMemory((Path::GetAbsolute(path_audioww) + L"\\" + str_bankname).c_str(), returnCode, bankID);
 	}
@@ -232,7 +232,7 @@ static PyMethodDef XFW_WWISEMethods[] = {
 	{ "bank_load"   , Py_Bank_Load          , METH_VARARGS, "Load WWise bank by filepath relative to WorldOfTanks.exe" },
 	{ "bank_unload" , Py_Bank_Unload        , METH_VARARGS, "Unload WWise bank by bankID." },
 	{ "comm_init"   , Py_Communication_Init , METH_VARARGS, "Init communication." },
-	{ NULL, NULL, 0, NULL} 
+	{ NULL, NULL, 0, NULL}
 };
 
 PyMODINIT_FUNC initXFW_WWISE(void)

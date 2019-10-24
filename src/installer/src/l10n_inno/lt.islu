@@ -12,7 +12,7 @@
 ; Corrected and updated to version 5.5.3+ by Dalius Guzauskas (d DOT guzauskas AT gmail DOT com)
 
 [LangOptions]
-; The following three entries are very important. Be sure to read and 
+; The following three entries are very important. Be sure to read and
 ; understand the '[LangOptions] section' topic in the help file.
 LanguageName=Lietuvi<0173>
 LanguageID=$0427

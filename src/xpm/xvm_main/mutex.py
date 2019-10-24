@@ -24,7 +24,7 @@ from xfw import *
 
 import config
 
-#WGC resets WoT mutex so we should perform mutex kill after wgc_api.dll code execution 
+#WGC resets WoT mutex so we should perform mutex kill after wgc_api.dll code execution
 @registerEvent(LoginView, 'onLogin')
 def kill_wotclient_mutex(self, *args):
     try:

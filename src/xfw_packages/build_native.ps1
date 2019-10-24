@@ -93,11 +93,11 @@ Remove-Item -Path "./_devel/*" -Force -Recurse -ErrorAction SilentlyContinue
 Download-DevelPackage
 
 foreach ($project in $projects_32) {
-#    Build-CmakeProject -Name $project -Arch "32bit"   
+#    Build-CmakeProject -Name $project -Arch "32bit"
 }
 
 foreach ($project in $projects_64) {
-    Build-CmakeProject -Name $project -Arch "64bit"  
+    Build-CmakeProject -Name $project -Arch "64bit"
 }
 
 #Remove-Item -Path "./_build/*" -Recurse -Force -ErrorAction SilentlyContinue

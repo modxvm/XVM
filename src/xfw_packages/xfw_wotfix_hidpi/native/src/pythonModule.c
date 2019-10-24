@@ -1,20 +1,20 @@
 /**
  * This file is part of the XVM Framework project.
  * Copyright (c) 2016-2019 XVM Team.
- * 
- * XVM Framework is free software: you can redistribute it and/or modify  
- * it under the terms of the GNU Lesser General Public License as   
+ *
+ * XVM Framework is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as
  * published by the Free Software Foundation, version 3.
  *
- * XVM Framework is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of 
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU 
+ * XVM Framework is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
- 
+
 #include "Python.h"
 
 #include <Windows.h>
@@ -61,7 +61,7 @@ PyObject* Py_Fix_DPI(PyObject* self, PyObject* args)
     HKEY key=NULL;
     if (RegCreateKeyExW(HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows NT\\CurrentVersion\\AppCompatFlags\\Layers",
         0, NULL, REG_OPTION_NON_VOLATILE, KEY_ALL_ACCESS, NULL,&key, NULL)== ERROR_SUCCESS)
-    {    
+    {
         wchar_t* wotlauncher = _wpgmptr;
         PathRemoveFileSpecW(wotlauncher);
         wcscat(wotlauncher, L"\\WoTLauncher.exe");
@@ -83,7 +83,7 @@ PyObject* Py_Fix_DPI(PyObject* self, PyObject* args)
 
 PyMethodDef XFWHiDPIMethods[] = {
     { "fix_dpi"      , Py_Fix_DPI    , METH_VARARGS, "Set DPI Aware for World of Tanks."},
-    { NULL           , NULL          ,            0, NULL} 
+    { NULL           , NULL          ,            0, NULL}
 };
 
 PyMODINIT_FUNC initXFW_HiDPI(void)

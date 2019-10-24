@@ -22,7 +22,7 @@ ucm_set_runtime(STATIC)
 
 set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/bin/)
 
-set(SOURCES_LIB 
+set(SOURCES_LIB
     "src/api.cpp"
     "src/dll.cpp"
     "src/registry.cpp"
@@ -36,7 +36,7 @@ set(SOURCES_LIB
     "src/string.cpp"
 )
 
-set(HEADERS_LIB 
+set(HEADERS_LIB
     "src/api.h"
     "src/registry.h"
     "src/filesystem.h"

@@ -64,7 +64,7 @@ class XFWWWise(object):
 
             self.__native = xfwnative.load_native(self.__package_name, 'xfw_wwise.pyd', 'XFW_WWISE')
             if not self.__native:
-                logging.error("[XFW/WWISE] Failed to load native module. Crash report were not enabled")   
+                logging.error("[XFW/WWISE] Failed to load native module. Crash report were not enabled")
                 return
         except Exception:
             logging.exception("[XFW/WWISE] Error when loading native library:")

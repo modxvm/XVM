@@ -43,7 +43,7 @@ class XFWCrashFix(object):
 
             self.__native = xfwnative.load_native(self.__package_name, 'xfw_crashfix.pyd', 'xfw_crashfix')
             if not self.__native:
-                logging.error("[XFW/Crashfix] Failed to load native module. Crash report were not enabled")   
+                logging.error("[XFW/Crashfix] Failed to load native module. Crash report were not enabled")
                 return
 
             self.__initialized = True
@@ -59,7 +59,7 @@ class XFWCrashFix(object):
         if self.__native is None:
             logging.warning("[XFW/Crashfix] Crash fixes not applied.")
             return
-        
+
         logging.info("[XFW/Crashfix] Applying crashfixes:")
 
         for bf_num in range(1, self.__native.fix_count()+1):
