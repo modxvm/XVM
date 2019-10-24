@@ -1,4 +1,9 @@
-﻿XVM-8.1.4:
+﻿XVM-8.1.5:
+  [GENERAL]
+  * Fixed XVM loading if WoT path has non-latin characters
+  * Initial macOS Catalina support
+
+XVM-8.1.4:
   [GENERAL]
   * World of Tanks 1.6.1.2
   * Added support for <WoT_DIR> working directory

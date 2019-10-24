@@ -3,7 +3,7 @@
 #####################################################################
 # imports
 
-
+import logging
 import os
 import threading
 import traceback
@@ -16,6 +16,7 @@ from gui.shared import EVENT_BUS_SCOPE
 
 from xfw import *
 from xfw.constants import PATH
+from xfw_loader.python import XFWLOADER_PATH_TO_ROOT
 
 import xvm_main.python.config as config
 from xvm_main.python.logger import *
@@ -30,9 +31,9 @@ integrity_result = None
 lock = threading.RLock()
 # check incorrect hash, missing and extra files
 check_xvm_dirs = [
-    '../res_mods/mods/xfw',
-    '../res_mods/mods/xfw_packages',
-    ]
+    XFWLOADER_PATH_TO_ROOT + 'res_mods/mods/xfw',
+    XFWLOADER_PATH_TO_ROOT + 'res_mods/mods/xfw_packages',
+]
 
 
 #####################################################################
@@ -77,7 +78,10 @@ def _checkIntegrityAsync(*args, **kwargs):
         global integrity_result
         try:
             from hash_table import HASH_DATA
-        except:
+            for key in HASH_DATA.keys():
+                HASH_DATA[XFWLOADER_PATH_TO_ROOT+key] = HASH_DATA.pop(key)
+        except Exception:
+            logging.exception('[XVM/Integrity]: _checkIntegrityAsync')
             with lock:
                 integrity_result = ['hash_table.py is missing/corrupt']
             return
