@@ -35,7 +35,7 @@ class JSONxLoader(object):
             return result
         except JSONx.JSONxException, e:
             line, col = e.error_position
-            raise JSONxLoaderException("{} at {}:{} in \"{}\"".format(e.message, line, col, path), path)
+            raise JSONxLoaderException(u"{} at {}:{} in \"{}\"".format(e.message, line, col, path), path)
 
     def visit(self, root, path, file_name, level):
         if level < 0:
@@ -60,7 +60,7 @@ class JSONxLoader(object):
 
         if err:
             obj_path = '/'.join(path)
-            raise JSONxLoaderException('Bad reference: ${{"{}": "{}"}} in "{}:{}"\n{}'
+            raise JSONxLoaderException(u'Bad reference: ${{"{}": "{}"}} in "{}:{}"\n{}'
                                        .format(ref_file or file_name, ref_path, config_file, obj_path, err), file_name)
 
         if isinstance(result, dict):
@@ -87,11 +87,11 @@ class JSONxLoader(object):
             stream = codecs.open(path, 'r', encoding)
             self.file_cache[path] = stream.read()
             if self.log_func is not None:
-                self.log_func('[JSONxLoader] load: {}'.format(path))
+                self.log_func(u'[JSONxLoader] load: {}'.format(path))
             stream.close()
             return self.file_cache[path]
         except IOError, e:
-            raise JSONxLoaderException('File not found: {}'.format(e.filename), e.filename)
+            raise JSONxLoaderException(u'File not found: {}'.format(e.filename), e.filename)
 
 
 def get_path(root_file, ref):

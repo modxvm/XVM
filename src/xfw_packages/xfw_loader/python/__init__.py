@@ -249,17 +249,17 @@ def init(path_to_root):
     XFWLOADER_PATH_TO_ROOT = path_to_root
 
     global XFWLOADER_PACKAGES_REALFS
-    XFWLOADER_PACKAGES_REALFS = XFWLOADER_PATH_TO_ROOT + 'res_mods/mods/xfw_packages'
+    XFWLOADER_PACKAGES_REALFS = XFWLOADER_PATH_TO_ROOT + u'res_mods/mods/xfw_packages'
 
     global XFWLOADER_PACKAGES_VFS
-    XFWLOADER_PACKAGES_VFS = 'mods/xfw_packages'
+    XFWLOADER_PACKAGES_VFS = u'mods/xfw_packages'
 
     global XFWLOADER_TEMPDIR
-    XFWLOADER_TEMPDIR = XFWLOADER_PATH_TO_ROOT + 'mods/temp'
+    XFWLOADER_TEMPDIR = XFWLOADER_PATH_TO_ROOT + u'mods/temp'
 
     # "../res_mods/0.9.20.1/""
     global WOT_RESMODS_DIR
-    WOT_RESMODS_DIR = XFWLOADER_PATH_TO_ROOT + '%s' % ResMgr.openSection('../paths.xml')['Paths'].values()[0].asString.lstrip('./')
+    WOT_RESMODS_DIR = XFWLOADER_PATH_TO_ROOT + ResMgr.openSection('../paths.xml')['Paths'].values()[0].asString.lstrip('./')
 
     # ver =
     #   * 'v.0.8.7'

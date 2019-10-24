@@ -20,11 +20,11 @@ class XVM(object):
     XMQP_LOBBY_EXCHANGE = 'com.xvm.xmqp.%s.lobby' % XMQP_API_VERSION
     XMQP_LOBBY_ROUTING_KEY = 'query.battle.channel'
 
-    CONFIG_DIR = XFWLOADER_PATH_TO_ROOT + 'res_mods/configs/xvm'
-    CONFIG_FILE = CONFIG_DIR + '/xvm.xc'
-    PY_MACRO_DIR = CONFIG_DIR + '/py_macro'
-    SHARED_RESOURCES_DIR = XFWLOADER_PATH_TO_ROOT + 'res_mods/mods/shared_resources/xvm'
-    LOCALE_DIR = SHARED_RESOURCES_DIR + '/l10n'
+    CONFIG_DIR = XFWLOADER_PATH_TO_ROOT + u'res_mods/configs/xvm'
+    CONFIG_FILE = CONFIG_DIR + u'/xvm.xc'
+    PY_MACRO_DIR = CONFIG_DIR + u'/py_macro'
+    SHARED_RESOURCES_DIR = XFWLOADER_PATH_TO_ROOT + u'res_mods/mods/shared_resources/xvm'
+    LOCALE_DIR = SHARED_RESOURCES_DIR + u'/l10n'
 
     LOCALE_AUTO_DETECTION = 'auto'
     REGION_AUTO_DETECTION = 'auto'

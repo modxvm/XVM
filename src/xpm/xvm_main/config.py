@@ -155,7 +155,7 @@ def _load_xvm_xc(filename, autoreload):
 
 def _load_locale_file():
     try:
-        data = JSONxLoader.load('{}/{}.xc'.format(XVM.LOCALE_DIR, get('language')), _load_log)
+        data = JSONxLoader.load(u'{}/{}.xc'.format(XVM.LOCALE_DIR, get('language')), _load_log)
     except Exception:
         data = default_config.LANG_RU if get('region').lower() == 'ru' else default_config.LANG_EN
         err(traceback.format_exc())
