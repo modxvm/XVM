@@ -32,6 +32,9 @@ set(VER_INTERNALNAME_STR "xfw_crashfix")
 configure_file("../../library.h.in" "library.h" @ONLY)
 
 target_compile_definitions(xfw_crashfix PRIVATE "_CRT_SECURE_NO_WARNINGS")
+
+target_compile_options(xfw_crashfix PRIVATE "/d2FH4-") 
+
 set_target_properties(xfw_crashfix PROPERTIES LINK_FLAGS "/INCREMENTAL:NO")
 
 target_link_libraries(xfw_crashfix libpython::python27)

@@ -39,6 +39,9 @@ configure_file("../../library.h.in" "library.h" @ONLY)
 target_include_directories(xfw_fonts PRIVATE "${CMAKE_BUILD_DIR}")
 
 target_compile_definitions(xfw_fonts PRIVATE "_CRT_SECURE_NO_WARNINGS")
+
+target_compile_options(xfw_fonts PRIVATE "/d2FH4-") 
+
 target_link_libraries(xfw_fonts libpython::python27)
 target_link_libraries(xfw_fonts minhook::minhook)
 set_target_properties(xfw_fonts PROPERTIES SUFFIX ".pyd")

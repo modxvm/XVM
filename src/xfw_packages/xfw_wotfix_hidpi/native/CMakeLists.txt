@@ -19,6 +19,8 @@ target_include_directories(xfw_hidpi PRIVATE "${CMAKE_BUILD_DIR}")
 
 target_compile_definitions(xfw_hidpi PRIVATE "_CRT_SECURE_NO_WARNINGS")
 
+target_compile_options(xfw_hidpi PRIVATE "/d2FH4-") 
+
 set_target_properties(xfw_hidpi PROPERTIES LINK_FLAGS "/INCREMENTAL:NO")
 
 target_link_libraries(xfw_hidpi libpython::python27)

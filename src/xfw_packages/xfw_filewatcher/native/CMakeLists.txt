@@ -33,7 +33,8 @@ set(VER_INTERNALNAME_STR "xfw_filewatcher")
 configure_file("../../library.h.in" "library.h" @ONLY)
 
 target_include_directories(xfw_filewatcher PRIVATE "${CMAKE_BUILD_DIR}")
-                                   
+                       
+target_compile_options(xfw_filewatcher PRIVATE "/d2FH4-") 
 
 target_link_libraries(xfw_filewatcher PRIVATE libpython::python27)
 set_target_properties(xfw_filewatcher PROPERTIES SUFFIX ".pyd")

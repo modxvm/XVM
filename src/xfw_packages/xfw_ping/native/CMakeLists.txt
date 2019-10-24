@@ -32,7 +32,8 @@ set(VER_INTERNALNAME_STR "xfw_ping")
 configure_file("../../library.h.in" "library.h" @ONLY)
 
 target_include_directories(xfw_ping PRIVATE "${CMAKE_BUILD_DIR}")
-          
+
+target_compile_options(xfw_ping PRIVATE "/d2FH4-") 
 
 target_link_libraries(xfw_ping "iphlpapi")
 target_link_libraries(xfw_ping "ws2_32")

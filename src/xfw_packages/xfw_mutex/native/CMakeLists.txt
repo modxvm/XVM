@@ -33,6 +33,9 @@ configure_file("../../library.h.in" "library.h" @ONLY)
 target_include_directories(xfw_mutex PRIVATE "${CMAKE_BUILD_DIR}")
 
 target_compile_definitions(xfw_mutex PRIVATE "_CRT_SECURE_NO_WARNINGS")
+
+target_compile_options(xfw_mutex PRIVATE "/d2FH4-") 
+
 target_link_libraries(xfw_mutex libpython::python27)
 set_target_properties(xfw_mutex PROPERTIES SUFFIX ".pyd")
 set_target_properties(xfw_mutex PROPERTIES LINK_FLAGS "/INCREMENTAL:NO")

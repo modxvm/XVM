@@ -31,6 +31,8 @@ target_include_directories(xfw_crashreport PRIVATE "${CMAKE_BUILD_DIR}")
 target_compile_definitions(xfw_crashreport PRIVATE "-D_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING")	
 target_compile_definitions(xfw_crashreport PRIVATE "-D_CRT_SECURE_NO_WARNINGS")
 
+target_compile_options(xfw_crashreport PRIVATE "/d2FH4-") 
+
 set_target_properties(xfw_crashreport PROPERTIES LINK_FLAGS "/INCREMENTAL:NO")
 
 #dep: python
