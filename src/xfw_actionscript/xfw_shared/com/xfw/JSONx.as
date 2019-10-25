@@ -23,12 +23,12 @@ SOFTWARE.
 /*
 ported to Actionscript May 2005 by Trannie Carter <tranniec@designvox.com>, wwww.designvox.com
 USAGE:
-	try {
-		var o:Object = JSON.parse(jsonStr);
-		var s:String = JSON.stringify(obj);
-	} catch(ex) {
-		trace(ex.name + ":" + ex.message + ":" + ex.at + ":" + ex.text);
-	}
+    try {
+        var o:Object = JSON.parse(jsonStr);
+        var s:String = JSON.stringify(obj);
+    } catch(ex) {
+        trace(ex.name + ":" + ex.message + ":" + ex.at + ":" + ex.text);
+    }
 
 added JSONx extensions 2012-2013 by Maxim Schedriviy "max(at)modxvm.com", https://modxvm.com
     1. Comments:

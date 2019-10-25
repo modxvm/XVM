@@ -12,12 +12,12 @@ find_package(libpython REQUIRED)
 add_definitions(-D_UNICODE)
 
 add_library(xfw_crashreport SHARED
-    "src/common.cpp"
-    "src/crashreporter.cpp"
-    "src/dllMain.cpp"
-    "src/fix_suef.cpp"
-    "src/pythonModule.cpp"
-    "../../library.rc"
+        "src/common.cpp"
+        "src/crashreporter.cpp"
+        "src/dllMain.cpp"
+        "src/fix_suef.cpp"
+        "src/pythonModule.cpp"
+        "../../library.rc"
 )
 
 
