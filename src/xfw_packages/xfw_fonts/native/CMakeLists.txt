@@ -23,11 +23,11 @@ find_package(minhook REQUIRED)
 include_directories("src")
 
 add_library(xfw_fonts SHARED
-	"src/pythonModule.cpp"
-	"src/ttfInfo.cpp"
-	"src/winapi_CreateFont.cpp"
-	"src/winapi_EnumFontsFamiliesEx.cpp"
-	"../../library.rc"
+        "src/pythonModule.cpp"
+        "src/ttfInfo.cpp"
+        "src/winapi_CreateFont.cpp"
+        "src/winapi_EnumFontsFamiliesEx.cpp"
+        "../../library.rc"
 )
 
 set(VER_PRODUCTNAME_STR "XFW Fonts")

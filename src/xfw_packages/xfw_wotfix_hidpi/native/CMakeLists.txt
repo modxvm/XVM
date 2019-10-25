@@ -5,8 +5,8 @@ project(xfw_hidpi LANGUAGES C)
 find_package(libpython REQUIRED)
 
 add_library(xfw_hidpi SHARED
-	"src/pythonModule.c"
-	"../../library.rc"
+        "src/pythonModule.c"
+        "../../library.rc"
 )
 
 set(VER_PRODUCTNAME_STR "XFW HiDPI")

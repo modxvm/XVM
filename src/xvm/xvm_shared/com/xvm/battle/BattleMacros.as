@@ -522,13 +522,13 @@ package com.xvm.battle
          *
          * VehicleMarkerAlly should contain 4 named frames:
          *   - green - normal ally
-         *   - gold - squad mate
-         *   - blue - teamkiller
+         *   - gold  - squad mate
+         *   - blue  - teamkiller
          * VehicleMarkerEnemy should contain 2 named frames:
          *   - red - normal enemy
-         * @param	entityName EntityName
-         * @param	isColorBlindMode CB mode flag
-         * @return	name of marker frame
+         * @param  entityName EntityName
+         * @param  isColorBlindMode CB mode flag
+         * @return name of marker frame
          */
         /*
         public static function getMarkerColorAlias(entityName):String
