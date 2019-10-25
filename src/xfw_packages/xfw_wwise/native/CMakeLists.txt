@@ -8,9 +8,9 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 #directories
 add_library(xfw_wwise SHARED
-  "src/path.cpp"
-  "src/pythonModule.cpp"
-  "../../library.rc"
+        "src/path.cpp"
+        "src/pythonModule.cpp"
+        "../../library.rc"
 )
 
 set(VER_PRODUCTNAME_STR "XFW WWISE")

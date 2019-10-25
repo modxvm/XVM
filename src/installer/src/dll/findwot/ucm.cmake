@@ -536,13 +536,13 @@ macro(ucm_add_target)
         set(do_unity FALSE)
     endif()
 
-	# inform the developer that the current target might benefit from a unity build
-	if(NOT ARG_UNITY AND ${UCM_UNITY_BUILD})
-		ucm_count_sources(${ARG_SOURCES} RESULT num_sources)
-		if(${num_sources} GREATER 1)
-			message(AUTHOR_WARNING "Target '${ARG_NAME}' may benefit from a unity build.\nIt has ${num_sources} sources - enable with UNITY flag")
-		endif()
-	endif()
+    # inform the developer that the current target might benefit from a unity build
+    if(NOT ARG_UNITY AND ${UCM_UNITY_BUILD})
+        ucm_count_sources(${ARG_SOURCES} RESULT num_sources)
+        if(${num_sources} GREATER 1)
+            message(AUTHOR_WARNING "Target '${ARG_NAME}' may benefit from a unity build.\nIt has ${num_sources} sources - enable with UNITY flag")
+        endif()
+    endif()
 
     # prepare for the unity build
     set(orig_target ${ARG_NAME})
@@ -567,9 +567,9 @@ macro(ucm_add_target)
         # set the number of unity cpp files to be used for the unity target
         if(NOT "${ARG_CPP_PER_UNITY}" STREQUAL "")
             set_property(TARGET ${orig_target} PROPERTY COTIRE_UNITY_SOURCE_MAXIMUM_NUMBER_OF_INCLUDES "${ARG_CPP_PER_UNITY}")
-		else()
-			set_property(TARGET ${orig_target} PROPERTY COTIRE_UNITY_SOURCE_MAXIMUM_NUMBER_OF_INCLUDES "100")
-		endif()
+    else()
+        set_property(TARGET ${orig_target} PROPERTY COTIRE_UNITY_SOURCE_MAXIMUM_NUMBER_OF_INCLUDES "100")
+    endif()
 
         if(NOT "${ARG_PCH_FILE}" STREQUAL "")
             set_target_properties(${orig_target} PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "${ARG_PCH_FILE}")
