@@ -177,9 +177,9 @@ class _XfwComponent(BaseDAAPIComponent):
                 return None
 
             for as_path in as_paths:
-                files = glob.iglob('{}/*/{}/*.swf'.format(mods_dir, as_path))
+                files = glob.iglob(u'{}/*/{}/*.swf'.format(mods_dir, as_path))
                 for m in files:
-                    m = '%s%s' % (_WOT_ROOT, m.replace('\\', '/').replace('//', '/'))
+                    m = '%s%s' % (_WOT_ROOT, str(m).replace('\\', '/').replace('//', '/'))
                     # debug('[XFW] getMods: ' + m)
                     name = os.path.basename(os.path.dirname(os.path.dirname(m)))
                     if not m.lower().endswith('_ui.swf') and not m.lower().endswith('_view.swf'):
