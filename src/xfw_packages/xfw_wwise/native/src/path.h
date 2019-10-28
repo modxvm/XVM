@@ -26,16 +26,16 @@
 
 class Path {
 public:
-	static std::wstring GetRoot(const std::wstring &path);
-	static std::wstring GetAbsolute(const std::wstring &path);
-	static std::wstring GetFilename(const std::wstring &path);
+    static std::wstring GetRoot(const std::wstring &path);
+    static std::wstring GetAbsolute(const std::wstring &path);
+    static std::wstring GetFilename(const std::wstring &path);
 
-	static bool AreEqual(const std::wstring &path_one, const std::wstring &path_two);
-	static bool FileExists(const std::wstring &path);
-	static bool DirectoryExists(const std::wstring &path);
-	static bool OnNTFS(const std::wstring &path);
-	static bool CreateDirectory(const std::wstring &path);
-	static bool DeleteFile(const std::wstring &path);
-	static bool CopyFile(const std::wstring &path_from, const std::wstring &path_to);
-	static bool CreateHardlink(const std::wstring &path_from, const std::wstring &path_to);
+    static bool AreEqual(const std::wstring &path_one, const std::wstring &path_two);
+    static bool FileExists(const std::wstring &path);
+    static bool DirectoryExists(const std::wstring &path);
+    static bool OnNTFS(const std::wstring &path);
+    static bool CreateDirectory(const std::wstring &path);
+    static bool DeleteFile(const std::wstring &path);
+    static bool CopyFile(const std::wstring &path_from, const std::wstring &path_to);
+    static bool CreateHardlink(const std::wstring &path_from, const std::wstring &path_to);
 };

@@ -24,11 +24,11 @@
 
 class WotDetector {
 private:
-	static bool isInitialized;
+    static bool isInitialized;
 public:
-	static std::vector<WotClient> clients;
+    static std::vector<WotClient> clients;
 
-	static void FindClients();
-	static int AddClient(std::wstring directory);
-	static bool IsInitialized();
+    static void FindClients();
+    static int AddClient(std::wstring directory);
+    static bool IsInitialized();
 };

@@ -40,22 +40,22 @@ static char python_watcher_is_exists_docstring[] = "Checks if watcher exists"
 "  watcher_is_exists(\"XVM_CONFIG\")";
 static PyObject* python_watcher_is_exists(PyObject* self, PyObject* args)
 {
-	char* watcherID;
+    char* watcherID;
 
-	//check input value
-	if (!PyArg_ParseTuple(args, "s", &watcherID))
-	{
-		return NULL;
-	}
+    //check input value
+    if (!PyArg_ParseTuple(args, "s", &watcherID))
+    {
+        return NULL;
+    }
 
-	if (watcherList.count(std::string(watcherID)))
-	{
-		Py_RETURN_TRUE;
-	}
-	else
-	{
-		Py_RETURN_FALSE;
-	}
+    if (watcherList.count(std::string(watcherID)))
+    {
+        Py_RETURN_TRUE;
+    }
+    else
+    {
+        Py_RETURN_FALSE;
+    }
 }
 
 
@@ -70,27 +70,27 @@ static char python_watcher_is_running_docstring[] = "Checks if watcher is runnin
 "  watcher_is_running(\"XVM_CONFIG\")";
 static PyObject* python_watcher_is_running(PyObject* self, PyObject* args)
 {
-	char* watcherID;
+    char* watcherID;
 
-	//check input value
-	if (!PyArg_ParseTuple(args, "s", &watcherID))
-	{
-		return NULL;
-	}
+    //check input value
+    if (!PyArg_ParseTuple(args, "s", &watcherID))
+    {
+        return NULL;
+    }
 
-	if (!watcherList.count(std::string(watcherID)))
-	{
-		Py_RETURN_FALSE;
-	}
+    if (!watcherList.count(std::string(watcherID)))
+    {
+        Py_RETURN_FALSE;
+    }
 
-	if (watcherList.at(std::string(watcherID))->IsRunning())
-	{
-		Py_RETURN_TRUE;
-	}
-	else
-	{
-		Py_RETURN_FALSE;
-	}
+    if (watcherList.at(std::string(watcherID))->IsRunning())
+    {
+        Py_RETURN_TRUE;
+    }
+    else
+    {
+        Py_RETURN_FALSE;
+    }
 }
 
 
@@ -108,30 +108,30 @@ static char python_watcher_add_docstring[] = "Starts new directory watcher"
 "  watcher_add(\"XVM_CONFIG\", u\"config/default\", \"events.HasCtxEvent(XVM_EVENT.RELOAD_CONFIG, {'filename':XVM.CONFIG_FILE})\")";
 static PyObject* python_watcher_add(PyObject* self, PyObject* args)
 {
-	char*    watcherID;
-	wchar_t* directory;
-	char*    eventCallText;
-	int      stopWatcherAfterEvent;
+    char*    watcherID;
+    wchar_t* directory;
+    char*    eventCallText;
+    int      stopWatcherAfterEvent;
 
-	//check input value
-	if (!PyArg_ParseTuple(args, "susi", &watcherID, &directory, &eventCallText, &stopWatcherAfterEvent))
-	{
-		return NULL;
-	}
+    //check input value
+    if (!PyArg_ParseTuple(args, "susi", &watcherID, &directory, &eventCallText, &stopWatcherAfterEvent))
+    {
+        return NULL;
+    }
 
-	if (watcherList.count(std::string(watcherID)))
-	{
-		PyErr_SetString(PyExc_RuntimeError, "watcher is already exists");
-		return NULL;
-	}
+    if (watcherList.count(std::string(watcherID)))
+    {
+        PyErr_SetString(PyExc_RuntimeError, "watcher is already exists");
+        return NULL;
+    }
 
-	watcherList.insert({
-		std::string(watcherID),
-		new FileWatcher(std::string(watcherID), std::wstring(directory),
-			std::string(eventCallText), static_cast<bool>(stopWatcherAfterEvent))
-	});
+    watcherList.insert({
+        std::string(watcherID),
+        new FileWatcher(std::string(watcherID), std::wstring(directory),
+            std::string(eventCallText), static_cast<bool>(stopWatcherAfterEvent))
+    });
 
-	Py_RETURN_NONE;
+    Py_RETURN_NONE;
 }
 
 
@@ -146,20 +146,20 @@ static char python_watcher_delete_docstring[] = "Deletes directory watcher"
 "  watcher_delete(\"XVM_CONFIG\")";
 static PyObject* python_watcher_delete(PyObject* self, PyObject* args)
 {
-	char* watcherID;
+    char* watcherID;
 
-	if (!PyArg_ParseTuple(args, "s", &watcherID))
-	{
-		return NULL;
-	}
+    if (!PyArg_ParseTuple(args, "s", &watcherID))
+    {
+        return NULL;
+    }
 
-	if (watcherList.count(std::string(watcherID)))
-	{
-		delete watcherList[std::string(watcherID)];
-		watcherList.erase(std::string(watcherID));
-	}
+    if (watcherList.count(std::string(watcherID)))
+    {
+        delete watcherList[std::string(watcherID)];
+        watcherList.erase(std::string(watcherID));
+    }
 
-	Py_RETURN_NONE;
+    Py_RETURN_NONE;
 }
 
 static char python_watcher_delete_all_docstring[] = "Deletes all directory watchers"
@@ -172,13 +172,13 @@ static char python_watcher_delete_all_docstring[] = "Deletes all directory watch
 "  watcher_delete_all()";
 static PyObject* python_watcher_delete_all(PyObject* self, PyObject* args)
 {
-	for (auto& item : watcherList)
-	{
-		delete item.second;
-		watcherList.erase(item.first);
-	}
+    for (auto& item : watcherList)
+    {
+        delete item.second;
+        watcherList.erase(item.first);
+    }
 
-	Py_RETURN_NONE;
+    Py_RETURN_NONE;
 }
 
 
@@ -195,20 +195,20 @@ static char python_watcher_start_docstring[] = "Starts directory watcher"
 "  watcher_start(\"XVM_CONFIG\")";
 static PyObject* python_watcher_start(PyObject* self, PyObject* args)
 {
-	char* watcherID;
+    char* watcherID;
 
-	if (!PyArg_ParseTuple(args, "s", &watcherID))
-	{
-		return NULL;
-	}
+    if (!PyArg_ParseTuple(args, "s", &watcherID))
+    {
+        return NULL;
+    }
 
-	if (watcherList.count(std::string(watcherID)))
-	{
-		watcherList[std::string(watcherID)]->StartWatch();
-		Py_RETURN_TRUE;
-	}
+    if (watcherList.count(std::string(watcherID)))
+    {
+        watcherList[std::string(watcherID)]->StartWatch();
+        Py_RETURN_TRUE;
+    }
 
-	Py_RETURN_FALSE;
+    Py_RETURN_FALSE;
 }
 
 
@@ -222,12 +222,12 @@ static char python_watcher_start_all_docstring[] = "Starts all directory watcher
 "  watcher_start_all()";
 static PyObject* python_watcher_start_all(PyObject* self, PyObject* args)
 {
-	for (auto& item : watcherList)
-	{
-		item.second->StartWatch();
-	}
+    for (auto& item : watcherList)
+    {
+        item.second->StartWatch();
+    }
 
-	Py_RETURN_NONE;
+    Py_RETURN_NONE;
 }
 
 static char python_watcher_stop_docstring[] = "Stops directory watcher"
@@ -243,20 +243,20 @@ static char python_watcher_stop_docstring[] = "Stops directory watcher"
 "  watcher_stop(\"XVM_CONFIG\")";
 static PyObject* python_watcher_stop(PyObject* self, PyObject* args)
 {
-	char* watcherID;
+    char* watcherID;
 
-	if (!PyArg_ParseTuple(args, "s", &watcherID))
-	{
-		return NULL;
-	}
+    if (!PyArg_ParseTuple(args, "s", &watcherID))
+    {
+        return NULL;
+    }
 
-	if (watcherList.count(std::string(watcherID)))
-	{
-		watcherList[std::string(watcherID)]->StopWatch();
-		Py_RETURN_TRUE;
-	}
+    if (watcherList.count(std::string(watcherID)))
+    {
+        watcherList[std::string(watcherID)]->StopWatch();
+        Py_RETURN_TRUE;
+    }
 
-	Py_RETURN_FALSE;
+    Py_RETURN_FALSE;
 }
 
 static char python_watcher_stop_all_docstring[] = "Stops all directory watchers"
@@ -269,29 +269,29 @@ static char python_watcher_stop_all_docstring[] = "Stops all directory watchers"
 "  watcher_stop_all()";
 static PyObject* python_watcher_stop_all(PyObject* self, PyObject* args)
 {
-	for (auto& item : watcherList)
-	{
-		item.second->StopWatch();
-	}
+    for (auto& item : watcherList)
+    {
+        item.second->StopWatch();
+    }
 
-	Py_RETURN_NONE;
+    Py_RETURN_NONE;
 }
 
 
 static PyMethodDef XFW_FileWatcherMethods[] = {
-	{ "watcher_is_exists"  , python_watcher_is_exists , METH_VARARGS, python_watcher_is_exists_docstring  },
-	{ "watcher_is_running" , python_watcher_is_running, METH_VARARGS, python_watcher_is_running_docstring },
+    { "watcher_is_exists"  , python_watcher_is_exists , METH_VARARGS, python_watcher_is_exists_docstring  },
+    { "watcher_is_running" , python_watcher_is_running, METH_VARARGS, python_watcher_is_running_docstring },
 
-	{ "watcher_add"        , python_watcher_add       , METH_VARARGS, python_watcher_add_docstring        },
+    { "watcher_add"        , python_watcher_add       , METH_VARARGS, python_watcher_add_docstring        },
 
-	{ "watcher_delete"     , python_watcher_delete    , METH_VARARGS, python_watcher_delete_docstring     },
-	{ "watcher_delete_all" , python_watcher_delete_all, METH_VARARGS, python_watcher_delete_all_docstring },
+    { "watcher_delete"     , python_watcher_delete    , METH_VARARGS, python_watcher_delete_docstring     },
+    { "watcher_delete_all" , python_watcher_delete_all, METH_VARARGS, python_watcher_delete_all_docstring },
 
-	{ "watcher_start"      , python_watcher_start     , METH_VARARGS, python_watcher_start_docstring      },
-	{ "watcher_start_all"  , python_watcher_start_all , METH_VARARGS, python_watcher_start_all_docstring  },
+    { "watcher_start"      , python_watcher_start     , METH_VARARGS, python_watcher_start_docstring      },
+    { "watcher_start_all"  , python_watcher_start_all , METH_VARARGS, python_watcher_start_all_docstring  },
 
-	{ "watcher_stop"       , python_watcher_stop      , METH_VARARGS, python_watcher_stop_docstring       },
-	{ "watcher_stopall"    , python_watcher_stop_all  , METH_VARARGS, python_watcher_stop_all_docstring   },
+    { "watcher_stop"       , python_watcher_stop      , METH_VARARGS, python_watcher_stop_docstring       },
+    { "watcher_stopall"    , python_watcher_stop_all  , METH_VARARGS, python_watcher_stop_all_docstring   },
     { NULL, NULL, 0, NULL}
 };
 

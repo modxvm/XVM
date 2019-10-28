@@ -23,5 +23,5 @@
 
 class Vector{
 public:
-	static void RemoveDuplicates(std::vector<std::wstring>& vec);
+    static void RemoveDuplicates(std::vector<std::wstring>& vec);
 };

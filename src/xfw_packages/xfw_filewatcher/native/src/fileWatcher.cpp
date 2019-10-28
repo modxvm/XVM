@@ -25,129 +25,129 @@
 
 FileWatcher::FileWatcher(std::string ID, std::wstring Directory, std::string PythonCommand, bool StopWatcherAfterEvent)
 {
-	this->ID = ID;
-	this->Directory = Directory;
-	this->PythonCommand = PythonCommand;
-	this->StopWatcherAfterEvent = StopWatcherAfterEvent;
+    this->ID = ID;
+    this->Directory = Directory;
+    this->PythonCommand = PythonCommand;
+    this->StopWatcherAfterEvent = StopWatcherAfterEvent;
 
-	this->isRunning = false;
+    this->isRunning = false;
 
-	Handles[1] = CreateEvent(NULL, FALSE, FALSE, NULL);
+    Handles[1] = CreateEvent(NULL, FALSE, FALSE, NULL);
 }
 
 bool FileWatcher::IsRunning()
 {
-	return isRunning;
+    return isRunning;
 }
 
 FileWatcher::~FileWatcher()
 {
-	StopWatch();
-	CloseHandle(Handles[1]);
+    StopWatch();
+    CloseHandle(Handles[1]);
 }
 
 void FileWatcher::StartWatch()
 {
-	if (isRunning)
-	{
-		return;
-	}
+    if (isRunning)
+    {
+        return;
+    }
 
-	if (Thread.joinable())
-	{
-		Thread.join();
-	}
+    if (Thread.joinable())
+    {
+        Thread.join();
+    }
 
-	Thread = std::thread([=] {WorkingThread(); });
-	SetThreadName(&(this->Thread), "xfw-filewatcher-" + std::string(ID));
+    Thread = std::thread([=] {WorkingThread(); });
+    SetThreadName(&(this->Thread), "xfw-filewatcher-" + std::string(ID));
 }
 
 void FileWatcher::StopWatch()
 {
-	if (!isRunning)
-	{
-		return;
-	}
+    if (!isRunning)
+    {
+        return;
+    }
 
-	SetEvent(Handles[1]);
-	Thread.join();
-	ResetEvent(Handles[1]);
+    SetEvent(Handles[1]);
+    Thread.join();
+    ResetEvent(Handles[1]);
 }
 
 bool FileWatcher::PrepareFileHandle()
 {
-	if (Handles[0] != NULL)
-	{
-		return false;
-	}
+    if (Handles[0] != NULL)
+    {
+        return false;
+    }
 
-	Handles[0] = FindFirstChangeNotificationW(
-		Directory.c_str(),
-		true,
-		FILE_NOTIFY_CHANGE_FILE_NAME | FILE_NOTIFY_CHANGE_LAST_WRITE);
+    Handles[0] = FindFirstChangeNotificationW(
+        Directory.c_str(),
+        true,
+        FILE_NOTIFY_CHANGE_FILE_NAME | FILE_NOTIFY_CHANGE_LAST_WRITE);
 
-	if ((Handles[0] == INVALID_HANDLE_VALUE) || (Handles[0] == NULL))
-	{
-		return false;
-	}
+    if ((Handles[0] == INVALID_HANDLE_VALUE) || (Handles[0] == NULL))
+    {
+        return false;
+    }
 
-	return true;
+    return true;
 }
 
 bool FileWatcher::CloseFileHandle()
 {
-	if (Handles[0] == NULL)
-	{
-		return false;
-	}
+    if (Handles[0] == NULL)
+    {
+        return false;
+    }
 
-	FindCloseChangeNotification(Handles[0]);
-	Handles[0] = NULL;
+    FindCloseChangeNotification(Handles[0]);
+    Handles[0] = NULL;
 }
 
 void FileWatcher::WorkingThread()
 {
-	isRunning = true;
+    isRunning = true;
 
-	DWORD dwWaitStatus;
+    DWORD dwWaitStatus;
 
-	if (!PrepareFileHandle())
-	{
-		isRunning=false;
-		return;
-	}
+    if (!PrepareFileHandle())
+    {
+        isRunning=false;
+        return;
+    }
 
-	while (true)
-	{
-		dwWaitStatus = WaitForMultipleObjects(2, Handles, FALSE, INFINITE);
+    while (true)
+    {
+        dwWaitStatus = WaitForMultipleObjects(2, Handles, FALSE, INFINITE);
 
-		switch (dwWaitStatus)
-		{
-		case WAIT_OBJECT_0 + 0:
-			CloseFileHandle();
+        switch (dwWaitStatus)
+        {
+        case WAIT_OBJECT_0 + 0:
+            CloseFileHandle();
 
-			PyGILState_STATE gstate;
-			gstate = PyGILState_Ensure();
-			PyRun_SimpleStringFlags(PythonCommand.c_str(), 0);
-			PyGILState_Release(gstate);
+            PyGILState_STATE gstate;
+            gstate = PyGILState_Ensure();
+            PyRun_SimpleStringFlags(PythonCommand.c_str(), 0);
+            PyGILState_Release(gstate);
 
-			if(StopWatcherAfterEvent)
-			{
-				isRunning = false;
-				return;
-			}
+            if(StopWatcherAfterEvent)
+            {
+                isRunning = false;
+                return;
+            }
 
-			PrepareFileHandle();
-			break;
+            PrepareFileHandle();
+            break;
 
-		case WAIT_OBJECT_0 + 1:
-			CloseFileHandle();
-			isRunning = false;
-			return;
-			break;
+        case WAIT_OBJECT_0 + 1:
+            CloseFileHandle();
+            isRunning = false;
+            return;
+            break;
 
-		default:
-			break;
-		}
-	}
+        default:
+            break;
+        }
+    }
 }

@@ -64,67 +64,67 @@ PyObject* Py_InitHooks(PyObject* self, PyObject* args)
 
 PyObject* Py_DeinitHooks(PyObject* self, PyObject* args)
 {
-	MH_DisableHook(&CreateFontW);
-	MH_DisableHook(&EnumFontFamiliesExW);
+    MH_DisableHook(&CreateFontW);
+    MH_DisableHook(&EnumFontFamiliesExW);
 
     Py_RETURN_TRUE;
 }
 
 PyObject* Py_RegisterFont(PyObject* self, PyObject* args)
 {
-	wchar_t* font_path = NULL;
-	BOOL isPrivate = FALSE;
-	BOOL not_enumerable = FALSE;
+    wchar_t* font_path = NULL;
+    BOOL isPrivate = FALSE;
+    BOOL not_enumerable = FALSE;
 
-	if (!PyArg_ParseTuple(args, "uii", &font_path, &isPrivate, &not_enumerable))
-	{
-		PyErr_SetString(PyExc_RuntimeError, "[XFW_Fonts/RegisterFont] Cannot parse tuple\n");
-		return NULL;
-	}
+    if (!PyArg_ParseTuple(args, "uii", &font_path, &isPrivate, &not_enumerable))
+    {
+        PyErr_SetString(PyExc_RuntimeError, "[XFW_Fonts/RegisterFont] Cannot parse tuple\n");
+        return NULL;
+    }
 
-	DWORD flags = 0;
+    DWORD flags = 0;
 
-	if(isPrivate)
-		flags |= FR_PRIVATE;
+    if(isPrivate)
+        flags |= FR_PRIVATE;
 
-	if(not_enumerable)
-		flags |= FR_NOT_ENUM;
+    if(not_enumerable)
+        flags |= FR_NOT_ENUM;
 
-	int fontsAdded = AddFontResourceExW(font_path, flags, 0);
+    int fontsAdded = AddFontResourceExW(font_path, flags, 0);
     if (fontsAdded > 0)
     {
         return Py_BuildValue("s", GetFontFamilyFromFile(std::wstring(font_path)).c_str());
     }
 
-	Py_RETURN_FALSE;
+    Py_RETURN_FALSE;
 
 }
 
 PyObject* Py_UnregisterFont(PyObject* self, PyObject* args)
 {
-	wchar_t* font_path = NULL;
-	BOOL isPrivate = FALSE;
-	BOOL not_enumerable = FALSE;
+    wchar_t* font_path = NULL;
+    BOOL isPrivate = FALSE;
+    BOOL not_enumerable = FALSE;
 
-	if (!PyArg_ParseTuple(args, "uii", &font_path, &isPrivate, &not_enumerable))
-	{
-		PyErr_SetString(PyExc_RuntimeError, "[XFW_Fonts/UnregisterFont] Cannot parse tuple\n");
-		return NULL;
-	}
+    if (!PyArg_ParseTuple(args, "uii", &font_path, &isPrivate, &not_enumerable))
+    {
+        PyErr_SetString(PyExc_RuntimeError, "[XFW_Fonts/UnregisterFont] Cannot parse tuple\n");
+        return NULL;
+    }
 
-	DWORD flags = 0;
+    DWORD flags = 0;
 
-	if(isPrivate)
-		flags |= FR_PRIVATE;
+    if(isPrivate)
+        flags |= FR_PRIVATE;
 
-	if(not_enumerable)
-		flags |= FR_NOT_ENUM;
+    if(not_enumerable)
+        flags |= FR_NOT_ENUM;
 
-	int fontsAdded = RemoveFontResourceExW(font_path, flags, 0);
-	if(fontsAdded > 0)
-		Py_RETURN_TRUE;
+    int fontsAdded = RemoveFontResourceExW(font_path, flags, 0);
+    if(fontsAdded > 0)
+        Py_RETURN_TRUE;
 
-	Py_RETURN_FALSE;
+    Py_RETURN_FALSE;
 }
 
 PyObject* Py_AddAlias(PyObject* self, PyObject* args)
@@ -166,8 +166,8 @@ PyObject* Py_RemoveAlias(PyObject* self, PyObject* args)
 
 
 PyMethodDef XFWFontManagerMethods[] = {
-	{ "init_hooks", Py_InitHooks, METH_VARARGS, "Init windows functions hooks for aliases."},
-	{ "deinit_hooks", Py_DeinitHooks, METH_VARARGS, "Init windows functions hooks for aliases."},
+    { "init_hooks", Py_InitHooks, METH_VARARGS, "Init windows functions hooks for aliases."},
+    { "deinit_hooks", Py_DeinitHooks, METH_VARARGS, "Init windows functions hooks for aliases."},
 
     { "register_font", Py_RegisterFont, METH_VARARGS, "Register font in system or process."},
     { "unregister_font", Py_UnregisterFont, METH_VARARGS, "Unregister font in system or process."},

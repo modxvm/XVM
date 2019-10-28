@@ -22,7 +22,7 @@
 
 class String {
 public:
-	static std::wstring & Trim(std::wstring & str);
-	static std::wstring & LTrim(std::wstring & str);
-	static std::wstring & RTrim(std::wstring & str);
+    static std::wstring & Trim(std::wstring & str);
+    static std::wstring & LTrim(std::wstring & str);
+    static std::wstring & RTrim(std::wstring & str);
 };
