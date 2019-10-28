@@ -991,12 +991,15 @@ def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
             if newHealth <= 0:
                 on_fire = 0
                 as_event(EVENTS_NAMES.ON_FIRE)
-        elif hasattr(BigWorld.player().inputHandler.ctrl, 'curVehicleID'):
-            vId = BigWorld.player().inputHandler.ctrl.curVehicleID
-            v = vId if isinstance(vId, Vehicle) else BigWorld.entity(vId)
-            if (v is not None) and ((self.id == v.id) and not v.isAlive()):
+        else:
+            v = vId = getattr(BigWorld.player().inputHandler.ctrl, 'curVehicleID', None)
+            if isinstance(vId, int):
+                v = BigWorld.entity(vId)
+            if isinstance(v, Vehicle) and (self.id == v.id) and not v.isAlive():
                 on_fire = 0
                 as_event(EVENTS_NAMES.ON_FIRE)
+            elif not isinstance(v, Vehicle) and v is not None:
+                log('[DamageLog] Type(BigWorld.player().inputHandler.ctrl.curVehicleID) = %s' % v)
 
 
 @registerEvent(PlayerAvatar, 'showVehicleDamageInfo')
