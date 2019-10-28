@@ -28,6 +28,7 @@ package com.xvm.types.cfg
         public var sortie_2:String;
         public var tournament:String;
         public var tournament_clan:String;
+        public var tournament_event:String;
         public var tournament_regular:String;
         public var training:String;
         public var tutorial:String;
