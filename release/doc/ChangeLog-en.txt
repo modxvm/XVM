@@ -1,4 +1,9 @@
-﻿XVM-8.1.5:
+﻿XVM-8.1.6:
+  [GENERAL]
+  * World of Tanks 1.6.1.3
+  * Improved support for WoT client installed in path with non-latin characters
+
+XVM-8.1.5:
   [GENERAL]
   * Fixed XVM loading if WoT path has non-latin characters
   * Initial macOS Catalina support
