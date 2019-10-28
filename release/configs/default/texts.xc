@@ -130,7 +130,10 @@
       "epic_battle": "",
       // Frontline (training).
       // Линия фронта (тренировка).
-      "epic_battle_training": ""
+      "epic_battle_training": "",
+      // Tournament (event).
+      // Турнир (ивент).
+      "tournament_event": ""
     },
     // Text for {{topclan}} macro.
     // Текст для макроса {{topclan}}.
