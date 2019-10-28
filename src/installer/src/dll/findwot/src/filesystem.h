@@ -24,8 +24,8 @@
 class Filesystem
 {
 public:
-	static std::wstring GetExeVersion(const std::wstring& filepath);
-	static std::wstring GetFileContent(const std::wstring& filepath);
-	static std::wstring GetProgramDataPath();
-	static std::vector<std::wstring> GetLogicalDrives();
+    static std::wstring GetExeVersion(const std::wstring& filepath);
+    static std::wstring GetFileContent(const std::wstring& filepath);
+    static std::wstring GetProgramDataPath();
+    static std::vector<std::wstring> GetLogicalDrives();
 };

@@ -23,5 +23,5 @@
 
 class WotLauncher {
 public:
-	static std::vector<std::wstring> GetWotPaths();
+    static std::vector<std::wstring> GetWotPaths();
 };

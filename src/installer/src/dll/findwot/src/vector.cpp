@@ -22,6 +22,6 @@
 
 void Vector::RemoveDuplicates(std::vector<std::wstring>& vec)
 {
-	std::sort(vec.begin(), vec.end());
-	vec.erase(std::unique(vec.begin(), vec.end()), vec.end());
+    std::sort(vec.begin(), vec.end());
+    vec.erase(std::unique(vec.begin(), vec.end()), vec.end());
 }

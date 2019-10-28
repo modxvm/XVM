@@ -59,7 +59,7 @@ static void bugfix_asm()
 int bugfix2_apply()
 {
     //init search
-	WCHAR lpFilename[2048];
+    WCHAR lpFilename[2048];
     GetModuleFileNameW(NULL, lpFilename, 2048);
     DWORD startpos = (DWORD)GetModuleHandleW(lpFilename);
     DWORD endpos = startpos + XFWNATIVE_GetModuleSize(lpFilename);
