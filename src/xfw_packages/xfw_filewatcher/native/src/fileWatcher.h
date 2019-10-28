@@ -28,27 +28,27 @@
 class FileWatcher {
 
 public:
-	FileWatcher(std::string ID, std::wstring Directory, std::string PythonCommand, bool StopWatcherAfterEvent);
-	~FileWatcher();
+    FileWatcher(std::string ID, std::wstring Directory, std::string PythonCommand, bool StopWatcherAfterEvent);
+    ~FileWatcher();
 
-	void StartWatch();
-	void StopWatch();
+    void StartWatch();
+    void StopWatch();
 
-	bool IsRunning();
+    bool IsRunning();
 
 private:
-	std::string  ID;
-	std::wstring Directory;
-	std::string  PythonCommand;
-	bool         StopWatcherAfterEvent;
+    std::string  ID;
+    std::wstring Directory;
+    std::string  PythonCommand;
+    bool         StopWatcherAfterEvent;
 
-	std::thread Thread;
-	HANDLE Handles[2] {0};
+    std::thread Thread;
+    HANDLE Handles[2] {0};
 
-	void WorkingThread();
+    void WorkingThread();
 
-	bool PrepareFileHandle();
-	bool CloseFileHandle();
+    bool PrepareFileHandle();
+    bool CloseFileHandle();
 
-	bool isRunning;
+    bool isRunning;
 };

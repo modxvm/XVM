@@ -285,10 +285,10 @@ namespace rapidxml
     //! \cond internal
     namespace internal
     {
-		inline bool over8bit(char ch) { return false; }
-		inline bool over8bit(signed char ch) { return false; }
-		inline bool over8bit(unsigned char ch) { return false; }
-		template<class Ch> inline bool over8bit(Ch ch) { return ch > 255; }
+        inline bool over8bit(char ch) { return false; }
+        inline bool over8bit(signed char ch) { return false; }
+        inline bool over8bit(unsigned char ch) { return false; }
+        template<class Ch> inline bool over8bit(Ch ch) { return ch > 255; }
 
         // Struct that contains lookup tables for the parser
         // It must be a template to allow correct linking (because it has static data members, which are defined in a header file).
@@ -333,13 +333,13 @@ namespace rapidxml
             }
             else
             {
-				for (const Ch *end = p1 + size1; p1 < end; ++p1, ++p2)
-				{
-					if ((over8bit(*p1) || over8bit(*p2)) && *p1 != *p2)
-						return false;
-					if (lookup_tables<0>::lookup_upcase[static_cast<unsigned char>(*p1)] != lookup_tables<0>::lookup_upcase[static_cast<unsigned char>(*p2)])
-						return false;
-				}
+                for (const Ch *end = p1 + size1; p1 < end; ++p1, ++p2)
+                {
+                    if ((over8bit(*p1) || over8bit(*p2)) && *p1 != *p2)
+                        return false;
+                    if (lookup_tables<0>::lookup_upcase[static_cast<unsigned char>(*p1)] != lookup_tables<0>::lookup_upcase[static_cast<unsigned char>(*p2)])
+                        return false;
+                }
             }
             return true;
         }
@@ -943,16 +943,16 @@ namespace rapidxml
         //! \return Pointer to found child, or 0 if not found.
         xml_node<Ch> *first_node(const Ch *name = 0, std::size_t name_size = 0, bool case_sensitive = true) const
         {
-			if (name)
-			{
-				if (name_size == 0)
-					name_size = internal::measure(name);
+            if (name)
+            {
+                if (name_size == 0)
+                    name_size = internal::measure(name);
 
-				for (xml_node<Ch> *child = m_first_node; child; child = child->next_sibling())
-					if (internal::compare(child->name(), child->name_size(), name, name_size, case_sensitive))
-						return child;
+                for (xml_node<Ch> *child = m_first_node; child; child = child->next_sibling())
+                    if (internal::compare(child->name(), child->name_size(), name, name_size, case_sensitive))
+                        return child;
 
-				return 0;
+                return 0;
             }
             else
                 return m_first_node;
@@ -1439,8 +1439,8 @@ namespace rapidxml
         {
             static unsigned char test(Ch ch)
             {
-				if (internal::over8bit(ch))
-					return 0;
+                if (internal::over8bit(ch))
+                    return 0;
                 return internal::lookup_tables<0>::lookup_whitespace[static_cast<unsigned char>(ch)];
             }
         };
@@ -1450,8 +1450,8 @@ namespace rapidxml
         {
             static unsigned char test(Ch ch)
             {
-				if (internal::over8bit(ch))
-					return 1;
+                if (internal::over8bit(ch))
+                    return 1;
                 return internal::lookup_tables<0>::lookup_node_name[static_cast<unsigned char>(ch)];
             }
         };
@@ -1461,8 +1461,8 @@ namespace rapidxml
         {
             static unsigned char test(Ch ch)
             {
-				if (internal::over8bit(ch))
-					return 1;
+                if (internal::over8bit(ch))
+                    return 1;
                 return internal::lookup_tables<0>::lookup_attribute_name[static_cast<unsigned char>(ch)];
             }
         };
@@ -1472,8 +1472,8 @@ namespace rapidxml
         {
             static unsigned char test(Ch ch)
             {
-				if (internal::over8bit(ch))
-					return 1;
+                if (internal::over8bit(ch))
+                    return 1;
                 return internal::lookup_tables<0>::lookup_text[static_cast<unsigned char>(ch)];
             }
         };
@@ -1483,8 +1483,8 @@ namespace rapidxml
         {
             static unsigned char test(Ch ch)
             {
-				if (internal::over8bit(ch))
-					return 1;
+                if (internal::over8bit(ch))
+                    return 1;
                 return internal::lookup_tables<0>::lookup_text_pure_no_ws[static_cast<unsigned char>(ch)];
             }
         };
@@ -1494,8 +1494,8 @@ namespace rapidxml
         {
             static unsigned char test(Ch ch)
             {
-				if (internal::over8bit(ch))
-					return 1;
+                if (internal::over8bit(ch))
+                    return 1;
                 return internal::lookup_tables<0>::lookup_text_pure_with_ws[static_cast<unsigned char>(ch)];
             }
         };
@@ -1506,8 +1506,8 @@ namespace rapidxml
         {
             static unsigned char test(Ch ch)
             {
-				if (internal::over8bit(ch))
-					return 1;
+                if (internal::over8bit(ch))
+                    return 1;
                 if (Quote == Ch('\''))
                     return internal::lookup_tables<0>::lookup_attribute_data_1[static_cast<unsigned char>(ch)];
                 if (Quote == Ch('\"'))
@@ -1546,28 +1546,28 @@ namespace rapidxml
                 // Insert UTF8 sequence
                 if (code < 0x80)    // 1 byte sequence
                 {
-	                text[0] = static_cast<unsigned char>(code);
+                    text[0] = static_cast<unsigned char>(code);
                     text += 1;
                 }
                 else if (code < 0x800)  // 2 byte sequence
                 {
-	                text[1] = static_cast<unsigned char>((code | 0x80) & 0xBF); code >>= 6;
-	                text[0] = static_cast<unsigned char>(code | 0xC0);
+                    text[1] = static_cast<unsigned char>((code | 0x80) & 0xBF); code >>= 6;
+                    text[0] = static_cast<unsigned char>(code | 0xC0);
                     text += 2;
                 }
-	            else if (code < 0x10000)    // 3 byte sequence
+                else if (code < 0x10000)    // 3 byte sequence
                 {
-	                text[2] = static_cast<unsigned char>((code | 0x80) & 0xBF); code >>= 6;
-	                text[1] = static_cast<unsigned char>((code | 0x80) & 0xBF); code >>= 6;
-	                text[0] = static_cast<unsigned char>(code | 0xE0);
+                    text[2] = static_cast<unsigned char>((code | 0x80) & 0xBF); code >>= 6;
+                    text[1] = static_cast<unsigned char>((code | 0x80) & 0xBF); code >>= 6;
+                    text[0] = static_cast<unsigned char>(code | 0xE0);
                     text += 3;
                 }
-	            else if (code < 0x110000)   // 4 byte sequence
+                else if (code < 0x110000)   // 4 byte sequence
                 {
-	                text[3] = static_cast<unsigned char>((code | 0x80) & 0xBF); code >>= 6;
-	                text[2] = static_cast<unsigned char>((code | 0x80) & 0xBF); code >>= 6;
-	                text[1] = static_cast<unsigned char>((code | 0x80) & 0xBF); code >>= 6;
-	                text[0] = static_cast<unsigned char>(code | 0xF0);
+                    text[3] = static_cast<unsigned char>((code | 0x80) & 0xBF); code >>= 6;
+                    text[2] = static_cast<unsigned char>((code | 0x80) & 0xBF); code >>= 6;
+                    text[1] = static_cast<unsigned char>((code | 0x80) & 0xBF); code >>= 6;
+                    text[0] = static_cast<unsigned char>(code | 0xF0);
                     text += 4;
                 }
                 else    // Invalid, only codes up to 0x10FFFF are allowed in Unicode
@@ -1608,7 +1608,7 @@ namespace rapidxml
             // Use translation skip
             Ch *src = text;
             Ch *dest = src;
-			while (internal::over8bit(*src) || StopPred::test(*src))
+            while (internal::over8bit(*src) || StopPred::test(*src))
             {
                 // If entity translation is enabled    
                 if (!(Flags & parse_no_entity_translation))
@@ -1678,8 +1678,8 @@ namespace rapidxml
                                 src += 3;   // Skip &#x
                                 while (1)
                                 {
-									if (internal::over8bit(*src))
-										break;
+                                    if (internal::over8bit(*src))
+                                        break;
                                     unsigned char digit = internal::lookup_tables<0>::lookup_digits[static_cast<unsigned char>(*src)];
                                     if (digit == 0xFF)
                                         break;
@@ -1694,8 +1694,8 @@ namespace rapidxml
                                 src += 2;   // Skip &#
                                 while (1)
                                 {
-									if (internal::over8bit(*src))
-										break;
+                                    if (internal::over8bit(*src))
+                                        break;
                                     unsigned char digit = internal::lookup_tables<0>::lookup_digits[static_cast<unsigned char>(*src)];
                                     if (digit == 0xFF)
                                         break;
@@ -1761,12 +1761,12 @@ namespace rapidxml
             }
         }
 
-		template<int Flags>
-		void parse_bom(wchar_t *&text)
-		{
-			if (text[0] == 0xFEFF)
-				text++;
-		}
+        template<int Flags>
+        void parse_bom(wchar_t *&text)
+        {
+            if (text[0] == 0xFEFF)
+                text++;
+        }
 
         // Parse XML declaration (<?xml...)
         template<int Flags>

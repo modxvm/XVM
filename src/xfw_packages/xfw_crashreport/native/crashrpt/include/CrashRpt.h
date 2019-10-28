@@ -178,17 +178,17 @@ typedef BOOL (CALLBACK *LPGETLOGFILE) (__reserved LPVOID lpvState);
 
 typedef struct tagCR_EXCEPTION_INFO
 {
-    WORD cb;                   //!< Size of this structure in bytes; should be initialized before using.
+    WORD cb;                      //!< Size of this structure in bytes; should be initialized before using.
     PEXCEPTION_POINTERS pexcptrs; //!< Exception pointers.
-    int exctype;               //!< Exception type.
-    DWORD code;                //!< Code of SEH exception.
-    unsigned int fpe_subcode;  //!< Floating point exception subcode.
-    const wchar_t* expression; //!< Assertion expression.
-    const wchar_t* function;   //!< Function in which assertion happened.
-    const wchar_t* file;       //!< File in which assertion happened.
-    unsigned int line;         //!< Line number.
-    BOOL bManual;              //!< Flag telling if the error report is generated manually or not.
-    HANDLE hSenderProcess;     //!< Handle to the CrashSender.exe process.
+    int exctype;                  //!< Exception type.
+    DWORD code;                   //!< Code of SEH exception.
+    unsigned int fpe_subcode;     //!< Floating point exception subcode.
+    const wchar_t* expression;    //!< Assertion expression.
+    const wchar_t* function;      //!< Function in which assertion happened.
+    const wchar_t* file;          //!< File in which assertion happened.
+    unsigned int line;            //!< Line number.
+    BOOL bManual;                 //!< Flag telling if the error report is generated manually or not.
+    HANDLE hSenderProcess;        //!< Handle to the CrashSender.exe process.
 }
 CR_EXCEPTION_INFO;
 
@@ -253,11 +253,11 @@ typedef CR_EXCEPTION_INFO* PCR_EXCEPTION_INFO;
 typedef struct tagCR_CRASH_CALLBACK_INFOW
 {
     WORD cb;                            //!< Size of this structure in bytes.
-	int nStage;                         //!< Stage.
-	LPCWSTR pszErrorReportFolder;       //!< Directory where crash report files are located.
+    int nStage;                         //!< Stage.
+    LPCWSTR pszErrorReportFolder;       //!< Directory where crash report files are located.
     CR_EXCEPTION_INFO* pExceptionInfo;  //!< Pointer to information about the crash.
-	LPVOID pUserParam;                  //!< Pointer to user-defined data.
-	BOOL bContinueExecution;            //!< Whether to terminate the process (the default) or to continue program execution.
+    LPVOID pUserParam;                  //!< Pointer to user-defined data.
+    BOOL bContinueExecution;            //!< Whether to terminate the process (the default) or to continue program execution.
 }
 CR_CRASH_CALLBACK_INFOW;
 
@@ -268,11 +268,11 @@ CR_CRASH_CALLBACK_INFOW;
 typedef struct tagCR_CRASH_CALLBACK_INFOA
 {
     WORD cb;                            //!< Size of this structure in bytes.
-	int nStage;                         //!< Stage.
-	LPCSTR pszErrorReportFolder;        //!< Directory where crash report files are located.
+    int nStage;                         //!< Stage.
+    LPCSTR pszErrorReportFolder;        //!< Directory where crash report files are located.
     CR_EXCEPTION_INFO* pExceptionInfo;  //!< Pointer to information about the crash.
-	LPVOID pUserParam;                  //!< Pointer to user-defined data.
-	BOOL bContinueExecution;            //!< Whether to terminate the process (the default) or to continue program execution.
+    LPVOID pUserParam;                  //!< Pointer to user-defined data.
+    BOOL bContinueExecution;            //!< Whether to terminate the process (the default) or to continue program execution.
 }
 CR_CRASH_CALLBACK_INFOA;
 
@@ -420,7 +420,7 @@ typedef PFNCRASHCALLBACKA PFNCRASHCALLBACK;
 CRASHRPTAPI(int)
 crSetCrashCallbackW(
              PFNCRASHCALLBACKW pfnCallbackFunc,
-			 LPVOID lpParam
+             LPVOID lpParam
              );
 
 CRASHRPTAPI(int)
@@ -448,7 +448,7 @@ crSetEmailSubjectA(
 CRASHRPTAPI(int)
 crSetCrashCallbackA(
              PFNCRASHCALLBACKA pfnCallbackFunc,
-			 LPVOID lpParam
+             LPVOID lpParam
              );
 
 
@@ -495,9 +495,9 @@ crSetCrashCallbackA(
 #define CR_INST_NO_MINIDUMP                   0x20000 //!< Do not include minidump file to crash report.
 #define CR_INST_SEND_QUEUED_REPORTS           0x40000 //!< CrashRpt should send error reports that are waiting to be delivered.
 #define CR_INST_STORE_ZIP_ARCHIVES            0x80000 //!< CrashRpt should store both uncompressed error report files and ZIP archives.
-#define CR_INST_SEND_MANDATORY				 0x100000 //!< This flag removes the "Close" and "Other actions" buttons from Error Report dialog, thus making the sending procedure mandatory for user.
-#define CR_INST_SHOW_ADDITIONAL_INFO_FIELDS	 0x200000 //!< Makes "Your E-mail" and "Describe what you were doing when the problem occurred" fields of Error Report dialog always visible.
-#define CR_INST_ALLOW_ATTACH_MORE_FILES		 0x400000 //!< Adds an ability for user to attach more files to crash report by clicking "Attach More File(s)" item from context menu of Error Report Details dialog.
+#define CR_INST_SEND_MANDATORY               0x100000 //!< This flag removes the "Close" and "Other actions" buttons from Error Report dialog, thus making the sending procedure mandatory for user.
+#define CR_INST_SHOW_ADDITIONAL_INFO_FIELDS  0x200000 //!< Makes "Your E-mail" and "Describe what you were doing when the problem occurred" fields of Error Report dialog always visible.
+#define CR_INST_ALLOW_ATTACH_MORE_FILES      0x400000 //!< Adds an ability for user to attach more files to crash report by clicking "Attach More File(s)" item from context menu of Error Report Details dialog.
 #define CR_INST_AUTO_THREAD_HANDLERS         0x800000 //!< If this flag is set, installs exception handlers for newly created threads automatically.
 
 #define CR_INST_SEH_CALL_PREV_HANDLER       0x1000000 //!< If this flag is set, crashrpt will send SEH exception to the next handler.
@@ -536,7 +536,7 @@ crSetCrashCallbackA(
 *    \b pszEmailTo [in, optional]
 *
 *       This is the email address of the recipient of error reports (or several E-mail adresses separated with semicolon),
-*		for example "name@example.com" or "person1@example.com;person2@someserver.com". If several E-mail addresses are
+*        for example "name@example.com" or "person1@example.com;person2@someserver.com". If several E-mail addresses are
 *       specified, error report will be delivered to each of them. If this parameter equals to NULL,
 *       the crash report won't be sent using E-mail client.
 *
@@ -628,7 +628,7 @@ crSetCrashCallbackA(
 *
 *    <tr><td> \ref CR_INST_SEND_MANDATORY
 *        <td> <b>Available since v.1.3.1</b> This parameter makes sending procedure mandatory by removing the "Close" button
-*			  and "Other actions..." button from the Error Report dialog. Typically, it is not recommended to use this flag,
+*              and "Other actions..." button from the Error Report dialog. Typically, it is not recommended to use this flag,
 *             unless you intentionally want users to always send error reports for your application.
 *    <tr><td> \ref CR_INST_SHOW_ADDITIONAL_INFO_FIELDS
 *        <td> <b>Available since v.1.3.1</b> This parameter makes "Your E-mail" and "Describe what you were doing when the
@@ -754,10 +754,10 @@ typedef struct tagCR_INSTALL_INFOW
     LPCWSTR pszEmailText;           //!< Custom E-mail text (used when deliverying report as E-mail).
     LPCWSTR pszSmtpProxy;           //!< Network address and port to be used as SMTP proxy.
     LPCWSTR pszCustomSenderIcon;    //!< Custom icon used for Error Report dialog.
-	LPCWSTR pszSmtpLogin;           //!< Login name used for SMTP authentication when sending error report as E-mail.
-	LPCWSTR pszSmtpPassword;        //!< Password used for SMTP authentication when sending error report as E-mail.
-	int nRestartTimeout;            //!< Timeout for application restart.
-	int nMaxReportsPerDay;          //!< Maximum number of crash reports that will be sent per calendar day.
+    LPCWSTR pszSmtpLogin;           //!< Login name used for SMTP authentication when sending error report as E-mail.
+    LPCWSTR pszSmtpPassword;        //!< Password used for SMTP authentication when sending error report as E-mail.
+    int nRestartTimeout;            //!< Timeout for application restart.
+    int nMaxReportsPerDay;          //!< Maximum number of crash reports that will be sent per calendar day.
 }
 CR_INSTALL_INFOW;
 
@@ -789,10 +789,10 @@ typedef struct tagCR_INSTALL_INFOA
     LPCSTR pszEmailText;           //!< Custom E-mail text (used when deliverying report as E-mail).
     LPCSTR pszSmtpProxy;           //!< Network address and port to be used as SMTP proxy.
     LPCSTR pszCustomSenderIcon;    //!< Custom icon used for Error Report dialog.
-	LPCSTR pszSmtpLogin;           //!< Login name used for SMTP authentication when sending error report as E-mail.
-	LPCSTR pszSmtpPassword;        //!< Password used for SMTP authentication when sending error report as E-mail.
-	int nRestartTimeout;           //!< Timeout for application restart.
-	int nMaxReportsPerDay;         //!< Maximum number of crash reports that will be sent per calendar day.
+    LPCSTR pszSmtpLogin;           //!< Login name used for SMTP authentication when sending error report as E-mail.
+    LPCSTR pszSmtpPassword;        //!< Password used for SMTP authentication when sending error report as E-mail.
+    int nRestartTimeout;           //!< Timeout for application restart.
+    int nMaxReportsPerDay;         //!< Maximum number of crash reports that will be sent per calendar day.
 }
 CR_INSTALL_INFOA;
 
@@ -1357,10 +1357,10 @@ crAddScreenshot2(
 CRASHRPTAPI(int)
 crAddVideo(
             DWORD dwFlags,
-			int nDuration,
-			int nFrameInterval,
+            int nDuration,
+            int nFrameInterval,
             PSIZE pDesiredFrameSize,
-			HWND hWndParent
+            HWND hWndParent
             );
 
 /*! \ingroup CrashRptAPI
@@ -1581,7 +1581,7 @@ crExceptionFilter(
 // Flags used by crEmulateCrash() function
 #define CR_NONCONTINUABLE_EXCEPTION  32  //!< Non continuable sofware exception.
 #define CR_THROW                     33  //!< Throw C++ typed exception.
-#define CR_STACK_OVERFLOW			 34  //!< Stack overflow.
+#define CR_STACK_OVERFLOW             34  //!< Stack overflow.
 
 /*! \ingroup CrashRptAPI
 *  \brief Emulates a predefined crash situation.
@@ -1773,8 +1773,8 @@ public:
     //! Uninstalls exception handlers from the caller process
     ~CrAutoInstallHelper()
     {
-		if(m_nInstallStatus==0)
-			crUninstall();
+        if(m_nInstallStatus==0)
+            crUninstall();
     }
 
     //! Install status
@@ -1818,10 +1818,10 @@ public:
 
     //! Uninstalls exception handlers from the caller thread
     ~CrThreadAutoInstallHelper()
-	{
-		if (m_nInstallStatus == 0)
-			 crUninstallFromCurrentThread();
-	}
+    {
+        if (m_nInstallStatus == 0)
+             crUninstallFromCurrentThread();
+    }
 
     //! Install status
     int m_nInstallStatus;

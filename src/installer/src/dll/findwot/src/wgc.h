@@ -23,7 +23,7 @@
 
 class WGC {
 public:
-	static std::wstring GetWGCInstallPath();
-	static std::vector<std::wstring> GetWotPaths();
-	static std::wstring GetWotPreferedPath();
+    static std::wstring GetWGCInstallPath();
+    static std::vector<std::wstring> GetWotPaths();
+    static std::wstring GetWotPreferedPath();
 };

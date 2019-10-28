@@ -22,53 +22,53 @@
 
 enum ClientBranch
 {
-	WoT_Unknown,
-	WoT_Release,
-	WoT_CommonTest,
-	WoT_SuperTest,
-	WoT_Sandbox,
+    WoT_Unknown,
+    WoT_Release,
+    WoT_CommonTest,
+    WoT_SuperTest,
+    WoT_Sandbox,
 };
 
 enum ClientType
 {
-	WoTType_Unknown,
-	WoTType_SD,
-	WoTType_HD,
+    WoTType_Unknown,
+    WoTType_SD,
+    WoTType_HD,
 };
 
 
 class WotClient {
 private:
-	bool isValid = false;
+    bool isValid = false;
 
-	std::wstring path;
+    std::wstring path;
 
-	ClientBranch clientBranch = ClientBranch::WoT_Unknown;
-	ClientType clientType = ClientType::WoTType_Unknown;
+    ClientBranch clientBranch = ClientBranch::WoT_Unknown;
+    ClientType clientType = ClientType::WoTType_Unknown;
 
-	std::wstring exeVersion;
-	std::wstring clientVersion;
+    std::wstring exeVersion;
+    std::wstring clientVersion;
 
-	std::wstring clientLocale;
+    std::wstring clientLocale;
 
-	void updateData();
-	bool updateData_apptype();
-	bool updateData_versionxml();
-	void clear();
+    void updateData();
+    bool updateData_apptype();
+    bool updateData_versionxml();
+    void clear();
 
 public:
-	bool IsValid();
+    bool IsValid();
 
-	WotClient();
-	WotClient(const std::wstring& wotDirectory);
+    WotClient();
+    WotClient(const std::wstring& wotDirectory);
 
-	std::wstring GetPath();
-	void SetPath(const std::wstring& path);
+    std::wstring GetPath();
+    void SetPath(const std::wstring& path);
 
-	ClientBranch GetClientBranch();
-	std::wstring GetClientExeVersion();
-	std::wstring GetClientVersion();
-	std::wstring GetClientLocale();
-	ClientType GetClientType();
+    ClientBranch GetClientBranch();
+    std::wstring GetClientExeVersion();
+    std::wstring GetClientVersion();
+    std::wstring GetClientLocale();
+    ClientType GetClientType();
 
 };

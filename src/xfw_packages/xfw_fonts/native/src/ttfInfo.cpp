@@ -7,40 +7,40 @@
 #pragma pack(push,1)
 
 typedef struct _tagTT_OFFSET_TABLE{
-	uint16_t	uMajorVersion;
-	uint16_t	uMinorVersion;
-	uint16_t	uNumOfTables;
-	uint16_t	uSearchRange;
-	uint16_t	uEntrySelector;
-	uint16_t	uRangeShift;
+    uint16_t    uMajorVersion;
+    uint16_t    uMinorVersion;
+    uint16_t    uNumOfTables;
+    uint16_t    uSearchRange;
+    uint16_t    uEntrySelector;
+    uint16_t    uRangeShift;
 }TT_OFFSET_TABLE;
 
 typedef struct _tagTT_TABLE_DIRECTORY{
-	char	    szTag[4];			//table name
-	uint32_t	uCheckSum;			//Check sum
-	uint32_t	uOffset;			//Offset from beginning of file
-	uint32_t	uLength;			//length of the table in bytes
+    char        szTag[4];           //table name
+    uint32_t    uCheckSum;          //Check sum
+    uint32_t    uOffset;            //Offset from beginning of file
+    uint32_t    uLength;            //length of the table in bytes
 }TT_TABLE_DIRECTORY;
 
 typedef struct _tagTT_NAME_TABLE_HEADER{
-	uint16_t	uFSelector;			//format selector. Always 0
-	uint16_t	uNRCount;			//Name Records count
-	uint16_t	uStorageOffset;		//Offset for strings storage, from start of the table
+    uint16_t    uFSelector;          //format selector. Always 0
+    uint16_t    uNRCount;            //Name Records count
+    uint16_t    uStorageOffset;      //Offset for strings storage, from start of the table
 }TT_NAME_TABLE_HEADER;
 
 typedef struct _tagTT_NAME_RECORD{
-	uint16_t	uPlatformID;
-	uint16_t	uEncodingID;
-	uint16_t	uLanguageID;
-	uint16_t	uNameID;
-	uint16_t	uStringLength;
-	uint16_t	uStringOffset;	//from start of storage area
+    uint16_t    uPlatformID;
+    uint16_t    uEncodingID;
+    uint16_t    uLanguageID;
+    uint16_t    uNameID;
+    uint16_t    uStringLength;
+    uint16_t    uStringOffset;       //from start of storage area
 }TT_NAME_RECORD;
 
 #pragma pack(pop)
 
-#define SWAPWORD(x)		MAKEWORD(HIBYTE(x), LOBYTE(x))
-#define SWAPLONG(x)		MAKELONG(SWAPWORD(HIWORD(x)), SWAPWORD(LOWORD(x)))
+#define SWAPWORD(x)        MAKEWORD(HIBYTE(x), LOBYTE(x))
+#define SWAPLONG(x)        MAKELONG(SWAPWORD(HIWORD(x)), SWAPWORD(LOWORD(x)))
 
 
 
