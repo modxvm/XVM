@@ -49,10 +49,14 @@ package com.xvm.battle.ranked.playersPanel
         {
             switch (state)
             {
+                case PLAYERS_PANEL_STATE.SHORT_NO_BADGES:
+                    return PLAYERS_PANEL_STATE.SHORT;
                 case PLAYERS_PANEL_STATE.MEDIUM_NO_BADGES:
                     return PLAYERS_PANEL_STATE.MEDIUM;
                 case PLAYERS_PANEL_STATE.FULL_NO_BADGES:
                     return PLAYERS_PANEL_STATE.FULL;
+                case PLAYERS_PANEL_STATE.LONG_NO_BADGES:
+                    return PLAYERS_PANEL_STATE.LONG;
                 default:
                     return state;
             }
@@ -142,6 +146,8 @@ package com.xvm.battle.ranked.playersPanel
                 }
 
                 mopt_expandAreaWidth = state == PLAYERS_PANEL_STATE.FULL ? 0 : Macros.FormatNumberGlobal(mcfg.expandAreaWidth, EXPAND_AREA_WIDTH);
+
+                updateBattleStatePlayersPanelData();
             }
             catch (ex:Error)
             {
@@ -203,6 +209,12 @@ package com.xvm.battle.ranked.playersPanel
                     }
                 }
             }
+        }
+
+        override protected function applyVehicleData(param1:IDAAPIDataClass):void
+        {
+            super.applyVehicleData(param1);
+            updateBattleStatePlayersPanelData();
         }
 
         private function onListRollOverHandler(e:MouseEvent):void
@@ -425,6 +437,16 @@ package com.xvm.battle.ranked.playersPanel
                 res[playerState.position - 1] = id;
             }
             return res;
+        }
+
+        private function updateBattleStatePlayersPanelData():void
+        {
+            BattleState.playersPanelMode = state;
+            if (!xvm_enabled)
+            {
+                BattleState.playersPanelWidthLeft = listLeft.getRenderersVisibleWidth() + PlayersPanelListItemProxyBase.PLAYERS_PANEL_WIDTH_OFFSET;
+                BattleState.playersPanelWidthRight = listRight.getRenderersVisibleWidth() + PlayersPanelListItemProxyBase.PLAYERS_PANEL_WIDTH_OFFSET;
+            }
         }
     }
 }
