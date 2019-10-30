@@ -62,7 +62,7 @@
 
     // The minimum required version of the XVM mod.
     // Минимально необходимая версия мода XVM.
-    "modMinVersion": "8.1.6",
+    "modMinVersion": "8.1.7",
 
     // Config last modified.
     // Дата последней модификации конфига.
