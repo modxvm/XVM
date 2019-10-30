@@ -167,8 +167,14 @@ package com.xvm.battle.shared.minimap.entries.vehicle
 
         private function hideLabels():void
         {
-            extraFields.visible = false;
-            extraFieldsAlt.visible = false;
+            if (extraFields)
+            {
+                extraFields.visible = false;
+            }
+            if (extraFieldsAlt)
+            {
+                extraFieldsAlt.visible = false;
+            }
         }
     }
 }
