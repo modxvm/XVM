@@ -1,4 +1,8 @@
-﻿XVM-8.1.6:
+﻿XVM-8.1.7:
+  [BATTLE]
+  * Fixed {{pp.mode}} macro in battle mode "Ranked Battle"
+
+XVM-8.1.6:
   [GENERAL]
   * World of Tanks 1.6.1.3
   * Improved support for WoT client installed in path with non-latin characters
