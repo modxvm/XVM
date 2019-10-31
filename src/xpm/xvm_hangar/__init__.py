@@ -28,6 +28,7 @@ from skeletons.account_helpers.settings_core import ISettingsCore
 from account_helpers.settings_core.ServerSettingsManager import SETTINGS_SECTIONS
 from gui.Scaleform.daapi.view.lobby.messengerBar.messenger_bar import MessengerBar
 from gui.Scaleform.daapi.view.lobby.messengerBar.session_stats_button import SessionStatsButton
+from gui.Scaleform.daapi.view.lobby.rankedBattles.ranked_battles_results import RankedBattlesResults
 
 from xfw import *
 
@@ -215,6 +216,13 @@ def _showAward(base, self, ctx):
     if not config.get('hangar/showRewardWindow', True):
         return
     base(self, ctx)
+
+# hide ranked battle results window
+@overrideMethod(RankedBattlesResults, '_populate')
+def _populate(base, self):
+    if not config.get('hangar/showRankedBattleResults', True):
+        return
+    base(self)
 
 # hide display session statistics help hints
 def hideSessionStatsHint():
