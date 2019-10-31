@@ -81,9 +81,13 @@ package com.xvm.battle.ranked.playersPanel
             super.configUI();
             listLeft.removeEventListener(MouseEvent.ROLL_OVER, xfw_onListRollOverHandler);
             listLeft.removeEventListener(MouseEvent.ROLL_OVER, xfw_onListRollOutHandler);
+            listRight.removeEventListener(MouseEvent.ROLL_OVER, xfw_onListRollOverHandler);
+            listRight.removeEventListener(MouseEvent.ROLL_OVER, xfw_onListRollOutHandler);
             listLeft.addEventListener(MouseEvent.ROLL_OVER, onListRollOverHandler, false, 0, true);
             listLeft.addEventListener(MouseEvent.ROLL_OUT, onListRollOutHandler, false, 0, true);
             listLeft.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMoveHandler, false, 0, true);
+            listRight.addEventListener(MouseEvent.ROLL_OVER, onListRollOverHandler, false, 0, true);
+            listRight.addEventListener(MouseEvent.ROLL_OUT, onListRollOutHandler, false, 0, true);
             listRight.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMoveHandler, false, 0, true);
         }
 
@@ -93,6 +97,8 @@ package com.xvm.battle.ranked.playersPanel
             listLeft.removeEventListener(MouseEvent.ROLL_OVER, onListRollOverHandler);
             listLeft.removeEventListener(MouseEvent.ROLL_OUT, onListRollOutHandler);
             listLeft.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMoveHandler);
+            listRight.removeEventListener(MouseEvent.ROLL_OVER, onListRollOverHandler);
+            listRight.removeEventListener(MouseEvent.ROLL_OUT, onListRollOutHandler);
             listRight.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMoveHandler);
             super.onDispose();
         }
@@ -241,20 +247,27 @@ package com.xvm.battle.ranked.playersPanel
 
         public function onMouseMoveHandler(e:MouseEvent):void
         {
-            if (mopt_expandAreaWidth > 0)
+            try
             {
-                if (_isMouseRollOver)
+                if (mopt_expandAreaWidth > 0)
                 {
-                    var isInExpandArea:Boolean = (e.stageX < mopt_expandAreaWidth) || (e.stageX > App.appWidth - mopt_expandAreaWidth);
-                    if (isInExpandArea)
+                    if (_isMouseRollOver)
                     {
-                        super.onListRollOverHandler(e);
-                    }
-                    else
-                    {
-                        super.onListRollOutHandler(e);
+                        var isInExpandArea:Boolean = (e.stageX < mopt_expandAreaWidth) || (e.stageX > App.appWidth - mopt_expandAreaWidth);
+                        if (isInExpandArea)
+                        {
+                            super.xfw_onListRollOverHandler(e);
+                        }
+                        else
+                        {
+                            super.xfw_onListRollOutHandler(e);
+                        }
                     }
                 }
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
             }
         }
 
