@@ -1,6 +1,10 @@
 ﻿XVM-8.1.7:
   [BATTLE]
-  * Fixed {{pp.mode}} macro in battle mode "Ranked Battle"
+  * Fixed {{pp.mode}} macro in battle mode "Ranked battle"
+
+  [HANGAR]
+  * Added option:
+      "hangar"/"showRankedBattleResults" - display info window with the battle results in the "Ranked battle"
 
 XVM-8.1.6:
   [GENERAL]
