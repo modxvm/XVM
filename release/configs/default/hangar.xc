@@ -28,6 +28,9 @@
     // true - show info window with list of received awards for "Reward for Merit".
     // true - показывать информационное окно с перечнем полученных наград за "Довольствие".
     "showRewardWindow": true,
+    // true - show info window with the battle results in the "Ranked battle".
+    // true - показывать информационное окно с результатами боя в "Ранговом бою".
+    "showRankedBattleResults": true,
     // "Combat Intelligence" - show/hide notifications in the main window and counters in the menu.
     // "Полевая почта" - показывать/прятать уведомления в главном окне и счетчики в меню.
     "combatIntelligence": {
