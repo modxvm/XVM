@@ -1,6 +1,7 @@
 ﻿XVM-8.1.7:
   [BATTLE]
   * Fixed {{pp.mode}} macro in battle mode "Ranked battle"
+  * Added the ability to scroll the contents of the hit log
 
   [HANGAR]
   * Added option:
