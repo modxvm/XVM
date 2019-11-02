@@ -51,7 +51,7 @@ package com.xvm.lobby.ui.tankcarousel
             renderer.height = int(Macros.FormatNumberGlobal(cfg.height, DEFAULT_HEIGHT - 2) + 2);
             //renderer.scrollRect = new Rectangle(0, 0, DEFAULT_WIDTH, DEFAULT_HEIGHT);
             renderer.setActualSize(renderer.width, renderer.height);
-            
+
             var formats:Array = cfg.extraFields;
             if (formats)
             {
