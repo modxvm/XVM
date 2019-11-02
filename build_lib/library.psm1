@@ -22,18 +22,18 @@ function Build-AS3Proj($Project)
     if(${env:XVMBUILD_FDBUILD_FILEPATH} -eq $null)
     {
         Find-FDBuild -Required
-    }    
+    }
 
     if($(Get-OS) -eq "windows")
     {
         Invoke-Expression -Command "${env:XVMBUILD_FDBUILD_FILEPATH} -notrace -compiler:'${env:FLEX_HOME}' -cp:'' '$Project'"
     }
-    else 
+    else
     {
         if(${env:XVMBUILD_MONO_FILEPATH} -eq $null)
         {
             Find-Mono -Required | Out-Null
-        }    
+        }
         Invoke-Expression -Command "${env:XVMBUILD_MONO_FILEPATH} `"${env:XVMBUILD_FDBUILD_FILEPATH}`" -notrace -compiler:`"${env:FLEX_HOME}`" -cp:`"`" `"$Project`""
     }
 
@@ -84,7 +84,7 @@ function Get-Architecture()
     if($os -eq "windows")
     {
         $arch = ${env:PROCESSOR_ARCHITECTURE}
-        
+
         if($arch -eq "AMD64")
         {
             return "amd64"
@@ -99,10 +99,10 @@ function Get-Architecture()
     }
     elseif($os -eq "linux")
     {
-        switch ($(uname -m)) 
+        switch ($(uname -m))
         {
-            x86_64 
-            {  
+            x86_64
+            {
                 return "amd64"
             }
 
@@ -139,7 +139,7 @@ function Get-OS()
 function Get-MercurialRepoStats($Path)
 {
     Find-Mercurial -Required
-    
+
     if($Path -eq $null)
     {
         $Path = $PWD.Path
@@ -164,7 +164,7 @@ function Get-MercurialRepoStats($Path)
     }
 }
 
-function Edit-Path ($Path, [switch] $Append, [switch] $Prepend) 
+function Edit-Path ($Path, [switch] $Append, [switch] $Prepend)
 {
     $os = Get-OS
 
@@ -192,12 +192,12 @@ function Edit-Path ($Path, [switch] $Append, [switch] $Prepend)
             ${env:PATH}="${Path}:${env:PATH}"
         }
     }
-       
+
 }
 
 function Find-Application([string] $Command, [Switch] $Required)
-{   
-    $cmd = Get-Command -Name $Command -ErrorAction SilentlyContinue  
+{
+    $cmd = Get-Command -Name $Command -ErrorAction SilentlyContinue
 
     if($cmd)
     {
@@ -219,18 +219,18 @@ function Find-FDBuild([Switch] $Required)
     {
         $path = Find-Application ${env:XVMBUILD_FDBUILD_FILEPATH} -Required:$false
     }
-    
+
     if(!$path)
     {
         $path = Find-Application "fdbuild" -Required:$false
     }
-    
+
     if(!$path)
     {
         Edit-Path -Path "${PSScriptRoot}/bin/msil/fdbuild/" -Prepend
         $path = Find-Application "fdbuild.exe" -Required:$Required
     }
-    
+
     ${env:XVMBUILD_FDBUILD_FILEPATH} = $path
     return $path
 }
@@ -275,7 +275,7 @@ function Find-Flex([Switch] $Required)
     {
         ${env:XVMBUILD_COMPC_FILEPATH}=Join-Path "${env:FLEX_HOME}" "bin/compc.bat"
     }
-    else 
+    else
     {
         ${env:XVMBUILD_COMPC_FILEPATH}=Join-Path "${env:FLEX_HOME}" "bin/compc"
     }
@@ -286,13 +286,13 @@ function Find-Flex([Switch] $Required)
             Write-Error "Apache Flex compc file is not found"
             exit 1
         }
-        return $false  
+        return $false
     }
 
     #playerglobal
     if(${env:PLAYERGLOBAL_HOME} -eq $null)
     {
-        ${env:PLAYERGLOBAL_HOME} = Join-Path "${env:FLEX_HOME}" "frameworks/libs/player/" 
+        ${env:PLAYERGLOBAL_HOME} = Join-Path "${env:FLEX_HOME}" "frameworks/libs/player/"
     }
 
     foreach($playerVersion in $playerVersions)
@@ -347,7 +347,7 @@ function Find-Mono([Switch] $Required)
     {
         return $false
     }
-    
+
     ${env:XVMBUILD_MONO_FILEPATH} = $path
 
     return $path
@@ -369,7 +369,7 @@ function Find-Patch([Switch] $Required)
         {
             $patchDir="$PSScriptRoot/bin/${os}_i686/patch"
         }
-        else 
+        else
         {
             $patchDir="$PSScriptRoot/bin/${os}_${Get-Architecture}/patch"
         }
@@ -430,12 +430,12 @@ function Find-Rabcdasm([Switch] $Required)
         {
             $rabcdasmDir="$PSScriptRoot/bin/${os}_i686/swf-disasm"
         }
-        else 
+        else
         {
             $rabcdasmDir="$PSScriptRoot/bin/${os}_$(Get-Architecture)/swf-disasm"
         }
 
-        Edit-Path -Path "${rabcdasmDir}" -Prepend 
+        Edit-Path -Path "${rabcdasmDir}" -Prepend
 
         $path = Find-Application "rabcdasm" -Required:$Required
     }
@@ -464,7 +464,7 @@ function Find-Zip([Switch] $Required)
         {
             $zipDir="$PSScriptRoot/bin/${os}_i686/zip"
         }
-        else 
+        else
         {
             $zipDir="$PSScriptRoot/bin/${os}_${Get-Architecture}/zip"
         }
@@ -482,7 +482,7 @@ function Create-Zip($Directory, $CompressionLevel=0)
 
     Find-Zip -Required | Out-Null
     zip -$CompressionLevel -q -X -r ./output.zip ./*
-    
+
     Pop-Location
 }
 
@@ -498,7 +498,7 @@ class FileHashTable
     [String] $JsonFile = ""
     [hashtable] $Hashes = @{}
 
-    
+
     FileHashTable([string] $JsonPath)
     {
         $this.JsonFile = $JsonPath
@@ -506,9 +506,9 @@ class FileHashTable
     }
 
     LoadJson()
-    {       
+    {
         if(Test-Path -Path $this.JsonFile )
-        {          
+        {
             $records  = $(Get-Content -Path $this.JsonFile | ConvertFrom-Json).psobject.properties
             foreach($record in $records)
             {
@@ -553,7 +553,7 @@ class FileHashTable
         else
         {
             $this.Hashes.Add($RelativePath,$value)
-        }       
+        }
     }
 }
 

@@ -549,7 +549,7 @@ macro(ucm_add_target)
     if(do_unity)
         # the original target will be added with a different name than the requested
         set(orig_target ${ARG_NAME}_ORIGINAL)
-       
+
         # exclude requested files from unity build of the current target
         foreach(excluded_file "${ARG_UNITY_EXCLUDED}")
             set_source_files_properties(${excluded_file} PROPERTIES COTIRE_EXCLUDED TRUE)
