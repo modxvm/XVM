@@ -129,7 +129,7 @@
 #define FIND_BEGINS        0x01
 #define FIND_ENDS          0x02
 #define FIND_CONTAINS      0x03
-#define FIND_CASESENSITIVE 0x04 
+#define FIND_CASESENSITIVE 0x04
 #define FIND_SENSITIVE     FIND_CASESENSITIVE
 #define FIND_AND           0x00
 #define FIND_OR            0x08
