@@ -47,6 +47,7 @@ import utils
 import xvmapi
 
 config_autoreload = False
+config_path = None
 config_data = None
 lang_data = None
 
@@ -124,16 +125,21 @@ def load(e):
 
 # PRIVATE
 
+_xvm_xc_files_counter = 0
+
 def _load_xvm_xc(filename, autoreload):
     # debug('_load_xvm_xc: "{}", {}'.format(filename, autoreload))
     try:
+        global _xvm_xc_files_counter
+        _xvm_xc_files_counter = 0
+
         config = deepcopy(default_config.DEFAULT_CONFIG)
         if not os.path.isfile(filename):
             log('[WARNING] xvm.xc was not found, building new')
             with open(filename, 'w') as f:
                 f.write(DEFAULT_XVM_XC)
         if os.path.isfile(filename):
-            result = JSONxLoader.load(filename, _load_log)
+            result = JSONxLoader.load(filename, _load_log_xvm_xc)
             if result is not None:
                 config = _merge_configs(config, result)
             config['__stateInfo'] = {}
@@ -162,9 +168,18 @@ def _load_locale_file():
     data = unicode_to_ascii(data)
     return data
 
+def _load_log_xvm_xc(msg):
+    _load_log(msg)
+    if msg.startswith(u'[JSONxLoader] load: '):
+        global _xvm_xc_files_counter
+        _xvm_xc_files_counter += 1
+        if _xvm_xc_files_counter < 3:
+            global config_path
+            config_path = os.path.dirname(msg.replace(u'[JSONxLoader] load: ', '').replace('\\', '/'))
 
 def _load_log(msg):
     log(msg
+        .replace('\\', '/')
         .replace(XVM.CONFIG_DIR, '[cfg]')
         .replace(XVM.SHARED_RESOURCES_DIR, '[res]'))
 

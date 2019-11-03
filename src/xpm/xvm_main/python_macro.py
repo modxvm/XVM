@@ -129,7 +129,8 @@ def initialize():
 
 
 def load_macros_lib(file_name):
-    debug("[PY_MACRO] load_macros_lib('{}')".format(file_name))
+    debug("[PY_MACRO] load_macros_lib('{}')".format(
+        file_name.replace('\\', '/').replace(XVM.CONFIG_DIR, '[cfg]')))
     try:
         code = load(file_name)
         execute(code, file_name, {'xvm': XvmNamespace})
