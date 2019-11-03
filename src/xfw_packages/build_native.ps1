@@ -20,10 +20,10 @@ Push-Location $PSScriptRoot
 Import-Module ../../build_lib/library.psm1 -Force -DisableNameChecking
 
 #version
-$version_str = "8.1.5.0"
+$version_str = "8.1.7.0"
 $version = $version_str -replace "\.",","
 
-$xfwnative_url="https://ci.appveyor.com/api/buildjobs/i65qldvbxeixg12q/artifacts/output%2Fdeploy%2Fcom.modxvm.xfw.native_1.5.4-devel.zip"
+$xfwnative_url="https://ci.appveyor.com/api/buildjobs/yipguxa4bi2tvofl/artifacts/output%2Fdeploy%2Fcom.modxvm.xfw.native_1.5.6-devel.zip"
 
 $projects_32=@(
     "xfw_crashreport"
@@ -43,6 +43,7 @@ $projects_64=@(
     "xfw_mutex"
     "xfw_ping"
     "xfw_wotfix_hidpi"
+    "xfw_wwise"
 )
 
 function Download-DevelPackage()
@@ -93,7 +94,7 @@ Remove-Item -Path "./_devel/*" -Force -Recurse -ErrorAction SilentlyContinue
 Download-DevelPackage
 
 foreach ($project in $projects_32) {
-#    Build-CmakeProject -Name $project -Arch "32bit"
+    Build-CmakeProject -Name $project -Arch "32bit"
 }
 
 foreach ($project in $projects_64) {

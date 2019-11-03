@@ -3,6 +3,7 @@ cmake_minimum_required (VERSION 3.0)
 
 find_package(audiokinetic REQUIRED)
 find_package(libpython REQUIRED)
+find_package(xfw_wotexport REQUIRED)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -20,9 +21,12 @@ set(VER_INTERNALNAME_STR "xfw_wwise")
 configure_file("../../library.h.in" "library.h" @ONLY)
 
 target_include_directories(xfw_wwise PRIVATE "${CMAKE_BUILD_DIR}")
+target_link_libraries(xfw_wwise libpython::python27)
 
 target_link_libraries(xfw_wwise audiokinetic::audiokinetic)
-target_link_libraries(xfw_wwise libpython::python27)
+target_compile_definitions(xfw_wwise PRIVATE "-DAKSOUNDENGINE_DLL")
+
+target_link_libraries(xfw_wwise xfw_wotexport::xfw_wotexport)
 target_link_libraries(xfw_wwise "shlwapi")
 
 if(MSVC)
