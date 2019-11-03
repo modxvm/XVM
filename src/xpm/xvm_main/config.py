@@ -164,6 +164,14 @@ def _load_locale_file():
     except Exception:
         data = default_config.LANG_RU if get('region').lower() == 'ru' else default_config.LANG_EN
         err(traceback.format_exc())
+    try:
+        folderLanguage = get('userLanguageFolder', '').strip(' /')
+        filename = '{}/{}/{}.xc'.format(XVM.CURRENT_CONFIG_DIR, folderLanguage, get('language'))
+        if folderLanguage and os.path.isfile(filename):
+            user_data = JSONxLoader.load(filename, _load_log)
+            data = _merge_configs(data, user_data)
+    except Exception:
+        err(traceback.format_exc())
     data = unicode_to_ascii(data)
     return data
 
