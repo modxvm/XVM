@@ -25,6 +25,7 @@ class XVM(object):
     PY_MACRO_DIR = CONFIG_DIR + u'/py_macro'
     SHARED_RESOURCES_DIR = XFWLOADER_PATH_TO_ROOT + u'res_mods/mods/shared_resources/xvm'
     LOCALE_DIR = SHARED_RESOURCES_DIR + u'/l10n'
+    CURRENT_CONFIG_DIR = CONFIG_DIR
 
     LOCALE_AUTO_DETECTION = 'auto'
     REGION_AUTO_DETECTION = 'auto'

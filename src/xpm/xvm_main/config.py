@@ -47,7 +47,6 @@ import utils
 import xvmapi
 
 config_autoreload = False
-config_path = None
 config_data = None
 lang_data = None
 
@@ -174,8 +173,8 @@ def _load_log_xvm_xc(msg):
         global _xvm_xc_files_counter
         _xvm_xc_files_counter += 1
         if _xvm_xc_files_counter < 3:
-            global config_path
-            config_path = os.path.dirname(msg.replace(u'[JSONxLoader] load: ', '').replace('\\', '/'))
+            XVM.CURRENT_CONFIG_DIR = os.path.dirname(
+                msg.replace(u'[JSONxLoader] load: ', '').replace('\\', '/'))
 
 def _load_log(msg):
     log(msg
