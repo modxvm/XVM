@@ -1,4 +1,9 @@
 ﻿XVM-8.1.7:
+  [GENERAL]
+  * Added option:
+      "userLanguageFolder" - the path to the folder containing custom localization files,
+                             set relative to the user config folder.
+
   [BATTLE]
   * Fixed {{pp.mode}} macro in battle mode "Ranked battle"
   * Added the ability to scroll the contents of the hit log

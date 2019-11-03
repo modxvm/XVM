@@ -33,6 +33,12 @@
   // или укажите имя файла в папке res_mods/mods/shared_resources/xvm/l10n/ (например, "en").
   "language": "auto",
 
+  // The path to the folder with custom localization files.
+  // The path is set relative to the user config folder
+  // Путь к папке с пользовательскими файлами локализации.
+  // Путь задается относительно папки пользовательского конфига
+  "userLanguageFolder": "lang",
+
   // Game Region:
   // "auto" - automatically detect game region from game client,
   // or specify one of: "RU", "EU", "NA", "ASIA", "KR", "CN"
