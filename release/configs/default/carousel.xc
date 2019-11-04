@@ -73,7 +73,7 @@
     "nations_order": [],
     // Order of types of vehicles.
     // Порядок классов техники.
-    "types_order":   ["lightTank", "mediumTank", "heavyTank", "AT-SPG", "SPG"],
+    "types_order": ["lightTank", "mediumTank", "heavyTank", "AT-SPG", "SPG"],
     // Tank sorting criteria, available options: (minus = reverse order)
     // Критерии сортировки танков, доступные значения: (минус = в обратном порядке)
     // "nation", "type", "level", "-level", "maxBattleTier", "-maxBattleTier", "premium", "-premium",

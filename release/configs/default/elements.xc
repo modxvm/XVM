@@ -63,6 +63,7 @@
     "damagePanel"                   - Панель повреждений                                     / Damage panel
     "debugPanel"                    - Панель пинга/лага/фпс                                  / Debug panel (ping/lag/fps)
     "destroyTimersPanel"            - Таймер до уничтожения (утопление, переворот)           / Destroy timers (drowning, overturned)
+    "dualGunPanel"                  - Панель для техники с двумя орудиями                    / Panel for vehicle with two guns
     "endWarningPanel"               - Панель оповещяющая о конце боя                         / Panel informing about the imminent end of the battle
     "fragCorrelationBar"            - Счёт боя                                               / Battle score
     "fullStats"                     - Окно статистики по клавише Tab                         / Battle Statistics form on the Tab key
