@@ -11,6 +11,8 @@
   [HANGAR]
   * Added option:
       "hangar"/"showRankedBattleResults" - display info window with the battle results in the "Ranked battle"
+      "hangar"/"equipmentPanel"/"showNumberEquipment" - show the remaining quantity of equipment in depot
+      "hangar"/"equipmentPanel"/"showNumberDirectives" - show the remaining quantity of directives in depot
 
 XVM-8.1.6:
   [GENERAL]
