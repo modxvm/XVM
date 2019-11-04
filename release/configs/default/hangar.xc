@@ -31,6 +31,16 @@
     // true - show info windows with the battle results in the "Ranked battle" mode.
     // true - показывать информационные окна результатов боя в режиме "Ранговый бой".
     "showRankedBattleResults": true,
+    // Equipment panel - show/hide the number of equipment and directives.
+    // Панель снаряжения - показывать/прятать количество снаряжения и инструкций.
+    "equipmentPanel": {
+      //true - show the remaining quantity of equipment in depot.
+      //true - показать оставшиеся количество оборудования на складе.
+      "showNumberEquipment": true,
+      //true - show the remaining quantity of directives in depot.
+      //true - показать оставшиеся количество инструкций на складе.
+      "showNumberDirectives": false
+    },
     // "Combat Intelligence" - show/hide notifications in the main window and counters in the menu.
     // "Полевая почта" - показывать/прятать уведомления в главном окне и счетчики в меню.
     "combatIntelligence": {
