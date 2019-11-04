@@ -21,7 +21,7 @@
       "hangar": ["xvm://audioww/xvm.bnk"]
     },
     // Enable sound events logging in the xvm.log
-    // Включить логгирование звуковых событий в xvm.log
+    // Включить логирование звуковых событий в xvm.log
     "logSoundEvents": false,
     // Sound events remapping.
     // Переопределение звуковых событий.
