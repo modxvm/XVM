@@ -3,17 +3,17 @@
   * Added option:
       "userLanguageFolder" - the path to the folder containing custom localization files,
                              set relative to the user config folder.
-  * Various bugs fixed 
+  * Various bugs fixed
 
-  [XFW] 
-  * Implemented sound banks loading on 64-bit clients 
+  [XFW]
+  * Implemented sound banks loading on 64-bit clients
 
   [BATTLE]
   * Fixed {{pp.mode}} macro in battle mode "Ranked battle"
   * Added the ability to scroll the contents of the hit log
 
   [HANGAR]
-  * Added filter for vehicles that have crews with less than 100% training level 
+  * Added filter for vehicles that have crews with less than 100% training level
   * Added option:
       "hangar"/"showRankedBattleResults" - display info window with the battle results in the "Ranked battle"
       "hangar"/"equipmentPanel"/"showNumberEquipment" - show the remaining quantity of equipment in depot
