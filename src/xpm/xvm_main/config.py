@@ -167,7 +167,7 @@ def _load_locale_file():
     try:
         folderLanguage = get('userLanguageFolder', 'lang').strip(' /')
         if folderLanguage:
-            filename = '{}/{}/{}.xc'.format(XVM.CURRENT_CONFIG_DIR, folderLanguage, get('language'))
+            filename = u'{}/{}/{}.xc'.format(XVM.CURRENT_CONFIG_DIR, folderLanguage, get('language'))
             if os.path.isfile(filename):
                 user_data = JSONxLoader.load(filename, _load_log)
                 data = _merge_configs(data, user_data)
