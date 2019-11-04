@@ -43,9 +43,10 @@ class PREFS(object):
     NORMAL = 'normal'
     NON_ELITE = 'nonelite'
     FULL_CREW = 'fullCrew'
+    TRAINING_CREW = 'trainingCrew'
     NO_MASTER = 'noMaster'
     RESERVE = 'reserve'
-    XVM_KEYS = (NORMAL, NON_ELITE, FULL_CREW, NO_MASTER, RESERVE)
+    XVM_KEYS = (NORMAL, NON_ELITE, FULL_CREW, TRAINING_CREW, NO_MASTER, RESERVE)
 
 class USERPREFS(object):
     CAROUSEL_FILTERS = "users/{accountDBID}/tankcarousel/filters"
@@ -95,8 +96,8 @@ def _AccountSettings_setFilter(base, name, value):
     base(name, value)
 
 # Filters:
-#   Premium   Normal   Elite    NonElite    CompleteCrew
-#   NoMaster  Reserve  [igr]
+#   Premium       Normal    Elite    NonElite    CompleteCrew
+#   TrainingCrew  NoMaster  Reserve  [igr]
 @overrideMethod(TankCarouselFilterPopover, '_getInitialVO')
 def _TankCarouselFilterPopover_getInitialVO(base, self, filters, xpRateMultiplier):
     data = base(self, filters, xpRateMultiplier)
@@ -111,7 +112,8 @@ def _TankCarouselFilterPopover_getInitialVO(base, self, filters, xpRateMultiplie
             elite = data['specials'][mapping[_SECTION.SPECIALS].index(PREFS.ELITE)]
             elite['value'] = '../../../mods/shared_resources/xvm/res/icons/carousel/filter/elite.png'
             non_elite = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/nonelite.png', 'tooltip': makeTooltip(l10n('NonEliteTooltipHeader'), l10n('NonEliteTooltipBody')), 'selected': filters[PREFS.NON_ELITE]}
-            complete_crew = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/fullcrew.png', 'tooltip': makeTooltip(l10n('CompleteCrewTooltipHeader'), l10n('CompleteCrewTooltipBody')), 'selected': filters[PREFS.FULL_CREW]}
+            full_crew = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/fullcrew.png', 'tooltip': makeTooltip(l10n('CompleteCrewTooltipHeader'), l10n('CompleteCrewTooltipBody')), 'selected': filters[PREFS.FULL_CREW]}
+            training_crew = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/trainingcrew.png', 'tooltip': makeTooltip(l10n('TrainingCrewTooltipHeader'), l10n('TrainingCrewTooltipBody')), 'selected': filters[PREFS.TRAINING_CREW]}
             no_master = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/nomaster.png', 'tooltip': makeTooltip(l10n('NoMasterTooltipHeader'), l10n('NoMasterTooltipBody')), 'selected': filters[PREFS.NO_MASTER]}
             reserve = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/reserve.png', 'tooltip': makeTooltip(l10n('ReserveFilterTooltipHeader'), l10n('ReserveFilterTooltipBody')), 'selected': filters[PREFS.RESERVE]}
 
@@ -119,8 +121,8 @@ def _TankCarouselFilterPopover_getInitialVO(base, self, filters, xpRateMultiplie
             if is_igr:
                 igr = data['specials'][-1]
             data['specials'] = [
-                premium, normal, elite, non_elite, complete_crew,
-                no_master, reserve]
+                premium, normal, elite, non_elite, full_crew,
+                training_crew, no_master, reserve]
             if is_igr:
                 data['specials'].append(igr)
         except Exception as ex:
@@ -132,8 +134,8 @@ def _TankCarouselFilterPopover_generateMapping(base, cls, hasRented, hasEvent):
     mapping = base(hasRented, hasEvent)
     is_igr = PREFS.IGR in mapping[_SECTION.SPECIALS]
     mapping[_SECTION.SPECIALS] = [
-        PREFS.PREMIUM,   PREFS.NORMAL, PREFS.ELITE, PREFS.NON_ELITE, PREFS.FULL_CREW,
-        PREFS.NO_MASTER, PREFS.RESERVE]
+        PREFS.PREMIUM, PREFS.NORMAL, PREFS.ELITE, PREFS.NON_ELITE, PREFS.FULL_CREW,
+        PREFS.TRAINING_CREW, PREFS.NO_MASTER, PREFS.RESERVE]
     if is_igr:
         mapping[_SECTION.SPECIALS].append(PREFS.IGR)
     return mapping
@@ -183,6 +185,17 @@ def _applyXvmFilter(item, filters, total_stats, vehicles_stats):
         remove |= filters[PREFS.NO_MASTER] and mark_of_mastery == MarkOfMasteryAchievement.MARK_OF_MASTERY.MASTER
 
     remove |= filters[PREFS.FULL_CREW] and not item.isCrewFull
+
+    if filters[PREFS.TRAINING_CREW]:
+        isCrewTraining = False
+        for slotIdx, crewman in item.crew:
+            if crewman is None:
+                isCrewTraining = True
+                break
+            if not crewman.isMaxRoleLevel:
+                isCrewTraining = True
+                break
+        remove |= not isCrewTraining
 
     remove |= not filters[PREFS.RESERVE] and vdata['isReserved']
     # next line will make xor filter: non_reserve <--> reserve,
