@@ -1,4 +1,4 @@
-{   
+{
     "sonarHost": "https://ci.modxvm.com/sonarqube",
     "sonarProjectKey": "xvm-client"
 }
