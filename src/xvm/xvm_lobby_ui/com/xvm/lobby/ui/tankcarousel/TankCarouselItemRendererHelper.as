@@ -49,7 +49,8 @@ package com.xvm.lobby.ui.tankcarousel
 
             renderer.width = int(Macros.FormatNumberGlobal(cfg.width, DEFAULT_WIDTH - 2) + 2);
             renderer.height = int(Macros.FormatNumberGlobal(cfg.height, DEFAULT_HEIGHT - 2) + 2);
-            renderer.scrollRect = new Rectangle(0, 0, DEFAULT_WIDTH, DEFAULT_HEIGHT);
+            //renderer.scrollRect = new Rectangle(0, 0, DEFAULT_WIDTH, DEFAULT_HEIGHT);
+            
             renderer.setActualSize(renderer.width, renderer.height);
 
             var formats:Array = cfg.extraFields;
@@ -258,6 +259,7 @@ package com.xvm.lobby.ui.tankcarousel
         {
             field.antiAliasType = AntiAliasType.ADVANCED;
             field.x = cfg.dx + 2;
+            field.y += - DEFAULT_HEIGHT + item.height + cfg.dy - 2;
             field.width = (DEFAULT_WIDTH - 4) / field.scaleX;
             field.autoSize = TextFieldAutoSize.NONE;
             field.defaultTextFormat.align = TextFormatAlign.RIGHT;
