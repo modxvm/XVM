@@ -22,7 +22,7 @@
     "Ping": "Ping",
     "Online": "Online",
 
-    // Hitlog
+    // HitLog
     "shot": "shot",
     "fire": "fire",
     "ramming": "ramming",
@@ -62,22 +62,21 @@
     "gunner": "gunner",
     "loader": "loader",
 
-    // DamageLog:
+    // DamageLog
     "sec": "sec",
-    "reloaded": "reloaded",
     "drowning": "drowning",
-    // Shell kind (macro {{type-shell}})
+    // Shell kind, macro {{type-shell}}
     "armor_piercing": "AP",
     "high_explosive": "HE",
     "armor_piercing_cr": "APCR",
     "armor_piercing_he": "HESH",
     "hollow_charge": "HEAT",
-    // Text at hits no damage (ricochet, no penetration, no damage) (macro {{dmg}})
+    // Text at hits no damage (ricochet, no penetration, no damage), macro {{dmg}}
     "intermediate_ricochet": "ricochet",
     "final_ricochet": "ricochet",
     "armor_not_pierced": "bounce",
     "armor_pierced_no_damage": "blocked",
-    // Name part of vehicle (macro {{comp-name}})
+    // Name part of vehicle, macro {{comp-name}}
     "turret": "turret",
     "hull": "hull",
     "chassis": "chassis",
