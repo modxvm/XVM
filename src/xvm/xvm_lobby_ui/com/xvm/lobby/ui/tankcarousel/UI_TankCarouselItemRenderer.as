@@ -33,7 +33,7 @@ package com.xvm.lobby.ui.tankcarousel
             super();
             try
             {
-                //preventAutosizing = false;
+                preventAutosizing = false;
 
                 _helper = new TankCarouselItemRendererHelper(this, Config.config.hangar.carousel.normal, DEFAULT_RENDERER_WIDTH, DEFAULT_RENDERER_HEIGHT);
                 Xfw.addCommandListener(LobbyXvmApp.AS_UPDATE_BATTLE_TYPE, updateData);
