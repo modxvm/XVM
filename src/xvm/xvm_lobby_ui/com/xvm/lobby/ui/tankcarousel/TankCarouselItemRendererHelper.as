@@ -201,6 +201,7 @@ package com.xvm.lobby.ui.tankcarousel
             sprite.mouseChildren = false;
             sprite.scaleX = DEFAULT_WIDTH / item.width;
             sprite.scaleY = DEFAULT_HEIGHT / item.height;
+            sprite.scrollRect = new Rectangle(0, 0, item.width, item.height);
             owner.addChildAt(sprite, index);
             return sprite;
         }
