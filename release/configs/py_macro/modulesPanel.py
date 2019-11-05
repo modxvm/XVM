@@ -7,8 +7,8 @@ import xvm_main.python.config as config
 from xfw import *
 
 EQUIPMENT_PANEL = 'hangar/equipmentPanel'
-SHOW_NUMBER_EQUIPMENT = EQUIPMENT_PANEL + '/showNumberEquipment'
-SHOW_NUMBER_DIRECTIVES = EQUIPMENT_PANEL + '/showNumberDirectives'
+SHOW_NUMBER_EQUIPMENT = EQUIPMENT_PANEL + '/showConsumablesCount'
+SHOW_NUMBER_DIRECTIVES = EQUIPMENT_PANEL + '/showDirectivesCount'
 
 
 @overrideMethod(ModulesPanelMeta, 'as_setDataS')
