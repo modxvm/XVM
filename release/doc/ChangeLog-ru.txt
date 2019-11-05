@@ -1,4 +1,10 @@
-﻿XVM-8.1.7:
+﻿XVM-8.1.8:
+  [АНГАР]
+  * Переименованы опции в секции "hangar"/"equipmentPanel":
+      "showNumberEquipment"  -> "showConsumablesCount"
+      "showNumberDirectives" -> "showDirectivesCount"
+
+XVM-8.1.7:
   [ОБЩЕЕ]
   * Добавлена опция:
       "userLanguageFolder" - путь к папке с пользовательскими файлами локализации,
@@ -16,7 +22,7 @@
   * Добавлен фильтр для танков с экипажем, который обучен менее, чем на 100%
   * Добавлена опция:
       "hangar"/"showRankedBattleResults" - показывать информационное окно с результатами боя в "Ранговом бою"
-      "hangar"/"equipmentPanel"/"showNumberEquipment" - показать оставшиеся количество оборудования на складе
+      "hangar"/"equipmentPanel"/"showNumberEquipment" - показать оставшиеся количество снаряжения на складе
       "hangar"/"equipmentPanel"/"showNumberDirectives" - показать оставшиеся количество инструкций на складе
 
 XVM-8.1.6:
