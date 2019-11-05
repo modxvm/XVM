@@ -51,8 +51,6 @@ package com.xvm.lobby.ui.tankcarousel
             renderer.height = int(Macros.FormatNumberGlobal(cfg.height, DEFAULT_HEIGHT - 2) + 2);
             renderer.content.scrollRect = new Rectangle(0, 0, DEFAULT_WIDTH, DEFAULT_HEIGHT);
 
-            renderer.setActualSize(renderer.width, renderer.height);
-
             var formats:Array = cfg.extraFields;
             if (formats)
             {
@@ -260,7 +258,6 @@ package com.xvm.lobby.ui.tankcarousel
         {
             field.antiAliasType = AntiAliasType.ADVANCED;
             field.x = cfg.dx + 2;
-            field.y += dy;
             field.width = (DEFAULT_WIDTH - 4) / field.scaleX;
             field.autoSize = TextFieldAutoSize.NONE;
             field.defaultTextFormat.align = TextFormatAlign.RIGHT;
@@ -359,9 +356,11 @@ package com.xvm.lobby.ui.tankcarousel
 
         private function _setupStandardFieldTankName():void
         {
+            //var dy:Number = DEFAULT_HEIGHT - renderer.content.txtTankName.y - 2;
             _setupStandardFieldAlpha(renderer.content.txtTankName, cfg.fields.tankName);
             _setupStandardFieldScale(renderer.content.txtTankName, cfg.fields.tankName);
-            _setupStandardTextField(renderer.content.txtTankName, cfg.fields.tankName, - DEFAULT_HEIGHT + item.height + cfg.dy - 2);
+            _setupStandardTextField(renderer.content.txtTankName, cfg.fields.tankName, 0);
+            //renderer.content.txtTankName.y = DEFAULT_HEIGHT - dy * renderer.content.txtTankName.scaleY + cfg.fields.xp.dy;
         }
 
         private function _setupStandardFieldRentInfo():void
@@ -370,9 +369,11 @@ package com.xvm.lobby.ui.tankcarousel
             if (tankicon)
             {
                 var field:TextField = tankicon.txtRentInfo;
+                //var dy:Number = DEFAULT_HEIGHT - field.y - 2;
                 _setupStandardFieldAlpha(field, cfg.fields.rentInfo);
                 _setupStandardFieldScale(field, cfg.fields.rentInfo);
                 _setupStandardTextField(field, cfg.fields.rentInfo, DEFAULT_HEIGHT - field.y - field.height - 2);
+                //field.y = DEFAULT_HEIGHT - dy * field.scaleY + cfg.fields.xp.dy;
                 //field.visible = true; field.htmlText = "<font color='#ffffff'>txtRentInfo</font>"; // DEBUG
             }
         }
