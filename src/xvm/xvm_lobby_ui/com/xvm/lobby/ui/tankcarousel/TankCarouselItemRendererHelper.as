@@ -260,7 +260,7 @@ package com.xvm.lobby.ui.tankcarousel
         {
             field.antiAliasType = AntiAliasType.ADVANCED;
             field.x = cfg.dx + 2;
-            field.y += - DEFAULT_HEIGHT + item.height + cfg.dy - 2;
+            field.y += dy;
             field.width = (DEFAULT_WIDTH - 4) / field.scaleX;
             field.autoSize = TextFieldAutoSize.NONE;
             field.defaultTextFormat.align = TextFormatAlign.RIGHT;
@@ -361,7 +361,7 @@ package com.xvm.lobby.ui.tankcarousel
         {
             _setupStandardFieldAlpha(renderer.content.txtTankName, cfg.fields.tankName);
             _setupStandardFieldScale(renderer.content.txtTankName, cfg.fields.tankName);
-            _setupStandardTextField(renderer.content.txtTankName, cfg.fields.tankName, 0);
+            _setupStandardTextField(renderer.content.txtTankName, cfg.fields.tankName, - DEFAULT_HEIGHT + item.height + cfg.dy - 2);
         }
 
         private function _setupStandardFieldRentInfo():void
