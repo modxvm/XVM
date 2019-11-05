@@ -117,6 +117,7 @@ package com.xvm.lobby.ui.tankcarousel
                 if (item.vehicleCarouselVO)
                 {
                     _setupStandardFieldInfo();
+                    _setupStandardFieldTankName();
                     if (!(item.vehicleCarouselVO.buySlot || item.vehicleCarouselVO.buyTank || item.vehicleCarouselVO.restoreTank))
                     {
                         if (item.extraFields)
@@ -353,14 +354,31 @@ package com.xvm.lobby.ui.tankcarousel
                 }
             }
         }
-
+        private var orig_TankName_x:Number = NaN;
+        private var orig_TankName_y:Number = NaN;
         private function _setupStandardFieldTankName():void
         {
+            var cfg_tankName:CCarouselCellStandardField = cfg.fields.tankName;
+            var tankName:InteractiveObject = renderer.content.txtTankName;
+            var scale:Number = isNaN(cfg_tankName.scale) ? 1 : cfg_tankName.scale;
+            if (isNaN(orig_TankName_x))
+            {
+                orig_TankName_x = tankName.x;
+                orig_TankName_y = tankName.y;
+            }        
+            tankName.scaleX = DEFAULT_WIDTH / item.width * scale;
+            tankName.scaleY = DEFAULT_HEIGHT / item.height * scale;
+            tankName.x = (orig_TankName_x * tankName.scaleX) + cfg_tankName.dx;
+            tankName.y = (orig_TankName_y * tankName.scaleY) + cfg_tankName.dy;
             //var dy:Number = DEFAULT_HEIGHT - renderer.content.txtTankName.y - 2;
-            _setupStandardFieldAlpha(renderer.content.txtTankName, cfg.fields.tankName);
-            _setupStandardFieldScale(renderer.content.txtTankName, cfg.fields.tankName);
-            _setupStandardTextField(renderer.content.txtTankName, cfg.fields.tankName, 0);
+            _setupStandardFieldAlpha(renderer.content.txtTankName, cfg_tankName);
+            //_setupStandardFieldScale(renderer.content.txtTankName, cfg.fields.tankName);
+            _setupStandardTextField(renderer.content.txtTankName, cfg_tankName, 0);
             //renderer.content.txtTankName.y = DEFAULT_HEIGHT - dy * renderer.content.txtTankName.scaleY + cfg.fields.xp.dy;
+            if (item.vehicleCarouselVO && item.vehicleCarouselVO.isNationChangeAvailable)
+            {
+                renderer.content.txtTankName.width = (DEFAULT_WIDTH - 4 - 23) / tankName.scaleX;
+            }
         }
 
         private function _setupStandardFieldRentInfo():void
