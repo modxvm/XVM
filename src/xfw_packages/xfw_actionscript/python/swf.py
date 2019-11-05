@@ -38,7 +38,7 @@ from xfw.logger import *
 import xfw_vfs as vfs
 from xfw import isInBootcamp, IS_DEVELOPMENT
 
-from .xfwmodsinfo import xfw_mods_info
+from .swfloadedinfo import swf_loaded_info
 
 g_xvmlogger = None
 g_xfwview = None
@@ -94,7 +94,7 @@ def _appInitialized(event):
             global xfwInitialized, appNS
             xfwInitialized = False
             appNS = event.ns
-            xfw_mods_info.clear_swfs()
+            swf_loaded_info.clear()
             if event.ns == APP_NAME_SPACE.SF_LOBBY:
                 #BigWorld.callback(0, lambda: app.loadView(SFViewLoadParams(CONST.XFW_VIEW_ALIAS, None)))
                 app.loadView(SFViewLoadParams(CONST.XFW_VIEW_ALIAS, None))

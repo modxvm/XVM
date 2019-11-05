@@ -19,7 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 import xfwview
 
 from swf import *
-from xfwmodsinfo import *
+from swfloadedinfo import *
 
 __all__ = [
     # swf
@@ -27,6 +27,6 @@ __all__ = [
     'as_event',
     'as_callback',
 
-    #xfwmodsinfo
-    'xfw_mods_info',
+    #swfloadedinfo
+    'swf_loaded_info',
 ]

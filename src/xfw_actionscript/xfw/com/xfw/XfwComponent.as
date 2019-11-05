@@ -33,9 +33,11 @@ package com.xfw
 
                 if (preloads == null)
                     preloads = [];
-                var swf:String = _instance.modsInfo[modName].swf_file_name;
-                if (swf == null)
+                var swf:String = _instance.modsNames[modName];
+                if (swf == null) {
+                    Logger.add("[XFW/XfwComponent] tryLoadUISWF: WARNING: swf is not found for mod name" + modName);
                     return XfwConst.SWF_LOAD_ERROR;
+                }
                 swf = swf.replace("\\", "/");
                 swf = swf.slice(0, swf.lastIndexOf("/") + 1) + swfName;
                 var libs:Vector.<String> = Vector.<String>(preloads).concat(Vector.<String>([swf]));
@@ -56,7 +58,7 @@ package com.xfw
         private static var _instance:XfwComponent;
         private static var _loadedUISWFs:Dictionary = new Dictionary();
 
-        private var modsInfo:Object;
+        private var modsNames:Object;
         private var modsList:Vector.<String>;
         private var loadedList:Vector.<String>;
         private var loadStartTime:Number;
@@ -92,8 +94,6 @@ package com.xfw
             //Logger.add("XfwComponent.onPopulate()");
             super.onPopulate();
             App.instance.loaderMgr.addEventListener(LibraryLoaderEvent.LOADED, onLibLoaded, false, 0, true);
-            modsInfo = Xfw.cmd(XfwConst.XFW_COMMAND_GETMODS);
-            //Logger.addObject(modsInfo, 3);
             loadMods();
         }
 
@@ -114,18 +114,31 @@ package com.xfw
             try
             {
                 modsList = new Vector.<String>();
-                for (var name:String in modsInfo)
+
+                var modsInfo:Object = Xfw.cmd(XfwConst.XFW_COMMAND_GETMODS);
+                modsNames = modsInfo.names
+
+                for(var modName:String in modsNames)
                 {
-                    var info:Object = modsInfo[name];
-                    if (!info.swf_file_name || info.swf_loaded)
+                    var swfFileName:String = modsNames[modName];
+
+                    if(swfFileName == null) 
+                    {
+                        DebugUtils.LOG_WARNING("[XFW/XfwComponent] loadMods: No SWF found for mod name " + modName);
+                        continue
+                    }
+
+                    if (modsInfo.loaded != null && modsInfo.loaded.indexOf(swfFileName) >= 0) 
+                    {
                         continue;
-                    info.swf_loaded = true;
-                    modsList.push(info.swf_file_name);
+                    }
+
+                    modsList.push(swfFileName);
                 }
 
                 if (modsList.length == 0)
                 {
-                    DebugUtils.LOG_DEBUG("[XFW] No SWF mods found");
+                    DebugUtils.LOG_WARNING("[XFW/XfwComponent] loadMods: No SWF mods found");
                     finishInit();
                     return;
                 }
@@ -134,7 +147,7 @@ package com.xfw
                 loadStartTime = (new Date()).getTime();
                 loadedList = new Vector.<String>;
                 modsList = modsList.sort(sortModsList);
-                Logger.add("Loading swf mods:");
+                Logger.add("[XFW/XfwComponent] loadMods: Loading swf mods:");
                 for each (var x:String in modsList)
                 {
                     Logger.add("  " + x.replace(XfwConst.XFW_PACKAGES_PATH, ''));
@@ -177,8 +190,7 @@ package com.xfw
         {
             try
             {
-                Logger.add("onLibLoaded: " + e.url);
-                //Logger.add("modsList: " + modsList);
+                Logger.add("[XFW/XfwComponent] onLibLoaded: " + e.url);
 
                 var swf:String = e.url.replace(/^.*\//, '');
                 _loadedUISWFs[swf] = e.loader ? XfwConst.SWF_LOADED : XfwConst.SWF_LOAD_ERROR;
@@ -197,7 +209,7 @@ package com.xfw
                     this.addChild(e.loader);
                 }
 
-                Logger.add("[XFW] Mod " + (e.loader ? "loaded" : "load failed") + ": " + swf);
+                Logger.add("[XFW/XfwComponent] onLibLoaded: Mod " + (e.loader ? "loaded" : "load failed") + ": " + swf);
             }
             catch (ex:Error)
             {
@@ -225,7 +237,7 @@ package com.xfw
                         if (loadedList.indexOf(x) < 0)
                         {
                             _loadedUISWFs[x] = XfwConst.SWF_LOAD_ERROR;
-                            Logger.add("WARNING: mod is not loaded: " + x);
+                            Logger.add("[XFW/XfwComponent] checkLoadComplete: WARNING: mod is not loaded: " + x);
                         }
                     }
                 }

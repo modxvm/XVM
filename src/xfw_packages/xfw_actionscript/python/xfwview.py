@@ -20,6 +20,7 @@ from __future__ import absolute_import
 
 import os
 import glob
+import logging
 import traceback
 import itertools
 import weakref
@@ -45,7 +46,7 @@ from xfw.constants import *
 from xfw.logger import *
 
 from . import swf
-from .xfwmodsinfo import xfw_mods_info
+from .swfloadedinfo import swf_loaded_info
 
 _LOG_COMMANDS = [
     COMMAND.XFW_COMMAND_INITIALIZED,
@@ -90,7 +91,8 @@ class _XfwComponent(BaseDAAPIComponent):
             elif cmd == COMMAND.XFW_COMMAND_INITIALIZED:
                 swf.xfwInitialized = True
             elif cmd == COMMAND.XFW_COMMAND_SWF_LOADED:
-                xfw_mods_info.swf_loaded(args[0])
+                logging.info('[XFW/Actionscript] COMMAND_SWF_LOADED: %s' % args[0])
+                swf_loaded_info.swf_loaded_set(args[0])
                 g_eventBus.handleEvent(HasCtxEvent(XFW_EVENT.SWF_LOADED, args[0]))
             elif cmd == COMMAND.XFW_COMMAND_GETMODS:
                 return self.getMods()
@@ -146,8 +148,6 @@ class _XfwComponent(BaseDAAPIComponent):
     # commands handlers
 
     def getMods(self):
-        #log(xfw_mods_info.info)
-        # debug('[XFW] getMods')
         try:
             app = dependency.instance(IAppLoader).getApp(swf.appNS)
             if app is None:
@@ -174,18 +174,22 @@ class _XfwComponent(BaseDAAPIComponent):
             #TODO: process only successful loaded mods
             mods_dir = loader.XFWLOADER_PACKAGES_REALFS
             if not os.path.isdir(mods_dir):
+                logging.warning('[XFW/Actionscript] getMods: directory: %s does not exists' % mods_dir)
                 return None
 
             for as_path in as_paths:
                 files = glob.iglob(u'{}/*/{}/*.swf'.format(mods_dir, as_path))
                 for m in files:
                     m = '%s%s' % (_WOT_ROOT, str(m).replace('\\', '/').replace('//', '/'))
-                    # debug('[XFW] getMods: ' + m)
                     name = os.path.basename(os.path.dirname(os.path.dirname(m)))
                     if not m.lower().endswith('_ui.swf') and not m.lower().endswith('_view.swf'):
-                        xfw_mods_info.update(name, {'swf_file_name':m})
+                        swf_loaded_info.swf_name_set(name, m)
 
-            return xfw_mods_info.info
+            logging.info('[XFW/Actionscript] getMods: found: %s' % swf_loaded_info.swf_name_get_all())
+            return {
+                'names': swf_loaded_info.swf_name_get_all(),
+                'loaded': swf_loaded_info.swf_loaded_get_all()
+            }
 
         except:
             err(traceback.format_exc())

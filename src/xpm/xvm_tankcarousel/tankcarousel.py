@@ -97,7 +97,7 @@ XVM_LOBBY_UI_SWF = 'xvm_lobby_ui.swf'
 @overrideMethod(Hangar, 'as_setCarouselS')
 def _Hangar_as_setCarouselS(base, self, linkage, alias):
     if not isInBootcamp():
-        if xfw_mods_info.loaded_swfs.get(XVM_LOBBY_UI_SWF, 0):
+        if swf_loaded_info.swf_loaded_get(XVM_LOBBY_UI_SWF):
             if linkage == HANGAR_ALIASES.TANK_CAROUSEL_UI:
                 linkage = 'com.xvm.lobby.ui.tankcarousel::UI_TankCarousel'
         else:

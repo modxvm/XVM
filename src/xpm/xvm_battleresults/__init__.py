@@ -20,7 +20,7 @@ from helpers import dependency
 from skeletons.gui.shared import IItemsCache
 
 from xfw import *
-from xfw_actionscript.python import xfw_mods_info
+from xfw_actionscript.python import swf_loaded_info
 
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
@@ -32,7 +32,7 @@ def event_dispatcher_showBattleResultsWindow_proxy(base, arenaUniqueID):
     event_dispatcher_showBattleResultsWindow(base, arenaUniqueID)
 
 def event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, cnt=0):
-    if cnt < 5 and not 'xvm_lobby_ui.swf' in map(str.lower, xfw_mods_info.loaded_swfs):
+    if cnt < 5 and not swf_loaded_info.swf_loaded_get('xvm_lobby_ui.swf'):
         BigWorld.callback(0, lambda: event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, cnt + 1))
     else:
         base(arenaUniqueID)
