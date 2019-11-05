@@ -236,7 +236,7 @@
     "TrainingCrewTooltipBody": "Отображать только технику с экипажем, который обучен менее, чем на 100%.",
     "NoMaster": "Нет мастера",
     "NoMasterTooltipHeader": "Нет мастера",
-    "NoMasterTooltipBody": "Отображать только технику без знаки классности «Мастер».",
+    "NoMasterTooltipBody": "Отображать только технику без знака классности «Мастер».",
     "ReserveFilter": "Резерв",
     "ReserveFilterTooltipHeader": "Резерв",
     "ReserveFilterTooltipBody": "Отображать только резервную технику.",
