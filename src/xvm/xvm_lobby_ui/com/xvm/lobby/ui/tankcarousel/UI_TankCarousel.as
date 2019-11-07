@@ -174,17 +174,12 @@ package com.xvm.lobby.ui.tankcarousel
         // config: "filters"
         private function setupFilters():void
         {
-            // TODO: broken, is required?
-            /*
-            vehicleFilters.validateNow();
             if (!cfg.filters.params.enabled)
-                resetFiltersS();
-            if (!cfg.filters.bonus.enabled)
-                vehicleFilters.bonusFilter.selected = false;
-            if (!cfg.filters.favorite.enabled)
-                vehicleFilters.favoriteFilter.selected = false;
-            call_setVehiclesFilter();
-            */
+            {
+                this.vehicleFilters.listHotFilter.height += vehicleFilters.paramsFilter.height;
+                this.vehicleFilters.listHotFilter.y = vehicleFilters.paramsFilter.y;
+                vehicleFilters.paramsFilter.visible = false;   
+            }
         }
     }
 }
