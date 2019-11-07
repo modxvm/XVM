@@ -4,7 +4,7 @@ import BigWorld
 # Import logger
 from xvm_main.python.logger import *
 
-# Import config. Usage example: config.get('definition/author', 'XVM team')
+# Import config. Usage example: config.get('definition/author', 'XVM Team')
 import xvm_main.python.config as config
 
 from xvm import utils
