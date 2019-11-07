@@ -50,7 +50,7 @@
   "definition": {
     // Config author.
     // Автор конфига.
-    "author": "XVM team",
+    "author": "XVM Team",
 
     // Config description.
     // Описание конфига.
@@ -66,11 +66,11 @@
 
     // The minimum required version of the XVM mod.
     // Минимально необходимая версия мода XVM.
-    "modMinVersion": "8.1.7",
+    "modMinVersion": "8.1.8",
 
     // Config last modified.
     // Дата последней модификации конфига.
-    "date": "03.11.2019"
+    "date": "07.11.2019"
   },
 
   // Parameters for login screen.

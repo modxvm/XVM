@@ -178,7 +178,7 @@ package com.xvm.lobby.ui.tankcarousel
             {
                 this.vehicleFilters.listHotFilter.height += vehicleFilters.paramsFilter.height;
                 this.vehicleFilters.listHotFilter.y = vehicleFilters.paramsFilter.y;
-                vehicleFilters.paramsFilter.visible = false;   
+                vehicleFilters.paramsFilter.visible = false;
             }
         }
     }
