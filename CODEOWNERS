@@ -1,0 +1,21 @@
+* @mixaill @m.schedriviy
+
+/build/* @mixaill @m.schedriviy
+/build/ci/ @mixaill
+
+/build_lib/ @mixaill
+
+/release/audioww/ @mixaill @m.schedriviy
+/release/configs/ @m.schedriviy
+/release/doc/ @mixaill @m.schedriviy
+/release/l10n/ @mixaill
+/release/res/ @m.schedriviy
+
+/src/installer/ @mixaill
+/src/xfw_actionscript/ @m.schedriviy
+/src/xfw_packages/ @mixaill @m.schedriviy
+/src/xfw_swf/ @mixaill @m.schedriviy
+/src/xpm/ @mixaill @m.schedriviy
+/src/xvm/ @m.schedriviy
+
+/utils/ @m.schedriviy
