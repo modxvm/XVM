@@ -25,6 +25,7 @@ from gui.Scaleform.daapi.view.dialogs import SimpleDialogMeta, I18nConfirmDialog
 from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
 import gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers as hangar_cm_handlers
 from gui.Scaleform.daapi.view.lobby.hangar.carousels.basic.carousel_data_provider import CarouselDataProvider, HangarCarouselDataProvider, _SUPPLY_ITEMS
+from gui.Scaleform.daapi.view.lobby.hangar.carousels.basic.tank_carousel import TankCarousel
 from gui.Scaleform.daapi.view.common.vehicle_carousel import carousel_data_provider
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache
@@ -220,6 +221,12 @@ def _carousel_data_provider_isLockedBackground(base, vState, vStateLvl):
     if not config.get('hangar/carousel/enableLockBackground', True):
         return False
     return base(vState, vStateLvl)
+
+# filter visibility
+@registerEvent(TankCarousel, '__init__')
+def _TankCarousel__init__(self):
+    _usedFilters = tuple(_filter for _filter in self._usedFilters if config.get('hangar/carousel/filters/{}/enabled'.format(_filter), True))
+    self._usedFilters = _usedFilters
 
 
 #####################################################################

@@ -3,6 +3,10 @@
   * Переименованы опции в секции "hangar"/"equipmentPanel":
       "showNumberEquipment"  -> "showConsumablesCount"
       "showNumberDirectives" -> "showDirectivesCount"
+  * Восстановлена работа параметров в секции "hangar"/"filters"
+  * Добавлены опции:
+    "hangar"/"filters"/"elite"/"enabled" - показывать/скрыть фильтр "Элитная техника"
+    "hangar"/"filters"/"premium"/"enabled" - показывать/скрыть фильтр "Премиум техника"
 
 XVM-8.1.7:
   [ОБЩЕЕ]
