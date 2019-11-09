@@ -33,8 +33,7 @@ def __showActiveTankmen(base, self, criteria):
     sorting_criteria = cfg_barracks.get('sorting_criteria', False)
     if not sorting_criteria:
         return base(self, criteria)
-    for _criteria in sorting_criteria:
-        _criteria.replace(' ', '')
+    sorting_criteria = [criterion.replace(' ', '') for criterion in sorting_criteria]
     _nations = cfg_barracks.get('nations_order', False)
     if _nations:
         nations_order = {nations.INDICES[name]: idx for idx, name in enumerate(_nations)}
