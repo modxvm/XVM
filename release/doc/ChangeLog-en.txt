@@ -7,6 +7,7 @@
   * Added options:
     "hangar"/"filters"/"elite"/"enabled" - show/hide "Elite Vehicle" filter
     "hangar"/"filters"/"premium"/"enabled" - show/hide "Premium Vehicle" filter
+  * added new feature of sorting tankmen in barracks from config (hangar.xc)
 
 XVM-8.1.7:
   [GENERAL]
