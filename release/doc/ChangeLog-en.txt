@@ -3,11 +3,17 @@
   * Renamed options in the "hangar"/"equipmentPanel" section:
       "showNumberEquipment"  -> "showConsumablesCount"
       "showNumberDirectives" -> "showDirectivesCount"
-  * The functionality in the "hangar"/"filters" section has been restored
+
+  [BARRACKS]
+  * Added new feature of sorting tankmen in barracks from config (hangar.xc)
+  * Added section:
+      "hangar"/"barracks"
+
+  [CAROUSEL]
+  * The functionality in the "carousel"/"filters" section has been restored
   * Added options:
-    "hangar"/"filters"/"elite"/"enabled" - show/hide "Elite Vehicle" filter
-    "hangar"/"filters"/"premium"/"enabled" - show/hide "Premium Vehicle" filter
-  * added new feature of sorting tankmen in barracks from config (hangar.xc)
+      "carousel"/"filters"/"elite"/"enabled" - show/hide "Elite vehicle" filter
+      "carousel"/"filters"/"premium"/"enabled" - show/hide "Premium vehicle" filter
 
 XVM-8.1.7:
   [GENERAL]
