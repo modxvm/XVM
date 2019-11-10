@@ -414,8 +414,8 @@
       "profile": true,                      // Service Record / Достижения
       "PersonalMissionOperationsPage": true // Campaigns      / Кампании
     },
-    // Parameters for barracks.
-    // Параметры казармы.
+    // Parameters of sorting tankmen in barracks.
+    // Параметры сортировки танкистов в казарме.
     "barracks": {
       // Order of nations.
       // Порядок наций.
