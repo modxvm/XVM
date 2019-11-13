@@ -262,7 +262,7 @@ class Xvm(object):
                 return (getCurrentAccountDBID(), True)
 
             if cmd == XVM_COMMAND.GET_PLAYER_NAME:
-                return (avatar_getter.getPlayerName(), True)
+                return (utils.getAccountPlayerName(), True)
 
             if cmd == XVM_COMMAND.GET_PLAYER_CLAN_ID:
                 return (utils.getClanDBID(), True)

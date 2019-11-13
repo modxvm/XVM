@@ -120,6 +120,9 @@ def getAccountDBID():
         accountDBID = userprefs.get('tokens/lastAccountDBID')
     return accountDBID
 
+def getAccountPlayerName():
+    return getattr(BigWorld.player(), 'name', None)
+
 def getClanDBID():
     player = BigWorld.player()
     arena = getattr(player, 'arena', None)
