@@ -15,6 +15,10 @@
       "carousel"/"filters"/"elite"/"enabled" - show/hide "Elite vehicle" filter
       "carousel"/"filters"/"premium"/"enabled" - show/hide "Premium vehicle" filter
 
+  [HITLOG]
+  * Added macro:
+      {{number}} - line number
+      
 XVM-8.1.7:
   [GENERAL]
   * Added option:

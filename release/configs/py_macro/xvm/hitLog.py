@@ -392,7 +392,7 @@ class GroupHit(object):
 
     def __init__(self, section):
         self.section = section
-        self.listLog = []
+        self._listLog = []
         self.numberTopLine = 0
         self.players = {}
         self.countLines = 0
@@ -405,14 +405,13 @@ class GroupHit(object):
         self.ATTACK_REASON_RAM_ID = ATTACK_REASON.getIndex(ATTACK_REASON.RAM)
         self.attackReasonID = 0
         self.damage = 0
-        self.damageRatio = 0
-        self.isGroup = False
+        self.__damageRatio = 0
         self.vehID = 0
-        self.hitLogConfig = {}
+        self.__hitLogConfig = {}
 
     def mouse_wheel(self, isScrollUp):
         if isScrollUp:
-            if self.numberTopLine < len(self.listLog):
+            if self.numberTopLine < len(self._listLog):
                 self.numberTopLine += 1
                 return True
         else:
@@ -434,28 +433,28 @@ class GroupHit(object):
         player['dmg-ratio'] = (player['damage'] * 100 // maxHealth) if maxHealth != 0 else 0
 
     def readyConfig(self):
-        if config.config_autoreload or not self.hitLogConfig:
-            self.hitLogConfig = {
-                'vehicleClass': keyLower(config.get(self.section + 'vtype')),
-                'c_shell': keyLower(config.get(self.section + 'c:costShell')),
-                'costShell': keyLower(config.get(self.section + 'costShell')),
-                'c_dmg-kind': keyLower(config.get(self.section + 'c:dmg-kind')),
-                'c_vehicleClass': keyLower(config.get(self.section + 'c:vtype')),
-                'dmg-kind': keyLower(config.get(self.section + 'dmg-kind')),
-                'dmg-kind-player': keyLower(config.get(self.section + 'dmg-kind-player')),
-                'c_teamDmg': keyLower(config.get(self.section + 'c:team-dmg')),
-                'teamDmg': keyLower(config.get(self.section + 'team-dmg')),
-                'compNames': keyLower(config.get(self.section + 'comp-name')),
-                'typeShell': keyLower(config.get(self.section + 'type-shell')),
-                'c_typeShell': keyLower(config.get(self.section + 'c:type-shell'))
+        if config.config_autoreload or not self.__hitLogConfig:
+            self.__hitLogConfig = {
+                'vehicleClass': keyLower(_config.get(self.section + 'vtype')),
+                'c_shell': keyLower(_config.get(self.section + 'c:costShell')),
+                'costShell': keyLower(_config.get(self.section + 'costShell')),
+                'c_dmg-kind': keyLower(_config.get(self.section + 'c:dmg-kind')),
+                'c_vehicleClass': keyLower(_config.get(self.section + 'c:vtype')),
+                'dmg-kind': keyLower(_config.get(self.section + 'dmg-kind')),
+                'dmg-kind-player': keyLower(_config.get(self.section + 'dmg-kind-player')),
+                'c_teamDmg': keyLower(_config.get(self.section + 'c:team-dmg')),
+                'teamDmg': keyLower(_config.get(self.section + 'team-dmg')),
+                'compNames': keyLower(_config.get(self.section + 'comp-name')),
+                'typeShell': keyLower(_config.get(self.section + 'type-shell')),
+                'c_typeShell': keyLower(_config.get(self.section + 'c:type-shell'))
             }
-        return self.hitLogConfig
+        return self.__hitLogConfig
 
     def setParametrsHitLog(self):
-        self.countLines = len(self.listLog)
+        self.countLines = len(self._listLog)
         self.attackReasonID = g_dataHitLog.data['attackReasonID']
         self.damage = g_dataHitLog.data['damage']
-        self.damageRatio = g_dataHitLog.data['dmgRatio']
+        self.__damageRatio = g_dataHitLog.data['dmgRatio']
         self.vehID = g_dataHitLog.vehicleID
         try:
             macro = {'battletype-key': g_dataHitLog.battletypeKey}
@@ -493,7 +492,7 @@ class GroupHit(object):
 
     def reset(self):
         self.players.clear()
-        self.listLog[:] = []
+        self._listLog[:] = []
         self.numberTopLine = 0
         self.countLines = 0
         self.maxCountLines = None
@@ -505,10 +504,10 @@ class GroupHit(object):
 
     def addPlayer(self):
         return {'dmg-player': self.damage,
-                'dmg-ratio-player': self.damageRatio,
+                'dmg-ratio-player': self.__damageRatio,
                 'n-player': 1,
                 'damage': self.damage,
-                'dmg-ratio': self.damageRatio,
+                'dmg-ratio': self.__damageRatio,
                 'numberLine': 0,
                 'dmg-kind-player': [self.attackReasonID]}
 
@@ -518,15 +517,26 @@ class GroupHitByPlayer(GroupHit):
     CHANGE = 1
     INSERT = 2
 
+    def __init__(self, section):
+        super(GroupHitByPlayer, self).__init__(section)
+        self._listLogNumber = []
+        self.prevLineNumber = 0
+
+    def reset(self):
+        super(GroupHit, self).reset()
+        self._listLogNumber[:] = []
+
     def updateList(self, mode, numberLine=0):
         macros = self.udateMacros()
         formattedString = parser(_config.get(self.S_FORMAT_HISTORY, ''), macros)
         if mode == self.APPEND:
-            self.listLog.append(formattedString)
+            self._listLog.append(formattedString)
+            self._listLogNumber.append('')
         elif mode == self.INSERT:
-            self.listLog.insert(0, formattedString)
+            self._listLog.insert(0, formattedString)
+            self._listLogNumber.insert(0, '')
         else:
-            self.listLog[numberLine] = formattedString
+            self._listLog[numberLine] = formattedString
 
     def updateGroupFireRamming(self, vehicle):
         if self.attackReasonID in [1, 2]:
@@ -544,13 +554,15 @@ class GroupHitByPlayer(GroupHit):
 
     def updatePlayers(self):
         vehicle = self.players[self.vehID]
+        self.prevLineNumber = vehicle['numberLine']
         self.updateGroupFireRamming(vehicle)
         self.sumDmg()
         if self.isAddToEnd:
             if vehicle['numberLine'] == self.countLines - 1:
                 self.updateList(self.CHANGE, vehicle['numberLine'])
             else:
-                self.listLog.pop(vehicle['numberLine'])
+                self._listLog.pop(vehicle['numberLine'])
+                self._listLogNumber.pop(vehicle['numberLine'])
                 for v in self.players.itervalues():
                     if v['numberLine'] > vehicle['numberLine']:
                         v['numberLine'] -= 1
@@ -560,7 +572,8 @@ class GroupHitByPlayer(GroupHit):
             if vehicle['numberLine'] == 0:
                 self.updateList(self.CHANGE)
             else:
-                self.listLog.pop(vehicle['numberLine'])
+                self._listLog.pop(vehicle['numberLine'])
+                self._listLogNumber.pop(vehicle['numberLine'])
                 for v in self.players.itervalues():
                     if v['numberLine'] < vehicle['numberLine']:
                         v['numberLine'] += 1
@@ -582,6 +595,15 @@ class GroupHitByPlayer(GroupHit):
                 v['numberLine'] += 1
             vehicle['numberLine'] = 0
             self.updateList(self.INSERT)
+        self.prevLineNumber = vehicle['numberLine']
+
+    def addLineNumber(self):
+        newLineNumber = self.players[self.vehID]['numberLine']
+        start, finish = (self.prevLineNumber, newLineNumber + 1) if self.prevLineNumber < newLineNumber else (newLineNumber, self.prevLineNumber + 1)
+        length = len(self._listLog)
+        for number in xrange(start, finish):
+            _number = number + 1 if self.isAddToEnd else length - number
+            self._listLogNumber[number] = parser(self._listLog[number], {'number': _number})
 
     def getListLog(self):
         self.setParametrsHitLog()
@@ -591,13 +613,18 @@ class GroupHitByPlayer(GroupHit):
             self.updatePlayers()
         else:
             self.addPlayers()
-        return self.listLog
+        self.addLineNumber()
+        return self._listLogNumber
 
 
 class GroupHitByFireRamming(GroupHit):
 
     DIRECTION_UP = -1
     DIRECTION_DOWN = 1
+
+    def __init__(self, section):
+        super(GroupHitByFireRamming, self).__init__(section)
+        self.isGroup = False
 
     def shiftsLines(self, direction):
         for v in self.players.itervalues():
@@ -608,17 +635,23 @@ class GroupHitByFireRamming(GroupHit):
 
     def udateListLog(self):
         macros = self.udateMacros()
-        formattedString = parser(_config.get(self.S_FORMAT_HISTORY, ''), macros)
         if self.isGroup:
             player = self.players[self.vehID]
-            self.listLog[player[self.attackReasonID]['numberLine']] = formattedString
+            lineNumber = player[self.attackReasonID]['numberLine']
+            macros['number'] = lineNumber + 1 if self.isAddToEnd else len(self._listLog) - lineNumber
+            formattedString = parser(_config.get(self.S_FORMAT_HISTORY, ''), macros)
+            self._listLog[lineNumber] = formattedString
         elif self.isAddToEnd:
             if self.maxCountLines <= self.countLines:
                 self.numberTopLine += 1
-            self.listLog.append(formattedString)
+            macros['number'] = self.countLines + 1
+            formattedString = parser(_config.get(self.S_FORMAT_HISTORY, ''), macros)
+            self._listLog.append(formattedString)
         else:
             self.shiftsLines(self.DIRECTION_DOWN)
-            self.listLog.insert(0, formattedString)
+            macros['number'] = self.countLines + 1
+            formattedString = parser(_config.get(self.S_FORMAT_HISTORY, ''), macros)
+            self._listLog.insert(0, formattedString)
 
     def updateAttackReasonID(self):
         player = self.players[self.vehID]
@@ -652,7 +685,7 @@ class GroupHitByFireRamming(GroupHit):
             return []
         self.updatePlayer()
         self.udateListLog()
-        return self.listLog
+        return self._listLog
 
 
 class HitLog(object):
