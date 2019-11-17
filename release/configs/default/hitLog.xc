@@ -9,6 +9,7 @@
   Macros used in hitLog:
   Макросы используемые в hitLog:
 
+    {{number}}             - line number / номер строки.
     {{dmg}}                - last damage / последний нанесенный урон.
     {{dmg-kind}}           - type of damage / тип нанесенного урона (атака, пожар, таран, ...).
     {{c:dmg-kind}}         - color by damage kind / цвет по типу урона.
