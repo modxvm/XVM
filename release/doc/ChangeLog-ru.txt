@@ -1,4 +1,7 @@
 ﻿XVM-8.1.8:
+  [ОБЩЕЕ]
+  * World of Tanks 1.6.1.4
+
   [АНГАР]
   * Переименованы опции в секции "hangar"/"equipmentPanel":
       "showNumberEquipment"  -> "showConsumablesCount"
@@ -18,7 +21,7 @@
   [ХИТЛОГ]
   * Добавлен макрос:
       {{number}} - номер строки
-      
+
 XVM-8.1.7:
   [ОБЩЕЕ]
   * Добавлена опция:
