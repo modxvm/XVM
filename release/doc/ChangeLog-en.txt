@@ -1,4 +1,7 @@
 ﻿XVM-8.1.8:
+  [GENERAL]
+  * World of Tanks 1.6.1.4
+
   [HANGAR]
   * Renamed options in the "hangar"/"equipmentPanel" section:
       "showNumberEquipment"  -> "showConsumablesCount"
@@ -18,7 +21,7 @@
   [HITLOG]
   * Added macro:
       {{number}} - line number
-      
+
 XVM-8.1.7:
   [GENERAL]
   * Added option:
