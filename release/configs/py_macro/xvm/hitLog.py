@@ -523,7 +523,7 @@ class GroupHitByPlayer(GroupHit):
         self.prevLineNumber = 0
 
     def reset(self):
-        super(GroupHit, self).reset()
+        super(GroupHitByPlayer, self).reset()
         self._listLogNumber[:] = []
 
     def updateList(self, mode, numberLine=0):
