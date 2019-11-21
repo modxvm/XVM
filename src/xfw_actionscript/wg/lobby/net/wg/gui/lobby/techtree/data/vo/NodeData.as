@@ -239,7 +239,7 @@ package net.wg.gui.lobby.techtree.data.vo
         public function get costLabel() : String
         {
             var _loc1_:* = 0;
-            if((this.state & NODE_STATE_FLAGS.LOCKED) > 0 || (this.state & NODE_STATE_FLAGS.NEXT_2_UNLOCK) > 0)
+            if(this.unlockProps != null && ((this.state & NODE_STATE_FLAGS.LOCKED) > 0 || (this.state & NODE_STATE_FLAGS.NEXT_2_UNLOCK) > 0))
             {
                 _loc1_ = this.unlockProps.xpCost;
             }

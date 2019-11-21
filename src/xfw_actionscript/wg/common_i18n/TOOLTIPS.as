@@ -41,6 +41,8 @@ package
 
         public static const ACHIEVEMENT_PARAMS:String = "#tooltips:achievement/params";
 
+        public static const ANONYMIZER_TEAMSTATS:String = "#tooltips:anonymizer/teamStats";
+
         public static const BATTLERESULTS_FORTRESOURCE_TEAMINFLUENCETOTAL:String = "#tooltips:battleResults/FortResource/teamInfluenceTotal";
 
         public static const BATTLERESULTS_FORTRESOURCE_TEAMRESOURCETOTAL:String = "#tooltips:battleResults/FortResource/teamResourceTotal";
@@ -757,6 +759,22 @@ package
 
         public static const SHOWMARKSONGUN_BODY:String = "#tooltips:showMarksOnGun/body";
 
+        public static const ANONYMIZER_HEADER:String = "#tooltips:anonymizer/header";
+
+        public static const ANONYMIZER_BODY_CLAN:String = "#tooltips:anonymizer/body/clan";
+
+        public static const ANONYMIZER_BODY_NOCLAN:String = "#tooltips:anonymizer/body/noClan";
+
+        public static const ANONYMIZER_BODYFOOTER_RESTRICTED:String = "#tooltips:anonymizer/bodyFooter/restricted";
+
+        public static const ANONYMIZER_BODYFOOTER_INBATTLE:String = "#tooltips:anonymizer/bodyFooter/inBattle";
+
+        public static const ANONYMIZER_BODYFOOTER_DEFAULT:String = "#tooltips:anonymizer/bodyFooter/default";
+
+        public static const ANONYMIZER_BATTLE_TEAMLIST_CLAN:String = "#tooltips:anonymizer/battle/teamList/clan";
+
+        public static const ANONYMIZER_BATTLE_TEAMLIST_NOCLAN:String = "#tooltips:anonymizer/battle/teamList/noClan";
+
         public static const C11NHISTORICALLYACCURATE_HEADER:String = "#tooltips:c11nHistoricallyAccurate/header";
 
         public static const C11NHISTORICALLYACCURATE_BODY:String = "#tooltips:c11nHistoricallyAccurate/body";
@@ -1431,6 +1449,20 @@ package
 
         public static const HANGAR_STATUS_TORENT:String = "#tooltips:hangar/status/toRent";
 
+        public static const CREWBUNDLE_HOWTOGET:String = "#tooltips:crewBundle/howToGet";
+
+        public static const CREWBUNDLE_BONUSES:String = "#tooltips:crewBundle/bonuses";
+
+        public static const CREWBUNDLE_BONUS_BASICROLEBOOST_100:String = "#tooltips:crewBundle/bonus/basicRoleBoost_100";
+
+        public static const CREWBUNDLE_BONUS_ANYADDITIONALSKILL:String = "#tooltips:crewBundle/bonus/anyAdditionalSkill";
+
+        public static const CREWBUNDLE_BONUS_SAMEBLOODZEROSKILL:String = "#tooltips:crewBundle/bonus/sameBloodZeroSkill";
+
+        public static const CREWBUNDLE_HEADER_OFFSPRING:String = "#tooltips:crewBundle/header/offspring";
+
+        public static const CREWBUNDLE_HOWTOGET_OFFSPRING:String = "#tooltips:crewBundle/howToGet/offspring";
+
         public static const HANGAR_CREW_RUDY_DOG_USSR_HEADER:String = "#tooltips:hangar/crew/rudy/dog/ussr/header";
 
         public static const HANGAR_CREW_RUDY_DOG_USSR_BODY:String = "#tooltips:hangar/crew/rudy/dog/ussr/body";
@@ -1545,6 +1577,10 @@ package
 
         public static const HANGAR_AMMO_PANEL_BATTLEABILITY_EMPTY_BODY:String = "#tooltips:hangar/ammo_panel/battleAbility/empty/body";
 
+        public static const MODULEFITS_REPLACE:String = "#tooltips:moduleFits/replace";
+
+        public static const MODULEFITS_DISMANTLING:String = "#tooltips:moduleFits/dismantling";
+
         public static const MODULEFITS_CREDITS_ERROR_HEADER:String = "#tooltips:moduleFits/credits_error/header";
 
         public static const MODULEFITS_CREDITS_ERROR_TEXT:String = "#tooltips:moduleFits/credits_error/text";
@@ -1582,8 +1618,6 @@ package
         public static const MODULEFITS_UNLOCK_ERROR_TEXT:String = "#tooltips:moduleFits/unlock_error/text";
 
         public static const MODULEFITS_WRONG_SLOT_BODY:String = "#tooltips:moduleFits/wrong_slot/body";
-
-        public static const MODULEFITS_REPLACE:String = "#tooltips:moduleFits/replace";
 
         public static const MODULEFITS_NOT_WITH_INSTALLED_EQUIPMENT_HEADER:String = "#tooltips:moduleFits/not_with_installed_equipment/header";
 
@@ -1660,6 +1694,10 @@ package
         public static const BATTLEBOOSTER_USELESS_BODY:String = "#tooltips:battleBooster/useless/body";
 
         public static const BATTLEBOOSTER_REPLACE:String = "#tooltips:battleBooster/replace";
+
+        public static const BATTLEBOOSTER_BUY_USELESS_UPPER_DESCRIPTION:String = "#tooltips:battleBooster/buy/useless/upper_description";
+
+        public static const BATTLEBOOSTER_BUY_USELESS_LOWER_DESCRIPTION:String = "#tooltips:battleBooster/buy/useless/lower_description";
 
         public static const TANKS_CAROUSEL_BUY_VEHICLE_HEADER:String = "#tooltips:tanks_carousel/buy_vehicle/header";
 
@@ -1884,10 +1922,6 @@ package
         public static const HEADER_BUTTONS_BROWSER_HEADER:String = "#tooltips:header/buttons/browser/header";
 
         public static const HEADER_BUTTONS_BROWSER_BODY:String = "#tooltips:header/buttons/browser/body";
-
-        public static const HEADER_BUTTONS_ENCYCLOPEDIA_HEADER:String = "#tooltips:header/buttons/encyclopedia/header";
-
-        public static const HEADER_BUTTONS_ENCYCLOPEDIA_BODY:String = "#tooltips:header/buttons/encyclopedia/body";
 
         public static const HEADER_BUTTONS_MANUAL_HEADER:String = "#tooltips:header/buttons/manual/header";
 
@@ -2194,6 +2228,10 @@ package
         public static const VEHICLE_TRADE:String = "#tooltips:vehicle/trade";
 
         public static const VEHICLE_DEAL_EPIC_MAIN:String = "#tooltips:vehicle/deal/epic/main";
+
+        public static const ANONYMIZER_TEAMSTATS_HEADER:String = "#tooltips:anonymizer/teamStats/header";
+
+        public static const ANONYMIZER_TEAMSTATS_BODY:String = "#tooltips:anonymizer/teamStats/body";
 
         public static const BUYSKILL_FULLY:String = "#tooltips:buySkill/fully";
 
@@ -3799,6 +3837,8 @@ package
 
         public static const TANK_PARAMS_DESC_STUNMAXDURATION:String = "#tooltips:tank_params/desc/stunMaxDuration";
 
+        public static const TANK_PARAMS_DESC_CHARGETIME:String = "#tooltips:tank_params/desc/chargeTime";
+
         public static const VEHICLEPARAMS_TITLE_VALUETEMPLATE:String = "#tooltips:vehicleParams/title/valueTemplate";
 
         public static const VEHICLEPARAMS_POSSIBLEBONUSES_DESC:String = "#tooltips:vehicleParams/possibleBonuses/desc";
@@ -4068,6 +4108,10 @@ package
         public static const SETTINGS_KEYFOLLOWME_TITLE:String = "#tooltips:settings/keyFollowMe/title";
 
         public static const SETTINGS_KEYMOVEMENT_TITLE:String = "#tooltips:settings/keyMovement/title";
+
+        public static const SETTINGS_KEYCHARGEFIRE_TITLE:String = "#tooltips:settings/keyChargeFire/title";
+
+        public static const SETTINGS_KEYCHARGEFIRE_DEFAULTKEY:String = "#tooltips:settings/keyChargeFire/defaultKey";
 
         public static const SETTINGS_SUPPORT_SUBTITLE:String = "#tooltips:settings/support/subtitle";
 
@@ -4398,6 +4442,8 @@ package
         public static const ADVANCED_FILTERCYCLONE:String = "#tooltips:advanced/filterCyclone";
 
         public static const ADVANCED_VEHICLEGUN:String = "#tooltips:advanced/vehicleGun";
+
+        public static const ADVANCED_VEHICLEDUALGUN:String = "#tooltips:advanced/vehicleDualGun";
 
         public static const ADVANCED_VEHICLERADIO:String = "#tooltips:advanced/vehicleRadio";
 
@@ -5363,6 +5409,8 @@ package
 
         public static const NOTRECRUITEDTANKMAN_USEBEFORE:String = "#tooltips:notrecruitedtankman/useBefore";
 
+        public static const NOTRECRUITEDTANKMAN_BASE_EVENT:String = "#tooltips:notrecruitedtankman/base/event";
+
         public static const NOTRECRUITEDTANKMAN_BASE_LABEL:String = "#tooltips:notrecruitedtankman/base/label";
 
         public static const NOTRECRUITEDTANKMAN_BASE_DESC:String = "#tooltips:notrecruitedtankman/base/desc";
@@ -5375,6 +5423,8 @@ package
 
         public static const NOTRECRUITEDTANKMAN_TANKWOMAN_DESC:String = "#tooltips:notrecruitedtankman/tankwoman/desc";
 
+        public static const NOTRECRUITEDTANKMAN_CZECH_WOMAN_EVENT:String = "#tooltips:notrecruitedtankman/czech_woman/event";
+
         public static const NOTRECRUITEDTANKMAN_CZECH_WOMAN_LABEL:String = "#tooltips:notrecruitedtankman/czech_woman/label";
 
         public static const NOTRECRUITEDTANKMAN_CZECH_WOMAN_DESC:String = "#tooltips:notrecruitedtankman/czech_woman/desc";
@@ -5382,6 +5432,8 @@ package
         public static const NOTRECRUITEDTANKMAN_TANKMAN_LABEL:String = "#tooltips:notrecruitedtankman/tankman/label";
 
         public static const NOTRECRUITEDTANKMAN_TANKMAN_DESC:String = "#tooltips:notrecruitedtankman/tankman/desc";
+
+        public static const NOTRECRUITEDTANKMAN_TANKMAN_HOWTOGETINFO:String = "#tooltips:notrecruitedtankman/tankman/howToGetInfo";
 
         public static const NOTRECRUITEDTANKMAN_TWITCH1_LABEL:String = "#tooltips:notrecruitedtankman/twitch1/label";
 
@@ -5402,6 +5454,10 @@ package
         public static const NOTRECRUITEDTANKMAN_TWITCH6_LABEL:String = "#tooltips:notrecruitedtankman/twitch6/label";
 
         public static const NOTRECRUITEDTANKMAN_TWITCH6_DESC:String = "#tooltips:notrecruitedtankman/twitch6/desc";
+
+        public static const NOTRECRUITEDTANKMAN_TWITCH7_LABEL:String = "#tooltips:notrecruitedtankman/twitch7/label";
+
+        public static const NOTRECRUITEDTANKMAN_TWITCH7_DESC:String = "#tooltips:notrecruitedtankman/twitch7/desc";
 
         public static const NOTRECRUITEDTANKMAN_NY19MEN_LABEL:String = "#tooltips:notrecruitedtankman/ny19men/label";
 
@@ -5440,6 +5496,10 @@ package
         public static const NOTRECRUITEDTANKMAN_COMMANDER_MARINA_LABEL:String = "#tooltips:notrecruitedtankman/commander_marina/label";
 
         public static const NOTRECRUITEDTANKMAN_COMMANDER_MARINA_DESC:String = "#tooltips:notrecruitedtankman/commander_marina/desc";
+
+        public static const NOTRECRUITEDTANKMAN_COMMANDER_PATRICK_LABEL:String = "#tooltips:notrecruitedtankman/commander_patrick/label";
+
+        public static const NOTRECRUITEDTANKMAN_COMMANDER_PATRICK_DESC:String = "#tooltips:notrecruitedtankman/commander_patrick/desc";
 
         public static const QUESTS_AWARDS_VEHICLERENT_HEADER:String = "#tooltips:quests/awards/vehicleRent/header";
 

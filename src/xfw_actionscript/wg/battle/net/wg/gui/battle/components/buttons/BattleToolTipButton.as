@@ -9,6 +9,8 @@ package net.wg.gui.battle.components.buttons
 
         protected var _isAllowedToShowTooltipOnDisabled:Boolean = false;
 
+        protected var _hideToolTipOnClickActions:Boolean = true;
+
         protected var _tooltipStr:String = "";
 
         public function BattleToolTipButton()
@@ -18,19 +20,19 @@ package net.wg.gui.battle.components.buttons
 
         override protected function invokeReleaseOutsideActions() : void
         {
-            this.hideTooltip();
+            this.tryToHideTooltip();
             super.invokeReleaseOutsideActions();
         }
 
         override protected function invokeReleaseActions() : void
         {
-            this.hideTooltip();
+            this.tryToHideTooltip();
             super.invokeReleaseActions();
         }
 
         override protected function invokePressActions() : void
         {
-            this.hideTooltip();
+            this.tryToHideTooltip();
             super.invokePressActions();
         }
 
@@ -49,7 +51,15 @@ package net.wg.gui.battle.components.buttons
             super.invokeRollOverActions();
         }
 
-        public function hideTooltip() : void
+        private function tryToHideTooltip() : void
+        {
+            if(this.hideToolTipOnClickActions)
+            {
+                this.hideTooltip();
+            }
+        }
+
+        private function hideTooltip() : void
         {
             if(this._isTooltipVisible)
             {
@@ -58,7 +68,7 @@ package net.wg.gui.battle.components.buttons
             }
         }
 
-        protected function showTooltip() : void
+        private function showTooltip() : void
         {
             if(!this._isTooltipVisible)
             {
@@ -96,6 +106,16 @@ package net.wg.gui.battle.components.buttons
         private function get allowShowTooltip() : Boolean
         {
             return this.isAllowedToShowToolTipOnDisabledState?true:enabled;
+        }
+
+        public function get hideToolTipOnClickActions() : Boolean
+        {
+            return this._hideToolTipOnClickActions;
+        }
+
+        public function set hideToolTipOnClickActions(param1:Boolean) : void
+        {
+            this._hideToolTipOnClickActions = param1;
         }
     }
 }

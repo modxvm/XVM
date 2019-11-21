@@ -1461,6 +1461,10 @@ package
 
         public static const CAMOUFLAGE_T_OCTOBER_DESCRIPTION:String = "#vehicle_customization:camouflage/t_october/description";
 
+        public static const CAMOUFLAGE_HALLOWEEN_2019_EVENT_REWARD_LABEL:String = "#vehicle_customization:camouflage/halloween_2019_event_reward/label";
+
+        public static const CAMOUFLAGE_HALLOWEEN_2019_EVENT_REWARD_DESCRIPTION:String = "#vehicle_customization:camouflage/halloween_2019_event_reward/description";
+
         public static const EMBLEM:String = "#vehicle_customization:emblem";
 
         public static const EMBLEM_CLAN_CONTENT:String = "#vehicle_customization:emblem/clan_content";
@@ -2612,6 +2616,12 @@ package
         public static const EMBLEM_SPECIAL_STICKER_514:String = "#vehicle_customization:emblem/special/sticker_514";
 
         public static const EMBLEM_SPECIAL_STICKER_515:String = "#vehicle_customization:emblem/special/sticker_515";
+
+        public static const EMBLEM_SPECIAL_STICKER_516:String = "#vehicle_customization:emblem/special/sticker_516";
+
+        public static const EMBLEM_SPECIAL_STICKER_518:String = "#vehicle_customization:emblem/special/sticker_518";
+
+        public static const EMBLEM_SPECIAL_STICKER_519:String = "#vehicle_customization:emblem/special/sticker_519";
 
         public static const INSCRIPTION:String = "#vehicle_customization:inscription";
 
@@ -4901,6 +4911,8 @@ package
 
         public static const REPAINT_T_OCTOBER:String = "#vehicle_customization:repaint/t_october";
 
+        public static const REPAINT_HALLOWEEN_2019:String = "#vehicle_customization:repaint/halloween_2019";
+
         public static const MODIFICATIONS_AGE_EFFECT_01:String = "#vehicle_customization:modifications/age_effect_01";
 
         public static const MODIFICATIONS_AGE_EFFECT_01_DESCRIPTION:String = "#vehicle_customization:modifications/age_effect_01/description";
@@ -5293,6 +5305,10 @@ package
 
         public static const SPECIAL_STYLE_COSMONAUTICS_DAY_DESC:String = "#vehicle_customization:special_style/cosmonautics_day_desc";
 
+        public static const SPECIAL_STYLE_BURNOUT:String = "#vehicle_customization:special_style/burnout";
+
+        public static const SPECIAL_STYLE_BURNOUT_DESC:String = "#vehicle_customization:special_style/burnout_desc";
+
         public static const SPECIAL_STYLE_KINGTIGER:String = "#vehicle_customization:special_style/kingtiger";
 
         public static const SPECIAL_STYLE_KINGTIGER_DESC:String = "#vehicle_customization:special_style/kingtiger_desc";
@@ -5541,6 +5557,10 @@ package
 
         public static const SPECIAL_STYLE_RACING_2019_TEAM_B:String = "#vehicle_customization:special_style/racing_2019_team_b";
 
+        public static const MAIN_STYLE_HALLOWEEN_2019_3DST:String = "#vehicle_customization:main_style/Halloween_2019_3Dst";
+
+        public static const MAIN_STYLE_HALLOWEEN_2019_3DST_DESC:String = "#vehicle_customization:main_style/Halloween_2019_3Dst_desc";
+
         public static const SPECIAL_STYLE_RACING_2019_TEAM_B_DESC:String = "#vehicle_customization:special_style/racing_2019_team_b_desc";
 
         public static const SPECIAL_STYLE_RACING_2019_TEAM_A:String = "#vehicle_customization:special_style/racing_2019_team_a";
@@ -5619,6 +5639,10 @@ package
 
         public static const MAIN_STYLE_HISTORICAL_CUSTOM_LOOK_KOREA_DESC:String = "#vehicle_customization:main_style/historical_custom_look_korea_desc";
 
+        public static const MAIN_STYLE_GB83_FV4005_3DST:String = "#vehicle_customization:main_style/GB83_FV4005_3Dst";
+
+        public static const MAIN_STYLE_GB83_FV4005_3DST_DESC:String = "#vehicle_customization:main_style/GB83_FV4005_3Dst_desc";
+
         public static const SPECIAL_STYLE_T_OCTOBER:String = "#vehicle_customization:special_style/t_october";
 
         public static const SPECIAL_STYLE_T_OCTOBER_DESC:String = "#vehicle_customization:special_style/t_october_desc";
@@ -5626,6 +5650,50 @@ package
         public static const MAIN_STYLE_A127_TL_1_LPC_3DST_OFFSPRING:String = "#vehicle_customization:main_style/A127_TL_1_LPC_3Dst_Offspring";
 
         public static const MAIN_STYLE_A127_TL_1_LPC_3DST_OFFSPRING_DESC:String = "#vehicle_customization:main_style/A127_TL_1_LPC_3Dst_Offspring_desc";
+
+        public static const MAIN_STYLE_A66_M103_HALLOWEEN_3DST:String = "#vehicle_customization:main_style/A66_M103_Halloween_3Dst";
+
+        public static const MAIN_STYLE_A66_M103_HALLOWEEN_3DST_DESC:String = "#vehicle_customization:main_style/A66_M103_Halloween_3Dst_desc";
+
+        public static const MAIN_STYLE_A100_T49_HALLOWEEN_3DST:String = "#vehicle_customization:main_style/A100_T49_Halloween_3Dst";
+
+        public static const MAIN_STYLE_A100_T49_HALLOWEEN_3DST_DESC:String = "#vehicle_customization:main_style/A100_T49_Halloween_3Dst_desc";
+
+        public static const MAIN_STYLE_GB24_CENTURION_MK3_HALLOWEEN_3DST:String = "#vehicle_customization:main_style/GB24_Centurion_Mk3_Halloween_3Dst";
+
+        public static const MAIN_STYLE_GB24_CENTURION_MK3_HALLOWEEN_3DST_DESC:String = "#vehicle_customization:main_style/GB24_Centurion_Mk3_Halloween_3Dst_desc";
+
+        public static const MAIN_STYLE_F17_AMX_13_90_HALLOWEEN_3DST:String = "#vehicle_customization:main_style/F17_AMX_13_90_Halloween_3Dst";
+
+        public static const MAIN_STYLE_F17_AMX_13_90_HALLOWEEN_3DST_DESC:String = "#vehicle_customization:main_style/F17_AMX_13_90_Halloween_3Dst_desc";
+
+        public static const MAIN_STYLE_R40_T_54_HALLOWEEN_3DST:String = "#vehicle_customization:main_style/R40_T-54_Halloween_3Dst";
+
+        public static const MAIN_STYLE_R40_T_54_HALLOWEEN_3DST_DESC:String = "#vehicle_customization:main_style/R40_T-54_Halloween_3Dst_desc";
+
+        public static const MAIN_STYLE_R159_SU_130PM_3DST_10_ADDITIONAL_FULL3D:String = "#vehicle_customization:main_style/R159_SU_130PM_3Dst_10_additional_FULL3D";
+
+        public static const MAIN_STYLE_R159_SU_130PM_3DST_10_ADDITIONAL_FULL3D_DESC:String = "#vehicle_customization:main_style/R159_SU_130PM_3Dst_10_additional_FULL3D_desc";
+
+        public static const SPECIAL_STYLE_HALLOWEEN_2019_EVENT_REWARD:String = "#vehicle_customization:special_style/halloween_2019_event_reward";
+
+        public static const SPECIAL_STYLE_HALLOWEEN_2019_EVENT_REWARD_DESC:String = "#vehicle_customization:special_style/halloween_2019_event_reward_desc";
+
+        public static const MAIN_STYLE_IT08_PROGETTO_M40_MOD_65_3DST:String = "#vehicle_customization:main_style/It08_Progetto_M40_mod_65_3Dst";
+
+        public static const MAIN_STYLE_IT08_PROGETTO_M40_MOD_65_3DST_DESC:String = "#vehicle_customization:main_style/It08_Progetto_M40_mod_65_3Dst_desc";
+
+        public static const MAIN_STYLE_R132_VNII_100LT_3DST:String = "#vehicle_customization:main_style/R132_VNII_100LT_3Dst";
+
+        public static const MAIN_STYLE_R132_VNII_100LT_3DST_DESC:String = "#vehicle_customization:main_style/R132_VNII_100LT_3Dst_desc";
+
+        public static const MAIN_STYLE_R148_OBJECT_430_U_3DST:String = "#vehicle_customization:main_style/R148_Object_430_U_3Dst";
+
+        public static const MAIN_STYLE_R148_OBJECT_430_U_3DST_DESC:String = "#vehicle_customization:main_style/R148_Object_430_U_3Dst_desc";
+
+        public static const MAIN_STYLE_R95_OBJECT_907_STOCK_3DST:String = "#vehicle_customization:main_style/R95_Object_907_stock_3Dst";
+
+        public static const MAIN_STYLE_R95_OBJECT_907_STOCK_3DST_DESC:String = "#vehicle_customization:main_style/R95_Object_907_stock_3Dst_desc";
 
         public static const CUSTOMIZATION_POPOVER_STYLE_SUMMER:String = "#vehicle_customization:customization/popover/style/summer";
 
@@ -6408,6 +6476,8 @@ package
         public static const NOTIFICATION_SLOTISFILLED_TITLE:String = "#vehicle_customization:notification/slotIsFilled/title";
 
         public static const CAROUSEL_MESSAGE_PROPERTYSHEET:String = "#vehicle_customization:carousel/message/propertysheet";
+
+        public static const SEQUENCE_GENERAL:String = "#vehicle_customization:sequence/general";
 
         public function VEHICLE_CUSTOMIZATION()
         {

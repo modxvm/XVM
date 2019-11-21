@@ -32,6 +32,8 @@ package net.wg.gui.lobby.settings.components
 
         private static const SHOW_DELAY:int = 1500;
 
+        private static const INVALID_KEYS:String = "invalidKeys";
+
         public var alert:UIComponent;
 
         public var bg:MovieClip;
@@ -97,7 +99,27 @@ package net.wg.gui.lobby.settings.components
                 textField.text = this._keyString || Values.EMPTY_STR;
                 this.alert.visible = this._keyCode == KeyProps.KEY_NONE && !selected;
             }
+            if(this._keys && isInvalid(INVALID_KEYS))
+            {
+                this.__keysToUpperCase();
+            }
             super.draw();
+        }
+
+        public function setupKey(param1:Array, param2:Number) : void
+        {
+            this._keys = param1;
+            this.__keysToUpperCase();
+            this._keyString = App.utils.commons.keyToString(param2).keyName;
+            var _loc3_:KeyProps = App.utils.commons.keyToString(param2);
+            if(this.__isInKeySet(_loc3_.keyCommand))
+            {
+                this.key = param2;
+            }
+            else
+            {
+                this.key = KeyProps.KEY_NONE;
+            }
         }
 
         private function __keysToUpperCase() : void
@@ -147,7 +169,7 @@ package net.wg.gui.lobby.settings.components
             {
                 _loc3_ = parent.localToGlobal(new Point(x + width,y - height - 7));
                 _loc4_ = new TooltipProps(BaseTooltips.TYPE_WARNING,_loc3_.x,_loc3_.y,0,0,SHOW_DELAY);
-                _loc5_ = App.utils.locale.makeString(this._alertMessageAlias,{"keyName":_loc2_.keyCommand});
+                _loc5_ = App.utils.locale.makeString(this._alertMessageAlias,{"keyName":_loc2_.keyName});
                 _loc6_ = App.textMgr.getTextStyleById(TEXT_MANAGER_STYLES.ALERT_TEXT,_loc5_);
                 App.toolTipMgr.show(_loc6_,_loc4_);
                 this.__inputClose();
@@ -213,7 +235,7 @@ package net.wg.gui.lobby.settings.components
         public function set keys(param1:Array) : void
         {
             this._keys = param1;
-            this.__keysToUpperCase();
+            invalidate(INVALID_KEYS);
         }
 
         public function get alertMessageAlias() : String

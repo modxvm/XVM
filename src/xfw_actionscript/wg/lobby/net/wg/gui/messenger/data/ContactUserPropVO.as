@@ -10,6 +10,8 @@ package net.wg.gui.messenger.data
 
         private static const TAGS_LBL:String = "tags";
 
+        private var _fakeName:String = "";
+
         private var _userName:String = "";
 
         private var _clanAbbrev:String = "";
@@ -78,6 +80,16 @@ package net.wg.gui.messenger.data
             this._tags.splice(0,this.tags.length);
             this._tags = null;
             super.onDispose();
+        }
+
+        public function get fakeName() : String
+        {
+            return this._fakeName;
+        }
+
+        public function set fakeName(param1:String) : void
+        {
+            this._fakeName = param1;
         }
 
         public function get userName() : String
@@ -203,6 +215,11 @@ package net.wg.gui.messenger.data
         public function set isTeamKiller(param1:Boolean) : void
         {
             this._isTeamKiller = param1;
+        }
+
+        public function get isAnonymized() : Boolean
+        {
+            return this._fakeName && this._fakeName != this._userName;
         }
     }
 }

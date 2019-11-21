@@ -121,7 +121,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             this._listItem.setVehicleIcon(this._vehicleData.vehicleIconName);
             this._listItem.setVehicleName(this._vehicleData.vehicleName);
             this._listItem.setBadge(this._vehicleData.badgeType);
-            this._listItem.dynamicSquad.setUID(this._vehicleData.accountDBID);
+            this._listItem.dynamicSquad.setSessionID(this._vehicleData.sessionID);
             this.applyVehicleStatus();
             this.applyPlayerStatus();
             this.applyUserTags();
@@ -171,11 +171,12 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
         {
             if(!this._userProps)
             {
-                this._userProps = new StatsUserProps(this._vehicleData.playerName,this._vehicleData.clanAbbrev,this._vehicleData.region,0,this._vehicleData.userTags);
+                this._userProps = new StatsUserProps(this._vehicleData.playerName,this._vehicleData.playerFakeName,this._vehicleData.clanAbbrev,this._vehicleData.region,0,this._vehicleData.userTags);
             }
             else
             {
                 this._userProps.userName = this._vehicleData.playerName;
+                this._userProps.fakeName = this._vehicleData.playerFakeName;
                 this._userProps.clanAbbrev = this._vehicleData.clanAbbrev;
                 this._userProps.region = this._vehicleData.region;
                 this._userProps.tags = this._vehicleData.userTags;
@@ -226,11 +227,6 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
         public function get isCurrentPlayer() : Boolean
         {
             return this._isCurrPlayer;
-        }
-
-        public function get accDBID() : Number
-        {
-            return this._vehicleData?this._vehicleData.accountDBID:NaN;
         }
     }
 }

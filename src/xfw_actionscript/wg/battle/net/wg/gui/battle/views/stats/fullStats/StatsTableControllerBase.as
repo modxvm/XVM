@@ -2,9 +2,9 @@ package net.wg.gui.battle.views.stats.fullStats
 {
     import net.wg.gui.battle.interfaces.IStatsTableController;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
+    import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
     import net.wg.gui.battle.battleloading.data.VehiclesDataProvider;
     import net.wg.infrastructure.events.ListDataProviderEvent;
-    import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
     import net.wg.data.VO.daapi.DAAPIVehicleUserTagsVO;
     import net.wg.infrastructure.exceptions.AbstractException;
     import net.wg.data.constants.Errors;
@@ -16,7 +16,7 @@ package net.wg.gui.battle.views.stats.fullStats
 
         protected var numRows:int = 15;
 
-        private var _isRenderingAvailable:Boolean;
+        protected var currentPlayerVO:DAAPIVehicleInfoVO;
 
         protected var _teamDP:VehiclesDataProvider;
 
@@ -25,6 +25,8 @@ package net.wg.gui.battle.views.stats.fullStats
         protected var _allyRenderers:Vector.<StatsTableItemHolderBase>;
 
         protected var _enemyRenderers:Vector.<StatsTableItemHolderBase>;
+
+        private var _isRenderingAvailable:Boolean;
 
         public function StatsTableControllerBase()
         {
@@ -43,17 +45,38 @@ package net.wg.gui.battle.views.stats.fullStats
             var _loc5_:StatsTableItemHolderBase = null;
             var _loc2_:uint = this._allyRenderers.length - 1;
             var _loc3_:Vector.<int> = Vector.<int>(param1.data);
+            if(this.currentPlayerVO == null)
+            {
+                this.updateCurrentPlayerVO(_loc3_);
+            }
             for each(_loc4_ in _loc3_)
             {
                 if(_loc4_ <= _loc2_)
                 {
                     _loc5_ = this._allyRenderers[_loc4_];
                     _loc5_.setDAAPIVehicleData(this._teamDP.requestItemAt(_loc4_) as DAAPIVehicleInfoVO);
+                    if(this.currentPlayerVO)
+                    {
+                        _loc5_.setCurrentPlayerData(this.currentPlayerVO);
+                    }
                     if(_loc5_.isSelected)
                     {
                         this.setSelectedItem(false,_loc4_);
                     }
                     this.onItemDataSet(_loc5_,false);
+                }
+            }
+        }
+
+        private function updateCurrentPlayerVO(param1:Vector.<int>) : void
+        {
+            var _loc2_:* = 0;
+            for each(_loc2_ in param1)
+            {
+                this.currentPlayerVO = this._teamDP.requestItemAt(_loc2_) as DAAPIVehicleInfoVO;
+                if(this.currentPlayerVO.isCurrentPlayer)
+                {
+                    break;
                 }
             }
         }

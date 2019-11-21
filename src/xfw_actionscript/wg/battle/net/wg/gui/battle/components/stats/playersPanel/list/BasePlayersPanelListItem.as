@@ -19,6 +19,7 @@ package net.wg.gui.battle.components.stats.playersPanel.list
     import net.wg.data.constants.generated.PLAYERS_PANEL_STATE;
     import net.wg.gui.battle.views.stats.constants.PlayerStatusSchemeName;
     import net.wg.infrastructure.interfaces.IColorScheme;
+    import net.wg.gui.battle.random.views.stats.components.playersPanel.list.PlayersPanelDynamicSquad;
 
     public class BasePlayersPanelListItem extends BattleUIComponent implements IPlayersPanelListItem
     {
@@ -412,7 +413,7 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             if(this._userProps)
             {
                 this._commons.truncateTextFieldText(this.playerNameCutTF,this._userProps.userName);
-                this._commons.formatPlayerName(this.playerNameFullTF,this._userProps);
+                this._commons.formatPlayerName(this.playerNameFullTF,this._userProps,!this._isCurrentPlayer,this._isCurrentPlayer);
             }
             this.updatePositions();
         }
@@ -421,7 +422,7 @@ package net.wg.gui.battle.components.stats.playersPanel.list
         {
             this._userProps = param1;
             this._commons.truncateTextFieldText(this.playerNameCutTF,param1.userName);
-            this._commons.formatPlayerName(this.playerNameFullTF,param1);
+            this._commons.formatPlayerName(this.playerNameFullTF,this._userProps,!this._isCurrentPlayer,this._isCurrentPlayer);
         }
 
         public function setState(param1:uint) : void
@@ -854,6 +855,11 @@ package net.wg.gui.battle.components.stats.playersPanel.list
         public function get holderItemID() : uint
         {
             return this._holderItemID;
+        }
+
+        public function getDynamicSquad() : PlayersPanelDynamicSquad
+        {
+            return null;
         }
 
         public function set holderItemID(param1:uint) : void

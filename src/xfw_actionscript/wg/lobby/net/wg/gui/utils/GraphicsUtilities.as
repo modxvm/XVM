@@ -52,5 +52,30 @@ package net.wg.gui.utils
                 }
             }
         }
+
+        public static function drawDashedArc(param1:Graphics, param2:Number, param3:Number, param4:Number, param5:Number, param6:Number, param7:Number, param8:Number) : void
+        {
+            var _loc9_:* = NaN;
+            var _loc10_:* = NaN;
+            var _loc15_:uint = 0;
+            var _loc16_:* = NaN;
+            _loc9_ = Math.abs(param5);
+            _loc10_ = param7 + param8;
+            var _loc11_:Number = Math.ceil(_loc9_ / _loc10_);
+            var _loc12_:Number = Math.min(param7,_loc9_ % _loc10_);
+            var _loc13_:int = _loc9_ / param5;
+            var _loc14_:Number = param4;
+            if(_loc11_ > 0)
+            {
+                _loc15_ = 0;
+                while(_loc15_ < _loc11_)
+                {
+                    _loc16_ = _loc15_ == _loc11_ - 1?_loc12_:param7;
+                    drawArc(param1,param2,param3,_loc14_,_loc13_ * _loc16_,param6);
+                    _loc14_ = _loc14_ + _loc13_ * _loc10_;
+                    _loc15_++;
+                }
+            }
+        }
     }
 }

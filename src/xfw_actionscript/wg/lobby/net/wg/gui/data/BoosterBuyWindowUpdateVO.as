@@ -37,7 +37,7 @@ package net.wg.gui.data
 
         override protected function onDataWrite(param1:String, param2:Object) : Boolean
         {
-            if(param1 == FIELD_ACTION_PRICE_DATA)
+            if(param1 == FIELD_ACTION_PRICE_DATA && param2 != null)
             {
                 this.actionPriceData = new ActionPriceVO(param2);
                 return false;

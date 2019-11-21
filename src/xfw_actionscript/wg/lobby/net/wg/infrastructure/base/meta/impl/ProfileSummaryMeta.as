@@ -8,8 +8,6 @@ package net.wg.infrastructure.base.meta.impl
     public class ProfileSummaryMeta extends ProfileAchievementsSection
     {
 
-        public var getPersonalScoreWarningText:Function;
-
         public var getGlobalRating:Function;
 
         private var _profileUserVO:ProfileUserVO;
@@ -27,12 +25,6 @@ package net.wg.infrastructure.base.meta.impl
                 this._profileUserVO = null;
             }
             super.onDispose();
-        }
-
-        public function getPersonalScoreWarningTextS(param1:Object) : String
-        {
-            App.utils.asserter.assertNotNull(this.getPersonalScoreWarningText,"getPersonalScoreWarningText" + Errors.CANT_NULL);
-            return this.getPersonalScoreWarningText(param1);
         }
 
         public function getGlobalRatingS(param1:String) : Number

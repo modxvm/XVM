@@ -7,7 +7,7 @@ package net.wg.infrastructure.base.meta
 
         function setDialogSettingsS(param1:Boolean) : void;
 
-        function sellS(param1:Object, param2:Array, param3:Array, param4:Array, param5:Array, param6:Array, param7:Boolean) : void;
+        function sellS(param1:Object, param2:Array, param3:Array, param4:Array, param5:Array, param6:Array, param7:Array, param8:Boolean) : void;
 
         function setUserInputS(param1:String) : void;
 

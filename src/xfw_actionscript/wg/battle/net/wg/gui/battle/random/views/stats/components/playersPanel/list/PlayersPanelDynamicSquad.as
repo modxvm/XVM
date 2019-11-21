@@ -48,7 +48,11 @@ package net.wg.gui.battle.random.views.stats.components.playersPanel.list
 
         private var _isEnemy:Boolean = false;
 
-        private var _uid:Number = NaN;
+        private var _sessionID:String = "";
+
+        private var _isCurrentPlayerAnonymized:Boolean = false;
+
+        private var _isCurrentPlayerInClan:Boolean = false;
 
         public function PlayersPanelDynamicSquad()
         {
@@ -133,9 +137,19 @@ package net.wg.gui.battle.random.views.stats.components.playersPanel.list
             this._isEnemy = param1;
         }
 
-        public function setUID(param1:Number) : void
+        public function setSessionID(param1:String) : void
         {
-            this._uid = param1;
+            this._sessionID = param1;
+        }
+
+        public function setCurrentPlayerAnonymized() : void
+        {
+            this._isCurrentPlayerAnonymized = true;
+        }
+
+        public function setIsCurrentPlayerInClan(param1:Boolean) : void
+        {
+            this._isCurrentPlayerInClan = param1;
         }
 
         override protected function configUI() : void
@@ -173,6 +187,8 @@ package net.wg.gui.battle.random.views.stats.components.playersPanel.list
             this.squadAddBt = null;
             this.noSound = null;
             this._tooltip = null;
+            this._isCurrentPlayerAnonymized = false;
+            this._isCurrentPlayerInClan = false;
             super.onDispose();
         }
 
@@ -208,16 +224,16 @@ package net.wg.gui.battle.random.views.stats.components.playersPanel.list
         {
             if(param1.name == this.squadAcceptBt.name)
             {
-                if(!isNaN(this._uid))
+                if(this._sessionID)
                 {
-                    dispatchEvent(new DynamicSquadEvent(DynamicSquadEvent.ACCEPT,this._uid,true));
+                    dispatchEvent(new DynamicSquadEvent(DynamicSquadEvent.ACCEPT,this._sessionID,true));
                 }
             }
             else if(param1.name == this.squadAddBt.name)
             {
-                if(!isNaN(this._uid))
+                if(this._sessionID)
                 {
-                    dispatchEvent(new DynamicSquadEvent(DynamicSquadEvent.ADD,this._uid,true));
+                    dispatchEvent(new DynamicSquadEvent(DynamicSquadEvent.ADD,this._sessionID,true));
                 }
             }
         }
@@ -249,7 +265,7 @@ package net.wg.gui.battle.random.views.stats.components.playersPanel.list
         {
             if(this._isInteractive && this._isMouseOver && this._state != DynamicSquadState.NONE)
             {
-                this._tooltip.show(this._state,this._isEnemy);
+                this._tooltip.show(this._state,this._isEnemy,this._isCurrentPlayerAnonymized,this._isCurrentPlayerInClan);
             }
             else
             {

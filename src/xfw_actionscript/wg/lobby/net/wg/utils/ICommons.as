@@ -36,9 +36,9 @@ package net.wg.utils
 
         function cutBitmapFromBitmapData(param1:BitmapData, param2:Rectangle) : Bitmap;
 
-        function getUserProps(param1:String, param2:String = null, param3:String = null, param4:int = 0, param5:Array = null, param6:int = 0, param7:String = "") : IUserProps;
+        function getUserProps(param1:String, param2:String = null, param3:String = null, param4:int = 0, param5:Array = null, param6:int = 0, param7:String = "", param8:String = "") : IUserProps;
 
-        function formatPlayerName(param1:TextField, param2:IUserProps) : Boolean;
+        function formatPlayerName(param1:TextField, param2:IUserProps, param3:Boolean = false, param4:Boolean = false) : Boolean;
 
         function truncateTextFieldText(param1:TextField, param2:String, param3:Boolean = true, param4:Boolean = false, param5:String = "..") : String;
 
@@ -48,7 +48,7 @@ package net.wg.utils
 
         function cutHtmlText(param1:String) : String;
 
-        function getFullPlayerName(param1:IUserProps) : String;
+        function getFullPlayerName(param1:IUserProps, param2:Boolean = false) : String;
 
         function addMultipleHandlers(param1:Vector.<IEventDispatcher>, param2:String, param3:Function) : void;
 

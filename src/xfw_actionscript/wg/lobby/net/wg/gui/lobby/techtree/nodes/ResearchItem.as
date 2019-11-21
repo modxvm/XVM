@@ -5,7 +5,6 @@ package net.wg.gui.lobby.techtree.nodes
     import flash.text.TextField;
     import net.wg.gui.lobby.techtree.controls.ActionButton;
     import net.wg.gui.lobby.techtree.controls.XPField;
-    import net.wg.gui.lobby.modulesPanel.components.ExtraIcon;
     import net.wg.gui.lobby.techtree.interfaces.IResearchContainer;
     import net.wg.data.constants.generated.CONTEXT_MENU_HANDLER_TYPE;
     import net.wg.data.Aliases;
@@ -13,14 +12,11 @@ package net.wg.gui.lobby.techtree.nodes
     import flash.display.BlendMode;
     import flash.text.TextFieldAutoSize;
     import net.wg.gui.lobby.techtree.constants.XpTypeStrings;
-    import net.wg.infrastructure.events.IconLoaderEvent;
-    import flash.display.DisplayObject;
     import net.wg.gui.lobby.techtree.constants.NodeEntityType;
     import net.wg.data.constants.generated.TOOLTIPS_CONSTANTS;
     import flash.events.MouseEvent;
-    import net.wg.data.constants.Linkages;
     import net.wg.gui.lobby.techtree.constants.NodeRendererState;
-    import org.idmedia.as3commons.util.StringUtils;
+    import flash.display.DisplayObject;
     import net.wg.data.constants.generated.NODE_STATE_FLAGS;
     import net.wg.gui.lobby.techtree.TechTreeEvent;
 
@@ -30,10 +26,6 @@ package net.wg.gui.lobby.techtree.nodes
         private static const DEFAULT_EXTRA_ICON_X:int = 41;
 
         private static const DEFAULT_EXTRA_ICON_Y:int = 41;
-
-        private static const EXTRA_ICON_X_SHIFT:int = 2;
-
-        private static const EXTRA_ICON_Y_SHIFT:int = 2;
 
         private static const EXTRA_ICON_ALPHA_TRANSPARENT:Number = 0.5;
 
@@ -48,8 +40,6 @@ package net.wg.gui.lobby.techtree.nodes
         public var button:ActionButton;
 
         public var xpField:XPField;
-
-        private var _extraIcon:ExtraIcon;
 
         public function ResearchItem()
         {
@@ -155,23 +145,7 @@ package net.wg.gui.lobby.techtree.nodes
             }
             this.levelIcon = null;
             this.nameField = null;
-            if(this._extraIcon != null)
-            {
-                this._extraIcon.removeEventListener(IconLoaderEvent.ICON_LOADED,this.onExtraIconLoadedHandler);
-                this._extraIcon.dispose();
-                this._extraIcon = null;
-            }
             super.onDispose();
-        }
-
-        override protected function get mouseEnabledChildren() : Vector.<DisplayObject>
-        {
-            var _loc1_:Vector.<DisplayObject> = super.mouseEnabledChildren;
-            if(this.button)
-            {
-                _loc1_.push(this.button);
-            }
-            return _loc1_;
         }
 
         override protected function initialize() : void
@@ -198,28 +172,15 @@ package net.wg.gui.lobby.techtree.nodes
         {
             var _loc1_:String = valueObject.extraInfo;
             this.typeIcon.hideExtraIcon();
-            switch(_loc1_)
+            if(_loc1_ && _loc1_.length > 0)
             {
-                case RES_ICONS.MAPS_ICONS_MODULES_MAGAZINEGUNICON:
-                    this.setExtraIcon(Linkages.MAGAZINE_GUN_ICON);
-                    break;
-                case RES_ICONS.MAPS_ICONS_MODULES_AUTOLOADERGUN:
-                    this.setExtraIcon(Linkages.AUTOLOADED_GUN_ICON);
-                    break;
-                case RES_ICONS.MAPS_ICONS_MODULES_HYDRAULICCHASSISICON:
-                    this.setExtraIcon(Linkages.HYDRAULIC_CHASSIS_ICON);
-                    break;
-                case RES_ICONS.MAPS_ICONS_MODULES_HYDRAULICWHEELEDCHASSISICON:
-                    this.setExtraIcon(Linkages.HYDRAULIC_WHEELED_CHASSIS_ICON);
-                    break;
-                default:
-                    this.applyExtraSourceLoad();
+                this.setExtraIcon(_loc1_);
             }
         }
 
         private function setExtraIcon(param1:String) : void
         {
-            this.typeIcon.setExtraIcon(param1);
+            this.typeIcon.setExtraIconBySource(param1);
             this.typeIcon.extraIconX = DEFAULT_EXTRA_ICON_X;
             this.typeIcon.extraIconY = DEFAULT_EXTRA_ICON_Y;
             if((this.button && this.button.visible || this.xpField && this.xpField.visible) != true)
@@ -229,25 +190,14 @@ package net.wg.gui.lobby.techtree.nodes
             }
         }
 
-        private function applyExtraSourceLoad() : void
+        override protected function get mouseEnabledChildren() : Vector.<DisplayObject>
         {
-            var _loc1_:String = valueObject.extraInfo;
-            if(this._extraIcon == null && StringUtils.isNotEmpty(_loc1_))
+            var _loc1_:Vector.<DisplayObject> = super.mouseEnabledChildren;
+            if(this.button)
             {
-                this._extraIcon = new ExtraIcon();
-                this._extraIcon.addEventListener(IconLoaderEvent.ICON_LOADED,this.onExtraIconLoadedHandler,false,0,true);
-                this._extraIcon.visible = false;
-                addChild(this._extraIcon);
+                _loc1_.push(this.button);
             }
-            if(this._extraIcon != null)
-            {
-                this._extraIcon.setSource(_loc1_);
-                this._extraIcon.visible = !(this.button && this.button.visible || this.xpField && this.xpField.visible);
-                if(this._extraIcon.visible)
-                {
-                    this._extraIcon.alpha = nodeState == NodeRendererState.LOCKED?EXTRA_ICON_ALPHA_TRANSPARENT:EXTRA_ICON_ALPHA;
-                }
-            }
+            return _loc1_;
         }
 
         private function get isAutoUnlocked() : Boolean
@@ -261,12 +211,6 @@ package net.wg.gui.lobby.techtree.nodes
             {
                 dispatchEvent(new TechTreeEvent(TechTreeEvent.CLICK_2_OPEN,nodeState,_index,entityType));
             }
-        }
-
-        private function onExtraIconLoadedHandler(param1:IconLoaderEvent) : void
-        {
-            this._extraIcon.x = this.typeIcon.x + this.typeIcon.width - this._extraIcon.width - EXTRA_ICON_X_SHIFT;
-            this._extraIcon.y = this.typeIcon.y + this.typeIcon.height - this._extraIcon.height - EXTRA_ICON_Y_SHIFT;
         }
     }
 }

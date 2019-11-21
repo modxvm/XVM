@@ -10,6 +10,7 @@ package net.wg.gui.lobby.battleResults.components
     import scaleform.clik.events.ListEvent;
     import net.wg.gui.events.ListEventEx;
     import scaleform.clik.constants.InvalidationType;
+    import net.wg.data.constants.UserTags;
     import scaleform.clik.data.DataProvider;
     import net.wg.gui.lobby.battleResults.data.TeamMemberItemVO;
     import net.wg.infrastructure.events.FocusRequestEvent;
@@ -99,6 +100,7 @@ package net.wg.gui.lobby.battleResults.components
 
         override protected function draw() : void
         {
+            var _loc1_:* = false;
             super.draw();
             if(isInvalid(InvalidationType.DATA) && teamMemberItemData != null)
             {
@@ -110,7 +112,10 @@ package net.wg.gui.lobby.battleResults.components
                 if(data)
                 {
                     this.initVehicleSelection(data);
+                    _loc1_ = UserTags.isCurrentPlayer(data.userVO.tags);
                     this.playerNameLbl.userVO = data.userVO;
+                    this.playerNameLbl.useFakeName = !(_loc1_ || teamMemberItemData.isOwnSquad);
+                    this.playerNameLbl.showAnonymizerIcon = true;
                     this.applyVehicleData();
                     this.deadBg.visible = data.deathReason > -1;
                     this.medalBg.visible = data.medalsCount > 0;

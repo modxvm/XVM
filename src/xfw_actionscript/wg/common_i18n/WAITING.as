@@ -179,7 +179,11 @@ package
 
         public static const TITLES_CHECKOUT_ERROR:String = "#waiting:titles/checkout_error";
 
-        public static const TITLES_AUTO_LOGIN_QUERY_FAILED:String = "#waiting:titles/auto_login_query_failed";
+        public static const MESSAGE_SERVER_OVERLOAD:String = "#waiting:message/server/overload";
+
+        public static const MESSAGE_SERVER_ANOTHER_PERIPHERY:String = "#waiting:message/server/another_periphery";
+
+        public static const MESSAGE_SERVER_CHECKOUT_ERROR:String = "#waiting:message/server/checkout_error";
 
         public static const MESSAGE_QUEUE:String = "#waiting:message/queue";
 
@@ -190,10 +194,6 @@ package
         public static const MESSAGE_ANOTHER_PERIPHERY:String = "#waiting:message/another_periphery";
 
         public static const MESSAGE_CHECKOUT_ERROR:String = "#waiting:message/checkout_error";
-
-        public static const MESSAGE_AUTO_LOGIN_QUERY_FAILED:String = "#waiting:message/auto_login_query_failed";
-
-        public static const MESSAGE_AUTO_LOGIN_ACTIVATING:String = "#waiting:message/auto_login_activating";
 
         public static const DOWNLOAD_INVENTORY:String = "#waiting:download/inventory";
 
@@ -216,6 +216,8 @@ package
         public static const DOWNLOAD_TOKENS:String = "#waiting:download/tokens";
 
         public static const DOWNLOAD_FESTIVITY:String = "#waiting:download/festivity";
+
+        public static const DOWNLOAD_ANONYMIZER:String = "#waiting:download/anonymizer";
 
         public static const UPDATINGSKILLWINDOW:String = "#waiting:updatingSkillWindow";
 

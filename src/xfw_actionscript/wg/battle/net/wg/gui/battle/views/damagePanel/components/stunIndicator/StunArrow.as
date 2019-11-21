@@ -12,6 +12,8 @@ package net.wg.gui.battle.views.damagePanel.components.stunIndicator
 
         public static const STATE_HIDDEN:String = "hidden";
 
+        public static const STATE_HIDE:String = "hide";
+
         public function StunArrow()
         {
             super();
@@ -21,6 +23,7 @@ package net.wg.gui.battle.views.damagePanel.components.stunIndicator
 
         public final function dispose() : void
         {
+            stop();
         }
 
         public function showStun(param1:Boolean = true) : void
@@ -35,10 +38,17 @@ package net.wg.gui.battle.views.damagePanel.components.stunIndicator
             }
         }
 
-        public function hideStun() : void
+        public function hideStun(param1:Boolean = true) : void
         {
             stop();
-            gotoAndStop(STATE_HIDDEN);
+            if(param1)
+            {
+                gotoAndPlay(STATE_HIDE);
+            }
+            else
+            {
+                gotoAndStop(STATE_HIDDEN);
+            }
         }
 
         public function isVisible() : Boolean

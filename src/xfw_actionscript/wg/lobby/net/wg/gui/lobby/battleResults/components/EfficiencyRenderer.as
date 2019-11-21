@@ -276,11 +276,13 @@ package net.wg.gui.lobby.battleResults.components
             this.baseDefenceIcon.visible = false;
             this.baseNameTF.visible = false;
             this.playerName.userVO = new UserVO({
-                "fullName":this._data.playerFullName,
-                "userName":this._data.playerName,
+                "userName":this._data.playerFakeName,
                 "clanAbbrev":this._data.playerClan,
-                "region":this._data.playerRegion
+                "fullName":this._data.playerFullName,
+                "region":this._data.playerRegion,
+                "fakeName":this._data.playerFakeName
             });
+            this.playerName.useFakeName = true;
             var _loc1_:TextFormat = this.playerName.textField.getTextFormat();
             if(this._data.isFake)
             {

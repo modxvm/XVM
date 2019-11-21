@@ -91,8 +91,7 @@ package net.wg.gui.components.tooltips
 
         override protected function updateSize() : void
         {
-            var _loc1_:Object = null;
-            _loc1_ = this.calcDimension();
+            var _loc1_:Object = this.calcDimension();
             background.x = background.y = 0;
             background.width = Math.round(_loc1_.w) + contentMargin.horizontal + bgShadowMargin.horizontal;
             background.height = Math.round(_loc1_.h) + contentMargin.vertical + bgShadowMargin.vertical;

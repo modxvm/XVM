@@ -2,6 +2,7 @@ package net.wg.gui.battle.epicBattle.battleloading.renderers
 {
     import net.wg.gui.battle.components.BattleUIComponent;
     import net.wg.gui.battle.epicRandom.battleloading.renderers.IEpicRandomBattleLoadingRenderer;
+    import net.wg.data.constants.Values;
     import flash.text.TextField;
     import net.wg.gui.components.icons.PlayerActionMarker;
     import net.wg.gui.battle.components.BattleAtlasSprite;
@@ -9,12 +10,12 @@ package net.wg.gui.battle.epicBattle.battleloading.renderers
     import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
     import net.wg.gui.battle.epicBattle.VO.daapi.EpicVehicleStatsVO;
     import net.wg.infrastructure.managers.IColorSchemeManager;
+    import net.wg.data.constants.UserTags;
     import net.wg.data.constants.generated.BATTLEATLAS;
     import scaleform.clik.data.ListData;
     import net.wg.data.constants.PlayerStatus;
     import org.idmedia.as3commons.util.StringUtils;
     import net.wg.gui.battle.battleloading.BattleLoadingHelper;
-    import net.wg.data.constants.UserTags;
     import net.wg.gui.battle.views.stats.constants.PlayerStatusSchemeName;
     import net.wg.infrastructure.interfaces.IColorScheme;
     import scaleform.clik.core.UIComponent;
@@ -32,7 +33,7 @@ package net.wg.gui.battle.epicBattle.battleloading.renderers
 
         private static const ACTION_MARKER_ENEMY:String = "enemy";
 
-        private static const DEF_PLAYER_ACTION:int = 0;
+        private static const DEF_PLAYER_ACTION:int = Values.ZERO;
 
         private static const FIELD_WIDTH_COMPENSATION:int = 2;
 
@@ -88,8 +89,6 @@ package net.wg.gui.battle.epicBattle.battleloading.renderers
 
         private var _colorMgr:IColorSchemeManager = null;
 
-        private var _suffixBageIcon:String = "";
-
         public function EpicBattleLoadingPlayerItemRenderer()
         {
             this._colorMgr = App.colorSchemeMgr;
@@ -144,6 +143,7 @@ package net.wg.gui.battle.epicBattle.battleloading.renderers
 
         override protected function draw() : void
         {
+            var _loc1_:* = false;
             super.draw();
             if(this._model != null)
             {
@@ -161,7 +161,8 @@ package net.wg.gui.battle.epicBattle.battleloading.renderers
                 {
                     this.textField.visible = true;
                     this.noLivesBg.visible = false;
-                    App.utils.commons.formatPlayerName(this.textField,App.utils.commons.getUserProps(this._model.playerName,this._model.clanAbbrev,this._model.region,0,this._model.userTags));
+                    _loc1_ = UserTags.isCurrentPlayer(this._model.userTags);
+                    App.utils.commons.formatPlayerName(this.textField,App.utils.commons.getUserProps(this._model.playerName,this._model.clanAbbrev,this._model.region,Values.ZERO,this._model.userTags,Values.ZERO,Values.EMPTY_STR,this._model.playerFakeName),!_loc1_,_loc1_);
                     this.vehicleField.visible = true;
                     this.vehicleField.text = this._model.vehicleName;
                     this.icoIGR.visible = this._model.isIGR;

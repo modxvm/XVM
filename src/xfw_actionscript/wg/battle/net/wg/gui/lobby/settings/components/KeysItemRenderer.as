@@ -32,6 +32,8 @@ package net.wg.gui.lobby.settings.components
 
         private var _header:Boolean;
 
+        private var _codependentID:String = null;
+
         public function KeysItemRenderer()
         {
             super();
@@ -59,6 +61,8 @@ package net.wg.gui.lobby.settings.components
             this.keyInput = null;
             this.bg = null;
             this.underline = null;
+            this.infoIcon.dispose();
+            this.infoIcon = null;
             super.onDispose();
         }
 
@@ -88,12 +92,12 @@ package net.wg.gui.lobby.settings.components
                     this.underline.visible = data.showUnderline;
                     this.infoIcon.visible = data.tooltipID != null && data.tooltipID.length > 0;
                     this.infoIcon.tooltip = data.tooltipID;
+                    this._codependentID = data.codependentID;
                     this.label = data.label;
                     if(!this.header)
                     {
-                        this.keyInput.keys = data.keysRang;
                         this.keyInput.keyDefault = data.keyDefault;
-                        this.keyInput.key = data.key;
+                        this.keyInput.setupKey(data.keysRang,data.key);
                     }
                 }
                 if(isInvalid(INVALID_TEXT))
@@ -126,27 +130,35 @@ package net.wg.gui.lobby.settings.components
             return this.keyInput.selected;
         }
 
-        private function keyCodeWasUsed(param1:Number) : Object
+        private function keyCodeWasUsed(param1:Number) : Array
         {
+            var _loc7_:KeyProps = null;
             if(param1 == KeyProps.KEY_NONE)
             {
-                return null;
+                return [];
             }
             var _loc2_:IDataProvider = KeysScrollingList(owner).dataProvider;
             var _loc3_:int = _loc2_.length;
-            var _loc4_:uint = 0;
-            while(_loc4_ < _loc3_)
+            var _loc4_:String = null;
+            if(this._codependentID)
             {
-                if(!_loc2_[_loc4_].header && _loc4_ != this.index)
+                _loc7_ = App.utils.commons.keyToString(this.keyInput.keyCode);
+                _loc4_ = _loc7_.keyCommand;
+            }
+            var _loc5_:Array = [];
+            var _loc6_:uint = 0;
+            while(_loc6_ < _loc3_)
+            {
+                if(!_loc2_[_loc6_].header && _loc6_ != this.index)
                 {
-                    if(this.keyInput.keyCode == _loc2_[_loc4_].key)
+                    if(this.keyInput.keyCode == _loc2_[_loc6_].key && (this._codependentID == null || !(this._codependentID && this._codependentID == _loc2_[_loc6_].id && _loc2_[_loc6_].keysRang.indexOf(_loc4_) > -1)))
                     {
-                        return _loc2_[_loc4_];
+                        _loc5_.push(_loc2_[_loc6_]);
                     }
                 }
-                _loc4_++;
+                _loc6_++;
             }
-            return null;
+            return _loc5_;
         }
 
         private function setText() : void
@@ -217,10 +229,13 @@ package net.wg.gui.lobby.settings.components
 
         private function onKeyChangeHandler(param1:KeyInputEvents) : void
         {
-            var _loc2_:Object = this.keyCodeWasUsed(param1.keyCode);
-            if(_loc2_)
+            var _loc2_:Array = this.keyCodeWasUsed(param1.keyCode);
+            var _loc3_:int = _loc2_.length;
+            var _loc4_:* = 0;
+            while(_loc4_ < _loc3_)
             {
-                _loc2_.key = KeyProps.KEY_NONE;
+                _loc2_[_loc4_].key = KeyProps.KEY_NONE;
+                _loc4_++;
             }
             if(data && data.hasOwnProperty(KEY_STR))
             {

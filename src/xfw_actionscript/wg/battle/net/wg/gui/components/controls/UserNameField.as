@@ -7,6 +7,7 @@ package net.wg.gui.components.controls
     import flash.text.TextFormat;
     import flash.utils.Dictionary;
     import net.wg.infrastructure.managers.ITooltipMgr;
+    import net.wg.data.managers.IToolTipParams;
     import scaleform.clik.utils.Constraints;
     import scaleform.clik.constants.ConstrainMode;
     import flash.events.MouseEvent;
@@ -15,6 +16,8 @@ package net.wg.gui.components.controls
     import flash.text.TextFieldAutoSize;
     import net.wg.data.constants.Values;
     import flash.events.Event;
+    import net.wg.data.constants.UserTags;
+    import net.wg.data.managers.impl.ToolTipParams;
 
     public class UserNameField extends UIComponentEx implements ITextContainer
     {
@@ -59,10 +62,17 @@ package net.wg.gui.components.controls
 
         private var _toolTipMgr:ITooltipMgr;
 
+        private var _tooltipParams:IToolTipParams;
+
+        private var _useFakeName:Boolean = false;
+
+        private var _showAnonymizerIcon:Boolean = false;
+
         public function UserNameField()
         {
             this._toolTipMgr = App.toolTipMgr;
             super();
+            this._tooltipParams = new ToolTipParams({},{},null);
         }
 
         override protected function preInitialize() : void
@@ -91,6 +101,11 @@ package net.wg.gui.components.controls
             this._userVO = null;
             App.utils.data.cleanupDynamicObject(this._shadowColorList);
             this._shadowColorList = null;
+            if(this._tooltipParams != null)
+            {
+                this._tooltipParams.dispose();
+                this._tooltipParams = null;
+            }
             super.onDispose();
         }
 
@@ -120,11 +135,15 @@ package net.wg.gui.components.controls
                 if(this.userVO)
                 {
                     this.textField.autoSize = TextFieldAutoSize.NONE;
-                    _loc2_ = App.utils.commons.formatPlayerName(this.textField,this.userVO.userProps);
-                    this._showToolTip = _loc2_;
-                    if(_loc2_)
+                    _loc2_ = App.utils.commons.formatPlayerName(this.textField,this.userVO.userProps,this.useFakeName,this.showAnonymizerIcon);
+                    this._showToolTip = _loc2_ || this.isAnonymized;
+                    if(this.isAnonymized)
                     {
-                        this._toolTip = this.userVO.fullName;
+                        this._tooltipParams.header.name = this.useFakeName?this.userVO.fullName:this.userVO.fakeName;
+                    }
+                    else if(_loc2_)
+                    {
+                        this._toolTip = App.utils.commons.getFullPlayerName(this.userVO.userProps,true);
                     }
                     else
                     {
@@ -161,6 +180,16 @@ package net.wg.gui.components.controls
             _loc2_.knockout = false;
             _loc2_.quality = _loc3_.quality;
             return _loc2_;
+        }
+
+        private function get isCurrentPlayer() : Boolean
+        {
+            return this._userVO && this._userVO.userProps && UserTags.isCurrentPlayer(this.userVO.userProps.tags);
+        }
+
+        private function get isAnonymized() : Boolean
+        {
+            return this._userVO && this._userVO.isAnonymized;
         }
 
         public function get showToolTip() : Boolean
@@ -287,6 +316,28 @@ package net.wg.gui.components.controls
             invalidateData();
         }
 
+        public function get useFakeName() : Boolean
+        {
+            return this._useFakeName;
+        }
+
+        public function set useFakeName(param1:Boolean) : void
+        {
+            this._useFakeName = param1;
+            invalidateData();
+        }
+
+        public function get showAnonymizerIcon() : Boolean
+        {
+            return this._showAnonymizerIcon;
+        }
+
+        public function set showAnonymizerIcon(param1:Boolean) : void
+        {
+            this._showAnonymizerIcon = param1;
+            invalidateData();
+        }
+
         public function get textWidth() : Number
         {
             return this.textField.textWidth;
@@ -296,7 +347,11 @@ package net.wg.gui.components.controls
         {
             if(this._showToolTip)
             {
-                if(this._altToolTip)
+                if(this.isAnonymized)
+                {
+                    this._toolTipMgr.showComplexWithParams(TOOLTIPS.ANONYMIZER_TEAMSTATS,this._tooltipParams);
+                }
+                else if(this._altToolTip)
                 {
                     this._toolTipMgr.show(this._altToolTip);
                 }

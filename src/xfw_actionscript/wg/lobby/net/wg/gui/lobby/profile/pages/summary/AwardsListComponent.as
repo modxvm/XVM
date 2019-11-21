@@ -85,8 +85,6 @@ package net.wg.gui.lobby.profile.pages.summary
         public function set dataProvider(param1:DataProvider) : void
         {
             this.medalsList.dataProvider = param1;
-            this.medalsList.invalidateData();
-            this.medalsList.validateNow();
             invalidate(DP_INV);
         }
 

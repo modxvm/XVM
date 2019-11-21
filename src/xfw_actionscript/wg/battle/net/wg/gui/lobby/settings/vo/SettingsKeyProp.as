@@ -30,6 +30,8 @@ package net.wg.gui.lobby.settings.vo
 
         public var keysRang:Array;
 
+        public var codependentID:String = null;
+
         public var showUnderline:Boolean = false;
 
         public var rendererYOffset:Number = 0;
@@ -47,6 +49,7 @@ package net.wg.gui.lobby.settings.vo
             this.id = param1;
             this.header = param2;
             this.keysRang = SettingsConfigHelper.KEY_RANGE.hasOwnProperty(param1)?SettingsConfigHelper.KEY_RANGE[param1]:SettingsConfigHelper.defaultKeyRange;
+            this.codependentID = SettingsConfigHelper.CO_DEPENDENTS.hasOwnProperty(param1)?SettingsConfigHelper.CO_DEPENDENTS[param1]:null;
             var _loc11_:String = null;
             if(param7)
             {
@@ -96,6 +99,7 @@ package net.wg.gui.lobby.settings.vo
                 "key":this.key,
                 "keyDefault":this.keyDefault,
                 "keysRang":this.keysRang,
+                "codependentID":this.codependentID,
                 "showUnderline":this.showUnderline,
                 "rendererYOffset":this.rendererYOffset,
                 "tooltipID":this.tooltipID

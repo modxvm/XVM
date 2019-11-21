@@ -93,8 +93,6 @@ package
 
         public static const INVITES_COMMENT:String = "#invites:invites/comment";
 
-        public static const INVITES_STATE_PENDING:String = "#invites:invites/state/PENDING";
-
         public static const INVITES_STATE_ACCEPTED:String = "#invites:invites/state/ACCEPTED";
 
         public static const INVITES_STATE_DECLINED:String = "#invites:invites/state/DECLINED";
@@ -157,11 +155,7 @@ package
 
         public static const INVITES_NOTE_CHANGE_AND_LEAVE_EXTERNAL:String = "#invites:invites/note/change_and_leave/EXTERNAL";
 
-        public static const INVITES_NOTE_LEAVE_RANDOMS:String = "#invites:invites/note/leave/RANDOMS";
-
         public static const INVITES_NOTE_CHANGE_AND_LEAVE_RANDOMS:String = "#invites:invites/note/change_and_leave/RANDOMS";
-
-        public static const INVITES_NOTE_LEAVE_EVENT:String = "#invites:invites/note/leave/EVENT";
 
         public static const INVITES_NOTE_CHANGE_AND_LEAVE_EVENT_BATTLES:String = "#invites:invites/note/change_and_leave/EVENT_BATTLES";
 
@@ -176,6 +170,8 @@ package
         public static const INVITES_NOTE_LEAVE_RANKED:String = "#invites:invites/note/leave/RANKED";
 
         public static const INVITES_NOTE_CHANGE_AND_LEAVE_RANKED:String = "#invites:invites/note/change_and_leave/RANKED";
+
+        public static const INVITES_WARNING_ANONYMIZED:String = "#invites:invites/warning/anonymized";
 
         public static const GUI_TITLES_RECEIVEDINVITES:String = "#invites:gui/titles/receivedInvites";
 
@@ -211,15 +207,11 @@ package
 
         public static const FRIENDSHIP_NOTE_NOTCONNECTED:String = "#invites:friendship/note/notConnected";
 
-        public static const CLANS_STATE_APP_ACTIVE:String = "#invites:clans/state/app/active";
-
         public static const CLANS_STATE_APP_ACCEPTED:String = "#invites:clans/state/app/accepted";
 
         public static const CLANS_STATE_APP_DECLINED:String = "#invites:clans/state/app/declined";
 
         public static const CLANS_STATE_APP_ERROR_INCLANENTERCOOLDOWN:String = "#invites:clans/state/app/error/inClanEnterCooldown";
-
-        public static const CLANS_STATE_INVITE_ACTIVE:String = "#invites:clans/state/invite/active";
 
         public static const CLANS_STATE_INVITE_ACCEPTED:String = "#invites:clans/state/invite/accepted";
 

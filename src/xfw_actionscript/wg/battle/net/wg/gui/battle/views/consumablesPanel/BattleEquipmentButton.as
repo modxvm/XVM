@@ -92,6 +92,7 @@ package net.wg.gui.battle.views.consumablesPanel
             this._coolDownTimer = new CoolDownTimer(this.cooldown);
             this._coolDownTimer.setFrames(COOLDOWN_START_FRAME,COOLDOWN_END_FRAME);
             isAllowedToShowToolTipOnDisabledState = true;
+            hideToolTipOnClickActions = false;
             this._consumablesVO = new ConsumablesVO();
         }
 

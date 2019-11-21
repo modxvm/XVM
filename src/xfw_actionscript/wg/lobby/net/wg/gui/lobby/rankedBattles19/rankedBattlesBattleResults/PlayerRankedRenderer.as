@@ -2,13 +2,13 @@ package net.wg.gui.lobby.rankedBattles19.rankedBattlesBattleResults
 {
     import scaleform.clik.controls.ListItemRenderer;
     import flash.display.MovieClip;
+    import net.wg.gui.components.controls.UserNameField;
     import flash.text.TextField;
     import net.wg.infrastructure.managers.ITooltipMgr;
     import net.wg.gui.lobby.rankedBattles19.data.PlayerRankRendererVO;
-    import net.wg.utils.ICommons;
     import flash.events.MouseEvent;
-    import flash.text.TextFormat;
-    import net.wg.data.constants.Values;
+    import net.wg.data.VO.UserVO;
+    import net.wg.data.constants.UserTags;
     import org.idmedia.as3commons.util.StringUtils;
 
     public class PlayerRankedRenderer extends ListItemRenderer
@@ -28,7 +28,7 @@ package net.wg.gui.lobby.rankedBattles19.rankedBattlesBattleResults
 
         public var selectBackground:MovieClip = null;
 
-        public var nickName:TextField = null;
+        public var nickName:UserNameField = null;
 
         public var standoff:MovieClip = null;
 
@@ -52,13 +52,10 @@ package net.wg.gui.lobby.rankedBattles19.rankedBattlesBattleResults
 
         private var _tooltipNickName:String = "";
 
-        private var _commons:ICommons = null;
-
         public function PlayerRankedRenderer()
         {
             super();
             this._tooltipMgr = App.toolTipMgr;
-            this._commons = App.utils.commons;
         }
 
         override public function setData(param1:Object) : void
@@ -100,7 +97,6 @@ package net.wg.gui.lobby.rankedBattles19.rankedBattlesBattleResults
             _owner = null;
             this.wave = null;
             this._tooltipMgr = null;
-            this._commons = null;
             super.onDispose();
         }
 
@@ -124,35 +120,35 @@ package net.wg.gui.lobby.rankedBattles19.rankedBattlesBattleResults
         private function updateTexts() : void
         {
             var _loc1_:String = null;
-            var _loc2_:* = 0;
-            var _loc3_:TextFormat = null;
-            var _loc4_:String = null;
+            var _loc2_:String = null;
+            var _loc3_:* = 0;
+            var _loc4_:* = false;
             if(this._dataVo)
             {
                 if(this._isCompact)
                 {
-                    this.points.htmlText = this._dataVo.points;
                     _loc1_ = this._dataVo.nickName;
-                    _loc2_ = FONT_SIZE_COMPACT;
+                    _loc2_ = this._dataVo.fakeName;
+                    _loc3_ = FONT_SIZE_COMPACT;
+                    this.points.htmlText = this._dataVo.points;
                 }
                 else
                 {
-                    this.points.htmlText = this._dataVo.pointsHuge;
                     _loc1_ = this._dataVo.nickNameHuge;
-                    _loc2_ = FONT_SIZE_INCOMPACT;
+                    _loc2_ = this._dataVo.fakeNameHuge;
+                    _loc3_ = FONT_SIZE_INCOMPACT;
+                    this.points.htmlText = this._dataVo.pointsHuge;
                 }
-                _loc3_ = this.nickName.getTextFormat();
-                _loc3_.size = _loc2_;
-                this.nickName.defaultTextFormat = _loc3_;
-                _loc4_ = this._commons.truncateTextFieldText(this.nickName,_loc1_,true,true);
-                if(_loc4_ && _loc4_ != _loc1_)
-                {
-                    this._tooltipNickName = this._commons.cutHtmlText(_loc1_);
-                }
-                else
-                {
-                    this._tooltipNickName = Values.EMPTY_STR;
-                }
+                this.nickName.userVO = new UserVO({
+                    "userName":_loc1_,
+                    "fakeName":_loc2_,
+                    "fullName":_loc1_,
+                    "tags":this._dataVo.tags
+                });
+                this.nickName.textSize = _loc3_;
+                _loc4_ = UserTags.isCurrentPlayer(this._dataVo.tags);
+                this.nickName.useFakeName = !_loc4_;
+                this.nickName.showAnonymizerIcon = _loc4_;
             }
         }
 

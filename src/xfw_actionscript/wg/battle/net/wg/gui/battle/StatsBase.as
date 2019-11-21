@@ -101,7 +101,7 @@ package net.wg.gui.battle
         {
         }
 
-        public function as_setIsIntaractive(param1:Boolean) : void
+        public function as_setIsInteractive(param1:Boolean) : void
         {
             this._isInteractive = param1;
             this.applyInteractivity();

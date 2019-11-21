@@ -13,6 +13,7 @@ package net.wg.gui.battle.views.battleMessenger
     import flash.utils.setTimeout;
     import flash.events.MouseEvent;
     import flash.utils.clearInterval;
+    import org.idmedia.as3commons.util.StringUtils;
     import flash.utils.clearTimeout;
     import flash.utils.getTimer;
     import net.wg.data.constants.Fonts;
@@ -92,7 +93,7 @@ package net.wg.gui.battle.views.battleMessenger
 
         public var background:Sprite;
 
-        public var messageID:Number = -1;
+        public var messageID:String = "";
 
         public var isOpenedToxicPanel:Boolean = false;
 
@@ -284,7 +285,7 @@ package net.wg.gui.battle.views.battleMessenger
 
         public function setRenderer(param1:String) : void
         {
-            this._atlasManager.drawGraphics(ATLAS_CONSTANTS.BATTLE_ATLAS,param1,this.background.graphics,"",false,true);
+            this._atlasManager.drawGraphics(ATLAS_CONSTANTS.BATTLE_ATLAS,param1,this.background.graphics,Values.EMPTY_STR,false,true);
             this.background.scale9Grid = new Rectangle(RECT_X,RECT_Y,RECT_WIDTH,RECT_HEIGHT);
             this.updateTextFieldProperties(param1);
         }
@@ -331,10 +332,8 @@ package net.wg.gui.battle.views.battleMessenger
 
         private function updateMessageElements(param1:Number, param2:Boolean) : void
         {
-            this.background.alpha = param1;
-            this.background.visible = param2;
-            this.messageField.alpha = param1;
-            this.messageField.visible = param2;
+            this.background.alpha = this.messageField.alpha = param1;
+            this.background.visible = this.messageField.visible = param2;
         }
 
         private function backgroundAddListeners(param1:Boolean = false) : void
@@ -356,7 +355,7 @@ package net.wg.gui.battle.views.battleMessenger
 
         private function updateUserInteraction() : void
         {
-            if(this._userInteractionCallback != null && this.messageID > 0)
+            if(this._userInteractionCallback != null && StringUtils.isNotEmpty(this.messageID))
             {
                 this.isOpenedToxicPanel = true;
                 if(this._userInteractionCallback(true,this.mouseOut,this.messageID,this.y,this.width,this.height))
@@ -518,7 +517,7 @@ package net.wg.gui.battle.views.battleMessenger
 
         private function onBackgroundRollOverHandler(param1:MouseEvent) : void
         {
-            if(this.messageID >= 0)
+            if(StringUtils.isNotEmpty(this.messageID))
             {
                 this._timerID = setTimeout(this.updateUserInteraction,USER_INTERACTION_TIMER_BY_MILLISECONDS);
             }

@@ -345,7 +345,7 @@ package net.wg.gui.battle.views.damagePanel
                 this.stunCounterMc.hideStun(param2);
                 this.stunHitMC.visible = false;
             }
-            this._tankmenCtrl.hideStatus(param1);
+            this._tankmenCtrl.hideStatus(param1,param2);
         }
 
         public function as_reset() : void

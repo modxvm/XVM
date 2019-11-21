@@ -16,6 +16,7 @@ package net.wg.gui.lobby.battleResults.epic
     import net.wg.gui.lobby.battleResults.data.TeamMemberItemVO;
     import net.wg.infrastructure.interfaces.IColorScheme;
     import net.wg.data.constants.ColorSchemeNames;
+    import net.wg.data.constants.UserTags;
     import org.idmedia.as3commons.util.StringUtils;
     import net.wg.data.constants.ArenaBonusTypes;
 
@@ -144,7 +145,10 @@ package net.wg.gui.lobby.battleResults.epic
             {
                 _loc2_ = this._colorSchemeMgr.getScheme(param1.deathReason > -1?ColorSchemeNames.NORMAL_DEAD:ColorSchemeNames.NORMAL);
             }
+            var _loc3_:Boolean = UserTags.isCurrentPlayer(param1.userVO.tags);
             this.playerName.userVO = param1.userVO;
+            this.playerName.useFakeName = !(_loc3_ || param1.isOwnSquad);
+            this.playerName.showAnonymizerIcon = _loc3_;
             this.playerName.textColor = _loc2_.rgb;
             if(StringUtils.isNotEmpty(this._suffixBadgeIcon))
             {

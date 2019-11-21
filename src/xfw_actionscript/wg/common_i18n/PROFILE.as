@@ -133,8 +133,6 @@ package
 
         public static const SECTION_SUMMARY_ERRORTEXT_NEXTAWARDS:String = "#profile:section/summary/errorText/nextAwards";
 
-        public static const SECTION_SUMMARY_WARNING_PERSONALSCORE:String = "#profile:section/summary/warning/personalScore";
-
         public static const SECTION_AWARDS_TITLE:String = "#profile:section/awards/title";
 
         public static const SECTION_AWARDS_LABELS_MARKSONGUN:String = "#profile:section/awards/labels/marksOnGun";

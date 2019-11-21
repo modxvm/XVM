@@ -152,7 +152,7 @@ package net.wg.infrastructure.base.meta.impl
             this.showSquad();
         }
 
-        public function fightClickS(param1:Number, param2:String) : void
+        public function fightClickS(param1:int, param2:String) : void
         {
             App.utils.asserter.assertNotNull(this.fightClick,"fightClick" + Errors.CANT_NULL);
             this.fightClick(param1,param2);

@@ -4,9 +4,9 @@ package net.wg.gui.battle.random.views.stats.components.fullStats
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import net.wg.gui.battle.components.BattleAtlasSprite;
     import flash.text.TextField;
+    import net.wg.gui.battle.components.buttons.BattleButton;
     import net.wg.gui.battle.components.PlayerStatusView;
     import net.wg.gui.battle.views.stats.SpeakAnimation;
-    import net.wg.gui.battle.components.buttons.BattleButton;
     import net.wg.gui.battle.views.stats.fullStats.SquadInviteStatusView;
     import flash.display.DisplayObject;
     import scaleform.gfx.TextFieldEx;
@@ -32,6 +32,14 @@ package net.wg.gui.battle.random.views.stats.components.fullStats
         public var team1TF:TextField = null;
 
         public var team2TF:TextField = null;
+
+        public var selfBgLeft:BattleAtlasSprite = null;
+
+        public var selfBgRight:BattleAtlasSprite = null;
+
+        public var squadAcceptBt:BattleButton = null;
+
+        public var squadAddBt:BattleButton = null;
 
         public var deadBg_c1r1:BattleAtlasSprite = null;
 
@@ -573,10 +581,6 @@ package net.wg.gui.battle.random.views.stats.components.fullStats
 
         public var playerStatus_c2r15:PlayerStatusView = null;
 
-        public var selfBgLeft:BattleAtlasSprite = null;
-
-        public var selfBgRight:BattleAtlasSprite = null;
-
         public var speakAnimation_c1r1:SpeakAnimation = null;
 
         public var speakAnimation_c1r2:SpeakAnimation = null;
@@ -756,10 +760,6 @@ package net.wg.gui.battle.random.views.stats.components.fullStats
         public var squad_c2r14:BattleAtlasSprite = null;
 
         public var squad_c2r15:BattleAtlasSprite = null;
-
-        public var squadAcceptBt:BattleButton = null;
-
-        public var squadAddBt:BattleButton = null;
 
         public var squadStatus_c1r1:SquadInviteStatusView = null;
 
@@ -1181,46 +1181,6 @@ package net.wg.gui.battle.random.views.stats.components.fullStats
 
         public var testerBack_c2r15:MovieClip = null;
 
-        public var deadBgCollection:Vector.<BattleAtlasSprite> = null;
-
-        public var fragsCollection:Vector.<TextField> = null;
-
-        public var hitCollection:Vector.<MovieClip> = null;
-
-        public var icoIGRCollection:Vector.<BattleAtlasSprite> = null;
-
-        public var muteCollection:Vector.<BattleAtlasSprite> = null;
-
-        public var disableCommunicationCollection:Vector.<BattleAtlasSprite> = null;
-
-        public var noSoundCollection:Vector.<BattleAtlasSprite> = null;
-
-        public var playerNameCollection:Vector.<TextField> = null;
-
-        public var playerStatusCollection:Vector.<PlayerStatusView> = null;
-
-        public var speakAnimationCollection:Vector.<SpeakAnimation> = null;
-
-        public var squadCollection:Vector.<BattleAtlasSprite> = null;
-
-        public var rankBadgesCollection:Vector.<BattleAtlasSprite> = null;
-
-        public var squadStatusCollection:Vector.<SquadInviteStatusView> = null;
-
-        public var vehicleActionMarkerCollection:Vector.<BattleAtlasSprite> = null;
-
-        public var vehicleIconCollection:Vector.<BattleAtlasSprite> = null;
-
-        public var vehicleLevelCollection:Vector.<BattleAtlasSprite> = null;
-
-        public var vehicleNameCollection:Vector.<TextField> = null;
-
-        public var vehicleTypeCollection:Vector.<BattleAtlasSprite> = null;
-
-        public var testerBackCollection:Vector.<MovieClip> = null;
-
-        public var icoTesterCollection:Vector.<BattleAtlasSprite> = null;
-
         public var icoTester_c1r1:BattleAtlasSprite = null;
 
         public var icoTester_c1r2:BattleAtlasSprite = null;
@@ -1280,6 +1240,46 @@ package net.wg.gui.battle.random.views.stats.components.fullStats
         public var icoTester_c2r14:BattleAtlasSprite = null;
 
         public var icoTester_c2r15:BattleAtlasSprite = null;
+
+        public var deadBgCollection:Vector.<BattleAtlasSprite> = null;
+
+        public var fragsCollection:Vector.<TextField> = null;
+
+        public var hitCollection:Vector.<MovieClip> = null;
+
+        public var icoIGRCollection:Vector.<BattleAtlasSprite> = null;
+
+        public var muteCollection:Vector.<BattleAtlasSprite> = null;
+
+        public var disableCommunicationCollection:Vector.<BattleAtlasSprite> = null;
+
+        public var noSoundCollection:Vector.<BattleAtlasSprite> = null;
+
+        public var playerNameCollection:Vector.<TextField> = null;
+
+        public var playerStatusCollection:Vector.<PlayerStatusView> = null;
+
+        public var speakAnimationCollection:Vector.<SpeakAnimation> = null;
+
+        public var squadCollection:Vector.<BattleAtlasSprite> = null;
+
+        public var rankBadgesCollection:Vector.<BattleAtlasSprite> = null;
+
+        public var squadStatusCollection:Vector.<SquadInviteStatusView> = null;
+
+        public var vehicleActionMarkerCollection:Vector.<BattleAtlasSprite> = null;
+
+        public var vehicleIconCollection:Vector.<BattleAtlasSprite> = null;
+
+        public var vehicleLevelCollection:Vector.<BattleAtlasSprite> = null;
+
+        public var vehicleNameCollection:Vector.<TextField> = null;
+
+        public var vehicleTypeCollection:Vector.<BattleAtlasSprite> = null;
+
+        public var testerBackCollection:Vector.<MovieClip> = null;
+
+        public var icoTesterCollection:Vector.<BattleAtlasSprite> = null;
 
         public function FullStatsTable()
         {

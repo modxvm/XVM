@@ -13,6 +13,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
     import net.wg.gui.battle.epicRandom.VO.daapi.EpicRandomDAAPIVehicleInfoVO;
     import flash.events.MouseEvent;
     import net.wg.data.constants.generated.PLAYERS_PANEL_STATE;
+    import net.wg.data.constants.Values;
     import net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.events.PlayersPanelItemEvent;
     import net.wg.infrastructure.exceptions.AbstractException;
     import net.wg.data.constants.Errors;
@@ -647,6 +648,11 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             this._items.push(_loc5_);
             _loc4_.setState(this._rendererStates[_loc3_ - 1]);
             this._currOrder[_loc3_ - 1].push(param1.vehicleID);
+            if(_loc5_.isCurrentPlayer && param1.isAnonymized)
+            {
+                _loc4_.dynamicSquad.setCurrentPlayerAnonymized();
+                _loc4_.dynamicSquad.setIsCurrentPlayerInClan(param1.clanAbbrev != Values.EMPTY_STR);
+            }
             return true;
         }
 
@@ -673,7 +679,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             var _loc3_:* = 0;
             while(_loc3_ < _loc2_)
             {
-                if(this._items[_loc3_].accDBID == param1)
+                if(this._items[_loc3_].accountDBID == param1)
                 {
                     return this._panelListItems[_loc3_];
                 }

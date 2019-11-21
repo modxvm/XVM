@@ -163,6 +163,15 @@ package net.wg.gui.components.questProgress
             super.updateState(param1);
         }
 
+        override protected function onDataUpdate(param1:IQPProgressData) : void
+        {
+            if(!param1.isLocked)
+            {
+                chartView.unlock();
+            }
+            super.onDataUpdate(param1);
+        }
+
         override protected function doLayout() : void
         {
             var _loc4_:IMetricsComponent = null;

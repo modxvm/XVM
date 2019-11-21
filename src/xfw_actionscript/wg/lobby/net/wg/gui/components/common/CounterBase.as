@@ -18,6 +18,8 @@ package net.wg.gui.components.common
 
         private static const INVALIDATE_COUNT:String = "invalidateCount";
 
+        private static const INVALIDATE_STATE:String = "invalidateState";
+
         public static const DEFAULT_EMPTY_VALUE:String = "0";
 
         private var _value:String = null;
@@ -31,6 +33,8 @@ package net.wg.gui.components.common
         private var _horizontalAlign:String = null;
 
         private var _addToTop:Boolean = true;
+
+        private var _viewState:String = null;
 
         public function CounterBase()
         {
@@ -67,6 +71,10 @@ package net.wg.gui.components.common
         override protected function draw() : void
         {
             super.draw();
+            if(isInvalid(INVALIDATE_STATE))
+            {
+                this.applyState();
+            }
             if(isInvalid(INVALIDATE_COUNT))
             {
                 this.applyCountValue();
@@ -90,7 +98,7 @@ package net.wg.gui.components.common
             }
         }
 
-        public function setTarget(param1:DisplayObject, param2:String, param3:Point = null, param4:String = null, param5:Boolean = true, param6:Number = 0) : void
+        public function setTarget(param1:DisplayObject, param2:String, param3:Point = null, param4:String = null, param5:Boolean = true, param6:Number = 0, param7:String = null) : void
         {
             App.utils.asserter.assertNotNull(param1,"Counter target" + Errors.CANT_NULL);
             this._target = param1;
@@ -98,6 +106,7 @@ package net.wg.gui.components.common
             this._addToTop = param5;
             this._tfPadding = param6;
             this._horizontalAlign = param4;
+            this._viewState = param7;
             this._value = param2;
             if(this._target.parent)
             {
@@ -144,6 +153,10 @@ package net.wg.gui.components.common
             }
         }
 
+        protected function applyState() : void
+        {
+        }
+
         private function invalidatePosition() : void
         {
             invalidate(INVALIDATE_POSITION);
@@ -177,6 +190,11 @@ package net.wg.gui.components.common
         protected function get addToTop() : Boolean
         {
             return this._addToTop;
+        }
+
+        protected function get viewState() : String
+        {
+            return this._viewState;
         }
 
         override protected function handleStageChange(param1:Event) : void
@@ -218,7 +236,7 @@ package net.wg.gui.components.common
                 }
                 _loc2_.addChildAt(this,_loc3_);
             }
-            invalidate(INVALIDATE_COUNT,INVALIDATE_VISIBILITY);
+            invalidate(INVALIDATE_STATE,INVALIDATE_COUNT,INVALIDATE_VISIBILITY);
         }
     }
 }

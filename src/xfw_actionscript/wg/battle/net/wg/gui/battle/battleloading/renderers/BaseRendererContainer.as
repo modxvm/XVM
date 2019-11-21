@@ -73,491 +73,483 @@ package net.wg.gui.battle.battleloading.renderers
 
         public var icoTesterAlly0:BattleAtlasSprite;
 
-        public var icoTesterEnemy0:BattleAtlasSprite;
-
         public var icoTesterAlly1:BattleAtlasSprite;
-
-        public var icoTesterEnemy1:BattleAtlasSprite;
 
         public var icoTesterAlly2:BattleAtlasSprite;
 
-        public var icoTesterEnemy2:BattleAtlasSprite;
-
         public var icoTesterAlly3:BattleAtlasSprite;
-
-        public var icoTesterEnemy3:BattleAtlasSprite;
 
         public var icoTesterAlly4:BattleAtlasSprite;
 
-        public var icoTesterEnemy4:BattleAtlasSprite;
-
         public var icoTesterAlly5:BattleAtlasSprite;
-
-        public var icoTesterEnemy5:BattleAtlasSprite;
 
         public var icoTesterAlly6:BattleAtlasSprite;
 
-        public var icoTesterEnemy6:BattleAtlasSprite;
-
         public var icoTesterAlly7:BattleAtlasSprite;
-
-        public var icoTesterEnemy7:BattleAtlasSprite;
 
         public var icoTesterAlly8:BattleAtlasSprite;
 
-        public var icoTesterEnemy8:BattleAtlasSprite;
-
         public var icoTesterAlly9:BattleAtlasSprite;
-
-        public var icoTesterEnemy9:BattleAtlasSprite;
 
         public var icoTesterAlly10:BattleAtlasSprite;
 
-        public var icoTesterEnemy10:BattleAtlasSprite;
-
         public var icoTesterAlly11:BattleAtlasSprite;
-
-        public var icoTesterEnemy11:BattleAtlasSprite;
 
         public var icoTesterAlly12:BattleAtlasSprite;
 
-        public var icoTesterEnemy12:BattleAtlasSprite;
-
         public var icoTesterAlly13:BattleAtlasSprite;
-
-        public var icoTesterEnemy13:BattleAtlasSprite;
 
         public var icoTesterAlly14:BattleAtlasSprite;
 
+        public var icoTesterEnemy0:BattleAtlasSprite;
+
+        public var icoTesterEnemy1:BattleAtlasSprite;
+
+        public var icoTesterEnemy2:BattleAtlasSprite;
+
+        public var icoTesterEnemy3:BattleAtlasSprite;
+
+        public var icoTesterEnemy4:BattleAtlasSprite;
+
+        public var icoTesterEnemy5:BattleAtlasSprite;
+
+        public var icoTesterEnemy6:BattleAtlasSprite;
+
+        public var icoTesterEnemy7:BattleAtlasSprite;
+
+        public var icoTesterEnemy8:BattleAtlasSprite;
+
+        public var icoTesterEnemy9:BattleAtlasSprite;
+
+        public var icoTesterEnemy10:BattleAtlasSprite;
+
+        public var icoTesterEnemy11:BattleAtlasSprite;
+
+        public var icoTesterEnemy12:BattleAtlasSprite;
+
+        public var icoTesterEnemy13:BattleAtlasSprite;
+
         public var icoTesterEnemy14:BattleAtlasSprite;
-
-        public var icoTestersEnemy:Vector.<BattleAtlasSprite>;
-
-        public var icoTestersAlly:Vector.<BattleAtlasSprite>;
-
-        public var backTestersEnemy:Vector.<MovieClip>;
-
-        public var backTestersAlly:Vector.<MovieClip>;
 
         public var textFieldAlly0:TextField;
 
-        public var textFieldEnemy0:TextField;
-
-        public var vehicleFieldAlly0:TextField;
-
-        public var vehicleFieldEnemy0:TextField;
-
-        public var playerActionMarkerAlly0:PlayerActionMarker;
-
-        public var playerActionMarkerEnemy0:PlayerActionMarker;
-
-        public var vehicleTypeIconAlly0:BattleAtlasSprite;
-
-        public var vehicleTypeIconEnemy0:BattleAtlasSprite;
-
-        public var vehicleLevelIconAlly0:BattleAtlasSprite;
-
-        public var vehicleLevelIconEnemy0:BattleAtlasSprite;
-
-        public var vehicleIconAlly0:BattleAtlasSprite;
-
-        public var vehicleIconEnemy0:BattleAtlasSprite;
-
-        public var icoIGRAlly0:BattleAtlasSprite;
-
-        public var icoIGREnemy0:BattleAtlasSprite;
-
-        public var selfBgAlly0:BattleAtlasSprite;
-
         public var textFieldAlly1:TextField;
-
-        public var textFieldEnemy1:TextField;
-
-        public var vehicleFieldAlly1:TextField;
-
-        public var vehicleFieldEnemy1:TextField;
-
-        public var playerActionMarkerAlly1:PlayerActionMarker;
-
-        public var playerActionMarkerEnemy1:PlayerActionMarker;
-
-        public var vehicleTypeIconAlly1:BattleAtlasSprite;
-
-        public var vehicleTypeIconEnemy1:BattleAtlasSprite;
-
-        public var vehicleLevelIconAlly1:BattleAtlasSprite;
-
-        public var vehicleLevelIconEnemy1:BattleAtlasSprite;
-
-        public var vehicleIconAlly1:BattleAtlasSprite;
-
-        public var vehicleIconEnemy1:BattleAtlasSprite;
-
-        public var icoIGRAlly1:BattleAtlasSprite;
-
-        public var icoIGREnemy1:BattleAtlasSprite;
-
-        public var selfBgAlly1:BattleAtlasSprite;
 
         public var textFieldAlly2:TextField;
 
-        public var textFieldEnemy2:TextField;
-
-        public var vehicleFieldAlly2:TextField;
-
-        public var vehicleFieldEnemy2:TextField;
-
-        public var playerActionMarkerAlly2:PlayerActionMarker;
-
-        public var playerActionMarkerEnemy2:PlayerActionMarker;
-
-        public var vehicleTypeIconAlly2:BattleAtlasSprite;
-
-        public var vehicleTypeIconEnemy2:BattleAtlasSprite;
-
-        public var vehicleLevelIconAlly2:BattleAtlasSprite;
-
-        public var vehicleLevelIconEnemy2:BattleAtlasSprite;
-
-        public var vehicleIconAlly2:BattleAtlasSprite;
-
-        public var vehicleIconEnemy2:BattleAtlasSprite;
-
-        public var icoIGRAlly2:BattleAtlasSprite;
-
-        public var icoIGREnemy2:BattleAtlasSprite;
-
-        public var selfBgAlly2:BattleAtlasSprite;
-
         public var textFieldAlly3:TextField;
-
-        public var textFieldEnemy3:TextField;
-
-        public var vehicleFieldAlly3:TextField;
-
-        public var vehicleFieldEnemy3:TextField;
-
-        public var playerActionMarkerAlly3:PlayerActionMarker;
-
-        public var playerActionMarkerEnemy3:PlayerActionMarker;
-
-        public var vehicleTypeIconAlly3:BattleAtlasSprite;
-
-        public var vehicleTypeIconEnemy3:BattleAtlasSprite;
-
-        public var vehicleLevelIconAlly3:BattleAtlasSprite;
-
-        public var vehicleLevelIconEnemy3:BattleAtlasSprite;
-
-        public var vehicleIconAlly3:BattleAtlasSprite;
-
-        public var vehicleIconEnemy3:BattleAtlasSprite;
-
-        public var icoIGRAlly3:BattleAtlasSprite;
-
-        public var icoIGREnemy3:BattleAtlasSprite;
-
-        public var selfBgAlly3:BattleAtlasSprite;
 
         public var textFieldAlly4:TextField;
 
-        public var textFieldEnemy4:TextField;
-
-        public var vehicleFieldAlly4:TextField;
-
-        public var vehicleFieldEnemy4:TextField;
-
-        public var playerActionMarkerAlly4:PlayerActionMarker;
-
-        public var playerActionMarkerEnemy4:PlayerActionMarker;
-
-        public var vehicleTypeIconAlly4:BattleAtlasSprite;
-
-        public var vehicleTypeIconEnemy4:BattleAtlasSprite;
-
-        public var vehicleLevelIconAlly4:BattleAtlasSprite;
-
-        public var vehicleLevelIconEnemy4:BattleAtlasSprite;
-
-        public var vehicleIconAlly4:BattleAtlasSprite;
-
-        public var vehicleIconEnemy4:BattleAtlasSprite;
-
-        public var icoIGRAlly4:BattleAtlasSprite;
-
-        public var icoIGREnemy4:BattleAtlasSprite;
-
-        public var selfBgAlly4:BattleAtlasSprite;
-
         public var textFieldAlly5:TextField;
-
-        public var textFieldEnemy5:TextField;
-
-        public var vehicleFieldAlly5:TextField;
-
-        public var vehicleFieldEnemy5:TextField;
-
-        public var playerActionMarkerAlly5:PlayerActionMarker;
-
-        public var playerActionMarkerEnemy5:PlayerActionMarker;
-
-        public var vehicleTypeIconAlly5:BattleAtlasSprite;
-
-        public var vehicleTypeIconEnemy5:BattleAtlasSprite;
-
-        public var vehicleLevelIconAlly5:BattleAtlasSprite;
-
-        public var vehicleLevelIconEnemy5:BattleAtlasSprite;
-
-        public var vehicleIconAlly5:BattleAtlasSprite;
-
-        public var vehicleIconEnemy5:BattleAtlasSprite;
-
-        public var icoIGRAlly5:BattleAtlasSprite;
-
-        public var icoIGREnemy5:BattleAtlasSprite;
-
-        public var selfBgAlly5:BattleAtlasSprite;
 
         public var textFieldAlly6:TextField;
 
-        public var textFieldEnemy6:TextField;
-
-        public var vehicleFieldAlly6:TextField;
-
-        public var vehicleFieldEnemy6:TextField;
-
-        public var playerActionMarkerAlly6:PlayerActionMarker;
-
-        public var playerActionMarkerEnemy6:PlayerActionMarker;
-
-        public var vehicleTypeIconAlly6:BattleAtlasSprite;
-
-        public var vehicleTypeIconEnemy6:BattleAtlasSprite;
-
-        public var vehicleLevelIconAlly6:BattleAtlasSprite;
-
-        public var vehicleLevelIconEnemy6:BattleAtlasSprite;
-
-        public var vehicleIconAlly6:BattleAtlasSprite;
-
-        public var vehicleIconEnemy6:BattleAtlasSprite;
-
-        public var icoIGRAlly6:BattleAtlasSprite;
-
-        public var icoIGREnemy6:BattleAtlasSprite;
-
-        public var selfBgAlly6:BattleAtlasSprite;
-
         public var textFieldAlly7:TextField;
-
-        public var textFieldEnemy7:TextField;
-
-        public var vehicleFieldAlly7:TextField;
-
-        public var vehicleFieldEnemy7:TextField;
-
-        public var playerActionMarkerAlly7:PlayerActionMarker;
-
-        public var playerActionMarkerEnemy7:PlayerActionMarker;
-
-        public var vehicleTypeIconAlly7:BattleAtlasSprite;
-
-        public var vehicleTypeIconEnemy7:BattleAtlasSprite;
-
-        public var vehicleLevelIconAlly7:BattleAtlasSprite;
-
-        public var vehicleLevelIconEnemy7:BattleAtlasSprite;
-
-        public var vehicleIconAlly7:BattleAtlasSprite;
-
-        public var vehicleIconEnemy7:BattleAtlasSprite;
-
-        public var icoIGRAlly7:BattleAtlasSprite;
-
-        public var icoIGREnemy7:BattleAtlasSprite;
-
-        public var selfBgAlly7:BattleAtlasSprite;
 
         public var textFieldAlly8:TextField;
 
-        public var textFieldEnemy8:TextField;
-
-        public var vehicleFieldAlly8:TextField;
-
-        public var vehicleFieldEnemy8:TextField;
-
-        public var playerActionMarkerAlly8:PlayerActionMarker;
-
-        public var playerActionMarkerEnemy8:PlayerActionMarker;
-
-        public var vehicleTypeIconAlly8:BattleAtlasSprite;
-
-        public var vehicleTypeIconEnemy8:BattleAtlasSprite;
-
-        public var vehicleLevelIconAlly8:BattleAtlasSprite;
-
-        public var vehicleLevelIconEnemy8:BattleAtlasSprite;
-
-        public var vehicleIconAlly8:BattleAtlasSprite;
-
-        public var vehicleIconEnemy8:BattleAtlasSprite;
-
-        public var icoIGRAlly8:BattleAtlasSprite;
-
-        public var icoIGREnemy8:BattleAtlasSprite;
-
-        public var selfBgAlly8:BattleAtlasSprite;
-
         public var textFieldAlly9:TextField;
-
-        public var textFieldEnemy9:TextField;
-
-        public var vehicleFieldAlly9:TextField;
-
-        public var vehicleFieldEnemy9:TextField;
-
-        public var playerActionMarkerAlly9:PlayerActionMarker;
-
-        public var playerActionMarkerEnemy9:PlayerActionMarker;
-
-        public var vehicleTypeIconAlly9:BattleAtlasSprite;
-
-        public var vehicleTypeIconEnemy9:BattleAtlasSprite;
-
-        public var vehicleLevelIconAlly9:BattleAtlasSprite;
-
-        public var vehicleLevelIconEnemy9:BattleAtlasSprite;
-
-        public var vehicleIconAlly9:BattleAtlasSprite;
-
-        public var vehicleIconEnemy9:BattleAtlasSprite;
-
-        public var icoIGRAlly9:BattleAtlasSprite;
-
-        public var icoIGREnemy9:BattleAtlasSprite;
-
-        public var selfBgAlly9:BattleAtlasSprite;
 
         public var textFieldAlly10:TextField;
 
-        public var textFieldEnemy10:TextField;
-
-        public var vehicleFieldAlly10:TextField;
-
-        public var vehicleFieldEnemy10:TextField;
-
-        public var playerActionMarkerAlly10:PlayerActionMarker;
-
-        public var playerActionMarkerEnemy10:PlayerActionMarker;
-
-        public var vehicleTypeIconAlly10:BattleAtlasSprite;
-
-        public var vehicleTypeIconEnemy10:BattleAtlasSprite;
-
-        public var vehicleLevelIconAlly10:BattleAtlasSprite;
-
-        public var vehicleLevelIconEnemy10:BattleAtlasSprite;
-
-        public var vehicleIconAlly10:BattleAtlasSprite;
-
-        public var vehicleIconEnemy10:BattleAtlasSprite;
-
-        public var icoIGRAlly10:BattleAtlasSprite;
-
-        public var icoIGREnemy10:BattleAtlasSprite;
-
-        public var selfBgAlly10:BattleAtlasSprite;
-
         public var textFieldAlly11:TextField;
-
-        public var textFieldEnemy11:TextField;
-
-        public var vehicleFieldAlly11:TextField;
-
-        public var vehicleFieldEnemy11:TextField;
-
-        public var playerActionMarkerAlly11:PlayerActionMarker;
-
-        public var playerActionMarkerEnemy11:PlayerActionMarker;
-
-        public var vehicleTypeIconAlly11:BattleAtlasSprite;
-
-        public var vehicleTypeIconEnemy11:BattleAtlasSprite;
-
-        public var vehicleLevelIconAlly11:BattleAtlasSprite;
-
-        public var vehicleLevelIconEnemy11:BattleAtlasSprite;
-
-        public var vehicleIconAlly11:BattleAtlasSprite;
-
-        public var vehicleIconEnemy11:BattleAtlasSprite;
-
-        public var icoIGRAlly11:BattleAtlasSprite;
-
-        public var icoIGREnemy11:BattleAtlasSprite;
-
-        public var selfBgAlly11:BattleAtlasSprite;
 
         public var textFieldAlly12:TextField;
 
-        public var textFieldEnemy12:TextField;
-
-        public var vehicleFieldAlly12:TextField;
-
-        public var vehicleFieldEnemy12:TextField;
-
-        public var playerActionMarkerAlly12:PlayerActionMarker;
-
-        public var playerActionMarkerEnemy12:PlayerActionMarker;
-
-        public var vehicleTypeIconAlly12:BattleAtlasSprite;
-
-        public var vehicleTypeIconEnemy12:BattleAtlasSprite;
-
-        public var vehicleLevelIconAlly12:BattleAtlasSprite;
-
-        public var vehicleLevelIconEnemy12:BattleAtlasSprite;
-
-        public var vehicleIconAlly12:BattleAtlasSprite;
-
-        public var vehicleIconEnemy12:BattleAtlasSprite;
-
-        public var icoIGRAlly12:BattleAtlasSprite;
-
-        public var icoIGREnemy12:BattleAtlasSprite;
-
-        public var selfBgAlly12:BattleAtlasSprite;
-
         public var textFieldAlly13:TextField;
+
+        public var textFieldAlly14:TextField;
+
+        public var textFieldEnemy0:TextField;
+
+        public var textFieldEnemy1:TextField;
+
+        public var textFieldEnemy2:TextField;
+
+        public var textFieldEnemy3:TextField;
+
+        public var textFieldEnemy4:TextField;
+
+        public var textFieldEnemy5:TextField;
+
+        public var textFieldEnemy6:TextField;
+
+        public var textFieldEnemy7:TextField;
+
+        public var textFieldEnemy8:TextField;
+
+        public var textFieldEnemy9:TextField;
+
+        public var textFieldEnemy10:TextField;
+
+        public var textFieldEnemy11:TextField;
+
+        public var textFieldEnemy12:TextField;
 
         public var textFieldEnemy13:TextField;
 
+        public var textFieldEnemy14:TextField;
+
+        public var vehicleFieldAlly0:TextField;
+
+        public var vehicleFieldAlly1:TextField;
+
+        public var vehicleFieldAlly2:TextField;
+
+        public var vehicleFieldAlly3:TextField;
+
+        public var vehicleFieldAlly4:TextField;
+
+        public var vehicleFieldAlly5:TextField;
+
+        public var vehicleFieldAlly6:TextField;
+
+        public var vehicleFieldAlly7:TextField;
+
+        public var vehicleFieldAlly8:TextField;
+
+        public var vehicleFieldAlly9:TextField;
+
+        public var vehicleFieldAlly10:TextField;
+
+        public var vehicleFieldAlly11:TextField;
+
+        public var vehicleFieldAlly12:TextField;
+
         public var vehicleFieldAlly13:TextField;
+
+        public var vehicleFieldAlly14:TextField;
+
+        public var vehicleFieldEnemy0:TextField;
+
+        public var vehicleFieldEnemy1:TextField;
+
+        public var vehicleFieldEnemy2:TextField;
+
+        public var vehicleFieldEnemy3:TextField;
+
+        public var vehicleFieldEnemy4:TextField;
+
+        public var vehicleFieldEnemy5:TextField;
+
+        public var vehicleFieldEnemy6:TextField;
+
+        public var vehicleFieldEnemy7:TextField;
+
+        public var vehicleFieldEnemy8:TextField;
+
+        public var vehicleFieldEnemy9:TextField;
+
+        public var vehicleFieldEnemy10:TextField;
+
+        public var vehicleFieldEnemy11:TextField;
+
+        public var vehicleFieldEnemy12:TextField;
 
         public var vehicleFieldEnemy13:TextField;
 
+        public var vehicleFieldEnemy14:TextField;
+
+        public var playerActionMarkerAlly0:PlayerActionMarker;
+
+        public var playerActionMarkerAlly1:PlayerActionMarker;
+
+        public var playerActionMarkerAlly2:PlayerActionMarker;
+
+        public var playerActionMarkerAlly3:PlayerActionMarker;
+
+        public var playerActionMarkerAlly4:PlayerActionMarker;
+
+        public var playerActionMarkerAlly5:PlayerActionMarker;
+
+        public var playerActionMarkerAlly6:PlayerActionMarker;
+
+        public var playerActionMarkerAlly7:PlayerActionMarker;
+
+        public var playerActionMarkerAlly8:PlayerActionMarker;
+
+        public var playerActionMarkerAlly9:PlayerActionMarker;
+
+        public var playerActionMarkerAlly10:PlayerActionMarker;
+
+        public var playerActionMarkerAlly11:PlayerActionMarker;
+
+        public var playerActionMarkerAlly12:PlayerActionMarker;
+
         public var playerActionMarkerAlly13:PlayerActionMarker;
+
+        public var playerActionMarkerAlly14:PlayerActionMarker;
+
+        public var playerActionMarkerEnemy0:PlayerActionMarker;
+
+        public var playerActionMarkerEnemy1:PlayerActionMarker;
+
+        public var playerActionMarkerEnemy2:PlayerActionMarker;
+
+        public var playerActionMarkerEnemy3:PlayerActionMarker;
+
+        public var playerActionMarkerEnemy4:PlayerActionMarker;
+
+        public var playerActionMarkerEnemy5:PlayerActionMarker;
+
+        public var playerActionMarkerEnemy6:PlayerActionMarker;
+
+        public var playerActionMarkerEnemy7:PlayerActionMarker;
+
+        public var playerActionMarkerEnemy8:PlayerActionMarker;
+
+        public var playerActionMarkerEnemy9:PlayerActionMarker;
+
+        public var playerActionMarkerEnemy10:PlayerActionMarker;
+
+        public var playerActionMarkerEnemy11:PlayerActionMarker;
+
+        public var playerActionMarkerEnemy12:PlayerActionMarker;
 
         public var playerActionMarkerEnemy13:PlayerActionMarker;
 
+        public var playerActionMarkerEnemy14:PlayerActionMarker;
+
+        public var vehicleTypeIconAlly0:BattleAtlasSprite;
+
+        public var vehicleTypeIconAlly1:BattleAtlasSprite;
+
+        public var vehicleTypeIconAlly2:BattleAtlasSprite;
+
+        public var vehicleTypeIconAlly3:BattleAtlasSprite;
+
+        public var vehicleTypeIconAlly4:BattleAtlasSprite;
+
+        public var vehicleTypeIconAlly5:BattleAtlasSprite;
+
+        public var vehicleTypeIconAlly6:BattleAtlasSprite;
+
+        public var vehicleTypeIconAlly7:BattleAtlasSprite;
+
+        public var vehicleTypeIconAlly8:BattleAtlasSprite;
+
+        public var vehicleTypeIconAlly9:BattleAtlasSprite;
+
+        public var vehicleTypeIconAlly10:BattleAtlasSprite;
+
+        public var vehicleTypeIconAlly11:BattleAtlasSprite;
+
+        public var vehicleTypeIconAlly12:BattleAtlasSprite;
+
         public var vehicleTypeIconAlly13:BattleAtlasSprite;
+
+        public var vehicleTypeIconAlly14:BattleAtlasSprite;
+
+        public var vehicleTypeIconEnemy0:BattleAtlasSprite;
+
+        public var vehicleTypeIconEnemy1:BattleAtlasSprite;
+
+        public var vehicleTypeIconEnemy2:BattleAtlasSprite;
+
+        public var vehicleTypeIconEnemy3:BattleAtlasSprite;
+
+        public var vehicleTypeIconEnemy4:BattleAtlasSprite;
+
+        public var vehicleTypeIconEnemy5:BattleAtlasSprite;
+
+        public var vehicleTypeIconEnemy6:BattleAtlasSprite;
+
+        public var vehicleTypeIconEnemy7:BattleAtlasSprite;
+
+        public var vehicleTypeIconEnemy8:BattleAtlasSprite;
+
+        public var vehicleTypeIconEnemy9:BattleAtlasSprite;
+
+        public var vehicleTypeIconEnemy10:BattleAtlasSprite;
+
+        public var vehicleTypeIconEnemy11:BattleAtlasSprite;
+
+        public var vehicleTypeIconEnemy12:BattleAtlasSprite;
 
         public var vehicleTypeIconEnemy13:BattleAtlasSprite;
 
+        public var vehicleTypeIconEnemy14:BattleAtlasSprite;
+
+        public var vehicleLevelIconAlly0:BattleAtlasSprite;
+
+        public var vehicleLevelIconAlly1:BattleAtlasSprite;
+
+        public var vehicleLevelIconAlly2:BattleAtlasSprite;
+
+        public var vehicleLevelIconAlly3:BattleAtlasSprite;
+
+        public var vehicleLevelIconAlly4:BattleAtlasSprite;
+
+        public var vehicleLevelIconAlly5:BattleAtlasSprite;
+
+        public var vehicleLevelIconAlly6:BattleAtlasSprite;
+
+        public var vehicleLevelIconAlly7:BattleAtlasSprite;
+
+        public var vehicleLevelIconAlly8:BattleAtlasSprite;
+
+        public var vehicleLevelIconAlly9:BattleAtlasSprite;
+
+        public var vehicleLevelIconAlly10:BattleAtlasSprite;
+
+        public var vehicleLevelIconAlly11:BattleAtlasSprite;
+
+        public var vehicleLevelIconAlly12:BattleAtlasSprite;
+
         public var vehicleLevelIconAlly13:BattleAtlasSprite;
+
+        public var vehicleLevelIconAlly14:BattleAtlasSprite;
+
+        public var vehicleLevelIconEnemy0:BattleAtlasSprite;
+
+        public var vehicleLevelIconEnemy1:BattleAtlasSprite;
+
+        public var vehicleLevelIconEnemy2:BattleAtlasSprite;
+
+        public var vehicleLevelIconEnemy3:BattleAtlasSprite;
+
+        public var vehicleLevelIconEnemy4:BattleAtlasSprite;
+
+        public var vehicleLevelIconEnemy5:BattleAtlasSprite;
+
+        public var vehicleLevelIconEnemy6:BattleAtlasSprite;
+
+        public var vehicleLevelIconEnemy7:BattleAtlasSprite;
+
+        public var vehicleLevelIconEnemy8:BattleAtlasSprite;
+
+        public var vehicleLevelIconEnemy9:BattleAtlasSprite;
+
+        public var vehicleLevelIconEnemy10:BattleAtlasSprite;
+
+        public var vehicleLevelIconEnemy11:BattleAtlasSprite;
+
+        public var vehicleLevelIconEnemy12:BattleAtlasSprite;
 
         public var vehicleLevelIconEnemy13:BattleAtlasSprite;
 
+        public var vehicleLevelIconEnemy14:BattleAtlasSprite;
+
+        public var vehicleIconAlly0:BattleAtlasSprite;
+
+        public var vehicleIconAlly1:BattleAtlasSprite;
+
+        public var vehicleIconAlly2:BattleAtlasSprite;
+
+        public var vehicleIconAlly3:BattleAtlasSprite;
+
+        public var vehicleIconAlly4:BattleAtlasSprite;
+
+        public var vehicleIconAlly5:BattleAtlasSprite;
+
+        public var vehicleIconAlly6:BattleAtlasSprite;
+
+        public var vehicleIconAlly7:BattleAtlasSprite;
+
+        public var vehicleIconAlly8:BattleAtlasSprite;
+
+        public var vehicleIconAlly9:BattleAtlasSprite;
+
+        public var vehicleIconAlly10:BattleAtlasSprite;
+
+        public var vehicleIconAlly11:BattleAtlasSprite;
+
+        public var vehicleIconAlly12:BattleAtlasSprite;
+
         public var vehicleIconAlly13:BattleAtlasSprite;
+
+        public var vehicleIconAlly14:BattleAtlasSprite;
+
+        public var vehicleIconEnemy0:BattleAtlasSprite;
+
+        public var vehicleIconEnemy1:BattleAtlasSprite;
+
+        public var vehicleIconEnemy2:BattleAtlasSprite;
+
+        public var vehicleIconEnemy3:BattleAtlasSprite;
+
+        public var vehicleIconEnemy4:BattleAtlasSprite;
+
+        public var vehicleIconEnemy5:BattleAtlasSprite;
+
+        public var vehicleIconEnemy6:BattleAtlasSprite;
+
+        public var vehicleIconEnemy7:BattleAtlasSprite;
+
+        public var vehicleIconEnemy8:BattleAtlasSprite;
+
+        public var vehicleIconEnemy9:BattleAtlasSprite;
+
+        public var vehicleIconEnemy10:BattleAtlasSprite;
+
+        public var vehicleIconEnemy11:BattleAtlasSprite;
+
+        public var vehicleIconEnemy12:BattleAtlasSprite;
 
         public var vehicleIconEnemy13:BattleAtlasSprite;
 
+        public var vehicleIconEnemy14:BattleAtlasSprite;
+
+        public var icoIGRAlly0:BattleAtlasSprite;
+
+        public var icoIGRAlly1:BattleAtlasSprite;
+
+        public var icoIGRAlly2:BattleAtlasSprite;
+
+        public var icoIGRAlly3:BattleAtlasSprite;
+
+        public var icoIGRAlly4:BattleAtlasSprite;
+
+        public var icoIGRAlly5:BattleAtlasSprite;
+
+        public var icoIGRAlly6:BattleAtlasSprite;
+
+        public var icoIGRAlly7:BattleAtlasSprite;
+
+        public var icoIGRAlly8:BattleAtlasSprite;
+
+        public var icoIGRAlly9:BattleAtlasSprite;
+
+        public var icoIGRAlly10:BattleAtlasSprite;
+
+        public var icoIGRAlly11:BattleAtlasSprite;
+
+        public var icoIGRAlly12:BattleAtlasSprite;
+
         public var icoIGRAlly13:BattleAtlasSprite;
+
+        public var icoIGRAlly14:BattleAtlasSprite;
+
+        public var icoIGREnemy0:BattleAtlasSprite;
+
+        public var icoIGREnemy1:BattleAtlasSprite;
+
+        public var icoIGREnemy2:BattleAtlasSprite;
+
+        public var icoIGREnemy3:BattleAtlasSprite;
+
+        public var icoIGREnemy4:BattleAtlasSprite;
+
+        public var icoIGREnemy5:BattleAtlasSprite;
+
+        public var icoIGREnemy6:BattleAtlasSprite;
+
+        public var icoIGREnemy7:BattleAtlasSprite;
+
+        public var icoIGREnemy8:BattleAtlasSprite;
+
+        public var icoIGREnemy9:BattleAtlasSprite;
+
+        public var icoIGREnemy10:BattleAtlasSprite;
+
+        public var icoIGREnemy11:BattleAtlasSprite;
+
+        public var icoIGREnemy12:BattleAtlasSprite;
 
         public var icoIGREnemy13:BattleAtlasSprite;
 
-        public var selfBgAlly13:BattleAtlasSprite;
+        public var icoIGREnemy14:BattleAtlasSprite;
 
         public var badgeAlly0:BattleAtlasSprite;
 
@@ -619,41 +611,55 @@ package net.wg.gui.battle.battleloading.renderers
 
         public var badgeEnemy14:BattleAtlasSprite;
 
-        public var textFieldAlly14:TextField;
+        public var selfBgAlly0:BattleAtlasSprite;
 
-        public var textFieldEnemy14:TextField;
+        public var selfBgAlly1:BattleAtlasSprite;
 
-        public var vehicleFieldAlly14:TextField;
+        public var selfBgAlly2:BattleAtlasSprite;
 
-        public var vehicleFieldEnemy14:TextField;
+        public var selfBgAlly3:BattleAtlasSprite;
 
-        public var playerActionMarkerAlly14:PlayerActionMarker;
+        public var selfBgAlly4:BattleAtlasSprite;
 
-        public var playerActionMarkerEnemy14:PlayerActionMarker;
+        public var selfBgAlly5:BattleAtlasSprite;
 
-        public var vehicleTypeIconAlly14:BattleAtlasSprite;
+        public var selfBgAlly6:BattleAtlasSprite;
 
-        public var vehicleTypeIconEnemy14:BattleAtlasSprite;
+        public var selfBgAlly7:BattleAtlasSprite;
 
-        public var vehicleLevelIconAlly14:BattleAtlasSprite;
+        public var selfBgAlly8:BattleAtlasSprite;
 
-        public var vehicleLevelIconEnemy14:BattleAtlasSprite;
+        public var selfBgAlly9:BattleAtlasSprite;
 
-        public var vehicleIconAlly14:BattleAtlasSprite;
+        public var selfBgAlly10:BattleAtlasSprite;
 
-        public var vehicleIconEnemy14:BattleAtlasSprite;
+        public var selfBgAlly11:BattleAtlasSprite;
 
-        public var icoIGRAlly14:BattleAtlasSprite;
+        public var selfBgAlly12:BattleAtlasSprite;
 
-        public var icoIGREnemy14:BattleAtlasSprite;
+        public var selfBgAlly13:BattleAtlasSprite;
 
         public var selfBgAlly14:BattleAtlasSprite;
 
+        public var backTestersAlly:Vector.<MovieClip>;
+
+        public var backTestersEnemy:Vector.<MovieClip>;
+
+        public var icoTestersAlly:Vector.<BattleAtlasSprite>;
+
+        public var icoTestersEnemy:Vector.<BattleAtlasSprite>;
+
         public var textFieldsAlly:Vector.<TextField>;
+
+        public var textFieldsEnemy:Vector.<TextField>;
 
         public var vehicleFieldsAlly:Vector.<TextField>;
 
+        public var vehicleFieldsEnemy:Vector.<TextField>;
+
         public var playerActionMarkersAlly:Vector.<PlayerActionMarker>;
+
+        public var playerActionMarkersEnemy:Vector.<PlayerActionMarker>;
 
         public var vehicleTypeIconsAlly:Vector.<BattleAtlasSprite>;
 
@@ -661,27 +667,21 @@ package net.wg.gui.battle.battleloading.renderers
 
         public var vehicleIconsAlly:Vector.<BattleAtlasSprite>;
 
+        public var vehicleIconsEnemy:Vector.<BattleAtlasSprite>;
+
         public var icoIGRsAlly:Vector.<BattleAtlasSprite>;
 
-        public var selfBgs:Vector.<BattleAtlasSprite>;
-
-        public var textFieldsEnemy:Vector.<TextField>;
-
-        public var vehicleFieldsEnemy:Vector.<TextField>;
-
-        public var playerActionMarkersEnemy:Vector.<PlayerActionMarker>;
+        public var icoIGRsEnemy:Vector.<BattleAtlasSprite>;
 
         public var vehicleTypeIconsEnemy:Vector.<BattleAtlasSprite>;
 
         public var vehicleLevelIconsEnemy:Vector.<BattleAtlasSprite>;
 
-        public var vehicleIconsEnemy:Vector.<BattleAtlasSprite>;
-
-        public var icoIGRsEnemy:Vector.<BattleAtlasSprite>;
-
         public var badgesAlly:Vector.<BattleAtlasSprite>;
 
         public var badgesEnemy:Vector.<BattleAtlasSprite>;
+
+        public var selfBgs:Vector.<BattleAtlasSprite>;
 
         public function BaseRendererContainer()
         {
@@ -738,270 +738,255 @@ package net.wg.gui.battle.battleloading.renderers
                 _loc2_ = null;
             }
             this.textFieldsAlly.length = 0;
-            this.vehicleFieldsAlly.length = 0;
-            this.playerActionMarkersAlly.length = 0;
-            this.vehicleTypeIconsAlly.length = 0;
-            this.vehicleLevelIconsAlly.length = 0;
-            this.vehicleIconsAlly.length = 0;
-            this.icoIGRsAlly.length = 0;
-            this.selfBgs.length = 0;
             this.textFieldsEnemy.length = 0;
+            this.vehicleFieldsAlly.length = 0;
             this.vehicleFieldsEnemy.length = 0;
-            this.playerActionMarkersEnemy.length = 0;
+            this.vehicleTypeIconsAlly.length = 0;
             this.vehicleTypeIconsEnemy.length = 0;
+            this.vehicleLevelIconsAlly.length = 0;
             this.vehicleLevelIconsEnemy.length = 0;
+            this.vehicleIconsAlly.length = 0;
             this.vehicleIconsEnemy.length = 0;
+            this.icoIGRsAlly.length = 0;
             this.icoIGRsEnemy.length = 0;
+            this.playerActionMarkersAlly.length = 0;
+            this.playerActionMarkersEnemy.length = 0;
             this.badgesAlly.length = 0;
             this.badgesEnemy.length = 0;
-            this.backTestersEnemy.length = 0;
             this.backTestersAlly.length = 0;
-            this.icoTestersEnemy.length = 0;
+            this.backTestersEnemy.length = 0;
             this.icoTestersAlly.length = 0;
-            this.icoTestersEnemy = null;
-            this.icoTestersAlly = null;
+            this.icoTestersEnemy.length = 0;
+            this.selfBgs.length = 0;
+            this.textFieldsAlly = null;
+            this.textFieldsEnemy = null;
+            this.vehicleFieldsAlly = null;
+            this.vehicleFieldsEnemy = null;
+            this.vehicleTypeIconsAlly = null;
+            this.vehicleTypeIconsEnemy = null;
+            this.vehicleLevelIconsAlly = null;
+            this.vehicleLevelIconsEnemy = null;
+            this.vehicleIconsAlly = null;
+            this.vehicleIconsEnemy = null;
+            this.icoIGRsAlly = null;
+            this.icoIGRsEnemy = null;
+            this.playerActionMarkersAlly = null;
+            this.playerActionMarkersEnemy = null;
             this.badgesAlly = null;
             this.badgesEnemy = null;
-            this.textFieldsAlly = null;
-            this.vehicleFieldsAlly = null;
-            this.playerActionMarkersAlly = null;
-            this.vehicleTypeIconsAlly = null;
-            this.vehicleLevelIconsAlly = null;
-            this.vehicleIconsAlly = null;
-            this.icoIGRsAlly = null;
+            this.icoTestersAlly = null;
+            this.icoTestersEnemy = null;
             this.selfBgs = null;
-            this.textFieldsEnemy = null;
-            this.vehicleFieldsEnemy = null;
-            this.playerActionMarkersEnemy = null;
-            this.vehicleTypeIconsEnemy = null;
-            this.vehicleLevelIconsEnemy = null;
-            this.vehicleIconsEnemy = null;
-            this.icoIGRsEnemy = null;
             this.textFieldAlly0 = null;
-            this.textFieldEnemy0 = null;
-            this.vehicleFieldAlly0 = null;
-            this.vehicleFieldEnemy0 = null;
-            this.playerActionMarkerAlly0 = null;
-            this.playerActionMarkerEnemy0 = null;
-            this.vehicleTypeIconAlly0 = null;
-            this.vehicleTypeIconEnemy0 = null;
-            this.vehicleLevelIconAlly0 = null;
-            this.vehicleLevelIconEnemy0 = null;
-            this.vehicleIconAlly0 = null;
-            this.vehicleIconEnemy0 = null;
-            this.icoIGRAlly0 = null;
-            this.icoIGREnemy0 = null;
-            this.selfBgAlly0 = null;
             this.textFieldAlly1 = null;
-            this.textFieldEnemy1 = null;
-            this.vehicleFieldAlly1 = null;
-            this.vehicleFieldEnemy1 = null;
-            this.playerActionMarkerAlly1 = null;
-            this.playerActionMarkerEnemy1 = null;
-            this.vehicleTypeIconAlly1 = null;
-            this.vehicleTypeIconEnemy1 = null;
-            this.vehicleLevelIconAlly1 = null;
-            this.vehicleLevelIconEnemy1 = null;
-            this.vehicleIconAlly1 = null;
-            this.vehicleIconEnemy1 = null;
-            this.icoIGRAlly1 = null;
-            this.icoIGREnemy1 = null;
-            this.selfBgAlly1 = null;
             this.textFieldAlly2 = null;
-            this.textFieldEnemy2 = null;
-            this.vehicleFieldAlly2 = null;
-            this.vehicleFieldEnemy2 = null;
-            this.playerActionMarkerAlly2 = null;
-            this.playerActionMarkerEnemy2 = null;
-            this.vehicleTypeIconAlly2 = null;
-            this.vehicleTypeIconEnemy2 = null;
-            this.vehicleLevelIconAlly2 = null;
-            this.vehicleLevelIconEnemy2 = null;
-            this.vehicleIconAlly2 = null;
-            this.vehicleIconEnemy2 = null;
-            this.icoIGRAlly2 = null;
-            this.icoIGREnemy2 = null;
-            this.selfBgAlly2 = null;
             this.textFieldAlly3 = null;
-            this.textFieldEnemy3 = null;
-            this.vehicleFieldAlly3 = null;
-            this.vehicleFieldEnemy3 = null;
-            this.playerActionMarkerAlly3 = null;
-            this.playerActionMarkerEnemy3 = null;
-            this.vehicleTypeIconAlly3 = null;
-            this.vehicleTypeIconEnemy3 = null;
-            this.vehicleLevelIconAlly3 = null;
-            this.vehicleLevelIconEnemy3 = null;
-            this.vehicleIconAlly3 = null;
-            this.vehicleIconEnemy3 = null;
-            this.icoIGRAlly3 = null;
-            this.icoIGREnemy3 = null;
-            this.selfBgAlly3 = null;
             this.textFieldAlly4 = null;
-            this.textFieldEnemy4 = null;
-            this.vehicleFieldAlly4 = null;
-            this.vehicleFieldEnemy4 = null;
-            this.playerActionMarkerAlly4 = null;
-            this.playerActionMarkerEnemy4 = null;
-            this.vehicleTypeIconAlly4 = null;
-            this.vehicleTypeIconEnemy4 = null;
-            this.vehicleLevelIconAlly4 = null;
-            this.vehicleLevelIconEnemy4 = null;
-            this.vehicleIconAlly4 = null;
-            this.vehicleIconEnemy4 = null;
-            this.icoIGRAlly4 = null;
-            this.icoIGREnemy4 = null;
-            this.selfBgAlly4 = null;
             this.textFieldAlly5 = null;
-            this.textFieldEnemy5 = null;
-            this.vehicleFieldAlly5 = null;
-            this.vehicleFieldEnemy5 = null;
-            this.playerActionMarkerAlly5 = null;
-            this.playerActionMarkerEnemy5 = null;
-            this.vehicleTypeIconAlly5 = null;
-            this.vehicleTypeIconEnemy5 = null;
-            this.vehicleLevelIconAlly5 = null;
-            this.vehicleLevelIconEnemy5 = null;
-            this.vehicleIconAlly5 = null;
-            this.vehicleIconEnemy5 = null;
-            this.icoIGRAlly5 = null;
-            this.icoIGREnemy5 = null;
-            this.selfBgAlly5 = null;
             this.textFieldAlly6 = null;
-            this.textFieldEnemy6 = null;
-            this.vehicleFieldAlly6 = null;
-            this.vehicleFieldEnemy6 = null;
-            this.playerActionMarkerAlly6 = null;
-            this.playerActionMarkerEnemy6 = null;
-            this.vehicleTypeIconAlly6 = null;
-            this.vehicleTypeIconEnemy6 = null;
-            this.vehicleLevelIconAlly6 = null;
-            this.vehicleLevelIconEnemy6 = null;
-            this.vehicleIconAlly6 = null;
-            this.vehicleIconEnemy6 = null;
-            this.icoIGRAlly6 = null;
-            this.icoIGREnemy6 = null;
-            this.selfBgAlly6 = null;
             this.textFieldAlly7 = null;
-            this.textFieldEnemy7 = null;
-            this.vehicleFieldAlly7 = null;
-            this.vehicleFieldEnemy7 = null;
-            this.playerActionMarkerAlly7 = null;
-            this.playerActionMarkerEnemy7 = null;
-            this.vehicleTypeIconAlly7 = null;
-            this.vehicleTypeIconEnemy7 = null;
-            this.vehicleLevelIconAlly7 = null;
-            this.vehicleLevelIconEnemy7 = null;
-            this.vehicleIconAlly7 = null;
-            this.vehicleIconEnemy7 = null;
-            this.icoIGRAlly7 = null;
-            this.icoIGREnemy7 = null;
-            this.selfBgAlly7 = null;
             this.textFieldAlly8 = null;
-            this.textFieldEnemy8 = null;
-            this.vehicleFieldAlly8 = null;
-            this.vehicleFieldEnemy8 = null;
-            this.playerActionMarkerAlly8 = null;
-            this.playerActionMarkerEnemy8 = null;
-            this.vehicleTypeIconAlly8 = null;
-            this.vehicleTypeIconEnemy8 = null;
-            this.vehicleLevelIconAlly8 = null;
-            this.vehicleLevelIconEnemy8 = null;
-            this.vehicleIconAlly8 = null;
-            this.vehicleIconEnemy8 = null;
-            this.icoIGRAlly8 = null;
-            this.icoIGREnemy8 = null;
-            this.selfBgAlly8 = null;
             this.textFieldAlly9 = null;
-            this.textFieldEnemy9 = null;
-            this.vehicleFieldAlly9 = null;
-            this.vehicleFieldEnemy9 = null;
-            this.playerActionMarkerAlly9 = null;
-            this.playerActionMarkerEnemy9 = null;
-            this.vehicleTypeIconAlly9 = null;
-            this.vehicleTypeIconEnemy9 = null;
-            this.vehicleLevelIconAlly9 = null;
-            this.vehicleLevelIconEnemy9 = null;
-            this.vehicleIconAlly9 = null;
-            this.vehicleIconEnemy9 = null;
-            this.icoIGRAlly9 = null;
-            this.icoIGREnemy9 = null;
-            this.selfBgAlly9 = null;
             this.textFieldAlly10 = null;
-            this.textFieldEnemy10 = null;
-            this.vehicleFieldAlly10 = null;
-            this.vehicleFieldEnemy10 = null;
-            this.playerActionMarkerAlly10 = null;
-            this.playerActionMarkerEnemy10 = null;
-            this.vehicleTypeIconAlly10 = null;
-            this.vehicleTypeIconEnemy10 = null;
-            this.vehicleLevelIconAlly10 = null;
-            this.vehicleLevelIconEnemy10 = null;
-            this.vehicleIconAlly10 = null;
-            this.vehicleIconEnemy10 = null;
-            this.icoIGRAlly10 = null;
-            this.icoIGREnemy10 = null;
-            this.selfBgAlly10 = null;
             this.textFieldAlly11 = null;
-            this.textFieldEnemy11 = null;
-            this.vehicleFieldAlly11 = null;
-            this.vehicleFieldEnemy11 = null;
-            this.playerActionMarkerAlly11 = null;
-            this.playerActionMarkerEnemy11 = null;
-            this.vehicleTypeIconAlly11 = null;
-            this.vehicleTypeIconEnemy11 = null;
-            this.vehicleLevelIconAlly11 = null;
-            this.vehicleLevelIconEnemy11 = null;
-            this.vehicleIconAlly11 = null;
-            this.vehicleIconEnemy11 = null;
-            this.icoIGRAlly11 = null;
-            this.icoIGREnemy11 = null;
-            this.selfBgAlly11 = null;
             this.textFieldAlly12 = null;
-            this.textFieldEnemy12 = null;
-            this.vehicleFieldAlly12 = null;
-            this.vehicleFieldEnemy12 = null;
-            this.playerActionMarkerAlly12 = null;
-            this.playerActionMarkerEnemy12 = null;
-            this.vehicleTypeIconAlly12 = null;
-            this.vehicleTypeIconEnemy12 = null;
-            this.vehicleLevelIconAlly12 = null;
-            this.vehicleLevelIconEnemy12 = null;
-            this.vehicleIconAlly12 = null;
-            this.vehicleIconEnemy12 = null;
-            this.icoIGRAlly12 = null;
-            this.icoIGREnemy12 = null;
-            this.selfBgAlly12 = null;
             this.textFieldAlly13 = null;
-            this.textFieldEnemy13 = null;
-            this.vehicleFieldAlly13 = null;
-            this.vehicleFieldEnemy13 = null;
-            this.playerActionMarkerAlly13 = null;
-            this.playerActionMarkerEnemy13 = null;
-            this.vehicleTypeIconAlly13 = null;
-            this.vehicleTypeIconEnemy13 = null;
-            this.vehicleLevelIconAlly13 = null;
-            this.vehicleLevelIconEnemy13 = null;
-            this.vehicleIconAlly13 = null;
-            this.vehicleIconEnemy13 = null;
-            this.icoIGRAlly13 = null;
-            this.icoIGREnemy13 = null;
-            this.selfBgAlly13 = null;
             this.textFieldAlly14 = null;
+            this.textFieldEnemy0 = null;
+            this.textFieldEnemy1 = null;
+            this.textFieldEnemy2 = null;
+            this.textFieldEnemy3 = null;
+            this.textFieldEnemy4 = null;
+            this.textFieldEnemy5 = null;
+            this.textFieldEnemy6 = null;
+            this.textFieldEnemy7 = null;
+            this.textFieldEnemy8 = null;
+            this.textFieldEnemy9 = null;
+            this.textFieldEnemy10 = null;
+            this.textFieldEnemy11 = null;
+            this.textFieldEnemy12 = null;
+            this.textFieldEnemy13 = null;
             this.textFieldEnemy14 = null;
+            this.vehicleFieldAlly0 = null;
+            this.vehicleFieldAlly1 = null;
+            this.vehicleFieldAlly2 = null;
+            this.vehicleFieldAlly3 = null;
+            this.vehicleFieldAlly4 = null;
+            this.vehicleFieldAlly5 = null;
+            this.vehicleFieldAlly6 = null;
+            this.vehicleFieldAlly7 = null;
+            this.vehicleFieldAlly8 = null;
+            this.vehicleFieldAlly9 = null;
+            this.vehicleFieldAlly10 = null;
+            this.vehicleFieldAlly11 = null;
+            this.vehicleFieldAlly12 = null;
+            this.vehicleFieldAlly13 = null;
             this.vehicleFieldAlly14 = null;
+            this.vehicleFieldEnemy0 = null;
+            this.vehicleFieldEnemy1 = null;
+            this.vehicleFieldEnemy2 = null;
+            this.vehicleFieldEnemy3 = null;
+            this.vehicleFieldEnemy4 = null;
+            this.vehicleFieldEnemy5 = null;
+            this.vehicleFieldEnemy6 = null;
+            this.vehicleFieldEnemy7 = null;
+            this.vehicleFieldEnemy8 = null;
+            this.vehicleFieldEnemy9 = null;
+            this.vehicleFieldEnemy10 = null;
+            this.vehicleFieldEnemy11 = null;
+            this.vehicleFieldEnemy12 = null;
+            this.vehicleFieldEnemy13 = null;
             this.vehicleFieldEnemy14 = null;
+            this.playerActionMarkerAlly0 = null;
+            this.playerActionMarkerAlly1 = null;
+            this.playerActionMarkerAlly2 = null;
+            this.playerActionMarkerAlly3 = null;
+            this.playerActionMarkerAlly4 = null;
+            this.playerActionMarkerAlly5 = null;
+            this.playerActionMarkerAlly6 = null;
+            this.playerActionMarkerAlly7 = null;
+            this.playerActionMarkerAlly8 = null;
+            this.playerActionMarkerAlly9 = null;
+            this.playerActionMarkerAlly10 = null;
+            this.playerActionMarkerAlly11 = null;
+            this.playerActionMarkerAlly12 = null;
+            this.playerActionMarkerAlly13 = null;
             this.playerActionMarkerAlly14 = null;
+            this.playerActionMarkerEnemy0 = null;
+            this.playerActionMarkerEnemy1 = null;
+            this.playerActionMarkerEnemy2 = null;
+            this.playerActionMarkerEnemy3 = null;
+            this.playerActionMarkerEnemy4 = null;
+            this.playerActionMarkerEnemy5 = null;
+            this.playerActionMarkerEnemy6 = null;
+            this.playerActionMarkerEnemy7 = null;
+            this.playerActionMarkerEnemy8 = null;
+            this.playerActionMarkerEnemy9 = null;
+            this.playerActionMarkerEnemy10 = null;
+            this.playerActionMarkerEnemy11 = null;
+            this.playerActionMarkerEnemy12 = null;
+            this.playerActionMarkerEnemy13 = null;
             this.playerActionMarkerEnemy14 = null;
+            this.vehicleTypeIconAlly0 = null;
+            this.vehicleTypeIconAlly1 = null;
+            this.vehicleTypeIconAlly2 = null;
+            this.vehicleTypeIconAlly3 = null;
+            this.vehicleTypeIconAlly4 = null;
+            this.vehicleTypeIconAlly5 = null;
+            this.vehicleTypeIconAlly6 = null;
+            this.vehicleTypeIconAlly7 = null;
+            this.vehicleTypeIconAlly8 = null;
+            this.vehicleTypeIconAlly9 = null;
+            this.vehicleTypeIconAlly10 = null;
+            this.vehicleTypeIconAlly11 = null;
+            this.vehicleTypeIconAlly12 = null;
+            this.vehicleTypeIconAlly13 = null;
             this.vehicleTypeIconAlly14 = null;
+            this.vehicleTypeIconEnemy0 = null;
+            this.vehicleTypeIconEnemy1 = null;
+            this.vehicleTypeIconEnemy2 = null;
+            this.vehicleTypeIconEnemy3 = null;
+            this.vehicleTypeIconEnemy4 = null;
+            this.vehicleTypeIconEnemy5 = null;
+            this.vehicleTypeIconEnemy6 = null;
+            this.vehicleTypeIconEnemy7 = null;
+            this.vehicleTypeIconEnemy8 = null;
+            this.vehicleTypeIconEnemy9 = null;
+            this.vehicleTypeIconEnemy10 = null;
+            this.vehicleTypeIconEnemy11 = null;
+            this.vehicleTypeIconEnemy12 = null;
+            this.vehicleTypeIconEnemy13 = null;
             this.vehicleTypeIconEnemy14 = null;
+            this.vehicleLevelIconAlly0 = null;
+            this.vehicleLevelIconAlly1 = null;
+            this.vehicleLevelIconAlly2 = null;
+            this.vehicleLevelIconAlly3 = null;
+            this.vehicleLevelIconAlly4 = null;
+            this.vehicleLevelIconAlly5 = null;
+            this.vehicleLevelIconAlly6 = null;
+            this.vehicleLevelIconAlly7 = null;
+            this.vehicleLevelIconAlly8 = null;
+            this.vehicleLevelIconAlly9 = null;
+            this.vehicleLevelIconAlly10 = null;
+            this.vehicleLevelIconAlly11 = null;
+            this.vehicleLevelIconAlly12 = null;
+            this.vehicleLevelIconAlly13 = null;
             this.vehicleLevelIconAlly14 = null;
+            this.vehicleLevelIconEnemy0 = null;
+            this.vehicleLevelIconEnemy1 = null;
+            this.vehicleLevelIconEnemy2 = null;
+            this.vehicleLevelIconEnemy3 = null;
+            this.vehicleLevelIconEnemy4 = null;
+            this.vehicleLevelIconEnemy5 = null;
+            this.vehicleLevelIconEnemy6 = null;
+            this.vehicleLevelIconEnemy7 = null;
+            this.vehicleLevelIconEnemy8 = null;
+            this.vehicleLevelIconEnemy9 = null;
+            this.vehicleLevelIconEnemy10 = null;
+            this.vehicleLevelIconEnemy11 = null;
+            this.vehicleLevelIconEnemy12 = null;
+            this.vehicleLevelIconEnemy13 = null;
             this.vehicleLevelIconEnemy14 = null;
+            this.vehicleIconAlly0 = null;
+            this.vehicleIconAlly1 = null;
+            this.vehicleIconAlly2 = null;
+            this.vehicleIconAlly3 = null;
+            this.vehicleIconAlly4 = null;
+            this.vehicleIconAlly5 = null;
+            this.vehicleIconAlly6 = null;
+            this.vehicleIconAlly7 = null;
+            this.vehicleIconAlly8 = null;
+            this.vehicleIconAlly9 = null;
+            this.vehicleIconAlly10 = null;
+            this.vehicleIconAlly11 = null;
+            this.vehicleIconAlly12 = null;
+            this.vehicleIconAlly13 = null;
             this.vehicleIconAlly14 = null;
+            this.vehicleIconEnemy0 = null;
+            this.vehicleIconEnemy1 = null;
+            this.vehicleIconEnemy2 = null;
+            this.vehicleIconEnemy3 = null;
+            this.vehicleIconEnemy4 = null;
+            this.vehicleIconEnemy5 = null;
+            this.vehicleIconEnemy6 = null;
+            this.vehicleIconEnemy7 = null;
+            this.vehicleIconEnemy8 = null;
+            this.vehicleIconEnemy9 = null;
+            this.vehicleIconEnemy10 = null;
+            this.vehicleIconEnemy11 = null;
+            this.vehicleIconEnemy12 = null;
+            this.vehicleIconEnemy13 = null;
             this.vehicleIconEnemy14 = null;
+            this.icoIGRAlly0 = null;
+            this.icoIGRAlly1 = null;
+            this.icoIGRAlly2 = null;
+            this.icoIGRAlly3 = null;
+            this.icoIGRAlly4 = null;
+            this.icoIGRAlly5 = null;
+            this.icoIGRAlly6 = null;
+            this.icoIGRAlly7 = null;
+            this.icoIGRAlly8 = null;
+            this.icoIGRAlly9 = null;
+            this.icoIGRAlly10 = null;
+            this.icoIGRAlly11 = null;
+            this.icoIGRAlly12 = null;
+            this.icoIGRAlly13 = null;
             this.icoIGRAlly14 = null;
+            this.icoIGREnemy0 = null;
+            this.icoIGREnemy1 = null;
+            this.icoIGREnemy2 = null;
+            this.icoIGREnemy3 = null;
+            this.icoIGREnemy4 = null;
+            this.icoIGREnemy5 = null;
+            this.icoIGREnemy6 = null;
+            this.icoIGREnemy7 = null;
+            this.icoIGREnemy8 = null;
+            this.icoIGREnemy9 = null;
+            this.icoIGREnemy10 = null;
+            this.icoIGREnemy11 = null;
+            this.icoIGREnemy12 = null;
+            this.icoIGREnemy13 = null;
             this.icoIGREnemy14 = null;
-            this.selfBgAlly14 = null;
             this.badgeAlly0 = null;
             this.badgeAlly1 = null;
             this.badgeAlly2 = null;
@@ -1032,6 +1017,21 @@ package net.wg.gui.battle.battleloading.renderers
             this.badgeEnemy12 = null;
             this.badgeEnemy13 = null;
             this.badgeEnemy14 = null;
+            this.selfBgAlly0 = null;
+            this.selfBgAlly1 = null;
+            this.selfBgAlly2 = null;
+            this.selfBgAlly3 = null;
+            this.selfBgAlly4 = null;
+            this.selfBgAlly5 = null;
+            this.selfBgAlly6 = null;
+            this.selfBgAlly7 = null;
+            this.selfBgAlly8 = null;
+            this.selfBgAlly9 = null;
+            this.selfBgAlly10 = null;
+            this.selfBgAlly11 = null;
+            this.selfBgAlly12 = null;
+            this.selfBgAlly13 = null;
+            this.selfBgAlly14 = null;
         }
     }
 }

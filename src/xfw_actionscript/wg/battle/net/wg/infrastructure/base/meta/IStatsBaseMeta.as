@@ -5,10 +5,10 @@ package net.wg.infrastructure.base.meta
     public interface IStatsBaseMeta extends IEventDispatcher
     {
 
-        function acceptSquadS(param1:Number) : void;
+        function acceptSquadS(param1:String) : void;
 
-        function addToSquadS(param1:Number) : void;
+        function addToSquadS(param1:String) : void;
 
-        function as_setIsIntaractive(param1:Boolean) : void;
+        function as_setIsInteractive(param1:Boolean) : void;
     }
 }

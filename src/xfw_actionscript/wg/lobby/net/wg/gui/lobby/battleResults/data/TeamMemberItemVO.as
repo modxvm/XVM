@@ -83,17 +83,19 @@ package net.wg.gui.lobby.battleResults.data
 
         public var killerID:int;
 
-        public var killerNameStr:String = "";
+        public var killerFakeNameStr:String = "";
+
+        public var killerRealNameStr:String = "";
 
         public var killerClanNameStr:String = "";
+
+        public var killerFullNameStr:String = "";
 
         public var killerRegionNameStr:String = "";
 
         public var vehicleStatePrefixStr:String = "";
 
         public var vehicleStateSuffixStr:String = "";
-
-        public var killerFullNameStr:String = "";
 
         public var vehicleCD:Number = -1;
 

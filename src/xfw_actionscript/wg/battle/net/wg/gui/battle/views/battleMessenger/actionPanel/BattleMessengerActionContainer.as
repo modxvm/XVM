@@ -11,6 +11,7 @@ package net.wg.gui.battle.views.battleMessenger.actionPanel
     import net.wg.gui.battle.views.battleMessenger.VO.ButtonToxicStatusVO;
     import scaleform.clik.utils.Padding;
     import net.wg.data.constants.generated.ATLAS_CONSTANTS;
+    import net.wg.data.constants.Values;
     import net.wg.data.constants.generated.BATTLE_CONTEXT_MENU_HANDLER_TYPE;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.VO.PlayersPanelContextMenuSentData;
     import net.wg.data.constants.generated.BATTLE_MESSAGES_CONSTS;
@@ -34,7 +35,7 @@ package net.wg.gui.battle.views.battleMessenger.actionPanel
 
         private var _bg:Sprite = null;
 
-        private var _messageID:Number = -1;
+        private var _messageID:String = "";
 
         private var _callbackFunction:Function = null;
 
@@ -155,7 +156,7 @@ package net.wg.gui.battle.views.battleMessenger.actionPanel
             this._bg.width = param1;
         }
 
-        public function syncUpdater(param1:Number, param2:BattleMessengerToxicVO) : void
+        public function syncUpdater(param1:String, param2:BattleMessengerToxicVO) : void
         {
             if(this._messageID != param1)
             {
@@ -219,7 +220,7 @@ package net.wg.gui.battle.views.battleMessenger.actionPanel
                 this.visible = false;
                 this.onClosedCallback(this._messageID);
                 this._vehicleID = -1;
-                this._messageID = -1;
+                this._messageID = Values.EMPTY_STR;
                 this._callbackFunction();
                 this._isShowContainer = false;
             }

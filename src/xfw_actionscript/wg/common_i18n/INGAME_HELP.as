@@ -175,19 +175,27 @@ package
 
         public static const DETAILSHELP_WHEELEDVEH_TWOMODES_TITLE:String = "#ingame_help:detailsHelp/wheeledVeh/twoModes/title";
 
-        public static const DETAILSHELP_WHEELEDVEH_BURNOUT_TITLE:String = "#ingame_help:detailsHelp/wheeledVeh/burnout/title";
-
-        public static const DETAILSHELP_WHEELEDVEH_ABOUTTECHNIQUE_TITLE:String = "#ingame_help:detailsHelp/wheeledVeh/aboutTechnique/title";
-
-        public static const DETAILSHELP_WHEELEDVEH_STABLECHASSIS_TITLE:String = "#ingame_help:detailsHelp/wheeledVeh/stableChassis/title";
-
         public static const DETAILSHELP_WHEELEDVEH_TWOMODES:String = "#ingame_help:detailsHelp/wheeledVeh/twoModes";
+
+        public static const DETAILSHELP_WHEELEDVEH_BURNOUT_TITLE:String = "#ingame_help:detailsHelp/wheeledVeh/burnout/title";
 
         public static const DETAILSHELP_WHEELEDVEH_BURNOUT:String = "#ingame_help:detailsHelp/wheeledVeh/burnout";
 
+        public static const DETAILSHELP_WHEELEDVEH_ABOUTTECHNIQUE_TITLE:String = "#ingame_help:detailsHelp/wheeledVeh/aboutTechnique/title";
+
         public static const DETAILSHELP_WHEELEDVEH_ABOUTTECHNIQUE:String = "#ingame_help:detailsHelp/wheeledVeh/aboutTechnique";
 
+        public static const DETAILSHELP_WHEELEDVEH_STABLECHASSIS_TITLE:String = "#ingame_help:detailsHelp/wheeledVeh/stableChassis/title";
+
         public static const DETAILSHELP_WHEELEDVEH_STABLECHASSIS:String = "#ingame_help:detailsHelp/wheeledVeh/stableChassis";
+
+        public static const DETAILSHELP_DUALGUN_QUICK_FIRE_TITLE:String = "#ingame_help:detailsHelp/dualGun/quick_fire/title";
+
+        public static const DETAILSHELP_DUALGUN_QUICK_FIRE:String = "#ingame_help:detailsHelp/dualGun/quick_fire";
+
+        public static const DETAILSHELP_DUALGUN_VOLLEY_FIRE_TITLE:String = "#ingame_help:detailsHelp/dualGun/volley_fire/title";
+
+        public static const DETAILSHELP_DUALGUN_VOLLEY_FIRE:String = "#ingame_help:detailsHelp/dualGun/volley_fire";
 
         public static const DETAILSHELP_NOKEYSWARNING:String = "#ingame_help:detailsHelp/noKeysWarning";
 

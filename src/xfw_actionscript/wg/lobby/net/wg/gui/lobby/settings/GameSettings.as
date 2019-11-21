@@ -12,6 +12,7 @@ package net.wg.gui.lobby.settings
     import net.wg.gui.components.controls.CheckBox;
     import net.wg.gui.lobby.settings.vo.IncreasedZoomVO;
     import net.wg.gui.lobby.settings.vo.ShowDamageIconVO;
+    import net.wg.gui.lobby.settings.vo.AnonymizerExtraVO;
     import net.wg.data.constants.Values;
     import net.wg.gui.lobby.settings.vo.SettingsControlProp;
     import net.wg.gui.components.controls.Slider;
@@ -37,6 +38,8 @@ package net.wg.gui.lobby.settings
         private static const INCREASED_ZOOM_LBL:String = "increasedZoom";
 
         private static const SHOW_DAMAGE_ICON_LBL:String = "showDamageIcon";
+
+        private static const ANONYMIZER:String = "anonymizer";
 
         private static const TO_STRING_MSG:String = "WG GameSettings: ";
 
@@ -91,7 +94,8 @@ package net.wg.gui.lobby.settings
             var _loc10_:* = false;
             var _loc12_:IncreasedZoomVO = null;
             var _loc13_:ShowDamageIconVO = null;
-            var _loc14_:String = null;
+            var _loc14_:AnonymizerExtraVO = null;
+            var _loc15_:String = null;
             var _loc2_:Vector.<String> = param1.keys;
             var _loc3_:Vector.<Object> = param1.values;
             var _loc4_:int = _loc2_.length;
@@ -135,6 +139,15 @@ package net.wg.gui.lobby.settings
                                 _loc9_.label = _loc13_.checkBoxLabel;
                                 _loc13_.dispose();
                             }
+                            else if(_loc5_ == ANONYMIZER)
+                            {
+                                _loc14_ = new AnonymizerExtraVO(_loc6_.extraData);
+                                _loc9_.label = _loc14_.checkBoxLabel;
+                                _loc9_.toolTip = _loc14_.tooltip;
+                                _loc9_.visible = _loc14_.visible;
+                                _loc9_.enabled = _loc14_.enabled;
+                                _loc14_.dispose();
+                            }
                             break;
                         case SettingsConfigHelper.TYPE_DROPDOWN:
                             this.setupDropDown(_loc7_[_loc8_],_loc6_,_loc10_);
@@ -150,8 +163,8 @@ package net.wg.gui.lobby.settings
                             this.setupButtonBar(ButtonBarEx(_loc7_[_loc8_]),_loc6_,_loc10_);
                             if(_loc5_ == SettingsConfigHelper.CAROUSEL_TYPE)
                             {
-                                _loc14_ = SettingsConfigHelper.CAROUSEL_TYPE_ID[_loc6_.current];
-                                _loc7_.doubleCarouselTypeDropDown.enabled = _loc14_ == SettingsConfigHelper.CAROUSEL_DOUBLE;
+                                _loc15_ = SettingsConfigHelper.CAROUSEL_TYPE_ID[_loc6_.current];
+                                _loc7_.doubleCarouselTypeDropDown.enabled = _loc15_ == SettingsConfigHelper.CAROUSEL_DOUBLE;
                             }
                             break;
                     }

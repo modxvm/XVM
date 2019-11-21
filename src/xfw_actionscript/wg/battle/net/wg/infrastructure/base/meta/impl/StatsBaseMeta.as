@@ -15,13 +15,13 @@ package net.wg.infrastructure.base.meta.impl
             super();
         }
 
-        public function acceptSquadS(param1:Number) : void
+        public function acceptSquadS(param1:String) : void
         {
             App.utils.asserter.assertNotNull(this.acceptSquad,"acceptSquad" + Errors.CANT_NULL);
             this.acceptSquad(param1);
         }
 
-        public function addToSquadS(param1:Number) : void
+        public function addToSquadS(param1:String) : void
         {
             App.utils.asserter.assertNotNull(this.addToSquad,"addToSquad" + Errors.CANT_NULL);
             this.addToSquad(param1);

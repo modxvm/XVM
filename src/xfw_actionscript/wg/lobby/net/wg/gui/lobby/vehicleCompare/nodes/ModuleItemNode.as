@@ -140,7 +140,7 @@ package net.wg.gui.lobby.vehicleCompare.nodes
 
         private function setExtraIcon(param1:String) : void
         {
-            this.typeIcon.setExtraIcon(param1);
+            this.typeIcon.setExtraIconByLinkage(param1);
             this.typeIcon.extraIconX = DEFAULT_EXTRA_ICON_X;
             this.typeIcon.extraIconY = DEFAULT_EXTRA_ICON_Y;
             this.typeIcon.showExtraIcon();

@@ -619,8 +619,8 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
 
         private function onSubmitBtnClickHandler(param1:ButtonEvent) : void
         {
-            var _loc9_:* = 0;
-            var _loc11_:ISaleItemBlockRenderer = null;
+            var _loc10_:* = 0;
+            var _loc12_:ISaleItemBlockRenderer = null;
             var _loc2_:Vector.<ISaleItemBlockRenderer> = this.slidingComponent.slidingScrList.getRenderers();
             var _loc3_:Vector.<ISaleItemBlockRenderer> = this.devicesComponent.deviceItemRenderer;
             var _loc4_:Array = [];
@@ -628,75 +628,82 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
             var _loc6_:Array = [];
             var _loc7_:Array = [];
             var _loc8_:Array = [];
-            var _loc10_:int = _loc2_.length;
-            _loc9_ = 0;
-            while(_loc9_ < _loc10_)
+            var _loc9_:Array = [];
+            var _loc11_:int = _loc2_.length;
+            _loc10_ = 0;
+            while(_loc10_ < _loc11_)
             {
-                _loc11_ = _loc2_[_loc9_];
-                if(!_loc11_.toInventory)
+                _loc12_ = _loc2_[_loc10_];
+                if(!_loc12_.toInventory)
                 {
-                    switch(_loc11_.type)
+                    switch(_loc12_.type)
                     {
                         case FITTING_TYPES.OPTIONAL_DEVICE:
                             _loc4_.push({
-                                "intCD":_loc11_.intCD,
-                                "count":_loc11_.count
+                                "intCD":_loc12_.intCD,
+                                "count":_loc12_.count
                             });
                             break;
                         case FITTING_TYPES.SHELL:
-                            if(_loc11_.fromInventory)
+                            if(_loc12_.fromInventory)
                             {
                                 _loc7_.push({
-                                    "intCD":_loc11_.intCD,
-                                    "count":_loc11_.count
+                                    "intCD":_loc12_.intCD,
+                                    "count":_loc12_.count
                                 });
                             }
                             else
                             {
                                 _loc5_.push({
-                                    "intCD":_loc11_.intCD,
-                                    "count":_loc11_.count
+                                    "intCD":_loc12_.intCD,
+                                    "count":_loc12_.count
                                 });
                             }
                             break;
                         case FITTING_TYPES.EQUIPMENT:
                             _loc6_.push({
-                                "intCD":_loc11_.intCD,
-                                "count":_loc11_.count
+                                "intCD":_loc12_.intCD,
+                                "count":_loc12_.count
                             });
                             break;
                         case FITTING_TYPES.MODULE:
-                            if(_loc11_.sellExternalData)
+                            if(_loc12_.sellExternalData)
                             {
-                                _loc7_ = _loc7_.concat(_loc11_.sellExternalData);
+                                _loc7_ = _loc7_.concat(_loc12_.sellExternalData);
                             }
                             break;
                         case FITTING_TYPES.CUSTOMIZATION:
                             _loc8_.push({
-                                "intCD":_loc11_.intCD,
-                                "count":_loc11_.count
+                                "intCD":_loc12_.intCD,
+                                "count":_loc12_.count
+                            });
+                            break;
+                        case FITTING_TYPES.BOOSTER:
+                            _loc9_.push({
+                                "intCD":_loc12_.intCD,
+                                "count":_loc12_.count
                             });
                             break;
                     }
                 }
-                _loc9_++;
+                _loc10_++;
             }
-            _loc10_ = _loc3_.length;
-            _loc9_ = 0;
-            while(_loc9_ < _loc10_)
+            _loc11_ = _loc3_.length;
+            _loc10_ = 0;
+            while(_loc10_ < _loc11_)
             {
-                if(!_loc3_[_loc9_].toInventory)
+                if(!_loc3_[_loc10_].toInventory)
                 {
                     _loc4_.push({
-                        "intCD":_loc3_[_loc9_].intCD,
-                        "count":_loc3_[_loc9_].count
+                        "intCD":_loc3_[_loc10_].intCD,
+                        "count":_loc3_[_loc10_].count
                     });
                 }
-                _loc9_++;
+                _loc10_++;
             }
-            var _loc12_:* = this.headerComponent.inBarracksDrop.selectedIndex == 1;
+            var _loc13_:* = this.headerComponent.inBarracksDrop.selectedIndex == 1;
             setDialogSettingsS(this._setingsDropBtn.selected);
-            sellS(this._vehicleVo.intCD,_loc5_,_loc6_,_loc4_,_loc7_,_loc8_,_loc12_);
+            sellS(this._vehicleVo.intCD,_loc5_,_loc6_,_loc4_,_loc7_,_loc8_,_loc9_,_loc13_);
         }
 
         private function onSlidingComponentListWasDrawnHandler(param1:VehicleSellDialogEvent) : void

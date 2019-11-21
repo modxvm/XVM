@@ -30,7 +30,7 @@ package net.wg.gui.lobby.moduleInfo
 
         public var paramType:TextField;
 
-        protected var _bottomMargin:Number;
+        private var _bottomMargin:Number;
 
         private var _headerText:String = "";
 
@@ -79,29 +79,31 @@ package net.wg.gui.lobby.moduleInfo
 
         public function setParameters(param1:Array = null) : void
         {
-            var _loc3_:Object = null;
+            var _loc3_:* = 0;
             var _loc4_:* = 0;
-            var _loc5_:ICounterProps = null;
+            var _loc5_:Object = null;
+            var _loc6_:ICounterProps = null;
             this.paramValue.htmlText = Values.EMPTY_STR;
             this.paramType.htmlText = Values.EMPTY_STR;
             var _loc2_:int = param1.length;
             if(_loc2_ > 0)
             {
-                _loc4_ = 0;
-                for each(_loc3_ in param1)
+                _loc3_ = 0;
+                for each(_loc5_ in param1)
                 {
-                    if(_loc4_ > 0)
+                    _loc4_ = this.paramType.numLines;
+                    TextFieldEx.appendHtml(this.paramType,_loc5_.type);
+                    TextFieldEx.appendHtml(this.paramValue,_loc5_.value);
+                    if(this.paramType.numLines - _loc4_ > 1)
                     {
                         TextFieldEx.appendHtml(this.paramValue,"\n");
                     }
-                    TextFieldEx.appendHtml(this.paramValue,_loc3_.value);
-                    TextFieldEx.appendHtml(this.paramType,_loc3_.type);
-                    if(_loc3_.highlight)
+                    if(_loc5_.highlight)
                     {
-                        _loc5_ = new CounterProps(COUNTER_OFFSET_X,this.paramValue.y + COUNTER_OFFSET_Y + COUNTER_STEP * _loc4_,TextFormatAlign.LEFT,true,Linkages.COUNTER_LINE_BIG_UI);
-                        this._counterManager.setCounter(this,CounterManager.COUNTER_EMPTY,null,_loc5_);
+                        _loc6_ = new CounterProps(COUNTER_OFFSET_X,this.paramValue.y + COUNTER_OFFSET_Y + COUNTER_STEP * _loc3_,TextFormatAlign.LEFT,true,Linkages.COUNTER_LINE_BIG_UI);
+                        this._counterManager.setCounter(this,CounterManager.COUNTER_EMPTY,null,_loc6_);
                     }
-                    _loc4_++;
+                    _loc3_++;
                 }
             }
             height = this.paramValue.y + this.paramValue.height + this._bottomMargin;

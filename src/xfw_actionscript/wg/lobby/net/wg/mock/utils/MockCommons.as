@@ -44,17 +44,17 @@ package net.wg.mock.utils
         {
         }
 
-        public function formatPlayerName(param1:TextField, param2:IUserProps) : Boolean
+        public function formatPlayerName(param1:TextField, param2:IUserProps, param3:Boolean = false, param4:Boolean = false) : Boolean
         {
             return false;
         }
 
-        public function getFullPlayerName(param1:IUserProps) : String
+        public function getFullPlayerName(param1:IUserProps, param2:Boolean = false) : String
         {
             return "";
         }
 
-        public function getUserProps(param1:String, param2:String = null, param3:String = null, param4:int = 0, param5:Array = null, param6:int = 0, param7:String = "") : IUserProps
+        public function getUserProps(param1:String, param2:String = null, param3:String = null, param4:int = 0, param5:Array = null, param6:int = 0, param7:String = "", param8:String = "") : IUserProps
         {
             return null;
         }

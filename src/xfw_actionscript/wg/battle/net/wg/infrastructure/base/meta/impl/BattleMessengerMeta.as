@@ -75,19 +75,19 @@ package net.wg.infrastructure.base.meta.impl
             this.focusLost();
         }
 
-        public function getToxicStatusS(param1:Number) : Object
+        public function getToxicStatusS(param1:String) : Object
         {
             App.utils.asserter.assertNotNull(this.getToxicStatus,"getToxicStatus" + Errors.CANT_NULL);
             return this.getToxicStatus(param1);
         }
 
-        public function onToxicButtonClickedS(param1:Number, param2:Number) : void
+        public function onToxicButtonClickedS(param1:String, param2:Number) : void
         {
             App.utils.asserter.assertNotNull(this.onToxicButtonClicked,"onToxicButtonClicked" + Errors.CANT_NULL);
             this.onToxicButtonClicked(param1,param2);
         }
 
-        public function onToxicPanelClosedS(param1:Number) : void
+        public function onToxicPanelClosedS(param1:String) : void
         {
             App.utils.asserter.assertNotNull(this.onToxicPanelClosed,"onToxicPanelClosed" + Errors.CANT_NULL);
             this.onToxicPanelClosed(param1);

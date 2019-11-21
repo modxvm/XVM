@@ -80,5 +80,7 @@ package net.wg.infrastructure.base.meta
         function as_cancelDualGunCharge() : void;
 
         function as_updateDualGunMarkerState(param1:int) : void;
+
+        function as_runCameraTransitionFx(param1:int, param2:Number) : void;
     }
 }

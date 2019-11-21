@@ -291,6 +291,8 @@ package
 
         public static const DIALOGS_SQUADCHANNEL_SIMPLECHATNAME:String = "#messenger:dialogs/squadChannel/simpleChatName";
 
+        public static const DIALOGS_SQUADCHANNEL_SIMPLECHATALERT_ANONYMIZER:String = "#messenger:dialogs/squadChannel/simpleChatAlert/anonymizer";
+
         public static const DIALOGS_SQUADCHANNEL_MEMBERS:String = "#messenger:dialogs/squadChannel/members";
 
         public static const DIALOGS_SQUADCHANNEL_VEHICLES:String = "#messenger:dialogs/squadChannel/vehicles";
@@ -354,6 +356,8 @@ package
         public static const DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_INBATTLE:String = "#messenger:dialogs/squadChannel/tooltips/status/inBattle";
 
         public static const DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_AFK:String = "#messenger:dialogs/squadChannel/tooltips/status/afk";
+
+        public static const SERVER_ERRORS_SETTINGERROR_CHANGEUNAVAILABLE_MESSAGE:String = "#messenger:server/errors/settingError/changeUnavailable/message";
 
         public static const SERVER_ERRORS_INTERNALERROR_TITLE:String = "#messenger:server/errors/internalError/title";
 
@@ -510,6 +514,8 @@ package
         public static const CLIENT_DYNSQUAD_INVITESENT:String = "#messenger:client/dynSquad/inviteSent";
 
         public static const CLIENT_DYNSQUAD_INVITERECEIVED:String = "#messenger:client/dynSquad/inviteReceived";
+
+        public static const CLIENT_DYNSQUAD_INVITERECEIVED_ANONYMIZED:String = "#messenger:client/dynSquad/inviteReceived/anonymized";
 
         public static const CLIENT_DYNSQUAD_INVITEACCEPTED_USER:String = "#messenger:client/dynSquad/inviteAccepted/user";
 

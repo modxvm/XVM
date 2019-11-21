@@ -43,7 +43,7 @@ package net.wg.gui.battle.random.views.stats.components.playersPanel.list
 
         override protected function updateListItemVehicleDataValues() : void
         {
-            this._randomListItem.getDynamicSquad().setUID(vehicleData.accountDBID);
+            this._randomListItem.getDynamicSquad().setSessionID(vehicleData.sessionID);
         }
 
         override protected function updateVehicleDataValues() : void

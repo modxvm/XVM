@@ -164,11 +164,12 @@ package net.wg.gui.battle.views.superPlatoonPanel.list
         {
             if(!this._userProps)
             {
-                this._userProps = new StatsUserProps(this._vehicleData.playerName,this._vehicleData.clanAbbrev,this._vehicleData.region,0,this._vehicleData.userTags);
+                this._userProps = new StatsUserProps(this._vehicleData.playerName,this._vehicleData.playerFakeName,this._vehicleData.clanAbbrev,this._vehicleData.region,0,this._vehicleData.userTags);
             }
             else
             {
                 this._userProps.userName = this._vehicleData.playerName;
+                this._userProps.fakeName = this._vehicleData.playerFakeName;
                 this._userProps.clanAbbrev = this._vehicleData.clanAbbrev;
                 this._userProps.region = this._vehicleData.region;
                 this._userProps.tags = this._vehicleData.userTags;

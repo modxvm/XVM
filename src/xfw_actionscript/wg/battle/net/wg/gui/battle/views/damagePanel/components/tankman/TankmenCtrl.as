@@ -136,9 +136,9 @@ package net.wg.gui.battle.views.damagePanel.components.tankman
             this.showStatusIndicator(param1,true,param2);
         }
 
-        public function hideStatus(param1:int) : void
+        public function hideStatus(param1:int, param2:Boolean) : void
         {
-            this.showStatusIndicator(param1,false);
+            this.showStatusIndicator(param1,false,param2);
         }
 
         private function showStatusIndicator(param1:int, param2:Boolean, param3:Boolean = false) : void
@@ -155,7 +155,7 @@ package net.wg.gui.battle.views.damagePanel.components.tankman
                 }
                 else
                 {
-                    _loc5_.hideStatus(param1);
+                    _loc5_.hideStatus(param1,param3);
                 }
                 _loc6_++;
             }

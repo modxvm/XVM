@@ -17,6 +17,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
     import scaleform.clik.events.ButtonEvent;
     import net.wg.gui.lobby.hangar.ammunitionPanel.events.AmmunitionPanelEvents;
     import net.wg.data.constants.generated.FITTING_TYPES;
+    import scaleform.clik.events.ComponentEvent;
     import net.wg.gui.lobby.components.data.DeviceSlotVO;
     import net.wg.gui.lobby.modulesPanel.data.DevicesDataVO;
     import net.wg.data.constants.Values;
@@ -31,6 +32,9 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
     import net.wg.gui.lobby.modulesPanel.data.FittingSelectPopoverParams;
     import net.wg.data.Aliases;
     import net.wg.infrastructure.managers.ITooltipFormatter;
+    import net.wg.utils.ICounterProps;
+    import flash.text.TextFormatAlign;
+    import net.wg.gui.components.common.Counter;
 
     public class AmmunitionPanel extends AmmunitionPanelMeta implements IAmmunitionPanel
     {
@@ -166,6 +170,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         private var _changeNationBtnVisible:Boolean;
 
         private var _changeNationIsNew:Boolean;
+
+        private var _boosterCounter:int;
 
         private var _buttonWidth:Number = 131;
 
@@ -310,6 +316,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
             this.booster.type = FITTING_TYPES.BOOSTER;
             this.booster.addEventListener(ButtonEvent.CLICK,this.onBoosterSlotClickHandler);
+            this.booster.addEventListener(ComponentEvent.SHOW,this.onBoosterVisibilityChanged);
+            this.booster.addEventListener(ComponentEvent.HIDE,this.onBoosterVisibilityChanged);
             this.toRent.addEventListener(MouseEvent.ROLL_OVER,this.onBtnRollOverHandler);
             this.toRent.addEventListener(MouseEvent.ROLL_OUT,this.onBtnRollOutHandler);
             this.toRent.addEventListener(ButtonEvent.CLICK,this.onToRentClickHandler);
@@ -405,6 +413,15 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
 
+        public function as_setBoosterBtnCounter(param1:int) : void
+        {
+            if(this._boosterCounter != param1)
+            {
+                this._boosterCounter = param1;
+                this.onBoosterCounterUpdate();
+            }
+        }
+
         public function as_showBattleAbilitiesAlert(param1:Boolean) : void
         {
             this._showBattleAbilitiesHighlighter = param1;
@@ -435,6 +452,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                 _loc1_.removeEventListener(ButtonEvent.CLICK,this.onAbilitySlotClickHandler);
             }
             this.booster.removeEventListener(ButtonEvent.CLICK,this.onBoosterSlotClickHandler);
+            this.booster.removeEventListener(ComponentEvent.SHOW,this.onBoosterVisibilityChanged);
+            this.booster.removeEventListener(ComponentEvent.HIDE,this.onBoosterVisibilityChanged);
             this._optionalDevices.splice(0,this._optionalDevices.length);
             this._optionalDevices = null;
             this._equipment.splice(0,this._equipment.length);
@@ -785,6 +804,11 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
 
+        private function onBoosterVisibilityChanged(param1:Event) : void
+        {
+            this.onBoosterCounterUpdate();
+        }
+
         private function onOptDeviceSlotClickHandler(param1:ButtonEvent) : void
         {
             if(param1.buttonIdx == MouseEventEx.LEFT_BUTTON)
@@ -888,6 +912,20 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                     _loc3_++;
                 }
                 this.centerPanel();
+            }
+        }
+
+        private function onBoosterCounterUpdate() : void
+        {
+            var _loc1_:ICounterProps = null;
+            if(this.booster.visible && this._boosterCounter > 0)
+            {
+                _loc1_ = new CounterProps(CounterProps.DEFAULT_OFFSET_X,CounterProps.DEFAULT_OFFSET_Y,TextFormatAlign.LEFT,true,Linkages.COUNTER_UI,CounterProps.DEFAULT_TF_PADDING,false,Counter.EMPTY_STATE);
+                this._counterManager.setCounter(this.booster.hitMc,"",null,_loc1_);
+            }
+            else
+            {
+                this._counterManager.removeCounter(this.booster.hitMc);
             }
         }
     }

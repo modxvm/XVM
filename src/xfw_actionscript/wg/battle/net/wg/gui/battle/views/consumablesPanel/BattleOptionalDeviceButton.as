@@ -22,6 +22,7 @@ package net.wg.gui.battle.views.consumablesPanel
         {
             super();
             isAllowedToShowToolTipOnDisabledState = true;
+            hideToolTipOnClickActions = false;
             this._consumablesVO = new ConsumablesVO();
             enabled = false;
             state = InteractiveStates.UP;

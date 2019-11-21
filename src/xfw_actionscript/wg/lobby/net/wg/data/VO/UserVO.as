@@ -12,11 +12,13 @@ package net.wg.data.VO
 
         private var _dbID:Number = 0;
 
-        private var _fullName:String = "";
+        private var _fakeName:String = "";
 
         private var _userName:String = "";
 
         private var _clanAbbrev:String = "";
+
+        private var _fullName:String = "";
 
         private var _region:String = "";
 
@@ -36,7 +38,7 @@ package net.wg.data.VO
         {
             this._tags = [];
             super(param1);
-            this._userProps = App.utils.commons.getUserProps(this._userName,this._clanAbbrev,this._region,this._igrType,this._tags,this._badge,this._badgeImgStr);
+            this._userProps = App.utils.commons.getUserProps(this._userName,this._clanAbbrev,this._region,this._igrType,this._tags,this._badge,this._badgeImgStr,this._fakeName);
         }
 
         override protected function onDispose() : void
@@ -61,30 +63,6 @@ package net.wg.data.VO
             super.onDispose();
         }
 
-        public function get accID() : Number
-        {
-            return this._accID;
-        }
-
-        public function set accID(param1:Number) : void
-        {
-            this._accID = param1;
-        }
-
-        public function get isTeamKiller() : Boolean
-        {
-            return this._isTeamKiller;
-        }
-
-        public function set isTeamKiller(param1:Boolean) : void
-        {
-            this._isTeamKiller = param1;
-            if(this._userProps)
-            {
-                this._userProps.isTeamKiller = param1;
-            }
-        }
-
         public function get dbID() : Number
         {
             return this._dbID;
@@ -95,14 +73,38 @@ package net.wg.data.VO
             this._dbID = param1;
         }
 
-        public function get fullName() : String
+        public function get accID() : Number
         {
-            return this._fullName;
+            return this._accID;
         }
 
-        public function set fullName(param1:String) : void
+        public function set accID(param1:Number) : void
         {
-            this._fullName = param1;
+            this._accID = param1;
+        }
+
+        public function get uid() : Number
+        {
+            return this._dbID;
+        }
+
+        public function get kickId() : Number
+        {
+            return this._dbID;
+        }
+
+        public function get fakeName() : String
+        {
+            return this._fakeName;
+        }
+
+        public function set fakeName(param1:String) : void
+        {
+            this._fakeName = param1;
+            if(this._userProps)
+            {
+                this._userProps.fakeName = param1;
+            }
         }
 
         public function get userName() : String
@@ -133,6 +135,16 @@ package net.wg.data.VO
             }
         }
 
+        public function get fullName() : String
+        {
+            return this._fullName;
+        }
+
+        public function set fullName(param1:String) : void
+        {
+            this._fullName = param1;
+        }
+
         public function get region() : String
         {
             return this._region;
@@ -145,30 +157,6 @@ package net.wg.data.VO
             {
                 this._userProps.region = param1;
             }
-        }
-
-        public function get igrType() : int
-        {
-            return this._igrType;
-        }
-
-        public function set igrType(param1:int) : void
-        {
-            this._igrType = param1;
-            if(this._userProps)
-            {
-                this._userProps.igrType = param1;
-            }
-        }
-
-        public function get uid() : Number
-        {
-            return this._dbID;
-        }
-
-        public function get kickId() : Number
-        {
-            return this._dbID;
         }
 
         public function get tags() : Array
@@ -188,6 +176,20 @@ package net.wg.data.VO
         public function get userProps() : IUserProps
         {
             return this._userProps;
+        }
+
+        public function get igrType() : int
+        {
+            return this._igrType;
+        }
+
+        public function set igrType(param1:int) : void
+        {
+            this._igrType = param1;
+            if(this._userProps)
+            {
+                this._userProps.igrType = param1;
+            }
         }
 
         public function get badge() : int
@@ -216,6 +218,25 @@ package net.wg.data.VO
             {
                 this._userProps.badgeImgStr = param1;
             }
+        }
+
+        public function get isTeamKiller() : Boolean
+        {
+            return this._isTeamKiller;
+        }
+
+        public function set isTeamKiller(param1:Boolean) : void
+        {
+            this._isTeamKiller = param1;
+            if(this._userProps)
+            {
+                this._userProps.isTeamKiller = param1;
+            }
+        }
+
+        public function get isAnonymized() : Boolean
+        {
+            return this._userProps.isAnonymized || this._fakeName && this._fakeName != this._userName;
         }
     }
 }

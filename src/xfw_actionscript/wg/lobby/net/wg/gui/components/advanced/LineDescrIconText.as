@@ -48,6 +48,7 @@ package net.wg.gui.components.advanced
             _loc1_.drawRect(0,0,1,1);
             _loc1_.endFill();
             addChild(this.hitSprite);
+            this.hitSprite.name = "hitSprite";
             this.hitArea = this.hitSprite;
         }
 
@@ -64,13 +65,18 @@ package net.wg.gui.components.advanced
             }
             if(isInvalid(InvalidationType.SIZE))
             {
-                this.hitSprite.width = this.width;
-                this.hitSprite.height = this.textField.y + this.textField.textHeight;
+                this.resizeHitSprite();
             }
             if(isInvalid(TOOLTIP_INVALID))
             {
                 this.refreshTooltip();
             }
+        }
+
+        protected function resizeHitSprite() : void
+        {
+            this.hitSprite.width = this.width;
+            this.hitSprite.height = this.textField.y + this.textField.textHeight;
         }
 
         override protected function applyText(param1:String) : void

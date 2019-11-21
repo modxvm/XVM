@@ -9,17 +9,22 @@ package net.wg.gui.battle.random.views.stats.events
 
         public static const ADD:String = "add";
 
-        public var uid:Number = -1;
+        private var _sessionID:String = "";
 
-        public function DynamicSquadEvent(param1:String, param2:Number, param3:Boolean = false, param4:Boolean = false)
+        public function DynamicSquadEvent(param1:String, param2:String, param3:Boolean = false, param4:Boolean = false)
         {
             super(param1,param3,param4);
-            this.uid = param2;
+            this._sessionID = param2;
+        }
+
+        public function get sessionID() : String
+        {
+            return this._sessionID;
         }
 
         override public function clone() : Event
         {
-            return new DynamicSquadEvent(type,this.uid,bubbles,cancelable);
+            return new DynamicSquadEvent(type,this._sessionID,bubbles,cancelable);
         }
     }
 }

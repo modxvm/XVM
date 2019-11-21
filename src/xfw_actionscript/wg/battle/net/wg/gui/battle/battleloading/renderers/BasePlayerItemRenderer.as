@@ -7,11 +7,11 @@ package net.wg.gui.battle.battleloading.renderers
     import net.wg.gui.components.icons.PlayerActionMarker;
     import flash.display.MovieClip;
     import net.wg.infrastructure.managers.IColorSchemeManager;
+    import net.wg.data.constants.Values;
     import net.wg.data.constants.generated.BATTLEATLAS;
     import org.idmedia.as3commons.util.StringUtils;
     import net.wg.gui.battle.battleloading.BattleLoadingHelper;
     import net.wg.gui.battle.views.stats.constants.PlayerStatusSchemeName;
-    import net.wg.data.constants.UserTags;
     import net.wg.infrastructure.interfaces.IColorScheme;
     import net.wg.data.constants.Errors;
     import flash.text.TextFieldAutoSize;
@@ -150,7 +150,7 @@ package net.wg.gui.battle.battleloading.renderers
                 this.setSelfBG();
                 this.setBadge();
                 this._textField.visible = true;
-                App.utils.commons.formatPlayerName(this._textField,App.utils.commons.getUserProps(this.model.playerName,this.model.clanAbbrev,this.model.region,0,this.model.userTags));
+                App.utils.commons.formatPlayerName(this._textField,App.utils.commons.getUserProps(this.model.playerName,this.model.clanAbbrev,this.model.region,Values.ZERO,this.model.userTags,Values.ZERO,Values.EMPTY_STR,this.model.playerFakeName),!this.model.isCurrentPlayer,this.model.isCurrentPlayer);
                 this._vehicleField.visible = true;
                 this._vehicleField.text = this.model.vehicleName;
                 this._icoIGR.visible = this.model.isIGR;
@@ -319,7 +319,7 @@ package net.wg.gui.battle.battleloading.renderers
             var _loc4_:* = false;
             var _loc5_:* = NaN;
             var _loc1_:Boolean = this.model.isAlive();
-            var _loc2_:String = PlayerStatusSchemeName.getSchemeNameForVehicle(UserTags.isCurrentPlayer(this.model.userTags),this.model.isSquadPersonal(),this.model.isTeamKiller(),!_loc1_,!this.model.isReady());
+            var _loc2_:String = PlayerStatusSchemeName.getSchemeNameForVehicle(this.model.isCurrentPlayer,this.model.isSquadPersonal(),this.model.isTeamKiller(),!_loc1_,!this.model.isReady());
             var _loc3_:IColorScheme = this._colorMgr.getScheme(_loc2_);
             if(_loc3_)
             {
@@ -331,7 +331,7 @@ package net.wg.gui.battle.battleloading.renderers
             {
                 this._vehicleLevelIcon.transform.colorTransform = _loc3_.colorTransform;
             }
-            _loc2_ = PlayerStatusSchemeName.getSchemeNameForPlayer(UserTags.isCurrentPlayer(this.model.userTags),this.model.isSquadPersonal(),this.model.isTeamKiller(),!_loc1_,!this.model.isReady());
+            _loc2_ = PlayerStatusSchemeName.getSchemeNameForPlayer(this.model.isCurrentPlayer,this.model.isSquadPersonal(),this.model.isTeamKiller(),!_loc1_,!this.model.isReady());
             _loc3_ = this._colorMgr.getScheme(_loc2_);
             if(_loc3_)
             {

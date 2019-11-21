@@ -35,25 +35,27 @@ package net.wg.gui.lobby.battleResults.data
 
         public var clans:Object = null;
 
-        public var clanNameStr:String = "";
-
         public var duration:String = "";
 
         public var finishReasonStr:String = "";
 
         public var iconType:String = "";
 
-        public var playerNameStr:String = "";
+        public var playerFakeNameStr:String = "";
+
+        public var playerRealNameStr:String = "";
+
+        public var clanNameStr:String = "";
 
         public var playerFullNameStr:String = "";
+
+        public var regionNameStr:String = "";
 
         public var playerKilled:String = "";
 
         public var playerVehicles:Vector.<VehicleStatsVO> = null;
 
         public var playerVehicleNames:Array;
-
-        public var regionNameStr:String = "";
 
         public var resultShortStr:String = "";
 

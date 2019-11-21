@@ -2,10 +2,10 @@ package net.wg.infrastructure.managers.impl
 {
     import net.wg.infrastructure.managers.utils.impl.CommonsBase;
     import flash.text.TextField;
-    import net.wg.infrastructure.interfaces.IUserProps;
+    import flash.geom.Rectangle;
     import net.wg.data.constants.Values;
     import net.wg.data.constants.UserTags;
-    import flash.geom.Rectangle;
+    import net.wg.infrastructure.interfaces.IUserProps;
 
     public class CommonsBattle extends CommonsBase
     {
@@ -15,45 +15,7 @@ package net.wg.infrastructure.managers.impl
             super();
         }
 
-        override public function formatPlayerName(param1:TextField, param2:IUserProps) : Boolean
-        {
-            var _loc10_:* = false;
-            var _loc12_:String = null;
-            var _loc13_:Vector.<String> = null;
-            var _loc14_:* = 0;
-            var _loc3_:Array = param2.tags;
-            var _loc4_:String = param2.userName;
-            var _loc5_:String = param2.clanAbbrev?CLAN_TAG_OPEN + param2.clanAbbrev + CLAN_TAG_CLOSE:Values.EMPTY_STR;
-            var _loc6_:String = param2.region?Values.SPACE_STR + param2.region:Values.EMPTY_STR;
-            var _loc7_:String = Values.EMPTY_STR;
-            var _loc8_:uint = param1.textColor;
-            if(_loc3_ && UserTags.isInIGR(_loc3_))
-            {
-                _loc7_ = Values.SPACE_STR + (UserTags.isBaseIGR(_loc3_)?IMG_TAG_OPEN_BASIC:IMG_TAG_OPEN_PREMIUM) + param2.igrVspace + IMG_TAG_CLOSE;
-            }
-            var _loc9_:String = _loc4_ + _loc5_ + _loc6_ + _loc7_;
-            var _loc11_:Number = param1.width;
-            param1.htmlText = _loc9_;
-            if(_loc11_ < param1.textWidth + TEXT_FIELD_BOUNDS_WIDTH)
-            {
-                _loc10_ = true;
-                _loc12_ = _loc6_ + _loc7_;
-                _loc13_ = new <String>["",_loc5_,_loc7_,_loc12_,_loc5_ + _loc12_];
-                _loc14_ = _loc13_.length - 1;
-                while(_loc14_ >= 0)
-                {
-                    if(this.cutPlayerName(param1,_loc4_,_loc13_[_loc14_]))
-                    {
-                        break;
-                    }
-                    _loc14_--;
-                }
-            }
-            param1.textColor = _loc8_;
-            return _loc10_;
-        }
-
-        private function cutPlayerName(param1:TextField, param2:String, param3:String) : Boolean
+        private static function cutPlayerName(param1:TextField, param2:String, param3:String) : Boolean
         {
             var _loc4_:* = 4;
             var _loc5_:uint = param2.length;
@@ -89,6 +51,49 @@ package net.wg.infrastructure.managers.impl
             }
             param1.htmlText = param2.substr(0,_loc5_) + CUT_SYMBOLS_STR + param3;
             return _loc12_ >= _loc4_;
+        }
+
+        private static function formatIgrStr(param1:Array, param2:int) : String
+        {
+            var _loc3_:String = Values.EMPTY_STR;
+            if(param1 && UserTags.isInIGR(param1))
+            {
+                _loc3_ = UserTags.isBaseIGR(param1)?IMG_TAG_OPEN_BASIC:IMG_TAG_OPEN_PREMIUM;
+                return Values.SPACE_STR + _loc3_ + param2 + IMG_TAG_CLOSE;
+            }
+            return _loc3_;
+        }
+
+        override public function formatPlayerName(param1:TextField, param2:IUserProps, param3:Boolean = false, param4:Boolean = false) : Boolean
+        {
+            var _loc11_:* = false;
+            var _loc12_:String = null;
+            var _loc13_:Vector.<String> = null;
+            var _loc14_:* = 0;
+            var _loc5_:String = param2.userName;
+            var _loc6_:String = param2.clanAbbrev?CLAN_TAG_OPEN + param2.clanAbbrev + CLAN_TAG_CLOSE:Values.EMPTY_STR;
+            var _loc7_:String = param2.region?Values.SPACE_STR + param2.region:Values.EMPTY_STR;
+            var _loc8_:String = formatIgrStr(param2.tags,param2.igrVspace);
+            var _loc9_:uint = param1.textColor;
+            var _loc10_:String = param2.isAnonymized && param4?Values.SPACE_STR + IMG_TAG_EYE_ICON:Values.EMPTY_STR;
+            param1.htmlText = _loc5_ + _loc6_ + _loc7_ + _loc8_ + _loc10_;
+            if(param1.width < param1.textWidth + TEXT_FIELD_BOUNDS_WIDTH)
+            {
+                _loc11_ = true;
+                _loc12_ = _loc7_ + _loc8_ + _loc10_;
+                _loc13_ = new <String>[Values.EMPTY_STR,_loc6_,_loc8_,_loc12_,_loc6_ + _loc12_];
+                _loc14_ = _loc13_.length - 1;
+                while(_loc14_ >= 0)
+                {
+                    if(cutPlayerName(param1,_loc5_,_loc13_[_loc14_]))
+                    {
+                        break;
+                    }
+                    _loc14_--;
+                }
+            }
+            param1.textColor = _loc9_;
+            return _loc11_;
         }
     }
 }

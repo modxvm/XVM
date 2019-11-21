@@ -17,6 +17,7 @@ package net.wg.gui.messenger
     import scaleform.clik.ui.InputDetails;
     import flash.ui.Keyboard;
     import scaleform.clik.constants.InputValue;
+    import flash.events.Event;
 
     public class ChannelComponent extends ChannelComponentMeta implements IChannelComponent
     {
@@ -144,7 +145,7 @@ package net.wg.gui.messenger
         {
             if(param1 != Values.EMPTY_STR && param1 != null)
             {
-                this.messageArea.appendHtmlResetPosition(param1 + "\n");
+                this.messageArea.appendHtmlResetPosition(param1 + Values.NEW_LINE);
                 this.hideExternalTF();
                 if(this.messageArea.textField.scrollV < this.messageArea.textField.maxScrollV)
                 {
@@ -225,7 +226,7 @@ package net.wg.gui.messenger
             var _loc1_:String = getHistoryS();
             if(_loc1_ != null && _loc1_ != Values.EMPTY_STR)
             {
-                this.messageArea.htmlText = _loc1_ + "\n";
+                this.messageArea.htmlText = _loc1_ + Values.NEW_LINE;
                 this.hideExternalTF();
             }
             else
@@ -238,6 +239,11 @@ package net.wg.gui.messenger
         public function get externalHintTF() : TextField
         {
             return this._externalHintTF;
+        }
+
+        public function getChatInfo() : String
+        {
+            return getInfoS();
         }
 
         public function set externalHintTF(param1:TextField) : void
@@ -292,6 +298,11 @@ package net.wg.gui.messenger
         private function onMessageAreaLinkHandler(param1:TextEvent) : void
         {
             onLinkClickS(param1.text);
+        }
+
+        public function as_notifyInfoChanged() : void
+        {
+            dispatchEvent(new Event(Event.CHANGE));
         }
     }
 }

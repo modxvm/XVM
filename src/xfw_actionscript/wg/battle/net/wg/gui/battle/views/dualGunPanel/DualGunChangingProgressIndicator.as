@@ -2,6 +2,8 @@ package net.wg.gui.battle.views.dualGunPanel
 {
     import flash.display.MovieClip;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
+    import scaleform.clik.motion.Tween;
+    import fl.motion.easing.Quartic;
 
     public class DualGunChangingProgressIndicator extends MovieClip implements IDisposable
     {
@@ -16,7 +18,7 @@ package net.wg.gui.battle.views.dualGunPanel
 
         private static const TRIGGER_VALUE_INCREASE:int = 1;
 
-        private static const START_ANGLE:int = -90;
+        private static const START_ANGLE:int = -45;
 
         private static const END_ANGLE:int = 0;
 
@@ -24,11 +26,21 @@ package net.wg.gui.battle.views.dualGunPanel
 
         private static const END_ANIMATION_DURATION:int = 60;
 
-        public var _previousValue:Number = 1.7976931348623157E308;
+        private static const COLLAPSE_TWEEN_DURATION:uint = 400;
 
         public var content:MovieClip;
 
+        public var oppositeGunPositionX:int;
+
+        private var _previousValue:Number = 1.7976931348623157E308;
+
         private var _isActive:Boolean;
+
+        private var _tween:Tween;
+
+        private var _changeGunTweenDuration:uint = 0;
+
+        private var _changeGunTweenDelay:uint = 0;
 
         public function DualGunChangingProgressIndicator()
         {
@@ -43,6 +55,34 @@ package net.wg.gui.battle.views.dualGunPanel
         public final function dispose() : void
         {
             this.content = null;
+            this.cleanTween();
+        }
+
+        public function playChangeActiveGunAnim() : void
+        {
+            if(this._changeGunTweenDuration == 0 && this._changeGunTweenDelay == 0)
+            {
+                return;
+            }
+            this.content.x = this.oppositeGunPositionX;
+            this.cleanTween();
+            this._tween = new Tween(this._changeGunTweenDuration,this.content,{"x":0},{
+                "paused":false,
+                "ease":Quartic.easeOut,
+                "delay":this._changeGunTweenDelay
+            });
+        }
+
+        public function playCollapseAnim() : void
+        {
+            if(this.content.x != 0)
+            {
+                this.cleanTween();
+                this._tween = new Tween(COLLAPSE_TWEEN_DURATION,this.content,{"x":0},{
+                    "paused":false,
+                    "ease":Quartic.easeOut
+                });
+            }
         }
 
         public function setActive(param1:Boolean) : void
@@ -53,6 +93,12 @@ package net.wg.gui.battle.views.dualGunPanel
             {
                 this.content.gotoAndStop(GUN_CHANGING_IDLE_LABEL);
             }
+        }
+
+        public function setChangeGunTweenProps(param1:int, param2:int) : void
+        {
+            this._changeGunTweenDuration = param1;
+            this._changeGunTweenDelay = param2;
         }
 
         public function updateProgress(param1:Number, param2:Number) : void
@@ -98,6 +144,16 @@ package net.wg.gui.battle.views.dualGunPanel
                 return this._previousValue < param2 && param1 >= param2;
             }
             return this._previousValue > param2 && param1 <= param2;
+        }
+
+        private function cleanTween() : void
+        {
+            if(this._tween)
+            {
+                this._tween.paused = true;
+                this._tween.dispose();
+                this._tween = null;
+            }
         }
     }
 }

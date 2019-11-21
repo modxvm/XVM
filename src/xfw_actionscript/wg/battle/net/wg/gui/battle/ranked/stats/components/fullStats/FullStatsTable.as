@@ -31,6 +31,10 @@ package net.wg.gui.battle.ranked.stats.components.fullStats
 
         public var team2TF:TextField = null;
 
+        public var selfBgLeft:BattleAtlasSprite = null;
+
+        public var selfBgRight:BattleAtlasSprite = null;
+
         public var deadBg_c1r1:BattleAtlasSprite = null;
 
         public var deadBg_c1r2:BattleAtlasSprite = null;
@@ -690,10 +694,6 @@ package net.wg.gui.battle.ranked.stats.components.fullStats
         public var playerStatus_c2r14:PlayerStatusView = null;
 
         public var playerStatus_c2r15:PlayerStatusView = null;
-
-        public var selfBgLeft:BattleAtlasSprite = null;
-
-        public var selfBgRight:BattleAtlasSprite = null;
 
         public var speakAnimation_c1r1:SpeakAnimation = null;
 

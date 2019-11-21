@@ -1,7 +1,7 @@
 package net.wg.gui.lobby.header.headerButtonBar
 {
-    import net.wg.gui.components.controls.UserNameField;
     import net.wg.gui.components.controls.Image;
+    import net.wg.gui.components.controls.UserNameField;
     import net.wg.gui.lobby.header.vo.HBC_AccountDataVo;
     import org.idmedia.as3commons.util.StringUtils;
     import net.wg.data.constants.ColorSchemeNames;
@@ -27,13 +27,21 @@ package net.wg.gui.lobby.header.headerButtonBar
 
         private static const ICON_OFFSET:int = 7;
 
+        private static const ANONYMIZER_ICON_WIDTH:int = 16;
+
+        private static const ANONYMIZER_ICON_HORIZONTAL_PADDING:int = 3;
+
         private static const NOT_MAX_SCREEN_ICON_OFFSET:int = -4;
+
+        private static const ANONYMIZER_ICON_VERTICAL_PADDING:int = 16;
 
         private static const ICON_SIZE:int = 48;
 
+        public var icon:Image = null;
+
         public var userName:UserNameField = null;
 
-        public var icon:Image = null;
+        public var anonymizerIcon:Image = null;
 
         private var _accountVo:HBC_AccountDataVo = null;
 
@@ -48,7 +56,7 @@ package net.wg.gui.lobby.header.headerButtonBar
 
         override protected function updateSize() : void
         {
-            bounds.width = this.userName.x + this.userName.textWidth | 0;
+            bounds.width = this.userName.x + this.userName.textWidth + this.anonymizerIconWidth << 0;
             super.updateSize();
         }
 
@@ -94,12 +102,19 @@ package net.wg.gui.lobby.header.headerButtonBar
                     }
                 }
                 _loc3_ = ICON_OFFSET;
-                _loc4_ = _loc1_ + this.userName.textWidth;
+                this.anonymizerIcon.visible = this._accountVo.isAnonymized;
+                _loc4_ = _loc1_ + this.userName.textWidth + this.anonymizerIconWidth;
                 if(_loc4_ < MIN_WIDTH)
                 {
                     _loc3_ = (availableWidth > MIN_WIDTH?MIN_WIDTH:availableWidth) - _loc4_ >> 1;
                 }
                 this.userName.x = _loc3_ + _loc1_;
+                if(this.anonymizerIcon.visible)
+                {
+                    this.anonymizerIcon.source = RES_ICONS.MAPS_ICONS_LIBRARY_ICON_EYE;
+                    this.anonymizerIcon.x = this.userName.x + this.userName.textWidth + ANONYMIZER_ICON_HORIZONTAL_PADDING;
+                    this.anonymizerIcon.y = ANONYMIZER_ICON_VERTICAL_PADDING;
+                }
             }
             super.updateData();
         }
@@ -107,6 +122,8 @@ package net.wg.gui.lobby.header.headerButtonBar
         override protected function onDispose() : void
         {
             this._accountVo = null;
+            this.anonymizerIcon.dispose();
+            this.anonymizerIcon = null;
             this.userName.dispose();
             this.userName = null;
             this.icon.dispose();
@@ -118,6 +135,11 @@ package net.wg.gui.lobby.header.headerButtonBar
         {
             this._accountVo = HBC_AccountDataVo(param1);
             super.data = param1;
+        }
+
+        private function get anonymizerIconWidth() : int
+        {
+            return int(this.anonymizerIcon.visible) * (ANONYMIZER_ICON_WIDTH + ANONYMIZER_ICON_HORIZONTAL_PADDING) << 0;
         }
     }
 }

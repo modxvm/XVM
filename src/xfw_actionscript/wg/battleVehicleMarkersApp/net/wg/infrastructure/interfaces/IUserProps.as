@@ -3,6 +3,10 @@ package net.wg.infrastructure.interfaces
     public interface IUserProps
     {
 
+        function get fakeName() : String;
+
+        function set fakeName(param1:String) : void;
+
         function get userName() : String;
 
         function set userName(param1:String) : void;
@@ -50,5 +54,7 @@ package net.wg.infrastructure.interfaces
         function get isTeamKiller() : Boolean;
 
         function set isTeamKiller(param1:Boolean) : void;
+
+        function get isAnonymized() : Boolean;
     }
 }

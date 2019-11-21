@@ -41,13 +41,9 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
             this.valueTF.autoSize = TextFieldAutoSize.LEFT;
         }
 
-        private function onIconInfoLoadHandler(param1:Event) : void
-        {
-            invalidateSize();
-        }
-
         override protected function draw() : void
         {
+            var _loc1_:* = 0;
             super.draw();
             if(this._data != null && isInvalid(InvalidationType.DATA))
             {
@@ -57,8 +53,9 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
             }
             if(isInvalid(InvalidationType.SIZE))
             {
-                this.descriptionTF.x = this.valueTF.x - this.descriptionTF.width >> 0;
-                this.iconInfo.x = this.descriptionTF.x - this.iconInfo.width >> 0;
+                _loc1_ = this.iconInfo.x + this.iconInfo.width;
+                this.descriptionTF.x = _loc1_;
+                this.valueTF.x = _loc1_ + this.descriptionTF.textWidth;
                 dispatchEvent(new Event(Event.RESIZE));
             }
         }
@@ -76,15 +73,15 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
             super.onDispose();
         }
 
-        public function get contentWidth() : Number
-        {
-            return this.iconInfo.width + this.descriptionTF.width + this.valueTF.width >> 0;
-        }
-
         public function setData(param1:VPCompensationVO) : void
         {
             this._data = param1;
             invalidateData();
+        }
+
+        private function onIconInfoLoadHandler(param1:Event) : void
+        {
+            invalidateSize();
         }
 
         private function onIconInfoMouseOutHandler(param1:MouseEvent) : void

@@ -795,6 +795,8 @@ package net.wg.data.constants.generated
 
         public static const FRANCE_F38_BAT_CHATILLON155_58:String = "france-F38_Bat_Chatillon155_58";
 
+        public static const FRANCE_F42_AMR_35:String = "france-F42_AMR_35";
+
         public static const FRANCE_F44_SOMUA_S35:String = "france-F44_Somua_S35";
 
         public static const FRANCE_F49_RENAULT_R35:String = "france-F49_RenaultR35";

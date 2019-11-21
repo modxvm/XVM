@@ -71,6 +71,7 @@ package net.wg.gui.battle.views.consumablesPanel
             this._coolDownTimer.setFrames(START_FRAME,END_FRAME);
             this._consumablesVO = new ConsumablesVO();
             isAllowedToShowToolTipOnDisabledState = true;
+            hideToolTipOnClickActions = false;
             addFrameScript(END_RELOADING_FRAME,this.reloadingEnd);
             TextFieldEx.setNoTranslate(this.bindKeyField,true);
             TextFieldEx.setNoTranslate(this.quantityField,true);

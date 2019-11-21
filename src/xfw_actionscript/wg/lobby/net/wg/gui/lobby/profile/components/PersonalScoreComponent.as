@@ -2,7 +2,6 @@ package net.wg.gui.lobby.profile.components
 {
     import flash.display.Sprite;
     import flash.display.MovieClip;
-    import flash.text.TextField;
     import flash.events.MouseEvent;
     import net.wg.data.constants.generated.TOOLTIPS_CONSTANTS;
 
@@ -15,13 +14,11 @@ package net.wg.gui.lobby.profile.components
 
         public var tooltipHitArea:MovieClip;
 
-        public var tfWarning:TextField;
-
         public function PersonalScoreComponent()
         {
             super();
-            this.tooltipHitArea.addEventListener(MouseEvent.ROLL_OVER,this.mouseRollOverHandler,false,0,true);
-            this.tooltipHitArea.addEventListener(MouseEvent.ROLL_OUT,this.mouseRollOutHandler,false,0,true);
+            this.tooltipHitArea.addEventListener(MouseEvent.ROLL_OVER,this.onTooltipHitAreaRollOverHandler,false,0,true);
+            this.tooltipHitArea.addEventListener(MouseEvent.ROLL_OUT,this.onTooltipHitAreaRollOutHandler,false,0,true);
         }
 
         private static function hideToolTip() : void
@@ -29,60 +26,12 @@ package net.wg.gui.lobby.profile.components
             App.toolTipMgr.hide();
         }
 
-        public function set description(param1:String) : void
+        public final function dispose() : void
         {
-            this.tfPersonalScore.description = param1;
-            this.tfPersonalScore.validateNow();
-            this.layout();
+            this.onDispose();
         }
 
-        public function set text(param1:String) : void
-        {
-            this.tfPersonalScore.visible = true;
-            this.tfWarning.visible = false;
-            this.tfPersonalScore.text = param1;
-            this.tfPersonalScore.validateNow();
-            this.layout();
-        }
-
-        public function showWarning(param1:String) : void
-        {
-            this.tfPersonalScore.visible = false;
-            this.tfWarning.visible = true;
-            this.tfWarning.visible = true;
-            this.tfWarning.htmlText = param1;
-        }
-
-        private function layout() : void
-        {
-            this.tfPersonalScore.x = -this.tfPersonalScore.actualWidth >> 1;
-        }
-
-        private function disposeHandlers() : void
-        {
-            if(this.tooltipHitArea)
-            {
-                this.tooltipHitArea.removeEventListener(MouseEvent.ROLL_OVER,this.mouseRollOverHandler);
-                this.tooltipHitArea.removeEventListener(MouseEvent.ROLL_OUT,this.mouseRollOutHandler);
-            }
-        }
-
-        protected function mouseRollOutHandler(param1:MouseEvent) : void
-        {
-            hideToolTip();
-        }
-
-        protected function mouseRollOverHandler(param1:MouseEvent) : void
-        {
-            this.showToolTip();
-        }
-
-        protected function showToolTip() : void
-        {
-            App.toolTipMgr.showSpecial(TOOLTIPS_CONSTANTS.GLOBAL_RATING,null);
-        }
-
-        public function dispose() : void
+        protected function onDispose() : void
         {
             if(this.tfPersonalScore)
             {
@@ -95,7 +44,45 @@ package net.wg.gui.lobby.profile.components
                 this.icon.parent.removeChild(this.icon);
                 this.icon = null;
             }
-            this.disposeHandlers();
+            if(this.tooltipHitArea)
+            {
+                this.tooltipHitArea.removeEventListener(MouseEvent.ROLL_OVER,this.onTooltipHitAreaRollOverHandler);
+                this.tooltipHitArea.removeEventListener(MouseEvent.ROLL_OUT,this.onTooltipHitAreaRollOutHandler);
+                this.tooltipHitArea = null;
+            }
+        }
+
+        protected function showToolTip() : void
+        {
+            App.toolTipMgr.showSpecial(TOOLTIPS_CONSTANTS.GLOBAL_RATING,null);
+        }
+
+        private function layout() : void
+        {
+            this.tfPersonalScore.validateNow();
+            this.tfPersonalScore.x = -this.tfPersonalScore.actualWidth >> 1;
+        }
+
+        public function set description(param1:String) : void
+        {
+            this.tfPersonalScore.description = param1;
+            this.layout();
+        }
+
+        public function set text(param1:String) : void
+        {
+            this.tfPersonalScore.text = param1;
+            this.layout();
+        }
+
+        private function onTooltipHitAreaRollOutHandler(param1:MouseEvent) : void
+        {
+            hideToolTip();
+        }
+
+        private function onTooltipHitAreaRollOverHandler(param1:MouseEvent) : void
+        {
+            this.showToolTip();
         }
     }
 }

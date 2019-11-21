@@ -6,8 +6,6 @@ package net.wg.gui.battle.random.views.stats.components.playersPanel.interfaces
     public interface IPlayersPanelListItemHolder extends IDisposable
     {
 
-        function get accDBID() : Number;
-
         function get playerStatus() : uint;
 
         function setVehicleData(param1:DAAPIVehicleInfoVO) : void;

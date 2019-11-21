@@ -10,7 +10,7 @@ package net.wg.gui.interfaces
 
         function get accID() : Number;
 
-        function get tags() : Array;
+        function get fakeName() : String;
 
         function get userName() : String;
 
@@ -20,12 +20,16 @@ package net.wg.gui.interfaces
 
         function get region() : String;
 
-        function get igrType() : int;
+        function get tags() : Array;
 
         function get userProps() : IUserProps;
+
+        function get igrType() : int;
 
         function get badge() : int;
 
         function get badgeImgStr() : String;
+
+        function get isAnonymized() : Boolean;
     }
 }

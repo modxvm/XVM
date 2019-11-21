@@ -68,7 +68,7 @@ package net.wg.gui.lobby.settings
             var _loc6_:SettingsControlProp = null;
             var _loc7_:CheckBox = null;
             var _loc8_:Slider = null;
-            if(data)
+            if(data && data.keys)
             {
                 _loc1_ = data.keys;
                 _loc2_ = data.values;

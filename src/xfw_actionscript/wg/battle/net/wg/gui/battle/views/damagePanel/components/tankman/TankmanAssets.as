@@ -170,7 +170,7 @@ package net.wg.gui.battle.views.damagePanel.components.tankman
             }
         }
 
-        public function hideStatus(param1:int) : void
+        public function hideStatus(param1:int, param2:Boolean) : void
         {
             this.clearStunAnimationTimeout();
             if(param1 != STUN_STATUS_ID)
@@ -179,7 +179,7 @@ package net.wg.gui.battle.views.damagePanel.components.tankman
             }
             if(param1 == STUN_STATUS_ID)
             {
-                this._stunIndicator.hideStun();
+                this._stunIndicator.hideStun(param2);
                 if(this._isOtherStatusActive)
                 {
                     this._inspireIndicator.showStatus(false);

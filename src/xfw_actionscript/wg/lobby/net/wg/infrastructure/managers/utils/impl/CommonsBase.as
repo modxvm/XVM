@@ -47,9 +47,9 @@ package net.wg.infrastructure.managers.utils.impl
 
         protected static const IMG_TAG_OPEN_BASIC:String = "<IMG SRC=\"img://gui/maps/icons/library/basic_small.png\" width=\"26\" height=\"16\" vspace=\"";
 
-        protected static const IMG_TAG_OPEN_PREMIUM:String = "<IMG SRC=\"img://gui/maps/icons/library/premium_small.png\" width=\"34\" height=\"16\" vspace=\"";
+        protected static const IMG_TAG_EYE_ICON:String = "<IMG SRC=\"img://gui/maps/icons/library/icon_eye.png\" width=\"16\" height=\"13\" vspace=\"0\"/>";
 
-        protected static const REFERRAL_IMG_TAG:String = "<IMG SRC=\"img://gui/maps/icons/referral/referralSmallHand.png\" width=\"16\" height=\"16\" vspace=\"-4\"/>";
+        protected static const IMG_TAG_OPEN_PREMIUM:String = "<IMG SRC=\"img://gui/maps/icons/library/premium_small.png\" width=\"34\" height=\"16\" vspace=\"";
 
         protected static const CLAN_TAG_OPEN:String = "[";
 
@@ -124,19 +124,19 @@ package net.wg.infrastructure.managers.utils.impl
             param1.transform.matrix = _loc2_;
         }
 
-        public function formatPlayerName(param1:TextField, param2:IUserProps) : Boolean
+        public function formatPlayerName(param1:TextField, param2:IUserProps, param3:Boolean = false, param4:Boolean = false) : Boolean
         {
             throw new AbstractException(Errors.ABSTRACT_INVOKE);
         }
 
-        public function getFullPlayerName(param1:IUserProps) : String
+        public function getFullPlayerName(param1:IUserProps, param2:Boolean = false) : String
         {
             throw new AbstractException(Errors.ABSTRACT_INVOKE);
         }
 
-        public function getUserProps(param1:String, param2:String = null, param3:String = null, param4:int = 0, param5:Array = null, param6:int = 0, param7:String = "") : IUserProps
+        public function getUserProps(param1:String, param2:String = null, param3:String = null, param4:int = 0, param5:Array = null, param6:int = 0, param7:String = "", param8:String = "") : IUserProps
         {
-            return new UserProps(param1,param2,param3,param4,param5,param6,param7);
+            return new UserProps(param1,param2,param3,param4,param5,param6,param7,param8);
         }
 
         public function initTabIndex(param1:Vector.<InteractiveObject>) : void
@@ -479,6 +479,8 @@ import net.wg.infrastructure.interfaces.IUserProps;
 class UserProps extends Object implements IUserProps
 {
 
+    private var _fakeName:String;
+
     private var _userName:String;
 
     private var _clanAbbrev:String;
@@ -503,10 +505,11 @@ class UserProps extends Object implements IUserProps
 
     private var _isTeamKiller:Boolean = false;
 
-    function UserProps(param1:String, param2:String, param3:String, param4:int, param5:Array = null, param6:int = 0, param7:String = "")
+    function UserProps(param1:String, param2:String, param3:String, param4:int, param5:Array = null, param6:int = 0, param7:String = "", param8:String = "")
     {
         this._tags = [];
         super();
+        this._fakeName = param8;
         this._userName = param1;
         this._clanAbbrev = param2;
         this._region = param3;
@@ -514,6 +517,16 @@ class UserProps extends Object implements IUserProps
         this._tags = param5;
         this._badge = param6;
         this._badgeImgStr = param7;
+    }
+
+    public function get fakeName() : String
+    {
+        return this._fakeName;
+    }
+
+    public function set fakeName(param1:String) : void
+    {
+        this._fakeName = param1;
     }
 
     public function get userName() : String
@@ -634,5 +647,10 @@ class UserProps extends Object implements IUserProps
     public function set isTeamKiller(param1:Boolean) : void
     {
         this._isTeamKiller = param1;
+    }
+
+    public function get isAnonymized() : Boolean
+    {
+        return this._fakeName && this._fakeName != this._userName;
     }
 }

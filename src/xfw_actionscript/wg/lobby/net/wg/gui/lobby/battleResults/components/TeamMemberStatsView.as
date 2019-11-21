@@ -14,6 +14,7 @@ package net.wg.gui.lobby.battleResults.components
     import flash.events.MouseEvent;
     import net.wg.infrastructure.interfaces.IUserProps;
     import scaleform.clik.constants.InvalidationType;
+    import net.wg.data.constants.UserTags;
     import net.wg.data.constants.Values;
     import net.wg.gui.lobby.battleResults.data.TeamMemberItemVO;
     import scaleform.clik.data.DataProvider;
@@ -33,7 +34,7 @@ package net.wg.gui.lobby.battleResults.components
 
         private static const GAP_STATS_TO_BTN:uint = 20;
 
-        private static const STATS_SCROLLPANE_WIDTH:uint = 470;
+        private static const STATS_SCROLL_PANE_WIDTH:uint = 470;
 
         public var list:ScrollingListEx = null;
 
@@ -115,7 +116,7 @@ package net.wg.gui.lobby.battleResults.components
         {
             super.configUI();
             this._vehicleStats = VehicleDetails(this.statsScrollPane.target);
-            this.statsScrollPane.width = STATS_SCROLLPANE_WIDTH;
+            this.statsScrollPane.width = STATS_SCROLL_PANE_WIDTH;
             this.selectVehicleTitle.text = BATTLE_RESULTS.SELECTVEHICLE;
             this._initialStatsY = this.statsScrollPane.y;
             this._initialCloseBtnY = this.closeBtn.y;
@@ -157,10 +158,11 @@ package net.wg.gui.lobby.battleResults.components
 
         override protected function draw() : void
         {
-            var _loc1_:* = 0;
-            var _loc2_:* = false;
-            var _loc3_:IUserProps = null;
-            var _loc4_:* = false;
+            var _loc1_:* = false;
+            var _loc2_:* = 0;
+            var _loc3_:* = false;
+            var _loc4_:IUserProps = null;
+            var _loc5_:* = false;
             super.draw();
             if(isInvalid(InvalidationType.DATA))
             {
@@ -171,7 +173,11 @@ package net.wg.gui.lobby.battleResults.components
                 if(data)
                 {
                     this.initVehicleSelection(data);
+                    _loc1_ = UserTags.isCurrentPlayer(data.userVO.tags);
                     this.playerNameLbl.userVO = data.userVO;
+                    this.playerNameLbl.useFakeName = !(_loc1_ || teamMemberItemData.isOwnSquad);
+                    this.playerNameLbl.showAnonymizerIcon = data.userVO.isAnonymized;
+                    this.playerNameLbl.validateNow();
                     this.vehicleName.htmlText = data.vehicleFullName;
                     this.vehicleName.textColor = this.playerNameLbl.textColor = data.isTeamKiller?TEAM_KILLER_COLOR:NAME_COLOR;
                     this.vehicleStateLbl.text = data.vehicleStateStr;
@@ -181,33 +187,33 @@ package net.wg.gui.lobby.battleResults.components
                     }
                     else if(data.killerID > 0)
                     {
-                        _loc3_ = App.utils.commons.getUserProps(data.killerNameStr,data.killerClanNameStr,data.killerRegionNameStr);
-                        _loc3_.prefix = data.vehicleStatePrefixStr;
-                        _loc3_.suffix = data.vehicleStateSuffixStr;
-                        _loc3_.isTeamKiller = data.isKilledByTeamKiller;
-                        _loc4_ = App.utils.commons.formatPlayerName(this.vehicleStateLbl,_loc3_);
-                        if(_loc4_)
+                        _loc4_ = App.utils.commons.getUserProps(data.killerRealNameStr,data.killerClanNameStr,data.killerRegionNameStr,0,null,0,Values.EMPTY_STR,data.killerFakeNameStr);
+                        _loc4_.prefix = data.vehicleStatePrefixStr;
+                        _loc4_.suffix = data.vehicleStateSuffixStr;
+                        _loc4_.isTeamKiller = data.isKilledByTeamKiller;
+                        _loc5_ = App.utils.commons.formatPlayerName(this.vehicleStateLbl,_loc4_,true);
+                        if(_loc5_)
                         {
                             this.vehicleStateLbl.addEventListener(MouseEvent.ROLL_OVER,this.onVehicleLabelRollOverHandler);
                             this.vehicleStateLbl.addEventListener(MouseEvent.ROLL_OUT,this.onVehicleLabelRollOutHandler);
-                            this._toolTip = _loc3_.prefix + data.killerFullNameStr + _loc3_.suffix;
+                            this._toolTip = App.utils.commons.getFullPlayerName(_loc4_,true);
                         }
-                        App.utils.commons.formatPlayerName(this.vehicleStateLbl,_loc3_);
+                        App.utils.commons.formatPlayerName(this.vehicleStateLbl,_loc4_,true);
                     }
                     this.applyVehicleData();
                     this.deadBg.visible = data.deathReason > Values.DEFAULT_INT;
-                    _loc1_ = this._initialStatsY;
-                    _loc2_ = data.medalsCount > 0;
-                    this.medalBg.visible = _loc2_;
-                    if(_loc2_)
+                    _loc2_ = this._initialStatsY;
+                    _loc3_ = data.medalsCount > 0;
+                    this.medalBg.visible = _loc3_;
+                    if(_loc3_)
                     {
-                        _loc1_ = _loc1_ + STATS_DY;
+                        _loc2_ = _loc2_ + STATS_DY;
                         this.achievements.visible = true;
                         this.achievements.dataProvider = data.achievements;
                         this.achievements.validateNow();
                     }
-                    this.statsScrollPane.y = _loc1_;
-                    this.statsScrollPane.height = this.closeBtn.y - GAP_STATS_TO_BTN - _loc1_;
+                    this.statsScrollPane.y = _loc2_;
+                    this.statsScrollPane.height = this.closeBtn.y - GAP_STATS_TO_BTN - _loc2_;
                 }
                 else
                 {
@@ -240,9 +246,8 @@ package net.wg.gui.lobby.battleResults.components
 
         private function initVehicleSelection(param1:TeamMemberItemVO) : void
         {
-            var _loc3_:* = false;
             var _loc2_:Array = param1.vehicles;
-            _loc3_ = _loc2_.length > 1;
+            var _loc3_:* = _loc2_.length > 1;
             this.selectVehicleTitle.visible = _loc3_;
             this.selectVehicleDropdown.visible = _loc3_;
             this.vehicleStateLbl.visible = !_loc3_;

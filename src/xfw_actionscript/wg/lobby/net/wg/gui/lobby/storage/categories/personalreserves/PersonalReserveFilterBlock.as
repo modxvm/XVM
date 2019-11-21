@@ -5,8 +5,8 @@ package net.wg.gui.lobby.storage.categories.personalreserves
     import flash.text.TextField;
     import net.wg.gui.lobby.components.data.ButtonFiltersVO;
     import flash.text.TextFieldAutoSize;
-    import scaleform.clik.constants.InvalidationType;
     import net.wg.gui.events.FiltersEvent;
+    import scaleform.clik.constants.InvalidationType;
     import flash.events.Event;
     import net.wg.gui.components.containers.HorizontalGroupLayout;
     import net.wg.data.constants.Linkages;
@@ -72,8 +72,12 @@ package net.wg.gui.lobby.storage.categories.personalreserves
             {
                 if(isInvalid(INVALID_RESET))
                 {
+                    this.durationFilters.removeEventListener(FiltersEvent.FILTERS_CHANGED,this.onFilterBlockFiltersChangedHandler);
+                    this.typeFilters.removeEventListener(FiltersEvent.FILTERS_CHANGED,this.onFilterBlockFiltersChangedHandler);
                     this.durationFilters.resetFilters(this._resetData);
                     this.typeFilters.resetFilters(this._resetData);
+                    this.durationFilters.addEventListener(FiltersEvent.FILTERS_CHANGED,this.onFilterBlockFiltersChangedHandler);
+                    this.typeFilters.addEventListener(FiltersEvent.FILTERS_CHANGED,this.onFilterBlockFiltersChangedHandler);
                 }
                 if(isInvalid(InvalidationType.DATA))
                 {

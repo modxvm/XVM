@@ -1,9 +1,11 @@
 package net.wg.gui.battle.views.battleMessenger.VO
 {
+    import net.wg.data.constants.Values;
+
     public class BattleMessengerToxicVO extends Object
     {
 
-        public var messageID:Number = -1;
+        public var messageID:String = "";
 
         public var vehicleID:Number = -1;
 
@@ -21,14 +23,14 @@ package net.wg.gui.battle.views.battleMessenger.VO
             {
                 return;
             }
-            this.vehicleID = param1.vehicleID;
             this.messageID = param1.messageID;
+            this.vehicleID = param1.vehicleID;
             this.blackList.parseData(param1.blackList);
         }
 
         public function reset() : void
         {
-            this.messageID = -1;
+            this.messageID = Values.EMPTY_STR;
             this.vehicleID = -1;
             this.blackList.reset();
         }

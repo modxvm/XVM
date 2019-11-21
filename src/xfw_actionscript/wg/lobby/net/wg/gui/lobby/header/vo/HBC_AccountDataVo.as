@@ -9,6 +9,8 @@ package net.wg.gui.lobby.header.vo
 
         public var isTeamKiller:Boolean = false;
 
+        public var isAnonymized:Boolean = false;
+
         public var badgeIcon:String = "";
 
         public var hasActiveBooster:Boolean = false;

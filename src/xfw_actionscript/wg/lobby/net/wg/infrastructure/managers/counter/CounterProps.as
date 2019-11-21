@@ -28,7 +28,11 @@ package net.wg.infrastructure.managers.counter
 
         private var _tfPadding:Number = 0;
 
-        public function CounterProps(param1:Number = 2, param2:Number = 2, param3:String = "left", param4:Boolean = true, param5:String = "CounterUI", param6:Number = 15)
+        private var _checkEmptyValue:Boolean = true;
+
+        private var _viewState:String = null;
+
+        public function CounterProps(param1:Number = 2, param2:Number = 2, param3:String = "left", param4:Boolean = true, param5:String = "CounterUI", param6:Number = 15, param7:Boolean = true, param8:String = null)
         {
             super();
             this._offsetX = param1;
@@ -37,6 +41,8 @@ package net.wg.infrastructure.managers.counter
             this._linkage = param5;
             this._tfPadding = param6;
             this._horizontalAlign = param3;
+            this._checkEmptyValue = param7;
+            this._viewState = param8;
         }
 
         public function get offsetX() : int
@@ -67,6 +73,16 @@ package net.wg.infrastructure.managers.counter
         public function get horizontalAlign() : String
         {
             return this._horizontalAlign;
+        }
+
+        public function get checkEmptyValue() : Boolean
+        {
+            return this._checkEmptyValue;
+        }
+
+        public function get viewState() : String
+        {
+            return this._viewState;
         }
     }
 }

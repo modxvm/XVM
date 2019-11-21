@@ -359,9 +359,9 @@ package net.wg.gui.lobby.battleResults
                 }
                 this.rankIconLoader.source = this.RANK_IMAGE_LIST[_loc1_.playerRank];
                 this.playerNameLbl.userVO = new UserVO({
-                    "fullName":_loc2_.playerFullNameStr,
-                    "userName":_loc2_.playerNameStr,
+                    "userName":_loc2_.playerRealNameStr,
                     "clanAbbrev":_loc2_.clanNameStr,
+                    "fullName":_loc2_.playerFullNameStr,
                     "region":_loc2_.regionNameStr
                 });
                 this.initEfficiencyList(_loc1_.efficiencyHeader);

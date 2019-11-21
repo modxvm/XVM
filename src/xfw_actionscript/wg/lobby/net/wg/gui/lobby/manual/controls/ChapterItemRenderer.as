@@ -10,11 +10,11 @@ package net.wg.gui.lobby.manual.controls
     public class ChapterItemRenderer extends SoundButtonEx
     {
 
+        private static const FONT_SMALL:int = 21;
+
+        private static const FONT_NORMAL:int = 30;
+
         public var loader:UILoaderAlt;
-
-        private const FONT_SMALL:int = 21;
-
-        private const FONT_NORMAL:int = 30;
 
         public function ChapterItemRenderer()
         {
@@ -44,7 +44,7 @@ package net.wg.gui.lobby.manual.controls
             if(isInvalid(InvalidationType.SIZE))
             {
                 _loc1_ = textField.getTextFormat();
-                _loc1_.size = scaleX < 1?this.FONT_SMALL:this.FONT_NORMAL;
+                _loc1_.size = scaleX < 1?FONT_SMALL:FONT_NORMAL;
                 textField.setTextFormat(_loc1_);
             }
         }

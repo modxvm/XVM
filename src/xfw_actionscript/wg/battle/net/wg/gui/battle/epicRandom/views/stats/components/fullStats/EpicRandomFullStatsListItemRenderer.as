@@ -25,6 +25,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
     import net.wg.gui.battle.random.views.stats.constants.VehicleActions;
     import net.wg.data.constants.UserTags;
     import net.wg.data.constants.PlayerStatus;
+    import net.wg.data.constants.Values;
     import net.wg.gui.battle.views.stats.constants.DynamicSquadState;
     import net.wg.gui.battle.battleloading.BattleLoadingHelper;
     import scaleform.clik.core.UIComponent;
@@ -380,7 +381,6 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
             }
             if(_loc1_ && this._data)
             {
-                _loc1_ = false;
                 this.setSuffixBadge(this._data.suffixBadgeType);
             }
         }
@@ -536,7 +536,12 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
                 if(this._squadItem)
                 {
                     this._squadItem.setIsEnemy(this._isEnemy);
-                    this._squadItem.uid = this._data.accountDBID;
+                    this._squadItem.sessionID = this._data.sessionID;
+                    if(this._isCurrentPlayer && this._data.isAnonymized)
+                    {
+                        this._squadItem.setCurrentPlayerAnonymized();
+                        this._squadItem.setIsCurrentPlayerInClan(this._data.clanAbbrev != Values.EMPTY_STR);
+                    }
                     this.updateDynamicSquadState(this._data);
                 }
             }
@@ -609,11 +614,12 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
         {
             if(!this._userProps)
             {
-                this._userProps = new StatsUserProps(param1.playerName,param1.clanAbbrev,param1.region,0,param1.userTags);
+                this._userProps = new StatsUserProps(param1.playerName,param1.playerFakeName,param1.clanAbbrev,param1.region,0,param1.userTags);
             }
             else
             {
                 this._userProps.userName = param1.playerName;
+                this._userProps.fakeName = param1.playerFakeName;
                 this._userProps.clanAbbrev = param1.clanAbbrev;
                 this._userProps.region = param1.region;
                 this._userProps.tags = param1.userTags;

@@ -2,6 +2,11 @@ package net.wg.gui.lobby.modulesPanel
 {
     import net.wg.infrastructure.base.meta.impl.FittingSelectPopoverMeta;
     import net.wg.infrastructure.base.meta.IFittingSelectPopoverMeta;
+    import net.wg.utils.ICounterProps;
+    import net.wg.infrastructure.managers.counter.CounterProps;
+    import flash.text.TextFormatAlign;
+    import net.wg.data.constants.Linkages;
+    import net.wg.gui.components.common.Counter;
     import flash.text.TextField;
     import net.wg.gui.components.controls.EmptyItemsScrollingList;
     import flash.display.MovieClip;
@@ -13,6 +18,7 @@ package net.wg.gui.lobby.modulesPanel
     import flash.display.Stage;
     import net.wg.utils.IUtils;
     import net.wg.infrastructure.base.UIComponentEx;
+    import net.wg.utils.ICounterManager;
     import net.wg.gui.lobby.modulesPanel.components.FittingListSelectionNavigator;
     import net.wg.gui.events.ModuleInfoEvent;
     import net.wg.gui.events.DeviceEvent;
@@ -21,11 +27,11 @@ package net.wg.gui.lobby.modulesPanel
     import scaleform.clik.events.IndexEvent;
     import scaleform.clik.events.ButtonEvent;
     import net.wg.gui.lobby.modulesPanel.data.ListOverlayVO;
+    import flash.display.DisplayObject;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.gui.components.popovers.PopOverConst;
     import net.wg.data.constants.generated.FITTING_TYPES;
     import net.wg.data.constants.Errors;
-    import net.wg.data.constants.Linkages;
     import flash.events.MouseEvent;
     import flash.display.InteractiveObject;
     import net.wg.data.constants.Values;
@@ -51,6 +57,10 @@ package net.wg.gui.lobby.modulesPanel
         private static const TOP_SEPARATOR_NO_TABBAR_Y:int = -30;
 
         private static const BATTLE_ABILITIES_BTN_AREA_NAME:String = "battleAbilitiesBtnArea";
+
+        private static const COUNTER_PROPS:ICounterProps = new CounterProps(CounterProps.DEFAULT_OFFSET_X,7,TextFormatAlign.LEFT,true,Linkages.COUNTER_UI,CounterProps.DEFAULT_TF_PADDING,false,Counter.EMPTY_STATE);
+
+        public static var NEW_COUNTER_CONTAINER_ID:String = "FittingSelectPopoverCountersContainer";
 
         public var textTf:TextField;
 
@@ -82,10 +92,13 @@ package net.wg.gui.lobby.modulesPanel
 
         private var _battleAbilitiesBtnArea:UIComponentEx = null;
 
+        private var _counterManager:ICounterManager;
+
         public function FittingSelectPopover()
         {
             this._stage = App.stage;
             this._utils = App.utils;
+            this._counterManager = App.utils.counterManager;
             super();
             this._topSeparatorTabBarY = this.topSeparator.y;
             this._itemListTabBarY = this.itemsList.y;
@@ -123,6 +136,9 @@ package net.wg.gui.lobby.modulesPanel
             var _loc1_:String = null;
             var _loc2_:* = false;
             var _loc3_:ListOverlayVO = null;
+            var _loc4_:* = 0;
+            var _loc5_:* = 0;
+            var _loc6_:DisplayObject = null;
             super.draw();
             if(this._data != null && isInvalid(InvalidationType.DATA))
             {
@@ -130,6 +146,7 @@ package net.wg.gui.lobby.modulesPanel
                 {
                     popoverLayout.preferredLayout = this._data.preferredLayout;
                 }
+                this._counterManager.disposeCountersForContainer(NEW_COUNTER_CONTAINER_ID);
                 if(this._data.tabData)
                 {
                     this.tabBar.dataProvider = this._data.tabData;
@@ -174,6 +191,20 @@ package net.wg.gui.lobby.modulesPanel
                     this._listOverlay.visible = false;
                 }
                 this.textTf.htmlText = this._data.title;
+                if(this._data.tabCounters)
+                {
+                    _loc4_ = this._data.tabCounters.length;
+                    _loc5_ = 0;
+                    while(_loc5_ < _loc4_)
+                    {
+                        _loc6_ = this.tabBar.getButtonAt(_loc5_);
+                        if(this._data.tabCounters[_loc5_] > 0)
+                        {
+                            this._counterManager.setCounter(_loc6_,"",NEW_COUNTER_CONTAINER_ID,COUNTER_PROPS);
+                        }
+                        _loc5_++;
+                    }
+                }
                 invalidateSize();
             }
             if(isInvalid(InvalidationType.SIZE))
@@ -223,6 +254,7 @@ package net.wg.gui.lobby.modulesPanel
                 this._listOverlay.dispose();
                 this._listOverlay = null;
             }
+            this._counterManager.disposeCountersForContainer(NEW_COUNTER_CONTAINER_ID);
             this.tabBar.dispose();
             this.tabBar = null;
             this.rearmCheckbox.dispose();
@@ -237,6 +269,7 @@ package net.wg.gui.lobby.modulesPanel
             this._data = null;
             this._stage = null;
             this._utils = null;
+            this._counterManager = null;
             super.onDispose();
         }
 

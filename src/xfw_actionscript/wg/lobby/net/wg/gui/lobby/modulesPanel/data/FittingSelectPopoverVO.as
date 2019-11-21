@@ -43,6 +43,8 @@ package net.wg.gui.lobby.modulesPanel.data
 
         public var listOverlay:ListOverlayVO = null;
 
+        public var tabCounters:Array = null;
+
         private var _rendererDataClass:Class = null;
 
         private var _rawAvailableDevices:Array;

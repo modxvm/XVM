@@ -66,6 +66,8 @@ package net.wg.gui.battle.views.dualGunPanel
 
         private var _isReadyForCharge:Boolean = false;
 
+        private var _lastActiveState:String = "singleMode";
+
         public function DualGunPanel()
         {
             this._scheduler = App.utils.scheduler;
@@ -108,6 +110,8 @@ package net.wg.gui.battle.views.dualGunPanel
         {
             super.configUI();
             this.leftGunContainer.setGunActive(true);
+            this.leftGunContainer.oppositeGunPositionX(this.rightGunContainer.x - this.leftGunContainer.x);
+            this.rightGunContainer.oppositeGunPositionX(this.leftGunContainer.x - this.rightGunContainer.x);
         }
 
         override protected function draw() : void
@@ -130,6 +134,8 @@ package net.wg.gui.battle.views.dualGunPanel
         public function as_collapsePanel() : void
         {
             this.updateState(DualGunPanelState.COLLAPSE);
+            this.leftGunContainer.playCollapseAnim();
+            this.rightGunContainer.playCollapseAnim();
         }
 
         public function as_expandPanel() : void
@@ -147,6 +153,12 @@ package net.wg.gui.battle.views.dualGunPanel
         public function as_reset() : void
         {
             this.reset();
+        }
+
+        public function as_setChangeGunTweenProps(param1:int, param2:int) : void
+        {
+            this.leftGunContainer.setChangeGunTweenProps(param1,param2);
+            this.rightGunContainer.setChangeGunTweenProps(param1,param2);
         }
 
         public function as_setCooldown(param1:Number) : void
@@ -239,21 +251,31 @@ package net.wg.gui.battle.views.dualGunPanel
 
         public function as_updateActiveGun(param1:int, param2:Number, param3:Number) : void
         {
-            var _loc4_:* = 0;
-            var _loc6_:DualGunPanelGunIndicator = null;
-            var _loc7_:* = false;
+            var _loc5_:* = 0;
+            var _loc7_:DualGunPanelGunIndicator = null;
+            var _loc8_:* = false;
+            var _loc4_:* = this._activeGunId != param1;
             this._activeGunId = param1;
-            var _loc5_:int = this._gunIndicators.length;
-            _loc4_ = 0;
-            while(_loc4_ < _loc5_)
+            var _loc6_:int = this._gunIndicators.length;
+            _loc5_ = 0;
+            while(_loc5_ < _loc6_)
             {
-                _loc6_ = this._gunIndicators[_loc4_];
-                _loc7_ = _loc4_ == this._activeGunId;
-                _loc6_.setGunActive(_loc7_);
-                _loc6_.updateSwitchingProgress(param2,param3);
-                _loc4_++;
+                _loc7_ = this._gunIndicators[_loc5_];
+                _loc8_ = _loc5_ == this._activeGunId;
+                _loc7_.setGunActive(_loc8_);
+                _loc7_.updateSwitchingProgress(param2,param3);
+                _loc5_++;
+            }
+            if(_loc4_)
+            {
+                this.getGunById(param1).changeActiveGun();
             }
             this.activateTimer(TIMER_ID_ACTIVE_GUN_CHANGE,param2,param3);
+        }
+
+        public function as_updateTotalTime(param1:Number) : void
+        {
+            this.panelTimer.updateTotalTime(param1);
         }
 
         public function updateStage(param1:Number, param2:Number) : void
@@ -261,11 +283,6 @@ package net.wg.gui.battle.views.dualGunPanel
             this._stageWidth = param1;
             this._stageHeight = param2;
             invalidatePosition();
-        }
-
-        public function as_updateTotalTime(param1:Number) : void
-        {
-            this.panelTimer.updateTotalTime(param1);
         }
 
         private function reset() : void
@@ -403,7 +420,7 @@ package net.wg.gui.battle.views.dualGunPanel
                 _loc6_ = DualGunPanelTimer.STYLE_IDLE;
                 _loc7_ = _loc2_.totalTime + _loc3_.totalTime;
             }
-            if(this._hasNegativeReloadingEffect && _loc6_ != DualGunPanelTimer.STYLE_CHARGE && _loc6_ != DualGunPanelTimer.STYLE_DEBUFF)
+            if(this._hasNegativeReloadingEffect && (_loc6_ == DualGunPanelTimer.STYLE_PRIMARY_LOADING || _loc6_ == DualGunPanelTimer.STYLE_SECONDARY_LOADING))
             {
                 _loc6_ = DualGunPanelTimer.STYLE_CRITICAL;
             }
@@ -435,7 +452,10 @@ package net.wg.gui.battle.views.dualGunPanel
                     this.deactivateTimer(TIMER_ID_COOLDOWN);
                     this._isReadyForCharge = false;
                     this.stopCharge();
-                    _loc2_ = !this._isCollapsed;
+                    if(this._isCollapsed)
+                    {
+                        _loc3_ = DualGunPanelState.COLLAPSE;
+                    }
                     break;
                 case DualGunPanelState.CHARGE:
                     this.deactivateTimer(TIMER_ID_COOLDOWN);
@@ -483,7 +503,7 @@ package net.wg.gui.battle.views.dualGunPanel
                     }
                     break;
             }
-            if(_loc2_)
+            if(_loc2_ && this._lastActiveState != _loc3_)
             {
                 if(_loc3_ == DualGunPanelState.CHARGED)
                 {
@@ -497,6 +517,7 @@ package net.wg.gui.battle.views.dualGunPanel
                     this.leftGunContainer.gotoAndPlay(_loc3_);
                     this.rightGunContainer.gotoAndPlay(_loc3_);
                 }
+                this._lastActiveState = _loc3_;
             }
             this.updatePanelTimer();
         }

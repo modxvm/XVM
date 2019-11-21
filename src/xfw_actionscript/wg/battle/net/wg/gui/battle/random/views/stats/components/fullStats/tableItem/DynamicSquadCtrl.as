@@ -52,7 +52,15 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
 
         private var _isEnemy:Boolean = false;
 
-        private var _uid:Number = NaN;
+        private var _sessionID:String = "";
+
+        private var _isCurrentPlayerAnonymized:Boolean = false;
+
+        private var _isCurrentPlayerInClan:Boolean = false;
+
+        private var _currentPlayerFakeName:String = null;
+
+        private var _toolTipString:String = null;
 
         public function DynamicSquadCtrl(param1:SquadInviteStatusView, param2:BattleAtlasSprite, param3:BattleButton, param4:BattleButton, param5:Sprite, param6:BattleAtlasSprite = null)
         {
@@ -138,19 +146,39 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
             this._isEnemy = param1;
         }
 
+        public function setCurrentPlayerAnonymized() : void
+        {
+            this._isCurrentPlayerAnonymized = true;
+        }
+
+        public function setCurrentPlayerFakeName(param1:String) : void
+        {
+            this._currentPlayerFakeName = param1;
+        }
+
+        private function makeTooltipString() : void
+        {
+            this._toolTipString = this._isCurrentPlayerInClan?App.utils.locale.makeString(TOOLTIPS.ANONYMIZER_BATTLE_TEAMLIST_CLAN,{"fakeName":this._currentPlayerFakeName}):App.utils.locale.makeString(TOOLTIPS.ANONYMIZER_BATTLE_TEAMLIST_NOCLAN,{"fakeName":this._currentPlayerFakeName});
+        }
+
+        public function setIsCurrentPlayerInClan(param1:Boolean) : void
+        {
+            this._isCurrentPlayerInClan = param1;
+        }
+
         public function addActionHandler(param1:ISquadHandler) : void
         {
             this._handler = param1;
         }
 
-        public function set uid(param1:Number) : void
+        public function set sessionID(param1:String) : void
         {
-            this._uid = param1;
+            this._sessionID = param1;
         }
 
-        public function get uid() : Number
+        public function get sessionID() : String
         {
-            return this._uid;
+            return this._sessionID;
         }
 
         public function get isAddBtAvailable() : Boolean
@@ -221,6 +249,9 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
             this._noSoundSpr = null;
             this._tooltip = null;
             this._activeButton = null;
+            this._isCurrentPlayerAnonymized = false;
+            this._isCurrentPlayerInClan = false;
+            this._currentPlayerFakeName = null;
             super.onDispose();
         }
 
@@ -231,6 +262,7 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
                 return;
             }
             this._isMouseOver = true;
+            this.updateAnonymizedTooltip();
             this.updateTooltip();
             this.updateSquadButtons();
             invalidate(SquadInvalidationType.ACTIVE_MOUSE_OVER);
@@ -243,6 +275,7 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
                 return;
             }
             this._isMouseOver = false;
+            this.updateAnonymizedTooltip();
             this.updateTooltip();
             this.updateSquadButtons();
             invalidate(SquadInvalidationType.ACTIVE_MOUSE_OVER);
@@ -343,11 +376,27 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
         {
             if(this._isInteractive && this._isMouseOver && this._state != DynamicSquadState.NONE)
             {
-                this._tooltip.show(this._state,this._isEnemy);
+                this._tooltip.show(this._state,this._isEnemy,this._isCurrentPlayerAnonymized,this._isCurrentPlayerInClan);
             }
             else
             {
                 this._tooltip.hide();
+            }
+        }
+
+        private function updateAnonymizedTooltip() : void
+        {
+            if(this._isInteractive && this._isMouseOver && this._state == DynamicSquadState.NONE && this._isCurrentPlayerAnonymized)
+            {
+                if(!this._toolTipString)
+                {
+                    this.makeTooltipString();
+                }
+                App.toolTipMgr.show(this._toolTipString);
+            }
+            else
+            {
+                App.toolTipMgr.hide();
             }
         }
 

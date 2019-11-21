@@ -102,12 +102,12 @@ package net.wg.gui.battle.epicBattle.views.stats.components
 
         public function onAcceptSquad(param1:DynamicSquadCtrl) : void
         {
-            this._squadHandler.acceptSquadS(param1.uid);
+            this._squadHandler.acceptSquadS(param1.sessionID);
         }
 
         public function onAddToSquad(param1:DynamicSquadCtrl) : void
         {
-            this._squadHandler.addToSquadS(param1.uid);
+            this._squadHandler.addToSquadS(param1.sessionID);
         }
 
         public function onSquadBtVisibleChange(param1:DynamicSquadCtrl) : void
@@ -198,7 +198,7 @@ package net.wg.gui.battle.epicBattle.views.stats.components
             var _loc3_:EpicStatsPlayerRenderer = null;
             if(teamDP.setSpeaking(param1,param2))
             {
-                _loc3_ = this.getRendererByAccoundId(false,param1);
+                _loc3_ = this.getRendererByAccountId(false,param1);
                 if(_loc3_)
                 {
                     _loc3_.setIsSpeaking(param2);
@@ -207,7 +207,7 @@ package net.wg.gui.battle.epicBattle.views.stats.components
             }
             else if(enemyDP.setSpeaking(param1,param2))
             {
-                _loc3_ = this.getRendererByAccoundId(true,param1);
+                _loc3_ = this.getRendererByAccountId(true,param1);
                 if(_loc3_)
                 {
                     _loc3_.setIsSpeaking(param2);
@@ -269,7 +269,7 @@ package net.wg.gui.battle.epicBattle.views.stats.components
             }
         }
 
-        private function getRendererByAccoundId(param1:Boolean, param2:int) : EpicStatsPlayerRenderer
+        private function getRendererByAccountId(param1:Boolean, param2:int) : EpicStatsPlayerRenderer
         {
             var _loc3_:PlayerScrollingList = param1?this._table.team2PlayerList:this._table.team1PlayerList;
             var _loc4_:int = _loc3_.rowCount;

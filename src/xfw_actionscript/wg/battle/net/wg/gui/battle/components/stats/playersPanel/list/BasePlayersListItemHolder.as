@@ -19,8 +19,6 @@ package net.wg.gui.battle.components.stats.playersPanel.list
 
         private var _userProps:StatsUserProps = null;
 
-        private var _isCurrPlayer:Boolean = false;
-
         private var _isDisposed:Boolean = false;
 
         public function BasePlayersListItemHolder(param1:IPlayersPanelListItem)
@@ -157,7 +155,7 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             this.applyUserTags();
             this.updateVehicleDataValues();
             this.updateUserProps();
-            if(this._isCurrPlayer && this.vehicleData.isAlive())
+            if(this.vehicleData.isCurrentPlayer && this.vehicleData.isAlive())
             {
                 this._listItem.setIsSelected(true);
             }
@@ -172,8 +170,7 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             }
             this._listItem.setIsMute(UserTags.isMuted(_loc1_));
             this._listItem.isIgnoredTmp(UserTags.isIgnored(_loc1_));
-            this._isCurrPlayer = UserTags.isCurrentPlayer(_loc1_);
-            this._listItem.setIsCurrentPlayer(this._isCurrPlayer);
+            this._listItem.setIsCurrentPlayer(this.vehicleData.isCurrentPlayer);
         }
 
         private function applyPlayerStatus() : void
@@ -193,11 +190,12 @@ package net.wg.gui.battle.components.stats.playersPanel.list
         {
             if(!this._userProps)
             {
-                this._userProps = new StatsUserProps(this.vehicleData.playerName,this.vehicleData.clanAbbrev,this.vehicleData.region,0,this.vehicleData.userTags);
+                this._userProps = new StatsUserProps(this.vehicleData.playerName,this.vehicleData.playerFakeName,this.vehicleData.clanAbbrev,this.vehicleData.region,0,this.vehicleData.userTags);
             }
             else
             {
                 this._userProps.userName = this.vehicleData.playerName;
+                this._userProps.fakeName = this.vehicleData.playerFakeName;
                 this._userProps.clanAbbrev = this.vehicleData.clanAbbrev;
                 this._userProps.region = this.vehicleData.region;
                 this._userProps.tags = this.vehicleData.userTags;
@@ -231,12 +229,7 @@ package net.wg.gui.battle.components.stats.playersPanel.list
 
         public function get isCurrentPlayer() : Boolean
         {
-            return this._isCurrPlayer;
-        }
-
-        public function get accDBID() : Number
-        {
-            return this.vehicleData?this.vehicleData.accountDBID:NaN;
+            return this.vehicleData && this.vehicleData.isCurrentPlayer;
         }
     }
 }

@@ -392,7 +392,7 @@ package net.wg.gui.battle.views.battleMessenger
             this.switchSwapArea(!this._isEnterButtonPressed);
         }
 
-        public function as_restoreMessages(param1:Number) : void
+        public function as_restoreMessages(param1:String) : void
         {
             var _loc2_:BattleMessage = null;
             for each(_loc2_ in this._messages)
@@ -447,22 +447,22 @@ package net.wg.gui.battle.views.battleMessenger
             this._tooltipStr = param1;
         }
 
-        public function as_showBlackMessage(param1:String, param2:Number) : void
+        public function as_showBlackMessage(param1:String, param2:String) : void
         {
             this.showMessage(param1,this._blackMessagesPool,param2);
         }
 
-        public function as_showGreenMessage(param1:String, param2:Number) : void
+        public function as_showGreenMessage(param1:String, param2:String) : void
         {
             this.showMessage(param1,this._greenMessagesPool,param2);
         }
 
-        public function as_showRedMessage(param1:String, param2:Number) : void
+        public function as_showRedMessage(param1:String, param2:String) : void
         {
             this.showMessage(param1,this._redMessagesPool,param2);
         }
 
-        public function as_showSelfMessage(param1:String, param2:Number) : void
+        public function as_showSelfMessage(param1:String, param2:String) : void
         {
             this.showMessage(param1,this._selfMessagesPool,param2);
         }
@@ -494,7 +494,7 @@ package net.wg.gui.battle.views.battleMessenger
             this.messageInputField.text = Values.EMPTY_STR;
         }
 
-        public function as_updateMessages(param1:Number, param2:String) : void
+        public function as_updateMessages(param1:String, param2:String) : void
         {
             var _loc3_:BattleMessage = null;
             for each(_loc3_ in this._messages)
@@ -510,7 +510,7 @@ package net.wg.gui.battle.views.battleMessenger
             }
         }
 
-        public function as_updateToxicPanel(param1:Number, param2:Object) : void
+        public function as_updateToxicPanel(param1:String, param2:Object) : void
         {
             this._toxicPanelData.reset();
             this._toxicPanelData.parseData(param2);
@@ -553,7 +553,7 @@ package net.wg.gui.battle.views.battleMessenger
             }
         }
 
-        private function userInteraction(param1:Boolean, param2:Function, param3:Number = -1, param4:int = 0, param5:int = 0, param6:int = 0) : Boolean
+        private function userInteraction(param1:Boolean, param2:Function, param3:String = "", param4:int = 0, param5:int = 0, param6:int = 0) : Boolean
         {
             if(!this._isToxicEnabled)
             {
@@ -1018,7 +1018,7 @@ package net.wg.gui.battle.views.battleMessenger
             this.messageInputField.type = TextFieldType.DYNAMIC;
         }
 
-        private function showMessage(param1:String, param2:BattleMessengerPool, param3:Number = -1) : void
+        private function showMessage(param1:String, param2:BattleMessengerPool, param3:String = "") : void
         {
             var _loc5_:BattleMessage = null;
             if(this._isFullMessagesStack)

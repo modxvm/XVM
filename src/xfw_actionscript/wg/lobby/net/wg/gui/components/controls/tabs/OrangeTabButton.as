@@ -66,6 +66,7 @@ package net.wg.gui.components.controls.tabs
         override protected function configUI() : void
         {
             super.configUI();
+            hitArea = this.background;
             this._tweens = new Vector.<Tween>(0);
             textField.autoSize = TextFieldAutoSize.LEFT;
             this.textFieldSelected.autoSize = TextFieldAutoSize.LEFT;
@@ -90,7 +91,7 @@ package net.wg.gui.components.controls.tabs
                 this.leftSelection.visible = selected;
                 this.rightSelection.visible = selected;
                 this.separator.visible = !this.isLastRenderer && !selected;
-                mouseEnabled = !selected;
+                buttonMode = useHandCursor = !selected && enabled;
                 this.disposeTweens();
                 this.activeBG.alpha = this.textFieldSelected.alpha = selected?1:0;
                 textField.alpha = selected?0:1;
@@ -143,7 +144,7 @@ package net.wg.gui.components.controls.tabs
                 return;
             }
             super.enabled = param1;
-            buttonMode = param1;
+            buttonMode = useHandCursor = param1 && !selected;
             if(param1)
             {
                 addEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);

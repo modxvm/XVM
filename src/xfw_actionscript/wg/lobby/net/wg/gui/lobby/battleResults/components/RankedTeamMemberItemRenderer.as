@@ -160,6 +160,8 @@ package net.wg.gui.lobby.battleResults.components
             this.playerName.userVO = param1.userVO;
             var _loc3_:Number = _loc2_.rgb;
             this.playerName.textColor = _loc3_;
+            this.playerName.useFakeName = !(param1.isSelf || param1.isOwnSquad);
+            this.playerName.showAnonymizerIcon = param1.isSelf;
             this.vehicleIcon.source = param1.tankIcon?param1.tankIcon:this.vehicleIcon.sourceAlt;
             this.vehicleName.htmlText = param1.vehicleName;
             this.xpLbl.text = this._locale.integer(param1.xp - param1.achievementXP);
@@ -214,6 +216,10 @@ package net.wg.gui.lobby.battleResults.components
                 this.medalIcon.value = param1.medalsCount;
                 this.medalIcon.validateNow();
                 this.medalIcon.visible = true;
+            }
+            if(param1.isSelf)
+            {
+                App.utils.commons.formatPlayerName(this.playerName.textField,param1.userVO.userProps,false,true);
             }
         }
 

@@ -29,6 +29,8 @@ package net.wg.data.constants.generated
 
         public static const VEHICLE_GUN:String = "vehicleGun";
 
+        public static const VEHICLE_DUAL_GUN:String = "vehicleDualGun";
+
         public static const VEHICLE_TURRET:String = "vehicleTurret";
 
         public static const VEHICLE_CHASSIS:String = "vehicleChassis";
@@ -41,9 +43,11 @@ package net.wg.data.constants.generated
 
         public static const MANDATORY_SLOTS:Array = [VEHICLE_GUN,VEHICLE_TURRET,VEHICLE_CHASSIS,VEHICLE_ENGINE,VEHICLE_RADIO];
 
+        public static const VEHICLE_GUN_OVERRIDE:Array = [VEHICLE_GUN,VEHICLE_DUAL_GUN];
+
         public static const VEHICLE_CHASSIS_OVERRIDE:Array = [VEHICLE_CHASSIS,VEHICLE_WHEELED_CHASSIS];
 
-        public static const MANDATORY_SLOTS_OVERRIDES:Array = [VEHICLE_CHASSIS_OVERRIDE];
+        public static const MANDATORY_SLOTS_OVERRIDES:Array = [VEHICLE_GUN_OVERRIDE,VEHICLE_CHASSIS_OVERRIDE];
 
         public static const RESERVE_SLOT1:String = "reserveSlot1";
 

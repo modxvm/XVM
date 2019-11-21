@@ -18,6 +18,7 @@ package net.wg.gui.components.containers
             this._type = param1;
             name = param1;
             this._manageSize = false;
+            mouseEnabled = false;
         }
 
         public function get type() : String

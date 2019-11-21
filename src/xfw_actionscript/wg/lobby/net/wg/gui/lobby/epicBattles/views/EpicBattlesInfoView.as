@@ -225,8 +225,7 @@ package net.wg.gui.lobby.epicBattles.views
 
         private function createTutorialLine(param1:String, param2:String) : TutorialLine
         {
-            var _loc3_:TutorialLine = null;
-            _loc3_ = App.utils.classFactory.getComponent(param1,TutorialLine);
+            var _loc3_:TutorialLine = App.utils.classFactory.getComponent(param1,TutorialLine);
             _loc3_.lineTF.text = param2;
             _loc3_.mouseEnabled = _loc3_.mouseChildren = false;
             addChild(_loc3_);

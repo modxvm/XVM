@@ -34,7 +34,7 @@ package net.wg.gui.lobby.manual
 
         private static const CLOSE_OFFSET:int = 22;
 
-        private static const BACK_IMAGE_RATIO:Number = 2;
+        private static const BACK_IMAGE_RATIO:int = 2;
 
         public var background:UILoaderAlt = null;
 
@@ -114,14 +114,14 @@ package net.wg.gui.lobby.manual
                     if(_loc5_ != -1)
                     {
                         _loc6_.setActualScale(_loc3_,_loc3_);
-                        _loc6_.x = int(_loc10_ * _loc6_.actualWidth);
-                        _loc6_.y = int(_loc11_ * _loc6_.actualHeight + _loc4_);
+                        _loc6_.x = _loc10_ * _loc6_.actualWidth | 0;
+                        _loc6_.y = _loc11_ * _loc6_.actualHeight + _loc4_ | 0;
                     }
                     _loc5_++;
                 }
                 this._container.x = _width - this._container.width >> 1;
                 this._container.y = CHAPTERS_TOP_PADDING + (_height - CHAPTERS_TOP_PADDING - this._container.height >> 1);
-                this.closeBtn.x = _width - this.closeBtn.width - CLOSE_OFFSET;
+                this.closeBtn.x = _width - this.closeBtn.width - CLOSE_OFFSET | 0;
                 this.screenBg.setSize(_width,_height);
                 _loc7_ = _width / _height > BACK_IMAGE_RATIO;
                 _loc8_ = _loc7_?_width:_height * BACK_IMAGE_RATIO;

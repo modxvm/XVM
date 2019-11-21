@@ -32,8 +32,6 @@ package net.wg.gui.battle.views.superPlatoonPanel.renderers
 
         private var _data:DAAPIVehicleInfoVO = null;
 
-        private var _isActive:Boolean = true;
-
         private var _scheduler:IScheduler;
 
         public function PlatoonInviteRenderer()
@@ -113,7 +111,7 @@ package net.wg.gui.battle.views.superPlatoonPanel.renderers
 
         private function onAcceptInvitationClickHandler(param1:MouseEvent) : void
         {
-            dispatchEvent(new DynamicSquadEvent(DynamicSquadEvent.ACCEPT,this._data.accountDBID,true));
+            dispatchEvent(new DynamicSquadEvent(DynamicSquadEvent.ACCEPT,this._data.sessionID,true));
         }
 
         private function onMouseRollOverHandler(param1:MouseEvent) : void

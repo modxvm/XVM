@@ -86,6 +86,8 @@ package net.wg.gui.lobby.settings
 
         public var showVehiclesCounterCheckbox:CheckBox = null;
 
+        public var anonymizerCheckbox:CheckBox = null;
+
         public var showMarksOnGunCheckbox:CheckBox = null;
 
         public var c11nHistoricallyAccurateCheckbox:CheckBox = null;
@@ -195,6 +197,8 @@ package net.wg.gui.lobby.settings
             this.showMarksOnGunCheckbox.label = SETTINGS.GAME_SHOWMARKSONGUN;
             this.showMarksOnGunCheckbox.toolTip = TOOLTIPS.SHOWMARKSONGUN;
             this.showMarksOnGunCheckbox.infoIcoType = InfoIcon.TYPE_INFO;
+            this.anonymizerCheckbox.label = SETTINGS.GAME_ANONYMIZER;
+            this.anonymizerCheckbox.infoIcoType = InfoIcon.TYPE_INFO;
             this.c11nHistoricallyAccurateCheckbox.label = SETTINGS.GAME_C11NHISTORICALLYACCURATE;
             this.c11nHistoricallyAccurateCheckbox.toolTip = TOOLTIPS.C11NHISTORICALLYACCURATE;
             this.c11nHistoricallyAccurateCheckbox.infoIcoType = InfoIcon.TYPE_INFO;
@@ -304,6 +308,8 @@ package net.wg.gui.lobby.settings
             this.showVehiclesCounterCheckbox = null;
             this.showMarksOnGunCheckbox.dispose();
             this.showMarksOnGunCheckbox = null;
+            this.anonymizerCheckbox.dispose();
+            this.anonymizerCheckbox = null;
             this.c11nHistoricallyAccurateCheckbox.dispose();
             this.c11nHistoricallyAccurateCheckbox = null;
             this.loginServerSelectionCheckbox.dispose();

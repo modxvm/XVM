@@ -88,7 +88,7 @@ package net.wg.gui.battle.views.superPlatoonPanel
             this.applyVehicleData(DAAPIVehiclesDataVO(param1));
         }
 
-        public function as_setIsIntaractive(param1:Boolean) : void
+        public function as_setIsInteractive(param1:Boolean) : void
         {
         }
 
@@ -361,7 +361,7 @@ package net.wg.gui.battle.views.superPlatoonPanel
         private function onDynamicSquadAcceptHandler(param1:DynamicSquadEvent) : void
         {
             this._platoonPanelState = IN_PLATOON_STATE;
-            acceptSquadS(param1.uid);
+            acceptSquadS(param1.sessionID);
         }
     }
 }

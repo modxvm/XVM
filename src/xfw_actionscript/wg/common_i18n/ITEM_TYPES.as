@@ -43,6 +43,8 @@ package
 
         public static const GUN_NAME:String = "#item_types:gun/name";
 
+        public static const DUALGUN_NAME:String = "#item_types:dualGun/name";
+
         public static const GUN_DESC:String = "#item_types:gun/desc";
 
         public static const GUN_TAGS:String = "#item_types:gun/tags";

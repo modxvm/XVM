@@ -136,12 +136,7 @@ package net.wg.gui.lobby.storage.categories.cards
                 this.flags = null;
             }
             this.inInventoryIcon = null;
-            if(this.discountIcon)
-            {
-                this.discountIcon.removeEventListener(MouseEvent.MOUSE_OVER,this.onDiscountIconMouseOverHandler);
-                this.discountIcon.removeEventListener(MouseEvent.MOUSE_OUT,this.onDiscountIconMouseOutHandler);
-                this.discountIcon = null;
-            }
+            this.discountIcon = null;
             this.equipmentType = null;
             this.sellButton.dispose();
             this.sellButton = null;
@@ -202,11 +197,6 @@ package net.wg.gui.lobby.storage.categories.cards
             {
                 this.equipmentType.visible = false;
                 this.equipmentType.mouseEnabled = this.equipmentType.mouseChildren = false;
-            }
-            if(this.discountIcon)
-            {
-                this.discountIcon.addEventListener(MouseEvent.MOUSE_OVER,this.onDiscountIconMouseOverHandler);
-                this.discountIcon.addEventListener(MouseEvent.MOUSE_OUT,this.onDiscountIconMouseOutHandler);
             }
             if(this.flags)
             {
@@ -534,10 +524,15 @@ package net.wg.gui.lobby.storage.categories.cards
 
         protected function onRollOver() : void
         {
+            var _loc1_:Boolean = this._data.price && this._data.price.action != null;
             this._isOver = true;
             this.disposeTweens();
             this._tweens = this.getRollOverTweens();
             App.utils.scheduler.scheduleTask(dispatchEvent,ROLL_OVER_ANIMATION_DELAY,new CardEvent(CardEvent.PLAY_INFO_SOUND));
+            if(_loc1_ && this._data.enabled)
+            {
+                this.showDiscountTooltip();
+            }
         }
 
         protected function onRollOut() : void
@@ -546,6 +541,7 @@ package net.wg.gui.lobby.storage.categories.cards
             this.disposeTweens();
             this._tweens = this.getRollOutTweens();
             App.utils.scheduler.cancelTask(dispatchEvent);
+            App.toolTipMgr.hide();
         }
 
         protected function animateImage() : void
@@ -706,16 +702,11 @@ package net.wg.gui.lobby.storage.categories.cards
             this.onClick(param1);
         }
 
-        private function onDiscountIconMouseOverHandler(param1:MouseEvent) : void
+        private function showDiscountTooltip() : void
         {
-            var _loc2_:CompoundPriceVO = this._data.price.price;
-            var _loc3_:CompoundPriceVO = this._data.price.defPrice;
-            App.toolTipMgr.showSpecial(TOOLTIPS_CONSTANTS.ACTION_PRICE,null,TOOLTIP_ACTION_PRICE_FIELD_NAME_ITEM,this._data.id,[_loc2_.getPriceValueByName(CURRENCIES_CONSTANTS.CREDITS),_loc2_.getPriceValueByName(CURRENCIES_CONSTANTS.GOLD),_loc2_.getPriceValueByName(CURRENCIES_CONSTANTS.CRYSTAL)],[_loc3_.getPriceValueByName(CURRENCIES_CONSTANTS.CREDITS),_loc3_.getPriceValueByName(CURRENCIES_CONSTANTS.GOLD),_loc3_.getPriceValueByName(CURRENCIES_CONSTANTS.CRYSTAL)],false,true,-1);
-        }
-
-        private function onDiscountIconMouseOutHandler(param1:MouseEvent) : void
-        {
-            App.toolTipMgr.hide();
+            var _loc1_:CompoundPriceVO = this._data.price.price;
+            var _loc2_:CompoundPriceVO = this._data.price.defPrice;
+            App.toolTipMgr.showSpecial(TOOLTIPS_CONSTANTS.ACTION_PRICE,null,TOOLTIP_ACTION_PRICE_FIELD_NAME_ITEM,this._data.id,[_loc1_.getPriceValueByName(CURRENCIES_CONSTANTS.CREDITS),_loc1_.getPriceValueByName(CURRENCIES_CONSTANTS.GOLD),_loc1_.getPriceValueByName(CURRENCIES_CONSTANTS.CRYSTAL)],[_loc2_.getPriceValueByName(CURRENCIES_CONSTANTS.CREDITS),_loc2_.getPriceValueByName(CURRENCIES_CONSTANTS.GOLD),_loc2_.getPriceValueByName(CURRENCIES_CONSTANTS.CRYSTAL)],false,true,-1);
         }
     }
 }

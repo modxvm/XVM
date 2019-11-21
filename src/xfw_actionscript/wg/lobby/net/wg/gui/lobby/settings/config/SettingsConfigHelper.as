@@ -251,12 +251,18 @@ package net.wg.gui.lobby.settings.config
 
         private static const PTT_KEY_RANGE:String = "pushToTalk";
 
+        public static const CO_DEPENDENTS:Object = {
+            "fire":"chargeFire",
+            "chargeFire":"fire"
+        };
+
         public static const KEY_RANGE:Object = {
             "defaultRange":["APOSTROPHE","SEMICOLON","LBRACKET","STOP","COMMA","SLASH","BACKSLASH","RBRACKET","SPACE","LSHIFT","LALT","1","2","3","4","5","6","7","8","9","0","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","W","V","X","Y","Z","UPARROW","DOWNARROW","LEFTARROW","RIGHTARROW","MOUSE0","MOUSE1","MOUSE2","MOUSE3","MOUSE4","MOUSE5","MOUSE6","MOUSE7","F2","F3","F4","F5","F6","F7","F8","F9","F10","F11","F12","INSERT","DELETE","HOME","END","NUMPAD0","NUMPAD1","NUMPAD2","NUMPAD3","NUMPAD4","NUMPAD5","NUMPAD6","NUMPAD7","NUMPAD8","NUMPAD9","NAMPADSLASH","NAMPADSTAR","NUMPADMINUS","ADD","NUMPADPERIOD"],
             "pushToTalk":["q","w","e","r","t","y","u","i","o","p","lbracket","rbracket","a","s","d","f","g","h","j","k","l","semicolon","backslash","z","x","c","v","b","n","m","comma","stop","slash","insert","delete","home","end","apostrophe"],
             "sizeUp":["q","w","e","r","t","y","u","i","o","p","lbracket","rbracket","a","s","d","f","g","h","j","k","l","semicolon","backslash","z","x","c","v","b","n","m","comma","stop","slash","insert","delete","home","end","apostrophe","MINUS","EQUALS","numpadslash","numpadstar","numpadminus","add","numpadperiod","numpad0","numpad1","numpad2","numpad3","numpad4","numpad5","numpad6","numpad7","numpad8","numpad9","MOUSE4","MOUSE5"],
             "sizeDown":["q","w","e","r","t","y","u","i","o","p","lbracket","rbracket","a","s","d","f","g","h","j","k","l","semicolon","backslash","z","x","c","v","b","n","m","comma","stop","slash","insert","delete","home","end","apostrophe","MINUS","EQUALS","numpadslash","numpadstar","numpadminus","add","numpadperiod","numpad0","numpad1","numpad2","numpad3","numpad4","numpad5","numpad6","numpad7","numpad8","numpad9","MOUSE4","MOUSE5"],
-            "visible":["q","w","e","r","t","y","u","i","o","p","lbracket","rbracket","a","s","d","f","g","h","j","k","l","semicolon","backslash","z","x","c","v","b","n","m","comma","stop","slash","insert","delete","home","end","apostrophe","MINUS","EQUALS","numpadslash","numpadstar","numpadminus","add","numpadperiod","numpad0","numpad1","numpad2","numpad3","numpad4","numpad5","numpad6","numpad7","numpad8","numpad9","MOUSE4","MOUSE5"]
+            "visible":["q","w","e","r","t","y","u","i","o","p","lbracket","rbracket","a","s","d","f","g","h","j","k","l","semicolon","backslash","z","x","c","v","b","n","m","comma","stop","slash","insert","delete","home","end","apostrophe","MINUS","EQUALS","numpadslash","numpadstar","numpadminus","add","numpadperiod","numpad0","numpad1","numpad2","numpad3","numpad4","numpad5","numpad6","numpad7","numpad8","numpad9","MOUSE4","MOUSE5"],
+            "chargeFire":["APOSTROPHE","SEMICOLON","LBRACKET","STOP","COMMA","SLASH","BACKSLASH","RBRACKET","SPACE","LSHIFT","LALT","1","2","3","4","5","6","7","8","9","0","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","W","V","X","Y","Z","UPARROW","DOWNARROW","LEFTARROW","RIGHTARROW","MOUSE0","MOUSE2","MOUSE3","MOUSE4","MOUSE5","MOUSE6","MOUSE7","F2","F3","F4","F5","F6","F7","F8","F9","F10","F11","F12","INSERT","DELETE","HOME","END","NUMPAD0","NUMPAD1","NUMPAD2","NUMPAD3","NUMPAD4","NUMPAD5","NUMPAD6","NUMPAD7","NUMPAD8","NUMPAD9","NAMPADSLASH","NAMPADSTAR","NUMPADMINUS","ADD","NUMPADPERIOD"]
         };
 
         private static const ENEMY_STR:String = "enemy";

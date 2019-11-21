@@ -98,7 +98,7 @@ package net.wg.gui.battle.epicBattle.views.stats
             this.statsTable.statsFilters.setButtonTexts(param1,param2);
         }
 
-        public function as_setIsIntaractive(param1:Boolean) : void
+        public function as_setIsInteractive(param1:Boolean) : void
         {
             this._isInteractive = param1;
             this.applyInteractivity();

@@ -343,6 +343,8 @@ package
 
         public static const SQUAD_NOTVALIDDELETED:String = "#system_messages:squad/notValidDeleted";
 
+        public static const SQUAD_NOTVALIDDELETEDFILTER:String = "#system_messages:squad/notValidDeletedFilter";
+
         public static const SQUAD_NOTVALIDMAXSPGDELETED:String = "#system_messages:squad/notValidMaxSpgDeleted";
 
         public static const BATTLESESSION_KICKEDFROMQUEUE:String = "#system_messages:battleSession/kickedFromQueue";
@@ -877,6 +879,8 @@ package
 
         public static const VEHICLE_SELL_SERVER_ERROR:String = "#system_messages:vehicle_sell/server_error";
 
+        public static const VEHICLE_SELL_DISABLEDSERVICE:String = "#system_messages:vehicle_sell/disabledService";
+
         public static const VEHICLE_SELL_INVALID_VEHICLE:String = "#system_messages:vehicle_sell/invalid_vehicle";
 
         public static const VEHICLE_SELL_VEHICLE_CANNOT_BE_SOLD:String = "#system_messages:vehicle_sell/vehicle_cannot_be_sold";
@@ -946,6 +950,8 @@ package
         public static const VEHICLE_REMOVE_VEHICLE_SELL_LIMIT:String = "#system_messages:vehicle_remove/vehicle_sell_limit";
 
         public static const VEHICLE_REMOVE_NOT_ENOUGH_SPACE:String = "#system_messages:vehicle_remove/not_enough_space";
+
+        public static const VEHICLE_REMOVE_DISABLEDSERVICE:String = "#system_messages:vehicle_remove/disabledService";
 
         public static const VEHICLE_RESTOREDURATION_HOURS:String = "#system_messages:vehicle/restoreDuration/hours";
 
@@ -1095,6 +1101,12 @@ package
 
         public static const BATTLEBOOSTER_BUY_NOT_ENOUGH_CRYSTAL:String = "#system_messages:battleBooster_buy/not_enough_crystal";
 
+        public static const BATTLEBOOSTER_BUY_CREDITS_ERROR:String = "#system_messages:battleBooster_buy/credits_error";
+
+        public static const BATTLEBOOSTER_BUY_GOLD_ERROR:String = "#system_messages:battleBooster_buy/gold_error";
+
+        public static const BATTLEBOOSTER_BUY_CRYSTAL_ERROR:String = "#system_messages:battleBooster_buy/crystal_error";
+
         public static const BATTLEBOOSTER_BUY_WALLET_NOT_AVAILABLE:String = "#system_messages:battleBooster_buy/wallet_not_available";
 
         public static const BATTLEBOOSTER_BUY_SERVER_ERROR:String = "#system_messages:battleBooster_buy/server_error";
@@ -1110,6 +1122,10 @@ package
         public static const BATTLEBOOSTER_BUY_INVALID_VEHICLE:String = "#system_messages:battleBooster_buy/invalid_vehicle";
 
         public static const BATTLEBOOSTER_BUY_ERROR_NOT_FOR_THIS_VEHICLE_TYPE:String = "#system_messages:battleBooster_buy/error_not_for_this_vehicle_type";
+
+        public static const BATTLEBOOSTER_SELL_SUCCESS:String = "#system_messages:battleBooster_sell/success";
+
+        public static const BATTLEBOOSTER_SELL_SERVER_ERROR:String = "#system_messages:battleBooster_sell/server_error";
 
         public static const MULTIPLESELLING_SUCCESS:String = "#system_messages:multipleSelling/success";
 
@@ -2010,8 +2026,6 @@ package
         public static const VEHICLECOMPARE_DISABLED:String = "#system_messages:vehicleCompare/disabled";
 
         public static const VEHICLECOMPARE_PREVIEWNOTALLOWED:String = "#system_messages:vehicleCompare/previewNotAllowed";
-
-        public static const PRMP_NOTIFICATION_NEWENCYCLOPEDIARECOMMENDATION:String = "#system_messages:prmp/notification/newEncyclopediaRecommendation";
 
         public static const RESTORECONTROLLER_HASLIMITEDRESTOREVEHICLES:String = "#system_messages:restoreController/hasLimitedRestoreVehicles";
 

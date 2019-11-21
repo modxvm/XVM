@@ -21,14 +21,14 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
     import flash.events.MouseEvent;
     import scaleform.clik.constants.InvalidationType;
     import org.idmedia.as3commons.util.StringUtils;
-    import net.wg.data.constants.UniversalBtnStylesConst;
-    import net.wg.gui.components.controls.VO.PriceVO;
     import net.wg.gui.lobby.vehiclePreview20.data.VPSetItemsVO;
     import net.wg.gui.lobby.vehiclePreview20.data.VPSetVehiclesVO;
     import scaleform.clik.data.DataProvider;
     import net.wg.gui.lobby.vehiclePreview20.data.VPCouponVO;
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.utils.StageSizeBoundaries;
+    import net.wg.data.constants.UniversalBtnStylesConst;
+    import net.wg.gui.components.controls.VO.PriceVO;
     import flash.display.BitmapData;
     import net.wg.data.constants.Linkages;
     import net.wg.gui.lobby.vehiclePreview20.data.VPSetItemVO;
@@ -44,19 +44,11 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
 
         private static const ACTION_BUTTON_DISCOUNT_OFFSET:int = 10;
 
-        private static const SET_ITEMS_PANEL_OFFSET:int = 150;
-
         private static const BUY_BUTTON_DEFAULT_OFFSET:int = 32;
-
-        private static const COMPENSATION_CURRENCY_OFFSET:int = 4;
 
         private static const HALF_BUY_BUTTON_DEFAULT_OFFSET:int = BUY_BUTTON_DEFAULT_OFFSET >> 1;
 
-        private static const TRADE_WIDGET_H_OFFSET:int = 20;
-
         private static const COMPENSATION_Y_OFFSET:int = 7;
-
-        private static const COMPENSATION_X_OFFSET:int = 64;
 
         private static const LEFT_TIME_INV:String = "leftTimeInv";
 
@@ -75,8 +67,6 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
         private static const PRICE_WITHOUT_COMP_POSITION_Y:int = 4;
 
         private static const PRICE_WITH_COMP_POSITION_Y:int = -8;
-
-        private static const PRICE_WITH_COMP_OFFSET_X:int = COMPENSATION_X_OFFSET + COMPENSATION_CURRENCY_OFFSET + BUY_BUTTON_DEFAULT_OFFSET;
 
         private static const END_TIME_FILTER:Array = [new DropShadowFilter(0,0,16711680,1,16,16,2,BitmapFilterQuality.HIGH)];
 
@@ -286,6 +276,84 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
             }
         }
 
+        override protected function setBuyData(param1:VPBuyingPanelVO) : void
+        {
+            this._data = param1;
+            invalidateData();
+        }
+
+        override protected function setSetItemsData(param1:VPSetItemsVO) : void
+        {
+            this.setItemsView.setData(param1.blocks);
+            invalidateSize();
+        }
+
+        override protected function setSetVehiclesData(param1:VPSetVehiclesVO) : void
+        {
+            this.setVehiclesView.setData(param1.vehicles);
+            addChild(this.setVehiclesView);
+            invalidateSize();
+        }
+
+        override protected function setOffersData(param1:DataProvider) : void
+        {
+            this.offersView.setData(param1);
+            addChild(this.offersView);
+            invalidateSize();
+        }
+
+        override protected function setCoupon(param1:VPCouponVO) : void
+        {
+            this.couponView.setData(param1);
+            addChild(this.couponView);
+            invalidateSize();
+        }
+
+        public function as_setSetTitleTooltip(param1:String) : void
+        {
+            this._titleTooltip = param1;
+            invalidate(TITLE_TOOLTIP_INV);
+        }
+
+        public function as_updateLeftTime(param1:String, param2:Boolean) : void
+        {
+            this._formattedLeftTime = param1;
+            invalidate(LEFT_TIME_INV);
+            if(!this._firstRearrange)
+            {
+                invalidateSize();
+                this._firstRearrange = true;
+            }
+            if(!param2 && this.setTimeLeftTF.filters.length != 0)
+            {
+                this.setTimeLeftTF.filters = [];
+            }
+            else if(param2 && this.setTimeLeftTF.filters.length == 0)
+            {
+                this.setTimeLeftTF.filters = END_TIME_FILTER;
+            }
+        }
+
+        public function getBtn() : SoundButtonEx
+        {
+            return this.actionButton;
+        }
+
+        public function getTotalHeight() : Number
+        {
+            return TOTAL_H;
+        }
+
+        public function setStateSizeBoundaries(param1:int, param2:int) : void
+        {
+            var _loc3_:* = param2 == StageSizeBoundaries.HEIGHT_768;
+            if(isDAAPIInited && this._useCompactData != _loc3_)
+            {
+                this._useCompactData = _loc3_;
+                updateDataS(this._useCompactData);
+            }
+        }
+
         private function updatePanelData() : void
         {
             var _loc1_:String = null;
@@ -425,10 +493,8 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
                 if(this.compensation.visible)
                 {
                     this.compensation.y = this.compoundPrice.y + this.compoundPrice.contentHeight - COMPENSATION_Y_OFFSET >> 0;
-                    _loc1_ = _loc1_ + COMPENSATION_X_OFFSET;
                     this.compensation.x = _loc1_;
-                    _loc1_ = _loc1_ - (SET_ITEMS_PANEL_OFFSET - this.compensation.contentWidth);
-                    _loc1_ = _loc1_ + PRICE_WITH_COMP_OFFSET_X;
+                    _loc1_ = _loc1_ + (BUY_BUTTON_DEFAULT_OFFSET + this.compensation.actualWidth);
                     this.compoundPrice.y = PRICE_WITH_COMP_POSITION_Y;
                 }
                 else
@@ -437,10 +503,10 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
                 }
                 if(this.compoundPrice.visible)
                 {
-                    _loc1_ = _loc1_ + (contains(this.offersView)?SET_ITEMS_PANEL_OFFSET - this.compoundPrice.width:0);
+                    _loc1_ = _loc1_ + (contains(this.offersView)?this.compoundPrice.width:0);
                     if(this.compensation.visible)
                     {
-                        this.compoundPrice.x = _loc1_ - this.compoundPrice.contentWidth - BUY_BUTTON_DEFAULT_OFFSET >> 0;
+                        this.compoundPrice.x = _loc1_ - BUY_BUTTON_DEFAULT_OFFSET - this.compoundPrice.actualWidth >> 0;
                         this.actionButton.x = _loc1_;
                         _loc1_ = this.compoundPrice.x;
                     }
@@ -498,84 +564,6 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
                     _loc5_ = this.setItemsView.x + this.actionButton.x + this.actionButton.width;
                     this.setTitleTF.x = (_loc5_ >> 1) - (this.setTitleTF.textWidth >> 1);
                 }
-            }
-        }
-
-        override protected function setBuyData(param1:VPBuyingPanelVO) : void
-        {
-            this._data = param1;
-            invalidateData();
-        }
-
-        override protected function setSetItemsData(param1:VPSetItemsVO) : void
-        {
-            this.setItemsView.setData(param1.blocks);
-            invalidateSize();
-        }
-
-        override protected function setSetVehiclesData(param1:VPSetVehiclesVO) : void
-        {
-            this.setVehiclesView.setData(param1.vehicles);
-            addChild(this.setVehiclesView);
-            invalidateSize();
-        }
-
-        override protected function setOffersData(param1:DataProvider) : void
-        {
-            this.offersView.setData(param1);
-            addChild(this.offersView);
-            invalidateSize();
-        }
-
-        override protected function setCoupon(param1:VPCouponVO) : void
-        {
-            this.couponView.setData(param1);
-            addChild(this.couponView);
-            invalidateSize();
-        }
-
-        public function as_setSetTitleTooltip(param1:String) : void
-        {
-            this._titleTooltip = param1;
-            invalidate(TITLE_TOOLTIP_INV);
-        }
-
-        public function as_updateLeftTime(param1:String, param2:Boolean) : void
-        {
-            this._formattedLeftTime = param1;
-            invalidate(LEFT_TIME_INV);
-            if(!this._firstRearrange)
-            {
-                invalidateSize();
-                this._firstRearrange = true;
-            }
-            if(!param2 && this.setTimeLeftTF.filters.length != 0)
-            {
-                this.setTimeLeftTF.filters = [];
-            }
-            else if(param2 && this.setTimeLeftTF.filters.length == 0)
-            {
-                this.setTimeLeftTF.filters = END_TIME_FILTER;
-            }
-        }
-
-        public function getBtn() : SoundButtonEx
-        {
-            return this.actionButton;
-        }
-
-        public function getTotalHeight() : Number
-        {
-            return TOTAL_H;
-        }
-
-        public function setStateSizeBoundaries(param1:int, param2:int) : void
-        {
-            var _loc3_:* = param2 == StageSizeBoundaries.HEIGHT_768;
-            if(isDAAPIInited && this._useCompactData != _loc3_)
-            {
-                this._useCompactData = _loc3_;
-                updateDataS(this._useCompactData);
             }
         }
 

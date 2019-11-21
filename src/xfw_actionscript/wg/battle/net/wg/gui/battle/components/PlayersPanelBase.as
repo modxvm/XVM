@@ -124,7 +124,7 @@ package net.wg.gui.battle.components
             dispatchEvent(new Event(Event.CHANGE));
         }
 
-        public function as_setIsIntaractive(param1:Boolean) : void
+        public function as_setIsInteractive(param1:Boolean) : void
         {
             this.panelSwitch.setIsInteractive(param1);
             this.listLeft.setIsCursorVisible(param1);
@@ -454,12 +454,12 @@ package net.wg.gui.battle.components
 
         private function onDynamicSquadAcceptHandler(param1:DynamicSquadEvent) : void
         {
-            acceptSquadS(param1.uid);
+            acceptSquadS(param1.sessionID);
         }
 
         private function onDynamicSquadAddHandler(param1:DynamicSquadEvent) : void
         {
-            addToSquadS(param1.uid);
+            addToSquadS(param1.sessionID);
         }
 
         private function onMouseClickHandler(param1:MouseEvent) : void

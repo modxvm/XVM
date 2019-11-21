@@ -4,7 +4,7 @@ package net.wg.gui.components.crosshairPanel.components.gunMarker
     import net.wg.gui.components.crosshairPanel.components.gunMarker.constants.GunMarkerConsts;
     import flash.events.Event;
 
-    public class DualGunMarkerArcade extends GunMarker implements IGunMarker
+    public class DualGunMarker extends GunMarker implements IGunMarker
     {
 
         public static const INVALID_CHARGE_ACTIVE:String = "invalidChargeActive";
@@ -13,7 +13,7 @@ package net.wg.gui.components.crosshairPanel.components.gunMarker
 
         public static const INVALID_MARKER_STATE:String = "invalidMarkerState";
 
-        public var chargeMixing:GunMarkerArcadeDualGunCharge;
+        public var chargeMixing:GunMarkerMixingDualGun;
 
         private var _markerState:int = 3;
 
@@ -21,7 +21,7 @@ package net.wg.gui.components.crosshairPanel.components.gunMarker
 
         private var _chargeTimerData:RunningTimerData;
 
-        public function DualGunMarkerArcade()
+        public function DualGunMarker()
         {
             super();
             this._chargeTimerData = new RunningTimerData();
@@ -47,7 +47,7 @@ package net.wg.gui.components.crosshairPanel.components.gunMarker
             }
             if(isInvalid(INVALID_CHARGE_PROGRESS))
             {
-                this.chargeMixing.setReloadingAsPercent(this._chargeTimerData.elapsedPercent);
+                this.chargeMixing.setChargeProgress(this._chargeTimerData.elapsedPercent);
                 this.chargeMixing.scaleX = radiusMC.scaleX;
                 this.chargeMixing.scaleY = radiusMC.scaleY;
                 if(this._chargeTimerData.elapsedPercent >= 1)

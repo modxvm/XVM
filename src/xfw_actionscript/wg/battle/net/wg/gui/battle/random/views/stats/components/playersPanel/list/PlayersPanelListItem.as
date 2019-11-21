@@ -62,7 +62,7 @@ package net.wg.gui.battle.random.views.stats.components.playersPanel.list
             this.dynamicSquad.setIsEnemy(param1);
         }
 
-        public function getDynamicSquad() : PlayersPanelDynamicSquad
+        override public function getDynamicSquad() : PlayersPanelDynamicSquad
         {
             return this.dynamicSquad;
         }

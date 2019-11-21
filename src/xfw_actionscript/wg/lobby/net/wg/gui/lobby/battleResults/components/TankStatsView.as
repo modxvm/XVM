@@ -89,9 +89,9 @@ package net.wg.gui.lobby.battleResults.components
                 _loc1_ = this._data.common;
                 this.imageSwitcher.areaIcon.source = _loc1_.arenaIcon;
                 _loc2_ = new UserVO({
-                    "fullName":_loc1_.playerFullNameStr,
-                    "userName":_loc1_.playerNameStr,
+                    "userName":_loc1_.playerRealNameStr,
                     "clanAbbrev":_loc1_.clanNameStr,
+                    "fullName":_loc1_.playerFullNameStr,
                     "region":_loc1_.regionNameStr,
                     "isTeamKiller":this._data.personal.isTeamKiller
                 });
@@ -166,7 +166,7 @@ package net.wg.gui.lobby.battleResults.components
             }
             else if(_loc1_.killerID > 0)
             {
-                _loc2_ = App.utils.commons.getUserProps(_loc1_.killerNameStr,_loc1_.killerClanNameStr,_loc1_.killerRegionNameStr);
+                _loc2_ = App.utils.commons.getUserProps(_loc1_.killerRealNameStr,_loc1_.killerClanNameStr,_loc1_.killerRegionNameStr);
                 _loc2_.prefix = _loc1_.vehicleStatePrefixStr;
                 _loc2_.suffix = _loc1_.vehicleStateSuffixStr;
                 _loc2_.isTeamKiller = _loc1_.isKilledByTeamKiller;

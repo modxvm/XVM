@@ -58,6 +58,8 @@ package net.wg.gui.lobby.hangar
 
         private static const PARAMS_BOTTOM_MARGIN:int = 80;
 
+        private static const PARAMS_SMALL_SCREEN_BOTTOM_MARGIN:int = 36;
+
         private static const MESSENGER_BAR_PADDING:int = 45;
 
         private static const TOP_MARGIN:Number = 34;
@@ -689,7 +691,8 @@ package net.wg.gui.lobby.hangar
         {
             this.params.x = _originalWidth - this.params.width - RIGHT_MARGIN ^ 0;
             this.params.y = this.vehResearchPanel.y + this.vehResearchPanel.totalHeight + PARAMS_TOP_MARGIN;
-            this.params.height = this.ammunitionPanel.y - this.params.y + PARAMS_BOTTOM_MARGIN;
+            var _loc1_:int = _originalWidth <= 1280?PARAMS_SMALL_SCREEN_BOTTOM_MARGIN:0;
+            this.params.height = this.ammunitionPanel.y - this.params.y + PARAMS_BOTTOM_MARGIN - _loc1_;
         }
 
         private function hideTooltip() : void

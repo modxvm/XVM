@@ -49,7 +49,6 @@ package net.wg.gui.lobby.profile.pages
             if(isInvalid(ResizableInvalidationTypes.CURRENT_DIMENSION_INVALID) && this.currentDimension)
             {
                 this.applyResizing();
-                App.stage.dispatchEvent(new Event(Event.RESIZE,true));
             }
             if(isInvalid(DOSSIER_DATA_INVALID) && this.currentData)
             {

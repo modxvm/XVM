@@ -97,7 +97,7 @@ package net.wg.gui.components.questProgress
         {
         }
 
-        private function onDataUpdate(param1:IQPProgressData) : void
+        protected function onDataUpdate(param1:IQPProgressData) : void
         {
             this.chartView.update(param1);
             var _loc2_:Vector.<IQPMetrics> = param1.metricsValue;

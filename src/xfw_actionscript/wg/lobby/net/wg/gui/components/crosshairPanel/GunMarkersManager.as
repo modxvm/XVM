@@ -1,7 +1,7 @@
 package net.wg.gui.components.crosshairPanel
 {
     import net.wg.infrastructure.interfaces.entity.IDisposable;
-    import net.wg.gui.components.crosshairPanel.components.gunMarker.DualGunMarkerArcade;
+    import net.wg.gui.components.crosshairPanel.components.gunMarker.DualGunMarker;
     import net.wg.gui.components.crosshairPanel.VO.CrosshairSettingsVO;
     import flash.display.DisplayObjectContainer;
     import net.wg.gui.components.crosshairPanel.components.gunMarker.IGunMarker;
@@ -12,7 +12,7 @@ package net.wg.gui.components.crosshairPanel
 
         private var _gunMarkers:Object = null;
 
-        private var _dualGunMarkers:Vector.<DualGunMarkerArcade>;
+        private var _dualGunMarkers:Vector.<DualGunMarker>;
 
         private var _scale:Number = 1;
 
@@ -28,7 +28,7 @@ package net.wg.gui.components.crosshairPanel
         {
             super();
             this._gunMarkers = {};
-            this._dualGunMarkers = new Vector.<DualGunMarkerArcade>(0);
+            this._dualGunMarkers = new Vector.<DualGunMarker>(0);
             this._container = param1;
         }
 
@@ -54,7 +54,7 @@ package net.wg.gui.components.crosshairPanel
             this._gunMarkers[param2] = param1;
             param1.name = param2;
             param1.setScale(this._scale);
-            if(param1 is DualGunMarkerArcade)
+            if(param1 is DualGunMarker)
             {
                 this._dualGunMarkers.push(param1);
             }
@@ -68,7 +68,7 @@ package net.wg.gui.components.crosshairPanel
 
         public function cancelDualGunCharge() : void
         {
-            var _loc1_:DualGunMarkerArcade = null;
+            var _loc1_:DualGunMarker = null;
             for each(_loc1_ in this._dualGunMarkers)
             {
                 _loc1_.stopCharging();
@@ -129,7 +129,7 @@ package net.wg.gui.components.crosshairPanel
 
         public function startDualGunCharging(param1:Number, param2:Number) : void
         {
-            var _loc3_:DualGunMarkerArcade = null;
+            var _loc3_:DualGunMarker = null;
             for each(_loc3_ in this._dualGunMarkers)
             {
                 _loc3_.startCharging(param1,param2);
@@ -138,7 +138,7 @@ package net.wg.gui.components.crosshairPanel
 
         public function updateDualGunMarkerState(param1:int) : void
         {
-            var _loc2_:DualGunMarkerArcade = null;
+            var _loc2_:DualGunMarker = null;
             for each(_loc2_ in this._dualGunMarkers)
             {
                 _loc2_.setMarkerState(param1);

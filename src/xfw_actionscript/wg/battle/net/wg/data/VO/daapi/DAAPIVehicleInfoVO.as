@@ -1,64 +1,70 @@
 package net.wg.data.VO.daapi
 {
     import net.wg.data.daapi.base.DAAPIDataClass;
+    import net.wg.data.constants.Values;
     import net.wg.data.constants.VehicleStatus;
     import net.wg.data.constants.PlayerStatus;
+    import net.wg.data.constants.UserTags;
     import net.wg.data.constants.generated.BATTLEATLAS;
 
     public class DAAPIVehicleInfoVO extends DAAPIDataClass
     {
 
-        public static const DEFAULT_SQUAD_IDX:int = 0;
-
-        public var suffixBadgeType:String = "";
-
-        public var accountDBID:Number = 0;
-
-        public var isSpeaking:Boolean = false;
+        public static const DEFAULT_SQUAD_IDX:int = Values.ZERO;
 
         public var prebattleID:Number = 0;
 
-        public var playerStatus:uint = 0;
-
-        public var playerName:String = "";
-
-        public var playerFullName:String = "";
-
-        public var userTags:Array = null;
-
-        public var vehicleID:Number = 0;
-
-        public var vehicleAction:uint = 0;
-
-        public var vehicleIcon:String = "";
-
-        public var vehicleIconName:String = "";
-
-        public var vehicleName:String = "";
-
-        public var vehicleLevel:int = -1;
-
-        public var vehicleType:String = "";
-
-        public var vehicleStatus:uint = 0;
-
-        public var isVehiclePremiumIgr:Boolean = false;
-
-        public var isObserver:Boolean = false;
+        public var isSpeaking:Boolean = false;
 
         public var frags:int;
 
+        public var sessionID:String = "";
+
+        public var accountDBID:Number = 0;
+
+        public var playerName:String = "";
+
+        public var playerFakeName:String = "";
+
+        public var playerFullName:String = "";
+
+        public var playerStatus:uint = 0;
+
+        public var clanAbbrev:String = "";
+
         public var region:String = "";
+
+        public var userTags:Array = null;
 
         public var squadIndex:uint = 0;
 
         public var invitationStatus:uint = 0;
 
+        public var vehicleID:Number = 0;
+
+        public var vehicleName:String = "";
+
+        public var vehicleType:String = "";
+
+        public var vehicleLevel:int = -1;
+
+        public var vehicleIcon:String = "";
+
+        public var vehicleIconName:String = "";
+
+        public var vehicleStatus:uint = 0;
+
+        public var isObserver:Boolean = false;
+
+        public var vehicleAction:uint = 0;
+
+        public var isVehiclePremiumIgr:Boolean = false;
+
         public var teamColor:String = "";
 
-        public var clanAbbrev:String = "";
-
         public var badgeType:String = "";
+
+        public var suffixBadgeType:String = "";
 
         public var selfBgSource:String;
 
@@ -112,6 +118,16 @@ package net.wg.data.VO.daapi
         public function isTeamKiller() : Boolean
         {
             return (this.playerStatus & PlayerStatus.IS_TEAM_KILLER) > 0;
+        }
+
+        public function get isAnonymized() : Boolean
+        {
+            return this.playerFakeName && this.playerFakeName != this.playerName;
+        }
+
+        public function get isCurrentPlayer() : Boolean
+        {
+            return this.userTags && UserTags.isCurrentPlayer(this.userTags);
         }
 
         public function get isIGR() : Boolean

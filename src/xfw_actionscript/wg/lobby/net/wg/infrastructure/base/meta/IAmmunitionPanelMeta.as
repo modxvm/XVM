@@ -20,5 +20,7 @@ package net.wg.infrastructure.base.meta
         function as_showBattleAbilitiesAlert(param1:Boolean) : void;
 
         function as_setCustomizationBtnCounter(param1:int) : void;
+
+        function as_setBoosterBtnCounter(param1:int) : void;
     }
 }

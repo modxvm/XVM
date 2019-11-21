@@ -59,6 +59,8 @@ package net.wg.gui.lobby.settings.vo.config
 
         public var showMarksOnGun:SettingsControlProp = null;
 
+        public var anonymizer:SettingsControlProp = null;
+
         public var c11nHistoricallyAccurate:SettingsControlProp = null;
 
         public var loginServerSelection:SettingsControlProp = null;
@@ -132,6 +134,7 @@ package net.wg.gui.lobby.settings.vo.config
                 "c11nHistoricallyAccurate":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "loginServerSelection":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "showMarksOnGun":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
+                "anonymizer":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "minimapViewRange":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "minimapMaxViewRange":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "minimapDrawRange":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
@@ -178,6 +181,7 @@ package net.wg.gui.lobby.settings.vo.config
             this.useServerAim = null;
             this.showVehiclesCounter = null;
             this.showMarksOnGun = null;
+            this.anonymizer = null;
             this.loginServerSelection = null;
             this.c11nHistoricallyAccurate = null;
             this.showVehModelsOnMap = null;

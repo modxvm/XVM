@@ -43,10 +43,10 @@ package net.wg.infrastructure.base.meta.impl
             this.setDialogSettings(param1);
         }
 
-        public function sellS(param1:Object, param2:Array, param3:Array, param4:Array, param5:Array, param6:Array, param7:Boolean) : void
+        public function sellS(param1:Object, param2:Array, param3:Array, param4:Array, param5:Array, param6:Array, param7:Array, param8:Boolean) : void
         {
             App.utils.asserter.assertNotNull(this.sell,"sell" + Errors.CANT_NULL);
-            this.sell(param1,param2,param3,param4,param5,param6,param7);
+            this.sell(param1,param2,param3,param4,param5,param6,param7,param8);
         }
 
         public function setUserInputS(param1:String) : void

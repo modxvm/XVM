@@ -9,11 +9,15 @@ package net.wg.gui.messenger.meta
 
         function sendMessageS(param1:String) : Boolean;
 
+        function getInfoS() : String;
+
         function getHistoryS() : String;
 
         function getMessageMaxLengthS() : int;
 
         function onLinkClickS(param1:String) : void;
+
+        function as_notifyInfoChanged() : void;
 
         function as_setJoined(param1:Boolean) : void;
 

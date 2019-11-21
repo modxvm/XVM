@@ -5,10 +5,9 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
     import net.wg.data.VO.SellDialogItem;
     import net.wg.data.VO.SellDialogElement;
     import net.wg.gui.events.VehicleSellDialogEvent;
-    import net.wg.gui.lobby.vehicleTradeWnds.sell.vo.SellVehicleItemBaseVo;
     import net.wg.gui.lobby.vehicleTradeWnds.sell.vo.SellOnVehicleEquipmentVo;
-    import net.wg.utils.ILocale;
     import net.wg.data.constants.generated.FITTING_TYPES;
+    import net.wg.utils.ILocale;
     import scaleform.clik.data.DataProvider;
     import net.wg.gui.lobby.vehicleTradeWnds.sell.vo.SellInInventoryModuleVo;
     import net.wg.gui.lobby.vehicleTradeWnds.sell.vo.SellInInventoryShellVo;
@@ -80,10 +79,10 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
             this.slidingScrList.addEventListener(VehicleSellDialogEvent.LIST_WAS_DRAWN,this.onSlidingScrListListWasDrawnHandler,false,5);
         }
 
-        public function battleBoosters(param1:Vector.<SellVehicleItemBaseVo>) : void
+        public function battleBoosters(param1:Vector.<SellOnVehicleEquipmentVo>) : void
         {
             var _loc3_:SellDialogItem = null;
-            var _loc4_:SellVehicleItemBaseVo = null;
+            var _loc4_:SellOnVehicleEquipmentVo = null;
             var _loc5_:uint = 0;
             var _loc6_:SellDialogElement = null;
             var _loc2_:Number = param1.length;
@@ -96,6 +95,7 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
                 {
                     _loc4_ = param1[_loc5_];
                     _loc6_ = new SellDialogElement();
+                    _loc6_.type = FITTING_TYPES.BOOSTER;
                     _loc6_.intCD = _loc4_.intCD;
                     _loc6_.toInventory = _loc4_.toInventory;
                     _loc6_.moneyValue = _loc4_.sellPrice[0] != 0?_loc4_.sellPrice[0]:_loc4_.sellPrice[1];
@@ -105,6 +105,7 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
                     _loc6_.id = _loc4_.userName;
                     _loc6_.removePrice = _loc4_.removePrice;
                     _loc6_.removeActionPriceVo = _loc4_.removeActionPrice;
+                    _loc6_.sellActionPriceVo = _loc4_.actionVo;
                     _loc3_.elements.push(_loc6_);
                     _loc5_++;
                 }

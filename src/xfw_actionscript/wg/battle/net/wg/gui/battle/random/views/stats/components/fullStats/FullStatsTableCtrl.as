@@ -107,12 +107,12 @@ package net.wg.gui.battle.random.views.stats.components.fullStats
 
         public function onAcceptSquad(param1:DynamicSquadCtrl) : void
         {
-            this._squadHandler.acceptSquadS(param1.uid);
+            this._squadHandler.acceptSquadS(param1.sessionID);
         }
 
         public function onAddToSquad(param1:DynamicSquadCtrl) : void
         {
-            this._squadHandler.addToSquadS(param1.uid);
+            this._squadHandler.addToSquadS(param1.sessionID);
         }
 
         public function onSquadBtVisibleChange(param1:DynamicSquadCtrl) : void

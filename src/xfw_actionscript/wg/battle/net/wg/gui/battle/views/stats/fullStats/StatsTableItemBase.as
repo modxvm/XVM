@@ -174,7 +174,7 @@ package net.wg.gui.battle.views.stats.fullStats
                 if(this._userProps)
                 {
                     this._playerNameTF.visible = true;
-                    App.utils.commons.formatPlayerName(this._playerNameTF,this._userProps);
+                    App.utils.commons.formatPlayerName(this._playerNameTF,this._userProps,!this.isCurrentPlayer,this.isCurrentPlayer);
                 }
                 else
                 {

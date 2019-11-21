@@ -21,7 +21,9 @@ package net.wg.gui.components.crosshairPanel
     public class CrosshairPanelContainer extends CrosshairPanelContainerMeta implements ICrosshairPanelContainer
     {
 
-        private static const SPEEDOMETER_OFFSET:int = 134;
+        private static const SPEEDOMETER_X_OFFSET:int = 144;
+
+        private static const SPEEDOMETER_Y_OFFSET:int = 114;
 
         private static const CROSSHAIRS_LINAKGES:Vector.<String> = new <String>[Linkages.CROSSHAIR_ARCADE_UI,Linkages.CROSSHAIR_SNIPER_UI,Linkages.CROSSHAIR_STRATEGIC_UI,Linkages.CROSSHAIR_POSTMORTEM_UI];
 
@@ -133,10 +135,13 @@ package net.wg.gui.components.crosshairPanel
 
         private var _engineCrush:String = "";
 
+        private var _sniperCameraTransitionFx:CrosshairPanelSniperCameraTransitionFx = null;
+
         public function CrosshairPanelContainer()
         {
             super();
             this._settings = [];
+            this._sniperCameraTransitionFx = new CrosshairPanelSniperCameraTransitionFx();
         }
 
         private static function createComponent(param1:String) : DisplayObject
@@ -166,6 +171,11 @@ package net.wg.gui.components.crosshairPanel
             }
             this._crosshairs.length = 0;
             this._crosshairs = null;
+            if(this._sniperCameraTransitionFx)
+            {
+                this._sniperCameraTransitionFx.dispose();
+                this._sniperCameraTransitionFx = null;
+            }
             super.onDispose();
         }
 
@@ -174,7 +184,8 @@ package net.wg.gui.components.crosshairPanel
             if(this._speedometer == null)
             {
                 this._speedometer = Speedometer(createComponent(Linkages.SPEEDOMETER_UI));
-                this._speedometer.x = this._speedometer.y = SPEEDOMETER_OFFSET;
+                this._speedometer.x = SPEEDOMETER_X_OFFSET;
+                this._speedometer.y = SPEEDOMETER_Y_OFFSET;
                 this._speedometer.setMaxSpeedNormalMode(param1);
                 this._speedometer.setMaxSpeedSpeedMode(param2);
                 this._speedometer.blendMode = BlendMode.ADD;
@@ -262,6 +273,16 @@ package net.wg.gui.components.crosshairPanel
             if(this._speedometer)
             {
                 this._speedometer.visible = false;
+            }
+        }
+
+        public function as_runCameraTransitionFx(param1:int, param2:Number) : void
+        {
+            if(this._currentCrosshair != null)
+            {
+                this._sniperCameraTransitionFx.setCameraTransitionDuration(param2);
+                this._sniperCameraTransitionFx.setActiveGunId(param1);
+                this._sniperCameraTransitionFx.start();
             }
         }
 
@@ -563,6 +584,7 @@ package net.wg.gui.components.crosshairPanel
                 this._currentCrosshair.setVisibleNet(this._visibleNet);
                 this._currentCrosshair.setNetSeparatorVisible(this._visibleNetSeparator);
             }
+            this._sniperCameraTransitionFx.setView(param1,this._currentCrosshair);
             this.applySettings();
             this.applyData();
         }

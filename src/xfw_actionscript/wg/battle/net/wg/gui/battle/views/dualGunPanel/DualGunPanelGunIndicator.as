@@ -7,7 +7,9 @@ package net.wg.gui.battle.views.dualGunPanel
     public class DualGunPanelGunIndicator extends BattleUIComponent
     {
 
-        private static const INVALID_SWITCH_INDICATOR:int = InvalidationType.SYSTEM_FLAGS_BORDER << 1;
+        private static const INV_SWITCH_INDICATOR:int = InvalidationType.SYSTEM_FLAGS_BORDER << 1;
+
+        private static const INV_CHANGE_ACTIVE_GUN:int = InvalidationType.SYSTEM_FLAGS_BORDER << 2;
 
         public var gunChangingProgress:DualGunChangingProgressIndicator;
 
@@ -22,6 +24,8 @@ package net.wg.gui.battle.views.dualGunPanel
         private var _switchingTotalTime:Number = 0;
 
         private var _isActive:Boolean;
+
+        private var _needChangeActiveGun:Boolean = false;
 
         public function DualGunPanelGunIndicator()
         {
@@ -45,7 +49,7 @@ package net.wg.gui.battle.views.dualGunPanel
             var _loc1_:* = NaN;
             var _loc2_:* = NaN;
             super.draw();
-            if(isInvalid(INVALID_SWITCH_INDICATOR))
+            if(isInvalid(INV_SWITCH_INDICATOR))
             {
                 this.gunChangingProgress.setActive(this._isActive);
             }
@@ -56,6 +60,27 @@ package net.wg.gui.battle.views.dualGunPanel
                 this.bulletProgress.value = _loc2_;
                 this.gunChangingProgress.updateProgress(_loc1_,this._switchingTotalTime);
             }
+            if(this._needChangeActiveGun && isInvalid(INV_CHANGE_ACTIVE_GUN))
+            {
+                this._needChangeActiveGun = false;
+                this.gunChangingProgress.playChangeActiveGunAnim();
+            }
+        }
+
+        public function changeActiveGun() : void
+        {
+            this._needChangeActiveGun = true;
+            invalidate(INV_CHANGE_ACTIVE_GUN);
+        }
+
+        public function oppositeGunPositionX(param1:int) : void
+        {
+            this.gunChangingProgress.oppositeGunPositionX = param1;
+        }
+
+        public function playCollapseAnim() : void
+        {
+            this.gunChangingProgress.playCollapseAnim();
         }
 
         public function reset() : void
@@ -65,10 +90,15 @@ package net.wg.gui.battle.views.dualGunPanel
             this.setGunActive(false);
         }
 
+        public function setChangeGunTweenProps(param1:int, param2:int) : void
+        {
+            this.gunChangingProgress.setChangeGunTweenProps(param1,param2);
+        }
+
         public function setGunActive(param1:Boolean) : void
         {
             this._isActive = param1;
-            invalidate(INVALID_SWITCH_INDICATOR);
+            invalidate(INV_SWITCH_INDICATOR);
         }
 
         public function updateReloadingProgress(param1:Number, param2:Number) : void

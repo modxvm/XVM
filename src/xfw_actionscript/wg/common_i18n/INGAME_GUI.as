@@ -1151,6 +1151,10 @@ package
 
         public static const DYNAMICSQUAD_ENEMY_RECEIVED:String = "#ingame_gui:dynamicSquad/enemy/received";
 
+        public static const DYNAMICSQUAD_ALLY_ANONYMIZED_CLAN:String = "#ingame_gui:dynamicSquad/ally/anonymized/clan";
+
+        public static const DYNAMICSQUAD_ALLY_ANONYMIZED_NOCLAN:String = "#ingame_gui:dynamicSquad/ally/anonymized/noClan";
+
         public static const AIM_ZOOM:String = "#ingame_gui:aim/zoom";
 
         public static const DISTANCE_METERS:String = "#ingame_gui:distance/meters";
@@ -1311,6 +1315,14 @@ package
 
         public static const REWARDWINDOW_TWITCH6_BTNLABEL:String = "#ingame_gui:rewardWindow/twitch6/btnLabel";
 
+        public static const REWARDWINDOW_TWITCH7_HEADERTEXT:String = "#ingame_gui:rewardWindow/twitch7/headerText";
+
+        public static const REWARDWINDOW_TWITCH7_SUBHEADERTEXT:String = "#ingame_gui:rewardWindow/twitch7/subHeaderText";
+
+        public static const REWARDWINDOW_TWITCH7_DESCTEXT:String = "#ingame_gui:rewardWindow/twitch7/descText";
+
+        public static const REWARDWINDOW_TWITCH7_BTNLABEL:String = "#ingame_gui:rewardWindow/twitch7/btnLabel";
+
         public static const REWARDWINDOW_LOOTBOX_WINHEADERTEXT:String = "#ingame_gui:rewardWindow/lootbox/winHeaderText";
 
         public static const REWARDWINDOW_LOOTBOX_HEADERTEXT:String = "#ingame_gui:rewardWindow/lootbox/headerText";
@@ -1358,6 +1370,14 @@ package
         public static const REWARDWINDOW_COMMANDER_MARINA_DESCTEXT:String = "#ingame_gui:rewardWindow/commander_marina/descText";
 
         public static const REWARDWINDOW_COMMANDER_MARINA_BTNLABEL:String = "#ingame_gui:rewardWindow/commander_marina/btnLabel";
+
+        public static const REWARDWINDOW_COMMANDER_PATRICK_HEADERTEXT:String = "#ingame_gui:rewardWindow/commander_patrick/headerText";
+
+        public static const REWARDWINDOW_COMMANDER_PATRICK_SUBHEADERTEXT:String = "#ingame_gui:rewardWindow/commander_patrick/subHeaderText";
+
+        public static const REWARDWINDOW_COMMANDER_PATRICK_DESCTEXT:String = "#ingame_gui:rewardWindow/commander_patrick/descText";
+
+        public static const REWARDWINDOW_COMMANDER_PATRICK_BTNLABEL:String = "#ingame_gui:rewardWindow/commander_patrick/btnLabel";
 
         public function INGAME_GUI()
         {

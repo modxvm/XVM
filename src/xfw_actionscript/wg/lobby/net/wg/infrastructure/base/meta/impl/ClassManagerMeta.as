@@ -604,7 +604,6 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.intro.IntroInfoVO;
     import net.wg.gui.intro.IntroPage;
     import net.wg.gui.lobby.LobbyPage;
-    import net.wg.gui.lobby.academy.AcademyView;
     import net.wg.gui.lobby.badges.BadgesContentContainer;
     import net.wg.gui.lobby.badges.BadgesHeader;
     import net.wg.gui.lobby.badges.BadgesPage;
@@ -3107,7 +3106,6 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.infrastructure.base.AbstractConfirmItemDialog;
     import net.wg.infrastructure.base.meta.IAbstractRallyViewMeta;
     import net.wg.infrastructure.base.meta.IAbstractRallyWindowMeta;
-    import net.wg.infrastructure.base.meta.IAcademyViewMeta;
     import net.wg.infrastructure.base.meta.IAccountPopoverMeta;
     import net.wg.infrastructure.base.meta.IAlertMessageBlockMeta;
     import net.wg.infrastructure.base.meta.IAllVehiclesTabViewMeta;
@@ -4642,8 +4640,6 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_INTRO_INTROPAGE:Class = IntroPage;
 
         public static const NET_WG_GUI_LOBBY_LOBBYPAGE:Class = LobbyPage;
-
-        public static const NET_WG_GUI_LOBBY_ACADEMY_ACADEMYVIEW:Class = AcademyView;
 
         public static const NET_WG_GUI_LOBBY_BADGES_BADGESCONTENTCONTAINER:Class = BadgesContentContainer;
 
@@ -9649,8 +9645,6 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IABSTRACTRALLYWINDOWMETA:Class = IAbstractRallyWindowMeta;
 
-        public static const NET_WG_INFRASTRUCTURE_BASE_META_IACADEMYVIEWMETA:Class = IAcademyViewMeta;
-
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IACCOUNTPOPOVERMETA:Class = IAccountPopoverMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IALERTMESSAGEBLOCKMETA:Class = IAlertMessageBlockMeta;
@@ -10234,8 +10228,6 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_ABSTRACTRALLYVIEWMETA:Class = AbstractRallyViewMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_ABSTRACTRALLYWINDOWMETA:Class = AbstractRallyWindowMeta;
-
-        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_ACADEMYVIEWMETA:Class = AcademyViewMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_ACCOUNTPOPOVERMETA:Class = AccountPopoverMeta;
 

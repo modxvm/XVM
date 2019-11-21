@@ -25,7 +25,7 @@ package net.wg.infrastructure.base.meta
 
         function showSquadS() : void;
 
-        function fightClickS(param1:Number, param2:String) : void;
+        function fightClickS(param1:int, param2:String) : void;
 
         function as_setScreen(param1:String) : void;
 
@@ -56,6 +56,8 @@ package net.wg.infrastructure.base.meta
         function as_setServer(param1:String, param2:String, param3:String) : void;
 
         function as_updatePingStatus(param1:int, param2:Boolean) : void;
+
+        function as_updateAnonymizedState(param1:Boolean) : void;
 
         function as_setWalletStatus(param1:Object) : void;
 

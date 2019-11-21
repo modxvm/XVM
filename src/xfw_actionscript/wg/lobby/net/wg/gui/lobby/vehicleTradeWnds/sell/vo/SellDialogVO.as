@@ -32,7 +32,7 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell.vo
 
         public var equipmentsOnVehicle:Vector.<SellOnVehicleEquipmentVo> = null;
 
-        public var battleBoostersOnVehicle:Vector.<SellVehicleItemBaseVo> = null;
+        public var battleBoostersOnVehicle:Vector.<SellOnVehicleEquipmentVo> = null;
 
         public var modulesInInventory:Vector.<SellInInventoryModuleVo> = null;
 
@@ -85,7 +85,7 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell.vo
             }
             if(param1 == BATTLE_BOOSTER && param2 != null)
             {
-                this.battleBoostersOnVehicle = Vector.<SellVehicleItemBaseVo>(App.utils.data.convertVOArrayToVector(param1,param2,SellVehicleItemBaseVo));
+                this.battleBoostersOnVehicle = Vector.<SellOnVehicleEquipmentVo>(App.utils.data.convertVOArrayToVector(param1,param2,SellOnVehicleEquipmentVo));
                 return false;
             }
             if(param1 == REMOVE_ACTION_PRICE_LABEL && param2 != null)

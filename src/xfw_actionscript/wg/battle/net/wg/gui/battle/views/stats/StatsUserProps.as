@@ -6,6 +6,8 @@ package net.wg.gui.battle.views.stats
     public class StatsUserProps extends Object implements IUserProps, IDisposable
     {
 
+        private var _fakeName:String = null;
+
         private var _userName:String = null;
 
         private var _clanAbbrev:String = null;
@@ -32,14 +34,15 @@ package net.wg.gui.battle.views.stats
 
         private var _isTeamKiller:Boolean = false;
 
-        public function StatsUserProps(param1:String, param2:String, param3:String, param4:int, param5:Array = null)
+        public function StatsUserProps(param1:String, param2:String, param3:String, param4:String, param5:int, param6:Array = null)
         {
             super();
+            this._fakeName = param2;
             this._userName = param1;
-            this._clanAbbrev = param2;
-            this._region = param3;
-            this._igrType = param4;
-            this._tags = param5;
+            this._clanAbbrev = param3;
+            this._region = param4;
+            this._igrType = param5;
+            this._tags = param6;
             this._isChanged = true;
         }
 
@@ -87,6 +90,21 @@ package net.wg.gui.battle.views.stats
                 _loc4_++;
             }
             return true;
+        }
+
+        public function get fakeName() : String
+        {
+            return this._fakeName;
+        }
+
+        public function set fakeName(param1:String) : void
+        {
+            if(this._fakeName == param1)
+            {
+                return;
+            }
+            this._fakeName = param1;
+            this._isChanged = true;
         }
 
         public function get userName() : String
@@ -257,6 +275,11 @@ package net.wg.gui.battle.views.stats
         public function set isTeamKiller(param1:Boolean) : void
         {
             this._isTeamKiller = param1;
+        }
+
+        public function get isAnonymized() : Boolean
+        {
+            return this._fakeName && this._fakeName != this._userName;
         }
     }
 }

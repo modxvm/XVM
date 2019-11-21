@@ -228,13 +228,14 @@ package net.wg.gui.lobby.battleResults.components
             }
             this.playerName.userVO = param1.userVO;
             this.playerName.textColor = _loc2_.rgb;
+            this.playerName.useFakeName = !(param1.isSelf || param1.isOwnSquad);
+            this.playerName.showAnonymizerIcon = param1.isSelf;
             this.vehicleIcon.source = param1.tankIcon?param1.tankIcon:this.vehicleIcon.sourceAlt;
             this.vehicleName.htmlText = param1.vehicleName;
             this.xpLbl.text = this._locale.integer(param1.xp - param1.achievementXP);
             var _loc3_:String = param1.badgeIcon;
-            var _loc4_:Boolean = StringUtils.isNotEmpty(_loc3_);
-            this.badgeIcon.visible = _loc4_;
-            if(_loc4_)
+            this.badgeIcon.visible = StringUtils.isNotEmpty(_loc3_);
+            if(this.badgeIcon.visible)
             {
                 this.badgeIcon.source = _loc3_;
                 if(!this._badgeVisibleLayout)
@@ -247,7 +248,7 @@ package net.wg.gui.lobby.battleResults.components
             {
                 this.playerName.x = this.playerName.x - BADGE_OFFSET;
             }
-            this._badgeVisibleLayout = _loc4_;
+            this._badgeVisibleLayout = this.badgeIcon.visible;
             this.damageLbl.text = ZERO;
             this.vehicleName.textColor = _loc2_.rgb;
             this.fragsLbl.textColor = this.damageLbl.textColor = DAMAGE_DEFAULT_COLOR;
@@ -279,6 +280,10 @@ package net.wg.gui.lobby.battleResults.components
                 this.medalIcon.value = param1.medalsCount;
                 this.medalIcon.validateNow();
                 this.medalIcon.visible = true;
+            }
+            if(param1.isSelf)
+            {
+                App.utils.commons.formatPlayerName(this.playerName.textField,param1.userVO.userProps,false,true);
             }
         }
 

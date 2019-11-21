@@ -63,12 +63,12 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
 
         public function onAcceptSquad(param1:DynamicSquadCtrl) : void
         {
-            this._squadHandler.acceptSquadS(param1.uid);
+            this._squadHandler.acceptSquadS(param1.sessionID);
         }
 
         public function onAddToSquad(param1:DynamicSquadCtrl) : void
         {
-            this._squadHandler.addToSquadS(param1.uid);
+            this._squadHandler.addToSquadS(param1.sessionID);
         }
 
         public function onSquadBtVisibleChange(param1:DynamicSquadCtrl) : void
@@ -198,7 +198,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
             var _loc3_:EpicRandomFullStatsListItemRenderer = null;
             if(teamDP.setSpeaking(param1,param2))
             {
-                _loc3_ = this.getRendererByAccoundId(false,param1);
+                _loc3_ = this.getRendererByAccountId(false,param1);
                 if(_loc3_)
                 {
                     _loc3_.setIsSpeaking(param2);
@@ -207,7 +207,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
             }
             else if(enemyDP.setSpeaking(param1,param2))
             {
-                _loc3_ = this.getRendererByAccoundId(true,param1);
+                _loc3_ = this.getRendererByAccountId(true,param1);
                 if(_loc3_)
                 {
                     _loc3_.setIsSpeaking(param2);
@@ -284,7 +284,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
             }
         }
 
-        private function getRendererByAccoundId(param1:Boolean, param2:int) : EpicRandomFullStatsListItemRenderer
+        private function getRendererByAccountId(param1:Boolean, param2:int) : EpicRandomFullStatsListItemRenderer
         {
             var _loc6_:EpicRandomFullStatsListItemRenderer = null;
             var _loc3_:ScrollingList = param1?this._table.team2PlayerList:this._table.team1PlayerList;

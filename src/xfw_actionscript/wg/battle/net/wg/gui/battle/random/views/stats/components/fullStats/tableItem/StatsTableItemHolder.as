@@ -2,6 +2,7 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
 {
     import net.wg.gui.battle.views.stats.fullStats.StatsTableItemHolderBase;
     import net.wg.gui.battle.random.views.stats.constants.VehicleActions;
+    import net.wg.data.constants.Values;
     import net.wg.data.constants.UserTags;
     import net.wg.gui.battle.views.stats.constants.DynamicSquadState;
     import net.wg.data.constants.PlayerStatus;
@@ -66,7 +67,13 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
                     this.getStatsItem.setVehicleAction(VehicleActions.getActionName(data.vehicleAction));
                 }
                 this._squadItem.setIsEnemy(this._isEnemy);
-                this._squadItem.uid = data.accountDBID;
+                this._squadItem.sessionID = data.sessionID;
+                if(currentPlayerData && currentPlayerData.isAnonymized)
+                {
+                    this._squadItem.setCurrentPlayerAnonymized();
+                    this._squadItem.setIsCurrentPlayerInClan(data.clanAbbrev != Values.EMPTY_STR);
+                    this._squadItem.setCurrentPlayerFakeName(data.playerFakeName);
+                }
                 this.updateDynamicSquadState();
             }
             else

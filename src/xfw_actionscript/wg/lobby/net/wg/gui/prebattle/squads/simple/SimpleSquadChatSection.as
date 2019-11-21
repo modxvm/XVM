@@ -9,12 +9,20 @@ package net.wg.gui.prebattle.squads.simple
         {
             super();
             lblChatHeader.mouseEnabled = false;
+            lblChatHeader.multiline = true;
+            lblChatHeader.wordWrap = true;
             channelComponent.externalHintTF = lblChatHeader;
         }
 
         override protected function getHeader() : String
         {
-            return MESSENGER.DIALOGS_SQUADCHANNEL_SIMPLECHATNAME;
+            return channelComponent.getChatInfo();
+        }
+
+        override protected function configUI() : void
+        {
+            super.configUI();
+            lblChatHeader.htmlText = this.getHeader();
         }
     }
 }

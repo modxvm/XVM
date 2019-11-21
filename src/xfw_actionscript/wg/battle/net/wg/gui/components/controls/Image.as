@@ -131,6 +131,15 @@ package net.wg.gui.components.controls
             }
         }
 
+        public function get bitmapData() : BitmapData
+        {
+            if(this._bitmap)
+            {
+                return this._bitmap.bitmapData;
+            }
+            return null;
+        }
+
         public function set bitmapData(param1:BitmapData) : void
         {
             this._bitmap.bitmapData = param1;

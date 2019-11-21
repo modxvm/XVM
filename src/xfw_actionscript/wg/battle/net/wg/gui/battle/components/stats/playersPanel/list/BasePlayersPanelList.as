@@ -8,6 +8,7 @@ package net.wg.gui.battle.components.stats.playersPanel.list
     import net.wg.infrastructure.exceptions.AbstractException;
     import net.wg.data.constants.Errors;
     import flash.geom.Rectangle;
+    import flash.events.MouseEvent;
     import net.wg.data.constants.Values;
     import net.wg.gui.battle.views.minimap.MinimapEntryController;
     import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
@@ -37,6 +38,10 @@ package net.wg.gui.battle.components.stats.playersPanel.list
         private var _renderersContainer:Sprite = null;
 
         private var _mapHolderByVehicleID:Dictionary = null;
+
+        private var _currentPlayerIsAnonymized:Boolean = false;
+
+        private var _toolTipString:String = null;
 
         public function BasePlayersPanelList()
         {
@@ -93,6 +98,8 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             {
                 for each(_loc3_ in this.panelListItems)
                 {
+                    _loc3_.removeEventListener(MouseEvent.MOUSE_OVER,this.onHitMouseOverHandler);
+                    _loc3_.removeEventListener(MouseEvent.MOUSE_OUT,this.onHitMouseOutHandler);
                     _loc3_.dispose();
                 }
                 this.panelListItems.splice(0,this.panelListItems.length);
@@ -195,9 +202,26 @@ package net.wg.gui.battle.components.stats.playersPanel.list
                     this.addItem(_loc2_);
                 }
             }
+            if(this._currentPlayerIsAnonymized && _loc2_)
+            {
+                this.setSquadTooltipInfo(_loc2_.clanAbbrev != Values.EMPTY_STR);
+            }
             this.updatePlayerNameWidth();
             this.updateVehicleData();
             dispatchEvent(new PlayersPanelListEvent(PlayersPanelListEvent.ITEMS_COUNT_CHANGE,0));
+        }
+
+        private function setSquadTooltipInfo(param1:Boolean) : void
+        {
+            var _loc2_:IPlayersPanelListItem = null;
+            for each(_loc2_ in this.panelListItems)
+            {
+                if(_loc2_.getDynamicSquad())
+                {
+                    _loc2_.getDynamicSquad().setCurrentPlayerAnonymized();
+                    _loc2_.getDynamicSquad().setIsCurrentPlayerInClan(param1);
+                }
+            }
         }
 
         public function setVehicleLevelVisible(param1:Boolean) : void
@@ -272,6 +296,8 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             this._currOrder = null;
             this.panelListItems = null;
             this._renderersContainer = null;
+            this._toolTipString = null;
+            this._currentPlayerIsAnonymized = false;
         }
 
         protected function initializeListItem(param1:IPlayersPanelListItem) : void
@@ -326,6 +352,28 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             this._mapHolderByVehicleID[_loc6_] = _loc5_;
             this._items.push(_loc5_);
             this._currOrder.push(_loc6_);
+            if(!this._toolTipString && _loc5_.isCurrentPlayer && param1.isAnonymized)
+            {
+                _loc2_.addEventListener(MouseEvent.MOUSE_OVER,this.onHitMouseOverHandler);
+                _loc2_.addEventListener(MouseEvent.MOUSE_OUT,this.onHitMouseOutHandler);
+                this.makeTooltipString(param1.playerFakeName,param1.clanAbbrev != Values.EMPTY_STR);
+                this._currentPlayerIsAnonymized = true;
+            }
+        }
+
+        private function makeTooltipString(param1:String, param2:Boolean) : void
+        {
+            this._toolTipString = param2?App.utils.locale.makeString(TOOLTIPS.ANONYMIZER_BATTLE_TEAMLIST_CLAN,{"fakeName":param1}):App.utils.locale.makeString(TOOLTIPS.ANONYMIZER_BATTLE_TEAMLIST_NOCLAN,{"fakeName":param1});
+        }
+
+        private function onHitMouseOverHandler(param1:MouseEvent) : void
+        {
+            App.toolTipMgr.show(this._toolTipString);
+        }
+
+        private function onHitMouseOutHandler(param1:MouseEvent) : void
+        {
+            App.toolTipMgr.hide();
         }
 
         private function setMouseListenersEnabled(param1:Boolean) : void
@@ -410,7 +458,7 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             var _loc3_:* = 0;
             while(_loc3_ < _loc2_)
             {
-                if(this._items[_loc3_].accDBID == param1)
+                if(this._items[_loc3_].accountDBID == param1)
                 {
                     return this.panelListItems[_loc3_];
                 }

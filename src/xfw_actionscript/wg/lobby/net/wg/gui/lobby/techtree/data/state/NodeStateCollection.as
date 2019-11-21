@@ -140,7 +140,7 @@ package net.wg.gui.lobby.techtree.data.state
 
         public function isRedrawNTLines(param1:String) : Boolean
         {
-            return param1 == NodeRendererState.NEXT2UNLOCK || param1 == NodeRendererState.BLUEPRINTS_NEXT2UNLOCK;
+            return param1 == NodeRendererState.NEXT2UNLOCK || param1 == NodeRendererState.BLUEPRINTS_NEXT2UNLOCK || NodeRendererState.NEXT4BUY || NodeRendererState.INVENTORY;
         }
 
         public function isRedrawResearchLines(param1:String) : Boolean

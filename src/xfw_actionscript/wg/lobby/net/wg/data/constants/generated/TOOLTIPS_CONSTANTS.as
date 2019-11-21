@@ -121,6 +121,8 @@ package net.wg.data.constants.generated
 
         public static const SHOP_20_BADGE:String = "shop20Badge";
 
+        public static const SHOP_20_CREW_BUNDLE:String = "shop20CrewBundle";
+
         public static const TANKMAN_SKILL:String = "tankmanSkill";
 
         public static const TANKMAN_NEW_SKILL:String = "tankmanNewSkill";
@@ -529,6 +531,10 @@ package net.wg.data.constants.generated
 
         public static const SETTINGS_KEY_SWITCH_MODE_UI:String = "ToolTipInblocksDefaultUI";
 
+        public static const SETTINGS_KEY_CHARGE_FIRE:String = "SettingsKeyChargeFire";
+
+        public static const SETTINGS_KEY_CHARGE_FIRE_UI:String = "ToolTipInblocksDefaultUI";
+
         public static const VEH_CMP_SKILLS:String = "vehCmpSkills";
 
         public static const VEH_CMP_SKILLS_UI:String = "ToolTipInblocksDefaultUI";
@@ -591,7 +597,7 @@ package net.wg.data.constants.generated
 
         public static const RANKED_SET:Array = [RANKED_BATTLES_POSITION,RANKED_BATTLES_EFFICIENCY,RANKED_BATTLES_LEAGUE,RANKED_BATTLES_BONUS,RANKED_BATTLES_RANK,RANKED_STEP,RANKED_CALENDAR_DAY_INFO,RANKED_CALENDAR_STEPS_INFO,RANKED_SELECTOR_INFO,RANKED_UNAVAILABLE_INFO,RANKED_DIVISION_INFO,RANKED_BATTLES_YEAR_REWARD,RANKED_SERVER_PRIMETIME];
 
-        public static const SETTINGS_SET:Array = [SETTINGS_CONTROL,SETTINGS_BUTTON,SETTINGS_MINIMAP_CIRCLES,SETTINGS_KEY_FOLLOW_ME,SETTINGS_KEY_TURN_BACK,SETTINGS_KEY_NEED_HELP,SETTINGS_KEY_RELOAD,SETTINGS_KEY_SWITCH_MODE];
+        public static const SETTINGS_SET:Array = [SETTINGS_CONTROL,SETTINGS_BUTTON,SETTINGS_MINIMAP_CIRCLES,SETTINGS_KEY_FOLLOW_ME,SETTINGS_KEY_TURN_BACK,SETTINGS_KEY_NEED_HELP,SETTINGS_KEY_RELOAD,SETTINGS_KEY_SWITCH_MODE,SETTINGS_KEY_CHARGE_FIRE];
 
         public static const TUTORIAL_SET:Array = [HANGAR_TUTORIAL_CUSTOMIZATION_TYPES,HANGAR_TUTORIAL_PERSONAL_CASE_SKILLS,HANGAR_TUTORIAL_PERSONAL_CASE_PERKS,HANGAR_TUTORIAL_PERSONAL_CASE_ADDITIONAL,HANGAR_TUTORIAL_AMMUNITION,HANGAR_TUTORIAL_EQUPMENT];
 
@@ -608,6 +614,8 @@ package net.wg.data.constants.generated
         public static const CREW_SKIN_SET:Array = [CREW_SKIN,CREW_SKIN_RESTRICTED,CREW_SKIN_NO_AVAILABLE_SKINS,CREW_SKIN_SOUND];
 
         public static const CREW_BOOK_SET:Array = [CREW_BOOK,CREW_BOOK_RESTRICTED];
+
+        public static const CREW_BUNDLE_SET:Array = [SHOP_20_CREW_BUNDLE];
 
         public static const FRONTLINE_SET:Array = [FRONTLINE_COUPON,FRONTLINE_RANK];
 

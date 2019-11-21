@@ -15,6 +15,8 @@ package net.wg.gui.battle.views.stats.fullStats
 
         protected var data:DAAPIVehicleInfoVO = null;
 
+        protected var currentPlayerData:DAAPIVehicleInfoVO = null;
+
         protected var _isCurrPlayer:Boolean = false;
 
         protected var _userProps:StatsUserProps = null;
@@ -34,6 +36,19 @@ package net.wg.gui.battle.views.stats.fullStats
         public function setDAAPIVehicleData(param1:DAAPIVehicleInfoVO) : void
         {
             this.data = param1;
+            if(this._isRenderingAvailable)
+            {
+                this.vehicleDataSync();
+            }
+            else
+            {
+                this._isRenderingRequired = true;
+            }
+        }
+
+        public function setCurrentPlayerData(param1:DAAPIVehicleInfoVO) : void
+        {
+            this.currentPlayerData = param1;
             if(this._isRenderingAvailable)
             {
                 this.vehicleDataSync();
@@ -118,11 +133,12 @@ package net.wg.gui.battle.views.stats.fullStats
         {
             if(!this._userProps)
             {
-                this._userProps = new StatsUserProps(this.data.playerName,this.data.clanAbbrev,this.data.region,0,this.data.userTags);
+                this._userProps = new StatsUserProps(this.data.playerName,this.data.playerFakeName,this.data.clanAbbrev,this.data.region,0,this.data.userTags);
             }
             else
             {
                 this._userProps.userName = this.data.playerName;
+                this._userProps.fakeName = this.data.playerFakeName;
                 this._userProps.clanAbbrev = this.data.clanAbbrev;
                 this._userProps.region = this.data.region;
                 this._userProps.tags = this.data.userTags;

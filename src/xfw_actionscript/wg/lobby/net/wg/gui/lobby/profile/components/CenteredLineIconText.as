@@ -32,7 +32,13 @@ package net.wg.gui.lobby.profile.components
                 _loc1_ = Math.max(textComponent.width,textField.width);
                 textComponent.x = _loc1_ - textComponent.width >> 1;
                 textField.x = _loc1_ - textField.width >> 1;
+                resizeHitSprite();
             }
+        }
+
+        override public function get width() : Number
+        {
+            return (textField.x << 1) + textField.width;
         }
 
         override public function set description(param1:String) : void

@@ -683,6 +683,8 @@ package
 
         public static const DETAILS_CONDITIONS_RESULTS_SINGLE_BOTHTEAMS_TOP:String = "#quests:details/conditions/results/single/bothTeams/top";
 
+        public static const DETAILS_CONDITIONS_RESULTS_SINGLE_BOTHTEAMS_TOP1:String = "#quests:details/conditions/results/single/bothTeams/top1";
+
         public static const DETAILS_CONDITIONS_RESULTS_SINGLE_BOTHTEAMS_TOP_NOT:String = "#quests:details/conditions/results/single/bothTeams/top/not";
 
         public static const DETAILS_CONDITIONS_RESULTS_SINGLE_HALFTEAM_RANGE:String = "#quests:details/conditions/results/single/halfTeam/range";
@@ -2224,6 +2226,8 @@ package
         public static const MISSIONS_VEHICLESELECTOR_STATUS_LIST:String = "#quests:missions/vehicleSelector/status/list";
 
         public static const MISSIONS_VEHICLESELECTOR_STATUS_NOTAVAILABLE:String = "#quests:missions/vehicleSelector/status/notAvailable";
+
+        public static const MISSIONS_VEHICLESELECTOR_STATUS_NOITEMS:String = "#quests:missions/vehicleSelector/status/noItems";
 
         public static const TOKEN_UNDEFINED:String = "#quests:token/undefined";
 

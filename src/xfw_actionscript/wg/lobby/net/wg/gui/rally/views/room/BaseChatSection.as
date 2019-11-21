@@ -9,7 +9,9 @@ package net.wg.gui.rally.views.room
     import net.wg.gui.messenger.ChannelComponent;
     import net.wg.gui.rally.interfaces.IRallyVO;
     import scaleform.clik.events.InputEvent;
+    import flash.events.Event;
     import flash.display.InteractiveObject;
+    import net.wg.data.constants.Values;
     import net.wg.infrastructure.events.FocusRequestEvent;
     import scaleform.clik.constants.InvalidationType;
     import scaleform.clik.ui.InputDetails;
@@ -49,6 +51,7 @@ package net.wg.gui.rally.views.room
             addEventListener(InputEvent.INPUT,this.handleInput,false,0,true);
             this.channelComponent.messageArea.bgForm.alpha = 0;
             this.channelComponent.messageArea.bgForm.visible = false;
+            this.channelComponent.addEventListener(Event.CHANGE,this.onHeaderChangedHandler);
             this.chatSubmitButton.tooltip = this.chatSubmitBtnTooltip;
             this.chatSubmitButton.iconSource = RES_ICONS.MAPS_ICONS_BUTTONS_ENTERWHITE;
         }
@@ -64,6 +67,7 @@ package net.wg.gui.rally.views.room
             this.lblChatHeader = null;
             this.chatSubmitButton.dispose();
             this.chatSubmitButton = null;
+            this.channelComponent.removeEventListener(Event.CHANGE,this.onHeaderChangedHandler);
             this.channelComponent = null;
             super.onDispose();
         }
@@ -84,7 +88,7 @@ package net.wg.gui.rally.views.room
 
         protected function getHeader() : String
         {
-            return "";
+            return Values.EMPTY_STR;
         }
 
         protected function updateFocus() : void
@@ -121,6 +125,16 @@ package net.wg.gui.rally.views.room
                 dispatchEvent(new RallyViewsEvent(RallyViewsEvent.SHOW_FAQ_WINDOW));
             }
             super.handleInput(param1);
+        }
+
+        private function onHeaderChangedHandler(param1:Event) : void
+        {
+            var _loc2_:String = this.getHeader();
+            if(_loc2_ != this.lblChatHeader.htmlText)
+            {
+                this.lblChatHeader.htmlText = _loc2_;
+                invalidateData();
+            }
         }
     }
 }

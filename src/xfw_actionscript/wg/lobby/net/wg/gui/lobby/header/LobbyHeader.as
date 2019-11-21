@@ -252,6 +252,16 @@ package net.wg.gui.lobby.header
             }
         }
 
+        public function as_updateAnonymizedState(param1:Boolean) : void
+        {
+            var _loc2_:HBC_AccountDataVo = HBC_AccountDataVo(this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT));
+            if(_loc2_ != null)
+            {
+                _loc2_.isAnonymized = param1;
+                this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT);
+            }
+        }
+
         override protected function setBoosterData(param1:AccountBoosterVO) : void
         {
             var _loc2_:HBC_AccountDataVo = HBC_AccountDataVo(this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT));

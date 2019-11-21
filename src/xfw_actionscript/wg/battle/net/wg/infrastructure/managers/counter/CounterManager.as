@@ -126,14 +126,14 @@ package net.wg.infrastructure.managers.counter
 
         public function setCounter(param1:DisplayObject, param2:String, param3:String = null, param4:ICounterProps = null) : int
         {
-            if(StringUtils.isEmpty(param2))
-            {
-                this.removeCounter(param1,param3);
-                return COUNTER_REMOVED;
-            }
             if(param4 == null)
             {
                 var param4:ICounterProps = CounterProps.DEFAULT_PROPS;
+            }
+            if(param4.checkEmptyValue && StringUtils.isEmpty(param2))
+            {
+                this.removeCounter(param1,param3);
+                return COUNTER_REMOVED;
             }
             var param3:String = getContainerId(param3);
             var _loc5_:Point = new Point(param4.offsetX,param4.offsetY);
@@ -143,7 +143,7 @@ package net.wg.infrastructure.managers.counter
             {
                 _loc7_ = App.utils.classFactory.getComponent(param4.linkage,INewCounter);
                 _loc6_[param1] = _loc7_;
-                _loc7_.setTarget(param1,param2,_loc5_,param4.horizontalAlign,param4.addToTop,param4.tfPadding);
+                _loc7_.setTarget(param1,param2,_loc5_,param4.horizontalAlign,param4.addToTop,param4.tfPadding,param4.viewState);
                 return COUNTER_ADDED;
             }
             _loc7_ = getCounter(_loc6_,param1);

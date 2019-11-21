@@ -14,5 +14,9 @@ package net.wg.utils
         function get addToTop() : Boolean;
 
         function get linkage() : String;
+
+        function get checkEmptyValue() : Boolean;
+
+        function get viewState() : String;
     }
 }
