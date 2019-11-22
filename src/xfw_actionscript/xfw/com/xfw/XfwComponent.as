@@ -122,13 +122,13 @@ package com.xfw
                 {
                     var swfFileName:String = modsNames[modName];
 
-                    if(swfFileName == null) 
+                    if(swfFileName == null)
                     {
                         DebugUtils.LOG_WARNING("[XFW/XfwComponent] loadMods: No SWF found for mod name " + modName);
                         continue
                     }
 
-                    if (modsInfo.loaded != null && modsInfo.loaded.indexOf(swfFileName) >= 0) 
+                    if (modsInfo.loaded != null && modsInfo.loaded.indexOf(swfFileName) >= 0)
                     {
                         continue;
                     }
@@ -195,7 +195,8 @@ package com.xfw
                 var swf:String = e.url.replace(/^.*\//, '');
                 _loadedUISWFs[swf] = e.loader ? XfwConst.SWF_LOADED : XfwConst.SWF_LOAD_ERROR;
 
-                if (modsList == null || modsList.length == 0 || modsList.indexOf(e.url.replace(/^..\/..\/res_mods\//i, "../../../../res_mods/")) < 0)
+                var fixedUrl:String = (e.url.search(/\/res_mods\//) >= 0 ? "../../" : "") + e.url;
+                if (modsList == null || modsList.length == 0 || modsList.indexOf(fixedUrl) < 0)
                 {
                     if (StringUtils.endsWith(swf.toLowerCase(), '_ui.swf'))
                         Xfw.cmd(XfwConst.XFW_COMMAND_SWF_LOADED, swf);

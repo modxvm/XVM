@@ -90,7 +90,7 @@
   <options>
     <option showHiddenPaths="False" />
     <option testMovie="Custom" />
-    <option testMovieCommand="..\..\..\..\utils\test.sh" />
+    <option testMovieCommand="..\..\utils\test.sh" />
   </options>
   <!-- Plugin storage -->
   <storage />
