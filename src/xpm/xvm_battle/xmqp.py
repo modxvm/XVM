@@ -63,6 +63,7 @@ def _start(e=None):
                     players.append(accountDBID)
                 #players.append(42)
                 #players.append(43)
+            players = list(set(players))
             players.sort()
             # start
             stop()
