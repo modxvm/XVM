@@ -246,7 +246,7 @@ def init(path_to_root):
     '''
 
     global XFWLOADER_PATH_TO_ROOT
-    XFWLOADER_PATH_TO_ROOT = path_to_root
+    XFWLOADER_PATH_TO_ROOT = '' if path_to_root in ['.', './'] else path_to_root
 
     global XFWLOADER_PACKAGES_REALFS
     XFWLOADER_PACKAGES_REALFS = XFWLOADER_PATH_TO_ROOT + u'res_mods/mods/xfw_packages'
