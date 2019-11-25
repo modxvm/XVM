@@ -366,7 +366,7 @@ package com.xvm.lobby.ui.tankcarousel
             {
                 orig_TankName_x = tankName.x;
                 orig_TankName_y = tankName.y;
-            }        
+            }
             tankName.scaleX = DEFAULT_WIDTH / item.width * scale;
             tankName.scaleY = DEFAULT_HEIGHT / item.height * scale;
             tankName.x = (orig_TankName_x * tankName.scaleX) + cfg_tankName.dx;

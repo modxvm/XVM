@@ -176,8 +176,8 @@
       // Width of area for switching to "large" mode on mouse over.
       // Ширина области переключения в режим "large" при наведении мыши.
       "expandAreaWidth": 230,
-      // true - disable platoon icons.
-      // true - убрать отображение иконок взвода.
+      // true - disable platoon/rank icons.
+      // true - убрать отображение иконки взвода/ранга.
       "removeSquadIcon": false,
       // Transparency of the squad icon.
       // Прозрачность иконки взвода.
@@ -293,8 +293,8 @@
       // Width of area for switching to "large" mode on mouse over.
       // Ширина области переключения в режим "large" при наведении мыши.
       "expandAreaWidth": 230,
-      // true - disable platoon icons.
-      // true - убрать отображение иконок взвода.
+      // true - disable platoon/rank icons.
+      // true - убрать отображение иконки взвода/ранга.
       "removeSquadIcon": false,
       // Transparency of the squad icon.
       // Прозрачность иконки взвода.
@@ -408,8 +408,8 @@
       // Width of area for switching to "large" mode on mouse over.
       // Ширина области переключения в режим "large" при наведении мыши.
       "expandAreaWidth": 230,
-      // true - disable platoon icons.
-      // true - убрать отображение иконок взвода.
+      // true - disable platoon/rank icons.
+      // true - убрать отображение иконки взвода/ранга.
       "removeSquadIcon": false,
       // Transparency of the squad icon.
       // Прозрачность иконки взвода.
@@ -520,8 +520,8 @@
       // Отображаемые стандартные поля в данном режиме, и их порядок.
       // Допустимые названия: "frags", "badge", "nick", "vehicle".
       "standardFields": [ "frags", "badge", "nick", "vehicle" ],
-      // true - disable platoon icons.
-      // true - убрать отображение иконок взвода.
+      // true - disable platoon/rank icons.
+      // true - убрать отображение иконки взвода/ранга.
       "removeSquadIcon": false,
       // Transparency of the squad icon.
       // Прозрачность иконки взвода.
