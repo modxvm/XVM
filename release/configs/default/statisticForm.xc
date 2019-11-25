@@ -13,7 +13,7 @@
     }
   },
   "statisticForm": {
-    // true - disable Platoon/rank icons.
+    // true - disable platoon/rank icons.
     // true - убрать отображение иконки взвода/ранга.
     "removeSquadIcon": false,
     // true - disable rank badge icons.

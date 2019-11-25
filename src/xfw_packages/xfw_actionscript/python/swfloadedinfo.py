@@ -51,7 +51,7 @@ class _SwfLoadedInfo(object):
     def swf_loaded_set(self, swf):
         if swf.lower() not in self.__swfs_loaded:
             self.__swfs_loaded.append(swf.lower())
-            
+
     def __swf_loaded_clear(self):
         del self.__swfs_loaded[:]
 
