@@ -17,7 +17,7 @@
     // Формат часов на экране загрузки боя.
     // http://php.net/date
     "clockFormat": "H:i:s",
-    // true - disable Platoon/rank icons. This blank space can house, for example, clan logos.
+    // true - disable platoon/rank icons. This blank space can house, for example, clan logos.
     // true - убрать отображение иконки взвода/ранга. На пустое поле можно вывести, например, иконку клана.
     "removeSquadIcon": false,
     // true - disable rank badge icons.
