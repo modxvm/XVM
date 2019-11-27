@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 08.10.2019
+    // Last update: 27.11.2019
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -533,6 +533,7 @@
     "usa-A126_PzVI_Tiger_II_capt":           {"name": null, "short": null},
     "usa-A127_TL_1_LPC":                     {"name": null, "short": null},
     "usa-A12_T32":                           {"name": null, "short": null},
+    "usa-A130_Super_Hellcat":                {"name": null, "short": null},
     "usa-A13_T34_hvy":                       {"name": null, "short": null},
     "usa-A13_T34_hvy_BF":                    {"name": null, "short": null},
     "usa-A13_T34_hvy_FL":                    {"name": null, "short": null},
