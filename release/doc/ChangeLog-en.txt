@@ -2,6 +2,10 @@
   [GENERAL]
   * World of Tanks 1.7.0.0
 
+XVM-8.1.9:
+  [GENERAL]
+  * World of Tanks 1.6.1.4 micropatch 2019.11.27
+
 XVM-8.1.8:
   [GENERAL]
   * World of Tanks 1.6.1.4
