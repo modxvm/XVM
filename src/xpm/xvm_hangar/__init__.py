@@ -21,6 +21,7 @@ from skeletons.gui.shared import IItemsCache
 from gui.Scaleform.daapi.view.meta.MessengerBarMeta import MessengerBarMeta
 from messenger.gui.Scaleform.lobby_entry import LobbyEntry
 from gui.game_control.hero_tank_controller import HeroTankController
+#from gui.game_control.calendar_controller import _HeroAdventActionHelper
 from gui.promo.hangar_teaser_widget import TeaserViewer
 from gui.game_control.PromoController import PromoController
 from gui.game_control.AwardController import ProgressiveRewardHandler
@@ -195,6 +196,13 @@ def updateSettings(base, self):
     if not config.get('hangar/showPromoPremVehicle', True):
         return
     base(self)
+
+# need remove after new year event
+#@overrideMethod(_HeroAdventActionHelper, '_HeroAdventActionHelper__updateInfo')
+#def updateInfo(base, self, vehicleCD, endTimestamp):
+#    if not config.get('hangar/showPromoPremVehicle', True):
+#        return
+#    base(self, vehicleCD, endTimestamp)
 
 # hide display pop-up messages in the hangar
 @overrideMethod(TeaserViewer, 'show')
