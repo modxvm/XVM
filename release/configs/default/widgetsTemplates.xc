@@ -59,7 +59,7 @@
     "type": "extrafield",
     "formats": [
       {
-        // Background image, left part
+        // Background image, left part.
         // Фоновая картинка, левая часть.
         "x": 66,
         "y": 193,
@@ -67,7 +67,7 @@
         "format": "<img src='xvm://res/icons/clock/clockBg.png' width='160' height='80'>"
       },
       {
-        // Background image, right part
+        // Background image, right part.
         // Фоновая картинка, правая часть.
         "x": 390,
         "y": 193,
