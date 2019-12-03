@@ -20,8 +20,8 @@
     // true - disable platoon/rank icons. This blank space can house, for example, clan logos.
     // true - убрать отображение иконки взвода/ранга. На пустое поле можно вывести, например, иконку клана.
     "removeSquadIcon": false,
-    // true - disable rank badge icons.
-    // true - убрать отображение иконки бейджа ранга.
+    // true - disable badge icons.
+    // true - убрать отображение иконки нашивки.
     "removeRankBadgeIcon": false,
     // true - disable alpha/beta testers icons.
     // true - убрать отображение иконки альфа/бета тестеров.
