@@ -16,8 +16,8 @@
     // true - disable platoon/rank icons.
     // true - убрать отображение иконки взвода/ранга.
     "removeSquadIcon": false,
-    // true - disable rank badge icons.
-    // true - убрать отображение иконки бейджа ранга.
+    // true - disable badge icons.
+    // true - убрать отображение иконки нашивки.
     "removeRankBadgeIcon": false,
     // true - disable alpha/beta testers icons.
     // true - убрать отображение иконки альфа/бета тестеров.
