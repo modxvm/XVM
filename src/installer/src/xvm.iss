@@ -41,7 +41,7 @@ Name: "xvmbackup"; Description: "{cm:backupXVM}"; Flags: unchecked;
 Filename: https://modxvm.com/; Description: "{cm:websiteXVM}"; Flags: postinstall nowait shellexec;
 
 [Components]
-Name: "XVM"; Description: "{cm:component_XVM}"; Types: full compact custom; Flags: fixed;
+;Name: "XVM"; Description: "{cm:component_XVM}"; Types: full compact custom; Flags: fixed;
 
 [Files]
 ;backup
