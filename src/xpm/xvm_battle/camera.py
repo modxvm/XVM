@@ -153,6 +153,7 @@ def _SniperCamera_disable(self):
 
 _prevOffsetX = None
 _prevOffsetY = None
+
 def onCrosshairPositionChanged(x, y):
     global _prevOffsetX
     global _prevOffsetY
