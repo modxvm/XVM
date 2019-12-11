@@ -47,7 +47,7 @@ Legend:
 ├───────────────────┼───┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────
 │ "scaleY"          │ X │ X │ X │ X │ X │ X │ X │ scaling axis Y in % (use negative values for mirroring) (default: 1)
 ├───────────────────┼───┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────
-│ "hotKeyCode"      │ X │ X │ X │ X │ X │ X │ X │ keyboard key code (see list in hotkeys.xc), when pressed - switches text field to show and apply configured html in "format", or hide;
+│ "hotKeyCode"      │ X │ X │ X │ X │ X │ X │ X │ keyboard key code (see list in keycodes.xc), when pressed - switches text field to show and apply configured html in "format", or hide;
 │                   │   │   │   │   │   │   │   │ when defined, text field will not be shown until key is pressed, to disable define null value or delete parameter
 ├───────────────────┼───┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────
 │ "onHold"          │ X │ X │ X │ X │ X │ X │ X │ false - take action by key click; true - while key is remains pressed (default: false)
