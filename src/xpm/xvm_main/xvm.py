@@ -178,6 +178,13 @@ class Xvm(object):
                 self.xvmServicesInitialized = False
                 self.initializeXvmServices()
             reserve.init(self.currentAccountDBID)
+
+            if config.networkServicesSettings.statBattle:
+                data = xvmapi.getServerMessage()
+                if data:
+                    serverMessage = data.get('msg', None)
+                    if serverMessage:
+                        svcmsg.sendXvmSystemMessage(SystemMessages.SM_TYPE.Warning, serverMessage)
         except Exception, ex:
             err(traceback.format_exc())
 

@@ -16,6 +16,10 @@ def getVersion(wgmLimit=50, wshLimit=50):
         params={'ver':urllib.quote('{0}#{1}'.format(XVM.XVM_VERSION,XVM.XVM_REVISION)),'wgm':wgmLimit,'wsh':wshLimit})
     return data
 
+def getServerMessage():
+    (data, errStr) = _exec('getServerMessage/{token}')
+    return data
+
 def getStats(request):
     (data, errStr) = _exec('getStats/{token}/{request}?battleInfo={battleInfo}', params={
         'request':request,
