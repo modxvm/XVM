@@ -14,6 +14,13 @@ from logger import *
 import utils
 from xvm import l10n
 
+_XVM_MESSAGE_HEADER = \
+    '<textformat tabstops="[50]"><img src="img://../mods/shared_resources/xvm/res/icons/xvm/16x16t.png" ' \
+    'vspace="-5">&nbsp;<a href="#XVM_SITE#"><font color="#E2D2A2">modxvm.com</font></a>'
+
+def sendXvmSystemMessage(type, msg):
+    msg = _XVM_MESSAGE_HEADER + '\n\n' + msg + '</textformat>'
+    g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.SYSTEM_MESSAGE, {'msg':msg, 'type':type}))
 
 def tokenUpdated():
     type = SystemMessages.SM_TYPE.Warning
@@ -42,7 +49,6 @@ def tokenUpdated():
 
     g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.SYSTEM_MESSAGE, {'msg':msg, 'type':type}))
 
-
 def fixData(value):
     if value and 'message' in value and 'message' in value['message']:
         message = l10n(value['message']['message'])
@@ -66,8 +72,7 @@ def fixData(value):
 # PRIVATE
 
 def _getXvmMessageHeader():
-    msg = '<textformat tabstops="[50]"><img src="img://../mods/shared_resources/xvm/res/icons/xvm/16x16t.png" ' \
-          'vspace="-5">&nbsp;<a href="#XVM_SITE#"><font color="#E2D2A2">modxvm.com</font></a> - '
+    msg = _XVM_MESSAGE_HEADER + ' - '
     rev = ''
     try:
         from __version__ import __revision__
