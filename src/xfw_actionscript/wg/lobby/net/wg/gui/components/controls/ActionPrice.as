@@ -328,7 +328,6 @@ package net.wg.gui.components.controls
 
         private function updatePositions() : void
         {
-            var _loc1_:* = false;
             if(!this._vo)
             {
                 return;
@@ -345,7 +344,7 @@ package net.wg.gui.components.controls
             {
                 this._defBgPos = this.bg.x;
             }
-            _loc1_ = this._vo.state == ActionPriceVO.STATE_PENALTY && this._alertVisibleInNextStates.indexOf(this._state) != -1;
+            var _loc1_:Boolean = this._vo.state == ActionPriceVO.STATE_PENALTY && this._alertVisibleInNextStates.indexOf(this._state) != -1;
             if(this._iconPosition == LEFT_LBL)
             {
                 this.iconText.x = 0;

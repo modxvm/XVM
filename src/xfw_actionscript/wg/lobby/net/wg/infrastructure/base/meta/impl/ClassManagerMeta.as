@@ -1159,6 +1159,8 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.hangar.CrewDropDownEvent;
     import net.wg.gui.lobby.hangar.Hangar;
     import net.wg.gui.lobby.hangar.HangarHeader;
+    import net.wg.gui.lobby.hangar.LootboxesEntrancePointWidget;
+    import net.wg.gui.lobby.hangar.NYCreditBonus;
     import net.wg.gui.lobby.hangar.ResearchPanel;
     import net.wg.gui.lobby.hangar.SwitchModePanel;
     import net.wg.gui.lobby.hangar.TmenXpPanel;
@@ -1216,12 +1218,16 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.hangar.quests.QuestFlagIconContainer;
     import net.wg.gui.lobby.hangar.quests.QuestInformerButton;
     import net.wg.gui.lobby.hangar.quests.QuestInformerContent;
+    import net.wg.gui.lobby.hangar.seniorityAwards.SeniorityAwardsEntryPoint;
+    import net.wg.gui.lobby.hangar.seniorityAwards.SeniorityAwardsEntryPointHangar;
+    import net.wg.gui.lobby.hangar.seniorityAwards.SeniorityAwardsEntryPointVO;
     import net.wg.gui.lobby.hangar.tcarousel.BaseTankIcon;
     import net.wg.gui.lobby.hangar.tcarousel.ClanLockUI;
     import net.wg.gui.lobby.hangar.tcarousel.ITankCarousel;
     import net.wg.gui.lobby.hangar.tcarousel.MultiselectionInfoBlock;
     import net.wg.gui.lobby.hangar.tcarousel.MultiselectionSlotRenderer;
     import net.wg.gui.lobby.hangar.tcarousel.MultiselectionSlots;
+    import net.wg.gui.lobby.hangar.tcarousel.NYVehicleBonus;
     import net.wg.gui.lobby.hangar.tcarousel.SmallTankIcon;
     import net.wg.gui.lobby.hangar.tcarousel.TankCarousel;
     import net.wg.gui.lobby.hangar.tcarousel.TankCarouselItemRenderer;
@@ -1242,6 +1248,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.header.BadgeSlot;
     import net.wg.gui.lobby.header.IAccountClanPopOverBlock;
     import net.wg.gui.lobby.header.LobbyHeader;
+    import net.wg.gui.lobby.header.NYWidgetUI;
     import net.wg.gui.lobby.header.OnlineCounter;
     import net.wg.gui.lobby.header.TankPanel;
     import net.wg.gui.lobby.header.events.AccountPopoverEvent;
@@ -1494,6 +1501,12 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.modulesPanel.data.OptionalDeviceVO;
     import net.wg.gui.lobby.modulesPanel.interfaces.IDeviceSlot;
     import net.wg.gui.lobby.modulesPanel.interfaces.IModulesPanel;
+    import net.wg.gui.lobby.ny2020.NYCustomizationSlot;
+    import net.wg.gui.lobby.ny2020.NYSelectVehiclePopover;
+    import net.wg.gui.lobby.ny2020.NYSelectVehicleRenderer;
+    import net.wg.gui.lobby.ny2020.NYVehicleBonusPanel;
+    import net.wg.gui.lobby.ny2020.NYVehicleSelectorFilter;
+    import net.wg.gui.lobby.ny2020.vo.NYSelectVehiclePopoverVO;
     import net.wg.gui.lobby.personalMissions.CampaignOperationsContainer;
     import net.wg.gui.lobby.personalMissions.PersonalMissionsPage;
     import net.wg.gui.lobby.personalMissions.components.AllOperationsContent;
@@ -2247,6 +2260,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.tankman.PersonalCaseInputList;
     import net.wg.gui.lobby.tankman.PersonalCaseModel;
     import net.wg.gui.lobby.tankman.PersonalCaseRetrainingModel;
+    import net.wg.gui.lobby.tankman.PersonalCaseSkillModel;
     import net.wg.gui.lobby.tankman.PersonalCaseSkills;
     import net.wg.gui.lobby.tankman.PersonalCaseSkillsItemRenderer;
     import net.wg.gui.lobby.tankman.PersonalCaseSkillsModel;
@@ -2708,6 +2722,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.vehiclePreview20.data.VPSetItemsVO;
     import net.wg.gui.lobby.vehiclePreview20.data.VPSetItemVO;
     import net.wg.gui.lobby.vehiclePreview20.data.VPSetVehiclesVO;
+    import net.wg.gui.lobby.vehiclePreview20.data.VPStyleBtnVO;
     import net.wg.gui.lobby.vehiclePreview20.data.VPTradeInBuyingPanelVO;
     import net.wg.gui.lobby.vehiclePreview20.data.VPVehicleCarouselVO;
     import net.wg.gui.lobby.vehiclePreview20.infoPanel.VPInfoPanel;
@@ -3262,6 +3277,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.infrastructure.base.meta.INotificationListButtonMeta;
     import net.wg.infrastructure.base.meta.INotificationPopUpViewerMeta;
     import net.wg.infrastructure.base.meta.INotificationsListMeta;
+    import net.wg.infrastructure.base.meta.INYSelectVehiclePopoverMeta;
     import net.wg.infrastructure.base.meta.IPackItemsPopoverMeta;
     import net.wg.infrastructure.base.meta.IPaginationMeta;
     import net.wg.infrastructure.base.meta.IPersonalCaseMeta;
@@ -3328,6 +3344,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.infrastructure.base.meta.IRosterSlotSettingsWindowMeta;
     import net.wg.infrastructure.base.meta.IRssNewsFeedMeta;
     import net.wg.infrastructure.base.meta.ISendInvitesWindowMeta;
+    import net.wg.infrastructure.base.meta.ISeniorityAwardsEntryPointMeta;
     import net.wg.infrastructure.base.meta.ISessionBattleStatsViewMeta;
     import net.wg.infrastructure.base.meta.ISessionStatsPopoverMeta;
     import net.wg.infrastructure.base.meta.ISessionVehicleStatsViewMeta;
@@ -5751,6 +5768,10 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_LOBBY_HANGAR_HANGARHEADER:Class = HangarHeader;
 
+        public static const NET_WG_GUI_LOBBY_HANGAR_LOOTBOXESENTRANCEPOINTWIDGET:Class = LootboxesEntrancePointWidget;
+
+        public static const NET_WG_GUI_LOBBY_HANGAR_NYCREDITBONUS:Class = NYCreditBonus;
+
         public static const NET_WG_GUI_LOBBY_HANGAR_RESEARCHPANEL:Class = ResearchPanel;
 
         public static const NET_WG_GUI_LOBBY_HANGAR_SWITCHMODEPANEL:Class = SwitchModePanel;
@@ -5865,6 +5886,12 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_LOBBY_HANGAR_QUESTS_QUESTINFORMERCONTENT:Class = QuestInformerContent;
 
+        public static const NET_WG_GUI_LOBBY_HANGAR_SENIORITYAWARDS_SENIORITYAWARDSENTRYPOINT:Class = SeniorityAwardsEntryPoint;
+
+        public static const NET_WG_GUI_LOBBY_HANGAR_SENIORITYAWARDS_SENIORITYAWARDSENTRYPOINTHANGAR:Class = SeniorityAwardsEntryPointHangar;
+
+        public static const NET_WG_GUI_LOBBY_HANGAR_SENIORITYAWARDS_SENIORITYAWARDSENTRYPOINTVO:Class = SeniorityAwardsEntryPointVO;
+
         public static const NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_BASETANKICON:Class = BaseTankIcon;
 
         public static const NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_CLANLOCKUI:Class = ClanLockUI;
@@ -5876,6 +5903,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_MULTISELECTIONSLOTRENDERER:Class = MultiselectionSlotRenderer;
 
         public static const NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_MULTISELECTIONSLOTS:Class = MultiselectionSlots;
+
+        public static const NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_NYVEHICLEBONUS:Class = NYVehicleBonus;
 
         public static const NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_SMALLTANKICON:Class = SmallTankIcon;
 
@@ -5916,6 +5945,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_LOBBY_HEADER_IACCOUNTCLANPOPOVERBLOCK:Class = IAccountClanPopOverBlock;
 
         public static const NET_WG_GUI_LOBBY_HEADER_LOBBYHEADER:Class = LobbyHeader;
+
+        public static const NET_WG_GUI_LOBBY_HEADER_NYWIDGETUI:Class = NYWidgetUI;
 
         public static const NET_WG_GUI_LOBBY_HEADER_ONLINECOUNTER:Class = OnlineCounter;
 
@@ -6420,6 +6451,18 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_LOBBY_MODULESPANEL_INTERFACES_IDEVICESLOT:Class = IDeviceSlot;
 
         public static const NET_WG_GUI_LOBBY_MODULESPANEL_INTERFACES_IMODULESPANEL:Class = IModulesPanel;
+
+        public static const NET_WG_GUI_LOBBY_NY2020_NYCUSTOMIZATIONSLOT:Class = NYCustomizationSlot;
+
+        public static const NET_WG_GUI_LOBBY_NY2020_NYSELECTVEHICLEPOPOVER:Class = NYSelectVehiclePopover;
+
+        public static const NET_WG_GUI_LOBBY_NY2020_NYSELECTVEHICLERENDERER:Class = NYSelectVehicleRenderer;
+
+        public static const NET_WG_GUI_LOBBY_NY2020_NYVEHICLEBONUSPANEL:Class = NYVehicleBonusPanel;
+
+        public static const NET_WG_GUI_LOBBY_NY2020_NYVEHICLESELECTORFILTER:Class = NYVehicleSelectorFilter;
+
+        public static const NET_WG_GUI_LOBBY_NY2020_VO_NYSELECTVEHICLEPOPOVERVO:Class = NYSelectVehiclePopoverVO;
 
         public static const NET_WG_GUI_LOBBY_PERSONALMISSIONS_CAMPAIGNOPERATIONSCONTAINER:Class = CampaignOperationsContainer;
 
@@ -7927,6 +7970,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASERETRAININGMODEL:Class = PersonalCaseRetrainingModel;
 
+        public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASESKILLMODEL:Class = PersonalCaseSkillModel;
+
         public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASESKILLS:Class = PersonalCaseSkills;
 
         public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASESKILLSITEMRENDERER:Class = PersonalCaseSkillsItemRenderer;
@@ -8848,6 +8893,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_LOBBY_VEHICLEPREVIEW20_DATA_VPSETITEMVO:Class = VPSetItemVO;
 
         public static const NET_WG_GUI_LOBBY_VEHICLEPREVIEW20_DATA_VPSETVEHICLESVO:Class = VPSetVehiclesVO;
+
+        public static const NET_WG_GUI_LOBBY_VEHICLEPREVIEW20_DATA_VPSTYLEBTNVO:Class = VPStyleBtnVO;
 
         public static const NET_WG_GUI_LOBBY_VEHICLEPREVIEW20_DATA_VPTRADEINBUYINGPANELVO:Class = VPTradeInBuyingPanelVO;
 
@@ -9957,6 +10004,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_INOTIFICATIONSLISTMETA:Class = INotificationsListMeta;
 
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_INYSELECTVEHICLEPOPOVERMETA:Class = INYSelectVehiclePopoverMeta;
+
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IPACKITEMSPOPOVERMETA:Class = IPackItemsPopoverMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IPAGINATIONMETA:Class = IPaginationMeta;
@@ -10088,6 +10137,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IRSSNEWSFEEDMETA:Class = IRssNewsFeedMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_ISENDINVITESWINDOWMETA:Class = ISendInvitesWindowMeta;
+
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_ISENIORITYAWARDSENTRYPOINTMETA:Class = ISeniorityAwardsEntryPointMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_ISESSIONBATTLESTATSVIEWMETA:Class = ISessionBattleStatsViewMeta;
 
@@ -10541,6 +10592,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_NOTIFICATIONSLISTMETA:Class = NotificationsListMeta;
 
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_NYSELECTVEHICLEPOPOVERMETA:Class = NYSelectVehiclePopoverMeta;
+
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PACKITEMSPOPOVERMETA:Class = PackItemsPopoverMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PAGINATIONMETA:Class = PaginationMeta;
@@ -10672,6 +10725,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_RSSNEWSFEEDMETA:Class = RssNewsFeedMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SENDINVITESWINDOWMETA:Class = SendInvitesWindowMeta;
+
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SENIORITYAWARDSENTRYPOINTMETA:Class = SeniorityAwardsEntryPointMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SESSIONBATTLESTATSVIEWMETA:Class = SessionBattleStatsViewMeta;
 

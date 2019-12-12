@@ -4,15 +4,17 @@ package net.wg.gui.lobby.progressiveReward
     import flash.text.TextField;
     import net.wg.gui.interfaces.ISoundButtonEx;
     import flash.display.MovieClip;
+    import net.wg.gui.lobby.hangar.seniorityAwards.SeniorityAwardsEntryPoint;
     import net.wg.gui.lobby.progressiveReward.data.ProgressiveRewardVO;
     import net.wg.data.managers.impl.TooltipProps;
     import net.wg.infrastructure.managers.ITooltipMgr;
     import flash.events.Event;
     import scaleform.clik.events.ButtonEvent;
     import flash.events.MouseEvent;
-    import net.wg.gui.lobby.progressiveReward.data.ProgressiveRewardStepVO;
     import scaleform.clik.constants.InvalidationType;
+    import net.wg.data.constants.Linkages;
     import net.wg.data.constants.generated.PROGRESSIVEREWARD_CONSTANTS;
+    import net.wg.gui.lobby.progressiveReward.data.ProgressiveRewardStepVO;
     import net.wg.gui.lobby.progressiveReward.events.ProgressiveRewardEvent;
     import net.wg.data.constants.BaseTooltips;
 
@@ -31,6 +33,8 @@ package net.wg.gui.lobby.progressiveReward
 
         private static const H_ALIGNED_REWARD_X_OFFSET:int = -20;
 
+        private static const SENIORITY_AWARDS_OFFSET_Y:int = -35;
+
         public var titleTF:TextField = null;
 
         public var linkBtn:ISoundButtonEx = null;
@@ -44,6 +48,8 @@ package net.wg.gui.lobby.progressiveReward
         public var lockMc:MovieClip = null;
 
         public var rewardsProgress:ProgressiveRewardProgress = null;
+
+        private var _seniorityAwards:SeniorityAwardsEntryPoint = null;
 
         private var _progressiveData:ProgressiveRewardVO = null;
 
@@ -76,13 +82,12 @@ package net.wg.gui.lobby.progressiveReward
             this._progressiveData = null;
             this._tooltipMgr = null;
             this._rewardTooltipProps = null;
+            if(this._seniorityAwards)
+            {
+                this._seniorityAwards.dispose();
+                this._seniorityAwards = null;
+            }
             super.onDispose();
-        }
-
-        public function setData(param1:ProgressiveRewardVO) : void
-        {
-            this._progressiveData = param1;
-            invalidateData();
         }
 
         override protected function configUI() : void
@@ -105,65 +110,101 @@ package net.wg.gui.lobby.progressiveReward
         override protected function draw() : void
         {
             var _loc1_:* = false;
-            var _loc2_:* = false;
-            var _loc3_:* = false;
-            var _loc4_:Vector.<ProgressiveRewardStepVO> = null;
-            var _loc5_:ProgressiveRewardStepVO = null;
-            var _loc6_:String = null;
-            var _loc7_:String = null;
             super.draw();
             if(this._progressiveData)
             {
-                _loc1_ = isInvalid(InvalidationType.SIZE);
                 if(isInvalid(InvalidationType.DATA))
                 {
-                    _loc2_ = this._progressiveData.widgetAlign == PROGRESSIVEREWARD_CONSTANTS.WIDGET_LAYOUT_V;
-                    _loc3_ = this._progressiveData.showBg;
-                    this.bgMc.visible = _loc3_;
-                    _loc4_ = this._progressiveData.getSteps();
-                    _loc5_ = _loc4_[this._progressiveData.stepIdx];
-                    _loc6_ = _loc5_.rewardType;
-                    App.utils.asserter.assertFrameExists(_loc6_,this.rewardMc);
-                    this.rewardMc.gotoAndStop(_loc6_);
-                    _loc7_ = _loc5_.stepState;
-                    App.utils.asserter.assertFrameExists(_loc7_,this.lockMc);
-                    this.lockMc.gotoAndStop(_loc7_);
-                    this.rewardsProgress.update(this._progressiveData);
-                    this.linkBtn.tooltip = this._progressiveData.btnTooltip;
+                    this.bgMc.visible = this._progressiveData.showBg;
+                    _loc1_ = this._progressiveData.seniorityAwards != null;
+                    if(!_loc1_)
+                    {
+                        this.createSteps();
+                        this.linkBtn.tooltip = this._progressiveData.btnTooltip;
+                    }
+                    this.rewardMc.visible = this.rewardsProgress.visible = !_loc1_;
+                    this.linkBtn.visible = this._progressiveData.showLinkBtn;
+                    this.rewardMc.mouseEnabled = this._progressiveData.showLinkBtn;
                     this.titleTF.htmlText = this._progressiveData.titleText;
                     App.utils.commons.updateTextFieldSize(this.titleTF,true,false);
-                    this.linkBtn.x = this.titleTF.x + this.titleTF.width | 0;
                     this.descTF.htmlText = this._progressiveData.descText;
-                    this.descTF.width = _loc2_?V_ALIGNED_DESC_WIDTH:H_ALIGNED_DESC_WIDTH;
-                    App.utils.commons.updateTextFieldSize(this.descTF,false);
-                    if(_loc2_)
-                    {
-                        this.rewardMc.x = this.descTF.x + V_ALIGNED_DESC_WIDTH - this.rewardMc.width >> 1;
-                        this.rewardMc.y = this.descTF.y + this.descTF.height | 0;
-                    }
-                    else
-                    {
-                        if(_loc3_)
-                        {
-                            this.bgMc.x = H_ALIGNED_WIDTH - this.bgMc.width | 0;
-                            this.rewardMc.x = H_ALIGNED_WIDTH - this.rewardMc.width + H_ALIGNED_REWARD_X_OFFSET | 0;
-                        }
-                        else
-                        {
-                            this.rewardMc.x = this.descTF.x + H_ALIGNED_DESC_WIDTH | 0;
-                        }
-                        this.rewardMc.y = BASE_REWARD_Y;
-                    }
-                    this.lockMc.x = this.rewardMc.x + (this.rewardMc.width - this.lockMc.width >> 1) | 0;
-                    this.lockMc.y = this.rewardMc.y + (this.rewardMc.height - this.lockMc.height >> 1) | 0;
-                    _loc1_ = true;
+                    invalidateSize();
                 }
-                if(_loc1_)
+                if(isInvalid(InvalidationType.SIZE))
                 {
-                    this.rewardsProgress.x = this.rewardMc.x + (this.rewardMc.width - this.rewardsProgress.actualWidth >> 1) | 0;
-                    this.rewardsProgress.y = this.rewardMc.y + this.rewardMc.height - this.rewardsProgress.actualHeight + REWARD_PROGRESS_Y_OFFSET | 0;
+                    this.updatePositions();
                 }
             }
+        }
+
+        public function setData(param1:ProgressiveRewardVO) : void
+        {
+            this._progressiveData = param1;
+            if(param1.seniorityAwards && !this._seniorityAwards)
+            {
+                this._seniorityAwards = App.utils.classFactory.getComponent(Linkages.SENIORITY_AWARDS_WIDGET_BLOCK,SeniorityAwardsEntryPoint);
+                addChild(this._seniorityAwards);
+            }
+            if(this._seniorityAwards)
+            {
+                this._seniorityAwards.setDataVO(param1.seniorityAwards);
+            }
+            invalidateData();
+        }
+
+        private function updatePositions() : void
+        {
+            var _loc1_:* = this._progressiveData.widgetAlign == PROGRESSIVEREWARD_CONSTANTS.WIDGET_LAYOUT_V;
+            this.linkBtn.x = this.titleTF.x + this.titleTF.width | 0;
+            this.descTF.width = _loc1_?V_ALIGNED_DESC_WIDTH:H_ALIGNED_DESC_WIDTH;
+            App.utils.commons.updateTextFieldSize(this.descTF,false);
+            if(_loc1_)
+            {
+                this.rewardMc.x = this.descTF.x + V_ALIGNED_DESC_WIDTH - this.rewardMc.width >> 1;
+                this.rewardMc.y = this.descTF.y + this.descTF.height | 0;
+            }
+            else
+            {
+                if(this._progressiveData.showBg)
+                {
+                    this.bgMc.x = H_ALIGNED_WIDTH - this.bgMc.width | 0;
+                    this.rewardMc.x = H_ALIGNED_WIDTH - this.rewardMc.width + H_ALIGNED_REWARD_X_OFFSET | 0;
+                }
+                else
+                {
+                    this.rewardMc.x = this.descTF.x + H_ALIGNED_DESC_WIDTH | 0;
+                }
+                this.rewardMc.y = BASE_REWARD_Y;
+            }
+            if(this._progressiveData.seniorityAwards)
+            {
+                this._seniorityAwards.y = this.descTF.y + this.descTF.textHeight + SENIORITY_AWARDS_OFFSET_Y;
+            }
+            else
+            {
+                this.lockMc.x = this.rewardMc.x + (this.rewardMc.width - this.lockMc.width >> 1) | 0;
+                this.lockMc.y = this.rewardMc.y + (this.rewardMc.height - this.lockMc.height >> 1) | 0;
+                this.rewardsProgress.x = this.rewardMc.x + (this.rewardMc.width - this.rewardsProgress.actualWidth >> 1) | 0;
+                this.rewardsProgress.y = this.rewardMc.y + this.rewardMc.height - this.rewardsProgress.actualHeight + REWARD_PROGRESS_Y_OFFSET | 0;
+            }
+            dispatchEvent(new Event(Event.RESIZE,true,true));
+        }
+
+        private function createSteps() : void
+        {
+            var _loc4_:String = null;
+            var _loc1_:Vector.<ProgressiveRewardStepVO> = this._progressiveData.getSteps();
+            var _loc2_:ProgressiveRewardStepVO = _loc1_[this._progressiveData.stepIdx];
+            var _loc3_:String = _loc2_.rewardType;
+            App.utils.asserter.assertFrameExists(_loc3_,this.rewardMc);
+            this.rewardMc.gotoAndStop(_loc3_);
+            if(!this._progressiveData.seniorityAwards)
+            {
+                _loc4_ = _loc2_.stepState;
+                App.utils.asserter.assertFrameExists(_loc4_,this.lockMc);
+                this.lockMc.gotoAndStop(_loc4_);
+            }
+            this.rewardsProgress.update(this._progressiveData);
         }
 
         private function handleWidgetClick() : void

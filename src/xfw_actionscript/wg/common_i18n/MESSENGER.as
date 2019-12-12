@@ -683,6 +683,8 @@ package
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_ITEMS_NAME:String = "#messenger:serviceChannelMessages/battleResults/quests/items/name";
 
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_NYBOXES:String = "#messenger:serviceChannelMessages/battleResults/quests/nyBoxes";
+
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_PERSONALMISSIONS:String = "#messenger:serviceChannelMessages/battleResults/personalMissions";
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_PERSONALMISSIONS_1:String = "#messenger:serviceChannelMessages/battleResults/personalMissions/1";
@@ -908,6 +910,20 @@ package
         public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_CREWSKINSACCRUED:String = "#messenger:serviceChannelMessages/invoiceReceived/crewSkinsAccrued";
 
         public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_CREWSKINSDEBITED:String = "#messenger:serviceChannelMessages/invoiceReceived/crewSkinsDebited";
+
+        public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_NYTOYSACCRUEDINVOICERECEIVED:String = "#messenger:serviceChannelMessages/invoiceReceived/nyToysAccruedInvoiceReceived";
+
+        public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_NYTOYSDEBITEDINVOICERECEIVED:String = "#messenger:serviceChannelMessages/invoiceReceived/nyToysDebitedInvoiceReceived";
+
+        public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_NYFILLERSACCRUED:String = "#messenger:serviceChannelMessages/invoiceReceived/nyFillersAccrued";
+
+        public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_NYFILLERSDEBITED:String = "#messenger:serviceChannelMessages/invoiceReceived/nyFillersDebited";
+
+        public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_NYFRAGMENTSACCRUED:String = "#messenger:serviceChannelMessages/invoiceReceived/nyFragmentsAccrued";
+
+        public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_NYFRAGMENTSDEBITED:String = "#messenger:serviceChannelMessages/invoiceReceived/nyFragmentsDebited";
+
+        public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_TOYTYPEWRAPPER:String = "#messenger:serviceChannelMessages/invoiceReceived/toyTypeWrapper";
 
         public static const SERVICECHANNELMESSAGES_DURATIONOFPREMIUMACCOUNTEXPIRES:String = "#messenger:serviceChannelMessages/durationOfPremiumAccountExpires";
 
@@ -1278,6 +1294,12 @@ package
         public static const SERVICECHANNELMESSAGES_RECRUITREMINDER_TEXT:String = "#messenger:serviceChannelMessages/recruitReminder/text";
 
         public static const SERVICECHANNELMESSAGES_RECRUITREMINDERTERMLESS_TEXT:String = "#messenger:serviceChannelMessages/recruitReminderTermless/text";
+
+        public static const SERVICECHANNELMESSAGES_LOOTBOXESGIFT_HEADER:String = "#messenger:serviceChannelMessages/lootBoxesGift/header";
+
+        public static const SERVICECHANNELMESSAGES_LOOTBOXESGIFT_BODY:String = "#messenger:serviceChannelMessages/lootBoxesGift/body";
+
+        public static const SERVICECHANNELMESSAGES_LOOTBOXESGIFT_BUTTON:String = "#messenger:serviceChannelMessages/lootBoxesGift/button";
 
         public static const COMMAND_SUCCESS_USERBAN:String = "#messenger:command/success/USERBAN";
 
@@ -1726,6 +1748,8 @@ package
         public static const SERVICECHANNELMESSAGES_FLEXCHANGE_QUESTS_POINTS:String = "#messenger:serviceChannelMessages/flExchange/quests/points";
 
         public static const SERVICECHANNELMESSAGES_FLEXCHANGE_QUESTS_REWARD:String = "#messenger:serviceChannelMessages/flExchange/quests/reward";
+
+        public static const SERVICECHANNELMESSAGES_NEWYEARTALISMAN_BUTTON:String = "#messenger:serviceChannelMessages/newYearTalisman/button";
 
         public function MESSENGER()
         {

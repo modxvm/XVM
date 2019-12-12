@@ -6,9 +6,9 @@ package net.wg.gui.components.controls
     import scaleform.clik.utils.Constraints;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.data.constants.Values;
-    import flash.events.Event;
-    import net.wg.data.constants.ComponentState;
     import org.idmedia.as3commons.util.StringUtils;
+    import net.wg.data.constants.ComponentState;
+    import flash.events.Event;
     import net.wg.data.constants.SoundTypes;
 
     public class ContextMenuItem extends SoundListItemRenderer
@@ -27,6 +27,8 @@ package net.wg.gui.components.controls
         private static const LINKAGE_TEXTFIELDSUB:String = "textFieldSub";
 
         private static const PREFIX_SELECTED:String = "selected_";
+
+        private static const POSTFIX_DISABLED:String = "_disabled";
 
         private static const BOTTOM_DASH:String = "_";
 
@@ -187,11 +189,6 @@ package net.wg.gui.components.controls
             return true;
         }
 
-        override protected function callLogEvent(param1:Event) : void
-        {
-            App.eventLogManager.logUIEventContextMenuItem(param1,_index);
-        }
-
         public function invalidWidth() : void
         {
             this.updateText();
@@ -211,6 +208,34 @@ package net.wg.gui.components.controls
             {
                 width = TEXT_MARGIN + this._defItemTextWidth + param1.textWidth | 0;
             }
+        }
+
+        private function updateIconType() : void
+        {
+            if(StringUtils.isNotEmpty(this._iconType))
+            {
+                this.iconsMc.gotoAndStop(super.enabled?this._iconType:this._iconType + POSTFIX_DISABLED);
+                this.iconsMc.visible = true;
+            }
+            else
+            {
+                this.iconsMc.visible = false;
+            }
+        }
+
+        private function applyText(param1:TextField, param2:String) : void
+        {
+            param1.text = param2;
+            if(this._textColor >= 0)
+            {
+                param1.textColor = this._textColor;
+            }
+        }
+
+        override public function set enabled(param1:Boolean) : void
+        {
+            super.enabled = param1;
+            this.updateIconType();
         }
 
         public function get type() : String
@@ -284,15 +309,7 @@ package net.wg.gui.components.controls
                 return;
             }
             this._iconType = param1;
-            if(StringUtils.isNotEmpty(this._iconType))
-            {
-                this.iconsMc.gotoAndStop(this._iconType);
-                this.iconsMc.visible = true;
-            }
-            else
-            {
-                this.iconsMc.visible = false;
-            }
+            this.updateIconType();
         }
 
         public function get textColor() : int
@@ -310,13 +327,9 @@ package net.wg.gui.components.controls
             this.updateText();
         }
 
-        private function applyText(param1:TextField, param2:String) : void
+        override protected function callLogEvent(param1:Event) : void
         {
-            param1.text = param2;
-            if(this._textColor >= 0)
-            {
-                param1.textColor = this._textColor;
-            }
+            App.eventLogManager.logUIEventContextMenuItem(param1,_index);
         }
     }
 }

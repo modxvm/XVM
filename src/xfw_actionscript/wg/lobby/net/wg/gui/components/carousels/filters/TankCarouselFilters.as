@@ -49,6 +49,8 @@ package net.wg.gui.components.carousels.filters
 
         private var _gapOffset:int = 0;
 
+        private var _updateHotFilterSelectedFromData:Boolean = true;
+
         public function TankCarouselFilters()
         {
             this.popoverMgr = App.popoverMgr;
@@ -106,6 +108,7 @@ package net.wg.gui.components.carousels.filters
                 this.paramsFilter.iconSource = this._initVO.mainBtn.value;
                 this.paramsFilter.tooltip = this._initVO.mainBtn.tooltip;
                 this.listHotFilter.dataProvider = this._initVO.hotFilters;
+                invalidateSize();
             }
             if(isInvalid(InvalidationType.SIZE) && _loc3_ && _loc2_)
             {
@@ -188,6 +191,27 @@ package net.wg.gui.components.carousels.filters
         private function getHorizontalGap() : int
         {
             return HOT_FILTERS_GAP + this._gapOffset;
+        }
+
+        public function set updateHotFilterSelectedFromData(param1:Boolean) : void
+        {
+            var _loc4_:uint = 0;
+            if(this._updateHotFilterSelectedFromData == param1)
+            {
+                return;
+            }
+            this._updateHotFilterSelectedFromData = param1;
+            var _loc2_:int = this.listHotFilter.length;
+            var _loc3_:ToggleRenderer = null;
+            while(_loc4_ < _loc2_)
+            {
+                _loc3_ = this.listHotFilter.getRendererAt(_loc4_) as ToggleRenderer;
+                if(_loc3_)
+                {
+                    _loc3_.updateSelectedFromData = this._updateHotFilterSelectedFromData;
+                }
+                _loc4_++;
+            }
         }
 
         public function get gapOffset() : int

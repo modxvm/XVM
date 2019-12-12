@@ -630,7 +630,7 @@ package net.wg.gui.lobby.tankman
             }
             else if(param1 is PersonalCaseSkills && skillsModel)
             {
-                param1.update(skillsModel);
+                param1.update(new PersonalCaseSkillsModel(skillsModel,data.isBootcamp));
             }
             else if(param1 is PersonalCaseDocs && documentsData)
             {

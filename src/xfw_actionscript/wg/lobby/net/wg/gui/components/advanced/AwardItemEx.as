@@ -18,6 +18,10 @@ package net.wg.gui.components.advanced
 
         public var img:Image;
 
+        public var highlight:Image;
+
+        public var overlay:Image;
+
         public var txtLabel:TextField;
 
         private var _data:AwardItemVO;
@@ -44,6 +48,10 @@ package net.wg.gui.components.advanced
             this.img.removeEventListener(Event.CHANGE,this.onImgChangeHandler);
             this.img.dispose();
             this.img = null;
+            this.highlight.dispose();
+            this.highlight = null;
+            this.overlay.dispose();
+            this.overlay = null;
             this.txtLabel = null;
             this._owner = null;
             this._data = null;
@@ -65,6 +73,8 @@ package net.wg.gui.components.advanced
                 this.img.scaleX = this.img.scaleY = 1;
                 this.txtLabel.htmlText = this._data.label;
                 this.img.source = this._data.imgSource;
+                this.highlight.source = this._data.highlight;
+                this.overlay.source = this._data.overlay;
             }
             if(isInvalid(InvalidationType.SIZE))
             {

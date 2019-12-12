@@ -17,6 +17,10 @@ package net.wg.infrastructure.base.meta.impl
 
         public var showChangeNation:Function;
 
+        public var toggleNYCustomization:Function;
+
+        public var onNYBonusPanelClicked:Function;
+
         private var _vectorShellButtonVO:Vector.<ShellButtonVO>;
 
         private var _vehicleMessageVO:VehicleMessageVO;
@@ -68,6 +72,18 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.showChangeNation,"showChangeNation" + Errors.CANT_NULL);
             this.showChangeNation();
+        }
+
+        public function toggleNYCustomizationS(param1:Boolean) : void
+        {
+            App.utils.asserter.assertNotNull(this.toggleNYCustomization,"toggleNYCustomization" + Errors.CANT_NULL);
+            this.toggleNYCustomization(param1);
+        }
+
+        public function onNYBonusPanelClickedS() : void
+        {
+            App.utils.asserter.assertNotNull(this.onNYBonusPanelClicked,"onNYBonusPanelClicked" + Errors.CANT_NULL);
+            this.onNYBonusPanelClicked();
         }
 
         public final function as_setAmmo(param1:Array, param2:Boolean) : void

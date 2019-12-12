@@ -51,6 +51,8 @@ package
 
         public static const MESSENGER:Class = MESSENGER;
 
+        public static const NY:Class = NY;
+
         public static const PERSONAL_MISSIONS:Class = PERSONAL_MISSIONS;
 
         public static const PO_FILES:Class = PO_FILES;

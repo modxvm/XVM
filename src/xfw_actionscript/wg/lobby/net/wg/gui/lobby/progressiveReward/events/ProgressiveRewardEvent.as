@@ -5,6 +5,8 @@ package net.wg.gui.lobby.progressiveReward.events
     public class ProgressiveRewardEvent extends Event
     {
 
+        public static const OPEN_BTN_CLICK:String = "openBtnClick";
+
         public static const LINK_BTN_CLICK:String = "pre_linkBtnClick";
 
         public static const SWITCH_WIDGET_ENABLED:String = "pre_switchWidgetEnabled";

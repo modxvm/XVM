@@ -4,6 +4,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
     import net.wg.gui.components.controls.IconTextButton;
     import net.wg.gui.components.advanced.ShellButton;
     import net.wg.gui.components.controls.SoundButtonEx;
+    import net.wg.gui.lobby.ny2020.NYCustomizationSlot;
+    import net.wg.gui.lobby.ny2020.NYVehicleBonusPanel;
     import net.wg.gui.lobby.modulesPanel.components.DeviceSlot;
     import net.wg.gui.components.controls.VO.ShellButtonVO;
     import net.wg.infrastructure.managers.ITooltipMgr;
@@ -28,13 +30,13 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
     import net.wg.data.constants.Linkages;
     import net.wg.data.constants.Directions;
     import net.wg.infrastructure.events.FocusRequestEvent;
+    import net.wg.utils.ICounterProps;
+    import flash.text.TextFormatAlign;
+    import net.wg.gui.components.common.Counter;
     import scaleform.gfx.MouseEventEx;
     import net.wg.gui.lobby.modulesPanel.data.FittingSelectPopoverParams;
     import net.wg.data.Aliases;
     import net.wg.infrastructure.managers.ITooltipFormatter;
-    import net.wg.utils.ICounterProps;
-    import flash.text.TextFormatAlign;
-    import net.wg.gui.components.common.Counter;
 
     public class AmmunitionPanel extends AmmunitionPanelMeta implements IAmmunitionPanel
     {
@@ -68,6 +70,18 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         private static const HIGHLIGHTER_CREATE_DELAY:int = 1000;
 
         private static const INDENT_BETWEEN_BUTTONS:int = 11;
+
+        public static const SLOTS_HEIGHT:int = 47;
+
+        public static const SLOTS_BOTTOM_OFFSET:int = 11;
+
+        private static const NY_SLOT_GAP:int = 10;
+
+        private static const NY_BONUS_PANEL_SIZE_BREAKPOINT:int = 768;
+
+        private static const NY_BONUS_PANEL_BIG_Y:int = -19;
+
+        private static const NY_BONUS_PANEL_SMALL_Y:int = -4;
 
         public var vehicleStateMsg:VehicleStateMsg = null;
 
@@ -106,6 +120,10 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         public var battleAbility2:BattleAbilitySlot = null;
 
         public var battleAbility3:BattleAbilitySlot = null;
+
+        public var nyCustomizationSlot:NYCustomizationSlot = null;
+
+        public var nyBonusPanel:NYVehicleBonusPanel = null;
 
         private var _modulesHelpLayoutId:String = "";
 
@@ -192,6 +210,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this.lastElementFocusFix.x = this.booster.x + OFFSET_LAST_ELEMENT_FOCUS_FIX;
             this._buttonsList = [this.maintenanceBtn,this.tuningBtn,this.changeNationBtn];
             this._counterManager = App.utils.counterManager;
+            this.nyBonusPanel.visible = false;
+            this.nyCustomizationSlot.visible = false;
         }
 
         override protected function initialize() : void
@@ -200,11 +220,17 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this.tuningBtn.enabled = false;
             App.waiting.addEventListener(ChildVisibilityEvent.CHILD_SHOWN,this.onChildShownHandler);
             App.waiting.addEventListener(ChildVisibilityEvent.CHILD_HIDDEN,this.onChildHiddenHandler);
+            this.nyBonusPanel.addEventListener(MouseEvent.CLICK,this.onNYBonusPanelClickHandler);
+            this.nyBonusPanel.addEventListener(MouseEvent.MOUSE_OVER,this.onNYBonusPanelOverHandler);
+            this.nyBonusPanel.addEventListener(MouseEvent.MOUSE_OUT,this.onNYBonusPanelOutHandler);
         }
 
         override protected function onBeforeDispose() : void
         {
             var _loc1_:IconTextButton = null;
+            this.nyBonusPanel.removeEventListener(MouseEvent.CLICK,this.onNYBonusPanelClickHandler);
+            this.nyBonusPanel.removeEventListener(MouseEvent.MOUSE_OVER,this.onNYBonusPanelOverHandler);
+            this.nyBonusPanel.removeEventListener(MouseEvent.MOUSE_OUT,this.onNYBonusPanelOutHandler);
             for each(_loc1_ in this._buttonsList)
             {
                 _loc1_.removeEventListener(MouseEvent.ROLL_OVER,this.onBtnRollOverHandler);
@@ -214,6 +240,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this.maintenanceBtn.removeEventListener(ButtonEvent.CLICK,this.onMaintenanceBtnClickHandler);
             this.tuningBtn.removeEventListener(ButtonEvent.CLICK,this.onTuningBtnClickHandler);
             this.changeNationBtn.removeEventListener(ButtonEvent.CLICK,this.onChangeNationBtnClickHandler);
+            this.nyCustomizationSlot.removeEventListener(ButtonEvent.CLICK,this.onNyCustomizationSlotClickHandler);
             this._scheduler.cancelTask(this.createBattleAbilitiesHighlighter);
             this.disposeSlots();
             this._shellsData = null;
@@ -251,6 +278,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this._utils = null;
             this._scheduler = null;
             this._buttonsList = null;
+            this.nyBonusPanel.dispose();
+            this.nyBonusPanel = null;
             super.onDispose();
         }
 
@@ -321,6 +350,10 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this.toRent.addEventListener(MouseEvent.ROLL_OVER,this.onBtnRollOverHandler);
             this.toRent.addEventListener(MouseEvent.ROLL_OUT,this.onBtnRollOutHandler);
             this.toRent.addEventListener(ButtonEvent.CLICK,this.onToRentClickHandler);
+            this.nyCustomizationSlot.addEventListener(ButtonEvent.CLICK,this.onNyCustomizationSlotClickHandler);
+            this.nyCustomizationSlot.useHandCursor = true;
+            this.nyCustomizationSlot.mouseChildren = false;
+            this.nyCustomizationSlot.buttonMode = true;
             this._utils.asserter.assert(this.width - this.lastElementFocusFix.x < this.lastElementFocusFix.width << 1,LAST_ELEMENT_FOCUS_FIX);
             addEventListener(AmmunitionPanelEvents.VEHICLE_STATE_MSG_RESIZE,this.onAmmunitionPanelVehicleStateMsgResizeHandler);
             this._utils.helpLayout.registerComponent(this);
@@ -401,6 +434,15 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this.invalidateBattleAbilities();
         }
 
+        public function as_setBoosterBtnCounter(param1:int) : void
+        {
+            if(this._boosterCounter != param1)
+            {
+                this._boosterCounter = param1;
+                this.onBoosterCounterUpdate();
+            }
+        }
+
         public function as_setCustomizationBtnCounter(param1:int) : void
         {
             if(param1 > 0)
@@ -413,13 +455,23 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
 
-        public function as_setBoosterBtnCounter(param1:int) : void
+        public function as_setNYCustomizationSlotState(param1:Boolean, param2:Boolean) : void
         {
-            if(this._boosterCounter != param1)
+            this.nyCustomizationSlot.selected = param1;
+            this.nyCustomizationSlot.enabled = param2;
+        }
+
+        public function as_setNeyYearVehicleBonus(param1:Boolean, param2:String, param3:String, param4:String, param5:String) : void
+        {
+            if(this.nyBonusPanel)
             {
-                this._boosterCounter = param1;
-                this.onBoosterCounterUpdate();
+                this.nyBonusPanel.update(param2,param3,param4,param5);
+                this.nyBonusPanel.visible = param1;
+                this.nyBonusPanel.buttonMode = true;
+                this.nyCustomizationSlot.visible = param1;
             }
+            this.vehicleStateMsg.visible = !param1;
+            this.toRent.visible = !param1;
         }
 
         public function as_showBattleAbilitiesAlert(param1:Boolean) : void
@@ -473,6 +525,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this.shell3 = null;
             this.lastElementFocusFix.dispose();
             this.lastElementFocusFix = null;
+            this.nyCustomizationSlot.dispose();
+            this.nyCustomizationSlot = null;
             this.booster = null;
             this.battleAbility1 = null;
             this.battleAbility3 = null;
@@ -508,20 +562,6 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             invalidateButtonsEnabled();
         }
 
-        public function updateStage(param1:Number, param2:Number) : void
-        {
-            this.vehicleStateMsg.updateStage(param1,param2);
-            this._screenWidth = param1;
-            this.centerPanel();
-        }
-
-        public function updateTuningButton(param1:Boolean, param2:String) : void
-        {
-            this._tuningBtnEnabled = param1;
-            this._tuningTooltip = param2;
-            invalidate(INV_TUNING_BUTTON_STATE);
-        }
-
         public function updateChangeNationButton(param1:Boolean, param2:Boolean, param3:String, param4:Boolean) : void
         {
             var _loc5_:* = this._changeNationBtnVisible != param1;
@@ -550,6 +590,20 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             {
                 this.centerPanel();
             }
+        }
+
+        public function updateStage(param1:Number, param2:Number) : void
+        {
+            this.vehicleStateMsg.updateStage(param1,param2);
+            this._screenWidth = param1;
+            this.centerPanel();
+        }
+
+        public function updateTuningButton(param1:Boolean, param2:String) : void
+        {
+            this._tuningBtnEnabled = param1;
+            this._tuningTooltip = param2;
+            invalidate(INV_TUNING_BUTTON_STATE);
         }
 
         private function createBattleAbilitiesHighlighter() : void
@@ -626,6 +680,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                 this._fakeWidth = this.lastElementFocusFix.x + this.lastElementFocusFix.width - OFFSET_LAST_ELEMENT_FOCUS_FIX >> 0;
                 this.centerPanel();
             }
+            this.nyCustomizationSlot.x = (this._highlighterRightX == Values.DEFAULT_INT?this.booster.x + this.booster.width:this._highlighterRightX) + NY_SLOT_GAP >> 0;
         }
 
         private function centerPanel() : void
@@ -651,6 +706,9 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this.tuningBtn.x = this.maintenanceBtn.x + this._buttonWidth + INDENT_BETWEEN_BUTTONS;
             this.changeNationBtn.x = this.tuningBtn.x + this._buttonWidth + INDENT_BETWEEN_BUTTONS;
             dispatchEvent(new Event(Event.RESIZE));
+            var _loc3_:* = stage.stageHeight == NY_BONUS_PANEL_SIZE_BREAKPOINT;
+            this.nyBonusPanel.y = _loc3_?NY_BONUS_PANEL_SMALL_Y:NY_BONUS_PANEL_BIG_Y;
+            this.nyBonusPanel.setIsSmall(_loc3_);
         }
 
         private function configButton(param1:IconTextButton, param2:String, param3:String, param4:Function) : void
@@ -748,6 +806,20 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
 
+        private function onBoosterCounterUpdate() : void
+        {
+            var _loc1_:ICounterProps = null;
+            if(this.booster.visible && this._boosterCounter > 0)
+            {
+                _loc1_ = new CounterProps(CounterProps.DEFAULT_OFFSET_X,CounterProps.DEFAULT_OFFSET_Y,TextFormatAlign.LEFT,true,Linkages.COUNTER_UI,CounterProps.DEFAULT_TF_PADDING,false,Counter.EMPTY_STATE);
+                this._counterManager.setCounter(this.booster.hitMc,"",null,_loc1_);
+            }
+            else
+            {
+                this._counterManager.removeCounter(this.booster.hitMc);
+            }
+        }
+
         override public function get width() : Number
         {
             return this._fakeWidth;
@@ -756,6 +828,21 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         override protected function get modulesEnabled() : Boolean
         {
             return super.modulesEnabled && this._panelEnabled;
+        }
+
+        private function onNYBonusPanelClickHandler(param1:MouseEvent) : void
+        {
+            onNYBonusPanelClickedS();
+        }
+
+        private function onNYBonusPanelOverHandler(param1:MouseEvent) : void
+        {
+            this.nyBonusPanel.showOver();
+        }
+
+        private function onNYBonusPanelOutHandler(param1:MouseEvent) : void
+        {
+            this.nyBonusPanel.showOut();
         }
 
         private function onAbilitySlotClickHandler(param1:ButtonEvent) : void
@@ -915,18 +1002,9 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
 
-        private function onBoosterCounterUpdate() : void
+        private function onNyCustomizationSlotClickHandler(param1:ButtonEvent) : void
         {
-            var _loc1_:ICounterProps = null;
-            if(this.booster.visible && this._boosterCounter > 0)
-            {
-                _loc1_ = new CounterProps(CounterProps.DEFAULT_OFFSET_X,CounterProps.DEFAULT_OFFSET_Y,TextFormatAlign.LEFT,true,Linkages.COUNTER_UI,CounterProps.DEFAULT_TF_PADDING,false,Counter.EMPTY_STATE);
-                this._counterManager.setCounter(this.booster.hitMc,"",null,_loc1_);
-            }
-            else
-            {
-                this._counterManager.removeCounter(this.booster.hitMc);
-            }
+            toggleNYCustomizationS(this.nyCustomizationSlot.selected);
         }
     }
 }

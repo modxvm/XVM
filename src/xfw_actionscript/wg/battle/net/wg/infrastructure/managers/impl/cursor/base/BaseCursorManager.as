@@ -45,7 +45,10 @@ package net.wg.infrastructure.managers.impl.cursor.base
         override protected function onDispose() : void
         {
             App.utils.scheduler.cancelTask(this.nextFrameAfterPopulateHandler);
-            this._stage.removeEventListener(MouseCursorEvent.CURSOR_CHANGE,this.onChangeCursorHandler);
+            if(this._stage.hasEventListener(MouseCursorEvent.CURSOR_CHANGE))
+            {
+                this._stage.removeEventListener(MouseCursorEvent.CURSOR_CHANGE,this.onChangeCursorHandler);
+            }
             if(this._attachedSprite)
             {
                 this.detachFromCursor();

@@ -11,6 +11,7 @@ package net.wg.gui.lobby.hangar.tcarousel
     import net.wg.infrastructure.interfaces.IImage;
     import net.wg.gui.components.carousels.data.VehicleCarouselVO;
     import org.idmedia.as3commons.util.StringUtils;
+    import flash.display.BlendMode;
 
     public class BaseTankIcon extends UIComponentEx
     {
@@ -18,6 +19,8 @@ package net.wg.gui.lobby.hangar.tcarousel
         private static const LABEL_WITH_NATION_CHANGE:String = "withNationChange";
 
         private static const LABEL_WITHOUT_NATION_CHANGE:String = "withoutNationChange";
+
+        private static const LABEL_NEW_YEAR:String = "NewYear";
 
         private static const PREM_FILTER:DropShadowFilter = new DropShadowFilter(0,90,16723968,0.7,12,12,3,2);
 
@@ -28,6 +31,8 @@ package net.wg.gui.lobby.hangar.tcarousel
         private static const TXT_INFO_WARN_FILTER:DropShadowFilter = new DropShadowFilter(0,90,0,1,12,12,1.8,2);
 
         private static const INFO_IMG_OFFSET_H:int = 32;
+
+        private static const NY_BLINK_TIMER_DELAY:int = 5000;
 
         public var mcFlag:MovieClip = null;
 
@@ -62,6 +67,10 @@ package net.wg.gui.lobby.hangar.tcarousel
         public var rentalBG:MovieClip = null;
 
         public var rentalHoverBG:MovieClip = null;
+
+        public var newYearOverlay:MovieClip = null;
+
+        public var nyBlink:MovieClip = null;
 
         public var addImg:IImage = null;
 
@@ -116,6 +125,8 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.rentalHoverBG = null;
             this.addImg.dispose();
             this.addImg = null;
+            this.newYearOverlay = null;
+            this.nyBlink = null;
             super.onDispose();
         }
 
@@ -172,9 +183,29 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
         }
 
+        private function enableNyBlink(param1:VehicleCarouselVO) : void
+        {
+            if(this.nyBlink == null)
+            {
+                return;
+            }
+            var _loc2_:Boolean = param1 != null?param1.nyBlinkEnabled:false;
+            this.nyBlink.visible = _loc2_;
+            if(_loc2_)
+            {
+                this.nyBlink.blendMode = BlendMode.ADD;
+                this.nyBlink.gotoAndPlay(0);
+            }
+            else
+            {
+                this.nyBlink.gotoAndStop(0);
+            }
+        }
+
         protected function updateData(param1:VehicleCarouselVO) : void
         {
-            this.gotoAndStop(param1.isNationChangeAvailable?LABEL_WITH_NATION_CHANGE:LABEL_WITHOUT_NATION_CHANGE);
+            this.gotoAndStop(param1.hasNyBonus?LABEL_NEW_YEAR:param1.isNationChangeAvailable?LABEL_WITH_NATION_CHANGE:LABEL_WITHOUT_NATION_CHANGE);
+            this.enableNyBlink(param1);
             this.price.visible = this.actionPrice.visible = this.lockedBG.visible = this.infoImg.visible = false;
             this._showStats = param1.visibleStats;
             if(StringUtils.isNotEmpty(param1.infoText) || StringUtils.isNotEmpty(param1.smallInfoText))
@@ -187,7 +218,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             this._isBuySlot = param1.buySlot;
             this._isBuyTank = param1.buyTank || param1.restoreTank;
             this._isRentPromotion = param1.isRentPromotion;
-            if(this._isBuyTank)
+            if(this._isBuyTank || param1.nySlot)
             {
                 this.setVisibleVehicleInfo(false);
             }

@@ -40,17 +40,13 @@ package net.wg.gui.notification
 
         private static const DEFAULT_SCROLL_STEP:int = 7;
 
-        private static const LIST_Y_OFFSET:int = 210;
+        private static const LIST_Y_OFFSET:int = -40;
 
-        private static const LIST_HEIGHT_OFFSET:int = -210;
+        private static const LIST_DEFAULT_TOP_Y:int = 5;
 
-        private static const SCROLL_Y_OFFSET:int = 220;
-
-        private static const SCROLL_HEIGHT_OFFSET:int = -220;
+        private static const SCROLLBAR_Y_OFFSET:int = 10;
 
         private static const EMPTY_TF_Y_OFFSET:int = 110;
-
-        private static const TOP_SHADOW_Y_OFFSET:int = 220;
 
         private static const INV_WIDGET_VISIBILITY:String = "invWidgetVisibility";
 
@@ -82,29 +78,9 @@ package net.wg.gui.notification
 
         private var _scrollStepSize:int = 7;
 
-        private var _listBaseY:int = -1;
-
-        private var _listBaseHeight:int = -1;
-
-        private var _scrollBaseY:int = -1;
-
-        private var _scrollBaseHeight:int = -1;
-
         private var _emptyListTFbaseY:int = -1;
 
-        private var _listReplacedY:int = -1;
-
-        private var _listReplacedHeight:int = -1;
-
-        private var _scrollReplacedY:int = -1;
-
-        private var _scrollReplacedHeight:int = -1;
-
         private var _emptyListTFreplacedY:int = -1;
-
-        private var _topShadowBaseY:int = -1;
-
-        private var _topShadowReplacedY:int = -1;
 
         private var _isProgressRewardEnabled:Boolean = false;
 
@@ -122,17 +98,7 @@ package net.wg.gui.notification
             hitArea = this.background;
             this.bottomLip.mouseChildren = false;
             this.bottomLip.mouseEnabled = false;
-            this._listBaseY = this.list.y;
-            this._listBaseHeight = this.list.height;
-            this._scrollBaseY = this.scrollBar.y;
-            this._scrollBaseHeight = this.scrollBar.height;
             this._emptyListTFbaseY = this.emptyListTF.y;
-            this._topShadowBaseY = this.topShadow.y;
-            this._topShadowReplacedY = this._topShadowBaseY + TOP_SHADOW_Y_OFFSET;
-            this._listReplacedY = this._listBaseY + LIST_Y_OFFSET;
-            this._listReplacedHeight = this._listBaseHeight + LIST_HEIGHT_OFFSET;
-            this._scrollReplacedY = this._scrollBaseY + SCROLL_Y_OFFSET;
-            this._scrollReplacedHeight = this._scrollBaseHeight + SCROLL_HEIGHT_OFFSET;
             this._emptyListTFreplacedY = this._emptyListTFbaseY + EMPTY_TF_Y_OFFSET;
             this.updateScrollBarProperties();
             this.list.itemRendererClassName = Linkages.SERVICE_MESSAGE_IR_UI;
@@ -143,12 +109,14 @@ package net.wg.gui.notification
             this.list.addEventListener(ScrollEvent.UPDATE_SIZE,this.onListUpdateSizeHandler);
             this.scrollBar.addEventListener(Event.SCROLL,this.onScrollBarScrollHandler);
             App.utils.scheduler.scheduleTask(this.updateTimestamps,TIME_UPDATE_INTERVAL);
+            this.progressiveRewardWidget.addEventListener(Event.RESIZE,this.onProgressiveRewardResizeHandler);
         }
 
         override protected function onDispose() : void
         {
             App.utils.scheduler.cancelTask(this.updateTimestamps);
             this.progressiveRewardWidget.removeEventListener(ProgressiveRewardEvent.SWITCH_WIDGET_ENABLED,this.onProgressiveRewardWidgetSwitchWidgetEnabledHandler);
+            this.progressiveRewardWidget.removeEventListener(Event.RESIZE,this.onProgressiveRewardResizeHandler);
             this.list.removeEventListener(Event.SCROLL,this.onListScrollHandler);
             this.list.removeEventListener(ScrollEvent.UPDATE_SIZE,this.onListUpdateSizeHandler);
             this.list.removeEventListener(ServiceMessageEvent.MESSAGE_BUTTON_CLICKED,this.onListMessageButtonClickedHandler);
@@ -194,12 +162,8 @@ package net.wg.gui.notification
                 }
                 _loc2_ = this._isProgressRewardEnabled && _loc1_.id == NOTIFICATIONS_CONSTANTS.TAB_OFFERS && isFlashComponentRegisteredS(HANGAR_ALIASES.PROGRESSIVE_REWARD_WIDGET);
                 this.progressiveRewardWidget.visible = _loc2_;
-                this.scrollBar.y = _loc2_?this._scrollReplacedY:this._scrollBaseY;
-                this.scrollBar.height = _loc2_?this._scrollReplacedHeight:this._scrollBaseHeight;
-                this.list.y = _loc2_?this._listReplacedY:this._listBaseY;
-                this.list.height = _loc2_?this._listReplacedHeight:this._listBaseHeight;
+                this.updateListItemsLayout();
                 this.emptyListTF.y = _loc2_?this._emptyListTFreplacedY:this._emptyListTFbaseY;
-                this.topShadow.y = _loc2_?this._topShadowReplacedY:this._topShadowBaseY;
             }
         }
 
@@ -269,6 +233,20 @@ package net.wg.gui.notification
             }
         }
 
+        private function updateListItemsLayout() : void
+        {
+            var _loc1_:* = 0;
+            var _loc2_:* = 0;
+            _loc1_ = this.progressiveRewardWidget.visible?this.progressiveRewardWidget.actualHeight:LIST_DEFAULT_TOP_Y;
+            _loc2_ = this.progressiveRewardWidget.y + _loc1_;
+            this.list.y = _loc2_;
+            this.list.height = this.background.height - _loc1_ + LIST_Y_OFFSET;
+            this.widgetSeparator.y = this.list.y + this.list.actualHeight;
+            this.scrollBar.y = _loc2_ + SCROLLBAR_Y_OFFSET;
+            this.scrollBar.height = this.list.height - (SCROLLBAR_Y_OFFSET << 1);
+            this.topShadow.y = _loc2_;
+        }
+
         private function setTabIndex(param1:int) : void
         {
             this.setCurrentBarIdx(param1);
@@ -330,6 +308,12 @@ package net.wg.gui.notification
         override public function get height() : Number
         {
             return this.background.height;
+        }
+
+        private function onProgressiveRewardResizeHandler(param1:Event) : void
+        {
+            param1.stopPropagation();
+            this.updateListItemsLayout();
         }
 
         private function onProgressiveRewardWidgetSwitchWidgetEnabledHandler(param1:ProgressiveRewardEvent) : void

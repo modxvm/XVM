@@ -1,12 +1,15 @@
 package net.wg.gui.lobby.progressiveReward.data
 {
     import net.wg.data.daapi.base.DAAPIDataClass;
+    import net.wg.gui.lobby.hangar.seniorityAwards.SeniorityAwardsEntryPointVO;
     import net.wg.data.constants.Errors;
 
     public class ProgressiveRewardVO extends DAAPIDataClass
     {
 
         private static const FIELD_STEPS:String = "steps";
+
+        private static const SENIORITY_AWARDS:String = "seniorityAwards";
 
         public var stepIdx:uint = 0;
 
@@ -22,7 +25,11 @@ package net.wg.gui.lobby.progressiveReward.data
 
         public var showBg:Boolean;
 
+        public var showLinkBtn:Boolean;
+
         public var isEnabled:Boolean;
+
+        public var seniorityAwards:SeniorityAwardsEntryPointVO = null;
 
         private var _steps:Vector.<ProgressiveRewardStepVO> = null;
 
@@ -44,6 +51,11 @@ package net.wg.gui.lobby.progressiveReward.data
                 this._steps.splice(0,this._steps.length);
                 this._steps = null;
             }
+            if(this.seniorityAwards)
+            {
+                this.seniorityAwards.dispose();
+                this.seniorityAwards = null;
+            }
             super.onDispose();
         }
 
@@ -57,6 +69,19 @@ package net.wg.gui.lobby.progressiveReward.data
                     return false;
                 }
                 throw new Error(FIELD_STEPS + Errors.INVALID_TYPE);
+            }
+            if(param1 == SENIORITY_AWARDS)
+            {
+                if(param2 != null)
+                {
+                    this.seniorityAwards = new SeniorityAwardsEntryPointVO(param2);
+                }
+                else if(this.seniorityAwards)
+                {
+                    this.seniorityAwards.dispose();
+                    this.seniorityAwards = null;
+                }
+                return false;
             }
             return super.onDataWrite(param1,param2);
         }

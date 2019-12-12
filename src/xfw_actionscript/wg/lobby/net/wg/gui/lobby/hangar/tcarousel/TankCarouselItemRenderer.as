@@ -2,6 +2,7 @@ package net.wg.gui.lobby.hangar.tcarousel
 {
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.components.controls.scroller.IScrollerItemRenderer;
+    import flash.display.MovieClip;
     import net.wg.gui.components.carousels.data.VehicleCarouselVO;
     import net.wg.infrastructure.managers.ITooltipMgr;
     import flash.display.Sprite;
@@ -26,6 +27,14 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         public var content:BaseTankIcon = null;
 
+        public var bg:MovieClip = null;
+
+        public var select:MovieClip = null;
+
+        public var border:MovieClip = null;
+
+        public var nySelect:MovieClip = null;
+
         private var _index:uint = 0;
 
         private var _dataVO:VehicleCarouselVO = null;
@@ -41,6 +50,8 @@ package net.wg.gui.lobby.hangar.tcarousel
         private var _isInteractive:Boolean = false;
 
         private var _rankedBonus:Sprite = null;
+
+        private var _nyBonus:NYVehicleBonus = null;
 
         public function TankCarouselItemRenderer()
         {
@@ -63,10 +74,15 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.removeListeners();
             this.content.dispose();
             this.content = null;
+            this.bg = null;
+            this.select = null;
+            this.border = null;
+            this.nySelect = null;
             this._dataVO = null;
             _owner = null;
             this._toolTipMgr = null;
             this.clearRankedBonus();
+            this.clearNyBonus();
             super.onDispose();
         }
 
@@ -83,7 +99,7 @@ package net.wg.gui.lobby.hangar.tcarousel
                 alpha = this._dataVO.alpha;
                 isUseRightBtn = this._dataVO.isUseRightBtn;
                 this._isClickEnabled = this._dataVO.clickEnabled;
-                this._isSpecialSlot = this._dataVO.buySlot || this._dataVO.buyTank || this._dataVO.isRentPromotion;
+                this._isSpecialSlot = this._dataVO.buySlot || this._dataVO.buyTank || this._dataVO.isRentPromotion || this._dataVO.nySlot;
                 mouseEnabledOnDisabled = true;
             }
             else
@@ -95,8 +111,46 @@ package net.wg.gui.lobby.hangar.tcarousel
                 mouseEnabledOnDisabled = false;
             }
             this.updateRankedBonus(_loc1_?this._dataVO.hasRankedBonus:false);
+            this.updateNyBonus(_loc1_?this._dataVO.hasNyBonus:false);
             this.updateInteractiveState();
             this.content.setData(this._dataVO);
+            this.select.visible = _loc1_?!this._dataVO.hasNyBonus:false;
+            this.nySelect.visible = _loc1_?this._dataVO.hasNyBonus || this._dataVO.nySlot:false;
+            this.border.visible = !this.nySelect.visible;
+        }
+
+        private function updateNyBonus(param1:Boolean) : void
+        {
+            if(param1)
+            {
+                if(!this._nyBonus)
+                {
+                    this._nyBonus = App.utils.classFactory.getComponent("NYVehicleBonusUI",NYVehicleBonus);
+                    this._nyBonus.x = width - this._nyBonus.width >> 1;
+                    this._nyBonus.y = -(this._nyBonus.height >> 1);
+                    this._nyBonus.updateBonus(this._dataVO.nyBonusValue,this._dataVO.nyBonusIcon);
+                    addChildAt(this._nyBonus,getChildIndex(hitMc));
+                }
+                else
+                {
+                    this._nyBonus.updateBonus(this._dataVO.nyBonusValue,this._dataVO.nyBonusIcon);
+                }
+                this._nyBonus.visible = true;
+            }
+            else
+            {
+                this.clearNyBonus();
+            }
+        }
+
+        private function clearNyBonus() : void
+        {
+            if(this._nyBonus != null)
+            {
+                removeChild(this._nyBonus);
+                this._nyBonus.dispose();
+                this._nyBonus = null;
+            }
         }
 
         private function clearRankedBonus() : void
@@ -237,6 +291,10 @@ package net.wg.gui.lobby.hangar.tcarousel
                         {
                             _loc4_ = TankItemEvent.SELECT_RESTORE_TANK;
                         }
+                        else if(this._dataVO.nySlot)
+                        {
+                            _loc4_ = TankItemEvent.SELECT_NEW_YEAR_SLOT;
+                        }
                         else if(this._dataVO.clickEnabled)
                         {
                             _loc4_ = TankItemEvent.SELECT_ITEM;
@@ -245,7 +303,7 @@ package net.wg.gui.lobby.hangar.tcarousel
                         dispatchEvent(new TankItemEvent(_loc4_,this._index));
                     }
                 }
-                else if(_loc3_ == MouseEventEx.RIGHT_BUTTON && isUseRightBtn && !this._dataVO.buySlot && !this._dataVO.buyTank && !this._dataVO.restoreTank && !this._dataVO.isRentPromotion)
+                else if(_loc3_ == MouseEventEx.RIGHT_BUTTON && isUseRightBtn && !this._dataVO.buySlot && !this._dataVO.buyTank && !this._dataVO.restoreTank && !this._dataVO.isRentPromotion && !this._dataVO.nySlot)
                 {
                     App.contextMenuMgr.show(CONTEXT_MENU_HANDLER_TYPE.VEHICLE,this,{"inventoryId":this._dataVO.id});
                 }
@@ -266,7 +324,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             {
                 return;
             }
-            if(this._dataVO.buyTank || this._dataVO.restoreTank)
+            if(this._dataVO.buyTank || this._dataVO.restoreTank || this._dataVO.nySlot)
             {
                 this._toolTipMgr.showComplex(this._dataVO.tooltip);
             }

@@ -82,6 +82,7 @@ package net.wg.gui.lobby.vehiclePreview20
             super();
             this._additionalInfoPanel = this.fadingPanels.additionalInfoPanel;
             this._tweens = new Vector.<Tween>(0);
+            this.rightBackground.visible = false;
         }
 
         override public function updateStage(param1:Number, param2:Number) : void

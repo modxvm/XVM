@@ -11,6 +11,10 @@ package net.wg.gui.data
 
         public var counter:String = "";
 
+        public var highlight:String = "";
+
+        public var overlay:String = "";
+
         public var scaleImg:Number = 1;
 
         public function AwardItemVO(param1:Object = null)

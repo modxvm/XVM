@@ -17,8 +17,8 @@ package net.wg.gui.lobby.vehicleCustomization.controls
     import scaleform.clik.motion.Tween;
     import flash.events.Event;
     import flash.events.MouseEvent;
-    import scaleform.gfx.TextFieldEx;
     import flash.text.TextFieldAutoSize;
+    import scaleform.gfx.TextFieldEx;
     import net.wg.gui.components.controls.VO.PriceVO;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.data.constants.generated.CURRENCIES_CONSTANTS;
@@ -98,9 +98,13 @@ package net.wg.gui.lobby.vehicleCustomization.controls
 
         private static const STYLE_NAME_TF_V_OFFSET:int = -10;
 
-        private static const RENTAL_ICON_OFFSET:int = 8;
+        private static const RENTAL_TF_PADDING_RIGHT:int = 8;
 
-        private static const RENTAL_ICON_MAX_HEIGHT:int = 38;
+        private static const RENTAL_ICON_OFFSET_X:int = 10;
+
+        private static const RENTAL_ICON_OFFSET_Y:int = 8;
+
+        private static const RENTAL_ICON_SIZE:int = 38;
 
         private static const RESET_COUNTER_DELAY:int = 300;
 
@@ -235,6 +239,7 @@ package net.wg.gui.lobby.vehicleCustomization.controls
             this.rentalIcon.mouseEnabled = false;
             this.rentalTF.mouseEnabled = false;
             this.rentalTF.visible = this.rentalIcon.visible = false;
+            this.rentalTF.autoSize = TextFieldAutoSize.LEFT;
             this.alertIcon.visible = false;
             this.alertIcon.source = RES_ICONS.MAPS_ICONS_LIBRARY_ALERTICON;
             this.limitedTextIcon.mouseChildren = this.limitedTextIcon.mouseEnabled = false;
@@ -355,6 +360,7 @@ package net.wg.gui.lobby.vehicleCustomization.controls
             var _loc5_:* = 0;
             var _loc6_:* = 0;
             var _loc7_:* = 0;
+            var _loc8_:* = 0;
             var _loc1_:Boolean = this._data != null && this._data.intCD;
             this._isMinResolution = this.isResponsive && App.appHeight < MIN_HEIGHT_RESOLUTION;
             if(this.considerWidth && !this._isMinResolution)
@@ -517,8 +523,11 @@ package net.wg.gui.lobby.vehicleCustomization.controls
                     this.rentalTF.visible = this.rentalIcon.visible = true;
                     this.storageIcon.visible = this.storageTF.visible = false;
                     this.rentalTF.text = this._data.quantity.toString();
+                    _loc8_ = this._customWidth - this.rentalTF.textWidth - RENTAL_TF_PADDING_RIGHT;
+                    this.rentalTF.x = _loc8_;
                     this.rentalTF.y = this._customHeight - this.rentalTF.height ^ 0;
-                    this.rentalIcon.y = this._customHeight - RENTAL_ICON_MAX_HEIGHT + RENTAL_ICON_OFFSET;
+                    this.rentalIcon.x = _loc8_ - RENTAL_ICON_SIZE + RENTAL_ICON_OFFSET_X;
+                    this.rentalIcon.y = this._customHeight - RENTAL_ICON_SIZE + RENTAL_ICON_OFFSET_Y;
                     this.rentalIcon.source = this._data.autoRentEnabled?RES_ICONS.MAPS_ICONS_CUSTOMIZATION_ICON_RENT:RES_ICONS.MAPS_ICONS_LIBRARY_CLOCKICON_1;
                 }
                 else

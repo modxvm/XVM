@@ -54,6 +54,8 @@ package net.wg.gui.components.controls
 
         private var _selectionNavigator:AbstractListSelectionNavigator = null;
 
+        private var _enableKeyboardInput:Boolean = true;
+
         public function ScrollingListEx()
         {
             super();
@@ -678,6 +680,16 @@ package net.wg.gui.components.controls
             this._widthAutoResize = param1;
         }
 
+        public function get enableKeyboardInput() : Boolean
+        {
+            return this._enableKeyboardInput;
+        }
+
+        public function set enableKeyboardInput(param1:Boolean) : void
+        {
+            this._enableKeyboardInput = param1;
+        }
+
         override public function handleInput(param1:InputEvent) : void
         {
             if(param1.handled)
@@ -692,6 +704,10 @@ package net.wg.gui.components.controls
                 {
                     return;
                 }
+            }
+            if(!this._enableKeyboardInput)
+            {
+                return;
             }
             var _loc3_:InputDetails = param1.details;
             var _loc4_:Boolean = _loc3_.value == InputValue.KEY_DOWN || _loc3_.value == InputValue.KEY_HOLD;

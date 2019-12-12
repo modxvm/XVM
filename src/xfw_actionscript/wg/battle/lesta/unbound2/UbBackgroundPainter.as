@@ -107,37 +107,46 @@ package lesta.unbound2
 
         public function setImage(param1:String) : void
         {
-            var _loc2_:Array = param1.split(":");
-            if(_loc2_.length != 2)
-            {
-                throw new Error("[UbBackgroundPainter] Invalid background image format (expected source:name): " + param1);
-            }
-            var _loc3_:String = _loc2_[0];
+            var _loc2_:Array = null;
+            var _loc3_:String = null;
             this.m_image = null;
             this.m_imageSource = IMAGE_SOURCE_INVALID;
-            if(_loc3_ == "url")
+            if(param1 == "null")
             {
-                this.m_imageSource = IMAGE_SOURCE_URL;
-                this.m_image = _loc2_[1];
-            }
-            else if(_loc3_ == "bitmap")
-            {
-                this.m_imageSource = IMAGE_SOURCE_BITMAP;
-                this.m_image = _loc2_[1];
-            }
-            else if(_loc3_ == "symbol")
-            {
-                this.m_imageSource = IMAGE_SOURCE_SYMBOL;
-                this.m_image = _loc2_[1];
-            }
-            else if(_loc3_ == "img")
-            {
-                this.m_imageSource = IMAGE_SOURCE_URL;
-                this.m_image = param1;
+                this.clearSprite();
             }
             else
             {
-                throw new Error("[UbBackgroundPainter] Invalid source identifier (expected url|bitmap|symbol|img): " + param1);
+                _loc2_ = param1.split(":");
+                if(_loc2_.length != 2)
+                {
+                    throw new Error("[UbBackgroundPainter] Invalid background image format (expected source:name): " + param1);
+                }
+                _loc3_ = _loc2_[0];
+                if(_loc3_ == "url")
+                {
+                    this.m_imageSource = IMAGE_SOURCE_URL;
+                    this.m_image = _loc2_[1];
+                }
+                else if(_loc3_ == "bitmap")
+                {
+                    this.m_imageSource = IMAGE_SOURCE_BITMAP;
+                    this.m_image = _loc2_[1];
+                }
+                else if(_loc3_ == "symbol")
+                {
+                    this.m_imageSource = IMAGE_SOURCE_SYMBOL;
+                    this.m_image = _loc2_[1];
+                }
+                else if(_loc3_ == "img")
+                {
+                    this.m_imageSource = IMAGE_SOURCE_URL;
+                    this.m_image = param1;
+                }
+                else
+                {
+                    throw new Error("[UbBackgroundPainter] Invalid source identifier (expected url|bitmap|symbol|img): " + param1);
+                }
             }
         }
 
@@ -180,6 +189,7 @@ package lesta.unbound2
             var _loc3_:String = null;
             if(this.m_imageSource == IMAGE_SOURCE_BITMAP)
             {
+                this.clearSprite();
                 _loc1_ = this.getClass(this.m_image);
                 if(_loc1_ != null)
                 {
@@ -189,6 +199,7 @@ package lesta.unbound2
             }
             else if(this.m_imageSource == IMAGE_SOURCE_URL)
             {
+                this.clearSprite();
                 _loc3_ = this.m_prevBitmapName;
                 this.m_prevBitmapName = this.m_image;
                 this.bitmapManager.unloadBitmap(_loc3_,this.onLoader);

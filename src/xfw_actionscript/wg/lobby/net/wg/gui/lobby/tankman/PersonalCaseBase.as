@@ -100,7 +100,7 @@ package net.wg.gui.lobby.tankman
         override protected function setSkillsData(param1:Array) : void
         {
             var _loc2_:uint = 0;
-            var _loc3_:PersonalCaseSkillsModel = null;
+            var _loc3_:PersonalCaseSkillModel = null;
             var _loc4_:Object = null;
             var _loc5_:String = null;
             var _loc6_:* = 0;
@@ -110,7 +110,7 @@ package net.wg.gui.lobby.tankman
             {
                 if(!(!_loc4_.hasOwnProperty("skills") || !_loc4_.skills is Array || _loc4_.skills.length <= 0))
                 {
-                    _loc3_ = new PersonalCaseSkillsModel();
+                    _loc3_ = new PersonalCaseSkillModel();
                     _loc5_ = _loc4_.id;
                     _loc3_.rankId = _loc5_;
                     _loc3_.title = _loc5_;
@@ -121,7 +121,7 @@ package net.wg.gui.lobby.tankman
                     _loc6_ = 0;
                     while(_loc6_ < _loc2_)
                     {
-                        _loc3_ = new PersonalCaseSkillsModel();
+                        _loc3_ = new PersonalCaseSkillModel();
                         _loc7_ = _loc4_.skills[_loc6_];
                         _loc3_.title = _loc7_.id;
                         _loc3_.isHeader = false;
@@ -138,7 +138,7 @@ package net.wg.gui.lobby.tankman
                 }
             }
             this.updateSkillsRelatedElements();
-            this.runtimeUpdateByModel(PersonalCaseSkills,this.skillsModel);
+            this.runtimeUpdateByModel(PersonalCaseSkills,new PersonalCaseSkillsModel(this.skillsModel,this.data.isBootcamp));
         }
 
         override protected function setDocumentsData(param1:PersonalCaseDocsModel) : void

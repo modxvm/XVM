@@ -10,6 +10,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public var onWidgetClick:Function;
 
+        public var onOpenBtnClick:Function;
+
         private var _progressiveRewardVO:ProgressiveRewardVO;
 
         public function ProgressiveRewardWidgetMeta()
@@ -31,6 +33,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.onWidgetClick,"onWidgetClick" + Errors.CANT_NULL);
             this.onWidgetClick();
+        }
+
+        public function onOpenBtnClickS() : void
+        {
+            App.utils.asserter.assertNotNull(this.onOpenBtnClick,"onOpenBtnClick" + Errors.CANT_NULL);
+            this.onOpenBtnClick();
         }
 
         public final function as_setData(param1:Object) : void

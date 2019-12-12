@@ -40,6 +40,8 @@ package net.wg.gui.components.carousels.data
 
         public var buySlot:Boolean = false;
 
+        public var nySlot:Boolean = false;
+
         public var lockBackground:Boolean = false;
 
         public var hasSale:Boolean = false;
@@ -51,6 +53,14 @@ package net.wg.gui.components.carousels.data
         public var isRentPromotion:Boolean = false;
 
         public var hasRankedBonus:Boolean = false;
+
+        public var hasNyBonus:Boolean = false;
+
+        public var nyBonusValue:String = "";
+
+        public var nyBonusIcon:String = "";
+
+        public var nyBlinkEnabled:Boolean = false;
 
         public var label:String = "";
 
@@ -84,9 +94,9 @@ package net.wg.gui.components.carousels.data
 
         public var lockedTooltip:String = "";
 
-        private var _slotPriceActionData:ActionPriceVO = null;
-
         public var isNationChangeAvailable:Boolean = false;
+
+        private var _slotPriceActionData:ActionPriceVO = null;
 
         public function VehicleCarouselVO(param1:Object)
         {

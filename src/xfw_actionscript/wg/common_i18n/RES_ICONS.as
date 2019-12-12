@@ -31,6 +31,8 @@ package
 
         public static const MAPS_ICONS_BATTLELOADING_GROUPS_INTERFACE:String = "../maps/icons/battleLoading/groups/interface.png";
 
+        public static const MAPS_ICONS_BATTLELOADING_GROUPS_NEWYEAR:String = "../maps/icons/battleLoading/groups/newYear.png";
+
         public static const MAPS_ICONS_BATTLELOADING_GROUPS_RULES:String = "../maps/icons/battleLoading/groups/rules.png";
 
         public static const MAPS_ICONS_BATTLELOADING_GROUPS_SECURITY:String = "../maps/icons/battleLoading/groups/security.png";
@@ -1161,6 +1163,8 @@ package
 
         public static const MAPS_ICONS_CREWBOOKS_BOOKS_BIG_PERSONALBOOK:String = "../maps/icons/crewBooks/books/big/personalBook.png";
 
+        public static const MAPS_ICONS_CREWBOOKS_BOOKS_BIG_UNIVERSALBOOK:String = "../maps/icons/crewBooks/books/big/universalBook.png";
+
         public static const MAPS_ICONS_CREWBOOKS_BOOKS_LARGE_BROCHURE_CHINA:String = "../maps/icons/crewBooks/books/large/brochure_china.png";
 
         public static const MAPS_ICONS_CREWBOOKS_BOOKS_LARGE_BROCHURE_CZECH:String = "../maps/icons/crewBooks/books/large/brochure_czech.png";
@@ -1229,6 +1233,8 @@ package
 
         public static const MAPS_ICONS_CREWBOOKS_BOOKS_LARGE_PERSONALBOOK:String = "../maps/icons/crewBooks/books/large/personalBook.png";
 
+        public static const MAPS_ICONS_CREWBOOKS_BOOKS_LARGE_UNIVERSALBOOK:String = "../maps/icons/crewBooks/books/large/universalBook.png";
+
         public static const MAPS_ICONS_CREWBOOKS_BOOKS_SMALL_BROCHURE_CHINA:String = "../maps/icons/crewBooks/books/small/brochure_china.png";
 
         public static const MAPS_ICONS_CREWBOOKS_BOOKS_SMALL_BROCHURE_CZECH:String = "../maps/icons/crewBooks/books/small/brochure_czech.png";
@@ -1296,6 +1302,8 @@ package
         public static const MAPS_ICONS_CREWBOOKS_BOOKS_SMALL_GUIDE_USSR:String = "../maps/icons/crewBooks/books/small/guide_ussr.png";
 
         public static const MAPS_ICONS_CREWBOOKS_BOOKS_SMALL_PERSONALBOOK:String = "../maps/icons/crewBooks/books/small/personalBook.png";
+
+        public static const MAPS_ICONS_CREWBOOKS_BOOKS_SMALL_UNIVERSALBOOK:String = "../maps/icons/crewBooks/books/small/universalBook.png";
 
         public static const MAPS_ICONS_CREWBOOKS_FLAGS_CHINA:String = "../maps/icons/crewBooks/flags/china.png";
 
@@ -1570,6 +1578,26 @@ package
         public static const MAPS_ICONS_CUSTOMIZATION_ITEMS_POPOVER_WINTER_BACK_LIST:String = "../maps/icons/customization/items_popover/winter_back_list.png";
 
         public static const MAPS_ICONS_CUSTOMIZATION_ITEMS_POPOVER_WINTER_LIST30X16:String = "../maps/icons/customization/items_popover/winter_list30x16.png";
+
+        public static const MAPS_ICONS_CUSTOMIZATION_LOOTBOXES_STYLES_A67_T57_58:String = "../maps/icons/customization/lootboxes_styles/A67_T57_58.png";
+
+        public static const MAPS_ICONS_CUSTOMIZATION_LOOTBOXES_STYLES_A83_T110E4:String = "../maps/icons/customization/lootboxes_styles/A83_T110E4.png";
+
+        public static const MAPS_ICONS_CUSTOMIZATION_LOOTBOXES_STYLES_F18_BAT_CHATILLON25T:String = "../maps/icons/customization/lootboxes_styles/F18_Bat_Chatillon25t.png";
+
+        public static const MAPS_ICONS_CUSTOMIZATION_LOOTBOXES_STYLES_F88_AMX_13_105:String = "../maps/icons/customization/lootboxes_styles/F88_AMX_13_105.png";
+
+        public static const MAPS_ICONS_CUSTOMIZATION_LOOTBOXES_STYLES_G121_GRILLE_15_L63:String = "../maps/icons/customization/lootboxes_styles/G121_Grille_15_L63.png";
+
+        public static const MAPS_ICONS_CUSTOMIZATION_LOOTBOXES_STYLES_G56_E_100:String = "../maps/icons/customization/lootboxes_styles/G56_E-100.png";
+
+        public static const MAPS_ICONS_CUSTOMIZATION_LOOTBOXES_STYLES_G72_JAGDPZ_E100:String = "../maps/icons/customization/lootboxes_styles/G72_JagdPz_E100.png";
+
+        public static const MAPS_ICONS_CUSTOMIZATION_LOOTBOXES_STYLES_R148_OBJECT_430_U:String = "../maps/icons/customization/lootboxes_styles/R148_Object_430_U.png";
+
+        public static const MAPS_ICONS_CUSTOMIZATION_LOOTBOXES_STYLES_R45_IS_7:String = "../maps/icons/customization/lootboxes_styles/R45_IS-7.png";
+
+        public static const MAPS_ICONS_CUSTOMIZATION_LOOTBOXES_STYLES_R97_OBJECT_140:String = "../maps/icons/customization/lootboxes_styles/R97_Object_140.png";
 
         public static const MAPS_ICONS_CUSTOMIZATION_PROPERTY_SHEET_DISABLE_ICON_EDIT_DISABLE:String = "../maps/icons/customization/property_sheet/disable/icon_edit_disable.png";
 
@@ -2053,6 +2081,8 @@ package
 
         public static const MAPS_ICONS_LIBRARY_BOOKMARKICON:String = "../maps/icons/library/bookmarkIcon.png";
 
+        public static const MAPS_ICONS_LIBRARY_BROWSER_LINK:String = "../maps/icons/library/browser_link.png";
+
         public static const MAPS_ICONS_LIBRARY_BUTTON_LINK:String = "../maps/icons/library/button_link.png";
 
         public static const MAPS_ICONS_LIBRARY_BUTTON_TRADEIN:String = "../maps/icons/library/button_tradein.png";
@@ -2320,6 +2350,8 @@ package
         public static const MAPS_ICONS_LIBRARY_MULTYXP:String = "../maps/icons/library/multyXp.png";
 
         public static const MAPS_ICONS_LIBRARY_NEW:String = "../maps/icons/library/new.png";
+
+        public static const MAPS_ICONS_LIBRARY_NEWYEAR_SMALL:String = "../maps/icons/library/newYear_small.png";
 
         public static const MAPS_ICONS_LIBRARY_NORMALXPICON:String = "../maps/icons/library/NormalXpIcon.png";
 
@@ -2661,6 +2693,8 @@ package
 
         public static const MAPS_ICONS_LIBRARY_BADGES_220X220_BADGE_85:String = "../maps/icons/library/badges/220x220/badge_85.png";
 
+        public static const MAPS_ICONS_LIBRARY_BADGES_220X220_BADGE_86:String = "../maps/icons/library/badges/220x220/badge_86.png";
+
         public static const MAPS_ICONS_LIBRARY_BADGES_24X24_BADGE_1:String = "../maps/icons/library/badges/24x24/badge_1.png";
 
         public static const MAPS_ICONS_LIBRARY_BADGES_24X24_BADGE_10:String = "../maps/icons/library/badges/24x24/badge_10.png";
@@ -2822,6 +2856,8 @@ package
         public static const MAPS_ICONS_LIBRARY_BADGES_24X24_BADGE_84:String = "../maps/icons/library/badges/24x24/badge_84.png";
 
         public static const MAPS_ICONS_LIBRARY_BADGES_24X24_BADGE_85:String = "../maps/icons/library/badges/24x24/badge_85.png";
+
+        public static const MAPS_ICONS_LIBRARY_BADGES_24X24_BADGE_86:String = "../maps/icons/library/badges/24x24/badge_86.png";
 
         public static const MAPS_ICONS_LIBRARY_BADGES_24X24_BADGE_9:String = "../maps/icons/library/badges/24x24/badge_9.png";
 
@@ -2986,6 +3022,8 @@ package
         public static const MAPS_ICONS_LIBRARY_BADGES_48X48_BADGE_84:String = "../maps/icons/library/badges/48x48/badge_84.png";
 
         public static const MAPS_ICONS_LIBRARY_BADGES_48X48_BADGE_85:String = "../maps/icons/library/badges/48x48/badge_85.png";
+
+        public static const MAPS_ICONS_LIBRARY_BADGES_48X48_BADGE_86:String = "../maps/icons/library/badges/48x48/badge_86.png";
 
         public static const MAPS_ICONS_LIBRARY_BADGES_48X48_BADGE_9:String = "../maps/icons/library/badges/48x48/badge_9.png";
 
@@ -3154,6 +3192,8 @@ package
         public static const MAPS_ICONS_LIBRARY_BADGES_80X80_BADGE_84:String = "../maps/icons/library/badges/80x80/badge_84.png";
 
         public static const MAPS_ICONS_LIBRARY_BADGES_80X80_BADGE_85:String = "../maps/icons/library/badges/80x80/badge_85.png";
+
+        public static const MAPS_ICONS_LIBRARY_BADGES_80X80_BADGE_86:String = "../maps/icons/library/badges/80x80/badge_86.png";
 
         public static const MAPS_ICONS_LIBRARY_BADGES_80X80_BADGE_9:String = "../maps/icons/library/badges/80x80/badge_9.png";
 
@@ -3655,6 +3695,8 @@ package
 
         public static const MAPS_ICONS_LIBRARY_HANGARFLAG_FLAG_KURSK:String = "../maps/icons/library/hangarFlag/flag_kursk.png";
 
+        public static const MAPS_ICONS_LIBRARY_HANGARFLAG_FLAG_NY:String = "../maps/icons/library/hangarFlag/flag_ny.png";
+
         public static const MAPS_ICONS_LIBRARY_HANGARFLAG_FLAG_RED:String = "../maps/icons/library/hangarFlag/flag_red.png";
 
         public static const MAPS_ICONS_LIBRARY_HANGARFLAG_FLAG_VINOUS:String = "../maps/icons/library/hangarFlag/flag_vinous.png";
@@ -3674,6 +3716,10 @@ package
         public static const MAPS_ICONS_LIBRARY_MARATHON_TIME_ICON:String = "../maps/icons/library/marathon/time_icon.png";
 
         public static const MAPS_ICONS_LIBRARY_OUTLINE_BEGINNER:String = "../maps/icons/library/outline/beginner.png";
+
+        public static const MAPS_ICONS_LIBRARY_OUTLINE_NY_QUESTS_AVAILABLE:String = "../maps/icons/library/outline/ny_quests_available.png";
+
+        public static const MAPS_ICONS_LIBRARY_OUTLINE_NY_QUESTS_DISABLED:String = "../maps/icons/library/outline/ny_quests_disabled.png";
 
         public static const MAPS_ICONS_LIBRARY_OUTLINE_PLUS:String = "../maps/icons/library/outline/plus.png";
 
@@ -3822,6 +3868,140 @@ package
         public static const MAPS_ICONS_LOBBY_REPORT_BUG_BACKGROUND:String = "../maps/icons/lobby/report-bug-background.png";
 
         public static const MAPS_ICONS_LOBBY_SETTINGS_BLURED_BG:String = "../maps/icons/lobby/settings_blured_bg.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_ADVANCEDSHINE:String = "../maps/icons/lootboxes/advancedShine.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_ARROW:String = "../maps/icons/lootboxes/arrow.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_CAROUSELBG:String = "../maps/icons/lootboxes/carouselBg.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_CHANGEARROW:String = "../maps/icons/lootboxes/changeArrow.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_CHANGETANK:String = "../maps/icons/lootboxes/changeTank.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_CHANGETANK16:String = "../maps/icons/lootboxes/changeTank16.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_DEVIDER:String = "../maps/icons/lootboxes/devider.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_ENTRY_VIEW_BACK_LEFT:String = "../maps/icons/lootboxes/entry_view_back_left.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_ENTRY_VIEW_BACK_RIGHT:String = "../maps/icons/lootboxes/entry_view_back_right.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_ENTRY_VIEW_BUY_BOX:String = "../maps/icons/lootboxes/entry_view_buy_box.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_FOCUS:String = "../maps/icons/lootboxes/focus.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_FRAGMENTS:String = "../maps/icons/lootboxes/fragments.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_ICONVIDEOOFF:String = "../maps/icons/lootboxes/iconVideoOff.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_ICONVIDEOON:String = "../maps/icons/lootboxes/iconVideoOn.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_LOOTBOXENTRYTOOLTIP:String = "../maps/icons/lootboxes/lootBoxEntryTooltip.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_LOOTBOXICON:String = "../maps/icons/lootboxes/lootboxIcon.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_LOOTBOXICONEMPTY:String = "../maps/icons/lootboxes/lootboxIconEmpty.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_LOOTBOXICONEMPTY_HOVER:String = "../maps/icons/lootboxes/lootboxIconEmpty_hover.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_LOOTBOXSHINE:String = "../maps/icons/lootboxes/lootboxShine.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_LOOTBOXSMOKE:String = "../maps/icons/lootboxes/lootboxSmoke.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_MULTIOPENRENDERERBG:String = "../maps/icons/lootboxes/multiOpenRendererBg.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_MULTIOPENRENDERERPOSBG:String = "../maps/icons/lootboxes/multiOpenRendererPosBg.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_MULTIPLIER:String = "../maps/icons/lootboxes/multiplier.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_OPEN_SEVERAL:String = "../maps/icons/lootboxes/open_several.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_PAUSE:String = "../maps/icons/lootboxes/pause.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_PLAY:String = "../maps/icons/lootboxes/play.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_POPOVERDOWN:String = "../maps/icons/lootboxes/popoverDown.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_POPOVERUP:String = "../maps/icons/lootboxes/popoverUp.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_RIBBON:String = "../maps/icons/lootboxes/ribbon.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_VIGNETTE:String = "../maps/icons/lootboxes/vignette.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_CATEGORY_BIG_NEWYEAR_PREMIUM_CHRISTMAS:String = "../maps/icons/lootboxes/category/big/newYear_premium/Christmas.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_CATEGORY_BIG_NEWYEAR_PREMIUM_FAIRYTALE:String = "../maps/icons/lootboxes/category/big/newYear_premium/Fairytale.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_CATEGORY_BIG_NEWYEAR_PREMIUM_NEWYEAR:String = "../maps/icons/lootboxes/category/big/newYear_premium/NewYear.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_CATEGORY_BIG_NEWYEAR_PREMIUM_ORIENTAL:String = "../maps/icons/lootboxes/category/big/newYear_premium/Oriental.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_CATEGORY_MEDIUM_NEWYEAR_PREMIUM_CHRISTMAS:String = "../maps/icons/lootboxes/category/medium/newYear_premium/Christmas.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_CATEGORY_MEDIUM_NEWYEAR_PREMIUM_FAIRYTALE:String = "../maps/icons/lootboxes/category/medium/newYear_premium/Fairytale.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_CATEGORY_MEDIUM_NEWYEAR_PREMIUM_NEWYEAR:String = "../maps/icons/lootboxes/category/medium/newYear_premium/NewYear.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_CATEGORY_MEDIUM_NEWYEAR_PREMIUM_ORIENTAL:String = "../maps/icons/lootboxes/category/medium/newYear_premium/Oriental.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_CATEGORY_NORMAL_NEWYEAR_PREMIUM_CHRISTMAS:String = "../maps/icons/lootboxes/category/normal/newYear_premium/Christmas.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_CATEGORY_NORMAL_NEWYEAR_PREMIUM_FAIRYTALE:String = "../maps/icons/lootboxes/category/normal/newYear_premium/Fairytale.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_CATEGORY_NORMAL_NEWYEAR_PREMIUM_NEWYEAR:String = "../maps/icons/lootboxes/category/normal/newYear_premium/NewYear.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_CATEGORY_NORMAL_NEWYEAR_PREMIUM_ORIENTAL:String = "../maps/icons/lootboxes/category/normal/newYear_premium/Oriental.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_SIDEBAR_ACTIVE:String = "../maps/icons/lootboxes/sidebar/active.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_SIDEBAR_DEFAULT:String = "../maps/icons/lootboxes/sidebar/default.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_SIDEBAR_GLOW:String = "../maps/icons/lootboxes/sidebar/glow.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_TOPBAR_BACK_LIGHT:String = "../maps/icons/lootboxes/topbar/back_light.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_TOPBAR_BACK_SHADOW:String = "../maps/icons/lootboxes/topbar/back_shadow.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_TOPBAR_TYPES_ACTIVE_CHRISTMAS:String = "../maps/icons/lootboxes/topbar/types/active/Christmas.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_TOPBAR_TYPES_ACTIVE_FAIRYTALE:String = "../maps/icons/lootboxes/topbar/types/active/Fairytale.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_TOPBAR_TYPES_ACTIVE_NEWYEAR:String = "../maps/icons/lootboxes/topbar/types/active/NewYear.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_TOPBAR_TYPES_ACTIVE_ORIENTAL:String = "../maps/icons/lootboxes/topbar/types/active/Oriental.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_TOPBAR_TYPES_REGULAR_CHRISTMAS:String = "../maps/icons/lootboxes/topbar/types/regular/Christmas.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_TOPBAR_TYPES_REGULAR_FAIRYTALE:String = "../maps/icons/lootboxes/topbar/types/regular/Fairytale.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_TOPBAR_TYPES_REGULAR_NEWYEAR:String = "../maps/icons/lootboxes/topbar/types/regular/NewYear.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_TOPBAR_TYPES_REGULAR_ORIENTAL:String = "../maps/icons/lootboxes/topbar/types/regular/Oriental.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_TYPES_NEWYEAR_PREMIUM:String = "../maps/icons/lootboxes/types/newYear_premium.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_TYPES_NEWYEAR_USUAL:String = "../maps/icons/lootboxes/types/newYear_usual.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_TYPES_BIG_NEWYEAR_PREMIUM:String = "../maps/icons/lootboxes/types/big/newYear_premium.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_TYPES_BIG_NEWYEAR_USUAL:String = "../maps/icons/lootboxes/types/big/newYear_usual.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_TYPES_MEDIUM_NEWYEAR_PREMIUM:String = "../maps/icons/lootboxes/types/medium/newYear_premium.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_TYPES_MEDIUM_NEWYEAR_USUAL:String = "../maps/icons/lootboxes/types/medium/newYear_usual.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_TYPES_NORMAL_NEWYEAR_PREMIUM:String = "../maps/icons/lootboxes/types/normal/newYear_premium.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_TYPES_NORMAL_NEWYEAR_USUAL:String = "../maps/icons/lootboxes/types/normal/newYear_usual.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_TYPES_SMALL_NEWYEAR_PREMIUM:String = "../maps/icons/lootboxes/types/small/newYear_premium.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_TYPES_SMALL_NEWYEAR_USUAL:String = "../maps/icons/lootboxes/types/small/newYear_usual.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_TYPES_UNPACKED_NEWYEAR_PREMIUM:String = "../maps/icons/lootboxes/types/unpacked/newYear_premium.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_TYPES_UNPACKED_NEWYEAR_USUAL:String = "../maps/icons/lootboxes/types/unpacked/newYear_usual.png";
 
         public static const MAPS_ICONS_MANUAL_BACKGROUNDS_ACHIEVES:String = "../maps/icons/manual/backgrounds/achieves.png";
 
@@ -4215,6 +4395,3742 @@ package
 
         public static const MAPS_ICONS_NATIONCHANGE_FLAGS_USSR:String = "../maps/icons/nationChange/flags/ussr.png";
 
+        public static const MAPS_ICONS_NEW_YEAR_ICON_ARROW:String = "../maps/icons/new_year/icon_arrow.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SHADOWSEPARATORBOTTOM:String = "../maps/icons/new_year/shadowSeparatorBottom.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SHADOWSEPARATORTOP:String = "../maps/icons/new_year/shadowSeparatorTop.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_BACK2018:String = "../maps/icons/new_year/album/back2018.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_BACK2019:String = "../maps/icons/new_year/album/back2019.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_BACK2020:String = "../maps/icons/new_year/album/back2020.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_EIGHT:String = "../maps/icons/new_year/album/eight.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_ENTER_POINT_HYSTORY:String = "../maps/icons/new_year/album/enter_point_hystory.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_FADE_BOTTOM:String = "../maps/icons/new_year/album/fade_bottom.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_FADE_UP:String = "../maps/icons/new_year/album/fade_up.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_FIRST:String = "../maps/icons/new_year/album/first.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_FIVE:String = "../maps/icons/new_year/album/five.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_FOURTH:String = "../maps/icons/new_year/album/fourth.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_NEW_YEAR_INNER_PAGE_2019:String = "../maps/icons/new_year/album/new_year_inner_page_2019.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_NOIZE:String = "../maps/icons/new_year/album/noize.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_NOIZE_LINE:String = "../maps/icons/new_year/album/noize_line.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE_SCREEN:String = "../maps/icons/new_year/album/page_screen.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_SECOND:String = "../maps/icons/new_year/album/second.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_SEVEN:String = "../maps/icons/new_year/album/seven.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_SIX:String = "../maps/icons/new_year/album/six.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_SNOWFLAKE324X324_10:String = "../maps/icons/new_year/album/snowflake324x324_10.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_THIRD:String = "../maps/icons/new_year/album/third.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_VIG:String = "../maps/icons/new_year/album/vig.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_VIGNETTE:String = "../maps/icons/new_year/album/vignette.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_BONUSTOOLTIP_CHECK:String = "../maps/icons/new_year/album/bonusTooltip/check.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_BONUSTOOLTIP_CURRENT_VALUE_BG:String = "../maps/icons/new_year/album/bonusTooltip/current_value_bg.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_BONUSTOOLTIP_MULTIPLY:String = "../maps/icons/new_year/album/bonusTooltip/multiply.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_ACCORIONTABBG_S:String = "../maps/icons/new_year/album/page18/AccorionTabBg_S.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_ACCORIONVIEWBG_S:String = "../maps/icons/new_year/album/page18/AccorionViewBg_S.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_BACK_TIER:String = "../maps/icons/new_year/album/page18/back_tier.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_FRAME:String = "../maps/icons/new_year/album/page18/frame.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_ICON_FILTER_NOTIFICATIONS:String = "../maps/icons/new_year/album/page18/icon_filter_notifications.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_MONEY_BACK:String = "../maps/icons/new_year/album/page18/money_back.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_MONEY_BACK_ZERO:String = "../maps/icons/new_year/album/page18/money_back_zero.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_MONEY_SMALL2:String = "../maps/icons/new_year/album/page18/money_small2.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_NOIZE:String = "../maps/icons/new_year/album/page18/noize.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_PAGE_SCREEN18:String = "../maps/icons/new_year/album/page18/page_screen18.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_PASSEPARTOUT_1:String = "../maps/icons/new_year/album/page18/passepartout_1.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_PASSEPARTOUT_2:String = "../maps/icons/new_year/album/page18/passepartout_2.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_PASSEPARTOUT_3:String = "../maps/icons/new_year/album/page18/passepartout_3.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_PASSEPARTOUT_4:String = "../maps/icons/new_year/album/page18/passepartout_4.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_PASSEPARTOUT_EMPTY:String = "../maps/icons/new_year/album/page18/passepartout_empty.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_PRICE:String = "../maps/icons/new_year/album/page18/price.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_TIER_1:String = "../maps/icons/new_year/album/page18/tier_1.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_TIER_2:String = "../maps/icons/new_year/album/page18/tier_2.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_TIER_3:String = "../maps/icons/new_year/album/page18/tier_3.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_TIER_4:String = "../maps/icons/new_year/album/page18/tier_4.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_TIER_5:String = "../maps/icons/new_year/album/page18/tier_5.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_ASIAN_ACCORIONTABBG_S:String = "../maps/icons/new_year/album/page18/asian/AccorionTabBg_S.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_ASIAN_ACTIVE_ICON:String = "../maps/icons/new_year/album/page18/asian/active_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_ASIAN_SMALL_ICON:String = "../maps/icons/new_year/album/page18/asian/small_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_ASIAN_STAMP:String = "../maps/icons/new_year/album/page18/asian/stamp.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_ASIAN_STAMP_EMPTY:String = "../maps/icons/new_year/album/page18/asian/stamp_empty.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_ASIAN_VINGETTE:String = "../maps/icons/new_year/album/page18/asian/vingette.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_MODERNWESTERN_ACCORIONTABBG_S:String = "../maps/icons/new_year/album/page18/modernWestern/AccorionTabBg_S.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_MODERNWESTERN_ACTIVE_ICON:String = "../maps/icons/new_year/album/page18/modernWestern/active_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_MODERNWESTERN_SMALL_ICON:String = "../maps/icons/new_year/album/page18/modernWestern/small_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_MODERNWESTERN_STAMP:String = "../maps/icons/new_year/album/page18/modernWestern/stamp.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_MODERNWESTERN_STAMP_EMPTY:String = "../maps/icons/new_year/album/page18/modernWestern/stamp_empty.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_MODERNWESTERN_VINGETTE:String = "../maps/icons/new_year/album/page18/modernWestern/vingette.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_SOVIET_ACCORIONTABBG_S:String = "../maps/icons/new_year/album/page18/soviet/AccorionTabBg_S.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_SOVIET_ACTIVE_ICON:String = "../maps/icons/new_year/album/page18/soviet/active_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_SOVIET_SMALL_ICON:String = "../maps/icons/new_year/album/page18/soviet/small_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_SOVIET_STAMP:String = "../maps/icons/new_year/album/page18/soviet/stamp.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_SOVIET_STAMP_EMPTY:String = "../maps/icons/new_year/album/page18/soviet/stamp_empty.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_SOVIET_VINGETTE:String = "../maps/icons/new_year/album/page18/soviet/vingette.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_TRADITIONALWESTERN_ACCORIONTABBG_S:String = "../maps/icons/new_year/album/page18/traditionalWestern/AccorionTabBg_S.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_TRADITIONALWESTERN_ACTIVE_ICON:String = "../maps/icons/new_year/album/page18/traditionalWestern/active_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_TRADITIONALWESTERN_SMALL_ICON:String = "../maps/icons/new_year/album/page18/traditionalWestern/small_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_TRADITIONALWESTERN_STAMP:String = "../maps/icons/new_year/album/page18/traditionalWestern/stamp.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_TRADITIONALWESTERN_STAMP_EMPTY:String = "../maps/icons/new_year/album/page18/traditionalWestern/stamp_empty.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE18_TRADITIONALWESTERN_VINGETTE:String = "../maps/icons/new_year/album/page18/traditionalWestern/vingette.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_ACCORIONTABBG_S:String = "../maps/icons/new_year/album/page19/AccorionTabBg_S.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_ACCORIONVIEWBG_S:String = "../maps/icons/new_year/album/page19/AccorionViewBg_S.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_BACK_TIER:String = "../maps/icons/new_year/album/page19/back_tier.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_CHECK:String = "../maps/icons/new_year/album/page19/check.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_FRAME:String = "../maps/icons/new_year/album/page19/frame.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_PASSEPARTOUT_1:String = "../maps/icons/new_year/album/page19/passepartout_1.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_PASSEPARTOUT_2:String = "../maps/icons/new_year/album/page19/passepartout_2.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_PASSEPARTOUT_3:String = "../maps/icons/new_year/album/page19/passepartout_3.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_PASSEPARTOUT_4:String = "../maps/icons/new_year/album/page19/passepartout_4.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_PASSEPARTOUT_EMPTY:String = "../maps/icons/new_year/album/page19/passepartout_empty.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_SHOW_VINGETTE:String = "../maps/icons/new_year/album/page19/show_vingette.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_TIER_1:String = "../maps/icons/new_year/album/page19/tier_1.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_TIER_2:String = "../maps/icons/new_year/album/page19/tier_2.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_TIER_3:String = "../maps/icons/new_year/album/page19/tier_3.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_TIER_4:String = "../maps/icons/new_year/album/page19/tier_4.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_TIER_5:String = "../maps/icons/new_year/album/page19/tier_5.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_CHRISTMAS_ACCORIONTABBG_S:String = "../maps/icons/new_year/album/page19/Christmas/AccorionTabBg_S.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_CHRISTMAS_ACTIVE_ICON:String = "../maps/icons/new_year/album/page19/Christmas/active_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_CHRISTMAS_BONUS_ICON:String = "../maps/icons/new_year/album/page19/Christmas/bonus_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_CHRISTMAS_SMALL_ICON:String = "../maps/icons/new_year/album/page19/Christmas/small_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_CHRISTMAS_STAMP:String = "../maps/icons/new_year/album/page19/Christmas/stamp.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_CHRISTMAS_STAMP_EMPTY:String = "../maps/icons/new_year/album/page19/Christmas/stamp_empty.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_CHRISTMAS_VINGETTE:String = "../maps/icons/new_year/album/page19/Christmas/vingette.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_FAIRYTALE_ACCORIONTABBG_S:String = "../maps/icons/new_year/album/page19/Fairytale/AccorionTabBg_S.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_FAIRYTALE_ACTIVE_ICON:String = "../maps/icons/new_year/album/page19/Fairytale/active_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_FAIRYTALE_BONUS_ICON:String = "../maps/icons/new_year/album/page19/Fairytale/bonus_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_FAIRYTALE_SMALL_ICON:String = "../maps/icons/new_year/album/page19/Fairytale/small_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_FAIRYTALE_STAMP:String = "../maps/icons/new_year/album/page19/Fairytale/stamp.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_FAIRYTALE_STAMP_EMPTY:String = "../maps/icons/new_year/album/page19/Fairytale/stamp_empty.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_FAIRYTALE_VINGETTE:String = "../maps/icons/new_year/album/page19/Fairytale/vingette.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_NEWYEAR_ACCORIONTABBG_S:String = "../maps/icons/new_year/album/page19/NewYear/AccorionTabBg_S.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_NEWYEAR_ACTIVE_ICON:String = "../maps/icons/new_year/album/page19/NewYear/active_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_NEWYEAR_BONUS_ICON:String = "../maps/icons/new_year/album/page19/NewYear/bonus_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_NEWYEAR_SMALL_ICON:String = "../maps/icons/new_year/album/page19/NewYear/small_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_NEWYEAR_STAMP:String = "../maps/icons/new_year/album/page19/NewYear/stamp.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_NEWYEAR_STAMP_EMPTY:String = "../maps/icons/new_year/album/page19/NewYear/stamp_empty.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_NEWYEAR_VINGETTE:String = "../maps/icons/new_year/album/page19/NewYear/vingette.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_ORIENTAL_ACCORIONTABBG_S:String = "../maps/icons/new_year/album/page19/Oriental/AccorionTabBg_S.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_ORIENTAL_ACTIVE_ICON:String = "../maps/icons/new_year/album/page19/Oriental/active_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_ORIENTAL_BONUS_ICON:String = "../maps/icons/new_year/album/page19/Oriental/bonus_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_ORIENTAL_SMALL_ICON:String = "../maps/icons/new_year/album/page19/Oriental/small_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_ORIENTAL_STAMP:String = "../maps/icons/new_year/album/page19/Oriental/stamp.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_ORIENTAL_STAMP_EMPTY:String = "../maps/icons/new_year/album/page19/Oriental/stamp_empty.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE19_ORIENTAL_VINGETTE:String = "../maps/icons/new_year/album/page19/Oriental/vingette.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_ACCORIONTABBG_S:String = "../maps/icons/new_year/album/page20/AccorionTabBg_S.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_ACCORIONVIEWBG_S:String = "../maps/icons/new_year/album/page20/AccorionViewBg_S.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_BACK_TIER:String = "../maps/icons/new_year/album/page20/back_tier.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_BONUS_INDICATION_BACK:String = "../maps/icons/new_year/album/page20/bonus_indication_back.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_CHECK:String = "../maps/icons/new_year/album/page20/check.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_CREDITS:String = "../maps/icons/new_year/album/page20/credits.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_DOWN_FRAME:String = "../maps/icons/new_year/album/page20/down_frame.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_FRAME:String = "../maps/icons/new_year/album/page20/frame.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_ICON_MOUNT:String = "../maps/icons/new_year/album/page20/icon_mount.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_INFO:String = "../maps/icons/new_year/album/page20/info.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_PAGE_PASSEPARTOUT_EMPTY:String = "../maps/icons/new_year/album/page20/page_passepartout_empty.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_PASSEPARTOUT_1:String = "../maps/icons/new_year/album/page20/passepartout_1.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_PASSEPARTOUT_2:String = "../maps/icons/new_year/album/page20/passepartout_2.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_PASSEPARTOUT_3:String = "../maps/icons/new_year/album/page20/passepartout_3.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_PASSEPARTOUT_4:String = "../maps/icons/new_year/album/page20/passepartout_4.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_PASSEPARTOUT_EMPTY:String = "../maps/icons/new_year/album/page20/passepartout_empty.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_PASSEPARTOUT_EMPTY_MEGA:String = "../maps/icons/new_year/album/page20/passepartout_empty_mega.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_PASSEPARTOUT_MEGA:String = "../maps/icons/new_year/album/page20/passepartout_mega.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_TIER_1:String = "../maps/icons/new_year/album/page20/tier_1.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_TIER_2:String = "../maps/icons/new_year/album/page20/tier_2.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_TIER_3:String = "../maps/icons/new_year/album/page20/tier_3.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_TIER_4:String = "../maps/icons/new_year/album/page20/tier_4.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_TIER_5:String = "../maps/icons/new_year/album/page20/tier_5.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_VINGETTE:String = "../maps/icons/new_year/album/page20/vingette.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_WHITE_SHARDS:String = "../maps/icons/new_year/album/page20/white_shards.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_WISHLIST:String = "../maps/icons/new_year/album/page20/wishlist.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_WISHLIST_DONE:String = "../maps/icons/new_year/album/page20/wishlist_done.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_BOTTOMBONUS_BONUS_INDICATION_BACK:String = "../maps/icons/new_year/album/page20/bottomBonus/bonus_indication_back.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_BOTTOMBONUS_ICON:String = "../maps/icons/new_year/album/page20/bottomBonus/icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_BOTTOMBONUS_INFO_BLUE:String = "../maps/icons/new_year/album/page20/bottomBonus/info_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_CHRISTMAS_ACCORIONTABBG_S:String = "../maps/icons/new_year/album/page20/Christmas/AccorionTabBg_S.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_CHRISTMAS_ACTIVE_ICON:String = "../maps/icons/new_year/album/page20/Christmas/active_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_CHRISTMAS_BONUS_ICON:String = "../maps/icons/new_year/album/page20/Christmas/bonus_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_CHRISTMAS_SMALL_ICON:String = "../maps/icons/new_year/album/page20/Christmas/small_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_CHRISTMAS_STAMP:String = "../maps/icons/new_year/album/page20/Christmas/stamp.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_CHRISTMAS_STAMP_EMPTY:String = "../maps/icons/new_year/album/page20/Christmas/stamp_empty.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_CHRISTMAS_VINGETTE:String = "../maps/icons/new_year/album/page20/Christmas/vingette.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_ENTRYHOVER_CHRISTMAS:String = "../maps/icons/new_year/album/page20/entryHover/Christmas.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_ENTRYHOVER_FAIRYTALE:String = "../maps/icons/new_year/album/page20/entryHover/Fairytale.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_ENTRYHOVER_MEGA:String = "../maps/icons/new_year/album/page20/entryHover/Mega.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_ENTRYHOVER_NEWYEAR:String = "../maps/icons/new_year/album/page20/entryHover/NewYear.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_ENTRYHOVER_ORIENTAL:String = "../maps/icons/new_year/album/page20/entryHover/Oriental.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_FAIRYTALE_ACCORIONTABBG_S:String = "../maps/icons/new_year/album/page20/Fairytale/AccorionTabBg_S.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_FAIRYTALE_ACTIVE_ICON:String = "../maps/icons/new_year/album/page20/Fairytale/active_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_FAIRYTALE_BONUS_ICON:String = "../maps/icons/new_year/album/page20/Fairytale/bonus_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_FAIRYTALE_SMALL_ICON:String = "../maps/icons/new_year/album/page20/Fairytale/small_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_FAIRYTALE_STAMP:String = "../maps/icons/new_year/album/page20/Fairytale/stamp.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_FAIRYTALE_STAMP_EMPTY:String = "../maps/icons/new_year/album/page20/Fairytale/stamp_empty.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_FAIRYTALE_VINGETTE:String = "../maps/icons/new_year/album/page20/Fairytale/vingette.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_MEGA_ACCORIONTABBG_S:String = "../maps/icons/new_year/album/page20/Mega/AccorionTabBg_S.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_MEGA_ACTIVE_ICON:String = "../maps/icons/new_year/album/page20/Mega/active_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_MEGA_SMALL_ICON:String = "../maps/icons/new_year/album/page20/Mega/small_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_MEGA_STAMP:String = "../maps/icons/new_year/album/page20/Mega/stamp.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_MEGA_VINGETTE:String = "../maps/icons/new_year/album/page20/Mega/vingette.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_MEGAPASS_PASSEPARTOUT_1:String = "../maps/icons/new_year/album/page20/megaPass/passepartout_1.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_MEGAPASS_PASSEPARTOUT_2:String = "../maps/icons/new_year/album/page20/megaPass/passepartout_2.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_MEGAPASS_PASSEPARTOUT_3:String = "../maps/icons/new_year/album/page20/megaPass/passepartout_3.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_MEGAPASS_PASSEPARTOUT_4:String = "../maps/icons/new_year/album/page20/megaPass/passepartout_4.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_NEWYEAR_ACCORIONTABBG_S:String = "../maps/icons/new_year/album/page20/NewYear/AccorionTabBg_S.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_NEWYEAR_ACTIVE_ICON:String = "../maps/icons/new_year/album/page20/NewYear/active_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_NEWYEAR_BONUS_ICON:String = "../maps/icons/new_year/album/page20/NewYear/bonus_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_NEWYEAR_SMALL_ICON:String = "../maps/icons/new_year/album/page20/NewYear/small_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_NEWYEAR_STAMP:String = "../maps/icons/new_year/album/page20/NewYear/stamp.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_NEWYEAR_STAMP_EMPTY:String = "../maps/icons/new_year/album/page20/NewYear/stamp_empty.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_NEWYEAR_VINGETTE:String = "../maps/icons/new_year/album/page20/NewYear/vingette.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_ORIENTAL_ACCORIONTABBG_S:String = "../maps/icons/new_year/album/page20/Oriental/AccorionTabBg_S.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_ORIENTAL_ACTIVE_ICON:String = "../maps/icons/new_year/album/page20/Oriental/active_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_ORIENTAL_BONUS_ICON:String = "../maps/icons/new_year/album/page20/Oriental/bonus_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_ORIENTAL_SMALL_ICON:String = "../maps/icons/new_year/album/page20/Oriental/small_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_ORIENTAL_STAMP:String = "../maps/icons/new_year/album/page20/Oriental/stamp.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_ORIENTAL_STAMP_EMPTY:String = "../maps/icons/new_year/album/page20/Oriental/stamp_empty.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_ORIENTAL_VINGETTE:String = "../maps/icons/new_year/album/page20/Oriental/vingette.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_PASSEPARTOUTSETTING_BALL:String = "../maps/icons/new_year/album/page20/passepartoutSetting/ball.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_PASSEPARTOUTSETTING_DECORATION:String = "../maps/icons/new_year/album/page20/passepartoutSetting/decoration.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_PASSEPARTOUTSETTING_FLOOR:String = "../maps/icons/new_year/album/page20/passepartoutSetting/floor.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_PASSEPARTOUTSETTING_GARLAND:String = "../maps/icons/new_year/album/page20/passepartoutSetting/garland.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_PASSEPARTOUTSETTING_GROUND_LIGHT:String = "../maps/icons/new_year/album/page20/passepartoutSetting/ground_light.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_PASSEPARTOUTSETTING_KITCHEN:String = "../maps/icons/new_year/album/page20/passepartoutSetting/kitchen.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_PASSEPARTOUTSETTING_MEGA:String = "../maps/icons/new_year/album/page20/passepartoutSetting/mega.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_PASSEPARTOUTSETTING_PYRO:String = "../maps/icons/new_year/album/page20/passepartoutSetting/pyro.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_PASSEPARTOUTSETTING_RANDOM:String = "../maps/icons/new_year/album/page20/passepartoutSetting/random.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_PASSEPARTOUTSETTING_SCULPTURE:String = "../maps/icons/new_year/album/page20/passepartoutSetting/sculpture.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_PASSEPARTOUTSETTING_SNOW_ITEM:String = "../maps/icons/new_year/album/page20/passepartoutSetting/snow_item.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_PASSEPARTOUTSETTING_TABLE:String = "../maps/icons/new_year/album/page20/passepartoutSetting/table.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_PASSEPARTOUTSETTING_TENT:String = "../maps/icons/new_year/album/page20/passepartoutSetting/tent.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_PASSEPARTOUTSETTING_TOP:String = "../maps/icons/new_year/album/page20/passepartoutSetting/top.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_PASSEPARTOUTSETTING_TREES:String = "../maps/icons/new_year/album/page20/passepartoutSetting/trees.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_TOYTOOLTIPSETTING_BALL:String = "../maps/icons/new_year/album/page20/toyTooltipSetting/ball.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_TOYTOOLTIPSETTING_DECORATION:String = "../maps/icons/new_year/album/page20/toyTooltipSetting/decoration.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_TOYTOOLTIPSETTING_FLOOR:String = "../maps/icons/new_year/album/page20/toyTooltipSetting/floor.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_TOYTOOLTIPSETTING_GARLAND:String = "../maps/icons/new_year/album/page20/toyTooltipSetting/garland.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_TOYTOOLTIPSETTING_GROUND_LIGHT:String = "../maps/icons/new_year/album/page20/toyTooltipSetting/ground_light.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_TOYTOOLTIPSETTING_KITCHEN:String = "../maps/icons/new_year/album/page20/toyTooltipSetting/kitchen.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_TOYTOOLTIPSETTING_MEGA:String = "../maps/icons/new_year/album/page20/toyTooltipSetting/mega.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_TOYTOOLTIPSETTING_PYRO:String = "../maps/icons/new_year/album/page20/toyTooltipSetting/pyro.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_TOYTOOLTIPSETTING_SCULPTURE:String = "../maps/icons/new_year/album/page20/toyTooltipSetting/sculpture.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_TOYTOOLTIPSETTING_SNOW_ITEM:String = "../maps/icons/new_year/album/page20/toyTooltipSetting/snow_item.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_TOYTOOLTIPSETTING_TABLE:String = "../maps/icons/new_year/album/page20/toyTooltipSetting/table.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_TOYTOOLTIPSETTING_TENT:String = "../maps/icons/new_year/album/page20/toyTooltipSetting/tent.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_TOYTOOLTIPSETTING_TOP:String = "../maps/icons/new_year/album/page20/toyTooltipSetting/top.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ALBUM_PAGE20_TOYTOOLTIPSETTING_TREES:String = "../maps/icons/new_year/album/page20/toyTooltipSetting/trees.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_BREAK_DECORATIONS_VIEW_FILTERSEPARATOR:String = "../maps/icons/new_year/break_decorations_view/filterSeparator.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_BREAK_DECORATIONS_VIEW_NEW_INDICATOR:String = "../maps/icons/new_year/break_decorations_view/new_indicator.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_BREAK_DECORATIONS_VIEW_SHADOW:String = "../maps/icons/new_year/break_decorations_view/shadow.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_BREAK_DECORATIONS_VIEW_SHADOWSEPARATORBOTTOM:String = "../maps/icons/new_year/break_decorations_view/shadowSeparatorBottom.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_BREAK_DECORATIONS_VIEW_SHADOWSEPARATORTOP:String = "../maps/icons/new_year/break_decorations_view/shadowSeparatorTop.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_BREAK_DECORATIONS_VIEW_SLOT_FOCUS:String = "../maps/icons/new_year/break_decorations_view/slot/focus.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_BUTTONS_SLOT_BUTTON_BACKGROUND:String = "../maps/icons/new_year/buttons/slot_button_background.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_BUTTONS_SLOT_BUTTON_LIGHT:String = "../maps/icons/new_year/buttons/slot_button_light.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_ACTIVE_ARROW:String = "../maps/icons/new_year/collections_reward/active_arrow.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_ADDITIONAL_REWARD_BG:String = "../maps/icons/new_year/collections_reward/additional_reward_bg.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_BOTTOM_GRADIENT:String = "../maps/icons/new_year/collections_reward/bottom_gradient.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_CHECK_BLUE:String = "../maps/icons/new_year/collections_reward/check_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_CHECK_BLUE_TAB:String = "../maps/icons/new_year/collections_reward/check_blue_tab.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_CRYSTAL:String = "../maps/icons/new_year/collections_reward/crystal.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_DECORATION:String = "../maps/icons/new_year/collections_reward/decoration.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_DEVIDER:String = "../maps/icons/new_year/collections_reward/devider.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_DEVIDER_ADDITIONALS:String = "../maps/icons/new_year/collections_reward/devider_additionals.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_DEVIDER_VERTICAL:String = "../maps/icons/new_year/collections_reward/devider_vertical.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_ISPREMIUM:String = "../maps/icons/new_year/collections_reward/isPremium.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_PARTICLES_160X100:String = "../maps/icons/new_year/collections_reward/particles_160x100.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_PARTICLES_240X100:String = "../maps/icons/new_year/collections_reward/particles_240x100.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_PARTICLES_240X120:String = "../maps/icons/new_year/collections_reward/particles_240x120.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_PLUS:String = "../maps/icons/new_year/collections_reward/plus.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_PREVIEW_VEHICLE:String = "../maps/icons/new_year/collections_reward/preview_vehicle.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_PREVIEW_VEHICLE_HOVER:String = "../maps/icons/new_year/collections_reward/preview_vehicle_hover.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_TABS_GRADIENT_BACK:String = "../maps/icons/new_year/collections_reward/tabs_gradient_back.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_TAB_BORDER_242X122:String = "../maps/icons/new_year/collections_reward/tab_border_242x122.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_TAB_BORDER_ACTIVE_242X122:String = "../maps/icons/new_year/collections_reward/tab_border_active_242x122.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_TAB_BORDER_SELECT_242X122:String = "../maps/icons/new_year/collections_reward/tab_border_select_242x122.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_TAB_GRADIENT_OVERLAY:String = "../maps/icons/new_year/collections_reward/tab_gradient_overlay.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_ICONS_ASIAN_NY18:String = "../maps/icons/new_year/collections_reward/icons/asian_ny18.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_ICONS_ASIAN_NY18_ACTIVE:String = "../maps/icons/new_year/collections_reward/icons/asian_ny18_active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_ICONS_CHRISTMAS_NY19:String = "../maps/icons/new_year/collections_reward/icons/Christmas_ny19.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_ICONS_CHRISTMAS_NY19_ACTIVE:String = "../maps/icons/new_year/collections_reward/icons/Christmas_ny19_active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_ICONS_CHRISTMAS_NY20:String = "../maps/icons/new_year/collections_reward/icons/Christmas_ny20.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_ICONS_CHRISTMAS_NY20_ACTIVE:String = "../maps/icons/new_year/collections_reward/icons/Christmas_ny20_active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_ICONS_FAIRYTALE_NY19:String = "../maps/icons/new_year/collections_reward/icons/Fairytale_ny19.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_ICONS_FAIRYTALE_NY19_ACTIVE:String = "../maps/icons/new_year/collections_reward/icons/Fairytale_ny19_active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_ICONS_FAIRYTALE_NY20:String = "../maps/icons/new_year/collections_reward/icons/Fairytale_ny20.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_ICONS_FAIRYTALE_NY20_ACTIVE:String = "../maps/icons/new_year/collections_reward/icons/Fairytale_ny20_active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_ICONS_MODERNWESTERN_NY18:String = "../maps/icons/new_year/collections_reward/icons/modernWestern_ny18.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_ICONS_MODERNWESTERN_NY18_ACTIVE:String = "../maps/icons/new_year/collections_reward/icons/modernWestern_ny18_active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_ICONS_NEWYEAR_NY19:String = "../maps/icons/new_year/collections_reward/icons/NewYear_ny19.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_ICONS_NEWYEAR_NY19_ACTIVE:String = "../maps/icons/new_year/collections_reward/icons/NewYear_ny19_active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_ICONS_NEWYEAR_NY20:String = "../maps/icons/new_year/collections_reward/icons/NewYear_ny20.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_ICONS_NEWYEAR_NY20_ACTIVE:String = "../maps/icons/new_year/collections_reward/icons/NewYear_ny20_active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_ICONS_ORIENTAL_NY19:String = "../maps/icons/new_year/collections_reward/icons/Oriental_ny19.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_ICONS_ORIENTAL_NY19_ACTIVE:String = "../maps/icons/new_year/collections_reward/icons/Oriental_ny19_active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_ICONS_ORIENTAL_NY20:String = "../maps/icons/new_year/collections_reward/icons/Oriental_ny20.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_ICONS_ORIENTAL_NY20_ACTIVE:String = "../maps/icons/new_year/collections_reward/icons/Oriental_ny20_active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_ICONS_SOVIET_NY18:String = "../maps/icons/new_year/collections_reward/icons/soviet_ny18.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_ICONS_SOVIET_NY18_ACTIVE:String = "../maps/icons/new_year/collections_reward/icons/soviet_ny18_active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_ICONS_TRADITIONALWESTERN_NY18:String = "../maps/icons/new_year/collections_reward/icons/traditionalWestern_ny18.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_ICONS_TRADITIONALWESTERN_NY18_ACTIVE:String = "../maps/icons/new_year/collections_reward/icons/traditionalWestern_ny18_active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLEPREVIEWS_ASIAN_NY18:String = "../maps/icons/new_year/collections_reward/stylePreviews/asian_ny18.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLEPREVIEWS_CHRISTMAS_NY19:String = "../maps/icons/new_year/collections_reward/stylePreviews/Christmas_ny19.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLEPREVIEWS_CHRISTMAS_NY20:String = "../maps/icons/new_year/collections_reward/stylePreviews/Christmas_ny20.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLEPREVIEWS_FAIRYTALE_NY19:String = "../maps/icons/new_year/collections_reward/stylePreviews/Fairytale_ny19.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLEPREVIEWS_FAIRYTALE_NY20:String = "../maps/icons/new_year/collections_reward/stylePreviews/Fairytale_ny20.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLEPREVIEWS_MODERNWESTERN_NY18:String = "../maps/icons/new_year/collections_reward/stylePreviews/modernWestern_ny18.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLEPREVIEWS_NEWYEAR_NY19:String = "../maps/icons/new_year/collections_reward/stylePreviews/NewYear_ny19.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLEPREVIEWS_NEWYEAR_NY20:String = "../maps/icons/new_year/collections_reward/stylePreviews/NewYear_ny20.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLEPREVIEWS_ORIENTAL_NY19:String = "../maps/icons/new_year/collections_reward/stylePreviews/Oriental_ny19.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLEPREVIEWS_ORIENTAL_NY20:String = "../maps/icons/new_year/collections_reward/stylePreviews/Oriental_ny20.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLEPREVIEWS_SOVIET_NY18:String = "../maps/icons/new_year/collections_reward/stylePreviews/soviet_ny18.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLEPREVIEWS_TRADITIONALWESTERN_NY18:String = "../maps/icons/new_year/collections_reward/stylePreviews/traditionalWestern_ny18.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLES_ASIAN_NY18_STYLE:String = "../maps/icons/new_year/collections_reward/styles/asian_ny18_style.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLES_ASIAN_NY18_STYLE_SMALL:String = "../maps/icons/new_year/collections_reward/styles/asian_ny18_style_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLES_CHRISTMAS_NY19_STYLE:String = "../maps/icons/new_year/collections_reward/styles/Christmas_ny19_style.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLES_CHRISTMAS_NY19_STYLE_SMALL:String = "../maps/icons/new_year/collections_reward/styles/Christmas_ny19_style_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLES_CHRISTMAS_NY20_STYLE:String = "../maps/icons/new_year/collections_reward/styles/Christmas_ny20_style.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLES_CHRISTMAS_NY20_STYLE_SMALL:String = "../maps/icons/new_year/collections_reward/styles/Christmas_ny20_style_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLES_FAIRYTALE_NY19_STYLE:String = "../maps/icons/new_year/collections_reward/styles/Fairytale_ny19_style.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLES_FAIRYTALE_NY19_STYLE_SMALL:String = "../maps/icons/new_year/collections_reward/styles/Fairytale_ny19_style_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLES_FAIRYTALE_NY20_STYLE:String = "../maps/icons/new_year/collections_reward/styles/Fairytale_ny20_style.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLES_FAIRYTALE_NY20_STYLE_SMALL:String = "../maps/icons/new_year/collections_reward/styles/Fairytale_ny20_style_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLES_MODERNWESTERN_NY18_STYLE:String = "../maps/icons/new_year/collections_reward/styles/modernWestern_ny18_style.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLES_MODERNWESTERN_NY18_STYLE_SMALL:String = "../maps/icons/new_year/collections_reward/styles/modernWestern_ny18_style_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLES_NEWYEAR_NY19_STYLE:String = "../maps/icons/new_year/collections_reward/styles/NewYear_ny19_style.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLES_NEWYEAR_NY19_STYLE_SMALL:String = "../maps/icons/new_year/collections_reward/styles/NewYear_ny19_style_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLES_NEWYEAR_NY20_STYLE:String = "../maps/icons/new_year/collections_reward/styles/NewYear_ny20_style.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLES_NEWYEAR_NY20_STYLE_SMALL:String = "../maps/icons/new_year/collections_reward/styles/NewYear_ny20_style_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLES_ORIENTAL_NY19_STYLE:String = "../maps/icons/new_year/collections_reward/styles/Oriental_ny19_style.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLES_ORIENTAL_NY19_STYLE_SMALL:String = "../maps/icons/new_year/collections_reward/styles/Oriental_ny19_style_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLES_ORIENTAL_NY20_STYLE:String = "../maps/icons/new_year/collections_reward/styles/Oriental_ny20_style.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLES_ORIENTAL_NY20_STYLE_SMALL:String = "../maps/icons/new_year/collections_reward/styles/Oriental_ny20_style_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLES_SOVIET_NY18_STYLE:String = "../maps/icons/new_year/collections_reward/styles/soviet_ny18_style.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLES_SOVIET_NY18_STYLE_SMALL:String = "../maps/icons/new_year/collections_reward/styles/soviet_ny18_style_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLES_TRADITIONALWESTERN_NY18_STYLE:String = "../maps/icons/new_year/collections_reward/styles/traditionalWestern_ny18_style.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_COLLECTIONS_REWARD_STYLES_TRADITIONALWESTERN_NY18_STYLE_SMALL:String = "../maps/icons/new_year/collections_reward/styles/traditionalWestern_ny18_style_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_BACKGROUND:String = "../maps/icons/new_year/craftMachine/background.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_COLLIDER:String = "../maps/icons/new_year/craftMachine/collider.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_DIGIT_GLOW:String = "../maps/icons/new_year/craftMachine/digit_glow.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_INFOGRAPHICS:String = "../maps/icons/new_year/craftMachine/infographics.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_INFOGRAPHICS_SMALL:String = "../maps/icons/new_year/craftMachine/infographics_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_LOGO:String = "../maps/icons/new_year/craftMachine/logo.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_LOGO_EN:String = "../maps/icons/new_year/craftMachine/logo_en.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_SHINE:String = "../maps/icons/new_year/craftMachine/shine.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_TEXT_NOIZE:String = "../maps/icons/new_year/craftMachine/text_noize.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_BULB_GREEN:String = "../maps/icons/new_year/craftMachine/bulb/green.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_BULB_OFF:String = "../maps/icons/new_year/craftMachine/bulb/off.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_BULB_RED:String = "../maps/icons/new_year/craftMachine/bulb/red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_CHARGE_BLUE_LIGHT:String = "../maps/icons/new_year/craftMachine/charge/blue_light.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_CHARGE_CHARGE:String = "../maps/icons/new_year/craftMachine/charge/charge.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_CHARGE_DISABLED:String = "../maps/icons/new_year/craftMachine/charge/disabled.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_CHARGE_SCREEN:String = "../maps/icons/new_year/craftMachine/charge/screen.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_CHARGE_WARM_LIGHT:String = "../maps/icons/new_year/craftMachine/charge/warm_light.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_DIGITS_DIGIT_0:String = "../maps/icons/new_year/craftMachine/digits/digit_0.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_DIGITS_DIGIT_1:String = "../maps/icons/new_year/craftMachine/digits/digit_1.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_DIGITS_DIGIT_2:String = "../maps/icons/new_year/craftMachine/digits/digit_2.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_DIGITS_DIGIT_3:String = "../maps/icons/new_year/craftMachine/digits/digit_3.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_DIGITS_DIGIT_4:String = "../maps/icons/new_year/craftMachine/digits/digit_4.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_DIGITS_DIGIT_5:String = "../maps/icons/new_year/craftMachine/digits/digit_5.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_DIGITS_DIGIT_6:String = "../maps/icons/new_year/craftMachine/digits/digit_6.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_DIGITS_DIGIT_7:String = "../maps/icons/new_year/craftMachine/digits/digit_7.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_DIGITS_DIGIT_8:String = "../maps/icons/new_year/craftMachine/digits/digit_8.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_DIGITS_DIGIT_9:String = "../maps/icons/new_year/craftMachine/digits/digit_9.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_LEVELS_LEVEL_1:String = "../maps/icons/new_year/craftMachine/icons/levels/level_1.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_LEVELS_LEVEL_1_ACTIVE:String = "../maps/icons/new_year/craftMachine/icons/levels/level_1_active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_LEVELS_LEVEL_2:String = "../maps/icons/new_year/craftMachine/icons/levels/level_2.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_LEVELS_LEVEL_2_ACTIVE:String = "../maps/icons/new_year/craftMachine/icons/levels/level_2_active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_LEVELS_LEVEL_3:String = "../maps/icons/new_year/craftMachine/icons/levels/level_3.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_LEVELS_LEVEL_3_ACTIVE:String = "../maps/icons/new_year/craftMachine/icons/levels/level_3_active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_LEVELS_LEVEL_4:String = "../maps/icons/new_year/craftMachine/icons/levels/level_4.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_LEVELS_LEVEL_4_ACTIVE:String = "../maps/icons/new_year/craftMachine/icons/levels/level_4_active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_LEVELS_LEVEL_5:String = "../maps/icons/new_year/craftMachine/icons/levels/level_5.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_LEVELS_LEVEL_5_ACTIVE:String = "../maps/icons/new_year/craftMachine/icons/levels/level_5_active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_LEVELS_RANDOM:String = "../maps/icons/new_year/craftMachine/icons/levels/random.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_LEVELS_RANDOM_ACTIVE:String = "../maps/icons/new_year/craftMachine/icons/levels/random_active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_SETTINGS_CHRISTMAS:String = "../maps/icons/new_year/craftMachine/icons/settings/Christmas.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_SETTINGS_CHRISTMAS_ACTIVE:String = "../maps/icons/new_year/craftMachine/icons/settings/Christmas_active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_SETTINGS_FAIRYTALE:String = "../maps/icons/new_year/craftMachine/icons/settings/Fairytale.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_SETTINGS_FAIRYTALE_ACTIVE:String = "../maps/icons/new_year/craftMachine/icons/settings/Fairytale_active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_SETTINGS_NEWYEAR:String = "../maps/icons/new_year/craftMachine/icons/settings/NewYear.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_SETTINGS_NEWYEAR_ACTIVE:String = "../maps/icons/new_year/craftMachine/icons/settings/NewYear_active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_SETTINGS_ORIENTAL:String = "../maps/icons/new_year/craftMachine/icons/settings/Oriental.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_SETTINGS_ORIENTAL_ACTIVE:String = "../maps/icons/new_year/craftMachine/icons/settings/Oriental_active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_ACTIVE_BALL:String = "../maps/icons/new_year/craftMachine/icons/types/active/ball.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_ACTIVE_DECORATION:String = "../maps/icons/new_year/craftMachine/icons/types/active/decoration.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_ACTIVE_FLOOR:String = "../maps/icons/new_year/craftMachine/icons/types/active/floor.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_ACTIVE_GARLAND:String = "../maps/icons/new_year/craftMachine/icons/types/active/garland.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_ACTIVE_GROUND_LIGHT:String = "../maps/icons/new_year/craftMachine/icons/types/active/ground_light.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_ACTIVE_KITCHEN:String = "../maps/icons/new_year/craftMachine/icons/types/active/kitchen.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_ACTIVE_PYRO:String = "../maps/icons/new_year/craftMachine/icons/types/active/pyro.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_ACTIVE_RANDOM:String = "../maps/icons/new_year/craftMachine/icons/types/active/random.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_ACTIVE_SCULPTURE:String = "../maps/icons/new_year/craftMachine/icons/types/active/sculpture.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_ACTIVE_SNOW_ITEM:String = "../maps/icons/new_year/craftMachine/icons/types/active/snow_item.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_ACTIVE_TABLE:String = "../maps/icons/new_year/craftMachine/icons/types/active/table.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_ACTIVE_TENT:String = "../maps/icons/new_year/craftMachine/icons/types/active/tent.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_ACTIVE_TOP:String = "../maps/icons/new_year/craftMachine/icons/types/active/top.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_ACTIVE_TREES:String = "../maps/icons/new_year/craftMachine/icons/types/active/trees.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_DISABLED_BALL:String = "../maps/icons/new_year/craftMachine/icons/types/disabled/ball.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_DISABLED_DECORATION:String = "../maps/icons/new_year/craftMachine/icons/types/disabled/decoration.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_DISABLED_FLOOR:String = "../maps/icons/new_year/craftMachine/icons/types/disabled/floor.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_DISABLED_GARLAND:String = "../maps/icons/new_year/craftMachine/icons/types/disabled/garland.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_DISABLED_GROUND_LIGHT:String = "../maps/icons/new_year/craftMachine/icons/types/disabled/ground_light.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_DISABLED_KITCHEN:String = "../maps/icons/new_year/craftMachine/icons/types/disabled/kitchen.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_DISABLED_PYRO:String = "../maps/icons/new_year/craftMachine/icons/types/disabled/pyro.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_DISABLED_RANDOM:String = "../maps/icons/new_year/craftMachine/icons/types/disabled/random.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_DISABLED_SCULPTURE:String = "../maps/icons/new_year/craftMachine/icons/types/disabled/sculpture.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_DISABLED_SNOW_ITEM:String = "../maps/icons/new_year/craftMachine/icons/types/disabled/snow_item.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_DISABLED_TABLE:String = "../maps/icons/new_year/craftMachine/icons/types/disabled/table.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_DISABLED_TENT:String = "../maps/icons/new_year/craftMachine/icons/types/disabled/tent.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_DISABLED_TOP:String = "../maps/icons/new_year/craftMachine/icons/types/disabled/top.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_DISABLED_TREES:String = "../maps/icons/new_year/craftMachine/icons/types/disabled/trees.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_SELECTED_BALL:String = "../maps/icons/new_year/craftMachine/icons/types/selected/ball.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_SELECTED_DECORATION:String = "../maps/icons/new_year/craftMachine/icons/types/selected/decoration.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_SELECTED_FLOOR:String = "../maps/icons/new_year/craftMachine/icons/types/selected/floor.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_SELECTED_GARLAND:String = "../maps/icons/new_year/craftMachine/icons/types/selected/garland.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_SELECTED_GROUND_LIGHT:String = "../maps/icons/new_year/craftMachine/icons/types/selected/ground_light.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_SELECTED_KITCHEN:String = "../maps/icons/new_year/craftMachine/icons/types/selected/kitchen.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_SELECTED_PYRO:String = "../maps/icons/new_year/craftMachine/icons/types/selected/pyro.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_SELECTED_RANDOM:String = "../maps/icons/new_year/craftMachine/icons/types/selected/random.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_SELECTED_SCULPTURE:String = "../maps/icons/new_year/craftMachine/icons/types/selected/sculpture.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_SELECTED_SNOW_ITEM:String = "../maps/icons/new_year/craftMachine/icons/types/selected/snow_item.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_SELECTED_TABLE:String = "../maps/icons/new_year/craftMachine/icons/types/selected/table.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_SELECTED_TENT:String = "../maps/icons/new_year/craftMachine/icons/types/selected/tent.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_SELECTED_TOP:String = "../maps/icons/new_year/craftMachine/icons/types/selected/top.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_ICONS_TYPES_SELECTED_TREES:String = "../maps/icons/new_year/craftMachine/icons/types/selected/trees.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_MAINBUTTON_DISABLED:String = "../maps/icons/new_year/craftMachine/mainButton/disabled.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_MAINBUTTON_DOWN:String = "../maps/icons/new_year/craftMachine/mainButton/down.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_MAINBUTTON_UP:String = "../maps/icons/new_year/craftMachine/mainButton/up.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_SWITCH_OFF:String = "../maps/icons/new_year/craftMachine/switch/off.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_SWITCH_ON:String = "../maps/icons/new_year/craftMachine/switch/on.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_TUMBLER_OFF:String = "../maps/icons/new_year/craftMachine/tumbler/off.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_TUMBLER_ON:String = "../maps/icons/new_year/craftMachine/tumbler/on.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_TYPEBUTTON_BACKGROUNDS_FIR:String = "../maps/icons/new_year/craftMachine/typeButton/backgrounds/Fir.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_TYPEBUTTON_BACKGROUNDS_ILLUMINATION:String = "../maps/icons/new_year/craftMachine/typeButton/backgrounds/Illumination.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_TYPEBUTTON_BACKGROUNDS_INSTALLATION:String = "../maps/icons/new_year/craftMachine/typeButton/backgrounds/Installation.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_TYPEBUTTON_BACKGROUNDS_RANDOM:String = "../maps/icons/new_year/craftMachine/typeButton/backgrounds/random.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_TYPEBUTTON_BACKGROUNDS_TABLEFUL:String = "../maps/icons/new_year/craftMachine/typeButton/backgrounds/Tableful.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_TYPEBUTTON_LEFT_ACTIVE:String = "../maps/icons/new_year/craftMachine/typeButton/left/active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_TYPEBUTTON_LEFT_DISABLED:String = "../maps/icons/new_year/craftMachine/typeButton/left/disabled.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_TYPEBUTTON_LEFT_SELECTED:String = "../maps/icons/new_year/craftMachine/typeButton/left/selected.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_TYPEBUTTON_LEFT_SELECTED_DISABLED:String = "../maps/icons/new_year/craftMachine/typeButton/left/selected_disabled.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_TYPEBUTTON_MIDDLE_ACTIVE:String = "../maps/icons/new_year/craftMachine/typeButton/middle/active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_TYPEBUTTON_MIDDLE_DISABLED:String = "../maps/icons/new_year/craftMachine/typeButton/middle/disabled.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_TYPEBUTTON_MIDDLE_SELECTED:String = "../maps/icons/new_year/craftMachine/typeButton/middle/selected.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_TYPEBUTTON_MIDDLE_SELECTED_DISABLED:String = "../maps/icons/new_year/craftMachine/typeButton/middle/selected_disabled.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_TYPEBUTTON_RIGHT_ACTIVE:String = "../maps/icons/new_year/craftMachine/typeButton/right/active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_TYPEBUTTON_RIGHT_DISABLED:String = "../maps/icons/new_year/craftMachine/typeButton/right/disabled.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_TYPEBUTTON_RIGHT_SELECTED:String = "../maps/icons/new_year/craftMachine/typeButton/right/selected.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_CRAFTMACHINE_TYPEBUTTON_RIGHT_SELECTED_DISABLED:String = "../maps/icons/new_year/craftMachine/typeButton/right/selected_disabled.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_BALL:String = "../maps/icons/new_year/decorationTypes/blue/ball.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_DECORATION:String = "../maps/icons/new_year/decorationTypes/blue/decoration.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_FLOOR:String = "../maps/icons/new_year/decorationTypes/blue/floor.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_GARLAND:String = "../maps/icons/new_year/decorationTypes/blue/garland.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_GROUND_LIGHT:String = "../maps/icons/new_year/decorationTypes/blue/ground_light.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_KITCHEN:String = "../maps/icons/new_year/decorationTypes/blue/kitchen.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_MEGA:String = "../maps/icons/new_year/decorationTypes/blue/mega.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_PYRO:String = "../maps/icons/new_year/decorationTypes/blue/pyro.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_RANDOM:String = "../maps/icons/new_year/decorationTypes/blue/random.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_SCULPTURE:String = "../maps/icons/new_year/decorationTypes/blue/sculpture.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_SNOW_ITEM:String = "../maps/icons/new_year/decorationTypes/blue/snow_item.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_TABLE:String = "../maps/icons/new_year/decorationTypes/blue/table.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_TENT:String = "../maps/icons/new_year/decorationTypes/blue/tent.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_TOP:String = "../maps/icons/new_year/decorationTypes/blue/top.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_TREES:String = "../maps/icons/new_year/decorationTypes/blue/trees.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_48_BALL:String = "../maps/icons/new_year/decorationTypes/blue_48/ball.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_48_DECORATION:String = "../maps/icons/new_year/decorationTypes/blue_48/decoration.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_48_FLOOR:String = "../maps/icons/new_year/decorationTypes/blue_48/floor.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_48_GARLAND:String = "../maps/icons/new_year/decorationTypes/blue_48/garland.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_48_GROUND_LIGHT:String = "../maps/icons/new_year/decorationTypes/blue_48/ground_light.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_48_KITCHEN:String = "../maps/icons/new_year/decorationTypes/blue_48/kitchen.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_48_MEGA:String = "../maps/icons/new_year/decorationTypes/blue_48/mega.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_48_PYRO:String = "../maps/icons/new_year/decorationTypes/blue_48/pyro.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_48_SCULPTURE:String = "../maps/icons/new_year/decorationTypes/blue_48/sculpture.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_48_SNOW_ITEM:String = "../maps/icons/new_year/decorationTypes/blue_48/snow_item.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_48_TABLE:String = "../maps/icons/new_year/decorationTypes/blue_48/table.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_48_TENT:String = "../maps/icons/new_year/decorationTypes/blue_48/tent.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_48_TOP:String = "../maps/icons/new_year/decorationTypes/blue_48/top.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_BLUE_48_TREES:String = "../maps/icons/new_year/decorationTypes/blue_48/trees.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_FILTER_BALL:String = "../maps/icons/new_year/decorationTypes/filter/ball.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_FILTER_DECORATION:String = "../maps/icons/new_year/decorationTypes/filter/decoration.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_FILTER_FLOOR:String = "../maps/icons/new_year/decorationTypes/filter/floor.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_FILTER_GARLAND:String = "../maps/icons/new_year/decorationTypes/filter/garland.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_FILTER_GROUND_LIGHT:String = "../maps/icons/new_year/decorationTypes/filter/ground_light.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_FILTER_KITCHEN:String = "../maps/icons/new_year/decorationTypes/filter/kitchen.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_FILTER_MEGA:String = "../maps/icons/new_year/decorationTypes/filter/mega.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_FILTER_PYRO:String = "../maps/icons/new_year/decorationTypes/filter/pyro.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_FILTER_RANDOM:String = "../maps/icons/new_year/decorationTypes/filter/random.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_FILTER_SCULPTURE:String = "../maps/icons/new_year/decorationTypes/filter/sculpture.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_FILTER_SNOW_ITEM:String = "../maps/icons/new_year/decorationTypes/filter/snow_item.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_FILTER_TABLE:String = "../maps/icons/new_year/decorationTypes/filter/table.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_FILTER_TENT:String = "../maps/icons/new_year/decorationTypes/filter/tent.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_FILTER_TOP:String = "../maps/icons/new_year/decorationTypes/filter/top.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_DECORATIONTYPES_FILTER_TREES:String = "../maps/icons/new_year/decorationTypes/filter/trees.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ICONS_ATM_POINTS_24X24:String = "../maps/icons/new_year/icons/atm_points_24x24.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ICONS_MEGA_COLLECTION:String = "../maps/icons/new_year/icons/mega_collection.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ICONS_PARTS_24X24:String = "../maps/icons/new_year/icons/parts_24x24.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ICONS_PARTS_48X24:String = "../maps/icons/new_year/icons/parts_48x24.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ICONS_PARTS_64X64:String = "../maps/icons/new_year/icons/parts_64x64.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_ICONS_RIBBON:String = "../maps/icons/new_year/icons/ribbon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_BIGBOXES:String = "../maps/icons/new_year/info/bigBoxes.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_BLOCK1:String = "../maps/icons/new_year/info/block1.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_BLOCK2:String = "../maps/icons/new_year/info/block2.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_BLOCK3:String = "../maps/icons/new_year/info/block3.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_BLOCK4:String = "../maps/icons/new_year/info/block4.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_BLOCK5:String = "../maps/icons/new_year/info/block5.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_BLOCK6:String = "../maps/icons/new_year/info/block6.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_BTN_PLAY:String = "../maps/icons/new_year/info/btn_play.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_BTN_PLAY_HOVER:String = "../maps/icons/new_year/info/btn_play_hover.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_COLLECTIONS1:String = "../maps/icons/new_year/info/collections1.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_COLLECTIONS2:String = "../maps/icons/new_year/info/collections2.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_COLLECTIONS3:String = "../maps/icons/new_year/info/collections3.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_COLLIDER1:String = "../maps/icons/new_year/info/collider1.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_COLLIDER2:String = "../maps/icons/new_year/info/collider2.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_COVER:String = "../maps/icons/new_year/info/cover.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_CREDITS_ICON:String = "../maps/icons/new_year/info/credits_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_HOWTOGET1:String = "../maps/icons/new_year/info/howToGet1.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_HOWTOGET2:String = "../maps/icons/new_year/info/howToGet2.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_HOWTOGET3:String = "../maps/icons/new_year/info/howToGet3.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_LEVELS:String = "../maps/icons/new_year/info/levels.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_MEGA1:String = "../maps/icons/new_year/info/mega1.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_MEGA2:String = "../maps/icons/new_year/info/mega2.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_POSTNY:String = "../maps/icons/new_year/info/postNy.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_REWARDS:String = "../maps/icons/new_year/info/rewards.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_SMALLBOXES:String = "../maps/icons/new_year/info/smallBoxes.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_STYLES:String = "../maps/icons/new_year/info/styles.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_TALISMANS:String = "../maps/icons/new_year/info/talismans.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_TANKS1:String = "../maps/icons/new_year/info/tanks1.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFO_TANKS2:String = "../maps/icons/new_year/info/tanks2.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFOTYPE_ARROW:String = "../maps/icons/new_year/infotype/arrow.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFOTYPE_CHRISTMAS:String = "../maps/icons/new_year/infotype/Christmas.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFOTYPE_CHRISTMAS_ACTIVE:String = "../maps/icons/new_year/infotype/Christmas_active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFOTYPE_EQUAL:String = "../maps/icons/new_year/infotype/equal.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFOTYPE_FAIRYTALE:String = "../maps/icons/new_year/infotype/Fairytale.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFOTYPE_FAIRYTALE_ACTIVE:String = "../maps/icons/new_year/infotype/Fairytale_active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFOTYPE_ICON_CHECKBOX_CHECKED:String = "../maps/icons/new_year/infotype/icon_checkbox_checked.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFOTYPE_ICON_FILLER:String = "../maps/icons/new_year/infotype/icon_filler.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFOTYPE_LINE:String = "../maps/icons/new_year/infotype/line.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFOTYPE_MULTIPLY:String = "../maps/icons/new_year/infotype/multiply.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFOTYPE_NEWYEAR:String = "../maps/icons/new_year/infotype/NewYear.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFOTYPE_NEWYEAR_ACTIVE:String = "../maps/icons/new_year/infotype/NewYear_active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFOTYPE_ORIENTAL:String = "../maps/icons/new_year/infotype/Oriental.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFOTYPE_ORIENTAL_ACTIVE:String = "../maps/icons/new_year/infotype/Oriental_active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFOTYPE_PLUS:String = "../maps/icons/new_year/infotype/plus.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_INFOTYPE_SELECTED_ROW:String = "../maps/icons/new_year/infotype/selected_row.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEFTTABBAR_BACK_LIGHT:String = "../maps/icons/new_year/leftTabBar/back_light.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEFTTABBAR_BUBBLE_X05:String = "../maps/icons/new_year/leftTabBar/bubble_x05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEFTTABBAR_FIR:String = "../maps/icons/new_year/leftTabBar/Fir.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEFTTABBAR_FORCOLLECTION:String = "../maps/icons/new_year/leftTabBar/forCollection.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEFTTABBAR_FORLEVELSREWARD:String = "../maps/icons/new_year/leftTabBar/forLevelsReward.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEFTTABBAR_ICON_HOUSE:String = "../maps/icons/new_year/leftTabBar/icon_house.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEFTTABBAR_ILLUMINATION:String = "../maps/icons/new_year/leftTabBar/Illumination.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEFTTABBAR_INSTALLATION:String = "../maps/icons/new_year/leftTabBar/Installation.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEFTTABBAR_LEFTMENUARROW:String = "../maps/icons/new_year/leftTabBar/leftMenuArrow.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEFTTABBAR_LEFTMENUARROW_S:String = "../maps/icons/new_year/leftTabBar/leftMenuArrow_s.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEFTTABBAR_LEFTMENUBACK:String = "../maps/icons/new_year/leftTabBar/leftMenuBack.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEFTTABBAR_LEFTMENUOVER:String = "../maps/icons/new_year/leftTabBar/leftMenuOver.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEFTTABBAR_LEFTMENUPARTICLES:String = "../maps/icons/new_year/leftTabBar/leftMenuParticles.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEFTTABBAR_MASCOT:String = "../maps/icons/new_year/leftTabBar/Mascot.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEFTTABBAR_NY18:String = "../maps/icons/new_year/leftTabBar/ny18.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEFTTABBAR_NY18REWARD:String = "../maps/icons/new_year/leftTabBar/ny18Reward.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEFTTABBAR_NY18_S:String = "../maps/icons/new_year/leftTabBar/ny18_s.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEFTTABBAR_NY19:String = "../maps/icons/new_year/leftTabBar/ny19.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEFTTABBAR_NY19REWARD:String = "../maps/icons/new_year/leftTabBar/ny19Reward.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEFTTABBAR_NY19_S:String = "../maps/icons/new_year/leftTabBar/ny19_s.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEFTTABBAR_NY20:String = "../maps/icons/new_year/leftTabBar/ny20.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEFTTABBAR_NY20REWARD:String = "../maps/icons/new_year/leftTabBar/ny20Reward.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEFTTABBAR_NY20_S:String = "../maps/icons/new_year/leftTabBar/ny20_s.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEFTTABBAR_SELECTED_INDICATOR:String = "../maps/icons/new_year/leftTabBar/selected_indicator.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEFTTABBAR_SHINE:String = "../maps/icons/new_year/leftTabBar/shine.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEFTTABBAR_TABLEFTARROW:String = "../maps/icons/new_year/leftTabBar/tabLeftArrow.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEFTTABBAR_TABLEFUL:String = "../maps/icons/new_year/leftTabBar/Tableful.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEFTTABBAR_VEHICLE:String = "../maps/icons/new_year/leftTabBar/vehicle.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_ALBUM_SMALL:String = "../maps/icons/new_year/levels_rewards/album_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_AWARD_LIGHT_BIG:String = "../maps/icons/new_year/levels_rewards/award_light_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_AWARD_LIGHT_SMALL:String = "../maps/icons/new_year/levels_rewards/award_light_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_BACKGROUND:String = "../maps/icons/new_year/levels_rewards/background.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_BORDER_LOCKED:String = "../maps/icons/new_year/levels_rewards/border_locked.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_BORDER_OPENED:String = "../maps/icons/new_year/levels_rewards/border_opened.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_BORDER_RECEIVED:String = "../maps/icons/new_year/levels_rewards/border_received.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_COLLECTION_REWARDS_BG:String = "../maps/icons/new_year/levels_rewards/collection_rewards_bg.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_FREETALISMAN_LOCKED:String = "../maps/icons/new_year/levels_rewards/freeTalisman_locked.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_FREETALISMAN_OPENED:String = "../maps/icons/new_year/levels_rewards/freeTalisman_opened.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_FREETALISMAN_OPENED_HOVER:String = "../maps/icons/new_year/levels_rewards/freeTalisman_opened_hover.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_FREETALISMAN_RECEIVED:String = "../maps/icons/new_year/levels_rewards/freeTalisman_received.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_HOR_LINE:String = "../maps/icons/new_year/levels_rewards/hor_line.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_LINE:String = "../maps/icons/new_year/levels_rewards/line.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_LOCK:String = "../maps/icons/new_year/levels_rewards/lock.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_PARTICLES:String = "../maps/icons/new_year/levels_rewards/particles.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_TANKWOMAN_LOCKED:String = "../maps/icons/new_year/levels_rewards/tankwoman_locked.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_TANKWOMAN_OPENED:String = "../maps/icons/new_year/levels_rewards/tankwoman_opened.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_TANKWOMAN_OPENED_HOVER:String = "../maps/icons/new_year/levels_rewards/tankwoman_opened_hover.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_TANKWOMAN_RECEIVED:String = "../maps/icons/new_year/levels_rewards/tankwoman_received.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_CICLES_ACHIEVED_BIG:String = "../maps/icons/new_year/levels_rewards/cicles/achieved_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_CICLES_ACHIEVED_SMALL:String = "../maps/icons/new_year/levels_rewards/cicles/achieved_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_CICLES_ACTIVE_BIG:String = "../maps/icons/new_year/levels_rewards/cicles/active_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_CICLES_ACTIVE_SMALL:String = "../maps/icons/new_year/levels_rewards/cicles/active_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_CICLES_NOT_ACHIEVED_BIG:String = "../maps/icons/new_year/levels_rewards/cicles/not_achieved_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_CICLES_NOT_ACHIEVED_SMALL:String = "../maps/icons/new_year/levels_rewards/cicles/not_achieved_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_LEVELS_ACTIVE:String = "../maps/icons/new_year/levels_rewards/levels/active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_LEVELS_BG_ACHIEVED:String = "../maps/icons/new_year/levels_rewards/levels/bg_achieved.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_LEVELS_BG_ACTIVE:String = "../maps/icons/new_year/levels_rewards/levels/bg_active.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_LEVELS_BG_NOT_ACHIEVED:String = "../maps/icons/new_year/levels_rewards/levels/bg_not_achieved.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_LEVELS_DISABLED:String = "../maps/icons/new_year/levels_rewards/levels/disabled.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_BIG_BLUE_SHINE:String = "../maps/icons/new_year/level_up_view/big_blue_shine.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_CHRISTMAS:String = "../maps/icons/new_year/level_up_view/Christmas.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_FAIRYTALE:String = "../maps/icons/new_year/level_up_view/Fairytale.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_NEWYEAR:String = "../maps/icons/new_year/level_up_view/NewYear.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_NY_BACKGROUND:String = "../maps/icons/new_year/level_up_view/ny_background.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_NY_BACKGROUND_SM:String = "../maps/icons/new_year/level_up_view/ny_background_sm.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_NY_ICE:String = "../maps/icons/new_year/level_up_view/ny_ice.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_ORIENTAL:String = "../maps/icons/new_year/level_up_view/Oriental.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_REDRIBBON:String = "../maps/icons/new_year/level_up_view/redRibbon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_SNOWFLAKES_324X324_1:String = "../maps/icons/new_year/level_up_view/snowflakes/324x324_1.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_SNOWFLAKES_324X324_10:String = "../maps/icons/new_year/level_up_view/snowflakes/324x324_10.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_SNOWFLAKES_324X324_2:String = "../maps/icons/new_year/level_up_view/snowflakes/324x324_2.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_SNOWFLAKES_324X324_3:String = "../maps/icons/new_year/level_up_view/snowflakes/324x324_3.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_SNOWFLAKES_324X324_4:String = "../maps/icons/new_year/level_up_view/snowflakes/324x324_4.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_SNOWFLAKES_324X324_5:String = "../maps/icons/new_year/level_up_view/snowflakes/324x324_5.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_SNOWFLAKES_324X324_6:String = "../maps/icons/new_year/level_up_view/snowflakes/324x324_6.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_SNOWFLAKES_324X324_7:String = "../maps/icons/new_year/level_up_view/snowflakes/324x324_7.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_SNOWFLAKES_324X324_8:String = "../maps/icons/new_year/level_up_view/snowflakes/324x324_8.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_SNOWFLAKES_324X324_9:String = "../maps/icons/new_year/level_up_view/snowflakes/324x324_9.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_MAIN_VIEW_SHADOW_BOTTOM:String = "../maps/icons/new_year/main_view/shadow_bottom.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_MAIN_VIEW_SHADOW_LEFT:String = "../maps/icons/new_year/main_view/shadow_left.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_MAIN_VIEW_SHADOW_RIGHT:String = "../maps/icons/new_year/main_view/shadow_right.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_MAIN_VIEW_SHADOW_TOP:String = "../maps/icons/new_year/main_view/shadow_top.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_MAIN_VIEW_POP_OVER_ARROW_BOTTOM:String = "../maps/icons/new_year/main_view/pop_over/arrow_bottom.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_MAIN_VIEW_POP_OVER_ARROW_LEFT:String = "../maps/icons/new_year/main_view/pop_over/arrow_left.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_MAIN_VIEW_POP_OVER_ARROW_RIGHT:String = "../maps/icons/new_year/main_view/pop_over/arrow_right.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_MAIN_VIEW_POP_OVER_ARROW_TOP:String = "../maps/icons/new_year/main_view/pop_over/arrow_top.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_MAIN_VIEW_POP_OVER_ART:String = "../maps/icons/new_year/main_view/pop_over/art.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_MAIN_VIEW_POP_OVER_BACKGROUND:String = "../maps/icons/new_year/main_view/pop_over/background.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_MAIN_VIEW_POP_OVER_DOT:String = "../maps/icons/new_year/main_view/pop_over/dot.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_MAIN_VIEW_POP_OVER_MOUSE:String = "../maps/icons/new_year/main_view/pop_over/mouse.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_MAIN_VIEW_POP_OVER_PLUS:String = "../maps/icons/new_year/main_view/pop_over/plus.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_PROGRESS_BAR_GLOWING_DELTA:String = "../maps/icons/new_year/progress_bar/glowing_delta.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_PROGRESS_BAR_INDICATOR:String = "../maps/icons/new_year/progress_bar/indicator.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_PROGRESS_BAR_ORANGE_INDICATOR:String = "../maps/icons/new_year/progress_bar/orange_indicator.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_PROGRESS_BAR_PB_BORDER:String = "../maps/icons/new_year/progress_bar/pb_border.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_PROGRESS_BAR_PB_GRADIENT:String = "../maps/icons/new_year/progress_bar/pb_gradient.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_PROGRESS_BAR_PB_ORANGE_GRADIENT:String = "../maps/icons/new_year/progress_bar/pb_orange_gradient.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_PROGRESS_BAR_PB_PATTERN_BG:String = "../maps/icons/new_year/progress_bar/pb_pattern_bg.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_PROGRESS_BAR_PB_PATTERN_BLUE:String = "../maps/icons/new_year/progress_bar/pb_pattern_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_PROGRESS_BAR_PB_PATTERN_EMPTY:String = "../maps/icons/new_year/progress_bar/pb_pattern_empty.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_PROGRESS_BAR_PB_PATTERN_GR:String = "../maps/icons/new_year/progress_bar/pb_pattern_gr.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_PROGRESS_BAR_PB_PATTERN_GREEN:String = "../maps/icons/new_year/progress_bar/pb_pattern_green.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_PROGRESS_BAR_PB_PATTERN_ORANGE:String = "../maps/icons/new_year/progress_bar/pb_pattern_orange.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_RANKBG_RANK1:String = "../maps/icons/new_year/rankBG/rank1.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_RANKBG_RANK2:String = "../maps/icons/new_year/rankBG/rank2.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_RANKBG_RANK3:String = "../maps/icons/new_year/rankBG/rank3.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_RANKBG_RANK4:String = "../maps/icons/new_year/rankBG/rank4.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_RANKBG_RANK5:String = "../maps/icons/new_year/rankBG/rank5.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SETTINGS_ASIAN:String = "../maps/icons/new_year/settings/asian.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SETTINGS_CHRISTMAS:String = "../maps/icons/new_year/settings/Christmas.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SETTINGS_FAIRYTALE:String = "../maps/icons/new_year/settings/Fairytale.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SETTINGS_MEGA:String = "../maps/icons/new_year/settings/Mega.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SETTINGS_MODERNWESTERN:String = "../maps/icons/new_year/settings/modernWestern.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SETTINGS_NEWYEAR:String = "../maps/icons/new_year/settings/NewYear.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SETTINGS_ORIENTAL:String = "../maps/icons/new_year/settings/Oriental.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SETTINGS_SOVIET:String = "../maps/icons/new_year/settings/soviet.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SETTINGS_TRADITIONALWESTERN:String = "../maps/icons/new_year/settings/traditionalWestern.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SLOTS_C_48X48_BORDER_BLUE:String = "../maps/icons/new_year/slots/c_48x48/border_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SLOTS_C_48X48_BORDER_VIOLET:String = "../maps/icons/new_year/slots/c_48x48/border_violet.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SLOTS_C_48X48_PIXELS:String = "../maps/icons/new_year/slots/c_48x48/pixels.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SLOTS_C_48X48_PLUS_BLUE:String = "../maps/icons/new_year/slots/c_48x48/plus_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SLOTS_C_48X48_PLUS_VIOLET:String = "../maps/icons/new_year/slots/c_48x48/plus_violet.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SLOTS_C_80X80_COUNTER_BACKGROUND:String = "../maps/icons/new_year/slots/c_80x80/counter_background.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SLOTS_C_80X80_SLOT_BG:String = "../maps/icons/new_year/slots/c_80x80/slot_bg.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SLOTS_C_80X80_SLOT_BG_CRAFT:String = "../maps/icons/new_year/slots/c_80x80/slot_bg_craft.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SLOTS_C_80X80_SLOT_BG_MULTI:String = "../maps/icons/new_year/slots/c_80x80/slot_bg_multi.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SLOTS_C_80X80_SLOT_OVER:String = "../maps/icons/new_year/slots/c_80x80/slot_over.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SLOTS_C_80X80_SLOT_PLUS:String = "../maps/icons/new_year/slots/c_80x80/slot_plus.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SLOTS_C_80X80_SLOT_SELECTED:String = "../maps/icons/new_year/slots/c_80x80/slot_selected.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SLOTS_C_80X80_SLOT_SELECTED_BREAK:String = "../maps/icons/new_year/slots/c_80x80/slot_selected_break.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SLOTS_C_80X80_SLOT_SELECTED_BREAK_MULTI:String = "../maps/icons/new_year/slots/c_80x80/slot_selected_break_multi.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SLOTS_C_80X80_SLOT_SELECTED_MULTI:String = "../maps/icons/new_year/slots/c_80x80/slot_selected_multi.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SLOTS_C_80X80_RANKS_RANK_1:String = "../maps/icons/new_year/slots/c_80x80/ranks/rank_1.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SLOTS_C_80X80_RANKS_RANK_2:String = "../maps/icons/new_year/slots/c_80x80/ranks/rank_2.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SLOTS_C_80X80_RANKS_RANK_3:String = "../maps/icons/new_year/slots/c_80x80/ranks/rank_3.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SLOTS_C_80X80_RANKS_RANK_4:String = "../maps/icons/new_year/slots/c_80x80/ranks/rank_4.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SLOTS_C_80X80_RANKS_RANK_5:String = "../maps/icons/new_year/slots/c_80x80/ranks/rank_5.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_SPECIAL_REWARD_VIEW_DEDMOROZ:String = "../maps/icons/new_year/special_reward_view/dedMoroz.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_STYLE_REWARD_BACKGROUND:String = "../maps/icons/new_year/style_reward/background.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_STYLE_REWARD_SHINE:String = "../maps/icons/new_year/style_reward/shine.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TALISMANS_DIALOG_SHADOW:String = "../maps/icons/new_year/talismans/dialog_shadow.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TALISMANS_TALISMANS_BACK:String = "../maps/icons/new_year/talismans/talismans_back.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TALISMANS_TALISMANS_BACK_BUTTON:String = "../maps/icons/new_year/talismans/talismans_back_button.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TALISMANS_BIG_CHRISTMAS:String = "../maps/icons/new_year/talismans/big/Christmas.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TALISMANS_BIG_DEFAULT:String = "../maps/icons/new_year/talismans/big/default.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TALISMANS_BIG_FAIRYTALE:String = "../maps/icons/new_year/talismans/big/Fairytale.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TALISMANS_BIG_NEWYEAR:String = "../maps/icons/new_year/talismans/big/NewYear.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TALISMANS_BIG_ORIENTAL:String = "../maps/icons/new_year/talismans/big/Oriental.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TALISMANS_SMALL_CHRISTMAS:String = "../maps/icons/new_year/talismans/small/Christmas.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TALISMANS_SMALL_DEFAULT:String = "../maps/icons/new_year/talismans/small/default.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TALISMANS_SMALL_FAIRYTALE:String = "../maps/icons/new_year/talismans/small/Fairytale.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TALISMANS_SMALL_NEWYEAR:String = "../maps/icons/new_year/talismans/small/NewYear.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TALISMANS_SMALL_ORIENTAL:String = "../maps/icons/new_year/talismans/small/Oriental.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TANK_SLOT_GLOW:String = "../maps/icons/new_year/tank_slot/glow.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TANK_SLOT_ICON_BATTLE_EXP_MAIN:String = "../maps/icons/new_year/tank_slot/icon_battle_exp_main.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TANK_SLOT_ICON_BATTLE_EXP_SMALL:String = "../maps/icons/new_year/tank_slot/icon_battle_exp_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TANK_SLOT_ICON_CREW_EXP_MAIN:String = "../maps/icons/new_year/tank_slot/icon_crew_exp_main.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TANK_SLOT_ICON_CREW_EXP_SMALL:String = "../maps/icons/new_year/tank_slot/icon_crew_exp_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TANK_SLOT_ICON_FREE_EXP_MAIN_SCREEN:String = "../maps/icons/new_year/tank_slot/icon_free_exp_main_screen.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TANK_SLOT_ICON_FREE_EXP_SMALL:String = "../maps/icons/new_year/tank_slot/icon_free_exp_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TANK_SLOT_SLOTS_BIG_SLOT_10:String = "../maps/icons/new_year/tank_slot/slots/big/slot_10.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TANK_SLOT_SLOTS_BIG_SLOT_5:String = "../maps/icons/new_year/tank_slot/slots/big/slot_5.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TANK_SLOT_SLOTS_BIG_SLOT_6:String = "../maps/icons/new_year/tank_slot/slots/big/slot_6.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TANK_SLOT_SLOTS_BIG_SLOT_7:String = "../maps/icons/new_year/tank_slot/slots/big/slot_7.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TANK_SLOT_SLOTS_BIG_SLOT_8:String = "../maps/icons/new_year/tank_slot/slots/big/slot_8.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TANK_SLOT_SLOTS_BIG_SLOT_9:String = "../maps/icons/new_year/tank_slot/slots/big/slot_9.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TANK_SLOT_SLOTS_MEDIUM_SLOT_10:String = "../maps/icons/new_year/tank_slot/slots/medium/slot_10.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TANK_SLOT_SLOTS_MEDIUM_SLOT_5:String = "../maps/icons/new_year/tank_slot/slots/medium/slot_5.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TANK_SLOT_SLOTS_MEDIUM_SLOT_6:String = "../maps/icons/new_year/tank_slot/slots/medium/slot_6.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TANK_SLOT_SLOTS_MEDIUM_SLOT_7:String = "../maps/icons/new_year/tank_slot/slots/medium/slot_7.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TANK_SLOT_SLOTS_MEDIUM_SLOT_8:String = "../maps/icons/new_year/tank_slot/slots/medium/slot_8.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TANK_SLOT_SLOTS_MEDIUM_SLOT_9:String = "../maps/icons/new_year/tank_slot/slots/medium/slot_9.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TANK_SLOT_SLOTS_SMALL_SLOT_10:String = "../maps/icons/new_year/tank_slot/slots/small/slot_10.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TANK_SLOT_SLOTS_SMALL_SLOT_5:String = "../maps/icons/new_year/tank_slot/slots/small/slot_5.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TANK_SLOT_SLOTS_SMALL_SLOT_6:String = "../maps/icons/new_year/tank_slot/slots/small/slot_6.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TANK_SLOT_SLOTS_SMALL_SLOT_7:String = "../maps/icons/new_year/tank_slot/slots/small/slot_7.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TANK_SLOT_SLOTS_SMALL_SLOT_8:String = "../maps/icons/new_year/tank_slot/slots/small/slot_8.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TANK_SLOT_SLOTS_SMALL_SLOT_9:String = "../maps/icons/new_year/tank_slot/slots/small/slot_9.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_01_01_BLACK_BIG:String = "../maps/icons/new_year/toys18/big/ball_01_01_black_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_01_01_BLUE_BIG:String = "../maps/icons/new_year/toys18/big/ball_01_01_blue_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_01_01_RED_BIG:String = "../maps/icons/new_year/toys18/big/ball_01_01_red_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_01_01_RED_WHITE_BIG:String = "../maps/icons/new_year/toys18/big/ball_01_01_red_white_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_01_01_WHITE_BIG:String = "../maps/icons/new_year/toys18/big/ball_01_01_white_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_01_02_BLACK_BIG:String = "../maps/icons/new_year/toys18/big/Ball_01_02_black_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_01_03_BLUE_BIG:String = "../maps/icons/new_year/toys18/big/ball_01_03_blue_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_01_03_RED_BIG:String = "../maps/icons/new_year/toys18/big/ball_01_03_red_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_01_03_WHITE_BIG:String = "../maps/icons/new_year/toys18/big/ball_01_03_white_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_01_45_RED_BIG:String = "../maps/icons/new_year/toys18/big/ball_01_45_red_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_01_45_YELLOW_BIG:String = "../maps/icons/new_year/toys18/big/ball_01_45_yellow_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_01_46_YELLOW_BIG:String = "../maps/icons/new_year/toys18/big/ball_01_46_yellow_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_02_02_BLACK_BIG:String = "../maps/icons/new_year/toys18/big/ball_02_02_black_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_02_02_BLUE_BIG:String = "../maps/icons/new_year/toys18/big/ball_02_02_blue_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_02_02_RED_BIG:String = "../maps/icons/new_year/toys18/big/ball_02_02_red_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_02_02_WHITE_BIG:String = "../maps/icons/new_year/toys18/big/ball_02_02_white_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_02_43_BLUE_BIG:String = "../maps/icons/new_year/toys18/big/ball_02_43_blue_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_02_43_RED_BIG:String = "../maps/icons/new_year/toys18/big/ball_02_43_red_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_02_43_WHITE_BIG:String = "../maps/icons/new_year/toys18/big/ball_02_43_white_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_02_47_RED_BIG:String = "../maps/icons/new_year/toys18/big/ball_02_47_red_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_02_47_YELLOW_BIG:String = "../maps/icons/new_year/toys18/big/ball_02_47_yellow_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_02_48_YELLOW_BIG:String = "../maps/icons/new_year/toys18/big/Ball_02_48_yellow_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_03_04_BLACK_BIG:String = "../maps/icons/new_year/toys18/big/Ball_03_04_black_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_03_04_BLUE_BIG:String = "../maps/icons/new_year/toys18/big/Ball_03_04_blue_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_03_04_RED_BIG:String = "../maps/icons/new_year/toys18/big/ball_03_04_red_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_03_04_WHITE_BIG:String = "../maps/icons/new_year/toys18/big/Ball_03_04_white_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_03_05_BIG:String = "../maps/icons/new_year/toys18/big/Ball_03_05_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_03_06_BLUE_BIG:String = "../maps/icons/new_year/toys18/big/Ball_03_06_blue_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_03_06_RED_BIG:String = "../maps/icons/new_year/toys18/big/Ball_03_06_red_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_03_06_WHITE_BIG:String = "../maps/icons/new_year/toys18/big/Ball_03_06_white_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_03_08_BLUE_BIG:String = "../maps/icons/new_year/toys18/big/Ball_03_08_blue_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_03_08_RED_BIG:String = "../maps/icons/new_year/toys18/big/Ball_03_08_red_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_03_16_BIG:String = "../maps/icons/new_year/toys18/big/Ball_03_16_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_03_49_RED_BIG:String = "../maps/icons/new_year/toys18/big/Ball_03_49_red_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_03_49_YELLOW_BIG:String = "../maps/icons/new_year/toys18/big/Ball_03_49_yellow_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_03_50_BIG:String = "../maps/icons/new_year/toys18/big/Ball_03_50_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_04_09_WHITE_BIG:String = "../maps/icons/new_year/toys18/big/Ball_04_09_white_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_04_09_YELLOW_BIG:String = "../maps/icons/new_year/toys18/big/ball_04_09_yellow_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_04_11_GOLD_BIG:String = "../maps/icons/new_year/toys18/big/Ball_04_11_gold_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_04_11_SILVER_BIG:String = "../maps/icons/new_year/toys18/big/ball_04_11_silver_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_04_12_GOLD_BIG:String = "../maps/icons/new_year/toys18/big/ball_04_12_gold_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_04_12_SILVER_BIG:String = "../maps/icons/new_year/toys18/big/Ball_04_12_silver_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_04_13_BIG:String = "../maps/icons/new_year/toys18/big/Ball_04_13_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_04_14_BIG:String = "../maps/icons/new_year/toys18/big/Ball_04_14_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_04_15_BIG:String = "../maps/icons/new_year/toys18/big/Ball_04_15_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_04_17_BLUE_BIG:String = "../maps/icons/new_year/toys18/big/Ball_04_17_blue_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_04_18_BIG:String = "../maps/icons/new_year/toys18/big/Ball_04_18_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_04_19_BIG:String = "../maps/icons/new_year/toys18/big/Ball_04_19_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_04_20_BIG:String = "../maps/icons/new_year/toys18/big/Ball_04_20_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_04_22_BIG:String = "../maps/icons/new_year/toys18/big/Ball_04_22_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_04_27_BIG:String = "../maps/icons/new_year/toys18/big/Ball_04_27_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_04_28_BIG:String = "../maps/icons/new_year/toys18/big/Ball_04_28_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_04_29_BIG:String = "../maps/icons/new_year/toys18/big/Ball_04_29_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_04_51_BIG:String = "../maps/icons/new_year/toys18/big/Ball_04_51_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_04_52_BIG:String = "../maps/icons/new_year/toys18/big/Ball_04_52_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_04_53_BIG:String = "../maps/icons/new_year/toys18/big/ball_04_53_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_05_35_BIG:String = "../maps/icons/new_year/toys18/big/Ball_05_35_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_05_38_BIG:String = "../maps/icons/new_year/toys18/big/Ball_05_38_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_05_54_BLUE_BIG:String = "../maps/icons/new_year/toys18/big/Ball_05_54_blue_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_05_54_RED_BIG:String = "../maps/icons/new_year/toys18/big/Ball_05_54_red_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_05_55_BIG:String = "../maps/icons/new_year/toys18/big/Ball_05_55_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_05_56_RED_BIG:String = "../maps/icons/new_year/toys18/big/Ball_05_56_red_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_BALL_05_56_YELLOW_BIG:String = "../maps/icons/new_year/toys18/big/Ball_05_56_yellow_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_01_01_BIG:String = "../maps/icons/new_year/toys18/big/floor_01_01_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_01_02_BIG:String = "../maps/icons/new_year/toys18/big/floor_01_02_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_01_02_BLUE_BIG:String = "../maps/icons/new_year/toys18/big/floor_01_02_blue_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_01_28_BIG:String = "../maps/icons/new_year/toys18/big/floor_01_28_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_01_29_BIG:String = "../maps/icons/new_year/toys18/big/floor_01_29_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_02_04_BIG:String = "../maps/icons/new_year/toys18/big/floor_02_04_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_02_05_BIG:String = "../maps/icons/new_year/toys18/big/floor_02_05_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_02_06_BIG:String = "../maps/icons/new_year/toys18/big/floor_02_06_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_02_06_BLUE_BIG:String = "../maps/icons/new_year/toys18/big/floor_02_06_blue_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_02_06_GREEN_BIG:String = "../maps/icons/new_year/toys18/big/floor_02_06_green_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_02_07_BIG:String = "../maps/icons/new_year/toys18/big/floor_02_07_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_02_30_BIG:String = "../maps/icons/new_year/toys18/big/floor_02_30_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_02_31_BIG:String = "../maps/icons/new_year/toys18/big/floor_02_31_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_02_32_BIG:String = "../maps/icons/new_year/toys18/big/floor_02_32_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_02_33_BIG:String = "../maps/icons/new_year/toys18/big/floor_02_33_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_03_03_BIG:String = "../maps/icons/new_year/toys18/big/floor_03_03_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_03_08_BIG:String = "../maps/icons/new_year/toys18/big/floor_03_08_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_03_15_BIG:String = "../maps/icons/new_year/toys18/big/floor_03_15_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_03_15_BLUE_BIG:String = "../maps/icons/new_year/toys18/big/floor_03_15_blue_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_03_34_BIG:String = "../maps/icons/new_year/toys18/big/floor_03_34_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_03_35_BIG:String = "../maps/icons/new_year/toys18/big/floor_03_35_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_03_36_BIG:String = "../maps/icons/new_year/toys18/big/floor_03_36_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_03_37_BIG:String = "../maps/icons/new_year/toys18/big/floor_03_37_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_03_38_BIG:String = "../maps/icons/new_year/toys18/big/floor_03_38_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_04_16_BIG:String = "../maps/icons/new_year/toys18/big/floor_04_16_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_04_39_BIG:String = "../maps/icons/new_year/toys18/big/floor_04_39_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_04_40_BIG:String = "../maps/icons/new_year/toys18/big/floor_04_40_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_04_41_BIG:String = "../maps/icons/new_year/toys18/big/floor_04_41_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_04_42_BIG:String = "../maps/icons/new_year/toys18/big/floor_04_42_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_04_43_BIG:String = "../maps/icons/new_year/toys18/big/floor_04_43_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_04_44_BIG:String = "../maps/icons/new_year/toys18/big/floor_04_44_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_04_45_BIG:String = "../maps/icons/new_year/toys18/big/floor_04_45_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_04_46_BIG:String = "../maps/icons/new_year/toys18/big/floor_04_46_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_05_26_BIG:String = "../maps/icons/new_year/toys18/big/floor_05_26_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_05_27_BIG:String = "../maps/icons/new_year/toys18/big/floor_05_27_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_05_47_BIG:String = "../maps/icons/new_year/toys18/big/Floor_05_47_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_05_48_BIG:String = "../maps/icons/new_year/toys18/big/Floor_05_48_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_05_49_BIG:String = "../maps/icons/new_year/toys18/big/floor_05_49_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_05_50_BIG:String = "../maps/icons/new_year/toys18/big/floor_05_50_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_05_51_BIG:String = "../maps/icons/new_year/toys18/big/floor_05_51_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_FLOOR_05_52_BIG:String = "../maps/icons/new_year/toys18/big/floor_05_52_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_01_01_BLUE_BIG:String = "../maps/icons/new_year/toys18/big/garland_01_01_blue_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_01_01_GOLD_BIG:String = "../maps/icons/new_year/toys18/big/garland_01_01_gold_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_01_01_RED:String = "../maps/icons/new_year/toys18/big/garland_01_01_Red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_01_01_WHITE_BIG:String = "../maps/icons/new_year/toys18/big/garland_01_01_white_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_01_19_GREENWHITE_BIG:String = "../maps/icons/new_year/toys18/big/garland_01_19_greenwhite_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_01_19_REDBLUE_BIG:String = "../maps/icons/new_year/toys18/big/garland_01_19_redblue_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_01_19_REDGOLD_BIG:String = "../maps/icons/new_year/toys18/big/garland_01_19_redgold_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_01_19_REDWHITE_BIG:String = "../maps/icons/new_year/toys18/big/garland_01_19_redwhite_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_02_02_BLUE_BIG:String = "../maps/icons/new_year/toys18/big/garland_02_02_blue_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_02_02_GOLD_BIG:String = "../maps/icons/new_year/toys18/big/garland_02_02_gold_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_02_02_RED_BIG:String = "../maps/icons/new_year/toys18/big/garland_02_02_red_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_02_02_WHITE_BIG:String = "../maps/icons/new_year/toys18/big/garland_02_02_white_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_02_20_GOLD_BIG:String = "../maps/icons/new_year/toys18/big/garland_02_20_gold_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_02_20_GREEN_BIG:String = "../maps/icons/new_year/toys18/big/garland_02_20_green_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_02_20_RED_BIG:String = "../maps/icons/new_year/toys18/big/garland_02_20_red_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_02_20_WHITE_BIG:String = "../maps/icons/new_year/toys18/big/garland_02_20_white_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_03_03_BLUE_BIG:String = "../maps/icons/new_year/toys18/big/garland_03_03_blue_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_03_03_GOLD_BIG:String = "../maps/icons/new_year/toys18/big/garland_03_03_gold_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_03_03_RED_BIG:String = "../maps/icons/new_year/toys18/big/garland_03_03_red_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_03_04_BIG:String = "../maps/icons/new_year/toys18/big/garland_03_04_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_03_05_BIG:String = "../maps/icons/new_year/toys18/big/garland_03_05_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_03_10_BIG:String = "../maps/icons/new_year/toys18/big/garland_03_10_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_03_17_BIG:String = "../maps/icons/new_year/toys18/big/garland_03_17_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_03_21_BIG:String = "../maps/icons/new_year/toys18/big/garland_03_21_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_04_07_BIG:String = "../maps/icons/new_year/toys18/big/garland_04_07_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_04_08_BIG:String = "../maps/icons/new_year/toys18/big/garland_04_08_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_04_09_BIG:String = "../maps/icons/new_year/toys18/big/garland_04_09_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_04_18_BIG:String = "../maps/icons/new_year/toys18/big/garland_04_18_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_04_22_BIG:String = "../maps/icons/new_year/toys18/big/garland_04_22_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_04_23_BIG:String = "../maps/icons/new_year/toys18/big/garland_04_23_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_04_24_BIG:String = "../maps/icons/new_year/toys18/big/garland_04_24_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_04_25_BIG:String = "../maps/icons/new_year/toys18/big/garland_04_25_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_04_26_BIG:String = "../maps/icons/new_year/toys18/big/garland_04_26_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_05_16_BIG:String = "../maps/icons/new_year/toys18/big/garland_05_16_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_05_27_BIG:String = "../maps/icons/new_year/toys18/big/garland_05_27_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_05_28_BLUE_BIG:String = "../maps/icons/new_year/toys18/big/garland_05_28_blue_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_05_28_RED_BIG:String = "../maps/icons/new_year/toys18/big/garland_05_28_red_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_05_29_BIG:String = "../maps/icons/new_year/toys18/big/garland_05_29_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_05_30_BIG:String = "../maps/icons/new_year/toys18/big/garland_05_30_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GARLAND_05_31_BIG:String = "../maps/icons/new_year/toys18/big/garland_05_31_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GATES_01_AM:String = "../maps/icons/new_year/toys18/big/Gates_01_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GATES_01_BIG:String = "../maps/icons/new_year/toys18/big/Gates_01_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GATES_01_CN:String = "../maps/icons/new_year/toys18/big/Gates_01_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GATES_01_EU:String = "../maps/icons/new_year/toys18/big/Gates_01_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GATES_01_SU:String = "../maps/icons/new_year/toys18/big/Gates_01_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GATES_02_AM:String = "../maps/icons/new_year/toys18/big/Gates_02_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GATES_02_CN:String = "../maps/icons/new_year/toys18/big/Gates_02_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GATES_02_EU:String = "../maps/icons/new_year/toys18/big/Gates_02_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GATES_02_SU:String = "../maps/icons/new_year/toys18/big/Gates_02_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GATES_03_AM:String = "../maps/icons/new_year/toys18/big/Gates_03_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GATES_03_CN:String = "../maps/icons/new_year/toys18/big/Gates_03_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GATES_03_EU:String = "../maps/icons/new_year/toys18/big/Gates_03_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GATES_03_SU:String = "../maps/icons/new_year/toys18/big/Gates_03_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GATES_04_AM:String = "../maps/icons/new_year/toys18/big/Gates_04_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GATES_04_CN:String = "../maps/icons/new_year/toys18/big/Gates_04_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GATES_04_EU:String = "../maps/icons/new_year/toys18/big/Gates_04_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GATES_04_SU:String = "../maps/icons/new_year/toys18/big/Gates_04_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GATES_05_AM:String = "../maps/icons/new_year/toys18/big/Gates_05_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GATES_05_CN:String = "../maps/icons/new_year/toys18/big/Gates_05_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GATES_05_EU:String = "../maps/icons/new_year/toys18/big/Gates_05_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GATES_05_SU:String = "../maps/icons/new_year/toys18/big/Gates_05_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GROUNDLIGHT_01_AM:String = "../maps/icons/new_year/toys18/big/Groundlight_01_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GROUNDLIGHT_01_AM_BIG:String = "../maps/icons/new_year/toys18/big/Groundlight_01_AM_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GROUNDLIGHT_01_CN:String = "../maps/icons/new_year/toys18/big/Groundlight_01_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GROUNDLIGHT_01_EU:String = "../maps/icons/new_year/toys18/big/Groundlight_01_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GROUNDLIGHT_01_SU:String = "../maps/icons/new_year/toys18/big/Groundlight_01_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GROUNDLIGHT_02_AM:String = "../maps/icons/new_year/toys18/big/Groundlight_02_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GROUNDLIGHT_02_CN:String = "../maps/icons/new_year/toys18/big/Groundlight_02_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GROUNDLIGHT_02_EU:String = "../maps/icons/new_year/toys18/big/Groundlight_02_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GROUNDLIGHT_02_SU:String = "../maps/icons/new_year/toys18/big/Groundlight_02_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GROUNDLIGHT_03_AM:String = "../maps/icons/new_year/toys18/big/Groundlight_03_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GROUNDLIGHT_03_CN:String = "../maps/icons/new_year/toys18/big/Groundlight_03_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GROUNDLIGHT_03_EU:String = "../maps/icons/new_year/toys18/big/Groundlight_03_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GROUNDLIGHT_03_SU:String = "../maps/icons/new_year/toys18/big/Groundlight_03_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GROUNDLIGHT_04_AM:String = "../maps/icons/new_year/toys18/big/Groundlight_04_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GROUNDLIGHT_04_CN:String = "../maps/icons/new_year/toys18/big/Groundlight_04_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GROUNDLIGHT_04_EU:String = "../maps/icons/new_year/toys18/big/Groundlight_04_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GROUNDLIGHT_04_SU:String = "../maps/icons/new_year/toys18/big/Groundlight_04_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GROUNDLIGHT_05_AM:String = "../maps/icons/new_year/toys18/big/Groundlight_05_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GROUNDLIGHT_05_CN:String = "../maps/icons/new_year/toys18/big/Groundlight_05_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GROUNDLIGHT_05_EU:String = "../maps/icons/new_year/toys18/big/Groundlight_05_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_GROUNDLIGHT_05_SU:String = "../maps/icons/new_year/toys18/big/Groundlight_05_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_HOMEDEC_01_AM:String = "../maps/icons/new_year/toys18/big/Homedec_01_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_HOMEDEC_01_AM_BIG:String = "../maps/icons/new_year/toys18/big/Homedec_01_AM_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_HOMEDEC_01_CN:String = "../maps/icons/new_year/toys18/big/Homedec_01_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_HOMEDEC_01_EU:String = "../maps/icons/new_year/toys18/big/Homedec_01_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_HOMEDEC_01_SU:String = "../maps/icons/new_year/toys18/big/Homedec_01_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_HOMEDEC_02_AM:String = "../maps/icons/new_year/toys18/big/Homedec_02_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_HOMEDEC_02_CN:String = "../maps/icons/new_year/toys18/big/Homedec_02_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_HOMEDEC_02_EU:String = "../maps/icons/new_year/toys18/big/Homedec_02_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_HOMEDEC_02_SU:String = "../maps/icons/new_year/toys18/big/Homedec_02_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_HOMEDEC_03_AM:String = "../maps/icons/new_year/toys18/big/Homedec_03_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_HOMEDEC_03_CN:String = "../maps/icons/new_year/toys18/big/Homedec_03_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_HOMEDEC_03_EU:String = "../maps/icons/new_year/toys18/big/Homedec_03_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_HOMEDEC_03_SU:String = "../maps/icons/new_year/toys18/big/Homedec_03_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_HOMEDEC_04_AM:String = "../maps/icons/new_year/toys18/big/Homedec_04_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_HOMEDEC_04_CN:String = "../maps/icons/new_year/toys18/big/Homedec_04_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_HOMEDEC_04_EU:String = "../maps/icons/new_year/toys18/big/Homedec_04_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_HOMEDEC_04_SU:String = "../maps/icons/new_year/toys18/big/Homedec_04_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_HOMEDEC_05_AM:String = "../maps/icons/new_year/toys18/big/Homedec_05_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_HOMEDEC_05_CN:String = "../maps/icons/new_year/toys18/big/Homedec_05_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_HOMEDEC_05_EU:String = "../maps/icons/new_year/toys18/big/Homedec_05_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_HOMEDEC_05_SU:String = "../maps/icons/new_year/toys18/big/Homedec_05_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_SNOWMAN_01_AM:String = "../maps/icons/new_year/toys18/big/Snowman_01_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_SNOWMAN_01_AM_BIG:String = "../maps/icons/new_year/toys18/big/Snowman_01_AM_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_SNOWMAN_01_CN:String = "../maps/icons/new_year/toys18/big/Snowman_01_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_SNOWMAN_01_CN_BIG:String = "../maps/icons/new_year/toys18/big/Snowman_01_CN_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_SNOWMAN_01_EU:String = "../maps/icons/new_year/toys18/big/Snowman_01_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_SNOWMAN_01_EU_BIG:String = "../maps/icons/new_year/toys18/big/Snowman_01_EU_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_SNOWMAN_01_SU:String = "../maps/icons/new_year/toys18/big/Snowman_01_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_SNOWMAN_01_SU_BIG:String = "../maps/icons/new_year/toys18/big/Snowman_01_SU_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_SNOWMAN_02_AM:String = "../maps/icons/new_year/toys18/big/Snowman_02_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_SNOWMAN_02_CN:String = "../maps/icons/new_year/toys18/big/Snowman_02_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_SNOWMAN_02_EU:String = "../maps/icons/new_year/toys18/big/Snowman_02_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_SNOWMAN_02_SU:String = "../maps/icons/new_year/toys18/big/Snowman_02_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_SNOWMAN_03_AM:String = "../maps/icons/new_year/toys18/big/Snowman_03_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_SNOWMAN_03_CN:String = "../maps/icons/new_year/toys18/big/Snowman_03_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_SNOWMAN_03_EU:String = "../maps/icons/new_year/toys18/big/Snowman_03_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_SNOWMAN_03_SU:String = "../maps/icons/new_year/toys18/big/Snowman_03_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_SNOWMAN_04_AM:String = "../maps/icons/new_year/toys18/big/Snowman_04_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_SNOWMAN_04_CN:String = "../maps/icons/new_year/toys18/big/Snowman_04_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_SNOWMAN_04_EU:String = "../maps/icons/new_year/toys18/big/Snowman_04_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_SNOWMAN_04_SU:String = "../maps/icons/new_year/toys18/big/Snowman_04_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_SNOWMAN_05_AM:String = "../maps/icons/new_year/toys18/big/Snowman_05_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_SNOWMAN_05_CN:String = "../maps/icons/new_year/toys18/big/Snowman_05_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_SNOWMAN_05_EU:String = "../maps/icons/new_year/toys18/big/snowman_05_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_SNOWMAN_05_SU:String = "../maps/icons/new_year/toys18/big/Snowman_05_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_01_01_BLUE_BIG:String = "../maps/icons/new_year/toys18/big/top_01_01_blue_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_01_01_RED_BIG:String = "../maps/icons/new_year/toys18/big/top_01_01_red_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_01_01_WHITE_BIG:String = "../maps/icons/new_year/toys18/big/top_01_01_white_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_01_28_COIN_BIG:String = "../maps/icons/new_year/toys18/big/top_01_28_coin_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_02_04_BLUE_BIG:String = "../maps/icons/new_year/toys18/big/top_02_04_blue_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_02_04_RED_BIG:String = "../maps/icons/new_year/toys18/big/top_02_04_red_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_02_04_WHITE_BIG:String = "../maps/icons/new_year/toys18/big/top_02_04_white_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_02_29_COIN_BIG:String = "../maps/icons/new_year/toys18/big/top_02_29_coin_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_03_08_BLUE_BIG:String = "../maps/icons/new_year/toys18/big/top_03_08_blue_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_03_08_RED_BIG:String = "../maps/icons/new_year/toys18/big/top_03_08_red_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_03_08_WHITE_BIG:String = "../maps/icons/new_year/toys18/big/top_03_08_white_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_03_09_BIG:String = "../maps/icons/new_year/toys18/big/top_03_09_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_03_14_BIG:String = "../maps/icons/new_year/toys18/big/top_03_14_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_03_15_BIG:String = "../maps/icons/new_year/toys18/big/top_03_15_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_03_24_BIG:String = "../maps/icons/new_year/toys18/big/top_03_24_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_04_07_WHITE_BIG:String = "../maps/icons/new_year/toys18/big/top_04_07_white_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_04_07_YELLOW_BIG:String = "../maps/icons/new_year/toys18/big/top_04_07_yellow_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_04_13_BIG:String = "../maps/icons/new_year/toys18/big/top_04_13_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_04_16_BIG:String = "../maps/icons/new_year/toys18/big/top_04_16_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_04_17_BIG:String = "../maps/icons/new_year/toys18/big/top_04_17_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_04_25_BIG:String = "../maps/icons/new_year/toys18/big/top_04_25_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_05_19_GOLD_BIG:String = "../maps/icons/new_year/toys18/big/top_05_19_gold_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_05_19_SILVER_BIG:String = "../maps/icons/new_year/toys18/big/top_05_19_silver_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_05_23_BIG:String = "../maps/icons/new_year/toys18/big/top_05_23_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_05_26_BIG:String = "../maps/icons/new_year/toys18/big/top_05_26_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_05_27_BIG:String = "../maps/icons/new_year/toys18/big/top_05_27_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_05_47_BIG:String = "../maps/icons/new_year/toys18/big/top_05_47_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_05_48_BIG:String = "../maps/icons/new_year/toys18/big/top_05_48_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_05_49_BIG:String = "../maps/icons/new_year/toys18/big/top_05_49_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_05_50_BIG:String = "../maps/icons/new_year/toys18/big/top_05_50_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_05_51_BIG:String = "../maps/icons/new_year/toys18/big/top_05_51_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOP_05_52_BIG:String = "../maps/icons/new_year/toys18/big/top_05_52_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOY_100_BIG:String = "../maps/icons/new_year/toys18/big/toy_100_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOY_101_BIG:String = "../maps/icons/new_year/toys18/big/toy_101_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOY_102_BIG:String = "../maps/icons/new_year/toys18/big/toy_102_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOY_103_BIG:String = "../maps/icons/new_year/toys18/big/toy_103_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOY_104_BIG:String = "../maps/icons/new_year/toys18/big/toy_104_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOY_105_BIG:String = "../maps/icons/new_year/toys18/big/toy_105_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOY_106_BIG:String = "../maps/icons/new_year/toys18/big/toy_106_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOY_107_BIG:String = "../maps/icons/new_year/toys18/big/toy_107_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOY_96_BIG:String = "../maps/icons/new_year/toys18/big/toy_96_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOY_97_BIG:String = "../maps/icons/new_year/toys18/big/toy_97_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOY_98_BIG:String = "../maps/icons/new_year/toys18/big/toy_98_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS18_BIG_TOY_99_BIG:String = "../maps/icons/new_year/toys18/big/toy_99_big.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_01_01_BLACK:String = "../maps/icons/new_year/toys19/big/ball_01_01_black.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_01_01_BLUE:String = "../maps/icons/new_year/toys19/big/ball_01_01_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_01_01_RED:String = "../maps/icons/new_year/toys19/big/ball_01_01_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_01_01_RED_WHITE:String = "../maps/icons/new_year/toys19/big/ball_01_01_red_white.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_01_01_WHITE:String = "../maps/icons/new_year/toys19/big/ball_01_01_white.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_01_02_BLACK:String = "../maps/icons/new_year/toys19/big/Ball_01_02_black.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_01_03_BLUE:String = "../maps/icons/new_year/toys19/big/ball_01_03_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_01_03_RED:String = "../maps/icons/new_year/toys19/big/ball_01_03_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_01_03_WHITE:String = "../maps/icons/new_year/toys19/big/ball_01_03_white.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_01_45_RED:String = "../maps/icons/new_year/toys19/big/ball_01_45_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_01_45_YELLOW:String = "../maps/icons/new_year/toys19/big/ball_01_45_yellow.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_01_46_YELLOW:String = "../maps/icons/new_year/toys19/big/ball_01_46_yellow.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_02_02_BLACK:String = "../maps/icons/new_year/toys19/big/ball_02_02_black.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_02_02_BLUE:String = "../maps/icons/new_year/toys19/big/ball_02_02_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_02_02_RED:String = "../maps/icons/new_year/toys19/big/ball_02_02_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_02_02_WHITE:String = "../maps/icons/new_year/toys19/big/ball_02_02_white.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_02_43_BLUE:String = "../maps/icons/new_year/toys19/big/ball_02_43_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_02_43_RED:String = "../maps/icons/new_year/toys19/big/ball_02_43_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_02_43_WHITE:String = "../maps/icons/new_year/toys19/big/ball_02_43_white.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_02_47_RED:String = "../maps/icons/new_year/toys19/big/ball_02_47_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_02_47_YELLOW:String = "../maps/icons/new_year/toys19/big/ball_02_47_yellow.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_02_48_YELLOW:String = "../maps/icons/new_year/toys19/big/Ball_02_48_yellow.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_03_04_BLACK:String = "../maps/icons/new_year/toys19/big/Ball_03_04_black.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_03_04_BLUE:String = "../maps/icons/new_year/toys19/big/Ball_03_04_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_03_04_RED:String = "../maps/icons/new_year/toys19/big/ball_03_04_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_03_04_WHITE:String = "../maps/icons/new_year/toys19/big/Ball_03_04_white.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_03_05:String = "../maps/icons/new_year/toys19/big/Ball_03_05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_03_06_BLUE:String = "../maps/icons/new_year/toys19/big/Ball_03_06_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_03_06_RED:String = "../maps/icons/new_year/toys19/big/Ball_03_06_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_03_06_WHITE:String = "../maps/icons/new_year/toys19/big/Ball_03_06_white.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_03_08_BLUE:String = "../maps/icons/new_year/toys19/big/Ball_03_08_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_03_08_RED:String = "../maps/icons/new_year/toys19/big/Ball_03_08_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_03_16:String = "../maps/icons/new_year/toys19/big/Ball_03_16.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_03_49_RED:String = "../maps/icons/new_year/toys19/big/Ball_03_49_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_03_49_YELLOW:String = "../maps/icons/new_year/toys19/big/Ball_03_49_yellow.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_03_50:String = "../maps/icons/new_year/toys19/big/Ball_03_50.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_04_09_WHITE:String = "../maps/icons/new_year/toys19/big/Ball_04_09_white.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_04_09_YELLOW:String = "../maps/icons/new_year/toys19/big/ball_04_09_yellow.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_04_11_GOLD:String = "../maps/icons/new_year/toys19/big/Ball_04_11_gold.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_04_11_SILVER:String = "../maps/icons/new_year/toys19/big/ball_04_11_silver.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_04_12_GOLD:String = "../maps/icons/new_year/toys19/big/ball_04_12_gold.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_04_12_SILVER:String = "../maps/icons/new_year/toys19/big/Ball_04_12_silver.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_04_13:String = "../maps/icons/new_year/toys19/big/Ball_04_13.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_04_14:String = "../maps/icons/new_year/toys19/big/Ball_04_14.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_04_15:String = "../maps/icons/new_year/toys19/big/Ball_04_15.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_04_17_BLUE:String = "../maps/icons/new_year/toys19/big/Ball_04_17_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_04_18:String = "../maps/icons/new_year/toys19/big/Ball_04_18.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_04_19:String = "../maps/icons/new_year/toys19/big/Ball_04_19.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_04_20:String = "../maps/icons/new_year/toys19/big/Ball_04_20.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_04_22:String = "../maps/icons/new_year/toys19/big/Ball_04_22.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_04_27:String = "../maps/icons/new_year/toys19/big/Ball_04_27.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_04_28:String = "../maps/icons/new_year/toys19/big/Ball_04_28.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_04_29:String = "../maps/icons/new_year/toys19/big/Ball_04_29.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_04_51:String = "../maps/icons/new_year/toys19/big/Ball_04_51.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_04_52:String = "../maps/icons/new_year/toys19/big/Ball_04_52.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_04_53:String = "../maps/icons/new_year/toys19/big/ball_04_53.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_05_35:String = "../maps/icons/new_year/toys19/big/Ball_05_35.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_05_38:String = "../maps/icons/new_year/toys19/big/Ball_05_38.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_05_41:String = "../maps/icons/new_year/toys19/big/Ball_05_41.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_05_54_BLUE:String = "../maps/icons/new_year/toys19/big/Ball_05_54_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_05_54_RED:String = "../maps/icons/new_year/toys19/big/Ball_05_54_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_05_55:String = "../maps/icons/new_year/toys19/big/Ball_05_55.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_05_56_RED:String = "../maps/icons/new_year/toys19/big/Ball_05_56_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_BALL_05_56_YELLOW:String = "../maps/icons/new_year/toys19/big/Ball_05_56_yellow.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_01_01:String = "../maps/icons/new_year/toys19/big/floor_01_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_01_02:String = "../maps/icons/new_year/toys19/big/floor_01_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_01_02_BLUE:String = "../maps/icons/new_year/toys19/big/floor_01_02_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_01_28:String = "../maps/icons/new_year/toys19/big/floor_01_28.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_01_29:String = "../maps/icons/new_year/toys19/big/floor_01_29.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_02_04:String = "../maps/icons/new_year/toys19/big/floor_02_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_02_05:String = "../maps/icons/new_year/toys19/big/floor_02_05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_02_06:String = "../maps/icons/new_year/toys19/big/floor_02_06.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_02_06_BLUE:String = "../maps/icons/new_year/toys19/big/floor_02_06_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_02_06_GREEN:String = "../maps/icons/new_year/toys19/big/floor_02_06_green.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_02_07:String = "../maps/icons/new_year/toys19/big/floor_02_07.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_02_30:String = "../maps/icons/new_year/toys19/big/floor_02_30.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_02_31:String = "../maps/icons/new_year/toys19/big/floor_02_31.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_02_32:String = "../maps/icons/new_year/toys19/big/floor_02_32.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_02_33:String = "../maps/icons/new_year/toys19/big/floor_02_33.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_03_03:String = "../maps/icons/new_year/toys19/big/floor_03_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_03_08:String = "../maps/icons/new_year/toys19/big/floor_03_08.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_03_15:String = "../maps/icons/new_year/toys19/big/floor_03_15.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_03_15_BLUE:String = "../maps/icons/new_year/toys19/big/floor_03_15_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_03_34:String = "../maps/icons/new_year/toys19/big/floor_03_34.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_03_35:String = "../maps/icons/new_year/toys19/big/floor_03_35.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_03_36:String = "../maps/icons/new_year/toys19/big/floor_03_36.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_03_37:String = "../maps/icons/new_year/toys19/big/floor_03_37.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_03_38:String = "../maps/icons/new_year/toys19/big/floor_03_38.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_04_16:String = "../maps/icons/new_year/toys19/big/floor_04_16.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_04_39:String = "../maps/icons/new_year/toys19/big/floor_04_39.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_04_40:String = "../maps/icons/new_year/toys19/big/floor_04_40.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_04_41:String = "../maps/icons/new_year/toys19/big/floor_04_41.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_04_42:String = "../maps/icons/new_year/toys19/big/floor_04_42.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_04_43:String = "../maps/icons/new_year/toys19/big/floor_04_43.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_04_44:String = "../maps/icons/new_year/toys19/big/floor_04_44.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_04_45:String = "../maps/icons/new_year/toys19/big/floor_04_45.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_04_46:String = "../maps/icons/new_year/toys19/big/floor_04_46.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_05_26:String = "../maps/icons/new_year/toys19/big/floor_05_26.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_05_27:String = "../maps/icons/new_year/toys19/big/floor_05_27.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_05_47:String = "../maps/icons/new_year/toys19/big/Floor_05_47.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_05_48:String = "../maps/icons/new_year/toys19/big/Floor_05_48.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_05_49:String = "../maps/icons/new_year/toys19/big/floor_05_49.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_05_50:String = "../maps/icons/new_year/toys19/big/floor_05_50.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_05_51:String = "../maps/icons/new_year/toys19/big/floor_05_51.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_FLOOR_05_52:String = "../maps/icons/new_year/toys19/big/floor_05_52.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_01_01_BLUE:String = "../maps/icons/new_year/toys19/big/garland_01_01_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_01_01_GOLD:String = "../maps/icons/new_year/toys19/big/garland_01_01_gold.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_01_01_RED:String = "../maps/icons/new_year/toys19/big/garland_01_01_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_01_01_WHITE:String = "../maps/icons/new_year/toys19/big/garland_01_01_white.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_01_19_GREENWHITE:String = "../maps/icons/new_year/toys19/big/garland_01_19_greenwhite.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_01_19_REDBLUE:String = "../maps/icons/new_year/toys19/big/garland_01_19_redblue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_01_19_REDGOLD:String = "../maps/icons/new_year/toys19/big/garland_01_19_redgold.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_01_19_REDWHITE:String = "../maps/icons/new_year/toys19/big/garland_01_19_redwhite.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_02_02_BLUE:String = "../maps/icons/new_year/toys19/big/garland_02_02_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_02_02_GOLD:String = "../maps/icons/new_year/toys19/big/garland_02_02_gold.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_02_02_RED:String = "../maps/icons/new_year/toys19/big/garland_02_02_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_02_02_WHITE:String = "../maps/icons/new_year/toys19/big/garland_02_02_white.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_02_20_GOLD:String = "../maps/icons/new_year/toys19/big/garland_02_20_gold.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_02_20_GREEN:String = "../maps/icons/new_year/toys19/big/garland_02_20_green.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_02_20_RED:String = "../maps/icons/new_year/toys19/big/garland_02_20_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_02_20_WHITE:String = "../maps/icons/new_year/toys19/big/garland_02_20_white.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_03_03_BLUE:String = "../maps/icons/new_year/toys19/big/garland_03_03_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_03_03_GOLD:String = "../maps/icons/new_year/toys19/big/garland_03_03_gold.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_03_03_RED:String = "../maps/icons/new_year/toys19/big/garland_03_03_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_03_04:String = "../maps/icons/new_year/toys19/big/garland_03_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_03_05:String = "../maps/icons/new_year/toys19/big/garland_03_05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_03_10:String = "../maps/icons/new_year/toys19/big/garland_03_10.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_03_14:String = "../maps/icons/new_year/toys19/big/Garland_03_14.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_03_17:String = "../maps/icons/new_year/toys19/big/garland_03_17.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_03_21:String = "../maps/icons/new_year/toys19/big/garland_03_21.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_04_07:String = "../maps/icons/new_year/toys19/big/garland_04_07.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_04_08:String = "../maps/icons/new_year/toys19/big/garland_04_08.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_04_09:String = "../maps/icons/new_year/toys19/big/garland_04_09.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_04_11:String = "../maps/icons/new_year/toys19/big/Garland_04_11.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_04_12:String = "../maps/icons/new_year/toys19/big/Garland_04_12.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_04_13:String = "../maps/icons/new_year/toys19/big/Garland_04_13.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_04_18:String = "../maps/icons/new_year/toys19/big/garland_04_18.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_04_22:String = "../maps/icons/new_year/toys19/big/garland_04_22.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_04_23:String = "../maps/icons/new_year/toys19/big/garland_04_23.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_04_24:String = "../maps/icons/new_year/toys19/big/garland_04_24.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_04_25:String = "../maps/icons/new_year/toys19/big/garland_04_25.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_04_26:String = "../maps/icons/new_year/toys19/big/garland_04_26.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_05_15:String = "../maps/icons/new_year/toys19/big/Garland_05_15.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_05_16:String = "../maps/icons/new_year/toys19/big/garland_05_16.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_05_27:String = "../maps/icons/new_year/toys19/big/garland_05_27.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_05_28_BLUE:String = "../maps/icons/new_year/toys19/big/garland_05_28_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_05_28_RED:String = "../maps/icons/new_year/toys19/big/garland_05_28_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_05_28_SILVER:String = "../maps/icons/new_year/toys19/big/garland_05_28_silver.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_05_29:String = "../maps/icons/new_year/toys19/big/garland_05_29.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_05_30:String = "../maps/icons/new_year/toys19/big/garland_05_30.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GARLAND_05_31:String = "../maps/icons/new_year/toys19/big/garland_05_31.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GATES_01_AM:String = "../maps/icons/new_year/toys19/big/Gates_01_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GATES_01_CN:String = "../maps/icons/new_year/toys19/big/Gates_01_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GATES_01_EU:String = "../maps/icons/new_year/toys19/big/Gates_01_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GATES_01_SU:String = "../maps/icons/new_year/toys19/big/Gates_01_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GATES_02_AM:String = "../maps/icons/new_year/toys19/big/Gates_02_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GATES_02_CN:String = "../maps/icons/new_year/toys19/big/Gates_02_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GATES_02_EU:String = "../maps/icons/new_year/toys19/big/Gates_02_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GATES_02_SU:String = "../maps/icons/new_year/toys19/big/Gates_02_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GATES_03_AM:String = "../maps/icons/new_year/toys19/big/Gates_03_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GATES_03_CN:String = "../maps/icons/new_year/toys19/big/Gates_03_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GATES_03_EU:String = "../maps/icons/new_year/toys19/big/Gates_03_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GATES_03_SU:String = "../maps/icons/new_year/toys19/big/Gates_03_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GATES_04_AM:String = "../maps/icons/new_year/toys19/big/Gates_04_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GATES_04_CN:String = "../maps/icons/new_year/toys19/big/Gates_04_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GATES_04_EU:String = "../maps/icons/new_year/toys19/big/Gates_04_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GATES_04_SU:String = "../maps/icons/new_year/toys19/big/Gates_04_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GATES_05_AM:String = "../maps/icons/new_year/toys19/big/Gates_05_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GATES_05_CN:String = "../maps/icons/new_year/toys19/big/Gates_05_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GATES_05_EU:String = "../maps/icons/new_year/toys19/big/Gates_05_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GATES_05_SU:String = "../maps/icons/new_year/toys19/big/Gates_05_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GROUNDLIGHT_01_AM:String = "../maps/icons/new_year/toys19/big/Groundlight_01_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GROUNDLIGHT_01_CN:String = "../maps/icons/new_year/toys19/big/Groundlight_01_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GROUNDLIGHT_01_EU:String = "../maps/icons/new_year/toys19/big/Groundlight_01_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GROUNDLIGHT_01_SU:String = "../maps/icons/new_year/toys19/big/Groundlight_01_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GROUNDLIGHT_02_AM:String = "../maps/icons/new_year/toys19/big/Groundlight_02_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GROUNDLIGHT_02_CN:String = "../maps/icons/new_year/toys19/big/Groundlight_02_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GROUNDLIGHT_02_EU:String = "../maps/icons/new_year/toys19/big/Groundlight_02_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GROUNDLIGHT_02_SU:String = "../maps/icons/new_year/toys19/big/Groundlight_02_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GROUNDLIGHT_03_AM:String = "../maps/icons/new_year/toys19/big/Groundlight_03_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GROUNDLIGHT_03_CN:String = "../maps/icons/new_year/toys19/big/Groundlight_03_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GROUNDLIGHT_03_EU:String = "../maps/icons/new_year/toys19/big/Groundlight_03_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GROUNDLIGHT_03_SU:String = "../maps/icons/new_year/toys19/big/Groundlight_03_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GROUNDLIGHT_04_AM:String = "../maps/icons/new_year/toys19/big/Groundlight_04_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GROUNDLIGHT_04_CN:String = "../maps/icons/new_year/toys19/big/Groundlight_04_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GROUNDLIGHT_04_EU:String = "../maps/icons/new_year/toys19/big/Groundlight_04_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GROUNDLIGHT_04_SU:String = "../maps/icons/new_year/toys19/big/Groundlight_04_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GROUNDLIGHT_05_AM:String = "../maps/icons/new_year/toys19/big/Groundlight_05_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GROUNDLIGHT_05_CN:String = "../maps/icons/new_year/toys19/big/Groundlight_05_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GROUNDLIGHT_05_EU:String = "../maps/icons/new_year/toys19/big/Groundlight_05_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_GROUNDLIGHT_05_SU:String = "../maps/icons/new_year/toys19/big/Groundlight_05_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_HOMEDEC_01_AM:String = "../maps/icons/new_year/toys19/big/Homedec_01_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_HOMEDEC_01_CN:String = "../maps/icons/new_year/toys19/big/Homedec_01_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_HOMEDEC_01_EU:String = "../maps/icons/new_year/toys19/big/Homedec_01_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_HOMEDEC_01_SU:String = "../maps/icons/new_year/toys19/big/Homedec_01_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_HOMEDEC_02_AM:String = "../maps/icons/new_year/toys19/big/Homedec_02_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_HOMEDEC_02_CN:String = "../maps/icons/new_year/toys19/big/Homedec_02_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_HOMEDEC_02_EU:String = "../maps/icons/new_year/toys19/big/Homedec_02_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_HOMEDEC_02_SU:String = "../maps/icons/new_year/toys19/big/Homedec_02_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_HOMEDEC_03_AM:String = "../maps/icons/new_year/toys19/big/Homedec_03_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_HOMEDEC_03_CN:String = "../maps/icons/new_year/toys19/big/Homedec_03_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_HOMEDEC_03_EU:String = "../maps/icons/new_year/toys19/big/Homedec_03_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_HOMEDEC_03_SU:String = "../maps/icons/new_year/toys19/big/Homedec_03_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_HOMEDEC_04_AM:String = "../maps/icons/new_year/toys19/big/Homedec_04_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_HOMEDEC_04_CN:String = "../maps/icons/new_year/toys19/big/Homedec_04_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_HOMEDEC_04_EU:String = "../maps/icons/new_year/toys19/big/Homedec_04_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_HOMEDEC_04_SU:String = "../maps/icons/new_year/toys19/big/Homedec_04_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_HOMEDEC_05_AM:String = "../maps/icons/new_year/toys19/big/Homedec_05_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_HOMEDEC_05_CN:String = "../maps/icons/new_year/toys19/big/Homedec_05_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_HOMEDEC_05_EU:String = "../maps/icons/new_year/toys19/big/Homedec_05_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_HOMEDEC_05_SU:String = "../maps/icons/new_year/toys19/big/Homedec_05_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_BALL_04_01:String = "../maps/icons/new_year/toys19/big/NY19_Ball_04_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_BALL_04_02:String = "../maps/icons/new_year/toys19/big/NY19_Ball_04_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_BALL_05_03:String = "../maps/icons/new_year/toys19/big/NY19_Ball_05_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_BALL_05_04:String = "../maps/icons/new_year/toys19/big/NY19_Ball_05_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_BALL_05_05:String = "../maps/icons/new_year/toys19/big/NY19_Ball_05_05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_BALL_05_06:String = "../maps/icons/new_year/toys19/big/NY19_Ball_05_06.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_BALL_05_07:String = "../maps/icons/new_year/toys19/big/NY19_Ball_05_07.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_BALL_05_08:String = "../maps/icons/new_year/toys19/big/NY19_Ball_05_08.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_BALL_05_09:String = "../maps/icons/new_year/toys19/big/NY19_Ball_05_09.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_BALL_05_10:String = "../maps/icons/new_year/toys19/big/NY19_Ball_05_10.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_DECORATION_01_01:String = "../maps/icons/new_year/toys19/big/NY19_Decoration_01_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_DECORATION_01_02:String = "../maps/icons/new_year/toys19/big/NY19_Decoration_01_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_DECORATION_01_03:String = "../maps/icons/new_year/toys19/big/NY19_Decoration_01_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_DECORATION_01_04:String = "../maps/icons/new_year/toys19/big/NY19_Decoration_01_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_DECORATION_02_05:String = "../maps/icons/new_year/toys19/big/NY19_Decoration_02_05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_DECORATION_02_06:String = "../maps/icons/new_year/toys19/big/NY19_Decoration_02_06.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_DECORATION_02_07:String = "../maps/icons/new_year/toys19/big/NY19_Decoration_02_07.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_DECORATION_02_08:String = "../maps/icons/new_year/toys19/big/NY19_Decoration_02_08.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_DECORATION_02_09:String = "../maps/icons/new_year/toys19/big/NY19_Decoration_02_09.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_DECORATION_03_10:String = "../maps/icons/new_year/toys19/big/NY19_Decoration_03_10.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_DECORATION_03_11:String = "../maps/icons/new_year/toys19/big/NY19_Decoration_03_11.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_DECORATION_03_12:String = "../maps/icons/new_year/toys19/big/NY19_Decoration_03_12.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_DECORATION_03_13:String = "../maps/icons/new_year/toys19/big/NY19_Decoration_03_13.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_DECORATION_03_14:String = "../maps/icons/new_year/toys19/big/NY19_Decoration_03_14.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_DECORATION_04_15:String = "../maps/icons/new_year/toys19/big/NY19_Decoration_04_15.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_DECORATION_04_16:String = "../maps/icons/new_year/toys19/big/NY19_Decoration_04_16.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_DECORATION_04_17:String = "../maps/icons/new_year/toys19/big/NY19_Decoration_04_17.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_DECORATION_04_18:String = "../maps/icons/new_year/toys19/big/NY19_Decoration_04_18.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_DECORATION_04_19:String = "../maps/icons/new_year/toys19/big/NY19_Decoration_04_19.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_DECORATION_05_20:String = "../maps/icons/new_year/toys19/big/NY19_Decoration_05_20.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_DECORATION_05_21:String = "../maps/icons/new_year/toys19/big/NY19_Decoration_05_21.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_DECORATION_05_22:String = "../maps/icons/new_year/toys19/big/NY19_Decoration_05_22.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_DECORATION_05_23:String = "../maps/icons/new_year/toys19/big/NY19_Decoration_05_23.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_DECORATION_05_24:String = "../maps/icons/new_year/toys19/big/NY19_Decoration_05_24.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_FLOOR_02_01:String = "../maps/icons/new_year/toys19/big/NY19_Floor_02_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_FLOOR_03_02:String = "../maps/icons/new_year/toys19/big/NY19_Floor_03_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_FLOOR_03_03:String = "../maps/icons/new_year/toys19/big/NY19_Floor_03_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_FLOOR_04_04:String = "../maps/icons/new_year/toys19/big/NY19_Floor_04_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_FLOOR_04_05:String = "../maps/icons/new_year/toys19/big/NY19_Floor_04_05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_FLOOR_04_06:String = "../maps/icons/new_year/toys19/big/NY19_Floor_04_06.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_FLOOR_05_07:String = "../maps/icons/new_year/toys19/big/NY19_Floor_05_07.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_FLOOR_05_08:String = "../maps/icons/new_year/toys19/big/NY19_Floor_05_08.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_FLOOR_05_09:String = "../maps/icons/new_year/toys19/big/NY19_Floor_05_09.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_FLOOR_05_10:String = "../maps/icons/new_year/toys19/big/NY19_Floor_05_10.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_GARLAND_03_01:String = "../maps/icons/new_year/toys19/big/NY19_Garland_03_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_GARLAND_04_02:String = "../maps/icons/new_year/toys19/big/NY19_Garland_04_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_GARLAND_04_03:String = "../maps/icons/new_year/toys19/big/NY19_Garland_04_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_GARLAND_05_04:String = "../maps/icons/new_year/toys19/big/NY19_Garland_05_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_GARLAND_05_05:String = "../maps/icons/new_year/toys19/big/NY19_Garland_05_05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_GARLAND_05_06:String = "../maps/icons/new_year/toys19/big/NY19_Garland_05_06.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_GROUNDLIGHT_02_01:String = "../maps/icons/new_year/toys19/big/NY19_Groundlight_02_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_GROUNDLIGHT_03_02:String = "../maps/icons/new_year/toys19/big/NY19_Groundlight_03_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_GROUNDLIGHT_04_03:String = "../maps/icons/new_year/toys19/big/NY19_Groundlight_04_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_GROUNDLIGHT_05_04:String = "../maps/icons/new_year/toys19/big/NY19_Groundlight_05_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_KITCHEN_01_01:String = "../maps/icons/new_year/toys19/big/NY19_Kitchen_01_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_KITCHEN_01_02:String = "../maps/icons/new_year/toys19/big/NY19_Kitchen_01_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_KITCHEN_01_03:String = "../maps/icons/new_year/toys19/big/NY19_Kitchen_01_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_KITCHEN_01_04:String = "../maps/icons/new_year/toys19/big/NY19_Kitchen_01_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_KITCHEN_02_05:String = "../maps/icons/new_year/toys19/big/NY19_Kitchen_02_05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_KITCHEN_02_06:String = "../maps/icons/new_year/toys19/big/NY19_Kitchen_02_06.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_KITCHEN_02_07:String = "../maps/icons/new_year/toys19/big/NY19_Kitchen_02_07.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_KITCHEN_02_08:String = "../maps/icons/new_year/toys19/big/NY19_Kitchen_02_08.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_KITCHEN_02_09:String = "../maps/icons/new_year/toys19/big/NY19_Kitchen_02_09.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_KITCHEN_03_10:String = "../maps/icons/new_year/toys19/big/NY19_Kitchen_03_10.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_KITCHEN_03_11:String = "../maps/icons/new_year/toys19/big/NY19_Kitchen_03_11.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_KITCHEN_03_12:String = "../maps/icons/new_year/toys19/big/NY19_Kitchen_03_12.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_KITCHEN_03_13:String = "../maps/icons/new_year/toys19/big/NY19_Kitchen_03_13.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_KITCHEN_03_14:String = "../maps/icons/new_year/toys19/big/NY19_Kitchen_03_14.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_KITCHEN_04_15:String = "../maps/icons/new_year/toys19/big/NY19_Kitchen_04_15.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_KITCHEN_04_16:String = "../maps/icons/new_year/toys19/big/NY19_Kitchen_04_16.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_KITCHEN_04_17:String = "../maps/icons/new_year/toys19/big/NY19_Kitchen_04_17.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_KITCHEN_04_18:String = "../maps/icons/new_year/toys19/big/NY19_Kitchen_04_18.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_KITCHEN_04_19:String = "../maps/icons/new_year/toys19/big/NY19_Kitchen_04_19.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_KITCHEN_05_20:String = "../maps/icons/new_year/toys19/big/NY19_Kitchen_05_20.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_KITCHEN_05_21:String = "../maps/icons/new_year/toys19/big/NY19_Kitchen_05_21.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_KITCHEN_05_22:String = "../maps/icons/new_year/toys19/big/NY19_Kitchen_05_22.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_KITCHEN_05_23:String = "../maps/icons/new_year/toys19/big/NY19_Kitchen_05_23.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_KITCHEN_05_24:String = "../maps/icons/new_year/toys19/big/NY19_Kitchen_05_24.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_SCULPTURE_01_01:String = "../maps/icons/new_year/toys19/big/NY19_Sculpture_01_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_SCULPTURE_01_02:String = "../maps/icons/new_year/toys19/big/NY19_Sculpture_01_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_SCULPTURE_01_03:String = "../maps/icons/new_year/toys19/big/NY19_Sculpture_01_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_SCULPTURE_01_04:String = "../maps/icons/new_year/toys19/big/NY19_Sculpture_01_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_SCULPTURE_01_25:String = "../maps/icons/new_year/toys19/big/NY19_Sculpture_01_25.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_SCULPTURE_02_05:String = "../maps/icons/new_year/toys19/big/NY19_Sculpture_02_05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_SCULPTURE_02_06:String = "../maps/icons/new_year/toys19/big/NY19_Sculpture_02_06.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_SCULPTURE_02_07:String = "../maps/icons/new_year/toys19/big/NY19_Sculpture_02_07.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_SCULPTURE_02_08:String = "../maps/icons/new_year/toys19/big/NY19_Sculpture_02_08.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_SCULPTURE_02_09:String = "../maps/icons/new_year/toys19/big/NY19_Sculpture_02_09.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_SCULPTURE_03_10:String = "../maps/icons/new_year/toys19/big/NY19_Sculpture_03_10.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_SCULPTURE_03_11:String = "../maps/icons/new_year/toys19/big/NY19_Sculpture_03_11.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_SCULPTURE_03_12:String = "../maps/icons/new_year/toys19/big/NY19_Sculpture_03_12.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_SCULPTURE_03_13:String = "../maps/icons/new_year/toys19/big/NY19_Sculpture_03_13.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_SCULPTURE_03_14:String = "../maps/icons/new_year/toys19/big/NY19_Sculpture_03_14.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_SCULPTURE_04_15:String = "../maps/icons/new_year/toys19/big/NY19_Sculpture_04_15.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_SCULPTURE_04_16:String = "../maps/icons/new_year/toys19/big/NY19_Sculpture_04_16.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_SCULPTURE_04_17:String = "../maps/icons/new_year/toys19/big/NY19_Sculpture_04_17.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_SCULPTURE_04_18:String = "../maps/icons/new_year/toys19/big/NY19_Sculpture_04_18.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_SCULPTURE_04_19:String = "../maps/icons/new_year/toys19/big/NY19_Sculpture_04_19.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_SCULPTURE_05_20:String = "../maps/icons/new_year/toys19/big/NY19_Sculpture_05_20.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_SCULPTURE_05_21:String = "../maps/icons/new_year/toys19/big/NY19_Sculpture_05_21.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_SCULPTURE_05_22:String = "../maps/icons/new_year/toys19/big/NY19_Sculpture_05_22.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_SCULPTURE_05_23:String = "../maps/icons/new_year/toys19/big/NY19_Sculpture_05_23.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_SCULPTURE_05_24:String = "../maps/icons/new_year/toys19/big/NY19_Sculpture_05_24.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_SCULPTURE_05_26:String = "../maps/icons/new_year/toys19/big/NY19_Sculpture_05_26.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TABLE_01_01:String = "../maps/icons/new_year/toys19/big/NY19_Table_01_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TABLE_01_02:String = "../maps/icons/new_year/toys19/big/NY19_Table_01_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TABLE_01_03:String = "../maps/icons/new_year/toys19/big/NY19_Table_01_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TABLE_01_04:String = "../maps/icons/new_year/toys19/big/NY19_Table_01_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TABLE_02_05:String = "../maps/icons/new_year/toys19/big/NY19_Table_02_05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TABLE_02_06:String = "../maps/icons/new_year/toys19/big/NY19_Table_02_06.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TABLE_02_07:String = "../maps/icons/new_year/toys19/big/NY19_Table_02_07.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TABLE_02_08:String = "../maps/icons/new_year/toys19/big/NY19_Table_02_08.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TABLE_02_09:String = "../maps/icons/new_year/toys19/big/NY19_Table_02_09.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TABLE_03_10:String = "../maps/icons/new_year/toys19/big/NY19_Table_03_10.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TABLE_03_11:String = "../maps/icons/new_year/toys19/big/NY19_Table_03_11.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TABLE_03_12:String = "../maps/icons/new_year/toys19/big/NY19_Table_03_12.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TABLE_03_13:String = "../maps/icons/new_year/toys19/big/NY19_Table_03_13.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TABLE_03_14:String = "../maps/icons/new_year/toys19/big/NY19_Table_03_14.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TABLE_04_15:String = "../maps/icons/new_year/toys19/big/NY19_Table_04_15.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TABLE_04_16:String = "../maps/icons/new_year/toys19/big/NY19_Table_04_16.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TABLE_04_17:String = "../maps/icons/new_year/toys19/big/NY19_Table_04_17.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TABLE_04_18:String = "../maps/icons/new_year/toys19/big/NY19_Table_04_18.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TABLE_04_19:String = "../maps/icons/new_year/toys19/big/NY19_Table_04_19.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TABLE_05_20:String = "../maps/icons/new_year/toys19/big/NY19_Table_05_20.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TABLE_05_21:String = "../maps/icons/new_year/toys19/big/NY19_Table_05_21.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TABLE_05_22:String = "../maps/icons/new_year/toys19/big/NY19_Table_05_22.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TABLE_05_23:String = "../maps/icons/new_year/toys19/big/NY19_Table_05_23.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TABLE_05_24:String = "../maps/icons/new_year/toys19/big/NY19_Table_05_24.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TOP_01_01:String = "../maps/icons/new_year/toys19/big/NY19_Top_01_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TOP_02_02:String = "../maps/icons/new_year/toys19/big/NY19_Top_02_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TOP_02_03:String = "../maps/icons/new_year/toys19/big/NY19_Top_02_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TOP_02_04:String = "../maps/icons/new_year/toys19/big/NY19_Top_02_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TOP_03_05:String = "../maps/icons/new_year/toys19/big/NY19_Top_03_05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TOP_04_06:String = "../maps/icons/new_year/toys19/big/NY19_Top_04_06.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TOP_04_07:String = "../maps/icons/new_year/toys19/big/NY19_Top_04_07.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TOP_04_08:String = "../maps/icons/new_year/toys19/big/NY19_Top_04_08.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TOP_05_09:String = "../maps/icons/new_year/toys19/big/NY19_Top_05_09.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TOP_05_10:String = "../maps/icons/new_year/toys19/big/NY19_Top_05_10.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TOP_05_11:String = "../maps/icons/new_year/toys19/big/NY19_Top_05_11.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TOP_05_12:String = "../maps/icons/new_year/toys19/big/NY19_Top_05_12.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TOP_05_13:String = "../maps/icons/new_year/toys19/big/NY19_Top_05_13.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TREES_00:String = "../maps/icons/new_year/toys19/big/NY19_Trees_00.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TREES_02_01:String = "../maps/icons/new_year/toys19/big/NY19_Trees_02_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TREES_03_02:String = "../maps/icons/new_year/toys19/big/NY19_Trees_03_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TREES_04_03:String = "../maps/icons/new_year/toys19/big/NY19_Trees_04_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_NY19_TREES_05_04:String = "../maps/icons/new_year/toys19/big/NY19_Trees_05_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_SNOWMAN_01_AM:String = "../maps/icons/new_year/toys19/big/Snowman_01_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_SNOWMAN_01_CN:String = "../maps/icons/new_year/toys19/big/Snowman_01_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_SNOWMAN_01_EU:String = "../maps/icons/new_year/toys19/big/Snowman_01_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_SNOWMAN_01_SU:String = "../maps/icons/new_year/toys19/big/Snowman_01_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_SNOWMAN_02_AM:String = "../maps/icons/new_year/toys19/big/Snowman_02_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_SNOWMAN_02_CN:String = "../maps/icons/new_year/toys19/big/Snowman_02_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_SNOWMAN_02_EU:String = "../maps/icons/new_year/toys19/big/Snowman_02_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_SNOWMAN_02_SU:String = "../maps/icons/new_year/toys19/big/Snowman_02_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_SNOWMAN_03_AM:String = "../maps/icons/new_year/toys19/big/Snowman_03_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_SNOWMAN_03_CN:String = "../maps/icons/new_year/toys19/big/Snowman_03_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_SNOWMAN_03_EU:String = "../maps/icons/new_year/toys19/big/Snowman_03_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_SNOWMAN_03_SU:String = "../maps/icons/new_year/toys19/big/Snowman_03_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_SNOWMAN_04_AM:String = "../maps/icons/new_year/toys19/big/Snowman_04_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_SNOWMAN_04_CN:String = "../maps/icons/new_year/toys19/big/Snowman_04_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_SNOWMAN_04_EU:String = "../maps/icons/new_year/toys19/big/Snowman_04_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_SNOWMAN_04_SU:String = "../maps/icons/new_year/toys19/big/Snowman_04_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_SNOWMAN_05_AM:String = "../maps/icons/new_year/toys19/big/Snowman_05_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_SNOWMAN_05_CN:String = "../maps/icons/new_year/toys19/big/Snowman_05_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_SNOWMAN_05_EU:String = "../maps/icons/new_year/toys19/big/snowman_05_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_SNOWMAN_05_SU:String = "../maps/icons/new_year/toys19/big/Snowman_05_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_TOP_01_01_BLUE:String = "../maps/icons/new_year/toys19/big/Top_01_01_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_TOP_01_01_RED:String = "../maps/icons/new_year/toys19/big/Top_01_01_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_TOP_01_01_WHITE:String = "../maps/icons/new_year/toys19/big/Top_01_01_white.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_TOP_01_28_COIN:String = "../maps/icons/new_year/toys19/big/top_01_28_coin.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_TOP_02_04_BLUE:String = "../maps/icons/new_year/toys19/big/Top_02_04_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_TOP_02_04_RED:String = "../maps/icons/new_year/toys19/big/Top_02_04_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_TOP_02_04_WHITE:String = "../maps/icons/new_year/toys19/big/Top_02_04_white.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_TOP_02_29_COIN:String = "../maps/icons/new_year/toys19/big/Top_02_29_coin.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_TOP_03_08_BLUE:String = "../maps/icons/new_year/toys19/big/Top_03_08_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_TOP_03_08_RED:String = "../maps/icons/new_year/toys19/big/Top_03_08_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_TOP_03_08_WHITE:String = "../maps/icons/new_year/toys19/big/Top_03_08_white.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_TOP_03_09:String = "../maps/icons/new_year/toys19/big/Top_03_09.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_TOP_03_14:String = "../maps/icons/new_year/toys19/big/Top_03_14.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_TOP_03_15:String = "../maps/icons/new_year/toys19/big/Top_03_15.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_TOP_03_24:String = "../maps/icons/new_year/toys19/big/top_03_24.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_TOP_04_07_WHITE:String = "../maps/icons/new_year/toys19/big/top_04_07_white.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_TOP_04_07_YELLOW:String = "../maps/icons/new_year/toys19/big/Top_04_07_yellow.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_TOP_04_13:String = "../maps/icons/new_year/toys19/big/Top_04_13.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_TOP_04_16:String = "../maps/icons/new_year/toys19/big/Top_04_16.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_TOP_04_17:String = "../maps/icons/new_year/toys19/big/Top_04_17.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_TOP_04_25:String = "../maps/icons/new_year/toys19/big/top_04_25.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_TOP_05_19_GOLD:String = "../maps/icons/new_year/toys19/big/top_05_19_gold.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_TOP_05_19_SILVER:String = "../maps/icons/new_year/toys19/big/top_05_19_silver.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_TOP_05_23:String = "../maps/icons/new_year/toys19/big/Top_05_23.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_TOP_05_26:String = "../maps/icons/new_year/toys19/big/top_05_26.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS19_BIG_TOP_05_27:String = "../maps/icons/new_year/toys19/big/top_05_27.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_01_01_BLACK:String = "../maps/icons/new_year/toys20/big/Ball_01_01_black.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_01_01_BLUE:String = "../maps/icons/new_year/toys20/big/Ball_01_01_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_01_01_RED:String = "../maps/icons/new_year/toys20/big/Ball_01_01_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_01_03_BLUE:String = "../maps/icons/new_year/toys20/big/Ball_01_03_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_01_03_RED:String = "../maps/icons/new_year/toys20/big/Ball_01_03_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_01_03_WHITE:String = "../maps/icons/new_year/toys20/big/Ball_01_03_white.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_01_45_RED:String = "../maps/icons/new_year/toys20/big/Ball_01_45_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_01_45_YELLOW:String = "../maps/icons/new_year/toys20/big/Ball_01_45_yellow.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_02_02_BLACK:String = "../maps/icons/new_year/toys20/big/Ball_02_02_black.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_02_02_BLUE:String = "../maps/icons/new_year/toys20/big/Ball_02_02_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_02_02_RED:String = "../maps/icons/new_year/toys20/big/Ball_02_02_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_02_43_BLUE:String = "../maps/icons/new_year/toys20/big/Ball_02_43_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_02_43_RED:String = "../maps/icons/new_year/toys20/big/Ball_02_43_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_02_43_WHITE:String = "../maps/icons/new_year/toys20/big/Ball_02_43_white.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_02_47_RED:String = "../maps/icons/new_year/toys20/big/Ball_02_47_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_02_47_YELLOW:String = "../maps/icons/new_year/toys20/big/Ball_02_47_yellow.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_03_06_BLUE:String = "../maps/icons/new_year/toys20/big/Ball_03_06_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_03_06_RED:String = "../maps/icons/new_year/toys20/big/Ball_03_06_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_03_06_WHITE:String = "../maps/icons/new_year/toys20/big/Ball_03_06_white.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_03_08_BLUE:String = "../maps/icons/new_year/toys20/big/Ball_03_08_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_03_08_RED:String = "../maps/icons/new_year/toys20/big/Ball_03_08_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_03_16:String = "../maps/icons/new_year/toys20/big/Ball_03_16.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_03_49_RED:String = "../maps/icons/new_year/toys20/big/Ball_03_49_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_03_49_YELLOW:String = "../maps/icons/new_year/toys20/big/Ball_03_49_yellow.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_04_09_YELLOW:String = "../maps/icons/new_year/toys20/big/Ball_04_09_yellow.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_04_11_SILVER:String = "../maps/icons/new_year/toys20/big/Ball_04_11_silver.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_04_12_GOLD:String = "../maps/icons/new_year/toys20/big/Ball_04_12_gold.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_04_14:String = "../maps/icons/new_year/toys20/big/Ball_04_14.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_04_18:String = "../maps/icons/new_year/toys20/big/Ball_04_18.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_04_20:String = "../maps/icons/new_year/toys20/big/Ball_04_20.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_04_22:String = "../maps/icons/new_year/toys20/big/Ball_04_22.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_04_52:String = "../maps/icons/new_year/toys20/big/Ball_04_52.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_04_53:String = "../maps/icons/new_year/toys20/big/Ball_04_53.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_BALL_05_55:String = "../maps/icons/new_year/toys20/big/Ball_05_55.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_FLOOR_01_02:String = "../maps/icons/new_year/toys20/big/Floor_01_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_FLOOR_01_29:String = "../maps/icons/new_year/toys20/big/Floor_01_29.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_FLOOR_02_05:String = "../maps/icons/new_year/toys20/big/Floor_02_05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_FLOOR_02_06_BLUE:String = "../maps/icons/new_year/toys20/big/Floor_02_06_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_FLOOR_02_07:String = "../maps/icons/new_year/toys20/big/Floor_02_07.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_FLOOR_02_33:String = "../maps/icons/new_year/toys20/big/Floor_02_33.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_FLOOR_03_03:String = "../maps/icons/new_year/toys20/big/Floor_03_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_FLOOR_03_08:String = "../maps/icons/new_year/toys20/big/Floor_03_08.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_FLOOR_03_35:String = "../maps/icons/new_year/toys20/big/Floor_03_35.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_FLOOR_04_16:String = "../maps/icons/new_year/toys20/big/Floor_04_16.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_FLOOR_04_42:String = "../maps/icons/new_year/toys20/big/Floor_04_42.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_FLOOR_04_46:String = "../maps/icons/new_year/toys20/big/Floor_04_46.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_FLOOR_05_47:String = "../maps/icons/new_year/toys20/big/Floor_05_47.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_FLOOR_05_50:String = "../maps/icons/new_year/toys20/big/Floor_05_50.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GARLAND_01_01_GOLD:String = "../maps/icons/new_year/toys20/big/Garland_01_01_gold.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GARLAND_01_01_RED:String = "../maps/icons/new_year/toys20/big/Garland_01_01_Red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GARLAND_01_01_RIGHT_BLUE:String = "../maps/icons/new_year/toys20/big/Garland_01_01_right_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GARLAND_01_01_WHITE:String = "../maps/icons/new_year/toys20/big/Garland_01_01_white.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GARLAND_02_02_BLUE:String = "../maps/icons/new_year/toys20/big/Garland_02_02_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GARLAND_02_20_GOLD:String = "../maps/icons/new_year/toys20/big/Garland_02_20_gold.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GARLAND_02_20_RED:String = "../maps/icons/new_year/toys20/big/Garland_02_20_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GARLAND_02_20_WHITE:String = "../maps/icons/new_year/toys20/big/Garland_02_20_white.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GARLAND_03_05:String = "../maps/icons/new_year/toys20/big/Garland_03_05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GARLAND_03_10:String = "../maps/icons/new_year/toys20/big/Garland_03_10.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GARLAND_03_21:String = "../maps/icons/new_year/toys20/big/Garland_03_21.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GARLAND_04_09:String = "../maps/icons/new_year/toys20/big/Garland_04_09.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GARLAND_04_12:String = "../maps/icons/new_year/toys20/big/Garland_04_12.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GARLAND_04_18:String = "../maps/icons/new_year/toys20/big/Garland_04_18.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GARLAND_04_22:String = "../maps/icons/new_year/toys20/big/Garland_04_22.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GARLAND_04_25:String = "../maps/icons/new_year/toys20/big/Garland_04_25.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GARLAND_04_26:String = "../maps/icons/new_year/toys20/big/Garland_04_26.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GARLAND_05_28_RED:String = "../maps/icons/new_year/toys20/big/Garland_05_28_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GARLAND_05_29:String = "../maps/icons/new_year/toys20/big/Garland_05_29.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GARLAND_05_30:String = "../maps/icons/new_year/toys20/big/Garland_05_30.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GROUNDLIGHT_01_AM:String = "../maps/icons/new_year/toys20/big/Groundlight_01_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GROUNDLIGHT_01_CN:String = "../maps/icons/new_year/toys20/big/Groundlight_01_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GROUNDLIGHT_01_EU:String = "../maps/icons/new_year/toys20/big/Groundlight_01_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GROUNDLIGHT_01_SU:String = "../maps/icons/new_year/toys20/big/Groundlight_01_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GROUNDLIGHT_02_CN:String = "../maps/icons/new_year/toys20/big/Groundlight_02_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GROUNDLIGHT_02_EU:String = "../maps/icons/new_year/toys20/big/Groundlight_02_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GROUNDLIGHT_02_SU:String = "../maps/icons/new_year/toys20/big/Groundlight_02_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GROUNDLIGHT_03_AM:String = "../maps/icons/new_year/toys20/big/Groundlight_03_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GROUNDLIGHT_03_CN:String = "../maps/icons/new_year/toys20/big/Groundlight_03_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GROUNDLIGHT_03_EU:String = "../maps/icons/new_year/toys20/big/Groundlight_03_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GROUNDLIGHT_03_SU:String = "../maps/icons/new_year/toys20/big/Groundlight_03_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GROUNDLIGHT_04_AM:String = "../maps/icons/new_year/toys20/big/Groundlight_04_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GROUNDLIGHT_04_EU:String = "../maps/icons/new_year/toys20/big/Groundlight_04_EU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GROUNDLIGHT_04_SU:String = "../maps/icons/new_year/toys20/big/Groundlight_04_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GROUNDLIGHT_05_AM:String = "../maps/icons/new_year/toys20/big/Groundlight_05_AM.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GROUNDLIGHT_05_CN:String = "../maps/icons/new_year/toys20/big/Groundlight_05_CN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_GROUNDLIGHT_05_SU:String = "../maps/icons/new_year/toys20/big/Groundlight_05_SU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_BALL_04_01:String = "../maps/icons/new_year/toys20/big/NY19_Ball_04_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_BALL_04_02:String = "../maps/icons/new_year/toys20/big/NY19_Ball_04_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_BALL_05_03:String = "../maps/icons/new_year/toys20/big/NY19_Ball_05_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_BALL_05_04:String = "../maps/icons/new_year/toys20/big/NY19_Ball_05_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_BALL_05_05:String = "../maps/icons/new_year/toys20/big/NY19_Ball_05_05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_BALL_05_06:String = "../maps/icons/new_year/toys20/big/NY19_Ball_05_06.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_BALL_05_07:String = "../maps/icons/new_year/toys20/big/NY19_Ball_05_07.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_BALL_05_08:String = "../maps/icons/new_year/toys20/big/NY19_Ball_05_08.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_BALL_05_09:String = "../maps/icons/new_year/toys20/big/NY19_Ball_05_09.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_BALL_05_10:String = "../maps/icons/new_year/toys20/big/NY19_Ball_05_10.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_DECORATION_01_01:String = "../maps/icons/new_year/toys20/big/NY19_Decoration_01_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_DECORATION_01_02:String = "../maps/icons/new_year/toys20/big/NY19_Decoration_01_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_DECORATION_01_03:String = "../maps/icons/new_year/toys20/big/NY19_Decoration_01_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_DECORATION_01_04:String = "../maps/icons/new_year/toys20/big/NY19_Decoration_01_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_DECORATION_02_05:String = "../maps/icons/new_year/toys20/big/NY19_Decoration_02_05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_DECORATION_02_07:String = "../maps/icons/new_year/toys20/big/NY19_Decoration_02_07.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_DECORATION_02_08:String = "../maps/icons/new_year/toys20/big/NY19_Decoration_02_08.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_DECORATION_02_09:String = "../maps/icons/new_year/toys20/big/NY19_Decoration_02_09.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_DECORATION_03_10:String = "../maps/icons/new_year/toys20/big/NY19_Decoration_03_10.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_DECORATION_03_12:String = "../maps/icons/new_year/toys20/big/NY19_Decoration_03_12.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_DECORATION_03_13:String = "../maps/icons/new_year/toys20/big/NY19_Decoration_03_13.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_DECORATION_03_14:String = "../maps/icons/new_year/toys20/big/NY19_Decoration_03_14.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_DECORATION_04_15:String = "../maps/icons/new_year/toys20/big/NY19_Decoration_04_15.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_DECORATION_04_16:String = "../maps/icons/new_year/toys20/big/NY19_Decoration_04_16.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_DECORATION_04_17:String = "../maps/icons/new_year/toys20/big/NY19_Decoration_04_17.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_DECORATION_04_19:String = "../maps/icons/new_year/toys20/big/NY19_Decoration_04_19.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_DECORATION_05_20:String = "../maps/icons/new_year/toys20/big/NY19_Decoration_05_20.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_DECORATION_05_21:String = "../maps/icons/new_year/toys20/big/NY19_Decoration_05_21.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_DECORATION_05_22:String = "../maps/icons/new_year/toys20/big/NY19_Decoration_05_22.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_DECORATION_05_23:String = "../maps/icons/new_year/toys20/big/NY19_Decoration_05_23.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_DECORATION_05_24:String = "../maps/icons/new_year/toys20/big/NY19_Decoration_05_24.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_DECORATION_BASE:String = "../maps/icons/new_year/toys20/big/NY19_Decoration_base.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_FLOOR_02_01:String = "../maps/icons/new_year/toys20/big/NY19_Floor_02_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_FLOOR_03_02:String = "../maps/icons/new_year/toys20/big/NY19_Floor_03_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_FLOOR_03_03:String = "../maps/icons/new_year/toys20/big/NY19_Floor_03_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_FLOOR_04_04:String = "../maps/icons/new_year/toys20/big/NY19_Floor_04_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_FLOOR_04_05:String = "../maps/icons/new_year/toys20/big/NY19_Floor_04_05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_FLOOR_04_06:String = "../maps/icons/new_year/toys20/big/NY19_Floor_04_06.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_FLOOR_05_07:String = "../maps/icons/new_year/toys20/big/NY19_Floor_05_07.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_FLOOR_05_08:String = "../maps/icons/new_year/toys20/big/NY19_Floor_05_08.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_FLOOR_05_09:String = "../maps/icons/new_year/toys20/big/NY19_Floor_05_09.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_FLOOR_05_10:String = "../maps/icons/new_year/toys20/big/NY19_Floor_05_10.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_GARLAND_03_01:String = "../maps/icons/new_year/toys20/big/NY19_Garland_03_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_GARLAND_04_02:String = "../maps/icons/new_year/toys20/big/NY19_Garland_04_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_GARLAND_04_03:String = "../maps/icons/new_year/toys20/big/NY19_Garland_04_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_GARLAND_05_04:String = "../maps/icons/new_year/toys20/big/NY19_Garland_05_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_GARLAND_05_05:String = "../maps/icons/new_year/toys20/big/NY19_Garland_05_05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_GARLAND_05_06:String = "../maps/icons/new_year/toys20/big/NY19_Garland_05_06.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_GROUNDLIGHT_02_01:String = "../maps/icons/new_year/toys20/big/NY19_Groundlight_02_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_GROUNDLIGHT_04_03:String = "../maps/icons/new_year/toys20/big/NY19_Groundlight_04_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_GROUNDLIGHT_05_04:String = "../maps/icons/new_year/toys20/big/NY19_Groundlight_05_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_KITCHEN_00:String = "../maps/icons/new_year/toys20/big/NY19_Kitchen_00.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_KITCHEN_01_01:String = "../maps/icons/new_year/toys20/big/NY19_Kitchen_01_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_KITCHEN_01_02:String = "../maps/icons/new_year/toys20/big/NY19_Kitchen_01_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_KITCHEN_01_03:String = "../maps/icons/new_year/toys20/big/NY19_Kitchen_01_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_KITCHEN_01_04:String = "../maps/icons/new_year/toys20/big/NY19_Kitchen_01_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_KITCHEN_02_05:String = "../maps/icons/new_year/toys20/big/NY19_Kitchen_02_05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_KITCHEN_02_06:String = "../maps/icons/new_year/toys20/big/NY19_Kitchen_02_06.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_KITCHEN_02_07:String = "../maps/icons/new_year/toys20/big/NY19_Kitchen_02_07.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_KITCHEN_02_09:String = "../maps/icons/new_year/toys20/big/NY19_Kitchen_02_09.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_KITCHEN_03_10:String = "../maps/icons/new_year/toys20/big/NY19_Kitchen_03_10.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_KITCHEN_03_11:String = "../maps/icons/new_year/toys20/big/NY19_Kitchen_03_11.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_KITCHEN_03_12:String = "../maps/icons/new_year/toys20/big/NY19_Kitchen_03_12.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_KITCHEN_03_13:String = "../maps/icons/new_year/toys20/big/NY19_Kitchen_03_13.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_KITCHEN_04_15:String = "../maps/icons/new_year/toys20/big/NY19_Kitchen_04_15.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_KITCHEN_04_16:String = "../maps/icons/new_year/toys20/big/NY19_Kitchen_04_16.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_KITCHEN_04_17:String = "../maps/icons/new_year/toys20/big/NY19_Kitchen_04_17.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_KITCHEN_04_18:String = "../maps/icons/new_year/toys20/big/NY19_Kitchen_04_18.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_KITCHEN_04_19:String = "../maps/icons/new_year/toys20/big/NY19_Kitchen_04_19.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_KITCHEN_05_20:String = "../maps/icons/new_year/toys20/big/NY19_Kitchen_05_20.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_KITCHEN_05_21:String = "../maps/icons/new_year/toys20/big/NY19_Kitchen_05_21.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_KITCHEN_05_22:String = "../maps/icons/new_year/toys20/big/NY19_Kitchen_05_22.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_KITCHEN_05_23:String = "../maps/icons/new_year/toys20/big/NY19_Kitchen_05_23.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_KITCHEN_05_24:String = "../maps/icons/new_year/toys20/big/NY19_Kitchen_05_24.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_KITCHEN_BASE:String = "../maps/icons/new_year/toys20/big/NY19_Kitchen_base.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_SCULPTURE_01_01:String = "../maps/icons/new_year/toys20/big/NY19_Sculpture_01_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_SCULPTURE_01_02:String = "../maps/icons/new_year/toys20/big/NY19_Sculpture_01_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_SCULPTURE_01_03:String = "../maps/icons/new_year/toys20/big/NY19_Sculpture_01_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_SCULPTURE_01_04:String = "../maps/icons/new_year/toys20/big/NY19_Sculpture_01_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_SCULPTURE_02_05:String = "../maps/icons/new_year/toys20/big/NY19_Sculpture_02_05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_SCULPTURE_02_06:String = "../maps/icons/new_year/toys20/big/NY19_Sculpture_02_06.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_SCULPTURE_02_08:String = "../maps/icons/new_year/toys20/big/NY19_Sculpture_02_08.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_SCULPTURE_02_09:String = "../maps/icons/new_year/toys20/big/NY19_Sculpture_02_09.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_SCULPTURE_03_10:String = "../maps/icons/new_year/toys20/big/NY19_Sculpture_03_10.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_SCULPTURE_03_11:String = "../maps/icons/new_year/toys20/big/NY19_Sculpture_03_11.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_SCULPTURE_03_12:String = "../maps/icons/new_year/toys20/big/NY19_Sculpture_03_12.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_SCULPTURE_03_14:String = "../maps/icons/new_year/toys20/big/NY19_Sculpture_03_14.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_SCULPTURE_04_15:String = "../maps/icons/new_year/toys20/big/NY19_Sculpture_04_15.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_SCULPTURE_04_16:String = "../maps/icons/new_year/toys20/big/NY19_Sculpture_04_16.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_SCULPTURE_04_17:String = "../maps/icons/new_year/toys20/big/NY19_Sculpture_04_17.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_SCULPTURE_04_18:String = "../maps/icons/new_year/toys20/big/NY19_Sculpture_04_18.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_SCULPTURE_04_19:String = "../maps/icons/new_year/toys20/big/NY19_Sculpture_04_19.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_SCULPTURE_05_20:String = "../maps/icons/new_year/toys20/big/NY19_Sculpture_05_20.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_SCULPTURE_05_21:String = "../maps/icons/new_year/toys20/big/NY19_Sculpture_05_21.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_SCULPTURE_05_22:String = "../maps/icons/new_year/toys20/big/NY19_Sculpture_05_22.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_SCULPTURE_05_23:String = "../maps/icons/new_year/toys20/big/NY19_Sculpture_05_23.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_SCULPTURE_05_24:String = "../maps/icons/new_year/toys20/big/NY19_Sculpture_05_24.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TABLE_00:String = "../maps/icons/new_year/toys20/big/NY19_Table_00.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TABLE_01_01:String = "../maps/icons/new_year/toys20/big/NY19_Table_01_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TABLE_01_02:String = "../maps/icons/new_year/toys20/big/NY19_Table_01_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TABLE_01_03:String = "../maps/icons/new_year/toys20/big/NY19_Table_01_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TABLE_01_04:String = "../maps/icons/new_year/toys20/big/NY19_Table_01_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TABLE_02_05:String = "../maps/icons/new_year/toys20/big/NY19_Table_02_05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TABLE_02_07:String = "../maps/icons/new_year/toys20/big/NY19_Table_02_07.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TABLE_02_08:String = "../maps/icons/new_year/toys20/big/NY19_Table_02_08.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TABLE_02_09:String = "../maps/icons/new_year/toys20/big/NY19_Table_02_09.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TABLE_03_10:String = "../maps/icons/new_year/toys20/big/NY19_Table_03_10.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TABLE_03_11:String = "../maps/icons/new_year/toys20/big/NY19_Table_03_11.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TABLE_03_13:String = "../maps/icons/new_year/toys20/big/NY19_Table_03_13.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TABLE_03_14:String = "../maps/icons/new_year/toys20/big/NY19_Table_03_14.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TABLE_04_15:String = "../maps/icons/new_year/toys20/big/NY19_Table_04_15.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TABLE_04_16:String = "../maps/icons/new_year/toys20/big/NY19_Table_04_16.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TABLE_04_17:String = "../maps/icons/new_year/toys20/big/NY19_Table_04_17.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TABLE_04_18:String = "../maps/icons/new_year/toys20/big/NY19_Table_04_18.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TABLE_04_19:String = "../maps/icons/new_year/toys20/big/NY19_Table_04_19.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TABLE_05_20:String = "../maps/icons/new_year/toys20/big/NY19_Table_05_20.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TABLE_05_21:String = "../maps/icons/new_year/toys20/big/NY19_Table_05_21.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TABLE_05_22:String = "../maps/icons/new_year/toys20/big/NY19_Table_05_22.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TABLE_05_23:String = "../maps/icons/new_year/toys20/big/NY19_Table_05_23.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TABLE_05_24:String = "../maps/icons/new_year/toys20/big/NY19_Table_05_24.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TOP_01_01:String = "../maps/icons/new_year/toys20/big/NY19_Top_01_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TOP_02_02:String = "../maps/icons/new_year/toys20/big/NY19_Top_02_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TOP_02_03:String = "../maps/icons/new_year/toys20/big/NY19_Top_02_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TOP_02_04:String = "../maps/icons/new_year/toys20/big/NY19_Top_02_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TOP_03_05:String = "../maps/icons/new_year/toys20/big/NY19_Top_03_05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TOP_04_06:String = "../maps/icons/new_year/toys20/big/NY19_Top_04_06.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TOP_04_07:String = "../maps/icons/new_year/toys20/big/NY19_Top_04_07.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TOP_04_08:String = "../maps/icons/new_year/toys20/big/NY19_Top_04_08.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TOP_05_09:String = "../maps/icons/new_year/toys20/big/NY19_Top_05_09.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TOP_05_10:String = "../maps/icons/new_year/toys20/big/NY19_Top_05_10.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TOP_05_11:String = "../maps/icons/new_year/toys20/big/NY19_Top_05_11.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY19_TOP_05_13:String = "../maps/icons/new_year/toys20/big/NY19_Top_05_13.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_BALL_05_01:String = "../maps/icons/new_year/toys20/big/NY20_Ball_05_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_BALL_05_02:String = "../maps/icons/new_year/toys20/big/NY20_Ball_05_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_BALL_05_03:String = "../maps/icons/new_year/toys20/big/NY20_Ball_05_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_BALL_05_04:String = "../maps/icons/new_year/toys20/big/NY20_Ball_05_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_DECORATION_05_01:String = "../maps/icons/new_year/toys20/big/NY20_Decoration_05_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_FLOOR_05_00:String = "../maps/icons/new_year/toys20/big/NY20_Floor_05_00.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_FLOOR_05_01:String = "../maps/icons/new_year/toys20/big/NY20_Floor_05_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_FLOOR_05_02:String = "../maps/icons/new_year/toys20/big/NY20_Floor_05_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_FLOOR_05_03:String = "../maps/icons/new_year/toys20/big/NY20_Floor_05_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_GARLAND_05_00:String = "../maps/icons/new_year/toys20/big/NY20_Garland_05_00.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_GARLAND_05_01:String = "../maps/icons/new_year/toys20/big/NY20_Garland_05_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_GATES_05_01:String = "../maps/icons/new_year/toys20/big/NY20_Gates_05_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_GATES_05_02:String = "../maps/icons/new_year/toys20/big/NY20_Gates_05_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_GATES_05_03:String = "../maps/icons/new_year/toys20/big/NY20_Gates_05_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_GATES_05_04:String = "../maps/icons/new_year/toys20/big/NY20_Gates_05_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_GATES_05_06:String = "../maps/icons/new_year/toys20/big/NY20_Gates_05_06.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_GATES_05_07:String = "../maps/icons/new_year/toys20/big/NY20_Gates_05_07.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_GROUNDLIGHT_05_01:String = "../maps/icons/new_year/toys20/big/NY20_Groundlight_05_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_GROUNDLIGHT_05_02:String = "../maps/icons/new_year/toys20/big/NY20_Groundlight_05_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_KITCHEN_01_01:String = "../maps/icons/new_year/toys20/big/NY20_Kitchen_01_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_KITCHEN_01_02:String = "../maps/icons/new_year/toys20/big/NY20_Kitchen_01_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_KITCHEN_01_03:String = "../maps/icons/new_year/toys20/big/NY20_Kitchen_01_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_KITCHEN_01_04:String = "../maps/icons/new_year/toys20/big/NY20_Kitchen_01_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_KITCHEN_02_05:String = "../maps/icons/new_year/toys20/big/NY20_Kitchen_02_05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_KITCHEN_02_06:String = "../maps/icons/new_year/toys20/big/NY20_Kitchen_02_06.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_KITCHEN_02_07:String = "../maps/icons/new_year/toys20/big/NY20_Kitchen_02_07.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_KITCHEN_02_08:String = "../maps/icons/new_year/toys20/big/NY20_Kitchen_02_08.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_KITCHEN_03_09:String = "../maps/icons/new_year/toys20/big/NY20_Kitchen_03_09.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_KITCHEN_03_10:String = "../maps/icons/new_year/toys20/big/NY20_Kitchen_03_10.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_KITCHEN_03_11:String = "../maps/icons/new_year/toys20/big/NY20_Kitchen_03_11.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_KITCHEN_03_12:String = "../maps/icons/new_year/toys20/big/NY20_Kitchen_03_12.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_KITCHEN_04_13:String = "../maps/icons/new_year/toys20/big/NY20_Kitchen_04_13.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_KITCHEN_04_14:String = "../maps/icons/new_year/toys20/big/NY20_Kitchen_04_14.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_KITCHEN_04_15:String = "../maps/icons/new_year/toys20/big/NY20_Kitchen_04_15.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_KITCHEN_04_16:String = "../maps/icons/new_year/toys20/big/NY20_Kitchen_04_16.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_KITCHEN_05_17:String = "../maps/icons/new_year/toys20/big/NY20_Kitchen_05_17.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_KITCHEN_05_18:String = "../maps/icons/new_year/toys20/big/NY20_Kitchen_05_18.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_KITCHEN_05_19:String = "../maps/icons/new_year/toys20/big/NY20_Kitchen_05_19.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_KITCHEN_05_20:String = "../maps/icons/new_year/toys20/big/NY20_Kitchen_05_20.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_KITCHEN_05_21:String = "../maps/icons/new_year/toys20/big/NY20_Kitchen_05_21.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_KITCHEN_05_22:String = "../maps/icons/new_year/toys20/big/NY20_Kitchen_05_22.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_MEGAFIR:String = "../maps/icons/new_year/toys20/big/NY20_Megafir.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_MEGAILLUMINATION:String = "../maps/icons/new_year/toys20/big/NY20_MegaIllumination.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_MEGAINSTALLATION:String = "../maps/icons/new_year/toys20/big/NY20_Megainstallation.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_MEGATABLEFUL:String = "../maps/icons/new_year/toys20/big/NY20_Megatableful.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_PYRO_00:String = "../maps/icons/new_year/toys20/big/NY20_Pyro_00.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_PYRO_01_01:String = "../maps/icons/new_year/toys20/big/NY20_Pyro_01_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_PYRO_01_02:String = "../maps/icons/new_year/toys20/big/NY20_Pyro_01_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_PYRO_01_03:String = "../maps/icons/new_year/toys20/big/NY20_Pyro_01_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_PYRO_01_04:String = "../maps/icons/new_year/toys20/big/NY20_Pyro_01_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_PYRO_02_05:String = "../maps/icons/new_year/toys20/big/NY20_Pyro_02_05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_PYRO_02_06:String = "../maps/icons/new_year/toys20/big/NY20_Pyro_02_06.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_PYRO_02_07:String = "../maps/icons/new_year/toys20/big/NY20_Pyro_02_07.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_PYRO_02_08:String = "../maps/icons/new_year/toys20/big/NY20_Pyro_02_08.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_PYRO_03_09:String = "../maps/icons/new_year/toys20/big/NY20_Pyro_03_09.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_PYRO_03_10:String = "../maps/icons/new_year/toys20/big/NY20_Pyro_03_10.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_PYRO_03_11:String = "../maps/icons/new_year/toys20/big/NY20_Pyro_03_11.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_PYRO_03_12:String = "../maps/icons/new_year/toys20/big/NY20_Pyro_03_12.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_PYRO_04_13:String = "../maps/icons/new_year/toys20/big/NY20_Pyro_04_13.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_PYRO_04_14:String = "../maps/icons/new_year/toys20/big/NY20_Pyro_04_14.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_PYRO_04_15:String = "../maps/icons/new_year/toys20/big/NY20_Pyro_04_15.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_PYRO_04_16:String = "../maps/icons/new_year/toys20/big/NY20_Pyro_04_16.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_PYRO_05_17:String = "../maps/icons/new_year/toys20/big/NY20_Pyro_05_17.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_PYRO_05_18:String = "../maps/icons/new_year/toys20/big/NY20_Pyro_05_18.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_PYRO_05_19:String = "../maps/icons/new_year/toys20/big/NY20_Pyro_05_19.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_PYRO_05_20:String = "../maps/icons/new_year/toys20/big/NY20_Pyro_05_20.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_PYRO_05_21:String = "../maps/icons/new_year/toys20/big/NY20_Pyro_05_21.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_PYRO_05_22:String = "../maps/icons/new_year/toys20/big/NY20_Pyro_05_22.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SCULPTURE_00:String = "../maps/icons/new_year/toys20/big/NY20_Sculpture_00.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SCULPTURE_01_01:String = "../maps/icons/new_year/toys20/big/NY20_Sculpture_01_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SCULPTURE_01_02:String = "../maps/icons/new_year/toys20/big/NY20_Sculpture_01_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SCULPTURE_01_03:String = "../maps/icons/new_year/toys20/big/NY20_Sculpture_01_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SCULPTURE_01_04:String = "../maps/icons/new_year/toys20/big/NY20_Sculpture_01_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SCULPTURE_02_05:String = "../maps/icons/new_year/toys20/big/NY20_Sculpture_02_05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SCULPTURE_02_06:String = "../maps/icons/new_year/toys20/big/NY20_Sculpture_02_06.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SCULPTURE_02_07:String = "../maps/icons/new_year/toys20/big/NY20_Sculpture_02_07.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SCULPTURE_02_08:String = "../maps/icons/new_year/toys20/big/NY20_Sculpture_02_08.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SCULPTURE_03_09:String = "../maps/icons/new_year/toys20/big/NY20_Sculpture_03_09.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SCULPTURE_03_10:String = "../maps/icons/new_year/toys20/big/NY20_Sculpture_03_10.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SCULPTURE_03_11:String = "../maps/icons/new_year/toys20/big/NY20_Sculpture_03_11.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SCULPTURE_03_12:String = "../maps/icons/new_year/toys20/big/NY20_Sculpture_03_12.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SCULPTURE_04_13:String = "../maps/icons/new_year/toys20/big/NY20_Sculpture_04_13.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SCULPTURE_04_14:String = "../maps/icons/new_year/toys20/big/NY20_Sculpture_04_14.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SCULPTURE_04_15:String = "../maps/icons/new_year/toys20/big/NY20_Sculpture_04_15.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SCULPTURE_04_16:String = "../maps/icons/new_year/toys20/big/NY20_Sculpture_04_16.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SCULPTURE_05_17:String = "../maps/icons/new_year/toys20/big/NY20_Sculpture_05_17.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SCULPTURE_05_18:String = "../maps/icons/new_year/toys20/big/NY20_Sculpture_05_18.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SCULPTURE_05_20:String = "../maps/icons/new_year/toys20/big/NY20_Sculpture_05_20.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SCULPTURE_05_21:String = "../maps/icons/new_year/toys20/big/NY20_Sculpture_05_21.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SCULPTURE_05_22:String = "../maps/icons/new_year/toys20/big/NY20_Sculpture_05_22.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SCULPTURE_BASE:String = "../maps/icons/new_year/toys20/big/NY20_Sculpture_base.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SNOWITEM_01_01:String = "../maps/icons/new_year/toys20/big/NY20_Snowitem_01_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SNOWITEM_01_02:String = "../maps/icons/new_year/toys20/big/NY20_Snowitem_01_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SNOWITEM_01_03:String = "../maps/icons/new_year/toys20/big/NY20_Snowitem_01_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SNOWITEM_01_04:String = "../maps/icons/new_year/toys20/big/NY20_Snowitem_01_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SNOWITEM_02_05:String = "../maps/icons/new_year/toys20/big/NY20_Snowitem_02_05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SNOWITEM_02_06:String = "../maps/icons/new_year/toys20/big/NY20_Snowitem_02_06.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SNOWITEM_02_07:String = "../maps/icons/new_year/toys20/big/NY20_Snowitem_02_07.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SNOWITEM_02_08:String = "../maps/icons/new_year/toys20/big/NY20_Snowitem_02_08.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SNOWITEM_03_09:String = "../maps/icons/new_year/toys20/big/NY20_Snowitem_03_09.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SNOWITEM_03_10:String = "../maps/icons/new_year/toys20/big/NY20_Snowitem_03_10.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SNOWITEM_03_11:String = "../maps/icons/new_year/toys20/big/NY20_Snowitem_03_11.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SNOWITEM_03_12:String = "../maps/icons/new_year/toys20/big/NY20_Snowitem_03_12.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SNOWITEM_04_13:String = "../maps/icons/new_year/toys20/big/NY20_Snowitem_04_13.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SNOWITEM_04_14:String = "../maps/icons/new_year/toys20/big/NY20_Snowitem_04_14.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SNOWITEM_04_15:String = "../maps/icons/new_year/toys20/big/NY20_Snowitem_04_15.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SNOWITEM_04_16:String = "../maps/icons/new_year/toys20/big/NY20_Snowitem_04_16.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SNOWITEM_05_17:String = "../maps/icons/new_year/toys20/big/NY20_Snowitem_05_17.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SNOWITEM_05_18:String = "../maps/icons/new_year/toys20/big/NY20_Snowitem_05_18.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SNOWITEM_05_19:String = "../maps/icons/new_year/toys20/big/NY20_Snowitem_05_19.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SNOWITEM_05_20:String = "../maps/icons/new_year/toys20/big/NY20_Snowitem_05_20.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SNOWITEM_05_21:String = "../maps/icons/new_year/toys20/big/NY20_Snowitem_05_21.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SNOWITEM_05_22:String = "../maps/icons/new_year/toys20/big/NY20_Snowitem_05_22.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_SNOWITEM_BASE:String = "../maps/icons/new_year/toys20/big/NY20_Snowitem_base.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TABLE_05_01:String = "../maps/icons/new_year/toys20/big/NY20_Table_05_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TABLE_BASE:String = "../maps/icons/new_year/toys20/big/NY20_Table_base.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TENT_00:String = "../maps/icons/new_year/toys20/big/NY20_Tent_00.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TENT_01_01:String = "../maps/icons/new_year/toys20/big/NY20_Tent_01_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TENT_01_02:String = "../maps/icons/new_year/toys20/big/NY20_Tent_01_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TENT_01_03:String = "../maps/icons/new_year/toys20/big/NY20_Tent_01_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TENT_01_04:String = "../maps/icons/new_year/toys20/big/NY20_Tent_01_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TENT_02_05:String = "../maps/icons/new_year/toys20/big/NY20_Tent_02_05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TENT_02_06:String = "../maps/icons/new_year/toys20/big/NY20_Tent_02_06.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TENT_02_07:String = "../maps/icons/new_year/toys20/big/NY20_Tent_02_07.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TENT_02_08:String = "../maps/icons/new_year/toys20/big/NY20_Tent_02_08.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TENT_03_09:String = "../maps/icons/new_year/toys20/big/NY20_Tent_03_09.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TENT_03_10:String = "../maps/icons/new_year/toys20/big/NY20_Tent_03_10.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TENT_03_11:String = "../maps/icons/new_year/toys20/big/NY20_Tent_03_11.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TENT_03_12:String = "../maps/icons/new_year/toys20/big/NY20_Tent_03_12.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TENT_04_13:String = "../maps/icons/new_year/toys20/big/NY20_Tent_04_13.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TENT_04_14:String = "../maps/icons/new_year/toys20/big/NY20_Tent_04_14.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TENT_04_15:String = "../maps/icons/new_year/toys20/big/NY20_Tent_04_15.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TENT_05_16:String = "../maps/icons/new_year/toys20/big/NY20_Tent_05_16.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TENT_05_17:String = "../maps/icons/new_year/toys20/big/NY20_Tent_05_17.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TENT_05_18:String = "../maps/icons/new_year/toys20/big/NY20_Tent_05_18.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TENT_05_19:String = "../maps/icons/new_year/toys20/big/NY20_Tent_05_19.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TENT_05_20:String = "../maps/icons/new_year/toys20/big/NY20_Tent_05_20.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TENT_05_21:String = "../maps/icons/new_year/toys20/big/NY20_Tent_05_21.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TENT_05_22:String = "../maps/icons/new_year/toys20/big/NY20_Tent_05_22.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TOP_05_01:String = "../maps/icons/new_year/toys20/big/NY20_Top_05_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TOP_05_02:String = "../maps/icons/new_year/toys20/big/NY20_Top_05_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TOP_05_03:String = "../maps/icons/new_year/toys20/big/NY20_Top_05_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TOP_05_04:String = "../maps/icons/new_year/toys20/big/NY20_Top_05_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TREES_00:String = "../maps/icons/new_year/toys20/big/NY20_Trees_00.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TREES_01_01:String = "../maps/icons/new_year/toys20/big/NY20_Trees_01_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TREES_01_02:String = "../maps/icons/new_year/toys20/big/NY20_Trees_01_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TREES_01_03:String = "../maps/icons/new_year/toys20/big/NY20_Trees_01_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TREES_01_04:String = "../maps/icons/new_year/toys20/big/NY20_Trees_01_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TREES_02_01:String = "../maps/icons/new_year/toys20/big/NY20_Trees_02_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TREES_02_02:String = "../maps/icons/new_year/toys20/big/NY20_Trees_02_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TREES_02_03:String = "../maps/icons/new_year/toys20/big/NY20_Trees_02_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TREES_02_04:String = "../maps/icons/new_year/toys20/big/NY20_Trees_02_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TREES_03_01:String = "../maps/icons/new_year/toys20/big/NY20_Trees_03_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TREES_03_02:String = "../maps/icons/new_year/toys20/big/NY20_Trees_03_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TREES_03_03:String = "../maps/icons/new_year/toys20/big/NY20_Trees_03_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TREES_03_04:String = "../maps/icons/new_year/toys20/big/NY20_Trees_03_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TREES_04_01:String = "../maps/icons/new_year/toys20/big/NY20_Trees_04_01.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TREES_04_02:String = "../maps/icons/new_year/toys20/big/NY20_Trees_04_02.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TREES_04_03:String = "../maps/icons/new_year/toys20/big/NY20_Trees_04_03.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TREES_04_04:String = "../maps/icons/new_year/toys20/big/NY20_Trees_04_04.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TREES_04_05:String = "../maps/icons/new_year/toys20/big/NY20_Trees_04_05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TREES_05_05:String = "../maps/icons/new_year/toys20/big/NY20_Trees_05_05.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_NY20_TREES_BASE:String = "../maps/icons/new_year/toys20/big/NY20_Trees_base.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_TOP_01_01_BLUE:String = "../maps/icons/new_year/toys20/big/Top_01_01_blue.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_TOP_01_01_RED:String = "../maps/icons/new_year/toys20/big/Top_01_01_red.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_TOP_01_28_COIN:String = "../maps/icons/new_year/toys20/big/Top_01_28_coin.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_TOP_02_04_WHITE:String = "../maps/icons/new_year/toys20/big/Top_02_04_white.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_TOP_03_09:String = "../maps/icons/new_year/toys20/big/Top_03_09.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_TOP_03_14:String = "../maps/icons/new_year/toys20/big/Top_03_14.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_TOP_03_15:String = "../maps/icons/new_year/toys20/big/Top_03_15.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_TOP_04_07_WHITE:String = "../maps/icons/new_year/toys20/big/Top_04_07_white.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_TOP_04_07_YELLOW:String = "../maps/icons/new_year/toys20/big/Top_04_07_yellow.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_TOP_05_23:String = "../maps/icons/new_year/toys20/big/Top_05_23.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_TOP_05_26:String = "../maps/icons/new_year/toys20/big/Top_05_26.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_BIG_TOP_05_27:String = "../maps/icons/new_year/toys20/big/Top_05_27.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_EXTRA_BIG_NY20_MEGAFIR:String = "../maps/icons/new_year/toys20/extra_big/NY20_Megafir.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_EXTRA_BIG_NY20_MEGAILLUMINATION:String = "../maps/icons/new_year/toys20/extra_big/NY20_MegaIllumination.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_EXTRA_BIG_NY20_MEGAINSTALLATION:String = "../maps/icons/new_year/toys20/extra_big/NY20_Megainstallation.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOYS20_EXTRA_BIG_NY20_MEGATABLEFUL:String = "../maps/icons/new_year/toys20/extra_big/NY20_Megatableful.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_ADD_SLOT:String = "../maps/icons/new_year/vehicles_view/add_slot.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_BACK_TANK_TREE:String = "../maps/icons/new_year/vehicles_view/back_tank_tree.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_BONUS_INDICATION_BACK:String = "../maps/icons/new_year/vehicles_view/bonus_indication_back.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_BUTTON:String = "../maps/icons/new_year/vehicles_view/button.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_HOVER_SLOT:String = "../maps/icons/new_year/vehicles_view/hover_slot.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_INFO:String = "../maps/icons/new_year/vehicles_view/info.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_NORMAL_SLOT:String = "../maps/icons/new_year/vehicles_view/normal_slot.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_NY_SLOT:String = "../maps/icons/new_year/vehicles_view/ny_slot.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_NY_SLOT_OVERLAY:String = "../maps/icons/new_year/vehicles_view/ny_slot_overlay.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_NY_SLOT_SMALL:String = "../maps/icons/new_year/vehicles_view/ny_slot_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_PLUS:String = "../maps/icons/new_year/vehicles_view/plus.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_SLOT_NOT_AVAIBLE:String = "../maps/icons/new_year/vehicles_view/slot_not_avaible.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_SLOT_TOP_SHADOW:String = "../maps/icons/new_year/vehicles_view/slot_top_shadow.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_STYLE_TOOLTIP:String = "../maps/icons/new_year/vehicles_view/style_tooltip.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_TOP_SHADOW:String = "../maps/icons/new_year/vehicles_view/top_shadow.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_TREE_BACK:String = "../maps/icons/new_year/vehicles_view/tree_back.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_TREE_BONUS_BACK:String = "../maps/icons/new_year/vehicles_view/tree_bonus_back.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_TREE_BONUS_LT:String = "../maps/icons/new_year/vehicles_view/tree_bonus_lt.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_TREE_BONUS_PT_SAU:String = "../maps/icons/new_year/vehicles_view/tree_bonus_pt_sau.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_TREE_BONUS_TT_ST:String = "../maps/icons/new_year/vehicles_view/tree_bonus_tt_st.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_TREE_LOCK:String = "../maps/icons/new_year/vehicles_view/tree_lock.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_ICONS_AT_SPG:String = "../maps/icons/new_year/vehicles_view/icons/AT-SPG.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_ICONS_HEAVYTANK:String = "../maps/icons/new_year/vehicles_view/icons/heavyTank.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_ICONS_ICON_BATTLE_EXP_MAIN:String = "../maps/icons/new_year/vehicles_view/icons/icon_battle_exp_main.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_ICONS_ICON_BATTLE_EXP_SMALL:String = "../maps/icons/new_year/vehicles_view/icons/icon_battle_exp_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_ICONS_ICON_CREW_EXP_MAIN:String = "../maps/icons/new_year/vehicles_view/icons/icon_crew_exp_main.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_ICONS_ICON_CREW_EXP_SMALL:String = "../maps/icons/new_year/vehicles_view/icons/icon_crew_exp_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_ICONS_ICON_FREE_EXP_MAIN_SCREEN:String = "../maps/icons/new_year/vehicles_view/icons/icon_free_exp_main_screen.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_ICONS_ICON_FREE_EXP_SMALL:String = "../maps/icons/new_year/vehicles_view/icons/icon_free_exp_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_ICONS_LIGHTTANK:String = "../maps/icons/new_year/vehicles_view/icons/lightTank.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_ICONS_MEDIUMTANK:String = "../maps/icons/new_year/vehicles_view/icons/mediumTank.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_ICONS_SPG:String = "../maps/icons/new_year/vehicles_view/icons/SPG.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_ICONS_STYLE_ICON:String = "../maps/icons/new_year/vehicles_view/icons/style_icon.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_ICONS_SLOTS_SLOT_1:String = "../maps/icons/new_year/vehicles_view/icons/slots/slot_1.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_ICONS_SLOTS_SLOT_2:String = "../maps/icons/new_year/vehicles_view/icons/slots/slot_2.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_ICONS_SLOTS_SLOT_3:String = "../maps/icons/new_year/vehicles_view/icons/slots/slot_3.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_BOOSTER:String = "../maps/icons/new_year/widget/booster.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_FINAL_SHINE:String = "../maps/icons/new_year/widget/final_shine.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_BG:String = "../maps/icons/new_year/widget/header_bg.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_PROGRESS:String = "../maps/icons/new_year/widget/progress.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_PROGRESS_1:String = "../maps/icons/new_year/widget/progress_1.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_STAR:String = "../maps/icons/new_year/widget/star.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_BE:String = "../maps/icons/new_year/widget/header_title/BE.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_BG:String = "../maps/icons/new_year/widget/header_title/BG.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_CS:String = "../maps/icons/new_year/widget/header_title/CS.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_DA:String = "../maps/icons/new_year/widget/header_title/DA.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_DE:String = "../maps/icons/new_year/widget/header_title/DE.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_EL:String = "../maps/icons/new_year/widget/header_title/EL.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_EN:String = "../maps/icons/new_year/widget/header_title/EN.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_ES:String = "../maps/icons/new_year/widget/header_title/ES.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_ES_AR:String = "../maps/icons/new_year/widget/header_title/ES_AR.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_ET:String = "../maps/icons/new_year/widget/header_title/ET.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_FI:String = "../maps/icons/new_year/widget/header_title/FI.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_FR:String = "../maps/icons/new_year/widget/header_title/FR.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_HR:String = "../maps/icons/new_year/widget/header_title/HR.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_HU:String = "../maps/icons/new_year/widget/header_title/HU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_ID:String = "../maps/icons/new_year/widget/header_title/ID.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_IT:String = "../maps/icons/new_year/widget/header_title/IT.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_JA:String = "../maps/icons/new_year/widget/header_title/JA.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_KK:String = "../maps/icons/new_year/widget/header_title/KK.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_KO:String = "../maps/icons/new_year/widget/header_title/KO.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_LT:String = "../maps/icons/new_year/widget/header_title/LT.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_LV:String = "../maps/icons/new_year/widget/header_title/LV.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_NL:String = "../maps/icons/new_year/widget/header_title/NL.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_NO:String = "../maps/icons/new_year/widget/header_title/NO.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_PL:String = "../maps/icons/new_year/widget/header_title/PL.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_PT:String = "../maps/icons/new_year/widget/header_title/PT.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_PT_BR:String = "../maps/icons/new_year/widget/header_title/PT_BR.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_RO:String = "../maps/icons/new_year/widget/header_title/RO.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_RU:String = "../maps/icons/new_year/widget/header_title/RU.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_SR:String = "../maps/icons/new_year/widget/header_title/SR.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_SV:String = "../maps/icons/new_year/widget/header_title/SV.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_TH:String = "../maps/icons/new_year/widget/header_title/TH.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_TR:String = "../maps/icons/new_year/widget/header_title/TR.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_UK:String = "../maps/icons/new_year/widget/header_title/UK.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_VI:String = "../maps/icons/new_year/widget/header_title/VI.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_ZH_SG:String = "../maps/icons/new_year/widget/header_title/ZH_SG.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_ZH_TW:String = "../maps/icons/new_year/widget/header_title/ZH_TW.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_LEVELS_LEVEL1:String = "../maps/icons/new_year/widget/levels/level1.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_LEVELS_LEVEL10:String = "../maps/icons/new_year/widget/levels/level10.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_LEVELS_LEVEL2:String = "../maps/icons/new_year/widget/levels/level2.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_LEVELS_LEVEL3:String = "../maps/icons/new_year/widget/levels/level3.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_LEVELS_LEVEL4:String = "../maps/icons/new_year/widget/levels/level4.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_LEVELS_LEVEL5:String = "../maps/icons/new_year/widget/levels/level5.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_LEVELS_LEVEL6:String = "../maps/icons/new_year/widget/levels/level6.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_LEVELS_LEVEL7:String = "../maps/icons/new_year/widget/levels/level7.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_LEVELS_LEVEL8:String = "../maps/icons/new_year/widget/levels/level8.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_LEVELS_LEVEL9:String = "../maps/icons/new_year/widget/levels/level9.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_MENU_COLLECTIONS:String = "../maps/icons/new_year/widget/menu/collections.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_MENU_COLLECTIONS_SMALL:String = "../maps/icons/new_year/widget/menu/collections_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_MENU_DECORATIONS:String = "../maps/icons/new_year/widget/menu/decorations.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_MENU_DECORATIONS_SMALL:String = "../maps/icons/new_year/widget/menu/decorations_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_MENU_GLADE:String = "../maps/icons/new_year/widget/menu/glade.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_MENU_GLADE_SMALL:String = "../maps/icons/new_year/widget/menu/glade_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_MENU_INFO:String = "../maps/icons/new_year/widget/menu/info.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_MENU_INFO_SMALL:String = "../maps/icons/new_year/widget/menu/info_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_MENU_MENU_ITEM_OVER:String = "../maps/icons/new_year/widget/menu/menu_item_over.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_MENU_REWARDS:String = "../maps/icons/new_year/widget/menu/rewards.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_MENU_REWARDS_SMALL:String = "../maps/icons/new_year/widget/menu/rewards_small.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_MENU_SHARDS:String = "../maps/icons/new_year/widget/menu/shards.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_MENU_SHARDS_SMALL:String = "../maps/icons/new_year/widget/menu/shards_small.png";
+
         public static const MAPS_ICONS_NUMERICAL_STEPPER_STEPPER_LARGE_BUTTONS:String = "../maps/icons/numerical_stepper/stepper_large_buttons.png";
 
         public static const MAPS_ICONS_NUMERICAL_STEPPER_STEPPER_MEDIUM_BUTTONS:String = "../maps/icons/numerical_stepper/stepper_medium_buttons.png";
@@ -4577,6 +8493,8 @@ package
 
         public static const MAPS_ICONS_PROGRESSIVEREWARD_BIG_LOCK_PROB_MIN:String = "../maps/icons/progressiveReward/big_lock_prob_min.png";
 
+        public static const MAPS_ICONS_PROGRESSIVEREWARD_DELIMITER:String = "../maps/icons/progressiveReward/delimiter.png";
+
         public static const MAPS_ICONS_PROGRESSIVEREWARD_LIGHT:String = "../maps/icons/progressiveReward/light.png";
 
         public static const MAPS_ICONS_PROGRESSIVEREWARD_LOCK:String = "../maps/icons/progressiveReward/lock.png";
@@ -4658,6 +8576,8 @@ package
         public static const MAPS_ICONS_QUESTS_MTAWARDBACK:String = "../maps/icons/quests/MTAwardBack.png";
 
         public static const MAPS_ICONS_QUESTS_MULTITEAMFALLOUTAWARDBACK:String = "../maps/icons/quests/multiteamFalloutAwardBack.png";
+
+        public static const MAPS_ICONS_QUESTS_NYQUESTTOOLTIPHEADER:String = "../maps/icons/quests/nyQuestTooltipHeader.png";
 
         public static const MAPS_ICONS_QUESTS_PROMOSCREEN_FALLOUT:String = "../maps/icons/quests/promoscreen_fallout.png";
 
@@ -5033,6 +8953,8 @@ package
 
         public static const MAPS_ICONS_QUESTS_BONUSES_BIG_FREEEXP:String = "../maps/icons/quests/bonuses/big/freeExp.png";
 
+        public static const MAPS_ICONS_QUESTS_BONUSES_BIG_FREETALISMAN:String = "../maps/icons/quests/bonuses/big/freeTalisman.png";
+
         public static const MAPS_ICONS_QUESTS_BONUSES_BIG_FREETOKENS:String = "../maps/icons/quests/bonuses/big/freeTokens.png";
 
         public static const MAPS_ICONS_QUESTS_BONUSES_BIG_FREETOKENS_0:String = "../maps/icons/quests/bonuses/big/freeTokens_0.png";
@@ -5077,6 +8999,8 @@ package
 
         public static const MAPS_ICONS_QUESTS_BONUSES_BIG_LOADER_PEDANT:String = "../maps/icons/quests/bonuses/big/loader_pedant.png";
 
+        public static const MAPS_ICONS_QUESTS_BONUSES_BIG_LOCKEDTANKWOMAN:String = "../maps/icons/quests/bonuses/big/lockedTankwoman.png";
+
         public static const MAPS_ICONS_QUESTS_BONUSES_BIG_LOOTBOX_NEWYEAR_PREMIUM:String = "../maps/icons/quests/bonuses/big/lootBox_newYear_premium.png";
 
         public static const MAPS_ICONS_QUESTS_BONUSES_BIG_LOOTBOX_NEWYEAR_USUAL:String = "../maps/icons/quests/bonuses/big/lootBox_newYear_usual.png";
@@ -5084,6 +9008,8 @@ package
         public static const MAPS_ICONS_QUESTS_BONUSES_BIG_MILITARYEXERCISES:String = "../maps/icons/quests/bonuses/big/militaryExercises.png";
 
         public static const MAPS_ICONS_QUESTS_BONUSES_BIG_MODIFICATION:String = "../maps/icons/quests/bonuses/big/modification.png";
+
+        public static const MAPS_ICONS_QUESTS_BONUSES_BIG_NY20FILLERS:String = "../maps/icons/quests/bonuses/big/ny20Fillers.png";
 
         public static const MAPS_ICONS_QUESTS_BONUSES_BIG_PAINT:String = "../maps/icons/quests/bonuses/big/paint.png";
 
@@ -5367,6 +9293,8 @@ package
 
         public static const MAPS_ICONS_QUESTS_BONUSES_SMALL_FREEEXP:String = "../maps/icons/quests/bonuses/small/freeExp.png";
 
+        public static const MAPS_ICONS_QUESTS_BONUSES_SMALL_FREETALISMAN:String = "../maps/icons/quests/bonuses/small/freeTalisman.png";
+
         public static const MAPS_ICONS_QUESTS_BONUSES_SMALL_FREETOKENS:String = "../maps/icons/quests/bonuses/small/freeTokens.png";
 
         public static const MAPS_ICONS_QUESTS_BONUSES_SMALL_FREETOKENS_0:String = "../maps/icons/quests/bonuses/small/freeTokens_0.png";
@@ -5405,11 +9333,15 @@ package
 
         public static const MAPS_ICONS_QUESTS_BONUSES_SMALL_LOADER_PEDANT:String = "../maps/icons/quests/bonuses/small/loader_pedant.png";
 
+        public static const MAPS_ICONS_QUESTS_BONUSES_SMALL_LOCKEDTANKWOMAN:String = "../maps/icons/quests/bonuses/small/lockedTankwoman.png";
+
         public static const MAPS_ICONS_QUESTS_BONUSES_SMALL_LOOTBOX_NEWYEAR_PREMIUM:String = "../maps/icons/quests/bonuses/small/lootBox_newYear_premium.png";
 
         public static const MAPS_ICONS_QUESTS_BONUSES_SMALL_LOOTBOX_NEWYEAR_USUAL:String = "../maps/icons/quests/bonuses/small/lootBox_newYear_usual.png";
 
         public static const MAPS_ICONS_QUESTS_BONUSES_SMALL_MODIFICATION:String = "../maps/icons/quests/bonuses/small/modification.png";
+
+        public static const MAPS_ICONS_QUESTS_BONUSES_SMALL_NY20FILLERS:String = "../maps/icons/quests/bonuses/small/ny20Fillers.png";
 
         public static const MAPS_ICONS_QUESTS_BONUSES_SMALL_PAINT:String = "../maps/icons/quests/bonuses/small/paint.png";
 
@@ -6607,6 +10539,46 @@ package
 
         public static const MAPS_ICONS_REFERRAL_TANKMANMALE:String = "../maps/icons/referral/tankmanMale.png";
 
+        public static const MAPS_ICONS_SENIORITYAWARDS_AWARD_BG:String = "../maps/icons/seniorityAwards/award_bg.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_AWARD_RIBBON:String = "../maps/icons/seniorityAwards/award_ribbon.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_AWARD_RIBBON_SMALL:String = "../maps/icons/seniorityAwards/award_ribbon_small.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_CONFETTI:String = "../maps/icons/seniorityAwards/confetti.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_CONFETTI_SMALL:String = "../maps/icons/seniorityAwards/confetti_small.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_GLOW_BUTTON:String = "../maps/icons/seniorityAwards/glow_button.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_GLOW_SMALL_BUTTON:String = "../maps/icons/seniorityAwards/glow_small_button.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_ICONVIDEOOFF:String = "../maps/icons/seniorityAwards/iconVideoOff.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_REWARD_SHINE:String = "../maps/icons/seniorityAwards/reward_shine.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_RIBBON_SHINE:String = "../maps/icons/seniorityAwards/ribbon_shine.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_RIBBON_SHINE_BG:String = "../maps/icons/seniorityAwards/ribbon_shine_bg.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_SPARKS:String = "../maps/icons/seniorityAwards/sparks.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_REWARDS_BIG:String = "../maps/icons/seniorityAwards/rewards/big.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_REWARDS_BIG_HIDDEN:String = "../maps/icons/seniorityAwards/rewards/big_hidden.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_REWARDS_BIG_WITH_SHINE:String = "../maps/icons/seniorityAwards/rewards/big_with_shine.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_REWARDS_SMALL:String = "../maps/icons/seniorityAwards/rewards/small.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_REWARDS_SMALL_HIDDEN:String = "../maps/icons/seniorityAwards/rewards/small_hidden.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_REWARDS_SMALL_WITH_SHINE:String = "../maps/icons/seniorityAwards/rewards/small_with_shine.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_VEHICLES_390X245_A130_SUPER_HELLCAT:String = "../maps/icons/seniorityAwards/vehicles/390x245/A130_Super_Hellcat.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_VEHICLES_390X245_R160_T_50_2:String = "../maps/icons/seniorityAwards/vehicles/390x245/R160_T_50_2.png";
+
         public static const MAPS_ICONS_SETTINGS_ACOUSTICS:String = "../maps/icons/settings/acoustics.png";
 
         public static const MAPS_ICONS_SETTINGS_COMMANDER_SIXTHSENSE:String = "../maps/icons/settings/commander_sixthSense.png";
@@ -7273,6 +11245,18 @@ package
 
         public static const MAPS_ICONS_TANKMEN_ICONS_BARRACKS_NY19_WOMAN_L8:String = "../maps/icons/tankmen/icons/barracks/ny19_woman_L8.png";
 
+        public static const MAPS_ICONS_TANKMEN_ICONS_BARRACKS_NY20_GIRL_CHRISTMAS:String = "../maps/icons/tankmen/icons/barracks/ny20_girl_Christmas.png";
+
+        public static const MAPS_ICONS_TANKMEN_ICONS_BARRACKS_NY20_GIRL_FAIRYTALE:String = "../maps/icons/tankmen/icons/barracks/ny20_girl_Fairytale.png";
+
+        public static const MAPS_ICONS_TANKMEN_ICONS_BARRACKS_NY20_GIRL_NEWYEAR:String = "../maps/icons/tankmen/icons/barracks/ny20_girl_NewYear.png";
+
+        public static const MAPS_ICONS_TANKMEN_ICONS_BARRACKS_NY20_GIRL_ORIENTAL:String = "../maps/icons/tankmen/icons/barracks/ny20_girl_Oriental.png";
+
+        public static const MAPS_ICONS_TANKMEN_ICONS_BARRACKS_NY20_MEN:String = "../maps/icons/tankmen/icons/barracks/ny20_men.png";
+
+        public static const MAPS_ICONS_TANKMEN_ICONS_BARRACKS_NY20_SNOWMEN:String = "../maps/icons/tankmen/icons/barracks/ny20_snowmen.png";
+
         public static const MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_1:String = "../maps/icons/tankmen/icons/barracks/poland-1.png";
 
         public static const MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_10:String = "../maps/icons/tankmen/icons/barracks/poland-10.png";
@@ -7933,6 +11917,20 @@ package
 
         public static const MAPS_ICONS_TANKMEN_ICONS_SPECIAL_NY19_WOMAN_L8:String = "../maps/icons/tankmen/icons/special/ny19_woman_L8.png";
 
+        public static const MAPS_ICONS_TANKMEN_ICONS_SPECIAL_NY20_DEFAULT_GIRL:String = "../maps/icons/tankmen/icons/special/ny20_default_girl.png";
+
+        public static const MAPS_ICONS_TANKMEN_ICONS_SPECIAL_NY20_GIRL_CHRISTMAS:String = "../maps/icons/tankmen/icons/special/ny20_girl_Christmas.png";
+
+        public static const MAPS_ICONS_TANKMEN_ICONS_SPECIAL_NY20_GIRL_FAIRYTALE:String = "../maps/icons/tankmen/icons/special/ny20_girl_Fairytale.png";
+
+        public static const MAPS_ICONS_TANKMEN_ICONS_SPECIAL_NY20_GIRL_NEWYEAR:String = "../maps/icons/tankmen/icons/special/ny20_girl_NewYear.png";
+
+        public static const MAPS_ICONS_TANKMEN_ICONS_SPECIAL_NY20_GIRL_ORIENTAL:String = "../maps/icons/tankmen/icons/special/ny20_girl_Oriental.png";
+
+        public static const MAPS_ICONS_TANKMEN_ICONS_SPECIAL_NY20_MEN:String = "../maps/icons/tankmen/icons/special/ny20_men.png";
+
+        public static const MAPS_ICONS_TANKMEN_ICONS_SPECIAL_NY20_SNOWMEN:String = "../maps/icons/tankmen/icons/special/ny20_snowmen.png";
+
         public static const MAPS_ICONS_TANKMEN_SKILLS_SMALL_BROTHERHOOD:String = "../maps/icons/tankmen/skills/small/brotherhood.png";
 
         public static const MAPS_ICONS_TANKMEN_SKILLS_SMALL_CAMOUFLAGE:String = "../maps/icons/tankmen/skills/small/camouflage.png";
@@ -8209,7 +12207,7 @@ package
 
         public static const MAPS_ICONS_BUTTONS_ENUM:Array = [MAPS_ICONS_BUTTONS_BOOKMARK,MAPS_ICONS_BUTTONS_BUTTON_BACK_ARROW,MAPS_ICONS_BUTTONS_BUTTON_NEXT_ARROW,MAPS_ICONS_BUTTONS_BUTTON_PLAY2,MAPS_ICONS_BUTTONS_CALENDAR,MAPS_ICONS_BUTTONS_CHECKMARK,MAPS_ICONS_BUTTONS_CLAN_LIST,MAPS_ICONS_BUTTONS_CLAN_STATS,MAPS_ICONS_BUTTONS_DESTROY,MAPS_ICONS_BUTTONS_ENTERWHITE,MAPS_ICONS_BUTTONS_ENVELOPE,MAPS_ICONS_BUTTONS_ENVELOPEOPENED,MAPS_ICONS_BUTTONS_EQUIPPED_ICON,MAPS_ICONS_BUTTONS_EXPLORE,MAPS_ICONS_BUTTONS_EXP_GATHERING,MAPS_ICONS_BUTTONS_FILTER,MAPS_ICONS_BUTTONS_FOOTHOLD,MAPS_ICONS_BUTTONS_GOLD_EXCHANGING,MAPS_ICONS_BUTTONS_HORN,MAPS_ICONS_BUTTONS_ICONDESTROY,MAPS_ICONS_BUTTONS_ICONDOWN,MAPS_ICONS_BUTTONS_ICONUP,MAPS_ICONS_BUTTONS_ICONUPGRADE,MAPS_ICONS_BUTTONS_ICON_ARROW_FORMATION_LEFT,MAPS_ICONS_BUTTONS_ICON_ARROW_FORMATION_LEFT_DOUBLE,MAPS_ICONS_BUTTONS_ICON_ARROW_FORMATION_RIGHT,MAPS_ICONS_BUTTONS_ICON_ARROW_FORMATION_RIGHT_DOUBLE,MAPS_ICONS_BUTTONS_ICON_BUTTON_ARROW,MAPS_ICONS_BUTTONS_ICON_CHANNELS_HIDE_SYMBOLS,MAPS_ICONS_BUTTONS_ICON_CHANNELS_SHOW_SYMBOLS_097,MAPS_ICONS_BUTTONS_ICON_TABLE_COMPARISON_CHECKMARK,MAPS_ICONS_BUTTONS_ICON_TABLE_COMPARISON_INHANGAR,MAPS_ICONS_BUTTONS_LEVEL_UP,MAPS_ICONS_BUTTONS_MAINMENU,MAPS_ICONS_BUTTONS_MAITENANCE,MAPS_ICONS_BUTTONS_NATION_CHANGE,MAPS_ICONS_BUTTONS_NC_ICON_MEDIUM,MAPS_ICONS_BUTTONS_NEXTPAGE,MAPS_ICONS_BUTTONS_NON_HISTORICAL,MAPS_ICONS_BUTTONS_PAUSE,MAPS_ICONS_BUTTONS_PLAY,MAPS_ICONS_BUTTONS_PLAYERS,MAPS_ICONS_BUTTONS_PREMIUM,MAPS_ICONS_BUTTONS_PREVIOUSPAGE,MAPS_ICONS_BUTTONS_REFILL_ACCOUNT,MAPS_ICONS_BUTTONS_REFRESH,MAPS_ICONS_BUTTONS_REMOVE,MAPS_ICONS_BUTTONS_REMOVEGOLD,MAPS_ICONS_BUTTONS_REVERT_24X24,MAPS_ICONS_BUTTONS_SEARCH,MAPS_ICONS_BUTTONS_SELECTORRENDERERBGEVENT,MAPS_ICONS_BUTTONS_SETTINGS,MAPS_ICONS_BUTTONS_SMALLATTACKICON,MAPS_ICONS_BUTTONS_SOUND,MAPS_ICONS_BUTTONS_SPEAKER_SMALL,MAPS_ICONS_BUTTONS_SPEAKER_SUB,MAPS_ICONS_BUTTONS_SWAP,MAPS_ICONS_BUTTONS_SWAP2,MAPS_ICONS_BUTTONS_SWAP3,MAPS_ICONS_BUTTONS_SWAP3_ROTATED,MAPS_ICONS_BUTTONS_TANK_ICO,MAPS_ICONS_BUTTONS_TANKMAN_SKILLS_DROP,MAPS_ICONS_BUTTONS_TIMER,MAPS_ICONS_BUTTONS_TRANSPORTING,MAPS_ICONS_BUTTONS_TRANSPORTINGARROW,MAPS_ICONS_BUTTONS_TUNING,MAPS_ICONS_BUTTONS_VEHICLE_FILTER,MAPS_ICONS_BUTTONS_VEHICLECOMPAREBTN,MAPS_ICONS_BUTTONS_SOCIAL_FACEBOOK,MAPS_ICONS_BUTTONS_SOCIAL_GOOGLE,MAPS_ICONS_BUTTONS_SOCIAL_NAVER,MAPS_ICONS_BUTTONS_SOCIAL_VKONTAKTE,MAPS_ICONS_BUTTONS_SOCIAL_WGNI,MAPS_ICONS_BUTTONS_SOCIAL_YAHOO,MAPS_ICONS_BUTTONS_SOCIAL_COLOR_FACEBOOK,MAPS_ICONS_BUTTONS_SOCIAL_COLOR_GOOGLE,MAPS_ICONS_BUTTONS_SOCIAL_COLOR_NAVER,MAPS_ICONS_BUTTONS_SOCIAL_COLOR_VKONTAKTE,MAPS_ICONS_BUTTONS_SOCIAL_COLOR_WGNI,MAPS_ICONS_BUTTONS_SOCIAL_COLOR_YAHOO,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_ASCENDINGSORTARROW,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_ASCPROFILESORTARROW,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_DAMAGE,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_DEATHS,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_DESCENDINGSORTARROW,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_DESCPROFILESORTARROW,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_FALLOUTRESOURCEPOINTS,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_FLAG,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_FRAG,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_HEALTH,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_LEVEL,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_LEVEL_6_8,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_MEDAL,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_NOTAVAILABLE,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_OK,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_PLAYER,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_PLAYERNUMBER,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_PLAYERRANK,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_RANK,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_RESOURCECOUNT,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_RESPAWN,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_SQUAD,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_STAR_RED,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_TABLEHEADERBG,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_TABLEHEADERSORTEDBG,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_TANK,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_TEAMSCORE,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_VICTORYSCORE,MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_XP];
 
-        public static const MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ENUM:Array = [MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_20,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_21,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_22,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_23,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_FEMALE_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_FEMALE_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_FEMALE_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_FEMALE_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_FEMALE_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_FEMALE_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_FEMALE_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_FEMALE_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_FEMALE_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_FEMALE_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_FEMALE_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_FEMALE_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_FEMALE_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_COMMANDER_MARINA,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_20,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_21,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_22,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_23,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_24,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_25,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_26,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_27,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_28,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_29,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_30,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_31,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_FEMALE_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_FEMALE_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_FEMALE_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_FEMALE_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_FEMALE_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_FEMALE_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_FEMALE_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_FEMALE_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_FEMALE_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_FEMALE_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_FEMALE_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_FEMALE_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_20,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_21,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_22,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_23,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_24,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_25,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_26,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_27,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_28,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_29,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_30,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_31,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_32,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_33,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_34,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_20,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_21,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_22,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_23,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_24,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_25,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_26,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_27,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_28,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_29,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_30,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_31,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_32,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GIRL_EMPTY,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_20,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_21,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_22,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_BUFFON,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_20,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_21,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_22,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_23,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_20,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_21,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_22,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_23,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_24,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_25,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_26,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_27,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_28,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_29,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_30,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_CARISA_CONTZEN,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_FEMALE_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_FEMALE_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_FEMALE_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_FEMALE_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_FEMALE_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_FEMALE_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_FEMALE_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_FEMALE_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_FEMALE_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_FEMALE_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_FEMALE_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_FEMALE_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_GUNNER,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_GUNNER_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_GUSURG,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_ISARA_GUNTHER,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_KREIS_CZHERNY,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_LOADER,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_LOADER_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_RADIO_OPERATOR,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_WELKIN_GUNTHER,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_NY19_MEN,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_NY19_WOMAN_L10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_NY19_WOMAN_L4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_NY19_WOMAN_L6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_NY19_WOMAN_L8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_20,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_21_KOS,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_22_CZERESNIAK,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_23_SAAKASZWILI,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_24_JELEN,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_FEMALE_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_FEMALE_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_FEMALE_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_FEMALE_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_FEMALE_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_FEMALE_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_FEMALE_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_FEMALE_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_FEMALE_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_FEMALE_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_FEMALE_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_FEMALE_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_RACE19_COMMANDER_A,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_RACE19_COMMANDER_B,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_RACE19_COMMANDER_C,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_20,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_21,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_22,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_23,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_24,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_25,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_26,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_27,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_28,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_29,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_30,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_31,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_32,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_33,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_34,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_35,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_36,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_37,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_TANKMAN,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_TWITCH6_PUMPKIN_TWITCH,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_TWITCH7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_TWITCH_GIRL,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_TWITCH_GUY,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_20,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_21,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_22,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_23,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_24,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_25,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_26,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_27,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_28,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_29,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_30,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_31,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_32,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_33,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_34,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_35,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_20,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_21,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_22,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_23,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_24,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_25,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_26,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_27,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_28,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_29,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_30,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_31,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_32,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_33,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_34,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_35,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_36,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_37,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_38,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_39,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_40,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_41,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_42,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_43,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_44,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_45,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_46,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_47,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_20,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_21,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_22,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_23,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_24,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_25,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_26,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_27,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_28,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_20,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_21,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_22,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_23,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_24,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_25,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_26,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_27,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_28,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_29,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_30,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_31,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_32,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_33,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_34,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE01,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE02,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE03,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE04,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE05,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE06,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE07,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE08,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE09,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_DEGAULLE,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_FOOLSDAY_CRAYFISH,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_FOOLSDAY_DEER,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_FOOLSDAY_RNGESUS,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_FOOLSDAY_TOMATO,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_FOOLSDAY_UNICORN,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_KATUKOV,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_PATTON,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE01,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE02,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE03,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE04,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE05,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE06,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE07,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE08,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE09,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RYBALKO,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_SPACE01,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_SPACE02,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_SPACE03,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_SPACE04,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_SPACE05,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_SPACE06];
+        public static const MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ENUM:Array = [MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_20,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_21,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_22,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_23,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_FEMALE_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_FEMALE_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_FEMALE_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_FEMALE_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_FEMALE_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_FEMALE_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_FEMALE_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_FEMALE_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_FEMALE_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_FEMALE_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_FEMALE_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_FEMALE_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CHINA_FEMALE_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_COMMANDER_MARINA,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_20,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_21,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_22,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_23,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_24,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_25,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_26,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_27,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_28,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_29,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_30,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_31,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_FEMALE_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_FEMALE_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_FEMALE_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_FEMALE_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_FEMALE_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_FEMALE_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_FEMALE_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_FEMALE_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_FEMALE_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_FEMALE_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_FEMALE_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CZECH_FEMALE_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_20,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_21,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_22,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_23,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_24,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_25,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_26,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_27,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_28,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_29,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_30,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_31,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_32,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_33,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_34,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_FRANCE_FEMALE_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_20,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_21,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_22,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_23,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_24,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_25,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_26,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_27,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_28,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_29,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_30,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_31,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_32,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GERMANY_FEMALE_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_GIRL_EMPTY,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_20,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_21,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_22,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_BUFFON,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_20,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_21,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_22,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_23,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_ITALY_FEMALE_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_20,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_21,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_22,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_23,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_24,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_25,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_26,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_27,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_28,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_29,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_30,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_CARISA_CONTZEN,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_FEMALE_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_FEMALE_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_FEMALE_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_FEMALE_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_FEMALE_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_FEMALE_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_FEMALE_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_FEMALE_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_FEMALE_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_FEMALE_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_FEMALE_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_FEMALE_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_GUNNER,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_GUNNER_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_GUSURG,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_ISARA_GUNTHER,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_KREIS_CZHERNY,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_LOADER,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_LOADER_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_RADIO_OPERATOR,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_JAPAN_WELKIN_GUNTHER,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_NY19_MEN,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_NY19_WOMAN_L10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_NY19_WOMAN_L4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_NY19_WOMAN_L6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_NY19_WOMAN_L8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_NY20_GIRL_CHRISTMAS,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_NY20_GIRL_FAIRYTALE,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_NY20_GIRL_NEWYEAR,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_NY20_GIRL_ORIENTAL,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_NY20_MEN,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_NY20_SNOWMEN,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_20,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_21_KOS,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_22_CZERESNIAK,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_23_SAAKASZWILI,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_24_JELEN,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_FEMALE_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_FEMALE_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_FEMALE_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_FEMALE_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_FEMALE_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_FEMALE_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_FEMALE_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_FEMALE_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_FEMALE_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_FEMALE_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_FEMALE_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_POLAND_FEMALE_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_RACE19_COMMANDER_A,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_RACE19_COMMANDER_B,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_RACE19_COMMANDER_C,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_20,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_21,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_22,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_23,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_24,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_25,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_26,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_27,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_28,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_29,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_30,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_31,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_32,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_33,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_34,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_35,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_36,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_37,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_SWEDEN_FEMALE_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_TANKMAN,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_TWITCH6_PUMPKIN_TWITCH,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_TWITCH7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_TWITCH_GIRL,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_TWITCH_GUY,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_20,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_21,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_22,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_23,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_24,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_25,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_26,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_27,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_28,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_29,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_30,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_31,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_32,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_33,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_34,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_35,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_UK_FEMALE_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_20,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_21,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_22,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_23,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_24,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_25,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_26,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_27,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_28,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_29,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_30,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_31,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_32,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_33,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_34,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_35,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_36,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_37,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_38,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_39,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_40,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_41,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_42,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_43,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_44,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_45,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_46,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_47,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_20,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_21,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_22,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_23,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_24,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_25,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_26,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_27,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_28,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_FEMALE_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_20,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_21,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_22,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_23,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_24,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_25,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_26,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_27,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_28,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_29,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_30,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_31,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_32,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_33,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_34,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_1,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_17,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_18,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_19,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_2,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_3,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_4,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_5,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_6,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_7,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_8,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USSR_FEMALE_9,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE01,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE02,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE03,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE04,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE05,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE06,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE07,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE08,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE09,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_BRAVE16,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_DEGAULLE,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_FOOLSDAY_CRAYFISH,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_FOOLSDAY_DEER,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_FOOLSDAY_RNGESUS,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_FOOLSDAY_TOMATO,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_FOOLSDAY_UNICORN,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_KATUKOV,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_PATTON,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE01,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE02,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE03,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE04,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE05,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE06,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE07,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE08,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE09,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE10,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE11,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE12,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE13,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE14,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RACE15,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_RYBALKO,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_SPACE01,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_SPACE02,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_SPACE03,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_SPACE04,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_SPACE05,MAPS_ICONS_TANKMEN_ICONS_BARRACKS_CREWSKINS_SPACE06];
 
         public static const MAPS_ICONS_TANKMEN_SKILLS_SMALL_ENUM:Array = [MAPS_ICONS_TANKMEN_SKILLS_SMALL_BROTHERHOOD,MAPS_ICONS_TANKMEN_SKILLS_SMALL_CAMOUFLAGE,MAPS_ICONS_TANKMEN_SKILLS_SMALL_COMMANDER_EAGLEEYE,MAPS_ICONS_TANKMEN_SKILLS_SMALL_COMMANDER_EXPERT,MAPS_ICONS_TANKMEN_SKILLS_SMALL_COMMANDER_SIXTHSENSE,MAPS_ICONS_TANKMEN_SKILLS_SMALL_COMMANDER_TUTOR,MAPS_ICONS_TANKMEN_SKILLS_SMALL_COMMANDER_UNIVERSALIST,MAPS_ICONS_TANKMEN_SKILLS_SMALL_DRIVER_BADROADSKING,MAPS_ICONS_TANKMEN_SKILLS_SMALL_DRIVER_RAMMINGMASTER,MAPS_ICONS_TANKMEN_SKILLS_SMALL_DRIVER_SMOOTHDRIVING,MAPS_ICONS_TANKMEN_SKILLS_SMALL_DRIVER_TIDYPERSON,MAPS_ICONS_TANKMEN_SKILLS_SMALL_DRIVER_VIRTUOSO,MAPS_ICONS_TANKMEN_SKILLS_SMALL_FIREFIGHTING,MAPS_ICONS_TANKMEN_SKILLS_SMALL_GUNNER_GUNSMITH,MAPS_ICONS_TANKMEN_SKILLS_SMALL_GUNNER_RANCOROUS,MAPS_ICONS_TANKMEN_SKILLS_SMALL_GUNNER_SMOOTHTURRET,MAPS_ICONS_TANKMEN_SKILLS_SMALL_GUNNER_SNIPER,MAPS_ICONS_TANKMEN_SKILLS_SMALL_LOADER_DESPERADO,MAPS_ICONS_TANKMEN_SKILLS_SMALL_LOADER_INTUITION,MAPS_ICONS_TANKMEN_SKILLS_SMALL_LOADER_PEDANT,MAPS_ICONS_TANKMEN_SKILLS_SMALL_NEW_CURRENT_SKILL,MAPS_ICONS_TANKMEN_SKILLS_SMALL_NEW_SKILL,MAPS_ICONS_TANKMEN_SKILLS_SMALL_OFFSPRING_BROTHERHOOD,MAPS_ICONS_TANKMEN_SKILLS_SMALL_RADIOMAN_FINDER,MAPS_ICONS_TANKMEN_SKILLS_SMALL_RADIOMAN_INVENTOR,MAPS_ICONS_TANKMEN_SKILLS_SMALL_RADIOMAN_LASTEFFORT,MAPS_ICONS_TANKMEN_SKILLS_SMALL_RADIOMAN_RETRANSMITTER,MAPS_ICONS_TANKMEN_SKILLS_SMALL_REPAIR,MAPS_ICONS_TANKMEN_SKILLS_SMALL_SABATON_BROTHERHOOD];
 

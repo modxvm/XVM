@@ -7,6 +7,8 @@ package net.wg.infrastructure.base.meta
 
         function onWidgetClickS() : void;
 
+        function onOpenBtnClickS() : void;
+
         function as_setData(param1:Object) : void;
     }
 }

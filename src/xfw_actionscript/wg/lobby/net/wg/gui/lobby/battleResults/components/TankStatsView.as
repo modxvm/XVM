@@ -158,6 +158,7 @@ package net.wg.gui.lobby.battleResults.components
         {
             var _loc2_:IUserProps = null;
             var _loc3_:* = false;
+            var _loc4_:String = null;
             var _loc1_:VehicleStatsVO = this._playerVehicles[0];
             if(_loc1_.isPrematureLeave || _loc1_.killerID <= 0)
             {
@@ -167,13 +168,15 @@ package net.wg.gui.lobby.battleResults.components
             else if(_loc1_.killerID > 0)
             {
                 _loc2_ = App.utils.commons.getUserProps(_loc1_.killerRealNameStr,_loc1_.killerClanNameStr,_loc1_.killerRegionNameStr);
+                _loc2_.fakeName = _loc1_.killerFakeNameStr;
                 _loc2_.prefix = _loc1_.vehicleStatePrefixStr;
                 _loc2_.suffix = _loc1_.vehicleStateSuffixStr;
                 _loc2_.isTeamKiller = _loc1_.isKilledByTeamKiller;
-                _loc3_ = App.utils.commons.formatPlayerName(this.vehicleStateLbl,_loc2_);
+                _loc3_ = App.utils.commons.formatPlayerName(this.vehicleStateLbl,_loc2_,true);
                 if(_loc3_)
                 {
-                    this.toolTip = _loc1_.vehicleStatePrefixStr + _loc1_.killerFullNameStr + _loc1_.vehicleStateSuffixStr;
+                    _loc4_ = _loc2_.isAnonymized?_loc1_.killerFakeNameStr:_loc1_.killerFullNameStr;
+                    this.toolTip = _loc1_.vehicleStatePrefixStr + _loc4_ + _loc1_.vehicleStateSuffixStr;
                 }
             }
         }

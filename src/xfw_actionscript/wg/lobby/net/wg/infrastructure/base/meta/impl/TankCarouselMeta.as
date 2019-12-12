@@ -17,6 +17,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public var buyRentPromotion:Function;
 
+        public var newYearVehicles:Function;
+
         public var setFilter:Function;
 
         public var updateHotFilters:Function;
@@ -69,6 +71,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.buyRentPromotion,"buyRentPromotion" + Errors.CANT_NULL);
             this.buyRentPromotion(param1);
+        }
+
+        public function newYearVehiclesS() : void
+        {
+            App.utils.asserter.assertNotNull(this.newYearVehicles,"newYearVehicles" + Errors.CANT_NULL);
+            this.newYearVehicles();
         }
 
         public function setFilterS(param1:int) : void

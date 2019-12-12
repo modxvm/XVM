@@ -2209,6 +2209,34 @@ package
 
         public static const NATION_CHANGE_ERROR:String = "#system_messages:nation_change/error";
 
+        public static const NEWYEAR_CRAFTTOY_SERVER_ERROR:String = "#system_messages:newYear/craftToy/server_error";
+
+        public static const NEWYEAR_BUYTOY_SERVER_ERROR:String = "#system_messages:newYear/buyToy/server_error";
+
+        public static const NEWYEAR_APPLYVEHICLEDISCOUNT_SUCCESS:String = "#system_messages:newYear/applyVehicleDiscount/success";
+
+        public static const NEWYEAR_APPLYVEHICLEDISCOUNT_SERVER_ERROR:String = "#system_messages:newYear/applyVehicleDiscount/server_error";
+
+        public static const NEWYEAR_APPLYVEHICLEDISCOUNT_SERVER_ERROR_NODISCOUNTS:String = "#system_messages:newYear/applyVehicleDiscount/server_error/noDiscounts";
+
+        public static const NEWYEAR_APPLYVEHICLEDISCOUNT_SERVER_ERROR_ALREADYACTIVE:String = "#system_messages:newYear/applyVehicleDiscount/server_error/alreadyActive";
+
+        public static const NEWYEAR_APPLYVEHICLEDISCOUNT_SERVER_ERROR_ALREADYBOUGHT:String = "#system_messages:newYear/applyVehicleDiscount/server_error/alreadyBought";
+
+        public static const NEWYEAR_APPLYVEHICLEDISCOUNT_SERVER_ERROR_NODISCOUNTFORVEHICLE:String = "#system_messages:newYear/applyVehicleDiscount/server_error/noDiscountForVehicle";
+
+        public static const NEWYEAR_HANGTOY_SERVER_ERROR:String = "#system_messages:newYear/hangToy/server_error";
+
+        public static const NEWYEAR_BREAKTOYS_SERVER_ERROR:String = "#system_messages:newYear/breakToys/server_error";
+
+        public static const NEWYEAR_SETVEHICLEBRANCH_SERVER_ERROR:String = "#system_messages:newYear/setVehicleBranch/server_error";
+
+        public static const NEWYEAR_ADDTALISMAN_SERVER_ERROR:String = "#system_messages:newYear/addTalisman/server_error";
+
+        public static const NEWYEAR_GETTALISMANTOY_SERVER_ERROR:String = "#system_messages:newYear/getTalismanToy/server_error";
+
+        public static const NEWYEAR_BUYCOLLECTION_SERVER_ERROR:String = "#system_messages:newYear/buyCollection/server_error";
+
         public function SYSTEM_MESSAGES()
         {
             super();

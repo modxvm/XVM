@@ -7,8 +7,8 @@ package net.wg.infrastructure.tutorial.builders.bootcamp
     import org.idmedia.as3commons.util.StringUtils;
     import net.wg.data.constants.Errors;
     import flash.events.Event;
-    import net.wg.data.VO.PaddingVO;
     import flash.geom.Point;
+    import net.wg.data.VO.PaddingVO;
 
     public class TutorialHighlightEffectBuilder extends TutorialEffectBuilder
     {
@@ -68,8 +68,9 @@ package net.wg.infrastructure.tutorial.builders.bootcamp
 
         protected function layoutHint() : void
         {
+            var _loc1_:Point = null;
             var _loc2_:PaddingVO = null;
-            var _loc1_:Point = component.localToGlobal(new Point(0,0));
+            _loc1_ = component.localToGlobal(new Point(0,0));
             _loc1_ = view.globalToLocal(_loc1_);
             _loc2_ = this._model.padding;
             if(!_loc2_)

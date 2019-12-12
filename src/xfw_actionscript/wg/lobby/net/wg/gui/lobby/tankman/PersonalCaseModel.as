@@ -61,6 +61,8 @@ package net.wg.gui.lobby.tankman
 
         public var tabIndex:int;
 
+        public var isBootcamp:Boolean = false;
+
         public var tabsData:Array;
 
         public var actionChangeRole:ActionPriceVO = null;
@@ -74,6 +76,7 @@ package net.wg.gui.lobby.tankman
             this.tabsData = [];
             super();
             this.tabIndex = parseInt(param1.tabIndex);
+            this.isBootcamp = Boolean(param1.isBootcamp);
             var _loc2_:Object = param1.nativeVehicle;
             this.nativeVehicle.intCD = _loc2_.intCD;
             this.nativeVehicle.type = _loc2_.type;

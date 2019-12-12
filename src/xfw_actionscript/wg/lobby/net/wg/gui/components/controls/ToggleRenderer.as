@@ -20,6 +20,8 @@ package net.wg.gui.components.controls
 
         private var _selected:Boolean = false;
 
+        private var _updateSelectedFromData:Boolean = true;
+
         public function ToggleRenderer()
         {
             super();
@@ -41,7 +43,10 @@ package net.wg.gui.components.controls
                 {
                     this.btn.visible = true;
                     this.btn.iconSource = this._rendererData.value;
-                    this.btn.selected = this._rendererData.selected;
+                    if(this._updateSelectedFromData)
+                    {
+                        this.btn.selected = this._rendererData.selected;
+                    }
                     this.btn.tooltip = this._rendererData.tooltip;
                     this.btn.enabled = this._rendererData.enabled;
                 }
@@ -83,6 +88,11 @@ package net.wg.gui.components.controls
         {
             this.index = param1.index;
             this.selected = param1.selected;
+        }
+
+        public function set updateSelectedFromData(param1:Boolean) : void
+        {
+            this._updateSelectedFromData = param1;
         }
 
         public function get index() : uint

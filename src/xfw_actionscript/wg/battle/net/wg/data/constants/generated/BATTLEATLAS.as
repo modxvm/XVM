@@ -257,6 +257,8 @@ package net.wg.data.constants.generated
 
         public static const BADGE_85:String = "badge_85";
 
+        public static const BADGE_86:String = "badge_86";
+
         public static const BADGE_9:String = "badge_9";
 
         public static const BATTLE_LOADING_FORM_BG_TABLE:String = "battleLoadingFormBgTable";
@@ -2380,6 +2382,8 @@ package net.wg.data.constants.generated
         public static const USA_A13_T34_HVY_FL:String = "usa-A13_T34_hvy_FL";
 
         public static const USA_A13_T34_HVY_IGR:String = "usa-A13_T34_hvy_IGR";
+
+        public static const USA_A130_SUPER_HELLCAT:String = "usa-A130_Super_Hellcat";
 
         public static const USA_A14_T30:String = "usa-A14_T30";
 

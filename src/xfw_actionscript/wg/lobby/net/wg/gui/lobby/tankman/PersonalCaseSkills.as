@@ -49,7 +49,7 @@ package net.wg.gui.lobby.tankman
             if(this.modifiers)
             {
                 this.modifiers.removeEventListener(ListEvent.INDEX_CHANGE,this.modifiers_listIndexChangeHandler);
-                this.modifiers.removeEventListener(ListEvent.ITEM_PRESS,this.modifiers_itemPressHandler);
+                this.modifiers.removeEventListener(ListEvent.ITEM_PRESS,this.modifiers_listIndexChangeHandler);
                 this.modifiers.removeEventListener(PersonalCaseSkillsItemRenderer.SKILL_DOUBLE_CLICK,this.modifiers_eventHandler);
                 this.modifiers.dispose();
                 this.modifiers = null;
@@ -73,7 +73,7 @@ package net.wg.gui.lobby.tankman
         {
             super.configUI();
             this.modifiers.addEventListener(ListEvent.INDEX_CHANGE,this.modifiers_listIndexChangeHandler);
-            this.modifiers.addEventListener(ListEvent.ITEM_PRESS,this.modifiers_itemPressHandler);
+            this.modifiers.addEventListener(ListEvent.ITEM_PRESS,this.modifiers_listIndexChangeHandler);
             this.modifiers.addEventListener(PersonalCaseSkillsItemRenderer.SKILL_DOUBLE_CLICK,this.modifiers_eventHandler);
             this.emptySkillsMessage.text = MENU.TANKMSNPERSONALCASE_LOADINGINFO;
         }
@@ -117,8 +117,14 @@ package net.wg.gui.lobby.tankman
 
         public function update(param1:Object) : void
         {
-            this.model = param1 as Array;
+            var _loc2_:PersonalCaseSkillsModel = param1 as PersonalCaseSkillsModel;
+            if(_loc2_ == null)
+            {
+                return;
+            }
+            this.model = _loc2_.list;
             this.hasNewSkill = false;
+            this.modifiers.enableKeyboardInput = !_loc2_.isBootcamp;
             this.modifiers.dataProvider = new DataProvider(this.model);
             invalidate(UPDATE_DATA_PROVIDER);
         }
@@ -186,24 +192,14 @@ package net.wg.gui.lobby.tankman
             this.updateSelectBtn();
         }
 
-        private function modifiers_itemPressHandler(param1:ListEvent) : void
-        {
-            if(!param1.itemData)
-            {
-                return;
-            }
-            this.selectedSkillName = param1.itemData.title;
-            this.lastSelectedIndex = param1.index;
-            this.updateSelectBtn();
-        }
-
         private function modifiers_listIndexChangeHandler(param1:ListEvent) : void
         {
-            if(!param1.itemData)
+            var _loc2_:PersonalCaseSkillModel = param1.itemData as PersonalCaseSkillModel;
+            if(_loc2_ == null)
             {
                 return;
             }
-            this.selectedSkillName = param1.itemData.title;
+            this.selectedSkillName = _loc2_.title;
             this.lastSelectedIndex = param1.index;
             this.updateSelectBtn();
         }

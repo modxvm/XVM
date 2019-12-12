@@ -39,6 +39,8 @@ package
 
         public static const TRADEINNOVEHICLES:String = "#tooltips:tradeInNoVehicles";
 
+        public static const SENIORITYAWARDS_HANGARENTRYPOINT_TOOLTIP:String = "#tooltips:seniorityAwards/hangarEntryPoint/tooltip";
+
         public static const ACHIEVEMENT_PARAMS:String = "#tooltips:achievement/params";
 
         public static const ANONYMIZER_TEAMSTATS:String = "#tooltips:anonymizer/teamStats";
@@ -1756,6 +1758,10 @@ package
         public static const TANKCARUSEL_LOCK_TOURNAMENT:String = "#tooltips:tankCarusel/lock/TOURNAMENT";
 
         public static const TANKCARUSEL_LOCK_ROTATION:String = "#tooltips:tankCarusel/lock/rotation";
+
+        public static const TANKCARUSEL_NEWYEARSLOT_HEADER:String = "#tooltips:tankCarusel/newYearSlot/header";
+
+        public static const TANKCARUSEL_NEWYEARSLOT_BODY:String = "#tooltips:tankCarusel/newYearSlot/body";
 
         public static const TANKCARUSEL_LOCK_ROAMING:String = "#tooltips:tankCarusel/lock/ROAMING";
 
@@ -3623,6 +3629,10 @@ package
 
         public static const AWARDITEM_ONEOF_RANKEDSEASON_PREVIEWSTYLE_BODY:String = "#tooltips:awardItem/oneof/rankedSeason/previewStyle/body";
 
+        public static const AWARDITEM_NY20FILLERS_HEADER:String = "#tooltips:awardItem/ny20Fillers/header";
+
+        public static const AWARDITEM_NY20FILLERS_BODY:String = "#tooltips:awardItem/ny20Fillers/body";
+
         public static const RANKEDBATTLEVIEW_SCOREPOINT_SHORT_HEADER:String = "#tooltips:rankedBattleView/scorePoint/short/header";
 
         public static const RANKEDBATTLEVIEW_SCOREPOINT_HEADER:String = "#tooltips:rankedBattleView/scorePoint/header";
@@ -3944,6 +3954,10 @@ package
         public static const VEHICLEPREVIEW_VEHICLEPANEL_INFO_BODY:String = "#tooltips:vehiclePreview/vehiclePanel/info/body";
 
         public static const VEHICLEPREVIEW_BUYBUTTON_PARENTMODULEISLOCKED_HEADER:String = "#tooltips:vehiclePreview/buyButton/parentModuleIsLocked/header";
+
+        public static const VEHICLEPREVIEW_BUYBUTTON_RESTOREREQUESTED_HEADER:String = "#tooltips:vehiclePreview/buyButton/restoreRequested/header";
+
+        public static const VEHICLEPREVIEW_BUYBUTTON_RESTOREREQUESTED_BODY:String = "#tooltips:vehiclePreview/buyButton/restoreRequested/body";
 
         public static const VEHICLEPREVIEW_BUYBUTTON_PARENTMODULEISLOCKED_BODY:String = "#tooltips:vehiclePreview/buyButton/parentModuleIsLocked/body";
 
@@ -4358,6 +4372,18 @@ package
         public static const QUESTS_BONUSES_TOKEN_HEADER:String = "#tooltips:quests/bonuses/token/header";
 
         public static const QUESTS_BONUSES_TOKEN_BODY:String = "#tooltips:quests/bonuses/token/body";
+
+        public static const QUESTS_BONUSES_TOKEN_BATTLE_BONUS_X5_HEADER:String = "#tooltips:quests/bonuses/token/battle_bonus_x5/header";
+
+        public static const QUESTS_BONUSES_TOKEN_BATTLE_BONUS_X5_BODY:String = "#tooltips:quests/bonuses/token/battle_bonus_x5/body";
+
+        public static const QUESTS_BONUSES_LOOTBOXTOKEN_BODY:String = "#tooltips:quests/bonuses/lootBoxToken/body";
+
+        public static const QUESTS_BONUSES_FREETALISMANTOKEN_HEADER:String = "#tooltips:quests/bonuses/freeTalismanToken/header";
+
+        public static const QUESTS_BONUSES_TALISMANBONUSTOKEN_HEADER:String = "#tooltips:quests/bonuses/talismanBonusToken/header";
+
+        public static const QUESTS_BONUSES_TALISMANBONUSTOKEN_BODY:String = "#tooltips:quests/bonuses/talismanBonusToken/body";
 
         public static const HANGAR_HEADER_WGMONEYTOOLTIP_GOLDNAME:String = "#tooltips:hangar/header/wgmoneyTooltip/goldName";
 
@@ -5501,6 +5527,34 @@ package
 
         public static const NOTRECRUITEDTANKMAN_COMMANDER_PATRICK_DESC:String = "#tooltips:notrecruitedtankman/commander_patrick/desc";
 
+        public static const NOTRECRUITEDTANKMAN_NY20WOMAN_LABEL:String = "#tooltips:notrecruitedtankman/ny20woman/label";
+
+        public static const NOTRECRUITEDTANKMAN_NY20WOMAN_DESC:String = "#tooltips:notrecruitedtankman/ny20woman/desc";
+
+        public static const NOTRECRUITEDTANKMAN_NY20DEFAULTGIRL_LABEL:String = "#tooltips:notrecruitedtankman/ny20defaultGirl/label";
+
+        public static const NOTRECRUITEDTANKMAN_NY20DEFAULTGIRL_DESC:String = "#tooltips:notrecruitedtankman/ny20defaultGirl/desc";
+
+        public static const NOTRECRUITEDTANKMAN_NY20DEFAULTGIRL_HOWTOGETINFO:String = "#tooltips:notrecruitedtankman/ny20defaultGirl/howToGetInfo";
+
+        public static const NOTRECRUITEDTANKMAN_NY20DEFAULTGIRL_ADDITIONALALERT:String = "#tooltips:notrecruitedtankman/ny20defaultGirl/additionalAlert";
+
+        public static const NOTRECRUITEDTANKMAN_NY20MEN_LABEL:String = "#tooltips:notrecruitedtankman/ny20men/label";
+
+        public static const NOTRECRUITEDTANKMAN_NY20MEN_DESC:String = "#tooltips:notrecruitedtankman/ny20men/desc";
+
+        public static const NOTRECRUITEDTANKMAN_NY20MEN_HOWTOGETINFO:String = "#tooltips:notrecruitedtankman/ny20men/howToGetInfo";
+
+        public static const NOTRECRUITEDTANKMAN_NY20MEN_ADDITIONALALERT:String = "#tooltips:notrecruitedtankman/ny20men/additionalAlert";
+
+        public static const NOTRECRUITEDTANKMAN_NY20SNOWMEN_LABEL:String = "#tooltips:notrecruitedtankman/ny20snowmen/label";
+
+        public static const NOTRECRUITEDTANKMAN_NY20SNOWMEN_DESC:String = "#tooltips:notrecruitedtankman/ny20snowmen/desc";
+
+        public static const NOTRECRUITEDTANKMAN_NY20SNOWMEN_HOWTOGETINFO:String = "#tooltips:notrecruitedtankman/ny20snowmen/howToGetInfo";
+
+        public static const NOTRECRUITEDTANKMAN_NY20SNOWMEN_ADDITIONALALERT:String = "#tooltips:notrecruitedtankman/ny20snowmen/additionalAlert";
+
         public static const QUESTS_AWARDS_VEHICLERENT_HEADER:String = "#tooltips:quests/awards/vehicleRent/header";
 
         public static const QUESTS_AWARDS_VEHICLERENT_EXPIRE:String = "#tooltips:quests/awards/vehicleRent/expire";
@@ -5611,6 +5665,8 @@ package
 
         public static const CREWBOOKS_STORAGE_FILTERS_CREWBOOK_TITLE:String = "#tooltips:crewBooks/storage/filters/crewBook/title";
 
+        public static const CREWBOOKS_STORAGE_FILTERS_UNIVERSALBOOK_TITLE:String = "#tooltips:crewBooks/storage/filters/universalBook/title";
+
         public static const CREWBOOKS_STORAGE_FILTERS_PERSONALBOOK_TITLE:String = "#tooltips:crewBooks/storage/filters/personalBook/title";
 
         public static const CREWBOOKS_STORAGE_FILTERS_BODY:String = "#tooltips:crewBooks/storage/filters/body";
@@ -5620,6 +5676,14 @@ package
         public static const CREWBOOKS_SCREEN_INVALIDPRICE_TITLE:String = "#tooltips:crewBooks/screen/invalidPrice/title";
 
         public static const CREWBOOKS_TANKMAN_SKILL_LOWGAINEDXP:String = "#tooltips:crewBooks/tankman/skill/lowGainedXp";
+
+        public static const SENIORITYAWARDS_HANGARENTRYPOINT_TOOLTIP_HEADER:String = "#tooltips:seniorityAwards/hangarEntryPoint/tooltip/header";
+
+        public static const SENIORITYAWARDS_HANGARENTRYPOINT_TOOLTIP_BODY:String = "#tooltips:seniorityAwards/hangarEntryPoint/tooltip/body";
+
+        public static const SENIORITYAWARDS_ADDITIONAL_TOOLTIP_HEADER:String = "#tooltips:seniorityAwards/additional/tooltip/header";
+
+        public static const SENIORITYAWARDS_HANGARSLOT_TOOLTIP_HEADER:String = "#tooltips:seniorityAwards/hangarSlot/tooltip/header";
 
         public static const ELEN_SUMMARY_RANK_ENUM:Array = [ELEN_SUMMARY_RANK_1,ELEN_SUMMARY_RANK_2,ELEN_SUMMARY_RANK_3,ELEN_SUMMARY_RANK_4,ELEN_SUMMARY_RANK_NORANK];
 

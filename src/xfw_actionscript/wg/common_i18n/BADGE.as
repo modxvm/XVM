@@ -397,6 +397,10 @@ package
 
         public static const BADGE_85_DESCR:String = "#badge:badge_85_descr";
 
+        public static const BADGE_86:String = "#badge:badge_86";
+
+        public static const BADGE_86_DESCR:String = "#badge:badge_86_descr";
+
         public function BADGE()
         {
             super();

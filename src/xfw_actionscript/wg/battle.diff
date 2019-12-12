@@ -95,7 +95,7 @@ diff -Naur battle.orig/net/wg/gui/battle/components/PlayersPanelBase.as battle/n
 diff -Naur battle.orig/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.as battle/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.as
 --- battle.orig/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.as	2019-10-08 23:40:19.002317200 +0300
 +++ battle/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.as	2019-10-08 23:43:05.599904500 +0300
-@@ -79,6 +79,11 @@
+@@ -80,6 +80,11 @@
  
          private var _holderItemID:int = -1;
  

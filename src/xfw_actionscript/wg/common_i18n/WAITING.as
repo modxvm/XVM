@@ -317,6 +317,20 @@ package
 
         public static const CREWBOOKS_USECREWBOOK:String = "#waiting:crewBooks/useCrewBook";
 
+        public static const NEWYEAR_BREAKDECORATIONSWAITING:String = "#waiting:newYear/breakDecorationsWaiting";
+
+        public static const NEWYEAR_BUYCOLLECTIONWAITING:String = "#waiting:newYear/buyCollectionWaiting";
+
+        public static const NEWYEAR_HANGTOYWAITING:String = "#waiting:newYear/hangToyWaiting";
+
+        public static const NEWYEAR_BUYTOYWAITING:String = "#waiting:newYear/buyToyWaiting";
+
+        public static const NEWYEAR_SETVEHICLEBRANCH:String = "#waiting:newYear/setVehicleBranch";
+
+        public static const NEWYEAR_DELVEHICLEBRANCH:String = "#waiting:newYear/delVehicleBranch";
+
+        public static const NEWYEAR_SETNEWYEARSTYLE:String = "#waiting:newYear/setNewYearStyle";
+
         public function WAITING()
         {
             super();

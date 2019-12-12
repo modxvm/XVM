@@ -123,6 +123,8 @@ package
 
         public static const BONUSES_NOTAVAILABLE:String = "#quests:bonuses/notAvailable";
 
+        public static const BONUSNAME_NY20FILLERS:String = "#quests:bonusName/ny20Fillers";
+
         public static const QUESTS_TITLE:String = "#quests:quests/title";
 
         public static const QUESTS_TITLE_MANEUVERSQUESTS:String = "#quests:quests/title/maneuversQuests";

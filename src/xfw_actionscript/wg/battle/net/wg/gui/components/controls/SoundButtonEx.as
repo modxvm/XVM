@@ -33,6 +33,8 @@ package net.wg.gui.components.controls
 
         protected var _tooltip:String = "";
 
+        protected var _isTooltipShown:Boolean = false;
+
         protected var _paddingHorizontal:Number = 5;
 
         protected var _helpText:String = "";
@@ -48,8 +50,6 @@ package net.wg.gui.components.controls
         private var _disabledFillPadding:Padding;
 
         private var _helpLayoutId:String = "";
-
-        private var _isTooltipShown:Boolean = false;
 
         private var _dynamicSizeByText:Boolean = false;
 
@@ -547,6 +547,11 @@ package net.wg.gui.components.controls
             }
         }
 
+        public function get textFieldPaddingHorizontal() : Number
+        {
+            return this._textFieldPaddingHorizontal;
+        }
+
         public function set textFieldPaddingHorizontal(param1:Number) : void
         {
             if(this._textFieldPaddingHorizontal != param1)
@@ -554,11 +559,6 @@ package net.wg.gui.components.controls
                 this._textFieldPaddingHorizontal = param1;
                 invalidateSize();
             }
-        }
-
-        public function get textFieldPaddingHorizontal() : Number
-        {
-            return this._textFieldPaddingHorizontal;
         }
 
         protected function onMouseDownHandler(param1:MouseEvent) : void

@@ -15,6 +15,8 @@ package net.wg.gui.components.carousels.events
 
         public static const SELECT_RENT_PROMOTION_SLOT:String = "selectRentPromotion";
 
+        public static const SELECT_NEW_YEAR_SLOT:String = "selectNewYear";
+
         private var _itemId:int = 0;
 
         public function TankItemEvent(param1:String, param2:uint, param3:Boolean = true, param4:Boolean = false)

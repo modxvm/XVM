@@ -3,27 +3,15 @@ package net.wg.gui.lobby.tankman
     public class PersonalCaseSkillsModel extends Object
     {
 
-        public var rankId:String = "";
+        public var list:Array = null;
 
-        public var isHeader:Boolean = false;
+        public var isBootcamp:Boolean = false;
 
-        public var title:String = "";
-
-        public var desc:String = "";
-
-        public var enabled:Boolean = false;
-
-        public var name:String = "";
-
-        public var tankmanID:int = 0;
-
-        public var selfSkill:Boolean = false;
-
-        public var hasNewSkills:Boolean = false;
-
-        public function PersonalCaseSkillsModel()
+        public function PersonalCaseSkillsModel(param1:Array, param2:Boolean = false)
         {
             super();
+            this.list = param1;
+            this.isBootcamp = param2;
         }
     }
 }

@@ -105,6 +105,7 @@ package net.wg.gui.lobby.vehicleCompare.configurator
             this.camoBtn.addEventListener(ButtonEvent.CLICK,this.onCamoBtnClickHandler);
             this.camoBtn.addEventListener(MouseEvent.ROLL_OVER,this.onCamoBtnRollOverHandler);
             this.camoBtn.addEventListener(MouseEvent.ROLL_OUT,this.onCamoBtnRollOutHandler);
+            CamouflageCheckBoxButton(this.camoBtn).setIcon(RES_ICONS.MAPS_ICONS_LIBRARY_QUALIFIERS_42X42_CAMOUFLAGE);
             this.booster.focusable = true;
             this.booster.type = FITTING_TYPES.BOOSTER;
             this.booster.addEventListener(ClosableEquipmentSlotEvent.LEFT_BTN_CLICK,this.onBoosterLeftBtnClickHandler);
@@ -125,11 +126,11 @@ package net.wg.gui.lobby.vehicleCompare.configurator
             this._shellsGoup = null;
             for each(_loc1_ in this._optionalDevices)
             {
-                _loc1_.removeEventListener(ButtonEvent.CLICK,this.onOptDeviceLeftBtnClickHandler);
+                _loc1_.removeEventListener(ClosableEquipmentSlotEvent.LEFT_BTN_CLICK,this.onOptDeviceLeftBtnClickHandler);
             }
             for each(_loc1_ in this._equipment)
             {
-                _loc1_.removeEventListener(ButtonEvent.CLICK,this.onEquipmentLeftBtnClickHandler);
+                _loc1_.removeEventListener(ClosableEquipmentSlotEvent.LEFT_BTN_CLICK,this.onEquipmentLeftBtnClickHandler);
             }
             this.booster.removeEventListener(ClosableEquipmentSlotEvent.LEFT_BTN_CLICK,this.onBoosterLeftBtnClickHandler);
             this.booster.dispose();

@@ -260,6 +260,7 @@ package net.wg.gui.lobby.vehicleCustomization
                 }
                 this.lblMessage.visible = _loc5_ == 0;
                 scrollList.visible = true;
+                this.carouselFilters.updateHotFilterSelectedFromData = false;
             }
         }
 

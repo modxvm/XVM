@@ -27,6 +27,8 @@ package net.wg.data.constants.generated
 
         public static const EPIC_WIDGET:String = "epicWdgt";
 
+        public static const SENIORITY_AWARDS_ENTRY_POINT:String = "SENIORITY_AWARDS_ENTRY_POINT";
+
         public static const RANKED_PRIME_TIME:String = "rankedPrimeTime.swf";
 
         public static const EPIC_PRIME_TIME:String = "epicPrimeTime.swf";
@@ -40,6 +42,10 @@ package net.wg.data.constants.generated
         public static const VEH_PARAM_RENDERER_STATE_ADVANCED:String = "advanced";
 
         public static const VEH_PARAM_RENDERER_STATE_SEPARATOR:String = "separator";
+
+        public static const NY_MAIN_WIDGET_UI:String = "NYMainWidgetUI";
+
+        public static const LOOTBOXES_ENTRANCE_POINT:String = "lootboxesEntrancePoint";
 
         public static const PROGRESSIVE_REWARD_WIDGET:String = "progressiveRewardWdgt";
 
