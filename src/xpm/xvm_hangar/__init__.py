@@ -195,7 +195,7 @@ def handleLazyChannelCtlInited(base, self, event):
 def recreateVehicle(base, self, typeDescriptor=None, state=ModelStates.UNDAMAGED, callback=None):
     if not config.get('hangar/showPromoPremVehicle', True):
         return
-    base(self, typeDescriptor=None, state=ModelStates.UNDAMAGED, callback=None)
+    base(self, typeDescriptor, state, callback)
 
 # hide display pop-up messages in the hangar
 @overrideMethod(TeaserViewer, 'show')
