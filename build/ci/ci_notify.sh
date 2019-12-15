@@ -57,7 +57,7 @@ post_ipb()
   XVMBUILD_XVM_COMMITAUTHOR=$(htmlencode "$XVMBUILD_XVM_COMMITAUTHOR")
   XVMBUILD_XVM_COMMITMSG=$(htmlencode "$XVMBUILD_XVM_COMMITMSG")
 
-  XVMBUILD_IPB_TEXT=$(printf "<b>Build: </b><a href='$XVMBUILD_URL_REPO/$REPOSITORY_HASH'>${XVMBUILD_XVM_VERSION}_$REPOSITORY_COMMITS_NUMBER (branch $REPOSITORY_BRANCH)</a><br/><b>Date:</b> $builddate <br/> <b>Download: </b><a href='$downloadlinkzip'>.zip archive</a> | <a href='$downloadlinkexe'>.exe installer</a> <br/> <b>Author:</b> $REPOSITORY_AUTHOR <br/> <b>Description:</b> $REPOSITORY_SUBJECT <hr>")
+  XVMBUILD_IPB_TEXT=$(printf "<b>Build: </b><a href='$XVMBUILD_URL_REPO/$REPOSITORY_HASH'>${XVMBUILD_XVM_VERSION}_$REPOSITORY_COMMITS_NUMBER (branch $REPOSITORY_BRANCH)</a><br/><b>Date:</b> $builddate <br/> <b>Download: </b><a href='$downloadlinkzip'>.zip archive</a> | <a href='$downloadlinkexe'>.exe installer</a> <br/> <b>Author:</b> $REPOSITORY_AUTHOR <br/> <b>Description:</b> $REPOSITORY_SUBJECT <br/>  $REPOSITORY_BODY <hr>")
 
   XVMBUILD_IPB_REQURL="$XVMBUILD_IPB_SERVER/api/forums/posts"
   XVMBUILD_IPB_REQBODY="key=$XVMBUILD_IPB_APIKEY&author=$XVMBUILD_IPB_USERID&topic=$XVMBUILD_IPB_TOPICID&post=$XVMBUILD_IPB_TEXT"
@@ -74,7 +74,7 @@ post_telegram()
   XVMBUILD_XVM_COMMITAUTHOR=$(htmlencode "$REPOSITORY_AUTHOR")
   XVMBUILD_XVM_COMMITMSG=$(htmlencode "$REPOSITORY_SUBJECT")
 
-  printf "<b>Build: </b><a href='$XVMBUILD_URL_REPO/$REPOSITORY_HASH'>${XVMBUILD_XVM_VERSION}_$REPOSITORY_COMMITS_NUMBER (branch $REPOSITORY_BRANCH)</a>\n<b>Date:</b> $builddate\n<b>Download: </b><a href='$downloadlinkzip'>.zip archive</a> | <a href='$downloadlinkexe'>.exe installer</a>\n<b>Author:</b>$REPOSITORY_AUTHOR\n<b>Description:</b> $REPOSITORY_SUBJECT" | telegram-send --stdin --disable-web-page-preview --format html --config /var/xvm/telegram-send.conf
+  printf "<b>Build: </b><a href='$XVMBUILD_URL_REPO/$REPOSITORY_HASH'>${XVMBUILD_XVM_VERSION}_$REPOSITORY_COMMITS_NUMBER (branch $REPOSITORY_BRANCH)</a>\n<b>Date:</b> $builddate\n<b>Download: </b><a href='$downloadlinkzip'>.zip archive</a> | <a href='$downloadlinkexe'>.exe installer</a>\n<b>Author:</b>$REPOSITORY_AUTHOR\n<b>Description:</b> $REPOSITORY_SUBJECT\n\n$REPOSITORY_BODY" | telegram-send --stdin --disable-web-page-preview --format html --config /var/xvm/telegram-send.conf
 }
 
 check_variables
