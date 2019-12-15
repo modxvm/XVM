@@ -17,13 +17,14 @@ import traceback
 import game
 from account_helpers import CustomFilesCache
 
+from consts import *
 from logger import *
 
 
 class _FileCache():
     def __init__(self):
         try:
-            self.cache_dir = '../res_mods/mods/shared_resources/xvm/cache'
+            self.cache_dir = XVM.SHARED_RESOURCES_DIR + '/cache'
             self.clean()
             self.customFilesCache = CustomFilesCache.CustomFilesCache('xvm/custom_data')
         except Exception:
