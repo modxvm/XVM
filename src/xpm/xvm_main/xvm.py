@@ -315,7 +315,7 @@ class Xvm(object):
                 return (None, True)
 
             if cmd == XVM_COMMAND.LOAD_STAT_BATTLE_RESULTS:
-                stats.getBattleResultsStat(args)
+                stats.getBattleResultsStat(args, as_xfw_cmd)
                 return (None, True)
 
             if cmd == XVM_COMMAND.LOAD_STAT_USER:

@@ -35,9 +35,9 @@ package com.xvm
             return instance.battleCache;
         }
 
-        public static function getBattleResultsStat(arenaUniqueId:String):Object
+        public static function getBattleResultsStat(arenaUniqueID:String):Object
         {
-            return instance.battleResultsCache[arenaUniqueId];
+            return instance.battleResultsCache[arenaUniqueID];
         }
 
         public static function isUserDataCachedByName(name:String):Boolean
@@ -68,9 +68,9 @@ package com.xvm
             instance.loadBattleStat();
         }
 
-        public static function loadBattleResultsStat(arenaUniqueId:String):void
+        public static function loadBattleResultsStat(arenaUniqueID:String):void
         {
-            instance.loadBattleResultsStat(arenaUniqueId);
+            instance.loadBattleResultsStat(arenaUniqueID);
         }
 
         public static function loadUserData(value:String):void
@@ -135,29 +135,29 @@ package com.xvm
             return null;
         }
 
-        private function loadBattleResultsStat(arenaUniqueId:String):void
+        private function loadBattleResultsStat(arenaUniqueID:String):void
         {
             //Logger.add("TRACE: loadBattleResultsStat()");
-            if (!arenaUniqueId || arenaUniqueId == "0")
+            if (!arenaUniqueID || arenaUniqueID == "0")
             {
-                dispatchEvent(new ObjectEvent(COMPLETE_BATTLERESULTS, arenaUniqueId));
+                dispatchEvent(new ObjectEvent(COMPLETE_BATTLERESULTS, arenaUniqueID));
             }
             else
             {
-                Xfw.cmd(XvmCommandsInternal.LOAD_STAT_BATTLE_RESULTS, arenaUniqueId);
+                Xfw.cmd(XvmCommandsInternal.LOAD_STAT_BATTLE_RESULTS, arenaUniqueID);
             }
         }
 
         private function battleResultsLoaded(data:Object):Object
         {
             //Logger.add("TRACE: battleResultsLoaded()");
-            var arenaUniqueId:String = null;
+            var arenaUniqueID:String = null;
             try
             {
                 //Logger.addObject(data, 3);
-                arenaUniqueId = data.arenaUniqueId;
-                battleResultsCache[arenaUniqueId] = {};
-                parseResult(data, battleResultsCache[arenaUniqueId]);
+                arenaUniqueID = data.arenaUniqueID;
+                battleResultsCache[arenaUniqueID] = {};
+                parseResult(data, battleResultsCache[arenaUniqueID]);
             }
             catch (ex:Error)
             {
@@ -171,7 +171,7 @@ package com.xvm
             }
             finally
             {
-                dispatchEvent(new ObjectEvent(COMPLETE_BATTLERESULTS, arenaUniqueId));
+                dispatchEvent(new ObjectEvent(COMPLETE_BATTLERESULTS, arenaUniqueID));
             }
             return null;
         }

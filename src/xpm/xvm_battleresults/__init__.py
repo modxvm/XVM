@@ -54,6 +54,7 @@ def BattleResultsWindow_as_setDataS(base, self, data):
             # Cannot add in data object because DAAPIDataClass is not dynamic.
             #log(data['xvm_data'])
             data['xvm_data']['regionNameStr'] = data['common']['regionNameStr']
+            data['xvm_data']['arenaUniqueID'] = str(self._BattleResultsWindow__arenaUniqueID)
             data['common']['regionNameStr'] = simplejson.dumps(data['xvm_data'], separators=(',',':'))
 
         del data['xvm_data']
@@ -64,8 +65,6 @@ def BattleResultsWindow_as_setDataS(base, self, data):
 @overrideMethod(BCBattleResult, 'as_setDataS')
 def BCBattleResult_as_setDataS(base, self, data):
     try:
-        #data['xvm_data']['regionNameStr'] = data['common']['regionNameStr']
-        #data['common']['regionNameStr'] = simplejson.dumps(data['xvm_data'], separators=(',',':'))
         del data['xvm_data']
     except Exception as ex:
         err(traceback.format_exc())
@@ -96,6 +95,7 @@ class XvmDataBlock(base.StatsBlock):
         return {
             '__xvm': True, # XVM data marker
             'regionNameStr': '',
+            'arenaUniqueID': 0,
             'data': self.xvm_data}
 
     def setRecord(self, result, reusable):

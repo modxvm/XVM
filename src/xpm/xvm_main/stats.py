@@ -11,10 +11,11 @@ def getBattleStat(args, respondFunc):
         'args': args})
     _stat.processQueue()
 
-def getBattleResultsStat(args):
+def getBattleResultsStat(args, respondFunc):
     _stat.enqueue({
         'func': _stat.getBattleResultsStat,
         'cmd': XVM_COMMAND.AS_STAT_BATTLE_RESULTS_DATA,
+        'respondFunc': respondFunc,
         'args': args})
     _stat.processQueue()
 
@@ -238,7 +239,7 @@ class _Stat(object):
             #    log('WARNING: icons loading too long')
             #    break;
 
-        self._load_stat(avatar_getter.getPlayerVehicleID())
+        self._load_stat(False)
 
         players = {}
         for (vehicleID, pl) in self.players.iteritems():
@@ -256,8 +257,8 @@ class _Stat(object):
             self.resp = {'players': players}
 
     def _get_battleresults(self):
-        (arenaUniqueId,) = self.req['args']
-        BigWorld.player().battleResultsCache.get(int(arenaUniqueId), self._battleResultsCallback)
+        (arenaUniqueID,) = self.req['args']
+        BigWorld.player().battleResultsCache.get(int(arenaUniqueID), self._battleResultsCallback)
 
     def _battleResultsCallback(self, responseCode, value=None, revision=0):
         try:
@@ -282,7 +283,7 @@ class _Stat(object):
                     'team': vData[0]['team']}
                 self.players[vehicleID] = _Player(vehicleID, vData)
 
-            self._load_stat(0)
+            self._load_stat(True)
 
             players = {}
             for (vehicleID, pl) in self.players.iteritems():
@@ -297,7 +298,7 @@ class _Stat(object):
             # pprint(players)
 
             with self.lock:
-                self.resp = {'arenaUniqueId': str(value['arenaUniqueID']), 'players': players}
+                self.resp = {'arenaUniqueID': str(value['arenaUniqueID']), 'players': players}
 
         except Exception:
             err(traceback.format_exc())
@@ -351,7 +352,7 @@ class _Stat(object):
         }
         return self._fix(s)
 
-    def _load_stat(self, playerVehicleID):
+    def _load_stat(self, isBattleResults):
         requestList = []
 
         replay = isReplay()
@@ -363,10 +364,7 @@ class _Stat(object):
                 all_cached = False
 
             if pl.vehCD != 65281:
-                requestList.append("%d=%d%s" % (
-                    pl.accountDBID,
-                    pl.vehCD,
-                    '=1' if not replay and pl.vehicleID == playerVehicleID else ''))
+                requestList.append("{}={}".format(pl.accountDBID, pl.vehCD))
 
         if all_cached or not requestList:
             return
@@ -374,7 +372,7 @@ class _Stat(object):
         try:
             accountDBID = utils.getAccountDBID()
             if config.networkServicesSettings.statBattle:
-                data = self._load_data_online(accountDBID, ','.join(requestList))
+                data = self._load_data_online(accountDBID, ','.join(requestList), isBattleResults)
             else:
                 data = self._load_data_offline(accountDBID)
 
@@ -394,7 +392,7 @@ class _Stat(object):
         except Exception:
             err(traceback.format_exc())
 
-    def _load_data_online(self, accountDBID, request):
+    def _load_data_online(self, accountDBID, request, isBattleResults):
         token = config.token.token
         if token is None:
             err('No valid token for XVM network services (id=%s)' % accountDBID)
@@ -402,6 +400,8 @@ class _Stat(object):
 
         if isReplay():
             data = xvmapi.getStatsReplay(request)
+        elif isBattleResults:
+            data = xvmapi.getStatsBattleResults(request)
         else:
             data = xvmapi.getStats(request)
 

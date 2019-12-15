@@ -11,6 +11,7 @@ package com.xvm.lobby.ui.battleresults
     {
         public var __xvm:Boolean = false; // XVM data marker
         public var data:Array = null;
+        public var arenaUniqueID:String = Values.EMPTY_STR;
         public var regionNameStr:String = Values.EMPTY_STR;
 
         public function XvmCommonStatsDataListVO(data:Object)

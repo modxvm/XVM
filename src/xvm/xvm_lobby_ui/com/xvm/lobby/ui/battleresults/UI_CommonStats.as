@@ -7,6 +7,7 @@
 package com.xvm.lobby.ui.battleresults
 {
     import com.xfw.*;
+    import com.xfw.events.ObjectEvent;
     import com.xvm.*;
     import com.xvm.types.cfg.CBattleResultsBonusState;
     import flash.events.MouseEvent;
@@ -43,7 +44,7 @@ package com.xvm.lobby.ui.battleresults
 
         private var _fieldsInitialized:Boolean = false;
         private var _data:BattleResultsVO = null;
-        private var _xdataList:XvmCommonStatsDataListVO = null;
+        private var _xvmData:XvmCommonStatsDataListVO = null;
         private var _currentTankIndex:int = 0;
 
         private var armorNames:Array = null;
@@ -81,14 +82,16 @@ package com.xvm.lobby.ui.battleresults
             super.configUI();
             tooltips = { };
             tankSlot.addEventListener(ListEvent.INDEX_CHANGE, onDropDownIndexChangeHandler, false, 0, true);
+            Stat.instance.addEventListener(Stat.COMPLETE_BATTLERESULTS, onStatLoaded, false, 0, true);
         }
 
         override protected function onDispose():void
         {
             tankSlot.removeEventListener(ListEvent.INDEX_CHANGE, onDropDownIndexChangeHandler);
+            Stat.instance.removeEventListener(Stat.COMPLETE_BATTLERESULTS, onStatLoaded);
 
             _data = null;
-            _xdataList = null;
+            _xvmData = null;
 
             if (bonusState)
             {
@@ -150,8 +153,8 @@ package com.xvm.lobby.ui.battleresults
                 var xdataStr:String = data.common.regionNameStr;
                 if (xdataStr.indexOf("\"__xvm\"") > 0)
                 {
-                    _xdataList = new XvmCommonStatsDataListVO(JSONx.parse(xdataStr));
-                    data.common.regionNameStr = _xdataList.regionNameStr;
+                    _xvmData = new XvmCommonStatsDataListVO(JSONx.parse(xdataStr));
+                    data.common.regionNameStr = _xvmData.regionNameStr;
                 }
 
                 // search localized strings for tooltips and calculate total values
@@ -161,8 +164,8 @@ package com.xvm.lobby.ui.battleresults
                     var creditsData:Vector.<DetailedStatsItemVO> = personal.creditsData[i] as Vector.<DetailedStatsItemVO>;
                     creditsData = creditsData.filter(function(x:DetailedStatsItemVO):Boolean { return x.lineType == "wideLine"; });
                     var totalData:DetailedStatsItemVO = creditsData[0];
-                    _xdataList.data[i].creditsNoPremTotalStr = totalData.col1;
-                    _xdataList.data[i].creditsPremTotalStr = totalData.col3;
+                    _xvmData.data[i].creditsNoPremTotalStr = totalData.col1;
+                    _xvmData.data[i].creditsPremTotalStr = totalData.col3;
                     for each (var detail:Object in personal.details[i])
                     {
                         if (armorNames == null)
@@ -196,6 +199,7 @@ package com.xvm.lobby.ui.battleresults
                 {
                     validateNow();
                     initializeFields();
+                    Stat.loadBattleResultsStat(_xvmData.arenaUniqueID);
                     _fieldsInitialized = true;
                 }
 
@@ -244,7 +248,7 @@ package com.xvm.lobby.ui.battleresults
 
         private function get _xdata():XvmCommonStatsDataVO
         {
-            return _xdataList.data[_currentTankIndex];
+            return _xvmData.data[_currentTankIndex];
         }
 
         private function compactQuests():void
@@ -526,6 +530,11 @@ package com.xvm.lobby.ui.battleresults
             var compareState:ComparePremiumState = detailsMc.compareState;
             compareState.creditsLbl.htmlText = _xdata.creditsNoPremTotalStr;
             compareState.premCreditsLbl.htmlText = _xdata.creditsPremTotalStr;
+        }
+
+        private function onStatLoaded(e:ObjectEvent):void
+        {
+            // TODO
         }
 
         // helpers
