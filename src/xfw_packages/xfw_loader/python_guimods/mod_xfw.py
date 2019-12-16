@@ -21,11 +21,9 @@ import os
 import sys
 
 def path_to_the_gameroot():
-    executable_directory = os.path.dirname(unicode(sys.executable.decode('mbcs')))
-    root_directory = os.path.abspath(os.path.join(executable_directory, os.pardir))
-    current_directory = os.getcwdu()
-
-    return os.path.relpath(root_directory, current_directory).replace('\\','/')+'/'
+    #Since WoT 1.7.0 python working directory always points to game root
+    #Please do not delete this function. It may be helpful in case of further changes in WoT client.
+    return './'
 
 def start_xfw():
     try:
