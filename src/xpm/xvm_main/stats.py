@@ -239,7 +239,9 @@ class _Stat(object):
             #    log('WARNING: icons loading too long')
             #    break;
 
-        self._load_stat(False)
+        # skip loading stat for Observer
+        if self.players[avatar_getter.getPlayerVehicleID()].vehCD != 65281: 
+            self._load_stat(False)
 
         players = {}
         for (vehicleID, pl) in self.players.iteritems():
@@ -363,8 +365,8 @@ class _Stat(object):
             if cacheKey not in self.cacheBattle:
                 all_cached = False
 
-            #if pl.vehCD != 65281: // Observer
-            requestList.append("{}={}".format(pl.accountDBID, pl.vehCD))
+            if pl.vehCD != 65281: # Observer
+                requestList.append("{}={}".format(pl.accountDBID, pl.vehCD))
 
         if all_cached or not requestList:
             return
