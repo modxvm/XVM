@@ -438,7 +438,11 @@ package com.xvm.lobby.ui.tankcarousel
         private function _setupStandardFieldStats():void
         {
             _setupStandardFieldAlpha(renderer.content.statsBg, cfg.fields.stats);
+
+            var _scaleX:Number = renderer.content.statsBg.scaleX;
             _setupStandardFieldScale(renderer.content.statsBg, cfg.fields.stats);
+            renderer.content.statsBg.scaleX *= _scaleX;
+
             _setupStandardFieldAlpha(renderer.content.statsTF, cfg.fields.stats);
             _setupStandardFieldScale(renderer.content.statsTF, cfg.fields.stats);
             _setupStandardTextField(renderer.content.statsTF, cfg.fields.stats, 0);
