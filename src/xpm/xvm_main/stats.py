@@ -240,7 +240,7 @@ class _Stat(object):
             #    break;
 
         # skip loading stat for Observer
-        if self.players[avatar_getter.getPlayerVehicleID()].vehCD != 65281: 
+        if self.players[avatar_getter.getPlayerVehicleID()].vehCD != 65281:
             self._load_stat(False)
 
         players = {}

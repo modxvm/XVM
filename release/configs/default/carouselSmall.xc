@@ -83,7 +83,7 @@
       {
         "enabled": true,
         "x": 4, "y": 14, "width": 23, "height": 23,
-        "src": "img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png"
+        "src": "{{v.mastery!=0?img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png}}"
       },
       // Vehicle name.
       // Название танка.

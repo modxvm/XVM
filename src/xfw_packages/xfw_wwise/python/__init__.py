@@ -39,7 +39,7 @@ class XFWWWise(object):
 
     Example:
         from xfw.wwise import g_wwise as wwise
-        wwise.bank_add("../res_mods/audioww/mybank.bnk,True,True)
+        wwise.bank_add("../res_mods/audioww/mybank.bnk, True, True)
         wwise.reload_banks()
     """
 
