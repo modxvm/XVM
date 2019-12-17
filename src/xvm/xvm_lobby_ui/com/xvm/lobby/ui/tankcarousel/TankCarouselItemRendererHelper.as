@@ -119,7 +119,7 @@ package com.xvm.lobby.ui.tankcarousel
                 {
                     _setupStandardFieldInfo();
                     _setupStandardFieldTankName();
-                    if (!(item.vehicleCarouselVO.buySlot || item.vehicleCarouselVO.buyTank || item.vehicleCarouselVO.restoreTank))
+                    if (!(item.vehicleCarouselVO.buySlot || item.vehicleCarouselVO.buyTank || item.vehicleCarouselVO.restoreTank || item.vehicleCarouselVO.nySlot))
                     {
                         if (item.extraFields)
                         {
@@ -451,7 +451,7 @@ package com.xvm.lobby.ui.tankcarousel
             var cfgInfo:CCarouselCellStandardField = null;
             if (item.vehicleCarouselVO)
             {
-                if (!(item.vehicleCarouselVO.buySlot || item.vehicleCarouselVO.buyTank || item.vehicleCarouselVO.restoreTank))
+                if (!(item.vehicleCarouselVO.buySlot || item.vehicleCarouselVO.buyTank || item.vehicleCarouselVO.restoreTank || item.vehicleCarouselVO.nySlot))
                 {
                     cfgInfo = cfg.fields.info;
                 }
