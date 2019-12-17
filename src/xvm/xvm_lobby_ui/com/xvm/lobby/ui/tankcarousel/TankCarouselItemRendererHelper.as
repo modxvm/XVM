@@ -182,12 +182,14 @@ package com.xvm.lobby.ui.tankcarousel
 
         public function handleRollOver():void
         {
-            _setupStandardFieldInfo();
+            //_setupStandardFieldInfo();
+            updateDataXvm();
         }
 
         public function handleRollOut():void
         {
-            _setupStandardFieldInfo();
+            //_setupStandardFieldInfo();
+            updateDataXvm()
         }
 
         // PRIVATE
@@ -476,13 +478,17 @@ package com.xvm.lobby.ui.tankcarousel
                 //orig_infoImg_y = img.y;
             //}
 
+            var orig_txtInfo_x:Number = field.x;
+            var orig_txtInfo_y:Number = field.y;
+            var orig_infoImg_x:Number = img.x;
+            var orig_infoImg_y:Number = img.y;
+
             _setupStandardFieldAlpha(field, cfgInfo);
             _setupStandardFieldScale(field, cfgInfo);
             field.antiAliasType = AntiAliasType.ADVANCED;
             if (cfg.fields.infoImg.enabled && img.visible)
             {
-                //field.x = this.orig_txtInfo_x + cfgInfo.dx;
-                field.x += cfgInfo.dx;
+                field.x = orig_txtInfo_x + cfgInfo.dx;
                 tf.align = TEXT_ALIGN.LEFT;
             }
             else
@@ -491,8 +497,7 @@ package com.xvm.lobby.ui.tankcarousel
                 tf.align = TEXT_ALIGN.CENTER;
             }
             field.setTextFormat(tf);
-            //field.y = orig_txtInfo_y + cfgInfo.dy;
-            field.y += cfgInfo.dy;
+            field.y = orig_txtInfo_y + cfgInfo.dy;
             field.width = DEFAULT_WIDTH / cfgInfo.scale;
             field.height = DEFAULT_HEIGHT / cfgInfo.scale;
             _setupTextFormat(field, cfgInfo.textFormat);
@@ -503,10 +508,8 @@ package com.xvm.lobby.ui.tankcarousel
             {
                 _setupStandardFieldAlpha(img, cfg.fields.infoImg);
                 _setupStandardFieldScale(img, cfg.fields.infoImg);
-                //img.x = orig_infoImg_x + cfg.fields.infoImg.dx;
-                //img.y = orig_infoImg_x + cfg.fields.infoImg.dx;
-                img.x += cfg.fields.infoImg.dx;
-                img.y += cfg.fields.infoImg.dy;
+                img.x = orig_infoImg_x + cfg.fields.infoImg.dx;
+                img.y = orig_infoImg_y + cfg.fields.infoImg.dy;
             }
         }
     }
