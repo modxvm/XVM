@@ -9,6 +9,7 @@ package com.xvm.lobby.ui.battleresults
     import com.xfw.*;
     import com.xfw.events.ObjectEvent;
     import com.xvm.*;
+    import com.xvm.lobby.vo.VOLobbyMacrosOptions;
     import com.xvm.types.cfg.CBattleResultsBonusState;
     import flash.events.MouseEvent;
     import flash.geom.Rectangle;
@@ -29,6 +30,7 @@ package com.xvm.lobby.ui.battleresults
     import net.wg.gui.lobby.battleResults.data.DetailedStatsItemVO;
     import net.wg.gui.lobby.battleResults.data.IconEfficiencyTooltipData;
     import net.wg.gui.lobby.battleResults.data.PersonalDataVO;
+    import net.wg.gui.lobby.battleResults.data.TeamMemberItemVO;
     import scaleform.clik.constants.InvalidationType;
     import scaleform.clik.events.ListEvent;
     import scaleform.gfx.TextFieldEx;
@@ -70,6 +72,8 @@ package com.xvm.lobby.ui.battleresults
         private var bonusState:PremiumBonusState;
 
         private var tooltips:Object;
+
+        private var fakeNames:Object = { };
 
         public function UI_CommonStats()
         {
@@ -185,6 +189,47 @@ package com.xvm.lobby.ui.battleresults
                             stunNames = detail.stunNames;
                         }
                     }
+                }
+
+                try
+                {
+                    var item:Object;
+                    var options:VOLobbyMacrosOptions = new VOLobbyMacrosOptions();
+                    // team 1
+                    for each (item in data.team1)
+                    {
+                        //Logger.addObject(item, 2);
+                        options.playerName = item.playerName;
+                        if (fakeNames[item.playerName] == null)
+                            fakeNames[item.playerName] = item.userVO.fakeName;
+                        item.userVO.fakeName = Macros.Format("<font color='{{c:xr}}'>{{r}}</font> ", options) + fakeNames[item.playerName];
+                    }
+                    // team 2
+                    for each (item in data.team2)
+                    {
+                        //Logger.addObject(item, 2);
+                        options.playerName = item.playerName;
+                        if (fakeNames[item.playerName] == null)
+                            fakeNames[item.playerName] = item.userVO.fakeName;
+                        item.userVO.fakeName = Macros.Format("<font color='{{c:xr}}'>{{r}}</font> ", options) + fakeNames[item.playerName];
+                    }
+                    // damage list
+                    //Logger.addObject(data.details);
+                    //Logger.addObject(data.details[0]);
+                    //for each (item in data.details[0])
+                    //{
+                        //if (item.playerRealName != null)
+                        //{
+                            //options.playerName = item.playerRealName;
+                            //if (fakeNames[item.playerRealName] == null)
+                                //fakeNames[item.playerRealName] = item.playerFakeName;
+                            //item.playerFakeName = Macros.Format("<font color='{{c:xr}}'>{{r}}</font> ", options) + fakeNames[item.playerRealName];
+                        //}
+                    //}
+                }
+                catch (e:Error)
+                {
+                    Logger.err(e);
                 }
 
                 // original update
@@ -534,7 +579,7 @@ package com.xvm.lobby.ui.battleresults
 
         private function onStatLoaded(e:ObjectEvent):void
         {
-            // TODO
+            invalidate(InvalidationType.DATA);
         }
 
         // helpers
