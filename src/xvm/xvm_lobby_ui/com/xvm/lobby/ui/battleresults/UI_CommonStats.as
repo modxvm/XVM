@@ -191,6 +191,7 @@ package com.xvm.lobby.ui.battleresults
                     }
                 }
 
+                /*
                 try
                 {
                     var item:Object;
@@ -231,6 +232,7 @@ package com.xvm.lobby.ui.battleresults
                 {
                     Logger.err(e);
                 }
+                */
 
                 // original update
                 super.update(data);
