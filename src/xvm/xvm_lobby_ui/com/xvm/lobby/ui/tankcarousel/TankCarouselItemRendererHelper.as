@@ -147,23 +147,24 @@ package com.xvm.lobby.ui.tankcarousel
                     else
                     {
                         // Add used slots count
-                        if (item.vehicleCarouselVO.buySlot)
-                        {
-                            if (Config.config.hangar.carousel.showUsedSlots)
-                            {
-                                renderer.content.txtInfo.htmlText =
-                                    "<p align='center'>" + item.vehicleCarouselVO.infoText + "\n" +
-                                    "<font face='$TextFont' size='12' color='#8C8C7E'>" +
-                                    Locale.get("Used slots") + ": " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_USED_SLOTS_COUNT) + "</font></p>";
-                            }
-                        }
+                        //if (item.vehicleCarouselVO.buySlot)
+                        //{
+                            //if (Config.config.hangar.carousel.showUsedSlots)
+                            //{
+                                //renderer.content.txtInfo.htmlText =
+                                    //"<p align='center'>" + item.vehicleCarouselVO.infoText + "\n" +
+                                    //"<font face='$TextFont' size='12' color='#8C8C7E'>" +
+                                    //Locale.get("Used slots") + ": " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_USED_SLOTS_COUNT) + "</font></p>";
+                            //}
+                        //}
+                        _addUsedSlotsCount();
                         if (item.vehicleCarouselVO.buyTank)
                         {
                             if (Config.config.hangar.carousel.showTotalSlots)
                             {
                                 renderer.content.txtInfo.htmlText =
                                     "<p align='center'>" + item.vehicleCarouselVO.infoText + " " +
-                                    "<font face='$TextFont' size='12' color='#8C8C7E'>" +
+                                    "<font face='$FieldFont' size='14' color='#8C8C7E'>" +
                                     Locale.get("from") + " " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_TOTAL_SLOTS_COUNT) + "</font></p>";
                             }
                         }
@@ -182,17 +183,38 @@ package com.xvm.lobby.ui.tankcarousel
 
         public function handleRollOver():void
         {
-            //_setupStandardFieldInfo();
-            updateDataXvm();
+            _setupStandardFieldInfo();
+            //updateDataXvm();
         }
 
         public function handleRollOut():void
         {
-            //_setupStandardFieldInfo();
-            updateDataXvm()
+            _setupStandardFieldInfo();
+            if (item.vehicleCarouselVO)
+            {
+                _addUsedSlotsCount();
+            }
+            //updateDataXvm()
         }
 
         // PRIVATE
+
+        private function _addUsedSlotsCount():void
+        {
+            if (item.vehicleCarouselVO.buySlot)
+            {
+                if (Config.config.hangar.carousel.showUsedSlots)
+                {
+                    var height:Number = renderer.content.txtInfo.height;
+                    renderer.content.txtInfo.htmlText =
+                        "<p align='center'>" + item.vehicleCarouselVO.infoText + "\n" +
+                        "<font face='$FieldFont' size='14' color='#8C8C7E'>" +
+                        Locale.get("Used slots") + ": " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_USED_SLOTS_COUNT) + "</font></p>";
+                    // Centering in height
+                    renderer.content.txtInfo.y -= 8;
+                }
+            }
+        }
 
         private function _createExtraFieldsHolder(owner:IUIComponent, index:int):Sprite
         {
