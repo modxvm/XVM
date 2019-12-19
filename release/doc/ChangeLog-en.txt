@@ -1,4 +1,12 @@
-﻿XVM-8.2.0:
+﻿XVM-8.2.1:
+  [KNOWN ISSUES]
+  * No indicator of the player's name hiding enabled in the players panel
+
+  [GENERAL]
+  * World of Tanks 1.7.0.2
+  * Various bugs fixed
+
+XVM-8.2.0:
   [KNOWN ISSUES]
   * No indicator of the player's name hiding enabled in the players panel
 
