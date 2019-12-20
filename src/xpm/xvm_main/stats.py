@@ -261,8 +261,13 @@ class _Stat(object):
 
     def _get_battleresults(self):
         log('_Stat._get_battleresults()')
-        (arenaUniqueID,) = self.req['args']
-        BigWorld.player().battleResultsCache.get(int(arenaUniqueID), self._battleResultsCallback)
+        try:
+            (arenaUniqueID,) = self.req['args']
+            BigWorld.player().battleResultsCache.get(int(arenaUniqueID), self._battleResultsCallback)
+        except Exception:
+            err(traceback.format_exc())
+            with self.lock:
+                self.resp = {}
 
     def _battleResultsCallback(self, responseCode, value=None, revision=0):
         try:
@@ -275,7 +280,7 @@ class _Stat(object):
                     self.resp = {}
                 return
 
-            pprint.pprint(value)
+            # pprint.pprint(value)
 
             self.players = {}
 
@@ -313,7 +318,7 @@ class _Stat(object):
             err(traceback.format_exc())
             print('=================================')
             print('_battleResultsCallback() exception: ' + traceback.format_exc())
-            # pprint.pprint(value)
+            pprint.pprint(value)
             print('=================================')
             with self.lock:
                 self.resp = {}
