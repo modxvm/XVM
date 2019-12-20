@@ -24,6 +24,7 @@ package com.xvm.battle.vo
         private var _isSpeaking:Boolean = false;
         private var _isVehiclePremiumIgr:Boolean = false;
         private var _playerFullName:String = null;
+        private var _playerFakeName:String = null;
         private var _playerName:String = null;
         private var _clanAbbrev:String = null;
         private var __badgeId:String = null;
@@ -77,6 +78,11 @@ package com.xvm.battle.vo
         public function get playerFullName():String
         {
             return _playerFullName;
+        }
+
+        public function get playerFakeName():String
+        {
+            return _playerFakeName;
         }
 
         override public function get playerName():String

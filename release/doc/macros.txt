@@ -95,6 +95,7 @@ Legend:
 │ H │ {{my-alive}}           │   │ X │ X │ X │ X │ X │ is my vehicle alive
 │ D │ {{my-frags}}           │   │ X │ X │ X │ X │ X │ my frags
 │ S │ {{my-veh-id}}          │ X │ X │ X │ X │ X │ X │ my vehicle id
+│ S │ {{my-anonym}}          │ X │ X │ X │ X │ X │ X │ returns 'anonym' for the player if anonymizer is enabled in the game, ' ' - if not
 │ S │ {{my-vehicle}}         │ X │ X │ X │ X │ X │ X │ my vehicle name
 │ S │ {{my-vehiclename}}     │ X │ X │ X │ X │ X │ X │ my vehicle system name (usa-M24_Chaffee)
 │ S │ {{my-vehicle-short}}   │   │ X │ X │ X │ X │ X │ my shortened vehicle name
