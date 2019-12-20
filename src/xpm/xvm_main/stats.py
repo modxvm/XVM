@@ -265,6 +265,7 @@ class _Stat(object):
         try:
             if responseCode == AccountCommands.RES_COOLDOWN:
                 BigWorld.callback(0, self._get_battleresults)
+                return
             elif responseCode not in [AccountCommands.RES_STREAM, AccountCommands.RES_CACHE]:
                 with self.lock:
                     self.resp = {}
