@@ -143,26 +143,29 @@ class _Stat(object):
         BigWorld.callback(0, self._checkResult)
 
     def _checkResult(self):
-        with self.lock:
-            debug("checkResult: " + ("no" if self.resp is None else "yes"))
-            if self.thread is not None:
-                self.thread.join(0.01)  # 10 ms
-            if self.resp is None:
-                BigWorld.callback(0.1, self._checkResult)
-                return
-            try:
-                self._respond()
-            except Exception:
-                err(traceback.format_exc())
-            finally:
-                #debug('done')
-                if self.thread:
-                    #debug('join')
-                    self.thread.join()
-                    #debug('thread deleted')
-                    self.thread = None
-                    # self.processQueue()
-                    BigWorld.callback(0, self.processQueue)
+        try:
+            with self.lock:
+                debug("checkResult: " + ("no" if self.resp is None else "yes"))
+                if self.thread is not None:
+                    self.thread.join(0.01)  # 10 ms
+                if self.resp is None:
+                    BigWorld.callback(0.1, self._checkResult)
+                    return
+                    self._respond()
+        except Exception:
+            err(traceback.format_exc())
+        finally:
+            #debug('done')
+            with self.lock:
+                if not self.resp:
+                    self.resp = {}
+            if self.thread:
+                #debug('join')
+                self.thread.join()
+                #debug('thread deleted')
+                self.thread = None
+                # self.processQueue()
+                BigWorld.callback(0, self.processQueue)
 
     def _respond(self):
         debug("respond: " + self.req['cmd'])
@@ -261,13 +264,16 @@ class _Stat(object):
 
     def _get_battleresults(self):
         log('_Stat._get_battleresults()')
+        (arenaUniqueID,) = self.req['args']
         try:
-            (arenaUniqueID,) = self.req['args']
-            BigWorld.player().battleResultsCache.get(int(arenaUniqueID), self._battleResultsCallback)
-        except Exception:
-            err(traceback.format_exc())
-            with self.lock:
-                self.resp = {}
+            log('BigWorld.player().battleResultsCache.get(): start')
+            while True:
+                BigWorld.player().battleResultsCache.get(int(arenaUniqueID), self._battleResultsCallback)
+                if self.resp is not None:
+                    return
+                time.sleep(0.05) # 50 ms
+        finally:
+            log('BigWorld.player().battleResultsCache.get(): end')
 
     def _battleResultsCallback(self, responseCode, value=None, revision=0):
         try:
