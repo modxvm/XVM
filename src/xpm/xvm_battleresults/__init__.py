@@ -32,6 +32,7 @@ def event_dispatcher_showBattleResultsWindow_proxy(base, arenaUniqueID):
     event_dispatcher_showBattleResultsWindow(base, arenaUniqueID)
 
 def event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, cnt=0):
+    log('event_dispatcher_showBattleResultsWindow()')
     if cnt < 5 and not swf_loaded_info.swf_loaded_get('xvm_lobby_ui.swf'):
         BigWorld.callback(0, lambda: event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, cnt + 1))
     else:
@@ -39,6 +40,7 @@ def event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, cnt=0):
 
 @overrideMethod(BattleResultsWindow, 'as_setDataS')
 def BattleResultsWindow_as_setDataS(base, self, data):
+    log('BattleResultsWindow_as_setDataS()')
     try:
         linkage = data['tabInfo'][0]['linkage']
 

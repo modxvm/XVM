@@ -12,6 +12,7 @@ def getBattleStat(args, respondFunc):
     _stat.processQueue()
 
 def getBattleResultsStat(args, respondFunc):
+    log('stats.getBattleResultsStat()')
     _stat.enqueue({
         'func': _stat.getBattleResultsStat,
         'cmd': XVM_COMMAND.AS_STAT_BATTLE_RESULTS_DATA,
@@ -192,6 +193,7 @@ class _Stat(object):
 
     def getBattleResultsStat(self):
         try:
+            log('_Stat.getBattleResultsStat()')
             player = BigWorld.player()
             if player.__class__.__name__ == 'PlayerAccount':
                 self._get_battleresults()
@@ -258,11 +260,13 @@ class _Stat(object):
             self.resp = {'players': players}
 
     def _get_battleresults(self):
+        log('_Stat._get_battleresults()')
         (arenaUniqueID,) = self.req['args']
         BigWorld.player().battleResultsCache.get(int(arenaUniqueID), self._battleResultsCallback)
 
     def _battleResultsCallback(self, responseCode, value=None, revision=0):
         try:
+            log('_Stat._battleResultsCallback(' + responseCode + ')')
             if responseCode == AccountCommands.RES_COOLDOWN:
                 BigWorld.callback(0.3, self._get_battleresults)
                 return
@@ -287,6 +291,7 @@ class _Stat(object):
                     'team': vData[0]['team']}
                 self.players[vehicleID] = _Player(vehicleID, vData)
 
+            log('_Stat._load_stat(True)')
             self._load_stat(True)
 
             players = {}

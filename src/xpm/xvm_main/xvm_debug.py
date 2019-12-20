@@ -75,9 +75,16 @@ def _showBattleResults(arenaUniqueID):
 #    if not result:
 #        self._updateNotification(notification)
 
+try:
+    from gui.mods.mod_pmod import FixedBattleResultsCache
+except:
+    pass
+
 @overrideMethod(BattleResultsCache.BattleResultsCache, 'get')
 def BattleResultsCache_get(base, self, arenaUniqueID, callback):
+    log('BattleResultsCache_get()')
     if not IS_DEVELOPMENT:
+        log('BattleResultsCache_get():!IS_DEVELOPMENT')
         return base(self, arenaUniqueID, callback)
 
     fileHandler = None
