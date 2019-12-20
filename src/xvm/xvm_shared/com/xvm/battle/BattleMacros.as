@@ -81,6 +81,13 @@ package com.xvm.battle
                 return BattleState.playerFrags == 0 ? NaN : BattleState.playerFrags;
             }
 
+            m_globals["my-anonym"] = function(o:IVOMacrosOptions):String
+            {
+                var ps:VOPlayerState = o as VOPlayerState;
+                //Logger.addObject(ps, 2, 'VOPlayerState ');
+                return ps && ps.playerFakeName && ps.playerName && ps.playerFakeName != ps.playerName ? "anonym" : null;
+            }
+
             // {{zoom}}
             m_globals["zoom"] = function(o:IVOMacrosOptions):Number
             {
