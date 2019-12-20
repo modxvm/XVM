@@ -44,6 +44,7 @@ import uuid
 import imghdr
 
 import BigWorld
+import AccountCommands
 from helpers import dependency
 from skeletons.gui.battle_session import IBattleSessionProvider
 from gui.battle_control import avatar_getter
@@ -262,7 +263,9 @@ class _Stat(object):
 
     def _battleResultsCallback(self, responseCode, value=None, revision=0):
         try:
-            if responseCode < 0:
+            if responseCode == AccountCommands.RES_COOLDOWN:
+                BigWorld.callback(0, self._get_battleresults)
+            elif responseCode not in [AccountCommands.RES_STREAM, AccountCommands.RES_CACHE]:
                 with self.lock:
                     self.resp = {}
                 return
