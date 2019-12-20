@@ -35,7 +35,7 @@ def getClanIcon(vehicleID):
 # Private
 
 import os
-from pprint import pprint
+import pprint
 import datetime
 import traceback
 import time
@@ -254,7 +254,7 @@ class _Stat(object):
             stat = self.cacheBattle[cacheKey]
             self._fix(stat)
             players[pl.name] = stat
-        # pprint(players)
+        # pprint.pprint(players)
 
         with self.lock:
             self.resp = {'players': players}
@@ -266,7 +266,7 @@ class _Stat(object):
 
     def _battleResultsCallback(self, responseCode, value=None, revision=0):
         try:
-            log('_Stat._battleResultsCallback(' + responseCode + ')')
+            log('_Stat._battleResultsCallback({})'.format(responseCode))
             if responseCode == AccountCommands.RES_COOLDOWN:
                 BigWorld.callback(0.3, self._get_battleresults)
                 return
@@ -275,7 +275,7 @@ class _Stat(object):
                     self.resp = {}
                 return
 
-            # pprint(value)
+            pprint.pprint(value)
 
             self.players = {}
 
@@ -304,7 +304,7 @@ class _Stat(object):
                 stat = self.cacheBattle[cacheKey]
                 self._fix(stat)
                 players[pl.name] = stat
-            # pprint(players)
+            # pprint.pprint(players)
 
             with self.lock:
                 self.resp = {'arenaUniqueID': str(value['arenaUniqueID']), 'players': players}
@@ -313,7 +313,7 @@ class _Stat(object):
             err(traceback.format_exc())
             print('=================================')
             print('_battleResultsCallback() exception: ' + traceback.format_exc())
-            pprint(value)
+            # pprint.pprint(value)
             print('=================================')
             with self.lock:
                 self.resp = {}
