@@ -246,7 +246,8 @@ package com.xvm.lobby.ui.battleresults
                 {
                     validateNow();
                     initializeFields();
-                    Stat.loadBattleResultsStat(_xvmData.arenaUniqueID);
+                    //TODO: uncomment after response code pressing fix in xpm/xvm_main/stats.py::_battleResultsCallback()
+                    //Stat.loadBattleResultsStat(_xvmData.arenaUniqueID);
                     _fieldsInitialized = true;
                 }
 
