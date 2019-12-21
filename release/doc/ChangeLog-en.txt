@@ -1,5 +1,9 @@
 ﻿XVM-8.2.2:
-  [БОЙ]
+  [GENERAL]
+  * Fixed incompability with modifications which uses battle results
+  * Various bugs fixed
+
+  [BATTLE]
   * Added macro:
       {{my-anonym}} - returns 'anonym' for the player if anonymizer is enabled in the game, ' ' - if not
 
