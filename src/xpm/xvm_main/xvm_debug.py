@@ -82,9 +82,7 @@ except:
 
 @overrideMethod(BattleResultsCache.BattleResultsCache, 'get')
 def BattleResultsCache_get(base, self, arenaUniqueID, callback):
-    log('BattleResultsCache_get()')
     if not IS_DEVELOPMENT:
-        log('BattleResultsCache_get():!IS_DEVELOPMENT')
         return base(self, arenaUniqueID, callback)
 
     fileHandler = None

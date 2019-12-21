@@ -12,7 +12,6 @@ def getBattleStat(args, respondFunc):
     _stat.processQueue()
 
 def getBattleResultsStat(args, respondFunc):
-    log('stats.getBattleResultsStat()')
     _stat.enqueue({
         'func': _stat.getBattleResultsStat,
         'cmd': XVM_COMMAND.AS_STAT_BATTLE_RESULTS_DATA,
@@ -196,7 +195,6 @@ class _Stat(object):
 
     def getBattleResultsStat(self):
         try:
-            log('_Stat.getBattleResultsStat()')
             player = BigWorld.player()
             if player.__class__.__name__ == 'PlayerAccount':
                 self._get_battleresults()
@@ -263,21 +261,20 @@ class _Stat(object):
             self.resp = {'players': players}
 
     def _get_battleresults(self):
-        log('_Stat._get_battleresults()')
         (arenaUniqueID,) = self.req['args']
         try:
-            log('BigWorld.player().battleResultsCache.get(): start')
+            #log('BigWorld.player().battleResultsCache.get(): start')
             while True:
                 BigWorld.player().battleResultsCache.get(int(arenaUniqueID), self._battleResultsCallback)
                 if self.resp is not None:
                     return
-                time.sleep(0.05) # 50 ms
+                time.sleep(0.5) # 500 ms
         finally:
-            log('BigWorld.player().battleResultsCache.get(): end')
+            #log('BigWorld.player().battleResultsCache.get(): end')
 
     def _battleResultsCallback(self, responseCode, value=None, revision=0):
         try:
-            log('_Stat._battleResultsCallback({})'.format(responseCode))
+            #log('_Stat._battleResultsCallback({})'.format(responseCode))
             if responseCode == AccountCommands.RES_COOLDOWN:
                 BigWorld.callback(0.3, self._get_battleresults)
                 return
@@ -302,7 +299,6 @@ class _Stat(object):
                     'team': vData[0]['team']}
                 self.players[vehicleID] = _Player(vehicleID, vData)
 
-            log('_Stat._load_stat(True)')
             self._load_stat(True)
 
             players = {}

@@ -77,7 +77,7 @@ package com.xvm.lobby.ui.battleresults
 
         public function UI_CommonStats()
         {
-            Logger.add("UI_CommonStats");
+            //Logger.add("UI_CommonStats");
             super();
         }
 
@@ -246,7 +246,6 @@ package com.xvm.lobby.ui.battleresults
                 {
                     validateNow();
                     initializeFields();
-                    Logger.add("[UI_CommonStats] Stat.loadBattleResultsStat(" + _xvmData.arenaUniqueID + ")");
                     Stat.loadBattleResultsStat(_xvmData.arenaUniqueID);
                     _fieldsInitialized = true;
                 }
