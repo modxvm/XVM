@@ -137,21 +137,20 @@ class _Stat(object):
         self.thread = threading.Thread(target=self.req['func'])
         self.thread.daemon = False
         self.thread.start()
-        # self.req['func']()
         #debug('start')
-        # self._checkResult()
         BigWorld.callback(0, self._checkResult)
 
     def _checkResult(self):
+        with self.lock:
+            debug('checkResult: {} => {}'.format(self.req['cmd'], 'no' if self.resp is None else 'yes'))
+            if self.thread is not None:
+                self.thread.join(0.01)  # 10 ms
+            if self.resp is None:
+                BigWorld.callback(0.1, self._checkResult)
+                return
         try:
             with self.lock:
-                debug("checkResult: " + ("no" if self.resp is None else "yes"))
-                if self.thread is not None:
-                    self.thread.join(0.01)  # 10 ms
-                if self.resp is None:
-                    BigWorld.callback(0.1, self._checkResult)
-                    return
-                    self._respond()
+                self._respond()
         except Exception:
             err(traceback.format_exc())
         finally:
@@ -163,9 +162,10 @@ class _Stat(object):
                 #debug('join')
                 self.thread.join()
                 #debug('thread deleted')
-                self.thread = None
-                # self.processQueue()
-                BigWorld.callback(0, self.processQueue)
+                with self.lock:
+                    self.thread = None
+            # self.processQueue()
+            BigWorld.callback(0, self.processQueue)
 
     def _respond(self):
         debug("respond: " + self.req['cmd'])
