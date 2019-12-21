@@ -269,7 +269,10 @@ class _Stat(object):
                 if self.resp is not None:
                     return
                 time.sleep(0.5) # 500 ms
+        except Exception:
+            err(traceback.format_exc())
         finally:
+            pass
             #log('BigWorld.player().battleResultsCache.get(): end')
 
     def _battleResultsCallback(self, responseCode, value=None, revision=0):
