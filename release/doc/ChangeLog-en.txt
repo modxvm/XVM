@@ -1,4 +1,8 @@
-﻿XVM-8.2.2:
+﻿XVM-8.2.3:
+  [GENERAL]
+  * Fix fonts loading
+
+XVM-8.2.2:
   [GENERAL]
   * Fixed incompability with modifications which uses battle results
   * Various bugs fixed
