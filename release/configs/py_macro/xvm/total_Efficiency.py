@@ -235,7 +235,7 @@ def BattleRibbonsPanel__onRibbonUpdated(self, ribbon):
         elif ribbonType == 'damage':
             numberDamagesDealt += 1
             updateLabels.update()
-        elif ribbonType == 'stun':
+        elif ribbonType == 'assistStun':
             numberAssistStun += 1
             updateLabels.update()
 
@@ -265,7 +265,7 @@ def BattleRibbonsPanel__onRibbonAdded(self, ribbon):
         elif ribbonType in ['damage', 'ram', 'burn']:
             numberDamagesDealt += 1
             updateLabels.update()
-        elif ribbonType == 'stun':
+        elif ribbonType == 'assistStun':
             numberAssistStun += 1
             updateLabels.update()
 
