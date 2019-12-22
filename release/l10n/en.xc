@@ -199,7 +199,7 @@
     // Check version
     // XVM 5.3.4 (4321)
     "ver/currentVersion": "XVM {0} ({1})",
-    "ver/newVersion": "Update available:<tab/><a href='#XVM_SITE_DL#'><font color='#00FF00'>v{0}</font></a>\n{1}",
+    "ver/newVersion": "Update available: <a href='#XVM_SITE_DL#'><font color='#00FF00'>XVM {0}</font></a>\n{1}",
     "xvmsvc/not_connected": "<font color='#FFFF00'>no connection to XVM server</font>",
 
     // Token
