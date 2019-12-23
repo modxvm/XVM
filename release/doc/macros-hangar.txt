@@ -12,8 +12,8 @@ Legend:
 ┌────────────────────────────┬───┬───┬─────────────────────────────────
 │ macro                      │ C │ W │ Description
 ├────────────────────────────┼───┼───┼─────────────────────────────────
-│ {{battletype-key}}         │ X │   │ selected battle type
-│ {{v.vehId}}                │ X │ X │ vehicle id
+│ {{battletype-key}}         │ X │ X │ selected battle type
+│ {{v.vehId}}                │ X │   │ vehicle id
 │ {{v.battles}}              │ X │ X │ total battles count for current vehicle
 │ {{v.c_battles}}            │ X │ X │ color for battles count
 │ {{v.kb}}                   │ X │ X │ number of kilo-battles for current vehicle
@@ -34,28 +34,28 @@ Legend:
 │ {{v.battletiermin}}        │ X │ X │ minimal vehicle battle tier
 │ {{v.battletiermax}}        │ X │ X │ maximal vehicle battle tier
 │ {{v.nation}}               │ X │ X │ vehicle nation
-│ {{v.premium}}              │ X │ X │ value 'premium' for premium, empty for normal vehicle
+│ {{v.premium}}              │ X │ X │ value 'premium' for premium, empty - for normal vehicle
 │ {{v.special}}              │ X │ X │ value 'special' for award and event (excluding premium vehicles with increased income on credits) vehicle, empty for normal vehicle
-│ {{v.elite}}                │ X │   │ value 'elite' for elite, empty for normal vehicle
-│ {{v.rent}}                 │ X │ X │ value 'rent' for rented, empty for normal vehicle
-│ {{v.multiNation}}          │ X │ X │ value 'multi' for vehicle on which it is possible to change the nation, empty for normal vehicle
+│ {{v.elite}}                │ X │ X │ value 'elite' for elite, empty - for normal vehicle
+│ {{v.rent}}                 │ X │ X │ value 'rent' for rented, empty - for normal vehicle
+│ {{v.multiNation}}          │ X │ X │ value 'multi' for vehicle on which it is possible to change the nation, empty - for normal vehicle
 │ {{v.maxHP}}                │ X │ X │ maximum vehicle health points
 │ {{v.hitsRatio}}            │ X │ X │ percent of hits
 │ {{v.c_hitsRatio}}          │ X │ X │ dynamic color for this macro
 │ {{v.winrate}}              │ X │ X │ vehicle win rate (percent of wins on this vehicle)
 │ {{v.c_winrate}}            │ X │ X │ color for win rate
-│ {{v.tdb}}                  │ X │ X │ average damage - damage / battles
+│ {{v.tdb}}                  │ X │ X │ average damage for current tank - damage/battles
 │ {{v.c_tdb}}                │ X │ X │ dynamic color for this macro
-│ {{v.xtdb}}                 │ X │ X │ average damage in XVM Scale
+│ {{v.xtdb}}                 │ X │ X │ average damage for current tank in XVM Scale
 │ {{v.c_xtdb}}               │ X │ X │ dynamic color for this macro
-│ {{v.tdv}}                  │ X │ X │ average damage efficiency - damage / (battles * maxHP)
+│ {{v.tdv}}                  │ X │ X │ average damage efficiency for current tank - damage/(battles*maxHP)
 │ {{v.c_tdv}}                │ X │ X │ dynamic color for this macro
-│ {{v.tfb}}                  │ X │ X │ average frags per battle
+│ {{v.tfb}}                  │ X │ X │ average frags per battle for current tank
 │ {{v.c_tfb}}                │ X │ X │ dynamic color for this macro
-│ {{v.tsb}}                  │ X │ X │ average number of spotted enemies per battle
+│ {{v.tsb}}                  │ X │ X │ average number of spotted enemies per battle for current tank
 │ {{v.c_tsb}}                │ X │ X │ dynamic color for this macro
 │ {{v.wn8expd}}              │ X │ X │ WN8 expected tank damage
-│ {{v.wn8effd}}              │ X │ X │ WN8 effective tank damage (avgdmg / expected_dmg)
+│ {{v.wn8effd}}              │ X │ X │ WN8 effective tank damage (avgdmg/expected_dmg)
 │ {{v.c_wn8effd}}            │ X │ X │ dynamic color for this macro
 │ {{v.avgdmg}}               │ X │ X │ average vehicle damage (last month active players with 100+ battles on tank)
 │ {{v.topdmg}}               │ X │ X │ top vehicle damage (100 position of the best players)
@@ -70,9 +70,9 @@ Legend:
 │ {{v.marksOnGun}}           │ X │ X │ marks on gun
 │ {{v.damageRating}}         │ X │ X │ damage rating in percents for marks on gun
 │ {{v.c_damageRating}}       │ X │ X │ dynamic color for this macro
-│ {{v.camouflageSummer}}     │ X │ X │ value 'summer' if summer camouflage installed
-│ {{v.camouflageWinter}}     │ X │ X │ value 'winter' if winter camouflage installed
-│ {{v.camouflageDesert}}     │ X │ X │ value 'desert' if desert camouflage installed
+│ {{v.camouflageSummer}}     │ X │ X │ value 'summer' if summer camouflage installed, empty - if not
+│ {{v.camouflageWinter}}     │ X │ X │ value 'winter' if winter camouflage installed, empty - if not
+│ {{v.camouflageDesert}}     │ X │ X │ value 'desert' if desert camouflage installed, empty - if not
 │ {{v.camouflageCount}}      │ X │ X │ count of camouflages installed
 │ {{v.equipment1}}           │ . │ . │ small icon of equipment in 1st slot
 │ {{v.equipment2}}           │ . │ . │ small icon of equipment in 2nd slot
@@ -89,10 +89,10 @@ Legend:
 │ {{v.gunAvgHit}}            │ . │ . │ average penetration for current gun AP/CR/HE
 │ {{v.gunDispersion}}        │ . │ . │ base dispersion at 100 m for current gun
 │ {{v.gunAimingTime}}        │ . │ . │ base aiming time for current gun
-│ {{v.selected}}             │ X │   │ value 'sel' for selected, empty for others
+│ {{v.selected}}             │ X │   │ value 'sel' for selected, empty - for others
 │ {{mystat.player_id}}       │   │ X │ ID of current player
 │ {{mystat.name}}            │   │ X │ nick of current player
-│ {{mystat.flag}}            │   │ X │ flag selected in the personal cabinet on the https://modxvm.com site
+│ {{mystat.flag}}            │   │ X │ flag selected in the personal cabinet on the https://modxvm.com/ site
 │ {{mystat.clan}}            │   │ X │ clan name
 │ {{mystat.clan_id}}         │   │ X │ clan ID
 │ {{mystat.winrate}}         │   │ X │ GWR (Global Win Ratio)
