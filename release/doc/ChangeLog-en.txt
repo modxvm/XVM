@@ -1,4 +1,6 @@
-﻿XVM-8.2.3:
+﻿XVM-8.2.4:
+
+XVM-8.2.3:
   [GENERAL]
   * Fix fonts loading
 

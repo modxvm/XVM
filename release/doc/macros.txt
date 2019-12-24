@@ -20,10 +20,10 @@ Legend:
 ├───┼────────────────────┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────
 │ S │ {{nick}}           │ X │ X │ X │ X │ X │ X │ player nickname with clan name
 │ S │ {{name}}           │ X │ X │ X │ X │ X │ X │ player nickname without clan name
-│ S │ {{clan}}           │ X │ X │ X │ X │ X │ X │ clan name with brackets (empty if no clan)
+│ S │ {{clan}}           │ X │ X │ X │ X │ X │ X │ clan name with brackets, empty - if no clan
 │ S │ {{clannb}}         │ X │ X │ X │ X │ X │ X │ clan name without brackets
-│ S │ {{ally}}           │ X │ X │ X │ X │ X │ X │ value 'ally' for ally team, '' for enemy team
-│ H │ {{player}}         │ X │ X │ X │ X │   │ X │ value 'pl' for player, empty for others
+│ S │ {{ally}}           │ X │ X │ X │ X │ X │ X │ value 'ally' for ally team, empty - for enemy team
+│ H │ {{player}}         │ X │ X │ X │ X │   │ X │ value 'pl' for player, empty - for others
 │ H │ {{veh-id}}         │ X │ X │ X │ X │ X │ X │ vehicle id
 │ H │ {{vehicle}}        │ X │ X │ X │ X │ X │ X │ vehicle name
 │ H │ {{vehiclename}}    │ X │ X │ X │ X │ X │ X │ vehicle system name (usa-M24_Chaffee)
@@ -37,22 +37,22 @@ Legend:
 │ H │ {{nation}}         │ X │ X │ X │ X │ X │ X │ vehicle nation
 │ H │ {{level}}          │ X │ X │ X │ X │ X │ X │ vehicle level (Arabic numerals)
 │ H │ {{rlevel}}         │ X │ X │ X │ X │ X │ X │ vehicle level (Roman numerals)
-│ H │ {{premium}}        │ X │ X │ X │ X │ X │ X │ value 'premium' for premium, empty for normal vehicle
-│ H │ {{special}}        │ X │ X │ X │ X │ X │ X │ value 'special' for award and event (excluding premium vehicles with increased income on credits) vehicle, empty for normal vehicle
-│ H │ {{squad}}          │ X │ X │ X │ X │ X │   │ value 'sq' for own squad, empty for others
+│ H │ {{premium}}        │ X │ X │ X │ X │ X │ X │ value 'premium' for premium, empty - for normal vehicle
+│ H │ {{special}}        │ X │ X │ X │ X │ X │ X │ value 'special' for award and event (excluding premium vehicles with increased income on credits) vehicle, empty - for normal vehicle
+│ H │ {{squad}}          │ X │ X │ X │ X │ X │   │ value 'sq' for own squad, empty - for others
 │ D │ {{frags}}          │   │ X │ X │ X │ X │   │ current frags
-│ H │ {{ready}}          │ X │ X │ X │ X │ X │   │ value 'ready' if player loaded to the game, '' if not
-│ H │ {{alive}}          │ X │ X │ X │ X │ X │   │ value 'alive' for alive, '' for dead
-│ H │ {{tk}}             │ X │ X │ X │ X │ X │   │ value 'tk' for teamkiller, empty for others
+│ H │ {{ready}}          │ X │ X │ X │ X │ X │   │ value 'ready' if player loaded to the game, empty - if not
+│ H │ {{alive}}          │ X │ X │ X │ X │ X │   │ value 'alive' for alive, empty - for dead
+│ H │ {{tk}}             │ X │ X │ X │ X │ X │   │ value 'tk' for teamkiller, empty - for others
 │ H │ {{marksOnGun}}     │   │ X │ X │ X │ X │   │ marks on gun (only for spotted vehicles)
 │ H │ {{friend}}         │   │ X │ X │ X │ X │   │ player is in the friends list
 │ H │ {{ignored}}        │   │ X │ X │ X │ X │   │ player is in the ignore list
 │ H │ {{muted}}          │   │ X │ X │ X │ X │   │ player is muted for current battle
 │ H │ {{chatban}}        │   │ X │ X │ X │ X │   │ player have blocked chat by WG
-│ D │ {{spotted}}        │   │ X │ X │ X │   │   │ vehicle spotted status with values from texts.xc/"texts"/"spotted" section
+│ D │ {{spotted}}        │   │ X │ X │ X │   │   │ vehicle spotted status with values from "texts"/"spotted" section
 │ D │ {{c:spotted}}      │   │ X │ X │ X │   │   │ dynamic color by vehicle spotted status
 │ D │ {{a:spotted}}      │   │ X │ X │ X │   │   │ dynamic transparency by vehicle spotted status
-│ H │ {{selected}}       │ X │ X │ X │ X │   │   │ value 'sel' for selected player, empty for others
+│ H │ {{selected}}       │ X │ X │ X │ X │   │   │ value 'sel' for selected player, empty - for others
 │ H │ {{position}}       │ X │ X │ X │ X │ X │   │ position of the player in the beginning of the battle (1-15)
 │ D │ {{hp}}             │   │ X │ X │ X │ X │   │ current health points
 │ D │ {{hp-max}}         │ X │ X │ X │ X │ X │   │ maximum health points
@@ -63,14 +63,14 @@ Legend:
 │ D │ {{a:hp-ratio}}     │   │ X │ X │ X │ X │   │ transparency depending on current health ratio (only in vehicle markers)
 │ H │ {{sys-color-key}}  │   │ X │ X │ X │ X │   │ key value for system color table
 │ H │ {{c:system}}       │   │ X │ X │ X │ X │   │ system color
-│ H │ {{squad-num}}      │ X │ X │ X │ X │ X │   │ number of squad (1,2,...), empty if not in squad
+│ H │ {{squad-num}}      │ X │ X │ X │ X │ X │   │ number of squad (1,2,...), empty - if not in squad
 │ S │ {{rank-level}}     │ X │ X │ X │ X │ X │   │ rank level, empty if no rank
 │ S │ {{rankBadgeId}}    │ X │ X │ X │ X │ X │   │ player's badge id
-│ S │ {{xvm-user}}       │ X │ X │ X │ X │ X │ X │ player's XVM status with values from texts/xvmuser section
+│ S │ {{xvm-user}}       │ X │ X │ X │ X │ X │ X │ player's XVM status with values from "texts"/"xvmuser" section
 │ S │ {{flag}}           │ X │ X │ X │ X │ X │ X │ flag for player selected in the personal cabinet or determined from the client language
 │ D │ {{clanicon}}       │ X │ X │ X │ X │ X │ X │ macro with clan embled image path value
 │ S │ {{clanrank}}       │ X │ X │ X │ X │ X │ X │ global map clan rating, from 1 to 1000 (https://eu.wargaming.net/clans/wot/leaderboards/)
-│ S │ {{topclan}}        │ X │ X │ X │ X │ X │ X │ clan indicator (values from texts/topclan section)
+│ S │ {{topclan}}        │ X │ X │ X │ X │ X │ X │ clan indicator (values from "texts"/"topclan" section)
 │ S │ {{comment}}        │ X │ X │ X │ X │ X │ X │ comment for player from contacts
 │ S │ {{turret}}         │   │   │   │   │ X │   │ stock turret marker
 │ D │ {{dmg}}            │   │   │   │   │ X │   │ damage health points / last hit value
@@ -85,17 +85,17 @@ Legend:
 ┌───┬────────────────────────┬───┬───┬───┬───┬───┬───┬──────────────────────────────────────
 │SDH│ macro                  │ BL│ PP│ SF│ MM│ VM│BLb│ Description
 ├───┼────────────────────────┼───┼───┼───┼───┼───┼───┼──────────────────────────────────────
-│ S │ {{xvm-stat}}           │ X │ X │ X │ X │ X │ X │ value 'stat' is statistic is active, empty if not
+│ S │ {{xvm-stat}}           │ X │ X │ X │ X │ X │ X │ value 'stat' is statistic is active, empty - if not
 │ S │ {{r_size}}             │ X │ X │ X │ X │ X │ X │ size of the {{r}} macro value (can be useful for fields formatting)
 │ S │ {{battletier}}         │ X │ X │ X │ X │ X │ X │ current battle tier
-│ S │ {{battletype}}         │ X │ X │ X │ X │ X │ X │ current battle type (values from texts/battletype section)
+│ S │ {{battletype}}         │ X │ X │ X │ X │ X │ X │ current battle type (values from "texts"/"battletype" section)
 │ S │ {{battletype-key}}     │ X │ X │ X │ X │ X │ X │ current battle type table key value
 │ S │ {{region}}             │ X │ X │ X │ X │ X │ X │ current game region (RU, EU, NA, ASIA, KR, CN, CT)
 │ S │ {{l10n:ID}}            │ X │ X │ X │ X │ X │ X │ localizated text, see en.xc for id
 │ H │ {{my-alive}}           │   │ X │ X │ X │ X │ X │ is my vehicle alive
 │ D │ {{my-frags}}           │   │ X │ X │ X │ X │ X │ my frags
 │ S │ {{my-veh-id}}          │ X │ X │ X │ X │ X │ X │ my vehicle id
-│ S │ {{my-anonym}}          │ X │ X │ X │ X │ X │ X │ returns 'anonym' for the player if anonymizer is enabled in the game, ' ' - if not
+│ S │ {{my-anonym}}          │ X │ X │ X │ X │ X │ X │ returns 'anonym' for the player if anonymizer is enabled in the game, empty - - if not
 │ S │ {{my-vehicle}}         │ X │ X │ X │ X │ X │ X │ my vehicle name
 │ S │ {{my-vehiclename}}     │ X │ X │ X │ X │ X │ X │ my vehicle system name (usa-M24_Chaffee)
 │ S │ {{my-vehicle-short}}   │   │ X │ X │ X │ X │ X │ my shortened vehicle name
@@ -108,14 +108,14 @@ Legend:
 │ S │ {{my-nation}}          │ X │ X │ X │ X │ X │ X │ my vehicle nation
 │ S │ {{my-level}}           │ X │ X │ X │ X │ X │ X │ my vehicle level (Arabic numerals)
 │ S │ {{my-rlevel}}          │ X │ X │ X │ X │ X │ X │ my vehicle level (Roman numerals)
-│ S │ {{my-premium}}         │ X │ X │ X │ X │ X │ X │ value 'premium' for premium, empty for normal vehicle
-│ S │ {{my-special}}         │ X │ X │ X │ X │ X │ X │ value 'special' for award and event (excluding premium vehicles with increased income on credits) vehicle, empty for normal vehicle
+│ S │ {{my-premium}}         │ X │ X │ X │ X │ X │ X │ value 'premium' for premium, empty - for normal vehicle
+│ S │ {{my-special}}         │ X │ X │ X │ X │ X │ X │ value 'special' for award and event (excluding premium vehicles with increased income on credits) vehicle, empty - for normal vehicle
 │ S │ {{my-clan}}            │ X │ X │ X │ X │ X │ X │ my clan
 │ S │ {{cellsize}}           │   │ X │ X │ X │ X │ X │ minimap cell side size
 │ D │ {{pp.mode}}            │   │ X │ X │ X │   │ X │ current players panel mode (0-none, 1-small, 2-medium, 3-medium2, 4-large)
 │ D │ {{pp.widthLeft}}       │   │ X │ X │ X │   │ X │ current left players panel width
 │ D │ {{pp.widthRight}}      │   │ X │ X │ X │   │ X │ current right players panel width
-│ D │ {{hasBadges}}          │   │ X │ X │ X │   │ X │ value 'true' if at least one player in the team has badge, empty if not
+│ D │ {{hasBadges}}          │   │ X │ X │ X │   │ X │ value 'true' if at least one player in the team has badge, empty - if not
 └───┴────────────────────────┴───┴───┴───┴───┴───┴───┴──────────────────────────────────────
 
   Statistic macros
@@ -148,7 +148,7 @@ Legend:
 │ S │ {{xtdb}}           │ X │ X │ X │ X │ X │ X │ average damage for current tank in XVM Scale
 │ S │ {{vwtr}}           │ X │ X │ X │ X │ X │ X │ WTR rating for current vehicle
 │ S │ {{xvwtr}}          │ X │ X │ X │ X │ X │ X │ WTR rating for current vehicle in XVM Scale
-│ S │ {{tdv}}            │ X │ X │ X │ X │ X │ X │ average damage efficiency for tank - damage/(battles*maxHP)
+│ S │ {{tdv}}            │ X │ X │ X │ X │ X │ X │ average damage efficiency for current tank - damage/(battles*maxHP)
 │ S │ {{tfb}}            │ X │ X │ X │ X │ X │ X │ average frags per battle for current tank
 │ S │ {{tsb}}            │ X │ X │ X │ X │ X │ X │ average number of spotted enemies per battle for current tank
 │ S │ {{c:r}}            │ X │ X │ X │ X │ X │ X │ color depending on rating type selected in the personal cabinet
