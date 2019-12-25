@@ -216,7 +216,7 @@ PyObject* Py_AllowMultiWot(PyObject* self, PyObject* args)
     free(handleInfo);
     CloseHandle(processHandle);
 
-    if(flag == TRUE)
+    if (flag == TRUE)
         Py_RETURN_TRUE;
 
     Py_RETURN_FALSE;
@@ -228,10 +228,10 @@ PyObject* Py_RestartWithoutMods(PyObject* self, PyObject* args)
     wchar_t** argv;
     wchar_t* cmdline = GetCommandLineW();
 
-    if(wcsstr(cmdline,L" -safe")==NULL)
+    if (wcsstr(cmdline,L" -safe") == NULL)
         wcscat(cmdline,L" -safe");
 
-    if(wcsstr(cmdline,L"-wot_wait_for_mutex")==NULL)
+    if (wcsstr(cmdline,L"-wot_wait_for_mutex") == NULL)
         wcscat(cmdline,L" -wot_wait_for_mutex");
 
     argv = CommandLineToArgvW(cmdline,&argc);

@@ -84,10 +84,10 @@ PyObject* Py_RegisterFont(PyObject* self, PyObject* args)
 
     DWORD flags = 0;
 
-    if(isPrivate)
+    if (isPrivate)
         flags |= FR_PRIVATE;
 
-    if(not_enumerable)
+    if (not_enumerable)
         flags |= FR_NOT_ENUM;
 
     int fontsAdded = AddFontResourceExW(font_path, flags, 0);
@@ -114,14 +114,14 @@ PyObject* Py_UnregisterFont(PyObject* self, PyObject* args)
 
     DWORD flags = 0;
 
-    if(isPrivate)
+    if (isPrivate)
         flags |= FR_PRIVATE;
 
-    if(not_enumerable)
+    if (not_enumerable)
         flags |= FR_NOT_ENUM;
 
     int fontsAdded = RemoveFontResourceExW(font_path, flags, 0);
-    if(fontsAdded > 0)
+    if (fontsAdded > 0)
         Py_RETURN_TRUE;
 
     Py_RETURN_FALSE;

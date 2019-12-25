@@ -38,7 +38,7 @@ int ping(char* address)
     WSADATA data;
 
     //Parse IP address
-    ipaddr= inet_addr(address);
+    ipaddr = inet_addr(address);
     if (ipaddr == INADDR_NONE)
     {
         //Try to resolve Host

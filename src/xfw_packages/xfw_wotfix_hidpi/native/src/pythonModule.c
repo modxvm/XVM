@@ -58,9 +58,9 @@ PyObject* Py_Fix_DPI(PyObject* self, PyObject* args)
     GetProcAddress_typedef SetProcessDPIAware = (GetProcAddress_typedef)GetProcAddress(GetModuleHandleA("user32.dll"), "SetProcessDPIAware");
 
     //write to registry
-    HKEY key=NULL;
+    HKEY key = NULL;
     if (RegCreateKeyExW(HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows NT\\CurrentVersion\\AppCompatFlags\\Layers",
-        0, NULL, REG_OPTION_NON_VOLATILE, KEY_ALL_ACCESS, NULL,&key, NULL)== ERROR_SUCCESS)
+        0, NULL, REG_OPTION_NON_VOLATILE, KEY_ALL_ACCESS, NULL, &key, NULL) == ERROR_SUCCESS)
     {
         wchar_t* wotlauncher = _wpgmptr;
         PathRemoveFileSpecW(wotlauncher);

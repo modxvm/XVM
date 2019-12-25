@@ -37,7 +37,7 @@ bool Bank_Load_FromMemory(const wchar_t* filename, AKRESULT& result, AkBankID& b
     void* file_content = nullptr;
 
     file_stream = _wfopen(filename, L"rb");
-    if (file_stream == nullptr)    {
+    if (file_stream == nullptr) {
         snprintf(error_string, BUF_SIZE, "[XFW_WWISE_Bank_Load_Memory] Cannot open file\n");
         return false;
     }
@@ -81,7 +81,7 @@ bool Bank_Load_UpdateFile(const wchar_t* path_bank, const wchar_t* dir_audioww, 
     path_new += L"\\";
     path_new += name_bank;
 
-    if(!Path::FileExists(path_old))
+    if (!Path::FileExists(path_old))
     {
         snprintf(error_string, BUF_SIZE, "[LoadBank] File does not exists.");
         return false;
@@ -172,7 +172,7 @@ static PyObject* Py_Bank_Load(PyObject* self, PyObject* args)
     }
     Py_END_ALLOW_THREADS;
 
-    if(!result) {
+    if (!result) {
         PyErr_SetString(PyExc_RuntimeError, error_string);
         return nullptr;
     }

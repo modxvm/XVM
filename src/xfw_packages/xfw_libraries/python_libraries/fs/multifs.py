@@ -93,7 +93,7 @@ class MultiFS(FS):
 
         self.auto_close = auto_close
         self.fs_sequence = []
-        self.fs_lookup =  {}
+        self.fs_lookup = {}
         self.fs_priorities = {}
         self.writefs = None
 

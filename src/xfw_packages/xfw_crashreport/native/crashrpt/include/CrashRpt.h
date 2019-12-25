@@ -1061,7 +1061,7 @@ crUninstallFromCurrentThread();
 *             _T("error.log"),
 *             _T("Log file"),
 *             CR_AF_MAKE_FILE_COPY|CR_AF_ALLOW_DELETE);
-*  if(nResult!=0)
+*  if (nResult != 0)
 *  {
 *    // Get the status message
 *    TCHAR szErrorMsg[256];
@@ -1515,7 +1515,7 @@ crAddRegKeyA(
 *
 *    int result = crGenerateErrorReport(&ei);
 *
-*    if(result!=0)
+*    if (result! = 0)
 *    {
 *      // If goes here, crGenerateErrorReport() has failed
 *      // Get the last error message
@@ -1746,7 +1746,7 @@ crGetLastErrorMsgA(
 *      // Install crash reporting
 *      CrAutoInstallHelper cr_install_helper(&info);
 *      // Check that installed OK
-*      assert(cr_install_helper.m_nInstallStatus==0);
+*      assert(cr_install_helper.m_nInstallStatus == 0);
 *
 *      // Your code follows here ...
 *
@@ -1773,7 +1773,7 @@ public:
     //! Uninstalls exception handlers from the caller process
     ~CrAutoInstallHelper()
     {
-        if(m_nInstallStatus==0)
+        if (m_nInstallStatus == 0)
             crUninstall();
     }
 
@@ -1799,7 +1799,7 @@ public:
 *   DWORD WINAPI ThreadProc(LPVOID lpParam)
 *   {
 *     CrThreadAutoInstallHelper cr_thread_install_helper();
-*     assert(cr_thread_install_helper.m_nInstallStatus==0);
+*     assert(cr_thread_install_helper.m_nInstallStatus == 0);
 *
 *     // Your code follows here ...
 *   }
@@ -1811,7 +1811,7 @@ class CrThreadAutoInstallHelper
 public:
 
     //! Installs exception handlers to the caller thread
-    CrThreadAutoInstallHelper(DWORD dwFlags=0)
+    CrThreadAutoInstallHelper(DWORD dwFlags = 0)
     {
         m_nInstallStatus = crInstallToCurrentThread2(dwFlags);
     }
@@ -1820,7 +1820,7 @@ public:
     ~CrThreadAutoInstallHelper()
     {
         if (m_nInstallStatus == 0)
-             crUninstallFromCurrentThread();
+            crUninstallFromCurrentThread();
     }
 
     //! Install status

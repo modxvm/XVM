@@ -59,7 +59,7 @@ function Build-CmakeProject($Name, $Arch = "32bit")
 
     $root = (Get-Location).Path -replace "\\","/"
 
-    if($Arch -eq "64bit") {
+    if ($Arch -eq "64bit") {
         $msvcarch = "x64"
     } else {
         $msvcarch = "Win32"
