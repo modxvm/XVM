@@ -69,17 +69,17 @@ bool Path::OnNTFS(const std::wstring &path)
 
 bool Path::CreateDirectory(const std::wstring &path)
 {
-    return (CreateDirectoryW(path.c_str(), NULL)!=FALSE);
+    return (CreateDirectoryW(path.c_str(), NULL) != FALSE);
 }
 
 bool Path::DeleteFile(const std::wstring &path)
 {
-    return (DeleteFileW(path.c_str())!=FALSE);
+    return (DeleteFileW(path.c_str()) != FALSE);
 }
 
 bool Path::CopyFile(const std::wstring &path_from, const std::wstring &path_to)
 {
-    return (CopyFileW(path_from.c_str(), path_to.c_str(), FALSE)!=FALSE);
+    return (CopyFileW(path_from.c_str(), path_to.c_str(), FALSE) != FALSE);
 }
 
 bool Path::CreateHardlink(const std::wstring &path_from, const std::wstring &path_to)
@@ -94,7 +94,7 @@ bool Path::CreateHardlink(const std::wstring &path_from, const std::wstring &pat
         return false;
     }
 
-    return (CreateHardLinkW(path_to.c_str(), path_from.c_str(), NULL)!=FALSE);
+    return (CreateHardLinkW(path_to.c_str(), path_from.c_str(), NULL) != FALSE);
 }
 
 bool Path::AreEqual(const std::wstring &path_one, const std::wstring &path_two)

@@ -113,7 +113,7 @@ void FileWatcher::WorkingThread()
 
     if (!PrepareFileHandle())
     {
-        isRunning=false;
+        isRunning = false;
         return;
     }
 
@@ -131,7 +131,7 @@ void FileWatcher::WorkingThread()
             PyRun_SimpleStringFlags(PythonCommand.c_str(), 0);
             PyGILState_Release(gstate);
 
-            if(StopWatcherAfterEvent)
+            if (StopWatcherAfterEvent)
             {
                 isRunning = false;
                 return;

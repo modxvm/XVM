@@ -16,7 +16,7 @@ int __stdcall EnumFontFamiliesExW_Detour(
     //PySys_WriteStdout("[XFW/Fonts][EnumFontsFamiliesExW] REQUEST: %s\n", ConvertUTF16ToUTF8(lpLogfont->lfFaceName).c_str());
     std::wstring fontName(lpLogfont->lfFaceName);
     std::transform(fontName.begin(), fontName.end(), fontName.begin(), towlower);
-    if(fontMap.find(fontName) != fontMap.end())
+    if (fontMap.find(fontName) != fontMap.end())
     {
         auto replacement = fontMap[fontName];
 

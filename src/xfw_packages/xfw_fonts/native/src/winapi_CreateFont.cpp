@@ -25,7 +25,7 @@ HFONT __stdcall CreateFontW_Detour(
 
     std::wstring fontName(lpszFace);
     std::transform(fontName.begin(), fontName.end(), fontName.begin(), towlower);
-    if(fontMap.find(fontName) != fontMap.end())
+    if (fontMap.find(fontName) != fontMap.end())
     {
         face = fontMap[fontName].c_str();
         //PySys_WriteStdout("[XFW/Fonts][CreateFontW] REDIRECT: %s\n", ConvertUTF16ToUTF8(face).c_str());
