@@ -2,7 +2,7 @@ from BigWorld import player, cancelCallback, callback
 from Vehicle import Vehicle
 from Avatar import PlayerAvatar
 from constants import VEHICLE_HIT_FLAGS as VHF
-from vehicle_extras import ShowShooting
+from vehicle_extras import ShowShooting, ShowShootingMultiGun
 from gui.battle_control.battle_constants import PERSONAL_EFFICIENCY_TYPE
 from gui.battle_control.arena_info.arena_dp import ArenaDataProvider
 from gui.battle_control.arena_info.arena_vos import VehicleArenaInfoVO
@@ -162,15 +162,25 @@ def PlayerAvatar_showShotResults(self, results):
         updateLabels.update()
 
 
-@registerEvent(ShowShooting, '_start')
-def ShowShooting_start(self, data, burstCount):
+def showShooting(vehicle, burstCount):
     global numberShotsDealt
     if not battle.isBattleTypeSupported:
         return
-    vehicle = data['entity']
     if vehicle is not None and vehicle.isPlayerVehicle and vehicle.isAlive():
-        numberShotsDealt += burst
+        numberShotsDealt += burstCount
         updateLabels.update()
+
+
+@overrideMethod(ShowShooting, '_start')
+def ShowShooting_start(base, self, data, args):
+    showShooting(data['entity'], args[0])
+    base(self, data, args)
+
+
+@overrideMethod(ShowShootingMultiGun, '_start')
+def ShowShootingMultiGun_start(base, self, data, args):
+    showShooting(data['entity'], args[0])
+    base(self, data, args)
 
 
 @registerEvent(Vehicle, 'showDamageFromShot')
