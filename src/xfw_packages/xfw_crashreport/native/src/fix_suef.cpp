@@ -24,7 +24,7 @@ bool Restore_SUEF()
 {
     //load module
     HMODULE hmod = GetModuleHandleW(L"KernelBase.dll");
-    if(hmod == nullptr)
+    if (hmod == nullptr)
         hmod = GetModuleHandleW(L"Kernel32.dll");
 
     if (hmod == nullptr)
@@ -55,7 +55,7 @@ bool Restore_SUEF()
 
 PyObject* Py_Restore_SUEF(PyObject* self, PyObject* args)
 {
-    if(Restore_SUEF())
+    if (Restore_SUEF())
         Py_RETURN_TRUE;
     else
         Py_RETURN_FALSE;

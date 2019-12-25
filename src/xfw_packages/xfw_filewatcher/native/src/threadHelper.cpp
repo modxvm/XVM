@@ -54,7 +54,7 @@ void SetThreadName(std::thread* thread, std::string threadName)
     HMODULE hlib = LoadLibraryA("Kernel32.dll");
     GetThreadIdProc GetThreadId = (GetThreadIdProc)GetProcAddress(hlib, "GetThreadId");
 
-    if(GetThreadId!=NULL)
+    if (GetThreadId != NULL)
     {
         DWORD threadId = GetThreadId(static_cast<HANDLE>(thread->native_handle()));
         SetThreadName(threadId, threadName.c_str());

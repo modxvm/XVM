@@ -29,7 +29,7 @@ target_compile_definitions(xfw_wwise PRIVATE "-DAKSOUNDENGINE_DLL")
 target_link_libraries(xfw_wwise xfw_wotexport::xfw_wotexport)
 target_link_libraries(xfw_wwise "shlwapi")
 
-if(MSVC)
+if (MSVC)
   target_compile_definitions(xfw_wwise PRIVATE "-D_CRT_SECURE_NO_WARNINGS")
   target_compile_options(xfw_wwise PRIVATE "/d2FH4-")
   set_target_properties(xfw_wwise PROPERTIES COMPILE_FLAGS "/wd4005")

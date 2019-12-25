@@ -104,7 +104,7 @@ public:
     {
         info.cb = sizeof(info);
 
-        if(silentMode)
+        if (silentMode)
             info.pszAppName = L"WoT+XVM_silent";
         else
             info.pszAppName = L"WoT+XVM";
@@ -128,7 +128,7 @@ public:
         info.dwFlags |= CR_INST_SEH_EXCEPTION_HANDLER;
         info.dwFlags |= CR_INST_SEH_CALL_PREV_HANDLER;
 
-        if(silentMode)
+        if (silentMode)
             info.dwFlags |= CR_INST_NO_GUI;
 
         auto debugHelpDll = (GetModuleDirectory(static_cast<HMODULE>(nullptr)) / L"DbgHelp.dll").wstring();
@@ -225,7 +225,7 @@ PyObject* Py_CrashRpt_Install(PyObject* self, PyObject* args)
         return nullptr;
     }
 
-    if(std::filesystem::exists(GetModuleDirectory(static_cast<HMODULE>(nullptr)) / L"wargaming_qa.conf"))
+    if (std::filesystem::exists(GetModuleDirectory(static_cast<HMODULE>(nullptr)) / L"wargaming_qa.conf"))
     {
         crashreporter->SetSilentMode(true);
     }
