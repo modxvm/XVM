@@ -186,7 +186,6 @@ class _Stat(object):
                 #self.getBattleStat(tries+1)
             else:
                 self._get_battle()
-                return  # required to prevent deadlock
         except Exception:
             err(traceback.format_exc())
         with self.lock:
@@ -198,7 +197,6 @@ class _Stat(object):
             player = BigWorld.player()
             if player.__class__.__name__ == 'PlayerAccount':
                 self._get_battleresults()
-                return  # required to prevent deadlock
         except Exception:
             err(traceback.format_exc())
         with self.lock:
@@ -208,7 +206,6 @@ class _Stat(object):
     def getUserData(self):
         try:
             self._get_user()
-            return  # required to prevent deadlock
         except Exception:
             err(traceback.format_exc())
         with self.lock:
