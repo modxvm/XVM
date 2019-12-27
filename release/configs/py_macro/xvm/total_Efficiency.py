@@ -1,7 +1,7 @@
 from BigWorld import player, cancelCallback, callback
 from Vehicle import Vehicle
 from Avatar import PlayerAvatar
-from constants import VEHICLE_HIT_FLAGS as VHF
+from constants import VEHICLE_SIEGE_STATE, VEHICLE_HIT_FLAGS as VHF
 from vehicle_extras import ShowShooting, ShowShootingMultiGun
 from gui.battle_control.battle_constants import PERSONAL_EFFICIENCY_TYPE
 from gui.battle_control.arena_info.arena_dp import ArenaDataProvider
@@ -162,25 +162,15 @@ def PlayerAvatar_showShotResults(self, results):
         updateLabels.update()
 
 
-def showShooting(vehicle, burstCount):
+@registerEvent(Vehicle, 'showShooting')
+def Vehicle_showShooting(self, burstCount, gunIndex, isPredictedShot=False):
     global numberShotsDealt
-    if not battle.isBattleTypeSupported:
+    blockShooting = self.siegeState is not None and self.siegeState != VEHICLE_SIEGE_STATE.ENABLED and self.siegeState != VEHICLE_SIEGE_STATE.DISABLED and not self.typeDescriptor.hasAutoSiegeMode
+    if not battle.isBattleTypeSupported or blockShooting or isPredictedShot or not self.isStarted :
         return
-    if vehicle is not None and vehicle.isPlayerVehicle and vehicle.isAlive():
+    if self.isPlayerVehicle:
         numberShotsDealt += burstCount
         updateLabels.update()
-
-
-@overrideMethod(ShowShooting, '_start')
-def ShowShooting_start(base, self, data, args):
-    showShooting(data['entity'], args[0])
-    base(self, data, args)
-
-
-@overrideMethod(ShowShootingMultiGun, '_start')
-def ShowShootingMultiGun_start(base, self, data, args):
-    showShooting(data['entity'], args[0])
-    base(self, data, args)
 
 
 @registerEvent(Vehicle, 'showDamageFromShot')
