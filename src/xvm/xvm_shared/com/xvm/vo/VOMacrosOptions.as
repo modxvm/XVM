@@ -20,6 +20,12 @@ package com.xvm.vo
             return null;
         }
 
+        public function get playerFakeName():String
+        {
+            //throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
+            return null;
+        }
+
         public function get clanAbbrev():String
         {
             //throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);

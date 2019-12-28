@@ -80,7 +80,7 @@ package com.xvm.battle.vo
             return _playerFullName;
         }
 
-        public function get playerFakeName():String
+        override public function get playerFakeName():String
         {
             return _playerFakeName;
         }

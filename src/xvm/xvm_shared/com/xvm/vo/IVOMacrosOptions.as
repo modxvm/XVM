@@ -8,6 +8,7 @@ package com.xvm.vo
     {
         function get vehicleID():Number;
         function get playerName():String;
+        function get playerFakeName():String;
         function get clanAbbrev():String;
         function get isAlly():Boolean;
         function get isEnemy():Boolean;
