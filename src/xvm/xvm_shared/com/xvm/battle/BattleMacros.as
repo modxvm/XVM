@@ -184,6 +184,30 @@ package com.xvm.battle
 
             // Dynamic macros
 
+            // {{name}}
+            m_globals["name"] = function(o:IVOMacrosOptions):String
+            {
+                var ps:VOPlayerState = o as VOPlayerState;
+                return ps && ps.playerName ? ps.playerName : null;
+            }
+            // {{nick}}
+            m_globals["nick"] = function(o:IVOMacrosOptions):String
+            {
+                var ps:VOPlayerState = o as VOPlayerState;
+                return ps && ps.playerName ? (ps.clanAbbrev ? (ps.playerName + "[" + ps.clanAbbrev + "]") : ps.playerName) : null;
+            }
+            // {{clan}}
+            m_globals["clan"] = function(o:IVOMacrosOptions):String
+            {
+                var ps:VOPlayerState = o as VOPlayerState;
+                return ps && ps.clanAbbrev ? ("[" + ps.clanAbbrev + "]") : null;
+            }
+            // {{clannb}}
+            m_globals["clannb"] = function(o:IVOMacrosOptions):String
+            {
+                var ps:VOPlayerState = o as VOPlayerState;
+                return ps && ps.clanAbbrev ? ps.clanAbbrev : null;
+            }
             // {{ready}}
             m_globals["ready"] = function(o:IVOMacrosOptions):String
             {

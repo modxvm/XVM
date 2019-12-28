@@ -80,7 +80,7 @@ package com.xvm.battle.vo
             return _playerFullName;
         }
 
-        public function get playerFakeName():String
+        override public function get playerFakeName():String
         {
             return _playerFakeName;
         }
@@ -265,7 +265,7 @@ package com.xvm.battle.vo
             {
                 if (_vehCD != _vehicleData.vehCD)
                 {
-                    Macros.RegisterVehicleMacrosData(playerName, _vehicleData.vehCD);
+                    Macros.RegisterVehicleMacrosData(playerName, playerFakeName, _vehicleData.vehCD);
                     _vehCD = _vehicleData.vehCD;
                 }
             }
