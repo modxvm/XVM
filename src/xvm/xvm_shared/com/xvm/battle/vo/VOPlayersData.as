@@ -99,8 +99,8 @@ package com.xvm.battle.vo
             {
                 for each (var playerState:VOPlayerState in _addedStates)
                 {
-                    Macros.RegisterPlayerMacrosData(playerState.vehicleID, playerState.accountDBID, playerState.playerName, playerState.clanAbbrev, playerState.isAlly, playerState.badgeId);
-                    Macros.RegisterVehicleMacrosData(playerState.playerName, playerState.vehCD);
+                    Macros.RegisterPlayerMacrosData(playerState.vehicleID, playerState.accountDBID, playerState.playerName, playerState.playerFakeName, playerState.clanAbbrev, playerState.isAlly, playerState.badgeId);
+                    Macros.RegisterVehicleMacrosData(playerState.playerName, playerState.playerFakeName, playerState.vehCD);
                 }
                 _addedStates = [];
             }
@@ -218,6 +218,11 @@ package com.xvm.battle.vo
             else
             {
                 playerState = playerStates[value.vehicleID] as VOPlayerState;
+                if (playerState.playerName != value.playerName)
+                {
+                    delete _playerNameToVehicleIDMap[playerState.playerName];
+                    _playerNameToVehicleIDMap[value.playerName] = value.vehicleID;
+                }
                 var value_obj:Object = ObjectConverter.toRawData(value);
                 delete value_obj.frags;
                 playerState.update(value_obj);

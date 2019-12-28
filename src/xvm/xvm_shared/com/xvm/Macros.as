@@ -261,9 +261,9 @@ package com.xvm
          * @param clanAbbrev clan abbreviation without brackets
          * @param isAlly is player team
          */
-        public static function RegisterPlayerMacrosData(vehicleID:Number, accountDBID:Number, playerName:String, clanAbbrev:String, isAlly:Boolean, rankBadgeId:String):void
+        public static function RegisterPlayerMacrosData(vehicleID:Number, accountDBID:Number, playerName:String, playerFakeName:String, clanAbbrev:String, isAlly:Boolean, rankBadgeId:String):void
         {
-            instance._RegisterPlayerMacrosData(vehicleID, accountDBID, playerName, clanAbbrev, isAlly, rankBadgeId);
+            instance._RegisterPlayerMacrosData(vehicleID, accountDBID, playerName, playerFakeName, clanAbbrev, isAlly, rankBadgeId);
         }
 
         /**
@@ -271,7 +271,7 @@ package com.xvm
          * @param vehicleID vehicle id
          * @param vehCD vehicle compactDescr
          */
-        public static function RegisterVehicleMacrosData(playerName:String, vehCD:Number):void
+        public static function RegisterVehicleMacrosData(playerName:String, playerFakeName:String, vehCD:Number):void
         {
             instance._RegisterVehicleMacrosData(playerName, vehCD);
         }
@@ -322,7 +322,8 @@ package com.xvm
         // special case for dynamic macros converted to static
         private const HYBRID_MACROS:Vector.<String> = new <String>[
             "alive", "ready", "selected", "player", "tk", "squad", "squad-num", "position", "marksOnGun",
-            "x-enabled", "x-sense-on", "x-spotted", "x-fire", "x-overturned", "x-drowning",
+            "x-enabled", "x-sense-on", "x-spotted", "x-fire", "x-overturned", "x-drowning", "name", "nick",
+            "clan", "clannb",
             // vehicle macros (can be changed during the battle in some game modes)
             "veh-id", "vehicle", "vehiclename", "vehicle-short", "vtype-key", "vtype", "vtype-l", "c:vtype",
             "battletier-min", "battletier-max", "nation", "level", "rlevel", "premium", "special",
@@ -1036,36 +1037,36 @@ package com.xvm
             m_globals["r_size"] = _getRatingDefaultValue().length;
         }
 
-        private function _RegisterPlayerMacrosData(vehicleID:Number, accountDBID:Number, playerName:String, clanAbbrev:String, isAlly:Boolean, rankBadgeId:String):void
+        private function _RegisterPlayerMacrosData(vehicleID:Number, accountDBID:Number, playerName:String, playerFakeName:String, clanAbbrev:String, isAlly:Boolean, rankBadgeId:String):void
         {
-            if (!playerName)
+            if (!playerFakeName)
                 throw new Error("empty name");
 
-            if (!(playerName in m_players))
+            if (!(playerFakeName in m_players))
             {
-                m_players[playerName] = {};
+                m_players[playerFakeName] = {};
             }
 
             // register player macros
-            var pdata:Object = m_players[playerName];
+            var pdata:Object = m_players[playerFakeName];
 
             //Logger.add("_RegisterPlayerMacrosData: " + playerName);
 
             // clear static cache
-            m_macros_cache_players[playerName] = null;
+            m_macros_cache_players[playerFakeName] = null;
 
-            var name:String = getCustomPlayerName(playerName, accountDBID);
-            var clanWithoutBrackets:String = clanAbbrev;
-            var clanWithBrackets:String = clanAbbrev ? ("[" + clanAbbrev + "]") : null;
+            //var name:String = getCustomPlayerName(playerName, accountDBID);
+            //var clanWithoutBrackets:String = clanAbbrev;
+            //var clanWithBrackets:String = clanAbbrev ? ("[" + clanAbbrev + "]") : null;
 
             // {{nick}}
-            pdata["nick"] = name + (clanWithBrackets || "");
+            //pdata["nick"] = name + (clanWithBrackets || "");
             // {{name}}
-            pdata["name"] = name;
+            //pdata["name"] = name;
             // {{clan}}
-            pdata["clan"] = clanWithBrackets;
+            //pdata["clan"] = clanWithBrackets;
             // {{clannb}}
-            pdata["clannb"] = clanWithoutBrackets;
+            //pdata["clannb"] = clanWithoutBrackets;
             // {{ally}}
             pdata["ally"] = isAlly ? 'ally' : null;
             // {{clanicon}}
@@ -1144,8 +1145,8 @@ package com.xvm
             var pdata:Object = m_players[pname];
             if (!pdata)
             {
-                RegisterPlayerMacrosData(stat.vehicleID, stat.player_id, pname, stat.clan, stat.team == XfwConst.TEAM_ALLY, stat.badgeId);
-                RegisterVehicleMacrosData(pname, stat.v.id);
+                RegisterPlayerMacrosData(stat.vehicleID, stat.player_id, pname, pname, stat.clan, stat.team == XfwConst.TEAM_ALLY, stat.badgeId);
+                RegisterVehicleMacrosData(pname, pname, stat.v.id);
                 pdata = m_players[pname];
             }
 

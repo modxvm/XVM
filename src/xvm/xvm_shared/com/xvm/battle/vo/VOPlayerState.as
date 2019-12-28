@@ -265,7 +265,7 @@ package com.xvm.battle.vo
             {
                 if (_vehCD != _vehicleData.vehCD)
                 {
-                    Macros.RegisterVehicleMacrosData(playerName, _vehicleData.vehCD);
+                    Macros.RegisterVehicleMacrosData(playerName, playerFakeName, _vehicleData.vehCD);
                     _vehCD = _vehicleData.vehCD;
                 }
             }
