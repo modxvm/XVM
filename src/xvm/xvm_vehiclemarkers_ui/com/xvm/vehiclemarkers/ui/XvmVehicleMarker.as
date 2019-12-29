@@ -158,6 +158,10 @@ package com.xvm.vehiclemarkers.ui
                 var playerState:VOPlayerState = BattleState.get(vehicleID);
                 if (playerState)
                 {
+                    if (playerState.playerFakeName != playerName)
+                    {
+                        playerName = playerState.playerFakeName;
+                    }
                     playerState.update({
                         markerState: new VOMarkerState({
                             criticalHitLabelText: param3,

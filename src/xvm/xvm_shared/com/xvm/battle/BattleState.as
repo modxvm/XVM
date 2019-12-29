@@ -22,9 +22,9 @@ package com.xvm.battle
             return instance._playersDataVO ? instance._playersDataVO.get(vehicleID) : null;
         }
 
-        public static function getVehicleIDByPlayerName(playerName:String):Number
+        public static function getVehicleIDByPlayerName(playerFakeName:String):Number
         {
-            return instance._playersDataVO ? instance._playersDataVO.getVehicleIDByPlayerName(playerName) : NaN;
+            return instance._playersDataVO ? instance._playersDataVO.getVehicleIDByPlayerName(playerFakeName) : NaN;
         }
 
         public static function getVehicleIDByAccountDBID(accountDBID:Number):Number
