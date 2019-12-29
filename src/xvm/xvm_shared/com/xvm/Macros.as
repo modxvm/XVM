@@ -1055,18 +1055,18 @@ package com.xvm
             // clear static cache
             m_macros_cache_players[playerFakeName] = null;
 
-            //var name:String = getCustomPlayerName(playerName, accountDBID);
-            //var clanWithoutBrackets:String = clanAbbrev;
-            //var clanWithBrackets:String = clanAbbrev ? ("[" + clanAbbrev + "]") : null;
+            var name:String = getCustomPlayerName(playerName, accountDBID);
+            var clanWithoutBrackets:String = clanAbbrev;
+            var clanWithBrackets:String = clanAbbrev ? ("[" + clanAbbrev + "]") : null;
 
             // {{nick}}
-            //pdata["nick"] = name + (clanWithBrackets || "");
+            pdata["nick"] = name + (clanWithBrackets || "");
             // {{name}}
-            //pdata["name"] = name;
+            pdata["name"] = name;
             // {{clan}}
-            //pdata["clan"] = clanWithBrackets;
+            pdata["clan"] = clanWithBrackets;
             // {{clannb}}
-            //pdata["clannb"] = clanWithoutBrackets;
+            pdata["clannb"] = clanWithoutBrackets;
             // {{ally}}
             pdata["ally"] = isAlly ? 'ally' : null;
             // {{clanicon}}
@@ -1350,60 +1350,60 @@ package com.xvm
          * @param playerName player name
          * @return personal name
          */
-        //private function getCustomPlayerName(playerName:String, accountDBID:Number):String
-        //{
-            //switch (Config.config.region)
-            //{
-                //case "RU":
-                    //if (playerName == "www_modxvm_com")
-                        //return "https://modxvm.com";
-                    //if (playerName == "M_r_A")
-                        //return "Флаттершай - лучшая пони!";
-                    //if (playerName == "sirmax2" || playerName == "0x01" || playerName == "_SirMax_")
-                        //return "https://modxvm.com";
-                    //if (playerName == "Mixailos")
-                        //return "Михаил";
-                    //if (playerName == "STL1te")
-                        //return "О, СТЛайт!";
-                    //if (playerName == "seriych")
-                        //return "Всем Счастья :)";
-                    //if (playerName == "XIebniDizele4ky" || playerName == "Xlebni_Dizele4ky" || playerName == "XlebniDizeIe4ku" || playerName == "XlebniDize1e4ku" || playerName == "XlebniDizele4ku_2013")
-                        //return "Alex Artobanana";
-                    //break;
-//
-                //case "CT":
-                    //if (playerName == "www_modxvm_com_RU")
-                        //return "https://modxvm.com";
-                    //if (playerName == "M_r_A_RU" || playerName == "M_r_A_EU")
-                        //return "Fluttershy is best pony!";
-                    //if (playerName == "sirmax2_RU" || playerName == "sirmax2_EU" || playerName == "sirmax_NA" || playerName == "0x01_RU" || playerName == "0x01_EU")
-                        //return "https://modxvm.com";
-                    //if (playerName == "seriych_RU")
-                        //return "Be Happy :)";
-                    //break;
-//
-                //case "EU":
-                    //if (playerName == "M_r_A")
-                        //return "Fluttershy is best pony!";
-                    //if (playerName == "sirmax2" || playerName == "0x01" || playerName == "_SirMax_")
-                        //return "https://modxvm.com";
-                    //if (playerName == "seriych")
-                        //return "Be Happy :)";
-                    //break;
-//
-                //case "US":
-                    //if (playerName == "sirmax" || playerName == "0x01" || playerName == "_SirMax_")
-                        //return "https://modxvm.com";
-                    //break;
-//
-                //case "ST":
-                    //if (playerName == "xvm_1")
-                        //return "«xvm»";
-                    //break;
-            //}
-//
-            //return playerName;
-        //}
+        private function getCustomPlayerName(playerName:String, accountDBID:Number):String
+        {
+            switch (Config.config.region)
+            {
+                case "RU":
+                    if (playerName == "www_modxvm_com")
+                        return "https://modxvm.com";
+                    if (playerName == "M_r_A")
+                        return "Флаттершай - лучшая пони!";
+                    if (playerName == "sirmax2" || playerName == "0x01" || playerName == "_SirMax_")
+                        return "https://modxvm.com";
+                    if (playerName == "Mixailos")
+                        return "Михаил";
+                    if (playerName == "STL1te")
+                        return "О, СТЛайт!";
+                    if (playerName == "seriych")
+                        return "Всем Счастья :)";
+                    if (playerName == "XIebniDizele4ky" || playerName == "Xlebni_Dizele4ky" || playerName == "XlebniDizeIe4ku" || playerName == "XlebniDize1e4ku" || playerName == "XlebniDizele4ku_2013")
+                        return "Alex Artobanana";
+                    break;
+
+                case "CT":
+                    if (playerName == "www_modxvm_com_RU")
+                        return "https://modxvm.com";
+                    if (playerName == "M_r_A_RU" || playerName == "M_r_A_EU")
+                        return "Fluttershy is best pony!";
+                    if (playerName == "sirmax2_RU" || playerName == "sirmax2_EU" || playerName == "sirmax_NA" || playerName == "0x01_RU" || playerName == "0x01_EU")
+                        return "https://modxvm.com";
+                    if (playerName == "seriych_RU")
+                        return "Be Happy :)";
+                    break;
+
+                case "EU":
+                    if (playerName == "M_r_A")
+                        return "Fluttershy is best pony!";
+                    if (playerName == "sirmax2" || playerName == "0x01" || playerName == "_SirMax_")
+                        return "https://modxvm.com";
+                    if (playerName == "seriych")
+                        return "Be Happy :)";
+                    break;
+
+                case "US":
+                    if (playerName == "sirmax" || playerName == "0x01" || playerName == "_SirMax_")
+                        return "https://modxvm.com";
+                    break;
+
+                case "ST":
+                    if (playerName == "xvm_1")
+                        return "«xvm»";
+                    break;
+            }
+
+            return playerName;
+        }
 
         // rating
 
