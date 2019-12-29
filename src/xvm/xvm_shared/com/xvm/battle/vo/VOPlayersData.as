@@ -66,9 +66,9 @@ package com.xvm.battle.vo
         }
 
         [Inline]
-        public final function getVehicleIDByPlayerName(playerName:String):Number
+        public final function getVehicleIDByPlayerName(playerFakeName:String):Number
         {
-            return playerName ? _playerNameToVehicleIDMap[playerName] : NaN;
+            return playerFakeName ? _playerNameToVehicleIDMap[playerFakeName] : NaN;
         }
 
         [Inline]
@@ -211,7 +211,7 @@ package com.xvm.battle.vo
                    index:index
                 });
                 playerStates[value.vehicleID] = playerState;
-                _playerNameToVehicleIDMap[value.playerName] = value.vehicleID;
+                _playerNameToVehicleIDMap[value.playerFakeName] = value.vehicleID;
                 _accountDBIDToVehicleIDMap[value.accountDBID] = value.vehicleID;
                 _addedStates.push(playerState);
             }
@@ -220,8 +220,12 @@ package com.xvm.battle.vo
                 playerState = playerStates[value.vehicleID] as VOPlayerState;
                 if (playerState.playerName != value.playerName)
                 {
-                    delete _playerNameToVehicleIDMap[playerState.playerName];
-                    _playerNameToVehicleIDMap[value.playerName] = value.vehicleID;
+                    //Moving macros from static to hybrid.
+                    var pdata:Object = Macros.Players[playerState.playerFakeName];
+                    delete pdata["name"];
+                    delete pdata["nick"];
+                    delete pdata["clan"];
+                    delete pdata["clannb"];
                 }
                 var value_obj:Object = ObjectConverter.toRawData(value);
                 delete value_obj.frags;

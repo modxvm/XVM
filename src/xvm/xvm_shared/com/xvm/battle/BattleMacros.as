@@ -184,6 +184,7 @@ package com.xvm.battle
 
             // Dynamic macros
 
+            // macros {{name}}, {{nick}}, {{clan}}, {{clannb}} hybrid only for anonymous users in a dynamic platoon.
             // {{name}}
             m_globals["name"] = function(o:IVOMacrosOptions):String
             {
@@ -208,6 +209,7 @@ package com.xvm.battle
                 var ps:VOPlayerState = o as VOPlayerState;
                 return ps && ps.clanAbbrev ? ps.clanAbbrev : null;
             }
+
             // {{ready}}
             m_globals["ready"] = function(o:IVOMacrosOptions):String
             {

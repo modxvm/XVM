@@ -158,7 +158,7 @@ package com.xvm.battle.ranked.fullStats
         override public function setPlayerName(userProps:IUserProps):void
         {
             super.setPlayerName(userProps);
-            var vehicleID:Number = BattleState.getVehicleIDByPlayerName(userProps.userName);
+            var vehicleID:Number = BattleState.getVehicleIDByPlayerName(userProps.fakeName);
             if (_vehicleID != vehicleID)
             {
                 _vehicleID = vehicleID;
