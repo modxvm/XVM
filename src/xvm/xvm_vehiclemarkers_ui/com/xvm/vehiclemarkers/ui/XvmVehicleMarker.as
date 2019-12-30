@@ -111,7 +111,7 @@ package com.xvm.vehiclemarkers.ui
             }
         }
 
-        // HACK: attackerID transfers as forth argument, but we can't change signature, so use arguments[3]
+        // HACK: attackerID transfers as fourth argument, but we can't change signature, so use arguments[3]
         override public function updateHealth(newHealth:int, damageFlag:int, damageType:String):void
         {
             this.curHealth = newHealth;
