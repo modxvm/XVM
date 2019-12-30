@@ -75,19 +75,6 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
 def _PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
     g_markers.updatePlayerState(vehicle.id, INV.ALL)
 
-# add attackerID if XVM markers are active
-@overrideMethod(VehicleMarkerPlugin, '_VehicleMarkerPlugin__updateVehicleHealth')
-def _VehicleMarkerPlugin__updateVehicleHealth(base, self, handle, newHealth, aInfo, attackReasonID):
-    if g_markers.active:
-        if not (g_replayCtrl.isPlaying and g_replayCtrl.isTimeWarpInProgress):
-            self._invokeMarker(handle,
-                               'updateHealth',
-                               newHealth,
-                               self._VehicleMarkerPlugin__getVehicleDamageType(aInfo),
-                               constants.ATTACK_REASONS[attackReasonID],
-                               aInfo.vehicleID)
-            return
-    base(self, handle, newHealth, aInfo, attackReasonID)
 
 #####################################################################
 # handlers
@@ -149,6 +136,20 @@ def _MarkersManager_as_setShowExInfoFlagS(base, self, flag):
             base(self, _exInfo)
     else:
         base(self, flag)
+
+# add attackerID if XVM markers are active
+@overrideMethod(VehicleMarkerPlugin, '_VehicleMarkerPlugin__updateVehicleHealth')
+def _VehicleMarkerPlugin__updateVehicleHealth(base, self, handle, newHealth, aInfo, attackReasonID):
+    if g_markers.active:
+        if not (g_replayCtrl.isPlaying and g_replayCtrl.isTimeWarpInProgress):
+            self._invokeMarker(handle,
+                               'updateHealth',
+                               newHealth,
+                               self._VehicleMarkerPlugin__getVehicleDamageType(aInfo),
+                               constants.ATTACK_REASONS[attackReasonID],
+                               aInfo.vehicleID)
+            return
+    base(self, handle, newHealth, aInfo, attackReasonID)
 
 def as_xvm_cmdS(self, *args):
     if self._isDAAPIInited():
