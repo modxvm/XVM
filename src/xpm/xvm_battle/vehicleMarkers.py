@@ -86,6 +86,8 @@ def _VehicleMarkerPlugin__updateVehicleHealth(base, self, handle, newHealth, aIn
                                self._VehicleMarkerPlugin__getVehicleDamageType(aInfo),
                                constants.ATTACK_REASONS[attackReasonID],
                                aInfo.vehicleID)
+            return
+    base(self, handle, newHealth, aInfo, attackReasonID)
 
 #####################################################################
 # handlers
