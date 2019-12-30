@@ -13,10 +13,12 @@ import game
 from Avatar import PlayerAvatar
 from messenger import MessengerEntry
 from helpers import dependency
+from BattleReplay import g_replayCtrl
 from skeletons.gui.battle_session import IBattleSessionProvider
 from gui.battle_control import avatar_getter
 from gui.shared import g_eventBus, events
 from gui.Scaleform.daapi.view.battle.shared.markers2d.manager import MarkersManager
+from gui.Scaleform.daapi.view.battle.shared.markers2d.plugins import VehicleMarkerPlugin
 
 from xfw import *
 from xvm_main.python.consts import *
@@ -73,6 +75,17 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
 def _PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
     g_markers.updatePlayerState(vehicle.id, INV.ALL)
 
+# add attackerID if XVM markers are active
+@overrideMethod(VehicleMarkerPlugin, '_VehicleMarkerPlugin__updateVehicleHealth')
+def _VehicleMarkerPlugin__updateVehicleHealth(base, self, handle, newHealth, aInfo, attackReasonID):
+    if g_markers.active:
+        if not (g_replayCtrl.isPlaying and g_replayCtrl.isTimeWarpInProgress):
+            self._invokeMarker(handle,
+                               'updateHealth',
+                               newHealth,
+                               self._VehicleMarkerPlugin__getVehicleDamageType(aInfo),
+                               constants.ATTACK_REASONS[attackReasonID],
+                               aInfo.vehicleID)
 
 #####################################################################
 # handlers
