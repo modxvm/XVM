@@ -111,19 +111,21 @@ package com.xvm.vehiclemarkers.ui
             }
         }
 
-        // HACK: attackerID transfers as fourth argument, but we can't change signature, so use arguments[3]
+        // HACK: transfer attackerID in the damageType argument
         override public function updateHealth(newHealth:int, damageFlag:int, damageType:String):void
         {
             this.curHealth = newHealth;
             var playerState:VOPlayerState = BattleState.get(vehicleID);
             if (playerState)
             {
+                var damageTypeSplitted = damageType.split(",");
+                damageType = damageTypeSplitted[0];
                 playerState.update({
                     damageInfo: new VODamageInfo({
                         damageDelta: playerState.getCurHealthValue() - Math.max(newHealth, 0),
                         damageType: damageType,
                         damageFlag: damageFlag,
-                        attackerID: arguments[3]
+                        attackerID: Number(damageTypeSplitted[1])
                     }),
                     curHealth: newHealth
                 });

@@ -146,8 +146,7 @@ def _VehicleMarkerPlugin__updateVehicleHealth(base, self, handle, newHealth, aIn
                                'updateHealth',
                                newHealth,
                                self._VehicleMarkerPlugin__getVehicleDamageType(aInfo),
-                               constants.ATTACK_REASONS[attackReasonID],
-                               aInfo.vehicleID)
+                               '{},{}'.format(constants.ATTACK_REASONS[attackReasonID], str(aInfo.vehicleID)))
             return
     base(self, handle, newHealth, aInfo, attackReasonID)
 
