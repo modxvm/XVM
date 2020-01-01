@@ -3,7 +3,7 @@
 import json
 from AmqpClient import AmqpClient
 
-with open('data/1/0.query.battle.channel.json','r') as f:
+with open('data/1/0.query.battle.channel.json', 'r') as f:
     get_exchange_name_query = f.read()
 
 host = 'xmqp3.modxvm.com'

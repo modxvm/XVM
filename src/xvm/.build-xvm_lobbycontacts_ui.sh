@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# XVM Team (c) https://modxvm.com 2014-2019
+# XVM Team (c) https://modxvm.com 2014-2020
 # XVM build system
 
 set -e
