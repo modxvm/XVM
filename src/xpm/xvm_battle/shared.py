@@ -1,4 +1,4 @@
-""" XVM (c) https://modxvm.com 2013-2019 """
+""" XVM (c) https://modxvm.com 2013-2020 """
 
 from gui.battle_control import avatar_getter
 

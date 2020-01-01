@@ -5,7 +5,7 @@ import sys
 import time
 from AmqpClient import AmqpClient
 
-with open('data/1/0.query.battle.channel.json','r') as f:
+with open('data/1/0.query.battle.channel.json', 'r') as f:
     get_exchange_name_query = f.read()
 
 if len(sys.argv[1:]):
@@ -14,7 +14,7 @@ else:
     servers = range(1, 10)
 
 def send(battle_exchange, fn):
-    with open(fn,'r') as f:
+    with open(fn, 'r') as f:
         post_battle_msg_query = f.read()
     result = amqp_client.publish_battle_message(battle_exchange, post_battle_msg_query)
     print(" [.] Got %r" % result)
