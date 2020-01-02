@@ -142,11 +142,12 @@ def _MarkersManager_as_setShowExInfoFlagS(base, self, flag):
 def _VehicleMarkerPlugin__updateVehicleHealth(base, self, handle, newHealth, aInfo, attackReasonID):
     if g_markers.active:
         if not (g_replayCtrl.isPlaying and g_replayCtrl.isTimeWarpInProgress):
+            attackerID = aInfo.vehicleID if aInfo else 0
             self._invokeMarker(handle,
                                'updateHealth',
                                newHealth,
                                self._VehicleMarkerPlugin__getVehicleDamageType(aInfo),
-                               '{},{}'.format(constants.ATTACK_REASONS[attackReasonID], str(aInfo.vehicleID)))
+                               '{},{}'.format(constants.ATTACK_REASONS[attackReasonID], str(attackerID)))
             return
     base(self, handle, newHealth, aInfo, attackReasonID)
 
