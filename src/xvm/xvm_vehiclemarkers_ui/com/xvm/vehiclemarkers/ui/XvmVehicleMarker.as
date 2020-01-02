@@ -118,7 +118,7 @@ package com.xvm.vehiclemarkers.ui
             var playerState:VOPlayerState = BattleState.get(vehicleID);
             if (playerState)
             {
-                var damageTypeSplitted = damageType.split(",");
+                var damageTypeSplitted:Array = damageType.split(",");
                 damageType = damageTypeSplitted[0];
                 playerState.update({
                     damageInfo: new VODamageInfo({
