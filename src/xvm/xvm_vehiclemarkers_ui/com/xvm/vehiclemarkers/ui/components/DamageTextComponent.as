@@ -11,11 +11,15 @@ package com.xvm.vehiclemarkers.ui.components
     import com.xvm.vehiclemarkers.ui.*;
     import flash.display.*;
     import flash.text.*;
+    import flash.utils.Dictionary;
+    import flash.utils.getTimer;
     import scaleform.gfx.*;
 
     public final class DamageTextComponent extends VehicleMarkerComponentBase implements IVehicleMarkerComponent
     {
         private var damage:MovieClip;
+        private var attackers:Dictionary = new Dictionary();
+        private const DELTA_TIME:int = 500;
 
         public final function DamageTextComponent(marker:XvmVehicleMarker)
         {
@@ -60,6 +64,67 @@ package com.xvm.vehiclemarkers.ui.components
         /**
          * Show floating damage indicator
          */
+
+        private function updateAttackers(damageInfo:VODamageInfo, index:int):void
+        {
+            var attacker:Dictionary;
+
+            if (damageInfo.attackerID in attackers)
+            {
+                attacker = attackers[damageInfo.attackerID];
+                if (damageInfo.damageType in attacker && attacker[damageInfo.damageType] is PrevMC)
+                {
+                    var prevMC:PrevMC = attacker[damageInfo.damageType];
+                    if ((getTimer() - prevMC.time) > DELTA_TIME)
+                    {
+                        prevMC.index = index;
+                    }
+                    prevMC.time = getTimer();
+                    prevMC.damage = damageInfo.damageDelta;
+                }
+                else
+                {
+                    attacker[damageInfo.damageType] = new PrevMC(index, damageInfo.damageDelta);
+                }
+            }
+            else
+            {
+                attacker = new Dictionary();
+                attacker[damageInfo.damageType] = new PrevMC(index, damageInfo.damageDelta);
+                attackers[damageInfo.attackerID] = attacker;
+            }
+        }
+
+        private function getIndexPrevMC(damageInfo:VODamageInfo):int
+        {
+            if (damageInfo.attackerID in attackers)
+            {
+                var attacker:Dictionary = attackers[damageInfo.attackerID];
+                if (damageInfo.damageType in attacker)
+                {
+                    var prevMC:PrevMC = attacker[damageInfo.damageType];
+                    if (prevMC && (getTimer() - prevMC.time) < DELTA_TIME)
+                    {
+                        return prevMC.index;
+                    }
+                }
+            }
+            return -1;
+        }
+
+        private function getDamagePrevMC(damageInfo:VODamageInfo):int
+        {
+            if (damageInfo.attackerID in attackers)
+            {
+                var attacker:Dictionary = attackers[damageInfo.attackerID];
+                if (damageInfo.damageType in attacker && attacker[damageInfo.damageType] is PrevMC)
+                {
+                    return attacker[damageInfo.damageType].damage;
+                }
+            }
+            return 0;
+        }
+
         private function showDamage(e:XvmVehicleMarkerEvent):void
         {
             var e_cfg:CMarkers4 = e.cfg;
@@ -75,50 +140,79 @@ package com.xvm.vehiclemarkers.ui.components
                 damage.visible = visible;
                 if (visible)
                 {
-                    var text:String = Macros.FormatString(playerState.isBlown ? Locale.get(cfg.blowupMessage) : Locale.get(cfg.damageMessage), playerState);
+                    var text:String;
                     var alpha:Number = Macros.FormatNumber(cfg.alpha, playerState, 1) / 100.0;
-
-                    // create text field
-                    var mc:MovieClip = new MovieClip();
-                    damage.addChild(mc);
-                    mc.y = Macros.FormatNumber(cfg.y, playerState, -67);
-
-                    var textField:TextField = new TextField();
-                    mc.addChild(textField);
-                    textField.mouseEnabled = false;
-                    textField.selectable = false;
-                    TextFieldEx.setNoTranslate(textField, true);
-                    textField.antiAliasType = AntiAliasType.ADVANCED;
-                    textField.x = Macros.FormatNumber(cfg.x, playerState, 0);
-                    textField.y = 0;
-                    textField.width = 200;
-                    textField.height = 100;
-                    textField.multiline = true;
-                    textField.wordWrap = false;
-                    textField.alpha = alpha;
-                    if (!cfg.textFormat)
+                    var mc:MovieClip;
+                    var textField:TextField;
+                    var indexPrevMC:int = getIndexPrevMC(damageInfo);
+                    if (0 <= indexPrevMC && indexPrevMC < damage.numChildren)
                     {
-                        cfg.textFormat = CTextFormat.GetDefaultConfigForMarkers();
-                        cfg.textFormat.color = "{{c:dmg}}";
+                        mc = damage.getChildAt(indexPrevMC) as MovieClip;
+                        textField = mc.getChildAt(0) as TextField;
+                        damageInfo.damageDelta += getDamagePrevMC(damageInfo);
+                        text = Macros.FormatString(playerState.isBlown ? Locale.get(cfg.blowupMessage) : Locale.get(cfg.damageMessage), playerState);
+                        textField.htmlText = text;
                     }
-                    if (cfg.textFormat.color == null)
+                    else  // create text field
                     {
-                        cfg.textFormat.color = "{{c:dmg}}";
-                    }
-                    if (cfg.textFormat.leading == null)
-                    {
-                        cfg.textFormat.leading = -2;
-                    }
-                    textField.defaultTextFormat = Utils.createTextFormatFromConfig(cfg.textFormat, playerState);
-                    textField.filters = Utils.createShadowFiltersFromConfig(cfg.shadow, playerState);
-                    textField.x -= (textField.width / 2.0);
-                    textField.htmlText = text;
+                        text = Macros.FormatString(playerState.isBlown ? Locale.get(cfg.blowupMessage) : Locale.get(cfg.damageMessage), playerState);
+                        mc = new MovieClip();
+                        damage.addChild(mc);
+                        mc.y = Macros.FormatNumber(cfg.y, playerState, -67);
+                        textField = new TextField();
+                        mc.addChild(textField);
+                        textField.mouseEnabled = false;
+                        textField.selectable = false;
+                        TextFieldEx.setNoTranslate(textField, true);
+                        textField.antiAliasType = AntiAliasType.ADVANCED;
+                        textField.x = Macros.FormatNumber(cfg.x, playerState, 0);
+                        textField.y = 0;
+                        textField.width = 200;
+                        textField.height = 100;
+                        textField.multiline = true;
+                        textField.wordWrap = false;
+                        textField.alpha = alpha;
+                        if (!cfg.textFormat)
+                        {
+                            cfg.textFormat = CTextFormat.GetDefaultConfigForMarkers();
+                            cfg.textFormat.color = "{{c:dmg}}";
+                        }
+                        if (cfg.textFormat.color == null)
+                        {
+                            cfg.textFormat.color = "{{c:dmg}}";
+                        }
+                        if (cfg.textFormat.leading == null)
+                        {
+                            cfg.textFormat.leading = -2;
+                        }
+                        textField.defaultTextFormat = Utils.createTextFormatFromConfig(cfg.textFormat, playerState);
+                        textField.filters = Utils.createShadowFiltersFromConfig(cfg.shadow, playerState);
+                        textField.x -= (textField.width / 2.0);
+                        textField.htmlText = text;
 
-                    var maxRange:Number = Macros.FormatNumber(cfg.maxRange, playerState, 40);
-                    new DamageTextAnimation(cfg, mc, maxRange); // defines and starts
+                        var maxRange:Number = Macros.FormatNumber(cfg.maxRange, playerState, 40);
+                        new DamageTextAnimation(cfg, mc, maxRange); // defines and starts
+                    }
+                    updateAttackers(damageInfo, damage.getChildIndex(mc));
                 }
             }
         }
     }
 }
+import flash.utils.getTimer;
+
+class PrevMC
+{
+    public var damage:Number;
+    public var index:int;
+    public var time:int;
+
+    public function PrevMC(ind:int, dmg:Number):void
+    {
+         index = ind;
+         time = getTimer();
+         damage = dmg;
+    }
+}
+
 
