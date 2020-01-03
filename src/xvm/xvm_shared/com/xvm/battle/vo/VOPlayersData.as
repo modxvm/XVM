@@ -212,6 +212,8 @@ package com.xvm.battle.vo
                 });
                 playerStates[value.vehicleID] = playerState;
                 _playerNameToVehicleIDMap[value.playerFakeName] = value.vehicleID;
+                // playerFakeName are not available in VehicleMarker
+                _playerNameToVehicleIDMap[value.playerName] = value.vehicleID;
                 _accountDBIDToVehicleIDMap[value.accountDBID] = value.vehicleID;
                 _addedStates.push(playerState);
             }
