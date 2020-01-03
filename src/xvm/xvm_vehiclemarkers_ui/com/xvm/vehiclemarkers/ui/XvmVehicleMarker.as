@@ -162,10 +162,6 @@ package com.xvm.vehiclemarkers.ui
                 var playerState:VOPlayerState = BattleState.get(vehicleID);
                 if (playerState)
                 {
-                    if (playerState.playerFakeName != playerName)
-                    {
-                        playerName = playerState.playerFakeName;
-                    }
                     playerState.update({
                         markerState: new VOMarkerState({
                             criticalHitLabelText: param3,
@@ -335,9 +331,21 @@ package com.xvm.vehiclemarkers.ui
         private function RegisterVehicleMarkerData():void
         {
             var dict:Object = Macros.Players;
-            if (!(playerName in dict))
-                dict[playerName] = {};
-            var pdata:Object = dict[playerName];
+            var playerState:VOPlayerState = BattleState.get(vehicleID);
+            var pdata:Object;
+            if (playerState)
+            {
+                var playerFakeName:String = playerState.playerFakeName;
+                if (!(playerFakeName in dict))
+                    dict[playerFakeName] = {};
+                pdata = dict[playerFakeName];
+            }
+            else
+            {
+                if (!(playerName in dict))
+                    dict[playerName] = {};
+                pdata = dict[playerName];
+            }
             // {{turret}}
             pdata["turret"] = getTurretData();
         }
