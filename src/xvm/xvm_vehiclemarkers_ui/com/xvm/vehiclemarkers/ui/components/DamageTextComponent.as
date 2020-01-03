@@ -153,7 +153,7 @@ package com.xvm.vehiclemarkers.ui.components
                         text = Macros.FormatString(playerState.isBlown ? Locale.get(cfg.blowupMessage) : Locale.get(cfg.damageMessage), playerState);
                         textField.htmlText = text;
                     }
-                    else  // create text field
+                    else // create text field
                     {
                         text = Macros.FormatString(playerState.isBlown ? Locale.get(cfg.blowupMessage) : Locale.get(cfg.damageMessage), playerState);
                         mc = new MovieClip();
@@ -199,6 +199,7 @@ package com.xvm.vehiclemarkers.ui.components
         }
     }
 }
+
 import flash.utils.getTimer;
 
 class PrevMC
@@ -214,5 +215,3 @@ class PrevMC
          damage = dmg;
     }
 }
-
-

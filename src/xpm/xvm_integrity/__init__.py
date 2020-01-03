@@ -79,7 +79,7 @@ def _checkIntegrityAsync(*args, **kwargs):
         try:
             from hash_table import HASH_DATA
             for key in HASH_DATA.keys():
-                HASH_DATA[XFWLOADER_PATH_TO_ROOT+key] = HASH_DATA.pop(key)
+                HASH_DATA[XFWLOADER_PATH_TO_ROOT + key] = HASH_DATA.pop(key)
         except Exception:
             logging.exception('[XVM/Integrity]: _checkIntegrityAsync')
             with lock:
