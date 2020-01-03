@@ -1,4 +1,9 @@
 ﻿XVM-8.2.4:
+  [MARKERS]
+  * The macro {{dmg}} sums the value, in a time span of less than 500 ms
+
+  [PLAYERS PANEL]
+  * Fixed macros {{nick}}, {{name}}, {{clan}}, {{clannb}} for platoon with an anonymous player
 
 XVM-8.2.3:
   [GENERAL]

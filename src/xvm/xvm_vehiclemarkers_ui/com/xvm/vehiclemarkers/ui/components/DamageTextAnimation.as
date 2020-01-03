@@ -61,25 +61,25 @@ package com.xvm.vehiclemarkers.ui.components
         [Inline]
         private final function emerge():TweenLite
         {
-            return TweenLite.from(mc, EMERGE_DURATION, { alpha:0, ease:Linear.easeNone, cacheAsBitmap:true } );
+            return TweenLite.from(mc, EMERGE_DURATION, { alpha: 0, ease: Linear.easeNone, cacheAsBitmap: true } );
         }
 
         [Inline]
         private final function tint():TweenLite
         {
-            return TweenLite.from(mc, TINT_DURATION, { tint:"0xFFFFFF", ease: Linear.easeNone, cacheAsBitmap:true } );
+            return TweenLite.from(mc, TINT_DURATION, { tint: "0xFFFFFF", ease: Linear.easeNone, cacheAsBitmap: true } );
         }
 
         [Inline]
         private final function moveUpward(movementDuration:Number, distanceUpward:Number):TweenLite
         {
-            return TweenLite.to(mc, movementDuration, { y:distanceUpward, ease:Linear.easeNone, cacheAsBitmap:true } );
+            return TweenLite.to(mc, movementDuration, { y: distanceUpward, ease: Linear.easeNone, cacheAsBitmap: true } );
         }
 
         [Inline]
         private final function fadeOut():TweenLite
         {
-            return TweenLite.to(mc, FADEOUT_DURATION, { alpha:0, ease:Linear.easeNone, cacheAsBitmap:true } );
+            return TweenLite.to(mc, FADEOUT_DURATION, { alpha: 0, ease: Linear.easeNone, cacheAsBitmap: true } );
         }
 
         [Inline]
