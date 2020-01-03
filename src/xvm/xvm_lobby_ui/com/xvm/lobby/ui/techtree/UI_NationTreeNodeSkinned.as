@@ -39,7 +39,7 @@ package com.xvm.lobby.ui.techtree
                             break;
                         default:
                             stateProps.visible = false;
-                            stateProps.animation = new AnimationProperties(150, { alpha:0 }, { alpha:1 } );
+                            stateProps.animation = new AnimationProperties(150, { alpha: 0 }, { alpha: 1 } );
                             break;
                     }
                 }

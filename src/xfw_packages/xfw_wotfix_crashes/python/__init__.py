@@ -62,7 +62,7 @@ class XFWCrashFix(object):
 
         logging.info("[XFW/Crashfix] Applying crashfixes:")
 
-        for bf_num in range(1, self.__native.fix_count()+1):
+        for bf_num in range(1, self.__native.fix_count() + 1):
             err_code = self.__native.fix_apply(bf_num)
             if err_code >= 0:
                 logging.info("[XFW/Crashfix]    BugFix %i: OK, %i" % (bf_num, err_code))
