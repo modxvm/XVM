@@ -79,7 +79,7 @@ package com.xvm.battle.shared.battleloading
 
         protected function onDispose():void
         {
-            if(clock)
+            if (clock)
             {
                 form.removeChild(clock);
                 clock = null;

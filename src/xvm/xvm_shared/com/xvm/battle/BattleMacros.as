@@ -65,27 +65,31 @@ package com.xvm.battle
             m_globals["my-premium"] = vdata.premium ? "premium" : null;
             // {{my-special}}
             m_globals["my-special"] = vdata.special ? "special" : null;
-
             // {{my-clan}}
             m_globals["my-clan"] = BattleGlobalData.playerClan;
-
             // {{my-alive}}
             m_globals["my-alive"] = function(o:IVOMacrosOptions):String
             {
                 return BattleState.playerIsAlive ? "alive" : null;
             }
-
             // {{my-frags}}
             m_globals["my-frags"] = function(o:IVOMacrosOptions):Number
             {
                 return BattleState.playerFrags == 0 ? NaN : BattleState.playerFrags;
             }
-
+            // {{my-anonym}}
             m_globals["my-anonym"] = function(o:IVOMacrosOptions):String
             {
-                var ps:VOPlayerState = o as VOPlayerState;
-                //Logger.addObject(ps, 2, 'VOPlayerState ');
-                return ps && ps.playerFakeName && ps.playerName && ps.playerFakeName != ps.playerName ? "anonym" : null;
+                if (o && o.isCurrentPlayer)
+                {
+                    var ps:VOPlayerState = o as VOPlayerState;
+                    //Logger.addObject(ps, 2, 'VOPlayerState ');
+                    return ps && ps.playerFakeName && ps.playerName && ps.playerFakeName != ps.playerName ? "anonym" : null;
+                }
+                else
+                {
+                    return null;
+                }
             }
 
             // {{zoom}}

@@ -416,7 +416,7 @@ package com.xvm.extraFields
         {
             var tween:TweenLite = null;
             var method:String = cfg[0];
-            switch(method)
+            switch (method)
             {
                 case "delay":
                     return TweenLite.to(field, cfg[1], {});
