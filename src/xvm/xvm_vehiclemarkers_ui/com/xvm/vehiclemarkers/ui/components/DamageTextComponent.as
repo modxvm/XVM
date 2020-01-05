@@ -19,7 +19,7 @@ package com.xvm.vehiclemarkers.ui.components
     {
         private var damage:MovieClip;
         private var attackers:Dictionary = new Dictionary();
-        private const DELTA_TIME:int = 500;
+        private const DELTA_TIME:int = 400;
 
         public final function DamageTextComponent(marker:XvmVehicleMarker)
         {
