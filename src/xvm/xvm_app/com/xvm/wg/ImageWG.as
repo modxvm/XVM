@@ -59,9 +59,9 @@ package com.xvm.wg
 
         private function removeImgData() : void
         {
-            if(this._imgData != null)
+            if (this._imgData != null)
             {
-                if(!this._imgData.ready)
+                if (!this._imgData.ready)
                 {
                     this.removeImgDataListeners();
                 }
@@ -73,7 +73,7 @@ package com.xvm.wg
         /*private*/ protected function setImgData(param1:IImageData) : void
         {
             this._imgData = param1;
-            if(this._imgData.ready)
+            if (this._imgData.ready)
             {
                 this._imgData.showTo(this);
             }
@@ -85,14 +85,14 @@ package com.xvm.wg
 
         private function addImgDataListeners() : void
         {
-            this._imgData.addEventListener(Event.COMPLETE,this.onImgDataCompleteHandler);
-            this._imgData.addEventListener(IOErrorEvent.IO_ERROR,this.onImgDataIoErrorHandler);
+            this._imgData.addEventListener(Event.COMPLETE, this.onImgDataCompleteHandler);
+            this._imgData.addEventListener(IOErrorEvent.IO_ERROR, this.onImgDataIoErrorHandler);
         }
 
         private function removeImgDataListeners() : void
         {
-            this._imgData.removeEventListener(Event.COMPLETE,this.onImgDataCompleteHandler);
-            this._imgData.removeEventListener(IOErrorEvent.IO_ERROR,this.onImgDataIoErrorHandler);
+            this._imgData.removeEventListener(Event.COMPLETE, this.onImgDataCompleteHandler);
+            this._imgData.removeEventListener(IOErrorEvent.IO_ERROR, this.onImgDataIoErrorHandler);
         }
 
         public function get source() : String
@@ -102,14 +102,14 @@ package com.xvm.wg
 
         public function set source(param1:String) : void
         {
-            if(this._source != param1)
+            if (this._source != param1)
             {
                 this._source = param1;
                 this._loadFailed = false;
                 this.removeImgData();
-                if(this._source)
+                if (this._source)
                 {
-                    this.setImgData(this._mgr.getImageData(this._source,this._cacheType));
+                    this.setImgData(this._mgr.getImageData(this._source, this._cacheType));
                 }
             }
         }
@@ -121,15 +121,15 @@ package com.xvm.wg
 
         public function set sourceAlt(param1:String) : void
         {
-            if(this._sourceAlt != param1)
+            if (this._sourceAlt != param1)
             {
                 this._sourceAlt = param1;
-                if(this._loadFailed)
+                if (this._loadFailed)
                 {
                     this.removeImgData();
-                    if(this._sourceAlt)
+                    if (this._sourceAlt)
                     {
-                        this.setImgData(this._mgr.getImageData(this._sourceAlt,this._cacheType));
+                        this.setImgData(this._mgr.getImageData(this._sourceAlt, this._cacheType));
                     }
                 }
             }
@@ -187,11 +187,11 @@ package com.xvm.wg
         /*private*/ protected function onImgDataIoErrorHandler(param1:IOErrorEvent) : void
         {
             this.removeImgDataListeners();
-            if(!this._loadFailed && /*StringUtils.isNotEmpty(this._sourceAlt)*/this._sourceAlt != null && this._sourceAlt.length > 0)
+            if (!this._loadFailed && /*StringUtils.isNotEmpty(this._sourceAlt)*/this._sourceAlt != null && this._sourceAlt.length > 0)
             {
                 this._loadFailed = true;
                 dispatchEvent(param1);
-                this.setImgData(this._mgr.getImageData(this._sourceAlt,this._cacheType));
+                this.setImgData(this._mgr.getImageData(this._sourceAlt, this._cacheType));
             }
             else
             {

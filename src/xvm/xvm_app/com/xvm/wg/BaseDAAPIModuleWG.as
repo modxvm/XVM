@@ -65,17 +65,17 @@ package com.xvm.wg
 
         protected final function assert(param1:Boolean, param2:String = "failed assert") : void
         {
-            App.utils.asserter.assert(param1,param2);
+            App.utils.asserter.assert(param1, param2);
         }
 
         protected final function assertNotNull(param1:Object, param2:String = "object") : void
         {
-            App.utils.asserter.assertNotNull(param1,param2 + Errors.CANT_NULL);
+            App.utils.asserter.assertNotNull(param1, param2 + Errors.CANT_NULL);
         }
 
         protected final function assertNull(param1:Object, param2:String = "object") : void
         {
-            App.utils.asserter.assertNull(param1,param2 + Errors.MUST_NULL);
+            App.utils.asserter.assertNull(param1, param2 + Errors.MUST_NULL);
         }
 
         public function get isDAAPIInited() : Boolean
