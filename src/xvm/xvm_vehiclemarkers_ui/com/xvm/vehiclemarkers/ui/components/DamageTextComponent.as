@@ -127,6 +127,27 @@ package com.xvm.vehiclemarkers.ui.components
 
         private function showDamage(e:XvmVehicleMarkerEvent):void
         {
+            function settingTextField(tf:TextField):void
+            {
+                tf.x = Macros.FormatNumber(cfg.x, playerState, 0);
+                tf.alpha = alpha;
+                if (!cfg.textFormat)
+                {
+                    cfg.textFormat = CTextFormat.GetDefaultConfigForMarkers();
+                    cfg.textFormat.color = "{{c:dmg}}";
+                }
+                if (cfg.textFormat.color == null)
+                {
+                    cfg.textFormat.color = "{{c:dmg}}";
+                }
+                if (cfg.textFormat.leading == null)
+                {
+                    cfg.textFormat.leading = -2;
+                }
+                tf.defaultTextFormat = Utils.createTextFormatFromConfig(cfg.textFormat, playerState);
+                tf.filters = Utils.createShadowFiltersFromConfig(cfg.shadow, playerState);
+                tf.x -= (textField.width / 2.0);
+            }
             var e_cfg:CMarkers4 = e.cfg;
             var playerState:VOPlayerState = e.playerState;
             var damageInfo:VODamageInfo = playerState.damageInfo;
@@ -151,6 +172,7 @@ package com.xvm.vehiclemarkers.ui.components
                         textField = mc.getChildAt(0) as TextField;
                         damageInfo.damageDelta += getDamagePrevMC(damageInfo);
                         text = Macros.FormatString(playerState.isBlown ? Locale.get(cfg.blowupMessage) : Locale.get(cfg.damageMessage), playerState);
+                        settingTextField(textField);
                         textField.htmlText = text;
                     }
                     else // create text field
@@ -165,29 +187,12 @@ package com.xvm.vehiclemarkers.ui.components
                         textField.selectable = false;
                         TextFieldEx.setNoTranslate(textField, true);
                         textField.antiAliasType = AntiAliasType.ADVANCED;
-                        textField.x = Macros.FormatNumber(cfg.x, playerState, 0);
                         textField.y = 0;
                         textField.width = 200;
                         textField.height = 100;
                         textField.multiline = true;
                         textField.wordWrap = false;
-                        textField.alpha = alpha;
-                        if (!cfg.textFormat)
-                        {
-                            cfg.textFormat = CTextFormat.GetDefaultConfigForMarkers();
-                            cfg.textFormat.color = "{{c:dmg}}";
-                        }
-                        if (cfg.textFormat.color == null)
-                        {
-                            cfg.textFormat.color = "{{c:dmg}}";
-                        }
-                        if (cfg.textFormat.leading == null)
-                        {
-                            cfg.textFormat.leading = -2;
-                        }
-                        textField.defaultTextFormat = Utils.createTextFormatFromConfig(cfg.textFormat, playerState);
-                        textField.filters = Utils.createShadowFiltersFromConfig(cfg.shadow, playerState);
-                        textField.x -= (textField.width / 2.0);
+                        settingTextField(textField);
                         textField.htmlText = text;
 
                         var maxRange:Number = Macros.FormatNumber(cfg.maxRange, playerState, 40);
