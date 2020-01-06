@@ -1,6 +1,9 @@
 ﻿XVM-8.2.4:
+  [BATTLE]
+  * The macro {{my-anonym}} has been renamed to {{anonym}}, the description in the documentation has been updated
+
   [MARKERS]
-  * The macro {{dmg}} sums the value, in a time span of less than 500 ms
+  * The macro {{dmg}} sums the value, in a time span of less than 400 ms
 
   [PLAYERS PANEL]
   * Fixed macros {{nick}}, {{name}}, {{clan}}, {{clannb}} for platoon with an anonymous player

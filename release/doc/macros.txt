@@ -22,6 +22,7 @@ Legend:
 │ S │ {{name}}           │ X │ X │ X │ X │ X │ X │ player nickname without clan name
 │ S │ {{clan}}           │ X │ X │ X │ X │ X │ X │ clan name with brackets, empty - if no clan
 │ S │ {{clannb}}         │ X │ X │ X │ X │ X │ X │ clan name without brackets
+│ S │ {{anonym}}         │ X │ X │ X │ X │ X │ X │ value 'anonym' for the player and squadman if the anonymizer is enabled in the game, empty - if not
 │ S │ {{ally}}           │ X │ X │ X │ X │ X │ X │ value 'ally' for ally team, empty - for enemy team
 │ H │ {{player}}         │ X │ X │ X │ X │   │ X │ value 'pl' for player, empty - for others
 │ H │ {{veh-id}}         │ X │ X │ X │ X │ X │ X │ vehicle id
@@ -95,7 +96,6 @@ Legend:
 │ H │ {{my-alive}}           │   │ X │ X │ X │ X │ X │ is my vehicle alive
 │ D │ {{my-frags}}           │   │ X │ X │ X │ X │ X │ my frags
 │ S │ {{my-veh-id}}          │ X │ X │ X │ X │ X │ X │ my vehicle id
-│ S │ {{my-anonym}}          │ X │ X │ X │ X │ X │ X │ returns 'anonym' for the player if anonymizer is enabled in the game, empty - - if not
 │ S │ {{my-vehicle}}         │ X │ X │ X │ X │ X │ X │ my vehicle name
 │ S │ {{my-vehiclename}}     │ X │ X │ X │ X │ X │ X │ my vehicle system name (usa-M24_Chaffee)
 │ S │ {{my-vehicle-short}}   │   │ X │ X │ X │ X │ X │ my shortened vehicle name

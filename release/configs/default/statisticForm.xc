@@ -93,7 +93,7 @@
     "fragsFieldWidthRight": 43,
     // Display format for the left panel (macros allowed, see macros.txt).
     // Формат отображения для левой панели (допускаются макроподстановки, см. macros.txt).
-    "formatLeftNick": "<img src='xvm://res/icons/flags/{{flag|default}}.png' width='16' height='13'> <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'> {{name%.{{my-anonym?13|15}}s~..}}{{my-anonym? <font face='xvm' size='13'><b>&#x11E;</b></font>}} <font alpha='#A0'>{{clan}}</font>",
+    "formatLeftNick": "<img src='xvm://res/icons/flags/{{flag|default}}.png' width='16' height='13'> <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'> {{name%.{{anonym?13|15}}s~..}}{{anonym? <font face='xvm' size='13'><b>&#x11E;</b></font>}} <font alpha='#A0'>{{clan}}</font>",
     // Display format for the right panel (macros allowed, see macros.txt).
     // Формат отображения для правой панели (допускаются макроподстановки, см. macros.txt).
     "formatRightNick": "<font alpha='#A0'>{{clan}}</font> {{name%.15s~..}} <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'> <img src='xvm://res/icons/flags/{{flag|default}}.png' width='16' height='13'>",

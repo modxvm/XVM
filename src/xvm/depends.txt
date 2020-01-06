@@ -6,7 +6,7 @@ wg_lobby.swc   <- wg/lobby wg/lobby_links wg/lobby_ui/* wg/common_i18n
 wg_vm.swc      <- wg/battleVehicleMarkersApp
 xfw_shared.swc <- xfw_shared
                   + wg_shared.swc (ext)
-xfw.swf,xfw.swc<- xfw
+xfw.swf, xfw.swc <- xfw
                   + wg_lobby.swc (ext)    TODO: wg_app.swc
                   + xfw_shared.swc (inc)
 
