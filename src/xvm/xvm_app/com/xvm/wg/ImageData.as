@@ -41,7 +41,7 @@ package com.xvm.wg
             this._source = param1;
             this._cacheType = param2;
             var _loc3_:URLRequest = new URLRequest(param1);
-            var _loc4_:LoaderContext = new LoaderContext(false,ApplicationDomain.currentDomain);
+            var _loc4_:LoaderContext = new LoaderContext(false, ApplicationDomain.currentDomain);
             this._loader = new Loader();
             this.addLoaderListeners();
             this._loader.load(_loc3_,_loc4_);
@@ -49,7 +49,7 @@ package com.xvm.wg
 
         public function dispose() : void
         {
-            if(this._ready)
+            if (this._ready)
             {
                 this._weakBitmapData.dispose();
                 this._weakBitmapData = null;
@@ -64,7 +64,7 @@ package com.xvm.wg
 
         public function isLockData() : Boolean
         {
-            if(this._ready)
+            if (this._ready)
             {
                 return this._weakBitmapData.isLock;
             }
@@ -78,7 +78,7 @@ package com.xvm.wg
 
         public function unlockData() : void
         {
-            if(!this._permanent)
+            if (!this._permanent)
             {
                 this._weakBitmapData.unlock();
             }
@@ -96,7 +96,7 @@ package com.xvm.wg
 
         public function get valid() : Boolean
         {
-            if(this._ready)
+            if (this._ready)
             {
                 return this._weakBitmapData.target != null;
             }
@@ -121,7 +121,7 @@ package com.xvm.wg
         public function removeFrom(param1:IImage) : void
         {
             param1.bitmapData = null;
-            if(this._cacheType == ImageCacheTypes.NOT_USE_CACHE)
+            if (this._cacheType == ImageCacheTypes.NOT_USE_CACHE)
             {
                 this.dispose();
             }
@@ -130,7 +130,7 @@ package com.xvm.wg
         private function onLoaderCompleteHandler(param1:Event) : void
         {
             this.removeLoaderListeners();
-            App.utils.asserter.assert(this._loader.contentLoaderInfo.contentType != CONTENT_TYPE_SWF,"Content loader is not image: " + this._source);
+            App.utils.asserter.assert(this._loader.contentLoaderInfo.contentType != CONTENT_TYPE_SWF, "Content loader is not image: " + this._source);
             var _loc2_:BitmapData = Bitmap(this._loader.content).bitmapData;
             this._weakBitmapData = new WeakRef(_loc2_,true);
             this._size = _loc2_.width * _loc2_.height * BYTE_PER_PIXEL;
@@ -152,14 +152,14 @@ package com.xvm.wg
 
         private function addLoaderListeners() : void
         {
-            this._loader.contentLoaderInfo.addEventListener(Event.COMPLETE,this.onLoaderCompleteHandler);
-            this._loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,this.onLoaderIOErrorHandler);
+            this._loader.contentLoaderInfo.addEventListener(Event.COMPLETE, this.onLoaderCompleteHandler);
+            this._loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, this.onLoaderIOErrorHandler);
         }
 
         private function removeLoaderListeners() : void
         {
-            this._loader.contentLoaderInfo.removeEventListener(Event.COMPLETE,this.onLoaderCompleteHandler);
-            this._loader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR,this.onLoaderIOErrorHandler);
+            this._loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, this.onLoaderCompleteHandler);
+            this._loader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR, this.onLoaderIOErrorHandler);
         }
 
         public function get permanent() : Boolean

@@ -22,7 +22,7 @@ package com.xvm.wg
         {
             this._dict = new Dictionary(true);
             this._dict[param1] = 1;
-            if(param2)
+            if (param2)
             {
                 this._lock = param2;
                 this._target = param1;
@@ -32,11 +32,11 @@ package com.xvm.wg
         public function get target() : *
         {
             var _loc1_:* = undefined;
-            if(this._lock)
+            if (this._lock)
             {
                 return this._target;
             }
-            for(_loc1_ in this._dict)
+            for (_loc1_ in this._dict)
             {
                 return _loc1_;
             }
@@ -47,7 +47,7 @@ package com.xvm.wg
         {
             var _loc1_:* = undefined;
             this.unlock();
-            for(_loc1_ in this._dict)
+            for (_loc1_ in this._dict)
             {
                 delete this._dict[_loc1_];
             }
@@ -62,10 +62,10 @@ package com.xvm.wg
         public function lock() : Boolean
         {
             var _loc1_:* = undefined;
-            if(!this._lock)
+            if (!this._lock)
             {
                 _loc1_ = this.target;
-                if(_loc1_ != null)
+                if (_loc1_ != null)
                 {
                     this._target = _loc1_;
                     this._lock = true;
@@ -76,7 +76,7 @@ package com.xvm.wg
 
         public function unlock() : void
         {
-            if(this._lock)
+            if (this._lock)
             {
                 this._target = null;
                 this._lock = false;
