@@ -1,4 +1,4 @@
-{
+﻿{
   "configVersion": "6.1.0",
   "autoReloadConfig": true,
   //"language": "pl",

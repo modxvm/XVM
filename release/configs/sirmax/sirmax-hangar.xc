@@ -1,4 +1,4 @@
-{
+﻿{
   "def": {
     "pingServers": {
       "enabled": true,

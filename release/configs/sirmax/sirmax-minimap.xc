@@ -1,4 +1,4 @@
-{
+﻿{
   "minimap": {
     //"enabled": false,
     //"mapBackgroundImageAlpha": 50,
