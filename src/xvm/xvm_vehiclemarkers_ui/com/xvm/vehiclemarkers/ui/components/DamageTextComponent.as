@@ -14,6 +14,7 @@ package com.xvm.vehiclemarkers.ui.components
     import flash.utils.Dictionary;
     import flash.utils.getTimer;
     import scaleform.gfx.*;
+    import net.wg.gui.battle.views.vehicleMarkers.VO.VehicleMarkerFlags;
 
     public final class DamageTextComponent extends VehicleMarkerComponentBase implements IVehicleMarkerComponent
     {
@@ -97,7 +98,7 @@ package com.xvm.vehiclemarkers.ui.components
 
         private function getIndexPrevMC(damageInfo:VODamageInfo):int
         {
-            if (damageInfo.attackerID in attackers)
+            if (damageInfo.attackerID in attackers && damageInfo.damageType != VehicleMarkerFlags.DAMAGE_FIRE)
             {
                 var attacker:Dictionary = attackers[damageInfo.attackerID];
                 if (damageInfo.damageType in attacker)
