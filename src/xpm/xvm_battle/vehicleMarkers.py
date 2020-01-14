@@ -11,6 +11,7 @@ import BigWorld
 import constants
 import game
 from Avatar import PlayerAvatar
+from Vehicle import Vehicle
 from messenger import MessengerEntry
 from helpers import dependency
 from BattleReplay import g_replayCtrl
@@ -75,6 +76,9 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
 def _PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
     g_markers.updatePlayerState(vehicle.id, INV.ALL)
 
+@registerEvent(Vehicle, 'set_isCrewActive')
+def set_isCrewActive(self, prev):
+    g_markers.updatePlayerState(self.id, INV.CREW_ACTIVE)
 
 #####################################################################
 # handlers
@@ -323,13 +327,17 @@ class VehicleMarkers(object):
                         if entity and hasattr(entity, 'publicInfo'):
                             data['marksOnGun'] = entity.publicInfo.marksOnGun
 
+                    if targets & INV.CREW_ACTIVE:
+                        if entity and hasattr(entity, 'isCrewActive'):
+                            data['isCrewActive'] = bool(entity.isCrewActive)
+
                 if targets & (INV.ALL_VINFO | INV.ALL_VSTATS):
                     arenaDP = self.sessionProvider.getArenaDP()
                     if targets & INV.ALL_VSTATS:
                         vStatsVO = arenaDP.getVehicleStats(vehicleID)
 
-                    if targets & INV.FRAGS:
-                        data['frags'] = vStatsVO.frags
+                        if targets & INV.FRAGS:
+                            data['frags'] = vStatsVO.frags
 
                 if data:
                     self.call(XVM_BATTLE_COMMAND.AS_UPDATE_PLAYER_STATE, vehicleID, data)
