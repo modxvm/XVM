@@ -909,6 +909,11 @@ def _Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
         g_dataHitLog.updateVehInfo(self)
 
 
+@registerEvent(Vehicle, 'set_isCrewActive')
+def set_isCrewActive(self, prev):
+    g_dataHitLog.updateVehInfo(self)
+
+
 @registerEvent(PlayerAvatar, '_PlayerAvatar__destroyGUI')
 def PlayerAvatar__destroyGUI(self):
     if _config.get(HIT_LOG_ENABLED, True) and battle.isBattleTypeSupported:
