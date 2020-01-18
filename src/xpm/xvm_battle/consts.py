@@ -43,6 +43,7 @@ class INV(object):
     NONE                = 0x00000000
     VEHICLE_STATUS      = 0x00000001 # ready, alive, not_available, stop_respawn
     #PLAYER_STATUS       = 0x00000002 # isActionDisabled, isSelected, isSquadMan, isSquadPersonal, isTeamKiller, isVoipDisabled
+    CREW_ACTIVE         = 0x00000004
     SQUAD_INDEX         = 0x00000008
     RANK_LEVEL          = 0x00000010
     CUR_HEALTH          = 0x00000020
@@ -53,7 +54,7 @@ class INV(object):
     DAMAGE_CAUSED       = 0x00010000
     ALL_VINFO           = VEHICLE_STATUS | SQUAD_INDEX | RANK_LEVEL | FRAGS # | PLAYER_STATUS
     ALL_VSTATS          = FRAGS
-    ALL_ENTITY          = CUR_HEALTH | MAX_HEALTH | MARKS_ON_GUN
+    ALL_ENTITY          = CUR_HEALTH | MAX_HEALTH | MARKS_ON_GUN | CREW_ACTIVE
     ALL                 = 0x0000FFFF
 
 # Spotted statuses
