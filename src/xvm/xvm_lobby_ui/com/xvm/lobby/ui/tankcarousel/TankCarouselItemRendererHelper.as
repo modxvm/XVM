@@ -146,28 +146,7 @@ package com.xvm.lobby.ui.tankcarousel
                     }
                     else
                     {
-                        // Add used slots count
-                        //if (item.vehicleCarouselVO.buySlot)
-                        //{
-                            //if (Config.config.hangar.carousel.showUsedSlots)
-                            //{
-                                //renderer.content.txtInfo.htmlText =
-                                    //"<p align='center'>" + item.vehicleCarouselVO.infoText + "\n" +
-                                    //"<font face='$TextFont' size='12' color='#8C8C7E'>" +
-                                    //Locale.get("Used slots") + ": " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_USED_SLOTS_COUNT) + "</font></p>";
-                            //}
-                        //}
-                        _addUsedSlotsCount();
-                        if (item.vehicleCarouselVO.buyTank)
-                        {
-                            if (Config.config.hangar.carousel.showTotalSlots)
-                            {
-                                renderer.content.txtInfo.htmlText =
-                                    "<p align='center'>" + item.vehicleCarouselVO.infoText + " " +
-                                    "<font face='$FieldFont' size='14' color='#8C8C7E'>" +
-                                    Locale.get("from") + " " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_TOTAL_SLOTS_COUNT) + "</font></p>";
-                            }
-                        }
+                        _addSlotsCount();
                     }
                 }
                 if (item.extraFields)
@@ -192,14 +171,14 @@ package com.xvm.lobby.ui.tankcarousel
             _setupStandardFieldInfo();
             if (item.vehicleCarouselVO)
             {
-                _addUsedSlotsCount();
+                _addSlotsCount();
             }
             //updateDataXvm()
         }
 
         // PRIVATE
 
-        private function _addUsedSlotsCount():void
+        private function _addSlotsCount():void
         {
             if (item.vehicleCarouselVO.buySlot)
             {
@@ -212,6 +191,16 @@ package com.xvm.lobby.ui.tankcarousel
                         Locale.get("Used slots") + ": " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_USED_SLOTS_COUNT) + "</font></p>";
                     // Centering in height
                     renderer.content.txtInfo.y -= 8;
+                }
+            }
+            if (item.vehicleCarouselVO.buyTank)
+            {
+                if (Config.config.hangar.carousel.showTotalSlots)
+                {
+                    renderer.content.txtInfo.htmlText =
+                        "<p align='center'>" + item.vehicleCarouselVO.infoText + " " +
+                        "<font face='$FieldFont' size='14' color='#8C8C7E'>" +
+                        Locale.get("from") + " " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_TOTAL_SLOTS_COUNT) + "</font></p>";
                 }
             }
         }
