@@ -53,6 +53,7 @@ package com.xvm.battle.vo
         private var _spottedStatus:String = null;
         private var __curHealth:Number = NaN;
         private var _maxHealth:Number = NaN;
+        private var _isCrewActive:Boolean = true;
 
         private var _damageInfo:VODamageInfo = null;
         private var _markerState:VOMarkerState = null;
@@ -368,6 +369,11 @@ package com.xvm.battle.vo
             {
                 eventsToDispatch[PlayerStateEvent.MY_HP_CHANGED] = true;
             }
+        }
+
+        public function get isCrewActive():Boolean
+        {
+            return _isCrewActive;
         }
 
         public function get maxHealth():Number
