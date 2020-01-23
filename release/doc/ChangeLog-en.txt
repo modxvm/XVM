@@ -1,4 +1,7 @@
-﻿XVM-8.2.4:
+﻿XVM-8.3.0:
+  [GENERAL]
+  * World of Tanks 1.7.1.0
+
   [MARKERS]
   * The macro {{dmg}} sums the value, in a time span of less than 500 ms
 
