@@ -26,7 +26,6 @@ from notification.settings import NOTIFICATION_TYPE
 from gui.shared import g_eventBus, events
 from gui.Scaleform.framework.application import AppEntry
 from gui.Scaleform.daapi.view.lobby.profile.ProfileTechniqueWindow import ProfileTechniqueWindow
-from gui.Scaleform.daapi.view.lobby.hangar.AmmunitionPanel import AmmunitionPanel
 from helpers import dependency, VERSION_FILE_PATH
 from skeletons.gui.app_loader import IAppLoader
 
