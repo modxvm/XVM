@@ -5,6 +5,9 @@
 
     "version": "XFW_VERSION",
     "dependencies": [],
+    "dependencies_optional": [
+        "com.modxvm.xfw.native"
+    ],
 
     "url": "https://modxvm.com/",
     "url_update": "https://modxvm.com/",
