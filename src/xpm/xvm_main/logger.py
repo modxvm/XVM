@@ -2,7 +2,7 @@
 
 import pprint
 
-from xfw import *
+from xfw import Logger, IS_DEVELOPMENT
 from xfw_actionscript.python import swf
 from xfw.constants import PATH
 

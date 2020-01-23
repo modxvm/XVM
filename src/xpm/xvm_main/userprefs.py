@@ -1,8 +1,38 @@
-""" XVM (c) https://modxvm.com 2013-2020 """
+"""
+This file is part of the XVM project.
+
+Copyright (c) 2013-2020 XVM Team.
+
+XVM is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as
+published by the Free Software Foundation, version 3.
+
+XVM is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>.
+"""
+
+#python
+import os
+import cPickle
+import traceback
+
+#bigworld
+import BigWorld
+
+from fs.osfs import OSFS
+from fs.zipfs import ZipFS
+
+#xvm.main
+from logger import *
+import utils
 
 def get(key, default=None):
     return _userPrefs.get(key, default)
-
 
 # key must be valid file name
 def set(key, value):
@@ -10,18 +40,6 @@ def set(key, value):
 
 
 # PRIVATE
-
-import os
-import cPickle
-import traceback
-
-import BigWorld
-
-from fs.osfs import OSFS
-from fs.zipfs import ZipFS
-from logger import *
-import utils
-
 
 class _UserPrefs():
     def __init__(self):
