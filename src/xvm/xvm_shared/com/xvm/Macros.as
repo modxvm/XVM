@@ -323,7 +323,7 @@ package com.xvm
         private const HYBRID_MACROS:Vector.<String> = new <String>[
             "alive", "ready", "selected", "player", "tk", "squad", "squad-num", "position", "marksOnGun",
             "x-enabled", "x-sense-on", "x-spotted", "x-fire", "x-overturned", "x-drowning", "name", "nick",
-            "clan", "clannb",
+            "clan", "clannb", "anonym",
             // vehicle macros (can be changed during the battle in some game modes)
             "veh-id", "vehicle", "vehiclename", "vehicle-short", "vtype-key", "vtype", "vtype-l", "c:vtype",
             "battletier-min", "battletier-max", "nation", "level", "rlevel", "premium", "special",

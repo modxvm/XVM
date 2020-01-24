@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 10.12.2019
+    // Last update: 24.01.2020
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -91,6 +91,8 @@
     "france-F111_AM39_Gendron_Somua":        {"name": null, "short": null},
     "france-F112_M10_RBFM":                  {"name": null, "short": null},
     "france-F113_Bretagne_Panther":          {"name": null, "short": null},
+    "france-F114_Projet_4_1":                {"name": null, "short": null},
+    "france-F116_Bat_Chatillon_Bourrasque":  {"name": null, "short": null},
     "france-F11_Renault_G1R":                {"name": null, "short": null},
     "france-F12_Hotchkiss_H35":              {"name": null, "short": null},
     "france-F13_AMX38":                      {"name": null, "short": null},
@@ -691,7 +693,11 @@
     "ussr-R161_T_116":                       {"name": null, "short": null},
     "ussr-R165_Object_703_II":               {"name": null, "short": null},
     "ussr-R165_Object_703_II_2":             {"name": null, "short": null},
+    "ussr-R169_ST_II":                       {"name": null, "short": null},
     "ussr-R16_SU-18":                        {"name": null, "short": null},
+    "ussr-R170_IS_2_II":                     {"name": null, "short": null},
+    "ussr-R171_IS_3_II":                     {"name": null, "short": null},
+    "ussr-R172_Object_752":                  {"name": null, "short": null},
     "ussr-R17_SU-100":                       {"name": null, "short": null},
     "ussr-R18_SU-152":                       {"name": null, "short": null},
     "ussr-R18_SU-152_IGR":                   {"name": null, "short": null},

@@ -228,6 +228,7 @@ package com.xvm.battle.vo
                     delete pdata["nick"];
                     delete pdata["clan"];
                     delete pdata["clannb"];
+                    delete pdata["anonym"];
                 }
                 var value_obj:Object = ObjectConverter.toRawData(value);
                 delete value_obj.frags;
