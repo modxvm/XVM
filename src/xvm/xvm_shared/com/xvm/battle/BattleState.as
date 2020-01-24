@@ -267,7 +267,7 @@ package com.xvm.battle
             {
                 this._allyVehicleMarkersList.isVehicleCounterShown = this._enemyVehicleMarkersList.isVehicleCounterShown = true;
             }
-            else if(PersonalStatus.IS_VEHICLE_COUNTER_SHOWN == param2)
+            else if (PersonalStatus.IS_VEHICLE_COUNTER_SHOWN == param2)
             {
                 this._allyVehicleMarkersList.isVehicleCounterShown = this._enemyVehicleMarkersList.isVehicleCounterShown = false;
             }

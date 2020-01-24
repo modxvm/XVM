@@ -27,7 +27,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 10.12.2019
+    # Last update: 24.01.2020
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -114,6 +114,8 @@ _data = {
     "france:F111_AM39_Gendron_Somua":        'am.Gedr',
     "france:F112_M10_RBFM":                  'M10.rbfm',
     "france:F113_Bretagne_Panther":          'Bret.Pant',
+    "france:F114_Projet_4_1":                'Char.Fut.4',
+    "france:F116_Bat_Chatillon_Bourrasque":  'Bourr.',
     "france:F11_Renault_G1R":                'G1R',
     "france:F12_Hotchkiss_H35":              'h35',
     "france:F13_AMX38":                      'amx38',
@@ -714,7 +716,11 @@ _data = {
     "ussr:R161_T_116":                       't116',
     "ussr:R165_Object_703_II":               'obj703·2(122)',
     "ussr:R165_Object_703_II_2":             'obj703·2(100)',
+    "ussr:R169_ST_II":                       'ST·II',
     "ussr:R16_SU-18":                        'Su·18',
+    "ussr:R170_IS_2_II":                     'Is·2·II',
+    "ussr:R171_IS_3_II":                     'Is·3·II',
+    "ussr:R172_Object_752":                  'obj752',
     "ussr:R17_SU-100":                       'Su100',
     "ussr:R18_SU-152":                       'Su152',
     "ussr:R18_SU-152_IGR":                   'Su152',

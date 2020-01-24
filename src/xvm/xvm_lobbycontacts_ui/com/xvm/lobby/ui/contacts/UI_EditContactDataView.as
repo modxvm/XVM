@@ -82,7 +82,7 @@ package com.xvm.lobby.ui.contacts
 
         override public function onOkS(value:Object):void
         {
-            App.utils.asserter.assertNotNull(this.onOk,"onOk" + Errors.CANT_NULL);
+            App.utils.asserter.assertNotNull(this.onOk, "onOk" + Errors.CANT_NULL);
             this.onOk({
                 nick: nickTextInput.text,
                 comment: commentTextArea.text
