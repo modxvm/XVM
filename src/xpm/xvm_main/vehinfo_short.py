@@ -27,7 +27,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 24.01.2020
+    # Last update: 28.01.2020
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -77,6 +77,7 @@ _data = {
     "china:Ch39_WZ120_1G_FT":                '120·1ft',
     "china:Ch40_WZ120G_FT":                  '120G·ft',
     "china:Ch41_WZ_111_5A":                  '111·5a',
+    "china:Ch41_WZ_111_5A_bob":              '111·5a·bb',
     "china:Ch41_WZ_111_QL":                  '111·lq',
     "china:Ch42_WalkerBulldog_M41D":         'M41D',
     "czech:Cz01_Skoda_T40":                  'skT40',
@@ -233,6 +234,7 @@ _data = {
     "germany:G12_Ltraktor":                  'Ltr',
     "germany:G12_Ltraktor_bot":              'Ltr',
     "germany:G134_PzKpfw_VII":               'PzKf·VII',
+    "germany:G134_PzKpfw_VII_bob":           'PzKf·VII·bb',
     "germany:G136_Tiger_131":                'Tig131',
     "germany:G137_PzVI_Tiger_217":           'Tig217',
     "germany:G138_VK168_02":                 '168.01p',
@@ -339,6 +341,7 @@ _data = {
     "italy:It06_M14_41":                     'M14/41',
     "italy:It07_P26_40":                     'M26/40',
     "italy:It08_Progetto_M40_mod_65":        'Prog65',
+    "italy:It08_Progetto_M40_mod_65_bob":    'Prog65·bb',
     "italy:It09_P43_ter":                    'P43·ter',
     "italy:It10_P43_bis":                    'P43·bis',
     "italy:It11_P43":                        'P43',
@@ -422,6 +425,7 @@ _data = {
     "sweden:S26_Lansen_C":                   'lans·C',
     "sweden:S27_UDES_16":                    'udes·16',
     "sweden:S28_UDES_15_16":                 'udes·15/16',
+    "sweden:S28_UDES_15_16_bob":             'udes·15/16·bb',
     "sweden:S29_UDES_14_5":                  'udes·14·5',
     "uk:GB01_Medium_Mark_I":                 'Med1',
     "uk:GB01_Medium_Mark_I_bot":             'Med1',
@@ -803,6 +807,7 @@ _data = {
     "ussr:R96_Object_430":                   'obj430',
     "ussr:R96_Object_430B":                  'obj430b',
     "ussr:R97_Object_140":                   'obj140',
+    "ussr:R97_Object_140_bob":               'obj140·bb',
     "ussr:R98_T44_85":                       't44·85',
     "ussr:R98_T44_85M":                      't44·85m',
     "ussr:R99_T44_122":                      't44·122'
