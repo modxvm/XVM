@@ -1,10 +1,10 @@
 diff -Naur lobby.orig-0.orig/net/wg/gui/lobby/hangar/Hangar.class.asasm lobby.orig-0/net/wg/gui/lobby/hangar/Hangar.class.asasm
---- lobby.orig-0.orig/net/wg/gui/lobby/hangar/Hangar.class.asasm	2020-01-23 03:20:40.680308900 +0300
-+++ lobby.orig-0/net/wg/gui/lobby/hangar/Hangar.class.asasm	2020-01-23 03:22:34.208875600 +0300
-@@ -108,6 +108,24 @@
-   trait slot QName(PackageNamespace(""), "switchModePanel") type QName(PackageNamespace("net.wg.gui.lobby.hangar"), "SwitchModePanel") end
+--- lobby.orig-0.orig/net/wg/gui/lobby/hangar/Hangar.class.asasm	2020-01-24 23:27:39.369863400 +0300
++++ lobby.orig-0/net/wg/gui/lobby/hangar/Hangar.class.asasm	2020-01-24 23:31:36.009170500 +0300
+@@ -119,6 +119,24 @@
    trait slot QName(PackageNamespace(""), "crewBG") type QName(PackageNamespace("flash.display"), "Sprite") end
    trait slot QName(PackageNamespace(""), "teaser") type QName(PackageNamespace("net.wg.gui.lobby.post"), "Teaser") end
+   trait slot QName(PackageNamespace(""), "bobAnnouncement") type QName(PackageNamespace("net.wg.gui.lobby.hangar.wgbob"), "BobAnnouncementWidget") end
 +  trait getter QName(PackageNamespace(""), "xfw_header")
 +   method
 +    returns QName(PackageNamespace("net.wg.gui.lobby.hangar"), "HangarHeader")
