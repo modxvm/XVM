@@ -61,7 +61,10 @@ package com.xvm.lobby.ui.techtree
                     if (dossier)
                     {
                         var vdata:VehicleDossierCut = dossier.getVehicleDossierCut(id);
-                        masteryStr = "<img src='img://gui/maps/icons/library/proficiency/class_icons_" + vdata.mastery + ".png' width='23' height='23'>";
+                        if (!isNaN(vdata.mastery) && vdata.mastery != 0)
+                        {
+                            masteryStr = "<img src='img://gui/maps/icons/library/proficiency/class_icons_" + vdata.mastery + ".png' width='23' height='23'>";
+                        }
                     }
                 }
                 catch (ex:Error)
