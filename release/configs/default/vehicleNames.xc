@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 24.01.2020
+    // Last update: 28.01.2020
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -54,6 +54,7 @@
     "china-Ch39_WZ120_1G_FT":                {"name": null, "short": null},
     "china-Ch40_WZ120G_FT":                  {"name": null, "short": null},
     "china-Ch41_WZ_111_5A":                  {"name": null, "short": null},
+    "china-Ch41_WZ_111_5A_bob":              {"name": null, "short": null},
     "china-Ch41_WZ_111_QL":                  {"name": null, "short": null},
     "china-Ch42_WalkerBulldog_M41D":         {"name": null, "short": null},
     "czech-Cz01_Skoda_T40":                  {"name": null, "short": null},
@@ -210,6 +211,7 @@
     "germany-G12_Ltraktor":                  {"name": null, "short": null},
     "germany-G12_Ltraktor_bot":              {"name": null, "short": null},
     "germany-G134_PzKpfw_VII":               {"name": null, "short": null},
+    "germany-G134_PzKpfw_VII_bob":           {"name": null, "short": null},
     "germany-G136_Tiger_131":                {"name": null, "short": null},
     "germany-G137_PzVI_Tiger_217":           {"name": null, "short": null},
     "germany-G138_VK168_02":                 {"name": null, "short": null},
@@ -316,6 +318,7 @@
     "italy-It06_M14_41":                     {"name": null, "short": null},
     "italy-It07_P26_40":                     {"name": null, "short": null},
     "italy-It08_Progetto_M40_mod_65":        {"name": null, "short": null},
+    "italy-It08_Progetto_M40_mod_65_bob":    {"name": null, "short": null},
     "italy-It09_P43_ter":                    {"name": null, "short": null},
     "italy-It10_P43_bis":                    {"name": null, "short": null},
     "italy-It11_P43":                        {"name": null, "short": null},
@@ -399,6 +402,7 @@
     "sweden-S26_Lansen_C":                   {"name": null, "short": null},
     "sweden-S27_UDES_16":                    {"name": null, "short": null},
     "sweden-S28_UDES_15_16":                 {"name": null, "short": null},
+    "sweden-S28_UDES_15_16_bob":             {"name": null, "short": null},
     "sweden-S29_UDES_14_5":                  {"name": null, "short": null},
     "uk-GB01_Medium_Mark_I":                 {"name": null, "short": null},
     "uk-GB01_Medium_Mark_I_bot":             {"name": null, "short": null},
@@ -780,6 +784,7 @@
     "ussr-R96_Object_430":                   {"name": null, "short": null},
     "ussr-R96_Object_430B":                  {"name": null, "short": null},
     "ussr-R97_Object_140":                   {"name": null, "short": null},
+    "ussr-R97_Object_140_bob":               {"name": null, "short": null},
     "ussr-R98_T44_85":                       {"name": null, "short": null},
     "ussr-R98_T44_85M":                      {"name": null, "short": null},
     "ussr-R99_T44_122":                      {"name": null, "short": null}
