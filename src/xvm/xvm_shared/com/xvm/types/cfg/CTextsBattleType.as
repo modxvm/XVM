@@ -8,6 +8,7 @@ package com.xvm.types.cfg
 
     public dynamic class CTextsBattleType implements ICloneable
     {
+        public var bob:String;
         public var bootcamp:String;
         public var clan:String;
         public var cybersport:String;
