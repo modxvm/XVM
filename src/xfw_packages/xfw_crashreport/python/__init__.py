@@ -22,94 +22,132 @@ import logging
 #xfw.loader
 import xfw_loader.python as loader
 
-#xfw.libraries
-from xfw.constants import PATH, VERSION
-from xfw.wg import getLanguage, getRegion
-
-
-g_crashreport = None
+__xfw_crashreport = None
 
 class XFWCrashReport(object):
     def __init__(self):
         self.__native = None
         self.__initialized = False
-        self.__package_name = 'com.modxvm.xfw.crashreport'
+        self.package_name = 'com.modxvm.xfw.crashreport'
 
         try:
             xfwnative = loader.get_mod_module('com.modxvm.xfw.native')
             if not xfwnative:
-                logging.error('[XFW/Crashreport] Failed to load native module. XFW Native is not available')
+                logging.error('[XFW/Crashreport] [__init__]  Failed to load native module. XFW Native is not available')
                 return
 
-            if not xfwnative.unpack_native(self.__package_name):
-                logging.error('[XFW/Crashreport] Failed to load native module. Failed to unpack native module')
+            if not xfwnative.unpack_native(self.package_name):
+                logging.error('[XFW/Crashreport] [__init__] Failed to load native module. Failed to unpack native module')
                 return
 
-            self.__native = xfwnative.load_native(self.__package_name, 'xfw_crashreport.pyd', 'XFW_CrashReport')
+            self.__native = xfwnative.load_native(self.package_name, 'xfw_crashreport.pyd', 'XFW_CrashReport')
             if not self.__native:
-                logging.error("[XFW/Crashreport] Failed to load native module. Crash report were not enabled")
+                logging.error("[XFW/Crashreport] [__init__] Failed to load native module. Crash report were not enabled")
                 return
 
             self.__native_configure()
 
         except Exception:
-            logging.exception("[XFW/Crashreport] Error when loading native library:")
+            logging.exception("[XFW/Crashreport] [__init__] Error when loading native library:")
 
 
     def __native_configure(self):
-        if not self.__native.crashrpt_is_supported():
-            logging.warning("[XFW/Crashreport] Crash reports are not not supported on this platform.")
+        if not self.__native.is_platform_supported():
+            logging.warning("[XFW/Crashreport] [__native_configure] Crash reports are not not supported on this platform.")
             return
 
         if not self.__native.restore_suef():
-            logging.error("[XFW/Crashreport] Crash reports failed to restore SUEF.")
+            logging.error("[XFW/Crashreport] [__native_configure] Crash reports failed to restore SUEF.")
             return
 
-        if not self.__native.crashrpt_set_language(unicode(getLanguage()), unicode(getRegion())):
-            logging.error("[XFW/Crashreport] Crash reports failed to find language files.")
-            return
-
-        if not self.__native.crashrpt_install():
-            logging.error("[XFW/Crashreport] Crash reports failed to install.")
-            return
-
-        logging.info("[XFW/Crashreport] Crash reports were registered.")
         self.__initialized = True
 
 
+    def install(self):
+        if self.__initialized:
+            if not self.__native.initialize():
+                logging.error("[XFW/Crashreport] [install] Crash reports failed to install.")
+                return
+            logging.info("[XFW/Crashreport] [install] Crash reports were registered.")
+            self.__installed = True
+
+
     def is_initialized(self):
-        return self.__initialized
+        '''
+        has the different meaning from self.__initialized!
 
-    def add_file(self, path, name, description):
+        self.__initialized     - .pyd was succesfuly loaded
+        self.is_inititalized() - crash handler was initialized
+        '''
+        if not self.__initialized:
+            return False
+
+        return self.__native.is_initialized()
+
+
+    def add_attachment(self, path, description):
         if not self.__initialized:
             return
 
         try:
-            self.__native.crashrpt_add_file(unicode(path), unicode(name), unicode(description))
+            if not self.__native.add_attachment(unicode(path), description):
+                logging.warn("[XFW/Crashreport] [add_attachment] failed to add attachment")
         except Exception:
-            logging.exception("[XFW/Crashreport] [add_file]")
+            logging.exception("[XFW/Crashreport] [add_attachment]")
 
 
-    def add_prop(self, name, value):
+    def set_dsn(self, dsn):
         if not self.__initialized:
             return
 
         try:
-            self.__native.crashrpt_add_prop(unicode(name), unicode(value))
+            if not self.__native.set_dsn(dsn):
+                logging.warn("[XFW/Crashreport] [set_dsn] failed to set DSN")
         except Exception:
-            logging.exception("[XFW/Crashreport] [add_prop]")
+            logging.exception("[XFW/Crashreport] [set_dsn]")
+
+
+    def set_tag(self, name, value):
+        if not self.__initialized:
+            return
+
+        try:
+            if not self.__native.set_tag(name, value):
+                logging.warn("[XFW/Crashreport] [set_tag] failed to set tag")
+        except Exception:
+            logging.exception("[XFW/Crashreport] [set_tag]")
+
+    def set_release(self, release_ver):
+        if not self.__initialized:
+            return
+
+        try:
+            if not self.__native.set_release(release_ver):
+                logging.warn("[XFW/Crashreport] [set_release] failed to set release")
+        except Exception:
+            logging.exception("[XFW/Crashreport] [set_release]")
 
 
 def xfw_is_module_loaded():
-    if not g_crashreport:
+    if not __xfw_crashreport:
         return False
 
-    return g_crashreport.is_initialized()
+    return __xfw_crashreport.is_initialized()
 
-g_crashreport = XFWCrashReport()
 
-g_crashreport.add_file("game.log","game.log","BigWorld debug log")
-g_crashreport.add_file("python.log","python.log","Python debug log")
-g_crashreport.add_file("xvm.log","xvm.log","XVM debug log")
+def xfw_module_init():
+    global __xfw_crashreport
+    __xfw_crashreport = XFWCrashReport()
+    
+    __xfw_crashreport.set_dsn('https://3ee6306774f349beb6c658462be0a591@sentry.openwg.net/2')
 
-g_crashreport.add_prop("wot_version", loader.WOT_VERSION_FULL)
+    __xfw_crashreport.add_attachment("game.log","BigWorld debug log")
+    __xfw_crashreport.add_attachment("python.log","Python debug log")
+    __xfw_crashreport.add_attachment("xvm.log","XVM debug log")
+
+    __xfw_crashreport.set_tag("wot_version", loader.WOT_VERSION_FULL)
+
+    print loader.get_mod_ids()
+    __xfw_crashreport.set_release(loader.get_mod_ids()[unicode(__xfw_crashreport.package_name)])
+
+    __xfw_crashreport.install()

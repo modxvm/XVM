@@ -40,9 +40,13 @@ target_link_libraries(xfw_crashreport libpython::python27)
 set_target_properties(xfw_crashreport PROPERTIES SUFFIX ".pyd")
 
 #dep: crashrpt
-target_include_directories(xfw_crashreport PRIVATE "crashrpt/include")
-target_link_libraries(xfw_crashreport "${CMAKE_SOURCE_DIR}/crashrpt/lib/CrashRpt1500.lib")
-set_target_properties(xfw_crashreport PROPERTIES LINK_FLAGS "/DELAYLOAD:CrashRpt1500.dll")
+target_include_directories(xfw_crashreport PRIVATE "3rdparty/sentry-native/include")
+if(CMAKE_CL_64)
+    target_link_libraries(xfw_crashreport "${CMAKE_SOURCE_DIR}/3rdparty/sentry-native/lib64/sentry_crashpad.lib")
+else()
+    target_link_libraries(xfw_crashreport "${CMAKE_SOURCE_DIR}/3rdparty/sentry-native/lib32/sentry_crashpad.lib")
+endif()
+set_target_properties(xfw_crashreport PROPERTIES LINK_FLAGS "/DELAYLOAD:sentry_crashpad.dll")
 
 #dep: windows
 target_link_libraries(xfw_crashreport "Shlwapi")
@@ -52,6 +56,8 @@ target_link_libraries(xfw_crashreport "Version")
 install(TARGETS xfw_crashreport
         RUNTIME DESTINATION ".")
 
-install(DIRECTORY "crashrpt/bin/" DESTINATION ".")
-
-install(DIRECTORY "crashrpt/lang_files/" DESTINATION "./lang_files/")
+if(CMAKE_CL_64)
+    install(DIRECTORY "3rdparty/sentry-native/bin64/" DESTINATION ".")
+else()
+    install(DIRECTORY "3rdparty/sentry-native/bin32/" DESTINATION ".")
+endif()
