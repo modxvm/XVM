@@ -13,8 +13,6 @@ package net.wg.infrastructure.base.meta
 
         function buyRentPromotionS(param1:int) : void;
 
-        function newYearVehiclesS() : void;
-
         function setFilterS(param1:int) : void;
 
         function updateHotFiltersS() : void;

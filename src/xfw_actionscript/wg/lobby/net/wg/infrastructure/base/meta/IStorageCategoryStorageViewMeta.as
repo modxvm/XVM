@@ -8,5 +8,7 @@ package net.wg.infrastructure.base.meta
         function onOpenTabS(param1:String) : void;
 
         function as_setTabsData(param1:Array) : void;
+
+        function as_setTabCounter(param1:int, param2:int) : void;
     }
 }

@@ -7,24 +7,24 @@ package net.wg.infrastructure.base.meta
 
         function setDialogSettingsS(param1:Boolean) : void;
 
-        function sellS(param1:Object, param2:Array, param3:Array, param4:Array, param5:Array, param6:Array, param7:Array, param8:Boolean) : void;
+        function sellS() : void;
 
         function setUserInputS(param1:String) : void;
 
-        function setResultCreditS(param1:Boolean, param2:int) : void;
+        function setCrewDismissalS(param1:Boolean) : void;
 
-        function checkControlQuestionS(param1:Boolean) : void;
-
-        function onChangeConfigurationS(param1:Array) : void;
+        function onSelectionChangedS(param1:int, param2:Boolean, param3:String) : void;
 
         function as_setData(param1:Object) : void;
-
-        function as_checkGold(param1:Number) : void;
 
         function as_visibleControlBlock(param1:Boolean) : void;
 
         function as_enableButton(param1:Boolean) : void;
 
         function as_setControlQuestionData(param1:Boolean, param2:String, param3:String) : void;
+
+        function as_setTotal(param1:int, param2:Object) : void;
+
+        function as_updateAccountMoney(param1:String, param2:int) : void;
     }
 }

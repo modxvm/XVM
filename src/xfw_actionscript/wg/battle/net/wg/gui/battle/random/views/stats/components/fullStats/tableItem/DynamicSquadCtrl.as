@@ -9,8 +9,10 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
     import flash.display.Sprite;
     import net.wg.gui.battle.random.views.stats.components.fullStats.interfaces.ISquadHandler;
     import net.wg.gui.battle.views.stats.SquadTooltip;
+    import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
     import net.wg.data.constants.InvalidationType;
     import net.wg.gui.battle.views.stats.constants.SquadInvalidationType;
+    import org.idmedia.as3commons.util.StringUtils;
     import net.wg.gui.battle.views.stats.constants.DynamicSquadState;
     import flash.events.MouseEvent;
     import net.wg.data.constants.generated.BATTLEATLAS;
@@ -61,6 +63,8 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
         private var _currentPlayerFakeName:String = null;
 
         private var _toolTipString:String = null;
+
+        private var _activePlayerData:DAAPIVehicleInfoVO = null;
 
         public function DynamicSquadCtrl(param1:SquadInviteStatusView, param2:BattleAtlasSprite, param3:BattleButton, param4:BattleButton, param5:Sprite, param6:BattleAtlasSprite = null)
         {
@@ -146,6 +150,11 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
             this._isEnemy = param1;
         }
 
+        public function setActivePlayerData(param1:DAAPIVehicleInfoVO) : void
+        {
+            this._activePlayerData = param1;
+        }
+
         public function setCurrentPlayerAnonymized() : void
         {
             this._isCurrentPlayerAnonymized = true;
@@ -158,7 +167,10 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
 
         private function makeTooltipString() : void
         {
-            this._toolTipString = this._isCurrentPlayerInClan?App.utils.locale.makeString(TOOLTIPS.ANONYMIZER_BATTLE_TEAMLIST_CLAN,{"fakeName":this._currentPlayerFakeName}):App.utils.locale.makeString(TOOLTIPS.ANONYMIZER_BATTLE_TEAMLIST_NOCLAN,{"fakeName":this._currentPlayerFakeName});
+            if(StringUtils.isNotEmpty(this._currentPlayerFakeName))
+            {
+                this._toolTipString = this._isCurrentPlayerInClan?App.utils.locale.makeString(TOOLTIPS.ANONYMIZER_BATTLE_TEAMLIST_CLAN,{"fakeName":this._currentPlayerFakeName}):App.utils.locale.makeString(TOOLTIPS.ANONYMIZER_BATTLE_TEAMLIST_NOCLAN,{"fakeName":this._currentPlayerFakeName});
+            }
         }
 
         public function setIsCurrentPlayerInClan(param1:Boolean) : void
@@ -252,6 +264,7 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
             this._isCurrentPlayerAnonymized = false;
             this._isCurrentPlayerInClan = false;
             this._currentPlayerFakeName = null;
+            this._activePlayerData = null;
             super.onDispose();
         }
 
@@ -262,7 +275,6 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
                 return;
             }
             this._isMouseOver = true;
-            this.updateAnonymizedTooltip();
             this.updateTooltip();
             this.updateSquadButtons();
             invalidate(SquadInvalidationType.ACTIVE_MOUSE_OVER);
@@ -275,7 +287,6 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
                 return;
             }
             this._isMouseOver = false;
-            this.updateAnonymizedTooltip();
             this.updateTooltip();
             this.updateSquadButtons();
             invalidate(SquadInvalidationType.ACTIVE_MOUSE_OVER);
@@ -374,29 +385,27 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
 
         private function updateTooltip() : void
         {
-            if(this._isInteractive && this._isMouseOver && this._state != DynamicSquadState.NONE)
+            if(this._isInteractive && this._isMouseOver && this._activePlayerData)
             {
-                this._tooltip.show(this._state,this._isEnemy,this._isCurrentPlayerAnonymized,this._isCurrentPlayerInClan);
+                if(this._state != DynamicSquadState.NONE)
+                {
+                    this._tooltip.show(this._state,this._isEnemy,this._activePlayerData.isAnonymized,StringUtils.isNotEmpty(this._activePlayerData.clanAbbrev));
+                }
+                if(this._state == DynamicSquadState.NONE && this._isCurrentPlayerAnonymized)
+                {
+                    if(!this._toolTipString)
+                    {
+                        this.makeTooltipString();
+                    }
+                    if(this._toolTipString)
+                    {
+                        App.toolTipMgr.show(this._toolTipString);
+                    }
+                }
             }
             else
             {
                 this._tooltip.hide();
-            }
-        }
-
-        private function updateAnonymizedTooltip() : void
-        {
-            if(this._isInteractive && this._isMouseOver && this._state == DynamicSquadState.NONE && this._isCurrentPlayerAnonymized)
-            {
-                if(!this._toolTipString)
-                {
-                    this.makeTooltipString();
-                }
-                App.toolTipMgr.show(this._toolTipString);
-            }
-            else
-            {
-                App.toolTipMgr.hide();
             }
         }
 

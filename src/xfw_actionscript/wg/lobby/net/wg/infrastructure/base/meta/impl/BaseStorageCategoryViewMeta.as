@@ -12,6 +12,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public var playInfoSound:Function;
 
+        public var scrolledToBottom:Function;
+
         private var _dummyVO:DummyVO;
 
         public function BaseStorageCategoryViewMeta()
@@ -39,6 +41,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.playInfoSound,"playInfoSound" + Errors.CANT_NULL);
             this.playInfoSound();
+        }
+
+        public function scrolledToBottomS() : void
+        {
+            App.utils.asserter.assertNotNull(this.scrolledToBottom,"scrolledToBottom" + Errors.CANT_NULL);
+            this.scrolledToBottom();
         }
 
         public final function as_showFilterWarning(param1:Object) : void

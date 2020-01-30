@@ -4,7 +4,7 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
     import net.wg.gui.components.controls.ResizableScrollPane;
     import flash.display.MovieClip;
     import net.wg.data.VO.SellDialogItem;
-    import net.wg.data.VO.SellDialogElement;
+    import net.wg.data.VO.SellDialogElementVO;
     import net.wg.gui.events.VehicleSellDialogEvent;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.gui.lobby.vehicleTradeWnds.sell.vo.SellOnVehicleOptionalDeviceVo;
@@ -45,13 +45,13 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
 
         override protected function onDispose() : void
         {
-            var _loc2_:SellDialogElement = null;
+            var _loc2_:SellDialogElementVO = null;
             this.sellDevicesScrollPane.removeEventListener(VehicleSellDialogEvent.SELL_DIALOG_LIST_ITEM_RENDERER_WAS_DRAWN,this.onSellDialogListItemRendererWasDrawn);
             this.sellDevicesScrollPane.dispose();
             this.sellDevicesScrollPane = null;
             this.complDevBg = null;
             this._content = null;
-            var _loc1_:Vector.<SellDialogElement> = this._complexDevicesArr.elements;
+            var _loc1_:Vector.<SellDialogElementVO> = this._complexDevicesArr.elements;
             for each(_loc2_ in _loc1_)
             {
                 _loc2_.dispose();
@@ -92,7 +92,7 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
 
         public function setData(param1:Vector.<SellOnVehicleOptionalDeviceVo>) : void
         {
-            var _loc6_:SellDialogElement = null;
+            var _loc6_:SellDialogElementVO = null;
             if(this._complexDevicesArr != null)
             {
                 this._complexDevicesArr.dispose();
@@ -105,14 +105,15 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
             while(_loc5_ < _loc3_)
             {
                 _loc4_ = param1[_loc5_];
-                _loc6_ = new SellDialogElement();
+                _loc6_ = new SellDialogElementVO();
                 _loc6_.id = _loc4_.userName;
                 _loc6_.type = FITTING_TYPES.OPTIONAL_DEVICE;
-                _loc6_.intCD = _loc4_.intCD;
+                _loc6_.itemIDList = [_loc4_.itemID];
                 _loc6_.count = _loc4_.count;
                 _loc6_.moneyValue = _loc4_.sellPrice[0];
                 _loc6_.sellActionPriceVo = _loc4_.actionVo;
                 _loc6_.removePrice = _loc4_.removePrice;
+                _loc6_.removeCurrency = _loc4_.removeCurrency;
                 _loc6_.isRemovable = _loc4_.isRemovable;
                 _loc6_.toInventory = _loc4_.toInventory;
                 _loc6_.onlyToInventory = _loc4_.onlyToInventory;

@@ -13,6 +13,8 @@ package net.wg.gui.components.tooltips.inblocks.data
 
         public var align:String = "";
 
+        public var stretchLast:Boolean = false;
+
         public function BuildUpBlockVO(param1:Object)
         {
             super(param1);
@@ -31,6 +33,11 @@ package net.wg.gui.components.tooltips.inblocks.data
         public function get blocks() : Vector.<BlockDataItemVO>
         {
             return blocksData;
+        }
+
+        public function get stretchLastElement() : Boolean
+        {
+            return this.stretchLast;
         }
     }
 }

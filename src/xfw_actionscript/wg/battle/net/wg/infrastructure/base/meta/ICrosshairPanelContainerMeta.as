@@ -47,7 +47,7 @@ package net.wg.infrastructure.base.meta
 
         function as_setNetType(param1:int) : void;
 
-        function as_autoloaderUpdate(param1:Number, param2:Number, param3:Boolean, param4:Boolean, param5:Boolean) : void;
+        function as_autoloaderUpdate(param1:Number, param2:Number, param3:Boolean, param4:Boolean, param5:Boolean, param6:Boolean) : void;
 
         function as_setAutoloaderReloading(param1:Number, param2:Number) : void;
 

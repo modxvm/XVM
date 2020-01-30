@@ -7,7 +7,7 @@ package net.wg.infrastructure.base.meta
 
         function onBuyOrResearchClickS() : void;
 
-        function onCarouselVehilceSelectedS(param1:int) : void;
+        function onCarouselVehicleSelectedS(param1:int) : void;
 
         function onOfferSelectedS(param1:String) : void;
 

@@ -94,7 +94,6 @@ package net.wg.gui.lobby.rankedBattles19.view.seasonComplete
             super.configUI();
             this._loader.contentLoaderInfo.addEventListener(Event.COMPLETE,this.onLoaderCompleteHandler);
             this.closeButton.label = VEHICLE_CUSTOMIZATION.CUSTOMIZATIONHEADER_CLOSE;
-            this.closeButton.tooltip = RANKED_BATTLES.TOOLTIP_CLOSEBUTTON;
             this.closeButton.addEventListener(ButtonEvent.CLICK,this.onCloseButtonClickHandler);
             this.closeButton.addEventListener(Event.RESIZE,this.onCloseButtonResizeHandler);
             this.closeButton.y = OFFSET_CLOSE_BUTTON;
@@ -253,12 +252,14 @@ package net.wg.gui.lobby.rankedBattles19.view.seasonComplete
         private function doData() : void
         {
             dispatchEvent(new SeasonCompleteEvent(SeasonCompleteEvent.START_INIT_DATA));
+            var _loc1_:* = this._seasonData.state == RANKEDBATTLES_ALIASES.SEASON_COMPLETE_VIEW_LEAGUE_STATE;
+            this.closeButton.tooltip = _loc1_?RANKED_BATTLES.TOOLTIP_CLOSEBUTTON:null;
             this.setBackground(this._seasonData.bgSource,true);
             this.seasonType.setType(this._seasonData.typeTitle,this._seasonData.typeIcon);
             this.title.label = this._seasonData.seasonTitle;
             this.nextButton.label = this._seasonData.btnLabel;
             this.disposeResultBlock();
-            this._resultBlock = App.utils.classFactory.getComponent(this._seasonData.state == RANKEDBATTLES_ALIASES.SEASON_COMPLETE_VIEW_LEAGUE_STATE?RESULT_BLOCK_LEAGUE_LINKAGE:RESULT_BLOCK_DIVISION_LINKAGE,SeasonBaseResultBlock);
+            this._resultBlock = App.utils.classFactory.getComponent(_loc1_?RESULT_BLOCK_LEAGUE_LINKAGE:RESULT_BLOCK_DIVISION_LINKAGE,SeasonBaseResultBlock);
             addChildAt(this._resultBlock,1);
             this._resultBlock.addEventListener(SeasonCompleteEvent.RESULT_BLOCK_READY,this.onCmpResultBlockReadyHandler);
             this._resultBlock.setData(this._seasonData);

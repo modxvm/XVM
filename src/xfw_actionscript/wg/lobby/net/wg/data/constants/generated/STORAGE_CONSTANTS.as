@@ -21,6 +21,8 @@ package net.wg.data.constants.generated
 
         public static const STORAGE_REGULAR_ITEMS_TAB:String = "RegularItemsTabViewUI";
 
+        public static const STORAGE_CONSUMABLES_TAB:String = "ConsumablesTabViewUI";
+
         public static const STORAGE_MODULES_TAB:String = "ModulesTabViewUI";
 
         public static const STORAGE_SHELLS_TAB:String = "ShellsTabViewUI";

@@ -24,7 +24,6 @@ package net.wg.gui.lobby
     import net.wg.data.Aliases;
     import net.wg.data.constants.Linkages;
     import net.wg.data.constants.generated.APP_CONTAINERS_NAMES;
-    import net.wg.gui.lobby.hangar.CrewDropDownEvent;
     import net.wg.gui.lobby.settings.config.ControlsFactory;
     import net.wg.data.constants.DragType;
     import flash.geom.Point;
@@ -196,14 +195,12 @@ package net.wg.gui.lobby
             this.subTopContainer = this.addSubContainer(APP_CONTAINERS_NAMES.TOP_SUB_VIEW,SUB_TOP_CONTAINER_ZINDEX);
             this.subViewContainer.manageSize = false;
             this.subTopContainer.manageSize = false;
-            addEventListener(CrewDropDownEvent.SHOW_DROP_DOWN,this.onHangarShowDropDownHandler);
         }
 
         override protected function onDispose() : void
         {
             App.stage.removeEventListener(LobbyEvent.REGISTER_DRAGGING,this.onRegisterDraggingHandler);
             App.stage.removeEventListener(LobbyEvent.UNREGISTER_DRAGGING,this.onUnregisterDraggingHandler);
-            removeEventListener(CrewDropDownEvent.SHOW_DROP_DOWN,this.onHangarShowDropDownHandler);
             removeEventListener(TeaserEvent.HIDE,this.onTeaserHideHandler,true);
             removeChild(this.notificationPopupViewer);
             this.vehicleHitArea.hit.removeEventListener(MouseEvent.MOUSE_WHEEL,this.onHitAreaMouseWheelHandler);
@@ -396,28 +393,6 @@ package net.wg.gui.lobby
         private function onUnregisterDraggingHandler(param1:LobbyEvent) : void
         {
             this.unregisterDragging();
-        }
-
-        public function as_switchLobbyDragging(param1:Boolean) : void
-        {
-            if(param1)
-            {
-                this.unregisterDragging();
-                this.registerDraging();
-            }
-            else
-            {
-                this.unregisterDragging();
-            }
-        }
-
-        private function onHangarShowDropDownHandler(param1:CrewDropDownEvent) : void
-        {
-            var _loc2_:DisplayObject = param1.dropDownref;
-            var _loc3_:Point = globalToLocal(new Point(_loc2_.x,_loc2_.y));
-            addChild(_loc2_);
-            _loc2_.x = _loc3_.x;
-            _loc2_.y = _loc3_.y;
         }
     }
 }

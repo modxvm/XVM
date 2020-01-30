@@ -86,9 +86,5 @@ package net.wg.infrastructure.base.meta
         function as_hideMenu(param1:Boolean) : void;
 
         function as_toggleVisibilityMenu(param1:uint) : void;
-
-        function as_updateNYVisibility(param1:Boolean, param2:Boolean, param3:Boolean) : void;
-
-        function as_showOrHideNyWidget(param1:Boolean) : void;
     }
 }

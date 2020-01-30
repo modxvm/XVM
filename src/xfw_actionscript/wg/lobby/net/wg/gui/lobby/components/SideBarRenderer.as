@@ -6,6 +6,7 @@ package net.wg.gui.lobby.components
     import flash.events.MouseEvent;
     import scaleform.clik.constants.InvalidationType;
     import flash.display.DisplayObject;
+    import flash.geom.Rectangle;
     import net.wg.data.constants.SoundTypes;
 
     public class SideBarRenderer extends SoundListItemRenderer
@@ -117,6 +118,15 @@ package net.wg.gui.lobby.components
         private function onMouseRollOutHandler(param1:MouseEvent) : void
         {
             this.hideTooltip();
+        }
+
+        override public function getBounds(param1:DisplayObject) : Rectangle
+        {
+            if(hitArea != null)
+            {
+                return hitArea.getBounds(param1);
+            }
+            return super.getBounds(param1);
         }
     }
 }

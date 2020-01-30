@@ -123,6 +123,8 @@ package net.wg.data.constants
 
         public static const QUEST_BIG_ICON_AWARD_ITEM_LINKAGE:String = "QuestBigIconAwardItemUI";
 
+        public static const EQUIPMENT_SLOT_UI:String = "EquipmentSlotUI";
+
         public static const INVITES_FRIENDS:String = "FriendsListFromUI";
 
         public static const INVITES_CLAN:String = "ClanMembersListFromUI";
@@ -556,6 +558,8 @@ package net.wg.data.constants
         public static const COUNTER_UI:String = "CounterUI";
 
         public static const COUNTER_LINE_UI:String = "NewCounterLineUI";
+
+        public static const COUNTER_DOUBLE_LINE_BIG_UI:String = "NewCounterDoubleLineBigUI";
 
         public static const COUNTER_LINE_BIG_UI:String = "NewCounterLineBigUI";
 

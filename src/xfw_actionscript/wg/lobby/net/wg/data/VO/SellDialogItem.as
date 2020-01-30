@@ -5,14 +5,14 @@ package net.wg.data.VO
     public class SellDialogItem extends Object implements IDisposable
     {
 
-        private var _elements:Vector.<SellDialogElement>;
+        private var _elements:Vector.<SellDialogElementVO>;
 
         private var _header:String;
 
         public function SellDialogItem()
         {
             super();
-            this._elements = new Vector.<SellDialogElement>();
+            this._elements = new Vector.<SellDialogElementVO>();
         }
 
         public final function dispose() : void
@@ -31,12 +31,12 @@ package net.wg.data.VO
             this._header = param1;
         }
 
-        public function get elements() : Vector.<SellDialogElement>
+        public function get elements() : Vector.<SellDialogElementVO>
         {
             return this._elements;
         }
 
-        public function set elements(param1:Vector.<SellDialogElement>) : void
+        public function set elements(param1:Vector.<SellDialogElementVO>) : void
         {
             this._elements = param1;
         }

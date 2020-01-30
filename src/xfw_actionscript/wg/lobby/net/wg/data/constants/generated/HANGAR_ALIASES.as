@@ -9,6 +9,8 @@ package net.wg.data.constants.generated
 
         public static const EPICBATTLE_TANK_CAROUSEL:String = "epicBattleTankCarousel";
 
+        public static const BOB_TANK_CAROUSEL:String = "bobTankCarousel";
+
         public static const CREW:String = "crew";
 
         public static const AMMUNITION_PANEL:String = "ammunitionPanel";
@@ -33,6 +35,8 @@ package net.wg.data.constants.generated
 
         public static const EPIC_PRIME_TIME:String = "epicPrimeTime.swf";
 
+        public static const BOB_PRIME_TIME:String = "rankedPrimeTime.swf";
+
         public static const TANK_CAROUSEL_UI:String = "TankCarouselUI";
 
         public static const VEH_PARAM_RENDERER_STATE_SIMPLE_TOP:String = "simpleTop";
@@ -43,11 +47,11 @@ package net.wg.data.constants.generated
 
         public static const VEH_PARAM_RENDERER_STATE_SEPARATOR:String = "separator";
 
-        public static const NY_MAIN_WIDGET_UI:String = "NYMainWidgetUI";
-
-        public static const LOOTBOXES_ENTRANCE_POINT:String = "lootboxesEntrancePoint";
-
         public static const PROGRESSIVE_REWARD_WIDGET:String = "progressiveRewardWdgt";
+
+        public static const BOB_WIDGET:String = "bobWdgt";
+
+        public static const BOB_ANNOUNCEMENT_WIDGET:String = "bobAnnouncement";
 
         public function HANGAR_ALIASES()
         {

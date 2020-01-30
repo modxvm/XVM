@@ -7,6 +7,9 @@ package net.wg.gui.lobby.storage
     import net.wg.gui.components.advanced.ViewStackEx;
     import net.wg.gui.lobby.storage.categories.NoItemsView;
     import flash.display.Sprite;
+    import net.wg.utils.IUtils;
+    import net.wg.utils.ICounterManager;
+    import net.wg.utils.ICounterProps;
     import flash.display.Graphics;
     import net.wg.gui.events.ViewStackEvent;
     import flash.events.Event;
@@ -15,18 +18,33 @@ package net.wg.gui.lobby.storage
     import net.wg.gui.lobby.storage.data.StorageVO;
     import net.wg.utils.StageSizeBoundaries;
     import net.wg.data.constants.Linkages;
+    import net.wg.infrastructure.managers.counter.CounterProps;
     import net.wg.infrastructure.interfaces.IDAAPIModule;
+    import scaleform.clik.controls.Button;
+    import net.wg.data.constants.Errors;
 
     public class StorageView extends StorageViewMeta implements IStorageViewMeta, IStageSizeDependComponent
     {
+
+        public static var COUNTER_CONTAINER_ID:String = "StorageViewCountersContainer";
 
         private static const HIT_AREA_NAME:String = "hitArea";
 
         private static const MENU_SIZE_FLAG:String = "menuSizeFlag";
 
+        private static const SIDE_BAR_COUNTER:String = "sideBarCounter";
+
         private static const SMALL_CONTENT_V_OFFSET:int = 66;
 
-        private static const BIG_CONTENT_V_OFFSET:int = 88;
+        private static const NORMAL_CONTENT_V_OFFSET:int = 88;
+
+        public static const COUNTER_SMALL_OFFSET_X:int = -9;
+
+        public static const COUNTER_SMALL_OFFSET_Y:int = 12;
+
+        public static const COUNTER_NORMAL_OFFSET_X:int = -12;
+
+        public static const COUNTER_NORMAL_OFFSET_Y:int = 14;
 
         public var menu:SideBar;
 
@@ -36,9 +54,20 @@ package net.wg.gui.lobby.storage
 
         private var _hitArea:Sprite;
 
+        private var _utils:IUtils = null;
+
+        private var _counterManager:ICounterManager = null;
+
+        private var _sidebarCounter:Object;
+
+        private var _sideBarCounterProps:ICounterProps;
+
         public function StorageView()
         {
+            this._sidebarCounter = {};
             super();
+            this._utils = App.utils;
+            this._counterManager = this._utils.counterManager;
         }
 
         override public function updateStage(param1:Number, param2:Number) : void
@@ -76,6 +105,12 @@ package net.wg.gui.lobby.storage
             this.noItemsView.removeEventListener(Event.CLOSE,this.onNoItemViewCloseHandler);
             this.noItemsView.dispose();
             this.noItemsView = null;
+            App.utils.data.cleanupDynamicObject(this._sidebarCounter);
+            this._sidebarCounter = null;
+            this._sideBarCounterProps = null;
+            this._counterManager.disposeCountersForContainer(COUNTER_CONTAINER_ID);
+            this._counterManager = null;
+            this._utils = null;
             super.onDispose();
         }
 
@@ -89,6 +124,11 @@ package net.wg.gui.lobby.storage
                 this.noItemsView.validateNow();
                 this.noItemsView.y = height - this.noItemsView.actualHeight >> 1;
                 invalidate(MENU_SIZE_FLAG);
+            }
+            if(isInvalid(SIDE_BAR_COUNTER))
+            {
+                this.menu.validateNow();
+                this.updateCounters();
             }
             if(this.content.currentView && isInvalid(MENU_SIZE_FLAG))
             {
@@ -135,16 +175,20 @@ package net.wg.gui.lobby.storage
 
         public function setStateSizeBoundaries(param1:int, param2:int) : void
         {
+            this.updateCounters(true);
             if(param1 == StageSizeBoundaries.WIDTH_1024)
             {
                 this.menu.y = this.content.y = SMALL_CONTENT_V_OFFSET;
                 this.menu.itemRendererName = Linkages.SIDE_BAR_SMALL_RENDERER;
+                this._sideBarCounterProps = new CounterProps(COUNTER_SMALL_OFFSET_X,COUNTER_SMALL_OFFSET_Y);
             }
             else
             {
-                this.menu.y = this.content.y = BIG_CONTENT_V_OFFSET;
+                this.menu.y = this.content.y = NORMAL_CONTENT_V_OFFSET;
                 this.menu.itemRendererName = Linkages.SIDE_BAR_NORMAL_RENDERER;
+                this._sideBarCounterProps = new CounterProps(COUNTER_NORMAL_OFFSET_X,COUNTER_NORMAL_OFFSET_Y);
             }
+            invalidate(SIDE_BAR_COUNTER);
         }
 
         private function onContentNeedUpdateHandler(param1:ViewStackEvent) : void
@@ -162,6 +206,30 @@ package net.wg.gui.lobby.storage
         private function onNoItemViewCloseHandler(param1:Event) : void
         {
             navigateToHangarS();
+        }
+
+        public function as_setButtonCounter(param1:int, param2:int) : void
+        {
+            this._sidebarCounter[param1] = param2;
+            invalidate(SIDE_BAR_COUNTER);
+        }
+
+        private function updateCounters(param1:Boolean = false) : void
+        {
+            var _loc2_:* = 0;
+            var _loc3_:Button = null;
+            var _loc4_:String = null;
+            for(_loc4_ in this._sidebarCounter)
+            {
+                _loc2_ = this._sidebarCounter[_loc4_];
+                _loc3_ = this.menu.getButtonAt(int(_loc4_));
+                this._utils.asserter.assertNotNull(_loc3_,"SideBar sectionIdx: " + _loc4_ + Errors.WASNT_FOUND);
+                this._counterManager.removeCounter(_loc3_,COUNTER_CONTAINER_ID);
+                if(!param1 && _loc2_ > 0)
+                {
+                    this._counterManager.setCounter(_loc3_,String(_loc2_),COUNTER_CONTAINER_ID,this._sideBarCounterProps);
+                }
+            }
         }
     }
 }

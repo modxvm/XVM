@@ -65,8 +65,6 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
 
         private var _tankCrystalPrice:Number = 0;
 
-        private var _creditsCommon:Number = 0;
-
         private var _crewTooltip:String;
 
         private var _sellData:SellVehicleVo;
@@ -214,7 +212,6 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
                 {
                     this._tankPrice = param1.sellPrice[CURRENCIES_CONSTANTS.CREDITS_INDEX];
                     this._tankGoldPrice = 0;
-                    this.creditsCommon = this.creditsCommon + this.tankPrice;
                 }
                 if(param1.sellPrice[CURRENCIES_CONSTANTS.CRYSTAL_INDEX] > 0)
                 {
@@ -259,16 +256,6 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
         public function get tankPrice() : Number
         {
             return this._tankPrice;
-        }
-
-        public function get creditsCommon() : Number
-        {
-            return this._creditsCommon;
-        }
-
-        public function set creditsCommon(param1:Number) : void
-        {
-            this._creditsCommon = param1;
         }
 
         private function onNationGroupTFRollOutHandler(param1:MouseEvent) : void

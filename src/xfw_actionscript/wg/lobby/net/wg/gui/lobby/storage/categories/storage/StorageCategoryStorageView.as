@@ -4,9 +4,13 @@ package net.wg.gui.lobby.storage.categories.storage
     import net.wg.infrastructure.base.meta.IStorageCategoryStorageViewMeta;
     import net.wg.infrastructure.interfaces.IViewStackExContent;
     import net.wg.gui.lobby.storage.categories.ICategory;
+    import net.wg.utils.ICounterProps;
+    import net.wg.infrastructure.managers.counter.CounterProps;
     import flash.text.TextField;
     import net.wg.gui.components.controls.tabs.OrangeTabMenu;
     import net.wg.gui.components.advanced.ViewStackEx;
+    import net.wg.utils.IUtils;
+    import net.wg.utils.ICounterManager;
     import flash.display.Sprite;
     import net.wg.gui.events.ViewStackEvent;
     import scaleform.clik.events.IndexEvent;
@@ -16,9 +20,17 @@ package net.wg.gui.lobby.storage.categories.storage
     import flash.display.InteractiveObject;
     import net.wg.gui.components.controls.tabs.OrangeTabsMenuVO;
     import net.wg.infrastructure.interfaces.IDAAPIModule;
+    import scaleform.clik.controls.Button;
+    import net.wg.data.constants.Errors;
 
     public class StorageCategoryStorageView extends StorageCategoryStorageViewMeta implements IStorageCategoryStorageViewMeta, IViewStackExContent, ICategory
     {
+
+        public static var COUNTER_CONTAINER_ID:String = "StorageCategoryStorageViewContainer";
+
+        private static const SIDE_BAR_COUNTER:String = "sideBarCounter";
+
+        private static var _counterProps:ICounterProps = new CounterProps(-30,5);
 
         public var title:TextField;
 
@@ -26,11 +38,20 @@ package net.wg.gui.lobby.storage.categories.storage
 
         public var content:ViewStackEx;
 
+        private var _utils:IUtils = null;
+
+        private var _counterManager:ICounterManager = null;
+
+        private var _tabCounters:Object;
+
         private var _hitArea:Sprite;
 
         public function StorageCategoryStorageView()
         {
+            this._tabCounters = {};
             super();
+            this._utils = App.utils;
+            this._counterManager = this._utils.counterManager;
         }
 
         override public function setSize(param1:Number, param2:Number) : void
@@ -43,6 +64,11 @@ package net.wg.gui.lobby.storage.categories.storage
 
         override protected function onDispose() : void
         {
+            App.utils.data.cleanupDynamicObject(this._tabCounters);
+            this._tabCounters = null;
+            this._utils = null;
+            this._counterManager.disposeCountersForContainer(COUNTER_CONTAINER_ID);
+            this._counterManager = null;
             this.content.removeEventListener(ViewStackEvent.NEED_UPDATE,this.onContentNeedUpdateHandler);
             this.content.dispose();
             this.content = null;
@@ -78,6 +104,10 @@ package net.wg.gui.lobby.storage.categories.storage
             {
                 _loc1_ = ICategory(this.content.currentView);
                 this.title.x = this.tabButtonBar.x = width - _loc1_.contentWidth >> 1;
+            }
+            if(isInvalid(SIDE_BAR_COUNTER))
+            {
+                this.updateCounters();
             }
         }
 
@@ -131,6 +161,31 @@ package net.wg.gui.lobby.storage.categories.storage
                 ICategory(param1.view).setHitArea(this._hitArea);
             }
             registerFlashComponentS(IDAAPIModule(param1.view),param1.viewId);
+        }
+
+        public function as_setTabCounter(param1:int, param2:int) : void
+        {
+            this._tabCounters[param1] = param2;
+            invalidate(SIDE_BAR_COUNTER);
+        }
+
+        private function updateCounters() : void
+        {
+            var _loc1_:* = 0;
+            var _loc2_:Button = null;
+            var _loc3_:String = null;
+            this.tabButtonBar.validateNow();
+            for(_loc3_ in this._tabCounters)
+            {
+                _loc1_ = this._tabCounters[_loc3_];
+                _loc2_ = this.tabButtonBar.getButtonAt(int(_loc3_));
+                this._utils.asserter.assertNotNull(_loc2_,"tabButtonBar sectionIdx: " + _loc3_ + Errors.WASNT_FOUND);
+                this._counterManager.removeCounter(_loc2_,COUNTER_CONTAINER_ID);
+                if(_loc1_ > 0)
+                {
+                    this._counterManager.setCounter(_loc2_,String(_loc1_),COUNTER_CONTAINER_ID,_counterProps);
+                }
+            }
         }
     }
 }

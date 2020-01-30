@@ -123,6 +123,10 @@ package net.wg.data.constants.generated
 
         public static const SHOP_20_CREW_BUNDLE:String = "shop20CrewBundle";
 
+        public static const AWARD_DEMOUNT_KIT:String = "awardDemountKit";
+
+        public static const NOT_ENOUGH_MONEY:String = "notEnoughMoney";
+
         public static const TANKMAN_SKILL:String = "tankmanSkill";
 
         public static const TANKMAN_NEW_SKILL:String = "tankmanNewSkill";
@@ -341,12 +345,6 @@ package net.wg.data.constants.generated
 
         public static const SQUAD_BONUS:String = "squadBonus";
 
-        public static const NY_CREDIT_BONUS:String = "nyTotalCreditBonus";
-
-        public static const NY_FILLERS:String = "nyFillers";
-
-        public static const NY_VEHICLE_BONUS:String = "nyVehicleBonus";
-
         public static const SINGAPORE_WALLET_STATS:String = "Stats";
 
         public static const GOLD_STATS:String = "goldStats";
@@ -358,6 +356,8 @@ package net.wg.data.constants.generated
         public static const CREDITS_INFO:String = "creditsInfo";
 
         public static const GOLD_INFO:String = "goldInfo";
+
+        public static const GOLD_ALTERNATIVE_INFO:String = "goldAlternativeInfo";
 
         public static const FREEXP_INFO:String = "freeXPInfo";
 
@@ -406,6 +406,10 @@ package net.wg.data.constants.generated
         public static const BLUEPRINT_FRAGMENT_INFO:String = "blueprintFragmentInfo";
 
         public static const BLUEPRINT_EMPTY_SLOT_INFO:String = "blueprintEmptySlotInfo";
+
+        public static const BOB_SELECTOR_INFO:String = "bobSelectorInfo";
+
+        public static const BOB_SERVER_PRIMETIME:String = "bobServerPrimeTime";
 
         public static const BLOCKS_DEFAULT_UI:String = "ToolTipInblocksDefaultUI";
 
@@ -581,7 +585,7 @@ package net.wg.data.constants.generated
 
         public static const BOOSTERS_SET:Array = [INVENTORY_BATTLE_BOOSTER,AWARD_BATTLE_BOOSTER,EPIC_AWARD_BATTLE_BOOSTER,BATTLE_BOOSTER,SHOP_BATTLE_BOOSTER,SHOP_20_BATTLE_BOOSTER,BATTLE_BOOSTER_COMPARE,BOOSTERS_BOOSTER_INFO,CLAN_RESERVE_INFO,BOOSTERS_SHOP,SHOP_20_BOOSTER,BOOSTERS_QUESTS,NATION_CHANGE_BATTLE_BOOSTER];
 
-        public static const COMMON_SET:Array = [EFFICIENCY_PARAM,IGR_INFO,CONTACT,SORTIE_DIVISION,MAP,MAP_SMALL,CLAN_COMMON_INFO,ACTION_PRICE,ACTION_SLOT_PRICE,PRICE_DISCOUNT,FRONTLINE_PRICE_DISCOUNT,ACTION_XP,QUESTS_VEHICLE_BONUSES,ENVIRONMENT,SQUAD_RESTRICTIONS_INFO,MISSIONS_TOKEN,RESERVE_MODULE,CRYSTAL_INFO,CREDITS_INFO,GOLD_INFO,FREEXP_INFO,VEHICLE_FILTER,RSS_NEWS,VEHICLE_ELITE_BONUS,VEHICLE_HISTORICAL_REFERENCE,BATTLE_TRAINING,SQUAD_BONUS,NY_CREDIT_BONUS,NY_FILLERS,NY_VEHICLE_BONUS];
+        public static const COMMON_SET:Array = [EFFICIENCY_PARAM,IGR_INFO,CONTACT,SORTIE_DIVISION,MAP,MAP_SMALL,CLAN_COMMON_INFO,ACTION_PRICE,ACTION_SLOT_PRICE,PRICE_DISCOUNT,FRONTLINE_PRICE_DISCOUNT,ACTION_XP,QUESTS_VEHICLE_BONUSES,ENVIRONMENT,SQUAD_RESTRICTIONS_INFO,MISSIONS_TOKEN,RESERVE_MODULE,CRYSTAL_INFO,CREDITS_INFO,GOLD_INFO,FREEXP_INFO,VEHICLE_FILTER,RSS_NEWS,VEHICLE_ELITE_BONUS,VEHICLE_HISTORICAL_REFERENCE,BATTLE_TRAINING,SQUAD_BONUS];
 
         public static const CUSTOMIZATION_SET:Array = [TECH_CUSTOMIZATION_ITEM,TECH_CUSTOMIZATION_HISTORIC_ITEM,TECH_CUSTOMIZATION_ITEM_ICON,TECH_CUSTOMIZATION_ITEM_AWARD,TECH_CUSTOMIZATION_ITEM_PURCHASE,SHOP_20_CUSTOMIZATION_ITEM];
 
@@ -628,6 +632,10 @@ package net.wg.data.constants.generated
         public static const SESSION_STATS_SET:Array = [SESSION_STATS_TANK_INFO,SESSION_STATS_EFFICIENCY_PARAM];
 
         public static const TRADE_IN_SET:Array = [TRADE_IN_INFO,TRADE_IN_INFO_NOT_AVAILABLE,TRADE_IN_STATE_NOT_AVAILABLE];
+
+        public static const DEMOUNT_KIT_SET:Array = [AWARD_DEMOUNT_KIT,GOLD_ALTERNATIVE_INFO,NOT_ENOUGH_MONEY];
+
+        public static const BOB_SET:Array = [BOB_SELECTOR_INFO,BOB_SERVER_PRIMETIME];
 
         public function TOOLTIPS_CONSTANTS()
         {

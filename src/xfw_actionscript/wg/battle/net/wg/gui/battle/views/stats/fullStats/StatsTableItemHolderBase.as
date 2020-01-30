@@ -15,7 +15,7 @@ package net.wg.gui.battle.views.stats.fullStats
 
         protected var data:DAAPIVehicleInfoVO = null;
 
-        protected var currentPlayerData:DAAPIVehicleInfoVO = null;
+        protected var activePlayerData:DAAPIVehicleInfoVO = null;
 
         protected var _isCurrPlayer:Boolean = false;
 
@@ -46,9 +46,9 @@ package net.wg.gui.battle.views.stats.fullStats
             }
         }
 
-        public function setCurrentPlayerData(param1:DAAPIVehicleInfoVO) : void
+        public function setActivePlayerData(param1:DAAPIVehicleInfoVO) : void
         {
-            this.currentPlayerData = param1;
+            this.activePlayerData = param1;
             if(this._isRenderingAvailable)
             {
                 this.vehicleDataSync();

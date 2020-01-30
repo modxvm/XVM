@@ -32,6 +32,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
 
         public var equipSlotOverlay:MovieClip = null;
 
+        public var background:MovieClip = null;
+
         public function EquipmentSlot()
         {
             super();
@@ -58,6 +60,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this.equipSlotHighlight = null;
             this.countTF = null;
             this.equipSlotOverlay = null;
+            this.background = null;
             super.onDispose();
         }
 

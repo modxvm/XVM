@@ -3,10 +3,14 @@ package net.wg.gui.bootcamp
     import net.wg.infrastructure.base.meta.impl.BCBattlePageMeta;
     import net.wg.infrastructure.base.meta.IBCBattlePageMeta;
     import net.wg.gui.bootcamp.battleTopHint.BCBattleTopHint;
+    import net.wg.gui.bootcamp.controls.BCAppearHint;
+    import net.wg.gui.bootcamp.controls.BCCirclesHint;
     import net.wg.data.constants.generated.BATTLE_VIEW_ALIASES;
     import net.wg.gui.bootcamp.events.BootcampBattleEvent;
+    import net.wg.gui.bootcamp.events.AppearEvent;
     import flash.display.Stage;
     import net.wg.gui.bootcamp.prebattleHints.BCPrebattleHints;
+    import net.wg.gui.battle.views.minimap.events.MinimapEvent;
 
     public class BCBattlePage extends BCBattlePageMeta implements IBCBattlePageMeta
     {
@@ -18,6 +22,10 @@ package net.wg.gui.bootcamp
         public var secondaryHint:BCSecondaryHint;
 
         public var battleTopHint:BCBattleTopHint;
+
+        private var _appearHint:BCAppearHint = null;
+
+        private var _circlesHint:BCCirclesHint = null;
 
         public function BCBattlePage()
         {
@@ -48,6 +56,8 @@ package net.wg.gui.bootcamp
         {
             super.configUI();
             stage.addEventListener(BootcampBattleEvent.PREBATTLE_CREATED,this.onStagePrebattleCreatedHandler);
+            stage.addEventListener(AppearEvent.PREPARE,this.onStageAppearHintCreatedHandler);
+            stage.addEventListener(AppearEvent.PREPARE_MINIMAP,this.onStageCirclesHintCreatedHandler);
         }
 
         override protected function onDispose() : void
@@ -56,6 +66,8 @@ package net.wg.gui.bootcamp
             this.battleTopHint = null;
             var _loc1_:Stage = App.stage;
             _loc1_.removeEventListener(BootcampBattleEvent.PREBATTLE_CREATED,this.onStagePrebattleCreatedHandler);
+            _loc1_.removeEventListener(AppearEvent.PREPARE,this.onStageAppearHintCreatedHandler);
+            _loc1_.removeEventListener(AppearEvent.PREPARE_MINIMAP,this.onStageCirclesHintCreatedHandler);
             super.onDispose();
         }
 
@@ -69,6 +81,36 @@ package net.wg.gui.bootcamp
             var _loc2_:BCPrebattleHints = BCPrebattleHints(param1.target);
             _loc2_.setMinimapComponent(minimap);
             _loc2_.setBattleTickerComponent(battleTicker);
+        }
+
+        private function setMinimapHintsVisible() : void
+        {
+            if(this._appearHint)
+            {
+                this._appearHint.visible = minimap.visible;
+            }
+            if(this._circlesHint)
+            {
+                this._circlesHint.visible = minimap.visible;
+            }
+        }
+
+        private function onStageAppearHintCreatedHandler(param1:AppearEvent) : void
+        {
+            this._appearHint = BCAppearHint(param1.target);
+            this.setMinimapHintsVisible();
+        }
+
+        private function onStageCirclesHintCreatedHandler(param1:AppearEvent) : void
+        {
+            this._circlesHint = BCCirclesHint(param1.target);
+            this.setMinimapHintsVisible();
+        }
+
+        override protected function onMiniMapChangeHandler(param1:MinimapEvent) : void
+        {
+            super.onMiniMapChangeHandler(param1);
+            this.setMinimapHintsVisible();
         }
     }
 }

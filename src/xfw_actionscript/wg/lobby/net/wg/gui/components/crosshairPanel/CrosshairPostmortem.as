@@ -19,7 +19,7 @@ package net.wg.gui.components.crosshairPanel
         {
         }
 
-        public function autoloaderUpdate(param1:Number, param2:Number, param3:Boolean) : void
+        public function autoloaderUpdate(param1:Number, param2:Number, param3:Boolean, param4:Boolean) : void
         {
         }
 

@@ -10,8 +10,6 @@ package net.wg.gui.lobby.vehiclePreview20.data
 
         private static const COMPENSATION_FIELD_NAME:String = "compensation";
 
-        private static const CUSTOM_OFFER_FIELD_NAME:String = "customOffer";
-
         public var setTitle:String = "";
 
         public var uniqueVehicleTitle:String = "";
@@ -23,6 +21,10 @@ package net.wg.gui.lobby.vehiclePreview20.data
         public var buyButtonEnabled:Boolean = false;
 
         public var buyButtonLabel:String = "";
+
+        public var buyButtonIcon:String = "";
+
+        public var buyButtonIconAlign:String = "";
 
         public var buyButtonTooltip:String = "";
 
@@ -46,7 +48,7 @@ package net.wg.gui.lobby.vehiclePreview20.data
 
         public var vehicleId:Number = -1;
 
-        public var customOffer:VPCustomOfferVO = null;
+        public var customOffer:String = "";
 
         public function VPBuyingPanelVO(param1:Object)
         {
@@ -65,21 +67,11 @@ package net.wg.gui.lobby.vehiclePreview20.data
                 this.compensation = new VPCompensationVO(param2);
                 return false;
             }
-            if(param1 == CUSTOM_OFFER_FIELD_NAME && param2)
-            {
-                this.customOffer = new VPCustomOfferVO(param2);
-                return false;
-            }
             return super.onDataWrite(param1,param2);
         }
 
         override protected function onDispose() : void
         {
-            if(this.customOffer != null)
-            {
-                this.customOffer.dispose();
-                this.customOffer = null;
-            }
             if(this.compensation != null)
             {
                 this.compensation.dispose();

@@ -25,6 +25,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.data.constants.generated.ACTION_PRICE_CONSTANTS;
     import net.wg.data.constants.generated.AWARDWINDOW_CONSTANTS;
     import net.wg.data.constants.generated.BARRACKS_CONSTANTS;
+    import net.wg.data.constants.generated.BATTLE_OF_BLOGGERS_ALIASES;
     import net.wg.data.constants.generated.BATTLE_RESULTS_PREMIUM_STATES;
     import net.wg.data.constants.generated.BATTLE_RESULT_TYPES;
     import net.wg.data.constants.generated.BOOSTER_CONSTANTS;
@@ -101,7 +102,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.data.VO.ILditInfo;
     import net.wg.data.VO.PointVO;
     import net.wg.data.VO.ProgressElementVO;
-    import net.wg.data.VO.SellDialogElement;
+    import net.wg.data.VO.SellDialogElementVO;
     import net.wg.data.VO.SellDialogItem;
     import net.wg.data.VO.ShopNationFilterDataVo;
     import net.wg.data.VO.ShopSubFilterData;
@@ -169,6 +170,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.bootcamp.questsView.data.BCQuestsViewVO;
     import net.wg.gui.bootcamp.queueWindow.BCQueueWindow;
     import net.wg.gui.bootcamp.queueWindow.data.BCQueueVO;
+    import net.wg.gui.components.UnboundComponent;
     import net.wg.gui.components.advanced.Accordion;
     import net.wg.gui.components.advanced.AdvancedLineDescrIconText;
     import net.wg.gui.components.advanced.AmmunitionButton;
@@ -558,6 +560,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.data.ButtonBarItemVO;
     import net.wg.gui.data.CrystalsPromoWindowVO;
     import net.wg.gui.data.DataClassItemVO;
+    import net.wg.gui.data.DemountKitInfoVO;
     import net.wg.gui.data.MissionAwardWindowVO;
     import net.wg.gui.data.TabDataVO;
     import net.wg.gui.data.TabsVO;
@@ -724,6 +727,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.battleResults.progressReport.BattleResultUnlockItemVO;
     import net.wg.gui.lobby.battleResults.progressReport.ProgressReportLinkageSelector;
     import net.wg.gui.lobby.battleResults.progressReport.UnlockLinkEvent;
+    import net.wg.gui.lobby.bob.HangarComponentsContainer;
     import net.wg.gui.lobby.boosters.BoostersTableRenderer;
     import net.wg.gui.lobby.boosters.components.BoostersWindowFilters;
     import net.wg.gui.lobby.boosters.data.BoostersTableRendererVO;
@@ -1159,8 +1163,6 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.hangar.CrewDropDownEvent;
     import net.wg.gui.lobby.hangar.Hangar;
     import net.wg.gui.lobby.hangar.HangarHeader;
-    import net.wg.gui.lobby.hangar.LootboxesEntrancePointWidget;
-    import net.wg.gui.lobby.hangar.NYCreditBonus;
     import net.wg.gui.lobby.hangar.ResearchPanel;
     import net.wg.gui.lobby.hangar.SwitchModePanel;
     import net.wg.gui.lobby.hangar.TmenXpPanel;
@@ -1171,6 +1173,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.hangar.ammunitionPanel.BattleAbilitySlot;
     import net.wg.gui.lobby.hangar.ammunitionPanel.EquipmentSlot;
     import net.wg.gui.lobby.hangar.ammunitionPanel.IAmmunitionPanel;
+    import net.wg.gui.lobby.hangar.ammunitionPanel.SlotAnimation;
     import net.wg.gui.lobby.hangar.ammunitionPanel.VehicleStateMsg;
     import net.wg.gui.lobby.hangar.ammunitionPanel.data.AmmunitionPanelVO;
     import net.wg.gui.lobby.hangar.ammunitionPanel.data.VehicleMessageVO;
@@ -1227,7 +1230,6 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.hangar.tcarousel.MultiselectionInfoBlock;
     import net.wg.gui.lobby.hangar.tcarousel.MultiselectionSlotRenderer;
     import net.wg.gui.lobby.hangar.tcarousel.MultiselectionSlots;
-    import net.wg.gui.lobby.hangar.tcarousel.NYVehicleBonus;
     import net.wg.gui.lobby.hangar.tcarousel.SmallTankIcon;
     import net.wg.gui.lobby.hangar.tcarousel.TankCarousel;
     import net.wg.gui.lobby.hangar.tcarousel.TankCarouselItemRenderer;
@@ -1240,6 +1242,9 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.hangar.tcarousel.helper.ITankCarouselHelper;
     import net.wg.gui.lobby.hangar.tcarousel.helper.TankCarouselStatsFormatter;
     import net.wg.gui.lobby.hangar.vehicleParameters.components.VehParamRenderer;
+    import net.wg.gui.lobby.hangar.wgbob.BobAnnouncementWidget;
+    import net.wg.gui.lobby.hangar.wgbob.BobAnnouncementWidgetDescription;
+    import net.wg.gui.lobby.hangar.wgbob.BobAnnouncementWidgetTitle;
     import net.wg.gui.lobby.header.AccountClanPopoverBlock;
     import net.wg.gui.lobby.header.AccountPopover;
     import net.wg.gui.lobby.header.AccountPopoverBlock;
@@ -1248,7 +1253,6 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.header.BadgeSlot;
     import net.wg.gui.lobby.header.IAccountClanPopOverBlock;
     import net.wg.gui.lobby.header.LobbyHeader;
-    import net.wg.gui.lobby.header.NYWidgetUI;
     import net.wg.gui.lobby.header.OnlineCounter;
     import net.wg.gui.lobby.header.TankPanel;
     import net.wg.gui.lobby.header.events.AccountPopoverEvent;
@@ -1501,12 +1505,6 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.modulesPanel.data.OptionalDeviceVO;
     import net.wg.gui.lobby.modulesPanel.interfaces.IDeviceSlot;
     import net.wg.gui.lobby.modulesPanel.interfaces.IModulesPanel;
-    import net.wg.gui.lobby.ny2020.NYCustomizationSlot;
-    import net.wg.gui.lobby.ny2020.NYSelectVehiclePopover;
-    import net.wg.gui.lobby.ny2020.NYSelectVehicleRenderer;
-    import net.wg.gui.lobby.ny2020.NYVehicleBonusPanel;
-    import net.wg.gui.lobby.ny2020.NYVehicleSelectorFilter;
-    import net.wg.gui.lobby.ny2020.vo.NYSelectVehiclePopoverVO;
     import net.wg.gui.lobby.personalMissions.CampaignOperationsContainer;
     import net.wg.gui.lobby.personalMissions.PersonalMissionsPage;
     import net.wg.gui.lobby.personalMissions.components.AllOperationsContent;
@@ -2157,6 +2155,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.storage.categories.storage.StorageTypeAndNationFilterBlock;
     import net.wg.gui.lobby.storage.categories.storage.StorageTypeAndVehicleFilterBlock;
     import net.wg.gui.lobby.storage.categories.storage.StorageTypeFilterBlock;
+    import net.wg.gui.lobby.storage.categories.storage.StorageTypeFilterBlockView;
     import net.wg.gui.lobby.storage.categories.storage.vehicleSelectPopover.StorageVehicleSelectPopoverVO;
     import net.wg.gui.lobby.storage.categories.storage.vehicleSelectPopover.VehicleSelectorFilter;
     import net.wg.gui.lobby.storage.categories.storage.vehicleSelectPopover.VehicleSelectPopover;
@@ -2712,7 +2711,6 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.vehiclePreview20.data.VPBuyingPanelVO;
     import net.wg.gui.lobby.vehiclePreview20.data.VPCompensationVO;
     import net.wg.gui.lobby.vehiclePreview20.data.VPCouponVO;
-    import net.wg.gui.lobby.vehiclePreview20.data.VPCustomOfferVO;
     import net.wg.gui.lobby.vehiclePreview20.data.VPFrontlineBuyingPanelVO;
     import net.wg.gui.lobby.vehiclePreview20.data.VPOfferVO;
     import net.wg.gui.lobby.vehiclePreview20.data.VPPackItemVO;
@@ -2722,7 +2720,6 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.vehiclePreview20.data.VPSetItemsVO;
     import net.wg.gui.lobby.vehiclePreview20.data.VPSetItemVO;
     import net.wg.gui.lobby.vehiclePreview20.data.VPSetVehiclesVO;
-    import net.wg.gui.lobby.vehiclePreview20.data.VPStyleBtnVO;
     import net.wg.gui.lobby.vehiclePreview20.data.VPTradeInBuyingPanelVO;
     import net.wg.gui.lobby.vehiclePreview20.data.VPVehicleCarouselVO;
     import net.wg.gui.lobby.vehiclePreview20.infoPanel.VPInfoPanel;
@@ -2771,8 +2768,10 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.vehicleTradeWnds.sell.TotalResult;
     import net.wg.gui.lobby.vehicleTradeWnds.sell.UserInputControl;
     import net.wg.gui.lobby.vehicleTradeWnds.sell.VehicleSellDialog;
+    import net.wg.gui.lobby.vehicleTradeWnds.sell.utils.VehicleSellDialogMoney;
+    import net.wg.gui.lobby.vehicleTradeWnds.sell.utils.VehicleSellDialogMoneyVO;
+    import net.wg.gui.lobby.vehicleTradeWnds.sell.utils.VehicleSellDialogUtils;
     import net.wg.gui.lobby.vehicleTradeWnds.sell.vo.SellDialogVO;
-    import net.wg.gui.lobby.vehicleTradeWnds.sell.vo.SellInInventoryModuleVo;
     import net.wg.gui.lobby.vehicleTradeWnds.sell.vo.SellInInventoryShellVo;
     import net.wg.gui.lobby.vehicleTradeWnds.sell.vo.SellOnVehicleEquipmentVo;
     import net.wg.gui.lobby.vehicleTradeWnds.sell.vo.SellOnVehicleOptionalDeviceVo;
@@ -2795,6 +2794,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.window.ConfirmItemWindowBaseVO;
     import net.wg.gui.lobby.window.ConfirmItemWindowVO;
     import net.wg.gui.lobby.window.CrystalsPromoWindow;
+    import net.wg.gui.lobby.window.DemountKitInfo;
     import net.wg.gui.lobby.window.EpicPrimeTime;
     import net.wg.gui.lobby.window.ExchangeCurrencyWindow;
     import net.wg.gui.lobby.window.ExchangeFreeToTankmanInitVO;
@@ -3151,6 +3151,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.infrastructure.base.meta.IBCQuestsViewMeta;
     import net.wg.infrastructure.base.meta.IBCQueueWindowMeta;
     import net.wg.infrastructure.base.meta.IBCTooltipsWindowMeta;
+    import net.wg.infrastructure.base.meta.IBobAnnouncementWidgetMeta;
     import net.wg.infrastructure.base.meta.IBoosterBuyWindowMeta;
     import net.wg.infrastructure.base.meta.IBoosterInfoMeta;
     import net.wg.infrastructure.base.meta.IBoostersWindowMeta;
@@ -3205,6 +3206,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.infrastructure.base.meta.ICyberSportUnitsListMeta;
     import net.wg.infrastructure.base.meta.IDemonstratorWindowMeta;
     import net.wg.infrastructure.base.meta.IDemoPageMeta;
+    import net.wg.infrastructure.base.meta.IDemountKitInfoMeta;
     import net.wg.infrastructure.base.meta.IEliteWindowMeta;
     import net.wg.infrastructure.base.meta.IEpicBattlesAfterBattleViewMeta;
     import net.wg.infrastructure.base.meta.IEpicBattlesBrowserViewMeta;
@@ -3277,7 +3279,6 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.infrastructure.base.meta.INotificationListButtonMeta;
     import net.wg.infrastructure.base.meta.INotificationPopUpViewerMeta;
     import net.wg.infrastructure.base.meta.INotificationsListMeta;
-    import net.wg.infrastructure.base.meta.INYSelectVehiclePopoverMeta;
     import net.wg.infrastructure.base.meta.IPackItemsPopoverMeta;
     import net.wg.infrastructure.base.meta.IPaginationMeta;
     import net.wg.infrastructure.base.meta.IPersonalCaseMeta;
@@ -3333,6 +3334,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.infrastructure.base.meta.IRecruitParametersMeta;
     import net.wg.infrastructure.base.meta.IRecruitWindowMeta;
     import net.wg.infrastructure.base.meta.IRegularItemsTabViewMeta;
+    import net.wg.infrastructure.base.meta.IRegularItemsWithTypeFilterTabViewMeta;
     import net.wg.infrastructure.base.meta.IRentalTermSelectionPopoverMeta;
     import net.wg.infrastructure.base.meta.IRentVehiclesTabViewMeta;
     import net.wg.infrastructure.base.meta.IResearchMeta;
@@ -3500,6 +3502,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_DATA_CONSTANTS_GENERATED_BARRACKS_CONSTANTS:Class = BARRACKS_CONSTANTS;
 
+        public static const NET_WG_DATA_CONSTANTS_GENERATED_BATTLE_OF_BLOGGERS_ALIASES:Class = BATTLE_OF_BLOGGERS_ALIASES;
+
         public static const NET_WG_DATA_CONSTANTS_GENERATED_BATTLE_RESULTS_PREMIUM_STATES:Class = BATTLE_RESULTS_PREMIUM_STATES;
 
         public static const NET_WG_DATA_CONSTANTS_GENERATED_BATTLE_RESULT_TYPES:Class = BATTLE_RESULT_TYPES;
@@ -3652,7 +3656,7 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_DATA_VO_PROGRESSELEMENTVO:Class = ProgressElementVO;
 
-        public static const NET_WG_DATA_VO_SELLDIALOGELEMENT:Class = SellDialogElement;
+        public static const NET_WG_DATA_VO_SELLDIALOGELEMENTVO:Class = SellDialogElementVO;
 
         public static const NET_WG_DATA_VO_SELLDIALOGITEM:Class = SellDialogItem;
 
@@ -3787,6 +3791,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_BOOTCAMP_QUEUEWINDOW_BCQUEUEWINDOW:Class = BCQueueWindow;
 
         public static const NET_WG_GUI_BOOTCAMP_QUEUEWINDOW_DATA_BCQUEUEVO:Class = BCQueueVO;
+
+        public static const NET_WG_GUI_COMPONENTS_UNBOUNDCOMPONENT:Class = UnboundComponent;
 
         public static const NET_WG_GUI_COMPONENTS_ADVANCED_ACCORDION:Class = Accordion;
 
@@ -4566,6 +4572,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_DATA_DATACLASSITEMVO:Class = DataClassItemVO;
 
+        public static const NET_WG_GUI_DATA_DEMOUNTKITINFOVO:Class = DemountKitInfoVO;
+
         public static const NET_WG_GUI_DATA_MISSIONAWARDWINDOWVO:Class = MissionAwardWindowVO;
 
         public static const NET_WG_GUI_DATA_TABDATAVO:Class = TabDataVO;
@@ -4897,6 +4905,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_LOBBY_BATTLERESULTS_PROGRESSREPORT_PROGRESSREPORTLINKAGESELECTOR:Class = ProgressReportLinkageSelector;
 
         public static const NET_WG_GUI_LOBBY_BATTLERESULTS_PROGRESSREPORT_UNLOCKLINKEVENT:Class = UnlockLinkEvent;
+
+        public static const NET_WG_GUI_LOBBY_BOB_HANGARCOMPONENTSCONTAINER:Class = HangarComponentsContainer;
 
         public static const NET_WG_GUI_LOBBY_BOOSTERS_BOOSTERSTABLERENDERER:Class = BoostersTableRenderer;
 
@@ -5768,10 +5778,6 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_LOBBY_HANGAR_HANGARHEADER:Class = HangarHeader;
 
-        public static const NET_WG_GUI_LOBBY_HANGAR_LOOTBOXESENTRANCEPOINTWIDGET:Class = LootboxesEntrancePointWidget;
-
-        public static const NET_WG_GUI_LOBBY_HANGAR_NYCREDITBONUS:Class = NYCreditBonus;
-
         public static const NET_WG_GUI_LOBBY_HANGAR_RESEARCHPANEL:Class = ResearchPanel;
 
         public static const NET_WG_GUI_LOBBY_HANGAR_SWITCHMODEPANEL:Class = SwitchModePanel;
@@ -5791,6 +5797,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_EQUIPMENTSLOT:Class = EquipmentSlot;
 
         public static const NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_IAMMUNITIONPANEL:Class = IAmmunitionPanel;
+
+        public static const NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_SLOTANIMATION:Class = SlotAnimation;
 
         public static const NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_VEHICLESTATEMSG:Class = VehicleStateMsg;
 
@@ -5904,8 +5912,6 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_MULTISELECTIONSLOTS:Class = MultiselectionSlots;
 
-        public static const NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_NYVEHICLEBONUS:Class = NYVehicleBonus;
-
         public static const NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_SMALLTANKICON:Class = SmallTankIcon;
 
         public static const NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_TANKCAROUSEL:Class = TankCarousel;
@@ -5930,6 +5936,12 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_LOBBY_HANGAR_VEHICLEPARAMETERS_COMPONENTS_VEHPARAMRENDERER:Class = VehParamRenderer;
 
+        public static const NET_WG_GUI_LOBBY_HANGAR_WGBOB_BOBANNOUNCEMENTWIDGET:Class = BobAnnouncementWidget;
+
+        public static const NET_WG_GUI_LOBBY_HANGAR_WGBOB_BOBANNOUNCEMENTWIDGETDESCRIPTION:Class = BobAnnouncementWidgetDescription;
+
+        public static const NET_WG_GUI_LOBBY_HANGAR_WGBOB_BOBANNOUNCEMENTWIDGETTITLE:Class = BobAnnouncementWidgetTitle;
+
         public static const NET_WG_GUI_LOBBY_HEADER_ACCOUNTCLANPOPOVERBLOCK:Class = AccountClanPopoverBlock;
 
         public static const NET_WG_GUI_LOBBY_HEADER_ACCOUNTPOPOVER:Class = AccountPopover;
@@ -5945,8 +5957,6 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_LOBBY_HEADER_IACCOUNTCLANPOPOVERBLOCK:Class = IAccountClanPopOverBlock;
 
         public static const NET_WG_GUI_LOBBY_HEADER_LOBBYHEADER:Class = LobbyHeader;
-
-        public static const NET_WG_GUI_LOBBY_HEADER_NYWIDGETUI:Class = NYWidgetUI;
 
         public static const NET_WG_GUI_LOBBY_HEADER_ONLINECOUNTER:Class = OnlineCounter;
 
@@ -6451,18 +6461,6 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_LOBBY_MODULESPANEL_INTERFACES_IDEVICESLOT:Class = IDeviceSlot;
 
         public static const NET_WG_GUI_LOBBY_MODULESPANEL_INTERFACES_IMODULESPANEL:Class = IModulesPanel;
-
-        public static const NET_WG_GUI_LOBBY_NY2020_NYCUSTOMIZATIONSLOT:Class = NYCustomizationSlot;
-
-        public static const NET_WG_GUI_LOBBY_NY2020_NYSELECTVEHICLEPOPOVER:Class = NYSelectVehiclePopover;
-
-        public static const NET_WG_GUI_LOBBY_NY2020_NYSELECTVEHICLERENDERER:Class = NYSelectVehicleRenderer;
-
-        public static const NET_WG_GUI_LOBBY_NY2020_NYVEHICLEBONUSPANEL:Class = NYVehicleBonusPanel;
-
-        public static const NET_WG_GUI_LOBBY_NY2020_NYVEHICLESELECTORFILTER:Class = NYVehicleSelectorFilter;
-
-        public static const NET_WG_GUI_LOBBY_NY2020_VO_NYSELECTVEHICLEPOPOVERVO:Class = NYSelectVehiclePopoverVO;
 
         public static const NET_WG_GUI_LOBBY_PERSONALMISSIONS_CAMPAIGNOPERATIONSCONTAINER:Class = CampaignOperationsContainer;
 
@@ -7764,6 +7762,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_LOBBY_STORAGE_CATEGORIES_STORAGE_STORAGETYPEFILTERBLOCK:Class = StorageTypeFilterBlock;
 
+        public static const NET_WG_GUI_LOBBY_STORAGE_CATEGORIES_STORAGE_STORAGETYPEFILTERBLOCKVIEW:Class = StorageTypeFilterBlockView;
+
         public static const NET_WG_GUI_LOBBY_STORAGE_CATEGORIES_STORAGE_VEHICLESELECTPOPOVER_STORAGEVEHICLESELECTPOPOVERVO:Class = StorageVehicleSelectPopoverVO;
 
         public static const NET_WG_GUI_LOBBY_STORAGE_CATEGORIES_STORAGE_VEHICLESELECTPOPOVER_VEHICLESELECTORFILTER:Class = net.wg.gui.lobby.storage.categories.storage.vehicleSelectPopover.VehicleSelectorFilter;
@@ -8874,8 +8874,6 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_LOBBY_VEHICLEPREVIEW20_DATA_VPCOUPONVO:Class = VPCouponVO;
 
-        public static const NET_WG_GUI_LOBBY_VEHICLEPREVIEW20_DATA_VPCUSTOMOFFERVO:Class = VPCustomOfferVO;
-
         public static const NET_WG_GUI_LOBBY_VEHICLEPREVIEW20_DATA_VPFRONTLINEBUYINGPANELVO:Class = VPFrontlineBuyingPanelVO;
 
         public static const NET_WG_GUI_LOBBY_VEHICLEPREVIEW20_DATA_VPOFFERVO:Class = VPOfferVO;
@@ -8893,8 +8891,6 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_LOBBY_VEHICLEPREVIEW20_DATA_VPSETITEMVO:Class = VPSetItemVO;
 
         public static const NET_WG_GUI_LOBBY_VEHICLEPREVIEW20_DATA_VPSETVEHICLESVO:Class = VPSetVehiclesVO;
-
-        public static const NET_WG_GUI_LOBBY_VEHICLEPREVIEW20_DATA_VPSTYLEBTNVO:Class = VPStyleBtnVO;
 
         public static const NET_WG_GUI_LOBBY_VEHICLEPREVIEW20_DATA_VPTRADEINBUYINGPANELVO:Class = VPTradeInBuyingPanelVO;
 
@@ -8992,9 +8988,13 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_LOBBY_VEHICLETRADEWNDS_SELL_VEHICLESELLDIALOG:Class = VehicleSellDialog;
 
-        public static const NET_WG_GUI_LOBBY_VEHICLETRADEWNDS_SELL_VO_SELLDIALOGVO:Class = SellDialogVO;
+        public static const NET_WG_GUI_LOBBY_VEHICLETRADEWNDS_SELL_UTILS_VEHICLESELLDIALOGMONEY:Class = VehicleSellDialogMoney;
 
-        public static const NET_WG_GUI_LOBBY_VEHICLETRADEWNDS_SELL_VO_SELLININVENTORYMODULEVO:Class = SellInInventoryModuleVo;
+        public static const NET_WG_GUI_LOBBY_VEHICLETRADEWNDS_SELL_UTILS_VEHICLESELLDIALOGMONEYVO:Class = VehicleSellDialogMoneyVO;
+
+        public static const NET_WG_GUI_LOBBY_VEHICLETRADEWNDS_SELL_UTILS_VEHICLESELLDIALOGUTILS:Class = VehicleSellDialogUtils;
+
+        public static const NET_WG_GUI_LOBBY_VEHICLETRADEWNDS_SELL_VO_SELLDIALOGVO:Class = SellDialogVO;
 
         public static const NET_WG_GUI_LOBBY_VEHICLETRADEWNDS_SELL_VO_SELLININVENTORYSHELLVO:Class = SellInInventoryShellVo;
 
@@ -9039,6 +9039,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_LOBBY_WINDOW_CONFIRMITEMWINDOWVO:Class = ConfirmItemWindowVO;
 
         public static const NET_WG_GUI_LOBBY_WINDOW_CRYSTALSPROMOWINDOW:Class = CrystalsPromoWindow;
+
+        public static const NET_WG_GUI_LOBBY_WINDOW_DEMOUNTKITINFO:Class = DemountKitInfo;
 
         public static const NET_WG_GUI_LOBBY_WINDOW_EPICPRIMETIME:Class = EpicPrimeTime;
 
@@ -9752,6 +9754,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IBCTOOLTIPSWINDOWMETA:Class = IBCTooltipsWindowMeta;
 
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IBOBANNOUNCEMENTWIDGETMETA:Class = IBobAnnouncementWidgetMeta;
+
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IBOOSTERBUYWINDOWMETA:Class = IBoosterBuyWindowMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IBOOSTERINFOMETA:Class = IBoosterInfoMeta;
@@ -9859,6 +9863,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IDEMONSTRATORWINDOWMETA:Class = IDemonstratorWindowMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IDEMOPAGEMETA:Class = IDemoPageMeta;
+
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IDEMOUNTKITINFOMETA:Class = IDemountKitInfoMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IELITEWINDOWMETA:Class = IEliteWindowMeta;
 
@@ -10004,8 +10010,6 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_INOTIFICATIONSLISTMETA:Class = INotificationsListMeta;
 
-        public static const NET_WG_INFRASTRUCTURE_BASE_META_INYSELECTVEHICLEPOPOVERMETA:Class = INYSelectVehiclePopoverMeta;
-
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IPACKITEMSPOPOVERMETA:Class = IPackItemsPopoverMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IPAGINATIONMETA:Class = IPaginationMeta;
@@ -10115,6 +10119,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IRECRUITWINDOWMETA:Class = IRecruitWindowMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IREGULARITEMSTABVIEWMETA:Class = IRegularItemsTabViewMeta;
+
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IREGULARITEMSWITHTYPEFILTERTABVIEWMETA:Class = IRegularItemsWithTypeFilterTabViewMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IRENTALTERMSELECTIONPOPOVERMETA:Class = IRentalTermSelectionPopoverMeta;
 
@@ -10340,6 +10346,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BCTOOLTIPSWINDOWMETA:Class = BCTooltipsWindowMeta;
 
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BOBANNOUNCEMENTWIDGETMETA:Class = BobAnnouncementWidgetMeta;
+
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BOOSTERBUYWINDOWMETA:Class = BoosterBuyWindowMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BOOSTERINFOMETA:Class = BoosterInfoMeta;
@@ -10447,6 +10455,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_DEMONSTRATORWINDOWMETA:Class = DemonstratorWindowMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_DEMOPAGEMETA:Class = DemoPageMeta;
+
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_DEMOUNTKITINFOMETA:Class = DemountKitInfoMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_ELITEWINDOWMETA:Class = EliteWindowMeta;
 
@@ -10592,8 +10602,6 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_NOTIFICATIONSLISTMETA:Class = NotificationsListMeta;
 
-        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_NYSELECTVEHICLEPOPOVERMETA:Class = NYSelectVehiclePopoverMeta;
-
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PACKITEMSPOPOVERMETA:Class = PackItemsPopoverMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PAGINATIONMETA:Class = PaginationMeta;
@@ -10703,6 +10711,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_RECRUITWINDOWMETA:Class = RecruitWindowMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_REGULARITEMSTABVIEWMETA:Class = RegularItemsTabViewMeta;
+
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_REGULARITEMSWITHTYPEFILTERTABVIEWMETA:Class = RegularItemsWithTypeFilterTabViewMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_RENTALTERMSELECTIONPOPOVERMETA:Class = RentalTermSelectionPopoverMeta;
 

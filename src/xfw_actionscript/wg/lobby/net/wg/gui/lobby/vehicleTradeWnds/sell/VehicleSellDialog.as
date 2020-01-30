@@ -10,6 +10,7 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
     import scaleform.clik.motion.Tween;
     import net.wg.gui.lobby.vehicleTradeWnds.sell.vo.SellVehicleVo;
     import net.wg.gui.lobby.vehicleTradeWnds.sell.vo.SellDialogVO;
+    import net.wg.gui.lobby.vehicleTradeWnds.sell.utils.VehicleSellDialogMoney;
     import net.wg.infrastructure.interfaces.IWindow;
     import scaleform.clik.utils.Padding;
     import net.wg.gui.events.VehicleSellDialogEvent;
@@ -18,11 +19,7 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
     import flash.events.Event;
     import scaleform.clik.constants.InvalidationType;
     import org.idmedia.as3commons.util.StringUtils;
-    import net.wg.gui.interfaces.ISaleItemBlockRenderer;
-    import net.wg.data.constants.ColorSchemeNames;
-    import net.wg.utils.ILocale;
     import fl.transitions.easing.Strong;
-    import net.wg.data.constants.generated.FITTING_TYPES;
 
     public class VehicleSellDialog extends VehicleSellDialogMeta implements IVehicleSellDialogMeta
     {
@@ -35,8 +32,6 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
 
         private static const CONTENT_RIGHT_ADDITIONAL_PADDING:int = -4;
 
-        private static const RED_COLOR:Number = 16711680;
-
         private static const POSITIVE_PREFIX:String = "+ ";
 
         private static const NEGATIVE_PREFIX:String = "- ";
@@ -45,13 +40,7 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
 
         private static const INV_BARRACKS_DROP:String = "invBarracksDrop";
 
-        private static const INV_GOLD:String = "invalidateGold";
-
-        private static const CREDITS_IDX:int = 0;
-
-        private static const GOLD_IDX:int = 1;
-
-        private static const CRYSTALS_IDX:int = 2;
+        private static const INV_RESULT:String = "invalidateResult";
 
         public var headerComponent:SellHeaderComponent = null;
 
@@ -69,21 +58,13 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
 
         public var result_mc:TotalResult = null;
 
-        private var _totalGoldTF:IconText = null;
-
         private var _settingsBtn:SettingsButton = null;
 
         private var _creditsIT:IconText = null;
 
         private var _setingsDropBtn:CheckBox = null;
 
-        private var _removeDevicesFullCost:Array = null;
-
         private var _listVisibleHeight:Number = 0;
-
-        private var _creditsComplDev:Number = 0;
-
-        private var _accGold:Number = 0;
 
         private var _tweens:Vector.<Tween>;
 
@@ -95,13 +76,16 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
 
         private var _data:SellDialogVO = null;
 
-        private var _isHaveCrystalInPrices:Boolean = false;
-
         private var _controlQuestionVisible:Boolean = false;
+
+        private var _totalCost:VehicleSellDialogMoney;
+
+        private var _creditsCommon:int;
 
         public function VehicleSellDialog()
         {
             this._tweens = new Vector.<Tween>();
+            this._totalCost = new VehicleSellDialogMoney();
             super();
         }
 
@@ -152,13 +136,12 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
         override protected function configUI() : void
         {
             super.configUI();
-            this._totalGoldTF = this.result_mc.goldIT;
             this.controlQuestion.visible = false;
             this.controlQuestion.addEventListener(ControlQuestionComponent.USER_INPUT_HANDLER,this.onControlUserInputHandlerHandler);
             this.slidingComponent.slidingScrList.addEventListener(VehicleSellDialogEvent.LIST_WAS_DRAWN,this.onSlidingComponentListWasDrawnHandler);
             this.devicesComponent.addEventListener(VehicleSellDialogEvent.SELL_DIALOG_LIST_ITEM_RENDERER_WAS_DRAWN,this.onSellDevicesComponentWasDrawnHandler);
             this.cancelBtn.label = DIALOGS.VEHICLESELLDIALOG_CANCEL;
-            this.addEventListener(VehicleSellDialogEvent.UPDATE_RESULT,this.onUpdateResultHandler);
+            this.addEventListener(VehicleSellDialogEvent.SELECTION_CHANGED,this.onSelectionChangeHandler);
             this.cancelBtn.addEventListener(ButtonEvent.CLICK,this.onCancelBtnClickHandler);
             this.submitBtn.addEventListener(ButtonEvent.CLICK,this.onSubmitBtnClickHandler);
             this.headerComponent.inBarracksDrop.addEventListener(ListEvent.INDEX_CHANGE,this.onHeaderComponentIndexChangeHandler);
@@ -171,7 +154,7 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
             App.utils.scheduler.cancelTask(setFocus);
             this.slidingComponent.slidingScrList.removeEventListener(VehicleSellDialogEvent.LIST_WAS_DRAWN,this.onSlidingComponentListWasDrawnHandler);
             this.devicesComponent.removeEventListener(VehicleSellDialogEvent.SELL_DIALOG_LIST_ITEM_RENDERER_WAS_DRAWN,this.onSellDevicesComponentWasDrawnHandler);
-            this.removeEventListener(VehicleSellDialogEvent.UPDATE_RESULT,this.onUpdateResultHandler);
+            this.removeEventListener(VehicleSellDialogEvent.SELECTION_CHANGED,this.onSelectionChangeHandler);
             this._setingsDropBtn.removeEventListener(Event.SELECT,this.onSlidingComponentSelectHandler);
             this.controlQuestion.removeEventListener(ControlQuestionComponent.USER_INPUT_HANDLER,this.onControlUserInputHandlerHandler);
             this.cancelBtn.removeEventListener(ButtonEvent.CLICK,this.onCancelBtnClickHandler);
@@ -182,7 +165,6 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
                 _loc1_.paused = true;
                 _loc1_ = null;
             }
-            this._totalGoldTF = null;
             this._settingsBtn = null;
             this._setingsDropBtn = null;
             this._creditsIT = null;
@@ -208,8 +190,8 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
             }
             this._tweens = null;
             this._data = null;
-            this._removeDevicesFullCost.splice(0,this._removeDevicesFullCost.length);
-            this._removeDevicesFullCost = null;
+            this._totalCost.dispose();
+            this._totalCost = null;
             App.toolTipMgr.hide();
             super.onDispose();
         }
@@ -224,21 +206,16 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
                     {
                         this.cleanAndFocusControlQuestion();
                     }
-                    checkControlQuestionS(this.headerComponent.inBarracksDrop.selectedIndex == DISMISS_TANKMEN);
+                    setCrewDismissal(this.headerComponent.inBarracksDrop.selectedIndex == DISMISS_TANKMEN);
                 }
-                if(isInvalid(InvalidationType.DATA))
+                if(isInvalid(INV_RESULT))
                 {
-                    this.updateTotalResults(this.headerComponent.creditsCommon,this._removeDevicesFullCost);
+                    this.result_mc.setMoney(this._totalCost.geResultMoney());
+                    this._settingsBtn.setData(this._creditsCommon);
                 }
                 if(isInvalid(INV_CONTROL_QUESTION))
                 {
                     this.controlQuestion.visible = this._controlQuestionVisible;
-                    this.updateTotalResults(this.headerComponent.creditsCommon,this._removeDevicesFullCost);
-                    this.checkGold();
-                }
-                if(isInvalid(INV_GOLD))
-                {
-                    this.checkGold();
                 }
                 if(isInvalid(InvalidationType.SIZE))
                 {
@@ -251,8 +228,7 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
         {
             this._data = param1;
             this._vehicleVo = param1.sellVehicleVO;
-            this._accGold = param1.accountMoney[GOLD_IDX];
-            this._removeDevicesFullCost = [0,0,0];
+            this._totalCost.updateAccountMoneyDict(param1.accountMoney);
             var _loc2_:String = this._vehicleVo.isRented?DIALOGS.VEHICLEREMOVEDIALOG_TITLE:DIALOGS.VEHICLESELLDIALOG_TITLE;
             if(this._vehicleVo.isRented)
             {
@@ -273,14 +249,7 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
             this.slidingComponent.battleBoosters(this._data.battleBoostersOnVehicle);
             this.slidingComponent.setInventory(this._data.modulesInInventory,this._data.shellsInInventory);
             this.slidingComponent.setCustomization(this._data.customizationOnVehicle);
-            this.recalculateTotals();
-            invalidate(InvalidationType.DATA,InvalidationType.SIZE);
-        }
-
-        public function as_checkGold(param1:Number) : void
-        {
-            this._accGold = param1;
-            invalidate(INV_GOLD);
+            invalidate(InvalidationType.SIZE);
         }
 
         public function as_enableButton(param1:Boolean) : void
@@ -349,119 +318,10 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
             }
         }
 
-        private function checkGold() : void
-        {
-            var _loc1_:* = NaN;
-            var _loc4_:ISaleItemBlockRenderer = null;
-            var _loc2_:Vector.<ISaleItemBlockRenderer> = this.devicesComponent.deviceItemRenderer;
-            if(this._accGold < this.isHasGold())
-            {
-                _loc1_ = RED_COLOR;
-            }
-            else
-            {
-                _loc1_ = App.colorSchemeMgr.getRGB(ColorSchemeNames.TEXT_COLOR_GOLD);
-            }
-            var _loc3_:int = _loc2_.length;
-            var _loc5_:uint = 0;
-            while(_loc5_ < _loc3_)
-            {
-                _loc4_ = _loc2_[_loc5_];
-                if(_loc4_.toInventory && !_loc4_.isRemovable)
-                {
-                    _loc4_.setColor(_loc1_);
-                    _loc4_.validateNow();
-                }
-                _loc5_++;
-            }
-            this._totalGoldTF.textColor = _loc1_;
-        }
-
-        private function isHasGold() : Number
-        {
-            return this._removeDevicesFullCost[GOLD_IDX] - this.headerComponent.tankGoldPrice;
-        }
-
         private function updateWindowPosition() : void
         {
             window.x = App.appWidth - window.width >> 1;
             window.y = App.appHeight - window.getBackground().height >> 1;
-        }
-
-        private function updateTotalResults(param1:Number, param2:Array) : void
-        {
-            var _loc11_:* = false;
-            var _loc12_:* = 0;
-            var _loc3_:ILocale = App.utils.locale;
-            var _loc4_:Number = this.headerComponent.tankGoldPrice - param2[GOLD_IDX];
-            var _loc5_:Number = this.headerComponent.tankCrystalPrice - param2[CRYSTALS_IDX];
-            var _loc6_:Number = param1 + this._creditsComplDev;
-            var _loc7_:String = _loc3_.gold(Math.abs(_loc4_));
-            var _loc8_:String = _loc3_.gold(Math.abs(_loc5_));
-            var _loc9_:Boolean = _loc5_ != 0 || this._isHaveCrystalInPrices;
-            this.result_mc.crystalIT.visible = _loc9_;
-            this._totalGoldTF.text = getPrefixByValue(_loc4_) + _loc7_;
-            if(_loc9_)
-            {
-                this.result_mc.crystalIT.text = getPrefixByValue(_loc5_) + _loc8_;
-            }
-            this.result_mc.creditsIT.text = getPrefixByValue(_loc6_) + _loc3_.integer(_loc6_);
-            if(this._controlQuestionVisible)
-            {
-                _loc11_ = _loc6_ == 0;
-                _loc12_ = _loc11_?_loc4_:_loc6_;
-                setResultCreditS(_loc11_,_loc12_);
-                this.cleanAndFocusControlQuestion();
-            }
-            var _loc10_:Number = param1 - this.headerComponent.tankPrice;
-            this._creditsIT.text = getPrefixByValue(_loc10_) + _loc3_.integer(_loc10_);
-            this._creditsIT.visible = !this._setingsDropBtn.selected;
-            this._creditsIT.alpha = this._setingsDropBtn.selected?0:1;
-            this._creditsIT.validateNow();
-        }
-
-        private function recalculateTotals() : void
-        {
-            var _loc5_:ISaleItemBlockRenderer = null;
-            this.headerComponent.creditsCommon = this.headerComponent.tankPrice;
-            this._creditsComplDev = 0;
-            this._removeDevicesFullCost = [0,0,0];
-            var _loc1_:Vector.<ISaleItemBlockRenderer> = this.slidingComponent.slidingScrList.getRenderers();
-            var _loc2_:int = _loc1_.length;
-            var _loc3_:uint = 0;
-            while(_loc3_ < _loc2_)
-            {
-                if(!_loc1_[_loc3_].toInventory)
-                {
-                    this.headerComponent.creditsCommon = this.headerComponent.creditsCommon + _loc1_[_loc3_].moneyValue;
-                }
-                _loc3_++;
-            }
-            var _loc4_:Vector.<ISaleItemBlockRenderer> = this.devicesComponent.deviceItemRenderer;
-            _loc2_ = _loc4_.length;
-            var _loc6_:uint = 0;
-            while(_loc6_ < _loc2_)
-            {
-                _loc5_ = _loc4_[_loc6_];
-                if(!(_loc5_ is SaleItemBlockRenderer && !(_loc5_ as SaleItemBlockRenderer).initialized))
-                {
-                    if(_loc5_.toInventory)
-                    {
-                        if(!_loc5_.isRemovable && _loc5_.toInventory)
-                        {
-                            this._removeDevicesFullCost[GOLD_IDX] = this._removeDevicesFullCost[GOLD_IDX] + _loc5_.removePrice[GOLD_IDX];
-                            this._removeDevicesFullCost[CREDITS_IDX] = this._removeDevicesFullCost[CREDITS_IDX] + _loc5_.removePrice[CREDITS_IDX];
-                            this._removeDevicesFullCost[CRYSTALS_IDX] = this._removeDevicesFullCost[CRYSTALS_IDX] + _loc5_.removePrice[CRYSTALS_IDX];
-                        }
-                    }
-                    else
-                    {
-                        this._creditsComplDev = this._creditsComplDev + _loc4_[_loc6_].moneyValue;
-                        this._isHaveCrystalInPrices = this._isHaveCrystalInPrices || _loc5_.removePrice[CRYSTALS_IDX] != 0;
-                    }
-                }
-                _loc6_++;
-            }
         }
 
         private function updateComponentsPosition() : void
@@ -504,14 +364,13 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
         private function updateElements() : void
         {
             this.slidingComponent.slidingScrList.y = this._settingsBtn.y + this._settingsBtn.height;
-            this._creditsIT.visible = true;
             this.slidingComponent.slidingScrList.visible = this.slidingComponent.isOpened;
         }
 
         private function cleanAndFocusControlQuestion() : void
         {
             this.controlQuestion.cleanField();
-            if(this.controlQuestion.userInput.focused == false)
+            if(!this.controlQuestion.userInput.focused)
             {
                 App.utils.scheduler.scheduleOnNextFrame(setFocus,this.controlQuestion.userInput);
             }
@@ -619,91 +478,8 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
 
         private function onSubmitBtnClickHandler(param1:ButtonEvent) : void
         {
-            var _loc10_:* = 0;
-            var _loc12_:ISaleItemBlockRenderer = null;
-            var _loc2_:Vector.<ISaleItemBlockRenderer> = this.slidingComponent.slidingScrList.getRenderers();
-            var _loc3_:Vector.<ISaleItemBlockRenderer> = this.devicesComponent.deviceItemRenderer;
-            var _loc4_:Array = [];
-            var _loc5_:Array = [];
-            var _loc6_:Array = [];
-            var _loc7_:Array = [];
-            var _loc8_:Array = [];
-            var _loc9_:Array = [];
-            var _loc11_:int = _loc2_.length;
-            _loc10_ = 0;
-            while(_loc10_ < _loc11_)
-            {
-                _loc12_ = _loc2_[_loc10_];
-                if(!_loc12_.toInventory)
-                {
-                    switch(_loc12_.type)
-                    {
-                        case FITTING_TYPES.OPTIONAL_DEVICE:
-                            _loc4_.push({
-                                "intCD":_loc12_.intCD,
-                                "count":_loc12_.count
-                            });
-                            break;
-                        case FITTING_TYPES.SHELL:
-                            if(_loc12_.fromInventory)
-                            {
-                                _loc7_.push({
-                                    "intCD":_loc12_.intCD,
-                                    "count":_loc12_.count
-                                });
-                            }
-                            else
-                            {
-                                _loc5_.push({
-                                    "intCD":_loc12_.intCD,
-                                    "count":_loc12_.count
-                                });
-                            }
-                            break;
-                        case FITTING_TYPES.EQUIPMENT:
-                            _loc6_.push({
-                                "intCD":_loc12_.intCD,
-                                "count":_loc12_.count
-                            });
-                            break;
-                        case FITTING_TYPES.MODULE:
-                            if(_loc12_.sellExternalData)
-                            {
-                                _loc7_ = _loc7_.concat(_loc12_.sellExternalData);
-                            }
-                            break;
-                        case FITTING_TYPES.CUSTOMIZATION:
-                            _loc8_.push({
-                                "intCD":_loc12_.intCD,
-                                "count":_loc12_.count
-                            });
-                            break;
-                        case FITTING_TYPES.BOOSTER:
-                            _loc9_.push({
-                                "intCD":_loc12_.intCD,
-                                "count":_loc12_.count
-                            });
-                            break;
-                    }
-                }
-                _loc10_++;
-            }
-            _loc11_ = _loc3_.length;
-            _loc10_ = 0;
-            while(_loc10_ < _loc11_)
-            {
-                if(!_loc3_[_loc10_].toInventory)
-                {
-                    _loc4_.push({
-                        "intCD":_loc3_[_loc10_].intCD,
-                        "count":_loc3_[_loc10_].count
-                    });
-                }
-                _loc10_++;
-            }
-            var _loc13_:* = this.headerComponent.inBarracksDrop.selectedIndex == 1;
             setDialogSettingsS(this._setingsDropBtn.selected);
-            sellS(this._vehicleVo.intCD,_loc5_,_loc6_,_loc4_,_loc7_,_loc8_,_loc9_,_loc13_);
+            sellS();
         }
 
         private function onSlidingComponentListWasDrawnHandler(param1:VehicleSellDialogEvent) : void
@@ -717,45 +493,24 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
             this.updateComponentsPosition();
         }
 
-        private function onUpdateResultHandler(param1:VehicleSellDialogEvent = null) : void
+        private function onSelectionChangeHandler(param1:VehicleSellDialogEvent) : void
         {
-            var _loc3_:ISaleItemBlockRenderer = null;
-            this.recalculateTotals();
-            this.updateTotalResults(this.headerComponent.creditsCommon,this._removeDevicesFullCost);
-            this.checkGold();
-            var _loc2_:Array = [];
-            for each(_loc3_ in this.slidingComponent.slidingScrList.getRenderers())
+            var _loc2_:* = 0;
+            var _loc3_:* = 0;
+            if(this._controlQuestionVisible)
             {
-                if(!_loc3_.toInventory)
+                this.cleanAndFocusControlQuestion();
+            }
+            if(param1.itemIDList != null)
+            {
+                _loc2_ = param1.itemIDList.length;
+                _loc3_ = 0;
+                while(_loc3_ < _loc2_)
                 {
-                    switch(_loc3_.type)
-                    {
-                        case FITTING_TYPES.OPTIONAL_DEVICE:
-                            _loc2_.push({
-                                "intCD":_loc3_.intCD,
-                                "count":_loc3_.count
-                            });
-                            continue;
-                        default:
-                            continue;
-                    }
-                }
-                else
-                {
-                    continue;
+                    onSelectionChangedS(param1.itemIDList[_loc3_],param1.toInventory,param1.currency);
+                    _loc3_++;
                 }
             }
-            for each(_loc3_ in this.devicesComponent.deviceItemRenderer)
-            {
-                if(!_loc3_.toInventory)
-                {
-                    _loc2_.push({
-                        "intCD":_loc3_.intCD,
-                        "count":_loc3_.count
-                    });
-                }
-            }
-            onChangeConfigurationS(_loc2_);
         }
 
         private function onCancelBtnClickHandler(param1:ButtonEvent) : void
@@ -771,6 +526,19 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
         private function onHeaderComponentIndexChangeHandler(param1:ListEvent) : void
         {
             invalidate(INV_BARRACKS_DROP);
+        }
+
+        public function as_setTotal(param1:int, param2:Object) : void
+        {
+            this._creditsCommon = param1;
+            this._totalCost.update(param2);
+            invalidate(INV_RESULT);
+        }
+
+        public function as_updateAccountMoney(param1:String, param2:int) : void
+        {
+            this._totalCost.updateAccountMoney(param1,param2);
+            invalidate(INV_RESULT);
         }
     }
 }

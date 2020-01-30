@@ -641,6 +641,36 @@ package net.wg.gui.battle.battleloading.renderers
 
         public var selfBgAlly14:BattleAtlasSprite;
 
+        public var selfBgEnemy0:BattleAtlasSprite;
+
+        public var selfBgEnemy1:BattleAtlasSprite;
+
+        public var selfBgEnemy2:BattleAtlasSprite;
+
+        public var selfBgEnemy3:BattleAtlasSprite;
+
+        public var selfBgEnemy4:BattleAtlasSprite;
+
+        public var selfBgEnemy5:BattleAtlasSprite;
+
+        public var selfBgEnemy6:BattleAtlasSprite;
+
+        public var selfBgEnemy7:BattleAtlasSprite;
+
+        public var selfBgEnemy8:BattleAtlasSprite;
+
+        public var selfBgEnemy9:BattleAtlasSprite;
+
+        public var selfBgEnemy10:BattleAtlasSprite;
+
+        public var selfBgEnemy11:BattleAtlasSprite;
+
+        public var selfBgEnemy12:BattleAtlasSprite;
+
+        public var selfBgEnemy13:BattleAtlasSprite;
+
+        public var selfBgEnemy14:BattleAtlasSprite;
+
         public var backTestersAlly:Vector.<MovieClip>;
 
         public var backTestersEnemy:Vector.<MovieClip>;
@@ -683,6 +713,8 @@ package net.wg.gui.battle.battleloading.renderers
 
         public var selfBgs:Vector.<BattleAtlasSprite>;
 
+        public var selfBgsEnemy:Vector.<BattleAtlasSprite>;
+
         public function BaseRendererContainer()
         {
             super();
@@ -698,6 +730,7 @@ package net.wg.gui.battle.battleloading.renderers
             this.vehicleIconsAlly = new <BattleAtlasSprite>[this.vehicleIconAlly0,this.vehicleIconAlly1,this.vehicleIconAlly2,this.vehicleIconAlly3,this.vehicleIconAlly4,this.vehicleIconAlly5,this.vehicleIconAlly6,this.vehicleIconAlly7,this.vehicleIconAlly8,this.vehicleIconAlly9,this.vehicleIconAlly10,this.vehicleIconAlly11,this.vehicleIconAlly12,this.vehicleIconAlly13,this.vehicleIconAlly14];
             this.icoIGRsAlly = new <BattleAtlasSprite>[this.icoIGRAlly0,this.icoIGRAlly1,this.icoIGRAlly2,this.icoIGRAlly3,this.icoIGRAlly4,this.icoIGRAlly5,this.icoIGRAlly6,this.icoIGRAlly7,this.icoIGRAlly8,this.icoIGRAlly9,this.icoIGRAlly10,this.icoIGRAlly11,this.icoIGRAlly12,this.icoIGRAlly13,this.icoIGRAlly14];
             this.selfBgs = new <BattleAtlasSprite>[this.selfBgAlly0,this.selfBgAlly1,this.selfBgAlly2,this.selfBgAlly3,this.selfBgAlly4,this.selfBgAlly5,this.selfBgAlly6,this.selfBgAlly7,this.selfBgAlly8,this.selfBgAlly9,this.selfBgAlly10,this.selfBgAlly11,this.selfBgAlly12,this.selfBgAlly13,this.selfBgAlly14];
+            this.selfBgsEnemy = new <BattleAtlasSprite>[this.selfBgEnemy0,this.selfBgEnemy1,this.selfBgEnemy2,this.selfBgEnemy3,this.selfBgEnemy4,this.selfBgEnemy5,this.selfBgEnemy6,this.selfBgEnemy7,this.selfBgEnemy8,this.selfBgEnemy9,this.selfBgEnemy10,this.selfBgEnemy11,this.selfBgEnemy12,this.selfBgEnemy13,this.selfBgEnemy14];
             this.textFieldsEnemy = new <TextField>[this.textFieldEnemy0,this.textFieldEnemy1,this.textFieldEnemy2,this.textFieldEnemy3,this.textFieldEnemy4,this.textFieldEnemy5,this.textFieldEnemy6,this.textFieldEnemy7,this.textFieldEnemy8,this.textFieldEnemy9,this.textFieldEnemy10,this.textFieldEnemy11,this.textFieldEnemy12,this.textFieldEnemy13,this.textFieldEnemy14];
             this.vehicleFieldsEnemy = new <TextField>[this.vehicleFieldEnemy0,this.vehicleFieldEnemy1,this.vehicleFieldEnemy2,this.vehicleFieldEnemy3,this.vehicleFieldEnemy4,this.vehicleFieldEnemy5,this.vehicleFieldEnemy6,this.vehicleFieldEnemy7,this.vehicleFieldEnemy8,this.vehicleFieldEnemy9,this.vehicleFieldEnemy10,this.vehicleFieldEnemy11,this.vehicleFieldEnemy12,this.vehicleFieldEnemy13,this.vehicleFieldEnemy14];
             this.playerActionMarkersEnemy = new <PlayerActionMarker>[this.playerActionMarkerEnemy0,this.playerActionMarkerEnemy1,this.playerActionMarkerEnemy2,this.playerActionMarkerEnemy3,this.playerActionMarkerEnemy4,this.playerActionMarkerEnemy5,this.playerActionMarkerEnemy6,this.playerActionMarkerEnemy7,this.playerActionMarkerEnemy8,this.playerActionMarkerEnemy9,this.playerActionMarkerEnemy10,this.playerActionMarkerEnemy11,this.playerActionMarkerEnemy12,this.playerActionMarkerEnemy13,this.playerActionMarkerEnemy14];
@@ -1032,6 +1065,21 @@ package net.wg.gui.battle.battleloading.renderers
             this.selfBgAlly12 = null;
             this.selfBgAlly13 = null;
             this.selfBgAlly14 = null;
+            this.selfBgEnemy0 = null;
+            this.selfBgEnemy1 = null;
+            this.selfBgEnemy2 = null;
+            this.selfBgEnemy3 = null;
+            this.selfBgEnemy4 = null;
+            this.selfBgEnemy5 = null;
+            this.selfBgEnemy6 = null;
+            this.selfBgEnemy7 = null;
+            this.selfBgEnemy8 = null;
+            this.selfBgEnemy9 = null;
+            this.selfBgEnemy10 = null;
+            this.selfBgEnemy11 = null;
+            this.selfBgEnemy12 = null;
+            this.selfBgEnemy13 = null;
+            this.selfBgEnemy14 = null;
         }
     }
 }

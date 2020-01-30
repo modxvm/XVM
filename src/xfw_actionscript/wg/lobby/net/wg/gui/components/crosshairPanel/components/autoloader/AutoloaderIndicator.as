@@ -51,9 +51,9 @@ package net.wg.gui.components.crosshairPanel.components.autoloader
             this.fireMc.gotoAndPlay(SHOOT_STATE);
         }
 
-        public function autoloaderUpdate(param1:Number, param2:Number, param3:Boolean) : void
+        public function autoloaderUpdate(param1:Number, param2:Number, param3:Boolean, param4:Boolean) : void
         {
-            this.cassette.autoloadProgress(param1,param2,param3);
+            this.cassette.autoloadProgress(param1,param2,param3,param4);
         }
 
         public function setGunReloadingPercent(param1:Number, param2:Boolean) : void

@@ -28,7 +28,8 @@ package net.wg.gui.login.impl
             var _loc1_:uint = 0;
             while(_loc1_ < this._sparkQuantity)
             {
-                _loc2_ = new Spark(this._zone,SPARK_NAME + _loc1_);
+                _loc2_ = App.utils.classFactory.getComponent("SparkUI",Spark);
+                _loc2_.init(this._zone,SPARK_NAME + _loc1_);
                 this._scope.addChild(_loc2_);
                 _loc2_.startAnimation();
                 _loc1_++;

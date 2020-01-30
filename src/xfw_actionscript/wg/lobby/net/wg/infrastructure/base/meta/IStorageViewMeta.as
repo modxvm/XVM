@@ -12,5 +12,7 @@ package net.wg.infrastructure.base.meta
         function as_setData(param1:Object) : void;
 
         function as_selectSection(param1:int) : void;
+
+        function as_setButtonCounter(param1:int, param2:int) : void;
     }
 }

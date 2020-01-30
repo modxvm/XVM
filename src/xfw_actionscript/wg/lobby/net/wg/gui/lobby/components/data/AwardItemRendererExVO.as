@@ -39,8 +39,6 @@ package net.wg.gui.lobby.components.data
 
         public var compensationReason:Object = null;
 
-        public var userName:String = "";
-
         public function AwardItemRendererExVO(param1:Object)
         {
             super(param1);

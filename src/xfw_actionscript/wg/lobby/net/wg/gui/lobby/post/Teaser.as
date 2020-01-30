@@ -45,6 +45,10 @@ package net.wg.gui.lobby.post
 
         private static const IMG_DEFAULT_POS:Number = 2;
 
+        private static const DOTS:String = "...";
+
+        private static const MAX_LINES:int = 2;
+
         public static const STAGE_WIDTH_BOUNDARY:int = 1680;
 
         public static const MASK_WIDTH:int = 475;
@@ -121,20 +125,20 @@ package net.wg.gui.lobby.post
             this.hover.visible = false;
             this.timerGlow.visible = false;
             this.image.mouseEnabled = false;
-            this.addEventListener(MouseEvent.ROLL_OVER,this.onMouseOverHandler);
-            this.addEventListener(MouseEvent.ROLL_OUT,this.onMouseOutHandler);
+            this.addEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
+            this.addEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
             this.hitMc.addEventListener(MouseEvent.CLICK,this.onHitMcClickHandler);
             this.closeBtn.addEventListener(MouseEvent.CLICK,this.onCloseBtnClickHandler);
             this.image.addEventListener(UILoaderEvent.COMPLETE,this.onImageCompleteHandler);
         }
 
-        private function onMouseOverHandler(param1:MouseEvent) : void
+        private function onRollOverHandler(param1:MouseEvent) : void
         {
             this.hover.visible = true;
             this._soundMgr.playControlsSnd(SoundManagerStates.SND_OVER,SoundTypes.ITEM_RDR,null);
         }
 
-        private function onMouseOutHandler(param1:MouseEvent) : void
+        private function onRollOutHandler(param1:MouseEvent) : void
         {
             this.hover.visible = false;
         }
@@ -178,7 +182,7 @@ package net.wg.gui.lobby.post
                     this._counterManager.setCounter(this.postTitle,this._data.postCounter.toString());
                 }
                 this.timerGlow.visible = this._timeLabel != Values.EMPTY_STR;
-                this.title.text = this._data.descr;
+                App.utils.commons.truncateTextFieldMultiline(this.title,this._data.descr,MAX_LINES,DOTS);
                 this._commons.updateTextFieldSize(this.title,false,true);
                 _loc1_ = stage.stageWidth <= STAGE_WIDTH_BOUNDARY && this.timerGlow.visible?TITLE_PADDING_BOTTOM_SMALL:TITLE_PADDING_BOTTOM;
                 this.title.y = height - this.title.height - _loc1_;
@@ -188,8 +192,8 @@ package net.wg.gui.lobby.post
 
         override protected function onDispose() : void
         {
-            this.removeEventListener(MouseEvent.ROLL_OVER,this.onMouseOverHandler);
-            this.removeEventListener(MouseEvent.ROLL_OUT,this.onMouseOutHandler);
+            this.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
+            this.removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
             this.hitMc.removeEventListener(MouseEvent.CLICK,this.onHitMcClickHandler);
             this.closeBtn.removeEventListener(MouseEvent.CLICK,this.onCloseBtnClickHandler);
             this.image.removeEventListener(UILoaderEvent.COMPLETE,this.onImageCompleteHandler);
@@ -210,6 +214,7 @@ package net.wg.gui.lobby.post
             this.over = null;
             this.back = null;
             this.middleTitle = null;
+            this.hover = null;
             this._data = null;
             super.onDispose();
         }
@@ -221,14 +226,13 @@ package net.wg.gui.lobby.post
 
         public function drawToBitmap() : Bitmap
         {
-            var _loc5_:Bitmap = null;
             var _loc1_:Rectangle = this.over.getBounds(this);
             var _loc2_:Point = localToGlobal(new Point(_loc1_.x,_loc1_.y));
             var _loc3_:Matrix = new Matrix();
             _loc3_.translate(-_loc1_.x,-_loc1_.y);
             var _loc4_:BitmapData = new BitmapData(_loc1_.width,_loc1_.height,true,0);
             _loc4_.draw(this,_loc3_);
-            _loc5_ = new Bitmap(_loc4_);
+            var _loc5_:Bitmap = new Bitmap(_loc4_);
             _loc5_.x = _loc2_.x;
             _loc5_.y = _loc2_.y;
             return _loc5_;

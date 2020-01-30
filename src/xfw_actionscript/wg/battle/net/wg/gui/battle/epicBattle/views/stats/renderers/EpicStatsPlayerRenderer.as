@@ -109,6 +109,8 @@ package net.wg.gui.battle.epicBattle.views.stats.renderers
 
         private var _data:DAAPIVehicleInfoVO = null;
 
+        private var _activePlayerData:DAAPIVehicleInfoVO = null;
+
         private var _epicData:EpicVehicleStatsVO = null;
 
         private var _badgeType:String;
@@ -454,6 +456,19 @@ package net.wg.gui.battle.epicBattle.views.stats.renderers
             }
         }
 
+        public function setActivePlayerData(param1:DAAPIVehicleInfoVO) : void
+        {
+            this._activePlayerData = param1;
+            if(this._isRenderingAvailable)
+            {
+                this.vehicleDataSync();
+            }
+            else
+            {
+                this._isRenderingRequired = true;
+            }
+        }
+
         public function setData(param1:Object) : void
         {
             var _loc2_:* = false;
@@ -608,6 +623,10 @@ package net.wg.gui.battle.epicBattle.views.stats.renderers
                 {
                     this._squadItem.setIsEnemy(this._isRightSide);
                     this._squadItem.sessionID = this._data.sessionID;
+                    if(this._activePlayerData)
+                    {
+                        this._squadItem.setActivePlayerData(this._activePlayerData);
+                    }
                     if(this._isCurrentPlayer && this._data.isAnonymized)
                     {
                         this._squadItem.setCurrentPlayerAnonymized();

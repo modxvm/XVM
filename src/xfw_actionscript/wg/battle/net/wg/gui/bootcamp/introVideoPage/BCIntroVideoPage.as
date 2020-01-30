@@ -7,15 +7,21 @@ package net.wg.gui.bootcamp.introVideoPage
     import net.wg.gui.components.controls.CloseButtonText;
     import flash.display.MovieClip;
     import net.wg.gui.bootcamp.introVideoPage.containers.LoadingContainer;
+    import net.wg.gui.components.controls.SoundButtonEx;
+    import flash.text.TextField;
     import net.wg.gui.bootcamp.introVideoPage.containers.StepperContainer;
     import net.wg.gui.bootcamp.containers.TutorialPageContainer;
     import net.wg.gui.bootcamp.introVideoPage.data.BCIntroVideoVO;
     import scaleform.clik.motion.Tween;
-    import net.wg.gui.components.common.video.VideoPlayerEvent;
     import net.wg.gui.components.common.video.VideoPlayerStatusEvent;
+    import net.wg.gui.components.common.video.VideoPlayerEvent;
     import flash.events.MouseEvent;
+    import scaleform.clik.events.ButtonEvent;
+    import flash.events.KeyboardEvent;
     import net.wg.gui.bootcamp.data.BCTutorialPageVO;
     import fl.transitions.easing.Strong;
+    import flash.events.Event;
+    import scaleform.gfx.MouseEventEx;
     import org.idmedia.as3commons.util.StringUtils;
     import net.wg.gui.components.common.video.PlayerStatus;
 
@@ -48,6 +54,20 @@ package net.wg.gui.bootcamp.introVideoPage
 
         private static const CLOSE_BTN_PADDING_RIGHT:int = 80;
 
+        private static const SELECT_BTN_Y:int = -125;
+
+        private static const SKIP_BTN_Y:int = -114;
+
+        private static const BUTTON_SPACING:int = 10;
+
+        private static const WAIT_MC_X:int = -40;
+
+        private static const WAIT_MC_Y:int = -35;
+
+        private static const WAIT_TF_X:int = -30;
+
+        private static const WAIT_TF_Y:int = -46;
+
         public var videoPlayer:SimpleVideoPlayer = null;
 
         public var introPage:IntroPageContainer = null;
@@ -61,6 +81,14 @@ package net.wg.gui.bootcamp.introVideoPage
         public var blackBG:MovieClip = null;
 
         public var loadingProgress:LoadingContainer = null;
+
+        public var btnSelect:SoundButtonEx;
+
+        public var btnSkip:SoundButtonEx;
+
+        public var waitingMC:MovieClip;
+
+        public var waitingTF:TextField;
 
         public var blackOverlay:MovieClip = null;
 
@@ -92,7 +120,11 @@ package net.wg.gui.bootcamp.introVideoPage
 
         private var _tweens:Vector.<Tween>;
 
-        private var _stageClickInited:Boolean = false;
+        private var _loaded:Boolean = false;
+
+        private var _videoCompleted:Boolean = false;
+
+        private var _skipShown:Boolean = false;
 
         public function BCIntroVideoPage()
         {
@@ -102,14 +134,72 @@ package net.wg.gui.bootcamp.introVideoPage
             focusable = true;
         }
 
+        public function as_showIntroPage(param1:Boolean) : void
+        {
+            this.introPage.visible = param1;
+        }
+
+        public function as_pausePlayback() : void
+        {
+            this.videoPlayer.pausePlayback();
+        }
+
+        public function as_resumePlayback() : void
+        {
+            this.videoPlayer.resumePlayback();
+        }
+
+        public function as_loaded() : void
+        {
+            this._loaded = true;
+            if(this._introData.videoPlayerVisible)
+            {
+                if(this._videoCompleted)
+                {
+                    this.onVideoCompleteOrSkip();
+                }
+                else
+                {
+                    this.showSkip();
+                }
+            }
+            else
+            {
+                this.loadingProgress.gotoAndStop(this.loadingProgress.totalFrames);
+                this.applyCompleteData();
+            }
+        }
+
+        public function as_updateProgress(param1:Number) : void
+        {
+            var _loc2_:int = param1 * FULL_PROGRESS;
+            if(this.loadingProgress.currentFrame < this.loadingProgress.totalFrames)
+            {
+                this.loadingProgress.gotoAndStop(_loc2_ + 1);
+            }
+        }
+
         override public function updateStage(param1:Number, param2:Number) : void
         {
             invalidate(STAGE_RESIZED);
         }
 
+        protected function disposePlayer() : void
+        {
+            if(this.videoPlayer)
+            {
+                this.videoPlayer.removeEventListener(VideoPlayerStatusEvent.STATUS_CHANGED,this.onVideoPlayerStatusChangedHandler);
+                this.videoPlayer.removeEventListener(VideoPlayerEvent.PLAYBACK_STOPPED,this.onVideoPlayerPlaybackStoppedHandler);
+                this.videoPlayer.removeEventListener(VideoPlayerStatusEvent.ERROR,this.onVideoPlayerErrorHandler);
+                this.videoPlayer.dispose();
+                this.videoPlayer = null;
+            }
+        }
+
         override protected function configUI() : void
         {
             super.configUI();
+            App.stage.addEventListener(MouseEvent.CLICK,this.onStageClickHandler);
             this.closeBtn.label = BOOTCAMP.BTN_TUTORIAL_CLOSE;
             this.closeBtn.visible = false;
             if(this.videoPlayer != null)
@@ -124,8 +214,9 @@ package net.wg.gui.bootcamp.introVideoPage
             }
             this.introPage.logoDescription = BOOTCAMP.WELLCOME_BOOTCAMP_DESCRIPTION;
             this.introPage.setReferralVisibility(false);
-            this.loadingProgress.skipLabel = BOOTCAMP.BTN_TUTORIAL_SKIP;
+            this.btnSkip.label = BOOTCAMP.BTN_TUTORIAL_SKIP;
             this.blackOverlay.alpha = 0;
+            this.waitingTF.text = BOOTCAMP.WELLCOME_BOOTCAMP_WAIT;
         }
 
         override protected function draw() : void
@@ -134,15 +225,7 @@ package net.wg.gui.bootcamp.introVideoPage
             if(this._introData && isInvalid(INTRO_INFO_CHANGED))
             {
                 this.btnLeft.visible = this.btnRight.visible = this._introData.navigationButtonsVisible;
-                this.loadingProgress.selectLabel = this._introData.selectButtonLabel;
-                if(this._introData.navigationButtonsVisible)
-                {
-                    if(!this._stageClickInited)
-                    {
-                        this._stageClickInited = true;
-                        App.stage.addEventListener(MouseEvent.CLICK,this.onStageClickHandler);
-                    }
-                }
+                this.btnSelect.label = this._introData.selectButtonLabel;
                 this.videoPlayer.visible = this._introData.videoPlayerVisible;
                 if(this._introData.videoPlayerVisible)
                 {
@@ -151,9 +234,11 @@ package net.wg.gui.bootcamp.introVideoPage
                 }
                 else
                 {
+                    this.waitingTF.visible = this.waitingMC.visible = false;
                     this.disposePlayer();
                     videoFinishedS();
                 }
+                this.loadingProgress.visible = !this._introData.videoPlayerVisible;
             }
             if(isInvalid(STAGE_RESIZED))
             {
@@ -165,7 +250,8 @@ package net.wg.gui.bootcamp.introVideoPage
         {
             var _loc1_:Tween = null;
             App.stage.removeEventListener(MouseEvent.CLICK,this.onStageClickHandler);
-            this.closeBtn.removeEventListener(MouseEvent.CLICK,this.onSkipButtonClickHandler);
+            this.closeBtn.removeEventListener(ButtonEvent.CLICK,this.onSkipButtonClickHandler);
+            App.stage.removeEventListener(KeyboardEvent.KEY_DOWN,this.onKeyDownHandler);
             this.disposePlayer();
             this.disposeBackgroundRenderers();
             this.stepperBar.dispose();
@@ -191,34 +277,56 @@ package net.wg.gui.bootcamp.introVideoPage
             }
             this._tweens.splice(0,this._tweens.length);
             this._tweens = null;
-            this.loadingProgress.btnSelect.removeEventListener(MouseEvent.CLICK,this.onSelectButtonClickHandler);
-            this.loadingProgress.btnSkip.removeEventListener(MouseEvent.CLICK,this.onSkipButtonClickHandler);
+            this.btnSelect.removeEventListener(ButtonEvent.CLICK,this.onSelectButtonClickHandler);
+            this.btnSkip.removeEventListener(ButtonEvent.CLICK,this.onSkipButtonClickHandler);
+            this.btnSelect.dispose();
+            this.btnSelect = null;
+            this.btnSkip.dispose();
+            this.btnSkip = null;
+            this.waitingMC = null;
+            this.waitingTF = null;
             this.loadingProgress.dispose();
             this.loadingProgress = null;
             this._introData = null;
             super.onDispose();
         }
 
-        override protected function playVideo(param1:BCIntroVideoVO) : void
+        override protected function setData(param1:BCIntroVideoVO) : void
         {
             this._introData = param1;
             invalidate(INTRO_INFO_CHANGED);
         }
 
-        public function as_loaded() : void
+        private function showSkip() : void
         {
-            this.loadingProgress.gotoAndStop(this.loadingProgress.totalFrames);
+            this.waitingMC.visible = false;
+            this.waitingTF.text = BOOTCAMP.WELLCOME_BOOTCAMP_SKIP;
+            this.updateWaiting();
+            this._skipShown = true;
+            App.stage.addEventListener(KeyboardEvent.KEY_DOWN,this.onKeyDownHandler);
+        }
+
+        private function onVideoCompleteOrSkip() : void
+        {
+            this.waitingMC.visible = false;
+            this.waitingTF.visible = false;
+            videoFinishedS();
+            this.applyCompleteData();
+        }
+
+        private function applyCompleteData() : void
+        {
             if(this._introData)
             {
-                this.loadingProgress.selectButtonVisible = !this._introData.autoStart;
-                this.loadingProgress.skipButtonVisible = this._introData.allowSkipButton;
-                this.loadingProgress.btnSelect.addEventListener(MouseEvent.CLICK,this.onSelectButtonClickHandler);
-                this.loadingProgress.btnSkip.addEventListener(MouseEvent.CLICK,this.onSkipButtonClickHandler);
+                this.btnSelect.visible = !this._introData.autoStart;
+                this.btnSkip.visible = this._introData.allowSkipButton;
+                this.btnSelect.addEventListener(ButtonEvent.CLICK,this.onSelectButtonClickHandler);
+                this.btnSkip.addEventListener(ButtonEvent.CLICK,this.onSkipButtonClickHandler);
                 this.closeBtn.visible = this._introData.isReferralEnabled && this._introData.isBootcampCloseEnabled;
                 this.introPage.referralDescription = this._introData.referralDescription;
                 if(this.closeBtn.visible)
                 {
-                    this.closeBtn.addEventListener(MouseEvent.CLICK,this.onSkipButtonClickHandler);
+                    this.closeBtn.addEventListener(ButtonEvent.CLICK,this.onSkipButtonClickHandler);
                 }
                 this.introPage.setReferralVisibility(this._introData.isReferralEnabled);
                 if(this._introData.autoStart)
@@ -228,40 +336,11 @@ package net.wg.gui.bootcamp.introVideoPage
             }
         }
 
-        public function as_showIntroPage(param1:Boolean) : void
+        private function onSkip() : void
         {
-            this.introPage.visible = param1;
-        }
-
-        public function as_updateProgress(param1:Number) : void
-        {
-            var _loc2_:int = param1 * FULL_PROGRESS;
-            if(this.loadingProgress.currentFrame < this.loadingProgress.totalFrames)
-            {
-                this.loadingProgress.gotoAndStop(_loc2_ + 1);
-            }
-        }
-
-        public function as_pausePlayback() : void
-        {
-            this.videoPlayer.pausePlayback();
-        }
-
-        public function as_resumePlayback() : void
-        {
-            this.videoPlayer.resumePlayback();
-        }
-
-        protected function disposePlayer() : void
-        {
-            if(this.videoPlayer)
-            {
-                this.videoPlayer.removeEventListener(VideoPlayerStatusEvent.STATUS_CHANGED,this.onVideoPlayerStatusChangedHandler);
-                this.videoPlayer.removeEventListener(VideoPlayerEvent.PLAYBACK_STOPPED,this.onVideoPlayerPlaybackStoppedHandler);
-                this.videoPlayer.removeEventListener(VideoPlayerStatusEvent.ERROR,this.onVideoPlayerErrorHandler);
-                this.videoPlayer.dispose();
-                this.videoPlayer = null;
-            }
+            this._skipShown = false;
+            App.stage.removeEventListener(KeyboardEvent.KEY_DOWN,this.onKeyDownHandler);
+            this.completeVideo();
         }
 
         private function disposeBackgroundRenderers() : void
@@ -306,10 +385,9 @@ package net.wg.gui.bootcamp.introVideoPage
 
         private function updateUIPosition() : void
         {
-            var _loc2_:* = 0;
             var _loc4_:* = NaN;
             var _loc1_:int = App.appWidth;
-            _loc2_ = App.appHeight;
+            var _loc2_:int = App.appHeight;
             if(this.videoPlayer != null)
             {
                 if(_loc1_ / _loc2_ > this._playerOriginalWidth / this._playerOriginalHeight)
@@ -327,9 +405,10 @@ package net.wg.gui.bootcamp.introVideoPage
                 this.videoPlayer.x = _loc1_ - this.videoPlayer.width >> 1;
                 this.videoPlayer.y = _loc2_ - this.videoPlayer.height >> 1;
             }
-            this.loadingProgress.x = _loc1_ >> 1;
-            this.loadingProgress.y = _loc2_;
-            this.loadingProgress.setSize(_loc1_,_loc2_);
+            this.btnSelect.x = _loc1_ - this.btnSelect.width >> 1;
+            this.btnSelect.y = _loc2_ + SELECT_BTN_Y;
+            this.btnSkip.x = this.btnSelect.x - this.btnSkip.width - BUTTON_SPACING;
+            this.btnSkip.y = _loc2_ + SKIP_BTN_Y;
             var _loc3_:Boolean = _loc1_ >= SMALL_SCREEN_WIDTH && _loc2_ >= SMALL_SCREEN_HEIGHT;
             if(this._introData && this._introData.showTutorialPages)
             {
@@ -360,6 +439,23 @@ package net.wg.gui.bootcamp.introVideoPage
             this.stepperBar.x = _loc1_ - this.stepperBar.width >> 1;
             this.closeBtn.validateNow();
             this.closeBtn.x = _loc1_ - this.closeBtn.width - CLOSE_BTN_PADDING_RIGHT;
+            this.loadingProgress.x = _loc1_ >> 1;
+            this.loadingProgress.y = _loc2_;
+            this.loadingProgress.setWidth(_loc1_);
+            this.updateWaiting();
+        }
+
+        private function updateWaiting() : void
+        {
+            var _loc1_:int = App.appWidth;
+            var _loc2_:int = App.appHeight;
+            if(this.waitingMC.visible)
+            {
+                this.waitingMC.x = _loc1_ + WAIT_MC_X;
+                this.waitingMC.y = _loc2_ + WAIT_MC_Y;
+            }
+            this.waitingTF.x = _loc1_ - this.waitingTF.width + WAIT_TF_X + (this.waitingMC.visible?WAIT_MC_X:0);
+            this.waitingTF.y = _loc2_ + WAIT_TF_Y;
         }
 
         private function updateBackgroundRenderer() : void
@@ -419,46 +515,71 @@ package net.wg.gui.bootcamp.introVideoPage
             goToBattleS();
         }
 
+        private function onKeyDownHandler(param1:Event) : void
+        {
+            this.onSkip();
+        }
+
         private function onStageClickHandler(param1:MouseEvent) : void
         {
-            if(!this._introData.showTutorialPages)
+            if(!this._introData || param1 is MouseEventEx && MouseEventEx(param1).buttonIdx != MouseEventEx.LEFT_BUTTON)
             {
-                this.continueToBattle();
+                return;
             }
-            else
+            if(this._skipShown)
             {
-                if(stage.mouseX > App.appWidth >> 1)
+                this.onSkip();
+            }
+            if(this._introData.navigationButtonsVisible)
+            {
+                if(!this._introData.showTutorialPages)
                 {
-                    this._imageGoRight = true;
+                    this.continueToBattle();
                 }
-                else if(stage.mouseX < App.appWidth >> 1)
+                else
                 {
-                    this._imageGoRight = false;
+                    if(stage.mouseX > App.appWidth >> 1)
+                    {
+                        this._imageGoRight = true;
+                    }
+                    else if(stage.mouseX < App.appWidth >> 1)
+                    {
+                        this._imageGoRight = false;
+                    }
+                    this.tweenFadeOut();
                 }
-                this.tweenFadeOut();
             }
         }
 
-        private function onSelectButtonClickHandler(param1:MouseEvent) : void
+        private function onSelectButtonClickHandler(param1:ButtonEvent) : void
         {
-            this.loadingProgress.btnSelect.removeEventListener(MouseEvent.CLICK,this.onSelectButtonClickHandler);
+            this.btnSelect.removeEventListener(ButtonEvent.CLICK,this.onSelectButtonClickHandler);
             this.continueToBattle();
         }
 
-        private function onSkipButtonClickHandler(param1:MouseEvent) : void
+        private function onSkipButtonClickHandler(param1:ButtonEvent) : void
         {
-            this.loadingProgress.btnSkip.removeEventListener(MouseEvent.CLICK,this.onSkipButtonClickHandler);
+            this.btnSkip.removeEventListener(ButtonEvent.CLICK,this.onSkipButtonClickHandler);
             skipBootcampS();
         }
 
         private function onVideoPlayerPlaybackStoppedHandler(param1:VideoPlayerEvent) : void
         {
+            this.completeVideo();
+        }
+
+        private function completeVideo() : void
+        {
             if(this.videoPlayer.source == this._introData.source)
             {
-                videoFinishedS();
+                this._videoCompleted = true;
                 if(!StringUtils.isNotEmpty(this._introData.backgroundVideo))
                 {
                     this.hideVideoPlayer();
+                }
+                if(this._loaded)
+                {
+                    this.onVideoCompleteOrSkip();
                 }
             }
             this.handleBackgroundVideo();

@@ -102,10 +102,7 @@ package net.wg.gui.lobby.menu
 
         override protected function onPopulate() : void
         {
-            var _loc1_:DisplayObject = null;
-            for each(this._btns[_loc1_.name] in [this.logoffBtn,this.settingsBtn,this.quitBtn,this.cancelBtn,this.bootcampBtn,this.manualBtn,this.postBtn])
-            {
-            }
+            this.updateButtons();
             super.onPopulate();
         }
 
@@ -227,6 +224,7 @@ package net.wg.gui.lobby.menu
             var _loc2_:* = this._menuState != param1;
             this._menuState = param1;
             this.gotoAndPlay(this._menuState);
+            this.updateButtons();
             if(_loc2_)
             {
                 this._bootomPositions[this.quitBtn] = this.quitBtn.y;
@@ -251,6 +249,10 @@ package net.wg.gui.lobby.menu
             registerFlashComponentS(this.serverStats,Aliases.SERVER_STATS);
             registerFlashComponentS(this.reportBugPanel,Aliases.REPORT_BUG);
             this.updateHeight(this.bounds.height);
+            if(hasFocus)
+            {
+                onCounterNeedUpdateS();
+            }
         }
 
         public function as_setPostButtonIcons(param1:String, param2:String) : void
@@ -281,6 +283,14 @@ package net.wg.gui.lobby.menu
         {
             this.manualBtn.visible = this._showManualButton = param1;
             invalidate(INVALIDATE_BUTTONS_VISIBLE);
+        }
+
+        private function updateButtons() : void
+        {
+            var _loc1_:DisplayObject = null;
+            for each(this._btns[_loc1_.name] in [this.logoffBtn,this.settingsBtn,this.quitBtn,this.cancelBtn,this.bootcampBtn,this.manualBtn,this.postBtn])
+            {
+            }
         }
 
         private function updateHeight(param1:int) : void

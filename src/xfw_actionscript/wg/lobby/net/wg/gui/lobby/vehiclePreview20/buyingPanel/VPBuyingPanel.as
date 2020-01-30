@@ -27,8 +27,8 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
     import net.wg.gui.lobby.vehiclePreview20.data.VPCouponVO;
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.utils.StageSizeBoundaries;
-    import net.wg.data.constants.UniversalBtnStylesConst;
     import net.wg.gui.components.controls.VO.PriceVO;
+    import net.wg.data.constants.UniversalBtnStylesConst;
     import flash.display.BitmapData;
     import net.wg.data.constants.Linkages;
     import net.wg.gui.lobby.vehiclePreview20.data.VPSetItemVO;
@@ -38,13 +38,19 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
     public class VPBuyingPanel extends VehiclePreviewBuyingPanelMeta implements IVehiclePreviewBuyingPanelMeta, IStageSizeDependComponent, IVPBottomPanel
     {
 
-        private static const CUSTOM_OFFER_VALUE_LABEL_OFFSET:int = 260;
+        private static const CUSTOM_OFFER_OFFSET_X:int = 20;
 
-        private static const CUSTOM_OFFER_NAME_LABEL_OFFSET:int = 4;
+        private static const CUSTOM_OFFER_OFFSET_Y:int = 4;
 
         private static const ACTION_BUTTON_DISCOUNT_OFFSET:int = 10;
 
+        private static const DISCOUNT_OVERLAY_OFFSET:int = 30;
+
         private static const BUY_BUTTON_DEFAULT_OFFSET:int = 32;
+
+        private static const ACTION_BUTTON_PADDING:int = 20;
+
+        private static const COMPENSATION_CURRENCY_OFFSET:int = 4;
 
         private static const HALF_BUY_BUTTON_DEFAULT_OFFSET:int = BUY_BUTTON_DEFAULT_OFFSET >> 1;
 
@@ -80,6 +86,8 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
 
         private static const DISCOUNT_OVERLAY_RESEARCH:String = "research";
 
+        private static const ACTION_BUTTON_DISABLED_ICON_ALPHA:Number = 0.5;
+
         public var notResearchedLabelTf:TextField;
 
         public var uniqueLabelTf:TextField;
@@ -106,9 +114,7 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
 
         public var discountOverlay:MovieClip = null;
 
-        public var customOfferValueTF:TextField = null;
-
-        public var customOfferNameTF:TextField = null;
+        public var customOfferLabelTF:TextField = null;
 
         public var couponView:CouponView = null;
 
@@ -158,6 +164,7 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
             this.compensation.addEventListener(Event.RESIZE,this.onContentResizeHandler);
             this.actionButton.addEventListener(ButtonEvent.CLICK,this.onActionButtonClickHandler);
             this.actionButton.mouseEnabledOnDisabled = true;
+            this.actionButton.disabledImageAlpha = ACTION_BUTTON_DISABLED_ICON_ALPHA;
             this.notResearchedLabelTf.mouseWheelEnabled = this.notResearchedLabelTf.mouseEnabled = false;
             this.notResearchedLabelTf.autoSize = TextFieldAutoSize.LEFT;
             this.notResearchedLabelTf.wordWrap = true;
@@ -181,12 +188,11 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
             this.timeLeftInfoIcon.visible = false;
             this.timeLeftInfoIcon.addEventListener(MouseEvent.ROLL_OVER,this.onTimeLeftInfoIconRollOverHandler);
             this.timeLeftInfoIcon.addEventListener(MouseEvent.ROLL_OUT,this.onTimeLeftInfoIconRollOutHandler);
-            this.customOfferValueTF.autoSize = TextFieldAutoSize.LEFT;
-            this.customOfferValueTF.visible = false;
-            this.customOfferNameTF.autoSize = TextFieldAutoSize.LEFT;
-            this.customOfferNameTF.visible = false;
+            this.customOfferLabelTF.autoSize = TextFieldAutoSize.LEFT;
+            this.customOfferLabelTF.visible = false;
             this.discountOverlay.mouseEnabled = this.discountOverlay.mouseChildren = false;
             this.discountOverlay.visible = false;
+            this.compensation.visible = false;
             mouseEnabled = false;
             App.stageSizeMgr.register(this);
         }
@@ -237,8 +243,7 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
             this.uniqueLabelTf = null;
             this.setTitleTF = null;
             this.discountOverlay = null;
-            this.customOfferValueTF = null;
-            this.customOfferNameTF = null;
+            this.customOfferLabelTF = null;
             this._data = null;
             this._toolTipMgr = null;
             super.onDispose();
@@ -360,8 +365,7 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
             var _loc2_:String = null;
             if(this._data)
             {
-                this.customOfferNameTF.visible = false;
-                this.customOfferValueTF.visible = false;
+                this.customOfferLabelTF.visible = false;
                 this.discountOverlay.visible = false;
                 if(this._data.uniqueVehicleTitle)
                 {
@@ -382,20 +386,17 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
                 {
                     this.setTitleTF.visible = false;
                 }
-                this.actionButton.label = this._data.buyButtonLabel;
-                this.actionButton.enabled = this._data.buyButtonEnabled;
-                this.actionButton.tooltip = this._data.buyButtonTooltip;
-                _loc1_ = this._data.isUnlock?UniversalBtnStylesConst.STYLE_HEAVY_LIME:UniversalBtnStylesConst.STYLE_HEAVY_ORANGE;
-                App.utils.universalBtnStyles.setStyle(this.actionButton,_loc1_);
-                if(this._data.customOffer != null)
+                if(StringUtils.isNotEmpty(this._data.customOffer))
                 {
                     this.compoundPrice.visible = false;
-                    this.customOfferValueTF.visible = true;
-                    this.customOfferValueTF.text = this._data.customOffer.value;
-                    this.customOfferNameTF.visible = true;
-                    this.customOfferNameTF.text = this._data.customOffer.name;
+                    this.customOfferLabelTF.visible = true;
+                    this.customOfferLabelTF.htmlText = this._data.customOffer;
                     this.discountOverlay.visible = true;
                     this.discountOverlay.gotoAndStop(this._data.isUnlock?DISCOUNT_OVERLAY_RESEARCH:DISCOUNT_OVERLAY_BUY);
+                    this.actionButton.changeSizeOnlyUpwards = true;
+                    this.actionButton.dynamicSizeByText = true;
+                    this.actionButton.paddingHorizontal = ACTION_BUTTON_PADDING;
+                    this.actionButton.visible = true;
                 }
                 else if(this._data.isBuyingAvailable)
                 {
@@ -428,6 +429,13 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
                     this.compoundPrice.visible = false;
                     this.discountOverlay.visible = false;
                 }
+                this.actionButton.label = this._data.buyButtonLabel;
+                this.actionButton.iconSource = this._data.buyButtonIcon;
+                this.actionButton.iconAlign = this._data.buyButtonIconAlign;
+                this.actionButton.enabled = this._data.buyButtonEnabled;
+                this.actionButton.tooltip = this._data.buyButtonTooltip;
+                _loc1_ = this._data.isUnlock?UniversalBtnStylesConst.STYLE_HEAVY_LIME:UniversalBtnStylesConst.STYLE_HEAVY_ORANGE;
+                App.utils.universalBtnStyles.setStyle(this.actionButton,_loc1_);
                 if(this._data.isReferralEnabled)
                 {
                     this.compoundPrice.visible = false;
@@ -453,16 +461,7 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
             var _loc4_:Point = null;
             var _loc5_:* = NaN;
             var _loc1_:* = 0;
-            if(this.customOfferNameTF.visible && this.customOfferValueTF.visible)
-            {
-                this.customOfferValueTF.x = this.notResearchedAlertIcon.visible?-INFO_ICON_OFFSET:CUSTOM_OFFER_VALUE_LABEL_OFFSET;
-                this.customOfferNameTF.x = this.customOfferValueTF.x - (this.customOfferNameTF.width + CUSTOM_OFFER_NAME_LABEL_OFFSET) | 0;
-                this.discountOverlay.x = this.customOfferValueTF.x - (this.discountOverlay.width - this.customOfferValueTF.width >> 1);
-                this.discountOverlay.y = this.customOfferValueTF.y - (this.discountOverlay.height - this.customOfferValueTF.height >> 1);
-                this.actionButton.x = this.customOfferValueTF.x + (this.customOfferValueTF.width + ACTION_BUTTON_DISCOUNT_OFFSET) | 0;
-                this.actionButton.y = this.customOfferValueTF.y - (this.actionButton.height - this.customOfferValueTF.height >> 1);
-            }
-            else if(this._data.isBuyingAvailable)
+            if(this._data.isBuyingAvailable)
             {
                 if(contains(this.setVehiclesView))
                 {
@@ -516,11 +515,30 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
                         this.compoundPrice.x = _loc1_ || -_loc3_;
                         this.actionButton.x = this.compoundPrice.x + _loc3_;
                     }
+                    if(this.discountOverlay.visible)
+                    {
+                        this.discountOverlay.x = this.compoundPrice.x + (this.compoundPrice.contentWidth - this.discountOverlay.width >> 1);
+                        this.discountOverlay.y = this.compoundPrice.y + (this.compoundPrice.contentHeight - this.discountOverlay.height >> 1);
+                    }
                 }
-                if(this.discountOverlay.visible)
+                else if(this.customOfferLabelTF.visible)
                 {
-                    this.discountOverlay.x = this.compoundPrice.x + (this.compoundPrice.contentWidth - this.discountOverlay.width >> 1);
-                    this.discountOverlay.y = this.compoundPrice.y + (this.compoundPrice.contentHeight - this.discountOverlay.height >> 1);
+                    if(this.setItemsView.visible)
+                    {
+                        this.customOfferLabelTF.x = _loc1_ + CUSTOM_OFFER_OFFSET_X;
+                        this.customOfferLabelTF.y = CUSTOM_OFFER_OFFSET_Y;
+                    }
+                    else
+                    {
+                        this.customOfferLabelTF.x = this.notResearchedAlertIcon.visible?-this.customOfferLabelTF.width - ACTION_BUTTON_DISCOUNT_OFFSET:0;
+                    }
+                    if(this.discountOverlay.visible)
+                    {
+                        this.discountOverlay.x = this.customOfferLabelTF.x + this.customOfferLabelTF.width - (this.discountOverlay.width >> 1) - DISCOUNT_OVERLAY_OFFSET | 0;
+                        this.discountOverlay.y = this.customOfferLabelTF.y - (this.discountOverlay.height - this.customOfferLabelTF.height >> 1);
+                    }
+                    this.actionButton.x = this.customOfferLabelTF.x + (this.customOfferLabelTF.width + ACTION_BUTTON_DISCOUNT_OFFSET) | 0;
+                    this.actionButton.y = this.customOfferLabelTF.y - (this.actionButton.height - this.customOfferLabelTF.height >> 1);
                 }
             }
             else
@@ -619,7 +637,7 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
 
         private function onSetVehiclesViewShowHandler(param1:VehiclePreview20Event) : void
         {
-            onCarouselVehilceSelectedS(VPVehicleCarouselVO(param1.data).intCD);
+            onCarouselVehicleSelectedS(VPVehicleCarouselVO(param1.data).intCD);
         }
 
         private function onOffersViewSelectHandler(param1:VehiclePreview20Event) : void

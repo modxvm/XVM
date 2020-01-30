@@ -7,26 +7,6 @@ package net.wg.gui.interfaces
 
         function hideLine() : void;
 
-        function setColor(param1:Number) : void;
-
         function setSize(param1:Number, param2:Number) : void;
-
-        function get toInventory() : Boolean;
-
-        function get fromInventory() : Boolean;
-
-        function get isRemovable() : Boolean;
-
-        function get moneyValue() : Number;
-
-        function get type() : String;
-
-        function get intCD() : Number;
-
-        function get count() : Number;
-
-        function get sellExternalData() : Array;
-
-        function get removePrice() : Array;
     }
 }

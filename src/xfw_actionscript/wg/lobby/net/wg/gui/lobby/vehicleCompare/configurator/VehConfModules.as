@@ -36,7 +36,7 @@ package net.wg.gui.lobby.vehicleCompare.configurator
             this.titleTf.text = VEH_COMPARE.VEHCONF_MODULES;
             this.topModulesTf.text = VEH_COMPARE.VEHCONF_TOPMODULESLABEL;
             this.topModulesCb.addEventListener(ButtonEvent.CLICK,this.onTopModulesBtnClickHandler);
-            this.topModulesCb.toolTip = VEH_COMPARE.VEHCONF_TOOLTIPS_TOPMODULESON;
+            this.topModulesCb.toolTip = this.topModulesCb.selected?VEH_COMPARE.VEHCONF_TOOLTIPS_TOPMODULESON:VEH_COMPARE.VEHCONF_TOOLTIPS_TOPMODULESOFF;
             this.topModulesCb.label = VEH_COMPARE.VEHCONF_TOPMODULESBTNLABEL;
             this.topModulesCb.validateNow();
             this.topModulesCb.autoSize = TextFieldAutoSize.RIGHT;

@@ -59,6 +59,7 @@ package net.wg.gui.lobby.profile.pages.summary
         public function ProfileSummary()
         {
             super();
+            _deferredDispose = true;
         }
 
         override public function as_setInitData(param1:Object) : void

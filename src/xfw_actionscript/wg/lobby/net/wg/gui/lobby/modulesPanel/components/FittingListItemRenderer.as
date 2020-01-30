@@ -91,6 +91,7 @@ package net.wg.gui.lobby.modulesPanel.components
             this.moduleType.mouseEnabled = this.moduleType.mouseChildren = false;
             this.targetMC.mouseEnabled = this.targetMC.mouseChildren = false;
             rendererBg.mouseEnabled = rendererBg.mouseChildren = false;
+            this.priceMC.mouseEnabled = this.priceMC.mouseChildren = false;
             this.titleField.mouseEnabled = false;
             this.errorField.mouseEnabled = false;
             addEventListener(MouseEvent.CLICK,this.onClickHandler);

@@ -9,6 +9,8 @@ package net.wg.infrastructure.base.meta
 
         function as_hide(param1:int) : void;
 
+        function as_setVerticalOffset(param1:int) : void;
+
         function as_setTimeInSeconds(param1:int, param2:int, param3:Number) : void;
 
         function as_setTimeSnapshot(param1:int, param2:int, param3:int) : void;

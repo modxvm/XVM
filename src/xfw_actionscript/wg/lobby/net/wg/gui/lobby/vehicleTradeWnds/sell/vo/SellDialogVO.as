@@ -34,7 +34,7 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell.vo
 
         public var battleBoostersOnVehicle:Vector.<SellOnVehicleEquipmentVo> = null;
 
-        public var modulesInInventory:Vector.<SellInInventoryModuleVo> = null;
+        public var modulesInInventory:Vector.<SellVehicleItemBaseVo> = null;
 
         public var shellsInInventory:Vector.<SellInInventoryShellVo> = null;
 
@@ -42,7 +42,7 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell.vo
 
         public var removeActionPrice:ActionPriceVO = null;
 
-        public var accountMoney:Array = null;
+        public var accountMoney:Object = null;
 
         public var isSlidingComponentOpened:Boolean = false;
 
@@ -75,7 +75,7 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell.vo
             }
             if(param1 == MODULES_IN_INVENTORY_LABEL)
             {
-                this.modulesInInventory = Vector.<SellInInventoryModuleVo>(App.utils.data.convertVOArrayToVector(param1,param2,SellInInventoryModuleVo));
+                this.modulesInInventory = Vector.<SellVehicleItemBaseVo>(App.utils.data.convertVOArrayToVector(param1,param2,SellVehicleItemBaseVo));
                 return false;
             }
             if(param1 == SHELLS_IN_INVENTORY_LABEL)
@@ -106,7 +106,7 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell.vo
             var _loc1_:SellOnVehicleOptionalDeviceVo = null;
             var _loc2_:SellOnVehicleShellVo = null;
             var _loc3_:SellOnVehicleEquipmentVo = null;
-            var _loc4_:SellInInventoryModuleVo = null;
+            var _loc4_:SellVehicleItemBaseVo = null;
             var _loc5_:SellInInventoryShellVo = null;
             var _loc6_:SellVehicleItemBaseVo = null;
             this.sellVehicleVO.dispose();
@@ -158,7 +158,6 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell.vo
             }
             this.customizationOnVehicle.splice(0,this.customizationOnVehicle.length);
             this.customizationOnVehicle = null;
-            this.accountMoney.splice(0,this.accountMoney.length);
             this.accountMoney = null;
             super.onDispose();
         }

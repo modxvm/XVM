@@ -4,7 +4,7 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
     import flash.text.TextField;
     import flash.display.Sprite;
     import flash.display.MovieClip;
-    import net.wg.data.VO.SellDialogElement;
+    import net.wg.data.VO.SellDialogElementVO;
     import net.wg.gui.interfaces.ISaleItemBlockRenderer;
     import net.wg.data.VO.SellDialogItem;
     import scaleform.clik.constants.InvalidationType;
@@ -23,13 +23,13 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
 
         public var scrollingRenderrBg:MovieClip;
 
-        private var _elements:Vector.<SellDialogElement>;
+        private var _elements:Vector.<SellDialogElementVO>;
 
         private var _renderers:Vector.<ISaleItemBlockRenderer>;
 
         public function SellDialogListItemRenderer()
         {
-            this._elements = new Vector.<SellDialogElement>();
+            this._elements = new Vector.<SellDialogElementVO>();
             this._renderers = new Vector.<ISaleItemBlockRenderer>();
             preventAutosizing = true;
             super();

@@ -7,6 +7,8 @@ package net.wg.gui.components.controls.tabs
     import flash.text.TextFieldAutoSize;
     import scaleform.clik.constants.InvalidationType;
     import flash.events.MouseEvent;
+    import flash.geom.Rectangle;
+    import flash.display.DisplayObject;
 
     public class OrangeTabButton extends SoundListItemRenderer
     {
@@ -164,6 +166,11 @@ package net.wg.gui.components.controls.tabs
         override public function get height() : Number
         {
             return this.background.height;
+        }
+
+        override public function getBounds(param1:DisplayObject) : Rectangle
+        {
+            return this.background.getBounds(param1);
         }
 
         override public function set selected(param1:Boolean) : void

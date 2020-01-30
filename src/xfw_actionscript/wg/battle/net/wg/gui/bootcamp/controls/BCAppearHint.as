@@ -2,6 +2,8 @@ package net.wg.gui.bootcamp.controls
 {
     import flash.display.MovieClip;
     import flash.events.Event;
+    import net.wg.gui.bootcamp.events.AppearEvent;
+    import net.wg.data.constants.Values;
 
     public class BCAppearHint extends BCHighlightRendererBase
     {
@@ -10,10 +12,13 @@ package net.wg.gui.bootcamp.controls
 
         public var animationMC:MovieClip;
 
+        private var _isStartAnimation:Boolean = false;
+
         public function BCAppearHint()
         {
             super();
             this.animationMC.addFrameScript(this.animationMC.totalFrames - 1,this.onAnimationComplete);
+            addEventListener(Event.ENTER_FRAME,this.onEnterFrameHandler);
         }
 
         override public function setProperties(param1:Number, param2:Number, param3:Boolean) : void
@@ -37,6 +42,16 @@ package net.wg.gui.bootcamp.controls
             this.animationMC.addFrameScript(this.animationMC.totalFrames - 1,null);
             stop();
             dispatchEvent(new Event(Event.COMPLETE));
+        }
+
+        private function onEnterFrameHandler(param1:Event) : void
+        {
+            removeEventListener(Event.ENTER_FRAME,this.onEnterFrameHandler);
+            if(!this._isStartAnimation)
+            {
+                this._isStartAnimation = true;
+                dispatchEvent(new AppearEvent(AppearEvent.PREPARE,Values.EMPTY_STR,Values.EMPTY_STR,true));
+            }
         }
     }
 }

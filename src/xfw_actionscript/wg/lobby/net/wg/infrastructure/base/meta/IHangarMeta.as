@@ -53,6 +53,6 @@ package net.wg.infrastructure.base.meta
 
         function as_updateSeniorityAwardsEntryPoint(param1:Boolean) : void;
 
-        function as_setLootboxesVisible(param1:Boolean) : void;
+        function as_toggleBob(param1:Boolean) : void;
     }
 }

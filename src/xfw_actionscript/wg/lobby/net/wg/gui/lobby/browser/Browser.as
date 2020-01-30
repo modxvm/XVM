@@ -19,15 +19,12 @@ package net.wg.gui.lobby.browser
 
         private var _mouseDown:Boolean = false;
 
+        private var _showContentUnderWaiting:Boolean = true;
+
         public function Browser()
         {
             super();
             this.serviceView.visible = false;
-        }
-
-        public function as_invalidateView() : void
-        {
-            invalidateViewS();
         }
 
         override public function setSize(param1:Number, param2:Number) : void
@@ -46,9 +43,16 @@ package net.wg.gui.lobby.browser
             {
                 this._bgImg.visible = !this.serviceView.visible;
             }
-            if(isInvalid(InvalidationType.SIZE) && this.serviceView.visible)
+            if(isInvalid(InvalidationType.SIZE))
             {
-                this.updateServiceViewPos();
+                if(this.serviceView.visible)
+                {
+                    this.updateServiceViewPos();
+                }
+                if(!this._showContentUnderWaiting)
+                {
+                    this.drawNoTransparencyBG();
+                }
             }
         }
 
@@ -93,13 +97,37 @@ package net.wg.gui.lobby.browser
             dispatchEvent(new BrowserEvent(BrowserEvent.SERVICE_VIEW_HIDDEN));
         }
 
-        public function as_loadingStart() : void
+        public function as_invalidateView() : void
+        {
+            invalidateViewS();
+        }
+
+        public function as_loadingStart(param1:Boolean) : void
         {
             dispatchEvent(new BrowserEvent(BrowserEvent.LOADING_STARTED));
+            this._showContentUnderWaiting = param1;
+            if(this._bgImg)
+            {
+                this._bgImg.alpha = this._showContentUnderWaiting?1:0;
+            }
+            if(!this._showContentUnderWaiting)
+            {
+                this.drawNoTransparencyBG();
+            }
+            else
+            {
+                graphics.clear();
+            }
         }
 
         public function as_loadingStop() : void
         {
+            if(this._bgImg)
+            {
+                this._bgImg.alpha = 1;
+            }
+            graphics.clear();
+            this._showContentUnderWaiting = true;
             this.checkAndCreateBgImg();
             this.invalidBgImgVisible();
             dispatchEvent(new BrowserEvent(BrowserEvent.LOADING_STOPPED));
@@ -118,6 +146,14 @@ package net.wg.gui.lobby.browser
             this.serviceView.visible = true;
             this.invalidBgImgVisible();
             dispatchEvent(new BrowserEvent(BrowserEvent.SERVICE_VIEW_SHOWED));
+        }
+
+        private function drawNoTransparencyBG() : void
+        {
+            graphics.clear();
+            graphics.beginFill(0);
+            graphics.drawRect(0,0,_width,_height);
+            graphics.endFill();
         }
 
         private function updateServiceViewPos() : void

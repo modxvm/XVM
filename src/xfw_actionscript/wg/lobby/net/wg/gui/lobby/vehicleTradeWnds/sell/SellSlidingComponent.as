@@ -3,13 +3,13 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
     import net.wg.infrastructure.base.UIComponentEx;
     import flash.display.MovieClip;
     import net.wg.data.VO.SellDialogItem;
-    import net.wg.data.VO.SellDialogElement;
+    import net.wg.data.VO.SellDialogElementVO;
     import net.wg.gui.events.VehicleSellDialogEvent;
     import net.wg.gui.lobby.vehicleTradeWnds.sell.vo.SellOnVehicleEquipmentVo;
-    import net.wg.data.constants.generated.FITTING_TYPES;
     import net.wg.utils.ILocale;
+    import net.wg.data.constants.generated.FITTING_TYPES;
     import scaleform.clik.data.DataProvider;
-    import net.wg.gui.lobby.vehicleTradeWnds.sell.vo.SellInInventoryModuleVo;
+    import net.wg.gui.lobby.vehicleTradeWnds.sell.vo.SellVehicleItemBaseVo;
     import net.wg.gui.lobby.vehicleTradeWnds.sell.vo.SellInInventoryShellVo;
     import net.wg.gui.lobby.vehicleTradeWnds.sell.vo.SellOnVehicleShellVo;
     import flash.geom.Rectangle;
@@ -45,8 +45,8 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
         override protected function onDispose() : void
         {
             var _loc1_:SellDialogItem = null;
-            var _loc2_:Vector.<SellDialogElement> = null;
-            var _loc3_:SellDialogElement = null;
+            var _loc2_:Vector.<SellDialogElementVO> = null;
+            var _loc3_:SellDialogElementVO = null;
             this.settingsBtn.dispose();
             this.settingsBtn = null;
             this.mask_mc = null;
@@ -84,7 +84,7 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
             var _loc3_:SellDialogItem = null;
             var _loc4_:SellOnVehicleEquipmentVo = null;
             var _loc5_:uint = 0;
-            var _loc6_:SellDialogElement = null;
+            var _loc6_:SellDialogElementVO = null;
             var _loc2_:Number = param1.length;
             if(_loc2_ > 0)
             {
@@ -94,9 +94,8 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
                 while(_loc5_ < _loc2_)
                 {
                     _loc4_ = param1[_loc5_];
-                    _loc6_ = new SellDialogElement();
-                    _loc6_.type = FITTING_TYPES.BOOSTER;
-                    _loc6_.intCD = _loc4_.intCD;
+                    _loc6_ = new SellDialogElementVO();
+                    _loc6_.itemIDList = [_loc4_.itemID];
                     _loc6_.toInventory = _loc4_.toInventory;
                     _loc6_.moneyValue = _loc4_.sellPrice[0] != 0?_loc4_.sellPrice[0]:_loc4_.sellPrice[1];
                     _loc6_.count = _loc4_.count;
@@ -149,7 +148,7 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
             var _loc4_:SellOnVehicleEquipmentVo = null;
             var _loc5_:ILocale = null;
             var _loc6_:* = 0;
-            var _loc7_:SellDialogElement = null;
+            var _loc7_:SellDialogElementVO = null;
             var _loc2_:int = param1.length;
             if(_loc2_ > 0)
             {
@@ -160,8 +159,8 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
                 while(_loc6_ < _loc2_)
                 {
                     _loc4_ = param1[_loc6_];
-                    _loc7_ = new SellDialogElement();
-                    _loc7_.intCD = _loc4_.intCD;
+                    _loc7_ = new SellDialogElementVO();
+                    _loc7_.itemIDList = [_loc4_.itemID];
                     _loc7_.type = FITTING_TYPES.CUSTOMIZATION;
                     _loc7_.toInventory = _loc4_.toInventory;
                     _loc7_.moneyValue = _loc4_.sellPrice[0] != 0?_loc4_.sellPrice[0]:_loc4_.sellPrice[1];
@@ -189,7 +188,7 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
             var _loc3_:SellDialogItem = null;
             var _loc4_:SellOnVehicleEquipmentVo = null;
             var _loc5_:uint = 0;
-            var _loc6_:SellDialogElement = null;
+            var _loc6_:SellDialogElementVO = null;
             var _loc2_:Number = param1.length;
             if(_loc2_ > 0)
             {
@@ -199,13 +198,13 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
                 while(_loc5_ < _loc2_)
                 {
                     _loc4_ = param1[_loc5_];
-                    _loc6_ = new SellDialogElement();
+                    _loc6_ = new SellDialogElementVO();
                     _loc6_.id = _loc4_.userName;
                     _loc6_.type = FITTING_TYPES.EQUIPMENT;
                     _loc6_.moneyValue = _loc4_.sellPrice[0] != 0?_loc4_.sellPrice[0]:_loc4_.sellPrice[1];
                     _loc6_.sellActionPriceVo = _loc4_.actionVo;
                     _loc6_.toInventory = _loc4_.toInventory;
-                    _loc6_.intCD = _loc4_.intCD;
+                    _loc6_.itemIDList = [_loc4_.itemID];
                     _loc6_.isRemovable = true;
                     _loc6_.count = _loc4_.count;
                     _loc6_.removePrice = _loc4_.removePrice;
@@ -219,17 +218,17 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
             }
         }
 
-        public function setInventory(param1:Vector.<SellInInventoryModuleVo>, param2:Vector.<SellInInventoryShellVo>) : void
+        public function setInventory(param1:Vector.<SellVehicleItemBaseVo>, param2:Vector.<SellInInventoryShellVo>) : void
         {
-            var _loc14_:SellDialogElement = null;
+            var _loc14_:SellDialogElementVO = null;
             var _loc3_:SellDialogItem = new SellDialogItem();
             var _loc4_:Number = 0;
-            var _loc5_:SellDialogElement = new SellDialogElement();
+            var _loc5_:SellDialogElementVO = new SellDialogElementVO();
             _loc5_.toInventory = true;
             var _loc6_:Number = 0;
             var _loc7_:Number = param1.length;
-            var _loc8_:SellInInventoryModuleVo = null;
-            var _loc9_:Array = new Array();
+            var _loc8_:SellVehicleItemBaseVo = null;
+            var _loc9_:Array = [];
             var _loc10_:uint = 0;
             while(_loc10_ < _loc7_)
             {
@@ -237,10 +236,7 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
                 _loc4_ = _loc4_ + _loc8_.sellPrice[0] * _loc8_.count;
                 _loc6_ = _loc6_ + _loc8_.count;
                 _loc5_.toInventory = _loc5_.toInventory;
-                _loc9_.push({
-                    "intCD":_loc8_.intCD,
-                    "count":_loc8_.count
-                });
+                _loc9_.push(_loc8_.itemID);
                 _loc10_++;
             }
             var _loc11_:ILocale = App.utils.locale;
@@ -251,7 +247,7 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
                 _loc5_.isRemovable = true;
                 _loc5_.type = FITTING_TYPES.MODULE;
                 _loc5_.count = _loc6_;
-                _loc5_.sellExternalData = _loc9_;
+                _loc5_.itemIDList = _loc9_;
                 _loc5_.removePrice = _loc5_.removePrice;
                 _loc5_.removeActionPriceVo = _loc8_.removeActionPrice;
                 _loc3_.elements.push(_loc5_);
@@ -264,14 +260,14 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
                 _loc12_ = param2[_loc13_];
                 if(_loc12_.count != 0)
                 {
-                    _loc14_ = new SellDialogElement();
+                    _loc14_ = new SellDialogElementVO();
                     _loc14_.id = _loc12_.userName + " (" + _loc12_.count + " " + _loc11_.makeString(DIALOGS.VEHICLESELLDIALOG_COUNT) + ")";
                     _loc14_.isRemovable = true;
                     _loc14_.kind = _loc12_.kind;
                     _loc14_.type = FITTING_TYPES.SHELL;
                     _loc14_.toInventory = _loc12_.toInventory;
                     _loc14_.fromInventory = true;
-                    _loc14_.intCD = _loc12_.intCD;
+                    _loc14_.itemIDList = [_loc12_.itemID];
                     _loc14_.count = _loc12_.count;
                     _loc14_.moneyValue = _loc12_.sellPrice[0] * _loc12_.count;
                     _loc14_.onlyToInventory = _loc12_.onlyToInventory;
@@ -298,7 +294,7 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
             var _loc4_:ILocale = null;
             var _loc5_:SellOnVehicleShellVo = null;
             var _loc6_:uint = 0;
-            var _loc7_:SellDialogElement = null;
+            var _loc7_:SellDialogElementVO = null;
             var _loc2_:Number = param1.length;
             if(_loc2_ > 0)
             {
@@ -311,12 +307,12 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
                     _loc5_ = param1[_loc6_];
                     if(_loc5_.count != 0)
                     {
-                        _loc7_ = new SellDialogElement();
+                        _loc7_ = new SellDialogElementVO();
                         _loc7_.id = _loc5_.userName + " (" + _loc5_.count + " " + _loc4_.makeString(DIALOGS.VEHICLESELLDIALOG_COUNT) + ")";
                         _loc7_.isRemovable = true;
                         _loc7_.type = FITTING_TYPES.SHELL;
                         _loc7_.kind = _loc5_.kind;
-                        _loc7_.intCD = _loc5_.intCD;
+                        _loc7_.itemIDList = [_loc5_.itemID];
                         _loc7_.moneyValue = _loc5_.sellPrice[0] * _loc5_.count;
                         _loc7_.fromInventory = false;
                         _loc7_.count = _loc5_.count;

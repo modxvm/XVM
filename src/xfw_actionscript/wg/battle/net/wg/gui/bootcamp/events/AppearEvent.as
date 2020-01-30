@@ -7,6 +7,8 @@ package net.wg.gui.bootcamp.events
 
         public static const PREPARE:String = "appearStart";
 
+        public static const PREPARE_MINIMAP:String = "appearStartMinimap";
+
         public static const ALL_COMPLETE:String = "appearAllComplete";
 
         public static const TWEEN_COMPLETE:String = "appearTweenComplete";

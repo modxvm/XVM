@@ -10,5 +10,7 @@ package net.wg.gui.components.tooltips.inblocks.interfaces
         function get layoutGap() : int;
 
         function get layoutAlign() : String;
+
+        function get stretchLastElement() : Boolean;
     }
 }

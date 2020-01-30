@@ -100,6 +100,9 @@ package net.wg.gui.lobby.modulesPanel.components
             this.removeButton.soundType = SoundTypes.ITEM_RDR;
             this.notAffected.visible = false;
             this.notAffected.mouseEnabled = this.notAffected.mouseChildren = false;
+            this.moduleHighlight.mouseEnabled = this.moduleHighlight.mouseChildren = false;
+            moduleType.mouseEnabled = moduleType.mouseChildren = false;
+            this.moduleOverlay.mouseEnabled = this.moduleOverlay.mouseChildren = false;
             this.descField.mouseEnabled = false;
             this.notAffected.source = RES_ICONS.MAPS_ICONS_LIBRARY_ALERTBIGICON;
         }

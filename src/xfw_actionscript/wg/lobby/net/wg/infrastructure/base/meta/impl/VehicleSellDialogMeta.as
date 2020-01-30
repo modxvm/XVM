@@ -14,11 +14,9 @@ package net.wg.infrastructure.base.meta.impl
 
         public var setUserInput:Function;
 
-        public var setResultCredit:Function;
+        public var setCrewDismissal:Function;
 
-        public var checkControlQuestion:Function;
-
-        public var onChangeConfiguration:Function;
+        public var onSelectionChanged:Function;
 
         private var _sellDialogVO:SellDialogVO;
 
@@ -43,10 +41,10 @@ package net.wg.infrastructure.base.meta.impl
             this.setDialogSettings(param1);
         }
 
-        public function sellS(param1:Object, param2:Array, param3:Array, param4:Array, param5:Array, param6:Array, param7:Array, param8:Boolean) : void
+        public function sellS() : void
         {
             App.utils.asserter.assertNotNull(this.sell,"sell" + Errors.CANT_NULL);
-            this.sell(param1,param2,param3,param4,param5,param6,param7,param8);
+            this.sell();
         }
 
         public function setUserInputS(param1:String) : void
@@ -55,22 +53,16 @@ package net.wg.infrastructure.base.meta.impl
             this.setUserInput(param1);
         }
 
-        public function setResultCreditS(param1:Boolean, param2:int) : void
+        public function setCrewDismissalS(param1:Boolean) : void
         {
-            App.utils.asserter.assertNotNull(this.setResultCredit,"setResultCredit" + Errors.CANT_NULL);
-            this.setResultCredit(param1,param2);
+            App.utils.asserter.assertNotNull(this.setCrewDismissal,"setCrewDismissal" + Errors.CANT_NULL);
+            this.setCrewDismissal(param1);
         }
 
-        public function checkControlQuestionS(param1:Boolean) : void
+        public function onSelectionChangedS(param1:int, param2:Boolean, param3:String) : void
         {
-            App.utils.asserter.assertNotNull(this.checkControlQuestion,"checkControlQuestion" + Errors.CANT_NULL);
-            this.checkControlQuestion(param1);
-        }
-
-        public function onChangeConfigurationS(param1:Array) : void
-        {
-            App.utils.asserter.assertNotNull(this.onChangeConfiguration,"onChangeConfiguration" + Errors.CANT_NULL);
-            this.onChangeConfiguration(param1);
+            App.utils.asserter.assertNotNull(this.onSelectionChanged,"onSelectionChanged" + Errors.CANT_NULL);
+            this.onSelectionChanged(param1,param2,param3);
         }
 
         public final function as_setData(param1:Object) : void

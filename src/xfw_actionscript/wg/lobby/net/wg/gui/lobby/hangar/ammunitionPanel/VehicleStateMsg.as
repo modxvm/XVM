@@ -47,7 +47,6 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
 
         override protected function draw() : void
         {
-            var _loc1_:* = NaN;
             super.draw();
             if(this._data && isInvalid(InvalidationType.DATA))
             {
@@ -57,11 +56,14 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
             if(isInvalid(InvalidationType.SIZE))
             {
-                _loc1_ = this.msgBackground.visible?this._offset:this._basePosition;
-                this.vehicleMsg.y = _loc1_;
                 if(this.msgBackground.visible)
                 {
+                    this.vehicleMsg.y = this._offset;
                     this.msgBackground.y = this.vehicleMsg.y + BACKGROUND_OFFSET;
+                }
+                else
+                {
+                    this.vehicleMsg.y = this._basePosition;
                 }
                 this.vehicleMsg.width = this.vehicleMsg.textWidth;
                 this.vehicleMsg.x = width - this.vehicleMsg.width >> 1;

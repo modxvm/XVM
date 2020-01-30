@@ -70,6 +70,8 @@ package net.wg.gui.components.crosshairPanel.components.autoloader
 
         private var _isCritical:Boolean = false;
 
+        private var _isTimerRed:Boolean = false;
+
         private var _shells:Vector.<MovieClip> = null;
 
         private var _lastShell:MovieClip = null;
@@ -116,11 +118,11 @@ package net.wg.gui.components.crosshairPanel.components.autoloader
             super.draw();
             if(isInvalid(TIMER_STATE_INVALID))
             {
-                this.timer.updateTimerColor(this._isAnimationInProgress,this._isCritical,this._isAutoloadInProgress);
+                this.timer.updateTimerColor(this._isTimerRed,this._isCritical,this._isAutoloadInProgress);
             }
         }
 
-        public function autoloadProgress(param1:Number, param2:Number, param3:Boolean) : void
+        public function autoloadProgress(param1:Number, param2:Number, param3:Boolean, param4:Boolean) : void
         {
             if(!this._isAnimationInProgress)
             {
@@ -138,6 +140,7 @@ package net.wg.gui.components.crosshairPanel.components.autoloader
                     }
                 }
             }
+            this.setTimerRed(param4);
             this.timer.updateTimer(param2,param3);
         }
 
@@ -147,10 +150,12 @@ package net.wg.gui.components.crosshairPanel.components.autoloader
             if(param1 < GUN_RELOADING_COMPLETE_STATE)
             {
                 this.reloadingInProgress(param1);
+                this.setTimerRed(true);
             }
             else
             {
                 this.reloadingComplete(param2);
+                this.setTimerRed(false);
             }
         }
 
@@ -231,6 +236,15 @@ package net.wg.gui.components.crosshairPanel.components.autoloader
                 invalidate(TIMER_STATE_INVALID);
             }
             gotoAndStop(param1 * RELOADING_FRAMES);
+        }
+
+        private function setTimerRed(param1:Boolean) : void
+        {
+            if(this._isTimerRed != param1)
+            {
+                this._isTimerRed = param1;
+                invalidate(TIMER_STATE_INVALID);
+            }
         }
 
         public function set totalAmmo(param1:int) : void

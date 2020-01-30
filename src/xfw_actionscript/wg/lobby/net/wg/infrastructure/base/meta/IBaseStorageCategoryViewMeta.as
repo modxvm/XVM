@@ -9,6 +9,8 @@ package net.wg.infrastructure.base.meta
 
         function playInfoSoundS() : void;
 
+        function scrolledToBottomS() : void;
+
         function as_showDummyScreen(param1:Boolean) : void;
 
         function as_showFilterWarning(param1:Object) : void;

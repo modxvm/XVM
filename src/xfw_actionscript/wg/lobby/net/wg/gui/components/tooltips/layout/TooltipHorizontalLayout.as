@@ -55,6 +55,11 @@ package net.wg.gui.components.tooltips.layout
                 _loc12_++;
             }
             _measuredWidth = _loc9_;
+            if(_loc5_ != null && param1.data.stretchLastElement && _expectedWidth > 0)
+            {
+                _loc5_.setBlockWidth(_loc5_.getWidth() + _expectedWidth - _measuredWidth);
+                _measuredWidth = _expectedWidth;
+            }
             _measuredHeight = _loc11_;
             var _loc13_:String = param1.data.layoutAlign;
             var _loc14_:* = 0;

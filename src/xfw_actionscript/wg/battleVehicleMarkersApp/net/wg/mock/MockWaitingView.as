@@ -745,5 +745,9 @@ package net.wg.mock
         public function handleInput(param1:InputEvent) : void
         {
         }
+
+        public function as_showAwards(param1:Boolean) : void
+        {
+        }
     }
 }

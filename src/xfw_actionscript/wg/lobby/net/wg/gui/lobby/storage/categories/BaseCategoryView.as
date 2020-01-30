@@ -7,8 +7,8 @@ package net.wg.gui.lobby.storage.categories
     import net.wg.gui.components.advanced.interfaces.IDummy;
     import scaleform.clik.interfaces.IDataProvider;
     import net.wg.gui.components.advanced.vo.DummyVO;
-    import net.wg.gui.lobby.storage.categories.cards.CardEvent;
     import flash.events.Event;
+    import net.wg.gui.lobby.storage.categories.cards.CardEvent;
     import net.wg.gui.components.advanced.events.DummyEvent;
     import scaleform.clik.constants.InvalidationType;
     import flash.display.InteractiveObject;
@@ -64,8 +64,10 @@ package net.wg.gui.lobby.storage.categories
         {
             this._filterWarningVo = null;
             this.cardsDP = null;
+            this.scrollBar.removeEventListener(Event.SCROLL,this.onScrollHandler);
             this.scrollBar.dispose();
             this.scrollBar = null;
+            this.carousel.scrollList.removeEventListener(Event.RESIZE,this.onScrollListResized);
             this.carousel.removeEventListener(CardEvent.PLAY_INFO_SOUND,this.onCarouselPlayInfoSoundHandler);
             this.carousel.removeEventListener(CardEvent.SHOW_CONTEXT_MENU,this.onShowCardContextMenuHandler);
             this.carousel.removeEventListener(Event.RESIZE,this.onCarouselResizeHandler);
@@ -92,6 +94,8 @@ package net.wg.gui.lobby.storage.categories
             {
                 this.noFilterWarningView.addEventListener(DummyEvent.CLICK,this.onNoFilterResultsClickHandler);
             }
+            this.scrollBar.addEventListener(Event.SCROLL,this.onScrollHandler);
+            this.carousel.scrollList.addEventListener(Event.RESIZE,this.onScrollListResized);
         }
 
         override protected function draw() : void
@@ -219,6 +223,22 @@ package net.wg.gui.lobby.storage.categories
         private function onCarouselPlayInfoSoundHandler(param1:CardEvent) : void
         {
             playInfoSoundS();
+        }
+
+        private function onScrollHandler(param1:Event) : void
+        {
+            if(!this.carousel.scrollList.availableScrollDown)
+            {
+                scrolledToBottomS();
+            }
+        }
+
+        private function onScrollListResized(param1:Event) : void
+        {
+            if(!this.scrollBar.visible)
+            {
+                scrolledToBottomS();
+            }
         }
 
         public function get noItemsComponent() : UIComponent

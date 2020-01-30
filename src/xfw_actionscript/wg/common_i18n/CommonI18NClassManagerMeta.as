@@ -11,6 +11,8 @@ package
 
         public static const BATTLE_TUTORIAL:Class = BATTLE_TUTORIAL;
 
+        public static const BOB:Class = BOB;
+
         public static const BOOTCAMP:Class = BOOTCAMP;
 
         public static const CHAT:Class = CHAT;
@@ -26,6 +28,8 @@ package
         public static const CREW_SKINS:Class = CREW_SKINS;
 
         public static const CYBERSPORT:Class = CYBERSPORT;
+
+        public static const DEMOUNT_KIT:Class = DEMOUNT_KIT;
 
         public static const DEVELOPMENT:Class = DEVELOPMENT;
 
@@ -50,8 +54,6 @@ package
         public static const MENU:Class = MENU;
 
         public static const MESSENGER:Class = MESSENGER;
-
-        public static const NY:Class = NY;
 
         public static const PERSONAL_MISSIONS:Class = PERSONAL_MISSIONS;
 

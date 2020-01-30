@@ -71,6 +71,8 @@ package net.wg.data.constants.generated
 
         public static const STORAGE_CREW_BOOKS_NO_SALE_ITEM:String = "storageCrewBooksNoSaleItem";
 
+        public static const STORAGE_DEMOUNT_KIT_ITEM:String = "storageDemountKitItem";
+
         public function CONTEXT_MENU_HANDLER_TYPE()
         {
             super();

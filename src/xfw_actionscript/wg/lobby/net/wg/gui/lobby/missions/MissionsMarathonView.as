@@ -68,7 +68,7 @@ package net.wg.gui.lobby.missions
             this.browser.addEventListener(BrowserEvent.LOADING_STARTED,this.onBrowserLoadingStartedHandler);
             this.browser.addEventListener(BrowserEvent.LOADING_STOPPED,this.onBrowserLoadingStoppedHandler);
             this.browser.setSize(_width,_height);
-            addChild(this.browser);
+            addChildAt(this.browser,0);
             registerFlashComponentS(this.browser,Aliases.BROWSER);
         }
 

@@ -15,7 +15,7 @@ package net.wg.infrastructure.base.meta.impl
 
         public var onBuyOrResearchClick:Function;
 
-        public var onCarouselVehilceSelected:Function;
+        public var onCarouselVehicleSelected:Function;
 
         public var onOfferSelected:Function;
 
@@ -81,10 +81,10 @@ package net.wg.infrastructure.base.meta.impl
             this.onBuyOrResearchClick();
         }
 
-        public function onCarouselVehilceSelectedS(param1:int) : void
+        public function onCarouselVehicleSelectedS(param1:int) : void
         {
-            App.utils.asserter.assertNotNull(this.onCarouselVehilceSelected,"onCarouselVehilceSelected" + Errors.CANT_NULL);
-            this.onCarouselVehilceSelected(param1);
+            App.utils.asserter.assertNotNull(this.onCarouselVehicleSelected,"onCarouselVehicleSelected" + Errors.CANT_NULL);
+            this.onCarouselVehicleSelected(param1);
         }
 
         public function onOfferSelectedS(param1:String) : void

@@ -54,6 +54,8 @@ package net.wg.gui.battle.components
 
         protected var stageHeight:int = 0;
 
+        private var _additionalTopOffset:int = 0;
+
         private var _statusVisibleBefore:Boolean = false;
 
         private var _secondaryTimerVisibleBefore:Boolean = false;
@@ -184,6 +186,7 @@ package net.wg.gui.battle.components
                     x = this.stageWidth - _loc4_ >> 1;
                     y = (this.stageHeight >> 1) + TOP_OFFSET_Y;
                 }
+                y = y + this._additionalTopOffset;
                 invalidateSize();
             }
         }
@@ -275,6 +278,15 @@ package net.wg.gui.battle.components
         public function as_setTimeSnapshot(param1:int, param2:int, param3:int) : void
         {
             this._timers[param1].updateRadialTimer(param2,param3);
+        }
+
+        public function as_setVerticalOffset(param1:int) : void
+        {
+            if(this._additionalTopOffset != param1)
+            {
+                this._additionalTopOffset = param1;
+                invalidate(INVALID_STATE);
+            }
         }
 
         public function as_show(param1:int, param2:int, param3:Boolean) : void
@@ -439,6 +451,11 @@ package net.wg.gui.battle.components
             invalidate(INVALID_STATE);
         }
 
+        private function onCurrentTimerTimerHiddenEventHandler(param1:DestroyTimerEvent) : void
+        {
+            this.hideTimer(param1.destroyTimer);
+        }
+
         public function get statusVisibleBefore() : Boolean
         {
             return this._statusVisibleBefore;
@@ -457,11 +474,6 @@ package net.wg.gui.battle.components
         public function set secondaryTimerVisibleBefore(param1:Boolean) : void
         {
             this._secondaryTimerVisibleBefore = param1;
-        }
-
-        private function onCurrentTimerTimerHiddenEventHandler(param1:DestroyTimerEvent) : void
-        {
-            this.hideTimer(param1.destroyTimer);
         }
     }
 }

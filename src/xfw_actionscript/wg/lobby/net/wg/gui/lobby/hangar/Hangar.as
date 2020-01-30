@@ -10,6 +10,7 @@ package net.wg.gui.lobby.hangar
     import net.wg.gui.lobby.hangar.ammunitionPanel.AmmunitionPanel;
     import flash.display.Sprite;
     import net.wg.gui.lobby.post.Teaser;
+    import net.wg.gui.lobby.hangar.wgbob.BobAnnouncementWidget;
     import net.wg.gui.lobby.hangar.tcarousel.TankCarousel;
     import net.wg.gui.lobby.rankedBattles19.components.widget.RankedBattlesHangarWidget;
     import net.wg.gui.lobby.hangar.alertMessage.AlertMessageBlock;
@@ -23,10 +24,10 @@ package net.wg.gui.lobby.hangar
     import scaleform.clik.motion.Tween;
     import flash.display.Loader;
     import net.wg.gui.lobby.hangar.seniorityAwards.SeniorityAwardsEntryPointHangar;
+    import net.wg.gui.lobby.bob.HangarComponentsContainer;
     import net.wg.data.constants.generated.HANGAR_ALIASES;
     import flash.geom.Rectangle;
     import net.wg.data.Aliases;
-    import flash.display.InteractiveObject;
     import flash.ui.Keyboard;
     import flash.events.KeyboardEvent;
     import net.wg.gui.events.LobbyEvent;
@@ -37,19 +38,22 @@ package net.wg.gui.lobby.hangar
     import scaleform.clik.events.ComponentEvent;
     import net.wg.gui.notification.events.NotificationLayoutEvent;
     import flash.geom.Point;
+    import flash.display.InteractiveObject;
     import net.wg.gui.lobby.hangar.ammunitionPanel.data.AmmunitionPanelVO;
     import net.wg.gui.lobby.post.data.TeaserVO;
     import fl.motion.easing.Quadratic;
     import net.wg.data.constants.Linkages;
     import flash.display.DisplayObject;
     import net.wg.infrastructure.base.BaseDAAPIComponent;
+    import net.wg.infrastructure.events.LifeCycleEvent;
+    import net.wg.data.constants.generated.BATTLE_OF_BLOGGERS_ALIASES;
     import flash.display.LoaderInfo;
     import flash.net.URLRequest;
     import flash.system.LoaderContext;
     import flash.system.ApplicationDomain;
     import flash.events.IOErrorEvent;
-    import flash.display.MovieClip;
     import net.wg.gui.lobby.hangar.seniorityAwards.SeniorityAwardsEntryPoint;
+    import flash.display.MovieClip;
     import scaleform.clik.events.InputEvent;
     import scaleform.clik.ui.InputDetails;
 
@@ -60,15 +64,11 @@ package net.wg.gui.lobby.hangar
 
         protected static const INVALIDATE_CAROUSEL_SIZE:String = "InvalidateCarouselSize";
 
-        private static const INVALIDATE_LOOTBOXES_VISIBLE:String = "invalidateLootboxesVisible";
-
         private static const CAROUSEL_NAME:String = "carousel";
 
         private static const PARAMS_TOP_MARGIN:int = 5;
 
         private static const PARAMS_BOTTOM_MARGIN:int = 80;
-
-        private static const PARAMS_SMALL_SCREEN_BOTTOM_MARGIN:int = 36;
 
         private static const MESSENGER_BAR_PADDING:int = 45;
 
@@ -84,6 +84,8 @@ package net.wg.gui.lobby.hangar
 
         private static const TEASER_HIDE_SMALL_X_OFFSET:int = -355;
 
+        private static const SMALL_SCREEN_WIDTH_THRESHOLD:int = 1280;
+
         private static const SM_CAROUSEL_PADDING:Number = 30;
 
         private static const SM_AMMUNITION_PANEL_PADDING:Number = 86;
@@ -98,11 +100,7 @@ package net.wg.gui.lobby.hangar
 
         private static const SENIORITY_AWARDS_COMPONENTS_SWF:String = "seniorityAwardsComponents.swf";
 
-        private static const LOOTBOXES_ENTRY_POINT_W:int = 185;
-
-        private static const LOOTBOXES_ENTRY_POINT_Y_OFFSET:int = 53;
-
-        private static const BOTTOM_BG_Y_OFFSET:int = 6;
+        private static const BOB_WITH_ALERT_MSG_Y:int = 40;
 
         public var vehResearchPanel:ResearchPanel;
 
@@ -128,7 +126,7 @@ package net.wg.gui.lobby.hangar
 
         public var teaser:Teaser;
 
-        public var lootboxesEntrancePoint:LootboxesEntrancePointWidget;
+        public var bobAnnouncement:BobAnnouncementWidget;
 
         public function get xfw_header():HangarHeader
         {
@@ -177,7 +175,9 @@ package net.wg.gui.lobby.hangar
 
         private var _seniorityAwardsComponent:SeniorityAwardsEntryPointHangar = null;
 
-        private var _lootboxesVisible:Boolean = true;
+        private var _isBob:Boolean = false;
+
+        private var _bobComponents:HangarComponentsContainer = null;
 
         public function Hangar()
         {
@@ -192,6 +192,7 @@ package net.wg.gui.lobby.hangar
             this._headerTypeDict[HANGAR_ALIASES.HEADER] = [this._header,HangarHeader,Linkages.HANGAR_HEADER];
             this._headerTypeDict[HANGAR_ALIASES.RANKED_WIDGET] = [this._rankedWdgt,RankedBattlesHangarWidget,Linkages.RANKED_BATTLES_WIDGET_UI];
             this._headerTypeDict[HANGAR_ALIASES.EPIC_WIDGET] = [this._epicBattlesWdgt,EpicBattlesWidget,Linkages.EPIC_WIDGET];
+            this._headerTypeDict[HANGAR_ALIASES.BOB_WIDGET] = [null,null,null];
         }
 
         override public function unregisterComponent(param1:String) : void
@@ -218,7 +219,7 @@ package net.wg.gui.lobby.hangar
             if(this.bottomBg != null)
             {
                 this.bottomBg.x = 0;
-                this.bottomBg.y = _originalHeight - BOTTOM_BG_Y_OFFSET | 0;
+                this.bottomBg.y = _originalHeight - this.bottomBg.height + MESSENGER_BAR_PADDING >> 0;
                 this.bottomBg.width = _originalWidth;
             }
             this.alignToCenter(this.switchModePanel);
@@ -226,7 +227,6 @@ package net.wg.gui.lobby.hangar
             if(this.header != null)
             {
                 this.header.x = param1 >> 1;
-                this.header.updateStage(param1,param2);
             }
             if(this._rankedWdgt != null)
             {
@@ -248,11 +248,19 @@ package net.wg.gui.lobby.hangar
                 _loc3_ = this.vehResearchBG.getBounds(this.vehResearchBG);
                 this.vehResearchBG.x = param1 - _loc3_.x - _loc3_.width - RIGHT_MARGIN >> 0;
             }
+            if(this.bobAnnouncement != null)
+            {
+                this.updateBobAnnouncementPosition();
+            }
             this._helpLayout.hide();
             if(this._seniorityAwardsComponent)
             {
                 this._seniorityAwardsComponent.updateSize(param1,param2);
                 this.seniorityAwardsUpdatePosition();
+            }
+            if(this._header)
+            {
+                this._header.updateStage(param1,param2);
             }
         }
 
@@ -264,7 +272,8 @@ package net.wg.gui.lobby.hangar
             registerFlashComponentS(this.ammunitionPanel,HANGAR_ALIASES.AMMUNITION_PANEL);
             registerFlashComponentS(this.switchModePanel,Aliases.SWITCH_MODE_PANEL);
             registerFlashComponentS(this.params,HANGAR_ALIASES.VEHICLE_PARAMETERS);
-            registerFlashComponentS(this.lootboxesEntrancePoint,HANGAR_ALIASES.LOOTBOXES_ENTRANCE_POINT);
+            registerFlashComponentS(this.bobAnnouncement,HANGAR_ALIASES.BOB_ANNOUNCEMENT_WIDGET);
+            addEventListener(CrewDropDownEvent.SHOW_DROP_DOWN,this.onHangarShowDropDownHandler);
             if(this.vehResearchPanel != null)
             {
                 registerFlashComponentS(this.vehResearchPanel,HANGAR_ALIASES.RESEARCH_PANEL);
@@ -273,16 +282,11 @@ package net.wg.gui.lobby.hangar
             this.updateElementsPosition();
         }
 
-        override protected function onInitModalFocus(param1:InteractiveObject) : void
-        {
-            super.onInitModalFocus(param1);
-            this._gameInputMgr.setKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.handleEscapeHandler,true);
-        }
-
         override protected function onBeforeDispose() : void
         {
             this._gameInputMgr.clearKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.handleEscapeHandler);
             App.stage.dispatchEvent(new LobbyEvent(LobbyEvent.UNREGISTER_DRAGGING));
+            removeEventListener(CrewDropDownEvent.SHOW_DROP_DOWN,this.onHangarShowDropDownHandler);
             this._gameInputMgr.clearKeyHandler(Keyboard.F1,KeyboardEvent.KEY_DOWN,this.showLayoutHandler);
             this._gameInputMgr.clearKeyHandler(Keyboard.F1,KeyboardEvent.KEY_UP,this.closeLayoutHandler);
             this.crewOperationBtn.removeEventListener(ButtonEvent.CLICK,this.onCrewOperationBtnClickHandler);
@@ -294,6 +298,11 @@ package net.wg.gui.lobby.hangar
             this.switchModePanel.removeEventListener(ComponentEvent.HIDE,this.onSwitchModePanelHideHandler);
             this.carousel.removeEventListener(Event.RESIZE,this.onCarouselResizeHandler);
             this.removeSeniorityAwardsLoader();
+            if(this.bobAnnouncement != null)
+            {
+                this.bobAnnouncement.removeEventListener(ComponentEvent.SHOW,this.onBobAnnouncementUpdatedHandler);
+                this.bobAnnouncement.removeEventListener(ComponentEvent.HIDE,this.onBobAnnouncementUpdatedHandler);
+            }
             super.onBeforeDispose();
         }
 
@@ -301,6 +310,12 @@ package net.wg.gui.lobby.hangar
         {
             App.tutorialMgr.removeListenersFromCustomTutorialComponent(this);
             App.utils.counterManager.removeCounter(this.crewOperationBtn);
+            if(this._bobComponents)
+            {
+                this._bobComponents.dispose();
+                this._bobComponents = null;
+            }
+            this.bobAnnouncement = null;
             this.crewOperationBtn.dispose();
             this.crewOperationBtn = null;
             this.bottomBg = null;
@@ -317,10 +332,9 @@ package net.wg.gui.lobby.hangar
             this.vehResearchPanel = null;
             this.vehResearchBG.dispose();
             this.vehResearchBG = null;
+            this.tmenXpPanel = null;
             this.crew = null;
             this.params = null;
-            this.tmenXpPanel = null;
-            this.lootboxesEntrancePoint = null;
             this.ammunitionPanel = null;
             this._carousel = null;
             this.switchModePanel = null;
@@ -353,6 +367,7 @@ package net.wg.gui.lobby.hangar
             this.bottomBg.mouseEnabled = false;
             this._gameInputMgr.setKeyHandler(Keyboard.F1,KeyboardEvent.KEY_DOWN,this.showLayoutHandler,true);
             this._gameInputMgr.setKeyHandler(Keyboard.F1,KeyboardEvent.KEY_UP,this.closeLayoutHandler,true);
+            this._gameInputMgr.setKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.handleEscapeHandler,true);
             this.crewOperationBtn.tooltip = CREW_OPERATIONS.CREWOPERATIONS_BTN_TOOLTIP;
             this.crewOperationBtn.helpText = LOBBY_HELP.HANGAR_CREWOPERATIONBTN;
             this.crewOperationBtn.addEventListener(ButtonEvent.CLICK,this.onCrewOperationBtnClickHandler,false,0,true);
@@ -363,6 +378,11 @@ package net.wg.gui.lobby.hangar
             this.vehResearchPanel.addEventListener(Event.RESIZE,this.onVehResearchPanelResizeHandler);
             this.teaser.addEventListener(TeaserEvent.TEASER_CLICK,this.onTeaserTeaserClickHandler);
             this.teaser.addEventListener(TeaserEvent.HIDE,this.onTeaserHideHandler);
+            if(this.bobAnnouncement != null)
+            {
+                this.bobAnnouncement.addEventListener(ComponentEvent.SHOW,this.onBobAnnouncementUpdatedHandler);
+                this.bobAnnouncement.addEventListener(ComponentEvent.HIDE,this.onBobAnnouncementUpdatedHandler);
+            }
             this.carouselContainer.mouseEnabled = false;
             this._teaserX = -this.teaser.over.width;
         }
@@ -381,15 +401,7 @@ package net.wg.gui.lobby.hangar
                 this.crew.enabled = this._crewEnabled;
                 this.crewOperationBtn.enabled = this._crewEnabled;
             }
-            if(isInvalid(INVALIDATE_LOOTBOXES_VISIBLE))
-            {
-                this.lootboxesEntrancePoint.visible = this._lootboxesVisible;
-                if(this.carousel)
-                {
-                    this.carousel.setRightMargin(this._lootboxesVisible?LOOTBOXES_ENTRY_POINT_W:0);
-                }
-            }
-            if(this.carousel && isInvalid(INVALIDATE_CAROUSEL_SIZE))
+            if(isInvalid(INVALIDATE_CAROUSEL_SIZE))
             {
                 this.carousel.visible = true;
                 this.updateCarouselPosition();
@@ -510,10 +522,6 @@ package net.wg.gui.lobby.hangar
             this._carouselAlias = param2;
             this._carousel = App.instance.utils.classFactory.getComponent(param1,TankCarousel);
             this.carousel.visible = false;
-            if(this._lootboxesVisible)
-            {
-                this.carousel.setRightMargin(LOOTBOXES_ENTRY_POINT_W);
-            }
             this.carousel.addEventListener(Event.RESIZE,this.onCarouselResizeHandler);
             this.carousel.updateStage(_originalWidth,_originalHeight);
             this.carousel.name = CAROUSEL_NAME;
@@ -564,27 +572,40 @@ package net.wg.gui.lobby.hangar
             }
             this._activeHeaderType = HANGAR_ALIASES.HEADER;
             this._header = HangarHeader(_loc1_);
+            this._header.addEventListener(LifeCycleEvent.ON_AFTER_DISPOSE,this.onHeaederDisposedHandler);
+            this.updateHeaderForBob();
             this._rankedWdgt = null;
             this._epicBattlesWdgt = null;
             this.updateElementsPosition();
         }
 
+        private function onHeaederDisposedHandler(param1:LifeCycleEvent) : void
+        {
+            this._header.removeEventListener(LifeCycleEvent.ON_AFTER_DISPOSE,this.onHeaederDisposedHandler);
+            this._header = null;
+        }
+
         public function as_setHeaderType(param1:String) : void
         {
             var _loc4_:String = null;
+            var _loc5_:String = null;
             var _loc2_:BaseDAAPIComponent = this._headerTypeDict[param1][0];
             var _loc3_:DisplayObject = this.getHeaderElement(this._activeHeaderType);
             if(_loc2_ == null)
             {
-                _loc2_ = App.instance.utils.classFactory.getComponent(this._headerTypeDict[param1][2],this._headerTypeDict[param1][1]);
-                _loc2_.name = param1;
-                addChildAt(_loc2_,getChildIndex(this.crewOperationBtn as DisplayObject) - 1);
-                registerFlashComponentS(_loc2_,param1);
+                _loc4_ = this._headerTypeDict[param1][2];
+                if(_loc4_ != null)
+                {
+                    _loc2_ = App.instance.utils.classFactory.getComponent(_loc4_,this._headerTypeDict[param1][1]);
+                    _loc2_.name = param1;
+                    addChildAt(_loc2_,getChildIndex(this.crewOperationBtn as DisplayObject) - 1);
+                    registerFlashComponentS(_loc2_,param1);
+                }
             }
             if(_loc3_ != null)
             {
-                _loc4_ = this._activeHeaderType;
-                unregisterFlashComponentS(_loc4_);
+                _loc5_ = this._activeHeaderType;
+                unregisterFlashComponentS(_loc5_);
                 removeChild(_loc3_);
                 _loc3_ = null;
             }
@@ -593,10 +614,12 @@ package net.wg.gui.lobby.hangar
                 case HANGAR_ALIASES.HEADER:
                     this._activeHeaderType = HANGAR_ALIASES.HEADER;
                     this._header = HangarHeader(_loc2_);
+                    this._header.addEventListener(LifeCycleEvent.ON_AFTER_DISPOSE,this.onHeaederDisposedHandler);
                     this._rankedWdgt = null;
                     this._epicBattlesWdgt = null;
                     this.ammunitionPanel.setBattleAbilitiesVisibility(false);
                     this.updateCarouselPosition();
+                    this.updateHeaderForBob();
                     break;
                 case HANGAR_ALIASES.RANKED_WIDGET:
                     this._activeHeaderType = HANGAR_ALIASES.RANKED_WIDGET;
@@ -613,6 +636,16 @@ package net.wg.gui.lobby.hangar
                     this.ammunitionPanel.setBattleAbilitiesVisibility(true);
                     this.updateCarouselPosition();
                     break;
+                case HANGAR_ALIASES.BOB_WIDGET:
+                    if(_loc2_)
+                    {
+                        this._header = HangarHeader(_loc2_);
+                        this._header.addEventListener(LifeCycleEvent.ON_AFTER_DISPOSE,this.onHeaederDisposedHandler);
+                        this.updateHeaderForBob();
+                    }
+                    this._rankedWdgt = null;
+                    this._activeHeaderType = HANGAR_ALIASES.BOB_WIDGET;
+                    this._epicBattlesWdgt = null;
             }
             this.updateElementsPosition();
         }
@@ -626,15 +659,6 @@ package net.wg.gui.lobby.hangar
             else
             {
                 App.utils.counterManager.removeCounter(this.crewOperationBtn);
-            }
-        }
-
-        public function as_setLootboxesVisible(param1:Boolean) : void
-        {
-            if(param1 != this._lootboxesVisible)
-            {
-                this._lootboxesVisible = param1;
-                invalidate(INVALIDATE_LOOTBOXES_VISIBLE);
             }
         }
 
@@ -673,6 +697,24 @@ package net.wg.gui.lobby.hangar
             addChild(this._miniClient);
             registerFlashComponentS(this._miniClient,Aliases.MINI_CLIENT_LINKED);
             this.updateElementsPosition();
+        }
+
+        public function as_toggleBob(param1:Boolean) : void
+        {
+            var _loc2_:DisplayObject = null;
+            this._isBob = param1;
+            if(this._bobComponents == null)
+            {
+                this._bobComponents = new HangarComponentsContainer();
+                _loc2_ = this._header != null?this._header:DisplayObject(this.params);
+                addChildAt(this._bobComponents,getChildIndex(_loc2_) - 1);
+                registerFlashComponentS(this._bobComponents.widget,BATTLE_OF_BLOGGERS_ALIASES.WIDGET_COMPONENT);
+            }
+            this._bobComponents.visible = param1;
+            if(this._header != null)
+            {
+                this.updateHeaderForBob();
+            }
         }
 
         public function as_updateSeniorityAwardsEntryPoint(param1:Boolean) : void
@@ -755,6 +797,12 @@ package net.wg.gui.lobby.hangar
             this.crewBG.visible = this.isControlsVisible;
         }
 
+        private function updateHeaderForBob() : void
+        {
+            this._header.setVisibleTankInfo(!this._isBob);
+            this._header.updateStage(width,height);
+        }
+
         private function removeSeniorityAwardsLoader() : void
         {
             var _loc1_:LoaderInfo = null;
@@ -768,6 +816,21 @@ package net.wg.gui.lobby.hangar
                 }
                 this._seniorityAwardsLoader.unload();
                 this._seniorityAwardsLoader = null;
+            }
+        }
+
+        private function updateBobAnnouncementPosition() : void
+        {
+            var _loc1_:* = 0;
+            if(this.bobAnnouncement)
+            {
+                this.bobAnnouncement.x = width - this.bobAnnouncement.width / 2 - BobAnnouncementWidget.PADDING_RIGHT | 0;
+                this.bobAnnouncement.y = this.ammunitionPanel.y + AmmunitionPanel.PANEL_HEIGHT - this.bobAnnouncement.height / 2 | 0;
+                if(width <= SMALL_SCREEN_WIDTH_THRESHOLD)
+                {
+                    _loc1_ = AmmunitionPanel.SLOTS_HEIGHT + AmmunitionPanel.SLOTS_BOTTOM_OFFSET;
+                    this.bobAnnouncement.y = this.bobAnnouncement.y - _loc1_;
+                }
             }
         }
 
@@ -812,6 +875,8 @@ package net.wg.gui.lobby.hangar
                     return this._rankedWdgt;
                 case HANGAR_ALIASES.EPIC_WIDGET:
                     return this._epicBattlesWdgt;
+                case HANGAR_ALIASES.BOB_WIDGET:
+                    return this._header;
                 default:
                     return null;
             }
@@ -821,8 +886,22 @@ package net.wg.gui.lobby.hangar
         {
             this.params.x = _originalWidth - this.params.width - RIGHT_MARGIN ^ 0;
             this.params.y = this.vehResearchPanel.y + this.vehResearchPanel.totalHeight + PARAMS_TOP_MARGIN;
-            var _loc1_:int = _originalWidth <= 1280?PARAMS_SMALL_SCREEN_BOTTOM_MARGIN:0;
+            var _loc1_:* = 0;
+            if(this._seniorityAwardsComponent)
+            {
+                _loc1_ = _loc1_ + (this._seniorityAwardsComponent.bounds.height + SeniorityAwardsEntryPoint.TOP_OFFSET);
+            }
             this.params.height = this.ammunitionPanel.y - this.params.y + PARAMS_BOTTOM_MARGIN - _loc1_;
+            if(this.bobAnnouncement && this.bobAnnouncement.visible)
+            {
+                _loc1_ = this.bobAnnouncement.height;
+            }
+            if(_originalWidth <= SMALL_SCREEN_WIDTH_THRESHOLD)
+            {
+                _loc1_ = _loc1_ + (AmmunitionPanel.SLOTS_HEIGHT + AmmunitionPanel.SLOTS_BOTTOM_OFFSET);
+            }
+            this.params.height = this.ammunitionPanel.y - this.params.y + AmmunitionPanel.PANEL_HEIGHT - _loc1_;
+            this.updateBobAnnouncementPosition();
         }
 
         private function hideTooltip() : void
@@ -832,10 +911,7 @@ package net.wg.gui.lobby.hangar
 
         private function updateCarouselPosition() : void
         {
-            var _loc1_:int = _height - this._carousel.getBottom();
-            this._carousel.updateCarouselPosition(_loc1_);
-            this.lootboxesEntrancePoint.x = this._carousel.x + this._carousel.rightArrow.x + this._carousel.rightArrow.width;
-            this.lootboxesEntrancePoint.y = this._carousel.y + this._carousel.leftArrow.y + (this._carousel.leftArrow.height >> 1) - LOOTBOXES_ENTRY_POINT_Y_OFFSET;
+            this._carousel.updateCarouselPosition(_height - this._carousel.getBottom() ^ 0);
             this.updateAmmunitionPanelPosition();
         }
 
@@ -851,7 +927,6 @@ package net.wg.gui.lobby.hangar
             {
                 this.header.x = _width >> 1;
                 this.header.y = _loc1_;
-                this.header.updateStage(_originalWidth,_originalHeight);
             }
             if(this.switchModePanel.visible)
             {
@@ -862,6 +937,17 @@ package net.wg.gui.lobby.hangar
                 this._alertMessageBlock.x = _width - this._alertMessageBlock.width >> 1;
                 this._alertMessageBlock.y = _loc1_;
                 _loc1_ = _loc1_ + ALERT_MESSAGE_GAP;
+            }
+            if(this._bobComponents)
+            {
+                if(this._alertMessageBlock)
+                {
+                    this._bobComponents.y = BOB_WITH_ALERT_MSG_Y;
+                }
+                else
+                {
+                    this._bobComponents.y = 0;
+                }
             }
             if(this._rankedWdgt != null)
             {
@@ -976,6 +1062,15 @@ package net.wg.gui.lobby.hangar
             }
         }
 
+        private function onHangarShowDropDownHandler(param1:CrewDropDownEvent) : void
+        {
+            var _loc2_:MovieClip = param1.dropDownref;
+            var _loc3_:Point = globalToLocal(new Point(_loc2_.x,_loc2_.y));
+            addChild(_loc2_);
+            _loc2_.x = _loc3_.x;
+            _loc2_.y = _loc3_.y;
+        }
+
         private function showLayoutHandler(param1:InputEvent) : void
         {
             var _loc2_:InputDetails = param1.details;
@@ -994,6 +1089,11 @@ package net.wg.gui.lobby.hangar
         private function onSwitchModePanelHideHandler(param1:ComponentEvent) : void
         {
             this.updateElementsPosition();
+        }
+
+        private function onBobAnnouncementUpdatedHandler(param1:ComponentEvent) : void
+        {
+            this.updateParamsPosition();
         }
 
         private function onCarouselResizeHandler(param1:Event) : void

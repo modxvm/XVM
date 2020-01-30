@@ -73,6 +73,8 @@ package net.wg.gui.components.crosshairPanel
 
         private var _isAutoloaderTimerOn:Boolean = false;
 
+        private var _isAutoloaderTimerRed:Boolean = false;
+
         private var _autoloaderAnimationBaseTime:Number = 0;
 
         private var _autoloaderAnimationProgress:Number = 0;
@@ -194,9 +196,10 @@ package net.wg.gui.components.crosshairPanel
             this.attachSpeedometer();
         }
 
-        public function as_autoloaderUpdate(param1:Number, param2:Number, param3:Boolean, param4:Boolean, param5:Boolean) : void
+        public function as_autoloaderUpdate(param1:Number, param2:Number, param3:Boolean, param4:Boolean, param5:Boolean, param6:Boolean) : void
         {
             this.clearAutoloaderReloadTimer();
+            this._isAutoloaderTimerRed = param6;
             this._isAutoloaderTimerOn = param5;
             this._autoloaderBaseTime = param2;
             this._reloadingAutoloaderFinishTime = getTimer() + param1 * CrosshairConsts.MS_IN_SECOND;
@@ -309,7 +312,7 @@ package net.wg.gui.components.crosshairPanel
         {
             if(this._currentCrosshair != null)
             {
-                this._currentCrosshair.autoloaderUpdate(param1,param2,param3);
+                this._currentCrosshair.autoloaderUpdate(param1,param2,param3,false);
             }
         }
 
@@ -774,7 +777,7 @@ package net.wg.gui.components.crosshairPanel
             }
             if(this._currentCrosshair != null)
             {
-                this._currentCrosshair.autoloaderUpdate(this._reloadingProgress,this._reloadingProgressSeconds,this._isAutoloaderTimerOn);
+                this._currentCrosshair.autoloaderUpdate(this._reloadingProgress,this._reloadingProgressSeconds,this._isAutoloaderTimerOn,this._isAutoloaderTimerRed);
             }
         }
 

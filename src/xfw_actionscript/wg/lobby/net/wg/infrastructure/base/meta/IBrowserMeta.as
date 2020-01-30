@@ -23,7 +23,7 @@ package net.wg.infrastructure.base.meta
 
         function setBrowserSizeS(param1:int, param2:int) : void;
 
-        function as_loadingStart() : void;
+        function as_loadingStart(param1:Boolean) : void;
 
         function as_loadingStop() : void;
 

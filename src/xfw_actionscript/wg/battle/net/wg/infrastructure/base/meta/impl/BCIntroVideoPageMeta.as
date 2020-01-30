@@ -65,20 +65,20 @@ package net.wg.infrastructure.base.meta.impl
             this.handleError(param1);
         }
 
-        public final function as_playVideo(param1:Object) : void
+        public final function as_setData(param1:Object) : void
         {
             var _loc2_:BCIntroVideoVO = this._bCIntroVideoVO;
             this._bCIntroVideoVO = new BCIntroVideoVO(param1);
-            this.playVideo(this._bCIntroVideoVO);
+            this.setData(this._bCIntroVideoVO);
             if(_loc2_)
             {
                 _loc2_.dispose();
             }
         }
 
-        protected function playVideo(param1:BCIntroVideoVO) : void
+        protected function setData(param1:BCIntroVideoVO) : void
         {
-            var _loc2_:String = "as_playVideo" + Errors.ABSTRACT_INVOKE;
+            var _loc2_:String = "as_setData" + Errors.ABSTRACT_INVOKE;
             DebugUtils.LOG_ERROR(_loc2_);
             throw new AbstractException(_loc2_);
         }

@@ -16,7 +16,7 @@ package net.wg.gui.battle.views.stats.fullStats
 
         protected var numRows:int = 15;
 
-        protected var currentPlayerVO:DAAPIVehicleInfoVO;
+        protected var activePlayerData:DAAPIVehicleInfoVO;
 
         protected var _teamDP:VehiclesDataProvider;
 
@@ -45,9 +45,9 @@ package net.wg.gui.battle.views.stats.fullStats
             var _loc5_:StatsTableItemHolderBase = null;
             var _loc2_:uint = this._allyRenderers.length - 1;
             var _loc3_:Vector.<int> = Vector.<int>(param1.data);
-            if(this.currentPlayerVO == null)
+            if(this.activePlayerData == null)
             {
-                this.updateCurrentPlayerVO(_loc3_);
+                this.updateActivePlayerVO(_loc3_);
             }
             for each(_loc4_ in _loc3_)
             {
@@ -55,9 +55,9 @@ package net.wg.gui.battle.views.stats.fullStats
                 {
                     _loc5_ = this._allyRenderers[_loc4_];
                     _loc5_.setDAAPIVehicleData(this._teamDP.requestItemAt(_loc4_) as DAAPIVehicleInfoVO);
-                    if(this.currentPlayerVO)
+                    if(this.activePlayerData)
                     {
-                        _loc5_.setCurrentPlayerData(this.currentPlayerVO);
+                        _loc5_.setActivePlayerData(this.activePlayerData);
                     }
                     if(_loc5_.isSelected)
                     {
@@ -68,13 +68,13 @@ package net.wg.gui.battle.views.stats.fullStats
             }
         }
 
-        private function updateCurrentPlayerVO(param1:Vector.<int>) : void
+        private function updateActivePlayerVO(param1:Vector.<int>) : void
         {
             var _loc2_:* = 0;
             for each(_loc2_ in param1)
             {
-                this.currentPlayerVO = this._teamDP.requestItemAt(_loc2_) as DAAPIVehicleInfoVO;
-                if(this.currentPlayerVO.isCurrentPlayer)
+                this.activePlayerData = this._teamDP.requestItemAt(_loc2_) as DAAPIVehicleInfoVO;
+                if(this.activePlayerData.isCurrentPlayer)
                 {
                     break;
                 }

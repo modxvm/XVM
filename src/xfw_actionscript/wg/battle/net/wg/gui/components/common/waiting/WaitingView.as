@@ -2,6 +2,7 @@ package net.wg.gui.components.common.waiting
 {
     import net.wg.infrastructure.base.meta.impl.WaitingViewMeta;
     import net.wg.infrastructure.managers.IWaitingView;
+    import flash.display.Sprite;
     import scaleform.clik.events.InputEvent;
     import net.wg.infrastructure.events.ChildVisibilityEvent;
 
@@ -10,21 +11,33 @@ package net.wg.gui.components.common.waiting
 
         private static const WAITING_COMPONENT_NAME:String = "waitingComponent";
 
+        private static const AWARDS_MARGIN:uint = 65;
+
         public var waitingComponent:WaitingComponent;
 
+        public var awards:Sprite;
+
         private var _frameOnShow:uint = 0;
+
+        private var _stageWidth:int;
+
+        private var _stageHeight:int;
 
         public function WaitingView()
         {
             super();
             focusRect = false;
             focusable = true;
+            this.awards.visible = false;
         }
 
         override public function updateStage(param1:Number, param2:Number) : void
         {
             super.updateStage(param1,param2);
             this.waitingComponent.setSize(param1,param2);
+            this._stageWidth = param1;
+            this._stageHeight = param2;
+            this.updateAwardsPosition();
         }
 
         override protected function configUI() : void
@@ -32,6 +45,7 @@ package net.wg.gui.components.common.waiting
             super.configUI();
             assertNotNull(this.waitingComponent,WAITING_COMPONENT_NAME);
             this.waitingComponent.setAnimationStatus(true);
+            this.updateAwardsPosition();
         }
 
         override protected function nextFrameAfterPopulateHandler() : void
@@ -49,6 +63,7 @@ package net.wg.gui.components.common.waiting
                 this.waitingComponent.dispose();
                 this.waitingComponent = null;
             }
+            this.awards = null;
             super.onDispose();
         }
 
@@ -63,6 +78,12 @@ package net.wg.gui.components.common.waiting
             {
                 App.utils.scheduler.scheduleOnNextFrame(this.performHide);
             }
+        }
+
+        public function as_showAwards(param1:Boolean) : void
+        {
+            this.awards.visible = param1;
+            this.updateAwardsPosition();
         }
 
         public function as_showWaiting(param1:String) : void
@@ -87,6 +108,15 @@ package net.wg.gui.components.common.waiting
                 this.waitingComponent.validateNow();
             }
             App.containerMgr.updateFocus();
+        }
+
+        private function updateAwardsPosition() : void
+        {
+            if(this.awards.visible)
+            {
+                this.awards.x = this._stageWidth - this.awards.width >> 1;
+                this.awards.y = this._stageHeight - this.awards.height - AWARDS_MARGIN | 0;
+            }
         }
 
         private function performHide() : void

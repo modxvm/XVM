@@ -8,13 +8,15 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell.vo
 
         private static const REMOVE_ACTION_PRICE_LBL:String = "removeActionPrice";
 
-        public var intCD:Number = -1;
+        public var itemID:Number = -1;
 
         public var toInventory:Boolean = false;
 
         public var sellPrice:Array = null;
 
-        public var removePrice:Array = null;
+        public var removePrice:Object = null;
+
+        public var removeCurrency:String = "";
 
         public var removeActionPrice:ActionPriceVO = null;
 
@@ -48,7 +50,7 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell.vo
             }
             if(this.removePrice)
             {
-                this.removePrice.splice(0,this.removePrice.length);
+                App.utils.data.cleanupDynamicObject(this.removePrice);
                 this.removePrice = null;
             }
             if(this.removeActionPrice)

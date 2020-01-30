@@ -13,9 +13,9 @@ package net.wg.gui.components.tooltips.inblocks.blocks
     import net.wg.data.constants.Errors;
     import net.wg.data.constants.generated.BLOCKS_TOOLTIP_TYPES;
     import net.wg.utils.ICounterProps;
+    import net.wg.data.constants.Linkages;
     import net.wg.infrastructure.managers.counter.CounterProps;
     import flash.text.TextFormatAlign;
-    import net.wg.data.constants.Linkages;
     import net.wg.infrastructure.managers.counter.CounterManager;
     import net.wg.gui.components.tooltips.inblocks.data.BlockDataItemVO;
     import net.wg.data.VO.PaddingVO;
@@ -32,6 +32,8 @@ package net.wg.gui.components.tooltips.inblocks.blocks
 
         private static const COUNTER_OFFSET_Y:int = -9;
 
+        private static const DOUBLE_LINE_BLOCK_HEIGHT_THRESHOLD:int = 30;
+
         public var background:Sprite;
 
         private var _blocks:Vector.<ITooltipBlock>;
@@ -42,7 +44,7 @@ package net.wg.gui.components.tooltips.inblocks.blocks
 
         private var _blockHeight:int = 0;
 
-        private var _highlightBlockDO:DisplayObject;
+        private var _highlightedBlocks:Vector.<DisplayObject>;
 
         private var _counterManager:ICounterManager;
 
@@ -54,6 +56,7 @@ package net.wg.gui.components.tooltips.inblocks.blocks
 
         public function BuildUpBlock()
         {
+            this._highlightedBlocks = new Vector.<DisplayObject>(0);
             this._counterManager = App.utils.counterManager;
             super();
         }
@@ -114,6 +117,7 @@ package net.wg.gui.components.tooltips.inblocks.blocks
             this._counterManager = null;
             this._horizontalLayout = null;
             this._verticalLayout = null;
+            this._highlightedBlocks = null;
             super.onDispose();
         }
 
@@ -157,11 +161,14 @@ package net.wg.gui.components.tooltips.inblocks.blocks
 
         private function highlightBlock() : void
         {
-            var _loc1_:ICounterProps = null;
-            if(this._highlightBlockDO)
+            var _loc1_:DisplayObject = null;
+            var _loc2_:String = null;
+            var _loc3_:ICounterProps = null;
+            for each(_loc1_ in this._highlightedBlocks)
             {
-                _loc1_ = new CounterProps(COUNTER_OFFSET_X,COUNTER_OFFSET_Y,TextFormatAlign.LEFT,true,Linkages.COUNTER_LINE_BIG_UI);
-                this._counterManager.setCounter(this._highlightBlockDO,CounterManager.COUNTER_EMPTY,null,_loc1_);
+                _loc2_ = _loc1_.height > DOUBLE_LINE_BLOCK_HEIGHT_THRESHOLD?Linkages.COUNTER_DOUBLE_LINE_BIG_UI:Linkages.COUNTER_LINE_BIG_UI;
+                _loc3_ = new CounterProps(COUNTER_OFFSET_X,COUNTER_OFFSET_Y,TextFormatAlign.LEFT,true,_loc2_);
+                this._counterManager.setCounter(_loc1_,CounterManager.COUNTER_EMPTY,null,_loc3_);
             }
         }
 
@@ -197,16 +204,17 @@ package net.wg.gui.components.tooltips.inblocks.blocks
 
         private function clearData() : void
         {
+            var _loc1_:DisplayObject = null;
             if(this._blockData != null)
             {
                 this._blockData.dispose();
                 this._blockData = null;
             }
-            if(this._highlightBlockDO)
+            for each(_loc1_ in this._highlightedBlocks)
             {
-                this._counterManager.removeCounter(this._highlightBlockDO);
-                this._highlightBlockDO = null;
+                this._counterManager.removeCounter(_loc1_);
             }
+            this._highlightedBlocks.splice(0,this._highlightedBlocks.length);
         }
 
         private function buildBlocks() : void
@@ -234,7 +242,7 @@ package net.wg.gui.components.tooltips.inblocks.blocks
                 _loc2_ = _loc1_.getDisplayObject();
                 if(_loc3_.data.highlight)
                 {
-                    this._highlightBlockDO = _loc2_;
+                    this._highlightedBlocks.push(_loc2_);
                 }
                 addChild(_loc2_);
                 _loc6_++;

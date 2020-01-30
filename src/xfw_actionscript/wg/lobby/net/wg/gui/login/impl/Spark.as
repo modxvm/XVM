@@ -13,10 +13,8 @@ package net.wg.gui.login.impl
 
         private var _zone:Rectangle = null;
 
-        public function Spark(param1:Rectangle, param2:String)
+        public function Spark()
         {
-            this.zone = param1;
-            this.name = param2;
             super();
         }
 
@@ -28,16 +26,22 @@ package net.wg.gui.login.impl
 
         public function dispose() : void
         {
-            removeEventListener(Event.ADDED_TO_STAGE,this.onAddedToStgage);
+            removeEventListener(Event.ADDED_TO_STAGE,this.onAddedToStage);
             this.zone = null;
             this.sparkAnimation.stop();
             this.sparkAnimation = null;
         }
 
+        public function init(param1:Rectangle, param2:String) : void
+        {
+            this.zone = param1;
+            this.name = param2;
+        }
+
         public function startAnimation() : void
         {
             var _loc1_:* = NaN;
-            removeEventListener(Event.ADDED_TO_STAGE,this.onAddedToStgage,false);
+            removeEventListener(Event.ADDED_TO_STAGE,this.onAddedToStage,false);
             if(stage)
             {
                 this.reposition();
@@ -47,7 +51,7 @@ package net.wg.gui.login.impl
             }
             else
             {
-                addEventListener(Event.ADDED_TO_STAGE,this.onAddedToStgage,false);
+                addEventListener(Event.ADDED_TO_STAGE,this.onAddedToStage,false);
             }
         }
 
@@ -77,6 +81,11 @@ package net.wg.gui.login.impl
             rotation = randRange(-120,-100);
         }
 
+        private function onAddedToStage(param1:Event) : void
+        {
+            this.startAnimation();
+        }
+
         public function get zone() : Rectangle
         {
             return this._zone;
@@ -85,11 +94,6 @@ package net.wg.gui.login.impl
         public function set zone(param1:Rectangle) : void
         {
             this._zone = param1;
-        }
-
-        private function onAddedToStgage(param1:Event) : void
-        {
-            this.startAnimation();
         }
     }
 }
