@@ -133,7 +133,10 @@
       "epic_battle_training": "",
       // Tournament (event).
       // Турнир (ивент).
-      "tournament_event": ""
+      "tournament_event": "",
+      // Team clash/Battle of bloggers.
+      // Битва блогеров.
+      "bob": ""
     },
     // Text for {{topclan}} macro.
     // Текст для макроса {{topclan}}.
