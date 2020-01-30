@@ -1,6 +1,6 @@
 ﻿XVM-8.3.0:
   [GENERAL]
-  * World of Tanks 1.7.1.0
+  * World of Tanks 1.7.1.1
 
   [BATTLE]
   * The macro {{my-anonym}} has been renamed to {{anonym}}, the description in the documentation has been updated
