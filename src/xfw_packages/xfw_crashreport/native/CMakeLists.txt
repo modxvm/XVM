@@ -13,10 +13,19 @@ add_definitions(-D_UNICODE)
 
 add_library(xfw_crashreport SHARED
         "src/common.cpp"
+        "src/common.h"
+
         "src/crashreporter.cpp"
+        "src/crashreporter.h"
+        
         "src/dllMain.cpp"
+        "src/dllMain.h"
+
         "src/fix_suef.cpp"
+        "src/fix_suef.h"
+        
         "src/pythonModule.cpp"
+
         "../../library.rc"
 )
 

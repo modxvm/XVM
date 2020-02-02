@@ -18,6 +18,7 @@
 
 #include <Python.h>
 
+#include "common.h"
 #include "crashreporter.h"
 #include "fix_suef.h"
 
@@ -104,7 +105,7 @@ PyObject* Py_add_attachment(PyObject* self, PyObject* args)
         Py_RETURN_FALSE;
     }
 
-    if (!crashreporter->add_attachment(prop_desc, std::wstring(prop_path))) {
+    if (!crashreporter->add_attachment(prop_desc, GetWorkingDirectory() / std::wstring(prop_path))) {
         Py_RETURN_FALSE;
     }
 
@@ -139,6 +140,34 @@ PyObject* Py_set_dsn(PyObject* self, PyObject* args)
     Py_RETURN_TRUE;
 }
 
+
+PyObject* Py_set_environment(PyObject* self, PyObject* args)
+{
+    if (!crashreporter)
+    {
+        return nullptr;
+    }
+
+    char* environment_name = nullptr;
+    if (!PyArg_ParseTuple(args, "s", &environment_name))
+    {
+        PyErr_SetString(PyExc_RuntimeError, "[XFW/Crashreport] [set_environment] Cannot parse tuple (expected s)\n");
+        return nullptr;
+    }
+
+    if (crashreporter->is_initialized())
+    {
+        PyErr_SetString(PyExc_RuntimeError, "[XFW/Crashreport] [set_environment] CrashRpt is already initialized\n");
+        Py_RETURN_FALSE;
+    }
+
+    if (!crashreporter->set_environment(environment_name)) {
+        Py_RETURN_FALSE;
+    }
+
+    Py_RETURN_TRUE;
+}
+\
 PyObject* Py_initialize(PyObject* self, PyObject* args)
 {
     if (!crashreporter)
@@ -193,6 +222,13 @@ PyObject* Py_set_tag(PyObject* self, PyObject* args)
         return nullptr;
     }
 
+    if (!crashreporter->is_initialized())
+    {
+        PyErr_SetString(PyExc_RuntimeError, "[XFW/Crashreport] [set_tag] CrashRpt is not initialized\n");
+        Py_RETURN_FALSE;
+    }
+
+
     if (!crashreporter->set_tag(prop_name, prop_val)) {
         Py_RETURN_FALSE;
     }
@@ -200,6 +236,35 @@ PyObject* Py_set_tag(PyObject* self, PyObject* args)
     Py_RETURN_TRUE;
 }
 
+PyObject* Py_set_user(PyObject* self, PyObject* args)
+{
+    char* prop_name = nullptr;
+    char* prop_val = nullptr;
+
+    if (!crashreporter)
+    {
+        return nullptr;
+    }
+
+    if (!PyArg_ParseTuple(args, "ss", &prop_name, &prop_val))
+    {
+        PyErr_SetString(PyExc_RuntimeError, "[XFW/Crashreport] [set_tag] Cannot parse tuple (expected ss)\n");
+        return nullptr;
+    }
+
+    if (!crashreporter->is_initialized())
+    {
+        PyErr_SetString(PyExc_RuntimeError, "[XFW/Crashreport] [set_tag] CrashRpt is not initialized\n");
+        Py_RETURN_FALSE;
+    }
+
+
+    if (!crashreporter->set_tag(prop_name, prop_val)) {
+        Py_RETURN_FALSE;
+    }
+
+    Py_RETURN_TRUE;
+}
 
 
 PyMethodDef XFW_CrashReportMethods[] = {
@@ -211,11 +276,13 @@ PyMethodDef XFW_CrashReportMethods[] = {
     { "set_release"           , Py_set_release           , METH_VARARGS, "" },
     { "add_attachment"        , Py_add_attachment        , METH_VARARGS, "" },
     { "set_dsn"               , Py_set_dsn               , METH_VARARGS, "" },
+    { "set_environment"       , Py_set_environment       , METH_VARARGS, "" },
 
     { "initialize"            , Py_initialize            , METH_VARARGS, "" },
     { "shutdown"              , Py_shutdown              , METH_VARARGS, "" },
 
     { "set_tag"               , Py_set_tag               , METH_VARARGS, "" },
+    { "set_user"              , Py_set_user              , METH_VARARGS, "" },
     { 0, 0, 0, 0 }
 };
 

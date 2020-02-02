@@ -66,6 +66,15 @@ bool CrashReporter::set_dsn(const std::string& dsn) {
     return true;
 }
 
+bool CrashReporter::set_environment(const std::string& environment)
+{
+    if (is_initialized())
+        return false;
+
+    sentry_options_set_environment(_options, environment.c_str());
+    return true;
+}
+
 
 bool CrashReporter::initialize()
 {
@@ -84,6 +93,10 @@ bool CrashReporter::shutdown()
 
 
 bool CrashReporter::set_tag(const std::string& key, const std::string& value) {
+    if (!is_initialized()) {
+        return false;
+    }
+
     sentry_set_tag(key.c_str(), value.c_str());
     return true;
 }

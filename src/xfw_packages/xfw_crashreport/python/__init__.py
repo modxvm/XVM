@@ -18,6 +18,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #cpython
 import logging
+import os.path
 
 #xfw.loader
 import xfw_loader.python as loader
@@ -107,6 +108,17 @@ class XFWCrashReport(object):
             logging.exception("[XFW/Crashreport] [set_dsn]")
 
 
+    def set_environment(self, environment):
+        if not self.__initialized:
+            return
+
+        try:
+            if not self.__native.set_environment(environment):
+                logging.warn("[XFW/Crashreport] [set_environment] failed to set environment")
+        except Exception:
+            logging.exception("[XFW/Crashreport] [set_environment]")
+
+
     def set_tag(self, name, value):
         if not self.__initialized:
             return
@@ -138,16 +150,33 @@ def xfw_is_module_loaded():
 def xfw_module_init():
     global __xfw_crashreport
     __xfw_crashreport = XFWCrashReport()
-    
-    __xfw_crashreport.set_dsn('https://3ee6306774f349beb6c658462be0a591@sentry.openwg.net/2')
 
-    __xfw_crashreport.add_attachment("game.log","BigWorld debug log")
-    __xfw_crashreport.add_attachment("python.log","Python debug log")
-    __xfw_crashreport.add_attachment("xvm.log","XVM debug log")
+    package_name    = unicode(__xfw_crashreport.package_name)
+    package_version = loader.get_mod_ids()[package_name]
+    is_development  = loader.get_mod_user_data(package_name, 'build_development') != "False"
+    server_dsn      = 'https://3ee6306774f349beb6c658462be0a591@sentry.openwg.net/2'
 
-    __xfw_crashreport.set_tag("wot_version", loader.WOT_VERSION_FULL)
+    #Server DSN
+    __xfw_crashreport.set_dsn(server_dsn)
 
-    print loader.get_mod_ids()
-    __xfw_crashreport.set_release(loader.get_mod_ids()[unicode(__xfw_crashreport.package_name)])
+    #additional files
+    __xfw_crashreport.add_attachment("game.log","bw_log")
+    __xfw_crashreport.add_attachment("python.log","python_log")
+    __xfw_crashreport.add_attachment("xvm.log","xvm_log")
 
+    #Release
+    __xfw_crashreport.set_release(package_version)
+
+    #Environment
+    environment = 'release'
+    if is_development:
+        environment = 'nightly'
+    if os.path.exists('wargaming_qa.conf'):
+        environment = 'qa'
+    __xfw_crashreport.set_environment(environment)
+
+    #Initialize
     __xfw_crashreport.install()
+    
+    #Tags
+    __xfw_crashreport.set_tag("wot_version", loader.WOT_VERSION_FULL)

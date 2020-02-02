@@ -18,6 +18,7 @@ public:
     bool set_release(const std::string& version);
     bool add_attachment(const std::string& name, const std::wstring& filepath);
     bool set_dsn(const std::string& dsn);
+    bool set_environment(const std::string& environment);
 
     //initialization
     bool initialize();
