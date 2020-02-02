@@ -139,6 +139,12 @@ class XFWCrashReport(object):
         except Exception:
             logging.exception("[XFW/Crashreport] [set_release]")
 
+    def simulate_crash(self):
+        if not self.__initialized:
+            return
+
+        self.__native.simulate_crash()
+
 
 def xfw_is_module_loaded():
     if not __xfw_crashreport:

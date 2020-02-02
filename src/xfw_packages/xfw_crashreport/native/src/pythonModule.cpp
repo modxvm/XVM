@@ -267,9 +267,17 @@ PyObject* Py_set_user(PyObject* self, PyObject* args)
 }
 
 
+PyObject* Py_simulate_crash(PyObject* self, PyObject* args)
+{
+    *reinterpret_cast<unsigned int*>(0xDEAD) = 0xBEEF;
+    Py_RETURN_TRUE;
+}
+
+
+
 PyMethodDef XFW_CrashReportMethods[] = {
     { "restore_suef"          , Py_Restore_SUEF          , METH_VARARGS, "Fix SetUnhandledExceptionFilter() WinAPI function"},
-    
+
     { "is_platform_supported" , Py_is_platform_supported , METH_VARARGS, "" },
     { "is_initialized"        , Py_is_initialized        , METH_VARARGS, "" },
 
@@ -283,6 +291,10 @@ PyMethodDef XFW_CrashReportMethods[] = {
 
     { "set_tag"               , Py_set_tag               , METH_VARARGS, "" },
     { "set_user"              , Py_set_user              , METH_VARARGS, "" },
+
+
+    { "simulate_crash"        , Py_simulate_crash        , METH_VARARGS, "" },
+
     { 0, 0, 0, 0 }
 };
 
