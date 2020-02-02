@@ -38,6 +38,7 @@ $projects_32=@(
 
 
 $projects_64=@(
+    "xfw_crashreport"
     "xfw_filewatcher"
     "xfw_fonts"
     "xfw_mutex"
@@ -98,7 +99,7 @@ foreach ($project in $projects_32) {
 }
 
 foreach ($project in $projects_64) {
-#   Build-CmakeProject -Name $project -Arch "64bit"
+   Build-CmakeProject -Name $project -Arch "64bit"
 }
 
 #Remove-Item -Path "./_build/*" -Recurse -Force -ErrorAction SilentlyContinue

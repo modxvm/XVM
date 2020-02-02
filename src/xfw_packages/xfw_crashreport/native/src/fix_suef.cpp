@@ -20,7 +20,8 @@
 
 #include <Windows.h>
 
-bool Restore_SUEF()
+#ifndef _WIN64
+bool Restore_SUEF_32()
 {
     //load module
     HMODULE hmod = GetModuleHandleW(L"KernelBase.dll");
@@ -52,11 +53,24 @@ bool Restore_SUEF()
 
     return true;
 }
+#endif
+
+#ifdef _WIN64
+bool Restore_SUEF_64() {
+    //no work needed
+    return true;
+}
+#endif
 
 PyObject* Py_Restore_SUEF(PyObject* self, PyObject* args)
 {
-    if (Restore_SUEF())
+#ifdef _WIN64
+    if (Restore_SUEF_64())
         Py_RETURN_TRUE;
-    else
-        Py_RETURN_FALSE;
+#else
+    if (Restore_SUEF_32())
+        Py_RETURN_TRUE;
+#endif
+
+    Py_RETURN_FALSE;
 }

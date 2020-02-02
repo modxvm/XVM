@@ -20,5 +20,4 @@
 
 #include <Python.h>
 
-bool Restore_SUEF();
 PyObject* Py_Restore_SUEF(PyObject* self, PyObject* args);
