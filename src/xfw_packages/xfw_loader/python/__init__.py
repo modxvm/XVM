@@ -49,6 +49,7 @@ __all__ = [
 
     'get_mod_directory_name',
     'get_mod_directory_path',
+    'get_mod_user_data'
     'get_mod_module',
     'get_mod_ids',
 
@@ -87,6 +88,19 @@ def get_mod_directory_path(mod_name):
     if mod_name not in mods:
         return None
     return mods[mod_name]['dir_path']
+
+def get_mod_user_data(package_id, var_id):
+    if package_id not in mods:
+        return None
+
+    if 'user_data' not in mods[package_id]:
+        return None
+
+    if var_id not in mods[package_id]['user_data']:
+        return None
+
+    return mods[package_id]['user_data'][var_id]
+
 
 def get_mod_module(mod_name):
     if mod_name not in mods_loaded:

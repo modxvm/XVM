@@ -53,7 +53,7 @@ libraries=(
   #'xfw_filewatcher'
   #'xfw_fonts'
   #'xfw_libraries'
-  #'xfw_loader'
+  'xfw_loader'
   #'xfw_mutex'
   #'xfw_ping'
   #'xfw_wotfix_crashes'
@@ -143,6 +143,7 @@ prepare_json()
     cp "$1" "$2"
     sed -i s/XFW_VERSION/$XVMBUILD_XVM_VERSION.$REPOSITORY_COMMITS_NUMBER$REPOSITORY_BRANCH_FORFILE/g "$2"
     sed -i "s/WOT_VERSION/$XVMBUILD_WOT_VERSION/g" "$2"
+    sed -i "s/XVMBUILD_DEVELOPMENT/$XVMBUILD_DEVELOPMENT/g" "$2"
   fi
 }
 
