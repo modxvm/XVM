@@ -152,7 +152,7 @@ package com.xvm.vehiclemarkers.ui.components
             var e_cfg:CMarkers4 = e.cfg;
             var playerState:VOPlayerState = e.playerState;
             var damageInfo:VODamageInfo = playerState.damageInfo;
-            if (damageInfo && damageInfo.damageDelta > 0 && playerState.isCrewActive)
+            if (damageInfo && damageInfo.damageDelta > 0 && (playerState.isCrewActive || playerState.isBlown))
             {
                 var damageFlag:Number = damageInfo.damageFlag;
                 var cfg:CMarkersDamageText = damageFlag == Defines.FROM_PLAYER ? e_cfg.damageTextPlayer
