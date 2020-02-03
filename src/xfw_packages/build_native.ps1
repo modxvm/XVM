@@ -20,24 +20,25 @@ Push-Location $PSScriptRoot
 Import-Module ../../build_lib/library.psm1 -Force -DisableNameChecking
 
 #version
-$version_str = "8.1.7.0"
+$version_str = "8.3.0.0"
 $version = $version_str -replace "\.",","
 
-$xfwnative_url="https://ci.appveyor.com/api/buildjobs/yipguxa4bi2tvofl/artifacts/output%2Fdeploy%2Fcom.modxvm.xfw.native_1.5.6-devel.zip"
+$xfwnative_url="https://ci.appveyor.com/api/buildjobs/hvuxnvoh05o7vr50/artifacts/~output%2Fdeploy%2Fcom.modxvm.xfw.native_1.5.8-devel.zip"
 
 $projects_32=@(
     "xfw_crashreport"
-    "xfw_filewatcher"
-    "xfw_fonts"
-    "xfw_mutex"
-    "xfw_ping"
-    "xfw_wotfix_crashes"
-    "xfw_wotfix_hidpi"
-    "xfw_wwise"
+ #   "xfw_filewatcher"
+  #  "xfw_fonts"
+  #  "xfw_mutex"
+  #  "xfw_ping"
+  #  "xfw_wotfix_crashes"
+  #  "xfw_wotfix_hidpi"
+  #  "xfw_wwise"
 )
 
 
 $projects_64=@(
+    "xfw_crashreport"
     "xfw_filewatcher"
     "xfw_fonts"
     "xfw_mutex"
@@ -98,7 +99,7 @@ foreach ($project in $projects_32) {
 }
 
 foreach ($project in $projects_64) {
-    Build-CmakeProject -Name $project -Arch "64bit"
+   Build-CmakeProject -Name $project -Arch "64bit"
 }
 
 #Remove-Item -Path "./_build/*" -Recurse -Force -ErrorAction SilentlyContinue

@@ -90,6 +90,13 @@ std::filesystem::path GetModuleDirectory(HMODULE hModule)
     return std::filesystem::path(Path);
 }
 
+std::filesystem::path GetWorkingDirectory()
+{
+    WCHAR Path[MAX_PATH];
+    GetCurrentDirectoryW(MAX_PATH, Path);
+    return std::filesystem::path(Path);
+}
+
 std::filesystem::path GetModuleDirectory(const wchar_t* moduleName)
 {
     return GetModuleDirectory(GetModuleHandleW(moduleName));

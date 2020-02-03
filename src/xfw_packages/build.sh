@@ -49,7 +49,7 @@ wotmodpath="$XVMBUILD_ROOT_PATH/$XVMBUILD_XFW_WOTMOD_OUTPUTPATH"
 
 libraries=(
   'xfw_actionscript'
-  #'xfw_crashreport'
+  'xfw_crashreport'
   'xfw_filewatcher'
   'xfw_fonts'
   'xfw_libraries'
@@ -143,6 +143,7 @@ prepare_json()
     cp "$1" "$2"
     sed -i s/XFW_VERSION/$XVMBUILD_XVM_VERSION.$REPOSITORY_COMMITS_NUMBER$REPOSITORY_BRANCH_FORFILE/g "$2"
     sed -i "s/WOT_VERSION/$XVMBUILD_WOT_VERSION/g" "$2"
+    sed -i "s/XVMBUILD_DEVELOPMENT/$XVMBUILD_DEVELOPMENT/g" "$2"
   fi
 }
 

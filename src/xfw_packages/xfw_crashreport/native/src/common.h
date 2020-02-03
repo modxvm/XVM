@@ -17,3 +17,5 @@ std::wstring GetModuleVersion(const wchar_t* moduleName);
 std::filesystem::path GetModuleDirectory(HMODULE hModule);
 
 std::filesystem::path GetModuleDirectory(const char* moduleName);
+
+std::filesystem::path GetWorkingDirectory();

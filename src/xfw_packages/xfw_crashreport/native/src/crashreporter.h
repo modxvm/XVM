@@ -1,11 +1,35 @@
 #pragma once
 
-#include <Python.h>
-#include "CrashRpt.h"
+#include <string>
 
-PyObject* Py_CrashRpt_Install(PyObject* self, PyObject* args);
-PyObject* Py_CrashRpt_IsSupported(PyObject* self, PyObject* args);
-PyObject* Py_CrashRpt_SetLanguage(PyObject* self, PyObject* args);
+#include "sentry.h"
 
-PyObject* Py_CrashRpt_AddFile(PyObject* self, PyObject* args);
-PyObject* Py_CrashRpt_AddProp(PyObject* self, PyObject* args);
+class CrashReporter {
+
+public:
+    CrashReporter();
+    ~CrashReporter();
+
+    //general getters
+    bool is_platform_supported();
+    bool is_initialized();
+
+    //options (should be executed before initialization)
+    bool set_release(const std::string& version);
+    bool add_attachment(const std::string& name, const std::wstring& filepath);
+    bool set_dsn(const std::string& dsn);
+    bool set_environment(const std::string& environment);
+
+    //initialization
+    bool initialize();
+    bool shutdown();
+
+    //other thing
+    bool set_tag(const std::string& key, const std::string& value);
+
+private:
+    sentry_options_t* _options = nullptr;
+    bool _initialized = false;
+
+    std::wstring library_name = L"sentry_crashpad.dll";
+};
