@@ -69,7 +69,6 @@ class XFWCrashReport(object):
             if not self.__native.initialize():
                 logging.error("[XFW/Crashreport] [install] Crash reports failed to install.")
                 return
-            logging.info("[XFW/Crashreport] [install] Crash reports were registered.")
             self.__installed = True
 
 
@@ -150,10 +149,22 @@ def xfw_is_module_loaded():
     if not __xfw_crashreport:
         return False
 
-    return __xfw_crashreport.is_initialized()
+    if __xfw_crashreport.is_initialized():
+        logging.info("[XFW/Crashreport] [xfw_is_module_loaded] bugreporting was initialized successfuly. Please read our privacy policy:")
+        logging.info("[XFW/Crashreport] [xfw_is_module_loaded] https://sentry.openwg.net/privacy")
+        return True
 
+    return False
 
 def xfw_module_init():
+    if loader.get_client_realm() != 'RU':
+        logging.info("[XFW/Crashreport] [xfw_module_init] bugreporting currently available only on RU realm")
+        return
+
+    if os.path.exists('XFW_BUGREPORT_OPTOUT.txt'):
+        logging.info("[XFW/Crashreport] [xfw_module_init] bugreporting disabled because of user opt-out")
+        return
+
     global __xfw_crashreport
     __xfw_crashreport = XFWCrashReport()
 
