@@ -47,6 +47,8 @@ __all__ = [
     'WOT_VERSION_FULL',
     'WOT_VERSION_SHORT',
 
+    'get_client_realm'
+
     'get_mod_directory_name',
     'get_mod_directory_path',
     'get_mod_user_data'
@@ -78,6 +80,9 @@ mods_loaded   = list()
 
 
 #### PUBLIC FUNCTIONS
+
+def get_client_realm():
+    return importlib.import_module('constants').AUTH_REALM
 
 def get_mod_directory_name(mod_name):
     if mod_name not in mods:
