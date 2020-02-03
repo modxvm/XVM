@@ -33,7 +33,7 @@ PyObject* Py_is_platform_supported(PyObject* self, PyObject* args)
         return nullptr;
     }
 
-    if (!crashreporter->is_platform_supported()) 
+    if (!crashreporter->is_platform_supported())
     {
         Py_RETURN_FALSE;
     }

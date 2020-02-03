@@ -194,6 +194,6 @@ def xfw_module_init():
 
     #Initialize
     __xfw_crashreport.install()
-    
+
     #Tags
     __xfw_crashreport.set_tag("wot_version", loader.WOT_VERSION_FULL)
