@@ -389,6 +389,13 @@ package com.xvm.battle
                 return ps && ps.damageInfo && ps.damageInfo.damageType ? Locale.get(ps.damageInfo.damageType) : null;
             }
 
+            // {{dmg-kind-key}}
+            m_globals["dmg-kind-key"] = function(o:IVOMacrosOptions):String
+            {
+                var ps:VOPlayerState = o as VOPlayerState;
+                return ps && ps.damageInfo && ps.damageInfo.damageType ? ps.damageInfo.damageType : null;
+            }
+
             // {{c:dmg}}
             m_globals["c:dmg"] = function(o:IVOMacrosOptions):String
             {
