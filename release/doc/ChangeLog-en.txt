@@ -1,4 +1,9 @@
-﻿XVM-8.3.0:
+﻿XVM-8.3.1:
+  [MARKERS]
+  * Added macro:
+      {{dmg-kind-key}} - damage kind table key value (attack, fire, ramming, ...)
+
+XVM-8.3.0:
   [GENERAL]
   * World of Tanks 1.7.1.1
 
