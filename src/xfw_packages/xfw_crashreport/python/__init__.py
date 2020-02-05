@@ -85,12 +85,12 @@ class XFWCrashReport(object):
         return self.__native.is_initialized()
 
 
-    def add_attachment(self, path, description):
+    def add_attachment(self, filepath, filename):
         if not self.__initialized:
             return
 
         try:
-            if not self.__native.add_attachment(unicode(path), description):
+            if not self.__native.add_attachment(unicode(filepath), filename):
                 logging.warn("[XFW/Crashreport] [add_attachment] failed to add attachment")
         except Exception:
             logging.exception("[XFW/Crashreport] [add_attachment]")
@@ -177,9 +177,10 @@ def xfw_module_init():
     __xfw_crashreport.set_dsn(server_dsn)
 
     #additional files
-    __xfw_crashreport.add_attachment("game.log","bw_log")
-    __xfw_crashreport.add_attachment("python.log","python_log")
-    __xfw_crashreport.add_attachment("xvm.log","xvm_log")
+    if os.path.exists('game.log'):
+        __xfw_crashreport.add_attachment("game.log","game.log")
+    __xfw_crashreport.add_attachment("python.log","python.log")
+    __xfw_crashreport.add_attachment("xvm.log","xvm.log")
 
     #Release
     __xfw_crashreport.set_release(package_version)
