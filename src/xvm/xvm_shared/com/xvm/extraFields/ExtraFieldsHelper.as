@@ -66,6 +66,9 @@ package com.xvm.extraFields
                             case "ON_CURRENT_VEHICLE_DESTROYED":
                                 Xvm.addEventListener(PlayerStateEvent.CURRENT_VEHICLE_DESTROYED, field.updateOnEvent);
                                 break;
+                            case "ON_MODULE_CRITICAL":
+                                Xvm.addEventListener(PlayerStateEvent.MODULE_CRITICAL, field.updateOnEvent);
+                                break;
                             case "ON_MODULE_DESTROYED":
                                 Xvm.addEventListener(PlayerStateEvent.MODULE_DESTROYED, field.updateOnEvent);
                                 break;
