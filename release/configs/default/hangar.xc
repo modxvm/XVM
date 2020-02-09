@@ -25,12 +25,12 @@
     // false - disable display promo of premium vehicle (on the background in the hangar).
     // false - отключить отображение рекламы премиум техники (на фоне в ангаре).
     "showPromoPremVehicle": true,
-    // true - show info window with list of received awards for "Reward for Merit".
-    // true - показывать информационное окно с перечнем полученных наград за "Довольствие".
-    "showRewardWindow": true,
     // true - show info windows with the battle results in the "Ranked battle" mode.
     // true - показывать информационные окна результатов боя в режиме "Ранговый бой".
     "showRankedBattleResults": true,
+    // true - show widget "Daily Quests" in the hangar.
+    // true - показывать виджет "Ежедневные задачи" в ангаре.
+    "showDailyQuestWidget": true,
     // Consumables panel - show/hide the number of consumables and directives.
     // Панель снаряжения - показывать/прятать количество снаряжения и инструкций.
     "equipmentPanel": {

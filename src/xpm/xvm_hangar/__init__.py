@@ -24,12 +24,11 @@ from HeroTank import HeroTank
 from vehicle_systems.tankStructure import ModelStates
 from gui.promo.hangar_teaser_widget import TeaserViewer
 from gui.game_control.PromoController import PromoController
-from gui.game_control.AwardController import ProgressiveRewardHandler
 from skeletons.account_helpers.settings_core import ISettingsCore
-from account_helpers.settings_core.ServerSettingsManager import SETTINGS_SECTIONS
 from gui.Scaleform.daapi.view.lobby.messengerBar.messenger_bar import MessengerBar
 from gui.Scaleform.daapi.view.lobby.messengerBar.session_stats_button import SessionStatsButton
 from gui.Scaleform.daapi.view.lobby.rankedBattles.ranked_battles_results import RankedBattlesResults
+from gui.Scaleform.daapi.view.lobby.hangar.daily_quest_widget import DailyQuestWidget
 
 from xfw import *
 
@@ -211,13 +210,6 @@ def getPromoCount(base, self):
         return
     base(self)
 
-# hide display window when reward is received
-@overrideMethod(ProgressiveRewardHandler, '_showAward')
-def _showAward(base, self, ctx):
-    if not config.get('hangar/showRewardWindow', True):
-        return
-    base(self, ctx)
-
 # hide ranked battle results window
 @overrideMethod(RankedBattlesResults, '_populate')
 def _populate(base, self):
@@ -228,7 +220,9 @@ def _populate(base, self):
 # hide display session statistics help hints
 def hideSessionStatsHint():
     settingsCore = dependency.instance(ISettingsCore)
-    settingsCore.serverSettings.setSectionSettings(SETTINGS_SECTIONS.ONCE_ONLY_HINTS, {'SessionStatsOpenBtnHint': 1})
+    settingsCore.serverSettings.setOnceOnlyHintsSettings({'SessionStatsOpenBtnHint': 1})
+    settingsCore.serverSettings.setOnceOnlyHintsSettings({'SessionStatsSettingsBtnHint': 1})
+    settingsCore.serverSettings.setSessionStatsSettings({'OnlyOnceHintShownField': 1})
     return
 
 # hide display session statistics button
@@ -245,4 +239,11 @@ def updateSessionStatsBtn(base, self):
 def updateBatteleCount(base, self):
     if not config.get('hangar/sessionStatsButton/showBattleCount', True):
         return
+    base(self)
+
+# hide display widget with daily quests
+@overrideMethod(DailyQuestWidget, '_DailyQuestWidget__shouldHide')
+def shouldHide(base, self):
+    if not config.get('hangar/showDailyQuestWidget', True):
+        return True
     base(self)
