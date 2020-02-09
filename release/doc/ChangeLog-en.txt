@@ -1,4 +1,14 @@
-﻿XVM-8.3.1:
+﻿XVM-8.3.2:
+  [GENERAL]
+  * World of Tanks 1.8.0.0
+
+  [HANGAR]
+  * added option:
+      "hangar"/"showDailyQuestWidget" - show widget "Daily Quests" in the hangar
+  * removed option:
+      "hangar"/"showRewardWindow"
+
+XVM-8.3.1:
   [GENERAL]
   * World of Tanks 1.7.1.2
 

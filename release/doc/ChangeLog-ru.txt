@@ -1,4 +1,14 @@
-﻿XVM-8.3.1:
+﻿XVM-8.3.2:
+  [ОБЩЕЕ]
+  * World of Tanks 1.8.0.0
+
+  [АНГАР]
+  * добавлена опция:
+      "hangar"/"showDailyQuestWidget" - показывать виджет "Ежедневные задачи" в ангаре
+  * удалена опция:
+      "hangar"/"showRewardWindow"
+
+XVM-8.3.1:
   [ОБЩЕЕ]
   * World of Tanks 1.7.1.2
 
