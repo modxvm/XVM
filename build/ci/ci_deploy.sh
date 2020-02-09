@@ -45,27 +45,16 @@ pack_xfw(){
     popd > /dev/null
 }
 
-
-deploy(){
+deploy_files(){
     echo ""
     echo "Deploying XVM"
 
     git_get_repostats "$XVMBUILD_ROOT_PATH"
-
     mkdir -p "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/
 
+    #XVM
     mv -f "$XVMBUILD_ROOT_PATH"/~output/deploy/xvm_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".zip "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/
-
     cp -f "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/xvm_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".zip "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/xvm_latest.zip
-
-    echo "$XVMBUILD_XVM_VERSION_$REPOSITORY_COMMITS_NUMBER" > "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/xvm_revision.txt
-    echo $REPOSITORY_HASH > "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/xvm_hash.txt
-    echo $REPOSITORY_BRANCH > "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/xvm_branch.txt
-    echo $REPOSITORY_COMMITS_NUMBER > "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/xvm_commits.txt
-
-    echo "$XVMBUILD_XVM_VERSION" > "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/xvm_version.txt
-    echo "$XVMBUILD_WOT_VERSION" > "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/wot_version.txt
-
 
     #XFW
     mv -f "$XVMBUILD_ROOT_PATH"/~output/xfw/xfw_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".zip "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/
@@ -76,9 +65,43 @@ deploy(){
     mv -f "$XVMBUILD_ROOT_PATH"/~output/installer/xvm_latest_"$REPOSITORY_BRANCH".exe "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/
 }
 
+deploy_meta(){
+    git_get_repostats "$XVMBUILD_ROOT_PATH"
+
+    #XVM-Nightly meta
+    echo "$XVMBUILD_XVM_VERSION_$REPOSITORY_COMMITS_NUMBER" > "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/xvm_revision.txt
+    echo $REPOSITORY_HASH > "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/xvm_hash.txt
+    echo $REPOSITORY_BRANCH > "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/xvm_branch.txt
+    echo $REPOSITORY_COMMITS_NUMBER > "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/xvm_commits.txt
+    echo "$XVMBUILD_XVM_VERSION" > "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/xvm_version.txt
+    echo "$XVMBUILD_WOT_VERSION" > "$XVMBUILD_OUTPUT_PATH"/"$REPOSITORY_BRANCH"/wot_version.txt
+
+    #MODXVM meta
+    XVMBUILD_MX_DATE=$(date +%Y-%m-%dT%H:%M:%S%:z)
+    XVMBUILD_MX_SIZE_EXE=$(stat --printf=%s "$XVMBUILD_OUTPUT_PATH/$REPOSITORY_BRANCH/xvm_latest_$REPOSITORY_BRANCH.exe")
+    XVMBUILD_MX_SIZE_ZIP=$(stat --printf=%s "$XVMBUILD_OUTPUT_PATH/$REPOSITORY_BRANCH/xvm_latest.zip")
+    XVMBUILD_MX_URL_ZIP="${XVMBUILD_URL_DOWNLOAD}/${REPOSITORY_BRANCH}/xvm_${XVMBUILD_XVM_VERSION}_${REPOSITORY_COMMITS_NUMBER}_${REPOSITORY_BRANCH}_${REPOSITORY_HASH}.zip"
+    XVMBUILD_MX_URL_EXE="${XVMBUILD_URL_DOWNLOAD}/${REPOSITORY_BRANCH}/xvm_${XVMBUILD_XVM_VERSION}_${REPOSITORY_COMMITS_NUMBER}_${REPOSITORY_BRANCH}_${REPOSITORY_HASH}.exe"
+
+    dlmeta_output="$XVMBUILD_OUTPUT_PATH/$REPOSITORY_BRANCH/dl_meta.json"
+    cp "./dl_meta.template" "$dlmeta_output"
+    sed -i "s/XVMBUILD_MX_DATE/$XVMBUILD_MX_DATE/g" "$dlmeta_output"
+    sed -i "s/XVMBUILD_MX_SIZE_EXE/$XVMBUILD_MX_SIZE_EXE/g" "$dlmeta_output"
+    sed -i "s/XVMBUILD_MX_SIZE_ZIP/$XVMBUILD_MX_SIZE_ZIP/g" "$dlmeta_output"
+    sed -i "s/REPOSITORY_BRANCH/$REPOSITORY_BRANCH/g" "$dlmeta_output"
+    sed -i "s/REPOSITORY_HASH/$REPOSITORY_HASH/g" "$dlmeta_output"
+    sed -i "s/XVMBUILD_XVM_VERSION/$XVMBUILD_XVM_VERSION/g" "$dlmeta_output"
+    sed -i "s/REPOSITORY_COMMITS_NUMBER/$REPOSITORY_COMMITS_NUMBER/g" "$dlmeta_output"
+    sed -i "s/XVMBUILD_WOT_VERSION/$XVMBUILD_WOT_VERSION/g" "$dlmeta_output"
+    sed -i "s,XVMBUILD_MX_URL_EXE,$XVMBUILD_MX_URL_EXE,g" "$dlmeta_output"
+    sed -i "s,XVMBUILD_MX_URL_ZIP,$XVMBUILD_MX_URL_ZIP,g" "$dlmeta_output"
+    sed -i "s,XVMBUILD_URL_REPO,$XVMBUILD_URL_REPO,g" "$dlmeta_output"
+}
+
 pack_xvm
 pack_xfw
 
-deploy
+deploy_files
+deploy_meta
 
 clean_repodir

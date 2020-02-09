@@ -5,7 +5,7 @@ export XVMBUILD_IPB_TOPICID=00000
 export XVMBUILD_IPB_SERVER=http://example.com/
 
 export XVMBUILD_URL_DOWNLOAD=http://nightly.modxvm.com/download
-export XVMBUILD_URL_REPO=https://bitbucket.org/XVM/xvm/commits
+export XVMBUILD_URL_REPO=https://gitlab.com/xvm/xvm/commit
 
 export XVMBUILD_OUTPUT_PATH=/var/download
 
