@@ -19,7 +19,7 @@ from vehicle_systems.tankStructure import TankPartIndexes
 import xvm_battle.python.battle as battle
 import xvm_main.python.config as config
 import xvm_main.python.userprefs as userprefs
-from xfw import *
+from xfw.events import registerEvent
 from xfw_actionscript.python import *
 from xvm_main.python.logger import *
 from xvm_main.python.stats import _stat
@@ -899,7 +899,7 @@ def _Vehicle_startVisual(self):
 @registerEvent(Vehicle, 'onHealthChanged')
 def _Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
     if _config.get(HIT_LOG_ENABLED, True) and battle.isBattleTypeSupported:
-        if (g_dataHitLog.playerVehicleID == attackerID) and (self.id not in g_dataHitLog.vehDead):
+        if (g_dataHitLog.playerVehicleID == attackerID) and (self.id not in g_dataHitLog.vehDead or newHealth <= -5):
             attacked = g_dataHitLog.player.arena.vehicles.get(self.id)
             if (g_dataHitLog.player.team != attacked['team']) or _config.get(SHOW_ALLY_DAMAGE, True):
                 if (self.id != attackerID) or _config.get(SHOW_SELF_DAMAGE, True):
