@@ -118,6 +118,8 @@ class Xvm(object):
         #trace('onSystemMessage')
         msg = e.ctx.get('msg', '')
         type = e.ctx.get('type', SystemMessages.SM_TYPE.Information)
+        if type not in [SystemMessages.SM_TYPE.Information, SystemMessages.SM_TYPE.GameGreeting]:
+            log('SystemMessage: [{}] {}'.format(type, utils.hide_guid(msg)))
         SystemMessages.pushMessage(msg, type)
 
     # state handler
