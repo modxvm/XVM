@@ -219,7 +219,7 @@ package com.xvm.battle.shared.battleloading
             _model = model;
             if (cfg.removeRankBadgeIcon)
             {
-                _model.badgeType = "";
+                //_model.badgeType = ""; // TODO:1.8.0
             }
             if (cfg.removeTesterIcon)
             {

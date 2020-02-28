@@ -434,6 +434,8 @@ package com.xvm.battle.classic.playersPanel
 
         private function updateHasBadges(data:DAAPIVehiclesDataVO):void
         {
+            // TODO:1.8.0
+            /*
             _leftHasBadges = false;
             _rightHasBadges = false;
             var vi:DAAPIVehicleInfoVO;
@@ -455,6 +457,7 @@ package com.xvm.battle.classic.playersPanel
                     break;
                 }
             }
+            */
         }
 
         private function setFixedOrder(data:DAAPIVehiclesDataVO):void

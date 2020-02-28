@@ -169,10 +169,13 @@ package com.xvm.battle.classic.fullStats
             _isIGR = isIGR;
         }
 
+        // TODO:1.8.0
+        /*
         override public function setBadge(badgeType:String):void
         {
             super.setBadge(cfg.removeRankBadgeIcon ? "" : badgeType);
         }
+        */
 
         override public function setSuffixBadge(suffixBadgeType:String):void
         {
