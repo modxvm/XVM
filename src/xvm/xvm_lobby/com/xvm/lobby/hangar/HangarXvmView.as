@@ -64,13 +64,14 @@ package com.xvm.lobby.hangar
 
         private function setup():void
         {
-            setupTxtTankInfo();
+            //setupTxtTankInfo(); // TODO:1.8.0
             //setupBtnCommonQuests(); // TODO:1.1
             //setupBtnPersonalQuests(); // TODO:1.1
         }
 
         // txtTankInfo
-
+        // TODO:1.8.0
+        /*
         private var _orig_txtTankInfo_x:Number = NaN;
         private var _orig_txtTankInfo_y:Number = NaN;
         private var _orig_tankTypeIcon_x:Number = NaN;
@@ -117,6 +118,7 @@ package com.xvm.lobby.hangar
                 Logger.err(ex);
             }
         }
+        */
 
         // btnCommonQuests
         // TODO:1.1
