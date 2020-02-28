@@ -9,11 +9,11 @@ package net.wg.gui.components.common.serverStats
     import net.wg.infrastructure.managers.ITooltipMgr;
     import flash.text.TextFieldAutoSize;
     import flash.events.MouseEvent;
+    import net.wg.infrastructure.events.ListDataProviderEvent;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.gui.components.controls.helpers.ServerPingState;
     import net.wg.gui.components.controls.helpers.ServerCsisState;
     import scaleform.clik.interfaces.IDataProvider;
-    import net.wg.infrastructure.events.ListDataProviderEvent;
     import net.wg.gui.components.paginator.vo.ToolTipVO;
 
     public class ServerDropDown extends DropdownMenu
@@ -79,6 +79,11 @@ package net.wg.gui.components.common.serverStats
 
         override protected function onDispose() : void
         {
+            if(_dataProvider)
+            {
+                _dataProvider.removeEventListener(ListDataProviderEvent.UPDATE_ITEM,this.onDataProviderUpdateItemHandler);
+                _dataProvider.removeEventListener(ListDataProviderEvent.RESET_SELECTED_INDEX,this.onDataProviderResetSelectedIndexHandler);
+            }
             removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
             removeEventListener(MouseEvent.ROLL_OUT,this.onHideTooltipHandler);
             removeEventListener(MouseEvent.CLICK,this.onHideTooltipHandler);
@@ -186,11 +191,22 @@ package net.wg.gui.components.common.serverStats
             if(_dataProvider)
             {
                 _dataProvider.removeEventListener(ListDataProviderEvent.UPDATE_ITEM,this.onDataProviderUpdateItemHandler);
+                _dataProvider.removeEventListener(ListDataProviderEvent.RESET_SELECTED_INDEX,this.onDataProviderResetSelectedIndexHandler);
             }
             super.dataProvider = param1;
             if(_dataProvider)
             {
                 _dataProvider.addEventListener(ListDataProviderEvent.UPDATE_ITEM,this.onDataProviderUpdateItemHandler);
+                _dataProvider.addEventListener(ListDataProviderEvent.RESET_SELECTED_INDEX,this.onDataProviderResetSelectedIndexHandler);
+            }
+        }
+
+        private function onDataProviderResetSelectedIndexHandler(param1:ListDataProviderEvent) : void
+        {
+            if(_dataProvider && _dataProvider.length > param1.index)
+            {
+                _selectedIndex = -1;
+                selectedIndex = param1.index;
             }
         }
 

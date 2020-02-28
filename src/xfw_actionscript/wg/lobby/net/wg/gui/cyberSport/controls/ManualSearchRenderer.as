@@ -12,7 +12,6 @@ package net.wg.gui.cyberSport.controls
     import net.wg.data.constants.generated.TOOLTIPS_CONSTANTS;
     import net.wg.infrastructure.interfaces.IUserProps;
     import net.wg.gui.rally.vo.RallyCandidateVO;
-    import org.idmedia.as3commons.util.StringUtils;
     import net.wg.data.constants.Values;
 
     public class ManualSearchRenderer extends TableRenderer implements IManualSearchRenderer
@@ -152,15 +151,13 @@ package net.wg.gui.cyberSport.controls
         {
             var _loc2_:String = null;
             var _loc7_:IUserProps = null;
-            var _loc8_:* = false;
             var _loc3_:RallyCandidateVO = param1.creator;
             if(_loc3_)
             {
-                _loc7_ = App.utils.commons.getUserProps(_loc3_.userName,_loc3_.clanAbbrev,_loc3_.region,_loc3_.igrType,null,_loc3_.badge,_loc3_.badgeImgStr);
+                _loc7_ = App.utils.commons.getUserProps(_loc3_.userName,_loc3_.clanAbbrev,_loc3_.region,_loc3_.igrType,null);
                 _loc7_.rgb = param1.creator.color;
                 this._userInfoTextLoadingController.setUserNameFromProps(_loc7_);
-                _loc8_ = StringUtils.isNotEmpty(_loc3_.badgeImgStr);
-                this.commander.y = _loc8_?this._commanderLabelWithBadgeY:this._commanderLabelY;
+                this.commander.y = _loc3_.badgeVisualVO != null?this._commanderLabelWithBadgeY:this._commanderLabelY;
                 _loc2_ = this.commander.htmlText;
             }
             else

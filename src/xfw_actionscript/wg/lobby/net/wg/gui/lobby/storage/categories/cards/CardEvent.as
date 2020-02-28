@@ -13,6 +13,8 @@ package net.wg.gui.lobby.storage.categories.cards
 
         public static const REMOVE:String = "remove";
 
+        public static const UPGRADE:String = "upgrade";
+
         public static const SHOW_CONTEXT_MENU:String = "showContextMenu";
 
         public static const PLAY_INFO_SOUND:String = "playInfoSound";

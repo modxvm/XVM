@@ -87,7 +87,7 @@ package net.wg.gui.lobby.training
                     this.textComment.text = this._dataVO.comment;
                     this.textArena.text = this._dataVO.arena;
                     this.textCount.text = this._dataVO.count + "/" + 2 * this._dataVO.total;
-                    App.utils.commons.formatPlayerName(this.textOwner,App.utils.commons.getUserProps(this._dataVO.creatorName,this._dataVO.creatorClan,this._dataVO.creatorRegion,this._dataVO.creatorIgrType,null,0,this._dataVO.badgeImgStr));
+                    App.utils.commons.formatPlayerName(this.textOwner,App.utils.commons.getUserProps(this._dataVO.creatorName,this._dataVO.creatorClan,this._dataVO.creatorRegion,this._dataVO.creatorIgrType,null));
                     this.iconLoader.visible = true;
                     if(this.iconLoader.source != this._dataVO.icon)
                     {

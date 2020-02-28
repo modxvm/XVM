@@ -104,9 +104,10 @@ package net.wg.gui.prebattle.squads.simple
         override public function updateComponents(param1:IRallySimpleSlotRenderer, param2:IRallySlotVO) : void
         {
             var _loc3_:SimpleSquadSlotRenderer = null;
+            var _loc4_:SimpleSquadRallySlotVO = null;
             _loc3_ = param1 as SimpleSquadSlotRenderer;
             App.utils.asserter.assertNotNull(_loc3_,"squadSlot" + Errors.CANT_NULL);
-            var _loc4_:SimpleSquadRallySlotVO = param2 as SimpleSquadRallySlotVO;
+            _loc4_ = param2 as SimpleSquadRallySlotVO;
             App.utils.asserter.assertNotNull(_loc4_,"unitSlotData" + Errors.CANT_NULL);
             _loc3_.slotLabel.width = _loc4_.playerStatus && _loc4_.selectedVehicle || _loc4_.isVisibleAdtMsg?_loc3_.vehicleBtn.x - _loc3_.slotLabel.x:_loc3_.vehicleBtn.x + _loc3_.vehicleBtn.width - _loc3_.slotLabel.x;
             super.updateComponents(param1,param2);

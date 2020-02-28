@@ -13,6 +13,8 @@ package net.wg.gui.events
 
         public static const DEVICE_EQUIP:String = "deviceEquip";
 
+        public static const DEVICE_UPGRADE:String = "deviceUpgrade";
+
         private var _deviceId:Number;
 
         public function DeviceEvent(param1:String, param2:Number)

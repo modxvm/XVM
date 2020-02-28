@@ -67,11 +67,11 @@ package net.wg.infrastructure.base.meta
 
         function as_startCoolDownSwapButton(param1:Number) : void;
 
-        function as_setPlayerStateInTeam1(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int, param7:int, param8:String) : void;
+        function as_setPlayerStateInTeam1(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int, param7:Object) : void;
 
-        function as_setPlayerStateInTeam2(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int, param7:int, param8:String) : void;
+        function as_setPlayerStateInTeam2(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int, param7:Object) : void;
 
-        function as_setPlayerStateInOther(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int, param7:int, param8:String) : void;
+        function as_setPlayerStateInOther(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int, param7:Object) : void;
 
         function as_setPlayerTagsInTeam1(param1:Number, param2:Array) : void;
 

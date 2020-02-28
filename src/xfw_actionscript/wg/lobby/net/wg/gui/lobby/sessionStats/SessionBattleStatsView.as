@@ -13,10 +13,11 @@ package net.wg.gui.lobby.sessionStats
     import net.wg.gui.components.common.containers.VerticalGroupLayout;
     import scaleform.clik.events.ButtonEvent;
     import flash.events.MouseEvent;
+    import flash.events.Event;
     import scaleform.clik.constants.InvalidationType;
-    import net.wg.gui.lobby.sessionStats.data.SessionStatsPopoverVO;
+    import net.wg.gui.lobby.sessionStats.events.SessionStatsPopoverResizeEvent;
+    import net.wg.gui.lobby.sessionStats.data.SessionStatsOverviewVO;
     import flash.display.InteractiveObject;
-    import net.wg.gui.lobby.sessionStats.events.SessionStatsPopoverResizedEvent;
 
     public class SessionBattleStatsView extends SessionBattleStatsViewMeta implements IResizableContent
     {
@@ -36,6 +37,12 @@ package net.wg.gui.lobby.sessionStats
         private static const ROW_HEIGHT:int = 31;
 
         private static const LIST_GAP:int = 10;
+
+        private static const VERTICAL_GAP_BETWEEN_BLOCKS:Number = 30;
+
+        private static const VERTICAL_PADDING_FOR_TOTALS_BG:Number = 15;
+
+        private static const EXTERNAL_SIZE_SET:String = "external_set_size";
 
         public var lastBattle:GroupEx = null;
 
@@ -79,24 +86,61 @@ package net.wg.gui.lobby.sessionStats
             this.collapseBtn.addEventListener(ButtonEvent.CLICK,this.onCollapseBtnClickHandler);
             this.collapseBtn.addEventListener(MouseEvent.ROLL_OVER,this.onCollapseBtnRollOverHandler);
             this.collapseBtn.addEventListener(MouseEvent.ROLL_OUT,this.onCollapseBtnRollOutHandler);
+            this.lastBattle.addEventListener(Event.RESIZE,this.onGroupResized);
+            this.total.addEventListener(Event.RESIZE,this.onGroupResized);
         }
 
         override protected function draw() : void
         {
+            var _loc1_:* = NaN;
+            var _loc2_:* = NaN;
+            var _loc3_:* = NaN;
+            var _loc4_:* = NaN;
             super.draw();
-            if(isInvalid(InvalidationType.DATA) && this._data)
+            if(this._data != null)
             {
-                this.lastBattle.dataProvider = this._data.lastBattle;
-                this.total.dataProvider = this._data.total;
-                this.collapsedList.dataProvider = this._data.battleEfficiency;
-                this.collapseBtn.label = this._data.collapseLabel;
+                if(isInvalid(InvalidationType.DATA))
+                {
+                    this.lastBattle.dataProvider = this._data.lastBattle;
+                    this.total.dataProvider = this._data.total;
+                    this.collapsedList.dataProvider = this._data.battleEfficiency;
+                    this.collapsedList.validateNow();
+                    this.collapseBtn.label = this._data.collapseLabel;
+                }
+                if(isInvalid(InvalidationType.SIZE))
+                {
+                    _loc1_ = this.lastBattle.y + this.lastBattle.height;
+                    this.total.y = _loc1_ + VERTICAL_GAP_BETWEEN_BLOCKS + VERTICAL_PADDING_FOR_TOTALS_BG;
+                    this.totalBg.y = _loc1_ + VERTICAL_GAP_BETWEEN_BLOCKS;
+                    this.totalBg.height = this.total.height + (VERTICAL_PADDING_FOR_TOTALS_BG << 1);
+                }
+                if(isInvalid(EXTERNAL_SIZE_SET))
+                {
+                    if(this.collapsedList.visible)
+                    {
+                        _loc2_ = height - this.collapsedList.y;
+                        _loc3_ = this._data.battleEfficiency.length * ROW_HEIGHT;
+                        _loc4_ = _loc2_ - _loc3_ - LIST_GAP;
+                        if(_loc4_ > 0)
+                        {
+                            this.collapsedList.height = _loc3_;
+                            dispatchEvent(new SessionStatsPopoverResizeEvent(SessionStatsPopoverResizeEvent.EXTRA_SIZED,_loc4_));
+                        }
+                        else
+                        {
+                            this.collapsedList.height = _loc2_;
+                        }
+                    }
+                }
             }
         }
 
         override protected function onDispose() : void
         {
+            this.lastBattle.removeEventListener(Event.RESIZE,this.onGroupResized);
             this.lastBattle.dispose();
             this.lastBattle = null;
+            this.total.removeEventListener(Event.RESIZE,this.onGroupResized);
             this.total.dispose();
             this.total = null;
             this.collapsedList.dispose();
@@ -118,6 +162,33 @@ package net.wg.gui.lobby.sessionStats
             invalidateData();
         }
 
+        private function onGroupResized(param1:Event) : void
+        {
+            invalidateSize();
+        }
+
+        private function onCollapseBtnClickHandler(param1:ButtonEvent) : void
+        {
+            this.expand(this.collapseBtn.selected);
+        }
+
+        private function expand(param1:Boolean) : void
+        {
+            this.collapsedList.visible = param1;
+            dispatchEvent(new SessionStatsPopoverResizeEvent(SessionStatsPopoverResizeEvent.EXPANDED,this.collapseBtn.selected));
+            invalidateSize();
+        }
+
+        private function onCollapseBtnRollOverHandler(param1:MouseEvent) : void
+        {
+            this.hoverBg.visible = true;
+        }
+
+        private function onCollapseBtnRollOutHandler(param1:MouseEvent) : void
+        {
+            this.hoverBg.visible = false;
+        }
+
         public function canShowAutomatically() : Boolean
         {
             return true;
@@ -129,7 +200,7 @@ package net.wg.gui.lobby.sessionStats
             {
                 return;
             }
-            var _loc2_:SessionStatsPopoverVO = SessionStatsPopoverVO(param1);
+            var _loc2_:SessionStatsOverviewVO = SessionStatsOverviewVO(param1);
             this.collapseBtn.selected = _loc2_.isExpanded;
             this.expand(_loc2_.isExpanded);
         }
@@ -139,21 +210,11 @@ package net.wg.gui.lobby.sessionStats
             return this;
         }
 
-        private function onCollapseBtnClickHandler(param1:ButtonEvent) : void
-        {
-            this.expand(this.collapseBtn.selected);
-            dispatchEvent(new SessionStatsPopoverResizedEvent(this.collapseBtn.selected));
-        }
-
-        private function expand(param1:Boolean) : void
-        {
-            this.collapsedList.visible = param1;
-        }
-
         public function setViewSize(param1:Number, param2:Number) : void
         {
-            setSize(param1,param2);
-            this.collapsedList.height = height - this.collapsedList.y;
+            _width = param1;
+            _height = param2;
+            invalidate(EXTERNAL_SIZE_SET);
         }
 
         public function get centerOffset() : int
@@ -172,16 +233,6 @@ package net.wg.gui.lobby.sessionStats
 
         public function set active(param1:Boolean) : void
         {
-        }
-
-        private function onCollapseBtnRollOverHandler(param1:MouseEvent) : void
-        {
-            this.hoverBg.visible = true;
-        }
-
-        private function onCollapseBtnRollOutHandler(param1:MouseEvent) : void
-        {
-            this.hoverBg.visible = false;
         }
     }
 }

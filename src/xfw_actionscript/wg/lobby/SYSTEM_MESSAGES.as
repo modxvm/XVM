@@ -165,8 +165,6 @@ package
 
         public static const PREBATTLE_VEHICLEINVALID_EPICONLY:String = "#system_messages:prebattle/vehicleInvalid/epicOnly";
 
-        public static const PREBATTLE_VEHICLEINVALID_BOBONLY:String = "#system_messages:prebattle/vehicleInvalid/bobOnly";
-
         public static const PREBATTLE_VEHICLEINVALID_NOTSETREADYSTATUS:String = "#system_messages:prebattle/vehicleInvalid/notSetReadyStatus";
 
         public static const PREBATTLE_VEHICLEINVALID_FALLOUTONLY:String = "#system_messages:prebattle/vehicleInvalid/falloutOnly";
@@ -1241,6 +1239,12 @@ package
 
         public static const ARTEFACT_REMOVE_ERROR_TOO_HEAVY:String = "#system_messages:artefact_remove/error_too_heavy";
 
+        public static const ARTEFACT_UPGRADE_SUCCESS:String = "#system_messages:artefact_upgrade/success";
+
+        public static const ARTEFACT_UPGRADE_SERVER_ERROR:String = "#system_messages:artefact_upgrade/server_error";
+
+        public static const ARTEFACT_UPGRADE_VEHICLE_NEED_REPAIR:String = "#system_messages:artefact_upgrade/vehicle_need_repair";
+
         public static const LAYOUT_APPLY_SUCCESS_MONEY_SPENT:String = "#system_messages:layout_apply/success_money_spent";
 
         public static const LAYOUT_APPLY_SERVER_ERROR:String = "#system_messages:layout_apply/server_error";
@@ -2111,6 +2115,8 @@ package
 
         public static const RANKED_NOTIFICATION_NOTAVAILABLE:String = "#system_messages:ranked/notification/notAvailable";
 
+        public static const RANKED_NOTIFICATION_NOTSET:String = "#system_messages:ranked/notification/notSet";
+
         public static const RANKED_NOTIFICATION_AVAILABLE:String = "#system_messages:ranked/notification/available";
 
         public static const TOKENS_NOTIFICATION_MARK_ACQUIRED:String = "#system_messages:tokens/notification/mark_acquired";
@@ -2149,9 +2155,9 @@ package
 
         public static const PROGRESSIVEREWARD_ERROR:String = "#system_messages:progressiveReward/error";
 
-        public static const FRONTLINE_BUY_VEHICLE_SERVER_ERROR:String = "#system_messages:frontline_buy_vehicle/server_error";
+        public static const EVENT_PROGRESSION_BUY_VEHICLE_SERVER_ERROR:String = "#system_messages:event_progression_buy_vehicle/server_error";
 
-        public static const FRONTLINE_BUY_VEHICLE_BUY:String = "#system_messages:frontline_buy_vehicle/buy";
+        public static const EVENT_PROGRESSION_BUY_VEHICLE_BUY:String = "#system_messages:event_progression_buy_vehicle/buy";
 
         public static const MAPS_BLACK_LIST_SELECT_SUCCESS:String = "#system_messages:maps_black_list/select/success";
 
@@ -2228,6 +2234,48 @@ package
         public static const DEMOUNTKIT_RESTORED_SWITCHEDON:String = "#system_messages:demountKit_restored/switchedOn";
 
         public static const DEMOUNTKIT_FAILED_SWITCHEDOFF:String = "#system_messages:demountKit_failed/switchedOff";
+
+        public static const DAILY_QUESTS_SWITCH_OFF_TITLE:String = "#system_messages:daily_quests/switch_off/title";
+
+        public static const DAILY_QUESTS_SWITCH_OFF_BODY:String = "#system_messages:daily_quests/switch_off/body";
+
+        public static const DAILY_QUESTS_SWITCH_ON_TITLE:String = "#system_messages:daily_quests/switch_on/title";
+
+        public static const DAILY_QUESTS_SWITCH_ON_BODY:String = "#system_messages:daily_quests/switch_on/body";
+
+        public static const DAILY_QUESTS_REROLL_SUCCESS:String = "#system_messages:daily_quests/reroll/success";
+
+        public static const DAILY_QUESTS_REROLL_REROLL_DISABLED:String = "#system_messages:daily_quests/reroll/reroll_disabled";
+
+        public static const DAILY_QUESTS_REROLL_REROLL_IN_COOLDOWN:String = "#system_messages:daily_quests/reroll/reroll_in_cooldown";
+
+        public static const DAILY_QUESTS_REROLL_QUEST_IS_ALREADY_COMPLETED:String = "#system_messages:daily_quests/reroll/quest_is_already_completed";
+
+        public static const DAILY_QUESTS_REROLL_UNKNOWN_ERROR:String = "#system_messages:daily_quests/reroll/unknown_error";
+
+        public static const BATTLEPASS_BUY_SERVER_ERROR:String = "#system_messages:battlePass_buy/server_error";
+
+        public static const BATTLEPASSLEVELS_BUY_SERVER_ERROR:String = "#system_messages:battlePassLevels_buy/server_error";
+
+        public static const CHOOSE_BATTLEPASS_REWARD_SERVER_ERROR:String = "#system_messages:choose_battlePass_reward/server_error";
+
+        public static const BATTLEPASS_SWITCH_STARTED_TITLE:String = "#system_messages:battlePass/switch_started/title";
+
+        public static const BATTLEPASS_SWITCH_STARTED_BODY:String = "#system_messages:battlePass/switch_started/body";
+
+        public static const BATTLEPASS_SWITCH_PAUSE_BODY:String = "#system_messages:battlePass/switch_pause/body";
+
+        public static const BATTLEPASS_SWITCH_DISABLE_TITLE:String = "#system_messages:battlePass/switch_disable/title";
+
+        public static const BATTLEPASS_SWITCH_DISABLE_BODY:String = "#system_messages:battlePass/switch_disable/body";
+
+        public static const BATTLEPASS_SWITCH_ENABLED_BODY:String = "#system_messages:battlePass/switch_enabled/body";
+
+        public static const UPGRADETROPHYDEVICE_SWITCH_ON_BODY:String = "#system_messages:upgradeTrophyDevice/switch_on/body";
+
+        public static const UPGRADETROPHYDEVICE_SWITCH_OFF_BODY:String = "#system_messages:upgradeTrophyDevice/switch_off/body";
+
+        public static const BATTLEPASS_BADGEREMOVED_TEXT:String = "#system_messages:battlePass/badgeRemoved/text";
 
         public function SYSTEM_MESSAGES()
         {

@@ -3,6 +3,16 @@ package net.wg.data.constants.generated
     public class DAMAGEINDICATOR extends Object
     {
 
+        public static const ALLY_AT_SPG:String = "ally_AT-SPG";
+
+        public static const ALLY_HEAVY_TANK:String = "ally_heavyTank";
+
+        public static const ALLY_LIGHT_TANK:String = "ally_lightTank";
+
+        public static const ALLY_MEDIUM_TANK:String = "ally_mediumTank";
+
+        public static const ALLY_SPG:String = "ally_SPG";
+
         public static const AMMO_CIRCLE:String = "ammoCircle";
 
         public static const ARTILLERY:String = "artillery";

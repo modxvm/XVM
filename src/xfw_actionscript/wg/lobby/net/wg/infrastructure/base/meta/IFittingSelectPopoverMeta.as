@@ -7,6 +7,8 @@ package net.wg.infrastructure.base.meta
 
         function setVehicleModuleS(param1:Number, param2:Number, param3:Boolean) : void;
 
+        function upgradeVehicleModuleS(param1:int) : void;
+
         function showModuleInfoS(param1:String) : void;
 
         function setAutoRearmS(param1:Boolean) : void;

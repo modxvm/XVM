@@ -28,6 +28,8 @@ package net.wg.gui.components.damageIndicator
 
         private var _yawDegrees:Number = 0;
 
+        private var _rotateInfo:Boolean = false;
+
         public function DamageIndicatorItem()
         {
             super();
@@ -79,10 +81,14 @@ package net.wg.gui.components.damageIndicator
             else
             {
                 this.extendedAnimation.rotation = this._yawDegrees;
+                if(this._rotateInfo)
+                {
+                    this.extendedAnimation.rotateInfo(this._yawDegrees);
+                }
             }
         }
 
-        public function showExtended(param1:String, param2:String, param3:int, param4:String, param5:String, param6:String) : void
+        public function showExtended(param1:String, param2:String, param3:int, param4:String, param5:String, param6:String, param7:Boolean) : void
         {
             visible = true;
             this.extendedAnimation.visible = true;
@@ -94,15 +100,15 @@ package net.wg.gui.components.damageIndicator
             {
                 this.extendedAnimation.gotoAndPlay(param3);
             }
-            this._extendedStateContainer.setExtendedData(param1,param2,param4,param5,param6);
+            this._extendedStateContainer.setExtendedData(param1,param2,param4,param5,param6,param7);
         }
 
-        public function showSettingExtended(param1:String, param2:String, param3:String, param4:String, param5:String) : void
+        public function showSettingExtended(param1:String, param2:String, param3:String, param4:String, param5:String, param6:Boolean) : void
         {
             visible = true;
             this.extendedAnimation.visible = true;
             this.extendedAnimation.gotoAndStop(SHOW_WITHOUT_ANIMATION_FRAME);
-            this._extendedStateContainer.setExtendedData(param1,param2,param3,param4,param5,false);
+            this._extendedStateContainer.setExtendedData(param1,param2,param3,param4,param5,param6,false);
         }
 
         public function showSettingStandard(param1:String) : void
@@ -131,6 +137,10 @@ package net.wg.gui.components.damageIndicator
             else
             {
                 this.extendedAnimation.rotation = this._yawDegrees;
+                if(this._rotateInfo)
+                {
+                    this.extendedAnimation.rotateInfo(this._yawDegrees);
+                }
                 this._isStandard = param1;
                 this.standardAnimation.visible = this._isStandard;
                 this.extendedAnimation.visible = !this._isStandard;
@@ -141,6 +151,11 @@ package net.wg.gui.components.damageIndicator
         private function onAnimFinished() : void
         {
             this.extendedAnimation.visible = false;
+        }
+
+        public function set rotateInfo(param1:Boolean) : void
+        {
+            this._rotateInfo = param1;
         }
     }
 }

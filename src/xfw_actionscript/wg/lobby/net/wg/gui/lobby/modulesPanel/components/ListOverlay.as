@@ -33,6 +33,8 @@ package net.wg.gui.lobby.modulesPanel.components
 
         private var _data:ListOverlayVO = null;
 
+        private var _useSmallIcon:Boolean = true;
+
         public function ListOverlay()
         {
             super();
@@ -70,7 +72,7 @@ package net.wg.gui.lobby.modulesPanel.components
             super.draw();
             if(this._data && isInvalid(InvalidationType.DATA))
             {
-                this.icon.source = this._data.icon;
+                this.icon.source = this._useSmallIcon?this._data.iconSmall:this._data.iconBig;
                 this.titleTf.htmlText = this._data.titleText;
                 this.descTf.htmlText = this._data.descText;
                 this.okBtn.label = this._data.okBtnLabel;
@@ -83,24 +85,25 @@ package net.wg.gui.lobby.modulesPanel.components
             }
         }
 
+        public function isClickEnabled() : Boolean
+        {
+            return this._data?this._data.isClickEnabled:true;
+        }
+
         public function update(param1:ListOverlayVO) : void
         {
             this._data = param1;
             invalidateData();
         }
 
-        public function isClickEnabled() : Boolean
-        {
-            return this._data?this._data.isClickEnabled:true;
-        }
-
         private function updateLayout() : void
         {
+            var _loc1_:* = 0;
             this.bg.width = _width;
             this.bg.height = _height;
             this.descTf.width = _width - PADDING_DESC | 0;
             App.utils.commons.updateTextFieldSize(this.descTf,false,true);
-            var _loc1_:* = _height - GAP_TOP_ICON - this.icon.height - GAP_ICON_DESC - this.titleTf.height - this.descTf.height - GAP_DESC_BTN - this.okBtn.height >> 1;
+            _loc1_ = _height - GAP_TOP_ICON - this.icon.height - GAP_ICON_DESC - this.titleTf.height - this.descTf.height - GAP_DESC_BTN - this.okBtn.height >> 1;
             this.icon.x = _width - this.icon.width >> 1;
             this.titleTf.x = _width - this.titleTf.width >> 1;
             this.descTf.x = PADDING_DESC >> 1;
@@ -112,6 +115,16 @@ package net.wg.gui.lobby.modulesPanel.components
             this.descTf.y = _loc1_;
             _loc1_ = _loc1_ + (this.descTf.height + GAP_DESC_BTN);
             this.okBtn.y = _loc1_;
+        }
+
+        public function set useSmallIcon(param1:Boolean) : void
+        {
+            if(this._useSmallIcon != param1)
+            {
+                this._useSmallIcon = param1;
+                this.icon.source = this._useSmallIcon?this._data.iconSmall:this._data.iconBig;
+                invalidateSize();
+            }
         }
 
         private function onIconCompleteHandler(param1:UILoaderEvent) : void

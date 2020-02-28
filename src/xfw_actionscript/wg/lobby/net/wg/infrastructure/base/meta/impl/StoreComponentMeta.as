@@ -20,6 +20,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public var onAddVehToCompare:Function;
 
+        public var onUpgradeModule:Function;
+
         private var _array:Array;
 
         private var _shopNationFilterDataVo:ShopNationFilterDataVo;
@@ -86,6 +88,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.onAddVehToCompare,"onAddVehToCompare" + Errors.CANT_NULL);
             this.onAddVehToCompare(param1);
+        }
+
+        public function onUpgradeModuleS(param1:int) : void
+        {
+            App.utils.asserter.assertNotNull(this.onUpgradeModule,"onUpgradeModule" + Errors.CANT_NULL);
+            this.onUpgradeModule(param1);
         }
 
         public final function as_initFiltersData(param1:Array, param2:String) : void

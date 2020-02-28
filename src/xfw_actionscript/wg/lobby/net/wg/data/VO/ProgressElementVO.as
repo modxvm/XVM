@@ -19,6 +19,8 @@ package net.wg.data.VO
 
         private var _progressDiff:String = "";
 
+        private var _progressDiffTooltip:String = "";
+
         private var _progrIndex:int = 0;
 
         private var _showDone:Boolean = false;
@@ -116,6 +118,16 @@ package net.wg.data.VO
         public function set showDone(param1:Boolean) : void
         {
             this._showDone = param1;
+        }
+
+        public function get progressDiffTooltip() : String
+        {
+            return this._progressDiffTooltip;
+        }
+
+        public function set progressDiffTooltip(param1:String) : void
+        {
+            this._progressDiffTooltip = param1;
         }
     }
 }

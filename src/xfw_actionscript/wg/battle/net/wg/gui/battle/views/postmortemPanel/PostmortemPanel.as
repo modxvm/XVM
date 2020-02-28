@@ -49,11 +49,6 @@ package net.wg.gui.battle.views.postmortemPanel
             super.onDispose();
         }
 
-        public function as_setDeadReasonInfo(param1:String, param2:Boolean, param3:String, param4:String, param5:String, param6:String) : void
-        {
-            setDeadReasonInfo(param1,param2,param3,param4,param5,param6);
-        }
-
         public function as_setPlayerInfo(param1:String) : void
         {
             setPlayerInfo(param1);

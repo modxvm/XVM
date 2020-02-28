@@ -21,7 +21,7 @@ package net.wg.data.constants.generated
 
         public static const EPIC_BATTLES_PRIME_TIME_ALIAS:String = "EpicBattlesPrimeTime";
 
-        public static const FRONTLINE_BUY_CONFIRM_VIEW_ALIAS:String = "FrontlineBuyConfirmView";
+        public static const EPIC_BATTLES_PROGRESS_INFO_ALIAS:String = "EpicBattlesProgressInfoView";
 
         public static const EPIC_BATTLES_SKILL_VIEW_UI:String = "epicBattlesSkillView.swf";
 
@@ -36,8 +36,6 @@ package net.wg.data.constants.generated
         public static const EPIC_BATTLES_PRESTIGE_INFO_VIEW_UI:String = "epicBattlesPrestigeView.swf";
 
         public static const EPIC_BATTLES_BROWSER_UI:String = "epicBattlesBrowserView.swf";
-
-        public static const FRONTLINE_BUY_CONFIRM_VIEW_UI:String = "frontlineBuyConfirmView.swf";
 
         public function EPICBATTLES_ALIASES()
         {

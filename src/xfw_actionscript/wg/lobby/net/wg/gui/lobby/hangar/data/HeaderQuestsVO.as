@@ -9,6 +9,8 @@ package net.wg.gui.lobby.hangar.data
 
         public var flag:String = "";
 
+        public var flagDisabled:String = "";
+
         public var icon:String = "";
 
         public var stateIcon:String = "";
@@ -24,6 +26,8 @@ package net.wg.gui.lobby.hangar.data
         public var tooltip:String = "";
 
         public var isTooltipSpecial:Boolean = false;
+
+        public var isTooltipWulf:Boolean = false;
 
         public function HeaderQuestsVO(param1:Object = null)
         {

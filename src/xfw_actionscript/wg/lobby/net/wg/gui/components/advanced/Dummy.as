@@ -39,6 +39,8 @@ package net.wg.gui.components.advanced
 
         private static const BUTTON_GAP:int = 13;
 
+        private static const ADDITIONAL_BUTTON_GAP_AFTER_ICON:int = 6;
+
         public var bg:Sprite = null;
 
         public var text:TextField = null;
@@ -233,13 +235,12 @@ package net.wg.gui.components.advanced
 
         private function layoutLeft(param1:int, param2:int) : void
         {
-            var _loc4_:* = 0;
             var _loc3_:* = 0;
             if(this._button)
             {
                 _loc3_ = this._button.height + BUTTON_GAP;
             }
-            _loc4_ = param2 - this.text.height - _loc3_ >> 1;
+            var _loc4_:* = param2 - this.text.height - _loc3_ >> 1;
             this.text.x = (param1 - this.text.textWidth >> 1) + this._padding.left * _width >> 0;
             this.text.y = _loc4_ + this._padding.top * _height >> 0;
             if(this._icon)
@@ -269,6 +270,7 @@ package net.wg.gui.components.advanced
             var _loc6_:* = param2 - this.text.height - _loc4_ - _loc5_ >> 1;
             this.text.x = (param1 - this.text.width >> 1) + this._padding.left * _width >> 0;
             this.text.y = _loc6_ + this._padding.top * _height + _loc4_ >> 0;
+            var _loc7_:int = BUTTON_GAP;
             if(this._icon)
             {
                 if(param3)
@@ -279,14 +281,15 @@ package net.wg.gui.components.advanced
                 }
                 else
                 {
+                    _loc7_ = _loc4_ * 0.5 + ADDITIONAL_BUTTON_GAP_AFTER_ICON;
                     this._icon.x = _width - this._icon.width >> 1;
-                    this._icon.y = this.text.y - this._icon.height;
+                    this._icon.y = this.text.y - _loc4_ * 1.5;
                 }
             }
             if(this._button)
             {
                 this._button.x = _width - this._button.width >> 1;
-                this._button.y = this.text.y + this.text.height + BUTTON_GAP;
+                this._button.y = this.text.y + this.text.height + _loc7_;
             }
         }
 

@@ -171,7 +171,6 @@ package net.wg.gui.lobby.rankedBattles19.view.rewards.ranks
         private function updateLayout() : void
         {
             var _loc9_:DisplayObject = null;
-            var _loc10_:* = 0;
             var _loc11_:Sprite = null;
             if(!this._bonuses)
             {
@@ -197,7 +196,7 @@ package net.wg.gui.lobby.rankedBattles19.view.rewards.ranks
             var _loc6_:int = Math.max(_loc2_,_loc3_);
             var _loc7_:int = width - this._viewPadding.left >> 1 > _loc6_ >> 1?-(this._viewPadding.left >> 1):0;
             var _loc8_:int = this._paddingTop + BONUS_Y_OFFSET;
-            _loc10_ = 0;
+            var _loc10_:* = 0;
             while(_loc10_ < _loc1_)
             {
                 _loc9_ = this._bonuses[_loc10_];

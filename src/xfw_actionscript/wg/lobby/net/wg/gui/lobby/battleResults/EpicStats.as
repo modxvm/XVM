@@ -2,6 +2,7 @@ package net.wg.gui.lobby.battleResults
 {
     import net.wg.infrastructure.base.UIComponentEx;
     import net.wg.infrastructure.interfaces.IViewStackContent;
+    import net.wg.infrastructure.interfaces.IRegisteredComponent;
     import net.wg.gui.lobby.battleResults.data.EfficiencyHeaderVO;
     import net.wg.gui.lobby.battleResults.data.EpicEfficiencyData;
     import flash.text.TextField;
@@ -13,9 +14,8 @@ package net.wg.gui.lobby.battleResults
     import net.wg.gui.components.controls.SimpleTileList;
     import net.wg.gui.components.controls.UserNameField;
     import flash.display.DisplayObjectContainer;
-    import net.wg.gui.components.controls.ScrollBar;
-    import net.wg.gui.components.controls.ResizableScrollPane;
     import flash.display.DisplayObject;
+    import net.wg.gui.lobby.battleResults.epic.EpicQuestProgressInfo;
     import flash.display.MovieClip;
     import net.wg.gui.lobby.battleResults.data.BattleResultsVO;
     import net.wg.gui.lobby.battleResults.components.MultiColumnSubtasksList;
@@ -23,8 +23,10 @@ package net.wg.gui.lobby.battleResults
     import net.wg.gui.lobby.battleResults.managers.IStatsUtilsManager;
     import net.wg.utils.ILocale;
     import net.wg.infrastructure.managers.ITooltipMgr;
+    import net.wg.infrastructure.base.meta.IBaseDAAPIComponentMeta;
     import scaleform.clik.events.ButtonEvent;
     import flash.events.MouseEvent;
+    import net.wg.data.constants.generated.EPICBATTLES_ALIASES;
     import flash.text.TextFieldAutoSize;
     import net.wg.data.constants.Linkages;
     import scaleform.clik.constants.DirectionMode;
@@ -35,14 +37,13 @@ package net.wg.gui.lobby.battleResults
     import scaleform.clik.data.DataProvider;
     import net.wg.data.VO.UserVO;
     import flash.display.InteractiveObject;
-    import scaleform.gfx.TextFieldEx;
     import net.wg.infrastructure.interfaces.IFormattedInt;
     import net.wg.data.constants.generated.TOOLTIPS_CONSTANTS;
     import net.wg.gui.lobby.battleResults.event.BattleResultsViewEvent;
     import net.wg.gui.lobby.battleResults.progressReport.ProgressReportLinkageSelector;
     import net.wg.gui.lobby.battleResults.managers.impl.StatsUtilsManager;
 
-    public class EpicStats extends UIComponentEx implements IViewStackContent
+    public class EpicStats extends UIComponentEx implements IViewStackContent, IRegisteredComponent
     {
 
         private static const LIST_TILE_WIDTH:uint = 150;
@@ -133,13 +134,9 @@ package net.wg.gui.lobby.battleResults
 
         public var upperShadow:DisplayObjectContainer;
 
-        public var subtasksScrollBar:ScrollBar;
-
-        public var scrollPane:ResizableScrollPane;
-
-        public var noProgressTF:TextField;
-
         public var progressInfoBG:DisplayObject;
+
+        public var progressInfo:EpicQuestProgressInfo;
 
         public var imageSwitcher:MovieClip;
 
@@ -163,7 +160,9 @@ package net.wg.gui.lobby.battleResults
 
         private var _toolTipMgr:ITooltipMgr;
 
-        private const RANK_IMAGE_LIST:Vector.<String> = new <String>[RES_ICONS.MAPS_ICONS_LIBRARY_EPICRANK_MSG_RANK_RECRUIT,RES_ICONS.MAPS_ICONS_LIBRARY_EPICRANK_MSG_RANK_PRIVATE,RES_ICONS.MAPS_ICONS_LIBRARY_EPICRANK_MSG_RANK_SERGEANT,RES_ICONS.MAPS_ICONS_LIBRARY_EPICRANK_MSG_RANK_CAPTAIN,RES_ICONS.MAPS_ICONS_LIBRARY_EPICRANK_MSG_RANK_MAJOR,RES_ICONS.MAPS_ICONS_LIBRARY_EPICRANK_MSG_RANK_GENERAL];
+        private var _register:IBaseDAAPIComponentMeta;
+
+        private const RANK_IMAGE_LIST:Vector.<String> = new <String>[RES_ICONS.MAPS_ICONS_LIBRARY_EPICRANK_MSG_RANK_RECRUIT,RES_ICONS.MAPS_ICONS_LIBRARY_EPICRANK_MSG_RANK_PRIVATE,RES_ICONS.MAPS_ICONS_LIBRARY_EPICRANK_MSG_RANK_SERGEANT,RES_ICONS.MAPS_ICONS_LIBRARY_EPICRANK_MSG_RANK_LIEUTENANT,RES_ICONS.MAPS_ICONS_LIBRARY_EPICRANK_MSG_RANK_CAPTAIN,RES_ICONS.MAPS_ICONS_LIBRARY_EPICRANK_MSG_RANK_MAJOR,RES_ICONS.MAPS_ICONS_LIBRARY_EPICRANK_MSG_RANK_GENERAL];
 
         public function EpicStats()
         {
@@ -217,8 +216,9 @@ package net.wg.gui.lobby.battleResults
             this.creditsCounter.dispose();
             this.crystalsCounter.dispose();
             this.xpCounter.dispose();
-            this.subtasksScrollBar.dispose();
-            this.subtasksScrollBar = null;
+            this._register.unregisterFlashComponentS(EPICBATTLES_ALIASES.EPIC_BATTLES_PROGRESS_INFO_ALIAS);
+            this._register = null;
+            this.progressInfo = null;
             this.noIncomeAlert = null;
             this.progressInfoBG = null;
             this.resultLbl = null;
@@ -238,13 +238,10 @@ package net.wg.gui.lobby.battleResults
             this.crystalsIcon = null;
             this.crystalsCounter = null;
             this.xpCounter = null;
-            this.scrollPane.dispose();
-            this.scrollPane = null;
             this.getPremBtn.dispose();
             this.getPremBtn = null;
             this.upperShadow = null;
             this.lowerShadow = null;
-            this.noProgressTF = null;
             this.rankIconLoader.dispose();
             this.rankIconLoader = null;
             this.playerNameLbl.dispose();
@@ -296,8 +293,6 @@ package net.wg.gui.lobby.battleResults
             var _loc5_:* = 0;
             var _loc6_:PremiumInfoVO = null;
             var _loc7_:* = false;
-            var _loc8_:* = 0;
-            var _loc9_:* = 0;
             super.draw();
             if(this._data != null && isInvalid(InvalidationType.DATA))
             {
@@ -342,18 +337,7 @@ package net.wg.gui.lobby.battleResults
                 }
                 _loc7_ = _loc1_.showNoIncomeAlert;
                 this.setNoIncomeVisible(_loc7_);
-                if(!_loc7_)
-                {
-                    _loc8_ = _loc4_.length;
-                    if(_loc2_.rank)
-                    {
-                        _loc8_ = _loc8_ + 1;
-                        _loc9_ = 1;
-                    }
-                    this.initProgressReport(_loc9_,_loc8_);
-                    this.subtasksScrollBar.visible = true;
-                }
-                else
+                if(_loc7_)
                 {
                     this.noIncomeAlert.setData(_loc1_.noIncomeAlert);
                 }
@@ -380,6 +364,15 @@ package net.wg.gui.lobby.battleResults
             return this;
         }
 
+        public function registerFlashComponentVia(param1:IBaseDAAPIComponentMeta) : void
+        {
+            if(!param1.isFlashComponentRegisteredS(EPICBATTLES_ALIASES.EPIC_BATTLES_PROGRESS_INFO_ALIAS))
+            {
+                this._register = param1;
+                param1.registerFlashComponentS(this.progressInfo,EPICBATTLES_ALIASES.EPIC_BATTLES_PROGRESS_INFO_ALIAS);
+            }
+        }
+
         public function update(param1:Object) : void
         {
             this._data = BattleResultsVO(param1);
@@ -400,30 +393,6 @@ package net.wg.gui.lobby.battleResults
         private function showEfficiencyList() : void
         {
             this.epicEfficiencyList.visible = true;
-        }
-
-        private function initProgressReport(param1:int, param2:int) : void
-        {
-            this._progressReport = MultiColumnSubtasksList(this.scrollPane.target);
-            this._progressReport.setColumns(2);
-            this._progressReport.linkage = Linkages.BR_SUBTASK_COMPONENT_UI;
-            if(this._unlocksAndQuests && this._unlocksAndQuests.length > 0)
-            {
-                this._linkageSelector.setUnlocksCount(param1,param2);
-                this._progressReport.setLinkageSelector(this._linkageSelector);
-                this._progressReport.setData(this._unlocksAndQuests);
-                this.noProgressTF.visible = false;
-            }
-            else
-            {
-                this.lowerShadow.visible = false;
-                this.upperShadow.visible = false;
-                this._progressReport.visible = false;
-                this.subtasksScrollBar.visible = false;
-                this.noProgressTF.visible = true;
-                this.noProgressTF.text = BATTLE_RESULTS.COMMON_NOPROGRESS;
-                TextFieldEx.setVerticalAlign(this.noProgressTF,TextFieldEx.VALIGN_CENTER);
-            }
         }
 
         private function tryCleanEfficiencyListDataProvider() : void
@@ -452,7 +421,6 @@ package net.wg.gui.lobby.battleResults
         {
             var _loc4_:IFormattedInt = null;
             var _loc5_:* = false;
-            var _loc8_:* = NaN;
             _loc4_ = this._locale.parseFormattedInteger(param3);
             _loc5_ = _loc4_.value > 0;
             var _loc6_:IFormattedInt = this._locale.parseFormattedInteger(param1);
@@ -461,7 +429,7 @@ package net.wg.gui.lobby.battleResults
             var _loc7_:IFormattedInt = this._locale.parseFormattedInteger(param2);
             this.xpCounter.init(_loc7_.value,this._locale.cutCharsBeforeNumber(param2),_loc7_.delimiter,this._xpCounterNumber != _loc7_.value);
             this._xpCounterNumber = _loc7_.value;
-            _loc8_ = _loc5_?COUNTERS_SCALE:COUNTERS_SCALE_NO_CRYSTALS;
+            var _loc8_:Number = _loc5_?COUNTERS_SCALE:COUNTERS_SCALE_NO_CRYSTALS;
             var _loc9_:int = _loc5_?COUNTER_LEFT_OFFSET:COUNTER_LEFT_OFFSET_NO_CRYSTALS;
             if(_loc5_)
             {
@@ -504,10 +472,6 @@ package net.wg.gui.lobby.battleResults
             }
             this.lowerShadow.visible = _loc2_;
             this.upperShadow.visible = _loc2_;
-            this.subtasksScrollBar.visible = _loc2_;
-            this.noProgressTF.visible = _loc2_;
-            this.subtasksScrollBar.visible = _loc2_;
-            this.progressInfoBG.visible = _loc2_;
         }
 
         private function initEfficiencyList(param1:EfficiencyHeaderVO) : void

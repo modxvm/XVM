@@ -4,6 +4,7 @@ package net.wg.gui.rally.controls
     import net.wg.gui.rally.controls.interfaces.IRallySimpleSlotRenderer;
     import net.wg.gui.components.advanced.IndicationOfStatus;
     import flash.text.TextField;
+    import net.wg.gui.components.controls.UserNameField;
     import net.wg.gui.interfaces.IButtonIconTextTransparent;
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.cyberSport.controls.interfaces.IVehicleButton;
@@ -17,8 +18,8 @@ package net.wg.gui.rally.controls
     import flash.events.MouseEvent;
     import scaleform.clik.events.ButtonEvent;
     import net.wg.infrastructure.interfaces.IUserProps;
-    import net.wg.gui.interfaces.IRallyCandidateVO;
-    import org.idmedia.as3commons.util.StringUtils;
+    import net.wg.gui.rally.vo.RallyCandidateVO;
+    import net.wg.data.constants.Values;
     import flash.events.IEventDispatcher;
     import net.wg.data.VO.ExtendedUserVO;
     import net.wg.data.constants.UserTags;
@@ -37,7 +38,7 @@ package net.wg.gui.rally.controls
 
         public var orderNo:TextField = null;
 
-        public var slotLabel:TextField = null;
+        public var slotLabel:UserNameField = null;
 
         public var takePlaceBtn:IButtonIconTextTransparent = null;
 
@@ -55,6 +56,8 @@ package net.wg.gui.rally.controls
 
         protected var slotLabelWithBadgeY:int = -1;
 
+        protected var slotLabelTextWithBadgeY:int = -1;
+
         protected var badgeOffsetY:int = -2;
 
         private var _userInfoTextLoadingController:UserInfoTextLoadingController = null;
@@ -71,6 +74,8 @@ package net.wg.gui.rally.controls
             this._userInfoTextLoadingController = new UserInfoTextLoadingController();
             this.slotLabelY = this.slotLabel.y;
             this.slotLabelWithBadgeY = this.slotLabelY + this.badgeOffsetY;
+            this.slotLabelTextWithBadgeY = -this.badgeOffsetY;
+            this.slotLabel.textSize = 13;
         }
 
         override protected function draw() : void
@@ -121,7 +126,7 @@ package net.wg.gui.rally.controls
             }
             this.addTooltipSubscriber(this.slotLabel);
             this.initControlsState();
-            this._userInfoTextLoadingController.setControlledUserNameTextField(this.slotLabel);
+            this._userInfoTextLoadingController.setControlledUserNameTextField(this.slotLabel.textField);
         }
 
         override protected function onDispose() : void
@@ -165,6 +170,7 @@ package net.wg.gui.rally.controls
             }
             this.orderNo = null;
             this.removeTooltipSubscriber(this.slotLabel);
+            this.slotLabel.dispose();
             this.slotLabel = null;
             this.commander = null;
             this._slotData = null;
@@ -220,14 +226,26 @@ package net.wg.gui.rally.controls
         public function updateComponents() : void
         {
             this.initControlsState();
-            this._helper.updateComponents(this,this._slotData);
-            var _loc1_:IRallyCandidateVO = this._slotData.player;
-            var _loc2_:* = false;
+            var _loc1_:RallyCandidateVO = this._slotData.player as RallyCandidateVO;
+            var _loc2_:Boolean = _loc1_ != null && _loc1_.badgeVisualVO != null;
+            this.slotLabel.y = _loc2_?this.slotLabelWithBadgeY:this.slotLabelY;
             if(_loc1_)
             {
-                _loc2_ = StringUtils.isNotEmpty(_loc1_.badgeImgStr);
+                this.slotLabel.userVO = _loc1_;
+                this.slotLabel.badgeVisibility = true;
+                this._helper.updateComponents(this,this._slotData);
+                this.slotLabel.textColor = _loc1_.color;
+                this.slotLabel.validateNow();
             }
-            this.slotLabel.y = _loc2_?this.slotLabelWithBadgeY:this.slotLabelY;
+            else
+            {
+                this.slotLabel.badgeVisibility = false;
+                this.slotLabel.userVO = null;
+                this.slotLabel.validateNow();
+                this._helper.updateComponents(this,this._slotData);
+                this.slotLabel.isFrozen = true;
+            }
+            this.slotLabel.textField.y = _loc2_?this.slotLabelTextWithBadgeY:Values.ZERO;
         }
 
         protected function getOrderNoSymbol() : String

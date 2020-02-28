@@ -12,6 +12,10 @@ package net.wg.gui.lobby.rankedBattles19.data
 
         public var titleIcon:String = "";
 
+        public var titleTooltip:String = "";
+
+        public var compensation:String = "";
+
         public var points:int = -1;
 
         public var rewards:Vector.<RankedRewardYearItemVO> = null;

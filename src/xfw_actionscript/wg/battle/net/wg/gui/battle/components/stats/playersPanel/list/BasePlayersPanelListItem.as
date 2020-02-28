@@ -3,9 +3,11 @@ package net.wg.gui.battle.components.stats.playersPanel.list
     import net.wg.gui.battle.components.BattleUIComponent;
     import net.wg.gui.battle.components.stats.playersPanel.interfaces.IPlayersPanelListItem;
     import flash.text.TextField;
+    import net.wg.gui.components.controls.BadgeComponent;
     import net.wg.gui.battle.components.BattleAtlasSprite;
     import net.wg.gui.battle.views.stats.SpeakAnimation;
     import flash.display.Sprite;
+    import net.wg.gui.components.controls.VO.BadgeVisualVO;
     import net.wg.infrastructure.interfaces.IUserProps;
     import net.wg.utils.ICommons;
     import flash.events.MouseEvent;
@@ -14,7 +16,6 @@ package net.wg.gui.battle.components.stats.playersPanel.list
     import net.wg.gui.battle.random.views.stats.components.playersPanel.constants.PlayersPanelInvalidationType;
     import net.wg.data.constants.Values;
     import net.wg.data.constants.InvalidationType;
-    import org.idmedia.as3commons.util.StringUtils;
     import net.wg.gui.battle.random.views.stats.constants.VehicleActions;
     import net.wg.data.constants.generated.PLAYERS_PANEL_STATE;
     import net.wg.gui.battle.views.stats.constants.PlayerStatusSchemeName;
@@ -52,7 +53,7 @@ package net.wg.gui.battle.components.stats.playersPanel.list
 
         public var vehicleTF:TextField = null;
 
-        public var badgeIcon:BattleAtlasSprite;
+        public var badge:BadgeComponent = null;
 
         public var icoIGR:BattleAtlasSprite = null;
 
@@ -115,7 +116,7 @@ package net.wg.gui.battle.components.stats.playersPanel.list
 
         private var _isIgnoredTmp:Boolean = false;
 
-        private var _badgeType:String = "";
+        private var _badgeVO:BadgeVisualVO = null;
 
         private var _hasBadge:Boolean = false;
 
@@ -151,7 +152,9 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             this.deadBg = null;
             this.actionMarker = null;
             this.hit = null;
-            this.badgeIcon = null;
+            this.badge.dispose();
+            this.badge = null;
+            this._badgeVO = null;
             this._commons = null;
             super.onDispose();
         }
@@ -171,7 +174,7 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             this.speakAnimation.mouseEnabled = false;
             this.speakAnimation.mouseChildren = false;
             this.actionMarker.mouseEnabled = false;
-            this.badgeIcon.mouseEnabled = this.badgeIcon.mouseChildren = false;
+            this.badge.mouseEnabled = this.badge.mouseChildren = false;
             TextFieldEx.setNoTranslate(this.fragsTF,true);
             TextFieldEx.setNoTranslate(this.playerNameFullTF,true);
             TextFieldEx.setNoTranslate(this.playerNameCutTF,true);
@@ -201,8 +204,11 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             super.draw();
             if(isInvalid(PlayersPanelInvalidationType.BADGE_CHANGED))
             {
-                this.badgeIcon.imageName = this._badgeType;
-                this.badgeIcon.visible = this._hasBadge;
+                if(this._hasBadge)
+                {
+                    this.badge.setData(this._badgeVO);
+                }
+                this.badge.visible = this._hasBadge;
             }
             if(isInvalid(PlayersPanelInvalidationType.VEHILCE_NAME))
             {
@@ -249,7 +255,7 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             }
             if(isInvalid(PlayersPanelInvalidationType.PLAYER_SCHEME))
             {
-                this.badgeIcon.alpha = this._isOffline || !this._isAlive?BADGE_ALPHA_NOT_ACTIVE:BADGE_ALPHA;
+                this.badge.alpha = this._isOffline || !this._isAlive?BADGE_ALPHA_NOT_ACTIVE:BADGE_ALPHA;
                 this.updateColors();
             }
             if(isInvalid(PlayersPanelInvalidationType.IGR_CHANGED))
@@ -282,15 +288,14 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             return false;
         }
 
-        public function setBadge(param1:String) : void
+        public function setBadge(param1:BadgeVisualVO, param2:Boolean) : void
         {
-            if(this._badgeType == param1)
+            if(this._badgeVO == null || !this._badgeVO.isEquals(param1) && this._hasBadge != param2)
             {
-                return;
+                this._badgeVO = param1;
+                this._hasBadge = param2;
+                invalidate(PlayersPanelInvalidationType.BADGE_CHANGED);
             }
-            this._badgeType = param1;
-            this._hasBadge = StringUtils.isNotEmpty(param1);
-            invalidate(PlayersPanelInvalidationType.BADGE_CHANGED);
         }
 
         public function setFrags(param1:int) : void
@@ -512,11 +517,11 @@ package net.wg.gui.battle.components.stats.playersPanel.list
                             this.playerNameFullTF.x = _loc1_;
                         }
                         _loc1_ = this.playerNameFullTF.x + this.playerNameFullTF.width + BADGE_OFFSET;
-                        if(this.badgeIcon.x != _loc1_)
+                        if(this.badge.x != _loc1_)
                         {
-                            this.badgeIcon.x = _loc1_;
+                            this.badge.x = _loc1_;
                         }
-                        _loc1_ = this.badgeIcon.x + BADGE_ICON_AREA_WIDTH;
+                        _loc1_ = this.badge.x + BADGE_ICON_AREA_WIDTH;
                         if(this.fragsTF.x != _loc1_)
                         {
                             this.fragsTF.x = _loc1_;
@@ -544,11 +549,11 @@ package net.wg.gui.battle.components.stats.playersPanel.list
                             this.vehicleTF.x = VEHICLE_TF_RIGHT_X;
                         }
                         _loc1_ = this.vehicleTF.x + this.vehicleTF.width + BADGE_OFFSET;
-                        if(this.badgeIcon.x != _loc1_)
+                        if(this.badge.x != _loc1_)
                         {
-                            this.badgeIcon.x = _loc1_;
+                            this.badge.x = _loc1_;
                         }
-                        _loc1_ = this.badgeIcon.x + BADGE_ICON_AREA_WIDTH;
+                        _loc1_ = this.badge.x + BADGE_ICON_AREA_WIDTH;
                         if(this.fragsTF.x != _loc1_)
                         {
                             this.fragsTF.x = _loc1_;
@@ -571,11 +576,11 @@ package net.wg.gui.battle.components.stats.playersPanel.list
                             this.playerNameCutTF.x = VEHICLE_TF_RIGHT_X;
                         }
                         _loc1_ = this.playerNameCutTF.x + this.playerNameCutTF.width + BADGE_OFFSET;
-                        if(this.badgeIcon.x != _loc1_)
+                        if(this.badge.x != _loc1_)
                         {
-                            this.badgeIcon.x = _loc1_;
+                            this.badge.x = _loc1_;
                         }
-                        _loc1_ = this.badgeIcon.x + BADGE_ICON_AREA_WIDTH;
+                        _loc1_ = this.badge.x + BADGE_ICON_AREA_WIDTH;
                         if(this.fragsTF.x != _loc1_)
                         {
                             this.fragsTF.x = _loc1_;
@@ -593,11 +598,11 @@ package net.wg.gui.battle.components.stats.playersPanel.list
                         }
                         break;
                     case PLAYERS_PANEL_STATE.SHORT:
-                        if(this.badgeIcon.x != VEHICLE_TF_RIGHT_X)
+                        if(this.badge.x != VEHICLE_TF_RIGHT_X)
                         {
-                            this.badgeIcon.x = VEHICLE_TF_RIGHT_X;
+                            this.badge.x = VEHICLE_TF_RIGHT_X;
                         }
-                        _loc1_ = this.badgeIcon.x + BADGE_ICON_AREA_WIDTH + BADGE_OFFSET;
+                        _loc1_ = this.badge.x + BADGE_ICON_AREA_WIDTH + BADGE_OFFSET;
                         if(this.fragsTF.x != _loc1_)
                         {
                             this.fragsTF.x = _loc1_;
@@ -628,11 +633,11 @@ package net.wg.gui.battle.components.stats.playersPanel.list
                             this.playerNameFullTF.x = _loc1_;
                         }
                         _loc1_ = this.playerNameFullTF.x - (BADGE_ICON_AREA_WIDTH + BADGE_OFFSET);
-                        if(this.badgeIcon.x != _loc1_)
+                        if(this.badge.x != _loc1_)
                         {
-                            this.badgeIcon.x = _loc1_;
+                            this.badge.x = _loc1_;
                         }
-                        _loc1_ = this.badgeIcon.x - this.fragsTF.width;
+                        _loc1_ = this.badge.x - this.fragsTF.width;
                         if(this.fragsTF.x != _loc1_)
                         {
                             this.fragsTF.x = _loc1_;
@@ -662,11 +667,11 @@ package net.wg.gui.battle.components.stats.playersPanel.list
                             this.vehicleTF.x = _loc1_;
                         }
                         _loc1_ = this.vehicleTF.x - (BADGE_ICON_AREA_WIDTH + BADGE_OFFSET);
-                        if(this.badgeIcon.x != _loc1_)
+                        if(this.badge.x != _loc1_)
                         {
-                            this.badgeIcon.x = _loc1_;
+                            this.badge.x = _loc1_;
                         }
-                        _loc1_ = this.badgeIcon.x - this.fragsTF.width;
+                        _loc1_ = this.badge.x - this.fragsTF.width;
                         if(this.fragsTF.x != _loc1_)
                         {
                             this.fragsTF.x = _loc1_;
@@ -691,11 +696,11 @@ package net.wg.gui.battle.components.stats.playersPanel.list
                             this.playerNameCutTF.x = _loc1_;
                         }
                         _loc1_ = this.playerNameCutTF.x - (BADGE_ICON_AREA_WIDTH + BADGE_OFFSET);
-                        if(this.badgeIcon.x != _loc1_)
+                        if(this.badge.x != _loc1_)
                         {
-                            this.badgeIcon.x = _loc1_;
+                            this.badge.x = _loc1_;
                         }
-                        _loc1_ = this.badgeIcon.x - this.fragsTF.width;
+                        _loc1_ = this.badge.x - this.fragsTF.width;
                         if(this.fragsTF.x != _loc1_)
                         {
                             this.fragsTF.x = _loc1_;
@@ -715,11 +720,11 @@ package net.wg.gui.battle.components.stats.playersPanel.list
                         break;
                     case PLAYERS_PANEL_STATE.SHORT:
                         _loc1_ = VEHICLE_TF_LEFT_X - BADGE_ICON_AREA_WIDTH;
-                        if(this.badgeIcon.x != _loc1_)
+                        if(this.badge.x != _loc1_)
                         {
-                            this.badgeIcon.x = _loc1_;
+                            this.badge.x = _loc1_;
                         }
-                        _loc1_ = this.badgeIcon.x - this.fragsTF.width;
+                        _loc1_ = this.badge.x - this.fragsTF.width;
                         if(this.fragsTF.x != _loc1_)
                         {
                             this.fragsTF.x = _loc1_;
@@ -747,7 +752,7 @@ package net.wg.gui.battle.components.stats.playersPanel.list
                     {
                         this.vehicleTF.visible = true;
                     }
-                    this.badgeIcon.visible = this._state != PLAYERS_PANEL_STATE.FULL_NO_BADGES;
+                    this.badge.visible = this._state != PLAYERS_PANEL_STATE.FULL_NO_BADGES;
                     if(!this.playerNameFullTF.visible)
                     {
                         this.playerNameFullTF.visible = true;
@@ -763,7 +768,7 @@ package net.wg.gui.battle.components.stats.playersPanel.list
                     {
                         this.vehicleTF.visible = true;
                     }
-                    this.badgeIcon.visible = this._state != PLAYERS_PANEL_STATE.LONG_NO_BADGES;
+                    this.badge.visible = this._state != PLAYERS_PANEL_STATE.LONG_NO_BADGES;
                     if(this.playerNameFullTF.visible)
                     {
                         this.playerNameFullTF.visible = false;
@@ -779,7 +784,7 @@ package net.wg.gui.battle.components.stats.playersPanel.list
                     {
                         this.vehicleTF.visible = false;
                     }
-                    this.badgeIcon.visible = this._state != PLAYERS_PANEL_STATE.MEDIUM_NO_BADGES;
+                    this.badge.visible = this._state != PLAYERS_PANEL_STATE.MEDIUM_NO_BADGES;
                     if(this.playerNameFullTF.visible)
                     {
                         this.playerNameFullTF.visible = false;
@@ -795,7 +800,7 @@ package net.wg.gui.battle.components.stats.playersPanel.list
                     {
                         this.vehicleTF.visible = false;
                     }
-                    this.badgeIcon.visible = this._state != PLAYERS_PANEL_STATE.SHORT_NO_BADGES;
+                    this.badge.visible = this._state != PLAYERS_PANEL_STATE.SHORT_NO_BADGES;
                     if(this.playerNameFullTF.visible)
                     {
                         this.playerNameFullTF.visible = false;

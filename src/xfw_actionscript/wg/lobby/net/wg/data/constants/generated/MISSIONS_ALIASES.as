@@ -39,6 +39,8 @@ package net.wg.data.constants.generated
 
         public static const VEHICLE_TYPE_RENDERER:String = "MissionVehicleTypeRendererUI";
 
+        public static const BATTLE_PASS_PROGRESSIONS_VIEW_COMPONENT:String = "BattlePassProgressionsComponent";
+
         public static const NONE:String = "oneOff";
 
         public static const CUMULATIVE:String = "accumulative";

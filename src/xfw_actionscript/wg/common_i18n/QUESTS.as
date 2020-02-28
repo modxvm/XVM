@@ -9,15 +9,15 @@ package
 
         public static const MISSIONS_TAB_MARATHONS:String = "#quests:missions/tab/marathons";
 
-        public static const MISSIONS_TAB_BATTLEOFBLOGGERS:String = "#quests:missions/tab/battleOfBloggers";
-
-        public static const MISSIONS_TAB_BATTLEOFBLOGGERS_NAASIA:String = "#quests:missions/tab/battleOfBloggers/naasia";
-
         public static const MISSIONS_TAB_EVENTBOARDS:String = "#quests:missions/tab/eventBoards";
 
         public static const MISSIONS_TAB_CATEGORIES:String = "#quests:missions/tab/categories";
 
         public static const MISSIONS_TAB_CURRENTVEHICLE:String = "#quests:missions/tab/currentVehicle";
+
+        public static const MISSIONS_TAB_BATTLE_PASS:String = "#quests:missions/tab/battle_pass";
+
+        public static const MISSIONS_TAB_DAILY:String = "#quests:missions/tab/daily";
 
         public static const MISSIONS_FILTERCOUNTER_CLOSEBUTTON:String = "#quests:missions/filterCounter/closeButton";
 
@@ -101,9 +101,23 @@ package
 
         public static const BONUSES_ITEM_CREWSKIN:String = "#quests:bonuses/item/crewSkin";
 
+        public static const BONUSNAME_BLUEPRINTS_ANY:String = "#quests:bonusName/blueprints/any";
+
+        public static const BONUSES_CREWBOOK_TEXT:String = "#quests:bonuses/crewBook/text";
+
+        public static const BONUSES_CREWSKIN_TEXT:String = "#quests:bonuses/crewSkin/text";
+
+        public static const BONUSES_DOSSIER_ACHIVE:String = "#quests:bonuses/dossier/achive";
+
+        public static const BONUSES_DOSSIER_BADGE:String = "#quests:bonuses/dossier/badge";
+
         public static const BONUSNAME_BLUEPRINTS_VEHICLE:String = "#quests:bonusName/blueprints/vehicle";
 
+        public static const BONUSNAME_BLUEPRINTS_VEHICLE_ANY:String = "#quests:bonusName/blueprints/vehicle/any";
+
         public static const BONUSNAME_BLUEPRINTS_NATION:String = "#quests:bonusName/blueprints/nation";
+
+        public static const BONUSNAME_BLUEPRINTS_NATION_ANY:String = "#quests:bonusName/blueprints/nation/any";
 
         public static const BONUSNAME_BLUEPRINTS_UNIVERSAL:String = "#quests:bonusName/blueprints/universal";
 
@@ -1433,6 +1447,8 @@ package
 
         public static const DETAILS_CONDITIONS_CUMULATIVE_AGGREGATED:String = "#quests:details/conditions/cumulative/aggregated";
 
+        public static const DETAILS_CONDITIONS_CUMULATIVE_RANKCHANGE:String = "#quests:details/conditions/cumulative/rankChange";
+
         public static const DETAILS_DOSSIER_SNIPERSERIES:String = "#quests:details/dossier/sniperSeries";
 
         public static const DETAILS_DOSSIER_MAXSNIPERSERIES:String = "#quests:details/dossier/maxSniperSeries";
@@ -1819,48 +1835,6 @@ package
 
         public static const DETAILS_DOSSIER_LADDER_DAMAGEASSISTEDRADIO:String = "#quests:details/dossier/ladder/damageAssistedRadio";
 
-        public static const DETAILS_DOSSIER_BOB_XP:String = "#quests:details/dossier/bob/xp";
-
-        public static const DETAILS_DOSSIER_BOB_BATTLESCOUNT:String = "#quests:details/dossier/bob/battlesCount";
-
-        public static const DETAILS_DOSSIER_BOB_WINS:String = "#quests:details/dossier/bob/wins";
-
-        public static const DETAILS_DOSSIER_BOB_LOSSES:String = "#quests:details/dossier/bob/losses";
-
-        public static const DETAILS_DOSSIER_BOB_SURVIVEDBATTLES:String = "#quests:details/dossier/bob/survivedBattles";
-
-        public static const DETAILS_DOSSIER_BOB_FRAGS:String = "#quests:details/dossier/bob/frags";
-
-        public static const DETAILS_DOSSIER_BOB_DIRECTHITS:String = "#quests:details/dossier/bob/directHits";
-
-        public static const DETAILS_DOSSIER_BOB_SPOTTED:String = "#quests:details/dossier/bob/spotted";
-
-        public static const DETAILS_DOSSIER_BOB_DAMAGEDEALT:String = "#quests:details/dossier/bob/damageDealt";
-
-        public static const DETAILS_DOSSIER_BOB_MAXDAMAGE:String = "#quests:details/dossier/bob/maxDamage";
-
-        public static const DETAILS_DOSSIER_BOB_DAMAGERECEIVED:String = "#quests:details/dossier/bob/damageReceived";
-
-        public static const DETAILS_DOSSIER_BOB_CAPTUREPOINTS:String = "#quests:details/dossier/bob/capturePoints";
-
-        public static const DETAILS_DOSSIER_BOB_DROPPEDCAPTUREPOINTS:String = "#quests:details/dossier/bob/droppedCapturePoints";
-
-        public static const DETAILS_DOSSIER_BOB_PIERCINGS:String = "#quests:details/dossier/bob/piercings";
-
-        public static const DETAILS_DOSSIER_BOB_NODAMAGEDIRECTHITSRECEIVED:String = "#quests:details/dossier/bob/noDamageDirectHitsReceived";
-
-        public static const DETAILS_DOSSIER_BOB_PIERCINGSRECEIVED:String = "#quests:details/dossier/bob/piercingsReceived";
-
-        public static const DETAILS_DOSSIER_BOB_POTENTIALDAMAGERECEIVED:String = "#quests:details/dossier/bob/potentialDamageReceived";
-
-        public static const DETAILS_DOSSIER_BOB_DAMAGEBLOCKEDBYARMOR:String = "#quests:details/dossier/bob/damageBlockedByArmor";
-
-        public static const DETAILS_DOSSIER_BOB_ORIGINALXP:String = "#quests:details/dossier/bob/originalXP";
-
-        public static const DETAILS_DOSSIER_BOB_DAMAGEASSISTEDTRACK:String = "#quests:details/dossier/bob/damageAssistedTrack";
-
-        public static const DETAILS_DOSSIER_BOB_DAMAGEASSISTEDRADIO:String = "#quests:details/dossier/bob/damageAssistedRadio";
-
         public static const DETAILS_DOSSIER_BATTLESCOUNT:String = "#quests:details/dossier/battlesCount";
 
         public static const DETAILS_DOSSIER_0_BATTLESCOUNT:String = "#quests:details/dossier/0/battlesCount";
@@ -1896,8 +1870,6 @@ package
         public static const DETAILS_DOSSIER_24_BATTLESCOUNT:String = "#quests:details/dossier/24/battlesCount";
 
         public static const DETAILS_DOSSIER_27_BATTLESCOUNT:String = "#quests:details/dossier/27/battlesCount";
-
-        public static const DETAILS_DOSSIER_32_BATTLESCOUNT:String = "#quests:details/dossier/32/battlesCount";
 
         public static const DETAILS_MODIFIERS_TITLE_DISCOUNT:String = "#quests:details/modifiers/title/discount";
 
@@ -2045,21 +2017,9 @@ package
 
         public static const MISSIONS_TAB_LABEL_MARATHONS:String = "#quests:missions/tab/label/marathons";
 
-        public static const MISSIONS_TAB_LABEL_BATTLEOFBLOGGERS:String = "#quests:missions/tab/label/battleOfBloggers";
-
-        public static const MISSIONS_TAB_LABEL_BATTLEOFBLOGGERS_NAASIA:String = "#quests:missions/tab/label/battleOfBloggers/naasia";
-
         public static const MISSIONS_TAB_KURSK_HEADER:String = "#quests:missions/tab/kursk/header";
 
         public static const MISSIONS_TAB_KURSK_BODY:String = "#quests:missions/tab/kursk/body";
-
-        public static const MISSIONS_TAB_BATTLEOFBLOGGERS_HEADER:String = "#quests:missions/tab/battleOfBloggers/header";
-
-        public static const MISSIONS_TAB_BATTLEOFBLOGGERS_NAASIA_HEADER:String = "#quests:missions/tab/battleOfBloggers/naasia/header";
-
-        public static const MISSIONS_TAB_BATTLEOFBLOGGERS_BODY:String = "#quests:missions/tab/battleOfBloggers/body";
-
-        public static const MISSIONS_TAB_BATTLEOFBLOGGERS_NAASIA_BODY:String = "#quests:missions/tab/battleOfBloggers/naasia/body";
 
         public static const MISSIONS_TAB_MARATHONS_HEADER:String = "#quests:missions/tab/marathons/header";
 
@@ -2072,6 +2032,8 @@ package
         public static const MISSIONS_TAB_LABEL_MISSIONS:String = "#quests:missions/tab/label/missions";
 
         public static const MISSIONS_TAB_LABEL_EVENTBOARDS:String = "#quests:missions/tab/label/eventBoards";
+
+        public static const MISSIONS_TAB_LABEL_DAILY:String = "#quests:missions/tab/label/daily";
 
         public static const MISSIONS_TAB_EVENTBOARDS_HEADER:String = "#quests:missions/tab/eventBoards/header";
 
@@ -2094,6 +2056,14 @@ package
         public static const MISSIONS_TAB_CATEGORIES_HEADER:String = "#quests:missions/tab/categories/header";
 
         public static const MISSIONS_TAB_CATEGORIES_BODY:String = "#quests:missions/tab/categories/body";
+
+        public static const MISSIONS_TAB_DAILY_HEADER:String = "#quests:missions/tab/daily/header";
+
+        public static const MISSIONS_TAB_DAILY_BODY:String = "#quests:missions/tab/daily/body";
+
+        public static const MISSIONS_TAB_BATTLE_PASS_BODY:String = "#quests:missions/tab/battle_pass/body";
+
+        public static const MISSIONS_TAB_BATTLE_PASS_HEADER:String = "#quests:missions/tab/battle_pass/header";
 
         public static const MISSIONS_TAB_LABEL_CURRENTVEHICLE:String = "#quests:missions/tab/label/currentVehicle";
 
@@ -3131,25 +3101,205 @@ package
 
         public static const QUEST_FLAG_STATUS_COMPLETED_PERFECTLY:String = "#quests:quest/flag/status/completed_perfectly";
 
-        public static const PREMIUMQUEST_BODY_TITLE:String = "#quests:premiumQuest/body/title";
+        public static const PREMIUMQUESTS_BODY_TITLE:String = "#quests:premiumQuests/body/title";
 
-        public static const PREMIUMQUEST_BODY_DESCRIPTION:String = "#quests:premiumQuest/body/description";
+        public static const PREMIUMQUESTS_BODY_DESCRIPTION:String = "#quests:premiumQuests/body/description";
 
-        public static const PREMIUMQUEST_BODY_BUTTONDETAILS:String = "#quests:premiumQuest/body/buttonDetails";
+        public static const PREMIUMQUESTS_BODY_BUTTONDETAILS:String = "#quests:premiumQuests/body/buttonDetails";
 
-        public static const PREMIUMQUEST_BODY_COMPLETE:String = "#quests:premiumQuest/body/complete";
+        public static const PREMIUMQUESTS_BODY_COMPLETE:String = "#quests:premiumQuests/body/complete";
 
-        public static const PREMIUMQUEST_HEADER_TITLE:String = "#quests:premiumQuest/header/title";
+        public static const PREMIUMQUESTS_QUESTS_PREM_ACC_Q01_TITLE:String = "#quests:premiumQuests/quests/prem_acc_q01/title";
 
-        public static const PREMIUMQUEST_QUESTS_PREM_ACC_Q01_TITLE:String = "#quests:premiumQuest/quests/prem_acc_q01/title";
+        public static const PREMIUMQUESTS_QUESTS_PREM_ACC_Q02_TITLE:String = "#quests:premiumQuests/quests/prem_acc_q02/title";
 
-        public static const PREMIUMQUEST_QUESTS_PREM_ACC_Q02_TITLE:String = "#quests:premiumQuest/quests/prem_acc_q02/title";
+        public static const PREMIUMQUESTS_QUESTS_PREM_ACC_Q03_TITLE:String = "#quests:premiumQuests/quests/prem_acc_q03/title";
 
-        public static const PREMIUMQUEST_QUESTS_PREM_ACC_Q03_TITLE:String = "#quests:premiumQuest/quests/prem_acc_q03/title";
+        public static const PREMIUMQUESTS_DETAILEDQUESTS_REQUIREMENTS_PREMIUMACCOUNT:String = "#quests:premiumQuests/detailedQuests/requirements/premiumAccount";
 
-        public static const PREMIUMQUEST_DETAILEDQUESTS_REQUIREMENTS_PREMIUMACCOUNT:String = "#quests:premiumQuest/detailedQuests/requirements/premiumAccount";
+        public static const PREMIUMQUESTS_DETAILEDQUESTS_REQUIREMENTS_TOKEN:String = "#quests:premiumQuests/detailedQuests/requirements/token";
 
-        public static const PREMIUMQUEST_DETAILEDQUESTS_REQUIREMENTS_TOKEN:String = "#quests:premiumQuest/detailedQuests/requirements/token";
+        public static const PREMIUMQUESTS_CONDITION_DMGTOP_5:String = "#quests:premiumQuests/condition/dmgTop_5";
+
+        public static const PREMIUMQUESTS_CONDITION_WIN_WINLONG:String = "#quests:premiumQuests/condition/win/winLong";
+
+        public static const DAILYQUESTS_HEADER_TITLE:String = "#quests:dailyQuests/header/title";
+
+        public static const PREMIUMQUESTS_HEADER_TITLE:String = "#quests:premiumQuests/header/title";
+
+        public static const DAILYQUESTS_TAB_LABEL:String = "#quests:dailyQuests/tab/label";
+
+        public static const PREMIUMQUESTS_TAB_LABEL:String = "#quests:premiumQuests/tab/label";
+
+        public static const DAILYQUESTS_BODY_REROLL:String = "#quests:dailyQuests/body/reroll";
+
+        public static const DAILYQUESTS_MISSIONSWITCH_TOOLTIP_HEADER:String = "#quests:dailyQuests/missionSwitch/tooltip/header";
+
+        public static const DAILYQUESTS_MISSIONSWITCH_TOOLTIP_BODY_AVAILABLE:String = "#quests:dailyQuests/missionSwitch/tooltip/body/available";
+
+        public static const DAILYQUESTS_MISSIONSWITCH_TOOLTIP_BODY_DESC_HRS:String = "#quests:dailyQuests/missionSwitch/tooltip/body/desc_hrs";
+
+        public static const DAILYQUESTS_MISSIONSWITCH_TOOLTIP_BODY_DESC_HRS_MIN:String = "#quests:dailyQuests/missionSwitch/tooltip/body/desc_hrs_min";
+
+        public static const DAILYQUESTS_MISSIONSWITCH_TOOLTIP_BODY_DESC_MIN_ONLY:String = "#quests:dailyQuests/missionSwitch/tooltip/body/desc_min_only";
+
+        public static const DAILYQUESTS_MISSIONSWITCH_TOOLTIP_BODY_DESC:String = "#quests:dailyQuests/missionSwitch/tooltip/body/desc";
+
+        public static const PREMIUMQUESTS_TOOLTIPS_LOCKED_HEADER:String = "#quests:premiumQuests/tooltips/locked/header";
+
+        public static const PREMIUMQUESTS_TOOLTIPS_LOCKED_BODY:String = "#quests:premiumQuests/tooltips/locked/body";
+
+        public static const PREMIUMQUESTS_NOTPREMIUMACCOUNT_TITLE:String = "#quests:premiumQuests/notPremiumAccount/title";
+
+        public static const PREMIUMQUESTS_NOTPREMIUMACCOUNT_PARAGRAPH:String = "#quests:premiumQuests/notPremiumAccount/paragraph";
+
+        public static const PREMIUMQUESTS_NOTPREMIUMACCOUNT_BUTTON:String = "#quests:premiumQuests/notPremiumAccount/button";
+
+        public static const PREMIUMQUESTS_COUNTDOWN_TITLE:String = "#quests:premiumQuests/countDown/title";
+
+        public static const PREMIUMQUESTS_COUNTDOWN_REMAININGTEXT:String = "#quests:premiumQuests/countDown/remainingText";
+
+        public static const DAILYQUESTS_COUNTDOWN_TITLE:String = "#quests:dailyQuests/countDown/title";
+
+        public static const DAILYQUESTS_COUNTDOWN_REMAININGTEXT:String = "#quests:dailyQuests/countDown/remainingText";
+
+        public static const DAILYQUESTS_FOOTER_TITLE:String = "#quests:dailyQuests/footer/title";
+
+        public static const DAILYQUESTS_FOOTER_PARAGRAPH:String = "#quests:dailyQuests/footer/paragraph";
+
+        public static const DAILYQUESTS_BONUS_TOOLTIPTITLE:String = "#quests:dailyQuests/bonus/tooltipTitle";
+
+        public static const DAILYQUESTS_BONUS_TOOLTIPDESCRIPTION:String = "#quests:dailyQuests/bonus/tooltipDescription";
+
+        public static const DAILYQUESTS_POSTBATTLE_GENERICTITLE_EASY:String = "#quests:dailyQuests/postBattle/genericTitle_easy";
+
+        public static const DAILYQUESTS_POSTBATTLE_GENERICTITLE_MEDIUM:String = "#quests:dailyQuests/postBattle/genericTitle_medium";
+
+        public static const DAILYQUESTS_POSTBATTLE_GENERICTITLE_HARD:String = "#quests:dailyQuests/postBattle/genericTitle_hard";
+
+        public static const DAILYQUESTS_POSTBATTLE_GENERICTITLE_BONUS:String = "#quests:dailyQuests/postBattle/genericTitle_bonus";
+
+        public static const DAILYQUESTS_POSTBATTLE_GENERICTITLE_EPIC:String = "#quests:dailyQuests/postBattle/genericTitle_epic";
+
+        public static const DAILYQUESTS_BONUSQUEST_COUNTDOWN_HRS:String = "#quests:dailyQuests/bonusQuest/countDown_hrs";
+
+        public static const DAILYQUESTS_BONUSQUEST_COUNTDOWN_MINSEC:String = "#quests:dailyQuests/bonusQuest/countDown_minSec";
+
+        public static const PREMIUMQUESTS_POSTBATTLE_GENERICTITLE_EASY:String = "#quests:premiumQuests/postBattle/genericTitle_easy";
+
+        public static const PREMIUMQUESTS_POSTBATTLE_GENERICTITLE_MEDIUM:String = "#quests:premiumQuests/postBattle/genericTitle_medium";
+
+        public static const PREMIUMQUESTS_POSTBATTLE_GENERICTITLE_HARD:String = "#quests:premiumQuests/postBattle/genericTitle_hard";
+
+        public static const GENERAL_COUNTDOWN_TEXT_TIMER_HRS:String = "#quests:general/countdown/text/timer_hrs";
+
+        public static const GENERAL_COUNTDOWN_TEXT_TIMER_HRS_ONLY:String = "#quests:general/countdown/text/timer_hrs_only";
+
+        public static const GENERAL_COUNTDOWN_TEXT_TIMER_MIN_ONLY:String = "#quests:general/countdown/text/timer_min_only";
+
+        public static const GENERAL_COUNTDOWN_TEXT_TIMER_MIN:String = "#quests:general/countdown/text/timer_min";
+
+        public static const GENERAL_COUNTDOWN_TEXT_TIMER_SEC:String = "#quests:general/countdown/text/timer_sec";
+
+        public static const GENERAL_COUNTDOWN_TIMER_HRS:String = "#quests:general/countdown/timer_hrs";
+
+        public static const GENERAL_COUNTDOWN_TIMER_HRS_ONLY:String = "#quests:general/countdown/timer_hrs_only";
+
+        public static const GENERAL_COUNTDOWN_TIMER_MIN_ONLY:String = "#quests:general/countdown/timer_min_only";
+
+        public static const GENERAL_COUNTDOWN_TIMER_MIN:String = "#quests:general/countdown/timer_min";
+
+        public static const GENERAL_COUNTDOWN_TIMER_SEC:String = "#quests:general/countdown/timer_sec";
+
+        public static const DAILYQUESTS_POSTBATTLE_GENERICAMPERSAND:String = "#quests:dailyQuests/postBattle/genericAmpersand";
+
+        public static const DAILYQUESTS_POSTBATTLE_AND:String = "#quests:dailyQuests/postBattle/and";
+
+        public static const DAILYQUESTS_HEADER_ABOUTINFO:String = "#quests:dailyQuests/header/aboutInfo";
+
+        public static const PREMIUMQUESTS_HEADER_ABOUTINFO:String = "#quests:premiumQuests/header/aboutInfo";
+
+        public static const DAILYQUESTS_HEADER_ABOUTTOOLTIP_BODY:String = "#quests:dailyQuests/header/aboutTooltip/body";
+
+        public static const DAILYQUESTS_HEADER_ABOUTTOOLTIP_HEADER:String = "#quests:dailyQuests/header/aboutTooltip/header";
+
+        public static const PREMIUMQUESTS_HEADER_ABOUTTOOLTIP_BODY:String = "#quests:premiumQuests/header/aboutTooltip/body";
+
+        public static const PREMIUMQUESTS_HEADER_ABOUTTOOLTIP_HEADER:String = "#quests:premiumQuests/header/aboutTooltip/header";
+
+        public static const GENERAL_INFO_BACK_TITLE:String = "#quests:general/info/back/title";
+
+        public static const GENERAL_INFO_BACK_GOTO:String = "#quests:general/info/back/goto";
+
+        public static const DAILYQUESTS_INFO_DAILYMISSIONS:String = "#quests:dailyQuests/info/dailyMissions";
+
+        public static const DAILYQUESTS_INFO_DAILYMISSIONTITLE:String = "#quests:dailyQuests/info/dailyMissionTitle";
+
+        public static const PREMIUMQUESTS_INFO_PREMIUMMISSIONS:String = "#quests:premiumQuests/info/premiumMissions";
+
+        public static const PREMIUMQUESTS_INFO_PREMIUMMISSIONSTITLE:String = "#quests:premiumQuests/info/premiumMissionsTitle";
+
+        public static const PREMIUMQUESTS_INFO_CONDITIONS:String = "#quests:premiumQuests/info/conditions";
+
+        public static const PREMIUMQUESTS_INFO_CONDITIONSTITLE:String = "#quests:premiumQuests/info/conditionsTitle";
+
+        public static const DAILYQUESTS_INFO_BONUSMISSION:String = "#quests:dailyQuests/info/bonusMission";
+
+        public static const DAILYQUESTS_INFO_BONUSMISSIONTITLE:String = "#quests:dailyQuests/info/bonusMissionTitle";
+
+        public static const PREMIUMQUESTS_INFO_EPICREWARDS:String = "#quests:premiumQuests/info/epicRewards";
+
+        public static const PREMIUMQUESTS_INFO_EPICREWARDSTITLE:String = "#quests:premiumQuests/info/epicRewardsTitle";
+
+        public static const DAILYQUESTS_INFO_MISSIONSWITCH_HRS:String = "#quests:dailyQuests/info/missionSwitch_hrs";
+
+        public static const DAILYQUESTS_INFO_MISSIONSWITCH_MIN:String = "#quests:dailyQuests/info/missionSwitch_min";
+
+        public static const DAILYQUESTS_INFO_MISSIONSWITCHTITLE:String = "#quests:dailyQuests/info/missionSwitchTitle";
+
+        public static const DAILYQUESTS_CONDITION_DODAMAGE:String = "#quests:dailyQuests/condition/doDamage";
+
+        public static const DAILYQUESTS_CONDITION_EARNEXP:String = "#quests:dailyQuests/condition/earnExp";
+
+        public static const DAILYQUESTS_CONDITION_DESTROYMODULE_FEW:String = "#quests:dailyQuests/condition/destroyModule_few";
+
+        public static const DAILYQUESTS_CONDITION_DESTROYMODULE_PLURAL:String = "#quests:dailyQuests/condition/destroyModule_plural";
+
+        public static const DAILYQUESTS_CONDITION_DESTROYVEH_SINGULAR:String = "#quests:dailyQuests/condition/destroyVeh_singular";
+
+        public static const DAILYQUESTS_CONDITION_DESTROYVEH_FEW:String = "#quests:dailyQuests/condition/destroyVeh_few";
+
+        public static const DAILYQUESTS_CONDITION_DESTROYVEH_PLURAL:String = "#quests:dailyQuests/condition/destroyVeh_plural";
+
+        public static const DAILYQUESTS_CONDITION_DODAMAGEVEH:String = "#quests:dailyQuests/condition/doDamageVeh";
+
+        public static const DAILYQUESTS_CONDITION_EXPTOP:String = "#quests:dailyQuests/condition/expTop";
+
+        public static const DAILYQUESTS_CONDITION_EXPTOP_FIRST:String = "#quests:dailyQuests/condition/expTop_first";
+
+        public static const DAILYQUESTS_CONDITION_DMGTOP:String = "#quests:dailyQuests/condition/dmgTop";
+
+        public static const DAILYQUESTS_CONDITION_DMGTOP_FIRST:String = "#quests:dailyQuests/condition/dmgTop_first";
+
+        public static const DAILYQUESTS_CONDITION_SPOTVEH_FEW:String = "#quests:dailyQuests/condition/spotVeh_few";
+
+        public static const DAILYQUESTS_CONDITION_WINBATTLE:String = "#quests:dailyQuests/condition/winBattle";
+
+        public static const DAILYQUESTS_CONDITION_WINBATTLE_ACCUM:String = "#quests:dailyQuests/condition/winBattle_accum";
+
+        public static const DAILYQUESTS_CONDITION_DODAMAGE_ACCUM:String = "#quests:dailyQuests/condition/doDamage_accum";
+
+        public static const DAILYQUESTS_CONDITION_EARNEXP_ACCUM:String = "#quests:dailyQuests/condition/earnExp_accum";
+
+        public static const DAILYQUESTS_CONDITION_DESTROYMODULE_FEW_ACCUM:String = "#quests:dailyQuests/condition/destroyModule_few_accum";
+
+        public static const DAILYQUESTS_CONDITION_DESTROYMODULE_PLURAL_ACCUM:String = "#quests:dailyQuests/condition/destroyModule_plural_accum";
+
+        public static const DAILYQUESTS_CONDITION_DODAMAGEVEH_ACCUM:String = "#quests:dailyQuests/condition/doDamageVeh_accum";
+
+        public static const DAILYQUESTS_CONDITION_DESTROYVEH_FEW_ACCUM:String = "#quests:dailyQuests/condition/destroyVeh_few_accum";
+
+        public static const DAILYQUESTS_CONDITION_DESTROYVEH_PLURAL_ACCUM:String = "#quests:dailyQuests/condition/destroyVeh_plural_accum";
 
         public static const BATTLECONDITION_STATE_ENUM:Array = [BATTLECONDITION_STATE_COMPLETED,BATTLECONDITION_STATE_COMPLETED_PERFECTLY,BATTLECONDITION_STATE_IN_PROGRESS,BATTLECONDITION_STATE_FAILED];
 

@@ -140,8 +140,7 @@ package net.wg.gui.components.advanced.collapsingBar
 
         protected function applyDataToButton(param1:ResizableButton, param2:CollapsingBarButtonVO) : void
         {
-            var _loc3_:ResizableButton = null;
-            _loc3_ = ResizableButton(param1);
+            var _loc3_:ResizableButton = ResizableButton(param1);
             _loc3_.toggle = true;
             _loc3_.allowDeselect = false;
             _loc3_.mouseEnabledOnDisabled = true;

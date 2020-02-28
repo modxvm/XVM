@@ -111,9 +111,9 @@ package net.wg.gui.lobby.messengerBar
 
         private var _vehicleCmpBtnVisible:Boolean = false;
 
-        private var _sessionStatsBtnVisible:Boolean = true;
+        private var _sessionStatsBtnVisible:Boolean = false;
 
-        private var _sessionStatsBtnEnable:Boolean = true;
+        private var _sessionStatsBtnEnable:Boolean = false;
 
         private var _sessionStatsBtnTooltip:String = "";
 
@@ -149,6 +149,7 @@ package net.wg.gui.lobby.messengerBar
             this.contactsListBtn.addEventListener(ButtonEvent.CLICK,this.onContactsButtonClickHandler);
             this.referralBtn.addEventListener(ButtonEvent.CLICK,this.onReferralButtonClickHandler);
             this.vehicleCompareCartBtn.addEventListener(ButtonEvent.CLICK,this.onVehicleCmpBtnClickHandler);
+            this.sessionStatsBtn.visible = this._sessionStatsBtnVisible;
             this.sessionStatsBtn.addEventListener(ButtonEvent.CLICK,this.onSessionStatsBtnClickHandler);
             App.stage.addEventListener(MessengerBarEvent.PIN_CHANNELS_WINDOW,this.onStagePinChannelsWindowHandler);
         }
@@ -157,6 +158,7 @@ package net.wg.gui.lobby.messengerBar
         {
             this.circleAnimMask = null;
             this._counterManager.removeCounter(this.referralBtn);
+            this._counterManager.removeCounter(this.sessionStatsBtn);
             this.fakeChnlBtn.removeEventListener(MouseEvent.ROLL_OVER,this.onFakeChnlBtnRollOverHandler);
             this.fakeChnlBtn.removeEventListener(MouseEvent.ROLL_OUT,this.onFakeChnlBtnRollOutHandler);
             this.fakeChnlBtn.removeEventListener(MouseEvent.CLICK,this.onFakeChnlBtnClickHandler);
@@ -412,6 +414,18 @@ package net.wg.gui.lobby.messengerBar
             }
         }
 
+        public function as_setSessionStatsButtonSettingsUpdate(param1:Boolean, param2:String) : void
+        {
+            if(param1)
+            {
+                this._counterManager.setCounter(this.sessionStatsBtn,param2);
+            }
+            else
+            {
+                this._counterManager.removeCounter(this.sessionStatsBtn);
+            }
+        }
+
         public function getLayoutProperties() : Vector.<HelpLayoutVO>
         {
             var _loc1_:Vector.<HelpLayoutVO> = new Vector.<HelpLayoutVO>();
@@ -590,6 +604,7 @@ package net.wg.gui.lobby.messengerBar
         private function onSessionStatsBtnClickHandler(param1:ButtonEvent) : void
         {
             App.popoverMgr.show(this.sessionStatsBtn,SESSION_STATS_CONSTANTS.SESSION_STATS_POPOVER);
+            sessionStatsButtonClickS();
         }
 
         private function onStagePinChannelsWindowHandler(param1:MessengerBarEvent) : void

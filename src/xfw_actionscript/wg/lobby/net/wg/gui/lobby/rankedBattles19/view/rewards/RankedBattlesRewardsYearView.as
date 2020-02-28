@@ -9,15 +9,17 @@ package net.wg.gui.lobby.rankedBattles19.view.rewards
     import net.wg.gui.lobby.rankedBattles19.view.rewards.year.RankedBattlesRewardsYearBg;
     import net.wg.gui.lobby.rankedBattles19.data.RankedRewardsYearVO;
     import net.wg.infrastructure.managers.ITooltipMgr;
+    import net.wg.data.managers.ITooltipProps;
     import net.wg.gui.events.UILoaderEvent;
     import net.wg.gui.lobby.rankedBattles19.events.RewardYearEvent;
     import flash.events.MouseEvent;
+    import net.wg.data.managers.impl.TooltipProps;
+    import net.wg.data.constants.BaseTooltips;
     import scaleform.clik.constants.InvalidationType;
+    import org.idmedia.as3commons.util.StringUtils;
     import net.wg.utils.StageSizeBoundaries;
     import net.wg.gui.lobby.rankedBattles19.data.RankedRewardYearItemVO;
     import net.wg.data.constants.generated.RANKEDBATTLES_CONSTS;
-    import net.wg.data.constants.Values;
-    import net.wg.data.managers.impl.ToolTipParams;
 
     public class RankedBattlesRewardsYearView extends RankedBattlesRewardsYearMeta implements IRankedBattlesRewardsYearMeta
     {
@@ -26,13 +28,19 @@ package net.wg.gui.lobby.rankedBattles19.view.rewards
 
         private static const TITLE_TOP_POS:int = -20;
 
+        private static const COMPENSATION_TOP_POS:int = 18;
+
         private static const BG_TOP_SHIFT:int = -50;
+
+        private static const TOOLTIP_MAX_WIDTH:int = 430;
 
         public var titleTF:TextField = null;
 
         public var titleIcon:UILoaderAlt = null;
 
         public var titleArea:Sprite = null;
+
+        public var compensationTF:TextField = null;
 
         public var rewardsContainer:RankedBattlesYearRewardContainer = null;
 
@@ -45,6 +53,10 @@ package net.wg.gui.lobby.rankedBattles19.view.rewards
         private var _rewardCircleTPos:int = 0;
 
         private var _tooltipMgr:ITooltipMgr = null;
+
+        private var _tooltipProps:ITooltipProps = null;
+
+        private var _hasCompensation:Boolean = false;
 
         public function RankedBattlesRewardsYearView()
         {
@@ -62,17 +74,28 @@ package net.wg.gui.lobby.rankedBattles19.view.rewards
             this._rewardCircleTPos = this.rewardsContainer.getCirclePos();
             this.titleArea.addEventListener(MouseEvent.MOUSE_OVER,this.onTitleAreaMouseOverHandler);
             this.titleArea.addEventListener(MouseEvent.MOUSE_OUT,this.onTitleAreaMouseOutHandler);
+            this._tooltipProps = new TooltipProps(BaseTooltips.TYPE_INFO,0,0);
+            this._tooltipProps.maxWidth = TOOLTIP_MAX_WIDTH;
+        }
+
+        override protected function configUI() : void
+        {
+            super.configUI();
+            this.titleTF.y = TITLE_TOP_POS;
+            this.compensationTF.y = COMPENSATION_TOP_POS;
         }
 
         override protected function draw() : void
         {
+            var _loc3_:uint = 0;
+            var _loc4_:uint = 0;
             var _loc5_:* = NaN;
             var _loc6_:* = 0;
             super.draw();
             var _loc1_:Boolean = isInvalid(InvalidationType.SIZE) || isInvalid(INV_VIEW_PADDING);
             var _loc2_:Boolean = isInvalid(InvalidationType.DATA);
-            var _loc3_:uint = _width - viewPadding.left >> 1;
-            var _loc4_:uint = _height - viewPadding.top >> 1;
+            _loc3_ = _width - viewPadding.left >> 1;
+            _loc4_ = _height - viewPadding.top >> 1;
             if(this._data)
             {
                 if(_loc2_)
@@ -82,11 +105,21 @@ package net.wg.gui.lobby.rankedBattles19.view.rewards
                     App.utils.commons.updateTextFieldSize(this.titleTF);
                     this.titleIcon.source = this._data.titleIcon;
                     _loc1_ = true;
+                    this._hasCompensation = StringUtils.isNotEmpty(this._data.compensation);
+                    this.compensationTF.visible = this._hasCompensation;
+                    if(this._hasCompensation)
+                    {
+                        this.compensationTF.htmlText = this._data.compensation;
+                        App.utils.commons.updateTextFieldSize(this.compensationTF,true,false);
+                    }
                 }
                 if(_loc1_)
                 {
                     this.titleTF.x = _loc3_ - (this.titleTF.width >> 1);
-                    this.titleTF.y = TITLE_TOP_POS;
+                    if(this._hasCompensation)
+                    {
+                        this.compensationTF.x = _loc3_ - (this.compensationTF.width >> 1);
+                    }
                     this.titleIcon.x = this.titleTF.x + this.titleTF.width + ICON_LEFT_GAP;
                     this.titleIcon.y = this.titleTF.y + (this.titleTF.height - this.titleIcon.height >> 1);
                     this.titleArea.x = this.titleTF.x;
@@ -125,9 +158,11 @@ package net.wg.gui.lobby.rankedBattles19.view.rewards
             this.bg.dispose();
             this.bg = null;
             this.black = null;
+            this.compensationTF = null;
             this._data = null;
             this._tooltipMgr.hide();
             this._tooltipMgr = null;
+            this._tooltipProps = null;
             super.onDispose();
         }
 
@@ -141,7 +176,7 @@ package net.wg.gui.lobby.rankedBattles19.view.rewards
             while(_loc5_ < _loc4_)
             {
                 _loc3_ = param1.rewards[_loc5_];
-                _loc2_ = _loc2_ || RANKEDBATTLES_CONSTS.RANKED_REWARDS_YEAR_MAIN_AVAILABLE_FOR.indexOf(_loc3_.id) >= 0 && _loc3_.status == RANKEDBATTLES_CONSTS.YEAR_REWARD_STATUS_CURRENT;
+                _loc2_ = _loc2_ || RANKEDBATTLES_CONSTS.RANKED_REWARDS_YEAR_MAIN_AVAILABLE_FOR.indexOf(_loc3_.id) >= 0 && (_loc3_.status == RANKEDBATTLES_CONSTS.YEAR_REWARD_STATUS_CURRENT || _loc3_.status == RANKEDBATTLES_CONSTS.YEAR_REWARD_STATUS_CURRENT_FINAL);
                 _loc5_++;
             }
             this.bg.isPermanentShow = _loc2_;
@@ -150,9 +185,9 @@ package net.wg.gui.lobby.rankedBattles19.view.rewards
 
         private function onTitleAreaMouseOverHandler(param1:MouseEvent) : void
         {
-            if(this._data && this._data.points > Values.DEFAULT_INT)
+            if(this._data)
             {
-                this._tooltipMgr.showComplexWithParams(RANKED_BATTLES.REWARDSVIEW_TABS_YEAR_SCOREPOINT_TOOLTIP,new ToolTipParams({"points":this._data.points.toString()},{}));
+                this._tooltipMgr.showComplex(this._data.titleTooltip,this._tooltipProps);
             }
         }
 

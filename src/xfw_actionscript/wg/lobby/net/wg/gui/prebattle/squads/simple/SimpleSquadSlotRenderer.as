@@ -33,10 +33,11 @@ package net.wg.gui.prebattle.squads.simple
         public function SimpleSquadSlotRenderer()
         {
             this._tooltipMgr = App.toolTipMgr;
-            badgeOffsetY = -4;
+            badgeOffsetY = -3;
             super();
             this.notificationInfoIcon.visible = false;
             TextFieldEx.setVerticalAlign(this.playerMessage,TextFieldEx.VALIGN_CENTER);
+            slotLabelTextWithBadgeY = -badgeOffsetY;
         }
 
         override public function setStatus(param1:int) : String

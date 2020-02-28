@@ -18,5 +18,7 @@ package net.wg.gui.lobby.hangar.interfaces
         function get groupID() : String;
 
         function get cmptWidth() : int;
+
+        function get isRightSide() : Boolean;
     }
 }

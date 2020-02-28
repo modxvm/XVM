@@ -18,7 +18,7 @@ package net.wg.app.impl
     import net.wg.gui.components.questProgress.data.metrics.QPMetricsTimerVO;
     import net.wg.gui.components.questProgress.data.metrics.QPMetricsVehicleVO;
     import net.wg.gui.components.questProgress.data.metrics.QPMetricsLimiterVO;
-    import net.wg.gui.battle.bob.data.BobDAAPIVehicleInfoVO;
+    import net.wg.gui.components.controls.VO.BadgeVisualVO;
     import net.wg.utils.IUtils;
     import net.wg.infrastructure.managers.utils.impl.Utils;
     import net.wg.infrastructure.managers.utils.impl.Asserter;
@@ -129,7 +129,7 @@ package net.wg.app.impl
             registerClassAlias("net.wg.gui.battle.views.questProgress.data.metrics.QPMetricsTimerVO",QPMetricsTimerVO);
             registerClassAlias("net.wg.gui.battle.views.questProgress.data.metrics.QPMetricsVehicleVO",QPMetricsVehicleVO);
             registerClassAlias("net.wg.gui.battle.views.questProgress.data.metrics.QPMetricsLimiterVO",QPMetricsLimiterVO);
-            registerClassAlias("net.wg.gui.battle.bob.data.BobDAAPIVehicleInfoVO",BobDAAPIVehicleInfoVO);
+            registerClassAlias("net.wg.gui.components.controls.VO.BadgeVisualVO",BadgeVisualVO);
         }
 
         override protected function onPopUpManagerInit() : void
@@ -293,6 +293,7 @@ package net.wg.app.impl
         {
             atlasMgr.registerAtlas(ATLAS_CONSTANTS.BATTLE_ATLAS);
             atlasMgr.registerAtlas(ATLAS_CONSTANTS.QUESTS_PROGRESS);
+            atlasMgr.registerAtlas(ATLAS_CONSTANTS.DIGITS);
         }
 
         override protected function onAfterAppConfiguring() : void

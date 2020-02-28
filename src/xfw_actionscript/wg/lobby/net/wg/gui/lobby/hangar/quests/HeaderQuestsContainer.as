@@ -59,6 +59,10 @@ package net.wg.gui.lobby.hangar.quests
 
         private var _questsMap:Dictionary;
 
+        private var _isRightSide:Boolean = false;
+
+        private var _maskMc:Sprite = null;
+
         public function HeaderQuestsContainer()
         {
             this._questsMap = new Dictionary();
@@ -104,6 +108,7 @@ package net.wg.gui.lobby.hangar.quests
             this._questsMap = null;
             this.clearTweens();
             this.clearAnimIcon();
+            this._maskMc = null;
         }
 
         public function getQuestBtnByType(param1:String) : IQuestInformerButton
@@ -160,16 +165,24 @@ package net.wg.gui.lobby.hangar.quests
                 return;
             }
             this._groupID = param1.groupID;
+            this._isRightSide = param1.isRightSide;
             this.doUpdates(param1.getQuests,param1.groupIcon);
         }
 
         private function addMask(param1:IQuestInformerButton, param2:int) : void
         {
-            var _loc3_:Sprite = null;
-            _loc3_ = App.utils.classFactory.getComponent(Aliases.HEADER_QUEST_FLAG_MASK,Sprite);
-            _loc3_.x = param2 + HEADER_QUESTS_CONSTANTS.QUEST_BUTTONS_MASK_X_SHIFT_COLLAPSE;
-            addChild(_loc3_);
-            param1.mask = _loc3_;
+            this._maskMc = App.utils.classFactory.getComponent(Aliases.HEADER_QUEST_FLAG_MASK,Sprite);
+            this._maskMc.x = param2;
+            if(this._isRightSide)
+            {
+                this._maskMc.x = this._maskMc.x + (HEADER_QUESTS_CONSTANTS.QUEST_BUTTONS_GROUP_STEP - this._maskMc.width);
+            }
+            else
+            {
+                this._maskMc.x = this._maskMc.x + HEADER_QUESTS_CONSTANTS.QUEST_BUTTONS_MASK_X_SHIFT_COLLAPSE;
+            }
+            addChild(this._maskMc);
+            param1.mask = this._maskMc;
         }
 
         private function doUpdates(param1:Vector.<HeaderQuestsVO>, param2:String) : void
@@ -192,6 +205,10 @@ package net.wg.gui.lobby.hangar.quests
             var _loc3_:IQuestInformerButton = null;
             var _loc4_:int = param1.length;
             var _loc5_:int = _loc4_ - 1;
+            if(this._isRightSide)
+            {
+                var param1:Vector.<HeaderQuestsVO> = param1.reverse();
+            }
             if(_loc4_)
             {
                 this._isSingle = _loc4_ == 1;
@@ -202,7 +219,7 @@ package net.wg.gui.lobby.hangar.quests
                     _loc3_ = App.utils.classFactory.getComponent(HANGAR_HEADER_QUESTS.HANGAR_QUEST_FLAG_LINKAGE,IQuestInformerButton);
                     _loc6_ = param1[_loc7_];
                     _loc3_.name = _loc6_.questType;
-                    _loc3_.setData(_loc6_);
+                    _loc3_.setData(_loc6_,this._isRightSide);
                     this.initQuestFlag(_loc3_,_loc7_,_loc7_ == _loc5_);
                     this._questsMap[_loc6_.questType] = _loc3_;
                     addChild(DisplayObject(_loc3_));
@@ -230,7 +247,7 @@ package net.wg.gui.lobby.hangar.quests
                     _loc3_ = this.getQuestInformerByType(_loc4_.questType);
                     if(_loc3_)
                     {
-                        _loc3_.setData(_loc4_);
+                        _loc3_.setData(_loc4_,this._isRightSide);
                     }
                     this._isAllQuestsItemsDisabled = this._isAllQuestsItemsDisabled && !_loc4_.enable;
                 }
@@ -258,9 +275,13 @@ package net.wg.gui.lobby.hangar.quests
             }
             else
             {
-                _loc4_ = param2 * -HEADER_QUESTS_CONSTANTS.QUEST_BUTTONS_GROUP_STEP;
+                _loc4_ = param2 * HEADER_QUESTS_CONSTANTS.QUEST_BUTTONS_GROUP_STEP * (this._isRightSide?1:-1);
+                if(this._isRightSide)
+                {
+                    _loc4_ = _loc4_ - HEADER_QUESTS_CONSTANTS.QUEST_BUTTONS_GROUP_STEP;
+                }
                 _loc5_ = !param3?GROUPED_FLAG_START_Y:0;
-                _loc6_ = param2 * -HEADER_QUESTS_CONSTANTS.QUEST_BUTTONS_STEP;
+                _loc6_ = param2 * HEADER_QUESTS_CONSTANTS.QUEST_BUTTONS_STEP * (this._isRightSide?1:-1);
                 if(!param3)
                 {
                     this.addMask(param1,_loc4_);
@@ -312,7 +333,15 @@ package net.wg.gui.lobby.hangar.quests
                         }
                         else
                         {
-                            _loc6_ = new Point(_loc5_.x + HEADER_QUESTS_CONSTANTS.QUEST_BUTTONS_MASK_X_SHIFT_COLLAPSE,Values.ZERO);
+                            _loc6_ = new Point(_loc5_.x,Values.ZERO);
+                            if(this._isRightSide)
+                            {
+                                _loc6_.x = _loc6_.x + (HEADER_QUESTS_CONSTANTS.QUEST_BUTTONS_GROUP_STEP - this._maskMc.width);
+                            }
+                            else
+                            {
+                                _loc6_.x = _loc6_.x + HEADER_QUESTS_CONSTANTS.QUEST_BUTTONS_MASK_X_SHIFT_COLLAPSE;
+                            }
                         }
                         this.addAnimItem(_loc4_.mask,_loc6_);
                     }
@@ -445,6 +474,11 @@ package net.wg.gui.lobby.hangar.quests
                 }
                 this._questsInformers = null;
             }
+        }
+
+        public function get isRightSide() : Boolean
+        {
+            return this._isRightSide;
         }
 
         public function get isAnimExpanded() : Boolean

@@ -23,7 +23,7 @@ package net.wg.infrastructure.base.meta
 
         function as_setNotReceivedBadges(param1:Object) : void;
 
-        function as_setSelectedBadgeImg(param1:String) : void;
+        function as_setSelectedBadge(param1:Object, param2:Boolean) : void;
 
         function as_setSuffixBadgeImg(param1:String, param2:String, param3:Boolean) : void;
     }

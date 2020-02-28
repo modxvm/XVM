@@ -29,8 +29,6 @@ package net.wg.gui.lobby.training
 
         private static const VEHICLE_COLOR:Number = 8092009;
 
-        private static const BADGE_OFFSET:int = -3;
-
         public var nameField:UserNameField;
 
         public var vehicleField:TextField;
@@ -49,16 +47,10 @@ package net.wg.gui.lobby.training
 
         private var _tooltipMgr:ITooltipMgr;
 
-        private var _namePosY:int = -1;
-
-        private var _namePosWithBadgeY:int = -1;
-
         public function TrainingPlayerItemRendererBase()
         {
             super();
             this._tooltipMgr = App.toolTipMgr;
-            this._namePosY = this.nameField.y;
-            this._namePosWithBadgeY = this._namePosY + BADGE_OFFSET;
             constraintsDisabled = true;
             preventAutosizing = true;
         }
@@ -191,8 +183,6 @@ package net.wg.gui.lobby.training
                 this.voiceWave.setMuted(UserTags.isMuted(_loc4_));
             }
             this.nameField.userVO = param1;
-            var _loc5_:Boolean = StringUtils.isNotEmpty(param1.badgeImgStr);
-            this.nameField.y = _loc5_?this._namePosWithBadgeY:this._namePosY;
             this.updateHoverState();
         }
 

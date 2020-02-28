@@ -11,7 +11,7 @@ package net.wg.infrastructure.base.meta
 
         function onHideTooltipS(param1:String) : void;
 
-        function onCreateWulfTooltipS(param1:String, param2:Array, param3:int, param4:int) : void;
+        function onCreateWulfTooltipS(param1:String, param2:Array, param3:int, param4:int, param5:Boolean = false) : void;
 
         function as_show(param1:Object, param2:String, param3:Boolean) : void;
 

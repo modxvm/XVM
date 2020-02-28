@@ -13,7 +13,13 @@ package
 
         public static const MAPS_PROMO_BG:String = "../maps/promo_bg.png";
 
-        public static const MAPS_ICONS_BOB_HANGAR_PRIMETIMEVIEW_BG:String = "../maps/icons/bob/hangar/primeTimeView/bg.png";
+        public static const MAPS_ICONS_BATTLEPASS2020_BUY_BG:String = "../maps/icons/battlePass2020/buy/bg.png";
+
+        public static const MAPS_ICONS_BATTLEPASS2020_INTRO_BG:String = "../maps/icons/battlePass2020/intro/bg.png";
+
+        public static const MAPS_ICONS_BATTLEPASS2020_PROGRESSION_BG:String = "../maps/icons/battlePass2020/progression/bg.png";
+
+        public static const MAPS_ICONS_BATTLEPASS2020_VOTING_BG:String = "../maps/icons/battlePass2020/voting/bg.png";
 
         public static const MAPS_ICONS_DEMOUNTKIT_BG:String = "../maps/icons/demountKit/bg.png";
 

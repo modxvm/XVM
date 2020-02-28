@@ -40,9 +40,18 @@ package net.wg.gui.lobby.storage.categories.cards
 
         public var type:String = "";
 
+        public var upgradable:Boolean = false;
+
+        public var upgradeButtonTooltip:String = "";
+
         public function BaseCardVO(param1:Object)
         {
             super(param1);
+        }
+
+        override public function toString() : String
+        {
+            return "[CardVO > id: " + this.id + ", image: " + this.image + "]";
         }
 
         override protected function onDataWrite(param1:String, param2:Object) : Boolean
@@ -72,11 +81,6 @@ package net.wg.gui.lobby.storage.categories.cards
                 return false;
             }
             return this.id == param1.id && this.contextMenuId == param1.contextMenuId && this.title == param1.title && this.image == param1.image && this.description == param1.description && this.count == param1.count && this.nationFlagIcon == param1.nationFlagIcon && this.selected == param1.selected && this.enabled == param1.enabled && this.price == param1.price || this.price && this.price.isEquals(param1.price) && this.type == param1.type;
-        }
-
-        override public function toString() : String
-        {
-            return "[CardVO > id: " + this.id + ", image: " + this.image + "]";
         }
     }
 }

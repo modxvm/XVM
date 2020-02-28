@@ -19,6 +19,10 @@ package net.wg.gui.lobby.settings.vo.config.feedback
 
         public var damageIndicatorAnimation:SettingsControlProp = null;
 
+        public var damageIndicatorCrits:SettingsControlProp = null;
+
+        public var damageIndicatorAllies:SettingsControlProp = null;
+
         public function DamageIndicatorDataVo()
         {
             super({
@@ -27,7 +31,9 @@ package net.wg.gui.lobby.settings.vo.config.feedback
                 "damageIndicatorDamageValue":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "damageIndicatorDynamicIndicator":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "damageIndicatorVehicleInfo":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
-                "damageIndicatorAnimation":createControl(ControlsFactory.TYPE_CHECKBOX).build()
+                "damageIndicatorAnimation":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
+                "damageIndicatorCrits":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
+                "damageIndicatorAllies":createControl(ControlsFactory.TYPE_CHECKBOX).build()
             });
         }
 
@@ -39,6 +45,8 @@ package net.wg.gui.lobby.settings.vo.config.feedback
             this.damageIndicatorPresets = null;
             this.damageIndicatorType = null;
             this.damageIndicatorVehicleInfo = null;
+            this.damageIndicatorCrits = null;
+            this.damageIndicatorAllies = null;
             super.onDispose();
         }
     }

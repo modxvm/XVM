@@ -73,6 +73,8 @@ package net.wg.data.constants.generated
 
         public static const TOOLTIP_META_LEVEL_PROGRESS_BLOCK_LINKAGE:String = "EpicMetaLevelProgressBlockUI";
 
+        public static const TOOLTIP_META_LEVEL_ICON_BLOCK_LINKAGE:String = "EpicMetaLevelIconBlockUI";
+
         public static const TOOLTIP_COMPOUND_PRICE_BLOCK_LINKAGE:String = "CompoundPriceBlockUI";
 
         public static const TOOLTIP_SESSION_STATS_TANK_INFO_HEADER_BLOCK:String = "SessionStatsTankInfoHeaderBlocktUI";

@@ -3,6 +3,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.infrastructure.base.AbstractView;
     import net.wg.data.VO.TrainingRoomTeamBaseVO;
     import net.wg.data.VO.TrainingRoomInfoVO;
+    import net.wg.gui.components.controls.VO.BadgeVisualVO;
     import net.wg.data.constants.Errors;
     import net.wg.infrastructure.exceptions.AbstractException;
 
@@ -49,6 +50,12 @@ package net.wg.infrastructure.base.meta.impl
 
         private var _trainingRoomInfoVO:TrainingRoomInfoVO;
 
+        private var _badgeVisualVO:BadgeVisualVO;
+
+        private var _badgeVisualVO1:BadgeVisualVO;
+
+        private var _badgeVisualVO2:BadgeVisualVO;
+
         private var _array:Array;
 
         private var _array1:Array;
@@ -81,6 +88,21 @@ package net.wg.infrastructure.base.meta.impl
             {
                 this._trainingRoomInfoVO.dispose();
                 this._trainingRoomInfoVO = null;
+            }
+            if(this._badgeVisualVO)
+            {
+                this._badgeVisualVO.dispose();
+                this._badgeVisualVO = null;
+            }
+            if(this._badgeVisualVO1)
+            {
+                this._badgeVisualVO1.dispose();
+                this._badgeVisualVO1 = null;
+            }
+            if(this._badgeVisualVO2)
+            {
+                this._badgeVisualVO2.dispose();
+                this._badgeVisualVO2 = null;
             }
             if(this._array)
             {
@@ -240,6 +262,39 @@ package net.wg.infrastructure.base.meta.impl
             }
         }
 
+        public final function as_setPlayerStateInTeam1(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int, param7:Object) : void
+        {
+            var _loc8_:BadgeVisualVO = this._badgeVisualVO;
+            this._badgeVisualVO = new BadgeVisualVO(param7);
+            this.setPlayerStateInTeam1(param1,param2,param3,param4,param5,param6,this._badgeVisualVO);
+            if(_loc8_)
+            {
+                _loc8_.dispose();
+            }
+        }
+
+        public final function as_setPlayerStateInTeam2(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int, param7:Object) : void
+        {
+            var _loc8_:BadgeVisualVO = this._badgeVisualVO1;
+            this._badgeVisualVO1 = new BadgeVisualVO(param7);
+            this.setPlayerStateInTeam2(param1,param2,param3,param4,param5,param6,this._badgeVisualVO1);
+            if(_loc8_)
+            {
+                _loc8_.dispose();
+            }
+        }
+
+        public final function as_setPlayerStateInOther(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int, param7:Object) : void
+        {
+            var _loc8_:BadgeVisualVO = this._badgeVisualVO2;
+            this._badgeVisualVO2 = new BadgeVisualVO(param7);
+            this.setPlayerStateInOther(param1,param2,param3,param4,param5,param6,this._badgeVisualVO2);
+            if(_loc8_)
+            {
+                _loc8_.dispose();
+            }
+        }
+
         public final function as_setPlayerTagsInTeam1(param1:Number, param2:Array) : void
         {
             var _loc3_:Array = this._array;
@@ -306,6 +361,27 @@ package net.wg.infrastructure.base.meta.impl
             var _loc2_:String = "as_setInfo" + Errors.ABSTRACT_INVOKE;
             DebugUtils.LOG_ERROR(_loc2_);
             throw new AbstractException(_loc2_);
+        }
+
+        protected function setPlayerStateInTeam1(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int, param7:BadgeVisualVO) : void
+        {
+            var _loc8_:String = "as_setPlayerStateInTeam1" + Errors.ABSTRACT_INVOKE;
+            DebugUtils.LOG_ERROR(_loc8_);
+            throw new AbstractException(_loc8_);
+        }
+
+        protected function setPlayerStateInTeam2(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int, param7:BadgeVisualVO) : void
+        {
+            var _loc8_:String = "as_setPlayerStateInTeam2" + Errors.ABSTRACT_INVOKE;
+            DebugUtils.LOG_ERROR(_loc8_);
+            throw new AbstractException(_loc8_);
+        }
+
+        protected function setPlayerStateInOther(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int, param7:BadgeVisualVO) : void
+        {
+            var _loc8_:String = "as_setPlayerStateInOther" + Errors.ABSTRACT_INVOKE;
+            DebugUtils.LOG_ERROR(_loc8_);
+            throw new AbstractException(_loc8_);
         }
 
         protected function setPlayerTagsInTeam1(param1:Number, param2:Array) : void

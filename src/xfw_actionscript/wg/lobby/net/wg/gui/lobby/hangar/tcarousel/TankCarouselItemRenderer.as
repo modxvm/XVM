@@ -2,9 +2,9 @@ package net.wg.gui.lobby.hangar.tcarousel
 {
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.components.controls.scroller.IScrollerItemRenderer;
+    import flash.display.Sprite;
     import net.wg.gui.components.carousels.data.VehicleCarouselVO;
     import net.wg.infrastructure.managers.ITooltipMgr;
-    import flash.display.Sprite;
     import net.wg.data.constants.SoundTypes;
     import net.wg.data.constants.SoundManagerStatesLobby;
     import flash.geom.Point;
@@ -24,7 +24,19 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         private static const RANKED_BONUS_NAME:String = "rankedBonus";
 
+        private static const PROGRESSION_POINTS:String = "progressionPoints";
+
+        private static const CAROUSEL_RANKED_BONUS_LINKAGE:String = "CarouselRankedBonusUI";
+
+        private static const LINKAGE_CAROUSEL_PROGRESSION_POINTS:String = "CarouselProgressionPointsUI";
+
+        private static const PROGRESSION_POINTS_OFFSET:int = -8;
+
         public var content:BaseTankIcon = null;
+
+        public var border:Sprite = null;
+
+        public var selectedMc:Sprite = null;
 
         private var _index:uint = 0;
 
@@ -42,6 +54,8 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         private var _rankedBonus:Sprite = null;
 
+        private var _progressionPoints:CarouselProgressionPoints = null;
+
         public function TankCarouselItemRenderer()
         {
             super();
@@ -52,7 +66,15 @@ package net.wg.gui.lobby.hangar.tcarousel
         override protected function configUI() : void
         {
             super.configUI();
+            mouseChildren = true;
+            mouseEnabled = false;
+            this.border.mouseEnabled = false;
+            this.border.mouseChildren = false;
+            this.selectedMc.mouseEnabled = false;
+            this.selectedMc.mouseChildren = false;
             this.content.cacheAsBitmap = true;
+            this.content.buttonMode = true;
+            this.content.mouseChildren = false;
             soundType = SoundTypes.CAROUSEL_BTN;
             soundId = SoundManagerStatesLobby.CAROUSEL_CELL_BTN;
             this.addListeners();
@@ -67,6 +89,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             _owner = null;
             this._toolTipMgr = null;
             this.clearRankedBonus();
+            this.clearProgressionPoints();
             super.onDispose();
         }
 
@@ -95,8 +118,42 @@ package net.wg.gui.lobby.hangar.tcarousel
                 mouseEnabledOnDisabled = false;
             }
             this.updateRankedBonus(_loc1_?this._dataVO.hasRankedBonus:false);
+            this.updateProgressionPoints(_loc1_?this._dataVO.hasProgression:false);
             this.updateInteractiveState();
             this.content.setData(this._dataVO);
+        }
+
+        private function clearProgressionPoints() : void
+        {
+            if(this._progressionPoints)
+            {
+                this._progressionPoints.dispose();
+                removeChild(this._progressionPoints);
+                this._progressionPoints = null;
+            }
+        }
+
+        private function updateProgressionPoints(param1:Boolean) : void
+        {
+            if(param1)
+            {
+                if(!this._progressionPoints)
+                {
+                    this._progressionPoints = App.utils.classFactory.getComponent(LINKAGE_CAROUSEL_PROGRESSION_POINTS,CarouselProgressionPoints);
+                    this._progressionPoints.setData(this._dataVO.progressionPoints,this._dataVO.intCD);
+                    this._progressionPoints.name = PROGRESSION_POINTS;
+                    this._progressionPoints.x = width - this._progressionPoints.width >> 1;
+                    this._progressionPoints.y = PROGRESSION_POINTS_OFFSET;
+                    addChild(this._progressionPoints);
+                }
+                this._progressionPoints.visible = true;
+                this.border.visible = !this._dataVO.progressionPoints.isSpecialVehicle;
+            }
+            else
+            {
+                this.clearProgressionPoints();
+                this.border.visible = true;
+            }
         }
 
         private function clearRankedBonus() : void
@@ -126,24 +183,23 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         private function addRankedBonus() : void
         {
-            this._rankedBonus = App.utils.classFactory.getComponent("CarouselRankedBonusUI",Sprite);
+            this._rankedBonus = App.utils.classFactory.getComponent(CAROUSEL_RANKED_BONUS_LINKAGE,Sprite);
             this._rankedBonus.name = RANKED_BONUS_NAME;
             this._rankedBonus.x = width >> 1;
-            var _loc1_:int = getChildIndex(hitMc);
-            this.addChildAt(this._rankedBonus,_loc1_);
+            addChild(this._rankedBonus);
         }
 
         private function addListeners() : void
         {
-            addEventListener(MouseEvent.ROLL_OVER,this.onSlotMouseRollOverHandler);
-            addEventListener(MouseEvent.ROLL_OUT,this.onSlotMouseRollOutHandler);
+            this.content.addEventListener(MouseEvent.ROLL_OVER,this.onSlotMouseRollOverHandler);
+            this.content.addEventListener(MouseEvent.ROLL_OUT,this.onSlotMouseRollOutHandler);
             addEventListener(MouseEvent.CLICK,this.onSlotMouseClickHandler);
         }
 
         private function removeListeners() : void
         {
-            removeEventListener(MouseEvent.ROLL_OVER,this.onSlotMouseRollOverHandler);
-            removeEventListener(MouseEvent.ROLL_OUT,this.onSlotMouseRollOutHandler);
+            this.content.removeEventListener(MouseEvent.ROLL_OVER,this.onSlotMouseRollOverHandler);
+            this.content.removeEventListener(MouseEvent.ROLL_OUT,this.onSlotMouseRollOutHandler);
             removeEventListener(MouseEvent.CLICK,this.onSlotMouseClickHandler);
         }
 
@@ -152,6 +208,16 @@ package net.wg.gui.lobby.hangar.tcarousel
             this._isInteractive = this._isViewPortEnabled && this._isClickEnabled || this._isSpecialSlot;
             this.enabled = this._isInteractive;
             this.content.enabled = this._isInteractive;
+        }
+
+        override public function set enabled(param1:Boolean) : void
+        {
+            if(param1 != enabled)
+            {
+                super.enabled = param1;
+                mouseChildren = param1;
+                mouseEnabled = false;
+            }
         }
 
         override public function get data() : Object

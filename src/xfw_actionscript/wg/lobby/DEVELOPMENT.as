@@ -79,6 +79,8 @@ package
 
         public static const WULF_UIKITWINDOW_PROGRESSBARBIG:String = "#development:wulf/uiKitWindow/ProgressBarBig";
 
+        public static const WULF_UIKITWINDOW_PROGRESSBARUB:String = "#development:wulf/uiKitWindow/ProgressBarUB";
+
         public static const WULF_UIKITWINDOW_INPUT:String = "#development:wulf/uiKitWindow/Input";
 
         public static const WULF_UIKITWINDOW_LIST:String = "#development:wulf/uiKitWindow/List";

@@ -71,11 +71,7 @@ package net.wg.gui.lobby.modulesPanel.components
             this.notAffected = null;
             this.descField = null;
             this.targetField = null;
-            if(this._boosterItemVO)
-            {
-                this._boosterItemVO.dispose();
-                this._boosterItemVO = null;
-            }
+            this._boosterItemVO = null;
             this.moduleHighlight = null;
             this.moduleOverlay = null;
             super.onDispose();

@@ -31,15 +31,19 @@ package net.wg.gui.lobby.header.itemSelectorPopover
 
         public var list:ItemSelectorList = null;
 
+        public var listExtra:ItemSelectorList = null;
+
         public var topLip:MovieClip = null;
 
         public var bottomLip:MovieClip = null;
+
+        private var _isShowDemonstrator:Boolean = false;
 
         private var _demonstrationItem:BattleTypeSelectPopoverDemonstrator = null;
 
         private var _items:DataProvider = null;
 
-        private var _isShowDemonstrator:Boolean = false;
+        private var _extraItems:DataProvider = null;
 
         private var _hitSprite:Sprite;
 
@@ -56,9 +60,9 @@ package net.wg.gui.lobby.header.itemSelectorPopover
             this.topLip.mouseChildren = this.bottomLip.mouseChildren = false;
             this.topLip.mouseEnabled = this.bottomLip.mouseEnabled = false;
             this.list.y = LIST_TOP_PADDING + LIPS_PADDING;
-            this.list.x = LIST_LEFT_PADDING;
+            this.list.x = this.listExtra.x = LIST_LEFT_PADDING;
             this._hitSprite = new Sprite();
-            addChildAt(this._hitSprite,getChildIndex(this.list));
+            addChildAt(this._hitSprite,getChildIndex(this.listExtra));
             hitArea = this._hitSprite;
             if(!hasEventListener(ListEvent.INDEX_CHANGE))
             {
@@ -75,29 +79,43 @@ package net.wg.gui.lobby.header.itemSelectorPopover
 
         override protected function draw() : void
         {
-            var _loc1_:Graphics = null;
+            var _loc1_:* = 0;
+            var _loc2_:* = 0;
+            var _loc3_:Graphics = null;
             if(_baseDisposed)
             {
                 return;
             }
-            if(isInvalid(InvalidationType.DATA) && this._items != null)
+            if(isInvalid(InvalidationType.DATA))
             {
                 if(this._demonstrationItem != null)
                 {
                     this._demonstrationItem.visible = this._isShowDemonstrator;
                 }
-                this.list.y = this._isShowDemonstrator?this._demonstrationItem.y + this._demonstrationItem.height + LIST_TOP_PADDING ^ 0:LIPS_PADDING + LIST_TOP_PADDING;
-                this.list.rowCount = this._items.length;
-                this.list.dataProvider = this._items;
+                if(this._items != null)
+                {
+                    this.list.y = this._isShowDemonstrator?this._demonstrationItem.y + this._demonstrationItem.height + LIST_TOP_PADDING ^ 0:LIPS_PADDING + LIST_TOP_PADDING;
+                    this.list.rowCount = this._items.length;
+                    this.list.dataProvider = this._items;
+                }
+                if(this._extraItems != null)
+                {
+                    this.listExtra.y = this.list.y + this.list.height;
+                    this.listExtra.rowCount = this._extraItems.length;
+                    this.listExtra.dataProvider = this._extraItems;
+                }
                 this.updateSelectedItem();
                 this.list.validateNow();
-                this.topLip.y = this._isShowDemonstrator?this._demonstrationItem.y - this.topLip.height:this.list.y - this.topLip.height - LIST_TOP_PADDING;
-                this.bottomLip.y = this.list.y + this.list.height + this.bottomLip.height - LIST_TOP_PADDING ^ 0;
-                _loc1_ = this._hitSprite.graphics;
-                _loc1_.clear();
-                _loc1_.beginFill(0,0);
-                _loc1_.drawRect(0,0,this.list.width + LIST_RIGHT_PADDING + LIST_LEFT_PADDING,this.list.y + this.list.height + this.list._gap + LIST_TOP_PADDING + LIPS_PADDING);
-                _loc1_.endFill();
+                this.listExtra.validateNow();
+                this.topLip.y = this._isShowDemonstrator?this._demonstrationItem.y - this.topLip.height ^ 0:this.list.y - this.topLip.height - LIST_TOP_PADDING ^ 0;
+                this.bottomLip.y = this.list.y + this.list.height + this.listExtra.height + this.bottomLip.height - LIST_TOP_PADDING ^ 0;
+                _loc1_ = this.list.width + LIST_RIGHT_PADDING + LIST_LEFT_PADDING;
+                _loc2_ = this.list.y + this.list._gap + this.list.height + this.listExtra.height + LIST_TOP_PADDING + LIPS_PADDING;
+                _loc3_ = this._hitSprite.graphics;
+                _loc3_.clear();
+                _loc3_.beginFill(0,0);
+                _loc3_.drawRect(0,0,_loc1_,_loc2_);
+                _loc3_.endFill();
                 setSize(this._hitSprite.width,this._hitSprite.height);
             }
             if(this._miniClientComponent != null)
@@ -117,6 +135,8 @@ package net.wg.gui.lobby.header.itemSelectorPopover
                 this._demonstrationItem.dispose();
                 this._demonstrationItem = null;
             }
+            this.listExtra.dispose();
+            this.listExtra = null;
             this.list.dispose();
             this.list = null;
             this.topLip = null;
@@ -124,18 +144,20 @@ package net.wg.gui.lobby.header.itemSelectorPopover
             hitArea = null;
             this._hitSprite = null;
             this._items = null;
+            this._extraItems = null;
             this._miniClientComponent = null;
             super.onDispose();
         }
 
-        override protected function update(param1:DataProvider, param2:Boolean, param3:Boolean) : void
+        override protected function update(param1:DataProvider, param2:DataProvider, param3:Boolean, param4:Boolean) : void
         {
             this._items = param1;
-            this._isShowDemonstrator = param2;
+            this._extraItems = param2;
+            this._isShowDemonstrator = param3;
             if(this._isShowDemonstrator)
             {
                 this.createDemonstrator();
-                this._demonstrationItem.enabled = param3;
+                this._demonstrationItem.enabled = param4;
             }
             invalidateData();
         }
@@ -193,17 +215,18 @@ package net.wg.gui.lobby.header.itemSelectorPopover
 
         private function updateSelectedItem() : void
         {
-            if(this.list.selectedIndex == -1)
+            var _loc1_:ItemSelectorList = this.listExtra.selectedIndex == -1?this.list:this.listExtra;
+            if(_loc1_.selectedIndex == -1)
             {
-                this.list.selectedIndex = this.list.getFirstSelectablePosition(0,true);
+                _loc1_.selectedIndex = _loc1_.getFirstSelectablePosition(0,true);
             }
-            else if(this.list.selectedIndex < this.list.getFirstSelectablePosition(this.list.dataProvider.length - 1,false))
+            else if(_loc1_.selectedIndex < _loc1_.getFirstSelectablePosition(_loc1_.dataProvider.length - 1,false))
             {
-                this.list.selectedIndex = this.list.getFirstSelectablePosition(this.list.selectedIndex,true);
+                _loc1_.selectedIndex = _loc1_.getFirstSelectablePosition(_loc1_.selectedIndex,true);
             }
             else
             {
-                this.list.selectedIndex = this.list.getFirstSelectablePosition(0,true);
+                _loc1_.selectedIndex = _loc1_.getFirstSelectablePosition(0,true);
             }
         }
 

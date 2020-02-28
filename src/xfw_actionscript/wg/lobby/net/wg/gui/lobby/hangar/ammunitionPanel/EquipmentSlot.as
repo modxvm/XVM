@@ -72,7 +72,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             var _loc4_:* = false;
             var _loc5_:String = null;
             var _loc6_:* = false;
-            var _loc7_:* = 0;
+            var _loc7_:* = false;
+            var _loc8_:* = 0;
             super.draw();
             if(slotData != null && isInvalid(InvalidationType.DATA))
             {
@@ -92,16 +93,21 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                 }
                 _loc5_ = slotData.bgHighlightType;
                 _loc6_ = StringUtils.isNotEmpty(_loc5_);
-                this.equipSlotHighlight.visible = this.equipSlotOverlay.visible = _loc6_;
+                this.equipSlotHighlight.visible = _loc6_;
                 if(_loc6_)
                 {
                     this.equipSlotHighlight.gotoAndStop(_loc5_);
-                    this.equipSlotOverlay.gotoAndStop(_loc5_);
                 }
-                _loc7_ = slotData.countValue;
-                if(_loc7_ > 0 && _loc4_)
+                _loc7_ = StringUtils.isNotEmpty(slotData.overlayType);
+                this.equipSlotOverlay.visible = _loc7_;
+                if(_loc7_)
                 {
-                    this.countTF.text = _loc7_.toString();
+                    this.equipSlotOverlay.gotoAndStop(slotData.overlayType);
+                }
+                _loc8_ = slotData.countValue;
+                if(_loc8_ > 0 && _loc4_)
+                {
+                    this.countTF.text = _loc8_.toString();
                     this.countTF.visible = true;
                 }
                 else

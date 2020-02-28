@@ -120,7 +120,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             this._listItem.setIsIGR(this._vehicleData.isIGR);
             this._listItem.setVehicleIcon(this._vehicleData.vehicleIconName);
             this._listItem.setVehicleName(this._vehicleData.vehicleName);
-            this._listItem.setBadge(this._vehicleData.badgeType);
+            this._listItem.setBadge(this._vehicleData.badgeVO,this._vehicleData.hasSelectedBadge);
             this._listItem.dynamicSquad.setSessionID(this._vehicleData.sessionID);
             this.applyVehicleStatus();
             this.applyPlayerStatus();

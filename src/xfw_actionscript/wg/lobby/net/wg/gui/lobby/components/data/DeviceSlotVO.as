@@ -35,6 +35,8 @@ package net.wg.gui.lobby.components.data
 
         public var bgHighlightType:String = "";
 
+        public var overlayType:String = "";
+
         public var isDisabledBgVisible:Boolean = true;
 
         public var counter:int = -1;

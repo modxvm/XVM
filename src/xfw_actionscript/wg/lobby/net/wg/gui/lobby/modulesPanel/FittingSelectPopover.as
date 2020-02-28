@@ -32,9 +32,9 @@ package net.wg.gui.lobby.modulesPanel
     import net.wg.gui.components.popovers.PopOverConst;
     import net.wg.data.constants.generated.FITTING_TYPES;
     import net.wg.data.constants.Errors;
+    import net.wg.data.constants.Values;
     import flash.events.MouseEvent;
     import flash.display.InteractiveObject;
-    import net.wg.data.constants.Values;
     import scaleform.clik.utils.Padding;
     import flash.display.Sprite;
     import net.wg.infrastructure.interfaces.IWrapper;
@@ -109,12 +109,14 @@ package net.wg.gui.lobby.modulesPanel
             super.configUI();
             this.setEmptyHitArea(this.topSeparator);
             this.setEmptyHitArea(this.bottomSeparator);
+            this.itemsList.canCleanDataProvider = false;
             this.itemsList.setSelectionNavigator(new FittingListSelectionNavigator());
             this.itemsList.addEventListener(ModuleInfoEvent.SHOW_INFO,this.onItemsListShowInfoHandler);
             this.itemsList.addEventListener(DeviceEvent.DEVICE_REMOVE,this.onItemsListDeviceRemoveHandler);
             this.itemsList.addEventListener(DeviceEvent.DEVICE_DESTROY,this.onItemsListDeviceDestroyHandler);
             this.itemsList.addEventListener(DeviceEvent.DEVICE_BUY,this.onItemsListDeviceBuyHandler);
             this.itemsList.addEventListener(DeviceEvent.DEVICE_EQUIP,this.onItemsListDeviceEquipHandler);
+            this.itemsList.addEventListener(DeviceEvent.DEVICE_UPGRADE,this.onItemsListDeviceUpgradeHandler);
             this.itemsList.addEventListener(ListEvent.ITEM_CLICK,this.onItemsListItemClickHandler);
             this.rearmCheckbox.label = MENU.BOOSTERSELECTPOPOVER_REARMCHECKBOXLABEL;
             this.rearmCheckbox.addEventListener(Event.SELECT,this.onRearmCheckboxSelectHandler);
@@ -150,7 +152,9 @@ package net.wg.gui.lobby.modulesPanel
                 if(this._data.tabData)
                 {
                     this.tabBar.dataProvider = this._data.tabData;
+                    this.tabBar.removeEventListener(IndexEvent.INDEX_CHANGE,this.onTabBarIndexChangeHandler);
                     this.tabBar.selectedIndex = this._data.selectedTab;
+                    this.tabBar.addEventListener(IndexEvent.INDEX_CHANGE,this.onTabBarIndexChangeHandler);
                     this.tabBar.validateNow();
                     this.tabBar.visible = true;
                     this.itemsList.y = this._itemListTabBarY;
@@ -168,6 +172,11 @@ package net.wg.gui.lobby.modulesPanel
                 this.itemsList.itemRendererName = _loc1_;
                 this.itemsList.dataProvider = this._data.availableDevices;
                 this.itemsList.selectedIndex = this._data.selectedIndex;
+                this.itemsList.validateNow();
+                if(this._data.scrollToIndex != Values.DEFAULT_INT)
+                {
+                    this.itemsList.scrollToIndex(this._data.scrollToIndex);
+                }
                 _loc2_ = this._data.rearmCheckboxVisible;
                 if(_loc2_)
                 {
@@ -231,6 +240,7 @@ package net.wg.gui.lobby.modulesPanel
             this.itemsList.removeEventListener(ListEvent.ITEM_CLICK,this.onItemsListItemClickHandler);
             this.itemsList.removeEventListener(DeviceEvent.DEVICE_BUY,this.onItemsListDeviceBuyHandler);
             this.itemsList.removeEventListener(DeviceEvent.DEVICE_EQUIP,this.onItemsListDeviceEquipHandler);
+            this.itemsList.removeEventListener(DeviceEvent.DEVICE_UPGRADE,this.onItemsListDeviceUpgradeHandler);
             this.battleAbilitiesButton.removeEventListener(ButtonEvent.CLICK,this.onBattleAbilitiesButtonClickHandler);
             this.rearmCheckbox.removeEventListener(Event.SELECT,this.onRearmCheckboxSelectHandler);
             this._stage.removeEventListener(Event.RESIZE,this.onStageResizeHandler);
@@ -266,6 +276,7 @@ package net.wg.gui.lobby.modulesPanel
             this.bottomSeparator = null;
             this.topSeparator.hitArea = null;
             this.topSeparator = null;
+            this._data.dispose();
             this._data = null;
             this._stage = null;
             this._utils = null;
@@ -340,6 +351,7 @@ package net.wg.gui.lobby.modulesPanel
             dispatchEvent(new Event(Event.RESIZE));
             if(this._listOverlay && this._listOverlay.visible)
             {
+                this._listOverlay.useSmallIcon = this.itemsList.rowCount <= 5;
                 this._listOverlay.x = this.itemsList.x;
                 this._listOverlay.y = this.itemsList.y;
                 this._listOverlay.setSize(this.itemsList.width,this.itemsList.height);
@@ -389,6 +401,11 @@ package net.wg.gui.lobby.modulesPanel
         private function onItemsListDeviceEquipHandler(param1:DeviceEvent) : void
         {
             setVehicleModuleS(param1.deviceId,-1,false);
+        }
+
+        private function onItemsListDeviceUpgradeHandler(param1:DeviceEvent) : void
+        {
+            upgradeVehicleModuleS(param1.deviceId);
         }
 
         private function onItemsListDeviceBuyHandler(param1:DeviceEvent) : void

@@ -125,5 +125,9 @@ package net.wg.gui.components.damageIndicator
         {
             this.updatePosition();
         }
+
+        public function rotateInfo(param1:Number) : void
+        {
+        }
     }
 }

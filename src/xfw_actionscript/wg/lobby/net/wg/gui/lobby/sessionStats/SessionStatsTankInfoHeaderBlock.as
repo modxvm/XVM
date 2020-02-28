@@ -7,6 +7,7 @@ package net.wg.gui.lobby.sessionStats
     import net.wg.gui.lobby.sessionStats.components.SessionStatsTankInfoMainMark;
     import net.wg.gui.lobby.sessionStats.components.SessionStatsTankInfoBackground;
     import net.wg.gui.lobby.sessionStats.data.SessionStatsTankInfoHeaderVO;
+    import net.wg.gui.lobby.sessionStats.helpers.SessionStatsHelper;
     import scaleform.clik.data.DataProvider;
     import net.wg.data.constants.Linkages;
     import scaleform.clik.constants.DirectionMode;
@@ -19,8 +20,6 @@ package net.wg.gui.lobby.sessionStats
         private static const PARAMS_LIST_GAP:int = 7;
 
         private static const MAIN_MARK_GAP:int = 32;
-
-        private static const TOTAL_WIDTH:int = 364;
 
         private static const SMALL_NAME_GAP:int = 36;
 
@@ -91,7 +90,7 @@ package net.wg.gui.lobby.sessionStats
         private function layout() : void
         {
             this.paramsList.validateNow();
-            this.mainMark.x = TOTAL_WIDTH;
+            this.mainMark.x = SessionStatsHelper.TOTAL_WIDTH;
             this.mainMark.y = this.paramsList.y + this.paramsList.height - MAIN_MARK_GAP;
             if(this.mainMark.y < MIN_MAIN_MARK_Y)
             {

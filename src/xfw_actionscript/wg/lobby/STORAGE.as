@@ -13,6 +13,8 @@ package
 
         public static const BUTTONLABEL_PREVIEW:String = "#storage:buttonLabel/preview";
 
+        public static const BUTTONUPGRADE_TOOLTIP_BODY:String = "#storage:buttonUpgrade/tooltip/body";
+
         public static const CARD_CANNOTSELLTITLE:String = "#storage:card/cannotSellTitle";
 
         public static const CARD_VEHICLE_HOVER_MAXADDITIONALPRICELABEL:String = "#storage:card/vehicle/hover/maxAdditionalPriceLabel";

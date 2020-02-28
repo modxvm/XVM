@@ -267,7 +267,7 @@ package net.wg.gui.lobby.battleResults.components
 
         private function onLinkBtnRollOverHandler(param1:MouseEvent) : void
         {
-            this._tooltipMgr.show(this.linkBtn.enabled?TOOLTIPS.QUESTS_LINKBTN_TASK:TOOLTIPS.QUESTS_DISABLELINKBTN_TASK);
+            this._tooltipMgr.show(this.linkBtn.enabled?this._questInfo.linkTooltip:TOOLTIPS.QUESTS_DISABLELINKBTN_TASK);
         }
 
         private function onLinkBtnClickHandler(param1:ButtonEvent) : void

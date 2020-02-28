@@ -266,8 +266,9 @@ package net.wg.gui.lobby.hangar.maintenance
 
         private function update() : void
         {
+            var _loc1_:ModuleVO = null;
             var _loc5_:* = false;
-            var _loc1_:ModuleVO = this.selectedItem;
+            _loc1_ = this.selectedItem;
             this.toBuyDropdown.visible = false;
             this.toBuyTf.visible = false;
             App.utils.asserter.assertFrameExists(_loc1_.moduleLabel,this.moduleType);

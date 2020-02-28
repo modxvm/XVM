@@ -43,12 +43,12 @@ package net.wg.gui.lobby.sessionStats
 
         override public function initLayout() : void
         {
+            super.initLayout();
             var _loc1_:VerticalGroupLayout = new VerticalGroupLayout();
             _loc1_.gap = SessionBattleStatsView.COLLAPSE_GAP;
             list.layout = _loc1_;
             list.itemRendererLinkage = Linkages.SESSION_STATS_PARAM_RENDERER;
             list.addEventListener(DashLineTextItemRendererEvent.TEXT_SIZE_CHANGED,this.onTextSizeChangedHandler);
-            list.addEventListener(Event.RESIZE,this.onListResizeHandler);
         }
 
         override public function setBlockData(param1:Object) : void
@@ -71,7 +71,6 @@ package net.wg.gui.lobby.sessionStats
         override protected function onDispose() : void
         {
             list.removeEventListener(DashLineTextItemRendererEvent.TEXT_SIZE_CHANGED,this.onTextSizeChangedHandler);
-            list.removeEventListener(Event.RESIZE,this.onListResizeHandler);
             this.titleTf = null;
             this.descriptionTf = null;
             this.icon.dispose();
@@ -86,12 +85,7 @@ package net.wg.gui.lobby.sessionStats
             super.onDispose();
         }
 
-        private function onTextSizeChangedHandler(param1:DashLineTextItemRendererEvent) : void
-        {
-            list.invalidateLayout();
-        }
-
-        private function onListResizeHandler(param1:Event) : void
+        override protected function onListResized(param1:Event) : void
         {
             this.descriptionTf.y = this.titleTf.y + this.titleTf.textHeight + DESCRIPTION_GAP;
             list.y = this.descriptionTf.y + this.descriptionTf.textHeight + PARAMS_GAP;
@@ -101,6 +95,11 @@ package net.wg.gui.lobby.sessionStats
             }
             invalidateBlock();
             dispatchEvent(new ToolTipBlockEvent(ToolTipBlockEvent.SIZE_CHANGE,this));
+        }
+
+        private function onTextSizeChangedHandler(param1:DashLineTextItemRendererEvent) : void
+        {
+            list.invalidateLayout();
         }
     }
 }

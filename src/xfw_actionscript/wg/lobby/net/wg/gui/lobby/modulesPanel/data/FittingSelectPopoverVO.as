@@ -25,6 +25,8 @@ package net.wg.gui.lobby.modulesPanel.data
 
         public var selectedIndex:int = -1;
 
+        public var scrollToIndex:int = -1;
+
         public var width:int = -1;
 
         public var rendererName:String = "";

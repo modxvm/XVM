@@ -234,13 +234,14 @@ package net.wg.gui.lobby.epicBattles.views
 
         private function updateLayout() : void
         {
+            var _loc4_:* = NaN;
             var _loc1_:* = this._currentWidth >> 1;
             var _loc2_:* = this._currentHeight >> 1;
             this.titleElement.x = _loc1_;
             this.metaProgressElement.y = _loc2_;
             this.combatReservesElement.y = _loc2_;
             var _loc3_:int = EpicHelper.calculateStaticMargin(this._currentHeight);
-            var _loc4_:Number = _loc3_ + EpicHelper.MAIN_MENU_BUTTON_BAR_HEIGHT;
+            _loc4_ = _loc3_ + EpicHelper.MAIN_MENU_BUTTON_BAR_HEIGHT;
             if(this._isSmallMode)
             {
                 this.combatReservesElement.x = _loc1_ - WINGS_SMALL_MODE_OFFSET;

@@ -24,23 +24,17 @@ package net.wg.gui.lobby.epicBattles.data
 
         public var rankText:String = "";
 
-        public var rankTextBig:String = "";
-
         public var rankSubText:String = "";
 
         public var levelUpText:String = "";
 
-        public var levelUpTextBig:String = "";
-
-        public var maxLevelText:String = "";
-
         public var fameBarVisible:Boolean = true;
-
-        public var maxPrestigeIconVisible:Boolean = true;
 
         public var backgroundImageSrc:String = "";
 
         public var maxLevel:int = 0;
+
+        public var maxLvlReached:Boolean = false;
 
         public function EpicBattlesAfterBattleViewVO(param1:Object = null)
         {

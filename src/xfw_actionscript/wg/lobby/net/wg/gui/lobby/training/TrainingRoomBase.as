@@ -3,6 +3,7 @@ package net.wg.gui.lobby.training
     import net.wg.infrastructure.base.meta.impl.TrainingRoomBaseMeta;
     import net.wg.infrastructure.base.meta.ITrainingRoomBaseMeta;
     import scaleform.clik.controls.CoreList;
+    import net.wg.gui.components.controls.VO.BadgeVisualVO;
     import net.wg.data.VO.TrainingRoomRendererVO;
     import scaleform.clik.interfaces.IDataProvider;
     import net.wg.utils.IScheduler;
@@ -129,21 +130,20 @@ package net.wg.gui.lobby.training
             this._ownerBadgeY = this._ownerY + OWNER_BAGE_Y_OFFSET;
         }
 
-        protected static function checkStatus(param1:CoreList, param2:Number, param3:String, param4:String, param5:String, param6:String, param7:int, param8:int, param9:String) : void
+        protected static function checkStatus(param1:CoreList, param2:Number, param3:String, param4:String, param5:String, param6:String, param7:int, param8:BadgeVisualVO) : void
         {
-            var _loc11_:TrainingRoomRendererVO = null;
-            var _loc10_:IDataProvider = param1.dataProvider;
-            for each(_loc11_ in _loc10_)
+            var _loc10_:TrainingRoomRendererVO = null;
+            var _loc9_:IDataProvider = param1.dataProvider;
+            for each(_loc10_ in _loc9_)
             {
-                if(_loc11_.dbID == param2)
+                if(_loc10_.dbID == param2)
                 {
-                    _loc11_.stateString = param3;
-                    _loc11_.icon = param4;
-                    _loc11_.vShortName = param5;
-                    _loc11_.vLevel = param6;
-                    _loc11_.igrType = param7;
-                    _loc11_.badge = param8;
-                    _loc11_.badgeImgStr = param9;
+                    _loc10_.stateString = param3;
+                    _loc10_.icon = param4;
+                    _loc10_.vShortName = param5;
+                    _loc10_.vLevel = param6;
+                    _loc10_.igrType = param7;
+                    _loc10_.badgeVisualVO = param8;
                     param1.invalidateData();
                     break;
                 }
@@ -232,7 +232,7 @@ package net.wg.gui.lobby.training
 
         override protected function onPopulate() : void
         {
-            var _loc2_:* = false;
+            var _loc1_:* = false;
             super.onPopulate();
             if(canAssignToTeamS(1) || canAssignToTeamS(2) || canChangePlayerTeamS())
             {
@@ -244,8 +244,8 @@ package net.wg.gui.lobby.training
             }
             registerFlashComponentS(this.minimap,Aliases.LOBBY_MINIMAP);
             this.setTeamsInfo();
-            var _loc1_:Boolean = this._voiceChatMgr.getYY();
-            _loc2_ = this._voiceChatMgr.isVOIPEnabledS();
+            _loc1_ = this._voiceChatMgr.getYY();
+            var _loc2_:Boolean = this._voiceChatMgr.isVOIPEnabledS();
             this.arenaVoipSettings.visible = _loc2_ || _loc1_;
             this.arenaVOIPLabel.text = _loc2_ || _loc1_?MENU.TRAINING_INFO_VOICECHAT:Values.EMPTY_STR;
         }
@@ -328,17 +328,16 @@ package net.wg.gui.lobby.training
                 this.owner.y = _loc3_?this._ownerBadgeY:this._ownerY;
                 this._ownerBadgeVisible = _loc3_;
             }
-            this.owner.userVO = new UserVO({
-                "accID":-1,
-                "dbID":-1,
-                "fullName":param1.creatorFullName,
-                "userName":param1.creator,
-                "clanAbbrev":param1.creatorClan,
-                "region":param1.creatorRegion,
-                "igrType":param1.creatorIgrType,
-                "badge":_loc2_,
-                "badgeImgStr":param1.badgeImgStr
-            });
+            this.owner.userVO = new UserVO(null);
+            var _loc4_:UserVO = this.owner.userVO;
+            _loc4_.accID = -1;
+            _loc4_.dbID = -1;
+            _loc4_.fullName = param1.creatorFullName;
+            _loc4_.userName = param1.creator;
+            _loc4_.clanAbbrev = param1.creatorClan;
+            _loc4_.region = param1.creatorRegion;
+            _loc4_.igrType = param1.creatorIgrType;
+            _loc4_.badgeVisualVO = param1.badgeVisualVO;
             this.minimap.setMapS(param1.arenaTypeID);
             this.description.position = 0;
             this.description.htmlText = param1.description;
@@ -378,19 +377,19 @@ package net.wg.gui.lobby.training
             this.observerButton.selected = param1;
         }
 
-        public function as_setPlayerStateInOther(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int, param7:int, param8:String) : void
+        override protected function setPlayerStateInOther(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int, param7:BadgeVisualVO) : void
         {
-            checkStatus(this.other,param1,param2,param3,param4,param5,param6,param7,param8);
+            checkStatus(this.other,param1,param2,param3,param4,param5,param6,param7);
         }
 
-        public function as_setPlayerStateInTeam1(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int, param7:int, param8:String) : void
+        override protected function setPlayerStateInTeam1(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int, param7:BadgeVisualVO) : void
         {
-            this.doCheckStatusTeam1(param1,param2,param3,param4,param5,param6,param7,param8);
+            this.doCheckStatusTeam1(param1,param2,param3,param4,param5,param6,param7);
         }
 
-        public function as_setPlayerStateInTeam2(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int, param7:int, param8:String) : void
+        override protected function setPlayerStateInTeam2(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int, param7:BadgeVisualVO) : void
         {
-            this.doCheckStatusTeam2(param1,param2,param3,param4,param5,param6,param7,param8);
+            this.doCheckStatusTeam2(param1,param2,param3,param4,param5,param6,param7);
         }
 
         public function as_startCoolDownObserver(param1:Number) : void
@@ -492,11 +491,11 @@ package net.wg.gui.lobby.training
         {
         }
 
-        protected function doCheckStatusTeam1(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int, param7:int, param8:String) : void
+        protected function doCheckStatusTeam1(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int, param7:BadgeVisualVO) : void
         {
         }
 
-        protected function doCheckStatusTeam2(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int, param7:int, param8:String) : void
+        protected function doCheckStatusTeam2(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int, param7:BadgeVisualVO) : void
         {
         }
 

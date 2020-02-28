@@ -36,7 +36,7 @@ package net.wg.gui.lobby.confirmModuleWindow
             _loc2_.setValueLabel(_loc1_.moduleLabel,_loc1_.level);
             _loc2_.extraIconSource = _loc1_.extraModuleInfo;
             _loc2_.setHighlightType(_loc1_.highlightType);
-            _loc2_.setOverlayType(_loc1_.highlightType);
+            _loc2_.setOverlayType(_loc1_.overlayType);
             content.setIcon(_loc2_);
             super.applyData();
         }

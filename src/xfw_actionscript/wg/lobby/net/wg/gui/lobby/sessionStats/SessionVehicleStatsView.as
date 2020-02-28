@@ -15,9 +15,9 @@ package net.wg.gui.lobby.sessionStats
     public class SessionVehicleStatsView extends SessionVehicleStatsViewMeta implements IResizableContent
     {
 
-        private static const GAP:int = 10;
+        private static const RENDERER_HEIGHT:int = 31;
 
-        private static const BOTTOM_OFFSET:int = 7;
+        private static const GAP:int = 10;
 
         public var headerName:TextField = null;
 
@@ -102,7 +102,8 @@ package net.wg.gui.lobby.sessionStats
 
         public function setViewSize(param1:Number, param2:Number) : void
         {
-            this.vehiclesMask.height = param2 - this.vehicles.y - BOTTOM_OFFSET;
+            var _loc3_:int = param2 - this.vehicles.y;
+            this.vehiclesMask.height = _loc3_ - _loc3_ % (RENDERER_HEIGHT + GAP);
             this.vehiclesMask.width = param1;
         }
 

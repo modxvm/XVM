@@ -9,12 +9,6 @@ package net.wg.gui.lobby.hangar.data
 
         private static const QUESTS_FIELD:String = "quests";
 
-        public var tankType:String = "";
-
-        public var tankInfo:String = "";
-
-        public var isPremIGR:Boolean = false;
-
         public var isVisible:Boolean = false;
 
         private var _questsGroups:Vector.<HeaderQuestGroupVO> = null;

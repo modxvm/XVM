@@ -74,21 +74,6 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.battle.battleloading.vo.VehStatusTeamVO;
     import net.wg.gui.battle.battleloading.vo.VehStatusVO;
     import net.wg.gui.battle.battleloading.vo.VisualTipInfoVO;
-    import net.wg.gui.battle.bob.BobBattleLoading;
-    import net.wg.gui.battle.bob.BobBattleLoadingForm;
-    import net.wg.gui.battle.bob.BobBattlePage;
-    import net.wg.gui.battle.bob.BobRendererContainer;
-    import net.wg.gui.battle.bob.BobTablePlayerItemRenderer;
-    import net.wg.gui.battle.bob.data.BobBattleStatisticDataController;
-    import net.wg.gui.battle.bob.data.BobDAAPIVehicleInfoVO;
-    import net.wg.gui.battle.bob.data.BobDAAPIVehiclesDataVO;
-    import net.wg.gui.battle.bob.stats.components.playersPanel.list.BobPlayersListHeader;
-    import net.wg.gui.battle.bob.stats.components.playersPanel.list.BobPlayersListHeaderLabels;
-    import net.wg.gui.battle.bob.stats.components.playersPanel.list.BobPlayersPanelList;
-    import net.wg.gui.battle.bob.stats.components.playersPanel.list.BobPlayersPanelListItem;
-    import net.wg.gui.battle.bob.stats.components.playersPanel.list.BobPlayersPanelListItemHolder;
-    import net.wg.gui.battle.bob.stats.components.playersPanel.list.BobPlayersPanelListLeft;
-    import net.wg.gui.battle.bob.stats.components.playersPanel.list.BobPlayersPanelListRight;
     import net.wg.gui.battle.components.BattleAtlasSprite;
     import net.wg.gui.battle.components.BattleDAAPIComponent;
     import net.wg.gui.battle.components.BattleDisplayable;
@@ -421,6 +406,9 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.battle.views.epicReinforcementPanel.EpicReinforcementPanel;
     import net.wg.gui.battle.views.epicRespawnView.EpicRespawnView;
     import net.wg.gui.battle.views.epicRespawnView.components.EpicRespawnDeployButtonGroup;
+    import net.wg.gui.battle.views.epicRespawnView.components.EpicRespawnMapEntriesContainer;
+    import net.wg.gui.battle.views.epicRespawnView.components.EpicRespawnPoint;
+    import net.wg.gui.battle.views.epicRespawnView.data.RespawnPointVO;
     import net.wg.gui.battle.views.epicRespawnView.events.EpicRespawnEvent;
     import net.wg.gui.battle.views.epicScorePanel.EpicScorePanel;
     import net.wg.gui.battle.views.epicScorePanel.components.HeadquarterEntryAnimated;
@@ -701,6 +689,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.infrastructure.base.BaseBattleDAAPIComponent;
     import net.wg.infrastructure.base.meta.IBaseBattleDAAPIComponentMeta;
     import net.wg.infrastructure.base.meta.IBaseBattleLoadingMeta;
+    import net.wg.infrastructure.base.meta.IBasePostmortemPanelMeta;
     import net.wg.infrastructure.base.meta.IBattleDAAPIComponentMeta;
     import net.wg.infrastructure.base.meta.IBattleEndWarningPanelMeta;
     import net.wg.infrastructure.base.meta.IBattleHintPanelMeta;
@@ -717,7 +706,6 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.infrastructure.base.meta.IBCOverlayFinalWindowMeta;
     import net.wg.infrastructure.base.meta.IBCPrebattleHintsMeta;
     import net.wg.infrastructure.base.meta.IBCSecondaryHintMeta;
-    import net.wg.infrastructure.base.meta.IBobBattleLoadingMeta;
     import net.wg.infrastructure.base.meta.IConsumablesPanelMeta;
     import net.wg.infrastructure.base.meta.IDamageInfoPanelMeta;
     import net.wg.infrastructure.base.meta.IDamagePanelMeta;
@@ -920,36 +908,6 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_BATTLE_BATTLELOADING_VO_VEHSTATUSVO:Class = VehStatusVO;
 
         public static const NET_WG_GUI_BATTLE_BATTLELOADING_VO_VISUALTIPINFOVO:Class = VisualTipInfoVO;
-
-        public static const NET_WG_GUI_BATTLE_BOB_BOBBATTLELOADING:Class = BobBattleLoading;
-
-        public static const NET_WG_GUI_BATTLE_BOB_BOBBATTLELOADINGFORM:Class = BobBattleLoadingForm;
-
-        public static const NET_WG_GUI_BATTLE_BOB_BOBBATTLEPAGE:Class = BobBattlePage;
-
-        public static const NET_WG_GUI_BATTLE_BOB_BOBRENDERERCONTAINER:Class = BobRendererContainer;
-
-        public static const NET_WG_GUI_BATTLE_BOB_BOBTABLEPLAYERITEMRENDERER:Class = BobTablePlayerItemRenderer;
-
-        public static const NET_WG_GUI_BATTLE_BOB_DATA_BOBBATTLESTATISTICDATACONTROLLER:Class = BobBattleStatisticDataController;
-
-        public static const NET_WG_GUI_BATTLE_BOB_DATA_BOBDAAPIVEHICLEINFOVO:Class = BobDAAPIVehicleInfoVO;
-
-        public static const NET_WG_GUI_BATTLE_BOB_DATA_BOBDAAPIVEHICLESDATAVO:Class = BobDAAPIVehiclesDataVO;
-
-        public static const NET_WG_GUI_BATTLE_BOB_STATS_COMPONENTS_PLAYERSPANEL_LIST_BOBPLAYERSLISTHEADER:Class = BobPlayersListHeader;
-
-        public static const NET_WG_GUI_BATTLE_BOB_STATS_COMPONENTS_PLAYERSPANEL_LIST_BOBPLAYERSLISTHEADERLABELS:Class = BobPlayersListHeaderLabels;
-
-        public static const NET_WG_GUI_BATTLE_BOB_STATS_COMPONENTS_PLAYERSPANEL_LIST_BOBPLAYERSPANELLIST:Class = BobPlayersPanelList;
-
-        public static const NET_WG_GUI_BATTLE_BOB_STATS_COMPONENTS_PLAYERSPANEL_LIST_BOBPLAYERSPANELLISTITEM:Class = BobPlayersPanelListItem;
-
-        public static const NET_WG_GUI_BATTLE_BOB_STATS_COMPONENTS_PLAYERSPANEL_LIST_BOBPLAYERSPANELLISTITEMHOLDER:Class = BobPlayersPanelListItemHolder;
-
-        public static const NET_WG_GUI_BATTLE_BOB_STATS_COMPONENTS_PLAYERSPANEL_LIST_BOBPLAYERSPANELLISTLEFT:Class = BobPlayersPanelListLeft;
-
-        public static const NET_WG_GUI_BATTLE_BOB_STATS_COMPONENTS_PLAYERSPANEL_LIST_BOBPLAYERSPANELLISTRIGHT:Class = BobPlayersPanelListRight;
 
         public static const NET_WG_GUI_BATTLE_COMPONENTS_BATTLEATLASSPRITE:Class = BattleAtlasSprite;
 
@@ -1615,6 +1573,12 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_BATTLE_VIEWS_EPICRESPAWNVIEW_COMPONENTS_EPICRESPAWNDEPLOYBUTTONGROUP:Class = EpicRespawnDeployButtonGroup;
 
+        public static const NET_WG_GUI_BATTLE_VIEWS_EPICRESPAWNVIEW_COMPONENTS_EPICRESPAWNMAPENTRIESCONTAINER:Class = EpicRespawnMapEntriesContainer;
+
+        public static const NET_WG_GUI_BATTLE_VIEWS_EPICRESPAWNVIEW_COMPONENTS_EPICRESPAWNPOINT:Class = EpicRespawnPoint;
+
+        public static const NET_WG_GUI_BATTLE_VIEWS_EPICRESPAWNVIEW_DATA_RESPAWNPOINTVO:Class = RespawnPointVO;
+
         public static const NET_WG_GUI_BATTLE_VIEWS_EPICRESPAWNVIEW_EVENTS_EPICRESPAWNEVENT:Class = EpicRespawnEvent;
 
         public static const NET_WG_GUI_BATTLE_VIEWS_EPICSCOREPANEL_EPICSCOREPANEL:Class = EpicScorePanel;
@@ -2175,6 +2139,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IBASEBATTLELOADINGMETA:Class = IBaseBattleLoadingMeta;
 
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IBASEPOSTMORTEMPANELMETA:Class = IBasePostmortemPanelMeta;
+
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IBATTLEDAAPICOMPONENTMETA:Class = IBattleDAAPIComponentMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IBATTLEENDWARNINGPANELMETA:Class = IBattleEndWarningPanelMeta;
@@ -2206,8 +2172,6 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IBCPREBATTLEHINTSMETA:Class = IBCPrebattleHintsMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IBCSECONDARYHINTMETA:Class = IBCSecondaryHintMeta;
-
-        public static const NET_WG_INFRASTRUCTURE_BASE_META_IBOBBATTLELOADINGMETA:Class = IBobBattleLoadingMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_ICONSUMABLESPANELMETA:Class = IConsumablesPanelMeta;
 
@@ -2307,6 +2271,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BASEBATTLELOADINGMETA:Class = BaseBattleLoadingMeta;
 
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BASEPOSTMORTEMPANELMETA:Class = BasePostmortemPanelMeta;
+
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BATTLEDAAPICOMPONENTMETA:Class = BattleDAAPIComponentMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BATTLEENDWARNINGPANELMETA:Class = BattleEndWarningPanelMeta;
@@ -2338,8 +2304,6 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BCPREBATTLEHINTSMETA:Class = BCPrebattleHintsMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BCSECONDARYHINTMETA:Class = BCSecondaryHintMeta;
-
-        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BOBBATTLELOADINGMETA:Class = BobBattleLoadingMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CONSUMABLESPANELMETA:Class = ConsumablesPanelMeta;
 

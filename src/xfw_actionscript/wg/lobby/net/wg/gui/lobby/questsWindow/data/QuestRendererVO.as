@@ -57,6 +57,8 @@ package net.wg.gui.lobby.questsWindow.data
 
         public var newSubtasksCount:int;
 
+        public var linkTooltip:String = "";
+
         public function QuestRendererVO(param1:Object = null)
         {
             super(param1);
@@ -69,7 +71,7 @@ package net.wg.gui.lobby.questsWindow.data
             {
                 return false;
             }
-            return this.rendererType == _loc2_.rendererType && this.isSelectable == _loc2_.isSelectable && this.bckgrImage == _loc2_.bckgrImage && this.showBckgrImage == _loc2_.showBckgrImage && this.tooltip == _loc2_.tooltip && this.detailsLinkage == _loc2_.detailsLinkage && this.detailsPyAlias == _loc2_.detailsPyAlias && this.isNew == _loc2_.isNew && this.status == _loc2_.status && this.IGR == _loc2_.IGR && this.taskType == _loc2_.taskType && this.description == _loc2_.description && this.timerDescription == _loc2_.timerDescription && this.tasksCount == _loc2_.tasksCount && this.progrBarType == _loc2_.progrBarType && this.maxProgrVal == _loc2_.maxProgrVal && this.currentProgrVal == _loc2_.currentProgrVal && this.questID == _loc2_.questID && compare(this.progrTooltip,_loc2_.progrTooltip) && this.eventType == _loc2_.eventType && this.isTitle == _loc2_.isTitle && this.isOpen == _loc2_.isOpen && this.newSubtasksCount == _loc2_.newSubtasksCount && this.isAvailable == _loc2_.isAvailable;
+            return this.rendererType == _loc2_.rendererType && this.isSelectable == _loc2_.isSelectable && this.bckgrImage == _loc2_.bckgrImage && this.showBckgrImage == _loc2_.showBckgrImage && this.tooltip == _loc2_.tooltip && this.detailsLinkage == _loc2_.detailsLinkage && this.detailsPyAlias == _loc2_.detailsPyAlias && this.isNew == _loc2_.isNew && this.status == _loc2_.status && this.IGR == _loc2_.IGR && this.taskType == _loc2_.taskType && this.description == _loc2_.description && this.timerDescription == _loc2_.timerDescription && this.tasksCount == _loc2_.tasksCount && this.progrBarType == _loc2_.progrBarType && this.maxProgrVal == _loc2_.maxProgrVal && this.currentProgrVal == _loc2_.currentProgrVal && this.questID == _loc2_.questID && compare(this.progrTooltip,_loc2_.progrTooltip) && this.eventType == _loc2_.eventType && this.isTitle == _loc2_.isTitle && this.isOpen == _loc2_.isOpen && this.newSubtasksCount == _loc2_.newSubtasksCount && this.isAvailable == _loc2_.isAvailable && this.linkTooltip == _loc2_.linkTooltip;
         }
 
         override protected function onDispose() : void

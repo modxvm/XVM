@@ -21,6 +21,8 @@ package
 
         public static const POPOVER_LABEL_HIDDEN:String = "#tank_carousel_filter:popover/label/hidden";
 
+        public static const POPOVER_LABEL_PROGRESSIONS:String = "#tank_carousel_filter:popover/label/progressions";
+
         public static const POPOVER_LABEL_SEARCHNAMEVEHICLE:String = "#tank_carousel_filter:popover/label/searchNameVehicle";
 
         public static const POPOVER_CHECKBOX_PREMIUM:String = "#tank_carousel_filter:popover/checkbox/premium";
@@ -80,6 +82,14 @@ package
         public static const TOOLTIP_GAMEMODE_HEADER:String = "#tank_carousel_filter:tooltip/gameMode/header";
 
         public static const TOOLTIP_GAMEMODE_BODY:String = "#tank_carousel_filter:tooltip/gameMode/body";
+
+        public static const TOOLTIP_ISCOMMONPROGRESSION_HEADER:String = "#tank_carousel_filter:tooltip/isCommonProgression/header";
+
+        public static const TOOLTIP_ISCOMMONPROGRESSION_BODY:String = "#tank_carousel_filter:tooltip/isCommonProgression/body";
+
+        public static const TOOLTIP_ISCOMPETITIVEPROGRESSION_HEADER:String = "#tank_carousel_filter:tooltip/isCompetitiveProgression/header";
+
+        public static const TOOLTIP_ISCOMPETITIVEPROGRESSION_BODY:String = "#tank_carousel_filter:tooltip/isCompetitiveProgression/body";
 
         public static const TOOLTIP_SEARCHINPUT_HEADER:String = "#tank_carousel_filter:tooltip/searchInput/header";
 

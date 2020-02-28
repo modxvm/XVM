@@ -27,6 +27,10 @@ package net.wg.data.constants.generated
 
         public static const MISSIONS_MARATHON_VIEW_LINKAGE:String = "MissionsMarathonViewUI";
 
+        public static const MISSIONS_PREMIUM_VIEW_PY_ALIAS:String = "MissionsPremiumView";
+
+        public static const MISSIONS_PREMIUM_VIEW_LINKAGE:String = "MissionsPremiumViewUI";
+
         public static const MISSIONS_GROUPED_VIEW_PY_ALIAS:String = "MissionsGroupedView";
 
         public static const MISSIONS_GROUPED_VIEW_LINKAGE:String = "MissionsGroupedViewUI";
@@ -42,6 +46,14 @@ package net.wg.data.constants.generated
         public static const CURRENT_VEHICLE_MISSIONS_VIEW_PY_ALIAS:String = "CurrentVehicleMissionsView";
 
         public static const CURRENT_VEHICLE_MISSIONS_VIEW_LINKAGE:String = "CurrentVehicleMissionsViewUI";
+
+        public static const BATTLE_PASS_MISSIONS_VIEW_PY_ALIAS:String = "BattlePassMissionsView";
+
+        public static const BATTLE_PASS_MISSIONS_VIEW_LINKAGE:String = "BattlePassMissionsViewUI";
+
+        public static const OLD_BATTLE_PASS_MISSIONS_VIEW_PY_ALIAS:String = "OldBattlePassMissionsView";
+
+        public static const OLD_BATTLE_PASS_MISSIONS_VIEW_LINKAGE:String = "OldBattlePassMissionsViewUI";
 
         public static const MISSIONS_FILTER_POPOVER_ALIAS:String = "MissionsFilterPopover";
 

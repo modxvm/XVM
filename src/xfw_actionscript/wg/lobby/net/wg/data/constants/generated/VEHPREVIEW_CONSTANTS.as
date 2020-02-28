@@ -7,7 +7,7 @@ package net.wg.data.constants.generated
 
         public static const BUYING_PANEL_LINKAGE:String = "VehiclePreview20BuyingPanelUI";
 
-        public static const FRONTLINE_BUYING_PANEL_LINKAGE:String = "VehiclePreview20FrontlineBuyingPanelUI";
+        public static const EVENT_PROGRESSION_BUYING_PANEL_LINKAGE:String = "VehiclePreview20EventProgressionBuyingPanelUI";
 
         public static const TRADE_IN_BUYING_PANEL_LINKAGE:String = "VehiclePreview20TradeInBuyingPanelUI";
 
@@ -33,7 +33,7 @@ package net.wg.data.constants.generated
 
         public static const BUYING_PANEL_PY_ALIAS:String = "vehPreviewBuyingPanel";
 
-        public static const FRONTLINE_BUYING_PANEL_PY_ALIAS:String = "vehPreviewFrontlineBuyingPanel";
+        public static const EVENT_PROGRESSION_BUYING_PANEL_PY_ALIAS:String = "vehPreviewEventProgressionBuyingPanel";
 
         public static const TRADE_IN_BUYING_PANEL_PY_ALIAS:String = "vehPreviewTradeInBuyingPanel";
 

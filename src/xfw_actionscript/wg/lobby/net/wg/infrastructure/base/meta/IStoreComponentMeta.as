@@ -15,6 +15,8 @@ package net.wg.infrastructure.base.meta
 
         function onAddVehToCompareS(param1:String) : void;
 
+        function onUpgradeModuleS(param1:int) : void;
+
         function as_initFiltersData(param1:Array, param2:String) : void;
 
         function as_completeInit() : void;

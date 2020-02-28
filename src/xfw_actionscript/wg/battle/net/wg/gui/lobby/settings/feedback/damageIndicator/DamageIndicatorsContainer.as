@@ -31,26 +31,27 @@ package net.wg.gui.lobby.settings.feedback.damageIndicator
             this.extendedMc = null;
         }
 
-        public function updateSettings(param1:Boolean, param2:Boolean, param3:Boolean) : void
+        public function updateSettings(param1:Boolean, param2:Boolean, param3:Boolean, param4:Boolean) : void
         {
-            var _loc4_:* = 0;
+            var _loc5_:* = 0;
             this.extendedMc.visible = !param1;
             if(!param1)
             {
                 if(param2 != this._isWithValue || !this._isInitialized)
                 {
-                    _loc4_ = 0;
-                    while(_loc4_ < INDICATOR_COUNT)
+                    _loc5_ = 0;
+                    while(_loc5_ < INDICATOR_COUNT)
                     {
-                        if(this._tfWithArrow[_loc4_])
+                        if(this._tfWithArrow[_loc5_])
                         {
-                            this._tfWithArrow[_loc4_].visible = param2;
+                            this._tfWithArrow[_loc5_].visible = param2;
                         }
-                        _loc4_++;
+                        _loc5_++;
                     }
                 }
                 this.extendedMc.damageModuleTF.visible = param3 && param2;
                 this.extendedMc.critTF.visible = param3;
+                this.extendedMc.allyTF.visible = param4;
                 this._isInitialized = true;
                 this._isWithValue = param2;
             }

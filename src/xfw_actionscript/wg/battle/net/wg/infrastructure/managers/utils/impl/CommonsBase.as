@@ -51,6 +51,8 @@ package net.wg.infrastructure.managers.utils.impl
 
         protected static const IMG_TAG_OPEN_PREMIUM:String = "<IMG SRC=\"img://gui/maps/icons/library/premium_small.png\" width=\"34\" height=\"16\" vspace=\"";
 
+        protected static const REFERRAL_IMG_TAG:String = "<IMG SRC=\"img://gui/maps/icons/referral/referralSmallHand.png\" width=\"16\" height=\"16\" vspace=\"-4\"/>";
+
         protected static const CLAN_TAG_OPEN:String = "[";
 
         protected static const CLAN_TAG_CLOSE:String = "]";
@@ -134,9 +136,9 @@ package net.wg.infrastructure.managers.utils.impl
             throw new AbstractException(Errors.ABSTRACT_INVOKE);
         }
 
-        public function getUserProps(param1:String, param2:String = null, param3:String = null, param4:int = 0, param5:Array = null, param6:int = 0, param7:String = "", param8:String = "") : IUserProps
+        public function getUserProps(param1:String, param2:String = null, param3:String = null, param4:int = 0, param5:Array = null, param6:String = "") : IUserProps
         {
-            return new UserProps(param1,param2,param3,param4,param5,param6,param7,param8);
+            return new UserProps(param1,param2,param3,param4,param5,param6);
         }
 
         public function initTabIndex(param1:Vector.<InteractiveObject>) : void
@@ -499,24 +501,18 @@ class UserProps extends Object implements IUserProps
 
     private var _tags:Array;
 
-    private var _badge:int = 0;
-
-    private var _badgeImgStr:String = "";
-
     private var _isTeamKiller:Boolean = false;
 
-    function UserProps(param1:String, param2:String, param3:String, param4:int, param5:Array = null, param6:int = 0, param7:String = "", param8:String = "")
+    function UserProps(param1:String, param2:String, param3:String, param4:int, param5:Array = null, param6:String = "")
     {
         this._tags = [];
         super();
-        this._fakeName = param8;
+        this._fakeName = param6;
         this._userName = param1;
         this._clanAbbrev = param2;
         this._region = param3;
         this._igrType = param4;
         this._tags = param5;
-        this._badge = param6;
-        this._badgeImgStr = param7;
     }
 
     public function get fakeName() : String
@@ -617,26 +613,6 @@ class UserProps extends Object implements IUserProps
     public function set tags(param1:Array) : void
     {
         this._tags = param1;
-    }
-
-    public function get badge() : int
-    {
-        return this._badge;
-    }
-
-    public function set badge(param1:int) : void
-    {
-        this._badge = param1;
-    }
-
-    public function get badgeImgStr() : String
-    {
-        return this._badgeImgStr;
-    }
-
-    public function set badgeImgStr(param1:String) : void
-    {
-        this._badgeImgStr = param1;
     }
 
     public function get isTeamKiller() : Boolean

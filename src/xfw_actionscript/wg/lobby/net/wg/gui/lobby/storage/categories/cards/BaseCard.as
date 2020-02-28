@@ -9,6 +9,7 @@ package net.wg.gui.lobby.storage.categories.cards
     import net.wg.gui.components.controls.IconText;
     import flash.text.TextField;
     import net.wg.gui.components.controls.SoundButtonEx;
+    import net.wg.gui.components.controls.ButtonIconNormal;
     import net.wg.gui.components.controls.Image;
     import flash.display.Sprite;
     import scaleform.clik.motion.Tween;
@@ -19,6 +20,7 @@ package net.wg.gui.lobby.storage.categories.cards
     import scaleform.clik.constants.InvalidationType;
     import flash.geom.Point;
     import net.wg.gui.components.controls.VO.PriceVO;
+    import net.wg.data.constants.Linkages;
     import net.wg.data.constants.generated.SLOT_HIGHLIGHT_TYPES;
     import scaleform.clik.core.UIComponent;
     import net.wg.infrastructure.managers.ITooltipMgr;
@@ -64,6 +66,10 @@ package net.wg.gui.lobby.storage.categories.cards
 
         private static const FLAG_HOVER_ALPHA:Number = 0.7;
 
+        private static const UPGRADE_BUTTON_WIDTH:int = 30;
+
+        private static const GAP_BUTTONS:int = -5;
+
         public var inInventoryIcon:MovieClip;
 
         public var discountIcon:MovieClip;
@@ -83,6 +89,8 @@ package net.wg.gui.lobby.storage.categories.cards
         public var cannotSellIcon:MovieClip;
 
         public var sellButton:SoundButtonEx;
+
+        public var upgradeButton:ButtonIconNormal;
 
         public var image:Image;
 
@@ -140,6 +148,11 @@ package net.wg.gui.lobby.storage.categories.cards
             this.equipmentType = null;
             this.sellButton.dispose();
             this.sellButton = null;
+            if(this.upgradeButton != null)
+            {
+                this.upgradeButton.dispose();
+                this.upgradeButton = null;
+            }
             this.image.removeEventListener(Event.CHANGE,this.onImageChangeHandler);
             this.image.dispose();
             this.image = null;
@@ -278,9 +291,14 @@ package net.wg.gui.lobby.storage.categories.cards
                     this.discountIcon.visible = _loc1_ && this._data.enabled;
                 }
                 this.sellButton.visible = this._data.enabled;
+                this.createUpgradeButton();
                 if(this._resetViewOnDataChange)
                 {
                     this.sellButton.alpha = 0;
+                    if(this._data.upgradable)
+                    {
+                        this.upgradeButton.alpha = 0;
+                    }
                     this._overlay.alpha = 0;
                 }
                 invalidateSize();
@@ -356,6 +374,12 @@ package net.wg.gui.lobby.storage.categories.cards
                 }
                 this.sellButton.x = _loc3_.right - this.sellButton.width >> 0;
                 this.sellButton.y = _loc3_.bottom - this.sellButton.height >> 0;
+                this.sellButton.validateNow();
+                if(this._data.upgradable)
+                {
+                    this.upgradeButton.x = this.sellButton.x - this.upgradeButton.width + GAP_BUTTONS;
+                    this.upgradeButton.y = this.sellButton.y;
+                }
                 this.renderEquipmentType();
                 this.onImageComplete();
             }
@@ -474,6 +498,13 @@ package net.wg.gui.lobby.storage.categories.cards
                     "delay":ROLL_OVER_ANIMATION_DELAY + FIRST_ANIMATION_DURATION
                 }));
             }
+            if(this._data.upgradable)
+            {
+                _loc2_.push(new Tween(FIRST_ANIMATION_DURATION,this.upgradeButton,{"alpha":1},{
+                    "fastTransform":false,
+                    "delay":ROLL_OVER_ANIMATION_DELAY + FIRST_ANIMATION_DURATION
+                }));
+            }
             return _loc2_;
         }
 
@@ -488,6 +519,10 @@ package net.wg.gui.lobby.storage.categories.cards
             if(this.sellButton.visible)
             {
                 _loc2_.push(new Tween(FIRST_ANIMATION_DURATION,this.sellButton,{"alpha":0},{"fastTransform":false}));
+            }
+            if(this._data.upgradable)
+            {
+                _loc2_.push(new Tween(FIRST_ANIMATION_DURATION,this.upgradeButton,{"alpha":0},{"fastTransform":false}));
             }
             if(this.equipmentType)
             {
@@ -577,6 +612,22 @@ package net.wg.gui.lobby.storage.categories.cards
                 _loc1_.dispose();
             }
             this._tweens.length = 0;
+        }
+
+        private function createUpgradeButton() : void
+        {
+            var _loc1_:* = 0;
+            if(this.upgradeButton == null)
+            {
+                this.upgradeButton = App.utils.classFactory.getComponent(Linkages.BUTTON_ICON_NORMAL,ButtonIconNormal);
+                this.upgradeButton.width = UPGRADE_BUTTON_WIDTH;
+                this.upgradeButton.alpha = 0;
+                this.upgradeButton.iconSource = RES_ICONS.MAPS_ICONS_LIBRARY_TROPHY_UPGRADE_ICON;
+                _loc1_ = getChildIndex(this.sellButton);
+                addChildAt(this.upgradeButton,_loc1_);
+            }
+            this.upgradeButton.visible = this._data.upgradable;
+            this.upgradeButton.tooltip = this._data.upgradeButtonTooltip;
         }
 
         private function renderEquipmentType() : void
@@ -669,6 +720,10 @@ package net.wg.gui.lobby.storage.categories.cards
                 {
                     dispatchEvent(new CardEvent(CardEvent.SHOW_CONTEXT_MENU,this._data));
                 }
+            }
+            else if(param1.target == this.upgradeButton)
+            {
+                dispatchEvent(new CardEvent(CardEvent.UPGRADE,this._data));
             }
             else if(this._data.enabled)
             {

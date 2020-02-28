@@ -37,10 +37,10 @@ package net.wg.infrastructure.base.meta.impl
             this.onHideTooltip(param1);
         }
 
-        public function onCreateWulfTooltipS(param1:String, param2:Array, param3:int, param4:int) : void
+        public function onCreateWulfTooltipS(param1:String, param2:Array, param3:int, param4:int, param5:Boolean = false) : void
         {
             App.utils.asserter.assertNotNull(this.onCreateWulfTooltip,"onCreateWulfTooltip" + Errors.CANT_NULL);
-            this.onCreateWulfTooltip(param1,param2,param3,param4);
+            this.onCreateWulfTooltip(param1,param2,param3,param4,param5);
         }
     }
 }

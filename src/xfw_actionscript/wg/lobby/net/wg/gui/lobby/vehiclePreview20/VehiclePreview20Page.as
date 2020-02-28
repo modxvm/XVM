@@ -26,7 +26,7 @@ package net.wg.gui.lobby.vehiclePreview20
     import flash.ui.Keyboard;
     import flash.events.KeyboardEvent;
     import net.wg.gui.lobby.vehiclePreview20.buyingPanel.VPBuyingPanel;
-    import net.wg.gui.lobby.vehiclePreview20.buyingPanel.VPFrontlineBuyingPanel;
+    import net.wg.gui.lobby.vehiclePreview20.buyingPanel.VPEventProgressionBuyingPanel;
     import net.wg.gui.lobby.vehiclePreview20.buyingPanel.VPTradeInBuyingPanel;
     import flash.events.Event;
     import scaleform.clik.constants.InvalidationType;
@@ -84,7 +84,7 @@ package net.wg.gui.lobby.vehiclePreview20
 
         public var background:Sprite;
 
-        public var frontlineBg:Sprite;
+        public var eventProgressionBg:Sprite;
 
         public var compareBlock:CompareBlock;
 
@@ -187,10 +187,10 @@ package net.wg.gui.lobby.vehiclePreview20
             this._stage.dispatchEvent(new LobbyEvent(LobbyEvent.REGISTER_DRAGGING));
             App.gameInputMgr.setKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.onEscapeKeyUpHandler,true);
             var _loc1_:* = this.bottomPanel is VPBuyingPanel;
-            var _loc2_:* = this.bottomPanel is VPFrontlineBuyingPanel;
+            var _loc2_:* = this.bottomPanel is VPEventProgressionBuyingPanel;
             var _loc3_:* = this.bottomPanel is VPTradeInBuyingPanel;
             this.bottomPanel.alpha = 0;
-            this.frontlineBg.visible = _loc2_;
+            this.eventProgressionBg.visible = _loc2_;
             if(_loc1_)
             {
                 registerFlashComponentS(VPBuyingPanel(this.bottomPanel),VEHPREVIEW_CONSTANTS.BUYING_PANEL_PY_ALIAS);
@@ -198,7 +198,7 @@ package net.wg.gui.lobby.vehiclePreview20
             }
             else if(_loc2_)
             {
-                registerFlashComponentS(VPFrontlineBuyingPanel(this.bottomPanel),VEHPREVIEW_CONSTANTS.FRONTLINE_BUYING_PANEL_PY_ALIAS);
+                registerFlashComponentS(VPEventProgressionBuyingPanel(this.bottomPanel),VEHPREVIEW_CONSTANTS.EVENT_PROGRESSION_BUYING_PANEL_PY_ALIAS);
             }
             else if(_loc3_)
             {
@@ -244,7 +244,7 @@ package net.wg.gui.lobby.vehiclePreview20
             this.background = null;
             this.fadingPanels = null;
             this.listDesc = null;
-            this.frontlineBg = null;
+            this.eventProgressionBg = null;
             super.onDispose();
         }
 
@@ -276,10 +276,10 @@ package net.wg.gui.lobby.vehiclePreview20
                 this.compareBlock.y = this._offset + this._panelVerticalOffset;
                 this.listDesc.x = width - this._offset - this.listDesc.width + VEH_DESCRIPTION_H_OFFSET ^ 0;
                 this.listDesc.y = this._vehParams.y + this._vehParams.bg.height | 0;
-                if(this.frontlineBg.visible)
+                if(this.eventProgressionBg.visible)
                 {
-                    this.frontlineBg.x = width - this.frontlineBg.width >> 1;
-                    this.frontlineBg.y = height - this.frontlineBg.height >> 0;
+                    this.eventProgressionBg.x = width - this.eventProgressionBg.width >> 1;
+                    this.eventProgressionBg.y = height - this.eventProgressionBg.height >> 0;
                 }
             }
             if(!this._isIntroFinished && isInvalid(INTRO_FLAG))

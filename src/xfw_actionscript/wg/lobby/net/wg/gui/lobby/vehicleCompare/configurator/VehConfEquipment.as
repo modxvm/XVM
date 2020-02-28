@@ -289,7 +289,7 @@ package net.wg.gui.lobby.vehicleCompare.configurator
         private function onOptDeviceLeftBtnClickHandler(param1:ClosableEquipmentSlotEvent) : void
         {
             var _loc2_:ClosableEquipmentSlot = ClosableEquipmentSlot(param1.currentTarget);
-            this.showPopover(_loc2_,Aliases.FITTING_CMP_SELECT_POPOVER);
+            this.showPopover(_loc2_,Aliases.OPT_DEVICES_CMP_SELECT_POPOVER);
         }
 
         private function onBoosterLeftBtnClickHandler(param1:ClosableEquipmentSlotEvent) : void

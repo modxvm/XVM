@@ -15,6 +15,8 @@ package net.wg.gui.components.carousels.data
 
         private static const HIDDEN_SELECTED:String = "hidden";
 
+        private static const PROGRESSIONS_SELECTED:String = "progressions";
+
         private var _nationsSelected:Vector.<Boolean> = null;
 
         private var _vehicleTypesSelected:Vector.<Boolean> = null;
@@ -24,6 +26,8 @@ package net.wg.gui.components.carousels.data
         private var _levelsSelected:Vector.<Boolean> = null;
 
         private var _hiddenSelected:Vector.<Boolean> = null;
+
+        private var _progressionsSelected:Vector.<Boolean> = null;
 
         public function FiltersStateVO(param1:Object)
         {
@@ -78,6 +82,15 @@ package net.wg.gui.components.carousels.data
                 }
                 return false;
             }
+            if(param1 == PROGRESSIONS_SELECTED)
+            {
+                this._progressionsSelected = new Vector.<Boolean>();
+                for each(_loc3_ in param2)
+                {
+                    this._progressionsSelected.push(_loc3_);
+                }
+                return false;
+            }
             return super.onDataWrite(param1,param2);
         }
 
@@ -119,6 +132,11 @@ package net.wg.gui.components.carousels.data
         public function get hiddenSelected() : Vector.<Boolean>
         {
             return this._hiddenSelected;
+        }
+
+        public function get progressionsSelected() : Vector.<Boolean>
+        {
+            return this._progressionsSelected;
         }
     }
 }

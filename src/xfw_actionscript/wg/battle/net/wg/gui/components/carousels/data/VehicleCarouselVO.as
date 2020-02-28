@@ -8,6 +8,8 @@ package net.wg.gui.components.carousels.data
 
         private static const SLOT_PRICE_ACTION_DATA:String = "slotPriceActionData";
 
+        private static const PROGRESSION_POINTS_FIELD:String = "progressionPoints";
+
         public var id:int = -1;
 
         public var intCD:int = -1;
@@ -52,6 +54,8 @@ package net.wg.gui.components.carousels.data
 
         public var hasRankedBonus:Boolean = false;
 
+        public var hasProgression:Boolean = false;
+
         public var label:String = "";
 
         public var level:Number = 0;
@@ -84,6 +88,8 @@ package net.wg.gui.components.carousels.data
 
         public var lockedTooltip:String = "";
 
+        public var progressionPoints:ProgressionPointsVO = null;
+
         private var _slotPriceActionData:ActionPriceVO = null;
 
         public var isNationChangeAvailable:Boolean = false;
@@ -100,6 +106,11 @@ package net.wg.gui.components.carousels.data
                 this._slotPriceActionData = new ActionPriceVO(param2);
                 return false;
             }
+            if(param1 == PROGRESSION_POINTS_FIELD)
+            {
+                this.progressionPoints = new ProgressionPointsVO(param2);
+                return false;
+            }
             return super.onDataWrite(param1,param2);
         }
 
@@ -109,6 +120,11 @@ package net.wg.gui.components.carousels.data
             {
                 this._slotPriceActionData.dispose();
                 this._slotPriceActionData = null;
+            }
+            if(this.progressionPoints != null)
+            {
+                this.progressionPoints.dispose();
+                this.progressionPoints = null;
             }
             super.onDispose();
         }

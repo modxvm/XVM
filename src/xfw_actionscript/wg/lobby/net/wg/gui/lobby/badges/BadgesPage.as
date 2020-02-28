@@ -11,6 +11,7 @@ package net.wg.gui.lobby.badges
     import net.wg.gui.lobby.badges.data.BadgesStaticDataVO;
     import net.wg.infrastructure.constants.WindowViewInvalidationType;
     import scaleform.clik.constants.InvalidationType;
+    import net.wg.gui.components.controls.VO.BadgeVisualVO;
     import flash.events.Event;
     import scaleform.clik.events.InputEvent;
 
@@ -152,9 +153,19 @@ package net.wg.gui.lobby.badges
             super.onDispose();
         }
 
+        override protected function setSelectedBadge(param1:BadgeVisualVO, param2:Boolean) : void
+        {
+            this.header.setBadgeData(param1,param2);
+        }
+
         public function as_hideWaiting() : void
         {
             this.showWaiting = false;
+        }
+
+        public function as_setSuffixBadgeImg(param1:String, param2:String, param3:Boolean) : void
+        {
+            this.header.setSuffixBadgeImg(param1,param2,param3);
         }
 
         public function as_showWaiting(param1:String, param2:Object) : void
@@ -194,6 +205,11 @@ package net.wg.gui.lobby.badges
             }
         }
 
+        override public function get isModal() : Boolean
+        {
+            return true;
+        }
+
         public function set showWaiting(param1:Boolean) : void
         {
             if(this._showWaiting != param1)
@@ -201,21 +217,6 @@ package net.wg.gui.lobby.badges
                 this._showWaiting = param1;
                 invalidate(WindowViewInvalidationType.WAITING_INVALID);
             }
-        }
-
-        public function as_setSelectedBadgeImg(param1:String) : void
-        {
-            this.header.setBadgeImg(param1);
-        }
-
-        public function as_setSuffixBadgeImg(param1:String, param2:String, param3:Boolean) : void
-        {
-            this.header.setSuffixBadgeImg(param1,param2,param3);
-        }
-
-        override public function get isModal() : Boolean
-        {
-            return true;
         }
 
         private function onSuffixBadgeSelectHandler(param1:BadgesEvent) : void

@@ -18,6 +18,8 @@ package net.wg.gui.components.carousels.data
 
         private static const HIDDEN:String = "hidden";
 
+        private static const PROGRESSIONS:String = "progressions";
+
         public var titleLabel:String = "";
 
         public var nationsLabel:String = "";
@@ -29,6 +31,8 @@ package net.wg.gui.components.carousels.data
         public var specialsLabel:String = "";
 
         public var hiddenLabel:String = "";
+
+        public var progressionsLabel:String = "";
 
         public var toggleSwitchCarouselIcon:String = "";
 
@@ -48,6 +52,8 @@ package net.wg.gui.components.carousels.data
 
         public var searchSectionVisible:Boolean = false;
 
+        public var progressionsSectionVisible:Boolean = false;
+
         public var changeableArrowDirection:Boolean = false;
 
         public var nationsSectionId:int = -1;
@@ -59,6 +65,8 @@ package net.wg.gui.components.carousels.data
         public var specialSectionId:int = -1;
 
         public var hiddenSectionId:int = -1;
+
+        public var progressionsSectionId:int = -1;
 
         public var toggleSwitchCarouselTooltip:String = "";
 
@@ -73,6 +81,8 @@ package net.wg.gui.components.carousels.data
         private var _specials:DataProvider = null;
 
         private var _hidden:DataProvider = null;
+
+        private var _progressions:DataProvider = null;
 
         public function FilterCarouseInitVO(param1:Object)
         {
@@ -130,6 +140,15 @@ package net.wg.gui.components.carousels.data
                 }
                 return false;
             }
+            if(param1 == PROGRESSIONS)
+            {
+                this._progressions = new DataProvider();
+                for each(_loc3_ in param2)
+                {
+                    this._progressions.push(new SimpleRendererVO(_loc3_));
+                }
+                return false;
+            }
             return super.onDataWrite(param1,param2);
         }
 
@@ -156,6 +175,10 @@ package net.wg.gui.components.carousels.data
             {
                 _loc1_.dispose();
             }
+            for each(_loc1_ in this._progressions)
+            {
+                _loc1_.dispose();
+            }
             this._nations.cleanUp();
             this._nations = null;
             this._vehicleTypes.cleanUp();
@@ -166,6 +189,8 @@ package net.wg.gui.components.carousels.data
             this._levels = null;
             this._hidden.cleanUp();
             this._hidden = null;
+            this._progressions.cleanUp();
+            this._progressions = null;
             super.onDispose();
         }
 
@@ -192,6 +217,11 @@ package net.wg.gui.components.carousels.data
         public function get nations() : DataProvider
         {
             return this._nations;
+        }
+
+        public function get progressions() : DataProvider
+        {
+            return this._progressions;
         }
     }
 }

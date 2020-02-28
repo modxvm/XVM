@@ -7,6 +7,8 @@ package net.wg.infrastructure.events
 
         public static var UPDATE_ITEM:String = "updateItem";
 
+        public static var RESET_SELECTED_INDEX:String = "resetSelectedIndex";
+
         public static var VALIDATE_ITEMS:String = "validateItems";
 
         private var _index:int;

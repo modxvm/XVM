@@ -13,6 +13,8 @@ package net.wg.infrastructure.base.meta
 
         function onChangeServerClickS() : void;
 
+        function onQuestBtnClickS(param1:String, param2:String) : void;
+
         function as_setData(param1:Object) : void;
     }
 }

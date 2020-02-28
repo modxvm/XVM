@@ -15,7 +15,7 @@ package net.wg.gui.components.battleDamagePanel.constants
 
         public static const MIN_VIEW_RENDERER_COUNT_IN_POSTMORTEM:int = 3;
 
-        public static const MAX_DAMAGE_LOG_VIEW_WIDTH:int = 160;
+        public static const MAX_DAMAGE_LOG_VIEW_WIDTH:int = 242;
 
         public function BattleDamageLogConstants()
         {

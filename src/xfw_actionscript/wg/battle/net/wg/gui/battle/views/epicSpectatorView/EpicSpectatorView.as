@@ -6,6 +6,7 @@ package net.wg.gui.battle.views.epicSpectatorView
     import flash.display.MovieClip;
     import flash.text.TextField;
     import flash.text.TextFieldAutoSize;
+    import flashx.textLayout.formats.VerticalAlign;
     import net.wg.data.constants.InvalidationType;
     import net.wg.data.constants.generated.EPIC_CONSTS;
 
@@ -64,8 +65,14 @@ package net.wg.gui.battle.views.epicSpectatorView
             playerInfoTF.y = (this._stageHeight >> 1) - PLAYER_INFO_DELTA_Y;
             vehiclePanel.x = this._stageWidth - vehiclePanel.width >> 1;
             vehiclePanel.y = (this._stageHeight >> 1) + VEHICLE_PANEL_OFFSET_Y;
-            deadReasonTF.x = this._stageWidth - deadReasonTF.width >> 1;
             deadReasonTF.y = (this._stageHeight >> 1) + VEHICLE_PANEL_OFFSET_Y - GAP_VEHICLE_PANEL_DEAD_REASON - deadReasonTF.height;
+            deadReasonTF.x = this._stageWidth - deadReasonTF.width >> 1;
+            if(_userName != null)
+            {
+                _userName.y = deadReasonTF.y + deadReasonTF.textHeight;
+                _userName.x = this._stageWidth - _userName.textWidth >> 1;
+                _userName.verticalAlign = VerticalAlign.MIDDLE;
+            }
         }
 
         override protected function draw() : void
@@ -99,11 +106,6 @@ package net.wg.gui.battle.views.epicSpectatorView
             {
                 this.followLabel.visible = param1;
             }
-        }
-
-        public function as_setDeadReasonInfo(param1:String, param2:Boolean, param3:String, param4:String, param5:String, param6:String) : void
-        {
-            setDeadReasonInfo(param1,param2,param3,param4,param5,param6);
         }
 
         public function as_setFollowInfoText(param1:String) : void

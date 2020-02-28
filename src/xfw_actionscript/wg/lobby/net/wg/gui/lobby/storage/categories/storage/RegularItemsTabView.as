@@ -37,6 +37,7 @@ package net.wg.gui.lobby.storage.categories.storage
             this.noItemsView.dispose();
             this.noItemsView = null;
             carousel.removeEventListener(CardEvent.SELL,this.onCardSellHandler);
+            carousel.removeEventListener(CardEvent.UPGRADE,this.onCardUpgradeHandler);
             super.onDispose();
         }
 
@@ -47,6 +48,7 @@ package net.wg.gui.lobby.storage.categories.storage
             carousel.scrollList.paddingTop = CAROUSEL_PADDING_TOP;
             carousel.scrollList.paddingBottom = CAROUSEL_PADDING_BOTTOM;
             carousel.addEventListener(CardEvent.SELL,this.onCardSellHandler);
+            carousel.addEventListener(CardEvent.UPGRADE,this.onCardUpgradeHandler);
             this.noItemsView.setTexts(STORAGE.STORAGE_NOITEMS_TITLE,STORAGE.STORAGE_NOITEMS_NAVIGATIONBUTTON);
             this.noItemsView.addEventListener(Event.CLOSE,this.onNoItemViewCloseHandler);
         }
@@ -65,6 +67,12 @@ package net.wg.gui.lobby.storage.categories.storage
         override public function get noItemsComponent() : UIComponent
         {
             return this.noItemsView;
+        }
+
+        private function onCardUpgradeHandler(param1:CardEvent) : void
+        {
+            param1.stopImmediatePropagation();
+            upgradeItemS(param1.data.id);
         }
 
         private function onCardSellHandler(param1:CardEvent) : void

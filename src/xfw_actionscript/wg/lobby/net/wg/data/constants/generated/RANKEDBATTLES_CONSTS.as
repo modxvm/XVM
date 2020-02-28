@@ -57,6 +57,12 @@ package net.wg.data.constants.generated
 
         public static const YEAR_REWARD_STATUS_CURRENT:String = "current";
 
+        public static const YEAR_REWARD_STATUS_PASSED_FINAL:String = "passedFinal";
+
+        public static const YEAR_REWARD_STATUS_LOCKED_FINAL:String = "lockedFinal";
+
+        public static const YEAR_REWARD_STATUS_CURRENT_FINAL:String = "currentFinal";
+
         public function RANKEDBATTLES_CONSTS()
         {
             super();

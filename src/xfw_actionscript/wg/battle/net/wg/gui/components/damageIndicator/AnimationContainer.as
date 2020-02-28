@@ -18,5 +18,10 @@ package net.wg.gui.components.damageIndicator
             this.stateContainer.dispose();
             this.stateContainer = null;
         }
+
+        public function rotateInfo(param1:Number) : void
+        {
+            this.stateContainer.rotateInfo(param1);
+        }
     }
 }

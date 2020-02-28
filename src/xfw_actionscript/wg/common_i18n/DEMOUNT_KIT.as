@@ -17,6 +17,8 @@ package
 
         public static const EQUIPMENTINSTALL_DEMOUNTDESCRIPTION_BONDS:String = "#demount_kit:equipmentInstall/demountDescription/bonds";
 
+        public static const EQUIPMENTINSTALL_DEMOUNTDESCRIPTION_TROPHY:String = "#demount_kit:equipmentInstall/demountDescription/trophy";
+
         public static const EQUIPMENTDEMOUNT_OPTIONFREE:String = "#demount_kit:equipmentDemount/optionFree";
 
         public static const EQUIPMENTDEMOUNT_CONFIRMATION:String = "#demount_kit:equipmentDemount/confirmation";

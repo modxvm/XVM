@@ -23,9 +23,7 @@ package net.wg.gui.components.carousels
 
         protected static const PADDING:Number = 17;
 
-        protected static const DEFAULT_PADDING_BOTTOM:Number = 9;
-
-        protected static const LIST_OFFSET:uint = 2;
+        protected static const DEFAULT_PADDING_BOTTOM:Number = 1;
 
         private static const INVALIDATE_STATE_DATA:String = "invStateData";
 
@@ -37,15 +35,15 @@ package net.wg.gui.components.carousels
 
         private static const CHECKBOX_TILE_HEIGHT:uint = 25;
 
-        private static const LABEL_OFFSET:uint = 4;
+        private static const LABEL_OFFSET:uint = 7;
 
-        private static const SEPARATOR_OFFSET:int = -15;
+        private static const SEPARATOR_OFFSET:int = -21;
 
         private static const LINKAGE_TOGGLE_RENDERER_IMG_ALPHA:String = "ToggleRendererImageAlphaUI";
 
         private static const LINKAGE_CHECKBOX_RENDERER:String = "CheckBoxRendererUI";
 
-        private static const SEARCH_INPUT_OFFSET:int = 18;
+        private static const SEARCH_INPUT_OFFSET:int = 17;
 
         public var lblTitle:TextField = null;
 
@@ -61,6 +59,8 @@ package net.wg.gui.components.carousels
 
         public var lblSpecials:TextField = null;
 
+        public var lblProgressions:TextField = null;
+
         public var listNationType:SimpleTileList = null;
 
         public var listVehicleType:SimpleTileList = null;
@@ -70,6 +70,8 @@ package net.wg.gui.components.carousels
         public var listSpecials:SimpleTileList = null;
 
         public var listHidden:SimpleTileList = null;
+
+        public var listProgressions:SimpleTileList = null;
 
         public var searchInput:ISearchInput = null;
 
@@ -97,17 +99,18 @@ package net.wg.gui.components.carousels
             super.configUI();
             var _loc1_:IClassFactory = App.utils.classFactory;
             this.listNationType.itemRenderer = _loc1_.getClass(LINKAGE_TOGGLE_RENDERER_IMG_ALPHA);
-            this.listVehicleType.itemRenderer = this.listVehicleLevels.itemRenderer = this.listSpecials.itemRenderer = _loc1_.getClass(Linkages.TOGGLE_RENDERER_UI);
+            this.listVehicleType.itemRenderer = this.listVehicleLevels.itemRenderer = this.listSpecials.itemRenderer = this.listProgressions.itemRenderer = _loc1_.getClass(Linkages.TOGGLE_RENDERER_UI);
             this.listHidden.itemRenderer = _loc1_.getClass(LINKAGE_CHECKBOX_RENDERER);
-            this.listNationType.tileWidth = this.listVehicleType.tileWidth = this.listVehicleLevels.tileWidth = this.listSpecials.tileWidth = TOGGLE_TILE_WIDTH;
-            this.listNationType.tileHeight = this.listVehicleType.tileHeight = this.listVehicleLevels.tileHeight = this.listSpecials.tileHeight = TOGGLE_TILE_HEIGHT;
+            this.listNationType.tileWidth = this.listVehicleType.tileWidth = this.listVehicleLevels.tileWidth = this.listProgressions.tileWidth = this.listSpecials.tileWidth = TOGGLE_TILE_WIDTH;
+            this.listNationType.tileHeight = this.listVehicleType.tileHeight = this.listVehicleLevels.tileHeight = this.listProgressions.tileHeight = this.listSpecials.tileHeight = TOGGLE_TILE_HEIGHT;
             this.listHidden.tileWidth = CHECKBOX_TILE_WIDTH;
             this.listHidden.tileHeight = CHECKBOX_TILE_HEIGHT;
-            this.listSpecials.directionMode = this.listHidden.directionMode = this.listNationType.directionMode = this.listVehicleType.directionMode = this.listVehicleLevels.directionMode = DirectionMode.HORIZONTAL;
+            this.listSpecials.directionMode = this.listHidden.directionMode = this.listNationType.directionMode = this.listVehicleType.directionMode = this.listVehicleLevels.directionMode = this.listProgressions.directionMode = DirectionMode.HORIZONTAL;
             this.listNationType.addEventListener(RendererEvent.ITEM_CLICK,this.onNationTypeItemClickHandler);
             this.listVehicleType.addEventListener(RendererEvent.ITEM_CLICK,this.onVehicleTypeItemClickHandler);
             this.listSpecials.addEventListener(RendererEvent.ITEM_CLICK,this.onSpecialItemClickHandler);
             this.listHidden.addEventListener(RendererEvent.ITEM_CLICK,this.onHiddenItemClickHandler);
+            this.listProgressions.addEventListener(RendererEvent.ITEM_CLICK,this.onProgressionsItemClickHandler);
             this.listSpecials.addEventListener(Event.RESIZE,this.onListsResizeHandler);
             this.listHidden.addEventListener(Event.RESIZE,this.onListsResizeHandler);
             this.listVehicleLevels.addEventListener(RendererEvent.ITEM_CLICK,this.onLevelsTypeItemClickHandler);
@@ -131,6 +134,7 @@ package net.wg.gui.components.carousels
             this.listVehicleType.removeEventListener(RendererEvent.ITEM_CLICK,this.onVehicleTypeItemClickHandler);
             this.listSpecials.removeEventListener(RendererEvent.ITEM_CLICK,this.onSpecialItemClickHandler);
             this.listHidden.removeEventListener(RendererEvent.ITEM_CLICK,this.onHiddenItemClickHandler);
+            this.listProgressions.removeEventListener(RendererEvent.ITEM_CLICK,this.onProgressionsItemClickHandler);
             this.listSpecials.removeEventListener(Event.RESIZE,this.onListsResizeHandler);
             this.listHidden.removeEventListener(Event.RESIZE,this.onListsResizeHandler);
             this.listVehicleLevels.removeEventListener(RendererEvent.ITEM_CLICK,this.onLevelsTypeItemClickHandler);
@@ -140,6 +144,7 @@ package net.wg.gui.components.carousels
             this.lblVehicleLevel = null;
             this.lblSpecials = null;
             this.lblHidden = null;
+            this.lblProgressions = null;
             this.countVehicles = null;
             this.listNationType.dispose();
             this.listNationType = null;
@@ -151,6 +156,8 @@ package net.wg.gui.components.carousels
             this.listHidden = null;
             this.listVehicleLevels.dispose();
             this.listVehicleLevels = null;
+            this.listProgressions.dispose();
+            this.listProgressions = null;
             this.searchInput.removeEventListener(Event.CHANGE,this.onSearchInputChangeHandler);
             this.searchInput.removeEventListener(MouseEvent.ROLL_OVER,this.onSearchInputRollOverHandler);
             this.searchInput.removeEventListener(MouseEvent.ROLL_OUT,this.onSearchInputRollOutHandler);
@@ -178,17 +185,21 @@ package net.wg.gui.components.carousels
             this.lblVehicleLevel.htmlText = this.initData.levelsLabel;
             this.lblSpecials.htmlText = this.initData.specialsLabel;
             this.lblHidden.htmlText = this.initData.hiddenLabel;
+            this.lblProgressions.htmlText = this.initData.progressionsLabel;
             this.listNationType.dataProvider = this.initData.nations;
             this.listVehicleType.dataProvider = this.initData.vehicleTypes;
             this.listSpecials.dataProvider = this.initData.specials;
             this.listVehicleLevels.dataProvider = this.initData.levels;
             this.listHidden.dataProvider = this.initData.hidden;
+            this.listProgressions.dataProvider = this.initData.progressions;
             this.lblHidden.visible = this.initData.hiddenSectionVisible;
             this.listHidden.visible = this.initData.hiddenSectionVisible;
             this.lblSpecials.visible = this.initData.specialSectionVisible;
             this.listSpecials.visible = this.initData.specialSectionVisible;
             this.lblVehicleLevel.visible = this.initData.tankTierSectionVisible;
             this.listVehicleLevels.visible = this.initData.tankTierSectionVisible;
+            this.lblProgressions.visible = this.initData.progressionsSectionVisible;
+            this.listProgressions.visible = this.initData.progressionsSectionVisible;
             this.separatorBottom.visible = this.initData.searchSectionVisible;
             this.searchInput.visible = this.initData.searchSectionVisible;
             this.searchInput.defaultText = this.initData.searchInputLabel;
@@ -207,6 +218,7 @@ package net.wg.gui.components.carousels
                 this.listSetState(this.listSpecials,this._stateData.specialsSelected);
                 this.listSetState(this.listHidden,this._stateData.hiddenSelected);
                 this.listSetState(this.listVehicleLevels,this._stateData.levelsSelected);
+                this.listSetState(this.listProgressions,this._stateData.progressionsSelected);
             }
             if(isInvalid(InvalidationType.LAYOUT))
             {
@@ -234,11 +246,11 @@ package net.wg.gui.components.carousels
         protected function updateSize() : void
         {
             this.listNationType.validateNow();
-            var _loc1_:* = this.listNationType.y + this.listNationType.height + LIST_OFFSET + DEFAULT_PADDING_BOTTOM ^ 0;
+            var _loc1_:* = this.listNationType.y + this.listNationType.height + DEFAULT_PADDING_BOTTOM ^ 0;
             if(this.initData != null && this.initData.tankTierSectionVisible)
             {
                 this.listVehicleLevels.validateNow();
-                _loc1_ = this.listVehicleLevels.y + this.listVehicleLevels.height + LIST_OFFSET + DEFAULT_PADDING_BOTTOM ^ 0;
+                _loc1_ = this.listVehicleLevels.y + this.listVehicleLevels.height + DEFAULT_PADDING_BOTTOM ^ 0;
             }
             if(this.initData != null && this.initData.specialSectionVisible)
             {
@@ -253,6 +265,13 @@ package net.wg.gui.components.carousels
                 this.listHidden.validateNow();
                 this.listHidden.y = this.lblHidden.y + this.lblHidden.height + LABEL_OFFSET ^ 0;
                 _loc1_ = this.listHidden.y + this.listHidden.height + DEFAULT_PADDING_BOTTOM ^ 0;
+            }
+            if(this.initData != null && this.initData.progressionsSectionVisible)
+            {
+                this.lblProgressions.y = _loc1_;
+                this.listProgressions.validateNow();
+                this.listProgressions.y = this.lblProgressions.y + this.lblProgressions.height + LABEL_OFFSET ^ 0;
+                _loc1_ = this.listProgressions.y + this.listProgressions.height + DEFAULT_PADDING_BOTTOM ^ 0;
             }
             this.currentPopoverHeight = _loc1_;
             if(this.initData != null && this.initData.searchSectionVisible)
@@ -333,6 +352,12 @@ package net.wg.gui.components.carousels
         private function onVehicleTypeItemClickHandler(param1:RendererEvent) : void
         {
             changeFilterS(this.initData.vehicleTypesSectionId,param1.index);
+            param1.stopPropagation();
+        }
+
+        private function onProgressionsItemClickHandler(param1:RendererEvent) : void
+        {
+            changeFilterS(this.initData.progressionsSectionId,param1.index);
             param1.stopPropagation();
         }
     }

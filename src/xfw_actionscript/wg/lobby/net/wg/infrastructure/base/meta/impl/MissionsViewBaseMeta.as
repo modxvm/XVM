@@ -8,8 +8,6 @@ package net.wg.infrastructure.base.meta.impl
     public class MissionsViewBaseMeta extends BaseDAAPIComponent
     {
 
-        public var openMissionDetailsView:Function;
-
         public var dummyClicked:Function;
 
         private var _dummyVO:DummyVO;
@@ -27,12 +25,6 @@ package net.wg.infrastructure.base.meta.impl
                 this._dummyVO = null;
             }
             super.onDispose();
-        }
-
-        public function openMissionDetailsViewS(param1:String, param2:String) : void
-        {
-            App.utils.asserter.assertNotNull(this.openMissionDetailsView,"openMissionDetailsView" + Errors.CANT_NULL);
-            this.openMissionDetailsView(param1,param2);
         }
 
         public function dummyClickedS(param1:String) : void

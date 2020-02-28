@@ -263,6 +263,10 @@ package net.wg.data.constants.generated
 
         public static const BADGE_9:String = "badge_9";
 
+        public static const BADGE_90:String = "badge_90";
+
+        public static const BADGE_90_GOLD:String = "badge_90_gold";
+
         public static const BATTLE_LOADING_FORM_BG_TABLE:String = "battleLoadingFormBgTable";
 
         public static const BATTLE_LOADING_FORM_BG_TIPS:String = "battleLoadingFormBgTips";
@@ -275,8 +279,6 @@ package net.wg.data.constants.generated
 
         public static const BATTLE_LOADING_SELF_TIPS_BACKGROUND:String = "battleLoadingSelfTipsBackground";
 
-        public static const BLOGGER:String = "blogger";
-
         public static const BLUE_ATSPG_H:String = "blue_atspg_h";
 
         public static const BLUE_ATSPG_M:String = "blue_atspg_m";
@@ -288,8 +290,6 @@ package net.wg.data.constants.generated
         public static const BLUE_TANK_SH:String = "blue_tank_sh";
 
         public static const BLUE_TANK_SH_DEAD:String = "blue_tank_sh_dead";
-
-        public static const BOB_SELF_BG:String = "bobSelfBG";
 
         public static const BOMBER_ENTRY:String = "BomberEntry";
 
@@ -432,6 +432,8 @@ package net.wg.data.constants.generated
         public static const CHINA_CH38_WZ113_G_FT:String = "china-Ch38_WZ113G_FT";
 
         public static const CHINA_CH39_WZ120_1_G_FT:String = "china-Ch39_WZ120_1G_FT";
+
+        public static const CHINA_CH39_WZ120_1_G_FT_FL:String = "china-Ch39_WZ120_1G_FT_FL";
 
         public static const CHINA_CH40_WZ120_G_FT:String = "china-Ch40_WZ120G_FT";
 
@@ -874,6 +876,8 @@ package net.wg.data.constants.generated
         public static const FRANCE_F89_CANON_DASSAUT_DE_105:String = "france-F89_Canon_dassaut_de_105";
 
         public static const FRANCE_F97_ELC_EVEN_90:String = "france-F97_ELC_EVEN_90";
+
+        public static const FRANCE_F97_ELC_EVEN_90_FL:String = "france-F97_ELC_EVEN_90_FL";
 
         public static const FUEL_TANK:String = "fuelTank";
 
@@ -1703,8 +1707,6 @@ package net.wg.data.constants.generated
 
         public static const PLAYERS_PANEL_BG:String = "playersPanel_bg";
 
-        public static const PLAYERS_PANEL_BLOGGER_BG:String = "playersPanel_bloggerBg";
-
         public static const PLAYERS_PANEL_DEAD_BG:String = "playersPanel_deadBg";
 
         public static const PLAYERS_PANEL_SELF_BG:String = "playersPanel_selfBg";
@@ -2091,6 +2093,8 @@ package net.wg.data.constants.generated
 
         public static const SWEDEN_S22_STRV_S1:String = "sweden-S22_Strv_S1";
 
+        public static const SWEDEN_S22_STRV_S1_FL:String = "sweden-S22_Strv_S1_FL";
+
         public static const SWEDEN_S23_STRV_81:String = "sweden-S23_Strv_81";
 
         public static const SWEDEN_S23_STRV_81_SABATON:String = "sweden-S23_Strv_81_sabaton";
@@ -2106,6 +2110,8 @@ package net.wg.data.constants.generated
         public static const SWEDEN_S28_UDES_15_16_BOB:String = "sweden-S28_UDES_15_16_bob";
 
         public static const SWEDEN_S29_UDES_14_5:String = "sweden-S29_UDES_14_5";
+
+        public static const SWEDEN_S30_UDES_03_ALT_3:String = "sweden-S30_UDES_03_Alt_3";
 
         public static const SWITCH_SIEGE_DAMAGED:String = "switch_siege_damaged";
 
@@ -2373,11 +2379,15 @@ package net.wg.data.constants.generated
 
         public static const USA_A117_T26_E5:String = "usa-A117_T26E5";
 
+        public static const USA_A117_T26_E5_FL:String = "usa-A117_T26E5_FL";
+
         public static const USA_A117_T26_E5_PATRIOT:String = "usa-A117_T26E5_Patriot";
 
         public static const USA_A118_M4_THUNDERBOLT:String = "usa-A118_M4_Thunderbolt";
 
         public static const USA_A12_T32:String = "usa-A12_T32";
+
+        public static const USA_A12_T32_FL:String = "usa-A12_T32_FL";
 
         public static const USA_A120_M48_A5:String = "usa-A120_M48A5";
 
@@ -2724,6 +2734,8 @@ package net.wg.data.constants.generated
         public static const USSR_R171_IS_3_II:String = "ussr-R171_IS_3_II";
 
         public static const USSR_R172_OBJECT_752:String = "ussr-R172_Object_752";
+
+        public static const USSR_R175_IS_2_SCREEN:String = "ussr-R175_IS_2_screen";
 
         public static const USSR_R18_SU_152:String = "ussr-R18_SU-152";
 

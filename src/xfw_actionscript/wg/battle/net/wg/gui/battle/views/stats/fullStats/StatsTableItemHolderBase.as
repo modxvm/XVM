@@ -94,7 +94,7 @@ package net.wg.gui.battle.views.stats.fullStats
             {
                 this.statsItem.setVehicleName(this.data.vehicleName);
                 this.statsItem.setIsIGR(this.data.isIGR);
-                this.statsItem.setBadge(this.data.badgeType);
+                this.statsItem.setBadge(this.data.badgeVO,this.data.hasSelectedBadge);
                 this.statsItem.setFrags(this.data.frags);
                 this.updateVehicleType();
                 this.applyVehicleStatus();

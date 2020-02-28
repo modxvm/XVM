@@ -193,12 +193,13 @@ package net.wg.gui.components.common.ticker
 
         private function addRenderer() : void
         {
+            var _loc1_:TickerItem = null;
             this._itemIndex++;
             if(this._itemIndex >= this._rssItems.length)
             {
                 this._itemIndex = 0;
             }
-            var _loc1_:TickerItem = App.utils.classFactory.getComponent(Linkages.TICKER_ITEM,TickerItem);
+            _loc1_ = App.utils.classFactory.getComponent(Linkages.TICKER_ITEM,TickerItem);
             _loc1_.model = this._rssItems[this._itemIndex];
             _loc1_.x = this.maskView.width;
             _loc1_.addEventListener(MouseEvent.MOUSE_OVER,this.onItemMouseOverHandler);

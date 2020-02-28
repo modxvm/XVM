@@ -27,6 +27,7 @@ package net.wg.gui.lobby.header
     import net.wg.gui.lobby.header.vo.AccountBoosterVO;
     import net.wg.gui.lobby.header.vo.HBC_FinanceVo;
     import net.wg.gui.lobby.header.vo.HBC_PremDataVo;
+    import net.wg.gui.components.controls.VO.BadgeVisualVO;
     import scaleform.clik.controls.Button;
     import org.idmedia.as3commons.util.StringUtils;
     import net.wg.data.constants.generated.CURRENCIES_CONSTANTS;
@@ -300,6 +301,17 @@ package net.wg.gui.lobby.header
             }
         }
 
+        override protected function setBadge(param1:BadgeVisualVO, param2:Boolean) : void
+        {
+            var _loc3_:HBC_AccountDataVo = this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT) as HBC_AccountDataVo;
+            if(_loc3_ != null)
+            {
+                _loc3_.badgeVO = param1;
+                _loc3_.selectedBadge = param2;
+                this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT);
+            }
+        }
+
         public function as_disableFightButton(param1:Boolean) : void
         {
             this._actualEnabledVal = !param1;
@@ -340,16 +352,6 @@ package net.wg.gui.lobby.header
             var _loc2_:Button = this.mainMenuButtonBar.getButtonByValue(param1);
             this.assertMainMenuButtonWasntFound(_loc2_,param1);
             this._counterManager.removeCounter(_loc2_);
-        }
-
-        public function as_setBadgeIcon(param1:String) : void
-        {
-            var _loc2_:Object = this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT);
-            if(_loc2_ != null)
-            {
-                _loc2_.badgeIcon = param1;
-                this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT);
-            }
         }
 
         public function as_setButtonCounter(param1:String, param2:String) : void

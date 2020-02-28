@@ -30,6 +30,8 @@ package net.wg.gui.notification.vo
 
         public var bgIconHeight:uint = 167;
 
+        public var bgIconSizeAuto:Boolean = false;
+
         public function MessageInfoVO(param1:Object)
         {
             this._buttonsLayout = new Vector.<ButtonVO>();

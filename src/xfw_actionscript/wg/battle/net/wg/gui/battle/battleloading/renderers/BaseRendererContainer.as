@@ -6,6 +6,7 @@ package net.wg.gui.battle.battleloading.renderers
     import net.wg.gui.battle.components.BattleAtlasSprite;
     import flash.text.TextField;
     import net.wg.gui.components.icons.PlayerActionMarker;
+    import net.wg.gui.components.controls.BadgeComponent;
     import flash.display.DisplayObject;
 
     public class BaseRendererContainer extends Sprite implements IDisposable
@@ -551,65 +552,65 @@ package net.wg.gui.battle.battleloading.renderers
 
         public var icoIGREnemy14:BattleAtlasSprite;
 
-        public var badgeAlly0:BattleAtlasSprite;
+        public var badgeAlly0:BadgeComponent;
 
-        public var badgeAlly1:BattleAtlasSprite;
+        public var badgeAlly1:BadgeComponent;
 
-        public var badgeAlly2:BattleAtlasSprite;
+        public var badgeAlly2:BadgeComponent;
 
-        public var badgeAlly3:BattleAtlasSprite;
+        public var badgeAlly3:BadgeComponent;
 
-        public var badgeAlly4:BattleAtlasSprite;
+        public var badgeAlly4:BadgeComponent;
 
-        public var badgeAlly5:BattleAtlasSprite;
+        public var badgeAlly5:BadgeComponent;
 
-        public var badgeAlly6:BattleAtlasSprite;
+        public var badgeAlly6:BadgeComponent;
 
-        public var badgeAlly7:BattleAtlasSprite;
+        public var badgeAlly7:BadgeComponent;
 
-        public var badgeAlly8:BattleAtlasSprite;
+        public var badgeAlly8:BadgeComponent;
 
-        public var badgeAlly9:BattleAtlasSprite;
+        public var badgeAlly9:BadgeComponent;
 
-        public var badgeAlly10:BattleAtlasSprite;
+        public var badgeAlly10:BadgeComponent;
 
-        public var badgeAlly11:BattleAtlasSprite;
+        public var badgeAlly11:BadgeComponent;
 
-        public var badgeAlly12:BattleAtlasSprite;
+        public var badgeAlly12:BadgeComponent;
 
-        public var badgeAlly13:BattleAtlasSprite;
+        public var badgeAlly13:BadgeComponent;
 
-        public var badgeAlly14:BattleAtlasSprite;
+        public var badgeAlly14:BadgeComponent;
 
-        public var badgeEnemy0:BattleAtlasSprite;
+        public var badgeEnemy0:BadgeComponent;
 
-        public var badgeEnemy1:BattleAtlasSprite;
+        public var badgeEnemy1:BadgeComponent;
 
-        public var badgeEnemy2:BattleAtlasSprite;
+        public var badgeEnemy2:BadgeComponent;
 
-        public var badgeEnemy3:BattleAtlasSprite;
+        public var badgeEnemy3:BadgeComponent;
 
-        public var badgeEnemy4:BattleAtlasSprite;
+        public var badgeEnemy4:BadgeComponent;
 
-        public var badgeEnemy5:BattleAtlasSprite;
+        public var badgeEnemy5:BadgeComponent;
 
-        public var badgeEnemy6:BattleAtlasSprite;
+        public var badgeEnemy6:BadgeComponent;
 
-        public var badgeEnemy7:BattleAtlasSprite;
+        public var badgeEnemy7:BadgeComponent;
 
-        public var badgeEnemy8:BattleAtlasSprite;
+        public var badgeEnemy8:BadgeComponent;
 
-        public var badgeEnemy9:BattleAtlasSprite;
+        public var badgeEnemy9:BadgeComponent;
 
-        public var badgeEnemy10:BattleAtlasSprite;
+        public var badgeEnemy10:BadgeComponent;
 
-        public var badgeEnemy11:BattleAtlasSprite;
+        public var badgeEnemy11:BadgeComponent;
 
-        public var badgeEnemy12:BattleAtlasSprite;
+        public var badgeEnemy12:BadgeComponent;
 
-        public var badgeEnemy13:BattleAtlasSprite;
+        public var badgeEnemy13:BadgeComponent;
 
-        public var badgeEnemy14:BattleAtlasSprite;
+        public var badgeEnemy14:BadgeComponent;
 
         public var selfBgAlly0:BattleAtlasSprite;
 
@@ -640,36 +641,6 @@ package net.wg.gui.battle.battleloading.renderers
         public var selfBgAlly13:BattleAtlasSprite;
 
         public var selfBgAlly14:BattleAtlasSprite;
-
-        public var selfBgEnemy0:BattleAtlasSprite;
-
-        public var selfBgEnemy1:BattleAtlasSprite;
-
-        public var selfBgEnemy2:BattleAtlasSprite;
-
-        public var selfBgEnemy3:BattleAtlasSprite;
-
-        public var selfBgEnemy4:BattleAtlasSprite;
-
-        public var selfBgEnemy5:BattleAtlasSprite;
-
-        public var selfBgEnemy6:BattleAtlasSprite;
-
-        public var selfBgEnemy7:BattleAtlasSprite;
-
-        public var selfBgEnemy8:BattleAtlasSprite;
-
-        public var selfBgEnemy9:BattleAtlasSprite;
-
-        public var selfBgEnemy10:BattleAtlasSprite;
-
-        public var selfBgEnemy11:BattleAtlasSprite;
-
-        public var selfBgEnemy12:BattleAtlasSprite;
-
-        public var selfBgEnemy13:BattleAtlasSprite;
-
-        public var selfBgEnemy14:BattleAtlasSprite;
 
         public var backTestersAlly:Vector.<MovieClip>;
 
@@ -707,13 +678,11 @@ package net.wg.gui.battle.battleloading.renderers
 
         public var vehicleLevelIconsEnemy:Vector.<BattleAtlasSprite>;
 
-        public var badgesAlly:Vector.<BattleAtlasSprite>;
+        public var badgesAlly:Vector.<BadgeComponent>;
 
-        public var badgesEnemy:Vector.<BattleAtlasSprite>;
+        public var badgesEnemy:Vector.<BadgeComponent>;
 
         public var selfBgs:Vector.<BattleAtlasSprite>;
-
-        public var selfBgsEnemy:Vector.<BattleAtlasSprite>;
 
         public function BaseRendererContainer()
         {
@@ -730,7 +699,6 @@ package net.wg.gui.battle.battleloading.renderers
             this.vehicleIconsAlly = new <BattleAtlasSprite>[this.vehicleIconAlly0,this.vehicleIconAlly1,this.vehicleIconAlly2,this.vehicleIconAlly3,this.vehicleIconAlly4,this.vehicleIconAlly5,this.vehicleIconAlly6,this.vehicleIconAlly7,this.vehicleIconAlly8,this.vehicleIconAlly9,this.vehicleIconAlly10,this.vehicleIconAlly11,this.vehicleIconAlly12,this.vehicleIconAlly13,this.vehicleIconAlly14];
             this.icoIGRsAlly = new <BattleAtlasSprite>[this.icoIGRAlly0,this.icoIGRAlly1,this.icoIGRAlly2,this.icoIGRAlly3,this.icoIGRAlly4,this.icoIGRAlly5,this.icoIGRAlly6,this.icoIGRAlly7,this.icoIGRAlly8,this.icoIGRAlly9,this.icoIGRAlly10,this.icoIGRAlly11,this.icoIGRAlly12,this.icoIGRAlly13,this.icoIGRAlly14];
             this.selfBgs = new <BattleAtlasSprite>[this.selfBgAlly0,this.selfBgAlly1,this.selfBgAlly2,this.selfBgAlly3,this.selfBgAlly4,this.selfBgAlly5,this.selfBgAlly6,this.selfBgAlly7,this.selfBgAlly8,this.selfBgAlly9,this.selfBgAlly10,this.selfBgAlly11,this.selfBgAlly12,this.selfBgAlly13,this.selfBgAlly14];
-            this.selfBgsEnemy = new <BattleAtlasSprite>[this.selfBgEnemy0,this.selfBgEnemy1,this.selfBgEnemy2,this.selfBgEnemy3,this.selfBgEnemy4,this.selfBgEnemy5,this.selfBgEnemy6,this.selfBgEnemy7,this.selfBgEnemy8,this.selfBgEnemy9,this.selfBgEnemy10,this.selfBgEnemy11,this.selfBgEnemy12,this.selfBgEnemy13,this.selfBgEnemy14];
             this.textFieldsEnemy = new <TextField>[this.textFieldEnemy0,this.textFieldEnemy1,this.textFieldEnemy2,this.textFieldEnemy3,this.textFieldEnemy4,this.textFieldEnemy5,this.textFieldEnemy6,this.textFieldEnemy7,this.textFieldEnemy8,this.textFieldEnemy9,this.textFieldEnemy10,this.textFieldEnemy11,this.textFieldEnemy12,this.textFieldEnemy13,this.textFieldEnemy14];
             this.vehicleFieldsEnemy = new <TextField>[this.vehicleFieldEnemy0,this.vehicleFieldEnemy1,this.vehicleFieldEnemy2,this.vehicleFieldEnemy3,this.vehicleFieldEnemy4,this.vehicleFieldEnemy5,this.vehicleFieldEnemy6,this.vehicleFieldEnemy7,this.vehicleFieldEnemy8,this.vehicleFieldEnemy9,this.vehicleFieldEnemy10,this.vehicleFieldEnemy11,this.vehicleFieldEnemy12,this.vehicleFieldEnemy13,this.vehicleFieldEnemy14];
             this.playerActionMarkersEnemy = new <PlayerActionMarker>[this.playerActionMarkerEnemy0,this.playerActionMarkerEnemy1,this.playerActionMarkerEnemy2,this.playerActionMarkerEnemy3,this.playerActionMarkerEnemy4,this.playerActionMarkerEnemy5,this.playerActionMarkerEnemy6,this.playerActionMarkerEnemy7,this.playerActionMarkerEnemy8,this.playerActionMarkerEnemy9,this.playerActionMarkerEnemy10,this.playerActionMarkerEnemy11,this.playerActionMarkerEnemy12,this.playerActionMarkerEnemy13,this.playerActionMarkerEnemy14];
@@ -738,8 +706,8 @@ package net.wg.gui.battle.battleloading.renderers
             this.vehicleLevelIconsEnemy = new <BattleAtlasSprite>[this.vehicleLevelIconEnemy0,this.vehicleLevelIconEnemy1,this.vehicleLevelIconEnemy2,this.vehicleLevelIconEnemy3,this.vehicleLevelIconEnemy4,this.vehicleLevelIconEnemy5,this.vehicleLevelIconEnemy6,this.vehicleLevelIconEnemy7,this.vehicleLevelIconEnemy8,this.vehicleLevelIconEnemy9,this.vehicleLevelIconEnemy10,this.vehicleLevelIconEnemy11,this.vehicleLevelIconEnemy12,this.vehicleLevelIconEnemy13,this.vehicleLevelIconEnemy14];
             this.vehicleIconsEnemy = new <BattleAtlasSprite>[this.vehicleIconEnemy0,this.vehicleIconEnemy1,this.vehicleIconEnemy2,this.vehicleIconEnemy3,this.vehicleIconEnemy4,this.vehicleIconEnemy5,this.vehicleIconEnemy6,this.vehicleIconEnemy7,this.vehicleIconEnemy8,this.vehicleIconEnemy9,this.vehicleIconEnemy10,this.vehicleIconEnemy11,this.vehicleIconEnemy12,this.vehicleIconEnemy13,this.vehicleIconEnemy14];
             this.icoIGRsEnemy = new <BattleAtlasSprite>[this.icoIGREnemy0,this.icoIGREnemy1,this.icoIGREnemy2,this.icoIGREnemy3,this.icoIGREnemy4,this.icoIGREnemy5,this.icoIGREnemy6,this.icoIGREnemy7,this.icoIGREnemy8,this.icoIGREnemy9,this.icoIGREnemy10,this.icoIGREnemy11,this.icoIGREnemy12,this.icoIGREnemy13,this.icoIGREnemy14];
-            this.badgesAlly = new <BattleAtlasSprite>[this.badgeAlly0,this.badgeAlly1,this.badgeAlly2,this.badgeAlly3,this.badgeAlly4,this.badgeAlly5,this.badgeAlly6,this.badgeAlly7,this.badgeAlly8,this.badgeAlly9,this.badgeAlly10,this.badgeAlly11,this.badgeAlly12,this.badgeAlly13,this.badgeAlly14];
-            this.badgesEnemy = new <BattleAtlasSprite>[this.badgeEnemy0,this.badgeEnemy1,this.badgeEnemy2,this.badgeEnemy3,this.badgeEnemy4,this.badgeEnemy5,this.badgeEnemy6,this.badgeEnemy7,this.badgeEnemy8,this.badgeEnemy9,this.badgeEnemy10,this.badgeEnemy11,this.badgeEnemy12,this.badgeEnemy13,this.badgeEnemy14];
+            this.badgesAlly = new <BadgeComponent>[this.badgeAlly0,this.badgeAlly1,this.badgeAlly2,this.badgeAlly3,this.badgeAlly4,this.badgeAlly5,this.badgeAlly6,this.badgeAlly7,this.badgeAlly8,this.badgeAlly9,this.badgeAlly10,this.badgeAlly11,this.badgeAlly12,this.badgeAlly13,this.badgeAlly14];
+            this.badgesEnemy = new <BadgeComponent>[this.badgeEnemy0,this.badgeEnemy1,this.badgeEnemy2,this.badgeEnemy3,this.badgeEnemy4,this.badgeEnemy5,this.badgeEnemy6,this.badgeEnemy7,this.badgeEnemy8,this.badgeEnemy9,this.badgeEnemy10,this.badgeEnemy11,this.badgeEnemy12,this.badgeEnemy13,this.badgeEnemy14];
         }
 
         public function dispose() : void
@@ -761,6 +729,14 @@ package net.wg.gui.battle.battleloading.renderers
             for each(_loc2_ in this.icoTestersEnemy)
             {
                 _loc2_ = null;
+            }
+            for each(_loc1_ in this.badgesEnemy)
+            {
+                _loc1_.dispose();
+            }
+            for each(_loc1_ in this.badgesAlly)
+            {
+                _loc1_.dispose();
             }
             for each(_loc2_ in this.backTestersEnemy)
             {
@@ -1065,21 +1041,6 @@ package net.wg.gui.battle.battleloading.renderers
             this.selfBgAlly12 = null;
             this.selfBgAlly13 = null;
             this.selfBgAlly14 = null;
-            this.selfBgEnemy0 = null;
-            this.selfBgEnemy1 = null;
-            this.selfBgEnemy2 = null;
-            this.selfBgEnemy3 = null;
-            this.selfBgEnemy4 = null;
-            this.selfBgEnemy5 = null;
-            this.selfBgEnemy6 = null;
-            this.selfBgEnemy7 = null;
-            this.selfBgEnemy8 = null;
-            this.selfBgEnemy9 = null;
-            this.selfBgEnemy10 = null;
-            this.selfBgEnemy11 = null;
-            this.selfBgEnemy12 = null;
-            this.selfBgEnemy13 = null;
-            this.selfBgEnemy14 = null;
         }
     }
 }

@@ -6,10 +6,10 @@ package net.wg.gui.components.controls
     import scaleform.clik.interfaces.IDataProvider;
     import scaleform.clik.constants.InvalidationType;
     import flash.events.Event;
+    import net.wg.gui.components.carousels.interfaces.IScrollerLayoutController;
     import net.wg.infrastructure.interfaces.IDisplayObject;
     import net.wg.gui.components.controls.events.VerticalListViewportEvent;
     import flash.display.DisplayObject;
-    import net.wg.gui.components.carousels.interfaces.IScrollerLayoutController;
 
     public class VerticalListViewPort extends UIComponentEx implements IScrollerViewPortBase
     {
@@ -59,6 +59,8 @@ package net.wg.gui.components.controls
         private var _visibleBottomThreshold:Number = 0;
 
         private var _gap:int = 0;
+
+        private var _firstRendererOffset:int = 0;
 
         public function VerticalListViewPort()
         {
@@ -124,6 +126,15 @@ package net.wg.gui.components.controls
             super.onDispose();
         }
 
+        public function set firtstRendererOffset(param1:Number) : void
+        {
+            if(this._firstRendererOffset != param1)
+            {
+                this._firstRendererOffset = param1;
+                invalidateSize();
+            }
+        }
+
         public function getBottomVisibleRendererIndex() : int
         {
             return this._lastRndrInd;
@@ -134,10 +145,23 @@ package net.wg.gui.components.controls
             return param1 <= this._lastRndrInd?this.getRendererY(param1):-1;
         }
 
+        public function getRendererY(param1:int) : int
+        {
+            if(param1 >= 0 && param1 < this._renderersY.length)
+            {
+                return this._renderersY[param1];
+            }
+            return 0;
+        }
+
         public function invalidateRenderers() : void
         {
             this.resetRenderers();
             invalidate(INVALID_CHECK_LAYOUT);
+        }
+
+        public function setLayoutController(param1:IScrollerLayoutController) : void
+        {
         }
 
         public function updateData(param1:int) : void
@@ -146,6 +170,11 @@ package net.wg.gui.components.controls
             {
                 this.invalidateRenderers();
             }
+        }
+
+        public function usesLayoutController() : Boolean
+        {
+            return false;
         }
 
         private function validateRenderersHeight() : void
@@ -289,15 +318,6 @@ package net.wg.gui.components.controls
             return this.getRendererY(param1) <= this._visibleBottomThreshold && this.getRendererBottomY(param1) >= this._verticalScrollPosition;
         }
 
-        public function getRendererY(param1:int) : int
-        {
-            if(param1 >= 0 && param1 < this._renderersY.length)
-            {
-                return this._renderersY[param1];
-            }
-            return 0;
-        }
-
         private function getRendererBottomY(param1:int) : int
         {
             return this.getRendererY(param1) + this.getRendererHeight(param1);
@@ -366,7 +386,7 @@ package net.wg.gui.components.controls
             if(this._dataLen > 0)
             {
                 this._renderersHeight[0] = _loc1_;
-                this._renderersY[0] = 0;
+                this._renderersY[0] = this._firstRendererOffset;
                 _loc2_ = 1;
                 while(_loc2_ < this._dataLen)
                 {
@@ -619,6 +639,15 @@ package net.wg.gui.components.controls
         {
         }
 
+        public function get showRendererOnlyIfDataExists() : Boolean
+        {
+            return false;
+        }
+
+        public function set showRendererOnlyIfDataExists(param1:Boolean) : void
+        {
+        }
+
         private function onRendererResizeHandler(param1:Event) : void
         {
             var _loc2_:IReusableListItemRenderer = IReusableListItemRenderer(param1.target);
@@ -629,24 +658,6 @@ package net.wg.gui.components.controls
         {
             this._dataLen = this._dataProvider?this._dataProvider.length:0;
             invalidate(INVALID_BOUNDS);
-        }
-
-        public function usesLayoutController() : Boolean
-        {
-            return false;
-        }
-
-        public function setLayoutController(param1:IScrollerLayoutController) : void
-        {
-        }
-
-        public function get showRendererOnlyIfDataExists() : Boolean
-        {
-            return false;
-        }
-
-        public function set showRendererOnlyIfDataExists(param1:Boolean) : void
-        {
         }
     }
 }

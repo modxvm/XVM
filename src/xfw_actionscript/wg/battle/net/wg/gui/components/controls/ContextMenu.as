@@ -140,6 +140,7 @@ package net.wg.gui.components.controls
 
         public function build(param1:Vector.<IContextItem>, param2:Point) : void
         {
+            var _loc3_:* = NaN;
             var _loc5_:Vector.<IContextItem> = null;
             var _loc6_:uint = 0;
             var _loc7_:uint = 0;
@@ -157,7 +158,7 @@ package net.wg.gui.components.controls
             var _loc19_:IContextItem = null;
             var _loc20_:String = null;
             this._clickPoint = param2;
-            var _loc3_:Number = param2.x;
+            _loc3_ = param2.x;
             var _loc4_:Number = param2.y;
             this.clearItems();
             this._data = param1;

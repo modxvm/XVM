@@ -270,11 +270,12 @@ package net.wg.gui.battle.views.minimap
         {
             var _loc1_:* = NaN;
             var _loc2_:* = NaN;
+            var _loc4_:* = NaN;
             _loc1_ = SCALE_SIZES[this._currentSizeIndex];
             this.entriesContainer.scaleX = this.entriesContainer.scaleY = _loc1_;
             _loc2_ = _loc1_ * MMAP_BASE_SIZE;
             var _loc3_:Number = _loc2_ + FRAME_WIDTH_MULTIPLIER * FRAME_IMG_OFFSET;
-            var _loc4_:Number = _loc1_ * FRAME_WIDTH_MULTIPLIER;
+            _loc4_ = _loc1_ * FRAME_WIDTH_MULTIPLIER;
             this.fgFrame.width = this.fgFrame.height = _loc3_;
             this.bgFrame.width = this.bgFrame.height = _loc3_ + _loc4_ * FRAME_WIDTH_MULTIPLIER;
             this.fgFrame.x = -FRAME_IMG_OFFSET;

@@ -5,6 +5,10 @@ package net.wg.gui.lobby.modulesPanel.data
 
         public var removable:Boolean = false;
 
+        public var isUpgradable:Boolean = false;
+
+        public var upgradeButtonLabel:String = "";
+
         public var desc:String = "";
 
         public var notAffectedTTCTooltip:String = "";

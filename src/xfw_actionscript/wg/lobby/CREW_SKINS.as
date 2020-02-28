@@ -311,6 +311,24 @@ package
 
         public static const RACE15_DESCR:String = "#crew_skins:Race15/Descr";
 
+        public static const EEKEEBOO_NAME:String = "#crew_skins:Eekeeboo/Name";
+
+        public static const EEKEEBOO_LASTNAME:String = "#crew_skins:Eekeeboo/LastName";
+
+        public static const EEKEEBOO_DESCR:String = "#crew_skins:Eekeeboo/Descr";
+
+        public static const LEGRASSE_NAME:String = "#crew_skins:Legrasse/Name";
+
+        public static const LEGRASSE_LASTNAME:String = "#crew_skins:Legrasse/LastName";
+
+        public static const LEGRASSE_DESCR:String = "#crew_skins:Legrasse/Descr";
+
+        public static const DURDEN_NAME:String = "#crew_skins:Durden/Name";
+
+        public static const DURDEN_LASTNAME:String = "#crew_skins:Durden/LastName";
+
+        public static const DURDEN_DESCR:String = "#crew_skins:Durden/Descr";
+
         public function CREW_SKINS()
         {
             super();

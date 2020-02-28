@@ -7,6 +7,7 @@ package net.wg.gui.lobby.sessionStats.components
     import net.wg.gui.lobby.sessionStats.data.SessionBattleStatsRendererVO;
     import flash.events.MouseEvent;
     import scaleform.clik.constants.InvalidationType;
+    import flash.text.TextFieldAutoSize;
     import net.wg.data.constants.generated.TOOLTIPS_CONSTANTS;
 
     public class SessionBattleStatsRenderer extends UIComponentEx implements IUpdatable
@@ -48,6 +49,7 @@ package net.wg.gui.lobby.sessionStats.components
 
         protected function applyData() : void
         {
+            this.label.autoSize = TextFieldAutoSize.LEFT;
             this.label.htmlText = this._data.label;
             this.value.htmlText = this._data.value;
             this.icon.source = this._data.icon;

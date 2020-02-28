@@ -67,26 +67,25 @@ package net.wg.gui.battle.epicBattle.views.stats.components
 
         override public function setVehiclesData(param1:Array, param2:Vector.<Number>, param3:Boolean) : void
         {
-            var _loc4_:EpicVehicleDataProvider = param3?enemyDP:teamDP;
-            super.setVehiclesData(param1,param2,param3);
+            var _loc4_:EpicVehicleDataProvider = null;
+            var _loc5_:PlayerScrollingList = null;
             if(param3)
             {
-                this._table.team2PlayerList.visible = true;
-                if(this._table.team2PlayerList.dataProvider)
-                {
-                    this._table.team2PlayerList.dataProvider.cleanUp();
-                }
-                this._table.team2PlayerList.dataProvider = _loc4_;
+                _loc5_ = this._table.team2PlayerList;
+                _loc4_ = enemyDP;
             }
             else
             {
-                this._table.team1PlayerList.visible = true;
-                if(this._table.team1PlayerList.dataProvider)
-                {
-                    this._table.team1PlayerList.dataProvider.cleanUp();
-                }
-                this._table.team1PlayerList.dataProvider = _loc4_;
+                _loc5_ = this._table.team1PlayerList;
+                _loc4_ = teamDP;
             }
+            _loc5_.visible = true;
+            if(_loc5_.dataProvider)
+            {
+                _loc5_.dataProvider.cleanUp();
+            }
+            super.setVehiclesData(param1,param2,param3);
+            _loc5_.dataProvider = _loc4_;
         }
 
         override protected function cleanUp() : void

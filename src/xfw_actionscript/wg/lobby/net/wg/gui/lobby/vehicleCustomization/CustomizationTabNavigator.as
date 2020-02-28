@@ -53,10 +53,11 @@ package net.wg.gui.lobby.vehicleCustomization
 
         override protected function configUI() : void
         {
+            var _loc1_:Sprite = null;
             super.configUI();
             this.firstHighlight.mouseEnabled = this.lastHighlight.mouseEnabled = false;
             this.firstHighlight.mouseChildren = this.lastHighlight.mouseChildren = false;
-            var _loc1_:Sprite = new Sprite();
+            _loc1_ = new Sprite();
             this.selector.hitArea = _loc1_;
             this.overlay.hitArea = _loc1_;
             addChild(_loc1_);

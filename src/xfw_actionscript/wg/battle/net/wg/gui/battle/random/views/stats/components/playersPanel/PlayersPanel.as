@@ -65,7 +65,7 @@ package net.wg.gui.battle.random.views.stats.components.playersPanel
             {
                 for each(_loc2_ in param1.leftVehicleInfos)
                 {
-                    if(_loc2_.badgeType)
+                    if(_loc2_.hasSelectedBadge)
                     {
                         this._leftListHasBadges = true;
                         break;
@@ -76,7 +76,7 @@ package net.wg.gui.battle.random.views.stats.components.playersPanel
             {
                 for each(_loc2_ in param1.rightVehicleInfos)
                 {
-                    if(_loc2_.badgeType)
+                    if(_loc2_.hasSelectedBadge)
                     {
                         this._rightListHasBadges = true;
                         break;

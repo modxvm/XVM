@@ -3,6 +3,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.rankedBattles19.view.base.HangarRankedScreen;
     import net.wg.gui.lobby.badges.data.BadgesStaticDataVO;
     import net.wg.gui.lobby.badges.data.BadgesGroupVO;
+    import net.wg.gui.components.controls.VO.BadgeVisualVO;
     import net.wg.data.constants.Errors;
     import net.wg.infrastructure.exceptions.AbstractException;
 
@@ -27,6 +28,8 @@ package net.wg.infrastructure.base.meta.impl
 
         private var _badgesGroupVO1:BadgesGroupVO;
 
+        private var _badgeVisualVO:BadgeVisualVO;
+
         public function BadgesPageMeta()
         {
             super();
@@ -48,6 +51,11 @@ package net.wg.infrastructure.base.meta.impl
             {
                 this._badgesGroupVO1.dispose();
                 this._badgesGroupVO1 = null;
+            }
+            if(this._badgeVisualVO)
+            {
+                this._badgeVisualVO.dispose();
+                this._badgeVisualVO = null;
             }
             super.onDispose();
         }
@@ -121,6 +129,17 @@ package net.wg.infrastructure.base.meta.impl
             }
         }
 
+        public final function as_setSelectedBadge(param1:Object, param2:Boolean) : void
+        {
+            var _loc3_:BadgeVisualVO = this._badgeVisualVO;
+            this._badgeVisualVO = new BadgeVisualVO(param1);
+            this.setSelectedBadge(this._badgeVisualVO,param2);
+            if(_loc3_)
+            {
+                _loc3_.dispose();
+            }
+        }
+
         protected function setStaticData(param1:BadgesStaticDataVO) : void
         {
             var _loc2_:String = "as_setStaticData" + Errors.ABSTRACT_INVOKE;
@@ -140,6 +159,13 @@ package net.wg.infrastructure.base.meta.impl
             var _loc2_:String = "as_setNotReceivedBadges" + Errors.ABSTRACT_INVOKE;
             DebugUtils.LOG_ERROR(_loc2_);
             throw new AbstractException(_loc2_);
+        }
+
+        protected function setSelectedBadge(param1:BadgeVisualVO, param2:Boolean) : void
+        {
+            var _loc3_:String = "as_setSelectedBadge" + Errors.ABSTRACT_INVOKE;
+            DebugUtils.LOG_ERROR(_loc3_);
+            throw new AbstractException(_loc3_);
         }
     }
 }

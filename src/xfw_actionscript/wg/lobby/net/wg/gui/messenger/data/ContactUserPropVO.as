@@ -32,10 +32,6 @@ package net.wg.gui.messenger.data
 
         private var _icons:Vector.<String> = null;
 
-        private var _badge:int = 0;
-
-        private var _badgeImgStr:String = "";
-
         private var _isTeamKiller:Boolean = false;
 
         public function ContactUserPropVO(param1:Object)
@@ -185,26 +181,6 @@ package net.wg.gui.messenger.data
         public function get icons() : Vector.<String>
         {
             return this._icons;
-        }
-
-        public function get badge() : int
-        {
-            return this._badge;
-        }
-
-        public function set badge(param1:int) : void
-        {
-            this._badge = param1;
-        }
-
-        public function get badgeImgStr() : String
-        {
-            return this._badgeImgStr;
-        }
-
-        public function set badgeImgStr(param1:String) : void
-        {
-            this._badgeImgStr = param1;
         }
 
         public function get isTeamKiller() : Boolean

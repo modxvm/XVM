@@ -97,6 +97,10 @@ package net.wg.data.constants
 
         public static const RANKED_BATTLES_ARROW:String = "rankedBattlesArrow";
 
+        public static const EPIC_RESPAWN_POINT_NORMAL:String = "epicRespawnPointNormal";
+
+        public static const EPIC_RESPAWN_POINT_WARNING:String = "epicRespawnPointWarning";
+
         public function SoundTypes()
         {
             super();

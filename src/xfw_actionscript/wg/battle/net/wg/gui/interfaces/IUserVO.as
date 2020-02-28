@@ -2,6 +2,7 @@ package net.wg.gui.interfaces
 {
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import net.wg.infrastructure.interfaces.IUserProps;
+    import net.wg.gui.components.controls.VO.BadgeVisualVO;
 
     public interface IUserVO extends IDisposable
     {
@@ -26,9 +27,7 @@ package net.wg.gui.interfaces
 
         function get igrType() : int;
 
-        function get badge() : int;
-
-        function get badgeImgStr() : String;
+        function get badgeVisualVO() : BadgeVisualVO;
 
         function get isAnonymized() : Boolean;
     }

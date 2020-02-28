@@ -5,8 +5,6 @@ package
 
         public static const TOOLTIP_CLOSEBUTTON:String = "#ranked_battles:tooltip/closeButton";
 
-        public static const REWARDSVIEW_TABS_YEAR_SCOREPOINT_TOOLTIP:String = "#ranked_battles:rewardsView/tabs/year/scorePoint/tooltip";
-
         public static const RANKEDBATTLEPAGE_CLOSEBTN:String = "#ranked_battles:rankedBattlePage/closeBtn";
 
         public static const RANKEDBATTLE_TITLE:String = "#ranked_battles:rankedBattle/title";
@@ -663,13 +661,17 @@ package
 
         public static const REWARDSVIEW_TABS_YEAR:String = "#ranked_battles:rewardsView/tabs/year";
 
-        public static const REWARDSVIEW_TABS_YEAR_TITLE:String = "#ranked_battles:rewardsView/tabs/year/title";
+        public static const REWARDSVIEW_TABS_YEAR_TITLE_AWARDED:String = "#ranked_battles:rewardsView/tabs/year/title/awarded";
 
-        public static const REWARDSVIEW_TABS_YEAR_SCOREPOINT_TOOLTIP_HEADER:String = "#ranked_battles:rewardsView/tabs/year/scorePoint/tooltip/header";
+        public static const REWARDSVIEW_TABS_YEAR_TITLE_NOTAWARDED:String = "#ranked_battles:rewardsView/tabs/year/title/notAwarded";
 
-        public static const REWARDSVIEW_TABS_YEAR_SCOREPOINT_TOOLTIP_BODY:String = "#ranked_battles:rewardsView/tabs/year/scorePoint/tooltip/body";
+        public static const REWARDSVIEW_TABS_YEAR_COMPENSATION_EXTRAPOINTS:String = "#ranked_battles:rewardsView/tabs/year/compensation/extraPoints";
+
+        public static const REWARDSVIEW_TABS_YEAR_COMPENSATION_NOTENOUGH:String = "#ranked_battles:rewardsView/tabs/year/compensation/notEnough";
 
         public static const REWARDSVIEW_TABS_YEAR_CURRENT:String = "#ranked_battles:rewardsView/tabs/year/current";
+
+        public static const REWARDSVIEW_TABS_YEAR_CURRENTFINAL:String = "#ranked_battles:rewardsView/tabs/year/currentFinal";
 
         public static const REWARDSVIEW_COMMON_CURRENTREWARD:String = "#ranked_battles:rewardsView/common/currentReward";
 
@@ -727,6 +729,14 @@ package
 
         public static const INTOPAGE_BLOCKS_BLOCK3_DESCRIPTION:String = "#ranked_battles:intoPage/blocks/block3/description";
 
+        public static const YEARREWARDS_BOX_SMALL_TITLE:String = "#ranked_battles:yearRewards/box/small/title";
+
+        public static const YEARREWARDS_BOX_MEDIUM_TITLE:String = "#ranked_battles:yearRewards/box/medium/title";
+
+        public static const YEARREWARDS_BOX_BIG_TITLE:String = "#ranked_battles:yearRewards/box/big/title";
+
+        public static const YEARREWARDS_BOX_LARGE_TITLE:String = "#ranked_battles:yearRewards/box/large/title";
+
         public static const YEARREWARDS_TOOLTIP_BOX_SMALL_TITLE:String = "#ranked_battles:yearRewards/tooltip/box/small/title";
 
         public static const YEARREWARDS_TOOLTIP_BOX_MEDIUM_TITLE:String = "#ranked_battles:yearRewards/tooltip/box/medium/title";
@@ -739,25 +749,13 @@ package
 
         public static const YEARREWARDS_TOOLTIP_NEEDPOINTS:String = "#ranked_battles:yearRewards/tooltip/needPoints";
 
+        public static const YEARREWARDS_TOOLTIP_ANY_REWARD_TITLE:String = "#ranked_battles:yearRewards/tooltip/any/reward/title";
+
         public static const YEARREWARDS_TOOLTIP_ANY_DESCRIPTION_TITLE:String = "#ranked_battles:yearRewards/tooltip/any/description/title";
 
-        public static const YEARREWARDS_TOOLTIP_SMALL_DESCRIPTION_NOTE_3:String = "#ranked_battles:yearRewards/tooltip/small/description/note/3";
+        public static const YEARREWARDS_TOOLTIP_ANY_DESCRIPTION_NOTE_3:String = "#ranked_battles:yearRewards/tooltip/any/description/note/3";
 
-        public static const YEARREWARDS_TOOLTIP_MEDIUM_DESCRIPTION_NOTE_3:String = "#ranked_battles:yearRewards/tooltip/medium/description/note/3";
-
-        public static const YEARREWARDS_TOOLTIP_BIG_DESCRIPTION_NOTE_3:String = "#ranked_battles:yearRewards/tooltip/big/description/note/3";
-
-        public static const YEARREWARDS_TOOLTIP_LARGE_DESCRIPTION_NOTE_3:String = "#ranked_battles:yearRewards/tooltip/large/description/note/3";
-
-        public static const YEARREWARDS_TOOLTIP_SMALL_DESCRIPTION_NOTE_2:String = "#ranked_battles:yearRewards/tooltip/small/description/note/2";
-
-        public static const YEARREWARDS_TOOLTIP_MEDIUM_DESCRIPTION_NOTE_2:String = "#ranked_battles:yearRewards/tooltip/medium/description/note/2";
-
-        public static const YEARREWARDS_TOOLTIP_BIG_DESCRIPTION_NOTE_2:String = "#ranked_battles:yearRewards/tooltip/big/description/note/2";
-
-        public static const YEARREWARDS_TOOLTIP_LARGE_DESCRIPTION_NOTE_2:String = "#ranked_battles:yearRewards/tooltip/large/description/note/2";
-
-        public static const YEARREWARDS_TOOLTIP_REWARD_VEHICLE:String = "#ranked_battles:yearRewards/tooltip/reward/vehicle";
+        public static const YEARREWARDS_TOOLTIP_ANY_DESCRIPTION_NOTE_2:String = "#ranked_battles:yearRewards/tooltip/any/description/note/2";
 
         public static const YEARREWARDS_TOOLTIP_STATUS_LOCKED_TITLE:String = "#ranked_battles:yearRewards/tooltip/status/locked/title";
 
@@ -771,7 +769,21 @@ package
 
         public static const YEARREWARDS_TOOLTIP_STATUS_PASSED_DESCRIPTION:String = "#ranked_battles:yearRewards/tooltip/status/passed/description";
 
+        public static const YEARREWARDS_TOOLTIP_STATUS_LOCKEDFINAL_TITLE:String = "#ranked_battles:yearRewards/tooltip/status/lockedFinal/title";
+
+        public static const YEARREWARDS_TOOLTIP_STATUS_LOCKEDFINAL_DESCRIPTION:String = "#ranked_battles:yearRewards/tooltip/status/lockedFinal/description";
+
+        public static const YEARREWARDS_TOOLTIP_STATUS_CURRENTFINAL_TITLE:String = "#ranked_battles:yearRewards/tooltip/status/currentFinal/title";
+
+        public static const YEARREWARDS_TOOLTIP_STATUS_CURRENTFINAL_DESCRIPTION:String = "#ranked_battles:yearRewards/tooltip/status/currentFinal/description";
+
+        public static const YEARREWARDS_TOOLTIP_STATUS_PASSEDFINAL_TITLE:String = "#ranked_battles:yearRewards/tooltip/status/passedFinal/title";
+
+        public static const YEARREWARDS_TOOLTIP_STATUS_PASSEDFINAL_DESCRIPTION:String = "#ranked_battles:yearRewards/tooltip/status/passedFinal/description";
+
         public static const ALERTMESSAGE_SEASONFINISHED:String = "#ranked_battles:alertMessage/seasonFinished";
+
+        public static const ALERTMESSAGE_UNSUITABLEPERIPHERY:String = "#ranked_battles:alertMessage/unsuitablePeriphery";
 
         public static const ALERTMESSAGE_SOMEPERIPHERIESHALT:String = "#ranked_battles:alertMessage/somePeripheriesHalt";
 
@@ -782,6 +794,14 @@ package
         public static const ALERTMESSAGE_BUTTON:String = "#ranked_battles:alertMessage/button";
 
         public static const QUALIFICATIONREWARDS_DESCRIPTION:String = "#ranked_battles:qualificationRewards/description";
+
+        public static const YEAR_AWARD_RANKEDLABEL:String = "#ranked_battles:year_award/rankedLabel";
+
+        public static const YEAR_AWARD_COMPENSATIONLABEL:String = "#ranked_battles:year_award/compensationLabel";
+
+        public static const YEAR_AWARD_ACCEPTBUTTON_ACCEPTLABEL:String = "#ranked_battles:year_award/acceptButton/acceptLabel";
+
+        public static const YEAR_AWARD_ACCEPTBUTTON_HANGARLABEL:String = "#ranked_battles:year_award/acceptButton/hangarLabel";
 
         public function RANKED_BATTLES()
         {

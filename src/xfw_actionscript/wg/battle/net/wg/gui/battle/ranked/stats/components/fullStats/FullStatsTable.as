@@ -6,6 +6,7 @@ package net.wg.gui.battle.ranked.stats.components.fullStats
     import flash.text.TextField;
     import net.wg.gui.battle.components.PlayerStatusView;
     import net.wg.gui.battle.views.stats.SpeakAnimation;
+    import net.wg.gui.components.controls.BadgeComponent;
     import flash.display.DisplayObject;
     import scaleform.gfx.TextFieldEx;
     import net.wg.data.constants.generated.BATTLEATLAS;
@@ -815,65 +816,65 @@ package net.wg.gui.battle.ranked.stats.components.fullStats
 
         public var rankIcon_c2r15:BattleAtlasSprite = null;
 
-        public var rankBadge_c1r1:BattleAtlasSprite = null;
+        public var rankBadge_c1r1:BadgeComponent = null;
 
-        public var rankBadge_c1r2:BattleAtlasSprite = null;
+        public var rankBadge_c1r2:BadgeComponent = null;
 
-        public var rankBadge_c1r3:BattleAtlasSprite = null;
+        public var rankBadge_c1r3:BadgeComponent = null;
 
-        public var rankBadge_c1r4:BattleAtlasSprite = null;
+        public var rankBadge_c1r4:BadgeComponent = null;
 
-        public var rankBadge_c1r5:BattleAtlasSprite = null;
+        public var rankBadge_c1r5:BadgeComponent = null;
 
-        public var rankBadge_c1r6:BattleAtlasSprite = null;
+        public var rankBadge_c1r6:BadgeComponent = null;
 
-        public var rankBadge_c1r7:BattleAtlasSprite = null;
+        public var rankBadge_c1r7:BadgeComponent = null;
 
-        public var rankBadge_c1r8:BattleAtlasSprite = null;
+        public var rankBadge_c1r8:BadgeComponent = null;
 
-        public var rankBadge_c1r9:BattleAtlasSprite = null;
+        public var rankBadge_c1r9:BadgeComponent = null;
 
-        public var rankBadge_c1r10:BattleAtlasSprite = null;
+        public var rankBadge_c1r10:BadgeComponent = null;
 
-        public var rankBadge_c1r11:BattleAtlasSprite = null;
+        public var rankBadge_c1r11:BadgeComponent = null;
 
-        public var rankBadge_c1r12:BattleAtlasSprite = null;
+        public var rankBadge_c1r12:BadgeComponent = null;
 
-        public var rankBadge_c1r13:BattleAtlasSprite = null;
+        public var rankBadge_c1r13:BadgeComponent = null;
 
-        public var rankBadge_c1r14:BattleAtlasSprite = null;
+        public var rankBadge_c1r14:BadgeComponent = null;
 
-        public var rankBadge_c1r15:BattleAtlasSprite = null;
+        public var rankBadge_c1r15:BadgeComponent = null;
 
-        public var rankBadge_c2r1:BattleAtlasSprite = null;
+        public var rankBadge_c2r1:BadgeComponent = null;
 
-        public var rankBadge_c2r2:BattleAtlasSprite = null;
+        public var rankBadge_c2r2:BadgeComponent = null;
 
-        public var rankBadge_c2r3:BattleAtlasSprite = null;
+        public var rankBadge_c2r3:BadgeComponent = null;
 
-        public var rankBadge_c2r4:BattleAtlasSprite = null;
+        public var rankBadge_c2r4:BadgeComponent = null;
 
-        public var rankBadge_c2r5:BattleAtlasSprite = null;
+        public var rankBadge_c2r5:BadgeComponent = null;
 
-        public var rankBadge_c2r6:BattleAtlasSprite = null;
+        public var rankBadge_c2r6:BadgeComponent = null;
 
-        public var rankBadge_c2r7:BattleAtlasSprite = null;
+        public var rankBadge_c2r7:BadgeComponent = null;
 
-        public var rankBadge_c2r8:BattleAtlasSprite = null;
+        public var rankBadge_c2r8:BadgeComponent = null;
 
-        public var rankBadge_c2r9:BattleAtlasSprite = null;
+        public var rankBadge_c2r9:BadgeComponent = null;
 
-        public var rankBadge_c2r10:BattleAtlasSprite = null;
+        public var rankBadge_c2r10:BadgeComponent = null;
 
-        public var rankBadge_c2r11:BattleAtlasSprite = null;
+        public var rankBadge_c2r11:BadgeComponent = null;
 
-        public var rankBadge_c2r12:BattleAtlasSprite = null;
+        public var rankBadge_c2r12:BadgeComponent = null;
 
-        public var rankBadge_c2r13:BattleAtlasSprite = null;
+        public var rankBadge_c2r13:BadgeComponent = null;
 
-        public var rankBadge_c2r14:BattleAtlasSprite = null;
+        public var rankBadge_c2r14:BadgeComponent = null;
 
-        public var rankBadge_c2r15:BattleAtlasSprite = null;
+        public var rankBadge_c2r15:BadgeComponent = null;
 
         public var vehicleActionMarker_c1r1:BattleAtlasSprite = null;
 
@@ -1207,7 +1208,7 @@ package net.wg.gui.battle.ranked.stats.components.fullStats
 
         public var vehicleTypeCollection:Vector.<BattleAtlasSprite> = null;
 
-        public var rankBadgesCollection:Vector.<BattleAtlasSprite>;
+        public var rankBadgesCollection:Vector.<BadgeComponent>;
 
         public var testerBackCollection:Vector.<MovieClip> = null;
 
@@ -1229,7 +1230,7 @@ package net.wg.gui.battle.ranked.stats.components.fullStats
             this.playerStatusCollection = new <PlayerStatusView>[this.playerStatus_c1r1,this.playerStatus_c1r2,this.playerStatus_c1r3,this.playerStatus_c1r4,this.playerStatus_c1r5,this.playerStatus_c1r6,this.playerStatus_c1r7,this.playerStatus_c1r8,this.playerStatus_c1r9,this.playerStatus_c1r10,this.playerStatus_c1r11,this.playerStatus_c1r12,this.playerStatus_c1r13,this.playerStatus_c1r14,this.playerStatus_c1r15,this.playerStatus_c2r1,this.playerStatus_c2r2,this.playerStatus_c2r3,this.playerStatus_c2r4,this.playerStatus_c2r5,this.playerStatus_c2r6,this.playerStatus_c2r7,this.playerStatus_c2r8,this.playerStatus_c2r9,this.playerStatus_c2r10,this.playerStatus_c2r11,this.playerStatus_c2r12,this.playerStatus_c2r13,this.playerStatus_c2r14,this.playerStatus_c2r15];
             this.speakAnimationCollection = new <SpeakAnimation>[this.speakAnimation_c1r1,this.speakAnimation_c1r2,this.speakAnimation_c1r3,this.speakAnimation_c1r4,this.speakAnimation_c1r5,this.speakAnimation_c1r6,this.speakAnimation_c1r7,this.speakAnimation_c1r8,this.speakAnimation_c1r9,this.speakAnimation_c1r10,this.speakAnimation_c1r11,this.speakAnimation_c1r12,this.speakAnimation_c1r13,this.speakAnimation_c1r14,this.speakAnimation_c1r15,this.speakAnimation_c2r1,this.speakAnimation_c2r2,this.speakAnimation_c2r3,this.speakAnimation_c2r4,this.speakAnimation_c2r5,this.speakAnimation_c2r6,this.speakAnimation_c2r7,this.speakAnimation_c2r8,this.speakAnimation_c2r9,this.speakAnimation_c2r10,this.speakAnimation_c2r11,this.speakAnimation_c2r12,this.speakAnimation_c2r13,this.speakAnimation_c2r14,this.speakAnimation_c2r15];
             this.rankIconsCollection = new <BattleAtlasSprite>[this.rankIcon_c1r1,this.rankIcon_c1r2,this.rankIcon_c1r3,this.rankIcon_c1r4,this.rankIcon_c1r5,this.rankIcon_c1r6,this.rankIcon_c1r7,this.rankIcon_c1r8,this.rankIcon_c1r9,this.rankIcon_c1r10,this.rankIcon_c1r11,this.rankIcon_c1r12,this.rankIcon_c1r13,this.rankIcon_c1r14,this.rankIcon_c1r15,this.rankIcon_c2r1,this.rankIcon_c2r2,this.rankIcon_c2r3,this.rankIcon_c2r4,this.rankIcon_c2r5,this.rankIcon_c2r6,this.rankIcon_c2r7,this.rankIcon_c2r8,this.rankIcon_c2r9,this.rankIcon_c2r10,this.rankIcon_c2r11,this.rankIcon_c2r12,this.rankIcon_c2r13,this.rankIcon_c2r14,this.rankIcon_c2r15];
-            this.rankBadgesCollection = new <BattleAtlasSprite>[this.rankBadge_c1r1,this.rankBadge_c1r2,this.rankBadge_c1r3,this.rankBadge_c1r4,this.rankBadge_c1r5,this.rankBadge_c1r6,this.rankBadge_c1r7,this.rankBadge_c1r8,this.rankBadge_c1r9,this.rankBadge_c1r10,this.rankBadge_c1r11,this.rankBadge_c1r12,this.rankBadge_c1r13,this.rankBadge_c1r14,this.rankBadge_c1r15,this.rankBadge_c2r1,this.rankBadge_c2r2,this.rankBadge_c2r3,this.rankBadge_c2r4,this.rankBadge_c2r5,this.rankBadge_c2r6,this.rankBadge_c2r7,this.rankBadge_c2r8,this.rankBadge_c2r9,this.rankBadge_c2r10,this.rankBadge_c2r11,this.rankBadge_c2r12,this.rankBadge_c2r13,this.rankBadge_c2r14,this.rankBadge_c2r15];
+            this.rankBadgesCollection = new <BadgeComponent>[this.rankBadge_c1r1,this.rankBadge_c1r2,this.rankBadge_c1r3,this.rankBadge_c1r4,this.rankBadge_c1r5,this.rankBadge_c1r6,this.rankBadge_c1r7,this.rankBadge_c1r8,this.rankBadge_c1r9,this.rankBadge_c1r10,this.rankBadge_c1r11,this.rankBadge_c1r12,this.rankBadge_c1r13,this.rankBadge_c1r14,this.rankBadge_c1r15,this.rankBadge_c2r1,this.rankBadge_c2r2,this.rankBadge_c2r3,this.rankBadge_c2r4,this.rankBadge_c2r5,this.rankBadge_c2r6,this.rankBadge_c2r7,this.rankBadge_c2r8,this.rankBadge_c2r9,this.rankBadge_c2r10,this.rankBadge_c2r11,this.rankBadge_c2r12,this.rankBadge_c2r13,this.rankBadge_c2r14,this.rankBadge_c2r15];
             this.vehicleActionMarkerCollection = new <BattleAtlasSprite>[this.vehicleActionMarker_c1r1,this.vehicleActionMarker_c1r2,this.vehicleActionMarker_c1r3,this.vehicleActionMarker_c1r4,this.vehicleActionMarker_c1r5,this.vehicleActionMarker_c1r6,this.vehicleActionMarker_c1r7,this.vehicleActionMarker_c1r8,this.vehicleActionMarker_c1r9,this.vehicleActionMarker_c1r10,this.vehicleActionMarker_c1r11,this.vehicleActionMarker_c1r12,this.vehicleActionMarker_c1r13,this.vehicleActionMarker_c1r14,this.vehicleActionMarker_c1r15,this.vehicleActionMarker_c2r1,this.vehicleActionMarker_c2r2,this.vehicleActionMarker_c2r3,this.vehicleActionMarker_c2r4,this.vehicleActionMarker_c2r5,this.vehicleActionMarker_c2r6,this.vehicleActionMarker_c2r7,this.vehicleActionMarker_c2r8,this.vehicleActionMarker_c2r9,this.vehicleActionMarker_c2r10,this.vehicleActionMarker_c2r11,this.vehicleActionMarker_c2r12,this.vehicleActionMarker_c2r13,this.vehicleActionMarker_c2r14,this.vehicleActionMarker_c2r15];
             this.vehicleIconCollection = new <BattleAtlasSprite>[this.vehicleIcon_c1r1,this.vehicleIcon_c1r2,this.vehicleIcon_c1r3,this.vehicleIcon_c1r4,this.vehicleIcon_c1r5,this.vehicleIcon_c1r6,this.vehicleIcon_c1r7,this.vehicleIcon_c1r8,this.vehicleIcon_c1r9,this.vehicleIcon_c1r10,this.vehicleIcon_c1r11,this.vehicleIcon_c1r12,this.vehicleIcon_c1r13,this.vehicleIcon_c1r14,this.vehicleIcon_c1r15,this.vehicleIcon_c2r1,this.vehicleIcon_c2r2,this.vehicleIcon_c2r3,this.vehicleIcon_c2r4,this.vehicleIcon_c2r5,this.vehicleIcon_c2r6,this.vehicleIcon_c2r7,this.vehicleIcon_c2r8,this.vehicleIcon_c2r9,this.vehicleIcon_c2r10,this.vehicleIcon_c2r11,this.vehicleIcon_c2r12,this.vehicleIcon_c2r13,this.vehicleIcon_c2r14,this.vehicleIcon_c2r15];
             this.vehicleLevelCollection = new <BattleAtlasSprite>[this.vehicleLevel_c1r1,this.vehicleLevel_c1r2,this.vehicleLevel_c1r3,this.vehicleLevel_c1r4,this.vehicleLevel_c1r5,this.vehicleLevel_c1r6,this.vehicleLevel_c1r7,this.vehicleLevel_c1r8,this.vehicleLevel_c1r9,this.vehicleLevel_c1r10,this.vehicleLevel_c1r11,this.vehicleLevel_c1r12,this.vehicleLevel_c1r13,this.vehicleLevel_c1r14,this.vehicleLevel_c1r15,this.vehicleLevel_c2r1,this.vehicleLevel_c2r2,this.vehicleLevel_c2r3,this.vehicleLevel_c2r4,this.vehicleLevel_c2r5,this.vehicleLevel_c2r6,this.vehicleLevel_c2r7,this.vehicleLevel_c2r8,this.vehicleLevel_c2r9,this.vehicleLevel_c2r10,this.vehicleLevel_c2r11,this.vehicleLevel_c2r12,this.vehicleLevel_c2r13,this.vehicleLevel_c2r14,this.vehicleLevel_c2r15];
@@ -1259,6 +1260,10 @@ package net.wg.gui.battle.ranked.stats.components.fullStats
                 _loc1_.dispose();
             }
             for each(_loc1_ in this.speakAnimationCollection)
+            {
+                _loc1_.dispose();
+            }
+            for each(_loc1_ in this.rankBadgesCollection)
             {
                 _loc1_.dispose();
             }

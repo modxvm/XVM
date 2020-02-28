@@ -1,9 +1,9 @@
 package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.gui.lobby.missions.MissionsViewBase;
+    import net.wg.gui.lobby.missions.MissionsListViewBase;
     import net.wg.data.constants.Errors;
 
-    public class MissionsGroupedViewMeta extends MissionsViewBase
+    public class MissionsGroupedViewMeta extends MissionsListViewBase
     {
 
         public var expand:Function;

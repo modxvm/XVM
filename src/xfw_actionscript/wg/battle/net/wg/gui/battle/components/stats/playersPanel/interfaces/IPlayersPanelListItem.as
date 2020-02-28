@@ -2,6 +2,7 @@ package net.wg.gui.battle.components.stats.playersPanel.interfaces
 {
     import net.wg.gui.battle.components.interfaces.IBattleUIComponent;
     import net.wg.infrastructure.interfaces.IUserProps;
+    import net.wg.gui.components.controls.VO.BadgeVisualVO;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.list.PlayersPanelDynamicSquad;
 
     public interface IPlayersPanelListItem extends IBattleUIComponent
@@ -47,7 +48,7 @@ package net.wg.gui.battle.components.stats.playersPanel.interfaces
 
         function setVehicleAction(param1:uint) : void;
 
-        function setBadge(param1:String) : void;
+        function setBadge(param1:BadgeVisualVO, param2:Boolean) : void;
 
         function setVehicleName(param1:String) : void;
 

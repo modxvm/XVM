@@ -15,6 +15,8 @@ package net.wg.data.constants.generated
 
         public static const QUEST_TYPE_EVENT:String = "eventQuest";
 
+        public static const QUEST_TYPE_BATTLE_PASS:String = "questBattlePass";
+
         public static const QUEST_GROUP_COMMON:String = "commonQuestsGroup";
 
         public static const QUEST_GROUP_MARATHON:String = "marathonQuestsGroup";
@@ -22,6 +24,8 @@ package net.wg.data.constants.generated
         public static const QUEST_GROUP_PERSONAL:String = "personalQuestsGroup";
 
         public static const QUEST_GROUP_EVENTS:String = "eventsQuestsGroup";
+
+        public static const QUEST_GROUP_BATTLE_PASS:String = "questGroupBattlePass";
 
         public function HANGAR_HEADER_QUESTS()
         {

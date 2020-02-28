@@ -65,6 +65,8 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         public var addImg:IImage = null;
 
+        public var bpSpecialBorder:MovieClip = null;
+
         private var _visibleVehicleInfo:Boolean = true;
 
         private var _showStats:Boolean = false;
@@ -116,6 +118,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.rentalHoverBG = null;
             this.addImg.dispose();
             this.addImg = null;
+            this.bpSpecialBorder = null;
             super.onDispose();
         }
 
@@ -225,6 +228,7 @@ package net.wg.gui.lobby.hangar.tcarousel
                 }
                 this.setVisibleVehicleInfo(true);
             }
+            this.bpSpecialBorder.visible = param1.progressionPoints && param1.progressionPoints.isSpecialVehicle;
             this.updateLockBg();
             this.imgFavorite.visible = param1.favorite;
             this.clanLock.timer = param1.clanLock;

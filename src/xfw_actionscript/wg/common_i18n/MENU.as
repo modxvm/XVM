@@ -3,7 +3,11 @@ package
     public class MENU extends Object
     {
 
+        public static const MODULEFITS_UPGRADEBTN_TOOLTIP:String = "#menu:moduleFits/upgradeBtn/tooltip";
+
         public static const TRAINING_CREATE_BATTLETIME_DISABLED:String = "#menu:training/create/battleTime/disabled";
+
+        public static const MODULEFITS_DESTROYBTN_TOOLTIP:String = "#menu:moduleFits/destroyBtn/tooltip";
 
         public static const COPY:String = "#menu:copy";
 
@@ -284,10 +288,6 @@ package
         public static const LOADING_BATTLETYPES_22:String = "#menu:loading/battleTypes/22";
 
         public static const LOADING_BATTLETYPES_DESC_22:String = "#menu:loading/battleTypes/desc/22";
-
-        public static const LOADING_BATTLETYPES_23:String = "#menu:loading/battleTypes/23";
-
-        public static const LOADING_BATTLETYPES_DESC_23:String = "#menu:loading/battleTypes/desc/23";
 
         public static const LOADING_TEAM1:String = "#menu:loading/team1";
 
@@ -1175,6 +1175,8 @@ package
 
         public static const HEADERBUTTONS_BATTLE_TYPES_RANKED_AVAILABILITY_FROZEN:String = "#menu:headerButtons/battle/types/ranked/availability/frozen";
 
+        public static const HEADERBUTTONS_BATTLE_TYPES_RANKED_AVAILABILITY_NOTSET:String = "#menu:headerButtons/battle/types/ranked/availability/notSet";
+
         public static const HEADERBUTTONS_BATTLE_TYPES_RANKED_AVAILABILITY:String = "#menu:headerButtons/battle/types/ranked/availability";
 
         public static const HEADERBUTTONS_BATTLE_TYPES_RANKED_AVAILABILITY_DAYS:String = "#menu:headerButtons/battle/types/ranked/availability/days";
@@ -1194,8 +1196,6 @@ package
         public static const HEADERBUTTONS_BATTLE_TYPES_SQUAD_EVENT:String = "#menu:headerButtons/battle/types/squad/event";
 
         public static const HEADERBUTTONS_BATTLE_TYPES_SQUAD_EPIC:String = "#menu:headerButtons/battle/types/squad/epic";
-
-        public static const HEADERBUTTONS_BATTLE_TYPES_SQUAD_BOB:String = "#menu:headerButtons/battle/types/squad/bob";
 
         public static const HEADERBUTTONS_BATTLE_TYPES_SQUADLEAVEOWNER:String = "#menu:headerButtons/battle/types/squadLeaveOwner";
 
@@ -1222,8 +1222,6 @@ package
         public static const HEADERBUTTONS_BATTLE_TYPES_SIMPLESQUAD:String = "#menu:headerButtons/battle/types/simpleSquad";
 
         public static const HEADERBUTTONS_BATTLE_TYPES_EVENTSQUAD:String = "#menu:headerButtons/battle/types/eventSquad";
-
-        public static const HEADERBUTTONS_BATTLE_TYPES_BOBSQUAD:String = "#menu:headerButtons/battle/types/bobSquad";
 
         public static const HEADERBUTTONS_BATTLE_TYPES_TRAININGLEAVE:String = "#menu:headerButtons/battle/types/trainingLeave";
 
@@ -1256,10 +1254,6 @@ package
         public static const HEADERBUTTONS_BATTLE_TYPES_BATTLETUTORIAL:String = "#menu:headerButtons/battle/types/battleTutorial";
 
         public static const HEADERBUTTONS_BATTLE_TYPES_FALLOUT:String = "#menu:headerButtons/battle/types/fallout";
-
-        public static const HEADERBUTTONS_BATTLE_TYPES_BOB:String = "#menu:headerButtons/battle/types/bob";
-
-        public static const HEADERBUTTONS_BATTLE_TYPES_BOB_DESCR:String = "#menu:headerButtons/battle/types/bob/descr";
 
         public static const HEADERBUTTONS_BATTLE_AVAILABLESINCE:String = "#menu:headerButtons/battle/availableSince";
 
@@ -1349,13 +1343,13 @@ package
 
         public static const HEADERBUTTONS_FIGHTBTN_TOOLTIP_EPICBATTLEONLY_BODY:String = "#menu:headerButtons/fightBtn/tooltip/epicBattleOnly/body";
 
-        public static const HEADERBUTTONS_FIGHTBTN_TOOLTIP_BOBONLY_HEADER:String = "#menu:headerButtons/fightBtn/tooltip/bobOnly/header";
-
-        public static const HEADERBUTTONS_FIGHTBTN_TOOLTIP_BOBONLY_BODY:String = "#menu:headerButtons/fightBtn/tooltip/bobOnly/body";
-
         public static const HEADERBUTTONS_FIGHTBTN_TOOLTIP_RANKEDDISABLED_HEADER:String = "#menu:headerButtons/fightBtn/tooltip/rankedDisabled/header";
 
         public static const HEADERBUTTONS_FIGHTBTN_TOOLTIP_RANKEDDISABLED_BODY:String = "#menu:headerButtons/fightBtn/tooltip/rankedDisabled/body";
+
+        public static const HEADERBUTTONS_FIGHTBTN_TOOLTIP_RANKEDNOTSET_HEADER:String = "#menu:headerButtons/fightBtn/tooltip/rankedNotSet/header";
+
+        public static const HEADERBUTTONS_FIGHTBTN_TOOLTIP_RANKEDNOTSET_BODY:String = "#menu:headerButtons/fightBtn/tooltip/rankedNotSet/body";
 
         public static const HEADERBUTTONS_DEFAULTCOUNTER:String = "#menu:headerButtons/defaultCounter";
 
@@ -1587,13 +1581,19 @@ package
 
         public static const MODULEFITS_NOT_WITH_INSTALLED_EQUIPMENT:String = "#menu:moduleFits/not_with_installed_equipment";
 
-        public static const MODULEFITS_DESTROYNAME:String = "#menu:moduleFits/destroyName";
-
         public static const MODULEFITS_DESTROYDESCR:String = "#menu:moduleFits/destroyDescr";
 
-        public static const MODULEFITS_DESTROYTOOLTIP:String = "#menu:moduleFits/destroyToolTip";
+        public static const MODULEFITS_DESTROYBTN_TOOLTIP_HEADER:String = "#menu:moduleFits/destroyBtn/tooltip/header";
+
+        public static const MODULEFITS_DESTROYBTN_TOOLTIP_BODY:String = "#menu:moduleFits/destroyBtn/tooltip/body";
 
         public static const MODULEFITS_REMOVENAME:String = "#menu:moduleFits/removeName";
+
+        public static const MODULEFITS_UPGRADEBTN_LABEL:String = "#menu:moduleFits/upgradeBtn/label";
+
+        public static const MODULEFITS_UPGRADEBTN_TOOLTIP_HEADER:String = "#menu:moduleFits/upgradeBtn/tooltip/header";
+
+        public static const MODULEFITS_UPGRADEBTN_TOOLTIP_BODY:String = "#menu:moduleFits/upgradeBtn/tooltip/body";
 
         public static const MODULEFITS_REMOVEDESCR:String = "#menu:moduleFits/removeDescr";
 
@@ -3075,7 +3075,7 @@ package
 
         public static const BONUSTYPE_24:String = "#menu:bonusType/24";
 
-        public static const BONUSTYPE_32:String = "#menu:bonusType/32";
+        public static const BONUSTYPE_27:String = "#menu:bonusType/27";
 
         public static const FORTIFICATIONCTX_ASSIGNEDPLAYERS:String = "#menu:fortificationCtx/assignedPlayers";
 
@@ -3455,6 +3455,14 @@ package
 
         public static const TIME_TIMEVALUEWITHSECS_LESSMIN:String = "#menu:Time/timeValueWithSecs/lessMin";
 
+        public static const TIME_TIMELEFTSHORT_DAYS:String = "#menu:Time/timeLeftShort/days";
+
+        public static const TIME_TIMELEFTSHORT_HOURS:String = "#menu:Time/timeLeftShort/hours";
+
+        public static const TIME_TIMELEFTSHORT_MIN:String = "#menu:Time/timeLeftShort/min";
+
+        public static const TIME_TIMELEFTSHORT_LESSMIN:String = "#menu:Time/timeLeftShort/lessMin";
+
         public static const MAPBLACKLIST_TIMELEFTSHORT_DAYS:String = "#menu:mapBlackList/timeLeftShort/days";
 
         public static const MAPBLACKLIST_TIMELEFTSHORT_HOURS:String = "#menu:mapBlackList/timeLeftShort/hours";
@@ -3603,6 +3611,10 @@ package
 
         public static const INFINITYSYMBOL:String = "#menu:infinitySymbol";
 
+        public static const HEADERBUTTONS_BATTLE_TYPES_EVENTPROGRESSION:String = "#menu:headerButtons/battle/types/eventProgression";
+
+        public static const HEADERBUTTONS_BATTLE_TYPES_EVENTPROGRESSION_ABOUT:String = "#menu:headerButtons/battle/types/eventProgression/about";
+
         public static const HEADERBUTTONS_BATTLE_TYPES_EPICBATTLE:String = "#menu:headerButtons/battle/types/epicBattle";
 
         public static const HEADERBUTTONS_BATTLE_TYPES_EPICBATTLE_DESCR:String = "#menu:headerButtons/battle/types/epicBattle/descr";
@@ -3717,6 +3729,12 @@ package
 
         public static const FITTINGSELECTPOPOVER_DESCTEXT_CRYSTAL:String = "#menu:fittingSelectPopover/descText/crystal";
 
+        public static const FITTINGSELECTPOPOVER_TROPHYOVERLAY_TITLETEXT:String = "#menu:fittingSelectPopover/trophyOverlay/titleText";
+
+        public static const FITTINGSELECTPOPOVER_TROPHYOVERLAY_DESCTEXT:String = "#menu:fittingSelectPopover/trophyOverlay/descText";
+
+        public static const FITTINGSELECTPOPOVER_TROPHYOVERLAY_OKBTNLABEL:String = "#menu:fittingSelectPopover/trophyOverlay/okBtnLabel";
+
         public static const QUOTE:String = "#menu:quote";
 
         public static const TECHTREE_ANNOUNCEMENT:String = "#menu:techtree/Announcement";
@@ -3776,6 +3794,8 @@ package
         public static const CST_ITEM_CTX_MENU_SHOWBLUEPRINT:String = "#menu:cst_item_ctx_menu/showBlueprint";
 
         public static const CST_ITEM_CTX_MENU_STYLEINFO:String = "#menu:cst_item_ctx_menu/styleInfo";
+
+        public static const CST_ITEM_CTX_MENU_UPGRADE:String = "#menu:cst_item_ctx_menu/upgrade";
 
         public static const VIEWHEADER_BACKBTN_LABEL:String = "#menu:viewHeader/backBtn/label";
 

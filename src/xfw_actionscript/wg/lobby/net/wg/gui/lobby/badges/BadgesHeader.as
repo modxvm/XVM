@@ -4,6 +4,7 @@ package net.wg.gui.lobby.badges
     import net.wg.gui.interfaces.IUpdatableComponent;
     import net.wg.data.constants.Values;
     import net.wg.gui.components.advanced.BackButton;
+    import net.wg.gui.components.controls.BadgeComponent;
     import net.wg.gui.components.controls.UILoaderAlt;
     import flash.display.MovieClip;
     import net.wg.gui.components.assets.SpottedBackground;
@@ -12,6 +13,7 @@ package net.wg.gui.lobby.badges
     import net.wg.gui.interfaces.ISoundButtonEx;
     import net.wg.gui.components.controls.CheckBox;
     import net.wg.gui.lobby.badges.data.BadgesHeaderVO;
+    import net.wg.gui.components.controls.VO.BadgeVisualVO;
     import flash.text.TextFieldAutoSize;
     import flash.events.Event;
     import scaleform.clik.events.ButtonEvent;
@@ -23,7 +25,7 @@ package net.wg.gui.lobby.badges
     public class BadgesHeader extends UIComponentEx implements IUpdatableComponent
     {
 
-        private static const INV_BADGE_IMG:String = "inv_badge_img";
+        private static const INV_BADGE_VISUAL:String = "inv_badge_img";
 
         private static const INV_SUF_BADGE_IMG:String = "inv_suf_badge_img";
 
@@ -45,7 +47,7 @@ package net.wg.gui.lobby.badges
 
         public var backButton:BackButton = null;
 
-        public var badgeImg:UILoaderAlt = null;
+        public var badgeComponent:BadgeComponent = null;
 
         public var suffixBadgeImg:UILoaderAlt = null;
 
@@ -69,7 +71,7 @@ package net.wg.gui.lobby.badges
 
         private var _data:BadgesHeaderVO = null;
 
-        private var _badgeImg:String = "";
+        private var _badgeVisualVO:BadgeVisualVO = null;
 
         private var _suffixBadgeImg:String = "";
 
@@ -102,9 +104,9 @@ package net.wg.gui.lobby.badges
                 this.playerTf.htmlText = this._data.playerText;
                 this.updateBadgeRelatedLayout();
             }
-            if(isInvalid(INV_BADGE_IMG))
+            if(this._badgeVisualVO != null && isInvalid(INV_BADGE_VISUAL))
             {
-                this.badgeImg.source = this._hasSelectedBadge?this._badgeImg:RES_ICONS.MAPS_ICONS_LIBRARY_BADGES_80X80_BADGE_EMPTY;
+                this.badgeComponent.setData(this._badgeVisualVO);
                 this.slotCloseBtn.visible = this._hasSelectedBadge;
                 this.updateBadgeRelatedLayout();
             }
@@ -149,11 +151,12 @@ package net.wg.gui.lobby.badges
             this.suffixSetting = null;
             this.suffixBadgeImg.dispose();
             this.suffixBadgeImg = null;
-            this.badgeImg.dispose();
-            this.badgeImg = null;
+            this.badgeComponent.dispose();
+            this.badgeComponent = null;
             this.slotCloseBtn.removeEventListener(ButtonEvent.CLICK,this.onSlotCloseBtnClickHandler);
             this.slotCloseBtn.dispose();
             this.slotCloseBtn = null;
+            this._badgeVisualVO = null;
             this.descrTf = null;
             this.playerTf = null;
             this.separator = null;
@@ -166,14 +169,11 @@ package net.wg.gui.lobby.badges
             super.onDispose();
         }
 
-        public function setBadgeImg(param1:String) : void
+        public function setBadgeData(param1:BadgeVisualVO, param2:Boolean) : void
         {
-            if(this._badgeImg != param1)
-            {
-                this._badgeImg = param1;
-                this._hasSelectedBadge = StringUtils.isNotEmpty(this._badgeImg);
-                invalidate(INV_BADGE_IMG);
-            }
+            this._badgeVisualVO = param1;
+            this._hasSelectedBadge = param2;
+            invalidate(INV_BADGE_VISUAL);
         }
 
         public function setSuffixBadgeImg(param1:String, param2:String, param3:Boolean) : void
@@ -220,11 +220,11 @@ package net.wg.gui.lobby.badges
             {
                 this.playerTf.x = this.playerTf.x - (SUFFIX_TF_BADGE_OFFSET_X + (this.suffixBadgeImg.width >> 1));
             }
-            this.badgeImg.x = this.playerTf.x - BADGE_IMG_GAP | 0;
+            this.badgeComponent.x = this.playerTf.x - BADGE_IMG_GAP | 0;
             this.playerTf.y = PLAYER_TF_DEFAULT_Y;
             if(this._hasSelectedBadge)
             {
-                this.slotCloseBtn.x = this.badgeImg.x + BADGE_IMG_WIDTH + SLOT_CLOSE_BTN_GAP | 0;
+                this.slotCloseBtn.x = this.badgeComponent.x + BADGE_IMG_WIDTH + SLOT_CLOSE_BTN_GAP | 0;
             }
             if(StringUtils.isNotEmpty(this._suffixBadgeImg))
             {

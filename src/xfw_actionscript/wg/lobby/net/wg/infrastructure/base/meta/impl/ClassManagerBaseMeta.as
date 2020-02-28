@@ -91,9 +91,12 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.bootcamp.introVideoPage.containers.LoadingContainer;
     import net.wg.gui.bootcamp.introVideoPage.containers.StepperContainer;
     import net.wg.gui.bootcamp.introVideoPage.data.BCIntroVideoVO;
+    import net.wg.gui.components.advanced.AtlasDigit;
+    import net.wg.gui.components.advanced.BadgeSizes;
     import net.wg.gui.components.advanced.ButtonBarEx;
     import net.wg.gui.components.advanced.ContentTabBar;
     import net.wg.gui.components.advanced.DashLine;
+    import net.wg.gui.components.advanced.DigitsComponent;
     import net.wg.gui.components.advanced.FieldSet;
     import net.wg.gui.components.advanced.InviteIndicator;
     import net.wg.gui.components.advanced.ModuleTypesUIWithFill;
@@ -136,6 +139,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.components.carousels.data.CheckBoxRendererVO;
     import net.wg.gui.components.carousels.data.FilterCarouseInitVO;
     import net.wg.gui.components.carousels.data.FiltersStateVO;
+    import net.wg.gui.components.carousels.data.ProgressionPointsVO;
     import net.wg.gui.components.carousels.data.VehicleCarouselVO;
     import net.wg.gui.components.carousels.events.TankItemEvent;
     import net.wg.gui.components.carousels.filters.FilterCounter;
@@ -207,10 +211,12 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.components.containers.SoundButtonContainer;
     import net.wg.gui.components.containers.UssWrapper;
     import net.wg.gui.components.containers.WaitingManagedContainer;
+    import net.wg.gui.components.containers.inject.GFInjectComponent;
     import net.wg.gui.components.controls.ActionPriceBg;
     import net.wg.gui.components.controls.AlertIco;
     import net.wg.gui.components.controls.AnimationIcon;
     import net.wg.gui.components.controls.ArrowButton;
+    import net.wg.gui.components.controls.BadgeComponent;
     import net.wg.gui.components.controls.BaseArrowButton;
     import net.wg.gui.components.controls.BitmapFill;
     import net.wg.gui.components.controls.BlackButton;
@@ -357,6 +363,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.components.controls.universalBtn.UniversalBtn;
     import net.wg.gui.components.controls.universalBtn.UniversalBtnToggleIndicator;
     import net.wg.gui.components.controls.VO.ActionPriceVO;
+    import net.wg.gui.components.controls.VO.BadgeVisualVO;
     import net.wg.gui.components.controls.VO.CompoundPriceVO;
     import net.wg.gui.components.controls.VO.ItemPriceVO;
     import net.wg.gui.components.controls.VO.PriceVO;
@@ -988,11 +995,17 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_BOOTCAMP_INTROVIDEOPAGE_DATA_BCINTROVIDEOVO:Class = BCIntroVideoVO;
 
+        public static const NET_WG_GUI_COMPONENTS_ADVANCED_ATLASDIGIT:Class = AtlasDigit;
+
+        public static const NET_WG_GUI_COMPONENTS_ADVANCED_BADGESIZES:Class = BadgeSizes;
+
         public static const NET_WG_GUI_COMPONENTS_ADVANCED_BUTTONBAREX:Class = ButtonBarEx;
 
         public static const NET_WG_GUI_COMPONENTS_ADVANCED_CONTENTTABBAR:Class = ContentTabBar;
 
         public static const NET_WG_GUI_COMPONENTS_ADVANCED_DASHLINE:Class = DashLine;
+
+        public static const NET_WG_GUI_COMPONENTS_ADVANCED_DIGITSCOMPONENT:Class = DigitsComponent;
 
         public static const NET_WG_GUI_COMPONENTS_ADVANCED_FIELDSET:Class = FieldSet;
 
@@ -1077,6 +1090,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_COMPONENTS_CAROUSELS_DATA_FILTERCAROUSEINITVO:Class = FilterCarouseInitVO;
 
         public static const NET_WG_GUI_COMPONENTS_CAROUSELS_DATA_FILTERSSTATEVO:Class = FiltersStateVO;
+
+        public static const NET_WG_GUI_COMPONENTS_CAROUSELS_DATA_PROGRESSIONPOINTSVO:Class = ProgressionPointsVO;
 
         public static const NET_WG_GUI_COMPONENTS_CAROUSELS_DATA_VEHICLECAROUSELVO:Class = VehicleCarouselVO;
 
@@ -1220,6 +1235,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_COMPONENTS_CONTAINERS_WAITINGMANAGEDCONTAINER:Class = WaitingManagedContainer;
 
+        public static const NET_WG_GUI_COMPONENTS_CONTAINERS_INJECT_GFINJECTCOMPONENT:Class = GFInjectComponent;
+
         public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACTIONPRICEBG:Class = ActionPriceBg;
 
         public static const NET_WG_GUI_COMPONENTS_CONTROLS_ALERTICO:Class = AlertIco;
@@ -1227,6 +1244,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_COMPONENTS_CONTROLS_ANIMATIONICON:Class = AnimationIcon;
 
         public static const NET_WG_GUI_COMPONENTS_CONTROLS_ARROWBUTTON:Class = ArrowButton;
+
+        public static const NET_WG_GUI_COMPONENTS_CONTROLS_BADGECOMPONENT:Class = BadgeComponent;
 
         public static const NET_WG_GUI_COMPONENTS_CONTROLS_BASEARROWBUTTON:Class = BaseArrowButton;
 
@@ -1519,6 +1538,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_COMPONENTS_CONTROLS_UNIVERSALBTN_UNIVERSALBTNTOGGLEINDICATOR:Class = UniversalBtnToggleIndicator;
 
         public static const NET_WG_GUI_COMPONENTS_CONTROLS_VO_ACTIONPRICEVO:Class = ActionPriceVO;
+
+        public static const NET_WG_GUI_COMPONENTS_CONTROLS_VO_BADGEVISUALVO:Class = BadgeVisualVO;
 
         public static const NET_WG_GUI_COMPONENTS_CONTROLS_VO_COMPOUNDPRICEVO:Class = CompoundPriceVO;
 

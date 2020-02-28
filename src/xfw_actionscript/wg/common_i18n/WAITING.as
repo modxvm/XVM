@@ -83,6 +83,8 @@ package
 
         public static const INSTALLEQUIPMENT:String = "#waiting:installEquipment";
 
+        public static const MODULEUPGRADE:String = "#waiting:moduleUpgrade";
+
         public static const RESEARCH:String = "#waiting:research";
 
         public static const DRAW_RESEARCH_ITEMS:String = "#waiting:draw_research_items";
@@ -219,7 +221,7 @@ package
 
         public static const DOWNLOAD_ANONYMIZER:String = "#waiting:download/anonymizer";
 
-        public static const BOB_CLAIMREWARD:String = "#waiting:bob/claimReward";
+        public static const DOWNLOAD_BATTLEPASS:String = "#waiting:download/battlePass";
 
         public static const UPDATINGSKILLWINDOW:String = "#waiting:updatingSkillWindow";
 
@@ -318,6 +320,14 @@ package
         public static const BLUEPRINTS_CONVERTFRAGMENTS:String = "#waiting:blueprints/convertFragments";
 
         public static const CREWBOOKS_USECREWBOOK:String = "#waiting:crewBooks/useCrewBook";
+
+        public static const DAILYQUESTS_WAITREROLL:String = "#waiting:dailyQuests/waitReroll";
+
+        public static const BUYBATTLEPASS:String = "#waiting:buyBattlePass";
+
+        public static const BUYBATTLEPASSLEVELS:String = "#waiting:buyBattlePassLevels";
+
+        public static const CHOOSEFINALREWARD:String = "#waiting:chooseFinalReward";
 
         public function WAITING()
         {

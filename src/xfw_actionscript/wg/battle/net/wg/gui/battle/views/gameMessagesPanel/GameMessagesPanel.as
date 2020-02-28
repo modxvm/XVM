@@ -144,6 +144,7 @@ package net.wg.gui.battle.views.gameMessagesPanel
                         }
                     }
                     this._activeMessages.splice(0,this._activeMessages.length);
+                    onMessageHidingS(_loc1_.getType(),_loc1_.getID());
                     _loc1_.gotoAndPlay(OUTRO);
                     this._scheduler.scheduleTask(this.onOutroTaskComplete,DELAYED_REMOVAL_TIME,_loc1_);
                     this._isPlayingMessages = false;
@@ -198,6 +199,7 @@ package net.wg.gui.battle.views.gameMessagesPanel
             if(this._isPlayingMessages && this._activeMessages.length > 0)
             {
                 _loc1_ = this._activeMessages.pop();
+                onMessageHidingS(_loc1_.getType(),_loc1_.getID());
                 _loc1_.gotoAndPlay(OUTRO);
                 this._scheduler.scheduleTask(this.onOutroTaskComplete,DELAYED_REMOVAL_TIME,_loc1_);
             }

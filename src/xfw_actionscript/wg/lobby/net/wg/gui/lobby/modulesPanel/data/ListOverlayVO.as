@@ -5,7 +5,9 @@ package net.wg.gui.lobby.modulesPanel.data
     public class ListOverlayVO extends DAAPIDataClass
     {
 
-        public var icon:String = "";
+        public var iconSmall:String = "";
+
+        public var iconBig:String = "";
 
         public var titleText:String = "";
 

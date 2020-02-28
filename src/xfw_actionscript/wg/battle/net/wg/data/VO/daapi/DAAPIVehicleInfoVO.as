@@ -2,6 +2,7 @@ package net.wg.data.VO.daapi
 {
     import net.wg.data.daapi.base.DAAPIDataClass;
     import net.wg.data.constants.Values;
+    import net.wg.gui.components.controls.VO.BadgeVisualVO;
     import net.wg.data.constants.VehicleStatus;
     import net.wg.data.constants.PlayerStatus;
     import net.wg.data.constants.UserTags;
@@ -11,6 +12,8 @@ package net.wg.data.VO.daapi
     {
 
         public static const DEFAULT_SQUAD_IDX:int = Values.ZERO;
+
+        private static const BADGE_FIELD_NAME:String = "badge";
 
         public var prebattleID:Number = 0;
 
@@ -62,7 +65,9 @@ package net.wg.data.VO.daapi
 
         public var teamColor:String = "";
 
-        public var badgeType:String = "";
+        public var badgeVO:BadgeVisualVO = null;
+
+        public var hasSelectedBadge:Boolean = false;
 
         public var suffixBadgeType:String = "";
 
@@ -80,12 +85,27 @@ package net.wg.data.VO.daapi
             return "[DAAPIVehicleInfoVO: vehicleID = " + this.vehicleID + ", playerFullName = " + this.playerFullName + " vehicleStatus = " + this.vehicleStatus + "] " + this.playerStatus;
         }
 
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
+            if(param1 == BADGE_FIELD_NAME)
+            {
+                this.badgeVO = new BadgeVisualVO(param2);
+                return false;
+            }
+            return super.onDataWrite(param1,param2);
+        }
+
         override protected function onDispose() : void
         {
             if(this.userTags)
             {
                 this.userTags.splice(0,this.userTags.length);
                 this.userTags = null;
+            }
+            if(this.badgeVO)
+            {
+                this.badgeVO.dispose();
+                this.badgeVO = null;
             }
             super.onDispose();
         }

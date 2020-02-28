@@ -1,13 +1,13 @@
 package net.wg.gui.components.tooltips.inblocks.blocks
 {
-    import net.wg.gui.components.advanced.interfaces.IProgressBarAnim;
+    import net.wg.gui.lobby.epicBattles.components.common.EpicProgressBar;
     import net.wg.gui.lobby.epicBattles.data.EpicBattlesMetaLevelVO;
     import net.wg.gui.components.advanced.vo.ProgressBarAnimVO;
 
     public class EpicMetaLevelProgressBlock extends BaseTooltipBlock
     {
 
-        public var progressBar:IProgressBarAnim = null;
+        public var progressBar:EpicProgressBar = null;
 
         private var _data:EpicBattlesMetaLevelVO = null;
 
@@ -16,6 +16,11 @@ package net.wg.gui.components.tooltips.inblocks.blocks
         public function EpicMetaLevelProgressBlock()
         {
             super();
+        }
+
+        override public function cleanUp() : void
+        {
+            this.clearData();
         }
 
         override public function setBlockData(param1:Object) : void
@@ -28,6 +33,16 @@ package net.wg.gui.components.tooltips.inblocks.blocks
 
         override public function setBlockWidth(param1:int) : void
         {
+        }
+
+        override public function getWidth() : Number
+        {
+            return this.progressBar.width;
+        }
+
+        override public function getHeight() : Number
+        {
+            return this.progressBar.height;
         }
 
         override protected function onValidateBlock() : Boolean

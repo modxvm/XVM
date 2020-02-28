@@ -5,9 +5,11 @@ package net.wg.gui.lobby.badges.components
     import net.wg.infrastructure.interfaces.IImage;
     import flash.display.Sprite;
     import net.wg.gui.components.assets.NewIndicator;
+    import net.wg.gui.components.controls.BadgeComponent;
     import net.wg.gui.lobby.badges.data.BadgeVO;
     import scaleform.clik.events.ButtonEvent;
     import scaleform.clik.constants.InvalidationType;
+    import net.wg.data.constants.Values;
     import org.idmedia.as3commons.util.StringUtils;
     import net.wg.gui.lobby.badges.events.BadgesEvent;
 
@@ -18,7 +20,7 @@ package net.wg.gui.lobby.badges.components
 
         private static const NOT_ENABLED_ALPHA:Number = 0.7;
 
-        private static const ICON_NOT_ENABLED_ALPHA:Number = 0.5;
+        private static const ICON_AND_CONTENT_NOT_ENABLED_ALPHA:Number = 0.5;
 
         private static const STATE_NORMAL:String = "normal";
 
@@ -30,8 +32,6 @@ package net.wg.gui.lobby.badges.components
 
         public var descrTF:TextField = null;
 
-        public var icon:IImage = null;
-
         public var selectedImg:IImage = null;
 
         public var hit:Sprite = null;
@@ -39,6 +39,8 @@ package net.wg.gui.lobby.badges.components
         public var highlightIcon:IImage = null;
 
         public var newIndicator:NewIndicator = null;
+
+        public var badgeComponent:BadgeComponent = null;
 
         private var _badgeData:BadgeVO = null;
 
@@ -76,8 +78,7 @@ package net.wg.gui.lobby.badges.components
                 alpha = enabled?1:NOT_ENABLED_ALPHA;
                 this.titleTF.htmlText = this._badgeData.title;
                 this.descrTF.htmlText = this._badgeData.description;
-                this.icon.alpha = enabled?1:ICON_NOT_ENABLED_ALPHA;
-                this.icon.source = this._badgeData.icon;
+                this.badgeComponent.alpha = enabled?Values.DEFAULT_ALPHA:ICON_AND_CONTENT_NOT_ENABLED_ALPHA;
                 this.highlightIcon.source = this._badgeData.highlightIcon;
                 if(!this._seenByUser)
                 {
@@ -88,6 +89,7 @@ package net.wg.gui.lobby.badges.components
                         this.newIndicator.shine();
                     }
                 }
+                this.badgeComponent.setData(this._badgeData.visual);
             }
             if(isInvalid(INV_SELECTED))
             {
@@ -109,12 +111,15 @@ package net.wg.gui.lobby.badges.components
         override protected function onDispose() : void
         {
             removeEventListener(ButtonEvent.CLICK,this.onClickHandler);
-            this.icon.dispose();
-            this.icon = null;
             if(this.selectedImg)
             {
                 this.selectedImg.dispose();
                 this.selectedImg = null;
+            }
+            if(this.badgeComponent)
+            {
+                this.badgeComponent.dispose();
+                this.badgeComponent = null;
             }
             this.newIndicator.dispose();
             this.newIndicator = null;

@@ -33,6 +33,8 @@ package net.wg.data.constants
 
         public static const BUTTON_NORMAL:String = "ButtonNormal";
 
+        public static const BUTTON_ICON_NORMAL:String = "ButtonIconNormalUI";
+
         public static const BUTTON_BLACK:String = "ButtonBlack";
 
         public static const SCROLL_BAR:String = "ScrollBar";
@@ -655,6 +657,10 @@ package net.wg.data.constants
 
         public static const RANKED_BATTLE_RESULT_LIST_WITH_BG:String = "RankedListWithBackgroundUI";
 
+        public static const BADGE_COMPONENT:String = "BadgeComponentUI";
+
+        public static const USER_NAME_FIELD:String = "UserNameFieldUI";
+
         public static const INVITE_INDICATOR:String = "inviteIndicator_UI";
 
         public static const BADGE_RENDERER_UI:String = "BadgeRendererUI";
@@ -866,6 +872,8 @@ package net.wg.data.constants
         public static const SESSION_PARAMS_LIST_RENDER_LINK:String = "SessionStatsTankInfoRendererUI";
 
         public static const SESSION_STATS_PARAM_RENDERER:String = "SessionStatsParamStatsBlickUI";
+
+        public static const SESSION_STATS_CHECKBOX_RENDERER:String = "SessionStatsSettingsCheckboxUI";
 
         public function Linkages()
         {

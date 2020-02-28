@@ -11,6 +11,7 @@ package net.wg.gui.lobby.store
     import scaleform.clik.utils.Constraints;
     import scaleform.clik.constants.ConstrainMode;
     import net.wg.data.Aliases;
+    import net.wg.gui.events.DeviceEvent;
     import net.wg.data.components.StoreMenuViewData;
     import scaleform.clik.events.ListEvent;
     import scaleform.clik.events.IndexEvent;
@@ -98,6 +99,7 @@ package net.wg.gui.lobby.store
             registerFlashComponentS(this.storeTable,Aliases.SHOP_TABLE);
             this.storeTable.addEventListener(StoreEvent.INFO,this.onStoreTableInfoHandler);
             this.storeTable.addEventListener(StoreEvent.ADD_TO_COMPARE,this.onStoreTableAddToCompareHandler);
+            this.storeTable.addEventListener(DeviceEvent.DEVICE_UPGRADE,this.onStoreTableDeviceUpgradeHandler);
         }
 
         override protected function onDispose() : void
@@ -105,6 +107,7 @@ package net.wg.gui.lobby.store
             var _loc1_:StoreMenuViewData = null;
             this.storeTable.removeEventListener(StoreEvent.INFO,this.onStoreTableInfoHandler);
             this.storeTable.removeEventListener(StoreEvent.ADD_TO_COMPARE,this.onStoreTableAddToCompareHandler);
+            this.storeTable.removeEventListener(DeviceEvent.DEVICE_UPGRADE,this.onStoreTableDeviceUpgradeHandler);
             this._storeTable = null;
             this.setCurrentView(null);
             this._subFilterData = null;
@@ -420,6 +423,11 @@ package net.wg.gui.lobby.store
         private function onStoreTableAddToCompareHandler(param1:StoreEvent) : void
         {
             onAddVehToCompareS(param1.itemCD);
+        }
+
+        private function onStoreTableDeviceUpgradeHandler(param1:DeviceEvent) : void
+        {
+            onUpgradeModuleS(param1.deviceId);
         }
     }
 }

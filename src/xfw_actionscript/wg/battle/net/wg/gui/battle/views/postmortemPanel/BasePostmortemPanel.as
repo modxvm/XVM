@@ -1,9 +1,14 @@
 package net.wg.gui.battle.views.postmortemPanel
 {
-    import net.wg.gui.battle.components.BattleDisplayable;
+    import net.wg.infrastructure.base.meta.impl.BasePostmortemPanelMeta;
     import flash.text.TextField;
+    import net.wg.gui.components.controls.UserNameField;
+    import flash.events.Event;
+    import net.wg.data.VO.UserVO;
+    import net.wg.data.constants.Linkages;
+    import flashx.textLayout.formats.VerticalAlign;
 
-    public class BasePostmortemPanel extends BattleDisplayable
+    public class BasePostmortemPanel extends BasePostmortemPanelMeta
     {
 
         private static const EMPTY_STR:String = "";
@@ -20,13 +25,15 @@ package net.wg.gui.battle.views.postmortemPanel
 
         protected static const PLAYER_INFO_DELTA_Y:int = 250;
 
-        protected static const GAP_VEHICLE_PANEL_DEAD_REASON:int = 20;
+        protected static const GAP_VEHICLE_PANEL_DEAD_REASON:int = 35;
 
         public var playerInfoTF:TextField = null;
 
         public var deadReasonTF:TextField = null;
 
         public var vehiclePanel:VehiclePanel = null;
+
+        protected var _userName:UserNameField = null;
 
         private var _deadReason:String = "";
 
@@ -54,12 +61,20 @@ package net.wg.gui.battle.views.postmortemPanel
             {
                 this.playerInfoTF.visible = false;
                 this.deadReasonTF.visible = true;
+                if(this._userName != null)
+                {
+                    this._userName.visible = true;
+                }
                 this.vehiclePanel.visible = this._showVehiclePanel;
             }
             if(isInvalid(INVALID_PLAYER_INFO))
             {
                 this.playerInfoTF.visible = true;
                 this.deadReasonTF.visible = false;
+                if(this._userName != null)
+                {
+                    this._userName.visible = false;
+                }
                 this.vehiclePanel.visible = false;
                 if(this._playerInfo != this.playerInfoTF.htmlText)
                 {
@@ -70,6 +85,10 @@ package net.wg.gui.battle.views.postmortemPanel
             {
                 this.playerInfoTF.visible = false;
                 this.deadReasonTF.visible = true;
+                if(this._userName != null)
+                {
+                    this._userName.visible = true;
+                }
                 if(this._deadReason != this.deadReasonTF.htmlText)
                 {
                     this.deadReasonTF.htmlText = this._deadReason;
@@ -92,10 +111,16 @@ package net.wg.gui.battle.views.postmortemPanel
             this.deadReasonTF = null;
             this.vehiclePanel.dispose();
             this.vehiclePanel = null;
+            if(this._userName != null)
+            {
+                this._userName.removeEventListener(Event.CHANGE,this.updateDeadReason);
+                this._userName.dispose();
+                this._userName = null;
+            }
             super.onDispose();
         }
 
-        public function setDeadReasonInfo(param1:String, param2:Boolean, param3:String, param4:String, param5:String, param6:String) : void
+        override protected function setDeadReasonInfo(param1:String, param2:Boolean, param3:String, param4:String, param5:String, param6:String, param7:UserVO) : void
         {
             this._deadReason = param1;
             this._showVehiclePanel = param2;
@@ -103,6 +128,16 @@ package net.wg.gui.battle.views.postmortemPanel
             this._vehicleImg = param4;
             this._vehicleName = param6;
             this._vehicleType = param5;
+            if(param7)
+            {
+                if(this._userName == null)
+                {
+                    this._userName = App.utils.classFactory.getComponent(Linkages.USER_NAME_FIELD,UserNameField);
+                    this._userName.addEventListener(Event.CHANGE,this.updateDeadReason);
+                    addChild(this._userName);
+                }
+                this._userName.userVO = param7;
+            }
             invalidate(INVALID_VEHICLE_PANEL);
         }
 
@@ -127,6 +162,12 @@ package net.wg.gui.battle.views.postmortemPanel
             this.playerInfoTF.y = -PLAYER_INFO_DELTA_Y - (App.appHeight >> 1);
             this.vehiclePanel.y = -(App.appHeight >> 1) + VEHICLE_PANEL_OFFSET_Y;
             this.deadReasonTF.y = this.vehiclePanel.y - GAP_VEHICLE_PANEL_DEAD_REASON - this.deadReasonTF.height;
+            if(this._userName != null)
+            {
+                this._userName.y = this.deadReasonTF.y + this.deadReasonTF.textHeight;
+                this._userName.x = -this._userName.textWidth >> 1;
+                this._userName.verticalAlign = VerticalAlign.MIDDLE;
+            }
         }
 
         protected function setComponentsVisibility(param1:Boolean) : void
@@ -134,6 +175,15 @@ package net.wg.gui.battle.views.postmortemPanel
             this.playerInfoTF.visible = param1;
             this.vehiclePanel.visible = param1;
             this.deadReasonTF.visible = param1;
+            if(this._userName != null)
+            {
+                this._userName.visible = param1;
+            }
+        }
+
+        private function updateDeadReason(param1:Event) : void
+        {
+            this.updateElementsPosition();
         }
     }
 }

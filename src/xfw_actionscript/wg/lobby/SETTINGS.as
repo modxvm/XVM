@@ -1097,6 +1097,8 @@ package
 
         public static const FEEDBACK_TAB_DAMAGEINDICATOR_INDICATOR_BLOCKEDLABEL:String = "#settings:feedback/tab/damageIndicator/indicator/blockedLabel";
 
+        public static const FEEDBACK_TAB_DAMAGEINDICATOR_INDICATOR_ALLYLABEL:String = "#settings:feedback/tab/damageIndicator/indicator/allyLabel";
+
         public static const FEEDBACK_TAB_DAMAGEINDICATOR_INDICATOR_DAMAGELABEL:String = "#settings:feedback/tab/damageIndicator/indicator/damageLabel";
 
         public static const FEEDBACK_TAB_DAMAGELOGPANEL:String = "#settings:feedback/tab/damageLogPanel";
@@ -1204,6 +1206,10 @@ package
         public static const FEEDBACK_TAB_DAMAGEINDICATOR_PRESETS_ALL:String = "#settings:feedback/tab/damageIndicator/presets/all";
 
         public static const FEEDBACK_TAB_DAMAGEINDICATOR_PRESETS_WITHOUTCRIT:String = "#settings:feedback/tab/damageIndicator/presets/withoutCrit";
+
+        public static const FEEDBACK_TAB_DAMAGEINDICATOR_PRESETS_SHOWCRITS:String = "#settings:feedback/tab/damageIndicator/presets/showCrits";
+
+        public static const FEEDBACK_TAB_DAMAGEINDICATOR_PRESETS_SHOWALLIES:String = "#settings:feedback/tab/damageIndicator/presets/showAllies";
 
         public static const FEEDBACK_TAB_DAMAGEINDICATOR_ITEMS:String = "#settings:feedback/tab/damageIndicator/items";
 

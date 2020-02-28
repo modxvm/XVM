@@ -310,22 +310,19 @@ package net.wg.gui.lobby.techtree.controls
             {
                 return;
             }
-            if(this._action != ActionName.RESTORE)
+            if(!this._imgSubstitution)
             {
-                if(!this._imgSubstitution)
-                {
-                    this._imgSubstitution = new ImageSubstitution(param1.subString,param1.source,param1.baseLineY,param1.width,param1.height);
-                }
-                else
-                {
-                    this._imgSubstitution.subString = param1.subString;
-                    this._imgSubstitution.source = param1.source;
-                    this._imgSubstitution.baseLineY = param1.baseLineY;
-                    this._imgSubstitution.width = param1.width;
-                    this._imgSubstitution.height = param1.height;
-                }
-                invalidateData();
+                this._imgSubstitution = new ImageSubstitution(param1.subString,param1.source,param1.baseLineY,param1.width,param1.height);
             }
+            else
+            {
+                this._imgSubstitution.subString = param1.subString;
+                this._imgSubstitution.source = param1.source;
+                this._imgSubstitution.baseLineY = param1.baseLineY;
+                this._imgSubstitution.width = param1.width;
+                this._imgSubstitution.height = param1.height;
+            }
+            invalidateData();
         }
 
         override protected function handleMouseRollOut(param1:MouseEvent) : void

@@ -8,7 +8,7 @@ package net.wg.gui.lobby.window
     import net.wg.gui.components.controls.universalBtn.UniversalBtn;
     import flash.display.MovieClip;
     import net.wg.gui.components.controls.CloseButtonText;
-    import scaleform.clik.interfaces.IDataProvider;
+    import net.wg.infrastructure.interfaces.IListDAAPIDataProvider;
     import net.wg.gui.lobby.components.data.PrimeTimeVO;
     import scaleform.clik.events.ListEvent;
     import flash.ui.Keyboard;
@@ -17,7 +17,6 @@ package net.wg.gui.lobby.window
     import scaleform.clik.events.ButtonEvent;
     import flash.events.Event;
     import scaleform.clik.constants.InvalidationType;
-    import net.wg.data.constants.Values;
     import scaleform.clik.events.InputEvent;
     import net.wg.data.ListDAAPIDataProvider;
     import net.wg.gui.lobby.components.data.PrimeTimeServerVO;
@@ -69,7 +68,7 @@ package net.wg.gui.lobby.window
 
         public var applyBtn:UniversalBtn = null;
 
-        private var _dataProvider:IDataProvider = null;
+        private var _dataProvider:IListDAAPIDataProvider = null;
 
         private var _data:PrimeTimeVO = null;
 
@@ -91,7 +90,7 @@ package net.wg.gui.lobby.window
             super.configUI();
             this.serversDD.dataProvider = this._dataProvider;
             this.serversDD.addEventListener(ListEvent.INDEX_CHANGE,this.onServersDDIndexChangeHandler);
-            this.serversDD.selectedIndex = 0;
+            this.serversDD.selectedIndex = this._dataProvider.getDAAPIselectedIdx();
             App.gameInputMgr.setKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.onEscapeKeyDownHandler,true);
             this.applyBtn.label = EPIC_BATTLE.PRIMETIME_APPLYBTN;
             App.utils.universalBtnStyles.setStyle(this.applyBtn,UniversalBtnStylesConst.STYLE_HEAVY_GREEN);
@@ -117,10 +116,6 @@ package net.wg.gui.lobby.window
                 this.alertBG.visible = this._data.showAlertBG;
                 this.serversDD.visible = this._data.serverDDVisible;
                 this.serversDD.enabled = this._data.serversDDEnabled;
-                if(this._data.background != Values.EMPTY_STR)
-                {
-                    setBackground(this._data.background);
-                }
                 App.utils.commons.updateTextFieldSize(this.serversTf,true,false);
                 invalidateSize();
             }
@@ -199,14 +194,6 @@ package net.wg.gui.lobby.window
             return this._dataProvider;
         }
 
-        private function setIconSmoothing() : void
-        {
-            if(App.appScale > 1)
-            {
-                this.warningIcon.smoothing = false;
-            }
-        }
-
         private function onCloseBtnClickHandler(param1:ButtonEvent) : void
         {
             closeViewS();
@@ -235,6 +222,14 @@ package net.wg.gui.lobby.window
         private function onWarningIconChangeHandler(param1:Event) : void
         {
             invalidateSize();
+        }
+
+        private function setIconSmoothing() : void
+        {
+            if(App.appScale > 1)
+            {
+                this.warningIcon.smoothing = false;
+            }
         }
     }
 }

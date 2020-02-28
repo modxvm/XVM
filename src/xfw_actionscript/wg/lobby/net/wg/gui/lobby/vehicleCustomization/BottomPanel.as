@@ -147,7 +147,6 @@ package net.wg.gui.lobby.vehicleCustomization
 
         override protected function configUI() : void
         {
-            var _loc1_:Sprite = null;
             super.configUI();
             this._utils = App.utils;
             this._popoverMgr = App.popoverMgr;
@@ -162,7 +161,7 @@ package net.wg.gui.lobby.vehicleCustomization
             this.tabGlow.mouseEnabled = this.tabGlow.mouseChildren = false;
             this.defaultStyleLabel.mouseEnabled = false;
             this.defaultStyleLabel.autoSize = TextFieldAutoSize.CENTER;
-            _loc1_ = new Sprite();
+            var _loc1_:Sprite = new Sprite();
             this.background.hitArea = _loc1_;
             addChild(_loc1_);
             this.switcher.addEventListener(CustomizationItemEvent.INSTALL_CUSTOM_STYLE,this.onStageInstallCustomStyleHandler);

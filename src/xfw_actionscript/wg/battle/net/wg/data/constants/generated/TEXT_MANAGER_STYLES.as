@@ -39,6 +39,8 @@ package net.wg.data.constants.generated
 
         public static const NEUTRAL_TEXT:String = "neutralText";
 
+        public static const NEUTRAL_TEXT_BIG:String = "neutralTextBig";
+
         public static const DEFRES_TEXT:String = "defresText";
 
         public static const GOLD_TEXT:String = "goldText";

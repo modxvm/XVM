@@ -7,11 +7,9 @@ package net.wg.gui.lobby.epicBattles.data
 
         public var level:String = "";
 
-        public var prestigeLevelHtmlText:String = "";
+        public var cycleNumberHtmlText:String = "";
 
-        public var metLvlBGImageSrc:String = "";
-
-        public var metLvlTopImageSrc:String = "";
+        public var metLvlBGImageId:int = -1;
 
         public function EpicMetaLevelIconVO(param1:Object)
         {

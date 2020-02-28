@@ -5,7 +5,7 @@ package net.wg.infrastructure.base.meta
     public interface IEpicRespawnViewMeta extends IEventDispatcher
     {
 
-        function onLaneSelectedS(param1:Number) : void;
+        function onLocationSelectedS(param1:int) : void;
 
         function onRespawnBtnClickS() : void;
 
@@ -17,12 +17,12 @@ package net.wg.infrastructure.base.meta
 
         function as_resetRespawnState() : void;
 
-        function as_setSelectedLane(param1:int) : void;
+        function as_setSelectedLocation(param1:int) : void;
 
         function as_setLaneState(param1:int, param2:Boolean, param3:String) : void;
 
         function as_setMapDimensions(param1:int, param2:int) : void;
 
-        function as_setRespawnLocations(param1:Object) : void;
+        function as_setRespawnLocations(param1:Array) : void;
     }
 }

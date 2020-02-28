@@ -6,14 +6,16 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
     import flash.text.TextField;
     import net.wg.gui.battle.components.BattleAtlasSprite;
     import net.wg.gui.battle.views.stats.SpeakAnimation;
+    import net.wg.gui.components.controls.BadgeComponent;
     import flash.display.MovieClip;
+    import net.wg.gui.components.controls.VO.BadgeVisualVO;
     import flash.events.MouseEvent;
     import net.wg.data.constants.generated.BATTLEATLAS;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.constants.PlayersPanelInvalidationType;
-    import org.idmedia.as3commons.util.StringUtils;
     import net.wg.data.constants.Values;
     import net.wg.data.constants.InvalidationType;
     import net.wg.infrastructure.interfaces.IUserProps;
+    import org.idmedia.as3commons.util.StringUtils;
     import net.wg.gui.battle.views.stats.constants.PlayerStatusSchemeName;
     import net.wg.infrastructure.interfaces.IColorScheme;
     import net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.events.PlayersPanelItemEvent;
@@ -26,19 +28,11 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
 
         private static const BADGE_ICON_AREA_WIDTH:int = 24;
 
-        private static const RIGHT_SITE_SHORT_TF_OFFSET:int = -109;
-
         private static const LEFT_SITE_SHORT_TF_OFFSET:int = 49;
 
         private static const SHORT_TF_EXTENDED_WIDTH:int = 60;
 
         private static const SHORT_TF_SHORT_WIDTH:int = 36;
-
-        private static const FIRST_COLUM:int = 0;
-
-        private static const SECOND_COLUM:int = 1;
-
-        private static const THIRD_COLUM:int = 2;
 
         private static const ALPHA_MULTIPLIER_SEMI_VISIBLE:Number = 0.8;
 
@@ -64,7 +58,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
 
         public var speakAnimation:SpeakAnimation = null;
 
-        public var badgeIcon:BattleAtlasSprite;
+        public var badge:BadgeComponent = null;
 
         public var deadBg:MovieClip = null;
 
@@ -80,7 +74,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
 
         private var _frags:int = 0;
 
-        private var _badgeType:String;
+        private var _badgeVO:BadgeVisualVO = null;
 
         private var _isMute:Boolean = false;
 
@@ -112,6 +106,8 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
 
         private var _rendererSettings:PlayersPanelListItemSettings = null;
 
+        private var _hasBadge:Boolean = false;
+
         public function PlayersPanelListItem()
         {
             super();
@@ -123,7 +119,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             this.mute.mouseEnabled = false;
             this.speakAnimation.mouseEnabled = false;
             this.speakAnimation.mouseChildren = false;
-            this.badgeIcon.mouseEnabled = this.badgeIcon.mouseChildren = false;
+            this.badge.mouseEnabled = this.badge.mouseChildren = false;
             TextFieldEx.setNoTranslate(this.shortTitleTF,true);
             this.hitArea = this.hit;
             addEventListener(MouseEvent.CLICK,this.onMouseClickHandler);
@@ -147,8 +143,10 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             this.speakAnimation = null;
             this.deadBg = null;
             this.hit = null;
-            this.badgeIcon = null;
             this._rendererSettings = null;
+            this.badge.dispose();
+            this.badge = null;
+            this._badgeVO = null;
             super.onDispose();
         }
 
@@ -170,8 +168,11 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             super.draw();
             if(isInvalid(PlayersPanelInvalidationType.BADGE_CHANGED))
             {
-                this.badgeIcon.visible = StringUtils.isNotEmpty(this._badgeType) && (this._state == PlayersPanelListItemState.MEDIUM_PLAYER_RENDERER_STATE || this._state == PlayersPanelListItemState.MEDIUM_TANK_RENDERER_STATE);
-                this.badgeIcon.imageName = this._badgeType;
+                this.badge.visible = this._hasBadge && (this._state == PlayersPanelListItemState.MEDIUM_PLAYER_RENDERER_STATE || this._state == PlayersPanelListItemState.MEDIUM_TANK_RENDERER_STATE);
+                if(this.badge.visible)
+                {
+                    this.badge.setData(this._badgeVO);
+                }
             }
             if(isInvalid(PlayersPanelInvalidationType.FRAGS))
             {
@@ -205,7 +206,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             }
             if(isInvalid(PlayersPanelInvalidationType.ALIVE))
             {
-                this.badgeIcon.alpha = this._isAlive?1:0.7;
+                this.badge.alpha = this._isAlive?1:0.7;
                 this.deadBg.visible = !this._isAlive;
             }
             if(isInvalid(PlayersPanelInvalidationType.PLAYER_SCHEME))
@@ -228,14 +229,14 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             invalidate(PlayersPanelInvalidationType.MUTE);
         }
 
-        public function setBadge(param1:String) : void
+        public function setBadge(param1:BadgeVisualVO, param2:Boolean) : void
         {
-            if(this._badgeType == param1)
+            if(this._badgeVO == null || !this._badgeVO.isEquals(param1))
             {
-                return;
+                this._badgeVO = param1;
+                this._hasBadge = param1 != null && param2;
+                invalidate(PlayersPanelInvalidationType.BADGE_CHANGED);
             }
-            this._badgeType = param1;
-            invalidate(PlayersPanelInvalidationType.BADGE_CHANGED);
         }
 
         public function setFrags(param1:int) : void
@@ -442,11 +443,11 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
                     this.vehicleIcon.visible = true;
                 }
                 this.shortTitleTF.visible = _loc2_ || _loc3_;
-                this.badgeIcon.visible = StringUtils.isNotEmpty(this._badgeType) && (_loc2_ || _loc3_);
+                this.badge.visible = this._hasBadge && (_loc2_ || _loc3_);
                 this._isVisibleState = param1 == PlayersPanelListItemState.SHORT_RENDERER_STATE || _loc2_ || _loc3_;
                 this.fragsTF.visible = this.dynamicSquad.visible = this._isVisibleState;
                 this.invalidateVariableElements();
-                if(StringUtils.isNotEmpty(this._badgeType) && (_loc2_ || _loc3_))
+                if(this._hasBadge && (_loc2_ || _loc3_))
                 {
                     _loc4_ = this._isRightAligned?-LEFT_SITE_SHORT_TF_OFFSET - (BADGE_ICON_AREA_WIDTH + BADGE_OFFSET) - SHORT_TF_SHORT_WIDTH:BADGE_ICON_AREA_WIDTH + BADGE_OFFSET + LEFT_SITE_SHORT_TF_OFFSET;
                     this.shortTitleTF.x = _loc4_;

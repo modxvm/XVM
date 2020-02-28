@@ -16,6 +16,10 @@ package net.wg.gui.lobby.epicBattles.components.prestigeView
 
         private static const END_FRAME:int = 33;
 
+        private static const EPIC_META_LEVEL_SIZE:int = 190;
+
+        private static const RIBBON_RED_GOLD_LABEL:String = "red_gold";
+
         public var award1:AwardItemRendererEx = null;
 
         public var award2:AwardItemRendererEx = null;
@@ -119,9 +123,15 @@ package net.wg.gui.lobby.epicBattles.components.prestigeView
             }
         }
 
-        public function setLevel(param1:EpicMetaLevelIconVO) : void
+        public function setLevel(param1:EpicMetaLevelIconVO, param2:Boolean = false) : void
         {
+            this.epicMetaLevelRegular.setIconSize(EPIC_META_LEVEL_SIZE);
             this.epicMetaLevelRegular.setData(param1);
+            this.glow.visible = param2;
+            if(param2)
+            {
+                this.ribbon.gotoAndStop(RIBBON_RED_GOLD_LABEL);
+            }
         }
 
         public function show() : void
@@ -131,7 +141,10 @@ package net.wg.gui.lobby.epicBattles.components.prestigeView
 
         private function onShowRibbonAnimationComplete() : void
         {
-            this.setState(SHOW_AWARD_TEMPLATE_STATE + this._awardCount.toString());
+            if(this._awardCount > 0)
+            {
+                this.setState(SHOW_AWARD_TEMPLATE_STATE + this._awardCount.toString());
+            }
         }
 
         private function setState(param1:String) : void

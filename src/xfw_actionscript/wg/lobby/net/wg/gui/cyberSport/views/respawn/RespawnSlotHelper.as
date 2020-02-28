@@ -91,9 +91,11 @@ package net.wg.gui.cyberSport.views.respawn
 
         override public function updateComponents(param1:IRallySimpleSlotRenderer, param2:IRallySlotVO) : void
         {
+            var _loc3_:RespawnTeamSlot = null;
+            var _loc4_:IRallySlotVO = null;
             super.updateComponents(param1,param2);
-            var _loc3_:RespawnTeamSlot = param1 as RespawnTeamSlot;
-            var _loc4_:IRallySlotVO = param2 as IRallySlotVO;
+            _loc3_ = param1 as RespawnTeamSlot;
+            _loc4_ = param2 as IRallySlotVO;
             if(_loc3_ && _loc4_)
             {
                 _loc3_.slotLabel.visible = true;

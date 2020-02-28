@@ -13,6 +13,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public var referralButtonClick:Function;
 
+        public var sessionStatsButtonClick:Function;
+
         private var _messegerBarInitVO:MessegerBarInitVO;
 
         private var _vehicleCompareAnimVO:VehicleCompareAnimVO;
@@ -47,6 +49,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.referralButtonClick,"referralButtonClick" + Errors.CANT_NULL);
             this.referralButtonClick();
+        }
+
+        public function sessionStatsButtonClickS() : void
+        {
+            App.utils.asserter.assertNotNull(this.sessionStatsButtonClick,"sessionStatsButtonClick" + Errors.CANT_NULL);
+            this.sessionStatsButtonClick();
         }
 
         public final function as_setInitData(param1:Object) : void

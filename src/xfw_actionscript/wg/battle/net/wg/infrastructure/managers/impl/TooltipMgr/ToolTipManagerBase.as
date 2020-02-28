@@ -202,10 +202,10 @@ package net.wg.infrastructure.managers.impl.TooltipMgr
             App.utils.scheduler.scheduleTask(this.createTypedTooltip,SCHEDULE_TIME,param1,rest,this._props.type);
         }
 
-        public function showWulfTooltip(param1:String, ... rest) : void
+        public function showWulfTooltip(param1:String, param2:Boolean, ... rest) : void
         {
             this.cancelTasks();
-            App.utils.scheduler.scheduleTask(this.createWulfTooltip,SCHEDULE_TIME,param1,rest,App.stage.mouseX,App.stage.mouseY);
+            App.utils.scheduler.scheduleTask(this.createWulfTooltip,SCHEDULE_TIME,param1,rest,App.stage.mouseX,App.stage.mouseY,param2);
         }
 
         protected function cacheComponent(param1:String, param2:DisplayObject) : void
@@ -265,9 +265,9 @@ package net.wg.infrastructure.managers.impl.TooltipMgr
             this._currentTooltipId = param1;
         }
 
-        private function createWulfTooltip(param1:String, param2:Array, param3:int, param4:int) : void
+        private function createWulfTooltip(param1:String, param2:Array, param3:int, param4:int, param5:Boolean = false) : void
         {
-            onCreateWulfTooltipS(param1,param2,param3,param4);
+            onCreateWulfTooltipS(param1,param2,param3,param4,param5);
             this._wrapperTooltipType = param1;
         }
     }

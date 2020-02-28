@@ -249,6 +249,10 @@ package net.wg.gui.components.tooltips.inblocks
                     _loc9_++;
                 }
                 this.bgHighlightMc.visible = StringUtils.isNotEmpty(this._inBlocksData.highlightType);
+                if(this.bgHighlightMc.visible)
+                {
+                    this.bgHighlightMc.gotoAndStop(this._inBlocksData.highlightType);
+                }
             }
         }
 

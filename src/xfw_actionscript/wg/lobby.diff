@@ -1,6 +1,6 @@
 diff -Naur lobby.orig/App.as lobby/App.as
---- lobby.orig/App.as	2020-01-30 22:31:16.043978400 +0200
-+++ lobby/App.as	2020-01-30 22:31:47.125156800 +0200
+--- lobby.orig/App.as	2020-02-28 20:15:48.755028700 +0200
++++ lobby/App.as	2020-02-28 20:19:21.712029800 +0200
 @@ -1,5 +1,6 @@
  package
  {
@@ -18,9 +18,9 @@ diff -Naur lobby.orig/App.as lobby/App.as
              return ms_instance;
          }
 diff -Naur lobby.orig/net/wg/data/constants/Linkages.as lobby/net/wg/data/constants/Linkages.as
---- lobby.orig/net/wg/data/constants/Linkages.as	2020-01-30 22:31:07.298370000 +0200
-+++ lobby/net/wg/data/constants/Linkages.as	2020-01-30 22:31:47.142118300 +0200
-@@ -377,7 +377,7 @@
+--- lobby.orig/net/wg/data/constants/Linkages.as	2020-02-28 20:15:55.426892200 +0200
++++ lobby/net/wg/data/constants/Linkages.as	2020-02-28 20:19:21.718027400 +0200
+@@ -379,7 +379,7 @@
  
          public static const TECHNIQUE_STATISTICS_PERCENT_SIGN:String = "TechniqueStatisticsPercentSign_UI";
  
@@ -30,8 +30,8 @@ diff -Naur lobby.orig/net/wg/data/constants/Linkages.as lobby/net/wg/data/consta
          public static const TECHNIQUE_ACHIEVEMENT_TAB:String = "TechniqueAchievementTab_UI";
  
 diff -Naur lobby.orig/net/wg/gui/components/tooltips/helpers/Utils.as lobby/net/wg/gui/components/tooltips/helpers/Utils.as
---- lobby.orig/net/wg/gui/components/tooltips/helpers/Utils.as	2020-01-30 22:31:09.050683800 +0200
-+++ lobby/net/wg/gui/components/tooltips/helpers/Utils.as	2020-01-30 22:31:47.152083900 +0200
+--- lobby.orig/net/wg/gui/components/tooltips/helpers/Utils.as	2020-02-28 20:16:00.221922200 +0200
++++ lobby/net/wg/gui/components/tooltips/helpers/Utils.as	2020-02-28 20:19:21.731521400 +0200
 @@ -75,7 +75,7 @@
  
          public const STATUS_INFO:String = "info";
@@ -42,9 +42,9 @@ diff -Naur lobby.orig/net/wg/gui/components/tooltips/helpers/Utils.as lobby/net/
          public const MARGIN_AFTER_BLOCK:Number = 15;
  
 diff -Naur lobby.orig/net/wg/gui/lobby/battleResults/BattleResults.as lobby/net/wg/gui/lobby/battleResults/BattleResults.as
---- lobby.orig/net/wg/gui/lobby/battleResults/BattleResults.as	2020-01-30 22:31:09.784720100 +0200
-+++ lobby/net/wg/gui/lobby/battleResults/BattleResults.as	2020-01-30 22:31:47.165049500 +0200
-@@ -40,6 +40,12 @@
+--- lobby.orig/net/wg/gui/lobby/battleResults/BattleResults.as	2020-02-28 20:16:25.223296100 +0200
++++ lobby/net/wg/gui/lobby/battleResults/BattleResults.as	2020-02-28 20:19:21.748018600 +0200
+@@ -41,6 +41,12 @@
  
          private var _emblemLoadingDelegates:Dictionary;
  
@@ -58,8 +58,8 @@ diff -Naur lobby.orig/net/wg/gui/lobby/battleResults/BattleResults.as lobby/net/
  
          public function BattleResults()
 diff -Naur lobby.orig/net/wg/gui/lobby/battleResults/CommonStats.as lobby/net/wg/gui/lobby/battleResults/CommonStats.as
---- lobby.orig/net/wg/gui/lobby/battleResults/CommonStats.as	2020-01-30 22:31:09.785717200 +0200
-+++ lobby/net/wg/gui/lobby/battleResults/CommonStats.as	2020-01-30 22:31:47.177017300 +0200
+--- lobby.orig/net/wg/gui/lobby/battleResults/CommonStats.as	2020-02-28 20:16:24.083238000 +0200
++++ lobby/net/wg/gui/lobby/battleResults/CommonStats.as	2020-02-28 20:19:21.765514900 +0200
 @@ -145,6 +145,12 @@
  
          private var _progressReport:SubtasksList;
@@ -74,8 +74,8 @@ diff -Naur lobby.orig/net/wg/gui/lobby/battleResults/CommonStats.as lobby/net/wg
  
          private var _xpCounterNumber:Number;
 diff -Naur lobby.orig/net/wg/gui/lobby/battleResults/components/BattleResultImageSwitcherView.as lobby/net/wg/gui/lobby/battleResults/components/BattleResultImageSwitcherView.as
---- lobby.orig/net/wg/gui/lobby/battleResults/components/BattleResultImageSwitcherView.as	2020-01-30 22:31:09.794693200 +0200
-+++ lobby/net/wg/gui/lobby/battleResults/components/BattleResultImageSwitcherView.as	2020-01-30 22:31:47.188985100 +0200
+--- lobby.orig/net/wg/gui/lobby/battleResults/components/BattleResultImageSwitcherView.as	2020-02-28 20:16:10.394615900 +0200
++++ lobby/net/wg/gui/lobby/battleResults/components/BattleResultImageSwitcherView.as	2020-02-28 20:19:21.782606800 +0200
 @@ -31,7 +31,7 @@
          public function setVehicleIcon(param1:Boolean, param2:String, param3:int) : void
          {
@@ -83,11 +83,11 @@ diff -Naur lobby.orig/net/wg/gui/lobby/battleResults/components/BattleResultImag
 -            if(this.vehicleIcon.visible = param1)
 +            if(this.vehicleIcon.visible == param1)
              {
-                 _loc4_ = VehicleIconPreset.getPreset(param3);
+                 _loc4_ = BattleResultImageSwitcherView.getPreset(param3);
                  App.utils.asserter.assertNotNull(_loc4_,"Icon preset for level: " + param3 + Errors.WASNT_FOUND);
 diff -Naur lobby.orig/net/wg/gui/lobby/battleResults/data/PersonalDataVO.as lobby/net/wg/gui/lobby/battleResults/data/PersonalDataVO.as
---- lobby.orig/net/wg/gui/lobby/battleResults/data/PersonalDataVO.as	2020-01-30 22:31:09.867498900 +0200
-+++ lobby/net/wg/gui/lobby/battleResults/data/PersonalDataVO.as	2020-01-30 22:31:47.198958300 +0200
+--- lobby.orig/net/wg/gui/lobby/battleResults/data/PersonalDataVO.as	2020-02-28 20:16:26.889514400 +0200
++++ lobby/net/wg/gui/lobby/battleResults/data/PersonalDataVO.as	2020-02-28 20:19:21.798600400 +0200
 @@ -396,7 +396,7 @@
              if(param1)
              {
@@ -107,8 +107,8 @@ diff -Naur lobby.orig/net/wg/gui/lobby/battleResults/data/PersonalDataVO.as lobb
          }
      }
 diff -Naur lobby.orig/net/wg/gui/lobby/components/SmallSkillsList.as lobby/net/wg/gui/lobby/components/SmallSkillsList.as
---- lobby.orig/net/wg/gui/lobby/components/SmallSkillsList.as	2020-01-30 22:31:10.139769900 +0200
-+++ lobby/net/wg/gui/lobby/components/SmallSkillsList.as	2020-01-30 22:31:47.210926300 +0200
+--- lobby.orig/net/wg/gui/lobby/components/SmallSkillsList.as	2020-02-28 20:16:31.094759400 +0200
++++ lobby/net/wg/gui/lobby/components/SmallSkillsList.as	2020-02-28 20:19:21.814653100 +0200
 @@ -14,7 +14,7 @@
  
          private static const PERCENT_SIGN:String = "%";
@@ -119,11 +119,11 @@ diff -Naur lobby.orig/net/wg/gui/lobby/components/SmallSkillsList.as lobby/net/w
          public var skills:TileList = null;
  
 diff -Naur lobby.orig/net/wg/gui/lobby/hangar/Hangar.as lobby/net/wg/gui/lobby/hangar/Hangar.as
---- lobby.orig/net/wg/gui/lobby/hangar/Hangar.as	2020-01-30 22:31:10.745150900 +0200
-+++ lobby/net/wg/gui/lobby/hangar/Hangar.as	2020-01-30 22:31:47.226884000 +0200
-@@ -128,6 +128,11 @@
+--- lobby.orig/net/wg/gui/lobby/hangar/Hangar.as	2020-02-28 20:16:11.425977000 +0200
++++ lobby/net/wg/gui/lobby/hangar/Hangar.as	2020-02-28 20:19:21.831655200 +0200
+@@ -139,6 +139,11 @@
  
-         public var bobAnnouncement:BobAnnouncementWidget;
+         public var dqWidget:DailyQuestWidget;
  
 +        public function get xfw_header():HangarHeader
 +        {
@@ -134,9 +134,9 @@ diff -Naur lobby.orig/net/wg/gui/lobby/hangar/Hangar.as lobby/net/wg/gui/lobby/h
  
          private var _carousel:TankCarousel;
 diff -Naur lobby.orig/net/wg/gui/lobby/hangar/ammunitionPanel/AmmunitionPanel.as lobby/net/wg/gui/lobby/hangar/ammunitionPanel/AmmunitionPanel.as
---- lobby.orig/net/wg/gui/lobby/hangar/ammunitionPanel/AmmunitionPanel.as	2020-01-30 22:31:10.754127000 +0200
-+++ lobby/net/wg/gui/lobby/hangar/ammunitionPanel/AmmunitionPanel.as	2020-01-30 22:39:17.896233500 +0200
-@@ -1005,12 +1005,14 @@
+--- lobby.orig/net/wg/gui/lobby/hangar/ammunitionPanel/AmmunitionPanel.as	2020-02-28 20:16:18.177148500 +0200
++++ lobby/net/wg/gui/lobby/hangar/ammunitionPanel/AmmunitionPanel.as	2020-02-28 20:19:21.853659000 +0200
+@@ -1050,12 +1050,14 @@
  
          private function animationCompleteHandler(param1:Event) : void
          {
@@ -152,9 +152,9 @@ diff -Naur lobby.orig/net/wg/gui/lobby/hangar/ammunitionPanel/AmmunitionPanel.as
  
          private function animationLoadedHandler(param1:IconLoaderEvent) : void
 diff -Naur lobby.orig/net/wg/gui/lobby/header/LobbyHeader.as lobby/net/wg/gui/lobby/header/LobbyHeader.as
---- lobby.orig/net/wg/gui/lobby/header/LobbyHeader.as	2020-01-30 22:31:10.870814800 +0200
-+++ lobby/net/wg/gui/lobby/header/LobbyHeader.as	2020-01-30 22:31:47.243838500 +0200
-@@ -99,6 +99,12 @@
+--- lobby.orig/net/wg/gui/lobby/header/LobbyHeader.as	2020-02-28 20:16:13.938423000 +0200
++++ lobby/net/wg/gui/lobby/header/LobbyHeader.as	2020-02-28 20:19:21.875658700 +0200
+@@ -100,6 +100,12 @@
  
          private var _headerButtonsHelper:HeaderButtonsHelper;
  
@@ -168,9 +168,9 @@ diff -Naur lobby.orig/net/wg/gui/lobby/header/LobbyHeader.as lobby/net/wg/gui/lo
  
          private var _actualEnabledVal:Boolean;
 diff -Naur lobby.orig/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonContentItem.as lobby/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonContentItem.as
---- lobby.orig/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonContentItem.as	2020-01-30 22:31:10.895748100 +0200
-+++ lobby/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonContentItem.as	2020-01-30 22:31:47.256803600 +0200
-@@ -323,11 +323,21 @@
+--- lobby.orig/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonContentItem.as	2020-02-28 20:16:08.282924900 +0200
++++ lobby/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonContentItem.as	2020-02-28 20:19:21.895951000 +0200
+@@ -324,11 +324,21 @@
              this._needUpdateFontSize = param1;
          }
  
@@ -193,8 +193,8 @@ diff -Naur lobby.orig/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonConten
          {
              return this._minScreenPadding.right + this._additionalScreenPadding.right * this._wideScreenPrc ^ 0;
 diff -Naur lobby.orig/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonsHelper.as lobby/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonsHelper.as
---- lobby.orig/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonsHelper.as	2020-01-30 22:31:10.896745800 +0200
-+++ lobby/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonsHelper.as	2020-01-30 22:31:47.269769300 +0200
+--- lobby.orig/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonsHelper.as	2020-02-28 20:16:15.634533700 +0200
++++ lobby/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonsHelper.as	2020-02-28 20:19:21.915445700 +0200
 @@ -271,6 +271,11 @@
              return this._btnsMap[param1];
          }
@@ -208,8 +208,8 @@ diff -Naur lobby.orig/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonsHelpe
          {
              var _loc2_:HeaderButtonVo = this.getButtonDataById(param1);
 diff -Naur lobby.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.as lobby/net/wg/gui/lobby/profile/ProfileTabNavigator.as
---- lobby.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.as	2020-01-30 22:31:11.481182500 +0200
-+++ lobby/net/wg/gui/lobby/profile/ProfileTabNavigator.as	2020-01-30 22:31:47.280739800 +0200
+--- lobby.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.as	2020-02-28 20:16:30.198791300 +0200
++++ lobby/net/wg/gui/lobby/profile/ProfileTabNavigator.as	2020-02-28 20:19:21.933434500 +0200
 @@ -40,8 +40,24 @@
  
          private var _data:ProfileMenuInfoVO = null;
@@ -236,8 +236,8 @@ diff -Naur lobby.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.as lobby/net/
  
          private var _countersToSet:Vector.<CountersVo> = null;
 diff -Naur lobby.orig/net/wg/gui/lobby/profile/pages/technique/TechniqueStatisticTab.as lobby/net/wg/gui/lobby/profile/pages/technique/TechniqueStatisticTab.as
---- lobby.orig/net/wg/gui/lobby/profile/pages/technique/TechniqueStatisticTab.as	2020-01-30 22:31:11.765423100 +0200
-+++ lobby/net/wg/gui/lobby/profile/pages/technique/TechniqueStatisticTab.as	2020-01-30 22:31:47.291710000 +0200
+--- lobby.orig/net/wg/gui/lobby/profile/pages/technique/TechniqueStatisticTab.as	2020-02-28 20:16:29.080758300 +0200
++++ lobby/net/wg/gui/lobby/profile/pages/technique/TechniqueStatisticTab.as	2020-02-28 20:19:21.951422900 +0200
 @@ -40,6 +40,12 @@
  
          private var _group:TechDetailedUnitGroup = null;
@@ -252,8 +252,8 @@ diff -Naur lobby.orig/net/wg/gui/lobby/profile/pages/technique/TechniqueStatisti
          {
              this._tweenManager = new ExcludeTweenManager();
 diff -Naur lobby.orig/net/wg/gui/lobby/profile/pages/technique/data/TechniqueListVehicleVO.as lobby/net/wg/gui/lobby/profile/pages/technique/data/TechniqueListVehicleVO.as
---- lobby.orig/net/wg/gui/lobby/profile/pages/technique/data/TechniqueListVehicleVO.as	2020-01-30 22:31:11.773401000 +0200
-+++ lobby/net/wg/gui/lobby/profile/pages/technique/data/TechniqueListVehicleVO.as	2020-01-30 22:31:47.302681000 +0200
+--- lobby.orig/net/wg/gui/lobby/profile/pages/technique/data/TechniqueListVehicleVO.as	2020-02-28 20:16:16.444063900 +0200
++++ lobby/net/wg/gui/lobby/profile/pages/technique/data/TechniqueListVehicleVO.as	2020-02-28 20:19:21.965430800 +0200
 @@ -4,6 +4,9 @@
  
      public class TechniqueListVehicleVO extends DAAPIDataClass
@@ -265,8 +265,8 @@ diff -Naur lobby.orig/net/wg/gui/lobby/profile/pages/technique/data/TechniqueLis
          public var id:int;
  
 diff -Naur lobby.orig/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as lobby/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as
---- lobby.orig/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as	2020-01-30 22:31:13.033031600 +0200
-+++ lobby/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as	2020-01-30 22:31:47.310659700 +0200
+--- lobby.orig/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as	2020-02-28 20:16:25.178308300 +0200
++++ lobby/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as	2020-02-28 20:19:21.978423400 +0200
 @@ -530,6 +530,7 @@
              var _loc16_:* = NaN;
              var _loc17_:* = NaN;
@@ -284,8 +284,8 @@ diff -Naur lobby.orig/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as lo
          }
  
 diff -Naur lobby.orig/net/wg/gui/messenger/ChannelComponent.as lobby/net/wg/gui/messenger/ChannelComponent.as
---- lobby.orig/net/wg/gui/messenger/ChannelComponent.as	2020-01-30 22:31:13.892732800 +0200
-+++ lobby/net/wg/gui/messenger/ChannelComponent.as	2020-01-30 22:31:47.325619800 +0200
+--- lobby.orig/net/wg/gui/messenger/ChannelComponent.as	2020-02-28 20:16:15.611548500 +0200
++++ lobby/net/wg/gui/messenger/ChannelComponent.as	2020-02-28 20:19:21.998388500 +0200
 @@ -30,7 +30,7 @@
  
          public var messageAreaScrollBar:ScrollBar = null;
@@ -296,8 +296,8 @@ diff -Naur lobby.orig/net/wg/gui/messenger/ChannelComponent.as lobby/net/wg/gui/
          public var messageInput:TextInput = null;
  
 diff -Naur lobby.orig/net/wg/gui/messenger/ContactsListPopover.as lobby/net/wg/gui/messenger/ContactsListPopover.as
---- lobby.orig/net/wg/gui/messenger/ContactsListPopover.as	2020-01-30 22:31:13.894727600 +0200
-+++ lobby/net/wg/gui/messenger/ContactsListPopover.as	2020-01-30 22:31:47.336590400 +0200
+--- lobby.orig/net/wg/gui/messenger/ContactsListPopover.as	2020-02-28 20:16:13.547729000 +0200
++++ lobby/net/wg/gui/messenger/ContactsListPopover.as	2020-02-28 20:19:22.016406100 +0200
 @@ -56,6 +56,12 @@
  
          private var _linkageUtils:LinkageUtils;
@@ -312,8 +312,8 @@ diff -Naur lobby.orig/net/wg/gui/messenger/ContactsListPopover.as lobby/net/wg/g
  
          private var _focusChain:Vector.<InteractiveObject> = null;
 diff -Naur lobby.orig/net/wg/gui/messenger/controls/ContactsTreeItemRenderer.as lobby/net/wg/gui/messenger/controls/ContactsTreeItemRenderer.as
---- lobby.orig/net/wg/gui/messenger/controls/ContactsTreeItemRenderer.as	2020-01-30 22:31:13.924647000 +0200
-+++ lobby/net/wg/gui/messenger/controls/ContactsTreeItemRenderer.as	2020-01-30 22:31:47.348558100 +0200
+--- lobby.orig/net/wg/gui/messenger/controls/ContactsTreeItemRenderer.as	2020-02-28 20:16:09.595114300 +0200
++++ lobby/net/wg/gui/messenger/controls/ContactsTreeItemRenderer.as	2020-02-28 20:19:22.033404000 +0200
 @@ -29,12 +29,32 @@
  
          private var _dashedArea:EmptyHighlightArea;
@@ -348,8 +348,8 @@ diff -Naur lobby.orig/net/wg/gui/messenger/controls/ContactsTreeItemRenderer.as 
  
          private var _isNewDataIsEqualOldData:Boolean = true;
 diff -Naur lobby.orig/net/wg/gui/messenger/data/ContactItemVO.as lobby/net/wg/gui/messenger/data/ContactItemVO.as
---- lobby.orig/net/wg/gui/messenger/data/ContactItemVO.as	2020-01-30 22:31:13.937612700 +0200
-+++ lobby/net/wg/gui/messenger/data/ContactItemVO.as	2020-01-30 22:31:47.359528900 +0200
+--- lobby.orig/net/wg/gui/messenger/data/ContactItemVO.as	2020-02-28 20:16:18.282341200 +0200
++++ lobby/net/wg/gui/messenger/data/ContactItemVO.as	2020-02-28 20:19:22.050394900 +0200
 @@ -5,6 +5,7 @@
  
      public class ContactItemVO extends DAAPIDataClass
@@ -359,8 +359,8 @@ diff -Naur lobby.orig/net/wg/gui/messenger/data/ContactItemVO.as lobby/net/wg/gu
          public static const USER_PROPS:String = "userProps";
  
 diff -Naur lobby.orig/net/wg/gui/messenger/meta/impl/ContactNoteManageViewMeta.as lobby/net/wg/gui/messenger/meta/impl/ContactNoteManageViewMeta.as
---- lobby.orig/net/wg/gui/messenger/meta/impl/ContactNoteManageViewMeta.as	2020-01-30 22:31:14.014406900 +0200
-+++ lobby/net/wg/gui/messenger/meta/impl/ContactNoteManageViewMeta.as	2020-01-30 22:31:47.367508000 +0200
+--- lobby.orig/net/wg/gui/messenger/meta/impl/ContactNoteManageViewMeta.as	2020-02-28 20:16:12.847666200 +0200
++++ lobby/net/wg/gui/messenger/meta/impl/ContactNoteManageViewMeta.as	2020-02-28 20:19:22.064385600 +0200
 @@ -33,7 +33,7 @@
              this.sendData(param1);
          }
@@ -371,8 +371,8 @@ diff -Naur lobby.orig/net/wg/gui/messenger/meta/impl/ContactNoteManageViewMeta.a
              var _loc2_:ContactUserPropVO = this._contactUserPropVO;
              this._contactUserPropVO = new ContactUserPropVO(param1);
 diff -Naur lobby.orig/net/wg/gui/notification/NotificationPopUpViewer.as lobby/net/wg/gui/notification/NotificationPopUpViewer.as
---- lobby.orig/net/wg/gui/notification/NotificationPopUpViewer.as	2020-01-30 22:31:14.063276400 +0200
-+++ lobby/net/wg/gui/notification/NotificationPopUpViewer.as	2020-01-30 22:31:47.375486200 +0200
+--- lobby.orig/net/wg/gui/notification/NotificationPopUpViewer.as	2020-02-28 20:16:06.900781600 +0200
++++ lobby/net/wg/gui/notification/NotificationPopUpViewer.as	2020-02-28 20:19:22.079375800 +0200
 @@ -39,6 +39,12 @@
  
          private var _popupClass:Class = null;
@@ -387,8 +387,8 @@ diff -Naur lobby.orig/net/wg/gui/notification/NotificationPopUpViewer.as lobby/n
  
          private var _isMessagesCountInvalid:Boolean = false;
 diff -Naur lobby.orig/net/wg/gui/rally/events/RallyViewsEvent.as lobby/net/wg/gui/rally/events/RallyViewsEvent.as
---- lobby.orig/net/wg/gui/rally/events/RallyViewsEvent.as	2020-01-30 22:31:14.202902800 +0200
-+++ lobby/net/wg/gui/rally/events/RallyViewsEvent.as	2020-01-30 22:31:47.387454400 +0200
+--- lobby.orig/net/wg/gui/rally/events/RallyViewsEvent.as	2020-02-28 20:16:21.297371900 +0200
++++ lobby/net/wg/gui/rally/events/RallyViewsEvent.as	2020-02-28 20:19:22.098364200 +0200
 @@ -35,7 +35,7 @@
  
          public static const VEH_BTN_ROLL_OUT:String = "vehBtnRollOut";
@@ -399,8 +399,8 @@ diff -Naur lobby.orig/net/wg/gui/rally/events/RallyViewsEvent.as lobby/net/wg/gu
          public function RallyViewsEvent(param1:String, param2:* = null)
          {
 diff -Naur lobby.orig/net/wg/infrastructure/managers/IContainerManager.as lobby/net/wg/infrastructure/managers/IContainerManager.as
---- lobby.orig/net/wg/infrastructure/managers/IContainerManager.as	2020-01-30 22:31:15.440593100 +0200
-+++ lobby/net/wg/infrastructure/managers/IContainerManager.as	2020-01-30 22:31:47.395432900 +0200
+--- lobby.orig/net/wg/infrastructure/managers/IContainerManager.as	2020-02-28 20:15:49.226737200 +0200
++++ lobby/net/wg/infrastructure/managers/IContainerManager.as	2020-02-28 20:19:22.110356200 +0200
 @@ -23,6 +23,8 @@
  
          function storeVisibleContainers() : void;
@@ -411,8 +411,8 @@ diff -Naur lobby.orig/net/wg/infrastructure/managers/IContainerManager.as lobby/
  
          function get lastFocusedView() : IView;
 diff -Naur lobby.orig/net/wg/infrastructure/managers/impl/ContainerManagerBase.as lobby/net/wg/infrastructure/managers/impl/ContainerManagerBase.as
---- lobby.orig/net/wg/infrastructure/managers/impl/ContainerManagerBase.as	2020-01-30 22:31:15.497440300 +0200
-+++ lobby/net/wg/infrastructure/managers/impl/ContainerManagerBase.as	2020-01-30 22:31:47.404409200 +0200
+--- lobby.orig/net/wg/infrastructure/managers/impl/ContainerManagerBase.as	2020-02-28 20:15:50.221118900 +0200
++++ lobby/net/wg/infrastructure/managers/impl/ContainerManagerBase.as	2020-02-28 20:19:22.115353300 +0200
 @@ -651,6 +651,7 @@
  
          private function onStartLoadViewHandler(param1:LoaderEvent) : void
@@ -430,8 +430,8 @@ diff -Naur lobby.orig/net/wg/infrastructure/managers/impl/ContainerManagerBase.a
  
          private function onViewLoadingCancelHandler(param1:LoaderEvent) : void
 diff -Naur lobby.orig/scaleform/clik/data/DataProvider.as lobby/scaleform/clik/data/DataProvider.as
---- lobby.orig/scaleform/clik/data/DataProvider.as	2020-01-30 22:31:15.887397100 +0200
-+++ lobby/scaleform/clik/data/DataProvider.as	2020-01-30 22:31:47.418371500 +0200
+--- lobby.orig/scaleform/clik/data/DataProvider.as	2020-02-28 20:15:55.782673000 +0200
++++ lobby/scaleform/clik/data/DataProvider.as	2020-02-28 20:19:22.137962500 +0200
 @@ -5,8 +5,9 @@
      import flash.events.EventDispatcher;
      import flash.events.Event;
@@ -444,8 +444,8 @@ diff -Naur lobby.orig/scaleform/clik/data/DataProvider.as lobby/scaleform/clik/d
          protected var dispatcher:EventDispatcher;
  
 diff -Naur lobby.orig/scaleform/clik/ui/InputDetails.as lobby/scaleform/clik/ui/InputDetails.as
---- lobby.orig/scaleform/clik/ui/InputDetails.as	2020-01-30 22:31:15.916319900 +0200
-+++ lobby/scaleform/clik/ui/InputDetails.as	2020-01-30 22:31:47.428344900 +0200
+--- lobby.orig/scaleform/clik/ui/InputDetails.as	2020-02-28 20:15:52.497709500 +0200
++++ lobby/scaleform/clik/ui/InputDetails.as	2020-02-28 20:19:22.142336600 +0200
 @@ -7,7 +7,7 @@
  
          public var code:Number;

@@ -47,7 +47,7 @@ package net.wg.mock
         {
         }
 
-        public function showWulfTooltip(param1:String, ... rest) : void
+        public function showWulfTooltip(param1:String, param2:Boolean, ... rest) : void
         {
         }
     }

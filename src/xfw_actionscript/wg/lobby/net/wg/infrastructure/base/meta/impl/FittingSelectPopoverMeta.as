@@ -10,6 +10,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public var setVehicleModule:Function;
 
+        public var upgradeVehicleModule:Function;
+
         public var showModuleInfo:Function;
 
         public var setAutoRearm:Function;
@@ -43,6 +45,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.setVehicleModule,"setVehicleModule" + Errors.CANT_NULL);
             this.setVehicleModule(param1,param2,param3);
+        }
+
+        public function upgradeVehicleModuleS(param1:int) : void
+        {
+            App.utils.asserter.assertNotNull(this.upgradeVehicleModule,"upgradeVehicleModule" + Errors.CANT_NULL);
+            this.upgradeVehicleModule(param1);
         }
 
         public function showModuleInfoS(param1:String) : void

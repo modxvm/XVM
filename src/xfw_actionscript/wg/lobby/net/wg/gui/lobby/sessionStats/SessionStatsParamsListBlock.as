@@ -2,6 +2,7 @@ package net.wg.gui.lobby.sessionStats
 {
     import net.wg.gui.components.tooltips.inblocks.blocks.BaseTooltipBlock;
     import net.wg.gui.components.containers.GroupEx;
+    import flash.events.Event;
 
     public class SessionStatsParamsListBlock extends BaseTooltipBlock
     {
@@ -15,6 +16,11 @@ package net.wg.gui.lobby.sessionStats
         }
 
         public function initLayout() : void
+        {
+            this.list.addEventListener(Event.RESIZE,this.onListResized);
+        }
+
+        protected function onListResized(param1:Event) : void
         {
         }
 
@@ -32,6 +38,7 @@ package net.wg.gui.lobby.sessionStats
 
         override protected function onDispose() : void
         {
+            this.list.removeEventListener(Event.RESIZE,this.onListResized);
             this.list.dispose();
             this.list = null;
             super.onDispose();

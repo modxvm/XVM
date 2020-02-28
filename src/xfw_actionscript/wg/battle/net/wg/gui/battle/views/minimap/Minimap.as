@@ -200,12 +200,13 @@ package net.wg.gui.battle.views.minimap
 
         private function updateContainersSize() : void
         {
+            var _loc2_:Point = null;
             var _loc1_:Rectangle = MinimapSizeConst.MAP_SIZE[this._currentSizeIndex];
             this.background.width = _loc1_.width;
             this.background.height = _loc1_.height;
             this.background.x = _loc1_.x;
             this.background.y = _loc1_.y;
-            var _loc2_:Point = MinimapSizeConst.ENTRY_CONTAINER_POINT[this._currentSizeIndex];
+            _loc2_ = MinimapSizeConst.ENTRY_CONTAINER_POINT[this._currentSizeIndex];
             this.entriesContainer.scaleX = this.background.scaleX;
             this.entriesContainer.scaleY = this.background.scaleY;
             MinimapEntryController.instance.updateScale(this._currentSizeIndex);

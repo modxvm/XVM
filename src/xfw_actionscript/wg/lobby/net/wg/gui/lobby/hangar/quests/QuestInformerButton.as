@@ -37,6 +37,8 @@ package net.wg.gui.lobby.hangar.quests
 
         public var flagContainer:FlagContainer;
 
+        public var flagGray:FlagContainer;
+
         public var rewardAnimMc:MovieClip;
 
         private var _questVO:HeaderQuestsVO = null;
@@ -48,6 +50,8 @@ package net.wg.gui.lobby.hangar.quests
         private var _tweenHide:Tween = null;
 
         private var _tweenShow:Tween = null;
+
+        private var _isHorizontalFlipped:Boolean = false;
 
         public function QuestInformerButton()
         {
@@ -118,6 +122,8 @@ package net.wg.gui.lobby.hangar.quests
             this.switchGlowMc = null;
             this.flagContainer.dispose();
             this.flagContainer = null;
+            this.flagGray.dispose();
+            this.flagGray = null;
             this.rewardAnimMc = null;
             this._questVO = null;
             super.onDispose();
@@ -138,7 +144,8 @@ package net.wg.gui.lobby.hangar.quests
                 {
                     this.rewardAnimMc.stop();
                 }
-                this.flagContainer.flag = this._questVO.flag;
+                this.flagContainer.setFlag(this._questVO.flag,this._isHorizontalFlipped);
+                this.flagGray.setFlag(this._questVO.flagDisabled,this._isHorizontalFlipped);
                 invalidate(INVALIDATE_FIELDS);
             }
             if(isInvalid(INVALIDATE_FIELDS) && !isInvalid(INVALIDATE_FIELDS) && enabled)
@@ -149,9 +156,20 @@ package net.wg.gui.lobby.hangar.quests
 
         override protected function showTooltip() : void
         {
-            if(this._questVO && this._questVO.isTooltipSpecial)
+            if(this._questVO)
             {
-                App.toolTipMgr.showSpecial(this._questVO.tooltip,null,this._questVO.questType,this._questVO.questID);
+                if(this._questVO.isTooltipSpecial)
+                {
+                    App.toolTipMgr.showSpecial(this._questVO.tooltip,null,this._questVO.questType,this._questVO.questID);
+                }
+                else if(this._questVO.isTooltipWulf)
+                {
+                    App.toolTipMgr.showWulfTooltip(this._questVO.tooltip,false,null);
+                }
+                else
+                {
+                    super.showTooltip();
+                }
             }
             else
             {
@@ -180,7 +198,7 @@ package net.wg.gui.lobby.hangar.quests
             this._collapsePoint.y = param2;
         }
 
-        public function setData(param1:HeaderQuestsVO) : void
+        public function setData(param1:HeaderQuestsVO, param2:Boolean) : void
         {
             if(param1 == null)
             {
@@ -189,6 +207,7 @@ package net.wg.gui.lobby.hangar.quests
             this._questVO = param1;
             this.enabled = this._questVO.enable;
             tooltip = this._questVO.tooltip;
+            this._isHorizontalFlipped = param2;
             invalidateData();
         }
 

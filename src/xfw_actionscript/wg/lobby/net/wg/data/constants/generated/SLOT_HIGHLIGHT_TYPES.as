@@ -23,6 +23,18 @@ package net.wg.data.constants.generated
 
         public static const BUILT_IN_EQUIPMENT_BIG:String = "builtInBig";
 
+        public static const EQUIPMENT_TROPHY:String = "equipmentTrophy";
+
+        public static const EQUIPMENT_TROPHY_BASIC:String = "equipmentTrophyBasic";
+
+        public static const EQUIPMENT_TROPHY_UPGRADED:String = "equipmentTrophyUpgraded";
+
+        public static const EQUIPMENT_TROPHY_BIG:String = "equipmentTrophyBig";
+
+        public static const EQUIPMENT_TROPHY_BASIC_BIG:String = "equipmentTrophyBasicBig";
+
+        public static const EQUIPMENT_TROPHY_UPGRADED_BIG:String = "equipmentTrophyUpgradedBig";
+
         public static const NO_HIGHLIGHT:String = "";
 
         public static const TOOLTIP_OVERLAY_PADDING_LEFT:int = -25;

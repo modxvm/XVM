@@ -1,15 +1,15 @@
 package net.wg.gui.lobby.header.headerButtonBar
 {
-    import net.wg.gui.components.controls.Image;
     import net.wg.gui.components.controls.UserNameField;
+    import net.wg.gui.components.controls.BadgeComponent;
+    import net.wg.gui.components.controls.Image;
     import net.wg.gui.lobby.header.vo.HBC_AccountDataVo;
-    import org.idmedia.as3commons.util.StringUtils;
     import net.wg.data.constants.ColorSchemeNames;
 
     public class HBC_Account extends HeaderButtonContentItem
     {
 
-        private static const ICON_MARGIN:int = 5;
+        private static const BADGE_MARGIN:int = 5;
 
         private static const MIN_SCREEN_PADDING_LEFT:int = 9;
 
@@ -21,25 +21,25 @@ package net.wg.gui.lobby.header.headerButtonBar
 
         private static const MIN_WIDTH:int = 81;
 
-        private static const ICON_MAX_SCREEN_ALPHA:Number = 1;
+        private static const BADGE_MAX_SCREEN_ALPHA:Number = 1;
 
-        private static const ICON_NOT_MAX_SCREEN_ALPHA:Number = 0.6;
+        private static const BADGE_NOT_MAX_SCREEN_ALPHA:Number = 0.6;
 
-        private static const ICON_OFFSET:int = 7;
+        private static const BADGE_OFFSET:int = 7;
 
         private static const ANONYMIZER_ICON_WIDTH:int = 16;
 
         private static const ANONYMIZER_ICON_HORIZONTAL_PADDING:int = 3;
 
-        private static const NOT_MAX_SCREEN_ICON_OFFSET:int = -4;
+        private static const NOT_MAX_SCREEN_BADGE_OFFSET:int = -4;
 
         private static const ANONYMIZER_ICON_VERTICAL_PADDING:int = 16;
 
-        private static const ICON_SIZE:int = 48;
-
-        public var icon:Image = null;
+        private static const BADGE_SIZE:int = 48;
 
         public var userName:UserNameField = null;
+
+        public var badge:BadgeComponent = null;
 
         public var anonymizerIcon:Image = null;
 
@@ -68,40 +68,40 @@ package net.wg.gui.lobby.header.headerButtonBar
             var _loc4_:* = 0;
             if(data)
             {
-                this.icon.visible = StringUtils.isNotEmpty(this._accountVo.badgeIcon);
+                this.badge.visible = this._accountVo.selectedBadge;
                 this.userName.textColor = this._accountVo.isTeamKiller?App.colorSchemeMgr.getScheme(ColorSchemeNames.TEAMKILLER).rgb:UserNameField.DEF_USER_NAME_COLOR;
                 _loc1_ = 0;
-                if(this.icon.visible)
+                if(this.badge.visible)
                 {
-                    this.icon.source = this._accountVo.badgeIcon;
-                    _loc1_ = ICON_SIZE >> 1;
+                    this.badge.setData(this._accountVo.badgeVO);
+                    _loc1_ = BADGE_SIZE >> 1;
                 }
                 if(availableWidth < MIN_WIDTH)
                 {
                     availableWidth = MIN_WIDTH;
                 }
-                _loc2_ = availableWidth - _loc1_;
+                _loc2_ = availableWidth - _loc1_ - this.anonymizerIconWidth;
                 if(this._accountVo.userVO != null)
                 {
                     this.userName.width = _loc2_;
                     this.userName.userVO = this._accountVo.userVO;
                     this.userName.validateNow();
                 }
-                if(this.icon.visible)
+                if(this.badge.visible)
                 {
-                    if(ICON_SIZE + this.userName.textWidth + ICON_MARGIN < _loc2_)
+                    if(BADGE_SIZE + this.userName.textWidth + BADGE_MARGIN < _loc2_)
                     {
-                        _loc1_ = ICON_SIZE + ICON_MARGIN;
-                        this.icon.alpha = ICON_MAX_SCREEN_ALPHA;
-                        this.icon.x = ICON_OFFSET;
+                        _loc1_ = BADGE_SIZE + BADGE_MARGIN;
+                        this.badge.alpha = BADGE_MAX_SCREEN_ALPHA;
+                        this.badge.x = BADGE_OFFSET;
                     }
                     else
                     {
-                        this.icon.alpha = ICON_NOT_MAX_SCREEN_ALPHA;
-                        this.icon.x = NOT_MAX_SCREEN_ICON_OFFSET;
+                        this.badge.alpha = BADGE_NOT_MAX_SCREEN_ALPHA;
+                        this.badge.x = NOT_MAX_SCREEN_BADGE_OFFSET;
                     }
                 }
-                _loc3_ = ICON_OFFSET;
+                _loc3_ = BADGE_OFFSET;
                 this.anonymizerIcon.visible = this._accountVo.isAnonymized;
                 _loc4_ = _loc1_ + this.userName.textWidth + this.anonymizerIconWidth;
                 if(_loc4_ < MIN_WIDTH)
@@ -126,8 +126,8 @@ package net.wg.gui.lobby.header.headerButtonBar
             this.anonymizerIcon = null;
             this.userName.dispose();
             this.userName = null;
-            this.icon.dispose();
-            this.icon = null;
+            this.badge.dispose();
+            this.badge = null;
             super.onDispose();
         }
 

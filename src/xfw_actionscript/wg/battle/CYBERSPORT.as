@@ -215,10 +215,6 @@ package
 
         public static const WINDOW_UNIT_MESSAGE_INACTIVEPERIPHERY:String = "#cyberSport:window/unit/message/inactivePeriphery";
 
-        public static const WINDOW_UNIT_MESSAGE_BOB_TEAM_MISMATCH:String = "#cyberSport:window/unit/message/bob_team_mismatch";
-
-        public static const WINDOW_UNIT_MESSAGE_BOB_LEADER_FORBIDDEN:String = "#cyberSport:window/unit/message/bob_leader_forbidden";
-
         public static const WINDOW_UNIT_MESSAGE_INACTIVEPERIPHERYSORTIE:String = "#cyberSport:window/unit/message/inactivePeripherySortie";
 
         public static const WINDOW_UNIT_MESSAGE_INACTIVEPERIPHERYBATTLE:String = "#cyberSport:window/unit/message/inactivePeripheryBattle";

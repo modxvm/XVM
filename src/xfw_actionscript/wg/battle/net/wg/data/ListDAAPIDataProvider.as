@@ -6,8 +6,8 @@ package net.wg.data
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import net.wg.utils.IDataUtils;
     import flash.events.Event;
-    import net.wg.infrastructure.interfaces.entity.IUpdatable;
     import net.wg.infrastructure.events.ListDataProviderEvent;
+    import net.wg.infrastructure.interfaces.entity.IUpdatable;
 
     public class ListDAAPIDataProvider extends EventDispatcher implements IListDAAPIDataProvider
     {
@@ -56,10 +56,6 @@ package net.wg.data
         {
             super();
             this._voClass = param1;
-            this._dataUtils = App.utils.data;
-            this._items = [];
-            this._itemsToDestroy = new Vector.<IDisposable>();
-            this._cachedRange = new Vector.<IDAAPIDataClass>();
         }
 
         public function DAAPIsortOn(param1:Object, param2:Object) : Array
@@ -73,21 +69,16 @@ package net.wg.data
 
         public function as_dispose() : void
         {
-            this.cleanUp();
-            this._isDisposed = true;
-            this._dataUtils = null;
-            this._cachedRange = null;
-            this._itemsToDestroy = null;
-            this._items = null;
-            this.requestItemAtHandler = null;
-            this.requestItemRangeHandler = null;
-            this.lengthHandler = null;
-            this.sortOnHandler = null;
-            this.getSelectedIdxHandler = null;
+            this.onDispose();
         }
 
         public function as_populate() : void
         {
+            this._dataUtils = App.utils.data;
+            this._items = [];
+            this._itemsToDestroy = new Vector.<IDisposable>();
+            this._cachedRange = new Vector.<IDAAPIDataClass>();
+            this._isDisposed = false;
             this._isDAAPIInited = true;
         }
 
@@ -124,6 +115,11 @@ package net.wg.data
                 return this.getSelectedIdxHandler();
             }
             return -1;
+        }
+
+        public function getItemIndex(param1:String, param2:*) : int
+        {
+            return this.getItemIndexHandler(param1,param2);
         }
 
         public function indexOf(param1:Object, param2:Function = null) : int
@@ -259,6 +255,26 @@ package net.wg.data
                 param3(this._items);
             }
             return this._items;
+        }
+
+        protected function onDispose() : void
+        {
+            this.cleanUp();
+            this._isDisposed = true;
+            this._dataUtils = null;
+            this._cachedRange = null;
+            this._itemsToDestroy = null;
+            this._items = null;
+            this.requestItemAtHandler = null;
+            this.requestItemRangeHandler = null;
+            this.lengthHandler = null;
+            this.sortOnHandler = null;
+            this.getSelectedIdxHandler = null;
+        }
+
+        public function resetSelectedIndex(param1:int) : void
+        {
+            dispatchEvent(new ListDataProviderEvent(ListDataProviderEvent.RESET_SELECTED_INDEX,param1,null));
         }
 
         protected function cacheGetItemAt(param1:uint) : IDAAPIDataClass
@@ -480,12 +496,6 @@ package net.wg.data
         protected function get isValid() : Boolean
         {
             return this._isValid;
-        }
-
-        public function getItemIndex(param1:String, param2:*) : int
-        {
-            var _loc3_:int = this.getItemIndexHandler(param1,param2);
-            return _loc3_;
         }
     }
 }

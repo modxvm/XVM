@@ -3,6 +3,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.infrastructure.base.BaseDAAPIComponent;
     import net.wg.gui.lobby.header.vo.HBC_FinanceVo;
     import net.wg.gui.lobby.header.vo.AccountDataVo;
+    import net.wg.gui.components.controls.VO.BadgeVisualVO;
     import net.wg.gui.lobby.header.vo.AccountBoosterVO;
     import net.wg.gui.lobby.header.vo.HBC_PremDataVo;
     import scaleform.clik.data.DataProvider;
@@ -39,6 +40,8 @@ package net.wg.infrastructure.base.meta.impl
 
         private var _accountDataVo:AccountDataVo;
 
+        private var _badgeVisualVO:BadgeVisualVO;
+
         private var _accountBoosterVO:AccountBoosterVO;
 
         private var _hBC_PremDataVo:HBC_PremDataVo;
@@ -64,6 +67,11 @@ package net.wg.infrastructure.base.meta.impl
             {
                 this._accountDataVo.dispose();
                 this._accountDataVo = null;
+            }
+            if(this._badgeVisualVO)
+            {
+                this._badgeVisualVO.dispose();
+                this._badgeVisualVO = null;
             }
             if(this._accountBoosterVO)
             {
@@ -180,6 +188,17 @@ package net.wg.infrastructure.base.meta.impl
             }
         }
 
+        public final function as_setBadge(param1:Object, param2:Boolean) : void
+        {
+            var _loc3_:BadgeVisualVO = this._badgeVisualVO;
+            this._badgeVisualVO = new BadgeVisualVO(param1);
+            this.setBadge(this._badgeVisualVO,param2);
+            if(_loc3_)
+            {
+                _loc3_.dispose();
+            }
+        }
+
         public final function as_setBoosterData(param1:Object) : void
         {
             var _loc2_:AccountBoosterVO = this._accountBoosterVO;
@@ -255,6 +274,13 @@ package net.wg.infrastructure.base.meta.impl
             var _loc2_:String = "as_nameResponse" + Errors.ABSTRACT_INVOKE;
             DebugUtils.LOG_ERROR(_loc2_);
             throw new AbstractException(_loc2_);
+        }
+
+        protected function setBadge(param1:BadgeVisualVO, param2:Boolean) : void
+        {
+            var _loc3_:String = "as_setBadge" + Errors.ABSTRACT_INVOKE;
+            DebugUtils.LOG_ERROR(_loc3_);
+            throw new AbstractException(_loc3_);
         }
 
         protected function setBoosterData(param1:AccountBoosterVO) : void

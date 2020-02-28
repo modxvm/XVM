@@ -75,13 +75,16 @@ package net.wg.gui.battle.views.minimap
         public function registerVehicleEntry(param1:IVehicleMinimapEntry) : void
         {
             this.verifyIsDisposed();
-            this._vehicleEntries.push(param1);
+            if(this._vehicleEntries.indexOf(param1) == -1)
+            {
+                this._vehicleEntries.push(param1);
+            }
         }
 
         public function unregisterVehicleLabelEntry(param1:IVehicleMinimapEntry) : void
         {
             this.verifyIsDisposed();
-            var _loc2_:Number = this._vehicleLabelsEntries.indexOf(param1);
+            var _loc2_:int = this._vehicleLabelsEntries.indexOf(param1);
             if(_loc2_ != -1)
             {
                 this._vehicleLabelsEntries.splice(_loc2_,1);
@@ -91,7 +94,10 @@ package net.wg.gui.battle.views.minimap
         public function registerVehicleLabelEntry(param1:IVehicleMinimapEntry) : void
         {
             this.verifyIsDisposed();
-            this._vehicleLabelsEntries.push(param1);
+            if(this._vehicleLabelsEntries.indexOf(param1) == -1)
+            {
+                this._vehicleLabelsEntries.push(param1);
+            }
             if(this._isShowVehicleNamesTurnedOn)
             {
                 param1.showVehicleName();
@@ -105,7 +111,7 @@ package net.wg.gui.battle.views.minimap
         public function unregisterVehicleEntry(param1:IVehicleMinimapEntry) : void
         {
             this.verifyIsDisposed();
-            var _loc2_:Number = this._vehicleEntries.indexOf(param1);
+            var _loc2_:int = this._vehicleEntries.indexOf(param1);
             if(_loc2_ != -1)
             {
                 this._vehicleEntries.splice(_loc2_,1);

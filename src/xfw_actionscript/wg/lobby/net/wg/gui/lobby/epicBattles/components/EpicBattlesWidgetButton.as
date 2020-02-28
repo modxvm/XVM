@@ -1,28 +1,23 @@
 package net.wg.gui.lobby.epicBattles.components
 {
-    import net.wg.gui.components.controls.SoundButtonEx;
-    import net.wg.gui.lobby.components.IconTextWrapper;
-    import flash.display.Sprite;
     import flash.display.MovieClip;
-    import net.wg.gui.lobby.epicBattles.data.EpicBattlesWidgetVO;
+    import net.wg.infrastructure.interfaces.entity.IDisposable;
     import net.wg.infrastructure.managers.ITooltipMgr;
-    import scaleform.clik.constants.InvalidationType;
+    import flash.events.MouseEvent;
     import net.wg.data.constants.generated.TOOLTIPS_CONSTANTS;
+    import scaleform.gfx.MouseEventEx;
+    import net.wg.gui.lobby.epicBattles.data.EpicBattlesWidgetVO;
 
-    public class EpicBattlesWidgetButton extends SoundButtonEx
+    public class EpicBattlesWidgetButton extends MovieClip implements IDisposable
     {
 
-        public var abilityPoints:IconTextWrapper = null;
+        private static const OUT:String = "out";
 
-        public var metaLevelElement:EpicBattlesMetaLevel = null;
+        private static const OVER:String = "over";
 
-        public var abilityPointsBg:Sprite = null;
+        public var widget:EpicBattlesWidgetComponent = null;
 
-        public var prestigeGlow:MovieClip = null;
-
-        public var roundGlowHover:MovieClip = null;
-
-        private var _epicData:EpicBattlesWidgetVO = null;
+        public var hitMc:MovieClip = null;
 
         private var _toolTipMgr:ITooltipMgr;
 
@@ -30,69 +25,57 @@ package net.wg.gui.lobby.epicBattles.components
         {
             this._toolTipMgr = App.toolTipMgr;
             super();
+            this.init();
         }
 
-        override protected function onDispose() : void
+        private function init() : void
         {
-            this.metaLevelElement.dispose();
-            this.metaLevelElement = null;
-            this.abilityPoints.dispose();
-            this.abilityPoints = null;
-            this.prestigeGlow.stop();
-            this.prestigeGlow = null;
-            this.roundGlowHover = null;
-            this.abilityPointsBg = null;
+            buttonMode = mouseEnabled = mouseChildren = true;
+            hitArea = this.hitMc;
+            addEventListener(MouseEvent.ROLL_OVER,this.onMouseRollOverHandler);
+            addEventListener(MouseEvent.ROLL_OUT,this.onMouseRollOutHandler);
+            addEventListener(MouseEvent.CLICK,this.onPreventMiddleRightClickHandler);
+        }
+
+        private function onMouseRollOutHandler(param1:MouseEvent) : void
+        {
+            this._toolTipMgr.hide();
+            gotoAndPlay(OUT);
+        }
+
+        private function onMouseRollOverHandler(param1:MouseEvent) : void
+        {
+            this._toolTipMgr.showSpecial(TOOLTIPS_CONSTANTS.EVENT_PROGRESSION_PROGRESS_INFO,null);
+            gotoAndPlay(OVER);
+        }
+
+        private function onPreventMiddleRightClickHandler(param1:MouseEvent) : void
+        {
+            if(param1 is MouseEventEx && MouseEventEx(param1).buttonIdx != MouseEventEx.LEFT_BUTTON)
+            {
+                param1.stopImmediatePropagation();
+            }
+        }
+
+        public final function dispose() : void
+        {
+            removeEventListener(MouseEvent.ROLL_OVER,this.onMouseRollOverHandler);
+            removeEventListener(MouseEvent.ROLL_OUT,this.onMouseRollOutHandler);
+            removeEventListener(MouseEvent.CLICK,this.onPreventMiddleRightClickHandler);
+            this.widget.dispose();
+            this.widget = null;
+            this.hitMc = null;
             this._toolTipMgr = null;
-            if(this._epicData)
-            {
-                this._epicData = null;
-            }
-            super.onDispose();
         }
 
-        override protected function draw() : void
+        public function setData(param1:EpicBattlesWidgetVO) : void
         {
-            var _loc1_:* = false;
-            super.draw();
-            if(isInvalid(InvalidationType.DATA) && this._epicData != null)
-            {
-                _loc1_ = this._epicData.skillPoints > 0;
-                this.roundGlowHover.visible = this.abilityPointsBg.visible = this.abilityPoints.visible = _loc1_;
-                if(_loc1_)
-                {
-                    this.abilityPoints.setText(this._epicData.skillPoints.toString());
-                }
-                this.metaLevelElement.setData(this._epicData.epicMetaLevelIconData);
-                if(this._epicData.canPrestige)
-                {
-                    this.prestigeGlow.visible = true;
-                }
-            }
+            this.widget.setEpicData(param1);
         }
 
-        override protected function configUI() : void
+        public function updateSize() : void
         {
-            super.configUI();
-            this.prestigeGlow.visible = false;
-            this.abilityPointsBg.visible = false;
-            this.roundGlowHover.visible = false;
-            this.prestigeGlow.mouseEnabled = this.prestigeGlow.mouseChildren = false;
-            this.roundGlowHover.mouseEnabled = this.roundGlowHover.mouseChildren = false;
-            this.abilityPointsBg.mouseEnabled = this.abilityPointsBg.mouseChildren = false;
-            this.abilityPoints.mouseEnabled = this.abilityPoints.mouseChildren = false;
-            this.metaLevelElement.mouseEnabled = this.metaLevelElement.mouseChildren = false;
-            bgMc.mouseEnabled = bgMc.mouseChildren = false;
-        }
-
-        override protected function showTooltip() : void
-        {
-            this._toolTipMgr.showSpecial(TOOLTIPS_CONSTANTS.EPIC_META_LEVEL_PROGRESS_INFO,null);
-        }
-
-        public function setEpicData(param1:EpicBattlesWidgetVO) : void
-        {
-            this._epicData = param1;
-            invalidateData();
+            this.widget.invalidateSize();
         }
     }
 }

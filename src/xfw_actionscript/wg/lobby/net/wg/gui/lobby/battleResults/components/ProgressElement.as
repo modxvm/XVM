@@ -34,6 +34,7 @@ package net.wg.gui.lobby.battleResults.components
             this.progressDiff.addEventListener(MouseEvent.CLICK,this.onProgressDiffClickHandler);
             this.progressDiff.addEventListener(MouseEvent.ROLL_OUT,this.onProgressDiffRollOutHandler);
             this.progressDiff.addEventListener(MouseEvent.ROLL_OVER,this.onProgressDiffRollOverHandler);
+            this.progressTF.buttonMode = false;
         }
 
         override protected function onDispose() : void
@@ -110,7 +111,7 @@ package net.wg.gui.lobby.battleResults.components
         {
             if(this._showProgressDiffTooltip)
             {
-                App.toolTipMgr.show(TOOLTIPS.QUESTS_PROGRESS_EARNEDINBATTLE);
+                App.toolTipMgr.show(this.data.progressDiffTooltip);
             }
         }
 

@@ -21,7 +21,7 @@ package net.wg.data.constants.generated
 
         public static const SESSION_STATS_PROPS_RATIO_KILL:String = "ratioKill";
 
-        public static const SESSION_STATS_PROPS_RATIO_WIN:String = "winRatio";
+        public static const SESSION_STATS_PROPS_WINS:String = "wins";
 
         public static const SESSION_STATS_PROPS_AVERAGE_DAMAGE:String = "averageDamage";
 
@@ -44,6 +44,24 @@ package net.wg.data.constants.generated
         public static const SESSION_STATS_PROPS_NET_CREDITS:String = "netCredits";
 
         public static const SESSION_STATS_PROPS_NET_CRYSTAL:String = "netCrystal";
+
+        public static const SESSION_STATS_PROPS_WIN_RATE:String = "winRate";
+
+        public static const SESSION_STATS_PROPS_SURVIVED_RATIO:String = "survivedRatio";
+
+        public static const SESSION_STATS_PROPS_AVERAGE_VEHICLE_LEVEL:String = "averageVehicleLevel";
+
+        public static const SESSION_STATS_PROPS_AVERAGE_FRAGS:String = "averageFrags";
+
+        public static const SESSION_STATS_PROPS_SPOTTED:String = "spotted";
+
+        public static const SESSION_STATS_OVERVIEW_PY_ALIAS:String = "SessionStatsOverview";
+
+        public static const SESSION_STATS_SETTINGS_PY_ALIAS:String = "SessionStatsSettings";
+
+        public static const SESSION_STATS_OVERVIEW_VIEW_LINKAGE:String = "SessionStatsOverviewUI";
+
+        public static const SESSION_STATS_SETTINGS_VIEW_LINKAGE:String = "SessionStatsSettingsUI";
 
         public function SESSION_STATS_CONSTANTS()
         {

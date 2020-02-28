@@ -633,6 +633,10 @@ package
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_CRYSTAL:String = "#messenger:serviceChannelMessages/battleResults/crystal";
 
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_EPICABILITYPOINTS:String = "#messenger:serviceChannelMessages/battleResults/epicAbilityPoints";
+
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_EPICREWARDPOINTS:String = "#messenger:serviceChannelMessages/battleResults/epicRewardPoints";
+
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_DOUBLEXPFACTOR:String = "#messenger:serviceChannelMessages/battleResults/doubleXpFactor";
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_PENALTYFORDAMAGEALLIES:String = "#messenger:serviceChannelMessages/battleResults/penaltyForDamageAllies";
@@ -740,6 +744,8 @@ package
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_TANKWOMAN:String = "#messenger:serviceChannelMessages/battleResults/tankwoman";
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_TANKMAN:String = "#messenger:serviceChannelMessages/battleResults/tankman";
+
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_BATTLEPASS:String = "#messenger:serviceChannelMessages/battleResults/battlePass";
 
         public static const SERVICECHANNELMESSAGES_BATTLETUTORIAL_RESULTS_FINISHED:String = "#messenger:serviceChannelMessages/battleTutorial/results/finished";
 
@@ -1061,7 +1067,7 @@ package
 
         public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_RANKEDBATTLESAVAILABLE:String = "#messenger:serviceChannelMessages/sysMsg/titles/rankedBattlesAvailable";
 
-        public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_BOBBATTLESAVAILABLE:String = "#messenger:serviceChannelMessages/sysMsg/titles/bobBattlesAvailable";
+        public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_RANKEDBATTLESNOTSET:String = "#messenger:serviceChannelMessages/sysMsg/titles/rankedBattlesNotSet";
 
         public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_PAYMENTMETHODLINK:String = "#messenger:serviceChannelMessages/sysMsg/titles/paymentMethodLink";
 
@@ -1745,11 +1751,83 @@ package
 
         public static const SERVICECHANNELMESSAGES_FLEXCHANGE_QUESTS_REWARD:String = "#messenger:serviceChannelMessages/flExchange/quests/reward";
 
+        public static const SERVICECHANNELMESSAGES_RANKEDFINALEAWARDSNOTIFICATION_TITLE:String = "#messenger:serviceChannelMessages/rankedFinaleAwardsNotification/title";
+
+        public static const SERVICECHANNELMESSAGES_RANKEDFINALEAWARDSNOTIFICATION_CONGRATULATION:String = "#messenger:serviceChannelMessages/rankedFinaleAwardsNotification/congratulation";
+
+        public static const SERVICECHANNELMESSAGES_RANKEDFINALEAWARDSNOTIFICATION_TEXT:String = "#messenger:serviceChannelMessages/rankedFinaleAwardsNotification/text";
+
+        public static const SERVICECHANNELMESSAGES_RANKEDFINALEAWARDSNOTIFICATION_COMPENSATION:String = "#messenger:serviceChannelMessages/rankedFinaleAwardsNotification/compensation";
+
+        public static const SERVICECHANNELMESSAGES_RANKEDFINALEAWARDSNOTIFICATION_BUTTONLABEL:String = "#messenger:serviceChannelMessages/rankedFinaleAwardsNotification/buttonLabel";
+
+        public static const SERVICECHANNELMESSAGES_RANKEDFINALEAWARDSNOTIFICATION_SMALL_AWARDSTITLE:String = "#messenger:serviceChannelMessages/rankedFinaleAwardsNotification/small/awardsTitle";
+
+        public static const SERVICECHANNELMESSAGES_RANKEDFINALEAWARDSNOTIFICATION_MEDIUM_AWARDSTITLE:String = "#messenger:serviceChannelMessages/rankedFinaleAwardsNotification/medium/awardsTitle";
+
+        public static const SERVICECHANNELMESSAGES_RANKEDFINALEAWARDSNOTIFICATION_BIG_AWARDSTITLE:String = "#messenger:serviceChannelMessages/rankedFinaleAwardsNotification/big/awardsTitle";
+
+        public static const SERVICECHANNELMESSAGES_RANKEDFINALEAWARDSNOTIFICATION_LARGE_AWARDSTITLE:String = "#messenger:serviceChannelMessages/rankedFinaleAwardsNotification/large/awardsTitle";
+
+        public static const SERVICECHANNELMESSAGES_SPECIALREWARD_TITLE:String = "#messenger:serviceChannelMessages/specialReward/title";
+
+        public static const SERVICECHANNELMESSAGES_SPECIALREWARD_VEHICLEBLUEPRINTS:String = "#messenger:serviceChannelMessages/specialReward/vehicleBlueprints";
+
+        public static const SERVICECHANNELMESSAGES_SPECIALREWARD_NATIONALBLUEPRINTS:String = "#messenger:serviceChannelMessages/specialReward/nationalBlueprints";
+
+        public static const SERVICECHANNELMESSAGES_SPECIALREWARD_INTELLIGENCEBLUEPRINTS:String = "#messenger:serviceChannelMessages/specialReward/intelligenceBlueprints";
+
         public static const CHAT_KOREAMESSAGE_DAILYLIMIT:String = "#messenger:chat/koreaMessage/dailyLimit";
 
         public static const CHAT_KOREAMESSAGE_WEEKLYLIMIT:String = "#messenger:chat/koreaMessage/weeklyLimit";
 
         public static const CHAT_KOREAMESSAGE_CURFEW:String = "#messenger:chat/koreaMessage/curfew";
+
+        public static const SERVICECHANNELMESSAGES_BATTLEPASSREWARD_HEADER_DEFAULT:String = "#messenger:serviceChannelMessages/battlePassReward/header/default";
+
+        public static const SERVICECHANNELMESSAGES_BATTLEPASSREWARD_HEADER_BUYBP:String = "#messenger:serviceChannelMessages/battlePassReward/header/buyBP";
+
+        public static const SERVICECHANNELMESSAGES_BATTLEPASSREWARD_HEADER_BUYPROGRESS:String = "#messenger:serviceChannelMessages/battlePassReward/header/buyProgress";
+
+        public static const SERVICECHANNELMESSAGES_BATTLEPASSREWARD_HEADER_VOTED:String = "#messenger:serviceChannelMessages/battlePassReward/header/voted";
+
+        public static const SERVICECHANNELMESSAGES_BATTLEPASSREWARD_BATTLE_BASE_TEXT:String = "#messenger:serviceChannelMessages/battlePassReward/battle/base/text";
+
+        public static const SERVICECHANNELMESSAGES_BATTLEPASSREWARD_BATTLE_POST_TEXT:String = "#messenger:serviceChannelMessages/battlePassReward/battle/post/text";
+
+        public static const SERVICECHANNELMESSAGES_BATTLEPASSREWARD_BATTLE_FINALBASE_TEXT:String = "#messenger:serviceChannelMessages/battlePassReward/battle/finalBase/text";
+
+        public static const SERVICECHANNELMESSAGES_BATTLEPASSREWARD_BATTLE_FINALBASE_ADDITIONALTEXT:String = "#messenger:serviceChannelMessages/battlePassReward/battle/finalBase/additionalText";
+
+        public static const SERVICECHANNELMESSAGES_BATTLEPASSREWARD_BATTLE_FINAL_TEXT:String = "#messenger:serviceChannelMessages/battlePassReward/battle/final/text";
+
+        public static const SERVICECHANNELMESSAGES_BATTLEPASSREWARD_BATTLE_FINAL_ADDITIONALTEXT:String = "#messenger:serviceChannelMessages/battlePassReward/battle/final/additionalText";
+
+        public static const SERVICECHANNELMESSAGES_BATTLEPASSREWARD_BUYWITHOUTREWARDS_TEXT:String = "#messenger:serviceChannelMessages/battlePassReward/buyWithoutRewards/text";
+
+        public static const SERVICECHANNELMESSAGES_BATTLEPASSREWARD_BUYWITHREWARDS_TEXT:String = "#messenger:serviceChannelMessages/battlePassReward/buyWithRewards/text";
+
+        public static const SERVICECHANNELMESSAGES_BATTLEPASSREWARD_BUYPROGRESS_TEXT:String = "#messenger:serviceChannelMessages/battlePassReward/buyProgress/text";
+
+        public static const SERVICECHANNELMESSAGES_BATTLEPASSREWARD_BUYPROGRESS_POSTTEXT:String = "#messenger:serviceChannelMessages/battlePassReward/buyProgress/postText";
+
+        public static const SERVICECHANNELMESSAGES_BATTLEPASSREWARD_VOTING_TEXT:String = "#messenger:serviceChannelMessages/battlePassReward/voting/text";
+
+        public static const SERVICECHANNELMESSAGES_BATTLEPASSREWARD_BUY_GOLD:String = "#messenger:serviceChannelMessages/battlePassReward/buy/gold";
+
+        public static const SERVICECHANNELMESSAGES_BATTLEPASSREWARD_BUTTON:String = "#messenger:serviceChannelMessages/battlePassReward/button";
+
+        public static const SERVICECHANNELMESSAGES_BATTLEPASSREWARD_TMAN:String = "#messenger:serviceChannelMessages/battlePassReward/tman";
+
+        public static const SERVICECHANNELMESSAGES_BATTLEPASS_REACHEDCAP_HEADER:String = "#messenger:serviceChannelMessages/battlePass/reachedCap/header";
+
+        public static const SERVICECHANNELMESSAGES_BATTLEPASS_REACHEDCAP_TEXT:String = "#messenger:serviceChannelMessages/battlePass/reachedCap/text";
+
+        public static const SERVICECHANNELMESSAGES_BATTLEPASS_BADGES_HEADER_REMOVE:String = "#messenger:serviceChannelMessages/battlePass/badges/header/remove";
+
+        public static const SERVICECHANNELMESSAGES_BATTLEPASS_BADGES_TEXT_REMOVE:String = "#messenger:serviceChannelMessages/battlePass/badges/text/remove";
+
+        public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_UPGRADE:String = "#messenger:serviceChannelMessages/sysMsg/titles/upgrade";
 
         public function MESSENGER()
         {

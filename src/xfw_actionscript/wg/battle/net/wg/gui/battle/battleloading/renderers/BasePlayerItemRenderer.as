@@ -4,6 +4,7 @@ package net.wg.gui.battle.battleloading.renderers
     import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
     import net.wg.gui.battle.components.BattleAtlasSprite;
     import flash.text.TextField;
+    import net.wg.gui.components.controls.BadgeComponent;
     import net.wg.gui.components.icons.PlayerActionMarker;
     import flash.display.MovieClip;
     import net.wg.infrastructure.managers.IColorSchemeManager;
@@ -55,7 +56,7 @@ package net.wg.gui.battle.battleloading.renderers
 
         private var _vehicleLevelIcon:BattleAtlasSprite;
 
-        private var _badgeIcon:BattleAtlasSprite;
+        private var _badge:BadgeComponent;
 
         private var _playerActionMarker:PlayerActionMarker;
 
@@ -91,8 +92,7 @@ package net.wg.gui.battle.battleloading.renderers
                 this._icoIGR = param1.icoIGRsEnemy[param2];
                 this._icoTester = param1.icoTestersEnemy[param2];
                 this._backTester = param1.backTestersEnemy[param2];
-                this.selfBg = param1.selfBgsEnemy[param2];
-                this._badgeIcon = param1.badgesEnemy[param2];
+                this._badge = param1.badgesEnemy[param2];
             }
             else
             {
@@ -106,7 +106,7 @@ package net.wg.gui.battle.battleloading.renderers
                 this._icoTester = param1.icoTestersAlly[param2];
                 this._backTester = param1.backTestersAlly[param2];
                 this.selfBg = param1.selfBgs[param2];
-                this._badgeIcon = param1.badgesAlly[param2];
+                this._badge = param1.badgesAlly[param2];
             }
             this._defaultVehicleFieldXPosition = this._vehicleField.x;
             this._defaultVehicleFieldWidth = this._vehicleField.width;
@@ -131,7 +131,7 @@ package net.wg.gui.battle.battleloading.renderers
             this._vehicleTypeIcon = null;
             this._vehicleLevelIcon = null;
             this._vehicleIcon = null;
-            this._badgeIcon = null;
+            this._badge = null;
             this._playerActionMarker = null;
             this._icoIGR = null;
             this._icoTester = null;
@@ -150,7 +150,7 @@ package net.wg.gui.battle.battleloading.renderers
                 this.setSelfBG();
                 this.setBadge();
                 this._textField.visible = true;
-                App.utils.commons.formatPlayerName(this._textField,App.utils.commons.getUserProps(this.model.playerName,this.model.clanAbbrev,this.model.region,0,this.model.userTags,0,"",this.model.playerFakeName),!this.model.isCurrentPlayer,this.model.isCurrentPlayer);
+                App.utils.commons.formatPlayerName(this._textField,App.utils.commons.getUserProps(this.model.playerName,this.model.clanAbbrev,this.model.region,0,this.model.userTags,this.model.playerFakeName),!this.model.isCurrentPlayer,this.model.isCurrentPlayer);
                 this._vehicleField.visible = true;
                 this._vehicleField.text = this.model.vehicleName;
                 this._icoIGR.visible = this.model.isIGR;
@@ -190,7 +190,7 @@ package net.wg.gui.battle.battleloading.renderers
                     this.selfBg.visible = false;
                 }
                 this._icoIGR.visible = false;
-                this._badgeIcon.visible = false;
+                this._badge.visible = false;
                 this._textField.visible = false;
                 this._vehicleField.visible = false;
                 this._vehicleIcon.visible = false;
@@ -236,20 +236,23 @@ package net.wg.gui.battle.battleloading.renderers
 
         private function setBadge() : void
         {
-            this._badgeIcon.alpha = this.model.isReady() && this.model.isAlive()?LIVE_ICON_ALPHA:DIE_ICON_ALPHA;
-            this._badgeIcon.visible = StringUtils.isNotEmpty(this.model.badgeType);
-            this._badgeIcon.imageName = this.model.badgeType;
-            var _loc1_:int = StringUtils.isNotEmpty(this.model.suffixBadgeType)?BADGE_SIZE - SUFFIX_BADGE_OFFSET:0;
-            if(this._badgeIcon.visible)
+            this._badge.alpha = this.model.isReady() && this.model.isAlive()?LIVE_ICON_ALPHA:DIE_ICON_ALPHA;
+            this._badge.visible = this.model.hasSelectedBadge;
+            if(this.model.hasSelectedBadge)
             {
-                this._textField.width = this._defaultUsernameTFWidth - (this._badgeIcon.width + RANKED_BADGE_OFFSET) - _loc1_;
+                this._badge.setData(this.model.badgeVO);
+            }
+            var _loc1_:int = StringUtils.isNotEmpty(this.model.suffixBadgeType)?BADGE_SIZE - SUFFIX_BADGE_OFFSET:0;
+            if(this._badge.visible)
+            {
+                this._textField.width = this._defaultUsernameTFWidth - (this._badge.width + RANKED_BADGE_OFFSET) - _loc1_;
                 if(this._isEnemy)
                 {
-                    this._textField.x = this._badgeIcon.x - (this._defaultUsernameTFWidth - this._badgeIcon.width) + _loc1_;
+                    this._textField.x = this._badge.x - (this._defaultUsernameTFWidth - this._badge.width) + _loc1_;
                 }
                 else
                 {
-                    this._textField.x = this._badgeIcon.x + (this._badgeIcon.width + RANKED_BADGE_OFFSET);
+                    this._textField.x = this._badge.x + (this._badge.width + RANKED_BADGE_OFFSET);
                 }
             }
             else

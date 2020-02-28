@@ -10,6 +10,7 @@ package net.wg.gui.lobby.storage.categories.storage
     import net.wg.gui.lobby.storage.categories.cards.CardEvent;
     import net.wg.data.constants.Linkages;
     import scaleform.clik.constants.InvalidationType;
+    import flash.events.Event;
     import scaleform.clik.core.UIComponent;
 
     public class ItemsWithTypeFilterTabView extends ItemsWithTypeFilterTabViewMeta
@@ -51,6 +52,7 @@ package net.wg.gui.lobby.storage.categories.storage
 
         override protected function onDispose() : void
         {
+            this.disposeNoItemsView();
             this.noItemsView.dispose();
             this.noItemsView = null;
             this.filtersBlock.removeEventListener(FiltersEvent.FILTERS_CHANGED,this.onFiltersBlockFiltersChangedHandler);
@@ -91,11 +93,6 @@ package net.wg.gui.lobby.storage.categories.storage
             resetFilterS();
         }
 
-        protected function initNoItemsView() : void
-        {
-            this.noItemsView.setTexts(STORAGE.STORAGE_NOITEMS_TITLESHORT);
-        }
-
         public function as_resetFilter(param1:int) : void
         {
             if(param1 >= 0)
@@ -107,6 +104,17 @@ package net.wg.gui.lobby.storage.categories.storage
         public function as_updateCounter(param1:Boolean, param2:String, param3:Boolean) : void
         {
             this.filtersBlock.updateCounter(param1,param2,param3);
+        }
+
+        protected function initNoItemsView() : void
+        {
+            this.noItemsView.setTexts(STORAGE.STORAGE_NOITEMS_TITLE,STORAGE.STORAGE_NOITEMS_NAVIGATIONBUTTON);
+            this.noItemsView.addEventListener(Event.CLOSE,this.onNoItemViewCloseHandler);
+        }
+
+        protected function disposeNoItemsView() : void
+        {
+            this.noItemsView.removeEventListener(Event.CLOSE,this.onNoItemViewCloseHandler);
         }
 
         override public function get noItemsComponent() : UIComponent
@@ -128,6 +136,11 @@ package net.wg.gui.lobby.storage.categories.storage
         private function onFiltersBlockResetAllFiltersHandler(param1:FiltersEvent) : void
         {
             resetFilterS();
+        }
+
+        private function onNoItemViewCloseHandler(param1:Event) : void
+        {
+            navigateToStoreS();
         }
     }
 }

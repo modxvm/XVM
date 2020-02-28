@@ -144,7 +144,7 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             this._listItem.setVehicleLevel(this.vehicleData.vehicleLevel);
             this._listItem.setVehicleIcon(this.vehicleData.vehicleIconName);
             this._listItem.setVehicleName(this.vehicleData.vehicleName);
-            this._listItem.setBadge(this.vehicleData.badgeType);
+            this._listItem.setBadge(this.vehicleData.badgeVO,this.vehicleData.hasSelectedBadge);
             this.updateListItemVehicleDataValues();
             if(this.vehicleData.vehicleAction)
             {

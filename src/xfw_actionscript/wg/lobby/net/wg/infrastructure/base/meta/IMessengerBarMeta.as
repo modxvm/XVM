@@ -9,6 +9,8 @@ package net.wg.infrastructure.base.meta
 
         function referralButtonClickS() : void;
 
+        function sessionStatsButtonClickS() : void;
+
         function as_setInitData(param1:Object) : void;
 
         function as_setVehicleCompareCartButtonVisible(param1:Boolean) : void;
@@ -28,5 +30,7 @@ package net.wg.infrastructure.base.meta
         function as_setSessionStatsButtonVisible(param1:Boolean) : void;
 
         function as_setSessionStatsButtonEnable(param1:Boolean, param2:String) : void;
+
+        function as_setSessionStatsButtonSettingsUpdate(param1:Boolean, param2:String) : void;
     }
 }

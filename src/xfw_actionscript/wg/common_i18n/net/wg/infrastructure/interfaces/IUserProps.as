@@ -43,14 +43,6 @@ package net.wg.infrastructure.interfaces
 
         function set tags(param1:Array) : void;
 
-        function get badge() : int;
-
-        function set badge(param1:int) : void;
-
-        function get badgeImgStr() : String;
-
-        function set badgeImgStr(param1:String) : void;
-
         function get isTeamKiller() : Boolean;
 
         function set isTeamKiller(param1:Boolean) : void;

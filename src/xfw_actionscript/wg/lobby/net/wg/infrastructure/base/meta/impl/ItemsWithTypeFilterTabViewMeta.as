@@ -14,6 +14,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public var onFiltersChange:Function;
 
+        public var navigateToStore:Function;
+
         private var _buttonFiltersVO:ButtonFiltersVO;
 
         public function ItemsWithTypeFilterTabViewMeta()
@@ -47,6 +49,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.onFiltersChange,"onFiltersChange" + Errors.CANT_NULL);
             this.onFiltersChange(param1);
+        }
+
+        public function navigateToStoreS() : void
+        {
+            App.utils.asserter.assertNotNull(this.navigateToStore,"navigateToStore" + Errors.CANT_NULL);
+            this.navigateToStore();
         }
 
         public final function as_initTypeFilter(param1:Object) : void

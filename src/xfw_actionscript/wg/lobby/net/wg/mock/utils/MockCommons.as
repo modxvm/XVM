@@ -54,7 +54,7 @@ package net.wg.mock.utils
             return "";
         }
 
-        public function getUserProps(param1:String, param2:String = null, param3:String = null, param4:int = 0, param5:Array = null, param6:int = 0, param7:String = "", param8:String = "") : IUserProps
+        public function getUserProps(param1:String, param2:String = null, param3:String = null, param4:int = 0, param5:Array = null, param6:String = "") : IUserProps
         {
             return null;
         }

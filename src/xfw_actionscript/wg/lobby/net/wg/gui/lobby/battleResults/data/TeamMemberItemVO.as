@@ -4,6 +4,7 @@ package net.wg.gui.lobby.battleResults.data
     import net.wg.data.VO.UserVO;
     import scaleform.clik.data.DataProvider;
     import net.wg.data.constants.Errors;
+    import net.wg.gui.components.controls.VO.BadgeVisualVO;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
 
     public class TeamMemberItemVO extends DAAPIDataClass
@@ -16,6 +17,8 @@ package net.wg.gui.lobby.battleResults.data
         private static const USER_VO:String = "userVO";
 
         private static const ACHIEVEMENTS:String = "achievements";
+
+        private static const BADGE_VO:String = "badgeVO";
 
         public var isSelf:Boolean;
 
@@ -119,9 +122,7 @@ package net.wg.gui.lobby.battleResults.data
 
         public var rank:int = -1;
 
-        public var badge:int = 0;
-
-        public var badgeIcon:String = "";
+        public var hasSelectedBadge:Boolean = false;
 
         public var suffixBadgeIcon:String = "";
 
@@ -148,6 +149,9 @@ package net.wg.gui.lobby.battleResults.data
                 case ACHIEVEMENTS:
                     App.utils.asserter.assert(param2 is Array,Errors.INVALID_TYPE);
                     this.fillAchievements(param2 as Array);
+                    return false;
+                case BADGE_VO:
+                    this.userVO.badgeVisualVO = new BadgeVisualVO(param2);
                     return false;
                 default:
                     return super.onDataRead(param1,param2);
@@ -196,8 +200,11 @@ package net.wg.gui.lobby.battleResults.data
                 this.achievements.cleanUp();
                 this.achievements = null;
             }
-            this.userVO.dispose();
-            this.userVO = null;
+            if(this.userVO)
+            {
+                this.userVO.dispose();
+                this.userVO = null;
+            }
             super.onDispose();
         }
 

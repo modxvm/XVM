@@ -5,8 +5,8 @@ package net.wg.gui.components.tooltips
     import net.wg.gui.cyberSport.controls.CSVehicleButton;
     import net.wg.infrastructure.base.UIComponentEx;
     import net.wg.data.managers.ITooltipProps;
-    import net.wg.utils.ILocale;
     import net.wg.gui.components.tooltips.VO.SuitableVehicleVO;
+    import net.wg.utils.ILocale;
     import flash.text.TextFieldAutoSize;
     import net.wg.data.constants.generated.TOOLTIPS_CONSTANTS;
     import net.wg.gui.components.tooltips.helpers.Utils;
@@ -90,7 +90,6 @@ package net.wg.gui.components.tooltips
 
         override protected function redraw() : void
         {
-            var _loc1_:ILocale = null;
             var _loc2_:SuitableVehicleVO = null;
             var _loc4_:uint = 0;
             var _loc5_:uint = 0;
@@ -98,7 +97,7 @@ package net.wg.gui.components.tooltips
             var _loc7_:* = 0;
             var _loc8_:uint = 0;
             var _loc9_:TextField = null;
-            _loc1_ = App.utils.locale;
+            var _loc1_:ILocale = App.utils.locale;
             _loc2_ = new SuitableVehicleVO(_data);
             var _loc3_:Separator = null;
             separators = new Vector.<Separator>();

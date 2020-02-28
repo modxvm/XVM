@@ -6,6 +6,7 @@ package net.wg.gui.components.advanced.tutorial
     import net.wg.gui.components.advanced.interfaces.ITutorialHintTextAnimation;
     import net.wg.gui.components.advanced.vo.TutorialHintVO;
     import net.wg.gui.components.advanced.events.TutorialHintEvent;
+    import flash.display.Sprite;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.data.constants.Values;
     import net.wg.data.constants.Directions;
@@ -85,12 +86,16 @@ package net.wg.gui.components.advanced.tutorial
             this.hintText.dispose();
             this.hintText = null;
             this._model = null;
+            hitArea = null;
             super.onDispose();
         }
 
         override protected function configUI() : void
         {
             super.configUI();
+            var _loc1_:Sprite = new Sprite();
+            addChild(_loc1_);
+            hitArea = _loc1_;
             mouseEnabled = mouseChildren = false;
         }
 

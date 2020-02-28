@@ -7,12 +7,14 @@ package net.wg.gui.battle.epicBattle.views.stats.renderers
     import flash.text.TextField;
     import net.wg.gui.battle.components.PlayerStatusView;
     import net.wg.gui.battle.views.stats.fullStats.SquadInviteStatusView;
+    import net.wg.gui.components.controls.BadgeComponent;
     import flash.display.MovieClip;
     import net.wg.gui.battle.views.stats.SpeakAnimation;
     import net.wg.gui.battle.views.stats.StatsUserProps;
     import net.wg.gui.battle.random.views.stats.components.fullStats.tableItem.DynamicSquadCtrl;
     import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
     import net.wg.gui.battle.epicBattle.VO.daapi.EpicVehicleStatsVO;
+    import net.wg.gui.components.controls.VO.BadgeVisualVO;
     import net.wg.data.constants.generated.BATTLEATLAS;
     import scaleform.gfx.TextFieldEx;
     import flash.events.MouseEvent;
@@ -57,7 +59,7 @@ package net.wg.gui.battle.epicBattle.views.stats.renderers
 
         public var squadStatus:SquadInviteStatusView = null;
 
-        public var rankBadge:BattleAtlasSprite = null;
+        public var rankBadge:BadgeComponent = null;
 
         public var squad:BattleAtlasSprite = null;
 
@@ -113,7 +115,7 @@ package net.wg.gui.battle.epicBattle.views.stats.renderers
 
         private var _epicData:EpicVehicleStatsVO = null;
 
-        private var _badgeType:String;
+        private var _badgeVO:BadgeVisualVO = null;
 
         private var _vehicleName:String = null;
 
@@ -144,6 +146,8 @@ package net.wg.gui.battle.epicBattle.views.stats.renderers
         private var _isRenderingAvailable:Boolean = false;
 
         private var _index:int = 0;
+
+        private var _hasBadge:Boolean = false;
 
         public function EpicStatsPlayerRenderer()
         {
@@ -329,8 +333,11 @@ package net.wg.gui.battle.epicBattle.views.stats.renderers
             }
             if(isInvalid(FullStatsValidationType.BADGE))
             {
-                this.rankBadge.visible = Boolean(this._badgeType);
-                this.rankBadge.imageName = this._badgeType;
+                this.rankBadge.visible = this._hasBadge;
+                if(this._hasBadge)
+                {
+                    this.rankBadge.setData(this._badgeVO);
+                }
                 if(this.rankBadge.visible)
                 {
                     if(this._isRightSide)
@@ -393,7 +400,6 @@ package net.wg.gui.battle.epicBattle.views.stats.renderers
             this.mute = null;
             this.deadBg = null;
             this.selfBg = null;
-            this.rankBadge = null;
             this.ranks = null;
             this.noLivesBg = null;
             this.squadStatus.dispose();
@@ -402,6 +408,8 @@ package net.wg.gui.battle.epicBattle.views.stats.renderers
             this.playerStatus = null;
             this.speakAnimation.dispose();
             this.speakAnimation = null;
+            this.rankBadge.dispose();
+            this.rankBadge = null;
             this.disableCommunicationIcon = null;
             if(this._squadItem)
             {
@@ -421,6 +429,7 @@ package net.wg.gui.battle.epicBattle.views.stats.renderers
             {
                 this._epicData = null;
             }
+            this._badgeVO = null;
             super.onDispose();
         }
 
@@ -592,14 +601,14 @@ package net.wg.gui.battle.epicBattle.views.stats.renderers
             }
         }
 
-        private function setBadge(param1:String) : void
+        private function setBadge(param1:BadgeVisualVO, param2:Boolean) : void
         {
-            if(this._badgeType == param1)
+            if(this._badgeVO == null || !this._badgeVO.isEquals(param1))
             {
-                return;
+                this._badgeVO = param1;
+                this._hasBadge = param1 != null && param2;
+                invalidate(FullStatsValidationType.BADGE);
             }
-            this._badgeType = param1;
-            invalidate(FullStatsValidationType.BADGE);
         }
 
         private function vehicleDataSync() : void
@@ -609,7 +618,7 @@ package net.wg.gui.battle.epicBattle.views.stats.renderers
                 this.setVehicleName(this._data.vehicleName);
                 this.setVehicleLevel(this._data.vehicleLevel);
                 this.setIsIGR(this._data.isIGR);
-                this.setBadge(this._data.badgeType);
+                this.setBadge(this._data.badgeVO,this._data.hasSelectedBadge);
                 this.setVehicleAction(VehicleActions.getActionName(this._data.vehicleAction));
                 this.setIsSpeaking(this._data.isSpeaking);
                 this.updateVehicleType(this._data);

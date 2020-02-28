@@ -140,6 +140,7 @@ package net.wg.gui.lobby.vehiclePreview20.infoPanel.browse
                 while(_loc3_ < _loc2_)
                 {
                     this._renderers[_loc3_].setData(param1[_loc3_]);
+                    this._renderers[_loc3_].visible = _loc3_ < param1.length;
                     _loc3_++;
                 }
             }

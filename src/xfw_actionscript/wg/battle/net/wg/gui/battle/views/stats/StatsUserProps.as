@@ -28,10 +28,6 @@ package net.wg.gui.battle.views.stats
 
         private var _isChanged:Boolean = false;
 
-        private var _badge:int = 0;
-
-        private var _badgeImgStr:String = "";
-
         private var _isTeamKiller:Boolean = false;
 
         public function StatsUserProps(param1:String, param2:String, param3:String, param4:String, param5:int, param6:Array = null)
@@ -245,26 +241,6 @@ package net.wg.gui.battle.views.stats
         public function get isChanged() : Boolean
         {
             return this._isChanged;
-        }
-
-        public function get badge() : int
-        {
-            return this._badge;
-        }
-
-        public function set badge(param1:int) : void
-        {
-            this._badge = param1;
-        }
-
-        public function get badgeImgStr() : String
-        {
-            return this._badgeImgStr;
-        }
-
-        public function set badgeImgStr(param1:String) : void
-        {
-            this._badgeImgStr = param1;
         }
 
         public function get isTeamKiller() : Boolean

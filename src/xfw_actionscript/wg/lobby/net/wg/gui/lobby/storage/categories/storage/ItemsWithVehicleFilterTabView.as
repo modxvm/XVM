@@ -45,5 +45,14 @@ package net.wg.gui.lobby.storage.categories.storage
         {
             resetVehicleFilterS();
         }
+
+        override protected function initNoItemsView() : void
+        {
+            noItemsView.setTexts(STORAGE.STORAGE_NOITEMS_TITLESHORT);
+        }
+
+        override protected function disposeNoItemsView() : void
+        {
+        }
     }
 }

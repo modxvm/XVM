@@ -95,8 +95,6 @@ package net.wg.gui.lobby.battleResults.components
 
         public var vehicleIcon:UILoaderAlt = null;
 
-        public var badgeIcon:UILoaderAlt = null;
-
         public var testerIcon:UILoaderAlt = null;
 
         public var testerBG:MovieClip = null;
@@ -112,8 +110,6 @@ package net.wg.gui.lobby.battleResults.components
         private var _locale:ILocale;
 
         private var _tooltipMgr:ITooltipMgr;
-
-        private var _badgeVisibleLayout:Boolean = false;
 
         private var _suffixBadgeIcon:String = "";
 
@@ -179,8 +175,6 @@ package net.wg.gui.lobby.battleResults.components
             this.fakeFocusIndicator = null;
             this.squadIcon.dispose();
             this.squadIcon = null;
-            this.badgeIcon.dispose();
-            this.badgeIcon = null;
             this.vehicleIcon.dispose();
             this.vehicleIcon = null;
             this._locale = null;
@@ -233,22 +227,6 @@ package net.wg.gui.lobby.battleResults.components
             this.vehicleIcon.source = param1.tankIcon?param1.tankIcon:this.vehicleIcon.sourceAlt;
             this.vehicleName.htmlText = param1.vehicleName;
             this.xpLbl.text = this._locale.integer(param1.xp - param1.achievementXP);
-            var _loc3_:String = param1.badgeIcon;
-            this.badgeIcon.visible = StringUtils.isNotEmpty(_loc3_);
-            if(this.badgeIcon.visible)
-            {
-                this.badgeIcon.source = _loc3_;
-                if(!this._badgeVisibleLayout)
-                {
-                    this.playerName.x = this.playerName.x + BADGE_OFFSET;
-                }
-                this.playerName.width = this.playerName.width - BADGE_OFFSET;
-            }
-            else if(this._badgeVisibleLayout)
-            {
-                this.playerName.x = this.playerName.x - BADGE_OFFSET;
-            }
-            this._badgeVisibleLayout = this.badgeIcon.visible;
             this.damageLbl.text = ZERO;
             this.vehicleName.textColor = _loc2_.rgb;
             this.fragsLbl.textColor = this.damageLbl.textColor = DAMAGE_DEFAULT_COLOR;
@@ -301,32 +279,12 @@ package net.wg.gui.lobby.battleResults.components
             {
                 this.playerName.x = this.selfBg.x + PLAYER_NAME_OFFSET;
                 this.playerName.width = this.playerNameWidth + SQUAD_WIDTH - this.playerName.x;
-                if(this._badgeVisibleLayout)
-                {
-                    this.badgeIcon.x = this.playerName.x - BADGE_GAP;
-                    this.playerName.x = this.badgeIcon.x + BADGE_OFFSET;
-                    this.playerName.width = this.playerName.width - BADGE_OFFSET;
-                }
-                if(StringUtils.isNotEmpty(this._suffixBadgeIcon))
-                {
-                    this.playerName.width = this.playerName.width - BADGE_OFFSET;
-                }
             }
             var _loc2_:Boolean = param1.isShowResources;
             if(_loc2_)
             {
                 this.playerName.width = this.playerNameWidth + this.xOffset;
                 this.playerName.x = PLAYER_NAME_POS_X;
-                if(this._badgeVisibleLayout)
-                {
-                    this.badgeIcon.x = this.playerName.x - BADGE_GAP;
-                    this.playerName.x = this.badgeIcon.x + BADGE_OFFSET;
-                    this.playerName.width = this.playerName.width - BADGE_OFFSET;
-                }
-                if(StringUtils.isNotEmpty(this._suffixBadgeIcon))
-                {
-                    this.playerName.width = this.playerName.width - BADGE_OFFSET;
-                }
                 this.vehicleIcon.x = VEHICLE_ICON_POS_X + this.xOffset;
                 this.vehicleName.x = VEHICLE_NAME_POS_X + this.xOffset;
                 this.damageLbl.x = DAMAGE_LBL_POS_X + this.xOffset;

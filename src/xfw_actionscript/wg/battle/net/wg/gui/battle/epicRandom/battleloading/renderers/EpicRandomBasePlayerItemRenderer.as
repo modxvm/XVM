@@ -4,6 +4,7 @@ package net.wg.gui.battle.epicRandom.battleloading.renderers
     import flash.text.TextField;
     import net.wg.gui.components.icons.PlayerActionMarker;
     import net.wg.gui.battle.components.BattleAtlasSprite;
+    import net.wg.gui.components.controls.BadgeComponent;
     import flash.display.MovieClip;
     import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
     import net.wg.infrastructure.managers.IColorSchemeManager;
@@ -57,7 +58,7 @@ package net.wg.gui.battle.epicRandom.battleloading.renderers
 
         public var selfBg:BattleAtlasSprite = null;
 
-        public var rankBadge:BattleAtlasSprite = null;
+        public var rankBadge:BadgeComponent = null;
 
         public var testerIcon:BattleAtlasSprite = null;
 
@@ -118,6 +119,7 @@ package net.wg.gui.battle.epicRandom.battleloading.renderers
             {
                 this.model = null;
             }
+            this.rankBadge.dispose();
             this.rankBadge = null;
             super.onDispose();
         }
@@ -336,8 +338,11 @@ package net.wg.gui.battle.epicRandom.battleloading.renderers
         private function setBadge() : void
         {
             this.rankBadge.alpha = this.model.isAlive()?ALPHA_FULL:ALPHA_DISABLED;
-            this.rankBadge.visible = Boolean(this.model.badgeType);
-            this.rankBadge.imageName = this.model.badgeType;
+            this.rankBadge.visible = this.model.hasSelectedBadge;
+            if(this.model.hasSelectedBadge)
+            {
+                this.rankBadge.setData(this.model.badgeVO);
+            }
             if(this.rankBadge.visible)
             {
                 if(this._isEnemy)

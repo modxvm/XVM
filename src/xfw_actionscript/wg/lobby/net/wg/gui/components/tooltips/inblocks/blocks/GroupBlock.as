@@ -25,6 +25,17 @@ package net.wg.gui.components.tooltips.inblocks.blocks
             super();
         }
 
+        override public function cleanUp() : void
+        {
+            super.cleanUp();
+            this._blockWidth = 0;
+        }
+
+        override public function getHeight() : Number
+        {
+            return this.bounds.height;
+        }
+
         override public function setBlockData(param1:Object) : void
         {
             this.clearData();
@@ -40,12 +51,6 @@ package net.wg.gui.components.tooltips.inblocks.blocks
                 this._group.width = param1 - this._group.x;
                 this._group.invalidateLayout();
             }
-        }
-
-        override public function cleanUp() : void
-        {
-            super.cleanUp();
-            this._blockWidth = 0;
         }
 
         override protected function onValidateBlock() : Boolean

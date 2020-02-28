@@ -236,9 +236,8 @@ package net.wg.gui.notification
         private function updateListItemsLayout() : void
         {
             var _loc1_:* = 0;
-            var _loc2_:* = 0;
             _loc1_ = this.progressiveRewardWidget.visible?this.progressiveRewardWidget.actualHeight:LIST_DEFAULT_TOP_Y;
-            _loc2_ = this.progressiveRewardWidget.y + _loc1_;
+            var _loc2_:int = this.progressiveRewardWidget.y + _loc1_;
             this.list.y = _loc2_;
             this.list.height = this.background.height - _loc1_ + LIST_Y_OFFSET;
             this.widgetSeparator.y = this.list.y + this.list.actualHeight;

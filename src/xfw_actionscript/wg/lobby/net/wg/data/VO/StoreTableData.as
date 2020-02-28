@@ -3,13 +3,18 @@ package net.wg.data.VO
     import net.wg.data.daapi.base.DAAPIDataClass;
     import net.wg.gui.components.controls.VO.ActionPriceVO;
     import net.wg.gui.data.VehCompareEntrypointVO;
+    import net.wg.gui.lobby.store.data.UpgradeModuleVO;
 
     public class StoreTableData extends DAAPIDataClass
     {
 
         private static const VEH_COMPARE_DATA_FIELD_NAME:String = "vehCompareData";
 
+        private static const UPGRADE_MODULE_DATA_FIELD_NAME:String = "upgradeModuleData";
+
         public var highlightType:String = "";
+
+        public var overlayType:String = "";
 
         public var showActionGoldAndCredits:Boolean = false;
 
@@ -95,6 +100,8 @@ package net.wg.data.VO
 
         private var _vehCompareVO:VehCompareEntrypointVO = null;
 
+        private var _upgradeModuleVO:UpgradeModuleVO = null;
+
         public function StoreTableData(param1:Object)
         {
             super(param1);
@@ -106,6 +113,7 @@ package net.wg.data.VO
             this.clearActionPriceDataVO();
             this.clearAlternativePriceDataVO();
             this.clearVehCompareVO();
+            this.clearUpgradeTrophyVO();
             this.actionPercent.splice(0,this.actionPercent.length);
             this.actionPercent = null;
             this._price.splice(0,this._price.length);
@@ -121,6 +129,12 @@ package net.wg.data.VO
                 this.vehCompareVO = new VehCompareEntrypointVO(param2);
                 return false;
             }
+            if(param1 == UPGRADE_MODULE_DATA_FIELD_NAME)
+            {
+                this.clearUpgradeTrophyVO();
+                this.upgradeModuleVO = new UpgradeModuleVO(param2);
+                return false;
+            }
             return super.onDataWrite(param1,param2);
         }
 
@@ -130,6 +144,15 @@ package net.wg.data.VO
             {
                 this._vehCompareVO.dispose();
                 this._vehCompareVO = null;
+            }
+        }
+
+        private function clearUpgradeTrophyVO() : void
+        {
+            if(this._upgradeModuleVO != null)
+            {
+                this._upgradeModuleVO.dispose();
+                this._upgradeModuleVO = null;
             }
         }
 
@@ -486,6 +509,16 @@ package net.wg.data.VO
         public function set vehCompareVO(param1:VehCompareEntrypointVO) : void
         {
             this._vehCompareVO = param1;
+        }
+
+        public function get upgradeModuleVO() : UpgradeModuleVO
+        {
+            return this._upgradeModuleVO;
+        }
+
+        public function set upgradeModuleVO(param1:UpgradeModuleVO) : void
+        {
+            this._upgradeModuleVO = param1;
         }
 
         public function get restoreInfo() : String

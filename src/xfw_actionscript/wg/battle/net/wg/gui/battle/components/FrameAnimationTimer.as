@@ -282,6 +282,10 @@ package net.wg.gui.battle.components
         private function updateCurrentTime() : void
         {
             this._currentTimerIndex = this._currentTime * this._totalFrames / this._totalTime;
+            if(this._currentTimerIndex >= this._progressValues.length)
+            {
+                this._currentTimerIndex = this._progressValues.length - 1;
+            }
             if(this._isUpdateProgressValues)
             {
                 this.setProgressMcPosition(this._progressValues[this._currentTimerIndex]);

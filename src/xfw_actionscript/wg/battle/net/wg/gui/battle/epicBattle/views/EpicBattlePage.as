@@ -235,7 +235,7 @@ package net.wg.gui.battle.epicBattle.views
             this.battleMessenger.addEventListener(BattleMessenger.REMOVE_FOCUS,this.onBattleMessengerRemoveFocusHandler);
             this.consumablesPanel.addEventListener(ConsumablesPanelEvent.UPDATE_POSITION,this.onConsumablesPanelUpdatePositionHandler);
             super.configUI();
-            setChildIndex(this.battleMessenger,this.numChildren - 1);
+            this.epicRespawnView.mouseEnabled = false;
             this.hintPanel.addEventListener(Event.RESIZE,this.onHintPanelResizeHandler);
         }
 
@@ -278,10 +278,6 @@ package net.wg.gui.battle.epicBattle.views
             this.battleMessenger.removeEventListener(BattleMessenger.REMOVE_FOCUS,this.onBattleMessengerRemoveFocusHandler);
             this.consumablesPanel.removeEventListener(ConsumablesPanelEvent.UPDATE_POSITION,this.onConsumablesPanelUpdatePositionHandler);
             this.epicRespawnView.removeEventListener(EpicRespawnEvent.VIEW_CHANGED,this.onRespawnViewChangedHandler);
-            this.epicRespawnView.removeEventListener(EpicRespawnEvent.RESPAWN_MAP_MOUSE_OVER,this.onRespawnMapMouseOverHandler);
-            this.epicRespawnView.removeEventListener(EpicRespawnEvent.RESPAWN_LOCATION_UPDATE,this.onRespawnLocationUpdateHandler);
-            this.epicRespawnView.removeEventListener(EpicRespawnEvent.LANE_STATE_CHANGED,this.onLaneStateChangedHandler);
-            this.epicRespawnView.removeEventListener(EpicRespawnEvent.SELECTED_LANE_CHANGED,this.onSelectedLaneChangedHandler);
             this.epicScorePanelUI.removeEventListener(EpicScorePanelEvent.STATE_CHANGED,this.onScorePanelStateChangedHandler);
             battleLoading.removeEventListener(EpicBattleLoadingEvent.VISIBILITY_CHANGED,this.onBattleLoadingVisibilityChangedHandler);
             this.hintPanel.removeEventListener(Event.RESIZE,this.onHintPanelResizeHandler);
@@ -335,10 +331,6 @@ package net.wg.gui.battle.epicBattle.views
         {
             super.initialize();
             this.epicRespawnView.addEventListener(EpicRespawnEvent.VIEW_CHANGED,this.onRespawnViewChangedHandler);
-            this.epicRespawnView.addEventListener(EpicRespawnEvent.RESPAWN_MAP_MOUSE_OVER,this.onRespawnMapMouseOverHandler);
-            this.epicRespawnView.addEventListener(EpicRespawnEvent.RESPAWN_LOCATION_UPDATE,this.onRespawnLocationUpdateHandler);
-            this.epicRespawnView.addEventListener(EpicRespawnEvent.LANE_STATE_CHANGED,this.onLaneStateChangedHandler);
-            this.epicRespawnView.addEventListener(EpicRespawnEvent.SELECTED_LANE_CHANGED,this.onSelectedLaneChangedHandler);
             this.epicScorePanelUI.addEventListener(EpicScorePanelEvent.STATE_CHANGED,this.onScorePanelStateChangedHandler);
             battleLoading.addEventListener(EpicBattleLoadingEvent.VISIBILITY_CHANGED,this.onBattleLoadingVisibilityChangedHandler);
         }
@@ -441,11 +433,19 @@ package net.wg.gui.battle.epicBattle.views
         private function onBattleMessengerRequestFocusHandler(param1:FocusRequestEvent) : void
         {
             setFocus(param1.focusContainer.getComponentForFocus());
+            if(getChildIndex(this.battleMessenger) < getChildIndex(this.epicRespawnView))
+            {
+                swapChildren(this.battleMessenger,this.epicRespawnView);
+            }
         }
 
         private function onBattleMessengerRemoveFocusHandler(param1:Event) : void
         {
             setFocus(this);
+            if(getChildIndex(this.battleMessenger) > getChildIndex(this.epicRespawnView))
+            {
+                swapChildren(this.battleMessenger,this.epicRespawnView);
+            }
         }
 
         private function onConsumablesPanelUpdatePositionHandler(param1:ConsumablesPanelEvent) : void
@@ -511,26 +511,6 @@ package net.wg.gui.battle.epicBattle.views
             {
                 this.teamBasesPanelUI.y = TEAM_BASES_PANEL_OFFSETS[this._scorePanelState];
             }
-        }
-
-        private function onRespawnMapMouseOverHandler(param1:EpicRespawnEvent) : void
-        {
-            this.epicDeploymentMap.setCurrentLaneOver(param1);
-        }
-
-        private function onRespawnLocationUpdateHandler(param1:EpicRespawnEvent) : void
-        {
-            this.epicDeploymentMap.updateRespawnPositions(param1);
-        }
-
-        private function onLaneStateChangedHandler(param1:EpicRespawnEvent) : void
-        {
-            this.epicDeploymentMap.updateBlockedLaneStates(param1);
-        }
-
-        private function onSelectedLaneChangedHandler(param1:EpicRespawnEvent) : void
-        {
-            this.epicDeploymentMap.updateRespawnLane(param1);
         }
     }
 }

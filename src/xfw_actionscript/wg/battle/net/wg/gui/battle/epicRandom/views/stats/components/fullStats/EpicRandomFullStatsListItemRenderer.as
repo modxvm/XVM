@@ -8,9 +8,11 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
     import net.wg.gui.battle.components.PlayerStatusView;
     import net.wg.gui.battle.views.stats.fullStats.SquadInviteStatusView;
     import net.wg.gui.battle.views.stats.SpeakAnimation;
+    import net.wg.gui.components.controls.BadgeComponent;
     import flash.display.MovieClip;
     import net.wg.gui.battle.views.stats.StatsUserProps;
     import net.wg.gui.battle.random.views.stats.components.fullStats.tableItem.DynamicSquadCtrl;
+    import net.wg.gui.components.controls.VO.BadgeVisualVO;
     import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
     import net.wg.data.constants.generated.BATTLEATLAS;
     import scaleform.gfx.TextFieldEx;
@@ -71,7 +73,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
 
         public var selfBg:BattleAtlasSprite = null;
 
-        public var rankBadge:BattleAtlasSprite = null;
+        public var rankBadge:BadgeComponent = null;
 
         public var testerIcon:BattleAtlasSprite = null;
 
@@ -97,7 +99,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
 
         private var _squadItem:DynamicSquadCtrl = null;
 
-        private var _badgeType:String;
+        private var _badgeVO:BadgeVisualVO;
 
         private var _data:DAAPIVehicleInfoVO = null;
 
@@ -129,6 +131,8 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
 
         private var _defaultUsernameTFWidth:int;
 
+        private var _hasBadge:Boolean = false;
+
         public function EpicRandomFullStatsListItemRenderer()
         {
             super();
@@ -152,6 +156,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
             this.mute = null;
             this.deadBg = null;
             this.selfBg = null;
+            this.rankBadge.dispose();
             this.rankBadge = null;
             this.squadStatus.dispose();
             this.squadStatus = null;
@@ -174,6 +179,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
                 this._data.dispose();
                 this._data = null;
             }
+            this._badgeVO = null;
             super.onDispose();
         }
 
@@ -208,8 +214,11 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
             var _loc1_:* = false;
             if(isInvalid(FullStatsValidationType.BADGE))
             {
-                this.rankBadge.visible = Boolean(this._badgeType);
-                this.rankBadge.imageName = this._badgeType;
+                this.rankBadge.visible = this._hasBadge;
+                if(this._hasBadge)
+                {
+                    this.rankBadge.setData(this._badgeVO);
+                }
                 if(this.rankBadge.visible)
                 {
                     if(this._isEnemy)
@@ -523,7 +532,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
                 this.setVehicleIcon(this._data.vehicleIconName);
                 this.setFrags(this._data.frags);
                 this.setIsIGR(this._data.isIGR);
-                this.setBadge(this._data.badgeType);
+                this.setBadge(this._data.badgeVO,this._data.hasSelectedBadge);
                 this.setVehicleAction(VehicleActions.getActionName(this._data.vehicleAction));
                 this.setIsSpeaking(this._data.isSpeaking);
                 this.updateVehicleType(this._data);
@@ -650,14 +659,14 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
             invalidate(FullStatsValidationType.IS_IGR);
         }
 
-        private function setBadge(param1:String) : void
+        private function setBadge(param1:BadgeVisualVO, param2:Boolean) : void
         {
-            if(this._badgeType == param1)
+            if(this._badgeVO == null || !this._badgeVO.isEquals(param1))
             {
-                return;
+                this._badgeVO = param1;
+                this._hasBadge = param1 != null && param2;
+                invalidate(FullStatsValidationType.BADGE);
             }
-            this._badgeType = param1;
-            invalidate(FullStatsValidationType.BADGE);
         }
 
         private function setVehicleAction(param1:String) : void

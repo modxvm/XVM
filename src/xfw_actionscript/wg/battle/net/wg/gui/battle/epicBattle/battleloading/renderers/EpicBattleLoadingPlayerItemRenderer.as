@@ -7,6 +7,7 @@ package net.wg.gui.battle.epicBattle.battleloading.renderers
     import net.wg.gui.components.icons.PlayerActionMarker;
     import net.wg.gui.battle.components.BattleAtlasSprite;
     import flash.display.MovieClip;
+    import net.wg.gui.components.controls.BadgeComponent;
     import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
     import net.wg.gui.battle.epicBattle.VO.daapi.EpicVehicleStatsVO;
     import net.wg.infrastructure.managers.IColorSchemeManager;
@@ -67,7 +68,7 @@ package net.wg.gui.battle.epicBattle.battleloading.renderers
 
         public var noLivesBg:MovieClip = null;
 
-        public var rankBadge:BattleAtlasSprite = null;
+        public var rankBadge:BadgeComponent = null;
 
         public var testerIcon:BattleAtlasSprite = null;
 
@@ -137,7 +138,11 @@ package net.wg.gui.battle.epicBattle.battleloading.renderers
             {
                 this._epicData = null;
             }
-            this.rankBadge = null;
+            if(this.rankBadge)
+            {
+                this.rankBadge.dispose();
+                this.rankBadge = null;
+            }
             super.onDispose();
         }
 
@@ -162,7 +167,7 @@ package net.wg.gui.battle.epicBattle.battleloading.renderers
                     this.textField.visible = true;
                     this.noLivesBg.visible = false;
                     _loc1_ = UserTags.isCurrentPlayer(this._model.userTags);
-                    App.utils.commons.formatPlayerName(this.textField,App.utils.commons.getUserProps(this._model.playerName,this._model.clanAbbrev,this._model.region,Values.ZERO,this._model.userTags,Values.ZERO,Values.EMPTY_STR,this._model.playerFakeName),!_loc1_,_loc1_);
+                    App.utils.commons.formatPlayerName(this.textField,App.utils.commons.getUserProps(this._model.playerName,this._model.clanAbbrev,this._model.region,Values.ZERO,this._model.userTags,this._model.playerFakeName),!_loc1_,_loc1_);
                     this.vehicleField.visible = true;
                     this.vehicleField.text = this._model.vehicleName;
                     this.icoIGR.visible = this._model.isIGR;
@@ -377,8 +382,11 @@ package net.wg.gui.battle.epicBattle.battleloading.renderers
         {
             var _loc1_:* = 0;
             this.rankBadge.alpha = this._model.isAlive()?ALPHA_FULL:ALPHA_DISABLED;
-            this.rankBadge.visible = Boolean(this._model.badgeType);
-            this.rankBadge.imageName = this._model.badgeType;
+            this.rankBadge.visible = this._model.hasSelectedBadge;
+            if(this._model.hasSelectedBadge)
+            {
+                this.rankBadge.setData(this._model.badgeVO);
+            }
             if(this.rankBadge.visible)
             {
                 _loc1_ = this.rankBadge.x >> 0;

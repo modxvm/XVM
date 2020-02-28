@@ -90,6 +90,11 @@ package net.wg.gui.lobby.rankedBattles19.view.rewards.year
             this._id = param1;
         }
 
+        public function get status() : String
+        {
+            return this._status;
+        }
+
         public function set status(param1:String) : void
         {
             if(this._status == param1)
@@ -97,7 +102,7 @@ package net.wg.gui.lobby.rankedBattles19.view.rewards.year
                 return;
             }
             this._status = param1;
-            this.selected = param1 == RANKEDBATTLES_CONSTS.YEAR_REWARD_STATUS_CURRENT;
+            this.selected = param1 == RANKEDBATTLES_CONSTS.YEAR_REWARD_STATUS_CURRENT || param1 == RANKEDBATTLES_CONSTS.YEAR_REWARD_STATUS_CURRENT_FINAL;
             if(!selected)
             {
                 if(RANKEDBATTLES_CONSTS.RANKED_REWARDS_YEAR_MAIN_AVAILABLE_FOR.indexOf(this._id) >= 0)

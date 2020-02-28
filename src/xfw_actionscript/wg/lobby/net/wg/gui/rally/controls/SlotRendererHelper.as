@@ -58,7 +58,7 @@ package net.wg.gui.rally.controls
 
         protected function formatPlayerName(param1:IRallySimpleSlotRenderer, param2:IRallySlotVO) : void
         {
-            var _loc3_:IUserProps = App.utils.commons.getUserProps(param2.player.userName,param2.player.clanAbbrev,param2.player.region,param2.player.igrType,param2.player.tags,param2.player.badge,param2.player.badgeImgStr);
+            var _loc3_:IUserProps = App.utils.commons.getUserProps(param2.player.userName,param2.player.clanAbbrev,param2.player.region,param2.player.igrType,param2.player.tags);
             _loc3_.rgb = param2.player.color;
             param1.formatPlayerName(_loc3_);
         }

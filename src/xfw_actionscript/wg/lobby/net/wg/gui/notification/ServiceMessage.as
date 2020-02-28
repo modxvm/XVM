@@ -293,9 +293,9 @@ package net.wg.gui.notification
             var _loc2_:int = this.textField.height;
             var _loc3_:int = _loc2_ + this._messageBottomOffset + this._messageTopOffset + _loc1_;
             var _loc4_:* = 0;
-            if(StringUtils.isNotEmpty(this.bgIcon.source))
+            if(StringUtils.isNotEmpty(this.bgIcon.source) && this._data.messageVO)
             {
-                _loc4_ = this._data.messageVO.bgIconHeight;
+                _loc4_ = this._data.messageVO.bgIconSizeAuto?this.bgIcon.height:this._data.messageVO.bgIconHeight;
             }
             var _loc5_:int = Math.max(_loc3_,_loc4_);
             if(_loc5_ != this.background.height)

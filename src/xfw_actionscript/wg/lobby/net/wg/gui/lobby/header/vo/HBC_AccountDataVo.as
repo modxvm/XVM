@@ -1,6 +1,7 @@
 package net.wg.gui.lobby.header.vo
 {
     import net.wg.data.VO.UserVO;
+    import net.wg.gui.components.controls.VO.BadgeVisualVO;
 
     public class HBC_AccountDataVo extends HBC_AbstractVO
     {
@@ -11,11 +12,13 @@ package net.wg.gui.lobby.header.vo
 
         public var isAnonymized:Boolean = false;
 
-        public var badgeIcon:String = "";
+        public var badgeVO:BadgeVisualVO = null;
 
         public var hasActiveBooster:Boolean = false;
 
         public var hasAvailableBoosters:Boolean = false;
+
+        public var selectedBadge:Boolean = false;
 
         public var boosterIcon:String = "";
 
@@ -32,6 +35,7 @@ package net.wg.gui.lobby.header.vo
         {
             this.userVO.dispose();
             this.userVO = null;
+            this.badgeVO = null;
             super.dispose();
         }
     }

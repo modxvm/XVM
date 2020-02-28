@@ -1,27 +1,26 @@
 package net.wg.gui.lobby.window
 {
     import flash.text.TextField;
-    import flash.text.TextFormat;
+    import flash.display.MovieClip;
     import scaleform.clik.constants.InvalidationType;
+    import net.wg.data.constants.generated.TEXT_MANAGER_STYLES;
 
     public class EpicPrimeTime extends PrimeTime
     {
 
-        private static const TITLE_TF_OFFSET:int = 30;
+        private static const TITLE_TF_DEF_OFFSET:int = 70;
 
-        private static const TITLE_TF_ALPHA:Number = 0.05;
+        private static const TITLE_TF_SMALL_OFFSET:int = 45;
 
-        private static const TITLE_TF_DEFAULT_SIZE:int = 160;
-
-        private static const TITLE_TF_SMALL_SIZE:int = 110;
-
-        private static const BREAKPOINT_WIDTH:int = 1600;
-
-        private static const BREAKPOINT_HEIGHT:int = 900;
+        private static const BREAKPOINT_SMALL_WIDTH:int = 1366;
 
         public var titleTf:TextField = null;
 
-        private var _titleFormat:TextFormat = null;
+        public var shadow:MovieClip = null;
+
+        private var _titleText:String = null;
+
+        private var _txtStyle:String = null;
 
         public function EpicPrimeTime()
         {
@@ -31,29 +30,42 @@ package net.wg.gui.lobby.window
         override protected function configUI() : void
         {
             super.configUI();
-            this.titleTf.alpha = TITLE_TF_ALPHA;
-            this.titleTf.text = EPIC_BATTLE.PRIMETIME_TITLE;
-            this._titleFormat = this.titleTf.getTextFormat();
+            this._titleText = EPIC_BATTLE.PRIMETIME_TITLE;
             setBackground(RES_ICONS.MAPS_ICONS_EPICBATTLES_PRIMETIME_PRIME_TIME_BACK_DEFAULT);
         }
 
         override protected function onDispose() : void
         {
             this.titleTf = null;
-            this._titleFormat = null;
+            this.shadow = null;
             super.onDispose();
         }
 
         override protected function draw() : void
         {
+            var _loc1_:String = null;
             super.draw();
             if(isInvalid(InvalidationType.SIZE))
             {
                 this.titleTf.x = 0;
-                this.titleTf.y = TITLE_TF_OFFSET;
                 this.titleTf.width = width;
-                this._titleFormat.size = width < BREAKPOINT_WIDTH || height < BREAKPOINT_HEIGHT?TITLE_TF_SMALL_SIZE:TITLE_TF_DEFAULT_SIZE;
-                this.titleTf.setTextFormat(this._titleFormat);
+                this.shadow.width = width;
+                this.shadow.height = height;
+                if(width <= BREAKPOINT_SMALL_WIDTH)
+                {
+                    _loc1_ = TEXT_MANAGER_STYLES.HERO_TITLE;
+                    this.titleTf.y = TITLE_TF_SMALL_OFFSET;
+                }
+                else
+                {
+                    _loc1_ = TEXT_MANAGER_STYLES.EPIC_TITLE;
+                    this.titleTf.y = TITLE_TF_DEF_OFFSET;
+                }
+                if(this._txtStyle != _loc1_)
+                {
+                    this._txtStyle = _loc1_;
+                    this.titleTf.htmlText = App.textMgr.getTextStyleById(_loc1_,this._titleText);
+                }
             }
         }
     }

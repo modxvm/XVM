@@ -5,6 +5,14 @@ package net.wg.gui.lobby.hangar.ammunitionPanel.data
     public class VehicleMessageVO extends DAAPIDataClass
     {
 
+        public var isElite:Boolean = false;
+
+        public var tankType:String = "";
+
+        public var vehicleLevel:String = "";
+
+        public var vehicleName:String = "";
+
         public var message:String = "";
 
         public var rentAvailable:Boolean = false;

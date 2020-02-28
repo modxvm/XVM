@@ -5,6 +5,8 @@ package net.wg.data.VO
     public class ButtonPropertiesVO extends DAAPIDataClass
     {
 
+        public var btnVisible:Boolean = false;
+
         public var btnEnabled:Boolean = false;
 
         public var btnTooltip:String = "";

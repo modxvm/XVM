@@ -8,9 +8,8 @@ package net.wg.gui.lobby.epicBattles.views
     import net.wg.gui.lobby.epicBattles.components.prestigeView.RewardRibbon;
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.lobby.epicBattles.components.afterBattle.EpicBattlesAfterBattleFameProgressBar;
-    import flash.text.TextField;
-    import flash.display.Sprite;
     import net.wg.gui.lobby.epicBattles.components.BackgroundComponent;
+    import net.wg.gui.lobby.epicBattles.components.afterBattle.EpicBattlesAfterBattleMaxLevelInfo;
     import net.wg.utils.IScheduler;
     import net.wg.gui.lobby.epicBattles.data.EpicBattlesAfterBattleViewVO;
     import scaleform.clik.motion.Tween;
@@ -18,9 +17,7 @@ package net.wg.gui.lobby.epicBattles.views
     import flash.events.KeyboardEvent;
     import scaleform.clik.events.ButtonEvent;
     import net.wg.gui.lobby.epicBattles.events.AfterBattleFameBarEvent;
-    import flash.text.TextFieldAutoSize;
     import scaleform.clik.constants.InvalidationType;
-    import org.idmedia.as3commons.util.StringUtils;
     import scaleform.clik.events.InputEvent;
 
     public class EpicBattlesAfterBattleView extends EpicBattlesAfterBattleViewMeta implements IEpicBattlesAfterBattleViewMeta
@@ -36,67 +33,59 @@ package net.wg.gui.lobby.epicBattles.views
 
         private static const BASIC_DELAY:int = 100;
 
-        private static const FADE_OUT_LENGTH:int = 300;
+        private static const FADE_IN_LENGTH:int = 300;
 
         private static const FAME_BAR_DELAY:int = 100;
+
+        private static const MAX_LEVEL_INFO_DELAY:int = 400;
 
         private static const INTRO_ANIMATION_START_DELAY:int = 1500;
 
         private static const STANDARD_TOP_RIBBON_RATIO:Number = 0.58;
 
-        private static const BREAKING_POINT_RESOLUTION:int = 900;
-
         private static const RANK_TO_BAR_GAP:int = 150;
 
-        private static const BAR_TO_BUTTON_GAP:int = 110;
-
-        private static const BAR_TO_SUBTITLE:int = 50;
+        private static const BAR_TO_BUTTON_GAP:int = 100;
 
         private static const RANK_Y_OFFSET:int = 130;
 
-        private static const REWARDS_TO_TITLE_GAP:int = -380;
+        private static const REWARDS_TO_TITLE_GAP:int = -400;
 
         private static const RANK_TOP_OFFSET:int = 60;
 
-        private static const MAX_PRESTIGE_ICON_OFFSET:int = 5;
+        public var closeButton:CloseButtonText = null;
 
-        public var closeButton:CloseButtonText;
+        public var playerRank:EpicBattlesPlayerRank = null;
 
-        public var playerRank:EpicBattlesPlayerRank;
+        public var titleTextWrapper:EpicBattlesAnimatedTitleTextfield = null;
 
-        public var titleTextWrapper:EpicBattlesAnimatedTitleTextfield;
+        public var rewardRibbon:RewardRibbon = null;
 
-        public var rewardRibbon:RewardRibbon;
+        public var nextButton:SoundButtonEx = null;
 
-        public var nextButton:SoundButtonEx;
-
-        public var fameBar:EpicBattlesAfterBattleFameProgressBar;
-
-        public var fameSubTitle:TextField;
-
-        public var maxPrestigeIcon:Sprite;
+        public var fameBar:EpicBattlesAfterBattleFameProgressBar = null;
 
         public var background:BackgroundComponent = null;
 
+        public var maxLevelInfo:EpicBattlesAfterBattleMaxLevelInfo = null;
+
         private var _scheduler:IScheduler;
-
-        private var _completedBattleData:EpicBattlesAfterBattleViewVO = null;
-
-        private var _isSmall:Boolean;
 
         private var _fameBarVisible:Boolean = true;
 
         private var _ribbonDisplayed:Boolean = false;
 
-        private var _fameBarFadeInTween:Tween;
+        private var _completedBattleData:EpicBattlesAfterBattleViewVO = null;
 
-        private var _playerRankFadeInTween:Tween;
+        private var _fameBarFadeInTween:Tween = null;
 
-        private var _nextButtonFadeInTween:Tween;
+        private var _playerRankFadeInTween:Tween = null;
 
-        private var _fameSubTitleInTween:Tween;
+        private var _nextButtonFadeInTween:Tween = null;
 
-        private var _maxPrestigeIconInTween:Tween;
+        private var _fameBarFadeOutTween:Tween = null;
+
+        private var _maxLevelInfoFadeInTween:Tween = null;
 
         public function EpicBattlesAfterBattleView()
         {
@@ -129,27 +118,32 @@ package net.wg.gui.lobby.epicBattles.views
         override protected function onDispose() : void
         {
             this._scheduler = null;
+            this._playerRankFadeInTween.paused = true;
+            this._playerRankFadeInTween.dispose();
+            this._playerRankFadeInTween = null;
             if(this._fameBarFadeInTween != null)
             {
+                this._fameBarFadeInTween.paused = true;
                 this._fameBarFadeInTween.dispose();
                 this._fameBarFadeInTween = null;
             }
-            this._playerRankFadeInTween.dispose();
-            this._playerRankFadeInTween = null;
-            if(this._fameSubTitleInTween != null)
+            if(this._nextButtonFadeInTween != null)
             {
-                this._fameSubTitleInTween.dispose();
-                this._fameSubTitleInTween = null;
-            }
-            if(this._maxPrestigeIconInTween != null)
-            {
-                this._maxPrestigeIconInTween.dispose();
-                this._maxPrestigeIconInTween = null;
-            }
-            if(this._nextButtonFadeInTween)
-            {
+                this._nextButtonFadeInTween.paused = true;
                 this._nextButtonFadeInTween.dispose();
                 this._nextButtonFadeInTween = null;
+            }
+            if(this._fameBarFadeOutTween != null)
+            {
+                this._fameBarFadeOutTween.paused = true;
+                this._fameBarFadeOutTween.dispose();
+                this._fameBarFadeOutTween = null;
+            }
+            if(this._maxLevelInfoFadeInTween != null)
+            {
+                this._maxLevelInfoFadeInTween.paused = true;
+                this._maxLevelInfoFadeInTween.dispose();
+                this._maxLevelInfoFadeInTween = null;
             }
             this.nextButton.dispose();
             this.nextButton = null;
@@ -165,8 +159,8 @@ package net.wg.gui.lobby.epicBattles.views
             this.background = null;
             this.fameBar.dispose();
             this.fameBar = null;
-            this.fameSubTitle = null;
-            this.maxPrestigeIcon = null;
+            this.maxLevelInfo.dispose();
+            this.maxLevelInfo = null;
             this._completedBattleData = null;
             super.onDispose();
         }
@@ -183,10 +177,6 @@ package net.wg.gui.lobby.epicBattles.views
             this.playerRank.visible = false;
             this.rewardRibbon.visible = false;
             this.titleTextWrapper.visible = false;
-            this.fameSubTitle.visible = false;
-            this.fameSubTitle.alpha = 0;
-            this.fameSubTitle.autoSize = TextFieldAutoSize.CENTER;
-            this.maxPrestigeIcon.alpha = 0;
             this.nextButton.alpha = 0;
             this.nextButton.visible = false;
             this.nextButton.label = DIALOGS.COMMON_SUBMIT;
@@ -203,7 +193,7 @@ package net.wg.gui.lobby.epicBattles.views
             this._completedBattleData = param1;
             this._fameBarVisible = this._completedBattleData.fameBarVisible;
             this.rewardRibbon.setAwards(param1.awards);
-            this.rewardRibbon.setLevel(param1.epicMetaLevelIconData);
+            this.rewardRibbon.setLevel(param1.epicMetaLevelIconData,param1.maxLvlReached);
             this.background.setBackground(param1.backgroundImageSrc);
             invalidateData();
         }
@@ -222,7 +212,6 @@ package net.wg.gui.lobby.epicBattles.views
             {
                 _loc1_ = isInvalid(InvalidationType.SIZE);
                 _loc2_ = App.appHeight;
-                this._isSmall = _loc2_ < BREAKING_POINT_RESOLUTION;
                 if(isInvalid(InvalidationType.DATA))
                 {
                     if(this._fameBarVisible)
@@ -235,13 +224,7 @@ package net.wg.gui.lobby.epicBattles.views
                     }
                     this.playerRank.setRank(this._completedBattleData.rank);
                     this.playerRank.setDescText(this._completedBattleData.rankSubText);
-                    this.playerRank.setTitleText(this._isSmall?this._completedBattleData.rankText:this._completedBattleData.rankTextBig);
-                    this.fameSubTitle.visible = StringUtils.isNotEmpty(this._completedBattleData.maxLevelText);
-                    if(this.fameSubTitle.visible)
-                    {
-                        this.fameSubTitle.htmlText = this._completedBattleData.maxLevelText;
-                    }
-                    this.maxPrestigeIcon.visible = this._completedBattleData.maxPrestigeIconVisible;
+                    this.playerRank.setTitleText(this._completedBattleData.rankText);
                     _loc1_ = true;
                     this.startAnimation();
                 }
@@ -252,27 +235,14 @@ package net.wg.gui.lobby.epicBattles.views
                     this.background.updateStage(_loc4_,_loc2_);
                     this.closeButton.x = _loc4_ - this.closeButton.width - OFFSET_CLOSE_BUTTON | 0;
                     this.closeButton.y = OFFSET_CLOSE_BUTTON;
-                    this.titleTextWrapper.setText(this._isSmall?this._completedBattleData.levelUpText:this._completedBattleData.levelUpTextBig);
-                    this.playerRank.setTitleText(this._isSmall?this._completedBattleData.rankText:this._completedBattleData.rankTextBig);
+                    this.titleTextWrapper.setText(this._completedBattleData.levelUpText);
+                    this.playerRank.setTitleText(this._completedBattleData.rankText);
                     _loc6_ = RANK_Y_OFFSET + this.playerRank.height + RANK_TO_BAR_GAP + this.fameBar.height + BAR_TO_BUTTON_GAP + this.nextButton.height;
                     this.playerRank.y = (_loc2_ - _loc6_ >> 1) + RANK_Y_OFFSET;
                     _loc7_ = this.playerRank.y + this.playerRank.height + RANK_TO_BAR_GAP;
-                    this.fameBar.y = _loc7_;
+                    this.fameBar.y = this.maxLevelInfo.y = _loc7_;
                     this.nextButton.y = _loc7_ + BAR_TO_BUTTON_GAP;
                     this.playerRank.y = this.playerRank.y + RANK_TOP_OFFSET;
-                    if(this._fameBarVisible)
-                    {
-                        this.fameSubTitle.y = _loc7_ + BAR_TO_SUBTITLE;
-                    }
-                    else
-                    {
-                        this.fameSubTitle.y = _loc7_;
-                    }
-                    if(this.maxPrestigeIcon.visible)
-                    {
-                        this.maxPrestigeIcon.x = _loc4_ - this.maxPrestigeIcon.width >> 1;
-                        this.maxPrestigeIcon.y = this.fameSubTitle.y - this.maxPrestigeIcon.height + MAX_PRESTIGE_ICON_OFFSET | 0;
-                    }
                     this.rewardRibbon.y = _loc2_ * STANDARD_TOP_RIBBON_RATIO ^ 0;
                     this.titleTextWrapper.y = this.rewardRibbon.y + REWARDS_TO_TITLE_GAP;
                     this.nextButton.x = _loc5_ - (this.nextButton.width >> 1);
@@ -280,7 +250,7 @@ package net.wg.gui.lobby.epicBattles.views
                     this.playerRank.x = _loc5_;
                     this.rewardRibbon.x = _loc5_;
                     this.fameBar.x = _loc4_ - this.fameBar.width >> 1;
-                    this.fameSubTitle.x = _loc4_ - this.fameSubTitle.width >> 1;
+                    this.maxLevelInfo.x = _loc4_ >> 1;
                 }
             }
         }
@@ -302,7 +272,7 @@ package net.wg.gui.lobby.epicBattles.views
         private function delayedFameBarIntroTweenTask() : void
         {
             this.fameBar.visible = this._fameBarVisible;
-            this._fameBarFadeInTween = new Tween(FADE_OUT_LENGTH,this.fameBar,{"alpha":1},{
+            this._fameBarFadeInTween = new Tween(FADE_IN_LENGTH,this.fameBar,{"alpha":1},{
                 "delay":FAME_BAR_DELAY,
                 "onComplete":this.fameBar.startProgressAnimation()
             });
@@ -316,22 +286,14 @@ package net.wg.gui.lobby.epicBattles.views
         private function delayedPlayerRankIntroTweenTask() : void
         {
             this.playerRank.visible = true;
-            this._playerRankFadeInTween = new Tween(FADE_OUT_LENGTH,this.playerRank,{"alpha":1},{"delay":BASIC_DELAY});
-            this._scheduler.scheduleTask(this.startIntroAnimation,FADE_OUT_LENGTH + BASIC_DELAY);
+            this._playerRankFadeInTween = new Tween(FADE_IN_LENGTH,this.playerRank,{"alpha":1},{"delay":BASIC_DELAY});
+            this._scheduler.scheduleTask(this.startIntroAnimation,FADE_IN_LENGTH + BASIC_DELAY);
         }
 
         private function delayedNextButtonIntroTweenTask() : void
         {
             this.nextButton.visible = true;
-            this._nextButtonFadeInTween = new Tween(FADE_OUT_LENGTH,this.nextButton,{"alpha":1},{"delay":BASIC_DELAY});
-            if(this.fameSubTitle.visible)
-            {
-                this._fameSubTitleInTween = new Tween(FADE_OUT_LENGTH,this.fameSubTitle,{"alpha":1},{"delay":FAME_BAR_DELAY});
-            }
-            if(this.maxPrestigeIcon.visible)
-            {
-                this._maxPrestigeIconInTween = new Tween(FADE_OUT_LENGTH,this.maxPrestigeIcon,{"alpha":1},{"delay":FAME_BAR_DELAY});
-            }
+            this._nextButtonFadeInTween = new Tween(FADE_IN_LENGTH,this.nextButton,{"alpha":1},{"delay":BASIC_DELAY});
         }
 
         private function onProgressBarStartAnimHandler(param1:AfterBattleFameBarEvent) : void
@@ -354,12 +316,17 @@ package net.wg.gui.lobby.epicBattles.views
             }
             this.playerRank.visible = false;
             this.titleTextWrapper.visible = true;
-            this.titleTextWrapper.setText(this._isSmall?this._completedBattleData.levelUpText:this._completedBattleData.levelUpTextBig);
+            this.titleTextWrapper.setText(this._completedBattleData.levelUpText);
             this.titleTextWrapper.gotoAndPlay(EpicBattlesAnimatedTitleTextfield.LEVEL_UP_ANIM_FRAME_LBL);
             this.rewardRibbon.visible = true;
             this.rewardRibbon.show();
             this._ribbonDisplayed = true;
             onRibbonStartsPlayingS();
+            if(this._completedBattleData.maxLvlReached)
+            {
+                this._fameBarFadeOutTween = new Tween(FADE_IN_LENGTH,this.fameBar,{"alpha":0},{"delay":FAME_BAR_DELAY});
+                this._maxLevelInfoFadeInTween = new Tween(FADE_IN_LENGTH,this.maxLevelInfo,{"alpha":1},{"delay":MAX_LEVEL_INFO_DELAY});
+            }
         }
 
         private function onNextButtonClickHandler(param1:ButtonEvent) : void

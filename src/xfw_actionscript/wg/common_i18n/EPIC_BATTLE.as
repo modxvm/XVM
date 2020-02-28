@@ -113,8 +113,6 @@ package
 
         public static const RESPAWN_AUTO_TIMER_TXT:String = "#epic_battle:respawn/auto_timer_txt";
 
-        public static const RANK_RANK0:String = "#epic_battle:rank/rank0";
-
         public static const RANK_RANK1:String = "#epic_battle:rank/rank1";
 
         public static const RANK_RANK2:String = "#epic_battle:rank/rank2";
@@ -124,6 +122,8 @@ package
         public static const RANK_RANK4:String = "#epic_battle:rank/rank4";
 
         public static const RANK_RANK5:String = "#epic_battle:rank/rank5";
+
+        public static const RANK_RANK6:String = "#epic_battle:rank/rank6";
 
         public static const RANK_NO_NAME:String = "#epic_battle:rank/no_name";
 
@@ -341,13 +341,23 @@ package
 
         public static const REINFORCEMENTSPANEL_INTEXT:String = "#epic_battle:reinforcementsPanel/inText";
 
+        public static const RESPAWNSCREEN_DEPLOYMENTLANE1:String = "#epic_battle:respawnScreen/deploymentLane1";
+
+        public static const RESPAWNSCREEN_DEPLOYMENTLANE2:String = "#epic_battle:respawnScreen/deploymentLane2";
+
+        public static const RESPAWNSCREEN_DEPLOYMENTLANE3:String = "#epic_battle:respawnScreen/deploymentLane3";
+
         public static const RESPAWNSCREEN_SECONDSTIMERTEXT:String = "#epic_battle:respawnScreen/secondsTimerText";
 
         public static const RESPAWNSCREEN_HEADERTITLE:String = "#epic_battle:respawnScreen/headerTitle";
 
+        public static const RESPAWNSCREEN_RESPAWNWARNING:String = "#epic_battle:respawnScreen/respawnWarning";
+
         public static const DEPLOYMENTMAP_SPGLIMITREACHED:String = "#epic_battle:deploymentMap/spgLimitReached";
 
         public static const DEPLOYMENTMAP_LANEPLAYERLIMITREACHED:String = "#epic_battle:deploymentMap/lanePlayerLimitReached";
+
+        public static const DEPLOYMENTMAP_RESPAWNWARNING:String = "#epic_battle:deploymentMap/respawnWarning";
 
         public static const EPICBATTLESINFOVIEW_BATTLEMODETITLE:String = "#epic_battle:epicBattlesInfoView/battleModeTitle";
 
@@ -425,13 +435,9 @@ package
 
         public static const EPIC_BATTLES_AFTER_BATTLE_LEVEL_UP_TITLE:String = "#epic_battle:epic_battles_after_battle/Level_Up_Title";
 
-        public static const EPIC_BATTLES_AFTER_BATTLE_LEVEL_UP_MAX_TITLE:String = "#epic_battle:epic_battles_after_battle/Level_Up_Max_Title";
+        public static const EPIC_BATTLES_AFTER_BATTLE_MAX_LEVEL_INFO_TITLE:String = "#epic_battle:epic_battles_after_battle/max_level_info/title";
 
-        public static const EPIC_BATTLES_AFTER_BATTLE_MAX_LEVEL_INFO:String = "#epic_battle:epic_battles_after_battle/max_level_info";
-
-        public static const EPIC_BATTLES_AFTER_BATTLE_MAX_PRESTIGE_IN_CYCLE_INFO:String = "#epic_battle:epic_battles_after_battle/max_prestige_in_cycle_info";
-
-        public static const EPIC_BATTLES_AFTER_BATTLE_MAX_PRESTIGE_IN_SEASON_INFO:String = "#epic_battle:epic_battles_after_battle/max_prestige_in_season_info";
+        public static const EPIC_BATTLES_AFTER_BATTLE_MAX_LEVEL_INFO_DESCRIPTION:String = "#epic_battle:epic_battles_after_battle/max_level_info/description";
 
         public static const SELECTORTOOLTIP_EPICBATTLE_HEADER:String = "#epic_battle:selectorTooltip/epicBattle/header";
 
@@ -462,6 +468,18 @@ package
         public static const SELECTORTOOLTIP_EPICBATTLE_ATTENTION_INFORMATIVELOWPERFORMANCE_TITLE:String = "#epic_battle:selectorTooltip/epicBattle/attention/informativeLowPerformance/title";
 
         public static const SELECTORTOOLTIP_EPICBATTLE_ATTENTION_INFORMATIVELOWPERFORMANCE_DESCRIPTION:String = "#epic_battle:selectorTooltip/epicBattle/attention/informativeLowPerformance/description";
+
+        public static const QUESTSTOOLTIP_EPICBATTLE_HEADER:String = "#epic_battle:questsTooltip/epicBattle/header";
+
+        public static const QUESTSTOOLTIP_EPICBATTLE_TIMELEFT:String = "#epic_battle:questsTooltip/epicBattle/timeLeft";
+
+        public static const QUESTSTOOLTIP_EPICBATTLE_STARTIN:String = "#epic_battle:questsTooltip/epicBattle/startIn";
+
+        public static const QUESTSTOOLTIP_EPICBATTLE_LESSTHANDAY:String = "#epic_battle:questsTooltip/epicBattle/lessThanDay";
+
+        public static const QUESTSTOOLTIP_EPICBATTLE_UNAVAILABLE:String = "#epic_battle:questsTooltip/epicBattle/unavailable";
+
+        public static const QUESTSTOOLTIP_EPICBATTLE_RESTRICT_LEVEL:String = "#epic_battle:questsTooltip/epicBattle/restrict/level";
 
         public static const WIDGETALERTMESSAGEBLOCK_NOCYCLEMESSAGE:String = "#epic_battle:widgetAlertMessageBlock/noCycleMessage";
 
@@ -500,6 +518,12 @@ package
         public static const METAABILITYSCREEN_ABILITY_LOCKED:String = "#epic_battle:metaAbilityScreen/Ability_locked";
 
         public static const METAABILITYSCREEN_ABILITY_NOT_POINTS:String = "#epic_battle:metaAbilityScreen/Ability_not_points";
+
+        public static const BOOSTER_DESCRIPTION_BONUSVALUETIME_BOOSTER_XP:String = "#epic_battle:booster/description/bonusValueTime/booster_xp";
+
+        public static const BOOSTER_DESCRIPTION_BONUSVALUETIME_BOOSTER_FREE_XP:String = "#epic_battle:booster/description/bonusValueTime/booster_free_xp";
+
+        public static const BOOSTER_DESCRIPTION_BONUSVALUETIME_BOOSTER_CREW_XP:String = "#epic_battle:booster/description/bonusValueTime/booster_crew_xp";
 
         public static const FITTINGSELECTPOPOVER_REMOVEBUTTON:String = "#epic_battle:fittingSelectPopover/RemoveButton";
 
@@ -557,8 +581,6 @@ package
 
         public static const SEASON_202002_NAME:String = "#epic_battle:season/202002/name";
 
-        public static const VEHICLE_PREVIEW_TITLE:String = "#epic_battle:vehicle_preview/title";
-
         public static const EPICBATTLEITEM_REWARDPOINTS_HEADER:String = "#epic_battle:epicBattleItem/rewardPoints/header";
 
         public static const EPICBATTLEITEM_REWARDPOINTS_DESCRIPTION:String = "#epic_battle:epicBattleItem/rewardPoints/description";
@@ -566,14 +588,6 @@ package
         public static const EPICBATTLEITEM_SUPPLYPOINTS_HEADER:String = "#epic_battle:epicBattleItem/supplyPoints/header";
 
         public static const EPICBATTLEITEM_SUPPLYPOINTS_DESCRIPTION:String = "#epic_battle:epicBattleItem/supplyPoints/description";
-
-        public static const BUYCONFIRM_TITLE:String = "#epic_battle:buyConfirm/title";
-
-        public static const BUYCONFIRM_CONTENT:String = "#epic_battle:buyConfirm/content";
-
-        public static const BUYCONFIRM_BUYLABEL:String = "#epic_battle:buyConfirm/buyLabel";
-
-        public static const BUYCONFIRM_BACKLABEL:String = "#epic_battle:buyConfirm/backLabel";
 
         public function EPIC_BATTLE()
         {

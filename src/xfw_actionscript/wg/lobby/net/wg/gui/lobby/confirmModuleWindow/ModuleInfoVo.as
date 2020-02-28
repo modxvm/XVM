@@ -13,6 +13,8 @@ package net.wg.gui.lobby.confirmModuleWindow
 
         public var highlightType:String = "";
 
+        public var overlayType:String = "";
+
         public function ModuleInfoVo(param1:Object)
         {
             super(param1);

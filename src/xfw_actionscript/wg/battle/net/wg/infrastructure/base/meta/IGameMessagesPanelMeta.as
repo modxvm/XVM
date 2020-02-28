@@ -9,6 +9,8 @@ package net.wg.infrastructure.base.meta
 
         function onMessageEndedS(param1:String, param2:int) : void;
 
+        function onMessageHidingS(param1:String, param2:int) : void;
+
         function as_addMessage(param1:Object) : void;
     }
 }

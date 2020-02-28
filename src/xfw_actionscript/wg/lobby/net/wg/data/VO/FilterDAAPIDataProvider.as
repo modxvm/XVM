@@ -15,13 +15,12 @@ package net.wg.data.VO
         public function FilterDAAPIDataProvider(param1:Class)
         {
             super(param1);
-            this._filteredItems = [];
         }
 
-        override public function as_dispose() : void
+        override public function as_populate() : void
         {
-            this._filteredItems = null;
-            super.as_dispose();
+            super.as_populate();
+            this._filteredItems = [];
         }
 
         override public function invalidate(param1:uint = 0) : void
@@ -62,6 +61,13 @@ package net.wg.data.VO
                 return _loc4_;
             }
             return super.requestItemRange(param1,param2,param3);
+        }
+
+        override protected function onDispose() : void
+        {
+            this._filteredItems = null;
+            this._isFilter = false;
+            super.onDispose();
         }
 
         public function as_clearFilter() : void
@@ -107,7 +113,7 @@ package net.wg.data.VO
 
         override public function get length() : uint
         {
-            if(this._isFilter)
+            if(this._isFilter && this._filteredItems != null)
             {
                 return this._filteredItems.length;
             }

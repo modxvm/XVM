@@ -68,8 +68,6 @@ package net.wg.gui.lobby.battleResults.components
 
         public var rankIcon:UILoaderAlt = null;
 
-        public var badgeIcon:UILoaderAlt = null;
-
         public var testerIcon:UILoaderAlt = null;
 
         public var testerBG:MovieClip = null;
@@ -128,8 +126,6 @@ package net.wg.gui.lobby.battleResults.components
             this.fakeFocusIndicator = null;
             this.rankIcon.dispose();
             this.rankIcon = null;
-            this.badgeIcon.dispose();
-            this.badgeIcon = null;
             this.vehicleIcon.dispose();
             this.vehicleIcon = null;
             this._colorMgr = null;
@@ -171,15 +167,6 @@ package net.wg.gui.lobby.battleResults.components
             if(_loc5_)
             {
                 this.rankIcon.source = _loc4_;
-            }
-            var _loc6_:String = param1.badgeIcon;
-            var _loc7_:Boolean = StringUtils.isNotEmpty(_loc6_);
-            this.badgeIcon.visible = _loc7_;
-            if(_loc7_)
-            {
-                this.badgeIcon.source = _loc6_;
-                this.playerName.x = this.playerName.x + BADGE_OFFSET;
-                this.playerName.width = this.playerName.width - BADGE_OFFSET;
             }
             if(StringUtils.isNotEmpty(this._suffixBadgeIcon))
             {

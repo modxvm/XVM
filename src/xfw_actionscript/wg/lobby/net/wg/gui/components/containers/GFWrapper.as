@@ -7,7 +7,7 @@ package net.wg.gui.components.containers
     public class GFWrapper extends BaseContainerWrapper
     {
 
-        private static const GF_WRAPPER_NAME:String = "GFWrapper";
+        public static const GF_WRAPPER_NAME:String = "GFWrapper";
 
         private static const BITMAP_NAME:String = "gamefaceBitmap";
 

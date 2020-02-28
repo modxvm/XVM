@@ -3,17 +3,18 @@ package net.wg.gui.lobby.hangar.quests
     import net.wg.infrastructure.base.UIComponentEx;
     import net.wg.gui.lobby.hangar.interfaces.IQuestsButtonsContainer;
     import net.wg.gui.lobby.hangar.data.HeaderQuestGroupVO;
+    import scaleform.clik.motion.Tween;
     import flash.display.Sprite;
     import net.wg.gui.lobby.hangar.interfaces.IHeaderQuestsContainer;
     import flash.utils.Dictionary;
     import flash.display.DisplayObject;
-    import scaleform.clik.motion.Tween;
     import net.wg.utils.IScheduler;
     import flash.events.MouseEvent;
+    import flash.events.Event;
     import scaleform.clik.constants.InvalidationType;
+    import net.wg.utils.StageSizeBoundaries;
     import flash.geom.Rectangle;
     import net.wg.gui.lobby.hangar.interfaces.IQuestInformerButton;
-    import net.wg.data.constants.Values;
     import net.wg.data.Aliases;
     import fl.motion.easing.Quadratic;
     import fl.motion.easing.Quartic;
@@ -31,6 +32,10 @@ package net.wg.gui.lobby.hangar.quests
 
         private static const COLLAPSE_ANIM_DELAY:int = 100;
 
+        private static const QUESTS_GROUP_OFFSET:int = 34;
+
+        private static const RIGHT_SIDE_GROUP_X_OFFSET:int = -11;
+
         public var questsHitArea:Sprite = null;
 
         private var _questsGroupsData:Vector.<HeaderQuestGroupVO> = null;
@@ -38,8 +43,6 @@ package net.wg.gui.lobby.hangar.quests
         private var _questsGroupsContainers:Vector.<IHeaderQuestsContainer> = null;
 
         private var _containersMap:Dictionary = null;
-
-        private var _isDataDirty:Boolean = false;
 
         private var _disableItemStartX:int = 0;
 
@@ -56,6 +59,8 @@ package net.wg.gui.lobby.hangar.quests
         private var _needCollapseAnim:Boolean = false;
 
         private var _scheduler:IScheduler = null;
+
+        private var _battlePassEntryPoint:BattlePassEntryPoint = null;
 
         public function HeaderQuestsFlags()
         {
@@ -76,21 +81,62 @@ package net.wg.gui.lobby.hangar.quests
             return null;
         }
 
+        private static function clearTweens(param1:Vector.<Tween>) : void
+        {
+            var _loc2_:* = 0;
+            var _loc3_:* = 0;
+            if(param1)
+            {
+                _loc2_ = param1.length;
+                _loc3_ = 0;
+                while(_loc3_ < _loc2_)
+                {
+                    param1[_loc3_].paused = true;
+                    param1[_loc3_].dispose();
+                    param1[_loc3_] = null;
+                    _loc3_++;
+                }
+                param1.splice(0,_loc2_);
+                var param1:Vector.<Tween> = null;
+            }
+        }
+
         override protected function configUI() : void
         {
             super.configUI();
             this.addEventListener(MouseEvent.ROLL_OUT,this.onThisRollOutHandler);
             this.addEventListener(MouseEvent.ROLL_OVER,this.onThisRollOverHandler);
+            App.stage.addEventListener(Event.RESIZE,this.onStageResizeHandler,false,0,true);
         }
 
         override protected function draw() : void
         {
             super.draw();
-            if(this._isDataDirty && isInvalid(InvalidationType.DATA))
+            if(this._questsGroupsData)
             {
-                this.doUpdateData();
-                this.updateHitArea();
-                this._isDataDirty = false;
+                if(isInvalid(InvalidationType.DATA))
+                {
+                    this.doUpdateData();
+                    invalidateSize();
+                }
+                if(isInvalid(InvalidationType.SIZE))
+                {
+                    if(this._battlePassEntryPoint)
+                    {
+                        if(App.stage.stageWidth >= StageSizeBoundaries.WIDTH_1600 && App.stage.stageHeight >= StageSizeBoundaries.HEIGHT_900)
+                        {
+                            this._battlePassEntryPoint.setIsSmallSize(false);
+                        }
+                        else
+                        {
+                            this._battlePassEntryPoint.setIsSmallSize(true);
+                        }
+                        this._battlePassEntryPoint.validateNow();
+                        this._battlePassEntryPoint.x = -(this._battlePassEntryPoint.width >> 1);
+                    }
+                    this.layoutQuestContainers();
+                    this.updateHitArea();
+                }
             }
         }
 
@@ -103,11 +149,17 @@ package net.wg.gui.lobby.hangar.quests
 
         override protected function onDispose() : void
         {
+            App.stage.removeEventListener(Event.RESIZE,this.onStageResizeHandler);
             this._scheduler.cancelTask(this.showCollapseAnim);
             this._scheduler = null;
             this.disposeQuestContainers();
             this.questsHitArea = null;
             this._questsGroupsData = null;
+            if(this._battlePassEntryPoint != null && this._battlePassEntryPoint.parent == this)
+            {
+                removeChild(this._battlePassEntryPoint);
+                this._battlePassEntryPoint = null;
+            }
             super.onDispose();
         }
 
@@ -150,15 +202,30 @@ package net.wg.gui.lobby.hangar.quests
             return null;
         }
 
-        public function setData(param1:Vector.<HeaderQuestGroupVO>) : void
+        public function setBattlePassEntryPoint(param1:BattlePassEntryPoint) : void
         {
             if(param1 == null)
             {
-                return;
+                if(this._battlePassEntryPoint && this._battlePassEntryPoint.parent == this)
+                {
+                    removeChild(this._battlePassEntryPoint);
+                }
             }
-            this._questsGroupsData = param1;
-            this._isDataDirty = true;
-            invalidateData();
+            else
+            {
+                addChildAt(param1,1);
+            }
+            this._battlePassEntryPoint = param1;
+            invalidateSize();
+        }
+
+        public function setData(param1:Vector.<HeaderQuestGroupVO>) : void
+        {
+            if(param1 != null && this._questsGroupsData != param1)
+            {
+                this._questsGroupsData = param1;
+                invalidateData();
+            }
         }
 
         private function doUpdateData() : void
@@ -223,34 +290,59 @@ package net.wg.gui.lobby.hangar.quests
 
         private function createQuestContainers() : void
         {
-            var _loc1_:* = 0;
             var _loc2_:IHeaderQuestsContainer = null;
-            var _loc3_:* = 0;
+            var _loc3_:HeaderQuestGroupVO = null;
             var _loc4_:* = 0;
             this._containersMap = new Dictionary();
-            if(this._questsGroupsData)
+            var _loc1_:int = this._questsGroupsData.length;
+            if(_loc1_ > 0)
             {
-                _loc1_ = this._questsGroupsData.length;
-                if(_loc1_ > 0)
+                this._questsGroupsContainers = new Vector.<IHeaderQuestsContainer>();
+                _loc2_ = null;
+                _loc3_ = null;
+                _loc4_ = 0;
+                while(_loc4_ < _loc1_)
                 {
-                    this._questsGroupsContainers = new Vector.<IHeaderQuestsContainer>();
-                    _loc2_ = null;
-                    _loc3_ = Values.ZERO;
-                    _loc4_ = 0;
-                    while(_loc4_ < _loc1_)
-                    {
-                        _loc2_ = App.utils.classFactory.getComponent(Aliases.HEADER_QUEST_GROUP_CONTAINER,HeaderQuestsContainer);
-                        this.addListenersToQuestsContainer(_loc2_);
-                        _loc2_.setData(this._questsGroupsData[_loc4_]);
-                        _loc2_.name = this._questsGroupsData[_loc4_].groupID;
-                        _loc2_.x = _loc3_;
-                        _loc3_ = _loc3_ - _loc2_.cmptWidth;
-                        this._containersMap[this._questsGroupsData[_loc4_].groupID] = _loc2_;
-                        this.addChild(DisplayObject(_loc2_));
-                        this._questsGroupsContainers.push(_loc2_);
-                        _loc4_++;
-                    }
+                    _loc2_ = App.utils.classFactory.getComponent(Aliases.HEADER_QUEST_GROUP_CONTAINER,HeaderQuestsContainer);
+                    this.addListenersToQuestsContainer(_loc2_);
+                    _loc3_ = this._questsGroupsData[_loc4_];
+                    _loc2_.setData(_loc3_);
+                    _loc2_.name = _loc3_.groupID;
+                    this._containersMap[_loc3_.groupID] = _loc2_;
+                    this.addChild(DisplayObject(_loc2_));
+                    this._questsGroupsContainers.push(_loc2_);
+                    _loc4_++;
                 }
+            }
+        }
+
+        private function layoutQuestContainers() : void
+        {
+            var _loc2_:IHeaderQuestsContainer = null;
+            var _loc3_:HeaderQuestGroupVO = null;
+            var _loc1_:int = this._questsGroupsData.length;
+            var _loc4_:int = this.getInitialRightSideX();
+            var _loc5_:* = -1;
+            var _loc6_:* = 0;
+            while(_loc6_ < _loc1_)
+            {
+                _loc3_ = this._questsGroupsData[_loc6_];
+                _loc2_ = this._containersMap[_loc3_.groupID];
+                if(_loc3_.isRightSide)
+                {
+                    _loc2_.x = _loc4_;
+                    _loc4_ = _loc4_ + _loc2_.cmptWidth;
+                }
+                else
+                {
+                    if(_loc5_ == -1)
+                    {
+                        _loc5_ = this.getInitialLeftSideX(_loc2_.cmptWidth);
+                    }
+                    _loc2_.x = _loc5_;
+                    _loc5_ = _loc5_ - _loc2_.cmptWidth;
+                }
+                _loc6_++;
             }
         }
 
@@ -273,7 +365,7 @@ package net.wg.gui.lobby.hangar.quests
         private function disposeQuestContainers() : void
         {
             this.clearDisableTween();
-            this.clearTweens(this._containerTweens);
+            clearTweens(this._containerTweens);
             this._containerTweens = null;
             App.utils.data.cleanupDynamicObject(this._containersMap);
             this._containersMap = null;
@@ -283,15 +375,18 @@ package net.wg.gui.lobby.hangar.quests
 
         private function updateHitArea() : void
         {
-            var _loc1_:* = 0;
-            var _loc2_:IHeaderQuestsContainer = null;
-            _loc1_ = 0;
-            for each(_loc2_ in this._questsGroupsContainers)
+            var _loc3_:IHeaderQuestsContainer = null;
+            var _loc1_:int = this.battlePassEntryPointWidth + 2 * QUESTS_GROUP_OFFSET;
+            var _loc2_:* = 0;
+            for each(_loc3_ in this._questsGroupsContainers)
             {
-                _loc1_ = _loc1_ + _loc2_.cmptWidth;
+                if(_loc3_.x < _loc2_)
+                {
+                    _loc2_ = _loc3_.x;
+                }
+                _loc1_ = _loc1_ + _loc3_.cmptWidth;
             }
-            _loc1_ = _loc1_ - HEADER_QUESTS_CONSTANTS.QUESTS_BUTTON_GAP;
-            this.questsHitArea.x = HEADER_QUESTS_CONSTANTS.QUEST_BUTTON_VISUAL_WIDTH - _loc1_;
+            this.questsHitArea.x = _loc2_;
             this.questsHitArea.width = _loc1_;
         }
 
@@ -318,7 +413,7 @@ package net.wg.gui.lobby.hangar.quests
         private function clearDisableTween() : void
         {
             this._disableItem = null;
-            this.clearTweens(this._disableItemsTweens);
+            clearTweens(this._disableItemsTweens);
             this._disableItemsTweens = null;
         }
 
@@ -362,34 +457,15 @@ package net.wg.gui.lobby.hangar.quests
             }
         }
 
-        private function clearTweens(param1:Vector.<Tween>) : void
-        {
-            var _loc2_:* = 0;
-            var _loc3_:* = 0;
-            if(param1)
-            {
-                _loc2_ = param1.length;
-                _loc3_ = 0;
-                while(_loc3_ < _loc2_)
-                {
-                    param1[_loc3_].paused = true;
-                    param1[_loc3_].dispose();
-                    param1[_loc3_] = null;
-                    _loc3_++;
-                }
-                param1.splice(0,_loc2_);
-                var param1:Vector.<Tween> = null;
-            }
-        }
-
         private function animContainers(param1:IHeaderQuestsContainer) : void
         {
             var _loc2_:* = 0;
             var _loc3_:* = 0;
-            var _loc4_:IHeaderQuestsContainer = null;
-            var _loc5_:* = 0;
-            var _loc6_:* = false;
-            var _loc7_:* = 0;
+            var _loc4_:* = 0;
+            var _loc5_:IHeaderQuestsContainer = null;
+            var _loc6_:* = 0;
+            var _loc7_:* = false;
+            var _loc8_:* = 0;
             if(this._questsGroupsContainers)
             {
                 if(this._disableItemsTweens)
@@ -397,35 +473,52 @@ package net.wg.gui.lobby.hangar.quests
                     this._disableItem.x = this._disableItemStartX;
                     this.onDisableTweenComplete();
                 }
-                this.clearTweens(this._containerTweens);
+                clearTweens(this._containerTweens);
                 this._isMoveContainerInProgress = true;
                 this._containerTweens = new Vector.<Tween>();
-                _loc2_ = Values.ZERO;
-                _loc3_ = this._questsGroupsContainers.length;
-                _loc4_ = null;
-                _loc5_ = _loc3_ - 1;
-                _loc6_ = false;
-                _loc7_ = 0;
-                while(_loc7_ < _loc3_)
+                _loc2_ = this.getInitialRightSideX();
+                _loc3_ = -1;
+                _loc4_ = this._questsGroupsContainers.length;
+                _loc5_ = null;
+                _loc6_ = _loc4_ - 1;
+                _loc7_ = false;
+                _loc8_ = 0;
+                while(_loc8_ < _loc4_)
                 {
-                    _loc4_ = this._questsGroupsContainers[_loc7_];
-                    if(param1 == _loc4_)
+                    _loc5_ = this._questsGroupsContainers[_loc8_];
+                    if(param1 == _loc5_)
                     {
-                        _loc4_.animExpand();
+                        _loc5_.animExpand();
                     }
                     else if(!param1)
                     {
-                        _loc4_.animCollapse();
+                        _loc5_.animCollapse();
                     }
-                    if(_loc4_.x != _loc2_)
+                    if(_loc5_.isRightSide)
                     {
-                        _loc6_ = true;
-                        this.moveContainerToX(_loc4_,_loc2_,_loc5_ == _loc7_);
+                        if(_loc5_.x != _loc2_)
+                        {
+                            _loc7_ = true;
+                            this.moveContainerToX(_loc5_,_loc2_,_loc6_ == _loc8_);
+                        }
+                        _loc2_ = _loc2_ + _loc5_.cmptWidth;
                     }
-                    _loc2_ = _loc2_ - _loc4_.cmptWidth;
-                    _loc7_++;
+                    else
+                    {
+                        if(_loc3_ == -1)
+                        {
+                            _loc3_ = this.getInitialLeftSideX(_loc5_.cmptWidth);
+                        }
+                        if(_loc5_.x != _loc3_)
+                        {
+                            _loc7_ = true;
+                            this.moveContainerToX(_loc5_,_loc3_,_loc6_ == _loc8_);
+                        }
+                        _loc3_ = _loc3_ - _loc5_.cmptWidth;
+                    }
+                    _loc8_++;
                 }
-                if(!_loc6_)
+                if(!_loc7_)
                 {
                     this._isMoveContainerInProgress = false;
                 }
@@ -452,9 +545,34 @@ package net.wg.gui.lobby.hangar.quests
             this.animContainers(null);
         }
 
+        private function getInitialRightSideX() : int
+        {
+            return this.battlePassEntryPointX + this.battlePassEntryPointWidth + QUESTS_GROUP_OFFSET - this.battlePassEntryPointmMrginX + RIGHT_SIDE_GROUP_X_OFFSET;
+        }
+
+        private function getInitialLeftSideX(param1:int) : int
+        {
+            return this.battlePassEntryPointX - (param1 >> 1) - QUESTS_GROUP_OFFSET + this.battlePassEntryPointmMrginX;
+        }
+
         private function onMoveContainerCompleted() : void
         {
             this._isMoveContainerInProgress = false;
+        }
+
+        private function get battlePassEntryPointWidth() : int
+        {
+            return this._battlePassEntryPoint?this._battlePassEntryPoint.width:0;
+        }
+
+        private function get battlePassEntryPointmMrginX() : int
+        {
+            return this._battlePassEntryPoint?this._battlePassEntryPoint.marginX:0;
+        }
+
+        private function get battlePassEntryPointX() : int
+        {
+            return this._battlePassEntryPoint?this._battlePassEntryPoint.x:0;
         }
 
         private function onBtnHeaderQuestClickHandler(param1:HeaderQuestsEvent) : void
@@ -495,6 +613,11 @@ package net.wg.gui.lobby.hangar.quests
         private function onPMItemsAnimStartHandler(param1:HeaderQuestsEvent) : void
         {
             this.updateHitArea();
+        }
+
+        private function onStageResizeHandler(param1:Event) : void
+        {
+            invalidateSize();
         }
     }
 }

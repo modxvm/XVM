@@ -196,7 +196,8 @@ package net.wg.gui.lobby.eventBoards.components
 
         private function onEnterFrameHandler(param1:Event) : void
         {
-            var _loc2_:Number = parent.y + this.y;
+            var _loc2_:* = NaN;
+            _loc2_ = parent.y + this.y;
             if(this._rendererData && this._prevPosition != _loc2_ && _loc2_ <= AWARDS_BOTTOM_THRESHOLD && _loc2_ >= AWARDS_TOP_THRESHOLD)
             {
                 this.visible = _loc2_ >= 0;

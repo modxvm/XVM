@@ -25,17 +25,17 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
     import flash.display.InteractiveObject;
     import net.wg.utils.helpLayout.HelpLayoutVO;
     import net.wg.infrastructure.managers.counter.CounterProps;
+    import flash.display.BitmapData;
     import net.wg.data.constants.Linkages;
     import net.wg.data.constants.Directions;
     import net.wg.infrastructure.events.FocusRequestEvent;
+    import net.wg.utils.ICounterProps;
+    import flash.text.TextFormatAlign;
+    import net.wg.infrastructure.events.IconLoaderEvent;
     import scaleform.gfx.MouseEventEx;
     import net.wg.gui.lobby.modulesPanel.data.FittingSelectPopoverParams;
     import net.wg.data.Aliases;
     import net.wg.infrastructure.managers.ITooltipFormatter;
-    import net.wg.utils.ICounterProps;
-    import flash.text.TextFormatAlign;
-    import flash.display.BitmapData;
-    import net.wg.infrastructure.events.IconLoaderEvent;
 
     public class AmmunitionPanel extends AmmunitionPanelMeta implements IAmmunitionPanel
     {
@@ -50,7 +50,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
 
         private static const INV_TUNING_BUTTON_STATE:String = "InvTuningState";
 
-        private static const OFFSET_BTN_TO_RENT:Number = 5;
+        private static const OFFSET_BTN_TO_RENT:int = 2;
 
         private static const SHELLS_VO_SIZE_CORRECTION:int = 10;
 
@@ -74,7 +74,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
 
         public static const SLOTS_BOTTOM_OFFSET:int = 11;
 
-        public static const PANEL_HEIGHT:int = 80 + SLOTS_HEIGHT;
+        private static const VEHICLE_STATE_MSG_OFFSET:int = 16;
 
         public var vehicleStateMsg:VehicleStateMsg = null;
 
@@ -123,6 +123,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         private var _equipmentHelpLayoutId:String = "";
 
         private var _boosterHelpLayoutId:String = "";
+
+        private var _vehicleStateHelpLayoutId:String = "";
 
         private var _panelEnabled:Boolean = true;
 
@@ -436,6 +438,15 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
 
+        public function as_setBoosterBtnCounter(param1:int) : void
+        {
+            if(this._boosterCounter != param1)
+            {
+                this._boosterCounter = param1;
+                this.onBoosterCounterUpdate();
+            }
+        }
+
         public function as_setCustomizationBtnCounter(param1:int) : void
         {
             if(param1 > 0)
@@ -448,12 +459,29 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
 
-        public function as_setBoosterBtnCounter(param1:int) : void
+        public function as_showAnimation(param1:String, param2:int, param3:String) : void
         {
-            if(this._boosterCounter != param1)
+            var _loc4_:DeviceSlot = null;
+            var _loc5_:SlotAnimation = null;
+            switch(param1)
             {
-                this._boosterCounter = param1;
-                this.onBoosterCounterUpdate();
+                case FITTING_TYPES.OPTIONAL_DEVICE:
+                    _loc4_ = this._optionalDevices[param2];
+                    break;
+                case FITTING_TYPES.EQUIPMENT:
+                    _loc4_ = this._equipment[param2];
+                    break;
+                case FITTING_TYPES.BOOSTER:
+                    _loc4_ = this.booster;
+                    break;
+            }
+            if(_loc4_ != null)
+            {
+                _loc5_ = this.createAnimation();
+                _loc5_.setData(param3,this.getSlotBitmapData(_loc4_.slotData));
+                _loc5_.x = _loc4_.x;
+                _loc5_.y = _loc4_.y;
+                this._animations.push(_loc5_);
             }
         }
 
@@ -527,7 +555,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             var _loc3_:HelpLayoutVO = this.createHelpLayoutData(this.shell1.x,this.shell1.y,this.shell3.x + this.shell3.width - this.shell1.x - SHELLS_VO_SIZE_CORRECTION,this.shell1.height - SHELLS_VO_SIZE_CORRECTION,LOBBY_HELP.HANGAR_SHELLS,this._shellsHelpLayoutId);
             var _loc4_:HelpLayoutVO = this.createHelpLayoutData(this.equipment1.x,this.equipment1.y,this.equipment3.x + this.equipment3.width - this.equipment1.x,this.equipment1.height,LOBBY_HELP.HANGAR_EQUIPMENT,this._equipmentHelpLayoutId);
             var _loc5_:HelpLayoutVO = this.createHelpLayoutData(this.booster.x,this.booster.y,this.booster.width,this.booster.height,LOBBY_HELP.HANGAR_BOOSTER,this._boosterHelpLayoutId);
-            return new <HelpLayoutVO>[_loc1_,_loc2_,_loc3_,_loc4_,_loc5_];
+            var _loc6_:HelpLayoutVO = this.createHelpLayoutData(this.vehicleStateMsg.x - (this.vehicleStateMsg.width >> 1),this.vehicleStateMsg.y,this.vehicleStateMsg.width,this.vehicleStateMsg.height,LOBBY_HELP.HANGAR_HEADER_VEHICLE,this._vehicleStateHelpLayoutId);
+            return new <HelpLayoutVO>[_loc1_,_loc2_,_loc3_,_loc4_,_loc5_,_loc6_];
         }
 
         public function setBattleAbilitiesVisibility(param1:Boolean) : void
@@ -541,20 +570,6 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this._panelEnabled = param1;
             this._maintenanceTooltip = param2;
             invalidateButtonsEnabled();
-        }
-
-        public function updateStage(param1:Number, param2:Number) : void
-        {
-            this.vehicleStateMsg.updateStage(param1,param2);
-            this._screenWidth = param1;
-            this.centerPanel();
-        }
-
-        public function updateTuningButton(param1:Boolean, param2:String) : void
-        {
-            this._tuningBtnEnabled = param1;
-            this._tuningTooltip = param2;
-            invalidate(INV_TUNING_BUTTON_STATE);
         }
 
         public function updateChangeNationButton(param1:Boolean, param2:Boolean, param3:String, param4:Boolean) : void
@@ -585,6 +600,33 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             {
                 this.centerPanel();
             }
+        }
+
+        public function updateStage(param1:Number, param2:Number) : void
+        {
+            this.vehicleStateMsg.updateStage(param1,param2);
+            this._screenWidth = param1;
+            this.centerPanel();
+        }
+
+        public function updateTuningButton(param1:Boolean, param2:String) : void
+        {
+            this._tuningBtnEnabled = param1;
+            this._tuningTooltip = param2;
+            invalidate(INV_TUNING_BUTTON_STATE);
+        }
+
+        protected function getSlotBitmapData(param1:DeviceSlotVO) : BitmapData
+        {
+            this._animationEquipmentSlot.update(param1);
+            this._animationEquipmentSlot.validateNow();
+            if(this._animationEquipmentSlot.background != null)
+            {
+                this._animationEquipmentSlot.background.visible = false;
+            }
+            var _loc2_:BitmapData = new BitmapData(this._animationEquipmentSlot.width,this._animationEquipmentSlot.height,true,NaN);
+            _loc2_.draw(this._animationEquipmentSlot);
+            return _loc2_;
         }
 
         private function createBattleAbilitiesHighlighter() : void
@@ -665,24 +707,23 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
 
         private function centerPanel() : void
         {
-            var _loc1_:* = NaN;
+            var _loc1_:Number = 2 * this._buttonWidth + INDENT_BETWEEN_BUTTONS;
+            if(this._changeNationBtnVisible)
+            {
+                _loc1_ = _loc1_ + (this._buttonWidth + INDENT_BETWEEN_BUTTONS);
+            }
+            var _loc2_:* = 0;
             if(this._battleAbilitiesVisible && this._screenWidth <= BREAKPOINT_SLOT_CENTERING)
             {
                 this.x = OFFSET_MINRES_LEFT;
-                _loc1_ = (this._screenWidth - this.vehicleStateMsg.width >> 1) - OFFSET_MINRES_LEFT;
+                _loc2_ = (this._screenWidth - _loc1_ >> 1) - OFFSET_MINRES_LEFT;
             }
             else
             {
                 this.x = this._screenWidth - this._fakeWidth >> 1;
-                _loc1_ = this._fakeWidth - this.vehicleStateMsg.width >> 1;
+                _loc2_ = this._fakeWidth - _loc1_ >> 1;
             }
-            this.vehicleStateMsg.x = _loc1_;
-            var _loc2_:Number = 2 * this._buttonWidth + INDENT_BETWEEN_BUTTONS;
-            if(this._changeNationBtnVisible)
-            {
-                _loc2_ = _loc2_ + (this._buttonWidth + INDENT_BETWEEN_BUTTONS);
-            }
-            this.maintenanceBtn.x = this._fakeWidth - _loc2_ >> 1;
+            this.maintenanceBtn.x = _loc2_;
             this.tuningBtn.x = this.maintenanceBtn.x + this._buttonWidth + INDENT_BETWEEN_BUTTONS;
             this.changeNationBtn.x = this.tuningBtn.x + this._buttonWidth + INDENT_BETWEEN_BUTTONS;
             dispatchEvent(new Event(Event.RESIZE));
@@ -723,6 +764,14 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             if(this._boosterHelpLayoutId == Values.EMPTY_STR)
             {
                 this._boosterHelpLayoutId = this.generateHelpLayoutId();
+            }
+            if(this._boosterHelpLayoutId == Values.EMPTY_STR)
+            {
+                this._boosterHelpLayoutId = this.generateHelpLayoutId();
+            }
+            if(this._vehicleStateHelpLayoutId == Values.EMPTY_STR)
+            {
+                this._vehicleStateHelpLayoutId = this.generateHelpLayoutId();
             }
         }
 
@@ -783,6 +832,38 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
 
+        private function onBoosterCounterUpdate() : void
+        {
+            var _loc1_:ICounterProps = null;
+            if(this.booster.visible && this._boosterCounter > 0)
+            {
+                _loc1_ = new CounterProps(CounterProps.DEFAULT_OFFSET_X,0,TextFormatAlign.LEFT,true,Linkages.COUNTER_UI,CounterProps.DEFAULT_TF_PADDING,false);
+                this._counterManager.setCounter(this.booster.hitMc,"1",null,_loc1_);
+            }
+            else
+            {
+                this._counterManager.removeCounter(this.booster.hitMc);
+            }
+        }
+
+        private function createAnimation() : SlotAnimation
+        {
+            var _loc1_:SlotAnimation = new SlotAnimation();
+            _loc1_.mouseChildren = _loc1_.mouseEnabled = false;
+            _loc1_.addEventListener(SlotAnimation.ANIMATION_COMPLETE,this.animationCompleteHandler,false,0,true);
+            _loc1_.addEventListener(IconLoaderEvent.ICON_LOADED,this.animationLoadedHandler,false,0,true);
+            addChild(_loc1_);
+            return _loc1_;
+        }
+
+        private function disposeAnimation(param1:SlotAnimation) : void
+        {
+            param1.removeEventListener(SlotAnimation.ANIMATION_COMPLETE,this.animationCompleteHandler);
+            param1.removeEventListener(IconLoaderEvent.ICON_LOADED,this.animationLoadedHandler);
+            removeChild(param1);
+            param1.dispose();
+        }
+
         override public function get width() : Number
         {
             return this._fakeWidth;
@@ -791,6 +872,21 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         override protected function get modulesEnabled() : Boolean
         {
             return super.modulesEnabled && this._panelEnabled;
+        }
+
+        private function get hasLoadingAnimations() : Boolean
+        {
+            var _loc1_:int = this._animations.length;
+            var _loc2_:* = 0;
+            while(_loc2_ < _loc1_)
+            {
+                if(!this._animations[_loc2_].loaded)
+                {
+                    return true;
+                }
+                _loc2_++;
+            }
+            return false;
         }
 
         private function onAbilitySlotClickHandler(param1:ButtonEvent) : void
@@ -854,10 +950,12 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
 
         private function onAmmunitionPanelVehicleStateMsgResizeHandler(param1:AmmunitionPanelEvents) : void
         {
+            this.vehicleStateMsg.x = (parent.width >> 1) - x;
+            this.vehicleStateMsg.y = this.maintenanceBtn.y - this.vehicleStateMsg.height - VEHICLE_STATE_MSG_OFFSET;
             if(this._msgVo != null)
             {
-                this.toRent.x = this.vehicleStateMsg.textX + this.vehicleStateMsg.x + TO_RENT_LEFT_MARGIN ^ 0;
-                this.toRent.y = this.vehicleStateMsg.textY + OFFSET_BTN_TO_RENT;
+                this.toRent.x = this.vehicleStateMsg.textX + TO_RENT_LEFT_MARGIN ^ 0;
+                this.toRent.y = this.vehicleStateMsg.textY + OFFSET_BTN_TO_RENT ^ 0;
                 this.toRent.visible = this._msgVo.rentAvailable;
             }
         }
@@ -950,59 +1048,6 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
 
-        private function onBoosterCounterUpdate() : void
-        {
-            var _loc1_:ICounterProps = null;
-            if(this.booster.visible && this._boosterCounter > 0)
-            {
-                _loc1_ = new CounterProps(CounterProps.DEFAULT_OFFSET_X,0,TextFormatAlign.LEFT,true,Linkages.COUNTER_UI,CounterProps.DEFAULT_TF_PADDING,false);
-                this._counterManager.setCounter(this.booster.hitMc,"1",null,_loc1_);
-            }
-            else
-            {
-                this._counterManager.removeCounter(this.booster.hitMc);
-            }
-        }
-
-        public function as_showAnimation(param1:String, param2:int, param3:String) : void
-        {
-            var _loc4_:DeviceSlot = null;
-            var _loc5_:SlotAnimation = null;
-            switch(param1)
-            {
-                case FITTING_TYPES.OPTIONAL_DEVICE:
-                    _loc4_ = this._optionalDevices[param2];
-                    break;
-                case FITTING_TYPES.EQUIPMENT:
-                    _loc4_ = this._equipment[param2];
-                    break;
-                case FITTING_TYPES.BOOSTER:
-                    _loc4_ = this.booster;
-                    break;
-            }
-            if(_loc4_ != null)
-            {
-                _loc5_ = this.createAnimation();
-                _loc5_.setData(param3,this.getSlotBitmapData(_loc4_.slotData));
-                _loc5_.x = _loc4_.x;
-                _loc5_.y = _loc4_.y;
-                this._animations.push(_loc5_);
-            }
-        }
-
-        protected function getSlotBitmapData(param1:DeviceSlotVO) : BitmapData
-        {
-            this._animationEquipmentSlot.update(param1);
-            this._animationEquipmentSlot.validateNow();
-            if(this._animationEquipmentSlot.background != null)
-            {
-                this._animationEquipmentSlot.background.visible = false;
-            }
-            var _loc2_:BitmapData = new BitmapData(this._animationEquipmentSlot.width,this._animationEquipmentSlot.height,true,NaN);
-            _loc2_.draw(this._animationEquipmentSlot);
-            return _loc2_;
-        }
-
         private function animationCompleteHandler(param1:Event) : void
         {
             /*
@@ -1024,39 +1069,6 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                 this._postponedData = null;
                 this.setData(_loc2_);
             }
-        }
-
-        private function createAnimation() : SlotAnimation
-        {
-            var _loc1_:SlotAnimation = new SlotAnimation();
-            _loc1_.mouseChildren = _loc1_.mouseEnabled = false;
-            _loc1_.addEventListener(SlotAnimation.ANIMATION_COMPLETE,this.animationCompleteHandler,false,0,true);
-            _loc1_.addEventListener(IconLoaderEvent.ICON_LOADED,this.animationLoadedHandler,false,0,true);
-            addChild(_loc1_);
-            return _loc1_;
-        }
-
-        private function disposeAnimation(param1:SlotAnimation) : void
-        {
-            param1.removeEventListener(SlotAnimation.ANIMATION_COMPLETE,this.animationCompleteHandler);
-            param1.removeEventListener(IconLoaderEvent.ICON_LOADED,this.animationLoadedHandler);
-            removeChild(param1);
-            param1.dispose();
-        }
-
-        private function get hasLoadingAnimations() : Boolean
-        {
-            var _loc1_:int = this._animations.length;
-            var _loc2_:* = 0;
-            while(_loc2_ < _loc1_)
-            {
-                if(!this._animations[_loc2_].loaded)
-                {
-                    return true;
-                }
-                _loc2_++;
-            }
-            return false;
         }
     }
 }

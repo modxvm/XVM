@@ -20,6 +20,7 @@ package net.wg.gui.lobby.battleResults
     import net.wg.gui.lobby.battleResults.event.ClanEmblemRequestEvent;
     import scaleform.clik.events.ButtonEvent;
     import scaleform.clik.constants.InvalidationType;
+    import net.wg.infrastructure.interfaces.IRegisteredComponent;
     import net.wg.gui.events.FinalStatisticEvent;
     import net.wg.gui.lobby.battleResults.data.TabInfoVO;
 
@@ -151,6 +152,7 @@ package net.wg.gui.lobby.battleResults
             }
             invalidateData();
             showWaiting = false;
+            this.registerComponent(this.view_mc.currentView as IRegisteredComponent);
             this.view_mc.currentView.update(param1);
         }
 
@@ -223,7 +225,16 @@ package net.wg.gui.lobby.battleResults
 
         private function onViewChangedHandler(param1:ViewStackEvent) : void
         {
+            this.registerComponent(param1.view as IRegisteredComponent);
             param1.view.update(this._data);
+        }
+
+        private function registerComponent(param1:IRegisteredComponent) : void
+        {
+            if(param1)
+            {
+                param1.registerFlashComponentVia(this);
+            }
         }
 
         private function onShowEventsWindowHandler(param1:QuestEvent) : void

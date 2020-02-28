@@ -187,7 +187,7 @@ package net.wg.gui.lobby.battleResults.components
                     }
                     else if(data.killerID > 0)
                     {
-                        _loc4_ = App.utils.commons.getUserProps(data.killerRealNameStr,data.killerClanNameStr,data.killerRegionNameStr,0,null,0,Values.EMPTY_STR,data.killerFakeNameStr);
+                        _loc4_ = App.utils.commons.getUserProps(data.killerRealNameStr,data.killerClanNameStr,data.killerRegionNameStr,0,null,data.killerFakeNameStr);
                         _loc4_.prefix = data.vehicleStatePrefixStr;
                         _loc4_.suffix = data.vehicleStateSuffixStr;
                         _loc4_.isTeamKiller = data.isKilledByTeamKiller;

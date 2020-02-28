@@ -78,7 +78,7 @@ package net.wg.gui.lobby.questsWindow
 
         private function showLinkBtnTooltip(param1:MouseEvent) : void
         {
-            App.toolTipMgr.show(this.linkBtn.enabled?TOOLTIPS.QUESTS_LINKBTN_TASK:TOOLTIPS.QUESTS_DISABLELINKBTN_TASK);
+            App.toolTipMgr.show(this.linkBtn.enabled?this.data.questInfo.linkTooltip:TOOLTIPS.QUESTS_DISABLELINKBTN_TASK);
         }
 
         public function setData(param1:Object) : void

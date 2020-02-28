@@ -1,6 +1,7 @@
 package net.wg.gui.lobby.modulesPanel.components
 {
     import net.wg.gui.interfaces.ISoundButtonEx;
+    import net.wg.gui.components.controls.BlackButton;
     import flash.display.MovieClip;
     import flash.text.TextField;
     import net.wg.gui.lobby.modulesPanel.data.OptionalDeviceVO;
@@ -25,9 +26,13 @@ package net.wg.gui.lobby.modulesPanel.components
 
         private static const BG_HIGHLIGHT_GAP:int = 2;
 
+        private static const BUTTON_OFFSET:int = 5;
+
         public var removeButton:ISoundButtonEx;
 
-        public var destroyButton:ISoundButtonEx;
+        public var destroyButton:BlackButton;
+
+        public var upgradeButton:ISoundButtonEx;
 
         public var locked:MovieClip;
 
@@ -42,8 +47,6 @@ package net.wg.gui.lobby.modulesPanel.components
         private var _commons:ICommons;
 
         private var _toolTipMgr:ITooltipMgr;
-
-        private var _needToolTip:Boolean = false;
 
         public function OptDeviceFittingItemRenderer()
         {
@@ -79,6 +82,8 @@ package net.wg.gui.lobby.modulesPanel.components
             this.destroyButton = null;
             this.removeButton.dispose();
             this.removeButton = null;
+            this.upgradeButton.dispose();
+            this.upgradeButton = null;
             this.descField = null;
             this.locked = null;
             this._optDevData = null;
@@ -94,6 +99,7 @@ package net.wg.gui.lobby.modulesPanel.components
             removeEventListener(MouseEvent.MOUSE_OVER,this.onMouseOverHandler);
             this.destroyButton.removeEventListener(ButtonEvent.CLICK,this.onDestroyButtonClickHandler);
             this.removeButton.removeEventListener(ButtonEvent.CLICK,this.onRemoveButtonClickHandler);
+            this.upgradeButton.removeEventListener(ButtonEvent.CLICK,this.onUpgradeButtonClickHandler);
             super.onBeforeDispose();
         }
 
@@ -104,9 +110,13 @@ package net.wg.gui.lobby.modulesPanel.components
             this.destroyButton.focusable = false;
             this.destroyButton.addEventListener(ButtonEvent.CLICK,this.onDestroyButtonClickHandler);
             this.destroyButton.soundType = SoundTypes.ITEM_RDR;
+            this.destroyButton.iconSource = RES_ICONS.MAPS_ICONS_LIBRARY_DESTROY_HUMMER;
             this.removeButton.focusable = false;
             this.removeButton.addEventListener(ButtonEvent.CLICK,this.onRemoveButtonClickHandler);
             this.removeButton.soundType = SoundTypes.ITEM_RDR;
+            this.upgradeButton.focusable = false;
+            this.upgradeButton.addEventListener(ButtonEvent.CLICK,this.onUpgradeButtonClickHandler);
+            this.upgradeButton.soundType = SoundTypes.ITEM_RDR;
             this.locked.visible = false;
             this.locked.mouseEnabled = this.locked.mouseChildren = false;
             this.descField.mouseEnabled = false;
@@ -127,7 +137,7 @@ package net.wg.gui.lobby.modulesPanel.components
                 this.destroyButton.visible = _loc2_ && _loc1_;
                 if(this.destroyButton.visible)
                 {
-                    this.destroyButton.label = MENU.MODULEFITS_DESTROYNAME;
+                    this.destroyButton.tooltip = MENU.MODULEFITS_DESTROYBTN_TOOLTIP;
                 }
                 this.removeButton.visible = _loc1_;
                 if(this.removeButton.visible)
@@ -135,7 +145,13 @@ package net.wg.gui.lobby.modulesPanel.components
                     this.removeButton.label = this._optDevData.removeButtonLabel;
                     this.removeButton.tooltip = this._optDevData.removeButtonTooltip;
                 }
-                this.descField.visible = !_loc1_ && StringUtils.isNotEmpty(this._optDevData.desc);
+                this.upgradeButton.visible = this._optDevData.isUpgradable && !this._optDevData.disabled;
+                if(this.upgradeButton.visible)
+                {
+                    this.upgradeButton.label = this._optDevData.upgradeButtonLabel;
+                    this.upgradeButton.tooltip = MENU.MODULEFITS_UPGRADEBTN_TOOLTIP;
+                }
+                this.descField.visible = !_loc1_ && !this.upgradeButton.visible && StringUtils.isNotEmpty(this._optDevData.desc);
                 if(this.descField.visible)
                 {
                     this.setTruncatedHtmlText(this.descField,this._optDevData.desc,MAX_LINE_NUMBER);
@@ -153,9 +169,9 @@ package net.wg.gui.lobby.modulesPanel.components
                     errorField.htmlText = this._optDevData.status;
                     this._commons.updateTextFieldSize(errorField,false,true);
                 }
-                if(StringUtils.isNotEmpty(this._optDevData.highlightType))
+                if(StringUtils.isNotEmpty(this._optDevData.overlayType))
                 {
-                    this.moduleOverlay.gotoAndStop(this._optDevData.highlightType);
+                    this.moduleOverlay.gotoAndStop(this._optDevData.overlayType);
                     this.moduleOverlay.visible = true;
                 }
                 else
@@ -166,6 +182,16 @@ package net.wg.gui.lobby.modulesPanel.components
                 _loc4_ = this._optDevData.disabled;
                 this.destroyButton.soundEnabled = _loc4_;
                 this.removeButton.soundEnabled = _loc4_;
+                this.upgradeButton.soundEnabled = _loc4_;
+                if(this.upgradeButton.visible)
+                {
+                    this.removeButton.x = this.upgradeButton.x + this.removeButton.width + BUTTON_OFFSET;
+                }
+                else
+                {
+                    this.removeButton.x = this.upgradeButton.x;
+                }
+                this.destroyButton.x = this.removeButton.x + this.removeButton.width + BUTTON_OFFSET;
             }
         }
 
@@ -192,6 +218,10 @@ package net.wg.gui.lobby.modulesPanel.components
         private function updateBgHighlight() : void
         {
             this.bgHighlightMc.visible = StringUtils.isNotEmpty(this._optDevData.bgHighlightType);
+            if(this.bgHighlightMc.visible)
+            {
+                this.bgHighlightMc.gotoAndStop(this._optDevData.bgHighlightType);
+            }
             if(selected)
             {
                 this.bgHighlightMc.x = this.bgHighlightMc.y = BG_HIGHLIGHT_GAP;
@@ -214,16 +244,15 @@ package net.wg.gui.lobby.modulesPanel.components
 
         private function onMouseOverHandler(param1:MouseEvent) : void
         {
-            if(param1.target == this.removeButton || param1.target == this.destroyButton)
+            if(param1.target != this.removeButton && param1.target != this.destroyButton && param1.target != this.upgradeButton)
             {
-                this._needToolTip = true;
-                hideTooltip();
-            }
-            else if(this._needToolTip)
-            {
-                this._needToolTip = false;
                 this.showItemTooltip();
             }
+        }
+
+        private function onUpgradeButtonClickHandler(param1:ButtonEvent) : void
+        {
+            dispatchEvent(new DeviceEvent(DeviceEvent.DEVICE_UPGRADE,this._optDevData.id));
         }
     }
 }

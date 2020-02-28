@@ -85,11 +85,11 @@ package net.wg.gui.components.damageIndicator
             this._items[param1].setYaw(param2);
         }
 
-        public function as_showExtended(param1:int, param2:String, param3:String, param4:int, param5:String, param6:String, param7:String) : void
+        public function as_showExtended(param1:int, param2:String, param3:String, param4:int, param5:String, param6:String, param7:String, param8:Boolean) : void
         {
-            var _loc8_:DamageIndicatorItem = this._items[param1];
-            _loc8_.showExtended(param2,param3,param4,param5,param6,param7);
-            setChildIndex(_loc8_,numChildren - 1);
+            var _loc9_:DamageIndicatorItem = this._items[param1];
+            _loc9_.showExtended(param2,param3,param4,param5,param6,param7,param8);
+            setChildIndex(_loc9_,numChildren - 1);
         }
 
         public function as_showStandard(param1:int, param2:String, param3:int) : void
@@ -140,7 +140,8 @@ package net.wg.gui.components.damageIndicator
         {
             var _loc4_:DamageIndicatorItem = this._items[param1.index];
             _loc4_.updateSettings(false,param3,false,param2);
-            _loc4_.showSettingExtended(param1.getBg(),param1.getCircle(),param1.tankName,param1.tankTypeStr,param1.damageValue);
+            var _loc5_:* = param1.type == DamageIndicatorExtendedSetting.ALLY;
+            _loc4_.showSettingExtended(param1.getBg(),param1.getCircle(),param1.tankName,param1.tankTypeStr,param1.damageValue,_loc5_);
             this.setupDamageIndicatorItem(_loc4_,param1);
         }
 
@@ -187,6 +188,15 @@ package net.wg.gui.components.damageIndicator
                 _loc2_.scaleX = _loc2_.scaleY = this._guiScale;
                 _loc2_.setYOffset(_loc1_);
             }
+        }
+
+        public function set rotateInfo(param1:Boolean) : void
+        {
+            this.hit_0.rotateInfo = param1;
+            this.hit_1.rotateInfo = param1;
+            this.hit_2.rotateInfo = param1;
+            this.hit_3.rotateInfo = param1;
+            this.hit_4.rotateInfo = param1;
         }
     }
 }

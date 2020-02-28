@@ -1,6 +1,7 @@
 package net.wg.gui.lobby.header.itemSelectorPopover
 {
     import net.wg.gui.components.controls.ScrollingListEx;
+    import flash.display.Sprite;
     import net.wg.gui.components.controls.helpers.ListUtils;
     import scaleform.clik.events.InputEvent;
     import scaleform.clik.interfaces.IListItemRenderer;
@@ -15,6 +16,14 @@ package net.wg.gui.lobby.header.itemSelectorPopover
         public function ItemSelectorList()
         {
             super();
+        }
+
+        override protected function configUI() : void
+        {
+            super.configUI();
+            var _loc1_:Sprite = new Sprite();
+            addChild(_loc1_);
+            hitArea = _loc1_;
         }
 
         public function getFirstSelectablePosition(param1:int, param2:Boolean = true) : int

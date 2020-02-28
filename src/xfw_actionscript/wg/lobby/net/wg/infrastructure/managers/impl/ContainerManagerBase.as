@@ -434,7 +434,7 @@ package net.wg.infrastructure.managers.impl
                 delete this._addWrapperInNextFrameDict[param2];
             }
             var _loc4_:ISimpleManagedContainer = this.getContainer(param1);
-            if(param2 != null)
+            if(param2 != null && param2.parent != null)
             {
                 if(_loc4_ == param2.parent)
                 {

@@ -170,9 +170,8 @@ package net.wg.gui.lobby.vehicleCustomization
 
         private function applyValidTextAlpha() : void
         {
-            var _loc2_:* = NaN;
             var _loc1_:Number = this._selectedLeft?ENABLE_ALPHA:DISABLE_ALPHA;
-            _loc2_ = !this._selectedLeft?ENABLE_ALPHA:DISABLE_ALPHA;
+            var _loc2_:Number = !this._selectedLeft?ENABLE_ALPHA:DISABLE_ALPHA;
             this.rightValue.alpha = _loc1_;
             this.leftValue.alpha = _loc2_;
         }

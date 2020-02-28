@@ -73,6 +73,8 @@ package net.wg.data.constants.generated
 
         public static const STORAGE_DEMOUNT_KIT_ITEM:String = "storageDemountKitItem";
 
+        public static const STORAGE_OPTIONAL_DEVICE_ITEM:String = "storageOptionalDeviceItem";
+
         public function CONTEXT_MENU_HANDLER_TYPE()
         {
             super();

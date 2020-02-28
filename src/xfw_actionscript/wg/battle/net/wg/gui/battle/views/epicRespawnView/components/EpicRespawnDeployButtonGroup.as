@@ -5,6 +5,7 @@ package net.wg.gui.battle.views.epicRespawnView.components
     import net.wg.gui.components.controls.FightButton;
     import net.wg.gui.battle.views.epicRespawnView.events.EpicRespawnEvent;
     import flash.text.TextField;
+    import flash.text.TextFieldAutoSize;
 
     public class EpicRespawnDeployButtonGroup extends MovieClip implements IDisposable
     {
@@ -15,15 +16,25 @@ package net.wg.gui.battle.views.epicRespawnView.components
 
         private static const HIGHLIGHT_STATE:String = "higlight";
 
+        private static const SINGLE_NOTIFICATION_Y:int = 60;
+
+        private static const DEPLOY_NOTIFICATION_Y:int = 50;
+
+        private static const RESPAWN_NOTIFICATION_Y:int = 70;
+
         public var deployButton:FightButton = null;
 
         public var buttonAnimation:MovieClip = null;
 
         public var deployNotification:MovieClip = null;
 
+        public var respawnNotification:MovieClip = null;
+
         private var _highlightAnimationActive:Boolean = false;
 
         private var _introAnimationActive:Boolean = false;
+
+        private var _isTimerVisible:Boolean = false;
 
         public function EpicRespawnDeployButtonGroup()
         {
@@ -33,6 +44,9 @@ package net.wg.gui.battle.views.epicRespawnView.components
             this.buttonAnimation.mouseChildren = false;
             this.deployNotification.mouseChildren = false;
             this.deployNotification.mouseEnabled = false;
+            this.respawnNotification.notificationTF.autoSize = TextFieldAutoSize.RIGHT;
+            this.respawnNotification.notificationTF.text = EPIC_BATTLE.RESPAWNSCREEN_RESPAWNWARNING;
+            this.respawnNotification.notificationIcon.x = this.respawnNotification.notificationTF.x | 0;
         }
 
         public final function dispose() : void
@@ -42,6 +56,7 @@ package net.wg.gui.battle.views.epicRespawnView.components
             this.buttonAnimation.stop();
             this.buttonAnimation = null;
             this.deployNotification = null;
+            this.respawnNotification = null;
         }
 
         public function playHighlightState() : void
@@ -66,6 +81,8 @@ package net.wg.gui.battle.views.epicRespawnView.components
             {
                 this.playHighlightState();
                 this.updateDeployNotification(this.deployNotification.timerToAutoDeployTF,true,param2);
+                this._isTimerVisible = true;
+                this.updateNotifyPositions();
             }
             else if(param1)
             {
@@ -83,11 +100,42 @@ package net.wg.gui.battle.views.epicRespawnView.components
             if(param1)
             {
                 this.updateDeployNotification(this.deployNotification.cooldownToDeployTF,false);
+                this._isTimerVisible = false;
+                this.updateNotifyPositions();
             }
             else
             {
                 this.updateDeployNotification(this.deployNotification.timerToAutoDeployTF,false);
                 this.updateDeployNotification(this.deployNotification.cooldownToDeployTF,true,param2);
+                this._isTimerVisible = true;
+                this.updateNotifyPositions();
+            }
+        }
+
+        public function updateRespawnWarning(param1:Boolean) : void
+        {
+            if(param1 == this.respawnNotification.visible)
+            {
+                return;
+            }
+            this.respawnNotification.visible = param1;
+            this.updateNotifyPositions();
+        }
+
+        private function updateNotifyPositions() : void
+        {
+            if(this._isTimerVisible && this.respawnNotification.visible)
+            {
+                this.deployNotification.y = DEPLOY_NOTIFICATION_Y;
+                this.respawnNotification.y = RESPAWN_NOTIFICATION_Y;
+            }
+            else if(this._isTimerVisible)
+            {
+                this.deployNotification.y = SINGLE_NOTIFICATION_Y;
+            }
+            else if(this.respawnNotification.visible)
+            {
+                this.respawnNotification.y = SINGLE_NOTIFICATION_Y;
             }
         }
 

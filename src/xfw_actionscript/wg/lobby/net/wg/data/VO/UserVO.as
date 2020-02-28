@@ -2,11 +2,14 @@ package net.wg.data.VO
 {
     import net.wg.data.daapi.base.DAAPIDataClass;
     import net.wg.gui.interfaces.IUserVO;
+    import net.wg.gui.components.controls.VO.BadgeVisualVO;
     import net.wg.infrastructure.interfaces.IUserProps;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
 
     public class UserVO extends DAAPIDataClass implements IUserVO
     {
+
+        private static const BADGE_FIELD_NAME:String = "badgeVisualVO";
 
         private var _accID:Number = 0;
 
@@ -26,9 +29,7 @@ package net.wg.data.VO
 
         private var _tags:Array;
 
-        private var _badge:int = 0;
-
-        private var _badgeImgStr:String = "";
+        private var _badgeVisualVO:BadgeVisualVO = null;
 
         private var _userProps:IUserProps = null;
 
@@ -38,7 +39,17 @@ package net.wg.data.VO
         {
             this._tags = [];
             super(param1);
-            this._userProps = App.utils.commons.getUserProps(this._userName,this._clanAbbrev,this._region,this._igrType,this._tags,this._badge,this._badgeImgStr,this._fakeName);
+            this._userProps = App.utils.commons.getUserProps(this._userName,this._clanAbbrev,this._region,this._igrType,this._tags,this._fakeName);
+        }
+
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
+            if(param1 == BADGE_FIELD_NAME)
+            {
+                this._badgeVisualVO = new BadgeVisualVO(param2);
+                return false;
+            }
+            return super.onDataWrite(param1,param2);
         }
 
         override protected function onDispose() : void
@@ -60,7 +71,11 @@ package net.wg.data.VO
             {
                 this._userProps = null;
             }
-            super.onDispose();
+            if(this._badgeVisualVO)
+            {
+                this._badgeVisualVO.dispose();
+                this._badgeVisualVO = null;
+            }
         }
 
         public function get dbID() : Number
@@ -192,32 +207,18 @@ package net.wg.data.VO
             }
         }
 
-        public function get badge() : int
+        public function get badgeVisualVO() : BadgeVisualVO
         {
-            return this._badge;
+            return this._badgeVisualVO;
         }
 
-        public function set badge(param1:int) : void
+        public function set badgeVisualVO(param1:BadgeVisualVO) : void
         {
-            this._badge = param1;
-            if(this._userProps)
+            if(this._badgeVisualVO)
             {
-                this._userProps.badge = param1;
+                this._badgeVisualVO.dispose();
             }
-        }
-
-        public function get badgeImgStr() : String
-        {
-            return this._badgeImgStr;
-        }
-
-        public function set badgeImgStr(param1:String) : void
-        {
-            this._badgeImgStr = param1;
-            if(this._userProps)
-            {
-                this._userProps.badgeImgStr = param1;
-            }
+            this._badgeVisualVO = param1;
         }
 
         public function get isTeamKiller() : Boolean
@@ -236,7 +237,7 @@ package net.wg.data.VO
 
         public function get isAnonymized() : Boolean
         {
-            return this._userProps.isAnonymized || this._fakeName && this._fakeName != this._userName;
+            return this._userProps != null && (this._userProps.isAnonymized || this._fakeName && this._fakeName != this._userName);
         }
     }
 }

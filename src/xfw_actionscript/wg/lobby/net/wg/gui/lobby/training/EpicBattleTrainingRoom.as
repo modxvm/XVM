@@ -15,6 +15,7 @@ package net.wg.gui.lobby.training
     import scaleform.clik.core.UIComponent;
     import net.wg.data.VO.TrainingRoomTeamBaseVO;
     import net.wg.data.VO.EpicBattleTrainingRoomTeamVO;
+    import net.wg.gui.components.controls.VO.BadgeVisualVO;
     import net.wg.utils.IUniversalBtnStyles;
     import net.wg.data.constants.UniversalBtnStylesConst;
     import scaleform.clik.constants.InvalidationType;
@@ -202,18 +203,18 @@ package net.wg.gui.lobby.training
             super.setOther(param1);
         }
 
-        override protected function doCheckStatusTeam1(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int, param7:int, param8:String) : void
+        override protected function doCheckStatusTeam1(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int, param7:BadgeVisualVO) : void
         {
-            checkStatus(this.team1_east,param1,param2,param3,param4,param5,param6,param7,param8);
-            checkStatus(this.team1_center,param1,param2,param3,param4,param5,param6,param7,param8);
-            checkStatus(this.team1_west,param1,param2,param3,param4,param5,param6,param7,param8);
+            checkStatus(this.team1_east,param1,param2,param3,param4,param5,param6,param7);
+            checkStatus(this.team1_center,param1,param2,param3,param4,param5,param6,param7);
+            checkStatus(this.team1_west,param1,param2,param3,param4,param5,param6,param7);
         }
 
-        override protected function doCheckStatusTeam2(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int, param7:int, param8:String) : void
+        override protected function doCheckStatusTeam2(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int, param7:BadgeVisualVO) : void
         {
-            checkStatus(this.team2_east,param1,param2,param3,param4,param5,param6,param7,param8);
-            checkStatus(this.team2_center,param1,param2,param3,param4,param5,param6,param7,param8);
-            checkStatus(this.team2_west,param1,param2,param3,param4,param5,param6,param7,param8);
+            checkStatus(this.team2_east,param1,param2,param3,param4,param5,param6,param7);
+            checkStatus(this.team2_center,param1,param2,param3,param4,param5,param6,param7);
+            checkStatus(this.team2_west,param1,param2,param3,param4,param5,param6,param7);
         }
 
         override protected function setTeam1(param1:TrainingRoomTeamBaseVO) : void

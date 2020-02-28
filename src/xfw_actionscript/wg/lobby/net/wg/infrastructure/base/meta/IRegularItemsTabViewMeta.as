@@ -8,5 +8,7 @@ package net.wg.infrastructure.base.meta
         function navigateToStoreS() : void;
 
         function sellItemS(param1:Number) : void;
+
+        function upgradeItemS(param1:Number) : void;
     }
 }

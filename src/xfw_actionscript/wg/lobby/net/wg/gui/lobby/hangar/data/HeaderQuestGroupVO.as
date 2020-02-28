@@ -12,6 +12,8 @@ package net.wg.gui.lobby.hangar.data
 
         public var groupIcon:String = "";
 
+        public var isRightSide:Boolean = false;
+
         private var _quests:Vector.<HeaderQuestsVO> = null;
 
         public function HeaderQuestGroupVO(param1:Object = null)

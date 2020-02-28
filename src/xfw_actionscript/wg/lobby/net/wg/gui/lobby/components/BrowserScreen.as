@@ -118,7 +118,7 @@ package net.wg.gui.lobby.components
                 }
                 this.waiting.setSize(_width,_height);
                 this.screenBg.setSize(_width,_height + this.bottomPanelHeight);
-                this.closeBtn.x = _width - this.closeBtn.width + CLOSE_BUTTON_RIGHT_OFFSET;
+                this.closeBtn.x = _width - this.closeBtn.width - CLOSE_BUTTON_RIGHT_OFFSET;
             }
         }
 

@@ -5,7 +5,6 @@ package net.wg.infrastructure.managers.utils.impl
     import flash.text.TextField;
     import net.wg.infrastructure.interfaces.IUserProps;
     import flash.text.TextFormat;
-    import org.idmedia.as3commons.util.StringUtils;
 
     public class CommonsLobby extends CommonsBase
     {
@@ -64,10 +63,6 @@ package net.wg.infrastructure.managers.utils.impl
             else
             {
                 _loc10_ = param2.userName;
-                if(StringUtils.isNotEmpty(param2.badgeImgStr))
-                {
-                    _loc9_ = param2.badgeImgStr + _loc9_;
-                }
                 if(param2.clanAbbrev)
                 {
                     _loc11_ = CLAN_TAG_OPEN + param2.clanAbbrev + CLAN_TAG_CLOSE;

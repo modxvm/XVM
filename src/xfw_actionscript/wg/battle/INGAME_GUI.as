@@ -1395,6 +1395,8 @@ package
 
         public static const REWARDWINDOW_COMMANDER_PATRICK_BTNLABEL:String = "#ingame_gui:rewardWindow/commander_patrick/btnLabel";
 
+        public static const DAMAGEINDICATOR_FRIENDLYFIRE_NODAMAGELABEL:String = "#ingame_gui:damageIndicator/friendlyFire/noDamageLabel";
+
         public function INGAME_GUI()
         {
             super();

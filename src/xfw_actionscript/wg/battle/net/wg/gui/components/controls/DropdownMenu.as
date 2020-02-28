@@ -241,7 +241,7 @@ package net.wg.gui.components.controls
             }
             if(_dataProvider)
             {
-                _dataProvider.removeEventListener(Event.CHANGE,handleDataChange,false);
+                _dataProvider.removeEventListener(Event.CHANGE,this.handleDataChange,false);
                 if(this.disposeDataProvider)
                 {
                     _dataProvider.cleanUp();
@@ -375,7 +375,7 @@ package net.wg.gui.components.controls
             }
             if(_dataProvider != null)
             {
-                _dataProvider.removeEventListener(Event.CHANGE,handleDataChange,false);
+                _dataProvider.removeEventListener(Event.CHANGE,this.handleDataChange,false);
                 if(this.disposeDataProvider)
                 {
                     _dataProvider.cleanUp();
@@ -387,7 +387,7 @@ package net.wg.gui.components.controls
                 return;
             }
             this.calcMenuAvailableRowCount();
-            _dataProvider.addEventListener(Event.CHANGE,handleDataChange,false,0,true);
+            _dataProvider.addEventListener(Event.CHANGE,this.handleDataChange,false,0,true);
             invalidateData();
             invalidate(INV_LIST_DATA);
         }
@@ -429,6 +429,13 @@ package net.wg.gui.components.controls
                 this._handleScroll = param1;
                 invalidate(HANDLE_SCROLL_INV);
             }
+        }
+
+        override protected function handleDataChange(param1:Event) : void
+        {
+            this.calcMenuAvailableRowCount();
+            super.handleDataChange(param1);
+            invalidate(INV_LIST_DATA);
         }
 
         override protected function handleStageClick(param1:MouseEvent) : void

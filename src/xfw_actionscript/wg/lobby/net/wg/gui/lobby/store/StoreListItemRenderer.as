@@ -337,6 +337,14 @@ package net.wg.gui.lobby.store
             }
         }
 
+        protected function hideTooltip() : void
+        {
+            this._scheduler.cancelTask(this.onShowTooltipTask);
+            this._scheduler.cancelTask(this.showTooltip);
+            this._tooltipMgr.hide();
+            this._tooltipIsVisible = false;
+        }
+
         private function updateAddToCompare(param1:StoreTableData) : void
         {
             var _loc2_:VehCompareEntrypointVO = null;
@@ -370,6 +378,13 @@ package net.wg.gui.lobby.store
                     this.rent.visible = true;
                 }
             }
+        }
+
+        private function onShowTooltipTask() : void
+        {
+            this._scheduler.cancelTask(this.showTooltip);
+            this._scheduler.scheduleTask(this.showTooltip,100);
+            this._tooltipIsVisible = true;
         }
 
         override public function set selected(param1:Boolean) : void
@@ -450,21 +465,6 @@ package net.wg.gui.lobby.store
         private function onStateChangeHandler(param1:ComponentEvent) : void
         {
             this.changedState();
-        }
-
-        private function hideTooltip() : void
-        {
-            this._scheduler.cancelTask(this.onShowTooltipTask);
-            this._scheduler.cancelTask(this.showTooltip);
-            this._tooltipMgr.hide();
-            this._tooltipIsVisible = false;
-        }
-
-        private function onShowTooltipTask() : void
-        {
-            this._scheduler.cancelTask(this.showTooltip);
-            this._scheduler.scheduleTask(this.showTooltip,100);
-            this._tooltipIsVisible = true;
         }
     }
 }

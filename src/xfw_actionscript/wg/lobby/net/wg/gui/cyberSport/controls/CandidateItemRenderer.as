@@ -4,6 +4,7 @@ package net.wg.gui.cyberSport.controls
     import net.wg.infrastructure.interfaces.entity.IDropItem;
     import net.wg.infrastructure.interfaces.entity.IUpdatable;
     import net.wg.gui.components.advanced.InviteIndicator;
+    import net.wg.gui.components.controls.UserNameField;
     import flash.text.TextField;
     import net.wg.gui.components.controls.VoiceWave;
     import net.wg.gui.components.controls.Image;
@@ -12,12 +13,11 @@ package net.wg.gui.cyberSport.controls
     import net.wg.infrastructure.managers.ITooltipMgr;
     import net.wg.infrastructure.events.VoiceChatEvent;
     import flash.events.MouseEvent;
-    import net.wg.infrastructure.interfaces.IUserProps;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.data.constants.Values;
-    import org.idmedia.as3commons.util.StringUtils;
     import net.wg.data.constants.UserTags;
     import net.wg.data.constants.Cursors;
+    import org.idmedia.as3commons.util.StringUtils;
     import net.wg.gui.rally.events.RallyViewsEvent;
 
     public class CandidateItemRenderer extends SoundListItemRenderer implements IDropItem, IUpdatable
@@ -27,7 +27,7 @@ package net.wg.gui.cyberSport.controls
 
         public var inviteIndicator:InviteIndicator = null;
 
-        public var candidateName:TextField = null;
+        public var candidateName:UserNameField = null;
 
         public var candidateRating:TextField = null;
 
@@ -91,6 +91,7 @@ package net.wg.gui.cyberSport.controls
             this.voiceWave = null;
             this.inviteIndicator.dispose();
             this.inviteIndicator = null;
+            this.candidateName.dispose();
             this.candidateName = null;
             this.candidateRating = null;
             if(this.statusIcon != null)
@@ -106,8 +107,6 @@ package net.wg.gui.cyberSport.controls
 
         override protected function draw() : void
         {
-            var _loc1_:* = false;
-            var _loc2_:IUserProps = null;
             super.draw();
             if(isInvalid(InvalidationType.DATA))
             {
@@ -130,12 +129,8 @@ package net.wg.gui.cyberSport.controls
                     {
                         this.candidateRating.visible = false;
                     }
-                    _loc1_ = StringUtils.isNotEmpty(this._cadidateData.badgeImgStr);
-                    _loc2_ = App.utils.commons.getUserProps(this._cadidateData.userName,this._cadidateData.clanAbbrev,this._cadidateData.region,this._cadidateData.igrType,null,this._cadidateData.badge,this._cadidateData.badgeImgStr);
-                    _loc2_.rgb = this._cadidateData.color;
+                    this.candidateName.userVO = this._cadidateData;
                     this.candidateName.visible = true;
-                    App.utils.commons.formatPlayerName(this.candidateName,_loc2_);
-                    this.candidateName.y = _loc1_?this._candidateWitdBadgeY:this._candidateNameY;
                     this.setSpeakers(this._cadidateData.isPlayerSpeaking,true);
                     this.voiceWave.setMuted(UserTags.isMuted(this._cadidateData.tags));
                 }

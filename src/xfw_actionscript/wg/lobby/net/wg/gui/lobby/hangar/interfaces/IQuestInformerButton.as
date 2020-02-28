@@ -7,7 +7,7 @@ package net.wg.gui.lobby.hangar.interfaces
     public interface IQuestInformerButton extends ISoundButtonEx
     {
 
-        function setData(param1:HeaderQuestsVO) : void;
+        function setData(param1:HeaderQuestsVO, param2:Boolean) : void;
 
         function setCollapsePoint(param1:int, param2:int) : void;
 

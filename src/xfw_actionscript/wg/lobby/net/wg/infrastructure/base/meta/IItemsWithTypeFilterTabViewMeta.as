@@ -11,6 +11,8 @@ package net.wg.infrastructure.base.meta
 
         function onFiltersChangeS(param1:int) : void;
 
+        function navigateToStoreS() : void;
+
         function as_initTypeFilter(param1:Object) : void;
 
         function as_resetFilter(param1:int) : void;

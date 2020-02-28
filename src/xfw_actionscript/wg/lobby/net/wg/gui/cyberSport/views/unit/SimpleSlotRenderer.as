@@ -53,7 +53,7 @@ package net.wg.gui.cyberSport.views.unit
 
         public function get slotLabelTextField() : TextField
         {
-            return slotLabel;
+            return slotLabel.textField;
         }
     }
 }

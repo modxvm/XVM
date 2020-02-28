@@ -12,6 +12,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public var onMessageEnded:Function;
 
+        public var onMessageHiding:Function;
+
         private var _gameMessageVO:GameMessageVO;
 
         public function GameMessagesPanelMeta()
@@ -39,6 +41,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.onMessageEnded,"onMessageEnded" + Errors.CANT_NULL);
             this.onMessageEnded(param1,param2);
+        }
+
+        public function onMessageHidingS(param1:String, param2:int) : void
+        {
+            App.utils.asserter.assertNotNull(this.onMessageHiding,"onMessageHiding" + Errors.CANT_NULL);
+            this.onMessageHiding(param1,param2);
         }
 
         public final function as_addMessage(param1:Object) : void

@@ -23,6 +23,8 @@ package net.wg.gui.lobby.epicBattles.components
 
         private var _bgIsLoaded:Boolean = false;
 
+        private var _baseDisposed:Boolean = false;
+
         public function BackgroundComponent()
         {
             super();
@@ -32,18 +34,26 @@ package net.wg.gui.lobby.epicBattles.components
             addChildAt(this._loader,0);
         }
 
+        protected function onDispose() : void
+        {
+            this._loader.contentLoaderInfo.removeEventListener(Event.COMPLETE,this.onLoaderCompleteHandler);
+            if(this._bgIsLoaded)
+            {
+                this._loader.unload();
+            }
+            removeChild(this._loader);
+            this._loader = null;
+            this.vignetteMC = null;
+        }
+
         public final function dispose() : void
         {
-            if(this._loader != null)
+            if(this._baseDisposed)
             {
-                if(this._bgIsLoaded)
-                {
-                    this._loader.unload();
-                }
-                this._loader.contentLoaderInfo.removeEventListener(Event.COMPLETE,this.onLoaderCompleteHandler);
-                this._loader = null;
+                return;
             }
-            this.vignetteMC = null;
+            this.onDispose();
+            this._baseDisposed = true;
         }
 
         public function setBackground(param1:String) : void
@@ -51,8 +61,6 @@ package net.wg.gui.lobby.epicBattles.components
             this._bgIsLoaded = false;
             var _loc2_:URLRequest = new URLRequest(param1);
             var _loc3_:LoaderContext = new LoaderContext(false,ApplicationDomain.currentDomain);
-            this._loader.scaleX = 1;
-            this._loader.scaleY = 1;
             this._loader.load(_loc2_,_loc3_);
         }
 
@@ -71,19 +79,11 @@ package net.wg.gui.lobby.epicBattles.components
             var _loc2_:* = 0;
             if(this._bgIsLoaded)
             {
-                _loc1_ = this._loader.width / this._loader.scaleX;
-                _loc2_ = this._loader.height / this._loader.scaleY;
-                if(this._height < _loc2_ * this._width / _loc1_)
-                {
-                    this._loader.width = this._width;
-                    this._loader.scaleY = this._loader.scaleX;
-                }
-                else
-                {
-                    this._loader.height = this._height;
-                    this._loader.scaleX = this._loader.scaleY;
-                }
-                this._loader.y = -y | 0;
+                _loc1_ = this._loader.content.width;
+                _loc2_ = this._loader.content.height;
+                this._loader.scaleX = this._loader.scaleY = Math.max(this._width / _loc1_,this._height / _loc2_);
+                this._loader.x = this._width - this._loader.width >> 1;
+                this._loader.y = this._height - this._loader.height >> 1;
             }
         }
 

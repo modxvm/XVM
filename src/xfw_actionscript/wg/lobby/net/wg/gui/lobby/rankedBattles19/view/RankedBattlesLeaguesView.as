@@ -272,7 +272,8 @@ package net.wg.gui.lobby.rankedBattles19.view
 
         private function updateLayoutVertical() : void
         {
-            var _loc1_:int = height - viewPadding.top - this.statsBlock.height;
+            var _loc1_:* = 0;
+            _loc1_ = height - viewPadding.top - this.statsBlock.height;
             if(this._isSmall)
             {
                 _loc1_ = _loc1_ - (LEAGUE_BLOCK_HEIGHT_SMALL + TITLE_BLOCK_H_SMALL);
