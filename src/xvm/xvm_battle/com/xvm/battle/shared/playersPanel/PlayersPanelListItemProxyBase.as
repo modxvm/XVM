@@ -188,7 +188,7 @@ package com.xvm.battle.shared.playersPanel
             DEFAULT_VEHICLE_LEVEL_X = ui.vehicleLevel.x;
             DEFAULT_FRAGS_WIDTH = ui.fragsTF.width;
             DEFAULT_VEHICLE_WIDTH = ui.vehicleTF.width;
-            // DEFAULT_BADGEICON_WIDTH = ui.badgeIcon.width; // TODO:1.8.0
+            DEFAULT_BADGEICON_WIDTH = ui.badge.width;
             DEFAULT_PLAYERNAMECUT_WIDTH = ui.playerNameCutTF.width;
 
             _setup();
@@ -479,7 +479,7 @@ package com.xvm.battle.shared.playersPanel
                     ui.deadBg.alpha = DEFAULT_DEADBG_ALPHA;
                     ui.fragsTF.width = DEFAULT_FRAGS_WIDTH;
                     ui.vehicleTF.width = DEFAULT_VEHICLE_WIDTH;
-                    //ui.badgeIcon.width = DEFAULT_BADGEICON_WIDTH; // TODO:1.8.0
+                    ui.badge.width = DEFAULT_BADGEICON_WIDTH;
                     ui.playerNameCutTF.width = DEFAULT_PLAYERNAMECUT_WIDTH;
                 }
 
@@ -505,7 +505,7 @@ package com.xvm.battle.shared.playersPanel
                     mcfg = pcfg[PLAYERS_PANEL_STATE_NAMES[state]];
                     ui.fragsTF.visible = false;
                     ui.vehicleTF.visible = false;
-                    //ui.badgeIcon.visible = false; // TODO:1.8.0
+                    ui.badge.visible = false;
                     ui.playerNameCutTF.visible = false;
                     ui.playerNameFullTF.visible = false;
                     if (mcfg.standardFields)
@@ -519,7 +519,7 @@ package com.xvm.battle.shared.playersPanel
                                     ui.fragsTF.visible = true;
                                     break;
                                 case "badge":
-                                    //ui.badgeIcon.visible = true; // TODO:1.8.0
+                                    ui.badge.visible = true;
                                     break;
                                 case "nick":
                                     ui.playerNameFullTF.visible = true;
@@ -623,7 +623,7 @@ package com.xvm.battle.shared.playersPanel
 
         private function _updateBadgeIcon():void
         {
-            //ui.badgeIcon.alpha = Macros.FormatNumber(mcfg.rankBadgeAlpha, currentPlayerState, currentPlayerState.isAlive ? 100 : 70) / 100.0; // TODO:1.8.0
+            ui.badge.alpha = Macros.FormatNumber(mcfg.rankBadgeAlpha, currentPlayerState, currentPlayerState.isAlive ? 100 : 70) / 100.0;
         }
 
         // update positions
@@ -754,8 +754,8 @@ package com.xvm.battle.shared.playersPanel
             {
                 case "frags":
                     return ui.fragsTF;
-                //case "badge": // TODO:1.8.0
-                //    return ui.badgeIcon; // TODO:1.8.0
+                case "badge":
+                    return ui.badge;
                 case "nick":
                     return ui.playerNameFullTF;
                 case "vehicle":
@@ -778,16 +778,13 @@ package com.xvm.battle.shared.playersPanel
                         ui.fragsTF.width = w;
                     }
                     break;
-                // TODO:1.8.0
-                /*
-                case ui.badgeIcon:
+                case ui.badge:
                     w = Macros.FormatNumber(mcfg.rankBadgeWidth, currentPlayerState, 0);
-                    if (int(ui.badgeIcon.width) != w)
+                    if (int(ui.badge.width) != w)
                     {
-                        ui.badgeIcon.width = w;
+                        ui.badge.width = w;
                     }
                     break;
-                */
                 case ui.playerNameFullTF:
                     var maxPlayerNameTextWidth:int;
                     if (isLeftPanel)
@@ -845,11 +842,8 @@ package com.xvm.battle.shared.playersPanel
                     return Macros.FormatNumber(mcfg.vehicleLevelOffsetXLeft, currentPlayerState, 0);
                 case ui.fragsTF:
                     return Macros.FormatNumber(mcfg.fragsOffsetXLeft, currentPlayerState, 0);
-                // TODO:1.8.0
-                /*
-                case ui.badgeIcon:
+                case ui.badge:
                     return Macros.FormatNumber(mcfg.rankBadgeOffsetXLeft, currentPlayerState, 0);
-                */
                 case ui.playerNameFullTF:
                     return Macros.FormatNumber(mcfg.nickOffsetXLeft, currentPlayerState, 0);
                 case ui.vehicleTF:
@@ -870,11 +864,8 @@ package com.xvm.battle.shared.playersPanel
                     return Macros.FormatNumber(mcfg.vehicleLevelOffsetXRight, currentPlayerState, 0);
                 case ui.fragsTF:
                     return Macros.FormatNumber(mcfg.fragsOffsetXRight, currentPlayerState, 0);
-                // TODO:1.8.0
-                /*
-                case ui.badgeIcon:
+                case ui.badge:
                     return Macros.FormatNumber(mcfg.rankBadgeOffsetXRight, currentPlayerState, 0);
-                */
                 case ui.playerNameFullTF:
                     return Macros.FormatNumber(mcfg.nickOffsetXRight, currentPlayerState, 0);
                 case ui.vehicleTF:

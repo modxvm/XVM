@@ -26,6 +26,7 @@ package com.xvm.battle.shared.battleloading
     import net.wg.gui.battle.battleloading.renderers.BaseRendererContainer;
     import net.wg.gui.battle.components.BattleAtlasSprite;
     import net.wg.gui.battle.views.stats.constants.PlayerStatusSchemeName;
+    import net.wg.gui.components.controls.BadgeComponent;
     import net.wg.gui.components.icons.PlayerActionMarker;
     import net.wg.infrastructure.interfaces.IColorScheme;
     import scaleform.gfx.TextFieldEx;
@@ -63,7 +64,7 @@ package com.xvm.battle.shared.battleloading
         private var _vehicleIconLoaded:Boolean = false;
 
         private var _defaults:XvmItemRendererDefaults;
-        private var _badgeIcon:BattleAtlasSprite;
+        private var _badge:BadgeComponent;
         private var _nameField:TextField;
         private var _vehicleField:TextField;
         private var _vehicleIcon:BattleAtlasSprite;
@@ -142,7 +143,7 @@ package com.xvm.battle.shared.battleloading
                 _icoIGR = container.icoIGRsEnemy[position];
                 _icoTester = container.icoTestersEnemy[position];
                 _backTester = container.backTestersEnemy[position];
-                _badgeIcon = container.badgesEnemy[position];
+                _badge = container.badgesEnemy[position];
             }
             else
             {
@@ -155,7 +156,7 @@ package com.xvm.battle.shared.battleloading
                 _icoIGR = container.icoIGRsAlly[position];
                 _icoTester = container.icoTestersAlly[position];
                 _backTester = container.backTestersAlly[position];
-                _badgeIcon = container.badgesAlly[position];
+                _badge = container.badgesAlly[position];
             }
 
             // align fields
@@ -199,7 +200,7 @@ package com.xvm.battle.shared.battleloading
             _normalHolder = null;
             _topHolder = null;
 
-            _badgeIcon = null;
+            _badge = null;
             _nameField = null;
             _vehicleField = null;
             _vehicleIcon = null;
@@ -219,7 +220,7 @@ package com.xvm.battle.shared.battleloading
             _model = model;
             if (cfg.removeRankBadgeIcon)
             {
-                //_model.badgeType = ""; // TODO:1.8.0
+                _model.badgeVO = null;
             }
             if (cfg.removeTesterIcon)
             {
@@ -286,9 +287,9 @@ package com.xvm.battle.shared.battleloading
             return _defaults;
         }
 
-        public function get badgeIcon():BattleAtlasSprite
+        public function get badgeIcon():BadgeComponent
         {
-            return _badgeIcon;
+            return _badge;
         }
 
         public function get nameField():TextField

@@ -22,6 +22,8 @@ package com.xvm.battle.classic.fullStats
     import net.wg.gui.battle.random.views.stats.components.fullStats.constants.*;
     import net.wg.gui.battle.random.views.stats.components.fullStats.tableItem.*;
     import net.wg.gui.battle.views.stats.constants.*;
+    import net.wg.gui.components.controls.BadgeComponent;
+    import net.wg.gui.components.controls.VO.BadgeVisualVO;
     import net.wg.infrastructure.interfaces.*;
     import scaleform.gfx.*;
 
@@ -59,7 +61,9 @@ package com.xvm.battle.classic.fullStats
         private var _vehicleTypeIcon:BattleAtlasSprite;
         private var _icoIGR:BattleAtlasSprite;
         private var _isIGR:Boolean = false;
-        private var _badgeIcon:BattleAtlasSprite;
+        private var _badge:BadgeComponent;
+        private var _badgeVO:BadgeVisualVO;
+        private var _hasBadge:Boolean;
 
         private var _vehicleID:Number = NaN;
         private var _vehicleIconName:String = null;
@@ -86,7 +90,7 @@ package com.xvm.battle.classic.fullStats
             _fragsTF = table.fragsCollection[index];
             _vehicleTypeIcon = table.vehicleTypeCollection[index];
             _icoIGR = table.icoIGRCollection[index];
-            _badgeIcon = table.rankBadgesCollection[index];
+            _badge = table.rankBadgesCollection[index];
             //_vehicleIcon = table.vehicleIconCollection[index];
             _vehicleLevelIcon = table.vehicleLevelCollection[index];
             _playerStatus = table.playerStatusCollection[index];
@@ -169,13 +173,11 @@ package com.xvm.battle.classic.fullStats
             _isIGR = isIGR;
         }
 
-        // TODO:1.8.0
-        /*
-        override public function setBadge(badgeType:String):void
+        override public function setBadge(_badgeVO:BadgeVisualVO, _hasBadge:Boolean):void
         {
-            super.setBadge(cfg.removeRankBadgeIcon ? "" : badgeType);
+            _badgeVO = cfg.removeRankBadgeIcon ? null : _badgeVO
+            super.setBadge(_badgeVO, _hasBadge);
         }
-        */
 
         override public function setSuffixBadge(suffixBadgeType:String):void
         {
@@ -480,21 +482,21 @@ package com.xvm.battle.classic.fullStats
             {
                 _playerNameTF.x = DEFAULT_PLAYER_NAME_X + cfg.nameFieldOffsetXLeft;
                 _playerNameTF.width = cfg.nameFieldWidthLeft;
-                if (_badgeIcon.visible)
+                if (_badge.visible)
                 {
-                    _badgeIcon.x = _playerNameTF.x;
-                    _playerNameTF.x += _badgeIcon.width + 1;
-                    _playerNameTF.width -= _badgeIcon.width + 1;
+                    _badge.x = _playerNameTF.x;
+                    _playerNameTF.x += _badge.width + 1;
+                    _playerNameTF.width -= _badge.width + 1;
                 }
             }
             else
             {
                 _playerNameTF.x = DEFAULT_PLAYER_NAME_X - cfg.nameFieldOffsetXRight + (DEFAULT_PLAYER_NAME_WIDTH - cfg.nameFieldWidthRight);
                 _playerNameTF.width = cfg.nameFieldWidthRight;
-                if (_badgeIcon.visible)
+                if (_badge.visible)
                 {
-                    _badgeIcon.x = _playerNameTF.x + _playerNameTF.width - _badgeIcon.width;
-                    _playerNameTF.width -= _badgeIcon.width + 1;
+                    _badge.x = _playerNameTF.x + _playerNameTF.width - _badge.width;
+                    _playerNameTF.width -= _badge.width + 1;
                 }
             }
         }

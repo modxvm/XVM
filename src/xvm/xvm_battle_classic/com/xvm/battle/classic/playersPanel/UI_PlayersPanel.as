@@ -434,15 +434,13 @@ package com.xvm.battle.classic.playersPanel
 
         private function updateHasBadges(data:DAAPIVehiclesDataVO):void
         {
-            // TODO:1.8.0
-            /*
             _leftHasBadges = false;
             _rightHasBadges = false;
             var vi:DAAPIVehicleInfoVO;
 
             for each (vi in data.leftVehicleInfos)
             {
-                if (vi.badgeType)
+                if (vi.badgeVO)
                 {
                     _leftHasBadges = true;
                     break;
@@ -451,13 +449,12 @@ package com.xvm.battle.classic.playersPanel
 
             for each(vi in data.rightVehicleInfos)
             {
-                if (vi.badgeType)
+                if (vi.badgeVO)
                 {
                     _rightHasBadges = true;
                     break;
                 }
             }
-            */
         }
 
         private function setFixedOrder(data:DAAPIVehiclesDataVO):void
