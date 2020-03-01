@@ -61,7 +61,7 @@
       {
         // Background image, left part.
         // Фоновая картинка, левая часть.
-        "x": 66,
+        "x": 136,
         "y": 193,
         "screenHAlign": "center",
         "format": "<img src='xvm://res/icons/clock/clockBg.png' width='160' height='80'>"
@@ -69,7 +69,7 @@
       {
         // Background image, right part.
         // Фоновая картинка, правая часть.
-        "x": 390,
+        "x": 460,
         "y": 193,
         "screenHAlign": "center",
         "scaleX": -1,
@@ -79,10 +79,10 @@
         // Text block.
         // Текстовый блок.
         "updateEvent": "ON_MY_STAT_LOADED",
-        "x": 185,
+        "x": 255,
         "y": 198,
         "width": 320,
-        "height": 150,
+        "height": 75,
         "screenHAlign": "center",
         "shadow": { "alpha": 80, "blur": 4, "strength": 2 },
         "textFormat": { "color": "0x959688", "size": 15 },
