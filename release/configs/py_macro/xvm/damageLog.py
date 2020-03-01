@@ -19,7 +19,7 @@ from helpers import dependency
 from skeletons.gui.battle_session import IBattleSessionProvider
 from skeletons.gui.game_control import IBootcampController
 
-from xfw import *
+from xfw.events import registerEvent, overrideMethod
 from xfw_actionscript.python import *
 
 from xvm_main.python.logger import *
@@ -373,7 +373,6 @@ class Data(object):
             self.data['squadnum'] = None
         self.updateLabels()
 
-
     def typeShell(self, effectsIndex):
         self.data['costShell'] = 'unknown'
         self.data['shellKind'] = 'not_shell'
@@ -529,7 +528,7 @@ class Data(object):
         self.data['oldHealth'] = newHealth
         if self.data['damage'] < 0:
             return
-        if attackReasonID < 8:
+        if (attackReasonID < 8) or (attackReasonID == 12):
             self.data['attackReasonID'] = attackReasonID
         elif attackReasonID in [9, 10, 13, 24]:
             self.data['attackReasonID'] = 24

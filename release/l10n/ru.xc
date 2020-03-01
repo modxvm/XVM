@@ -65,6 +65,7 @@
     // DamageLog
     "sec": "сек",
     "drowning": "затоплен",
+    "forsaken": "брошен",
     "fireMsg": "ПОЖАР",
     // Shell kind, macro {{type-shell}}
     "armor_piercing": "ББ",

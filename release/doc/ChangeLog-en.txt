@@ -8,6 +8,9 @@
   * removed option:
       "hangar"/"showRewardWindow"
 
+  [PYTHON MACROS]
+  * damageLog: in the “dmg-kind” and “c:dmg-kind” sections, the “recovery” parameter has been added
+
 XVM-8.3.1:
   [GENERAL]
   * World of Tanks 1.7.1.2
