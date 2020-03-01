@@ -65,6 +65,7 @@
     // DamageLog
     "sec": "sec",
     "drowning": "drowning",
+    "forsaken": "forsaken",
     "fireMsg": "FIRE",
     // Shell kind, macro {{type-shell}}
     "armor_piercing": "AP",
