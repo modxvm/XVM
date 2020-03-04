@@ -220,7 +220,10 @@ package com.xvm.battle.shared.battleloading
             _model = model;
             if (cfg.removeRankBadgeIcon)
             {
-                _model.badgeVO = null;
+                if (this._badge)
+                {
+                    this._badge.visible = false;
+                }
             }
             if (cfg.removeTesterIcon)
             {
