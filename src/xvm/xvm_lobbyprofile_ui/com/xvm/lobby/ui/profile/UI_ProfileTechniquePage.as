@@ -46,6 +46,8 @@ package com.xvm.lobby.ui.profile
             super.onDispose();
         }
 
+        private var isFirstHangarSelected: Boolean = true;
+
         override public function as_setInitData(param1:Object):void
         {
             try
@@ -53,7 +55,11 @@ package com.xvm.lobby.ui.profile
                 if (technique)
                 {
                     technique.fixInitData(param1);
-                    param1.isInHangarSelected = Config.config.userInfo.inHangarFilterEnabled;
+                    if (isFirstHangarSelected)
+                    {
+                        param1.isInHangarSelected = Config.config.userInfo.inHangarFilterEnabled;
+                        isFirstHangarSelected = false;
+                    }
                 }
             }
             catch (ex:Error)
