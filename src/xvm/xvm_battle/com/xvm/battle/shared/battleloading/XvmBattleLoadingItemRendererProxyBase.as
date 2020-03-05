@@ -220,9 +220,16 @@ package com.xvm.battle.shared.battleloading
             _model = model;
             if (cfg.removeRankBadgeIcon)
             {
-                if (this._badge)
+                //_model.badgeVO = null;
+                //temporary solution
+                if (_model.badgeVO)
                 {
-                    this._badge.visible = false;
+                    _model.badgeVO.icon = "";
+                    _model.badgeVO.content = "";
+                    _model.badgeVO.sizeContent = "";
+                    _model.badgeVO.isDynamic = false;
+                    _model.badgeVO.isAtlasSource = false;
+
                 }
             }
             if (cfg.removeTesterIcon)
