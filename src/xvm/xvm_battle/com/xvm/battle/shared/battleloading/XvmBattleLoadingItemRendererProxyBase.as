@@ -229,7 +229,6 @@ package com.xvm.battle.shared.battleloading
                     _model.badgeVO.sizeContent = "";
                     _model.badgeVO.isDynamic = false;
                     _model.badgeVO.isAtlasSource = false;
-
                 }
             }
             if (cfg.removeTesterIcon)
@@ -528,6 +527,11 @@ package com.xvm.battle.shared.battleloading
                     badgeIcon.x = nameField.x + nameField.width - _BADGE_ICON_WIDTH;
                     nameField.width -= _BADGE_ICON_WIDTH + 1;
                 }
+                if (!cfg.removeTesterIcon)
+                {
+                    _icoTester.x = nameField.x + nameField.width - _BADGE_ICON_WIDTH - nameField.textWidth;
+                    _backTester.x = nameField.x + nameField.width - _BADGE_ICON_WIDTH / 2 - nameField.textWidth + _backTester.width;
+                }
             }
             else
             {
@@ -537,6 +541,11 @@ package com.xvm.battle.shared.battleloading
                     badgeIcon.x = nameField.x;
                     nameField.x += _BADGE_ICON_WIDTH + 1;
                     nameField.width -= _BADGE_ICON_WIDTH + 1;
+                }
+                if (!cfg.removeTesterIcon)
+                {
+                    _icoTester.x = nameField.x + nameField.textWidth;
+                    _backTester.x = nameField.x +  _BADGE_ICON_WIDTH / 2 + nameField.textWidth - _backTester.width;
                 }
             }
         }
