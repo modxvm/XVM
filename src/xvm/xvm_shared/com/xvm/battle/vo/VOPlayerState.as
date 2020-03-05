@@ -116,7 +116,7 @@ package com.xvm.battle.vo
         internal function set_badgeVO(value:*):void
         {
             _badgeVO = value;
-            if ((!_suffixBadgeType) && _badgeVO && _badgeVO.icon)
+            if (_badgeVO && _badgeVO.icon)
             {
                 __badgeId = _badgeVO.icon.replace("badge_", "");
             }
