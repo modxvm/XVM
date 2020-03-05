@@ -28,7 +28,9 @@ package com.xvm.battle.vo
         private var _playerName:String = null;
         private var _clanAbbrev:String = null;
         private var __badgeId:String = null;
-        private var __badgeType:String = "";
+        private var _badgeVO:* = null;
+        private var _hasSelectedBadge:Boolean = false;
+        private var _suffixBadgeType:String = "";
         private var _playerStatus:uint = 0;
         private var _prebattleID:Number = NaN;
         private var _region:String = null;
@@ -101,23 +103,43 @@ package com.xvm.battle.vo
             return __badgeId;
         }
 
-        internal function get badgeType():String
+        public function get hasSelectedBadge():Boolean
         {
-            return __badgeType;
+            return _hasSelectedBadge;
         }
 
-        internal function set_badgeType(value:String):void
+        public function get badgeVO():*
         {
-            __badgeType = value;
-            if (!value)
+            return _badgeVO;
+        }
+
+        internal function set_badgeVO(value:*):void
+        {
+            _badgeVO = value;
+            if ((!_suffixBadgeType) && _badgeVO && _badgeVO.icon)
             {
-                __badgeId = null;
+                __badgeId = _badgeVO.icon.replace("badge_", "");
             }
             else
             {
-                __badgeId = value.replace("badge_", "");
+                __badgeId = null;
             }
         }
+
+        internal function get suffixBadgeType():String
+        {
+            return _suffixBadgeType;
+        }
+
+        // icons of testers and someone else?
+        //internal function set_suffixBadgeType(value:String):void
+        //{
+            //_suffixBadgeType = value;
+            //if (value)
+            //{
+                //__badgeId = value.replace("badge_", "");
+            //}
+        //}
 
         override public function get isAlly():Boolean
         {

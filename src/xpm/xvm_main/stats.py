@@ -687,9 +687,9 @@ class _Player(object):
         self.name = vData['name']
         self.clan = vData['clanAbbrev']
         self.badgeId = None
-        ranked = vData.get('ranked', None)
-        if ranked:
-            self.badgeId = str(ranked[1])
+        badges = vData.get('badges', None)
+        if badges:
+            self.badgeId = str(badges[0])
         self.clanInfo = topclans.getClanInfo(self.clan)
         self.vehCD = None
         if 'typeCompDescr' in vData:
