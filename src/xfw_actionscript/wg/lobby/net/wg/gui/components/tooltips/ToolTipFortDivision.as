@@ -3,9 +3,9 @@ package net.wg.gui.components.tooltips
     import flash.text.TextField;
     import net.wg.gui.components.controls.UILoaderAlt;
     import net.wg.data.managers.ITooltipProps;
+    import net.wg.gui.components.tooltips.VO.FortDivisionVO;
     import net.wg.gui.components.tooltips.VO.ToolTipBlockVO;
     import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
-    import net.wg.gui.components.tooltips.VO.FortDivisionVO;
     import flash.text.TextFieldAutoSize;
     import net.wg.gui.components.tooltips.helpers.Utils;
     import flash.text.StyleSheet;
@@ -60,16 +60,18 @@ package net.wg.gui.components.tooltips
         override protected function redraw() : void
         {
             var _loc1_:* = NaN;
+            var _loc3_:FortDivisionVO = null;
+            var _loc4_:* = NaN;
             var _loc6_:ToolTipBlockVO = null;
             var _loc7_:* = NaN;
             var _loc8_:ToolTipBlockResultVO = null;
             _loc1_ = 320;
             var _loc2_:Separator = null;
             separators = new Vector.<Separator>();
-            var _loc3_:FortDivisionVO = new FortDivisionVO(_data);
+            _loc3_ = new FortDivisionVO(_data);
             contentMargin.bottom = 24;
             topPosition = bgShadowMargin.top + contentMargin.top;
-            var _loc4_:Number = bgShadowMargin.left + contentMargin.left;
+            _loc4_ = bgShadowMargin.left + contentMargin.left;
             var _loc5_:Number = bgShadowMargin.horizontal + contentMargin.horizontal;
             this._headerTF.autoSize = TextFieldAutoSize.LEFT;
             this._headerTF.htmlText = Utils.instance.htmlWrapper(_loc3_.name,Utils.instance.COLOR_HEADER,18,"$TitleFont");

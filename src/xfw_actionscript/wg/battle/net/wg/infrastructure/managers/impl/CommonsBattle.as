@@ -10,8 +10,6 @@ package net.wg.infrastructure.managers.impl
     public class CommonsBattle extends CommonsBase
     {
 
-        private static const IGR_TYPE_PREMIUM:int = 2;
-
         public function CommonsBattle()
         {
             super();
@@ -103,16 +101,6 @@ package net.wg.infrastructure.managers.impl
             }
             param1.textColor = _loc9_;
             return _loc11_;
-        }
-
-        override public function getFullPlayerName(param1:IUserProps, param2:Boolean = false) : String
-        {
-            if(param1.isAnonymized && param2)
-            {
-                return param1.prefix + param1.fakeName + param1.suffix;
-            }
-            var _loc3_:String = (param1.igrType == IGR_TYPE_PREMIUM?IMG_TAG_OPEN_PREMIUM:IMG_TAG_OPEN_BASIC) + param1.igrVspace + IMG_TAG_CLOSE;
-            return param1.prefix + param1.userName + (param1.clanAbbrev?CLAN_TAG_OPEN + param1.clanAbbrev + CLAN_TAG_CLOSE:Values.EMPTY_STR) + (param1.region?Values.SPACE_STR + param1.region:Values.EMPTY_STR) + (param1.igrType > 0?Values.SPACE_STR + _loc3_:Values.EMPTY_STR) + param1.suffix;
         }
     }
 }
