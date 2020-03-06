@@ -83,8 +83,8 @@ diff -Naur lobby.orig/net/wg/gui/lobby/battleResults/components/BattleResultImag
 -            if(this.vehicleIcon.visible = param1)
 +            if(this.vehicleIcon.visible == param1)
              {
--                _loc4_ = BattleResultImageSwitcherView.getPreset(param3);
-+                //_loc4_ = BattleResultImageSwitcherView.getPreset(param3);
+-                _loc4_ = VehicleIconPreset.getPreset(param3);
++                //_loc4_ = VehicleIconPreset.getPreset(param3);
                  App.utils.asserter.assertNotNull(_loc4_,"Icon preset for level: " + param3 + Errors.WASNT_FOUND);
                  this.vehicleIcon.source = RES_SHOP.getVehicleIcon(_loc4_.size,param2);
                  this.vehicleIcon.scaleX = this.vehicleIcon.scaleY = _loc4_.scale;
@@ -139,7 +139,7 @@ diff -Naur lobby.orig/net/wg/gui/lobby/hangar/Hangar.as lobby/net/wg/gui/lobby/h
 diff -Naur lobby.orig/net/wg/gui/lobby/hangar/ammunitionPanel/AmmunitionPanel.as lobby/net/wg/gui/lobby/hangar/ammunitionPanel/AmmunitionPanel.as
 --- lobby.orig/net/wg/gui/lobby/hangar/ammunitionPanel/AmmunitionPanel.as	2020-02-28 20:16:18.177148500 +0200
 +++ lobby/net/wg/gui/lobby/hangar/ammunitionPanel/AmmunitionPanel.as	2020-02-28 20:19:21.853659000 +0200
-@@ -1050,12 +1050,14 @@
+@@ -1042,12 +1042,14 @@
  
          private function animationCompleteHandler(param1:Event) : void
          {
@@ -173,7 +173,7 @@ diff -Naur lobby.orig/net/wg/gui/lobby/header/LobbyHeader.as lobby/net/wg/gui/lo
 diff -Naur lobby.orig/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonContentItem.as lobby/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonContentItem.as
 --- lobby.orig/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonContentItem.as	2020-02-28 20:16:08.282924900 +0200
 +++ lobby/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonContentItem.as	2020-02-28 20:19:21.895951000 +0200
-@@ -324,11 +324,21 @@
+@@ -323,11 +323,21 @@
              this._needUpdateFontSize = param1;
          }
  

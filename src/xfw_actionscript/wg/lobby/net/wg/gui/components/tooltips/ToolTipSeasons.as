@@ -94,13 +94,11 @@ package net.wg.gui.components.tooltips
 
         private function onIcoLoadedCompleteHandler(param1:UILoaderEvent) : void
         {
-            var _loc2_:* = NaN;
-            var _loc3_:* = NaN;
             if(this.seasonsIco.hasEventListener(UILoaderEvent.COMPLETE))
             {
                 this.seasonsIco.removeEventListener(UILoaderEvent.COMPLETE,this.onIcoLoadedCompleteHandler);
             }
-            _loc2_ = contentMargin.left;
+            var _loc2_:Number = contentMargin.left;
             this.seasonsIco.x = contentMargin.left + bgShadowMargin.left;
             this.seasonsIco.y = contentMargin.top + bgShadowMargin.top;
             this.headerTF.x = this.seasonsIco.x + this.seasonsIco.width + _loc2_;
@@ -108,7 +106,7 @@ package net.wg.gui.components.tooltips
             this.headerTF.width = this._TOOLTIP_WIDTH - this.headerTF.x - contentMargin.right;
             background.width = this._TOOLTIP_WIDTH;
             background.height = Math.max(this.headerTF.textHeight,this.seasonsIco.height) + contentMargin.top + bgShadowMargin.top + contentMargin.bottom + bgShadowMargin.bottom;
-            _loc3_ = 1;
+            var _loc3_:Number = 1;
             this.whiteBg.x = bgShadowMargin.left + _loc3_;
             this.whiteBg.y = bgShadowMargin.top;
             this.whiteBg.width = this._TOOLTIP_WIDTH - bgShadowMargin.horizontal - _loc3_ * 2;

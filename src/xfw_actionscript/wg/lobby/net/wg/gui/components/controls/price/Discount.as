@@ -27,13 +27,12 @@ package net.wg.gui.components.controls.price
 
         public var valueTF:TextField = null;
 
-        private var _state:String;
+        private var _state:String = "camouflage";
 
         private var _data:PriceVO = null;
 
         public function Discount()
         {
-            this._state = ONLY_BG_STATE;
             super();
         }
 

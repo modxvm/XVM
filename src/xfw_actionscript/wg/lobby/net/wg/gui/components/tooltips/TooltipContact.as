@@ -34,7 +34,6 @@ package net.wg.gui.components.tooltips
 
         override protected function redraw() : void
         {
-            var _loc2_:Image = null;
             var _loc3_:TextField = null;
             var _loc5_:uint = 0;
             var _loc6_:* = 0;
@@ -42,7 +41,7 @@ package net.wg.gui.components.tooltips
             var _loc8_:TextField = null;
             var _loc9_:TextFormat = null;
             var _loc1_:ContactTooltipVO = new ContactTooltipVO(_data);
-            _loc2_ = content.statusIndicator;
+            var _loc2_:Image = content.statusIndicator;
             _loc3_ = content.title;
             var _loc4_:Number = contentMargin.left + bgShadowMargin.left;
             _loc2_.x = _loc4_;
@@ -93,8 +92,7 @@ package net.wg.gui.components.tooltips
 
         private function createTextField(param1:int) : TextField
         {
-            var _loc2_:TextField = null;
-            _loc2_ = App.textMgr.createTextField();
+            var _loc2_:TextField = App.textMgr.createTextField();
             _loc2_.y = topPosition;
             _loc2_.x = param1;
             _loc2_.multiline = true;
