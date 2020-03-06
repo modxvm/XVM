@@ -117,14 +117,6 @@ package
 
         public static const MAPS_ICONS_BATTLELOADING_TIPS_TIP186:String = "../maps/icons/battleLoading/tips/tip186.png";
 
-        public static const MAPS_ICONS_BATTLELOADING_TIPS_TIP187:String = "../maps/icons/battleLoading/tips/tip187.png";
-
-        public static const MAPS_ICONS_BATTLELOADING_TIPS_TIP188:String = "../maps/icons/battleLoading/tips/tip188.png";
-
-        public static const MAPS_ICONS_BATTLELOADING_TIPS_TIP189:String = "../maps/icons/battleLoading/tips/tip189.png";
-
-        public static const MAPS_ICONS_BATTLELOADING_TIPS_TIP190:String = "../maps/icons/battleLoading/tips/tip190.png";
-
         public static const MAPS_ICONS_BATTLELOADING_TIPS_TIP20:String = "../maps/icons/battleLoading/tips/tip20.png";
 
         public static const MAPS_ICONS_BATTLELOADING_TIPS_TIP23:String = "../maps/icons/battleLoading/tips/tip23.png";
@@ -587,29 +579,29 @@ package
 
         public static const MAPS_ICONS_BATTLEPASS2020_REWARDS_STYLE:String = "../maps/icons/battlePass2020/rewards/style.png";
 
-        public static const MAPS_ICONS_BATTLEPASS2020_REWARDS_STYLE_3D_15697:String = "../maps/icons/battlePass2020/rewards/style_3d_15697.png";
+        public static const MAPS_ICONS_BATTLEPASS2020_REWARDS_STYLE_15697:String = "../maps/icons/battlePass2020/rewards/style_15697.png";
 
-        public static const MAPS_ICONS_BATTLEPASS2020_REWARDS_STYLE_3D_15697_MEDIUM:String = "../maps/icons/battlePass2020/rewards/style_3d_15697_medium.png";
+        public static const MAPS_ICONS_BATTLEPASS2020_REWARDS_STYLE_15697_MEDIUM:String = "../maps/icons/battlePass2020/rewards/style_15697_medium.png";
 
-        public static const MAPS_ICONS_BATTLEPASS2020_REWARDS_STYLE_3D_15697_SECONDARY:String = "../maps/icons/battlePass2020/rewards/style_3d_15697_secondary.png";
+        public static const MAPS_ICONS_BATTLEPASS2020_REWARDS_STYLE_15697_SECONDARY:String = "../maps/icons/battlePass2020/rewards/style_15697_secondary.png";
 
-        public static const MAPS_ICONS_BATTLEPASS2020_REWARDS_STYLE_3D_15697_SECONDARY_MEDIUM:String = "../maps/icons/battlePass2020/rewards/style_3d_15697_secondary_medium.png";
+        public static const MAPS_ICONS_BATTLEPASS2020_REWARDS_STYLE_15697_SECONDARY_MEDIUM:String = "../maps/icons/battlePass2020/rewards/style_15697_secondary_medium.png";
 
-        public static const MAPS_ICONS_BATTLEPASS2020_REWARDS_STYLE_3D_15697_SECONDARY_SMALL:String = "../maps/icons/battlePass2020/rewards/style_3d_15697_secondary_small.png";
+        public static const MAPS_ICONS_BATTLEPASS2020_REWARDS_STYLE_15697_SECONDARY_SMALL:String = "../maps/icons/battlePass2020/rewards/style_15697_secondary_small.png";
 
-        public static const MAPS_ICONS_BATTLEPASS2020_REWARDS_STYLE_3D_15697_SMALL:String = "../maps/icons/battlePass2020/rewards/style_3d_15697_small.png";
+        public static const MAPS_ICONS_BATTLEPASS2020_REWARDS_STYLE_15697_SMALL:String = "../maps/icons/battlePass2020/rewards/style_15697_small.png";
 
-        public static const MAPS_ICONS_BATTLEPASS2020_REWARDS_STYLE_3D_22017:String = "../maps/icons/battlePass2020/rewards/style_3d_22017.png";
+        public static const MAPS_ICONS_BATTLEPASS2020_REWARDS_STYLE_22017:String = "../maps/icons/battlePass2020/rewards/style_22017.png";
 
-        public static const MAPS_ICONS_BATTLEPASS2020_REWARDS_STYLE_3D_22017_MEDIUM:String = "../maps/icons/battlePass2020/rewards/style_3d_22017_medium.png";
+        public static const MAPS_ICONS_BATTLEPASS2020_REWARDS_STYLE_22017_MEDIUM:String = "../maps/icons/battlePass2020/rewards/style_22017_medium.png";
 
-        public static const MAPS_ICONS_BATTLEPASS2020_REWARDS_STYLE_3D_22017_SECONDARY:String = "../maps/icons/battlePass2020/rewards/style_3d_22017_secondary.png";
+        public static const MAPS_ICONS_BATTLEPASS2020_REWARDS_STYLE_22017_SECONDARY:String = "../maps/icons/battlePass2020/rewards/style_22017_secondary.png";
 
-        public static const MAPS_ICONS_BATTLEPASS2020_REWARDS_STYLE_3D_22017_SECONDARY_MEDIUM:String = "../maps/icons/battlePass2020/rewards/style_3d_22017_secondary_medium.png";
+        public static const MAPS_ICONS_BATTLEPASS2020_REWARDS_STYLE_22017_SECONDARY_MEDIUM:String = "../maps/icons/battlePass2020/rewards/style_22017_secondary_medium.png";
 
-        public static const MAPS_ICONS_BATTLEPASS2020_REWARDS_STYLE_3D_22017_SECONDARY_SMALL:String = "../maps/icons/battlePass2020/rewards/style_3d_22017_secondary_small.png";
+        public static const MAPS_ICONS_BATTLEPASS2020_REWARDS_STYLE_22017_SECONDARY_SMALL:String = "../maps/icons/battlePass2020/rewards/style_22017_secondary_small.png";
 
-        public static const MAPS_ICONS_BATTLEPASS2020_REWARDS_STYLE_3D_22017_SMALL:String = "../maps/icons/battlePass2020/rewards/style_3d_22017_small.png";
+        public static const MAPS_ICONS_BATTLEPASS2020_REWARDS_STYLE_22017_SMALL:String = "../maps/icons/battlePass2020/rewards/style_22017_small.png";
 
         public static const MAPS_ICONS_BATTLEPASS2020_REWARDS_STYLE_MEDIUM:String = "../maps/icons/battlePass2020/rewards/style_medium.png";
 
@@ -653,19 +645,11 @@ package
 
         public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_OR:String = "../maps/icons/battlePass2020/tooltips/or.png";
 
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_PERK_LIGHT:String = "../maps/icons/battlePass2020/tooltips/perk_light.png";
-
         public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_POINTS_136:String = "../maps/icons/battlePass2020/tooltips/points_136.png";
-
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_POINTS_16:String = "../maps/icons/battlePass2020/tooltips/points_16.png";
 
         public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_POINTS_24:String = "../maps/icons/battlePass2020/tooltips/points_24.png";
 
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_POINTS_80:String = "../maps/icons/battlePass2020/tooltips/points_80.png";
-
         public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_POINTS_REWARD:String = "../maps/icons/battlePass2020/tooltips/points_reward.png";
-
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_POINTS_REWARD_56:String = "../maps/icons/battlePass2020/tooltips/points_reward_56.png";
 
         public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_RIBBON_LARGE:String = "../maps/icons/battlePass2020/tooltips/Ribbon_large.png";
 
@@ -676,58 +660,6 @@ package
         public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_TOOLTIP_LOCK:String = "../maps/icons/battlePass2020/tooltips/tooltip_lock.png";
 
         public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_YOUTUBE_BUTTON:String = "../maps/icons/battlePass2020/tooltips/youtube-button.png";
-
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_ICONS_ICON_PERK_BROTHERHOOD:String = "../maps/icons/battlePass2020/tooltips/icons/icon_perk_brotherhood.png";
-
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_ICONS_ICON_PERK_CAMOUFLAGE:String = "../maps/icons/battlePass2020/tooltips/icons/icon_perk_camouflage.png";
-
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_ICONS_ICON_PERK_COMMANDER_EAGLEEYE:String = "../maps/icons/battlePass2020/tooltips/icons/icon_perk_commander_eagleEye.png";
-
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_ICONS_ICON_PERK_COMMANDER_EXPERT:String = "../maps/icons/battlePass2020/tooltips/icons/icon_perk_commander_expert.png";
-
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_ICONS_ICON_PERK_COMMANDER_SIXTHSENSE:String = "../maps/icons/battlePass2020/tooltips/icons/icon_perk_commander_sixthSense.png";
-
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_ICONS_ICON_PERK_COMMANDER_UNIVERSALIST:String = "../maps/icons/battlePass2020/tooltips/icons/icon_perk_commander_universalist.png";
-
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_ICONS_ICON_PERK_DRIVER_BADROADSKING:String = "../maps/icons/battlePass2020/tooltips/icons/icon_perk_driver_badRoadsKing.png";
-
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_ICONS_ICON_PERK_DRIVER_RAMMINGMASTER:String = "../maps/icons/battlePass2020/tooltips/icons/icon_perk_driver_rammingMaster.png";
-
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_ICONS_ICON_PERK_DRIVER_SMOOTHDRIVING:String = "../maps/icons/battlePass2020/tooltips/icons/icon_perk_driver_smoothDriving.png";
-
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_ICONS_ICON_PERK_DRIVER_TIDYPERSON:String = "../maps/icons/battlePass2020/tooltips/icons/icon_perk_driver_tidyPerson.png";
-
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_ICONS_ICON_PERK_DRIVER_VIRTUOSO:String = "../maps/icons/battlePass2020/tooltips/icons/icon_perk_driver_virtuoso.png";
-
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_ICONS_ICON_PERK_FIREFIGHTING:String = "../maps/icons/battlePass2020/tooltips/icons/icon_perk_fireFighting.png";
-
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_ICONS_ICON_PERK_GUNNER_GUNSMITH:String = "../maps/icons/battlePass2020/tooltips/icons/icon_perk_gunner_gunsmith.png";
-
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_ICONS_ICON_PERK_GUNNER_RANCOROUS:String = "../maps/icons/battlePass2020/tooltips/icons/icon_perk_gunner_rancorous.png";
-
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_ICONS_ICON_PERK_GUNNER_SMOOTHTURRET:String = "../maps/icons/battlePass2020/tooltips/icons/icon_perk_gunner_smoothTurret.png";
-
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_ICONS_ICON_PERK_GUNNER_SNIPER:String = "../maps/icons/battlePass2020/tooltips/icons/icon_perk_gunner_sniper.png";
-
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_ICONS_ICON_PERK_GUNNER_WOODHUNTER:String = "../maps/icons/battlePass2020/tooltips/icons/icon_perk_gunner_woodHunter.png";
-
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_ICONS_ICON_PERK_LOADER_DESPERADO:String = "../maps/icons/battlePass2020/tooltips/icons/icon_perk_loader_desperado.png";
-
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_ICONS_ICON_PERK_LOADER_INTUITION:String = "../maps/icons/battlePass2020/tooltips/icons/icon_perk_loader_intuition.png";
-
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_ICONS_ICON_PERK_LOADER_PEDANT:String = "../maps/icons/battlePass2020/tooltips/icons/icon_perk_loader_pedant.png";
-
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_ICONS_ICON_PERK_MENTOR:String = "../maps/icons/battlePass2020/tooltips/icons/icon_perk_mentor.png";
-
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_ICONS_ICON_PERK_RADIOMAN_FINDER:String = "../maps/icons/battlePass2020/tooltips/icons/icon_perk_radioman_finder.png";
-
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_ICONS_ICON_PERK_RADIOMAN_INVENTOR:String = "../maps/icons/battlePass2020/tooltips/icons/icon_perk_radioman_inventor.png";
-
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_ICONS_ICON_PERK_RADIOMAN_LASTEFFORT:String = "../maps/icons/battlePass2020/tooltips/icons/icon_perk_radioman_lastEffort.png";
-
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_ICONS_ICON_PERK_RADIOMAN_RETRANSMITTER:String = "../maps/icons/battlePass2020/tooltips/icons/icon_perk_radioman_retransmitter.png";
-
-        public static const MAPS_ICONS_BATTLEPASS2020_TOOLTIPS_ICONS_ICON_PERK_REPAIR:String = "../maps/icons/battlePass2020/tooltips/icons/icon_perk_repair.png";
 
         public static const MAPS_ICONS_BATTLEPASS2020_TROPHY_UPGRADE_UPGRADE_ARROW_ICON:String = "../maps/icons/battlePass2020/trophy_upgrade/upgrade_arrow_icon.png";
 
@@ -1646,10 +1578,6 @@ package
         public static const MAPS_ICONS_COMPONENTS_PROGRESS_BAR_GLOW_SMALL:String = "../maps/icons/components/progress_bar/glow_small.png";
 
         public static const MAPS_ICONS_COMPONENTS_PROGRESS_BAR_GLOW_SMALL_BLUE:String = "../maps/icons/components/progress_bar/glow_small_blue.png";
-
-        public static const MAPS_ICONS_COMPONENTS_PROGRESS_BAR_GLOW_SMALL_VIOLET:String = "../maps/icons/components/progress_bar/glow_small_violet.png";
-
-        public static const MAPS_ICONS_COMPONENTS_PROGRESS_BAR_GLOW_VIOLET:String = "../maps/icons/components/progress_bar/glow_violet.png";
 
         public static const MAPS_ICONS_COMPONENTS_SCROLL_AREA_ARROW_DOWN:String = "../maps/icons/components/scroll_area/arrow_down.png";
 
@@ -6749,8 +6677,6 @@ package
 
         public static const MAPS_ICONS_QUESTS_BONUSES_BIG_STYLE:String = "../maps/icons/quests/bonuses/big/style.png";
 
-        public static const MAPS_ICONS_QUESTS_BONUSES_BIG_STYLE_3D:String = "../maps/icons/quests/bonuses/big/style_3d.png";
-
         public static const MAPS_ICONS_QUESTS_BONUSES_BIG_TACTICALTRAINING:String = "../maps/icons/quests/bonuses/big/tacticalTraining.png";
 
         public static const MAPS_ICONS_QUESTS_BONUSES_BIG_TANKMAN:String = "../maps/icons/quests/bonuses/big/tankman.png";
@@ -7098,8 +7024,6 @@ package
         public static const MAPS_ICONS_QUESTS_BONUSES_SMALL_STEREOSCOPE:String = "../maps/icons/quests/bonuses/small/stereoscope.png";
 
         public static const MAPS_ICONS_QUESTS_BONUSES_SMALL_STYLE:String = "../maps/icons/quests/bonuses/small/style.png";
-
-        public static const MAPS_ICONS_QUESTS_BONUSES_SMALL_STYLE_3D:String = "../maps/icons/quests/bonuses/small/style_3d.png";
 
         public static const MAPS_ICONS_QUESTS_BONUSES_SMALL_TACTICALTRAINING:String = "../maps/icons/quests/bonuses/small/tacticalTraining.png";
 

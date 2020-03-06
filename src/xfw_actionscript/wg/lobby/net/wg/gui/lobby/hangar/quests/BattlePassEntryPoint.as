@@ -11,13 +11,11 @@ package net.wg.gui.lobby.hangar.quests
 
         private static const BP_ENTRY_POINT_SIDE_INDENT:int = 2;
 
-        private static const BP_ENTRY_POINT_MARGIN_X:int = 30;
-
-        private static const BP_ENTRY_POINT_SMALL_WIDTH:int = 100 + BP_ENTRY_POINT_MARGIN_X * 2;
+        private static const BP_ENTRY_POINT_SMALL_WIDTH:int = 100;
 
         private static const BP_ENTRY_POINT_SMALL_HEIGHT:int = 120;
 
-        private static const BP_ENTRY_POINT_WIDTH:int = 142 + BP_ENTRY_POINT_MARGIN_X * 2;
+        private static const BP_ENTRY_POINT_WIDTH:int = 142;
 
         private static const BP_ENTRY_POINT_HEIGHT:int = 160;
 
@@ -63,11 +61,6 @@ package net.wg.gui.lobby.hangar.quests
                 validateNow();
                 setIsSmallS(this._isSmall);
             }
-        }
-
-        public function get marginX() : Number
-        {
-            return BP_ENTRY_POINT_MARGIN_X;
         }
     }
 }

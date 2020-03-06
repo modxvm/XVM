@@ -127,6 +127,7 @@ package net.wg.gui.lobby.epicBattles.components.skillView
 
         public function layout(param1:Boolean) : void
         {
+            var _loc3_:Rectangle = null;
             this.titleTF.x = parent.width - this.titleTF.width >> 1;
             this.titleTF.y = 0;
             var _loc2_:int = param1?IMAGE_SMALL_SIZE:IMAGE_REG_SIZE;
@@ -137,7 +138,7 @@ package net.wg.gui.lobby.epicBattles.components.skillView
             this.descriptionTF.y = this.skillIcon.y + _loc2_ + DESC_Y_OFFSET | 0;
             this.skillLevelBar.x = parent.width - this.skillLevelBar.width >> 1;
             this.skillLevelBar.y = this.descriptionTF.y + this.descriptionTF.height + LEVEL_Y_OFFSET | 0;
-            var _loc3_:Rectangle = this.skillLevelBar.getBounds(this.skillLevelBar);
+            _loc3_ = this.skillLevelBar.getBounds(this.skillLevelBar);
             this.upgradeBtn.x = parent.width - this.upgradeBtn.width - this.upgradeBtn.getBounds(this.upgradeBtn).left >> 1;
             this.upgradeBtn.y = this.skillLevelBar.y + this.skillLevelBar.height + _loc3_.top + BTN_Y_OFFSET | 0;
             this.upgradeTF.x = parent.width - this.upgradeTF.width >> 1;
