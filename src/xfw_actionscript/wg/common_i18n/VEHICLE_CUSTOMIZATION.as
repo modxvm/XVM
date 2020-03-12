@@ -1609,6 +1609,10 @@ package
 
         public static const CAMOUFLAGE_PIXEL_WINTER_DESCRIPTION:String = "#vehicle_customization:camouflage/pixel_winter/description";
 
+        public static const CAMOUFLAGE_CLAN_RIVALS_LABEL:String = "#vehicle_customization:camouflage/clan_rivals/label";
+
+        public static const CAMOUFLAGE_CLAN_RIVALS_DESCRIPTION:String = "#vehicle_customization:camouflage/clan_rivals/description";
+
         public static const EMBLEM:String = "#vehicle_customization:emblem";
 
         public static const EMBLEM_CLAN_CONTENT:String = "#vehicle_customization:emblem/clan_content";
@@ -2808,6 +2812,16 @@ package
         public static const EMBLEM_SPECIAL_STICKER_539:String = "#vehicle_customization:emblem/special/sticker_539";
 
         public static const EMBLEM_SPECIAL_STICKER_540:String = "#vehicle_customization:emblem/special/sticker_540";
+
+        public static const EMBLEM_SPECIAL_STICKER_541:String = "#vehicle_customization:emblem/special/sticker_541";
+
+        public static const EMBLEM_SPECIAL_STICKER_541_DESC:String = "#vehicle_customization:emblem/special/sticker_541_desc";
+
+        public static const EMBLEM_SPECIAL_STICKER_543:String = "#vehicle_customization:emblem/special/sticker_543";
+
+        public static const EMBLEM_SPECIAL_STICKER_544:String = "#vehicle_customization:emblem/special/sticker_544";
+
+        public static const EMBLEM_SPECIAL_STICKER_545:String = "#vehicle_customization:emblem/special/sticker_545";
 
         public static const INSCRIPTION:String = "#vehicle_customization:inscription";
 
@@ -4124,6 +4138,8 @@ package
         public static const INSCRIPTION_SPECIAL_SPECIAL_310:String = "#vehicle_customization:inscription/special/special_310";
 
         public static const INSCRIPTION_SPECIAL_SPECIAL_311:String = "#vehicle_customization:inscription/special/special_311";
+
+        public static const INSCRIPTION_SPECIAL_SPECIAL_313:String = "#vehicle_customization:inscription/special/special_313";
 
         public static const ITEM_EMBLEM1:String = "#vehicle_customization:item/emblem1";
 
@@ -6199,6 +6215,18 @@ package
 
         public static const SPECIAL_STYLE_PIXEL_DESC:String = "#vehicle_customization:special_style/pixel_desc";
 
+        public static const SPECIAL_STYLE_CLAN_RIVALS_BRONZE:String = "#vehicle_customization:special_style/clan_rivals_bronze";
+
+        public static const SPECIAL_STYLE_CLAN_RIVALS_BRONZE_DESC:String = "#vehicle_customization:special_style/clan_rivals_bronze_desc";
+
+        public static const SPECIAL_STYLE_CLAN_RIVALS_SILVER:String = "#vehicle_customization:special_style/clan_rivals_silver";
+
+        public static const SPECIAL_STYLE_CLAN_RIVALS_SILVER_DESC:String = "#vehicle_customization:special_style/clan_rivals_silver_desc";
+
+        public static const SPECIAL_STYLE_CLAN_RIVALS_GOLD:String = "#vehicle_customization:special_style/clan_rivals_gold";
+
+        public static const SPECIAL_STYLE_CLAN_RIVALS_GOLD_DESC:String = "#vehicle_customization:special_style/clan_rivals_gold_desc";
+
         public static const CUSTOMIZATION_POPOVER_STYLE_SUMMER:String = "#vehicle_customization:customization/popover/style/summer";
 
         public static const CUSTOMIZATION_POPOVER_STYLE_DESERT:String = "#vehicle_customization:customization/popover/style/desert";
@@ -6950,6 +6978,10 @@ package
         public static const PROJECTION_DECALS_SPECIAL_PROJECTION_DECAL_58:String = "#vehicle_customization:projection_decals/special/projection_decal_58";
 
         public static const PROJECTION_DECALS_SPECIAL_PROJECTION_DECAL_59:String = "#vehicle_customization:projection_decals/special/projection_decal_59";
+
+        public static const PROJECTION_DECALS_SPECIAL_PROJECTION_DECAL_60:String = "#vehicle_customization:projection_decals/special/projection_decal_60";
+
+        public static const PROJECTION_DECALS_SPECIAL_PROJECTION_DECAL_60_DESCRIPTION:String = "#vehicle_customization:projection_decals/special/projection_decal_60/description";
 
         public static const PROPERTYSHEET_KEYBOARD_HINT:String = "#vehicle_customization:propertySheet/keyboard/hint";
 

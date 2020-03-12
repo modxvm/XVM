@@ -157,11 +157,6 @@ package net.wg.gui.battle.views.postmortemPanel
             invalidate(INVALID_PLAYER_INFO_POSITION);
         }
 
-        private function updateDeadReason(param1:Event) : void
-        {
-            this.updateElementsPosition();
-        }
-
         protected function updatePlayerInfoPosition() : void
         {
             this.playerInfoTF.y = -PLAYER_INFO_DELTA_Y - (App.appHeight >> 1);
@@ -184,6 +179,11 @@ package net.wg.gui.battle.views.postmortemPanel
             {
                 this._userName.visible = param1;
             }
+        }
+
+        private function updateDeadReason(param1:Event) : void
+        {
+            this.updateElementsPosition();
         }
     }
 }

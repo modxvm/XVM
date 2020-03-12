@@ -50,7 +50,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
 
         private static const INV_TUNING_BUTTON_STATE:String = "InvTuningState";
 
-        private static const OFFSET_BTN_TO_RENT:Number = 2;
+        private static const OFFSET_BTN_TO_RENT:int = 2;
 
         private static const SHELLS_VO_SIZE_CORRECTION:int = 10;
 
@@ -123,6 +123,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         private var _equipmentHelpLayoutId:String = "";
 
         private var _boosterHelpLayoutId:String = "";
+
+        private var _vehicleStateHelpLayoutId:String = "";
 
         private var _panelEnabled:Boolean = true;
 
@@ -553,7 +555,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             var _loc3_:HelpLayoutVO = this.createHelpLayoutData(this.shell1.x,this.shell1.y,this.shell3.x + this.shell3.width - this.shell1.x - SHELLS_VO_SIZE_CORRECTION,this.shell1.height - SHELLS_VO_SIZE_CORRECTION,LOBBY_HELP.HANGAR_SHELLS,this._shellsHelpLayoutId);
             var _loc4_:HelpLayoutVO = this.createHelpLayoutData(this.equipment1.x,this.equipment1.y,this.equipment3.x + this.equipment3.width - this.equipment1.x,this.equipment1.height,LOBBY_HELP.HANGAR_EQUIPMENT,this._equipmentHelpLayoutId);
             var _loc5_:HelpLayoutVO = this.createHelpLayoutData(this.booster.x,this.booster.y,this.booster.width,this.booster.height,LOBBY_HELP.HANGAR_BOOSTER,this._boosterHelpLayoutId);
-            return new <HelpLayoutVO>[_loc1_,_loc2_,_loc3_,_loc4_,_loc5_];
+            var _loc6_:HelpLayoutVO = this.createHelpLayoutData(this.vehicleStateMsg.x - (this.vehicleStateMsg.width >> 1),this.vehicleStateMsg.y,this.vehicleStateMsg.width,this.vehicleStateMsg.height,LOBBY_HELP.HANGAR_HEADER_VEHICLE,this._vehicleStateHelpLayoutId);
+            return new <HelpLayoutVO>[_loc1_,_loc2_,_loc3_,_loc4_,_loc5_,_loc6_];
         }
 
         public function setBattleAbilitiesVisibility(param1:Boolean) : void
@@ -704,26 +707,23 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
 
         private function centerPanel() : void
         {
-            var _loc2_:* = NaN;
             var _loc1_:Number = 2 * this._buttonWidth + INDENT_BETWEEN_BUTTONS;
             if(this._changeNationBtnVisible)
             {
                 _loc1_ = _loc1_ + (this._buttonWidth + INDENT_BETWEEN_BUTTONS);
             }
-            var _loc3_:Number = 0;
+            var _loc2_:* = 0;
             if(this._battleAbilitiesVisible && this._screenWidth <= BREAKPOINT_SLOT_CENTERING)
             {
                 this.x = OFFSET_MINRES_LEFT;
-                _loc2_ = (this._screenWidth - this.vehicleStateMsg.width >> 1) - OFFSET_MINRES_LEFT;
-                _loc3_ = (this._screenWidth - _loc1_ >> 1) - OFFSET_MINRES_LEFT;
+                _loc2_ = (this._screenWidth - _loc1_ >> 1) - OFFSET_MINRES_LEFT;
             }
             else
             {
                 this.x = this._screenWidth - this._fakeWidth >> 1;
-                _loc2_ = this._fakeWidth - this.vehicleStateMsg.width >> 1;
-                _loc3_ = this._fakeWidth - _loc1_ >> 1;
+                _loc2_ = this._fakeWidth - _loc1_ >> 1;
             }
-            this.maintenanceBtn.x = _loc3_;
+            this.maintenanceBtn.x = _loc2_;
             this.tuningBtn.x = this.maintenanceBtn.x + this._buttonWidth + INDENT_BETWEEN_BUTTONS;
             this.changeNationBtn.x = this.tuningBtn.x + this._buttonWidth + INDENT_BETWEEN_BUTTONS;
             dispatchEvent(new Event(Event.RESIZE));
@@ -764,6 +764,14 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             if(this._boosterHelpLayoutId == Values.EMPTY_STR)
             {
                 this._boosterHelpLayoutId = this.generateHelpLayoutId();
+            }
+            if(this._boosterHelpLayoutId == Values.EMPTY_STR)
+            {
+                this._boosterHelpLayoutId = this.generateHelpLayoutId();
+            }
+            if(this._vehicleStateHelpLayoutId == Values.EMPTY_STR)
+            {
+                this._vehicleStateHelpLayoutId = this.generateHelpLayoutId();
             }
         }
 

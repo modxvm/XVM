@@ -21,11 +21,9 @@ package net.wg.gui.lobby.hangar
 
         private static const SEPARATOR:String = "_";
 
-        private static const HELP_OFFSET_WIDTH:int = 56;
-
         private static const HELP_OFFSET_HEIGHT:int = -3;
 
-        private static const HELP_OFFSET_WIDTH_GAP:int = 199;
+        private static const HELP_OFFSET_X:int = -30;
 
         public var mcBackground:Sprite;
 
@@ -115,7 +113,7 @@ package net.wg.gui.lobby.hangar
         {
             var _loc1_:HelpLayoutVO = new HelpLayoutVO();
             var _loc2_:Rectangle = this.questsFlags.getHitRect();
-            _loc1_.x = this.questsFlags.x + _loc2_.x;
+            _loc1_.x = this.questsFlags.x + _loc2_.x + HELP_OFFSET_X;
             _loc1_.y = this.questsFlags.y;
             _loc1_.width = _loc2_.width;
             _loc1_.height = _loc2_.height + HELP_OFFSET_HEIGHT;
@@ -123,20 +121,7 @@ package net.wg.gui.lobby.hangar
             _loc1_.extensibilityDirection = Directions.RIGHT;
             _loc1_.id = name + SEPARATOR + Math.random();
             _loc1_.scope = this;
-            var _loc3_:HelpLayoutVO = new HelpLayoutVO();
-            _loc3_.x = _loc1_.x + _loc1_.width;
-            _loc3_.y = this.questsFlags.y;
-            _loc3_.width = -_loc3_.x + HELP_OFFSET_WIDTH;
-            _loc3_.height = _loc1_.height;
-            _loc3_.message = LOBBY_HELP.HANGAR_HEADER_VEHICLE;
-            _loc3_.extensibilityDirection = Directions.RIGHT;
-            _loc3_.id = name + SEPARATOR + Math.random();
-            _loc3_.scope = this;
-            if(_loc3_.width > HELP_OFFSET_WIDTH_GAP)
-            {
-                _loc3_.width = HELP_OFFSET_WIDTH_GAP;
-            }
-            return new <HelpLayoutVO>[_loc1_,_loc3_];
+            return new <HelpLayoutVO>[_loc1_];
         }
 
         public function getQuestGroupByType(param1:String) : IHeaderQuestsContainer

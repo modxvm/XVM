@@ -547,12 +547,12 @@ package net.wg.gui.lobby.hangar.quests
 
         private function getInitialRightSideX() : int
         {
-            return this.battlePassEntryPointX + this.battlePassEntryPointWidth + QUESTS_GROUP_OFFSET + RIGHT_SIDE_GROUP_X_OFFSET;
+            return this.battlePassEntryPointX + this.battlePassEntryPointWidth + QUESTS_GROUP_OFFSET - this.battlePassEntryPointmMrginX + RIGHT_SIDE_GROUP_X_OFFSET;
         }
 
         private function getInitialLeftSideX(param1:int) : int
         {
-            return this.battlePassEntryPointX - (param1 >> 1) - QUESTS_GROUP_OFFSET;
+            return this.battlePassEntryPointX - (param1 >> 1) - QUESTS_GROUP_OFFSET + this.battlePassEntryPointmMrginX;
         }
 
         private function onMoveContainerCompleted() : void
@@ -563,6 +563,11 @@ package net.wg.gui.lobby.hangar.quests
         private function get battlePassEntryPointWidth() : int
         {
             return this._battlePassEntryPoint?this._battlePassEntryPoint.width:0;
+        }
+
+        private function get battlePassEntryPointmMrginX() : int
+        {
+            return this._battlePassEntryPoint?this._battlePassEntryPoint.marginX:0;
         }
 
         private function get battlePassEntryPointX() : int

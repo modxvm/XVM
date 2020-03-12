@@ -83,6 +83,7 @@ package net.wg.gui.lobby.components
         {
             stop();
             App.utils.scheduler.cancelTask(gotoAndPlay);
+            App.utils.scheduler.cancelTask(this.onStartFadeIn);
             this.ribbonAward.dispose();
             this.ribbonAward = null;
             this._frameHelper.dispose();
