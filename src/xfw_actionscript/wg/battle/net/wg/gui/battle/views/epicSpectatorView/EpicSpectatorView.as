@@ -21,6 +21,8 @@ package net.wg.gui.battle.views.epicSpectatorView
 
         private static const DAMAGE_PANEL_OVERLAY_START_FRAME:int = 2;
 
+        private static const VEHICLE_PANEL_OFFSET_X:int = 30;
+
         public var damagePanelOverlay:MovieClip = null;
 
         public var postmortemPanelOverlay:MovieClip = null;
@@ -63,7 +65,7 @@ package net.wg.gui.battle.views.epicSpectatorView
         {
             playerInfoTF.x = this._stageWidth - playerInfoTF.width >> 1;
             playerInfoTF.y = (this._stageHeight >> 1) - PLAYER_INFO_DELTA_Y;
-            vehiclePanel.x = this._stageWidth - vehiclePanel.width >> 1;
+            vehiclePanel.x = (this._stageWidth - vehiclePanel.width >> 1) + VEHICLE_PANEL_OFFSET_X;
             vehiclePanel.y = (this._stageHeight >> 1) + VEHICLE_PANEL_OFFSET_Y;
             deadReasonTF.y = (this._stageHeight >> 1) + VEHICLE_PANEL_OFFSET_Y - GAP_VEHICLE_PANEL_DEAD_REASON - deadReasonTF.height;
             deadReasonTF.x = this._stageWidth - deadReasonTF.width >> 1;

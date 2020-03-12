@@ -57,37 +57,40 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
 
         override protected function draw() : void
         {
-            var _loc1_:* = NaN;
-            var _loc2_:* = NaN;
+            var _loc1_:* = 0;
+            var _loc2_:* = 0;
             super.draw();
-            if(this._data && isInvalid(InvalidationType.DATA))
+            if(this._data)
             {
-                this.vehicleMsg.htmlText = this._data.message;
-                this.vehicleLevel.text = this._data.vehicleLevel;
-                this.vehicleName.text = this._data.vehicleName;
-                this.tankTypeIcon.type = this._data.tankType;
-                this.tankTypeIcon.validateNow();
-                this.statusBg.visible = this.vehicleMsg.visible = this._data.message.length > 0;
-                invalidateSize();
-            }
-            if(isInvalid(InvalidationType.SIZE))
-            {
-                this.vehicleLevel.x = 0;
-                this.vehicleName.width = this.vehicleName.textWidth + TEXT_PADDING;
-                this.vehicleLevel.width = this.vehicleLevel.textWidth + TEXT_PADDING;
-                this.vehicleMsg.width = this.vehicleMsg.textWidth + TEXT_PADDING;
-                this.vehicleMsg.height = this.vehicleMsg.textHeight + TEXT_PADDING;
-                _loc1_ = this._data.isElite?ELITE_TYPE_GAP:COMMON_TYPE_GAP;
-                this.tankTypeIcon.x = this.vehicleLevel.x + this.vehicleLevel.width + this.tankTypeIcon.width + _loc1_ ^ 0;
-                this.vehicleName.x = this.tankTypeIcon.x + this.tankTypeIcon.width + _loc1_ ^ 0;
-                _loc2_ = this.vehicleName.x + this.vehicleName.width >> 1;
-                this.vehicleLevel.x = this.vehicleLevel.x - _loc2_;
-                this.tankTypeIcon.x = this.tankTypeIcon.x - _loc2_;
-                this.vehicleName.x = this.vehicleName.x - _loc2_;
-                this.vehicleMsg.x = -this.vehicleMsg.width >> 1;
-                this.statusBg.x = this.vehicleMsg.x + (this.vehicleMsg.width >> 1);
-                this.statusBg.y = this.vehicleMsg.y + (this.vehicleMsg.height >> 1) + BG_OFFSET;
-                dispatchEvent(new AmmunitionPanelEvents(AmmunitionPanelEvents.VEHICLE_STATE_MSG_RESIZE));
+                if(isInvalid(InvalidationType.DATA))
+                {
+                    this.vehicleMsg.htmlText = this._data.message;
+                    this.vehicleLevel.text = this._data.vehicleLevel;
+                    this.vehicleName.text = this._data.vehicleName;
+                    this.tankTypeIcon.type = this._data.tankType;
+                    this.tankTypeIcon.validateNow();
+                    this.statusBg.visible = this.vehicleMsg.visible = this._data.message.length > 0;
+                    invalidateSize();
+                }
+                if(isInvalid(InvalidationType.SIZE))
+                {
+                    this.vehicleLevel.x = 0;
+                    this.vehicleName.width = this.vehicleName.textWidth + TEXT_PADDING;
+                    this.vehicleLevel.width = this.vehicleLevel.textWidth + TEXT_PADDING;
+                    this.vehicleMsg.width = this.vehicleMsg.textWidth + TEXT_PADDING;
+                    this.vehicleMsg.height = this.vehicleMsg.textHeight + TEXT_PADDING;
+                    _loc1_ = this._data.isElite?ELITE_TYPE_GAP:COMMON_TYPE_GAP;
+                    this.tankTypeIcon.x = this.vehicleLevel.x + this.vehicleLevel.width + this.tankTypeIcon.width + _loc1_ ^ 0;
+                    this.vehicleName.x = this.tankTypeIcon.x + this.tankTypeIcon.width + _loc1_ ^ 0;
+                    _loc2_ = this.vehicleName.x + this.vehicleName.width >> 1;
+                    this.vehicleLevel.x = this.vehicleLevel.x - _loc2_;
+                    this.tankTypeIcon.x = this.tankTypeIcon.x - _loc2_;
+                    this.vehicleName.x = this.vehicleName.x - _loc2_;
+                    this.vehicleMsg.x = -this.vehicleMsg.width >> 1;
+                    this.statusBg.x = this.vehicleMsg.x + (this.vehicleMsg.width >> 1);
+                    this.statusBg.y = this.vehicleMsg.y + (this.vehicleMsg.height >> 1) + BG_OFFSET;
+                    dispatchEvent(new AmmunitionPanelEvents(AmmunitionPanelEvents.VEHICLE_STATE_MSG_RESIZE));
+                }
             }
         }
 
