@@ -51,11 +51,14 @@ set_target_properties(xfw_crashreport PROPERTIES SUFFIX ".pyd")
 #dep: crashrpt
 target_include_directories(xfw_crashreport PRIVATE "3rdparty/sentry-native/include")
 if(CMAKE_CL_64)
-    target_link_libraries(xfw_crashreport "${CMAKE_SOURCE_DIR}/3rdparty/sentry-native/lib64/sentry_crashpad.lib")
+    target_link_libraries(xfw_crashreport "${CMAKE_SOURCE_DIR}/3rdparty/sentry-native/lib64/sentry.lib")
 else()
-    target_link_libraries(xfw_crashreport "${CMAKE_SOURCE_DIR}/3rdparty/sentry-native/lib32/sentry_crashpad.lib")
+    target_link_libraries(xfw_crashreport "${CMAKE_SOURCE_DIR}/3rdparty/sentry-native/lib32/sentry.lib")
 endif()
-set_target_properties(xfw_crashreport PROPERTIES LINK_FLAGS "/DELAYLOAD:sentry_crashpad.dll")
+set_target_properties(xfw_crashreport PROPERTIES LINK_FLAGS "/DELAYLOAD:sentry.dll")
+
+#dep: digestpp
+target_include_directories(xfw_crashreport PRIVATE "3rdparty/digestpp")
 
 #dep: windows
 target_link_libraries(xfw_crashreport "Shlwapi")

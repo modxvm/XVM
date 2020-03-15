@@ -1,7 +1,5 @@
 #include <Windows.h>
 
-
-
 #include "common.h"
 #include "dllMain.h"
 #include "crashreporter.h"
@@ -16,8 +14,6 @@ CrashReporter::CrashReporter()
     //create options
     _options = sentry_options_new();
     sentry_options_set_handler_pathw(_options, (GetModuleDirectory(hDLL) / L"crashpad_handler.exe").c_str());
-    sentry_options_set_database_pathw(_options, (GetModuleDirectory(hDLL) / L"db/").c_str());
-    sentry_options_set_debug(_options, 1);
 }
 
 
@@ -40,7 +36,7 @@ bool CrashReporter::is_initialized()
 }
 
 
-bool CrashReporter::set_release(const std::string& version) {
+bool CrashReporter::options_release_set(const std::string& version) {
     if (is_initialized())
         return false;
 
@@ -48,8 +44,17 @@ bool CrashReporter::set_release(const std::string& version) {
     return true;
 }
 
+bool CrashReporter::options_databasepath_set(const std::wstring& path)
+{
+    if (is_initialized())
+        return false;
 
-bool CrashReporter::add_attachment(const std::string& name, const std::wstring& filepath) {
+    sentry_options_set_database_pathw(_options, path.c_str());
+    return true;
+}
+
+
+bool CrashReporter::options_attachment_add(const std::string& name, const std::wstring& filepath) {
     if (is_initialized())
         return false;
 
@@ -57,8 +62,17 @@ bool CrashReporter::add_attachment(const std::string& name, const std::wstring& 
     return true;
 }
 
+bool CrashReporter::options_consent_required_set(bool val)
+{
+    if (is_initialized())
+        return false;
 
-bool CrashReporter::set_dsn(const std::string& dsn) {
+    sentry_options_set_require_user_consent(_options, val);
+    return true;
+}
+
+
+bool CrashReporter::options_dsn_set(const std::string& dsn) {
     if (is_initialized())
         return false;
 
@@ -66,7 +80,7 @@ bool CrashReporter::set_dsn(const std::string& dsn) {
     return true;
 }
 
-bool CrashReporter::set_environment(const std::string& environment)
+bool CrashReporter::options_environment_set(const std::string& environment)
 {
     if (is_initialized())
         return false;
@@ -74,7 +88,6 @@ bool CrashReporter::set_environment(const std::string& environment)
     sentry_options_set_environment(_options, environment.c_str());
     return true;
 }
-
 
 bool CrashReporter::initialize()
 {
@@ -91,6 +104,36 @@ bool CrashReporter::shutdown()
     return true;
 }
 
+bool CrashReporter::consent_get()
+{
+    switch (sentry_user_consent_get()) {
+        case SENTRY_USER_CONSENT_GIVEN:
+            return true;
+        case SENTRY_USER_CONSENT_UNKNOWN:
+        case SENTRY_USER_CONSENT_REVOKED:
+        default:
+            return false;
+    }
+
+    return false;
+}
+
+bool CrashReporter::consent_set(bool val)
+{
+    if (!is_initialized()) {
+        return false;
+    }
+
+    if (val) {
+        sentry_user_consent_give(); 
+    }
+    else {
+        sentry_user_consent_revoke();
+    }
+    return true;
+}
+
+
 
 bool CrashReporter::set_tag(const std::string& key, const std::string& value) {
     if (!is_initialized()) {
@@ -98,5 +141,18 @@ bool CrashReporter::set_tag(const std::string& key, const std::string& value) {
     }
 
     sentry_set_tag(key.c_str(), value.c_str());
+    return true;
+}
+
+bool CrashReporter::set_user(const std::string& user_id, const std::string& user_name) {
+    sentry_value_t user = sentry_value_new_object();
+    if (user_id.size() > 0) {
+        sentry_value_set_by_key(user, "id", sentry_value_new_string(user_id.c_str()));
+    }
+    if (user_name.size() > 0) {
+        sentry_value_set_by_key(user, "username", sentry_value_new_string(user_name.c_str()));
+    }
+
+    sentry_set_user(user);
     return true;
 }

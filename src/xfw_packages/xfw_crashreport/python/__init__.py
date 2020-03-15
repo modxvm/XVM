@@ -20,6 +20,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 import logging
 import os.path
 
+#bigworld/wot
+from gui.shared.utils import getPlayerDatabaseID
+from helpers import dependency
+from skeletons.gui.app_loader import IAppLoader, GuiGlobalSpaceID
+
 #xfw.loader
 import xfw_loader.python as loader
 
@@ -65,12 +70,22 @@ class XFWCrashReport(object):
 
 
     def install(self):
-        if self.__initialized:
-            if not self.__native.initialize():
-                logging.error("[XFW/Crashreport] [install] Crash reports failed to install.")
-                return
-            self.__installed = True
+        if not self.__initialized:
+            return False
 
+        if not self.__native.opt_databasepath_set(u'%s/%s/db' % (unicode(loader.XFWLOADER_TEMPDIR), unicode(self.package_name))):
+            logging.error("[XFW/Crashreport] [install] Crash reports failed to install. (failed to set database path)")
+            return False
+        if not self.__native.initialize():
+            logging.error("[XFW/Crashreport] [install] Crash reports failed to install. (failed to initialize sentry)")
+            return False
+        if not self.set_user("0"):
+            logging.error("[XFW/Crashreport] [install] Crash reports failed to install. (failed to set userid)")
+            return False 
+
+        dependency.instance(IAppLoader).onGUISpaceEntered += self.__on_gui_space_entered
+        self.__installed = True
+        return True
 
     def is_initialized(self):
         '''
@@ -138,11 +153,64 @@ class XFWCrashReport(object):
         except Exception:
             logging.exception("[XFW/Crashreport] [set_release]")
 
+    def set_user(self, user_id):
+        if not self.__initialized:
+            return False
+
+        try:
+            if not self.__native.set_user(user_id):
+                logging.warn("[XFW/Crashreport] [set_user] failed to set release")
+                return False
+            return True
+        except Exception:
+            logging.exception("[XFW/Crashreport] [set_user]")
+
+    def consent_get(self):
+        if not self.__initialized:
+            return
+
+        try:
+            return self.__native.consent_get()
+        except Exception:
+            logging.exception("[XFW/Crashreport] [consent_get]")
+        return False
+
+    def consent_set(self, consent_given):
+        if not self.__initialized:
+            return
+
+        try:
+            return self.__native.consent_get(consent_given)
+        except Exception:
+            logging.exception("[XFW/Crashreport] [consent_set]")
+        return False
+
+
+    def consent_require(self, consent_required):
+        if not self.__initialized:
+            return
+
+        try:
+            return self.__native.consent_require(consent_required)
+        except Exception:
+            logging.exception("[XFW/Crashreport] [consent_require]")
+        return False
+
     def simulate_crash(self):
         if not self.__initialized:
             return
 
         self.__native.simulate_crash()
+
+    def __on_gui_space_entered(self, spaceID):
+        print "on acc show gui"
+        if not self.__installed:
+            return
+
+        if spaceID == GuiGlobalSpaceID.LOGIN:
+            self.set_user("0")
+        elif spaceID == GuiGlobalSpaceID.LOBBY:
+            self.set_user(str(getPlayerDatabaseID()))
 
 
 def xfw_is_module_loaded():
@@ -157,44 +225,50 @@ def xfw_is_module_loaded():
     return False
 
 def xfw_module_init():
-    if loader.get_client_realm() != 'RU':
-        logging.info("[XFW/Crashreport] [xfw_module_init] bugreporting currently available only on RU realm")
-        return
-
-    if os.path.exists('XFW_BUGREPORT_OPTOUT.txt'):
-        logging.info("[XFW/Crashreport] [xfw_module_init] bugreporting disabled because of user opt-out")
-        return
 
     global __xfw_crashreport
     __xfw_crashreport = XFWCrashReport()
 
-    package_name    = unicode(__xfw_crashreport.package_name)
-    package_version = loader.get_mod_ids()[package_name]
-    is_development  = loader.get_mod_user_data(package_name, 'build_development') != "False"
-    server_dsn      = 'https://3ee6306774f349beb6c658462be0a591@sentry.openwg.net/2'
-
-    #Server DSN
-    __xfw_crashreport.set_dsn(server_dsn)
-
-    #additional files
+    package_name = unicode(__xfw_crashreport.package_name)
+    
+    #options/attachments
     if os.path.exists('game.log'):
         __xfw_crashreport.add_attachment("game.log","game.log")
     __xfw_crashreport.add_attachment("python.log","python.log")
     __xfw_crashreport.add_attachment("xvm.log","xvm.log")
 
-    #Release
-    __xfw_crashreport.set_release(package_version)
+    #options/consent
+    if loader.get_client_realm() != 'RU':
+        logging.info("[XFW/Crashreport] [xfw_module_init] bugreporting requires user consent. Please add empty 'XFW_BUGREPORT_OPTIN.txt file to game root to enable it")
+        __xfw_crashreport.consent_require(True)
 
-    #Environment
+    #options/dsn
+    __xfw_crashreport.set_dsn('https://2f01e1ac193f4e369c105392e2b4b6fe@sentry.openwg.net/2')
+
+    #options/environment
     environment = 'release'
+    is_development  = loader.get_mod_user_data(package_name, 'build_development') != "False"
     if is_development:
         environment = 'nightly'
     if os.path.exists('wargaming_qa.conf'):
         environment = 'qa'
     __xfw_crashreport.set_environment(environment)
 
-    #Initialize
+    #options/release
+    __xfw_crashreport.set_release(loader.get_mod_ids()[package_name])
+
+    #initialize
     __xfw_crashreport.install()
 
-    #Tags
+    #tags
     __xfw_crashreport.set_tag("wot_version", loader.WOT_VERSION_FULL)
+
+    #consent
+    if os.path.exists('XFW_BUGREPORT_OPTOUT.txt'):
+        __xfw_crashreport.consent_set(False)
+        logging.info("[XFW/Crashreport] [xfw_module_init] bugreporting disabled because of user opt-out")
+    elif os.path.exists('XFW_BUGREPORT_OPTIN.txt'):
+        __xfw_crashreport.consent_set(False)
+        logging.info("[XFW/Crashreport] [xfw_module_init] bugreporting enabled because of user opt-in")
+    elif os.path.exists('wargaming_qa.conf'):
+        logging.info("[XFW/Crashreport] [xfw_module_init] bugreporting enabled because of QA")
