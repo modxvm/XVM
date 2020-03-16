@@ -44,17 +44,17 @@
   2. Standardowo nie musisz niczego zmieniać.
 
     Jeśli chcesz używać innej konfiguracji, to musisz zmienić nazwę w pliku startowym:
-      \res_mods\xvm\xvm.xc.sample do xvm.xc
+      \res_mods\configs\xvm\xvm.xc.sample do xvm.xc
     Instrukcje znajdują sie w środku pliku.
 
     Wszystkie możliwe opcje konfiguracji możesz znaleźć w:
-      \res_mods\xvm\configs\@Default\
+      \res_mods\configs\xvm\default\
     lub możesz użyć edytora: https://koreanrandom.com/forum/topic/1422-/#entry11316
 
-    WAŻNE: Jeśli konfigurujesz manualnie, używaj programów typu notatnik(czy innego edytora, który nie modyfikuje kodowania pliku - przykładowo notepad++), NIGDY nie używaj edytorów typu Word/Wordpad.
+    WAŻNE: Jeśli konfigurujesz manualnie, używaj programów typu notatnik (czy innego edytora, który nie modyfikuje kodowania pliku - przykładowo Notepad++), NIGDY nie używaj edytorów typu MS Word/WordPad.
 
   3. Jeśli XVM nie wykrywa prawidłowo języka gry,
-   to w pliku konfiguracji (standardowo\res_mods\xvm\configs\@default\@xvm.xc)
+   to w pliku konfiguracji (standardowo \res_mods\configs\xvm\default\@xvm.xc)
     zmień wartość "language" z "auto" na kod języka(np. pl).
 
   4. Jest też możliwość instalacji tzw. "Nightly builds"(wersje testowe).
@@ -79,30 +79,29 @@
 -----------------------------------------------------------
 
   Pliki konfiguracyjne modyfikacji:
-    \res_mods\xvm\configs\@Default\
-  * Możesz wybrać gotowy plik konfiguracji z katalogu \res_mods\xvm\configs\user configs\
+    \res_mods\configs\xvm\default\
+  * Możesz wybrać gotowy plik konfiguracji z katalogu \res_mods\configs\xvm\user configs\
   * Możesz utworzyć nową konfigurację lub edytować istniejącą w:
     https://koreanrandom.com/forum/topic/1422-/#entry11316
 
   Wszystkie możliwe opcje konfiguracji znajdziesz tutaj:
-    \res_mods\xvm\configs\@Default\
-
+    \res_mods\configs\xvm\default\
 
   Wspierane tagi html:
     https://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText
 
   Ikona szóstego zmysłu.
   Aby zmienić ikonę szóstego zmysłu przekopiuj obrazek do:
-   \res_mods\xvm\res\SixthSense.png.
+    \res_mods\mods\shared_resources\xvm\res\SixthSense.png
 
   Hit Log.
-  Współczynniki x, y pozwalają ustalić ułożenie panelu, w zależności od rozdzielczości.
+    Współczynniki x, y pozwalają ustalić ułożenie panelu, w zależności od rozdzielczości.
 
   Zegar w bitwie oraz na ekranie ładowania bitwy.
-  Format: Data PHP: http://php.net/date
-  Np:
-  "clockFormat": "H:i"          => 01:23
-  "clockFormat": "Y.m.d H:i:s"  => 2013.05.20 01:23:45
+    Format: Data PHP: http://php.net/date
+    Np:
+      "clockFormat": "H:i"          => 01:23
+      "clockFormat": "Y.m.d H:i:s"  => 2013.05.20 01:23:45
 
 // Plik readme dla XVM, tłumaczenie na język polski - Nikodemsky
 http://forum.worldoftanks.eu/index.php?/user/nikodemsky-501974216/

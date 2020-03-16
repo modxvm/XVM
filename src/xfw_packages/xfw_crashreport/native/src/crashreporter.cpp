@@ -125,7 +125,7 @@ bool CrashReporter::consent_set(bool val)
     }
 
     if (val) {
-        sentry_user_consent_give(); 
+        sentry_user_consent_give();
     }
     else {
         sentry_user_consent_revoke();

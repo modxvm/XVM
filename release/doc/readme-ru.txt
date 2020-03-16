@@ -152,9 +152,11 @@
     "alpha": "{{a:hp}}" - прозрачность в зависимости от количества здоровья
 
   Иконки кланов и игроков.
-    В качестве рейтинга кланов используется Эло-рейтинг клана на Глобальной карте https://ru.wargaming.net/clans/wot/leaderboards/#ratingssearch&order=-egm (колонка wGM).
-      Формула: https://ru.wargaming.net/clans/wot/leaderboards/#ratingssearch&offset=0&limit=25&order=-esh&guide-slug=ratings&guide-anchor=1
-      Принцип рейтинга ЭЛО: https://ru.wikipedia.org/wiki/%D0%E5%E9%F2%E8%ED%E3_%DD%EB%EE
+    В качестве рейтинга кланов используется:
+      Эло-рейтинг клана на Глобальной карте: https://ru.wargaming.net/clans/wot/leaderboards/#ratingssearch&order=-egm (колонка wGM).
+      Эло-рейтинг клана в Укрепрайоне:       https://ru.wargaming.net/clans/wot/leaderboards/#ratingssearch&order=-wsh (колонка wSH).
+      Формула:                               https://ru.wargaming.net/clans/wot/leaderboards/#ratingssearch&offset=0&limit=25&order=-esh&guide-slug=ratings&guide-anchor=1
+      Принцип рейтинга ЭЛО:                  https://ru.wikipedia.org/wiki/%D0%A0%D0%B5%D0%B9%D1%82%D0%B8%D0%BD%D0%B3_%D0%AD%D0%BB%D0%BE
     Сервер XVM мониторит список топ-кланов и при запуске клиента этот список скачивается. При появлении топового клана в бою, с сервера XVM скачивается его иконка.
     Обновление списка на сервере происходит 8 раз в сутки.
     Существует возможность добавления своего набора иконок кланов/игроков.
