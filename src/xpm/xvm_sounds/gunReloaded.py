@@ -27,7 +27,7 @@ class XVM_SOUND_EVENT(object):
 def onGunReloadTimeSet(self, _, state):
     try:
         if config.get('sounds/enabled'):
-            isAutoReload = self.sessionProvider.shared.ammo.getGunSettings().hasAutoReload()
+            isAutoReload = self._AmmoPlugin__guiSettings.hasAutoReload
             isInPostmortem = self.sessionProvider.shared.vehicleState.isInPostmortem
             timeLast = state.getActualValue()
             timeLeft = state.getTimeLeft()
@@ -40,7 +40,7 @@ def onGunReloadTimeSet(self, _, state):
 def onGunAutoReloadTimeSet(self, state, stunned):
     try:
         if config.get('sounds/enabled'):
-            isAutoReload = self.sessionProvider.shared.ammo.getGunSettings().hasAutoReload()
+            isAutoReload = self._AmmoPlugin__guiSettings.hasAutoReload
             isInPostmortem = self.sessionProvider.shared.vehicleState.isInPostmortem
             timeLast = state.getActualValue()
             timeLeft = state.getTimeLeft()

@@ -36,16 +36,16 @@
 2. Instalace
 -----------------------------------------------------------
 
-  1.  Rozbalte archiv do složky s hrou:
+  1. Rozbalte archiv do složky s hrou:
     Kliknout pravým tlačítkem myši na soubor, zvolit možnost "Extrahovat vše..."
     -> najít adresář se hrou (výchozí C:\Games\World of Tanks) -> "Extrahovat".
 
-  2.  Nemusíte nic nastavovat.
+  2. Nemusíte nic nastavovat.
     Pokud chcete nějaké jiné, než výchozí nastavení, musíte přejmenovat výchozí soubor s nastavením
-    "\res_mods\xvm\configs\xvm.xc.sample" na "xvm.xc" v adresáři hry.
+    "\res_mods\configs\xvm\xvm.xc.sample" na "xvm.xc" v adresáři hry.
 
     Všechna možná nastavení můžete najít v souborech ve složce:
-      "\res_mods\xvm\configs\@Default\"
+      "\res_mods\configs\xvm\default\"
 
     !!! Varování !!!:
     ---------------
@@ -53,9 +53,9 @@
     NEPOUŽÍVEJTE Word, WordPad ani další podobné editory.
 
   3. Pokud XVM nerozpozná jazyk vašeho herního klienta,
-    můžete pomocí konfiguračního souboru (by default\res_mods\xvm\configs\@default\@xvm.xc),
+    můžete pomocí konfiguračního souboru (by default \res_mods\configs\xvm\default\@xvm.xc),
     změnit hodnotu "language" z "auto" na jazykový kód.
-    Jazykový kód se musí shodovat s názvem souboru ve složce \res_mods\xvm\l10n\ (for example, "en").
+    Jazykový kód se musí shodovat s názvem souboru ve složce res_mods\mods\shared_resources\xvm\l10n\ (for example, "en").
 
   4. Je tu možnost používání "nočních" verzí XVM.
     Tyto verze jsou vytvořeny automaticky z aktuálního zdrojového kódu, nemusí být testovány a mohou obsahovat chyby!
@@ -65,11 +65,11 @@
 3. Aktualizace
 -----------------------------------------------------------
 
-  1.  Rozbalte archiv do složky s hrou:
+  1. Rozbalte archiv do složky s hrou:
     Kliknout pravým tlačítkem myši na soubor, zvolit možnost "Extrahovat vše..."
       -> najít adresář se hrou (výchozí C:\Games\World of Tanks) -> "Extrahovat"
 
-  2.  NEDĚLEJTE nic dalšího.
+  2. NEDĚLEJTE nic dalšího.
 
 
 -----------------------------------------------------------
@@ -77,20 +77,20 @@
 -----------------------------------------------------------
 
   Soubory s nastavením:
-    "\res_mods\xvm\configs\@Default\"
+    "\res_mods\configs\xvm\default\"
 
   Můžete použít některé z připravených souborů s nastavením ze složky:
-    "\res_mods\xvm\configs\user configs\"
+    "\res_mods\configs\xvm\user configs\"
 
   Všechny možnosti nastavení můžete vidět ve složce:
-    "\res_mods\xvm\configs\@Default\"
+    "\res_mods\configs\xvm\default\"
 
   Podporované HTML tagy:
     https://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText
 
   Obrázek šestého smyslu:
     Chcete-li změnit ikonu šestého smyslu, uložte svůj obrázek takto:
-      \res_mods\xvm\res\SixthSense.png
+      \res_mods\mods\shared_resources\xvm\res\SixthSense.png
 
   Hit Log.
     Záporné hodnoty x, y umístí text k pravé dolní hranici

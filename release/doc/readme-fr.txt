@@ -46,21 +46,21 @@
 
     Si vous voulez personnaliser votre configuration, vous devez renommer le
     fichier de démarrage de la config:
-      \res_mods\xvm\xvm.xc.sample en xvm.xc
+      \res_mods\configs\xvm\xvm.xc.sample en xvm.xc
     Les consignes pour modifier les paramêtres sont à l'intérieur.
 
     Toutes les options de configuration sont localisées dans
-      \res_mods\xvm\configs\@Default\
+      \res_mods\configs\xvm\default\
 
     Note: Si vous voulez modifier la configuration manuellement, utilisez le
     Bloc-notes Windows ou Notepad++, mais n'utilisez PAS de logiciels de
     traitement de texte comme MS Word ou WordPad.
 
   3. Si XVM n'arrive pas à détecter la langue du client de jeu, alors allez dans
-    le fichier de configuration (par défaut \res_mods\xvm\configs\@Default\@xvm.xc),
+    le fichier de configuration (par défaut \res_mods\configs\xvm\default\@xvm.xc),
     changez la valeur de la variable "language" de "auto" à votre code de langue,
     par exemple "fr" pour le français. Le code de langue doit correspondre au
-    nom du fichier dans \res_mods\xvm\l10n\.
+    nom du fichier dans res_mods\mods\shared_resources\xvm\l10n\.
 
   4. Vous pouvez installer des versions journalières de développement d'XVM.
     Vous pouvez télécharger ces versions spéciales ici:
@@ -83,7 +83,7 @@
 -----------------------------------------------------------
 
   Fichiers de configuration par défaut:
-    \res_mods\xvm\configs\@Default\
+    \res_mods\configs\xvm\default\
   Vous pouvez utiliser des configurations toutes faites dans le dossier
     \res_mods\xvm\configs\user configs\
   Vous pouvez créer une nouvelle configuration ou en éditer une déjà existante à
@@ -92,15 +92,15 @@
     https://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText (en anglais)
 
   L'image Sixième Sens.
-  Pour changer l'image de l'indicateur Sixième Sens, placez votre image PNG
-  alternative dans \res_mods\xvm\res\SixthSense.png.
+    Pour changer l'image de l'indicateur Sixième Sens, placez votre image PNG
+    alternative dans \res_mods\mods\shared_resources\xvm\res\SixthSense.png
 
   Journal des coups reçus.
-  Des valeurs X ou Y négatives vous autorise à afficher le texte à droite ou en
-  bas de l'écran pour avoir le même affichage sur différentes résolutions d'écran.
+    Des valeurs X ou Y négatives vous autorise à afficher le texte à droite ou en
+    bas de l'écran pour avoir le même affichage sur différentes résolutions d'écran.
 
   Horloge en bataille et sur l'écran de chargement.
-  Format: Date PHP: http://php.net/date
-  Par exemple:
+    Format: Date PHP: http://php.net/date
+    Par exemple:
       "clockFormat": "H:i"          => 01:23
       "clockFormat": "Y.m.d H:i:s"  => 2013.05.20 01:23:45
