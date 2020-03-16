@@ -1,21 +1,21 @@
 ﻿{
     "RU": {
-        "ver": "8.3.4",
+        "ver": "8.3.5",
         "wot": "1.8.0.1",
         "message": " • World of Tanks 1.8.0.1\nСкачать на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
     },
     "EU": {
-        "ver": "8.3.4",
+        "ver": "8.3.5",
         "wot": "1.8.0.1",
         "message": " • World of Tanks 1.8.0.1\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
     },
     "NA": {
-        "ver": "8.3.4",
+        "ver": "8.3.5",
         "wot": "1.8.0.1",
         "message": " • World of Tanks 1.8.0.1\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
     },
     "ASIA": {
-        "ver": "8.3.4",
+        "ver": "8.3.5",
         "wot": "1.8.0.1",
         "message": " • World of Tanks 1.8.0.1\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
     },
@@ -25,7 +25,7 @@
         "message": " • World of Tanks 1.8.0.1\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
     },
     "CT": {
-        "ver": "8.3.4",
+        "ver": "8.3.5",
         "wot": "1.8.0.1",
         "message": " • World of Tanks 1.8.0.1\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
     }

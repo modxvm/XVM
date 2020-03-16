@@ -1,4 +1,8 @@
-﻿XVM-8.3.4:
+﻿XVM-8.3.5:
+  [GENERAL]
+  * Temporarily disable crashreporting tool
+
+XVM-8.3.4:
   [GENERAL]
   * Fix compatibility with Windows 7
 
