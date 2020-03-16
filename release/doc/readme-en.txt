@@ -73,7 +73,7 @@
 -----------------------------------------------------------
 
   Config files are located:
-        \res_mods\configs\xvm
+    \res_mods\configs\xvm
   You can select user made config files from \res_mods\configs\xvm\user configs\ directory
 
   You can learn about all possible config options in this file:
@@ -148,8 +148,10 @@
     "alpha": "{{a:hp}}" - transparency depending on current health
 
   Clan and players icons.
-    Global map rating is used to rate clans https://eu.wargaming.net/clans/wot/leaderboards/#ratingssearch&order=-egm (wGM column).
-      Formula used for the rating: https://eu.wargaming.net/clans/wot/leaderboards/#ratingssearch&offset=0&limit=25&order=-esh&guide-slug=ratings&guide-anchor=1
+    For the clan rating is used:
+      Elo rating on the Global Map:        https://eu.wargaming.net/clans/wot/leaderboards/#ratingssearch&order=-egm (wGM column).
+      Elo rating in Stronghold:            https://eu.wargaming.net/clans/wot/leaderboards/#ratingssearch&order=-wsh (wSH column).
+      Formula used for the rating:         https://eu.wargaming.net/clans/wot/leaderboards/#ratingssearch&offset=0&limit=25&order=-esh&guide-slug=ratings&guide-anchor=1
       Principles of the Elo rating system: https://en.wikipedia.org/wiki/Elo_rating_system
     XVM server monitors the list of top clans and downloads it at client launch. If a player in top clan is encounter in a battle, that clan's icon is downloaded from the XVM server.
     The list is updated 8 times a day.
@@ -168,16 +170,16 @@
     ID\<accountId>.png -> nick\<playerName>.png -> clan\<clan>.png -> clan\default.png -> nick\default.png
 
   6-th sense image.
-  To change sixth sense indicator place an alternative PNG image named SixthSense.png to
-   \res_mods\mods\shared_resources\xvm\res\.
+    To change sixth sense indicator place an alternative PNG image named SixthSense.png to
+    \res_mods\mods\shared_resources\xvm\res\.
 
   Hit Log.
-  Negative x, y values allow to bind the text to the right and bottom edges of the screen so that
-  the config works with different screen resolutions.
+    Negative x, y values allow to bind the text to the right and bottom edges of the screen so that
+    the config works with different screen resolutions.
 
   Clock in battle and on battle loading screen.
-  Format: PHP Date: http://php.net/date
-  For example:
+    Format: PHP Date: http://php.net/date
+    For example:
       "clockFormat": "H:i"          => 01:23
       "clockFormat": "Y.m.d H:i:s"  => 2013.05.20 01:23:45
 
