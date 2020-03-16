@@ -1,4 +1,8 @@
-﻿XVM-8.3.3:
+﻿XVM-8.3.4:
+  [GENERAL]
+  * fix compatibility with Windows 7
+
+XVM-8.3.3:
   [GENERAL]
   * World of Tanks 1.8.0.1
 
