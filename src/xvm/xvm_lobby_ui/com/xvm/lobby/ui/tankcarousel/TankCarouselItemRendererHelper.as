@@ -459,10 +459,10 @@ package com.xvm.lobby.ui.tankcarousel
             _setupStandardTextField(renderer.content.statsTF, cfg.fields.stats, 0);
         }
 //
-        //private var orig_txtInfo_x:Number = NaN;
-        //private var orig_txtInfo_y:Number = NaN;
-        //private var orig_infoImg_x:Number = NaN;
-        //private var orig_infoImg_y:Number = NaN;
+        private var orig_txtInfo_x:Number = NaN;
+        private var orig_txtInfo_y:Number = NaN;
+        private var orig_infoImg_x:Number = NaN;
+        private var orig_infoImg_y:Number = NaN;
         private function _setupStandardFieldInfo():void
         {
             var cfgInfo:CCarouselCellStandardField = null;
@@ -485,18 +485,18 @@ package com.xvm.lobby.ui.tankcarousel
             var field:TextField = renderer.content.txtInfo;
             var tf:TextFormat = field.getTextFormat();
             var img:Image = renderer.content.infoImg as Image;
-            //if (isNaN(orig_txtInfo_x))
-            //{
-                //orig_txtInfo_x = field.x;
-                //orig_txtInfo_y = field.y;
-                //orig_infoImg_x = img.x;
-                //orig_infoImg_y = img.y;
-            //}
+            if (isNaN(orig_txtInfo_x))
+            {
+                orig_txtInfo_x = field.x;
+                orig_txtInfo_y = field.y;
+                orig_infoImg_x = img.x;
+                orig_infoImg_y = img.y;
+            }
 
-            var orig_txtInfo_x:Number = field.x;
-            var orig_txtInfo_y:Number = field.y;
-            var orig_infoImg_x:Number = img.x;
-            var orig_infoImg_y:Number = img.y;
+            //var orig_txtInfo_x:Number = field.x;
+            //var orig_txtInfo_y:Number = field.y;
+            //var orig_infoImg_x:Number = img.x;
+            //var orig_infoImg_y:Number = img.y;
 
             _setupStandardFieldAlpha(field, cfgInfo);
             _setupStandardFieldScale(field, cfgInfo);
