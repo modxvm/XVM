@@ -163,6 +163,10 @@ package com.xvm.lobby.ui.tankcarousel
         public function handleRollOver():void
         {
             _setupStandardFieldInfo();
+            if (item.vehicleCarouselVO)
+            {
+                _addSlotsCount();
+            }
             //updateDataXvm();
         }
 
