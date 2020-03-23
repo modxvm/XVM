@@ -28,7 +28,8 @@ totalAssist = 0
 totalBlocked = 0
 maxHealth = 0
 damageReceived = 0
-vehiclesHealth = {}
+enemiesHealth = {}
+alliesDamage = {}
 enemyVehiclesMaxHP = {}
 enemyVehiclesSumMaxHP = 0
 damagesSquad = 0
@@ -106,16 +107,16 @@ updateLabels = UpdateLabels(ON_TOTAL_EFFICIENCY)
 
 @registerEvent(VehicleArenaInfoVO, 'updatePlayerStatus')
 def totalEfficiency_updatePlayerStatus(self, **kwargs):
-    global isPlayerInSquad, fragsSquad, fragsSquad_dict
-    if battle.isBattleTypeSupported and _player is not None:
-        playerVehicleID = _player.playerVehicleID
-        isPlayerVehicle = self.vehicleID == playerVehicleID
-        if isPlayerVehicle and kwargs.get('isSquadMan', False):
-            isPlayerInSquad = True
-        if kwargs.get('isSquadMan', False) and isPlayerInSquad:
+    global isPlayerInSquad, fragsSquad, fragsSquad_dict, damagesSquad
+    if battle.isBattleTypeSupported and _player is not None and kwargs.get('isSquadMan', False):
+        isPlayerVehicle = (self.vehicleID == _player.playerVehicleID)
+        isPlayerInSquad |= isPlayerVehicle
+        if isPlayerInSquad:
             vehicles = arenaDP.getVehiclesStatsIterator()
             fragsSquad_dict = {stats.vehicleID: stats.frags for stats in vehicles if not isPlayerVehicle and arenaDP.isSquadMan(vID=stats.vehicleID)}
             fragsSquad = sum(fragsSquad_dict.itervalues())
+            if not isPlayerVehicle:
+                damagesSquad += alliesDamage[self.vehicleID]
             updateLabels.update()
 
 
@@ -272,7 +273,7 @@ def BattleRibbonsPanel__onRibbonAdded(self, ribbon):
 
 @registerEvent(Vehicle, 'onHealthChanged')
 def onHealthChanged(self, newHealth, attackerID, attackReasonID):
-    global vehiclesHealth, numberHitsDealt, damageReceived, numberDamagesDealt, numberDamagedVehicles, dmgAlly, damageKind, damagesSquad
+    global enemiesHealth, numberHitsDealt, damageReceived, numberDamagesDealt, numberDamagedVehicles, dmgAlly, damageKind, damagesSquad
     if not battle.isBattleTypeSupported:
         return
     isUpdate = False
@@ -280,11 +281,13 @@ def onHealthChanged(self, newHealth, attackerID, attackReasonID):
         damageReceived = maxHealth - max(0, newHealth)
         isUpdate = True
     if _player is not None and hasattr(_player, 'playerVehicleID'):
-        if self.id in vehiclesHealth:
-            damage = vehiclesHealth[self.id] - max(0, newHealth)
-            vehiclesHealth[self.id] = newHealth
+        if self.id in enemiesHealth:
+            _damage = enemiesHealth[self.id] - max(0, newHealth)
+            enemiesHealth[self.id] = newHealth
+            if attackerID in alliesDamage:
+                alliesDamage[attackerID] += _damage
             if arenaDP.isSquadMan(vID=attackerID) and attackerID != _player.playerVehicleID:
-                damagesSquad += damage
+                damagesSquad += _damage
                 isUpdate = True
         if attackerID == _player.playerVehicleID:
             if not dmgAlly and self.id in allyVehicles:
@@ -299,19 +302,21 @@ def onHealthChanged(self, newHealth, attackerID, attackReasonID):
 
 @registerEvent(Vehicle, 'onEnterWorld')
 def onEnterWorld(self, prereqs):
-    global _player, isPlayerInSquad, isStuns, vehiclesHealth, allyVehicles, enemyVehiclesMaxHP, enemyVehiclesSumMaxHP, arenaDP
+    global _player, isPlayerInSquad, isStuns, enemiesHealth, allyVehicles, enemyVehiclesMaxHP, enemyVehiclesSumMaxHP, arenaDP, alliesDamage
     if not battle.isBattleTypeSupported:
         return
     if _player is None:
         _player = player()
         arenaDP = _player.guiSessionProvider.getArenaDP()
     if self.publicInfo['team'] != _player.team:
-        vehiclesHealth[self.id] = self.health if self.health is not None else 0
+        enemiesHealth[self.id] = self.health if self.health is not None else 0
         if self.id in enemyVehiclesMaxHP and enemyVehiclesMaxHP[self.id] < self.health:
             enemyVehiclesMaxHP[self.id] = self.health if self.health is not None else 0
             enemyVehiclesSumMaxHP = sum(enemyVehiclesMaxHP.values())
     else:
         allyVehicles.append(self.id)
+        if self.id not in alliesDamage:
+            alliesDamage[self.id] = 0
     if self.isPlayerVehicle:
         global maxHealth, vehCD, burst
         isPlayerInSquad = arenaDP.isSquadMan(_player.playerVehicleID)
@@ -332,12 +337,13 @@ def FragsCollectableStats_addVehicleStatusUpdate(self, vInfoVO):
 
 @registerEvent(PlayerAvatar, '_PlayerAvatar__destroyGUI')
 def totalEfficiency_destroyGUI(self):
-    global vehiclesHealth, totalDamage, totalAssist, totalBlocked, damageReceived, damagesSquad, isPlayerInSquad, dmgAlly
+    global enemiesHealth, totalDamage, totalAssist, totalBlocked, damageReceived, damagesSquad, isPlayerInSquad, dmgAlly, alliesDamage
     global ribbonTypes, numberHitsBlocked, _player, numberHitsDealt, old_totalDamage, damage, numberShotsDealt, totalStun
     global numberDamagesDealt, numberShotsReceived, numberHitsReceived, numberHits, fragsSquad, fragsSquad_dict, isStuns
     global numberStuns, numberDamagedVehicles, hitAlly, allyVehicles, burst, numberAssistTrack, numberAssistSpot, numberAssistStun
     global damageKind, enemyVehiclesMaxHP, enemyVehiclesSumMaxHP, arenaDP
-    vehiclesHealth = {}
+    enemiesHealth = {}
+    alliesDamage = {}
     enemyVehiclesMaxHP = {}
     enemyVehiclesSumMaxHP = 0
     totalDamage = 0
