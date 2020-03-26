@@ -332,7 +332,7 @@
         "world_collision": "{{hit-effects}}", // world collision / столкновение с объектами, падение.
         "drowning": "{{l10n:drowning}}",      // drowning / утопление.
         "overturn": "{{hit-effects}}",        // overturn / опрокидывание.
-	"recovery": "{{l10n:forsaken}}",      // TO DO / самоуничтожение в режиме линия фронта
+        "recovery": "{{l10n:forsaken}}",      // self-destruction / самоуничтожение (in the "Frontline" mode / в режиме "Линия фронта").
         "death_zone": "DZ",                   // death zone / смертельная зона.
         "gas_attack": "GA",                   // gas attack / газовая атака.
         "art_attack": "{{hit-effects}}",      // art attack / артиллерийская поддержка.

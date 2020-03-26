@@ -1,4 +1,6 @@
-﻿XVM-8.3.5:
+﻿XVM-8.3.6:
+
+XVM-8.3.5:
   [GENERAL]
   * Temporarily disable crashreporting tool
 
