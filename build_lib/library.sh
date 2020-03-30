@@ -92,7 +92,7 @@ git_get_repostats(){
     export REPOSITORY_SUBJECT=$(git log -1 --pretty=format:'%s')
     export REPOSITORY_BODY=$(git log -1 --pretty=format:'%b')
     export REPOSITORY_LAST_TAG=$(git describe --tags --abbrev=0)
-    export REPOSITORY_COMMITS_NUMBER=$(git rev-list $REPOSITORY_LAST_TAG..HEAD --count)
+    export REPOSITORY_COMMITS_NUMBER=$(printf %04d $(git rev-list $REPOSITORY_LAST_TAG..HEAD --count))
     popd >/dev/null
 }
 #
