@@ -173,7 +173,7 @@ def _init():
                 data['localizedName'] = descr.shortUserString
                 data['localizedShortName'] = descr.shortUserString
                 data['localizedFullName'] = descr.userString
-                data['premium'] = 'premium' in descr.tags
+                data['premium'] = 'premium' in descr.tags and 'special' not in descr.tags
                 data['special'] = 'special' in descr.tags
 
                 stockTurret = item.turrets[0][0]

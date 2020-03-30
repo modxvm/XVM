@@ -224,6 +224,12 @@
     "lobby/crew/enable_prev_crew_tooltip": "<b><font color='#FDF4CE'>{{l10n:lobby/crew/enable_prev_crew}}</font></b>\nАвтоматически вернуть экипаж, который в предыдущем\nбою был на данной машине",
 
     // Carousel
+    "Premium": "Премиумная",
+    "PremiumTooltipHeader": "Премиумная техника",
+    "PremiumTooltipBody": "Отображать только премиумную технику.",
+    "Special": "Акционная (наградная)",
+    "SpecialTooltipHeader": "Акционная (наградная) техника",
+    "SpecialTooltipBody": "Отображать только акционную (наградную) технику.",
     "Normal": "Обычная",
     "NormalTooltipHeader": "Обычная техника",
     "NormalTooltipBody": "Отображать только обычную (не премиумную) технику.",
