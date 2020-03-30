@@ -167,9 +167,9 @@ def __read_realfs():
                 data = json.load(m_config_f)
 
                 if data['id'] in mods.keys():
-                    logging.warning("[XFW/Loader] [RealFS]: mod '%s' was already found" % data[id])
+                    logging.warning("[XFW/Loader] [RealFS]: mod '%s' was already found" % data['id'])
                     logging.warning("                       current location  : %s" % m_dir)
-                    logging.warning("                       imported location : %s" % mods[id]['dir'])
+                    logging.warning("                       imported location : %s" % mods[data['id']]['dir'])
                 else:
                     mods[data['id']] = data
                     mods[data['id']]['fs'] = 'realfs'
