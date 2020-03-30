@@ -228,6 +228,12 @@
     "profile/xvm_xte_extended_tooltip": "<textformat tabstops='[20, 85, 140]'>{{l10n:profile/xvm_xte_tooltip}}\n\nReference values:\n\t\tdamage\tfrags\n\tCurrent:\t<font color='#FDF4CE' size='14'>{0}</font>\t<font color='#FDF4CE' size='14'>{1}</font>\n\tAverage:\t<font color='#FDF4CE' size='14'>{2}</font>\t<font color='#FDF4CE' size='14'>{3}</font>\n\tTop:\t<font color='#FDF4CE' size='14'>{4}</font>\t<font color='#FDF4CE' size='14'>{5}</font>",
 
     // Carousel
+    "Premium": "Premium",
+    "PremiumTooltipHeader": "Premium vehicles",
+    "PremiumTooltipBody": "Show only premium vehicles.",
+    "Special": "Reward",
+    "SpecialTooltipHeader": "Reward vehicles.",
+    "SpecialTooltipBody": "Show only reward vehicles.",
     "Normal": "Normal",
     "NormalTooltipHeader": "Normal Vehicles",
     "NormalTooltipBody": "Show only normal (non-premium) vehicles.",

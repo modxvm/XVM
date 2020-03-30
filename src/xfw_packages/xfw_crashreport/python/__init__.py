@@ -81,7 +81,7 @@ class XFWCrashReport(object):
             return False
         if not self.set_user("0"):
             logging.error("[XFW/Crashreport] [install] Crash reports failed to install. (failed to set userid)")
-            return False 
+            return False
 
         dependency.instance(IAppLoader).onGUISpaceEntered += self.__on_gui_space_entered
         self.__installed = True
@@ -230,12 +230,12 @@ def xfw_module_init():
     __xfw_crashreport = XFWCrashReport()
 
     package_name = unicode(__xfw_crashreport.package_name)
-    
+
     #options/attachments
     if os.path.exists('game.log'):
-        __xfw_crashreport.add_attachment("game.log","game.log")
-    __xfw_crashreport.add_attachment("python.log","python.log")
-    __xfw_crashreport.add_attachment("xvm.log","xvm.log")
+        __xfw_crashreport.add_attachment("game.log", "game.log")
+    __xfw_crashreport.add_attachment("python.log", "python.log")
+    __xfw_crashreport.add_attachment("xvm.log", "xvm.log")
 
     #options/consent
     if loader.get_client_realm() != 'RU':
