@@ -177,13 +177,19 @@ def _applyXvmFilter(item, filters, total_stats, vehicles_stats):
 
     remove = False
 
-    if premium != normal:
-        remove |= premium and not vdata['premium']
-        remove |= normal and item.isPremium # isPremium include 'premium' and 'special' vehicles
-
-    if premium != special:
+    # isPremium include 'premium' and 'special' vehicles
+    if premium and special and normal:
+        pass
+    elif premium and special:
+        remove |= not item.isPremium
+    elif premium and normal:
+        remove |= vdata['special']
+    elif special and normal:
+        remove |= vdata['premium']
+    else:
         remove |= premium and not vdata['premium']
         remove |= special and not vdata['special']
+        remove |= normal and item.isPremium
 
     if elite != non_elite:
         remove |= elite and not item.isElite
