@@ -152,7 +152,7 @@ main(){
     fi
 
     build_deploy
-    clean_directories
+    #clean_directories
 }
 
 main

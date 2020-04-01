@@ -12,3 +12,6 @@ backupXVM=Backup /res_mods/configs folder.
 websiteXVM=Activate online services on XVM website
 component_XVM=XVM
 component_MSRuntime=Updated Microsoft C++ Runtime (needed for Windows XP)
+SettingConfigurationBtn=Configuration
+SettingConfigurationForm=Configuration
+LinkSupportConfigs=Configs Support
