@@ -3869,6 +3869,10 @@ package
 
         public static const INTERNET_PROVIDER_KAZAKHTELECOM_TARIFF:String = "#menu:internet_provider/Kazakhtelecom/tariff";
 
+        public static const INTERNET_PROVIDER_BEELINEKZ_NAME:String = "#menu:internet_provider/BeelineKZ/name";
+
+        public static const INTERNET_PROVIDER_BEELINEKZ_TARIFF:String = "#menu:internet_provider/BeelineKZ/tariff";
+
         public static const PROGRESSIVEREWARD_WIDGET_TITLE:String = "#menu:progressiveReward/widget/title";
 
         public static const PROGRESSIVEREWARD_WIDGET_DESC:String = "#menu:progressiveReward/widget/desc";
