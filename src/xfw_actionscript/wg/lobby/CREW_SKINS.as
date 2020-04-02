@@ -329,6 +329,24 @@ package
 
         public static const DURDEN_DESCR:String = "#crew_skins:Durden/Descr";
 
+        public static const ALICE_NAME:String = "#crew_skins:alice/Name";
+
+        public static const ALICE_LASTNAME:String = "#crew_skins:alice/LastName";
+
+        public static const ALICE_DESCR:String = "#crew_skins:alice/Descr";
+
+        public static const ZELENY_NAME:String = "#crew_skins:zeleny/Name";
+
+        public static const ZELENY_LASTNAME:String = "#crew_skins:zeleny/LastName";
+
+        public static const ZELENY_DESCR:String = "#crew_skins:zeleny/Descr";
+
+        public static const SELEZNEV_NAME:String = "#crew_skins:seleznev/Name";
+
+        public static const SELEZNEV_LASTNAME:String = "#crew_skins:seleznev/LastName";
+
+        public static const SELEZNEV_DESCR:String = "#crew_skins:seleznev/Descr";
+
         public function CREW_SKINS()
         {
             super();
