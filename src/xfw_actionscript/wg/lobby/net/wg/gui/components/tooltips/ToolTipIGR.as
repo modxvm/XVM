@@ -71,7 +71,6 @@ package net.wg.gui.components.tooltips
         {
             var _loc4_:* = NaN;
             var _loc5_:IgrVO = null;
-            var _loc6_:Separator = null;
             var _loc9_:IgrQuestBlock = null;
             var _loc11_:* = false;
             var _loc12_:IgrPremVehQuestBlock = null;
@@ -80,7 +79,7 @@ package net.wg.gui.components.tooltips
             var _loc3_:uint = 0;
             _loc4_ = 300;
             _loc5_ = new IgrVO(_data);
-            _loc6_ = null;
+            var _loc6_:Separator = null;
             separators = new Vector.<Separator>();
             contentMargin.bottom = 2;
             var _loc7_:ToolTipBlockResultVO = null;

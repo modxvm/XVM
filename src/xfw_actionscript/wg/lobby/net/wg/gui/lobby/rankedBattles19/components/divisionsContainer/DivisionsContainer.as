@@ -113,12 +113,13 @@ package net.wg.gui.lobby.rankedBattles19.components.divisionsContainer
         public function layoutContent() : void
         {
             var _loc2_:Division = null;
+            var _loc3_:* = 0;
             var _loc1_:int = this._divisions.length;
             if(_loc1_ == 0)
             {
                 return;
             }
-            var _loc3_:int = this._isSmall?DIVISION_SPACE_SMALL:DIVISION_SPACE_BIG;
+            _loc3_ = this._isSmall?DIVISION_SPACE_SMALL:DIVISION_SPACE_BIG;
             var _loc4_:int = START_X + (_loc3_ >> 1);
             var _loc5_:* = 0;
             while(_loc5_ < _loc1_)
