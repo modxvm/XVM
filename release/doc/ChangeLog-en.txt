@@ -1,4 +1,6 @@
 ﻿XVM-8.4.0:
+  [GENERAL]
+  * World of Tanks 1.8.0.2
 
 XVM-8.3.5:
   [GENERAL]
