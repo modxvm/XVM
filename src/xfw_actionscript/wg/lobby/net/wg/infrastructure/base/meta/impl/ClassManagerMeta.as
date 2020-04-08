@@ -1170,6 +1170,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.hangar.DailyQuestWidget;
     import net.wg.gui.lobby.hangar.Hangar;
     import net.wg.gui.lobby.hangar.HangarHeader;
+    import net.wg.gui.lobby.hangar.PreLaunch;
     import net.wg.gui.lobby.hangar.ResearchPanel;
     import net.wg.gui.lobby.hangar.SwitchModePanel;
     import net.wg.gui.lobby.hangar.TmenXpPanel;
@@ -5832,6 +5833,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_LOBBY_HANGAR_HANGAR:Class = Hangar;
 
         public static const NET_WG_GUI_LOBBY_HANGAR_HANGARHEADER:Class = HangarHeader;
+
+        public static const NET_WG_GUI_LOBBY_HANGAR_PRELAUNCH:Class = PreLaunch;
 
         public static const NET_WG_GUI_LOBBY_HANGAR_RESEARCHPANEL:Class = ResearchPanel;
 

@@ -51,6 +51,8 @@ package net.wg.data.constants.generated
 
         public static const BATTLE_PASSS_ENTRY_POINT:String = "battlePassEntryPoint";
 
+        public static const PRE_LAUNCH:String = "preLaunch";
+
         public function HANGAR_ALIASES()
         {
             super();
