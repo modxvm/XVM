@@ -5247,6 +5247,12 @@ package
 
         public static const MAPS_ICONS_POPOVERS_POPOVER_SHADOW:String = "../maps/icons/popovers/popover_shadow.png";
 
+        public static const MAPS_ICONS_PRELAUNCH_ARROW:String = "../maps/icons/preLaunch/arrow.png";
+
+        public static const MAPS_ICONS_PRELAUNCH_PRELAUNCH_BACKGROUND:String = "../maps/icons/preLaunch/prelaunch_background.png";
+
+        public static const MAPS_ICONS_PRELAUNCH_PRELAUNCH_TISER_BG:String = "../maps/icons/preLaunch/prelaunch_tiser_bg.png";
+
         public static const MAPS_ICONS_PREMACC_BACKGROUNDS_DASHBOARD:String = "../maps/icons/premacc/backgrounds/dashboard.png";
 
         public static const MAPS_ICONS_PREMACC_BACKGROUNDS_PIGGYBANK:String = "../maps/icons/premacc/backgrounds/piggybank.png";
