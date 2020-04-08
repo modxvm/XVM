@@ -3,6 +3,7 @@ package net.wg.gui.components.containers
     import flash.text.TextField;
     import flash.display.Bitmap;
     import flash.text.TextFieldType;
+    import flash.display.Sprite;
 
     public class GFWrapper extends BaseContainerWrapper
     {
@@ -14,6 +15,8 @@ package net.wg.gui.components.containers
         private static const TF_NAME:String = "gfInputFixTF";
 
         private static const IME_TF_NAME:String = "gfimeTF";
+
+        private static const HIT_AREA_SPRITE:String = "hitAreaSprite";
 
         public var inputFixTF:TextField = null;
 
@@ -28,6 +31,7 @@ package net.wg.gui.components.containers
             this.addGFBitmap();
             this.addInputFixTF();
             this.addIMETF();
+            this.addHitArea();
         }
 
         public static function createWrapper() : GFWrapper
@@ -48,6 +52,11 @@ package net.wg.gui.components.containers
                 this.gamefaceBitmap.width = param1;
                 this.gamefaceBitmap.height = param2;
             }
+            if(hitArea != null)
+            {
+                hitArea.width = param1;
+                hitArea.height = param2;
+            }
         }
 
         override protected function onDispose() : void
@@ -55,6 +64,8 @@ package net.wg.gui.components.containers
             this.gamefaceBitmap = null;
             this.inputFixTF = null;
             this.imeTF = null;
+            removeChild(hitArea);
+            hitArea = null;
             super.onDispose();
         }
 
@@ -84,6 +95,18 @@ package net.wg.gui.components.containers
             this.imeTF.alpha = 0;
             this.imeTF.type = TextFieldType.INPUT;
             this.imeTF.selectable = false;
+        }
+
+        private function addHitArea() : void
+        {
+            var _loc1_:Sprite = new Sprite();
+            _loc1_.name = HIT_AREA_SPRITE;
+            _loc1_.graphics.clear();
+            _loc1_.graphics.beginFill(16711680,0);
+            _loc1_.graphics.drawRect(0,0,1,1);
+            _loc1_.graphics.endFill();
+            addChild(_loc1_);
+            hitArea = _loc1_;
         }
     }
 }
