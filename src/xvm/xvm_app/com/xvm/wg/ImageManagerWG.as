@@ -74,18 +74,18 @@ package com.xvm.wg
                         if(!_loc2_.lockData())
                         {
                             _loc2_.dispose();
-                            _loc2_ = new ImageData(_loc3_,ImageCacheTypes.USE_WEB_CACHE);
+                            _loc2_ = new ImageData(_loc3_, ImageCacheTypes.USE_WEB_CACHE);
                         }
                     }
                 }
                 else
                 {
-                    _loc2_ = new ImageData(_loc3_,ImageCacheTypes.USE_WEB_CACHE);
+                    _loc2_ = new ImageData(_loc3_, ImageCacheTypes.USE_WEB_CACHE);
                 }
                 _loc2_.permanent = true;
                 this._webCache[_loc3_] = _loc2_;
             }
-            param1.splice(0,param1.length);
+            param1.splice(0, param1.length);
         }
 
         override protected function unloadImages(param1:Array) : void
@@ -104,8 +104,8 @@ package com.xvm.wg
                     }
                     else
                     {
-                        _loc2_.addEventListener(Event.COMPLETE,this.onLoaderCompleteHandler);
-                        _loc2_.addEventListener(IOErrorEvent.IO_ERROR,this.onLoaderIoErrorHandler);
+                        _loc2_.addEventListener(Event.COMPLETE, this.onLoaderCompleteHandler);
+                        _loc2_.addEventListener(IOErrorEvent.IO_ERROR, this.onLoaderIoErrorHandler);
                     }
                 }
                 else
@@ -127,10 +127,10 @@ package com.xvm.wg
             var _loc1_:ImageData = null;
             if(this._init)
             {
-                this._loaderMgr.removeEventListener(LoaderEvent.VIEW_LOADING,this.onLoaderMgrViewLoadingHandler);
+                this._loaderMgr.removeEventListener(LoaderEvent.VIEW_LOADING, this.onLoaderMgrViewLoadingHandler);
                 this._loaderMgr = null;
             }
-            this._queue.splice(0,this._queue.length);
+            this._queue.splice(0, this._queue.length);
             this._queue = null;
             for each(_loc1_ in this._webCache)
             {
@@ -153,11 +153,11 @@ package com.xvm.wg
             {
                 return null;
             }
-            _loc3_ = this.getLoader(param1,param2);
+            _loc3_ = this.getLoader(param1, param2);
             if(!_loc3_.ready)
             {
-                _loc3_.addEventListener(Event.COMPLETE,this.onLoaderCompleteHandler);
-                _loc3_.addEventListener(IOErrorEvent.IO_ERROR,this.onLoaderIoErrorHandler);
+                _loc3_.addEventListener(Event.COMPLETE, this.onLoaderCompleteHandler);
+                _loc3_.addEventListener(IOErrorEvent.IO_ERROR, this.onLoaderIoErrorHandler);
             }
             return _loc3_;
         }
@@ -185,20 +185,20 @@ package com.xvm.wg
                     else
                     {
                         _loc3_.dispose();
-                        _loc3_ = this.createImageLoader(param1,param2);
+                        _loc3_ = this.createImageLoader(param1, param2);
                     }
                 }
             }
             else
             {
-                _loc3_ = this.createImageLoader(param1,param2);
+                _loc3_ = this.createImageLoader(param1, param2);
             }
             return _loc3_;
         }
 
         private function createImageLoader(param1:String, param2:int = 1) : ImageData
         {
-            var _loc3_:ImageData = new ImageData(param1,param2);
+            var _loc3_:ImageData = new ImageData(param1, param2);
             if(param2 == ImageCacheTypes.USE_WEB_CACHE)
             {
                 this._webCache[param1] = _loc3_;
@@ -254,15 +254,15 @@ package com.xvm.wg
             {
                 this._init = true;
                 this._loaderMgr = App.instance.loaderMgr;
-                this._loaderMgr.addEventListener(LoaderEvent.VIEW_LOADING,this.onLoaderMgrViewLoadingHandler);
+                this._loaderMgr.addEventListener(LoaderEvent.VIEW_LOADING, this.onLoaderMgrViewLoadingHandler);
             }
         }
 
         private function onLoaderCompleteHandler(param1:Event) : void
         {
             var _loc2_:ImageData = ImageData(param1.target);
-            _loc2_.removeEventListener(Event.COMPLETE,this.onLoaderCompleteHandler);
-            _loc2_.removeEventListener(IOErrorEvent.IO_ERROR,this.onLoaderIoErrorHandler);
+            _loc2_.removeEventListener(Event.COMPLETE, this.onLoaderCompleteHandler);
+            _loc2_.removeEventListener(IOErrorEvent.IO_ERROR, this.onLoaderIoErrorHandler);
             if(!_loc2_.permanent)
             {
                 this.pushQueue(_loc2_);
@@ -272,8 +272,8 @@ package com.xvm.wg
         private function onLoaderIoErrorHandler(param1:IOErrorEvent) : void
         {
             var _loc2_:ImageData = ImageData(param1.target);
-            _loc2_.removeEventListener(Event.COMPLETE,this.onLoaderCompleteHandler);
-            _loc2_.removeEventListener(IOErrorEvent.IO_ERROR,this.onLoaderIoErrorHandler);
+            _loc2_.removeEventListener(Event.COMPLETE, this.onLoaderCompleteHandler);
+            _loc2_.removeEventListener(IOErrorEvent.IO_ERROR, this.onLoaderIoErrorHandler);
         }
 
         private function onLoaderMgrViewLoadingHandler(param1:LoaderEvent) : void
