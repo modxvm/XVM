@@ -92,7 +92,7 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/teamBasesPanel/Team
    trait method QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamBasesPanel"), "updatePositions")
     method
      refid "net.wg.gui.battle.random.views.teamBasesPanel:TeamBasesPanel/instance/net.wg.gui.battle.random.views.teamBasesPanel:TeamBasesPanel/updatePositions"
-@@ -1221,7 +1241,48 @@
+@@ -1225,7 +1225,48 @@
     end ; code
    end ; body
   end ; method

@@ -20,12 +20,12 @@ package com.xvm.wg
         {
             if(this._array)
             {
-                this._array.splice(0,this._array.length);
+                this._array.splice(0, this._array.length);
                 this._array = null;
             }
             if(this._array1)
             {
-                this._array1.splice(0,this._array1.length);
+                this._array1.splice(0, this._array1.length);
                 this._array1 = null;
             }
             super.onDispose();
@@ -38,7 +38,7 @@ package com.xvm.wg
             this.loadImages(this._array);
             if(_loc2_)
             {
-                _loc2_.splice(0,_loc2_.length);
+                _loc2_.splice(0, _loc2_.length);
             }
         }
 
@@ -49,7 +49,7 @@ package com.xvm.wg
             this.unloadImages(this._array1);
             if(_loc2_)
             {
-                _loc2_.splice(0,_loc2_.length);
+                _loc2_.splice(0, _loc2_.length);
             }
         }
 

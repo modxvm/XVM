@@ -85,14 +85,14 @@ package com.xvm.wg
 
         private function addImgDataListeners() : void
         {
-            this._imgData.addEventListener(Event.COMPLETE,this.onImgDataCompleteHandler);
-            this._imgData.addEventListener(IOErrorEvent.IO_ERROR,this.onImgDataIoErrorHandler);
+            this._imgData.addEventListener(Event.COMPLETE, this.onImgDataCompleteHandler);
+            this._imgData.addEventListener(IOErrorEvent.IO_ERROR, this.onImgDataIoErrorHandler);
         }
 
         private function removeImgDataListeners() : void
         {
-            this._imgData.removeEventListener(Event.COMPLETE,this.onImgDataCompleteHandler);
-            this._imgData.removeEventListener(IOErrorEvent.IO_ERROR,this.onImgDataIoErrorHandler);
+            this._imgData.removeEventListener(Event.COMPLETE, this.onImgDataCompleteHandler);
+            this._imgData.removeEventListener(IOErrorEvent.IO_ERROR, this.onImgDataIoErrorHandler);
         }
 
         public function get source() : String
@@ -109,7 +109,7 @@ package com.xvm.wg
                 this.removeImgData();
                 if(this._source)
                 {
-                    this.setImgData(this._mgr.getImageData(this._source,this._cacheType));
+                    this.setImgData(this._mgr.getImageData(this._source, this._cacheType));
                 }
             }
         }
@@ -129,7 +129,7 @@ package com.xvm.wg
                     this.removeImgData();
                     if(this._sourceAlt)
                     {
-                        this.setImgData(this._mgr.getImageData(this._sourceAlt,this._cacheType));
+                        this.setImgData(this._mgr.getImageData(this._sourceAlt, this._cacheType));
                     }
                 }
             }
@@ -191,7 +191,7 @@ package com.xvm.wg
             {
                 this._loadFailed = true;
                 dispatchEvent(param1);
-                this.setImgData(this._mgr.getImageData(this._sourceAlt,this._cacheType));
+                this.setImgData(this._mgr.getImageData(this._sourceAlt, this._cacheType));
             }
             else
             {

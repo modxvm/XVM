@@ -175,7 +175,7 @@ package com.xvm.battle.classic.fullStats
 
         override public function setBadge(_badgeVO:BadgeVisualVO, _hasBadge:Boolean):void
         {
-            _hasBadge = cfg.removeRankBadgeIcon ? false : _hasBadge
+            _hasBadge = cfg.removeRankBadgeIcon ? false : _hasBadge;
             super.setBadge(_badgeVO, _hasBadge);
         }
 
