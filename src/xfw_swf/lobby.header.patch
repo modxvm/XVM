@@ -30,7 +30,7 @@ diff -Naur lobby.orig-0.orig/net/wg/gui/lobby/header/LobbyHeader.class.asasm lob
 diff -Naur lobby.orig-0.orig/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonContentItem.class.asasm lobby.orig-0/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonContentItem.class.asasm
 --- lobby.orig-0.orig/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonContentItem.class.asasm	2019-05-29 13:25:03.507758400 +0300
 +++ lobby.orig-0/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonContentItem.class.asasm	2019-05-29 13:32:15.896478200 +0300
-@@ -1206,6 +1206,25 @@
+@@ -1201,6 +1201,25 @@
      end ; body
     end ; method
    end ; trait
@@ -56,7 +56,7 @@ diff -Naur lobby.orig-0.orig/net/wg/gui/lobby/header/headerButtonBar/HeaderButto
    trait getter QName(ProtectedNamespace("net.wg.gui.lobby.header.headerButtonBar:HeaderButtonContentItem"), "leftPadding")
     method
      refid "net.wg.gui.lobby.header.headerButtonBar:HeaderButtonContentItem/instance/net.wg.gui.lobby.header.headerButtonBar:HeaderButtonContentItem:leftPadding/getter"
-@@ -1234,6 +1234,25 @@
+@@ -1229,6 +1229,25 @@
        returnvalue
       end ; code
      end ; body
