@@ -22,6 +22,10 @@ package net.wg.gui.bootcamp.messageWindow.data
 
         public var contentData:NodeData = null;
 
+        public var animationTarget:String = "";
+
+        public var animationType:String = "";
+
         public function MessageBottomItemVO(param1:Object)
         {
             super(param1);

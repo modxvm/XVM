@@ -38,9 +38,9 @@ package net.wg.gui.lobby.techtree.sub
 
         private static const UNLOCK_INFORMATION_NOT_DEFINED:String = "Unlock information is not defined for node = ";
 
-        private static const MEDIUM_SIZE_BREAKPOINT:Number = 1280;
+        private static const MEDIUM_SIZE_BREAKPOINT:int = 1280;
 
-        private static const LARGE_SIZE_BREAKPOINT:Number = 1600;
+        private static const LARGE_SIZE_BREAKPOINT:int = 1600;
 
         private static const NATION_FLAG_ALPHA:Number = 1.2;
 
@@ -48,11 +48,13 @@ package net.wg.gui.lobby.techtree.sub
 
         private static const CORNER_X:int = 18;
 
-        private static const PREMIUM_ROOT_OUT_X:Number = 180;
+        private static const PREMIUM_ROOT_OUT_X:int = 180;
 
         public var view:IResearchPage = null;
 
         public var background:Sprite = null;
+
+        public var backgroundCollectible:Sprite = null;
 
         public var nationFlagContainer:NationFlagContainer = null;
 
@@ -71,7 +73,7 @@ package net.wg.gui.lobby.techtree.sub
             super();
         }
 
-        override public function getNodeByID(param1:Number) : IRenderer
+        override public function getNodeByID(param1:int) : IRenderer
         {
             var _loc2_:MatrixPosition = positionById[param1];
             var _loc3_:IRenderer = null;
@@ -106,6 +108,7 @@ package net.wg.gui.lobby.techtree.sub
             param1.removeEventListener(TechTreeEvent.RESTORE_VEHICLE,this.onRendererRestoreVehicleHandler);
             param1.removeEventListener(TechTreeEvent.GO_TO_BLUEPRINT_VIEW,this.onGoToBlueprintViewHandler);
             param1.removeEventListener(TechTreeEvent.CLICK_2_RENT,this.onRendererClick2RentHandler);
+            param1.removeEventListener(TechTreeEvent.GO_TO_SHOP,this.onRendererGoToShopHandler);
             param1.removeEventListener(TechTreeEvent.GO_TO_CHANGE_NATION_VIEW,this.onGoToChangeNationViewHandler);
             super.removeItemRenderer(param1);
         }
@@ -126,6 +129,7 @@ package net.wg.gui.lobby.techtree.sub
                     _loc1_ = MEDIUM_SIZE_SCALE;
                 }
                 this.background.scaleX = this.background.scaleY = _loc1_;
+                this.backgroundCollectible.scaleX = this.backgroundCollectible.scaleY = _loc1_;
                 this.nationFlagContainer.scaleX = this.nationFlagContainer.scaleY = _loc1_;
                 invalidateLayout();
             }
@@ -136,6 +140,17 @@ package net.wg.gui.lobby.techtree.sub
         {
             super.drawLines();
             ResearchGraphics(rGraphics).buildTopRenderersLines(this._topRenderers);
+        }
+
+        override protected function onDrawComplete() : void
+        {
+            this.updateBackground();
+        }
+
+        private function updateBackground() : void
+        {
+            this.background.visible = !rootRenderer.isCollectible();
+            this.backgroundCollectible.visible = rootRenderer.isCollectible();
         }
 
         override protected function onDispose() : void
@@ -149,6 +164,7 @@ package net.wg.gui.lobby.techtree.sub
             this._topRenderers = null;
             this._vehicleNodeClass = null;
             this.background = null;
+            this.backgroundCollectible = null;
             this.nationFlagContainer.dispose();
             this.nationFlagContainer = null;
             this.view = null;
@@ -202,6 +218,7 @@ package net.wg.gui.lobby.techtree.sub
             param1.addEventListener(TechTreeEvent.RESTORE_VEHICLE,this.onRendererRestoreVehicleHandler,false,0,true);
             param1.addEventListener(TechTreeEvent.GO_TO_BLUEPRINT_VIEW,this.onGoToBlueprintViewHandler,false,0,true);
             param1.addEventListener(TechTreeEvent.CLICK_2_RENT,this.onRendererClick2RentHandler,false,0,true);
+            param1.addEventListener(TechTreeEvent.GO_TO_SHOP,this.onRendererGoToShopHandler,false,0,true);
             if(!param2)
             {
                 param1.addEventListener(TechTreeEvent.CLICK_2_OPEN,this.onRendererClick2OpenHandler,false,0,true);
@@ -249,7 +266,7 @@ package net.wg.gui.lobby.techtree.sub
 
         override protected function updateLayout() : void
         {
-            var _loc2_:* = NaN;
+            var _loc2_:* = 0;
             var _loc3_:* = NaN;
             var _loc4_:IRenderer = null;
             super.updateLayout();
@@ -301,8 +318,8 @@ package net.wg.gui.lobby.techtree.sub
             var _loc4_:* = NaN;
             var _loc5_:Array = null;
             var _loc6_:IRenderer = null;
-            var _loc3_:Number = param1.length;
-            var _loc7_:Number = 0;
+            var _loc3_:int = param1.length;
+            var _loc7_:* = 0;
             while(_loc7_ < _loc3_)
             {
                 _loc5_ = param1[_loc7_];
@@ -332,10 +349,10 @@ package net.wg.gui.lobby.techtree.sub
             var _loc5_:Array = null;
             var _loc6_:* = false;
             var _loc7_:IRenderer = null;
-            var _loc8_:* = NaN;
-            var _loc9_:* = NaN;
-            var _loc4_:Number = param2.length;
-            var _loc10_:Number = 0;
+            var _loc8_:* = 0;
+            var _loc9_:* = 0;
+            var _loc4_:int = param2.length;
+            var _loc10_:* = 0;
             while(_loc10_ < _loc4_)
             {
                 _loc5_ = param2[_loc10_];
@@ -387,10 +404,10 @@ package net.wg.gui.lobby.techtree.sub
         {
             var _loc3_:Array = null;
             var _loc4_:IRenderer = null;
-            var _loc5_:* = NaN;
-            var _loc6_:* = NaN;
-            var _loc2_:Number = param1.length;
-            var _loc7_:Number = 0;
+            var _loc5_:* = 0;
+            var _loc6_:* = 0;
+            var _loc2_:int = param1.length;
+            var _loc7_:* = 0;
             while(_loc7_ < _loc2_)
             {
                 _loc3_ = param1[_loc7_];
@@ -459,13 +476,13 @@ package net.wg.gui.lobby.techtree.sub
             var _loc2_:IRenderer = null;
             var _loc3_:MatrixPosition = null;
             var _loc4_:NodeData = null;
-            var _loc1_:Number = _dataProvider.topLength;
+            var _loc1_:int = _dataProvider.topLength;
             var _loc5_:* = false;
             while(this._topRenderers.length > _loc1_)
             {
                 this.removeItemRenderer(this._topRenderers.pop());
             }
-            var _loc6_:Number = 0;
+            var _loc6_:* = 0;
             while(_loc6_ < _loc1_)
             {
                 if(_loc6_ < this._topRenderers.length)
@@ -475,7 +492,6 @@ package net.wg.gui.lobby.techtree.sub
                     if(rGraphics != null)
                     {
                         rGraphics.clearUpRenderer(_loc2_);
-                        rGraphics.clearLinesAndArrows(_loc2_);
                     }
                 }
                 else
@@ -632,6 +648,14 @@ package net.wg.gui.lobby.techtree.sub
         private function onGoToChangeNationViewHandler(param1:TechTreeEvent) : void
         {
             this.view.goToNationChangeViewS(rootRenderer.getID());
+        }
+
+        private function onRendererGoToShopHandler(param1:TechTreeEvent) : void
+        {
+            if(this.view != null && param1.index > -1)
+            {
+                this.view.goToVehicleCollectionS(rootRenderer.container.getNation());
+            }
         }
     }
 }

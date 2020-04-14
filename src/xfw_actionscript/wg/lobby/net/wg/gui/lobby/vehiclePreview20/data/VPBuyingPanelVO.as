@@ -28,13 +28,15 @@ package net.wg.gui.lobby.vehiclePreview20.data
 
         public var buyButtonTooltip:String = "";
 
+        public var isShowSpecialTooltip:Boolean = false;
+
         public var isBuyingAvailable:Boolean = false;
 
         public var isUnlock:Boolean = false;
 
         public var showAction:Boolean = false;
 
-        public var showCannotResearchWarning:Boolean = false;
+        public var warning:String = "";
 
         public var hasCompensation:Boolean = false;
 

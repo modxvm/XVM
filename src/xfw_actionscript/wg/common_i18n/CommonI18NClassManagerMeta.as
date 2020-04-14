@@ -53,6 +53,8 @@ package
 
         public static const MESSENGER:Class = MESSENGER;
 
+        public static const NATIONS:Class = NATIONS;
+
         public static const PERSONAL_MISSIONS:Class = PERSONAL_MISSIONS;
 
         public static const PO_FILES:Class = PO_FILES;
@@ -80,6 +82,8 @@ package
         public static const SETTINGS:Class = SETTINGS;
 
         public static const STORAGE:Class = STORAGE;
+
+        public static const STORE:Class = STORE;
 
         public static const SYSTEM_MESSAGES:Class = SYSTEM_MESSAGES;
 

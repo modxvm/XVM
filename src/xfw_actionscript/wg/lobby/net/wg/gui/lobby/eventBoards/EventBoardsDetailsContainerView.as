@@ -191,7 +191,6 @@ package net.wg.gui.lobby.eventBoards
 
         private function updateLayout() : void
         {
-            var _loc1_:* = 0;
             this.waiting.width = width;
             this.waiting.height = height;
             if(this._data.bgWidth != Values.DEFAULT_INT)
@@ -204,7 +203,7 @@ package net.wg.gui.lobby.eventBoards
                 this.bgWindow.height = this._data.bgHeight;
             }
             this.topPanel.width = width;
-            _loc1_ = height - TOP_PANEL_HEIGHT;
+            var _loc1_:int = height - TOP_PANEL_HEIGHT;
             var _loc2_:int = height / MIN_HEIGHT * MIN_CMP_PADDING;
             var _loc3_:int = this.bgWindow.height + this.topPanel.height + NUM_BTN_HEIGHT + (_loc2_ << 1);
             this.topPanel.y = (_loc1_ - _loc3_ >> 1) + TOP_PANEL_HEIGHT;

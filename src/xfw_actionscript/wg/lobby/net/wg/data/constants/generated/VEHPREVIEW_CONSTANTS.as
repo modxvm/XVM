@@ -47,6 +47,12 @@ package net.wg.data.constants.generated
 
         public static const CREDIT_BONUS:int = 3;
 
+        public static const REGULAR:int = 0;
+
+        public static const COLLECTIBLE:int = 1;
+
+        public static const COLLECTIBLE_WITHOUT_MODULES:int = 2;
+
         public function VEHPREVIEW_CONSTANTS()
         {
             super();

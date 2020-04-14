@@ -33,21 +33,11 @@ package net.wg.gui.bootcamp.queueWindow
 
         private static const INTRO_IMAGE_HEIGHT:int = 1200;
 
-        private static const TEXT_UPDATE_DELAY:int = 500;
-
-        private static const TITLE_OFFSET:int = 26;
-
         private static const BOTTOM_PADDING:int = 150;
 
         private static const INFO_OFFSET:int = 7;
 
-        private static const DOTS:String = " ...";
-
         public var infoField:TextField;
-
-        public var titleField:TextField;
-
-        public var dotsField:TextField;
 
         public var overlay:Sprite;
 
@@ -60,8 +50,6 @@ package net.wg.gui.bootcamp.queueWindow
         public var background:UILoaderAlt;
 
         private var _backgroundContainer:Sprite;
-
-        private var _dotIndex:int = 1;
 
         private var _tutorialPage:TutorialPageContainer;
 
@@ -79,8 +67,7 @@ package net.wg.gui.bootcamp.queueWindow
 
         public function as_setStatusText(param1:String) : void
         {
-            this.titleField.text = param1;
-            this.updateDotsPosition();
+            this.waiting.setMessage(param1);
         }
 
         public function as_showCancelButton(param1:Boolean, param2:String, param3:String) : void
@@ -96,23 +83,6 @@ package net.wg.gui.bootcamp.queueWindow
             this.overlay.width = this.backgroundOverlay.width = param1;
             this.overlay.height = this.backgroundOverlay.height = param2;
             this.updatePosition();
-        }
-
-        private function updateDotsPosition() : void
-        {
-            this.dotsField.y = this.titleField.y;
-            this.dotsField.x = this.titleField.x + (this.titleField.width - this.titleField.textWidth >> 1) + this.titleField.textWidth | 0;
-        }
-
-        private function updateDotsText() : void
-        {
-            this.dotsField.text = DOTS.substr(0,this._dotIndex);
-            this._dotIndex++;
-            if(this._dotIndex > DOTS.length)
-            {
-                this._dotIndex = 1;
-            }
-            App.utils.scheduler.scheduleTask(this.updateDotsText,TEXT_UPDATE_DELAY);
         }
 
         override protected function setData(param1:BCQueueVO) : void
@@ -134,11 +104,9 @@ package net.wg.gui.bootcamp.queueWindow
         override protected function configUI() : void
         {
             super.configUI();
-            App.utils.scheduler.scheduleTask(this.updateDotsText,TEXT_UPDATE_DELAY);
             addChildAt(this._backgroundContainer,1);
             this.cancelBtn.addEventListener(ButtonEvent.PRESS,this.onCancelBtnPressHandler);
             this.background.addEventListener(UILoaderEvent.COMPLETE,this.onBackgroundCompleteHandler,false,0,true);
-            this.titleField.autoSize = TextFieldAutoSize.LEFT;
             this.infoField.autoSize = TextFieldAutoSize.LEFT;
         }
 
@@ -150,9 +118,6 @@ package net.wg.gui.bootcamp.queueWindow
         override protected function onDispose() : void
         {
             this.disposeBackgroundRenderer();
-            App.utils.scheduler.cancelTask(this.updateDotsText);
-            this.titleField = null;
-            this.dotsField = null;
             this.overlay = null;
             this.infoField = null;
             this.waiting.dispose();
@@ -171,10 +136,11 @@ package net.wg.gui.bootcamp.queueWindow
 
         private function updatePosition() : void
         {
+            var _loc1_:* = 0;
             var _loc4_:* = NaN;
             var _loc5_:* = NaN;
             var _loc6_:* = NaN;
-            var _loc1_:int = App.appWidth;
+            _loc1_ = App.appWidth;
             var _loc2_:int = App.appHeight;
             this.cancelBtn.x = _loc1_ - this.cancelBtn.width >> 1;
             var _loc3_:Boolean = _loc1_ >= SMALL_SCREEN_WIDTH && _loc2_ >= SMALL_SCREEN_HEIGHT;
@@ -209,13 +175,10 @@ package net.wg.gui.bootcamp.queueWindow
             }
             this.waiting.x = _loc1_ - this.waiting.width >> 1;
             this.waiting.y = _loc2_ - this.waiting.height >> 1;
-            this.titleField.x = _loc1_ - this.titleField.width >> 1;
-            this.titleField.y = this.waiting.y + this.waiting.height - TITLE_OFFSET | 0;
             this.infoField.x = _loc1_ - this.infoField.width >> 1;
-            this.infoField.y = this.titleField.y + this.titleField.height + INFO_OFFSET | 0;
+            this.infoField.y = this.waiting.y + this.waiting.height + INFO_OFFSET | 0;
             this.cancelBtn.x = _loc1_ - this.cancelBtn.width >> 1;
             this.cancelBtn.y = _loc2_ - BOTTOM_PADDING | 0;
-            this.updateDotsPosition();
         }
 
         private function createTutorialPage() : void

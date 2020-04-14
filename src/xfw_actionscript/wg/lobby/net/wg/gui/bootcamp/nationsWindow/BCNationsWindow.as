@@ -2,25 +2,34 @@ package net.wg.gui.bootcamp.nationsWindow
 {
     import net.wg.infrastructure.base.meta.impl.BCNationsWindowMeta;
     import net.wg.infrastructure.base.meta.IBCNationsWindowMeta;
-    import net.wg.gui.bootcamp.nationsWindow.containers.NationsContainer;
-    import flash.text.TextField;
+    import net.wg.gui.bootcamp.nationsWindow.containers.InfoContainer;
     import flash.display.MovieClip;
+    import flash.text.TextField;
     import net.wg.gui.bootcamp.nationsWindow.containers.NationsSelectorContainer;
+    import net.wg.gui.interfaces.ISoundButtonEx;
     import flash.geom.Point;
     import flash.text.TextFieldAutoSize;
+    import scaleform.clik.events.ButtonEvent;
     import net.wg.gui.bootcamp.nationsWindow.events.NationSelectEvent;
     import net.wg.infrastructure.constants.WindowViewInvalidationType;
+    import scaleform.clik.constants.InvalidationType;
 
     public class BCNationsWindow extends BCNationsWindowMeta implements IBCNationsWindowMeta
     {
 
         private static const STAGE_RESIZED:String = "stageResized";
 
-        private static const TO_DELIMITER:String = "to";
+        private static const HEADER_POSITION_MULTIPLIER:Number = 0.1;
 
-        private static const NATION:String = "nation";
+        private static const INFO_POSITION_MULTIPLIER:Number = 0.05;
 
-        public var nations:NationsContainer = null;
+        private static const SELECT_OFFSET:int = 230;
+
+        private static const FX_OFFSET:int = -1;
+
+        public var info:InfoContainer = null;
+
+        public var infoBack:MovieClip = null;
 
         public var textHeader:TextField = null;
 
@@ -28,19 +37,21 @@ package net.wg.gui.bootcamp.nationsWindow
 
         public var bottom:NationsSelectorContainer = null;
 
+        public var btnSelect:ISoundButtonEx = null;
+
+        public var fx:MovieClip = null;
+
         private var _selectedNation:uint = 0;
 
-        private var _stageDimensions:Point;
+        private var _stageDimensions:Point = null;
 
-        private var _nationsOriginalWidth:Number;
-
-        private var _nationsOriginalHeight:Number;
-
-        private var _nationsList:Vector.<int>;
+        private var _nationsList:Vector.<int> = null;
 
         public function BCNationsWindow()
         {
             super();
+            showWindowBgForm = false;
+            showWindowBg = false;
         }
 
         override public function updateStage(param1:Number, param2:Number) : void
@@ -59,23 +70,34 @@ package net.wg.gui.bootcamp.nationsWindow
             super.configUI();
             this.textHeader.autoSize = TextFieldAutoSize.LEFT;
             this.textHeader.text = BOOTCAMP.AWARD_OPTIONS_TITLE;
-            this._nationsOriginalWidth = this.nations.width;
-            this._nationsOriginalHeight = this.nations.height;
-            this.bottom.addEventListener(NationSelectEvent.NATION_SELECTED,this.onBottomNationSelectedHandler);
+            this.btnSelect.label = BOOTCAMP.BTN_SELECT;
+            this.btnSelect.addEventListener(ButtonEvent.CLICK,this.onBtnSelectClickHandler);
             this.bottom.addEventListener(NationSelectEvent.NATION_SHOW,this.onBottomNationShowHandler);
+            mouseEnabled = window.mouseEnabled = this.bottom.mouseEnabled = false;
+            this.textHeader.mouseEnabled = this.fx.mouseEnabled = this.fx.mouseChildren = this.info.mouseEnabled = this.info.mouseChildren = this.infoBack.mouseEnabled = this.infoBack.mouseChildren = this.vignette.mouseEnabled = this.vignette.mouseChildren = false;
+            window.getBackground();
+        }
+
+        override protected function onBeforeDispose() : void
+        {
+            this.btnSelect.removeEventListener(ButtonEvent.CLICK,this.onBtnSelectClickHandler);
+            this.bottom.removeEventListener(NationSelectEvent.NATION_SHOW,this.onBottomNationShowHandler);
+            super.onBeforeDispose();
         }
 
         override protected function onDispose() : void
         {
-            this.bottom.removeEventListener(NationSelectEvent.NATION_SELECTED,this.onBottomNationSelectedHandler);
-            this.bottom.removeEventListener(NationSelectEvent.NATION_SHOW,this.onBottomNationShowHandler);
             this._stageDimensions = null;
-            this.nations.dispose();
-            this.nations = null;
             this.textHeader = null;
             this.vignette = null;
             this.bottom.dispose();
             this.bottom = null;
+            this.info.dispose();
+            this.info = null;
+            this.infoBack = null;
+            this.btnSelect.dispose();
+            this.btnSelect = null;
+            this.fx = null;
             this._nationsList = null;
             super.onDispose();
         }
@@ -90,42 +112,47 @@ package net.wg.gui.bootcamp.nationsWindow
                 _loc1_ = this._stageDimensions.x;
                 _loc2_ = this._stageDimensions.y;
                 this.textHeader.x = _loc1_ - this.textHeader.textWidth >> 1;
+                this.textHeader.y = HEADER_POSITION_MULTIPLIER * _loc2_ >> 0;
                 this.bottom.x = _loc1_ >> 1;
                 this.bottom.y = _loc2_;
-                this.bottom.bottomBG.width = _loc1_;
-                this.bottom.bottomBG.x = -_loc1_ >> 1;
+                this.bottom.setWidth(_loc1_);
                 this.vignette.width = _loc1_;
                 this.vignette.height = _loc2_;
-                this.nations.scaleX = this.nations.scaleY = Math.max(_loc1_ / this._nationsOriginalWidth,(_loc2_ + this.bottom.bottomBG.y) / this._nationsOriginalHeight);
-                this.nations.x = _loc1_ - this._nationsOriginalWidth * this.nations.scaleX >> 1;
-                this.nations.y = _loc2_ + this.bottom.bottomBG.y - this._nationsOriginalHeight * this.nations.scaleY >> 1;
+                this.info.x = _loc1_ * INFO_POSITION_MULTIPLIER >> 0;
+                this.info.y = this.infoBack.y = _loc2_ >> 1;
+                this.btnSelect.x = _loc1_ - this.btnSelect.width >> 1;
+                this.btnSelect.y = _loc2_ - SELECT_OFFSET;
+                this.fx.x = this.btnSelect.x + (this.btnSelect.width >> 1);
+                this.fx.y = this.btnSelect.y + (this.btnSelect.height >> 1) + FX_OFFSET;
                 window.x = window.y = 0;
                 x = y = 0;
+            }
+            if(this._nationsList != null && isInvalid(InvalidationType.DATA))
+            {
+                this.bottom.selectNation(this._selectedNation);
+                this.info.selectNation(this._selectedNation);
             }
         }
 
         override protected function selectNation(param1:uint, param2:Vector.<int>) : void
         {
             var _loc3_:int = param2.indexOf(param1);
-            var _loc4_:String = NATION + String(_loc3_ + 1);
             this._selectedNation = _loc3_;
-            this.bottom.selectNation(_loc3_,_loc4_);
-            this.nations.gotoAndStop(_loc4_);
             this._nationsList = param2;
+            invalidateData();
         }
 
         private function onBottomNationShowHandler(param1:NationSelectEvent) : void
         {
-            var _loc2_:String = (this._selectedNation + 1).toString() + TO_DELIMITER + (param1.selectedNation + 1).toString();
             this._selectedNation = param1.selectedNation;
-            this.nations.gotoAndPlay(_loc2_);
-            var _loc3_:int = this._nationsList[param1.selectedNation];
-            onNationShowS(_loc3_);
+            var _loc2_:int = this._nationsList[param1.selectedNation];
+            this.info.selectNation(this._selectedNation);
+            onNationShowS(_loc2_);
         }
 
-        private function onBottomNationSelectedHandler(param1:NationSelectEvent) : void
+        private function onBtnSelectClickHandler(param1:ButtonEvent) : void
         {
-            var _loc2_:int = this._nationsList[param1.selectedNation];
+            var _loc2_:int = this._nationsList[this._selectedNation];
             onNationSelectedS(_loc2_);
         }
     }

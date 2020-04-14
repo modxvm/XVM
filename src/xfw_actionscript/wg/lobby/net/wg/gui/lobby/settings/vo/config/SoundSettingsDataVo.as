@@ -52,6 +52,8 @@ package net.wg.gui.lobby.settings.vo.config
 
         public var soundQualityVisible:SettingsControlProp = null;
 
+        public var subtitles:SettingsControlProp = null;
+
         public var specialMusicVolume:SettingsControlProp = null;
 
         public var specialVehiclesVolume:SettingsControlProp = null;
@@ -91,6 +93,7 @@ package net.wg.gui.lobby.settings.vo.config
                 "masterVolumeToggle":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "soundQuality":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "soundQualityVisible":createControl(ControlsFactory.TYPE_VALUE).readOnly(true).build(),
+                "subtitles":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "bassBoost":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "nightMode":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "bulbVoices":createControl(ControlsFactory.TYPE_DROPDOWN).isDataAsSelectedIndex(true).build(),
@@ -127,6 +130,7 @@ package net.wg.gui.lobby.settings.vo.config
             this.masterVolumeToggle = null;
             this.soundQuality = null;
             this.soundQualityVisible = null;
+            this.subtitles = null;
             this.bassBoost = null;
             this.specialMusicVolume = null;
             this.specialVehiclesVolume = null;

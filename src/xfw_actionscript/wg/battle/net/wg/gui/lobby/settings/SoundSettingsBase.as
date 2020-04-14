@@ -33,6 +33,8 @@ package net.wg.gui.lobby.settings
 
         public var soundQualityCheckbox:CheckBox = null;
 
+        public var subtitlesCheckbox:CheckBox = null;
+
         public var musicVolumeLabel:LabelControl = null;
 
         public var musicVolumeSlider:Slider = null;
@@ -198,6 +200,7 @@ package net.wg.gui.lobby.settings
         {
             this.volumeFieldSet = this.commonForm.volumeFieldSet;
             this.soundQualityCheckbox = this.commonForm.soundQualityCheckbox;
+            this.subtitlesCheckbox = this.commonForm.subtitlesCheckbox;
             this.musicVolumeLabel = this.commonForm.musicVolumeLabel;
             this.musicVolumeSlider = this.commonForm.musicVolumeSlider;
             this.musicVolumeValue = this.commonForm.musicVolumeValue;
@@ -298,6 +301,7 @@ package net.wg.gui.lobby.settings
         {
             this.volumeFieldSet = null;
             this.soundQualityCheckbox = null;
+            this.subtitlesCheckbox = null;
             this.microphoneFieldSet = null;
             this.musicVolumeLabel = null;
             this.musicVolumeSlider = null;

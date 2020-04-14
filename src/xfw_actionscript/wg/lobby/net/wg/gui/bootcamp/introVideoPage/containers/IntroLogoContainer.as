@@ -7,8 +7,6 @@ package net.wg.gui.bootcamp.introVideoPage.containers
     public class IntroLogoContainer extends Sprite implements IDisposable
     {
 
-        public var txtHeader:TextField;
-
         public var dashline:Sprite;
 
         public var txtDescription:TextField;
@@ -28,16 +26,6 @@ package net.wg.gui.bootcamp.introVideoPage.containers
         public function get referralDescription() : String
         {
             return this.txtReferral.text;
-        }
-
-        public function set logoHeader(param1:String) : void
-        {
-            this.txtHeader.text = param1;
-        }
-
-        public function get logoHeader() : String
-        {
-            return this.txtHeader.text;
         }
 
         public function set logoDescription(param1:String) : void
@@ -63,7 +51,6 @@ package net.wg.gui.bootcamp.introVideoPage.containers
 
         public final function dispose() : void
         {
-            this.txtHeader = null;
             this.txtDescription = null;
             this.txtReferral = null;
             this.dashline = null;

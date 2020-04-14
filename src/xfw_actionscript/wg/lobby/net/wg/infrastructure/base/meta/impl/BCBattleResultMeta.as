@@ -12,6 +12,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public var onAnimationAwardStart:Function;
 
+        public var onToolTipShow:Function;
+
         private var _bCBattleViewVO:BCBattleViewVO;
 
         public function BCBattleResultMeta()
@@ -39,6 +41,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.onAnimationAwardStart,"onAnimationAwardStart" + Errors.CANT_NULL);
             this.onAnimationAwardStart(param1);
+        }
+
+        public function onToolTipShowS(param1:String) : void
+        {
+            App.utils.asserter.assertNotNull(this.onToolTipShow,"onToolTipShow" + Errors.CANT_NULL);
+            this.onToolTipShow(param1);
         }
 
         public final function as_setData(param1:Object) : void

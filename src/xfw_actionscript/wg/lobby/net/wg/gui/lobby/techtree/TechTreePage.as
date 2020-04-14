@@ -10,10 +10,12 @@ package net.wg.gui.lobby.techtree
     import net.wg.gui.lobby.techtree.controls.BlueprintBackground;
     import net.wg.gui.lobby.techtree.controls.BlueprintsModeSwitchButton;
     import net.wg.gui.lobby.techtree.controls.BlueprintBalance;
+    import net.wg.gui.lobby.techtree.controls.NationTreeVehicleCollectionBtn;
     import net.wg.gui.components.miniclient.TechTreeMiniClientComponent;
     import flash.ui.Keyboard;
     import flash.events.KeyboardEvent;
     import scaleform.clik.events.IndexEvent;
+    import flash.events.MouseEvent;
     import net.wg.gui.lobby.techtree.data.state.NodeStateCollection;
     import flash.events.Event;
     import scaleform.clik.constants.InvalidationType;
@@ -22,6 +24,8 @@ package net.wg.gui.lobby.techtree
     import net.wg.gui.lobby.techtree.data.BlueprintBalanceVO;
     import net.wg.data.constants.generated.NODE_STATE_FLAGS;
     import net.wg.gui.lobby.techtree.data.vo.NodeData;
+    import net.wg.gui.lobby.techtree.data.vo.TechTreeNationMenuItemVO;
+    import scaleform.clik.interfaces.IDataProvider;
     import net.wg.data.constants.Linkages;
     import net.wg.data.Aliases;
     import net.wg.utils.StageSizeBoundaries;
@@ -58,6 +62,10 @@ package net.wg.gui.lobby.techtree
 
         private static const NATION_BUTTON_BAR_OFFSET_Y_DECREASED:int = 120;
 
+        private static const VEHICLE_COLLECTOR_BTN_X_OFFSET:int = 20;
+
+        private static const VEHICLE_BTN_Y_OFFSET:int = 1;
+
         public var title:TechTreeTitle = null;
 
         public var nationTree:NationTree = null;
@@ -65,6 +73,8 @@ package net.wg.gui.lobby.techtree
         public var nationsBar:NationsButtonBar = null;
 
         public var scrollBar:ScrollBar = null;
+
+        public var vScrollBar:ScrollBar = null;
 
         public var shadowBg:Sprite = null;
 
@@ -76,7 +86,11 @@ package net.wg.gui.lobby.techtree
 
         public var blueprintBalance:BlueprintBalance = null;
 
+        public var vehicleCollectionBtn:NationTreeVehicleCollectionBtn = null;
+
         private var _miniClient:TechTreeMiniClientComponent = null;
+
+        private var _vehicleCollectorEnabled:Boolean = true;
 
         public function TechTreePage()
         {
@@ -104,6 +118,8 @@ package net.wg.gui.lobby.techtree
         {
             App.gameInputMgr.clearKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.handleEscape);
             this.nationsBar.removeEventListener(IndexEvent.INDEX_CHANGE,this.onNationsBarIndexChangeHandler);
+            this.nationsBar.removeEventListener(MouseEvent.MOUSE_OUT,this.onNationsBarMouseOutHandler);
+            this.nationsBar.removeEventListener(MouseEvent.MOUSE_OVER,this.onNationsBarMouseOverHandler);
             NodeStateCollection.instance.dispose();
             super.onBeforeDispose();
         }
@@ -114,10 +130,13 @@ package net.wg.gui.lobby.techtree
             this.nationsBar.removeEventListener(Event.COMPLETE,this.onNationsBarCompleteHandler);
             this.nationsBar.dispose();
             this.nationsBar = null;
+            this.nationTree.removeEventListener(TechTreeEvent.GO_TO_PREMIUM_SHOP,this.onNationTreeGoToPremiumShopHandler);
             this.nationTree.dispose();
             this.nationTree = null;
             this.scrollBar.dispose();
             this.scrollBar = null;
+            this.vScrollBar.dispose();
+            this.vScrollBar = null;
             this.title.dispose();
             this.title = null;
             this.shadowBg = null;
@@ -129,7 +148,12 @@ package net.wg.gui.lobby.techtree
             this.blueprintsSwitchButton = null;
             this.blueprintBalance.dispose();
             this.blueprintBalance = null;
+            this.vehicleCollectionBtn.removeEventListener(MouseEvent.CLICK,this.onVehicleCollectionBtnClickHandler);
+            this.vehicleCollectionBtn.dispose();
+            this.vehicleCollectionBtn = null;
             removeEventListener(TechTreeEvent.GO_TO_BLUEPRINT_VIEW,this.goToBlueprintScreen);
+            removeEventListener(TechTreeEvent.ON_START_HINT_ANIMATION,this.onOnStartHintAnimationHandler);
+            removeEventListener(TechTreeEvent.ON_END_HINT_ANIMATION,this.onOnEndHintAnimationHandler);
             super.onDispose();
         }
 
@@ -140,14 +164,21 @@ package net.wg.gui.lobby.techtree
             this.shadowBg.mouseEnabled = false;
             this.nationsBar.addEventListener(IndexEvent.INDEX_CHANGE,this.onNationsBarIndexChangeHandler,false,0,true);
             this.nationsBar.addEventListener(Event.COMPLETE,this.onNationsBarCompleteHandler);
+            this.nationsBar.addEventListener(MouseEvent.MOUSE_OUT,this.onNationsBarMouseOutHandler);
+            this.nationsBar.addEventListener(MouseEvent.MOUSE_OVER,this.onNationsBarMouseOverHandler);
             this.nationsBar.focused = 1;
             this.nationsBar.width = NATION_BUTTON_BAR_WIDTH;
             this.nationsBar.tabVAlign = NationsButtonBar.TOP_ALIGN;
             this.nationTree.view = this;
+            this.nationTree.addEventListener(TechTreeEvent.GO_TO_PREMIUM_SHOP,this.onNationTreeGoToPremiumShopHandler);
             this.blueprintsSwitchButton.addEventListener(Event.SELECT,this.onBlueprintsSwitchCheckboxSelectHandler);
             this.blueprintsSwitchButton.tooltip = TOOLTIPS.TECHTREEPAGE_BLUEPRINTSSWITCHTOOLTIP;
+            this.vehicleCollectionBtn.addEventListener(MouseEvent.CLICK,this.onVehicleCollectionBtnClickHandler);
             addEventListener(TechTreeEvent.GO_TO_BLUEPRINT_VIEW,this.goToBlueprintScreen);
+            addEventListener(TechTreeEvent.ON_START_HINT_ANIMATION,this.onOnStartHintAnimationHandler);
+            addEventListener(TechTreeEvent.ON_END_HINT_ANIMATION,this.onOnEndHintAnimationHandler);
             App.gameInputMgr.setKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.handleEscape,true);
+            this.nationTree.invalidatePremiumPanelLabels(getPremiumPanelLabelsS());
         }
 
         override protected function draw() : void
@@ -205,6 +236,11 @@ package net.wg.gui.lobby.techtree
             this.nationTree.setVehicleTypeXP(param1);
         }
 
+        public function as_closePremiumPanel() : void
+        {
+            this.nationTree.closePremiumPanel(true);
+        }
+
         public function as_hideNationsBar(param1:Boolean) : void
         {
             this.nationsBar.visible = !param1;
@@ -231,10 +267,28 @@ package net.wg.gui.lobby.techtree
 
         public function as_setSelectedNation(param1:String) : void
         {
-            var _loc2_:int = this.nationsBar.dataProvider.indexOf(param1);
-            if(_loc2_ > -1)
+            var _loc3_:TechTreeNationMenuItemVO = null;
+            var _loc2_:IDataProvider = this.nationsBar.dataProvider;
+            var _loc4_:int = _loc2_.length;
+            var _loc5_:* = 0;
+            while(_loc5_ < _loc4_)
             {
-                this.nationsBar.selectedIndex = _loc2_;
+                _loc3_ = TechTreeNationMenuItemVO(_loc2_[_loc5_]);
+                if(_loc3_.label == param1)
+                {
+                    this.nationsBar.selectedIndex = _loc5_;
+                    break;
+                }
+                _loc5_++;
+            }
+        }
+
+        public function as_setVehicleCollectorState(param1:Boolean) : void
+        {
+            if(this._vehicleCollectorEnabled != param1)
+            {
+                this._vehicleCollectorEnabled = param1;
+                this.updateVehicleCollectionBtnVisibility();
             }
         }
 
@@ -252,10 +306,16 @@ package net.wg.gui.lobby.techtree
             return this.scrollBar;
         }
 
+        public function getVScrollBar() : ScrollBar
+        {
+            return this.vScrollBar;
+        }
+
         protected function updateLayouts() : void
         {
+            this.title.updateSize(_width,_height);
+            this.nationTree.levels.y = this.title.y + this.title.height >> 0;
             this.nationTree.setSize(Math.round(_width - this.nationTree.x),Math.round(_height));
-            this.title.updateSize(_width,(_height - NationTree.CONTAINER_HEIGHT >> 1) - this.title.y);
             this.footerBg.width = _width;
             this.shadowBg.height = this.footerBg.y = _height;
             this.background.setSize(_width,_height);
@@ -287,6 +347,14 @@ package net.wg.gui.lobby.techtree
             this.nationsBar.height = _loc4_ << 1;
             this.nationsBar.y = _loc3_ - _loc4_;
             this.blueprintsSwitchButton.x = this.nationsBar.x + 0.5 * this.nationsBar.width;
+            this.updateVehicleCollectorBtnLayout();
+        }
+
+        private function updateVehicleCollectorBtnLayout() : void
+        {
+            this.vehicleCollectionBtn.isSmallLayout = stage.stageHeight < StageSizeBoundaries.HEIGHT_900;
+            this.vehicleCollectionBtn.x = this.title.x + (this.title.width + this.title.titleWidth >> 1) + VEHICLE_COLLECTOR_BTN_X_OFFSET >> 0;
+            this.vehicleCollectionBtn.y = this.title.y + (this.title.height - this.vehicleCollectionBtn.currentHeight >> 1) + VEHICLE_BTN_Y_OFFSET >> 0;
         }
 
         private function updateMiniClientLayouts() : void
@@ -299,7 +367,29 @@ package net.wg.gui.lobby.techtree
         private function updateTitle(param1:String) : void
         {
             var _loc2_:String = this.nationTree.blueprintModeOn?MENU.nation_tree_blueprint_title(param1):MENU.nation_tree_title(param1);
-            this.title.updateTitle(_loc2_?_loc2_:EMPTY_STR);
+            this.title.updateTitle = _loc2_?_loc2_:EMPTY_STR;
+            this.updateVehicleCollectorBtnLayout();
+        }
+
+        private function switchBlueprintMode(param1:Boolean) : void
+        {
+            this.blueprintsSwitchButton.selected = param1;
+            this.nationTree.blueprintModeOn = param1;
+            this.blueprintBalance.enabled = param1;
+            this.background.enabled = param1;
+            this.updateTitle(TechTreeNationMenuItemVO(this.nationsBar.selectedItem).label);
+            this.updateVehicleCollectionBtnVisibility();
+        }
+
+        private function updateVehicleCollectionBtnVisibility() : void
+        {
+            var _loc1_:Boolean = this.nationTree.blueprintModeOn;
+            this.vehicleCollectionBtn.visible = this._vehicleCollectorEnabled && !_loc1_;
+        }
+
+        private function onOnEndHintAnimationHandler(param1:TechTreeEvent) : void
+        {
+            onPlayHintAnimationS(false);
         }
 
         private function handleEscape(param1:InputEvent) : void
@@ -309,26 +399,29 @@ package net.wg.gui.lobby.techtree
 
         private function onNationsBarIndexChangeHandler(param1:IndexEvent) : void
         {
-            var _loc2_:String = this.nationsBar.itemToLabel(param1.data);
+            var _loc2_:String = TechTreeNationMenuItemVO(param1.data).label;
             var _loc3_:Object = getNationTreeDataS(_loc2_);
+            this.vehicleCollectionBtn.nation = _loc2_;
             this.updateTitle(_loc2_);
             this.nationTree.invalidateNodesData(_loc2_,_loc3_);
+            this.nationTree.closePremiumPanel(true);
             App.contextMenuMgr.hide();
+        }
+
+        private function onNationsBarMouseOutHandler(param1:MouseEvent) : void
+        {
+            this.nationTree.closePremiumPanel();
+        }
+
+        private function onNationsBarMouseOverHandler(param1:MouseEvent) : void
+        {
+            this.nationTree.hideTreeNodeSelector();
         }
 
         private function onBlueprintsSwitchCheckboxSelectHandler(param1:Event) : void
         {
             this.switchBlueprintMode(this.blueprintsSwitchButton.selected);
             onBlueprintModeSwitchS(this.blueprintsSwitchButton.selected);
-        }
-
-        private function switchBlueprintMode(param1:Boolean) : void
-        {
-            this.blueprintsSwitchButton.selected = param1;
-            this.nationTree.blueprintModeOn = param1;
-            this.blueprintBalance.enabled = param1;
-            this.background.enabled = param1;
-            this.updateTitle(this.nationsBar.itemToLabel(this.nationsBar.selectedItem));
         }
 
         private function onNationsBarCompleteHandler(param1:Event) : void
@@ -339,6 +432,24 @@ package net.wg.gui.lobby.techtree
         private function goToBlueprintScreen(param1:TechTreeEvent) : void
         {
             goToBlueprintViewS(this.nationTree.dataProvider.getItemAt(param1.index).id);
+        }
+
+        private function onVehicleCollectionBtnClickHandler(param1:MouseEvent) : void
+        {
+            if(App.utils.commons.isLeftButton(param1))
+            {
+                goToVehicleCollectionS(this.nationTree.getNation());
+            }
+        }
+
+        private function onNationTreeGoToPremiumShopHandler(param1:TechTreeEvent) : void
+        {
+            onGoToPremiumShopS(this.nationTree.getNation(),param1.level);
+        }
+
+        private function onOnStartHintAnimationHandler(param1:TechTreeEvent) : void
+        {
+            onPlayHintAnimationS(true);
         }
     }
 }

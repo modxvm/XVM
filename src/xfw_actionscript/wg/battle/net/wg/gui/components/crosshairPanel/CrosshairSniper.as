@@ -1,5 +1,7 @@
 package net.wg.gui.components.crosshairPanel
 {
+    import flash.display.DisplayObject;
+    import flash.utils.getDefinitionByName;
     import flash.text.TextField;
 
     public class CrosshairSniper extends CrosshairWithCassette
@@ -22,6 +24,12 @@ package net.wg.gui.components.crosshairPanel
         public function CrosshairSniper()
         {
             super();
+        }
+
+        private static function createComponent(param1:String) : DisplayObject
+        {
+            var _loc2_:Class = Class(getDefinitionByName(param1));
+            return new _loc2_();
         }
 
         override public function dispose() : void

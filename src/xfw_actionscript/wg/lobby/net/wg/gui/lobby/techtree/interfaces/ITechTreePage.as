@@ -8,5 +8,7 @@ package net.wg.gui.lobby.techtree.interfaces
     {
 
         function getScrollBar() : ScrollBar;
+
+        function getVScrollBar() : ScrollBar;
     }
 }

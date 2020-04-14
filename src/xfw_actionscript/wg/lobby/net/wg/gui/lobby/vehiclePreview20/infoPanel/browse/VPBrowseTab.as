@@ -5,8 +5,10 @@ package net.wg.gui.lobby.vehiclePreview20.infoPanel.browse
     import net.wg.infrastructure.base.meta.IVehiclePreviewBrowseTabMeta;
     import flash.text.TextField;
     import flash.events.MouseEvent;
-    import flash.text.TextFieldAutoSize;
     import scaleform.clik.constants.InvalidationType;
+    import flash.text.TextFieldAutoSize;
+    import net.wg.data.constants.generated.VEHPREVIEW_CONSTANTS;
+    import flash.events.Event;
     import flash.display.InteractiveObject;
     import net.wg.data.constants.generated.TOOLTIPS_CONSTANTS;
 
@@ -14,6 +16,8 @@ package net.wg.gui.lobby.vehiclePreview20.infoPanel.browse
     {
 
         private static const TITLE_OFFSET:int = 30;
+
+        private static const COLLECTIBLE_OFFSET:int = 30;
 
         private static const HISTORIC_REFERENCE_OFFSET:int = 4;
 
@@ -27,7 +31,11 @@ package net.wg.gui.lobby.vehiclePreview20.infoPanel.browse
 
         public var renderer2:VPKPIItemRenderer;
 
+        public var collectibleInfo:VPCollectibleInfo;
+
         private var _renderers:Vector.<VPKPIItemRenderer>;
+
+        private var _isCollectible:Boolean = false;
 
         public function VPBrowseTab()
         {
@@ -59,6 +67,7 @@ package net.wg.gui.lobby.vehiclePreview20.infoPanel.browse
             var _loc1_:VPKPIItemRenderer = null;
             this.historicReference.removeEventListener(MouseEvent.ROLL_OVER,this.onHistoricReferenceRollOverHandler);
             this.historicReference.removeEventListener(MouseEvent.ROLL_OUT,this.onHistoricReferenceRollOutHandler);
+            this.collectibleInfo.removeEventListener(InvalidationType.LAYOUT,this.updateLayout);
             for each(_loc1_ in this._renderers)
             {
                 _loc1_.dispose();
@@ -70,6 +79,8 @@ package net.wg.gui.lobby.vehiclePreview20.infoPanel.browse
             this.renderer2 = null;
             this.historicReference = null;
             this.title = null;
+            this.collectibleInfo.dispose();
+            this.collectibleInfo = null;
             super.onDispose();
         }
 
@@ -83,33 +94,52 @@ package net.wg.gui.lobby.vehiclePreview20.infoPanel.browse
             this.historicReference.multiline = true;
             this.historicReference.addEventListener(MouseEvent.ROLL_OVER,this.onHistoricReferenceRollOverHandler);
             this.historicReference.addEventListener(MouseEvent.ROLL_OUT,this.onHistoricReferenceRollOutHandler);
+            this.collectibleInfo.addEventListener(InvalidationType.LAYOUT,this.updateLayout);
         }
 
         override protected function draw() : void
         {
+            var _loc1_:* = 0;
             super.draw();
             if(isInvalid(InvalidationType.SIZE))
             {
+                this.collectibleInfo.visible = this._isCollectible;
+                this.collectibleInfo.width = width;
+                this.title.width = width;
+                this.historicReference.width = width;
+                invalidateLayout();
+            }
+            if(isInvalid(InvalidationType.LAYOUT))
+            {
+                _loc1_ = 0;
+                if(this._isCollectible)
+                {
+                    _loc1_ = this.collectibleInfo.y + this.collectibleInfo.height + COLLECTIBLE_OFFSET >> 0;
+                }
                 if(this.renderer0.visible)
                 {
                     this.title.y = this.renderer0.y + this.renderer0.height + TITLE_OFFSET >> 0;
                 }
                 else
                 {
-                    this.title.y = this.renderer0.y;
+                    this.title.y = this.renderer0.y + _loc1_;
                 }
-                this.title.width = width;
                 this.historicReference.y = this.title.y + this.title.height + HISTORIC_REFERENCE_OFFSET >> 0;
-                this.historicReference.width = width;
             }
         }
 
-        override protected function setData(param1:String, param2:Boolean, param3:Array) : void
+        override protected function setData(param1:String, param2:Boolean, param3:int, param4:Array) : void
         {
             this.historicReference.htmlText = param1;
+            this._isCollectible = param3 == VEHPREVIEW_CONSTANTS.COLLECTIBLE || param3 == VEHPREVIEW_CONSTANTS.COLLECTIBLE_WITHOUT_MODULES;
             mouseChildren = param2;
-            this.setRenderersData(param3);
+            this.setRenderersData(param4);
             invalidateSize();
+        }
+
+        private function updateLayout(param1:Event) : void
+        {
+            invalidateLayout();
         }
 
         public function canShowAutomatically() : Boolean

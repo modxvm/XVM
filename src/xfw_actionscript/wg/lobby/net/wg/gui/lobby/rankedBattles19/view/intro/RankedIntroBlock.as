@@ -34,6 +34,8 @@ package net.wg.gui.lobby.rankedBattles19.view.intro
 
         private static const DESCR_TOP_OFFSET_BIG:int = 37;
 
+        private static const TF_BORDER_PADDING:Number = 2;
+
         public var titleTf:TextField = null;
 
         public var descrTf:TextField = null;
@@ -67,6 +69,15 @@ package net.wg.gui.lobby.rankedBattles19.view.intro
             this.line.visible = !param2;
         }
 
+        private function updateLargeTitle() : void
+        {
+            this.titleTf.width = this.titleTf.textWidth + (TF_BORDER_PADDING << 1);
+            var _loc1_:Number = this.descrTf.width / this.titleTf.width;
+            this.titleTf.scaleX = this.titleTf.scaleY = _loc1_;
+            this.titleTf.x = this.titleTf.x ^ 0;
+            this.titleTf.y = this.titleTf.height * (1 - _loc1_) >> 1;
+        }
+
         override public function get width() : Number
         {
             return this.line.x;
@@ -84,12 +95,12 @@ package net.wg.gui.lobby.rankedBattles19.view.intro
 
         public function set sizeID(param1:String) : void
         {
-            var _loc6_:* = 0;
+            var _loc3_:* = 0;
             var _loc2_:int = Values.DEFAULT_INT;
-            var _loc3_:int = TITLE_FONT_SIZE_SMALL;
+            _loc3_ = TITLE_FONT_SIZE_SMALL;
             var _loc4_:int = DESCR_FONT_SIZE_SMALL;
             var _loc5_:int = DESCR_TOP_OFFSET_SMALL;
-            _loc6_ = TF_HORIZONTAL_PADDING_SMALL;
+            var _loc6_:int = TF_HORIZONTAL_PADDING_SMALL;
             if(param1 == RankedBattlesIntro.VIEW_SIZE_ID_BIG)
             {
                 _loc2_ = ALLOW_BLOCK_WIDTH_WIDE;
@@ -113,6 +124,10 @@ package net.wg.gui.lobby.rankedBattles19.view.intro
             this.line.x = _loc2_;
             this.titleTf.x = this.descrTf.x = _loc6_;
             App.utils.commons.updateTextFieldSize(this.descrTf,false,true);
+            if(this.titleTf.width <= this.titleTf.textWidth)
+            {
+                this.updateLargeTitle();
+            }
         }
     }
 }

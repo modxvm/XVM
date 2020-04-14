@@ -9,8 +9,6 @@ package
 
         public static const WELLCOME_BOOTCAMP_WAIT:String = "#bootcamp:wellcome/bootcamp/wait";
 
-        public static const WELLCOME_BOOTCAMP_SKIP:String = "#bootcamp:wellcome/bootcamp/skip";
-
         public static const WELLCOME_BOOTCAMP_REFERRAL:String = "#bootcamp:wellcome/bootcamp/referral";
 
         public static const FINISH_BOOTCAMP_REFERRAL:String = "#bootcamp:finish/bootcamp/referral";
@@ -21,9 +19,13 @@ package
 
         public static const REQUEST_BOOTCAMP_FINISH:String = "#bootcamp:request/bootcamp/finish";
 
+        public static const BTN_SKIPVIDEO:String = "#bootcamp:btn/skipVideo";
+
         public static const BTN_SELECT:String = "#bootcamp:btn/select";
 
         public static const BTN_CONTINUE:String = "#bootcamp:btn/continue";
+
+        public static const BTN_CANCEL:String = "#bootcamp:btn/cancel";
 
         public static const BTN_CONTINUE_PREBATTLE:String = "#bootcamp:btn/continue/prebattle";
 
@@ -36,6 +38,8 @@ package
         public static const BTN_TUTORIAL_CLOSE:String = "#bootcamp:btn/tutorial/close";
 
         public static const PROMO_VEHICLEBUYVIEW:String = "#bootcamp:promo/vehicleBuyView";
+
+        public static const COST_MESSAGEVIEWBUY:String = "#bootcamp:cost/messageViewBuy";
 
         public static const AWARD_OPTIONS:String = "#bootcamp:award/options";
 
@@ -219,6 +223,10 @@ package
 
         public static const PREBATTLE_HINT_PENETRATION_CHANCE:String = "#bootcamp:prebattle/hint/penetration/chance";
 
+        public static const PREBATTLE_HINT_PENETRATION_CHANCE_HIGH:String = "#bootcamp:prebattle/hint/penetration/chance/high";
+
+        public static const PREBATTLE_HINT_PENETRATION_CHANCE_LOW:String = "#bootcamp:prebattle/hint/penetration/chance/low";
+
         public static const PREBATTLE_HINT_PENETRATION_HIGH:String = "#bootcamp:prebattle/hint/penetration/high";
 
         public static const PREBATTLE_HINT_PENETRATION_LOW:String = "#bootcamp:prebattle/hint/penetration/low";
@@ -237,7 +245,17 @@ package
 
         public static const MESSAGE_EXPERIENCE_TEXT:String = "#bootcamp:message/experience/text";
 
-        public static const MESSAGE_UNLOCK_MODULE_LABEL:String = "#bootcamp:message/unlock/module/label";
+        public static const MESSAGE_UNLOCK_MODULE_BUTTONLABEL:String = "#bootcamp:message/unlock/module/buttonLabel";
+
+        public static const MESSAGE_UNLOCK_MODULE_TITLE:String = "#bootcamp:message/unlock/module/title";
+
+        public static const MESSAGE_UNLOCK_VEHICLE_BUTTONLABEL:String = "#bootcamp:message/unlock/vehicle/buttonLabel";
+
+        public static const MESSAGE_UNLOCK_VEHICLE_TITLE:String = "#bootcamp:message/unlock/vehicle/title";
+
+        public static const MESSAGE_CONFIRMBUYANDINSTALL_MODULE_BUTTONLABEL:String = "#bootcamp:message/confirmBuyAndInstall/module/buttonLabel";
+
+        public static const MESSAGE_CONFIRMBUYANDINSTALL_MODULE_TITLE:String = "#bootcamp:message/confirmBuyAndInstall/module/title";
 
         public static const MESSAGE_UNLOCK_MODULE_TEXT:String = "#bootcamp:message/unlock/module/text";
 
@@ -246,6 +264,10 @@ package
         public static const MESSAGE_NEW_MODULE_TEXT:String = "#bootcamp:message/new/module/text";
 
         public static const MESSAGE_UNLOCK_VEHICLE_LABEL:String = "#bootcamp:message/unlock/vehicle/label";
+
+        public static const MESSAGE_TEACHING_TEAM_LABEL:String = "#bootcamp:message/teaching/team/label";
+
+        public static const MESSAGE_TEACHING_TEAM_TEXT:String = "#bootcamp:message/teaching/team/text";
 
         public static const MESSAGE_UNLOCK_VEHICLE_TEXT:String = "#bootcamp:message/unlock/vehicle/text";
 
@@ -265,6 +287,8 @@ package
 
         public static const MESSAGE_CONSUMABLES_LABEL:String = "#bootcamp:message/consumables/label";
 
+        public static const MESSAGE_MISSIONBONUSCOUNT:String = "#bootcamp:message/missionBonusCount";
+
         public static const MESSAGE_CONSUMABLES_TEXT:String = "#bootcamp:message/consumables/text";
 
         public static const MESSAGE_REPAIR_KIT_LABEL:String = "#bootcamp:message/repair/kit/label";
@@ -281,6 +305,8 @@ package
 
         public static const MESSAGE_BONUS_EQUIPMENT_TEXT:String = "#bootcamp:message/bonus/equipment/text";
 
+        public static const MESSAGE_GOLDRECEIVED_LABEL:String = "#bootcamp:message/goldReceived/label";
+
         public static const MESSAGE_GOLD_LABEL:String = "#bootcamp:message/gold/label";
 
         public static const MESSAGE_GOLD_PREMIUM_TEXT:String = "#bootcamp:message/gold/premium/text";
@@ -292,6 +318,8 @@ package
         public static const MESSAGE_PREMIUM_TEXT:String = "#bootcamp:message/premium/text";
 
         public static const MESSAGE_PREMIUMPLUS_LABEL:String = "#bootcamp:message/premiumPlus/label";
+
+        public static const MESSAGE_PREMIUMPLUSRECEIVED_LABEL:String = "#bootcamp:message/premiumPlusReceived/label";
 
         public static const MESSAGE_PREMIUMPLUS_TEXT:String = "#bootcamp:message/premiumPlus/text";
 
@@ -307,9 +335,51 @@ package
 
         public static const MESSAGE_BOOTCAMP_GRADUATE_TEXT:String = "#bootcamp:message/bootcamp/graduate/text";
 
+        public static const TOOLTIP_BOOTCAMP_ACHIEVEMENT_LABEL:String = "#bootcamp:tooltip/bootcamp/achievement/label";
+
+        public static const TOOLTIP_BOOTCAMP_ACHIEVEMENT_TEXT:String = "#bootcamp:tooltip/bootcamp/achievement/text";
+
+        public static const TOOLTIP_BOOTCAMP_BADGE_LABEL:String = "#bootcamp:tooltip/bootcamp/badge/label";
+
+        public static const TOOLTIP_BOOTCAMP_BADGE_TEXT:String = "#bootcamp:tooltip/bootcamp/badge/text";
+
         public static const MESSAGE_BOOTCAMP_GRADUATE_REFERRAL_TEXT:String = "#bootcamp:message/bootcamp/graduate/referral/text";
 
         public static const MESSAGE_BOOTCAMP_REFERRAL_TEXT:String = "#bootcamp:message/bootcamp/referral/text";
+
+        public static const MESSAGE_SKIP_LABEL:String = "#bootcamp:message/skip/label";
+
+        public static const MESSAGE_SKIP_LABELEXECUTE:String = "#bootcamp:message/skip/labelExecute";
+
+        public static const MESSAGE_SKIP_MESSAGE:String = "#bootcamp:message/skip/message";
+
+        public static const MESSAGE_SKIP_REFERRAL_MESSAGE:String = "#bootcamp:message/skip/referral/message";
+
+        public static const MESSAGE_SKIP_MESSAGE_PREMIUM:String = "#bootcamp:message/skip/message/premium";
+
+        public static const MESSAGE_SKIP_MESSAGE_GOLD:String = "#bootcamp:message/skip/message/gold";
+
+        public static const MESSAGE_SKIP_MESSAGE_CREW:String = "#bootcamp:message/skip/message/crew";
+
+        public static const MESSAGE_SKIP_COMPLETED_MESSAGE:String = "#bootcamp:message/skip/completed/message";
+
+        public static const MESSAGE_START_MESSAGE:String = "#bootcamp:message/start/message";
+
+        public static const MESSAGE_START_TITLE:String = "#bootcamp:message/start/title";
+
+        public static const MESSAGE_START_SUBMIT:String = "#bootcamp:message/start/submit";
+
+        public static const MESSAGE_START_CANCEL:String = "#bootcamp:message/start/cancel";
+
+        public static const MESSAGE_RESTART_MESSAGE:String = "#bootcamp:message/restart/message";
+
+        public static const MESSAGE_RESTART_REWARD:String = "#bootcamp:message/restart/reward";
+
+        public static const MESSAGE_RESTART_TITLE:String = "#bootcamp:message/restart/title";
+
+        public static const MESSAGE_RESTART_SUBMIT:String = "#bootcamp:message/restart/submit";
+
+        public static const MESSAGE_RESTART_CANCEL:String = "#bootcamp:message/restart/cancel";
 
         public static const RESULTLABEL_WIN:String = "#bootcamp:resultlabel/win";
 
@@ -317,9 +387,15 @@ package
 
         public static const RESULTLABEL_TIE:String = "#bootcamp:resultlabel/tie";
 
+        public static const RESULTLABEL_DEAD:String = "#bootcamp:resultlabel/dead";
+
+        public static const RESULTLABEL_ALIVE:String = "#bootcamp:resultlabel/alive";
+
         public static const RESULTLABEL_TECHWIN:String = "#bootcamp:resultlabel/techwin";
 
         public static const RESULTLABEL_ENDED:String = "#bootcamp:resultlabel/ended";
+
+        public static const REWARD_LABEL:String = "#bootcamp:reward/label";
 
         public static const WITH_PREMIUM:String = "#bootcamp:with/premium";
 
@@ -604,6 +680,44 @@ package
         public static const JURGEN_WOLF:String = "#bootcamp:Jurgen Wolf";
 
         public static const JOSEPH_ONEAL:String = "#bootcamp:Joseph ONeal";
+
+        public static const SUBTITLES_VO_BC_HANGAR_TANK_IMPROVEMENT:String = "#bootcamp:subtitles/vo_bc_hangar_tank_improvement";
+
+        public static const SUBTITLES_VO_BC_HANGAR_EXPERIENCE:String = "#bootcamp:subtitles/vo_bc_hangar_experience";
+
+        public static const SUBTITLES_VO_BC_HANGAR_MODULE_INVESTIGATED:String = "#bootcamp:subtitles/vo_bc_hangar_module_investigated";
+
+        public static const SUBTITLES_VO_BC_HANGAR_SILVER:String = "#bootcamp:subtitles/vo_bc_hangar_silver";
+
+        public static const SUBTITLES_VO_BC_HANGAR_MODULE_PURCHASED:String = "#bootcamp:subtitles/vo_bc_hangar_module_purchased";
+
+        public static const SUBTITLES_VO_BC_HANGAR_NEW_TANK_RECEIVED:String = "#bootcamp:subtitles/vo_bc_hangar_new_tank_received";
+
+        public static const SUBTITLES_VO_BC_HANGAR_TANK_INVESTIGATED:String = "#bootcamp:subtitles/vo_bc_hangar_tank_investigated";
+
+        public static const SUBTITLES_VO_BC_HANGAR_TANK_IN_GARAGE:String = "#bootcamp:subtitles/vo_bc_hangar_tank_in_garage";
+
+        public static const SUBTITLES_VO_BC_HANGAR_TEAM:String = "#bootcamp:subtitles/vo_bc_hangar_team";
+
+        public static const SUBTITLES_VO_BC_HANGAR_SKILLS_ABILITIES:String = "#bootcamp:subtitles/vo_bc_hangar_skills_abilities";
+
+        public static const SUBTITLES_VO_BC_HANGAR_EQUIPMENT_AND_KIT:String = "#bootcamp:subtitles/vo_bc_hangar_equipment_and_kit";
+
+        public static const SUBTITLES_VO_BC_HANGAR_KIT:String = "#bootcamp:subtitles/vo_bc_hangar_kit";
+
+        public static const SUBTITLES_VO_BC_HANGAR_EQUIPMENT:String = "#bootcamp:subtitles/vo_bc_hangar_equipment";
+
+        public static const SUBTITLES_VO_BC_HANGAR_RANDOM_BATTLE:String = "#bootcamp:subtitles/vo_bc_hangar_random_battle";
+
+        public static const SUBTITLES_VO_BC_HANGAR_GOLD_PREMIUM:String = "#bootcamp:subtitles/vo_bc_hangar_gold_premium";
+
+        public static const SUBTITLES_VO_BC_HANGAR_GOLD:String = "#bootcamp:subtitles/vo_bc_hangar_gold";
+
+        public static const SUBTITLES_VO_BC_HANGAR_PREMIUM:String = "#bootcamp:subtitles/vo_bc_hangar_premium";
+
+        public static const SUBTITLES_VO_BC_HANGAR_MISSION_ACCOMPLISHED:String = "#bootcamp:subtitles/vo_bc_hangar_mission_accomplished";
+
+        public static const SUBTITLES_VO_BC_HANGAR_CONGRATULATIONS:String = "#bootcamp:subtitles/vo_bc_hangar_congratulations";
 
         public function BOOTCAMP()
         {

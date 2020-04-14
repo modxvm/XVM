@@ -10,10 +10,6 @@ package net.wg.gui.bootcamp.introVideoPage.containers
 
         private static const LOGO_CENTER_OFFSET:Number = -250;
 
-        private static const INTRO_IMAGE_WIDTH:int = 3439;
-
-        private static const INTRO_IMAGE_HEIGHT:int = 1377;
-
         public var introLogo:IntroLogoContainer;
 
         public function IntroPageContainer()
@@ -29,7 +25,6 @@ package net.wg.gui.bootcamp.introVideoPage.containers
 
         public function setSize(param1:int, param2:int) : void
         {
-            var _loc3_:Number = param2 / INTRO_IMAGE_HEIGHT;
             this.introLogo.x = param1 >> 1;
             this.introLogo.y = (param2 >> 1) + LOGO_CENTER_OFFSET;
             this.introLogo.dashLength = DASHLINE_WIDTH;
@@ -43,16 +38,6 @@ package net.wg.gui.bootcamp.introVideoPage.containers
         public function set referralDescription(param1:String) : void
         {
             this.introLogo.referralDescription = param1;
-        }
-
-        public function get logoHeader() : String
-        {
-            return this.introLogo.logoHeader;
-        }
-
-        public function set logoHeader(param1:String) : void
-        {
-            this.introLogo.logoHeader = param1;
         }
 
         public function get logoDescription() : String

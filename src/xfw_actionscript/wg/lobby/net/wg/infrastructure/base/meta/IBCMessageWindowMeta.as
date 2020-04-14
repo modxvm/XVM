@@ -11,8 +11,14 @@ package net.wg.infrastructure.base.meta
 
         function onMessageDisappearS(param1:String) : void;
 
+        function onMessageExecutedS(param1:String) : void;
+
         function onMessageButtonClickedS() : void;
 
+        function hideBlurS() : void;
+
         function as_setMessageData(param1:Array) : void;
+
+        function as_blurOtherWindows(param1:String) : void;
     }
 }

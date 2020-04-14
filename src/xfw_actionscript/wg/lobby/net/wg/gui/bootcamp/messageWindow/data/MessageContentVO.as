@@ -12,6 +12,14 @@ package net.wg.gui.bootcamp.messageWindow.data
 
         public var message:String = "";
 
+        public var labelExecute:String = "";
+
+        public var costValue:int = 0;
+
+        public var isBuy:Boolean = false;
+
+        public var isTraining:Boolean = true;
+
         public var referralDescription:String = "";
 
         public var messagePreset:String = "";

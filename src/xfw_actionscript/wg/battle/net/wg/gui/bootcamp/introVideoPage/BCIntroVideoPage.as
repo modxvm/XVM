@@ -18,6 +18,7 @@ package net.wg.gui.bootcamp.introVideoPage
     import net.wg.gui.components.common.video.VideoPlayerStatusEvent;
     import scaleform.clik.events.ButtonEvent;
     import flash.events.KeyboardEvent;
+    import scaleform.gfx.FocusManager;
     import net.wg.gui.bootcamp.data.BCTutorialPageVO;
     import fl.transitions.easing.Strong;
     import org.idmedia.as3commons.util.StringUtils;
@@ -54,9 +55,7 @@ package net.wg.gui.bootcamp.introVideoPage
 
         private static const CLOSE_BTN_PADDING_RIGHT:int = 80;
 
-        private static const SELECT_BTN_Y:int = -125;
-
-        private static const SKIP_BTN_Y:int = -114;
+        private static const SELECT_BTN_Y:int = -88;
 
         private static const BUTTON_SPACING:int = 10;
 
@@ -87,6 +86,8 @@ package net.wg.gui.bootcamp.introVideoPage
         public var btnSelect:SoundButtonEx;
 
         public var btnSkip:SoundButtonEx;
+
+        public var btnSkipVideo:SoundButtonEx;
 
         public var waitingMC:MovieClip;
 
@@ -126,6 +127,8 @@ package net.wg.gui.bootcamp.introVideoPage
 
         private var _videoCompleted:Boolean = false;
 
+        private var _skipPrepared:Boolean = false;
+
         private var _skipShown:Boolean = false;
 
         public function BCIntroVideoPage()
@@ -138,6 +141,8 @@ package net.wg.gui.bootcamp.introVideoPage
 
         override public function updateStage(param1:Number, param2:Number) : void
         {
+            this.blackBG.width = param1;
+            this.blackBG.height = param2;
             invalidate(STAGE_RESIZED);
         }
 
@@ -160,8 +165,11 @@ package net.wg.gui.bootcamp.introVideoPage
             this.introPage.logoDescription = BOOTCAMP.WELLCOME_BOOTCAMP_DESCRIPTION;
             this.introPage.setReferralVisibility(false);
             this.btnSkip.label = BOOTCAMP.BTN_TUTORIAL_SKIP;
+            this.btnSkipVideo.label = BOOTCAMP.BTN_SKIPVIDEO;
+            this.btnSkipVideo.addEventListener(ButtonEvent.CLICK,this.onSkipVideoButtonClickHandler);
             this.blackOverlay.alpha = 0;
             this.waitingTF.text = BOOTCAMP.WELLCOME_BOOTCAMP_WAIT;
+            this.btnSelect.visible = this.btnSkip.visible = this.btnSkipVideo.visible = false;
         }
 
         override protected function draw() : void
@@ -228,10 +236,13 @@ package net.wg.gui.bootcamp.introVideoPage
             this._tweens = null;
             this.btnSelect.removeEventListener(ButtonEvent.CLICK,this.onSelectButtonClickHandler);
             this.btnSkip.removeEventListener(ButtonEvent.CLICK,this.onSkipButtonClickHandler);
+            this.btnSkipVideo.removeEventListener(ButtonEvent.CLICK,this.onSkipVideoButtonClickHandler);
             this.btnSelect.dispose();
             this.btnSelect = null;
             this.btnSkip.dispose();
             this.btnSkip = null;
+            this.btnSkipVideo.dispose();
+            this.btnSkipVideo = null;
             this.waitingMC = null;
             this.waitingTF = null;
             this.loadingProgress.dispose();
@@ -257,7 +268,7 @@ package net.wg.gui.bootcamp.introVideoPage
                 }
                 else
                 {
-                    this.showSkip();
+                    this.prepareSkip();
                 }
             }
             else
@@ -303,19 +314,29 @@ package net.wg.gui.bootcamp.introVideoPage
             }
         }
 
-        private function showSkip() : void
+        private function prepareSkip() : void
         {
             this.waitingMC.visible = false;
-            this.waitingTF.text = BOOTCAMP.WELLCOME_BOOTCAMP_SKIP;
-            this.updateWaiting();
-            this._skipShown = true;
+            this.waitingTF.visible = false;
+            this._skipPrepared = true;
             App.stage.addEventListener(KeyboardEvent.KEY_DOWN,this.onKeyDownHandler);
+        }
+
+        private function showSkip() : void
+        {
+            App.stage.removeEventListener(KeyboardEvent.KEY_DOWN,this.onKeyDownHandler);
+            this.btnSkipVideo.visible = true;
+            FocusManager.setFocus(this.btnSkipVideo);
+            this._skipShown = true;
         }
 
         private function onVideoCompleteOrSkip() : void
         {
             this.waitingMC.visible = false;
             this.waitingTF.visible = false;
+            this.btnSkipVideo.visible = false;
+            this._skipPrepared = false;
+            App.stage.removeEventListener(KeyboardEvent.KEY_DOWN,this.onKeyDownHandler);
             videoFinishedS();
             this.applyCompleteData();
         }
@@ -325,6 +346,10 @@ package net.wg.gui.bootcamp.introVideoPage
             if(this._introData)
             {
                 this.btnSelect.visible = !this._introData.autoStart;
+                if(this.btnSelect.visible)
+                {
+                    FocusManager.setFocus(this.btnSelect);
+                }
                 this.btnSkip.visible = this._introData.allowSkipButton;
                 this.btnSelect.addEventListener(ButtonEvent.CLICK,this.onSelectButtonClickHandler);
                 this.btnSkip.addEventListener(ButtonEvent.CLICK,this.onSkipButtonClickHandler);
@@ -344,8 +369,7 @@ package net.wg.gui.bootcamp.introVideoPage
 
         private function onSkip() : void
         {
-            this._skipShown = false;
-            App.stage.removeEventListener(KeyboardEvent.KEY_DOWN,this.onKeyDownHandler);
+            this.btnSkipVideo.visible = false;
             this.completeVideo();
         }
 
@@ -414,14 +438,16 @@ package net.wg.gui.bootcamp.introVideoPage
             this.btnSelect.y = _loc2_ + SELECT_BTN_Y;
             if(this._introData && this._introData.allowSkipButton)
             {
-                this.btnSkip.y = _loc2_ + SKIP_BTN_Y;
-                this.btnSkip.x = (_loc1_ - this.btnSelect.hitMc.width - this.btnSkip.width - BUTTON_SPACING >> 1) - BTN_SELECT_OFFSET;
+                this.btnSkip.y = _loc2_ + SELECT_BTN_Y;
+                this.btnSkip.x = (_loc1_ - this.btnSelect.width - this.btnSkip.width - BUTTON_SPACING >> 1) - BTN_SELECT_OFFSET;
                 this.btnSelect.x = this.btnSkip.x + this.btnSkip.width + BUTTON_SPACING;
             }
             else
             {
                 this.btnSelect.x = _loc1_ - this.btnSelect.width >> 1;
             }
+            this.btnSkipVideo.x = _loc1_ - this.btnSkipVideo.width >> 1;
+            this.btnSkipVideo.y = _loc2_ + SELECT_BTN_Y;
             var _loc3_:Boolean = _loc1_ >= SMALL_SCREEN_WIDTH && _loc2_ >= SMALL_SCREEN_HEIGHT;
             if(this._introData && this._introData.showTutorialPages)
             {
@@ -442,10 +468,8 @@ package net.wg.gui.bootcamp.introVideoPage
             this.backgroundVignette.height = _loc2_;
             this.backgroundVignette.x = 0;
             this.backgroundVignette.y = 0;
-            this.blackBG.width = this.blackOverlay.width = _loc1_;
-            this.blackBG.height = this.blackOverlay.height = _loc2_;
-            this.blackBG.x = this.blackBG.x = 0;
-            this.blackBG.y = this.blackBG.y = 0;
+            this.blackOverlay.width = _loc1_;
+            this.blackOverlay.height = _loc2_;
             this.btnLeft.x = BTN_PADDING;
             this.btnRight.x = App.appWidth - BTN_PADDING;
             this.btnLeft.y = this.btnRight.y = (App.appHeight >> 1) - (this.btnLeft.height >> 1);
@@ -455,20 +479,13 @@ package net.wg.gui.bootcamp.introVideoPage
             this.loadingProgress.x = _loc1_ >> 1;
             this.loadingProgress.y = _loc2_;
             this.loadingProgress.setWidth(_loc1_);
-            this.updateWaiting();
-        }
-
-        private function updateWaiting() : void
-        {
-            var _loc1_:int = App.appWidth;
-            var _loc2_:int = App.appHeight;
             if(this.waitingMC.visible)
             {
                 this.waitingMC.x = _loc1_ + WAIT_MC_X;
                 this.waitingMC.y = _loc2_ + WAIT_MC_Y;
+                this.waitingTF.x = _loc1_ - this.waitingTF.width + WAIT_TF_X + WAIT_MC_X;
+                this.waitingTF.y = _loc2_ + WAIT_TF_Y;
             }
-            this.waitingTF.x = _loc1_ - this.waitingTF.width + WAIT_TF_X + (this.waitingMC.visible?WAIT_MC_X:0);
-            this.waitingTF.y = _loc2_ + WAIT_TF_Y;
         }
 
         private function updateBackgroundRenderer() : void
@@ -561,7 +578,7 @@ package net.wg.gui.bootcamp.introVideoPage
 
         private function onKeyDownHandler(param1:Event) : void
         {
-            this.onSkip();
+            this.showSkip();
         }
 
         private function onStageClickHandler(param1:MouseEvent) : void
@@ -570,9 +587,9 @@ package net.wg.gui.bootcamp.introVideoPage
             {
                 return;
             }
-            if(this._skipShown)
+            if(this._skipPrepared && !this._skipShown)
             {
-                this.onSkip();
+                this.showSkip();
             }
             if(this._introData.navigationButtonsVisible)
             {
@@ -605,6 +622,11 @@ package net.wg.gui.bootcamp.introVideoPage
         {
             this.btnSkip.removeEventListener(ButtonEvent.CLICK,this.onSkipButtonClickHandler);
             skipBootcampS();
+        }
+
+        private function onSkipVideoButtonClickHandler(param1:ButtonEvent) : void
+        {
+            this.onSkip();
         }
 
         private function onVideoPlayerPlaybackStoppedHandler(param1:VideoPlayerEvent) : void

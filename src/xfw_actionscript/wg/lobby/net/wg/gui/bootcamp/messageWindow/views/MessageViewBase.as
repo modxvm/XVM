@@ -24,6 +24,8 @@ package net.wg.gui.bootcamp.messageWindow.views
 
         protected static const OUT_STATE:String = "out";
 
+        protected static const ACCEPT_STATE:String = "accept";
+
         private static const MESSAGE_SHOW:String = "show";
 
         private static const MESSAGE_FINISH:String = "finish";
@@ -213,10 +215,28 @@ package net.wg.gui.bootcamp.messageWindow.views
             }
         }
 
+        protected function setExecuteState(param1:Boolean) : void
+        {
+            if(!_baseDisposed)
+            {
+                if(param1)
+                {
+                    dispatchEvent(new MessageViewEvent(MessageViewEvent.MESSAGE_EXECUTED));
+                }
+                this._messageStateLabel = ACCEPT_STATE;
+                invalidateState();
+            }
+        }
+
+        protected function setDescription() : void
+        {
+            this.animContainerDescription.text = this._messageData.message;
+        }
+
         protected function updateContent() : void
         {
             this.animContainerTitle.text = this._messageData.label;
-            this.animContainerDescription.text = this._messageData.message;
+            this.setDescription();
             this.animContainerBtnContinue.text = BOOTCAMP.BTN_CONTINUE;
             if(this.iconContainer && StringUtils.isNotEmpty(this._messageData.iconPath))
             {
@@ -240,15 +260,20 @@ package net.wg.gui.bootcamp.messageWindow.views
             }
         }
 
-        private function onPressAnyKeyHandler() : void
+        protected function onPressAnyKeyHandler() : void
         {
             stop();
             this.animContainerBtnContinue.button.addEventListener(ButtonEvent.CLICK,this.onBtnContinueClickHandler);
         }
 
-        private function onAnimationFinishHandler() : void
+        protected function onAnimationFinish() : void
         {
             dispatchEvent(new MessageViewEvent(MessageViewEvent.MESSAGE_REMOVED));
+        }
+
+        private function onAnimationFinishHandler() : void
+        {
+            this.onAnimationFinish();
         }
 
         protected function get messageData() : MessageContentVO

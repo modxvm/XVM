@@ -9,6 +9,12 @@ package net.wg.gui.battle.random.views.fragCorrelationBar
     public class VehicleMarkersList extends Object implements IVehicleMarkerAnimFinishedHandler, IDisposable
     {
 
+        private static const ALLY_MARKERS_START_POSITION:int = 433;
+
+        private static const ENEMY_MARKERS_START_POSITION:int = 556;
+
+        private static const MARKER_SHIFT:int = 16;
+
         private var _vehicleMarkers:Vector.<FCVehicleMarker>;
 
         private var _vehicleIDs:Vector.<Number>;
@@ -27,12 +33,6 @@ package net.wg.gui.battle.random.views.fragCorrelationBar
 
         private var _isVehicleCounterShown:Boolean = true;
 
-        private const ALLY_MARKERS_START_POSITION:int = 433;
-
-        private const ENEMY_MARKERS_START_POSITION:int = 556;
-
-        private const MARKER_SHIFT:int = 16;
-
         public function VehicleMarkersList(param1:MovieClip, param2:Boolean, param3:String)
         {
             this._vehicleMarkers = new Vector.<FCVehicleMarker>(0);
@@ -41,8 +41,8 @@ package net.wg.gui.battle.random.views.fragCorrelationBar
             this._observerIDs = new Vector.<Number>();
             super();
             this._container = param1;
-            this._markerStartPosition = param2?this.ENEMY_MARKERS_START_POSITION:this.ALLY_MARKERS_START_POSITION;
-            this._markerShift = param2?this.MARKER_SHIFT:-this.MARKER_SHIFT;
+            this._markerStartPosition = param2?ENEMY_MARKERS_START_POSITION:ALLY_MARKERS_START_POSITION;
+            this._markerShift = param2?MARKER_SHIFT:-MARKER_SHIFT;
             this._color = param3;
         }
 
@@ -87,7 +87,7 @@ package net.wg.gui.battle.random.views.fragCorrelationBar
 
         private function addVehicle(param1:DAAPIVehicleInfoVO) : void
         {
-            var _loc2_:FCVehicleMarker = FCVehicleMarker(this._classFactory.getObject(Linkages.FC_MARKER_ITEM));
+            var _loc2_:FCVehicleMarker = FCVehicleMarker(this._classFactory.getObject(this.getMarkerLinkage()));
             _loc2_.init(param1.vehicleID,param1.vehicleType,param1.vehicleStatus,this._color,this);
             this._vehicleMarkers.push(_loc2_);
             if(!this._isVehicleCounterShown)
@@ -220,7 +220,7 @@ package net.wg.gui.battle.random.views.fragCorrelationBar
             }
         }
 
-        public function dispose() : void
+        public final function dispose() : void
         {
             var _loc1_:FCVehicleMarker = null;
             for each(_loc1_ in this._vehicleMarkers)
@@ -238,6 +238,11 @@ package net.wg.gui.battle.random.views.fragCorrelationBar
             this._observerIDs.splice(0,this._observerIDs.length);
             this._observerIDs = null;
             this._classFactory = null;
+        }
+
+        protected function getMarkerLinkage() : String
+        {
+            return Linkages.FC_MARKER_ITEM;
         }
 
         private function removeObserversFromVehicleInfos(param1:Vector.<DAAPIVehicleInfoVO>) : Vector.<DAAPIVehicleInfoVO>
@@ -288,8 +293,6 @@ package net.wg.gui.battle.random.views.fragCorrelationBar
             {
                 _loc2_ = param1.concat();
                 _loc2_.fixed = false;
-                _loc3_ = -1;
-                _loc4_ = -1;
                 for each(_loc4_ in this._observerIDs)
                 {
                     _loc3_ = _loc2_.indexOf(_loc4_);
@@ -300,6 +303,11 @@ package net.wg.gui.battle.random.views.fragCorrelationBar
                 }
             }
             return _loc2_;
+        }
+
+        protected function get vehicleMarkers() : Vector.<FCVehicleMarker>
+        {
+            return this._vehicleMarkers;
         }
     }
 }

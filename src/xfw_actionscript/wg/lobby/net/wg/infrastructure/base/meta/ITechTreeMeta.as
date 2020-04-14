@@ -9,6 +9,8 @@ package net.wg.infrastructure.base.meta
 
         function getNationTreeDataS(param1:String) : Object;
 
+        function getPremiumPanelLabelsS() : Object;
+
         function request4UnlockS(param1:int) : void;
 
         function goToNextVehicleS(param1:Number) : void;
@@ -18,6 +20,10 @@ package net.wg.infrastructure.base.meta
         function request4VehCompareS(param1:Number) : void;
 
         function onBlueprintModeSwitchS(param1:Boolean) : void;
+
+        function onGoToPremiumShopS(param1:String, param2:int) : void;
+
+        function onPlayHintAnimationS(param1:Boolean) : void;
 
         function as_setAvailableNations(param1:Array) : void;
 
@@ -36,5 +42,9 @@ package net.wg.infrastructure.base.meta
         function as_setBlueprintMode(param1:Boolean) : void;
 
         function as_setBlueprintBalance(param1:Object) : void;
+
+        function as_closePremiumPanel() : void;
+
+        function as_setVehicleCollectorState(param1:Boolean) : void;
     }
 }

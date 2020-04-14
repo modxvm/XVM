@@ -101,6 +101,8 @@ package net.wg.data.constants
 
         public static const EPIC_RESPAWN_POINT_WARNING:String = "epicRespawnPointWarning";
 
+        public static const PREMIUM_PANEL:String = "premiumPanel";
+
         public function SoundTypes()
         {
             super();

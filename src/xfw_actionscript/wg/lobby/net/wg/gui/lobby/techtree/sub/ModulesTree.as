@@ -15,6 +15,7 @@ package net.wg.gui.lobby.techtree.sub
     import flash.display.InteractiveObject;
     import net.wg.gui.lobby.techtree.math.MatrixPosition;
     import net.wg.gui.lobby.techtree.data.vo.NodeData;
+    import net.wg.gui.lobby.techtree.data.state.NodeStateCollection;
     import net.wg.gui.lobby.techtree.constants.NodeEntityType;
     import flash.geom.Point;
     import net.wg.gui.lobby.techtree.data.vo.ResearchDisplayInfo;
@@ -33,15 +34,17 @@ package net.wg.gui.lobby.techtree.sub
 
         private static const CYCLIC_REFERENCE_ERROR:String = ERROR + "Has cyclic reference.";
 
-        public var yRatio:Number = 90;
+        private static const INV_RENDERERS_LINES_STATE:String = "invRenderersLines";
 
-        public var xRatio:Number = 90;
+        public var yRatio:int = 90;
 
-        public var topLevelOffset:Number = -150;
+        public var xRatio:int = 90;
 
-        public var nextLevelOffset:Number = 800;
+        public var topLevelOffset:int = -150;
 
-        public var maxNodesOnLevel:Number = 10;
+        public var nextLevelOffset:int = 800;
+
+        public var maxNodesOnLevel:int = 10;
 
         public var rGraphics:ModulesGraphics;
 
@@ -124,11 +127,15 @@ package net.wg.gui.lobby.techtree.sub
             if(isInvalid(InvalidationType.LAYOUT))
             {
                 this.updateLayout();
-                this.drawLines();
+                invalidate(INV_RENDERERS_LINES_STATE);
             }
             if(isInvalid(InvalidationType.LAYOUT,InvalidationType.DATA))
             {
                 this.onDrawComplete();
+            }
+            if(isInvalid(INV_RENDERERS_LINES_STATE))
+            {
+                this.drawLines();
             }
         }
 
@@ -136,7 +143,7 @@ package net.wg.gui.lobby.techtree.sub
         {
             var _loc2_:Vector.<IRenderer> = null;
             var _loc4_:NodeIndexFilter = null;
-            var _loc3_:Number = param1.matrixPosition.row + 1;
+            var _loc3_:int = param1.matrixPosition.row + 1;
             if(_loc3_ < this.renderers.length)
             {
                 _loc4_ = new NodeIndexFilter(this._levelsBuilder.getChildrenLevelIdxs(param1.index));
@@ -159,7 +166,7 @@ package net.wg.gui.lobby.techtree.sub
             return this._dataProvider.nation;
         }
 
-        public function getNodeByID(param1:Number) : IRenderer
+        public function getNodeByID(param1:int) : IRenderer
         {
             var _loc2_:MatrixPosition = this._positionByID[param1];
             return this.renderers[_loc2_.row][_loc2_.column];
@@ -175,7 +182,7 @@ package net.wg.gui.lobby.techtree.sub
             var _loc4_:IRenderer = null;
             var _loc3_:Array = this._levelsBuilder.getParentLevelIdxs(param2);
             var _loc5_:int = _loc3_.length;
-            var _loc6_:Number = 0;
+            var _loc6_:* = 0;
             while(_loc6_ < _loc5_)
             {
                 _loc4_ = this.renderers[param1][_loc3_[_loc6_]];
@@ -245,6 +252,7 @@ package net.wg.gui.lobby.techtree.sub
                 return;
             }
             param1.container = this;
+            param1.addEventListener(TechTreeEvent.STATE_CHANGED,this.onRendererStateChangedHandler,false,0,true);
         }
 
         protected function setupVehicleRenderer(param1:IRenderer, param2:Boolean = false) : void
@@ -254,6 +262,15 @@ package net.wg.gui.lobby.techtree.sub
                 return;
             }
             param1.container = this;
+            param1.addEventListener(TechTreeEvent.STATE_CHANGED,this.onRendererStateChangedHandler,false,0,true);
+        }
+
+        private function onRendererStateChangedHandler(param1:TechTreeEvent) : void
+        {
+            if(NodeStateCollection.instance.isRedrawResearchLines(param1.nodeState))
+            {
+                invalidate(INV_RENDERERS_LINES_STATE);
+            }
         }
 
         protected function onCircleReferenceDetected() : void
@@ -301,20 +318,21 @@ package net.wg.gui.lobby.techtree.sub
             var _loc1_:IRenderer = null;
             var _loc2_:Vector.<IRenderer> = null;
             var _loc3_:NodeIndexFilter = null;
-            var _loc4_:* = NaN;
+            var _loc4_:* = 0;
             var _loc5_:Vector.<IRenderer> = null;
+            var _loc7_:* = 0;
             var _loc8_:* = 0;
-            var _loc9_:* = NaN;
+            this.rGraphics.clearLinesAndArrowsRenderers();
             var _loc6_:int = this.renderers.length;
-            var _loc7_:Number = 0;
-            while(_loc7_ < _loc6_)
+            var _loc9_:* = 0;
+            while(_loc9_ < _loc6_)
             {
-                _loc2_ = this.renderers[_loc7_];
-                _loc8_ = _loc2_.length;
-                _loc9_ = 0;
-                while(_loc9_ < _loc8_)
+                _loc2_ = this.renderers[_loc9_];
+                _loc7_ = _loc2_.length;
+                _loc8_ = 0;
+                while(_loc8_ < _loc7_)
                 {
-                    _loc1_ = _loc2_[_loc9_];
+                    _loc1_ = _loc2_[_loc8_];
                     if(_loc1_ != null)
                     {
                         _loc4_ = _loc1_.matrixPosition.row + 1;
@@ -330,9 +348,9 @@ package net.wg.gui.lobby.techtree.sub
                         }
                         _loc5_ = null;
                     }
-                    _loc9_++;
+                    _loc8_++;
                 }
-                _loc7_++;
+                _loc9_++;
             }
         }
 
@@ -341,10 +359,10 @@ package net.wg.gui.lobby.techtree.sub
             var _loc8_:Vector.<IRenderer> = null;
             var _loc9_:Point = null;
             var _loc12_:ResearchDisplayInfo = null;
-            var _loc14_:* = NaN;
+            var _loc14_:* = 0;
             var _loc15_:IRenderer = null;
             var _loc17_:* = 0;
-            var _loc18_:* = NaN;
+            var _loc18_:* = 0;
             var _loc1_:Object = this._levelsBuilder.levelDimension;
             var _loc2_:Number = this.rootRenderer.getY();
             var _loc3_:Number = this.rootRenderer.getOutX();
@@ -352,7 +370,7 @@ package net.wg.gui.lobby.techtree.sub
             var _loc5_:Number = (_loc1_.column - 1) * this.yRatio;
             _loc4_[0] = _loc2_ - (_loc5_ >> 1);
             var _loc6_:int = _loc1_.column;
-            var _loc7_:Number = 1;
+            var _loc7_:* = 1;
             while(_loc7_ < _loc6_)
             {
                 _loc4_[_loc7_] = _loc4_[_loc7_ - 1] + this.yRatio;
@@ -395,23 +413,23 @@ package net.wg.gui.lobby.techtree.sub
         private function createRenderersMatrix() : Vector.<Vector.<IRenderer>>
         {
             var _loc1_:MatrixPosition = this._levelsBuilder.levelDimension;
-            var _loc2_:Vector.<Vector.<IRenderer>> = new Vector.<Vector.<IRenderer>>(_loc1_.row);
-            var _loc3_:int = _loc1_.row;
-            var _loc4_:Number = 0;
-            while(_loc4_ < _loc3_)
+            var _loc2_:int = _loc1_.row;
+            var _loc3_:Vector.<Vector.<IRenderer>> = new Vector.<Vector.<IRenderer>>(_loc2_);
+            var _loc4_:* = 0;
+            while(_loc4_ < _loc2_)
             {
-                _loc2_[_loc4_] = new Vector.<IRenderer>(_loc1_.column);
+                _loc3_[_loc4_] = new Vector.<IRenderer>(_loc1_.column);
                 _loc4_++;
             }
-            return _loc2_;
+            return _loc3_;
         }
 
         private function flushRenderersOnScene() : void
         {
             var _loc1_:Vector.<IRenderer> = null;
             var _loc2_:IRenderer = null;
-            var _loc5_:* = 0;
-            var _loc6_:* = NaN;
+            var _loc4_:* = 0;
+            var _loc6_:* = 0;
             if(this._onScene == null)
             {
                 this._onScene = new RenderersOnScene();
@@ -420,25 +438,25 @@ package net.wg.gui.lobby.techtree.sub
             {
                 return;
             }
+            this.rGraphics.clearLinesAndArrowsRenderers();
             var _loc3_:int = this.renderers.length;
-            var _loc4_:Number = 1;
-            while(_loc4_ < _loc3_)
+            var _loc5_:* = 1;
+            while(_loc5_ < _loc3_)
             {
-                _loc1_ = this.renderers[_loc4_];
-                _loc5_ = _loc1_.length;
-                _loc6_ = 0;
-                while(_loc6_ < _loc5_)
+                _loc1_ = this.renderers[_loc5_];
+                _loc6_ = _loc1_.length;
+                _loc4_ = 0;
+                while(_loc4_ < _loc6_)
                 {
-                    _loc2_ = _loc1_[_loc6_];
+                    _loc2_ = _loc1_[_loc4_];
                     if(_loc2_ != null)
                     {
                         this.rGraphics.clearUpRenderer(_loc2_);
-                        this.rGraphics.clearLinesAndArrows(_loc2_);
                         this._onScene.addRenderer(_loc2_);
                     }
-                    _loc6_++;
+                    _loc4_++;
                 }
-                _loc4_++;
+                _loc5_++;
             }
         }
 
@@ -446,20 +464,20 @@ package net.wg.gui.lobby.techtree.sub
         {
             var _loc1_:Vector.<IRenderer> = null;
             var _loc3_:* = 0;
-            var _loc5_:* = 0;
-            var _loc2_:int = this._renderers.length;
             var _loc4_:* = 0;
-            while(_loc4_ < _loc2_)
+            var _loc2_:int = this._renderers.length;
+            var _loc5_:* = 0;
+            while(_loc5_ < _loc2_)
             {
                 _loc1_ = this._renderers.pop();
                 _loc3_ = _loc1_.length;
-                _loc5_ = 0;
-                while(_loc5_ < _loc3_)
+                _loc4_ = 0;
+                while(_loc4_ < _loc3_)
                 {
                     this.removeItemRenderer(_loc1_.pop());
-                    _loc5_++;
+                    _loc4_++;
                 }
-                _loc4_++;
+                _loc5_++;
             }
             this._renderers = null;
         }
@@ -472,8 +490,8 @@ package net.wg.gui.lobby.techtree.sub
             var _loc4_:NodeData = null;
             var _loc6_:Array = null;
             var _loc9_:* = NaN;
-            var _loc10_:* = NaN;
-            var _loc11_:* = NaN;
+            var _loc10_:* = 0;
+            var _loc11_:* = 0;
             var _loc13_:uint = 0;
             var _loc14_:Vector.<IRenderer> = null;
             var _loc15_:Vector.<IRenderer> = null;
@@ -482,12 +500,12 @@ package net.wg.gui.lobby.techtree.sub
             var _loc18_:FakeNode = null;
             var _loc19_:IRenderer = null;
             var _loc20_:IRenderer = null;
-            var _loc21_:FakeNode = null;
+            var _loc21_:* = 0;
             var _loc22_:* = 0;
-            var _loc23_:* = 0;
+            var _loc23_:FakeNode = null;
             var _loc5_:Array = this._levelsBuilder.nodesByLevel;
             var _loc7_:Vector.<FakeNode> = new Vector.<FakeNode>();
-            var _loc8_:Number = _loc5_.length;
+            var _loc8_:int = _loc5_.length;
             var _loc12_:* = false;
             _loc10_ = 1;
             while(_loc10_ < _loc8_)
@@ -525,9 +543,9 @@ package net.wg.gui.lobby.techtree.sub
                             _loc1_.validateNow();
                             if(_loc1_.isFake())
                             {
-                                _loc21_ = _loc1_ as FakeNode;
-                                App.utils.asserter.assertNotNull(_loc21_,"fakeNodeRenderer " + Errors.CANT_NULL);
-                                _loc7_.push(_loc21_);
+                                _loc23_ = _loc1_ as FakeNode;
+                                App.utils.asserter.assertNotNull(_loc23_,"fakeNodeRenderer " + Errors.CANT_NULL);
+                                _loc7_.push(_loc23_);
                             }
                             if(_loc12_)
                             {
@@ -546,9 +564,9 @@ package net.wg.gui.lobby.techtree.sub
                 _loc18_ = _loc7_[_loc10_];
                 _loc14_ = new Vector.<IRenderer>();
                 _loc16_ = this._levelsBuilder.getChildrenLevelIdxs(_loc18_.index);
-                _loc22_ = _loc16_.length;
+                _loc21_ = _loc16_.length;
                 _loc11_ = 0;
-                while(_loc11_ < _loc22_)
+                while(_loc11_ < _loc21_)
                 {
                     _loc19_ = this.renderers[_loc18_.matrixPosition.row + 1][_loc16_[_loc11_]];
                     if(_loc19_ != null)
@@ -560,9 +578,9 @@ package net.wg.gui.lobby.techtree.sub
                 _loc18_.setChildren(_loc14_);
                 _loc15_ = new Vector.<IRenderer>();
                 _loc17_ = this._levelsBuilder.getParentLevelIdxs(_loc18_.index);
-                _loc23_ = _loc17_.length;
+                _loc22_ = _loc17_.length;
                 _loc11_ = 0;
-                while(_loc11_ < _loc23_)
+                while(_loc11_ < _loc22_)
                 {
                     _loc20_ = this.renderers[_loc18_.matrixPosition.row - 1][_loc17_[_loc11_]];
                     if(_loc20_ != null)

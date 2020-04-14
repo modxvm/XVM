@@ -43,12 +43,6 @@ package
 
         public static const GRAPHICSQUALITY_DESCRIPTION:String = "#settings:graphicsQuality/description";
 
-        public static const GRAPHICSQUALITY_XP:String = "#settings:graphicsQuality_XP";
-
-        public static const GRAPHICSQUALITY_XP_DESCRIPTION:String = "#settings:graphicsQuality_XP/description";
-
-        public static const GRAPHICSQUALITY_XP_WARNING:String = "#settings:graphicsQuality_XP/warning";
-
         public static const GRAPHICSQUALITYHDSD_SD:String = "#settings:graphicsQualityHDSD/SD";
 
         public static const GRAPHICSQUALITYHDSD_HD:String = "#settings:graphicsQualityHDSD/HD";
@@ -166,12 +160,6 @@ package
         public static const RENDER_PIPELINE_DESCRIPTION:String = "#settings:RENDER_PIPELINE/description";
 
         public static const RENDER_PIPELINE_WARNING:String = "#settings:RENDER_PIPELINE/warning";
-
-        public static const RENDER_PIPELINE_XP:String = "#settings:RENDER_PIPELINE_XP";
-
-        public static const RENDER_PIPELINE_XP_DESCRIPTION:String = "#settings:RENDER_PIPELINE_XP/description";
-
-        public static const RENDER_PIPELINE_XP_WARNING:String = "#settings:RENDER_PIPELINE_XP/warning";
 
         public static const TEXTURE_QUALITY:String = "#settings:TEXTURE_QUALITY";
 
@@ -528,6 +516,8 @@ package
         public static const SOUNDS_SOUNDQUALITY:String = "#settings:sounds/soundQuality";
 
         public static const SOUNDS_SOUNDQUALITY_DESCRIPTION:String = "#settings:sounds/soundQuality/description";
+
+        public static const SOUNDS_SUBTITLES:String = "#settings:sounds/subtitles";
 
         public static const SOUNDS_ACOUSTICTYPE_ACOUSTICS20:String = "#settings:sounds/acousticType/acoustics20";
 

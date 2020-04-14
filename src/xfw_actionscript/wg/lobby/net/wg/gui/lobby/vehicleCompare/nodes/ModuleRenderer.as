@@ -6,6 +6,7 @@ package net.wg.gui.lobby.vehicleCompare.nodes
     import net.wg.gui.lobby.techtree.data.vo.NodeData;
     import net.wg.gui.lobby.techtree.math.MatrixPosition;
     import scaleform.clik.constants.InvalidationType;
+    import net.wg.data.constants.Values;
     import net.wg.data.constants.generated.NODE_STATE_FLAGS;
     import net.wg.gui.lobby.techtree.TechTreeEvent;
     import flash.geom.Point;
@@ -102,7 +103,7 @@ package net.wg.gui.lobby.vehicleCompare.nodes
 
         public function getGraphicsName() : String
         {
-            return LINES_AND_ARROWS_NAME + this._entityType.toString() + _index.toString();
+            return LINES_AND_ARROWS_NAME;
         }
 
         public function getID() : uint
@@ -112,7 +113,7 @@ package net.wg.gui.lobby.vehicleCompare.nodes
 
         public function getIconPath() : String
         {
-            return this._dataInited?this._valueObject.iconPath:"";
+            return this._dataInited?this._valueObject.iconPath:Values.EMPTY_STR;
         }
 
         public function getInX() : Number
@@ -122,12 +123,12 @@ package net.wg.gui.lobby.vehicleCompare.nodes
 
         public function getItemName() : String
         {
-            return this._dataInited?this._valueObject.nameString:"";
+            return this._dataInited?this._valueObject.nameString:Values.EMPTY_STR;
         }
 
         public function getItemType() : String
         {
-            return this._dataInited?this._valueObject.primaryClassName:"";
+            return this._dataInited?this._valueObject.primaryClassName:Values.EMPTY_STR;
         }
 
         public function getLevel() : int
@@ -177,12 +178,22 @@ package net.wg.gui.lobby.vehicleCompare.nodes
             return false;
         }
 
+        public function isLocked() : Boolean
+        {
+            return !this.isUnlocked();
+        }
+
         public function isNext2Unlock() : Boolean
         {
             return false;
         }
 
         public function isPremium() : Boolean
+        {
+            return false;
+        }
+
+        public function isCollectible() : Boolean
         {
             return false;
         }
@@ -200,11 +211,6 @@ package net.wg.gui.lobby.vehicleCompare.nodes
         public function isUnlocked() : Boolean
         {
             return this._dataInited && (this._valueObject.state & NODE_STATE_FLAGS.UNLOCKED) > 0;
-        }
-
-        public function isLocked() : Boolean
-        {
-            return !this.isUnlocked();
         }
 
         public function setPosition(param1:Point) : void
@@ -286,6 +292,11 @@ package net.wg.gui.lobby.vehicleCompare.nodes
         public function set entityType(param1:uint) : void
         {
             this._entityType = param1;
+        }
+
+        public function isTopActionNode() : Boolean
+        {
+            return false;
         }
     }
 }

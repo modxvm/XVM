@@ -5,11 +5,13 @@ package net.wg.gui.bootcamp.battleResult.events
     public final class BattleViewEvent extends Event
     {
 
-        public static const ANIMATION_COMPLETE:String = "animationsComplete";
+        public static const ANIMATION_START:String = "animationsStart";
 
-        public static const ANIMATIONS_QUEUE_START:String = "animationsQueueStart";
+        public static const TOOLTIP_SHOW:String = "tooltipShow";
 
-        public static const ANIMATIONS_QUEUE_COMPLETE:String = "animationsQueueComplete";
+        public static const RENDERER_LOADED:String = "rendererLoaded";
+
+        public static const ALL_RENDERERS_LOADED:String = "allRenderersLoaded";
 
         private var _elementId:String = "";
 

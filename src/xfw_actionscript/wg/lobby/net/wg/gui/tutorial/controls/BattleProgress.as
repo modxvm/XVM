@@ -114,14 +114,13 @@ package net.wg.gui.tutorial.controls
 
         private function rebuildPhases() : void
         {
-            var _loc1_:* = 0;
             var _loc2_:* = NaN;
             var _loc3_:ProgressSeparator = null;
             var _loc4_:ProgressItem = null;
             this.clearItems(this.separatorsContainer,this.separatorItems);
             this.clearItems(this.phasesContainer,this.phaseItems);
             this._phaseWidth = this._bodyWidth / this._allPhases;
-            _loc1_ = 0;
+            var _loc1_:* = 0;
             while(_loc1_ < this._allPhases)
             {
                 _loc2_ = this._phaseWidth * _loc1_ ^ 0;
@@ -188,12 +187,11 @@ package net.wg.gui.tutorial.controls
 
         private function rebuildTasks() : void
         {
-            var _loc3_:* = 0;
             var _loc4_:ProgressItem = null;
             this.clearItems(this.tasksContainer,this.taskItems);
             var _loc1_:Number = this._phaseWidth * this._curPhase ^ 0;
             var _loc2_:Number = this._phaseWidth / this._allTasks ^ 0;
-            _loc3_ = 0;
+            var _loc3_:* = 0;
             while(_loc3_ < this._allTasks)
             {
                 _loc4_ = this.createInstance(this.tasksContainer,this.progressItemRenderer) as ProgressItem;

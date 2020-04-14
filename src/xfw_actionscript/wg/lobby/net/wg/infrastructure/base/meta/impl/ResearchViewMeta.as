@@ -19,6 +19,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public var goToNationChangeView:Function;
 
+        public var goToVehicleCollection:Function;
+
         private var _array:Array;
 
         private var _array1:Array;
@@ -98,6 +100,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.goToNationChangeView,"goToNationChangeView" + Errors.CANT_NULL);
             this.goToNationChangeView(param1);
+        }
+
+        public function goToVehicleCollectionS(param1:String) : void
+        {
+            App.utils.asserter.assertNotNull(this.goToVehicleCollection,"goToVehicleCollection" + Errors.CANT_NULL);
+            this.goToVehicleCollection(param1);
         }
 
         public final function as_setNodesStates(param1:Number, param2:Array) : void

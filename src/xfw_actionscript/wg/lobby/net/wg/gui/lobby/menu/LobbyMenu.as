@@ -265,6 +265,10 @@ package net.wg.gui.lobby.menu
         public function as_setPostButtonVisible(param1:Boolean) : void
         {
             this._showPostButton = this.postBtn.visible = param1;
+            if(!param1)
+            {
+                this._counterManager.removeCounter(DisplayObject(this.postBtn),NEW_COUNTER_CONTAINER_ID);
+            }
             invalidate(INVALIDATE_BUTTONS_VISIBLE);
         }
 

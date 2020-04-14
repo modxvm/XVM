@@ -47,6 +47,10 @@ package net.wg.data.constants.generated
 
         public static const TECHTREE_MODULE:String = "techtreeModule";
 
+        public static const TECHTREE_DISCOUNT_INFO:String = "techtreeDiscount";
+
+        public static const TECHTREE_NATION_DISCOUNT:String = "techtreeNationDiscount";
+
         public static const VEH_COMPARE_TECHTREE_MODULE:String = "vehCompareTechtreeModule";
 
         public static const TECH_MAIN_SHELL:String = "techMainShell";
@@ -64,6 +68,10 @@ package net.wg.data.constants.generated
         public static const CREW_BOOK:String = "crewBook";
 
         public static const CREW_BOOK_RESTRICTED:String = "crewBookRestricted";
+
+        public static const VEHICLE_COLLECTOR_INFO:String = "vehicleCollectorInfo";
+
+        public static const VEHICLE_COLLECTOR_DISABLED:String = "vehicleCollectorDisabled";
 
         public static const NATION_CHANGE_HANGAR_MODULE:String = "nationChangeHangarModule";
 
@@ -347,6 +355,8 @@ package net.wg.data.constants.generated
 
         public static const SQUAD_BONUS:String = "squadBonus";
 
+        public static const GF_TEST_TOOLTIP:String = "gfTestTooltip";
+
         public static const BATTLE_PASS_VEHICLE_POINTS:String = "battlePassVehiclePoints";
 
         public static const BATTLE_PASS_POINTS:String = "battlePassPoints";
@@ -374,6 +384,8 @@ package net.wg.data.constants.generated
         public static const GOLD_ALTERNATIVE_INFO:String = "goldAlternativeInfo";
 
         public static const GOLD_ALTERNATIVE_STATS:String = "goldAlternativeStats";
+
+        public static const EVENT_COIN_INFO:String = "eventCoinInfo";
 
         public static const FREEXP_INFO:String = "freeXPInfo";
 
@@ -599,7 +611,7 @@ package net.wg.data.constants.generated
 
         public static const BOOSTERS_SET:Array = [INVENTORY_BATTLE_BOOSTER,AWARD_BATTLE_BOOSTER,EPIC_AWARD_BATTLE_BOOSTER,BATTLE_BOOSTER,SHOP_BATTLE_BOOSTER,SHOP_20_BATTLE_BOOSTER,BATTLE_BOOSTER_COMPARE,BOOSTERS_BOOSTER_INFO,CLAN_RESERVE_INFO,BOOSTERS_SHOP,SHOP_20_BOOSTER,BOOSTERS_QUESTS,NATION_CHANGE_BATTLE_BOOSTER];
 
-        public static const COMMON_SET:Array = [EFFICIENCY_PARAM,IGR_INFO,CONTACT,SORTIE_DIVISION,MAP,MAP_SMALL,CLAN_COMMON_INFO,ACTION_PRICE,ACTION_SLOT_PRICE,PRICE_DISCOUNT,FRONTLINE_PRICE_DISCOUNT,ACTION_XP,QUESTS_VEHICLE_BONUSES,ENVIRONMENT,SQUAD_RESTRICTIONS_INFO,MISSIONS_TOKEN,RESERVE_MODULE,CRYSTAL_INFO,CREDITS_INFO,GOLD_INFO,FREEXP_INFO,VEHICLE_FILTER,RSS_NEWS,VEHICLE_ELITE_BONUS,VEHICLE_HISTORICAL_REFERENCE,BATTLE_TRAINING,SQUAD_BONUS,BATTLE_PASS_VEHICLE_POINTS,BATTLE_PASS_IN_PROGRESS,BATTLE_PASS_COMPLETED,BATTLE_PASS_CHOSE_WINNER];
+        public static const COMMON_SET:Array = [EFFICIENCY_PARAM,IGR_INFO,CONTACT,SORTIE_DIVISION,MAP,MAP_SMALL,CLAN_COMMON_INFO,ACTION_PRICE,ACTION_SLOT_PRICE,PRICE_DISCOUNT,FRONTLINE_PRICE_DISCOUNT,ACTION_XP,QUESTS_VEHICLE_BONUSES,ENVIRONMENT,SQUAD_RESTRICTIONS_INFO,MISSIONS_TOKEN,RESERVE_MODULE,CRYSTAL_INFO,EVENT_COIN_INFO,CREDITS_INFO,GOLD_INFO,FREEXP_INFO,VEHICLE_FILTER,RSS_NEWS,VEHICLE_ELITE_BONUS,VEHICLE_HISTORICAL_REFERENCE,BATTLE_TRAINING,SQUAD_BONUS,BATTLE_PASS_VEHICLE_POINTS,BATTLE_PASS_IN_PROGRESS,BATTLE_PASS_COMPLETED,BATTLE_PASS_CHOSE_WINNER,TECHTREE_DISCOUNT_INFO,TECHTREE_NATION_DISCOUNT];
 
         public static const CUSTOMIZATION_SET:Array = [TECH_CUSTOMIZATION_ITEM,TECH_CUSTOMIZATION_HISTORIC_ITEM,TECH_CUSTOMIZATION_ITEM_ICON,TECH_CUSTOMIZATION_ITEM_AWARD,TECH_CUSTOMIZATION_ITEM_PURCHASE,SHOP_20_CUSTOMIZATION_ITEM];
 
@@ -650,6 +662,10 @@ package net.wg.data.constants.generated
         public static const TRADE_IN_SET:Array = [TRADE_IN_INFO,TRADE_IN_INFO_NOT_AVAILABLE,TRADE_IN_STATE_NOT_AVAILABLE];
 
         public static const DEMOUNT_KIT_SET:Array = [AWARD_DEMOUNT_KIT,GOLD_ALTERNATIVE_INFO,GOLD_ALTERNATIVE_STATS,NOT_ENOUGH_MONEY];
+
+        public static const DEVELOPMENT_SET:Array = [GF_TEST_TOOLTIP];
+
+        public static const VEHICLE_COLLECTOR_SET:Array = [VEHICLE_COLLECTOR_INFO,VEHICLE_COLLECTOR_DISABLED];
 
         public function TOOLTIPS_CONSTANTS()
         {

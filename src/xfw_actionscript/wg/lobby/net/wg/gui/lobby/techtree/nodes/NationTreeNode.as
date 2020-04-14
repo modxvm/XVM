@@ -5,25 +5,30 @@ package net.wg.gui.lobby.techtree.nodes
     import net.wg.gui.lobby.techtree.controls.TypeAndLevelField;
     import net.wg.infrastructure.interfaces.IImage;
     import net.wg.gui.lobby.techtree.controls.ActionButton;
+    import flash.display.MovieClip;
     import flash.display.Sprite;
     import net.wg.gui.lobby.techtree.controls.XPField;
     import net.wg.gui.components.controls.TradeIco;
     import net.wg.infrastructure.managers.ITooltipMgr;
-    import net.wg.gui.lobby.techtree.constants.NodeEntityType;
+    import net.wg.gui.lobby.techtree.interfaces.IRenderer;
+    import net.wg.gui.lobby.techtree.constants.ColorIndex;
     import flash.geom.Point;
     import net.wg.gui.lobby.techtree.data.vo.NTDisplayInfo;
     import net.wg.data.constants.generated.TOOLTIPS_CONSTANTS;
     import net.wg.data.constants.generated.CONTEXT_MENU_HANDLER_TYPE;
     import net.wg.gui.lobby.techtree.constants.XpTypeStrings;
     import flash.events.MouseEvent;
-    import flash.display.DisplayObject;
+    import net.wg.gui.lobby.techtree.constants.NodeEntityType;
     import net.wg.data.constants.Linkages;
-    import net.wg.gui.lobby.techtree.constants.NodeRendererState;
     import flash.geom.ColorTransform;
+    import flash.display.DisplayObject;
+    import net.wg.gui.lobby.techtree.constants.NodeRendererState;
     import net.wg.gui.lobby.techtree.TechTreeEvent;
 
     public class NationTreeNode extends Renderer
     {
+
+        private static const LABEL_ANIM_START:String = "animStart";
 
         private static const TRADE_POS_X:Number = 14;
 
@@ -49,6 +54,12 @@ package net.wg.gui.lobby.techtree.nodes
 
         private static const NAME_TF_SHORT_WIDTH_FOR_NATION_CHANGE_ICON:int = 108;
 
+        private static const INV_FIRST_TIME_SHOW:String = "invFirstTimeShow";
+
+        private static const DISCOUNT_LABEL_BLUE:String = "blue";
+
+        private static const DISCOUNT_LABEL_RED:String = "red";
+
         public var blueprintProgressBar:FadeComponent = null;
 
         public var blueprintBorder:FadeComponent = null;
@@ -63,13 +74,19 @@ package net.wg.gui.lobby.techtree.nodes
 
         public var button:ActionButton = null;
 
-        public var discountIcon:Sprite = null;
+        public var discountIcon:MovieClip = null;
 
         public var nationChangeIcon:Sprite = null;
 
         public var xpField:XPField = null;
 
         public var nameTF:TextField = null;
+
+        public var techTreeEventAnimMc:MovieClip = null;
+
+        public var techTreeEventFrameMc:MovieClip = null;
+
+        private var _isFirstTimeActionShow:Boolean = false;
 
         private var _trade:TradeIco = null;
 
@@ -81,9 +98,18 @@ package net.wg.gui.lobby.techtree.nodes
             super();
         }
 
-        override public function getGraphicsName() : String
+        override public function getColorIndex(param1:IRenderer = null) : uint
         {
-            return LINES_AND_ARROWS_NAME + NodeEntityType.NATION_TREE + _index.toString();
+            var _loc2_:NationTreeNode = null;
+            if(this._isFirstTimeActionShow && hasTechTreeEvent)
+            {
+                _loc2_ = param1 as NationTreeNode;
+                if(_loc2_ && _loc2_.hasTechTreeEvent && _loc2_.isFirstTimeActionShow)
+                {
+                    return ColorIndex.EVENT_AVAILABLE;
+                }
+            }
+            return super.getColorIndex(param1);
         }
 
         override public function getIconPath() : String
@@ -153,7 +179,7 @@ package net.wg.gui.lobby.techtree.nodes
 
         override protected function validateData() : void
         {
-            var _loc2_:String = null;
+            var _loc4_:String = null;
             visible = !(this.isBlueprintMode && !canHaveBlueprint());
             if(!visible)
             {
@@ -165,9 +191,16 @@ package net.wg.gui.lobby.techtree.nodes
             this.vehicleImage.source = _loc1_;
             this.typeAndLevel.setOwner(this);
             this.nameTF.text = getItemName();
+            var _loc2_:String = hasAction && (isLocked() || isNext2Unlock())?DISCOUNT_LABEL_BLUE:DISCOUNT_LABEL_RED;
+            var _loc3_:Boolean = hasAction || hasTechTreeEvent;
             if(this.discountIcon)
             {
-                this.discountIcon.visible = hasAction;
+                this.discountIcon.visible = _loc3_;
+                if(_loc3_)
+                {
+                    App.utils.asserter.assertFrameExists(_loc2_,this.discountIcon);
+                    this.discountIcon.gotoAndStop(_loc2_);
+                }
             }
             if(this.xpField)
             {
@@ -179,14 +212,14 @@ package net.wg.gui.lobby.techtree.nodes
                 }
                 else if(getEarnedXP() > 0 && !stateProps.visible)
                 {
-                    _loc2_ = isElite()?XpTypeStrings.ELITE_XP_TYPE:XpTypeStrings.EARNED_XP_TYPE;
-                    this.xpField.setData(getEarnedXP(),_loc2_);
+                    _loc4_ = isElite()?XpTypeStrings.ELITE_XP_TYPE:XpTypeStrings.EARNED_XP_TYPE;
+                    this.xpField.setData(getEarnedXP(),_loc4_);
                 }
                 else
                 {
                     this.xpField.visible = false;
                 }
-                this.xpField.x = this.discountIcon && this.discountIcon.visible?XP_FIELD_ACTION_OFFSET_X:XP_FIELD_DEFAULT_OFFSET_X;
+                this.xpField.x = _loc3_ && this.discountIcon?XP_FIELD_ACTION_OFFSET_X:XP_FIELD_DEFAULT_OFFSET_X;
             }
             if(isRestoreAvailable())
             {
@@ -221,10 +254,28 @@ package net.wg.gui.lobby.techtree.nodes
             this.nationChangeIcon.visible = valueObject.isNationChangeAvailable;
             this.nameTF.width = valueObject.isNationChangeAvailable?NAME_TF_SHORT_WIDTH_FOR_NATION_CHANGE_ICON:NAME_TF_FULL_WIDTH;
             this.setTradeIcon();
+            this.updateTechTreeEventBorder();
+        }
+
+        override protected function draw() : void
+        {
+            super.draw();
+            if(isInvalid(INV_FIRST_TIME_SHOW))
+            {
+                this.updateTechTreeEventBorder();
+            }
         }
 
         override protected function onDispose() : void
         {
+            if(this.techTreeEventAnimMc)
+            {
+                this.techTreeEventAnimMc = null;
+            }
+            if(this.techTreeEventFrameMc)
+            {
+                this.techTreeEventFrameMc = null;
+            }
             this.button.dispose();
             this.button = null;
             this.typeAndLevel.dispose();
@@ -259,18 +310,6 @@ package net.wg.gui.lobby.techtree.nodes
             super.onDispose();
         }
 
-        override protected function get mouseEnabledChildren() : Vector.<DisplayObject>
-        {
-            var _loc1_:Vector.<DisplayObject> = super.mouseEnabledChildren;
-            _loc1_.push(this.button);
-            _loc1_.push(this.blueprintPlus);
-            if(this._trade != null)
-            {
-                _loc1_.push(this._trade);
-            }
-            return _loc1_;
-        }
-
         override protected function initialize() : void
         {
             super.initialize();
@@ -302,6 +341,21 @@ package net.wg.gui.lobby.techtree.nodes
             this.blueprintPlus.addEventListener(MouseEvent.CLICK,this.onBlueprintPlusClickHandler,false,0,true);
         }
 
+        public function animateFrameHighlight() : void
+        {
+            this.techTreeEventFrameMc.gotoAndPlay(LABEL_ANIM_START);
+        }
+
+        public function animateNationTreeEvent() : void
+        {
+            this.techTreeEventAnimMc.gotoAndPlay(LABEL_ANIM_START);
+        }
+
+        public function resetNationTreeEventAnimation() : void
+        {
+            this.techTreeEventAnimMc.gotoAndStop(1);
+        }
+
         private function setTradeIcon() : void
         {
             if(isTradeIn())
@@ -323,6 +377,42 @@ package net.wg.gui.lobby.techtree.nodes
             }
         }
 
+        private function blueprintPlusHoverEffectEnable() : void
+        {
+            this.blueprintPlus.transform.colorTransform = new ColorTransform(1,1,1,1,BLUEPRINT_PLUS_COLOR_OFFSET,BLUEPRINT_PLUS_COLOR_OFFSET,BLUEPRINT_PLUS_COLOR_OFFSET,0);
+            App.utils.commons.setGlowFilter(this.blueprintPlus,4.283871231E9);
+        }
+
+        private function blueprintPlusHoverEffectDisable() : void
+        {
+            this.blueprintPlus.filters = [];
+            this.blueprintPlus.transform.colorTransform = null;
+        }
+
+        private function updateTechTreeEventBorder() : void
+        {
+            if(this.techTreeEventFrameMc)
+            {
+                if(!this._isFirstTimeActionShow)
+                {
+                    this.techTreeEventFrameMc.gotoAndStop(1);
+                }
+                this.techTreeEventFrameMc.visible = !this.isBlueprintMode && hasTechTreeEvent;
+            }
+        }
+
+        override protected function get mouseEnabledChildren() : Vector.<DisplayObject>
+        {
+            var _loc1_:Vector.<DisplayObject> = super.mouseEnabledChildren;
+            _loc1_.push(this.button);
+            _loc1_.push(this.blueprintPlus);
+            if(this._trade != null)
+            {
+                _loc1_.push(this._trade);
+            }
+            return _loc1_;
+        }
+
         override public function get bottomArrowOffset() : Number
         {
             if(nodeState == NodeRendererState.LOCKED || nodeState == NodeRendererState.BLUEPRINTS_LOCKED)
@@ -341,20 +431,15 @@ package net.wg.gui.lobby.techtree.nodes
             return entityType == NodeEntityType.BLUEPRINT_TREE;
         }
 
-        private function blueprintPlusHoverEffectEnable() : void
+        public function get isFirstTimeActionShow() : Boolean
         {
-            var _loc1_:ColorTransform = new ColorTransform();
-            _loc1_.blueOffset = BLUEPRINT_PLUS_COLOR_OFFSET;
-            _loc1_.greenOffset = BLUEPRINT_PLUS_COLOR_OFFSET;
-            _loc1_.redOffset = BLUEPRINT_PLUS_COLOR_OFFSET;
-            this.blueprintPlus.transform.colorTransform = _loc1_;
-            App.utils.commons.setGlowFilter(this.blueprintPlus,4.283871231E9);
+            return this._isFirstTimeActionShow;
         }
 
-        private function blueprintPlusHoverEffectDisable() : void
+        public function set isFirstTimeActionShow(param1:Boolean) : void
         {
-            this.blueprintPlus.filters = [];
-            this.blueprintPlus.transform.colorTransform = null;
+            this._isFirstTimeActionShow = param1;
+            invalidate(INV_FIRST_TIME_SHOW);
         }
 
         private function onHitClickHandler(param1:MouseEvent) : void

@@ -119,7 +119,8 @@ package net.wg.data
 
         public function getItemIndex(param1:String, param2:*) : int
         {
-            return this.getItemIndexHandler(param1,param2);
+            var _loc3_:int = this.getItemIndexHandler(param1,param2);
+            return _loc3_;
         }
 
         public function indexOf(param1:Object, param2:Function = null) : int
