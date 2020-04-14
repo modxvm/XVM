@@ -12,11 +12,17 @@ package net.wg.gui.lobby.techtree.controls
 
         private static const _SMALL_TITLE_STATE:String = "small";
 
-        private static const _TITLE_SIZE_FACTOR:int = 111;
-
-        private static const _TITLE_SHOW_FACTOR:int = 51;
-
         private static const _ALREADY_DISPOSED_MESSAGE:String = "(TechTreeTitle) already disposed!";
+
+        private static const _HEIGHT_SMALL:int = 36;
+
+        private static const _HEIGHT_BIG:int = 58;
+
+        private static const _Y_SMALL:int = 36;
+
+        private static const _Y_BIG:int = 33;
+
+        private static const _HEIGHT_BREAKPOINT:int = 837;
 
         public var titleTF:TextField = null;
 
@@ -29,11 +35,6 @@ package net.wg.gui.lobby.techtree.controls
             super();
         }
 
-        protected function onDispose() : void
-        {
-            this.titleTF = null;
-        }
-
         public final function dispose() : void
         {
             App.utils.asserter.assert(!this._baseDisposed,name + _ALREADY_DISPOSED_MESSAGE);
@@ -41,34 +42,35 @@ package net.wg.gui.lobby.techtree.controls
             this._baseDisposed = true;
         }
 
-        public function updateTitle(param1:String) : void
+        public function updateSize(param1:Number, param2:Number) : void
+        {
+            var _loc3_:* = param2 >= _HEIGHT_BREAKPOINT;
+            this.y = _loc3_?_Y_BIG:_Y_SMALL;
+            this.gotoAndStop(_loc3_?_BIG_TITLE_STATE:_SMALL_TITLE_STATE);
+            if(this._baseDisposed)
+            {
+                return;
+            }
+            this.titleTF.text = this._titleStr;
+            this.titleTF.width = param1;
+            this.titleTF.height = _loc3_?_HEIGHT_BIG:_HEIGHT_SMALL;
+            TextFieldEx.setVerticalAlign(this.titleTF,TextFieldEx.VALIGN_CENTER);
+        }
+
+        protected function onDispose() : void
+        {
+            this.titleTF = null;
+        }
+
+        public function set updateTitle(param1:String) : void
         {
             this._titleStr = param1;
             this.titleTF.text = param1;
         }
 
-        public function updateSize(param1:Number, param2:Number) : void
+        public function get titleWidth() : Number
         {
-            this.visible = param2 >= _TITLE_SHOW_FACTOR;
-            if(this.visible)
-            {
-                if(param2 >= _TITLE_SIZE_FACTOR)
-                {
-                    this.gotoAndStop(_BIG_TITLE_STATE);
-                }
-                else
-                {
-                    this.gotoAndStop(_SMALL_TITLE_STATE);
-                }
-                if(this._baseDisposed)
-                {
-                    return;
-                }
-                this.titleTF.width = param1;
-                this.titleTF.height = param2;
-                this.titleTF.text = this._titleStr;
-                TextFieldEx.setVerticalAlign(this.titleTF,TextFieldEx.VALIGN_CENTER);
-            }
+            return this.titleTF.textWidth;
         }
     }
 }

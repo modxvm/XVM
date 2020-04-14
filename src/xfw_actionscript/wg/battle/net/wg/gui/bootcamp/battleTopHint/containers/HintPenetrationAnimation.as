@@ -14,8 +14,6 @@ package net.wg.gui.bootcamp.battleTopHint.containers
 
         public var txtPenetrationLow:AnimatedTextContainer = null;
 
-        public var penetrationBlind:HintBlindContainer = null;
-
         public function HintPenetrationAnimation()
         {
             super();
@@ -28,8 +26,6 @@ package net.wg.gui.bootcamp.battleTopHint.containers
         public final function dispose() : void
         {
             App.colorSchemeMgr.removeEventListener(ColorSchemeEvent.SCHEMAS_UPDATED,this.onColorSchemasUpdatedHandler);
-            this.penetrationBlind.dispose();
-            this.penetrationBlind = null;
             this.txtPenetrationHigh.dispose();
             this.txtPenetrationLow.dispose();
             this.txtPenetrationHigh = null;

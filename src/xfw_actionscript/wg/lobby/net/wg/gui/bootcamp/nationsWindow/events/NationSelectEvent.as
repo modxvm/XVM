@@ -5,8 +5,6 @@ package net.wg.gui.bootcamp.nationsWindow.events
     public final class NationSelectEvent extends Event
     {
 
-        public static const NATION_SELECTED:String = "nationSelected";
-
         public static const NATION_SHOW:String = "nationShow";
 
         private var _selectedNation:int = 0;

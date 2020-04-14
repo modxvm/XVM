@@ -8,6 +8,7 @@ package net.wg.gui.lobby.rankedBattles19.view.intro
     import net.wg.gui.components.advanced.VideoButton;
     import net.wg.gui.lobby.rankedBattles19.data.RankedBattlesPageHeaderVO;
     import net.wg.utils.IUtils;
+    import net.wg.gui.lobby.rankedBattles19.components.RankedBattlesPageHeaderHelper;
     import net.wg.data.constants.UniversalBtnStylesConst;
     import scaleform.clik.events.ButtonEvent;
     import flash.events.Event;
@@ -60,10 +61,15 @@ package net.wg.gui.lobby.rankedBattles19.view.intro
 
         private var _viewSizeID:String = "";
 
+        private var _headerHelper:RankedBattlesPageHeaderHelper = null;
+
+        private var _headerSizeId:String = "small";
+
         public function RankedBattlesIntro()
         {
             this._utils = App.utils;
             super();
+            this._headerHelper = RankedBattlesPageHeaderHelper.getInstance();
         }
 
         override protected function configUI() : void
@@ -105,6 +111,9 @@ package net.wg.gui.lobby.rankedBattles19.view.intro
                 }
                 if(isInvalid(InvalidationType.SIZE))
                 {
+                    this.header.setSizeId(this._headerSizeId);
+                    this.header.y = this._headerHelper.getYOffset(this._headerSizeId);
+                    closeBtn.y = this.header.y + this._headerHelper.getCloseBtnYOffset(this._headerSizeId);
                     _loc1_ = width >> 1;
                     _loc2_ = BTNS_GAP >> 1;
                     _loc3_ = height - this.acceptBtn.height - this._btnsBottomOffset;
@@ -152,6 +161,7 @@ package net.wg.gui.lobby.rankedBattles19.view.intro
             this.blocks = null;
             this._utils = null;
             this._headerData = null;
+            this._headerHelper = null;
             super.onDispose();
         }
 
@@ -174,24 +184,23 @@ package net.wg.gui.lobby.rankedBattles19.view.intro
 
         public function setStateSizeBoundaries(param1:int, param2:int) : void
         {
-            var _loc3_:Boolean = param1 < StageSizeBoundaries.WIDTH_1366 || param2 < StageSizeBoundaries.HEIGHT_900;
-            this.header.setScreenSize(_loc3_);
-            var _loc4_:String = VIEW_SIZE_ID_SMALL;
+            this._headerSizeId = this._headerHelper.getSizeId(param1,param2);
+            var _loc3_:String = VIEW_SIZE_ID_SMALL;
             if(param1 >= StageSizeBoundaries.WIDTH_1920 || param2 >= StageSizeBoundaries.HEIGHT_1080)
             {
-                _loc4_ = VIEW_SIZE_ID_BIG;
+                _loc3_ = VIEW_SIZE_ID_BIG;
             }
             else if(param1 >= StageSizeBoundaries.WIDTH_1366)
             {
-                _loc4_ = VIEW_SIZE_ID_MEDIUM;
+                _loc3_ = VIEW_SIZE_ID_MEDIUM;
             }
-            if(this._viewSizeID == _loc4_)
+            if(this._viewSizeID == _loc3_)
             {
                 return;
             }
-            this._viewSizeID = _loc4_;
+            this._viewSizeID = _loc3_;
             this._btnsBottomOffset = BTNS_BOTTOM_OFFSET_SMALL;
-            var _loc5_:String = VideoButton.SIZE_ID_BIG;
+            var _loc4_:String = VideoButton.SIZE_ID_BIG;
             if(this._viewSizeID == VIEW_SIZE_ID_BIG)
             {
                 this._btnsBottomOffset = BTNS_BOTTOM_OFFSET_BIG;
@@ -204,9 +213,9 @@ package net.wg.gui.lobby.rankedBattles19.view.intro
             else
             {
                 this._blocksBottomOffset = BLOCKS_BOTTOM_OFFSET_SMALL;
-                _loc5_ = VideoButton.SIZE_ID_SMALL;
+                _loc4_ = VideoButton.SIZE_ID_SMALL;
             }
-            this.playBtn.sizeID = _loc5_;
+            this.playBtn.sizeID = _loc4_;
             invalidateSize();
         }
 

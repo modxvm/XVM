@@ -49,7 +49,7 @@ package net.wg.gui.bootcamp
 
         public function set highlight(param1:Boolean) : void
         {
-            if(this._highlighted != param1)
+            if(this._highlighted != param1 && !_baseDisposed)
             {
                 this._highlighted = param1;
                 state = this._highlighted?HIGHLIGHT_LABEL:InteractiveStates.UP;

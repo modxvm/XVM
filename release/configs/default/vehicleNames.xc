@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 14.02.2020
+    // Last update: 14.04.2020
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -408,6 +408,7 @@
     "sweden-S28_UDES_15_16_bob":             {"name": null, "short": null},
     "sweden-S29_UDES_14_5":                  {"name": null, "short": null},
     "sweden-S30_UDES_03_Alt_3":              {"name": null, "short": null},
+    "sweden-S31_Strv_K":                     {"name": null, "short": null},
     "uk-GB01_Medium_Mark_I":                 {"name": null, "short": null},
     "uk-GB01_Medium_Mark_I_bot":             {"name": null, "short": null},
     "uk-GB03_Cruiser_Mk_I":                  {"name": null, "short": null},
@@ -425,6 +426,8 @@
     "uk-GB103_GSOR3301_AVR_FS":              {"name": null, "short": null},
     "uk-GB104_GSR_3301_Setter":              {"name": null, "short": null},
     "uk-GB105_Black_Prince_2019":            {"name": null, "short": null},
+    "uk-GB107_Cavalier":                     {"name": null, "short": null},
+    "uk-GB108_A46":                          {"name": null, "short": null},
     "uk-GB10_Black_Prince":                  {"name": null, "short": null},
     "uk-GB11_Caernarvon":                    {"name": null, "short": null},
     "uk-GB11_Caernarvon_IGR":                {"name": null, "short": null},
@@ -544,6 +547,8 @@
     "usa-A125_AEP_1":                        {"name": null, "short": null},
     "usa-A126_PzVI_Tiger_II_capt":           {"name": null, "short": null},
     "usa-A127_TL_1_LPC":                     {"name": null, "short": null},
+    "usa-A128_concept_1b":                   {"name": null, "short": null},
+    "usa-A129_T6_medium":                    {"name": null, "short": null},
     "usa-A12_T32":                           {"name": null, "short": null},
     "usa-A12_T32_FL":                        {"name": null, "short": null},
     "usa-A130_Super_Hellcat":                {"name": null, "short": null},
@@ -708,7 +713,10 @@
     "ussr-R170_IS_2_II":                     {"name": null, "short": null},
     "ussr-R171_IS_3_II":                     {"name": null, "short": null},
     "ussr-R172_Object_752":                  {"name": null, "short": null},
+    "ussr-R173_K_91_2":                      {"name": null, "short": null},
+    "ussr-R174_BT-5":                        {"name": null, "short": null},
     "ussr-R175_IS_2_screen":                 {"name": null, "short": null},
+    "ussr-R177_ISU_152K_BL10":               {"name": null, "short": null},
     "ussr-R17_SU-100":                       {"name": null, "short": null},
     "ussr-R18_SU-152":                       {"name": null, "short": null},
     "ussr-R18_SU-152_IGR":                   {"name": null, "short": null},

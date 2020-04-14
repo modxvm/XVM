@@ -226,11 +226,11 @@ package net.wg.gui.lobby.components
         {
             if(this._data.align == TEXT_ALIGN.RIGHT)
             {
-                this.txtLabel.x = this.img.x + this.img.width - this.txtLabel.width ^ 0;
+                this.txtLabel.x = this.img.x + this.img.width - this.txtLabel.width + this._data.padding ^ 0;
             }
             else if(this._data.align == TEXT_ALIGN.LEFT)
             {
-                this.txtLabel.x = this.img.x - this.txtLabel.width + ICONS_OFFSET ^ 0;
+                this.txtLabel.x = this.img.x - this.txtLabel.width + ICONS_OFFSET - this._data.padding ^ 0;
             }
             else
             {

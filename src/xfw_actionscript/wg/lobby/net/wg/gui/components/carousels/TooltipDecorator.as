@@ -116,9 +116,9 @@ package net.wg.gui.components.carousels
             }
         }
 
-        public function showWulfTooltip(param1:String, param2:Boolean, ... rest) : void
+        public function showWulfTooltip(param1:String, ... rest) : void
         {
-            rest.unshift(param1,param2);
+            rest.unshift(param1);
             if(this._enabled)
             {
                 this._mgr.showWulfTooltip.apply(this._mgr,rest);

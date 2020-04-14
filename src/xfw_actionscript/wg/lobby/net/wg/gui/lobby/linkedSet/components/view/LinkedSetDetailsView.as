@@ -11,7 +11,7 @@ package net.wg.gui.lobby.linkedSet.components.view
     import net.wg.gui.components.controls.UILoaderAlt;
     import net.wg.gui.lobby.linkedSet.data.LinkedSetDetailsOverlayVO;
     import net.wg.gui.lobby.linkedSet.data.LinkedSetDetailsVideoVO;
-    import net.wg.gui.bootcamp.controls.BCLobbyHint;
+    import net.wg.gui.bootcamp.controls.BCLobbyRectangleHint;
     import flash.display.Loader;
     import net.wg.gui.components.paginator.PaginatorArrowsController;
     import net.wg.utils.IClassFactory;
@@ -89,7 +89,7 @@ package net.wg.gui.lobby.linkedSet.components.view
 
         private var _eventId:String = "";
 
-        private var _hintStart:BCLobbyHint = null;
+        private var _hintStart:BCLobbyRectangleHint = null;
 
         private var _loaderMovie:Loader = null;
 
@@ -290,7 +290,7 @@ package net.wg.gui.lobby.linkedSet.components.view
         {
             if(this._hintStart == null)
             {
-                this._hintStart = this._classFactory.getComponent(Linkages.LOBBY_HINT_UI,BCLobbyHint);
+                this._hintStart = this._classFactory.getComponent(Linkages.LOBBY_RECTANGLE_HINT_UI,BCLobbyRectangleHint);
                 this._hintStart.x = this.btnStart.x;
                 this._hintStart.y = this.btnStart.y;
                 this._hintStart.setProperties(this.btnStart.width,this.btnStart.height,true);

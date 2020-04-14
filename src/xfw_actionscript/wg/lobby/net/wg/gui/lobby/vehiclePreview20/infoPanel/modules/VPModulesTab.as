@@ -23,9 +23,15 @@ package net.wg.gui.lobby.vehiclePreview20.infoPanel.modules
 
         public var statusInfoTf:TextField;
 
+        public var unlockableModulesTF:TextField;
+
         private var _toolTipMgr:ITooltipMgr;
 
         private var _statusInfoTooltip:String;
+
+        private var _haveUnlockable:Boolean = false;
+
+        private var _needToShowAnim:Boolean = false;
 
         public function VPModulesTab()
         {
@@ -39,6 +45,7 @@ package net.wg.gui.lobby.vehiclePreview20.infoPanel.modules
             mouseEnabled = false;
             this.modules.preferredLayout = PopOverConst.ARROW_LEFT;
             this.modules.addEventListener(Event.RESIZE,this.onModulesResizeHandler);
+            this.unlockableModulesTF.text = VEHICLE_PREVIEW.INFOPANEL_TAB_MODULES_UNLOCKABLEMODULES;
             this.statusInfoTf.addEventListener(MouseEvent.ROLL_OVER,this.onStatusInfoTfRollOverHandler);
             this.statusInfoTf.addEventListener(MouseEvent.ROLL_OUT,this.onStatusInfoTfRollOutHandler);
             this.statusInfoTf.autoSize = TextFieldAutoSize.LEFT;
@@ -49,6 +56,7 @@ package net.wg.gui.lobby.vehiclePreview20.infoPanel.modules
             this.statusInfoTf.removeEventListener(MouseEvent.ROLL_OVER,this.onStatusInfoTfRollOverHandler);
             this.statusInfoTf.removeEventListener(MouseEvent.ROLL_OUT,this.onStatusInfoTfRollOutHandler);
             this.statusInfoTf = null;
+            this.unlockableModulesTF = null;
             this.modules.removeEventListener(Event.RESIZE,this.onModulesResizeHandler);
             this.modules = null;
             this._toolTipMgr = null;
@@ -67,13 +75,20 @@ package net.wg.gui.lobby.vehiclePreview20.infoPanel.modules
             if(isInvalid(InvalidationType.SIZE))
             {
                 this.statusInfoTf.y = this.modules.y + this.modules.actualHeight + STATUS_TF_OFFSET;
+                this.unlockableModulesTF.visible = this._haveUnlockable;
+                if(this._needToShowAnim)
+                {
+                    this.modules.playAnimation();
+                }
             }
         }
 
-        public function as_setStatusInfo(param1:String, param2:String) : void
+        public function as_setStatusInfo(param1:String, param2:String, param3:int, param4:Boolean) : void
         {
             this.statusInfoTf.htmlText = param1;
             this._statusInfoTooltip = param2;
+            this._haveUnlockable = param3 == VEHPREVIEW_CONSTANTS.COLLECTIBLE;
+            this._needToShowAnim = param4;
         }
 
         public function canShowAutomatically() : Boolean

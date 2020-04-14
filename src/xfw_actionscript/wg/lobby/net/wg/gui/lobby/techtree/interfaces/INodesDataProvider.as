@@ -33,5 +33,7 @@ package net.wg.gui.lobby.techtree.interfaces
         function get nation() : String;
 
         function get length() : Number;
+
+        function isPremiumItem(param1:Number) : Boolean;
     }
 }

@@ -2,6 +2,8 @@ package net.wg.gui.lobby.techtree.controls
 {
     import net.wg.gui.components.advanced.ButtonBarEx;
     import scaleform.clik.constants.InvalidationType;
+    import scaleform.clik.controls.Button;
+    import net.wg.gui.lobby.techtree.data.vo.TechTreeNationMenuItemVO;
     import scaleform.clik.core.UIComponent;
 
     public class NationsButtonBar extends ButtonBarEx
@@ -39,6 +41,15 @@ package net.wg.gui.lobby.techtree.controls
                 invalidate(InvalidationType.RENDERERS);
             }
             super.draw();
+        }
+
+        override protected function populateRendererData(param1:Button, param2:uint) : void
+        {
+            var _loc3_:TechTreeNationMenuItemVO = TechTreeNationMenuItemVO(_dataProvider[param2]);
+            var _loc4_:NationButton = NationButton(param1);
+            _loc4_.isTooltipSpecial = _loc3_.isTooltipSpecial;
+            _loc4_.setDiscountVisible(_loc3_.hasDiscount);
+            super.populateRendererData(param1,param2);
         }
 
         override protected function updateRenderers() : void

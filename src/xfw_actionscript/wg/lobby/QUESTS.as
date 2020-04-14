@@ -127,6 +127,8 @@ package
 
         public static const BONUSES_CRYSTAL_DESCRIPTION:String = "#quests:bonuses/crystal/description";
 
+        public static const BONUSES_EVENTCOIN_DESCRIPTION:String = "#quests:bonuses/eventCoin/description";
+
         public static const BONUSES_TANKMEN_DESCRIPTION:String = "#quests:bonuses/tankmen/description";
 
         public static const BONUSES_ITEM_TANKWOMAN:String = "#quests:bonuses/item/tankwoman";
@@ -1929,6 +1931,8 @@ package
 
         public static const DETAILS_MODIFIERS_EQUIPMENT_CRYSTAL:String = "#quests:details/modifiers/equipment/crystal";
 
+        public static const DETAILS_MODIFIERS_EQUIPMENT_EVENTCOIN:String = "#quests:details/modifiers/equipment/eventCoin";
+
         public static const DETAILS_MODIFIERS_EQUIPMENT_GOLDPRICEMULTIPLIER:String = "#quests:details/modifiers/equipment/goldPriceMultiplier";
 
         public static const DETAILS_MODIFIERS_EQUIPMENT_CREDITSPRICEMULTIPLIER:String = "#quests:details/modifiers/equipment/creditsPriceMultiplier";
@@ -2324,6 +2328,8 @@ package
         public static const BONUSNAME_GOLD:String = "#quests:bonusName/gold";
 
         public static const BONUSNAME_CRYSTAL:String = "#quests:bonusName/crystal";
+
+        public static const BONUSNAME_EVENTCOIN:String = "#quests:bonusName/eventCoin";
 
         public static const BONUSNAME_XP:String = "#quests:bonusName/xp";
 

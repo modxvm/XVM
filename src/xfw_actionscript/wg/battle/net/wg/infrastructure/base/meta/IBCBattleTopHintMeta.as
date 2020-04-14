@@ -12,5 +12,7 @@ package net.wg.infrastructure.base.meta
         function as_hideHint() : void;
 
         function as_closeHint() : void;
+
+        function as_setPenetration(param1:String, param2:Boolean) : void;
     }
 }

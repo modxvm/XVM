@@ -68,14 +68,24 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.bootcamp.containers.AnimatedSpriteContainer;
     import net.wg.gui.bootcamp.containers.AnimatedTextContainer;
     import net.wg.gui.bootcamp.containers.AnimatedTextContainerWithBackground;
-    import net.wg.gui.bootcamp.containers.BCBattleResultTransition;
+    import net.wg.gui.bootcamp.containers.HintContainer;
     import net.wg.gui.bootcamp.containers.StartBootcampTransition;
+    import net.wg.gui.bootcamp.containers.TipHintAnimation;
     import net.wg.gui.bootcamp.containers.TutorialPageContainer;
-    import net.wg.gui.bootcamp.controls.BCAppearHint;
-    import net.wg.gui.bootcamp.controls.BCCirclesHint;
+    import net.wg.gui.bootcamp.controls.BCAnimatedHintBase;
+    import net.wg.gui.bootcamp.controls.BCAppearEquipmentHint;
+    import net.wg.gui.bootcamp.controls.BCAppearFragCorrelationHint;
+    import net.wg.gui.bootcamp.controls.BCAppearMinimapHint;
+    import net.wg.gui.bootcamp.controls.BCCirclesMinimapHint;
+    import net.wg.gui.bootcamp.controls.BCCirclesTintHint;
+    import net.wg.gui.bootcamp.controls.BCCirclesTintHintContinuous;
     import net.wg.gui.bootcamp.controls.BCHighlightRendererBase;
+    import net.wg.gui.bootcamp.controls.BCIconTextBigButtonFx;
+    import net.wg.gui.bootcamp.controls.BCLobbyFlagHint;
     import net.wg.gui.bootcamp.controls.BCLobbyHint;
+    import net.wg.gui.bootcamp.controls.BCLobbyRectangleHint;
     import net.wg.gui.bootcamp.controls.BCLobbySlotHint;
+    import net.wg.gui.bootcamp.controls.BCLobbyTintHint;
     import net.wg.gui.bootcamp.data.BCTutorialPageVO;
     import net.wg.gui.bootcamp.dialogs.BootcampDialog;
     import net.wg.gui.bootcamp.events.AppearEvent;
@@ -83,7 +93,6 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.bootcamp.interfaces.IAnimatedContainerRenderer;
     import net.wg.gui.bootcamp.interfaces.IAnimatedMovieClip;
     import net.wg.gui.bootcamp.interfaces.IAnimatedRenderer;
-    import net.wg.gui.bootcamp.interfaces.IBCBattleResultTransition;
     import net.wg.gui.bootcamp.interfaces.ITransitionRenderer;
     import net.wg.gui.bootcamp.introVideoPage.BCIntroVideoPage;
     import net.wg.gui.bootcamp.introVideoPage.containers.IntroLogoContainer;
@@ -91,6 +100,8 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.bootcamp.introVideoPage.containers.LoadingContainer;
     import net.wg.gui.bootcamp.introVideoPage.containers.StepperContainer;
     import net.wg.gui.bootcamp.introVideoPage.data.BCIntroVideoVO;
+    import net.wg.gui.bootcamp.subtitles.BCSubtitle;
+    import net.wg.gui.bootcamp.subtitles.SubtitlesWindow;
     import net.wg.gui.components.advanced.AtlasDigit;
     import net.wg.gui.components.advanced.BadgeSizes;
     import net.wg.gui.components.advanced.ButtonBarEx;
@@ -629,6 +640,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.colorSettings.vo.ColorSettingsRendererVO;
     import net.wg.gui.lobby.colorSettings.vo.ColorSettingsUpdateVO;
     import net.wg.gui.lobby.colorSettings.vo.ColorSettingsVO;
+    import net.wg.gui.lobby.components.CollectibleStatus;
     import net.wg.gui.lobby.components.MinimapEntry;
     import net.wg.gui.lobby.components.interfaces.IMinimapEntry;
     import net.wg.gui.lobby.components.maintenance.MaintenanceDropDown;
@@ -769,7 +781,6 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.infrastructure.base.interfaces.IWaiting;
     import net.wg.infrastructure.base.meta.IAcousticPopoverMeta;
     import net.wg.infrastructure.base.meta.IBattleDamageLogPanelMeta;
-    import net.wg.infrastructure.base.meta.IBCBattleResultTransitionMeta;
     import net.wg.infrastructure.base.meta.IBCHighlightsMeta;
     import net.wg.infrastructure.base.meta.IBCIntroVideoPageMeta;
     import net.wg.infrastructure.base.meta.IBootcampDialogMeta;
@@ -789,6 +800,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.infrastructure.base.meta.ISimpleDialogMeta;
     import net.wg.infrastructure.base.meta.ISmartPopOverViewMeta;
     import net.wg.infrastructure.base.meta.IStartBootcampTransitionMeta;
+    import net.wg.infrastructure.base.meta.ISubtitlesWindowMeta;
     import net.wg.infrastructure.base.meta.ITankCarouselFilterPopoverMeta;
     import net.wg.infrastructure.base.meta.ITickerMeta;
     import net.wg.infrastructure.base.meta.ITutorialDialogMeta;
@@ -949,21 +961,41 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_BOOTCAMP_CONTAINERS_ANIMATEDTEXTCONTAINERWITHBACKGROUND:Class = AnimatedTextContainerWithBackground;
 
-        public static const NET_WG_GUI_BOOTCAMP_CONTAINERS_BCBATTLERESULTTRANSITION:Class = BCBattleResultTransition;
+        public static const NET_WG_GUI_BOOTCAMP_CONTAINERS_HINTCONTAINER:Class = HintContainer;
 
         public static const NET_WG_GUI_BOOTCAMP_CONTAINERS_STARTBOOTCAMPTRANSITION:Class = StartBootcampTransition;
 
+        public static const NET_WG_GUI_BOOTCAMP_CONTAINERS_TIPHINTANIMATION:Class = TipHintAnimation;
+
         public static const NET_WG_GUI_BOOTCAMP_CONTAINERS_TUTORIALPAGECONTAINER:Class = TutorialPageContainer;
 
-        public static const NET_WG_GUI_BOOTCAMP_CONTROLS_BCAPPEARHINT:Class = BCAppearHint;
+        public static const NET_WG_GUI_BOOTCAMP_CONTROLS_BCANIMATEDHINTBASE:Class = BCAnimatedHintBase;
 
-        public static const NET_WG_GUI_BOOTCAMP_CONTROLS_BCCIRCLESHINT:Class = BCCirclesHint;
+        public static const NET_WG_GUI_BOOTCAMP_CONTROLS_BCAPPEAREQUIPMENTHINT:Class = BCAppearEquipmentHint;
+
+        public static const NET_WG_GUI_BOOTCAMP_CONTROLS_BCAPPEARFRAGCORRELATIONHINT:Class = BCAppearFragCorrelationHint;
+
+        public static const NET_WG_GUI_BOOTCAMP_CONTROLS_BCAPPEARMINIMAPHINT:Class = BCAppearMinimapHint;
+
+        public static const NET_WG_GUI_BOOTCAMP_CONTROLS_BCCIRCLESMINIMAPHINT:Class = BCCirclesMinimapHint;
+
+        public static const NET_WG_GUI_BOOTCAMP_CONTROLS_BCCIRCLESTINTHINT:Class = BCCirclesTintHint;
+
+        public static const NET_WG_GUI_BOOTCAMP_CONTROLS_BCCIRCLESTINTHINTCONTINUOUS:Class = BCCirclesTintHintContinuous;
 
         public static const NET_WG_GUI_BOOTCAMP_CONTROLS_BCHIGHLIGHTRENDERERBASE:Class = BCHighlightRendererBase;
 
+        public static const NET_WG_GUI_BOOTCAMP_CONTROLS_BCICONTEXTBIGBUTTONFX:Class = BCIconTextBigButtonFx;
+
+        public static const NET_WG_GUI_BOOTCAMP_CONTROLS_BCLOBBYFLAGHINT:Class = BCLobbyFlagHint;
+
         public static const NET_WG_GUI_BOOTCAMP_CONTROLS_BCLOBBYHINT:Class = BCLobbyHint;
 
+        public static const NET_WG_GUI_BOOTCAMP_CONTROLS_BCLOBBYRECTANGLEHINT:Class = BCLobbyRectangleHint;
+
         public static const NET_WG_GUI_BOOTCAMP_CONTROLS_BCLOBBYSLOTHINT:Class = BCLobbySlotHint;
+
+        public static const NET_WG_GUI_BOOTCAMP_CONTROLS_BCLOBBYTINTHINT:Class = BCLobbyTintHint;
 
         public static const NET_WG_GUI_BOOTCAMP_DATA_BCTUTORIALPAGEVO:Class = BCTutorialPageVO;
 
@@ -979,8 +1011,6 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_BOOTCAMP_INTERFACES_IANIMATEDRENDERER:Class = IAnimatedRenderer;
 
-        public static const NET_WG_GUI_BOOTCAMP_INTERFACES_IBCBATTLERESULTTRANSITION:Class = IBCBattleResultTransition;
-
         public static const NET_WG_GUI_BOOTCAMP_INTERFACES_ITRANSITIONRENDERER:Class = ITransitionRenderer;
 
         public static const NET_WG_GUI_BOOTCAMP_INTROVIDEOPAGE_BCINTROVIDEOPAGE:Class = BCIntroVideoPage;
@@ -994,6 +1024,10 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_BOOTCAMP_INTROVIDEOPAGE_CONTAINERS_STEPPERCONTAINER:Class = StepperContainer;
 
         public static const NET_WG_GUI_BOOTCAMP_INTROVIDEOPAGE_DATA_BCINTROVIDEOVO:Class = BCIntroVideoVO;
+
+        public static const NET_WG_GUI_BOOTCAMP_SUBTITLES_BCSUBTITLE:Class = BCSubtitle;
+
+        public static const NET_WG_GUI_BOOTCAMP_SUBTITLES_SUBTITLESWINDOW:Class = SubtitlesWindow;
 
         public static const NET_WG_GUI_COMPONENTS_ADVANCED_ATLASDIGIT:Class = AtlasDigit;
 
@@ -2071,6 +2105,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_LOBBY_COLORSETTINGS_VO_COLORSETTINGSVO:Class = ColorSettingsVO;
 
+        public static const NET_WG_GUI_LOBBY_COMPONENTS_COLLECTIBLESTATUS:Class = CollectibleStatus;
+
         public static const NET_WG_GUI_LOBBY_COMPONENTS_MINIMAPENTRY:Class = MinimapEntry;
 
         public static const NET_WG_GUI_LOBBY_COMPONENTS_INTERFACES_IMINIMAPENTRY:Class = net.wg.gui.lobby.components.interfaces.IMinimapEntry;
@@ -2351,8 +2387,6 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IBATTLEDAMAGELOGPANELMETA:Class = IBattleDamageLogPanelMeta;
 
-        public static const NET_WG_INFRASTRUCTURE_BASE_META_IBCBATTLERESULTTRANSITIONMETA:Class = IBCBattleResultTransitionMeta;
-
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IBCHIGHLIGHTSMETA:Class = IBCHighlightsMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IBCINTROVIDEOPAGEMETA:Class = IBCIntroVideoPageMeta;
@@ -2391,6 +2425,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_ISTARTBOOTCAMPTRANSITIONMETA:Class = IStartBootcampTransitionMeta;
 
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_ISUBTITLESWINDOWMETA:Class = ISubtitlesWindowMeta;
+
         public static const NET_WG_INFRASTRUCTURE_BASE_META_ITANKCAROUSELFILTERPOPOVERMETA:Class = ITankCarouselFilterPopoverMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_ITICKERMETA:Class = ITickerMeta;
@@ -2402,8 +2438,6 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_ACOUSTICPOPOVERMETA:Class = AcousticPopoverMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BATTLEDAMAGELOGPANELMETA:Class = BattleDamageLogPanelMeta;
-
-        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BCBATTLERESULTTRANSITIONMETA:Class = BCBattleResultTransitionMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BCHIGHLIGHTSMETA:Class = BCHighlightsMeta;
 
@@ -2442,6 +2476,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SMARTPOPOVERVIEWMETA:Class = SmartPopOverViewMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_STARTBOOTCAMPTRANSITIONMETA:Class = StartBootcampTransitionMeta;
+
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SUBTITLESWINDOWMETA:Class = SubtitlesWindowMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TANKCAROUSELFILTERPOPOVERMETA:Class = TankCarouselFilterPopoverMeta;
 

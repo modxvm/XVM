@@ -1,6 +1,6 @@
 diff -Naur battleVehicleMarkersApp.orig/App.as battleVehicleMarkersApp/App.as
---- battleVehicleMarkersApp.orig/App.as	2019-09-10 14:54:38.370847400 +0300
-+++ battleVehicleMarkersApp/App.as	2019-09-10 15:06:56.272133300 +0300
+--- battleVehicleMarkersApp.orig/App.as	2020-04-14 21:45:00.370847400 +0300
++++ battleVehicleMarkersApp/App.as	2020-04-14 21:45:00.272133300 +0300
 @@ -1,5 +1,6 @@
  package
  {

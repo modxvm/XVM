@@ -123,12 +123,11 @@ package net.wg.gui.components.advanced
 
         private function drawLayout(param1:Number, param2:Number) : void
         {
-            var _loc3_:* = NaN;
             var _loc5_:IAccordionItemRenderer = null;
             var _loc6_:* = NaN;
             var _loc7_:* = NaN;
             var param1:Number = param1 - this.paddingLeft - this.paddingRight - this.margin * 2;
-            _loc3_ = this.margin + this.paddingTop;
+            var _loc3_:Number = this.margin + this.paddingTop;
             var _loc4_:int = _renderers.length;
             for each(_loc5_ in _renderers)
             {

@@ -88,11 +88,12 @@ package net.wg.gui.battle.epicBattle.views.stats.components
             _loc5_.dataProvider = _loc4_;
         }
 
-        override protected function cleanUp() : void
+        override protected function onDispose() : void
         {
             this._squadHandler = null;
             this._table = null;
-            super.cleanUp();
+            this._activePlayerData = null;
+            super.onDispose();
         }
 
         public function focusScrollbar(param1:int = 0) : void
@@ -322,6 +323,19 @@ package net.wg.gui.battle.epicBattle.views.stats.components
             this._table.statsFilters.setPlayerLane(this._currentLane);
         }
 
+        private function updateActivePlayerVO(param1:Vector.<int>) : void
+        {
+            var _loc2_:* = 0;
+            for each(_loc2_ in param1)
+            {
+                this._activePlayerData = teamDP.requestItemAt(_loc2_) as DAAPIVehicleInfoVO;
+                if(this._activePlayerData.isCurrentPlayer)
+                {
+                    break;
+                }
+            }
+        }
+
         public function set currentLane(param1:int) : void
         {
             if(this._currentLane != param1)
@@ -412,19 +426,6 @@ package net.wg.gui.battle.epicBattle.views.stats.components
                             _loc8_.setEpicData(_loc7_);
                         }
                     }
-                }
-            }
-        }
-
-        private function updateActivePlayerVO(param1:Vector.<int>) : void
-        {
-            var _loc2_:* = 0;
-            for each(_loc2_ in param1)
-            {
-                this._activePlayerData = teamDP.requestItemAt(_loc2_) as DAAPIVehicleInfoVO;
-                if(this._activePlayerData.isCurrentPlayer)
-                {
-                    break;
                 }
             }
         }

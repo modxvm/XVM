@@ -10,5 +10,9 @@ package net.wg.infrastructure.base.meta
         function handleErrorS(param1:String) : void;
 
         function as_playVideo(param1:Object) : void;
+
+        function as_pausePlayback() : void;
+
+        function as_resumePlayback() : void;
     }
 }

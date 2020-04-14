@@ -7,7 +7,9 @@ package net.wg.gui.bootcamp
 
         public var source:String = "";
 
-        public var volume:Number;
+        public var volume:Number = -1;
+
+        public var bufferTime:Number = -1;
 
         public function BCOutroVideoVO(param1:Object)
         {

@@ -1,20 +1,15 @@
 package net.wg.gui.lobby.techtree.helpers
 {
-    import flash.display.BlendMode;
     import flash.display.Sprite;
     import net.wg.gui.lobby.techtree.interfaces.IRenderer;
     import net.wg.gui.lobby.techtree.interfaces.IResearchContainer;
     import flash.events.MouseEvent;
     import net.wg.gui.lobby.techtree.constants.NodeEntityType;
-    import net.wg.gui.lobby.techtree.TechTreeEvent;
     import flash.geom.Point;
     import net.wg.gui.lobby.techtree.constants.ColorIndex;
-    import net.wg.gui.lobby.techtree.data.state.NodeStateCollection;
 
     public class ResearchGraphics extends ModulesGraphics
     {
-
-        private static const RESEARCH_ARROWS_BLEND_MODE:String = BlendMode.ADD;
 
         private static const LOCKED_LINE_COMP_NAME:String = "ResearchLineLocked";
 
@@ -24,9 +19,11 @@ package net.wg.gui.lobby.techtree.helpers
 
         private static const FADE_OUT_ARROW_LOCKED:String = "ResearchArrowDisFadeOut";
 
-        private static const FADE_IN_ARROW_LOCKED:String = "ResearchArrowDisFadeIn";
+        private static const FADE_OUT_ARROW:String = "ResearchArrowFadeOutUI";
 
-        private static const FADE_IN_ARROW:String = "ResearchArrowFadeIn";
+        private static const FADE_IN_ARROW_LOCKED:String = "ResearchArrowDisFadeInUI";
+
+        private static const FADE_IN_ARROW:String = "ResearchArrowFadeInUI";
 
         private static const MAX_LEVEL:uint = 10;
 
@@ -43,15 +40,16 @@ package net.wg.gui.lobby.techtree.helpers
         {
             var _loc4_:Vector.<IRenderer> = null;
             var _loc5_:String = null;
-            var _loc6_:Sprite = null;
+            var _loc6_:String = null;
+            var _loc7_:Sprite = null;
             super.buildRendererLines(param1,param2);
             var _loc3_:Object = null;
             if(param1 == rootRenderer)
             {
-                _loc4_ = IResearchContainer(_container).getTopLevel();
+                _loc4_ = IResearchContainer(container).getTopLevel();
                 if(_loc4_.length > 1)
                 {
-                    this.drawIngoingLine(param1,_loc4_);
+                    this.drawIngoingLine(_loc4_);
                 }
                 if(param1.isLocked() && _loc4_.length > 0)
                 {
@@ -72,7 +70,7 @@ package net.wg.gui.lobby.techtree.helpers
                     this._lockedOverlay = App.utils.classFactory.getComponent(_loc5_,Sprite,_loc3_);
                     this._lockedOverlay.addEventListener(MouseEvent.ROLL_OVER,this.onLockedRollOverHandler,false,0,true);
                     this._lockedOverlay.addEventListener(MouseEvent.ROLL_OUT,this.onLockedRollOutHandler,false,0,true);
-                    getSubSprite(param1).addChild(this._lockedOverlay);
+                    getLinesAndArrowsSprite(param1).addChild(this._lockedOverlay);
                 }
             }
             else if(NodeEntityType.isVehicleType(param1.entityType) && param1.getLevel() < MAX_LEVEL)
@@ -81,33 +79,29 @@ package net.wg.gui.lobby.techtree.helpers
                     "x":param1.getOutX(),
                     "y":param1.getY()
                 };
-                _loc6_ = App.utils.classFactory.getComponent(FADE_OUT_ARROW_LOCKED,Sprite,_loc3_);
-                getSubSprite(param1).addChild(_loc6_);
+                _loc6_ = param1.isUnlocked()?FADE_OUT_ARROW:FADE_OUT_ARROW_LOCKED;
+                _loc7_ = App.utils.classFactory.getComponent(_loc6_,Sprite,_loc3_);
+                _loc7_.y = _loc7_.y - (_loc7_.height >> 1);
+                getLinesAndArrowsSprite(param1).addChild(_loc7_);
             }
-            param1.addEventListener(TechTreeEvent.STATE_CHANGED,this.onRendererStateChangedHandler,false,0,true);
-            setBlendMode(param1,RESEARCH_ARROWS_BLEND_MODE);
         }
 
-        override public function clearLinesAndArrows(param1:IRenderer) : void
+        override public function clearLinesAndArrowsRenderers() : void
         {
-            super.clearLinesAndArrows(param1);
-            if(this._lockedOverlay != null && param1 == rootRenderer)
+            super.clearLinesAndArrowsRenderers();
+            if(this._lockedOverlay)
             {
-                this._lockedOverlay.removeEventListener(MouseEvent.ROLL_OVER,this.onLockedRollOverHandler);
-                this._lockedOverlay.removeEventListener(MouseEvent.ROLL_OUT,this.onLockedRollOutHandler);
-                this._lockedOverlay = null;
+                this.clearLockedOverlayListeners();
             }
-        }
-
-        override public function clearUpRenderer(param1:IRenderer) : void
-        {
-            param1.removeEventListener(TechTreeEvent.STATE_CHANGED,this.onTopLevelRendererStateChangedHandler);
-            param1.removeEventListener(TechTreeEvent.STATE_CHANGED,this.onRendererStateChangedHandler);
         }
 
         override protected function onDispose() : void
         {
-            this._lockedOverlay = null;
+            if(this._lockedOverlay)
+            {
+                this.clearLockedOverlayListeners();
+                this._lockedOverlay = null;
+            }
             super.onDispose();
         }
 
@@ -116,11 +110,10 @@ package net.wg.gui.lobby.techtree.helpers
             var _loc2_:IRenderer = null;
             var _loc3_:Object = null;
             var _loc4_:Sprite = null;
-            if(param1)
+            if(param1 && param1.length)
             {
                 for each(_loc2_ in param1)
                 {
-                    this.clearLinesAndArrows(_loc2_);
                     this.drawTopRendererLine(_loc2_,param1.length == 1);
                     if(NodeEntityType.isVehicleType(_loc2_.entityType) && _loc2_.getLevel() > MIN_LEVEL)
                     {
@@ -129,34 +122,43 @@ package net.wg.gui.lobby.techtree.helpers
                             "y":_loc2_.getY()
                         };
                         _loc4_ = App.utils.classFactory.getComponent(_loc2_.isLocked()?FADE_IN_ARROW_LOCKED:FADE_IN_ARROW,Sprite,_loc3_);
-                        getSubSprite(_loc2_).addChild(_loc4_);
+                        _loc4_.y = _loc4_.y - (_loc4_.height >> 1);
+                        getLinesAndArrowsSprite(_loc2_).addChild(_loc4_);
                     }
-                    _loc2_.addEventListener(TechTreeEvent.STATE_CHANGED,this.onTopLevelRendererStateChangedHandler,false,0,true);
-                    setBlendMode(_loc2_,RESEARCH_ARROWS_BLEND_MODE);
                 }
             }
         }
 
-        private function drawIngoingLine(param1:IRenderer, param2:Vector.<IRenderer>) : void
+        private function clearLockedOverlayListeners() : void
         {
+            this._lockedOverlay.removeEventListener(MouseEvent.ROLL_OVER,this.onLockedRollOverHandler);
+            this._lockedOverlay.removeEventListener(MouseEvent.ROLL_OUT,this.onLockedRollOutHandler);
+        }
+
+        private function drawIngoingLine(param1:Vector.<IRenderer>) : void
+        {
+            var _loc4_:uint = 0;
             var _loc5_:uint = 0;
-            var _loc3_:Point = new Point(param1.getInX(),param1.getY());
-            var _loc4_:Point = new Point(param2[0].getOutX() + xRatio,_loc3_.y);
-            if(rootRenderer.isNext2Unlock())
+            var _loc2_:Point = new Point(rootRenderer.getInX(),rootRenderer.getY());
+            var _loc3_:Point = new Point(param1[0].getOutX() + xRatio,_loc2_.y);
+            if(rootRenderer.isNext2Unlock() || rootRenderer.isUnlocked())
             {
-                _loc5_ = ColorIndex.UNLOCKED;
+                _loc4_ = ColorIndex.UNLOCKED;
+                _loc5_ = UNLOCKED_LINE_THICKNESS;
             }
             else
             {
-                _loc5_ = rootRenderer.getColorIndex();
+                _loc4_ = rootRenderer.getColorIndex();
+                _loc5_ = DEFAULT_LINE_THICKNESS;
             }
-            if(!param1.isPremium())
+            var _loc6_:Number = getArrowAlphaByThickness(_loc5_);
+            if(!rootRenderer.isPremium())
             {
-                drawLineAndArrow(param1,_colorIdxs[_loc5_],_loc4_,_loc3_);
+                drawLineAndArrow(rootRenderer,colorIdxs[_loc4_],_loc3_,_loc2_,_loc5_,_loc6_,false,true);
             }
             else
             {
-                drawLine(param1,_colorIdxs[_loc5_],_loc4_,_loc3_);
+                drawLine(rootRenderer,colorIdxs[_loc4_],_loc3_,_loc2_,_loc5_,_loc6_);
             }
         }
 
@@ -166,6 +168,8 @@ package net.wg.gui.lobby.techtree.helpers
             var _loc3_:Point = new Point(param1.getOutX(),param1.getY());
             var _loc4_:Point = new Point(rootRenderer.getInX(),rootRenderer.getY());
             var _loc5_:uint = rootRenderer.getColorIndex(param1);
+            var _loc7_:int = getLineThickness(rootRenderer,param1);
+            var _loc8_:Number = getArrowAlphaByThickness(_loc7_);
             if(_loc3_.y == _loc4_.y)
             {
                 if(!param2)
@@ -174,55 +178,23 @@ package net.wg.gui.lobby.techtree.helpers
                 }
                 if(param2)
                 {
-                    drawLineAndArrow(param1,_colorIdxs[_loc5_],_loc3_,_loc4_);
+                    drawLineAndArrow(param1,colorIdxs[_loc5_],_loc3_,_loc4_,_loc7_,_loc8_,false,true);
                 }
                 else
                 {
-                    drawLine(param1,_colorIdxs[_loc5_],_loc3_,_loc4_);
+                    drawLine(param1,colorIdxs[_loc5_],_loc3_,_loc4_,_loc7_,_loc8_);
                 }
             }
             else
             {
                 _loc6_ = new Point(_loc3_.x + xRatio,_loc3_.y);
-                drawLine(param1,_colorIdxs[_loc5_],_loc3_,_loc6_);
+                drawLine(param1,colorIdxs[_loc5_],_loc3_,_loc6_,_loc7_,_loc8_);
                 _loc3_ = _loc6_;
                 _loc6_ = new Point(_loc3_.x,_loc4_.y);
-                drawLine(param1,_colorIdxs[_loc5_],_loc3_,_loc6_);
+                drawLine(param1,colorIdxs[_loc5_],_loc3_,_loc6_,_loc7_,_loc8_);
                 if(param2)
                 {
-                    drawLineAndArrow(param1,_colorIdxs[_loc5_],_loc6_,_loc4_);
-                }
-            }
-        }
-
-        private function onTopLevelRendererStateChangedHandler(param1:TechTreeEvent) : void
-        {
-            var _loc2_:IRenderer = null;
-            if(NodeStateCollection.instance.isRedrawResearchLines(param1.nodeState))
-            {
-                _loc2_ = param1.target as IRenderer;
-                if(_loc2_ != null)
-                {
-                    this.clearLinesAndArrows(_loc2_);
-                    this.drawTopRendererLine(_loc2_,IResearchContainer(_container).getTopLevel().length == 1);
-                    setBlendMode(_loc2_,RESEARCH_ARROWS_BLEND_MODE);
-                }
-            }
-        }
-
-        private function onRendererStateChangedHandler(param1:TechTreeEvent) : void
-        {
-            var _loc2_:IRenderer = null;
-            var _loc3_:Vector.<IRenderer> = null;
-            if(NodeStateCollection.instance.isRedrawResearchLines(param1.nodeState))
-            {
-                _loc2_ = param1.target as IRenderer;
-                if(_loc2_ != null)
-                {
-                    _loc3_ = IResearchContainer(_container).getChildren(_loc2_);
-                    this.buildRendererLines(_loc2_,_loc3_);
-                    _loc3_.splice(0,_loc3_.length);
-                    _loc3_ = null;
+                    drawLineAndArrow(param1,colorIdxs[_loc5_],_loc6_,_loc4_,_loc7_,_loc8_,false,true);
                 }
             }
         }

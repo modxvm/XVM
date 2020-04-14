@@ -1,6 +1,6 @@
 diff -Naur battle.orig/App.as battle/App.as
---- battle.orig/App.as	2020-02-28 20:15:13.298432000 +0200
-+++ battle/App.as	2020-02-28 20:19:11.024686600 +0200
+--- battle.orig/App.as	2020-04-14 21:45:00.298432000 +0200
++++ battle/App.as	2020-04-14 21:45:00.024686600 +0200
 @@ -1,5 +1,6 @@
  package
  {
@@ -20,7 +20,7 @@ diff -Naur battle.orig/App.as battle/App.as
 diff -Naur battle.orig/net/wg/data/constants/Linkages.as battle/net/wg/data/constants/Linkages.as
 --- battle.orig/net/wg/data/constants/Linkages.as	2020-02-28 20:15:14.955407100 +0200
 +++ battle/net/wg/data/constants/Linkages.as	2020-02-28 20:19:11.047673400 +0200
-@@ -503,7 +503,7 @@
+@@ -507,7 +507,7 @@
  
          public static const BATTLE_PROGRESS_TASK_SEPARATOR:String = "battleProgressTaskSeparatorUI";
  

@@ -66,6 +66,8 @@ package net.wg.gui.battle.views.prebattleTimer
 
         private var _currentState:String = null;
 
+        private var _isNeedWinChangePosition:Boolean = true;
+
         public function PrebattleTimerBase()
         {
             super();
@@ -127,7 +129,7 @@ package net.wg.gui.battle.views.prebattleTimer
             {
                 this.timer.setTime(this._totalTime,false);
             }
-            if(isInvalid(InvalidationType.SIZE))
+            if(this._isNeedWinChangePosition && isInvalid(InvalidationType.SIZE))
             {
                 this.win.y = this.message.y + this.message.height | 0;
                 _loc1_ = App.appHeight <= PREBATTLE_TIMER.APP_MIN_HEIGHT_BREAKING;
@@ -260,6 +262,11 @@ package net.wg.gui.battle.views.prebattleTimer
         public function get componentVisibility() : Boolean
         {
             return this._componentVisibility;
+        }
+
+        public function set isNeedWinChangePosition(param1:Boolean) : void
+        {
+            this._isNeedWinChangePosition = param1;
         }
     }
 }

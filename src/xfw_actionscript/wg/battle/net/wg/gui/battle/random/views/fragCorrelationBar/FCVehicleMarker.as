@@ -10,6 +10,18 @@ package net.wg.gui.battle.random.views.fragCorrelationBar
     public class FCVehicleMarker extends MovieClip implements IDisposable
     {
 
+        private static const LAST_ANIM_FRAME:int = 12;
+
+        private static const NORMAL_IMAGE_POSTFIX:String = "Normal";
+
+        private static const DESTROYED_IMAGE_POSTFIX:String = "Destroyed";
+
+        private static const NORMAL_FRAME_NAME:String = "normal";
+
+        private static const DESTROY_FRAME_NAME:String = "destroy";
+
+        private static const DESTROYED_FRAME_NAME:String = "destroyed";
+
         public var vehicleID:int = -1;
 
         public var normalMarker:Sprite = null;
@@ -27,18 +39,6 @@ package net.wg.gui.battle.random.views.fragCorrelationBar
         private var _vehicleMarkerAnimFinishedHandler:IVehicleMarkerAnimFinishedHandler = null;
 
         private var _isDisposed:Boolean = false;
-
-        private const LAST_ANIM_FRAME:int = 12;
-
-        private const NORMAL_IMAGE_POSTFIX:String = "Normal";
-
-        private const DESTROYED_IMAGE_POSTFIX:String = "Destroyed";
-
-        private const NORMAL_FRAME_NAME:String = "normal";
-
-        private const DESTROY_FRAME_NAME:String = "destroy";
-
-        private const DESTROYED_FRAME_NAME:String = "destroyed";
 
         public function FCVehicleMarker()
         {
@@ -68,13 +68,13 @@ package net.wg.gui.battle.random.views.fragCorrelationBar
                 this._vehicleStatus = param2;
                 if(!(this._vehicleStatus & VehicleStatus.IS_ALIVE) > 0)
                 {
-                    gotoAndStop(this.DESTROYED_FRAME_NAME);
+                    gotoAndStop(DESTROYED_FRAME_NAME);
                     this.normalMarker.visible = false;
                     this.destroyedMarker.visible = true;
                 }
                 else
                 {
-                    gotoAndStop(this.NORMAL_FRAME_NAME);
+                    gotoAndStop(NORMAL_FRAME_NAME);
                     this.destroyedMarker.visible = false;
                 }
             }
@@ -84,14 +84,14 @@ package net.wg.gui.battle.random.views.fragCorrelationBar
         {
             this.vehicleID = param1;
             this.update(param2,param3,param4);
-            addFrameScript(this.LAST_ANIM_FRAME,this.updateVehicleIDs);
+            addFrameScript(LAST_ANIM_FRAME,this.updateVehicleIDs);
             this._vehicleMarkerAnimFinishedHandler = param5;
         }
 
         private function playDestroyAnim() : void
         {
             this.destroyedMarker.visible = true;
-            gotoAndPlay(this.DESTROY_FRAME_NAME);
+            gotoAndPlay(DESTROY_FRAME_NAME);
         }
 
         private function updateVehicleIDs() : void
@@ -104,8 +104,8 @@ package net.wg.gui.battle.random.views.fragCorrelationBar
 
         private function redraw() : void
         {
-            this._atlasManager.drawGraphics(ATLAS_CONSTANTS.BATTLE_ATLAS,this._color + this._vehicleType + this.NORMAL_IMAGE_POSTFIX,this.normalMarker.graphics);
-            this._atlasManager.drawGraphics(ATLAS_CONSTANTS.BATTLE_ATLAS,this._color + this._vehicleType + this.DESTROYED_IMAGE_POSTFIX,this.destroyedMarker.graphics);
+            this._atlasManager.drawGraphics(ATLAS_CONSTANTS.BATTLE_ATLAS,this._color + this._vehicleType + NORMAL_IMAGE_POSTFIX,this.normalMarker.graphics);
+            this._atlasManager.drawGraphics(ATLAS_CONSTANTS.BATTLE_ATLAS,this._color + this._vehicleType + DESTROYED_IMAGE_POSTFIX,this.destroyedMarker.graphics);
         }
 
         public function updateVehicleStatus(param1:uint) : void
@@ -124,6 +124,11 @@ package net.wg.gui.battle.random.views.fragCorrelationBar
         }
 
         public final function dispose() : void
+        {
+            this.onDispose();
+        }
+
+        protected function onDispose() : void
         {
             App.utils.asserter.assert(!this._isDisposed,"FCVehicleMarker is already disposed!");
             this._isDisposed = true;

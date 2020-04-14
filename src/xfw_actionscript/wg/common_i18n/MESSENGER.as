@@ -637,6 +637,8 @@ package
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_EPICREWARDPOINTS:String = "#messenger:serviceChannelMessages/battleResults/epicRewardPoints";
 
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_EVENTCOIN:String = "#messenger:serviceChannelMessages/battleResults/eventCoin";
+
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_DOUBLEXPFACTOR:String = "#messenger:serviceChannelMessages/battleResults/doubleXpFactor";
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_PENALTYFORDAMAGEALLIES:String = "#messenger:serviceChannelMessages/battleResults/penaltyForDamageAllies";
@@ -654,6 +656,8 @@ package
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_ACTIONSRESULTSCREDITS:String = "#messenger:serviceChannelMessages/battleResults/actionsResultsCredits";
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_ACTIONSRESULTSCRYSTAL:String = "#messenger:serviceChannelMessages/battleResults/actionsResultsCrystal";
+
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_ACTIONSRESULTSEVENTCOIN:String = "#messenger:serviceChannelMessages/battleResults/actionsResultsEventCoin";
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_ACTIONSRESULTSFREEXP:String = "#messenger:serviceChannelMessages/battleResults/actionsResultsFreeXP";
 
@@ -674,6 +678,8 @@ package
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_GOLD:String = "#messenger:serviceChannelMessages/battleResults/quests/gold";
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_CRYSTAL:String = "#messenger:serviceChannelMessages/battleResults/quests/crystal";
+
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_EVENTCOIN:String = "#messenger:serviceChannelMessages/battleResults/quests/eventCoin";
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_BERTHS:String = "#messenger:serviceChannelMessages/battleResults/quests/berths";
 
@@ -769,6 +775,8 @@ package
 
         public static const SERVICECHANNELMESSAGES_BOOTCAMP_CREW:String = "#messenger:serviceChannelMessages/bootcamp/crew";
 
+        public static const SERVICECHANNELMESSAGES_CURRENCYUPDATE_AUCTION:String = "#messenger:serviceChannelMessages/currencyUpdate/auction";
+
         public static const SERVICECHANNELMESSAGES_CURRENCYUPDATE_FINANCIAL_TRANSACTION:String = "#messenger:serviceChannelMessages/currencyUpdate/financial_transaction";
 
         public static const SERVICECHANNELMESSAGES_CURRENCYUPDATE_DATE:String = "#messenger:serviceChannelMessages/currencyUpdate/date";
@@ -779,11 +787,15 @@ package
 
         public static const SERVICECHANNELMESSAGES_CURRENCYUPDATE_RECEIVED_CRYSTAL:String = "#messenger:serviceChannelMessages/currencyUpdate/received/crystal";
 
+        public static const SERVICECHANNELMESSAGES_CURRENCYUPDATE_RECEIVED_EVENTCOIN:String = "#messenger:serviceChannelMessages/currencyUpdate/received/eventCoin";
+
         public static const SERVICECHANNELMESSAGES_CURRENCYUPDATE_DEBITED_CREDITS:String = "#messenger:serviceChannelMessages/currencyUpdate/debited/credits";
 
         public static const SERVICECHANNELMESSAGES_CURRENCYUPDATE_DEBITED_GOLD:String = "#messenger:serviceChannelMessages/currencyUpdate/debited/gold";
 
         public static const SERVICECHANNELMESSAGES_CURRENCYUPDATE_DEBITED_CRYSTAL:String = "#messenger:serviceChannelMessages/currencyUpdate/debited/crystal";
+
+        public static const SERVICECHANNELMESSAGES_CURRENCYUPDATE_DEBITED_EVENTCOIN:String = "#messenger:serviceChannelMessages/currencyUpdate/debited/eventCoin";
 
         public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_GOLDACCRUED:String = "#messenger:serviceChannelMessages/invoiceReceived/goldAccrued";
 
@@ -792,6 +804,10 @@ package
         public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_CRYSTALACCRUED:String = "#messenger:serviceChannelMessages/invoiceReceived/crystalAccrued";
 
         public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_CRYSTALDEBITED:String = "#messenger:serviceChannelMessages/invoiceReceived/crystalDebited";
+
+        public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_EVENTCOINACCRUED:String = "#messenger:serviceChannelMessages/invoiceReceived/eventCoinAccrued";
+
+        public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_EVENTCOINDEBITED:String = "#messenger:serviceChannelMessages/invoiceReceived/eventCoinDebited";
 
         public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_CREDITSACCRUED:String = "#messenger:serviceChannelMessages/invoiceReceived/creditsAccrued";
 
@@ -889,6 +905,8 @@ package
 
         public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_COMPENSATION_CRYSTAL:String = "#messenger:serviceChannelMessages/invoiceReceived/compensation/crystal";
 
+        public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_COMPENSATION_EVENTCOIN:String = "#messenger:serviceChannelMessages/invoiceReceived/compensation/eventCoin";
+
         public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_TANKMEN:String = "#messenger:serviceChannelMessages/invoiceReceived/tankmen";
 
         public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_BOOSTERS:String = "#messenger:serviceChannelMessages/invoiceReceived/boosters";
@@ -952,6 +970,8 @@ package
         public static const SERVICECHANNELMESSAGES_CREDITSRECEIVEDASGIFT:String = "#messenger:serviceChannelMessages/creditsReceivedAsGift";
 
         public static const SERVICECHANNELMESSAGES_GOLDRECEIVEDASGIFT:String = "#messenger:serviceChannelMessages/goldReceivedAsGift";
+
+        public static const SERVICECHANNELMESSAGES_EVENTCOINRECEIVEDASGIFT:String = "#messenger:serviceChannelMessages/eventCoinReceivedAsGift";
 
         public static const SERVICECHANNELMESSAGES_XPRECEIVEDASGIFT:String = "#messenger:serviceChannelMessages/xpReceivedAsGift";
 
@@ -1183,6 +1203,10 @@ package
 
         public static const SERVICECHANNELMESSAGES_SYSMSG_CONVERTER_CRYSTALWITHDRAWN:String = "#messenger:serviceChannelMessages/sysMsg/converter/crystalWithdrawn";
 
+        public static const SERVICECHANNELMESSAGES_SYSMSG_CONVERTER_EVENTCOINRECEIVED:String = "#messenger:serviceChannelMessages/sysMsg/converter/eventCoinReceived";
+
+        public static const SERVICECHANNELMESSAGES_SYSMSG_CONVERTER_EVENTCOINWITHDRAWN:String = "#messenger:serviceChannelMessages/sysMsg/converter/eventCoinWithdrawn";
+
         public static const SERVICECHANNELMESSAGES_SYSMSG_CONVERTER_CREDITSRECEIVED:String = "#messenger:serviceChannelMessages/sysMsg/converter/creditsReceived";
 
         public static const SERVICECHANNELMESSAGES_SYSMSG_CONVERTER_CREDITSWITHDRAWN:String = "#messenger:serviceChannelMessages/sysMsg/converter/creditsWithdrawn";
@@ -1198,6 +1222,12 @@ package
         public static const SERVICECHANNELMESSAGES_SYSMSG_CONVERTER_VEHICLESRECEIVED:String = "#messenger:serviceChannelMessages/sysMsg/converter/vehiclesReceived";
 
         public static const SERVICECHANNELMESSAGES_SYSMSG_CONVERTER_VEHICLESWITHDRAWN:String = "#messenger:serviceChannelMessages/sysMsg/converter/vehiclesWithdrawn";
+
+        public static const SERVICECHANNELMESSAGES_SYSMSG_CONVERTER_BLUEPRINTSRECEIVED:String = "#messenger:serviceChannelMessages/sysMsg/converter/blueprintsReceived";
+
+        public static const SERVICECHANNELMESSAGES_SYSMSG_CONVERTER_INTELLIGENCEBLUEPRINTRECEIVED:String = "#messenger:serviceChannelMessages/sysMsg/converter/intelligenceBlueprintReceived";
+
+        public static const SERVICECHANNELMESSAGES_SYSMSG_CONVERTER_NATIONALBLUEPRINTRECEIVED:String = "#messenger:serviceChannelMessages/sysMsg/converter/nationalBlueprintReceived";
 
         public static const SERVICECHANNELMESSAGES_LOOTBOXES_HEADER:String = "#messenger:serviceChannelMessages/lootBoxes/header";
 
@@ -1782,6 +1812,10 @@ package
         public static const CHAT_KOREAMESSAGE_WEEKLYLIMIT:String = "#messenger:chat/koreaMessage/weeklyLimit";
 
         public static const CHAT_KOREAMESSAGE_CURFEW:String = "#messenger:chat/koreaMessage/curfew";
+
+        public static const SERVICECHANNELMESSAGES_VEHICLECOLLECTOR_UNLOCKLEVEL_HEADER:String = "#messenger:serviceChannelMessages/vehicleCollector/unlockLevel/header";
+
+        public static const SERVICECHANNELMESSAGES_VEHICLECOLLECTOR_UNLOCKLEVEL_TEXT:String = "#messenger:serviceChannelMessages/vehicleCollector/unlockLevel/text";
 
         public static const SERVICECHANNELMESSAGES_BATTLEPASSREWARD_HEADER_DEFAULT:String = "#messenger:serviceChannelMessages/battlePassReward/header/default";
 

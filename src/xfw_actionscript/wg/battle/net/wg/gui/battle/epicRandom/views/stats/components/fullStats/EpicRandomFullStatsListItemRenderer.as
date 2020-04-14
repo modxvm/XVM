@@ -103,6 +103,8 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
 
         private var _data:DAAPIVehicleInfoVO = null;
 
+        private var _activePlayerData:DAAPIVehicleInfoVO = null;
+
         private var _isEnemy:Boolean = false;
 
         private var _vehicleName:String = null;
@@ -180,6 +182,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
                 this._data = null;
             }
             this._badgeVO = null;
+            this._activePlayerData = null;
             super.onDispose();
         }
 
@@ -208,8 +211,9 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
 
         override protected function draw() : void
         {
-            var _loc2_:String = null;
-            var _loc3_:IColorScheme = null;
+            var _loc2_:* = false;
+            var _loc3_:String = null;
+            var _loc4_:IColorScheme = null;
             super.draw();
             var _loc1_:* = false;
             if(isInvalid(FullStatsValidationType.BADGE))
@@ -243,7 +247,8 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
                 if(this._userProps)
                 {
                     this.playerName.visible = true;
-                    App.utils.commons.formatPlayerName(this.playerName,this._userProps);
+                    _loc2_ = this.isCurrentPlayer();
+                    App.utils.commons.formatPlayerName(this.playerName,this._userProps,!_loc2_,_loc2_);
                     _loc1_ = true;
                 }
                 else
@@ -261,13 +266,13 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
             }
             if(isInvalid(FullStatsValidationType.COLORS))
             {
-                _loc2_ = PlayerStatusSchemeName.getSchemeNameForPlayer(this._isCurrentPlayer,this._isSquadPersonal,this._isTeamKiller,this._isDead,this._isOffline);
-                _loc3_ = App.colorSchemeMgr.getScheme(_loc2_);
-                if(_loc3_)
+                _loc3_ = PlayerStatusSchemeName.getSchemeNameForPlayer(_loc2_,this._isSquadPersonal,this._isTeamKiller,this._isDead,this._isOffline);
+                _loc4_ = App.colorSchemeMgr.getScheme(_loc3_);
+                if(_loc4_)
                 {
-                    this.applyTextColor(_loc3_.rgb);
-                    this.vehicleIcon.transform.colorTransform = _loc3_.colorTransform;
-                    this.vehicleLevel.transform.colorTransform = _loc3_.colorTransform;
+                    this.applyTextColor(_loc4_.rgb);
+                    this.vehicleIcon.transform.colorTransform = _loc4_.colorTransform;
+                    this.vehicleLevel.transform.colorTransform = _loc4_.colorTransform;
                 }
             }
             if(isInvalid(FullStatsValidationType.SELECTED))
@@ -418,6 +423,19 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
             return false;
         }
 
+        public function setActivePlayerData(param1:DAAPIVehicleInfoVO) : void
+        {
+            this._activePlayerData = param1;
+            if(this._isRenderingAvailable)
+            {
+                this.vehicleDataSync();
+            }
+            else
+            {
+                this._isRenderingRequired = true;
+            }
+        }
+
         public function setDAAPIVehicleInfoVO(param1:DAAPIVehicleInfoVO, param2:Boolean) : void
         {
             this._isEnemy = param2;
@@ -546,10 +564,15 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
                 {
                     this._squadItem.setIsEnemy(this._isEnemy);
                     this._squadItem.sessionID = this._data.sessionID;
+                    if(this._activePlayerData)
+                    {
+                        this._squadItem.setActivePlayerData(this._activePlayerData);
+                    }
                     if(this._isCurrentPlayer && this._data.isAnonymized)
                     {
                         this._squadItem.setCurrentPlayerAnonymized();
                         this._squadItem.setIsCurrentPlayerInClan(this._data.clanAbbrev != Values.EMPTY_STR);
+                        this._squadItem.setCurrentPlayerFakeName(this._data.playerFakeName);
                     }
                     this.updateDynamicSquadState(this._data);
                 }

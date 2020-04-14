@@ -146,10 +146,11 @@ package net.wg.gui.lobby.vehicleCustomization
         override protected function updateLayout(param1:int, param2:int = 0) : void
         {
             var _loc4_:* = 0;
+            var _loc5_:* = 0;
             var _loc6_:Rectangle = null;
             var _loc3_:int = param2 + OFFSET_ARROW + EXTRA_OFFSET;
             _loc4_ = param1 - _loc3_ - OFFSET_ARROW;
-            var _loc5_:int = _loc4_ + leftArrowOffset - rightArrowOffset;
+            _loc5_ = _loc4_ + leftArrowOffset - rightArrowOffset;
             this.lblMessage.x = (_loc4_ - this.lblMessage.textWidth >> 1) + _loc3_;
             super.updateLayout(_loc4_,(_loc4_ - _loc5_ >> 1) + _loc3_);
             this.scrollBar.setVisibleBookmarks(scrollList.viewPort.width / _loc4_ > BOOKMARKS_COEFFICIENT);

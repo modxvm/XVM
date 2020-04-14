@@ -126,9 +126,18 @@ package net.wg.gui.lobby.vehiclePreview20
         override protected function onInitModalFocus(param1:InteractiveObject) : void
         {
             super.onInitModalFocus(param1);
-            var _loc2_:Vector.<InteractiveObject> = new <InteractiveObject>[InteractiveObject(this.backButton),InteractiveObject(this.bottomPanel.getBtn()),InteractiveObject(this.compareBlock.addToCompareButton),InteractiveObject(this.closeButton)];
+            var _loc2_:Vector.<InteractiveObject> = new Vector.<InteractiveObject>(0);
+            var _loc3_:* = 0;
+            _loc2_.push(InteractiveObject(this.backButton));
+            if(this.bottomPanel != null)
+            {
+                _loc2_.push(InteractiveObject(this.bottomPanel.getBtn()));
+                _loc3_ = 1;
+            }
+            _loc2_.push(InteractiveObject(this.compareBlock.addToCompareButton));
+            _loc2_.push(InteractiveObject(this.closeButton));
             App.utils.commons.initTabIndex(_loc2_);
-            setFocus(_loc2_[1]);
+            setFocus(_loc2_[_loc3_]);
             _loc2_.splice(0,_loc2_.length);
         }
 
@@ -189,7 +198,10 @@ package net.wg.gui.lobby.vehiclePreview20
             var _loc1_:* = this.bottomPanel is VPBuyingPanel;
             var _loc2_:* = this.bottomPanel is VPEventProgressionBuyingPanel;
             var _loc3_:* = this.bottomPanel is VPTradeInBuyingPanel;
-            this.bottomPanel.alpha = 0;
+            if(this.bottomPanel != null)
+            {
+                this.bottomPanel.alpha = 0;
+            }
             this.eventProgressionBg.visible = _loc2_;
             if(_loc1_)
             {
@@ -234,8 +246,11 @@ package net.wg.gui.lobby.vehiclePreview20
             this.leftBackground = null;
             this.rightBackground = null;
             this.messengerBg = null;
-            this.bottomPanel.removeEventListener(Event.RESIZE,this.onBottomPanelResizeHandler);
-            this.bottomPanel = null;
+            if(this.bottomPanel != null)
+            {
+                this.bottomPanel.removeEventListener(Event.RESIZE,this.onBottomPanelResizeHandler);
+                this.bottomPanel = null;
+            }
             this._toolTipMgr = null;
             this._stage = null;
             this._vehParams.removeEventListener(Event.RESIZE,this.onVehParamsResizeHandler);
@@ -251,6 +266,7 @@ package net.wg.gui.lobby.vehiclePreview20
         override protected function draw() : void
         {
             var _loc1_:* = 0;
+            var _loc2_:* = 0;
             super.draw();
             if(isInvalid(InvalidationType.SIZE))
             {
@@ -263,15 +279,23 @@ package net.wg.gui.lobby.vehiclePreview20
                 this.messengerBg.y = height | 0;
                 this.backButton.x = this._offset - NAVIGATION_BUTTONS_OFFSET;
                 this.closeButton.x = width - this._offset - this.closeButton.width + NAVIGATION_BUTTONS_OFFSET | 0;
-                _loc1_ = height - this._offset - this.bottomPanel.getTotalHeight();
+                _loc1_ = 0;
+                if(this.bottomPanel != null)
+                {
+                    _loc1_ = this.bottomPanel.getTotalHeight();
+                }
+                _loc2_ = height - this._offset - _loc1_;
                 this._vehParams.x = width - this._offset - this._vehParams.width + VEH_PARAMS_H_OFFSET ^ 0;
                 this._vehParams.y = this._offset + this._panelVerticalOffset + VEH_PARAMS_V_OFFSET;
                 this._infoPanel.x = this._offset;
                 this._infoPanel.y = this._offset + this._panelVerticalOffset;
-                this._vehParams.height = _loc1_ - this._vehParams.y - this.listDesc.height;
-                this._infoPanel.height = _loc1_ - this._infoPanel.y;
-                this.bottomPanel.x = width - this.bottomPanel.width >> 1;
-                this.bottomPanel.y = height - this._offset - this.bottomPanel.height | 0;
+                this._vehParams.height = _loc2_ - this._vehParams.y - this.listDesc.height;
+                this._infoPanel.height = _loc2_ - this._infoPanel.y;
+                if(this.bottomPanel != null)
+                {
+                    this.bottomPanel.x = width - this.bottomPanel.width >> 1;
+                    this.bottomPanel.y = height - this._offset - this.bottomPanel.height | 0;
+                }
                 this.compareBlock.x = width - this._offset - this.compareBlock.width | 0;
                 this.compareBlock.y = this._offset + this._panelVerticalOffset;
                 this.listDesc.x = width - this._offset - this.listDesc.width + VEH_DESCRIPTION_H_OFFSET ^ 0;
@@ -295,10 +319,18 @@ package net.wg.gui.lobby.vehiclePreview20
 
         public function as_setBottomPanel(param1:String) : void
         {
-            if(this.bottomPanel == null)
+            if(this.bottomPanel == null && param1 != "")
             {
                 this.bottomPanel = App.utils.classFactory.getComponent(param1,MovieClip);
                 addChild(DisplayObject(this.bottomPanel));
+            }
+        }
+
+        public function as_setBulletVisibility(param1:int, param2:Boolean) : void
+        {
+            if(this._infoPanel != null)
+            {
+                this._infoPanel.setBulletVisibility(param1,param2);
             }
         }
 
@@ -334,11 +366,15 @@ package net.wg.gui.lobby.vehiclePreview20
             }),new Tween(INTRO_ANIMATION_DURATION,this._infoPanel,{"alpha":1},{
                 "delay":INTRO_ANIMATION_DELAY,
                 "fastTransform":false
-            }),new Tween(INTRO_ANIMATION_DURATION,this.bottomPanel,{"alpha":1},{
-                "delay":INTRO_ANIMATION_DELAY,
-                "fastTransform":false,
-                "onComplete":this.onIntroCompleteCallback
             }));
+            if(this.bottomPanel != null)
+            {
+                this._tweens.push(new Tween(INTRO_ANIMATION_DURATION,this.bottomPanel,{"alpha":1},{
+                    "delay":INTRO_ANIMATION_DELAY,
+                    "fastTransform":false,
+                    "onComplete":this.onIntroCompleteCallback
+                }));
+            }
         }
 
         private function disposeTweens() : void

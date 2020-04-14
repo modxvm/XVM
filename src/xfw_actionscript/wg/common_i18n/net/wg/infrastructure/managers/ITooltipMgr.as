@@ -18,7 +18,7 @@ package net.wg.infrastructure.managers
 
         function showLocal(param1:String, param2:Object, param3:ITooltipProps = null) : void;
 
-        function showWulfTooltip(param1:String, param2:Boolean, ... rest) : void;
+        function showWulfTooltip(param1:String, ... rest) : void;
 
         function getNewFormatter() : ITooltipFormatter;
 

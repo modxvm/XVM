@@ -1,16 +1,20 @@
 package net.wg.gui.battle.epicBattle.views.data
 {
     import net.wg.infrastructure.interfaces.entity.IDisposable;
+    import net.wg.data.constants.Errors;
     import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
     import net.wg.gui.battle.battleloading.interfaces.IVehiclesDataProvider;
     import net.wg.gui.battle.epicBattle.VO.daapi.EpicVehicleStatsVO;
     import net.wg.data.VO.daapi.DAAPIVehicleUserTagsVO;
     import net.wg.infrastructure.events.ListDataProviderEvent;
-    import net.wg.data.constants.Errors;
     import net.wg.infrastructure.exceptions.AbstractException;
 
     public class EpicStatsDataProviderBaseCtrl extends Object implements IDisposable
     {
+
+        private static const UPDATE_TEAM_ALLY_CALL_ASSERTION:String = "updateTeamDPItems" + Errors.ABSTRACT_INVOKE;
+
+        private static const UPDATE_TEAM_ENEMY_CALL_ASSERTION:String = "updateEnemyDPItems" + Errors.ABSTRACT_INVOKE;
 
         protected var teamDP:EpicVehicleDataProvider;
 
@@ -43,7 +47,7 @@ package net.wg.gui.battle.epicBattle.views.data
 
         public final function dispose() : void
         {
-            this.cleanUp();
+            this.onDispose();
         }
 
         public function setEpicVehiclesStats(param1:Boolean, param2:Vector.<EpicVehicleStatsVO>, param3:Vector.<Number>) : void
@@ -113,7 +117,7 @@ package net.wg.gui.battle.epicBattle.views.data
             }
         }
 
-        protected function cleanUp() : void
+        protected function onDispose() : void
         {
             if(this._enemyOrder)
             {
@@ -150,16 +154,14 @@ package net.wg.gui.battle.epicBattle.views.data
 
         protected function updateTeamDPItems(param1:ListDataProviderEvent) : void
         {
-            var _loc2_:String = "updateTeamDPItems" + Errors.ABSTRACT_INVOKE;
-            DebugUtils.LOG_ERROR(_loc2_);
-            throw new AbstractException(_loc2_);
+            DebugUtils.LOG_ERROR(UPDATE_TEAM_ALLY_CALL_ASSERTION);
+            throw new AbstractException(UPDATE_TEAM_ALLY_CALL_ASSERTION);
         }
 
         protected function updateEnemyDPItems(param1:ListDataProviderEvent) : void
         {
-            var _loc2_:String = "updateEnemyDPItems" + Errors.ABSTRACT_INVOKE;
-            DebugUtils.LOG_ERROR(_loc2_);
-            throw new AbstractException(_loc2_);
+            DebugUtils.LOG_ERROR(UPDATE_TEAM_ENEMY_CALL_ASSERTION);
+            throw new AbstractException(UPDATE_TEAM_ENEMY_CALL_ASSERTION);
         }
 
         private function onTeamDPValidateItemsHandler(param1:ListDataProviderEvent) : void

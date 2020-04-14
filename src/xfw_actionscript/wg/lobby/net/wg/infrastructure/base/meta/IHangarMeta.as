@@ -56,7 +56,5 @@ package net.wg.infrastructure.base.meta
         function as_createDQWidget() : void;
 
         function as_destroyDQWidget() : void;
-
-        function as_updatePreLaunch(param1:Boolean) : void;
     }
 }

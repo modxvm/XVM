@@ -2,9 +2,11 @@ package net.wg.gui.lobby.techtree.data
 {
     import net.wg.gui.lobby.techtree.interfaces.INationTreeDataProvider;
     import net.wg.gui.lobby.techtree.data.vo.NationDisplaySettings;
+    import net.wg.gui.lobby.techtree.data.vo.NationGridDisplaySettings;
     import net.wg.gui.lobby.techtree.data.vo.NodeData;
     import net.wg.gui.lobby.techtree.data.vo.NTDisplayInfo;
     import net.wg.utils.ILocale;
+    import net.wg.data.constants.generated.NODE_STATE_FLAGS;
 
     public class NationVODataProvider extends AbstractDataProvider implements INationTreeDataProvider
     {
@@ -13,20 +15,63 @@ package net.wg.gui.lobby.techtree.data
 
         private static const PROPERTY_DISPLAY_SETTINGS:String = "displaySettings";
 
+        private static const PROPERTY_GRID_SETTINGS:String = "gridSettings";
+
+        private static const PROPERTY_PREMIUM_GRID_SETTINGS:String = "premiumSettings";
+
+        private static const MAX_LEVELS:int = 10;
+
         protected var scrollIndex:Number = 0;
 
         protected var displaySettings:NationDisplaySettings;
 
+        protected var premiumNodeIndx:Vector.<int> = null;
+
+        protected var premiumLevelInfo:Vector.<NationLevelInfoVO> = null;
+
+        protected var commonGridSettings:NationGridDisplaySettings;
+
+        protected var premiumGridSettings:NationGridDisplaySettings;
+
         public function NationVODataProvider()
         {
             this.displaySettings = new NationDisplaySettings();
+            this.commonGridSettings = new NationGridDisplaySettings();
+            this.premiumGridSettings = new NationGridDisplaySettings();
             super();
+        }
+
+        override public function cleanUp() : void
+        {
+            super.cleanUp();
+            if(this.commonGridSettings != null)
+            {
+                this.commonGridSettings.cleanUp();
+            }
+            if(this.premiumGridSettings != null)
+            {
+                this.premiumGridSettings.cleanUp();
+            }
+            this.disposeAdditionalInfo();
+            this.premiumNodeIndx = new Vector.<int>();
+            this.premiumLevelInfo = new Vector.<NationLevelInfoVO>(MAX_LEVELS);
+            var _loc1_:* = 0;
+            while(_loc1_ < MAX_LEVELS)
+            {
+                this.premiumLevelInfo[_loc1_] = new NationLevelInfoVO(_loc1_ + 1);
+                _loc1_++;
+            }
+        }
+
+        override public function isPremiumItem(param1:Number) : Boolean
+        {
+            return this.premiumNodeIndx.indexOf(param1) > -1;
         }
 
         override public function parse(param1:Object) : void
         {
             var _loc5_:NodeData = null;
-            cleanUp();
+            this.cleanUp();
             NodeData.setDisplayInfoClass(NTDisplayInfo);
             var _loc2_:Array = param1.nodes;
             var _loc3_:ILocale = App.utils.locale;
@@ -38,6 +83,14 @@ package net.wg.gui.lobby.techtree.data
             {
                 this.displaySettings.fromObject(param1.displaySettings,_loc3_);
             }
+            if(param1.hasOwnProperty(PROPERTY_PREMIUM_GRID_SETTINGS))
+            {
+                this.premiumGridSettings.fromObject(param1.premiumSettings,_loc3_);
+            }
+            if(param1.hasOwnProperty(PROPERTY_GRID_SETTINGS))
+            {
+                this.commonGridSettings.fromObject(param1.gridSettings,_loc3_);
+            }
             var _loc4_:Number = _loc2_.length;
             var _loc6_:Number = 0;
             while(_loc6_ < _loc4_)
@@ -46,6 +99,11 @@ package net.wg.gui.lobby.techtree.data
                 _loc5_.fromObject(_loc2_[_loc6_],_loc3_);
                 nodeIdxCache[_loc5_.id] = nodeData.length;
                 nodeData.push(_loc5_);
+                if((_loc5_.state & NODE_STATE_FLAGS.PREMIUM) > 0)
+                {
+                    this.premiumLevelInfo[_loc5_.level - 1].addItem((_loc5_.displayInfo as NTDisplayInfo).column);
+                    this.premiumNodeIndx.push(_loc6_);
+                }
                 _loc6_++;
             }
         }
@@ -72,12 +130,32 @@ package net.wg.gui.lobby.techtree.data
                 this.displaySettings.dispose();
                 this.displaySettings = null;
             }
+            this.commonGridSettings.dispose();
+            this.commonGridSettings = null;
+            this.premiumGridSettings.dispose();
+            this.premiumGridSettings = null;
+            this.disposeAdditionalInfo();
             super.onDispose();
+        }
+
+        public function getCommonGridSettings() : NationGridDisplaySettings
+        {
+            return this.commonGridSettings;
         }
 
         public function getDisplaySettings() : NationDisplaySettings
         {
             return this.displaySettings;
+        }
+
+        public function getPremiumGridSettings() : NationGridDisplaySettings
+        {
+            return this.premiumGridSettings;
+        }
+
+        public function getPremiumLevelInfo() : Vector.<NationLevelInfoVO>
+        {
+            return this.premiumLevelInfo;
         }
 
         public function getScrollIndex() : Number
@@ -94,6 +172,25 @@ package net.wg.gui.lobby.techtree.data
                 _loc3_ = true;
             }
             return _loc3_;
+        }
+
+        private function disposeAdditionalInfo() : void
+        {
+            var _loc1_:NationLevelInfoVO = null;
+            if(this.premiumNodeIndx != null)
+            {
+                this.premiumNodeIndx.splice(0,this.premiumNodeIndx.length);
+                this.premiumNodeIndx = null;
+            }
+            if(this.premiumLevelInfo != null)
+            {
+                for each(_loc1_ in this.premiumLevelInfo)
+                {
+                    _loc1_.dispose();
+                }
+                this.premiumLevelInfo.splice(0,this.premiumLevelInfo.length);
+                this.premiumLevelInfo = null;
+            }
         }
     }
 }

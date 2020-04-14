@@ -124,8 +124,6 @@ package net.wg.gui.lobby.settings
 
         private var _graphicsPresetToSelect:int = -1;
 
-        private var _isWinXP:Boolean = false;
-
         private var _settingsConfigHelper:SettingsConfigHelper;
 
         private var _countersData:Vector.<SettingsNewCountersVo> = null;
@@ -429,11 +427,6 @@ package net.wg.gui.lobby.settings
                 _loc2_.setPresetAfterAutoDetect(this._graphicsPresetToSelect);
                 this._graphicsPresetToSelect = -1;
             }
-        }
-
-        public function as_setInitData(param1:Boolean) : void
-        {
-            this._isWinXP = param1;
         }
 
         public function as_updateVideoSettings(param1:Object) : void
@@ -1133,7 +1126,6 @@ package net.wg.gui.lobby.settings
             var _loc4_:GraphicSettings = _loc3_ as GraphicSettings;
             if(_loc4_)
             {
-                _loc4_.isWinXP = this._isWinXP;
                 if(this._needToUpdateGraphicSettings)
                 {
                     _loc4_.updateDependentData();

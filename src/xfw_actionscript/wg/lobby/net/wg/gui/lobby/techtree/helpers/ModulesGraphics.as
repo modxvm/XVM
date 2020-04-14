@@ -1,15 +1,19 @@
 package net.wg.gui.lobby.techtree.helpers
 {
     import net.wg.gui.lobby.techtree.interfaces.IRenderer;
+    import net.wg.gui.lobby.techtree.nodes.ResearchItem;
+    import net.wg.gui.lobby.techtree.interfaces.IResearchContainer;
     import flash.display.DisplayObject;
     import flash.geom.Point;
 
     public class ModulesGraphics extends LinesGraphics
     {
 
+        private static const Y_PROP:String = "y";
+
         public var premiumLineColor:Number;
 
-        public var xRatio:Number = 0;
+        public var xRatio:int = 0;
 
         public var rootRenderer:IRenderer;
 
@@ -32,20 +36,37 @@ package net.wg.gui.lobby.techtree.helpers
         override public function setup() : void
         {
             super.setup();
-            _colorIdxs.push(this.premiumLineColor);
+            colorIdxs = new <uint>[ARROW_COLOR,ARROW_COLOR,this.premiumLineColor];
         }
 
         override protected function onDispose() : void
         {
             this.clearUp();
             this.rootRenderer = null;
-            _container = null;
+            container = null;
             super.onDispose();
+        }
+
+        override protected function getLineThickness(param1:IRenderer, param2:IRenderer) : uint
+        {
+            var _loc3_:* = false;
+            if((param1.isNext2Unlock() || param1.isUnlocked()) && param2.isUnlocked() && (param1 != this.rootRenderer?this.rootRenderer.isUnlocked():true))
+            {
+                if(param1 != this.rootRenderer && param2 is ResearchItem)
+                {
+                    _loc3_ = container != null?IResearchContainer(container).hasUnlockedParent(param2.matrixPosition.row - 1,param2.index):false;
+                    if(!_loc3_)
+                    {
+                        return DEFAULT_LINE_THICKNESS;
+                    }
+                }
+                return UNLOCKED_LINE_THICKNESS;
+            }
+            return DEFAULT_LINE_THICKNESS;
         }
 
         public function buildRendererLines(param1:IRenderer, param2:Vector.<IRenderer>) : void
         {
-            clearLinesAndArrows(param1);
             if(param2)
             {
                 this.drawOutgoingLines(param1,param2);
@@ -76,7 +97,9 @@ package net.wg.gui.lobby.techtree.helpers
 
         private function drawOutgoingLines(param1:IRenderer, param2:Vector.<IRenderer>) : void
         {
-            var _loc3_:Number = param2.length;
+            var _loc17_:uint = 0;
+            var _loc18_:* = NaN;
+            var _loc3_:uint = param2.length;
             if(_loc3_ == 0)
             {
                 return;
@@ -84,14 +107,18 @@ package net.wg.gui.lobby.techtree.helpers
             var _loc4_:Point = new Point(param1.getOutX(),param1.getY());
             var _loc5_:Array = [];
             var _loc6_:Array = [];
-            var _loc7_:Object = null;
+            var _loc7_:ResearchLineInfo = null;
             var _loc8_:ResearchLineInfo = null;
             var _loc9_:Point = null;
             var _loc10_:IRenderer = null;
-            var _loc11_:Number = 0;
-            while(_loc11_ < _loc3_)
+            var _loc11_:Number = DEFAULT_LINE_THICKNESS;
+            var _loc12_:Number = DEFAULT_LINE_THICKNESS;
+            var _loc13_:uint = Math.max(param1.getColorIndex(),this.rootRenderer.getColorIndex());
+            var _loc14_:Point = new Point(_loc4_.x + this.xRatio,_loc4_.y);
+            var _loc15_:* = 0;
+            while(_loc15_ < _loc3_)
             {
-                _loc10_ = param2[_loc11_];
+                _loc10_ = param2[_loc15_];
                 if(_loc10_ != null)
                 {
                     _loc9_ = new Point(_loc10_.getInX(),_loc10_.getY());
@@ -99,102 +126,91 @@ package net.wg.gui.lobby.techtree.helpers
                     if(_loc4_.y > _loc9_.y)
                     {
                         _loc5_.push(_loc8_);
+                        _loc11_ = Math.max(this.getLineThickness(_loc10_,param1),_loc11_);
                     }
                     else if(_loc4_.y < _loc9_.y)
                     {
                         _loc6_.push(_loc8_);
+                        _loc12_ = Math.max(this.getLineThickness(_loc10_,param1),_loc12_);
                     }
                     else
                     {
                         _loc7_ = _loc8_;
                     }
                 }
-                _loc11_++;
+                _loc15_++;
             }
-            var _loc12_:Point = new Point(_loc4_.x + this.xRatio,_loc4_.y);
-            var _loc13_:uint = Math.max(param1.getColorIndex(),this.rootRenderer.getColorIndex());
-            this.drawUpLines(_loc5_,_loc12_,_loc13_);
-            this.drawDownLines(_loc6_,_loc12_,_loc13_);
+            this.drawLines(_loc5_,_loc14_,_loc13_);
+            this.drawLines(_loc6_,_loc14_,_loc13_,false);
+            var _loc16_:uint = colorIdxs[_loc13_];
             if(_loc7_ != null)
             {
+                _loc17_ = this.getLineThickness(_loc7_.child,_loc7_.parent);
+                _loc18_ = getArrowAlphaByThickness(_loc17_);
                 if(_loc7_.drawArrow)
                 {
-                    drawLineAndArrow(param1,_colorIdxs[_loc13_],_loc4_,_loc7_.point);
+                    drawLineAndArrow(param1,_loc16_,_loc4_,_loc7_.point,_loc17_,_loc18_,!param1.isFake(),true);
                 }
                 else
                 {
-                    drawLine(param1,_colorIdxs[_loc13_],_loc4_,_loc7_.point);
+                    drawLine(param1,_loc16_,_loc4_,_loc7_.point,_loc17_,_loc18_,!param1.isFake());
                 }
             }
             else
             {
-                drawLine(param1,_colorIdxs[_loc13_],_loc4_,_loc12_);
+                _loc17_ = Math.max(_loc11_,_loc12_);
+                drawLine(param1,_loc16_,_loc4_,_loc14_,_loc17_,getArrowAlphaByThickness(_loc17_));
             }
         }
 
-        private function drawUpLines(param1:Array, param2:Point, param3:uint, param4:Boolean = false) : void
+        private function drawLines(param1:Array, param2:Point, param3:uint, param4:Boolean = true) : void
         {
             var _loc6_:IRenderer = null;
             var _loc7_:IRenderer = null;
             var _loc8_:Point = null;
-            var _loc9_:Point = null;
-            var _loc10_:ResearchLineInfo = null;
+            var _loc9_:ResearchLineInfo = null;
+            var _loc15_:* = NaN;
             var _loc5_:uint = param1.length;
-            param1.sortOn("y",Array.NUMERIC);
-            var _loc11_:Number = 0;
-            while(_loc11_ < _loc5_)
+            var _loc10_:uint = DEFAULT_LINE_THICKNESS;
+            var _loc11_:Number = getArrowAlphaByThickness(_loc10_);
+            param1.sortOn(Y_PROP,param4?Array.NUMERIC:Array.NUMERIC | Array.DESCENDING);
+            var _loc12_:* = false;
+            var _loc13_:int = param4?int.MAX_VALUE:int.MIN_VALUE;
+            var _loc14_:* = 0;
+            var _loc16_:uint = 0;
+            while(_loc16_ < _loc5_)
             {
-                _loc10_ = param1[_loc11_];
-                _loc7_ = _loc10_.child;
-                _loc6_ = _loc10_.parent;
-                _loc8_ = new Point(param2.x,_loc10_.point.y);
-                _loc9_ = new Point(param2.x,_loc11_ == _loc5_ - 1?param2.y:param1[_loc11_ + 1].point.y);
-                drawLine(_loc6_,_colorIdxs[param3],_loc8_,_loc9_);
-                if(!param4)
+                _loc9_ = param1[_loc16_];
+                _loc7_ = _loc9_.child;
+                _loc6_ = _loc9_.parent;
+                _loc14_ = _loc7_.getY();
+                _loc13_ = param4?Math.min(_loc13_,_loc14_):Math.max(_loc13_,_loc14_);
+                _loc15_ = this.getLineThickness(_loc7_,_loc6_);
+                _loc11_ = getArrowAlphaByThickness(_loc15_);
+                if(_loc12_)
                 {
-                    if(_loc10_.drawArrow)
+                    if(_loc10_ < _loc15_)
                     {
-                        drawLineAndArrow(_loc6_,_colorIdxs[param3],_loc8_,_loc10_.point);
+                        _loc12_ = true;
+                        drawLine(_loc6_,colorIdxs[param3],param2,new Point(param2.x,_loc14_),_loc15_,_loc11_);
+                        drawLine(_loc6_,colorIdxs[param3],new Point(param2.x,_loc14_),new Point(param2.x,_loc13_),_loc10_,getArrowAlphaByThickness(_loc10_));
                     }
-                    else
-                    {
-                        drawLine(_loc6_,_colorIdxs[param3],_loc8_,_loc10_.point);
-                    }
+                    _loc10_ = _loc15_;
                 }
-                _loc11_++;
-            }
-        }
-
-        private function drawDownLines(param1:Array, param2:Point, param3:uint, param4:Boolean = false) : void
-        {
-            var _loc6_:IRenderer = null;
-            var _loc7_:IRenderer = null;
-            var _loc8_:Point = null;
-            var _loc9_:Point = null;
-            var _loc10_:ResearchLineInfo = null;
-            var _loc5_:Number = param1.length;
-            param1.sortOn("y",Array.NUMERIC | Array.DESCENDING);
-            var _loc11_:Number = 0;
-            while(_loc11_ < _loc5_)
-            {
-                _loc10_ = param1[_loc11_];
-                _loc7_ = _loc10_.child;
-                _loc6_ = _loc10_.parent;
-                _loc8_ = new Point(param2.x,_loc10_.point.y);
-                _loc9_ = new Point(param2.x,_loc11_ == _loc5_ - 1?param2.y:param1[_loc11_ + 1].point.y);
-                drawLine(_loc6_,_colorIdxs[param3],_loc8_,_loc9_);
-                if(!param4)
+                _loc8_ = new Point(param2.x,_loc9_.point.y);
+                if(_loc9_.drawArrow)
                 {
-                    if(_loc10_.drawArrow)
-                    {
-                        drawLineAndArrow(_loc6_,_colorIdxs[param3],_loc8_,_loc10_.point);
-                    }
-                    else
-                    {
-                        drawLine(_loc6_,_colorIdxs[param3],_loc8_,_loc10_.point);
-                    }
+                    drawLineAndArrow(_loc6_,colorIdxs[param3],_loc8_,_loc9_.point,_loc15_,_loc11_,false,true);
                 }
-                _loc11_++;
+                else
+                {
+                    drawLine(_loc6_,colorIdxs[param3],_loc8_,_loc9_.point,_loc15_,_loc11_);
+                }
+                if(!_loc12_ && _loc16_ == _loc5_ - 1)
+                {
+                    drawLine(_loc6_,colorIdxs[param3],param2,new Point(param2.x,_loc13_),_loc15_,_loc11_);
+                }
+                _loc16_++;
             }
         }
     }

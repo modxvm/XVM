@@ -126,6 +126,8 @@ package net.wg.gui.lobby.header.mainMenuButtonBar
             {
                 _loc4_.tooltip = _loc3_.tooltip;
             }
+            _loc4_.isTooltipSpecial = _loc3_.isTooltipSpecial;
+            _loc4_.actionIconStr = _loc3_.actionIcon;
         }
 
         override protected function draw() : void

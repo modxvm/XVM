@@ -9,7 +9,15 @@ package net.wg.gui.bootcamp.messageWindow.events
 
         public static const MESSAGE_DISAPPEAR:String = "messageDisappear";
 
+        public static const MESSAGE_EXECUTED:String = "messageExecuted";
+
         public static const MESSAGE_OPEN_NATIONS:String = "openNations";
+
+        public static const REWARD_ICON_LOADED:String = "rewardIconLoaded";
+
+        public static const REWARD_ANIMATION_COMPLETE:String = "rewardAnimationComplete";
+
+        public static const REWARD_ANIMATION_START:String = "rewardAnimationStart";
 
         public function MessageViewEvent(param1:String, param2:Boolean = false, param3:Boolean = false)
         {

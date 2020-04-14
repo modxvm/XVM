@@ -2,10 +2,14 @@ package net.wg.gui.bootcamp
 {
     import net.wg.infrastructure.base.meta.impl.BCHighlightsMeta;
     import net.wg.infrastructure.base.meta.IBCHighlightsMeta;
+    import flash.display.DisplayObjectContainer;
+    import flash.display.DisplayObject;
+    import net.wg.infrastructure.interfaces.IView;
+    import net.wg.gui.components.windows.Window;
+    import net.wg.infrastructure.base.BaseViewWrapper;
     import flash.utils.Dictionary;
     import flash.events.EventDispatcher;
     import net.wg.infrastructure.events.LifeCycleEvent;
-    import flash.display.DisplayObject;
     import net.wg.gui.bootcamp.controls.BCHighlightRendererBase;
     import net.wg.gui.interfaces.IHighlighted;
     import flash.events.Event;
@@ -13,7 +17,6 @@ package net.wg.gui.bootcamp
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import flash.display.MovieClip;
     import net.wg.infrastructure.events.TutorialEvent;
-    import flash.display.DisplayObjectContainer;
     import scaleform.clik.controls.CoreList;
     import scaleform.clik.interfaces.IListItemRenderer;
     import net.wg.gui.components.controls.scroller.ScrollerBase;
@@ -23,12 +26,9 @@ package net.wg.gui.bootcamp
     import scaleform.clik.controls.DropdownMenu;
     import flash.events.IEventDispatcher;
     import net.wg.infrastructure.events.LoaderEvent;
-    import net.wg.infrastructure.interfaces.IView;
     import flash.geom.Rectangle;
     import scaleform.clik.utils.Padding;
     import net.wg.infrastructure.interfaces.ITutorialCustomComponent;
-    import net.wg.gui.components.windows.Window;
-    import net.wg.infrastructure.base.BaseViewWrapper;
     import net.wg.data.constants.Values;
 
     public class BCHighlightsBase extends BCHighlightsMeta implements IBCHighlightsMeta
@@ -70,6 +70,50 @@ package net.wg.gui.bootcamp
             this._hintsMap = new Dictionary(true);
             this._viewsCache = new Dictionary(true);
             super();
+        }
+
+        public static function seekView(param1:String) : DisplayObjectContainer
+        {
+            var _loc3_:String = null;
+            var _loc4_:DisplayObjectContainer = null;
+            var _loc5_:uint = 0;
+            var _loc6_:uint = 0;
+            var _loc7_:DisplayObject = null;
+            var _loc8_:IView = null;
+            var _loc2_:Object = Object(App.containerMgr).containersMap;
+            for(_loc3_ in _loc2_)
+            {
+                _loc4_ = _loc2_[_loc3_] as DisplayObjectContainer;
+                if(_loc4_)
+                {
+                    _loc5_ = _loc4_.numChildren;
+                    _loc6_ = 0;
+                    while(_loc6_ < _loc5_)
+                    {
+                        _loc7_ = _loc4_.getChildAt(_loc6_);
+                        _loc8_ = null;
+                        if(_loc7_ is IView)
+                        {
+                            _loc8_ = IView(_loc7_);
+                        }
+                        else if(_loc7_ is Window)
+                        {
+                            _loc8_ = Window(_loc7_).sourceView;
+                        }
+                        else if(_loc7_ is BaseViewWrapper)
+                        {
+                            _loc8_ = BaseViewWrapper(_loc7_).sourceView;
+                        }
+                        if(_loc8_ && _loc8_.as_config.alias == param1)
+                        {
+                            return DisplayObjectContainer(_loc8_);
+                        }
+                        _loc6_++;
+                    }
+                    continue;
+                }
+            }
+            return null;
         }
 
         override public function updateStage(param1:Number, param2:Number) : void
@@ -329,7 +373,7 @@ package net.wg.gui.bootcamp
             }
             else
             {
-                _loc3_ = this.seekView(_loc2_.viewAlias);
+                _loc3_ = seekView(_loc2_.viewAlias);
                 if(_loc3_)
                 {
                     this._viewsCache[_loc2_.viewAlias] = _loc3_;
@@ -373,18 +417,14 @@ package net.wg.gui.bootcamp
 
         private function updateComponentPosition(param1:Object, param2:String) : void
         {
-            var _loc3_:HighlightData = null;
-            var _loc4_:DisplayObjectContainer = null;
-            var _loc5_:Rectangle = null;
-            var _loc6_:BCHighlightRendererBase = null;
-            _loc3_ = this._highlightsData[param2];
+            var _loc3_:HighlightData = this._highlightsData[param2];
             if(!_loc3_)
             {
                 return;
             }
-            _loc4_ = this._viewsCache[_loc3_.viewAlias];
-            _loc5_ = this.getComponentBounds(param1,_loc4_);
-            _loc6_ = this._hintsMap[param2];
+            var _loc4_:DisplayObjectContainer = this._viewsCache[_loc3_.viewAlias];
+            var _loc5_:Rectangle = this.getComponentBounds(param1,_loc4_);
+            var _loc6_:BCHighlightRendererBase = this._hintsMap[param2];
             var _loc7_:Padding = _loc3_.padding;
             if(_loc7_)
             {
@@ -393,8 +433,8 @@ package net.wg.gui.bootcamp
                 _loc5_.x = _loc5_.x + _loc7_.left;
                 _loc5_.y = _loc5_.y + _loc7_.top;
             }
-            _loc6_.x = _loc5_.x;
-            _loc6_.y = _loc5_.y;
+            _loc6_.x = _loc5_.x >> 0;
+            _loc6_.y = _loc5_.y >> 0;
             _loc6_.setProperties(_loc5_.width,_loc5_.height,!_loc3_.hideBorder);
             if(_loc4_ && _loc6_.parent == null)
             {
@@ -501,50 +541,6 @@ package net.wg.gui.bootcamp
                 _loc6_.addEventListener(TutorialEvent.VIEW_READY_FOR_TUTORIAL,this.onComponentViewReadyForTutorialHandler);
             }
             return _loc10_;
-        }
-
-        private function seekView(param1:String) : DisplayObjectContainer
-        {
-            var _loc3_:String = null;
-            var _loc4_:DisplayObjectContainer = null;
-            var _loc5_:uint = 0;
-            var _loc6_:uint = 0;
-            var _loc7_:DisplayObject = null;
-            var _loc8_:IView = null;
-            var _loc2_:Object = Object(App.containerMgr).containersMap;
-            for(_loc3_ in _loc2_)
-            {
-                _loc4_ = _loc2_[_loc3_] as DisplayObjectContainer;
-                if(_loc4_)
-                {
-                    _loc5_ = _loc4_.numChildren;
-                    _loc6_ = 0;
-                    while(_loc6_ < _loc5_)
-                    {
-                        _loc7_ = _loc4_.getChildAt(_loc6_);
-                        _loc8_ = null;
-                        if(_loc7_ is IView)
-                        {
-                            _loc8_ = IView(_loc7_);
-                        }
-                        else if(_loc7_ is Window)
-                        {
-                            _loc8_ = Window(_loc7_).sourceView;
-                        }
-                        else if(_loc7_ is BaseViewWrapper)
-                        {
-                            _loc8_ = BaseViewWrapper(_loc7_).sourceView;
-                        }
-                        if(_loc8_ && _loc8_.as_config.alias == param1)
-                        {
-                            return DisplayObjectContainer(_loc8_);
-                        }
-                        _loc6_++;
-                    }
-                    continue;
-                }
-            }
-            return null;
         }
 
         private function restartHighlightRoutine() : void

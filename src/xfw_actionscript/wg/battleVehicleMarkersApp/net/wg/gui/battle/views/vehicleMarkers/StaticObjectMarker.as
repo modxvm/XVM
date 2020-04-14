@@ -60,14 +60,20 @@ package net.wg.gui.battle.views.vehicleMarkers
 
         override protected function onDispose() : void
         {
-            this._shapeBitmap.bitmapData.dispose();
-            this._shapeBitmap.bitmapData = null;
-            this._shapeBitmap = null;
+            if(this._shapeBitmap != null)
+            {
+                if(this._shapeBitmap.bitmapData != null)
+                {
+                    this._shapeBitmap.bitmapData.dispose();
+                    this._shapeBitmap.bitmapData = null;
+                }
+                this._shapeBitmap = null;
+            }
             this.marker = null;
             this.distanceFieldGreen = null;
             this.distanceFieldYellow = null;
             this.bgShadow = null;
-            this._tween = null;
+            this.clearTween();
             this._distanceTF = null;
             super.onDispose();
         }
@@ -85,6 +91,7 @@ package net.wg.gui.battle.views.vehicleMarkers
             var _loc1_:* = 0;
             if(this._alphaZone > 0)
             {
+                this.clearTween();
                 _loc1_ = this._distance - this._minDistance;
                 if(this._isShow && _loc1_ <= 0)
                 {
@@ -163,8 +170,11 @@ package net.wg.gui.battle.views.vehicleMarkers
             if(this._shapeBitmap != null)
             {
                 this.marker.removeChild(this._shapeBitmap);
-                this._shapeBitmap.bitmapData.dispose();
-                this._shapeBitmap.bitmapData = null;
+                if(this._shapeBitmap.bitmapData != null)
+                {
+                    this._shapeBitmap.bitmapData.dispose();
+                    this._shapeBitmap.bitmapData = null;
+                }
             }
             try
             {
@@ -179,6 +189,16 @@ package net.wg.gui.battle.views.vehicleMarkers
             {
                 DebugUtils.LOG_ERROR(Errors.BAD_LINKAGE + _shapeName);
                 return;
+            }
+        }
+
+        private function clearTween() : void
+        {
+            if(this._tween != null)
+            {
+                this._tween.paused = true;
+                this._tween.dispose();
+                this._tween = null;
             }
         }
     }

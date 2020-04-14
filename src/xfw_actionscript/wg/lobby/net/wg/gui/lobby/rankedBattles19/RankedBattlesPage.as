@@ -11,13 +11,14 @@ package net.wg.gui.lobby.rankedBattles19
     import net.wg.gui.lobby.rankedBattles19.data.RankedBattlesPageVO;
     import net.wg.utils.ICounterManager;
     import net.wg.data.VO.CountersVo;
+    import net.wg.gui.lobby.rankedBattles19.components.RankedBattlesPageHeaderHelper;
     import net.wg.gui.events.ViewStackEvent;
     import flash.events.Event;
     import flash.display.DisplayObject;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.gui.lobby.rankedBattles19.data.RankedBattlesPageHeaderVO;
-    import net.wg.utils.StageSizeBoundaries;
     import net.wg.data.constants.Values;
+    import net.wg.utils.StageSizeBoundaries;
     import net.wg.data.constants.Linkages;
     import net.wg.gui.lobby.components.SideBarRenderer;
     import scaleform.clik.interfaces.IDataProvider;
@@ -47,10 +48,6 @@ package net.wg.gui.lobby.rankedBattles19
 
         private static const COUNTERS_INVALID:String = "countersInvalid";
 
-        private static const HEADER_V_OFFSET_BIG:int = 44;
-
-        private static const HEADER_V_OFFSET_SMALL:int = 41;
-
         private static const COUNTER_PROPS_BIG:CounterProps = new CounterProps(12,8,TextFormatAlign.RIGHT);
 
         private static const COUNTER_PROPS_SMALL:CounterProps = new CounterProps(20,4,TextFormatAlign.RIGHT);
@@ -73,10 +70,13 @@ package net.wg.gui.lobby.rankedBattles19
 
         private var _menuHeight:int = 0;
 
+        private var _headerHelper:RankedBattlesPageHeaderHelper = null;
+
         public function RankedBattlesPage()
         {
             this._counterManager = App.utils.counterManager;
             super();
+            this._headerHelper = RankedBattlesPageHeaderHelper.getInstance();
         }
 
         override public function updateStage(param1:Number, param2:Number) : void
@@ -167,6 +167,7 @@ package net.wg.gui.lobby.rankedBattles19
             this.header = null;
             this._counterProps = null;
             this._data = null;
+            this._headerHelper = null;
             super.onDispose();
         }
 
@@ -182,9 +183,10 @@ package net.wg.gui.lobby.rankedBattles19
 
         public function setStateSizeBoundaries(param1:int, param2:int) : void
         {
-            var _loc3_:Boolean = param1 < StageSizeBoundaries.WIDTH_1366 || param2 < StageSizeBoundaries.HEIGHT_900;
-            this.header.setScreenSize(_loc3_);
-            this.header.y = _loc3_?HEADER_V_OFFSET_SMALL:HEADER_V_OFFSET_BIG;
+            var _loc3_:String = this._headerHelper.getSizeId(param1,param2);
+            this.header.setSizeId(_loc3_);
+            this.header.y = this._headerHelper.getYOffset(_loc3_);
+            closeBtn.y = this.header.y + this._headerHelper.getCloseBtnYOffset(_loc3_);
             var _loc4_:String = Values.EMPTY_STR;
             if(param1 == StageSizeBoundaries.WIDTH_1024)
             {

@@ -12,6 +12,7 @@ package net.wg.gui.lobby.modulesPanel.components
     import org.idmedia.as3commons.util.StringUtils;
     import net.wg.infrastructure.managers.counter.CounterProps;
     import net.wg.data.constants.generated.TOOLTIPS_CONSTANTS;
+    import scaleform.clik.controls.Button;
 
     public class DeviceSlot extends AmmunitionButton implements IDeviceSlot
     {
@@ -172,12 +173,12 @@ package net.wg.gui.lobby.modulesPanel.components
             this._type = param1;
         }
 
-        public function get slotIndex() : Number
+        public function get slotIndex() : int
         {
             return this._slotIndex;
         }
 
-        public function set slotIndex(param1:Number) : void
+        public function set slotIndex(param1:int) : void
         {
             this._slotIndex = param1;
         }
@@ -226,6 +227,11 @@ package net.wg.gui.lobby.modulesPanel.components
         private function onRollOutHandler(param1:MouseEvent) : void
         {
             this.hideToolTip();
+        }
+
+        public function get button() : Button
+        {
+            return this;
         }
     }
 }

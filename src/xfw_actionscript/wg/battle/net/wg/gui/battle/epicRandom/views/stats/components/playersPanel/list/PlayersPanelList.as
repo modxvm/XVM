@@ -6,12 +6,13 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
     import net.wg.gui.battle.random.views.stats.components.playersPanel.interfaces.IPlayersPanelListItemHolder;
     import flash.utils.Dictionary;
     import flash.display.Sprite;
+    import net.wg.infrastructure.managers.ITooltipMgr;
+    import flash.events.MouseEvent;
     import net.wg.gui.battle.views.minimap.MinimapEntryController;
     import net.wg.data.constants.PlayerStatus;
     import net.wg.gui.battle.components.events.PlayersPanelListEvent;
     import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
     import net.wg.gui.battle.epicRandom.VO.daapi.EpicRandomDAAPIVehicleInfoVO;
-    import flash.events.MouseEvent;
     import net.wg.data.constants.generated.PLAYERS_PANEL_STATE;
     import net.wg.data.constants.Values;
     import net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.events.PlayersPanelItemEvent;
@@ -23,8 +24,6 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
     {
 
         private static const ITEM_HEIGHT:int = 32;
-
-        private static const COLUMN_WIDTH:int = 80;
 
         private static const SELF_BG_SHORT_WIDTH:int = 56;
 
@@ -120,9 +119,14 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
 
         private var _currentState:Number = 0;
 
+        private var _toolTipString:String = null;
+
+        private var _tooltipMgr:ITooltipMgr = null;
+
         public function PlayersPanelList()
         {
             super();
+            this._tooltipMgr = App.toolTipMgr;
             this._listStates = new Dictionary();
             this._listStates[PLAYERS_PANEL_STATE.HIDDEN] = LIST_STATE_HIDDEN;
             this._listStates[PLAYERS_PANEL_STATE.SHORT] = LIST_STATE_SINGLE_SHORT;
@@ -201,6 +205,8 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             {
                 for each(_loc3_ in this._panelListItems)
                 {
+                    _loc3_.removeEventListener(MouseEvent.MOUSE_OVER,this.onHitMouseOverHandler);
+                    _loc3_.removeEventListener(MouseEvent.MOUSE_OUT,this.onHitMouseOutHandler);
                     _loc3_.dispose();
                 }
                 this._panelListItems.splice(0,this._panelListItems.length);
@@ -229,6 +235,10 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
                 _loc2_.length = 0;
             }
             this._playerVehicleID = 0;
+        }
+
+        public function resetFrags() : void
+        {
         }
 
         public function setAndSortByGroup(param1:int, param2:Number) : void
@@ -523,6 +533,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             App.utils.data.cleanupDynamicObject(this._listWidths);
             this._listWidths = null;
             this._renderersContainer = null;
+            this._tooltipMgr = null;
         }
 
         protected function setGroupIcons() : void
@@ -652,12 +663,19 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             {
                 _loc4_.dynamicSquad.setCurrentPlayerAnonymized();
                 _loc4_.dynamicSquad.setIsCurrentPlayerInClan(param1.clanAbbrev != Values.EMPTY_STR);
+                if(!this._toolTipString)
+                {
+                    _loc4_.addEventListener(MouseEvent.MOUSE_OVER,this.onHitMouseOverHandler);
+                    _loc4_.addEventListener(MouseEvent.MOUSE_OUT,this.onHitMouseOutHandler);
+                    this.makeTooltipString(param1.playerFakeName,param1.clanAbbrev != Values.EMPTY_STR);
+                }
             }
             return true;
         }
 
-        public function resetFrags() : void
+        private function makeTooltipString(param1:String, param2:Boolean) : void
         {
+            this._toolTipString = param2?App.utils.locale.makeString(TOOLTIPS.ANONYMIZER_BATTLE_TEAMLIST_CLAN,{"fakeName":param1}):App.utils.locale.makeString(TOOLTIPS.ANONYMIZER_BATTLE_TEAMLIST_NOCLAN,{"fakeName":param1});
         }
 
         private function getHolderByVehicleID(param1:Number) : PlayersPanelListItemHolder
@@ -800,6 +818,19 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
         protected function get isRightAligned() : Boolean
         {
             throw new AbstractException(Errors.ABSTRACT_INVOKE);
+        }
+
+        private function onHitMouseOverHandler(param1:MouseEvent) : void
+        {
+            if(this._toolTipString)
+            {
+                this._tooltipMgr.show(this._toolTipString);
+            }
+        }
+
+        private function onHitMouseOutHandler(param1:MouseEvent) : void
+        {
+            this._tooltipMgr.hide();
         }
 
         private function onThirdSpawnGroupClickHandler(param1:MouseEvent) : void
