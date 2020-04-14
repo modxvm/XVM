@@ -5,7 +5,7 @@ package net.wg.gui.lobby.techtree.interfaces
     public interface INodesContainer extends IUIComponentEx
     {
 
-        function getNodeByID(param1:Number) : IRenderer;
+        function getNodeByID(param1:int) : IRenderer;
 
         function getNation() : String;
 

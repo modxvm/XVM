@@ -3,9 +3,11 @@ package net.wg.data.constants
     public class Linkages extends Object
     {
 
-        public static const ITEM_RENDERER_MEDAL:String = "BSMedalUI";
+        public static const BC_STAT_RENDERER:String = "StatRendererContainerUI";
 
-        public static const ITEM_RENDERER_STAT:String = "BSStatContainerUI";
+        public static const BC_BASE_RENDERER:String = "BaseRendererContainerUI";
+
+        public static const BC_BOTTOM_REWARD_RENDERER:String = "BottomRewardRendererContainerUI";
 
         public static const WINDOW:String = "WindowUI";
 
@@ -258,6 +260,8 @@ package net.wg.data.constants
         public static const RESUPPLY_TIMER_SMALL_UI:String = "resupplyTimerSmallUI";
 
         public static const FC_MARKER_ITEM:String = "fcMarkerItemUI";
+
+        public static const BCFC_MARKER_ITEM:String = "BCFCMarkerItemUI";
 
         public static const PRICE_COMPONENT:String = "PriceUI";
 
@@ -601,7 +605,7 @@ package net.wg.data.constants
 
         public static const FAKE_ITEM_NODE:String = "FakeItemNode";
 
-        public static const RESEARCH_ITEMS_ARROW:String = "ResearchItemsArrowUI";
+        public static const RESEARCH_ITEMS_ARROW:String = "NationTreeArrowUI";
 
         public static const VEHICLE_COMPARE_ANIM:String = "VehicleCompareAnimUI";
 
@@ -640,6 +644,8 @@ package net.wg.data.constants
         public static const CROSSHAIR_STRATEGIC_UI:String = "CrosshairStrategicUI";
 
         public static const CROSSHAIR_POSTMORTEM_UI:String = "CrosshairPostmortemUI";
+
+        public static const CROSSHAIR_PENETRATION_HINT_UI:String = "CrosshairPenetrationHintUI";
 
         public static const SPEEDOMETER_UI:String = "SpeedometerUI";
 
@@ -708,6 +714,8 @@ package net.wg.data.constants
         public static const LINKED_SET_AWARD_UI:String = "LinkedSetAwardUI";
 
         public static const LOBBY_HINT_UI:String = "BCLobbyHintUI";
+
+        public static const LOBBY_RECTANGLE_HINT_UI:String = "BCLobbyRectangleHintUI";
 
         public static const LOBBY_HINT_MISSION_UI:String = "BCLobbyHintMissionUI";
 
@@ -874,6 +882,16 @@ package net.wg.data.constants
         public static const SESSION_STATS_PARAM_RENDERER:String = "SessionStatsParamStatsBlickUI";
 
         public static const SESSION_STATS_CHECKBOX_RENDERER:String = "SessionStatsSettingsCheckboxUI";
+
+        public static const NATION_TREE_LEVEL_RENDERER:String = "NationalTreeLevelRendererUI";
+
+        public static const NATION_TREE_PREMIUM_PANEL_DOTTY_PATTERN:String = "PremiumNTDottyUI";
+
+        public static const NATION_TREE_LEVELS_DELIMETER:String = "NTLevelsDelimeterUI";
+
+        public static const NATION_TREE_NODE_PREMIUM_COLLECTOR_BTN:String = "NationTreeNodeBtnUI";
+
+        public static const NATION_TREE_PREMIUM_DOTS_PATTERN:String = "PremiumDotUI";
 
         public function Linkages()
         {

@@ -33,6 +33,8 @@ package net.wg.data.constants.generated
 
         public static const CRYSTAL:String = "crystal";
 
+        public static const EVENT_COIN:String = "eventCoin";
+
         public static const TANK_DAILYXPFACTOR:String = "tank_dailyXPFactor";
 
         public static const TANK_UNLOCK_PRICE:String = "tank_unlock_price";

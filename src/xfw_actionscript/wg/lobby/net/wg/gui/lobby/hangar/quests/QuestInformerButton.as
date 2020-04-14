@@ -164,7 +164,7 @@ package net.wg.gui.lobby.hangar.quests
                 }
                 else if(this._questVO.isTooltipWulf)
                 {
-                    App.toolTipMgr.showWulfTooltip(this._questVO.tooltip,false,null);
+                    App.toolTipMgr.showWulfTooltip(this._questVO.tooltip,null);
                 }
                 else
                 {

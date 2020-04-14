@@ -16,9 +16,9 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
     import flash.geom.Point;
     import flash.events.Event;
     import scaleform.clik.events.ButtonEvent;
+    import flash.events.MouseEvent;
     import flash.text.TextFieldAutoSize;
     import net.wg.gui.lobby.vehiclePreview20.VehiclePreview20Event;
-    import flash.events.MouseEvent;
     import scaleform.clik.constants.InvalidationType;
     import org.idmedia.as3commons.util.StringUtils;
     import net.wg.gui.lobby.vehiclePreview20.data.VPSetItemsVO;
@@ -163,6 +163,8 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
             this.compoundPrice.priceActionOffset = new Point(0,3);
             this.compensation.addEventListener(Event.RESIZE,this.onContentResizeHandler);
             this.actionButton.addEventListener(ButtonEvent.CLICK,this.onActionButtonClickHandler);
+            this.actionButton.addEventListener(MouseEvent.ROLL_OVER,this.onActionButtonRollOverHandler);
+            this.actionButton.addEventListener(MouseEvent.ROLL_OUT,this.onActionButtonRollOutHandler);
             this.actionButton.mouseEnabledOnDisabled = true;
             this.actionButton.disabledImageAlpha = ACTION_BUTTON_DISABLED_ICON_ALPHA;
             this.notResearchedLabelTf.mouseWheelEnabled = this.notResearchedLabelTf.mouseEnabled = false;
@@ -200,6 +202,8 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
         override protected function onBeforeDispose() : void
         {
             this.actionButton.removeEventListener(ButtonEvent.CLICK,this.onActionButtonClickHandler);
+            this.actionButton.removeEventListener(MouseEvent.ROLL_OVER,this.onActionButtonRollOverHandler);
+            this.actionButton.removeEventListener(MouseEvent.ROLL_OUT,this.onActionButtonRollOutHandler);
             this.offersView.removeEventListener(VehiclePreview20Event.SELECT,this.onOffersViewSelectHandler);
             this.couponView.removeEventListener(Event.SELECT,this.onCouponViewSelectHandler);
             this.timeLeftInfoIcon.removeEventListener(MouseEvent.ROLL_OVER,this.onTimeLeftInfoIconRollOverHandler);
@@ -376,7 +380,7 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
                 {
                     this.uniqueLabelTf.visible = false;
                 }
-                this.notResearchedAlertIcon.visible = this.notResearchedLabelTf.visible = this._data.showCannotResearchWarning;
+                this.notResearchedAlertIcon.visible = this.notResearchedLabelTf.visible = StringUtils.isNotEmpty(this._data.warning);
                 if(this._data.setTitle)
                 {
                     this.setTitleTF.htmlText = this._data.setTitle;
@@ -433,7 +437,6 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
                 this.actionButton.iconSource = this._data.buyButtonIcon;
                 this.actionButton.iconAlign = this._data.buyButtonIconAlign;
                 this.actionButton.enabled = this._data.buyButtonEnabled;
-                this.actionButton.tooltip = this._data.buyButtonTooltip;
                 _loc1_ = this._data.isUnlock?UniversalBtnStylesConst.STYLE_HEAVY_LIME:UniversalBtnStylesConst.STYLE_HEAVY_ORANGE;
                 App.utils.universalBtnStyles.setStyle(this.actionButton,_loc1_);
                 if(this._data.isReferralEnabled)
@@ -443,7 +446,6 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
                     this.actionButton.visible = true;
                     this.actionButton.enabled = this._data.buyButtonEnabled;
                     this.actionButton.label = this._data.buyButtonLabel;
-                    this.actionButton.tooltip = this._data.buyButtonTooltip;
                 }
                 this.couponView.setCouponDiscount(this._data.couponDiscount);
                 visible = true;
@@ -547,7 +549,7 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
             }
             if(this.notResearchedAlertIcon.visible)
             {
-                this.notResearchedLabelTf.text = VEHICLE_PREVIEW.BUYINGPANEL_NOTRESEARCHEDVEHICLEWARNING;
+                this.notResearchedLabelTf.text = this._data.warning;
                 this.notResearchedAlertIcon.x = this.actionButton.x + this.actionButton.width >> 0;
                 this.notResearchedAlertIcon.y = this.actionButton.y + (this.actionButton.height - this.notResearchedAlertIcon.height >> 1) | 0;
                 this.notResearchedLabelTf.x = this.notResearchedAlertIcon.x + this.notResearchedAlertIcon.width + 1 >> 0;
@@ -643,6 +645,27 @@ package net.wg.gui.lobby.vehiclePreview20.buyingPanel
         private function onOffersViewSelectHandler(param1:VehiclePreview20Event) : void
         {
             onOfferSelectedS(VPOfferVO(param1.data).id);
+        }
+
+        private function onActionButtonRollOverHandler(param1:MouseEvent) : void
+        {
+            if(this._data == null || StringUtils.isEmpty(this._data.buyButtonTooltip))
+            {
+                return;
+            }
+            if(this._data.isShowSpecialTooltip)
+            {
+                this._toolTipMgr.showSpecial(this._data.buyButtonTooltip,null);
+            }
+            else
+            {
+                this._toolTipMgr.showComplex(this._data.buyButtonTooltip);
+            }
+        }
+
+        private function onActionButtonRollOutHandler(param1:MouseEvent) : void
+        {
+            this._toolTipMgr.hide();
         }
     }
 }

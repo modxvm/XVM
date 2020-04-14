@@ -411,6 +411,8 @@ package
 
         public static const SHELLS_KINDS_PARAMS:String = "#ingame_gui:shells_kinds/params";
 
+        public static const SHELLS_KINDS_PARAMSNOPIERCING:String = "#ingame_gui:shells_kinds/paramsNoPiercing";
+
         public static const SHELLS_KINDS_STUNPARAMS:String = "#ingame_gui:shells_kinds/stunParams";
 
         public static const DAMAGE_PANEL_DEVICES_TURRETROTATOR_NORMAL:String = "#ingame_gui:damage_panel/devices/turretRotator/normal";
@@ -1346,14 +1348,6 @@ package
         public static const REWARDWINDOW_TWITCH10_DESCTEXT:String = "#ingame_gui:rewardWindow/twitch10/descText";
 
         public static const REWARDWINDOW_TWITCH10_BTNLABEL:String = "#ingame_gui:rewardWindow/twitch10/btnLabel";
-
-        public static const REWARDWINDOW_TWITCH11_HEADERTEXT:String = "#ingame_gui:rewardWindow/twitch11/headerText";
-
-        public static const REWARDWINDOW_TWITCH11_SUBHEADERTEXT:String = "#ingame_gui:rewardWindow/twitch11/subHeaderText";
-
-        public static const REWARDWINDOW_TWITCH11_DESCTEXT:String = "#ingame_gui:rewardWindow/twitch11/descText";
-
-        public static const REWARDWINDOW_TWITCH11_BTNLABEL:String = "#ingame_gui:rewardWindow/twitch11/btnLabel";
 
         public static const REWARDWINDOW_LOOTBOX_WINHEADERTEXT:String = "#ingame_gui:rewardWindow/lootbox/winHeaderText";
 

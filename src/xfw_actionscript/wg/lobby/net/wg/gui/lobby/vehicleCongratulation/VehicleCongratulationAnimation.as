@@ -6,6 +6,7 @@ package net.wg.gui.lobby.vehicleCongratulation
     import net.wg.gui.components.controls.UILoaderAlt;
     import net.wg.gui.components.controls.universalBtn.UniversalBtn;
     import flash.display.MovieClip;
+    import net.wg.gui.lobby.components.CollectibleStatus;
     import net.wg.gui.components.tooltips.helpers.TankTypeIco;
     import scaleform.clik.motion.Tween;
     import net.wg.gui.events.UILoaderEvent;
@@ -47,11 +48,19 @@ package net.wg.gui.lobby.vehicleCongratulation
 
         private static const BUTTON_W:int = 160;
 
+        private static const VEHICLE_TYPE_Y:int = 137;
+
+        private static const SCALE_BIG:Number = 1;
+
+        private static const SCALE_SMALL:Number = 0.75;
+
         private static const ANIMATION_FLAG:String = "animationFlag";
 
         private static const IN_HANGAR_EVENT_TYPE:String = "inHangar";
 
         private static const BACK_EVENT_TYPE:String = "back";
+
+        private static const COLLECTIBLE_OFFSET:int = 33;
 
         public var titleTF:TextField;
 
@@ -67,9 +76,13 @@ package net.wg.gui.lobby.vehicleCongratulation
 
         public var vehicleHighlight:MovieClip;
 
+        public var collectibleTF:CollectibleStatus;
+
         private var _vehicleType:TankTypeIco;
 
         private var _isElite:Boolean;
+
+        private var _isCollectible:Boolean;
 
         private var _showAnimation:Boolean;
 
@@ -83,7 +96,7 @@ package net.wg.gui.lobby.vehicleCongratulation
             this._tweens = new Vector.<Tween>(0);
             this._vehicleType = App.utils.classFactory.getComponent(Linkages.TANK_TYPE_ICO_UI,TankTypeIco);
             this._vehicleType.x = 0;
-            this._vehicleType.y = 104;
+            this._vehicleType.y = VEHICLE_TYPE_Y;
             addChild(this._vehicleType);
         }
 
@@ -116,6 +129,8 @@ package net.wg.gui.lobby.vehicleCongratulation
             this.backButton.dispose();
             this.backButton = null;
             this.vehicleHighlight = null;
+            this.collectibleTF.dispose();
+            this.collectibleTF = null;
             super.onDispose();
         }
 
@@ -162,6 +177,7 @@ package net.wg.gui.lobby.vehicleCongratulation
                 _loc3_ = this.vehicleLevelTF.width + _loc1_ + this._vehicleType.width + _loc2_ + this.vehicleNameTF.width;
                 _loc4_ = width - _loc3_ >> 1;
                 this.titleTF.x = width - this.titleTF.width >> 1;
+                this.collectibleTF.x = width - this.collectibleTF.width >> 1;
                 this.vehicleLevelTF.x = _loc4_;
                 _loc4_ = _loc4_ + (this.vehicleLevelTF.width + _loc1_);
                 this._vehicleType.x = _loc4_;
@@ -186,6 +202,7 @@ package net.wg.gui.lobby.vehicleCongratulation
                 this._showAnimation = false;
                 visible = true;
                 this.disposeTweens();
+                this.repositionItems();
                 this._tweens.push(new Tween(ANIMATION_DURATION,this.titleTF,{
                     "y":this.titleTF.y,
                     "alpha":1
@@ -195,6 +212,18 @@ package net.wg.gui.lobby.vehicleCongratulation
                 }));
                 this.titleTF.y = this.titleTF.y - TEXTS_TWEEN_TOP_PADDING;
                 this.titleTF.alpha = 0;
+                if(this._isCollectible)
+                {
+                    this._tweens.push(new Tween(ANIMATION_DURATION,this.collectibleTF,{
+                        "y":this.collectibleTF.y,
+                        "alpha":1
+                    },{
+                        "ease":Regular.easeOut,
+                        "fastTransform":false
+                    }));
+                }
+                this.collectibleTF.y = this.collectibleTF.y - TEXTS_TWEEN_TOP_PADDING;
+                this.collectibleTF.alpha = 0;
                 this._tweens.push(new Tween(ANIMATION_DURATION,this.vehicleLevelTF,{
                     "y":this.vehicleLevelTF.y,
                     "alpha":1
@@ -277,6 +306,7 @@ package net.wg.gui.lobby.vehicleCongratulation
         {
             this.image.autoSize = false;
             this._isElite = param1.isElite;
+            this._isCollectible = param1.isCollectible;
             this._vehicleType.type = param1.vehicleType;
             this.titleTF.text = param1.title;
             this.vehicleLevelTF.text = param1.lvl;
@@ -291,7 +321,7 @@ package net.wg.gui.lobby.vehicleCongratulation
 
         public function setStateSizeBoundaries(param1:int, param2:int) : void
         {
-            this._imageScale = param2 >= StageSizeBoundaries.HEIGHT_900?1:0.75;
+            this._imageScale = param2 >= StageSizeBoundaries.HEIGHT_900?SCALE_BIG:SCALE_SMALL;
             invalidateSize();
         }
 
@@ -330,6 +360,16 @@ package net.wg.gui.lobby.vehicleCongratulation
         private function onBackButtonClickHandler(param1:ButtonEvent) : void
         {
             dispatchEvent(new Event(BACK_EVENT_TYPE));
+        }
+
+        private function repositionItems() : void
+        {
+            if(!this._isCollectible)
+            {
+                this.vehicleLevelTF.y = this.vehicleLevelTF.y - COLLECTIBLE_OFFSET;
+                this._vehicleType.y = this._vehicleType.y - COLLECTIBLE_OFFSET;
+                this.vehicleNameTF.y = this.vehicleNameTF.y - COLLECTIBLE_OFFSET;
+            }
         }
     }
 }

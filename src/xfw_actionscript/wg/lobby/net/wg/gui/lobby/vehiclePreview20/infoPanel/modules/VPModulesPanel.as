@@ -3,6 +3,7 @@ package net.wg.gui.lobby.vehiclePreview20.infoPanel.modules
     import net.wg.gui.lobby.modulesPanel.ModulesPanel;
     import net.wg.utils.IStageSizeDependComponent;
     import flash.text.TextField;
+    import net.wg.utils.IScheduler;
     import net.wg.gui.lobby.components.data.DeviceSlotVO;
     import net.wg.gui.lobby.modulesPanel.DeviceIndexHelper;
     import net.wg.utils.StageSizeBoundaries;
@@ -17,6 +18,8 @@ package net.wg.gui.lobby.vehiclePreview20.infoPanel.modules
 
         private static const BIG_SLOTS_OFFSET:int = 65;
 
+        private static const DELAY:int = 600;
+
         public var gunTitleTF:TextField;
 
         public var turretTitleTF:TextField;
@@ -29,8 +32,11 @@ package net.wg.gui.lobby.vehiclePreview20.infoPanel.modules
 
         private var _titles:Vector.<TextField>;
 
+        private var _scheduler:IScheduler;
+
         public function VPModulesPanel()
         {
+            this._scheduler = App.utils.scheduler;
             super();
         }
 
@@ -52,6 +58,18 @@ package net.wg.gui.lobby.vehiclePreview20.infoPanel.modules
             this.radioTitleTF.mouseWheelEnabled = this.radioTitleTF.mouseEnabled = false;
         }
 
+        override protected function onBeforeDispose() : void
+        {
+            var _loc1_:int = _modules.length;
+            var _loc2_:* = 0;
+            while(_loc2_ < _loc1_)
+            {
+                this._scheduler.cancelTask(_modules[_loc2_].playAnimation);
+                _loc2_++;
+            }
+            super.onBeforeDispose();
+        }
+
         override protected function onDispose() : void
         {
             this._titles.length = 0;
@@ -61,6 +79,7 @@ package net.wg.gui.lobby.vehiclePreview20.infoPanel.modules
             this.engineTitleTF = null;
             this.chassisTitleTF = null;
             this.radioTitleTF = null;
+            this._scheduler = null;
             super.onDispose();
         }
 
@@ -78,7 +97,7 @@ package net.wg.gui.lobby.vehiclePreview20.infoPanel.modules
 
         public function setStateSizeBoundaries(param1:int, param2:int) : void
         {
-            var _loc3_:int = param2 == StageSizeBoundaries.HEIGHT_768?SMALL_SLOTS_OFFSET:BIG_SLOTS_OFFSET;
+            var _loc3_:int = param2 <= StageSizeBoundaries.HEIGHT_900?SMALL_SLOTS_OFFSET:BIG_SLOTS_OFFSET;
             var _loc4_:int = _slots.length;
             var _loc5_:* = 0;
             while(_loc5_ < _loc4_)
@@ -88,6 +107,17 @@ package net.wg.gui.lobby.vehiclePreview20.infoPanel.modules
                 _loc5_++;
             }
             dispatchEvent(new Event(Event.RESIZE));
+        }
+
+        override public function playAnimation() : void
+        {
+            var _loc1_:int = _modules.length;
+            var _loc2_:* = 0;
+            while(_loc2_ < _loc1_)
+            {
+                this._scheduler.scheduleTask(_modules[_loc2_].playAnimation,_loc2_ * DELAY);
+                _loc2_++;
+            }
         }
     }
 }

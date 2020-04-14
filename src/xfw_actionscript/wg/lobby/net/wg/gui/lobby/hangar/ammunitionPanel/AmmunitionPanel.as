@@ -4,7 +4,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
     import net.wg.gui.components.controls.IconTextButton;
     import net.wg.gui.components.advanced.ShellButton;
     import net.wg.gui.components.controls.SoundButtonEx;
-    import net.wg.gui.lobby.modulesPanel.components.DeviceSlot;
+    import net.wg.gui.lobby.modulesPanel.interfaces.IDeviceSlot;
     import net.wg.gui.components.controls.VO.ShellButtonVO;
     import net.wg.infrastructure.managers.ITooltipMgr;
     import net.wg.utils.IUtils;
@@ -17,6 +17,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
     import flash.events.Event;
     import scaleform.clik.events.ButtonEvent;
     import net.wg.gui.lobby.hangar.ammunitionPanel.events.AmmunitionPanelEvents;
+    import net.wg.gui.lobby.modulesPanel.components.DeviceSlot;
     import net.wg.data.constants.generated.FITTING_TYPES;
     import scaleform.clik.events.ComponentEvent;
     import net.wg.gui.lobby.components.data.DeviceSlotVO;
@@ -134,11 +135,11 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
 
         private var _tuningTooltip:String = "";
 
-        private var _optionalDevices:Vector.<DeviceSlot> = null;
+        private var _optionalDevices:Vector.<IDeviceSlot> = null;
 
-        private var _equipment:Vector.<DeviceSlot> = null;
+        private var _equipment:Vector.<IDeviceSlot> = null;
 
-        private var _battleAbilities:Vector.<DeviceSlot> = null;
+        private var _battleAbilities:Vector.<IDeviceSlot> = null;
 
         private var _shells:Vector.<ShellButton> = null;
 
@@ -199,10 +200,10 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this._scheduler = App.utils.scheduler;
             super();
             addSlots(this.optionalDevice1,this.optionalDevice2,this.optionalDevice3,this.equipment1,this.equipment2,this.equipment3,this.booster,this.battleAbility1,this.battleAbility2,this.battleAbility3);
-            this._optionalDevices = new <DeviceSlot>[this.optionalDevice1,this.optionalDevice2,this.optionalDevice3];
-            this._equipment = new <DeviceSlot>[this.equipment1,this.equipment2,this.equipment3];
+            this._optionalDevices = new <IDeviceSlot>[this.optionalDevice1,this.optionalDevice2,this.optionalDevice3];
+            this._equipment = new <IDeviceSlot>[this.equipment1,this.equipment2,this.equipment3];
             this._shells = new <ShellButton>[this.shell1,this.shell2,this.shell3];
-            this._battleAbilities = new <DeviceSlot>[this.battleAbility1,this.battleAbility2,this.battleAbility3];
+            this._battleAbilities = new <IDeviceSlot>[this.battleAbility1,this.battleAbility2,this.battleAbility3];
             this._fakeWidth = this.booster.x + this.booster.width >> 0;
             this.lastElementFocusFix.x = this.booster.x + OFFSET_LAST_ELEMENT_FOCUS_FIX;
             this._buttonsList = [this.maintenanceBtn,this.tuningBtn,this.changeNationBtn];
@@ -461,7 +462,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
 
         public function as_showAnimation(param1:String, param2:int, param3:String) : void
         {
-            var _loc4_:DeviceSlot = null;
+            var _loc4_:IDeviceSlot = null;
             var _loc5_:SlotAnimation = null;
             switch(param1)
             {

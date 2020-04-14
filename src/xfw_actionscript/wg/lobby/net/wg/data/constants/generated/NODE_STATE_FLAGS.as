@@ -55,6 +55,14 @@ package net.wg.data.constants.generated
 
         public static const BLUEPRINT:int = 33554432;
 
+        public static const LAST_2_BUY:int = 67108864;
+
+        public static const COLLECTIBLE:int = 134217728;
+
+        public static const COLLECTIBLE_ACTION:int = 268435456;
+
+        public static const HAS_TECH_TREE_EVENT:int = 536870912;
+
         public function NODE_STATE_FLAGS()
         {
             super();

@@ -3,9 +3,10 @@ package net.wg.infrastructure.tutorial.builders.bootcamp
     import net.wg.infrastructure.tutorial.builders.TutorialEffectBuilder;
     import net.wg.gui.components.advanced.vo.TutorialClipEffectVO;
     import net.wg.gui.bootcamp.controls.BCHighlightRendererBase;
+    import flash.geom.Matrix;
+    import flash.events.Event;
     import flash.geom.Rectangle;
     import flash.display.DisplayObject;
-    import flash.events.Event;
     import net.wg.data.constants.generated.TUTORIAL_EFFECT_TYPES;
 
     public class TutorialClipEffectBuilder extends TutorialEffectBuilder
@@ -15,6 +16,8 @@ package net.wg.infrastructure.tutorial.builders.bootcamp
 
         private var _clip:BCHighlightRendererBase = null;
 
+        private var _rect:Matrix = null;
+
         public function TutorialClipEffectBuilder()
         {
             super();
@@ -22,23 +25,42 @@ package net.wg.infrastructure.tutorial.builders.bootcamp
 
         override protected function onDispose() : void
         {
+            if(component != null)
+            {
+                component.removeEventListener(Event.RENDER,this.onComponentRenderHandler);
+            }
             this.disposeModel();
             this.disposeClip();
             super.onDispose();
         }
 
+        override protected function onViewResize() : void
+        {
+            if(component != null && this._model != null)
+            {
+                this.layoutHint();
+            }
+        }
+
         override protected function createEffect(param1:Object) : void
         {
-            var _loc2_:Rectangle = null;
             this.disposeModel();
             this.disposeClip();
             this._model = new TutorialClipEffectVO(param1);
             this._clip = App.utils.classFactory.getComponent(this._model.linkage,BCHighlightRendererBase);
-            _loc2_ = component.getRect(DisplayObject(view));
-            this._clip.x = _loc2_.x + (_loc2_.width >> 1) + this._model.offsetX | 0;
-            this._clip.y = _loc2_.y + (_loc2_.height >> 1) + this._model.offsetY | 0;
             view.addChild(this._clip);
             this._clip.addEventListener(Event.COMPLETE,this.onClipCompleteHandler);
+            this._rect = component.transform.concatenatedMatrix;
+            component.addEventListener(Event.RENDER,this.onComponentRenderHandler);
+            this.layoutHint();
+        }
+
+        protected function layoutHint() : void
+        {
+            var _loc1_:Rectangle = null;
+            _loc1_ = component.getRect(DisplayObject(view));
+            this._clip.x = _loc1_.x + (_loc1_.width >> 1) + this._model.offsetX | 0;
+            this._clip.y = _loc1_.y + (_loc1_.height >> 1) + this._model.offsetY | 0;
         }
 
         private function disposeModel() : void
@@ -66,6 +88,20 @@ package net.wg.infrastructure.tutorial.builders.bootcamp
         {
             this.disposeClip();
             App.tutorialMgr.onEffectComplete(component,TUTORIAL_EFFECT_TYPES.CLIP);
+        }
+
+        private function onComponentRenderHandler(param1:Event) : void
+        {
+            var _loc2_:Matrix = null;
+            if(component != null && this._model != null)
+            {
+                _loc2_ = component.transform.concatenatedMatrix;
+                if(_loc2_.tx != this._rect.tx || _loc2_.ty != this._rect.ty)
+                {
+                    this._rect = _loc2_;
+                    this.layoutHint();
+                }
+            }
         }
     }
 }

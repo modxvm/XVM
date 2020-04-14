@@ -16,6 +16,12 @@ package net.wg.gui.lobby.techtree.controls
             super();
         }
 
+        public function dispose() : void
+        {
+            this.ico = null;
+            this.icoAdd = null;
+        }
+
         public function setIconState(param1:String) : void
         {
             if(this.ico != null)
@@ -31,12 +37,6 @@ package net.wg.gui.lobby.techtree.controls
         public function get contentSize() : Rectangle
         {
             return scale9Grid;
-        }
-
-        public function dispose() : void
-        {
-            this.ico = null;
-            this.icoAdd = null;
         }
     }
 }

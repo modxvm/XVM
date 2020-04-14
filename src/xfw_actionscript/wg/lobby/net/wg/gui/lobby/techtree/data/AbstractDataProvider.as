@@ -73,6 +73,11 @@ package net.wg.gui.lobby.techtree.data
             return this.nodeData[param1];
         }
 
+        public function isPremiumItem(param1:Number) : Boolean
+        {
+            return false;
+        }
+
         public function getItemByID(param1:Number) : NodeData
         {
             var _loc2_:Number = this.getIndexByID(param1);

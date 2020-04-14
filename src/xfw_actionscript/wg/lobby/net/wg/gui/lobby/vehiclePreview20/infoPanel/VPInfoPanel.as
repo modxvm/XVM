@@ -8,11 +8,15 @@ package net.wg.gui.lobby.vehiclePreview20.infoPanel
     import net.wg.gui.components.controls.tabs.OrangeTabMenu;
     import net.wg.gui.components.advanced.ViewStackEx;
     import net.wg.gui.lobby.vehiclePreview20.data.VPPageVO;
+    import net.wg.utils.ICounterManager;
     import flash.text.TextFieldAutoSize;
+    import scaleform.clik.events.IndexEvent;
     import flash.events.Event;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.utils.StageSizeBoundaries;
     import scaleform.clik.data.DataProvider;
+    import scaleform.clik.controls.Button;
+    import net.wg.infrastructure.managers.counter.CounterProps;
 
     public class VPInfoPanel extends UIComponentEx implements IStageSizeDependComponent
     {
@@ -39,6 +43,8 @@ package net.wg.gui.lobby.vehiclePreview20.infoPanel
 
         private static const NATION_CHANGE_ICON_BIG_Y_OFFSET:int = 18;
 
+        private static const BULLET_VISIBILITY_INVALID:String = "BULLET_VISIBILITY_INVALID";
+
         public var vehicleTypeIcon:Image = null;
 
         public var nationFlagIcon:Image = null;
@@ -55,6 +61,10 @@ package net.wg.gui.lobby.vehiclePreview20.infoPanel
 
         public var viewStack:ViewStackEx;
 
+        private var _bulletTabIdx:int = -1;
+
+        private var _isBulletVisible:Boolean = false;
+
         private var _tabBarOffset:int;
 
         private var _viewStackOffset:int;
@@ -63,8 +73,11 @@ package net.wg.gui.lobby.vehiclePreview20.infoPanel
 
         private var ncIconOffset:Number;
 
+        private var _counterManager:ICounterManager;
+
         public function VPInfoPanel()
         {
+            this._counterManager = App.utils.counterManager;
             super();
         }
 
@@ -73,6 +86,7 @@ package net.wg.gui.lobby.vehiclePreview20.infoPanel
             super.configUI();
             mouseEnabled = false;
             this.tabButtonBar.autoSize = TextFieldAutoSize.LEFT;
+            this.tabButtonBar.addEventListener(IndexEvent.INDEX_CHANGE,this.onTabIndexChangeHandler);
             this.vehicleTypeTF.mouseEnabled = this.vehicleTypeTF.mouseWheelEnabled = false;
             this.vehicleTypeTF.autoSize = TextFieldAutoSize.LEFT;
             this.vehicleTypeTF.wordWrap = false;
@@ -92,9 +106,12 @@ package net.wg.gui.lobby.vehiclePreview20.infoPanel
 
         override protected function onDispose() : void
         {
+            this._counterManager.removeCounter(this.tabButtonBar.getButtonAt(this._bulletTabIdx));
+            this._counterManager = null;
             this.viewStack.dispose();
             this.viewStack = null;
             this._data = null;
+            this.tabButtonBar.removeEventListener(IndexEvent.INDEX_CHANGE,this.onTabIndexChangeHandler);
             this.tabButtonBar.dispose();
             this.tabButtonBar = null;
             this.vehicleTypeTF = null;
@@ -135,6 +152,10 @@ package net.wg.gui.lobby.vehiclePreview20.infoPanel
                 this.viewStack.y = this.tabButtonBar.y + this._viewStackOffset >> 0;
                 this.viewStack.setSize(this.width,height - this.viewStack.y);
             }
+            if(isInvalid(BULLET_VISIBILITY_INVALID))
+            {
+                this.updateBulletVisibility();
+            }
         }
 
         public function setData(param1:VPPageVO) : void
@@ -146,7 +167,7 @@ package net.wg.gui.lobby.vehiclePreview20.infoPanel
 
         public function setStateSizeBoundaries(param1:int, param2:int) : void
         {
-            if(param2 == StageSizeBoundaries.HEIGHT_768)
+            if(param2 <= StageSizeBoundaries.HEIGHT_900)
             {
                 this.vehicleNameTF.scaleX = this.vehicleNameTF.scaleY = VEH_NAME_SCALE_SMALL;
                 this.vehicleNameTF.y = VEH_NAME_SMALL_Y_OFFSET;
@@ -172,14 +193,43 @@ package net.wg.gui.lobby.vehiclePreview20.infoPanel
             invalidateSize();
         }
 
+        public function setBulletVisibility(param1:int, param2:Boolean) : void
+        {
+            this._bulletTabIdx = param1;
+            this._isBulletVisible = param2;
+            invalidate(BULLET_VISIBILITY_INVALID);
+        }
+
         override public function get width() : Number
         {
             return this.tabButtonBar.getWidth();
         }
 
+        private function updateBulletVisibility() : void
+        {
+            var _loc1_:Button = this.tabButtonBar.getButtonAt(this._bulletTabIdx);
+            if(_loc1_ != null && this._isBulletVisible)
+            {
+                if(this.tabButtonBar.selectedIndex != this._bulletTabIdx)
+                {
+                    this._counterManager.setCounter(_loc1_," ",null,new CounterProps(-10,-3));
+                }
+                else
+                {
+                    this._counterManager.removeCounter(_loc1_);
+                    this._isBulletVisible = false;
+                }
+            }
+        }
+
         private function onIconChangeHandler(param1:Event) : void
         {
             invalidateSize();
+        }
+
+        private function onTabIndexChangeHandler(param1:IndexEvent) : void
+        {
+            invalidate(BULLET_VISIBILITY_INVALID);
         }
     }
 }

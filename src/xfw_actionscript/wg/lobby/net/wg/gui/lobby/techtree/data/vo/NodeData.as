@@ -32,6 +32,10 @@ package net.wg.gui.lobby.techtree.data.vo
 
         private static const IS_NATION_CHANGE_AVAILABLE:String = "isNationChangeAvailable";
 
+        private static const IS_TOP_ACTION_NODE:String = "isTopActionNode";
+
+        private static const ACTION_MESSAGE:String = "actionMessage";
+
         public var id:uint = 0;
 
         public var nameString:String = "";
@@ -57,6 +61,10 @@ package net.wg.gui.lobby.techtree.data.vo
         public var earnedXP:Number = 0;
 
         public var unlockProps:UnlockProps = null;
+
+        public var isTopActionNode:Boolean = false;
+
+        public var actionMessage:String = "";
 
         private var _blueprintLabel:String = "";
 
@@ -182,6 +190,14 @@ package net.wg.gui.lobby.techtree.data.vo
             {
                 this._isNationChangeAvailable = param1[IS_NATION_CHANGE_AVAILABLE];
             }
+            if(param1.hasOwnProperty(IS_TOP_ACTION_NODE))
+            {
+                this.isTopActionNode = param1[IS_TOP_ACTION_NODE];
+            }
+            if(param1.hasOwnProperty(ACTION_MESSAGE))
+            {
+                this.actionMessage = param1[ACTION_MESSAGE];
+            }
             this.dataIsReady = true;
         }
 
@@ -283,6 +299,11 @@ package net.wg.gui.lobby.techtree.data.vo
         public function get isNationChangeAvailable() : Boolean
         {
             return this._isNationChangeAvailable;
+        }
+
+        public function get hasTechTreeEvent() : Boolean
+        {
+            return (this.state & NODE_STATE_FLAGS.HAS_TECH_TREE_EVENT) > 0;
         }
     }
 }

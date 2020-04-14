@@ -6,9 +6,11 @@ package net.wg.gui.lobby.unboundInjectWindow
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.components.containers.inject.GFInjectComponent;
     import net.wg.utils.StageSizeBoundaries;
+    import flash.events.MouseEvent;
     import flash.display.Graphics;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.data.Aliases;
+    import net.wg.data.constants.generated.TOOLTIPS_CONSTANTS;
 
     public class UnboundInjectWindow extends UnboundInjectWindowMeta implements IUnboundInjectWindowMeta
     {
@@ -44,6 +46,8 @@ package net.wg.gui.lobby.unboundInjectWindow
             window.title = DEVELOPMENT.WULF_UNBOUNDINJECTIONWINDOW_TITLE;
             window.setMaxHeight(StageSizeBoundaries.HEIGHT_1080);
             window.setMaxWidth(StageSizeBoundaries.WIDTH_1920);
+            this.btn.addEventListener(MouseEvent.MOUSE_OVER,this.btnMouseOverHandler);
+            this.btn.addEventListener(MouseEvent.MOUSE_OUT,this.btnMouseOutHandler);
         }
 
         override protected function draw() : void
@@ -77,6 +81,8 @@ package net.wg.gui.lobby.unboundInjectWindow
         {
             this.image.dispose();
             this.image = null;
+            this.btn.removeEventListener(MouseEvent.MOUSE_OVER,this.btnMouseOverHandler);
+            this.btn.removeEventListener(MouseEvent.MOUSE_OUT,this.btnMouseOutHandler);
             this.btn.dispose();
             this.btn = null;
             this.ubComponent = null;
@@ -88,6 +94,16 @@ package net.wg.gui.lobby.unboundInjectWindow
         {
             this.btn.label = param2;
             this.image.source = param1;
+        }
+
+        private function btnMouseOverHandler(param1:MouseEvent) : void
+        {
+            App.toolTipMgr.showWulfTooltip(TOOLTIPS_CONSTANTS.GF_TEST_TOOLTIP,50,"IS2",true);
+        }
+
+        private function btnMouseOutHandler(param1:MouseEvent) : void
+        {
+            App.toolTipMgr.hide();
         }
     }
 }

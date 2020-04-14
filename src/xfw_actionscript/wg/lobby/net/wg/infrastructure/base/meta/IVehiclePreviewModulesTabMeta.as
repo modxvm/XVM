@@ -7,6 +7,6 @@ package net.wg.infrastructure.base.meta
 
         function setActiveStateS(param1:Boolean) : void;
 
-        function as_setStatusInfo(param1:String, param2:String) : void;
+        function as_setStatusInfo(param1:String, param2:String, param3:int, param4:Boolean) : void;
     }
 }

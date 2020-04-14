@@ -17,6 +17,8 @@ package net.wg.infrastructure.base.meta
 
         function goToNationChangeViewS(param1:int) : void;
 
+        function goToVehicleCollectionS(param1:String) : void;
+
         function as_setNodesStates(param1:Number, param2:Array) : void;
 
         function as_setNext2Unlock(param1:Array) : void;

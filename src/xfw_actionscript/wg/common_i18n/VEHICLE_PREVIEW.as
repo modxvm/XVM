@@ -113,6 +113,8 @@ package
 
         public static const BUYINGPANEL_NOTRESEARCHEDVEHICLEWARNING:String = "#vehicle_preview:buyingPanel/notResearchedVehicleWarning";
 
+        public static const BUYINGPANEL_COLLECTIBLE_NOTRESEARCHEDVEHICLESWARNING:String = "#vehicle_preview:buyingPanel/collectible/notResearchedVehiclesWarning";
+
         public static const BUYINGPANEL_COMPENSATION:String = "#vehicle_preview:buyingPanel/compensation";
 
         public static const BUYINGPANEL_COMPENSATION_BODY:String = "#vehicle_preview:buyingPanel/compensation/body";
@@ -128,6 +130,8 @@ package
         public static const INFOPANEL_TAB_BROWSE_NAME:String = "#vehicle_preview:infoPanel/tab/browse/name";
 
         public static const INFOPANEL_TAB_MODULES_NAME:String = "#vehicle_preview:infoPanel/tab/modules/name";
+
+        public static const INFOPANEL_TAB_MODULES_UNLOCKABLEMODULES:String = "#vehicle_preview:infoPanel/tab/modules/unlockableModules";
 
         public static const INFOPANEL_TAB_LISTDESC_CREW:String = "#vehicle_preview:infoPanel/tab/listDesc/crew";
 
@@ -158,6 +162,10 @@ package
         public static const INFOPANEL_PREMIUM_BUILTINEQUPMENTTITLE:String = "#vehicle_preview:infoPanel/premium/builtInEqupmentTitle";
 
         public static const INFOPANEL_PREMIUM_BUILTINEQUPMENTTEXT:String = "#vehicle_preview:infoPanel/premium/builtInEqupmentText";
+
+        public static const INFOPANEL_COLLECTIBLE_TITLE:String = "#vehicle_preview:infoPanel/collectible/title";
+
+        public static const INFOPANEL_COLLECTIBLE_DESC:String = "#vehicle_preview:infoPanel/collectible/desc";
 
         public static const BUYINGPANEL_FRONTLINEPACK_TITLELABEL_ACTIVE:String = "#vehicle_preview:buyingPanel/frontlinePack/titleLabel/active";
 

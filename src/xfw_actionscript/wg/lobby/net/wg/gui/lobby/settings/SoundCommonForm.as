@@ -14,6 +14,10 @@ package net.wg.gui.lobby.settings
     public class SoundCommonForm extends UIComponentEx
     {
 
+        private static const STATUS_BTN_OFFSET_LEFT:int = 4;
+
+        private static const STATUS_BTN_OFFSET_TOP:int = 2;
+
         public var volumeFieldSet:FieldSet = null;
 
         public var musicVolumeLabel:LabelControl = null;
@@ -92,9 +96,7 @@ package net.wg.gui.lobby.settings
 
         public var soundQualityCheckbox:CheckBox = null;
 
-        private const STATUS_BTN_OFFSET_LEFT:int = 4;
-
-        private const STATUS_BTN_OFFSET_TOP:int = 2;
+        public var subtitlesCheckbox:CheckBox = null;
 
         public function SoundCommonForm()
         {
@@ -123,21 +125,24 @@ package net.wg.gui.lobby.settings
             this.bassBoostCheckbox.label = SETTINGS.SOUNDS_BASSBOOST;
             this.nightModeCheckbox.label = SETTINGS.SOUNDS_NIGHTMODE;
             this.soundQualityCheckbox.label = SETTINGS.SOUNDS_SOUNDQUALITY;
+            this.subtitlesCheckbox.label = SETTINGS.SOUNDS_SUBTITLES;
+            this.subtitlesCheckbox.toolTip = TOOLTIPS.SETTINGS_SOUND_SUBTITLES;
+            this.subtitlesCheckbox.infoIcoType = InfoIcon.TYPE_INFO;
             this.soundSpeakersTestButton.caps = false;
             this.soundSpeakersTestButton.label = SETTINGS.SOUNDS_ACOUSTICTYPE_TESTBUTTON;
             this.soundSpeakersTestButton.iconSource = RES_ICONS.MAPS_ICONS_BUTTONS_SOUND;
-            this.soundSpeakersTestButton.iconOffsetLeft = this.STATUS_BTN_OFFSET_LEFT;
-            this.soundSpeakersTestButton.iconOffsetTop = this.STATUS_BTN_OFFSET_TOP;
+            this.soundSpeakersTestButton.iconOffsetLeft = STATUS_BTN_OFFSET_LEFT;
+            this.soundSpeakersTestButton.iconOffsetTop = STATUS_BTN_OFFSET_TOP;
             this.bulbVoicesButton.caps = false;
             this.bulbVoicesButton.iconSource = RES_ICONS.MAPS_ICONS_BUTTONS_SOUND;
             this.bulbVoicesButton.label = SETTINGS.SOUNDS_ACOUSTICTYPE_TESTBUTTON;
-            this.bulbVoicesButton.iconOffsetLeft = this.STATUS_BTN_OFFSET_LEFT;
-            this.bulbVoicesButton.iconOffsetTop = this.STATUS_BTN_OFFSET_TOP;
+            this.bulbVoicesButton.iconOffsetLeft = STATUS_BTN_OFFSET_LEFT;
+            this.bulbVoicesButton.iconOffsetTop = STATUS_BTN_OFFSET_TOP;
             this.testAlternativeVoicesButton.caps = false;
             this.testAlternativeVoicesButton.iconSource = RES_ICONS.MAPS_ICONS_BUTTONS_SOUND;
             this.testAlternativeVoicesButton.label = SETTINGS.SOUNDS_ACOUSTICTYPE_TESTBUTTON;
-            this.testAlternativeVoicesButton.iconOffsetLeft = this.STATUS_BTN_OFFSET_LEFT;
-            this.testAlternativeVoicesButton.iconOffsetTop = this.STATUS_BTN_OFFSET_TOP;
+            this.testAlternativeVoicesButton.iconOffsetLeft = STATUS_BTN_OFFSET_LEFT;
+            this.testAlternativeVoicesButton.iconOffsetTop = STATUS_BTN_OFFSET_TOP;
             this.soundDeviceAlert.tooltip = TOOLTIPS.SETTINGS_SOUND_DEVICEALERT;
             super.configUI();
         }
@@ -148,6 +153,8 @@ package net.wg.gui.lobby.settings
             this.volumeFieldSet = null;
             this.soundQualityCheckbox.dispose();
             this.soundQualityCheckbox = null;
+            this.subtitlesCheckbox.dispose();
+            this.subtitlesCheckbox = null;
             this.musicVolumeLabel.dispose();
             this.musicVolumeLabel = null;
             this.musicVolumeSlider.dispose();
@@ -206,6 +213,8 @@ package net.wg.gui.lobby.settings
             this.alternativeVoicesDropDown = null;
             this.alternativeVoicesIcon.dispose();
             this.alternativeVoicesIcon = null;
+            this.alternativeVoicesLabel.dispose();
+            this.alternativeVoicesLabel = null;
             this.presetsFieldSet.dispose();
             this.presetsFieldSet = null;
             this.soundDeviceButtonBar.dispose();

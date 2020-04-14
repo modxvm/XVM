@@ -9,12 +9,13 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
     import net.wg.gui.components.controls.BadgeComponent;
     import flash.display.MovieClip;
     import net.wg.gui.components.controls.VO.BadgeVisualVO;
+    import net.wg.utils.ICommons;
+    import net.wg.infrastructure.interfaces.IUserProps;
     import flash.events.MouseEvent;
     import net.wg.data.constants.generated.BATTLEATLAS;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.constants.PlayersPanelInvalidationType;
     import net.wg.data.constants.Values;
     import net.wg.data.constants.InvalidationType;
-    import net.wg.infrastructure.interfaces.IUserProps;
     import org.idmedia.as3commons.util.StringUtils;
     import net.wg.gui.battle.views.stats.constants.PlayerStatusSchemeName;
     import net.wg.infrastructure.interfaces.IColorScheme;
@@ -68,8 +69,6 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
 
         private var _isCurrentPlayer:Boolean = false;
 
-        private var _playerName:String = null;
-
         private var _vehicleName:String = null;
 
         private var _frags:int = 0;
@@ -108,9 +107,14 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
 
         private var _hasBadge:Boolean = false;
 
+        private var _commons:ICommons = null;
+
+        private var _userProps:IUserProps = null;
+
         public function PlayersPanelListItem()
         {
             super();
+            this._commons = App.utils.commons;
             this.fragsTF.mouseEnabled = false;
             this.shortTitleTF.mouseEnabled = false;
             this.vehicleIcon.visible = false;
@@ -147,6 +151,8 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             this.badge.dispose();
             this.badge = null;
             this._badgeVO = null;
+            this._userProps = null;
+            this._commons = null;
             super.onDispose();
         }
 
@@ -350,18 +356,10 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             invalidate(PlayersPanelInvalidationType.PLAYER_SCHEME);
         }
 
-        public function setPlayerName(param1:String) : void
-        {
-            if(this._playerName == param1)
-            {
-                return;
-            }
-            this._playerName = param1;
-        }
-
         public function setPlayerNameProps(param1:IUserProps) : void
         {
-            this.setPlayerName(param1.userName);
+            this._userProps = param1;
+            invalidateState();
         }
 
         public function setSquad(param1:Boolean, param2:int) : void
@@ -462,14 +460,15 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
                 {
                     if(StringUtils.isNotEmpty(this._vehicleName))
                     {
-                        App.utils.commons.truncateTextFieldText(this.shortTitleTF,this._vehicleName);
+                        this._commons.truncateTextFieldText(this.shortTitleTF,this._vehicleName);
                     }
                 }
                 else if(_loc3_)
                 {
-                    if(StringUtils.isNotEmpty(this._playerName))
+                    if(this._userProps)
                     {
-                        App.utils.commons.truncateTextFieldText(this.shortTitleTF,this._playerName);
+                        this._commons.truncateTextFieldText(this.shortTitleTF,this._userProps.userName);
+                        this._commons.formatPlayerName(this.shortTitleTF,this._userProps,!this._isCurrentPlayer,this._isCurrentPlayer);
                     }
                 }
                 visible = true;

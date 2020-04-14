@@ -219,8 +219,7 @@ package net.wg.gui.lobby.techtree
 
         protected function updateLayouts() : void
         {
-            var _loc1_:* = 0;
-            _loc1_ = width >> 1;
+            var _loc1_:* = width >> 1;
             var _loc2_:* = height >> 1;
             this.researchItems.y = _loc2_;
             this.researchItems.x = _loc1_ + RESEARCH_ITEMS_CENTER_OFFSET_X;

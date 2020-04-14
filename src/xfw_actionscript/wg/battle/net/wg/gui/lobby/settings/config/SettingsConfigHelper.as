@@ -123,6 +123,8 @@ package net.wg.gui.lobby.settings.config
 
         public static const SOUND_QUALITY:String = "soundQuality";
 
+        public static const SUBTITLES:String = "subtitles";
+
         public static const SOUND_QUALITY_VISIBLE:String = "soundQualityVisible";
 
         public static const SIZES:String = "sizes";
@@ -215,13 +217,9 @@ package net.wg.gui.lobby.settings.config
 
         public static const RENDER_PIPELINE:String = "RENDER_PIPELINE";
 
-        public static const RENDER_PIPELINE_XP:String = "RENDER_PIPELINE_XP";
-
         public static const CUSTOM:String = "CUSTOM";
 
         public static const GRAPHIC_QUALITY:String = "graphicsQuality";
-
-        public static const GRAPHIC_QUALITY_XP:String = "graphicsQuality_XP";
 
         public static const GRAPHIC_QUALITY_HDSD:String = "graphicsQualityHDSD";
 

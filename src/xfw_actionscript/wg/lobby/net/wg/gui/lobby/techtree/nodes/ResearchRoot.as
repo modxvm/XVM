@@ -10,6 +10,7 @@ package net.wg.gui.lobby.techtree.nodes
     import net.wg.gui.lobby.techtree.controls.DiscountBanner;
     import net.wg.gui.lobby.techtree.controls.BlueprintBar;
     import net.wg.gui.lobby.tradeIn.TradeOffWidget;
+    import net.wg.gui.lobby.components.CollectibleStatus;
     import net.wg.gui.lobby.techtree.data.vo.NodeData;
     import net.wg.gui.lobby.techtree.interfaces.IResearchContainer;
     import net.wg.gui.lobby.techtree.data.ResearchRootVO;
@@ -36,6 +37,7 @@ package net.wg.gui.lobby.techtree.nodes
     import net.wg.gui.lobby.techtree.constants.NodeEntityType;
     import net.wg.gui.lobby.techtree.interfaces.INodesContainer;
     import flash.events.Event;
+    import net.wg.data.managers.impl.ToolTipParams;
     import net.wg.data.constants.generated.TOOLTIPS_CONSTANTS;
     import scaleform.gfx.MouseEventEx;
     import net.wg.gui.lobby.techtree.TechTreeEvent;
@@ -63,6 +65,8 @@ package net.wg.gui.lobby.techtree.nodes
 
         private static const SMALL_VEHICLE_BOTTOM_Y_GAP:Number = 10;
 
+        private static const COLLECTIBLE_STATUS_Y_GAP:Number = 6;
+
         private static const TRADE_OFF_WIDGET_OFFSET:Number = 8;
 
         private static const TRADE_OFF_WIDGET_DO_INTERNAL_X_SHIFT:int = -30;
@@ -80,6 +84,8 @@ package net.wg.gui.lobby.techtree.nodes
         public var blueprintBar:BlueprintBar = null;
 
         public var tradeOffWidget:TradeOffWidget;
+
+        public var collectibleStatus:CollectibleStatus = null;
 
         private var _nodeData:NodeData = null;
 
@@ -151,6 +157,8 @@ package net.wg.gui.lobby.techtree.nodes
             this._nodeData = null;
             this._data = null;
             this.tradeOffWidget = null;
+            this.collectibleStatus.dispose();
+            this.collectibleStatus = null;
             this.vehicleButton.dispose();
             this.vehicleButton = null;
             this.blueprintBar.removeEventListener(ButtonEvent.CLICK,this.onBlueprintBarClickHandler);
@@ -249,7 +257,7 @@ package net.wg.gui.lobby.techtree.nodes
 
         public function getGraphicsName() : String
         {
-            return LINES_AND_ARROWS_NAME + this.entityType.toString() + this.index.toString();
+            return LINES_AND_ARROWS_NAME;
         }
 
         public function getID() : uint
@@ -322,7 +330,7 @@ package net.wg.gui.lobby.techtree.nodes
             var _loc1_:StateProperties = NodeStateCollection.instance.getStateProps(this.entityType,this._nodeData.state);
             this.nodeState = _loc1_.state;
             this._action = _loc1_.action;
-            this._actionEnabled = !_loc1_.enough || (this._nodeData.state & _loc1_.enough) > 0;
+            this._actionEnabled = _loc1_.isEnabled && (!_loc1_.enough || (this._nodeData.state & _loc1_.enough) > 0);
             this._actionAvailable = _loc1_.visible;
             invalidateData();
         }
@@ -372,6 +380,11 @@ package net.wg.gui.lobby.techtree.nodes
             return this._nodeData != null && (this._nodeData.state & NODE_STATE_FLAGS.UNLOCKED) > 0;
         }
 
+        public function isCollectible() : Boolean
+        {
+            return this._nodeData != null && (this._nodeData.state & NODE_STATE_FLAGS.COLLECTIBLE) > 0;
+        }
+
         public function needPreventInnerEvents() : Boolean
         {
             return false;
@@ -412,7 +425,7 @@ package net.wg.gui.lobby.techtree.nodes
         private function populateUI() : void
         {
             this.vehicleButton.subButtonsMode = this.inInventory()?VehicleButton.COMPARE_ONLY_MODE:VehicleButton.NORMAL_MODE;
-            this.vehicleButton.setData(this._data,this._nodeData,this.isPremium());
+            this.vehicleButton.setData(this._data,this._nodeData,this.isPremium() || this.isCollectible());
             this.blueprintBar.visible = this.canHaveBlueprint();
             if(this.blueprintBar.visible)
             {
@@ -426,7 +439,8 @@ package net.wg.gui.lobby.techtree.nodes
                     this._experienceBlock.setData(this._nodeData,this.isElite());
                 }
             }
-            this.price.visible = this._nodeState != NodeRendererState.ROOT_HANGAR;
+            this.collectibleStatus.visible = this.isCollectible();
+            this.price.visible = this._nodeState != NodeRendererState.ROOT_HANGAR && this._nodeState != NodeRendererState.ROOT_COLLECTIBLE;
             if(this.price.visible)
             {
                 this.price.setData(new ItemPriceVO(this._data.itemPrices[0]));
@@ -449,6 +463,8 @@ package net.wg.gui.lobby.techtree.nodes
                     _loc1_ = UniversalBtnStylesConst.STYLE_HEAVY_LIME;
                     break;
                 case NodeRendererState.ROOT_HANGAR:
+                case NodeRendererState.ROOT_COLLECTIBLE:
+                case NodeRendererState.ROOT_DISCOUNTED_COLLECTIBLE:
                     _loc1_ = UniversalBtnStylesConst.STYLE_HEAVY_BLACK;
                     break;
                 default:
@@ -461,7 +477,7 @@ package net.wg.gui.lobby.techtree.nodes
                 this._rentBtn.useHtmlText = true;
                 this._rentBtn.label = this._data.rentBtnLabel;
             }
-            this._hangarBtn = this.setupOrRemoveExtraBtn(this._hangarBtn,this.inInventory() && this._action != ActionName.SELECT_VEHICLE);
+            this._hangarBtn = this.setupOrRemoveExtraBtn(this._hangarBtn,this.inInventory() && this._action != ActionName.SELECT_VEHICLE && this._action != ActionName.SHOP);
             if(this._hangarBtn != null)
             {
                 this._hangarBtn.label = MENU.RESEARCH_LABELS_BUTTON_SHOWINHANGAR;
@@ -495,6 +511,12 @@ package net.wg.gui.lobby.techtree.nodes
                 this.discountBanner.y = _loc1_ | 0;
             }
             _loc1_ = this._size == SMALL_SIZE?this.getRatioY() + SMALL_VEHICLE_BOTTOM_Y_GAP:this.getRatioY();
+            if(this.collectibleStatus.visible)
+            {
+                this.collectibleStatus.y = _loc1_ | 0;
+                this.collectibleStatus.x = this.actionButton.x + (this.actionButton.width - this.collectibleStatus.width >> 1) | 0;
+                _loc1_ = _loc1_ + (this.collectibleStatus.actualHeight + COLLECTIBLE_STATUS_Y_GAP);
+            }
             if(this.price.visible)
             {
                 this.price.validateNow();
@@ -679,7 +701,24 @@ package net.wg.gui.lobby.techtree.nodes
 
         private function onButtonRollOverHandler(param1:MouseEvent) : void
         {
-            if(App.toolTipMgr && !this.actionButton.enabled)
+            var _loc2_:String = null;
+            if(App.toolTipMgr == null)
+            {
+                return;
+            }
+            if(this.isCollectible())
+            {
+                if(this.actionButton.enabled)
+                {
+                    _loc2_ = App.utils.locale.makeString(NATIONS.genetiveCase(this._owner.getNation()));
+                    App.toolTipMgr.showComplexWithParams(TOOLTIPS.RESEARCHPAGE_COLLECTIBLEVEHICLE_VEHICLEENABLED,new ToolTipParams({},{"nation":_loc2_}));
+                }
+                else
+                {
+                    App.toolTipMgr.showSpecial(TOOLTIPS_CONSTANTS.VEHICLE_COLLECTOR_DISABLED,null);
+                }
+            }
+            else if(!this.actionButton.enabled)
             {
                 if(this.isTradeIn())
                 {
@@ -725,6 +764,9 @@ package net.wg.gui.lobby.techtree.nodes
                 case ActionName.SELECT_VEHICLE:
                     _loc2_ = TechTreeEvent.GO_TO_VEHICLE_VIEW;
                     break;
+                case ActionName.SHOP:
+                    _loc2_ = TechTreeEvent.GO_TO_SHOP;
+                    break;
             }
             if(_loc2_)
             {
@@ -746,6 +788,11 @@ package net.wg.gui.lobby.techtree.nodes
             {
                 dispatchEvent(new TechTreeEvent(TechTreeEvent.GO_TO_CHANGE_NATION_VIEW));
             }
+        }
+
+        public function isTopActionNode() : Boolean
+        {
+            return false;
         }
     }
 }

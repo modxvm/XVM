@@ -19,7 +19,11 @@ package net.wg.gui.lobby.header.vo
 
         public var tooltip:String = "";
 
+        public var isTooltipSpecial:Boolean = false;
+
         public var enabled:Boolean = true;
+
+        public var actionIcon:String = "";
 
         public function HangarMenuTabItemVO(param1:Object)
         {

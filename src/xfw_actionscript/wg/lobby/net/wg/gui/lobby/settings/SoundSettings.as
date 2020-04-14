@@ -551,6 +551,7 @@ package net.wg.gui.lobby.settings
             alternativeVoicesDropDown.enabled = this._masterVolumeSelected;
             alternativeVoicesLabel.enabled = this._masterVolumeSelected;
             soundQualityCheckbox.enabled = this._masterVolumeSelected;
+            subtitlesCheckbox.enabled = this._masterVolumeSelected;
             soundSpeakersTestButton.enabled = this._masterVolumeSelected;
             this.updateSoundSpeakersDropDown();
         }

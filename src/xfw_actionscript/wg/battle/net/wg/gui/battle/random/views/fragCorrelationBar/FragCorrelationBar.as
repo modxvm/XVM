@@ -9,6 +9,7 @@ package net.wg.gui.battle.random.views.fragCorrelationBar
     import net.wg.gui.battle.components.BattleAtlasSprite;
     import net.wg.infrastructure.interfaces.IColorScheme;
     import net.wg.infrastructure.managers.IColorSchemeManager;
+    import flash.display.MovieClip;
     import net.wg.data.constants.generated.BATTLEATLAS;
     import net.wg.infrastructure.events.ColorSchemeEvent;
     import net.wg.infrastructure.interfaces.IDAAPIDataClass;
@@ -89,8 +90,13 @@ package net.wg.gui.battle.random.views.fragCorrelationBar
             TextFieldEx.setNoTranslate(this.teamFragsSeparatorField,true);
             this._winColorScheme = this._colorSchemeMgr.getScheme(FRAG_CORRELATION_WIN);
             this._loseColorScheme = this._colorSchemeMgr.getScheme(FRAG_CORRELATION_LOSE);
-            this._allyVehicleMarkersList = new VehicleMarkersList(this,false,this._winColorScheme.aliasColor);
-            this._enemyVehicleMarkersList = new VehicleMarkersList(this,true,this._loseColorScheme.aliasColor);
+            this._allyVehicleMarkersList = this.createVehicleMarkersLists(this,false,this._winColorScheme.aliasColor);
+            this._enemyVehicleMarkersList = this.createVehicleMarkersLists(this,true,this._loseColorScheme.aliasColor);
+        }
+
+        protected function createVehicleMarkersLists(param1:MovieClip, param2:Boolean, param3:String) : VehicleMarkersList
+        {
+            return new VehicleMarkersList(param1,param2,param3);
         }
 
         override protected function draw() : void
@@ -309,6 +315,16 @@ package net.wg.gui.battle.random.views.fragCorrelationBar
             this._allyVehicleMarkersList.color = this._winColorScheme.aliasColor;
             this._enemyVehicleMarkersList.color = this._loseColorScheme.aliasColor;
             invalidate(INVALID_COLOR_SCHEME);
+        }
+
+        protected function get enemyVehicleMarkersList() : VehicleMarkersList
+        {
+            return this._enemyVehicleMarkersList;
+        }
+
+        protected function get allyVehicleMarkersList() : VehicleMarkersList
+        {
+            return this._allyVehicleMarkersList;
         }
     }
 }

@@ -9,25 +9,21 @@ package net.wg.gui.lobby.rankedBattles19.view
     import net.wg.gui.lobby.rankedBattles19.view.unreachableView.RankedUnreachableBottomBlock;
     import flash.text.TextField;
     import net.wg.gui.lobby.rankedBattles19.data.RankedBattlesUnreachableViewVO;
+    import net.wg.gui.lobby.rankedBattles19.components.RankedBattlesPageHeaderHelper;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.gui.events.UILoaderEvent;
     import flash.ui.Keyboard;
     import flash.events.KeyboardEvent;
     import scaleform.clik.events.ButtonEvent;
-    import net.wg.utils.StageSizeBoundaries;
 
     public class RankedBattlesUnreachableView extends RankedBattlesUnreachableViewMeta implements IRankedBattlesUnreachableViewMeta, IStageSizeDependComponent
     {
 
         private static const BIG_HEIGHT:int = 1131;
 
-        private static const CLOSE_BTN_TOP_OFFSET:int = 63;
-
         private static const CLOSE_BTN_RIGHT_OFFSET:int = -33;
 
         private static const CENTER_BIG_TO_BUTTONS_OFFSET_Y:int = 189;
-
-        private static const HEADER_OFFSET_Y:int = 40;
 
         private static const CENTER_TO_BUTTONS_OFFSET_Y:int = 121;
 
@@ -55,9 +51,14 @@ package net.wg.gui.lobby.rankedBattles19.view
 
         private var _imgBigHalfHeight:int = -1;
 
+        private var _headerHelper:RankedBattlesPageHeaderHelper = null;
+
+        private var _headerSizeId:String = "small";
+
         public function RankedBattlesUnreachableView()
         {
             super();
+            this._headerHelper = RankedBattlesPageHeaderHelper.getInstance();
         }
 
         override public function updateStage(param1:Number, param2:Number) : void
@@ -84,6 +85,7 @@ package net.wg.gui.lobby.rankedBattles19.view
             this.centerImgBig = null;
             this.centerTF = null;
             this._data = null;
+            this._headerHelper = null;
             super.onDispose();
         }
 
@@ -127,8 +129,10 @@ package net.wg.gui.lobby.rankedBattles19.view
                 }
                 if(isInvalid(InvalidationType.LAYOUT))
                 {
+                    this.header.setSizeId(this._headerSizeId);
+                    this.header.y = this._headerHelper.getYOffset(this._headerSizeId);
+                    this.closeBtn.y = this.header.y + this._headerHelper.getCloseBtnYOffset(this._headerSizeId);
                     this.closeBtn.x = bgActualWidth - this.closeBtn.width + CLOSE_BTN_RIGHT_OFFSET;
-                    this.closeBtn.y = CLOSE_BTN_TOP_OFFSET;
                     _loc1_ = App.appHeight;
                     _loc2_ = _loc1_ < BIG_HEIGHT;
                     this.centerImg.visible = _loc2_;
@@ -139,8 +143,7 @@ package net.wg.gui.lobby.rankedBattles19.view
                     this.centerImgBig.x = bgActualWidth - this.centerImgBig.width >> 1;
                     this.bottomBlockMc.x = bgActualWidth >> 1;
                     this.bottomBlockMc.y = bgActualHeight - FOOTER_HEIGHT;
-                    this.header.y = HEADER_OFFSET_Y;
-                    _loc3_ = HEADER_OFFSET_Y + this.header.height + this.bottomBlockMc.y >> 1;
+                    _loc3_ = this.header.y + this.header.height + this.bottomBlockMc.y >> 1;
                     if(_loc2_)
                     {
                         this.centerImg.y = _loc3_ - this._imgHalfHeight + CENTER_IMG_OFFSET_Y;
@@ -157,8 +160,7 @@ package net.wg.gui.lobby.rankedBattles19.view
 
         public function setStateSizeBoundaries(param1:int, param2:int) : void
         {
-            var _loc3_:Boolean = param1 < StageSizeBoundaries.WIDTH_1366 || param2 < StageSizeBoundaries.HEIGHT_900;
-            this.header.setScreenSize(_loc3_);
+            this._headerSizeId = this._headerHelper.getSizeId(param1,param2);
             invalidateLayout();
         }
 

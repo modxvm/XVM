@@ -3,23 +3,36 @@ package net.wg.gui.lobby.techtree.controls
     import net.wg.gui.components.controls.SoundButtonEx;
     import flash.geom.Rectangle;
     import flash.display.MovieClip;
+    import flash.display.Sprite;
+    import net.wg.infrastructure.managers.ITooltipMgr;
     import net.wg.data.constants.SoundTypes;
     import scaleform.clik.constants.InvalidationType;
     import org.idmedia.as3commons.util.StringUtils;
+    import net.wg.data.constants.Errors;
     import flash.events.MouseEvent;
 
     public class NationButton extends SoundButtonEx
     {
 
-        private static const ARROW_OFFEST:int = 12;
+        private static const ARROW_OFFSET:int = 12;
 
         private static const DEFAULT_CONTENT_SIZE:Rectangle = new Rectangle();
+
+        private static const DISCOUNT_OFFSET_X:int = 23;
+
+        private static const DISCOUNT_OFFSET_Y:int = 7;
 
         public var borderStates:NationButtonStates;
 
         public var arrowMc:MovieClip;
 
+        public var discount:Sprite;
+
         private var _flagScale:Number = 1;
+
+        private var _tooltipMgr:ITooltipMgr = null;
+
+        private var _isTooltipSpecial:Boolean = false;
 
         public function NationButton()
         {
@@ -30,13 +43,16 @@ package net.wg.gui.lobby.techtree.controls
         {
             super.preInitialize();
             soundType = SoundTypes.TAB;
+            this._tooltipMgr = App.toolTipMgr;
         }
 
         override protected function onDispose() : void
         {
             this.borderStates.dispose();
             this.borderStates = null;
+            this.discount = null;
             this.arrowMc = null;
+            this._tooltipMgr = null;
             super.onDispose();
         }
 
@@ -51,7 +67,7 @@ package net.wg.gui.lobby.techtree.controls
             {
                 if(StringUtils.isNotEmpty(_newFrame))
                 {
-                    App.utils.asserter.assert(_labelHash.hasOwnProperty(_newFrame),"Not found state " + _newFrame);
+                    App.utils.asserter.assert(_labelHash.hasOwnProperty(_newFrame),Errors.WASNT_FOUND);
                     this.borderStates.gotoAndPlay(_newFrame);
                     if(_baseDisposed)
                     {
@@ -75,17 +91,31 @@ package net.wg.gui.lobby.techtree.controls
                 this.borderStates.scaleY = (_originalHeight - _loc1_.height + this._flagScale * _loc1_.height) / _originalHeight;
                 if(this.arrowMc)
                 {
-                    this.arrowMc.x = (_loc1_.width * (1 + this._flagScale) >> 1) + ARROW_OFFEST;
+                    this.arrowMc.x = (_loc1_.width * (1 + this._flagScale) >> 1) + ARROW_OFFSET;
                 }
+                this.discount.x = _loc1_.width * (1 + this._flagScale) * 0.5 - this.discount.width + DISCOUNT_OFFSET_X;
+                this.discount.y = -_loc1_.height * this._flagScale * 0.5 + DISCOUNT_OFFSET_Y;
             }
         }
 
         override protected function showTooltip() : void
         {
-            if(_label != null && !_selected && App.toolTipMgr != null)
+            if(!_selected && this._tooltipMgr != null && StringUtils.isNotEmpty(_tooltip))
             {
-                App.toolTipMgr.showComplex(App.toolTipMgr.getNewFormatter().addHeader(TOOLTIPS.techtreepage_nations(_label),true).make());
+                if(this._isTooltipSpecial)
+                {
+                    this._tooltipMgr.showSpecial(_tooltip,null,_label);
+                }
+                else
+                {
+                    this._tooltipMgr.showComplex(this._tooltipMgr.getNewFormatter().addHeader(TOOLTIPS.techtreepage_nations(_tooltip),true).make());
+                }
             }
+        }
+
+        public function setDiscountVisible(param1:Boolean) : void
+        {
+            this.discount.visible = param1;
         }
 
         public function setFlagScale(param1:Number) : void
@@ -100,6 +130,11 @@ package net.wg.gui.lobby.techtree.controls
         public function get contentSize() : Rectangle
         {
             return this.borderStates?this.borderStates.contentSize:DEFAULT_CONTENT_SIZE;
+        }
+
+        public function set isTooltipSpecial(param1:Boolean) : void
+        {
+            this._isTooltipSpecial = param1;
         }
 
         override protected function handleMouseRelease(param1:MouseEvent) : void

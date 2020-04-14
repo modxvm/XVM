@@ -14,7 +14,11 @@ package net.wg.infrastructure.base.meta.impl
 
         public var onMessageDisappear:Function;
 
+        public var onMessageExecuted:Function;
+
         public var onMessageButtonClicked:Function;
+
+        public var hideBlur:Function;
 
         private var _vectorMessageContentVO:Vector.<MessageContentVO>;
 
@@ -56,10 +60,22 @@ package net.wg.infrastructure.base.meta.impl
             this.onMessageDisappear(param1);
         }
 
+        public function onMessageExecutedS(param1:String) : void
+        {
+            App.utils.asserter.assertNotNull(this.onMessageExecuted,"onMessageExecuted" + Errors.CANT_NULL);
+            this.onMessageExecuted(param1);
+        }
+
         public function onMessageButtonClickedS() : void
         {
             App.utils.asserter.assertNotNull(this.onMessageButtonClicked,"onMessageButtonClicked" + Errors.CANT_NULL);
             this.onMessageButtonClicked();
+        }
+
+        public function hideBlurS() : void
+        {
+            App.utils.asserter.assertNotNull(this.hideBlur,"hideBlur" + Errors.CANT_NULL);
+            this.hideBlur();
         }
 
         public final function as_setMessageData(param1:Array) : void

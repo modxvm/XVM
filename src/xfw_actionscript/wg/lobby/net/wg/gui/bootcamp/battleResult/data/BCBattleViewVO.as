@@ -8,9 +8,13 @@ package net.wg.gui.bootcamp.battleResult.data
 
         private static const STATS_FIELD:String = "stats";
 
-        private static const UNLOCKS_FIELD:String = "unlocksAndMedals";
+        private static const REWARDS:String = "rewards";
 
-        private static const VEHICLE_FIELD:String = "playerVehicle";
+        private static const UNLOCKS:String = "unlocks";
+
+        private static const RIBBONS:String = "ribbons";
+
+        private static const MEDALS:String = "medals";
 
         private static const XP_STATS_FIELD:String = "xp";
 
@@ -18,7 +22,11 @@ package net.wg.gui.bootcamp.battleResult.data
 
         public var stats:DataProvider;
 
-        public var unlocksAndMedals:DataProvider;
+        public var unlocks:DataProvider;
+
+        public var ribbons:DataProvider;
+
+        public var medals:DataProvider;
 
         public var showRewards:Boolean = true;
 
@@ -28,9 +36,13 @@ package net.wg.gui.bootcamp.battleResult.data
 
         public var hasUnlocks:Boolean = false;
 
-        public var finishReasonStr:String = "";
+        public var finishReason:String = "";
 
-        public var playerVehicle:PlayerVehicleVO = null;
+        public var playerName:String = "";
+
+        public var playerResult:String = "";
+
+        public var finishReasonStr:String = "";
 
         public var background:String = "";
 
@@ -41,36 +53,72 @@ package net.wg.gui.bootcamp.battleResult.data
             super(param1);
         }
 
+        override public function fromHash(param1:Object) : void
+        {
+            var _loc2_:BattleItemRendererVO = null;
+            super.fromHash(param1);
+            for each(_loc2_ in this.stats)
+            {
+                _loc2_.finishReason = this.finishReason;
+            }
+        }
+
         override protected function onDataWrite(param1:String, param2:Object) : Boolean
         {
             var _loc3_:Object = null;
-            var _loc4_:BattleItemRendrerVO = null;
+            var _loc4_:BattleItemRendererVO = null;
             var _loc5_:Array = null;
+            var _loc6_:String = null;
             if(param1 == STATS_FIELD)
             {
                 this.stats = new DataProvider();
                 _loc5_ = param2 as Array;
                 for each(_loc3_ in _loc5_)
                 {
-                    _loc4_ = new BattleItemRendrerVO(_loc3_);
+                    _loc4_ = new BattleItemRendererVO(_loc3_);
                     this.stats.push(_loc4_);
                 }
                 return false;
             }
-            if(param1 == UNLOCKS_FIELD)
+            if(param1 == REWARDS)
             {
-                this.unlocksAndMedals = new DataProvider();
-                _loc5_ = param2 as Array;
-                for each(_loc3_ in _loc5_)
+                for(_loc6_ in param2)
                 {
-                    _loc4_ = new BattleItemRendrerVO(_loc3_);
-                    this.unlocksAndMedals.push(_loc4_);
+                    this.onDataWrite(_loc6_,param2[_loc6_]);
                 }
                 return false;
             }
-            if(param1 == VEHICLE_FIELD)
+            if(param1 == UNLOCKS)
             {
-                this.playerVehicle = new PlayerVehicleVO(param2);
+                this.unlocks = new DataProvider();
+                _loc5_ = param2 as Array;
+                for each(_loc3_ in _loc5_)
+                {
+                    _loc4_ = new BattleItemRendererVO(_loc3_);
+                    this.unlocks.push(_loc4_);
+                }
+                return false;
+            }
+            if(param1 == RIBBONS)
+            {
+                this.ribbons = new DataProvider();
+                _loc5_ = param2 as Array;
+                for each(_loc3_ in _loc5_)
+                {
+                    _loc4_ = new BattleItemRendererVO(_loc3_);
+                    this.ribbons.push(_loc4_);
+                }
+                return false;
+            }
+            if(param1 == MEDALS)
+            {
+                this.medals = new DataProvider();
+                _loc5_ = param2 as Array;
+                for each(_loc3_ in _loc5_)
+                {
+                    _loc4_ = new BattleItemRendererVO(_loc3_);
+                    this.medals.push(_loc4_);
+                }
                 return false;
             }
             if(param1 == XP_STATS_FIELD)
@@ -88,7 +136,7 @@ package net.wg.gui.bootcamp.battleResult.data
 
         override protected function onDispose() : void
         {
-            var _loc1_:BattleItemRendrerVO = null;
+            var _loc1_:BattleItemRendererVO = null;
             if(this.stats)
             {
                 for each(_loc1_ in this.stats)
@@ -98,24 +146,46 @@ package net.wg.gui.bootcamp.battleResult.data
                 this.stats.cleanUp();
                 this.stats = null;
             }
-            if(this.unlocksAndMedals)
+            if(this.ribbons)
             {
-                for each(_loc1_ in this.unlocksAndMedals)
+                for each(_loc1_ in this.ribbons)
                 {
                     _loc1_.dispose();
                 }
-                this.unlocksAndMedals.cleanUp();
-                this.unlocksAndMedals = null;
+                this.ribbons.cleanUp();
+                this.ribbons = null;
+            }
+            if(this.medals)
+            {
+                for each(_loc1_ in this.medals)
+                {
+                    _loc1_.dispose();
+                }
+                this.medals.cleanUp();
+                this.medals = null;
+            }
+            if(this.unlocks)
+            {
+                for each(_loc1_ in this.unlocks)
+                {
+                    _loc1_.dispose();
+                }
+                this.unlocks.cleanUp();
+                this.unlocks = null;
             }
             this.resultTypeStr = null;
             this.background = null;
             this.finishReasonStr = null;
-            this.xp.dispose();
-            this.xp = null;
-            this.credits.dispose();
-            this.credits = null;
-            this.playerVehicle.dispose();
-            this.playerVehicle = null;
+            if(this.xp)
+            {
+                this.xp.dispose();
+                this.xp = null;
+            }
+            if(this.credits)
+            {
+                this.credits.dispose();
+                this.credits = null;
+            }
             super.onDispose();
         }
     }

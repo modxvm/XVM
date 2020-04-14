@@ -16,6 +16,7 @@ package net.wg.gui.components.advanced.tutorial
         public function TutorialHintArrowAnimation()
         {
             super();
+            showAnimation.addFrameScript(showAnimation.totalFrames - 1,this.endShowAnimationDispatch);
         }
 
         override protected function getAnimations() : void
@@ -50,7 +51,11 @@ package net.wg.gui.components.advanced.tutorial
 
         private function endShowAnimationDispatch() : void
         {
-            this.loop();
+            dispatchEvent(new TutorialHintEvent(TutorialHintEvent.ANIMATION_ENDED));
+            if(this._isLooped)
+            {
+                this.loop();
+            }
         }
 
         private function endLoopAnimationDispatch() : void
@@ -71,10 +76,6 @@ package net.wg.gui.components.advanced.tutorial
         public function set isLooped(param1:Boolean) : void
         {
             this._isLooped = param1;
-            if(this._isLooped)
-            {
-                showAnimation.addFrameScript(showAnimation.totalFrames - 1,this.endShowAnimationDispatch);
-            }
         }
     }
 }

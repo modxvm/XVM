@@ -35,6 +35,10 @@ package net.wg.gui.lobby.techtree.constants
 
         public static const ROOT_HANGAR:String = "hangar";
 
+        public static const ROOT_COLLECTIBLE:String = "collectible";
+
+        public static const ROOT_DISCOUNTED_COLLECTIBLE:String = "discountedCollectible";
+
         public function NodeRendererState()
         {
             super();

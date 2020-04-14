@@ -2,8 +2,8 @@ package net.wg.gui.lobby.modulesPanel
 {
     import net.wg.infrastructure.base.meta.impl.ModulesPanelMeta;
     import net.wg.gui.lobby.modulesPanel.interfaces.IModulesPanel;
-    import net.wg.gui.lobby.modulesPanel.components.ModuleSlot;
-    import net.wg.gui.lobby.modulesPanel.components.DeviceSlot;
+    import net.wg.gui.lobby.modulesPanel.interfaces.IModuleSlot;
+    import net.wg.gui.lobby.modulesPanel.interfaces.IDeviceSlot;
     import net.wg.infrastructure.managers.ITooltipMgr;
     import net.wg.utils.IUtils;
     import net.wg.data.constants.generated.FITTING_TYPES;
@@ -17,6 +17,7 @@ package net.wg.gui.lobby.modulesPanel
     import net.wg.data.Aliases;
     import net.wg.gui.lobby.modulesPanel.data.FittingSelectPopoverParams;
     import scaleform.gfx.MouseEventEx;
+    import net.wg.gui.lobby.modulesPanel.components.DeviceSlot;
 
     public class ModulesPanel extends ModulesPanelMeta implements IModulesPanel
     {
@@ -27,23 +28,23 @@ package net.wg.gui.lobby.modulesPanel
 
         private static const MODULES_PANEL_BTN_GROUP:String = "ModulesPanelBtnGroup";
 
-        public var gun:ModuleSlot = null;
+        public var gun:IModuleSlot = null;
 
-        public var turret:ModuleSlot = null;
+        public var turret:IModuleSlot = null;
 
-        public var engine:ModuleSlot = null;
+        public var engine:IModuleSlot = null;
 
-        public var chassis:ModuleSlot = null;
+        public var chassis:IModuleSlot = null;
 
-        public var radio:ModuleSlot = null;
+        public var radio:IModuleSlot = null;
 
         public var preferredLayout:int = 2;
 
-        protected var _slots:Vector.<DeviceSlot> = null;
+        protected var _slots:Vector.<IDeviceSlot> = null;
 
         private var _hasTurret:Boolean = false;
 
-        private var _modules:Vector.<DeviceSlot> = null;
+        protected var _modules:Vector.<IModuleSlot> = null;
 
         private var _toolTipMgr:ITooltipMgr;
 
@@ -61,30 +62,31 @@ package net.wg.gui.lobby.modulesPanel
         override protected function initialize() : void
         {
             super.initialize();
-            this._slots = new Vector.<DeviceSlot>(0);
+            this._slots = new Vector.<IDeviceSlot>(0);
             this.addSlots(this.gun,this.turret,this.chassis,this.engine,this.radio);
-            this._modules = new <DeviceSlot>[this.gun,this.turret,this.chassis,this.engine,this.radio];
+            this._modules = new <IModuleSlot>[this.gun,this.turret,this.chassis,this.engine,this.radio];
         }
 
         override protected function configUI() : void
         {
-            var _loc1_:DeviceSlot = null;
+            var _loc1_:IDeviceSlot = null;
+            var _loc2_:IModuleSlot = null;
             super.configUI();
             _deferredDispose = true;
             for each(_loc1_ in this._slots)
             {
-                this.configSlot(_loc1_);
+                this.configSlot(_loc1_.button);
             }
-            for each(_loc1_ in this._modules)
+            for each(_loc2_ in this._modules)
             {
-                _loc1_.type = FITTING_TYPES.MANDATORY_SLOTS[this._modules.indexOf(_loc1_)];
-                _loc1_.addEventListener(ButtonEvent.CLICK,this.onModuleSlotClickHandler);
+                _loc2_.type = FITTING_TYPES.MANDATORY_SLOTS[this._modules.indexOf(_loc2_)];
+                _loc2_.addEventListener(ButtonEvent.CLICK,this.onModuleSlotClickHandler);
             }
         }
 
         override protected function onBeforeDispose() : void
         {
-            var _loc1_:DeviceSlot = null;
+            var _loc1_:IDeviceSlot = null;
             var _loc2_:IEventDispatcher = null;
             for each(_loc1_ in this._slots)
             {
@@ -152,9 +154,9 @@ package net.wg.gui.lobby.modulesPanel
             this.turret.enabled = this._hasTurret && this.modulesEnabled;
         }
 
-        public function setItemsEnabled(param1:Vector.<DeviceSlot>, param2:Boolean) : void
+        public function setItemsEnabled(param1:Vector.<IDeviceSlot>, param2:Boolean) : void
         {
-            var _loc3_:DeviceSlot = null;
+            var _loc3_:IDeviceSlot = null;
             for each(_loc3_ in param1)
             {
                 if(_loc3_ == this.turret)
@@ -183,13 +185,13 @@ package net.wg.gui.lobby.modulesPanel
             this._slots.push.apply(this._slots,rest);
         }
 
-        protected function configSlot(param1:DeviceSlot) : void
+        protected function configSlot(param1:Button) : void
         {
             param1.addEventListener(ButtonEvent.CLICK,this.onSlotClickHandler);
             this.addToButtonGroup(param1);
         }
 
-        protected function clearSlot(param1:DeviceSlot) : void
+        protected function clearSlot(param1:IDeviceSlot) : void
         {
             param1.removeEventListener(ButtonEvent.CLICK,this.onSlotClickHandler);
         }
@@ -215,7 +217,7 @@ package net.wg.gui.lobby.modulesPanel
             invalidate(INV_SELECTION);
         }
 
-        protected function showFittingPopover(param1:DeviceSlot) : void
+        protected function showFittingPopover(param1:IDeviceSlot) : void
         {
             var _loc2_:String = Aliases.FITTING_SELECT_POPOVER;
             var _loc3_:Object = new FittingSelectPopoverParams(param1.type,param1.slotIndex,this.preferredLayout);
@@ -256,7 +258,7 @@ package net.wg.gui.lobby.modulesPanel
         {
             if(param1.buttonIdx == MouseEventEx.LEFT_BUTTON)
             {
-                this.showFittingPopover(DeviceSlot(param1.currentTarget));
+                this.showFittingPopover(IDeviceSlot(param1.currentTarget));
             }
         }
 
@@ -277,6 +279,10 @@ package net.wg.gui.lobby.modulesPanel
                     }
                 }
             }
+        }
+
+        public function playAnimation() : void
+        {
         }
     }
 }

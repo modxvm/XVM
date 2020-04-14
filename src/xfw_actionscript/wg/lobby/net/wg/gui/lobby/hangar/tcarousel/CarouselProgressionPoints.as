@@ -90,7 +90,7 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         private function onMouseOverHandler(param1:MouseEvent) : void
         {
-            App.toolTipMgr.showWulfTooltip(TOOLTIPS_CONSTANTS.BATTLE_PASS_VEHICLE_POINTS,false,this._intCD);
+            App.toolTipMgr.showWulfTooltip(TOOLTIPS_CONSTANTS.BATTLE_PASS_VEHICLE_POINTS,this._intCD);
         }
 
         private function onMouseOutHandler(param1:MouseEvent) : void

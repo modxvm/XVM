@@ -13,6 +13,8 @@ package net.wg.gui.lobby.techtree.constants
 
         public static const RENT:String = "rent";
 
+        public static const SHOP:String = "shop";
+
         public function ActionName()
         {
             super();

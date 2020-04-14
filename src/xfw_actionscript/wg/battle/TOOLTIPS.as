@@ -283,6 +283,8 @@ package
 
         public static const SETTINGS_SOUND_DEVICEALERT:String = "#tooltips:settings/sound/deviceAlert";
 
+        public static const SETTINGS_SOUND_SUBTITLES:String = "#tooltips:settings/sound/subtitles";
+
         public static const MINIMAPALPHA:String = "#tooltips:minimapAlpha";
 
         public static const HANGARCAMDROPDOWN:String = "#tooltips:hangarCamDropdown";
@@ -320,6 +322,8 @@ package
         public static const STORAGE_FILTERCOUNTER_CLOSEBUTTON:String = "#tooltips:storage/filterCounter/closeButton";
 
         public static const RESEARCHPAGE_VEHICLE_STATUS_PARENTMODULEISLOCKED:String = "#tooltips:researchPage/vehicle/status/parentModuleIsLocked";
+
+        public static const RESEARCHPAGE_COLLECTIBLEVEHICLE_VEHICLEENABLED:String = "#tooltips:researchPage/collectibleVehicle/vehicleEnabled";
 
         public static const AWARDITEM_ONEOF_RANKEDSEASON_PREVIEWSTYLE:String = "#tooltips:awardItem/oneof/rankedSeason/previewStyle";
 
@@ -680,6 +684,10 @@ package
         public static const SETTINGS_SOUND_DEVICEALERT_HEADER:String = "#tooltips:settings/sound/deviceAlert/header";
 
         public static const SETTINGS_SOUND_DEVICEALERT_BODY:String = "#tooltips:settings/sound/deviceAlert/body";
+
+        public static const SETTINGS_SOUND_SUBTITLES_HEADER:String = "#tooltips:settings/sound/subtitles/header";
+
+        public static const SETTINGS_SOUND_SUBTITLES_BODY:String = "#tooltips:settings/sound/subtitles/body";
 
         public static const LOBBYMENU_VERSIONINFOBUTTON_BODY:String = "#tooltips:lobbyMenu/versionInfoButton/body";
 
@@ -1282,6 +1290,8 @@ package
         public static const ACHIEVEMENT_PARAMS_VEHICLESTOKILL:String = "#tooltips:achievement/params/vehiclesToKill";
 
         public static const ACHIEVEMENT_PARAMS_VEHICLESTORESEARCH:String = "#tooltips:achievement/params/vehiclesToResearch";
+
+        public static const ACHIEVEMENT_PARAMS_VEHICLESTOBUY:String = "#tooltips:achievement/params/vehiclesToBuy";
 
         public static const ACHIEVEMENT_PARAMS_VEHICLES:String = "#tooltips:achievement/params/vehicles";
 
@@ -1935,6 +1945,8 @@ package
 
         public static const HEADER_BUTTONS_TECHTREE_BODY:String = "#tooltips:header/buttons/techtree/body";
 
+        public static const HEADER_BUTTONS_TECHTREE_EXTENDED_DESCRIPTION:String = "#tooltips:header/buttons/techtree/extended/description";
+
         public static const HEADER_BUTTONS_BARRACKS_HEADER:String = "#tooltips:header/buttons/barracks/header";
 
         public static const HEADER_BUTTONS_BARRACKS_BODY:String = "#tooltips:header/buttons/barracks/body";
@@ -2539,6 +2551,10 @@ package
 
         public static const RESEARCHPAGE_VEHICLE_STATUS_PARENTMODULEISLOCKED_BODY:String = "#tooltips:researchPage/vehicle/status/parentModuleIsLocked/body";
 
+        public static const RESEARCHPAGE_COLLECTIBLEVEHICLE_VEHICLEENABLED_HEADER:String = "#tooltips:researchPage/collectibleVehicle/vehicleEnabled/header";
+
+        public static const RESEARCHPAGE_COLLECTIBLEVEHICLE_VEHICLEENABLED_BODY:String = "#tooltips:researchPage/collectibleVehicle/vehicleEnabled/body";
+
         public static const TECHTREEPAGE_NATIONS_USSR:String = "#tooltips:techTreePage/nations/ussr";
 
         public static const TECHTREEPAGE_NATIONS_GERMANY:String = "#tooltips:techTreePage/nations/germany";
@@ -2561,6 +2577,20 @@ package
 
         public static const TECHTREEPAGE_NATIONS_ITALY:String = "#tooltips:techTreePage/nations/italy";
 
+        public static const TECHTREEPAGE_EVENT_NAME:String = "#tooltips:techTreePage/event/name";
+
+        public static const TECHTREEPAGE_EVENT_TIME:String = "#tooltips:techTreePage/event/time";
+
+        public static const TECHTREEPAGE_EVENT_TIMELEFT_DAYS:String = "#tooltips:techTreePage/event/timeLeft/days";
+
+        public static const TECHTREEPAGE_EVENT_TIMELEFT_HOURS:String = "#tooltips:techTreePage/event/timeLeft/hours";
+
+        public static const TECHTREEPAGE_EVENT_TIMELEFT_MIN:String = "#tooltips:techTreePage/event/timeLeft/min";
+
+        public static const TECHTREEPAGE_EVENT_TIMELEFT_LESSMIN:String = "#tooltips:techTreePage/event/timeLeft/lessMin";
+
+        public static const TECHTREEPAGE_EVENT_DESCRIPTION:String = "#tooltips:techTreePage/event/description";
+
         public static const TECHTREEPAGE_BLUEPRINTSSWITCHTOOLTIP_HEADER:String = "#tooltips:techTreePage/blueprintsSwitchTooltip/header";
 
         public static const TECHTREEPAGE_BLUEPRINTSSWITCHTOOLTIP_BODY:String = "#tooltips:techTreePage/blueprintsSwitchTooltip/body";
@@ -2572,6 +2602,28 @@ package
         public static const TECHTREEPAGE_BLUEPRINTSSWITCHTOOLTIPDISABLED_HEADER:String = "#tooltips:techTreePage/blueprintsSwitchTooltipDisabled/header";
 
         public static const TECHTREEPAGE_BLUEPRINTSSWITCHTOOLTIPDISABLED_BODY:String = "#tooltips:techTreePage/blueprintsSwitchTooltipDisabled/body";
+
+        public static const COLLECTIBLEVEHICLETOOLTIP_HEADER:String = "#tooltips:collectibleVehicleTooltip/header";
+
+        public static const COLLECTIBLEVEHICLETOOLTIP_STATISTICS:String = "#tooltips:collectibleVehicleTooltip/statistics";
+
+        public static const COLLECTIBLEVEHICLETOOLTIP_DESCRIPTION:String = "#tooltips:collectibleVehicleTooltip/description";
+
+        public static const COLLECTIBLEVEHICLETOOLTIP_ELITE:String = "#tooltips:collectibleVehicleTooltip/elite";
+
+        public static const COLLECTIBLEVEHICLETOOLTIP_STATUS_PURCHASEUNAVAILABLE:String = "#tooltips:collectibleVehicleTooltip/status/purchaseUnavailable";
+
+        public static const COLLECTIBLEVEHICLETOOLTIP_STATUS_PURCHASEAVAILABLE:String = "#tooltips:collectibleVehicleTooltip/status/purchaseAvailable";
+
+        public static const COLLECTIBLEVEHICLETOOLTIP_STATUS_CONDITION:String = "#tooltips:collectibleVehicleTooltip/status/condition";
+
+        public static const COLLECTIBLEVEHICLETOOLTIP_STATUS_PURCHASED:String = "#tooltips:collectibleVehicleTooltip/status/purchased";
+
+        public static const COLLECTIBLEVEHICLETOOLTIP_STATUS_LEVEL:String = "#tooltips:collectibleVehicleTooltip/status/level";
+
+        public static const COLLECTIBLEVEHICLETOOLTIP_SWITCHOFF_HEADER:String = "#tooltips:collectibleVehicleTooltip/switchOff/header";
+
+        public static const COLLECTIBLEVEHICLETOOLTIP_SWITCHOFF_TEXT:String = "#tooltips:collectibleVehicleTooltip/switchOff/text";
 
         public static const BLUEPRINT_VEHICLEBLUEPRINTTOOLTIP_HEADER:String = "#tooltips:blueprint/VehicleBlueprintTooltip/header";
 
@@ -3453,6 +3505,10 @@ package
 
         public static const AWARDITEM_GOLD_BODY:String = "#tooltips:awardItem/gold/body";
 
+        public static const AWARDITEM_EVENTCOIN_HEADER:String = "#tooltips:awardItem/eventCoin/header";
+
+        public static const AWARDITEM_EVENTCOIN_BODY:String = "#tooltips:awardItem/eventCoin/body";
+
         public static const AWARDITEM_FREEXP_HEADER:String = "#tooltips:awardItem/freeXP/header";
 
         public static const AWARDITEM_FREEXP_BODY:String = "#tooltips:awardItem/freeXP/body";
@@ -4027,6 +4083,10 @@ package
 
         public static const VEHICLEPREVIEW_BUYBUTTON_ENDTIME_BODY:String = "#tooltips:vehiclePreview/buyButton/endTime/body";
 
+        public static const VEHICLEPREVIEW_BUYBUTTON_NOTUNLOCKEDNATION_HEADER:String = "#tooltips:vehiclePreview/buyButton/notUnlockedNation/header";
+
+        public static const VEHICLEPREVIEW_BUYBUTTON_NOTUNLOCKEDNATION_BODY:String = "#tooltips:vehiclePreview/buyButton/notUnlockedNation/body";
+
         public static const VEHICLEPREVIEW_MODULS_HEADER:String = "#tooltips:vehiclePreview/moduls/header";
 
         public static const VEHICLEPREVIEW_MODULS_BODY:String = "#tooltips:vehiclePreview/moduls/body";
@@ -4535,7 +4595,7 @@ package
 
         public static const ADVANCED_CAMOUFLAGE:String = "#tooltips:advanced/camouflage";
 
-        public static const ADVANCED_CAMOUFLAGEBATTLEBOOSTER:String = "#tooltips:advanced/camouflageBattleBooster";
+        public static const ADVANCED_NATURALCOVER:String = "#tooltips:advanced/naturalCover";
 
         public static const ADVANCED_BROTHERHOOD:String = "#tooltips:advanced/brotherhood";
 
@@ -5384,6 +5444,8 @@ package
         public static const MARATHON_BODY:String = "#tooltips:marathon/body";
 
         public static const MARATHON_BODY_EXTRA:String = "#tooltips:marathon/body/extra";
+
+        public static const MARATHON_BODY_EXTRA_SMART:String = "#tooltips:marathon/body/extra_smart";
 
         public static const MARATHON_STATE_START:String = "#tooltips:marathon/state/start";
 

@@ -829,6 +829,8 @@ package
 
         public static const VEHICLE_BUY_WALLET_NOT_AVAILABLE:String = "#system_messages:vehicle_buy/wallet_not_available";
 
+        public static const VEHICLE_BUY_NOT_UNLOCKED_NATION:String = "#system_messages:vehicle_buy/not_unlocked_nation";
+
         public static const VEHICLE_RENT_SUCCESS:String = "#system_messages:vehicle_rent/success";
 
         public static const VEHICLE_RENT_BUYOPTION:String = "#system_messages:vehicle_rent/buyOption";
@@ -1085,6 +1087,8 @@ package
 
         public static const ARTEFACT_BUY_NOT_ENOUGH_CRYSTAL:String = "#system_messages:artefact_buy/not_enough_crystal";
 
+        public static const ARTEFACT_BUY_NOT_ENOUGH_EVENTCOIN:String = "#system_messages:artefact_buy/not_enough_eventCoin";
+
         public static const ARTEFACT_BUY_WALLET_NOT_AVAILABLE:String = "#system_messages:artefact_buy/wallet_not_available";
 
         public static const ARTEFACT_BUY_SERVER_ERROR:String = "#system_messages:artefact_buy/server_error";
@@ -1113,11 +1117,15 @@ package
 
         public static const BATTLEBOOSTER_BUY_NOT_ENOUGH_CRYSTAL:String = "#system_messages:battleBooster_buy/not_enough_crystal";
 
+        public static const BATTLEBOOSTER_BUY_NOT_ENOUGH_EVENTCOIN:String = "#system_messages:battleBooster_buy/not_enough_eventCoin";
+
         public static const BATTLEBOOSTER_BUY_CREDITS_ERROR:String = "#system_messages:battleBooster_buy/credits_error";
 
         public static const BATTLEBOOSTER_BUY_GOLD_ERROR:String = "#system_messages:battleBooster_buy/gold_error";
 
         public static const BATTLEBOOSTER_BUY_CRYSTAL_ERROR:String = "#system_messages:battleBooster_buy/crystal_error";
+
+        public static const BATTLEBOOSTER_BUY_EVENTCOIN_ERROR:String = "#system_messages:battleBooster_buy/eventCoin_error";
 
         public static const BATTLEBOOSTER_BUY_WALLET_NOT_AVAILABLE:String = "#system_messages:battleBooster_buy/wallet_not_available";
 
@@ -2065,6 +2073,8 @@ package
 
         public static const RANKED_NOTIFICATIONS_BONUSNAME_CRYSTAL:String = "#system_messages:ranked/notifications/bonusName/crystal";
 
+        public static const RANKED_NOTIFICATIONS_BONUSNAME_EVENTCOIN:String = "#system_messages:ranked/notifications/bonusName/eventCoin";
+
         public static const RANKED_NOTIFICATIONS_BONUSNAME_CREDITS:String = "#system_messages:ranked/notifications/bonusName/credits";
 
         public static const RANKED_NOTIFICATIONS_BONUSNAME_GOLD:String = "#system_messages:ranked/notifications/bonusName/gold";
@@ -2276,6 +2286,20 @@ package
         public static const UPGRADETROPHYDEVICE_SWITCH_OFF_BODY:String = "#system_messages:upgradeTrophyDevice/switch_off/body";
 
         public static const BATTLEPASS_BADGEREMOVED_TEXT:String = "#system_messages:battlePass/badgeRemoved/text";
+
+        public static const COLLECTORVEHICLE_SWITCH_OFF_TITLE:String = "#system_messages:collectorVehicle/switch_off/title";
+
+        public static const COLLECTORVEHICLE_SWITCH_OFF_BODY:String = "#system_messages:collectorVehicle/switch_off/body";
+
+        public static const COLLECTORVEHICLE_SWITCH_ON_TITLE:String = "#system_messages:collectorVehicle/switch_on/title";
+
+        public static const COLLECTORVEHICLE_SWITCH_ON_BODY:String = "#system_messages:collectorVehicle/switch_on/body";
+
+        public static const TECHTREE_ACTION_HEADER:String = "#system_messages:techtree/action/header";
+
+        public static const TECHTREE_ACTION_TEXT:String = "#system_messages:techtree/action/text";
+
+        public static const TECHTREE_ACTION_EXPIRETIME:String = "#system_messages:techtree/action/expireTime";
 
         public function SYSTEM_MESSAGES()
         {

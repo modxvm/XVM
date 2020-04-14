@@ -53,6 +53,8 @@ package net.wg.gui.lobby.techtree.interfaces
 
         function isPremium() : Boolean;
 
+        function isCollectible() : Boolean;
+
         function inInventory() : Boolean;
 
         function isTradeIn() : Boolean;
@@ -62,6 +64,8 @@ package net.wg.gui.lobby.techtree.interfaces
         function canHaveBlueprint() : Boolean;
 
         function isSelected() : Boolean;
+
+        function isTopActionNode() : Boolean;
 
         function invalidateNodeState() : void;
 

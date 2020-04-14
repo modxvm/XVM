@@ -9,13 +9,14 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
     import flash.display.Sprite;
     import net.wg.gui.battle.random.views.stats.components.fullStats.interfaces.ISquadHandler;
     import net.wg.gui.battle.views.stats.SquadTooltip;
+    import net.wg.infrastructure.managers.ITooltipMgr;
     import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
+    import flash.events.MouseEvent;
     import net.wg.data.constants.InvalidationType;
     import net.wg.gui.battle.views.stats.constants.SquadInvalidationType;
-    import org.idmedia.as3commons.util.StringUtils;
     import net.wg.gui.battle.views.stats.constants.DynamicSquadState;
-    import flash.events.MouseEvent;
     import net.wg.data.constants.generated.BATTLEATLAS;
+    import org.idmedia.as3commons.util.StringUtils;
 
     public class DynamicSquadCtrl extends BattleUIComponentsHolder implements IClickButtonHandler, IRollOutButtonHandler
     {
@@ -64,11 +65,14 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
 
         private var _toolTipString:String = null;
 
+        private var _tooltipMgr:ITooltipMgr = null;
+
         private var _activePlayerData:DAAPIVehicleInfoVO = null;
 
         public function DynamicSquadCtrl(param1:SquadInviteStatusView, param2:BattleAtlasSprite, param3:BattleButton, param4:BattleButton, param5:Sprite, param6:BattleAtlasSprite = null)
         {
             super();
+            this._tooltipMgr = App.toolTipMgr;
             this._state = DynamicSquadState.NONE;
             this._squadStatus = param1;
             this._squadIcon = param2;
@@ -86,172 +90,11 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
             this._tooltip = new SquadTooltip();
         }
 
-        public function setState(param1:int) : void
-        {
-            if(this._state == param1)
-            {
-                return;
-            }
-            this._state = param1;
-            this.updateSquadButtons();
-            invalidate(InvalidationType.STATE);
-        }
-
-        public function setIsInviteShown(param1:Boolean) : void
-        {
-            if(this._isInviteShown == param1)
-            {
-                return;
-            }
-            this._isInviteShown = param1;
-            invalidate(SquadInvalidationType.ACTIVE_MOUSE_OVER);
-        }
-
-        public function setIsInteractive(param1:Boolean) : void
-        {
-            if(this._isInteractive == param1)
-            {
-                return;
-            }
-            this.setMouseEnabled(param1);
-            if(!param1)
-            {
-                this._isMouseOver = param1;
-            }
-            this._isInteractive = param1;
-            this.updateTooltip();
-            this.updateSquadButtons();
-            invalidate(SquadInvalidationType.ACTIVE_MOUSE_OVER);
-        }
-
-        public function setSquadIndex(param1:int, param2:Boolean) : void
-        {
-            if(this._squadIndex == param1 && this._isSquadPersonal == param2)
-            {
-                return;
-            }
-            this._squadIndex = param1;
-            this._isSquadPersonal = param2;
-            invalidate(SquadInvalidationType.SQUAD_INDEX);
-        }
-
-        public function setNoSound(param1:Boolean) : void
-        {
-            if(this._isNoSound == param1)
-            {
-                return;
-            }
-            this._isNoSound = param1;
-            invalidate(SquadInvalidationType.SQUAD_NO_SOUND);
-        }
-
-        public function setIsEnemy(param1:Boolean) : void
-        {
-            this._isEnemy = param1;
-        }
-
-        public function setActivePlayerData(param1:DAAPIVehicleInfoVO) : void
-        {
-            this._activePlayerData = param1;
-        }
-
-        public function setCurrentPlayerAnonymized() : void
-        {
-            this._isCurrentPlayerAnonymized = true;
-        }
-
-        public function setCurrentPlayerFakeName(param1:String) : void
-        {
-            this._currentPlayerFakeName = param1;
-        }
-
-        private function makeTooltipString() : void
-        {
-            if(StringUtils.isNotEmpty(this._currentPlayerFakeName))
-            {
-                this._toolTipString = this._isCurrentPlayerInClan?App.utils.locale.makeString(TOOLTIPS.ANONYMIZER_BATTLE_TEAMLIST_CLAN,{"fakeName":this._currentPlayerFakeName}):App.utils.locale.makeString(TOOLTIPS.ANONYMIZER_BATTLE_TEAMLIST_NOCLAN,{"fakeName":this._currentPlayerFakeName});
-            }
-        }
-
-        public function setIsCurrentPlayerInClan(param1:Boolean) : void
-        {
-            this._isCurrentPlayerInClan = param1;
-        }
-
-        public function addActionHandler(param1:ISquadHandler) : void
-        {
-            this._handler = param1;
-        }
-
-        public function set sessionID(param1:String) : void
-        {
-            this._sessionID = param1;
-        }
-
-        public function get sessionID() : String
-        {
-            return this._sessionID;
-        }
-
-        public function get isAddBtAvailable() : Boolean
-        {
-            return this._activeButton == this._squadAddBt;
-        }
-
-        public function get isAcceptBtAvailable() : Boolean
-        {
-            return this._activeButton == this._squadAcceptBt;
-        }
-
-        public function reset() : void
-        {
-            this._state = DynamicSquadState.NONE;
-            if(this._isInteractive)
-            {
-                this.setMouseEnabled(false);
-            }
-            this._isInviteShown = false;
-            this._isInteractive = false;
-            invalidate(InvalidationType.ALL);
-        }
-
-        public function onButtonClick(param1:Object) : void
-        {
-            DebugUtils.LOG_DEBUG("[DynamicSquadCtrl] onButtonClick",param1);
-            if(param1.name == this._squadAcceptBt.name)
-            {
-                if(this._handler)
-                {
-                    this._handler.onAcceptSquad(this);
-                }
-            }
-            else if(param1.name == this._squadAddBt.name)
-            {
-                if(this._handler)
-                {
-                    this._handler.onAddToSquad(this);
-                }
-            }
-        }
-
-        public function onButtonRollOut(param1:Object) : void
-        {
-            if(this._isMouseOver && !this.getIsMouseOver())
-            {
-                this._isMouseOver = false;
-                this.updateTooltip();
-                this.updateSquadButtons();
-                invalidate(SquadInvalidationType.ACTIVE_MOUSE_OVER);
-            }
-        }
-
         override protected function onDispose() : void
         {
             this.setMouseEnabled(false);
             this._hitArea.removeEventListener(MouseEvent.ROLL_OVER,this.onMouseRollOverHandler);
             this._hitArea.removeEventListener(MouseEvent.ROLL_OUT,this.onMouseRollOutHandler);
-            this._squadAcceptBt.removeEventListener(MouseEvent.ROLL_OUT,this.onSquadBtRollOutHandler);
-            this._squadAddBt.removeEventListener(MouseEvent.ROLL_OUT,this.onSquadBtRollOutHandler);
             this._squadStatus = null;
             this._squadIcon = null;
             this._squadAcceptBt = null;
@@ -265,42 +108,8 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
             this._isCurrentPlayerInClan = false;
             this._currentPlayerFakeName = null;
             this._activePlayerData = null;
+            this._tooltipMgr = null;
             super.onDispose();
-        }
-
-        private function onMouseRollOverHandler(param1:MouseEvent) : void
-        {
-            if(this._isMouseOver)
-            {
-                return;
-            }
-            this._isMouseOver = true;
-            this.updateTooltip();
-            this.updateSquadButtons();
-            invalidate(SquadInvalidationType.ACTIVE_MOUSE_OVER);
-        }
-
-        private function onMouseRollOutHandler(param1:MouseEvent) : void
-        {
-            if(this.getIsMouseOver())
-            {
-                return;
-            }
-            this._isMouseOver = false;
-            this.updateTooltip();
-            this.updateSquadButtons();
-            invalidate(SquadInvalidationType.ACTIVE_MOUSE_OVER);
-        }
-
-        private function onSquadBtRollOutHandler(param1:MouseEvent) : void
-        {
-            if(this._isMouseOver && !this.getIsMouseOver())
-            {
-                this._isMouseOver = false;
-                this.updateTooltip();
-                this.updateSquadButtons();
-                invalidate(SquadInvalidationType.ACTIVE_MOUSE_OVER);
-            }
         }
 
         override protected function draw() : void
@@ -332,6 +141,152 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
                 {
                     this._squadIcon.visible = false;
                 }
+            }
+        }
+
+        public function addActionHandler(param1:ISquadHandler) : void
+        {
+            this._handler = param1;
+        }
+
+        public function onButtonClick(param1:Object) : void
+        {
+            if(param1.name == this._squadAcceptBt.name)
+            {
+                if(this._handler)
+                {
+                    this._handler.onAcceptSquad(this);
+                }
+            }
+            else if(param1.name == this._squadAddBt.name)
+            {
+                if(this._handler)
+                {
+                    this._handler.onAddToSquad(this);
+                }
+            }
+        }
+
+        public function onButtonRollOut(param1:Object) : void
+        {
+            if(this._isMouseOver && !this.getIsMouseOver())
+            {
+                this._isMouseOver = false;
+                this.updateTooltip();
+                this.updateSquadButtons();
+                invalidate(SquadInvalidationType.ACTIVE_MOUSE_OVER);
+            }
+        }
+
+        public function reset() : void
+        {
+            this._state = DynamicSquadState.NONE;
+            if(this._isInteractive)
+            {
+                this.setMouseEnabled(false);
+            }
+            this._isInviteShown = false;
+            this._isInteractive = false;
+            invalidate(InvalidationType.ALL);
+        }
+
+        public function setActivePlayerData(param1:DAAPIVehicleInfoVO) : void
+        {
+            this._activePlayerData = param1;
+        }
+
+        public function setCurrentPlayerAnonymized() : void
+        {
+            this._isCurrentPlayerAnonymized = true;
+        }
+
+        public function setCurrentPlayerFakeName(param1:String) : void
+        {
+            this._currentPlayerFakeName = param1;
+            if(!this._toolTipString)
+            {
+                this.makeTooltipString();
+            }
+        }
+
+        public function setIsCurrentPlayerInClan(param1:Boolean) : void
+        {
+            this._isCurrentPlayerInClan = param1;
+            if(!this._toolTipString)
+            {
+                this.makeTooltipString();
+            }
+        }
+
+        public function setIsEnemy(param1:Boolean) : void
+        {
+            this._isEnemy = param1;
+        }
+
+        public function setIsInteractive(param1:Boolean) : void
+        {
+            if(this._isInteractive == param1)
+            {
+                return;
+            }
+            this.setMouseEnabled(param1);
+            if(!param1)
+            {
+                this._isMouseOver = param1;
+            }
+            this._isInteractive = param1;
+            this.updateTooltip();
+            this.updateSquadButtons();
+            invalidate(SquadInvalidationType.ACTIVE_MOUSE_OVER);
+        }
+
+        public function setIsInviteShown(param1:Boolean) : void
+        {
+            if(this._isInviteShown == param1)
+            {
+                return;
+            }
+            this._isInviteShown = param1;
+            invalidate(SquadInvalidationType.ACTIVE_MOUSE_OVER);
+        }
+
+        public function setNoSound(param1:Boolean) : void
+        {
+            if(this._isNoSound == param1)
+            {
+                return;
+            }
+            this._isNoSound = param1;
+            invalidate(SquadInvalidationType.SQUAD_NO_SOUND);
+        }
+
+        public function setSquadIndex(param1:int, param2:Boolean) : void
+        {
+            if(this._squadIndex == param1 && this._isSquadPersonal == param2)
+            {
+                return;
+            }
+            this._squadIndex = param1;
+            this._isSquadPersonal = param2;
+            invalidate(SquadInvalidationType.SQUAD_INDEX);
+        }
+
+        public function setState(param1:int) : void
+        {
+            if(this._state == param1)
+            {
+                return;
+            }
+            this._state = param1;
+            this.updateSquadButtons();
+            invalidate(InvalidationType.STATE);
+        }
+
+        private function makeTooltipString() : void
+        {
+            if(StringUtils.isNotEmpty(this._currentPlayerFakeName))
+            {
+                this._toolTipString = this._isCurrentPlayerInClan?App.utils.locale.makeString(TOOLTIPS.ANONYMIZER_BATTLE_TEAMLIST_CLAN,{"fakeName":this._currentPlayerFakeName}):App.utils.locale.makeString(TOOLTIPS.ANONYMIZER_BATTLE_TEAMLIST_NOCLAN,{"fakeName":this._currentPlayerFakeName});
             }
         }
 
@@ -391,17 +346,14 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
                 {
                     this._tooltip.show(this._state,this._isEnemy,this._activePlayerData.isAnonymized,StringUtils.isNotEmpty(this._activePlayerData.clanAbbrev));
                 }
-                if(this._state == DynamicSquadState.NONE && this._isCurrentPlayerAnonymized)
+                if(this._state == DynamicSquadState.NONE && this._isCurrentPlayerAnonymized && this._toolTipString)
                 {
-                    if(!this._toolTipString)
-                    {
-                        this.makeTooltipString();
-                    }
-                    if(this._toolTipString)
-                    {
-                        App.toolTipMgr.show(this._toolTipString);
-                    }
+                    this._tooltipMgr.show(this._toolTipString);
                 }
+            }
+            else if(this._state == DynamicSquadState.NONE && this._isCurrentPlayerAnonymized && this._toolTipString)
+            {
+                this._tooltipMgr.hide();
             }
             else
             {
@@ -435,6 +387,50 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
                 this._activeButton = null;
                 this._handler.onSquadBtVisibleChange(this);
             }
+        }
+
+        public function get sessionID() : String
+        {
+            return this._sessionID;
+        }
+
+        public function set sessionID(param1:String) : void
+        {
+            this._sessionID = param1;
+        }
+
+        public function get isAddBtAvailable() : Boolean
+        {
+            return this._activeButton == this._squadAddBt;
+        }
+
+        public function get isAcceptBtAvailable() : Boolean
+        {
+            return this._activeButton == this._squadAcceptBt;
+        }
+
+        private function onMouseRollOverHandler(param1:MouseEvent) : void
+        {
+            if(this._isMouseOver)
+            {
+                return;
+            }
+            this._isMouseOver = true;
+            this.updateTooltip();
+            this.updateSquadButtons();
+            invalidate(SquadInvalidationType.ACTIVE_MOUSE_OVER);
+        }
+
+        private function onMouseRollOutHandler(param1:MouseEvent) : void
+        {
+            if(this.getIsMouseOver())
+            {
+                return;
+            }
+            this._isMouseOver = false;
+            this.updateTooltip();
+            this.updateSquadButtons();
+            invalidate(SquadInvalidationType.ACTIVE_MOUSE_OVER);
         }
     }
 }

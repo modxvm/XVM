@@ -15,6 +15,7 @@ package net.wg.gui.lobby.techtree.nodes
     import net.wg.gui.lobby.techtree.TechTreeEvent;
     import net.wg.data.constants.generated.NODE_STATE_FLAGS;
     import net.wg.gui.lobby.techtree.constants.ColorIndex;
+    import net.wg.data.constants.Values;
     import net.wg.infrastructure.exceptions.AbstractException;
     import net.wg.data.constants.Errors;
     import flash.geom.Point;
@@ -25,13 +26,13 @@ package net.wg.gui.lobby.techtree.nodes
     public class Renderer extends SoundListItemRenderer implements IRenderer
     {
 
+        public static const LINES_AND_ARROWS_NAME:String = "linesAndArrows";
+
         private static const STATE_PREFIX_SELECTED:String = "selected_";
 
         private static const STATE_UP:String = "up";
 
         private static const STATE_UNION:String = "_";
-
-        protected static const LINES_AND_ARROWS_NAME:String = "linesAndArrows";
 
         public var hit:MovieClip = null;
 
@@ -182,7 +183,7 @@ package net.wg.gui.lobby.techtree.nodes
 
         public function getGraphicsName() : String
         {
-            return LINES_AND_ARROWS_NAME + this._entityType.toString() + _index.toString();
+            return LINES_AND_ARROWS_NAME;
         }
 
         public function getID() : uint
@@ -192,7 +193,7 @@ package net.wg.gui.lobby.techtree.nodes
 
         public function getIconPath() : String
         {
-            return this._dataInited?this._valueObject.iconPath:"";
+            return this._dataInited?this._valueObject.iconPath:Values.EMPTY_STR;
         }
 
         public function getInX() : Number
@@ -202,12 +203,12 @@ package net.wg.gui.lobby.techtree.nodes
 
         public function getItemName() : String
         {
-            return this._dataInited?this._valueObject.nameString:"";
+            return this._dataInited?this._valueObject.nameString:Values.EMPTY_STR;
         }
 
         public function getItemType() : String
         {
-            return this._dataInited?this._valueObject.primaryClassName:"";
+            return this._dataInited?this._valueObject.primaryClassName:Values.EMPTY_STR;
         }
 
         public function getLevel() : int
@@ -281,6 +282,11 @@ package net.wg.gui.lobby.techtree.nodes
             return this._dataInited && (this._valueObject.state & NODE_STATE_FLAGS.PREMIUM) > 0;
         }
 
+        public function isCollectible() : Boolean
+        {
+            return this._dataInited && (this._valueObject.state & NODE_STATE_FLAGS.COLLECTIBLE) > 0;
+        }
+
         public function isRentAvailable() : Boolean
         {
             if(!this._dataInited)
@@ -302,6 +308,11 @@ package net.wg.gui.lobby.techtree.nodes
         public function isSelected() : Boolean
         {
             throw new AbstractException(Errors.ABSTRACT_INVOKE);
+        }
+
+        public function isTopActionNode() : Boolean
+        {
+            return this._dataInited?this._valueObject.isTopActionNode:false;
         }
 
         public function isTradeIn() : Boolean
@@ -359,16 +370,6 @@ package net.wg.gui.lobby.techtree.nodes
 
         protected function validateData() : void
         {
-        }
-
-        protected function get mouseEnabledChildren() : Vector.<DisplayObject>
-        {
-            this._enabledChildren.splice(0,this._enabledChildren.length);
-            if(this.hit != null)
-            {
-                this._enabledChildren.push(this.hit);
-            }
-            return this._enabledChildren;
         }
 
         protected function addNodeEventHandlers() : void
@@ -493,6 +494,21 @@ package net.wg.gui.lobby.techtree.nodes
             return this._matrixPosition;
         }
 
+        public function get hasTechTreeEvent() : Boolean
+        {
+            return this._dataInited && this._valueObject.hasTechTreeEvent;
+        }
+
+        protected function get mouseEnabledChildren() : Vector.<DisplayObject>
+        {
+            this._enabledChildren.splice(0,this._enabledChildren.length);
+            if(this.hit != null)
+            {
+                this._enabledChildren.push(this.hit);
+            }
+            return this._enabledChildren;
+        }
+
         protected function get hasAction() : Boolean
         {
             return this._dataInited && (this._valueObject.state & NODE_STATE_FLAGS.ACTION) > 0;
@@ -500,7 +516,7 @@ package net.wg.gui.lobby.techtree.nodes
 
         protected function get blueprintLabel() : String
         {
-            return this._dataInited?this._valueObject.blueprintLabel:"";
+            return this._dataInited?this._valueObject.blueprintLabel:Values.EMPTY_STR;
         }
 
         protected function get blueprintProgress() : Number

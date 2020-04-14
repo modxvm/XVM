@@ -61,7 +61,7 @@ package net.wg.gui.lobby.epicBattles.components
             320:66
         };
 
-        private const SEASON_H_OFFSET:Array = [0,0,0,1,1];
+        private const SEASON_H_OFFSET:Array = [1,0,0,1,1];
 
         private const LEVEL_H_OFFSET:Object = {
             130:1,

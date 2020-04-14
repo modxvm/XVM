@@ -38,6 +38,8 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
 
         private var _isRenderingAvailable:Boolean;
 
+        private var _activePlayerData:DAAPIVehicleInfoVO;
+
         public function EpicRandomFullStatsTableCtrl(param1:EpicRandomFullStatsTable, param2:StatsBaseMeta)
         {
             super(param1);
@@ -58,6 +60,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
         {
             this._squadHandler = null;
             this._table = null;
+            this._activePlayerData = null;
             super.onDispose();
         }
 
@@ -322,6 +325,19 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
             }
         }
 
+        private function updateActivePlayerVO(param1:Vector.<int>) : void
+        {
+            var _loc2_:* = 0;
+            for each(_loc2_ in param1)
+            {
+                this._activePlayerData = teamDP.requestItemAt(_loc2_) as DAAPIVehicleInfoVO;
+                if(this._activePlayerData.isCurrentPlayer)
+                {
+                    break;
+                }
+            }
+        }
+
         public function get isRenderingAvailable() : Boolean
         {
             return this._isRenderingAvailable;
@@ -368,6 +384,10 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
             var _loc2_:uint = this._table.team1PlayerList.scrollPosition;
             var _loc3_:uint = _loc2_ + this._table.team1PlayerList.rowCount - 1;
             var _loc4_:Vector.<int> = Vector.<int>(param1.data);
+            if(this._activePlayerData == null)
+            {
+                this.updateActivePlayerVO(_loc4_);
+            }
             for each(_loc5_ in _loc4_)
             {
                 if(!(_loc5_ < _loc2_ || _loc5_ > _loc3_))
@@ -379,6 +399,10 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
                         this.setSquadSettingsForRenderer(_loc7_);
                         _loc7_.setDAAPIVehicleInfoVO(_loc6_,false);
                         this.onItemDataSet(_loc7_,false);
+                        if(this._activePlayerData)
+                        {
+                            _loc7_.setActivePlayerData(this._activePlayerData);
+                        }
                     }
                 }
             }

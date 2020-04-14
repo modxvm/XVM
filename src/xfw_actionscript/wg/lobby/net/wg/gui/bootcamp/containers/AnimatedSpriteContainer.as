@@ -58,6 +58,7 @@ package net.wg.gui.bootcamp.containers
 
         public function set htmlText(param1:String) : void
         {
+            this.content.htmlText = param1;
         }
     }
 }

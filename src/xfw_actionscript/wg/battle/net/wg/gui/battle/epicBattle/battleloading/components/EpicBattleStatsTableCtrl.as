@@ -42,10 +42,10 @@ package net.wg.gui.battle.epicBattle.battleloading.components
             _loc5_.dataProvider = _loc4_;
         }
 
-        override protected function cleanUp() : void
+        override protected function onDispose() : void
         {
             this._table = null;
-            super.cleanUp();
+            super.onDispose();
         }
 
         public function scrollToPosition(param1:int) : void

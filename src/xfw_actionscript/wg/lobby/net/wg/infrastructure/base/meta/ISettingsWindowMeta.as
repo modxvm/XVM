@@ -59,8 +59,6 @@ package net.wg.infrastructure.base.meta
 
         function as_disableControl(param1:String, param2:String, param3:String) : void;
 
-        function as_setInitData(param1:Boolean) : void;
-
         function as_setColorGradingTechnique(param1:String, param2:String) : void;
 
         function as_setFeedbackDataProvider(param1:Array) : void;

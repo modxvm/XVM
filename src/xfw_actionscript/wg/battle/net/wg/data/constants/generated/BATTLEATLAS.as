@@ -261,6 +261,10 @@ package net.wg.data.constants.generated
 
         public static const BADGE_87:String = "badge_87";
 
+        public static const BADGE_88:String = "badge_88";
+
+        public static const BADGE_89:String = "badge_89";
+
         public static const BADGE_9:String = "badge_9";
 
         public static const BADGE_90:String = "badge_90";
@@ -2113,6 +2117,8 @@ package net.wg.data.constants.generated
 
         public static const SWEDEN_S30_UDES_03_ALT_3:String = "sweden-S30_UDES_03_Alt_3";
 
+        public static const SWEDEN_S31_STRV_K:String = "sweden-S31_Strv_K";
+
         public static const SWITCH_SIEGE_DAMAGED:String = "switch_siege_damaged";
 
         public static const TOXIC_BG:String = "toxic_bg";
@@ -2160,6 +2166,10 @@ package net.wg.data.constants.generated
         public static const UK_GB104_GSR_3301_SETTER:String = "uk-GB104_GSR_3301_Setter";
 
         public static const UK_GB105_BLACK_PRINCE_2019:String = "uk-GB105_Black_Prince_2019";
+
+        public static const UK_GB107_CAVALIER:String = "uk-GB107_Cavalier";
+
+        public static const UK_GB108_A46:String = "uk-GB108_A46";
 
         public static const UK_GB11_CAERNARVON:String = "uk-GB11_Caernarvon";
 
@@ -2406,6 +2416,10 @@ package net.wg.data.constants.generated
         public static const USA_A126_PZ_VI_TIGER_II_CAPT:String = "usa-A126_PzVI_Tiger_II_capt";
 
         public static const USA_A127_TL_1_LPC:String = "usa-A127_TL_1_LPC";
+
+        public static const USA_A128_CONCEPT_1B:String = "usa-A128_concept_1b";
+
+        public static const USA_A129_T6_MEDIUM:String = "usa-A129_T6_medium";
 
         public static const USA_A13_T34_HVY:String = "usa-A13_T34_hvy";
 
@@ -2735,7 +2749,13 @@ package net.wg.data.constants.generated
 
         public static const USSR_R172_OBJECT_752:String = "ussr-R172_Object_752";
 
+        public static const USSR_R173_K_91_2:String = "ussr-R173_K_91_2";
+
+        public static const USSR_R174_BT_5:String = "ussr-R174_BT-5";
+
         public static const USSR_R175_IS_2_SCREEN:String = "ussr-R175_IS_2_screen";
+
+        public static const USSR_R177_ISU_152_K_BL10:String = "ussr-R177_ISU_152K_BL10";
 
         public static const USSR_R18_SU_152:String = "ussr-R18_SU-152";
 

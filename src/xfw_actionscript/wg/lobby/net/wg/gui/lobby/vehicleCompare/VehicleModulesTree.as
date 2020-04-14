@@ -6,14 +6,13 @@ package net.wg.gui.lobby.vehicleCompare
     import scaleform.clik.events.ButtonEvent;
     import net.wg.gui.lobby.vehicleCompare.nodes.ModulesTreeDataProvider;
     import net.wg.utils.IClassFactory;
+    import net.wg.data.constants.Linkages;
     import net.wg.gui.lobby.vehicleCompare.events.VehicleModuleItemEvent;
 
     public class VehicleModulesTree extends ModulesTree
     {
 
         private static const LINE_COLOR:uint = 8421504;
-
-        private static const MODULE_ITEMS_ARROW:String = "ModuleItemsArrowUI";
 
         private static const MODULE_ITEM_NODE:String = "ModuleItemNodeUI";
 
@@ -52,7 +51,7 @@ package net.wg.gui.lobby.vehicleCompare
             var _loc1_:IClassFactory = App.utils.classFactory;
             itemNodeClass = _loc1_.getClass(MODULE_ITEM_NODE);
             fakeNodeClass = _loc1_.getClass(MODULE_FAKE_ITEM_NODE);
-            rGraphics.arrowRenderer = MODULE_ITEMS_ARROW;
+            rGraphics.arrowRenderer = Linkages.RESEARCH_ITEMS_ARROW;
             rGraphics.unlockedLineColor = LINE_COLOR;
             rGraphics.lockedLineColor = LINE_COLOR;
             rGraphics.premiumLineColor = LINE_COLOR;

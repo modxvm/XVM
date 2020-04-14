@@ -220,11 +220,11 @@ package net.wg.infrastructure.tutorial.builders.bootcamp
         {
             var _loc3_:DisplayObject = null;
             this._ammunitionPanel = param1;
-            this._module1 = param1.gun;
+            this._module1 = param1.gun as Sprite;
             this._optionalDevice1 = param1.optionalDevice1;
             this._equipment1 = param1.equipment1;
             this._shell1 = param1.shell1;
-            this._modules = new <Sprite>[this._module1,param1.turret,param1.chassis,param1.engine,param1.radio];
+            this._modules = new <Sprite>[this._module1,Sprite(param1.turret),Sprite(param1.chassis),Sprite(param1.engine),Sprite(param1.radio)];
             this._optionalDevices = new <Sprite>[this._optionalDevice1,param1.optionalDevice2,param1.optionalDevice3];
             this._equipment = new <Sprite>[this._equipment1,param1.equipment2,param1.equipment3];
             this._shells = new <Sprite>[this._shell1,param1.shell2,param1.shell3];

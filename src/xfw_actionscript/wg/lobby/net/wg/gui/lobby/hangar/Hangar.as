@@ -49,9 +49,8 @@ package net.wg.gui.lobby.hangar
     import flash.system.LoaderContext;
     import flash.system.ApplicationDomain;
     import flash.events.IOErrorEvent;
-    import flash.display.MovieClip;
     import net.wg.gui.lobby.hangar.seniorityAwards.SeniorityAwardsEntryPoint;
-    import net.wg.utils.StageSizeBoundaries;
+    import flash.display.MovieClip;
     import scaleform.clik.events.InputEvent;
     import scaleform.clik.ui.InputDetails;
 
@@ -67,6 +66,8 @@ package net.wg.gui.lobby.hangar
         private static const PARAMS_TOP_MARGIN:int = 3;
 
         private static const PARAMS_BOTTOM_MARGIN:int = 80;
+
+        private static const PARAMS_SMALL_SCREEN_BOTTOM_MARGIN:int = 36;
 
         private static const MESSENGER_BAR_PADDING:int = 45;
 
@@ -111,10 +112,6 @@ package net.wg.gui.lobby.hangar
         private static const DQ_WIDGET_VERTICAL_OFFSET:int = 15;
 
         private static const DQ_WIDGET_HORIZONTAL_MARGIN:int = 3;
-
-        private static const PRELAUNCH_POSITION_INVALID:String = "eventBannerPositionInvalid";
-
-        private static const PARAMS_POSITION_INVALID:String = "paramsPositionInvalid";
 
         public var vehResearchPanel:ResearchPanel;
 
@@ -189,8 +186,6 @@ package net.wg.gui.lobby.hangar
 
         private var _seniorityAwardsComponent:SeniorityAwardsEntryPointHangar = null;
 
-        private var _preLaunch:PreLaunch;
-
         private var _currentWidgetLayout:int = 99;
 
         private var _widgetInitialized:Boolean;
@@ -203,7 +198,6 @@ package net.wg.gui.lobby.hangar
             this._toolTipMgr = App.toolTipMgr;
             this._utils = App.utils;
             this._helpLayout = App.utils.helpLayout;
-            this._preLaunch = new PreLaunch();
             super();
             _deferredDispose = true;
             this.switchModePanel.visible = false;
@@ -212,7 +206,6 @@ package net.wg.gui.lobby.hangar
             this._headerTypeDict[HANGAR_ALIASES.RANKED_WIDGET] = [this._rankedWdgt,RankedBattlesHangarWidget,Linkages.RANKED_BATTLES_WIDGET_UI];
             this._headerTypeDict[HANGAR_ALIASES.EPIC_WIDGET] = [this._epicBattlesWdgt,EpicBattlesWidget,Linkages.EPIC_WIDGET];
             this.setupWidgetSizes();
-            addChild(this._preLaunch);
         }
 
         private function setupWidgetSizes() : void
@@ -283,7 +276,6 @@ package net.wg.gui.lobby.hangar
                 this.seniorityAwardsUpdatePosition();
             }
             this.checkToIfLayoutNeedsUpdate();
-            invalidate(PRELAUNCH_POSITION_INVALID);
         }
 
         override protected function onPopulate() : void
@@ -295,7 +287,6 @@ package net.wg.gui.lobby.hangar
             registerFlashComponentS(this.switchModePanel,Aliases.SWITCH_MODE_PANEL);
             registerFlashComponentS(this.params,HANGAR_ALIASES.VEHICLE_PARAMETERS);
             registerFlashComponentS(this.dqWidget,Aliases.DAILY_QUEST_WIDGET);
-            registerFlashComponentS(this._preLaunch,HANGAR_ALIASES.PRE_LAUNCH);
             addEventListener(CrewDropDownEvent.SHOW_DROP_DOWN,this.onHangarShowDropDownHandler);
             if(this.vehResearchPanel != null)
             {
@@ -356,8 +347,6 @@ package net.wg.gui.lobby.hangar
             this._epicBattlesWdgt = null;
             this.dqWidget = null;
             this._widgetInitialized = false;
-            App.utils.data.cleanupDynamicObject(this._widgetSizes);
-            this._widgetSizes = null;
             this._gameInputMgr = null;
             this._toolTipMgr = null;
             this._utils = null;
@@ -370,10 +359,6 @@ package net.wg.gui.lobby.hangar
                 this._seniorityAwardsComponent = null;
             }
             this._currentWidgetLayout = 99;
-            if(this._preLaunch)
-            {
-                this._preLaunch = null;
-            }
             App.utils.data.cleanupDynamicObject(this._headerTypeDict);
             this._headerTypeDict = null;
             super.onDispose();
@@ -410,14 +395,13 @@ package net.wg.gui.lobby.hangar
 
         override protected function draw() : void
         {
-            var _loc3_:* = NaN;
+            var _loc1_:* = NaN;
             super.draw();
             if(isInvalid(INVALIDATE_ENABLED_CREW))
             {
                 this.crew.enabled = this._crewEnabled;
                 this.crewOperationBtn.enabled = this._crewEnabled;
             }
-            var _loc1_:Boolean = isInvalid(PRELAUNCH_POSITION_INVALID);
             if(isInvalid(INVALIDATE_CAROUSEL_SIZE))
             {
                 this.carousel.visible = true;
@@ -427,26 +411,15 @@ package net.wg.gui.lobby.hangar
                 {
                     dispatchEvent(new Event(Event.RESIZE));
                 }
-                _loc3_ = SM_CAROUSEL_PADDING;
+                _loc1_ = SM_CAROUSEL_PADDING;
                 if(width > SM_THRESHOLD_X)
                 {
-                    _loc3_ = SM_AMMUNITION_PANEL_PADDING;
+                    _loc1_ = SM_AMMUNITION_PANEL_PADDING;
                 }
                 this.updateTeaserSize();
-                App.systemMessages.dispatchEvent(new NotificationLayoutEvent(NotificationLayoutEvent.UPDATE_LAYOUT,new Point(SM_PADDING_X,height - this.ammunitionPanel.y - _loc3_)));
+                App.systemMessages.dispatchEvent(new NotificationLayoutEvent(NotificationLayoutEvent.UPDATE_LAYOUT,new Point(SM_PADDING_X,height - this.ammunitionPanel.y - _loc1_)));
                 this.seniorityAwardsUpdatePosition();
                 this.checkToIfLayoutNeedsUpdate();
-                _loc1_ = true;
-            }
-            var _loc2_:Boolean = isInvalid(PARAMS_POSITION_INVALID);
-            if(_loc1_)
-            {
-                this.prelaunchUpdatePosition();
-                _loc2_ = true;
-            }
-            if(_loc2_)
-            {
-                this.updateParamsPosition();
             }
         }
 
@@ -748,15 +721,6 @@ package net.wg.gui.lobby.hangar
             }
         }
 
-        public function as_updatePreLaunch(param1:Boolean) : void
-        {
-            if(this._preLaunch.visible != param1)
-            {
-                this._preLaunch.visible = param1;
-                invalidate(PRELAUNCH_POSITION_INVALID);
-            }
-        }
-
         public function generatedUnstoppableEvents() : Boolean
         {
             return true;
@@ -797,7 +761,7 @@ package net.wg.gui.lobby.hangar
                 }
                 this.ammunitionPanel.updateStage(_width,this.carousel.y);
             }
-            invalidate(PARAMS_POSITION_INVALID);
+            this.updateParamsPosition();
         }
 
         private function checkToIfLayoutNeedsUpdate() : void
@@ -932,13 +896,12 @@ package net.wg.gui.lobby.hangar
         {
             this.params.x = _originalWidth - this.params.width - RIGHT_MARGIN ^ 0;
             this.params.y = this.vehResearchBG.y + this.vehResearchBG.height + PARAMS_TOP_MARGIN ^ 0;
-            var _loc1_:int = this.ammunitionPanel.y + PARAMS_BOTTOM_MARGIN;
-            if(this._preLaunch && this._preLaunch.visible)
+            var _loc1_:int = _originalWidth <= 1280?PARAMS_SMALL_SCREEN_BOTTOM_MARGIN:0;
+            if(this._seniorityAwardsComponent)
             {
-                _loc1_ = Math.min(_loc1_,this._preLaunch.y - PreLaunch.TOP_MARGIN);
+                _loc1_ = _loc1_ + (this._seniorityAwardsComponent.bounds.height + SeniorityAwardsEntryPoint.TOP_OFFSET);
             }
-            this.params.height = _loc1_ - this.params.y;
-            this.params.validateNow();
+            this.params.height = this.ammunitionPanel.y - this.params.y + PARAMS_BOTTOM_MARGIN - _loc1_;
         }
 
         private function hideTooltip() : void
@@ -1028,27 +991,6 @@ package net.wg.gui.lobby.hangar
                     this._seniorityAwardsComponent.y = height - _loc1_.height - this.carousel.getBottom() - _loc2_ + SeniorityAwardsEntryPoint.BOTTOM_OFFSET;
                 }
                 this.updateParamsPosition();
-            }
-        }
-
-        private function prelaunchUpdatePosition() : void
-        {
-            if(this._preLaunch && this._preLaunch.visible && this.carousel)
-            {
-                if(width < StageSizeBoundaries.WIDTH_1600 || height < StageSizeBoundaries.HEIGHT_900)
-                {
-                    this._preLaunch.isSmall = true;
-                }
-                else
-                {
-                    this._preLaunch.isSmall = false;
-                }
-                this._preLaunch.x = _width - this._preLaunch.getWidth() | 0;
-                this._preLaunch.y = this.carousel.y - this._preLaunch.getHeight() | 0;
-                if(this.ammunitionPanel.visible && this.ammunitionPanel.x + this.ammunitionPanel.width > this._preLaunch.x - RIGHT_MARGIN)
-                {
-                    this._preLaunch.y = this._preLaunch.y - (AmmunitionPanel.SLOTS_HEIGHT + AmmunitionPanel.SLOTS_BOTTOM_OFFSET);
-                }
             }
         }
 

@@ -430,6 +430,7 @@ package net.wg.gui.battle.epicBattle.views.stats.renderers
                 this._epicData = null;
             }
             this._badgeVO = null;
+            this._activePlayerData = null;
             super.onDispose();
         }
 
@@ -452,9 +453,9 @@ package net.wg.gui.battle.epicBattle.views.stats.renderers
             return false;
         }
 
-        public function setDAAPIVehicleInfoVO(param1:DAAPIVehicleInfoVO) : void
+        public function setActivePlayerData(param1:DAAPIVehicleInfoVO) : void
         {
-            this._data = param1;
+            this._activePlayerData = param1;
             if(this._isRenderingAvailable)
             {
                 this.vehicleDataSync();
@@ -465,9 +466,9 @@ package net.wg.gui.battle.epicBattle.views.stats.renderers
             }
         }
 
-        public function setActivePlayerData(param1:DAAPIVehicleInfoVO) : void
+        public function setDAAPIVehicleInfoVO(param1:DAAPIVehicleInfoVO) : void
         {
-            this._activePlayerData = param1;
+            this._data = param1;
             if(this._isRenderingAvailable)
             {
                 this.vehicleDataSync();
@@ -640,6 +641,7 @@ package net.wg.gui.battle.epicBattle.views.stats.renderers
                     {
                         this._squadItem.setCurrentPlayerAnonymized();
                         this._squadItem.setIsCurrentPlayerInClan(this._data.clanAbbrev != Values.EMPTY_STR);
+                        this._squadItem.setCurrentPlayerFakeName(this._data.playerFakeName);
                     }
                     this.updateDynamicSquadState(this._data);
                 }

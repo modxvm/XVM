@@ -16,33 +16,42 @@ package net.wg.gui.lobby.rankedBattles19.components
     public class RankedBattlesPageHeader extends UIComponentEx
     {
 
-        private static const DESCR_V_OFFSET_TITLE_BIG:int = 137;
+        private static const SEPARATOR_H_GAP:int = 15;
 
-        private static const DESCR_V_OFFSET_TITLE_SMALL:int = 76;
+        private static const LEFT_SIDE_TF_WIDTH_FACTOR:int = 2;
 
-        private static const SEPARATOR_V_OFFSET_BIG:int = 8;
+        private static const DESCR_GAPS:Object = {};
 
-        private static const SEPARATOR_V_OFFSET_SMALL:int = 5;
+        private static const SEPARATOR_V_GAPS:Object = {};
 
-        private static const SEPARATOR_HEIGTH_BIG:int = 20;
+        private static const SEPARATOR_HEIGHTS:Object = {};
 
-        private static const SEPARATOR_HEIGTH_SMALL:int = 18;
+        private static const TITLE_FORMATS:Object = {};
 
-        private static const SEPARATOR_GAP:int = 15;
+        private static const DESCR_FORMATS:Object = {};
 
-        private static const TITLE_BIG_FORMAT:TextFormat = new TextFormat(Fonts.TITLE_FONT,130,16777215);
-
-        private static const TITLE_SMALL_FORMAT:TextFormat = new TextFormat(Fonts.TITLE_FONT,70,16777215);
-
-        private static const DESCR_BIG_FORMAT:TextFormat = new TextFormat(Fonts.FIELD_FONT,24,16777215);
-
-        private static const DESCR_SMALL_FORMAT:TextFormat = new TextFormat(Fonts.FIELD_FONT,18,16777215);
-
-        private static const TF_ALPHA:Number = 0.6;
-
-        private static const TITLE_TF_ALPHA:Number = 0.3;
-
-        private static const LEFT_SIDE_TF_WIDTH_FACTOR:Number = 0.75;
+        {
+            DESCR_GAPS[RankedBattlesPageHeaderHelper.SIZE_HUGE] = 91;
+            DESCR_GAPS[RankedBattlesPageHeaderHelper.SIZE_BIG] = 70;
+            DESCR_GAPS[RankedBattlesPageHeaderHelper.SIZE_MEDIUM] = 70;
+            DESCR_GAPS[RankedBattlesPageHeaderHelper.SIZE_SMALL] = 52;
+            SEPARATOR_V_GAPS[RankedBattlesPageHeaderHelper.SIZE_HUGE] = 8;
+            SEPARATOR_V_GAPS[RankedBattlesPageHeaderHelper.SIZE_BIG] = 8;
+            SEPARATOR_V_GAPS[RankedBattlesPageHeaderHelper.SIZE_MEDIUM] = 5;
+            SEPARATOR_V_GAPS[RankedBattlesPageHeaderHelper.SIZE_SMALL] = 5;
+            SEPARATOR_HEIGHTS[RankedBattlesPageHeaderHelper.SIZE_HUGE] = 20;
+            SEPARATOR_HEIGHTS[RankedBattlesPageHeaderHelper.SIZE_BIG] = 20;
+            SEPARATOR_HEIGHTS[RankedBattlesPageHeaderHelper.SIZE_MEDIUM] = 18;
+            SEPARATOR_HEIGHTS[RankedBattlesPageHeaderHelper.SIZE_SMALL] = 18;
+            TITLE_FORMATS[RankedBattlesPageHeaderHelper.SIZE_HUGE] = new TextFormat(Fonts.TITLE_FONT,73,15921911);
+            TITLE_FORMATS[RankedBattlesPageHeaderHelper.SIZE_BIG] = new TextFormat(Fonts.TITLE_FONT,56,15921911);
+            TITLE_FORMATS[RankedBattlesPageHeaderHelper.SIZE_MEDIUM] = new TextFormat(Fonts.TITLE_FONT,56,15921911);
+            TITLE_FORMATS[RankedBattlesPageHeaderHelper.SIZE_SMALL] = new TextFormat(Fonts.TITLE_FONT,45,15921911);
+            DESCR_FORMATS[RankedBattlesPageHeaderHelper.SIZE_HUGE] = new TextFormat(Fonts.FIELD_FONT,24,15921911);
+            DESCR_FORMATS[RankedBattlesPageHeaderHelper.SIZE_BIG] = new TextFormat(Fonts.FIELD_FONT,24,15921911);
+            DESCR_FORMATS[RankedBattlesPageHeaderHelper.SIZE_MEDIUM] = new TextFormat(Fonts.FIELD_FONT,18,15921911);
+            DESCR_FORMATS[RankedBattlesPageHeaderHelper.SIZE_SMALL] = new TextFormat(Fonts.FIELD_FONT,18,15921911);
+        }
 
         public var titleTf:TextField = null;
 
@@ -56,13 +65,9 @@ package net.wg.gui.lobby.rankedBattles19.components
 
         private var _commons:ICommons = null;
 
-        private var _isSmall:Boolean = false;
+        private var _size:String = "small";
 
         private var _tooltipMgr:ITooltipMgr;
-
-        private var _titleFormat:TextFormat;
-
-        private var _descriptionFormat:TextFormat;
 
         private var _headerHeight:int = -1;
 
@@ -70,8 +75,6 @@ package net.wg.gui.lobby.rankedBattles19.components
 
         public function RankedBattlesPageHeader()
         {
-            this._titleFormat = TITLE_BIG_FORMAT;
-            this._descriptionFormat = DESCR_BIG_FORMAT;
             super();
             this._commons = App.utils.commons;
             this._tooltipMgr = App.toolTipMgr;
@@ -80,9 +83,6 @@ package net.wg.gui.lobby.rankedBattles19.components
         override protected function configUI() : void
         {
             super.configUI();
-            this.rightSideTf.alpha = TF_ALPHA;
-            this.leftSideTf.alpha = TF_ALPHA;
-            this.titleTf.alpha = TITLE_TF_ALPHA;
             addEventListener(MouseEvent.MOUSE_OVER,this.onMouseOverHandler);
             addEventListener(MouseEvent.MOUSE_OUT,this.onMouseOutHandler);
         }
@@ -118,8 +118,6 @@ package net.wg.gui.lobby.rankedBattles19.components
             this.rightSideTf = null;
             this.leftSideTf = null;
             this.separator = null;
-            this._titleFormat = null;
-            this._descriptionFormat = null;
             this._commons = null;
             this._tooltipMgr = null;
             this._data = null;
@@ -132,41 +130,41 @@ package net.wg.gui.lobby.rankedBattles19.components
             invalidateData();
         }
 
-        public function setScreenSize(param1:Boolean) : void
+        public function setSizeId(param1:String) : void
         {
-            if(this._isSmall == param1)
+            if(this._size != param1)
             {
-                return;
+                this._size = param1;
+                invalidateSize();
             }
-            this._isSmall = param1;
-            this._titleFormat = this._isSmall?TITLE_SMALL_FORMAT:TITLE_BIG_FORMAT;
-            this._descriptionFormat = this._isSmall?DESCR_SMALL_FORMAT:DESCR_BIG_FORMAT;
-            invalidateSize();
         }
 
         private function updateLayout() : void
         {
-            this.titleTf.setTextFormat(this._titleFormat);
+            var _loc1_:TextFormat = null;
+            var _loc2_:* = 0;
+            _loc1_ = DESCR_FORMATS[this._size];
+            this.titleTf.setTextFormat(TITLE_FORMATS[this._size]);
             this._commons.updateTextFieldSize(this.titleTf);
             this.titleTf.x = width - this.titleTf.width >> 1;
-            this._descriptionFormat.align = this._data.useOneSideDescription?TextFormatAlign.CENTER:TextFormatAlign.LEFT;
-            this.leftSideTf.setTextFormat(this._descriptionFormat);
+            _loc1_.align = this._data.useOneSideDescription?TextFormatAlign.CENTER:TextFormatAlign.LEFT;
+            this.leftSideTf.setTextFormat(_loc1_);
             this.leftSideTf.width = LEFT_SIDE_TF_WIDTH_FACTOR * this.titleTf.width;
             this._commons.updateTextFieldSize(this.leftSideTf);
-            var _loc1_:int = this.titleTf.y + (this._isSmall?DESCR_V_OFFSET_TITLE_SMALL:DESCR_V_OFFSET_TITLE_BIG);
-            this.leftSideTf.y = _loc1_;
-            var _loc2_:int = this.leftSideTf.width + (SEPARATOR_GAP << 1);
+            _loc2_ = this.titleTf.y + DESCR_GAPS[this._size];
+            this.leftSideTf.y = _loc2_;
+            var _loc3_:int = this.leftSideTf.width + (SEPARATOR_H_GAP << 1);
             if(!this._data.useOneSideDescription)
             {
-                this.rightSideTf.y = _loc1_;
-                this.rightSideTf.setTextFormat(this._descriptionFormat);
+                this.rightSideTf.y = _loc2_;
+                this.rightSideTf.setTextFormat(_loc1_);
                 this._commons.updateTextFieldSize(this.rightSideTf);
-                _loc2_ = _loc2_ + this.rightSideTf.width;
-                this.rightSideTf.x = width - _loc2_ >> 1;
-                this.separator.x = this.rightSideTf.x + this.rightSideTf.width + SEPARATOR_GAP | 0;
-                this.separator.y = _loc1_ + (this._isSmall?SEPARATOR_V_OFFSET_SMALL:SEPARATOR_V_OFFSET_BIG);
-                this.separator.height = this._isSmall?SEPARATOR_HEIGTH_SMALL:SEPARATOR_HEIGTH_BIG;
-                this.leftSideTf.x = this.separator.x + SEPARATOR_GAP;
+                _loc3_ = _loc3_ + this.rightSideTf.width;
+                this.rightSideTf.x = width - _loc3_ >> 1;
+                this.separator.x = this.rightSideTf.x + this.rightSideTf.width + SEPARATOR_H_GAP | 0;
+                this.separator.y = _loc2_ + SEPARATOR_V_GAPS[this._size];
+                this.separator.height = SEPARATOR_HEIGHTS[this._size];
+                this.leftSideTf.x = this.separator.x + SEPARATOR_H_GAP;
             }
             else
             {

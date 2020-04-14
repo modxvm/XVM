@@ -11,7 +11,7 @@ package net.wg.gui.bootcamp.messageWindow.views.bottom
 
         private static const REWARD_ITEM_RENDERER:String = "MessageRewardRendererUI";
 
-        private static const RENDERER_WIDTH:int = 80;
+        private static const RENDERER_WIDTH:int = 100;
 
         private static const RENDERER_HEIGHT:int = 90;
 

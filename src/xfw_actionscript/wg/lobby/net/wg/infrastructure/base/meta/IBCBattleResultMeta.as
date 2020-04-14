@@ -9,6 +9,8 @@ package net.wg.infrastructure.base.meta
 
         function onAnimationAwardStartS(param1:String) : void;
 
+        function onToolTipShowS(param1:String) : void;
+
         function as_setData(param1:Object) : void;
     }
 }

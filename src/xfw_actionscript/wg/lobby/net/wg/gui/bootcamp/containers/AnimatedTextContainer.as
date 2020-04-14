@@ -53,5 +53,10 @@ package net.wg.gui.bootcamp.containers
         {
             this.textField.textColor = param1;
         }
+
+        public function set autoSize(param1:String) : void
+        {
+            this.textField.autoSize = param1;
+        }
     }
 }

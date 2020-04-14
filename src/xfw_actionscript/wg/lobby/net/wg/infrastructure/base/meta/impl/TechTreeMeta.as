@@ -2,6 +2,7 @@ package net.wg.infrastructure.base.meta.impl
 {
     import scaleform.clik.data.DataProvider;
     import net.wg.gui.lobby.techtree.data.BlueprintBalanceVO;
+    import net.wg.gui.lobby.techtree.data.vo.TechTreeNationMenuItemVO;
     import net.wg.data.constants.Errors;
     import net.wg.infrastructure.exceptions.AbstractException;
 
@@ -11,6 +12,8 @@ package net.wg.infrastructure.base.meta.impl
         public var requestNationTreeData:Function;
 
         public var getNationTreeData:Function;
+
+        public var getPremiumPanelLabels:Function;
 
         public var request4Unlock:Function;
 
@@ -22,7 +25,11 @@ package net.wg.infrastructure.base.meta.impl
 
         public var onBlueprintModeSwitch:Function;
 
-        private var _dataProvider:DataProvider;
+        public var onGoToPremiumShop:Function;
+
+        public var onPlayHintAnimation:Function;
+
+        private var _dataProviderTechTreeNationMenuItemVO:DataProvider;
 
         private var _array:Array;
 
@@ -35,10 +42,15 @@ package net.wg.infrastructure.base.meta.impl
 
         override protected function onDispose() : void
         {
-            if(this._dataProvider)
+            var _loc1_:TechTreeNationMenuItemVO = null;
+            if(this._dataProviderTechTreeNationMenuItemVO)
             {
-                this._dataProvider.cleanUp();
-                this._dataProvider = null;
+                for each(_loc1_ in this._dataProviderTechTreeNationMenuItemVO)
+                {
+                    _loc1_.dispose();
+                }
+                this._dataProviderTechTreeNationMenuItemVO.cleanUp();
+                this._dataProviderTechTreeNationMenuItemVO = null;
             }
             if(this._array)
             {
@@ -63,6 +75,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.getNationTreeData,"getNationTreeData" + Errors.CANT_NULL);
             return this.getNationTreeData(param1);
+        }
+
+        public function getPremiumPanelLabelsS() : Object
+        {
+            App.utils.asserter.assertNotNull(this.getPremiumPanelLabels,"getPremiumPanelLabels" + Errors.CANT_NULL);
+            return this.getPremiumPanelLabels();
         }
 
         public function request4UnlockS(param1:int) : void
@@ -95,13 +113,37 @@ package net.wg.infrastructure.base.meta.impl
             this.onBlueprintModeSwitch(param1);
         }
 
+        public function onGoToPremiumShopS(param1:String, param2:int) : void
+        {
+            App.utils.asserter.assertNotNull(this.onGoToPremiumShop,"onGoToPremiumShop" + Errors.CANT_NULL);
+            this.onGoToPremiumShop(param1,param2);
+        }
+
+        public function onPlayHintAnimationS(param1:Boolean) : void
+        {
+            App.utils.asserter.assertNotNull(this.onPlayHintAnimation,"onPlayHintAnimation" + Errors.CANT_NULL);
+            this.onPlayHintAnimation(param1);
+        }
+
         public final function as_setAvailableNations(param1:Array) : void
         {
-            var _loc2_:DataProvider = this._dataProvider;
-            this._dataProvider = new DataProvider(param1);
-            this.setAvailableNations(this._dataProvider);
+            var _loc5_:TechTreeNationMenuItemVO = null;
+            var _loc2_:DataProvider = this._dataProviderTechTreeNationMenuItemVO;
+            this._dataProviderTechTreeNationMenuItemVO = new DataProvider();
+            var _loc3_:uint = param1.length;
+            var _loc4_:* = 0;
+            while(_loc4_ < _loc3_)
+            {
+                this._dataProviderTechTreeNationMenuItemVO[_loc4_] = new TechTreeNationMenuItemVO(param1[_loc4_]);
+                _loc4_++;
+            }
+            this.setAvailableNations(this._dataProviderTechTreeNationMenuItemVO);
             if(_loc2_)
             {
+                for each(_loc5_ in _loc2_)
+                {
+                    _loc5_.dispose();
+                }
                 _loc2_.cleanUp();
             }
         }

@@ -7,13 +7,13 @@ package net.wg.gui.bootcamp.controls
 
         private static const PADDING:Number = 9;
 
-        private static const SCALE_FACTOR:Number = 0.0075;
+        private static const GLOW_SCALE_X:Number = 0.00514;
 
-        public var fxMask:MovieClip;
+        private static const GLOW_SCALE_Y:Number = 0.0052;
 
-        public var border:MovieClip;
+        public var border:MovieClip = null;
 
-        public var fx:MovieClip;
+        public var fx:MovieClip = null;
 
         public function BCLobbyHint()
         {
@@ -22,25 +22,23 @@ package net.wg.gui.bootcamp.controls
 
         override public function setProperties(param1:Number, param2:Number, param3:Boolean) : void
         {
-            this.fxMask.width = param1;
-            this.fxMask.height = param2;
             if(this.border.mcBorder)
             {
                 this.border.mcBorder.width = param1 + (PADDING << 1);
                 this.border.mcBorder.height = param2 + (PADDING << 1);
             }
-            this.fx.scaleX = this.fx.scaleY = param2 * SCALE_FACTOR;
-            this.fx.x = (this.border.width >> 1) - PADDING;
-            this.fx.y = (this.border.height >> 1) - PADDING;
             if(this.border.visible != param3)
             {
                 this.border.visible = param3;
             }
+            this.fx.scaleX = param1 * GLOW_SCALE_X;
+            this.fx.scaleY = param2 * GLOW_SCALE_Y;
+            this.fx.x = param1 >> 1;
+            this.fx.y = param2 >> 1;
         }
 
         override protected function onDispose() : void
         {
-            this.fxMask = null;
             this.border = null;
             this.fx = null;
             super.onDispose();

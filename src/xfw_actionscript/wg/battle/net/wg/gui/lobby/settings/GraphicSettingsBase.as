@@ -196,8 +196,6 @@ package net.wg.gui.lobby.settings
 
         protected var currentScreenModeId:String = "";
 
-        private var _isWinXP:Boolean = false;
-
         public function GraphicSettingsBase()
         {
             super();
@@ -328,7 +326,8 @@ package net.wg.gui.lobby.settings
 
         private function initToolTipMapping() : void
         {
-            this.updateGraphicsQualityTooltipMapping();
+            registerToolTip(this.graphicsQualityDropDown,SettingsConfigHelper.GRAPHIC_QUALITY);
+            registerToolTip(this.graphicsQualityLabel,SettingsConfigHelper.GRAPHIC_QUALITY);
             registerToolTip(this.dynamicRendererSlider,SettingsConfigHelper.DYNAMIC_RENDERER);
             registerToolTip(this.dynamicRendererLabel,SettingsConfigHelper.DYNAMIC_RENDERER);
             registerToolTip(this.dynamicRendererValue,SettingsConfigHelper.DYNAMIC_RENDERER);
@@ -347,7 +346,8 @@ package net.wg.gui.lobby.settings
             registerToolTip(this.fovRangeSlider,SettingsConfigHelper.FOV);
             registerToolTip(this.fovLabel,SettingsConfigHelper.FOV);
             registerToolTip(this.dynamicFovCheckbox,SettingsConfigHelper.DYNAMIC_FOV);
-            this.updateRenderPipelineTooltipMapping();
+            registerToolTip(this.RENDER_PIPELINEButtonBar,SettingsConfigHelper.RENDER_PIPELINE);
+            registerToolTip(this.RENDER_PIPELINELabel,SettingsConfigHelper.RENDER_PIPELINE);
             registerToolTip(this.TEXTURE_QUALITYLabel,SettingsConfigHelper.TEXTURE_QUALITY);
             registerToolTip(this.TEXTURE_QUALITYValue,SettingsConfigHelper.TEXTURE_QUALITY);
             registerToolTip(this.SHADOWS_QUALITYLabel,SettingsConfigHelper.SHADOWS_QUALITY);
@@ -468,30 +468,6 @@ package net.wg.gui.lobby.settings
             this.SEMITRANSPARENT_LEAVES_ENABLEDCheckbox = _loc1_.SEMITRANSPARENT_LEAVES_ENABLEDCheckbox;
             this.TERRAIN_TESSELLATION_ENABLEDCheckbox = _loc1_.TERRAIN_TESSELLATION_ENABLEDCheckbox;
             this.SNIPER_MODE_TERRAIN_TESSELLATION_ENABLEDCheckbox = _loc1_.SNIPER_MODE_TERRAIN_TESSELLATION_ENABLEDCheckbox;
-        }
-
-        private function updateRenderPipelineTooltipMapping() : void
-        {
-            var _loc1_:String = this._isWinXP?SettingsConfigHelper.RENDER_PIPELINE_XP:SettingsConfigHelper.RENDER_PIPELINE;
-            registerToolTip(this.RENDER_PIPELINEButtonBar,_loc1_);
-            registerToolTip(this.RENDER_PIPELINELabel,_loc1_);
-        }
-
-        private function updateGraphicsQualityTooltipMapping() : void
-        {
-            var _loc1_:String = this._isWinXP?SettingsConfigHelper.GRAPHIC_QUALITY_XP:SettingsConfigHelper.GRAPHIC_QUALITY;
-            registerToolTip(this.graphicsQualityDropDown,_loc1_);
-            registerToolTip(this.graphicsQualityLabel,_loc1_);
-        }
-
-        public function set isWinXP(param1:Boolean) : void
-        {
-            if(this._isWinXP != param1)
-            {
-                this._isWinXP = param1;
-                this.updateRenderPipelineTooltipMapping();
-                this.updateGraphicsQualityTooltipMapping();
-            }
         }
     }
 }

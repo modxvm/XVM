@@ -2,8 +2,12 @@ package net.wg.gui.components.controls
 {
     import flash.text.TextField;
     import flash.display.MovieClip;
+    import net.wg.utils.ICommons;
+    import net.wg.infrastructure.managers.ITooltipMgr;
     import flash.events.MouseEvent;
     import flash.events.Event;
+    import org.idmedia.as3commons.util.StringUtils;
+    import net.wg.data.constants.Values;
     import flash.text.TextFieldAutoSize;
     import scaleform.clik.utils.ConstrainedElement;
     import scaleform.clik.constants.InvalidationType;
@@ -16,15 +20,31 @@ package net.wg.gui.components.controls
 
         public static var SUB_SELECTED:String = "sub_selected_";
 
-        private static var INVALIDATE_ICON:String = "invalidateIcon";
+        private static const INVALIDATE_ICON:String = "invalidateIcon";
 
-        private static var INVALIDATE_CAPS:String = "invalidateCaps";
+        private static const INVALIDATE_CAPS:String = "invalidateCaps";
 
-        private static var INVALIDATE_PADDING:String = "invalidatePadding";
+        private static const INVALIDATE_PADDING:String = "invalidatePadding";
 
-        private static var INVALIDATE_TEXT_COLOR:String = "invalidateTextColor";
+        private static const INVALIDATE_TEXT_COLOR:String = "invalidateTextColor";
 
-        private static var ICON_PADDING:int = 1;
+        private static const INVALIDATE_ACTION_ICON:String = "invalidateActionIcon";
+
+        private static const INVALIDATE_ACTION_ICON_POS:String = "invalidateActionIconPos";
+
+        private static const ICON_PADDING:int = 1;
+
+        private static const TEXTFIELD_NAME:String = "textField";
+
+        private static const BLUR_TEXTFIELD_NAME:String = "blurTextField";
+
+        private static const TEXTFIELD_PADDING:int = 5;
+
+        private static const BROWSER:String = "browser";
+
+        private static const CHANGE_EFFECT_TIME:int = 1000;
+
+        private static const BLINK_TEXT_COLOR:uint = 16563563;
 
         public var fxTextField1:TextField;
 
@@ -34,17 +54,27 @@ package net.wg.gui.components.controls
 
         public var icon:Image;
 
+        public var actionIcon:Image;
+
         private var _iconType:String;
 
         private var _caps:Boolean = true;
 
         private var _textColorOver:Number;
 
-        private var textColorBeforeBlink:Number;
+        private var _textColorBeforeBlink:Number;
 
         private var _externalState:String = "";
 
         private var _isBlinking:Boolean;
+
+        private var _actionIconStr:String = "";
+
+        private var _commonsUtils:ICommons = null;
+
+        private var _isTooltipSpecial:Boolean = false;
+
+        private var _tooltipMgr:ITooltipMgr = null;
 
         public function MainMenuButton()
         {
@@ -52,18 +82,26 @@ package net.wg.gui.components.controls
             constraintsDisabled = true;
             soundType = SoundTypes.MAIN_MENU;
             this.fxTextField2 = this.fx.fxTextField2;
+            this._commonsUtils = App.utils.commons;
+            this._tooltipMgr = App.toolTipMgr;
+            preventAutosizing = true;
         }
 
         override protected function onDispose() : void
         {
-            removeEventListener(MouseEvent.ROLL_OVER,this.onOverHandler);
-            removeEventListener(MouseEvent.ROLL_OUT,this.onOutHandler);
+            removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
+            removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
+            this.icon.removeEventListener(Event.CHANGE,this.onIconChangeHandler);
+            this.actionIcon.removeEventListener(Event.CHANGE,this.onActionIconChangeHandler);
             this.fxTextField1 = null;
             this.fxTextField2 = null;
             this.fx = null;
-            this.icon.removeEventListener(Event.CHANGE,this.onIconChangeHandler);
             this.icon.dispose();
             this.icon = null;
+            this.actionIcon.dispose();
+            this.actionIcon = null;
+            this._commonsUtils = null;
+            this._tooltipMgr = null;
             super.onDispose();
         }
 
@@ -72,8 +110,9 @@ package net.wg.gui.components.controls
             super.configUI();
             this.paddingHorizontal = 0;
             this.icon.addEventListener(Event.CHANGE,this.onIconChangeHandler);
-            addEventListener(MouseEvent.ROLL_OVER,this.onOverHandler);
-            addEventListener(MouseEvent.ROLL_OUT,this.onOutHandler);
+            this.actionIcon.addEventListener(Event.CHANGE,this.onActionIconChangeHandler);
+            addEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
+            addEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
             this.checkBrowserEffect();
         }
 
@@ -89,13 +128,13 @@ package net.wg.gui.components.controls
                 if(_label != null)
                 {
                     _loc1_ = App.utils.locale.makeString(_label,{});
-                    if(_loc1_)
+                    if(StringUtils.isNotEmpty(_loc1_))
                     {
                         _loc1_ = App.utils.toUpperOrLowerCase(_loc1_,true);
                     }
                     else
                     {
-                        _loc1_ = "";
+                        _loc1_ = Values.EMPTY_STR;
                     }
                     if(textField != null)
                     {
@@ -108,17 +147,17 @@ package net.wg.gui.components.controls
                     if(blurTextField != null)
                     {
                         blurTextField.text = _loc1_;
-                        blurTextField.width = blurTextField.textWidth + 5;
+                        this._commonsUtils.updateTextFieldSize(blurTextField,true,false);
                     }
                     if(this.fxTextField1 != null)
                     {
                         this.fxTextField1.text = _loc1_;
-                        this.fxTextField1.width = this.fxTextField1.textWidth + 5;
+                        this._commonsUtils.updateTextFieldSize(this.fxTextField1,true,false);
                     }
                     if(this.fxTextField2 != null)
                     {
                         this.fxTextField2.text = _loc1_;
-                        this.fxTextField2.width = this.fxTextField2.textWidth + 5;
+                        this._commonsUtils.updateTextFieldSize(this.fxTextField2,true,false);
                     }
                 }
             }
@@ -147,15 +186,15 @@ package net.wg.gui.components.controls
 
         override protected function alignForAutoSize() : void
         {
-            var _loc1_:* = NaN;
-            var _loc3_:* = NaN;
-            var _loc4_:* = NaN;
+            var _loc1_:* = 0;
+            var _loc3_:* = 0;
+            var _loc4_:* = 0;
             if(!initialized || _autoSize == TextFieldAutoSize.NONE || !textField)
             {
                 return;
             }
             _loc1_ = _width;
-            var _loc2_:Number = _width = this.calculateWidth();
+            var _loc2_:int = _width = this.calculateWidth();
             switch(_autoSize)
             {
                 case TextFieldAutoSize.RIGHT:
@@ -163,8 +202,8 @@ package net.wg.gui.components.controls
                     x = _loc3_ - _loc2_;
                     break;
                 case TextFieldAutoSize.CENTER:
-                    _loc4_ = x + _loc1_ * 0.5;
-                    x = _loc4_ - _loc2_ * 0.5;
+                    _loc4_ = x + (_loc1_ >> 1);
+                    x = _loc4_ - (_loc2_ >> 1);
                     break;
             }
         }
@@ -176,15 +215,17 @@ package net.wg.gui.components.controls
             var _loc1_:Number = actualWidth;
             if(!constraintsDisabled && initialized)
             {
-                _loc2_ = constraints.getElement(textField?"textField":"blurTextField");
+                _loc2_ = constraints.getElement(textField?TEXTFIELD_NAME:BLUR_TEXTFIELD_NAME);
                 _loc3_ = textField?textField:blurTextField;
-                _loc1_ = _loc3_.x + _loc3_.textWidth + _loc2_.left + _loc2_.right + 5 + (_paddingHorizontal << 1);
+                _loc1_ = _loc3_.x + _loc3_.textWidth + _loc2_.left + _loc2_.right + TEXTFIELD_PADDING + (_paddingHorizontal << 1);
             }
             return _loc1_;
         }
 
         override protected function draw() : void
         {
+            var _loc1_:* = 0;
+            var _loc2_:* = 0;
             super.draw();
             if(this.fxTextField1 && isInvalid(InvalidationType.STATE,INVALIDATE_CAPS,INVALIDATE_PADDING,INVALIDATE_TEXT_COLOR))
             {
@@ -208,19 +249,43 @@ package net.wg.gui.components.controls
             }
             if(isInvalid(INVALIDATE_ICON))
             {
+                this.icon.visible = StringUtils.isNotEmpty(this._iconType);
                 this.icon.source = this._iconType;
-                this.icon.visible = Boolean(this._iconType);
             }
-        }
-
-        override public function get width() : Number
-        {
-            return this.fxTextField1?this.fxTextField1.x + this.fxTextField1.textWidth + 5 + (_paddingHorizontal << 1):0;
+            if(isInvalid(INVALIDATE_ACTION_ICON))
+            {
+                this.actionIcon.visible = StringUtils.isNotEmpty(this._actionIconStr);
+                this.actionIcon.source = this._actionIconStr;
+                invalidate(INVALIDATE_ACTION_ICON_POS);
+            }
+            if(isInvalid(INVALIDATE_ACTION_ICON_POS))
+            {
+                _loc1_ = this._iconType?this.icon.x:this.fxTextField1.x;
+                _loc2_ = this._iconType?_loc1_ + this.icon.width + ICON_PADDING + this.fxTextField1.width:this.fxTextField1.width;
+                this.actionIcon.x = _loc1_ + (_loc2_ - this.actionIcon.width >> 1);
+            }
         }
 
         override protected function getStatePrefixes() : Vector.<String>
         {
-            return _selected?statesSelected:this._externalState != ""?Vector.<String>([this._externalState]):statesDefault;
+            return _selected?statesSelected:this._externalState != Values.EMPTY_STR?Vector.<String>([this._externalState]):statesDefault;
+        }
+
+        override protected function showTooltip() : void
+        {
+            if(this._isTooltipSpecial && _tooltip && this._tooltipMgr)
+            {
+                this._tooltipMgr.showSpecial(_tooltip,null);
+            }
+            else
+            {
+                super.showTooltip();
+            }
+        }
+
+        public function set isTooltipSpecial(param1:Boolean) : void
+        {
+            this._isTooltipSpecial = param1;
         }
 
         public function setExternalState(param1:String) : void
@@ -231,9 +296,9 @@ package net.wg.gui.components.controls
 
         private function checkBrowserEffect() : void
         {
-            if(data && data.value == "browser")
+            if(data && data.value == BROWSER)
             {
-                App.utils.scheduler.scheduleTask(this.changeEffectState,1000);
+                App.utils.scheduler.scheduleTask(this.changeEffectState,CHANGE_EFFECT_TIME);
                 selected = false;
             }
         }
@@ -248,21 +313,26 @@ package net.wg.gui.components.controls
             }
             if(this.fxTextField1)
             {
-                if(isNaN(this.textColorBeforeBlink))
+                if(isNaN(this._textColorBeforeBlink))
                 {
-                    this.textColorBeforeBlink = this.fxTextField1.textColor;
+                    this._textColorBeforeBlink = this.fxTextField1.textColor;
                 }
                 this._isBlinking = !this._isBlinking;
                 if(this._isBlinking)
                 {
-                    this.fxTextField1.textColor = 16563563;
+                    this.fxTextField1.textColor = BLINK_TEXT_COLOR;
                 }
                 else
                 {
-                    this.fxTextField1.textColor = this.textColorBeforeBlink;
+                    this.fxTextField1.textColor = this._textColorBeforeBlink;
                 }
-                App.utils.scheduler.scheduleTask(this.changeEffectState,1000);
+                App.utils.scheduler.scheduleTask(this.changeEffectState,CHANGE_EFFECT_TIME);
             }
+        }
+
+        override public function get width() : Number
+        {
+            return this.fxTextField1?this.fxTextField1.x + this.fxTextField1.textWidth + TEXTFIELD_PADDING + (_paddingHorizontal << 1):0;
         }
 
         override public function get paddingHorizontal() : Number
@@ -330,7 +400,17 @@ package net.wg.gui.components.controls
             invalidate(INVALIDATE_ICON);
         }
 
-        private function onOverHandler(param1:MouseEvent) : void
+        public function set actionIconStr(param1:String) : void
+        {
+            if(this._actionIconStr == param1)
+            {
+                return;
+            }
+            this._actionIconStr = param1;
+            invalidate(INVALIDATE_ACTION_ICON);
+        }
+
+        private function onRollOverHandler(param1:MouseEvent) : void
         {
             if(data && data.value == Aliases.BROWSER)
             {
@@ -339,7 +419,7 @@ package net.wg.gui.components.controls
             }
         }
 
-        private function onOutHandler(param1:MouseEvent) : void
+        private function onRollOutHandler(param1:MouseEvent) : void
         {
             this.checkBrowserEffect();
         }
@@ -347,6 +427,11 @@ package net.wg.gui.components.controls
         private function onIconChangeHandler(param1:Event) : void
         {
             invalidateState();
+        }
+
+        private function onActionIconChangeHandler(param1:Event) : void
+        {
+            invalidate(INVALIDATE_ACTION_ICON_POS);
         }
     }
 }

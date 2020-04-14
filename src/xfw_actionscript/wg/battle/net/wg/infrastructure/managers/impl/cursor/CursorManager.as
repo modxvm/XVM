@@ -206,6 +206,11 @@ package net.wg.infrastructure.managers.impl.cursor
         private function draggingHandler(param1:MouseEvent) : void
         {
             this._asserter.assert(!disposed,Errors.MTHD_CORRUPT_INVOKE,InfrastructureException);
+            if(!param1.buttonDown)
+            {
+                this.mouseUpLclHdr(param1);
+                return;
+            }
             var _loc2_:DragInfo = this.getDragInfoByHit(InteractiveObject(param1.currentTarget));
             if(_loc2_.state != BaseInfo.STATE_STARTED)
             {
@@ -243,7 +248,15 @@ package net.wg.infrastructure.managers.impl.cursor
         {
             App.stage.removeEventListener(MouseEvent.MOUSE_UP,this.mouseReleaseOutsideLclHdr);
             this._asserter.assert(!disposed,Errors.MTHD_CORRUPT_INVOKE,InfrastructureException);
-            this._asserter.assertNotNull(this._mouseDwnDragInfo,this._mouseDwnDragInfo + Errors.CANT_NULL);
+            var _loc2_:DragInfo = this.getDragInfoByHit(InteractiveObject(param1.currentTarget));
+            if(!this._mouseDwnDragInfo && !_loc2_)
+            {
+                this._asserter.assertNotNull(this._mouseDwnDragInfo,this._mouseDwnDragInfo + Errors.CANT_NULL);
+            }
+            else if(!this._mouseDwnDragInfo)
+            {
+                this._mouseDwnDragInfo = _loc2_;
+            }
             this._mouseDwnDragInfo.hit.removeEventListener(MouseEvent.MOUSE_UP,this.mouseUpLclHdr);
             this._mouseDwnDragInfo.hit.removeEventListener(MouseEvent.MOUSE_MOVE,this.draggingHandler);
             if(isOnDropping)

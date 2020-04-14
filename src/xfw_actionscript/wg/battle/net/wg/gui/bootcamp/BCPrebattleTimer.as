@@ -21,6 +21,7 @@ package net.wg.gui.bootcamp
         {
             super();
             this._scheduler = App.utils.scheduler;
+            isNeedWinChangePosition = false;
         }
 
         override protected function onDispose() : void

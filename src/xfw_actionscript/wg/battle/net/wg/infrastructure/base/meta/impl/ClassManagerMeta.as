@@ -653,25 +653,24 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.battle.windows.vo.IngameDetailsPageVO;
     import net.wg.gui.bootcamp.BCBattleEquipmentButton;
     import net.wg.gui.bootcamp.BCBattlePage;
+    import net.wg.gui.bootcamp.BCFCVehicleMarker;
+    import net.wg.gui.bootcamp.BCFragCorrelationBar;
     import net.wg.gui.bootcamp.BCHighlightsOverlay;
     import net.wg.gui.bootcamp.BCIntroFadeOut;
-    import net.wg.gui.bootcamp.BCOverlayFinalWindow;
     import net.wg.gui.bootcamp.BCPrebattleTimer;
     import net.wg.gui.bootcamp.BCSecondaryHint;
+    import net.wg.gui.bootcamp.BCVehicleMarkersList;
     import net.wg.gui.bootcamp.battleTopHint.BCBattleTopHint;
     import net.wg.gui.bootcamp.battleTopHint.constants.HINT_LABELS;
     import net.wg.gui.bootcamp.battleTopHint.containers.HintAnimationBlind;
     import net.wg.gui.bootcamp.battleTopHint.containers.HintAnimationContainer;
     import net.wg.gui.bootcamp.battleTopHint.containers.HintBackground;
-    import net.wg.gui.bootcamp.battleTopHint.containers.HintBackgroundMask;
     import net.wg.gui.bootcamp.battleTopHint.containers.HintBlindContainer;
     import net.wg.gui.bootcamp.battleTopHint.containers.HintContainer;
     import net.wg.gui.bootcamp.battleTopHint.containers.HintInfoContainer;
     import net.wg.gui.bootcamp.battleTopHint.containers.HintPenetrationAnimation;
-    import net.wg.gui.bootcamp.events.BootcampBattleEvent;
     import net.wg.gui.bootcamp.prebattleHints.BCPrebattleHints;
     import net.wg.gui.bootcamp.prebattleHints.controls.CrosshairContainer;
-    import net.wg.gui.bootcamp.prebattleHints.controls.HintContainer;
     import net.wg.gui.components.controls.ReadOnlyScrollingList;
     import net.wg.gui.components.hintPanel.HintPanel;
     import net.wg.gui.components.hintPanel.KeyViewer;
@@ -702,8 +701,8 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.infrastructure.base.meta.IBattleTutorialMeta;
     import net.wg.infrastructure.base.meta.IBCBattlePageMeta;
     import net.wg.infrastructure.base.meta.IBCBattleTopHintMeta;
+    import net.wg.infrastructure.base.meta.IBCFragCorrelationBarMeta;
     import net.wg.infrastructure.base.meta.IBCIntroFadeOutMeta;
-    import net.wg.infrastructure.base.meta.IBCOverlayFinalWindowMeta;
     import net.wg.infrastructure.base.meta.IBCPrebattleHintsMeta;
     import net.wg.infrastructure.base.meta.IBCSecondaryHintMeta;
     import net.wg.infrastructure.base.meta.IConsumablesPanelMeta;
@@ -2067,15 +2066,19 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_BOOTCAMP_BCBATTLEPAGE:Class = BCBattlePage;
 
+        public static const NET_WG_GUI_BOOTCAMP_BCFCVEHICLEMARKER:Class = BCFCVehicleMarker;
+
+        public static const NET_WG_GUI_BOOTCAMP_BCFRAGCORRELATIONBAR:Class = BCFragCorrelationBar;
+
         public static const NET_WG_GUI_BOOTCAMP_BCHIGHLIGHTSOVERLAY:Class = BCHighlightsOverlay;
 
         public static const NET_WG_GUI_BOOTCAMP_BCINTROFADEOUT:Class = BCIntroFadeOut;
 
-        public static const NET_WG_GUI_BOOTCAMP_BCOVERLAYFINALWINDOW:Class = BCOverlayFinalWindow;
-
         public static const NET_WG_GUI_BOOTCAMP_BCPREBATTLETIMER:Class = BCPrebattleTimer;
 
         public static const NET_WG_GUI_BOOTCAMP_BCSECONDARYHINT:Class = BCSecondaryHint;
+
+        public static const NET_WG_GUI_BOOTCAMP_BCVEHICLEMARKERSLIST:Class = BCVehicleMarkersList;
 
         public static const NET_WG_GUI_BOOTCAMP_BATTLETOPHINT_BCBATTLETOPHINT:Class = BCBattleTopHint;
 
@@ -2087,23 +2090,17 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_BOOTCAMP_BATTLETOPHINT_CONTAINERS_HINTBACKGROUND:Class = HintBackground;
 
-        public static const NET_WG_GUI_BOOTCAMP_BATTLETOPHINT_CONTAINERS_HINTBACKGROUNDMASK:Class = HintBackgroundMask;
-
         public static const NET_WG_GUI_BOOTCAMP_BATTLETOPHINT_CONTAINERS_HINTBLINDCONTAINER:Class = HintBlindContainer;
 
-        public static const NET_WG_GUI_BOOTCAMP_BATTLETOPHINT_CONTAINERS_HINTCONTAINER:Class = net.wg.gui.bootcamp.battleTopHint.containers.HintContainer;
+        public static const NET_WG_GUI_BOOTCAMP_BATTLETOPHINT_CONTAINERS_HINTCONTAINER:Class = HintContainer;
 
         public static const NET_WG_GUI_BOOTCAMP_BATTLETOPHINT_CONTAINERS_HINTINFOCONTAINER:Class = HintInfoContainer;
 
         public static const NET_WG_GUI_BOOTCAMP_BATTLETOPHINT_CONTAINERS_HINTPENETRATIONANIMATION:Class = HintPenetrationAnimation;
 
-        public static const NET_WG_GUI_BOOTCAMP_EVENTS_BOOTCAMPBATTLEEVENT:Class = BootcampBattleEvent;
-
         public static const NET_WG_GUI_BOOTCAMP_PREBATTLEHINTS_BCPREBATTLEHINTS:Class = BCPrebattleHints;
 
         public static const NET_WG_GUI_BOOTCAMP_PREBATTLEHINTS_CONTROLS_CROSSHAIRCONTAINER:Class = CrosshairContainer;
-
-        public static const NET_WG_GUI_BOOTCAMP_PREBATTLEHINTS_CONTROLS_HINTCONTAINER:Class = net.wg.gui.bootcamp.prebattleHints.controls.HintContainer;
 
         public static const NET_WG_GUI_COMPONENTS_CONTROLS_READONLYSCROLLINGLIST:Class = ReadOnlyScrollingList;
 
@@ -2165,9 +2162,9 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IBCBATTLETOPHINTMETA:Class = IBCBattleTopHintMeta;
 
-        public static const NET_WG_INFRASTRUCTURE_BASE_META_IBCINTROFADEOUTMETA:Class = IBCIntroFadeOutMeta;
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IBCFRAGCORRELATIONBARMETA:Class = IBCFragCorrelationBarMeta;
 
-        public static const NET_WG_INFRASTRUCTURE_BASE_META_IBCOVERLAYFINALWINDOWMETA:Class = IBCOverlayFinalWindowMeta;
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IBCINTROFADEOUTMETA:Class = IBCIntroFadeOutMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IBCPREBATTLEHINTSMETA:Class = IBCPrebattleHintsMeta;
 
@@ -2297,9 +2294,9 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BCBATTLETOPHINTMETA:Class = BCBattleTopHintMeta;
 
-        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BCINTROFADEOUTMETA:Class = BCIntroFadeOutMeta;
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BCFRAGCORRELATIONBARMETA:Class = BCFragCorrelationBarMeta;
 
-        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BCOVERLAYFINALWINDOWMETA:Class = BCOverlayFinalWindowMeta;
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BCINTROFADEOUTMETA:Class = BCIntroFadeOutMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BCPREBATTLEHINTSMETA:Class = BCPrebattleHintsMeta;
 

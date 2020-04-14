@@ -63,7 +63,7 @@ package
 
         public static const INVITES_TEXT_FORT_BATTLE:String = "#invites:invites/text/FORT_BATTLE";
 
-        public static const INVITES_TEXT_EXTERNAL:String = "#invites:invites/text/EXTERNAL";
+        public static const INVITES_TEXT_STRONGHOLD:String = "#invites:invites/text/STRONGHOLD";
 
         public static const INVITES_TEXT_FORT_OFFENCE:String = "#invites:invites/text/fort/offence";
 
@@ -151,9 +151,9 @@ package
 
         public static const INVITES_NOTE_CHANGE_AND_LEAVE_FORT_BATTLE:String = "#invites:invites/note/change_and_leave/FORT_BATTLE";
 
-        public static const INVITES_NOTE_LEAVE_EXTERNAL:String = "#invites:invites/note/leave/EXTERNAL";
+        public static const INVITES_NOTE_LEAVE_STRONGHOLD:String = "#invites:invites/note/leave/STRONGHOLD";
 
-        public static const INVITES_NOTE_CHANGE_AND_LEAVE_EXTERNAL:String = "#invites:invites/note/change_and_leave/EXTERNAL";
+        public static const INVITES_NOTE_CHANGE_AND_LEAVE_STRONGHOLD:String = "#invites:invites/note/change_and_leave/STRONGHOLD";
 
         public static const INVITES_NOTE_CHANGE_AND_LEAVE_RANDOMS:String = "#invites:invites/note/change_and_leave/RANDOMS";
 

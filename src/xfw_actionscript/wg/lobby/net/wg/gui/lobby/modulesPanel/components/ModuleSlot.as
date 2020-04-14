@@ -1,9 +1,10 @@
 package net.wg.gui.lobby.modulesPanel.components
 {
+    import net.wg.gui.lobby.modulesPanel.interfaces.IModuleSlot;
     import flash.display.MovieClip;
     import scaleform.clik.constants.InvalidationType;
 
-    public class ModuleSlot extends DeviceSlot
+    public class ModuleSlot extends DeviceSlot implements IModuleSlot
     {
 
         public var levelMC:MovieClip = null;
@@ -45,6 +46,10 @@ package net.wg.gui.lobby.modulesPanel.components
             {
                 this.disabledBg.visible = slotData && slotData.isDisabledBgVisible;
             }
+        }
+
+        public function playAnimation() : void
+        {
         }
     }
 }
