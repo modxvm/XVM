@@ -27,7 +27,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 14.02.2020
+    # Last update: 14.04.2020
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -431,6 +431,7 @@ _data = {
     "sweden:S28_UDES_15_16_bob":             'udes·15/16·bb',
     "sweden:S29_UDES_14_5":                  'udes·14·5',
     "sweden:S30_UDES_03_Alt_3":              'udes·03·3',
+    "sweden:S31_Strv_K":                     'strv·K',
     "uk:GB01_Medium_Mark_I":                 'Med1',
     "uk:GB01_Medium_Mark_I_bot":             'Med1',
     "uk:GB03_Cruiser_Mk_I":                  'Crus1',
@@ -448,6 +449,8 @@ _data = {
     "uk:GB103_GSOR3301_AVR_FS":              'GSOR',
     "uk:GB104_GSR_3301_Setter":              'Setter',
     "uk:GB105_Black_Prince_2019":            'A43bp',
+    "uk:GB107_Cavalier":                     'Caval.',
+    "uk:GB108_A46":                          'A46',
     "uk:GB10_Black_Prince":                  'BlPrn',
     "uk:GB11_Caernarvon":                    'Caer',
     "uk:GB11_Caernarvon_IGR":                'Caer',
@@ -567,6 +570,8 @@ _data = {
     "usa:A125_AEP_1":                        'AEPh·I',
     "usa:A126_PzVI_Tiger_II_capt":           'K.TigrC',
     "usa:A127_TL_1_LPC":                     'TL1.lpc',
+    "usa:A128_concept_1b":                   'Conc.1b',
+    "usa:A129_T6_medium":                    'T6med',
     "usa:A12_T32":                           'T32',
     "usa:A12_T32_FL":                        'T32·fl',
     "usa:A130_Super_Hellcat":                'S.Hellc',
@@ -731,7 +736,10 @@ _data = {
     "ussr:R170_IS_2_II":                     'Is·2·II',
     "ussr:R171_IS_3_II":                     'Is·3·II',
     "ussr:R172_Object_752":                  'obj752',
+    "ussr:R173_K_91_2":                      'k91·2',
+    "ussr:R174_BT-5":                        'Bt5',
     "ussr:R175_IS_2_screen":                 'Is·2·s',
+    "ussr:R177_ISU_152K_BL10":               'ISU·K',
     "ussr:R17_SU-100":                       'Su100',
     "ussr:R18_SU-152":                       'Su152',
     "ussr:R18_SU-152_IGR":                   'Su152',
