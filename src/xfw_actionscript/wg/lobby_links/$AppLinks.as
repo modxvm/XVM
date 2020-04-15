@@ -30,7 +30,8 @@ import net.wg.gui.lobby.header.headerButtonBar.HBC_Finance; HBC_Finance;
 import net.wg.gui.lobby.header.headerButtonBar.HBC_Squad; HBC_Squad;
 import net.wg.gui.lobby.profile.Profile; Profile;
 import net.wg.gui.lobby.techtree.ResearchPage; ResearchPage;
-import net.wg.gui.lobby.techtree.TechTreePage; TechTreePage;
+// TODO:1.9.0
+/* import net.wg.gui.lobby.techtree.TechTreePage; TechTreePage; */
 import net.wg.gui.lobby.window.ProfileWindow; ProfileWindow;
 import net.wg.gui.login.impl.LoginPage; LoginPage;
 import net.wg.gui.messenger.ContactsListPopover; ContactsListPopover;
