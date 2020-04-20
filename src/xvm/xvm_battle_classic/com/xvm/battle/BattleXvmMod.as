@@ -27,11 +27,11 @@ package com.xvm.battle
         private static const VIEWS:Object =
         {
             "classicBattlePage": [
-                RandomBattleLoadingXvmView,
+                //TODO: RandomBattleLoadingXvmView,
                 //TODO: FullStatsXvmView,
                 //TODO: PlayersPanelXvmView,
                 TeamBasesPanelXvmView,
-                MinimapXvmView,
+                //TODO: MinimapXvmView,
                 SixthSenseXvmView,
                 BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
             ]
