@@ -145,7 +145,7 @@ detect_ffdec(){
 #  - $PATHS+=$ASSDK_HOME/bin
 #
 detect_actionscript_sdk(){
-    if [ "$ROYALE_HOME" != "" ]; then
+    if [ "$ROYALE_HOME" != "" -a -d "$ROYALE_HOME" ]; then
         export ASSDK_HOME="$ROYALE_HOME"
         export ASSDK_TYPE="royale"
     elif [ -d "/c/Apache Royale/royale-asjs" ]; then
@@ -154,7 +154,7 @@ detect_actionscript_sdk(){
     elif [ -d "/opt/apache-royale/royale-asjs" ]; then
         export ASSDK_HOME="/opt/apache-royale/royale-asjs"
         export ASSDK_TYPE="royale"
-    elif [ "$FLEX_HOME" != "" ]; then
+    elif [ "$FLEX_HOME" != "" -a -d "$FLEX_HOME" ]; then
         export ASSDK_HOME="$FLEX_HOME"
         export ASSDK_TYPE="flex"
     elif [ -d "/opt/apache-flex" ]; then
@@ -173,8 +173,13 @@ detect_actionscript_sdk(){
 
     # extend PATH and set XVMBUILD_MXMLC_FILEPATH and XVMBUILD_COMPC_FILEPATH
     export PATH=$PATH:$ASSDK_HOME/bin/
-    export XVMBUILD_MXMLC_FILEPATH="$ASSDK_HOME/js/bin/mxmlc"
-    export XVMBUILD_COMPC_FILEPATH="$ASSDK_HOME/js/bin/compc"
+    if [ "$ASSDK_TYPE" = "royale" ]; then
+        export XVMBUILD_MXMLC_FILEPATH="$ASSDK_HOME/js/bin/mxmlc"
+        export XVMBUILD_COMPC_FILEPATH="$ASSDK_HOME/js/bin/compc"
+    else
+        export XVMBUILD_MXMLC_FILEPATH="$ASSDK_HOME/bin/mxmlc"
+        export XVMBUILD_COMPC_FILEPATH="$ASSDK_HOME/bin/compc"
+    fi
 
     #check if mxmlc exists
     if [ ! -f "$XVMBUILD_MXMLC_FILEPATH" ]; then

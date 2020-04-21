@@ -276,7 +276,13 @@ package com.xfw
 
         public static function stack(...params):String
         {
-            var s:String = new Error().getStackTrace();
+            var e:Error = new Error();
+            if (e == null)
+            {
+                return "WOT_1_9_0_STACK_BROKEN:" + params;
+            }
+
+            var s:String = e.getStackTrace();
             var func:String = "<unknown>";
             var file:String = null;
             var args:String = null;

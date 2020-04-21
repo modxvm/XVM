@@ -65,8 +65,8 @@ package com.xfw
         public static const XFW_CONFIGS_DIR_NAME:String = "res_mods/configs/";
         // res_mods/mods/shared_resources/
         public static const XFW_RESOURCES_DIR_NAME:String = "res_mods/mods/shared_resources/";
-        // ../../../../res_mods/mods/xfw_packages/
-        public static const XFW_PACKAGES_PATH:String = "../../../../res_mods/mods/xfw_packages/";
+        // ../../../res_mods/mods/xfw_packages/
+        public static const XFW_PACKAGES_PATH:String = "../../../res_mods/mods/xfw_packages/";
 
         // swf load status
         public static const SWF_START_LOADING:int = 1;
