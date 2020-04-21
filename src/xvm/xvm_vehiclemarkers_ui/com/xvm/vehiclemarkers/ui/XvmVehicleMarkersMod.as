@@ -72,7 +72,7 @@ package com.xvm.vehiclemarkers.ui
 
         private function onConfigLoaded(e:Event):void
         {
-            Xvm.swfProfilerBegin(XfwUtils.stack());
+            //Xvm.swfProfilerBegin(XfwUtils.stack());
             removeBattleControllerListeners();
             if (Config.config.markers.enabled)
             {
@@ -84,7 +84,7 @@ package com.xvm.vehiclemarkers.ui
                     initialize();
                 }
             }
-            Xvm.swfProfilerEnd(XfwUtils.stack());
+            //Xvm.swfProfilerEnd(XfwUtils.stack());
         }
 
         private function registerVehicleIconAtlases():void

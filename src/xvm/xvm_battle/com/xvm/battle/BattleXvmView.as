@@ -180,7 +180,7 @@ package com.xvm.battle
         public override function onConfigLoaded(e:Event):void
         {
             //Logger.add("BattleXvmView.onConfigLoaded()");
-            Xvm.swfProfilerBegin(XfwUtils.stack());
+            //Xvm.swfProfilerBegin(XfwUtils.stack());
             try
             {
                 super.onConfigLoaded(e);
@@ -193,7 +193,7 @@ package com.xvm.battle
             {
                 Logger.err(ex);
             }
-            Xvm.swfProfilerEnd(XfwUtils.stack());
+            //Xvm.swfProfilerEnd(XfwUtils.stack());
         }
 
         // PRIVATE
