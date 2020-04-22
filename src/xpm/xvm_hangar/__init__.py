@@ -29,6 +29,8 @@ from gui.Scaleform.daapi.view.lobby.messengerBar.messenger_bar import MessengerB
 from gui.Scaleform.daapi.view.lobby.messengerBar.session_stats_button import SessionStatsButton
 from gui.Scaleform.daapi.view.lobby.rankedBattles.ranked_battles_results import RankedBattlesResults
 from gui.Scaleform.daapi.view.lobby.hangar.daily_quest_widget import DailyQuestWidget
+from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
+from gui.Scaleform.genConsts.HANGAR_ALIASES import HANGAR_ALIASES
 
 from xfw import *
 
@@ -246,4 +248,12 @@ def updateBatteleCount(base, self):
 def shouldHide(base, self):
     if not config.get('hangar/showDailyQuestWidget', True):
         return True
+    base(self)
+
+# hide display widget - World of Tanks' 10th Anniversary
+@overrideMethod(Hangar, '_Hangar__updateTenYearsCountdownEntryPointVisibility')
+def updateTenYearsCountdownEntryPointVisibility(base, self):
+    if not config.get('hangar/showTenYearsWidget', True):
+        self.as_updateEventEntryPointS(HANGAR_ALIASES.TEN_YEARS_COUNTDOWN_ENTRY_POINT_INJECT, False)
+        return
     base(self)
