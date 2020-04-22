@@ -19,61 +19,50 @@
 #include <Python.h>
 #include <XfwNativeApi.h>
 
-#include "bugfix_3.h"
-#include "common.h"
+#include "32_common.h"
 
-//IDA Search string: 55 8B EC 51 53 8B D9 57 33 FF 8B 83 24 4B 00 00
-static const char* function_signature = "\x55\x8B\xEC\x51\x53\x8B\xD9\x57\x33\xFF\x8B\x83\x24\x4B\x00\x00";
+//Search string: 55 8B EC 83 EC 10 56 8B F1 89 75 FC 8B 86 24 4B
+static const char* function_signature = "\x55\x8B\xEC\x83\xEC\x10\x56\x8B\xF1\x89\x75\xFC\x8B\x86\x24\x4B";
 static const char* function_signature_mask = "xxxxxxxxxxxxxxxx";
 
-static const DWORD replace_addr_offset = 0x20;
+static const DWORD replace_addr_offset = 0xD7;
 static const char replace_addr_test = 0x8B;
 static DWORD* replace_addr = NULL;
 
-static const DWORD return_addr_offset = 0x3F;
+static const DWORD return_addr_offset = 0xE1;
 static const char return_addr_test = 0x8B;
 static DWORD* return_addr = NULL;
 
-static const DWORD return2_addr_offset = 0x5F;
-static const char return2_addr_test = 0x47;
-static DWORD* return2_addr = NULL;
 
 _declspec(naked)
 static void bugfix_asm()
 {
     __asm
     {
-        mov     eax, [ebx+4B20h]
-        lea     ecx, ds:0[edi*4]
-        push    dword ptr[ebp + 8]
-        push    ebx
-        mov     ecx, [ecx+eax]
+        mov     eax, [esi]
+        mov ecx, [eax + edi * 4]
 
-        //crashfix-6
-        test    ecx, ecx
-        jz      check_failed
-        mov     eax, [ecx]      // CRASH, ECX=0x0
+        //Crashfix: ECX = 0x0
+        test ecx, ecx
+        jz aftercall
+        mov     eax, [ecx]
 
-        mov     eax, [eax+14h]
-        call    eax
-        test    al, al
-        jz      check_failed
+        call    dword ptr[eax + 10h]
 
-        jmp return_addr
-
-        check_failed:
-        jmp return2_addr
+        aftercall:
+        jmp     return_addr
     }
 }
 
 
-int bugfix3_apply()
+int bugfix4_apply()
 {
     //init search
     WCHAR lpFilename[2048];
     GetModuleFileNameW(NULL, lpFilename, 2048);
     DWORD startpos = (DWORD)GetModuleHandleW(lpFilename);
     DWORD endpos = startpos + XFWNATIVE_GetModuleSize(lpFilename);
+    DWORD curpos = startpos;
 
     char *test = NULL;
 
@@ -92,12 +81,6 @@ int bugfix3_apply()
     test = return_addr;
     if (test[0] != return_addr_test) {
         return -3;
-    }
-
-    return2_addr = crashfunction_addr + return2_addr_offset;
-    test = return2_addr;
-    if (test[0] != return2_addr_test) {
-        return -4;
     }
 
     make_jmp(replace_addr, bugfix_asm);

@@ -19,19 +19,18 @@
 #include <Python.h>
 #include <XfwNativeApi.h>
 
-#include "bugfix_4.h"
-#include "common.h"
+#include "32_common.h"
 
-//Search string: 55 8B EC 83 EC 10 56 8B F1 89 75 FC 8B 86 24 4B
-static const char* function_signature = "\x55\x8B\xEC\x83\xEC\x10\x56\x8B\xF1\x89\x75\xFC\x8B\x86\x24\x4B";
+//search string: 55 8B EC 83 EC 18 53 8B D9 56 57 8D 7B 08 89 5D
+static const char* function_signature = "\x55\x8B\xEC\x83\xEC\x18\x53\x8B\xD9\x56\x57\x8D\x7B\x08\x89\x5D";
 static const char* function_signature_mask = "xxxxxxxxxxxxxxxx";
 
-static const DWORD replace_addr_offset = 0xD7;
+static const DWORD replace_addr_offset = 0x180;
 static const char replace_addr_test = 0x8B;
 static DWORD* replace_addr = NULL;
 
-static const DWORD return_addr_offset = 0xE1;
-static const char return_addr_test = 0x8B;
+static const DWORD return_addr_offset = 0x18E;
+static const char return_addr_test = 0x47;
 static DWORD* return_addr = NULL;
 
 
@@ -40,30 +39,29 @@ static void bugfix_asm()
 {
     __asm
     {
-        mov     eax, [esi]
-        mov ecx, [eax + edi * 4]
+        mov     eax, [ebx+4B20h]
+        mov     ecx, [eax+edi*4]
 
         //Crashfix: ECX = 0x0
         test ecx, ecx
         jz aftercall
         mov     eax, [ecx]
 
-        call    dword ptr[eax + 10h]
+        call    dword ptr [eax+10h]
 
         aftercall:
-        jmp     return_addr
+            jmp     return_addr
     }
 }
 
 
-int bugfix4_apply()
+int bugfix1_apply()
 {
     //init search
     WCHAR lpFilename[2048];
     GetModuleFileNameW(NULL, lpFilename, 2048);
     DWORD startpos = (DWORD)GetModuleHandleW(lpFilename);
     DWORD endpos = startpos + XFWNATIVE_GetModuleSize(lpFilename);
-    DWORD curpos = startpos;
 
     char *test = NULL;
 

@@ -22,4 +22,4 @@
 
 BOOL __stdcall IsBadReadPtrVQ(PVOID p);
 
-BOOL make_jmp(DWORD originAddress, DWORD replacementAddress);
+BOOL make_jmp(PVOID originAddress, PVOID replacementAddress);

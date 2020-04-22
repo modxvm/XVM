@@ -20,4 +20,4 @@
 
 #include <Windows.h>
 
-BOOL bugfix3_apply();
+BOOL make_jmp(PVOID originAddress, PVOID replacementAddress);

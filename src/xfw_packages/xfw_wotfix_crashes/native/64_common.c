@@ -16,8 +16,28 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#pragma once
+#include "64_common.h"
 
-#include <Windows.h>
+BOOL make_jmp(PVOID originAddress, PVOID replacementAddress)
+{
+    char* originFunction = NULL;
+    DWORD dwProtect = 0;
 
-BOOL bugfix4_apply();
+    originFunction = originAddress;
+    VirtualProtect(originFunction, 12, PAGE_EXECUTE_READWRITE, &dwProtect);
+
+    //mov rax, ADDR
+    originFunction[0] = 0x48;
+    originFunction[1] = 0xB8;
+    memcpy(originFunction + 2, &replacementAddress, 8);
+    
+    //push rax
+    originFunction[10] = 0x50;
+
+    //retn
+    originFunction[11] = 0xC3;
+
+    VirtualProtect(originFunction, 12, dwProtect, &dwProtect);
+
+    return TRUE;
+}

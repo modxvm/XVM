@@ -2,28 +2,38 @@ cmake_minimum_required (VERSION 3.0)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-project(xfw_crashfix LANGUAGES C)
+project(xfw_crashfix LANGUAGES C ASM_MASM)
 
 find_package(libpython REQUIRED)
 
-add_library(xfw_crashfix SHARED
-        "src/pythonModule.c"
-        "src/common.c"
+add_library(xfw_crashfix SHARED)
 
-        "src/bugfix_1.c"
-        "src/bugfix_1.h"
-
-        "src/bugfix_2.c"
-        "src/bugfix_2.h"
-
-        "src/bugfix_3.c"
-        "src/bugfix_3.h"
-
-        "src/bugfix_4.c"
-        "src/bugfix_4.h"
-
-        "../../library.rc"
+target_sources(xfw_crashfix PRIVATE
+    "../../library.rc"
+    "pythonModule.c"
 )
+
+if("${CMAKE_GENERATOR_PLATFORM}" STREQUAL "x64")
+
+    target_sources(xfw_crashfix PRIVATE
+        "64_common.c"
+        "64_patch.c"
+        "64_patch_1.c"
+        "64_patch_1.asm"
+    )
+
+else()
+
+    target_sources(xfw_crashfix PRIVATE
+        "32_common.c"
+        "32_patch.c"
+        "32_patch_1.c"
+        "32_patch_2.c"
+        "32_patch_3.c"
+        "32_patch_4.c"
+    )
+
+endif()
 
 set(VER_PRODUCTNAME_STR "XFW Crashfix")
 set(VER_FILEDESCRIPTION_STR "XFW Crashfix module for World of Tanks")

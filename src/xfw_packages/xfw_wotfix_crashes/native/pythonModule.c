@@ -19,17 +19,13 @@
 #include <Windows.h>
 #include <Python.h>
 
-#include "bugfix_1.h"
-#include "bugfix_2.h"
-#include "bugfix_3.h"
-#include "bugfix_4.h"
+extern int patch_get_count();
+extern int patch_apply(int);
 
-
-int bugfix_count = 4;
 
 PyObject* fix_count(PyObject* self, PyObject* args)
 {
-    return Py_BuildValue("i", bugfix_count);
+    return Py_BuildValue("i", patch_get_count());
 }
 
 PyObject* fix_apply(PyObject* self, PyObject* args)
@@ -39,25 +35,7 @@ PyObject* fix_apply(PyObject* self, PyObject* args)
         return NULL;
     }
 
-    int result = -100;
-    switch(i){
-        case 1:
-            result = bugfix1_apply();
-            break;
-        case 2:
-            result = bugfix2_apply();
-            break;
-        case 3:
-            result = bugfix3_apply();
-            break;
-        case 4:
-            result = bugfix4_apply();
-            break;
-        default:
-            break;
-    }
-
-    return Py_BuildValue("i", result);
+    return Py_BuildValue("i", patch_apply(i));
 }
 
 

@@ -26,25 +26,26 @@ $version = $version_str -replace "\.",","
 $xfwnative_url="https://ci.appveyor.com/api/buildjobs/hvuxnvoh05o7vr50/artifacts/~output%2Fdeploy%2Fcom.modxvm.xfw.native_1.5.8-devel.zip"
 
 $projects_32=@(
-    "xfw_crashreport"
+  #  "xfw_crashreport"
  #   "xfw_filewatcher"
   #  "xfw_fonts"
   #  "xfw_mutex"
   #  "xfw_ping"
-  #  "xfw_wotfix_crashes"
+    "xfw_wotfix_crashes"
   #  "xfw_wotfix_hidpi"
   #  "xfw_wwise"
 )
 
 
 $projects_64=@(
-    "xfw_crashreport"
-    "xfw_filewatcher"
-    "xfw_fonts"
-    "xfw_mutex"
-    "xfw_ping"
-    "xfw_wotfix_hidpi"
-    "xfw_wwise"
+ #   "xfw_crashreport"
+ #   "xfw_filewatcher"
+ #   "xfw_fonts"
+ #   "xfw_mutex"
+   # "xfw_ping"
+    "xfw_wotfix_crashes"
+    #"xfw_wotfix_hidpi"
+   # "xfw_wwise"
 )
 
 function Download-DevelPackage()

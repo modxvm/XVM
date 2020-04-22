@@ -19,44 +19,54 @@
 #include <Python.h>
 #include <XfwNativeApi.h>
 
-#include "bugfix_2.h"
-#include "common.h"
+#include "32_common.h"
 
-//Search string: 56 8B F1 83 7E 48 00 75 3A 8B 4E 4C 85 C9 74 07
-
-static const char* function_signature = "\x56\x8B\xF1\x83\x7E\x48\x00\x75\x3A\x8B\x4E\x4C\x85\xC9\x74\x07";
+//IDA Search string: 55 8B EC 51 53 8B D9 57 33 FF 8B 83 24 4B 00 00
+static const char* function_signature = "\x55\x8B\xEC\x51\x53\x8B\xD9\x57\x33\xFF\x8B\x83\x24\x4B\x00\x00";
 static const char* function_signature_mask = "xxxxxxxxxxxxxxxx";
 
-static const DWORD replace_addr_offset = 0x0;
-static const char replace_addr_test = 0x56;
+static const DWORD replace_addr_offset = 0x20;
+static const char replace_addr_test = 0x8B;
 static DWORD* replace_addr = NULL;
 
-static const DWORD return_addr_offset = 0x7;
-static const char return_addr_test = 0x75;
+static const DWORD return_addr_offset = 0x3F;
+static const char return_addr_test = 0x8B;
 static DWORD* return_addr = NULL;
+
+static const DWORD return2_addr_offset = 0x5F;
+static const char return2_addr_test = 0x47;
+static DWORD* return2_addr = NULL;
 
 _declspec(naked)
 static void bugfix_asm()
 {
     __asm
     {
+        mov     eax, [ebx+4B20h]
+        lea     ecx, ds:0[edi*4]
+        push    dword ptr[ebp + 8]
+        push    ebx
+        mov     ecx, [ecx+eax]
+
+        //crashfix-6
         test    ecx, ecx
-        jz      this_is_nullptr
+        jz      check_failed
+        mov     eax, [ecx]      // CRASH, ECX=0x0
 
-        push    esi
-        mov     esi, ecx
-        cmp     dword ptr[esi + 48h], 0 // CRASH, ESI = 0x0
+        mov     eax, [eax+14h]
+        call    eax
+        test    al, al
+        jz      check_failed
 
-        jmp     return_addr
+        jmp return_addr
 
-        this_is_nullptr:
-        mov eax, 0
-        retn
+        check_failed:
+        jmp return2_addr
     }
 }
 
 
-int bugfix2_apply()
+int bugfix3_apply()
 {
     //init search
     WCHAR lpFilename[2048];
@@ -81,6 +91,12 @@ int bugfix2_apply()
     test = return_addr;
     if (test[0] != return_addr_test) {
         return -3;
+    }
+
+    return2_addr = crashfunction_addr + return2_addr_offset;
+    test = return2_addr;
+    if (test[0] != return2_addr_test) {
+        return -4;
     }
 
     make_jmp(replace_addr, bugfix_asm);

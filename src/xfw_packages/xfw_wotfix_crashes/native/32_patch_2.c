@@ -19,44 +19,43 @@
 #include <Python.h>
 #include <XfwNativeApi.h>
 
-#include "bugfix_1.h"
-#include "common.h"
+#include "32_common.h"
 
-//search string: 55 8B EC 83 EC 18 53 8B D9 56 57 8D 7B 08 89 5D
-static const char* function_signature = "\x55\x8B\xEC\x83\xEC\x18\x53\x8B\xD9\x56\x57\x8D\x7B\x08\x89\x5D";
+//Search string: 56 8B F1 83 7E 48 00 75 3A 8B 4E 4C 85 C9 74 07
+
+static const char* function_signature = "\x56\x8B\xF1\x83\x7E\x48\x00\x75\x3A\x8B\x4E\x4C\x85\xC9\x74\x07";
 static const char* function_signature_mask = "xxxxxxxxxxxxxxxx";
 
-static const DWORD replace_addr_offset = 0x180;
-static const char replace_addr_test = 0x8B;
+static const DWORD replace_addr_offset = 0x0;
+static const char replace_addr_test = 0x56;
 static DWORD* replace_addr = NULL;
 
-static const DWORD return_addr_offset = 0x18E;
-static const char return_addr_test = 0x47;
+static const DWORD return_addr_offset = 0x7;
+static const char return_addr_test = 0x75;
 static DWORD* return_addr = NULL;
-
 
 _declspec(naked)
 static void bugfix_asm()
 {
     __asm
     {
-        mov     eax, [ebx+4B20h]
-        mov     ecx, [eax+edi*4]
+        test    ecx, ecx
+        jz      this_is_nullptr
 
-        //Crashfix: ECX = 0x0
-        test ecx, ecx
-        jz aftercall
-        mov     eax, [ecx]
+        push    esi
+        mov     esi, ecx
+        cmp     dword ptr[esi + 48h], 0 // CRASH, ESI = 0x0
 
-        call    dword ptr [eax+10h]
+        jmp     return_addr
 
-        aftercall:
-            jmp     return_addr
+        this_is_nullptr:
+        mov eax, 0
+        retn
     }
 }
 
 
-int bugfix1_apply()
+int bugfix2_apply()
 {
     //init search
     WCHAR lpFilename[2048];

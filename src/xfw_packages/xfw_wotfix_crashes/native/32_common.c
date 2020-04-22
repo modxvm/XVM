@@ -16,7 +16,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "common.h"
+#include "32_common.h"
 
 BOOL __stdcall IsBadReadPtrVQ(PVOID p)
 {
@@ -34,7 +34,7 @@ BOOL __stdcall IsBadReadPtrVQ(PVOID p)
     return TRUE;
 }
 
-BOOL make_jmp(DWORD originAddress, DWORD replacementAddress)
+BOOL make_jmp(PVOID originAddress, PVOID replacementAddress)
 {
     char* originFunction;
     DWORD dwProtect;
