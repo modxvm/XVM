@@ -61,7 +61,18 @@ package com.xfw
 
         public static function err(error:Error):void
         {
-            add(error.getStackTrace());
+            if(error == null){
+                add("[ERROR] trying to log error which is null");
+            }
+
+            if(error.message){
+                add("[ERROR]" + error.message);
+            }  
+
+            var stackTrace:String = error.getStackTrace();
+            if(stackTrace){
+                add(stackTrace);
+            }
         }
     }
 }
