@@ -31,6 +31,9 @@
     // true - show widget "Daily Quests" in the hangar.
     // true - показывать виджет "Ежедневные задачи" в ангаре.
     "showDailyQuestWidget": true,
+    // true - show widget "World of Tanks' 10th Anniversary" in the hangar.
+    // true - показывать виджет "Десятилетие World of Tanks" в ангаре.
+    "showTenYearsWidget": true,
     // Consumables panel - show/hide the number of consumables and directives.
     // Панель снаряжения - показывать/прятать количество снаряжения и инструкций.
     "equipmentPanel": {

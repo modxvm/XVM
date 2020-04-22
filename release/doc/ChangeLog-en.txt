@@ -1,4 +1,10 @@
 ﻿XVM-8.4.1:
+  [GENERAL]
+  * World of Tanks 1.9.0.0
+
+  [HANGAR]
+  * added option:
+      "hangar"/"showTenYearsWidget" - show widget "World of Tanks' 10th Anniversary" in the hangar
 
 XVM-8.4.0:
   [GENERAL]
