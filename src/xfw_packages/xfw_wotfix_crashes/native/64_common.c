@@ -18,26 +18,29 @@
 
 #include "64_common.h"
 
+//requires 13 bytes in the original function
+//requires pop rax at the beggining of your replacement code
 BOOL make_jmp(PVOID originAddress, PVOID replacementAddress)
 {
     char* originFunction = NULL;
     DWORD dwProtect = 0;
 
     originFunction = originAddress;
-    VirtualProtect(originFunction, 12, PAGE_EXECUTE_READWRITE, &dwProtect);
+    VirtualProtect(originFunction, 13, PAGE_EXECUTE_READWRITE, &dwProtect);
 
-    //mov rax, ADDR
-    originFunction[0] = 0x48;
-    originFunction[1] = 0xB8;
-    memcpy(originFunction + 2, &replacementAddress, 8);
-    
     //push rax
-    originFunction[10] = 0x50;
+    originFunction[0] = 0x50;
 
-    //retn
-    originFunction[11] = 0xC3;
+    //mov rax, QWORD
+    originFunction[1] = 0x48;
+    originFunction[2] = 0xB8;
+    memcpy(originFunction + 3, &replacementAddress, 8);
 
-    VirtualProtect(originFunction, 12, dwProtect, &dwProtect);
+    //jmp rax
+    originFunction[11] = 0xFF;
+    originFunction[12] = 0xE0;
+
+    VirtualProtect(originFunction, 13, dwProtect, &dwProtect);
 
     return TRUE;
 }

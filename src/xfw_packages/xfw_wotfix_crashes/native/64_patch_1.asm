@@ -10,7 +10,10 @@ patch_1_returnaddr QWORD 1
 .code
 
 patch_1_asmfunc PROC
-   
+   ;restore rax
+   pop     rax
+
+   start:
    mov     rax, [r14+4CE0h]
    mov     rcx, [rax+rdi*8]
 
@@ -25,7 +28,7 @@ patch_1_asmfunc PROC
    aftercall:
    inc     rdi
    cmp     rdi, rsi
-   jb      patch_1_asmfunc
+   jb      start
 
    jmp     patch_1_returnaddr
 
