@@ -125,6 +125,7 @@ package com.xvm
                 case 27: return 'epic_battle';
                 case 28: return 'epic_battle_training';
                 case 31: return 'tournament_event';
+                case 32: return 'bob';
                 default: return 'unknown';
             }
         }
