@@ -271,6 +271,8 @@ package net.wg.data.constants.generated
 
         public static const BADGE_90_GOLD:String = "badge_90_gold";
 
+        public static const BADGE_91:String = "badge_91";
+
         public static const BATTLE_LOADING_FORM_BG_TABLE:String = "battleLoadingFormBgTable";
 
         public static const BATTLE_LOADING_FORM_BG_TIPS:String = "battleLoadingFormBgTips";

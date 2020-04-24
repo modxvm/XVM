@@ -1,6 +1,6 @@
 ﻿XVM-8.4.1:
   [GENERAL]
-  * World of Tanks 1.9.0.0
+  * World of Tanks 1.9.0.1
 
   [HANGAR]
   * added option:

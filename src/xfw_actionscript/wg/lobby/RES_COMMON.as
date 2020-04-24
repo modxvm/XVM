@@ -21,6 +21,8 @@ package
 
         public static const MAPS_ICONS_BATTLEPASS2020_VOTING_BG:String = "../maps/icons/battlePass2020/voting/bg.png";
 
+        public static const MAPS_ICONS_BOB_HANGAR_PRIMETIMEVIEW_BG:String = "../maps/icons/bob/hangar/primeTimeView/bg.png";
+
         public static const MAPS_ICONS_DEMOUNTKIT_BG:String = "../maps/icons/demountKit/bg.png";
 
         public static const MAPS_ICONS_PREMACC_DASHBOARD_HEADER_BADGESLOT_BG:String = "../maps/icons/premacc/dashboard/header/badgeSlot/bg.png";
@@ -30,6 +32,8 @@ package
         public static const MAPS_ICONS_TANKMEN_ROLES_BIG_DOG:String = "../maps/icons/tankmen/roles/big/dog.png";
 
         public static const MAPS_ICONS_TANKMEN_SKILLS_BIG_NEW_SKILL:String = "../maps/icons/tankmen/skills/big/new_skill.png";
+
+        public static const MAPS_ICONS_TENYEARSCOUNTDOWN_ONBOARDING_BG:String = "../maps/icons/tenYearsCountdown/onBoarding/bg.png";
 
         public function RES_COMMON()
         {

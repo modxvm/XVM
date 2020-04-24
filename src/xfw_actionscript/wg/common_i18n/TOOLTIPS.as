@@ -173,6 +173,8 @@ package
 
         public static const TURNOFFCOMBATCHAT:String = "#tooltips:turnOffCombatChat";
 
+        public static const DISABLECOMMONCHAT:String = "#tooltips:disableCommonChat";
+
         public static const SHOWMARKSONGUN:String = "#tooltips:showMarksOnGun";
 
         public static const C11NHISTORICALLYACCURATE:String = "#tooltips:c11nHistoricallyAccurate";
@@ -766,6 +768,10 @@ package
         public static const TURNOFFCOMBATCHAT_HEADER:String = "#tooltips:turnOffCombatChat/header";
 
         public static const TURNOFFCOMBATCHAT_BODY:String = "#tooltips:turnOffCombatChat/body";
+
+        public static const DISABLECOMMONCHAT_HEADER:String = "#tooltips:disableCommonChat/header";
+
+        public static const DISABLECOMMONCHAT_BODY:String = "#tooltips:disableCommonChat/body";
 
         public static const HANGARCAMDROPDOWN_HEADER:String = "#tooltips:hangarCamDropdown/header";
 
@@ -1364,6 +1370,10 @@ package
         public static const HEADER_RANKEDSQUAD_HEADER:String = "#tooltips:header/rankedSquad/header";
 
         public static const HEADER_RANKEDSQUAD_BODY:String = "#tooltips:header/rankedSquad/body";
+
+        public static const HEADER_BOBSQUAD_HEADER:String = "#tooltips:header/bobSquad/header";
+
+        public static const HEADER_BOBSQUAD_BODY:String = "#tooltips:header/bobSquad/body";
 
         public static const HEADER_BATTLETYPE_HEADER:String = "#tooltips:header/battleType/header";
 
@@ -2268,6 +2278,8 @@ package
         public static const VEHICLE_TRADE:String = "#tooltips:vehicle/trade";
 
         public static const VEHICLE_DEAL_EPIC_MAIN:String = "#tooltips:vehicle/deal/epic/main";
+
+        public static const VEHICLE_DEAL_BOB_MAIN:String = "#tooltips:vehicle/deal/bob/main";
 
         public static const ANONYMIZER_TEAMSTATS_HEADER:String = "#tooltips:anonymizer/teamStats/header";
 

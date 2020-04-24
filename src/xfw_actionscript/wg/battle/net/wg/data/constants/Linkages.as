@@ -893,6 +893,8 @@ package net.wg.data.constants
 
         public static const NATION_TREE_PREMIUM_DOTS_PATTERN:String = "PremiumDotUI";
 
+        public static const TEN_YEARS_ENTRY_POINT_ANIM_UI:String = "TenYearsEntryPointAnimUI";
+
         public function Linkages()
         {
             super();

@@ -56,5 +56,7 @@ package net.wg.infrastructure.base.meta
         function as_createDQWidget() : void;
 
         function as_destroyDQWidget() : void;
+
+        function as_updateEventEntryPoint(param1:String, param2:Boolean) : void;
     }
 }
