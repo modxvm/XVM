@@ -437,6 +437,10 @@ package net.wg.data.constants.generated
 
         public static const BLUEPRINT_RANDOM_INFO:String = "blueprintRandomInfo";
 
+        public static const BOB_SELECTOR_INFO:String = "bobSelectorInfo";
+
+        public static const BOB_SERVER_PRIMETIME:String = "bobServerPrimeTime";
+
         public static const BLOCKS_DEFAULT_UI:String = "ToolTipInblocksDefaultUI";
 
         public static const TANKMEN_UI:String = "ToolTipTankmenUI";
@@ -666,6 +670,8 @@ package net.wg.data.constants.generated
         public static const DEVELOPMENT_SET:Array = [GF_TEST_TOOLTIP];
 
         public static const VEHICLE_COLLECTOR_SET:Array = [VEHICLE_COLLECTOR_INFO,VEHICLE_COLLECTOR_DISABLED];
+
+        public static const BOB_SET:Array = [BOB_SELECTOR_INFO,BOB_SERVER_PRIMETIME];
 
         public function TOOLTIPS_CONSTANTS()
         {

@@ -44,6 +44,8 @@ package net.wg.gui.lobby.settings
 
         public var disableBattleChatCheckbox:CheckBox = null;
 
+        public var disableEventCommonChatCheckbox:CheckBox = null;
+
         public var ppShowLevelsCheckbox:CheckBox = null;
 
         public var gameplay_ctfCheckbox:CheckBox = null;
@@ -172,6 +174,7 @@ package net.wg.gui.lobby.settings
             this.disableBattleChatCheckbox.label = SETTINGS.CHAT_DISABLEBATTLECHAT;
             this.disableBattleChatCheckbox.toolTip = TOOLTIPS.TURNOFFCOMBATCHAT;
             this.disableBattleChatCheckbox.infoIcoType = InfoIcon.TYPE_INFO;
+            this.disableEventCommonChatCheckbox.label = SETTINGS.CHAT_DISABLEDCOMMONCHAT;
             this.ppShowLevelsCheckbox.label = SETTINGS.GAME_PPSHOWLEVELS;
             this.gameplay_ctfCheckbox.label = SETTINGS.GAMEPLAY_CTF;
             this.gameplay_dominationCheckbox.label = SETTINGS.GAMEPLAY_DOMINATION;
@@ -265,6 +268,8 @@ package net.wg.gui.lobby.settings
             this.chatContactsListOnlyCheckbox = null;
             this.disableBattleChatCheckbox.dispose();
             this.disableBattleChatCheckbox = null;
+            this.disableEventCommonChatCheckbox.dispose();
+            this.disableEventCommonChatCheckbox = null;
             this.ppShowLevelsCheckbox.dispose();
             this.ppShowLevelsCheckbox = null;
             this.gameplay_ctfCheckbox.dispose();

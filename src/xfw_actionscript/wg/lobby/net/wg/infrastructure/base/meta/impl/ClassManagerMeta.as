@@ -25,6 +25,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.data.constants.generated.ACTION_PRICE_CONSTANTS;
     import net.wg.data.constants.generated.AWARDWINDOW_CONSTANTS;
     import net.wg.data.constants.generated.BARRACKS_CONSTANTS;
+    import net.wg.data.constants.generated.BATTLE_OF_BLOGGERS_ALIASES;
     import net.wg.data.constants.generated.BATTLE_RESULTS_PREMIUM_STATES;
     import net.wg.data.constants.generated.BATTLE_RESULT_TYPES;
     import net.wg.data.constants.generated.BOOSTER_CONSTANTS;
@@ -1209,6 +1210,8 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.hangar.data.ModuleInfoActionVO;
     import net.wg.gui.lobby.hangar.data.ResearchPanelVO;
     import net.wg.gui.lobby.hangar.data.SwitchModePanelVO;
+    import net.wg.gui.lobby.hangar.eventEntryPoint.HangarEventEntriesContainer;
+    import net.wg.gui.lobby.hangar.eventEntryPoint.IEventEntryPoint;
     import net.wg.gui.lobby.hangar.interfaces.IHangar;
     import net.wg.gui.lobby.hangar.interfaces.IHangarHeader;
     import net.wg.gui.lobby.hangar.interfaces.IHeaderQuestsContainer;
@@ -1253,6 +1256,8 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.hangar.tcarousel.event.SlotEvent;
     import net.wg.gui.lobby.hangar.tcarousel.helper.ITankCarouselHelper;
     import net.wg.gui.lobby.hangar.tcarousel.helper.TankCarouselStatsFormatter;
+    import net.wg.gui.lobby.hangar.tenYearsCountdown.TenYearsCountdownEntryPointInject;
+    import net.wg.gui.lobby.hangar.tenYearsCountdown.TenYearsEntryPointAnim;
     import net.wg.gui.lobby.hangar.vehicleParameters.components.VehParamRenderer;
     import net.wg.gui.lobby.header.AccountClanPopoverBlock;
     import net.wg.gui.lobby.header.AccountPopover;
@@ -3435,6 +3440,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.infrastructure.base.meta.ITankmanOperationDialogMeta;
     import net.wg.infrastructure.base.meta.ITechnicalMaintenanceMeta;
     import net.wg.infrastructure.base.meta.ITechTreeMeta;
+    import net.wg.infrastructure.base.meta.ITenYearsCountdownEntryPointMeta;
     import net.wg.infrastructure.base.meta.ITmenXpPanelMeta;
     import net.wg.infrastructure.base.meta.ITradeInPopupMeta;
     import net.wg.infrastructure.base.meta.ITradeOffWidgetMeta;
@@ -3556,6 +3562,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_DATA_CONSTANTS_GENERATED_AWARDWINDOW_CONSTANTS:Class = AWARDWINDOW_CONSTANTS;
 
         public static const NET_WG_DATA_CONSTANTS_GENERATED_BARRACKS_CONSTANTS:Class = BARRACKS_CONSTANTS;
+
+        public static const NET_WG_DATA_CONSTANTS_GENERATED_BATTLE_OF_BLOGGERS_ALIASES:Class = BATTLE_OF_BLOGGERS_ALIASES;
 
         public static const NET_WG_DATA_CONSTANTS_GENERATED_BATTLE_RESULTS_PREMIUM_STATES:Class = BATTLE_RESULTS_PREMIUM_STATES;
 
@@ -5925,6 +5933,10 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_LOBBY_HANGAR_DATA_SWITCHMODEPANELVO:Class = SwitchModePanelVO;
 
+        public static const NET_WG_GUI_LOBBY_HANGAR_EVENTENTRYPOINT_HANGAREVENTENTRIESCONTAINER:Class = HangarEventEntriesContainer;
+
+        public static const NET_WG_GUI_LOBBY_HANGAR_EVENTENTRYPOINT_IEVENTENTRYPOINT:Class = IEventEntryPoint;
+
         public static const NET_WG_GUI_LOBBY_HANGAR_INTERFACES_IHANGAR:Class = IHangar;
 
         public static const NET_WG_GUI_LOBBY_HANGAR_INTERFACES_IHANGARHEADER:Class = IHangarHeader;
@@ -6012,6 +6024,10 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_HELPER_ITANKCAROUSELHELPER:Class = ITankCarouselHelper;
 
         public static const NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_HELPER_TANKCAROUSELSTATSFORMATTER:Class = TankCarouselStatsFormatter;
+
+        public static const NET_WG_GUI_LOBBY_HANGAR_TENYEARSCOUNTDOWN_TENYEARSCOUNTDOWNENTRYPOINTINJECT:Class = TenYearsCountdownEntryPointInject;
+
+        public static const NET_WG_GUI_LOBBY_HANGAR_TENYEARSCOUNTDOWN_TENYEARSENTRYPOINTANIM:Class = TenYearsEntryPointAnim;
 
         public static const NET_WG_GUI_LOBBY_HANGAR_VEHICLEPARAMETERS_COMPONENTS_VEHPARAMRENDERER:Class = VehParamRenderer;
 
@@ -10377,6 +10393,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_ITECHTREEMETA:Class = ITechTreeMeta;
 
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_ITENYEARSCOUNTDOWNENTRYPOINTMETA:Class = ITenYearsCountdownEntryPointMeta;
+
         public static const NET_WG_INFRASTRUCTURE_BASE_META_ITMENXPPANELMETA:Class = ITmenXpPanelMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_ITRADEINPOPUPMETA:Class = ITradeInPopupMeta;
@@ -10976,6 +10994,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TECHNICALMAINTENANCEMETA:Class = TechnicalMaintenanceMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TECHTREEMETA:Class = TechTreeMeta;
+
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TENYEARSCOUNTDOWNENTRYPOINTMETA:Class = TenYearsCountdownEntryPointMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TMENXPPANELMETA:Class = TmenXpPanelMeta;
 

@@ -106,7 +106,7 @@ package net.wg.gui.lobby.questsWindow.components
         {
             if(this.dataVO.dataType && this.dataVO.dataName && this.dataVO.dataBlock)
             {
-                App.toolTipMgr.showSpecial(this.dataVO.dataType,null,this.dataVO.dataBlock,this.dataVO.dataName);
+                App.toolTipMgr.showSpecial(this.dataVO.dataType,null,this.dataVO.dataBlock,this.dataVO.dataName,this.dataVO.dataValue);
             }
             else if(this.dataVO.dataType)
             {

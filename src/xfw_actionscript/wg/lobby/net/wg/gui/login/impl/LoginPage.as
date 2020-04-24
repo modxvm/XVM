@@ -67,7 +67,7 @@ package net.wg.gui.login.impl
 
         private static const FREE_SPACE_BORDER_FACTOR:Number = 0.17;
 
-        private static const WOT_LOGO_OFFSET_Y:Number = 190;
+        private static const WOT_LOGO_OFFSET_Y:Number = 150;
 
         private static const COPYRIGHT_OFFSET_Y:Number = 44;
 

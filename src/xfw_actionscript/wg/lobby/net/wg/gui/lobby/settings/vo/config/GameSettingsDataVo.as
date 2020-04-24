@@ -29,6 +29,8 @@ package net.wg.gui.lobby.settings.vo.config
 
         public var disableBattleChat:SettingsControlProp = null;
 
+        public var disableEventCommonChat:SettingsControlProp = null;
+
         public var ppShowLevels:SettingsControlProp = null;
 
         public var gameplay_ctf:SettingsControlProp = null;
@@ -113,6 +115,7 @@ package net.wg.gui.lobby.settings.vo.config
                 "dynamicCamera":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "horStabilizationSnp":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "disableBattleChat":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
+                "disableEventCommonChat":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "receiveClanInvitesNotifications":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "sniperModeByShift":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "increasedZoom":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
@@ -164,6 +167,7 @@ package net.wg.gui.lobby.settings.vo.config
             this.dynamicCamera = null;
             this.horStabilizationSnp = null;
             this.disableBattleChat = null;
+            this.disableEventCommonChat = null;
             this.ppShowLevels = null;
             this.gameplay_ctf = null;
             this.gameplay_domination = null;
