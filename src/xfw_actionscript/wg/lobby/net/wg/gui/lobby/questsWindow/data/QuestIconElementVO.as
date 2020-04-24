@@ -17,6 +17,8 @@ package net.wg.gui.lobby.questsWindow.data
 
         private var _dataBlock:String = "";
 
+        private var _dataValue:Number = 0;
+
         private var _counter:String = "";
 
         private var _iconAutoSize:Boolean = true;
@@ -34,6 +36,7 @@ package net.wg.gui.lobby.questsWindow.data
                 {
                     this.dataBlock = param2[0];
                     this.dataName = param2[1];
+                    this.dataValue = param2[2];
                 }
                 return false;
             }
@@ -98,6 +101,16 @@ package net.wg.gui.lobby.questsWindow.data
         public function set dataBlock(param1:String) : void
         {
             this._dataBlock = param1;
+        }
+
+        public function get dataValue() : Number
+        {
+            return this._dataValue;
+        }
+
+        public function set dataValue(param1:Number) : void
+        {
+            this._dataValue = param1;
         }
 
         public function get counter() : String

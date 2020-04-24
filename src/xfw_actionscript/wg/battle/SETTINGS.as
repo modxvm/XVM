@@ -693,6 +693,8 @@ package
 
         public static const CHAT_DISABLEBATTLECHAT:String = "#settings:chat/disableBattleChat";
 
+        public static const CHAT_DISABLEDCOMMONCHAT:String = "#settings:chat/disabledCommonChat";
+
         public static const GAME_SHOWLANGUAGEBAR:String = "#settings:game/showLanguageBar";
 
         public static const GAME_ENABLEVOIP:String = "#settings:game/enableVoIP";
