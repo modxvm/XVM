@@ -20,6 +20,8 @@ if("${CMAKE_GENERATOR_PLATFORM}" STREQUAL "x64")
         "64_patch.c"
         "64_patch_1.c"
         "64_patch_1.asm"
+        "64_patch_2.c"
+        "64_patch_2.asm"
     )
 
 else()
