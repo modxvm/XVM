@@ -2,6 +2,12 @@
   [ОБЩЕЕ]
   * World of Tanks 1.9.0.2
 
+  [АНГАР]
+  * добавлена опция:
+      "hangar"/"showSE20Banner" - показывать баннер "Путь до Берлина" в ангаре
+  * переименована опция:
+      "hangar"/"showTenYearsWidget" -> "hangar"/"showTenYearsBanner"
+
 XVM-8.5.0:
   [ОБЩЕЕ]
   * World of Tanks 1.9.0.1
