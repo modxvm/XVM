@@ -1,20 +1,15 @@
 package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.infrastructure.base.AbstractView;
     import net.wg.gui.lobby.battlequeue.BattleQueueTypeInfoVO;
     import scaleform.clik.data.DataProvider;
     import net.wg.gui.lobby.battlequeue.BattleQueueItemVO;
     import net.wg.data.constants.Errors;
     import net.wg.infrastructure.exceptions.AbstractException;
 
-    public class BattleQueueMeta extends AbstractView
+    public class BattleQueueMeta extends BaseBattleQueueMeta
     {
 
         public var startClick:Function;
-
-        public var exitClick:Function;
-
-        public var onEscape:Function;
 
         private var _battleQueueTypeInfoVO:BattleQueueTypeInfoVO;
 
@@ -49,18 +44,6 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.startClick,"startClick" + Errors.CANT_NULL);
             this.startClick();
-        }
-
-        public function exitClickS() : void
-        {
-            App.utils.asserter.assertNotNull(this.exitClick,"exitClick" + Errors.CANT_NULL);
-            this.exitClick();
-        }
-
-        public function onEscapeS() : void
-        {
-            App.utils.asserter.assertNotNull(this.onEscape,"onEscape" + Errors.CANT_NULL);
-            this.onEscape();
         }
 
         public final function as_setTypeInfo(param1:Object) : void

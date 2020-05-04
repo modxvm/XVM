@@ -476,6 +476,7 @@ package net.wg.gui.lobby.techtree.nodes
             {
                 this._rentBtn.useHtmlText = true;
                 this._rentBtn.label = this._data.rentBtnLabel;
+                this._rentBtn.focusable = false;
             }
             this._hangarBtn = this.setupOrRemoveExtraBtn(this._hangarBtn,this.inInventory() && this._action != ActionName.SELECT_VEHICLE && this._action != ActionName.SHOP);
             if(this._hangarBtn != null)

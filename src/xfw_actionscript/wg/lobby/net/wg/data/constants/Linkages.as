@@ -239,6 +239,8 @@ package net.wg.data.constants
 
         public static const DROWN_ICON:String = "destroyTimerDrownUI";
 
+        public static const EVENTWARNING_ICON:String = "destroyTimerEventWarningUI";
+
         public static const GAS_DRAFT_ICON:String = "destroyTimerGazDraftUI";
 
         public static const STUN_ICON:String = "secondaryStunIconUI";
@@ -274,6 +276,14 @@ package net.wg.data.constants
         public static const ENTITIES_POPUP:String = "EntitiesStatePopUpUI";
 
         public static const ENTITY_BUTTON:String = "EntityStateButtonUI";
+
+        public static const EVENT_SHELL_BUTTON_BATTLE:String = "EventShellButtonBattleUI";
+
+        public static const EVENT_EQUIPMENT_BUTTON:String = "EventEquipmentButtonUI";
+
+        public static const EVENT_DEATH_ZONE:String = "destroyTimerEventDeathZoneUI";
+
+        public static const EVENT_PERSONAL_DEATH_ZONE:String = "destroyTimerEventPersonalDeathZoneUI";
 
         public static const OPTIONAL_DEVICE_BUTTON:String = "OptionalDeviceButtonUI";
 
@@ -894,6 +904,10 @@ package net.wg.data.constants
         public static const NATION_TREE_PREMIUM_DOTS_PATTERN:String = "PremiumDotUI";
 
         public static const TEN_YEARS_ENTRY_POINT_ANIM_UI:String = "TenYearsEntryPointAnimUI";
+
+        public static const STATS_PLAYERBLOCK_RENDERER:String = "StatsPlayerBlockRendererUI";
+
+        public static const SE20_BANNER:String = "EventBannerUI";
 
         public function Linkages()
         {

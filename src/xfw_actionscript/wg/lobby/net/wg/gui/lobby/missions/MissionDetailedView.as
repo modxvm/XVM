@@ -72,6 +72,7 @@ package net.wg.gui.lobby.missions
             addItemToContentList(DisplayObject(this.prebattleConditions));
             addItemToContentList(this.battleConditions);
             addItemToContentList(DisplayObject(this.awardsPanel));
+            this.accountRequirementsPanel.visible = false;
         }
 
         override public function setData(param1:BaseMissionDetailedViewVO) : void
@@ -125,6 +126,7 @@ package net.wg.gui.lobby.missions
         override protected function draw() : void
         {
             var _loc1_:String = null;
+            var _loc2_:* = false;
             super.draw();
             if(this._vo != null && isInvalid(InvalidationType.DATA))
             {
@@ -133,12 +135,16 @@ package net.wg.gui.lobby.missions
                 this.resetDateTf.htmlText = this._vo.resetDateLabel;
                 _loc1_ = App.utils.commons.truncateTextFieldText(this.dateTf,this._vo.dateLabel,true,true);
                 this._isDateTruncated = _loc1_.length < this._vo.dateLabel.length;
-                this.accountRequirementsPanel.setData(this._vo.accountRequirements);
+                _loc2_ = this._vo.accountRequirements != null;
+                this.accountRequirementsPanel.visible = _loc2_;
+                if(_loc2_)
+                {
+                    this.accountRequirementsPanel.setData(this._vo.accountRequirements);
+                }
                 this.prebattleConditions.dataProvider = this._vo.prebattleConditions;
                 this.prebattleConditions.validateNow();
                 this.prebattleConditions.x = -this.prebattleConditions.width >> 1;
                 this.separator.visible = this._vo.prebattleConditions && this._vo.prebattleConditions.length > 0;
-                this.accountRequirementsPanel.setData(this._vo.accountRequirements);
                 this.battleConditions.width = this.width;
                 this.battleConditions.setData(this._vo.battleConditions);
                 this.uiDecoration.visible = StringUtils.isNotEmpty(this._vo.uiDecoration);

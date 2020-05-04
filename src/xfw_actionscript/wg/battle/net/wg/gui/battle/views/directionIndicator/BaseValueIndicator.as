@@ -2,7 +2,6 @@ package net.wg.gui.battle.views.directionIndicator
 {
     import flash.display.Sprite;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
-    import net.wg.data.constants.Values;
     import flash.text.TextField;
     import flash.text.TextFormat;
     import scaleform.gfx.TextFieldEx;
@@ -10,7 +9,7 @@ package net.wg.gui.battle.views.directionIndicator
     public class BaseValueIndicator extends Sprite implements IDisposable
     {
 
-        private static const EMPTY_STR:String = Values.EMPTY_STR;
+        public var eventControlPointTF:TextField = null;
 
         public var greenTF:TextField = null;
 
@@ -19,6 +18,8 @@ package net.wg.gui.battle.views.directionIndicator
         public var purpleTF:TextField = null;
 
         public var yellowTF:TextField = null;
+
+        public var whiteTF:TextField = null;
 
         private var _currTF:TextField = null;
 
@@ -29,6 +30,7 @@ package net.wg.gui.battle.views.directionIndicator
         public function BaseValueIndicator()
         {
             super();
+            this.eventControlPointTF.visible = false;
             this.greenTF.visible = false;
             this.redTF.visible = false;
             this.purpleTF.visible = false;
@@ -37,6 +39,8 @@ package net.wg.gui.battle.views.directionIndicator
             TextFieldEx.setNoTranslate(this.redTF,true);
             TextFieldEx.setNoTranslate(this.purpleTF,true);
             TextFieldEx.setNoTranslate(this.yellowTF,true);
+            TextFieldEx.setNoTranslate(this.eventControlPointTF,true);
+            TextFieldEx.setNoTranslate(this.whiteTF,true);
         }
 
         public final function dispose() : void
@@ -45,6 +49,8 @@ package net.wg.gui.battle.views.directionIndicator
             this.redTF = null;
             this.purpleTF = null;
             this.yellowTF = null;
+            this.eventControlPointTF = null;
+            this.whiteTF = null;
             this._currTF = null;
         }
 
@@ -85,6 +91,19 @@ package net.wg.gui.battle.views.directionIndicator
                 case DirectionIndicatorShape.SHAPE_YELLOW:
                     this._currTF = this.yellowTF;
                     break;
+                case DirectionIndicatorShape.SHAPE_EVENT_KILL:
+                case DirectionIndicatorShape.SHAPE_EVENT_CAPTUREBASE:
+                case DirectionIndicatorShape.SHAPE_EVENT_OURBASE:
+                    this._currTF = this.whiteTF;
+                    break;
+                case DirectionIndicatorShape.SHAPE_EVENT_CAPTUREA:
+                case DirectionIndicatorShape.SHAPE_EVENT_CAPTUREB:
+                case DirectionIndicatorShape.SHAPE_EVENT_CAPTUREC:
+                case DirectionIndicatorShape.SHAPE_EVENT_ATTACK:
+                case DirectionIndicatorShape.SHAPE_EVENT_ATTACK_RED:
+                case DirectionIndicatorShape.SHAPE_EVENT_ATTACK_RECTANGLE:
+                    this._currTF = this.eventControlPointTF;
+                    break;
                 default:
                     return;
             }
@@ -102,6 +121,8 @@ package net.wg.gui.battle.views.directionIndicator
             this.applyTextAlign(this.redTF,param1);
             this.applyTextAlign(this.purpleTF,param1);
             this.applyTextAlign(this.yellowTF,param1);
+            this.applyTextAlign(this.eventControlPointTF,param1);
+            this.applyTextAlign(this.whiteTF,param1);
             this._align = param1;
         }
 

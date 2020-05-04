@@ -159,13 +159,18 @@ package net.wg.gui.battle.views.consumablesPanel
             }
         }
 
+        protected function createEquipmentButton(param1:String) : BattleEquipmentButton
+        {
+            return App.utils.classFactory.getComponent(this._equipmentButtonLinkage,BattleEquipmentButton);
+        }
+
         public function as_addEquipmentSlot(param1:int, param2:Number, param3:Number, param4:String, param5:int, param6:Number, param7:Number, param8:String, param9:String) : void
         {
             if(param4 == null)
             {
                 var param4:String = BATTLE_CONSUMABLES_PANEL_TAGS.WITHOUT_TAG;
             }
-            var _loc10_:BattleEquipmentButton = App.utils.classFactory.getComponent(this._equipmentButtonLinkage,BattleEquipmentButton);
+            var _loc10_:BattleEquipmentButton = this.createEquipmentButton(param4);
             addChild(_loc10_);
             var _loc11_:ConsumablesVO = _loc10_.consumablesVO;
             _loc11_.keyCode = param2;
@@ -196,9 +201,14 @@ package net.wg.gui.battle.views.consumablesPanel
             invalidate(INVALIDATE_DRAW_LAYOUT);
         }
 
+        protected function createShellButton() : BattleShellButton
+        {
+            return App.utils.classFactory.getComponent(Linkages.SHELL_BUTTON_BATTLE,BattleShellButton);
+        }
+
         public function as_addShellSlot(param1:int, param2:Number, param3:Number, param4:int, param5:Number, param6:String, param7:String, param8:String) : void
         {
-            var _loc9_:BattleShellButton = App.utils.classFactory.getComponent(Linkages.SHELL_BUTTON_BATTLE,BattleShellButton);
+            var _loc9_:BattleShellButton = this.createShellButton();
             addChild(_loc9_);
             var _loc10_:ConsumablesVO = _loc9_.consumablesVO;
             _loc10_.shellIconPath = param6;
@@ -337,13 +347,14 @@ package net.wg.gui.battle.views.consumablesPanel
             }
         }
 
-        public function as_setItemTimeQuantityInSlot(param1:int, param2:int, param3:Number, param4:Number) : void
+        public function as_setItemTimeQuantityInSlot(param1:int, param2:int, param3:Number, param4:Number, param5:int) : void
         {
-            var _loc5_:IConsumablesButton = this.getRendererBySlotIdx(param1);
-            if(_loc5_)
+            var _loc6_:IConsumablesButton = this.getRendererBySlotIdx(param1);
+            if(_loc6_)
             {
-                _loc5_.setCoolDownTime(param3,param4,param4 - param3,false);
-                _loc5_.quantity = param2;
+                _loc6_.setStage(param5);
+                _loc6_.setCoolDownTime(param3,param4,param4 - param3,false);
+                _loc6_.quantity = param2;
             }
         }
 
@@ -473,7 +484,7 @@ package net.wg.gui.battle.views.consumablesPanel
             return IConsumablesButton(this.renderers[param1]);
         }
 
-        private function updatePosition() : void
+        protected function updatePosition() : void
         {
             x = this.stageWidth - this._basePanelWidth >> 1;
             y = this.stageHeight - this._bottomPadding;
@@ -566,6 +577,16 @@ package net.wg.gui.battle.views.consumablesPanel
         public function get panelWidth() : Number
         {
             return this.x + this._basePanelWidth;
+        }
+
+        protected function get itemsPadding() : int
+        {
+            return this._itemsPadding;
+        }
+
+        protected function set basePanelWidth(param1:Number) : void
+        {
+            this._basePanelWidth = param1;
         }
 
         private function onStageMouseDownHandler(param1:MouseEvent) : void

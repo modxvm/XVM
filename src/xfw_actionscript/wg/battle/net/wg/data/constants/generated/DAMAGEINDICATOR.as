@@ -19,6 +19,10 @@ package net.wg.data.constants.generated
 
         public static const AT_SPG:String = "AT-SPG";
 
+        public static const AT_SPG_ELITE:String = "AT-SPGElite";
+
+        public static const AT_SPG_NORMAL:String = "AT-SPGNormal";
+
         public static const BLOCK_CIRCLE:String = "blockCircle";
 
         public static const BLOCKED_BIG:String = "blockedBig";
@@ -30,6 +34,8 @@ package net.wg.data.constants.generated
         public static const BLOCKED_STANDARD:String = "blockedStandard";
 
         public static const BOMBER:String = "bomber";
+
+        public static const BOSS_KILL:String = "bossKill";
 
         public static const COMMANDER_CIRCLE:String = "commanderCircle";
 
@@ -71,9 +77,21 @@ package net.wg.data.constants.generated
 
         public static const HEAVY_TANK:String = "heavyTank";
 
+        public static const HEAVY_TANK_ELITE:String = "heavyTankElite";
+
+        public static const HEAVY_TANK_NORMAL:String = "heavyTankNormal";
+
         public static const LIGHT_TANK:String = "lightTank";
 
+        public static const LIGHT_TANK_ELITE:String = "lightTankElite";
+
+        public static const LIGHT_TANK_NORMAL:String = "lightTankNormal";
+
         public static const MEDIUM_TANK:String = "mediumTank";
+
+        public static const MEDIUM_TANK_ELITE:String = "mediumTankElite";
+
+        public static const MEDIUM_TANK_NORMAL:String = "mediumTankNormal";
 
         public static const RADIO_CIRCLE:String = "radioCircle";
 
@@ -82,6 +100,10 @@ package net.wg.data.constants.generated
         public static const RELOADER_CIRCLE:String = "reloaderCircle";
 
         public static const SPG:String = "SPG";
+
+        public static const SPG_ELITE:String = "SPGElite";
+
+        public static const SPG_NORMAL:String = "SPGNormal";
 
         public static const TANKS_CIRCLE:String = "tanksCircle";
 

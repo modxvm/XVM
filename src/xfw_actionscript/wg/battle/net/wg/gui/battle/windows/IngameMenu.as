@@ -102,6 +102,8 @@ package net.wg.gui.battle.windows
 
         private var _btns:Dictionary;
 
+        private var _showHelpButton:Boolean = true;
+
         private var _counterManager:ICounterManager;
 
         public function IngameMenu()
@@ -207,6 +209,7 @@ package net.wg.gui.battle.windows
             if(isInvalid(INVALIDATE_SERVER_INFO,INVALIDATE_MENU_BUTTONS_POSITIONS))
             {
                 this.requestBootcampQuitBtn.visible = this._showBootcampButton;
+                this.helpBtn.visible = this._showHelpButton;
                 this.quitBattleBtn.visible = this._showQuitButton;
                 _loc1_ = !this._showQuitButton?Y_OFFSET_MENU_BUTTON:0;
                 if(this._serverState == INTERFACE_STATES.HIDE_SERVER_STATS)
@@ -292,6 +295,12 @@ package net.wg.gui.battle.windows
             invalidate(INVALIDATE_MENU_BUTTONS_POSITIONS);
         }
 
+        public function as_showHelpButton(param1:Boolean) : void
+        {
+            this._showHelpButton = param1;
+            invalidate(INVALIDATE_MENU_BUTTONS_POSITIONS);
+        }
+
         public function as_showQuitButton(param1:Boolean) : void
         {
             this._showQuitButton = param1;
@@ -307,6 +316,10 @@ package net.wg.gui.battle.windows
                 this.settingsBtn.y = this.settingsBtn.y + param1;
                 this.helpBtn.y = this.helpBtn.y + param1;
                 _loc2_ = this._showBootcampButton?0:Y_OFFSET_MENU_BUTTON;
+                if(!this._showHelpButton)
+                {
+                    _loc2_ = _loc2_ + Y_OFFSET_MENU_BUTTON;
+                }
                 this.cancelBtn.y = this.cancelBtn.y + (param1 + _loc2_);
                 this.background.height = this.background.height + (param1 + _loc2_);
                 this.requestBootcampQuitBtn.y = this.requestBootcampQuitBtn.y + param1;

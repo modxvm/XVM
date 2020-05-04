@@ -203,6 +203,8 @@ package net.wg.data.constants.generated
 
         public static const EVENT_QUESTS_PREVIEW:String = "EventQuestsPreview";
 
+        public static const SECRET_EVENT_QUESTS_PREVIEW:String = "secretEventQuestsPreview";
+
         public static const PERSONAL_QUESTS_PREVIEW:String = "presonalQuestsPreview";
 
         public static const SHEDULE_QUEST:String = "scheduleQuest";
@@ -343,6 +345,34 @@ package net.wg.data.constants.generated
 
         public static const EVENT_BOARDS_BADGES_GROUP:String = "eventBoardsBadgesGroup";
 
+        public static const EVENT_BONUSES_BASIC_INFO:String = "eventBonusesBasicInfo";
+
+        public static const EVENT_ENERGY_DISCOUNT:String = "eventEnergyDiscount";
+
+        public static const EVENT_BONUSES_INFO:String = "eventBonusesInfo";
+
+        public static const EVENT_BONUSES_POST_BATTLE_INFO:String = "eventBonusesPostBattleInfo";
+
+        public static const EVENT_BANNER_INFO:String = "eventBannerInfo";
+
+        public static const EVENT_SELECTOR_INFO:String = "eventSelectorInfo";
+
+        public static const EVENT_SQUAD_INFO:String = "eventSquadInfo";
+
+        public static const EVENT_SUBDIVISION_PUMPING_INFO:String = "eventSubdivisionPumpingInfo";
+
+        public static const COMMANDER_ABILITY_INFO:String = "commanderAbilityInfo";
+
+        public static const COMMANDER_RESPAWN_INFO:String = "commaderRespawnInfo";
+
+        public static const EVENT_PROGRESSION_POINTS_INFO:String = "eventProgressionPointsInfo";
+
+        public static const EVENT_SQUAD_GENERAL_INFO:String = "eventSquadGeneralInfo";
+
+        public static const SECRET_EVENT_PROGRESSION_INFO:String = "secretEventProgressInfo";
+
+        public static const EVENT_RESULT_GENERAL:String = "eventResultGeneral";
+
         public static const OPERATION:String = "operation";
 
         public static const OPERATIONS_CHAIN_DETAILS:String = "operationsChainDetails";
@@ -357,6 +387,8 @@ package net.wg.data.constants.generated
 
         public static const GF_TEST_TOOLTIP:String = "gfTestTooltip";
 
+        public static const COMMANDER_CHARACTERISTICS:String = "eventCommanderCharacteristics";
+
         public static const BATTLE_PASS_VEHICLE_POINTS:String = "battlePassVehiclePoints";
 
         public static const BATTLE_PASS_POINTS:String = "battlePassPoints";
@@ -368,6 +400,28 @@ package net.wg.data.constants.generated
         public static const BATTLE_PASS_COMPLETED:String = "battlePassCompleted";
 
         public static const BATTLE_PASS_CHOSE_WINNER:String = "battlePassChoseWinner";
+
+        public static const EVENT_VEHICLE_PREVIEW_MESSAGE:String = "eventVehiclePreviewMessage";
+
+        public static const EVENT_RESULT_KILL:String = "eventResultKill";
+
+        public static const EVENT_RESULT_DAMAGE:String = "eventResultDamage";
+
+        public static const EVENT_RESULT_ASSIST:String = "eventResultAssist";
+
+        public static const EVENT_RESULT_ARMOR:String = "eventResultArmor";
+
+        public static const EVENT_RESULT_MISSION:String = "eventResultMission";
+
+        public static const EVENT_VEHICLE:String = "eventVehicle";
+
+        public static const EVENT_GOLD_INFO:String = "eventGoldInfo";
+
+        public static const EVENT_CREDIT_INFO:String = "eventCreditInfo";
+
+        public static const EVENT_CRYSTAL_INFO:String = "eventCrystalInfo";
+
+        public static const EVENT_FREE_XP_INFO:String = "eventFreeXPInfo";
 
         public static const SINGAPORE_WALLET_STATS:String = "Stats";
 
@@ -611,6 +665,8 @@ package net.wg.data.constants.generated
 
         public static const SESSION_STATS_EFFICIENCY_PARAM_UI:String = "ToolTipInblocksDefaultUI";
 
+        public static const SECRET_EVENT_HANGAR_OBJECT:String = "secretEventHangarObject";
+
         public static const ACHIEVEMENTS_SET:Array = [BATTLE_STATS_ACHIEVS,BATTLE_STATS_MARKS_ON_GUN_ACHIEVEMENT,ACHIEVEMENT,MARKS_ON_GUN_ACHIEVEMENT,GLOBAL_RATING,MARK_OF_MASTERY,ACHIEVEMENT_ATTR,SHOP_20_ACHIEVEMENT,SHOP_20_BADGE,REFERRAL_BADGE];
 
         public static const BOOSTERS_SET:Array = [INVENTORY_BATTLE_BOOSTER,AWARD_BATTLE_BOOSTER,EPIC_AWARD_BATTLE_BOOSTER,BATTLE_BOOSTER,SHOP_BATTLE_BOOSTER,SHOP_20_BATTLE_BOOSTER,BATTLE_BOOSTER_COMPARE,BOOSTERS_BOOSTER_INFO,CLAN_RESERVE_INFO,BOOSTERS_SHOP,SHOP_20_BOOSTER,BOOSTERS_QUESTS,NATION_CHANGE_BATTLE_BOOSTER];
@@ -672,6 +728,8 @@ package net.wg.data.constants.generated
         public static const VEHICLE_COLLECTOR_SET:Array = [VEHICLE_COLLECTOR_INFO,VEHICLE_COLLECTOR_DISABLED];
 
         public static const BOB_SET:Array = [BOB_SELECTOR_INFO,BOB_SERVER_PRIMETIME];
+
+        public static const EVENT_SET:Array = [EVENT_FREE_XP_INFO,EVENT_CRYSTAL_INFO,EVENT_CREDIT_INFO,EVENT_GOLD_INFO,EVENT_SELECTOR_INFO,EVENT_VEHICLE_PREVIEW_MESSAGE,EVENT_SQUAD_INFO,EVENT_SUBDIVISION_PUMPING_INFO,SECRET_EVENT_QUESTS_PREVIEW,SECRET_EVENT_HANGAR_OBJECT,EVENT_BANNER_INFO,EVENT_ENERGY_DISCOUNT,EVENT_BONUSES_BASIC_INFO,EVENT_BONUSES_INFO,EVENT_BONUSES_POST_BATTLE_INFO,COMMANDER_ABILITY_INFO,COMMANDER_RESPAWN_INFO,EVENT_PROGRESSION_POINTS_INFO,EVENT_SQUAD_GENERAL_INFO,EVENT_RESULT_KILL,EVENT_RESULT_DAMAGE,EVENT_RESULT_ARMOR,EVENT_RESULT_ASSIST,EVENT_RESULT_MISSION,SECRET_EVENT_PROGRESSION_INFO,EVENT_VEHICLE,COMMANDER_CHARACTERISTICS,EVENT_RESULT_GENERAL];
 
         public function TOOLTIPS_CONSTANTS()
         {

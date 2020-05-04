@@ -50,6 +50,11 @@ package net.wg.gui.lobby.shop20.controls
                 this.price.updateEnoughStatuses(this._slotData.isEnoughStatuses);
                 this.labelTF.htmlText = this._slotData.label;
                 enabled = this._slotData.enabled && this._slotData.isEnough;
+                if(this._slotData.price.defPrice != null)
+                {
+                    this.price.actionTooltip = true;
+                    mouseChildren = true;
+                }
                 allowSelectionDispatch = false;
                 selected = this._slotData.selected;
             }

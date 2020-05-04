@@ -88,7 +88,7 @@ package net.wg.gui.components.damageIndicator
             }
         }
 
-        public function showExtended(param1:String, param2:String, param3:int, param4:String, param5:String, param6:String, param7:Boolean) : void
+        public function showExtended(param1:String, param2:String, param3:int, param4:String, param5:String, param6:String, param7:Boolean, param8:String) : void
         {
             visible = true;
             this.extendedAnimation.visible = true;
@@ -100,7 +100,7 @@ package net.wg.gui.components.damageIndicator
             {
                 this.extendedAnimation.gotoAndPlay(param3);
             }
-            this._extendedStateContainer.setExtendedData(param1,param2,param4,param5,param6,param7);
+            this._extendedStateContainer.setExtendedData(param1,param2,param4,param5,param6,param7,param8);
         }
 
         public function showSettingExtended(param1:String, param2:String, param3:String, param4:String, param5:String, param6:Boolean) : void
@@ -108,7 +108,7 @@ package net.wg.gui.components.damageIndicator
             visible = true;
             this.extendedAnimation.visible = true;
             this.extendedAnimation.gotoAndStop(SHOW_WITHOUT_ANIMATION_FRAME);
-            this._extendedStateContainer.setExtendedData(param1,param2,param3,param4,param5,param6,false);
+            this._extendedStateContainer.setExtendedData(param1,param2,param3,param4,param5,param6,"",false);
         }
 
         public function showSettingStandard(param1:String) : void

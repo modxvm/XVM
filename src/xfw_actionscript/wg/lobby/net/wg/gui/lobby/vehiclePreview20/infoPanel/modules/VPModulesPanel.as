@@ -109,7 +109,7 @@ package net.wg.gui.lobby.vehiclePreview20.infoPanel.modules
             dispatchEvent(new Event(Event.RESIZE));
         }
 
-        override public function playAnimation() : void
+        override protected function doPlayAnimation() : void
         {
             var _loc1_:int = _modules.length;
             var _loc2_:* = 0;

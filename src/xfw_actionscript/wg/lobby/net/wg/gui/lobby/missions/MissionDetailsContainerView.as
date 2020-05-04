@@ -3,11 +3,13 @@ package net.wg.gui.lobby.missions
     import net.wg.infrastructure.base.meta.impl.MissionDetailsContainerViewMeta;
     import net.wg.infrastructure.base.meta.IMissionDetailsContainerViewMeta;
     import net.wg.data.constants.Values;
+    import net.wg.gui.components.advanced.BackButton;
     import net.wg.gui.lobby.components.interfaces.IMissionsVehicleSelector;
     import net.wg.data.constants.generated.QUESTS_ALIASES;
     import net.wg.gui.lobby.components.MissionsVehicleSelector;
     import flash.display.DisplayObject;
     import flash.events.Event;
+    import scaleform.clik.events.ButtonEvent;
     import net.wg.gui.lobby.missions.event.MissionDetailedConditionRendererEvent;
     import net.wg.gui.lobby.components.data.BaseMissionDetailsContainerVO;
     import net.wg.gui.lobby.missions.data.MissionDetailsContainerVO;
@@ -42,6 +44,8 @@ package net.wg.gui.lobby.missions
 
         private static const CLOSE_BTN_ALPHA_DEFAULT:Number = Values.DEFAULT_ALPHA;
 
+        public var btnBack:BackButton;
+
         private var _vehicleSelector:IMissionsVehicleSelector = null;
 
         public function MissionDetailsContainerView()
@@ -63,6 +67,7 @@ package net.wg.gui.lobby.missions
         override protected function configUI() : void
         {
             super.configUI();
+            this.btnBack.addEventListener(ButtonEvent.CLICK,this.onBackBtnClickHandler);
             MissionDetailedView(view).addEventListener(MissionDetailedConditionRendererEvent.BUY_CLICK,this.onTokenBuyClickHandler);
         }
 
@@ -77,6 +82,9 @@ package net.wg.gui.lobby.missions
             MissionDetailedView(view).removeEventListener(MissionDetailedConditionRendererEvent.BUY_CLICK,this.onTokenBuyClickHandler);
             removeChild(DisplayObject(this._vehicleSelector));
             this._vehicleSelector = null;
+            this.btnBack.removeEventListener(ButtonEvent.CLICK,this.onBackBtnClickHandler);
+            this.btnBack.dispose();
+            this.btnBack = null;
             super.onDispose();
         }
 
@@ -88,6 +96,8 @@ package net.wg.gui.lobby.missions
             btnClose.y = (height - _loc2_ - TOP_PANEL_HEIGHT >> 1) + TOP_PANEL_HEIGHT;
             btnClose.x = (_width + VIEW_WIDTH >> 1) - BTN_CLOSE_WIDTH;
             view.y = btnClose.y + BTN_CLOSE_HEIGHT + _loc1_ >> 0;
+            this.btnBack.y = (height - _loc2_ - TOP_PANEL_HEIGHT >> 1) + TOP_PANEL_HEIGHT;
+            this.btnBack.x = _width - VIEW_WIDTH >> 1;
             this._vehicleSelector.x = view.x - (this._vehicleSelector.width >> 1) + VEHICLE_SELECTOR_LEFT;
             this._vehicleSelector.y = view.y + VEHICLE_SELECTOR_TOP;
         }
@@ -114,10 +124,27 @@ package net.wg.gui.lobby.missions
             return new MissionDetailedViewVO(param1);
         }
 
+        public function as_hideBackButton() : void
+        {
+            this.btnBack.visible = false;
+        }
+
+        public function as_showBackButton(param1:String, param2:String) : void
+        {
+            this.btnBack.visible = true;
+            this.btnBack.label = param1;
+            this.btnBack.descrLabel = param2;
+        }
+
         override public function set viewOpacity(param1:Number) : void
         {
             super.viewOpacity = param1;
             this._vehicleSelector.alpha = param1;
+        }
+
+        private function onBackBtnClickHandler(param1:ButtonEvent) : void
+        {
+            onToEventClickS();
         }
 
         private function onTokenBuyClickHandler(param1:MissionDetailedConditionRendererEvent) : void

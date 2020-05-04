@@ -30,17 +30,22 @@ package net.wg.gui.battle.views.epicDeploymentMap.components
 
         public final function dispose() : void
         {
+            this.onDispose();
+        }
+
+        public function initializeMouseHandler() : void
+        {
+            this._clickAreaSpr.addEventListener(MouseEvent.CLICK,this.onMouseClickHandler);
+        }
+
+        protected function onDispose() : void
+        {
             this._clickAreaSpr.removeEventListener(MouseEvent.CLICK,this.onMouseClickHandler);
             this._clickAreaSpr = null;
             this.mapHit = null;
             this.mapMask = null;
             this.entriesContainer.dispose();
             this.entriesContainer = null;
-        }
-
-        public function initializeMouseHandler() : void
-        {
-            this._clickAreaSpr.addEventListener(MouseEvent.CLICK,this.onMouseClickHandler);
         }
 
         private function onMouseClickHandler(param1:MouseEvent) : void

@@ -6,6 +6,7 @@ package net.wg.gui.lobby.missions
     import net.wg.gui.components.advanced.ViewStack;
     import net.wg.gui.lobby.missions.components.MissionsFilter;
     import flash.display.Sprite;
+    import net.wg.gui.components.advanced.BackButton;
     import net.wg.gui.components.windows.ScreenBg;
     import net.wg.gui.components.assets.interfaces.ISeparatorAsset;
     import net.wg.infrastructure.base.interfaces.IWaiting;
@@ -15,6 +16,7 @@ package net.wg.gui.lobby.missions
     import net.wg.gui.lobby.missions.event.MissionViewEvent;
     import net.wg.gui.events.ViewStackEvent;
     import scaleform.clik.events.IndexEvent;
+    import scaleform.clik.events.ButtonEvent;
     import net.wg.gui.events.FiltersEvent;
     import net.wg.gui.components.assets.data.SeparatorConstants;
     import flash.ui.Keyboard;
@@ -46,6 +48,8 @@ package net.wg.gui.lobby.missions
         public var filter:MissionsFilter;
 
         public var topShadowBg:Sprite;
+
+        public var btnBack:BackButton;
 
         public var bg:ScreenBg;
 
@@ -83,6 +87,7 @@ package net.wg.gui.lobby.missions
             this.tabBar.selectedIndex = -1;
             this.tabBar.addEventListener(IndexEvent.INDEX_CHANGE,this.onTabBarIndexChangeHandler);
             this.tabBar.minRendererWidth = MIN_BTN_WIDTH;
+            this.btnBack.addEventListener(ButtonEvent.CLICK,this.onBackBtnClickHandler);
             this.filter.addEventListener(FiltersEvent.RESET_ALL_FILTERS,this.onFilterResetAllFiltersHandler);
             this.waiting.setMessage(WAITING.LOADCONTENT);
             this.waiting.backgroundVisibility = false;
@@ -151,6 +156,9 @@ package net.wg.gui.lobby.missions
             this.viewStack.removeEventListener(ViewStackEvent.VIEW_CHANGED,this.onViewStackViewChangedHandler);
             this.viewStack.dispose();
             this.viewStack = null;
+            this.btnBack.removeEventListener(ButtonEvent.CLICK,this.onBackBtnClickHandler);
+            this.btnBack.dispose();
+            this.btnBack = null;
             this.filter.removeEventListener(FiltersEvent.RESET_ALL_FILTERS,this.onFilterResetAllFiltersHandler);
             this.filter.dispose();
             this.filter = null;
@@ -175,6 +183,18 @@ package net.wg.gui.lobby.missions
         public function as_blinkFilterCounter() : void
         {
             this.filter.blink();
+        }
+
+        public function as_hideBackButton() : void
+        {
+            this.btnBack.visible = false;
+        }
+
+        public function as_showBackButton(param1:String, param2:String) : void
+        {
+            this.btnBack.visible = true;
+            this.btnBack.label = param1;
+            this.btnBack.descrLabel = param2;
         }
 
         public function as_showFilter(param1:Boolean, param2:Boolean) : void
@@ -292,6 +312,11 @@ package net.wg.gui.lobby.missions
                 this.waiting.hide();
             }
             invalidateSize();
+        }
+
+        private function onBackBtnClickHandler(param1:ButtonEvent) : void
+        {
+            onToEventClickS();
         }
     }
 }

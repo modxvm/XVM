@@ -58,7 +58,7 @@ package net.wg.gui.battle.views.radialMenu.components
             this._iconsDictionary[param1].visible = true;
         }
 
-        private function hideAll() : void
+        public function hideAll() : void
         {
             this.followmeIcon.visible = false;
             this.stopIcon.visible = false;

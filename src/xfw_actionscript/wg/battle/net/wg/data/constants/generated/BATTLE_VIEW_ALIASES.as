@@ -117,6 +117,22 @@ package net.wg.data.constants.generated
 
         public static const HELP_DETAILED:String = "helpDetailed";
 
+        public static const PLAYERS_PANEL_EVENT:String = "playersPanelEvent";
+
+        public static const BATTLE_HINT:String = "battleHint";
+
+        public static const EVENT_TIMER:String = "eventTimer";
+
+        public static const EVENT_TIMER_TAB:String = "eventTimerTab";
+
+        public static const EVENT_STATS:String = "eventStats";
+
+        public static const EVENT_DESTROY_TIMERS_PANEL:String = "eventDestroyTimersPanel";
+
+        public static const EVENT_PLAYER_LIVES:String = "eventPlayerLives";
+
+        public static const EVENT_FULL_MAP:String = "eventFullMap";
+
         public function BATTLE_VIEW_ALIASES()
         {
             super();

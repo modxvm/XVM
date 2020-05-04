@@ -769,11 +769,17 @@ package
 
         public static const PREBATTLE_TIMERLABEL:String = "#menu:prebattle/timerLabel";
 
+        public static const PREBATTLE_TIMERLABEL_EVENT:String = "#menu:prebattle/timerLabel/event";
+
+        public static const PREBATTLE_TIMERLABELWARNING_EVENT:String = "#menu:prebattle/timerLabelWarning/event";
+
         public static const PREBATTLE_TANKLABEL:String = "#menu:prebattle/tankLabel";
 
         public static const PREBATTLE_STARTINGTANKLABEL:String = "#menu:prebattle/startingTankLabel";
 
         public static const PREBATTLE_EXITBUTTON:String = "#menu:prebattle/exitButton";
+
+        public static const PREBATTLE_EXITBUTTON_EVENT:String = "#menu:prebattle/exitButton/event";
 
         public static const PREBATTLE_STARTBUTTON:String = "#menu:prebattle/startButton";
 
@@ -1233,9 +1239,19 @@ package
 
         public static const HEADERBUTTONS_BATTLE_TYPES_EVENTSQUAD:String = "#menu:headerButtons/battle/types/eventSquad";
 
+        public static const HEADERBUTTONS_BATTLE_TYPES_SIMPLESQUAD_LABEL:String = "#menu:headerButtons/battle/types/simpleSquad/label";
+
+        public static const HEADERBUTTONS_BATTLE_TYPES_SIMPLESQUAD_DESCRIPTION:String = "#menu:headerButtons/battle/types/simpleSquad/description";
+
+        public static const HEADERBUTTONS_BATTLE_TYPES_EVENTSQUAD_LABEL:String = "#menu:headerButtons/battle/types/eventSquad/label";
+
+        public static const HEADERBUTTONS_BATTLE_TYPES_EVENTSQUAD_DESCRIPTION:String = "#menu:headerButtons/battle/types/eventSquad/description";
+
         public static const HEADERBUTTONS_BATTLE_TYPES_TRAININGLEAVE:String = "#menu:headerButtons/battle/types/trainingLeave";
 
         public static const HEADERBUTTONS_BATTLE_TYPES_BATTLETEACHING:String = "#menu:headerButtons/battle/types/battleTeaching";
+
+        public static const HEADERBUTTONS_BATTLE_TYPES_EVENTBATTLE:String = "#menu:headerButtons/battle/types/eventBattle";
 
         public static const HEADERBUTTONS_BATTLE_TYPES_SPEC:String = "#menu:headerButtons/battle/types/spec";
 

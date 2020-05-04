@@ -116,9 +116,8 @@ package net.wg.gui.components.tooltips.helpers
 
         public function addHeader(param1:String, param2:Number, param3:Number, param4:String) : TextField
         {
-            var _loc6_:TextFormat = null;
             var _loc5_:TextField = App.textMgr.createTextField();
-            _loc6_ = new TextFormat();
+            var _loc6_:TextFormat = new TextFormat();
             _loc6_.leading = -3;
             _loc6_.align = TextFormatAlign.LEFT;
             _loc5_.name = param1;
@@ -142,7 +141,6 @@ package net.wg.gui.components.tooltips.helpers
         {
             var _loc16_:IconText = null;
             var _loc17_:ToolTipBlockRightListItemVO = null;
-            var _loc18_:* = false;
             var _loc21_:TextField = null;
             var _loc22_:* = NaN;
             var _loc23_:* = NaN;
@@ -199,7 +197,7 @@ package net.wg.gui.components.tooltips.helpers
             var _loc13_:Vector.<ToolTipBlockRightListItemVO> = param1.rightTextList;
             var _loc14_:uint = _loc13_.length;
             var _loc15_:Number = param1.leftTextLineHight != 0?param1.leftTextLineHight:_loc10_.getLineMetrics(0).height;
-            _loc18_ = false;
+            var _loc18_:* = false;
             _loc4_ = 0;
             while(_loc4_ < _loc14_)
             {
