@@ -138,5 +138,9 @@ package net.wg.gui.battle.views.consumablesPanel
         public function set showConsumableBorder(param1:Boolean) : void
         {
         }
+
+        public function setStage(param1:int) : void
+        {
+        }
     }
 }

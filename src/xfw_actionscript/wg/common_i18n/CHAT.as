@@ -11,6 +11,8 @@ package
 
         public static const CHANNELS_COMMON:String = "#chat:channels/common";
 
+        public static const CHANNELS_SECRET_EVENT:String = "#chat:channels/secret_event";
+
         public static const CHANNELS_SPECIAL_BATTLES:String = "#chat:channels/special_battles";
 
         public static const CHANNELS_TOURNAMENT:String = "#chat:channels/tournament";

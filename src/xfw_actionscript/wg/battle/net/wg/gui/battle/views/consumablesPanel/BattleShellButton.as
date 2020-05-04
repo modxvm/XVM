@@ -83,19 +83,24 @@ package net.wg.gui.battle.views.consumablesPanel
             this.nextIndicator.visible = this._isNext;
         }
 
+        protected function setBindKeyText() : void
+        {
+            if(this._bindSfKeyCode == KeyProps.KEY_NONE)
+            {
+                this.bindKeyField.text = App.utils.locale.makeString(READABLE_KEY_NAMES.KEY_NONE_ALT);
+            }
+            else
+            {
+                this.bindKeyField.text = App.utils.commons.keyToString(this._bindSfKeyCode).keyName;
+            }
+        }
+
         override protected function draw() : void
         {
             super.draw();
             if(isInvalid(KEY_VALIDATION))
             {
-                if(this._bindSfKeyCode == KeyProps.KEY_NONE)
-                {
-                    this.bindKeyField.text = App.utils.locale.makeString(READABLE_KEY_NAMES.KEY_NONE_ALT);
-                }
-                else
-                {
-                    this.bindKeyField.text = App.utils.commons.keyToString(this._bindSfKeyCode).keyName;
-                }
+                this.setBindKeyText();
             }
             if(isInvalid(QUANTITY_VALIDATION))
             {
@@ -320,6 +325,11 @@ package net.wg.gui.battle.views.consumablesPanel
             this.iconLoader.source = param1;
         }
 
+        public function get bindSfKeyCode() : Number
+        {
+            return this._bindSfKeyCode;
+        }
+
         public function set key(param1:Number) : void
         {
             if(this._bindSfKeyCode == param1)
@@ -361,6 +371,10 @@ package net.wg.gui.battle.views.consumablesPanel
         }
 
         public function set showConsumableBorder(param1:Boolean) : void
+        {
+        }
+
+        public function setStage(param1:int) : void
         {
         }
     }

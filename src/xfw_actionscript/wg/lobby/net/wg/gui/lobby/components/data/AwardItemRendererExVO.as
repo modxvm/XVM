@@ -41,6 +41,8 @@ package net.wg.gui.lobby.components.data
 
         public var padding:int = 0;
 
+        public var levelIcon:String = "";
+
         public function AwardItemRendererExVO(param1:Object)
         {
             super(param1);

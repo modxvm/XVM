@@ -19,6 +19,14 @@ package
 
         public static const MAPS_ICONS_BATTLEHELP_WHEELEDHELP_WHEEL_TWO_MODE:String = "../maps/icons/battleHelp/wheeledHelp/wheel_two_mode.png";
 
+        public static const MAPS_ICONS_BATTLEHINTS_EVENT_ICONMATTER:String = "../maps/icons/battleHints/event/iconMatter.png";
+
+        public static const MAPS_ICONS_BATTLEHINTS_EVENT_ICONMATTERSMALL:String = "../maps/icons/battleHints/event/iconMatterSmall.png";
+
+        public static const MAPS_ICONS_BATTLEHINTS_EVENT_ICONPOINTBLUE:String = "../maps/icons/battleHints/event/iconPointBlue.png";
+
+        public static const MAPS_ICONS_BATTLEHINTS_EVENT_ICONPOINTGREEN:String = "../maps/icons/battleHints/event/iconPointGreen.png";
+
         public static const MAPS_ICONS_BATTLELOADING_SELFTABLEBACKGROUND:String = "../maps/icons/battleLoading/selfTableBackground.png";
 
         public static const MAPS_ICONS_BATTLELOADING_SELFTIPSBACKGROUND:String = "../maps/icons/battleLoading/selfTipsBackground.png";
@@ -839,6 +847,8 @@ package
 
         public static const MAPS_ICONS_BATTLETYPES_136X136_ESCORT:String = "../maps/icons/battleTypes/136x136/escort.png";
 
+        public static const MAPS_ICONS_BATTLETYPES_136X136_EVENTBATTLE:String = "../maps/icons/battleTypes/136x136/eventBattle.png";
+
         public static const MAPS_ICONS_BATTLETYPES_136X136_FALLOUT:String = "../maps/icons/battleTypes/136x136/fallout.png";
 
         public static const MAPS_ICONS_BATTLETYPES_136X136_FALLOUT_CLASSIC:String = "../maps/icons/battleTypes/136x136/fallout_classic.png";
@@ -893,6 +903,8 @@ package
 
         public static const MAPS_ICONS_BATTLETYPES_40X40_EVENT:String = "../maps/icons/battleTypes/40x40/event.png";
 
+        public static const MAPS_ICONS_BATTLETYPES_40X40_EVENTBATTLE:String = "../maps/icons/battleTypes/40x40/eventBattle.png";
+
         public static const MAPS_ICONS_BATTLETYPES_40X40_EVENTSQUAD:String = "../maps/icons/battleTypes/40x40/eventSquad.png";
 
         public static const MAPS_ICONS_BATTLETYPES_40X40_FALLOUT:String = "../maps/icons/battleTypes/40x40/fallout.png";
@@ -946,6 +958,8 @@ package
         public static const MAPS_ICONS_BATTLETYPES_64X64_ESPORT:String = "../maps/icons/battleTypes/64x64/eSport.png";
 
         public static const MAPS_ICONS_BATTLETYPES_64X64_EVENT:String = "../maps/icons/battleTypes/64x64/event.png";
+
+        public static const MAPS_ICONS_BATTLETYPES_64X64_EVENTBATTLE:String = "../maps/icons/battleTypes/64x64/eventBattle.png";
 
         public static const MAPS_ICONS_BATTLETYPES_64X64_EVENTSQUAD:String = "../maps/icons/battleTypes/64x64/eventSquad.png";
 
@@ -1204,6 +1218,30 @@ package
         public static const MAPS_ICONS_BOOTCAMP_LOADING_EQUIPMENT_BIG:String = "../maps/icons/bootcamp/loading/equipment_big.png";
 
         public static const MAPS_ICONS_BOOTCAMP_LOADING_EQUIPMENT_SMALL:String = "../maps/icons/bootcamp/loading/equipment_small.png";
+
+        public static const MAPS_ICONS_BOOTCAMP_LOADING_EVENTHINT1_BIG:String = "../maps/icons/bootcamp/loading/eventHint1_big.png";
+
+        public static const MAPS_ICONS_BOOTCAMP_LOADING_EVENTHINT1_SMALL:String = "../maps/icons/bootcamp/loading/eventHint1_small.png";
+
+        public static const MAPS_ICONS_BOOTCAMP_LOADING_EVENTHINT2_BIG:String = "../maps/icons/bootcamp/loading/eventHint2_big.png";
+
+        public static const MAPS_ICONS_BOOTCAMP_LOADING_EVENTHINT2_SMALL:String = "../maps/icons/bootcamp/loading/eventHint2_small.png";
+
+        public static const MAPS_ICONS_BOOTCAMP_LOADING_EVENTHINT3_BIG:String = "../maps/icons/bootcamp/loading/eventHint3_big.png";
+
+        public static const MAPS_ICONS_BOOTCAMP_LOADING_EVENTHINT3_SMALL:String = "../maps/icons/bootcamp/loading/eventHint3_small.png";
+
+        public static const MAPS_ICONS_BOOTCAMP_LOADING_EVENTHINT4_BIG:String = "../maps/icons/bootcamp/loading/eventHint4_big.png";
+
+        public static const MAPS_ICONS_BOOTCAMP_LOADING_EVENTHINT4_SMALL:String = "../maps/icons/bootcamp/loading/eventHint4_small.png";
+
+        public static const MAPS_ICONS_BOOTCAMP_LOADING_EVENTHINT5_BIG:String = "../maps/icons/bootcamp/loading/eventHint5_big.png";
+
+        public static const MAPS_ICONS_BOOTCAMP_LOADING_EVENTHINT5_SMALL:String = "../maps/icons/bootcamp/loading/eventHint5_small.png";
+
+        public static const MAPS_ICONS_BOOTCAMP_LOADING_EVENTHINT6_BIG:String = "../maps/icons/bootcamp/loading/eventHint6_big.png";
+
+        public static const MAPS_ICONS_BOOTCAMP_LOADING_EVENTHINT6_SMALL:String = "../maps/icons/bootcamp/loading/eventHint6_small.png";
 
         public static const MAPS_ICONS_BOOTCAMP_LOADING_MODULES_BIG:String = "../maps/icons/bootcamp/loading/modules_big.png";
 
@@ -2899,6 +2937,14 @@ package
 
         public static const MAPS_ICONS_LIBRARY_BGBATTLERESULTICONVICTORY_1:String = "../maps/icons/library/BgBattleResultIconVictory-1.png";
 
+        public static const MAPS_ICONS_LIBRARY_BGBATTLERESULTSE20EVENTDEFEAT_1:String = "../maps/icons/library/BgBattleResultSE20EventDefeat-1.png";
+
+        public static const MAPS_ICONS_LIBRARY_BGBATTLERESULTSE20EVENTDEFEAT:String = "../maps/icons/library/BgBattleResultSE20EventDefeat.png";
+
+        public static const MAPS_ICONS_LIBRARY_BGBATTLERESULTSE20EVENTVICTORY_1:String = "../maps/icons/library/BgBattleResultSE20EventVictory-1.png";
+
+        public static const MAPS_ICONS_LIBRARY_BGBATTLERESULTSE20EVENTVICTORY:String = "../maps/icons/library/BgBattleResultSE20EventVictory.png";
+
         public static const MAPS_ICONS_LIBRARY_BGPERSONALMISSIONFAILEDICON_1:String = "../maps/icons/library/BgPersonalMissionFailedIcon-1.png";
 
         public static const MAPS_ICONS_LIBRARY_BGPOLL_1:String = "../maps/icons/library/BgPoll-1.png";
@@ -3068,6 +3114,8 @@ package
         public static const MAPS_ICONS_LIBRARY_EVENTICONBG_1:String = "../maps/icons/library/EventIconBg-1.png";
 
         public static const MAPS_ICONS_LIBRARY_EVENTINVITEICON_1:String = "../maps/icons/library/eventInviteIcon-1.png";
+
+        public static const MAPS_ICONS_LIBRARY_EXHANGEORDERICON_1:String = "../maps/icons/library/ExhangeOrderIcon-1.png";
 
         public static const MAPS_ICONS_LIBRARY_FALLOUTVEHICLESALL:String = "../maps/icons/library/falloutVehiclesAll.png";
 
@@ -3317,6 +3365,10 @@ package
 
         public static const MAPS_ICONS_LIBRARY_SALLYRESULTBG_1:String = "../maps/icons/library/SallyResultBg-1.png";
 
+        public static const MAPS_ICONS_LIBRARY_SE20COMMANDERLEVELCOMPLETEDICON_1:String = "../maps/icons/library/SE20CommanderLevelCompletedIcon-1.png";
+
+        public static const MAPS_ICONS_LIBRARY_SE20FRONTLEVELCOMPLETEDICON_1:String = "../maps/icons/library/SE20FrontLevelCompletedIcon-1.png";
+
         public static const MAPS_ICONS_LIBRARY_SEND:String = "../maps/icons/library/send.png";
 
         public static const MAPS_ICONS_LIBRARY_SEPARATOR:String = "../maps/icons/library/separator.png";
@@ -3491,6 +3543,8 @@ package
 
         public static const MAPS_ICONS_LIBRARY_BADGES_110X110_BADGE_91:String = "../maps/icons/library/badges/110x110/badge_91.png";
 
+        public static const MAPS_ICONS_LIBRARY_BADGES_110X110_BADGE_92:String = "../maps/icons/library/badges/110x110/badge_92.png";
+
         public static const MAPS_ICONS_LIBRARY_BADGES_220X220_BADGE_10:String = "../maps/icons/library/badges/220x220/badge_10.png";
 
         public static const MAPS_ICONS_LIBRARY_BADGES_220X220_BADGE_11:String = "../maps/icons/library/badges/220x220/badge_11.png";
@@ -3592,6 +3646,8 @@ package
         public static const MAPS_ICONS_LIBRARY_BADGES_220X220_BADGE_90_GOLD:String = "../maps/icons/library/badges/220x220/badge_90_gold.png";
 
         public static const MAPS_ICONS_LIBRARY_BADGES_220X220_BADGE_91:String = "../maps/icons/library/badges/220x220/badge_91.png";
+
+        public static const MAPS_ICONS_LIBRARY_BADGES_220X220_BADGE_92:String = "../maps/icons/library/badges/220x220/badge_92.png";
 
         public static const MAPS_ICONS_LIBRARY_BADGES_24X24_BADGE_1:String = "../maps/icons/library/badges/24x24/badge_1.png";
 
@@ -3771,6 +3827,8 @@ package
 
         public static const MAPS_ICONS_LIBRARY_BADGES_24X24_BADGE_91:String = "../maps/icons/library/badges/24x24/badge_91.png";
 
+        public static const MAPS_ICONS_LIBRARY_BADGES_24X24_BADGE_92:String = "../maps/icons/library/badges/24x24/badge_92.png";
+
         public static const MAPS_ICONS_LIBRARY_BADGES_48X48_BADGE_1:String = "../maps/icons/library/badges/48x48/badge_1.png";
 
         public static const MAPS_ICONS_LIBRARY_BADGES_48X48_BADGE_10:String = "../maps/icons/library/badges/48x48/badge_10.png";
@@ -3948,6 +4006,8 @@ package
         public static const MAPS_ICONS_LIBRARY_BADGES_48X48_BADGE_90_GOLD:String = "../maps/icons/library/badges/48x48/badge_90_gold.png";
 
         public static const MAPS_ICONS_LIBRARY_BADGES_48X48_BADGE_91:String = "../maps/icons/library/badges/48x48/badge_91.png";
+
+        public static const MAPS_ICONS_LIBRARY_BADGES_48X48_BADGE_92:String = "../maps/icons/library/badges/48x48/badge_92.png";
 
         public static const MAPS_ICONS_LIBRARY_BADGES_48X48_BADGE_DEFAULT:String = "../maps/icons/library/badges/48x48/badge_default.png";
 
@@ -4130,6 +4190,8 @@ package
         public static const MAPS_ICONS_LIBRARY_BADGES_80X80_BADGE_90_GOLD:String = "../maps/icons/library/badges/80x80/badge_90_gold.png";
 
         public static const MAPS_ICONS_LIBRARY_BADGES_80X80_BADGE_91:String = "../maps/icons/library/badges/80x80/badge_91.png";
+
+        public static const MAPS_ICONS_LIBRARY_BADGES_80X80_BADGE_92:String = "../maps/icons/library/badges/80x80/badge_92.png";
 
         public static const MAPS_ICONS_LIBRARY_BADGES_80X80_BADGE_EMPTY:String = "../maps/icons/library/badges/80x80/badge_empty.png";
 
@@ -4620,6 +4682,8 @@ package
         public static const MAPS_ICONS_LIBRARY_FORTIFICATION_RESERVE_INPROGRESS_24:String = "../maps/icons/library/fortification/reserve_inprogress_24.png";
 
         public static const MAPS_ICONS_LIBRARY_FORTIFICATION_USSR_T62A:String = "../maps/icons/library/fortification/ussr-T62A.png";
+
+        public static const MAPS_ICONS_LIBRARY_HANGARFLAG_FLAG_45:String = "../maps/icons/library/hangarFlag/flag_45.png";
 
         public static const MAPS_ICONS_LIBRARY_HANGARFLAG_FLAG_BLUE:String = "../maps/icons/library/hangarFlag/flag_blue.png";
 
@@ -5655,6 +5719,8 @@ package
 
         public static const MAPS_ICONS_QUESTS_PROMOSCREEN_FALLOUT:String = "../maps/icons/quests/promoscreen_fallout.png";
 
+        public static const MAPS_ICONS_QUESTS_QUESTSECRETEVENTTOOLTIPHEADER:String = "../maps/icons/quests/questSecretEventTooltipHeader.png";
+
         public static const MAPS_ICONS_QUESTS_QUESTTOOLTIPHEADER:String = "../maps/icons/quests/questTooltipHeader.png";
 
         public static const MAPS_ICONS_QUESTS_SEASONSVIEWBG:String = "../maps/icons/quests/seasonsViewBg.png";
@@ -5949,6 +6015,8 @@ package
 
         public static const MAPS_ICONS_QUESTS_BONUSES_BADGES_110X110_BADGE_91:String = "../maps/icons/quests/bonuses/badges/110x110/badge_91.png";
 
+        public static const MAPS_ICONS_QUESTS_BONUSES_BADGES_110X110_BADGE_92:String = "../maps/icons/quests/bonuses/badges/110x110/badge_92.png";
+
         public static const MAPS_ICONS_QUESTS_BONUSES_BADGES_220X220_BADGE_10:String = "../maps/icons/quests/bonuses/badges/220x220/badge_10.png";
 
         public static const MAPS_ICONS_QUESTS_BONUSES_BADGES_220X220_BADGE_11:String = "../maps/icons/quests/bonuses/badges/220x220/badge_11.png";
@@ -6036,6 +6104,8 @@ package
         public static const MAPS_ICONS_QUESTS_BONUSES_BADGES_220X220_BADGE_90_GOLD:String = "../maps/icons/quests/bonuses/badges/220x220/badge_90_gold.png";
 
         public static const MAPS_ICONS_QUESTS_BONUSES_BADGES_220X220_BADGE_91:String = "../maps/icons/quests/bonuses/badges/220x220/badge_91.png";
+
+        public static const MAPS_ICONS_QUESTS_BONUSES_BADGES_220X220_BADGE_92:String = "../maps/icons/quests/bonuses/badges/220x220/badge_92.png";
 
         public static const MAPS_ICONS_QUESTS_BONUSES_BADGES_24X24_BADGE_1:String = "../maps/icons/quests/bonuses/badges/24x24/badge_1.png";
 
@@ -6197,6 +6267,8 @@ package
 
         public static const MAPS_ICONS_QUESTS_BONUSES_BADGES_24X24_BADGE_91:String = "../maps/icons/quests/bonuses/badges/24x24/badge_91.png";
 
+        public static const MAPS_ICONS_QUESTS_BONUSES_BADGES_24X24_BADGE_92:String = "../maps/icons/quests/bonuses/badges/24x24/badge_92.png";
+
         public static const MAPS_ICONS_QUESTS_BONUSES_BADGES_48X48_BADGE_1:String = "../maps/icons/quests/bonuses/badges/48x48/badge_1.png";
 
         public static const MAPS_ICONS_QUESTS_BONUSES_BADGES_48X48_BADGE_10:String = "../maps/icons/quests/bonuses/badges/48x48/badge_10.png";
@@ -6356,6 +6428,8 @@ package
         public static const MAPS_ICONS_QUESTS_BONUSES_BADGES_48X48_BADGE_90_GOLD:String = "../maps/icons/quests/bonuses/badges/48x48/badge_90_gold.png";
 
         public static const MAPS_ICONS_QUESTS_BONUSES_BADGES_48X48_BADGE_91:String = "../maps/icons/quests/bonuses/badges/48x48/badge_91.png";
+
+        public static const MAPS_ICONS_QUESTS_BONUSES_BADGES_48X48_BADGE_92:String = "../maps/icons/quests/bonuses/badges/48x48/badge_92.png";
 
         public static const MAPS_ICONS_QUESTS_BONUSES_BADGES_48X48_BADGE_DEFAULT:String = "../maps/icons/quests/bonuses/badges/48x48/badge_default.png";
 
@@ -6520,6 +6594,8 @@ package
         public static const MAPS_ICONS_QUESTS_BONUSES_BADGES_80X80_BADGE_90_GOLD:String = "../maps/icons/quests/bonuses/badges/80x80/badge_90_gold.png";
 
         public static const MAPS_ICONS_QUESTS_BONUSES_BADGES_80X80_BADGE_91:String = "../maps/icons/quests/bonuses/badges/80x80/badge_91.png";
+
+        public static const MAPS_ICONS_QUESTS_BONUSES_BADGES_80X80_BADGE_92:String = "../maps/icons/quests/bonuses/badges/80x80/badge_92.png";
 
         public static const MAPS_ICONS_QUESTS_BONUSES_BADGES_80X80_BADGE_EMPTY:String = "../maps/icons/quests/bonuses/badges/80x80/badge_empty.png";
 
@@ -8305,6 +8381,1166 @@ package
 
         public static const MAPS_ICONS_REFERRAL_TANKMANMALE:String = "../maps/icons/referral/tankmanMale.png";
 
+        public static const MAPS_ICONS_SECRETEVENT_ARROW:String = "../maps/icons/secretEvent/arrow.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BACKGROUND:String = "../maps/icons/secretEvent/background.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BUYFUELICON:String = "../maps/icons/secretEvent/buyFuelicon.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CAROUSELSLOT_BACK:String = "../maps/icons/secretEvent/carouselSlot_back.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CAROUSELSLOT_SHADOWABOVETANK:String = "../maps/icons/secretEvent/carouselSlot_shadowAboveTank.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE:String = "../maps/icons/secretEvent/certificate.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CHARS_BG:String = "../maps/icons/secretEvent/chars_bg.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CHARS_SEPARATOR:String = "../maps/icons/secretEvent/chars_separator.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CHECK:String = "../maps/icons/secretEvent/check.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CHECK_PLAIN:String = "../maps/icons/secretEvent/check_plain.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CLOCK:String = "../maps/icons/secretEvent/clock.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CLOCKACTIVE:String = "../maps/icons/secretEvent/clockActive.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CORNER_SHADOW:String = "../maps/icons/secretEvent/corner_shadow.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CURRENCYBALANCESHADOW:String = "../maps/icons/secretEvent/currencyBalanceShadow.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_FLAGICON:String = "../maps/icons/secretEvent/flagIcon.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_FLAGICONDISABLE:String = "../maps/icons/secretEvent/flagIconDisable.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GIFTICON:String = "../maps/icons/secretEvent/giftIcon.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GLOW_ORANGE_MEDIUM:String = "../maps/icons/secretEvent/glow_orange_medium.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GLOW_WHITE:String = "../maps/icons/secretEvent/glow_white.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GLOW_WHITE_MEDIUM:String = "../maps/icons/secretEvent/glow_white_medium.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_G_BACKGROUND1:String = "../maps/icons/secretEvent/g_background1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_G_BACKGROUND2:String = "../maps/icons/secretEvent/g_background2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_G_BACKGROUND3:String = "../maps/icons/secretEvent/g_background3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_G_BACKGROUND4:String = "../maps/icons/secretEvent/g_background4.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_G_BACKGROUND5:String = "../maps/icons/secretEvent/g_background5.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_G_BACKGROUND6:String = "../maps/icons/secretEvent/g_background6.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ICONMARK:String = "../maps/icons/secretEvent/iconMark.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ICONSALE:String = "../maps/icons/secretEvent/iconSale.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ICONTANK:String = "../maps/icons/secretEvent/iconTank.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ICONTOKEN:String = "../maps/icons/secretEvent/iconToken.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_INFO:String = "../maps/icons/secretEvent/info.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_INFOLABEL:String = "../maps/icons/secretEvent/infoLabel.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_INFOTIPCORNER:String = "../maps/icons/secretEvent/infotipCorner.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_INFOTIPTANKS:String = "../maps/icons/secretEvent/infotipTanks.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_LEVEL3_HIGHTLIGHT:String = "../maps/icons/secretEvent/level3_hightlight.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_LOCK:String = "../maps/icons/secretEvent/lock.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MARKICON:String = "../maps/icons/secretEvent/markIcon.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MARKICONBIG:String = "../maps/icons/secretEvent/markIconBig.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MARKICONSMALL:String = "../maps/icons/secretEvent/markIconSmall.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MENUACTIVELIGHT:String = "../maps/icons/secretEvent/menuActiveLight.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MENUFUELICON:String = "../maps/icons/secretEvent/menuFuelIcon.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MENUITEMREWARDITEMICONDONE:String = "../maps/icons/secretEvent/menuItemRewardItemIconDone.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MISSION_HOVER:String = "../maps/icons/secretEvent/mission_hover.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_PANELBACKGROUNDGENERAL:String = "../maps/icons/secretEvent/panelBackgroundGeneral.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_PANELBACKGROUNDTOTAL:String = "../maps/icons/secretEvent/panelBackgroundTotal.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_R175_IS_2E_446X316:String = "../maps/icons/secretEvent/R175_IS_2E_446x316.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_SHADOW:String = "../maps/icons/secretEvent/shadow.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_SUBDIVISION_HOVER:String = "../maps/icons/secretEvent/subdivision_hover.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOKEN:String = "../maps/icons/secretEvent/token.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOKENICON:String = "../maps/icons/secretEvent/tokenIcon.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOKENICONBIG:String = "../maps/icons/secretEvent/tokenIconBig.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOKENICONLARGE:String = "../maps/icons/secretEvent/tokenIconLarge.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOKENICONSMALL:String = "../maps/icons/secretEvent/tokenIconSmall.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOOLITPDOTS:String = "../maps/icons/secretEvent/toolitpDots.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOOLTIPLIGHT:String = "../maps/icons/secretEvent/tooltipLight.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOPMENUSHADOW:String = "../maps/icons/secretEvent/topMenuShadow.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITLEVEL1:String = "../maps/icons/secretEvent/unitLevel1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITLEVEL1_23X24:String = "../maps/icons/secretEvent/unitLevel1_23x24.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITLEVEL1_33X36:String = "../maps/icons/secretEvent/unitLevel1_33x36.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITLEVEL2:String = "../maps/icons/secretEvent/unitLevel2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITLEVEL2_23X24:String = "../maps/icons/secretEvent/unitLevel2_23x24.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITLEVEL2_33X36:String = "../maps/icons/secretEvent/unitLevel2_33x36.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITLEVEL3:String = "../maps/icons/secretEvent/unitLevel3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITLEVEL3_23X24:String = "../maps/icons/secretEvent/unitLevel3_23x24.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITLEVEL3_33X36:String = "../maps/icons/secretEvent/unitLevel3_33x36.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLE_PREVIEW_INFO:String = "../maps/icons/secretEvent/vehicle_preview_info.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_WINDOWGLOW:String = "../maps/icons/secretEvent/windowGlow.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_ARCADE_ARTILLERY_EVENT:String = "../maps/icons/secretEvent/abilities/arcade_artillery_event.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_ARCADE_BOMBER_ATTACK_EVENT:String = "../maps/icons/secretEvent/abilities/arcade_bomber_attack_event.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_ARCADE_BOMBER_EVENT:String = "../maps/icons/secretEvent/abilities/arcade_bomber_event.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_ARCADE_MINEFIELD_EVENT:String = "../maps/icons/secretEvent/abilities/arcade_minefield_event.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_H_HP_REPAIR:String = "../maps/icons/secretEvent/abilities/h_HP_repair.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_H_NITRO:String = "../maps/icons/secretEvent/abilities/h_Nitro.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_MORTAR:String = "../maps/icons/secretEvent/abilities/mortar.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_NOIMAGE:String = "../maps/icons/secretEvent/abilities/noImage.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_RESPAWN:String = "../maps/icons/secretEvent/abilities/respawn.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_ROCKET_ARTILLERY:String = "../maps/icons/secretEvent/abilities/rocket_artillery.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_SUPERSHELLFIREBALL:String = "../maps/icons/secretEvent/abilities/superShellFireball.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_SUPERSHELLFLATTYRES:String = "../maps/icons/secretEvent/abilities/superShellFlatTyres.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_36X36_ARCADE_ARTILLERY_EVENT:String = "../maps/icons/secretEvent/abilities/36x36/arcade_artillery_event.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_36X36_ARCADE_BOMBER_ATTACK_EVENT:String = "../maps/icons/secretEvent/abilities/36x36/arcade_bomber_attack_event.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_36X36_ARCADE_BOMBER_EVENT:String = "../maps/icons/secretEvent/abilities/36x36/arcade_bomber_event.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_36X36_ARCADE_MINEFIELD_EVENT:String = "../maps/icons/secretEvent/abilities/36x36/arcade_minefield_event.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_36X36_HEAL:String = "../maps/icons/secretEvent/abilities/36x36/heal.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_36X36_H_NITRO:String = "../maps/icons/secretEvent/abilities/36x36/h_Nitro.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_36X36_MORTAR:String = "../maps/icons/secretEvent/abilities/36x36/mortar.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_36X36_ROCKET_ARTILLERY:String = "../maps/icons/secretEvent/abilities/36x36/rocket_artillery.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_36X36_SUPERSHELLFIREBALL:String = "../maps/icons/secretEvent/abilities/36x36/superShellFireball.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_36X36_SUPERSHELLFLATTYRES:String = "../maps/icons/secretEvent/abilities/36x36/superShellFlatTyres.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_48X48_ARCADE_ARTILLERY_EVENT:String = "../maps/icons/secretEvent/abilities/48x48/arcade_artillery_event.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_48X48_ARCADE_BOMBER_ATTACK_EVENT:String = "../maps/icons/secretEvent/abilities/48x48/arcade_bomber_attack_event.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_48X48_ARCADE_BOMBER_EVENT:String = "../maps/icons/secretEvent/abilities/48x48/arcade_bomber_event.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_48X48_ARCADE_MINEFIELD_EVENT:String = "../maps/icons/secretEvent/abilities/48x48/arcade_minefield_event.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_48X48_H_HP_REPAIR:String = "../maps/icons/secretEvent/abilities/48x48/h_HP_repair.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_48X48_H_NITRO:String = "../maps/icons/secretEvent/abilities/48x48/h_Nitro.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_48X48_MORTAR:String = "../maps/icons/secretEvent/abilities/48x48/mortar.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_48X48_ROCKET_ARTILLERY:String = "../maps/icons/secretEvent/abilities/48x48/rocket_artillery.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_48X48_SUPERSHELLFIREBALL:String = "../maps/icons/secretEvent/abilities/48x48/superShellFireball.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABILITIES_48X48_SUPERSHELLFLATTYRES:String = "../maps/icons/secretEvent/abilities/48x48/superShellFlatTyres.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_ADD_REWARD_1:String = "../maps/icons/secretEvent/about/add_reward_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_ADD_REWARD_2:String = "../maps/icons/secretEvent/about/add_reward_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_ADD_REWARD_3:String = "../maps/icons/secretEvent/about/add_reward_3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_ALL_1:String = "../maps/icons/secretEvent/about/all_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_ALL_2:String = "../maps/icons/secretEvent/about/all_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_ALL_3:String = "../maps/icons/secretEvent/about/all_3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_ARROW_SEPARATOR:String = "../maps/icons/secretEvent/about/arrow_separator.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_BG:String = "../maps/icons/secretEvent/about/bg.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_CONSUMABLES:String = "../maps/icons/secretEvent/about/consumables.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_GAME:String = "../maps/icons/secretEvent/about/game.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_LEVELS_1:String = "../maps/icons/secretEvent/about/levels_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_LEVELS_2:String = "../maps/icons/secretEvent/about/levels_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_LEVELS_3:String = "../maps/icons/secretEvent/about/levels_3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_MAP_1:String = "../maps/icons/secretEvent/about/map_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_MAP_2:String = "../maps/icons/secretEvent/about/map_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_MAP_3:String = "../maps/icons/secretEvent/about/map_3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_MAP_4:String = "../maps/icons/secretEvent/about/map_4.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_MODIFIERS_1:String = "../maps/icons/secretEvent/about/modifiers_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_MODIFIERS_2:String = "../maps/icons/secretEvent/about/modifiers_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_MODIFIERS_3:String = "../maps/icons/secretEvent/about/modifiers_3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_MOUSEARROW:String = "../maps/icons/secretEvent/about/mouseArrow.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_PLATOONS_1:String = "../maps/icons/secretEvent/about/platoons_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_PLATOONS_2:String = "../maps/icons/secretEvent/about/platoons_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_PLATOONS_3:String = "../maps/icons/secretEvent/about/platoons_3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_PLATOONS_4:String = "../maps/icons/secretEvent/about/platoons_4.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_PLATOONS_5:String = "../maps/icons/secretEvent/about/platoons_5.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_PRIZE_TANK:String = "../maps/icons/secretEvent/about/prize_tank.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_PRIZE_TANK_LEVEL:String = "../maps/icons/secretEvent/about/prize_tank_level.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_SEPARATOR:String = "../maps/icons/secretEvent/about/separator.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_SHADOW:String = "../maps/icons/secretEvent/about/shadow.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_SKILLS_1_1:String = "../maps/icons/secretEvent/about/skills_1_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_SKILLS_1_2:String = "../maps/icons/secretEvent/about/skills_1_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_SKILLS_1_3:String = "../maps/icons/secretEvent/about/skills_1_3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_SKILLS_1_4:String = "../maps/icons/secretEvent/about/skills_1_4.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_SKILLS_1_5:String = "../maps/icons/secretEvent/about/skills_1_5.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_SKILLS_1_6:String = "../maps/icons/secretEvent/about/skills_1_6.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_SKILLS_2_1:String = "../maps/icons/secretEvent/about/skills_2_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_SKILLS_2_2:String = "../maps/icons/secretEvent/about/skills_2_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_SLILLS_3_1:String = "../maps/icons/secretEvent/about/slills_3_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_SLILLS_3_2:String = "../maps/icons/secretEvent/about/slills_3_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_SLILLS_4_1:String = "../maps/icons/secretEvent/about/slills_4_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_TANKS:String = "../maps/icons/secretEvent/about/tanks.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_VIDEO:String = "../maps/icons/secretEvent/about/video.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ABOUT_YOUTUBE_BUTTON:String = "../maps/icons/secretEvent/about/youtube_button.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BACKGROUNDS_BATTLE_RESULT:String = "../maps/icons/secretEvent/backgrounds/battle_result.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BACKGROUNDS_CONFIRMWINDOW:String = "../maps/icons/secretEvent/backgrounds/confirmWindow.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BACKGROUNDS_CONFIRMWINDOW1:String = "../maps/icons/secretEvent/backgrounds/confirmWindow1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BACKGROUNDS_MISSION_COMPLETED:String = "../maps/icons/secretEvent/backgrounds/mission_completed.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BACKGROUNDS_TANK_REWARD:String = "../maps/icons/secretEvent/backgrounds/tank_reward.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BACKGROUNDS_UNIT_0:String = "../maps/icons/secretEvent/backgrounds/unit_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BACKGROUNDS_UNIT_1:String = "../maps/icons/secretEvent/backgrounds/unit_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BACKGROUNDS_UNIT_2:String = "../maps/icons/secretEvent/backgrounds/unit_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BACKGROUNDS_UNIT_3:String = "../maps/icons/secretEvent/backgrounds/unit_3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BACKGROUNDS_UNIT_4:String = "../maps/icons/secretEvent/backgrounds/unit_4.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BACKGROUNDS_UNIT_5:String = "../maps/icons/secretEvent/backgrounds/unit_5.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BASE_BGORDER:String = "../maps/icons/secretEvent/base/bgOrder.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BASE_BGSHADOW:String = "../maps/icons/secretEvent/base/bgShadow.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BASE_CAROUSELBACK:String = "../maps/icons/secretEvent/base/carouselBack.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BASE_CERTIFICATE:String = "../maps/icons/secretEvent/base/certificate.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BASE_CERTIFICATESARROW:String = "../maps/icons/secretEvent/base/certificatesArrow.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BASE_CERTIFICATESGLOW:String = "../maps/icons/secretEvent/base/certificatesGlow.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BASE_GLOWBOTTOM_GREY:String = "../maps/icons/secretEvent/base/glowBottom_grey.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BASE_GLOWBOTTOM_ORANGE:String = "../maps/icons/secretEvent/base/glowBottom_orange.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BASE_LEFTARROW:String = "../maps/icons/secretEvent/base/leftArrow.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BASE_MESSAGEBG:String = "../maps/icons/secretEvent/base/messageBg.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BASE_MESSAGEBGSIDE:String = "../maps/icons/secretEvent/base/messageBgSide.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BASE_MESSAGEICONBLOCKED:String = "../maps/icons/secretEvent/base/messageIconBlocked.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BASE_MODIFIERBACKCAROUSELSLOT_RED:String = "../maps/icons/secretEvent/base/modifierBackCarouselSlot_red.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BASE_MODIFIERBACKINFOTIP_RED:String = "../maps/icons/secretEvent/base/modifierBackInfotip_red.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BASE_MODIFIERBACKINFOTIP_YELLOW:String = "../maps/icons/secretEvent/base/modifierBackInfotip_yellow.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BASE_RIGHTARROW:String = "../maps/icons/secretEvent/base/rightArrow.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BASE_WINDOWGLOW:String = "../maps/icons/secretEvent/base/windowGlow.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BATTLERESULT_ARMOR:String = "../maps/icons/secretEvent/battleResult/armor.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BATTLERESULT_ASSIST:String = "../maps/icons/secretEvent/battleResult/assist.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BATTLERESULT_CERTIFICATE:String = "../maps/icons/secretEvent/battleResult/certificate.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BATTLERESULT_DAMAGE:String = "../maps/icons/secretEvent/battleResult/damage.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BATTLERESULT_KILL:String = "../maps/icons/secretEvent/battleResult/kill.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BATTLERESULT_OBJECTIVES:String = "../maps/icons/secretEvent/battleResult/objectives.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BATTLERESULT_UNITLEVEL1:String = "../maps/icons/secretEvent/battleResult/unitLevel1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BATTLERESULT_UNITLEVEL2:String = "../maps/icons/secretEvent/battleResult/unitLevel2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BATTLERESULT_UNITLEVEL3:String = "../maps/icons/secretEvent/battleResult/unitLevel3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_ALLGENERAL:String = "../maps/icons/secretEvent/berlin/allGeneral.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_BENEFITMAP:String = "../maps/icons/secretEvent/berlin/benefitMap.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_BENEFITPRIZE:String = "../maps/icons/secretEvent/berlin/benefitPrize.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_BENEFITSPECIAL:String = "../maps/icons/secretEvent/berlin/benefitSpecial.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_BERLIN_INFO_SHADOW:String = "../maps/icons/secretEvent/berlin/berlin_info_shadow.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_BG1:String = "../maps/icons/secretEvent/berlin/bg1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_BG2:String = "../maps/icons/secretEvent/berlin/bg2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_BGACTIVE:String = "../maps/icons/secretEvent/berlin/bgActive.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_BGDISCOUNT:String = "../maps/icons/secretEvent/berlin/bgDiscount.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_BGTEXTURE:String = "../maps/icons/secretEvent/berlin/bgTexture.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_DARKENER:String = "../maps/icons/secretEvent/berlin/darkener.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_GLOW:String = "../maps/icons/secretEvent/berlin/glow.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_ICON9MAY:String = "../maps/icons/secretEvent/berlin/icon9may.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_ICONALLTEAMS:String = "../maps/icons/secretEvent/berlin/iconAllTeams.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_MODIFIERS:String = "../maps/icons/secretEvent/berlin/modifiers.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_NUM1:String = "../maps/icons/secretEvent/berlin/num1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_NUM2:String = "../maps/icons/secretEvent/berlin/num2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_NUM3:String = "../maps/icons/secretEvent/berlin/num3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_PACKBACK:String = "../maps/icons/secretEvent/berlin/packBack.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_PLUS:String = "../maps/icons/secretEvent/berlin/plus.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_SEP:String = "../maps/icons/secretEvent/berlin/sep.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_SEPARATOR:String = "../maps/icons/secretEvent/berlin/separator.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_SHADOW:String = "../maps/icons/secretEvent/berlin/shadow.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_SHADOWCARD:String = "../maps/icons/secretEvent/berlin/shadowCard.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_SHADOWLEFTXS:String = "../maps/icons/secretEvent/berlin/shadowLeftXs.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_SHADOWRIGHTXS:String = "../maps/icons/secretEvent/berlin/shadowRightXs.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_SIDELIGHT:String = "../maps/icons/secretEvent/berlin/sideLight.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_SPARKS:String = "../maps/icons/secretEvent/berlin/sparks.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_BERLIN_TIMERGLOW:String = "../maps/icons/secretEvent/berlin/timerGlow.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX10_0_0:String = "../maps/icons/secretEvent/certificate/192x192/certificateX10_0_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX10_0_1:String = "../maps/icons/secretEvent/certificate/192x192/certificateX10_0_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX10_1_0:String = "../maps/icons/secretEvent/certificate/192x192/certificateX10_1_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX10_1_1:String = "../maps/icons/secretEvent/certificate/192x192/certificateX10_1_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX10_2_0:String = "../maps/icons/secretEvent/certificate/192x192/certificateX10_2_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX10_2_1:String = "../maps/icons/secretEvent/certificate/192x192/certificateX10_2_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX10_3_0:String = "../maps/icons/secretEvent/certificate/192x192/certificateX10_3_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX10_3_1:String = "../maps/icons/secretEvent/certificate/192x192/certificateX10_3_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX10_4_0:String = "../maps/icons/secretEvent/certificate/192x192/certificateX10_4_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX10_4_1:String = "../maps/icons/secretEvent/certificate/192x192/certificateX10_4_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX15_0_0:String = "../maps/icons/secretEvent/certificate/192x192/certificateX15_0_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX15_0_1:String = "../maps/icons/secretEvent/certificate/192x192/certificateX15_0_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX15_1_0:String = "../maps/icons/secretEvent/certificate/192x192/certificateX15_1_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX15_1_1:String = "../maps/icons/secretEvent/certificate/192x192/certificateX15_1_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX15_2_0:String = "../maps/icons/secretEvent/certificate/192x192/certificateX15_2_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX15_2_1:String = "../maps/icons/secretEvent/certificate/192x192/certificateX15_2_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX15_3_0:String = "../maps/icons/secretEvent/certificate/192x192/certificateX15_3_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX15_3_1:String = "../maps/icons/secretEvent/certificate/192x192/certificateX15_3_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX15_4_0:String = "../maps/icons/secretEvent/certificate/192x192/certificateX15_4_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX15_4_1:String = "../maps/icons/secretEvent/certificate/192x192/certificateX15_4_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX5_0_0:String = "../maps/icons/secretEvent/certificate/192x192/certificateX5_0_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX5_0_1:String = "../maps/icons/secretEvent/certificate/192x192/certificateX5_0_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX5_1_0:String = "../maps/icons/secretEvent/certificate/192x192/certificateX5_1_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX5_1_1:String = "../maps/icons/secretEvent/certificate/192x192/certificateX5_1_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX5_2_0:String = "../maps/icons/secretEvent/certificate/192x192/certificateX5_2_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX5_2_1:String = "../maps/icons/secretEvent/certificate/192x192/certificateX5_2_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX5_3_0:String = "../maps/icons/secretEvent/certificate/192x192/certificateX5_3_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX5_3_1:String = "../maps/icons/secretEvent/certificate/192x192/certificateX5_3_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX5_4_0:String = "../maps/icons/secretEvent/certificate/192x192/certificateX5_4_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_192X192_CERTIFICATEX5_4_1:String = "../maps/icons/secretEvent/certificate/192x192/certificateX5_4_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX10_0_0:String = "../maps/icons/secretEvent/certificate/250x250/certificateX10_0_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX10_0_1:String = "../maps/icons/secretEvent/certificate/250x250/certificateX10_0_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX10_1_0:String = "../maps/icons/secretEvent/certificate/250x250/certificateX10_1_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX10_1_1:String = "../maps/icons/secretEvent/certificate/250x250/certificateX10_1_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX10_2_0:String = "../maps/icons/secretEvent/certificate/250x250/certificateX10_2_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX10_2_1:String = "../maps/icons/secretEvent/certificate/250x250/certificateX10_2_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX10_3_0:String = "../maps/icons/secretEvent/certificate/250x250/certificateX10_3_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX10_3_1:String = "../maps/icons/secretEvent/certificate/250x250/certificateX10_3_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX10_4_0:String = "../maps/icons/secretEvent/certificate/250x250/certificateX10_4_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX10_4_1:String = "../maps/icons/secretEvent/certificate/250x250/certificateX10_4_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX15_0_0:String = "../maps/icons/secretEvent/certificate/250x250/certificateX15_0_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX15_0_1:String = "../maps/icons/secretEvent/certificate/250x250/certificateX15_0_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX15_1_0:String = "../maps/icons/secretEvent/certificate/250x250/certificateX15_1_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX15_1_1:String = "../maps/icons/secretEvent/certificate/250x250/certificateX15_1_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX15_2_0:String = "../maps/icons/secretEvent/certificate/250x250/certificateX15_2_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX15_2_1:String = "../maps/icons/secretEvent/certificate/250x250/certificateX15_2_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX15_3_0:String = "../maps/icons/secretEvent/certificate/250x250/certificateX15_3_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX15_3_1:String = "../maps/icons/secretEvent/certificate/250x250/certificateX15_3_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX15_4_0:String = "../maps/icons/secretEvent/certificate/250x250/certificateX15_4_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX15_4_1:String = "../maps/icons/secretEvent/certificate/250x250/certificateX15_4_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX5_0_0:String = "../maps/icons/secretEvent/certificate/250x250/certificateX5_0_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX5_0_1:String = "../maps/icons/secretEvent/certificate/250x250/certificateX5_0_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX5_1_0:String = "../maps/icons/secretEvent/certificate/250x250/certificateX5_1_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX5_1_1:String = "../maps/icons/secretEvent/certificate/250x250/certificateX5_1_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX5_2_0:String = "../maps/icons/secretEvent/certificate/250x250/certificateX5_2_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX5_2_1:String = "../maps/icons/secretEvent/certificate/250x250/certificateX5_2_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX5_3_0:String = "../maps/icons/secretEvent/certificate/250x250/certificateX5_3_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX5_3_1:String = "../maps/icons/secretEvent/certificate/250x250/certificateX5_3_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX5_4_0:String = "../maps/icons/secretEvent/certificate/250x250/certificateX5_4_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_250X250_CERTIFICATEX5_4_1:String = "../maps/icons/secretEvent/certificate/250x250/certificateX5_4_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX10_0_0:String = "../maps/icons/secretEvent/certificate/48x48/certificateX10_0_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX10_0_1:String = "../maps/icons/secretEvent/certificate/48x48/certificateX10_0_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX10_1_0:String = "../maps/icons/secretEvent/certificate/48x48/certificateX10_1_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX10_1_1:String = "../maps/icons/secretEvent/certificate/48x48/certificateX10_1_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX10_2_0:String = "../maps/icons/secretEvent/certificate/48x48/certificateX10_2_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX10_2_1:String = "../maps/icons/secretEvent/certificate/48x48/certificateX10_2_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX10_3_0:String = "../maps/icons/secretEvent/certificate/48x48/certificateX10_3_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX10_3_1:String = "../maps/icons/secretEvent/certificate/48x48/certificateX10_3_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX10_4_0:String = "../maps/icons/secretEvent/certificate/48x48/certificateX10_4_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX10_4_1:String = "../maps/icons/secretEvent/certificate/48x48/certificateX10_4_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX15_0_0:String = "../maps/icons/secretEvent/certificate/48x48/certificateX15_0_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX15_0_1:String = "../maps/icons/secretEvent/certificate/48x48/certificateX15_0_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX15_1_0:String = "../maps/icons/secretEvent/certificate/48x48/certificateX15_1_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX15_1_1:String = "../maps/icons/secretEvent/certificate/48x48/certificateX15_1_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX15_2_0:String = "../maps/icons/secretEvent/certificate/48x48/certificateX15_2_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX15_2_1:String = "../maps/icons/secretEvent/certificate/48x48/certificateX15_2_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX15_3_0:String = "../maps/icons/secretEvent/certificate/48x48/certificateX15_3_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX15_3_1:String = "../maps/icons/secretEvent/certificate/48x48/certificateX15_3_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX15_4_0:String = "../maps/icons/secretEvent/certificate/48x48/certificateX15_4_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX15_4_1:String = "../maps/icons/secretEvent/certificate/48x48/certificateX15_4_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX5_0_0:String = "../maps/icons/secretEvent/certificate/48x48/certificateX5_0_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX5_0_1:String = "../maps/icons/secretEvent/certificate/48x48/certificateX5_0_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX5_1_0:String = "../maps/icons/secretEvent/certificate/48x48/certificateX5_1_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX5_1_1:String = "../maps/icons/secretEvent/certificate/48x48/certificateX5_1_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX5_2_0:String = "../maps/icons/secretEvent/certificate/48x48/certificateX5_2_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX5_2_1:String = "../maps/icons/secretEvent/certificate/48x48/certificateX5_2_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX5_3_0:String = "../maps/icons/secretEvent/certificate/48x48/certificateX5_3_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX5_3_1:String = "../maps/icons/secretEvent/certificate/48x48/certificateX5_3_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX5_4_0:String = "../maps/icons/secretEvent/certificate/48x48/certificateX5_4_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_48X48_CERTIFICATEX5_4_1:String = "../maps/icons/secretEvent/certificate/48x48/certificateX5_4_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX10_0_0:String = "../maps/icons/secretEvent/certificate/80x80/certificateX10_0_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX10_0_1:String = "../maps/icons/secretEvent/certificate/80x80/certificateX10_0_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX10_1_0:String = "../maps/icons/secretEvent/certificate/80x80/certificateX10_1_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX10_1_1:String = "../maps/icons/secretEvent/certificate/80x80/certificateX10_1_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX10_2_0:String = "../maps/icons/secretEvent/certificate/80x80/certificateX10_2_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX10_2_1:String = "../maps/icons/secretEvent/certificate/80x80/certificateX10_2_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX10_3_0:String = "../maps/icons/secretEvent/certificate/80x80/certificateX10_3_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX10_3_1:String = "../maps/icons/secretEvent/certificate/80x80/certificateX10_3_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX10_4_0:String = "../maps/icons/secretEvent/certificate/80x80/certificateX10_4_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX10_4_1:String = "../maps/icons/secretEvent/certificate/80x80/certificateX10_4_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX15_0_0:String = "../maps/icons/secretEvent/certificate/80x80/certificateX15_0_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX15_0_1:String = "../maps/icons/secretEvent/certificate/80x80/certificateX15_0_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX15_1_0:String = "../maps/icons/secretEvent/certificate/80x80/certificateX15_1_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX15_1_1:String = "../maps/icons/secretEvent/certificate/80x80/certificateX15_1_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX15_2_0:String = "../maps/icons/secretEvent/certificate/80x80/certificateX15_2_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX15_2_1:String = "../maps/icons/secretEvent/certificate/80x80/certificateX15_2_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX15_3_0:String = "../maps/icons/secretEvent/certificate/80x80/certificateX15_3_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX15_3_1:String = "../maps/icons/secretEvent/certificate/80x80/certificateX15_3_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX15_4_0:String = "../maps/icons/secretEvent/certificate/80x80/certificateX15_4_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX15_4_1:String = "../maps/icons/secretEvent/certificate/80x80/certificateX15_4_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX5_0_0:String = "../maps/icons/secretEvent/certificate/80x80/certificateX5_0_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX5_0_1:String = "../maps/icons/secretEvent/certificate/80x80/certificateX5_0_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX5_1_0:String = "../maps/icons/secretEvent/certificate/80x80/certificateX5_1_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX5_1_1:String = "../maps/icons/secretEvent/certificate/80x80/certificateX5_1_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX5_2_0:String = "../maps/icons/secretEvent/certificate/80x80/certificateX5_2_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX5_2_1:String = "../maps/icons/secretEvent/certificate/80x80/certificateX5_2_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX5_3_0:String = "../maps/icons/secretEvent/certificate/80x80/certificateX5_3_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX5_3_1:String = "../maps/icons/secretEvent/certificate/80x80/certificateX5_3_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX5_4_0:String = "../maps/icons/secretEvent/certificate/80x80/certificateX5_4_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_80X80_CERTIFICATEX5_4_1:String = "../maps/icons/secretEvent/certificate/80x80/certificateX5_4_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX10_0_0:String = "../maps/icons/secretEvent/certificate/96x96/certificateX10_0_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX10_0_1:String = "../maps/icons/secretEvent/certificate/96x96/certificateX10_0_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX10_1_0:String = "../maps/icons/secretEvent/certificate/96x96/certificateX10_1_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX10_1_1:String = "../maps/icons/secretEvent/certificate/96x96/certificateX10_1_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX10_2_0:String = "../maps/icons/secretEvent/certificate/96x96/certificateX10_2_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX10_2_1:String = "../maps/icons/secretEvent/certificate/96x96/certificateX10_2_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX10_3_0:String = "../maps/icons/secretEvent/certificate/96x96/certificateX10_3_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX10_3_1:String = "../maps/icons/secretEvent/certificate/96x96/certificateX10_3_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX10_4_0:String = "../maps/icons/secretEvent/certificate/96x96/certificateX10_4_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX10_4_1:String = "../maps/icons/secretEvent/certificate/96x96/certificateX10_4_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX15_0_0:String = "../maps/icons/secretEvent/certificate/96x96/certificateX15_0_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX15_0_1:String = "../maps/icons/secretEvent/certificate/96x96/certificateX15_0_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX15_1_0:String = "../maps/icons/secretEvent/certificate/96x96/certificateX15_1_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX15_1_1:String = "../maps/icons/secretEvent/certificate/96x96/certificateX15_1_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX15_2_0:String = "../maps/icons/secretEvent/certificate/96x96/certificateX15_2_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX15_2_1:String = "../maps/icons/secretEvent/certificate/96x96/certificateX15_2_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX15_3_0:String = "../maps/icons/secretEvent/certificate/96x96/certificateX15_3_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX15_3_1:String = "../maps/icons/secretEvent/certificate/96x96/certificateX15_3_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX15_4_0:String = "../maps/icons/secretEvent/certificate/96x96/certificateX15_4_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX15_4_1:String = "../maps/icons/secretEvent/certificate/96x96/certificateX15_4_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX5_0_0:String = "../maps/icons/secretEvent/certificate/96x96/certificateX5_0_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX5_0_1:String = "../maps/icons/secretEvent/certificate/96x96/certificateX5_0_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX5_1_0:String = "../maps/icons/secretEvent/certificate/96x96/certificateX5_1_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX5_1_1:String = "../maps/icons/secretEvent/certificate/96x96/certificateX5_1_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX5_2_0:String = "../maps/icons/secretEvent/certificate/96x96/certificateX5_2_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX5_2_1:String = "../maps/icons/secretEvent/certificate/96x96/certificateX5_2_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX5_3_0:String = "../maps/icons/secretEvent/certificate/96x96/certificateX5_3_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX5_3_1:String = "../maps/icons/secretEvent/certificate/96x96/certificateX5_3_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX5_4_0:String = "../maps/icons/secretEvent/certificate/96x96/certificateX5_4_0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATEX5_4_1:String = "../maps/icons/secretEvent/certificate/96x96/certificateX5_4_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_CERTIFICATE_96X96_CERTIFICATE_HOVER:String = "../maps/icons/secretEvent/certificate/96x96/certificate_hover.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_FUEL_CLOCK:String = "../maps/icons/secretEvent/fuel/clock.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_FUEL_FUEL:String = "../maps/icons/secretEvent/fuel/fuel.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_FUEL_JERRICAN:String = "../maps/icons/secretEvent/fuel/jerrican.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_FUEL_LEVELS:String = "../maps/icons/secretEvent/fuel/levels.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_FUEL_TASKS:String = "../maps/icons/secretEvent/fuel/tasks.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_FUEL_TIMERCLOCKICON:String = "../maps/icons/secretEvent/fuel/timerClockIcon.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_FUEL_TIMERGLOW:String = "../maps/icons/secretEvent/fuel/timerGlow.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_G_ICON0:String = "../maps/icons/secretEvent/generalIcons/g_icon0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_G_ICON0_ACTIVE:String = "../maps/icons/secretEvent/generalIcons/g_icon0_active.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_G_ICON1:String = "../maps/icons/secretEvent/generalIcons/g_icon1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_G_ICON1_ACTIVE:String = "../maps/icons/secretEvent/generalIcons/g_icon1_active.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_G_ICON2:String = "../maps/icons/secretEvent/generalIcons/g_icon2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_G_ICON2_ACTIVE:String = "../maps/icons/secretEvent/generalIcons/g_icon2_active.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_G_ICON3:String = "../maps/icons/secretEvent/generalIcons/g_icon3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_G_ICON3_ACTIVE:String = "../maps/icons/secretEvent/generalIcons/g_icon3_active.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_G_ICON4:String = "../maps/icons/secretEvent/generalIcons/g_icon4.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_G_ICON4_ACTIVE:String = "../maps/icons/secretEvent/generalIcons/g_icon4_active.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_100X100_G_ICON0:String = "../maps/icons/secretEvent/generalIcons/100x100/g_icon0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_100X100_G_ICON1:String = "../maps/icons/secretEvent/generalIcons/100x100/g_icon1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_100X100_G_ICON2:String = "../maps/icons/secretEvent/generalIcons/100x100/g_icon2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_100X100_G_ICON3:String = "../maps/icons/secretEvent/generalIcons/100x100/g_icon3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_100X100_G_ICON4:String = "../maps/icons/secretEvent/generalIcons/100x100/g_icon4.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_134X134_G_ICON0:String = "../maps/icons/secretEvent/generalIcons/134x134/g_icon0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_134X134_G_ICON1:String = "../maps/icons/secretEvent/generalIcons/134x134/g_icon1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_134X134_G_ICON2:String = "../maps/icons/secretEvent/generalIcons/134x134/g_icon2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_134X134_G_ICON3:String = "../maps/icons/secretEvent/generalIcons/134x134/g_icon3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_134X134_G_ICON4:String = "../maps/icons/secretEvent/generalIcons/134x134/g_icon4.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_192X192_G_ICON0:String = "../maps/icons/secretEvent/generalIcons/192x192/g_icon0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_192X192_G_ICON1:String = "../maps/icons/secretEvent/generalIcons/192x192/g_icon1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_192X192_G_ICON2:String = "../maps/icons/secretEvent/generalIcons/192x192/g_icon2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_192X192_G_ICON3:String = "../maps/icons/secretEvent/generalIcons/192x192/g_icon3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_192X192_G_ICON4:String = "../maps/icons/secretEvent/generalIcons/192x192/g_icon4.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_22X22_G_ICON0:String = "../maps/icons/secretEvent/generalIcons/22x22/g_icon0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_22X22_G_ICON1:String = "../maps/icons/secretEvent/generalIcons/22x22/g_icon1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_22X22_G_ICON2:String = "../maps/icons/secretEvent/generalIcons/22x22/g_icon2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_22X22_G_ICON3:String = "../maps/icons/secretEvent/generalIcons/22x22/g_icon3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_22X22_G_ICON4:String = "../maps/icons/secretEvent/generalIcons/22x22/g_icon4.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_36X36_G_ICON0:String = "../maps/icons/secretEvent/generalIcons/36x36/g_icon0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_36X36_G_ICON1:String = "../maps/icons/secretEvent/generalIcons/36x36/g_icon1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_36X36_G_ICON2:String = "../maps/icons/secretEvent/generalIcons/36x36/g_icon2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_36X36_G_ICON3:String = "../maps/icons/secretEvent/generalIcons/36x36/g_icon3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_36X36_G_ICON4:String = "../maps/icons/secretEvent/generalIcons/36x36/g_icon4.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_36X36_YELLOW_G_ICON0:String = "../maps/icons/secretEvent/generalIcons/36x36_yellow/g_icon0.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_36X36_YELLOW_G_ICON1:String = "../maps/icons/secretEvent/generalIcons/36x36_yellow/g_icon1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_36X36_YELLOW_G_ICON2:String = "../maps/icons/secretEvent/generalIcons/36x36_yellow/g_icon2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_36X36_YELLOW_G_ICON3:String = "../maps/icons/secretEvent/generalIcons/36x36_yellow/g_icon3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_36X36_YELLOW_G_ICON4:String = "../maps/icons/secretEvent/generalIcons/36x36_yellow/g_icon4.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MISSIONS_BACK_FLASH:String = "../maps/icons/secretEvent/missions/back_flash.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MISSIONS_BACK_LIGHT:String = "../maps/icons/secretEvent/missions/back_light.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MISSIONS_CARDBG:String = "../maps/icons/secretEvent/missions/cardBg.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MISSIONS_FRONT_GLOW:String = "../maps/icons/secretEvent/missions/front_glow.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MISSIONS_INPROGRESSTEXTURE:String = "../maps/icons/secretEvent/missions/inprogressTexture.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MISSIONS_MIDDLE_FLASH:String = "../maps/icons/secretEvent/missions/middle_flash.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MISSIONS_MISSION_108X140:String = "../maps/icons/secretEvent/missions/mission_108x140.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MISSIONS_MISSION_162X212:String = "../maps/icons/secretEvent/missions/mission_162x212.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MISSIONS_MISSION_62X80:String = "../maps/icons/secretEvent/missions/mission_62x80.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MISSIONS_MISSION_ICON:String = "../maps/icons/secretEvent/missions/mission_icon.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MISSIONS_RACING_TOOLTIP_COOLDOWN_BG:String = "../maps/icons/secretEvent/missions/racing_tooltip_cooldown_bg.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MISSIONS_STATUSCOMPLETED:String = "../maps/icons/secretEvent/missions/statusCompleted.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MISSIONS_STATUSLOCKED:String = "../maps/icons/secretEvent/missions/statusLocked.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MISSIONS_STATUSPROGRESS:String = "../maps/icons/secretEvent/missions/statusProgress.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MISSIONS_TOKEN:String = "../maps/icons/secretEvent/missions/token.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MODIFIERS_24X24_X10:String = "../maps/icons/secretEvent/modifiers/24x24/X10.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MODIFIERS_24X24_X15:String = "../maps/icons/secretEvent/modifiers/24x24/X15.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MODIFIERS_24X24_X5:String = "../maps/icons/secretEvent/modifiers/24x24/X5.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MODIFIERS_24X24_XX:String = "../maps/icons/secretEvent/modifiers/24x24/XX.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MODIFIERS_48X48_X10:String = "../maps/icons/secretEvent/modifiers/48x48/X10.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MODIFIERS_48X48_X15:String = "../maps/icons/secretEvent/modifiers/48x48/X15.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MODIFIERS_48X48_X5:String = "../maps/icons/secretEvent/modifiers/48x48/X5.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MODIFIERS_64X60_X10:String = "../maps/icons/secretEvent/modifiers/64x60/X10.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MODIFIERS_64X60_X15:String = "../maps/icons/secretEvent/modifiers/64x60/X15.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MODIFIERS_64X60_X5:String = "../maps/icons/secretEvent/modifiers/64x60/X5.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_MODIFIERS_64X60_XX:String = "../maps/icons/secretEvent/modifiers/64x60/XX.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ORDER_CARDMISSIONBG:String = "../maps/icons/secretEvent/order/cardMissionBg.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ORDER_CHECK:String = "../maps/icons/secretEvent/order/check.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ORDER_DISCOUNTBG:String = "../maps/icons/secretEvent/order/discountBg.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ORDER_FRAME_BIG:String = "../maps/icons/secretEvent/order/frame_big.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ORDER_FRAME_SMALL:String = "../maps/icons/secretEvent/order/frame_small.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ORDER_MASTER:String = "../maps/icons/secretEvent/order/master.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ORDER_ORANGEGLOW:String = "../maps/icons/secretEvent/order/orangeGlow.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ORDER_ORDERTIMER:String = "../maps/icons/secretEvent/order/orderTimer.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_ORDER_SPECIALIST:String = "../maps/icons/secretEvent/order/specialist.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_QUEST_MISSIONBG482X222:String = "../maps/icons/secretEvent/quest/missionBG482x222.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_QUEST_MISSIONBG752X264:String = "../maps/icons/secretEvent/quest/missionBG752x264.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TIERS_26X28_TIER_1:String = "../maps/icons/secretEvent/tiers/26x28/tier_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TIERS_26X28_TIER_1_DIS:String = "../maps/icons/secretEvent/tiers/26x28/tier_1_dis.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TIERS_26X28_TIER_2:String = "../maps/icons/secretEvent/tiers/26x28/tier_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TIERS_26X28_TIER_2_DIS:String = "../maps/icons/secretEvent/tiers/26x28/tier_2_dis.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TIERS_26X28_TIER_3:String = "../maps/icons/secretEvent/tiers/26x28/tier_3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TIERS_26X28_TIER_3_DIS:String = "../maps/icons/secretEvent/tiers/26x28/tier_3_dis.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TIERS_38X44_TIER_1:String = "../maps/icons/secretEvent/tiers/38x44/tier_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TIERS_38X44_TIER_2:String = "../maps/icons/secretEvent/tiers/38x44/tier_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TIERS_38X44_TIER_3:String = "../maps/icons/secretEvent/tiers/38x44/tier_3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TIERS_52X62_TIER_2:String = "../maps/icons/secretEvent/tiers/52x62/tier_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TIERS_52X62_TIER_3:String = "../maps/icons/secretEvent/tiers/52x62/tier_3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TIERS_70X82_TIER_2:String = "../maps/icons/secretEvent/tiers/70x82/tier_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TIERS_70X82_TIER_3:String = "../maps/icons/secretEvent/tiers/70x82/tier_3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TIERS_SKILLS_TIER_1:String = "../maps/icons/secretEvent/tiers/skills/tier_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TIERS_SKILLS_TIER_2:String = "../maps/icons/secretEvent/tiers/skills/tier_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TIERS_SKILLS_TIER_3:String = "../maps/icons/secretEvent/tiers/skills/tier_3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOKENS_124X124_SE20_ENERGY_GENERAL_X15_DISCOUNT:String = "../maps/icons/secretEvent/tokens/124x124/se20_energy_general_x15_discount.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOKENS_24X24_SE20_ENERGY_GENERAL_X15_DISCOUNT:String = "../maps/icons/secretEvent/tokens/24x24/se20_energy_general_x15_discount.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOKENS_48X48_SE20_ENERGY_GENERAL_X15_DISCOUNT:String = "../maps/icons/secretEvent/tokens/48x48/se20_energy_general_x15_discount.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOKENS_60X60_SE20_ENERGY_GENERAL_X15_DISCOUNT:String = "../maps/icons/secretEvent/tokens/60x60/se20_energy_general_x15_discount.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOKENS_80X80_SE20_ENERGY_GENERAL_X15_DISCOUNT:String = "../maps/icons/secretEvent/tokens/80x80/se20_energy_general_x15_discount.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOOLTIP_DEMO1:String = "../maps/icons/secretEvent/tooltip/demo1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOOLTIP_DEMO2:String = "../maps/icons/secretEvent/tooltip/demo2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOOLTIP_DEMO3:String = "../maps/icons/secretEvent/tooltip/demo3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOOLTIP_HANGARAUTOMOBILE1:String = "../maps/icons/secretEvent/tooltip/hangarAutomobile1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOOLTIP_HANGARAUTOMOBILE2:String = "../maps/icons/secretEvent/tooltip/hangarAutomobile2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOOLTIP_HANGARAUTOMOBILE3:String = "../maps/icons/secretEvent/tooltip/hangarAutomobile3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOOLTIP_HANGARBERLINSIGN:String = "../maps/icons/secretEvent/tooltip/hangarBerlinSign.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOOLTIP_HANGARCAT:String = "../maps/icons/secretEvent/tooltip/hangarCat.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOOLTIP_HANGARDOG:String = "../maps/icons/secretEvent/tooltip/hangarDog.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOOLTIP_HANGARGRAMOPHONE:String = "../maps/icons/secretEvent/tooltip/hangarGramophone.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOOLTIP_HANGAROFFICER1:String = "../maps/icons/secretEvent/tooltip/hangarOfficer1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOOLTIP_HANGAROFFICER2:String = "../maps/icons/secretEvent/tooltip/hangarOfficer2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOOLTIP_HANGARPLANE:String = "../maps/icons/secretEvent/tooltip/hangarPlane.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOOLTIP_HANGARPOSTER:String = "../maps/icons/secretEvent/tooltip/hangarPoster.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOOLTIP_HANGARPOSTMANBAG:String = "../maps/icons/secretEvent/tooltip/hangarPostmanBag.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOOLTIP_HANGARRECRUIT:String = "../maps/icons/secretEvent/tooltip/hangarRecruit.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOOLTIP_HANGARSOLDIER:String = "../maps/icons/secretEvent/tooltip/hangarSoldier.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOOLTIP_HANGARTANK1:String = "../maps/icons/secretEvent/tooltip/hangarTank1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOOLTIP_HANGARTANK2:String = "../maps/icons/secretEvent/tooltip/hangarTank2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOOLTIP_HANGARTANK3:String = "../maps/icons/secretEvent/tooltip/hangarTank3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOOLTIP_LEVEL1:String = "../maps/icons/secretEvent/tooltip/level1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOOLTIP_LEVEL2:String = "../maps/icons/secretEvent/tooltip/level2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOOLTIP_LEVEL3:String = "../maps/icons/secretEvent/tooltip/level3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOOLTIP_TITTLEBG:String = "../maps/icons/secretEvent/tooltip/tittleBg.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_TOOLTIP_TITTLEBGBLACK:String = "../maps/icons/secretEvent/tooltip/tittleBgBlack.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITSVIEW_BUTTONBG:String = "../maps/icons/secretEvent/unitsView/buttonBg.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITSVIEW_CHECK:String = "../maps/icons/secretEvent/unitsView/check.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITSVIEW_ICONINFO:String = "../maps/icons/secretEvent/unitsView/iconInfo.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITSVIEW_LEVELONE:String = "../maps/icons/secretEvent/unitsView/levelOne.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITSVIEW_LEVELTHREE:String = "../maps/icons/secretEvent/unitsView/levelThree.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITSVIEW_LEVELTWO:String = "../maps/icons/secretEvent/unitsView/levelTwo.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITSVIEW_MARKMAIN:String = "../maps/icons/secretEvent/unitsView/markMain.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITSVIEW_PRIZEBOX:String = "../maps/icons/secretEvent/unitsView/prizeBox.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITSVIEW_PRIZEFUEL:String = "../maps/icons/secretEvent/unitsView/prizeFuel.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITSVIEW_PRIZEMARK:String = "../maps/icons/secretEvent/unitsView/prizeMark.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITSVIEW_PRIZENITRO:String = "../maps/icons/secretEvent/unitsView/prizeNitro.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITSVIEW_PRIZEPOWER:String = "../maps/icons/secretEvent/unitsView/prizePower.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITSVIEW_PRIZEREPAIRS:String = "../maps/icons/secretEvent/unitsView/prizeRepairs.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITSVIEW_REWARDTANK11:String = "../maps/icons/secretEvent/unitsView/rewardTank11.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITSVIEW_REWARDTANK12:String = "../maps/icons/secretEvent/unitsView/rewardTank12.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITSVIEW_REWARDTANK13:String = "../maps/icons/secretEvent/unitsView/rewardTank13.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITSVIEW_REWARDTANK21:String = "../maps/icons/secretEvent/unitsView/rewardTank21.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITSVIEW_REWARDTANK22:String = "../maps/icons/secretEvent/unitsView/rewardTank22.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITSVIEW_REWARDTANK23:String = "../maps/icons/secretEvent/unitsView/rewardTank23.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITSVIEW_REWARDTANK31:String = "../maps/icons/secretEvent/unitsView/rewardTank31.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITSVIEW_REWARDTANK32:String = "../maps/icons/secretEvent/unitsView/rewardTank32.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITSVIEW_REWARDTANK33:String = "../maps/icons/secretEvent/unitsView/rewardTank33.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITSVIEW_REWARDTANK41:String = "../maps/icons/secretEvent/unitsView/rewardTank41.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITSVIEW_REWARDTANK42:String = "../maps/icons/secretEvent/unitsView/rewardTank42.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITSVIEW_REWARDTANK43:String = "../maps/icons/secretEvent/unitsView/rewardTank43.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_UNITSVIEW_SEPARATOR:String = "../maps/icons/secretEvent/unitsView/separator.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_160X100_CAROUSEL_A121_M26_COLOGNE_SE20_GEN_4_LVL_3:String = "../maps/icons/secretEvent/vehicles/160x100_carousel/A121_M26_Cologne_SE20_Gen_4_Lvl_3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_160X100_CAROUSEL_A36_SHERMAN_JUMBO_SE20_GEN_4_LVL_2:String = "../maps/icons/secretEvent/vehicles/160x100_carousel/A36_Sherman_Jumbo_SE20_Gen_4_Lvl_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_160X100_CAROUSEL_GB09_CHURCHILL_VII_SE20_GEN_5_LVL_1:String = "../maps/icons/secretEvent/vehicles/160x100_carousel/GB09_Churchill_VII_SE20_Gen_5_Lvl_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_160X100_CAROUSEL_GB09_CHURCHILL_VII_SE20_GEN_5_LVL_2:String = "../maps/icons/secretEvent/vehicles/160x100_carousel/GB09_Churchill_VII_SE20_Gen_5_Lvl_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_160X100_CAROUSEL_GB10_BLACK_PRINCE_SE20_GEN_5_LVL_3:String = "../maps/icons/secretEvent/vehicles/160x100_carousel/GB10_Black_Prince_SE20_Gen_5_Lvl_3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_160X100_CAROUSEL_R01_IS_SE20_GEN_1_LVL_1:String = "../maps/icons/secretEvent/vehicles/160x100_carousel/R01_IS_SE20_Gen_1_Lvl_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_160X100_CAROUSEL_R01_IS_SE20_GEN_1_LVL_2:String = "../maps/icons/secretEvent/vehicles/160x100_carousel/R01_IS_SE20_Gen_1_Lvl_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_160X100_CAROUSEL_R07_T_34_85_SE20_GEN_2_LVL_1:String = "../maps/icons/secretEvent/vehicles/160x100_carousel/R07_T_34_85_SE20_Gen_2_Lvl_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_160X100_CAROUSEL_R108_T34_85M_SE20_GEN_2_LVL_2:String = "../maps/icons/secretEvent/vehicles/160x100_carousel/R108_T34_85M_SE20_Gen_2_Lvl_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_160X100_CAROUSEL_R116_ISU122C_BERLIN_SE20_GEN_0_LVL_3:String = "../maps/icons/secretEvent/vehicles/160x100_carousel/R116_ISU122C_Berlin_SE20_Gen_0_Lvl_3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_160X100_CAROUSEL_R140_M4_LOZA_SE20_GEN_4_LVL_1:String = "../maps/icons/secretEvent/vehicles/160x100_carousel/R140_M4_Loza_SE20_Gen_4_Lvl_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_160X100_CAROUSEL_R17_SU_100_SE20_GEN_0_LVL_1:String = "../maps/icons/secretEvent/vehicles/160x100_carousel/R17_SU_100_SE20_Gen_0_Lvl_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_160X100_CAROUSEL_R17_SU_100_SE20_GEN_0_LVL_2:String = "../maps/icons/secretEvent/vehicles/160x100_carousel/R17_SU_100_SE20_Gen_0_Lvl_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_160X100_CAROUSEL_R71_IS_2B_SE20_GEN_1_LVL_3:String = "../maps/icons/secretEvent/vehicles/160x100_carousel/R71_IS_2B_SE20_Gen_1_Lvl_3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_160X100_CAROUSEL_R98_T44_85_SE20_GEN_2_LVL_3:String = "../maps/icons/secretEvent/vehicles/160x100_carousel/R98_T44_85_SE20_Gen_2_Lvl_3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_48X48_A121_M26_COLOGNE_SE20_GEN_4_LVL_3:String = "../maps/icons/secretEvent/vehicles/48x48/A121_M26_Cologne_SE20_Gen_4_Lvl_3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_48X48_A36_SHERMAN_JUMBO_SE20_GEN_4_LVL_2:String = "../maps/icons/secretEvent/vehicles/48x48/A36_Sherman_Jumbo_SE20_Gen_4_Lvl_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_48X48_GB09_CHURCHILL_VII_SE20_GEN_5_LVL_1:String = "../maps/icons/secretEvent/vehicles/48x48/GB09_Churchill_VII_SE20_Gen_5_Lvl_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_48X48_GB09_CHURCHILL_VII_SE20_GEN_5_LVL_2:String = "../maps/icons/secretEvent/vehicles/48x48/GB09_Churchill_VII_SE20_Gen_5_Lvl_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_48X48_GB10_BLACK_PRINCE_SE20_GEN_5_LVL_3:String = "../maps/icons/secretEvent/vehicles/48x48/GB10_Black_Prince_SE20_Gen_5_Lvl_3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_48X48_R01_IS_SE20_GEN_1_LVL_1:String = "../maps/icons/secretEvent/vehicles/48x48/R01_IS_SE20_Gen_1_Lvl_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_48X48_R01_IS_SE20_GEN_1_LVL_2:String = "../maps/icons/secretEvent/vehicles/48x48/R01_IS_SE20_Gen_1_Lvl_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_48X48_R07_T_34_85_SE20_GEN_2_LVL_1:String = "../maps/icons/secretEvent/vehicles/48x48/R07_T_34_85_SE20_Gen_2_Lvl_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_48X48_R108_T34_85M_SE20_GEN_2_LVL_2:String = "../maps/icons/secretEvent/vehicles/48x48/R108_T34_85M_SE20_Gen_2_Lvl_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_48X48_R116_ISU122C_BERLIN_SE20_GEN_0_LVL_3:String = "../maps/icons/secretEvent/vehicles/48x48/R116_ISU122C_Berlin_SE20_Gen_0_Lvl_3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_48X48_R140_M4_LOZA_SE20_GEN_4_LVL_1:String = "../maps/icons/secretEvent/vehicles/48x48/R140_M4_Loza_SE20_Gen_4_Lvl_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_48X48_R17_SU_100_SE20_GEN_0_LVL_1:String = "../maps/icons/secretEvent/vehicles/48x48/R17_SU_100_SE20_Gen_0_Lvl_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_48X48_R17_SU_100_SE20_GEN_0_LVL_2:String = "../maps/icons/secretEvent/vehicles/48x48/R17_SU_100_SE20_Gen_0_Lvl_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_48X48_R71_IS_2B_SE20_GEN_1_LVL_3:String = "../maps/icons/secretEvent/vehicles/48x48/R71_IS_2B_SE20_Gen_1_Lvl_3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_48X48_R98_T44_85_SE20_GEN_2_LVL_3:String = "../maps/icons/secretEvent/vehicles/48x48/R98_T44_85_SE20_Gen_2_Lvl_3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_80X80_A121_M26_COLOGNE_SE20_GEN_4_LVL_3:String = "../maps/icons/secretEvent/vehicles/80x80/A121_M26_Cologne_SE20_Gen_4_Lvl_3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_80X80_A36_SHERMAN_JUMBO_SE20_GEN_4_LVL_2:String = "../maps/icons/secretEvent/vehicles/80x80/A36_Sherman_Jumbo_SE20_Gen_4_Lvl_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_80X80_GB09_CHURCHILL_VII_SE20_GEN_5_LVL_1:String = "../maps/icons/secretEvent/vehicles/80x80/GB09_Churchill_VII_SE20_Gen_5_Lvl_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_80X80_GB09_CHURCHILL_VII_SE20_GEN_5_LVL_2:String = "../maps/icons/secretEvent/vehicles/80x80/GB09_Churchill_VII_SE20_Gen_5_Lvl_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_80X80_GB10_BLACK_PRINCE_SE20_GEN_5_LVL_3:String = "../maps/icons/secretEvent/vehicles/80x80/GB10_Black_Prince_SE20_Gen_5_Lvl_3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_80X80_R01_IS_SE20_GEN_1_LVL_1:String = "../maps/icons/secretEvent/vehicles/80x80/R01_IS_SE20_Gen_1_Lvl_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_80X80_R01_IS_SE20_GEN_1_LVL_2:String = "../maps/icons/secretEvent/vehicles/80x80/R01_IS_SE20_Gen_1_Lvl_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_80X80_R07_T_34_85_SE20_GEN_2_LVL_1:String = "../maps/icons/secretEvent/vehicles/80x80/R07_T_34_85_SE20_Gen_2_Lvl_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_80X80_R108_T34_85M_SE20_GEN_2_LVL_2:String = "../maps/icons/secretEvent/vehicles/80x80/R108_T34_85M_SE20_Gen_2_Lvl_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_80X80_R116_ISU122C_BERLIN_SE20_GEN_0_LVL_3:String = "../maps/icons/secretEvent/vehicles/80x80/R116_ISU122C_Berlin_SE20_Gen_0_Lvl_3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_80X80_R140_M4_LOZA_SE20_GEN_4_LVL_1:String = "../maps/icons/secretEvent/vehicles/80x80/R140_M4_Loza_SE20_Gen_4_Lvl_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_80X80_R17_SU_100_SE20_GEN_0_LVL_1:String = "../maps/icons/secretEvent/vehicles/80x80/R17_SU_100_SE20_Gen_0_Lvl_1.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_80X80_R17_SU_100_SE20_GEN_0_LVL_2:String = "../maps/icons/secretEvent/vehicles/80x80/R17_SU_100_SE20_Gen_0_Lvl_2.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_80X80_R71_IS_2B_SE20_GEN_1_LVL_3:String = "../maps/icons/secretEvent/vehicles/80x80/R71_IS_2B_SE20_Gen_1_Lvl_3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHICLES_80X80_R98_T44_85_SE20_GEN_2_LVL_3:String = "../maps/icons/secretEvent/vehicles/80x80/R98_T44_85_SE20_Gen_2_Lvl_3.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHPARAMS_BAD_ACCURACY:String = "../maps/icons/secretEvent/vehParams/bad_accuracy.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHPARAMS_BAD_ARMOR:String = "../maps/icons/secretEvent/vehParams/bad_armor.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHPARAMS_BAD_AVGDAMAGE:String = "../maps/icons/secretEvent/vehParams/bad_avgDamage.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHPARAMS_BAD_AVGDAMAGEPERMINUTE:String = "../maps/icons/secretEvent/vehParams/bad_avgDamagePerMinute.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHPARAMS_BAD_CLIPFIRERATE:String = "../maps/icons/secretEvent/vehParams/bad_clipFireRate.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHPARAMS_BAD_MAXHEALTH:String = "../maps/icons/secretEvent/vehParams/bad_maxHealth.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHPARAMS_BAD_MOBILITY:String = "../maps/icons/secretEvent/vehParams/bad_mobility.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHPARAMS_BAD_PIERCINGPOWER:String = "../maps/icons/secretEvent/vehParams/bad_piercingPower.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHPARAMS_BAD_SPEEDLIMITS:String = "../maps/icons/secretEvent/vehParams/bad_speedLimits.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHPARAMS_GOOD_ACCURACY:String = "../maps/icons/secretEvent/vehParams/good_accuracy.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHPARAMS_GOOD_ARMOR:String = "../maps/icons/secretEvent/vehParams/good_armor.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHPARAMS_GOOD_AVGDAMAGE:String = "../maps/icons/secretEvent/vehParams/good_avgDamage.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHPARAMS_GOOD_AVGDAMAGEPERMINUTE:String = "../maps/icons/secretEvent/vehParams/good_avgDamagePerMinute.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHPARAMS_GOOD_CLIPFIRERATE:String = "../maps/icons/secretEvent/vehParams/good_clipFireRate.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHPARAMS_GOOD_MAXHEALTH:String = "../maps/icons/secretEvent/vehParams/good_maxHealth.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHPARAMS_GOOD_MOBILITY:String = "../maps/icons/secretEvent/vehParams/good_mobility.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHPARAMS_GOOD_PIERCINGPOWER:String = "../maps/icons/secretEvent/vehParams/good_piercingPower.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHPARAMS_GOOD_SPEEDLIMITS:String = "../maps/icons/secretEvent/vehParams/good_speedLimits.png";
+
+        public static const MAPS_ICONS_SECRETEVENT_VEHPARAMS_NOIMAGE:String = "../maps/icons/secretEvent/vehParams/noImage.png";
+
         public static const MAPS_ICONS_SENIORITYAWARDS_AWARD_BG:String = "../maps/icons/seniorityAwards/award_bg.png";
 
         public static const MAPS_ICONS_SENIORITYAWARDS_AWARD_RIBBON:String = "../maps/icons/seniorityAwards/award_ribbon.png";
@@ -10001,6 +11237,16 @@ package
 
         public static const MAPS_ICONS_VEHICLETYPES_BIG_AT_SPG_ELITE:String = "../maps/icons/vehicleTypes/big/AT-SPG_elite.png";
 
+        public static const MAPS_ICONS_VEHICLETYPES_BIG_EVENT_AT_SPG_ELITE:String = "../maps/icons/vehicleTypes/big/event_AT-SPG_elite.png";
+
+        public static const MAPS_ICONS_VEHICLETYPES_BIG_EVENT_HEAVYTANK_ELITE:String = "../maps/icons/vehicleTypes/big/event_heavyTank_elite.png";
+
+        public static const MAPS_ICONS_VEHICLETYPES_BIG_EVENT_LIGHTTANK_ELITE:String = "../maps/icons/vehicleTypes/big/event_lightTank_elite.png";
+
+        public static const MAPS_ICONS_VEHICLETYPES_BIG_EVENT_MEDIUMTANK_ELITE:String = "../maps/icons/vehicleTypes/big/event_mediumTank_elite.png";
+
+        public static const MAPS_ICONS_VEHICLETYPES_BIG_EVENT_SPG_ELITE:String = "../maps/icons/vehicleTypes/big/event_SPG_elite.png";
+
         public static const MAPS_ICONS_VEHICLETYPES_BIG_HEAVYTANK:String = "../maps/icons/vehicleTypes/big/heavyTank.png";
 
         public static const MAPS_ICONS_VEHICLETYPES_BIG_HEAVYTANK_ELITE:String = "../maps/icons/vehicleTypes/big/heavyTank_elite.png";
@@ -10016,6 +11262,28 @@ package
         public static const MAPS_ICONS_VEHICLETYPES_BIG_SPG:String = "../maps/icons/vehicleTypes/big/SPG.png";
 
         public static const MAPS_ICONS_VEHICLETYPES_BIG_SPG_ELITE:String = "../maps/icons/vehicleTypes/big/SPG_elite.png";
+
+        public static const MAPS_ICONS_VEHICLETYPES_BIG_EVENT_AT_SPGELITE:String = "../maps/icons/vehicleTypes/big/event/AT-SPGElite.png";
+
+        public static const MAPS_ICONS_VEHICLETYPES_BIG_EVENT_AT_SPGNORMAL:String = "../maps/icons/vehicleTypes/big/event/AT-SPGNormal.png";
+
+        public static const MAPS_ICONS_VEHICLETYPES_BIG_EVENT_BOSSKILL:String = "../maps/icons/vehicleTypes/big/event/bossKill.png";
+
+        public static const MAPS_ICONS_VEHICLETYPES_BIG_EVENT_HEAVYTANKELITE:String = "../maps/icons/vehicleTypes/big/event/heavyTankElite.png";
+
+        public static const MAPS_ICONS_VEHICLETYPES_BIG_EVENT_HEAVYTANKNORMAL:String = "../maps/icons/vehicleTypes/big/event/heavyTankNormal.png";
+
+        public static const MAPS_ICONS_VEHICLETYPES_BIG_EVENT_LIGHTTANKELITE:String = "../maps/icons/vehicleTypes/big/event/lightTankElite.png";
+
+        public static const MAPS_ICONS_VEHICLETYPES_BIG_EVENT_LIGHTTANKNORMAL:String = "../maps/icons/vehicleTypes/big/event/lightTankNormal.png";
+
+        public static const MAPS_ICONS_VEHICLETYPES_BIG_EVENT_MEDIUMTANKELITE:String = "../maps/icons/vehicleTypes/big/event/mediumTankElite.png";
+
+        public static const MAPS_ICONS_VEHICLETYPES_BIG_EVENT_MEDIUMTANKNORMAL:String = "../maps/icons/vehicleTypes/big/event/mediumTankNormal.png";
+
+        public static const MAPS_ICONS_VEHICLETYPES_BIG_EVENT_SPGELITE:String = "../maps/icons/vehicleTypes/big/event/SPGElite.png";
+
+        public static const MAPS_ICONS_VEHICLETYPES_BIG_EVENT_SPGNORMAL:String = "../maps/icons/vehicleTypes/big/event/SPGNormal.png";
 
         public static const MAPS_ICONS_VEHICLETYPES_ELITE_AT_SPG:String = "../maps/icons/vehicleTypes/elite/AT-SPG.png";
 
@@ -10133,9 +11401,9 @@ package
 
         public static const MAPS_ICONS_QUESTS_BATTLECONDITION_128_DECOR_ICON_BATTLE_CONDITION_ALL_128X128_ENUM:Array = [MAPS_ICONS_QUESTS_BATTLECONDITION_128_DECOR_ICON_BATTLE_CONDITION_ASSIST_128X128,MAPS_ICONS_QUESTS_BATTLECONDITION_128_DECOR_ICON_BATTLE_CONDITION_ASSIST_RADIO_128X128,MAPS_ICONS_QUESTS_BATTLECONDITION_128_DECOR_ICON_BATTLE_CONDITION_ASSIST_STUN_128X128,MAPS_ICONS_QUESTS_BATTLECONDITION_128_DECOR_ICON_BATTLE_CONDITION_ASSIST_STUN_MULTY_128X128,MAPS_ICONS_QUESTS_BATTLECONDITION_128_DECOR_ICON_BATTLE_CONDITION_ASSIST_STUN_TIME_128X128,MAPS_ICONS_QUESTS_BATTLECONDITION_128_DECOR_ICON_BATTLE_CONDITION_ASSIST_TRACK_128X128,MAPS_ICONS_QUESTS_BATTLECONDITION_128_DECOR_ICON_BATTLE_CONDITION_AWARD_128X128,MAPS_ICONS_QUESTS_BATTLECONDITION_128_DECOR_ICON_BATTLE_CONDITION_BASE_CAPTURE_128X128,MAPS_ICONS_QUESTS_BATTLECONDITION_128_DECOR_ICON_BATTLE_CONDITION_BASE_DEF_128X128,MAPS_ICONS_QUESTS_BATTLECONDITION_128_DECOR_ICON_BATTLE_CONDITION_DAMAGE_128X128,MAPS_ICONS_QUESTS_BATTLECONDITION_128_DECOR_ICON_BATTLE_CONDITION_DAMAGE_BLOCK_128X128,MAPS_ICONS_QUESTS_BATTLECONDITION_128_DECOR_ICON_BATTLE_CONDITION_DISCOVER_128X128,MAPS_ICONS_QUESTS_BATTLECONDITION_128_DECOR_ICON_BATTLE_CONDITION_FIRE_128X128,MAPS_ICONS_QUESTS_BATTLECONDITION_128_DECOR_ICON_BATTLE_CONDITION_FOLDER_128X128,MAPS_ICONS_QUESTS_BATTLECONDITION_128_DECOR_ICON_BATTLE_CONDITION_HIT_128X128,MAPS_ICONS_QUESTS_BATTLECONDITION_128_DECOR_ICON_BATTLE_CONDITION_HURT_VEHICLES_128X128,MAPS_ICONS_QUESTS_BATTLECONDITION_128_DECOR_ICON_BATTLE_CONDITION_IMPROVE_128X128,MAPS_ICONS_QUESTS_BATTLECONDITION_128_DECOR_ICON_BATTLE_CONDITION_KILL_VEHICLES_128X128,MAPS_ICONS_QUESTS_BATTLECONDITION_128_DECOR_ICON_BATTLE_CONDITION_MAIN_REPEAT_128X128,MAPS_ICONS_QUESTS_BATTLECONDITION_128_DECOR_ICON_BATTLE_CONDITION_MASTER_128X128,MAPS_ICONS_QUESTS_BATTLECONDITION_128_DECOR_ICON_BATTLE_CONDITION_MODULE_CRIT_128X128,MAPS_ICONS_QUESTS_BATTLECONDITION_128_DECOR_ICON_BATTLE_CONDITION_PREPARATION_128X128,MAPS_ICONS_QUESTS_BATTLECONDITION_128_DECOR_ICON_BATTLE_CONDITION_RAM_128X128,MAPS_ICONS_QUESTS_BATTLECONDITION_128_DECOR_ICON_BATTLE_CONDITION_SURVIVE_128X128,MAPS_ICONS_QUESTS_BATTLECONDITION_128_DECOR_ICON_BATTLE_CONDITION_TOP_128X128,MAPS_ICONS_QUESTS_BATTLECONDITION_128_DECOR_ICON_BATTLE_CONDITION_WIN_128X128];
 
-        public static const MAPS_ICONS_BATTLETYPES_136X136_ENUM:Array = [MAPS_ICONS_BATTLETYPES_136X136_ASSAULT,MAPS_ICONS_BATTLETYPES_136X136_ASSAULT1,MAPS_ICONS_BATTLETYPES_136X136_ASSAULT2,MAPS_ICONS_BATTLETYPES_136X136_BOB,MAPS_ICONS_BATTLETYPES_136X136_BOOTCAMP,MAPS_ICONS_BATTLETYPES_136X136_CLAN,MAPS_ICONS_BATTLETYPES_136X136_CTF,MAPS_ICONS_BATTLETYPES_136X136_CTF30X30,MAPS_ICONS_BATTLETYPES_136X136_DOMINATION,MAPS_ICONS_BATTLETYPES_136X136_DOMINATION30X30,MAPS_ICONS_BATTLETYPES_136X136_EPICBATTLE,MAPS_ICONS_BATTLETYPES_136X136_ESCORT,MAPS_ICONS_BATTLETYPES_136X136_FALLOUT,MAPS_ICONS_BATTLETYPES_136X136_FALLOUT_CLASSIC,MAPS_ICONS_BATTLETYPES_136X136_FALLOUT_MULTITEAM,MAPS_ICONS_BATTLETYPES_136X136_FORTIFICATIONS,MAPS_ICONS_BATTLETYPES_136X136_HISTORICAL,MAPS_ICONS_BATTLETYPES_136X136_NATIONS,MAPS_ICONS_BATTLETYPES_136X136_NEUTRAL,MAPS_ICONS_BATTLETYPES_136X136_PLATOON,MAPS_ICONS_BATTLETYPES_136X136_RANDOM,MAPS_ICONS_BATTLETYPES_136X136_RANKED,MAPS_ICONS_BATTLETYPES_136X136_RATEDSANDBOX,MAPS_ICONS_BATTLETYPES_136X136_RESOURCEPOINTS,MAPS_ICONS_BATTLETYPES_136X136_SANDBOX,MAPS_ICONS_BATTLETYPES_136X136_SQUAD,MAPS_ICONS_BATTLETYPES_136X136_TEAM,MAPS_ICONS_BATTLETYPES_136X136_TEAM7X7,MAPS_ICONS_BATTLETYPES_136X136_TRAINING,MAPS_ICONS_BATTLETYPES_136X136_TUTORIAL];
+        public static const MAPS_ICONS_BATTLETYPES_136X136_ENUM:Array = [MAPS_ICONS_BATTLETYPES_136X136_ASSAULT,MAPS_ICONS_BATTLETYPES_136X136_ASSAULT1,MAPS_ICONS_BATTLETYPES_136X136_ASSAULT2,MAPS_ICONS_BATTLETYPES_136X136_BOB,MAPS_ICONS_BATTLETYPES_136X136_BOOTCAMP,MAPS_ICONS_BATTLETYPES_136X136_CLAN,MAPS_ICONS_BATTLETYPES_136X136_CTF,MAPS_ICONS_BATTLETYPES_136X136_CTF30X30,MAPS_ICONS_BATTLETYPES_136X136_DOMINATION,MAPS_ICONS_BATTLETYPES_136X136_DOMINATION30X30,MAPS_ICONS_BATTLETYPES_136X136_EPICBATTLE,MAPS_ICONS_BATTLETYPES_136X136_ESCORT,MAPS_ICONS_BATTLETYPES_136X136_EVENTBATTLE,MAPS_ICONS_BATTLETYPES_136X136_FALLOUT,MAPS_ICONS_BATTLETYPES_136X136_FALLOUT_CLASSIC,MAPS_ICONS_BATTLETYPES_136X136_FALLOUT_MULTITEAM,MAPS_ICONS_BATTLETYPES_136X136_FORTIFICATIONS,MAPS_ICONS_BATTLETYPES_136X136_HISTORICAL,MAPS_ICONS_BATTLETYPES_136X136_NATIONS,MAPS_ICONS_BATTLETYPES_136X136_NEUTRAL,MAPS_ICONS_BATTLETYPES_136X136_PLATOON,MAPS_ICONS_BATTLETYPES_136X136_RANDOM,MAPS_ICONS_BATTLETYPES_136X136_RANKED,MAPS_ICONS_BATTLETYPES_136X136_RATEDSANDBOX,MAPS_ICONS_BATTLETYPES_136X136_RESOURCEPOINTS,MAPS_ICONS_BATTLETYPES_136X136_SANDBOX,MAPS_ICONS_BATTLETYPES_136X136_SQUAD,MAPS_ICONS_BATTLETYPES_136X136_TEAM,MAPS_ICONS_BATTLETYPES_136X136_TEAM7X7,MAPS_ICONS_BATTLETYPES_136X136_TRAINING,MAPS_ICONS_BATTLETYPES_136X136_TUTORIAL];
 
-        public static const MAPS_ICONS_BATTLETYPES_64X64_ENUM:Array = [MAPS_ICONS_BATTLETYPES_64X64_ASSAULT,MAPS_ICONS_BATTLETYPES_64X64_ASSAULT1,MAPS_ICONS_BATTLETYPES_64X64_ASSAULT2,MAPS_ICONS_BATTLETYPES_64X64_BATTLETEACHING,MAPS_ICONS_BATTLETYPES_64X64_BOB,MAPS_ICONS_BATTLETYPES_64X64_CTF,MAPS_ICONS_BATTLETYPES_64X64_CTF30X30,MAPS_ICONS_BATTLETYPES_64X64_DOMINATION,MAPS_ICONS_BATTLETYPES_64X64_EPICBATTLE,MAPS_ICONS_BATTLETYPES_64X64_EPICQUEUE,MAPS_ICONS_BATTLETYPES_64X64_EPICTRAININGSLIST,MAPS_ICONS_BATTLETYPES_64X64_ESCORT,MAPS_ICONS_BATTLETYPES_64X64_ESPORT,MAPS_ICONS_BATTLETYPES_64X64_EVENT,MAPS_ICONS_BATTLETYPES_64X64_EVENTSQUAD,MAPS_ICONS_BATTLETYPES_64X64_FALLOUT,MAPS_ICONS_BATTLETYPES_64X64_FALLOUT_CLASSIC,MAPS_ICONS_BATTLETYPES_64X64_FALLOUT_MULTITEAM,MAPS_ICONS_BATTLETYPES_64X64_FORT,MAPS_ICONS_BATTLETYPES_64X64_FORTIFICATIONS,MAPS_ICONS_BATTLETYPES_64X64_FRONTLINE,MAPS_ICONS_BATTLETYPES_64X64_HISTORICAL,MAPS_ICONS_BATTLETYPES_64X64_NATIONS,MAPS_ICONS_BATTLETYPES_64X64_NEUTRAL,MAPS_ICONS_BATTLETYPES_64X64_RANDOM,MAPS_ICONS_BATTLETYPES_64X64_RANKED,MAPS_ICONS_BATTLETYPES_64X64_RANKED_EPICRANDOM,MAPS_ICONS_BATTLETYPES_64X64_RESOURCEPOINTS,MAPS_ICONS_BATTLETYPES_64X64_SPECBATTLESLIST,MAPS_ICONS_BATTLETYPES_64X64_SQUAD,MAPS_ICONS_BATTLETYPES_64X64_STEELHUNT,MAPS_ICONS_BATTLETYPES_64X64_STRONGHOLDSBATTLESLIST,MAPS_ICONS_BATTLETYPES_64X64_TEAM7X7,MAPS_ICONS_BATTLETYPES_64X64_TRAININGSLIST,MAPS_ICONS_BATTLETYPES_64X64_TUTORIAL];
+        public static const MAPS_ICONS_BATTLETYPES_64X64_ENUM:Array = [MAPS_ICONS_BATTLETYPES_64X64_ASSAULT,MAPS_ICONS_BATTLETYPES_64X64_ASSAULT1,MAPS_ICONS_BATTLETYPES_64X64_ASSAULT2,MAPS_ICONS_BATTLETYPES_64X64_BATTLETEACHING,MAPS_ICONS_BATTLETYPES_64X64_BOB,MAPS_ICONS_BATTLETYPES_64X64_CTF,MAPS_ICONS_BATTLETYPES_64X64_CTF30X30,MAPS_ICONS_BATTLETYPES_64X64_DOMINATION,MAPS_ICONS_BATTLETYPES_64X64_EPICBATTLE,MAPS_ICONS_BATTLETYPES_64X64_EPICQUEUE,MAPS_ICONS_BATTLETYPES_64X64_EPICTRAININGSLIST,MAPS_ICONS_BATTLETYPES_64X64_ESCORT,MAPS_ICONS_BATTLETYPES_64X64_ESPORT,MAPS_ICONS_BATTLETYPES_64X64_EVENT,MAPS_ICONS_BATTLETYPES_64X64_EVENTBATTLE,MAPS_ICONS_BATTLETYPES_64X64_EVENTSQUAD,MAPS_ICONS_BATTLETYPES_64X64_FALLOUT,MAPS_ICONS_BATTLETYPES_64X64_FALLOUT_CLASSIC,MAPS_ICONS_BATTLETYPES_64X64_FALLOUT_MULTITEAM,MAPS_ICONS_BATTLETYPES_64X64_FORT,MAPS_ICONS_BATTLETYPES_64X64_FORTIFICATIONS,MAPS_ICONS_BATTLETYPES_64X64_FRONTLINE,MAPS_ICONS_BATTLETYPES_64X64_HISTORICAL,MAPS_ICONS_BATTLETYPES_64X64_NATIONS,MAPS_ICONS_BATTLETYPES_64X64_NEUTRAL,MAPS_ICONS_BATTLETYPES_64X64_RANDOM,MAPS_ICONS_BATTLETYPES_64X64_RANKED,MAPS_ICONS_BATTLETYPES_64X64_RANKED_EPICRANDOM,MAPS_ICONS_BATTLETYPES_64X64_RESOURCEPOINTS,MAPS_ICONS_BATTLETYPES_64X64_SPECBATTLESLIST,MAPS_ICONS_BATTLETYPES_64X64_SQUAD,MAPS_ICONS_BATTLETYPES_64X64_STEELHUNT,MAPS_ICONS_BATTLETYPES_64X64_STRONGHOLDSBATTLESLIST,MAPS_ICONS_BATTLETYPES_64X64_TEAM7X7,MAPS_ICONS_BATTLETYPES_64X64_TRAININGSLIST,MAPS_ICONS_BATTLETYPES_64X64_TUTORIAL];
 
         public static const MAPS_ICONS_RANKEDBATTLES_STATS_ALL_ENUM:Array = [MAPS_ICONS_RANKEDBATTLES_STATS_42_EFFICIENCY,MAPS_ICONS_RANKEDBATTLES_STATS_42_POSITION,MAPS_ICONS_RANKEDBATTLES_STATS_52_BATTLES,MAPS_ICONS_RANKEDBATTLES_STATS_52_BATTLESTOTAL,MAPS_ICONS_RANKEDBATTLES_STATS_52_DIVISIONEFFICIENCY,MAPS_ICONS_RANKEDBATTLES_STATS_52_EFFICIENCY,MAPS_ICONS_RANKEDBATTLES_STATS_52_STRIPES,MAPS_ICONS_RANKEDBATTLES_STATS_52_STRIPESTOTAL,MAPS_ICONS_RANKEDBATTLES_STATS_64_EFFICIENCY,MAPS_ICONS_RANKEDBATTLES_STATS_64_POSITION,MAPS_ICONS_RANKEDBATTLES_STATS_64_STEPS,MAPS_ICONS_RANKEDBATTLES_STATS_70_BATTLES,MAPS_ICONS_RANKEDBATTLES_STATS_70_BATTLESTOTAL,MAPS_ICONS_RANKEDBATTLES_STATS_70_DIVISIONEFFICIENCY,MAPS_ICONS_RANKEDBATTLES_STATS_70_EFFICIENCY,MAPS_ICONS_RANKEDBATTLES_STATS_70_STRIPES,MAPS_ICONS_RANKEDBATTLES_STATS_70_STRIPESTOTAL,MAPS_ICONS_RANKEDBATTLES_STATS_84_EFFICIENCY,MAPS_ICONS_RANKEDBATTLES_STATS_84_POSITION,MAPS_ICONS_RANKEDBATTLES_STATS_84_STEPS];
 
@@ -10150,6 +11418,10 @@ package
         public static const MAPS_ICONS_VEHPREVIEW_ENUM:Array = [MAPS_ICONS_VEHPREVIEW_BONUS_BATTLE,MAPS_ICONS_VEHPREVIEW_BONUS_CREDIT,MAPS_ICONS_VEHPREVIEW_BONUS_CREW,MAPS_ICONS_VEHPREVIEW_BONUS_REPLACE,MAPS_ICONS_VEHPREVIEW_VEHICLECHASSIS,MAPS_ICONS_VEHPREVIEW_VEHICLEENGINE,MAPS_ICONS_VEHPREVIEW_VEHICLEGUN,MAPS_ICONS_VEHPREVIEW_VEHICLERADIO,MAPS_ICONS_VEHPREVIEW_VEHICLETURRET];
 
         public static const MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_ALL_DIGIT_ENUM:Array = [MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_220X220_DIGIT_0,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_220X220_DIGIT_1,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_220X220_DIGIT_2,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_220X220_DIGIT_3,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_220X220_DIGIT_4,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_220X220_DIGIT_5,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_220X220_DIGIT_6,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_220X220_DIGIT_7,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_220X220_DIGIT_8,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_220X220_DIGIT_9,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_24X24_DIGIT_0,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_24X24_DIGIT_1,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_24X24_DIGIT_2,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_24X24_DIGIT_3,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_24X24_DIGIT_4,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_24X24_DIGIT_5,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_24X24_DIGIT_6,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_24X24_DIGIT_7,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_24X24_DIGIT_8,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_24X24_DIGIT_9,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_48X48_DIGIT_0,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_48X48_DIGIT_1,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_48X48_DIGIT_2,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_48X48_DIGIT_3,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_48X48_DIGIT_4,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_48X48_DIGIT_5,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_48X48_DIGIT_6,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_48X48_DIGIT_7,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_48X48_DIGIT_8,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_48X48_DIGIT_9,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_80X80_DIGIT_0,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_80X80_DIGIT_1,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_80X80_DIGIT_2,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_80X80_DIGIT_3,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_80X80_DIGIT_4,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_80X80_DIGIT_5,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_80X80_DIGIT_6,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_80X80_DIGIT_7,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_80X80_DIGIT_8,MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_80X80_DIGIT_9];
+
+        public static const MAPS_ICONS_SECRETEVENT_GENERALICONS_ALL_ENUM:Array = [MAPS_ICONS_SECRETEVENT_GENERALICONS_100X100_G_ICON0,MAPS_ICONS_SECRETEVENT_GENERALICONS_100X100_G_ICON1,MAPS_ICONS_SECRETEVENT_GENERALICONS_100X100_G_ICON2,MAPS_ICONS_SECRETEVENT_GENERALICONS_100X100_G_ICON3,MAPS_ICONS_SECRETEVENT_GENERALICONS_100X100_G_ICON4,MAPS_ICONS_SECRETEVENT_GENERALICONS_134X134_G_ICON0,MAPS_ICONS_SECRETEVENT_GENERALICONS_134X134_G_ICON1,MAPS_ICONS_SECRETEVENT_GENERALICONS_134X134_G_ICON2,MAPS_ICONS_SECRETEVENT_GENERALICONS_134X134_G_ICON3,MAPS_ICONS_SECRETEVENT_GENERALICONS_134X134_G_ICON4,MAPS_ICONS_SECRETEVENT_GENERALICONS_192X192_G_ICON0,MAPS_ICONS_SECRETEVENT_GENERALICONS_192X192_G_ICON1,MAPS_ICONS_SECRETEVENT_GENERALICONS_192X192_G_ICON2,MAPS_ICONS_SECRETEVENT_GENERALICONS_192X192_G_ICON3,MAPS_ICONS_SECRETEVENT_GENERALICONS_192X192_G_ICON4,MAPS_ICONS_SECRETEVENT_GENERALICONS_22X22_G_ICON0,MAPS_ICONS_SECRETEVENT_GENERALICONS_22X22_G_ICON1,MAPS_ICONS_SECRETEVENT_GENERALICONS_22X22_G_ICON2,MAPS_ICONS_SECRETEVENT_GENERALICONS_22X22_G_ICON3,MAPS_ICONS_SECRETEVENT_GENERALICONS_22X22_G_ICON4,MAPS_ICONS_SECRETEVENT_GENERALICONS_36X36_G_ICON0,MAPS_ICONS_SECRETEVENT_GENERALICONS_36X36_G_ICON1,MAPS_ICONS_SECRETEVENT_GENERALICONS_36X36_G_ICON2,MAPS_ICONS_SECRETEVENT_GENERALICONS_36X36_G_ICON3,MAPS_ICONS_SECRETEVENT_GENERALICONS_36X36_G_ICON4,MAPS_ICONS_SECRETEVENT_GENERALICONS_36X36_YELLOW_G_ICON0,MAPS_ICONS_SECRETEVENT_GENERALICONS_36X36_YELLOW_G_ICON1,MAPS_ICONS_SECRETEVENT_GENERALICONS_36X36_YELLOW_G_ICON2,MAPS_ICONS_SECRETEVENT_GENERALICONS_36X36_YELLOW_G_ICON3,MAPS_ICONS_SECRETEVENT_GENERALICONS_36X36_YELLOW_G_ICON4];
+
+        public static const MAPS_ICONS_SECRETEVENT_TIERS_ALL_TIER_ENUM:Array = [MAPS_ICONS_SECRETEVENT_TIERS_26X28_TIER_1,MAPS_ICONS_SECRETEVENT_TIERS_26X28_TIER_1_DIS,MAPS_ICONS_SECRETEVENT_TIERS_26X28_TIER_2,MAPS_ICONS_SECRETEVENT_TIERS_26X28_TIER_2_DIS,MAPS_ICONS_SECRETEVENT_TIERS_26X28_TIER_3,MAPS_ICONS_SECRETEVENT_TIERS_26X28_TIER_3_DIS,MAPS_ICONS_SECRETEVENT_TIERS_38X44_TIER_1,MAPS_ICONS_SECRETEVENT_TIERS_38X44_TIER_2,MAPS_ICONS_SECRETEVENT_TIERS_38X44_TIER_3,MAPS_ICONS_SECRETEVENT_TIERS_52X62_TIER_2,MAPS_ICONS_SECRETEVENT_TIERS_52X62_TIER_3,MAPS_ICONS_SECRETEVENT_TIERS_70X82_TIER_2,MAPS_ICONS_SECRETEVENT_TIERS_70X82_TIER_3,MAPS_ICONS_SECRETEVENT_TIERS_SKILLS_TIER_1,MAPS_ICONS_SECRETEVENT_TIERS_SKILLS_TIER_2,MAPS_ICONS_SECRETEVENT_TIERS_SKILLS_TIER_3];
 
         public function RES_ICONS()
         {
@@ -10379,6 +11651,30 @@ package
             if(MAPS_ICONS_BATTLEPASS2020_BADGE_DIGITS_SIZE_ALL_DIGIT_ENUM.indexOf(_loc3_) == -1)
             {
                 DebugUtils.LOG_WARNING("[getDigitIcon]:locale key \"" + _loc3_ + "\" was not found");
+                return null;
+            }
+            return _loc3_;
+        }
+
+        public static function getGeneralIcon(param1:String, param2:String) : String
+        {
+            var _loc3_:String = null;
+            _loc3_ = "../" + "maps/icons/secretEvent/generalIcons/" + param1 + "/" + param2 + ".png";
+            if(MAPS_ICONS_SECRETEVENT_GENERALICONS_ALL_ENUM.indexOf(_loc3_) == -1)
+            {
+                DebugUtils.LOG_WARNING("[getGeneralIcon]:locale key \"" + _loc3_ + "\" was not found");
+                return null;
+            }
+            return _loc3_;
+        }
+
+        public static function getTierIcon(param1:String, param2:String) : String
+        {
+            var _loc3_:String = null;
+            _loc3_ = "../" + "maps/icons/secretEvent/tiers/" + param1 + "/tier_" + param2 + ".png";
+            if(MAPS_ICONS_SECRETEVENT_TIERS_ALL_TIER_ENUM.indexOf(_loc3_) == -1)
+            {
+                DebugUtils.LOG_WARNING("[getTierIcon]:locale key \"" + _loc3_ + "\" was not found");
                 return null;
             }
             return _loc3_;

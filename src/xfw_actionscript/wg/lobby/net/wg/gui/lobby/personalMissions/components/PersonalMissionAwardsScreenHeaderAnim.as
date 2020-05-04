@@ -7,9 +7,9 @@ package net.wg.gui.lobby.personalMissions.components
     public class PersonalMissionAwardsScreenHeaderAnim extends UIComponentEx
     {
 
-        private static const FADE_IN_LABEL:String = "fadeIn";
+        protected static const FADE_IN_LABEL:String = "fadeIn";
 
-        private static const FADE_OUT_LABEL:String = "fadeOut";
+        protected static const FADE_OUT_LABEL:String = "fadeOut";
 
         public var header:AnimatedTextContainer = null;
 

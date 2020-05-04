@@ -41,6 +41,8 @@ package
 
         public static const SENIORITYAWARDS_HANGARENTRYPOINT_TOOLTIP:String = "#tooltips:seniorityAwards/hangarEntryPoint/tooltip";
 
+        public static const SECRET_EVENT_BANNER_TIMELEFT:String = "#tooltips:secret_event/banner/timeLeft";
+
         public static const ACHIEVEMENT_PARAMS:String = "#tooltips:achievement/params";
 
         public static const ANONYMIZER_TEAMSTATS:String = "#tooltips:anonymizer/teamStats";
@@ -576,6 +578,22 @@ package
         public static const SQUADWINDOW_DOMINATION_VEHICLESINFOICON_HEADER:String = "#tooltips:squadWindow/domination/vehiclesInfoIcon/header";
 
         public static const SQUADWINDOW_DOMINATION_VEHICLESINFOICON_BODY:String = "#tooltips:squadWindow/domination/vehiclesInfoIcon/body";
+
+        public static const SQUADWINDOW_INFOICON_TECH_EVENT_HEADER:String = "#tooltips:squadWindow/infoIcon/tech/event/header";
+
+        public static const SQUADWINDOW_INFOICON_TECH_EVENT_BODY:String = "#tooltips:squadWindow/infoIcon/tech/event/body";
+
+        public static const SQUADWINDOW_EVENTINFO_ROADTOBERLIN_HEADER:String = "#tooltips:squadWindow/eventInfo/roadToBerlin/header";
+
+        public static const SQUADWINDOW_EVENTINFO_ROADTOBERLIN_BODY:String = "#tooltips:squadWindow/eventInfo/roadToBerlin/body";
+
+        public static const SQUADWINDOW_EVENTINFO_BERLIN_HEADER:String = "#tooltips:squadWindow/eventInfo/berlin/header";
+
+        public static const SQUADWINDOW_EVENTINFO_BERLIN_BODY:String = "#tooltips:squadWindow/eventInfo/berlin/body";
+
+        public static const SQUADWINDOW_EVENTINFO_BERLIN_WINNERDAY:String = "#tooltips:squadWindow/eventInfo/berlin/winnerDay";
+
+        public static const SQUADWINDOW_EVENTINFO_PLAYINFO:String = "#tooltips:squadWindow/eventInfo/playInfo";
 
         public static const LOGIN_REMEMBERPASSWORD_SIMPLE_HEADER:String = "#tooltips:login/rememberPassword/simple/header";
 
@@ -4099,6 +4117,8 @@ package
 
         public static const VEHICLEPREVIEW_BUYBUTTON_NOTUNLOCKEDNATION_BODY:String = "#tooltips:vehiclePreview/buyButton/notUnlockedNation/body";
 
+        public static const VEHICLEPREVIEW_NOTENOUGH:String = "#tooltips:vehiclePreview/notEnough";
+
         public static const VEHICLEPREVIEW_MODULS_HEADER:String = "#tooltips:vehiclePreview/moduls/header";
 
         public static const VEHICLEPREVIEW_MODULS_BODY:String = "#tooltips:vehiclePreview/moduls/body";
@@ -4335,6 +4355,8 @@ package
 
         public static const MISSIONS_TOKENPOPOVER_QUEST_BODY:String = "#tooltips:missions/tokenPopover/quest/body";
 
+        public static const MISSIONS_TOKEN_SECRETEVENT_HEADER:String = "#tooltips:missions/token/secretEvent/header";
+
         public static const MISSIONS_TOKEN_HEADER:String = "#tooltips:missions/token/header";
 
         public static const MISSIONS_TOKEN_QUESTS_SINGLE:String = "#tooltips:missions/token/quests/single";
@@ -4490,6 +4512,10 @@ package
         public static const QUESTS_BONUSES_TOKEN_HEADER:String = "#tooltips:quests/bonuses/token/header";
 
         public static const QUESTS_BONUSES_TOKEN_BODY:String = "#tooltips:quests/bonuses/token/body";
+
+        public static const QUESTS_BONUSES_TOKEN_SE20_TANK_DISCOUNT_HEADER:String = "#tooltips:quests/bonuses/token/se20_tank_discount/header";
+
+        public static const QUESTS_BONUSES_TOKEN_SE20_TANK_DISCOUNT_BODY:String = "#tooltips:quests/bonuses/token/se20_tank_discount/body";
 
         public static const QUESTS_BONUSES_TOKEN_BATTLE_BONUS_X5_HEADER:String = "#tooltips:quests/bonuses/token/battle_bonus_x5/header";
 
@@ -5890,6 +5916,306 @@ package
         public static const EVENTPROGRESSION_ALLSEASONSAREOVER:String = "#tooltips:eventProgression/allSeasonsAreOver";
 
         public static const EVENTPROGRESSION_FRONTLINE:String = "#tooltips:eventProgression/frontLine";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_SE20_ENERGY_GENERAL_X15_DISCOUNT:String = "#tooltips:quests/bonuses/token/header/se20_energy_general_x15_discount";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_SE20_ENERGY_GENERAL_0_X1:String = "#tooltips:quests/bonuses/token/header/se20_energy_general_0_x1";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_SE20_ENERGY_GENERAL_0_X5:String = "#tooltips:quests/bonuses/token/header/se20_energy_general_0_x5";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_SE20_ENERGY_GENERAL_0_X10:String = "#tooltips:quests/bonuses/token/header/se20_energy_general_0_x10";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_SE20_ENERGY_GENERAL_0_X10_PREMIUM:String = "#tooltips:quests/bonuses/token/header/se20_energy_general_0_x10_premium";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_SE20_ENERGY_GENERAL_0_X15:String = "#tooltips:quests/bonuses/token/header/se20_energy_general_0_x15";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_SE20_ENERGY_GENERAL_1_X1:String = "#tooltips:quests/bonuses/token/header/se20_energy_general_1_x1";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_SE20_ENERGY_GENERAL_1_X5:String = "#tooltips:quests/bonuses/token/header/se20_energy_general_1_x5";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_SE20_ENERGY_GENERAL_1_X10:String = "#tooltips:quests/bonuses/token/header/se20_energy_general_1_x10";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_SE20_ENERGY_GENERAL_1_X10_PREMIUM:String = "#tooltips:quests/bonuses/token/header/se20_energy_general_1_x10_premium";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_SE20_ENERGY_GENERAL_1_X15:String = "#tooltips:quests/bonuses/token/header/se20_energy_general_1_x15";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_SE20_ENERGY_GENERAL_2_X1:String = "#tooltips:quests/bonuses/token/header/se20_energy_general_2_x1";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_SE20_ENERGY_GENERAL_2_X5:String = "#tooltips:quests/bonuses/token/header/se20_energy_general_2_x5";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_SE20_ENERGY_GENERAL_2_X10:String = "#tooltips:quests/bonuses/token/header/se20_energy_general_2_x10";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_SE20_ENERGY_GENERAL_2_X10_PREMIUM:String = "#tooltips:quests/bonuses/token/header/se20_energy_general_2_x10_premium";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_SE20_ENERGY_GENERAL_2_X15:String = "#tooltips:quests/bonuses/token/header/se20_energy_general_2_x15";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_SE20_ENERGY_GENERAL_3_X1:String = "#tooltips:quests/bonuses/token/header/se20_energy_general_3_x1";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_SE20_ENERGY_GENERAL_3_X5:String = "#tooltips:quests/bonuses/token/header/se20_energy_general_3_x5";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_SE20_ENERGY_GENERAL_3_X10:String = "#tooltips:quests/bonuses/token/header/se20_energy_general_3_x10";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_SE20_ENERGY_GENERAL_3_X10_PREMIUM:String = "#tooltips:quests/bonuses/token/header/se20_energy_general_3_x10_premium";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_SE20_ENERGY_GENERAL_3_X15:String = "#tooltips:quests/bonuses/token/header/se20_energy_general_3_x15";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_SE20_ENERGY_GENERAL_4_X1:String = "#tooltips:quests/bonuses/token/header/se20_energy_general_4_x1";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_SE20_ENERGY_GENERAL_4_X5:String = "#tooltips:quests/bonuses/token/header/se20_energy_general_4_x5";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_SE20_ENERGY_GENERAL_4_X10:String = "#tooltips:quests/bonuses/token/header/se20_energy_general_4_x10";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_SE20_ENERGY_GENERAL_4_X10_PREMIUM:String = "#tooltips:quests/bonuses/token/header/se20_energy_general_4_x10_premium";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_SE20_ENERGY_GENERAL_4_X15:String = "#tooltips:quests/bonuses/token/header/se20_energy_general_4_x15";
+
+        public static const QUESTS_BONUSES_TOKEN_BODY_EVENT_DISCOUNT:String = "#tooltips:quests/bonuses/token/body/event_discount";
+
+        public static const QUESTS_BONUSES_TOKEN_BODY_SE_ENERGY:String = "#tooltips:quests/bonuses/token/body/se_energy";
+
+        public static const QUESTS_BONUSES_TOKEN_HOWTOGET_SE_ENERGY:String = "#tooltips:quests/bonuses/token/howToGet/se_energy";
+
+        public static const QUESTS_BONUSES_TOKEN_HOWTOGETVARIANTS_SE_ENERGY_X5:String = "#tooltips:quests/bonuses/token/howToGetVariants/se_energy_x5";
+
+        public static const QUESTS_BONUSES_TOKEN_HOWTOGETVARIANTS_SE_ENERGY_X10:String = "#tooltips:quests/bonuses/token/howToGetVariants/se_energy_x10";
+
+        public static const QUESTS_BONUSES_TOKEN_HOWTOGETVARIANTS_SE_ENERGY_X15:String = "#tooltips:quests/bonuses/token/howToGetVariants/se_energy_x15";
+
+        public static const QUESTS_BONUSES_TOKEN_SE_ENERGY_WILL_BE_APPLIED:String = "#tooltips:quests/bonuses/token/se_energy/will_be_applied";
+
+        public static const QUESTS_BONUSES_TOKEN_SE_ENERGY_NOT_IN_STORAGE:String = "#tooltips:quests/bonuses/token/se_energy/not_in_storage";
+
+        public static const QUESTS_BONUSES_TOKEN_SE_ENERGY_IN_STORAGE:String = "#tooltips:quests/bonuses/token/se_energy/in_storage";
+
+        public static const QUESTS_BONUSES_TOKEN_SE_ENERGY_SPECIALCONDITIONS:String = "#tooltips:quests/bonuses/token/se_energy/specialConditions";
+
+        public static const QUESTS_BONUSES_TOKEN_SE20_FRONT_1_EVENT_POINTS_HEADER:String = "#tooltips:quests/bonuses/token/se20_front_1_event_points/header";
+
+        public static const QUESTS_BONUSES_TOKEN_SE20_FRONT_1_EVENT_POINTS_BODY:String = "#tooltips:quests/bonuses/token/se20_front_1_event_points/body";
+
+        public static const QUESTS_BONUSES_TOKEN_SE20_FRONT_1_EVENT_POINTS_HOWTOGET:String = "#tooltips:quests/bonuses/token/se20_front_1_event_points/howToGet";
+
+        public static const QUESTS_BONUSES_TOKEN_SE20_FRONT_1_EVENT_POINTS_HOWTOGETVARIANTS:String = "#tooltips:quests/bonuses/token/se20_front_1_event_points/howToGetVariants";
+
+        public static const QUESTS_BONUSES_TOKEN_SE20_FRONT_1_EVENT_POINTS_ADDITIONALINFO:String = "#tooltips:quests/bonuses/token/se20_front_1_event_points/additionalInfo";
+
+        public static const QUESTS_BONUSES_TOKEN_SE_ENERGY_APPLIED:String = "#tooltips:quests/bonuses/token/se_energy/applied";
+
+        public static const QUESTS_BONUSES_TOKEN_SE_ENERGY_ENDED:String = "#tooltips:quests/bonuses/token/se_energy/ended";
+
+        public static const QUESTS_BONUSES_TOKEN_SE_ENERGY_POINTS:String = "#tooltips:quests/bonuses/token/se_energy/points";
+
+        public static const BATTLETYPES_EVENT_END:String = "#tooltips:battleTypes/event/end";
+
+        public static const BATTLETYPES_EVENT_DAYS:String = "#tooltips:battleTypes/event/days";
+
+        public static const BATTLETYPES_EVENT_HOURS:String = "#tooltips:battleTypes/event/hours";
+
+        public static const BATTLETYPES_EVENT_MIN:String = "#tooltips:battleTypes/event/min";
+
+        public static const BATTLETYPES_EVENT_LESSMIN:String = "#tooltips:battleTypes/event/lessMin";
+
+        public static const EVENT_COMMANDERS_HEADER:String = "#tooltips:event/commanders/header";
+
+        public static const EVENT_COMMANDERS_BONUSESDESCRIPTION:String = "#tooltips:event/commanders/bonusesDescription";
+
+        public static const EVENT_COMMANDERS_BONUSES:String = "#tooltips:event/commanders/bonuses";
+
+        public static const EVENT_COMMANDERS_OTHERSBONUSES:String = "#tooltips:event/commanders/othersBonuses";
+
+        public static const EVENT_COMMANDERS_DESCRIPTION2:String = "#tooltips:event/commanders/description2";
+
+        public static const SECRET_EVENT_HEROTANK_TITLE:String = "#tooltips:secret_event/herotank/title";
+
+        public static const SECRET_EVENT_HEROTANK_BODY:String = "#tooltips:secret_event/herotank/body";
+
+        public static const SECRET_EVENT_HEROTANK_FOOTER:String = "#tooltips:secret_event/herotank/footer";
+
+        public static const SECRET_EVENT_GENERALINFOTIP_LEVEL:String = "#tooltips:secret_event/generalInfoTip/level";
+
+        public static const SECRET_EVENT_GENERALINFOTIP_LVL:String = "#tooltips:secret_event/generalInfoTip/lvl";
+
+        public static const SECRET_EVENT_GENERALINFOTIP_VEHICLES_TITLE:String = "#tooltips:secret_event/generalInfoTip/vehicles/title";
+
+        public static const SECRET_EVENT_GENERALINFOTIP_VEHICLES_INFO:String = "#tooltips:secret_event/generalInfoTip/vehicles/info";
+
+        public static const SECRET_EVENT_GENERALINFOTIP_SKILLS_TITLE:String = "#tooltips:secret_event/generalInfoTip/skills/title";
+
+        public static const SECRET_EVENT_GENERALINFOTIP_SKILLS_INFO:String = "#tooltips:secret_event/generalInfoTip/skills/info";
+
+        public static const SECRET_EVENT_GENERALINFOTIP_POINTS_TITLE:String = "#tooltips:secret_event/generalInfoTip/points/title";
+
+        public static const SECRET_EVENT_GENERALINFOTIP_DESCRIPTION_0:String = "#tooltips:secret_event/generalInfoTip/description/0";
+
+        public static const SECRET_EVENT_GENERALINFOTIP_DESCRIPTION_1:String = "#tooltips:secret_event/generalInfoTip/description/1";
+
+        public static const SECRET_EVENT_GENERALINFOTIP_DESCRIPTION_2:String = "#tooltips:secret_event/generalInfoTip/description/2";
+
+        public static const SECRET_EVENT_GENERALINFOTIP_DESCRIPTION_3:String = "#tooltips:secret_event/generalInfoTip/description/3";
+
+        public static const SECRET_EVENT_GENERALINFOTIP_DESCRIPTION_4:String = "#tooltips:secret_event/generalInfoTip/description/4";
+
+        public static const SECRET_EVENT_GENERALINFOTIP_HOWGET:String = "#tooltips:secret_event/generalInfoTip/howGet";
+
+        public static const SECRET_EVENT_GENERALINFOTIP_INFO_DESC:String = "#tooltips:secret_event/generalInfoTip/info/desc";
+
+        public static const SECRET_EVENT_GENERALINFOTIP_INFO_USEFUL:String = "#tooltips:secret_event/generalInfoTip/info/useful";
+
+        public static const SECRET_EVENT_GENERALINFOTIP_INFO_KILL:String = "#tooltips:secret_event/generalInfoTip/info/kill";
+
+        public static const SECRET_EVENT_GENERALINFOTIP_INFO_DAMAGE:String = "#tooltips:secret_event/generalInfoTip/info/damage";
+
+        public static const SECRET_EVENT_GENERALINFOTIP_INFO_HELP:String = "#tooltips:secret_event/generalInfoTip/info/help";
+
+        public static const SECRET_EVENT_GENERALINFOTIP_INFO_BLOCKING:String = "#tooltips:secret_event/generalInfoTip/info/blocking";
+
+        public static const SECRET_EVENT_GENERALINFOTIP_FASTINFO_TITLE:String = "#tooltips:secret_event/generalInfoTip/fastinfo/title";
+
+        public static const SECRET_EVENT_GENERALINFOTIP_FASTINFO_DESCRIPTION:String = "#tooltips:secret_event/generalInfoTip/fastinfo/description";
+
+        public static const SECRET_EVENT_GENERALINFOTIP_FASTINFO_ORDER:String = "#tooltips:secret_event/generalInfoTip/fastinfo/order";
+
+        public static const SECRET_EVENT_GENERALINFOTIP_FASTINFO_X5:String = "#tooltips:secret_event/generalInfoTip/fastinfo/x5";
+
+        public static const SECRET_EVENT_GENERALINFOTIP_FASTINFO_X10:String = "#tooltips:secret_event/generalInfoTip/fastinfo/x10";
+
+        public static const SECRET_EVENT_GENERALINFOTIP_FASTINFO_X15:String = "#tooltips:secret_event/generalInfoTip/fastinfo/x15";
+
+        public static const SECRET_EVENT_GENERALINFOTIP_CLICK:String = "#tooltips:secret_event/generalInfoTip/click";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARGRAMOPHONE_TITLE:String = "#tooltips:secret_event/hangar/interactiveObject/hangarGramophone/title";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARGRAMOPHONE_DESC:String = "#tooltips:secret_event/hangar/interactiveObject/hangarGramophone/desc";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARPOSTMANBAG_TITLE:String = "#tooltips:secret_event/hangar/interactiveObject/hangarPostmanBag/title";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARPOSTMANBAG_DESC:String = "#tooltips:secret_event/hangar/interactiveObject/hangarPostmanBag/desc";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARPOSTMANBAG_PHASE2_TITLE:String = "#tooltips:secret_event/hangar/interactiveObject/hangarPostmanBag/phase2/title";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARPOSTMANBAG_PHASE2_DESC:String = "#tooltips:secret_event/hangar/interactiveObject/hangarPostmanBag/phase2/desc";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARBERLINSIGN_TITLE:String = "#tooltips:secret_event/hangar/interactiveObject/hangarBerlinSign/title";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARBERLINSIGN_DESC:String = "#tooltips:secret_event/hangar/interactiveObject/hangarBerlinSign/desc";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARBERLINSIGN_PHASE2_TITLE:String = "#tooltips:secret_event/hangar/interactiveObject/hangarBerlinSign/phase2/title";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARBERLINSIGN_PHASE2_DESC:String = "#tooltips:secret_event/hangar/interactiveObject/hangarBerlinSign/phase2/desc";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARAUTOMOBILE1_TITLE:String = "#tooltips:secret_event/hangar/interactiveObject/hangarAutomobile1/title";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARAUTOMOBILE1_DESC:String = "#tooltips:secret_event/hangar/interactiveObject/hangarAutomobile1/desc";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARAUTOMOBILE1_PHASE2_TITLE:String = "#tooltips:secret_event/hangar/interactiveObject/hangarAutomobile1/phase2/title";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARAUTOMOBILE1_PHASE2_DESC:String = "#tooltips:secret_event/hangar/interactiveObject/hangarAutomobile1/phase2/desc";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARPOSTER_TITLE:String = "#tooltips:secret_event/hangar/interactiveObject/hangarPoster/title";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARPOSTER_DESC:String = "#tooltips:secret_event/hangar/interactiveObject/hangarPoster/desc";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_PHONOGRAPH_TITLE:String = "#tooltips:secret_event/hangar/interactiveObject/phonograph/title";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_PHONOGRAPH_DESC:String = "#tooltips:secret_event/hangar/interactiveObject/phonograph/desc";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARDOG_TITLE:String = "#tooltips:secret_event/hangar/interactiveObject/hangarDog/title";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARDOG_DESC:String = "#tooltips:secret_event/hangar/interactiveObject/hangarDog/desc";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARDOG_PHASE2_TITLE:String = "#tooltips:secret_event/hangar/interactiveObject/hangarDog/phase2/title";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARDOG_PHASE2_DESC:String = "#tooltips:secret_event/hangar/interactiveObject/hangarDog/phase2/desc";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARCAT_TITLE:String = "#tooltips:secret_event/hangar/interactiveObject/hangarCat/title";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARCAT_DESC:String = "#tooltips:secret_event/hangar/interactiveObject/hangarCat/desc";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARCAT_PHASE2_TITLE:String = "#tooltips:secret_event/hangar/interactiveObject/hangarCat/phase2/title";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARCAT_PHASE2_DESC:String = "#tooltips:secret_event/hangar/interactiveObject/hangarCat/phase2/desc";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARSOLDIER_TITLE:String = "#tooltips:secret_event/hangar/interactiveObject/hangarSoldier/title";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARSOLDIER_DESC:String = "#tooltips:secret_event/hangar/interactiveObject/hangarSoldier/desc";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARSOLDIER_PHASE2_TITLE:String = "#tooltips:secret_event/hangar/interactiveObject/hangarSoldier/phase2/title";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARSOLDIER_PHASE2_DESC:String = "#tooltips:secret_event/hangar/interactiveObject/hangarSoldier/phase2/desc";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARRECRUIT_TITLE:String = "#tooltips:secret_event/hangar/interactiveObject/hangarRecruit/title";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARRECRUIT_DESC:String = "#tooltips:secret_event/hangar/interactiveObject/hangarRecruit/desc";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARRECRUIT_PHASE2_TITLE:String = "#tooltips:secret_event/hangar/interactiveObject/hangarRecruit/phase2/title";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARRECRUIT_PHASE2_DESC:String = "#tooltips:secret_event/hangar/interactiveObject/hangarRecruit/phase2/desc";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGAROFFICER1_TITLE:String = "#tooltips:secret_event/hangar/interactiveObject/hangarOfficer1/title";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGAROFFICER1_DESC:String = "#tooltips:secret_event/hangar/interactiveObject/hangarOfficer1/desc";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGAROFFICER1_PHASE2_TITLE:String = "#tooltips:secret_event/hangar/interactiveObject/hangarOfficer1/phase2/title";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGAROFFICER1_PHASE2_DESC:String = "#tooltips:secret_event/hangar/interactiveObject/hangarOfficer1/phase2/desc";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARTANK1_TITLE:String = "#tooltips:secret_event/hangar/interactiveObject/hangarTank1/title";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARTANK1_DESC:String = "#tooltips:secret_event/hangar/interactiveObject/hangarTank1/desc";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARTANK2_TITLE:String = "#tooltips:secret_event/hangar/interactiveObject/hangarTank2/title";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARTANK2_DESC:String = "#tooltips:secret_event/hangar/interactiveObject/hangarTank2/desc";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARTANK3_TITLE:String = "#tooltips:secret_event/hangar/interactiveObject/hangarTank3/title";
+
+        public static const SECRET_EVENT_HANGAR_INTERACTIVEOBJECT_HANGARTANK3_DESC:String = "#tooltips:secret_event/hangar/interactiveObject/hangarTank3/desc";
+
+        public static const SECRET_EVENT_BANNER_HEADER:String = "#tooltips:secret_event/banner/header";
+
+        public static const SECRET_EVENT_BANNER_DESCRIPTION:String = "#tooltips:secret_event/banner/description";
+
+        public static const SECRET_EVENT_BANNER_BERLIN:String = "#tooltips:secret_event/banner/berlin";
+
+        public static const SECRET_EVENT_BANNER_FOOTER:String = "#tooltips:secret_event/banner/footer";
+
+        public static const SECRET_EVENT_BANNER_TIMELEFT_DAYS:String = "#tooltips:secret_event/banner/timeLeft/days";
+
+        public static const SECRET_EVENT_BANNER_TIMELEFT_HOURS:String = "#tooltips:secret_event/banner/timeLeft/hours";
+
+        public static const SECRET_EVENT_BANNER_TIMELEFT_MIN:String = "#tooltips:secret_event/banner/timeLeft/min";
+
+        public static const SECRET_EVENT_BANNER_TIMELEFT_LESSMIN:String = "#tooltips:secret_event/banner/timeLeft/lessMin";
+
+        public static const SECRET_EVENT_BANNER_HAVE:String = "#tooltips:secret_event/banner/have";
+
+        public static const SECRET_EVENT_BANNER_BEFOREBERLIN:String = "#tooltips:secret_event/banner/beforeBerlin";
+
+        public static const SECRET_EVENT_RESPAWNABILITY_TITLE_HEADER:String = "#tooltips:secret_event/respawnAbility/title/header";
+
+        public static const SECRET_EVENT_PASSIVEABILITY:String = "#tooltips:secret_event/passiveAbility";
+
+        public static const SECRET_EVENT_RESPAWNABILITY_TITLE_BODY:String = "#tooltips:secret_event/respawnAbility/title/body";
+
+        public static const SECRET_EVENT_RESPAWNABILITY_BODY:String = "#tooltips:secret_event/respawnAbility/body";
+
+        public static const SECRET_EVENT_SQUADINFO_TITLE:String = "#tooltips:secret_event/squadInfo/title";
+
+        public static const SECRET_EVENT_SQUADINFO_BODY:String = "#tooltips:secret_event/squadInfo/body";
+
+        public static const SECRET_EVENT_SQUADINFO_FOOTER:String = "#tooltips:secret_event/squadInfo/footer";
+
+        public static const SECRET_EVENT_SQUADINFO_NEWLEVEL:String = "#tooltips:secret_event/squadInfo/newLevel";
+
+        public static const SECRET_EVENT_PROGRESSIONINFO_TITLE:String = "#tooltips:secret_event/progressionInfo/title";
+
+        public static const SECRET_EVENT_PROGRESSIONINFO_DESC:String = "#tooltips:secret_event/progressionInfo/desc";
+
+        public static const SECRET_EVENT_PROGRESSIONINFO_INFO:String = "#tooltips:secret_event/progressionInfo/info";
+
+        public static const SECRET_EVENT_PROGRESSIONINFO_CLICK:String = "#tooltips:secret_event/progressionInfo/click";
+
+        public static const SECRET_EVENT_HANGAR_HEADER_QUESTS_HEADER:String = "#tooltips:secret_event/hangar/header/quests/header";
 
         public static const ELEN_SUMMARY_RANK_ENUM:Array = [ELEN_SUMMARY_RANK_1,ELEN_SUMMARY_RANK_2,ELEN_SUMMARY_RANK_3,ELEN_SUMMARY_RANK_4,ELEN_SUMMARY_RANK_NORANK];
 

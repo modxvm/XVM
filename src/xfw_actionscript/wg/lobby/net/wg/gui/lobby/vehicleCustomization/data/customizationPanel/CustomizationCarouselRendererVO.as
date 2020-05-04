@@ -72,6 +72,8 @@ package net.wg.gui.lobby.vehicleCustomization.data.customizationPanel
 
         public var formFactor:int = -1;
 
+        public var customVehicleCD:int = -1;
+
         public function CustomizationCarouselRendererVO(param1:Object)
         {
             super(param1);

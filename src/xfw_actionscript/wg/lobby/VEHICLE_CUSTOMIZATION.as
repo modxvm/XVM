@@ -1669,6 +1669,10 @@ package
 
         public static const CAMOUFLAGE_10YEARS_UNIVERSAL_DESERT_DESCRIPTION:String = "#vehicle_customization:camouflage/10years_universal_desert/description";
 
+        public static const CAMOUFLAGE_TWITCH_MAY_2020_LABEL:String = "#vehicle_customization:camouflage/twitch_may_2020/label";
+
+        public static const CAMOUFLAGE_TWITCH_MAY_2020_DESCRIPTION:String = "#vehicle_customization:camouflage/twitch_may_2020/description";
+
         public static const EMBLEM:String = "#vehicle_customization:emblem";
 
         public static const EMBLEM_CLAN_CONTENT:String = "#vehicle_customization:emblem/clan_content";
@@ -5311,6 +5315,8 @@ package
 
         public static const REPAINT_10YEARS_GEESE:String = "#vehicle_customization:repaint/10years_geese";
 
+        public static const REPAINT_TWITCH_MAY_2020:String = "#vehicle_customization:repaint/twitch_may_2020";
+
         public static const MODIFICATIONS_AGE_EFFECT_01:String = "#vehicle_customization:modifications/age_effect_01";
 
         public static const MODIFICATIONS_AGE_EFFECT_01_DESCRIPTION:String = "#vehicle_customization:modifications/age_effect_01/description";
@@ -6415,6 +6421,10 @@ package
 
         public static const SPECIAL_STYLE_10YEARS_UNIVERSAL_DESC:String = "#vehicle_customization:special_style/10years_universal_desc";
 
+        public static const SPECIAL_STYLE_TWITCH_MAY_2020:String = "#vehicle_customization:special_style/twitch_may_2020";
+
+        public static const SPECIAL_STYLE_TWITCH_MAY_2020_DESC:String = "#vehicle_customization:special_style/twitch_may_2020_desc";
+
         public static const CUSTOMIZATION_POPOVER_STYLE_SUMMER:String = "#vehicle_customization:customization/popover/style/summer";
 
         public static const CUSTOMIZATION_POPOVER_STYLE_DESERT:String = "#vehicle_customization:customization/popover/style/desert";
@@ -6536,6 +6546,8 @@ package
         public static const STYLEINFO_EVENT_KURSK_BATTLE:String = "#vehicle_customization:styleInfo/event/kursk_battle";
 
         public static const STYLEINFO_EVENT_HALLOWEEN:String = "#vehicle_customization:styleInfo/event/halloween";
+
+        public static const STYLEINFO_EVENT_SE20:String = "#vehicle_customization:styleInfo/event/se20";
 
         public static const PROPERTYSHEET_TITLE_APPLIEDTO:String = "#vehicle_customization:propertySheet/title/appliedTo";
 

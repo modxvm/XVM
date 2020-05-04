@@ -65,6 +65,34 @@ package
 
         public static const RADIALMENU_ATTACKENEMY_EXT:String = "#ingame_help:radialMenu/attackEnemy/ext";
 
+        public static const CHATSHORTCUTS_EVENT_CHAT_1:String = "#ingame_help:chatShortcuts/event_chat_1";
+
+        public static const CHATSHORTCUTS_EVENT_CHAT_2:String = "#ingame_help:chatShortcuts/event_chat_2";
+
+        public static const CHATSHORTCUTS_EVENT_CHAT_3:String = "#ingame_help:chatShortcuts/event_chat_3";
+
+        public static const CHATSHORTCUTS_EVENT_CHAT_4:String = "#ingame_help:chatShortcuts/event_chat_4";
+
+        public static const CHATSHORTCUTS_EVENT_CHAT_5:String = "#ingame_help:chatShortcuts/event_chat_5";
+
+        public static const CHATSHORTCUTS_EVENT_CHAT_6:String = "#ingame_help:chatShortcuts/event_chat_6";
+
+        public static const CHATSHORTCUTS_EVENT_CHAT_7:String = "#ingame_help:chatShortcuts/event_chat_7";
+
+        public static const CHATSHORTCUTS_EVENT_CHAT_1_EX:String = "#ingame_help:chatShortcuts/event_chat_1_ex";
+
+        public static const CHATSHORTCUTS_EVENT_CHAT_2_EX:String = "#ingame_help:chatShortcuts/event_chat_2_ex";
+
+        public static const CHATSHORTCUTS_EVENT_CHAT_3_EX:String = "#ingame_help:chatShortcuts/event_chat_3_ex";
+
+        public static const CHATSHORTCUTS_EVENT_CHAT_4_EX:String = "#ingame_help:chatShortcuts/event_chat_4_ex";
+
+        public static const CHATSHORTCUTS_EVENT_CHAT_5_EX:String = "#ingame_help:chatShortcuts/event_chat_5_ex";
+
+        public static const CHATSHORTCUTS_EVENT_CHAT_6_EX:String = "#ingame_help:chatShortcuts/event_chat_6_ex";
+
+        public static const CHATSHORTCUTS_EVENT_CHAT_7_EX:String = "#ingame_help:chatShortcuts/event_chat_7_ex";
+
         public static const CHATSHORTCUTS_TITLE:String = "#ingame_help:chatShortcuts/title";
 
         public static const CHATSHORTCUTS_ATTACK:String = "#ingame_help:chatShortcuts/attack";

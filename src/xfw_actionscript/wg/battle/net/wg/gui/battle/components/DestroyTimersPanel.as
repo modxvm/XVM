@@ -415,7 +415,7 @@ package net.wg.gui.battle.components
 
         protected function getTimersIcons() : Vector.<String>
         {
-            return new <String>[Linkages.DROWN_ICON,Linkages.DEATHZONE_ICON,Linkages.OVERTURNED_ICON,Linkages.FIRE_ICON];
+            return new <String>[Linkages.DROWN_ICON,Linkages.DEATHZONE_ICON,Linkages.OVERTURNED_ICON,Linkages.FIRE_ICON,Linkages.EVENT_DEATH_ZONE,Linkages.EVENT_PERSONAL_DEATH_ZONE];
         }
 
         private function updateSecondaryTimersPositions(param1:Boolean) : void

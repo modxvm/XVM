@@ -6,5 +6,11 @@ package net.wg.infrastructure.base.meta
     {
 
         function onTokenBuyClickS(param1:String, param2:String) : void;
+
+        function onToEventClickS() : void;
+
+        function as_showBackButton(param1:String, param2:String) : void;
+
+        function as_hideBackButton() : void;
     }
 }

@@ -14,6 +14,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public var onTabSelected:Function;
 
+        public var onToEventClick:Function;
+
         public var onClose:Function;
 
         private var _dataProviderMissionTabVO:DataProvider;
@@ -60,6 +62,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.onTabSelected,"onTabSelected" + Errors.CANT_NULL);
             this.onTabSelected(param1,param2);
+        }
+
+        public function onToEventClickS() : void
+        {
+            App.utils.asserter.assertNotNull(this.onToEventClick,"onToEventClick" + Errors.CANT_NULL);
+            this.onToEventClick();
         }
 
         public function onCloseS() : void

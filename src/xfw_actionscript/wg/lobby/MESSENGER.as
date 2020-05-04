@@ -1865,6 +1865,24 @@ package
 
         public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_UPGRADE:String = "#messenger:serviceChannelMessages/sysMsg/titles/upgrade";
 
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_SE20_GAMEMODE:String = "#messenger:serviceChannelMessages/battleResults/se20/gameMode";
+
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_SE20_GAMEMODENAME:String = "#messenger:serviceChannelMessages/battleResults/se20/gameModeName";
+
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_SE20_DIVISION:String = "#messenger:serviceChannelMessages/battleResults/se20/division";
+
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_SE20_BATTLEGOALSDONE:String = "#messenger:serviceChannelMessages/battleResults/se20/battleGoalsDone";
+
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_SE20_REPUTATIONPOINTSGAIN:String = "#messenger:serviceChannelMessages/battleResults/se20/reputationPointsGain";
+
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_SE20_DIVISIONPOINTSGAIN:String = "#messenger:serviceChannelMessages/battleResults/se20/divisionPointsGain";
+
+        public static const SERVICECHANNELMESSAGES_SE20_BUYBUNDLEREWARD:String = "#messenger:serviceChannelMessages/se20/buyBundleReward";
+
+        public static const SERVICECHANNELMESSAGES_SE20_EXHANGEORDER_HEADER:String = "#messenger:serviceChannelMessages/se20/exhangeOrder/header";
+
+        public static const SERVICECHANNELMESSAGES_SE20_EXHANGEORDER_DESC:String = "#messenger:serviceChannelMessages/se20/exhangeOrder/desc";
+
         public function MESSENGER()
         {
             super();

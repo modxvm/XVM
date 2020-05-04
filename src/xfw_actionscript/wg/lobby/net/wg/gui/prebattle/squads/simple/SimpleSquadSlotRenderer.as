@@ -53,6 +53,7 @@ package net.wg.gui.prebattle.squads.simple
 
         override public function updateComponents() : void
         {
+            var _loc4_:* = 0;
             super.updateComponents();
             var _loc1_:SimpleSquadRallySlotVO = SimpleSquadRallySlotVO(slotData);
             var _loc2_:Boolean = _loc1_.isVisibleAdtMsg;
@@ -62,7 +63,12 @@ package net.wg.gui.prebattle.squads.simple
             }
             if(_loc2_)
             {
+                _loc4_ = this.height;
+                this.playerMessage.wordWrap = true;
+                this.playerMessage.height = _loc4_;
                 this.playerMessage.htmlText = _loc1_.additionalMsg;
+                App.utils.commons.updateTextFieldSize(this.playerMessage,false,true);
+                this.playerMessage.y = _loc4_ - this.playerMessage.height >> 1;
             }
             var _loc3_:String = _loc1_.slotNotificationIcon;
             if(_loc3_ != Values.EMPTY_STR)

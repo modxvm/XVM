@@ -77,8 +77,11 @@ package net.wg.gui.battle.views.epicDeploymentMap
             this.mapContainer.removeEventListener(EpicDeploymentMapEvent.MAP_CLICKED,this.onDeploymentMapClickedHandler);
             this._entryContainer.splice(0,this._entryContainer.length);
             this._entryContainer = null;
-            this.bigBackground.dispose();
-            this.bigBackground = null;
+            if(this.bigBackground != null)
+            {
+                this.bigBackground.dispose();
+                this.bigBackground = null;
+            }
             this.mapContainer.dispose();
             this.mapContainer = null;
             super.onDispose();
@@ -170,6 +173,21 @@ package net.wg.gui.battle.views.epicDeploymentMap
         private function onDeploymentMapClickedHandler(param1:EpicDeploymentMapEvent) : void
         {
             setAttentionToCellS(param1.mouseX,param1.mouseY,param1.isMouseRightClick);
+        }
+
+        protected function get mapWidth() : int
+        {
+            return this._mapWidth;
+        }
+
+        protected function get mapHeight() : int
+        {
+            return this._mapHeight;
+        }
+
+        protected function get entryContainers() : Vector.<Sprite>
+        {
+            return this._entryContainer;
         }
     }
 }

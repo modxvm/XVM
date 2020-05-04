@@ -13,6 +13,8 @@ package net.wg.data.constants.generated
 
         public static const BOB_TANK_CAROUSEL:String = "bobTankCarousel";
 
+        public static const EVENT_TANK_CAROUSEL:String = "eventTankCarousel";
+
         public static const CREW:String = "crew";
 
         public static const AMMUNITION_PANEL:String = "ammunitionPanel";
@@ -56,6 +58,14 @@ package net.wg.data.constants.generated
         public static const BATTLE_PASSS_ENTRY_POINT:String = "battlePassEntryPoint";
 
         public static const TEN_YEARS_COUNTDOWN_ENTRY_POINT_INJECT:String = "tenYearsCountdownEntryPointInject";
+
+        public static const EVENT_REPAIR_COMPONENT:String = "eventRepairComponent";
+
+        public static const EVENT_TANK_RENT_COMPONENT:String = "eventTankRentComponent";
+
+        public static const EVENT_QUESTS_COMPONENT:String = "eventQuestsComponent";
+
+        public static const SE20_BANNER:String = "se20Banner";
 
         public function HANGAR_ALIASES()
         {
