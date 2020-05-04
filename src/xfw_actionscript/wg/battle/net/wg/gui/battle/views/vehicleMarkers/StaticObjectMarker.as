@@ -7,6 +7,7 @@ package net.wg.gui.battle.views.vehicleMarkers
     import flash.display.Sprite;
     import scaleform.clik.motion.Tween;
     import flash.display.Bitmap;
+    import net.wg.data.constants.Values;
     import flash.utils.getDefinitionByName;
     import net.wg.data.constants.Errors;
     import scaleform.gfx.TextFieldEx;
@@ -22,11 +23,15 @@ package net.wg.gui.battle.views.vehicleMarkers
 
         private static const COLOR_YELLOW:String = "yellow";
 
+        private static const COLOR_WHITE:String = "white";
+
         public var marker:MovieClip = null;
 
         public var distanceFieldGreen:TextField = null;
 
         public var distanceFieldYellow:TextField = null;
+
+        public var distanceFieldWhite:TextField = null;
 
         public var bgShadow:Sprite = null;
 
@@ -48,14 +53,22 @@ package net.wg.gui.battle.views.vehicleMarkers
 
         private var _shapeBitmap:Bitmap = null;
 
+        private var _hideTween:Tween = null;
+
+        private var _inTween:Tween = null;
+
+        private var _tweenTime:int = 0;
+
         public function StaticObjectMarker()
         {
             super();
             this._distanceTF = this.distanceFieldGreen;
             this.distanceFieldGreen.visible = false;
             this.distanceFieldYellow.visible = false;
+            this.distanceFieldWhite.visible = false;
             TextFieldEx.setNoTranslate(this.distanceFieldGreen,true);
             TextFieldEx.setNoTranslate(this.distanceFieldYellow,true);
+            TextFieldEx.setNoTranslate(this.distanceFieldWhite,true);
         }
 
         override protected function onDispose() : void
@@ -72,9 +85,22 @@ package net.wg.gui.battle.views.vehicleMarkers
             this.marker = null;
             this.distanceFieldGreen = null;
             this.distanceFieldYellow = null;
+            this.distanceFieldWhite = null;
             this.bgShadow = null;
             this.clearTween();
             this._distanceTF = null;
+            if(this._inTween)
+            {
+                this._inTween.paused = true;
+                this._inTween.dispose();
+                this._inTween = null;
+            }
+            if(this._hideTween)
+            {
+                this._hideTween.paused = true;
+                this._hideTween.dispose();
+                this._hideTween = null;
+            }
             super.onDispose();
         }
 
@@ -112,7 +138,18 @@ package net.wg.gui.battle.views.vehicleMarkers
             this._minDistance = param2;
             this._alphaZone = param3 - param2;
             this._distance = !isNaN(param4)?Math.round(param4):-1;
-            this._distanceTF = param6 == COLOR_GREEN?this.distanceFieldGreen:this.distanceFieldYellow;
+            switch(param6)
+            {
+                case COLOR_GREEN:
+                    this._distanceTF = this.distanceFieldGreen;
+                    break;
+                case COLOR_WHITE:
+                    this._distanceTF = this.distanceFieldWhite;
+                    break;
+                case COLOR_YELLOW:
+                default:
+                    this._distanceTF = this.distanceFieldYellow;
+            }
             this._metersString = param5;
             this._distanceTF.visible = true;
             if(initialized)
@@ -133,6 +170,52 @@ package net.wg.gui.battle.views.vehicleMarkers
             this._distance = _loc2_;
             this.doAlphaAnimation();
             this.setDistanceText();
+        }
+
+        public function setBlinking(param1:Boolean, param2:int = 0) : void
+        {
+            if(param1)
+            {
+                this._tweenTime = param2 >> 1;
+                if(!this._inTween)
+                {
+                    this._hideTween = new Tween(this._tweenTime,this.marker,{"alpha":0},{"onComplete":this.onFadeOutTweenComplete});
+                    this._hideTween.paused = true;
+                    this._hideTween.fastTransform = false;
+                    this._inTween = new Tween(this._tweenTime,this.marker,{"alpha":1},{"onComplete":this.onFadeInTweenComplete});
+                    this._inTween.fastTransform = false;
+                    this._inTween.paused = true;
+                }
+                else
+                {
+                    this._hideTween.duration = this._tweenTime;
+                    this._inTween.duration = this._tweenTime;
+                }
+                this.onFadeInTweenComplete();
+            }
+            else
+            {
+                if(this._inTween)
+                {
+                    this._inTween.paused = true;
+                    this._hideTween.paused = true;
+                }
+                this.marker.alpha = 1;
+            }
+        }
+
+        private function onFadeInTweenComplete() : void
+        {
+            this._inTween.paused = true;
+            this._hideTween.position = 0;
+            this._hideTween.paused = false;
+        }
+
+        private function onFadeOutTweenComplete() : void
+        {
+            this._hideTween.paused = true;
+            this._inTween.position = 0;
+            this._inTween.paused = false;
         }
 
         private function setInitialAlpha() : void
@@ -160,7 +243,7 @@ package net.wg.gui.battle.views.vehicleMarkers
             }
             else
             {
-                this._distanceTF.text = "";
+                this._distanceTF.text = Values.EMPTY_STR;
             }
         }
 

@@ -2303,6 +2303,74 @@ package
 
         public static const TECHTREE_ACTION_EXPIRETIME:String = "#system_messages:techtree/action/expireTime";
 
+        public static const SE20_BUY_ENERGY_SERVER_ERROR:String = "#system_messages:se20_buy_energy/server_error";
+
+        public static const SE20_BUY_ENERGY_HAS_ENERGY:String = "#system_messages:se20_buy_energy/has_energy";
+
+        public static const SE20_BUY_ENERGY_SUCCESS:String = "#system_messages:se20_buy_energy/success";
+
+        public static const SE20_SERVER_ERROR:String = "#system_messages:se20/server_error";
+
+        public static const SE20_BUY_PACK_SUCCESS:String = "#system_messages:se20_buy_pack/success";
+
+        public static const SE20_SHOP_PACK_SE20_ENERGY_GENERAL_0_X10:String = "#system_messages:se20_shop_pack/se20_energy_general_0_x10";
+
+        public static const SE20_SHOP_PACK_SE20_ENERGY_GENERAL_1_X10:String = "#system_messages:se20_shop_pack/se20_energy_general_1_x10";
+
+        public static const SE20_SHOP_PACK_SE20_ENERGY_GENERAL_2_X10:String = "#system_messages:se20_shop_pack/se20_energy_general_2_x10";
+
+        public static const SE20_SHOP_PACK_SE20_ENERGY_GENERAL_3_X10:String = "#system_messages:se20_shop_pack/se20_energy_general_3_x10";
+
+        public static const SE20_SHOP_PACK_SE20_ENERGY_GENERAL_4_X10:String = "#system_messages:se20_shop_pack/se20_energy_general_4_x10";
+
+        public static const SE20_SHOP_PACK_SE20_ENERGY_GENERAL_0_BUNDLE_X10:String = "#system_messages:se20_shop_pack/se20_energy_general_0_bundle_x10";
+
+        public static const SE20_SHOP_PACK_SE20_ENERGY_GENERAL_1_BUNDLE_X10:String = "#system_messages:se20_shop_pack/se20_energy_general_1_bundle_x10";
+
+        public static const SE20_SHOP_PACK_SE20_ENERGY_GENERAL_2_BUNDLE_X10:String = "#system_messages:se20_shop_pack/se20_energy_general_2_bundle_x10";
+
+        public static const SE20_SHOP_PACK_SE20_ENERGY_GENERAL_3_BUNDLE_X10:String = "#system_messages:se20_shop_pack/se20_energy_general_3_bundle_x10";
+
+        public static const SE20_SHOP_PACK_SE20_ENERGY_GENERAL_4_BUNDLE_X10:String = "#system_messages:se20_shop_pack/se20_energy_general_4_bundle_x10";
+
+        public static const SE20_SHOP_PACK_SE20_ENERGY_GENERAL_0_BUNDLE2_X10:String = "#system_messages:se20_shop_pack/se20_energy_general_0_bundle2_x10";
+
+        public static const SE20_SHOP_PACK_SE20_ENERGY_GENERAL_1_BUNDLE2_X10:String = "#system_messages:se20_shop_pack/se20_energy_general_1_bundle2_x10";
+
+        public static const SE20_SHOP_PACK_SE20_ENERGY_GENERAL_2_BUNDLE2_X10:String = "#system_messages:se20_shop_pack/se20_energy_general_2_bundle2_x10";
+
+        public static const SE20_SHOP_PACK_SE20_ENERGY_GENERAL_3_BUNDLE2_X10:String = "#system_messages:se20_shop_pack/se20_energy_general_3_bundle2_x10";
+
+        public static const SE20_SHOP_PACK_SE20_ENERGY_GENERAL_4_BUNDLE2_X10:String = "#system_messages:se20_shop_pack/se20_energy_general_4_bundle2_x10";
+
+        public static const SE20_SHOP_PACK_SE20_GENERAL_BUNDLE_LEVEL_2:String = "#system_messages:se20_shop_pack/se20_general_bundle_level_2";
+
+        public static const SE20_MAX_GENERAL_LEVEL_ALREADY_REACHED:String = "#system_messages:se20/max_general_level_already_reached";
+
+        public static const SE20_BUY_GENERAL_LEVEL_SUCCESS:String = "#system_messages:se20/buy_general_level_success";
+
+        public static const SE20_GENERAL_ORDERS_RECEIVE:String = "#system_messages:se20/general_orders_receive";
+
+        public static const SE20_GENERAL_ORDERS_DRAW:String = "#system_messages:se20/general_orders_draw";
+
+        public static const SE20_FRONT_LEVEL_COMPLETE_TITLE:String = "#system_messages:se20/front_level_complete/title";
+
+        public static const SE20_FRONT_LEVEL_COMPLETE_BODY:String = "#system_messages:se20/front_level_complete/body";
+
+        public static const SE20_FRONT_LEVEL_COMPLETE_AWARDS:String = "#system_messages:se20/front_level_complete/awards";
+
+        public static const SE20_FRONT_LEVEL_COMPLETE_SLOTS:String = "#system_messages:se20/front_level_complete/slots";
+
+        public static const SE20_FRONT_LEVEL_COMPLETE_PIECES:String = "#system_messages:se20/front_level_complete/pieces";
+
+        public static const SE20_COMMANDER_LEVEL_COMPLETE_BODY:String = "#system_messages:se20/commander_level_complete/body";
+
+        public static const SE20_COMMANDER_LEVEL_COMPLETE_CURRENTVEHICLE:String = "#system_messages:se20/commander_level_complete/currentVehicle";
+
+        public static const SE20_COMMANDER_LEVEL_COMPLETE_ABILITIES:String = "#system_messages:se20/commander_level_complete/abilities";
+
+        public static const ARENA_START_ERRORS_JOIN_NOT_ENOUGH_ENERGY:String = "#system_messages:arena_start_errors/join/NOT_ENOUGH_ENERGY";
+
         public function SYSTEM_MESSAGES()
         {
             super();

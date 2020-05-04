@@ -637,7 +637,7 @@ package net.wg.gui.lobby.vehicleCustomization.controls
 
         private function showItemTooltip() : void
         {
-            this.tooltipDecorator.showSpecial(TOOLTIPS_CONSTANTS.TECH_CUSTOMIZATION_ITEM,null,this._data.intCD,true,this._data.isUnsupportedForm);
+            this.tooltipDecorator.showSpecial(TOOLTIPS_CONSTANTS.TECH_CUSTOMIZATION_ITEM,null,this._data.intCD,true,this._data.isUnsupportedForm,null,this._data.customVehicleCD);
             App.soundMgr.playControlsSnd(SoundManagerStates.SND_OVER,SoundTypes.CUSTOMIZATION_DEFAULT,null);
         }
 
@@ -782,7 +782,10 @@ package net.wg.gui.lobby.vehicleCustomization.controls
 
         private function onStorageIconChangeHandler(param1:Event) : void
         {
-            this.layoutStorageInfo();
+            if(this._data != null)
+            {
+                this.layoutStorageInfo();
+            }
         }
 
         private function onClickHandler(param1:MouseEvent) : void

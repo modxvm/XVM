@@ -3,9 +3,11 @@ package net.wg.gui.lobby.vehiclePreview20
     import net.wg.infrastructure.base.meta.impl.VehiclePreview20Meta;
     import net.wg.infrastructure.base.meta.IVehiclePreview20Meta;
     import net.wg.utils.IStageSizeDependComponent;
+    import net.wg.data.constants.generated.VEHPREVIEW_CONSTANTS;
     import net.wg.gui.interfaces.ISoundButtonEx;
     import net.wg.gui.components.advanced.interfaces.IBackButton;
     import flash.display.MovieClip;
+    import net.wg.gui.lobby.vehiclePreview20.header.IVehiclePreviewHeader;
     import net.wg.gui.lobby.vehiclePreview20.buyingPanel.IVPBottomPanel;
     import flash.display.Sprite;
     import flash.text.TextField;
@@ -21,28 +23,28 @@ package net.wg.gui.lobby.vehiclePreview20
     import scaleform.clik.events.ButtonEvent;
     import net.wg.gui.lobby.vehicleCompare.events.VehCompareEvent;
     import net.wg.gui.events.ViewStackEvent;
-    import net.wg.data.constants.generated.VEHPREVIEW_CONSTANTS;
     import net.wg.gui.events.LobbyEvent;
     import flash.ui.Keyboard;
     import flash.events.KeyboardEvent;
-    import net.wg.gui.lobby.vehiclePreview20.buyingPanel.VPBuyingPanel;
-    import net.wg.gui.lobby.vehiclePreview20.buyingPanel.VPEventProgressionBuyingPanel;
-    import net.wg.gui.lobby.vehiclePreview20.buyingPanel.VPTradeInBuyingPanel;
+    import net.wg.infrastructure.interfaces.IDAAPIModule;
     import flash.events.Event;
     import scaleform.clik.constants.InvalidationType;
+    import net.wg.gui.lobby.vehiclePreview20.utils.VehiclePreviewAdaptive;
+    import org.idmedia.as3commons.util.StringUtils;
     import flash.display.DisplayObject;
     import net.wg.utils.StageSizeBoundaries;
     import scaleform.clik.events.InputEvent;
-    import net.wg.infrastructure.interfaces.IDAAPIModule;
 
     public class VehiclePreview20Page extends VehiclePreview20Meta implements IVehiclePreview20Meta, IStageSizeDependComponent
     {
+
+        private static const _bottomPanelLinkageToAlias:Object = {};
 
         private static const INTRO_FLAG:String = "showIntro";
 
         private static const BIG_OFFSET:int = 50;
 
-        private static const SMALL_OFFSET:int = BIG_OFFSET * 0.5;
+        private static const SMALL_OFFSET:int = BIG_OFFSET >> 1;
 
         private static const BIG_PANELS_VERTICAL_OFFSET:int = 90;
 
@@ -68,6 +70,16 @@ package net.wg.gui.lobby.vehiclePreview20
 
         private static const VEH_PARAMS_V_OFFSET:int = 20;
 
+        {
+            _bottomPanelLinkageToAlias[VEHPREVIEW_CONSTANTS.BUYING_PANEL_LINKAGE] = VEHPREVIEW_CONSTANTS.BUYING_PANEL_PY_ALIAS;
+            _bottomPanelLinkageToAlias[VEHPREVIEW_CONSTANTS.EVENT_PROGRESSION_BUYING_PANEL_LINKAGE] = VEHPREVIEW_CONSTANTS.EVENT_PROGRESSION_BUYING_PANEL_PY_ALIAS;
+            _bottomPanelLinkageToAlias[VEHPREVIEW_CONSTANTS.TRADE_IN_BUYING_PANEL_LINKAGE] = VEHPREVIEW_CONSTANTS.TRADE_IN_BUYING_PANEL_PY_ALIAS;
+            _bottomPanelLinkageToAlias[VEHPREVIEW_CONSTANTS.SECRET_EVENT_BUYING_PANEL_LINKAGE] = VEHPREVIEW_CONSTANTS.SECRET_EVENT_BUYING_PANEL_PY_ALIAS;
+            _bottomPanelLinkageToAlias[VEHPREVIEW_CONSTANTS.SECRET_EVENT_BUYING_ACTION_PANEL_LINKAGE] = VEHPREVIEW_CONSTANTS.SECRET_EVENT_BUYING_ACTION_PANEL_PY_ALIAS;
+            _bottomPanelLinkageToAlias[VEHPREVIEW_CONSTANTS.SECRET_EVENT_BOUGHT_PANEL_LINKAGE] = VEHPREVIEW_CONSTANTS.SECRET_EVENT_BOUGHT_PANEL_PY_ALIAS;
+            _bottomPanelLinkageToAlias[VEHPREVIEW_CONSTANTS.SECRET_EVENT_SOLD_PANEL_LINKAGE] = VEHPREVIEW_CONSTANTS.SECRET_EVENT_SOLD_PANEL_PY_ALIAS;
+        }
+
         public var closeButton:ISoundButtonEx;
 
         public var backButton:IBackButton;
@@ -75,6 +87,8 @@ package net.wg.gui.lobby.vehiclePreview20
         public var leftBackground:MovieClip;
 
         public var rightBackground:MovieClip;
+
+        public var headerPanel:IVehiclePreviewHeader;
 
         public var bottomPanel:IVPBottomPanel;
 
@@ -84,7 +98,11 @@ package net.wg.gui.lobby.vehiclePreview20
 
         public var background:Sprite;
 
+        public var headerBg:Sprite;
+
         public var eventProgressionBg:Sprite;
+
+        public var secretEventBg:Sprite;
 
         public var compareBlock:CompareBlock;
 
@@ -105,6 +123,8 @@ package net.wg.gui.lobby.vehiclePreview20
         private var _panelVerticalOffset:int = 90;
 
         private var _isIntroFinished:Boolean;
+
+        private var _bottomPanelLinkage:String;
 
         public function VehiclePreview20Page()
         {
@@ -172,6 +192,8 @@ package net.wg.gui.lobby.vehiclePreview20
             this.fadingPanels.mouseEnabled = false;
             this.leftBackground.mouseEnabled = this.leftBackground.mouseChildren = false;
             this.rightBackground.mouseEnabled = this.rightBackground.mouseChildren = false;
+            this.secretEventBg.mouseEnabled = this.secretEventBg.mouseChildren = false;
+            this.headerBg.mouseEnabled = this.headerBg.mouseChildren = false;
             this.listDesc.autoSize = TextFieldAutoSize.RIGHT;
             this.listDesc.wordWrap = true;
             this.listDesc.multiline = true;
@@ -195,26 +217,22 @@ package net.wg.gui.lobby.vehiclePreview20
             super.onPopulate();
             this._stage.dispatchEvent(new LobbyEvent(LobbyEvent.REGISTER_DRAGGING));
             App.gameInputMgr.setKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.onEscapeKeyUpHandler,true);
-            var _loc1_:* = this.bottomPanel is VPBuyingPanel;
-            var _loc2_:* = this.bottomPanel is VPEventProgressionBuyingPanel;
-            var _loc3_:* = this.bottomPanel is VPTradeInBuyingPanel;
             if(this.bottomPanel != null)
             {
                 this.bottomPanel.alpha = 0;
             }
-            this.eventProgressionBg.visible = _loc2_;
-            if(_loc1_)
+            this.eventProgressionBg.visible = this._bottomPanelLinkage == VEHPREVIEW_CONSTANTS.EVENT_PROGRESSION_BUYING_PANEL_LINKAGE;
+            this.secretEventBg.visible = VEHPREVIEW_CONSTANTS.SECRET_EVENT_LINKAGES.indexOf(this._bottomPanelLinkage) != -1;
+            if(this.bottomPanel != null)
             {
-                registerFlashComponentS(VPBuyingPanel(this.bottomPanel),VEHPREVIEW_CONSTANTS.BUYING_PANEL_PY_ALIAS);
+                registerFlashComponentS(IDAAPIModule(this.bottomPanel),_bottomPanelLinkageToAlias[this._bottomPanelLinkage]);
                 this.bottomPanel.addEventListener(Event.RESIZE,this.onBottomPanelResizeHandler);
             }
-            else if(_loc2_)
+            this.headerBg.visible = this.headerPanel != null;
+            if(this.headerPanel != null)
             {
-                registerFlashComponentS(VPEventProgressionBuyingPanel(this.bottomPanel),VEHPREVIEW_CONSTANTS.EVENT_PROGRESSION_BUYING_PANEL_PY_ALIAS);
-            }
-            else if(_loc3_)
-            {
-                registerFlashComponentS(VPTradeInBuyingPanel(this.bottomPanel),VEHPREVIEW_CONSTANTS.TRADE_IN_BUYING_PANEL_PY_ALIAS);
+                registerFlashComponentS(IDAAPIModule(this.headerPanel),VEHPREVIEW_CONSTANTS.SECRET_EVENT_HEADER_WIDGET_PY_ALIAS);
+                this.headerPanel.resize(width,height);
             }
         }
 
@@ -246,6 +264,8 @@ package net.wg.gui.lobby.vehiclePreview20
             this.leftBackground = null;
             this.rightBackground = null;
             this.messengerBg = null;
+            this.headerPanel = null;
+            this._bottomPanelLinkage = null;
             if(this.bottomPanel != null)
             {
                 this.bottomPanel.removeEventListener(Event.RESIZE,this.onBottomPanelResizeHandler);
@@ -260,6 +280,8 @@ package net.wg.gui.lobby.vehiclePreview20
             this.fadingPanels = null;
             this.listDesc = null;
             this.eventProgressionBg = null;
+            this.secretEventBg = null;
+            this.headerBg = null;
             super.onDispose();
         }
 
@@ -294,7 +316,7 @@ package net.wg.gui.lobby.vehiclePreview20
                 if(this.bottomPanel != null)
                 {
                     this.bottomPanel.x = width - this.bottomPanel.width >> 1;
-                    this.bottomPanel.y = height - this._offset - this.bottomPanel.height | 0;
+                    this.bottomPanel.y = height - VehiclePreviewAdaptive.bottomPanelGap - this.bottomPanel.height | 0;
                 }
                 this.compareBlock.x = width - this._offset - this.compareBlock.width | 0;
                 this.compareBlock.y = this._offset + this._panelVerticalOffset;
@@ -304,6 +326,15 @@ package net.wg.gui.lobby.vehiclePreview20
                 {
                     this.eventProgressionBg.x = width - this.eventProgressionBg.width >> 1;
                     this.eventProgressionBg.y = height - this.eventProgressionBg.height >> 0;
+                }
+                if(this.headerPanel != null)
+                {
+                    this.headerPanel.resize(width,height);
+                }
+                this.adjustBottomShadow(this.secretEventBg);
+                if(this.headerBg.visible)
+                {
+                    this.headerBg.x = width - this.headerBg.width >> 1;
                 }
             }
             if(!this._isIntroFinished && isInvalid(INTRO_FLAG))
@@ -319,8 +350,9 @@ package net.wg.gui.lobby.vehiclePreview20
 
         public function as_setBottomPanel(param1:String) : void
         {
-            if(this.bottomPanel == null && param1 != "")
+            if(this.bottomPanel == null && StringUtils.isNotEmpty(param1))
             {
+                this._bottomPanelLinkage = param1;
                 this.bottomPanel = App.utils.classFactory.getComponent(param1,MovieClip);
                 addChild(DisplayObject(this.bottomPanel));
             }
@@ -331,6 +363,18 @@ package net.wg.gui.lobby.vehiclePreview20
             if(this._infoPanel != null)
             {
                 this._infoPanel.setBulletVisibility(param1,param2);
+            }
+        }
+
+        public function as_setHeader(param1:String) : void
+        {
+            var _loc2_:DisplayObject = null;
+            if(this.headerPanel == null)
+            {
+                this.headerPanel = App.utils.classFactory.getComponent(param1,MovieClip);
+                _loc2_ = DisplayObject(this.headerPanel);
+                _loc2_.alpha = 0;
+                addChildAt(_loc2_,getChildIndex(this.fadingPanels));
             }
         }
 
@@ -349,6 +393,15 @@ package net.wg.gui.lobby.vehiclePreview20
             invalidateSize();
         }
 
+        private function adjustBottomShadow(param1:DisplayObject) : void
+        {
+            if(param1.visible)
+            {
+                param1.x = width - param1.width >> 1;
+                param1.y = height - param1.height >> 0;
+            }
+        }
+
         private function hideTooltip() : void
         {
             this._toolTipMgr.hide();
@@ -357,6 +410,7 @@ package net.wg.gui.lobby.vehiclePreview20
         private function startIntroAnimation() : void
         {
             this.disposeTweens();
+            visible = true;
             this._tweens.push(new Tween(INTRO_ANIMATION_DURATION,this._vehParams,{"alpha":1},{
                 "delay":INTRO_ANIMATION_DELAY,
                 "fastTransform":false
@@ -373,6 +427,13 @@ package net.wg.gui.lobby.vehiclePreview20
                     "delay":INTRO_ANIMATION_DELAY,
                     "fastTransform":false,
                     "onComplete":this.onIntroCompleteCallback
+                }));
+            }
+            if(this.headerPanel != null)
+            {
+                this._tweens.push(new Tween(INTRO_ANIMATION_DURATION,this.headerPanel,{"alpha":1},{
+                    "delay":INTRO_ANIMATION_DELAY,
+                    "fastTransform":false
                 }));
             }
         }
@@ -395,6 +456,11 @@ package net.wg.gui.lobby.vehiclePreview20
             this._stage.addEventListener(LobbyEvent.DRAGGING_END,this.onDraggingEndHandler);
         }
 
+        override protected function get autoShowViewProperty() : int
+        {
+            return SHOW_VIEW_PROP_FORBIDDEN;
+        }
+
         private function onDraggingEndHandler(param1:LobbyEvent) : void
         {
             if(this._isIntroFinished)
@@ -408,6 +474,10 @@ package net.wg.gui.lobby.vehiclePreview20
                     "alpha":SHOW_SLOTS_ALPHA,
                     "visible":true
                 },{"fastTransform":false}),new Tween(FADE_ANIMATION_DURATION,this.leftBackground,{"alpha":SHOW_SLOTS_ALPHA},{"fastTransform":false}),new Tween(FADE_ANIMATION_DURATION,this.rightBackground,{"alpha":SHOW_SLOTS_ALPHA},{"fastTransform":false}));
+                if(this.headerPanel != null)
+                {
+                    this._tweens.push(new Tween(FADE_ANIMATION_DURATION,this.headerPanel,{"alpha":SHOW_SLOTS_ALPHA},{"fastTransform":false}));
+                }
             }
         }
 
@@ -434,6 +504,13 @@ package net.wg.gui.lobby.vehiclePreview20
                 "delay":FADE_ANIMATION_DELAY,
                 "fastTransform":false
             }));
+            if(this.headerPanel != null)
+            {
+                this._tweens.push(new Tween(FADE_ANIMATION_DURATION,this.headerPanel,{"alpha":HIDE_SLOTS_ALPHA},{
+                    "delay":FADE_ANIMATION_DELAY,
+                    "fastTransform":false
+                }));
+            }
         }
 
         private function onEscapeKeyUpHandler(param1:InputEvent) : void

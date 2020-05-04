@@ -11,7 +11,7 @@ package net.wg.infrastructure.managers.impl
 
         private static const WIDTH_BOUNDARY_VALUES:Vector.<int> = new <int>[StageSizeBoundaries.WIDTH_2200,StageSizeBoundaries.WIDTH_1920,StageSizeBoundaries.WIDTH_1600,StageSizeBoundaries.WIDTH_1366,StageSizeBoundaries.WIDTH_1280,StageSizeBoundaries.WIDTH_1024];
 
-        private static const HEIGHT_BOUNDARY_VALUES:Vector.<int> = new <int>[StageSizeBoundaries.HEIGHT_1080,StageSizeBoundaries.HEIGHT_900,StageSizeBoundaries.HEIGHT_800,StageSizeBoundaries.HEIGHT_768];
+        private static const HEIGHT_BOUNDARY_VALUES:Vector.<int> = new <int>[StageSizeBoundaries.HEIGHT_1080,StageSizeBoundaries.HEIGHT_900,StageSizeBoundaries.HEIGHT_837,StageSizeBoundaries.HEIGHT_800,StageSizeBoundaries.HEIGHT_768];
 
         private var _components:Vector.<IStageSizeDependComponent>;
 

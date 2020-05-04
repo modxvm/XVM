@@ -284,7 +284,7 @@ package net.wg.gui.lobby.hangar
 
         private function onDataProviderChangeHandler(param1:Event) : void
         {
-            if(this._dataProvider.length > 0 && this.paramsList.renderersCount > 0)
+            if(this._dataProvider.length > 0 || this.paramsList.renderersCount > 0)
             {
                 invalidateSize();
             }

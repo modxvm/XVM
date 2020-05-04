@@ -24,5 +24,7 @@ package net.wg.infrastructure.base.meta
         function as_setBottomPanel(param1:String) : void;
 
         function as_setBulletVisibility(param1:int, param2:Boolean) : void;
+
+        function as_setHeader(param1:String) : void;
     }
 }

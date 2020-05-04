@@ -22,13 +22,13 @@ package net.wg.gui.lobby.components
     public class AwardItemRendererEx extends UIComponentEx implements IListItemRenderer, IUpdatable, IScrollerItemRenderer
     {
 
-        private static const ICONS_OFFSET:int = 10;
+        protected static const ICONS_OFFSET:int = 10;
 
-        private static const ICONS_OFFSET_Y:int = 2;
+        protected static const ICONS_OFFSET_Y:int = 2;
 
-        private static const EFFECTS_OFFSET_X:int = 3;
+        protected static const EFFECTS_OFFSET_X:int = 3;
 
-        private static const EFFECTS_OFFSET_Y:int = 5;
+        protected static const EFFECTS_OFFSET_Y:int = 5;
 
         public var img:IImage;
 
@@ -42,19 +42,19 @@ package net.wg.gui.lobby.components
 
         public var overlay:MovieClip = null;
 
-        private var _data:AwardItemRendererExVO;
+        protected var _data:AwardItemRendererExVO;
+
+        protected var _hasSize:Boolean = false;
+
+        protected var _rendererWidth:Number = 0;
+
+        protected var _rendererHeight:Number = 0;
 
         private var _toolTipMgr:ITooltipMgr;
 
         private var _index:uint = 0;
 
         private var _owner:UIComponent;
-
-        private var _hasSize:Boolean = false;
-
-        private var _rendererWidth:Number = 0;
-
-        private var _rendererHeight:Number = 0;
 
         private var _gap:int = 0;
 
@@ -117,8 +117,6 @@ package net.wg.gui.lobby.components
             var _loc4_:String = null;
             var _loc5_:* = false;
             var _loc6_:String = null;
-            var _loc7_:* = NaN;
-            var _loc8_:* = NaN;
             super.draw();
             if(isInvalid(InvalidationType.DATA))
             {
@@ -172,26 +170,7 @@ package net.wg.gui.lobby.components
             }
             if(this._data && isInvalid(InvalidationType.SIZE))
             {
-                if(this._hasSize)
-                {
-                    if(this.img.width > this._rendererWidth || this.img.height > this._rendererHeight)
-                    {
-                        _loc7_ = this._rendererWidth / this.img.width;
-                        _loc8_ = this._rendererHeight / this.img.height;
-                        this.img.scaleX = this.img.scaleY = _loc7_ > _loc8_?_loc8_:_loc7_;
-                    }
-                    this.img.x = this._rendererWidth - this.img.width >> 1;
-                    this.img.y = this._rendererHeight - this.img.height >> 1;
-                    this.highlight.x = this.overlay.x = this.img.x + EFFECTS_OFFSET_X;
-                    this.highlight.y = this.overlay.y = this.img.y + EFFECTS_OFFSET_Y;
-                    this.starIcon.x = this.width - this.starIcon.width + ICONS_OFFSET ^ 0;
-                    this.awardObtainedIcon.x = this._rendererWidth - this.awardObtainedIcon.width >> 1;
-                    this.awardObtainedIcon.y = this.img.y + this.img.height - (this.awardObtainedIcon.height >> 1) + this._data.obtainedImageOffset ^ 0;
-                }
-                else
-                {
-                    this.awardObtainedIcon.x = this.img.x + (this.img.width - this.awardObtainedIcon.width >> 1);
-                }
+                this.adjustSize();
                 this.updateTextFieldLayout();
                 dispatchEvent(new Event(Event.CHANGE));
             }
@@ -220,6 +199,32 @@ package net.wg.gui.lobby.components
         public function update(param1:Object) : void
         {
             this.setData(param1);
+        }
+
+        protected function adjustSize() : void
+        {
+            var _loc1_:* = NaN;
+            var _loc2_:* = NaN;
+            if(this._hasSize)
+            {
+                if(this.img.width > this._rendererWidth || this.img.height > this._rendererHeight)
+                {
+                    _loc1_ = this._rendererWidth / this.img.width;
+                    _loc2_ = this._rendererHeight / this.img.height;
+                    this.img.scaleX = this.img.scaleY = _loc1_ > _loc2_?_loc2_:_loc1_;
+                }
+                this.img.x = this._rendererWidth - this.img.width >> 1;
+                this.img.y = this._rendererHeight - this.img.height >> 1;
+                this.highlight.x = this.overlay.x = this.img.x + EFFECTS_OFFSET_X;
+                this.highlight.y = this.overlay.y = this.img.y + EFFECTS_OFFSET_Y;
+                this.starIcon.x = this.width - this.starIcon.width + ICONS_OFFSET ^ 0;
+                this.awardObtainedIcon.x = this._rendererWidth - this.awardObtainedIcon.width >> 1;
+                this.awardObtainedIcon.y = this.img.y + this.img.height - (this.awardObtainedIcon.height >> 1) + this._data.obtainedImageOffset ^ 0;
+            }
+            else
+            {
+                this.awardObtainedIcon.x = this.img.x + (this.img.width - this.awardObtainedIcon.width >> 1);
+            }
         }
 
         private function updateTextFieldLayout() : void

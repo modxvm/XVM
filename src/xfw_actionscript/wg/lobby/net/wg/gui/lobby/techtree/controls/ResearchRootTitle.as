@@ -145,7 +145,8 @@ package net.wg.gui.lobby.techtree.controls
 
         private function updateLayout() : void
         {
-            var _loc1_:Number = this._isElite?ELITE_ICON_ACTUAL_WIDTH:SIMPLE_ICON_ACTUAL_WIDTH;
+            var _loc1_:* = NaN;
+            _loc1_ = this._isElite?ELITE_ICON_ACTUAL_WIDTH:SIMPLE_ICON_ACTUAL_WIDTH;
             var _loc2_:Number = this.tankTier.width + this.tankName.width + _loc1_ + this.infoIcon.width + INFO_ICON_X_OFFSET;
             this.tankTier.x = -_loc2_ >> 1;
             this.tankType.x = this.tankTier.x + this.tankTier.width - (TYPE_ICON_WIDTH - _loc1_ >> 1) | 0;

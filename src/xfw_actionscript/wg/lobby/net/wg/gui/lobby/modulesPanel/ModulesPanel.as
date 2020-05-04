@@ -42,9 +42,11 @@ package net.wg.gui.lobby.modulesPanel
 
         protected var _slots:Vector.<IDeviceSlot> = null;
 
-        private var _hasTurret:Boolean = false;
-
         protected var _modules:Vector.<IModuleSlot> = null;
+
+        private var _panelWidth:int = 0;
+
+        private var _hasTurret:Boolean = false;
 
         private var _toolTipMgr:ITooltipMgr;
 
@@ -138,7 +140,11 @@ package net.wg.gui.lobby.modulesPanel
         {
             this.resetSelection();
             this.setupDevices(param1.devices);
-            dispatchEvent(new Event(Event.RESIZE));
+            if(this._panelWidth != this.width)
+            {
+                this._panelWidth = this.width;
+                dispatchEvent(new Event(Event.RESIZE));
+            }
         }
 
         public function as_setModulesEnabled(param1:Boolean) : void
@@ -152,6 +158,11 @@ package net.wg.gui.lobby.modulesPanel
         {
             this._hasTurret = param1;
             this.turret.enabled = this._hasTurret && this.modulesEnabled;
+        }
+
+        public final function playAnimation() : void
+        {
+            this.doPlayAnimation();
         }
 
         public function setItemsEnabled(param1:Vector.<IDeviceSlot>, param2:Boolean) : void
@@ -168,6 +179,10 @@ package net.wg.gui.lobby.modulesPanel
                     _loc3_.enabled = param2;
                 }
             }
+        }
+
+        protected function doPlayAnimation() : void
+        {
         }
 
         protected function addToButtonGroup(param1:Button) : void
@@ -279,10 +294,6 @@ package net.wg.gui.lobby.modulesPanel
                     }
                 }
             }
-        }
-
-        public function playAnimation() : void
-        {
         }
     }
 }

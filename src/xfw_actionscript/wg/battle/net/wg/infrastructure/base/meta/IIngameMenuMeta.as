@@ -30,5 +30,7 @@ package net.wg.infrastructure.base.meta
         function as_showQuitButton(param1:Boolean) : void;
 
         function as_showBootcampButton(param1:Boolean) : void;
+
+        function as_showHelpButton(param1:Boolean) : void;
     }
 }

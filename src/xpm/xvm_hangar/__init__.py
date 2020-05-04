@@ -250,10 +250,18 @@ def shouldHide(base, self):
         return True
     base(self)
 
-# hide display widget - World of Tanks' 10th Anniversary
+# hide display banner - World of Tanks' 10th Anniversary
 @overrideMethod(Hangar, '_Hangar__updateTenYearsCountdownEntryPointVisibility')
 def updateTenYearsCountdownEntryPointVisibility(base, self):
-    if not config.get('hangar/showTenYearsWidget', True):
+    if not config.get('hangar/showTenYearsBanner', True):
         self.as_updateEventEntryPointS(HANGAR_ALIASES.TEN_YEARS_COUNTDOWN_ENTRY_POINT_INJECT, False)
+        return
+    base(self)
+
+# hide display banner - Road to Berlin
+@overrideMethod(Hangar, '_Hangar__updateEvent')
+def updateEvent(base, self):
+    if not config.get('hangar/showSE20Banner', True):
+        self.as_updateEventEntryPointS(HANGAR_ALIASES.SE20_BANNER, False)
         return
     base(self)

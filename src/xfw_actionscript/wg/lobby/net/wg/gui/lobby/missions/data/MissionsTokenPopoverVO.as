@@ -15,6 +15,8 @@ package net.wg.gui.lobby.missions.data
 
         public var buyBtnVisible:Boolean = false;
 
+        public var descrLeftPadding:int = -1;
+
         public function MissionsTokenPopoverVO(param1:Object)
         {
             super(param1);

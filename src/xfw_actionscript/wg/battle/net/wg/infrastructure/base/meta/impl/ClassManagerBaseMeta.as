@@ -603,6 +603,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.data.WaitingQueueWindowVO;
     import net.wg.gui.dialogs.ItemStatusData;
     import net.wg.gui.dialogs.SimpleDialog;
+    import net.wg.gui.eventcomponents.NumberProgress;
     import net.wg.gui.events.AccordionRendererEvent;
     import net.wg.gui.events.EquipmentEvent;
     import net.wg.gui.events.FiltersEvent;
@@ -2030,6 +2031,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_DIALOGS_ITEMSTATUSDATA:Class = ItemStatusData;
 
         public static const NET_WG_GUI_DIALOGS_SIMPLEDIALOG:Class = SimpleDialog;
+
+        public static const NET_WG_GUI_EVENTCOMPONENTS_NUMBERPROGRESS:Class = NumberProgress;
 
         public static const NET_WG_GUI_EVENTS_ACCORDIONRENDEREREVENT:Class = AccordionRendererEvent;
 

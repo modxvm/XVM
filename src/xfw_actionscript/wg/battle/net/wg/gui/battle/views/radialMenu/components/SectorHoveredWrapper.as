@@ -15,14 +15,27 @@ package net.wg.gui.battle.views.radialMenu.components
         public function SectorHoveredWrapper()
         {
             super();
-            this.light.imageName = BATTLEATLAS.RADIAL_MENU_LIGHT;
+            this.light.imageName = this.getImageName();
         }
 
-        public function dispose() : void
+        protected function getImageName() : String
         {
-            this.content.dispose();
-            this.content = null;
+            return BATTLEATLAS.RADIAL_MENU_LIGHT;
+        }
+
+        protected function onDispose() : void
+        {
+            if(this.content != null)
+            {
+                this.content.dispose();
+                this.content = null;
+            }
             this.light = null;
+        }
+
+        public final function dispose() : void
+        {
+            this.onDispose();
         }
     }
 }

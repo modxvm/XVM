@@ -53,6 +53,8 @@ package
 
         public static const HANGAR_SESSIONSTATS:String = "#lobby_help:hangar/sessionStats";
 
+        public static const HANGAR_EVENT:String = "#lobby_help:hangar/event";
+
         public function LOBBY_HELP()
         {
             super();

@@ -3,23 +3,27 @@ package net.wg.gui.components.tooltips
     import flash.text.TextField;
     import flash.display.Sprite;
     import net.wg.infrastructure.base.UIComponentEx;
-    import net.wg.gui.rally.vo.VehicleVO;
     import net.wg.utils.ILocale;
+    import net.wg.gui.rally.vo.VehicleVO;
     import flash.text.TextFieldAutoSize;
     import net.wg.gui.components.tooltips.helpers.Utils;
 
     public class ToolTipSelectedVehicle extends ToolTipSpecial
     {
 
+        private static const MIN_CONTENT_WIDTH:Number = 275;
+
+        private static const MARGIN_BEETWEEN_BLOCKS:Number = 3;
+
+        private static const VEHICLE_LINKAGE:String = "SuitableVehicleBlockItemUI";
+
+        private static const EVENT_VEHICLE_LINKAGE:String = "EventSuitableVehicleBlockItemUI";
+
         public var headerTF:TextField = null;
 
         public var whiteBg:Sprite = null;
 
         private var _vehicleBlockItems:Vector.<UIComponentEx> = null;
-
-        private const MIN_CONTENT_WIDTH:Number = 275;
-
-        private const MARGIN_BEETWEEN_BLOCKS:Number = 3;
 
         public function ToolTipSelectedVehicle()
         {
@@ -37,9 +41,9 @@ package net.wg.gui.components.tooltips
         override protected function updateSize() : void
         {
             var _loc1_:Separator = null;
-            if(content.width < this.MIN_CONTENT_WIDTH)
+            if(content.width < MIN_CONTENT_WIDTH)
             {
-                contentWidth = this.MIN_CONTENT_WIDTH;
+                contentWidth = MIN_CONTENT_WIDTH;
             }
             super.updateSize();
             if(this.whiteBg.visible)
@@ -52,9 +56,10 @@ package net.wg.gui.components.tooltips
 
         override protected function redraw() : void
         {
+            var _loc1_:ILocale = null;
             var _loc2_:VehicleVO = null;
             var _loc3_:Separator = null;
-            var _loc1_:ILocale = App.utils.locale;
+            _loc1_ = App.utils.locale;
             _loc2_ = new VehicleVO(_data);
             separators = new Vector.<Separator>();
             this.headerTF.autoSize = TextFieldAutoSize.LEFT;
@@ -93,14 +98,14 @@ package net.wg.gui.components.tooltips
 
         private function addSuitableVehicleBlockItem(param1:VehicleVO, param2:Number) : Number
         {
-            var _loc3_:SuitableVehicleBlockItem = null;
-            _loc3_ = App.utils.classFactory.getComponent("SuitableVehicleBlockItemUI",SuitableVehicleBlockItem);
-            this._vehicleBlockItems.push(_loc3_);
-            _loc3_.setData(App.utils.nations.getNationIcon(param1.nationID),param1.level,param1.smallIconPath,"../maps/icons/filters/tanks/" + param1.type + ".png",param1.shortUserName);
-            _loc3_.x = contentMargin.left + bgShadowMargin.left;
-            _loc3_.y = param2 ^ 0;
-            content.addChild(_loc3_);
-            var param2:Number = param2 + (_loc3_.height + this.MARGIN_BEETWEEN_BLOCKS);
+            var _loc3_:String = param1.isEvent?EVENT_VEHICLE_LINKAGE:VEHICLE_LINKAGE;
+            var _loc4_:SuitableVehicleBlockItem = App.utils.classFactory.getComponent(_loc3_,SuitableVehicleBlockItem);
+            this._vehicleBlockItems.push(_loc4_);
+            _loc4_.setData(App.utils.nations.getNationIcon(param1.nationID),param1.level,param1.smallIconPath,"../maps/icons/filters/tanks/" + param1.type + ".png",param1.shortUserName);
+            _loc4_.x = contentMargin.left + bgShadowMargin.left;
+            _loc4_.y = param2 ^ 0;
+            content.addChild(_loc4_);
+            var param2:Number = param2 + (_loc4_.height + MARGIN_BEETWEEN_BLOCKS);
             return param2;
         }
     }
