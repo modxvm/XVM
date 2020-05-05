@@ -11,7 +11,6 @@ from gui.Scaleform.daapi.view.battle.shared.ribbons_panel import BattleRibbonsPa
 from gui.Scaleform.daapi.view.battle.shared.ribbons_aggregator import RibbonsAggregator
 from gui.Scaleform.daapi.view.battle.classic.stats_exchange import FragsCollectableStats
 
-
 from xfw import *
 from xfw_actionscript.python import *
 from xvm_main.python.logger import *
@@ -325,6 +324,7 @@ def onEnterWorld(self, prereqs):
         maxHealth = self.health
         isStuns = 'st' if self.typeDescriptor.shot.shell.hasStun else None
 
+
 @registerEvent(FragsCollectableStats, 'addVehicleStatusUpdate')
 def FragsCollectableStats_addVehicleStatusUpdate(self, vInfoVO):
     global enemyVehiclesMaxHP, enemyVehiclesSumMaxHP, _player, arenaDP
@@ -334,6 +334,7 @@ def FragsCollectableStats_addVehicleStatusUpdate(self, vInfoVO):
     if vInfoVO.vehicleID not in enemyVehiclesMaxHP and vInfoVO.team != _player.team:
         enemyVehiclesMaxHP[vInfoVO.vehicleID] = vInfoVO.vehicleType.maxHealth if vInfoVO.vehicleType.maxHealth is not None else 0
         enemyVehiclesSumMaxHP = sum(enemyVehiclesMaxHP.values())
+
 
 @registerEvent(PlayerAvatar, '_PlayerAvatar__destroyGUI')
 def totalEfficiency_destroyGUI(self):
@@ -401,5 +402,3 @@ def suspend(base, self):
         self.resume()
     else:
         base(self)
-
-
