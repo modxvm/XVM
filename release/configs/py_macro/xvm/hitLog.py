@@ -159,7 +159,6 @@ class Macros(dict):
 
 
 class DataHitLog(object):
-
     guiSessionProvider = dependency.descriptor(IBattleSessionProvider)
 
     def __init__(self):

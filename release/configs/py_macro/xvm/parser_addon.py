@@ -1,11 +1,8 @@
-# import c_parser_addon
-
 
 def parser_addon(strHTML, dict_macros):
     if not isinstance(strHTML, str):
         return str(strHTML)
     if '{{' in strHTML:
-        # return c_parser_addon.parse(strHTML, dict_macros)
         return _parser(strHTML, dict_macros)
     else:
         return strHTML

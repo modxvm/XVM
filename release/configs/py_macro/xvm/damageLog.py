@@ -2,7 +2,6 @@
 # ktulho <https://kr.cm/f/p/17624/>
 
 import copy
-
 import BigWorld
 import ResMgr
 import nations
@@ -555,6 +554,7 @@ data = Data()
 
 
 class _Base(object):
+
     def __init__(self, section):
         self.S_MOVE_IN_BATTLE = section + MOVE_IN_BATTLE
         self.S_SHOW_HIT_NO_DAMAGE = section + SHOW_HIT_NO_DAMAGE
@@ -697,6 +697,7 @@ class _Base(object):
 
 
 class DamageLog(_Base):
+
     def __init__(self, section):
         _Base.__init__(self, section)
         self.S_FORMAT_HISTORY = section + FORMAT_HISTORY

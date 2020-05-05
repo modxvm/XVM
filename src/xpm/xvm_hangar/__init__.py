@@ -259,9 +259,8 @@ def updateTenYearsCountdownEntryPointVisibility(base, self):
     base(self)
 
 # hide display banner - Road to Berlin
-@overrideMethod(Hangar, '_Hangar__updateEvent')
-def updateEvent(base, self):
+@registerEvent(Hangar, '_Hangar__updateEvent')
+def updateEvent(self):
     if not config.get('hangar/showSE20Banner', True):
         self.as_updateEventEntryPointS(HANGAR_ALIASES.SE20_BANNER, False)
         return
-    base(self)
