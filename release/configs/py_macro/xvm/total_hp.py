@@ -50,7 +50,7 @@ data = PlayerDamages()
 def update_hp(vehicleID, hp):
     global max_hp_ally, max_hp_enemy
     if panel.teams_totalhp[0] > max_hp_ally:
-        max_hp_enemy = panel.teams_totalhp[0]
+        max_hp_ally = panel.teams_totalhp[0]
     elif panel.teams_totalhp[1] > max_hp_enemy:
         max_hp_enemy = panel.teams_totalhp[1]
     as_event('ON_UPDATE_HP')
