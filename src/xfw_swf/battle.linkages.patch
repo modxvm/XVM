@@ -1,11 +1,11 @@
 --- battle.orig-0.orig/net/wg/data/constants/Linkages.class.asasm	2020-04-30 20:42:09.892001400 +0300
 +++ battle.orig-0/net/wg/data/constants/Linkages.class.asasm	2020-04-30 20:42:56.199708400 +0300
-@@ -2108,7 +2108,7 @@
-  trait const QName(PackageNamespace(""), "BATTLE_PROGRESS_ITEM_LABEL") slotid 255 type QName(PackageNamespace(""), "String") value Utf8("battleProgressItemLabelUI") end
-  trait const QName(PackageNamespace(""), "BATTLE_PROGRESS_ITEM_LINE") slotid 256 type QName(PackageNamespace(""), "String") value Utf8("battleProgressItemLineUI") end
-  trait const QName(PackageNamespace(""), "BATTLE_PROGRESS_TASK_SEPARATOR") slotid 257 type QName(PackageNamespace(""), "String") value Utf8("battleProgressTaskSeparatorUI") end
-- trait const QName(PackageNamespace(""), "CAPTURE_BAR_LINKAGE") slotid 258 type QName(PackageNamespace(""), "String") value Utf8("TeamCaptureBarUI") end
-+ trait slot QName(PackageNamespace(""), "CAPTURE_BAR_LINKAGE") slotid 258 type QName(PackageNamespace(""), "String") value Utf8("TeamCaptureBarUI") end
-  trait const QName(PackageNamespace(""), "VEH_CMP_WINDOW_BG_UI") slotid 259 type QName(PackageNamespace(""), "String") value Utf8("WindowBgUI") end
-  trait const QName(PackageNamespace(""), "VEH_CMP_BUBBLE_UI") slotid 260 type QName(PackageNamespace(""), "String") value Utf8("VehCompareBubbleUI") end
-  trait const QName(PackageNamespace(""), "DIP_ENGINE_DAMAGED") slotid 261 type QName(PackageNamespace(""), "String") value Utf8("DipEngineDamagedUI") end
+@@ -2103,7 +2103,7 @@
+  trait const QName(PackageNamespace(""), "BATTLE_PROGRESS_ITEM_LABEL") slotid 254 type QName(PackageNamespace(""), "String") value Utf8("battleProgressItemLabelUI") end
+  trait const QName(PackageNamespace(""), "BATTLE_PROGRESS_ITEM_LINE") slotid 255 type QName(PackageNamespace(""), "String") value Utf8("battleProgressItemLineUI") end
+  trait const QName(PackageNamespace(""), "BATTLE_PROGRESS_TASK_SEPARATOR") slotid 256 type QName(PackageNamespace(""), "String") value Utf8("battleProgressTaskSeparatorUI") end
+- trait const QName(PackageNamespace(""), "CAPTURE_BAR_LINKAGE") slotid 257 type QName(PackageNamespace(""), "String") value Utf8("TeamCaptureBarUI") end
++ trait slot QName(PackageNamespace(""), "CAPTURE_BAR_LINKAGE") slotid 257 type QName(PackageNamespace(""), "String") value Utf8("TeamCaptureBarUI") end
+  trait const QName(PackageNamespace(""), "VEH_CMP_WINDOW_BG_UI") slotid 258 type QName(PackageNamespace(""), "String") value Utf8("WindowBgUI") end
+  trait const QName(PackageNamespace(""), "VEH_CMP_BUBBLE_UI") slotid 259 type QName(PackageNamespace(""), "String") value Utf8("VehCompareBubbleUI") end
+  trait const QName(PackageNamespace(""), "DIP_ENGINE_DAMAGED") slotid 260 type QName(PackageNamespace(""), "String") value Utf8("DipEngineDamagedUI") end

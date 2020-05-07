@@ -283,8 +283,6 @@ package net.wg.data.constants
 
         public static const EVENT_DEATH_ZONE:String = "destroyTimerEventDeathZoneUI";
 
-        public static const EVENT_PERSONAL_DEATH_ZONE:String = "destroyTimerEventPersonalDeathZoneUI";
-
         public static const OPTIONAL_DEVICE_BUTTON:String = "OptionalDeviceButtonUI";
 
         public static const VEHICLE_SEASON_AWARD:String = "VehicleSeasonAwardUI";
