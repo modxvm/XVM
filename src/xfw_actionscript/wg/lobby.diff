@@ -20,7 +20,7 @@ diff -Naur lobby.orig/App.as lobby/App.as
 diff -Naur lobby.orig/net/wg/data/constants/Linkages.as lobby/net/wg/data/constants/Linkages.as
 --- lobby.orig/net/wg/data/constants/Linkages.as	2020-02-28 20:15:55.426892200 +0200
 +++ lobby/net/wg/data/constants/Linkages.as	2020-02-28 20:19:21.718027400 +0200
-@@ -393,7 +393,7 @@
+@@ -391,7 +391,7 @@
  
          public static const TECHNIQUE_STATISTICS_PERCENT_SIGN:String = "TechniqueStatisticsPercentSign_UI";
  

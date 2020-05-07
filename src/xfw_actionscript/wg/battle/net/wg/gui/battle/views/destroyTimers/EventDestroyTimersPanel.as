@@ -60,6 +60,7 @@ package net.wg.gui.battle.views.destroyTimers
         override protected function getTimersIcons() : Vector.<String>
         {
             var _loc1_:Vector.<String> = super.getTimersIcons();
+            _loc1_.push(Linkages.EVENT_DEATH_ZONE);
             _loc1_.push(Linkages.EVENTWARNING_ICON);
             return _loc1_;
         }
