@@ -49,7 +49,6 @@ wotmodpath="$XVMBUILD_ROOT_PATH/$XVMBUILD_XFW_WOTMOD_OUTPUTPATH"
 
 libraries=(
   'xfw_actionscript'
-#  'xfw_crashreport'
   'xfw_filewatcher'
   'xfw_fonts'
   'xfw_libraries'

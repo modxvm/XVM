@@ -23,29 +23,27 @@ Import-Module ../../build_lib/library.psm1 -Force -DisableNameChecking
 $version_str = "8.3.0.0"
 $version = $version_str -replace "\.",","
 
-$xfwnative_url="https://ci.appveyor.com/api/buildjobs/hvuxnvoh05o7vr50/artifacts/~output%2Fdeploy%2Fcom.modxvm.xfw.native_1.5.8-devel.zip"
+$xfwnative_url="https://ci.appveyor.com/api/buildjobs/llrln8cg7dplif9l/artifacts/~output%2Fdeploy%2Fcom.modxvm.xfw.native_2.0.0-devel.zip"
 
 $projects_32=@(
-  #  "xfw_crashreport"
- #   "xfw_filewatcher"
-  #  "xfw_fonts"
-  #  "xfw_mutex"
-  #  "xfw_ping"
+   "xfw_filewatcher"
+    "xfw_fonts"
+    "xfw_mutex"
+    "xfw_ping"
     "xfw_wotfix_crashes"
-  #  "xfw_wotfix_hidpi"
-  #  "xfw_wwise"
+    "xfw_wotfix_hidpi"
+    "xfw_wwise"
 )
 
 
 $projects_64=@(
- #   "xfw_crashreport"
- #   "xfw_filewatcher"
- #   "xfw_fonts"
- #   "xfw_mutex"
-   # "xfw_ping"
+    "xfw_filewatcher"
+    "xfw_fonts"
+    "xfw_mutex"
+    "xfw_ping"
     "xfw_wotfix_crashes"
-    #"xfw_wotfix_hidpi"
-   # "xfw_wwise"
+    "xfw_wotfix_hidpi"
+    "xfw_wwise"
 )
 
 function Download-DevelPackage()
@@ -103,7 +101,13 @@ foreach ($project in $projects_64) {
    Build-CmakeProject -Name $project -Arch "64bit"
 }
 
-#Remove-Item -Path "./_build/*" -Recurse -Force -ErrorAction SilentlyContinue
-#Remove-Item -Path "./_devel/*" -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item -Path "./_build/*" -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item -Path "./_devel/*" -Recurse -Force -ErrorAction SilentlyContinue
+
+if(Sign-IsAvailable){
+    Write-Output "Signing files"
+    Sign-Folder -Folder "./_binaries/"
+    Write-Output ""
+}
 
 Write-Output "Successful"

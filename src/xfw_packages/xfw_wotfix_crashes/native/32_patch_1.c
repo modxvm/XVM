@@ -17,8 +17,8 @@
  */
 
 #include <Python.h>
-#include <XfwNativeApi.h>
 
+#include "all_common.h"
 #include "32_common.h"
 
 //search string: 55 8B EC 83 EC 18 53 8B D9 56 57 8D 7B 08 89 5D
@@ -61,11 +61,11 @@ int bugfix1_apply()
     WCHAR lpFilename[2048];
     GetModuleFileNameW(NULL, lpFilename, 2048);
     DWORD startpos = (DWORD)GetModuleHandleW(lpFilename);
-    DWORD endpos = startpos + XFWNATIVE_GetModuleSize(lpFilename);
+    DWORD endpos = startpos + GetModuleSize(lpFilename);
 
     char *test = NULL;
 
-    DWORD crashfunction_addr = XFWNATIVE_FindFunction(startpos, endpos, function_signature, function_signature_mask);
+    DWORD crashfunction_addr = FindFunction(startpos, endpos, function_signature, function_signature_mask);
     if (crashfunction_addr == 0) {
         return -1;
     }

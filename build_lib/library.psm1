@@ -15,7 +15,7 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-$xvm_pslib_version="2017.10.18"
+$xvm_pslib_version="2020.05.03"
 
 function Build-AS3Proj($Project)
 {
@@ -43,9 +43,9 @@ function Build-AS3Proj($Project)
     }
 }
 
-function Build-PythonFile($FilePath, $OutputDirectory, [Switch] $UseHashTable)
+function Build-PythonFile($FilePath, $OutputDirectory, $OutputFileName = $null, [Switch] $UseHashTable)
 {
-    Find-Python -Required | Out-Null
+    $python = Find-Python -Required
 
     $relativePath = $(Resolve-Path -Path $FilePath -Relative).Replace(".\","")
 
@@ -62,7 +62,7 @@ function Build-PythonFile($FilePath, $OutputDirectory, [Switch] $UseHashTable)
 
     Write-Output "  * ${relativePath}"
 
-    python -m py_compile "${FilePath}" | Out-Null
+    & $python.Path -m py_compile "${FilePath}" | Out-Null
 
     if($(Test-Path "${OutputDirectory}") -eq $false)
     {
@@ -71,10 +71,37 @@ function Build-PythonFile($FilePath, $OutputDirectory, [Switch] $UseHashTable)
 
     Move-Item "${FilePath}c" "${OutputDirectory}" -Force
 
+    if ($OutputFileName -ne $null) {
+        $filename = Split-Path "${FilePath}c" -Leaf
+        Move-Item (Join-Path "${OutputDirectory}" "${filename}") (Join-Path "${OutputDirectory}" "${OutputFileName}")
+    }
+
+
     if($UseHashTable -eq $true)
     {
         $hashtable.UpdateFileHash($relativePath,$relativePath)
     }
+}
+
+
+function Build-PythonDirectory($FileDirectory, $OutputDirectory, [Switch] $UseHashTable)
+{
+    $dir_in = Resolve-Path $FileDirectory
+
+    New-Item -Path $OutputDirectory -ItemType Directory -Force -ErrorAction SilentlyContinue
+    $dir_out = Resolve-Path $OutputDirectory
+
+    Push-Location -Path $dir_in
+
+    foreach($file in $(Get-ChildItem -Path $dir_in -Filter "*.py" -Recurse))
+    {
+        $refpath = Resolve-Path $file.FullName -Relative
+        $outdir = Split-Path $(Join-Path -Path $dir_out -ChildPath $refpath) -Parent
+
+        Build-PythonFile -FilePath $file.FullName -OutputDirectory $outdir 
+    }
+
+    Pop-Location
 }
 
 function Get-Architecture()
@@ -83,19 +110,18 @@ function Get-Architecture()
 
     if($os -eq "windows")
     {
-        $arch = ${env:PROCESSOR_ARCHITECTURE}
-
-        if($arch -eq "AMD64")
+        switch(${env:PROCESSOR_ARCHITECTURE})
         {
-            return "amd64"
-        }
+            AMD64
+            {
+                return "amd64"
+            }
 
-        if($arch -eq "x86")
-        {
-            return "i686"
+            x86
+            {
+                return "i686"
+            }
         }
-
-        return "Unknown"
     }
     elseif($os -eq "linux")
     {
@@ -104,11 +130,6 @@ function Get-Architecture()
             x86_64
             {
                 return "amd64"
-            }
-
-            Default
-            {
-                return "Unknown"
             }
         }
     }
@@ -123,7 +144,7 @@ function Get-OS()
         return "windows"
     }
 
-    if($PSVersionTable.OS.StartsWith("Microsoft windows"))
+    if($PSVersionTable.OS.StartsWith("Microsoft"))
     {
         return "windows"
     }
@@ -383,19 +404,38 @@ function Find-Patch([Switch] $Required)
 
 function Find-Python([Switch] $Required)
 {
-    if(!$path)
-    {
-        $path = Find-Application "python"
-    }
+    $appNames = @(
+        "python2.7",
+        "python2",
+        
+        "C:\Python27\python.exe",,
+        "C:\Python27_32\python.exe",
+        "C:\Python27_64\python.exe",
 
-    if(!$path)
-    {
-        $path = Find-Application "python2.7"
-    }
+        "C:\Python\27\python.exe"
+        "C:\Python\27_32\python.exe",
+        "C:\Python\27_64\python.exe",
+        
+        "python"
+    )
 
-    if(!$path -and (${Get-OS} -eq "windows") )
-    {
-        $path = Find-Application "C:\Python27\python.exe"
+    $path = $null;
+
+    foreach ($appname in $appNames) {
+        $path = Find-Application $appname
+
+        if(!$path){
+            continue;
+        }
+
+        #Fix Windows 19.03 Windows Store install invitation
+        if((Get-Item -Path $path).Length -eq 0){
+            $path = $null
+        }
+
+        if($null -ne $path){
+            break;
+        }
     }
 
     if(!$path)
@@ -408,7 +448,14 @@ function Find-Python([Switch] $Required)
         return $false
     }
 
-    $version = (Invoke-Expression "${path} --version 2>&1") -replace "Python ",""
+    $version = (Invoke-Expression "${path} -c 'import sys; print(sys.version)'") -replace "Python ",""
+
+    if(!$version.StartsWith("2.7"))
+    {
+        Write-Error -Message "Python 2.7 is required, current version: ${version}"
+        exit 1
+    }
+
     $directory = Split-Path -Path $path
 
     Edit-Path -Path "${directory}" -Prepend
@@ -492,6 +539,27 @@ function Get-FileHashTable($JsonPath)
 {
     return [FileHashTable]::new($JsonPath)
 }
+
+function Sign-IsAvailable(){
+    return $null -ne $(Get-ChildItem -Path Cert:\CurrentUser\My -CodeSigningCert)
+}
+function Sign-File($FilePath, $TimestampServer = "http://time.certum.pl/")
+{
+    $cert=Get-ChildItem -Path Cert:\CurrentUser\My -CodeSigningCert
+    Set-AuthenticodeSignature -FilePath $FilePath -Certificate $cert -TimestampServer $TimestampServer
+}
+
+function Sign-Folder($Folder, $Filters = @("*.exe", "*.dll", "*.pyd"), $TimestampServer = "http://time.certum.pl/")
+{
+    foreach($filter in $Filters){
+        $files = Get-ChildItem -Path $Folder -Filter $filter -Recurse -ErrorAction SilentlyContinue -Force
+
+        foreach ($file in $files) {
+            Sign-File -FilePath $file.FullName -TimestampServer $TimestampServer
+        }
+    }
+}
+
 
 class FileHashTable
 {

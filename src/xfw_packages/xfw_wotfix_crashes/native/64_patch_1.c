@@ -17,8 +17,8 @@
  */
 
 #include <Python.h>
-#include <XfwNativeApi.h>
 
+#include "all_common.h"
 #include "64_common.h"
 
 //IDA search: 48 89 5C 24 08 48 89 6C 24 10 48 89 74 24 18 57 41 54 41 55 41 56 41 57 48 83 EC 20 48 ? ? ? ? ? ? 4C 8B F1 48 89 01 48 8D 59 10
@@ -42,11 +42,11 @@ int patch_1_apply()
     WCHAR lpFilename[2048];
     GetModuleFileNameW(NULL, lpFilename, 2048);
     size_t startpos = GetModuleHandleW(lpFilename);
-    size_t endpos = startpos + XFWNATIVE_GetModuleSize(lpFilename);
+    size_t endpos = startpos + GetModuleSize(lpFilename);
 
     char *test = NULL;
 
-    size_t crashfunction_addr = XFWNATIVE_FindFunction(startpos, endpos, function_signature, function_signature_mask);
+    size_t crashfunction_addr = FindFunction(startpos, endpos, function_signature, function_signature_mask);
     if (crashfunction_addr == 0) {
         return -1;
     }

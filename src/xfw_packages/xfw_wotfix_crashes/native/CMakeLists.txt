@@ -11,6 +11,7 @@ add_library(xfw_crashfix SHARED)
 target_sources(xfw_crashfix PRIVATE
     "../../library.rc"
     "pythonModule.c"
+    "all_common.c"
 )
 
 if("${CMAKE_GENERATOR_PLATFORM}" STREQUAL "x64")
