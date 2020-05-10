@@ -124,7 +124,7 @@ from gui.Scaleform.daapi.view.battle.shared.destroy_timers_panel import DestroyT
 @registerEvent(DestroyTimersPanel, '_DestroyTimersPanel__setFireInVehicle')
 def _DestroyTimersPanel__setFireInVehicle(self, isInFire):
     if xmqp.is_active():
-        xmqp.call({'event':EVENTS.XMQP_FIRE,'enable':isInFire})
+        xmqp.call({'event': EVENTS.XMQP_FIRE, 'enable': isInFire})
 
 # vehicle death timer
 #   code: drown, overturn, ALL
@@ -135,14 +135,14 @@ def _DestroyTimersPanel__showDestroyTimer(self, value):
     if xmqp.is_active() and dependency.instance(IAppLoader).getSpaceID() == GuiGlobalSpaceID.BATTLE:
         if value.needToCloseAll():
             xmqp.call({
-                'event':EVENTS.XMQP_VEHICLE_TIMER,
-                'enable':False,
-                'code':'ALL'})
+                'event': EVENTS.XMQP_VEHICLE_TIMER,
+                'enable': False,
+                'code': 'ALL'})
         elif value.needToCloseTimer():
             xmqp.call({
-                'event':EVENTS.XMQP_VEHICLE_TIMER,
-                'enable':False,
-                'code':value.code})
+                'event': EVENTS.XMQP_VEHICLE_TIMER,
+                'enable': False,
+                'code': value.code})
         else:
             xmqp.call({
                 'event': EVENTS.XMQP_VEHICLE_TIMER,
@@ -161,14 +161,14 @@ def _DestroyTimersPanel_showDeathZoneTimer(self, value):
         try:
             if value.needToCloseAll():
                 xmqp.call({
-                    'event':EVENTS.XMQP_DEATH_ZONE_TIMER,
-                    'enable':False,
-                    'zoneID':'ALL'})
+                    'event': EVENTS.XMQP_DEATH_ZONE_TIMER,
+                    'enable': False,
+                    'zoneID': 'ALL'})
             elif value.needToCloseTimer():
                 xmqp.call({
-                    'event':EVENTS.XMQP_DEATH_ZONE_TIMER,
-                    'enable':False,
-                    'zoneID':value.zoneID})
+                    'event': EVENTS.XMQP_DEATH_ZONE_TIMER,
+                    'enable': False,
+                    'zoneID': value.zoneID})
             elif value.needToShow():
                 xmqp.call({
                     'event': EVENTS.XMQP_DEATH_ZONE_TIMER,
