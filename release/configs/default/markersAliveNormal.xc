@@ -16,7 +16,7 @@
       "x": 0,
       "y": -67,
       // Opacity (dynamic transparency allowed, see macros.txt).
-      // Прозрачность (допускается использование динамической прозрачности, см. macros.txt).
+      // Прозрачность (допускается использование динамической прозрачности, см. macros_ru.txt).
       "alpha": 100,
       "align": "center",
       // Font options.
@@ -25,7 +25,7 @@
         "font": "$FieldFont",           // Font name     / Название
         "size": 18,                     // Font size     / Размер
         // Color (dynamic colors allowed, see macros.txt).
-        // Цвет (допускается использование динамического цвета, см. macros.txt)
+        // Цвет (допускается использование динамического цвета, см. macros_ru.txt)
         "color": null,
         "bold": false,                  // True - bold   / Жирный.
         "italic": false                 // True - italic / Курсив.
@@ -50,10 +50,10 @@
       // Расстояние, на которое отлетает урон.
       "maxRange": 40,
       // Text for normal damage (see description of macros in the macros.txt).
-      // Текст при обычном уроне (см. описание макросов в macros.txt).
+      // Текст при обычном уроне (см. описание макросов в macros_ru.txt).
       "damageMessage": "{{dmg}}",
       // Text for ammo rack explosion (see description of macros in the macros.txt).
-      // Текст при взрыве боеукладки (см. описание макросов в macros.txt).
+      // Текст при взрыве боеукладки (см. описание макросов в macros_ru.txt).
       "blowupMessage": "{{l10n:blownUp}}\n{{dmg}}"
     },
     // Text field with the name of the tank.
@@ -90,14 +90,14 @@
       "enabled": true,                // false - не отображать
       "x": 0,                         // положение по оси X
       "y": -51,                       // положение по оси Y
-      "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. macros.txt)
+      "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. macros_ru.txt)
       "align": "center",              // выравнивание текста (left, center, right)
       // Font options.
       // Параметры шрифта.
       "textFormat": {
         "font": "$FieldFont",         // название
         "size": 13,                   // размер
-        "color": null,                // цвет (допускается использование динамического цвета, см. macros.txt)
+        "color": null,                // цвет (допускается использование динамического цвета, см. macros_ru.txt)
         "bold": false,                // обычный (false) или жирный (true)
         "italic": false               // обычный (false) или курсив (true)
       },
@@ -114,7 +114,8 @@
         "blur": 6,                    // размытие
         "strength": 2                 // интенсивность
       },
-      // Формат текста. См. описание макросов в macros.txt
+      // Text format (see description of macros in the macros.txt).
+      // Формат текста (см. описание макросов в macros_ru.txt).
       "format": "<font size='{{battletype?13|{{squad?13|0}}}}'>{{name}}</font>"
     },
     // Text field with the remaining health.

@@ -73,7 +73,7 @@
       "stats": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1, "textFormat": {}, "shadow": {} }
     },
     // Extra cell fields (extended format supported, see extra-field.txt).
-    // Дополнительные поля ячеек (поддерживается расширенный формат, см. extra-field.txt).
+    // Дополнительные поля ячеек (поддерживается расширенный формат, см. extra-field_ru.txt).
     "extraFields": [
       // Slot background.
       // Подложка слота.

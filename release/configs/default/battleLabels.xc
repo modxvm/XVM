@@ -9,7 +9,7 @@
     // * extended format supported, see extra-field.txt
     // Подключенные текстовые поля:
     // * кастомные поля можно отдельно отключать и включать с помощью "enabled" в их настройках.
-    // * поддерживается расширенный формат, см. extra-field.txt
+    // * поддерживается расширенный формат, см. extra-field_ru.txt
     "formats": [
       ${"battleLabelsTemplates.xc":"def.hitLogBackground"},
       ${"battleLabelsTemplates.xc":"def.hitLogBody"},
