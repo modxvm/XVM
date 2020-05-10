@@ -95,8 +95,8 @@
       // Смещение по оси Y.
       "offsetY": 0
     },
-    // true - enable crew auto return function.
-    // true - включить функцию автовозврата экипажа.
+    // true - enable crew auto return function (the option works if there are free places in the barracks).
+    // true - включить функцию автовозврата экипажа (опция работает при наличии свободных мест в казарме).
     "enableCrewAutoReturn": true,
     // true - return crew check box is selected by default.
     // true - включить галочку возврата экипажа по умолчанию.
@@ -235,8 +235,8 @@
       // Leading between lines.
       // Пространство между строками.
       "leading": 2,
-      // layer - "bottom", "normal" (default), "top".
-      // слой - "bottom", "normal" (по-умолчанию), "top".
+      // Layer - "bottom", "normal" (default), "top".
+      // Слой - "bottom", "normal" (по-умолчанию), "top".
       "layer": "normal",
       // true - show title "Ping".
       // true - показывать заголовок "Пинг".
@@ -244,14 +244,14 @@
       // true - show server names in list.
       // true - показывать названия серверов в списке.
       "showServerName": true,
-      // expand server names to this amount of symbols. recommended to use monospace font if this option is set.
-      // расширить названия серверов до данного количества символов. рекомендуется использовать моноширинный шрифт если данная опция задана.
+      // Expand server names to this amount of symbols. recommended to use monospace font if this option is set.
+      // Расширить названия серверов до данного количества символов. рекомендуется использовать моноширинный шрифт если данная опция задана.
       "minimalNameLength": 4,
-      // expand values to this amount of symbols. recommended to use monospace font if this option is set.
-      // расширить значения до данного количества символов. рекомендуется использовать моноширинный шрифт если данная опция задана.
+      // Expand values to this amount of symbols. recommended to use monospace font if this option is set.
+      // Расширить значения до данного количества символов. рекомендуется использовать моноширинный шрифт если данная опция задана.
       "minimalValueLength": 0,
-      // text to show in case of error.
-      // текст показываемый в случае ошибки.
+      // Text to show in case of error.
+      // Текст показываемый в случае ошибки.
       "errorString": "--",
       // List of ignored servers, for example, ["RU1", "RU3"].
       // Список игнорируемых серверов, например, ["RU1", "RU3"].
@@ -259,14 +259,14 @@
       // Text style.
       // Стиль текста.
       "fontStyle": {
-        // Font name
-        // Название шрифта
+        // Font name.
+        // Название шрифта.
         "name": "$FieldFont",
-        "size": 12,            // Размер
-        "bold": false,         // Жирный
-        "italic": false,       // Курсив
-        // Different colors depending on people online.
-        // Разные цвета в зависимости от количества игроков.
+        "size": 12,      // Размер
+        "bold": false,   // Жирный
+        "italic": false, // Курсив
+        // Different colors depending on server response time.
+        // Разные цвета в зависимости от времени отклика сервера.
         "color": {
           "great": "0xFFCC66", // Отличный
           "good":  "0xE5E4E1", // Хороший
@@ -344,8 +344,8 @@
       // Leading between lines.
       // Пространство между строками.
       "leading": 0,
-      // layer - "bottom", "normal" (default), "top".
-      // слой - "bottom", "normal" (по-умолчанию), "top".
+      // Layer - "bottom", "normal" (default), "top".
+      // Слой - "bottom", "normal" (по-умолчанию), "top".
       "layer": "normal",
       // true - show title "Online".
       // true - показывать заголовок "Онлайн".
@@ -353,27 +353,27 @@
       // true - show server names in list.
       // true - показывать названия серверов в списке.
       "showServerName": true,
-      // expand server names to this amount of symbols. recommended to use monospace font if this option is set.
-      // расширить названия серверов до данного количества символов. рекомендуется использовать моноширинный шрифт если данная опция задана.
+      // Expand server names to this amount of symbols. recommended to use monospace font if this option is set.
+      // Расширить названия серверов до данного количества символов. рекомендуется использовать моноширинный шрифт если данная опция задана.
       "minimalNameLength": 4,
-      // expand values to this amount of symbols. recommended to use monospace font if this option is set.
-      // расширить значения до данного количества символов. рекомендуется использовать моноширинный шрифт если данная опция задана.
+      // Expand values to this amount of symbols. recommended to use monospace font if this option is set.
+      // Расширить значения до данного количества символов. рекомендуется использовать моноширинный шрифт если данная опция задана.
       "minimalValueLength": 0,
-      // text to show in case of error.
-      // текст показываемый в случае ошибки.
+      // Text to show in case of error.
+      // Текст показываемый в случае ошибки.
       "errorString": "--k",
-      // List of ignored servers, for example, ["RU1", "RU2"].
-      // Список игнорируемых серверов, например, ["RU1", "RU2"].
+      // List of ignored servers, for example, ["RU1", "RU3"].
+      // Список игнорируемых серверов, например, ["RU1", "RU3"].
       "ignoredServers": [],
       // Text style.
       // Стиль текста.
       "fontStyle": {
-        // Font name
-        // Название шрифта
+        // Font name.
+        // Название шрифта.
         "name": "$FieldFont",
-        "size": 12,            // Размер
-        "bold": false,         // Жирный
-        "italic": false,       // Курсив
+        "size": 12,      // Размер
+        "bold": false,   // Жирный
+        "italic": false, // Курсив
         // Different colors depending on people online.
         // Разные цвета в зависимости от количества игроков.
         "color": {
@@ -397,8 +397,8 @@
         "great": 30000,
         "good": 10000,
         "poor": 3000
-        //below this value the queue might be long.
-        //ниже этого значения очередь может быть долгой.
+        // Below this value the queue might be long.
+        // Ниже этого значения очередь может быть долгой.
       },
       // Shadow options.
       // Параметры тени.

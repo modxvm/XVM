@@ -81,26 +81,26 @@
     // false - отключить затемнение иконки не загрузившегося игрока.
     "darkenNotReadyIcon": true,
     // Display format for the left panel (macros allowed, see macros.txt).
-    // Формат отображения для левой панели (допускаются макроподстановки, см. macros.txt).
+    // Формат отображения для левой панели (допускаются макроподстановки, см. macros_ru.txt).
     "formatLeftNick": "<img src='xvm://res/icons/flags/{{flag|default}}.png' width='16' height='13' vspace='-2'> <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'> {{name%.15s~..}} <font alpha='#A0'>{{clan}}</font>",
     // Display format for the right panel (macros allowed, see macros.txt).
-    // Формат отображения для правой панели (допускаются макроподстановки, см. macros.txt).
+    // Формат отображения для правой панели (допускаются макроподстановки, см. macros_ru.txt).
     "formatRightNick": "<font alpha='#A0'>{{clan}}</font> {{name%.15s~..}} <img src='xvm://res/icons/xvm/xvm-user-{{xvm-user|none}}.png'> <img src='xvm://res/icons/flags/{{flag|default}}.png' width='16' height='13' vspace='-2'>",
     // Display format for the left panel (macros allowed, see macros.txt).
-    // Формат отображения для левой панели (допускаются макроподстановки, см. macros.txt).
+    // Формат отображения для левой панели (допускаются макроподстановки, см. macros_ru.txt).
     "formatLeftVehicle": "{{vehicle}}<font face='mono' size='{{xvm-stat?13|0}}'> <font color='{{c:xr}}'>{{r}}</font></font>",
     // Display format for the right panel (macros allowed, see macros.txt).
-    // Формат отображения для правой панели (допускаются макроподстановки, см. macros.txt).
+    // Формат отображения для правой панели (допускаются макроподстановки, см. macros_ru.txt).
     "formatRightVehicle": "<font face='mono' size='{{xvm-stat?13|0}}'><font color='{{c:xr}}'>{{r}}</font> </font>{{vehicle}}",
     // Extra fields. Fields are placed one above the other.
     // Дополнительные поля. Поля располагаются друг над другом.
     // Set of formats for left panel (extended format supported, see extra-field.txt)
-    // Набор форматов для левой панели (поддерживается расширенный формат, см. extra-field.txt)
+    // Набор форматов для левой панели (поддерживается расширенный формат, см. extra-field_ru.txt)
     "extraFieldsLeft": [
       ${"templates.clanIcon"}
     ],
     // Set of formats for right panel (extended format supported, see extra-field.txt).
-    // Набор форматов для правой панели (поддерживается расширенный формат, см. extra-field.txt).
+    // Набор форматов для правой панели (поддерживается расширенный формат, см. extra-field_ru.txt).
     "extraFieldsRight": [
       ${"templates.clanIcon"}
     ]

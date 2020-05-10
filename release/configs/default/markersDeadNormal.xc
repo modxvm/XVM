@@ -16,7 +16,7 @@
       "x": 0,
       "y": -67,
       // Opacity (dynamic transparency allowed, see macros.txt).
-      // Прозрачность (допускается использование динамической прозрачности, см. macros.txt).
+      // Прозрачность (допускается использование динамической прозрачности, см. macros_ru.txt).
       "alpha": 100,
       "align": "center",
       // Font options.
@@ -25,7 +25,7 @@
         "font": "$FieldFont",           // Font name     / Название
         "size": 18,                     // Font size     / Размер
         // Color (dynamic colors allowed, see macros.txt).
-        // Цвет (допускается использование динамического цвета, см. macros.txt)
+        // Цвет (допускается использование динамического цвета, см. macros_ru.txt)
         "color": null,
         "bold": false,                  // True - bold   / Жирный.
         "italic": false                 // True - italic / Курсив.
@@ -50,10 +50,10 @@
       // Расстояние, на которое отлетает урон.
       "maxRange": 40,
       // Text for normal damage (see description of macros in the macros.txt).
-      // Текст при обычном уроне (см. описание макросов в macros.txt).
+      // Текст при обычном уроне (см. описание макросов в macros_ru.txt).
       "damageMessage": "{{dmg}}",
       // Text for ammo rack explosion (see description of macros in the macros.txt).
-      // Текст при взрыве боеукладки (см. описание макросов в macros.txt).
+      // Текст при взрыве боеукладки (см. описание макросов в macros_ru.txt).
       "blowupMessage": "{{l10n:blownUp}}\n{{dmg}}"
     }
   },
@@ -91,8 +91,8 @@
       "enabled": false,                 // false - не отображать
       "x": -41,                         // положение по оси X
       "y": -33,                         // положение по оси Y
-      "alpha": 100,                     // прозрачность (допускается использование динамической прозрачности, см. macros.txt)
-      "color": null,                    // цвет основной (допускается использование динамического цвета, см. macros.txt)
+      "alpha": 100,                     // прозрачность (допускается использование динамической прозрачности, см. macros_ru.txt)
+      "color": null,                    // цвет основной (допускается использование динамического цвета, см. macros_ru.txt)
       "lcolor": null,                   // цвет дополнительный (для градиента)
       "width": 80,                      // ширина полосы здоровья
       "height": 12,                     // высота полосы здоровья
@@ -137,10 +137,10 @@
       "x": 6,
       "y": -65,
       // Opacity (dynamic transparency allowed, see macros.txt).
-      // Прозрачность (допускается использование динамической прозрачности, см. macros.txt).
+      // Прозрачность (допускается использование динамической прозрачности, см. macros_ru.txt).
       "alpha": 100,
       // Color (dynamic colors allowed, see macros.txt).
-      // Цвет (допускается использование динамического цвета, см. macros.txt).
+      // Цвет (допускается использование динамического цвета, см. macros_ru.txt).
       "color": null,
       // Color intensity from 0 to 100. The default is 0 (off).
       // Интенсивность цвета от 0 до 100. По умолчанию 0, т.е. выключено.
@@ -180,7 +180,7 @@
       "alpha": 100       // Opacity                / Прозрачность.
     },
     // Block of text fields (extended format supported, see extra-field.txt).
-    // Блок текстовых полей (поддерживается расширенный формат, см. extra-field.txt).
+    // Блок текстовых полей (поддерживается расширенный формат, см. extra-field_ru.txt).
     "textFields": []
   },
   // Settings for enemies.
@@ -278,7 +278,7 @@
       "alpha": 100
     },
     // Block of text fields (extended format supported, see extra-field.txt).
-    // Блок текстовых полей (поддерживается расширенный формат, см. extra-field.txt).
+    // Блок текстовых полей (поддерживается расширенный формат, см. extra-field_ru.txt).
     "textFields": []
   }
 }

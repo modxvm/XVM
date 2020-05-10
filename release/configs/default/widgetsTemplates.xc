@@ -3,12 +3,14 @@
  * Шаблоны виджетов.
  */
 {
+  // Clock widget in hangar.
+  // Виджет часов в ангаре.
   "clock": {
-    // Show clock in hangar.
-    // Показывать часы в ангаре.
+    // true - show widget.
+    // true - показывать виджет.
     "enabled": true,
-    // layer - "bottom", "normal" (default), "top".
-    // слой - "bottom", "normal" (по-умолчанию), "top".
+    // Layer - "bottom", "normal" (default), "top".
+    // Слой - "bottom", "normal" (по-умолчанию), "top".
     "layer": "normal",
     "type": "extrafield",
     "formats": [
@@ -53,6 +55,8 @@
       }
     ]
   },
+  // Statistics widget in hangar.
+  // Виджет статистики в ангаре.
   "statistics": {
     "enabled": true,
     "layer": "normal",

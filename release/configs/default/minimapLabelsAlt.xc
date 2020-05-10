@@ -7,7 +7,7 @@
   // Текстовые поля юнитов на миникарте.
   "labels": {
     // Format set (extended format supported, see extra-field.txt).
-    // Набор форматов (поддерживается расширенный формат, см. extra-field.txt).
+    // Набор форматов (поддерживается расширенный формат, см. extra-field_ru.txt).
     "formats": [
       ${ "minimapLabelsTemplates.xc":"def.vtypeSpotted" },
       ${ "minimapLabelsTemplates.xc":"def.vehicleSpottedAlt" },
