@@ -45,7 +45,7 @@ patch_2_asmfunc PROC
     movzx   ecx, al         ; Move with Zero-Extend
     mov     rax, [rdx+r8*8]
     mov     rbp, [rax+rcx*8]
-    
+
     jmp patch_2_returnaddr
 
     ;content on which we are returned

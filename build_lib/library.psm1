@@ -98,7 +98,7 @@ function Build-PythonDirectory($FileDirectory, $OutputDirectory, [Switch] $UseHa
         $refpath = Resolve-Path $file.FullName -Relative
         $outdir = Split-Path $(Join-Path -Path $dir_out -ChildPath $refpath) -Parent
 
-        Build-PythonFile -FilePath $file.FullName -OutputDirectory $outdir 
+        Build-PythonFile -FilePath $file.FullName -OutputDirectory $outdir
     }
 
     Pop-Location
@@ -407,7 +407,7 @@ function Find-Python([Switch] $Required)
     $appNames = @(
         "python2.7",
         "python2",
-        
+
         "C:\Python27\python.exe",,
         "C:\Python27_32\python.exe",
         "C:\Python27_64\python.exe",
@@ -415,7 +415,7 @@ function Find-Python([Switch] $Required)
         "C:\Python\27\python.exe"
         "C:\Python\27_32\python.exe",
         "C:\Python\27_64\python.exe",
-        
+
         "python"
     )
 
