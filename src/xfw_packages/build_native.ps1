@@ -26,7 +26,7 @@ $version = $version_str -replace "\.",","
 $xfwnative_url="https://ci.appveyor.com/api/buildjobs/llrln8cg7dplif9l/artifacts/~output%2Fdeploy%2Fcom.modxvm.xfw.native_2.0.0-devel.zip"
 
 $projects_32=@(
-   "xfw_filewatcher"
+    "xfw_filewatcher"
     "xfw_fonts"
     "xfw_mutex"
     "xfw_ping"

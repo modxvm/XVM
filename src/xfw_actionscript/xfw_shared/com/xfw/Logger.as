@@ -67,7 +67,7 @@ package com.xfw
 
             if(error.message){
                 add("[ERROR]" + error.message);
-            }  
+            }
 
             var stackTrace:String = error.getStackTrace();
             if(stackTrace){

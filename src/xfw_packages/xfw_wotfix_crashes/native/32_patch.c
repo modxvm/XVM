@@ -5,7 +5,7 @@ extern int bugfix4_apply();
 
 
 int patch_get_count() {
-	return 4;
+    return 4;
 }
 
 int patch_apply(int i) {
