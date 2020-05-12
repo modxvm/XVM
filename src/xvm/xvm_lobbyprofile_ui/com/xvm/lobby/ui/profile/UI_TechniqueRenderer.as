@@ -96,6 +96,10 @@ package com.xvm.lobby.ui.profile
                     {
                         vehicleTF.textColor = XfwConst.UICOLOR_GOLD;
                     }
+                    else if (vdata.special == 1)
+                    {
+                        vehicleTF.textColor = XfwConst.UICOLOR_SPECIAL;
+                    }
                 }
 
                 if (Config.networkServicesSettings.statAwards)

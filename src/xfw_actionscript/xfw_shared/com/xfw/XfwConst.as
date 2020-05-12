@@ -15,6 +15,7 @@ package com.xfw
         public static const UICOLOR_DISABLED:uint = 0x4C4A47;
         public static const UICOLOR_GOLD:uint = 0xFFC133;
         public static const UICOLOR_GOLD2:uint = 0xCBAD78;
+        public static const UICOLOR_SPECIAL:uint = 0xFE7903;
         public static const UICOLOR_BLUE:uint = 0x408CCF;
 
         public static const UICOLOR_TEXT1:uint = 0xE1DDCE;
