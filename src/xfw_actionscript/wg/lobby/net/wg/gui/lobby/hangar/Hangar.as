@@ -65,7 +65,9 @@ package net.wg.gui.lobby.hangar
 
         protected static const INVALIDATE_CAROUSEL_SIZE:String = "InvalidateCarouselSize";
 
-        private static const ENTRY_CONT_POSITION_INVALID:String = "entryContPositionInvalid";
+        protected static const INVALIDATE_AMMUNITION_PANEL_SIZE:String = "InvalidateAmmunitionPanelSize";
+
+        private static const ENTRY_CONT_POSITION_INVALID:String = "enrtyContPositionInvalid";
 
         private static const PARAMS_POSITION_INVALID:String = "paramsPositionInvalid";
 
@@ -360,8 +362,8 @@ package net.wg.gui.lobby.hangar
             this._gameInputMgr.clearKeyHandler(Keyboard.F1,KeyboardEvent.KEY_DOWN,this.showLayoutHandler);
             this._gameInputMgr.clearKeyHandler(Keyboard.F1,KeyboardEvent.KEY_UP,this.closeLayoutHandler);
             this.crewOperationBtn.removeEventListener(ButtonEvent.CLICK,this.onCrewOperationBtnClickHandler);
-            this.ammunitionPanel.removeEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onAmmunitionPanelRequestFocusHandler);
             this.ammunitionPanel.removeEventListener(Event.RESIZE,this.onAmmunitionPanelResizeHandler);
+            this.ammunitionPanel.removeEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onAmmunitionPanelRequestFocusHandler);
             this.vehResearchPanel.removeEventListener(Event.RESIZE,this.onVehResearchPanelResizeHandler);
             this.teaser.removeEventListener(TeaserEvent.TEASER_CLICK,this.onTeaserTeaserClickHandler);
             this.teaser.removeEventListener(TeaserEvent.HIDE,this.onTeaserHideHandler);
@@ -443,8 +445,8 @@ package net.wg.gui.lobby.hangar
             this.crewOperationBtn.helpText = LOBBY_HELP.HANGAR_CREWOPERATIONBTN;
             this.crewOperationBtn.addEventListener(ButtonEvent.CLICK,this.onCrewOperationBtnClickHandler,false,0,true);
             this.crewOperationBtn.iconSource = RES_ICONS.MAPS_ICONS_TANKMEN_CREW_CREWOPERATIONS;
-            this.ammunitionPanel.addEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onAmmunitionPanelRequestFocusHandler);
             this.ammunitionPanel.addEventListener(Event.RESIZE,this.onAmmunitionPanelResizeHandler);
+            this.ammunitionPanel.addEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onAmmunitionPanelRequestFocusHandler);
             this.switchModePanel.addEventListener(ComponentEvent.SHOW,this.onSwitchModePanelShowHandler);
             this.switchModePanel.addEventListener(ComponentEvent.HIDE,this.onSwitchModePanelHideHandler);
             this.vehResearchPanel.addEventListener(Event.RESIZE,this.onVehResearchPanelResizeHandler);
@@ -468,7 +470,7 @@ package net.wg.gui.lobby.hangar
                 this.crew.enabled = this._crewEnabled;
                 this.crewOperationBtn.enabled = this._crewEnabled;
             }
-            var _loc1_:Boolean = isInvalid(ENTRY_CONT_POSITION_INVALID);
+            var _loc1_:Boolean = isInvalid(ENTRY_CONT_POSITION_INVALID,INVALIDATE_AMMUNITION_PANEL_SIZE);
             if(isInvalid(INVALIDATE_CAROUSEL_SIZE))
             {
                 this.carousel.visible = true;
@@ -1175,14 +1177,14 @@ package net.wg.gui.lobby.hangar
             this.hideTeaserAnim();
         }
 
+        private function onAmmunitionPanelResizeHandler(param1:Event) : void
+        {
+            invalidate(INVALIDATE_AMMUNITION_PANEL_SIZE);
+        }
+
         private function onAmmunitionPanelRequestFocusHandler(param1:FocusRequestEvent) : void
         {
             setFocus(param1.focusContainer.getComponentForFocus());
-        }
-
-        private function onAmmunitionPanelResizeHandler(param1:Event) : void
-        {
-            invalidate(ENTRY_CONT_POSITION_INVALID);
         }
 
         private function onCrewOperationBtnClickHandler(param1:Event) : void

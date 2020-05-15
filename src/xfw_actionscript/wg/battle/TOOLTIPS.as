@@ -175,8 +175,6 @@ package
 
         public static const TURNOFFCOMBATCHAT:String = "#tooltips:turnOffCombatChat";
 
-        public static const DISABLECOMMONCHAT:String = "#tooltips:disableCommonChat";
-
         public static const SHOWMARKSONGUN:String = "#tooltips:showMarksOnGun";
 
         public static const C11NHISTORICALLYACCURATE:String = "#tooltips:c11nHistoricallyAccurate";
@@ -786,10 +784,6 @@ package
         public static const TURNOFFCOMBATCHAT_HEADER:String = "#tooltips:turnOffCombatChat/header";
 
         public static const TURNOFFCOMBATCHAT_BODY:String = "#tooltips:turnOffCombatChat/body";
-
-        public static const DISABLECOMMONCHAT_HEADER:String = "#tooltips:disableCommonChat/header";
-
-        public static const DISABLECOMMONCHAT_BODY:String = "#tooltips:disableCommonChat/body";
 
         public static const HANGARCAMDROPDOWN_HEADER:String = "#tooltips:hangarCamDropdown/header";
 
