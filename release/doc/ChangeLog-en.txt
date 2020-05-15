@@ -1,4 +1,8 @@
-﻿XVM-8.5.2:
+﻿XVM-8.5.3:
+  [GENERAL]
+  * XFW.Native 2.0.1
+
+XVM-8.5.2:
   [GENERAL]
   * World of Tanks 1.9.0.3
 
