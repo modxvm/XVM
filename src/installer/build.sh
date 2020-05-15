@@ -123,12 +123,6 @@ build_deploy(){
     popd >/dev/null
 }
 
-build_sign(){
-    pushd "$XVMINST_ROOT_PATH/output" >/dev/null
-    sign_file ./setup_xvm.exe
-    popd >/dev/null
-}
-
 main(){
     detect_os
     detect_wine
@@ -146,10 +140,6 @@ main(){
     prepare_languages
 
     build_run
-
-    if [ "$XVMBUILD_SIGN" != "" ]; then
-        build_sign
-    fi
 
     build_deploy
     clean_directories

@@ -165,12 +165,6 @@ pack_package()
     popd > /dev/null
 }
 
-sign()
-{
-  if [ "$XVMBUILD_SIGN" != "" ]; then
-    sign_files_in_directory "$outputpath"
-  fi
-}
 
 build_package()
 {
@@ -200,8 +194,6 @@ build_package()
   build_python  "$package_dir/python" "$output_dir_xfwpackage/python"
   build_python_empty "$output_dir_xfwpackage"
   copy_files "$package_dir/python_libraries" "$output_dir_xfwlibraries" "*.pem"
-
-  #sign           $1
 
   pack_package  "$output_dir" "$wotmodpath/$wotmod_filename"
 

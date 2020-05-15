@@ -1,4 +1,7 @@
 ﻿XVM-8.5.2:
+  [GENERAL]
+  * World of Tanks 1.9.0.3
+
   [HANGAR]
   * added option:
       "hangar"/"showSE20Banner" - show banner "Road to Berlin" in the hangar
