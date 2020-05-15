@@ -71,7 +71,7 @@ package net.wg.gui.login.impl
 
         private static const COPYRIGHT_OFFSET_Y:Number = 44;
 
-        private static const WARNING_OFFSET_Y:Number = 68;
+        private static const WARNING_OFFSET_Y:Number = 48;
 
         private static const STAGE_RESIZED:String = "stageResized";
 
