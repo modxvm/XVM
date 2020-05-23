@@ -62,6 +62,7 @@ class XVM_COMMAND(object):
     SAVE_SETTINGS = "xvm.save_settings"
     IS_IN_BOOTCAMP = "xvm.is_in_bootcamp"
     MINIMAP_CLICK = "xvm.minimap_click"
+    OPEN_WEB_BROWSER = "xvm.open_web_browser"
     AS_ON_KEY_EVENT = "xvm.as.on_key_event"
     AS_ON_UPDATE_STAGE = "xvm.as.on_update_stage"
     AS_DOSSIER = "xvm.as.dossier"

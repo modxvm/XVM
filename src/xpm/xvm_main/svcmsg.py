@@ -45,7 +45,8 @@ def tokenUpdated():
     else:
         type = SystemMessages.SM_TYPE.Error
         msg += '{{l10n:token/unknown_status}}\n%s' % status
-    msg += '</textformat>'
+    msg += '</textformat>\n'
+    msg += _getXvmMessageFooter()
 
     g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.SYSTEM_MESSAGE, {'msg':msg, 'type':type}))
 
@@ -83,7 +84,6 @@ def _getXvmMessageHeader():
     msg += _getVersionText() + '\n'
     return msg
 
-
 def _getVersionText():
     ver = config.verinfo.ver
     cur = config.get('__xvmVersion')
@@ -116,3 +116,6 @@ If you are testing XVM, you can ignore this message.
 <b>If you're just a player and not a tester of XVM, please use a stable version instead of nightly builds. Download the stable version from the official website of XVM: <a href='#XVM_SITE_DL#'>https://modxvm.com</a></b>
 """
     return msg
+
+def _getXvmMessageFooter():
+    return '\n{{l10n:stats_link/svcmsg:%s}}\n\n' % (utils.getAccountDBID())

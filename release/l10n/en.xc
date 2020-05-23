@@ -212,6 +212,11 @@
     "token/time_left_warn": "<tab/><font color='#EEEEEE'>{0}d. {1}h. {2}m.</font>\n<tab/><a href='#XVM_SITE#'>Prolong</a>",
     "token/unknown_status": "Unknown status",
 
+    // Stats link
+    "stats_link/svcmsg": "<a href='event:https://stats.modxvm.com/en/stats/players/{0}#svcmsg'><font color='#E2D2A2'>Your stats on the XVM website</font></a>",
+    "stats_link/profile_self": "<a href='event:https://stats.modxvm.com/en/stats/players/{0}#profile'><font color='#E2D2A2'><u>Your stats on the XVM website</u></font></a>",
+    "stats_link/profile": "<a href='event:https://stats.modxvm.com/en/stats/players/{0}#profile'><font color='#E2D2A2'><u>Player stats on the XVM website</u></font></a>",
+
     // Lobby
     "lobby/header/gold_locked_tooltip": "Gold is locked",
     "lobby/header/gold_unlocked_tooltip": "Gold is unlocked",

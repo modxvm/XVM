@@ -11,6 +11,7 @@ package com.xvm.lobby.ui.profile.components
     import com.xvm.types.dossier.*;
     import com.xvm.types.stat.*;
     import flash.display.*;
+    import flash.events.TextEvent;
     import flash.text.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
@@ -24,6 +25,7 @@ package com.xvm.lobby.ui.profile.components
 
         public var ratingTF:TextField;
         public var winsToPercentGlobalTF:TextField;
+        public var statsLinkTF:TextField;
         public var winsToPercentTF:TextField;
 
         // ENTRY POINTS
@@ -139,21 +141,44 @@ package com.xvm.lobby.ui.profile.components
 
         private function createControls():void
         {
-            // rating
+            var offsetY: Number = 0;
+
             if (tech.accountDBID == 0)
             {
                 page.stackComponent.viewRatingBtn.y = -30;
+
+                offsetY = 18;
+                proxy.scrollPane.y += 36;
+                proxy.scrollPane.height -= 36;
+                proxy.scrollBar.y += 36;
+                proxy.scrollBar.height -= 36;
             }
+            else
+            {
+                proxy.scrollPane.y += 18;
+                proxy.scrollPane.height -= 18;
+                proxy.scrollBar.y += 18;
+                proxy.scrollBar.height -= 18;
+            }
+
             ratingTF = _createTextField(210, -2, 400, 200, 14);
             proxy.addChild(ratingTF);
 
-            proxy.scrollPane.y += 18;
-            proxy.scrollPane.height -= 18;
-            proxy.scrollBar.y += 18;
-            proxy.scrollBar.height -= 18;
-
             winsToPercentGlobalTF = _createTextField(210, 48, 271, 25, 14);
             proxy.addChild(winsToPercentGlobalTF);
+
+            statsLinkTF = _createTextField(210, 48 + offsetY, 271, 25, 14);
+            proxy.addChild(statsLinkTF);
+            App.utils.styleSheetManager.setLinkStyle(statsLinkTF);
+            statsLinkTF.addEventListener(TextEvent.LINK, onSiteLinkClickedHandler, false, 0, true);
+            statsLinkTF.mouseEnabled = true;
+            if (tech.accountDBID == 0) {
+                statsLinkTF.htmlText = Locale.get("{{l10n:stats_link/profile_self:" + Xfw.cmd(XvmCommands.GET_PLAYER_ID) + "}}");
+            }
+            else
+            {
+                statsLinkTF.htmlText = Locale.get("{{l10n:stats_link/profile:" + tech.accountDBID + "}}");
+            }
 
             winsToPercentTF = _createTextField(120, 65, 200, 25, 14);
             Sprite(proxy.scrollPane.target).addChild(winsToPercentTF);
@@ -197,7 +222,7 @@ package com.xvm.lobby.ui.profile.components
             else
             {
                 var result:Array = [];
-                var dt:String = isNaN(data.stat.ts) ? Locale.get("unknown") : XfwUtils.FormatDate("Y-m-d", new Date(data.stat.ts));
+                var dt:String = isNaN(data.stat.ts) ? Locale.get("unknown") : XfwUtils.FormatDate("d.m.Y", new Date(data.stat.ts));
 
                 result.push(size(Locale.get("General stats") + " (" + color(dt, 0xCCCCCC) + ")", 13) + "\n");
 
@@ -278,6 +303,11 @@ package com.xvm.lobby.ui.profile.components
             }
 
             return info.join("");
+        }
+
+        private function onSiteLinkClickedHandler(e:TextEvent) : void
+        {
+            Xfw.cmd(XvmCommands.OPEN_WEB_BROWSER, e.text);
         }
     }
 }
