@@ -104,7 +104,7 @@
     "Avg level": "Средний уровень",
     "WTR": "WTR",
     "WN8": "WN8",
-    "EFF": "РЭ",
+    "EFF": "EFF",
     "WGR": "ЛРИ",
     "updated": "обновлено",
     "toWithSpaces": " до ",
