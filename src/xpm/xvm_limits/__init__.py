@@ -25,7 +25,6 @@ from gui.Scaleform.daapi.view.lobby.techtree.settings import UNKNOWN_VEHICLE_LEV
 from gui.Scaleform.daapi.view.lobby.techtree.techtree_page import TechTree
 from gui.Scaleform.daapi.view.lobby.techtree.research_page import Research
 from gui.Scaleform.daapi.view.lobby.hangar.TechnicalMaintenance import TechnicalMaintenance
-from gui.Scaleform.daapi.view.lobby.store.Shop import Shop
 from gui.Scaleform.daapi.view.lobby.recruitWindow.RecruitWindow import RecruitWindow
 from gui.Scaleform.daapi.view.lobby.PersonalCase import PersonalCase
 from gui.Scaleform.daapi.view.lobby.exchange.ExchangeFreeToTankmanXpWindow import ExchangeFreeToTankmanXpWindow
@@ -53,7 +52,6 @@ crystal_enable = True
 TechTree_handler = None
 Research_handler = None
 TechnicalMaintenance_handler = None
-Shop_handler = None
 RecruitWindow_handler = None
 PersonalCase_handlers = []
 ExchangeFreeToTankmanXpWindow_handlers = []
@@ -96,7 +94,6 @@ def onXfwCommand(cmd, *args):
             handlersInvalidate('invalidateGold()', TechTree_handler, Research_handler)
             handlersInvalidate('onGoldChange(0)', TechnicalMaintenance_handler)
             handlersInvalidate('onGoldChange(0)', RecruitWindow_handler)
-            handlersInvalidate('_update()', Shop_handler)
             handlersInvalidate("onClientChanged({'stats': 'gold'})", PersonalCase_handlers)
             handlersInvalidate("_MainView__setBuyingPanelData()", MainView_handler)
             return (None, True)
@@ -110,7 +107,6 @@ def onXfwCommand(cmd, *args):
         elif cmd == XVM_LIMITS_COMMAND.SET_CRYSTAL_LOCK_STATUS:
             global crystal_enable
             crystal_enable = not args[0]
-            handlersInvalidate('_update()', Shop_handler)
             handlersInvalidate("onClientChanged({'stats': 'crystal'})", PersonalCase_handlers)
             return (None, True)
     except Exception, ex:
@@ -204,16 +200,6 @@ def TechnicalMaintenance_populate(self, *args, **kwargs):
 def TechnicalMaintenance_dispose(self, *args, **kwargs):
     global TechnicalMaintenance_handler
     TechnicalMaintenance_handler = None
-
-@registerEvent(Shop, '_populate')
-def Shop_populate(self, *args, **kwargs):
-    global Shop_handler
-    Shop_handler = self
-
-@registerEvent(Shop, '_dispose')
-def Shop_dispose(self, *args, **kwargs):
-    global Shop_handler
-    Shop_handler = None
 
 @registerEvent(RecruitWindow, '_populate')
 def RecruitWindow_populate(self, *args, **kwargs):
