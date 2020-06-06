@@ -136,7 +136,7 @@ def _TankCarouselFilterPopover_getInitialVO(base, self, filters, xpRateMultiplie
 
 @overrideClassMethod(TankCarouselFilterPopover, '_generateMapping')
 def _TankCarouselFilterPopover_generateMapping(base, cls, hasRented, hasEvent, hasRoles):
-    mapping = base(hasRented, hasEvent)
+    mapping = base(hasRented, hasEvent, hasRoles)
     is_igr = PREFS.IGR in mapping[_SECTION.SPECIALS]
     mapping[_SECTION.SPECIALS] = [
         PREFS.PREMIUM, PREFS.SPECIAL, PREFS.NORMAL, PREFS.ELITE, PREFS.NON_ELITE,
