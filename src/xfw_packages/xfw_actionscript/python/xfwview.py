@@ -133,8 +133,8 @@ class _XfwComponent(BaseDAAPIComponent):
                     args[0],
                     type=SystemMessages.SM_TYPE.of(args[1]))
             else:
-                handlers = g_eventBus._EventBus__scopes[EVENT_BUS_SCOPE.DEFAULT][XFW_COMMAND.XFW_CMD]
-                for handler in handlers.copy():
+                handlers = g_eventBus._EventBus__handlers[EVENT_BUS_SCOPE.DEFAULT][XFW_COMMAND.XFW_CMD]
+                for handler in handlers:
                     try:
                         (result, status) = handler(cmd, *args)
                         if status:
