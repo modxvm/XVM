@@ -8,7 +8,6 @@ package com.xvm.types.cfg
 
     public dynamic class CTextsBattleType implements ICloneable
     {
-        public var bob:String;
         public var bootcamp:String;
         public var clan:String;
         public var cybersport:String;
@@ -18,6 +17,7 @@ package com.xvm.types.cfg
         public var epic_random_training:String;
         public var event_battles:String;
         public var event_battles_2:String;
+        public var event_random:String;
         public var fallout_classic:String;
         public var fallout_multiteam:String;
         public var fort_battle_2:String;

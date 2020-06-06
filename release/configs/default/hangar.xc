@@ -34,9 +34,6 @@
     // true - show banner "World of Tanks' 10th Anniversary" in the hangar.
     // true - показывать баннер "Десятилетие World of Tanks" в ангаре.
     "showTenYearsBanner": true,
-    // true - show banner "Road to Berlin" in the hangar.
-    // true - показывать баннер "Путь до Берлина" в ангаре.
-    "showSE20Banner": true,
     // Consumables panel - show/hide the number of consumables and directives.
     // Панель снаряжения - показывать/прятать количество снаряжения и инструкций.
     "equipmentPanel": {
