@@ -8,7 +8,6 @@ from skeletons.gui.shared import IItemsCache
 import gui.shared.tooltips.shell as tooltips_shell
 from gui.shared.tooltips import formatters
 from gui.shared.formatters import text_styles
-from gui.Scaleform.daapi.view.lobby.store.StoreView import StoreView
 from gui.Scaleform.daapi.view.common.vehicle_carousel.carousel_data_provider import CarouselDataProvider
 from gui.Scaleform.daapi.view.lobby.ModuleInfoWindow import ModuleInfoWindow
 
@@ -80,9 +79,10 @@ def updateMyVehicles():
     myVehicles = {v.userName for v in vehicles.itervalues() if v.invID >= 0}
 
 
-@registerEvent(StoreView, '_initialize')
-def StoreView_initialize(self, ctx=None):
-    updateMyVehicles()
+#TODO: 1.9.1
+#@registerEvent(StoreView, '_initialize')
+#def StoreView_initialize(self, ctx=None):
+#    updateMyVehicles()
 
 
 @registerEvent(CarouselDataProvider, 'buildList')
