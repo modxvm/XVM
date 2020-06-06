@@ -1,4 +1,10 @@
 ﻿XVM-8.5.4:
+  [GENERAL]
+  * World of Tanks 1.9.1.0
+
+  [HANGAR]
+  * removed option:
+      "hangar"/"showSE20Banner"
 
 XVM-8.5.3:
   [GENERAL]

@@ -134,9 +134,9 @@
       // Tournament (event).
       // Турнир (ивент).
       "tournament_event": "",
-      // «Brawl» mode.
-      // Режим «Схватка».
-      "bob": ""
+      // ?.
+      // ?.
+      "event_random": ""
     },
     // Text for {{topclan}} macro.
     // Текст для макроса {{topclan}}.

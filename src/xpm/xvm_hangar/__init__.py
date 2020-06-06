@@ -257,10 +257,3 @@ def updateTenYearsCountdownEntryPointVisibility(base, self):
         self.as_updateEventEntryPointS(HANGAR_ALIASES.TEN_YEARS_COUNTDOWN_ENTRY_POINT_INJECT, False)
         return
     base(self)
-
-# hide display banner - Road to Berlin
-@registerEvent(Hangar, '_Hangar__updateEvent')
-def updateEvent(self):
-    if not config.get('hangar/showSE20Banner', True):
-        self.as_updateEventEntryPointS(HANGAR_ALIASES.SE20_BANNER, False)
-        return
