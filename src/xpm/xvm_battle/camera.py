@@ -72,9 +72,9 @@ def _ArcadeCamera_create(base, self, pivotPos, onChangeControlMode = None, postm
     if config.get('battle/camera/enabled'):
         mode = 'arcade' if not postmortemMode else 'postmortem'
         c = config.get('battle/camera/%s' % mode)
-        cfg = self._ArcadeCamera__cfg
-        bcfg = self._ArcadeCamera__baseCfg
-        ucfg = self._ArcadeCamera__userCfg
+        cfg = self._cfg
+        bcfg = self._baseCfg
+        ucfg = self._userCfg
         dcfg = self._ArcadeCamera__dynamicCfg
 
         if not c['shotRecoilEffect']:
@@ -102,7 +102,7 @@ def _ArcadeCamera_enable(self, *args, **kwargs):
     #debug('_ArcadeCamera_enable: {}'.format(self._ArcadeCamera__postmortemMode))
     if config.get('battle/camera/enabled'):
         if self._ArcadeCamera__postmortemMode:
-            camDist = self._ArcadeCamera__cfg.get('startDist', None)
+            camDist = self._cfg.get('startDist', None)
             if camDist:
                 self.setCameraDistance(camDist)
 
@@ -111,7 +111,7 @@ def _SniperCamera_create(base, self, onChangeControlMode = None):
     #debug('_SniperCamera_create')
     if config.get('battle/camera/enabled'):
         c = config.get('battle/camera/sniper')
-        cfg = self._SniperCamera__cfg
+        cfg = self._cfg
         dcfg = self._SniperCamera__dynamicCfg
 
         if not c['shotRecoilEffect']:
@@ -127,8 +127,8 @@ def _SniperCamera_create(base, self, onChangeControlMode = None):
 
     base(self, onChangeControlMode)
 
-@overrideMethod(SniperCamera, '_SniperCamera__onSettingsChanged')
-def _SniperCamera__onSettingsChanged(base, self, diff):
+@overrideMethod(SniperCamera, '_handleSettingsChange')
+def _SniperCamera_handleSettingsChange(base, self, diff):
     if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/zooms'):
         diff['increasedZoom'] = True
     base(self, diff)
@@ -141,8 +141,8 @@ def _SniperCamera_enable(base, self, targetPos, saveZoom):
         if zoom is not None:
             saveZoom = True
         else:
-            zoom = self._SniperCamera__cfg['zoom']
-        self._SniperCamera__cfg['zoom'] = utils.takeClosest(self._SniperCamera__cfg['zooms'], zoom)
+            zoom = self._cfg['zoom']
+        self._cfg['zoom'] = utils.takeClosest(self._cfg['zooms'], zoom)
 
     base(self, targetPos, saveZoom)
     _sendSniperCameraFlash(True, self._SniperCamera__zoom)
@@ -182,7 +182,7 @@ def _StrategicCamera_create(base, self, onChangeControlMode = None):
     #debug('_StrategicCamera_create')
     if config.get('battle/camera/enabled'):
         c = config.get('battle/camera/strategic')
-        cfg = self._StrategicCamera__cfg
+        cfg = self._cfg
         dcfg = self._StrategicCamera__dynamicCfg
 
         if not c['shotRecoilEffect']:
