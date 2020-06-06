@@ -25,7 +25,6 @@ from gui.Scaleform.daapi.view.lobby.techtree.settings import UNKNOWN_VEHICLE_LEV
 from gui.Scaleform.daapi.view.lobby.techtree.techtree_page import TechTree
 from gui.Scaleform.daapi.view.lobby.techtree.research_page import Research
 from gui.Scaleform.daapi.view.lobby.hangar.TechnicalMaintenance import TechnicalMaintenance
-from gui.Scaleform.daapi.view.lobby.PremiumWindow import PremiumWindow
 from gui.Scaleform.daapi.view.lobby.store.Shop import Shop
 from gui.Scaleform.daapi.view.lobby.recruitWindow.RecruitWindow import RecruitWindow
 from gui.Scaleform.daapi.view.lobby.PersonalCase import PersonalCase
@@ -54,7 +53,6 @@ crystal_enable = True
 TechTree_handler = None
 Research_handler = None
 TechnicalMaintenance_handler = None
-PremiumWindow_handler = None
 Shop_handler = None
 RecruitWindow_handler = None
 PersonalCase_handlers = []
@@ -97,7 +95,6 @@ def onXfwCommand(cmd, *args):
             gold_enable = not args[0]
             handlersInvalidate('invalidateGold()', TechTree_handler, Research_handler)
             handlersInvalidate('onGoldChange(0)', TechnicalMaintenance_handler)
-            handlersInvalidate('_PremiumWindow__onUpdateHandler()', PremiumWindow_handler)
             handlersInvalidate('onGoldChange(0)', RecruitWindow_handler)
             handlersInvalidate('_update()', Shop_handler)
             handlersInvalidate("onClientChanged({'stats': 'gold'})", PersonalCase_handlers)
@@ -207,16 +204,6 @@ def TechnicalMaintenance_populate(self, *args, **kwargs):
 def TechnicalMaintenance_dispose(self, *args, **kwargs):
     global TechnicalMaintenance_handler
     TechnicalMaintenance_handler = None
-
-@registerEvent(PremiumWindow, '_populate')
-def PremiumWindow_populate(self, *args, **kwargs):
-    global PremiumWindow_handler
-    PremiumWindow_handler = self
-
-@registerEvent(PremiumWindow, '_dispose')
-def PremiumWindow_dispose(self, *args, **kwargs):
-    global PremiumWindow_handler
-    PremiumWindow_handler = None
 
 @registerEvent(Shop, '_populate')
 def Shop_populate(self, *args, **kwargs):
