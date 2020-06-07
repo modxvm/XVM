@@ -101,7 +101,7 @@ package net.wg.gui.lobby.questsWindow.components
 
         private function onLoaderRollOverHandler(param1:MouseEvent) : void
         {
-            this._toolTipMgr.showSpecial(TOOLTIPS_CONSTANTS.TECH_CUSTOMIZATION_ITEM,null,this._data.intCD,false);
+            this._toolTipMgr.showSpecial(TOOLTIPS_CONSTANTS.TECH_CUSTOMIZATION_ITEM,null,this._data.intCD,-1);
         }
 
         private function onLoaderRollOutHandler(param1:MouseEvent) : void

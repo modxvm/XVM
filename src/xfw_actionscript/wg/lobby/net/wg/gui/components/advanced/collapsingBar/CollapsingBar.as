@@ -117,6 +117,7 @@ package net.wg.gui.components.advanced.collapsingBar
             }
             this.buttonGroup.collapseAll(this._isBarCollapsed);
             invalidate(InvalidationType.LAYOUT,SELECT_INVALID);
+            validateNow();
         }
 
         public function updateStage(param1:int, param2:int) : void
@@ -140,13 +141,12 @@ package net.wg.gui.components.advanced.collapsingBar
 
         protected function applyDataToButton(param1:ResizableButton, param2:CollapsingBarButtonVO) : void
         {
-            var _loc3_:ResizableButton = ResizableButton(param1);
-            _loc3_.toggle = true;
-            _loc3_.allowDeselect = false;
-            _loc3_.mouseEnabledOnDisabled = true;
-            _loc3_.tooltip = param2.tooltip;
-            _loc3_.data = param2;
-            _loc3_.label = param2.label;
+            param1.toggle = true;
+            param1.allowDeselect = false;
+            param1.mouseEnabledOnDisabled = true;
+            param1.tooltip = param2.tooltip;
+            param1.data = param2;
+            param1.label = param2.label;
         }
 
         protected function calculateExpandedSize(param1:ResizableButton) : Point

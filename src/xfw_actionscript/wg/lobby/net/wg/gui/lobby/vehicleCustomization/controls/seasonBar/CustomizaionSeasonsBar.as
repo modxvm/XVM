@@ -43,7 +43,8 @@ package net.wg.gui.lobby.vehicleCustomization.controls.seasonBar
         override public function handleInput(param1:InputEvent) : void
         {
             super.handleInput(param1);
-            if(param1.details.code != Keyboard.ESCAPE)
+            var _loc2_:Number = param1.details.code;
+            if(_loc2_ != Keyboard.ESCAPE && _loc2_ != Keyboard.LEFT && _loc2_ != Keyboard.RIGHT)
             {
                 param1.handled = true;
             }

@@ -29,7 +29,11 @@ package net.wg.data.constants.generated
 
         public static const TOOLTIP_TEXT_BETWEEN_LINE_BLOCK_LINKAGE:String = "TextBetweenLineBlockUI";
 
-        public static const TOOLTIP_IMAGE_BLOCK_NON_HISTORICAL_LINKAGE:String = "ImageBlockNonHistoricalUI";
+        public static const TOOLTIP_IMAGE_BLOCK_NON_HISTORICAL_LINKAGE:String = "CustomizationImageBlockUI";
+
+        public static const TOOLTIP_IMAGE_TEXT_BLOCK_PROGRESSIVE_LINKAGE:String = "ImageTextBlockProgressiveUI";
+
+        public static const TOOLTIP_CUSTOMIZATION_ITEM_PROPERTY_BLOCK_LINKAGE:String = "CustomizationItemPropertyBlockUI";
 
         public static const TOOLTIP_SALE_TEXT_PARAMETER_BLOCK_LINKAGE:String = "SaleTextParameterBlockUI";
 

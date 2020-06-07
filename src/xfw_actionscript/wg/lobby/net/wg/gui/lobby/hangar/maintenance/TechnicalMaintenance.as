@@ -7,7 +7,6 @@ package net.wg.gui.lobby.hangar.maintenance
     import net.wg.gui.components.controls.IconText;
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.components.controls.DynamicScrollingListEx;
-    import flash.display.MovieClip;
     import net.wg.gui.components.controls.AlertIco;
     import scaleform.clik.controls.ButtonGroup;
     import net.wg.gui.lobby.components.maintenance.data.MaintenanceVO;
@@ -35,17 +34,15 @@ package net.wg.gui.lobby.hangar.maintenance
     public class TechnicalMaintenance extends TechnicalMaintenanceMeta implements ITechnicalMaintenanceMeta
     {
 
-        protected static const EQUIPMENT:String = "equipment";
-
         private static const PERCENT_CHAR:String = "%";
 
         private static const SPLITTER_CHAR:String = "/";
 
         private static const MONEY:String = "money";
 
-        private static const EQUIPMENT_CHANGED:String = "equipmentChanged";
+        protected static const EQUIPMENT:String = "equipment";
 
-        private static const EVENT_INFO:String = "eventInfo";
+        private static const EQUIPMENT_CHANGED:String = "equipmentChanged";
 
         private static const PADDING_STR:String = "Padding";
 
@@ -129,10 +126,6 @@ package net.wg.gui.lobby.hangar.maintenance
 
         public var infoTF:TextField;
 
-        public var eventInfoTF:TextField;
-
-        public var eventInfoIcon:MovieClip;
-
         public var infoAlertIcon:AlertIco;
 
         protected var btnGroup:ButtonGroup;
@@ -159,10 +152,6 @@ package net.wg.gui.lobby.hangar.maintenance
 
         private var _isApplyEnable:Boolean = false;
 
-        private var _showEventInfo:Boolean = false;
-
-        private var _eventInfo:String = "";
-
         private var _toolTipMgr:ITooltipMgr;
 
         public function TechnicalMaintenance()
@@ -186,7 +175,6 @@ package net.wg.gui.lobby.hangar.maintenance
             this.eqHeaderInventory.text = MENU.HANGAR_AMMUNITIONPANEL_TECHNICALMAITENANCE_EQUIPMENT_LIST_INVENTORY;
             this.eqHeaderPrice.text = MENU.HANGAR_AMMUNITIONPANEL_TECHNICALMAITENANCE_EQUIPMENT_LIST_PRICE;
             this.labelTotal.text = MENU.HANGAR_AMMUNITIONPANEL_TECHNICALMAITENANCE_BUTTONS_LABELTOTAL;
-            this.eventInfoTF.visible = this.eventInfoIcon.visible = false;
             this.shells.addEventListener(ShellRendererEvent.TOTAL_PRICE_CHANGED,this.onShellsTotalPriceChangedHandler);
             this.shells.addEventListener(ShellRendererEvent.CURRENCY_CHANGED,this.onShellsCurrencyChangedHandler);
             this.autoChBListeners();
@@ -209,12 +197,6 @@ package net.wg.gui.lobby.hangar.maintenance
                 this.infoTF.htmlText = this._maintenanceData.infoAfterShellBlock;
                 this.infoAlertIcon.visible = this.infoTF.visible = this._maintenanceData.infoAfterShellBlock != Values.EMPTY_STR;
                 this.eqIndicator.visible = this.eqAuto.visible = this._maintenanceData.autoEquipVisible;
-            }
-            if(isInvalid(EVENT_INFO))
-            {
-                this.eventInfoTF.visible = this.eventInfoIcon.visible = this._showEventInfo;
-                this.repairTextfield.visible = this.repairIndicator.visible = this.repairAuto.visible = this.repairPrice.visible = this.repairBtn.visible = !this._showEventInfo;
-                this.eventInfoTF.text = this._eventInfo;
             }
             if(isInvalid(MONEY))
             {
@@ -287,8 +269,6 @@ package net.wg.gui.lobby.hangar.maintenance
             this.totalGold = null;
             this.labelTotal = null;
             this.infoTF = null;
-            this.eventInfoTF = null;
-            this.eventInfoIcon = null;
             this.infoAlertIcon.dispose();
             this.infoAlertIcon = null;
             this.eqItem1.dispose();
@@ -333,21 +313,6 @@ package net.wg.gui.lobby.hangar.maintenance
             super.onDispose();
         }
 
-        override protected function setData(param1:MaintenanceVO) : void
-        {
-            this.updateOldData();
-            this._maintenanceData = param1;
-            invalidateData();
-        }
-
-        override protected function setEquipment(param1:Array, param2:Array, param3:Array) : void
-        {
-            this._equipmentList = param3;
-            this._equipmentSetup = param2;
-            this._equipmentInstalled = param1;
-            invalidate(EQUIPMENT);
-        }
-
         public function as_resetEquipment(param1:String) : void
         {
             var _loc3_:EquipmentItem = null;
@@ -371,6 +336,21 @@ package net.wg.gui.lobby.hangar.maintenance
             }
         }
 
+        override protected function setData(param1:MaintenanceVO) : void
+        {
+            this.updateOldData();
+            this._maintenanceData = param1;
+            invalidateData();
+        }
+
+        override protected function setEquipment(param1:Array, param2:Array, param3:Array) : void
+        {
+            this._equipmentList = param3;
+            this._equipmentSetup = param2;
+            this._equipmentInstalled = param1;
+            invalidate(EQUIPMENT);
+        }
+
         public function as_setGold(param1:Number) : void
         {
             if(this._maintenanceData)
@@ -378,13 +358,6 @@ package net.wg.gui.lobby.hangar.maintenance
                 this._maintenanceData.gold = param1;
                 invalidate(MONEY,EQUIPMENT);
             }
-        }
-
-        public function as_showEventInfo(param1:Boolean, param2:String) : void
-        {
-            this._showEventInfo = param1;
-            this._eventInfo = param2;
-            invalidate(EVENT_INFO);
         }
 
         public function isResetWindow() : Boolean
@@ -699,30 +672,6 @@ package net.wg.gui.lobby.hangar.maintenance
             this._isApplyEnable = true;
         }
 
-        private function lockEquipmentChangeEvents(param1:Array, param2:Boolean) : void
-        {
-            var _loc3_:EquipmentItem = null;
-            for each(_loc3_ in param1)
-            {
-                if(param2)
-                {
-                    _loc3_.addEventListener(EquipmentEvent.EQUIPMENT_CHANGE,this.onModuleEquipmentChangeHandler);
-                }
-                else
-                {
-                    _loc3_.removeEventListener(EquipmentEvent.EQUIPMENT_CHANGE,this.onModuleEquipmentChangeHandler);
-                }
-                _loc3_.toggleSelectChange(param2);
-            }
-            param1.splice(0);
-            var param1:Array = null;
-        }
-
-        private function requestEquipment() : void
-        {
-            getEquipmentS(this.eqItem1.getItemId(),this.eqItem1.getCurrency(),this.eqItem2.getItemId(),this.eqItem2.getCurrency(),this.eqItem3.getItemId(),this.eqItem3.getCurrency());
-        }
-
         private function onModuleOnEquipmentRendererOverHandler(param1:OnEquipmentRendererOver) : void
         {
             var _loc4_:EquipmentItem = null;
@@ -794,6 +743,25 @@ package net.wg.gui.lobby.hangar.maintenance
             }
             this.doApplyEnable();
             this.requestEquipment();
+        }
+
+        private function lockEquipmentChangeEvents(param1:Array, param2:Boolean) : void
+        {
+            var _loc3_:EquipmentItem = null;
+            for each(_loc3_ in param1)
+            {
+                if(param2)
+                {
+                    _loc3_.addEventListener(EquipmentEvent.EQUIPMENT_CHANGE,this.onModuleEquipmentChangeHandler);
+                }
+                else
+                {
+                    _loc3_.removeEventListener(EquipmentEvent.EQUIPMENT_CHANGE,this.onModuleEquipmentChangeHandler);
+                }
+                _loc3_.toggleSelectChange(param2);
+            }
+            param1.splice(0);
+            var param1:Array = null;
         }
 
         private function onStageShowInfoHandler(param1:ModuleInfoEvent) : void
@@ -902,6 +870,11 @@ package net.wg.gui.lobby.hangar.maintenance
         private function onCloseBtnClickHandler(param1:ButtonEvent) : void
         {
             onWindowCloseS();
+        }
+
+        private function requestEquipment() : void
+        {
+            getEquipmentS(this.eqItem1.getItemId(),this.eqItem1.getCurrency(),this.eqItem2.getItemId(),this.eqItem2.getCurrency(),this.eqItem3.getItemId(),this.eqItem3.getCurrency());
         }
     }
 }

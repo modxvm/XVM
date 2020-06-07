@@ -105,11 +105,7 @@ package net.wg.gui.lobby.window
             this.image2.source = param1.image2;
             this.bg.source = param1.bg;
             this.closeBtn.label = param1.closeBtn;
-            this.openShopBtn.visible = param1.showOpenShopBtn;
-            if(param1.showOpenShopBtn)
-            {
-                this.openShopBtn.label = param1.openShopBtnLabel;
-            }
+            this.openShopBtn.label = param1.openShopBtnLabel;
             invalidateSize();
         }
 

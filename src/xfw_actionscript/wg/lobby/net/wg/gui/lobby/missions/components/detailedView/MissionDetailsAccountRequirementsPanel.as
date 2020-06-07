@@ -149,7 +149,7 @@ package net.wg.gui.lobby.missions.components.detailedView
                 renderersGroup.x = CONDITIONS_OFFSET_X;
                 _loc1_ = App.utils.commons.truncateTextFieldText(labelTf,this.header,true,true);
                 this._isHeaderTruncated = _loc1_.length < this.header.length;
-                if(this.groupData.length > CONDITIONS_ROLL_UP_MIN && this._data.showDetailedRequirements)
+                if(this.groupData.length > CONDITIONS_ROLL_UP_MIN)
                 {
                     this.buttonDown.visible = !this._isShown;
                     this.buttonUp.visible = this._isShown;

@@ -11,8 +11,6 @@ package net.wg.data.constants.generated
 
         public static const EPIC_SQUAD_VIEW_PY:String = "prebattle/company/epicSquad";
 
-        public static const BOB_SQUAD_VIEW_PY:String = "prebattle/company/bobSquad";
-
         public static const SQUAD_WINDOW_PY:String = "prb_windows/squadWindow";
 
         public static const EVENT_SQUAD_WINDOW_PY:String = "prb_windows/eventSquadWindow";
@@ -20,8 +18,6 @@ package net.wg.data.constants.generated
         public static const EPIC_SQUAD_WINDOW_PY:String = "prb_windows/epicSquadWindow";
 
         public static const FALLOUT_SQUAD_WINDOW_PY:String = "prb_windows/falloutSquadWindow";
-
-        public static const BOB_SQUAD_WINDOW_PY:String = "prb_windows/bobSquadWindow";
 
         public static const BATTLE_SESSION_LIST_WINDOW_PY:String = "prb_windows/battleSessionList";
 

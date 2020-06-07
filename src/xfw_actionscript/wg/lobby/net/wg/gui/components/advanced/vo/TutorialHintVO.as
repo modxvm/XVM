@@ -24,7 +24,11 @@ package net.wg.gui.components.advanced.vo
 
         public var checkViewArea:Boolean = false;
 
+        public var hideImmediately:Boolean = false;
+
         public var positionValue:Number = -1;
+
+        public var textPadding:Number = -1;
 
         public var padding:PaddingVO = null;
 

@@ -17,7 +17,6 @@ package net.wg.gui.lobby.window
     import scaleform.clik.events.ButtonEvent;
     import flash.events.Event;
     import scaleform.clik.constants.InvalidationType;
-    import net.wg.data.constants.Values;
     import scaleform.clik.events.InputEvent;
     import net.wg.data.ListDAAPIDataProvider;
     import net.wg.gui.lobby.components.data.PrimeTimeServerVO;
@@ -117,10 +116,6 @@ package net.wg.gui.lobby.window
                 this.alertBG.visible = this._data.showAlertBG;
                 this.serversDD.visible = this._data.serverDDVisible;
                 this.serversDD.enabled = this._data.serversDDEnabled;
-                if(this._data.background != Values.EMPTY_STR)
-                {
-                    setBackground(this._data.background);
-                }
                 App.utils.commons.updateTextFieldSize(this.serversTf,true,false);
                 invalidateSize();
             }
@@ -199,14 +194,6 @@ package net.wg.gui.lobby.window
             return this._dataProvider;
         }
 
-        private function setIconSmoothing() : void
-        {
-            if(App.appScale > 1)
-            {
-                this.warningIcon.smoothing = false;
-            }
-        }
-
         private function onCloseBtnClickHandler(param1:ButtonEvent) : void
         {
             closeViewS();
@@ -235,6 +222,14 @@ package net.wg.gui.lobby.window
         private function onWarningIconChangeHandler(param1:Event) : void
         {
             invalidateSize();
+        }
+
+        private function setIconSmoothing() : void
+        {
+            if(App.appScale > 1)
+            {
+                this.warningIcon.smoothing = false;
+            }
         }
     }
 }

@@ -30,9 +30,33 @@ package net.wg.gui.prebattle.data
 
         private var _isCreator:Boolean;
 
+        private var _isExperimentalModule:Boolean = false;
+
+        private var _experimentalModuleName:String = "";
+
         public function PlayerPrbInfoVO(param1:Object)
         {
             super(param1);
+        }
+
+        public function get experimentalModuleName() : String
+        {
+            return this._experimentalModuleName;
+        }
+
+        public function set experimentalModuleName(param1:String) : void
+        {
+            this._experimentalModuleName = param1;
+        }
+
+        public function get isExperimentalModule() : Boolean
+        {
+            return this._isExperimentalModule;
+        }
+
+        public function set isExperimentalModule(param1:Boolean) : void
+        {
+            this._isExperimentalModule = param1;
         }
 
         override public function get kickId() : Number

@@ -27,8 +27,6 @@ package net.wg.gui.notification
 
         private static const DEFAULT_PADDING:Point = new Point(4,40);
 
-        private static const PADDING_Y:Number = 100;
-
         private var _pendingForDisplay:Vector.<PopUpNotificationInfoVO>;
 
         private var _displayingNowPopUps:Vector.<ServiceMessagePopUp>;
@@ -59,8 +57,6 @@ package net.wg.gui.notification
 
         private var _containerMgr:IContainerManager = null;
 
-        private var _outerBottomPadding:int;
-
         public function NotificationPopUpViewer(param1:Class)
         {
             this._pendingForDisplay = new Vector.<PopUpNotificationInfoVO>();
@@ -79,7 +75,6 @@ package net.wg.gui.notification
             this._smContainer.addEventListener(MouseEvent.MOUSE_OVER,this.onSMContainerMouseOverHandler);
             this._smContainer.addEventListener(MouseEvent.MOUSE_OUT,this.onSMContainerMouseOutHandler);
             this._smContainer.addEventListener(NotificationLayoutEvent.UPDATE_LAYOUT,this.onSmContainerUpdateLayoutHandler);
-            this._smContainer.addEventListener(NotificationLayoutEvent.RESET_LAYOUT,this.onSmContainerResetLayoutHandler);
             this._containerMgr.addEventListener(ContainerManagerEvent.VIEW_ADDED,this.onContainerMgrViewLoadingHandler);
         }
 
@@ -109,7 +104,7 @@ package net.wg.gui.notification
                     _loc1_.data = _loc5_;
                     _loc1_.validateNow();
                     _loc2_ = _loc1_.height;
-                    _loc3_ = this._stageDimensions.y - _loc4_ - this._popupPadding * _loc7_ - this._padding.y - _loc2_ - this._outerBottomPadding >> 0;
+                    _loc3_ = this._stageDimensions.y - _loc4_ - this._popupPadding * _loc7_ - this._padding.y - _loc2_ >> 0;
                     if(_loc3_ > 0)
                     {
                         this._smContainer.addChild(_loc1_);
@@ -137,7 +132,7 @@ package net.wg.gui.notification
                     {
                         _loc1_ = this._displayingNowPopUps[_loc9_];
                         _loc2_ = _loc1_.height;
-                        _loc3_ = this._stageDimensions.y - _loc4_ - this._popupPadding * _loc7_ - this._padding.y - _loc2_ - this._outerBottomPadding >> 0;
+                        _loc3_ = this._stageDimensions.y - _loc4_ - this._popupPadding * _loc7_ - this._padding.y - _loc2_ >> 0;
                         if(_loc3_ > 0)
                         {
                             this.setupPopUpPosition(_loc1_,_loc3_);
@@ -203,7 +198,6 @@ package net.wg.gui.notification
             this._smContainer.removeEventListener(MouseEvent.MOUSE_OVER,this.onSMContainerMouseOverHandler);
             this._smContainer.removeEventListener(MouseEvent.MOUSE_OUT,this.onSMContainerMouseOutHandler);
             this._smContainer.removeEventListener(NotificationLayoutEvent.UPDATE_LAYOUT,this.onSmContainerUpdateLayoutHandler);
-            this._smContainer.removeEventListener(NotificationLayoutEvent.RESET_LAYOUT,this.onSmContainerResetLayoutHandler);
             this._smContainer = null;
             this._containerMgr.removeEventListener(ContainerManagerEvent.VIEW_ADDED,this.onContainerMgrViewLoadingHandler);
             this._containerMgr = null;
@@ -251,13 +245,6 @@ package net.wg.gui.notification
                 this._pendingForDisplay[_loc4_].dispose();
                 this._pendingForDisplay.splice(_loc4_,1);
             }
-        }
-
-        public function as_setBottomPadding(param1:Number) : void
-        {
-            this._outerBottomPadding = param1;
-            this._arrangeLayout = true;
-            invalidate();
         }
 
         public function updateStage(param1:Number, param2:Number) : void
@@ -451,11 +438,6 @@ package net.wg.gui.notification
         private function onSmContainerUpdateLayoutHandler(param1:NotificationLayoutEvent) : void
         {
             this.setPadding(param1.padding);
-        }
-
-        private function onSmContainerResetLayoutHandler(param1:NotificationLayoutEvent) : void
-        {
-            this.setPadding(DEFAULT_PADDING);
         }
 
         private function onContainerMgrViewLoadingHandler(param1:ContainerManagerEvent) : void

@@ -20,6 +20,8 @@ package net.wg.gui.bootcamp.battleResult.data
 
         private static const CREDITS_STATS_FIELD:String = "credits";
 
+        private static const VIDEO_BUTTON_FIELD:String = "videoButton";
+
         public var stats:DataProvider;
 
         public var unlocks:DataProvider;
@@ -33,6 +35,8 @@ package net.wg.gui.bootcamp.battleResult.data
         public var credits:RewardDataVO = null;
 
         public var xp:RewardDataVO = null;
+
+        public var videoButton:RewardVideoDataVO = null;
 
         public var hasUnlocks:Boolean = false;
 
@@ -131,6 +135,11 @@ package net.wg.gui.bootcamp.battleResult.data
                 this.credits = new RewardDataVO(param2);
                 return false;
             }
+            if(param1 == VIDEO_BUTTON_FIELD)
+            {
+                this.videoButton = new RewardVideoDataVO(param2);
+                return false;
+            }
             return super.onDataWrite(param1,param2);
         }
 
@@ -185,6 +194,11 @@ package net.wg.gui.bootcamp.battleResult.data
             {
                 this.credits.dispose();
                 this.credits = null;
+            }
+            if(this.videoButton)
+            {
+                this.videoButton.dispose();
+                this.videoButton = null;
             }
             super.onDispose();
         }

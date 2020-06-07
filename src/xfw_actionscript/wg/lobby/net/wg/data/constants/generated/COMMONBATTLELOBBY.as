@@ -3,12 +3,6 @@ package net.wg.data.constants.generated
     public class COMMONBATTLELOBBY extends Object
     {
 
-        public static const AT_SPG_ELITE:String = "AT-SPGElite";
-
-        public static const AT_SPG_NORMAL:String = "AT-SPGNormal";
-
-        public static const BOSS_KILL:String = "bossKill";
-
         public static const DAMAGE_LOG_AIRSTRIKE_16X16:String = "damageLog_airstrike_16x16";
 
         public static const DAMAGE_LOG_ART_16X16:String = "damageLog_art_16x16";
@@ -74,18 +68,6 @@ package net.wg.data.constants.generated
         public static const GOLD_CENTER:String = "goldCenter";
 
         public static const GOLD_EDGE:String = "goldEdge";
-
-        public static const HEAVY_TANK_ELITE:String = "heavyTankElite";
-
-        public static const HEAVY_TANK_NORMAL:String = "heavyTankNormal";
-
-        public static const LIGHT_TANK_ELITE:String = "lightTankElite";
-
-        public static const LIGHT_TANK_NORMAL:String = "lightTankNormal";
-
-        public static const MEDIUM_TANK_ELITE:String = "mediumTankElite";
-
-        public static const MEDIUM_TANK_NORMAL:String = "mediumTankNormal";
 
         public static const RIBBONS_ARMOR:String = "ribbonsArmor";
 
@@ -166,10 +148,6 @@ package net.wg.data.constants.generated
         public static const RIBBONS_SPOTTED:String = "ribbonsSpotted";
 
         public static const RIBBONS_STUN:String = "ribbonsStun";
-
-        public static const SPG_ELITE:String = "SPGElite";
-
-        public static const SPG_NORMAL:String = "SPGNormal";
 
         public static const WHITE_CENTER:String = "whiteCenter";
 

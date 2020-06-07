@@ -13,12 +13,15 @@ package net.wg.gui.lobby.storage.categories.cards
     import net.wg.gui.components.controls.Image;
     import flash.display.Sprite;
     import scaleform.clik.motion.Tween;
+    import net.wg.gui.lobby.storage.categories.cards.configs.CardSizeVO;
+    import net.wg.gui.lobby.storage.categories.cards.configs.CardImageSizeVO;
     import flash.events.MouseEvent;
     import flash.events.Event;
     import flash.text.TextFieldAutoSize;
     import flash.display.Graphics;
     import scaleform.clik.constants.InvalidationType;
     import flash.geom.Point;
+    import net.wg.gui.lobby.storage.categories.cards.configs.CardConfigs;
     import net.wg.gui.components.controls.VO.PriceVO;
     import net.wg.data.constants.Linkages;
     import net.wg.data.constants.generated.SLOT_HIGHLIGHT_TYPES;
@@ -106,13 +109,15 @@ package net.wg.gui.lobby.storage.categories.cards
 
         protected var _sizeVO:CardSizeVO;
 
+        protected var _imageSizeVO:CardImageSizeVO;
+
         protected var _isOver:Boolean;
 
         protected var _resetViewOnDataChange:Boolean = true;
 
-        private var _index:uint;
+        protected var _stageWidthBoundary:int;
 
-        private var _stageWidthBoundary:int;
+        private var _index:uint;
 
         public function BaseCard()
         {
@@ -171,6 +176,7 @@ package net.wg.gui.lobby.storage.categories.cards
             this._container = null;
             this._overlay = null;
             this._sizeVO = null;
+            this._imageSizeVO = null;
             super.onDispose();
         }
 
@@ -407,8 +413,9 @@ package net.wg.gui.lobby.storage.categories.cards
 
         public function setStateSizeBoundaries(param1:int, param2:int) : void
         {
-            this._stageWidthBoundary = App.stageSizeMgr.calcAllowSize(param1,CardSizeConfig.ALLOW_CARDS_RESOLUTION);
-            this._sizeVO = CardSizeConfig.getConfig(this._stageWidthBoundary);
+            this._stageWidthBoundary = App.stageSizeMgr.calcAllowSize(param1,CardConfigs.getInstance().allowCardsResolution);
+            this._sizeVO = CardConfigs.getInstance().cardSize.getConfig(this._stageWidthBoundary);
+            this._imageSizeVO = CardConfigs.getInstance().cardImage.getConfig(this._stageWidthBoundary);
         }
 
         protected function drawPrice() : void
@@ -589,11 +596,14 @@ package net.wg.gui.lobby.storage.categories.cards
 
         protected function onImageComplete() : void
         {
+            var _loc1_:Rectangle = null;
             if(this.image.width)
             {
-                this.image.width = this._sizeVO.imageSize.width;
-                this.image.height = this._sizeVO.imageSize.height;
-                this.image.x = width - this.image.width >> 1;
+                _loc1_ = this._imageSizeVO.getRect(this._data.isWideImage);
+                this.image.width = _loc1_.width;
+                this.image.height = _loc1_.height;
+                this.image.x = _loc1_.x < 0?width - this.image.width >> 1:_loc1_.x;
+                this.image.y = _loc1_.y < 0?this.image.y:_loc1_.y;
                 this.animateImage();
                 if(this.equipmentType)
                 {
@@ -686,7 +696,7 @@ package net.wg.gui.lobby.storage.categories.cards
         public function set data(param1:Object) : void
         {
             var _loc2_:BaseCardVO = param1 as BaseCardVO;
-            if(this._data && this._data.isEqual(_loc2_))
+            if(this._data == _loc2_)
             {
                 return;
             }

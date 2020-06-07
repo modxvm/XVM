@@ -136,8 +136,6 @@ package net.wg.gui.lobby.settings
 
         public var enableSpeedometerCheckbox:CheckBox = null;
 
-        public var disableEventHornCheckbox:CheckBox = null;
-
         public function GameSettingsContent()
         {
             super();
@@ -232,7 +230,6 @@ package net.wg.gui.lobby.settings
             this.hangarCamLabelControl.toolTip = TOOLTIPS.HANGARCAMDROPDOWN;
             this.showDamageIconCheckbox.infoIcoType = InfoIcon.TYPE_INFO;
             this.enableSpeedometerCheckbox.label = SETTINGS.GAME_ENABLESPEEDOMETER;
-            this.disableEventHornCheckbox.label = SETTINGS.GAME_EVENTHORNDISABLE;
             super.configUI();
         }
 
@@ -355,8 +352,6 @@ package net.wg.gui.lobby.settings
             this.showDamageIconCheckbox = null;
             this.enableSpeedometerCheckbox.dispose();
             this.enableSpeedometerCheckbox = null;
-            this.disableEventHornCheckbox.dispose();
-            this.disableEventHornCheckbox = null;
             super.onDispose();
         }
 

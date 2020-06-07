@@ -20,13 +20,13 @@ package net.wg.gui.bootcamp
 
         private static const HINT_BACKGROUND_X:int = 0;
 
-        private static const HINT_TYPE_ICON_X:int = 87;
-
         private static const HINT_TYPE_ICON_Y:int = -5;
 
         private static const HINT_TYPE_TEXT_Y:int = 8;
 
-        private static const HINT_TYPE_TEXT_X:int = 133;
+        private static const HINT_TYPE_TEXT_X:int = 46;
+
+        private static const CENTER_OFFSET:int = -30;
 
         private static const SINGLE_LINE_HEIGHT:int = 22;
 
@@ -63,7 +63,6 @@ package net.wg.gui.bootcamp
             this.textsAnim.stop();
             this._background = new Shape();
             this._hintTypeIcon = new Shape();
-            this._hintTypeIcon.x = HINT_TYPE_ICON_X;
             this._hintTypeIcon.y = HINT_TYPE_ICON_Y;
             this.hintText.x = HINT_TYPE_TEXT_X;
             this.hintText.y = HINT_TYPE_TEXT_Y;
@@ -98,16 +97,16 @@ package net.wg.gui.bootcamp
 
         public function as_showHint(param1:String) : void
         {
-            var _loc2_:* = 0;
             this.textsAnim.visible = true;
             this.iconsAnim.visible = true;
             this.iconsAnim.gotoAndPlay(RibbonCtrl.SHOW_ANIM);
             this.iconsAnim.glowAnim.gotoAndPlay(1);
             this.textsAnim.gotoAndPlay(RibbonCtrl.SHOW_ANIM);
             this._textField.text = param1.toUpperCase();
-            _loc2_ = SINGLE_LINE_HEIGHT - this._textField.textHeight;
+            var _loc2_:int = SINGLE_LINE_HEIGHT - this._textField.textHeight;
             this.iconsAnim.y = _loc2_;
             this.textsAnim.y = _loc2_;
+            this.iconsAnim.x = this.textsAnim.x = CENTER_OFFSET - (this._textField.textWidth >> 1);
         }
 
         private function onLifetimeCooldown() : void

@@ -23,8 +23,6 @@ package net.wg.infrastructure.base.meta.impl
 
         private var _array:Array;
 
-        private var _array1:Array;
-
         private var _teaserVO:TeaserVO;
 
         public function HangarMeta()
@@ -43,11 +41,6 @@ package net.wg.infrastructure.base.meta.impl
             {
                 this._array.splice(0,this._array.length);
                 this._array = null;
-            }
-            if(this._array1)
-            {
-                this._array1.splice(0,this._array1.length);
-                this._array1 = null;
             }
             if(this._teaserVO)
             {
@@ -109,17 +102,6 @@ package net.wg.infrastructure.base.meta.impl
             }
         }
 
-        public final function as_show3DSceneWulfTooltip(param1:String, param2:Array) : void
-        {
-            var _loc3_:Array = this._array1;
-            this._array1 = param2;
-            this.show3DSceneWulfTooltip(param1,this._array1);
-            if(_loc3_)
-            {
-                _loc3_.splice(0,_loc3_.length);
-            }
-        }
-
         public final function as_showTeaser(param1:Object) : void
         {
             var _loc2_:TeaserVO = this._teaserVO;
@@ -141,13 +123,6 @@ package net.wg.infrastructure.base.meta.impl
         protected function show3DSceneTooltip(param1:String, param2:Array) : void
         {
             var _loc3_:String = "as_show3DSceneTooltip" + Errors.ABSTRACT_INVOKE;
-            DebugUtils.LOG_ERROR(_loc3_);
-            throw new AbstractException(_loc3_);
-        }
-
-        protected function show3DSceneWulfTooltip(param1:String, param2:Array) : void
-        {
-            var _loc3_:String = "as_show3DSceneWulfTooltip" + Errors.ABSTRACT_INVOKE;
             DebugUtils.LOG_ERROR(_loc3_);
             throw new AbstractException(_loc3_);
         }

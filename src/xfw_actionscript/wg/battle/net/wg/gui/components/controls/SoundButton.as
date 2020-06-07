@@ -43,6 +43,8 @@ package net.wg.gui.components.controls
 
         private var _soundEnabled:Boolean = true;
 
+        private var _mutedSoundTypes:Array;
+
         public function SoundButton()
         {
             super();
@@ -192,6 +194,10 @@ package net.wg.gui.components.controls
 
         public function canPlaySound(param1:String) : Boolean
         {
+            if(this._mutedSoundTypes)
+            {
+                return this._mutedSoundTypes.indexOf(param1) == -1;
+            }
             return this.enabled;
         }
 
@@ -305,6 +311,11 @@ package net.wg.gui.components.controls
             }
             this._mouseEnabledOnDisabled = param1;
             this.updateMouseEnabled();
+        }
+
+        public function set mutedSoundTypes(param1:Array) : void
+        {
+            this._mutedSoundTypes = param1;
         }
 
         override protected function handleMouseRelease(param1:MouseEvent) : void

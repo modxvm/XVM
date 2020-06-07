@@ -2,7 +2,6 @@ package net.wg.gui.components.containers
 {
     import flash.text.TextField;
     import flash.display.Bitmap;
-    import scaleform.clik.constants.InvalidationType;
     import flash.text.TextFieldType;
     import flash.display.Sprite;
 
@@ -40,26 +39,23 @@ package net.wg.gui.components.containers
             return new GFWrapper();
         }
 
-        override protected function draw() : void
+        override public function setSize(param1:Number, param2:Number) : void
         {
-            super.draw();
-            if(isInvalid(InvalidationType.SIZE))
+            super.setSize(param1,param2);
+            if(this.inputFixTF != null)
             {
-                if(this.gamefaceBitmap != null)
-                {
-                    this.gamefaceBitmap.width = width;
-                    this.gamefaceBitmap.height = height;
-                }
-                if(this.inputFixTF != null)
-                {
-                    this.inputFixTF.width = width;
-                    this.inputFixTF.height = height;
-                }
+                this.inputFixTF.width = param1;
+                this.inputFixTF.height = param2;
+            }
+            if(this.gamefaceBitmap != null)
+            {
+                this.gamefaceBitmap.width = param1;
+                this.gamefaceBitmap.height = param2;
             }
             if(hitArea != null)
             {
-                hitArea.width = width;
-                hitArea.height = height;
+                hitArea.width = param1;
+                hitArea.height = param2;
             }
         }
 

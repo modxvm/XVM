@@ -21,12 +21,7 @@ package net.wg.gui.battle.views.radialMenu.components
         public function BackGround()
         {
             super();
-            this.center.imageName = this.getBackGroundName();
-        }
-
-        protected function getBackGroundName() : String
-        {
-            return BATTLEATLAS.RADIAL_MENU_HOLE;
+            this.center.imageName = BATTLEATLAS.RADIAL_MENU_HOLE;
         }
 
         public function setBackgroundAlpha(param1:Number) : void
@@ -40,7 +35,7 @@ package net.wg.gui.battle.views.radialMenu.components
             this.tback.height = this.bback.height = param2;
         }
 
-        public final function dispose() : void
+        public function dispose() : void
         {
             this.lback = null;
             this.rback = null;

@@ -85,6 +85,8 @@ package net.wg.gui.lobby.storage.categories.storage
 
         protected function updatePositions() : void
         {
+            this.typeFilters.x = width - this.typeFilters.width;
+            this.typeFilterName.x = this.typeFilters.x - this.typeFilterName.width - FILTER_NAME_GAP;
         }
 
         private function setupFilter(param1:ButtonFilters) : void
@@ -104,7 +106,9 @@ package net.wg.gui.lobby.storage.categories.storage
 
         protected function doResetFilters(param1:int) : void
         {
+            this.typeFilters.removeEventListener(FiltersEvent.FILTERS_CHANGED,this.onFilterBlockFiltersChangedHandler);
             this.typeFilters.resetFilters(param1);
+            this.typeFilters.addEventListener(FiltersEvent.FILTERS_CHANGED,this.onFilterBlockFiltersChangedHandler);
         }
 
         private function onFilterBlockResizeHandler(param1:Event) : void

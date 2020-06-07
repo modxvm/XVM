@@ -8,8 +8,8 @@ package net.wg.gui.components.advanced
     import flash.text.TextField;
     import scaleform.clik.events.ListEvent;
     import net.wg.gui.components.controls.events.DropdownMenuEvent;
-    import flash.events.Event;
     import scaleform.clik.controls.ScrollingList;
+    import flash.events.Event;
 
     public class RecruitParametersComponent extends RecruitParametersMeta implements IRecruitParametersMeta
     {
@@ -21,8 +21,6 @@ package net.wg.gui.components.advanced
         private static const VEHICLE_INV:String = "vehInv";
 
         private static const TANKMAN_ROLE_INV:String = "tManInv";
-
-        private static const CHANGE_INV:String = "changeInv";
 
         private static const DROPDOWN_MAX_ROWS_COUNT:int = 9;
 
@@ -133,10 +131,6 @@ package net.wg.gui.components.advanced
             {
                 this._initialized = true;
             }
-            if(isInvalid(CHANGE_INV))
-            {
-                dispatchEvent(new Event(Event.CHANGE));
-            }
         }
 
         override protected function onDispose() : void
@@ -195,7 +189,7 @@ package net.wg.gui.components.advanced
             if(this._initialized)
             {
                 onNationChangedS(this.getSelectedNation());
-                invalidate(CHANGE_INV);
+                dispatchEvent(new Event(Event.CHANGE));
             }
         }
 
@@ -204,7 +198,7 @@ package net.wg.gui.components.advanced
             if(this._initialized)
             {
                 onVehicleClassChangedS(this.getSelectedVehicleClass());
-                invalidate(CHANGE_INV);
+                dispatchEvent(new Event(Event.CHANGE));
             }
         }
 
@@ -213,7 +207,7 @@ package net.wg.gui.components.advanced
             if(this._initialized)
             {
                 onVehicleChangedS(this.getSelectedVehicle());
-                invalidate(CHANGE_INV);
+                dispatchEvent(new Event(Event.CHANGE));
             }
         }
 
@@ -222,7 +216,7 @@ package net.wg.gui.components.advanced
             if(this._initialized)
             {
                 onTankmanRoleChangedS(this.getSelectedTankmanRole());
-                invalidate(CHANGE_INV);
+                dispatchEvent(new Event(Event.CHANGE));
             }
         }
     }

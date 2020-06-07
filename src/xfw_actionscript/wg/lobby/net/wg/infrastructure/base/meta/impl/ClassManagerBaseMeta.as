@@ -136,6 +136,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.components.battleDamagePanel.constants.BattleDamageLogConstants;
     import net.wg.gui.components.battleDamagePanel.models.MessageRenderModel;
     import net.wg.gui.components.carousels.CarouselEnvironment;
+    import net.wg.gui.components.carousels.FilterPopoverContent;
     import net.wg.gui.components.carousels.FilterPopoverView;
     import net.wg.gui.components.carousels.HorizontalScroller;
     import net.wg.gui.components.carousels.HorizontalScrollerViewPort;
@@ -144,14 +145,20 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.components.carousels.ScrollerViewPort;
     import net.wg.gui.components.carousels.TooltipDecorator;
     import net.wg.gui.components.carousels.TwoWayDirectionScroller;
+    import net.wg.gui.components.carousels.VehiclesFilterPopoverContent;
     import net.wg.gui.components.carousels.VehiclesFilterPopoverView;
     import net.wg.gui.components.carousels.controls.CheckBoxRenderer;
+    import net.wg.gui.components.carousels.controls.RadioButtonRenderer;
     import net.wg.gui.components.carousels.controls.ToggleImageAlphaRenderer;
+    import net.wg.gui.components.carousels.controls.VehicleRolesTileList;
+    import net.wg.gui.components.carousels.data.BaseRendererStateVO;
+    import net.wg.gui.components.carousels.data.BaseRendererVO;
     import net.wg.gui.components.carousels.data.CheckBoxRendererVO;
     import net.wg.gui.components.carousels.data.FilterCarouseInitVO;
     import net.wg.gui.components.carousels.data.FiltersStateVO;
     import net.wg.gui.components.carousels.data.ProgressionPointsVO;
     import net.wg.gui.components.carousels.data.VehicleCarouselVO;
+    import net.wg.gui.components.carousels.events.FiltersTileListEvent;
     import net.wg.gui.components.carousels.events.TankItemEvent;
     import net.wg.gui.components.carousels.filters.FilterCounter;
     import net.wg.gui.components.carousels.filters.TankCarouselFilters;
@@ -603,7 +610,6 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.data.WaitingQueueWindowVO;
     import net.wg.gui.dialogs.ItemStatusData;
     import net.wg.gui.dialogs.SimpleDialog;
-    import net.wg.gui.eventcomponents.NumberProgress;
     import net.wg.gui.events.AccordionRendererEvent;
     import net.wg.gui.events.EquipmentEvent;
     import net.wg.gui.events.FiltersEvent;
@@ -1098,6 +1104,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_COMPONENTS_CAROUSELS_CAROUSELENVIRONMENT:Class = CarouselEnvironment;
 
+        public static const NET_WG_GUI_COMPONENTS_CAROUSELS_FILTERPOPOVERCONTENT:Class = FilterPopoverContent;
+
         public static const NET_WG_GUI_COMPONENTS_CAROUSELS_FILTERPOPOVERVIEW:Class = FilterPopoverView;
 
         public static const NET_WG_GUI_COMPONENTS_CAROUSELS_HORIZONTALSCROLLER:Class = HorizontalScroller;
@@ -1114,11 +1122,21 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_COMPONENTS_CAROUSELS_TWOWAYDIRECTIONSCROLLER:Class = TwoWayDirectionScroller;
 
+        public static const NET_WG_GUI_COMPONENTS_CAROUSELS_VEHICLESFILTERPOPOVERCONTENT:Class = VehiclesFilterPopoverContent;
+
         public static const NET_WG_GUI_COMPONENTS_CAROUSELS_VEHICLESFILTERPOPOVERVIEW:Class = VehiclesFilterPopoverView;
 
         public static const NET_WG_GUI_COMPONENTS_CAROUSELS_CONTROLS_CHECKBOXRENDERER:Class = CheckBoxRenderer;
 
+        public static const NET_WG_GUI_COMPONENTS_CAROUSELS_CONTROLS_RADIOBUTTONRENDERER:Class = RadioButtonRenderer;
+
         public static const NET_WG_GUI_COMPONENTS_CAROUSELS_CONTROLS_TOGGLEIMAGEALPHARENDERER:Class = ToggleImageAlphaRenderer;
+
+        public static const NET_WG_GUI_COMPONENTS_CAROUSELS_CONTROLS_VEHICLEROLESTILELIST:Class = VehicleRolesTileList;
+
+        public static const NET_WG_GUI_COMPONENTS_CAROUSELS_DATA_BASERENDERERSTATEVO:Class = BaseRendererStateVO;
+
+        public static const NET_WG_GUI_COMPONENTS_CAROUSELS_DATA_BASERENDERERVO:Class = BaseRendererVO;
 
         public static const NET_WG_GUI_COMPONENTS_CAROUSELS_DATA_CHECKBOXRENDERERVO:Class = CheckBoxRendererVO;
 
@@ -1129,6 +1147,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_COMPONENTS_CAROUSELS_DATA_PROGRESSIONPOINTSVO:Class = ProgressionPointsVO;
 
         public static const NET_WG_GUI_COMPONENTS_CAROUSELS_DATA_VEHICLECAROUSELVO:Class = VehicleCarouselVO;
+
+        public static const NET_WG_GUI_COMPONENTS_CAROUSELS_EVENTS_FILTERSTILELISTEVENT:Class = FiltersTileListEvent;
 
         public static const NET_WG_GUI_COMPONENTS_CAROUSELS_EVENTS_TANKITEMEVENT:Class = TankItemEvent;
 
@@ -2031,8 +2051,6 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_DIALOGS_ITEMSTATUSDATA:Class = ItemStatusData;
 
         public static const NET_WG_GUI_DIALOGS_SIMPLEDIALOG:Class = SimpleDialog;
-
-        public static const NET_WG_GUI_EVENTCOMPONENTS_NUMBERPROGRESS:Class = NumberProgress;
 
         public static const NET_WG_GUI_EVENTS_ACCORDIONRENDEREREVENT:Class = AccordionRendererEvent;
 

@@ -35,10 +35,10 @@ package net.wg.infrastructure.base.meta.impl
             super.onDispose();
         }
 
-        public function onClickedToSlotS(param1:Number) : void
+        public function onClickedToSlotS(param1:Number, param2:int) : void
         {
             App.utils.asserter.assertNotNull(this.onClickedToSlot,"onClickedToSlot" + Errors.CANT_NULL);
-            this.onClickedToSlot(param1);
+            this.onClickedToSlot(param1,param2);
         }
 
         public function onPopUpClosedS() : void

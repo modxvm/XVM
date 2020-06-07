@@ -15,6 +15,8 @@ package
 
         public static const BUTTONUPGRADE_TOOLTIP_BODY:String = "#storage:buttonUpgrade/tooltip/body";
 
+        public static const BUTTONLABEL_SELECT:String = "#storage:buttonLabel/select";
+
         public static const CARD_CANNOTSELLTITLE:String = "#storage:card/cannotSellTitle";
 
         public static const CARD_VEHICLE_HOVER_MAXADDITIONALPRICELABEL:String = "#storage:card/vehicle/hover/maxAdditionalPriceLabel";
@@ -169,6 +171,10 @@ package
 
         public static const CUSTOMIZATIONSUITABLE_LABEL:String = "#storage:customizationSuitable/label";
 
+        public static const CUSTOMIZATIONSUITABLEFORALL_LABEL:String = "#storage:customizationSuitableForAll/label";
+
+        public static const STYLEPREVIEW_TOOLTIP:String = "#storage:stylePreview/tooltip";
+
         public static const STORAGE_TABS_CREWBOOKS:String = "#storage:storage/tabs/crewBooks";
 
         public static const CREWBOOKS_NOITEMS_INFO:String = "#storage:crewBooks/noItems/info";
@@ -184,6 +190,16 @@ package
         public static const INVENTORY_FILTERTYPE_INSTRUCTIONS:String = "#storage:inventory/filterType/instructions";
 
         public static const INVENTORY_FILTERTYPE_OTHER:String = "#storage:inventory/filterType/other";
+
+        public static const OFFERS_SECTIONTITLE:String = "#storage:offers/sectionTitle";
+
+        public static const OFFERS_GIFTSTITLE:String = "#storage:offers/giftsTitle";
+
+        public static const OFFERS_GIFTAMOUNT:String = "#storage:offers/giftAmount";
+
+        public static const OFFERS_EXPIRATION:String = "#storage:offers/expiration";
+
+        public static const OFFERS_NOITEMS_TITLE:String = "#storage:offers/noItems/title";
 
         public function STORAGE()
         {

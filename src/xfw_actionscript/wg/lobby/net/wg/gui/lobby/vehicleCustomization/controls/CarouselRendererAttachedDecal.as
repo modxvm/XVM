@@ -15,7 +15,7 @@ package net.wg.gui.lobby.vehicleCustomization.controls
 
         public function CarouselRendererAttachedDecal()
         {
-            this.formScales = [0.4,0.34,0.44,0.5,0.4,0.72];
+            this.formScales = [0.34,0.28,0.38,0.44,0.34,0.66];
             super();
         }
 

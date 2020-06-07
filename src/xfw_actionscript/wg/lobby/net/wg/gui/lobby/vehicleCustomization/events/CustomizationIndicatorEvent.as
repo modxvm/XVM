@@ -11,11 +11,14 @@ package net.wg.gui.lobby.vehicleCustomization.events
 
         private var _itemsList:Object;
 
-        public function CustomizationIndicatorEvent(param1:String, param2:Number, param3:Object)
+        private var _seasonType:int;
+
+        public function CustomizationIndicatorEvent(param1:String, param2:Number, param3:Object, param4:int = -1)
         {
             super(param1,true,false);
             this._id = param2;
             this._itemsList = param3;
+            this._seasonType = param4;
         }
 
         override public function clone() : Event
@@ -25,7 +28,7 @@ package net.wg.gui.lobby.vehicleCustomization.events
 
         override public function toString() : String
         {
-            return formatToString("CustomizationIndicatorEvent","type","id","itemsList");
+            return formatToString("CustomizationIndicatorEvent","type","id","itemsList","seasonType");
         }
 
         public function get id() : Number
@@ -36,6 +39,11 @@ package net.wg.gui.lobby.vehicleCustomization.events
         public function get itemsList() : Object
         {
             return this._itemsList;
+        }
+
+        public function get seasonType() : int
+        {
+            return this._seasonType;
         }
     }
 }

@@ -8,9 +8,9 @@ package net.wg.gui.lobby.vehicleCustomization.data
 
         public var areaId:int = -1;
 
-        public var slotId:int = -1;
+        public var slotType:int = -1;
 
-        public var regionId:int = -1;
+        public var regionIdx:int = -1;
 
         public function CustomizationSlotIdVO(param1:Object)
         {
@@ -24,12 +24,12 @@ package net.wg.gui.lobby.vehicleCustomization.data
             {
                 return false;
             }
-            return this.regionId == _loc2_.regionId && this.slotId == _loc2_.slotId && this.areaId == _loc2_.areaId;
+            return this.regionIdx == _loc2_.regionIdx && this.slotType == _loc2_.slotType && this.areaId == _loc2_.areaId;
         }
 
         public function isEmpty() : Boolean
         {
-            return this.regionId == Values.DEFAULT_INT && this.slotId == Values.DEFAULT_INT && this.areaId == Values.DEFAULT_INT;
+            return this.regionIdx == Values.DEFAULT_INT && this.slotType == Values.DEFAULT_INT && this.areaId == Values.DEFAULT_INT;
         }
     }
 }

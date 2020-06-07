@@ -2,6 +2,7 @@ package net.wg.gui.prebattle.controls
 {
     import flash.text.TextField;
     import scaleform.clik.core.UIComponent;
+    import flash.display.Sprite;
     import scaleform.clik.utils.Constraints;
     import net.wg.data.constants.Values;
     import net.wg.data.constants.UserTags;
@@ -20,6 +21,8 @@ package net.wg.gui.prebattle.controls
         public var wrong_limits:UIComponent;
 
         public var vehicle_type_icon:UIComponent;
+
+        public var boosterIcon:Sprite;
 
         public var toolTipStr:String = "";
 
@@ -51,6 +54,7 @@ package net.wg.gui.prebattle.controls
             this.wrong_limits = null;
             this.vehicle_type_icon.dispose();
             this.vehicle_type_icon = null;
+            this.boosterIcon = null;
             super.onDispose();
         }
 
@@ -83,13 +87,17 @@ package net.wg.gui.prebattle.controls
             {
                 App.toolTipMgr.show(_loc1_);
             }
+            if(model && model.vType)
+            {
+                this.boosterIcon.visible = model.isExperimentalModule;
+            }
         }
 
         override protected function afterSetData() : void
         {
             var _loc1_:String = null;
             var _loc3_:String = null;
-            this.commander_icon.visible = this.status_icon.visible = this.vehicle_type_icon.visible = false;
+            this.commander_icon.visible = this.status_icon.visible = this.vehicle_type_icon.visible = this.boosterIcon.visible = false;
             updatePlayerName();
             if(!model)
             {
@@ -122,10 +130,12 @@ package net.wg.gui.prebattle.controls
                 {
                     this.vehicle_type_icon.visible = true;
                     this.vehicle_type_icon.gotoAndPlay(model.vType);
+                    this.boosterIcon.visible = model.isExperimentalModule;
                 }
                 else
                 {
                     this.vehicle_type_icon.visible = false;
+                    this.boosterIcon.visible = false;
                 }
                 if(model.isCreator)
                 {
@@ -177,10 +187,12 @@ package net.wg.gui.prebattle.controls
             {
                 this.vehicle_type_icon.visible = true;
                 this.vehicle_type_icon.gotoAndPlay(model.vType);
+                this.boosterIcon.visible = model.isExperimentalModule;
             }
             else
             {
                 this.vehicle_type_icon.visible = false;
+                this.boosterIcon.visible = false;
             }
             TextFieldEx.setVerticalAlign(textField,TextFieldEx.VALIGN_TOP);
             TextFieldEx.setVerticalAlign(vehicleNameField,TextFieldEx.VALIGN_TOP);

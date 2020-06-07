@@ -347,12 +347,12 @@ package net.wg.gui.lobby.techtree.sub
             if(this._dataProvider && isInvalid(InvalidationType.DATA))
             {
                 this.ntGraphics.setup();
+                this._nationTreeActionsHelper.reset();
                 this.premiumPanel.setNodeSize(NODE_WIDTH,NODE_HEIGHT);
                 this.premiumPanel.levelsInfo = this._dataProvider.getPremiumLevelInfo();
                 this.premiumPanel.gridSettings = this._dataProvider.getPremiumGridSettings();
                 this.premiumPanel.initPremiumPanelWithDots();
                 this.updatePremiumPanelLayouts();
-                this._nationTreeActionsHelper.reset();
                 this.itemRendererName = this._dataProvider.getDisplaySettings().nodeRendererName;
                 this.drawRenderers();
                 if(this._renderers.length > 0)
@@ -466,6 +466,10 @@ package net.wg.gui.lobby.techtree.sub
         {
             var _loc3_:Number = App.stage.mouseX;
             var _loc4_:Number = App.stage.mouseY;
+            if(this._curRend)
+            {
+                this.hideTreeNodeSelector();
+            }
             this.updateScrollHPosition(this.scrollHPosition - (_loc3_ - this._dragHOffset) / SCROLL_STEP_FACTOR);
             if(!this.isPremiumPanelVisible() || !this.premiumPanel.isOpened)
             {

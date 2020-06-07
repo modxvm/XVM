@@ -17,8 +17,6 @@ package net.wg.gui.rally.controls
 
         public static const UPDATE_COMMENTS:String = "updateComments";
 
-        public static const SECTION_DATA:String = "sectionData";
-
         public function RallyInvalidationType()
         {
             super();

@@ -50,8 +50,6 @@ package net.wg.gui.lobby.tankman
 
         private var _totalPriceWidth:int = 367;
 
-        private var _enableSubmitButton:Boolean = true;
-
         private var _currentVehicleId:int = -1;
 
         private var _currentRoleId:String;
@@ -134,14 +132,14 @@ package net.wg.gui.lobby.tankman
             this._currentVehicleId = this.vehicleSelection.currentVehicleId;
         }
 
-        override protected function setPrice(param1:String, param2:Boolean, param3:ActionPriceVO) : void
+        override protected function setPrice(param1:String, param2:ActionPriceVO) : void
         {
             this.changeRoleDiscountIcon.state = ACTION_PRICE_CONSTANTS.STATE_ALIGN_TOP;
-            this.changeRoleDiscountIcon.visible = param3.useAction;
+            this.changeRoleDiscountIcon.visible = param2.useAction;
             if(this.changeRoleDiscountIcon.visible)
             {
                 this._totalPriceWidth = TOTAL_PRICE_WIDTH_DISCOUNT;
-                this._actionChangeRoleData = param3;
+                this._actionChangeRoleData = param2;
                 this.changeRoleDiscountIcon.addEventListener(MouseEvent.ROLL_OVER,this.onChangeRoleDiscountIconRollOverHandler);
                 this.changeRoleDiscountIcon.addEventListener(MouseEvent.ROLL_OUT,this.onChangeRoleDiscountIconRollOutHandler);
             }
@@ -152,7 +150,6 @@ package net.wg.gui.lobby.tankman
                 this.changeRoleDiscountIcon.removeEventListener(MouseEvent.ROLL_OUT,this.onChangeRoleDiscountIconRollOutHandler);
             }
             this.totalPrice.value = param1;
-            this._enableSubmitButton = param2;
             invalidateData();
         }
 
@@ -163,7 +160,7 @@ package net.wg.gui.lobby.tankman
 
         private function updateAcceptButtonState() : void
         {
-            this.acceptBtn.enabled = this._enableSubmitButton && this._currentRoleId != null && this._currentVehicleId != Values.DEFAULT_INT;
+            this.acceptBtn.enabled = this._currentRoleId != null && this._currentVehicleId != Values.DEFAULT_INT;
             if(this.acceptBtn.focused && this.acceptBtn.enabled)
             {
                 setFocus(this.cancelBtn);

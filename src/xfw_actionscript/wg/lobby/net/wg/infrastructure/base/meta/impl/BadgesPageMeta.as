@@ -4,6 +4,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.badges.data.BadgesStaticDataVO;
     import net.wg.gui.lobby.badges.data.BadgesGroupVO;
     import net.wg.gui.components.controls.VO.BadgeVisualVO;
+    import net.wg.gui.lobby.badges.data.BadgeSuffixVO;
     import net.wg.data.constants.Errors;
     import net.wg.infrastructure.exceptions.AbstractException;
 
@@ -29,6 +30,8 @@ package net.wg.infrastructure.base.meta.impl
         private var _badgesGroupVO1:BadgesGroupVO;
 
         private var _badgeVisualVO:BadgeVisualVO;
+
+        private var _badgeSuffixVO:BadgeSuffixVO;
 
         public function BadgesPageMeta()
         {
@@ -57,6 +60,11 @@ package net.wg.infrastructure.base.meta.impl
                 this._badgeVisualVO.dispose();
                 this._badgeVisualVO = null;
             }
+            if(this._badgeSuffixVO)
+            {
+                this._badgeSuffixVO.dispose();
+                this._badgeSuffixVO = null;
+            }
             super.onDispose();
         }
 
@@ -78,10 +86,10 @@ package net.wg.infrastructure.base.meta.impl
             this.onDeselectBadge();
         }
 
-        public function onSelectSuffixBadgeS() : void
+        public function onSelectSuffixBadgeS(param1:int) : void
         {
             App.utils.asserter.assertNotNull(this.onSelectSuffixBadge,"onSelectSuffixBadge" + Errors.CANT_NULL);
-            this.onSelectSuffixBadge();
+            this.onSelectSuffixBadge(param1);
         }
 
         public function onDeselectSuffixBadgeS() : void
@@ -140,6 +148,17 @@ package net.wg.infrastructure.base.meta.impl
             }
         }
 
+        public final function as_setBadgeSuffix(param1:Object) : void
+        {
+            var _loc2_:BadgeSuffixVO = this._badgeSuffixVO;
+            this._badgeSuffixVO = new BadgeSuffixVO(param1);
+            this.setBadgeSuffix(this._badgeSuffixVO);
+            if(_loc2_)
+            {
+                _loc2_.dispose();
+            }
+        }
+
         protected function setStaticData(param1:BadgesStaticDataVO) : void
         {
             var _loc2_:String = "as_setStaticData" + Errors.ABSTRACT_INVOKE;
@@ -166,6 +185,13 @@ package net.wg.infrastructure.base.meta.impl
             var _loc3_:String = "as_setSelectedBadge" + Errors.ABSTRACT_INVOKE;
             DebugUtils.LOG_ERROR(_loc3_);
             throw new AbstractException(_loc3_);
+        }
+
+        protected function setBadgeSuffix(param1:BadgeSuffixVO) : void
+        {
+            var _loc2_:String = "as_setBadgeSuffix" + Errors.ABSTRACT_INVOKE;
+            DebugUtils.LOG_ERROR(_loc2_);
+            throw new AbstractException(_loc2_);
         }
     }
 }

@@ -25,11 +25,14 @@ package net.wg.gui.components.advanced.tutorial
             this.onDispose();
         }
 
-        public function hide() : void
+        public function hide(param1:Boolean = false) : void
         {
             this.hideAndStopAnimations();
-            this.hideAnimation.visible = true;
-            this.hideAnimation.gotoAndPlay(0);
+            if(!param1)
+            {
+                this.hideAnimation.visible = true;
+                this.hideAnimation.gotoAndPlay(0);
+            }
         }
 
         public function setSize(param1:Number, param2:Number = NaN) : void

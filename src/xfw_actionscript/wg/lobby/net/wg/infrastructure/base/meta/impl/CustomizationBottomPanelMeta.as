@@ -19,17 +19,19 @@ package net.wg.infrastructure.base.meta.impl
 
         public var showBuyWindow:Function;
 
-        public var switchToStyle:Function;
-
-        public var switchToCustom:Function;
-
         public var refreshFilterData:Function;
 
         public var onSelectItem:Function;
 
+        public var onEditItem:Function;
+
         public var showGroupFromTab:Function;
 
         public var onSelectHotFilter:Function;
+
+        public var switchMode:Function;
+
+        public var returnToStyledMode:Function;
 
         private var _customizationBottomPanelInitVO:CustomizationBottomPanelInitVO;
 
@@ -116,28 +118,22 @@ package net.wg.infrastructure.base.meta.impl
             this.showBuyWindow();
         }
 
-        public function switchToStyleS() : void
-        {
-            App.utils.asserter.assertNotNull(this.switchToStyle,"switchToStyle" + Errors.CANT_NULL);
-            this.switchToStyle();
-        }
-
-        public function switchToCustomS() : void
-        {
-            App.utils.asserter.assertNotNull(this.switchToCustom,"switchToCustom" + Errors.CANT_NULL);
-            this.switchToCustom();
-        }
-
         public function refreshFilterDataS() : void
         {
             App.utils.asserter.assertNotNull(this.refreshFilterData,"refreshFilterData" + Errors.CANT_NULL);
             this.refreshFilterData();
         }
 
-        public function onSelectItemS(param1:int, param2:int) : void
+        public function onSelectItemS(param1:int, param2:int, param3:int) : void
         {
             App.utils.asserter.assertNotNull(this.onSelectItem,"onSelectItem" + Errors.CANT_NULL);
-            this.onSelectItem(param1,param2);
+            this.onSelectItem(param1,param2,param3);
+        }
+
+        public function onEditItemS(param1:int) : void
+        {
+            App.utils.asserter.assertNotNull(this.onEditItem,"onEditItem" + Errors.CANT_NULL);
+            this.onEditItem(param1);
         }
 
         public function showGroupFromTabS(param1:int) : void
@@ -150,6 +146,18 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.onSelectHotFilter,"onSelectHotFilter" + Errors.CANT_NULL);
             this.onSelectHotFilter(param1,param2);
+        }
+
+        public function switchModeS(param1:int) : void
+        {
+            App.utils.asserter.assertNotNull(this.switchMode,"switchMode" + Errors.CANT_NULL);
+            this.switchMode(param1);
+        }
+
+        public function returnToStyledModeS() : void
+        {
+            App.utils.asserter.assertNotNull(this.returnToStyledMode,"returnToStyledMode" + Errors.CANT_NULL);
+            this.returnToStyledMode();
         }
 
         public final function as_setBottomPanelInitData(param1:Object) : void

@@ -7,11 +7,14 @@ package net.wg.gui.lobby.vehicleCustomization
     import net.wg.gui.components.controls.DropdownMenu;
     import net.wg.gui.interfaces.ISoundButtonEx;
     import net.wg.gui.components.controls.SimpleTileList;
+    import net.wg.gui.components.controls.CheckBox;
     import net.wg.gui.lobby.vehicleCustomization.data.FiltersPopoverVO;
     import flash.display.InteractiveObject;
+    import net.wg.infrastructure.managers.ITooltipMgr;
     import scaleform.clik.events.ListEvent;
     import scaleform.clik.events.ButtonEvent;
     import flash.events.MouseEvent;
+    import flash.events.Event;
     import net.wg.gui.components.controls.events.RendererEvent;
     import scaleform.clik.constants.InvalidationType;
     import scaleform.clik.data.DataProvider;
@@ -32,13 +35,17 @@ package net.wg.gui.lobby.vehicleCustomization
 
         private static const DD_OFFSET:int = -2;
 
+        private static const CHECKBOX_OFFSET:int = -9;
+
+        private static const AFTER_CHECKBOX_OFFSET:int = 25;
+
         private static const SEPARATOR_OFFSET:int = -29;
 
         private static const INV_FOCUS_CHAIN:String = "InvFocusChain";
 
-        private static const LINKAGE_TOGGLE_RENDERER:String = "ToggleHotFilterRendererUI";
+        private static const LINKAGE_TOGGLE_RENDERER:String = "ToggleHotFilterSmallRendererUI";
 
-        private static const FILTERS_TILE_WIDTH:int = 58;
+        private static const FILTERS_TILE_WIDTH:int = 47;
 
         private static const FILTERS_TILE_HEIGHT:int = 22;
 
@@ -54,9 +61,9 @@ package net.wg.gui.lobby.vehicleCustomization
 
         private static const FILTERS_OFFSET:int = 3;
 
-        private static const AFTER_FILTERS_OFFSET:int = 40;
+        private static const AFTER_FILTERS_OFFSET:int = 20;
 
-        private static const AFTER_FORM_FILTERS_OFFSET:int = 60;
+        private static const AFTER_FORM_FILTERS_OFFSET:int = 18;
 
         public var separator:DisplayObject = null;
 
@@ -76,15 +83,22 @@ package net.wg.gui.lobby.vehicleCustomization
 
         public var formBtns:SimpleTileList = null;
 
+        public var lblAdditional:TextField = null;
+
+        public var additionalCheckBox:CheckBox = null;
+
         private var _initData:FiltersPopoverVO = null;
 
         private var _focusChain:Vector.<InteractiveObject>;
 
         private var _dpInited:Boolean = false;
 
+        private var _toolTipMgr:ITooltipMgr;
+
         public function CustomizationFiltersPopover()
         {
             this._focusChain = new Vector.<InteractiveObject>();
+            this._toolTipMgr = App.toolTipMgr;
             super();
         }
 
@@ -95,6 +109,7 @@ package net.wg.gui.lobby.vehicleCustomization
             this.btnDefault.addEventListener(ButtonEvent.CLICK,this.onBtnDefaultClickHandler);
             this.ddlGroups.addEventListener(MouseEvent.MOUSE_OVER,this.onDdlGroupTypeMouseOverHandler);
             this.ddlGroups.addEventListener(MouseEvent.MOUSE_OUT,this.onDdlGroupTypeMouseOutHandler);
+            this.additionalCheckBox.addEventListener(Event.SELECT,this.onAdditionalCheckBoxSelectHandler);
             this.setListParams(this.filterBtns);
             this.setListParams(this.formBtns);
             this.formBtns.addEventListener(RendererEvent.ITEM_CLICK,this.onFormBtnsItemClickHandler);
@@ -109,6 +124,7 @@ package net.wg.gui.lobby.vehicleCustomization
             this.ddlGroups.removeEventListener(MouseEvent.MOUSE_OUT,this.onDdlGroupTypeMouseOutHandler);
             this.filterBtns.removeEventListener(RendererEvent.ITEM_CLICK,this.onFilterBtnsItemClickHandler);
             this.formBtns.removeEventListener(RendererEvent.ITEM_CLICK,this.onFormBtnsItemClickHandler);
+            this.additionalCheckBox.removeEventListener(Event.SELECT,this.onAdditionalCheckBoxSelectHandler);
             this.separator = null;
             this.lblTitle = null;
             this.lblShowOnlyFilters = null;
@@ -126,6 +142,10 @@ package net.wg.gui.lobby.vehicleCustomization
             this._focusChain = null;
             this.filterBtns.dispose();
             this.filterBtns = null;
+            this.lblAdditional = null;
+            this.additionalCheckBox.dispose();
+            this.additionalCheckBox = null;
+            this._toolTipMgr = null;
             super.onDispose();
         }
 
@@ -154,6 +174,9 @@ package net.wg.gui.lobby.vehicleCustomization
                         this.ddlGroups.selectedIndex = this._initData.groupTypeSelectedIndex;
                     }
                     this.lblGroups.visible = this.ddlGroups.visible;
+                    this.lblAdditional.htmlText = this._initData.lblAdditional;
+                    this.additionalCheckBox.label = this._initData.additionalCheckBoxData.label;
+                    this.additionalCheckBox.toolTip = this._initData.additionalCheckBoxData.tooltip;
                     invalidateSize();
                 }
                 if(isInvalid(InvalidationType.SIZE))
@@ -176,13 +199,27 @@ package net.wg.gui.lobby.vehicleCustomization
                     {
                         this.lblFormFilters.y = _loc1_ + ADD_TEXT_OFFSET;
                         _loc1_ = _loc1_ + this.lblFormFilters.height;
-                        this.formBtns.y = _loc1_ + DD_OFFSET + FILTERS_OFFSET;
-                        _loc1_ = _loc1_ + (ELEMENT_PADDING + AFTER_FORM_FILTERS_OFFSET);
+                        _loc1_ = _loc1_ + (DD_OFFSET + FILTERS_OFFSET);
+                        this.formBtns.validateNow();
+                        this.formBtns.y = _loc1_;
+                        _loc1_ = _loc1_ + (this.formBtns.height + AFTER_FORM_FILTERS_OFFSET);
                     }
                     this.lblShowOnlyFilters.y = _loc1_ + ADD_TEXT_OFFSET;
                     _loc1_ = _loc1_ + this.lblShowOnlyFilters.height;
-                    this.filterBtns.y = _loc1_ + DD_OFFSET + FILTERS_OFFSET;
-                    _loc1_ = _loc1_ + (ELEMENT_PADDING + AFTER_FILTERS_OFFSET);
+                    this.filterBtns.validateNow();
+                    this.filterBtns.y = _loc1_;
+                    _loc1_ = _loc1_ + (this.filterBtns.height + AFTER_FILTERS_OFFSET);
+                    if(this.lblAdditional.visible)
+                    {
+                        this.lblAdditional.y = _loc1_;
+                        _loc1_ = _loc1_ + this.lblAdditional.height;
+                        this.additionalCheckBox.y = _loc1_ + CHECKBOX_OFFSET + FILTERS_OFFSET;
+                        _loc1_ = _loc1_ + (this.additionalCheckBox.height + AFTER_FILTERS_OFFSET);
+                    }
+                    else
+                    {
+                        _loc1_ = _loc1_ + ELEMENT_PADDING;
+                    }
                     this.separator.y = _loc1_ + SEPARATOR_OFFSET;
                     _loc1_ = _loc1_ + this.separator.height;
                     this.btnDefault.y = _loc1_ + BTNDEFAULT_OFFSET;
@@ -204,6 +241,8 @@ package net.wg.gui.lobby.vehicleCustomization
             this.formBtns.dataProvider = this._initData.formsBtns;
             this.formBtns.visible = this._initData.formsBtns && this._initData.formsBtns.length;
             this.lblFormFilters.visible = this.formBtns.visible;
+            this.additionalCheckBox.selected = this._initData.additionalCheckBoxData.selected;
+            this.additionalCheckBox.visible = this.lblAdditional.visible = this._initData.additionalEnabled;
             invalidateData();
         }
 
@@ -289,13 +328,18 @@ package net.wg.gui.lobby.vehicleCustomization
         {
             if(!this.ddlGroups.enabled)
             {
-                App.toolTipMgr.showComplex(this._initData.bonusTypeDisableTooltip);
+                this._toolTipMgr.showComplex(this._initData.bonusTypeDisableTooltip);
             }
         }
 
         private function onDdlGroupTypeMouseOutHandler(param1:MouseEvent) : void
         {
-            App.toolTipMgr.hide();
+            this._toolTipMgr.hide();
+        }
+
+        private function onAdditionalCheckBoxSelectHandler(param1:Event) : void
+        {
+            setHideOnAnotherVehS(this.additionalCheckBox.selected);
         }
     }
 }

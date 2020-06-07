@@ -329,10 +329,6 @@ package
 
         public static const CHOOSEFINALREWARD:String = "#waiting:chooseFinalReward";
 
-        public static const BUYENERGY:String = "#waiting:buyEnergy";
-
-        public static const BUYGENERAL:String = "#waiting:buyGeneral";
-
         public function WAITING()
         {
             super();

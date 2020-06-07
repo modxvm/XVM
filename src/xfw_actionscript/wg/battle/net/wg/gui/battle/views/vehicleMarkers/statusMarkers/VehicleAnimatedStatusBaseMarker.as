@@ -43,7 +43,7 @@ package net.wg.gui.battle.views.vehicleMarkers.statusMarkers
         public function hideEffectTimer(param1:Boolean = false) : void
         {
             this.oneShotAnimation = false;
-            if(currentLabel && currentLabel != STATE_HIDDEN)
+            if(currentFrameLabel && currentFrameLabel != STATE_HIDDEN)
             {
                 gotoAndPlay(param1?STATE_HIDE:STATE_HIDDEN);
             }
@@ -55,11 +55,11 @@ package net.wg.gui.battle.views.vehicleMarkers.statusMarkers
 
         public function isVisible() : Boolean
         {
-            if(currentLabel == null)
+            if(currentFrameLabel == null)
             {
                 return false;
             }
-            return visible || currentLabel != STATE_HIDDEN;
+            return visible || currentFrameLabel != STATE_HIDDEN;
         }
 
         public function onDispose() : void
@@ -165,10 +165,6 @@ package net.wg.gui.battle.views.vehicleMarkers.statusMarkers
             {
                 this.onHiddenStateShowed();
             }
-        }
-
-        public function clearTimer() : void
-        {
         }
     }
 }

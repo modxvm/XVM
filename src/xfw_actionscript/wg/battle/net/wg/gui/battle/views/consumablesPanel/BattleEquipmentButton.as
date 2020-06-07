@@ -27,7 +27,7 @@ package net.wg.gui.battle.views.consumablesPanel
 
         private static const COOLDOWN_COUNTER_BG_RED:String = "red";
 
-        protected static const COOLDOWN_COUNTER_BG_GREEN:String = "green";
+        private static const COOLDOWN_COUNTER_BG_GREEN:String = "green";
 
         private static const COOLDOWN_COUNTER_BG_HIDE:String = "hide";
 
@@ -104,24 +104,19 @@ package net.wg.gui.battle.views.consumablesPanel
             this.consumableBackground.visible = false;
         }
 
-        protected function setBindKeyText() : void
-        {
-            if(this._bindSfKeyCode == KeyProps.KEY_NONE)
-            {
-                this.glow.setBindKeyText(App.utils.locale.makeString(READABLE_KEY_NAMES.KEY_NONE_ALT));
-            }
-            else
-            {
-                this.glow.setBindKeyText(App.utils.commons.keyToString(this._bindSfKeyCode).keyName);
-            }
-        }
-
         override protected function draw() : void
         {
             super.draw();
             if(isInvalid(KEY_VALIDATION))
             {
-                this.setBindKeyText();
+                if(this._bindSfKeyCode == KeyProps.KEY_NONE)
+                {
+                    this.glow.setBindKeyText(App.utils.locale.makeString(READABLE_KEY_NAMES.KEY_NONE_ALT));
+                }
+                else
+                {
+                    this.glow.setBindKeyText(App.utils.commons.keyToString(this._bindSfKeyCode).keyName);
+                }
             }
         }
 
@@ -322,17 +317,13 @@ package net.wg.gui.battle.views.consumablesPanel
             }
         }
 
-        public function setStage(param1:int) : void
-        {
-        }
-
         private function intervalRun() : void
         {
             this._currentIntervalTime = this._currentIntervalTime - 1;
             this.cooldownTimerTf.text = this._currentIntervalTime.toString();
         }
 
-        protected function clearCoolDownText() : void
+        private function clearCoolDownText() : void
         {
             this.cooldownTimerTf.text = Values.EMPTY_STR;
             this.counterBg.gotoAndStop(COOLDOWN_COUNTER_BG_HIDE);
@@ -364,11 +355,6 @@ package net.wg.gui.battle.views.consumablesPanel
         public function set quantity(param1:int) : void
         {
             this.empty = param1 == 0;
-        }
-
-        public function get bindSfKeyCode() : Number
-        {
-            return this._bindSfKeyCode;
         }
 
         public function set key(param1:Number) : void

@@ -52,5 +52,7 @@ package net.wg.gui.battle.random.views.stats.components.playersPanel.interfaces
         function get y() : Number;
 
         function get height() : Number;
+
+        function get isInviteReceived() : Boolean;
     }
 }

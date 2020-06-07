@@ -12,5 +12,9 @@ package net.wg.infrastructure.base.meta
         function as_createBattlePass() : void;
 
         function as_removeBattlePass() : void;
+
+        function as_createRankedBattles() : void;
+
+        function as_removeRankedBattles() : void;
     }
 }

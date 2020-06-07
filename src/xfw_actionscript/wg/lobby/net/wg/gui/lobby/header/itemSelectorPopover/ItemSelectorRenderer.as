@@ -56,7 +56,7 @@ package net.wg.gui.lobby.header.itemSelectorPopover
         {
             super.configUI();
             textField.multiline = true;
-            textField.wordWrap = true;
+            textField.wordWrap = false;
             mouseEnabledOnDisabled = true;
             if(!constraintsDisabled)
             {

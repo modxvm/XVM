@@ -41,18 +41,6 @@ package net.wg.data.constants
 
         public static const SCROLL_BAR:String = "ScrollBar";
 
-        public static const SHOP_MODULE_ITEM_RENDERER:String = "ShopModuleListItemRendererUI";
-
-        public static const SHOP_VEHICLE_ITEM_RENDERER:String = "ShopVehicleListItemRendererUI";
-
-        public static const SHOP_ACCORDION_VEHICLE_BUYING_VIEW:String = "shopVehicleViewUI";
-
-        public static const INVENTORY_ACCORDION_VEHICLE_VIEW:String = "inventoryVehicleViewUI";
-
-        public static const INVENTORY_MODULE_ITEM_RENDERER:String = "InventoryModuleListItemRendererUI";
-
-        public static const INVENTORY_VEHICLE_ITEM_RENDERER:String = "InventoryVehicleListItemRendererUI";
-
         public static const CLR_CSS:String = "net.wg.data.VO.ColorScheme";
 
         public static const TRAINING_DRAG_ELEMENT_UI:String = "DragPlayerElementUI";
@@ -123,11 +111,11 @@ package net.wg.data.constants
 
         public static const BTN_SECONDARY_LARGE:String = "ButtonSecondaryLargeUI";
 
-        public static const GREEN_CHECKBOX_WITH_LABEL:String = "GreenCheckboxWithLabelUI";
-
         public static const QUEST_BIG_ICON_AWARD_ITEM_LINKAGE:String = "QuestBigIconAwardItemUI";
 
         public static const EQUIPMENT_SLOT_UI:String = "EquipmentSlotUI";
+
+        public static const PROGRESSIVE_REWARD_WIDGET:String = "ProgressiveRewardWidgetUI";
 
         public static const INVITES_FRIENDS:String = "FriendsListFromUI";
 
@@ -239,8 +227,6 @@ package net.wg.data.constants
 
         public static const DROWN_ICON:String = "destroyTimerDrownUI";
 
-        public static const EVENTWARNING_ICON:String = "destroyTimerEventWarningUI";
-
         public static const GAS_DRAFT_ICON:String = "destroyTimerGazDraftUI";
 
         public static const STUN_ICON:String = "secondaryStunIconUI";
@@ -276,12 +262,6 @@ package net.wg.data.constants
         public static const ENTITIES_POPUP:String = "EntitiesStatePopUpUI";
 
         public static const ENTITY_BUTTON:String = "EntityStateButtonUI";
-
-        public static const EVENT_SHELL_BUTTON_BATTLE:String = "EventShellButtonBattleUI";
-
-        public static const EVENT_EQUIPMENT_BUTTON:String = "EventEquipmentButtonUI";
-
-        public static const EVENT_DEATH_ZONE:String = "destroyTimerEventDeathZoneUI";
 
         public static const OPTIONAL_DEVICE_BUTTON:String = "OptionalDeviceButtonUI";
 
@@ -769,11 +749,11 @@ package net.wg.data.constants
 
         public static const CUSTOMIZATION_DECAL_ANCHOR_RENDERER_LINKAGE:String = "CustomizationDecalAnchorRendererUI";
 
-        public static const CUSTOMIZATION_SEASON_BUY_RENDERER:String = "PurchaseTableRendererUI";
-
         public static const CUSTOMIZATION_ITEM_ICON_RENDERER:String = "CustomizationItemIconRendererUI";
 
         public static const CUSTOMIZATION_KIT_RENDERER:String = "CustomizationKitRendererUI";
+
+        public static const CUSTOMIZATION_EDITED_ITEM_RENDERER:String = "CustomizationPopoverEditedItemRendererUI";
 
         public static const CUSTOMIZATION_IMAGE_WRAPPER:String = "CustomizationImageWrapperUI";
 
@@ -849,6 +829,8 @@ package net.wg.data.constants
 
         public static const BLUEPRINTS_CARD_RENDERER:String = "BlueprintsCardUI";
 
+        public static const OFFER_CARD_RENDERER:String = "OfferCardUI";
+
         public static const EPIC_BATTLE_RESULTS_VEHICLE_RENDERER:String = "EpicVehicleSelectionItemRendererUI";
 
         public static const LINK_EPIC_EFFICIENCY_ITEM_RENDERER:String = "EpicEfficiencyItemRendererUI";
@@ -902,10 +884,6 @@ package net.wg.data.constants
         public static const NATION_TREE_PREMIUM_DOTS_PATTERN:String = "PremiumDotUI";
 
         public static const TEN_YEARS_ENTRY_POINT_ANIM_UI:String = "TenYearsEntryPointAnimUI";
-
-        public static const STATS_PLAYERBLOCK_RENDERER:String = "StatsPlayerBlockRendererUI";
-
-        public static const SE20_BANNER:String = "EventBannerUI";
 
         public function Linkages()
         {

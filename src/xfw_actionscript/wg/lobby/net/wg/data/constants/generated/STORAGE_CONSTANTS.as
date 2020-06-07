@@ -15,6 +15,8 @@ package net.wg.data.constants.generated
 
         public static const BLUEPRINTS:String = "blueprints";
 
+        public static const OFFERS:String = "offers";
+
         public static const FOR_SELL_VIEW:String = "StorageCategoryForSellViewUI";
 
         public static const STORAGE_VIEW:String = "StorageCategoryStorageViewUI";
@@ -42,6 +44,8 @@ package net.wg.data.constants.generated
         public static const CUSTOMIZATION_VIEW:String = "StorageCategoryCustomizationViewUI";
 
         public static const BLUEPRINTS_VIEW:String = "StorageCategoryBlueprintsViewUI";
+
+        public static const OFFERS_VIEW:String = "StorageCategoryOffersViewUI";
 
         public static const INVENTORY_TAB_ALL:String = "all";
 

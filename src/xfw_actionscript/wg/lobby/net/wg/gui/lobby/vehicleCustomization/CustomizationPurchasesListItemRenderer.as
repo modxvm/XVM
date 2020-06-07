@@ -132,7 +132,7 @@ package net.wg.gui.lobby.vehicleCustomization
         {
             if(param1.target != this.removeCurrencytBtn)
             {
-                this._toolTipMgr.showSpecial(TOOLTIPS_CONSTANTS.TECH_CUSTOMIZATION_ITEM,null,this._id,false);
+                this._toolTipMgr.showSpecial(TOOLTIPS_CONSTANTS.TECH_CUSTOMIZATION_ITEM,null,this._id,-1);
             }
         }
     }

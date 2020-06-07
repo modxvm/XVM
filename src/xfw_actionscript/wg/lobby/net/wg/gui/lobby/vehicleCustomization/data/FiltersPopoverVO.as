@@ -1,6 +1,7 @@
 package net.wg.gui.lobby.vehicleCustomization.data
 {
     import net.wg.data.daapi.base.DAAPIDataClass;
+    import net.wg.gui.components.carousels.data.CheckBoxRendererVO;
     import scaleform.clik.data.DataProvider;
     import net.wg.gui.components.controls.VO.SimpleRendererVO;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
@@ -14,11 +15,15 @@ package net.wg.gui.lobby.vehicleCustomization.data
 
         private static const FORMS_BTNS:String = "formsBtns";
 
+        private static const ADDITIONAL_CHECKBOX_DATA:String = "additionalCheckBoxData";
+
         public var lblTitle:String = "";
 
         public var lblGroups:String = "";
 
         public var lblShowOnlyFilters:String = "";
+
+        public var lblAdditional:String = "";
 
         public var formsBtnsLbl:String = "";
 
@@ -29,6 +34,10 @@ package net.wg.gui.lobby.vehicleCustomization.data
         public var groupTypeSelectedIndex:int = -1;
 
         public var btnDefaultTooltip:String = "";
+
+        public var additionalEnabled:Boolean = false;
+
+        public var additionalCheckBoxData:CheckBoxRendererVO = null;
 
         public var groupType:Vector.<String> = null;
 
@@ -72,6 +81,11 @@ package net.wg.gui.lobby.vehicleCustomization.data
                 }
                 return false;
             }
+            if(param1 == ADDITIONAL_CHECKBOX_DATA)
+            {
+                this.additionalCheckBoxData = new CheckBoxRendererVO(param2);
+                return false;
+            }
             return super.onDataWrite(param1,param2);
         }
 
@@ -91,6 +105,11 @@ package net.wg.gui.lobby.vehicleCustomization.data
                 }
                 this.filterBtns.cleanUp();
                 this.filterBtns = null;
+            }
+            if(this.additionalCheckBoxData)
+            {
+                this.additionalCheckBoxData.dispose();
+                this.additionalCheckBoxData = null;
             }
             super.onDispose();
         }

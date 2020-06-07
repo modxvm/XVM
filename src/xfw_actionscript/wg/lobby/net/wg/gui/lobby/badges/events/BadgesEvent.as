@@ -21,14 +21,15 @@ package net.wg.gui.lobby.badges.events
 
         public var selected:Boolean;
 
-        public function BadgesEvent(param1:String, param2:Boolean = false, param3:Boolean = false)
+        public function BadgesEvent(param1:String, param2:Boolean = false, param3:Boolean = false, param4:int = -1)
         {
+            this.badgeID = param4;
             super(param1,param2,param3);
         }
 
         override public function clone() : Event
         {
-            return new BadgesEvent(type,bubbles,cancelable);
+            return new BadgesEvent(type,bubbles,cancelable,this.badgeID);
         }
 
         override public function toString() : String

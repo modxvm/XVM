@@ -35,7 +35,6 @@ package net.wg.gui.lobby.progressiveReward
         override protected function setData(param1:ProgressiveRewardVO) : void
         {
             var _loc2_:Boolean = param1.isEnabled;
-            dispatchEvent(new ProgressiveRewardEvent(ProgressiveRewardEvent.SWITCH_WIDGET_ENABLED,_loc2_));
             if(_loc2_)
             {
                 this.progressiveReward.setData(param1);

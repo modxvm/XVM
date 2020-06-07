@@ -550,5 +550,10 @@ package net.wg.gui.battle.components.stats.playersPanel.list
                 dispatchEvent(new PlayersPanelListEvent(PlayersPanelListEvent.ITEM_SELECTED,_loc2_.vehicleID));
             }
         }
+
+        public function get isInviteReceived() : Boolean
+        {
+            return false;
+        }
     }
 }

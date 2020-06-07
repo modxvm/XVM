@@ -9,18 +9,20 @@ package net.wg.infrastructure.base.meta
 
         function onBackClickS() : void;
 
-        function onBuyOrResearchClickS() : void;
-
         function onOpenInfoTabS(param1:int) : void;
 
         function onCompareClickS() : void;
 
-        function as_setStaticData(param1:Object) : void;
+        function as_setData(param1:Object) : void;
 
-        function as_updateInfoData(param1:Object) : void;
+        function as_setTabsData(param1:Array) : void;
 
-        function as_updateVehicleStatus(param1:String) : void;
+        function as_show3DSceneTooltip(param1:String, param2:Array) : void;
 
-        function as_updateBuyingPanel(param1:Object) : void;
+        function as_hide3DSceneTooltip() : void;
+
+        function as_setBottomPanel(param1:String) : void;
+
+        function as_setBulletVisibility(param1:int, param2:Boolean) : void;
     }
 }

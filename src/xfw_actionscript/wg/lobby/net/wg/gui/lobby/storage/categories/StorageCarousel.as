@@ -3,8 +3,8 @@ package net.wg.gui.lobby.storage.categories
     import net.wg.gui.components.carousels.ScrollCarousel;
     import net.wg.infrastructure.interfaces.IFocusChainContainer;
     import net.wg.utils.IStageSizeDependComponent;
-    import net.wg.gui.lobby.storage.categories.cards.CardSizeConfig;
-    import net.wg.gui.lobby.storage.categories.cards.CardSizeVO;
+    import net.wg.gui.lobby.storage.categories.cards.configs.CardConfigs;
+    import net.wg.gui.lobby.storage.categories.cards.configs.CardSizeVO;
     import net.wg.utils.StageSizeBoundaries;
     import scaleform.clik.constants.DirectionMode;
     import scaleform.clik.constants.InvalidationType;
@@ -21,8 +21,8 @@ package net.wg.gui.lobby.storage.categories
 
         public function setStateSizeBoundaries(param1:int, param2:int) : void
         {
-            var param1:int = App.stageSizeMgr.calcAllowSize(param1,CardSizeConfig.ALLOW_CARDS_RESOLUTION);
-            var _loc3_:CardSizeVO = CardSizeConfig.getConfig(param1);
+            var param1:int = App.stageSizeMgr.calcAllowSize(param1,CardConfigs.getInstance().allowCardsResolution);
+            var _loc3_:CardSizeVO = CardConfigs.getInstance().cardSize.getConfig(param1);
             var _loc4_:int = param1 == StageSizeBoundaries.WIDTH_1024?3:4;
             scrollList.columnCount = _loc4_;
             scrollList.rendererWidth = _loc3_.size.width;

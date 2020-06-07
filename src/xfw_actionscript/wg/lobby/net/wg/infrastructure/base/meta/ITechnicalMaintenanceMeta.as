@@ -26,7 +26,5 @@ package net.wg.infrastructure.base.meta
         function as_setGold(param1:Number) : void;
 
         function as_resetEquipment(param1:String) : void;
-
-        function as_showEventInfo(param1:Boolean, param2:String) : void;
     }
 }

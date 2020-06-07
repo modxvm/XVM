@@ -17,7 +17,7 @@ package net.wg.gui.lobby.rankedBattles19.battleResults.components
 
         private static var _blackWhiteFilters:Array = null;
 
-        private static const RENDERER_HEIGHT:int = 116;
+        private static const RENDERER_MIN_HEIGHT:int = 116;
 
         private static const TITLE_PADDING_RIGHT:int = 120;
 
@@ -33,9 +33,11 @@ package net.wg.gui.lobby.rankedBattles19.battleResults.components
 
         private static const PLATE_ICON_OFFSET_Y:int = -3;
 
+        private static const LINE_MC_OFFSET_Y:int = 10;
+
         private static const DESCRIPTION_ICON_MIN_WIDTH:int = 30;
 
-        private static const DESCRIPTION_ICON_OFSET_X:int = 10;
+        private static const DESCRIPTION_ICON_OFFSET_X:int = 10;
 
         public var titleTF:TextField = null;
 
@@ -137,6 +139,7 @@ package net.wg.gui.lobby.rankedBattles19.battleResults.components
                 }
                 if(isInvalid(InvalidationType.LAYOUT))
                 {
+                    this.lineMC.y = Math.max(this.descriptionTF.height + LINE_MC_OFFSET_Y | 0,RENDERER_MIN_HEIGHT);
                     this.titleTF.x = TITLE_PADDING_RIGHT - this.titleTF.width;
                     this.titleTF.y = this.height - this.titleTF.height >> 1;
                     this.icon.x = ICON_CENTER_X - (this.icon.width >> 1);
@@ -158,7 +161,7 @@ package net.wg.gui.lobby.rankedBattles19.battleResults.components
                     {
                         this.descriptionIcon.x = _loc4_;
                         this.descriptionIcon.y = this.height - this.descriptionIcon.height >> 1;
-                        _loc4_ = _loc4_ + (Math.max(this.descriptionIcon.width,DESCRIPTION_ICON_MIN_WIDTH) + DESCRIPTION_ICON_OFSET_X);
+                        _loc4_ = _loc4_ + (Math.max(this.descriptionIcon.width,DESCRIPTION_ICON_MIN_WIDTH) + DESCRIPTION_ICON_OFFSET_X);
                     }
                     this.descriptionTF.x = _loc4_;
                     this.descriptionTF.y = this.height - this.descriptionTF.height >> 1;
@@ -201,7 +204,7 @@ package net.wg.gui.lobby.rankedBattles19.battleResults.components
 
         override public function get height() : Number
         {
-            return RENDERER_HEIGHT;
+            return this.lineMC.y;
         }
 
         private function onIconChangeHandler(param1:Event) : void

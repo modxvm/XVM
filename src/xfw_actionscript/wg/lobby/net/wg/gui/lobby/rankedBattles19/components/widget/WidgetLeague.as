@@ -4,6 +4,7 @@ package net.wg.gui.lobby.rankedBattles19.components.widget
     import net.wg.gui.interfaces.IUpdatableComponent;
     import net.wg.gui.lobby.rankedBattles19.components.interfaces.IResizableRankedComponent;
     import net.wg.data.constants.generated.RANKEDBATTLES_ALIASES;
+    import net.wg.data.constants.generated.RANKEDBATTLES_CONSTS;
     import flash.geom.Point;
     import net.wg.gui.lobby.rankedBattles19.components.ImageContainer;
     import net.wg.gui.lobby.rankedBattles19.components.stats.RankedBattleStats;
@@ -21,21 +22,29 @@ package net.wg.gui.lobby.rankedBattles19.components.widget
     public class WidgetLeague extends UIComponentEx implements IUpdatableComponent, IResizableRankedComponent
     {
 
-        private static const WIDTH:int = 310;
-
-        private static const HEIGHT:int = 130;
-
         private static const STATS_VALUE_Y_OFFSET:int = -8;
 
         private static const IMAGE_SIZE_MEDIUM:String = "130x130";
 
         private static const IMAGE_SIZE_SMALL:String = "100x100";
 
+        private static const SIZES_WIDTH:Object = {};
+
+        private static const SIZES_HEIGHT:Object = {};
+
         private static const IMAGE_POSITIONS:Object = {};
 
+        private static const STATS_POSITIONS_X_OFFSETS:Object = {};
+
         {
+            SIZES_WIDTH[RANKEDBATTLES_ALIASES.WIDGET_MEDIUM] = RANKEDBATTLES_CONSTS.WIDGET_MEDIUM_WIDTH;
+            SIZES_WIDTH[RANKEDBATTLES_ALIASES.WIDGET_SMALL] = RANKEDBATTLES_CONSTS.WIDGET_SMALL_WIDTH;
+            SIZES_HEIGHT[RANKEDBATTLES_ALIASES.WIDGET_MEDIUM] = 130;
+            SIZES_HEIGHT[RANKEDBATTLES_ALIASES.WIDGET_SMALL] = 100;
             IMAGE_POSITIONS[RANKEDBATTLES_ALIASES.WIDGET_MEDIUM] = new Point(-65,-65);
-            IMAGE_POSITIONS[RANKEDBATTLES_ALIASES.WIDGET_SMALL] = new Point(-50,-50);
+            IMAGE_POSITIONS[RANKEDBATTLES_ALIASES.WIDGET_SMALL] = new Point(-50,-60);
+            STATS_POSITIONS_X_OFFSETS[RANKEDBATTLES_ALIASES.WIDGET_MEDIUM] = 136;
+            STATS_POSITIONS_X_OFFSETS[RANKEDBATTLES_ALIASES.WIDGET_SMALL] = 116;
         }
 
         public var leagueMc:ImageContainer = null;
@@ -116,6 +125,8 @@ package net.wg.gui.lobby.rankedBattles19.components.widget
                     _loc2_ = IMAGE_POSITIONS[this._size];
                     this.leagueMc.setImgPoint(_loc2_);
                     this.leagueEffectMc.setImgPoint(_loc2_);
+                    this.statsInfo.x = STATS_POSITIONS_X_OFFSETS[this._size];
+                    this.statsDelta.x = -STATS_POSITIONS_X_OFFSETS[this._size];
                 }
             }
         }
@@ -157,12 +168,12 @@ package net.wg.gui.lobby.rankedBattles19.components.widget
 
         override public function get width() : Number
         {
-            return WIDTH;
+            return SIZES_WIDTH[this._size];
         }
 
         override public function get height() : Number
         {
-            return HEIGHT;
+            return SIZES_HEIGHT[this._size];
         }
 
         public function get componentSize() : String

@@ -25,6 +25,8 @@ package net.wg.gui.components.carousels.filters
 
         private static const LINKAGE_TOGGLE_RENDERER:String = "ToggleHotFilterRendererUI";
 
+        private static const IS_RANKED_FIELD:String = "isRanked";
+
         private static const IS_FRONTLINE_FIELD:String = "isFrontline";
 
         private static const HOT_FILTER_TILE_WIDTH:uint = 58;
@@ -183,6 +185,7 @@ package net.wg.gui.components.carousels.filters
 
         protected function showPopup() : void
         {
+            this._popoverData[IS_RANKED_FIELD] = this._initVO.isRanked;
             this._popoverData[IS_FRONTLINE_FIELD] = this._initVO.isFrontline;
             this.popoverMgr.show(this,this._initVO.popoverAlias,this._popoverData);
         }

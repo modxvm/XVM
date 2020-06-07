@@ -61,10 +61,6 @@ package net.wg.data.constants.generated
 
         public static const ASSIST_BY_ABILITY:String = "assistByAbility";
 
-        public static const EVENT_ABILITY_DAMAGE:String = "eventAbilityDamage";
-
-        public static const EVENT_DEATHZONE_DAMAGE:String = "eventDeathZoneDamage";
-
         public function BATTLE_EFFICIENCY_TYPES()
         {
             super();

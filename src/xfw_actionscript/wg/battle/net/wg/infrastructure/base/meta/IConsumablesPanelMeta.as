@@ -5,7 +5,7 @@ package net.wg.infrastructure.base.meta
     public interface IConsumablesPanelMeta extends IEventDispatcher
     {
 
-        function onClickedToSlotS(param1:Number) : void;
+        function onClickedToSlotS(param1:Number, param2:int) : void;
 
         function onPopUpClosedS() : void;
 
@@ -13,7 +13,7 @@ package net.wg.infrastructure.base.meta
 
         function as_setItemQuantityInSlot(param1:int, param2:int) : void;
 
-        function as_setItemTimeQuantityInSlot(param1:int, param2:int, param3:Number, param4:Number, param5:int) : void;
+        function as_setItemTimeQuantityInSlot(param1:int, param2:int, param3:Number, param4:Number) : void;
 
         function as_setCoolDownTime(param1:int, param2:Number, param3:Number, param4:Number, param5:Boolean) : void;
 

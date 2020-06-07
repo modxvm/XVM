@@ -15,19 +15,15 @@ package
 
         public static const MAPS_ICONS_BATTLEPASS2020_BUY_BG:String = "../maps/icons/battlePass2020/buy/bg.png";
 
-        public static const MAPS_ICONS_BATTLEPASS2020_INTRO_BG:String = "../maps/icons/battlePass2020/intro/bg.png";
+        public static const MAPS_ICONS_BATTLEPASS2020_OFF_SEASON_BG:String = "../maps/icons/battlePass2020/off_season/bg.png";
 
         public static const MAPS_ICONS_BATTLEPASS2020_PROGRESSION_BG:String = "../maps/icons/battlePass2020/progression/bg.png";
 
         public static const MAPS_ICONS_BATTLEPASS2020_VOTING_BG:String = "../maps/icons/battlePass2020/voting/bg.png";
 
-        public static const MAPS_ICONS_BOB_HANGAR_PRIMETIMEVIEW_BG:String = "../maps/icons/bob/hangar/primeTimeView/bg.png";
-
         public static const MAPS_ICONS_DEMOUNTKIT_BG:String = "../maps/icons/demountKit/bg.png";
 
         public static const MAPS_ICONS_PREMACC_DASHBOARD_HEADER_BADGESLOT_BG:String = "../maps/icons/premacc/dashboard/header/badgeSlot/bg.png";
-
-        public static const MAPS_ICONS_SECRETEVENT_ABOUT_BG:String = "../maps/icons/secretEvent/about/bg.png";
 
         public static const MAPS_ICONS_TANKMEN_ICONS_SMALL_USSR_DOG_1:String = "../maps/icons/tankmen/icons/small/ussr-dog-1.png";
 

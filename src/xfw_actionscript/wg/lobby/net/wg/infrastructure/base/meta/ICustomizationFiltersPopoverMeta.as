@@ -13,6 +13,12 @@ package net.wg.infrastructure.base.meta
 
         function setShowOnlyAcquiredS(param1:Boolean) : void;
 
+        function setHideOnAnotherVehS(param1:Boolean) : void;
+
+        function setShowOnlyProgressionDecalsS(param1:Boolean) : void;
+
+        function setShowOnlyEditableStylesS(param1:Boolean) : void;
+
         function onFilterChangeS(param1:int, param2:Boolean) : void;
 
         function onFormChangeS(param1:int, param2:Boolean) : void;

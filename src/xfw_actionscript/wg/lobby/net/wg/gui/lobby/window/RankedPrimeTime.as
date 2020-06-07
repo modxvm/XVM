@@ -29,6 +29,7 @@ package net.wg.gui.lobby.window
         {
             super.configUI();
             serversDD.labelField = this.SERVER_LABEL_FIELD;
+            setBackground(RES_ICONS.MAPS_ICONS_RANKEDBATTLES_BG_MAIN);
             App.stageSizeMgr.register(this);
         }
 

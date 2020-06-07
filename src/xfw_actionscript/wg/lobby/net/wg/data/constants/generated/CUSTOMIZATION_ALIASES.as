@@ -11,6 +11,8 @@ package net.wg.data.constants.generated
 
         public static const CUSTOMIZATION_SHEET_SWITCH_RENDERER_UI:String = "CustomizationSheetSwitchRendererUI";
 
+        public static const PROGRESSIVE_ITEMS_BROWSER_VIEW:String = "ProgressiveItemsBrowserView";
+
         public static const CUSTOMIZATION_SHEET_ACTION_APPLY_TO_ALL_PARTS:int = 0;
 
         public static const CUSTOMIZATION_SHEET_ACTION_APPLY_TO_ALL_SEASONS:int = 1;
@@ -27,15 +29,21 @@ package net.wg.data.constants.generated
 
         public static const CUSTOMIZATION_SHEET_ACTION_CLOSE:int = 7;
 
-        public static const CUSTOMIZATION_SHEET_ACTION_MIRROR:int = 8;
+        public static const CUSTOMIZATION_SHEET_ACTION_HORIZONZONTAL_MIRROR:int = 8;
 
-        public static const CUSTOMIZATION_SHEET_ACTION_MOVE:int = 9;
+        public static const CUSTOMIZATION_SHEET_ACTION_VERTICAL_MIRROR:int = 9;
 
-        public static const CUSTOMIZATION_SHEET_ACTION_EDIT:int = 10;
+        public static const CUSTOMIZATION_SHEET_ACTION_MOVE:int = 10;
 
-        public static const CUSTOMIZATION_SHEET_ACTION_INFO:int = 11;
+        public static const CUSTOMIZATION_SHEET_ACTION_EDIT:int = 11;
 
-        public static const CUSTOMIZATION_SHEET_ACTION_GET_BACK:int = 12;
+        public static const CUSTOMIZATION_SHEET_ACTION_INFO:int = 12;
+
+        public static const CUSTOMIZATION_SHEET_ACTION_GET_BACK:int = 13;
+
+        public static const CUSTOMIZATION_SHEET_ACTION_SWITCH_PROGRESSION_LVL:int = 14;
+
+        public static const CUSTOMIZATION_SHEET_ACTION_EDIT_STYLE:int = 15;
 
         public static const CUSTOMIZATION_SEASON_SUMMER:int = 0;
 
@@ -66,10 +74,6 @@ package net.wg.data.constants.generated
         public static const SOUND_CUST_CHOICE_NUMBER_DENIED:String = "cust_choice_number_denied";
 
         public static const SOUND_CUST_HIGHLIGHT:String = "highlight";
-
-        public static const PROJECTION_DECAL_TAB_SHOWN_FIELD:String = "isProjectionDecalTabShown";
-
-        public static const USER_NUMBER_TAB_SHOWN_FIELD:String = "isUserNumberTabShown";
 
         public static const PROJECTION_DECAL_FORMFACTOR_ANY:String = "formfactor_any";
 

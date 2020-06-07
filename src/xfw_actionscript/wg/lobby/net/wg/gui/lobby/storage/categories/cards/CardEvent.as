@@ -11,6 +11,8 @@ package net.wg.gui.lobby.storage.categories.cards
 
         public static const SELL:String = "sell";
 
+        public static const PREVIEW:String = "preview";
+
         public static const REMOVE:String = "remove";
 
         public static const UPGRADE:String = "upgrade";

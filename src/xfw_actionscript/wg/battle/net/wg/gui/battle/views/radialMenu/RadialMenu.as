@@ -28,9 +28,7 @@ package net.wg.gui.battle.views.radialMenu
 
         private static const PAUSE_BEFORE_HIDE:int = 300;
 
-        protected static const CIRCLE_DEGREES:int = 360;
-
-        private static const OFFSET_ANGLE:int = 45;
+        private static const CIRCLE_DEGREES:int = 360;
 
         private static const HIDE_STATE:String = "hide";
 
@@ -53,6 +51,8 @@ package net.wg.gui.battle.views.radialMenu
         private var _stateMap:Dictionary;
 
         private var _state:String = "default";
+
+        private var _offsetAngle:Number = 45;
 
         private var _stageWidth:int = 0;
 
@@ -79,21 +79,10 @@ package net.wg.gui.battle.views.radialMenu
             this._stateMap = new Dictionary();
             this._mouseOffset = new Point(0,0);
             super();
-            this._buttons = this.getButtons();
+            this._buttons = new <RadialButton>[this.negativeBtn,this.toBaseBtn,this.helpBtn,this.reloadBtn,this.attackBtn,this.positiveBtn];
             this._buttonsCount = this._buttons.length;
             this.internalHide();
             this.updateButtons();
-        }
-
-        protected static function hideButton(param1:Array) : void
-        {
-            var _loc2_:RadialButton = param1[0];
-            _loc2_.state = HIDE_STATE;
-        }
-
-        protected function getButtons() : Vector.<RadialButton>
-        {
-            return new <RadialButton>[this.negativeBtn,this.toBaseBtn,this.helpBtn,this.reloadBtn,this.attackBtn,this.positiveBtn];
         }
 
         override protected function buildData(param1:Array) : void
@@ -114,7 +103,7 @@ package net.wg.gui.battle.views.radialMenu
             this._isAction = false;
             this._state = param1;
             App.utils.scheduler.cancelTask(this.internalHide);
-            App.utils.scheduler.cancelTask(hideButton);
+            App.utils.scheduler.cancelTask(this.hideButton);
             this.updateData();
             this.internalShow();
             x = param2[0];
@@ -133,11 +122,6 @@ package net.wg.gui.battle.views.radialMenu
         override protected function configUI() : void
         {
             super.configUI();
-            this.configBG();
-        }
-
-        protected function configBG() : void
-        {
             this.pane.imageName = BATTLEATLAS.RADIAL_MENU_BACKGROUND;
             this.background.setBackgroundAlpha(BACK_ALPHA);
         }
@@ -145,7 +129,7 @@ package net.wg.gui.battle.views.radialMenu
         override protected function onDispose() : void
         {
             App.utils.scheduler.cancelTask(this.internalHide);
-            App.utils.scheduler.cancelTask(hideButton);
+            App.utils.scheduler.cancelTask(this.hideButton);
             this.internalHide();
             this._buttons.length = 0;
             App.utils.data.cleanupDynamicObject(this._stateMap);
@@ -182,49 +166,37 @@ package net.wg.gui.battle.views.radialMenu
             invalidate(InvalidationType.SIZE);
         }
 
-        protected function updateData() : void
+        private function updateData() : void
         {
-            var _loc3_:Object = null;
+            var _loc2_:RadialButton = null;
+            var _loc4_:Object = null;
             var _loc1_:Array = this._stateMap[this._state];
-            var _loc2_:uint = 0;
-            while(_loc2_ < this._buttonsCount)
+            var _loc3_:uint = 0;
+            while(_loc3_ < this._buttonsCount)
             {
-                _loc3_ = this.getButtonData(_loc1_,_loc2_);
-                this.updateButton(this._buttons[_loc2_],_loc3_);
-                _loc2_++;
+                _loc2_ = this._buttons[_loc3_];
+                _loc4_ = _loc1_[_loc3_];
+                if(_loc4_ != null)
+                {
+                    _loc2_.title = _loc4_.title;
+                    _loc2_.action = _loc4_.action;
+                    _loc2_.icon = _loc4_.icon;
+                    if(!isNaN(_loc4_.key) && _loc4_.key != KeyProps.KEY_NONE)
+                    {
+                        _loc2_.hotKey = App.utils.commons.keyToString(_loc4_.key).keyName;
+                    }
+                    else
+                    {
+                        _loc2_.hotKey = DEFAULT_NONE_KEY;
+                    }
+                }
+                _loc2_.idx = _loc3_;
+                _loc2_.enabled = false;
+                _loc3_++;
             }
         }
 
-        protected function updateButton(param1:RadialButton, param2:Object) : void
-        {
-            if(param2 != null)
-            {
-                param1.title = param2.title;
-                param1.action = param2.action;
-                param1.icon = param2.icon;
-                if(!isNaN(param2.key) && param2.key != KeyProps.KEY_NONE)
-                {
-                    param1.hotKey = App.utils.commons.keyToString(param2.key).keyName;
-                }
-                else
-                {
-                    param1.hotKey = DEFAULT_NONE_KEY;
-                }
-            }
-            param1.enabled = false;
-        }
-
-        protected final function getStateData(param1:String) : Array
-        {
-            return this._stateMap[param1];
-        }
-
-        protected function getButtonData(param1:Array, param2:uint) : Object
-        {
-            return param1[param2];
-        }
-
-        protected function selectButton(param1:RadialButton) : void
+        private function selectButton(param1:RadialButton) : void
         {
             if(!param1.selected)
             {
@@ -234,7 +206,7 @@ package net.wg.gui.battle.views.radialMenu
             }
         }
 
-        protected function unSelectButton(param1:RadialButton) : void
+        private function unSelectButton(param1:RadialButton) : void
         {
             if(param1.selected)
             {
@@ -243,22 +215,19 @@ package net.wg.gui.battle.views.radialMenu
             }
         }
 
-        protected function cancelButton(param1:RadialButton) : void
+        private function cancelButton(param1:RadialButton) : void
         {
             param1.state = InteractiveStates.UP;
             param1.selected = false;
         }
 
-        protected function internalShow() : void
+        private function internalShow() : void
         {
             this._scaleKoefX = 1 / App.stage.scaleX;
             this._scaleKoefY = 1 / App.stage.scaleY;
             this._hideWithAnimationState = false;
             visible = true;
-            if(this.pane != null)
-            {
-                this.pane.visible = true;
-            }
+            this.pane.visible = true;
             this.background.visible = true;
             var _loc1_:uint = 0;
             while(_loc1_ < this._buttonsCount)
@@ -278,7 +247,7 @@ package net.wg.gui.battle.views.radialMenu
             this._wheelPosition = -1;
         }
 
-        protected function hideWithAnimation() : void
+        private function hideWithAnimation() : void
         {
             App.utils.scheduler.scheduleTask(this.internalHide,EFFECT_TIME);
             this._hideWithAnimationState = true;
@@ -290,7 +259,7 @@ package net.wg.gui.battle.views.radialMenu
             }
         }
 
-        protected function internalHide() : void
+        private function internalHide() : void
         {
             visible = false;
             this._hideWithAnimationState = false;
@@ -302,26 +271,32 @@ package net.wg.gui.battle.views.radialMenu
             }
         }
 
-        protected function updateButtons() : void
+        private function hideButton(param1:Array) : void
+        {
+            var _loc2_:RadialButton = param1[0];
+            _loc2_.state = HIDE_STATE;
+        }
+
+        private function updateButtons() : void
         {
             var _loc2_:RadialButton = null;
             var _loc3_:* = NaN;
-            var _loc1_:Number = (CIRCLE_DEGREES - (OFFSET_ANGLE << 1)) / this._buttons.length;
+            var _loc1_:Number = (CIRCLE_DEGREES - (this._offsetAngle << 1)) / this._buttons.length;
             var _loc4_:uint = 0;
             while(_loc4_ < this._buttonsCount)
             {
                 _loc2_ = this._buttons[_loc4_];
-                _loc3_ = _loc1_ * _loc4_ + OFFSET_ANGLE;
+                _loc3_ = _loc1_ * _loc4_ + this._offsetAngle;
                 if(_loc4_ > this._buttonsCount >> 1 - 1)
                 {
-                    _loc3_ = -CIRCLE_DEGREES + _loc3_ + OFFSET_ANGLE;
+                    _loc3_ = -CIRCLE_DEGREES + _loc3_ + this._offsetAngle;
                 }
                 _loc2_.angle = _loc3_;
                 _loc4_++;
             }
         }
 
-        protected function action() : void
+        private function action() : void
         {
             var _loc1_:* = false;
             var _loc2_:RadialButton = null;
@@ -335,7 +310,7 @@ package net.wg.gui.battle.views.radialMenu
                     _loc2_ = this._buttons[_loc3_];
                     if(_loc2_.selected)
                     {
-                        App.utils.scheduler.scheduleTask(hideButton,PAUSE_BEFORE_HIDE,[_loc2_]);
+                        App.utils.scheduler.scheduleTask(this.hideButton,PAUSE_BEFORE_HIDE,[_loc2_]);
                         this._isAction = true;
                         onActionS(_loc2_.action);
                         _loc1_ = true;
@@ -348,7 +323,7 @@ package net.wg.gui.battle.views.radialMenu
                 }
                 if(_loc1_)
                 {
-                    this.onHideFromSchedule();
+                    this.pane.visible = false;
                     this.background.visible = false;
                     this.hideWithAnimation();
                 }
@@ -359,22 +334,12 @@ package net.wg.gui.battle.views.radialMenu
             }
         }
 
-        protected function onHideFromSchedule() : void
-        {
-            this.pane.visible = false;
-        }
-
         override public function get visible() : Boolean
         {
             return !this._hideWithAnimationState && super.visible;
         }
 
         private function onButtonMouseDownHandler(param1:MouseEvent) : void
-        {
-            this.onButtonMouseDown(param1);
-        }
-
-        protected function onButtonMouseDown(param1:MouseEvent) : void
         {
             if(param1 is MouseEventEx)
             {
@@ -390,11 +355,6 @@ package net.wg.gui.battle.views.radialMenu
         }
 
         private function onMouseMoveHandler(param1:MouseEvent) : void
-        {
-            this.onMouseMove(param1);
-        }
-
-        protected function onMouseMove(param1:MouseEvent) : void
         {
             var _loc2_:uint = 0;
             var _loc3_:Point = null;
@@ -457,11 +417,6 @@ package net.wg.gui.battle.views.radialMenu
 
         private function onMouseWheelHandler(param1:MouseEvent) : void
         {
-            this.onMouseWheel(param1);
-        }
-
-        protected function onMouseWheel(param1:MouseEvent) : void
-        {
             var _loc2_:* = 0;
             var _loc3_:RadialButton = null;
             var _loc4_:uint = 0;
@@ -504,36 +459,6 @@ package net.wg.gui.battle.views.radialMenu
                 }
                 this.selectButton(this._buttons[this._wheelPosition]);
             }
-        }
-
-        protected function get state() : String
-        {
-            return this._state;
-        }
-
-        protected function get isAction() : Boolean
-        {
-            return this._isAction;
-        }
-
-        protected function get buttons() : Vector.<RadialButton>
-        {
-            return this._buttons;
-        }
-
-        protected function get buttonsCount() : int
-        {
-            return this._buttonsCount;
-        }
-
-        protected function get scaleKoefX() : Number
-        {
-            return this._scaleKoefX;
-        }
-
-        protected function get scaleKoefY() : Number
-        {
-            return this._scaleKoefY;
         }
     }
 }

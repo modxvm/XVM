@@ -153,6 +153,7 @@ package net.wg.gui.lobby.vehicleCustomization
                     _loc4_ = this.scrollPane.y + Math.min(_loc5_,this._scrollContainer.contentHeight);
                 }
                 this.scrollPane.setSize(this.width,_loc5_);
+                this.scrollPane.invalidateSize();
                 this.scrollPane.scrollBarShiftHorizontal = this._blockMargin;
                 this._scrollContainer.scaleX = this._scrollContainer.scaleY = 1;
                 this.topLips.width = this.bottomLips.width = this._scrollContainer.width;

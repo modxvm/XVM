@@ -33,7 +33,7 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/epicRandom/views/EpicRandomPage.
 diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/BattlePage.class.asasm battle.orig-0/net/wg/gui/battle/random/views/BattlePage.class.asasm
 --- battle.orig-0.orig/net/wg/gui/battle/random/views/BattlePage.class.asasm	2019-08-22 22:42:04.358616300 +0300
 +++ battle.orig-0/net/wg/gui/battle/random/views/BattlePage.class.asasm	2019-08-22 22:44:51.864233800 +0300
-@@ -1649,6 +1649,28 @@
+@@ -1486,6 +1486,28 @@
      end ; body
     end ; method
    end ; trait
@@ -92,7 +92,7 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/teamBasesPanel/Team
    trait method QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamBasesPanel"), "updatePositions")
     method
      refid "net.wg.gui.battle.random.views.teamBasesPanel:TeamBasesPanel/instance/net.wg.gui.battle.random.views.teamBasesPanel:TeamBasesPanel/updatePositions"
-@@ -1225,7 +1225,48 @@
+@@ -1221,7 +1221,48 @@
     end ; code
    end ; body
   end ; method

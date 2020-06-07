@@ -15,12 +15,6 @@ package net.wg.data.constants.generated
 
         public static const UNDER_FIRE:int = 4;
 
-        public static const LOSE_SOULS_IN_AURA:int = 4;
-
-        public static const EVENT_DEATH_ZONE:int = 4;
-
-        public static const EVENT_PERSONAL_DEATH_ZONE:int = 5;
-
         public static const SECTOR_AIRSTRIKE:int = 5;
 
         public static const RECOVERY:int = 6;

@@ -11,7 +11,7 @@ package net.wg.infrastructure.base.meta
 
         function onDeselectBadgeS() : void;
 
-        function onSelectSuffixBadgeS() : void;
+        function onSelectSuffixBadgeS(param1:int) : void;
 
         function onDeselectSuffixBadgeS() : void;
 
@@ -25,6 +25,6 @@ package net.wg.infrastructure.base.meta
 
         function as_setSelectedBadge(param1:Object, param2:Boolean) : void;
 
-        function as_setSuffixBadgeImg(param1:String, param2:String, param3:Boolean) : void;
+        function as_setBadgeSuffix(param1:Object) : void;
     }
 }
