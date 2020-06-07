@@ -30,6 +30,11 @@ from xfw import *
 from xvm_main.python.logger import *
 
 #####################################################################
+# constants
+
+isCommonTest = constants.CURRENT_REALM == 'CT'
+
+#####################################################################
 # handlers
 
 @overrideMethod(CustomFilesCache, '_CustomFilesCache__onReadLocalFile')
@@ -48,7 +53,7 @@ def _CustomFilesCache__onReadLocalFile(base, self, url, showImmediately):
 
 @overrideMethod(debug_utils, '_doLog')
 def _doLog(base, category, msg, args=None, kwargs={}):
-    if constants.CURRENT_REALM == 'CT':
+    if isCommonTest:
         if category == 'DEBUG':
             if msg == '_updateToLatestVersion':
                 return
