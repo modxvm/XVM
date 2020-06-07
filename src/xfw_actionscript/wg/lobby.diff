@@ -20,7 +20,7 @@ diff -Naur lobby.orig/App.as lobby/App.as
 diff -Naur lobby.orig/net/wg/data/constants/Linkages.as lobby/net/wg/data/constants/Linkages.as
 --- lobby.orig/net/wg/data/constants/Linkages.as	2020-02-28 20:15:55.426892200 +0200
 +++ lobby/net/wg/data/constants/Linkages.as	2020-02-28 20:19:21.718027400 +0200
-@@ -391,7 +391,7 @@
+@@ -371,7 +371,7 @@
  
          public static const TECHNIQUE_STATISTICS_PERCENT_SIGN:String = "TechniqueStatisticsPercentSign_UI";
  
@@ -83,8 +83,8 @@ diff -Naur lobby.orig/net/wg/gui/lobby/battleResults/components/BattleResultImag
 -            if(this.vehicleIcon.visible = param1)
 +            if(this.vehicleIcon.visible == param1)
              {
--                _loc4_ = BattleResultImageSwitcherView.getPreset(param3);
-+                //_loc4_ = BattleResultImageSwitcherView.getPreset(param3);
+-                _loc4_ = VehicleIconPreset.getPreset(param3);
++                //_loc4_ = VehicleIconPreset.getPreset(param3);
                  App.utils.asserter.assertNotNull(_loc4_,"Icon preset for level: " + param3 + Errors.WASNT_FOUND);
                  this.vehicleIcon.source = RES_SHOP.getVehicleIcon(_loc4_.size,param2);
                  this.vehicleIcon.scaleX = this.vehicleIcon.scaleY = _loc4_.scale;
@@ -124,7 +124,7 @@ diff -Naur lobby.orig/net/wg/gui/lobby/components/SmallSkillsList.as lobby/net/w
 diff -Naur lobby.orig/net/wg/gui/lobby/hangar/Hangar.as lobby/net/wg/gui/lobby/hangar/Hangar.as
 --- lobby.orig/net/wg/gui/lobby/hangar/Hangar.as	2020-02-28 20:16:11.425977000 +0200
 +++ lobby/net/wg/gui/lobby/hangar/Hangar.as	2020-02-28 20:19:21.831655200 +0200
-@@ -175,6 +175,11 @@
+@@ -165,6 +165,11 @@
  
          public var dqWidget:DailyQuestWidget;
  
@@ -139,7 +139,7 @@ diff -Naur lobby.orig/net/wg/gui/lobby/hangar/Hangar.as lobby/net/wg/gui/lobby/h
 diff -Naur lobby.orig/net/wg/gui/lobby/hangar/ammunitionPanel/AmmunitionPanel.as lobby/net/wg/gui/lobby/hangar/ammunitionPanel/AmmunitionPanel.as
 --- lobby.orig/net/wg/gui/lobby/hangar/ammunitionPanel/AmmunitionPanel.as	2020-02-28 20:16:18.177148500 +0200
 +++ lobby/net/wg/gui/lobby/hangar/ammunitionPanel/AmmunitionPanel.as	2020-02-28 20:19:21.853659000 +0200
-@@ -1051,12 +1051,14 @@
+@@ -1058,12 +1058,14 @@
  
          private function animationCompleteHandler(param1:Event) : void
          {
@@ -376,7 +376,7 @@ diff -Naur lobby.orig/net/wg/gui/messenger/meta/impl/ContactNoteManageViewMeta.a
 diff -Naur lobby.orig/net/wg/gui/notification/NotificationPopUpViewer.as lobby/net/wg/gui/notification/NotificationPopUpViewer.as
 --- lobby.orig/net/wg/gui/notification/NotificationPopUpViewer.as	2020-02-28 20:16:06.900781600 +0200
 +++ lobby/net/wg/gui/notification/NotificationPopUpViewer.as	2020-02-28 20:19:22.079375800 +0200
-@@ -41,6 +41,12 @@
+@@ -39,6 +39,12 @@
  
          private var _popupClass:Class = null;
  

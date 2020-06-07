@@ -11,8 +11,8 @@ diff -Naur battleVehicleMarkersApp.orig/App.as battleVehicleMarkersApp/App.as
 diff -Naur battleVehicleMarkersApp.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.as battleVehicleMarkersApp/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.as
 --- battleVehicleMarkersApp.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.as	2019-09-10 14:54:38.965850500 +0300
 +++ battleVehicleMarkersApp/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.as	2019-09-10 15:06:56.299135600 +0300
-@@ -552,8 +552,16 @@
-             return this.getIsPartVisible(V_NAME_LBL);
+@@ -543,8 +543,16 @@
+             this._stunSchemeName = VM_STUN_PREFIX + this._entityName + VM_STUN_POSTFIX;
          }
  
 +        public function xvm_active() : Boolean
@@ -28,7 +28,7 @@ diff -Naur battleVehicleMarkersApp.orig/net/wg/gui/battle/views/vehicleMarkers/V
              var _loc9_:Point = null;
              var _loc1_:Boolean = this.getIsPartVisible(ICON);
              var _loc2_:Boolean = this.getIsPartVisible(LEVEL);
-@@ -798,6 +798,11 @@
+@@ -788,6 +788,11 @@
              this._vmManager.drawWithCenterAlign(_loc1_,this.marker.vehicleTypeIcon.graphics,true,false,0,V_TYPE_ICON_Y);
          }
  
@@ -43,7 +43,7 @@ diff -Naur battleVehicleMarkersApp.orig/net/wg/gui/battle/views/vehicleMarkers/V
 diff -Naur battleVehicleMarkersApp.orig/net/wg/infrastructure/base/meta/impl/ClassManagerBattleMarkersMeta.as battleVehicleMarkersApp/net/wg/infrastructure/base/meta/impl/ClassManagerBattleMarkersMeta.as
 --- battleVehicleMarkersApp.orig/net/wg/infrastructure/base/meta/impl/ClassManagerBattleMarkersMeta.as	2019-09-10 14:54:38.187846100 +0300
 +++ battleVehicleMarkersApp/net/wg/infrastructure/base/meta/impl/ClassManagerBattleMarkersMeta.as	2019-09-10 15:06:56.326133900 +0300
-@@ -122,7 +122,7 @@
+@@ -116,7 +116,7 @@
  
          public static const NET_WG_GUI_BATTLE_VIEWS_VEHICLEMARKERS_VEHICLEICONANIMATION:Class = VehicleIconAnimation;
  
