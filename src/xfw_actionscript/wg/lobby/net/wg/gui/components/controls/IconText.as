@@ -20,21 +20,21 @@ package net.wg.gui.components.controls
     public class IconText extends UIComponentEx implements ITextContainer
     {
 
-        private static const INV_TEXT:String = "InvText";
+        protected static const INV_TEXT:String = "InvText";
 
-        private static const INV_ANTIALIAS:String = "InvAntialias";
+        protected static const INV_ANTIALIAS:String = "InvAntialias";
 
-        private static const INV_TEXT_SIZE:String = "InvTextSize";
+        protected static const INV_TEXT_SIZE:String = "InvTextSize";
 
-        private static const INV_TEXT_FONT:String = "InvTextFont";
+        protected static const INV_TEXT_FONT:String = "InvTextFont";
 
-        private static const INV_TEXT_ALIGN:String = "InvTextAlign";
+        protected static const INV_TEXT_ALIGN:String = "InvTextAlign";
 
-        private static const INV_TEXT_COLOR:String = "InvTextColor";
+        protected static const INV_TEXT_COLOR:String = "InvTextColor";
 
-        private static const INV_POSITION:String = "InvPosition";
+        protected static const INV_POSITION:String = "InvPosition";
 
-        private static const INV_ICON:String = "InvIcon";
+        protected static const INV_ICON:String = "InvIcon";
 
         private static const ALPHA_ENABLED:Number = 1;
 

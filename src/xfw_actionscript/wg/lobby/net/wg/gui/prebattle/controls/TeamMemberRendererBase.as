@@ -9,6 +9,7 @@ package net.wg.gui.prebattle.controls
     import scaleform.clik.utils.Constraints;
     import net.wg.data.constants.Values;
     import net.wg.gui.prebattle.constants.PrebattleStateString;
+    import org.idmedia.as3commons.util.StringUtils;
     import net.wg.data.constants.UserTags;
     import net.wg.gui.prebattle.data.PlayerPrbInfoVO;
     import flash.events.MouseEvent;
@@ -31,6 +32,8 @@ package net.wg.gui.prebattle.controls
         private var _playerNameStr:String = "";
 
         private var currentDbID:Number = -1;
+
+        private const NEXT_LINE_TOOLTIP:String = "\n\n";
 
         public function TeamMemberRendererBase()
         {
@@ -221,11 +224,20 @@ package net.wg.gui.prebattle.controls
 
         protected function getToolTipData() : String
         {
-            if(this._statusString && this._statusString == PrebattleStateString.OFFLINE_READY)
+            var _loc1_:String = Values.EMPTY_STR;
+            if(StringUtils.isNotEmpty(this._statusString))
             {
-                this._statusString = PrebattleStateString.OFFLINE;
+                if(this._statusString == PrebattleStateString.OFFLINE_READY)
+                {
+                    this._statusString = PrebattleStateString.OFFLINE;
+                }
+                _loc1_ = App.utils.locale.makeString(MESSENGER.getSquadChannelTooltipsStatus(this._statusString));
+                if(this.model.isExperimentalModule)
+                {
+                    _loc1_ = _loc1_ + (this.NEXT_LINE_TOOLTIP + App.utils.locale.makeString(MESSENGER.DIALOGS_SQUADCHANNEL_TOOLTIPS_MODULE,{"name":this.model.experimentalModuleName}));
+                }
             }
-            return this._statusString != null?"#messenger:dialogs/squadChannel/tooltips/status/" + this._statusString:null;
+            return _loc1_;
         }
 
         protected function updateVoiceWave() : void

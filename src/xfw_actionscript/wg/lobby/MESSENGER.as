@@ -357,6 +357,8 @@ package
 
         public static const DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_AFK:String = "#messenger:dialogs/squadChannel/tooltips/status/afk";
 
+        public static const DIALOGS_SQUADCHANNEL_TOOLTIPS_MODULE:String = "#messenger:dialogs/squadChannel/tooltips/module";
+
         public static const SERVER_ERRORS_SETTINGERROR_CHANGEUNAVAILABLE_MESSAGE:String = "#messenger:server/errors/settingError/changeUnavailable/message";
 
         public static const SERVER_ERRORS_INTERNALERROR_TITLE:String = "#messenger:server/errors/internalError/title";
@@ -693,6 +695,14 @@ package
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_ITEMS_NAME:String = "#messenger:serviceChannelMessages/battleResults/quests/items/name";
 
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_ENTITLEMENTS_MULTIPLIER:String = "#messenger:serviceChannelMessages/battleResults/quests/entitlements/multiplier";
+
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_RANKEDBONUSBATTLES:String = "#messenger:serviceChannelMessages/battleResults/quests/rankedBonusBattles";
+
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_RANKEDBONUSBATTLES_PERSISTENT:String = "#messenger:serviceChannelMessages/battleResults/quests/rankedBonusBattles/persistent";
+
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_RANKEDBONUSBATTLES_DAILY:String = "#messenger:serviceChannelMessages/battleResults/quests/rankedBonusBattles/daily";
+
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_PERSONALMISSIONS:String = "#messenger:serviceChannelMessages/battleResults/personalMissions";
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_PERSONALMISSIONS_1:String = "#messenger:serviceChannelMessages/battleResults/personalMissions/1";
@@ -715,7 +725,13 @@ package
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_RANKEDSTATE_DIVISIONEARNED:String = "#messenger:serviceChannelMessages/battleResults/rankedState/divisionEarned";
 
-        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_RANKEDBONUSBATTLES_TEXT:String = "#messenger:serviceChannelMessages/battleResults/rankedBonusBattles/text";
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_RANKEDBONUSBATTLES_STEPS_PERSISTENT:String = "#messenger:serviceChannelMessages/battleResults/rankedBonusBattles/steps/persistent";
+
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_RANKEDBONUSBATTLES_STEPS_DAILY:String = "#messenger:serviceChannelMessages/battleResults/rankedBonusBattles/steps/daily";
+
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_RANKEDBONUSBATTLES_EFFICIENCY:String = "#messenger:serviceChannelMessages/battleResults/rankedBonusBattles/efficiency";
+
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_RANKEDBONUSBATTLES_QUESTS:String = "#messenger:serviceChannelMessages/battleResults/rankedBonusBattles/quests";
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_DIVISIONS_BRONZE:String = "#messenger:serviceChannelMessages/battleResults/divisions/bronze";
 
@@ -939,6 +955,14 @@ package
 
         public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_CREWSKINSDEBITED:String = "#messenger:serviceChannelMessages/invoiceReceived/crewSkinsDebited";
 
+        public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_ENTITLEMENTSACCRUED:String = "#messenger:serviceChannelMessages/invoiceReceived/entitlementsAccrued";
+
+        public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_ENTITLEMENTSDEBITED:String = "#messenger:serviceChannelMessages/invoiceReceived/entitlementsDebited";
+
+        public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_RANKEDBONUSBATTLESACCRUED:String = "#messenger:serviceChannelMessages/invoiceReceived/rankedBonusBattlesAccrued";
+
+        public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_RANKEDBONUSBATTLESDEBITED:String = "#messenger:serviceChannelMessages/invoiceReceived/rankedBonusBattlesDebited";
+
         public static const SERVICECHANNELMESSAGES_DURATIONOFPREMIUMACCOUNTEXPIRES:String = "#messenger:serviceChannelMessages/durationOfPremiumAccountExpires";
 
         public static const SERVICECHANNELMESSAGES_PREMIUMBOUGHT:String = "#messenger:serviceChannelMessages/premiumBought";
@@ -964,6 +988,8 @@ package
         public static const SERVICECHANNELMESSAGES_ENHANCEMENTS_REMOVED:String = "#messenger:serviceChannelMessages/enhancements/removed";
 
         public static const SERVICECHANNELMESSAGES_ENHANCEMENTS_WIPED:String = "#messenger:serviceChannelMessages/enhancements/wiped";
+
+        public static const SERVICECHANNELMESSAGES_ENHANCEMENTS_WIPEDONVEHICLES:String = "#messenger:serviceChannelMessages/enhancements/wipedOnVehicles";
 
         public static const SERVICECHANNELMESSAGES_CREDITSANDGOLDRECEIVEDASGIFT:String = "#messenger:serviceChannelMessages/creditsAndGoldReceivedAsGift";
 
@@ -1089,8 +1115,6 @@ package
 
         public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_RANKEDBATTLESNOTSET:String = "#messenger:serviceChannelMessages/sysMsg/titles/rankedBattlesNotSet";
 
-        public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_BOBBATTLESAVAILABLE:String = "#messenger:serviceChannelMessages/sysMsg/titles/bobBattlesAvailable";
-
         public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_PAYMENTMETHODLINK:String = "#messenger:serviceChannelMessages/sysMsg/titles/paymentMethodLink";
 
         public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_PAYMENTMETHODUNLINK:String = "#messenger:serviceChannelMessages/sysMsg/titles/paymentMethodUnlink";
@@ -1191,11 +1215,33 @@ package
 
         public static const SERVICECHANNELMESSAGES_SYSMSG_OPENCUSTOMIZATION_BUTTON:String = "#messenger:serviceChannelMessages/sysMsg/openCustomization/button";
 
+        public static const SERVICECHANNELMESSAGES_SYSMSG_CUSTOMIZATION_CHANGE:String = "#messenger:serviceChannelMessages/sysMsg/customization/change";
+
+        public static const SERVICECHANNELMESSAGES_SYSMSG_CUSTOMIZATION_REMOVE:String = "#messenger:serviceChannelMessages/sysMsg/customization/remove";
+
+        public static const SERVICECHANNELMESSAGES_SYSMSG_CUSTOMIZATION_BUYONE:String = "#messenger:serviceChannelMessages/sysMsg/customization/buyOne";
+
+        public static const SERVICECHANNELMESSAGES_SYSMSG_CUSTOMIZATION_BUYMANY:String = "#messenger:serviceChannelMessages/sysMsg/customization/buyMany";
+
+        public static const SERVICECHANNELMESSAGES_SYSMSG_CUSTOMIZATION_ITEM:String = "#messenger:serviceChannelMessages/sysMsg/customization/item";
+
         public static const SERVICECHANNELMESSAGES_SYSMSG_CONVERTER_CUSTOMIZATIONSBUY:String = "#messenger:serviceChannelMessages/sysMsg/converter/customizationsBuy";
 
         public static const SERVICECHANNELMESSAGES_SYSMSG_CUSTOMIZATIONS_SELL:String = "#messenger:serviceChannelMessages/sysMsg/customizations/sell";
 
         public static const SERVICECHANNELMESSAGES_SYSMSG_CUSTOMIZATIONS_BUY:String = "#messenger:serviceChannelMessages/sysMsg/customizations/buy";
+
+        public static const SERVICECHANNELMESSAGES_SYSMSG_CUSTOMIZATIONPROGRESS_ITEMRECEIVED:String = "#messenger:serviceChannelMessages/sysMsg/customizationProgress/itemReceived";
+
+        public static const SERVICECHANNELMESSAGES_SYSMSG_CUSTOMIZATIONPROGRESS_ITEMRECEIVEDNOTAUTOBOUND:String = "#messenger:serviceChannelMessages/sysMsg/customizationProgress/itemReceivedNotAutoBound";
+
+        public static const SERVICECHANNELMESSAGES_SYSMSG_CUSTOMIZATIONPROGRESS_ITEMUPDATED:String = "#messenger:serviceChannelMessages/sysMsg/customizationProgress/itemUpdated";
+
+        public static const SERVICECHANNELMESSAGES_SYSMSG_CUSTOMIZATIONPROGRESS_ITEMUPDATEDNOTAUTOBOUND:String = "#messenger:serviceChannelMessages/sysMsg/customizationProgress/itemUpdatedNotAutoBound";
+
+        public static const SERVICECHANNELMESSAGES_SYSMSG_CUSTOMIZATIONPROGRESS_EDITSTYLEUNLOCKED:String = "#messenger:serviceChannelMessages/sysMsg/customizationProgress/editStyleUnlocked";
+
+        public static const SERVICECHANNELMESSAGES_SYSMSG_CUSTOMIZATIONPROGRESS_ITEMUPDATED_BUTTON:String = "#messenger:serviceChannelMessages/sysMsg/customizationProgress/itemUpdated/button";
 
         public static const SERVICECHANNELMESSAGES_SYSMSG_CONVERTER_GOLDRECEIVED:String = "#messenger:serviceChannelMessages/sysMsg/converter/goldReceived";
 
@@ -1865,27 +1911,22 @@ package
 
         public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_UPGRADE:String = "#messenger:serviceChannelMessages/sysMsg/titles/upgrade";
 
-        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_SE20_GAMEMODE:String = "#messenger:serviceChannelMessages/battleResults/se20/gameMode";
-
-        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_SE20_GAMEMODENAME:String = "#messenger:serviceChannelMessages/battleResults/se20/gameModeName";
-
-        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_SE20_DIVISION:String = "#messenger:serviceChannelMessages/battleResults/se20/division";
-
-        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_SE20_BATTLEGOALSDONE:String = "#messenger:serviceChannelMessages/battleResults/se20/battleGoalsDone";
-
-        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_SE20_REPUTATIONPOINTSGAIN:String = "#messenger:serviceChannelMessages/battleResults/se20/reputationPointsGain";
-
-        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_SE20_DIVISIONPOINTSGAIN:String = "#messenger:serviceChannelMessages/battleResults/se20/divisionPointsGain";
-
-        public static const SERVICECHANNELMESSAGES_SE20_BUYBUNDLEREWARD:String = "#messenger:serviceChannelMessages/se20/buyBundleReward";
-
-        public static const SERVICECHANNELMESSAGES_SE20_EXHANGEORDER_HEADER:String = "#messenger:serviceChannelMessages/se20/exhangeOrder/header";
-
-        public static const SERVICECHANNELMESSAGES_SE20_EXHANGEORDER_DESC:String = "#messenger:serviceChannelMessages/se20/exhangeOrder/desc";
+        public static const DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_ENUM:Array = [DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_OFFLINE,DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_NOTREADY,DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_READY,DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_INBATTLE,DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_AFK];
 
         public function MESSENGER()
         {
             super();
+        }
+
+        public static function getSquadChannelTooltipsStatus(param1:String) : String
+        {
+            var _loc2_:String = "#messenger:" + "dialogs/squadChannel/tooltips/status/" + param1;
+            if(DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_ENUM.indexOf(_loc2_) == -1)
+            {
+                DebugUtils.LOG_WARNING("[getSquadChannelTooltipsStatus]:locale key \"" + _loc2_ + "\" was not found");
+                return null;
+            }
+            return _loc2_;
         }
     }
 }

@@ -4,7 +4,6 @@ package net.wg.gui.lobby.storage.categories
     import flash.text.TextField;
     import net.wg.gui.components.carousels.filters.FilterCounter;
     import flash.display.MovieClip;
-    import net.wg.gui.events.FiltersEvent;
     import flash.text.TextFieldAutoSize;
     import scaleform.clik.constants.InvalidationType;
 
@@ -35,7 +34,6 @@ package net.wg.gui.lobby.storage.categories
         override protected function configUI() : void
         {
             super.configUI();
-            this.filterCounter.addEventListener(FiltersEvent.RESET_ALL_FILTERS,dispatchEvent);
             this.filterCounter.setCloseButtonTooltip(TOOLTIPS.STORAGE_FILTERCOUNTER_CLOSEBUTTON);
             this.filterTitle.text = STORAGE.STORAGE_FILTERTITLE;
             this.filterTitle.autoSize = TextFieldAutoSize.LEFT;
@@ -51,7 +49,6 @@ package net.wg.gui.lobby.storage.categories
 
         override protected function onDispose() : void
         {
-            this.filterCounter.removeEventListener(FiltersEvent.RESET_ALL_FILTERS,dispatchEvent);
             this.filterCounter.dispose();
             this.filterCounter = null;
             this.line = null;

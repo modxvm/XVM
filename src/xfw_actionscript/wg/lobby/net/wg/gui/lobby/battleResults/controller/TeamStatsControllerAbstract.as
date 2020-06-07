@@ -106,7 +106,7 @@ package net.wg.gui.lobby.battleResults.controller
             {
                 this._columnTooltip[ColumnConstants.SQUAD] = BATTLE_RESULTS.TEAM_SQUADHEADER;
                 this._columnWidth[ColumnConstants.SQUAD] = ColumnConstants.FIRST_COLUMN_WIDTH;
-                this._sortingKey[ColumnConstants.SQUAD] = [ColumnConstants.KEY_PREBATTLE_ID];
+                this._sortingKey[ColumnConstants.SQUAD] = [ColumnConstants.KEY_SQUAD_ID];
             }
             this._columnTooltip[ColumnConstants.PLAYER] = BATTLE_RESULTS.TEAM_PLAYERHEADER;
             this._columnWidth[ColumnConstants.PLAYER] = param1.isShowSquad?ColumnConstants.DEFAULT_PLAYER_COLUMN_WIDTH:ColumnConstants.DEFAULT_PLAYER_COLUMN_WIDTH + ColumnConstants.FIRST_COLUMN_WIDTH;

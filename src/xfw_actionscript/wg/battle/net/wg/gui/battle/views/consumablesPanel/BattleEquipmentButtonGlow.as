@@ -14,13 +14,13 @@ package net.wg.gui.battle.views.consumablesPanel
 
         private static const SHOW_GLOW_GREEN_SPECIAL_STATE:String = "greenSpecial";
 
-        protected static const SHOW_GLOW_ORANGE_STATE:String = "orange";
+        private static const SHOW_GLOW_ORANGE_STATE:String = "orange";
 
         private static const RED_TEXT_COLOR:uint = 16768409;
 
         private static const GREEN_TEXT_COLOR:uint = 11854471;
 
-        protected static const NORMAL_TEXT_COLOR:uint = 0;
+        private static const NORMAL_TEXT_COLOR:uint = 0;
 
         public var tfContainer:MovieClip = null;
 
@@ -74,7 +74,7 @@ package net.wg.gui.battle.views.consumablesPanel
             this._textField.text = param1;
         }
 
-        protected function goIdle() : void
+        private function goIdle() : void
         {
             stop();
             this._textField.textColor = NORMAL_TEXT_COLOR;
@@ -86,11 +86,6 @@ package net.wg.gui.battle.views.consumablesPanel
             this._textField = null;
             this.tfContainer = null;
             super.onDispose();
-        }
-
-        protected function get bindKeyField() : TextField
-        {
-            return this._textField;
         }
     }
 }

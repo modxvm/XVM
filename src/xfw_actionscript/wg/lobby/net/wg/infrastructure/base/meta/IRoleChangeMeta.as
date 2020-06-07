@@ -13,6 +13,6 @@ package net.wg.infrastructure.base.meta
 
         function as_setRoles(param1:Array) : void;
 
-        function as_setPrice(param1:String, param2:Boolean, param3:Object) : void;
+        function as_setPrice(param1:String, param2:Object) : void;
     }
 }

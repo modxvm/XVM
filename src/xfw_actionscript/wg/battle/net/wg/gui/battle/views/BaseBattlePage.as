@@ -11,10 +11,10 @@ package net.wg.gui.battle.views
     import net.wg.infrastructure.base.meta.impl.BattleTimerMeta;
     import net.wg.gui.battle.views.ribbonsPanel.RibbonsPanel;
     import net.wg.gui.battle.views.gameMessagesPanel.GameMessagesPanel;
-    import net.wg.gui.battle.views.postmortemPanel.PostmortemPanel;
     import net.wg.gui.battle.views.vehicleMessages.VehicleMessages;
     import net.wg.gui.battle.views.messages.MessageListDAAPI;
     import net.wg.infrastructure.helpers.statisticsDataController.BattleStatisticDataController;
+    import net.wg.gui.battle.views.postmortemPanel.PostmortemPanel;
     import flash.display.Sprite;
     import net.wg.gui.battle.views.gameMessagesPanel.events.GameMessagesPanelEvent;
     import net.wg.gui.battle.views.minimap.events.MinimapEvent;
@@ -61,8 +61,6 @@ package net.wg.gui.battle.views
 
         public var gameMessagesPanel:GameMessagesPanel = null;
 
-        public var postmortemTips:PostmortemPanel = null;
-
         protected var vehicleMessageList:VehicleMessages;
 
         protected var vehicleErrorMessageList:MessageListDAAPI;
@@ -75,6 +73,8 @@ package net.wg.gui.battle.views
         }
 
         protected var battleStatisticDataController:BattleStatisticDataController;
+
+        protected var postmortemTips:PostmortemPanel = null;
 
         protected var isPostMortem:Boolean = false;
 
@@ -95,6 +95,7 @@ package net.wg.gui.battle.views
         {
             super.updateStage(param1,param2);
             var _loc3_:Number = param1 >> 1;
+            var _loc4_:Number = param2 >> 1;
             _originalWidth = param1;
             _originalHeight = param2;
             setSize(param1,param2);
@@ -110,7 +111,11 @@ package net.wg.gui.battle.views
                 this.dualGunPanel.updateStage(param1,param2);
             }
             this.ribbonsPanel.x = _loc3_ + this.ribbonsPanel.offsetX;
-            this.updateRibbonsPositionY();
+            var _loc5_:int = this.getRibbonsCenterOffset();
+            var _loc6_:Number = _loc4_ - _loc5_ - RIBBONS_MIN_BOTTOM_PADDING_Y;
+            this.ribbonsPanel.setFreeWorkingHeight(_loc6_);
+            var _loc7_:int = _loc4_ + (_loc6_ - this.ribbonsPanel.freeHeightForRenderers >> 1) + _loc5_;
+            this.ribbonsPanel.y = _loc7_;
             this.minimap.x = param1 - this.minimap.currentWidth;
             this.minimap.y = param2 - this.minimap.currentHeight;
             if(this.postmortemTips)
@@ -122,22 +127,8 @@ package net.wg.gui.battle.views
             this.playerMessageListPositionUpdate();
             this.vehicleMessageList.updateStage();
             this.vehicleMessageListPositionUpdate();
-            var _loc4_:BaseBattleLoading = this.getBattleLoading();
-            if(_loc4_)
-            {
-                _loc4_.updateStage(param1,param2);
-            }
+            this.battleLoading.updateStage(param1,param2);
             this.gameMessagesPanel.x = _loc3_;
-        }
-
-        protected function updateRibbonsPositionY() : void
-        {
-            var _loc1_:* = _originalHeight >> 1;
-            var _loc2_:int = this.getRibbonsCenterOffset();
-            var _loc3_:int = _loc1_ - _loc2_ - RIBBONS_MIN_BOTTOM_PADDING_Y;
-            this.ribbonsPanel.setFreeWorkingHeight(_loc3_);
-            var _loc4_:int = _loc1_ + (_loc3_ - this.ribbonsPanel.freeHeightForRenderers >> 1) + _loc2_;
-            this.ribbonsPanel.y = _loc4_;
         }
 
         override protected function initialize() : void
@@ -159,11 +150,7 @@ package net.wg.gui.battle.views
 
         override protected function onPopulate() : void
         {
-            var _loc1_:BaseBattleLoading = this.getBattleLoading();
-            if(_loc1_)
-            {
-                this.registerComponent(_loc1_,BATTLE_VIEW_ALIASES.BATTLE_LOADING);
-            }
+            this.registerComponent(this.battleLoading,BATTLE_VIEW_ALIASES.BATTLE_LOADING);
             this.registerComponent(this.minimap,BATTLE_VIEW_ALIASES.MINIMAP);
             this.registerComponent(this.prebattleTimer,BATTLE_VIEW_ALIASES.PREBATTLE_TIMER);
             this.registerComponent(this.damagePanel,BATTLE_VIEW_ALIASES.DAMAGE_PANEL);
@@ -177,10 +164,7 @@ package net.wg.gui.battle.views
             {
                 this.registerComponent(this.dualGunPanel,BATTLE_VIEW_ALIASES.DUAL_GUN_PANEL);
             }
-            if(!this.postmortemTips)
-            {
-                this.postmortemTips = App.utils.classFactory.getComponent(Linkages.POSTMORTEN_PANEL,PostmortemPanel);
-            }
+            this.postmortemTips = App.utils.classFactory.getComponent(Linkages.POSTMORTEN_PANEL,PostmortemPanel);
             this.postmortemTips.setCompVisible(false);
             this.updatePostmortemTipsPosition();
             addChild(this.postmortemTips);
@@ -280,11 +264,6 @@ package net.wg.gui.battle.views
             App.toolTipMgr.hide();
         }
 
-        protected function getBattleLoading() : BaseBattleLoading
-        {
-            return this.battleLoading;
-        }
-
         protected function onComponentVisibilityChanged(param1:String, param2:Boolean) : void
         {
         }
@@ -319,11 +298,7 @@ package net.wg.gui.battle.views
             this._messagesContainer = new Sprite();
             this._messagesContainer.mouseEnabled = this._messagesContainer.mouseChildren = false;
             addChild(this._messagesContainer);
-            var _loc1_:BaseBattleLoading = this.getBattleLoading();
-            if(_loc1_)
-            {
-                swapChildren(this._messagesContainer,_loc1_);
-            }
+            swapChildren(this._messagesContainer,this.battleLoading);
             this.vehicleMessageList = new VehicleMessages(this._messagesContainer);
             this.vehicleErrorMessageList = new MessageListDAAPI(this._messagesContainer);
             this.playerMessageList = new MessageListDAAPI(this._messagesContainer);
@@ -338,14 +313,9 @@ package net.wg.gui.battle.views
             return param1;
         }
 
-        protected function getPlayerMessagesListOffsetY() : Number
-        {
-            return PLAYER_MESSAGES_LIST_OFFSET.y;
-        }
-
         protected function playerMessageListPositionUpdate() : void
         {
-            this.playerMessageList.setLocation(_originalWidth - PLAYER_MESSAGES_LIST_OFFSET.x | 0,_originalHeight - this.minimap.getMessageCoordinate() + this.getPlayerMessagesListOffsetY());
+            this.playerMessageList.setLocation(_originalWidth - PLAYER_MESSAGES_LIST_OFFSET.x | 0,_originalHeight - this.minimap.getMessageCoordinate() + PLAYER_MESSAGES_LIST_OFFSET.y);
         }
 
         public function xfw_registerComponent(param1:IDAAPIModule, param2:String) : void
@@ -369,18 +339,6 @@ package net.wg.gui.battle.views
             return this._componentsStorage[param1];
         }
 
-        protected function vehicleMessageListPositionUpdate() : void
-        {
-            if(this.postmortemTips && this.postmortemTips.visible)
-            {
-                this.vehicleMessageList.setLocation(_originalWidth - VEHICLE_MESSAGES_LIST_OFFSET.x >> 1,this.postmortemTips.y - VEHICLE_MESSAGES_LIST_OFFSET.y - VEHICLE_MESSAGES_LIST_POSTMORTEM_Y_OFFSET | 0);
-            }
-            else
-            {
-                this.vehicleMessageList.setLocation(_originalWidth - VEHICLE_MESSAGES_LIST_OFFSET.x >> 1,_originalHeight - VEHICLE_MESSAGES_LIST_OFFSET.y | 0);
-            }
-        }
-
         private function showComponent(param1:String, param2:Boolean) : void
         {
             var _loc3_:IDisplayableComponent = null;
@@ -393,6 +351,18 @@ package net.wg.gui.battle.views
         private function updateMinimapSizeIndex(param1:Number) : void
         {
             this.minimap.setAllowedSizeIndex(this.getAllowedMinimapSizeIndex(param1));
+        }
+
+        private function vehicleMessageListPositionUpdate() : void
+        {
+            if(this.postmortemTips && this.postmortemTips.visible)
+            {
+                this.vehicleMessageList.setLocation(_originalWidth - VEHICLE_MESSAGES_LIST_OFFSET.x >> 1,this.postmortemTips.y - VEHICLE_MESSAGES_LIST_OFFSET.y - VEHICLE_MESSAGES_LIST_POSTMORTEM_Y_OFFSET | 0);
+            }
+            else
+            {
+                this.vehicleMessageList.setLocation(_originalWidth - VEHICLE_MESSAGES_LIST_OFFSET.x >> 1,_originalHeight - VEHICLE_MESSAGES_LIST_OFFSET.y | 0);
+            }
         }
 
         private function updatePostmortemTipsPosition() : void

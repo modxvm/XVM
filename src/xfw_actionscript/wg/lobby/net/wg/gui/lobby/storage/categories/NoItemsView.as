@@ -44,8 +44,7 @@ package net.wg.gui.lobby.storage.categories
                 this.noItemsMc.scaleX = this.noItemsMc.scaleY = SMALL_SCALE;
             }
             this.noItemsMc.x = param1 - this.noItemsMc.width >> 1;
-            this.labelTF.y = this.noItemsMc.y + this.noItemsMc.height + LABEL_OFFSET;
-            this.navigateButton.y = this.labelTF.y + this.labelTF.height + NAVIGATION_BUTTON_OFFSET;
+            invalidateSize();
         }
 
         override protected function initialize() : void
@@ -68,10 +67,12 @@ package net.wg.gui.lobby.storage.categories
             super.draw();
             if(isInvalid(InvalidationType.SIZE))
             {
-                this.navigateButton.validateNow();
-                this.navigateButton.x = width - this.navigateButton.width >> 1;
                 this.noItemsMc.x = width - this.noItemsMc.width >> 1;
                 this.labelTF.width = width;
+                this.labelTF.y = this.noItemsMc.y + this.noItemsMc.height + LABEL_OFFSET;
+                this.navigateButton.validateNow();
+                this.navigateButton.x = width - this.navigateButton.width >> 1;
+                this.navigateButton.y = this.labelTF.y + this.labelTF.height + NAVIGATION_BUTTON_OFFSET | 0;
             }
         }
 

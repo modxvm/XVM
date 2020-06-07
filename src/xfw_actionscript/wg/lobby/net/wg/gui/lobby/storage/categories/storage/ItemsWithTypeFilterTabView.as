@@ -93,6 +93,12 @@ package net.wg.gui.lobby.storage.categories.storage
             resetFilterS();
         }
 
+        protected function onCardSellHandler(param1:CardEvent) : void
+        {
+            param1.stopImmediatePropagation();
+            sellItemS(param1.data.id);
+        }
+
         public function as_resetFilter(param1:int) : void
         {
             if(param1 >= 0)
@@ -120,12 +126,6 @@ package net.wg.gui.lobby.storage.categories.storage
         override public function get noItemsComponent() : UIComponent
         {
             return this.noItemsView;
-        }
-
-        private function onCardSellHandler(param1:CardEvent) : void
-        {
-            param1.stopImmediatePropagation();
-            sellItemS(param1.data.id);
         }
 
         private function onFiltersBlockFiltersChangedHandler(param1:FiltersEvent) : void

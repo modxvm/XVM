@@ -907,5 +907,10 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
                 }
             }
         }
+
+        public function get isInviteReceived() : Boolean
+        {
+            return this._isInviteReceived;
+        }
     }
 }

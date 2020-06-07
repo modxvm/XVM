@@ -24,7 +24,7 @@ package net.wg.infrastructure.base.meta.impl
 
         public var showExchangeXPWindow:Function;
 
-        public var showPremiumDialog:Function;
+        public var showPremiumView:Function;
 
         public var onPremShopClick:Function;
 
@@ -130,10 +130,10 @@ package net.wg.infrastructure.base.meta.impl
             this.showExchangeXPWindow();
         }
 
-        public function showPremiumDialogS() : void
+        public function showPremiumViewS() : void
         {
-            App.utils.asserter.assertNotNull(this.showPremiumDialog,"showPremiumDialog" + Errors.CANT_NULL);
-            this.showPremiumDialog();
+            App.utils.asserter.assertNotNull(this.showPremiumView,"showPremiumView" + Errors.CANT_NULL);
+            this.showPremiumView();
         }
 
         public function onPremShopClickS() : void

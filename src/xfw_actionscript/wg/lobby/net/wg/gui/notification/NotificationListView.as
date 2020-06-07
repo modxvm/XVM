@@ -15,16 +15,15 @@ package net.wg.gui.notification
     import net.wg.gui.notification.events.ServiceMessageEvent;
     import flash.events.Event;
     import net.wg.gui.components.controls.events.ScrollEvent;
-    import net.wg.gui.lobby.progressiveReward.events.ProgressiveRewardEvent;
     import scaleform.clik.events.IndexEvent;
     import net.wg.gui.data.TabDataVO;
-    import net.wg.data.constants.generated.HANGAR_ALIASES;
     import net.wg.data.constants.generated.NOTIFICATIONS_CONSTANTS;
     import net.wg.gui.notification.vo.NotificationInfoVO;
     import net.wg.gui.notification.vo.NotificationViewInitVO;
     import net.wg.gui.notification.vo.NotificationMessagesListVO;
     import org.idmedia.as3commons.util.StringUtils;
     import flash.display.DisplayObject;
+    import net.wg.data.constants.generated.HANGAR_ALIASES;
     import scaleform.clik.interfaces.IDataProvider;
     import net.wg.data.constants.Values;
     import net.wg.infrastructure.interfaces.IWrapper;
@@ -42,11 +41,13 @@ package net.wg.gui.notification
 
         private static const LIST_Y_OFFSET:int = -40;
 
-        private static const LIST_DEFAULT_TOP_Y:int = 5;
+        private static const LIST_DEFAULT_TOP_Y:int = 35;
 
         private static const SCROLLBAR_Y_OFFSET:int = 10;
 
         private static const EMPTY_TF_Y_OFFSET:int = 110;
+
+        private static const PROGRESSIVE_REWARD_TOP_OFFSET:int = 30;
 
         private static const INV_WIDGET_VISIBILITY:String = "invWidgetVisibility";
 
@@ -82,7 +83,9 @@ package net.wg.gui.notification
 
         private var _emptyListTFreplacedY:int = -1;
 
-        private var _isProgressRewardEnabled:Boolean = false;
+        private var _progressiveRewardEnabled:Boolean = false;
+
+        private var _isProgressRewardRegistred:Boolean = false;
 
         public function NotificationListView()
         {
@@ -109,14 +112,15 @@ package net.wg.gui.notification
             this.list.addEventListener(ScrollEvent.UPDATE_SIZE,this.onListUpdateSizeHandler);
             this.scrollBar.addEventListener(Event.SCROLL,this.onScrollBarScrollHandler);
             App.utils.scheduler.scheduleTask(this.updateTimestamps,TIME_UPDATE_INTERVAL);
-            this.progressiveRewardWidget.addEventListener(Event.RESIZE,this.onProgressiveRewardResizeHandler);
         }
 
         override protected function onDispose() : void
         {
             App.utils.scheduler.cancelTask(this.updateTimestamps);
-            this.progressiveRewardWidget.removeEventListener(ProgressiveRewardEvent.SWITCH_WIDGET_ENABLED,this.onProgressiveRewardWidgetSwitchWidgetEnabledHandler);
-            this.progressiveRewardWidget.removeEventListener(Event.RESIZE,this.onProgressiveRewardResizeHandler);
+            if(this.progressiveRewardWidget)
+            {
+                this.progressiveRewardWidget.removeEventListener(Event.RESIZE,this.onProgressiveRewardResizeHandler);
+            }
             this.list.removeEventListener(Event.SCROLL,this.onListScrollHandler);
             this.list.removeEventListener(ScrollEvent.UPDATE_SIZE,this.onListUpdateSizeHandler);
             this.list.removeEventListener(ServiceMessageEvent.MESSAGE_BUTTON_CLICKED,this.onListMessageButtonClickedHandler);
@@ -155,13 +159,16 @@ package net.wg.gui.notification
             if(isInvalid(INV_WIDGET_VISIBILITY))
             {
                 _loc1_ = TabDataVO(this.buttonBar.data);
-                if(!isFlashComponentRegisteredS(HANGAR_ALIASES.PROGRESSIVE_REWARD_WIDGET) && _loc1_.id == NOTIFICATIONS_CONSTANTS.TAB_OFFERS)
+                _loc2_ = false;
+                if(this.progressiveRewardWidget)
                 {
-                    this.progressiveRewardWidget.addEventListener(ProgressiveRewardEvent.SWITCH_WIDGET_ENABLED,this.onProgressiveRewardWidgetSwitchWidgetEnabledHandler);
-                    registerFlashComponentS(this.progressiveRewardWidget,HANGAR_ALIASES.PROGRESSIVE_REWARD_WIDGET);
+                    _loc2_ = this._progressiveRewardEnabled && _loc1_.id == NOTIFICATIONS_CONSTANTS.TAB_OFFERS;
+                    if(_loc2_ && !this._isProgressRewardRegistred)
+                    {
+                        this.registerProgressiveReward();
+                    }
+                    this.progressiveRewardWidget.visible = _loc2_;
                 }
-                _loc2_ = this._isProgressRewardEnabled && _loc1_.id == NOTIFICATIONS_CONSTANTS.TAB_OFFERS && isFlashComponentRegisteredS(HANGAR_ALIASES.PROGRESSIVE_REWARD_WIDGET);
-                this.progressiveRewardWidget.visible = _loc2_;
                 this.updateListItemsLayout();
                 this.emptyListTF.y = _loc2_?this._emptyListTFreplacedY:this._emptyListTFbaseY;
             }
@@ -233,17 +240,38 @@ package net.wg.gui.notification
             }
         }
 
+        public function as_setProgressiveRewardEnabled(param1:Boolean) : void
+        {
+            this._progressiveRewardEnabled = param1;
+            if(param1 && !this.progressiveRewardWidget)
+            {
+                this.progressiveRewardWidget = App.utils.classFactory.getComponent(Linkages.PROGRESSIVE_REWARD_WIDGET,ProgressiveRewardWidget);
+                this.progressiveRewardWidget.y = PROGRESSIVE_REWARD_TOP_OFFSET;
+                addChild(this.progressiveRewardWidget);
+            }
+            invalidate(INV_WIDGET_VISIBILITY);
+        }
+
+        private function registerProgressiveReward() : void
+        {
+            this.progressiveRewardWidget.addEventListener(Event.RESIZE,this.onProgressiveRewardResizeHandler);
+            registerFlashComponentS(this.progressiveRewardWidget,HANGAR_ALIASES.PROGRESSIVE_REWARD_WIDGET);
+            this._isProgressRewardRegistred = true;
+        }
+
         private function updateListItemsLayout() : void
         {
-            var _loc1_:* = 0;
-            _loc1_ = this.progressiveRewardWidget.visible?this.progressiveRewardWidget.actualHeight:LIST_DEFAULT_TOP_Y;
-            var _loc2_:int = this.progressiveRewardWidget.y + _loc1_;
-            this.list.y = _loc2_;
+            var _loc1_:int = LIST_DEFAULT_TOP_Y;
+            if(this._progressiveRewardEnabled && this.progressiveRewardWidget.visible)
+            {
+                _loc1_ = this.progressiveRewardWidget.y + this.progressiveRewardWidget.actualHeight;
+            }
+            this.list.y = _loc1_;
             this.list.height = this.background.height - _loc1_ + LIST_Y_OFFSET;
             this.widgetSeparator.y = this.list.y + this.list.actualHeight;
-            this.scrollBar.y = _loc2_ + SCROLLBAR_Y_OFFSET;
+            this.scrollBar.y = _loc1_ + SCROLLBAR_Y_OFFSET;
             this.scrollBar.height = this.list.height - (SCROLLBAR_Y_OFFSET << 1);
-            this.topShadow.y = _loc2_;
+            this.topShadow.y = _loc1_;
         }
 
         private function setTabIndex(param1:int) : void
@@ -313,12 +341,6 @@ package net.wg.gui.notification
         {
             param1.stopPropagation();
             this.updateListItemsLayout();
-        }
-
-        private function onProgressiveRewardWidgetSwitchWidgetEnabledHandler(param1:ProgressiveRewardEvent) : void
-        {
-            this._isProgressRewardEnabled = param1.getFlag();
-            invalidate(INV_WIDGET_VISIBILITY);
         }
 
         private function onListScrollHandler(param1:Event) : void

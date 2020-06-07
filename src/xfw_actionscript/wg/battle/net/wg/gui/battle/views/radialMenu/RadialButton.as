@@ -16,11 +16,11 @@ package net.wg.gui.battle.views.radialMenu
 
         private static const KEY_TEXT_FIELD_X_OFFSET:int = 10;
 
-        protected static const ANGLE_VALIDATION:uint = InvalidationType.SYSTEM_FLAGS_BORDER << 2;
+        private static const ANGLE_VALIDATION:uint = InvalidationType.SYSTEM_FLAGS_BORDER << 2;
 
-        protected static const TITLE_VALIDATION:uint = InvalidationType.SYSTEM_FLAGS_BORDER << 3;
+        private static const TITLE_VALIDATION:uint = InvalidationType.SYSTEM_FLAGS_BORDER << 3;
 
-        protected static const KEY_VALIDATION:uint = InvalidationType.SYSTEM_FLAGS_BORDER << 4;
+        private static const KEY_VALIDATION:uint = InvalidationType.SYSTEM_FLAGS_BORDER << 4;
 
         public var idx:int = -1;
 
@@ -61,12 +61,6 @@ package net.wg.gui.battle.views.radialMenu
         public function RadialButton()
         {
             super();
-            this.initComponents();
-            this.hitAreaSpr.visible = false;
-        }
-
-        protected function initComponents() : void
-        {
             this.content = this.sectorWrapper.content;
             this.icons = this.content.icons;
             this.titleTF = this.content.titleTF;
@@ -76,6 +70,7 @@ package net.wg.gui.battle.views.radialMenu
             this.titleHoveredTF = this.contentHovered.titleTF;
             this.keyHoveredTF = this.contentHovered.keyTF;
             this.hitAreaSpr = this.sectorWrapper.hitAreaSpr;
+            this.hitAreaSpr.visible = false;
         }
 
         public function set title(param1:String) : void
@@ -101,7 +96,7 @@ package net.wg.gui.battle.views.radialMenu
             }
         }
 
-        protected function showIcon(param1:String) : void
+        private function showIcon(param1:String) : void
         {
             this.icons.showIcon(param1);
             this.iconsHovered.showIcon(param1);
@@ -119,22 +114,12 @@ package net.wg.gui.battle.views.radialMenu
         override protected function draw() : void
         {
             super.draw();
-            this.drawAngle();
-            this.drawText();
-        }
-
-        protected function drawAngle() : void
-        {
             if(isInvalid(ANGLE_VALIDATION))
             {
                 this.rotation = this._angle;
                 this.content.rotation = -this._angle;
                 this.contentHovered.rotation = -this._angle;
             }
-        }
-
-        protected function drawText() : void
-        {
             if(isInvalid(TITLE_VALIDATION))
             {
                 this.titleTF.text = this._titleStr;
@@ -170,19 +155,13 @@ package net.wg.gui.battle.views.radialMenu
 
         override protected function onDispose() : void
         {
-            if(this.sectorWrapper != null)
-            {
-                this.sectorWrapper.dispose();
-                this.sectorWrapper = null;
-            }
-            if(this.sectorWrapperHovered != null)
-            {
-                this.sectorWrapperHovered.dispose();
-                this.sectorWrapperHovered = null;
-            }
+            this.sectorWrapper.dispose();
+            this.sectorWrapperHovered.dispose();
+            this.sectorWrapper = null;
+            this.sectorWrapperHovered = null;
             this.icons = null;
-            this.content = null;
             this.iconsHovered = null;
+            this.content = null;
             this.contentHovered = null;
             this.hitAreaSpr = null;
             this.titleTF = null;
@@ -190,21 +169,6 @@ package net.wg.gui.battle.views.radialMenu
             this.titleHoveredTF = null;
             this.keyHoveredTF = null;
             super.onDispose();
-        }
-
-        public function get angle() : Number
-        {
-            return this._angle;
-        }
-
-        protected function get titleStr() : String
-        {
-            return this._titleStr;
-        }
-
-        protected function get keyStr() : String
-        {
-            return this._keyStr;
         }
     }
 }

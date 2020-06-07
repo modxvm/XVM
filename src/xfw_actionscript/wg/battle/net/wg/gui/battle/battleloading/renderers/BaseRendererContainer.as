@@ -2,7 +2,6 @@ package net.wg.gui.battle.battleloading.renderers
 {
     import flash.display.Sprite;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
-    import flash.display.MovieClip;
     import net.wg.gui.battle.components.BattleAtlasSprite;
     import flash.text.TextField;
     import net.wg.gui.components.icons.PlayerActionMarker;
@@ -12,65 +11,65 @@ package net.wg.gui.battle.battleloading.renderers
     public class BaseRendererContainer extends Sprite implements IDisposable
     {
 
-        public var testerBack_c1r1:MovieClip;
+        public var testerBack_c1r1:BattleAtlasSprite;
 
-        public var testerBack_c1r2:MovieClip;
+        public var testerBack_c1r2:BattleAtlasSprite;
 
-        public var testerBack_c1r3:MovieClip;
+        public var testerBack_c1r3:BattleAtlasSprite;
 
-        public var testerBack_c1r4:MovieClip;
+        public var testerBack_c1r4:BattleAtlasSprite;
 
-        public var testerBack_c1r5:MovieClip;
+        public var testerBack_c1r5:BattleAtlasSprite;
 
-        public var testerBack_c1r6:MovieClip;
+        public var testerBack_c1r6:BattleAtlasSprite;
 
-        public var testerBack_c1r7:MovieClip;
+        public var testerBack_c1r7:BattleAtlasSprite;
 
-        public var testerBack_c1r8:MovieClip;
+        public var testerBack_c1r8:BattleAtlasSprite;
 
-        public var testerBack_c1r9:MovieClip;
+        public var testerBack_c1r9:BattleAtlasSprite;
 
-        public var testerBack_c1r10:MovieClip;
+        public var testerBack_c1r10:BattleAtlasSprite;
 
-        public var testerBack_c1r11:MovieClip;
+        public var testerBack_c1r11:BattleAtlasSprite;
 
-        public var testerBack_c1r12:MovieClip;
+        public var testerBack_c1r12:BattleAtlasSprite;
 
-        public var testerBack_c1r13:MovieClip;
+        public var testerBack_c1r13:BattleAtlasSprite;
 
-        public var testerBack_c1r14:MovieClip;
+        public var testerBack_c1r14:BattleAtlasSprite;
 
-        public var testerBack_c1r15:MovieClip;
+        public var testerBack_c1r15:BattleAtlasSprite;
 
-        public var testerBack_c2r1:MovieClip;
+        public var testerBack_c2r1:BattleAtlasSprite;
 
-        public var testerBack_c2r2:MovieClip;
+        public var testerBack_c2r2:BattleAtlasSprite;
 
-        public var testerBack_c2r3:MovieClip;
+        public var testerBack_c2r3:BattleAtlasSprite;
 
-        public var testerBack_c2r4:MovieClip;
+        public var testerBack_c2r4:BattleAtlasSprite;
 
-        public var testerBack_c2r5:MovieClip;
+        public var testerBack_c2r5:BattleAtlasSprite;
 
-        public var testerBack_c2r6:MovieClip;
+        public var testerBack_c2r6:BattleAtlasSprite;
 
-        public var testerBack_c2r7:MovieClip;
+        public var testerBack_c2r7:BattleAtlasSprite;
 
-        public var testerBack_c2r8:MovieClip;
+        public var testerBack_c2r8:BattleAtlasSprite;
 
-        public var testerBack_c2r9:MovieClip;
+        public var testerBack_c2r9:BattleAtlasSprite;
 
-        public var testerBack_c2r10:MovieClip;
+        public var testerBack_c2r10:BattleAtlasSprite;
 
-        public var testerBack_c2r11:MovieClip;
+        public var testerBack_c2r11:BattleAtlasSprite;
 
-        public var testerBack_c2r12:MovieClip;
+        public var testerBack_c2r12:BattleAtlasSprite;
 
-        public var testerBack_c2r13:MovieClip;
+        public var testerBack_c2r13:BattleAtlasSprite;
 
-        public var testerBack_c2r14:MovieClip;
+        public var testerBack_c2r14:BattleAtlasSprite;
 
-        public var testerBack_c2r15:MovieClip;
+        public var testerBack_c2r15:BattleAtlasSprite;
 
         public var icoTesterAlly0:BattleAtlasSprite;
 
@@ -642,9 +641,9 @@ package net.wg.gui.battle.battleloading.renderers
 
         public var selfBgAlly14:BattleAtlasSprite;
 
-        public var backTestersAlly:Vector.<MovieClip>;
+        public var backTestersAlly:Vector.<BattleAtlasSprite>;
 
-        public var backTestersEnemy:Vector.<MovieClip>;
+        public var backTestersEnemy:Vector.<BattleAtlasSprite>;
 
         public var icoTestersAlly:Vector.<BattleAtlasSprite>;
 
@@ -689,8 +688,8 @@ package net.wg.gui.battle.battleloading.renderers
             super();
             this.icoTestersEnemy = new <BattleAtlasSprite>[this.icoTesterEnemy0,this.icoTesterEnemy1,this.icoTesterEnemy2,this.icoTesterEnemy3,this.icoTesterEnemy4,this.icoTesterEnemy5,this.icoTesterEnemy6,this.icoTesterEnemy7,this.icoTesterEnemy8,this.icoTesterEnemy9,this.icoTesterEnemy10,this.icoTesterEnemy11,this.icoTesterEnemy12,this.icoTesterEnemy13,this.icoTesterEnemy14];
             this.icoTestersAlly = new <BattleAtlasSprite>[this.icoTesterAlly0,this.icoTesterAlly1,this.icoTesterAlly2,this.icoTesterAlly3,this.icoTesterAlly4,this.icoTesterAlly5,this.icoTesterAlly6,this.icoTesterAlly7,this.icoTesterAlly8,this.icoTesterAlly9,this.icoTesterAlly10,this.icoTesterAlly11,this.icoTesterAlly12,this.icoTesterAlly13,this.icoTesterAlly14];
-            this.backTestersEnemy = new <MovieClip>[this.testerBack_c2r1,this.testerBack_c2r2,this.testerBack_c2r3,this.testerBack_c2r4,this.testerBack_c2r5,this.testerBack_c2r6,this.testerBack_c2r7,this.testerBack_c2r8,this.testerBack_c2r9,this.testerBack_c2r10,this.testerBack_c2r11,this.testerBack_c2r12,this.testerBack_c2r13,this.testerBack_c2r14,this.testerBack_c2r15];
-            this.backTestersAlly = new <MovieClip>[this.testerBack_c1r1,this.testerBack_c1r2,this.testerBack_c1r3,this.testerBack_c1r4,this.testerBack_c1r5,this.testerBack_c1r6,this.testerBack_c1r7,this.testerBack_c1r8,this.testerBack_c1r9,this.testerBack_c1r10,this.testerBack_c1r11,this.testerBack_c1r12,this.testerBack_c1r13,this.testerBack_c1r14,this.testerBack_c1r15];
+            this.backTestersEnemy = new <BattleAtlasSprite>[this.testerBack_c2r1,this.testerBack_c2r2,this.testerBack_c2r3,this.testerBack_c2r4,this.testerBack_c2r5,this.testerBack_c2r6,this.testerBack_c2r7,this.testerBack_c2r8,this.testerBack_c2r9,this.testerBack_c2r10,this.testerBack_c2r11,this.testerBack_c2r12,this.testerBack_c2r13,this.testerBack_c2r14,this.testerBack_c2r15];
+            this.backTestersAlly = new <BattleAtlasSprite>[this.testerBack_c1r1,this.testerBack_c1r2,this.testerBack_c1r3,this.testerBack_c1r4,this.testerBack_c1r5,this.testerBack_c1r6,this.testerBack_c1r7,this.testerBack_c1r8,this.testerBack_c1r9,this.testerBack_c1r10,this.testerBack_c1r11,this.testerBack_c1r12,this.testerBack_c1r13,this.testerBack_c1r14,this.testerBack_c1r15];
             this.textFieldsAlly = new <TextField>[this.textFieldAlly0,this.textFieldAlly1,this.textFieldAlly2,this.textFieldAlly3,this.textFieldAlly4,this.textFieldAlly5,this.textFieldAlly6,this.textFieldAlly7,this.textFieldAlly8,this.textFieldAlly9,this.textFieldAlly10,this.textFieldAlly11,this.textFieldAlly12,this.textFieldAlly13,this.textFieldAlly14];
             this.vehicleFieldsAlly = new <TextField>[this.vehicleFieldAlly0,this.vehicleFieldAlly1,this.vehicleFieldAlly2,this.vehicleFieldAlly3,this.vehicleFieldAlly4,this.vehicleFieldAlly5,this.vehicleFieldAlly6,this.vehicleFieldAlly7,this.vehicleFieldAlly8,this.vehicleFieldAlly9,this.vehicleFieldAlly10,this.vehicleFieldAlly11,this.vehicleFieldAlly12,this.vehicleFieldAlly13,this.vehicleFieldAlly14];
             this.playerActionMarkersAlly = new <PlayerActionMarker>[this.playerActionMarkerAlly0,this.playerActionMarkerAlly1,this.playerActionMarkerAlly2,this.playerActionMarkerAlly3,this.playerActionMarkerAlly4,this.playerActionMarkerAlly5,this.playerActionMarkerAlly6,this.playerActionMarkerAlly7,this.playerActionMarkerAlly8,this.playerActionMarkerAlly9,this.playerActionMarkerAlly10,this.playerActionMarkerAlly11,this.playerActionMarkerAlly12,this.playerActionMarkerAlly13,this.playerActionMarkerAlly14];

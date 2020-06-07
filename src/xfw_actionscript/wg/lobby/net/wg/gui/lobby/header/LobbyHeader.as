@@ -616,7 +616,7 @@ package net.wg.gui.lobby.header
                     showDashboardS();
                     break;
                 case HeaderButtonsHelper.ITEM_ID_PREM:
-                    showPremiumDialogS();
+                    showPremiumViewS();
                     break;
                 case HeaderButtonsHelper.ITEM_ID_PREMSHOP:
                     onPremShopClickS();

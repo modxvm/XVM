@@ -69,6 +69,7 @@ package net.wg.gui.lobby.missions.components.headerComponents
         override public function setCollapsed(param1:Boolean, param2:Boolean) : void
         {
             this._isCollapsed = param1;
+            this.collapsedToggleBtn.enabled = param2;
             this.collapsedToggleBtn.selected = this._isCollapsed;
         }
 

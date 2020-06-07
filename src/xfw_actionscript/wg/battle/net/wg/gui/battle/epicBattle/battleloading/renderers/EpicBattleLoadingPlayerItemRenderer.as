@@ -72,7 +72,7 @@ package net.wg.gui.battle.epicBattle.battleloading.renderers
 
         public var testerIcon:BattleAtlasSprite = null;
 
-        public var testerBG:MovieClip = null;
+        public var testerBG:BattleAtlasSprite = null;
 
         private var _model:DAAPIVehicleInfoVO;
 
@@ -200,7 +200,7 @@ package net.wg.gui.battle.epicBattle.battleloading.renderers
                 this.updateState();
                 this.setPlayerActionMarkerState();
                 this.setSquadState();
-                this.setSuffixBadge(this._model.suffixBadgeType);
+                this.setSuffixBadge(this._model.suffixBadgeType,this._model.suffixBadgeStripType);
             }
             else
             {
@@ -248,13 +248,14 @@ package net.wg.gui.battle.epicBattle.battleloading.renderers
             this.selfBg.visible = PlayerStatus.isSelected(this._model.playerStatus);
         }
 
-        private function setSuffixBadge(param1:String) : void
+        private function setSuffixBadge(param1:String, param2:String) : void
         {
-            var _loc2_:Boolean = StringUtils.isNotEmpty(param1);
-            this.testerIcon.visible = this.testerBG.visible = _loc2_;
-            if(_loc2_)
+            var _loc3_:Boolean = StringUtils.isNotEmpty(param1);
+            this.testerIcon.visible = this.testerBG.visible = _loc3_;
+            if(_loc3_)
             {
                 this.testerIcon.imageName = param1;
+                this.testerBG.imageName = param2;
                 if(this._isEnemy)
                 {
                     this.testerIcon.x = -FIELD_WIDTH_COMPENSATION - RANKED_BADGE_OFFSET - this.testerIcon.width + this.textField.x + (this.textField.width - this.textField.textWidth) >> 0;

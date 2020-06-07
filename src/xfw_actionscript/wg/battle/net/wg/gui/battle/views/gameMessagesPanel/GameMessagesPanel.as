@@ -107,17 +107,12 @@ package net.wg.gui.battle.views.gameMessagesPanel
             }
         }
 
-        protected function setMsgLinkageTypeDict() : void
-        {
-            this.msgLinkageTypeDict[GAME_MESSAGES_CONSTS.WIN] = Linkages.WIN_UI_LINKAGE;
-            this.msgLinkageTypeDict[GAME_MESSAGES_CONSTS.DEFEAT] = Linkages.DEFEAT_UI_LINKAGE;
-            this.msgLinkageTypeDict[GAME_MESSAGES_CONSTS.DRAW] = Linkages.DRAW_UI_LINKAGE;
-        }
-
         protected function initMappingDict() : void
         {
             this.msgLinkageTypeDict = new Dictionary();
-            this.setMsgLinkageTypeDict();
+            this.msgLinkageTypeDict[GAME_MESSAGES_CONSTS.WIN] = Linkages.WIN_UI_LINKAGE;
+            this.msgLinkageTypeDict[GAME_MESSAGES_CONSTS.DEFEAT] = Linkages.DEFEAT_UI_LINKAGE;
+            this.msgLinkageTypeDict[GAME_MESSAGES_CONSTS.DRAW] = Linkages.DRAW_UI_LINKAGE;
             this.msgClassTypeDict = new Dictionary();
             this.msgClassTypeDict[GAME_MESSAGES_CONSTS.WIN] = EndGameMessage;
             this.msgClassTypeDict[GAME_MESSAGES_CONSTS.DEFEAT] = EndGameMessage;

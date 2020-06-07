@@ -130,7 +130,7 @@ package net.wg.gui.lobby.vehicleCustomization
         {
             if(slotData != null && slotData.slotId != null)
             {
-                return slotData.slotId.slotId;
+                return slotData.slotId.slotType;
             }
             return Values.DEFAULT_INT;
         }

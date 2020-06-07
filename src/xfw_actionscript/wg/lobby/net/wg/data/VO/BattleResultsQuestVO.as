@@ -29,6 +29,10 @@ package net.wg.data.VO
 
         public var linkBtnVisible:Boolean = true;
 
+        public var linkBtnEnabled:Boolean = true;
+
+        public var linkBtnTooltip:String = "";
+
         public var questState:StateVO = null;
 
         public var descr:String = "";

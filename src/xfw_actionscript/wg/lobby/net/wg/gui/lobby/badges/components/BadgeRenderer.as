@@ -74,7 +74,6 @@ package net.wg.gui.lobby.badges.components
             if(this._badgeData != null && isInvalid(InvalidationType.DATA))
             {
                 enabled = this._badgeData.enabled;
-                gotoAndStop(enabled?STATE_NORMAL:STATE_DISABLED);
                 alpha = enabled?1:NOT_ENABLED_ALPHA;
                 this.titleTF.htmlText = this._badgeData.title;
                 this.descrTF.htmlText = this._badgeData.description;
@@ -90,20 +89,21 @@ package net.wg.gui.lobby.badges.components
                     }
                 }
                 this.badgeComponent.setData(this._badgeData.visual);
+                invalidate(INV_SELECTED);
             }
             if(isInvalid(INV_SELECTED))
             {
                 if(_selected)
                 {
+                    gotoAndStop(STATE_SELECTED);
                     if(this.selectedImg && StringUtils.isEmpty(this.selectedImg.source))
                     {
                         this.selectedImg.source = RES_ICONS.MAPS_ICONS_LIBRARY_COMPLETEDINDICATOR;
                     }
-                    gotoAndStop(STATE_SELECTED);
                 }
                 else
                 {
-                    gotoAndStop(STATE_NORMAL);
+                    gotoAndStop(enabled?STATE_NORMAL:STATE_DISABLED);
                 }
             }
         }

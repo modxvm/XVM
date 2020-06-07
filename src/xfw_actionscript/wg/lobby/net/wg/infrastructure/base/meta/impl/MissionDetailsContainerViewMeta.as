@@ -8,8 +8,6 @@ package net.wg.infrastructure.base.meta.impl
 
         public var onTokenBuyClick:Function;
 
-        public var onToEventClick:Function;
-
         public function MissionDetailsContainerViewMeta()
         {
             super();
@@ -19,12 +17,6 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.onTokenBuyClick,"onTokenBuyClick" + Errors.CANT_NULL);
             this.onTokenBuyClick(param1,param2);
-        }
-
-        public function onToEventClickS() : void
-        {
-            App.utils.asserter.assertNotNull(this.onToEventClick,"onToEventClick" + Errors.CANT_NULL);
-            this.onToEventClick();
         }
     }
 }

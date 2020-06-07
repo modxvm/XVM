@@ -91,10 +91,6 @@ package
 
         public static const PLAYER_ERRORS_EQUIPMENT_ORDER_NOTREADY:String = "#ingame_gui:player_errors/equipment/order/notReady";
 
-        public static const PLAYER_MESSAGES_DEVICE_CRITICAL_AT_SHOT_IN_PERSONAL_DEATH_ZONE:String = "#ingame_gui:player_messages/DEVICE_CRITICAL_AT_SHOT_IN_PERSONAL_DEATH_ZONE";
-
-        public static const PLAYER_MESSAGES_DEVICE_DESTROYED_AT_SHOT_IN_PERSONAL_DEATH_ZONE:String = "#ingame_gui:player_messages/DEVICE_DESTROYED_AT_SHOT_IN_PERSONAL_DEATH_ZONE";
-
         public static const PLAYER_MESSAGES_DEVICE_CRITICAL_AT_SHOT:String = "#ingame_gui:player_messages/DEVICE_CRITICAL_AT_SHOT";
 
         public static const PLAYER_MESSAGES_DEVICE_DESTROYED_AT_SHOT:String = "#ingame_gui:player_messages/DEVICE_DESTROYED_AT_SHOT";
@@ -236,34 +232,6 @@ package
         public static const CHAT_SHORTCUTS_ATTACK_ENEMY:String = "#ingame_gui:chat_shortcuts/attack_enemy";
 
         public static const CHAT_SHORTCUTS_ATTACK_ENEMY_RELOADING:String = "#ingame_gui:chat_shortcuts/attack_enemy_reloading";
-
-        public static const CHAT_SHORTCUTS_EVENT_CHAT_1:String = "#ingame_gui:chat_shortcuts/event_chat_1";
-
-        public static const CHAT_SHORTCUTS_EVENT_CHAT_2:String = "#ingame_gui:chat_shortcuts/event_chat_2";
-
-        public static const CHAT_SHORTCUTS_EVENT_CHAT_3:String = "#ingame_gui:chat_shortcuts/event_chat_3";
-
-        public static const CHAT_SHORTCUTS_EVENT_CHAT_4:String = "#ingame_gui:chat_shortcuts/event_chat_4";
-
-        public static const CHAT_SHORTCUTS_EVENT_CHAT_5:String = "#ingame_gui:chat_shortcuts/event_chat_5";
-
-        public static const CHAT_SHORTCUTS_EVENT_CHAT_6:String = "#ingame_gui:chat_shortcuts/event_chat_6";
-
-        public static const CHAT_SHORTCUTS_EVENT_CHAT_7:String = "#ingame_gui:chat_shortcuts/event_chat_7";
-
-        public static const CHAT_SHORTCUTS_EVENT_CHAT_1_EX:String = "#ingame_gui:chat_shortcuts/event_chat_1_ex";
-
-        public static const CHAT_SHORTCUTS_EVENT_CHAT_2_EX:String = "#ingame_gui:chat_shortcuts/event_chat_2_ex";
-
-        public static const CHAT_SHORTCUTS_EVENT_CHAT_3_EX:String = "#ingame_gui:chat_shortcuts/event_chat_3_ex";
-
-        public static const CHAT_SHORTCUTS_EVENT_CHAT_4_EX:String = "#ingame_gui:chat_shortcuts/event_chat_4_ex";
-
-        public static const CHAT_SHORTCUTS_EVENT_CHAT_5_EX:String = "#ingame_gui:chat_shortcuts/event_chat_5_ex";
-
-        public static const CHAT_SHORTCUTS_EVENT_CHAT_6_EX:String = "#ingame_gui:chat_shortcuts/event_chat_6_ex";
-
-        public static const CHAT_SHORTCUTS_EVENT_CHAT_7_EX:String = "#ingame_gui:chat_shortcuts/event_chat_7_ex";
 
         public static const CHAT_EXAMPLE_GLOBAL_MSG_DEF_SAVE_TANKS:String = "#ingame_gui:chat_example/global_msg/def/save_tanks";
 
@@ -601,8 +569,6 @@ package
 
         public static const PLAYERS_PANEL_UNKNOWN_CLAN:String = "#ingame_gui:players_panel/unknown_clan";
 
-        public static const PLAYERS_PANEL_INFO_TITLE:String = "#ingame_gui:players_panel/info/title";
-
         public static const EPIC_PLAYERS_PANEL_STATE_HIDDEN_HEADER:String = "#ingame_gui:epic_players_panel/state/hidden/header";
 
         public static const EPIC_PLAYERS_PANEL_STATE_HIDDEN_BODY:String = "#ingame_gui:epic_players_panel/state/hidden/body";
@@ -719,19 +685,11 @@ package
 
         public static const POSTMORTEM_MESSAGES_DEATH_FROM_SHOT_BOMBER:String = "#ingame_gui:postmortem_messages/DEATH_FROM_SHOT_BOMBER";
 
-        public static const POSTMORTEM_MESSAGES_EVENT_DEATH_FROM_SHOT:String = "#ingame_gui:postmortem_messages/EVENT_DEATH_FROM_SHOT";
-
-        public static const PLAYER_MESSAGES_DEATH_FROM_SHOT_SELF_SUICIDE_BOMBER:String = "#ingame_gui:player_messages/DEATH_FROM_SHOT_SELF_SUICIDE_BOMBER";
-
-        public static const PLAYER_MESSAGES_DEATH_FROM_SHOT_SELF_SUICIDE_ARTILLERY:String = "#ingame_gui:player_messages/DEATH_FROM_SHOT_SELF_SUICIDE_ARTILLERY";
-
         public static const POSTMORTEM_MESSAGES_DEATH_FROM_OVERTURN_SELF_SUICIDE:String = "#ingame_gui:postmortem_messages/DEATH_FROM_OVERTURN_SELF_SUICIDE";
 
         public static const POSTMORTEM_MESSAGES_DEATH_FROM_OVERTURN_ENEMY_SELF:String = "#ingame_gui:postmortem_messages/DEATH_FROM_OVERTURN_ENEMY_SELF";
 
         public static const POSTMORTEM_MESSAGES_DEATH_FROM_OVERTURN_ALLY_SELF:String = "#ingame_gui:postmortem_messages/DEATH_FROM_OVERTURN_ALLY_SELF";
-
-        public static const PLAYER_MESSAGES_DEATH_FROM_SHOT:String = "#ingame_gui:player_messages/DEATH_FROM_SHOT";
 
         public static const PLAYER_MESSAGES_DEATH_FROM_SHOT_SELF_ALLY:String = "#ingame_gui:player_messages/DEATH_FROM_SHOT_SELF_ALLY";
 
@@ -744,10 +702,6 @@ package
         public static const PLAYER_MESSAGES_DEATH_FROM_SHOT_SELF_ENEMY_ARTILLERY:String = "#ingame_gui:player_messages/DEATH_FROM_SHOT_SELF_ENEMY_ARTILLERY";
 
         public static const PLAYER_MESSAGES_DEATH_FROM_SHOT_SELF_ENEMY_BOMBER:String = "#ingame_gui:player_messages/DEATH_FROM_SHOT_SELF_ENEMY_BOMBER";
-
-        public static const PLAYER_MESSAGES_DEATH_FROM_SHOT_SELF_ENEMY_MINEFIELD:String = "#ingame_gui:player_messages/DEATH_FROM_SHOT_SELF_ENEMY_MINEFIELD";
-
-        public static const PLAYER_MESSAGES_DEATH_FROM_SHOT_SELF_SUICIDE:String = "#ingame_gui:player_messages/DEATH_FROM_SHOT_SELF_SUICIDE";
 
         public static const PLAYER_MESSAGES_DEATH_FROM_SHOT_ALLY_ALLY:String = "#ingame_gui:player_messages/DEATH_FROM_SHOT_ALLY_ALLY";
 
@@ -823,12 +777,6 @@ package
 
         public static const PLAYER_MESSAGES_DEATH_FROM_SECTOR_BOMBERS_UNKNOWN_ALLY:String = "#ingame_gui:player_messages/DEATH_FROM_SECTOR_BOMBERS_UNKNOWN_ALLY";
 
-        public static const PLAYER_MESSAGES_DEATH_FROM_FIRE:String = "#ingame_gui:player_messages/DEATH_FROM_FIRE";
-
-        public static const PLAYER_MESSAGES_DEATH_FROM_FIRE_SELF_SUICIDE:String = "#ingame_gui:player_messages/DEATH_FROM_FIRE_SELF_SUICIDE";
-
-        public static const PLAYER_MESSAGES_DEATH_FROM_SHOT_ENEMY_SELF:String = "#ingame_gui:player_messages/DEATH_FROM_SHOT_ENEMY_SELF";
-
         public static const VEHICLE_MESSAGES_DEATH_FROM_FIRE:String = "#ingame_gui:vehicle_messages/DEATH_FROM_FIRE";
 
         public static const POSTMORTEM_MESSAGES_DEATH_FROM_FIRE:String = "#ingame_gui:postmortem_messages/DEATH_FROM_FIRE";
@@ -881,11 +829,19 @@ package
 
         public static const PLAYER_MESSAGES_DEATH_FROM_DROWNING_ENEMY_ENEMY:String = "#ingame_gui:player_messages/DEATH_FROM_DROWNING_ENEMY_ENEMY";
 
+        public static const PLAYER_MESSAGES_COMBAT_EQUIPMENT_READY_ARTILLERY:String = "#ingame_gui:player_messages/COMBAT_EQUIPMENT_READY_ARTILLERY";
+
+        public static const PLAYER_MESSAGES_COMBAT_EQUIPMENT_READY_BOMBER:String = "#ingame_gui:player_messages/COMBAT_EQUIPMENT_READY_BOMBER";
+
         public static const PLAYER_MESSAGES_COMBAT_EQUIPMENT_READY_RECON:String = "#ingame_gui:player_messages/COMBAT_EQUIPMENT_READY_RECON";
 
         public static const PLAYER_MESSAGES_COMBAT_EQUIPMENT_READY_SMOKE:String = "#ingame_gui:player_messages/COMBAT_EQUIPMENT_READY_SMOKE";
 
         public static const PLAYER_MESSAGES_COMBAT_EQUIPMENT_READY_INSPIRE:String = "#ingame_gui:player_messages/COMBAT_EQUIPMENT_READY_INSPIRE";
+
+        public static const PLAYER_MESSAGES_COMBAT_EQUIPMENT_USED_ARTILLERY:String = "#ingame_gui:player_messages/COMBAT_EQUIPMENT_USED_ARTILLERY";
+
+        public static const PLAYER_MESSAGES_COMBAT_EQUIPMENT_USED_BOMBER:String = "#ingame_gui:player_messages/COMBAT_EQUIPMENT_USED_BOMBER";
 
         public static const PLAYER_MESSAGES_COMBAT_EQUIPMENT_USED_RECON:String = "#ingame_gui:player_messages/COMBAT_EQUIPMENT_USED_RECON";
 
@@ -976,8 +932,6 @@ package
         public static const VEHICLE_MESSAGES_DEATH_FROM_GAS_ATTACK_ENEMY_SELF:String = "#ingame_gui:vehicle_messages/DEATH_FROM_GAS_ATTACK_ENEMY_SELF";
 
         public static const VEHICLE_MESSAGES_DEATH_FROM_GAS_ATTACK_ALLY_SELF:String = "#ingame_gui:vehicle_messages/DEATH_FROM_GAS_ATTACK_ALLY_SELF";
-
-        public static const PLAYER_MESSAGES_DEATH_FROM_DEATH_ZONE:String = "#ingame_gui:player_messages/DEATH_FROM_DEATH_ZONE";
 
         public static const PLAYER_MESSAGES_DEATH_FROM_DEATH_ZONE_SELF_SUICIDE:String = "#ingame_gui:player_messages/DEATH_FROM_DEATH_ZONE_SELF_SUICIDE";
 
@@ -1093,10 +1047,6 @@ package
 
         public static const EFFICIENCYRIBBONS_DAMAGE:String = "#ingame_gui:efficiencyRibbons/damage";
 
-        public static const EFFICIENCYRIBBONS_DAMAGEBYABILITY:String = "#ingame_gui:efficiencyRibbons/damageByAbility";
-
-        public static const EFFICIENCYRIBBONS_DAMAGEBYDEATHZONE:String = "#ingame_gui:efficiencyRibbons/damageByDeathZone";
-
         public static const EFFICIENCYRIBBONS_RAM:String = "#ingame_gui:efficiencyRibbons/ram";
 
         public static const EFFICIENCYRIBBONS_BURN:String = "#ingame_gui:efficiencyRibbons/burn";
@@ -1150,8 +1100,6 @@ package
         public static const HITMARKER_RICOCHET:String = "#ingame_gui:hitMarker/ricochet";
 
         public static const HITMARKER_CRITICAL:String = "#ingame_gui:hitMarker/critical";
-
-        public static const HITMARKER_BOSS:String = "#ingame_gui:hitMarker/boss";
 
         public static const RESPAWNVIEW_TITLE:String = "#ingame_gui:respawnView/title";
 
@@ -1312,6 +1260,24 @@ package
         public static const REWARDWINDOW_BASE_DESCTEXT:String = "#ingame_gui:rewardWindow/base/descText";
 
         public static const REWARDWINDOW_BASE_BTNLABEL:String = "#ingame_gui:rewardWindow/base/btnLabel";
+
+        public static const REWARDWINDOW_WGCQ_CLAN_REWARD_WINHEADERTEXT:String = "#ingame_gui:rewardWindow/wgcq_clan_reward/winHeaderText";
+
+        public static const REWARDWINDOW_WGCQ_CLAN_REWARD_HEADERTEXT:String = "#ingame_gui:rewardWindow/wgcq_clan_reward/headerText";
+
+        public static const REWARDWINDOW_WGCQ_CLAN_REWARD_SUBHEADERTEXT:String = "#ingame_gui:rewardWindow/wgcq_clan_reward/subHeaderText";
+
+        public static const REWARDWINDOW_WGCQ_CLAN_REWARD_DESCTEXT:String = "#ingame_gui:rewardWindow/wgcq_clan_reward/descText";
+
+        public static const REWARDWINDOW_WGCQ_CLAN_REWARD_BTNLABEL:String = "#ingame_gui:rewardWindow/wgcq_clan_reward/btnLabel";
+
+        public static const REWARDWINDOW_WGCQ_PLAYER_REWARD_WINHEADERTEXT:String = "#ingame_gui:rewardWindow/wgcq_player_reward/winHeaderText";
+
+        public static const REWARDWINDOW_WGCQ_PLAYER_REWARD_HEADERTEXT:String = "#ingame_gui:rewardWindow/wgcq_player_reward/headerText";
+
+        public static const REWARDWINDOW_WGCQ_PLAYER_REWARD_SUBHEADERTEXT:String = "#ingame_gui:rewardWindow/wgcq_player_reward/subHeaderText";
+
+        public static const REWARDWINDOW_WGCQ_PLAYER_REWARD_BTNLABEL:String = "#ingame_gui:rewardWindow/wgcq_player_reward/btnLabel";
 
         public static const REWARDWINDOW_TWITCH0_HEADERTEXT:String = "#ingame_gui:rewardWindow/twitch0/headerText";
 
@@ -1474,42 +1440,6 @@ package
         public static const REWARDWINDOW_COMMANDER_PATRICK_BTNLABEL:String = "#ingame_gui:rewardWindow/commander_patrick/btnLabel";
 
         public static const DAMAGEINDICATOR_FRIENDLYFIRE_NODAMAGELABEL:String = "#ingame_gui:damageIndicator/friendlyFire/noDamageLabel";
-
-        public static const PLAYER_MESSAGES_EQUIPMENT_USAGE:String = "#ingame_gui:player_messages/EQUIPMENT_USAGE";
-
-        public static const PLAYER_MESSAGES_TEAM_EQUIPMENT_USAGE:String = "#ingame_gui:player_messages/TEAM_EQUIPMENT_USAGE";
-
-        public static const PLAYER_MESSAGES_COMBAT_EQUIPMENT_READY_ARTILLERY:String = "#ingame_gui:player_messages/COMBAT_EQUIPMENT_READY_ARTILLERY";
-
-        public static const PLAYER_MESSAGES_COMBAT_EQUIPMENT_READY_ARTILLERYROCKET:String = "#ingame_gui:player_messages/COMBAT_EQUIPMENT_READY_ARTILLERYROCKET";
-
-        public static const PLAYER_MESSAGES_COMBAT_EQUIPMENT_READY_ARTILLERYMORTAR:String = "#ingame_gui:player_messages/COMBAT_EQUIPMENT_READY_ARTILLERYMORTAR";
-
-        public static const PLAYER_MESSAGES_COMBAT_EQUIPMENT_READY_BOMBER:String = "#ingame_gui:player_messages/COMBAT_EQUIPMENT_READY_BOMBER";
-
-        public static const PLAYER_MESSAGES_COMBAT_EQUIPMENT_READY_BOMBERCAS:String = "#ingame_gui:player_messages/COMBAT_EQUIPMENT_READY_BOMBERCAS";
-
-        public static const PLAYER_MESSAGES_COMBAT_EQUIPMENT_READY_MINEFIELD:String = "#ingame_gui:player_messages/COMBAT_EQUIPMENT_READY_MINEFIELD";
-
-        public static const PLAYER_MESSAGES_COMBAT_EQUIPMENT_READY_NITRO:String = "#ingame_gui:player_messages/COMBAT_EQUIPMENT_READY_NITRO";
-
-        public static const PLAYER_MESSAGES_COMBAT_EQUIPMENT_READY_SUPERSHELLFIREBALL:String = "#ingame_gui:player_messages/COMBAT_EQUIPMENT_READY_SUPERSHELLFIREBALL";
-
-        public static const PLAYER_MESSAGES_COMBAT_EQUIPMENT_USED_ARTILLERY:String = "#ingame_gui:player_messages/COMBAT_EQUIPMENT_USED_ARTILLERY";
-
-        public static const PLAYER_MESSAGES_COMBAT_EQUIPMENT_USED_ARTILLERYROCKET:String = "#ingame_gui:player_messages/COMBAT_EQUIPMENT_USED_ARTILLERYROCKET";
-
-        public static const PLAYER_MESSAGES_COMBAT_EQUIPMENT_USED_ARTILLERYMORTAR:String = "#ingame_gui:player_messages/COMBAT_EQUIPMENT_USED_ARTILLERYMORTAR";
-
-        public static const PLAYER_MESSAGES_COMBAT_EQUIPMENT_USED_BOMBER:String = "#ingame_gui:player_messages/COMBAT_EQUIPMENT_USED_BOMBER";
-
-        public static const PLAYER_MESSAGES_COMBAT_EQUIPMENT_USED_BOMBERCAS:String = "#ingame_gui:player_messages/COMBAT_EQUIPMENT_USED_BOMBERCAS";
-
-        public static const PLAYER_MESSAGES_COMBAT_EQUIPMENT_USED_MINEFIELD:String = "#ingame_gui:player_messages/COMBAT_EQUIPMENT_USED_MINEFIELD";
-
-        public static const PLAYER_MESSAGES_COMBAT_EQUIPMENT_USED_NITRO:String = "#ingame_gui:player_messages/COMBAT_EQUIPMENT_USED_NITRO";
-
-        public static const PLAYER_MESSAGES_COMBAT_EQUIPMENT_USED_SUPERSHELLFIREBALL:String = "#ingame_gui:player_messages/COMBAT_EQUIPMENT_USED_SUPERSHELLFIREBALL";
 
         public function INGAME_GUI()
         {

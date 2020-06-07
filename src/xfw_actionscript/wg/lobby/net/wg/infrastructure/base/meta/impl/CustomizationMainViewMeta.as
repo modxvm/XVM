@@ -6,6 +6,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.vehicleCustomization.data.CustomizationSlotIdVO;
     import net.wg.gui.lobby.vehicleCustomization.data.CustomizationAnchorsSetVO;
     import scaleform.clik.data.DataProvider;
+    import net.wg.gui.lobby.vehicleCustomization.data.customizationPanel.CustomizationCarouselRendererVO;
     import net.wg.gui.lobby.vehicleCustomization.data.CustomizationAnchorsStateVO;
     import net.wg.gui.lobby.vehicleCustomization.data.seasonBar.CustomizationSeasonBarRendererVO;
     import net.wg.data.constants.Errors;
@@ -21,8 +22,6 @@ package net.wg.infrastructure.base.meta.impl
         public var fadeOutAnchors:Function;
 
         public var changeSeason:Function;
-
-        public var itemContextMenuDisplayed:Function;
 
         public var onLobbyClick:Function;
 
@@ -50,6 +49,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public var resetC11nItemsNovelty:Function;
 
+        public var onProgressionEntryPointClick:Function;
+
         private var _customizationHeaderVO:CustomizationHeaderVO;
 
         private var _customizationAnchorInitVO:CustomizationAnchorInitVO;
@@ -64,9 +65,13 @@ package net.wg.infrastructure.base.meta.impl
 
         private var _dataProviderCustomizationSeasonBarRendererVO:DataProvider;
 
+        private var _customizationCarouselRendererVO:CustomizationCarouselRendererVO;
+
         private var _array2:Array;
 
         private var _customizationAnchorsStateVO:CustomizationAnchorsStateVO;
+
+        private var _customizationCarouselRendererVO1:CustomizationCarouselRendererVO;
 
         public function CustomizationMainViewMeta()
         {
@@ -115,6 +120,11 @@ package net.wg.infrastructure.base.meta.impl
                 this._dataProviderCustomizationSeasonBarRendererVO.cleanUp();
                 this._dataProviderCustomizationSeasonBarRendererVO = null;
             }
+            if(this._customizationCarouselRendererVO)
+            {
+                this._customizationCarouselRendererVO.dispose();
+                this._customizationCarouselRendererVO = null;
+            }
             if(this._array2)
             {
                 this._array2.splice(0,this._array2.length);
@@ -124,6 +134,11 @@ package net.wg.infrastructure.base.meta.impl
             {
                 this._customizationAnchorsStateVO.dispose();
                 this._customizationAnchorsStateVO = null;
+            }
+            if(this._customizationCarouselRendererVO1)
+            {
+                this._customizationCarouselRendererVO1.dispose();
+                this._customizationCarouselRendererVO1 = null;
             }
             super.onDispose();
         }
@@ -150,12 +165,6 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.changeSeason,"changeSeason" + Errors.CANT_NULL);
             this.changeSeason(param1,param2);
-        }
-
-        public function itemContextMenuDisplayedS() : void
-        {
-            App.utils.asserter.assertNotNull(this.itemContextMenuDisplayed,"itemContextMenuDisplayed" + Errors.CANT_NULL);
-            this.itemContextMenuDisplayed();
         }
 
         public function onLobbyClickS() : void
@@ -234,6 +243,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.resetC11nItemsNovelty,"resetC11nItemsNovelty" + Errors.CANT_NULL);
             this.resetC11nItemsNovelty(param1);
+        }
+
+        public function onProgressionEntryPointClickS() : void
+        {
+            App.utils.asserter.assertNotNull(this.onProgressionEntryPointClick,"onProgressionEntryPointClick" + Errors.CANT_NULL);
+            this.onProgressionEntryPointClick();
         }
 
         public final function as_setHeaderData(param1:Object) : void
@@ -325,6 +340,17 @@ package net.wg.infrastructure.base.meta.impl
             }
         }
 
+        public final function as_reselect(param1:Object) : void
+        {
+            var _loc2_:CustomizationCarouselRendererVO = this._customizationCarouselRendererVO;
+            this._customizationCarouselRendererVO = new CustomizationCarouselRendererVO(param1);
+            this.reselect(this._customizationCarouselRendererVO);
+            if(_loc2_)
+            {
+                _loc2_.dispose();
+            }
+        }
+
         public final function as_setNotificationCounters(param1:Array) : void
         {
             var _loc2_:Array = this._array2;
@@ -341,6 +367,17 @@ package net.wg.infrastructure.base.meta.impl
             var _loc2_:CustomizationAnchorsStateVO = this._customizationAnchorsStateVO;
             this._customizationAnchorsStateVO = new CustomizationAnchorsStateVO(param1);
             this.setAnchorsState(this._customizationAnchorsStateVO);
+            if(_loc2_)
+            {
+                _loc2_.dispose();
+            }
+        }
+
+        public final function as_attachToCursor(param1:Object) : void
+        {
+            var _loc2_:CustomizationCarouselRendererVO = this._customizationCarouselRendererVO1;
+            this._customizationCarouselRendererVO1 = new CustomizationCarouselRendererVO(param1);
+            this.attachToCursor(this._customizationCarouselRendererVO1);
             if(_loc2_)
             {
                 _loc2_.dispose();
@@ -396,6 +433,13 @@ package net.wg.infrastructure.base.meta.impl
             throw new AbstractException(_loc2_);
         }
 
+        protected function reselect(param1:CustomizationCarouselRendererVO) : void
+        {
+            var _loc2_:String = "as_reselect" + Errors.ABSTRACT_INVOKE;
+            DebugUtils.LOG_ERROR(_loc2_);
+            throw new AbstractException(_loc2_);
+        }
+
         protected function setNotificationCounters(param1:Array) : void
         {
             var _loc2_:String = "as_setNotificationCounters" + Errors.ABSTRACT_INVOKE;
@@ -406,6 +450,13 @@ package net.wg.infrastructure.base.meta.impl
         protected function setAnchorsState(param1:CustomizationAnchorsStateVO) : void
         {
             var _loc2_:String = "as_setAnchorsState" + Errors.ABSTRACT_INVOKE;
+            DebugUtils.LOG_ERROR(_loc2_);
+            throw new AbstractException(_loc2_);
+        }
+
+        protected function attachToCursor(param1:CustomizationCarouselRendererVO) : void
+        {
+            var _loc2_:String = "as_attachToCursor" + Errors.ABSTRACT_INVOKE;
             DebugUtils.LOG_ERROR(_loc2_);
             throw new AbstractException(_loc2_);
         }

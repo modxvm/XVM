@@ -6,6 +6,7 @@ package net.wg.gui.bootcamp.battleResult
     import flash.display.MovieClip;
     import net.wg.gui.components.controls.UILoaderAlt;
     import net.wg.gui.bootcamp.battleResult.containers.base.BattleResultContent;
+    import net.wg.gui.bootcamp.battleResult.containers.base.BattleResultVideoButton;
     import net.wg.gui.components.controls.SoundButtonEx;
     import flash.geom.Point;
     import net.wg.gui.bootcamp.battleResult.data.BCBattleViewVO;
@@ -14,6 +15,7 @@ package net.wg.gui.bootcamp.battleResult
     import net.wg.gui.events.UILoaderEvent;
     import scaleform.clik.events.ButtonEvent;
     import scaleform.clik.constants.InvalidationType;
+    import org.idmedia.as3commons.util.StringUtils;
     import flash.text.TextFieldAutoSize;
     import scaleform.clik.events.InputEvent;
     import scaleform.clik.ui.InputDetails;
@@ -35,13 +37,13 @@ package net.wg.gui.bootcamp.battleResult
 
         private static const FINISH_MARGIN_Y:int = 100;
 
-        private static const RESULT_MARGIN_Y:int = -38;
+        private static const RESULT_MARGIN_Y:int = -18;
 
         private static const BUTTON_MARGIN_Y:int = -70;
 
         private static const FINISH_MARGIN_SMALL_Y:int = 30;
 
-        private static const RESULT_MARGIN_SMALL_Y:int = -29;
+        private static const RESULT_MARGIN_SMALL_Y:int = -10;
 
         private static const BUTTON_MARGIN_SMALL_Y:int = -45;
 
@@ -62,6 +64,8 @@ package net.wg.gui.bootcamp.battleResult
         public var playerStatus:AnimatedTextContainer = null;
 
         public var content:BattleResultContent = null;
+
+        public var videoButton:BattleResultVideoButton = null;
 
         public var btnAnimation:MovieClip = null;
 
@@ -115,6 +119,7 @@ package net.wg.gui.bootcamp.battleResult
             focusable = true;
             this.btnHangar.label = BOOTCAMP.BTN_CONTINUE;
             this.btnHangar.addEventListener(ButtonEvent.CLICK,this.onBtnHangarClickHandler);
+            this.videoButton.addEventListener(ButtonEvent.CLICK,this.onVideoButtonClickHandler);
         }
 
         override protected function draw() : void
@@ -122,7 +127,7 @@ package net.wg.gui.bootcamp.battleResult
             super.draw();
             if(this._data && isInvalid(InvalidationType.DATA))
             {
-                this.validateDate();
+                this.validateData();
             }
             if(this._stageDimensions && isInvalid(InvalidationType.LAYOUT))
             {
@@ -135,6 +140,7 @@ package net.wg.gui.bootcamp.battleResult
             removeEventListener(BattleViewEvent.ANIMATION_START,this.onAnimationStartHandler);
             removeEventListener(BattleViewEvent.TOOLTIP_SHOW,this.onTooltipShowHandler);
             removeEventListener(BattleViewEvent.ALL_RENDERERS_LOADED,this.onAllRenderersLoadedHandler);
+            this.videoButton.removeEventListener(ButtonEvent.CLICK,this.onVideoButtonClickHandler);
             this.bg.removeEventListener(UILoaderEvent.COMPLETE,this.onBgCompleteHandler);
             this.bg.dispose();
             this.bg = null;
@@ -149,6 +155,8 @@ package net.wg.gui.bootcamp.battleResult
             this.playerStatus = null;
             this.content.dispose();
             this.content = null;
+            this.videoButton.dispose();
+            this.videoButton = null;
             this._data.dispose();
             this._data = null;
             this._stageDimensions = null;
@@ -165,11 +173,13 @@ package net.wg.gui.bootcamp.battleResult
             invalidate(InvalidationType.DATA);
         }
 
-        private function validateDate() : void
+        private function validateData() : void
         {
             this.bg.source = this._data.background;
             this.resultGlowMC.gotoAndStop(this._data.finishReason);
             this.content.setData(this._data);
+            this.videoButton.visible = this._data.videoButton != null && StringUtils.isNotEmpty(this._data.videoButton.image);
+            this.videoButton.setData(this._data.videoButton);
             this.updateText();
             this.validateLayout();
         }
@@ -237,6 +247,7 @@ package net.wg.gui.bootcamp.battleResult
             this.playerStatus.y = _loc2_ - this.playerStatus.height - PLAYER_STATUS_MARGIN_Y >> 0;
             this.btnAnimation.y = this.btnHangar.y + (this.btnHangar.height >> 1) >> 0;
             this.bottomGlowMC.y = _loc2_;
+            this.videoButton.y = _loc2_;
         }
 
         private function delayExit() : void
@@ -245,7 +256,7 @@ package net.wg.gui.bootcamp.battleResult
             clickS();
         }
 
-        private function onBtnHangarClickHandler() : void
+        private function onBtnHangarClickHandler(param1:ButtonEvent) : void
         {
             this.btnHangar.enabled = false;
             this._scheduler.scheduleTask(this.delayExit,DELAY_EXIT);
@@ -287,6 +298,11 @@ package net.wg.gui.bootcamp.battleResult
         private function onAnimationStartHandler(param1:BattleViewEvent) : void
         {
             onAnimationAwardStartS(param1.elementId);
+        }
+
+        private function onVideoButtonClickHandler(param1:ButtonEvent) : void
+        {
+            onVideoButtonClickS();
         }
     }
 }

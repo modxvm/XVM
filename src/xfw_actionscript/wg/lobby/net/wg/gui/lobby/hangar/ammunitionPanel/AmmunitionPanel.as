@@ -17,6 +17,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
     import flash.events.Event;
     import scaleform.clik.events.ButtonEvent;
     import net.wg.gui.lobby.hangar.ammunitionPanel.events.AmmunitionPanelEvents;
+    import net.wg.infrastructure.managers.counter.CounterProps;
     import net.wg.gui.lobby.modulesPanel.components.DeviceSlot;
     import net.wg.data.constants.generated.FITTING_TYPES;
     import scaleform.clik.events.ComponentEvent;
@@ -25,7 +26,6 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
     import net.wg.infrastructure.interfaces.IUIComponentEx;
     import flash.display.InteractiveObject;
     import net.wg.utils.helpLayout.HelpLayoutVO;
-    import net.wg.infrastructure.managers.counter.CounterProps;
     import flash.display.BitmapData;
     import net.wg.data.constants.Linkages;
     import net.wg.data.constants.Directions;
@@ -51,6 +51,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
 
         private static const INV_TUNING_BUTTON_STATE:String = "InvTuningState";
 
+        private static const INV_NATION_CHANGE_BUTTON_STATE:String = "invNationChangeState";
+
         private static const OFFSET_BTN_TO_RENT:int = 2;
 
         private static const SHELLS_VO_SIZE_CORRECTION:int = 10;
@@ -75,7 +77,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
 
         public static const SLOTS_BOTTOM_OFFSET:int = 11;
 
-        private static const VEHICLE_STATE_MSG_OFFSET:int = 16;
+        private static const VEHICLE_STATE_MSG_OFFSET:int = -13;
 
         public var vehicleStateMsg:VehicleStateMsg = null;
 
@@ -287,6 +289,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
 
         override protected function draw() : void
         {
+            var _loc1_:* = false;
             super.draw();
             if(isInvalid(VEHICLE_STATUS_INVALID) && this._msgVo != null)
             {
@@ -309,6 +312,31 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                 else
                 {
                     this.tuningBtn.enabled = this._tuningBtnEnabled;
+                }
+            }
+            if(isInvalid(INV_NATION_CHANGE_BUTTON_STATE))
+            {
+                _loc1_ = this._changeNationBtnVisible != this.changeNationBtn.visible;
+                this.changeNationBtn.visible = this._changeNationBtnVisible;
+                if(this._changeNationIsNew && this._changeNationBtnVisible)
+                {
+                    this._counterManager.setCounter(this.changeNationBtn,"!",null,new CounterProps(3,-1));
+                }
+                else
+                {
+                    this._counterManager.removeCounter(this.changeNationBtn);
+                }
+                if(App.waiting)
+                {
+                    this.changeNationBtn.enabled = this._changeNationBtnEnabled && !App.waiting.isOnStage;
+                }
+                else
+                {
+                    this.changeNationBtn.enabled = this._changeNationBtnEnabled;
+                }
+                if(_loc1_)
+                {
+                    this.centerPanel();
                 }
             }
         }
@@ -575,32 +603,11 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
 
         public function updateChangeNationButton(param1:Boolean, param2:Boolean, param3:String, param4:Boolean) : void
         {
-            var _loc5_:* = this._changeNationBtnVisible != param1;
             this._changeNationBtnVisible = param1;
-            this.changeNationBtn.visible = this._changeNationBtnVisible;
             this._changeNationBtnEnabled = param2;
             this._changeNationIsNew = param4;
-            if(this._changeNationIsNew && this._changeNationBtnVisible)
-            {
-                this._counterManager.setCounter(this.changeNationBtn,"!",null,new CounterProps(3,-1));
-            }
-            else
-            {
-                this._counterManager.removeCounter(this.changeNationBtn);
-            }
-            if(App.waiting)
-            {
-                this.changeNationBtn.enabled = this._changeNationBtnEnabled && !App.waiting.isOnStage;
-            }
-            else
-            {
-                this.changeNationBtn.enabled = this._changeNationBtnEnabled;
-            }
             this._changeNationTooltip = param3;
-            if(_loc5_)
-            {
-                this.centerPanel();
-            }
+            invalidate(INV_NATION_CHANGE_BUTTON_STATE);
         }
 
         public function updateStage(param1:Number, param2:Number) : void
@@ -952,7 +959,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         private function onAmmunitionPanelVehicleStateMsgResizeHandler(param1:AmmunitionPanelEvents) : void
         {
             this.vehicleStateMsg.x = (parent.width >> 1) - x;
-            this.vehicleStateMsg.y = this.maintenanceBtn.y - this.vehicleStateMsg.height - VEHICLE_STATE_MSG_OFFSET;
+            this.vehicleStateMsg.y = this.maintenanceBtn.y - this.vehicleStateMsg.height + VEHICLE_STATE_MSG_OFFSET;
             if(this._msgVo != null)
             {
                 this.toRent.x = this.vehicleStateMsg.textX + TO_RENT_LEFT_MARGIN ^ 0;

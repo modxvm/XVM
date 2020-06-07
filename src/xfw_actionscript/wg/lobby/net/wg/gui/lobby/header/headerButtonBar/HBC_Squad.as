@@ -10,21 +10,11 @@ package net.wg.gui.lobby.header.headerButtonBar
     public class HBC_Squad extends HeaderButtonContentItem
     {
 
-        private static const MIN_SCREEN_PADDING_LEFT:int = 13;
-
-        private static const MIN_SCREEN_PADDING_RIGHT:int = 11;
-
-        private static const ADDITIONAL_SCREEN_PADDING_LEFT:int = 4;
-
-        private static const ADDITIONAL_SCREEN_PADDING_RIGHT:int = -2;
-
-        private static const MAX_FONT_SIZE:int = 14;
-
         private static const ICON_ARROW_GAP:int = 3;
 
-        private static const SQUAD_ICON_MARGIN:int = 0;
+        private static const ARROW_RIGHT_PADDING:int = 4;
 
-        private static const SQUAD_TEXT_MARGIN:int = 5;
+        private static const SQUAD_ICON_MARGIN:int = 0;
 
         public var arrow:ArrowDown = null;
 
@@ -37,11 +27,11 @@ package net.wg.gui.lobby.header.headerButtonBar
         public function HBC_Squad()
         {
             super();
-            minScreenPadding.left = MIN_SCREEN_PADDING_LEFT;
-            minScreenPadding.right = MIN_SCREEN_PADDING_RIGHT;
-            additionalScreenPadding.left = ADDITIONAL_SCREEN_PADDING_LEFT;
-            additionalScreenPadding.right = ADDITIONAL_SCREEN_PADDING_RIGHT;
-            maxFontSize = MAX_FONT_SIZE;
+            minScreenPadding.left = 13;
+            minScreenPadding.right = 11;
+            additionalScreenPadding.left = 4;
+            additionalScreenPadding.right = -2;
+            maxFontSize = 14;
         }
 
         override public function onPopoverClose() : void
@@ -63,7 +53,26 @@ package net.wg.gui.lobby.header.headerButtonBar
 
         override protected function updateSize() : void
         {
-            bounds.width = this.icon.x + this.icon.width;
+            var _loc1_:* = wideScreenPrc > WIDE_SCREEN_PRC_BORDER;
+            if(_loc1_)
+            {
+                if(this._squadDataVo.isEvent)
+                {
+                    bounds.width = this.arrow.x + this.arrow.width + ARROW_RIGHT_PADDING;
+                }
+                else
+                {
+                    bounds.width = this.icon.x + this.icon.width;
+                }
+            }
+            else if(this._squadDataVo.isEvent)
+            {
+                bounds.width = this.icon.width + ICON_ARROW_GAP + this.arrow.width + ARROW_RIGHT_PADDING;
+            }
+            else
+            {
+                bounds.width = this.icon.width;
+            }
             super.updateSize();
         }
 
@@ -93,17 +102,9 @@ package net.wg.gui.lobby.header.headerButtonBar
             {
                 this.textField.width = 0;
             }
+            this.icon.x = this.textField.width + SQUAD_ICON_MARGIN ^ 0;
+            this.arrow.x = this.icon.x + this.icon.width + ICON_ARROW_GAP ^ 0;
             this.arrow.visible = this._squadDataVo.isEvent;
-            if(this._squadDataVo.isEvent)
-            {
-                this.arrow.x = 0;
-                this.textField.x = SQUAD_TEXT_MARGIN + this.arrow.x + this.arrow.width + ICON_ARROW_GAP ^ 0;
-            }
-            else
-            {
-                this.textField.x = 0;
-            }
-            this.icon.x = this.textField.x + this.textField.width + SQUAD_ICON_MARGIN ^ 0;
             super.updateData();
         }
 

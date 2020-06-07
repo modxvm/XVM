@@ -1122,65 +1122,65 @@ package net.wg.gui.battle.random.views.stats.components.fullStats
 
         public var vehicleType_c2r15:BattleAtlasSprite = null;
 
-        public var testerBack_c1r1:MovieClip = null;
+        public var testerBack_c1r1:BattleAtlasSprite = null;
 
-        public var testerBack_c1r2:MovieClip = null;
+        public var testerBack_c1r2:BattleAtlasSprite = null;
 
-        public var testerBack_c1r3:MovieClip = null;
+        public var testerBack_c1r3:BattleAtlasSprite = null;
 
-        public var testerBack_c1r4:MovieClip = null;
+        public var testerBack_c1r4:BattleAtlasSprite = null;
 
-        public var testerBack_c1r5:MovieClip = null;
+        public var testerBack_c1r5:BattleAtlasSprite = null;
 
-        public var testerBack_c1r6:MovieClip = null;
+        public var testerBack_c1r6:BattleAtlasSprite = null;
 
-        public var testerBack_c1r7:MovieClip = null;
+        public var testerBack_c1r7:BattleAtlasSprite = null;
 
-        public var testerBack_c1r8:MovieClip = null;
+        public var testerBack_c1r8:BattleAtlasSprite = null;
 
-        public var testerBack_c1r9:MovieClip = null;
+        public var testerBack_c1r9:BattleAtlasSprite = null;
 
-        public var testerBack_c1r10:MovieClip = null;
+        public var testerBack_c1r10:BattleAtlasSprite = null;
 
-        public var testerBack_c1r11:MovieClip = null;
+        public var testerBack_c1r11:BattleAtlasSprite = null;
 
-        public var testerBack_c1r12:MovieClip = null;
+        public var testerBack_c1r12:BattleAtlasSprite = null;
 
-        public var testerBack_c1r13:MovieClip = null;
+        public var testerBack_c1r13:BattleAtlasSprite = null;
 
-        public var testerBack_c1r14:MovieClip = null;
+        public var testerBack_c1r14:BattleAtlasSprite = null;
 
-        public var testerBack_c1r15:MovieClip = null;
+        public var testerBack_c1r15:BattleAtlasSprite = null;
 
-        public var testerBack_c2r1:MovieClip = null;
+        public var testerBack_c2r1:BattleAtlasSprite = null;
 
-        public var testerBack_c2r2:MovieClip = null;
+        public var testerBack_c2r2:BattleAtlasSprite = null;
 
-        public var testerBack_c2r3:MovieClip = null;
+        public var testerBack_c2r3:BattleAtlasSprite = null;
 
-        public var testerBack_c2r4:MovieClip = null;
+        public var testerBack_c2r4:BattleAtlasSprite = null;
 
-        public var testerBack_c2r5:MovieClip = null;
+        public var testerBack_c2r5:BattleAtlasSprite = null;
 
-        public var testerBack_c2r6:MovieClip = null;
+        public var testerBack_c2r6:BattleAtlasSprite = null;
 
-        public var testerBack_c2r7:MovieClip = null;
+        public var testerBack_c2r7:BattleAtlasSprite = null;
 
-        public var testerBack_c2r8:MovieClip = null;
+        public var testerBack_c2r8:BattleAtlasSprite = null;
 
-        public var testerBack_c2r9:MovieClip = null;
+        public var testerBack_c2r9:BattleAtlasSprite = null;
 
-        public var testerBack_c2r10:MovieClip = null;
+        public var testerBack_c2r10:BattleAtlasSprite = null;
 
-        public var testerBack_c2r11:MovieClip = null;
+        public var testerBack_c2r11:BattleAtlasSprite = null;
 
-        public var testerBack_c2r12:MovieClip = null;
+        public var testerBack_c2r12:BattleAtlasSprite = null;
 
-        public var testerBack_c2r13:MovieClip = null;
+        public var testerBack_c2r13:BattleAtlasSprite = null;
 
-        public var testerBack_c2r14:MovieClip = null;
+        public var testerBack_c2r14:BattleAtlasSprite = null;
 
-        public var testerBack_c2r15:MovieClip = null;
+        public var testerBack_c2r15:BattleAtlasSprite = null;
 
         public var icoTester_c1r1:BattleAtlasSprite = null;
 
@@ -1278,7 +1278,7 @@ package net.wg.gui.battle.random.views.stats.components.fullStats
 
         public var vehicleTypeCollection:Vector.<BattleAtlasSprite> = null;
 
-        public var testerBackCollection:Vector.<MovieClip> = null;
+        public var testerBackCollection:Vector.<BattleAtlasSprite> = null;
 
         public var icoTesterCollection:Vector.<BattleAtlasSprite> = null;
 
@@ -1305,7 +1305,7 @@ package net.wg.gui.battle.random.views.stats.components.fullStats
             this.vehicleLevelCollection = new <BattleAtlasSprite>[this.vehicleLevel_c1r1,this.vehicleLevel_c1r2,this.vehicleLevel_c1r3,this.vehicleLevel_c1r4,this.vehicleLevel_c1r5,this.vehicleLevel_c1r6,this.vehicleLevel_c1r7,this.vehicleLevel_c1r8,this.vehicleLevel_c1r9,this.vehicleLevel_c1r10,this.vehicleLevel_c1r11,this.vehicleLevel_c1r12,this.vehicleLevel_c1r13,this.vehicleLevel_c1r14,this.vehicleLevel_c1r15,this.vehicleLevel_c2r1,this.vehicleLevel_c2r2,this.vehicleLevel_c2r3,this.vehicleLevel_c2r4,this.vehicleLevel_c2r5,this.vehicleLevel_c2r6,this.vehicleLevel_c2r7,this.vehicleLevel_c2r8,this.vehicleLevel_c2r9,this.vehicleLevel_c2r10,this.vehicleLevel_c2r11,this.vehicleLevel_c2r12,this.vehicleLevel_c2r13,this.vehicleLevel_c2r14,this.vehicleLevel_c2r15];
             this.vehicleNameCollection = new <TextField>[this.vehicleName_c1r1,this.vehicleName_c1r2,this.vehicleName_c1r3,this.vehicleName_c1r4,this.vehicleName_c1r5,this.vehicleName_c1r6,this.vehicleName_c1r7,this.vehicleName_c1r8,this.vehicleName_c1r9,this.vehicleName_c1r10,this.vehicleName_c1r11,this.vehicleName_c1r12,this.vehicleName_c1r13,this.vehicleName_c1r14,this.vehicleName_c1r15,this.vehicleName_c2r1,this.vehicleName_c2r2,this.vehicleName_c2r3,this.vehicleName_c2r4,this.vehicleName_c2r5,this.vehicleName_c2r6,this.vehicleName_c2r7,this.vehicleName_c2r8,this.vehicleName_c2r9,this.vehicleName_c2r10,this.vehicleName_c2r11,this.vehicleName_c2r12,this.vehicleName_c2r13,this.vehicleName_c2r14,this.vehicleName_c2r15];
             this.vehicleTypeCollection = new <BattleAtlasSprite>[this.vehicleType_c1r1,this.vehicleType_c1r2,this.vehicleType_c1r3,this.vehicleType_c1r4,this.vehicleType_c1r5,this.vehicleType_c1r6,this.vehicleType_c1r7,this.vehicleType_c1r8,this.vehicleType_c1r9,this.vehicleType_c1r10,this.vehicleType_c1r11,this.vehicleType_c1r12,this.vehicleType_c1r13,this.vehicleType_c1r14,this.vehicleType_c1r15,this.vehicleType_c2r1,this.vehicleType_c2r2,this.vehicleType_c2r3,this.vehicleType_c2r4,this.vehicleType_c2r5,this.vehicleType_c2r6,this.vehicleType_c2r7,this.vehicleType_c2r8,this.vehicleType_c2r9,this.vehicleType_c2r10,this.vehicleType_c2r11,this.vehicleType_c2r12,this.vehicleType_c2r13,this.vehicleType_c2r14,this.vehicleType_c2r15];
-            this.testerBackCollection = new <MovieClip>[this.testerBack_c1r1,this.testerBack_c1r2,this.testerBack_c1r3,this.testerBack_c1r4,this.testerBack_c1r5,this.testerBack_c1r6,this.testerBack_c1r7,this.testerBack_c1r8,this.testerBack_c1r9,this.testerBack_c1r10,this.testerBack_c1r11,this.testerBack_c1r12,this.testerBack_c1r13,this.testerBack_c1r14,this.testerBack_c1r15,this.testerBack_c2r1,this.testerBack_c2r2,this.testerBack_c2r3,this.testerBack_c2r4,this.testerBack_c2r5,this.testerBack_c2r6,this.testerBack_c2r7,this.testerBack_c2r8,this.testerBack_c2r9,this.testerBack_c2r10,this.testerBack_c2r11,this.testerBack_c2r12,this.testerBack_c2r13,this.testerBack_c2r14,this.testerBack_c2r15];
+            this.testerBackCollection = new <BattleAtlasSprite>[this.testerBack_c1r1,this.testerBack_c1r2,this.testerBack_c1r3,this.testerBack_c1r4,this.testerBack_c1r5,this.testerBack_c1r6,this.testerBack_c1r7,this.testerBack_c1r8,this.testerBack_c1r9,this.testerBack_c1r10,this.testerBack_c1r11,this.testerBack_c1r12,this.testerBack_c1r13,this.testerBack_c1r14,this.testerBack_c1r15,this.testerBack_c2r1,this.testerBack_c2r2,this.testerBack_c2r3,this.testerBack_c2r4,this.testerBack_c2r5,this.testerBack_c2r6,this.testerBack_c2r7,this.testerBack_c2r8,this.testerBack_c2r9,this.testerBack_c2r10,this.testerBack_c2r11,this.testerBack_c2r12,this.testerBack_c2r13,this.testerBack_c2r14,this.testerBack_c2r15];
             this.icoTesterCollection = new <BattleAtlasSprite>[this.icoTester_c1r1,this.icoTester_c1r2,this.icoTester_c1r3,this.icoTester_c1r4,this.icoTester_c1r5,this.icoTester_c1r6,this.icoTester_c1r7,this.icoTester_c1r8,this.icoTester_c1r9,this.icoTester_c1r10,this.icoTester_c1r11,this.icoTester_c1r12,this.icoTester_c1r13,this.icoTester_c1r14,this.icoTester_c1r15,this.icoTester_c2r1,this.icoTester_c2r2,this.icoTester_c2r3,this.icoTester_c2r4,this.icoTester_c2r5,this.icoTester_c2r6,this.icoTester_c2r7,this.icoTester_c2r8,this.icoTester_c2r9,this.icoTester_c2r10,this.icoTester_c2r11,this.icoTester_c2r12,this.icoTester_c2r13,this.icoTester_c2r14,this.icoTester_c2r15];
             this.background.imageName = BATTLEATLAS.STATS_TABLE_BG;
             this.leftTank.imageName = BATTLEATLAS.STATS_TABLE_TANK;

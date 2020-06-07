@@ -39,7 +39,6 @@ package net.wg.gui.components.controls.price
         override protected function draw() : void
         {
             var _loc1_:* = false;
-            var _loc2_:String = null;
             super.draw();
             if(isInvalid(InvalidationType.STATE,InvalidationType.DATA))
             {
@@ -53,10 +52,13 @@ package net.wg.gui.components.controls.price
                     _loc1_ = this._data.name == CURRENCIES_CONSTANTS.XP_COST;
                     if(this._state == WITH_VALUE_STATE)
                     {
-                        _loc2_ = _loc1_?UNLOCK_VALUE_FRAME:BUY_VALUE_FRAME;
-                        if(_loc2_ != currentFrameLabel)
+                        if(_loc1_)
                         {
-                            gotoAndStop(_loc2_);
+                            gotoAndStop(UNLOCK_VALUE_FRAME);
+                        }
+                        else
+                        {
+                            gotoAndStop(BUY_VALUE_FRAME);
                         }
                         this.bg.state = DiscountBG.PERCENT_BG_STATE;
                         this.valueTF.text = App.utils.locale.integer(this._data.value);

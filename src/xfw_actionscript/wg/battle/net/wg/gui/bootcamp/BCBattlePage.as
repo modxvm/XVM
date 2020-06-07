@@ -6,8 +6,10 @@ package net.wg.gui.bootcamp
     import net.wg.gui.bootcamp.controls.BCAppearMinimapHint;
     import net.wg.data.constants.generated.BATTLE_VIEW_ALIASES;
     import net.wg.gui.bootcamp.events.AppearEvent;
-    import flash.display.Stage;
+    import net.wg.infrastructure.events.LifeCycleEvent;
     import net.wg.gui.battle.views.minimap.events.MinimapEvent;
+    import flash.events.Event;
+    import flash.geom.Rectangle;
 
     public class BCBattlePage extends BCBattlePageMeta implements IBCBattlePageMeta
     {
@@ -15,6 +17,10 @@ package net.wg.gui.bootcamp
         private static const SEC_HINT_OFFSET_Y:int = 30;
 
         private static const RIBBONS_CENTER_SCREEN_OFFSET_Y:int = 185;
+
+        private static const MINIMAP_HINT_OFFSET_POS:int = 10;
+
+        private static const MINIMAP_HINT_OFFSET_SIZE:int = 7;
 
         public var secondaryHint:BCSecondaryHint;
 
@@ -32,7 +38,7 @@ package net.wg.gui.bootcamp
             super.updateStage(param1,param2);
             this.battleTopHint.updateStage(param1,param2);
             this.secondaryHint.y = ribbonsPanel.y - SEC_HINT_OFFSET_Y;
-            this.secondaryHint.x = ribbonsPanel.x;
+            this.secondaryHint.x = param1 >> 1;
         }
 
         override protected function getRibbonsCenterOffset() : int
@@ -50,15 +56,16 @@ package net.wg.gui.bootcamp
         override protected function configUI() : void
         {
             super.configUI();
-            stage.addEventListener(AppearEvent.PREPARE,this.onStageAppearHintCreatedHandler);
+            App.stage.addEventListener(AppearEvent.PREPARE,this.onStageAppearHintCreatedHandler);
+            minimap.addEventListener(LifeCycleEvent.ON_GRAPHICS_RECTANGLES_UPDATE,this.onGraphicsRectanglesUpdateHandler);
         }
 
         override protected function onDispose() : void
         {
+            App.stage.removeEventListener(AppearEvent.PREPARE,this.onStageAppearHintCreatedHandler);
+            minimap.removeEventListener(LifeCycleEvent.ON_GRAPHICS_RECTANGLES_UPDATE,this.onGraphicsRectanglesUpdateHandler);
             this.secondaryHint = null;
             this.battleTopHint = null;
-            var _loc1_:Stage = App.stage;
-            _loc1_.removeEventListener(AppearEvent.PREPARE,this.onStageAppearHintCreatedHandler);
             super.onDispose();
         }
 
@@ -85,6 +92,21 @@ package net.wg.gui.bootcamp
         {
             super.onMiniMapChangeHandler(param1);
             this.setMinimapHintsVisible();
+        }
+
+        private function onGraphicsRectanglesUpdateHandler(param1:Event) : void
+        {
+            var _loc2_:Vector.<Rectangle> = null;
+            if(this._appearMinimapHint)
+            {
+                _loc2_ = minimap.getRectangles();
+                if(_loc2_)
+                {
+                    this._appearMinimapHint.x = _loc2_[0].x - MINIMAP_HINT_OFFSET_POS;
+                    this._appearMinimapHint.y = _loc2_[0].y - MINIMAP_HINT_OFFSET_POS;
+                    this._appearMinimapHint.setProperties(_loc2_[0].width + MINIMAP_HINT_OFFSET_SIZE,_loc2_[0].height + MINIMAP_HINT_OFFSET_SIZE,true);
+                }
+            }
         }
     }
 }

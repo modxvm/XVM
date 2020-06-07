@@ -7,6 +7,8 @@ package net.wg.gui.lobby.vehicleCustomization.events
 
         public static const TAB_CHANGED:String = "tabChangedEvent";
 
+        public static const RETURN_TO_COMPLETE_STYLE:String = "returnToCompleteStyle";
+
         private var _groupId:int = -1;
 
         public function CustomizationTabEvent(param1:String, param2:int, param3:Boolean = false)

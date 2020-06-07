@@ -7,8 +7,6 @@ package net.wg.data.constants.generated
 
         public static const CUSTOMIZATION_INSTALL_BOUND_BASKET_NOTIFICATION:String = "customization/install_bound/basket";
 
-        public static const CUSTOMIZATION_INSTALL_BOUND_RIGHTCLICK_NOTIFICATION:String = "customization/install_bound/right_click";
-
         public function CUSTOMIZATION_DIALOGS()
         {
             super();

@@ -16,6 +16,12 @@ package net.wg.infrastructure.base.meta.impl
 
         public var setShowOnlyAcquired:Function;
 
+        public var setHideOnAnotherVeh:Function;
+
+        public var setShowOnlyProgressionDecals:Function;
+
+        public var setShowOnlyEditableStyles:Function;
+
         public var onFilterChange:Function;
 
         public var onFormChange:Function;
@@ -59,6 +65,24 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.setShowOnlyAcquired,"setShowOnlyAcquired" + Errors.CANT_NULL);
             this.setShowOnlyAcquired(param1);
+        }
+
+        public function setHideOnAnotherVehS(param1:Boolean) : void
+        {
+            App.utils.asserter.assertNotNull(this.setHideOnAnotherVeh,"setHideOnAnotherVeh" + Errors.CANT_NULL);
+            this.setHideOnAnotherVeh(param1);
+        }
+
+        public function setShowOnlyProgressionDecalsS(param1:Boolean) : void
+        {
+            App.utils.asserter.assertNotNull(this.setShowOnlyProgressionDecals,"setShowOnlyProgressionDecals" + Errors.CANT_NULL);
+            this.setShowOnlyProgressionDecals(param1);
+        }
+
+        public function setShowOnlyEditableStylesS(param1:Boolean) : void
+        {
+            App.utils.asserter.assertNotNull(this.setShowOnlyEditableStyles,"setShowOnlyEditableStyles" + Errors.CANT_NULL);
+            this.setShowOnlyEditableStyles(param1);
         }
 
         public function onFilterChangeS(param1:int, param2:Boolean) : void

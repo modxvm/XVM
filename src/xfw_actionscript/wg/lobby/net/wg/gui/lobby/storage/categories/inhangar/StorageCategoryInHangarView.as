@@ -95,6 +95,7 @@ package net.wg.gui.lobby.storage.categories.inhangar
 
         public function setActive(param1:Boolean) : void
         {
+            setActiveStateS(param1);
         }
 
         public function setHitArea(param1:Sprite) : void

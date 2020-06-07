@@ -357,7 +357,7 @@ package net.wg.gui.lobby.barracks
                     {
                         if(this.price)
                         {
-                            this.price.textColor = this._tankmanData.enoughGold?IconText.BASE_COLOR:Colors.ERROR_COLOR;
+                            this.price.textColor = IconText.BASE_COLOR;
                             this.price.text = this._utils.locale.gold(this._tankmanData.price);
                             this.price.visible = true;
                         }
@@ -367,7 +367,7 @@ package net.wg.gui.lobby.barracks
                             if(_loc3_)
                             {
                                 _loc3_.forCredits = false;
-                                this.actionPrice.textColorType = this._tankmanData.enoughGold?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_ERROR;
+                                this.actionPrice.textColorType = ActionPrice.TEXT_COLOR_TYPE_ICON;
                             }
                             this.actionPrice.setData(_loc3_);
                             this.actionPrice.setup(this);

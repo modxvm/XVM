@@ -9,8 +9,6 @@ package net.wg.gui.lobby.progressiveReward.events
 
         public static const LINK_BTN_CLICK:String = "pre_linkBtnClick";
 
-        public static const SWITCH_WIDGET_ENABLED:String = "pre_switchWidgetEnabled";
-
         private var _flag:Boolean;
 
         public function ProgressiveRewardEvent(param1:String, param2:Boolean = false, param3:Boolean = false, param4:Boolean = false)

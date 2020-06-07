@@ -11,7 +11,17 @@ package net.wg.gui.lobby.vehicleCustomization.data.customizationPanel
 
         public var historicEnabled:Boolean = false;
 
+        public var nonHistoricEnabled:Boolean = false;
+
         public var appliedEnabled:Boolean = false;
+
+        public var hideOnAnotherVehEnabled:Boolean = false;
+
+        public var showOnlyProgressionDecalsEnabled:Boolean = false;
+
+        public var showOnlyEditableStylesEnabled:Boolean = false;
+
+        public var showOnlyNonEditableStylesEnabled:Boolean = false;
 
         public var selectedGroup:int = -1;
 

@@ -88,6 +88,7 @@ package net.wg.gui.battle.views.consumablesPanel
                 _loc4_.entityState = _loc2_;
                 _loc4_.key = _loc3_.sfKeyCode;
                 _loc4_.consumablesVO.keyCode = _loc3_.bwKeyCode;
+                _loc4_.consumablesVO.idx = _loc3_.entityIdx;
                 _loc4_.entityName = _loc3_.entityName;
                 if(this._clickButtonHandler)
                 {

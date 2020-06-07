@@ -129,6 +129,10 @@ package
 
         public static const BONUSES_EVENTCOIN_DESCRIPTION:String = "#quests:bonuses/eventCoin/description";
 
+        public static const BONUSES_FREEXP_DESCRIPTION:String = "#quests:bonuses/freeXP/description";
+
+        public static const BONUSES_PREMIUM_PLUS_DESCRIPTION:String = "#quests:bonuses/premium_plus/description";
+
         public static const BONUSES_TANKMEN_DESCRIPTION:String = "#quests:bonuses/tankmen/description";
 
         public static const BONUSES_ITEM_TANKWOMAN:String = "#quests:bonuses/item/tankwoman";
@@ -1451,7 +1455,7 @@ package
 
         public static const DETAILS_CONDITIONS_CUMULATIVE_RANKCHANGE:String = "#quests:details/conditions/cumulative/rankChange";
 
-        public static const DETAILS_CONDITIONS_CUMULATIVE_ENVIRONMENTID:String = "#quests:details/conditions/cumulative/environmentID";
+        public static const DETAILS_CONDITIONS_CUMULATIVE_XP_OTHER:String = "#quests:details/conditions/cumulative/xp/other";
 
         public static const DETAILS_DOSSIER_SNIPERSERIES:String = "#quests:details/dossier/sniperSeries";
 
@@ -1839,48 +1843,6 @@ package
 
         public static const DETAILS_DOSSIER_LADDER_DAMAGEASSISTEDRADIO:String = "#quests:details/dossier/ladder/damageAssistedRadio";
 
-        public static const DETAILS_DOSSIER_BOB_XP:String = "#quests:details/dossier/bob/xp";
-
-        public static const DETAILS_DOSSIER_BOB_BATTLESCOUNT:String = "#quests:details/dossier/bob/battlesCount";
-
-        public static const DETAILS_DOSSIER_BOB_WINS:String = "#quests:details/dossier/bob/wins";
-
-        public static const DETAILS_DOSSIER_BOB_LOSSES:String = "#quests:details/dossier/bob/losses";
-
-        public static const DETAILS_DOSSIER_BOB_SURVIVEDBATTLES:String = "#quests:details/dossier/bob/survivedBattles";
-
-        public static const DETAILS_DOSSIER_BOB_FRAGS:String = "#quests:details/dossier/bob/frags";
-
-        public static const DETAILS_DOSSIER_BOB_DIRECTHITS:String = "#quests:details/dossier/bob/directHits";
-
-        public static const DETAILS_DOSSIER_BOB_SPOTTED:String = "#quests:details/dossier/bob/spotted";
-
-        public static const DETAILS_DOSSIER_BOB_DAMAGEDEALT:String = "#quests:details/dossier/bob/damageDealt";
-
-        public static const DETAILS_DOSSIER_BOB_MAXDAMAGE:String = "#quests:details/dossier/bob/maxDamage";
-
-        public static const DETAILS_DOSSIER_BOB_DAMAGERECEIVED:String = "#quests:details/dossier/bob/damageReceived";
-
-        public static const DETAILS_DOSSIER_BOB_CAPTUREPOINTS:String = "#quests:details/dossier/bob/capturePoints";
-
-        public static const DETAILS_DOSSIER_BOB_DROPPEDCAPTUREPOINTS:String = "#quests:details/dossier/bob/droppedCapturePoints";
-
-        public static const DETAILS_DOSSIER_BOB_PIERCINGS:String = "#quests:details/dossier/bob/piercings";
-
-        public static const DETAILS_DOSSIER_BOB_NODAMAGEDIRECTHITSRECEIVED:String = "#quests:details/dossier/bob/noDamageDirectHitsReceived";
-
-        public static const DETAILS_DOSSIER_BOB_PIERCINGSRECEIVED:String = "#quests:details/dossier/bob/piercingsReceived";
-
-        public static const DETAILS_DOSSIER_BOB_POTENTIALDAMAGERECEIVED:String = "#quests:details/dossier/bob/potentialDamageReceived";
-
-        public static const DETAILS_DOSSIER_BOB_DAMAGEBLOCKEDBYARMOR:String = "#quests:details/dossier/bob/damageBlockedByArmor";
-
-        public static const DETAILS_DOSSIER_BOB_ORIGINALXP:String = "#quests:details/dossier/bob/originalXP";
-
-        public static const DETAILS_DOSSIER_BOB_DAMAGEASSISTEDTRACK:String = "#quests:details/dossier/bob/damageAssistedTrack";
-
-        public static const DETAILS_DOSSIER_BOB_DAMAGEASSISTEDRADIO:String = "#quests:details/dossier/bob/damageAssistedRadio";
-
         public static const DETAILS_DOSSIER_BATTLESCOUNT:String = "#quests:details/dossier/battlesCount";
 
         public static const DETAILS_DOSSIER_0_BATTLESCOUNT:String = "#quests:details/dossier/0/battlesCount";
@@ -1916,8 +1878,6 @@ package
         public static const DETAILS_DOSSIER_24_BATTLESCOUNT:String = "#quests:details/dossier/24/battlesCount";
 
         public static const DETAILS_DOSSIER_27_BATTLESCOUNT:String = "#quests:details/dossier/27/battlesCount";
-
-        public static const DETAILS_DOSSIER_32_BATTLESCOUNT:String = "#quests:details/dossier/32/battlesCount";
 
         public static const DETAILS_MODIFIERS_TITLE_DISCOUNT:String = "#quests:details/modifiers/title/discount";
 
@@ -2185,12 +2145,6 @@ package
 
         public static const MISSIONDETAILS_STATUS_COMPLETED_DAILY:String = "#quests:missionDetails/status/completed/daily";
 
-        public static const MISSIONDETAILS_STATUS_COMPLETED_SECRETEVENT:String = "#quests:missionDetails/status/completed/secretEvent";
-
-        public static const MISSIONDETAILS_STATUS_COMPLETE:String = "#quests:missionDetails/status/complete";
-
-        public static const MISSIONDETAILS_STATUS_INPROGRESS:String = "#quests:missionDetails/status/inProgress";
-
         public static const MISSIONDETAILS_STATUS_NOTAVAILABLE:String = "#quests:missionDetails/status/notAvailable";
 
         public static const MISSIONDETAILS_STATUS_WRONGVEHICLE:String = "#quests:missionDetails/status/wrongVehicle";
@@ -2273,8 +2227,6 @@ package
 
         public static const MISSIONDETAILS_REQUIREMENTS_CONCLUSION_UNAVAILABLE:String = "#quests:missionDetails/requirements/conclusion/unavailable";
 
-        public static const MISSIONDETAILS_REQUIREMENTS_CONCLUSION_PREVIOUSINCOMPLETE:String = "#quests:missionDetails/requirements/conclusion/previousIncomplete";
-
         public static const MISSIONDETAILS_VEHICLESSELECT:String = "#quests:missionDetails/vehiclesSelect";
 
         public static const MISSIONDETAILS_VEHICLESAVAILABLE:String = "#quests:missionDetails/vehiclesAvailable";
@@ -2288,14 +2240,6 @@ package
         public static const MISSIONDETAILS_NEXTPAGEBTN_LABEL:String = "#quests:missionDetails/nextPageBtn/label";
 
         public static const MISSIONDETAILS_PREVPAGEBTN_LABEL:String = "#quests:missionDetails/prevPageBtn/label";
-
-        public static const MISSIONS_TOKENPOPOVER_SECRETEVENT_HEADER:String = "#quests:missions/tokenPopover/secretEvent/header";
-
-        public static const MISSIONS_TOKENPOPOVER_SECRETEVENT_DESCR:String = "#quests:missions/tokenPopover/secretEvent/descr";
-
-        public static const MISSIONS_TOKENPOPOVER_SECRETEVENT_DESCR_SHOP:String = "#quests:missions/tokenPopover/secretEvent/descr/shop";
-
-        public static const MISSIONS_TOKENPOPOVER_SECRETEVENT_BUYBTN_LABEL:String = "#quests:missions/tokenPopover/secretEvent/buyBtn/label";
 
         public static const MISSIONS_TOKENPOPOVER_HEADER:String = "#quests:missions/tokenPopover/header";
 
@@ -2384,60 +2328,6 @@ package
         public static const TOKEN_DEFAULT_BOX:String = "#quests:token/default/box";
 
         public static const TOKEN_DEFAULT_TANKREWARDS:String = "#quests:token/default/tankrewards";
-
-        public static const TOKEN_DEFAULT_SE_ENERGY:String = "#quests:token/default/se_energy";
-
-        public static const TOKEN_DEFAULT_SE20_ENERGY_GENERAL_X15_DISCOUNT:String = "#quests:token/default/se20_energy_general_x15_discount";
-
-        public static const TOKEN_DEFAULT_SE20_ENERGY_GENERAL_0_X5:String = "#quests:token/default/se20_energy_general_0_x5";
-
-        public static const TOKEN_DEFAULT_SE20_ENERGY_GENERAL_0_X10:String = "#quests:token/default/se20_energy_general_0_x10";
-
-        public static const TOKEN_DEFAULT_SE20_ENERGY_GENERAL_0_X10_PREMIUM:String = "#quests:token/default/se20_energy_general_0_x10_premium";
-
-        public static const TOKEN_DEFAULT_SE20_ENERGY_GENERAL_0_X15:String = "#quests:token/default/se20_energy_general_0_x15";
-
-        public static const TOKEN_DEFAULT_SE20_ENERGY_GENERAL_1_X5:String = "#quests:token/default/se20_energy_general_1_x5";
-
-        public static const TOKEN_DEFAULT_SE20_ENERGY_GENERAL_1_X10:String = "#quests:token/default/se20_energy_general_1_x10";
-
-        public static const TOKEN_DEFAULT_SE20_ENERGY_GENERAL_1_X10_PREMIUM:String = "#quests:token/default/se20_energy_general_1_x10_premium";
-
-        public static const TOKEN_DEFAULT_SE20_ENERGY_GENERAL_1_X15:String = "#quests:token/default/se20_energy_general_1_x15";
-
-        public static const TOKEN_DEFAULT_SE20_ENERGY_GENERAL_2_X5:String = "#quests:token/default/se20_energy_general_2_x5";
-
-        public static const TOKEN_DEFAULT_SE20_ENERGY_GENERAL_2_X10:String = "#quests:token/default/se20_energy_general_2_x10";
-
-        public static const TOKEN_DEFAULT_SE20_ENERGY_GENERAL_2_X10_PREMIUM:String = "#quests:token/default/se20_energy_general_2_x10_premium";
-
-        public static const TOKEN_DEFAULT_SE20_ENERGY_GENERAL_2_X15:String = "#quests:token/default/se20_energy_general_2_x15";
-
-        public static const TOKEN_DEFAULT_SE20_ENERGY_GENERAL_3_X5:String = "#quests:token/default/se20_energy_general_3_x5";
-
-        public static const TOKEN_DEFAULT_SE20_ENERGY_GENERAL_3_X10:String = "#quests:token/default/se20_energy_general_3_x10";
-
-        public static const TOKEN_DEFAULT_SE20_ENERGY_GENERAL_3_X10_PREMIUM:String = "#quests:token/default/se20_energy_general_3_x10_premium";
-
-        public static const TOKEN_DEFAULT_SE20_ENERGY_GENERAL_3_X15:String = "#quests:token/default/se20_energy_general_3_x15";
-
-        public static const TOKEN_DEFAULT_SE20_ENERGY_GENERAL_4_X5:String = "#quests:token/default/se20_energy_general_4_x5";
-
-        public static const TOKEN_DEFAULT_SE20_ENERGY_GENERAL_4_X10:String = "#quests:token/default/se20_energy_general_4_x10";
-
-        public static const TOKEN_DEFAULT_SE20_ENERGY_GENERAL_4_X10_PREMIUM:String = "#quests:token/default/se20_energy_general_4_x10_premium";
-
-        public static const TOKEN_DEFAULT_SE20_ENERGY_GENERAL_4_X15:String = "#quests:token/default/se20_energy_general_4_x15";
-
-        public static const TOKEN_TOKEN_FOR:String = "#quests:token/token_for";
-
-        public static const TOKEN_DEFAULT_SE20_GENERAL_MARK:String = "#quests:token/default/se20_general_mark";
-
-        public static const TOKEN_DEFAULT_SE20_TANK_DISCOUNT25:String = "#quests:token/default/se20_tank_discount25";
-
-        public static const TOKEN_DEFAULT_SE20_TANK_DISCOUNT50:String = "#quests:token/default/se20_tank_discount50";
-
-        public static const TOKEN_DEFAULT_SE20_TANK_DISCOUNT75:String = "#quests:token/default/se20_tank_discount75";
 
         public static const BONUSNAME_CREDITS:String = "#quests:bonusName/credits";
 
@@ -2560,6 +2450,12 @@ package
         public static const BONUSNAME_PROJECTIONDECAL:String = "#quests:bonusName/projectionDecal";
 
         public static const BONUSNAME_PERSONALNUMBER:String = "#quests:bonusName/personalNumber";
+
+        public static const BONUSNAME_RANKEDDAILYBATTLES:String = "#quests:bonusName/rankedDailyBattles";
+
+        public static const BONUSNAME_RANKEDBONUSBATTLES:String = "#quests:bonusName/rankedBonusBattles";
+
+        public static const BONUSNAME_ENTITLEMENTS_TESTENTITLEMENT:String = "#quests:bonusName/entitlements/testEntitlement";
 
         public static const ACTION_AUTO_CALENDAR:String = "#quests:action/auto/calendar";
 
@@ -3422,10 +3318,6 @@ package
         public static const DAILYQUESTS_CONDITION_DESTROYVEH_FEW_ACCUM:String = "#quests:dailyQuests/condition/destroyVeh_few_accum";
 
         public static const DAILYQUESTS_CONDITION_DESTROYVEH_PLURAL_ACCUM:String = "#quests:dailyQuests/condition/destroyVeh_plural_accum";
-
-        public static const BACKBUTTON_LABEL:String = "#quests:backButton/label";
-
-        public static const BACKBUTTON_DESCRIPTION:String = "#quests:backButton/description";
 
         public static const BATTLECONDITION_STATE_ENUM:Array = [BATTLECONDITION_STATE_COMPLETED,BATTLECONDITION_STATE_COMPLETED_PERFECTLY,BATTLECONDITION_STATE_IN_PROGRESS,BATTLECONDITION_STATE_FAILED];
 

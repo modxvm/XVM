@@ -9,8 +9,6 @@ package net.wg.infrastructure.base.meta
 
         function onTabSelectedS(param1:String, param2:String) : void;
 
-        function onToEventClickS() : void;
-
         function onCloseS() : void;
 
         function as_setTabsDataProvider(param1:Array) : void;
@@ -22,9 +20,5 @@ package net.wg.infrastructure.base.meta
         function as_blinkFilterCounter() : void;
 
         function as_setTabsCounterData(param1:Array) : void;
-
-        function as_showBackButton(param1:String, param2:String) : void;
-
-        function as_hideBackButton() : void;
     }
 }

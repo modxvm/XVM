@@ -141,9 +141,10 @@ package net.wg.gui.lobby.epicBattles.components
 
         private function positionPrestigeProgressElements() : void
         {
+            var _loc3_:* = 0;
             var _loc1_:int = this._prestigeProgressList.length;
             var _loc2_:int = this._isSmallMode?SMALL_BLOCK_ELEMENTS_X_OFFSET:BLOCK_ELEMENTS_X_OFFSET;
-            var _loc3_:int = this._isSmallMode?SMALL_LINE_SEPARATOR_WIDTH:LINE_SEPARATOR_WIDTH;
+            _loc3_ = this._isSmallMode?SMALL_LINE_SEPARATOR_WIDTH:LINE_SEPARATOR_WIDTH;
             var _loc4_:int = this._isSmallMode?SMALL_LINE_SEPARATOR_BLOCK_X_OFFSET:LINE_SEPARATOR_BLOCK_X_OFFSET;
             var _loc5_:* = -(TANK_REWARD_X_OFFSET + (_loc1_ - 1) * _loc2_) >> 1;
             var _loc6_:int = _loc1_ - 2;

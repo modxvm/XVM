@@ -528,10 +528,6 @@ package net.wg.gui.battle.views.vehicleMarkers
         {
         }
 
-        protected function layoutExtended(param1:int) : void
-        {
-        }
-
         private function updateHitLayout() : void
         {
             var _loc1_:Boolean = this.hitLabel.visible && this.hitLabel.isActive();
@@ -545,11 +541,6 @@ package net.wg.gui.battle.views.vehicleMarkers
         {
             this._markerSchemeName = (this._vehicleDestroyed?VM_DEAD_PREFIX:VM_PREFIX) + this._entityName;
             this._stunSchemeName = VM_STUN_PREFIX + this._entityName + VM_STUN_POSTFIX;
-        }
-
-        protected function getVNameVisible() : Boolean
-        {
-            return this.getIsPartVisible(V_NAME_LBL);
         }
 
         public function xvm_active() : Boolean
@@ -566,7 +557,7 @@ package net.wg.gui.battle.views.vehicleMarkers
             var _loc1_:Boolean = this.getIsPartVisible(ICON);
             var _loc2_:Boolean = this.getIsPartVisible(LEVEL);
             var _loc3_:Boolean = this.getIsPartVisible(P_NAME_LBL);
-            var _loc4_:Boolean = this.getVNameVisible();
+            var _loc4_:Boolean = this.getIsPartVisible(V_NAME_LBL);
             var _loc5_:Boolean = this.getIsPartVisible(HEALTH_BAR);
             var _loc6_:Boolean = this.getIsPartVisible(HEALTH_LBL);
             var _loc7_:Boolean = this.getIsPartVisible(DAMAGE_PANEL);
@@ -676,7 +667,6 @@ package net.wg.gui.battle.views.vehicleMarkers
             this.healthBar.y = HEALTH_BAR_Y;
             this.hpField.y = this.healthBar.y + HP_FIELD_VERTICAL_OFFSET;
             this._canUseCachedVisibility = true;
-            this.layoutExtended(_loc2_ - _loc6_);
         }
 
         private function prepareLayout() : void
@@ -928,16 +918,6 @@ package net.wg.gui.battle.views.vehicleMarkers
         public function set entityType(param1:String) : void
         {
             this._entityType = param1;
-        }
-
-        protected function get model() : VehicleMarkerVO
-        {
-            return this._model;
-        }
-
-        protected function get vmManager() : VehicleMarkersManager
-        {
-            return this._vmManager;
         }
 
         private function onShowExInfoHandler(param1:VehicleMarkersManagerEvent) : void

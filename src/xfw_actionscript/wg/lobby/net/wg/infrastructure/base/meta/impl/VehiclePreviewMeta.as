@@ -1,9 +1,9 @@
 package net.wg.infrastructure.base.meta.impl
 {
     import net.wg.infrastructure.base.AbstractView;
-    import net.wg.gui.lobby.vehiclePreview.data.VehPreviewStaticDataVO;
-    import net.wg.gui.lobby.vehiclePreview.data.VehPreviewInfoPanelVO;
-    import net.wg.gui.lobby.vehiclePreview.data.VehPreviewBuyingPanelDataVO;
+    import net.wg.gui.lobby.vehiclePreview.data.VPPageVO;
+    import scaleform.clik.data.DataProvider;
+    import net.wg.gui.components.controls.tabs.OrangeTabsMenuVO;
     import net.wg.data.constants.Errors;
     import net.wg.infrastructure.exceptions.AbstractException;
 
@@ -14,17 +14,15 @@ package net.wg.infrastructure.base.meta.impl
 
         public var onBackClick:Function;
 
-        public var onBuyOrResearchClick:Function;
-
         public var onOpenInfoTab:Function;
 
         public var onCompareClick:Function;
 
-        private var _vehPreviewStaticDataVO:VehPreviewStaticDataVO;
+        private var _vPPageVO:VPPageVO;
 
-        private var _vehPreviewInfoPanelVO:VehPreviewInfoPanelVO;
+        private var _dataProviderOrangeTabsMenuVO:DataProvider;
 
-        private var _vehPreviewBuyingPanelDataVO:VehPreviewBuyingPanelDataVO;
+        private var _array:Array;
 
         public function VehiclePreviewMeta()
         {
@@ -33,20 +31,25 @@ package net.wg.infrastructure.base.meta.impl
 
         override protected function onDispose() : void
         {
-            if(this._vehPreviewStaticDataVO)
+            var _loc1_:OrangeTabsMenuVO = null;
+            if(this._vPPageVO)
             {
-                this._vehPreviewStaticDataVO.dispose();
-                this._vehPreviewStaticDataVO = null;
+                this._vPPageVO.dispose();
+                this._vPPageVO = null;
             }
-            if(this._vehPreviewInfoPanelVO)
+            if(this._dataProviderOrangeTabsMenuVO)
             {
-                this._vehPreviewInfoPanelVO.dispose();
-                this._vehPreviewInfoPanelVO = null;
+                for each(_loc1_ in this._dataProviderOrangeTabsMenuVO)
+                {
+                    _loc1_.dispose();
+                }
+                this._dataProviderOrangeTabsMenuVO.cleanUp();
+                this._dataProviderOrangeTabsMenuVO = null;
             }
-            if(this._vehPreviewBuyingPanelDataVO)
+            if(this._array)
             {
-                this._vehPreviewBuyingPanelDataVO.dispose();
-                this._vehPreviewBuyingPanelDataVO = null;
+                this._array.splice(0,this._array.length);
+                this._array = null;
             }
             super.onDispose();
         }
@@ -63,12 +66,6 @@ package net.wg.infrastructure.base.meta.impl
             this.onBackClick();
         }
 
-        public function onBuyOrResearchClickS() : void
-        {
-            App.utils.asserter.assertNotNull(this.onBuyOrResearchClick,"onBuyOrResearchClick" + Errors.CANT_NULL);
-            this.onBuyOrResearchClick();
-        }
-
         public function onOpenInfoTabS(param1:int) : void
         {
             App.utils.asserter.assertNotNull(this.onOpenInfoTab,"onOpenInfoTab" + Errors.CANT_NULL);
@@ -81,58 +78,70 @@ package net.wg.infrastructure.base.meta.impl
             this.onCompareClick();
         }
 
-        public final function as_setStaticData(param1:Object) : void
+        public final function as_setData(param1:Object) : void
         {
-            var _loc2_:VehPreviewStaticDataVO = this._vehPreviewStaticDataVO;
-            this._vehPreviewStaticDataVO = new VehPreviewStaticDataVO(param1);
-            this.setStaticData(this._vehPreviewStaticDataVO);
+            var _loc2_:VPPageVO = this._vPPageVO;
+            this._vPPageVO = new VPPageVO(param1);
+            this.setData(this._vPPageVO);
             if(_loc2_)
             {
                 _loc2_.dispose();
             }
         }
 
-        public final function as_updateInfoData(param1:Object) : void
+        public final function as_setTabsData(param1:Array) : void
         {
-            var _loc2_:VehPreviewInfoPanelVO = this._vehPreviewInfoPanelVO;
-            this._vehPreviewInfoPanelVO = new VehPreviewInfoPanelVO(param1);
-            this.updateInfoData(this._vehPreviewInfoPanelVO);
+            var _loc5_:OrangeTabsMenuVO = null;
+            var _loc2_:DataProvider = this._dataProviderOrangeTabsMenuVO;
+            this._dataProviderOrangeTabsMenuVO = new DataProvider();
+            var _loc3_:uint = param1.length;
+            var _loc4_:* = 0;
+            while(_loc4_ < _loc3_)
+            {
+                this._dataProviderOrangeTabsMenuVO[_loc4_] = new OrangeTabsMenuVO(param1[_loc4_]);
+                _loc4_++;
+            }
+            this.setTabsData(this._dataProviderOrangeTabsMenuVO);
             if(_loc2_)
             {
-                _loc2_.dispose();
+                for each(_loc5_ in _loc2_)
+                {
+                    _loc5_.dispose();
+                }
+                _loc2_.cleanUp();
             }
         }
 
-        public final function as_updateBuyingPanel(param1:Object) : void
+        public final function as_show3DSceneTooltip(param1:String, param2:Array) : void
         {
-            var _loc2_:VehPreviewBuyingPanelDataVO = this._vehPreviewBuyingPanelDataVO;
-            this._vehPreviewBuyingPanelDataVO = new VehPreviewBuyingPanelDataVO(param1);
-            this.updateBuyingPanel(this._vehPreviewBuyingPanelDataVO);
-            if(_loc2_)
+            var _loc3_:Array = this._array;
+            this._array = param2;
+            this.show3DSceneTooltip(param1,this._array);
+            if(_loc3_)
             {
-                _loc2_.dispose();
+                _loc3_.splice(0,_loc3_.length);
             }
         }
 
-        protected function setStaticData(param1:VehPreviewStaticDataVO) : void
+        protected function setData(param1:VPPageVO) : void
         {
-            var _loc2_:String = "as_setStaticData" + Errors.ABSTRACT_INVOKE;
+            var _loc2_:String = "as_setData" + Errors.ABSTRACT_INVOKE;
             DebugUtils.LOG_ERROR(_loc2_);
             throw new AbstractException(_loc2_);
         }
 
-        protected function updateInfoData(param1:VehPreviewInfoPanelVO) : void
+        protected function setTabsData(param1:DataProvider) : void
         {
-            var _loc2_:String = "as_updateInfoData" + Errors.ABSTRACT_INVOKE;
+            var _loc2_:String = "as_setTabsData" + Errors.ABSTRACT_INVOKE;
             DebugUtils.LOG_ERROR(_loc2_);
             throw new AbstractException(_loc2_);
         }
 
-        protected function updateBuyingPanel(param1:VehPreviewBuyingPanelDataVO) : void
+        protected function show3DSceneTooltip(param1:String, param2:Array) : void
         {
-            var _loc2_:String = "as_updateBuyingPanel" + Errors.ABSTRACT_INVOKE;
-            DebugUtils.LOG_ERROR(_loc2_);
-            throw new AbstractException(_loc2_);
+            var _loc3_:String = "as_show3DSceneTooltip" + Errors.ABSTRACT_INVOKE;
+            DebugUtils.LOG_ERROR(_loc3_);
+            throw new AbstractException(_loc3_);
         }
     }
 }

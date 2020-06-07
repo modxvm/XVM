@@ -70,7 +70,7 @@ package net.wg.gui.lobby.battleResults.components
 
         public var testerIcon:UILoaderAlt = null;
 
-        public var testerBG:MovieClip = null;
+        public var testerBG:UILoaderAlt = null;
 
         private var _tooltipMgr:ITooltipMgr;
 
@@ -79,6 +79,8 @@ package net.wg.gui.lobby.battleResults.components
         private var _colorMgr:IColorSchemeManager;
 
         private var _suffixBadgeIcon:String;
+
+        private var _suffixBadgeStripIcon:String;
 
         public function RankedTeamMemberItemRenderer()
         {
@@ -109,6 +111,7 @@ package net.wg.gui.lobby.battleResults.components
             this.medalIcon.dispose();
             this.testerIcon.dispose();
             this.testerIcon = null;
+            this.testerBG.dispose();
             this.testerBG = null;
             this.medalIcon = null;
             this._tooltipMgr = null;
@@ -140,6 +143,7 @@ package net.wg.gui.lobby.battleResults.components
             this.deadBg.visible = false;
             this.medalIcon.visible = false;
             this._suffixBadgeIcon = param1.suffixBadgeIcon;
+            this._suffixBadgeStripIcon = param1.suffixBadgeStripIcon;
             var _loc2_:IColorScheme = null;
             if(param1.isTeamKiller)
             {
@@ -210,13 +214,14 @@ package net.wg.gui.lobby.battleResults.components
             }
         }
 
-        private function setSuffixBadge(param1:String) : void
+        private function setSuffixBadge(param1:String, param2:String) : void
         {
-            var _loc2_:Boolean = StringUtils.isNotEmpty(param1);
-            this.testerIcon.visible = this.testerBG.visible = _loc2_;
-            if(_loc2_)
+            var _loc3_:Boolean = StringUtils.isNotEmpty(param1);
+            this.testerIcon.visible = this.testerBG.visible = _loc3_;
+            if(_loc3_)
             {
                 this.testerIcon.source = param1;
+                this.testerBG.source = param2;
                 this.testerIcon.x = this.playerName.x + this.playerName.textWidth + FIELD_WIDTH_COMPENSATION >> 0;
                 this.testerBG.x = (this.testerIcon.width >> 1) + this.testerIcon.x - this.testerBG.width >> 0;
             }
@@ -242,7 +247,7 @@ package net.wg.gui.lobby.battleResults.components
 
         private function onPlayerNameChangeHandler(param1:Event) : void
         {
-            this.setSuffixBadge(this._suffixBadgeIcon);
+            this.setSuffixBadge(this._suffixBadgeIcon,this._suffixBadgeStripIcon);
         }
 
         private function onMedalIconRollOverHandler(param1:MouseEvent) : void

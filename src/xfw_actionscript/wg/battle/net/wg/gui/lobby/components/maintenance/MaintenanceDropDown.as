@@ -2,9 +2,9 @@ package net.wg.gui.lobby.components.maintenance
 {
     import net.wg.gui.components.controls.DropdownMenu;
     import net.wg.gui.lobby.components.maintenance.events.OnEquipmentRendererOver;
-    import scaleform.clik.constants.InvalidationType;
     import flash.events.MouseEvent;
     import net.wg.data.constants.ComponentState;
+    import scaleform.clik.constants.InvalidationType;
     import flash.events.Event;
     import flash.geom.Point;
 
@@ -22,7 +22,7 @@ package net.wg.gui.lobby.components.maintenance
             if(_dropdownRef)
             {
                 parent.parent.addChild(_dropdownRef);
-                _dropdownRef.addEventListener(OnEquipmentRendererOver.ON_EQUIPMENT_RENDERER_OVER,this.onDropdownOnEquipmentRendererOverHandler,false,0,true);
+                _dropdownRef.addEventListener(OnEquipmentRendererOver.ON_EQUIPMENT_RENDERER_OVER,this.handleOnEquipmentRendererOver,false,0,true);
                 this.updateDDPosition(null);
             }
         }
@@ -31,18 +31,14 @@ package net.wg.gui.lobby.components.maintenance
         {
             if(_dropdownRef)
             {
-                _dropdownRef.removeEventListener(OnEquipmentRendererOver.ON_EQUIPMENT_RENDERER_OVER,this.onDropdownOnEquipmentRendererOverHandler);
+                _dropdownRef.removeEventListener(OnEquipmentRendererOver.ON_EQUIPMENT_RENDERER_OVER,this.handleOnEquipmentRendererOver);
             }
             super.onDispose();
         }
 
-        override protected function draw() : void
+        private function handleOnEquipmentRendererOver(param1:OnEquipmentRendererOver) : void
         {
-            super.draw();
-            if(_dataProvider && isInvalid(InvalidationType.DATA))
-            {
-                enabled = _dataProvider.length > 0;
-            }
+            dispatchEvent(new OnEquipmentRendererOver(OnEquipmentRendererOver.ON_EQUIPMENT_RENDERER_OVER,param1.moduleID,param1.modulePrices,param1.inventoryCount,param1.vehicleCount,param1.moduleIndex));
         }
 
         override protected function handleMouseRollOut(param1:MouseEvent) : void
@@ -71,6 +67,15 @@ package net.wg.gui.lobby.components.maintenance
             }
         }
 
+        override protected function draw() : void
+        {
+            super.draw();
+            if(_dataProvider && isInvalid(InvalidationType.DATA))
+            {
+                enabled = _dataProvider.length > 0;
+            }
+        }
+
         override protected function updateDDPosition(param1:Event) : void
         {
             var _loc2_:Point = null;
@@ -83,11 +88,6 @@ package net.wg.gui.lobby.components.maintenance
                 _dropdownRef.x = _loc2_.x;
                 _dropdownRef.y = _loc2_.y;
             }
-        }
-
-        private function onDropdownOnEquipmentRendererOverHandler(param1:OnEquipmentRendererOver) : void
-        {
-            dispatchEvent(new OnEquipmentRendererOver(OnEquipmentRendererOver.ON_EQUIPMENT_RENDERER_OVER,param1.moduleID,param1.modulePrices,param1.inventoryCount,param1.vehicleCount,param1.moduleIndex));
         }
     }
 }

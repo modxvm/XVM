@@ -31,7 +31,7 @@ package net.wg.gui.lobby.vehicleCustomization.controls
 
         private static const COUNTER_IN_BASE_OFFSET:int = 3;
 
-        private static const COUNTER_IN_PURCHASE_OFFSET:int = -10;
+        private static const COUNTER_IN_PURCHASE_OFFSET:int = -3;
 
         private static const NON_HISTORIC_ICON_OFFSET:int = -10;
 
@@ -78,7 +78,7 @@ package net.wg.gui.lobby.vehicleCustomization.controls
             super.setData(param1);
             this.itemIcon.unload();
             this._tooltipManager.hide();
-            this._model = CustomizationPopoverItemRendererVO(param1);
+            this._model = param1?CustomizationPopoverItemRendererVO(param1):null;
             invalidateData();
         }
 
@@ -107,7 +107,6 @@ package net.wg.gui.lobby.vehicleCustomization.controls
                     App.utils.commons.truncateTextFieldText(this.nameTF,this._model.userName,true,true);
                     if(!this._model.isTitle)
                     {
-                        this.nameTF.x = NAME_X_NORMAL;
                         this._isAlreadyPurchased = this._model.isApplied;
                         this.updateVisibility(true);
                         this.itemIcon.visible = false;
@@ -124,7 +123,6 @@ package net.wg.gui.lobby.vehicleCustomization.controls
                     }
                     else
                     {
-                        this.nameTF.x = NAME_X_TITLE;
                         this.nameTF.visible = true;
                         this.price.visible = false;
                         this.iconBg.visible = false;
@@ -135,12 +133,14 @@ package net.wg.gui.lobby.vehicleCustomization.controls
                         this.inStorageIcon.visible = false;
                         this.nonHistoricIcon.visible = false;
                     }
+                    this.layoutName(this._model.isTitle);
+                    invalidateSize();
                 }
                 if(isInvalid(InvalidationType.SIZE))
                 {
                     if(!this._model.isTitle)
                     {
-                        this.itemIcon.x = ICON_OFFSET - (this.itemIcon.width >> 1) ^ 0;
+                        this.layoutItemIcon();
                         if(!this._isAlreadyPurchased)
                         {
                             if(this.inStorageIcon.visible)
@@ -196,7 +196,17 @@ package net.wg.gui.lobby.vehicleCustomization.controls
             super.onDispose();
         }
 
-        private function updateVisibility(param1:Boolean) : void
+        protected function layoutItemIcon() : void
+        {
+            this.itemIcon.x = ICON_OFFSET - (this.itemIcon.width >> 1) ^ 0;
+        }
+
+        protected function layoutName(param1:Boolean) : void
+        {
+            this.nameTF.x = param1?NAME_X_TITLE:NAME_X_NORMAL;
+        }
+
+        protected function updateVisibility(param1:Boolean) : void
         {
             this.enabled = param1;
             this.nameTF.visible = param1;
@@ -210,7 +220,7 @@ package net.wg.gui.lobby.vehicleCustomization.controls
             this.inStorageIcon.visible = param1 && !this.price.visible && !this._model.isApplied;
         }
 
-        private function removeItem() : void
+        protected function removeItem() : void
         {
             dispatchEvent(new CustomizationIndicatorEvent(CustomizationIndicatorEvent.REMOVAL,this._model.id,this._model.itemsList));
         }
@@ -225,7 +235,7 @@ package net.wg.gui.lobby.vehicleCustomization.controls
         {
             if(this._model && this._model.id != Values.DEFAULT_INT)
             {
-                this._tooltipManager.showSpecial(TOOLTIPS_CONSTANTS.TECH_CUSTOMIZATION_ITEM,null,this._model.id,true);
+                this._tooltipManager.showSpecial(TOOLTIPS_CONSTANTS.TECH_CUSTOMIZATION_ITEM,null,this._model.id,-1,true);
             }
         }
 

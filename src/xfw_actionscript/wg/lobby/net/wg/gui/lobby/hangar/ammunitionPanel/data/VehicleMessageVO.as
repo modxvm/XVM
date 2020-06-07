@@ -19,6 +19,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel.data
 
         public var isBackground:Boolean = false;
 
+        public var actionGroupId:int = -1;
+
         public function VehicleMessageVO(param1:Object)
         {
             super(param1);

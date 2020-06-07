@@ -38,6 +38,8 @@ package net.wg.gui.lobby.storage.categories.cards
 
         public var isMoneyEnough:Boolean = true;
 
+        public var isWideImage:Boolean = false;
+
         public var type:String = "";
 
         public var upgradable:Boolean = false;
@@ -80,7 +82,7 @@ package net.wg.gui.lobby.storage.categories.cards
             {
                 return false;
             }
-            return this.id == param1.id && this.contextMenuId == param1.contextMenuId && this.title == param1.title && this.image == param1.image && this.description == param1.description && this.count == param1.count && this.nationFlagIcon == param1.nationFlagIcon && this.selected == param1.selected && this.enabled == param1.enabled && this.price == param1.price || this.price && this.price.isEquals(param1.price) && this.type == param1.type;
+            return this.id == param1.id && this.contextMenuId == param1.contextMenuId && this.title == param1.title && this.image == param1.image && this.description == param1.description && this.count == param1.count && this.nationFlagIcon == param1.nationFlagIcon && this.selected == param1.selected && this.enabled == param1.enabled && (this.price == param1.price || this.price && param1.price && this.price.isEquals(param1.price)) && this.isWideImage == param1.isWideImage && this.type == param1.type;
         }
     }
 }

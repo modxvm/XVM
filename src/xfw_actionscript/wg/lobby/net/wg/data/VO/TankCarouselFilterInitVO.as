@@ -13,6 +13,8 @@ package net.wg.data.VO
 
         public var isVisible:Boolean = true;
 
+        public var isRanked:Boolean = false;
+
         public var isFrontline:Boolean = false;
 
         public var popoverAlias:String = "TankCarouselFilterPopover";

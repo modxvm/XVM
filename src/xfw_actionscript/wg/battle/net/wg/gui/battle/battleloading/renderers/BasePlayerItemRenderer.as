@@ -6,7 +6,6 @@ package net.wg.gui.battle.battleloading.renderers
     import flash.text.TextField;
     import net.wg.gui.components.controls.BadgeComponent;
     import net.wg.gui.components.icons.PlayerActionMarker;
-    import flash.display.MovieClip;
     import net.wg.infrastructure.managers.IColorSchemeManager;
     import net.wg.data.constants.generated.BATTLEATLAS;
     import org.idmedia.as3commons.util.StringUtils;
@@ -64,7 +63,7 @@ package net.wg.gui.battle.battleloading.renderers
 
         private var _icoTester:BattleAtlasSprite;
 
-        private var _backTester:MovieClip;
+        private var _backTester:BattleAtlasSprite;
 
         private var _isEnemy:Boolean;
 
@@ -218,6 +217,7 @@ package net.wg.gui.battle.battleloading.renderers
         {
             this._icoTester.visible = StringUtils.isNotEmpty(this.model.suffixBadgeType);
             this._icoTester.imageName = this.model.suffixBadgeType;
+            this._backTester.imageName = this.model.suffixBadgeStripType;
             this._backTester.visible = this._icoTester.visible;
             if(this._icoTester.visible)
             {

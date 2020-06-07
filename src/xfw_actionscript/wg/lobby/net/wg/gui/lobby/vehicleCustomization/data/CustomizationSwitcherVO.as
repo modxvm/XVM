@@ -9,13 +9,15 @@ package net.wg.gui.lobby.vehicleCustomization.data
 
         public var rightLabel:String = "";
 
-        public var leftEvent:String = "";
-
-        public var rightEvent:String = "";
+        public var editableTooltip:String = "";
 
         public var rightEnabled:Boolean = true;
 
-        public var isLeft:Boolean = false;
+        public var selectedIndex:int = -1;
+
+        public var isEditable:Boolean = false;
+
+        public var popoverAlias:String = "";
 
         public function CustomizationSwitcherVO(param1:Object)
         {

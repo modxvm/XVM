@@ -122,5 +122,10 @@ package net.wg.gui.battle.random.views.stats.components.playersPanel
                 expandState = PLAYERS_PANEL_STATE.NONE;
             }
         }
+
+        public function get isInviteReceived() : Boolean
+        {
+            return listLeft.isInviteReceived;
+        }
     }
 }

@@ -4,11 +4,11 @@ package net.wg.gui.lobby.vehicleCustomization.controls.propertiesSheet
     import scaleform.clik.motion.Tween;
     import flash.geom.Point;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
+    import flash.display.MovieClip;
+    import net.wg.data.constants.Values;
     import net.wg.gui.lobby.vehicleCustomization.data.propertiesSheet.CustomizationPropertiesSheetVO;
     import net.wg.data.constants.generated.CUSTOMIZATION_ALIASES;
-    import net.wg.data.constants.Values;
     import fl.motion.easing.Quintic;
-    import flash.display.MovieClip;
     import net.wg.gui.lobby.vehicleCustomization.events.CustomizationEvent;
     import fl.motion.easing.Exponential;
 
@@ -75,6 +75,8 @@ package net.wg.gui.lobby.vehicleCustomization.controls.propertiesSheet
 
         public var six:CustomizationSheetContentRenderer = null;
 
+        public var seventh:CustomizationSheetContentRenderer = null;
+
         private var _contentRenderers:Vector.<CustomizationSheetContentRenderer> = null;
 
         private var _tweens:Vector.<Tween>;
@@ -104,8 +106,8 @@ package net.wg.gui.lobby.vehicleCustomization.controls.propertiesSheet
             this._tweens = new Vector.<Tween>(0);
             this._oldActionTypes = new Vector.<int>();
             this._oldRenderersPositions = new Vector.<Point>();
-            this._rendererStates = [[RENDERER_POSITION_MIDDLE],[RENDERER_POSITION_TOP_INTERMEDIATE,RENDERER_POSITION_BOTTOM_INTERMEDIATE],[RENDERER_POSITION_TOP,RENDERER_POSITION_MIDDLE,RENDERER_POSITION_BOTTOM],[RENDERER_POSITION_TOP,RENDERER_POSITION_TOP_INTERMEDIATE,RENDERER_POSITION_BOTTOM_INTERMEDIATE,RENDERER_POSITION_BOTTOM],[RENDERER_POSITION_TOP,RENDERER_POSITION_TOP_INTERMEDIATE,RENDERER_POSITION_MIDDLE,RENDERER_POSITION_BOTTOM_INTERMEDIATE,RENDERER_POSITION_BOTTOM],[RENDERER_POSITION_TOP,RENDERER_POSITION_TOP_INTERMEDIATE,RENDERER_POSITION_TOP_INTERMEDIATE,RENDERER_POSITION_BOTTOM_INTERMEDIATE,RENDERER_POSITION_BOTTOM_INTERMEDIATE,RENDERER_POSITION_BOTTOM]];
-            this._contentStates = [[CONTENT_POSITION_MIDDLE],[CONTENT_POSITION_BOTTOM,CONTENT_POSITION_TOP],[CONTENT_POSITION_BOTTOM,CONTENT_POSITION_MIDDLE,CONTENT_POSITION_TOP],[CONTENT_POSITION_BOTTOM,CONTENT_POSITION_MIDDLE,CONTENT_POSITION_MIDDLE,CONTENT_POSITION_TOP],[CONTENT_POSITION_BOTTOM,CONTENT_POSITION_BOTTOM,CONTENT_POSITION_MIDDLE,CONTENT_POSITION_MIDDLE,CONTENT_POSITION_TOP],[CONTENT_POSITION_BOTTOM,CONTENT_POSITION_BOTTOM,CONTENT_POSITION_MIDDLE,CONTENT_POSITION_MIDDLE,CONTENT_POSITION_MIDDLE,CONTENT_POSITION_TOP]];
+            this._rendererStates = [[RENDERER_POSITION_MIDDLE],[RENDERER_POSITION_TOP_INTERMEDIATE,RENDERER_POSITION_BOTTOM_INTERMEDIATE],[RENDERER_POSITION_TOP,RENDERER_POSITION_MIDDLE,RENDERER_POSITION_BOTTOM],[RENDERER_POSITION_TOP,RENDERER_POSITION_TOP_INTERMEDIATE,RENDERER_POSITION_BOTTOM_INTERMEDIATE,RENDERER_POSITION_BOTTOM],[RENDERER_POSITION_TOP,RENDERER_POSITION_TOP_INTERMEDIATE,RENDERER_POSITION_MIDDLE,RENDERER_POSITION_BOTTOM_INTERMEDIATE,RENDERER_POSITION_BOTTOM],[RENDERER_POSITION_TOP,RENDERER_POSITION_TOP_INTERMEDIATE,RENDERER_POSITION_TOP_INTERMEDIATE,RENDERER_POSITION_BOTTOM_INTERMEDIATE,RENDERER_POSITION_BOTTOM_INTERMEDIATE,RENDERER_POSITION_BOTTOM],[RENDERER_POSITION_TOP,RENDERER_POSITION_TOP_INTERMEDIATE,RENDERER_POSITION_TOP_INTERMEDIATE,RENDERER_POSITION_BOTTOM_INTERMEDIATE,RENDERER_POSITION_BOTTOM_INTERMEDIATE,RENDERER_POSITION_BOTTOM,RENDERER_POSITION_BOTTOM]];
+            this._contentStates = [[CONTENT_POSITION_MIDDLE],[CONTENT_POSITION_BOTTOM,CONTENT_POSITION_TOP],[CONTENT_POSITION_BOTTOM,CONTENT_POSITION_MIDDLE,CONTENT_POSITION_TOP],[CONTENT_POSITION_BOTTOM,CONTENT_POSITION_MIDDLE,CONTENT_POSITION_MIDDLE,CONTENT_POSITION_TOP],[CONTENT_POSITION_BOTTOM,CONTENT_POSITION_BOTTOM,CONTENT_POSITION_MIDDLE,CONTENT_POSITION_MIDDLE,CONTENT_POSITION_TOP],[CONTENT_POSITION_BOTTOM,CONTENT_POSITION_BOTTOM,CONTENT_POSITION_MIDDLE,CONTENT_POSITION_MIDDLE,CONTENT_POSITION_MIDDLE,CONTENT_POSITION_TOP],[CONTENT_POSITION_BOTTOM,CONTENT_POSITION_BOTTOM,CONTENT_POSITION_MIDDLE,CONTENT_POSITION_MIDDLE,CONTENT_POSITION_MIDDLE,CONTENT_POSITION_TOP,CONTENT_POSITION_TOP]];
             super();
         }
 
@@ -119,6 +121,7 @@ package net.wg.gui.lobby.vehicleCustomization.controls.propertiesSheet
             this._contentRenderers.push(this.fourth);
             this._contentRenderers.push(this.fifth);
             this._contentRenderers.push(this.six);
+            this._contentRenderers.push(this.seventh);
             visible = false;
         }
 
@@ -144,12 +147,20 @@ package net.wg.gui.lobby.vehicleCustomization.controls.propertiesSheet
             super.onDispose();
         }
 
-        private function hideRenderers() : void
+        public function hideElementsAnimation() : void
         {
-            var _loc1_:CustomizationSheetContentRenderer = null;
+            var _loc1_:MovieClip = null;
+            this._isAfterOpen = true;
+            this._layoutingRenderersCount = Values.DEFAULT_INT;
+            graphics.clear();
+            this.clearTweens();
+            if(this._contentRenderers)
+            {
+                this._hideElementsAnimationsCount = this._contentRenderers.length;
+            }
             for each(_loc1_ in this._contentRenderers)
             {
-                _loc1_.visible = false;
+                this.animationHide(_loc1_);
             }
         }
 
@@ -203,6 +214,15 @@ package net.wg.gui.lobby.vehicleCustomization.controls.propertiesSheet
                 this.setPositions();
             }
             this._isAfterOpen = false;
+        }
+
+        private function hideRenderers() : void
+        {
+            var _loc1_:CustomizationSheetContentRenderer = null;
+            for each(_loc1_ in this._contentRenderers)
+            {
+                _loc1_.visible = false;
+            }
         }
 
         private function clearOldPositionsArrays() : void
@@ -303,23 +323,6 @@ package net.wg.gui.lobby.vehicleCustomization.controls.propertiesSheet
                 graphics.clear();
             }
             this._layoutingRenderersCount = this._activeRenderersCount;
-        }
-
-        public function hideElementsAnimation() : void
-        {
-            var _loc1_:MovieClip = null;
-            this._isAfterOpen = true;
-            this._layoutingRenderersCount = Values.DEFAULT_INT;
-            graphics.clear();
-            this.clearTweens();
-            if(this._contentRenderers)
-            {
-                this._hideElementsAnimationsCount = this._contentRenderers.length;
-            }
-            for each(_loc1_ in this._contentRenderers)
-            {
-                this.animationHide(_loc1_);
-            }
         }
 
         private function visibleHide() : void

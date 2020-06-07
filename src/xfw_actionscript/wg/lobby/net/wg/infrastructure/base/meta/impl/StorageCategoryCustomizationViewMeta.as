@@ -1,14 +1,16 @@
 package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.gui.lobby.storage.categories.BaseCategoryView;
+    import net.wg.gui.lobby.storage.categories.storage.ItemsWithTypeFilterTabView;
     import net.wg.data.constants.Errors;
 
-    public class StorageCategoryCustomizationViewMeta extends BaseCategoryView
+    public class StorageCategoryCustomizationViewMeta extends ItemsWithTypeFilterTabView
     {
 
         public var navigateToCustomization:Function;
 
-        public var sellItem:Function;
+        public var sellCustomizationItem:Function;
+
+        public var previewItem:Function;
 
         public function StorageCategoryCustomizationViewMeta()
         {
@@ -21,10 +23,16 @@ package net.wg.infrastructure.base.meta.impl
             this.navigateToCustomization();
         }
 
-        public function sellItemS(param1:Number) : void
+        public function sellCustomizationItemS(param1:Number, param2:Number) : void
         {
-            App.utils.asserter.assertNotNull(this.sellItem,"sellItem" + Errors.CANT_NULL);
-            this.sellItem(param1);
+            App.utils.asserter.assertNotNull(this.sellCustomizationItem,"sellCustomizationItem" + Errors.CANT_NULL);
+            this.sellCustomizationItem(param1,param2);
+        }
+
+        public function previewItemS(param1:Number, param2:Number) : void
+        {
+            App.utils.asserter.assertNotNull(this.previewItem,"previewItem" + Errors.CANT_NULL);
+            this.previewItem(param1,param2);
         }
     }
 }

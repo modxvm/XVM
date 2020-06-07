@@ -407,7 +407,11 @@ package
 
         public static const BATTLERESULT_BONUSBATTLESEARNED:String = "#ranked_battles:battleresult/bonusBattlesEarned";
 
-        public static const BATTLERESULT_BONUSBATTLESEARNED_TEXT:String = "#ranked_battles:battleresult/bonusBattlesEarned/text";
+        public static const BATTLERESULT_BONUSBATTLESEARNED_STEPS_PERSISTENT:String = "#ranked_battles:battleresult/bonusBattlesEarned/steps/persistent";
+
+        public static const BATTLERESULT_BONUSBATTLESEARNED_STEPS_DAILY:String = "#ranked_battles:battleresult/bonusBattlesEarned/steps/daily";
+
+        public static const BATTLERESULT_BONUSBATTLESEARNED_EFFICIENCY:String = "#ranked_battles:battleresult/bonusBattlesEarned/efficiency";
 
         public static const BATTLERESULT_LEAGUEUNAVAILABLE:String = "#ranked_battles:battleresult/leagueUnavailable";
 
@@ -511,7 +515,11 @@ package
 
         public static const AWARDS_BONUSBATTLES_HEADER:String = "#ranked_battles:awards/bonusBattles/header";
 
-        public static const AWARDS_BONUSBATTLES_BODY:String = "#ranked_battles:awards/bonusBattles/body";
+        public static const AWARDS_BONUSBATTLES_STEPS_PERSISTENT:String = "#ranked_battles:awards/bonusBattles/steps/persistent";
+
+        public static const AWARDS_BONUSBATTLES_STEPS_DAILY:String = "#ranked_battles:awards/bonusBattles/steps/daily";
+
+        public static const AWARDS_BONUSBATTLES_EFFICIENCY:String = "#ranked_battles:awards/bonusBattles/efficiency";
 
         public static const SEASONCOMPLETE_SMALLTITLE:String = "#ranked_battles:seasonComplete/smallTitle";
 
@@ -609,9 +617,19 @@ package
 
         public static const NOTIFICATION_RANKEDMESSAGE:String = "#ranked_battles:notification/rankedMessage";
 
-        public static const RANKEDBATTLESCAROUSEL_LOCKEDTOOLTIP_HEADER:String = "#ranked_battles:rankedBattlesCarousel/lockedTooltip/header";
+        public static const RANKEDBATTLESCAROUSEL_LOCKEDTOOLTIP_VEHLVL_HEADER:String = "#ranked_battles:rankedBattlesCarousel/lockedTooltip/vehLvl/header";
 
-        public static const RANKEDBATTLESCAROUSEL_LOCKEDTOOLTIP_BODY:String = "#ranked_battles:rankedBattlesCarousel/lockedTooltip/body";
+        public static const RANKEDBATTLESCAROUSEL_LOCKEDTOOLTIP_VEHLVL_BODY:String = "#ranked_battles:rankedBattlesCarousel/lockedTooltip/vehLvl/body";
+
+        public static const RANKEDBATTLESCAROUSEL_LOCKEDTOOLTIP_VEHLVL_LEVELSUBSTR:String = "#ranked_battles:rankedBattlesCarousel/lockedTooltip/vehLvl/levelSubStr";
+
+        public static const RANKEDBATTLESCAROUSEL_LOCKEDTOOLTIP_VEHCLASS_HEADER:String = "#ranked_battles:rankedBattlesCarousel/lockedTooltip/vehClass/header";
+
+        public static const RANKEDBATTLESCAROUSEL_LOCKEDTOOLTIP_VEHCLASS_BODY:String = "#ranked_battles:rankedBattlesCarousel/lockedTooltip/vehClass/body";
+
+        public static const RANKEDBATTLESCAROUSEL_LOCKEDTOOLTIP_VEHTYPE_HEADER:String = "#ranked_battles:rankedBattlesCarousel/lockedTooltip/vehType/header";
+
+        public static const RANKEDBATTLESCAROUSEL_LOCKEDTOOLTIP_VEHTYPE_BODY:String = "#ranked_battles:rankedBattlesCarousel/lockedTooltip/vehType/body";
 
         public static const RANKEDBATTLESBATTLERESULTS_ANIMATIONCHECKBOXLABEL:String = "#ranked_battles:rankedBattlesBattleResults/animationCheckBoxLabel";
 
@@ -781,6 +799,8 @@ package
 
         public static const YEARREWARDS_TOOLTIP_STATUS_PASSEDFINAL_DESCRIPTION:String = "#ranked_battles:yearRewards/tooltip/status/passedFinal/description";
 
+        public static const ALERTMESSAGE_UNSUITABLEVEHICLES:String = "#ranked_battles:alertMessage/unsuitableVehicles";
+
         public static const ALERTMESSAGE_SEASONFINISHED:String = "#ranked_battles:alertMessage/seasonFinished";
 
         public static const ALERTMESSAGE_UNSUITABLEPERIPHERY:String = "#ranked_battles:alertMessage/unsuitablePeriphery";
@@ -791,7 +811,9 @@ package
 
         public static const ALERTMESSAGE_ALLPERIPHERIESHALT:String = "#ranked_battles:alertMessage/allPeripheriesHalt";
 
-        public static const ALERTMESSAGE_BUTTON:String = "#ranked_battles:alertMessage/button";
+        public static const ALERTMESSAGE_BUTTON_CHANGESERVER:String = "#ranked_battles:alertMessage/button/changeServer";
+
+        public static const ALERTMESSAGE_BUTTON_MOREINFO:String = "#ranked_battles:alertMessage/button/moreInfo";
 
         public static const QUALIFICATIONREWARDS_DESCRIPTION:String = "#ranked_battles:qualificationRewards/description";
 
@@ -802,6 +824,80 @@ package
         public static const YEAR_AWARD_ACCEPTBUTTON_ACCEPTLABEL:String = "#ranked_battles:year_award/acceptButton/acceptLabel";
 
         public static const YEAR_AWARD_ACCEPTBUTTON_HANGARLABEL:String = "#ranked_battles:year_award/acceptButton/hangarLabel";
+
+        public static const CURRENTVEHICLESTATUS_UNSUITABLETOQUEUE:String = "#ranked_battles:currentVehicleStatus/unsuitableToQueue";
+
+        public static const QUESTS_TOOLTIP_UNAVAILABLE_HEADER_NOTINLEAGUES:String = "#ranked_battles:quests/tooltip/unavailable/header/notInLeagues";
+
+        public static const QUESTS_TOOLTIP_UNAVAILABLE_BODY_NOTINLEAGUES:String = "#ranked_battles:quests/tooltip/unavailable/body/notInLeagues";
+
+        public static const QUESTS_TOOLTIP_UNAVAILABLE_HEADER_ALLSERVERSPRIME:String = "#ranked_battles:quests/tooltip/unavailable/header/allServersPrime";
+
+        public static const QUESTS_TOOLTIP_UNAVAILABLE_BODY_ALLSERVERSPRIME:String = "#ranked_battles:quests/tooltip/unavailable/body/allServersPrime";
+
+        public static const QUESTS_TOOLTIP_UNAVAILABLE_HEADER_SEASONEND:String = "#ranked_battles:quests/tooltip/unavailable/header/seasonEnd";
+
+        public static const QUESTS_TOOLTIP_UNAVAILABLE_BODY_SEASONEND_DAYS:String = "#ranked_battles:quests/tooltip/unavailable/body/seasonEnd/days";
+
+        public static const QUESTS_TOOLTIP_UNAVAILABLE_BODY_SEASONEND_HOURS:String = "#ranked_battles:quests/tooltip/unavailable/body/seasonEnd/hours";
+
+        public static const QUESTS_TOOLTIP_UNAVAILABLE_BODY_SEASONEND_MIN:String = "#ranked_battles:quests/tooltip/unavailable/body/seasonEnd/min";
+
+        public static const QUESTS_TOOLTIP_UNAVAILABLE_BODY_SEASONEND_LESSMIN:String = "#ranked_battles:quests/tooltip/unavailable/body/seasonEnd/lessMin";
+
+        public static const QUESTS_TOOLTIP_UNAVAILABLE_BODY_SEASONEND_DEFAULT:String = "#ranked_battles:quests/tooltip/unavailable/body/seasonEnd/default";
+
+        public static const QUESTS_TOOLTIP_UNAVAILABLE_BOTTOM:String = "#ranked_battles:quests/tooltip/unavailable/bottom";
+
+        public static const QUESTS_DETAILED_UNAVAILABLELABEL:String = "#ranked_battles:quests/detailed/unavailableLabel";
+
+        public static const QUESTS_DETAILED_NOTINLEAGUES:String = "#ranked_battles:quests/detailed/notInLeagues";
+
+        public static const QUESTS_DETAILED_ALLSERVERSPRIME:String = "#ranked_battles:quests/detailed/allServersPrime";
+
+        public static const QUESTS_DETAILED_SEASONEND_DAYS:String = "#ranked_battles:quests/detailed/seasonEnd/days";
+
+        public static const QUESTS_DETAILED_SEASONEND_HOURS:String = "#ranked_battles:quests/detailed/seasonEnd/hours";
+
+        public static const QUESTS_DETAILED_SEASONEND_MIN:String = "#ranked_battles:quests/detailed/seasonEnd/min";
+
+        public static const QUESTS_DETAILED_SEASONEND_LESSMIN:String = "#ranked_battles:quests/detailed/seasonEnd/lessMin";
+
+        public static const QUESTS_DETAILED_SEASONEND_DEFAULT:String = "#ranked_battles:quests/detailed/seasonEnd/default";
+
+        public static const QUESTSTOOLTIP_HEADER:String = "#ranked_battles:questsTooltip/header";
+
+        public static const QUESTSTOOLTIP_UNAVAILABLE_NOTINLEAGUES:String = "#ranked_battles:questsTooltip/unavailable/notInLeagues";
+
+        public static const QUESTSTOOLTIP_UNAVAILABLE_ALLSERVERSPRIME:String = "#ranked_battles:questsTooltip/unavailable/allServersPrime";
+
+        public static const QUESTSTOOLTIP_UNAVAILABLE_SEASONEND_DAYS:String = "#ranked_battles:questsTooltip/unavailable/seasonEnd/days";
+
+        public static const QUESTSTOOLTIP_UNAVAILABLE_SEASONEND_HOURS:String = "#ranked_battles:questsTooltip/unavailable/seasonEnd/hours";
+
+        public static const QUESTSTOOLTIP_UNAVAILABLE_SEASONEND_MIN:String = "#ranked_battles:questsTooltip/unavailable/seasonEnd/min";
+
+        public static const QUESTSTOOLTIP_UNAVAILABLE_SEASONEND_LESSMIN:String = "#ranked_battles:questsTooltip/unavailable/seasonEnd/lessMin";
+
+        public static const QUESTSTOOLTIP_AVAILABLE:String = "#ranked_battles:questsTooltip/available";
+
+        public static const QUESTSTOOLTIP_AVAILABLE_DAYS:String = "#ranked_battles:questsTooltip/available/days";
+
+        public static const QUESTSTOOLTIP_AVAILABLE_HOURS:String = "#ranked_battles:questsTooltip/available/hours";
+
+        public static const QUESTSTOOLTIP_AVAILABLE_MIN:String = "#ranked_battles:questsTooltip/available/min";
+
+        public static const QUESTSTOOLTIP_AVAILABLE_LESSMIN:String = "#ranked_battles:questsTooltip/available/lessMin";
+
+        public static const QUESTSTOOLTIP_COOLDOWN_DAYS:String = "#ranked_battles:questsTooltip/cooldown/days";
+
+        public static const QUESTSTOOLTIP_COOLDOWN_HOURS:String = "#ranked_battles:questsTooltip/cooldown/hours";
+
+        public static const QUESTSTOOLTIP_COOLDOWN_MIN:String = "#ranked_battles:questsTooltip/cooldown/min";
+
+        public static const QUESTSTOOLTIP_COOLDOWN_LESSMIN:String = "#ranked_battles:questsTooltip/cooldown/lessMin";
+
+        public static const QUESTSTOOLTIP_BOTTOM:String = "#ranked_battles:questsTooltip/bottom";
 
         public function RANKED_BATTLES()
         {

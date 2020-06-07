@@ -5,6 +5,8 @@ package net.wg.gui.battle.views.consumablesPanel.VO
 
         public var keyCode:Number;
 
+        public var idx:int;
+
         public var tag:String;
 
         public var shellIconPath:String;

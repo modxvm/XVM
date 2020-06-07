@@ -81,8 +81,6 @@ package net.wg.data
 
         public static const SQUAD_TYPE_SELECT_POPOVER:String = "squadTypeSelectPopover";
 
-        public static const ACCOUNT_POPOVER:String = "accountPopover";
-
         public static const SYSTEM_MESSAGES_GENERATOR_WINDOW:String = "SystemMessagesGenerator";
 
         public static const TRAINING_WINDOW:String = "trainingWindow";
@@ -104,10 +102,6 @@ package net.wg.data
         public static const ELITE_WINDOW:String = "eliteWindow";
 
         public static const DISMISS_TANKMAN_DIALOG:String = "dismissTankmanDialog";
-
-        public static const BOOSTERS_WINDOW:String = "boostersWindow";
-
-        public static const GET_PREMIUM_POPOVER:String = "getPremiumPopover";
 
         public static const RESEARCH:String = "research";
 
@@ -158,8 +152,6 @@ package net.wg.data
         public static const MINIMAP_ON_BATTLE_LOADING:String = "minimapOnBattleLoading";
 
         public static const LOBBY_HEADER:String = "lobbyHeader";
-
-        public static const EVENT_HEADER:String = "eventHeader";
 
         public static const CUSTOMIZATION_PROPERTIES_SHEET:String = "customizationPropertiesSheet";
 

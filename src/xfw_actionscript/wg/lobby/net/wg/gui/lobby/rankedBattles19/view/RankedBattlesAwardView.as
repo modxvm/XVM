@@ -138,7 +138,7 @@ package net.wg.gui.lobby.rankedBattles19.view
             this.bonusBattleMc.y = this.bonusBattleMcY;
             this.title.y = TITLE_Y;
             this.smallHeightXShift = 0;
-            if(param2 < StageSizeBoundaries.HEIGHT_900 && param1 < StageSizeBoundaries.WIDTH_1600)
+            if(param2 < StageSizeBoundaries.HEIGHT_900 || param1 < StageSizeBoundaries.WIDTH_1600)
             {
                 this.title.y = this.title.y + TITLE_Y_SHIFT;
                 this.smallHeightXShift = SMALL_HEIGHT_X_SHIFT;

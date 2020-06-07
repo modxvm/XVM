@@ -12,8 +12,6 @@ package net.wg.gui.lobby.missions.data
 
         public var header:String = "";
 
-        public var showDetailedRequirements:Boolean = true;
-
         private var _requirements:DataProvider;
 
         public function MissionAccountRequirementsVO(param1:Object = null)

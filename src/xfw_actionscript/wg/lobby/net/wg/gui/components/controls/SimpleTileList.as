@@ -181,7 +181,7 @@ package net.wg.gui.components.controls
         {
             var _loc2_:* = 0;
             var _loc5_:* = 0;
-            var _loc7_:* = 0;
+            var _loc7_:IListItemRenderer = null;
             var _loc10_:* = 0;
             var _loc11_:* = 0;
             var _loc12_:* = 0;
@@ -193,28 +193,28 @@ package net.wg.gui.components.controls
             var _loc3_:* = 0;
             var _loc4_:* = 0;
             var _loc6_:Number = 0;
-            var _loc8_:int = this._renderers.length;
             if(this._directionMode == DirectionMode.HORIZONTAL)
             {
                 _loc2_ = _height;
                 _loc6_ = this._tileWidth + this._horizontalGap;
                 _loc5_ = width / _loc6_ - 1;
                 this._asserter.assert(_loc5_ >= _loc3_,CHILD_SIZE_ERROR);
-                _loc7_ = 0;
-                while(_loc7_ < _loc8_)
+                for each(_loc7_ in this._renderers)
                 {
-                    this._renderers[_loc7_].x = _loc3_ * _loc6_;
-                    this._renderers[_loc7_].y = _loc4_;
-                    if(_loc5_ > _loc3_)
+                    if(!this.isRenderStatic(_loc7_))
                     {
-                        _loc3_++;
+                        _loc7_.x = _loc3_ * _loc6_;
+                        _loc7_.y = _loc4_;
+                        if(_loc5_ > _loc3_)
+                        {
+                            _loc3_++;
+                        }
+                        else
+                        {
+                            _loc4_ = _loc4_ + (this._tileHeight + this._verticalGap);
+                            _loc3_ = 0;
+                        }
                     }
-                    else
-                    {
-                        _loc4_ = _loc4_ + (this._tileHeight + this._verticalGap);
-                        _loc3_ = 0;
-                    }
-                    _loc7_++;
                 }
                 if(this._autoSize)
                 {
@@ -239,21 +239,22 @@ package net.wg.gui.components.controls
                 _loc6_ = this._tileHeight + this._verticalGap;
                 _loc5_ = height / _loc6_ - 1;
                 this._asserter.assert(_loc5_ >= _loc3_,CHILD_SIZE_ERROR);
-                _loc7_ = 0;
-                while(_loc7_ < _loc8_)
+                for each(_loc7_ in this._renderers)
                 {
-                    this._renderers[_loc7_].y = _loc3_ * _loc6_;
-                    this._renderers[_loc7_].x = _loc4_;
-                    if(_loc5_ > _loc3_)
+                    if(!this.isRenderStatic(_loc7_))
                     {
-                        _loc3_++;
+                        _loc7_.y = _loc3_ * _loc6_;
+                        _loc7_.x = _loc4_;
+                        if(_loc5_ > _loc3_)
+                        {
+                            _loc3_++;
+                        }
+                        else
+                        {
+                            _loc4_ = _loc4_ + (this._tileWidth + this._horizontalGap);
+                            _loc3_ = 0;
+                        }
                     }
-                    else
-                    {
-                        _loc4_ = _loc4_ + (this._tileWidth + this._horizontalGap);
-                        _loc3_ = 0;
-                    }
-                    _loc7_++;
                 }
                 if(this._autoSize)
                 {
@@ -272,6 +273,7 @@ package net.wg.gui.components.controls
                     _loc1_ = _loc2_ != _width;
                 }
             }
+            var _loc8_:int = this._renderers.length;
             var _loc9_:* = width / (this.tileWidth + this.horizontalGap) | 0;
             if(_loc9_ > 0 && this._renderersAlign != RENDERERS_ALIGN_LEFT)
             {
@@ -311,6 +313,11 @@ package net.wg.gui.components.controls
                 this._renderersChanged = false;
                 dispatchEvent(new Event(Event.COMPLETE));
             }
+        }
+
+        protected function isRenderStatic(param1:IListItemRenderer) : Boolean
+        {
+            return false;
         }
 
         private function getDiffRenderers() : int

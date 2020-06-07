@@ -228,6 +228,10 @@ package net.wg.gui.bootcamp.controls
 
         private function animFxLineStart(param1:MovieClip) : void
         {
+            if(param1 == null)
+            {
+                return;
+            }
             param1.visible = true;
             var _loc2_:Number = getStartScaleX(param1);
             var _loc3_:Number = param1.scaleX;

@@ -20,5 +20,7 @@ package net.wg.infrastructure.base.meta
         function as_updateMessage(param1:Object) : void;
 
         function as_updateCounters(param1:Array) : void;
+
+        function as_setProgressiveRewardEnabled(param1:Boolean) : void;
     }
 }

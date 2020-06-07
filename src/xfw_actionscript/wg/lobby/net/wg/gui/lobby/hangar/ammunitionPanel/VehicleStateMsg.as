@@ -5,8 +5,10 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
     import flash.text.TextField;
     import flash.display.Sprite;
     import net.wg.gui.lobby.hangar.ammunitionPanel.data.VehicleMessageVO;
+    import flash.events.MouseEvent;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.gui.lobby.hangar.ammunitionPanel.events.AmmunitionPanelEvents;
+    import net.wg.data.constants.generated.TOOLTIPS_CONSTANTS;
 
     public class VehicleStateMsg extends UIComponentEx
     {
@@ -39,19 +41,22 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         override protected function configUI() : void
         {
             super.configUI();
-            mouseChildren = mouseEnabled = false;
             this.tankTypeIcon.mouseEnabled = this.tankTypeIcon.mouseChildren = false;
+            this.vehicleMsg.addEventListener(MouseEvent.ROLL_OVER,this.onVehicleMsgRollOverHandler);
+            this.vehicleMsg.addEventListener(MouseEvent.ROLL_OUT,this.onVehicleMsgRollOutHandler);
         }
 
         override protected function onDispose() : void
         {
-            this.vehicleName = null;
+            this.vehicleMsg.removeEventListener(MouseEvent.ROLL_OVER,this.onVehicleMsgRollOverHandler);
+            this.vehicleMsg.removeEventListener(MouseEvent.ROLL_OUT,this.onVehicleMsgRollOutHandler);
             this.vehicleMsg = null;
-            this._data = null;
             this.tankTypeIcon.dispose();
             this.tankTypeIcon = null;
+            this.vehicleName = null;
             this.statusBg = null;
             this.vehicleLevel = null;
+            this._data = null;
             super.onDispose();
         }
 
@@ -118,6 +123,19 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         public function get textY() : Number
         {
             return this.y + this.vehicleMsg.y;
+        }
+
+        private function onVehicleMsgRollOverHandler(param1:MouseEvent) : void
+        {
+            if(this._data.actionGroupId > 0)
+            {
+                App.toolTipMgr.showWulfTooltip(TOOLTIPS_CONSTANTS.RANKED_BATTLES_ROLES,this._data.actionGroupId);
+            }
+        }
+
+        private function onVehicleMsgRollOutHandler(param1:MouseEvent) : void
+        {
+            App.toolTipMgr.hide();
         }
     }
 }
