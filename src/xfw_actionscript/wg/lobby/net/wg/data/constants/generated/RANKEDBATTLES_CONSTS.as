@@ -63,6 +63,10 @@ package net.wg.data.constants.generated
 
         public static const YEAR_REWARD_STATUS_CURRENT_FINAL:String = "currentFinal";
 
+        public static const WIDGET_MEDIUM_WIDTH:int = 340;
+
+        public static const WIDGET_SMALL_WIDTH:int = 290;
+
         public function RANKEDBATTLES_CONSTS()
         {
             super();

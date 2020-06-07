@@ -40,6 +40,7 @@ package net.wg.gui.lobby.vehicleCustomization.controls.propertiesSheet
             this.emptyHitMc = new Sprite();
             addChild(this.emptyHitMc);
             hitArea = this.emptyHitMc;
+            mouseEnabled = mouseChildren = false;
             this.setInitState();
         }
 

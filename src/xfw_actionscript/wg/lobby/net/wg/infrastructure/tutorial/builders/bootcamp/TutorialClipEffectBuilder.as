@@ -29,6 +29,7 @@ package net.wg.infrastructure.tutorial.builders.bootcamp
             {
                 component.removeEventListener(Event.RENDER,this.onComponentRenderHandler);
             }
+            this._rect = null;
             this.disposeModel();
             this.disposeClip();
             super.onDispose();
@@ -36,7 +37,7 @@ package net.wg.infrastructure.tutorial.builders.bootcamp
 
         override protected function onViewResize() : void
         {
-            if(component != null && this._model != null)
+            if(component != null && this._model != null && this._clip != null)
             {
                 this.layoutHint();
             }
@@ -93,7 +94,7 @@ package net.wg.infrastructure.tutorial.builders.bootcamp
         private function onComponentRenderHandler(param1:Event) : void
         {
             var _loc2_:Matrix = null;
-            if(component != null && this._model != null)
+            if(component != null && this._model != null && this._clip != null)
             {
                 _loc2_ = component.transform.concatenatedMatrix;
                 if(_loc2_.tx != this._rect.tx || _loc2_.ty != this._rect.ty)

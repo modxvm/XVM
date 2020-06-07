@@ -9,7 +9,6 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
     import net.wg.gui.battle.views.stats.fullStats.SquadInviteStatusView;
     import net.wg.gui.battle.views.stats.SpeakAnimation;
     import net.wg.gui.components.controls.BadgeComponent;
-    import flash.display.MovieClip;
     import net.wg.gui.battle.views.stats.StatsUserProps;
     import net.wg.gui.battle.random.views.stats.components.fullStats.tableItem.DynamicSquadCtrl;
     import net.wg.gui.components.controls.VO.BadgeVisualVO;
@@ -77,7 +76,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
 
         public var testerIcon:BattleAtlasSprite = null;
 
-        public var testerBG:MovieClip = null;
+        public var testerBG:BattleAtlasSprite = null;
 
         private var _userProps:StatsUserProps = null;
 
@@ -395,7 +394,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
             }
             if(_loc1_ && this._data)
             {
-                this.setSuffixBadge(this._data.suffixBadgeType);
+                this.setSuffixBadge(this._data.suffixBadgeType,this._data.suffixBadgeStripType);
             }
         }
 
@@ -521,13 +520,14 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
             invalidate(FullStatsValidationType.COLORS);
         }
 
-        private function setSuffixBadge(param1:String) : void
+        private function setSuffixBadge(param1:String, param2:String) : void
         {
-            var _loc2_:Boolean = StringUtils.isNotEmpty(param1);
-            this.testerIcon.visible = this.testerBG.visible = _loc2_;
-            if(_loc2_)
+            var _loc3_:Boolean = StringUtils.isNotEmpty(param1);
+            this.testerIcon.visible = this.testerBG.visible = _loc3_;
+            if(_loc3_)
             {
                 this.testerIcon.imageName = param1;
+                this.testerBG.imageName = param2;
                 if(this._isEnemy)
                 {
                     this.testerIcon.x = -RANKED_BADGE_OFFSET - FIELD_WIDTH_COMPENSATION - this.testerIcon.width + (this.playerName.x + (this.playerName.width - this.playerName.textWidth)) >> 0;

@@ -37,7 +37,7 @@ package net.wg.gui.battle.tutorial.views.tutorial.utils.tween
         {
             super();
             _flowFactory = TweenFlowFactory.getInstance();
-            this._params = new Vector.<TutorialTweener>();
+            this._params = new Vector.<TweenParams>();
             this._isExternalLinkToInstance = param1;
         }
 

@@ -8,7 +8,7 @@ package net.wg.gui.components.advanced.interfaces
 
         function show() : void;
 
-        function hide() : void;
+        function hide(param1:Boolean = false) : void;
 
         function setSize(param1:Number, param2:Number = NaN) : void;
     }

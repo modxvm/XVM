@@ -9,6 +9,8 @@ package net.wg.gui.lobby.vehicleCustomization.events
 
         public static const SHOW_BUY_WINDOW:String = "showBuyWindow";
 
+        public static const SHOW_PROGRESSION_DECALS_WINDOW:String = "showProgressionDecalsWindow";
+
         public static const RESET_FILTER:String = "clearFilter";
 
         public static const REFRESH_FILTER_DATA:String = "refreshFilterData";

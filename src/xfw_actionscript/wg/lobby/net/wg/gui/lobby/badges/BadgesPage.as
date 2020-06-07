@@ -12,6 +12,7 @@ package net.wg.gui.lobby.badges
     import net.wg.infrastructure.constants.WindowViewInvalidationType;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.gui.components.controls.VO.BadgeVisualVO;
+    import net.wg.gui.lobby.badges.data.BadgeSuffixVO;
     import flash.events.Event;
     import scaleform.clik.events.InputEvent;
 
@@ -48,7 +49,7 @@ package net.wg.gui.lobby.badges
 
         private var _waiting:Waiting;
 
-        private var waitingMessage:String;
+        private var _waitingMessage:String;
 
         private var _showWaiting:Boolean;
 
@@ -69,10 +70,10 @@ package net.wg.gui.lobby.badges
         {
             super.configUI();
             App.gameInputMgr.setKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.onEscapeKeyDownHandler,true);
-            addEventListener(BadgesEvent.BACK_BUTTON_CLICK,this.onBackButtonClickHandler);
-            addEventListener(BadgesEvent.BADGE_DESELECT,this.onBadgeDeselectHandler);
-            addEventListener(BadgesEvent.SUFFIX_BADGE_SELECT,this.onSuffixBadgeSelectHandler);
-            addEventListener(BadgesEvent.SUFFIX_BADGE_DESELECT,this.onSuffixBadgeDeselectHandler);
+            this.header.addEventListener(BadgesEvent.BACK_BUTTON_CLICK,this.onBackButtonClickHandler);
+            this.header.addEventListener(BadgesEvent.BADGE_DESELECT,this.onBadgeDeselectHandler);
+            this.header.addEventListener(BadgesEvent.SUFFIX_BADGE_SELECT,this.onSuffixBadgeSelectHandler);
+            this.header.addEventListener(BadgesEvent.SUFFIX_BADGE_DESELECT,this.onSuffixBadgeDeselectHandler);
             this.scrollPane.scrollBarMargin = SCROLL_BAR_MARGIN;
             this.scrollPane.scrollBar = SCROLL_BAR_VALUE;
             this.scrollPane.y = SCROLL_TOP;
@@ -135,10 +136,10 @@ package net.wg.gui.lobby.badges
         override protected function onDispose() : void
         {
             App.gameInputMgr.clearKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.onEscapeKeyDownHandler);
-            removeEventListener(BadgesEvent.BACK_BUTTON_CLICK,this.onBackButtonClickHandler);
-            removeEventListener(BadgesEvent.BADGE_DESELECT,this.onBadgeDeselectHandler);
-            removeEventListener(BadgesEvent.SUFFIX_BADGE_SELECT,this.onSuffixBadgeSelectHandler);
-            removeEventListener(BadgesEvent.SUFFIX_BADGE_DESELECT,this.onSuffixBadgeDeselectHandler);
+            this.header.removeEventListener(BadgesEvent.BACK_BUTTON_CLICK,this.onBackButtonClickHandler);
+            this.header.removeEventListener(BadgesEvent.BADGE_DESELECT,this.onBadgeDeselectHandler);
+            this.header.removeEventListener(BadgesEvent.SUFFIX_BADGE_SELECT,this.onSuffixBadgeSelectHandler);
+            this.header.removeEventListener(BadgesEvent.SUFFIX_BADGE_DESELECT,this.onSuffixBadgeDeselectHandler);
             this.header.dispose();
             this.header = null;
             this.scrollPane.dispose();
@@ -158,14 +159,14 @@ package net.wg.gui.lobby.badges
             this.header.setBadgeData(param1,param2);
         }
 
+        override protected function setBadgeSuffix(param1:BadgeSuffixVO) : void
+        {
+            this.header.setBadgeSuffix(param1);
+        }
+
         public function as_hideWaiting() : void
         {
             this.showWaiting = false;
-        }
-
-        public function as_setSuffixBadgeImg(param1:String, param2:String, param3:Boolean) : void
-        {
-            this.header.setSuffixBadgeImg(param1,param2,param3);
         }
 
         public function as_showWaiting(param1:String, param2:Object) : void
@@ -175,7 +176,7 @@ package net.wg.gui.lobby.badges
 
         protected function showWaitingMessage(param1:String) : void
         {
-            this.waitingMessage = param1;
+            this._waitingMessage = param1;
             this.showWaiting = true;
         }
 
@@ -190,7 +191,7 @@ package net.wg.gui.lobby.badges
                     this._waiting.setSize(param1,param2);
                     this._waiting.validateNow();
                 }
-                this._waiting.setMessage(this.waitingMessage);
+                this._waiting.setMessage(this._waitingMessage);
             }
             if(this._waiting)
             {
@@ -221,7 +222,7 @@ package net.wg.gui.lobby.badges
 
         private function onSuffixBadgeSelectHandler(param1:BadgesEvent) : void
         {
-            onSelectSuffixBadgeS();
+            onSelectSuffixBadgeS(param1.badgeID);
         }
 
         private function onSuffixBadgeDeselectHandler(param1:BadgesEvent) : void

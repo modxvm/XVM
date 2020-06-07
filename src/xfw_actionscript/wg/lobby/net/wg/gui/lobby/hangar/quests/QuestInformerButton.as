@@ -3,6 +3,7 @@ package net.wg.gui.lobby.hangar.quests
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.lobby.hangar.interfaces.IQuestInformerButton;
     import flash.display.MovieClip;
+    import flash.display.Sprite;
     import net.wg.gui.lobby.hangar.data.HeaderQuestsVO;
     import flash.geom.Point;
     import scaleform.clik.motion.Tween;
@@ -40,6 +41,10 @@ package net.wg.gui.lobby.hangar.quests
         public var flagGray:FlagContainer;
 
         public var rewardAnimMc:MovieClip;
+
+        public var hover:Sprite;
+
+        public var hoverFlipped:Sprite;
 
         private var _questVO:HeaderQuestsVO = null;
 
@@ -125,6 +130,8 @@ package net.wg.gui.lobby.hangar.quests
             this.flagGray.dispose();
             this.flagGray = null;
             this.rewardAnimMc = null;
+            this.hover = null;
+            this.hoverFlipped = null;
             this._questVO = null;
             super.onDispose();
         }
@@ -146,6 +153,14 @@ package net.wg.gui.lobby.hangar.quests
                 }
                 this.flagContainer.setFlag(this._questVO.flag,this._isHorizontalFlipped);
                 this.flagGray.setFlag(this._questVO.flagDisabled,this._isHorizontalFlipped);
+                if(this._isHorizontalFlipped)
+                {
+                    this.hover.alpha = 0;
+                }
+                else
+                {
+                    this.hoverFlipped.alpha = 0;
+                }
                 invalidate(INVALIDATE_FIELDS);
             }
             if(isInvalid(INVALIDATE_FIELDS) && !isInvalid(INVALIDATE_FIELDS) && enabled)

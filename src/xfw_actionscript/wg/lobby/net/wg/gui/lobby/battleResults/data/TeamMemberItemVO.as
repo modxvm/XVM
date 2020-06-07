@@ -126,6 +126,8 @@ package net.wg.gui.lobby.battleResults.data
 
         public var suffixBadgeIcon:String = "";
 
+        public var suffixBadgeStripIcon:String = "";
+
         public function TeamMemberItemVO(param1:Object)
         {
             super(param1);

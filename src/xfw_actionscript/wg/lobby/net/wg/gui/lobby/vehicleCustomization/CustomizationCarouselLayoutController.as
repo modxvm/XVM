@@ -11,7 +11,7 @@ package net.wg.gui.lobby.vehicleCustomization
     public class CustomizationCarouselLayoutController extends Object implements IScrollerLayoutController, IDisposable
     {
 
-        private static const BOOK_MARK_WIDTH_OFFSET:int = 30;
+        private static const BOOK_MARK_WIDTH_OFFSET:int = -3;
 
         private static const FILTER_OFFSET_X:int = 40;
 

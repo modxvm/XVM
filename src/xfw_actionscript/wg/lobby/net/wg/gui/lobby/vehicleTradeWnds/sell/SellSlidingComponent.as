@@ -163,7 +163,7 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
                     _loc7_.itemIDList = [_loc4_.itemID];
                     _loc7_.type = FITTING_TYPES.CUSTOMIZATION;
                     _loc7_.toInventory = _loc4_.toInventory;
-                    _loc7_.moneyValue = _loc4_.sellPrice[0] != 0?_loc4_.sellPrice[0]:_loc4_.sellPrice[1];
+                    _loc7_.moneyValue = (_loc4_.sellPrice[0] != 0?_loc4_.sellPrice[0]:_loc4_.sellPrice[1]) * _loc4_.count;
                     _loc7_.count = _loc4_.count;
                     _loc7_.onlyToInventory = _loc4_.onlyToInventory;
                     _loc7_.isRemovable = true;

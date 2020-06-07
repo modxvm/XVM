@@ -57,28 +57,6 @@ package net.wg.data.constants.generated
 
         public static const DAMAGELOG_ARTILLERY_16X16:String = "damageLog_artillery_16x16";
 
-        public static const DAMAGELOG_AT_SPG_NORMAL:String = "AT-SPGNormal";
-
-        public static const DAMAGELOG_SPG_NORMAL:String = "SPGNormal";
-
-        public static const DAMAGELOG_HEAVY_TANK_NORMAL:String = "heavyTankNormal";
-
-        public static const DAMAGELOG_LIGHT_TANK_NORMAL:String = "lightTankNormal";
-
-        public static const DAMAGELOG_MEDIUM_TANK_NORMAL:String = "mediumTankNormal";
-
-        public static const DAMAGELOG_AT_SPG_ELITE:String = "AT-SPGElite";
-
-        public static const DAMAGELOG_SPG_ELITE:String = "SPGElite";
-
-        public static const DAMAGELOG_HEAVY_TANK_ELITE:String = "heavyTankElite";
-
-        public static const DAMAGELOG_LIGHT_TANK_ELITE:String = "lightTankElite";
-
-        public static const DAMAGELOG_MEDIUM_TANK_ELITE:String = "mediumTankElite";
-
-        public static const DAMAGELOG_BOSS_KILL:String = "bossKill";
-
         public function BATTLEDAMAGELOG_IMAGES()
         {
             super();

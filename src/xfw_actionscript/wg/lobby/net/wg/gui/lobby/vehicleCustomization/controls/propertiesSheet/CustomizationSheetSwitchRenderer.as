@@ -29,55 +29,6 @@ package net.wg.gui.lobby.vehicleCustomization.controls.propertiesSheet
             super();
         }
 
-        override protected function configUI() : void
-        {
-            super.configUI();
-            hitArea = hitMc;
-            this.left.focusable = false;
-            this.right.focusable = false;
-            this.right.addEventListener(MouseEvent.CLICK,this.onLeftClickHandler);
-            this.left.addEventListener(MouseEvent.CLICK,this.onRightClickHandler);
-            mouseEnabled = mouseChildren = true;
-        }
-
-        override public function set enabled(param1:Boolean) : void
-        {
-            super.enabled = param1;
-            buttonMode = useHandCursor = param1;
-            this.right.enabled = this.left.enabled = param1;
-            mouseEnabled = mouseChildren = param1;
-            this.updateSeparator();
-        }
-
-        override protected function onDispose() : void
-        {
-            this.right.removeEventListener(MouseEvent.CLICK,this.onLeftClickHandler);
-            this.left.removeEventListener(MouseEvent.CLICK,this.onRightClickHandler);
-            hitMc = null;
-            this.separator = null;
-            this.right.dispose();
-            this.right = null;
-            this.left.dispose();
-            this.left = null;
-            super.onDispose();
-        }
-
-        private function onLeftClickHandler(param1:MouseEvent) : void
-        {
-            dispatchEvent(new CustomizationSheetRendererEvent(CustomizationSheetRendererEvent.ACTION_BTN_CLICK,model.actionType,LEFT_STATE));
-        }
-
-        private function onRightClickHandler(param1:MouseEvent) : void
-        {
-            dispatchEvent(new CustomizationSheetRendererEvent(CustomizationSheetRendererEvent.ACTION_BTN_CLICK,model.actionType,RIGHT_STATE));
-        }
-
-        private function updateSeparator(param1:Boolean = false) : void
-        {
-            var _loc2_:int = param1?HOVER_STATE_FRAME:ENABLE_STATE_FRAME;
-            this.separator.gotoAndStop(enabled?_loc2_:DISABLE_STATE_FRAME);
-        }
-
         override public function onOutHandler() : void
         {
             super.onOutHandler();
@@ -90,8 +41,55 @@ package net.wg.gui.lobby.vehicleCustomization.controls.propertiesSheet
             this.updateSeparator(true);
         }
 
+        override protected function configUI() : void
+        {
+            super.configUI();
+            this.left.focusable = false;
+            this.right.focusable = false;
+            this.right.addEventListener(MouseEvent.CLICK,this.onLeftClickHandler);
+            this.left.addEventListener(MouseEvent.CLICK,this.onRightClickHandler);
+            mouseEnabled = mouseChildren = true;
+        }
+
+        override protected function onDispose() : void
+        {
+            this.right.removeEventListener(MouseEvent.CLICK,this.onLeftClickHandler);
+            this.left.removeEventListener(MouseEvent.CLICK,this.onRightClickHandler);
+            this.separator = null;
+            this.right.dispose();
+            this.right = null;
+            this.left.dispose();
+            this.left = null;
+            super.onDispose();
+        }
+
         override protected function dispatchClickAction() : void
         {
+        }
+
+        private function updateSeparator(param1:Boolean = false) : void
+        {
+            var _loc2_:int = param1?HOVER_STATE_FRAME:ENABLE_STATE_FRAME;
+            this.separator.gotoAndStop(enabled?_loc2_:DISABLE_STATE_FRAME);
+        }
+
+        override public function set enabled(param1:Boolean) : void
+        {
+            super.enabled = param1;
+            buttonMode = useHandCursor = param1;
+            this.right.enabled = this.left.enabled = param1;
+            mouseEnabled = mouseChildren = param1;
+            this.updateSeparator();
+        }
+
+        private function onLeftClickHandler(param1:MouseEvent) : void
+        {
+            dispatchEvent(new CustomizationSheetRendererEvent(CustomizationSheetRendererEvent.ACTION_BTN_CLICK,model.actionType,LEFT_STATE));
+        }
+
+        private function onRightClickHandler(param1:MouseEvent) : void
+        {
+            dispatchEvent(new CustomizationSheetRendererEvent(CustomizationSheetRendererEvent.ACTION_BTN_CLICK,model.actionType,RIGHT_STATE));
         }
     }
 }

@@ -8,8 +8,11 @@ package net.wg.gui.lobby.hangar
     import net.wg.gui.lobby.hangar.quests.HeaderQuestsFlags;
     import net.wg.gui.lobby.hangar.data.HangarHeaderVO;
     import net.wg.gui.lobby.hangar.quests.BattlePassEntryPoint;
+    import net.wg.gui.lobby.rankedBattles19.components.widget.RankedBattlesHangarWidget;
+    import net.wg.utils.IScheduler;
     import net.wg.gui.lobby.hangar.quests.HeaderQuestsEvent;
     import scaleform.clik.constants.InvalidationType;
+    import net.wg.data.constants.Linkages;
     import net.wg.data.constants.generated.HANGAR_ALIASES;
     import net.wg.utils.helpLayout.HelpLayoutVO;
     import flash.geom.Rectangle;
@@ -33,9 +36,14 @@ package net.wg.gui.lobby.hangar
 
         private var _battlePassEntryPoint:BattlePassEntryPoint = null;
 
+        private var _rankedBattlesWidget:RankedBattlesHangarWidget = null;
+
+        private var _scheduler:IScheduler = null;
+
         public function HangarHeader()
         {
             super();
+            this._scheduler = App.utils.scheduler;
         }
 
         override protected function configUI() : void
@@ -58,8 +66,11 @@ package net.wg.gui.lobby.hangar
             this.questsFlags.dispose();
             this.questsFlags = null;
             this._battlePassEntryPoint = null;
+            this._rankedBattlesWidget = null;
             this.mcBackground = null;
             this._data = null;
+            this._scheduler.cancelTask(this.createBattlePass);
+            this._scheduler = null;
             super.onDispose();
         }
 
@@ -90,9 +101,18 @@ package net.wg.gui.lobby.hangar
         {
             if(this._battlePassEntryPoint == null)
             {
-                this._battlePassEntryPoint = new BattlePassEntryPoint();
-                this.questsFlags.setBattlePassEntryPoint(this._battlePassEntryPoint);
-                registerFlashComponentS(this._battlePassEntryPoint,HANGAR_ALIASES.BATTLE_PASSS_ENTRY_POINT);
+                this._scheduler.cancelTask(this.createBattlePass);
+                this._scheduler.scheduleOnNextFrame(this.createBattlePass);
+            }
+        }
+
+        public function as_createRankedBattles() : void
+        {
+            if(this._rankedBattlesWidget == null)
+            {
+                this._rankedBattlesWidget = App.instance.utils.classFactory.getComponent(Linkages.RANKED_BATTLES_WIDGET_UI,RankedBattlesHangarWidget);
+                this.questsFlags.setEntryPoint(this._rankedBattlesWidget);
+                registerFlashComponentS(this._rankedBattlesWidget,HANGAR_ALIASES.RANKED_WIDGET);
             }
         }
 
@@ -100,12 +120,31 @@ package net.wg.gui.lobby.hangar
         {
             if(this._battlePassEntryPoint != null)
             {
-                this.questsFlags.setBattlePassEntryPoint(null);
+                if(this.questsFlags.getEntryPoint() is BattlePassEntryPoint)
+                {
+                    this.questsFlags.setEntryPoint(null);
+                }
                 if(isFlashComponentRegisteredS(HANGAR_ALIASES.BATTLE_PASSS_ENTRY_POINT))
                 {
                     unregisterFlashComponentS(HANGAR_ALIASES.BATTLE_PASSS_ENTRY_POINT);
                 }
                 this._battlePassEntryPoint = null;
+            }
+        }
+
+        public function as_removeRankedBattles() : void
+        {
+            if(this._rankedBattlesWidget != null)
+            {
+                if(this.questsFlags.getEntryPoint() is RankedBattlesHangarWidget)
+                {
+                    this.questsFlags.setEntryPoint(null);
+                }
+                if(isFlashComponentRegisteredS(HANGAR_ALIASES.RANKED_WIDGET))
+                {
+                    unregisterFlashComponentS(HANGAR_ALIASES.RANKED_WIDGET);
+                }
+                this._rankedBattlesWidget = null;
             }
         }
 
@@ -127,6 +166,13 @@ package net.wg.gui.lobby.hangar
         public function getQuestGroupByType(param1:String) : IHeaderQuestsContainer
         {
             return this.questsFlags.getQuestGroupByID(param1);
+        }
+
+        private function createBattlePass() : void
+        {
+            this._battlePassEntryPoint = new BattlePassEntryPoint();
+            this.questsFlags.setEntryPoint(this._battlePassEntryPoint);
+            registerFlashComponentS(this._battlePassEntryPoint,HANGAR_ALIASES.BATTLE_PASSS_ENTRY_POINT);
         }
 
         private function onBtnHeaderQuestClickHandler(param1:HeaderQuestsEvent) : void

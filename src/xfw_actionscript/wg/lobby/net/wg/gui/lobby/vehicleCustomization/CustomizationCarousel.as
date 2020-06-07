@@ -75,7 +75,11 @@ package net.wg.gui.lobby.vehicleCustomization
 
         public var carouselFilters:TankCarouselFilters = null;
 
-        public var hintArea:UIComponentEx = null;
+        public var projectionDecalHint:UIComponentEx = null;
+
+        public var editableStyleHint:UIComponentEx = null;
+
+        public var progressionDecalHint:UIComponentEx = null;
 
         private var _layoutController:CustomizationCarouselLayoutController = null;
 
@@ -132,8 +136,12 @@ package net.wg.gui.lobby.vehicleCustomization
             this.lblMessage = null;
             this.filterCounter.dispose();
             this.filterCounter = null;
-            this.hintArea.dispose();
-            this.hintArea = null;
+            this.projectionDecalHint.dispose();
+            this.projectionDecalHint = null;
+            this.editableStyleHint.dispose();
+            this.editableStyleHint = null;
+            this.progressionDecalHint.dispose();
+            this.progressionDecalHint = null;
             this._dataProvider.cleanUp();
             this._dataProvider = null;
             this._layoutController.dispose();
@@ -145,12 +153,12 @@ package net.wg.gui.lobby.vehicleCustomization
 
         override protected function updateLayout(param1:int, param2:int = 0) : void
         {
+            var _loc3_:* = 0;
             var _loc4_:* = 0;
-            var _loc5_:* = 0;
             var _loc6_:Rectangle = null;
-            var _loc3_:int = param2 + OFFSET_ARROW + EXTRA_OFFSET;
+            _loc3_ = param2 + OFFSET_ARROW + EXTRA_OFFSET;
             _loc4_ = param1 - _loc3_ - OFFSET_ARROW;
-            _loc5_ = _loc4_ + leftArrowOffset - rightArrowOffset;
+            var _loc5_:int = _loc4_ + leftArrowOffset - rightArrowOffset;
             this.lblMessage.x = (_loc4_ - this.lblMessage.textWidth >> 1) + _loc3_;
             super.updateLayout(_loc4_,(_loc4_ - _loc5_ >> 1) + _loc3_);
             this.scrollBar.setVisibleBookmarks(scrollList.viewPort.width / _loc4_ > BOOKMARKS_COEFFICIENT);
@@ -164,10 +172,10 @@ package net.wg.gui.lobby.vehicleCustomization
             this.scrollBar.width = scrollList.width;
             this.scrollBar.x = scrollList.x;
             this.scrollBar.y = leftArrow.y + leftArrow.height + SCROLL_Y_OFFSET;
-            this.hintArea.x = scrollList.x;
-            this.hintArea.y = scrollList.y;
-            this.hintArea.width = scrollList.width;
-            this.hintArea.height = this._isMinResolution?HIT_AREA_HEIGHT_MIN:HIT_AREA_HEIGHT;
+            this.projectionDecalHint.x = this.editableStyleHint.x = this.progressionDecalHint.x = scrollList.x;
+            this.projectionDecalHint.y = this.editableStyleHint.y = this.progressionDecalHint.y = scrollList.y;
+            this.projectionDecalHint.width = this.editableStyleHint.width = this.progressionDecalHint.width = scrollList.width;
+            this.projectionDecalHint.height = this.editableStyleHint.height = this.progressionDecalHint.height = this._isMinResolution?HIT_AREA_HEIGHT_MIN:HIT_AREA_HEIGHT;
             this.carouselFilters.gapOffset = int(this._isMinResolution) * FILTERS_GAP_OFFSET;
         }
 
@@ -356,11 +364,16 @@ package net.wg.gui.lobby.vehicleCustomization
             var _loc2_:Object = {
                 "purchasedEnabled":param1.purchasedEnabled,
                 "historicEnabled":param1.historicEnabled,
+                "nonHistoricEnabled":param1.nonHistoricEnabled,
                 "appliedEnabled":param1.appliedEnabled,
                 "groups":param1.groups,
                 "selectedGroup":param1.selectedGroup,
                 "groupCount":param1.groupCount,
                 "formfactorGroups":param1.formfactorGroups,
+                "hideOnAnotherVehEnabled":param1.hideOnAnotherVehEnabled,
+                "showOnlyProgressionDecalsEnabled":param1.showOnlyProgressionDecalsEnabled,
+                "showOnlyEditableStylesEnabled":param1.showOnlyEditableStylesEnabled,
+                "showOnlyNonEditableStylesEnabled":param1.showOnlyNonEditableStylesEnabled,
                 "isInit":true
             };
             this.carouselFilters.popoverData = _loc2_;

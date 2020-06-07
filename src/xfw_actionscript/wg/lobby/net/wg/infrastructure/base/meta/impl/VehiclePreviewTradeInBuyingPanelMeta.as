@@ -1,7 +1,7 @@
 package net.wg.infrastructure.base.meta.impl
 {
     import net.wg.infrastructure.base.BaseDAAPIComponent;
-    import net.wg.gui.lobby.vehiclePreview20.data.VPTradeInBuyingPanelVO;
+    import net.wg.gui.lobby.vehiclePreview.data.VPTradeInBuyingPanelVO;
     import net.wg.data.constants.Errors;
     import net.wg.infrastructure.exceptions.AbstractException;
 

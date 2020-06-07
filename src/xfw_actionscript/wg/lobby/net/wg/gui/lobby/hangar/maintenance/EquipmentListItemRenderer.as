@@ -197,13 +197,6 @@ package net.wg.gui.lobby.hangar.maintenance
                     this.disabledOverlayMc.validateNow();
                     this.disableMc.validateNow();
                     mouseEnabled = true;
-                    if(hitTestPoint(App.stage.mouseX,App.stage.mouseY,false))
-                    {
-                        if(enabled)
-                        {
-                            dispatchEvent(new MouseEvent(MouseEvent.ROLL_OVER));
-                        }
-                    }
                 }
                 else
                 {
@@ -219,20 +212,6 @@ package net.wg.gui.lobby.hangar.maintenance
             this.moduleType.scaleX = this.moduleType.scaleY = 1;
             this.moduleType.x = MODULE_ICON_OFFSET;
             this.moduleType.y = MODULE_ICON_OFFSET;
-        }
-
-        private function getPriceColor() : uint
-        {
-            var _loc1_:ModuleVO = this.module;
-            if(_loc1_.price < _loc1_.userCredits[_loc1_.currency])
-            {
-                if(_loc1_.status == MENU.MODULEFITS_NOT_WITH_INSTALLED_EQUIPMENT)
-                {
-                    return Currencies.DISABLED_COLOR;
-                }
-                return Currencies.TEXT_COLORS[_loc1_.currency];
-            }
-            return Currencies.TEXT_COLORS[CURRENCIES_CONSTANTS.ERROR];
         }
 
         override public function get height() : Number
@@ -251,6 +230,20 @@ package net.wg.gui.lobby.hangar.maintenance
         private function get module() : ModuleVO
         {
             return data as ModuleVO;
+        }
+
+        private function getPriceColor() : uint
+        {
+            var _loc1_:ModuleVO = this.module;
+            if(_loc1_.price < _loc1_.userCredits[_loc1_.currency])
+            {
+                if(_loc1_.status == MENU.MODULEFITS_NOT_WITH_INSTALLED_EQUIPMENT)
+                {
+                    return Currencies.DISABLED_COLOR;
+                }
+                return Currencies.TEXT_COLORS[_loc1_.currency];
+            }
+            return Currencies.TEXT_COLORS[CURRENCIES_CONSTANTS.ERROR];
         }
 
         private function onRollOverHandler(param1:MouseEvent) : void

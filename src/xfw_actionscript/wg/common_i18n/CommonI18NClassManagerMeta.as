@@ -5,8 +5,6 @@ package
 
         public static const ACHIEVEMENTS:Class = ACHIEVEMENTS;
 
-        public static const ANIMATION_CONSTANTS:Class = ANIMATION_CONSTANTS;
-
         public static const BADGE:Class = BADGE;
 
         public static const BATTLE_RESULTS:Class = BATTLE_RESULTS;
@@ -36,8 +34,6 @@ package
         public static const DIALOGS:Class = DIALOGS;
 
         public static const EPIC_BATTLE:Class = EPIC_BATTLE;
-
-        public static const EVENT:Class = EVENT;
 
         public static const EVENT_BOARDS:Class = EVENT_BOARDS;
 
@@ -100,8 +96,6 @@ package
         public static const VEHICLE_PREVIEW:Class = VEHICLE_PREVIEW;
 
         public static const VEH_COMPARE:Class = VEH_COMPARE;
-
-        public static const VIDEOS_CONSTANTS:Class = VIDEOS_CONSTANTS;
 
         public static const WAITING:Class = WAITING;
 

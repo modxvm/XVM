@@ -102,6 +102,7 @@ package net.wg.gui.battle.views.stats.fullStats
                 this.applyUserTags();
                 this.updateUserProps();
                 this.statsItem.setSuffixBadge(this.data.suffixBadgeType);
+                this.statsItem.setSuffixBadgeStrip(this.data.suffixBadgeStripType);
             }
             else
             {

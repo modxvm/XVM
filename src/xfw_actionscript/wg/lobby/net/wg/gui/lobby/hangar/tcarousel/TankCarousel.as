@@ -52,8 +52,6 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         public var background:MovieClip = null;
 
-        public var hitMc:MovieClip = null;
-
         private var _carouselHelpLayoutId:String = null;
 
         private var _filtersHelpLayoutId:String = null;
@@ -89,10 +87,6 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
             var _loc5_:Number = param1 - _loc3_ - OFFSET_ARROW >> 0;
             this.background.width = param1 >> 0;
-            if(this.hitMc)
-            {
-                this.hitMc.width = this.background.width;
-            }
             var _loc6_:* = _loc5_ + leftArrowOffset - rightArrowOffset >> 0;
             super.updateLayout(_loc5_,(_loc5_ - _loc6_ >> 1) + _loc3_ >> 0);
             leftArrow.x = this.vehicleFilters.visible?param2 + _loc4_ + OFFSET_ARROW:OFFSET_ARROW;
@@ -180,7 +174,6 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.vehicleFilters.dispose();
             this.vehicleFilters = null;
             this.background = null;
-            this.hitMc = null;
             this._helper = null;
             super.onDispose();
         }
@@ -317,10 +310,6 @@ package net.wg.gui.lobby.hangar.tcarousel
             var _loc5_:int = this._helper.padding.top;
             scrollList.y = _loc5_;
             this.background.height = -this.background.y + this._listVisibleHeight + _loc5_ + this._helper.padding.bottom;
-            if(this.hitMc)
-            {
-                this.hitMc.height = this._listVisibleHeight + this._helper.padding.top + this._helper.padding.bottom;
-            }
             leftArrow.height = rightArrow.height = this._listVisibleHeight;
             startFadeMask.height = endFadeMask.height = this._listVisibleHeight + _loc5_;
             startFadeMask.y = endFadeMask.y = 0;

@@ -13,8 +13,8 @@ package net.wg.gui.lobby.vehicleCustomization
     import net.wg.data.ListDAAPIDataProvider;
     import net.wg.gui.lobby.vehicleCustomization.data.CustomizationPopoverItemRendererVO;
     import net.wg.gui.lobby.vehicleCustomization.events.CustomizationIndicatorEvent;
-    import scaleform.clik.events.ButtonEvent;
     import flash.events.MouseEvent;
+    import scaleform.clik.events.ButtonEvent;
     import flash.text.TextFieldAutoSize;
     import net.wg.gui.components.popovers.PopOverConst;
     import net.wg.gui.components.popovers.PopOver;
@@ -28,7 +28,7 @@ package net.wg.gui.lobby.vehicleCustomization
 
         private static const WIDTH:int = 420;
 
-        private static const HEIGHT:int = 400;
+        private static const HEIGHT:int = 390;
 
         private static const CLEAR_STATE_INVALID:String = "ClearStateInvalid";
 
@@ -78,7 +78,7 @@ package net.wg.gui.lobby.vehicleCustomization
             this.table.isListSelectable = false;
             this.table.addEventListener(CustomizationIndicatorEvent.REMOVAL,this.onTableDeleteItemRemovalHandler);
             this.clearBtn.mouseEnabledOnDisabled = true;
-            this.clearBtn.soundEnabled = false;
+            this.clearBtn.mutedSoundTypes = [MouseEvent.MOUSE_DOWN];
             this.clearBtn.iconSource = RES_ICONS.MAPS_ICONS_LIBRARY_ASSET_1;
             this.clearBtn.label = VEHICLE_CUSTOMIZATION.CUSTOMIZATION_NONHISTORIC_BUTTONTEXT_REMOVEFROMALL;
             this.clearBtn.addEventListener(ButtonEvent.CLICK,this.onClearBtnClickHandler);
@@ -198,7 +198,7 @@ package net.wg.gui.lobby.vehicleCustomization
 
         private function onNonHictoricOverHandler(param1:Event) : void
         {
-            this._tooltipMgr.showSpecial(TOOLTIPS_CONSTANTS.TECH_CUSTOMIZATION_HISTORIC_ITEM,null,true,true,true);
+            this._tooltipMgr.showSpecial(TOOLTIPS_CONSTANTS.TECH_CUSTOMIZATION_NONHISTORIC_ITEM,null);
         }
 
         private function onNonHictoricOutHandler(param1:Event) : void

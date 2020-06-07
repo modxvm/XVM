@@ -59,6 +59,10 @@ package
 
         public static const DROPINBARRACK_WARNING_NOSPACE_TOOLTIP_BODY:String = "#crew_operations:dropInBarrack/warning/noSpace/tooltip/body";
 
+        public static const DROPINBARRACK_WARNING_INBATTLE_TOOLTIP_HEADER:String = "#crew_operations:dropInBarrack/warning/inBattle/tooltip/header";
+
+        public static const DROPINBARRACK_WARNING_INBATTLE_TOOLTIP_BODY:String = "#crew_operations:dropInBarrack/warning/inBattle/tooltip/body";
+
         public static const ROLECHANGE_WINDOWTITLE:String = "#crew_operations:roleChange/windowTitle";
 
         public static const ROLECHANGE_ACCEPTBUTTON:String = "#crew_operations:roleChange/acceptButton";

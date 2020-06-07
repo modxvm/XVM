@@ -125,7 +125,7 @@ package net.wg.gui.lobby.vehicleCustomization.controls
         {
             if(this._data && this._data.id != Values.DEFAULT_INT)
             {
-                this._tooltipManager.showSpecial(TOOLTIPS_CONSTANTS.TECH_CUSTOMIZATION_ITEM_ICON,null,this._data.id,false);
+                this._tooltipManager.showSpecial(TOOLTIPS_CONSTANTS.TECH_CUSTOMIZATION_ITEM_ICON,null,this._data.id,-1);
             }
         }
 

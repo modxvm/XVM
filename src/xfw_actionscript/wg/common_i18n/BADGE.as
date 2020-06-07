@@ -15,6 +15,8 @@ package
 
         public static const BADGESPAGE_HEADER_BACKBTN_DESCRLABEL:String = "#badge:badgesPage/header/backBtn/descrLabel";
 
+        public static const BADGESPAGE_HEADER_SUFFIXSETTING_LABEL:String = "#badge:badgesPage/header/suffixSetting/label";
+
         public static const BADGESPAGE_BODY_UNCOLLECTED_TITLE:String = "#badge:badgesPage/body/uncollected/title";
 
         public static const BADGESPAGE_DUMMY_TITLE:String = "#badge:badgesPage/dummy/title";
@@ -424,6 +426,10 @@ package
         public static const BADGE_92:String = "#badge:badge_92";
 
         public static const BADGE_92_DESCR:String = "#badge:badge_92_descr";
+
+        public static const BADGE_93:String = "#badge:badge_93";
+
+        public static const BADGE_93_DESCR:String = "#badge:badge_93_descr";
 
         public function BADGE()
         {

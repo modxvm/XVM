@@ -21,6 +21,8 @@ package net.wg.gui.lobby.battleResults.components
     public class TeamMemberItemRenderer extends TeamMemberRendererBase
     {
 
+        private static var _dimmFilter:ColorMatrixFilter = null;
+
         private static const DAMAGE_DEATH_COLOR:int = 6381391;
 
         private static const DAMAGE_DEFAULT_COLOR:int = 13413751;
@@ -97,7 +99,7 @@ package net.wg.gui.lobby.battleResults.components
 
         public var testerIcon:UILoaderAlt = null;
 
-        public var testerBG:MovieClip = null;
+        public var testerBG:UILoaderAlt = null;
 
         protected var xOffset:int = 0;
 
@@ -113,6 +115,8 @@ package net.wg.gui.lobby.battleResults.components
 
         private var _suffixBadgeIcon:String = "";
 
+        private var _suffixBadgeStripIcon:String = "";
+
         public function TeamMemberItemRenderer()
         {
             this._locale = App.utils.locale;
@@ -123,18 +127,26 @@ package net.wg.gui.lobby.battleResults.components
 
         private static function getDimmFilter() : ColorMatrixFilter
         {
-            var _loc1_:ColorMatrixFilter = new ColorMatrixFilter();
-            var _loc2_:Array = [DIMMED_COLOR_VALUE,0,0,0,0];
-            var _loc3_:Array = [0,DIMMED_COLOR_VALUE,0,0,0];
-            var _loc4_:Array = [0,0,DIMMED_COLOR_VALUE,0,0];
-            var _loc5_:Array = [0,0,0,1,0];
-            var _loc6_:Array = [];
-            _loc6_ = _loc6_.concat(_loc2_);
-            _loc6_ = _loc6_.concat(_loc3_);
-            _loc6_ = _loc6_.concat(_loc4_);
-            _loc6_ = _loc6_.concat(_loc5_);
-            _loc1_.matrix = _loc6_;
-            return _loc1_;
+            var _loc1_:Array = null;
+            var _loc2_:Array = null;
+            var _loc3_:Array = null;
+            var _loc4_:Array = null;
+            var _loc5_:Array = null;
+            if(_dimmFilter == null)
+            {
+                _dimmFilter = new ColorMatrixFilter();
+                _loc1_ = [DIMMED_COLOR_VALUE,0,0,0,0];
+                _loc2_ = [0,DIMMED_COLOR_VALUE,0,0,0];
+                _loc3_ = [0,0,DIMMED_COLOR_VALUE,0,0];
+                _loc4_ = [0,0,0,1,0];
+                _loc5_ = [];
+                _loc5_ = _loc5_.concat(_loc1_);
+                _loc5_ = _loc5_.concat(_loc2_);
+                _loc5_ = _loc5_.concat(_loc3_);
+                _loc5_ = _loc5_.concat(_loc4_);
+                _dimmFilter.matrix = _loc5_;
+            }
+            return _dimmFilter;
         }
 
         override protected function configUI() : void
@@ -159,6 +171,7 @@ package net.wg.gui.lobby.battleResults.components
             this.medalIcon = null;
             this.testerIcon.dispose();
             this.testerIcon = null;
+            this.testerBG.dispose();
             this.testerBG = null;
             this.clickArea = null;
             this.selfBg = null;
@@ -175,6 +188,7 @@ package net.wg.gui.lobby.battleResults.components
             this.fakeFocusIndicator = null;
             this.squadIcon.dispose();
             this.squadIcon = null;
+            this.vehicleIcon.filters = [];
             this.vehicleIcon.dispose();
             this.vehicleIcon = null;
             this._locale = null;
@@ -186,6 +200,7 @@ package net.wg.gui.lobby.battleResults.components
         {
             this.playerName.width = this.playerNameWidth;
             this._suffixBadgeIcon = param1.suffixBadgeIcon;
+            this._suffixBadgeStripIcon = param1.suffixBadgeStripIcon;
             this.selfBg.visible = param1.isSelf;
             this.deadBg.visible = false;
             this.medalIcon.visible = false;
@@ -305,6 +320,7 @@ package net.wg.gui.lobby.battleResults.components
             if(_loc1_)
             {
                 this.testerIcon.source = this._suffixBadgeIcon;
+                this.testerBG.source = this._suffixBadgeStripIcon;
                 this.testerIcon.x = this.playerName.x + this.playerName.textWidth + BADGE_GAP >> 0;
                 this.testerBG.x = (this.testerIcon.width >> 1) + this.testerIcon.x - this.testerBG.width >> 0;
             }

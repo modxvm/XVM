@@ -5,8 +5,6 @@ package net.wg.gui.lobby.vehicleCustomization.tooltips.inblocks.data
     public class CustomizationImageBlockVO extends ImageBlockVO
     {
 
-        public var isHistorical:Boolean = false;
-
         public var formfactor:String = "";
 
         public var isDim:Boolean = false;

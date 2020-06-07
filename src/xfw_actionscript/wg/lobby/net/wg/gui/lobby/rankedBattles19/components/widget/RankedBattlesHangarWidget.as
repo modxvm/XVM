@@ -2,10 +2,12 @@ package net.wg.gui.lobby.rankedBattles19.components.widget
 {
     import net.wg.infrastructure.base.meta.impl.RankedBattlesHangarWidgetMeta;
     import net.wg.infrastructure.base.meta.IRankedBattlesHangarWidgetMeta;
+    import net.wg.gui.lobby.hangar.quests.IHeaderFlagsEntryPoint;
     import net.wg.infrastructure.interfaces.entity.ISoundable;
     import flash.geom.Point;
     import flash.display.MovieClip;
     import net.wg.data.constants.generated.RANKEDBATTLES_ALIASES;
+    import net.wg.data.constants.generated.RANKEDBATTLES_CONSTS;
     import flash.display.Sprite;
     import net.wg.gui.lobby.rankedBattles19.components.interfaces.IRankIcon;
     import flash.text.TextField;
@@ -14,6 +16,7 @@ package net.wg.gui.lobby.rankedBattles19.components.widget
     import flash.events.MouseEvent;
     import net.wg.gui.lobby.rankedBattles19.events.RankWidgetEvent;
     import net.wg.gui.lobby.rankedBattles19.events.StepEvent;
+    import flash.events.Event;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.data.constants.Values;
     import org.idmedia.as3commons.util.StringUtils;
@@ -23,10 +26,22 @@ package net.wg.gui.lobby.rankedBattles19.components.widget
     import scaleform.gfx.MouseEventEx;
     import net.wg.data.constants.ComponentState;
 
-    public class RankedBattlesHangarWidget extends RankedBattlesHangarWidgetMeta implements IRankedBattlesHangarWidgetMeta, ISoundable
+    public class RankedBattlesHangarWidget extends RankedBattlesHangarWidgetMeta implements IRankedBattlesHangarWidgetMeta, IHeaderFlagsEntryPoint, ISoundable
     {
 
         public static const RANK_NORMAL_Y:int = 29;
+
+        private static const SIZES:Object = {};
+
+        private static const MARGIN:Object = {};
+
+        private static const RANKS_OFFSETS_MAP:Object = {};
+
+        private static const STEPS_CONTAINER_X_OFFSETS_MAP:Object = {};
+
+        private static const POST_BATTLE_SOUNDS:Object = {};
+
+        private static const HANGAR_SOUNDS:Object = {};
 
         private static const CENTER_RANK_Y:int = 64;
 
@@ -36,9 +51,9 @@ package net.wg.gui.lobby.rankedBattles19.components.widget
 
         private static const SMALL_RIGHT_RANK_OFFSET:int = -16;
 
-        private static const MEDIUM_LEFT_OFFSET:int = 30;
+        private static const MEDIUM_LEFT_OFFSET:int = 27;
 
-        private static const MEDIUM_RIGHT_OFFSET:int = -27;
+        private static const MEDIUM_RIGHT_OFFSET:int = -30;
 
         private static const HUGE_LEFT_RANK_OFFSET:int = 46;
 
@@ -56,14 +71,6 @@ package net.wg.gui.lobby.rankedBattles19.components.widget
 
         private static const SMALL_LADDER_POINT_OFFSET_X:int = -37;
 
-        private static const RANKS_OFFSETS_MAP:Object = {};
-
-        private static const STEPS_CONTAINER_X_OFFSETS_MAP:Object = {};
-
-        private static const POST_BATTLE_SOUNDS:Object = {};
-
-        private static const HANGAR_SOUNDS:Object = {};
-
         private static const HIT_OFFSET:int = 6;
 
         private static const SHOW_RED_LABEL:String = "over-red";
@@ -80,6 +87,8 @@ package net.wg.gui.lobby.rankedBattles19.components.widget
 
         private static const BONUS_BATTLES_Y:int = 152;
 
+        private static const BONUS_BATTLES_Y_SMALL:int = 132;
+
         private static const BONUS_BATTLES_SHIELD_GAP:int = 10;
 
         private static const REPLECTION_LOOP_DELAY:int = 3000;
@@ -87,6 +96,10 @@ package net.wg.gui.lobby.rankedBattles19.components.widget
         private static const HUGE_STEPS_ANIM_TIMER:int = 300;
 
         {
+            SIZES[RANKEDBATTLES_ALIASES.WIDGET_MEDIUM] = RANKEDBATTLES_CONSTS.WIDGET_MEDIUM_WIDTH;
+            SIZES[RANKEDBATTLES_ALIASES.WIDGET_SMALL] = RANKEDBATTLES_CONSTS.WIDGET_SMALL_WIDTH;
+            MARGIN[RANKEDBATTLES_ALIASES.WIDGET_MEDIUM] = 25;
+            MARGIN[RANKEDBATTLES_ALIASES.WIDGET_SMALL] = -5;
             RANKS_OFFSETS_MAP[RANKEDBATTLES_ALIASES.WIDGET_HUGE] = [HUGE_LEFT_RANK_OFFSET,HUGE_RIGHT_RANK_OFFSET,HUGE_LADDER_POINT_OFFSET_X];
             RANKS_OFFSETS_MAP[RANKEDBATTLES_ALIASES.WIDGET_MEDIUM] = [MEDIUM_LEFT_OFFSET,MEDIUM_RIGHT_OFFSET,MEDIUM_LADDER_POINT_OFFSET_X];
             RANKS_OFFSETS_MAP[RANKEDBATTLES_ALIASES.WIDGET_SMALL] = [SMALL_LEFT_RANK_OFFSET,SMALL_RIGHT_RANK_OFFSET,SMALL_LADDER_POINT_OFFSET_X];
@@ -181,7 +194,7 @@ package net.wg.gui.lobby.rankedBattles19.components.widget
 
         private var _hitArea:Sprite = null;
 
-        private var _widgetSize:String = "";
+        private var _widgetSize:String = "medium";
 
         private var _isRightOnLeft:Boolean = false;
 
@@ -226,9 +239,11 @@ package net.wg.gui.lobby.rankedBattles19.components.widget
             this.rankRight.addEventListener(RankWidgetEvent.BLINK_STARTED,this.onRankRightBlinkStartedHandler);
             App.soundMgr.addSoundsHdlrs(this);
             this.division.visible = false;
+            this.useButtonMode();
             this.league.buttonMode = this.league.useHandCursor = true;
             this.bonusBattles.buttonMode = this.bonusBattles.useHandCursor = true;
             this.stepsContainer.addEventListener(StepEvent.STEP_ANIM_IN_PROGRESS,this.onStepsContStepAnimInProgressHandler);
+            App.stage.addEventListener(Event.RESIZE,this.onStageResizeHandler,false,0,true);
         }
 
         override protected function onBeforeDispose() : void
@@ -252,6 +267,7 @@ package net.wg.gui.lobby.rankedBattles19.components.widget
 
         override protected function onDispose() : void
         {
+            App.stage.removeEventListener(Event.RESIZE,this.onStageResizeHandler);
             this.rankLeft.dispose();
             this.rankLeft = null;
             this.rankRight.dispose();
@@ -354,9 +370,11 @@ package net.wg.gui.lobby.rankedBattles19.components.widget
                     this.rankLeft.componentSize = this._widgetSize;
                     this.rankRight.componentSize = this._widgetSize;
                     this.stepsContainer.componentSize = this._widgetSize;
+                    this.league.componentSize = this._widgetSize;
                     this.rankLeft.validateNow();
                     this.rankRight.validateNow();
                     this.stepsContainer.validateNow();
+                    this.league.validateNow();
                     if(!this._animationEnabled)
                     {
                         this.setFinalStateLayout();
@@ -586,21 +604,14 @@ package net.wg.gui.lobby.rankedBattles19.components.widget
             }
         }
 
-        public function useButtonMode(param1:Boolean) : void
+        public function useButtonMode() : void
         {
-            useHandCursor = buttonMode = param1;
-            this.rankLeft.useButtonMode(param1);
-            this.rankRight.useButtonMode(param1);
-            this.stepsContainer.useButtonMode(param1);
-            if(param1)
-            {
-                addEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
-                addEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
-            }
-            else
-            {
-                this.removeHoverListeners();
-            }
+            useHandCursor = buttonMode = true;
+            this.rankLeft.useButtonMode(true);
+            this.rankRight.useButtonMode(true);
+            this.stepsContainer.useButtonMode(true);
+            addEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
+            addEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
         }
 
         private function showReflection() : void
@@ -878,7 +889,7 @@ package net.wg.gui.lobby.rankedBattles19.components.widget
             var _loc4_:* = 0;
             var _loc5_:* = 0;
             var _loc6_:* = 0;
-            this.bonusBattles.y = BONUS_BATTLES_Y;
+            this.bonusBattles.y = this._widgetSize == RANKEDBATTLES_ALIASES.WIDGET_SMALL?BONUS_BATTLES_Y_SMALL:BONUS_BATTLES_Y;
             if(this._model == null || this._model.leagueVO == null)
             {
                 _loc1_ = null;
@@ -925,6 +936,7 @@ package net.wg.gui.lobby.rankedBattles19.components.widget
                 this.hit.height = this.league.height;
                 this.hit.x = -(this.hit.width >> 1);
             }
+            dispatchEvent(new Event(Event.RESIZE));
         }
 
         private function leftRankToCenter(param1:Boolean = false) : void
@@ -971,6 +983,11 @@ package net.wg.gui.lobby.rankedBattles19.components.widget
             this.rankRight.y = this._rightRankY;
         }
 
+        override public function get width() : Number
+        {
+            return this._widgetSize == RANKEDBATTLES_ALIASES.WIDGET_HUGE?_width:SIZES[this._widgetSize];
+        }
+
         public function get leftRankX() : int
         {
             return this._leftRankX;
@@ -994,6 +1011,11 @@ package net.wg.gui.lobby.rankedBattles19.components.widget
         public function set isRightOnLeft(param1:Boolean) : void
         {
             this._isRightOnLeft = param1;
+        }
+
+        public function get marginX() : int
+        {
+            return MARGIN[this._widgetSize];
         }
 
         private function onRankLeftBlinkStartedHandler(param1:RankWidgetEvent) : void
@@ -1040,6 +1062,11 @@ package net.wg.gui.lobby.rankedBattles19.components.widget
         private function onStepsContStepAnimInProgressHandler(param1:StepEvent) : void
         {
             this.playStateSound(param1.state);
+        }
+
+        private function onStageResizeHandler(param1:Event) : void
+        {
+            invalidateSize();
         }
     }
 }

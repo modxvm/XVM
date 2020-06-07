@@ -1,6 +1,7 @@
 package net.wg.gui.components.carousels.data
 {
     import net.wg.data.daapi.base.DAAPIDataClass;
+    import net.wg.infrastructure.interfaces.entity.IDisposable;
 
     public class FiltersStateVO extends DAAPIDataClass
     {
@@ -17,6 +18,8 @@ package net.wg.gui.components.carousels.data
 
         private static const PROGRESSIONS_SELECTED:String = "progressions";
 
+        private static const ROLES_STATES:String = "roles";
+
         private var _nationsSelected:Vector.<Boolean> = null;
 
         private var _vehicleTypesSelected:Vector.<Boolean> = null;
@@ -29,6 +32,8 @@ package net.wg.gui.components.carousels.data
 
         private var _progressionsSelected:Vector.<Boolean> = null;
 
+        private var _rolesStates:Vector.<BaseRendererStateVO> = null;
+
         public function FiltersStateVO(param1:Object)
         {
             super(param1);
@@ -36,6 +41,7 @@ package net.wg.gui.components.carousels.data
 
         override protected function onDataWrite(param1:String, param2:Object) : Boolean
         {
+            var _loc4_:Object = null;
             var _loc3_:* = false;
             if(param1 == NATIONS_SELECTED)
             {
@@ -82,6 +88,15 @@ package net.wg.gui.components.carousels.data
                 }
                 return false;
             }
+            if(param1 == ROLES_STATES)
+            {
+                this._rolesStates = new Vector.<BaseRendererStateVO>();
+                for each(_loc4_ in param2)
+                {
+                    this._rolesStates.push(new BaseRendererStateVO(_loc4_));
+                }
+                return false;
+            }
             if(param1 == PROGRESSIONS_SELECTED)
             {
                 this._progressionsSelected = new Vector.<Boolean>();
@@ -96,6 +111,7 @@ package net.wg.gui.components.carousels.data
 
         override protected function onDispose() : void
         {
+            var _loc1_:IDisposable = null;
             this._nationsSelected.splice(0,this._nationsSelected.length);
             this._nationsSelected = null;
             this._vehicleTypesSelected.splice(0,this._vehicleTypesSelected.length);
@@ -106,6 +122,12 @@ package net.wg.gui.components.carousels.data
             this._levelsSelected = null;
             this._hiddenSelected.splice(0,this._hiddenSelected.length);
             this._hiddenSelected = null;
+            for each(_loc1_ in this._rolesStates)
+            {
+                _loc1_.dispose();
+            }
+            this._rolesStates.splice(0,this._rolesStates.length);
+            this._rolesStates = null;
             super.onDispose();
         }
 
@@ -137,6 +159,11 @@ package net.wg.gui.components.carousels.data
         public function get progressionsSelected() : Vector.<Boolean>
         {
             return this._progressionsSelected;
+        }
+
+        public function get rolesStates() : Vector.<BaseRendererStateVO>
+        {
+            return this._rolesStates;
         }
     }
 }

@@ -1,7 +1,7 @@
 package net.wg.infrastructure.base.meta.impl
 {
     import net.wg.infrastructure.base.SmartPopOverView;
-    import net.wg.gui.lobby.shop20.data.RentalTermSelectionPopoverVO;
+    import net.wg.gui.lobby.shop.data.RentalTermSelectionPopoverVO;
     import net.wg.data.constants.Errors;
     import net.wg.infrastructure.exceptions.AbstractException;
 

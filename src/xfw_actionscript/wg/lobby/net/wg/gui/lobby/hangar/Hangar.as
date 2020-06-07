@@ -11,7 +11,6 @@ package net.wg.gui.lobby.hangar
     import flash.display.Sprite;
     import net.wg.gui.lobby.post.Teaser;
     import net.wg.gui.lobby.hangar.tcarousel.TankCarousel;
-    import net.wg.gui.lobby.rankedBattles19.components.widget.RankedBattlesHangarWidget;
     import net.wg.gui.lobby.hangar.alertMessage.AlertMessageBlock;
     import net.wg.gui.lobby.epicBattles.components.EpicBattlesWidget;
     import net.wg.gui.components.miniclient.HangarMiniClientComponent;
@@ -25,9 +24,7 @@ package net.wg.gui.lobby.hangar
     import net.wg.gui.lobby.hangar.seniorityAwards.SeniorityAwardsEntryPointHangar;
     import net.wg.gui.lobby.hangar.eventEntryPoint.HangarEventEntriesContainer;
     import net.wg.gui.lobby.hangar.tenYearsCountdown.TenYearsCountdownEntryPointInject;
-    import net.wg.gui.lobby.eventHangar.components.EventBanner;
     import flash.events.Event;
-    import net.wg.data.constants.generated.DAILY_QUESTS_WIDGET_CONSTANTS;
     import net.wg.data.constants.generated.HANGAR_ALIASES;
     import flash.geom.Rectangle;
     import net.wg.data.Aliases;
@@ -52,6 +49,7 @@ package net.wg.gui.lobby.hangar
     import flash.system.LoaderContext;
     import flash.system.ApplicationDomain;
     import flash.events.IOErrorEvent;
+    import net.wg.data.constants.generated.DAILY_QUESTS_WIDGET_CONSTANTS;
     import net.wg.utils.StageSizeBoundaries;
     import net.wg.gui.lobby.hangar.seniorityAwards.SeniorityAwardsEntryPoint;
     import flash.display.MovieClip;
@@ -61,9 +59,9 @@ package net.wg.gui.lobby.hangar
     public class Hangar extends HangarMeta implements IHangar, ITutorialCustomComponent
     {
 
-        private static const INVALIDATE_ENABLED_CREW:String = "InvalidateEnabledCrew";
+        private static const INVALIDATE_CAROUSEL_SIZE:String = "InvalidateCarouselSize";
 
-        protected static const INVALIDATE_CAROUSEL_SIZE:String = "InvalidateCarouselSize";
+        private static const INVALIDATE_ENABLED_CREW:String = "InvalidateEnabledCrew";
 
         protected static const INVALIDATE_AMMUNITION_PANEL_SIZE:String = "InvalidateAmmunitionPanelSize";
 
@@ -79,9 +77,9 @@ package net.wg.gui.lobby.hangar
 
         private static const MESSENGER_BAR_PADDING:int = 45;
 
-        private static const TOP_MARGIN:int = 34;
+        private static const TOP_MARGIN:Number = 34;
 
-        private static const MINI_CLIENT_GAP:int = 1;
+        private static const MINI_CLIENT_GAP:Number = 1;
 
         private static const ANIM_SPEED_TIME:int = 600;
 
@@ -91,27 +89,19 @@ package net.wg.gui.lobby.hangar
 
         private static const TEASER_HIDE_SMALL_X_OFFSET:int = -355;
 
-        private static const DEFAULT_WIDGET_LAYOUT:int = 99;
+        private static const SM_CAROUSEL_PADDING:Number = 30;
 
-        private static const SM_CAROUSEL_PADDING:int = 30;
+        private static const SM_AMMUNITION_PANEL_PADDING:Number = 86;
 
-        private static const SM_AMMUNITION_PANEL_PADDING:int = 86;
+        private static const SM_THRESHOLD_X:Number = 1360;
 
-        private static const SM_THRESHOLD_X:int = 1360;
-
-        private static const SM_PADDING_X:int = 4;
+        private static const SM_PADDING_X:Number = 4;
 
         private static const ALERT_MESSAGE_GAP:int = 40;
 
         private static const RIGHT_MARGIN:int = 5;
 
         private static const SENIORITY_AWARDS_COMPONENTS_SWF:String = "seniorityAwardsComponents.swf";
-
-        private static const DQ_WIDGET_NORMAL_HEIGHT:int = 184;
-
-        private static const DQ_WIDGET_MINI_HEIGHT:int = 70;
-
-        private static const DQ_WIDGET_MICRO_HEIGHT:int = 58;
 
         private static const DQ_WIDGET_NORMAL_LAYOUT_CAROUSEL_THRESHOLD:int = 675;
 
@@ -121,7 +111,9 @@ package net.wg.gui.lobby.hangar
 
         private static const DQ_WIDGET_VERTICAL_OFFSET:int = 15;
 
-        private static const DQ_WIDGET_HORIZONTAL_MARGIN:int = 3;
+        private static const DQ_WIDGET_VERTICAL_OFFSET_MICRO:int = 13;
+
+        private static const DQ_WIDGET_HORIZONTAL_MARGIN:int = 1;
 
         private static const SMALL_SCREEN_WIDTH_THRESHOLD:int = 1280;
 
@@ -146,8 +138,6 @@ package net.wg.gui.lobby.hangar
         private static const EVENT_ENTRY_POINT_MARGIN_BOTTOM_BIG:int = 30;
 
         private static const EVENT_ENTRY_POINT_GAP_BIG:int = 20;
-
-        private static const EVENT_ENTRY_POINT_MESSAGES_OFFSET_Y:int = 80;
 
         public var vehResearchPanel:ResearchPanel;
 
@@ -187,8 +177,6 @@ package net.wg.gui.lobby.hangar
         private var _isControlsVisible:Boolean = false;
 
         private var _carouselAlias:String;
-
-        private var _rankedWdgt:RankedBattlesHangarWidget;
 
         private var _alertMessageBlock:AlertMessageBlock;
 
@@ -232,8 +220,6 @@ package net.wg.gui.lobby.hangar
 
         private var _tenYearsCountdownEntryPointInject:TenYearsCountdownEntryPointInject = null;
 
-        private var _se20Banner:EventBanner;
-
         public function Hangar()
         {
             this._gameInputMgr = App.gameInputMgr;
@@ -245,7 +231,6 @@ package net.wg.gui.lobby.hangar
             this.switchModePanel.visible = false;
             this._headerTypeDict = new Dictionary();
             this._headerTypeDict[HANGAR_ALIASES.HEADER] = [this._header,HangarHeader,Linkages.HANGAR_HEADER];
-            this._headerTypeDict[HANGAR_ALIASES.RANKED_WIDGET] = [this._rankedWdgt,RankedBattlesHangarWidget,Linkages.RANKED_BATTLES_WIDGET_UI];
             this._headerTypeDict[HANGAR_ALIASES.EPIC_WIDGET] = [this._epicBattlesWdgt,EpicBattlesWidget,Linkages.EPIC_WIDGET];
             this.setupWidgetSizes();
             this._eventsEntryContainer = new HangarEventEntriesContainer(this);
@@ -255,20 +240,11 @@ package net.wg.gui.lobby.hangar
             this._eventsEntryContainer.setMarginBig(EVENT_ENTRY_POINT_MARGIN_LEFT_BIG,EVENT_ENTRY_POINT_MARGIN_TOP_BIG,EVENT_ENTRY_POINT_MARGIN_RIGHT_BIG,EVENT_ENTRY_POINT_MARGIN_BOTTOM_BIG);
             this._eventsEntryContainer.setGap(EVENT_ENTRY_POINT_GAP_SMALL,EVENT_ENTRY_POINT_GAP_BIG);
             this._tenYearsCountdownEntryPointInject = new TenYearsCountdownEntryPointInject();
-            this._se20Banner = this._utils.classFactory.getComponent(Linkages.SE20_BANNER,EventBanner);
         }
 
         private function onEventsEntryContainerResizeHandler(param1:Event) : void
         {
             invalidate(ENTRY_CONT_POSITION_INVALID);
-        }
-
-        private function setupWidgetSizes() : void
-        {
-            this._widgetSizes = new Dictionary();
-            this._widgetSizes[DAILY_QUESTS_WIDGET_CONSTANTS.WIDGET_LAYOUT_NORMAL] = [340,186];
-            this._widgetSizes[DAILY_QUESTS_WIDGET_CONSTANTS.WIDGET_LAYOUT_MINI] = [185,65];
-            this._widgetSizes[DAILY_QUESTS_WIDGET_CONSTANTS.WIDGET_LAYOUT_MICRO] = [150,55];
         }
 
         override public function unregisterComponent(param1:String) : void
@@ -303,11 +279,6 @@ package net.wg.gui.lobby.hangar
             if(this.header != null)
             {
                 this.header.x = param1 >> 1;
-            }
-            if(this._rankedWdgt != null)
-            {
-                this._rankedWdgt.invalidateSize();
-                this._rankedWdgt.x = _width >> 1;
             }
             if(this._alertMessageBlock)
             {
@@ -350,7 +321,6 @@ package net.wg.gui.lobby.hangar
             }
             this.updateControlsVisibility();
             this.updateElementsPosition();
-            this._eventsEntryContainer.addEntry(this._se20Banner,HANGAR_ALIASES.SE20_BANNER);
             this._eventsEntryContainer.addEntry(this._tenYearsCountdownEntryPointInject,HANGAR_ALIASES.TEN_YEARS_COUNTDOWN_ENTRY_POINT_INJECT);
         }
 
@@ -371,7 +341,6 @@ package net.wg.gui.lobby.hangar
             this.switchModePanel.removeEventListener(ComponentEvent.HIDE,this.onSwitchModePanelHideHandler);
             this.carousel.removeEventListener(Event.RESIZE,this.onCarouselResizeHandler);
             this.removeSeniorityAwardsLoader();
-            App.systemMessages.dispatchEvent(new NotificationLayoutEvent(NotificationLayoutEvent.RESET_LAYOUT));
             super.onBeforeDispose();
         }
 
@@ -402,7 +371,6 @@ package net.wg.gui.lobby.hangar
             this._carousel = null;
             this.switchModePanel = null;
             this._header = null;
-            this._rankedWdgt = null;
             this._alertMessageBlock = null;
             this._epicBattlesWdgt = null;
             this.dqWidget = null;
@@ -421,11 +389,10 @@ package net.wg.gui.lobby.hangar
                 this._seniorityAwardsComponent = null;
             }
             this._tenYearsCountdownEntryPointInject = null;
-            this._se20Banner = null;
             this._eventsEntryContainer.removeEventListener(Event.RESIZE,this.onEventsEntryContainerResizeHandler);
             this._eventsEntryContainer.dispose();
             this._eventsEntryContainer = null;
-            this._currentWidgetLayout = DEFAULT_WIDGET_LAYOUT;
+            this._currentWidgetLayout = 99;
             App.utils.data.cleanupDynamicObject(this._headerTypeDict);
             this._headerTypeDict = null;
             super.onDispose();
@@ -502,10 +469,6 @@ package net.wg.gui.lobby.hangar
                 this.updateParamsPosition();
             }
             this.checkToIfLayoutNeedsUpdate();
-            if(isInvalid(INVALIDATE_CAROUSEL_SIZE) || _loc1_)
-            {
-                this.dispatchLayoutChangeEvent();
-            }
         }
 
         override protected function onSetModalFocus(param1:InteractiveObject) : void
@@ -527,11 +490,6 @@ package net.wg.gui.lobby.hangar
         override protected function show3DSceneTooltip(param1:String, param2:Array) : void
         {
             this._toolTipMgr.showSpecial.apply(this._toolTipMgr,[param1,null].concat(param2));
-        }
-
-        override protected function show3DSceneWulfTooltip(param1:String, param2:Array) : void
-        {
-            this._toolTipMgr.showWulfTooltip.apply(this._toolTipMgr,[param1].concat(param2));
         }
 
         override protected function showTeaser(param1:TeaserVO) : void
@@ -557,16 +515,6 @@ package net.wg.gui.lobby.hangar
             this._helpLayout.hide();
         }
 
-        public function as_hide3DSceneTooltip() : void
-        {
-            this.hideTooltip();
-        }
-
-        public function as_hideTeaserTimer() : void
-        {
-            this.teaser.hideTimer();
-        }
-
         public function as_createDQWidget() : void
         {
             if(!this.dqWidget)
@@ -587,6 +535,16 @@ package net.wg.gui.lobby.hangar
             this.dqWidget = null;
         }
 
+        public function as_hide3DSceneTooltip() : void
+        {
+            this.hideTooltip();
+        }
+
+        public function as_hideTeaserTimer() : void
+        {
+            this.teaser.hideTimer();
+        }
+
         public function as_setAlertMessageBlockVisible(param1:Boolean) : void
         {
             var _loc2_:String = HANGAR_ALIASES.ALERT_MESSAGE_BLOCK;
@@ -596,7 +554,7 @@ package net.wg.gui.lobby.hangar
             {
                 if(this._alertMessageBlock == null)
                 {
-                    this._alertMessageBlock = this._utils.classFactory.getComponent(Linkages.ALERT_MESSAGE_BLOCK,AlertMessageBlock);
+                    this._alertMessageBlock = App.instance.utils.classFactory.getComponent(Linkages.ALERT_MESSAGE_BLOCK,AlertMessageBlock);
                     this._alertMessageBlock.name = _loc2_;
                 }
                 if(!_loc4_)
@@ -632,7 +590,7 @@ package net.wg.gui.lobby.hangar
                 unregisterFlashComponentS(this._carouselAlias);
             }
             this._carouselAlias = param2;
-            this._carousel = this._utils.classFactory.getComponent(param1,TankCarousel);
+            this._carousel = App.instance.utils.classFactory.getComponent(param1,TankCarousel);
             this.carousel.visible = false;
             this.carousel.addEventListener(Event.RESIZE,this.onCarouselResizeHandler);
             this.carousel.updateStage(_originalWidth,_originalHeight);
@@ -670,7 +628,7 @@ package net.wg.gui.lobby.hangar
             var _loc2_:DisplayObject = this.getHeaderElement(this._activeHeaderType);
             if(_loc1_ == null)
             {
-                _loc1_ = this._utils.classFactory.getComponent(this._headerTypeDict[HANGAR_ALIASES.HEADER][2],this._headerTypeDict[HANGAR_ALIASES.HEADER][1]);
+                _loc1_ = App.instance.utils.classFactory.getComponent(this._headerTypeDict[HANGAR_ALIASES.HEADER][2],this._headerTypeDict[HANGAR_ALIASES.HEADER][1]);
                 _loc1_.name = HANGAR_ALIASES.HEADER;
                 addChildAt(_loc1_,getChildIndex(this.params as DisplayObject) - 1);
                 registerFlashComponentS(_loc1_,HANGAR_ALIASES.HEADER);
@@ -684,7 +642,6 @@ package net.wg.gui.lobby.hangar
             }
             this._activeHeaderType = HANGAR_ALIASES.HEADER;
             this._header = HangarHeader(_loc1_);
-            this._rankedWdgt = null;
             this._epicBattlesWdgt = null;
             this.updateElementsPosition();
         }
@@ -696,7 +653,7 @@ package net.wg.gui.lobby.hangar
             var _loc3_:DisplayObject = this.getHeaderElement(this._activeHeaderType);
             if(_loc2_ == null)
             {
-                _loc2_ = this._utils.classFactory.getComponent(this._headerTypeDict[param1][2],this._headerTypeDict[param1][1]);
+                _loc2_ = App.instance.utils.classFactory.getComponent(this._headerTypeDict[param1][2],this._headerTypeDict[param1][1]);
                 _loc2_.name = param1;
                 addChildAt(_loc2_,getChildIndex(this.crewOperationBtn as DisplayObject) - 1);
                 registerFlashComponentS(_loc2_,param1);
@@ -713,21 +670,12 @@ package net.wg.gui.lobby.hangar
                 case HANGAR_ALIASES.HEADER:
                     this._activeHeaderType = HANGAR_ALIASES.HEADER;
                     this._header = HangarHeader(_loc2_);
-                    this._rankedWdgt = null;
                     this._epicBattlesWdgt = null;
                     this.ammunitionPanel.setBattleAbilitiesVisibility(false);
                     this.updateCarouselPosition();
                     break;
-                case HANGAR_ALIASES.RANKED_WIDGET:
-                    this._activeHeaderType = HANGAR_ALIASES.RANKED_WIDGET;
-                    this._rankedWdgt = RankedBattlesHangarWidget(_loc2_);
-                    this._rankedWdgt.useButtonMode(true);
-                    this._header = null;
-                    this._epicBattlesWdgt = null;
-                    break;
                 case HANGAR_ALIASES.EPIC_WIDGET:
                     this._header = null;
-                    this._rankedWdgt = null;
                     this._activeHeaderType = HANGAR_ALIASES.EPIC_WIDGET;
                     this._epicBattlesWdgt = EpicBattlesWidget(_loc2_);
                     this.ammunitionPanel.setBattleAbilitiesVisibility(true);
@@ -815,18 +763,16 @@ package net.wg.gui.lobby.hangar
         {
             this._eventsEntryContainer.updateEntry(param1,param2);
             var _loc3_:* = 0;
-            var _loc4_:int = this._eventsEntryContainer.numChildren;
-            var _loc5_:* = 0;
-            while(_loc5_ < _loc4_)
+            var _loc4_:* = 0;
+            while(_loc4_ < this._eventsEntryContainer.numChildren)
             {
-                if(this._eventsEntryContainer.getChildAt(_loc5_).visible)
+                if(this._eventsEntryContainer.getChildAt(_loc4_).visible)
                 {
                     _loc3_++;
                 }
-                _loc5_++;
+                _loc4_++;
             }
             this._tenYearsCountdownEntryPointInject.isWide = _loc3_ <= 1;
-            invalidate(ENTRY_CONT_POSITION_INVALID);
         }
 
         public function generatedUnstoppableEvents() : Boolean
@@ -872,6 +818,26 @@ package net.wg.gui.lobby.hangar
             invalidate(PARAMS_POSITION_INVALID);
         }
 
+        protected function updateControlsVisibility() : void
+        {
+            this.params.visible = this.isControlsVisible;
+            this.crew.visible = this.isControlsVisible;
+            this.crewOperationBtn.visible = this.isControlsVisible;
+            this.ammunitionPanel.visible = this.isControlsVisible;
+            this.bottomBg.visible = this.isControlsVisible;
+            this.vehResearchPanel.visible = this.isControlsVisible;
+            this.vehResearchBG.visible = this.isControlsVisible;
+            this.crewBG.visible = this.isControlsVisible;
+        }
+
+        private function setupWidgetSizes() : void
+        {
+            this._widgetSizes = new Dictionary();
+            this._widgetSizes[DAILY_QUESTS_WIDGET_CONSTANTS.WIDGET_LAYOUT_NORMAL] = [340,186];
+            this._widgetSizes[DAILY_QUESTS_WIDGET_CONSTANTS.WIDGET_LAYOUT_MINI] = [185,65];
+            this._widgetSizes[DAILY_QUESTS_WIDGET_CONSTANTS.WIDGET_LAYOUT_MICRO] = [150,55];
+        }
+
         private function updateEntriesPosition() : void
         {
             if(this.carousel && this._eventsEntryContainer.isActive)
@@ -884,20 +850,6 @@ package net.wg.gui.lobby.hangar
                     this._eventsEntryContainer.y = this._eventsEntryContainer.y - (AmmunitionPanel.SLOTS_HEIGHT + AmmunitionPanel.SLOTS_BOTTOM_OFFSET);
                 }
             }
-        }
-
-        private function dispatchLayoutChangeEvent() : void
-        {
-            var _loc1_:Number = SM_CAROUSEL_PADDING;
-            if(this._eventsEntryContainer.isActive)
-            {
-                _loc1_ = _loc1_ + (this._eventsEntryContainer.y - EVENT_ENTRY_POINT_MESSAGES_OFFSET_Y);
-            }
-            else
-            {
-                _loc1_ = _loc1_ + this.ammunitionPanel.y;
-            }
-            App.systemMessages.dispatchEvent(new NotificationLayoutEvent(NotificationLayoutEvent.UPDATE_LAYOUT,new Point(SM_PADDING_X,height - _loc1_)));
         }
 
         private function checkToIfLayoutNeedsUpdate() : void
@@ -927,18 +879,12 @@ package net.wg.gui.lobby.hangar
 
         private function repositionWidget() : void
         {
-            switch(this._currentWidgetLayout)
+            var _loc1_:int = DQ_WIDGET_VERTICAL_OFFSET;
+            if(this._currentWidgetLayout == DAILY_QUESTS_WIDGET_CONSTANTS.WIDGET_LAYOUT_MICRO)
             {
-                case DAILY_QUESTS_WIDGET_CONSTANTS.WIDGET_LAYOUT_NORMAL:
-                    this.dqWidget.y = this.ammunitionPanel.y + this.ammunitionPanel.gun.y - DQ_WIDGET_NORMAL_HEIGHT + DQ_WIDGET_VERTICAL_OFFSET;
-                    break;
-                case DAILY_QUESTS_WIDGET_CONSTANTS.WIDGET_LAYOUT_MINI:
-                    this.dqWidget.y = this.ammunitionPanel.y + this.ammunitionPanel.gun.y - DQ_WIDGET_MINI_HEIGHT + DQ_WIDGET_VERTICAL_OFFSET;
-                    break;
-                case DAILY_QUESTS_WIDGET_CONSTANTS.WIDGET_LAYOUT_MICRO:
-                    this.dqWidget.y = this.ammunitionPanel.y + this.ammunitionPanel.gun.y - DQ_WIDGET_MICRO_HEIGHT;
-                    break;
+                _loc1_ = DQ_WIDGET_VERTICAL_OFFSET_MICRO;
             }
+            this.dqWidget.y = this.ammunitionPanel.y + this.ammunitionPanel.gun.y - this.dqWidget.height + _loc1_;
         }
 
         private function determineLayout() : int
@@ -952,18 +898,6 @@ package net.wg.gui.lobby.hangar
                 return DAILY_QUESTS_WIDGET_CONSTANTS.WIDGET_LAYOUT_MINI;
             }
             return DAILY_QUESTS_WIDGET_CONSTANTS.WIDGET_LAYOUT_MICRO;
-        }
-
-        protected function updateControlsVisibility() : void
-        {
-            this.params.visible = this.isControlsVisible;
-            this.crew.visible = this.isControlsVisible;
-            this.crewOperationBtn.visible = this.isControlsVisible;
-            this.ammunitionPanel.visible = this.isControlsVisible;
-            this.bottomBg.visible = this.isControlsVisible;
-            this.vehResearchPanel.visible = this.isControlsVisible;
-            this.vehResearchBG.visible = this.isControlsVisible;
-            this.crewBG.visible = this.isControlsVisible;
         }
 
         private function removeSeniorityAwardsLoader() : void
@@ -1019,8 +953,6 @@ package net.wg.gui.lobby.hangar
             {
                 case HANGAR_ALIASES.HEADER:
                     return this._header;
-                case HANGAR_ALIASES.RANKED_WIDGET:
-                    return this._rankedWdgt;
                 case HANGAR_ALIASES.EPIC_WIDGET:
                     return this._epicBattlesWdgt;
                 default:
@@ -1067,6 +999,12 @@ package net.wg.gui.lobby.hangar
                 this._miniClient.y = _loc1_;
                 _loc1_ = _loc1_ + (this._miniClient.height + MINI_CLIENT_GAP);
             }
+            if(this._alertMessageBlock)
+            {
+                this._alertMessageBlock.x = _width - this._alertMessageBlock.width >> 1;
+                this._alertMessageBlock.y = _loc1_;
+                _loc1_ = _loc1_ + ALERT_MESSAGE_GAP;
+            }
             if(this.header != null)
             {
                 this.header.x = _width >> 1;
@@ -1075,17 +1013,6 @@ package net.wg.gui.lobby.hangar
             if(this.switchModePanel.visible)
             {
                 this.switchModePanel.y = _loc1_;
-            }
-            if(this._alertMessageBlock)
-            {
-                this._alertMessageBlock.x = _width - this._alertMessageBlock.width >> 1;
-                this._alertMessageBlock.y = _loc1_;
-                _loc1_ = _loc1_ + ALERT_MESSAGE_GAP;
-            }
-            if(this._rankedWdgt != null)
-            {
-                this._rankedWdgt.x = _width >> 1;
-                this._rankedWdgt.y = _loc1_;
             }
             if(this._epicBattlesWdgt != null)
             {
@@ -1160,7 +1087,7 @@ package net.wg.gui.lobby.hangar
 
         private function onSeniorityAwardsLoadCompleteHandler(param1:Event) : void
         {
-            this._seniorityAwardsComponent = this._utils.classFactory.getComponent(Linkages.SENIORITY_AWARDS_HANGAR_ENTRY_POINT,SeniorityAwardsEntryPoint);
+            this._seniorityAwardsComponent = App.utils.classFactory.getComponent(Linkages.SENIORITY_AWARDS_HANGAR_ENTRY_POINT,SeniorityAwardsEntryPoint);
             addChild(this._seniorityAwardsComponent);
             this._seniorityAwardsComponent.visible = true;
             registerFlashComponentS(this._seniorityAwardsComponent,HANGAR_ALIASES.SENIORITY_AWARDS_ENTRY_POINT);
@@ -1236,7 +1163,7 @@ package net.wg.gui.lobby.hangar
 
         private function onVehResearchPanelResizeHandler(param1:Event) : void
         {
-            invalidate(ENTRY_CONT_POSITION_INVALID);
+            this.updateParamsPosition();
         }
     }
 }

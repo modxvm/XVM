@@ -176,11 +176,6 @@ package net.wg.gui.battle.views.vehicleMarkers
             this._statusEffectMarkers[param1].updateEffectTimer(param2,this._activeEffectID == param1,param3);
         }
 
-        public function clearEffectTimer(param1:int) : void
-        {
-            this._statusEffectMarkers[param1].clearTimer();
-        }
-
         override public function get height() : Number
         {
             return BASE_HEIGHT;

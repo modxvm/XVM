@@ -33,8 +33,6 @@ package net.wg.gui.data
 
         public var bg:String = "";
 
-        public var showOpenShopBtn:Boolean = false;
-
         public function CrystalsPromoWindowVO(param1:Object)
         {
             super(param1);

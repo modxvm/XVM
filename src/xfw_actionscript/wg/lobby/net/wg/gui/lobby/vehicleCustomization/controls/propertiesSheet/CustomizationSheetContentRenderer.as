@@ -65,6 +65,8 @@ package net.wg.gui.lobby.vehicleCustomization.controls.propertiesSheet
             this.hoverBackground.mouseEnabled = this.hoverBackground.mouseChildren = false;
             this.background.mouseEnabled = this.background.mouseChildren = false;
             this.notifyMc.mouseEnabled = this.notifyMc.mouseChildren = false;
+            this.hitMc.mouseEnabled = this.hitMc.mouseChildren = false;
+            this.hitMc.visible = false;
             hitArea = this.hitMc;
             buttonMode = true;
             useHandCursor = true;

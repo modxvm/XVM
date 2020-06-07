@@ -2,6 +2,7 @@ package net.wg.gui.battle.random.views.stats.components.playersPanel.list
 {
     import net.wg.gui.battle.components.stats.playersPanel.list.BasePlayersPanelList;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.interfaces.IPlayersPanelListItemHolder;
+    import flash.events.Event;
     import net.wg.gui.battle.components.stats.playersPanel.interfaces.IPlayersPanelListItem;
     import net.wg.data.constants.generated.PLAYERS_PANEL_STATE;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.events.PlayersPanelItemEvent;
@@ -47,6 +48,7 @@ package net.wg.gui.battle.random.views.stats.components.playersPanel.list
                 this._isInviteReceived = checkInviteReceived();
             }
             this.updateInviteIndicator();
+            dispatchEvent(new Event(Event.CHANGE,true));
         }
 
         override public function setIsInteractive(param1:Boolean) : void
@@ -115,6 +117,11 @@ package net.wg.gui.battle.random.views.stats.components.playersPanel.list
             var _loc3_:PlayersPanelDynamicSquad = IRandomPlayersPanelListItem(param1.playersListItem).getDynamicSquad();
             _loc3_.onItemOut();
             dispatchEvent(new PlayersPanelListEvent(PlayersPanelListEvent.ITEM_CONTEXT_MENU_OPEN,_loc2_.vehicleID));
+        }
+
+        override public function get isInviteReceived() : Boolean
+        {
+            return this._isInviteReceived;
         }
     }
 }

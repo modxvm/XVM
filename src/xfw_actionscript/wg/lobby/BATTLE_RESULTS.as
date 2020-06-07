@@ -721,6 +721,12 @@ package
 
         public static const PROGRESSIVEREWARD_DESCR:String = "#battle_results:progressiveReward/descr";
 
+        public static const CUSTOMIZATIONPROGRESS_DESCR:String = "#battle_results:customizationProgress/descr";
+
+        public static const CUSTOMIZATIONPROGRESS_AWARD_RECEIVED:String = "#battle_results:customizationProgress/award/received";
+
+        public static const CUSTOMIZATIONPROGRESS_AWARD_NEWLEVEL:String = "#battle_results:customizationProgress/award/newLevel";
+
         public function BATTLE_RESULTS()
         {
             super();

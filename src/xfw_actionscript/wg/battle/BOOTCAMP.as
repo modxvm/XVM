@@ -419,6 +419,8 @@ package
 
         public static const BATTLE_RESULT_DESCRIPTION_ASSISTED:String = "#bootcamp:battle/result/description/assisted";
 
+        public static const BATTLE_RESULT_VIDEOBUTTON:String = "#bootcamp:battle/result/videoButton";
+
         public static const RESULT_AWARD_CADET_LABEL:String = "#bootcamp:result/award/cadet/label";
 
         public static const RESULT_AWARD_CADET_TEXT:String = "#bootcamp:result/award/cadet/text";

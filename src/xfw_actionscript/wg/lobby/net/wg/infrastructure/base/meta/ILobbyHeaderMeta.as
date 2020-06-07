@@ -15,7 +15,7 @@ package net.wg.infrastructure.base.meta
 
         function showExchangeXPWindowS() : void;
 
-        function showPremiumDialogS() : void;
+        function showPremiumViewS() : void;
 
         function onPremShopClickS() : void;
 

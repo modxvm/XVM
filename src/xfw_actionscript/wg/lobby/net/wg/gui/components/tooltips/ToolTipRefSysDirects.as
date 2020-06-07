@@ -160,7 +160,6 @@ package net.wg.gui.components.tooltips
 
         override protected function updatePositions() : void
         {
-            var _loc3_:Separator = null;
             var _loc1_:int = !this._model.infoDirection.length?DIR_OFFSET:0;
             this._infoMapNameTF.y = this._infoMapNameTF.y - _loc1_;
             this._minimap.y = this._minimap.y + (this._infoMapNameTF.textHeight - _loc1_);
@@ -173,7 +172,7 @@ package net.wg.gui.components.tooltips
             this.offsetDescription2(_loc2_);
             this.offsetDescription3(_loc2_);
             this._infoTotalDescriptionTF.y = this._infoTotalDescriptionTF.y - _loc2_;
-            _loc3_ = Utils.instance.createSeparate(content);
+            var _loc3_:Separator = Utils.instance.createSeparate(content);
             _loc3_.x = 0;
             _loc3_.y = SEPARATE1_POS_Y - _loc1_;
             _loc3_.width = BG_WIDTH;

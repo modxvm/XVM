@@ -20,6 +20,8 @@ package net.wg.gui.components.carousels.data
 
         private static const PROGRESSIONS:String = "progressions";
 
+        private static const ROLES:String = "roles";
+
         public var titleLabel:String = "";
 
         public var nationsLabel:String = "";
@@ -33,6 +35,8 @@ package net.wg.gui.components.carousels.data
         public var hiddenLabel:String = "";
 
         public var progressionsLabel:String = "";
+
+        public var rolesLabel:String = "";
 
         public var toggleSwitchCarouselIcon:String = "";
 
@@ -54,6 +58,10 @@ package net.wg.gui.components.carousels.data
 
         public var progressionsSectionVisible:Boolean = false;
 
+        public var rolesSectionVisible:Boolean = false;
+
+        public var rolesSectionCollapsed:Boolean = false;
+
         public var changeableArrowDirection:Boolean = false;
 
         public var nationsSectionId:int = -1;
@@ -67,6 +75,8 @@ package net.wg.gui.components.carousels.data
         public var hiddenSectionId:int = -1;
 
         public var progressionsSectionId:int = -1;
+
+        public var rolesSectionId:int = -1;
 
         public var toggleSwitchCarouselTooltip:String = "";
 
@@ -83,6 +93,8 @@ package net.wg.gui.components.carousels.data
         private var _hidden:DataProvider = null;
 
         private var _progressions:DataProvider = null;
+
+        private var _roles:DataProvider = null;
 
         public function FilterCarouseInitVO(param1:Object)
         {
@@ -140,6 +152,15 @@ package net.wg.gui.components.carousels.data
                 }
                 return false;
             }
+            if(param1 == ROLES)
+            {
+                this._roles = new DataProvider();
+                for each(_loc3_ in param2)
+                {
+                    this._roles.push(new BaseRendererVO(_loc3_));
+                }
+                return false;
+            }
             if(param1 == PROGRESSIONS)
             {
                 this._progressions = new DataProvider();
@@ -179,6 +200,10 @@ package net.wg.gui.components.carousels.data
             {
                 _loc1_.dispose();
             }
+            for each(_loc1_ in this._roles)
+            {
+                _loc1_.dispose();
+            }
             this._nations.cleanUp();
             this._nations = null;
             this._vehicleTypes.cleanUp();
@@ -191,6 +216,8 @@ package net.wg.gui.components.carousels.data
             this._hidden = null;
             this._progressions.cleanUp();
             this._progressions = null;
+            this._roles.cleanUp();
+            this._roles = null;
             super.onDispose();
         }
 
@@ -222,6 +249,11 @@ package net.wg.gui.components.carousels.data
         public function get progressions() : DataProvider
         {
             return this._progressions;
+        }
+
+        public function get roles() : DataProvider
+        {
+            return this._roles;
         }
     }
 }

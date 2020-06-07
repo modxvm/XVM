@@ -4,7 +4,6 @@ package net.wg.gui.battle.views.stats.fullStats
     import net.wg.gui.battle.components.BattleAtlasSprite;
     import flash.text.TextField;
     import net.wg.gui.components.controls.BadgeComponent;
-    import flash.display.MovieClip;
     import net.wg.infrastructure.interfaces.IUserProps;
     import net.wg.gui.components.controls.VO.BadgeVisualVO;
     import net.wg.infrastructure.interfaces.IColorScheme;
@@ -14,6 +13,7 @@ package net.wg.gui.battle.views.stats.fullStats
     import net.wg.data.constants.generated.BATTLEATLAS;
     import net.wg.data.constants.Values;
     import net.wg.data.constants.InvalidationType;
+    import flash.display.MovieClip;
     import flash.text.TextFieldAutoSize;
     import scaleform.gfx.TextFieldEx;
 
@@ -56,7 +56,7 @@ package net.wg.gui.battle.views.stats.fullStats
 
         private var _testerIcon:BattleAtlasSprite;
 
-        private var _backTester:MovieClip;
+        private var _backTester:BattleAtlasSprite;
 
         private var _userProps:IUserProps = null;
 
@@ -75,6 +75,8 @@ package net.wg.gui.battle.views.stats.fullStats
         private var _hasBadge:Boolean = false;
 
         private var _suffixBadgeType:String;
+
+        private var _suffixBadgeStripType:String;
 
         private var _defaultVehicleFieldXPosition:int;
 
@@ -195,6 +197,7 @@ package net.wg.gui.battle.views.stats.fullStats
                 if(this._testerIcon.visible && this._playerNameTF.visible)
                 {
                     this._testerIcon.imageName = this._suffixBadgeType;
+                    this._backTester.imageName = this._suffixBadgeStripType;
                     if(this._isEnemy)
                     {
                         this._testerIcon.x = -FIELD_WIDTH_COMPENSATION + (this._playerNameTF.width - this._playerNameTF.textWidth + this._playerNameTF.x - this._testerIcon.width) >> 0;
@@ -408,6 +411,16 @@ package net.wg.gui.battle.views.stats.fullStats
                 return;
             }
             this._suffixBadgeType = param1;
+            invalidate(FullStatsValidationType.SUFFIXBAGE);
+        }
+
+        public function setSuffixBadgeStrip(param1:String) : void
+        {
+            if(this._suffixBadgeStripType == param1)
+            {
+                return;
+            }
+            this._suffixBadgeStripType = param1;
             invalidate(FullStatsValidationType.SUFFIXBAGE);
         }
 

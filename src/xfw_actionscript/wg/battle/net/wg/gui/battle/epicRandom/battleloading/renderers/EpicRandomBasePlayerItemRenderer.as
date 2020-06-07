@@ -5,7 +5,6 @@ package net.wg.gui.battle.epicRandom.battleloading.renderers
     import net.wg.gui.components.icons.PlayerActionMarker;
     import net.wg.gui.battle.components.BattleAtlasSprite;
     import net.wg.gui.components.controls.BadgeComponent;
-    import flash.display.MovieClip;
     import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
     import net.wg.infrastructure.managers.IColorSchemeManager;
     import net.wg.data.constants.generated.BATTLEATLAS;
@@ -62,7 +61,7 @@ package net.wg.gui.battle.epicRandom.battleloading.renderers
 
         public var testerIcon:BattleAtlasSprite = null;
 
-        public var testerBG:MovieClip = null;
+        public var testerBG:BattleAtlasSprite = null;
 
         protected var model:DAAPIVehicleInfoVO;
 
@@ -164,7 +163,7 @@ package net.wg.gui.battle.epicRandom.battleloading.renderers
                 this.setPlayerActionMarkerState();
                 this.updateState();
                 this.setSquadState();
-                this.setSuffixBadge(this.model.suffixBadgeType);
+                this.setSuffixBadge(this.model.suffixBadgeType,this.model.suffixBadgeStripType);
             }
             else
             {
@@ -206,13 +205,14 @@ package net.wg.gui.battle.epicRandom.battleloading.renderers
             this.selfBg.visible = PlayerStatus.isSelected(this.model.playerStatus);
         }
 
-        private function setSuffixBadge(param1:String) : void
+        private function setSuffixBadge(param1:String, param2:String) : void
         {
-            var _loc2_:Boolean = StringUtils.isNotEmpty(param1);
-            this.testerIcon.visible = this.testerBG.visible = _loc2_;
-            if(_loc2_)
+            var _loc3_:Boolean = StringUtils.isNotEmpty(param1);
+            this.testerIcon.visible = this.testerBG.visible = _loc3_;
+            if(_loc3_)
             {
                 this.testerIcon.imageName = param1;
+                this.testerBG.imageName = param2;
                 if(this._isEnemy)
                 {
                     this.testerIcon.x = -RANKED_BADGE_OFFSET - FIELD_WIDTH_COMPENSATION - this.testerIcon.width + (this.textField.x + (this.textField.width - this.textField.textWidth)) >> 0;

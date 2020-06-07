@@ -10,8 +10,6 @@ package net.wg.gui.lobby.vehicleCustomization.data
 
         private static const FILTERS_VO:String = "filtersVO";
 
-        public var defaultStyleLabel:String = "";
-
         public var tabsAvailableRegions:Vector.<int> = null;
 
         public var filtersVO:TankCarouselFilterInitVO = null;

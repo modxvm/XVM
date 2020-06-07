@@ -39,7 +39,7 @@ package net.wg.gui.lobby.battleResults.epic
 
         public var testerIcon:UILoaderAlt = null;
 
-        public var testerBG:MovieClip = null;
+        public var testerBG:UILoaderAlt = null;
 
         public var clickArea:MovieClip = null;
 
@@ -68,6 +68,8 @@ package net.wg.gui.lobby.battleResults.epic
         public var fakeFocusIndicator:MovieClip = null;
 
         private var _suffixBadgeIcon:String = "";
+
+        private var _suffixBadgeStripIcon:String = "";
 
         private var _toolTipMgr:ITooltipMgr;
 
@@ -108,6 +110,7 @@ package net.wg.gui.lobby.battleResults.epic
             this.medalIcon = null;
             this.testerIcon.dispose();
             this.testerIcon = null;
+            this.testerBG.dispose();
             this.testerBG = null;
             this.playerName.dispose();
             this.playerName = null;
@@ -134,6 +137,7 @@ package net.wg.gui.lobby.battleResults.epic
             this.playerName.width = PLAYER_NAME_WIDTH;
             this.selfBg.visible = param1.isSelf;
             this._suffixBadgeIcon = param1.suffixBadgeIcon;
+            this._suffixBadgeStripIcon = param1.suffixBadgeStripIcon;
             this.squadIcon.hide();
             this.medalIcon.visible = false;
             var _loc2_:IColorScheme = null;
@@ -188,6 +192,7 @@ package net.wg.gui.lobby.battleResults.epic
             if(_loc1_)
             {
                 this.testerIcon.source = this._suffixBadgeIcon;
+                this.testerBG.source = this._suffixBadgeStripIcon;
                 this.testerIcon.x = this.playerName.x + this.playerName.textWidth + FIELD_WIDTH_COMPENSATION >> 0;
                 this.testerBG.x = (this.testerIcon.width >> 1) + this.testerIcon.x - this.testerBG.width >> 0;
             }

@@ -7,6 +7,8 @@ package net.wg.infrastructure.base.meta
 
         function navigateToCustomizationS() : void;
 
-        function sellItemS(param1:Number) : void;
+        function sellCustomizationItemS(param1:Number, param2:Number) : void;
+
+        function previewItemS(param1:Number, param2:Number) : void;
     }
 }

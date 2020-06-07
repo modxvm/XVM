@@ -5,6 +5,7 @@ package net.wg.gui.components.advanced.tutorial
     import net.wg.gui.components.advanced.interfaces.ITutorialHintAnimation;
     import net.wg.gui.components.advanced.interfaces.ITutorialHintTextAnimation;
     import net.wg.gui.components.advanced.vo.TutorialHintVO;
+    import scaleform.clik.motion.Tween;
     import net.wg.gui.components.advanced.events.TutorialHintEvent;
     import flash.display.Sprite;
     import scaleform.clik.constants.InvalidationType;
@@ -34,6 +35,12 @@ package net.wg.gui.components.advanced.tutorial
 
         private static const TEXT_ALPHA_DECREMENT:Number = 0.05;
 
+        private static const SHOW_ALPHA:Number = 1;
+
+        private static const HIDE_ALPHA:Number = 0.0;
+
+        private static const ANIMATION_DURATION:int = 200;
+
         public var hintArrow:ITutorialHintArrowAnimation = null;
 
         public var hintBox:ITutorialHintAnimation = null;
@@ -56,8 +63,11 @@ package net.wg.gui.components.advanced.tutorial
 
         private var _hideTextRuntime:Boolean;
 
+        private var _tweens:Vector.<Tween>;
+
         public function TutorialHint()
         {
+            this._tweens = new Vector.<Tween>();
             super();
             visible = false;
         }
@@ -76,6 +86,7 @@ package net.wg.gui.components.advanced.tutorial
 
         override protected function onDispose() : void
         {
+            this.removeTweens();
             this.hintArrow.removeEventListener(TutorialHintEvent.LOOP_ENDED,this.onLoopEndedHandler);
             this.hintArrow.dispose();
             this.hintArrow = null;
@@ -86,6 +97,7 @@ package net.wg.gui.components.advanced.tutorial
             this.hintText.dispose();
             this.hintText = null;
             this._model = null;
+            this._tweens = null;
             hitArea = null;
             super.onDispose();
         }
@@ -141,6 +153,16 @@ package net.wg.gui.components.advanced.tutorial
             }
         }
 
+        public function fadeIn() : void
+        {
+            this._tweens.push(new Tween(ANIMATION_DURATION,this,{"alpha":SHOW_ALPHA},{}));
+        }
+
+        public function fadeOut() : void
+        {
+            this._tweens.push(new Tween(ANIMATION_DURATION,this,{"alpha":HIDE_ALPHA},{}));
+        }
+
         public function hide() : void
         {
             if(this._isHidden)
@@ -149,13 +171,13 @@ package net.wg.gui.components.advanced.tutorial
             }
             if(this._model.hasArrow)
             {
-                if(this.hintArrow.isLooped)
+                if(this.hintArrow.isLooped && !this._model.hideImmediately)
                 {
                     this.hintArrow.needToHide(true);
                     this.hintArrow.addEventListener(TutorialHintEvent.LOOP_ENDED,this.onLoopEndedHandler);
                     return;
                 }
-                this.hintArrow.hide();
+                this.hintArrow.hide(this._model.hideImmediately);
             }
             if(_baseDisposed)
             {
@@ -163,12 +185,12 @@ package net.wg.gui.components.advanced.tutorial
             }
             if(this._model.hasBox)
             {
-                this.hintBox.hide();
+                this.hintBox.hide(this._model.hideImmediately);
             }
             if(this._model.hintText != Values.EMPTY_STR)
             {
-                this.hintBG.hide();
-                this.hintText.hide();
+                this.hintBG.hide(this._model.hideImmediately);
+                this.hintText.hide(this._model.hideImmediately);
             }
             this._isHidden = true;
         }
@@ -184,6 +206,7 @@ package net.wg.gui.components.advanced.tutorial
             this._hideTextRuntime = false;
             this.hintBox.alpha = this.hintText.alpha = this.hintBG.alpha = this._textAlpha = 1;
             this.hintArrow.needToHide(false);
+            invalidateSize();
             invalidateState();
         }
 
@@ -205,6 +228,18 @@ package net.wg.gui.components.advanced.tutorial
                 this._textAlpha = Math.max(0,Math.min(1,this._textAlpha));
                 this.hintBox.alpha = this.hintText.alpha = this.hintBG.alpha = this._textAlpha;
             }
+        }
+
+        private function removeTweens() : void
+        {
+            var _loc1_:Tween = null;
+            for each(_loc1_ in this._tweens)
+            {
+                _loc1_.paused = true;
+                _loc1_.dispose();
+                _loc1_ = null;
+            }
+            this._tweens.splice(0,this._tweens.length);
         }
 
         private function layoutArrow() : void
@@ -264,20 +299,20 @@ package net.wg.gui.components.advanced.tutorial
                 switch(_loc5_)
                 {
                     case Directions.LEFT:
-                        this.hintBG.x = -_loc2_ - HINT_BG_H_OFFSET;
+                        this.hintBG.x = -_loc2_ - HINT_BG_H_OFFSET - this._model.textPadding;
                         this.hintBG.y = _loc7_ - (_loc3_ >> 1);
                         break;
                     case Directions.RIGHT:
-                        this.hintBG.x = this._hintWidth + HINT_BG_H_OFFSET;
+                        this.hintBG.x = this._hintWidth + HINT_BG_H_OFFSET + this._model.textPadding;
                         this.hintBG.y = _loc7_ - (_loc3_ >> 1);
                         break;
                     case Directions.TOP:
                         this.hintBG.x = _loc6_ - (_loc2_ >> 1);
-                        this.hintBG.y = -_loc3_ - HINT_BG_V_OFFSET;
+                        this.hintBG.y = -_loc3_ - HINT_BG_V_OFFSET - this._model.textPadding;
                         break;
                     case Directions.BOTTOM:
                         this.hintBG.x = _loc6_ - (_loc2_ >> 1);
-                        this.hintBG.y = this._hintHeight + HINT_BG_V_OFFSET;
+                        this.hintBG.y = this._hintHeight + HINT_BG_V_OFFSET + this._model.textPadding;
                         break;
                 }
                 _loc1_ = TextFormatAlign.CENTER;

@@ -2,26 +2,18 @@ package net.wg.gui.lobby.storage.categories.customization
 {
     import net.wg.infrastructure.base.meta.impl.StorageCategoryCustomizationViewMeta;
     import net.wg.infrastructure.base.meta.IStorageCategoryCustomizationViewMeta;
-    import net.wg.gui.lobby.storage.categories.NoItemsView;
     import flash.text.TextField;
     import scaleform.clik.interfaces.IDataProvider;
     import net.wg.data.ListDAAPIDataProvider;
-    import net.wg.gui.lobby.storage.categories.cards.BaseCardVO;
-    import scaleform.clik.core.UIComponent;
-    import flash.events.Event;
-    import net.wg.gui.lobby.storage.categories.cards.CardEvent;
+    import net.wg.gui.lobby.storage.categories.cards.CustomizationCardVO;
     import flash.text.TextFieldAutoSize;
     import net.wg.data.constants.Linkages;
+    import net.wg.gui.lobby.storage.categories.cards.CardEvent;
+    import flash.events.Event;
     import scaleform.clik.constants.InvalidationType;
 
     public class StorageCategoryCustomizationView extends StorageCategoryCustomizationViewMeta implements IStorageCategoryCustomizationViewMeta
     {
-
-        private static const CAROUSEL_TOP_OFFSET:int = 10;
-
-        private static const CAROUSEL_BOTTOM_OFFSET:int = 30;
-
-        public var noItemsView:NoItemsView;
 
         public var title:TextField;
 
@@ -32,22 +24,7 @@ package net.wg.gui.lobby.storage.categories.customization
 
         override protected function getNewCardDP() : IDataProvider
         {
-            return new ListDAAPIDataProvider(BaseCardVO);
-        }
-
-        override public function get noItemsComponent() : UIComponent
-        {
-            return this.noItemsView;
-        }
-
-        override protected function onDispose() : void
-        {
-            this.noItemsView.removeEventListener(Event.CLOSE,this.onNoItemViewCloseHandler);
-            carousel.removeEventListener(CardEvent.SELL,this.onCardSellHandler);
-            this.noItemsView.dispose();
-            this.noItemsView = null;
-            this.title = null;
-            super.onDispose();
+            return new ListDAAPIDataProvider(CustomizationCardVO);
         }
 
         override protected function configUI() : void
@@ -56,32 +33,51 @@ package net.wg.gui.lobby.storage.categories.customization
             this.title.autoSize = TextFieldAutoSize.LEFT;
             this.title.text = STORAGE.CUSTOMIZATION_SECTIONTITLE;
             this.title.mouseWheelEnabled = this.title.mouseEnabled = false;
-            this.noItemsView.setTexts(STORAGE.CUSTOMIZATION_NOITEMS_TITLE,STORAGE.CUSTOMIZATION_NOITEMS_NAVIGATIONBUTTON);
-            this.noItemsView.addEventListener(Event.CLOSE,this.onNoItemViewCloseHandler);
             carousel.scrollList.itemRendererClassReference = Linkages.CUSTOMIZATION_CARD_RENDERER;
-            carousel.scrollList.paddingTop = CAROUSEL_TOP_OFFSET;
-            carousel.scrollList.paddingBottom = CAROUSEL_BOTTOM_OFFSET;
-            carousel.addEventListener(CardEvent.SELL,this.onCardSellHandler);
+            carousel.addEventListener(CardEvent.PREVIEW,this.onCardPreviewHandler);
+        }
+
+        override protected function onDispose() : void
+        {
+            noItemsView.removeEventListener(Event.CLOSE,this.onNoItemViewCloseHandler);
+            carousel.removeEventListener(CardEvent.PREVIEW,this.onCardPreviewHandler);
+            this.title = null;
+            super.onDispose();
         }
 
         override protected function draw() : void
         {
-            var _loc1_:* = 0;
             super.draw();
             if(isInvalid(InvalidationType.SIZE))
             {
                 this.title.x = carousel.x;
-                _loc1_ = this.title.y + this.title.height;
-                this.noItemsView.width = width;
-                this.noItemsView.validateNow();
-                this.noItemsView.y = _loc1_ + (height - _loc1_ - this.noItemsView.actualHeight >> 1);
             }
         }
 
-        private function onCardSellHandler(param1:CardEvent) : void
+        override protected function initNoItemsView() : void
+        {
+            noItemsView.setTexts(STORAGE.CUSTOMIZATION_NOITEMS_TITLE,STORAGE.CUSTOMIZATION_NOITEMS_NAVIGATIONBUTTON);
+            noItemsView.addEventListener(Event.CLOSE,this.onNoItemViewCloseHandler);
+        }
+
+        private function onCardPreviewHandler(param1:CardEvent) : void
         {
             param1.stopImmediatePropagation();
-            sellItemS(param1.data.id);
+            var _loc2_:CustomizationCardVO = param1.data as CustomizationCardVO;
+            if(_loc2_ != null)
+            {
+                previewItemS(_loc2_.id,_loc2_.vehicleCD);
+            }
+        }
+
+        override protected function onCardSellHandler(param1:CardEvent) : void
+        {
+            param1.stopImmediatePropagation();
+            var _loc2_:CustomizationCardVO = param1.data as CustomizationCardVO;
+            if(_loc2_ != null)
+            {
+                sellCustomizationItemS(_loc2_.id,_loc2_.vehicleCD);
+            }
         }
 
         private function onNoItemViewCloseHandler(param1:Event) : void

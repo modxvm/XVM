@@ -96,14 +96,14 @@ package net.wg.infrastructure.base.meta.impl
             }
         }
 
-        public final function as_setPrice(param1:String, param2:Boolean, param3:Object) : void
+        public final function as_setPrice(param1:String, param2:Object) : void
         {
-            var _loc4_:ActionPriceVO = this._actionPriceVO;
-            this._actionPriceVO = new ActionPriceVO(param3);
-            this.setPrice(param1,param2,this._actionPriceVO);
-            if(_loc4_)
+            var _loc3_:ActionPriceVO = this._actionPriceVO;
+            this._actionPriceVO = new ActionPriceVO(param2);
+            this.setPrice(param1,this._actionPriceVO);
+            if(_loc3_)
             {
-                _loc4_.dispose();
+                _loc3_.dispose();
             }
         }
 
@@ -121,11 +121,11 @@ package net.wg.infrastructure.base.meta.impl
             throw new AbstractException(_loc2_);
         }
 
-        protected function setPrice(param1:String, param2:Boolean, param3:ActionPriceVO) : void
+        protected function setPrice(param1:String, param2:ActionPriceVO) : void
         {
-            var _loc4_:String = "as_setPrice" + Errors.ABSTRACT_INVOKE;
-            DebugUtils.LOG_ERROR(_loc4_);
-            throw new AbstractException(_loc4_);
+            var _loc3_:String = "as_setPrice" + Errors.ABSTRACT_INVOKE;
+            DebugUtils.LOG_ERROR(_loc3_);
+            throw new AbstractException(_loc3_);
         }
     }
 }

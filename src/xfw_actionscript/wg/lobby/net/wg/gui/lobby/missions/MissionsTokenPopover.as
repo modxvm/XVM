@@ -10,7 +10,6 @@ package net.wg.gui.lobby.missions
     import scaleform.clik.events.ButtonEvent;
     import net.wg.gui.lobby.missions.event.MissionsTokenListRendererEvent;
     import net.wg.gui.lobby.missions.data.MissionsTokenPopoverVO;
-    import scaleform.gfx.TextFieldEx;
     import scaleform.clik.data.DataProvider;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.infrastructure.interfaces.IWrapper;
@@ -53,10 +52,6 @@ package net.wg.gui.lobby.missions
 
         private var _rendererHeight:int = -1;
 
-        private var _descrLeft:int = -1;
-
-        private var _descrWidth:int = -1;
-
         public function MissionsTokenPopover()
         {
             this._separatorHitArea = new Sprite();
@@ -64,8 +59,6 @@ package net.wg.gui.lobby.missions
             addChild(this._separatorHitArea);
             this.separatorTop.hitArea = this._separatorHitArea;
             this.separatorBottom.hitArea = this._separatorHitArea;
-            this._descrLeft = this.descrTF.x;
-            this._descrWidth = this.descrTF.width;
         }
 
         override protected function configUI() : void
@@ -82,9 +75,6 @@ package net.wg.gui.lobby.missions
         {
             this.headerTF.htmlText = param1.headerText;
             this.descrTF.htmlText = param1.descrText;
-            this.descrTF.x = this._descrLeft + param1.descrLeftPadding;
-            this.descrTF.width = this._descrWidth - param1.descrLeftPadding;
-            TextFieldEx.setVerticalAlign(this.descrTF,TextFieldEx.VALIGN_CENTER);
             this.image.source = param1.imageSrc;
             this.buyBtn.label = param1.buyBtnLabel;
             this.buyBtn.visible = param1.buyBtnVisible;

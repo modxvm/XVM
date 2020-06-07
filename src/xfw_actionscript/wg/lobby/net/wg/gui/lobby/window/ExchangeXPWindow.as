@@ -114,8 +114,6 @@ package net.wg.gui.lobby.window
 
         private var _haveEliteVehicles:Boolean;
 
-        private var _buyGoldAvailable:Boolean;
-
         private var _totalXp:int = 0;
 
         private var _selectedGold:int;
@@ -277,7 +275,6 @@ package net.wg.gui.lobby.window
             this.scrollList.sortByField(SORT_FIELD_VEHICLE_NAME,true);
             this._haveEliteVehicles = param1.isHaveElite;
             this._xpForFree = param1.xpForFree;
-            this._buyGoldAvailable = param1.buyGoldAvailable;
             this._selectedXp = 0;
             if(this._haveEliteVehicles)
             {
@@ -290,9 +287,10 @@ package net.wg.gui.lobby.window
 
         public function as_setWalletStatus(param1:Object, param2:Boolean) : void
         {
+            var _loc4_:* = false;
             var _loc3_:IWalletStatusVO = App.utils.voMgr.walletStatusVO;
             _loc3_.update(param1);
-            var _loc4_:* = !this.onHandHaveNotMoney.updateStatus(_loc3_.goldStatus);
+            _loc4_ = !this.onHandHaveNotMoney.updateStatus(_loc3_.goldStatus);
             this.resultHaveNotMoney.updateStatus(_loc3_.goldStatus);
             var _loc5_:* = !this.onHandHaveNotFreeXp.updateStatus(_loc3_.freeXpStatus);
             this.resultHaveNotFreeXp.updateStatus(_loc3_.freeXpStatus);
@@ -361,7 +359,7 @@ package net.wg.gui.lobby.window
             var _loc5_:int = this.scrollList.dataProvider?this.scrollList.dataProvider.length:0;
             this.submitBtn.enabled = getSubmitButtonEnableStateS(_loc1_);
             this.buttonBar.enabled = _loc5_ > 0;
-            var _loc6_:Boolean = totalPrimaryCurrency < this._selectedGold && this._buyGoldAvailable;
+            var _loc6_:* = totalPrimaryCurrency < this._selectedGold;
             this.exchangeGoldWarning.visible = _loc6_;
             this.exchangeGoldWarning.x = this.itGoldResult.x + this.itGoldResult.iconClip.x * this.itGoldResult.scaleX - this.exchangeGoldWarning.actualWidth;
             this.exchangeGoldWarning.y = this.itGoldResult.y + (this.itGoldResult.actualHeight - this.exchangeGoldWarning.height >> 1);
@@ -395,9 +393,9 @@ package net.wg.gui.lobby.window
         private function invalidateAvailableXp() : void
         {
             var _loc4_:* = NaN;
-            var _loc8_:uint = 0;
-            var _loc9_:ExchangeXPVehicleVO = null;
-            var _loc10_:* = 0;
+            var _loc7_:uint = 0;
+            var _loc8_:ExchangeXPVehicleVO = null;
+            var _loc9_:* = 0;
             var _loc1_:* = this._xpForFree > 0;
             var _loc2_:Number = 0;
             var _loc3_:Number = 0;
@@ -405,21 +403,21 @@ package net.wg.gui.lobby.window
             var _loc6_:* = true;
             if(this._scrollListProvider)
             {
-                _loc8_ = this._scrollListProvider.length;
-                _loc10_ = 0;
-                while(_loc10_ < _loc8_)
+                _loc7_ = this._scrollListProvider.length;
+                _loc9_ = 0;
+                while(_loc9_ < _loc7_)
                 {
-                    _loc9_ = this._scrollListProvider[_loc10_];
-                    _loc4_ = _loc9_.xp;
-                    if(_loc9_.isSelectCandidate)
+                    _loc8_ = this._scrollListProvider[_loc9_];
+                    _loc4_ = _loc8_.xp;
+                    if(_loc8_.isSelectCandidate)
                     {
                         _loc3_ = _loc3_ + _loc4_;
                     }
-                    _loc5_ = _loc5_ && _loc9_.isSelectCandidate;
+                    _loc5_ = _loc5_ && _loc8_.isSelectCandidate;
                     _loc2_ = _loc2_ + _loc4_;
-                    _loc10_++;
+                    _loc9_++;
                 }
-                _loc6_ = Boolean(_loc8_);
+                _loc6_ = Boolean(_loc7_);
             }
             else
             {
@@ -437,8 +435,7 @@ package net.wg.gui.lobby.window
                 this.cbSelectAll.addEventListener(Event.SELECT,this.onCbSelectAllSelectHandler,false,0,true);
             }
             this.itTotalAvailableXp.text = this._locale?this._locale.gold(_loc2_):_loc2_.toString();
-            var _loc7_:Number = _loc3_ / actualRate;
-            this._selectedGold = this._buyGoldAvailable?_loc7_:Math.min(_loc7_,totalPrimaryCurrency);
+            this._selectedGold = _loc3_ / actualRate;
             this._selectedXp = Math.min(this._xpForFree,_loc3_);
             this.nsGoldExchange.enabled = !_loc1_;
             this.nsGoldExchange.maximum = this._selectedGold;

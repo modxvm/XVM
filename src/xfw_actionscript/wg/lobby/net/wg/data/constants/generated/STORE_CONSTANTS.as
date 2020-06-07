@@ -9,25 +9,9 @@ package net.wg.data.constants.generated
 
         public static const STORE_ACTIONS:String = "storeActions";
 
-        public static const SHOP_LINKAGE:String = "ShopUI";
-
-        public static const INVENTORY_LINKAGE:String = "InventoryUI";
-
-        public static const STORE_ACTIONS_LINKAGE:String = "StoreActionsViewUI";
-
         public static const STORE:String = "store";
 
-        public static const ACTION_CARD_HERO_LINKAGE:String = "ActionCardHeroUI";
-
-        public static const ACTION_CARD_NORMAL_LINKAGE:String = "ActionCardNormalUI";
-
-        public static const ACTION_CARD_SMALL_LINKAGE:String = "ActionCardSmallUI";
-
-        public static const ACTION_COMING_SOON_LINKAGE:String = "ActionComingSoonUI";
-
         public static const ACTION_EMPTY_LINKAGE:String = "StoreActionsEmptyUI";
-
-        public static const ACTION_CARD_SELECT_LINKAGE:String = "ActionCardSelectUI";
 
         public static const ACTION_CARD_NORMAL_SELECT_FRAME_LABEL:String = "normal";
 

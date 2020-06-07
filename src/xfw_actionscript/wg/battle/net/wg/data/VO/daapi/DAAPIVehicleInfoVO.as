@@ -71,6 +71,8 @@ package net.wg.data.VO.daapi
 
         public var suffixBadgeType:String = "";
 
+        public var suffixBadgeStripType:String = "";
+
         public var selfBgSource:String;
 
         public var isCurrentSquad:Boolean = false;

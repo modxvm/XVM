@@ -68,7 +68,10 @@ package net.wg.gui.lobby.vehicleCustomization.controls.bottomPanel
         {
             this._barExpandedWith = 0;
             super.createTabs(param1);
-            CustomizationBottomPanelTabButton(buttonGroup.getButtonAt(buttonGroup.length - 1)).last = true;
+            if(buttonGroup.length > 0)
+            {
+                CustomizationBottomPanelTabButton(buttonGroup.getButtonAt(buttonGroup.length - 1)).last = true;
+            }
         }
 
         public function checkCollapsing() : Boolean

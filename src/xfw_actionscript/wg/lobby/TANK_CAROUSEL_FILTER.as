@@ -23,6 +23,8 @@ package
 
         public static const POPOVER_LABEL_PROGRESSIONS:String = "#tank_carousel_filter:popover/label/progressions";
 
+        public static const POPOVER_LABEL_ROLES:String = "#tank_carousel_filter:popover/label/roles";
+
         public static const POPOVER_LABEL_SEARCHNAMEVEHICLE:String = "#tank_carousel_filter:popover/label/searchNameVehicle";
 
         public static const POPOVER_CHECKBOX_PREMIUM:String = "#tank_carousel_filter:popover/checkbox/premium";

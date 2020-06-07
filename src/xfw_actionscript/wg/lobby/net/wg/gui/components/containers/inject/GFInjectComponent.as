@@ -22,7 +22,6 @@ package net.wg.gui.components.containers.inject
             {
                 this._wrapper = GFWrapper(param1);
                 this._wrapper.setSize(width,height);
-                this._wrapper.validateNow();
             }
             return super.addChild(param1);
         }

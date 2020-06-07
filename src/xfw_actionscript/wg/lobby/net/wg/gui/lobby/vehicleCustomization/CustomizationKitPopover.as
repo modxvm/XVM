@@ -17,6 +17,7 @@ package net.wg.gui.lobby.vehicleCustomization
     import flash.events.MouseEvent;
     import net.wg.gui.components.popovers.PopOverConst;
     import net.wg.gui.components.popovers.PopOver;
+    import scaleform.clik.constants.InvalidationType;
     import net.wg.gui.lobby.vehicleCustomization.events.CustomizationEvent;
 
     public class CustomizationKitPopover extends CustomizationKitPopoverMeta implements ICustomizationKitPopoverMeta
@@ -24,7 +25,7 @@ package net.wg.gui.lobby.vehicleCustomization
 
         private static const WIDTH:int = 420;
 
-        private static const HEIGHT:int = 420;
+        private static const HEIGHT:int = 410;
 
         private static const CLEAR_STATE_INVALID:String = "ClearStateInvalid";
 
@@ -116,6 +117,13 @@ package net.wg.gui.lobby.vehicleCustomization
                 this.clearBtn.enabled = !this._isClear;
                 this.scrollPane.visible = !this._isClear;
             }
+            if(isInvalid(InvalidationType.LAYOUT))
+            {
+                if(!this.autoProlongationCheckbox.visible)
+                {
+                    this.titleTF.y = this.topShadow.y - this.titleTF.height >> 1;
+                }
+            }
         }
 
         override protected function onBeforeDispose() : void
@@ -151,7 +159,8 @@ package net.wg.gui.lobby.vehicleCustomization
 
         public function as_setAutoProlongationCheckboxEnabled(param1:Boolean) : void
         {
-            this.autoProlongationCheckbox.enabled = param1;
+            this.autoProlongationCheckbox.enabled = this.autoProlongationCheckbox.visible = param1;
+            invalidateLayout();
         }
 
         public function as_setAutoProlongationCheckboxSelected(param1:Boolean) : void

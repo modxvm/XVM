@@ -28,6 +28,8 @@ package net.wg.gui.components.advanced.collapsingBar
         {
             this._baseScaleX = 1;
             this._baseScaleY = 1;
+            setActualScale(this._baseScaleX,this._baseScaleY);
+            this.rescaleItems();
         }
 
         override public function get width() : Number
@@ -71,6 +73,7 @@ package net.wg.gui.components.advanced.collapsingBar
 
         protected function calculateOriginHeight() : int
         {
+            this.resetScale();
             return bgMc.height;
         }
 

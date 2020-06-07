@@ -1,7 +1,5 @@
 package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.gui.battle.pveEvent.views.vehicleMarkers.EventVehicleMarker;
-    import net.wg.gui.battle.pveEvent.views.vehicleMarkers.EventVehicleMarkerMessage;
     import net.wg.gui.battle.views.staticMarkers.epic.headquarter.HeadquarterIcon;
     import net.wg.gui.battle.views.staticMarkers.epic.headquarter.HeadquarterMarker;
     import net.wg.gui.battle.views.staticMarkers.epic.resupplyPoint.ResupplyIcon;
@@ -57,10 +55,6 @@ package net.wg.infrastructure.base.meta.impl
 
     public class ClassManagerBattleMarkersMeta extends Object
     {
-
-        public static const NET_WG_GUI_BATTLE_PVEEVENT_VIEWS_VEHICLEMARKERS_EVENTVEHICLEMARKER:Class = EventVehicleMarker;
-
-        public static const NET_WG_GUI_BATTLE_PVEEVENT_VIEWS_VEHICLEMARKERS_EVENTVEHICLEMARKERMESSAGE:Class = EventVehicleMarkerMessage;
 
         public static const NET_WG_GUI_BATTLE_VIEWS_STATICMARKERS_EPIC_HEADQUARTER_HEADQUARTERICON:Class = HeadquarterIcon;
 

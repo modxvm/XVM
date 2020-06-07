@@ -12,12 +12,12 @@ package net.wg.gui.lobby.battleResults.components
     import net.wg.data.VO.BattleResultsQuestVO;
     import net.wg.gui.lobby.questsWindow.data.QuestRendererVO;
     import net.wg.infrastructure.managers.ITooltipMgr;
+    import flash.events.MouseEvent;
     import net.wg.data.constants.Linkages;
     import net.wg.data.constants.QuestsStates;
     import flash.text.TextFieldAutoSize;
     import flash.events.Event;
     import scaleform.clik.events.ButtonEvent;
-    import flash.events.MouseEvent;
     import scaleform.clik.constants.InvalidationType;
     import org.idmedia.as3commons.util.StringUtils;
     import net.wg.gui.events.QuestEvent;
@@ -76,6 +76,8 @@ package net.wg.gui.lobby.battleResults.components
             this.statusMC.visible = false;
             this.counter.visible = false;
             this.linkBtn.focusable = false;
+            this.linkBtn.mouseEnabledOnDisabled = true;
+            this.linkBtn.mutedSoundTypes = [MouseEvent.MOUSE_DOWN];
             this.taskTF.mouseEnabled = false;
             this.progressList.linkage = Linkages.PROGRESS_ELEMENT;
             this.taskTF.textColor = QuestsStates.CLR_TASK_TF_NORMAL;
@@ -138,6 +140,7 @@ package net.wg.gui.lobby.battleResults.components
                     this.lineMC.y = _loc1_;
                     setSize(width,this.lineMC.y);
                     this.linkBtn.visible = this._data.isLinkBtnVisible;
+                    this.linkBtn.enabled = this._data.linkBtnEnabled;
                     if(this.linkBtn.visible && !this._linkBtnHasListeners)
                     {
                         this._linkBtnHasListeners = true;
@@ -199,7 +202,8 @@ package net.wg.gui.lobby.battleResults.components
 
         private function checkProgressList(param1:int) : int
         {
-            var _loc2_:Boolean = this._data.progressList && this._data.progressList.length > 0;
+            var _loc2_:* = false;
+            _loc2_ = this._data.progressList && this._data.progressList.length > 0;
             this.progressList.visible = _loc2_;
             if(_loc2_)
             {
@@ -256,6 +260,7 @@ package net.wg.gui.lobby.battleResults.components
             {
                 this._status = this._questInfo.status;
                 this.statusMC.setStatus(this._status);
+                this.statusMC.statusTooltip = this._questInfo.statusTooltip;
                 this.taskTF.textColor = StringUtils.isNotEmpty(this._status)?QuestsStates.CLR_TASK_TF_WITH_STATUS:QuestsStates.CLR_TASK_TF_NORMAL;
             }
         }
@@ -267,7 +272,14 @@ package net.wg.gui.lobby.battleResults.components
 
         private function onLinkBtnRollOverHandler(param1:MouseEvent) : void
         {
-            this._tooltipMgr.show(this.linkBtn.enabled?this._questInfo.linkTooltip:TOOLTIPS.QUESTS_DISABLELINKBTN_TASK);
+            if(StringUtils.isNotEmpty(this._data.linkBtnTooltip))
+            {
+                this._tooltipMgr.show(this._data.linkBtnTooltip);
+            }
+            else
+            {
+                this._tooltipMgr.show(this.linkBtn.enabled?this._questInfo.linkTooltip:TOOLTIPS.QUESTS_DISABLELINKBTN_TASK);
+            }
         }
 
         private function onLinkBtnClickHandler(param1:ButtonEvent) : void

@@ -8,11 +8,9 @@ package net.wg.gui.notification.events
 
         public static const UPDATE_LAYOUT:String = "notificationLayoutUpdate";
 
-        public static const RESET_LAYOUT:String = "notificationLayoutReset";
-
         private var _padding:Point = null;
 
-        public function NotificationLayoutEvent(param1:String, param2:Point = null)
+        public function NotificationLayoutEvent(param1:String, param2:Point)
         {
             super(param1);
             this._padding = param2;

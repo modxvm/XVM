@@ -5,12 +5,9 @@ package net.wg.gui.components.common.lobbyVehicleMarkers
     import flash.text.TextField;
     import scaleform.clik.core.UIComponent;
     import scaleform.clik.constants.InvalidationType;
-    import org.idmedia.as3commons.util.StringUtils;
 
     public class LobbyVehicleMarkers extends UIComponentEx
     {
-
-        private static const NAME_BASELINE:int = -15;
 
         public var vehicleTypeMarker:MovieClip;
 
@@ -19,8 +16,6 @@ package net.wg.gui.components.common.lobbyVehicleMarkers
         private var _model:LobbyVehicleMarkersVO = null;
 
         private var _markerHash:Object = null;
-
-        private var _id:int = -1;
 
         public function LobbyVehicleMarkers()
         {
@@ -48,18 +43,12 @@ package net.wg.gui.components.common.lobbyVehicleMarkers
             super.draw();
             if(this._model != null && isInvalid(InvalidationType.DATA))
             {
-                this.vehicleNameField.htmlText = this._model.vName;
+                this.vehicleNameField.text = this._model.vName;
                 App.utils.commons.updateTextFieldSize(this.vehicleNameField);
                 this.vehicleNameField.x = -this.vehicleNameField.width >> 1;
-                this.vehicleNameField.y = NAME_BASELINE - this.vehicleNameField.height ^ 0;
-                if(StringUtils.isNotEmpty(this._model.vClass) && this._markerHash[this._model.vClass])
+                if(this._markerHash[this._model.vClass])
                 {
-                    this.vehicleTypeMarker.visible = true;
                     this.vehicleTypeMarker.gotoAndStop(this._model.vClass);
-                }
-                else
-                {
-                    this.vehicleTypeMarker.visible = false;
                 }
             }
         }
@@ -70,16 +59,6 @@ package net.wg.gui.components.common.lobbyVehicleMarkers
             this._model.vClass = param1;
             this._model.vName = param2;
             invalidateData();
-        }
-
-        public function get id() : int
-        {
-            return this._id;
-        }
-
-        public function set id(param1:int) : void
-        {
-            this._id = param1;
         }
     }
 }

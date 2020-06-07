@@ -13,6 +13,7 @@ package net.wg.gui.lobby.storage
     import flash.display.Graphics;
     import net.wg.gui.events.ViewStackEvent;
     import flash.events.Event;
+    import net.wg.gui.lobby.storage.categories.cards.configs.CardConfigs;
     import net.wg.gui.lobby.storage.categories.ICategory;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.gui.lobby.storage.data.StorageVO;
@@ -111,6 +112,7 @@ package net.wg.gui.lobby.storage
             this._counterManager.disposeCountersForContainer(COUNTER_CONTAINER_ID);
             this._counterManager = null;
             this._utils = null;
+            CardConfigs.getInstance().dispose();
             super.onDispose();
         }
 
@@ -147,10 +149,12 @@ package net.wg.gui.lobby.storage
             }
             else
             {
+                this.updateCounters(true);
                 this.noItemsView.visible = false;
                 this.content.visible = true;
                 this.menu.visible = true;
                 this.menu.dataProvider = param1.sections;
+                invalidate(SIDE_BAR_COUNTER);
             }
             setBackground(param1.bgSource);
             this.updateStage(width,height);
@@ -223,11 +227,17 @@ package net.wg.gui.lobby.storage
             {
                 _loc2_ = this._sidebarCounter[_loc4_];
                 _loc3_ = this.menu.getButtonAt(int(_loc4_));
-                this._utils.asserter.assertNotNull(_loc3_,"SideBar sectionIdx: " + _loc4_ + Errors.WASNT_FOUND);
-                this._counterManager.removeCounter(_loc3_,COUNTER_CONTAINER_ID);
-                if(!param1 && _loc2_ > 0)
+                if(_loc3_)
                 {
-                    this._counterManager.setCounter(_loc3_,String(_loc2_),COUNTER_CONTAINER_ID,this._sideBarCounterProps);
+                    this._counterManager.removeCounter(_loc3_,COUNTER_CONTAINER_ID);
+                    if(!param1 && _loc2_ > 0)
+                    {
+                        this._counterManager.setCounter(_loc3_,String(_loc2_),COUNTER_CONTAINER_ID,this._sideBarCounterProps);
+                    }
+                }
+                else
+                {
+                    DebugUtils.LOG_WARNING("SideBar sectionIdx: " + _loc4_ + Errors.WASNT_FOUND);
                 }
             }
         }

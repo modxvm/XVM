@@ -5,21 +5,13 @@ package net.wg.data.constants.generated
 
         public static const CREW_INFO_LINKAGE:String = "VehPreviewCrewInfoUI";
 
-        public static const BUYING_PANEL_LINKAGE:String = "VehiclePreview20BuyingPanelUI";
+        public static const BUYING_PANEL_LINKAGE:String = "VehiclePreviewBuyingPanelUI";
 
-        public static const EVENT_PROGRESSION_BUYING_PANEL_LINKAGE:String = "VehiclePreview20EventProgressionBuyingPanelUI";
+        public static const EVENT_PROGRESSION_BUYING_PANEL_LINKAGE:String = "VehiclePreviewEventProgressionBuyingPanelUI";
 
-        public static const TRADE_IN_BUYING_PANEL_LINKAGE:String = "VehiclePreview20TradeInBuyingPanelUI";
+        public static const TRADE_IN_BUYING_PANEL_LINKAGE:String = "VehiclePreviewTradeInBuyingPanelUI";
 
-        public static const SECRET_EVENT_BUYING_PANEL_LINKAGE:String = "VehiclePreview20SecretEventBuyingPanelUI";
-
-        public static const SECRET_EVENT_BUYING_ACTION_PANEL_LINKAGE:String = "VehiclePreview20SecretEventBuyingActionPanelUI";
-
-        public static const SECRET_EVENT_BOUGHT_PANEL_LINKAGE:String = "VehiclePreview20SecretEventBoughtPanelUI";
-
-        public static const SECRET_EVENT_SOLD_PANEL_LINKAGE:String = "VehiclePreview20SecretEventSoldPanelUI";
-
-        public static const SECRET_EVENT_HEADER_LINKAGE:String = "VehiclePreview20SecretEventHeaderUI";
+        public static const OFFER_GIFT_BUYING_PANEL_LINKAGE:String = "VehiclePreviewOfferGiftBuyingPanelUI";
 
         public static const FACT_SHEET_LINKAGE:String = "VehPreviewFactSheetUI";
 
@@ -47,17 +39,9 @@ package net.wg.data.constants.generated
 
         public static const TRADE_IN_BUYING_PANEL_PY_ALIAS:String = "vehPreviewTradeInBuyingPanel";
 
-        public static const SECRET_EVENT_BUYING_PANEL_PY_ALIAS:String = "vehPreviewSecretEventBuyingPanel";
-
-        public static const SECRET_EVENT_BUYING_ACTION_PANEL_PY_ALIAS:String = "vehPreviewSecretEventBuyingActionPanel";
-
-        public static const SECRET_EVENT_BOUGHT_PANEL_PY_ALIAS:String = "vehPreviewSecretEventBoughtPanel";
-
-        public static const SECRET_EVENT_SOLD_PANEL_PY_ALIAS:String = "vehPreviewSecretEventSoldPanel";
+        public static const OFFER_GIFT_BUYING_PANEL_PY_ALIAS:String = "vehPreviewOfferGiftBuyingPanel";
 
         public static const TRADE_OFF_WIDGET_ALIAS:String = "vehPreviewTradeOffWidget";
-
-        public static const SECRET_EVENT_HEADER_WIDGET_PY_ALIAS:String = "vehPreviewSecretEventHeaderWidget";
 
         public static const CREW_BONUS:int = 0;
 
@@ -72,8 +56,6 @@ package net.wg.data.constants.generated
         public static const COLLECTIBLE:int = 1;
 
         public static const COLLECTIBLE_WITHOUT_MODULES:int = 2;
-
-        public static const SECRET_EVENT_LINKAGES:Array = [SECRET_EVENT_BUYING_PANEL_LINKAGE,SECRET_EVENT_BUYING_ACTION_PANEL_LINKAGE,SECRET_EVENT_BOUGHT_PANEL_LINKAGE,SECRET_EVENT_SOLD_PANEL_LINKAGE,SECRET_EVENT_HEADER_LINKAGE];
 
         public function VEHPREVIEW_CONSTANTS()
         {

@@ -10,11 +10,10 @@ package net.wg.gui.lobby.hangar.quests
     import flash.display.DisplayObject;
     import net.wg.utils.IScheduler;
     import flash.events.MouseEvent;
-    import flash.events.Event;
     import scaleform.clik.constants.InvalidationType;
-    import net.wg.utils.StageSizeBoundaries;
     import flash.geom.Rectangle;
     import net.wg.gui.lobby.hangar.interfaces.IQuestInformerButton;
+    import flash.events.Event;
     import net.wg.data.Aliases;
     import fl.motion.easing.Quadratic;
     import fl.motion.easing.Quartic;
@@ -60,7 +59,7 @@ package net.wg.gui.lobby.hangar.quests
 
         private var _scheduler:IScheduler = null;
 
-        private var _battlePassEntryPoint:BattlePassEntryPoint = null;
+        private var _entryPoint:IHeaderFlagsEntryPoint = null;
 
         public function HeaderQuestsFlags()
         {
@@ -106,7 +105,6 @@ package net.wg.gui.lobby.hangar.quests
             super.configUI();
             this.addEventListener(MouseEvent.ROLL_OUT,this.onThisRollOutHandler);
             this.addEventListener(MouseEvent.ROLL_OVER,this.onThisRollOverHandler);
-            App.stage.addEventListener(Event.RESIZE,this.onStageResizeHandler,false,0,true);
         }
 
         override protected function draw() : void
@@ -121,19 +119,6 @@ package net.wg.gui.lobby.hangar.quests
                 }
                 if(isInvalid(InvalidationType.SIZE))
                 {
-                    if(this._battlePassEntryPoint)
-                    {
-                        if(App.stage.stageWidth >= StageSizeBoundaries.WIDTH_1600 && App.stage.stageHeight >= StageSizeBoundaries.HEIGHT_900)
-                        {
-                            this._battlePassEntryPoint.setIsSmallSize(false);
-                        }
-                        else
-                        {
-                            this._battlePassEntryPoint.setIsSmallSize(true);
-                        }
-                        this._battlePassEntryPoint.validateNow();
-                        this._battlePassEntryPoint.x = -(this._battlePassEntryPoint.width >> 1);
-                    }
                     this.layoutQuestContainers();
                     this.updateHitArea();
                 }
@@ -149,18 +134,18 @@ package net.wg.gui.lobby.hangar.quests
 
         override protected function onDispose() : void
         {
-            App.stage.removeEventListener(Event.RESIZE,this.onStageResizeHandler);
             this._scheduler.cancelTask(this.showCollapseAnim);
             this._scheduler = null;
             this.disposeQuestContainers();
             this.questsHitArea = null;
             this._questsGroupsData = null;
-            if(this._battlePassEntryPoint != null && this._battlePassEntryPoint.parent == this)
-            {
-                removeChild(this._battlePassEntryPoint);
-                this._battlePassEntryPoint = null;
-            }
+            this.clearEntryPoint();
             super.onDispose();
+        }
+
+        public function getEntryPoint() : IHeaderFlagsEntryPoint
+        {
+            return this._entryPoint;
         }
 
         public function getHitRect() : Rectangle
@@ -202,29 +187,34 @@ package net.wg.gui.lobby.hangar.quests
             return null;
         }
 
-        public function setBattlePassEntryPoint(param1:BattlePassEntryPoint) : void
-        {
-            if(param1 == null)
-            {
-                if(this._battlePassEntryPoint && this._battlePassEntryPoint.parent == this)
-                {
-                    removeChild(this._battlePassEntryPoint);
-                }
-            }
-            else
-            {
-                addChildAt(param1,1);
-            }
-            this._battlePassEntryPoint = param1;
-            invalidateSize();
-        }
-
         public function setData(param1:Vector.<HeaderQuestGroupVO>) : void
         {
             if(param1 != null && this._questsGroupsData != param1)
             {
                 this._questsGroupsData = param1;
                 invalidateData();
+            }
+        }
+
+        public function setEntryPoint(param1:IHeaderFlagsEntryPoint) : void
+        {
+            this.clearEntryPoint();
+            if(param1 != null)
+            {
+                addChildAt(DisplayObject(param1),1);
+                DisplayObject(param1).addEventListener(Event.RESIZE,this.onEntryPointResizeHandler);
+            }
+            this._entryPoint = param1;
+            invalidateSize();
+        }
+
+        private function clearEntryPoint() : void
+        {
+            if(this._entryPoint != null)
+            {
+                this._entryPoint.removeEventListener(Event.RESIZE,this.onEntryPointResizeHandler);
+                removeChild(DisplayObject(this._entryPoint));
+                this._entryPoint = null;
             }
         }
 
@@ -376,7 +366,7 @@ package net.wg.gui.lobby.hangar.quests
         private function updateHitArea() : void
         {
             var _loc3_:IHeaderQuestsContainer = null;
-            var _loc1_:int = this.battlePassEntryPointWidth + 2 * QUESTS_GROUP_OFFSET;
+            var _loc1_:int = this.entryPointWidth + 2 * this.entryPointMarginX + 2 * QUESTS_GROUP_OFFSET;
             var _loc2_:* = 0;
             for each(_loc3_ in this._questsGroupsContainers)
             {
@@ -547,12 +537,12 @@ package net.wg.gui.lobby.hangar.quests
 
         private function getInitialRightSideX() : int
         {
-            return this.battlePassEntryPointX + this.battlePassEntryPointWidth + QUESTS_GROUP_OFFSET - this.battlePassEntryPointmMrginX + RIGHT_SIDE_GROUP_X_OFFSET;
+            return (this.entryPointWidth >> 1) + this.entryPointMarginX + QUESTS_GROUP_OFFSET + RIGHT_SIDE_GROUP_X_OFFSET;
         }
 
         private function getInitialLeftSideX(param1:int) : int
         {
-            return this.battlePassEntryPointX - (param1 >> 1) - QUESTS_GROUP_OFFSET + this.battlePassEntryPointmMrginX;
+            return -((this.entryPointWidth >> 1) + (param1 >> 1) + this.entryPointMarginX + QUESTS_GROUP_OFFSET);
         }
 
         private function onMoveContainerCompleted() : void
@@ -560,19 +550,14 @@ package net.wg.gui.lobby.hangar.quests
             this._isMoveContainerInProgress = false;
         }
 
-        private function get battlePassEntryPointWidth() : int
+        private function get entryPointWidth() : int
         {
-            return this._battlePassEntryPoint?this._battlePassEntryPoint.width:0;
+            return this._entryPoint?this._entryPoint.width:0;
         }
 
-        private function get battlePassEntryPointmMrginX() : int
+        private function get entryPointMarginX() : int
         {
-            return this._battlePassEntryPoint?this._battlePassEntryPoint.marginX:0;
-        }
-
-        private function get battlePassEntryPointX() : int
-        {
-            return this._battlePassEntryPoint?this._battlePassEntryPoint.x:0;
+            return this._entryPoint?this._entryPoint.marginX:0;
         }
 
         private function onBtnHeaderQuestClickHandler(param1:HeaderQuestsEvent) : void
@@ -615,7 +600,7 @@ package net.wg.gui.lobby.hangar.quests
             this.updateHitArea();
         }
 
-        private function onStageResizeHandler(param1:Event) : void
+        private function onEntryPointResizeHandler(param1:Event) : void
         {
             invalidateSize();
         }

@@ -23,6 +23,8 @@ package net.wg.gui.lobby.questsWindow.data
 
         public var status:String = "";
 
+        public var statusTooltip:String = "";
+
         public var IGR:Boolean = false;
 
         public var taskType:String = "";

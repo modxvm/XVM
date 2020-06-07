@@ -11,8 +11,6 @@ package net.wg.gui.lobby.window
 
         private static const EXCHANGE_HEADER_DATA:String = "exchangeHeaderData";
 
-        public var buyGoldAvailable:Boolean = false;
-
         public var isHaveElite:Boolean = false;
 
         public var xpForFree:int = -1;

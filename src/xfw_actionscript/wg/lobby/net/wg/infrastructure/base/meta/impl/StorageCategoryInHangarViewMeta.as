@@ -9,6 +9,8 @@ package net.wg.infrastructure.base.meta.impl
     public class StorageCategoryInHangarViewMeta extends BaseDAAPIComponent
     {
 
+        public var setActiveState:Function;
+
         private var _dataProviderOrangeTabsMenuVO:DataProvider;
 
         public function StorageCategoryInHangarViewMeta()
@@ -29,6 +31,12 @@ package net.wg.infrastructure.base.meta.impl
                 this._dataProviderOrangeTabsMenuVO = null;
             }
             super.onDispose();
+        }
+
+        public function setActiveStateS(param1:Boolean) : void
+        {
+            App.utils.asserter.assertNotNull(this.setActiveState,"setActiveState" + Errors.CANT_NULL);
+            this.setActiveState(param1);
         }
 
         public final function as_setTabsData(param1:Array) : void

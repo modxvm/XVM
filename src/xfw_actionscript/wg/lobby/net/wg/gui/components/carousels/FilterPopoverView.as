@@ -1,14 +1,24 @@
 package net.wg.gui.components.carousels
 {
+    import net.wg.gui.components.controls.ScrollBar;
+    import net.wg.gui.components.controls.ResizableScrollPane;
     import net.wg.gui.components.controls.BlackButton;
     import scaleform.clik.events.ButtonEvent;
-    import net.wg.gui.components.carousels.data.FilterCarouseInitVO;
+    import scaleform.clik.constants.InvalidationType;
     import net.wg.gui.components.popovers.PopOverConst;
 
     public class FilterPopoverView extends VehiclesFilterPopoverView
     {
 
         private static const DEFAULT_BTN_OFFSET:uint = 20;
+
+        private static const SCROLL_STEP_FACTOR:int = 30;
+
+        private static const SCROLL_PANE_MAX_HEIGHT:uint = 391;
+
+        public var scrollBar:ScrollBar = null;
+
+        public var scrollPane:ResizableScrollPane = null;
 
         public var switchCarouselBtn:BlackButton = null;
 
@@ -22,6 +32,22 @@ package net.wg.gui.components.carousels
             super.configUI();
             this.switchCarouselBtn.toggleEnable = true;
             this.switchCarouselBtn.addEventListener(ButtonEvent.CLICK,this.onSwitchCarouselBtnClickHandler);
+            this.scrollPane.scrollBar = this.scrollBar;
+            this.scrollPane.scrollStepFactor = SCROLL_STEP_FACTOR;
+            this.scrollPane.target = content;
+            this.scrollPane.scrollPosition = 0;
+        }
+
+        override protected function draw() : void
+        {
+            super.draw();
+            if(initData && isInvalid(InvalidationType.DATA))
+            {
+                this.switchCarouselBtn.iconSource = initData.toggleSwitchCarouselIcon;
+                this.switchCarouselBtn.tooltip = initData.toggleSwitchCarouselTooltip;
+                this.switchCarouselBtn.selected = initData.toggleSwitchCarouselSelected;
+                this.switchCarouselBtn.visible = initData.searchSectionVisible;
+            }
         }
 
         override protected function onDispose() : void
@@ -29,16 +55,11 @@ package net.wg.gui.components.carousels
             this.switchCarouselBtn.removeEventListener(ButtonEvent.CLICK,this.onSwitchCarouselBtnClickHandler);
             this.switchCarouselBtn.dispose();
             this.switchCarouselBtn = null;
+            this.scrollPane.target = null;
+            this.scrollPane.dispose();
+            this.scrollPane = null;
+            this.scrollBar = null;
             super.onDispose();
-        }
-
-        override protected function setInitData(param1:FilterCarouseInitVO) : void
-        {
-            super.setInitData(param1);
-            this.switchCarouselBtn.iconSource = initData.toggleSwitchCarouselIcon;
-            this.switchCarouselBtn.tooltip = initData.toggleSwitchCarouselTooltip;
-            this.switchCarouselBtn.selected = initData.toggleSwitchCarouselSelected;
-            this.switchCarouselBtn.visible = initData.searchSectionVisible;
         }
 
         override protected function getPreferredLayout() : int
@@ -46,21 +67,22 @@ package net.wg.gui.components.carousels
             return PopOverConst.ARROW_BOTTOM;
         }
 
-        override protected function initLayout() : void
-        {
-            popoverLayout.preferredLayout = this.getPreferredLayout();
-            super.initLayout();
-        }
-
         override protected function updateSize() : void
         {
-            super.updateSize();
-            if(initData != null && initData.searchSectionVisible)
+            this.scrollPane.setSize(width,Math.min(content.height,SCROLL_PANE_MAX_HEIGHT));
+            this.scrollBar.height = this.scrollPane.height;
+            setViewSize(width,this.getNewHeight(this.scrollPane.y + this.scrollPane.height));
+        }
+
+        override protected function getNewHeight(param1:int) : int
+        {
+            var _loc2_:int = super.getNewHeight(param1);
+            if(initData.searchSectionVisible)
             {
-                this.switchCarouselBtn.y = separatorBottom.y + separatorBottom.height + DEFAULT_BTN_OFFSET;
-                currentPopoverHeight = this.switchCarouselBtn.y + this.switchCarouselBtn.height + PADDING;
+                this.switchCarouselBtn.y = separatorBottom.y + separatorBottom.height + DEFAULT_BTN_OFFSET | 0;
+                _loc2_ = this.switchCarouselBtn.y + this.switchCarouselBtn.height + PADDING;
             }
-            setViewSize(width,currentPopoverHeight);
+            return _loc2_;
         }
 
         private function onSwitchCarouselBtnClickHandler(param1:ButtonEvent) : void

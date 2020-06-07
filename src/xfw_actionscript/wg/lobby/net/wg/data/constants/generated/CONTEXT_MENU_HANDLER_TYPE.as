@@ -45,7 +45,7 @@ package net.wg.data.constants.generated
 
         public static const STRONGHOLD_USER:String = "strongholdUser";
 
-        public static const INGAME_SHOP:String = "ingameShop";
+        public static const SHOP:String = "shop";
 
         public static const STORAGE_FOR_SELL_ITEM:String = "storageForSellItem";
 

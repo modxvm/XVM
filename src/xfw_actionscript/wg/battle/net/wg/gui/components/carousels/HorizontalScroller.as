@@ -133,7 +133,7 @@ package net.wg.gui.components.carousels
                     }
                     if(scrollImmediately)
                     {
-                        horizontalScrollPosition = _loc2_;
+                        throwToHorizontalPosition(_loc2_,0);
                     }
                     else if(scrollIfRendererVisible || horizontalScrollPosition > _loc2_ || horizontalScrollPosition + width <= _loc2_)
                     {

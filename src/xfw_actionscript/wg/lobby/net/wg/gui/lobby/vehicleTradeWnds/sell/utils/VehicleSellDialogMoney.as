@@ -87,24 +87,6 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell.utils
             return _loc2_;
         }
 
-        public function hasEnoughMoney(param1:Boolean) : Boolean
-        {
-            var _loc3_:VehicleSellDialogMoneyVO = null;
-            var _loc2_:* = true;
-            for each(_loc3_ in _loc3_)
-            {
-                if(!_loc3_.hasEnough)
-                {
-                    if(_loc3_.type == CURRENCIES_CONSTANTS.GOLD && param1)
-                    {
-                        continue;
-                    }
-                    return false;
-                }
-            }
-            return _loc2_;
-        }
-
         public function geResultMoney() : Vector.<VehicleSellDialogMoneyVO>
         {
             var _loc1_:Vector.<VehicleSellDialogMoneyVO> = new Vector.<VehicleSellDialogMoneyVO>(0);

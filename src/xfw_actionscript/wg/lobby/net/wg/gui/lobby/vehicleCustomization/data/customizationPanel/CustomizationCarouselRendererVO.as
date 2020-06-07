@@ -2,9 +2,14 @@ package net.wg.gui.lobby.vehicleCustomization.data.customizationPanel
 {
     import net.wg.data.daapi.base.DAAPIDataClass;
     import net.wg.gui.components.controls.VO.ItemPriceVO;
+    import org.idmedia.as3commons.util.StringUtils;
 
     public class CustomizationCarouselRendererVO extends DAAPIDataClass
     {
+
+        private static const EDITABLE_ICON_NAME_PREFIX_SMALL:String = "small";
+
+        private static const EDITABLE_ICON_NAME_PREFIX_BIG:String = "big";
 
         private static const BUY_PRICE:String = "buyPrice";
 
@@ -72,7 +77,17 @@ package net.wg.gui.lobby.vehicleCustomization.data.customizationPanel
 
         public var formFactor:int = -1;
 
-        public var customVehicleCD:int = -1;
+        public var progressionLevel:int = -1;
+
+        public var editableIcon:String = "";
+
+        public var editBtnEnabled:Boolean = false;
+
+        public var showEditableHint:Boolean = false;
+
+        public var showEditBtnHint:Boolean = false;
+
+        public var scale:Number = 1.0;
 
         public function CustomizationCarouselRendererVO(param1:Object)
         {
@@ -97,6 +112,16 @@ package net.wg.gui.lobby.vehicleCustomization.data.customizationPanel
                 this.buyPrice = null;
             }
             super.onDispose();
+        }
+
+        public function get isEditableStyle() : Boolean
+        {
+            return StringUtils.isNotEmpty(this.editableIcon);
+        }
+
+        public function get editableIconBig() : String
+        {
+            return this.editableIcon.replace(EDITABLE_ICON_NAME_PREFIX_SMALL,EDITABLE_ICON_NAME_PREFIX_BIG);
         }
     }
 }

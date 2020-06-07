@@ -44,8 +44,6 @@ package net.wg.gui.lobby.barracks.data
 
         public var price:String = "";
 
-        public var enoughGold:Boolean = false;
-
         public var actionPriceData:ActionPriceVO = null;
 
         public var count:int = -1;

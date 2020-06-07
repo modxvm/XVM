@@ -85,7 +85,7 @@ package net.wg.gui.battle.epicBattle.views.stats.renderers
 
         public var testerIcon:BattleAtlasSprite = null;
 
-        public var testerBG:MovieClip = null;
+        public var testerBG:BattleAtlasSprite = null;
 
         private var _userProps:StatsUserProps = null;
 
@@ -589,6 +589,7 @@ package net.wg.gui.battle.epicBattle.views.stats.renderers
             if(_loc1_)
             {
                 this.testerIcon.imageName = this._data.suffixBadgeType;
+                this.testerBG.imageName = this._data.suffixBadgeStripType;
                 if(this._isRightSide)
                 {
                     this.testerIcon.x = -FIELD_WIDTH_COMPENSATION - RANKED_BADGE_OFFSET - this.testerIcon.width + (this.playerName.x + (this.playerName.width - this.playerName.textWidth)) >> 0;

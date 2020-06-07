@@ -13,8 +13,6 @@ package net.wg.infrastructure.base.meta
 
         function changeSeasonS(param1:int, param2:Boolean) : void;
 
-        function itemContextMenuDisplayedS() : void;
-
         function onLobbyClickS() : void;
 
         function onSelectAnchorS(param1:int, param2:int, param3:int) : void;
@@ -41,6 +39,8 @@ package net.wg.infrastructure.base.meta
 
         function resetC11nItemsNoveltyS(param1:Array) : void;
 
+        function onProgressionEntryPointClickS() : void;
+
         function as_hide(param1:Boolean) : void;
 
         function as_setHeaderData(param1:Object) : void;
@@ -65,12 +65,14 @@ package net.wg.infrastructure.base.meta
 
         function as_showCarouselsArrowsNotification(param1:String) : void;
 
-        function as_reselect(param1:int) : void;
+        function as_reselect(param1:Object) : void;
 
         function as_setNotificationCounters(param1:Array) : void;
 
         function as_setAnchorsState(param1:Object) : void;
 
-        function as_attachToCursor(param1:int) : void;
+        function as_attachToCursor(param1:Object) : void;
+
+        function as_progressionEntryPointVisible(param1:Boolean) : void;
     }
 }

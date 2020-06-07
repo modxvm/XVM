@@ -7,6 +7,7 @@ package net.wg.gui.lobby.questsWindow.components
     import flash.text.TextFormat;
     import net.wg.data.constants.QuestsStates;
     import flash.text.TextFieldAutoSize;
+    import org.idmedia.as3commons.util.StringUtils;
 
     public class QuestStatusComponent extends UIComponentEx
     {
@@ -22,6 +23,8 @@ package net.wg.gui.lobby.questsWindow.components
         public var iconMC:MovieClip;
 
         private var _status:String = "";
+
+        private var _defaultStatusTooltip:String = "";
 
         private var _statusTooltip:String = "";
 
@@ -73,7 +76,7 @@ package net.wg.gui.lobby.questsWindow.components
                     this.iconMC.gotoAndStop(QuestsStates.NOT_AVAILABLE);
                     this.textField.text = QUESTS.QUESTS_STATUS_NOTAVAILABLE;
                     this.textField.textColor = QuestsStates.CLR_STATUS_NOT_AVAILABLE;
-                    this._statusTooltip = TOOLTIPS.QUESTS_STATUS_NOTREADY;
+                    this._defaultStatusTooltip = TOOLTIPS.QUESTS_STATUS_NOTREADY;
                 }
                 else if(this._status == QuestsStates.DONE)
                 {
@@ -81,19 +84,19 @@ package net.wg.gui.lobby.questsWindow.components
                     this.iconMC.gotoAndStop(QuestsStates.DONE);
                     this.textField.text = QUESTS.QUESTS_STATUS_DONE;
                     this.textField.textColor = QuestsStates.CLR_STATUS_DONE;
-                    this._statusTooltip = TOOLTIPS.QUESTS_STATUS_DONE;
+                    this._defaultStatusTooltip = TOOLTIPS.QUESTS_STATUS_DONE;
                 }
                 else if(this._status == QuestsStates.NOT_DONE)
                 {
                     this.iconMC.gotoAndStop(QuestsStates.NOT_DONE);
                     this.textField.text = QUESTS.QUESTS_STATUS_NOTDONE;
                     this.textField.textColor = QuestsStates.CLR_STATUS_NOT_DONE;
-                    this._statusTooltip = TOOLTIPS.QUESTS_STATUS_NOTDONE;
+                    this._defaultStatusTooltip = TOOLTIPS.QUESTS_STATUS_NOTDONE;
                 }
                 else
                 {
                     visible = false;
-                    this._statusTooltip = "";
+                    this._defaultStatusTooltip = "";
                 }
             }
             if(isInvalid(INV_ALIGN))
@@ -116,6 +119,11 @@ package net.wg.gui.lobby.questsWindow.components
             }
             this._status = param1;
             invalidate(INV_STATUS);
+        }
+
+        public function set statusTooltip(param1:String) : void
+        {
+            this._statusTooltip = param1;
         }
 
         public function get showTooltip() : Boolean
@@ -143,7 +151,14 @@ package net.wg.gui.lobby.questsWindow.components
         {
             if(this._showTooltip)
             {
-                App.toolTipMgr.show(this._statusTooltip);
+                if(StringUtils.isNotEmpty(this._statusTooltip))
+                {
+                    App.toolTipMgr.show(this._statusTooltip);
+                }
+                else
+                {
+                    App.toolTipMgr.show(this._defaultStatusTooltip);
+                }
             }
         }
     }

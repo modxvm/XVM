@@ -3,7 +3,6 @@ package net.wg.gui.battle.views.vehicleMarkers.statusMarkers
     import flash.display.MovieClip;
     import flash.text.TextField;
     import scaleform.gfx.TextFieldEx;
-    import net.wg.data.constants.Values;
 
     public class VehicleStunMarker extends VehicleAnimatedStatusBaseMarker
     {
@@ -53,11 +52,6 @@ package net.wg.gui.battle.views.vehicleMarkers.statusMarkers
                 TextFieldEx.setNoTranslate(TextField(this.counterMc.labelTf),true);
             }
             this.counterMc.labelTf.text = (param1 ^ 0) + this._secString;
-        }
-
-        override public function clearTimer() : void
-        {
-            this.counterMc.labelTf.text = Values.EMPTY_STR;
         }
     }
 }
