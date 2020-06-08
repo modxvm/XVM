@@ -40,12 +40,12 @@ clean_directories()
 
 prepare_changelog()
 {
-    cp "$XVMBUILD_ROOT_PATH/release/doc/ChangeLog-en.txt" "$XVMINST_ROOT_PATH/temp/changelogs/"
-    cp "$XVMBUILD_ROOT_PATH/release/doc/ChangeLog-ru.txt" "$XVMINST_ROOT_PATH/temp/changelogs/"
+    cp "$XVMBUILD_ROOT_PATH/release/doc/ChangeLog-en.md" "$XVMINST_ROOT_PATH/temp/changelogs/"
+    cp "$XVMBUILD_ROOT_PATH/release/doc/ChangeLog-ru.md" "$XVMINST_ROOT_PATH/temp/changelogs/"
 
-    sed -i '1s/^\xef\xbb\xbf//' "$XVMINST_ROOT_PATH/temp/changelogs/ChangeLog-ru.txt"
-    iconv --from-code=utf-8 --to-code=cp1251 "$XVMINST_ROOT_PATH/temp/changelogs/ChangeLog-ru.txt" > "$XVMINST_ROOT_PATH/temp/changelogs/ChangeLog-ru.txt.new"
-    mv "$XVMINST_ROOT_PATH/temp/changelogs/ChangeLog-ru.txt.new" "$XVMINST_ROOT_PATH/temp/changelogs/ChangeLog-ru.txt"
+    sed -i '1s/^\xef\xbb\xbf//' "$XVMINST_ROOT_PATH/temp/changelogs/ChangeLog-ru.md"
+    iconv --from-code=utf-8 --to-code=cp1251 "$XVMINST_ROOT_PATH/temp/changelogs/ChangeLog-ru.md" > "$XVMINST_ROOT_PATH/temp/changelogs/ChangeLog-ru.md.new"
+    mv "$XVMINST_ROOT_PATH/temp/changelogs/ChangeLog-ru.md.new" "$XVMINST_ROOT_PATH/temp/changelogs/ChangeLog-ru.md"
 }
 
 prepare_defines()
@@ -80,7 +80,7 @@ prepare_languages()
 
     echo "[Languages]" >> lang.iss
 
-    echo "Name: \"en\"; MessagesFile: \"l10n_inno\\en.islu,..\\temp\\l10n_result\\en.islu\"; InfoBeforeFile: \"..\\temp\\changelogs\\ChangeLog-en.txt\"" >> lang.iss
+    echo "Name: \"en\"; MessagesFile: \"l10n_inno\\en.islu,..\\temp\\l10n_result\\en.islu\"; InfoBeforeFile: \"..\\temp\\changelogs\\ChangeLog-en.md\"" >> lang.iss
 
     for file in *.islu; do
         lang="${file%.*}"
@@ -94,7 +94,7 @@ prepare_languages()
             fi
 
             if [ -f "$XVMINST_ROOT_PATH/src/l10n_inno/$lang.islu" ]; then
-                echo "Name: \"$lang\"; MessagesFile: \"l10n_inno\\$lang.islu,..\\temp\\l10n_result\\$lang.islu\"; InfoBeforeFile: \"..\\temp\\changelogs\\ChangeLog-$langchg.txt\"" >> lang.iss
+                echo "Name: \"$lang\"; MessagesFile: \"l10n_inno\\$lang.islu,..\\temp\\l10n_result\\$lang.islu\"; InfoBeforeFile: \"..\\temp\\changelogs\\ChangeLog-$langchg.md\"" >> lang.iss
             fi
         fi
     done
