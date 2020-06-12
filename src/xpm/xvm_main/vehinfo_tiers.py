@@ -15,7 +15,7 @@ from skeletons.gui.shared import IItemsCache
 
 _special = {
     # Data from http://forum.worldoftanks.ru/index.php?/topic/1894923-
-    # Last update: 06.06.2020
+    # Last update: 12.06.2020
 
     # level 2
     'germany:G53_PzI':                     [ 2, 2 ],
