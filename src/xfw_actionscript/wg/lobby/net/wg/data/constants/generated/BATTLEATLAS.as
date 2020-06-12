@@ -2235,6 +2235,8 @@ package net.wg.data.constants.generated
 
         public static const UK_GB35_SENTINEL_AC_IV:String = "uk-GB35_Sentinel_AC_IV";
 
+        public static const UK_GB37_VALLIANT:String = "uk-GB37_Valliant";
+
         public static const UK_GB39_UNIVERSAL_CARRIER_QF2:String = "uk-GB39_Universal_CarrierQF2";
 
         public static const UK_GB40_GUN_CARRIER_CHURCHILL:String = "uk-GB40_Gun_Carrier_Churchill";

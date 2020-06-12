@@ -27,7 +27,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 06.06.2020
+    # Last update: 12.06.2020
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -479,6 +479,7 @@ _data = {
     "uk:GB32_Tortoise":                      'Tort',
     "uk:GB33_Sentinel_AC_I":                 'Sentw',
     "uk:GB35_Sentinel_AC_IV":                'SentAC',
+    "uk:GB37_Valliant":                      'Vali.',
     "uk:GB39_Universal_CarrierQF2":          'QF2',
     "uk:GB40_Gun_Carrier_Churchill":         'ChrGC',
     "uk:GB41_Challenger":                    'Chall',
