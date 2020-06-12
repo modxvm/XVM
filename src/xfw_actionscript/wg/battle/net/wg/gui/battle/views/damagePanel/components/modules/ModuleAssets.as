@@ -90,9 +90,9 @@ package net.wg.gui.battle.views.damagePanel.components.modules
         {
             this._modulesHit.dispose();
             this._modulesHit = null;
-            this._critical.bitmapData.dispose();
+            this._critical.bitmapData = null;
             this._critical = null;
-            this._destroyed.bitmapData.dispose();
+            this._destroyed.bitmapData = null;
             this._destroyed = null;
             this._repairAnim.dispose();
             this._repairAnim = null;

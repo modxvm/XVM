@@ -2,7 +2,6 @@ package net.wg.gui.prebattle.controls
 {
     import flash.text.TextField;
     import scaleform.clik.core.UIComponent;
-    import flash.display.Sprite;
     import scaleform.clik.utils.Constraints;
     import net.wg.data.constants.Values;
     import net.wg.data.constants.UserTags;
@@ -22,7 +21,7 @@ package net.wg.gui.prebattle.controls
 
         public var vehicle_type_icon:UIComponent;
 
-        public var boosterIcon:Sprite;
+        public var boosterIcon:UIComponent;
 
         public var toolTipStr:String = "";
 
@@ -54,6 +53,7 @@ package net.wg.gui.prebattle.controls
             this.wrong_limits = null;
             this.vehicle_type_icon.dispose();
             this.vehicle_type_icon = null;
+            this.boosterIcon.dispose();
             this.boosterIcon = null;
             super.onDispose();
         }
@@ -62,6 +62,7 @@ package net.wg.gui.prebattle.controls
         {
             super.configUI();
             constraints.addElement(this.vehicle_type_icon.name,this.vehicle_type_icon,Constraints.ALL);
+            constraints.addElement(this.boosterIcon.name,this.boosterIcon,Constraints.ALL);
         }
 
         override protected function showToolTips() : void
@@ -211,6 +212,7 @@ package net.wg.gui.prebattle.controls
             constraints.updateElement("status",status);
             constraints.updateElement("vehicleNameField",vehicleNameField);
             constraints.updateElement(this.vehicle_type_icon.name,this.vehicle_type_icon);
+            constraints.updateElement(this.boosterIcon.name,this.boosterIcon);
         }
 
         private function updateValidVehicleState(param1:Boolean) : void
