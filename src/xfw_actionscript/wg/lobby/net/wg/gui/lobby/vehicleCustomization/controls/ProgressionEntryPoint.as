@@ -4,13 +4,14 @@ package net.wg.gui.lobby.vehicleCustomization.controls
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import flash.display.Sprite;
     import flash.text.TextField;
+    import flash.text.TextFormat;
     import flash.events.MouseEvent;
+    import net.wg.gui.lobby.vehicleCustomization.CustomizationMainView;
     import net.wg.gui.lobby.vehicleCustomization.events.CustomizationSoundEvent;
     import net.wg.data.constants.generated.CUSTOMIZATION_ALIASES;
     import scaleform.gfx.MouseEventEx;
     import net.wg.data.constants.SoundTypes;
     import net.wg.gui.lobby.vehicleCustomization.events.CustomizationEvent;
-    import flash.text.TextFieldAutoSize;
 
     public class ProgressionEntryPoint extends UIComponentEx implements IDisposable
     {
@@ -25,6 +26,22 @@ package net.wg.gui.lobby.vehicleCustomization.controls
 
         private static const FREE_SPACE_WIDTH:uint = 184;
 
+        private static const ONE_LINE_TEXT_SIZE:uint = 20;
+
+        private static const TEXT_POSITION_SMALL:uint = 122;
+
+        private static const TEXT_POSITION_BIG:uint = 130;
+
+        private static const TEXT_POSITION_SINGLE:uint = 135;
+
+        private static const FONT_SIZE:uint = 13;
+
+        private static const FONT_SIZE_BIG:uint = 15;
+
+        private static const TEXT_SIZE:uint = 130;
+
+        private static const TEXT_SIZE_BIG:uint = 160;
+
         public var hitMc:Sprite = null;
 
         public var border:Sprite = null;
@@ -33,6 +50,8 @@ package net.wg.gui.lobby.vehicleCustomization.controls
 
         public var textField:TextField = null;
 
+        private var _textFormat:TextFormat;
+
         public function ProgressionEntryPoint()
         {
             var _loc1_:Sprite = null;
@@ -40,7 +59,6 @@ package net.wg.gui.lobby.vehicleCustomization.controls
             hitArea = this.hitMc;
             buttonMode = true;
             hitArea.buttonMode = true;
-            this.textField.autoSize = TextFieldAutoSize.CENTER;
             _loc1_ = new Sprite();
             _loc1_.name = BORDERS_HIT_AREA_NAME;
             addChild(_loc1_);
@@ -48,6 +66,9 @@ package net.wg.gui.lobby.vehicleCustomization.controls
             this.borderHover.mouseEnabled = this.borderHover.mouseChildren = false;
             this.border.hitArea = _loc1_;
             this.borderHover.hitArea = _loc1_;
+            this._textFormat = new TextFormat();
+            this._textFormat.size = FONT_SIZE_BIG;
+            this.textField.setTextFormat(this._textFormat);
             addEventListener(MouseEvent.MOUSE_OVER,this.onMouseOverHandler);
             addEventListener(MouseEvent.MOUSE_OUT,this.onMouseOutHandler);
             addEventListener(MouseEvent.CLICK,this.onClickHandler);
@@ -68,11 +89,29 @@ package net.wg.gui.lobby.vehicleCustomization.controls
 
         public function setScale(param1:Number) : void
         {
+            var _loc2_:* = param1 < CustomizationMainView.ENTRY_POINT_SCALE;
+            var _loc3_:* = this.textField.textHeight > ONE_LINE_TEXT_SIZE;
             scaleX = scaleY = param1;
             this.textField.scaleX = this.textField.scaleY = BASE_SCALE / param1;
-            this.textField.width = this.textField.width | 0;
-            this.textField.height = this.textField.height | 0;
+            if(_loc3_)
+            {
+                if(_loc2_)
+                {
+                    this.textField.y = TEXT_POSITION_SMALL;
+                }
+                else
+                {
+                    this.textField.y = TEXT_POSITION_BIG;
+                }
+            }
+            else
+            {
+                this.textField.y = TEXT_POSITION_SINGLE;
+            }
+            this.textField.width = _loc2_?TEXT_SIZE:TEXT_SIZE_BIG;
+            this._textFormat.size = _loc2_?FONT_SIZE:FONT_SIZE_BIG;
             this.textField.x = FREE_SPACE_WIDTH - this.textField.width >> 1;
+            this.textField.setTextFormat(this._textFormat);
         }
 
         public function set label(param1:String) : void

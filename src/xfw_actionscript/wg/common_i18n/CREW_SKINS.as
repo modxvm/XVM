@@ -347,6 +347,18 @@ package
 
         public static const SELEZNEV_DESCR:String = "#crew_skins:seleznev/Descr";
 
+        public static const VOJTECH_NAME:String = "#crew_skins:vojtech/Name";
+
+        public static const VOJTECH_LASTNAME:String = "#crew_skins:vojtech/LastName";
+
+        public static const VOJTECH_DESCR:String = "#crew_skins:vojtech/Descr";
+
+        public static const RAMIREZ_NAME:String = "#crew_skins:ramirez/Name";
+
+        public static const RAMIREZ_LASTNAME:String = "#crew_skins:ramirez/LastName";
+
+        public static const RAMIREZ_DESCR:String = "#crew_skins:ramirez/Descr";
+
         public function CREW_SKINS()
         {
             super();

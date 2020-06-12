@@ -92,7 +92,7 @@ package net.wg.gui.lobby.vehicleCustomization
 
         private static const ENTRY_POINT_MIN:int = 10;
 
-        private static const ENTRY_POINT_SCALE:Number = 1;
+        public static const ENTRY_POINT_SCALE:Number = 1;
 
         private static const ENTRY_POINT_MIN_SCALE:Number = 0.75;
 

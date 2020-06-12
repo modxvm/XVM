@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 06.06.2020
+    // Last update: 12.06.2020
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -456,6 +456,7 @@
     "uk-GB32_Tortoise":                      {"name": null, "short": null},
     "uk-GB33_Sentinel_AC_I":                 {"name": null, "short": null},
     "uk-GB35_Sentinel_AC_IV":                {"name": null, "short": null},
+    "uk-GB37_Valliant":                      {"name": null, "short": null},
     "uk-GB39_Universal_CarrierQF2":          {"name": null, "short": null},
     "uk-GB40_Gun_Carrier_Churchill":         {"name": null, "short": null},
     "uk-GB41_Challenger":                    {"name": null, "short": null},
