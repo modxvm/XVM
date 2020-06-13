@@ -133,6 +133,11 @@ def _SniperCamera_handleSettingsChange(base, self, diff):
         diff['increasedZoom'] = True
     base(self, diff)
 
+@registerEvent(SniperCamera, '_updateSettingsFromServer')
+def _SniperCamera_updateSettingsFromServer(self):
+    if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/zooms'):
+        self._cfg['increasedZoom'] = True
+
 @overrideMethod(SniperCamera, 'enable')
 def _SniperCamera_enable(base, self, targetPos, saveZoom):
     #debug('_SniperCamera_enable')
