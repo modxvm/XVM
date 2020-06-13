@@ -51,11 +51,18 @@ package com.xvm.battle.classic.battleloading
 
         override protected function setVisualTipInfo(data:VisualTipInfoVO):void
         {
-            //Logger.addObject(param1);
-            super.setVisualTipInfo(data);
-            isTipsForm = data.showTipsBackground;
-            setup();
-            initRenderers();
+            try
+            {
+                //Logger.addObject(param1);
+                super.setVisualTipInfo(data);
+                isTipsForm = data.showTipsBackground;
+                setup();
+                initRenderers();
+            }
+            catch (ex:Error)
+            {
+                Logger.err(ex);
+            }
         }
 
         override public function setCompVisible(value:Boolean):void
