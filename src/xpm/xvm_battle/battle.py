@@ -390,16 +390,16 @@ class Battle(object):
     def invalidateArenaInfo(self):
         #debug('battle: invalidateArenaInfo')
         if self.battle_page:
-            if battle_loading.isBattleLoadingShowed():
-                if 'battleLoading' in self.battle_page.as_getComponentsVisibilityS():
-                    battleLoading = self.battle_page.getComponent(BATTLE_VIEW_ALIASES.BATTLE_LOADING)
-                    if battleLoading:
-                        battle_loading._setBattleLoading(False)
-                        #TODO: 1.9.1
-                        try:
-                            battleLoading.invalidateArenaInfo()
-                        except Exception:
-                            err(traceback.format_exc())
+            #TODO 1.9.1
+            #if battle_loading.isBattleLoadingShowed():
+            #    if 'battleLoading' in self.battle_page.as_getComponentsVisibilityS():
+            #        battleLoading = self.battle_page.getComponent(BATTLE_VIEW_ALIASES.BATTLE_LOADING)
+            #        if battleLoading:
+            #            battle_loading._setBattleLoading(False)
+            #            try:
+            #                battleLoading.invalidateArenaInfo()
+            #            except Exception:
+            #                err(traceback.format_exc())
             ctrl = self.battle_page.getComponent(BATTLE_VIEW_ALIASES.BATTLE_STATISTIC_DATA_CONTROLLER)
             if ctrl and not isinstance(ctrl, EpicStatisticsDataController):
                 ctrl._dispose()
