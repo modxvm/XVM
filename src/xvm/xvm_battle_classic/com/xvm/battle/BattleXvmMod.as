@@ -27,7 +27,7 @@ package com.xvm.battle
         private static const VIEWS:Object =
         {
             "classicBattlePage": [
-                //TODO: WoT 1.9.1 RandomBattleLoadingXvmView,
+                RandomBattleLoadingXvmView,
                 FullStatsXvmView,
                 PlayersPanelXvmView,
                 TeamBasesPanelXvmView,

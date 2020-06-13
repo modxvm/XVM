@@ -73,7 +73,7 @@ package com.xvm.battle.shared.battleloading
         private var _playerActionMarker:PlayerActionMarker;
         private var _icoIGR:BattleAtlasSprite;
         private var _icoTester:BattleAtlasSprite;
-        private var _backTester:MovieClip;
+        private var _backTester:BattleAtlasSprite;
         private var _selfBg:BattleAtlasSprite;
 
         private var _substrateHolder:Sprite;

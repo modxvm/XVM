@@ -25,7 +25,7 @@ package com.xvm.battle
         private static const VIEWS:Object =
         {
             "epicRandomPage": [
-                //TODO: WoT 1.9.1 EpicRandomBattleLoadingXvmView,
+                EpicRandomBattleLoadingXvmView,
                 EpicRandomPlayersPanelXvmView,
                 TeamBasesPanelXvmView,
                 MinimapXvmView,

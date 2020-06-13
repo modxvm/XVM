@@ -27,7 +27,7 @@ package com.xvm.battle
         private static const VIEWS:Object =
         {
             "rankedBattlePage": [
-                //TODO: WoT 1.9.1 RankedBattleLoadingXvmView,
+                RankedBattleLoadingXvmView,
                 RankedFullStatsXvmView,
                 RankedPlayersPanelXvmView,
                 TeamBasesPanelXvmView,
