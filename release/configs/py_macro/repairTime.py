@@ -1,5 +1,5 @@
 ﻿from Avatar import PlayerAvatar
-from xfw import registerEvent
+from xfw.events import registerEvent
 from xfw_actionscript.python import as_event
 from gui.shared.utils.TimeInterval import TimeInterval
 from gui.Scaleform.daapi.view.battle.shared.damage_panel import DamagePanel
