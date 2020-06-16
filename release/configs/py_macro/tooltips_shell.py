@@ -5,7 +5,7 @@ from helpers import dependency
 from helpers.i18n import makeString
 from constants import ITEM_DEFS_PATH
 from skeletons.gui.shared import IItemsCache
-import gui.shared.tooltips.shell as tooltips_shell
+from gui.shared.tooltips.shell import CommonStatsBlockConstructor
 from gui.shared.tooltips import formatters
 from gui.shared.formatters import text_styles
 from gui.Scaleform.daapi.view.common.vehicle_carousel.carousel_data_provider import CarouselDataProvider
@@ -54,7 +54,7 @@ for nation in nations.NAMES:
             shells[nation][k_s] = shells[nation].get(k_s, set()) | guns.get(gun, set())
 
 
-@overrideMethod(tooltips_shell.CommonStatsBlockConstructor, 'construct')
+@overrideMethod(CommonStatsBlockConstructor, 'construct')
 def CommonStatsBlockConstructor_construct(base, self):
     block = base(self)
     if self.configuration.params:
@@ -79,14 +79,6 @@ def updateMyVehicles():
     myVehicles = {v.userName for v in vehicles.itervalues() if v.invID >= 0}
 
 
-#TODO: 1.9.1
-#@registerEvent(StoreView, '_initialize')
-#def StoreView_initialize(self, ctx=None):
-#    updateMyVehicles()
-
-
 @registerEvent(CarouselDataProvider, 'buildList')
 def buildList(self):
     updateMyVehicles()
-
-
