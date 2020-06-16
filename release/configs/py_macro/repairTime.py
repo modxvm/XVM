@@ -101,7 +101,7 @@ class RepairTimers(object):
             return None
         elif device == COMPLEX:
             if self.isWheeledTech:
-                result = self.timers[WHEEL].get('duration', None)
+                result = self.timers.get(WHEEL, {}).get('duration', None)
             else:
                 isLeftTrackInTimers = LEFTTRACK in self.timers
                 isRightTrackInTimers = RIGHTTRACK in self.timers
@@ -126,8 +126,7 @@ RepairTimers = RepairTimers()
 
 @registerEvent(PlayerAvatar, 'onVehicleChanged')
 def onVehicleChanged(self):
-    if self.vehicle is not None:
-        RepairTimers.isWheeledTech = self.vehicle.isWheeledTech
+    RepairTimers.isWheeledTech = getattr(self.vehicle, 'isWheeledTech', False)
 
 @registerEvent(DamagePanel, '_switching')
 def _switching(self, _):
