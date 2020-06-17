@@ -52,7 +52,7 @@ def _CustomFilesCache__onReadLocalFile(base, self, url, showImmediately):
             err(traceback.format_exc())
 
 @overrideMethod(debug_utils, '_doLog')
-def _doLog(base, category, msg, args=None, kwargs={}):
+def _doLog(base, category, msg, *args, **kwargs):
     if isCommonTest:
         if category == 'DEBUG':
             if msg == '_updateToLatestVersion':
