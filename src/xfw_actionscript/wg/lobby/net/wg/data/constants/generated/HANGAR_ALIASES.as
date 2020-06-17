@@ -35,6 +35,8 @@ package net.wg.data.constants.generated
 
         public static const EPIC_PRIME_TIME:String = "epicPrimeTime.swf";
 
+        public static const EVENT_10YC_PRIME_TIME:String = "event10YCPrimeTime.swf";
+
         public static const TANK_CAROUSEL_UI:String = "TankCarouselUI";
 
         public static const VEH_PARAM_RENDERER_STATE_SIMPLE_TOP:String = "simpleTop";

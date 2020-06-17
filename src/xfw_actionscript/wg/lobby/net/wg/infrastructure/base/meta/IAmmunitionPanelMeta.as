@@ -24,5 +24,9 @@ package net.wg.infrastructure.base.meta
         function as_setBoosterBtnCounter(param1:int) : void;
 
         function as_showAnimation(param1:String, param2:int, param3:String) : void;
+
+        function as_setEquipmentEnabled(param1:Boolean) : void;
+
+        function as_optionalDevicesEnabled(param1:Boolean) : void;
     }
 }

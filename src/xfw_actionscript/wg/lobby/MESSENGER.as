@@ -1911,6 +1911,12 @@ package
 
         public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_UPGRADE:String = "#messenger:serviceChannelMessages/sysMsg/titles/upgrade";
 
+        public static const SERVICECHANNELMESSAGES_SPGEVENT_TITLES_AVAILABLE:String = "#messenger:serviceChannelMessages/spgEvent/titles/available";
+
+        public static const SERVICECHANNELMESSAGES_SPGEVENT_TITLES_NOTSET:String = "#messenger:serviceChannelMessages/spgEvent/titles/notSet";
+
+        public static const SERVICECHANNELMESSAGES_SPGEVENT_TITLES_PRIMETIME:String = "#messenger:serviceChannelMessages/spgEvent/titles/primeTime";
+
         public static const DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_ENUM:Array = [DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_OFFLINE,DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_NOTREADY,DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_READY,DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_INBATTLE,DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_AFK];
 
         public function MESSENGER()

@@ -447,6 +447,10 @@ package
 
         public static const SQUADWINDOW_WAITINGFORBATTLE:String = "#cyberSport:squadWindow/waitingForBattle";
 
+        public static const SQUADWINDOW_EVENTDISABLEDMESSAGE:String = "#cyberSport:squadWindow/eventDisabledMessage";
+
+        public static const SQUADWINDOW_EVENTNOTSETMESSAGE:String = "#cyberSport:squadWindow/eventNotSetMessage";
+
         public function CYBERSPORT()
         {
             super();

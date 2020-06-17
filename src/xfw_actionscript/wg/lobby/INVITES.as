@@ -109,6 +109,8 @@ package
 
         public static const INVITES_NOTE_LEAVE_SQUAD:String = "#invites:invites/note/leave/SQUAD";
 
+        public static const INVITES_NOTE_LEAVE_EVENT:String = "#invites:invites/note/leave/EVENT";
+
         public static const INVITES_NOTE_LEAVE_FALLOUT:String = "#invites:invites/note/leave/FALLOUT";
 
         public static const INVITES_NOTE_CHANGE_AND_LEAVE_SQUAD:String = "#invites:invites/note/change_and_leave/SQUAD";

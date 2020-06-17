@@ -86,7 +86,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             {
                 txtInfo.visible = infoImg.visible;
             }
-            if(param1.buyTank || param1.restoreTank)
+            if(param1.buyTank || param1.restoreTank || param1.isEvent)
             {
                 imgIcon.x = ICON_OFFSET_EMPTY.x;
                 imgIcon.y = ICON_OFFSET_EMPTY.y;

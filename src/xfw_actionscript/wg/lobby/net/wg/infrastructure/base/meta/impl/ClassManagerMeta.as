@@ -41,6 +41,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.data.constants.generated.CYBER_SPORT_ALIASES;
     import net.wg.data.constants.generated.DAILY_QUESTS_WIDGET_CONSTANTS;
     import net.wg.data.constants.generated.EPICBATTLES_ALIASES;
+    import net.wg.data.constants.generated.EVENT10YC_ALIASES;
     import net.wg.data.constants.generated.EVENTBOARDS_ALIASES;
     import net.wg.data.constants.generated.EVENTPROGRESSION_ALIASES;
     import net.wg.data.constants.generated.FITTING_TYPES;
@@ -2731,6 +2732,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.window.CrystalsPromoWindow;
     import net.wg.gui.lobby.window.DemountKitInfo;
     import net.wg.gui.lobby.window.EpicPrimeTime;
+    import net.wg.gui.lobby.window.Event10YCPrimeTime;
     import net.wg.gui.lobby.window.ExchangeCurrencyWindow;
     import net.wg.gui.lobby.window.ExchangeFreeToTankmanInitVO;
     import net.wg.gui.lobby.window.ExchangeFreeToTankmanXpWarning;
@@ -3151,6 +3153,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.infrastructure.base.meta.IEpicBattlesWidgetMeta;
     import net.wg.infrastructure.base.meta.IEpicBattleTrainingRoomMeta;
     import net.wg.infrastructure.base.meta.IEULAMeta;
+    import net.wg.infrastructure.base.meta.IEvent10YCPrimeTimeMeta;
     import net.wg.infrastructure.base.meta.IEventBoardsAwardsOverlayMeta;
     import net.wg.infrastructure.base.meta.IEventBoardsBattleOverlayMeta;
     import net.wg.infrastructure.base.meta.IEventBoardsDetailsContainerViewMeta;
@@ -3464,6 +3467,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_DATA_CONSTANTS_GENERATED_DAILY_QUESTS_WIDGET_CONSTANTS:Class = DAILY_QUESTS_WIDGET_CONSTANTS;
 
         public static const NET_WG_DATA_CONSTANTS_GENERATED_EPICBATTLES_ALIASES:Class = EPICBATTLES_ALIASES;
+
+        public static const NET_WG_DATA_CONSTANTS_GENERATED_EVENT10YC_ALIASES:Class = EVENT10YC_ALIASES;
 
         public static const NET_WG_DATA_CONSTANTS_GENERATED_EVENTBOARDS_ALIASES:Class = EVENTBOARDS_ALIASES;
 
@@ -8845,6 +8850,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_LOBBY_WINDOW_EPICPRIMETIME:Class = EpicPrimeTime;
 
+        public static const NET_WG_GUI_LOBBY_WINDOW_EVENT10YCPRIMETIME:Class = Event10YCPrimeTime;
+
         public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGECURRENCYWINDOW:Class = ExchangeCurrencyWindow;
 
         public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEFREETOTANKMANINITVO:Class = ExchangeFreeToTankmanInitVO;
@@ -9685,6 +9692,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IEULAMETA:Class = IEULAMeta;
 
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IEVENT10YCPRIMETIMEMETA:Class = IEvent10YCPrimeTimeMeta;
+
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IEVENTBOARDSAWARDSOVERLAYMETA:Class = IEventBoardsAwardsOverlayMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IEVENTBOARDSBATTLEOVERLAYMETA:Class = IEventBoardsBattleOverlayMeta;
@@ -10268,6 +10277,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_EPICBATTLETRAININGROOMMETA:Class = EpicBattleTrainingRoomMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_EULAMETA:Class = EULAMeta;
+
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_EVENT10YCPRIMETIMEMETA:Class = Event10YCPrimeTimeMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_EVENTBOARDSAWARDSOVERLAYMETA:Class = EventBoardsAwardsOverlayMeta;
 
