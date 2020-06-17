@@ -100,6 +100,7 @@ package net.wg.gui.lobby.window
             this.cancelBtn.addEventListener(ButtonEvent.CLICK,this.onCancelBtnClickHandler);
             this.warningIcon.addEventListener(Event.CHANGE,this.onWarningIconChangeHandler);
             this.closeBtn.label = VEHICLE_CUSTOMIZATION.CUSTOMIZATIONHEADER_CLOSE;
+            this.closeBtn.validateNow();
             this.closeBtn.addEventListener(ButtonEvent.CLICK,this.onCloseBtnClickHandler);
         }
 

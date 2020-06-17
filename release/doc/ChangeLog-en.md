@@ -2,7 +2,7 @@
 
   #### General
 
-  * Compatibility with World of Tanks 1.9.1.0
+  * Compatibility with World of Tanks 1.9.1.1
 
   #### Hangar
 

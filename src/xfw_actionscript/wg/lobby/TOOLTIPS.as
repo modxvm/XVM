@@ -1603,13 +1603,25 @@ package
 
         public static const HANGAR_AMMO_PANEL_DEVICE_EMPTY_BODY:String = "#tooltips:hangar/ammo_panel/device/empty/body";
 
+        public static const HANGAR_AMMO_PANEL_DEVICE_DISABLED_HEADER:String = "#tooltips:hangar/ammo_panel/device/disabled/header";
+
+        public static const HANGAR_AMMO_PANEL_DEVICE_DISABLED_BODY:String = "#tooltips:hangar/ammo_panel/device/disabled/body";
+
         public static const HANGAR_AMMO_PANEL_EQUIPMENT_EMPTY_HEADER:String = "#tooltips:hangar/ammo_panel/equipment/empty/header";
 
         public static const HANGAR_AMMO_PANEL_EQUIPMENT_EMPTY_BODY:String = "#tooltips:hangar/ammo_panel/equipment/empty/body";
 
+        public static const HANGAR_AMMO_PANEL_EQUIPMENT_DISABLED_HEADER:String = "#tooltips:hangar/ammo_panel/equipment/disabled/header";
+
+        public static const HANGAR_AMMO_PANEL_EQUIPMENT_DISABLED_BODY:String = "#tooltips:hangar/ammo_panel/equipment/disabled/body";
+
         public static const HANGAR_AMMO_PANEL_BATTLEBOOSTER_EMPTY_HEADER:String = "#tooltips:hangar/ammo_panel/battleBooster/empty/header";
 
         public static const HANGAR_AMMO_PANEL_BATTLEBOOSTER_EMPTY_BODY:String = "#tooltips:hangar/ammo_panel/battleBooster/empty/body";
+
+        public static const HANGAR_AMMO_PANEL_BATTLEBOOSTER_DISABLED_HEADER:String = "#tooltips:hangar/ammo_panel/battleBooster/disabled/header";
+
+        public static const HANGAR_AMMO_PANEL_BATTLEBOOSTER_DISABLED_BODY:String = "#tooltips:hangar/ammo_panel/battleBooster/disabled/body";
 
         public static const HANGAR_AMMO_PANEL_BATTLEABILITY_EMPTY_HEADER:String = "#tooltips:hangar/ammo_panel/battleAbility/empty/header";
 
@@ -5950,6 +5962,8 @@ package
         public static const ROLEEXP_STATUS_FOOTER:String = "#tooltips:roleExp/status/footer";
 
         public static const ROLEEXP_STATUS_FOOTEREXP:String = "#tooltips:roleExp/status/footerExp";
+
+        public static const EVENT10YC_EVENTVEHICLE:String = "#tooltips:event10YC/eventVehicle";
 
         public static const ELEN_SUMMARY_RANK_ENUM:Array = [ELEN_SUMMARY_RANK_1,ELEN_SUMMARY_RANK_2,ELEN_SUMMARY_RANK_3,ELEN_SUMMARY_RANK_4,ELEN_SUMMARY_RANK_NORANK];
 

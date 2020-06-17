@@ -709,19 +709,15 @@ package net.wg.gui.lobby.hangar
 
         public function as_showHelpLayout() : void
         {
-            var _loc1_:* = NaN;
             var _loc2_:* = NaN;
             if(this.crewOperationBtn.visible)
             {
-                _loc1_ = this.crewOperationBtn.width;
-                _loc1_ = _loc1_ + (this.tmenXpPanel.panelVisible?this.tmenXpPanel.width:0);
-                this.crewOperationBtn.showHelpLayoutEx(1,_loc1_);
+                _loc2_ = this.crewOperationBtn.width;
+                _loc2_ = _loc2_ + (this.tmenXpPanel.panelVisible?this.tmenXpPanel.width:0);
+                this.crewOperationBtn.showHelpLayoutEx(1,_loc2_);
             }
-            if(this.params.visible)
-            {
-                _loc2_ = Math.max(this.params.getHelpLayoutWidth(),this.vehResearchPanel.getHelpLayoutWidth());
-                this.params.showHelpLayoutEx(this.vehResearchPanel.x - this.params.x,_loc2_);
-            }
+            var _loc1_:Number = Math.max(this.params.getHelpLayoutWidth(),this.vehResearchPanel.getHelpLayoutWidth());
+            this.params.showHelpLayoutEx(this.vehResearchPanel.x - this.params.x,_loc1_);
             this._helpLayout.show();
         }
 
@@ -773,6 +769,17 @@ package net.wg.gui.lobby.hangar
                 _loc4_++;
             }
             this._tenYearsCountdownEntryPointInject.isWide = _loc3_ <= 1;
+        }
+
+        public function as_toggleSPGEvent(param1:Boolean) : void
+        {
+            this.vehResearchBG.visible = param1 && this.isControlsVisible;
+            this.vehResearchPanel.visible = param1 && this.isControlsVisible;
+            this.params.visible = param1 && this.isControlsVisible;
+            this.crew.visible = param1 && this.isControlsVisible;
+            this.crewBG.visible = param1 && this.isControlsVisible;
+            this.crewOperationBtn.visible = param1 && this.isControlsVisible;
+            this.tmenXpPanel.visible = param1 && this.isControlsVisible;
         }
 
         public function generatedUnstoppableEvents() : Boolean

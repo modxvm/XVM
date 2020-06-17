@@ -4,9 +4,12 @@ package net.wg.gui.lobby.hangar.tenYearsCountdown
     import net.wg.gui.lobby.hangar.eventEntryPoint.IEventEntryPoint;
     import net.wg.infrastructure.base.meta.ITenYearsCountdownEntryPointMeta;
     import flash.display.MovieClip;
+    import net.wg.infrastructure.managers.ITooltipMgr;
     import flash.display.DisplayObject;
+    import flash.events.MouseEvent;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.data.constants.Linkages;
+    import net.wg.data.constants.generated.TOOLTIPS_CONSTANTS;
 
     public class TenYearsCountdownEntryPointInject extends TenYearsCountdownEntryPointMeta implements IEventEntryPoint, ITenYearsCountdownEntryPointMeta
     {
@@ -39,9 +42,12 @@ package net.wg.gui.lobby.hangar.tenYearsCountdown
 
         private var _isAnimationEnabled:Boolean = false;
 
+        private var _tooltipMgr:ITooltipMgr = null;
+
         public function TenYearsCountdownEntryPointInject()
         {
             super();
+            this._tooltipMgr = App.toolTipMgr;
             mouseEnabled = false;
         }
 
@@ -80,6 +86,13 @@ package net.wg.gui.lobby.hangar.tenYearsCountdown
                 setChildIndex(this._anim,numChildren - 1);
             }
             return _loc2_;
+        }
+
+        override protected function configUI() : void
+        {
+            super.configUI();
+            addEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
+            addEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
         }
 
         override protected function draw() : void
@@ -137,13 +150,16 @@ package net.wg.gui.lobby.hangar.tenYearsCountdown
 
         override protected function onDispose() : void
         {
-            super.onDispose();
+            removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
+            removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
             if(this._anim)
             {
                 this._anim.stop();
                 removeChild(this._anim);
                 this._anim = null;
             }
+            this._tooltipMgr = null;
+            super.onDispose();
         }
 
         public function as_updateActivity(param1:Boolean) : void
@@ -162,6 +178,16 @@ package net.wg.gui.lobby.hangar.tenYearsCountdown
                 this._isAnimationEnabled = param1;
                 invalidate(ANIMATION_INVALID);
             }
+        }
+
+        private function onRollOverHandler(param1:MouseEvent) : void
+        {
+            this._tooltipMgr.showSpecial(TOOLTIPS_CONSTANTS.TENYEARS_ENTRY_POINT,null);
+        }
+
+        private function onRollOutHandler(param1:MouseEvent) : void
+        {
+            this._tooltipMgr.hide();
         }
     }
 }

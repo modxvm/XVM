@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 12.06.2020
+    // Last update: 17.06.2020
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -278,6 +278,7 @@
     "germany-G58_VK4502P":                   {"name": null, "short": null},
     "germany-G58_VK4502P7":                  {"name": null, "short": null},
     "germany-G61_G_E":                       {"name": null, "short": null},
+    "germany-G62_Roket_Sturmtiger":          {"name": null, "short": null},
     "germany-G63_PzI_ausf_C":                {"name": null, "short": null},
     "germany-G64_Panther_II":                {"name": null, "short": null},
     "germany-G64_Panther_II_IGR":            {"name": null, "short": null},
