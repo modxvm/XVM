@@ -139,9 +139,9 @@ diff -Naur lobby.orig/net/wg/gui/lobby/hangar/Hangar.as lobby/net/wg/gui/lobby/h
 diff -Naur lobby.orig/net/wg/gui/lobby/hangar/ammunitionPanel/AmmunitionPanel.as lobby/net/wg/gui/lobby/hangar/ammunitionPanel/AmmunitionPanel.as
 --- lobby.orig/net/wg/gui/lobby/hangar/ammunitionPanel/AmmunitionPanel.as	2020-02-28 20:16:18.177148500 +0200
 +++ lobby/net/wg/gui/lobby/hangar/ammunitionPanel/AmmunitionPanel.as	2020-02-28 20:19:21.853659000 +0200
-@@ -1058,12 +1058,14 @@
+@@ -1102,12 +1102,14 @@
  
-         private function animationCompleteHandler(param1:Event) : void
+         private function onAnimationCompleteHandler(param1:Event) : void
          {
 +            /*
              var _loc2_:int = this._animations.indexOf(param1.currentTarget);
@@ -153,7 +153,7 @@ diff -Naur lobby.orig/net/wg/gui/lobby/hangar/ammunitionPanel/AmmunitionPanel.as
 +            */
          }
  
-         private function animationLoadedHandler(param1:IconLoaderEvent) : void
+         private function onAnimationLoadedHandler(param1:IconLoaderEvent) : void
 diff -Naur lobby.orig/net/wg/gui/lobby/header/LobbyHeader.as lobby/net/wg/gui/lobby/header/LobbyHeader.as
 --- lobby.orig/net/wg/gui/lobby/header/LobbyHeader.as	2020-02-28 20:16:13.938423000 +0200
 +++ lobby/net/wg/gui/lobby/header/LobbyHeader.as	2020-02-28 20:19:21.875658700 +0200

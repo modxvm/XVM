@@ -2309,6 +2309,12 @@ package
 
         public static const OFFERS_UNAVAILABLE_MANY:String = "#system_messages:offers/unavailable_many";
 
+        public static const SPGEVENT_NOTIFICATION_PRIMETIME:String = "#system_messages:spgEvent/notification/primeTime";
+
+        public static const SPGEVENT_NOTIFICATION_NOTSET:String = "#system_messages:spgEvent/notification/notSet";
+
+        public static const SPGEVENT_NOTIFICATION_AVAILABLE:String = "#system_messages:spgEvent/notification/available";
+
         public function SYSTEM_MESSAGES()
         {
             super();

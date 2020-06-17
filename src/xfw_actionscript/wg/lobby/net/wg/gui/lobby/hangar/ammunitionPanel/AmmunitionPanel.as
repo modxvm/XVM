@@ -187,6 +187,10 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
 
         private var _animations:Vector.<SlotAnimation>;
 
+        private var _equipmentButtonsEnabled:Boolean = true;
+
+        private var _optionalDeviceButtonsEnabled:Boolean = true;
+
         private var _animationEquipmentSlot:EquipmentSlot;
 
         private var _postponedData:DevicesDataVO;
@@ -377,6 +381,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this.booster.addEventListener(ButtonEvent.CLICK,this.onBoosterSlotClickHandler);
             this.booster.addEventListener(ComponentEvent.SHOW,this.onBoosterVisibilityChanged);
             this.booster.addEventListener(ComponentEvent.HIDE,this.onBoosterVisibilityChanged);
+            this.booster.addEventListener(ComponentEvent.STATE_CHANGE,this.onBoosterSlotStateChangeHandler);
             this.toRent.addEventListener(MouseEvent.ROLL_OVER,this.onBtnRollOverHandler);
             this.toRent.addEventListener(MouseEvent.ROLL_OUT,this.onBtnRollOutHandler);
             this.toRent.addEventListener(ButtonEvent.CLICK,this.onToRentClickHandler);
@@ -396,10 +401,34 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         {
             super.updateButtonsEnabled();
             this.maintenanceBtn.enabled = this._panelEnabled;
-            setItemsEnabled(this._optionalDevices,this._panelEnabled);
-            setItemsEnabled(this._equipment,this._panelEnabled);
-            this.booster.enabled = this._panelEnabled;
+            var _loc1_:Boolean = this._equipmentButtonsEnabled && this._panelEnabled;
+            setItemsEnabled(this._equipment,_loc1_);
+            this.setModuleTypesVisible(this._equipment,_loc1_);
+            var _loc2_:Boolean = this._optionalDeviceButtonsEnabled && this._panelEnabled;
+            setItemsEnabled(this._optionalDevices,_loc2_);
+            this.setModuleTypesVisible(this._optionalDevices,_loc2_);
+            this.booster.enabled = this.booster.moduleType.visible = _loc1_;
             setItemsEnabled(this._battleAbilities,this._panelEnabled);
+        }
+
+        public function as_setEquipmentEnabled(param1:Boolean) : void
+        {
+            if(this._equipmentButtonsEnabled != param1)
+            {
+                this._equipmentButtonsEnabled = param1;
+                this.resetSelection();
+                invalidateButtonsEnabled();
+            }
+        }
+
+        public function as_optionalDevicesEnabled(param1:Boolean) : void
+        {
+            if(this._optionalDeviceButtonsEnabled != param1)
+            {
+                this._optionalDeviceButtonsEnabled = param1;
+                this.resetSelection();
+                invalidateButtonsEnabled();
+            }
         }
 
         override protected function trySetupDevice(param1:DeviceSlotVO) : Boolean
@@ -546,6 +575,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this.booster.removeEventListener(ButtonEvent.CLICK,this.onBoosterSlotClickHandler);
             this.booster.removeEventListener(ComponentEvent.SHOW,this.onBoosterVisibilityChanged);
             this.booster.removeEventListener(ComponentEvent.HIDE,this.onBoosterVisibilityChanged);
+            this.booster.removeEventListener(ComponentEvent.STATE_CHANGE,this.onBoosterSlotStateChangeHandler);
             this._optionalDevices.splice(0,this._optionalDevices.length);
             this._optionalDevices = null;
             this._equipment.splice(0,this._equipment.length);
@@ -831,6 +861,15 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
 
+        private function setModuleTypesVisible(param1:Vector.<IDeviceSlot>, param2:Boolean) : void
+        {
+            var _loc3_:EquipmentSlot = null;
+            for each(_loc3_ in param1)
+            {
+                _loc3_.moduleType.visible = param2;
+            }
+        }
+
         private function setVehicleStatus() : void
         {
             this.vehicleStateMsg.setVehicleStatus(this._msgVo);
@@ -843,7 +882,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         private function onBoosterCounterUpdate() : void
         {
             var _loc1_:ICounterProps = null;
-            if(this.booster.visible && this._boosterCounter > 0)
+            if(this.booster.visible && this.booster.enabled && this._boosterCounter > 0)
             {
                 _loc1_ = new CounterProps(CounterProps.DEFAULT_OFFSET_X,0,TextFormatAlign.LEFT,true,Linkages.COUNTER_UI,CounterProps.DEFAULT_TF_PADDING,false);
                 this._counterManager.setCounter(this.booster.hitMc,"1",null,_loc1_);
@@ -858,16 +897,16 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         {
             var _loc1_:SlotAnimation = new SlotAnimation();
             _loc1_.mouseChildren = _loc1_.mouseEnabled = false;
-            _loc1_.addEventListener(SlotAnimation.ANIMATION_COMPLETE,this.animationCompleteHandler,false,0,true);
-            _loc1_.addEventListener(IconLoaderEvent.ICON_LOADED,this.animationLoadedHandler,false,0,true);
+            _loc1_.addEventListener(SlotAnimation.ANIMATION_COMPLETE,this.onAnimationCompleteHandler,false,0,true);
+            _loc1_.addEventListener(IconLoaderEvent.ICON_LOADED,this.onAnimationLoadedHandler,false,0,true);
             addChild(_loc1_);
             return _loc1_;
         }
 
         private function disposeAnimation(param1:SlotAnimation) : void
         {
-            param1.removeEventListener(SlotAnimation.ANIMATION_COMPLETE,this.animationCompleteHandler);
-            param1.removeEventListener(IconLoaderEvent.ICON_LOADED,this.animationLoadedHandler);
+            param1.removeEventListener(SlotAnimation.ANIMATION_COMPLETE,this.onAnimationCompleteHandler);
+            param1.removeEventListener(IconLoaderEvent.ICON_LOADED,this.onAnimationLoadedHandler);
             removeChild(param1);
             param1.dispose();
         }
@@ -941,6 +980,11 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                 _loc3_ = new FittingSelectPopoverParams(_loc2_.type,_loc2_.slotIndex);
                 App.popoverMgr.show(_loc2_,Aliases.BOOSTER_SELECT_POPOVER,_loc3_);
             }
+        }
+
+        private function onBoosterSlotStateChangeHandler(param1:Event) : void
+        {
+            this.onBoosterCounterUpdate();
         }
 
         private function onBoosterVisibilityChanged(param1:Event) : void
@@ -1056,7 +1100,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
 
-        private function animationCompleteHandler(param1:Event) : void
+        private function onAnimationCompleteHandler(param1:Event) : void
         {
             /*
             var _loc2_:int = this._animations.indexOf(param1.currentTarget);
@@ -1068,7 +1112,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             */
         }
 
-        private function animationLoadedHandler(param1:IconLoaderEvent) : void
+        private function onAnimationLoadedHandler(param1:IconLoaderEvent) : void
         {
             var _loc2_:DevicesDataVO = null;
             if(!this.hasLoadingAnimations && this._postponedData != null)

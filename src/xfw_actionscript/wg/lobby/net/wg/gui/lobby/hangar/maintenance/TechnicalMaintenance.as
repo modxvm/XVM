@@ -40,7 +40,7 @@ package net.wg.gui.lobby.hangar.maintenance
 
         private static const MONEY:String = "money";
 
-        protected static const EQUIPMENT:String = "equipment";
+        private static const EQUIPMENT:String = "equipment";
 
         private static const EQUIPMENT_CHANGED:String = "equipmentChanged";
 
@@ -61,6 +61,8 @@ package net.wg.gui.lobby.hangar.maintenance
         private static const SHELLS_LIST_ROW_HEIGHT:int = 47;
 
         private static const SHELLS_LIST_GAP:int = 6;
+
+        private static const PADDING_TOP:int = 585;
 
         public var repairTextfield:TextField;
 
@@ -128,6 +130,8 @@ package net.wg.gui.lobby.hangar.maintenance
 
         public var infoAlertIcon:AlertIco;
 
+        public var eqLabelDisabled:TextField;
+
         protected var btnGroup:ButtonGroup;
 
         private var _maintenanceData:MaintenanceVO;
@@ -175,6 +179,7 @@ package net.wg.gui.lobby.hangar.maintenance
             this.eqHeaderInventory.text = MENU.HANGAR_AMMUNITIONPANEL_TECHNICALMAITENANCE_EQUIPMENT_LIST_INVENTORY;
             this.eqHeaderPrice.text = MENU.HANGAR_AMMUNITIONPANEL_TECHNICALMAITENANCE_EQUIPMENT_LIST_PRICE;
             this.labelTotal.text = MENU.HANGAR_AMMUNITIONPANEL_TECHNICALMAITENANCE_BUTTONS_LABELTOTAL;
+            this.eqLabelDisabled.text = MENU.HANGAR_AMMUNITIONPANEL_TECHNICALMAITENANCE_EQUIPMENTDISABLED;
             this.shells.addEventListener(ShellRendererEvent.TOTAL_PRICE_CHANGED,this.onShellsTotalPriceChangedHandler);
             this.shells.addEventListener(ShellRendererEvent.CURRENCY_CHANGED,this.onShellsCurrencyChangedHandler);
             this.autoChBListeners();
@@ -224,11 +229,11 @@ package net.wg.gui.lobby.hangar.maintenance
             window.useBottomBtns = true;
             var _loc1_:Padding = window.contentPadding as Padding;
             App.utils.asserter.assertNotNull(_loc1_,PADDING_STR + Errors.CANT_NULL);
-            _loc1_.top = _loc1_.top + 1;
+            _loc1_.top++;
             window.contentPadding = _loc1_;
             _loc1_ = window.formBgPadding;
-            _loc1_.top = _loc1_.top + 585;
-            _loc1_.right = _loc1_.right + 1;
+            _loc1_.top = _loc1_.top + PADDING_TOP;
+            _loc1_.right++;
             window.formBgPadding = _loc1_;
             App.stage.addEventListener(ModuleInfoEvent.SHOW_INFO,this.onStageShowInfoHandler);
             App.stage.addEventListener(ShellRendererEvent.CHANGE_ORDER,this.onStageChangeOrderHandler);
@@ -271,6 +276,7 @@ package net.wg.gui.lobby.hangar.maintenance
             this.infoTF = null;
             this.infoAlertIcon.dispose();
             this.infoAlertIcon = null;
+            this.eqLabelDisabled = null;
             this.eqItem1.dispose();
             this.eqItem1 = null;
             this.eqItem2.dispose();
@@ -365,6 +371,13 @@ package net.wg.gui.lobby.hangar.maintenance
             return this._prevVehicleId != this._maintenanceData.vehicleId || this._prevGunIntCD != this._maintenanceData.gunIntCD;
         }
 
+        public function as_setEquipmentVisible(param1:Boolean) : void
+        {
+            this.eqItem1.visible = this.eqItem2.visible = this.eqItem3.visible = this.eqAuto.enabled = param1;
+            this.eqIndicator.flashing = param1;
+            this.eqLabelDisabled.visible = !param1;
+        }
+
         private function subscribeModules(param1:Boolean = true) : void
         {
             var _loc3_:EquipmentItem = null;
@@ -424,7 +437,7 @@ package net.wg.gui.lobby.hangar.maintenance
 
         private function updateRepairBlock() : void
         {
-            var _loc2_:* = NaN;
+            var _loc2_:* = 0;
             this.repairAuto.removeEventListener(Event.SELECT,this.onAutoSelectHandler);
             this.repairAuto.selected = this._maintenanceData.autoRepair;
             this.repairAuto.addEventListener(Event.SELECT,this.onAutoSelectHandler);

@@ -57,6 +57,8 @@ package net.wg.infrastructure.base.meta
 
         function as_destroyDQWidget() : void;
 
+        function as_toggleSPGEvent(param1:Boolean) : void;
+
         function as_updateEventEntryPoint(param1:String, param2:Boolean) : void;
     }
 }

@@ -1177,6 +1177,8 @@ package net.wg.data.constants.generated
 
         public static const GERMANY_G61_G_E:String = "germany-G61_G_E";
 
+        public static const GERMANY_G62_ROKET_STURMTIGER:String = "germany-G62_Roket_Sturmtiger";
+
         public static const GERMANY_G63_PZ_I_AUSF_C:String = "germany-G63_PzI_ausf_C";
 
         public static const GERMANY_G64_PANTHER_II:String = "germany-G64_Panther_II";
