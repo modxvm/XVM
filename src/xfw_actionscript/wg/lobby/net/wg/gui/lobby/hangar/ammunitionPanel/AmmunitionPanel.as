@@ -403,11 +403,12 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this.maintenanceBtn.enabled = this._panelEnabled;
             var _loc1_:Boolean = this._equipmentButtonsEnabled && this._panelEnabled;
             setItemsEnabled(this._equipment,_loc1_);
-            this.setModuleTypesVisible(this._equipment,_loc1_);
+            this.setModuleTypesVisible(this._equipment,this._equipmentButtonsEnabled);
             var _loc2_:Boolean = this._optionalDeviceButtonsEnabled && this._panelEnabled;
             setItemsEnabled(this._optionalDevices,_loc2_);
-            this.setModuleTypesVisible(this._optionalDevices,_loc2_);
-            this.booster.enabled = this.booster.moduleType.visible = _loc1_;
+            this.setModuleTypesVisible(this._optionalDevices,this._optionalDeviceButtonsEnabled);
+            this.booster.enabled = _loc1_;
+            this.booster.moduleType.visible = this._equipmentButtonsEnabled;
             setItemsEnabled(this._battleAbilities,this._panelEnabled);
         }
 
