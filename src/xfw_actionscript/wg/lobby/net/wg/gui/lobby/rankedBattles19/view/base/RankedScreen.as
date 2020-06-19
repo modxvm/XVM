@@ -65,12 +65,6 @@ package net.wg.gui.lobby.rankedBattles19.view.base
             this.updateBG();
         }
 
-        override protected function configUI() : void
-        {
-            super.configUI();
-            this.bgLoader.contentLoaderInfo.addEventListener(Event.COMPLETE,this.onLoaderCompleteHandler);
-        }
-
         override protected function onDispose() : void
         {
             if(this.bgLoader != null)
@@ -100,6 +94,7 @@ package net.wg.gui.lobby.rankedBattles19.view.base
             var _loc4_:LoaderContext = new LoaderContext(false,ApplicationDomain.currentDomain);
             this.bgLoader.scaleX = 1;
             this.bgLoader.scaleY = 1;
+            this.bgLoader.contentLoaderInfo.addEventListener(Event.COMPLETE,this.onLoaderCompleteHandler);
             this.bgLoader.load(_loc3_,_loc4_);
         }
 
@@ -145,6 +140,7 @@ package net.wg.gui.lobby.rankedBattles19.view.base
         private function onLoaderCompleteHandler(param1:Event) : void
         {
             this._bgIsLoaded = true;
+            this.bgLoader.contentLoaderInfo.removeEventListener(Event.COMPLETE,this.onLoaderCompleteHandler);
             this.updateBG();
         }
     }
