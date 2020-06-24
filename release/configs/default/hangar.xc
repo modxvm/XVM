@@ -417,6 +417,9 @@
       "profile": true,                      // Service Record / Достижения
       "PersonalMissionOperationsPage": true // Campaigns      / Кампании
     },
+    // true - show notifications counters in the window and on the button "Exterior".
+    // true - показать счетчики уведомлений в окне и на кнопке "Внешний вид".
+    "showCustomizationCounter": true,
     // Parameters of sorting tankmen in barracks.
     // Параметры сортировки танкистов в казарме.
     "barracks": {

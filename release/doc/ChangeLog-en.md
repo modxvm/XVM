@@ -6,6 +6,10 @@
 
   #### Hangar
 
+  * Added option:
+
+      `"hangar"/"showCustomizationCounter"` — show notifications counters in the window and on the button "Exterior"
+
   * Removed option:
 
       `"hangar"/"showSE20Banner"`
