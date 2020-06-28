@@ -1,8 +1,10 @@
-﻿### XVM 8.5.4-dev
+﻿### XVM 8.5.4
 
   #### General
 
   * Compatibility with World of Tanks 1.9.1.1
+  * XFW.Native update to 2.0.5
+  * Added automatic crash reporting (only for CIS region)
 
   #### Hangar
 
