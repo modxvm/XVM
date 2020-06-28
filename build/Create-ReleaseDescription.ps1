@@ -1,11 +1,11 @@
 ﻿$PSDefaultParameterValues['*:Encoding'] = 'utf8'
 Set-Location $PSScriptRoot
 
-$header_en = '<a href=\"https://gitlab.com/xvm/xvm/raw/master/release/doc/ChangeLog-en.txt\">Full ChangeLog</a><br/><br/>'
-$header_ru = '<a href=\"https://gitlab.com/xvm/xvm/raw/master/release/doc/ChangeLog-en.txt\">Полный список изменений</a><br/><br/>'
+$header_en = '<a href=\"https://gitlab.com/xvm/xvm/raw/master/release/doc/ChangeLog-en.md\">Full ChangeLog</a><br/><br/>'
+$header_ru = '<a href=\"https://gitlab.com/xvm/xvm/raw/master/release/doc/ChangeLog-ru.md\">Полный список изменений</a><br/><br/>'
 
-$changelog_en = ((Get-Content -Path ../release/doc/ChangeLog-en.txt -Raw) -replace '\r','' -split '\n\nXVM-')[0]
-$changelog_ru = ((Get-Content -Path ../release/doc/ChangeLog-ru.txt -Raw) -replace '\r','' -split '\n\nXVM-')[0]
+$changelog_en = ((Get-Content -Path ../release/doc/ChangeLog-en.md -Raw) -replace '\r','' -split '\n\n### XVM ')[0]
+$changelog_ru = ((Get-Content -Path ../release/doc/ChangeLog-ru.md -Raw) -replace '\r','' -split '\n\n### XVM ')[0]
 
 (Get-Content -Path ../build/xvm-build.conf -Raw) -match '\nexport XVMBUILD_WOT_VERSION=\$\{TARGET_VERSION:-(.*?)\}' | Out-Null
 $version_wot = $Matches[1]
