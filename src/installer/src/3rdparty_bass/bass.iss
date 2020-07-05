@@ -1,3 +1,6 @@
+[Files]
+Source: "3rdparty_bass\bass.dll"; Flags: dontcopy;
+
 [Code]
 
 function BASS_Init(device: Integer; freq, flags: DWORD; win: hwnd; CLSID: DWORD): BOOL;

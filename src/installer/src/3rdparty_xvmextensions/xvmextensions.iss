@@ -5,7 +5,6 @@
 [Files]
 Source: "{#XVMEXTENSION_DIR}xvmextensions.x86_32.dll"; DestName: xvmextensions.dll; Flags: dontcopy;
 
-
 [Code]
 
 //JSON
@@ -45,7 +44,6 @@ external 'PROCESS_TerminateProcess@files:xvmextensions.dll cdecl';
 function SPLASHSCREEN_ShowSplashScreenW(FileName: String; SecondsToShow: Integer): Boolean;
 external 'SPLASHSCREEN_ShowSplashScreenW@files:xvmextensions.dll cdecl';
 
-
 //WGC
 procedure WGC_GetInstallPathW(Buffer: String; BufferSize: Integer);
 external 'WGC_GetInstallPathW@files:xvmextensions.dll cdecl';
@@ -53,11 +51,9 @@ external 'WGC_GetInstallPathW@files:xvmextensions.dll cdecl';
 function WGC_IsInstalled(): Boolean;
 external 'WGC_IsInstalled@files:xvmextensions.dll cdecl';
 
-
 //Wine
 function WINE_IsRunningUnder(): Boolean;
 external 'WINE_IsRunningUnder@files:xvmextensions.dll cdecl';
-
 
 //WoT
 function WOT_AddClientW(ClientPath: String): Integer;
