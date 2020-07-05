@@ -10,14 +10,14 @@
 │ et    │ Estonian              │          │ 5.5.3+
 │ fi    │ Finnish               │ Official │ 6.0.0+
 │ fr    │ French (Standard)     │ Official │ 6.0.3+
-│ hr    │ Croatian              │          │ 6.0.0+
+│ hr    │ Croatian              │          │ 6.0.3+
 │ hu    │ Hungarian             │          │ 6.0.3+
 │ id    │ Indonesian            │          │ 6.0.0+
 │ it    │ Italian               │ Official │ 6.0.3+
 │ ja    │ Japanese              │ Official │ 6.0.3+
 │ ka    │ Georgian              │          │ 6.0.3+
 │ ko    │ Korean                │          │ 6.0.3+
-│ lt    │ Lithuanian            │          │ 6.0.0+
+│ lt    │ Lithuanian            │          │ 6.0.3+
 │ lv    │ Latvian               │          │ 5.5.0+
 │ ms    │ Malay (Malaysian)     │          │ 5.1.0+
 │ nl    │ Dutch (Netherlands)   │ Official │ 6.0.3+

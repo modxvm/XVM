@@ -39,11 +39,9 @@ OutputDir=..\output
 OutputBaseFilename=setup_xvm
 
 UninstallFilesDir={app}\xvm_uninst
-
-DefaultDirName=C:\
+DefaultDirName=C:\Games\World_of_Tanks
 
 SetupLogging=yes
-
 WizardStyle=modern
 
 [Tasks]
@@ -59,10 +57,6 @@ Source: "{app}\res_mods\configs\*"; DestDir: "{app}\xvm_backup\configs"; Tasks: 
 ;Source: "..\..\..\~output\mods\*"; DestDir: "{app}\mods"; Flags: createallsubdirs recursesubdirs; Components: XVM
 ;Source: "..\..\..\~output\res_mods\*"; DestDir: "{app}\res_mods"; Flags: createallsubdirs recursesubdirs; Components: XVM
 ;Source: "..\..\..\~output\readme*.*"; DestDir: "{app}"; Components: XVM
-
-;installer libs
-Source: "3rdparty_bass\bass.dll"; Flags: dontcopy;
-Source: "3rdparty_unmergf\unmerg_f.dll"; Flags: dontcopy;
 
 [InstallDelete]
 ;mods\ver\com.modxvm.xfw\*.wotmod
