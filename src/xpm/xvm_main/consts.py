@@ -38,6 +38,7 @@ class XVM_EVENT(object):
     RELOAD_CONFIG = 'xvm.reload_config'
     CONFIG_LOADED = 'xvm.config_loaded'
     SYSTEM_MESSAGE = 'xvm.system_message'
+    CHECK_ACTIVATION = 'xvm.check_activation'
     XVM_SERVICES_INITIALIZED = 'xvm.services_initialized'
 
 # PY<->AS3 commands

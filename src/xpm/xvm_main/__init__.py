@@ -72,6 +72,7 @@ def start():
     g_eventBus.addListener(XVM_EVENT.RELOAD_CONFIG, config.load)
     g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, g_xvm.onConfigLoaded)
     g_eventBus.addListener(XVM_EVENT.SYSTEM_MESSAGE, g_xvm.onSystemMessage)
+    g_eventBus.addListener(XVM_EVENT.CHECK_ACTIVATION, g_xvm.onCheckActivation)
 
     # config already loaded, just send event to apply required code
     g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.CONFIG_LOADED, {'fromInitStage':True}))
@@ -91,6 +92,7 @@ def fini():
     g_eventBus.removeListener(XVM_EVENT.RELOAD_CONFIG, config.load)
     g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, g_xvm.onConfigLoaded)
     g_eventBus.removeListener(XVM_EVENT.SYSTEM_MESSAGE, g_xvm.onSystemMessage)
+    g_eventBus.removeListener(XVM_EVENT.CHECK_ACTIVATION, g_xvm.onCheckActivation)
 
 
 #####################################################################
@@ -112,7 +114,9 @@ def _MessageDecorator_getListVO(base, self, newId=None):
 
 @overrideMethod(NotificationsActionsHandlers, 'handleAction')
 def _NotificationsActionsHandlers_handleAction(base, self, model, typeID, entityID, actionName):
-    if typeID == NOTIFICATION_TYPE.MESSAGE and re.match('https?://', actionName, re.I):
+    if actionName == 'XVM_CHECK_ACTIVATION':
+        g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.CHECK_ACTIVATION))
+    elif typeID == NOTIFICATION_TYPE.MESSAGE and re.match('https?://', actionName, re.I):
         BigWorld.wg_openWebBrowser(actionName)
     else:
         base(self, model, typeID, entityID, actionName)
