@@ -135,7 +135,6 @@ class Xvm(object):
             if status == 'badToken' or status == 'inactive':
                 svcmsg.sendXvmSystemMessage(SystemMessages.SM_TYPE.Warning, '{{l10n:token/services_not_activated}}')
             else:
-                #wgutils.reloadHangar()
                 g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.CONFIG_LOADED))
                 svcmsg.tokenUpdated()
                 self.showXvmServicesLobbyMessage()
