@@ -86,8 +86,7 @@ class Xvm(object):
     appLoader = dependency.descriptor(IAppLoader)
 
     def __init__(self):
-        self.xvmServicesInitialized = False
-        self.xvmFirstTimeLobbyLoaded = True
+        self.xvmLobbyMessageShown = False
         self.xvmServerMessageLastInfo = None
         self.currentAccountDBID = None
 
@@ -121,6 +120,25 @@ class Xvm(object):
         if type not in [SystemMessages.SM_TYPE.Information, SystemMessages.SM_TYPE.GameGreeting]:
             log('SystemMessage: [{}] {}'.format(type, utils.hide_guid(msg)))
         SystemMessages.pushMessage(msg, type)
+
+    # Check Activation
+
+    def onCheckActivation(self, e=None):
+        # log('xvm.onCheckActivation')
+        status = config.token.status
+        if status == 'active':
+            svcmsg.tokenUpdated()
+        else:
+            self.xvmServicesInitialized = False
+            self.initializeXvmServices()
+            status = config.token.status
+            if status == 'badToken' or status == 'inactive':
+                svcmsg.sendXvmSystemMessage(SystemMessages.SM_TYPE.Warning, '{{l10n:token/services_not_activated}}')
+            else:
+                #wgutils.reloadHangar()
+                g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.CONFIG_LOADED))
+                svcmsg.tokenUpdated()
+                self.showXvmServicesLobbyMessage()
 
     # state handler
 
@@ -180,25 +198,12 @@ class Xvm(object):
                 config.token = config.XvmServicesToken({'accountDBID':accountDBID})
                 config.token.saveLastAccountDBID()
                 self.xvmServicesInitialized = False
-                self.xvmFirstTimeLobbyLoaded = True
-                self.xvmServerMessageLastInfo = None
                 self.initializeXvmServices()
+                svcmsg.tokenUpdated()
+
             reserve.init(self.currentAccountDBID)
 
-            if config.networkServicesSettings.statBattle:
-                data = xvmapi.getServerMessage()
-                if data:
-                    msg = data.get('msg', None)
-                    if msg:
-                        svcmsg.sendXvmSystemMessage(SystemMessages.SM_TYPE.Warning, msg)
-                    elif not self.xvmFirstTimeLobbyLoaded:
-                        msg = data.get('info', None)
-                        if msg != self.xvmServerMessageLastInfo:
-                            self.xvmServerMessageLastInfo = msg
-                            if msg:
-                                svcmsg.sendXvmSystemMessage(SystemMessages.SM_TYPE.Information, msg)
-
-            self.xvmFirstTimeLobbyLoaded = False
+            self.showXvmServicesLobbyMessage()
 
         except Exception, ex:
             err(traceback.format_exc())
@@ -353,6 +358,22 @@ class Xvm(object):
 
         return (None, False)
 
+    def showXvmServicesLobbyMessage(self):
+        if config.networkServicesSettings.statBattle:
+            data = xvmapi.getServerMessage()
+            if data:
+                msg = data.get('msg', None)
+                if msg:
+                    svcmsg.sendXvmSystemMessage(SystemMessages.SM_TYPE.Warning, msg)
+                elif self.xvmLobbyMessageShown:
+                    msg = data.get('info', None)
+                    if msg != self.xvmServerMessageLastInfo:
+                        self.xvmServerMessageLastInfo = msg
+                        if msg:
+                            svcmsg.sendXvmSystemMessage(SystemMessages.SM_TYPE.Information, msg)
+
+        self.xvmLobbyMessageShown = True
+
     def initializeXvmServices(self):
         if self.xvmServicesInitialized:
             return
@@ -362,7 +383,7 @@ class Xvm(object):
             return
 
         self.xvmServicesInitialized = True
-        self.xvmFirstTimeLobbyLoaded = True
+        self.xvmLobbyMessageShown = False
         self.xvmServerMessageLastInfo = None
 
         config.token = config.XvmServicesToken.restore()
@@ -371,9 +392,6 @@ class Xvm(object):
         data = xvmapi.getVersion(config.networkServicesSettings.topClansCountWgm, config.networkServicesSettings.topClansCountWsh)
         topclans.update(data)
         config.verinfo = config.XvmVersionInfo(data)
-
-        if self.appLoader.getSpaceID() == GuiGlobalSpaceID.LOBBY:
-            svcmsg.tokenUpdated()
 
         g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.XVM_SERVICES_INITIALIZED))
 
