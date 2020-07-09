@@ -2,15 +2,16 @@ package net.wg.gui.lobby.hangar.tcarousel
 {
     import net.wg.infrastructure.base.UIComponentEx;
     import flash.filters.DropShadowFilter;
+    import net.wg.infrastructure.interfaces.IImage;
     import flash.display.MovieClip;
     import net.wg.gui.components.controls.Image;
     import flash.text.TextField;
     import net.wg.gui.components.controls.IconText;
     import net.wg.gui.components.controls.ActionPrice;
     import flash.display.Sprite;
-    import net.wg.infrastructure.interfaces.IImage;
     import net.wg.gui.components.carousels.data.VehicleCarouselVO;
     import org.idmedia.as3commons.util.StringUtils;
+    import flash.display.DisplayObject;
 
     public class BaseTankIcon extends UIComponentEx
     {
@@ -28,6 +29,8 @@ package net.wg.gui.lobby.hangar.tcarousel
         private static const TXT_INFO_WARN_FILTER:DropShadowFilter = new DropShadowFilter(0,90,0,1,12,12,1.8,2);
 
         private static const INFO_IMG_OFFSET_H:int = 32;
+
+        public var specialBg:IImage = null;
 
         public var mcFlag:MovieClip = null;
 
@@ -93,6 +96,8 @@ package net.wg.gui.lobby.hangar.tcarousel
         override protected function onDispose() : void
         {
             this.mcFlag = null;
+            this.specialBg.dispose();
+            this.specialBg = null;
             this.imgIcon.dispose();
             this.imgIcon = null;
             this.mcTankType = null;
@@ -242,6 +247,30 @@ package net.wg.gui.lobby.hangar.tcarousel
             {
                 this._visibleVehicleInfo = param1;
                 this.txtTankName.visible = this.imgXp.visible = this.mcTankType.visible = this.mcFlag.visible = this.mcLevel.visible = param1;
+            }
+        }
+
+        protected function updateSpecialBg(param1:String, param2:Boolean) : void
+        {
+            var _loc3_:* = 0;
+            var _loc4_:DisplayObject = null;
+            if(StringUtils.isNotEmpty(param1))
+            {
+                this.specialBg.visible = true;
+                this.specialBg.source = param1;
+                if(param2)
+                {
+                    _loc3_ = getChildIndex(this.mcFlag);
+                    _loc4_ = DisplayObject(this.specialBg);
+                    if(this.getChildIndex(_loc4_) < _loc3_)
+                    {
+                        this.setChildIndex(_loc4_,_loc3_);
+                    }
+                }
+            }
+            else
+            {
+                this.specialBg.visible = false;
             }
         }
 

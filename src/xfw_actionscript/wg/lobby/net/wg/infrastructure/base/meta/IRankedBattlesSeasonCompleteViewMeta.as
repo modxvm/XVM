@@ -13,6 +13,8 @@ package net.wg.infrastructure.base.meta
 
         function as_setData(param1:Object) : void;
 
+        function as_setPlace(param1:String) : void;
+
         function as_setAwardsData(param1:Object) : void;
     }
 }

@@ -23,7 +23,7 @@ package net.wg.gui.lobby.rankedBattles19.data
 
         public var divisionImgBig:String = "";
 
-        public var sprinterLabel:String = "";
+        public var sprinterImg:String = "";
 
         public function SeasonGapViewVO(param1:Object)
         {

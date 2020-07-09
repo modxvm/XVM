@@ -697,6 +697,8 @@ package
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_ENTITLEMENTS_MULTIPLIER:String = "#messenger:serviceChannelMessages/battleResults/quests/entitlements/multiplier";
 
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_ENTITLEMENTS_FMTMULTIPLIER:String = "#messenger:serviceChannelMessages/battleResults/quests/entitlements/fmtMultiplier";
+
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_RANKEDBONUSBATTLES:String = "#messenger:serviceChannelMessages/battleResults/quests/rankedBonusBattles";
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_RANKEDBONUSBATTLES_PERSISTENT:String = "#messenger:serviceChannelMessages/battleResults/quests/rankedBonusBattles/persistent";
@@ -1114,6 +1116,10 @@ package
         public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_RANKEDBATTLESAVAILABLE:String = "#messenger:serviceChannelMessages/sysMsg/titles/rankedBattlesAvailable";
 
         public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_RANKEDBATTLESNOTSET:String = "#messenger:serviceChannelMessages/sysMsg/titles/rankedBattlesNotSet";
+
+        public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_BOBBATTLESAVAILABLE:String = "#messenger:serviceChannelMessages/sysMsg/titles/bobBattlesAvailable";
+
+        public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_BOBBATTLESPRIMETIME:String = "#messenger:serviceChannelMessages/sysMsg/titles/bobBattlesPrimeTime";
 
         public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_PAYMENTMETHODLINK:String = "#messenger:serviceChannelMessages/sysMsg/titles/paymentMethodLink";
 

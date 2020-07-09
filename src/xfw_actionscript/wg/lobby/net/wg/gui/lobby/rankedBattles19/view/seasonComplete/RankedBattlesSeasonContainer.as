@@ -171,6 +171,14 @@ package net.wg.gui.lobby.rankedBattles19.view.seasonComplete
             }
         }
 
+        public function setPlace(param1:String) : void
+        {
+            if(this._resultBlock)
+            {
+                this._resultBlock.setPlace(param1);
+            }
+        }
+
         public function updateStage(param1:Number, param2:Number) : void
         {
             this._screenW = param1;

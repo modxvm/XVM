@@ -17,8 +17,9 @@ package net.wg.gui.lobby.rankedBattles19
     import flash.display.DisplayObject;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.gui.lobby.rankedBattles19.data.RankedBattlesPageHeaderVO;
-    import net.wg.data.constants.Values;
+    import net.wg.data.constants.generated.RANKEDBATTLES_ALIASES;
     import net.wg.utils.StageSizeBoundaries;
+    import net.wg.data.constants.Values;
     import net.wg.data.constants.Linkages;
     import net.wg.gui.lobby.components.SideBarRenderer;
     import scaleform.clik.interfaces.IDataProvider;
@@ -30,9 +31,11 @@ package net.wg.gui.lobby.rankedBattles19
 
         private static const PROPERTY_ID:String = "id";
 
-        private static const MENU_NORMAL_HEIGHT:int = 334;
+        private static const MENU_RENDERER_NORMAL_HEIGHT:int = 78;
 
-        private static const MENU_SMALL_HEIGHT:int = 238;
+        private static const MENU_RENDERER_SMALL_HEIGHT:int = 54;
+
+        private static const MENU_EXTRA_HEIGHT:int = 22;
 
         private static const CONTENT_H_OFFSET_BIG:int = 50;
 
@@ -52,6 +55,10 @@ package net.wg.gui.lobby.rankedBattles19
 
         private static const COUNTER_PROPS_SMALL:CounterProps = new CounterProps(20,4,TextFormatAlign.RIGHT);
 
+        private static const SHOP_BG_OFFSET_Y:int = -50;
+
+        private static const SHOP_BG_MAGIC_OFFSET_Y:int = 526;
+
         public var menu:SideBar = null;
 
         public var content:ViewStackExPadding = null;
@@ -68,7 +75,7 @@ package net.wg.gui.lobby.rankedBattles19
 
         private var _itemRendererName:String = "";
 
-        private var _menuHeight:int = 0;
+        private var _itemRendererHeight:int = 78;
 
         private var _headerHelper:RankedBattlesPageHeaderHelper = null;
 
@@ -82,7 +89,6 @@ package net.wg.gui.lobby.rankedBattles19
         override public function updateStage(param1:Number, param2:Number) : void
         {
             setSize(param1,param2);
-            this.menu.height = param2;
             this.updateContentSize();
         }
 
@@ -107,28 +113,38 @@ package net.wg.gui.lobby.rankedBattles19
 
         override protected function draw() : void
         {
-            var _loc1_:DisplayObject = null;
-            var _loc2_:CountersVo = null;
+            var _loc3_:DisplayObject = null;
+            var _loc4_:CountersVo = null;
             super.draw();
-            if(this._data && isInvalid(InvalidationType.DATA))
+            var _loc1_:Boolean = isInvalid(InvalidationType.DATA);
+            var _loc2_:Boolean = isInvalid(InvalidationType.SIZE);
+            if(this._data)
             {
-                this.menu.dataProvider = this._data.menuDP;
-                this.menu.selectedIndex = this._data.selectedIndex;
-            }
-            if(isInvalid(InvalidationType.SIZE))
-            {
-                this.menu.y = height - this._menuHeight >> 1;
-                closeBtn.x = _width - closeBtn.width - CLOSE_BUTTON_OFFSET;
+                if(_loc1_ || _loc2_)
+                {
+                    this.menu.height = this._itemRendererHeight * this._data.menuDP.length + MENU_EXTRA_HEIGHT;
+                }
+                if(_loc1_)
+                {
+                    this.menu.dataProvider = this._data.menuDP;
+                    this.menu.selectedIndex = this._data.selectedIndex;
+                    _loc2_ = true;
+                }
+                if(_loc2_)
+                {
+                    this.menu.y = height - this.menu.height >> 1;
+                    closeBtn.x = _width - closeBtn.width - CLOSE_BUTTON_OFFSET;
+                }
             }
             if(this._countersData && isInvalid(COUNTERS_INVALID))
             {
                 this._counterManager.disposeCountersForContainer(NEW_COUNTER_CONTAINER_ID);
-                for each(_loc2_ in this._countersData)
+                for each(_loc4_ in this._countersData)
                 {
-                    _loc1_ = this.getCounterTarget(_loc2_.componentId);
-                    if(_loc1_)
+                    _loc3_ = this.getCounterTarget(_loc4_.componentId);
+                    if(_loc3_)
                     {
-                        this._counterManager.setCounter(_loc1_,_loc2_.count,NEW_COUNTER_CONTAINER_ID,this._counterProps);
+                        this._counterManager.setCounter(_loc3_,_loc4_.count,NEW_COUNTER_CONTAINER_ID,this._counterProps);
                     }
                 }
             }
@@ -181,6 +197,41 @@ package net.wg.gui.lobby.rankedBattles19
             onCloseS();
         }
 
+        override protected function layoutBackground() : void
+        {
+            var _loc1_:* = NaN;
+            var _loc2_:* = NaN;
+            var _loc3_:* = NaN;
+            var _loc4_:* = NaN;
+            var _loc5_:* = 0;
+            var _loc6_:* = 0;
+            graphics.clear();
+            if(this.content.currentViewId == RANKEDBATTLES_ALIASES.RANKED_BATTLES_SHOP_ALIAS)
+            {
+                _loc1_ = App.appWidth / StageSizeBoundaries.WIDTH_1920;
+                _loc2_ = App.appHeight / StageSizeBoundaries.HEIGHT_1080;
+                _loc3_ = Math.min(_loc1_,_loc2_);
+                bgHolder.scaleX = bgHolder.scaleY = _loc3_;
+                _loc4_ = width + bgPaddingLayout.horizontal;
+                _loc5_ = Math.max(0,SHOP_BG_MAGIC_OFFSET_Y * _loc3_ - (height >> 1));
+                _loc6_ = bgHolder.width;
+                _loc6_ = _loc6_ + _loc6_ % 2;
+                bgHolder.width = _loc6_;
+                _loc6_ = bgHolder.height;
+                _loc6_ = _loc6_ + _loc6_ % 2;
+                bgHolder.height = _loc6_;
+                bgHolder.x = _loc4_ - bgHolder.width >> 1;
+                bgHolder.y = (height - bgHolder.height >> 1) - _loc5_ + SHOP_BG_OFFSET_Y;
+                graphics.beginFill(0);
+                graphics.drawRect(0,0,App.appWidth,App.appHeight);
+                graphics.endFill();
+            }
+            else
+            {
+                super.layoutBackground();
+            }
+        }
+
         public function setStateSizeBoundaries(param1:int, param2:int) : void
         {
             var _loc3_:String = this._headerHelper.getSizeId(param1,param2);
@@ -190,15 +241,15 @@ package net.wg.gui.lobby.rankedBattles19
             var _loc4_:String = Values.EMPTY_STR;
             if(param1 == StageSizeBoundaries.WIDTH_1024)
             {
-                this._menuHeight = MENU_SMALL_HEIGHT;
                 _loc4_ = Linkages.SIDE_BAR_SMALL_RENDERER;
+                this._itemRendererHeight = MENU_RENDERER_SMALL_HEIGHT;
                 this._counterProps = COUNTER_PROPS_SMALL;
                 this.menu.x = CONTENT_H_OFFSET_SMALL;
             }
             else
             {
-                this._menuHeight = MENU_NORMAL_HEIGHT;
                 _loc4_ = Linkages.SIDE_BAR_NORMAL_RENDERER;
+                this._itemRendererHeight = MENU_RENDERER_NORMAL_HEIGHT;
                 this._counterProps = COUNTER_PROPS_BIG;
                 this.menu.x = CONTENT_H_OFFSET_BIG;
             }
