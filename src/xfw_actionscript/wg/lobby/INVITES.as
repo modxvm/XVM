@@ -65,6 +65,8 @@ package
 
         public static const INVITES_TEXT_STRONGHOLD:String = "#invites:invites/text/STRONGHOLD";
 
+        public static const INVITES_TEXT_BOB:String = "#invites:invites/text/BOB";
+
         public static const INVITES_TEXT_FORT_OFFENCE:String = "#invites:invites/text/fort/offence";
 
         public static const INVITES_TEXT_FORT_DEFENCE:String = "#invites:invites/text/fort/defence";
@@ -172,6 +174,10 @@ package
         public static const INVITES_NOTE_LEAVE_RANKED:String = "#invites:invites/note/leave/RANKED";
 
         public static const INVITES_NOTE_CHANGE_AND_LEAVE_RANKED:String = "#invites:invites/note/change_and_leave/RANKED";
+
+        public static const INVITES_NOTE_LEAVE_BOB:String = "#invites:invites/note/leave/BOB";
+
+        public static const INVITES_NOTE_CHANGE_AND_LEAVE_BOB:String = "#invites:invites/note/change_and_leave/BOB";
 
         public static const INVITES_WARNING_ANONYMIZED:String = "#invites:invites/warning/anonymized";
 

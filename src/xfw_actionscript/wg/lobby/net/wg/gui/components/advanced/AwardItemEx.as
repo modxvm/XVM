@@ -32,6 +32,8 @@ package net.wg.gui.components.advanced
 
         private var _hasSize:Boolean = false;
 
+        private var _maxHeight:int = -2147483648;
+
         public function AwardItemEx()
         {
             super();
@@ -48,8 +50,10 @@ package net.wg.gui.components.advanced
             this.img.removeEventListener(Event.CHANGE,this.onImgChangeHandler);
             this.img.dispose();
             this.img = null;
+            this.highlight.removeEventListener(Event.CHANGE,this.onChangeHandler);
             this.highlight.dispose();
             this.highlight = null;
+            this.overlay.removeEventListener(Event.CHANGE,this.onChangeHandler);
             this.overlay.dispose();
             this.overlay = null;
             this.txtLabel = null;
@@ -63,6 +67,8 @@ package net.wg.gui.components.advanced
             super.configUI();
             this.txtLabel.mouseEnabled = false;
             this.img.addEventListener(Event.CHANGE,this.onImgChangeHandler);
+            this.highlight.addEventListener(Event.CHANGE,this.onChangeHandler);
+            this.overlay.addEventListener(Event.CHANGE,this.onChangeHandler);
         }
 
         override protected function draw() : void
@@ -82,6 +88,13 @@ package net.wg.gui.components.advanced
                 {
                     this.img.scaleX = this.img.scaleY = _width / this.img.width;
                     this.img.y = height - this.img.height >> 1;
+                }
+                else if(this._maxHeight > int.MIN_VALUE)
+                {
+                    this.img.y = this._maxHeight - this.img.height >> 1;
+                    this.highlight.y = this._maxHeight - this.highlight.height >> 1;
+                    this.overlay.y = this._maxHeight - this.overlay.height >> 1;
+                    this.highlight.x = this.img.width - this.highlight.width >> 1;
                 }
                 this.txtLabel.y = this.img.y + this.img.height - this.txtLabel.textHeight ^ 0;
                 dispatchEvent(new Event(Event.CHANGE));
@@ -162,6 +175,13 @@ package net.wg.gui.components.advanced
             {
                 this.txtLabel.x = this.img.width - this.txtLabel.textWidth >> 1;
             }
+            this.onChangeHandler(param1);
+        }
+
+        private function onChangeHandler(param1:Event) : void
+        {
+            var _loc2_:int = Image(param1.target).height;
+            this._maxHeight = _loc2_ > this._maxHeight?_loc2_:this._maxHeight;
             invalidateSize();
         }
     }

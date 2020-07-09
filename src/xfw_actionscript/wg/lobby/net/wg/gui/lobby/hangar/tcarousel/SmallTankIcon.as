@@ -104,6 +104,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             imgIcon.source = param1.iconSmall;
             imgIcon.sourceAlt = param1.iconSmallAlt;
             addImg.visible = false;
+            updateSpecialBg(param1.specialBgSmallSrc,param1.isSpecialBgOverFlag);
         }
 
         override protected function onDispose() : void

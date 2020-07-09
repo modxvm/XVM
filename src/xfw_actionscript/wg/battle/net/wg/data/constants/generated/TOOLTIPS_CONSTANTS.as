@@ -447,6 +447,10 @@ package net.wg.data.constants.generated
 
         public static const BLUEPRINT_RANDOM_INFO:String = "blueprintRandomInfo";
 
+        public static const BOB_SELECTOR_INFO:String = "bobSelectorInfo";
+
+        public static const BOB_SERVER_PRIMETIME:String = "bobServerPrimeTime";
+
         public static const BLOCKS_DEFAULT_UI:String = "ToolTipInblocksDefaultUI";
 
         public static const TANKMEN_UI:String = "ToolTipTankmenUI";
@@ -619,7 +623,11 @@ package net.wg.data.constants.generated
 
         public static const BADGES_SUFFIX_ITEM:String = "badgesSuffixItem";
 
+        public static const BADGES_SUFFIX_RANKED_ITEM:String = "badgesSuffixRankedItem";
+
         public static const BADGES_SUFFIX_ITEM_UI:String = "ToolTipInblocksDefaultUI";
+
+        public static const BADGES_SUFFIX_RANKED_ITEM_UI:String = "ToolTipInblocksDefaultUI";
 
         public static const ACHIEVEMENTS_SET:Array = [BATTLE_STATS_ACHIEVS,BATTLE_STATS_MARKS_ON_GUN_ACHIEVEMENT,ACHIEVEMENT,MARKS_ON_GUN_ACHIEVEMENT,GLOBAL_RATING,MARK_OF_MASTERY,ACHIEVEMENT_ATTR,SHOP_ACHIEVEMENT,SHOP_BADGE,REFERRAL_BADGE];
 
@@ -681,7 +689,9 @@ package net.wg.data.constants.generated
 
         public static const VEHICLE_COLLECTOR_SET:Array = [VEHICLE_COLLECTOR_INFO,VEHICLE_COLLECTOR_DISABLED];
 
-        public static const BADGES_SET:Array = [BADGES_SUFFIX_ITEM];
+        public static const BADGES_SET:Array = [BADGES_SUFFIX_ITEM,BADGES_SUFFIX_RANKED_ITEM];
+
+        public static const BOB_SET:Array = [BOB_SELECTOR_INFO,BOB_SERVER_PRIMETIME];
 
         public function TOOLTIPS_CONSTANTS()
         {

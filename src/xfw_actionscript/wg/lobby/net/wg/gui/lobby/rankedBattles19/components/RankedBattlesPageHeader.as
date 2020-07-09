@@ -141,9 +141,7 @@ package net.wg.gui.lobby.rankedBattles19.components
 
         private function updateLayout() : void
         {
-            var _loc1_:TextFormat = null;
-            var _loc2_:* = 0;
-            _loc1_ = DESCR_FORMATS[this._size];
+            var _loc1_:TextFormat = DESCR_FORMATS[this._size];
             this.titleTf.setTextFormat(TITLE_FORMATS[this._size]);
             this._commons.updateTextFieldSize(this.titleTf);
             this.titleTf.x = width - this.titleTf.width >> 1;
@@ -151,7 +149,7 @@ package net.wg.gui.lobby.rankedBattles19.components
             this.leftSideTf.setTextFormat(_loc1_);
             this.leftSideTf.width = LEFT_SIDE_TF_WIDTH_FACTOR * this.titleTf.width;
             this._commons.updateTextFieldSize(this.leftSideTf);
-            _loc2_ = this.titleTf.y + DESCR_GAPS[this._size];
+            var _loc2_:int = this.titleTf.y + DESCR_GAPS[this._size];
             this.leftSideTf.y = _loc2_;
             var _loc3_:int = this.leftSideTf.width + (SEPARATOR_H_GAP << 1);
             if(!this._data.useOneSideDescription)

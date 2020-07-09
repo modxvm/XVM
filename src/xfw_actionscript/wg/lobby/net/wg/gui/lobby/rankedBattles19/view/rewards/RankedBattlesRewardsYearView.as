@@ -89,7 +89,10 @@ package net.wg.gui.lobby.rankedBattles19.view.rewards
         {
             var _loc4_:uint = 0;
             var _loc5_:* = NaN;
-            var _loc6_:* = 0;
+            var _loc6_:* = NaN;
+            var _loc7_:* = NaN;
+            var _loc8_:* = 0;
+            var _loc9_:* = 0;
             super.draw();
             var _loc1_:Boolean = isInvalid(InvalidationType.SIZE) || isInvalid(INV_VIEW_PADDING);
             var _loc2_:Boolean = isInvalid(InvalidationType.DATA);
@@ -131,14 +134,22 @@ package net.wg.gui.lobby.rankedBattles19.view.rewards
                 this.black.y = -viewPadding.top;
                 this.black.width = _width + viewPadding.left;
                 this.black.height = _height + viewPadding.top;
-                _loc5_ = Math.min(1,App.appWidth / StageSizeBoundaries.WIDTH_1920);
-                _loc6_ = Math.max(0,this._rewardCircleTPos * _loc5_ - (_height + viewPadding.top >> 1));
+                _loc5_ = App.appWidth / StageSizeBoundaries.WIDTH_1920;
+                _loc6_ = App.appHeight / StageSizeBoundaries.HEIGHT_1080;
+                _loc7_ = Math.min(_loc5_,_loc6_);
+                _loc8_ = Math.max(0,this._rewardCircleTPos * _loc7_ - (_height + viewPadding.top >> 1));
+                this.bg.scaleX = this.bg.scaleY = _loc7_;
+                _loc9_ = this.bg.width;
+                _loc9_ = _loc9_ + _loc9_ % 2;
+                this.bg.width = _loc9_;
+                _loc9_ = this.bg.height;
+                _loc9_ = _loc9_ + _loc9_ % 2;
+                this.bg.height = _loc9_;
                 this.bg.x = _loc3_;
-                this.bg.y = _loc4_ + BG_TOP_SHIFT - _loc6_;
-                this.bg.scaleX = this.bg.scaleY = _loc5_;
+                this.bg.y = _loc4_ + BG_TOP_SHIFT - _loc8_;
                 this.rewardsContainer.x = _loc3_;
                 this.rewardsContainer.y = this.bg.y;
-                this.rewardsContainer.scale = _loc5_;
+                this.rewardsContainer.scale = _loc7_;
             }
         }
 

@@ -22,7 +22,7 @@ package net.wg.gui.lobby.rankedBattles19.view.seasonComplete
 
         public var effectResult:SeasonResultRenderer;
 
-        public var placeResult:SeasonResultRenderer;
+        public var placeResult:SeasonPlaceResultRenderer;
 
         public var mainImage:SeasonMainImage;
 
@@ -110,10 +110,18 @@ package net.wg.gui.lobby.rankedBattles19.view.seasonComplete
             }
         }
 
+        public function setPlace(param1:String) : void
+        {
+            this.placeResult.setValue(param1);
+            this.placeResult.updateValue();
+        }
+
         protected function updateData() : void
         {
-            this.effectResult.setValueAndLabel(this.data.effectValue,this.data.effectLabel);
-            this.placeResult.setValueAndLabel(this.data.placeValue,this.data.placeLabel);
+            this.effectResult.setValue(this.data.effectValue);
+            this.effectResult.setLabel(this.data.effectLabel);
+            this.placeResult.setValue(this.data.placeValue);
+            this.placeResult.setLabel(this.data.placeLabel);
             this.mainImage.setImage(this.data.mainImage);
         }
 
