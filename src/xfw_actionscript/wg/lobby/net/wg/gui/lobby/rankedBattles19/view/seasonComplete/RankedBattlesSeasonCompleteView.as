@@ -89,6 +89,11 @@ package net.wg.gui.lobby.rankedBattles19.view.seasonComplete
             this.container.setAwardsData(param1);
         }
 
+        public function as_setPlace(param1:String) : void
+        {
+            this.container.setPlace(param1);
+        }
+
         protected function beforeInitData() : void
         {
             visible = true;

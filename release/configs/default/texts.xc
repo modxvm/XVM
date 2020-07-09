@@ -134,6 +134,9 @@
       // Tournament (event).
       // Турнир (ивент).
       "tournament_event": "",
+      // «Brawl» mode.
+      // Режим «Схватка».
+      "bob": "",
       // ?.
       // ?.
       "event_random": ""

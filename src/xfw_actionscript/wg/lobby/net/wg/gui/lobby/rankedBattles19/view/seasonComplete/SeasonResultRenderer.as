@@ -5,6 +5,7 @@ package net.wg.gui.lobby.rankedBattles19.view.seasonComplete
     import net.wg.gui.components.advanced.CounterEx;
     import flash.text.TextField;
     import net.wg.utils.ILocale;
+    import flash.utils.getQualifiedClassName;
     import net.wg.infrastructure.interfaces.IFormattedInt;
     import org.idmedia.as3commons.util.StringUtils;
 
@@ -19,6 +20,8 @@ package net.wg.gui.lobby.rankedBattles19.view.seasonComplete
 
         private var _locale:ILocale;
 
+        private var _baseDisposed:Boolean = false;
+
         public function SeasonResultRenderer()
         {
             this._locale = App.utils.locale;
@@ -28,16 +31,22 @@ package net.wg.gui.lobby.rankedBattles19.view.seasonComplete
 
         public final function dispose() : void
         {
-            this.counter.dispose();
-            this.counter = null;
-            this.labelTF = null;
-            this._locale = null;
+            if(this._baseDisposed)
+            {
+                App.utils.asserter.assert(false,name + "(" + getQualifiedClassName(this) + ") already disposed!");
+            }
+            this._baseDisposed = true;
+            this.onDispose();
         }
 
-        public function setValueAndLabel(param1:String, param2:String) : void
+        public function setLabel(param1:String) : void
+        {
+            this.labelTF.text = param1;
+        }
+
+        public function setValue(param1:String) : void
         {
             this._resultValue = param1;
-            this.labelTF.text = param2;
         }
 
         public function updateValue() : void
@@ -50,6 +59,14 @@ package net.wg.gui.lobby.rankedBattles19.view.seasonComplete
                 this.counter.init(_loc1_.value,this._resultValue,_loc1_.delimiter,true);
                 this.counter.x = this.counter.expectedWidth >> 1;
             }
+        }
+
+        protected function onDispose() : void
+        {
+            this.counter.dispose();
+            this.counter = null;
+            this.labelTF = null;
+            this._locale = null;
         }
 
         public function set endingChar(param1:String) : void

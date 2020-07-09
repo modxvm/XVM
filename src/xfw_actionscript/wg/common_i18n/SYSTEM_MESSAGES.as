@@ -165,6 +165,8 @@ package
 
         public static const PREBATTLE_VEHICLEINVALID_EPICONLY:String = "#system_messages:prebattle/vehicleInvalid/epicOnly";
 
+        public static const PREBATTLE_VEHICLEINVALID_BOBONLY:String = "#system_messages:prebattle/vehicleInvalid/bobOnly";
+
         public static const PREBATTLE_VEHICLEINVALID_NOTSETREADYSTATUS:String = "#system_messages:prebattle/vehicleInvalid/notSetReadyStatus";
 
         public static const PREBATTLE_VEHICLEINVALID_FALLOUTONLY:String = "#system_messages:prebattle/vehicleInvalid/falloutOnly";
@@ -2130,6 +2132,14 @@ package
         public static const RANKED_NOTIFICATION_AVAILABLE:String = "#system_messages:ranked/notification/available";
 
         public static const TOKENS_NOTIFICATION_MARK_ACQUIRED:String = "#system_messages:tokens/notification/mark_acquired";
+
+        public static const RANKED_NOTIFICATION_YEARLB_POSITIVE_TITLE:String = "#system_messages:ranked/notification/yearLB/positive/title";
+
+        public static const RANKED_NOTIFICATION_YEARLB_POSITIVE_BODY:String = "#system_messages:ranked/notification/yearLB/positive/body";
+
+        public static const RANKED_NOTIFICATION_YEARLB_NEGATIVE_TITLE:String = "#system_messages:ranked/notification/yearLB/negative/title";
+
+        public static const RANKED_NOTIFICATION_YEARLB_NEGATIVE_BODY:String = "#system_messages:ranked/notification/yearLB/negative/body";
 
         public static const EPICBATTLES_NOTIFICATION_NOTAVAILABLE:String = "#system_messages:epicBattles/notification/notAvailable";
 

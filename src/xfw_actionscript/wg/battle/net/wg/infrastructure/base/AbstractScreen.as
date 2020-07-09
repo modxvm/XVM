@@ -217,6 +217,7 @@ package net.wg.infrastructure.base
                 this.bgHolder.scaleX = this.bgHolder.scaleY;
             }
             this.bgHolder.x = _loc1_ - this.bgHolder.width >> 1;
+            this.bgHolder.y = 0;
         }
 
         protected function onEscapeKeyDown() : void

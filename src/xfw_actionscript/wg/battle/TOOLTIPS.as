@@ -331,9 +331,17 @@ package
 
         public static const TOOLTIPS_BATTLEPASS_ENTRYPOINT_DISABLED:String = "#tooltips:tooltips/battlePass/entryPoint/disabled";
 
+        public static const RANKEDBATTLESVIEW_SPRINTER:String = "#tooltips:rankedBattlesView/sprinter";
+
         public static const BADGEINFO_TITLE:String = "#tooltips:badgeinfo/title";
 
         public static const BADGEINFO_TEXT:String = "#tooltips:badgeinfo/text";
+
+        public static const BADGEPAGE_RANKED_SUFFIXITEM_POSITION:String = "#tooltips:badgepage/ranked/suffixItem/position";
+
+        public static const BADGEPAGE_RANKED_SUFFIXITEM_CONFIRMATION:String = "#tooltips:badgepage/ranked/suffixItem/confirmation";
+
+        public static const BADGEPAGE_RANKED_SUFFIXITEM_DURATION:String = "#tooltips:badgepage/ranked/suffixItem/duration";
 
         public static const TEMPLATE_DAYS_SHORT:String = "#tooltips:template/days/short";
 
@@ -1371,6 +1379,10 @@ package
 
         public static const HEADER_RANKEDSQUAD_BODY:String = "#tooltips:header/rankedSquad/body";
 
+        public static const HEADER_BOBSQUAD_HEADER:String = "#tooltips:header/bobSquad/header";
+
+        public static const HEADER_BOBSQUAD_BODY:String = "#tooltips:header/bobSquad/body";
+
         public static const HEADER_BATTLETYPE_HEADER:String = "#tooltips:header/battleType/header";
 
         public static const HEADER_BATTLETYPE_BODY:String = "#tooltips:header/battleType/body";
@@ -2286,6 +2298,8 @@ package
         public static const VEHICLE_TRADE:String = "#tooltips:vehicle/trade";
 
         public static const VEHICLE_DEAL_EPIC_MAIN:String = "#tooltips:vehicle/deal/epic/main";
+
+        public static const VEHICLE_DEAL_BOB_MAIN:String = "#tooltips:vehicle/deal/bob/main";
 
         public static const ANONYMIZER_TEAMSTATS_HEADER:String = "#tooltips:anonymizer/teamStats/header";
 
@@ -3757,6 +3771,14 @@ package
 
         public static const AWARDITEM_TESTENTITLEMENT_BODY:String = "#tooltips:awardItem/testEntitlement/body";
 
+        public static const AWARDITEM_RANKED_2020_DISCOUNT_HEADER:String = "#tooltips:awardItem/ranked_2020_discount/header";
+
+        public static const AWARDITEM_RANKED_2020_DISCOUNT_BODY:String = "#tooltips:awardItem/ranked_2020_discount/body";
+
+        public static const AWARDITEM_RANKED_202007_ACCESS_HEADER:String = "#tooltips:awardItem/ranked_202007_access/header";
+
+        public static const AWARDITEM_RANKED_202007_ACCESS_BODY:String = "#tooltips:awardItem/ranked_202007_access/body";
+
         public static const AWARDITEM_RANKEDDAILYBATTLES_HEADER:String = "#tooltips:awardItem/rankedDailyBattles/header";
 
         public static const AWARDITEM_RANKEDDAILYBATTLES_BODY:String = "#tooltips:awardItem/rankedDailyBattles/body";
@@ -3817,6 +3839,10 @@ package
 
         public static const RANKEDBATTLESVIEW_REWARDS_BODY:String = "#tooltips:rankedBattlesView/rewards/body";
 
+        public static const RANKEDBATTLESVIEW_SHOP_HEADER:String = "#tooltips:rankedBattlesView/shop/header";
+
+        public static const RANKEDBATTLESVIEW_SHOP_BODY:String = "#tooltips:rankedBattlesView/shop/body";
+
         public static const RANKEDBATTLESVIEW_RATING_HEADER:String = "#tooltips:rankedBattlesView/rating/header";
 
         public static const RANKEDBATTLESVIEW_RATING_BODY:String = "#tooltips:rankedBattlesView/rating/body";
@@ -3824,6 +3850,14 @@ package
         public static const RANKEDBATTLESVIEW_INFO_HEADER:String = "#tooltips:rankedBattlesView/info/header";
 
         public static const RANKEDBATTLESVIEW_INFO_BODY:String = "#tooltips:rankedBattlesView/info/body";
+
+        public static const RANKEDBATTLESVIEW_YEARRATING_HEADER:String = "#tooltips:rankedBattlesView/yearRating/header";
+
+        public static const RANKEDBATTLESVIEW_YEARRATING_BODY:String = "#tooltips:rankedBattlesView/yearRating/body";
+
+        public static const RANKEDBATTLESVIEW_SPRINTER_HEADER:String = "#tooltips:rankedBattlesView/sprinter/header";
+
+        public static const RANKEDBATTLESVIEW_SPRINTER_BODY:String = "#tooltips:rankedBattlesView/sprinter/body";
 
         public static const RANKED_WIDGET_EFFICIENCY_TITLE:String = "#tooltips:ranked/widget/efficiency/title";
 
@@ -5644,6 +5678,10 @@ package
         public static const NOTRECRUITEDTANKMAN_TWITCH9_LABEL:String = "#tooltips:notrecruitedtankman/twitch9/label";
 
         public static const NOTRECRUITEDTANKMAN_TWITCH9_DESC:String = "#tooltips:notrecruitedtankman/twitch9/desc";
+
+        public static const NOTRECRUITEDTANKMAN_COMMANDER_CESARE_LABEL:String = "#tooltips:notrecruitedtankman/commander_cesare/label";
+
+        public static const NOTRECRUITEDTANKMAN_COMMANDER_CESARE_DESC:String = "#tooltips:notrecruitedtankman/commander_cesare/desc";
 
         public static const NOTRECRUITEDTANKMAN_NY19MEN_LABEL:String = "#tooltips:notrecruitedtankman/ny19men/label";
 

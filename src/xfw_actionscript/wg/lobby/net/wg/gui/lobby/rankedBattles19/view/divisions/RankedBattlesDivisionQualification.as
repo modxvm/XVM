@@ -3,10 +3,11 @@ package net.wg.gui.lobby.rankedBattles19.view.divisions
     import net.wg.infrastructure.base.meta.impl.RankedBattlesDivisionQualificationMeta;
     import net.wg.infrastructure.base.meta.IRankedBattlesDivisionQualificationMeta;
     import net.wg.utils.IStageSizeDependComponent;
-    import flash.text.TextField;
+    import net.wg.gui.lobby.rankedBattles19.view.RankedBattlesViewHelper;
     import net.wg.gui.components.controls.Image;
     import net.wg.gui.lobby.rankedBattles19.components.stats.RankedBattleStats;
     import flash.display.Sprite;
+    import flash.text.TextField;
     import scaleform.clik.motion.Tween;
     import net.wg.infrastructure.managers.ITooltipMgr;
     import net.wg.gui.lobby.rankedBattles19.data.RankedBattlesStatsVO;
@@ -43,23 +44,30 @@ package net.wg.gui.lobby.rankedBattles19.view.divisions
 
         private static const STATS_V_OFFSET_SMALL:int = 20;
 
-        private static const TITLE_V_OFFSET_BIG:int = -20;
-
-        private static const TITLE_V_OFFSET_SMALL:int = -5;
-
-        private static const TITLE_FADE_DURATION:int = 400;
-
-        private static const TITLE_FADE_DELAY:int = 0;
-
         private static const ICON_FADE_DURATION:int = 400;
 
-        private static const ICON_FADE_DELAY:int = 200;
+        private static const ICON_FADE_DELAY:int = 0;
 
         private static const STATS_FADE_DURATION:int = 400;
 
-        private static const STATS_FADE_DELAY:int = 400;
+        private static const STATS_FADE_DELAY:int = 200;
 
-        public var titleTf:TextField = null;
+        private static const QUAL_COUNTER_FADE_DURATION:int = 400;
+
+        private static const QUAL_COUNTER_FADE_DELAY:int = 400;
+
+        private static const Y_OFFSETS:Object = {};
+
+        private static const QUAL_COUNTER_Y_OFFSETS:Object = {};
+
+        {
+            Y_OFFSETS[RankedBattlesViewHelper.SIZE_HUGE] = -65;
+            Y_OFFSETS[RankedBattlesViewHelper.SIZE_BIG] = -72;
+            Y_OFFSETS[RankedBattlesViewHelper.SIZE_SMALL] = -51;
+            QUAL_COUNTER_Y_OFFSETS[RankedBattlesViewHelper.SIZE_HUGE] = 135;
+            QUAL_COUNTER_Y_OFFSETS[RankedBattlesViewHelper.SIZE_BIG] = 100;
+            QUAL_COUNTER_Y_OFFSETS[RankedBattlesViewHelper.SIZE_SMALL] = 91;
+        }
 
         public var rankIcon:Image = null;
 
@@ -69,11 +77,13 @@ package net.wg.gui.lobby.rankedBattles19.view.divisions
 
         public var bg:Sprite = null;
 
-        private var _titleContainer:Sprite = null;
+        public var qualCounterTf:TextField = null;
 
         private var _iconContainer:Sprite = null;
 
         private var _statsContainer:Sprite = null;
+
+        private var _qualCounterContainer:Sprite = null;
 
         private var _tweens:Vector.<Tween> = null;
 
@@ -93,23 +103,28 @@ package net.wg.gui.lobby.rankedBattles19.view.divisions
 
         private var _isFirstEnter:Boolean = false;
 
+        private var _viewHelper:RankedBattlesViewHelper = null;
+
+        private var _viewSizeId:String = "small";
+
         public function RankedBattlesDivisionQualification()
         {
             super();
-            this._titleContainer = new Sprite();
+            this._qualCounterContainer = new Sprite();
             this._iconContainer = new Sprite();
             this._statsContainer = new Sprite();
-            addChild(this._titleContainer);
+            addChild(this._qualCounterContainer);
             addChild(this._iconContainer);
             addChild(this._statsContainer);
-            this._titleContainer.addChild(this.titleTf);
+            this._qualCounterContainer.addChild(this.qualCounterTf);
             this._iconContainer.addChild(this.rankIcon);
             this._statsContainer.addChild(this.efficiencyStats);
             this._statsContainer.addChild(this.stepsStats);
-            this._titleContainer.alpha = 0;
+            this._qualCounterContainer.alpha = 0;
             this._iconContainer.alpha = 0;
             this._statsContainer.alpha = 0;
             this._tweens = new Vector.<Tween>(0);
+            this._viewHelper = RankedBattlesViewHelper.getInstance();
         }
 
         override protected function setQualificationEfficiencyData(param1:RankedBattlesStatsVO) : void
@@ -156,15 +171,16 @@ package net.wg.gui.lobby.rankedBattles19.view.divisions
             this.rankIcon.dispose();
             this.rankIcon.filters = null;
             this.rankIcon = null;
-            this.titleTf = null;
+            this.qualCounterTf = null;
             this.bg = null;
-            removeChild(this._titleContainer);
+            removeChild(this._qualCounterContainer);
             removeChild(this._iconContainer);
             removeChild(this._statsContainer);
-            this._titleContainer = null;
+            this._qualCounterContainer = null;
             this._iconContainer = null;
             this._statsContainer = null;
             this._tooltipMgr = null;
+            this._viewHelper = null;
             this.clearTweens();
             this._tweens = null;
             super.onDispose();
@@ -178,14 +194,10 @@ package net.wg.gui.lobby.rankedBattles19.view.divisions
                 if(this._isFirstEnter)
                 {
                     this._isFirstEnter = false;
-                    this._titleContainer.alpha = 0;
+                    this._qualCounterContainer.alpha = 0;
                     this._iconContainer.alpha = 0;
                     this._statsContainer.alpha = 0;
                     this.clearTweens();
-                    this._tweens.push(new Tween(TITLE_FADE_DURATION,this._titleContainer,{"alpha":1},{
-                        "paused":false,
-                        "delay":TITLE_FADE_DELAY
-                    }));
                     this._tweens.push(new Tween(ICON_FADE_DURATION,this._iconContainer,{"alpha":1},{
                         "paused":false,
                         "delay":ICON_FADE_DELAY
@@ -194,10 +206,14 @@ package net.wg.gui.lobby.rankedBattles19.view.divisions
                         "paused":false,
                         "delay":STATS_FADE_DELAY
                     }));
+                    this._tweens.push(new Tween(QUAL_COUNTER_FADE_DURATION,this._qualCounterContainer,{"alpha":1},{
+                        "paused":false,
+                        "delay":QUAL_COUNTER_FADE_DELAY
+                    }));
                 }
                 else
                 {
-                    this._titleContainer.alpha = 1;
+                    this._qualCounterContainer.alpha = 1;
                     this._iconContainer.alpha = 1;
                     this._statsContainer.alpha = 1;
                 }
@@ -214,7 +230,7 @@ package net.wg.gui.lobby.rankedBattles19.view.divisions
             if(isInvalid(InvalidationType.LAYOUT) || isInvalid(InvalidationType.SIZE))
             {
                 this.rankIcon.source = this._isSmall?this._smallImageSrc:this._bigImageSrc;
-                this.titleTf.htmlText = this._isSmall?this._progressTextSmall:this._progressTextBig;
+                this.qualCounterTf.htmlText = this._isSmall?this._progressTextSmall:this._progressTextBig;
                 this.updateLayoutHorizontal();
                 this.updateLayoutVertical();
             }
@@ -238,6 +254,7 @@ package net.wg.gui.lobby.rankedBattles19.view.divisions
 
         public function setStateSizeBoundaries(param1:int, param2:int) : void
         {
+            this._viewSizeId = this._viewHelper.getSizeId(param1,param2);
             this._isSmall = param1 < StageSizeBoundaries.WIDTH_1920 || param2 < StageSizeBoundaries.HEIGHT_900;
             if(this._isSmall)
             {
@@ -269,7 +286,7 @@ package net.wg.gui.lobby.rankedBattles19.view.divisions
             var _loc1_:int = width - 2 * viewPadding.left;
             this.bg.width = Math.min(_loc1_,MAX_BG_WIDTH);
             this.bg.x = width - this.bg.width >> 1;
-            this.titleTf.x = this.rankIcon.x + (this.rankIcon.width - this.titleTf.width >> 1);
+            this.qualCounterTf.x = this.rankIcon.x + (this.rankIcon.width - this.qualCounterTf.width >> 1);
             var _loc2_:* = width >> 1;
             if(this._isSmall)
             {
@@ -285,21 +302,19 @@ package net.wg.gui.lobby.rankedBattles19.view.divisions
 
         private function updateLayoutVertical() : void
         {
-            this.rankIcon.y = (_height - this.rankIcon.height >> 1) + (this._isSmall?ICON_V_OFFSET_SMALL:ICON_V_OFFSET_BIG);
+            this.rankIcon.y = (_height - this.rankIcon.height >> 1) + (this._isSmall?ICON_V_OFFSET_SMALL:ICON_V_OFFSET_BIG) + Y_OFFSETS[this._viewSizeId];
             this.bg.height = this._isSmall?BG_HEIGHT_SMALL:BG_HEIGHT_BIG;
             this.bg.y = this.rankIcon.y + (this.rankIcon.height - this.bg.height >> 1);
-            this.titleTf.y = this.rankIcon.y - this.titleTf.height;
+            this.qualCounterTf.y = this.rankIcon.y + this.rankIcon.height + QUAL_COUNTER_Y_OFFSETS[this._viewSizeId];
             if(this._isSmall)
             {
                 this.bg.y = this.bg.y + BG_V_OFFSET_SMALL;
                 this.efficiencyStats.y = this.stepsStats.y = this.rankIcon.y + STATS_V_OFFSET_SMALL;
-                this.titleTf.y = this.titleTf.y + TITLE_V_OFFSET_SMALL;
             }
             else
             {
                 this.bg.y = this.bg.y + BG_V_OFFSET_BIG;
                 this.efficiencyStats.y = this.stepsStats.y = this.rankIcon.y + STATS_V_OFFSET_BIG;
-                this.titleTf.y = this.titleTf.y + TITLE_V_OFFSET_BIG;
             }
         }
 

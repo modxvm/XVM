@@ -41,6 +41,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.txtRentInfo.htmlText = param1.rentLeft;
             imgIcon.source = param1.icon;
             imgIcon.sourceAlt = param1.iconAlt;
+            updateSpecialBg(param1.specialBgSrc,param1.isSpecialBgOverFlag);
         }
 
         override protected function setVisibleVehicleInfo(param1:Boolean) : void

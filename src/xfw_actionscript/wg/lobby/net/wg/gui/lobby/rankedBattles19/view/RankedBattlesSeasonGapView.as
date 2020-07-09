@@ -4,18 +4,20 @@ package net.wg.gui.lobby.rankedBattles19.view
     import net.wg.infrastructure.base.meta.IRankedBattlesSeasonGapViewMeta;
     import net.wg.utils.IStageSizeDependComponent;
     import flash.text.TextField;
-    import flash.display.MovieClip;
     import net.wg.gui.components.controls.Image;
+    import flash.display.MovieClip;
     import net.wg.gui.lobby.rankedBattles19.components.stats.RankedBattleStats;
     import net.wg.infrastructure.interfaces.IUniversalBtn;
     import flash.display.Sprite;
     import net.wg.gui.lobby.rankedBattles19.data.SeasonGapViewVO;
     import net.wg.utils.ITextManager;
+    import net.wg.infrastructure.managers.ITooltipMgr;
     import net.wg.data.constants.generated.TEXT_MANAGER_STYLES;
     import net.wg.gui.lobby.rankedBattles19.constants.StatsConsts;
     import net.wg.data.constants.UniversalBtnStylesConst;
     import flash.events.Event;
     import scaleform.clik.events.ButtonEvent;
+    import flash.events.MouseEvent;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.gui.lobby.rankedBattles19.data.RankedBattlesStatsVO;
     import net.wg.utils.StageSizeBoundaries;
@@ -41,11 +43,9 @@ package net.wg.gui.lobby.rankedBattles19.view
 
         private static const BG_HEIGHT_BIG:int = 160;
 
-        private static const TITLE_BLOCK_H_BIG:int = 230;
+        private static const SPRINTER_IMG_WIDTH:int = 32;
 
         private static const DESCR_TF_V_OFFSET_BIG:int = 47;
-
-        private static const BG_V_OFFSET_BIG:int = 154;
 
         private static const LEAGUE_IMG_V_OFFSET_BIG:int = 76;
 
@@ -55,13 +55,11 @@ package net.wg.gui.lobby.rankedBattles19.view
 
         private static const RATING_BTN_V_OFFSET_BIG:int = 144;
 
-        private static const SPRINTER_TF_V_OFFSET_BIG:int = 65;
+        private static const SPRINTER_IMG_V_OFFSET_BIG:int = 20;
 
-        private static const TITLE_BLOCK_H_SMALL:int = 50;
+        private static const SPRINTER_IMG_H_OFFSET_BIG:int = -14;
 
         private static const DESCR_TF_V_OFFSET_SMALL:int = 35;
-
-        private static const BG_V_OFFSET_SMALL:int = 134;
 
         private static const LEAGUE_IMG_V_OFFSET_SMALL:int = 63;
 
@@ -71,21 +69,28 @@ package net.wg.gui.lobby.rankedBattles19.view
 
         private static const RATING_BTN_V_OFFSET_SMALL:int = 126;
 
-        private static const SPRINTER_TF_V_OFFSET_SMALL:int = 50;
+        private static const SPRINTER_IMG_V_OFFSET_SMALL:int = 14;
 
-        private static const TITLE_PADDING_WEIGHT:Number = 0.25;
+        private static const SPRINTER_IMG_H_OFFSET_SMALL:int = -10;
 
-        private static const TITLE_PADDING_TOP_MIN:int = 20;
+        private static const TOP_BLOCK_Y_OFFSETS:Object = {};
 
-        private static const MAIN_BLOCK_HEIGHT_SMALL:int = 230;
+        private static const CENTER_BLOCK_Y_OFFSETS:Object = {};
 
-        private static const MAIN_BLOCK_HEIGHT_BIG:int = 320;
+        {
+            TOP_BLOCK_Y_OFFSETS[RankedBattlesViewHelper.SIZE_HUGE] = -200;
+            TOP_BLOCK_Y_OFFSETS[RankedBattlesViewHelper.SIZE_BIG] = -165;
+            TOP_BLOCK_Y_OFFSETS[RankedBattlesViewHelper.SIZE_SMALL] = -130;
+            CENTER_BLOCK_Y_OFFSETS[RankedBattlesViewHelper.SIZE_HUGE] = -60;
+            CENTER_BLOCK_Y_OFFSETS[RankedBattlesViewHelper.SIZE_BIG] = -70;
+            CENTER_BLOCK_Y_OFFSETS[RankedBattlesViewHelper.SIZE_SMALL] = -40;
+        }
 
         public var titleTf:TextField = null;
 
         public var descrTf:TextField = null;
 
-        public var sprinterTf:TextField = null;
+        public var sprinterImage:Image = null;
 
         public var leagueMc:MovieClip = null;
 
@@ -107,9 +112,18 @@ package net.wg.gui.lobby.rankedBattles19.view
 
         private var _textMgr:ITextManager = null;
 
+        private var _tooltipMgr:ITooltipMgr = null;
+
+        private var _viewHelper:RankedBattlesViewHelper = null;
+
+        private var _viewSizeId:String = "small";
+
         public function RankedBattlesSeasonGapView()
         {
             super();
+            this._textMgr = App.textMgr;
+            this._tooltipMgr = App.toolTipMgr;
+            this._viewHelper = RankedBattlesViewHelper.getInstance();
         }
 
         override protected function configUI() : void
@@ -126,12 +140,13 @@ package net.wg.gui.lobby.rankedBattles19.view
             this.statsRating.iconSizeSmall = StatsConsts.ICON_SIZE_64;
             this.statsRating.labelYOffset = STATS_LABEL_Y_OFFSET;
             App.utils.universalBtnStyles.setStyle(this.ratingBtn,UniversalBtnStylesConst.STYLE_HEAVY_GREEN);
-            this._textMgr = App.textMgr;
             this.leagueMc.visible = false;
             this.divisionImage.visible = false;
             this.divisionImage.addEventListener(Event.CHANGE,this.onMainImageChangeHandler);
-            this.sprinterTf.visible = false;
             this.ratingBtn.addEventListener(ButtonEvent.CLICK,this.onRatingBtnClickHandler);
+            this.sprinterImage.addEventListener(MouseEvent.ROLL_OVER,this.onSprinterImageRollOverHandler);
+            this.sprinterImage.addEventListener(MouseEvent.ROLL_OUT,this.onSprinterImageRollOutHandler);
+            this.sprinterImage.visible = false;
             App.stageSizeMgr.register(this);
         }
 
@@ -149,11 +164,7 @@ package net.wg.gui.lobby.rankedBattles19.view
                     }
                     invalidateLayout();
                 }
-                if(isInvalid(INV_VIEW_PADDING))
-                {
-                    invalidateLayout();
-                }
-                if(isInvalid(InvalidationType.LAYOUT))
+                if(isInvalid(InvalidationType.LAYOUT) || isInvalid(INV_VIEW_PADDING))
                 {
                     this.updateLayoutVertical();
                     this.updateLayoutHorizontal();
@@ -174,13 +185,18 @@ package net.wg.gui.lobby.rankedBattles19.view
             this.ratingBtn.removeEventListener(ButtonEvent.CLICK,this.onRatingBtnClickHandler);
             this.ratingBtn.dispose();
             this.ratingBtn = null;
+            this.sprinterImage.removeEventListener(MouseEvent.ROLL_OVER,this.onSprinterImageRollOverHandler);
+            this.sprinterImage.removeEventListener(MouseEvent.ROLL_OUT,this.onSprinterImageRollOutHandler);
+            this.sprinterImage.dispose();
+            this.sprinterImage = null;
             this.titleTf = null;
             this.descrTf = null;
-            this.sprinterTf = null;
             this.leagueMc = null;
             this.bg = null;
             this._data = null;
             this._textMgr = null;
+            this._tooltipMgr = null;
+            this._viewHelper = null;
             super.onDispose();
         }
 
@@ -205,6 +221,7 @@ package net.wg.gui.lobby.rankedBattles19.view
 
         public function setStateSizeBoundaries(param1:int, param2:int) : void
         {
+            this._viewSizeId = this._viewHelper.getSizeId(param1,param2);
             if(this._prevBoundariesHeight != param2)
             {
                 this._prevBoundariesHeight = param2;
@@ -264,14 +281,14 @@ package net.wg.gui.lobby.rankedBattles19.view
             }
             this.titleTf.htmlText = this._isSmall?this._textMgr.getTextStyleById(TEXT_MANAGER_STYLES.SUPER_PROMO_TITLE,this._data.title):this._textMgr.getTextStyleById(TEXT_MANAGER_STYLES.GRAND_TITLE,this._data.title);
             this.descrTf.htmlText = this._isSmall?this._textMgr.getTextStyleById(TEXT_MANAGER_STYLES.MAIN_TEXT,this._data.descr):this._textMgr.getTextStyleById(TEXT_MANAGER_STYLES.MAIN_BIG_TEXT,this._data.descr);
-            if(StringUtils.isNotEmpty(this._data.sprinterLabel))
+            if(StringUtils.isNotEmpty(this._data.sprinterImg))
             {
-                this.sprinterTf.visible = true;
-                this.sprinterTf.htmlText = this._data.sprinterLabel;
+                this.sprinterImage.visible = true;
+                this.sprinterImage.source = this._data.sprinterImg;
             }
             else
             {
-                this.sprinterTf.visible = false;
+                this.sprinterImage.visible = false;
             }
         }
 
@@ -283,7 +300,11 @@ package net.wg.gui.lobby.rankedBattles19.view
             this.descrTf.x = _width - this.descrTf.width >> 1;
             this.bg.x = _width - this.bg.width >> 1;
             this.ratingBtn.x = _width - this.ratingBtn.width >> 1;
-            this.sprinterTf.x = _width - this.sprinterTf.width >> 1;
+            if(this.sprinterImage.visible)
+            {
+                this.sprinterImage.x = (_width - this.titleTf.textWidth >> 1) - SPRINTER_IMG_WIDTH;
+                this.sprinterImage.x = this.sprinterImage.x + (this._isSmall?SPRINTER_IMG_H_OFFSET_SMALL:SPRINTER_IMG_H_OFFSET_BIG);
+            }
             if(this._data.state == RANKEDBATTLES_ALIASES.SEASON_GAP_VIEW_LEAGUE_STATE)
             {
                 _loc1_ = _width >> 1;
@@ -310,45 +331,42 @@ package net.wg.gui.lobby.rankedBattles19.view
 
         private function updateLayoutVertical() : void
         {
-            var _loc2_:Sprite = null;
+            var _loc1_:Sprite = null;
+            var _loc2_:* = 0;
             var _loc3_:* = 0;
-            var _loc4_:* = 0;
-            var _loc1_:int = height - viewPadding.top;
             if(this._data.state == RANKEDBATTLES_ALIASES.SEASON_GAP_VIEW_LEAGUE_STATE)
             {
-                _loc2_ = this.leagueMc;
-                _loc3_ = LEAGUE_IMG_V_OFFSET_BIG;
-                _loc4_ = LEAGUE_IMG_V_OFFSET_SMALL;
+                _loc1_ = this.leagueMc;
+                _loc2_ = LEAGUE_IMG_V_OFFSET_BIG;
+                _loc3_ = LEAGUE_IMG_V_OFFSET_SMALL;
             }
             else
             {
-                _loc2_ = this.divisionImage;
-                _loc3_ = DIVISION_IMG_V_OFFSET_BIG;
-                _loc4_ = DIVISION_IMG_V_OFFSET_SMALL;
+                _loc1_ = this.divisionImage;
+                _loc2_ = DIVISION_IMG_V_OFFSET_BIG;
+                _loc3_ = DIVISION_IMG_V_OFFSET_SMALL;
             }
+            this.bg.y = (height >> 1) + CENTER_BLOCK_Y_OFFSETS[this._viewSizeId];
+            this.titleTf.y = this.bg.y + TOP_BLOCK_Y_OFFSETS[this._viewSizeId];
             if(this._isSmall)
             {
-                _loc1_ = _loc1_ - (MAIN_BLOCK_HEIGHT_SMALL + TITLE_BLOCK_H_SMALL);
-                this.titleTf.y = Math.max(_loc1_ * TITLE_PADDING_WEIGHT,TITLE_PADDING_TOP_MIN) + viewPadding.top | 0;
                 this.descrTf.y = this.titleTf.y + DESCR_TF_V_OFFSET_SMALL;
-                this.bg.y = this.descrTf.y + BG_V_OFFSET_SMALL;
                 this.bg.height = BG_HEIGHT_SMALL;
-                _loc2_.y = this.bg.y + _loc4_;
+                _loc1_.y = this.bg.y + _loc3_;
                 this.statsEfficiency.y = this.statsRating.y = this.bg.y + STATS_V_OFFSET_SMALL;
                 this.ratingBtn.y = this.bg.y + this.bg.height + RATING_BTN_V_OFFSET_SMALL;
-                this.sprinterTf.y = this.bg.y + this.bg.height + SPRINTER_TF_V_OFFSET_SMALL;
             }
             else
             {
-                _loc1_ = _loc1_ - (MAIN_BLOCK_HEIGHT_BIG + TITLE_BLOCK_H_BIG);
-                this.titleTf.y = Math.max(_loc1_ * TITLE_PADDING_WEIGHT,TITLE_PADDING_TOP_MIN) + viewPadding.top | 0;
                 this.descrTf.y = this.titleTf.y + DESCR_TF_V_OFFSET_BIG;
-                this.bg.y = this.descrTf.y + BG_V_OFFSET_BIG;
                 this.bg.height = BG_HEIGHT_BIG;
-                _loc2_.y = this.bg.y + _loc3_;
+                _loc1_.y = this.bg.y + _loc2_;
                 this.statsEfficiency.y = this.statsRating.y = this.bg.y + STATS_V_OFFSET_BIG;
                 this.ratingBtn.y = this.bg.y + this.bg.height + RATING_BTN_V_OFFSET_BIG;
-                this.sprinterTf.y = this.bg.y + this.bg.height + SPRINTER_TF_V_OFFSET_BIG;
+            }
+            if(this.sprinterImage.visible)
+            {
+                this.sprinterImage.y = this.titleTf.y + (this._isSmall?SPRINTER_IMG_V_OFFSET_SMALL:SPRINTER_IMG_V_OFFSET_BIG);
             }
         }
 
@@ -360,6 +378,16 @@ package net.wg.gui.lobby.rankedBattles19.view
         private function onRatingBtnClickHandler(param1:Event) : void
         {
             onBtnClickS();
+        }
+
+        private function onSprinterImageRollOverHandler(param1:Event) : void
+        {
+            this._tooltipMgr.showComplex(TOOLTIPS.RANKEDBATTLESVIEW_SPRINTER);
+        }
+
+        private function onSprinterImageRollOutHandler(param1:Event) : void
+        {
+            this._tooltipMgr.hide();
         }
     }
 }

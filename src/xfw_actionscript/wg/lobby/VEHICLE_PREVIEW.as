@@ -27,6 +27,8 @@ package
 
         public static const HEADER_BACKBTN_DESCRLABEL_WINTERMARATHON:String = "#vehicle_preview:header/backBtn/descrLabel/winterMarathon";
 
+        public static const HEADER_BACKBTN_DESCRLABEL_RANKED:String = "#vehicle_preview:header/backBtn/descrLabel/ranked";
+
         public static const HEADER_TITLE:String = "#vehicle_preview:header/title";
 
         public static const HERO_HEADER_TITLE:String = "#vehicle_preview:hero/header/title";

@@ -23,9 +23,13 @@ package
 
         public static const RANKEDBATTLEMAINVIEW_SEASONCOMPLETE:String = "#ranked_battles:rankedBattleMainView/seasonComplete";
 
+        public static const RANKEDBATTLEMAINVIEW_SEASONCOMPLETESINGLE:String = "#ranked_battles:rankedBattleMainView/seasonCompleteSingle";
+
         public static const RANKEDBATTLEMAINVIEW_SEASONGAP:String = "#ranked_battles:rankedBattleMainView/seasonGap";
 
         public static const RANKEDBATTLEMAINVIEW_BONUSBATTLES:String = "#ranked_battles:rankedBattleMainView/bonusBattles";
+
+        public static const RANKEDBATTLEMAINVIEW_YEARGAP_HEADER:String = "#ranked_battles:rankedBattleMainView/yearGap/header";
 
         public static const RANKEDBATTLEMAINVIEW_INFOPAGE_HEADER:String = "#ranked_battles:rankedBattleMainView/infoPage/header";
 
@@ -35,19 +39,21 @@ package
 
         public static const RANKEDBATTLEMAINVIEW_LEAGUESVIEW_UNAVAILABLEDESCR:String = "#ranked_battles:rankedBattleMainView/leaguesView/unavailableDescr";
 
+        public static const RANKEDBATTLEMAINVIEW_LEAGUESVIEW_TOPDESCR:String = "#ranked_battles:rankedBattleMainView/leaguesView/topDescr";
+
         public static const RANKEDBATTLEMAINVIEW_LEAGUESVIEW_LEAGUE1:String = "#ranked_battles:rankedBattleMainView/leaguesView/league1";
 
         public static const RANKEDBATTLEMAINVIEW_LEAGUESVIEW_LEAGUE2:String = "#ranked_battles:rankedBattleMainView/leaguesView/league2";
 
         public static const RANKEDBATTLEMAINVIEW_LEAGUESVIEW_LEAGUE3:String = "#ranked_battles:rankedBattleMainView/leaguesView/league3";
 
+        public static const RANKEDBATTLEMAINVIEW_LEAGUESVIEW_TOP:String = "#ranked_battles:rankedBattleMainView/leaguesView/top";
+
         public static const RANKEDBATTLEMAINVIEW_SEASONGAP_LEAGUE1:String = "#ranked_battles:rankedBattleMainView/seasonGap/league1";
 
         public static const RANKEDBATTLEMAINVIEW_SEASONGAP_LEAGUE2:String = "#ranked_battles:rankedBattleMainView/seasonGap/league2";
 
         public static const RANKEDBATTLEMAINVIEW_SEASONGAP_LEAGUE3:String = "#ranked_battles:rankedBattleMainView/seasonGap/league3";
-
-        public static const RANKEDBATTLEMAINVIEW_SEASONGAP_SPRINTER:String = "#ranked_battles:rankedBattleMainView/seasonGap/sprinter";
 
         public static const RANKEDBATTLEMAINVIEW_SEASONGAP_DIVISION_TITLE:String = "#ranked_battles:rankedBattleMainView/seasonGap/division/title";
 
@@ -74,6 +80,14 @@ package
         public static const RANKEDBATTLEMAINVIEW_SEASONGAP_BANNEDNOTINSEASON_DESCR:String = "#ranked_battles:rankedBattleMainView/seasonGap/bannedNotInSeason/descr";
 
         public static const RANKEDBATTLEMAINVIEW_SEASONGAP_BANNEDNOTINDIVISIONS_DESCR:String = "#ranked_battles:rankedBattleMainView/seasonGap/bannedNotInDivisions/descr";
+
+        public static const RANKEDBATTLEMAINVIEW_SEASONGAP_ROLLEDLEAGUE_DESCR:String = "#ranked_battles:rankedBattleMainView/seasonGap/rolledLeague/descr";
+
+        public static const RANKEDBATTLEMAINVIEW_SEASONGAP_ROLLEDDIVISION_DESCR:String = "#ranked_battles:rankedBattleMainView/seasonGap/rolledDivision/descr";
+
+        public static const RANKEDBATTLEMAINVIEW_SEASONGAP_ROLLEDNOTINSEASON_DESCR:String = "#ranked_battles:rankedBattleMainView/seasonGap/rolledNotInSeason/descr";
+
+        public static const RANKEDBATTLEMAINVIEW_SEASONGAP_ROLLEDNOTINDIVISIONS_DESCR:String = "#ranked_battles:rankedBattleMainView/seasonGap/rolledNotInDivisions/descr";
 
         public static const RANKEDBATTLEMAINVIEW_SEASONGAP_LEAGUE_RATINGBTN:String = "#ranked_battles:rankedBattleMainView/seasonGap/league/ratingBtn";
 
@@ -824,6 +838,20 @@ package
         public static const YEAR_AWARD_ACCEPTBUTTON_ACCEPTLABEL:String = "#ranked_battles:year_award/acceptButton/acceptLabel";
 
         public static const YEAR_AWARD_ACCEPTBUTTON_HANGARLABEL:String = "#ranked_battles:year_award/acceptButton/hangarLabel";
+
+        public static const YEARLEADERBOARD_REWARDVIEW_BATTLETYPE:String = "#ranked_battles:yearLeaderboard/rewardView/battleType";
+
+        public static const YEARLEADERBOARD_REWARDVIEW_TITLE:String = "#ranked_battles:yearLeaderboard/rewardView/title";
+
+        public static const YEARLEADERBOARD_REWARDVIEW_POSITIONDESCR:String = "#ranked_battles:yearLeaderboard/rewardView/positionDescr";
+
+        public static const YEARLEADERBOARD_REWARDVIEW_CLANDESCR:String = "#ranked_battles:yearLeaderboard/rewardView/clanDescr";
+
+        public static const YEARLEADERBOARD_REWARDVIEW_REWARD_LABEL:String = "#ranked_battles:yearLeaderboard/rewardView/reward/label";
+
+        public static const YEARLEADERBOARD_REWARDVIEW_REWARD_NAMETEMPLATE:String = "#ranked_battles:yearLeaderboard/rewardView/reward/nameTemplate";
+
+        public static const YEARLEADERBOARD_REWARDVIEW_LEADERBOARDBTN_LABEL:String = "#ranked_battles:yearLeaderboard/rewardView/leaderboardBtn/label";
 
         public static const CURRENTVEHICLESTATUS_UNSUITABLETOQUEUE:String = "#ranked_battles:currentVehicleStatus/unsuitableToQueue";
 
