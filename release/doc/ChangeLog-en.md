@@ -1,4 +1,8 @@
-﻿### XVM 8.5.5-dev
+﻿### XVM 8.5.5
+
+  #### General
+
+  * Compatibility with World of Tanks 1.9.1.2
 
 ______________________________
 
