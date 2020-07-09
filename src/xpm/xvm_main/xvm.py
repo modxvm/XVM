@@ -86,6 +86,7 @@ class Xvm(object):
     appLoader = dependency.descriptor(IAppLoader)
 
     def __init__(self):
+        self.xvmServicesInitialized = True
         self.xvmLobbyMessageShown = False
         self.xvmServerMessageLastInfo = None
         self.currentAccountDBID = None
