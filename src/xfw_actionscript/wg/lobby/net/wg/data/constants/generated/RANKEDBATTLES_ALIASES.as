@@ -35,7 +35,13 @@ package net.wg.data.constants.generated
 
         public static const RANKED_BATTLES_SEASON_GAP_VIEW_UI:String = "RankedBattlesSeasonGapViewUI";
 
+        public static const RANKED_BATTLES_WEB_SEASON_GAP_ALIAS:String = "RankedBattlesWebSeasonGapAlias";
+
+        public static const RANKED_BATTLES_SHOP_ALIAS:String = "RankedBattlesShopAlias";
+
         public static const RANKED_BATTLES_RAITING_ALIAS:String = "RankedBattlesRatingAlias";
+
+        public static const RANKED_BATTLES_YEAR_RAITING_ALIAS:String = "RankedBattlesYearRatingAlias";
 
         public static const RANKED_BATTLES_INFO_ALIAS:String = "RankedBattlesInfoAlias";
 
@@ -52,6 +58,12 @@ package net.wg.data.constants.generated
         public static const RANKED_BATTLE_RESULTS_WIDGET:String = "battleResWidget";
 
         public static const RANKED_BATTLE_PRIME_TIME:String = "rankedBattlesPrimeTime";
+
+        public static const RANKED_BATTLE_SHOP_LANDING:String = "rankedBattlesShopLanding";
+
+        public static const RANKED_BATTLE_YEAR_RATING_LANDING:String = "rankedBattlesYearRatingLanding";
+
+        public static const RANKED_WEB_OVERLAY:String = "rankedBattlesWebOverlay";
 
         public static const RANKED_AWARD_RENDERER_ALIAS:String = "AwardItemRendererExUI";
 

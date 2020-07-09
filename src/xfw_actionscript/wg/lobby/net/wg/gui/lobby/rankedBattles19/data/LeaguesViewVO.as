@@ -11,6 +11,10 @@ package net.wg.gui.lobby.rankedBattles19.data
 
         public var league:int = -1;
 
+        public var sprinterImg:String = "";
+
+        public var topText:String = "";
+
         public function LeaguesViewVO(param1:Object)
         {
             super(param1);

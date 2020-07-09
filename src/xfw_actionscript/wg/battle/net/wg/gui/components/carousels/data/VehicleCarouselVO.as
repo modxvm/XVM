@@ -20,8 +20,6 @@ package net.wg.gui.components.carousels.data
 
         public var infoHoverText:String = "";
 
-        public var smallInfoHoverText:String = "";
-
         public var icon:String = "";
 
         public var iconAlt:String = "";
@@ -91,6 +89,12 @@ package net.wg.gui.components.carousels.data
         public var lockedTooltip:String = "";
 
         public var progressionPoints:ProgressionPointsVO = null;
+
+        public var specialBgSrc:String = "";
+
+        public var specialBgSmallSrc:String = "";
+
+        public var isSpecialBgOverFlag:Boolean = false;
 
         private var _slotPriceActionData:ActionPriceVO = null;
 

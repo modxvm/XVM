@@ -20,11 +20,10 @@ package net.wg.gui.lobby.epicBattles.components.skillView
 
         private var _selectedIdx:int = -1;
 
-        private var _renderersState:String;
+        private var _renderersState:String = "minres";
 
         public function EpicBattlesSkillsGroup()
         {
-            this._renderersState = EpicBattlesSkillTile.MIN_RES_STATE;
             super();
             itemRendererLinkage = Linkages.EPIC_BATTLES_SKILL_VIEW_SKILL_TILE_UI;
             var _loc1_:TiledLayout = new TiledLayout(EpicBattlesSkillTile.WIDTH,EpicBattlesSkillTile.HEIGHT,COLUMNS);

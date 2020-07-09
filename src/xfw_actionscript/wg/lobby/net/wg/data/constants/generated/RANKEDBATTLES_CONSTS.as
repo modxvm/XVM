@@ -7,9 +7,13 @@ package net.wg.data.constants.generated
 
         public static const RANKED_BATTLES_REWARDS_ID:String = "rankedBattlesRewards";
 
+        public static const RANKED_BATTLES_SHOP_ID:String = "rankedBattlesShop";
+
         public static const RANKED_BATTLES_RATING_ID:String = "rankedBattlesRating";
 
         public static const RANKED_BATTLES_INFO_ID:String = "rankedBattlesInfo";
+
+        public static const RANKED_BATTLES_YEAR_RATING_ID:String = "rankedBattlesYearRating";
 
         public static const RANKED_BATTLES_REWARDS_RANKEDS_ID:String = "rankedBattlesRewardsRankeds";
 

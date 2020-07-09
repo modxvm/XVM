@@ -10,20 +10,11 @@ package net.wg.gui.lobby.rankedBattles19.view
     import flash.events.Event;
     import net.wg.gui.events.ViewStackEvent;
     import scaleform.clik.constants.InvalidationType;
-    import net.wg.utils.StageSizeBoundaries;
     import scaleform.clik.utils.Padding;
     import net.wg.infrastructure.interfaces.IDAAPIModule;
 
     public class RankedBattlesDivisionsView extends RankedBattlesDivisionsViewMeta implements IRankedBattlesDivisionsViewMeta, IStageSizeDependComponent
     {
-
-        private static const DIVISIONS_OFFSET:int = 90;
-
-        private static const MIN_CONTENT_HEIGHT:int = 400;
-
-        private static const DIVISION_PADDING_WEIGHT:Number = 0.2;
-
-        private static const DIVISION_PADDING_TOP_MIN:int = 60;
 
         public var divisionsContainer:DivisionsContainer = null;
 
@@ -31,15 +22,20 @@ package net.wg.gui.lobby.rankedBattles19.view
 
         private var _data:DivisionsViewVO = null;
 
+        private var _viewHelper:RankedBattlesViewHelper = null;
+
+        private var _viewSizeId:String = "small";
+
         public function RankedBattlesDivisionsView()
         {
             super();
+            this._viewHelper = RankedBattlesViewHelper.getInstance();
         }
 
         override protected function configUI() : void
         {
             super.configUI();
-            this.divisionsContainer.addEventListener(IndexEvent.INDEX_CHANGE,this.onDivisionsIndexChangedHandler);
+            this.divisionsContainer.addEventListener(IndexEvent.INDEX_CHANGE,this.onDivisionsContainerIndexChangeHandler);
             this.divisionsContainer.addEventListener(Event.RESIZE,this.onDivisionsContainerResizeHandler);
             this.content.cache = true;
             this.content.targetGroup = this.divisionsContainer.name;
@@ -64,13 +60,14 @@ package net.wg.gui.lobby.rankedBattles19.view
         override protected function onDispose() : void
         {
             this.divisionsContainer.removeEventListener(Event.RESIZE,this.onDivisionsContainerResizeHandler);
-            this.divisionsContainer.removeEventListener(IndexEvent.INDEX_CHANGE,this.onDivisionsIndexChangedHandler);
+            this.divisionsContainer.removeEventListener(IndexEvent.INDEX_CHANGE,this.onDivisionsContainerIndexChangeHandler);
             this.divisionsContainer.dispose();
             this.divisionsContainer = null;
             this.content.removeEventListener(ViewStackEvent.VIEW_CHANGED,this.onContentViewChangedHandler);
             this.content.dispose();
             this.content = null;
             this._data = null;
+            this._viewHelper = null;
             super.onDispose();
         }
 
@@ -84,7 +81,8 @@ package net.wg.gui.lobby.rankedBattles19.view
 
         public function setStateSizeBoundaries(param1:int, param2:int) : void
         {
-            this.divisionsContainer.isSmall = param1 < StageSizeBoundaries.WIDTH_1366 || param2 < StageSizeBoundaries.HEIGHT_900;
+            this._viewSizeId = this._viewHelper.getSizeId(param1,param2);
+            this.divisionsContainer.isSmall = this._viewSizeId == RankedBattlesViewHelper.SIZE_SMALL;
             invalidateSize();
         }
 
@@ -95,11 +93,10 @@ package net.wg.gui.lobby.rankedBattles19.view
 
         private function updateLayoutVertical() : void
         {
-            var _loc1_:int = height - viewPadding.top - MIN_CONTENT_HEIGHT;
-            this.divisionsContainer.y = Math.max(_loc1_ * DIVISION_PADDING_WEIGHT,DIVISION_PADDING_TOP_MIN) + viewPadding.top | 0;
-            this.content.y = this.divisionsContainer.y + DIVISIONS_OFFSET;
+            this.content.y = (height >> 1) + this._viewHelper.getDivisionsCenterBlockYOffset(this._viewSizeId);
             this.content.setSize(_width,_height - this.content.y);
             this.content.setSizePadding(new Padding(0,0,0,viewPadding.left));
+            this.divisionsContainer.y = this.content.y + this._viewHelper.getDivisionsTopBlockYOffset(this._viewSizeId) | 0;
         }
 
         private function onDivisionsContainerResizeHandler(param1:Event) : void
@@ -107,7 +104,7 @@ package net.wg.gui.lobby.rankedBattles19.view
             invalidateSize();
         }
 
-        private function onDivisionsIndexChangedHandler(param1:IndexEvent) : void
+        private function onDivisionsContainerIndexChangeHandler(param1:IndexEvent) : void
         {
             onDivisionChangedS(param1.index);
         }

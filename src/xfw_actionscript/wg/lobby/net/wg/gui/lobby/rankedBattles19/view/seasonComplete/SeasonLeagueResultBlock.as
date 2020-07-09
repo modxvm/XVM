@@ -13,13 +13,13 @@ package net.wg.gui.lobby.rankedBattles19.view.seasonComplete
     public class SeasonLeagueResultBlock extends SeasonBaseResultBlock
     {
 
+        private static const SPRINTER_FADE_DURATION:int = 300;
+
         public var ribbonAwards:RibbonAwards = null;
 
         public var sprinterLabel:SeasonTextWrapper = null;
 
         private var _sprinterFadeTween:Tween = null;
-
-        private const SPRINTER_FADE_DURATION:int = 300;
 
         public function SeasonLeagueResultBlock()
         {
@@ -34,6 +34,10 @@ package net.wg.gui.lobby.rankedBattles19.view.seasonComplete
         override protected function updateData() : void
         {
             super.updateData();
+            if(data)
+            {
+                placeResult.setInfoTooltip(data.placeTooltip);
+            }
             this.disposeTween();
             if(data && StringUtils.isNotEmpty(data.sprinterLabel))
             {
@@ -97,7 +101,7 @@ package net.wg.gui.lobby.rankedBattles19.view.seasonComplete
             dispatchEvent(new SeasonCompleteEvent(SeasonCompleteEvent.RESULT_BLOCK_READY));
             if(data && StringUtils.isNotEmpty(data.sprinterLabel))
             {
-                this._sprinterFadeTween = new Tween(this.SPRINTER_FADE_DURATION,this.sprinterLabel,{"alpha":Values.DEFAULT_ALPHA});
+                this._sprinterFadeTween = new Tween(SPRINTER_FADE_DURATION,this.sprinterLabel,{"alpha":Values.DEFAULT_ALPHA});
             }
         }
 

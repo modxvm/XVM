@@ -39,7 +39,7 @@ package net.wg.gui.notification
 
         private static const DEFAULT_SCROLL_STEP:int = 7;
 
-        private static const LIST_Y_OFFSET:int = -40;
+        private static const LIST_Y_OFFSET:int = -10;
 
         private static const LIST_DEFAULT_TOP_Y:int = 35;
 
@@ -99,8 +99,8 @@ package net.wg.gui.notification
         {
             super.configUI();
             hitArea = this.background;
-            this.bottomLip.mouseChildren = false;
-            this.bottomLip.mouseEnabled = false;
+            this.bottomLip.mouseChildren = this.bottomLip.mouseEnabled = false;
+            this.bottomShadow.mouseChildren = this.bottomShadow.mouseEnabled = false;
             this._emptyListTFbaseY = this.emptyListTF.y;
             this._emptyListTFreplacedY = this._emptyListTFbaseY + EMPTY_TF_Y_OFFSET;
             this.updateScrollBarProperties();

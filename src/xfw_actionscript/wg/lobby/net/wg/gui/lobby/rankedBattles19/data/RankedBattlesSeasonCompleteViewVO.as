@@ -19,6 +19,8 @@ package net.wg.gui.lobby.rankedBattles19.data
 
         public var placeLabel:String = "";
 
+        public var placeTooltip:String = "";
+
         public var btnLabel:String = "";
 
         public var bgSource:String = "";

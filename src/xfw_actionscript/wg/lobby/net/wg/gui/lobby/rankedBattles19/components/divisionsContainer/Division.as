@@ -25,11 +25,15 @@ package net.wg.gui.lobby.rankedBattles19.components.divisionsContainer
 
         private static const SIZE_SELECTED_SMALL:int = 42;
 
+        private static const NAMETF_Y_SMALL:int = 28;
+
         private static const SIZE_NORMAL_BIG:int = 42;
 
         private static const SIZE_HOVER_BIG:int = 46;
 
         private static const SIZE_SELECTED_BIG:int = 56;
+
+        private static const NAMETF_Y_BIG:int = 33;
 
         private static const NORMAL_STATE:String = "normal";
 
@@ -194,6 +198,7 @@ package net.wg.gui.lobby.rankedBattles19.components.divisionsContainer
             }
             if(StringUtils.isNotEmpty(this._currentState) && isInvalid(InvalidationType.STATE))
             {
+                this.nameTf.y = this._isSmall?NAMETF_Y_SMALL:NAMETF_Y_BIG;
                 _loc1_ = this._currentState == SELECTED_STATE;
                 hitArea = _loc1_?null:this.hit;
                 buttonMode = useHandCursor = !_loc1_;

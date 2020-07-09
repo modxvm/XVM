@@ -277,6 +277,8 @@ package net.wg.data.constants.generated
 
         public static const BADGE_93:String = "badge_93";
 
+        public static const BADGE_94:String = "badge_94";
+
         public static const BATTLE_LOADING_FORM_BG_TABLE:String = "battleLoadingFormBgTable";
 
         public static const BATTLE_LOADING_FORM_BG_TIPS:String = "battleLoadingFormBgTips";
@@ -2060,6 +2062,8 @@ package net.wg.data.constants.generated
         public static const STRIP_56:String = "strip_56";
 
         public static const STRIP_57:String = "strip_57";
+
+        public static const STRIP_94:String = "strip_94";
 
         public static const SURVEYING_DEVICE:String = "surveyingDevice";
 

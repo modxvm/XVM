@@ -41,9 +41,8 @@ package net.wg.gui.components.tooltips
         override protected function redraw() : void
         {
             var _loc1_:TooltipEnvironmentVO = null;
-            var _loc2_:* = NaN;
             _loc1_ = new TooltipEnvironmentVO(_data);
-            _loc2_ = contentMargin.left + bgShadowMargin.left;
+            var _loc2_:Number = contentMargin.left + bgShadowMargin.left;
             this.titleTF.text = _loc1_.title;
             this.textTF.text = _loc1_.text;
             this.icon.visible = StringUtils.isNotEmpty(_loc1_.icon);

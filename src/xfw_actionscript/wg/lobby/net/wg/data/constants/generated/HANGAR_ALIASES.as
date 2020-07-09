@@ -11,6 +11,8 @@ package net.wg.data.constants.generated
 
         public static const BATTLEPASS_TANK_CAROUSEL:String = "battlePassTankCarousel";
 
+        public static const BOB_TANK_CAROUSEL:String = "bobTankCarousel";
+
         public static const CREW:String = "crew";
 
         public static const AMMUNITION_PANEL:String = "ammunitionPanel";
@@ -36,6 +38,8 @@ package net.wg.data.constants.generated
         public static const EPIC_PRIME_TIME:String = "epicPrimeTime.swf";
 
         public static const EVENT_10YC_PRIME_TIME:String = "event10YCPrimeTime.swf";
+
+        public static const BOB_PRIME_TIME:String = "rankedPrimeTime.swf";
 
         public static const TANK_CAROUSEL_UI:String = "TankCarouselUI";
 

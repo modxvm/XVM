@@ -25,6 +25,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.data.constants.generated.ACTION_PRICE_CONSTANTS;
     import net.wg.data.constants.generated.AWARDWINDOW_CONSTANTS;
     import net.wg.data.constants.generated.BARRACKS_CONSTANTS;
+    import net.wg.data.constants.generated.BATTLE_OF_BLOGGERS_ALIASES;
     import net.wg.data.constants.generated.BATTLE_RESULTS_PREMIUM_STATES;
     import net.wg.data.constants.generated.BATTLE_RESULT_TYPES;
     import net.wg.data.constants.generated.BOOSTER_CONSTANTS;
@@ -2015,6 +2016,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.rankedBattles19.view.RankedBattlesLeaguesView;
     import net.wg.gui.lobby.rankedBattles19.view.RankedBattlesSeasonGapView;
     import net.wg.gui.lobby.rankedBattles19.view.RankedBattlesUnreachableView;
+    import net.wg.gui.lobby.rankedBattles19.view.RankedBattlesViewHelper;
     import net.wg.gui.lobby.rankedBattles19.view.RankedBattlesViewStackComponent;
     import net.wg.gui.lobby.rankedBattles19.view.base.HangarRankedScreen;
     import net.wg.gui.lobby.rankedBattles19.view.base.RankedScreen;
@@ -2046,6 +2048,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.rankedBattles19.view.seasonComplete.SeasonDivisionResultBlock;
     import net.wg.gui.lobby.rankedBattles19.view.seasonComplete.SeasonLeagueResultBlock;
     import net.wg.gui.lobby.rankedBattles19.view.seasonComplete.SeasonMainImage;
+    import net.wg.gui.lobby.rankedBattles19.view.seasonComplete.SeasonPlaceResultRenderer;
     import net.wg.gui.lobby.rankedBattles19.view.seasonComplete.SeasonResultRenderer;
     import net.wg.gui.lobby.rankedBattles19.view.seasonComplete.SeasonTextWrapper;
     import net.wg.gui.lobby.rankedBattles19.view.stats.DivisionsStatsBlock;
@@ -3435,6 +3438,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_DATA_CONSTANTS_GENERATED_AWARDWINDOW_CONSTANTS:Class = AWARDWINDOW_CONSTANTS;
 
         public static const NET_WG_DATA_CONSTANTS_GENERATED_BARRACKS_CONSTANTS:Class = BARRACKS_CONSTANTS;
+
+        public static const NET_WG_DATA_CONSTANTS_GENERATED_BATTLE_OF_BLOGGERS_ALIASES:Class = BATTLE_OF_BLOGGERS_ALIASES;
 
         public static const NET_WG_DATA_CONSTANTS_GENERATED_BATTLE_RESULTS_PREMIUM_STATES:Class = BATTLE_RESULTS_PREMIUM_STATES;
 
@@ -7416,6 +7421,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_LOBBY_RANKEDBATTLES19_VIEW_RANKEDBATTLESUNREACHABLEVIEW:Class = RankedBattlesUnreachableView;
 
+        public static const NET_WG_GUI_LOBBY_RANKEDBATTLES19_VIEW_RANKEDBATTLESVIEWHELPER:Class = RankedBattlesViewHelper;
+
         public static const NET_WG_GUI_LOBBY_RANKEDBATTLES19_VIEW_RANKEDBATTLESVIEWSTACKCOMPONENT:Class = RankedBattlesViewStackComponent;
 
         public static const NET_WG_GUI_LOBBY_RANKEDBATTLES19_VIEW_BASE_HANGARRANKEDSCREEN:Class = HangarRankedScreen;
@@ -7477,6 +7484,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_LOBBY_RANKEDBATTLES19_VIEW_SEASONCOMPLETE_SEASONLEAGUERESULTBLOCK:Class = SeasonLeagueResultBlock;
 
         public static const NET_WG_GUI_LOBBY_RANKEDBATTLES19_VIEW_SEASONCOMPLETE_SEASONMAINIMAGE:Class = SeasonMainImage;
+
+        public static const NET_WG_GUI_LOBBY_RANKEDBATTLES19_VIEW_SEASONCOMPLETE_SEASONPLACERESULTRENDERER:Class = SeasonPlaceResultRenderer;
 
         public static const NET_WG_GUI_LOBBY_RANKEDBATTLES19_VIEW_SEASONCOMPLETE_SEASONRESULTRENDERER:Class = SeasonResultRenderer;
 
