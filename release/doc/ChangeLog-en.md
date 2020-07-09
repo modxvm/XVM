@@ -1,4 +1,8 @@
-﻿### XVM 8.5.7-dev
+﻿### XVM 8.5.7
+
+  #### General
+
+  * Fixed replay playback
 
 ______________________________
 
