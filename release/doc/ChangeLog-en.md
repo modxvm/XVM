@@ -86,7 +86,7 @@ ______________________________
   * Compatibility with World of Tanks 1.9.0.1
 
   #### Hangar
-  
+
   * Added option:
 
       `"hangar"/"showTenYearsWidget"` — show widget "World of Tanks' 10th Anniversary" in the hangar
