@@ -64,6 +64,7 @@ def getCurrentBattleInfo():
             'arena_gui_type': arena.guiType,
             'arena_bonus_type': arena.bonusType,
             'arena_gameplay_id': arena.arenaType.id >> 16,
+            'arena_type_id': arena.arenaType.id,
             'arena_name': arena.arenaType.geometryName}
     except Exception:
         return None
