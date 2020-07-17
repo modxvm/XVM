@@ -343,7 +343,7 @@ class Xvm(object):
                 return (None, True)
 
             if cmd == XVM_COMMAND.LOAD_STAT_USER:
-                stats.getUserData(args)
+                stats.getUserData(args, as_xfw_cmd)
                 return (None, True)
 
             # profiler

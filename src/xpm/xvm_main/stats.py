@@ -19,10 +19,11 @@ def getBattleResultsStat(args, respondFunc):
         'args': args})
     _stat.processQueue()
 
-def getUserData(args):
+def getUserData(args, respondFunc):
     _stat.enqueue({
         'func': _stat.getUserData,
         'cmd': XVM_COMMAND.AS_STAT_USER_DATA,
+        'respondFunc': respondFunc,
         'args': args})
     _stat.processQueue()
 
