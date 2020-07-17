@@ -284,7 +284,7 @@ class _Stat(object):
                     self.resp = {}
                 return
 
-            # pprint.pprint(value)
+            #log(value)
 
             self.players = {}
 
@@ -300,7 +300,14 @@ class _Stat(object):
                     'team': vData[0]['team']}
                 self.players[vehicleID] = _Player(vehicleID, vData)
 
-            self._load_stat(True)
+
+            battleinfo = {
+                'arena_unique_id': value['arenaUniqueID'],
+                'duration': value['common']['duration'],
+                'finishReason': value['common']['finishReason'],
+                'winnerTeam': value['common']['winnerTeam']}
+
+            self._load_stat(True, battleinfo)
 
             players = {}
             for (vehicleID, pl) in self.players.iteritems():
@@ -369,7 +376,7 @@ class _Stat(object):
         }
         return self._fix(s)
 
-    def _load_stat(self, isBattleResults):
+    def _load_stat(self, isBattleResults, battleinfo=None):
         requestList = []
 
         replay = isReplay()
@@ -380,7 +387,7 @@ class _Stat(object):
             if cacheKey not in self.cacheBattle:
                 all_cached = False
 
-            requestList.append("{}={}".format(pl.accountDBID, pl.vehCD))
+            requestList.append("{}={}={}".format(pl.accountDBID, pl.vehCD, pl.team))
 
         if all_cached or not requestList:
             return
@@ -388,7 +395,7 @@ class _Stat(object):
         try:
             accountDBID = utils.getAccountDBID()
             if config.networkServicesSettings.statBattle:
-                data = self._load_data_online(accountDBID, ','.join(requestList), isBattleResults)
+                data = self._load_data_online(accountDBID, ','.join(requestList), isBattleResults, battleinfo)
             else:
                 data = self._load_data_offline(accountDBID)
 
@@ -408,7 +415,7 @@ class _Stat(object):
         except Exception:
             err(traceback.format_exc())
 
-    def _load_data_online(self, accountDBID, request, isBattleResults):
+    def _load_data_online(self, accountDBID, request, isBattleResults, battleinfo):
         token = config.token.token
         if token is None:
             err('No valid token for XVM network services (id=%s)' % accountDBID)
@@ -417,7 +424,7 @@ class _Stat(object):
         if isReplay():
             data = xvmapi.getStatsReplay(request)
         elif isBattleResults:
-            data = xvmapi.getStatsBattleResults(request)
+            data = xvmapi.getStatsBattleResults(request, battleinfo)
         else:
             data = xvmapi.getStats(request)
 

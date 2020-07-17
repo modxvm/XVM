@@ -30,8 +30,10 @@ def getStatsReplay(request):
     (data, errStr) = _exec('getStatsReplay/{token}/{request}', params={'request':request})
     return data
 
-def getStatsBattleResults(request):
-    (data, errStr) = _exec('getStatsBattleResults/{token}/{request}', params={'request':request})
+def getStatsBattleResults(request, battleinfo):
+    (data, errStr) = _exec('getStatsBattleResults/{token}/{request}?battleInfo={battleInfo}', params={
+        'request':request,
+        'battleInfo':urlSafeBase64Encode(simplejson.dumps(battleinfo, separators=(',',':'), sort_keys=True))})
     return data
 
 def getStatsByNick(region, nick):
