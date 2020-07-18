@@ -20,7 +20,7 @@ _XVM_MESSAGE_HEADER = \
 
 def sendXvmSystemMessage(type, msg):
     msg = _XVM_MESSAGE_HEADER + '\n\n' + msg + '</textformat>'
-    g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.SYSTEM_MESSAGE, {'msg':msg, 'type':type}))
+    g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.SYSTEM_MESSAGE, {'msg': msg, 'type': type}))
 
 def tokenUpdated():
     type = SystemMessages.SM_TYPE.Warning
@@ -48,7 +48,7 @@ def tokenUpdated():
     msg += '</textformat>\n'
     msg += _getXvmMessageFooter()
 
-    g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.SYSTEM_MESSAGE, {'msg':msg, 'type':type}))
+    g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.SYSTEM_MESSAGE, {'msg': msg, 'type': type}))
 
 def fixData(value):
     if value and 'message' in value and 'message' in value['message']:

@@ -179,7 +179,7 @@ def log_version():
         log("    WoT Version     : %s" % WOT_VERSION_FULL)
         log("    WoT Architecture: %s" % platform.architecture()[0])
         log("    Current Time    : %s %+05d" % (datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-            round((round((datetime.now()-datetime.utcnow()).total_seconds())/1800)/2) * 100))
+            round((round((datetime.now() - datetime.utcnow()).total_seconds()) / 1800) / 2) * 100))
 
         log("---------------------------")
 
@@ -203,7 +203,7 @@ def xfw_module_init():
         BigWorld.callback(0, start)
 
         # load config
-        config.load(events.HasCtxEvent(XVM_EVENT.RELOAD_CONFIG, {'filename':XVM.CONFIG_FILE}))
+        config.load(events.HasCtxEvent(XVM_EVENT.RELOAD_CONFIG, {'filename': XVM.CONFIG_FILE}))
 
         global __xvm_main_loaded
         __xvm_main_loaded = True
