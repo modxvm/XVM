@@ -195,7 +195,7 @@ class Xvm(object):
             accountDBID = getCurrentAccountDBID()
             if accountDBID is not None and self.currentAccountDBID != accountDBID:
                 self.currentAccountDBID = accountDBID
-                config.token = config.XvmServicesToken({'accountDBID':accountDBID})
+                config.token = config.XvmServicesToken({'accountDBID': accountDBID})
                 config.token.saveLastAccountDBID()
                 self.xvmServicesInitialized = False
                 self.initializeXvmServices()

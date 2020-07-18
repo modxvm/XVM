@@ -15,7 +15,6 @@ import datetime
 import locale
 from helpers import dependency
 from skeletons.gui.app_loader import IAppLoader
-from gui.shared.formatters import time_formatters
 
 _defaultlocale = locale.getdefaultlocale()[1]
 _DIRECTIVES = [ 'au', 'al', 'Au', 'Al', 'bu', 'bl', 'Bu', 'Bl', # double
@@ -45,7 +44,7 @@ def xvm_formatDate(formatDate):
                 return ''
 
     def processDirective(value, formatDate):
-        directive = '%'+value
+        directive = '%' + value
         if directive in formatDate:
             isUpper = False
             isLower = False
