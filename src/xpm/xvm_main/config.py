@@ -147,7 +147,7 @@ def _load_xvm_xc(filename, autoreload):
             config['__stateInfo'] = {'warning':''}
     except Exception as ex:
         config['autoReloadConfig'] = autoreload
-        config['__stateInfo'] = {'error':str(ex), 'stacktrace':traceback.format_exc()}
+        config['__stateInfo'] = {'error': str(ex), 'stacktrace': traceback.format_exc()}
         err(traceback.format_exc())
     #log('config={}'.format(config))
 

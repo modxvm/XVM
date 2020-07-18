@@ -13,7 +13,7 @@ def getToken():
 
 def getVersion(wgmLimit=50, wshLimit=50):
     (data, errStr) = _exec('getVersion/{id}/{ver}/{wgm}/{wsh}',
-        params={'ver':urllib.quote('{0}#{1}'.format(XVM.XVM_VERSION,XVM.XVM_REVISION)),'wgm':wgmLimit,'wsh':wshLimit})
+        params={'ver': urllib.quote('{0}#{1}'.format(XVM.XVM_VERSION, XVM.XVM_REVISION)), 'wgm': wgmLimit, 'wsh': wshLimit})
     return data
 
 def getServerMessage():
@@ -22,22 +22,22 @@ def getServerMessage():
 
 def getStats(request):
     (data, errStr) = _exec('getStats/{token}/{request}?battleInfo={battleInfo}', params={
-        'request':request,
-        'battleInfo':urlSafeBase64Encode(simplejson.dumps(getCurrentBattleInfo(), separators=(',',':'), sort_keys=True))})
+        'request': request,
+        'battleInfo': urlSafeBase64Encode(simplejson.dumps(getCurrentBattleInfo(), separators=(',', ':'), sort_keys=True))})
     return data
 
 def getStatsReplay(request):
-    (data, errStr) = _exec('getStatsReplay/{token}/{request}', params={'request':request})
+    (data, errStr) = _exec('getStatsReplay/{token}/{request}', params={'request': request})
     return data
 
 def getStatsBattleResults(request, battleinfo):
     (data, errStr) = _exec('getStatsBattleResults/{token}/{request}?battleInfo={battleInfo}', params={
-        'request':request,
-        'battleInfo':urlSafeBase64Encode(simplejson.dumps(battleinfo, separators=(',',':'), sort_keys=True))})
+        'request': request,
+        'battleInfo': urlSafeBase64Encode(simplejson.dumps(battleinfo, separators=(',', ':'), sort_keys=True))})
     return data
 
 def getStatsByNick(region, nick):
-    (data, errStr) = _exec('getStatsByNick/{token}/{region}/{nick}', params={'region':region,'nick':nick})
+    (data, errStr) = _exec('getStatsByNick/{token}/{region}/{nick}', params={'region': region,'nick': nick})
     return data
 
 def getOnlineUsersCount():

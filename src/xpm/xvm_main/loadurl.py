@@ -72,7 +72,7 @@ def _loadUrl(u, timeout, body, content_type): # timeout in msec
         global _proxy
         #log(_proxy)
         if _proxy:
-            conn = cls(_proxy.hostname, _proxy.port, timeout=timeout/1000)
+            conn = cls(_proxy.hostname, _proxy.port, timeout=timeout / 1000)
             headers = {}
             if _proxy.username and _proxy.password:
                 auth = '%s:%s' % (_proxy.username, _proxy.password)
@@ -80,7 +80,7 @@ def _loadUrl(u, timeout, body, content_type): # timeout in msec
             #log(headers)
             conn.set_tunnel(u.hostname, u.port, headers=headers)
         else:
-            conn = cls(u.netloc, timeout=timeout/1000)
+            conn = cls(u.netloc, timeout=timeout / 1000)
 
         global _USER_AGENT
         headers = {
