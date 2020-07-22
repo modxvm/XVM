@@ -17,6 +17,7 @@ import traceback
 import BigWorld
 import game
 from gui import shop
+from gui.impl import backport
 from gui.shared import g_eventBus, tooltips
 from gui.shared.gui_items import GUI_ITEM_TYPE
 from gui.shared.money import Currency
@@ -29,6 +30,9 @@ from gui.Scaleform.daapi.view.lobby.recruitWindow.RecruitWindow import RecruitWi
 from gui.Scaleform.daapi.view.lobby.PersonalCase import PersonalCase
 from gui.Scaleform.daapi.view.lobby.exchange.ExchangeFreeToTankmanXpWindow import ExchangeFreeToTankmanXpWindow
 from gui.Scaleform.daapi.view.lobby.customization.main_view import MainView
+from gui.Scaleform.genConsts.CURRENCIES_CONSTANTS import CURRENCIES_CONSTANTS
+from gui.shared.formatters import text_styles
+from gui.shared.tooltips.common import HeaderMoneyAndXpTooltipData
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache
 
@@ -167,6 +171,20 @@ def StatsRequester_crystal(base, self):
         return max(self.actualCrystal, 0)
     return 0
 
+@overrideMethod(HeaderMoneyAndXpTooltipData, '_getValue')
+def _getValue(base, self):
+    valueStr = '0'
+    if self._btnType == CURRENCIES_CONSTANTS.GOLD:
+        valueStr = text_styles.gold(backport.getIntegralFormat(max(self.itemsCache.items.stats.actualGold, 0)))
+    elif self._btnType == CURRENCIES_CONSTANTS.CREDITS:
+        valueStr = text_styles.credits(backport.getIntegralFormat(max(self.itemsCache.items.stats.actualCredits, 0)))
+    elif self._btnType == CURRENCIES_CONSTANTS.CRYSTAL:
+        valueStr = text_styles.crystal(backport.getIntegralFormat(max(self.itemsCache.items.stats.actualCrystal, 0)))
+    elif self._btnType == CURRENCIES_CONSTANTS.EVENT_COIN:
+        valueStr = text_styles.eventCoin(backport.getIntegralFormat(max(self.itemsCache.items.stats.actualEventCoin, 0)))
+    elif self._btnType == CURRENCIES_CONSTANTS.FREE_XP:
+        valueStr = text_styles.expText(backport.getIntegralFormat(max(self.itemsCache.items.stats.actualFreeXP, 0)))
+    return valueStr
 
 ##############################################################
 # handlers of windows that use gold/freeXP/crystal
