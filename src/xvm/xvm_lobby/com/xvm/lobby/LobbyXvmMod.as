@@ -20,8 +20,7 @@ package com.xvm.lobby
     import com.xvm.lobby.profile.ProfileXvmView;
     import com.xvm.lobby.squad.SquadXvmView;
     import com.xvm.lobby.techtree.ResearchXvmView;
-    // TODO:1.9.0
-    /* import com.xvm.lobby.techtree.TechTreeXvmView; */
+    import com.xvm.lobby.techtree.TechTreeXvmView;
     import com.xvm.lobby.widgets.WidgetsLobbyXvmView;
     import com.xvm.lobby.widgets.WidgetsLoginXvmView;
     import net.wg.infrastructure.interfaces.*;
@@ -52,8 +51,7 @@ package com.xvm.lobby
             "profile": [ ProfileXvmView ],
             "profileWindow": [ ProfileXvmView ],
             "prb_windows/squadWindow": [ SquadXvmView ],
-            // TODO:1.9.0
-            /* "techtree": [ TechTreeXvmView ], */
+            "techtree": [ TechTreeXvmView ],
             "research": [ ResearchXvmView ]
         }
 
