@@ -156,11 +156,11 @@ class _Dossier(object):
         rent = vehicle.isRented
         multiNation = vehicle.hasNationGroup
         outfit = vehicle.getOutfit(SeasonType.SUMMER)
-        summer_camo = outfit is not None and bool(outfit.hull.slotFor(GUI_ITEM_TYPE.CAMOUFLAGE).items()) # vehicle_outfit.MultiSlot
+        summer_camo = outfit is not None and bool(outfit.hull.slotFor(GUI_ITEM_TYPE.CAMOUFLAGE).getItemCD()) # vehicle_outfit.MultiSlot
         outfit = vehicle.getOutfit(SeasonType.WINTER)
-        winter_camo = outfit is not None and bool(outfit.hull.slotFor(GUI_ITEM_TYPE.CAMOUFLAGE).items())
+        winter_camo = outfit is not None and bool(outfit.hull.slotFor(GUI_ITEM_TYPE.CAMOUFLAGE).getItemCD())
         outfit = vehicle.getOutfit(SeasonType.DESERT)
-        desert_camo = outfit is not None and bool(outfit.hull.slotFor(GUI_ITEM_TYPE.CAMOUFLAGE).items())
+        desert_camo = outfit is not None and bool(outfit.hull.slotFor(GUI_ITEM_TYPE.CAMOUFLAGE).getItemCD())
 
         if self.__isVehicleDossierLoaded(accountDBID, vehCD):
             dossier = self.itemsCache.items.getVehicleDossier(vehCD, accountDBID)
