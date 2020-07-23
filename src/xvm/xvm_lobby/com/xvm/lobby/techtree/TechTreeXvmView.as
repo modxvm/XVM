@@ -13,8 +13,6 @@ package com.xvm.lobby.techtree
     import net.wg.infrastructure.interfaces.*;
     import scaleform.clik.events.*;
 
-    // TODO:1.9.0
-    /*
     public class TechTreeXvmView extends XvmViewBase
     {
         public function TechTreeXvmView(view:IView)
@@ -52,5 +50,4 @@ package com.xvm.lobby.techtree
             page.nationTree.invalidateData();
         }
     }
-    */
 }
