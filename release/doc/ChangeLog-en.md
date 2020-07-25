@@ -1,7 +1,22 @@
-﻿### XVM 8.5.8-dev
+﻿### XVM 8.6.0-dev
+
+  #### General
+
+  * Compatibility with World of Tanks 1.10.0.0
+
+  #### Hangar
+
+  * Removed option:
+
+      `"hangar"/"enableEquipAutoReturn"`
+
+  #### Battle
+
+  * Added option:
+
+      `"battle"/"battleHint"/"hideRadarHint"` — hide the tips about radar activation ("Steel Hunter" mode)
 
 ______________________________
-
 ### XVM 8.5.7
 
   #### General

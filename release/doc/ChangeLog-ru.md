@@ -1,4 +1,20 @@
-﻿### XVM 8.5.8-dev
+﻿### XVM 8.6.0-dev
+
+  #### Общее
+
+  * Совместимость с World of Tanks 1.10.0.0
+
+  #### Ангар
+
+  * Удалена опция:
+
+      `"hangar"/"enableEquipAutoReturn"`
+
+  #### Battle
+
+  * Added option:
+
+      `"battle"/"battleHint"/"hideRadarHint"` — скрыть подсказку активации радара (режим "Стальной охотник")
 
 ______________________________
 

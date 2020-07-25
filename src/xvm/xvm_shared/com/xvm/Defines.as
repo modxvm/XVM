@@ -100,6 +100,8 @@ package com.xvm
         public static const BATTLE_TYPE_EVENT_BATTLES_2:Number = 26;
         public static const BATTLE_TYPE_EPIC_BATTLE:Number = 27;
         public static const BATTLE_TYPE_EPIC_BATTLE_TRAINING:Number = 28;
+        public static const BATTLE_TYPE_BATTLE_ROYALE_SOLO:Number = 29;
+        public static const BATTLE_TYPE_BATTLE_ROYALE_SQUAD:Number = 30;
         public static const BATTLE_TYPE_TOURNAMENT_EVENT:Number = 31;
         public static const BATTLE_TYPE_EVENT_RANDOM:Number = 33;
 

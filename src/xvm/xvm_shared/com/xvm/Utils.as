@@ -124,6 +124,8 @@ package com.xvm
                 case 26: return 'event_battles_2';
                 case 27: return 'epic_battle';
                 case 28: return 'epic_battle_training';
+                case 29: return 'battle_royale_solo';
+                case 30: return 'battle_royale_squad';
                 case 31: return 'tournament_event';
                 case 33: return 'event_random';
                 default: return 'unknown';

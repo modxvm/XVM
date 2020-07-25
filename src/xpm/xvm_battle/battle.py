@@ -30,7 +30,7 @@ from gui.Scaleform.daapi.view.battle.shared.markers2d import settings as markers
 from gui.Scaleform.daapi.view.battle.shared.minimap.plugins import ArenaVehiclesPlugin
 from gui.Scaleform.daapi.view.battle.shared.page import SharedPage
 from gui.Scaleform.daapi.view.battle.shared.stats_exchage import BattleStatisticsDataController
-from gui.Scaleform.daapi.view.battle.shared.hint_panel.plugins import TrajectoryViewHintPlugin, SiegeIndicatorHintPlugin, PreBattleHintPlugin
+from gui.Scaleform.daapi.view.battle.shared.hint_panel.plugins import TrajectoryViewHintPlugin, SiegeIndicatorHintPlugin, PreBattleHintPlugin, RadarHintPlugin
 from helpers import dependency
 from skeletons.gui.app_loader import IAppLoader
 
@@ -50,7 +50,8 @@ import xmqp_events
 
 NOT_SUPPORTED_BATTLE_TYPES = [constants.ARENA_GUI_TYPE.TUTORIAL,
                            constants.ARENA_GUI_TYPE.EVENT_BATTLES,
-                           constants.ARENA_GUI_TYPE.BOOTCAMP]
+                           constants.ARENA_GUI_TYPE.BOOTCAMP,
+                           constants.ARENA_GUI_TYPE.BATTLE_ROYALE]
 
 #####################################################################
 # initialization/finalization
@@ -233,6 +234,12 @@ def canDisplayHelpHint(base, self, typeDescriptor):
     if config.get('battle/battleHint/hideHelpScreen'):
         return False
     base(self, typeDescriptor)
+
+@overrideMethod(RadarHintPlugin, '_RadarHintPlugin__updateHint')
+def updateHint(base, self):
+    if config.get('battle/battleHint/hideRadarHint'):
+        return
+    base(self)
 
 
 #####################################################################
