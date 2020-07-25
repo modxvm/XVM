@@ -145,6 +145,7 @@ package com.xvm
         public static const APP_TYPE_BATTLE_EPICRANDOM:int = 0x0008;
         public static const APP_TYPE_BATTLE_RANKED:int =     0x0010;
         public static const APP_TYPE_VEHICLE_MARKERS:int =   0x0020;
-        public static const APP_TYPE_BATTLE:int =            APP_TYPE_BATTLE_CLASSIC | APP_TYPE_BATTLE_EPICBATTLE | APP_TYPE_BATTLE_EPICRANDOM | APP_TYPE_BATTLE_RANKED;
+        public static const APP_TYPE_BATTLE_ROYALE:int =     0x0040;
+        public static const APP_TYPE_BATTLE:int =            APP_TYPE_BATTLE_CLASSIC | APP_TYPE_BATTLE_EPICBATTLE | APP_TYPE_BATTLE_EPICRANDOM | APP_TYPE_BATTLE_RANKED | APP_TYPE_BATTLE_ROYALE;
     }
 }
