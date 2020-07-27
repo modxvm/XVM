@@ -27,7 +27,7 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/ranked/stats/components/fullStat
    trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.stats.components.fullStats:FullStatsTableCtrl"), "_table") type QName(PackageNamespace("net.wg.gui.battle.ranked.stats.components.fullStats"), "FullStatsTable") value Null() end
    trait method QName(PackageNamespace(""), "setTeamsInfo") flag OVERRIDE
     method
-@@ -103,7 +122,7 @@
+@@ -103,7 +103,7 @@
        getlocal0
        getlocal1
        getlocal2
@@ -36,7 +36,7 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/ranked/stats/components/fullStat
        coerce              QName(PackageNamespace("net.wg.gui.battle.ranked.stats.components.fullStats.tableItem"), "StatsTableItem")
        setlocal3
  
-@@ -384,7 +403,7 @@
+@@ -384,7 +384,7 @@
      end ; body
     end ; method
    end ; trait
