@@ -27,7 +27,7 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/views/BaseBattlePage.class.asasm
    trait slot QName(ProtectedNamespace("net.wg.gui.battle.views:BaseBattlePage"), "battleStatisticDataController") type QName(PackageNamespace("net.wg.infrastructure.helpers.statisticsDataController"), "BattleStatisticDataController") end
    trait slot QName(ProtectedNamespace("net.wg.gui.battle.views:BaseBattlePage"), "postmortemTips") type QName(PackageNamespace("net.wg.gui.battle.views.postmortemPanel"), "PostmortemPanel") value Null() end
    trait slot QName(ProtectedNamespace("net.wg.gui.battle.views:BaseBattlePage"), "isPostMortem") type QName(PackageNamespace(""), "Boolean") value False() end
-@@ -1036,6 +1036,30 @@
+@@ -1037,6 +1037,30 @@
      end ; body
     end ; method
    end ; trait
@@ -58,7 +58,7 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/views/BaseBattlePage.class.asasm
    trait method QName(ProtectedNamespace("net.wg.gui.battle.views:BaseBattlePage"), "updateBattleDamageLogPosInPostmortem")
     method
      refid "net.wg.gui.battle.views:BaseBattlePage/instance/net.wg.gui.battle.views:BaseBattlePage:updateBattleDamageLogPosInPostmortem"
-@@ -1617,6 +1617,28 @@
+@@ -1697,6 +1697,28 @@
      end ; body
     end ; method
    end ; trait
@@ -87,7 +87,7 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/views/BaseBattlePage.class.asasm
    trait method QName(PrivateNamespace(null, "net.wg.gui.battle.views:BaseBattlePage"), "onMiniMapTrySizeChangeHandler")
     method
      refid "net.wg.gui.battle.views:BaseBattlePage/instance/net.wg.gui.battle.views:BaseBattlePage/onMiniMapTrySizeChangeHandler"
-@@ -1638,6 +1638,28 @@
+@@ -1718,6 +1718,28 @@
  
        returnvoid
       end ; code
