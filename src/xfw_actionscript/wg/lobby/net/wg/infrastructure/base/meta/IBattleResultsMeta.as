@@ -26,5 +26,7 @@ package net.wg.infrastructure.base.meta
         function as_setClanEmblem(param1:String, param2:String) : void;
 
         function as_setTeamInfo(param1:String, param2:String, param3:String) : void;
+
+        function as_setIsInBattleQueue(param1:Boolean) : void;
     }
 }

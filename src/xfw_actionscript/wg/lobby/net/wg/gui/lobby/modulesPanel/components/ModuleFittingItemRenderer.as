@@ -13,6 +13,7 @@ package net.wg.gui.lobby.modulesPanel.components
     import flash.text.TextFormatAlign;
     import net.wg.data.constants.Linkages;
     import net.wg.infrastructure.managers.counter.CounterManager;
+    import flash.geom.Rectangle;
 
     public class ModuleFittingItemRenderer extends FittingListItemRenderer
     {
@@ -25,7 +26,9 @@ package net.wg.gui.lobby.modulesPanel.components
 
         private static const EXTRA_ICON_OFFSET_Y:Number = 14;
 
-        private static const HIGHLIGHTED_STEP:Number = 14;
+        private static const COUNTER_LINE_BIG_UI_HEIGHT:int = 42;
+
+        private static const COUNTER_LINE_BIG_UI_OFFSET:Number = 2.5;
 
         public var levelIcon:MovieClip;
 
@@ -114,7 +117,7 @@ package net.wg.gui.lobby.modulesPanel.components
                 }
                 if(this._moduleData.highlightedParameterIdx > Values.DEFAULT_INT)
                 {
-                    _loc1_ = new CounterProps(CounterProps.DEFAULT_OFFSET_X,this.paramNamesField.y + this._moduleData.highlightedParameterIdx * HIGHLIGHTED_STEP,TextFormatAlign.LEFT,true,Linkages.COUNTER_LINE_BIG_UI);
+                    _loc1_ = new CounterProps(CounterProps.DEFAULT_OFFSET_X,this.paramNamesField.y + this.getHighlightOffset(this._moduleData.highlightedParameterIdx),TextFormatAlign.LEFT,true,Linkages.COUNTER_LINE_BIG_UI);
                     this._counterManager.setCounter(this,CounterManager.COUNTER_EMPTY,null,_loc1_);
                 }
             }
@@ -127,6 +130,15 @@ package net.wg.gui.lobby.modulesPanel.components
             this._extraIcon.mouseChildren = false;
             this._extraIcon.mouseEnabled = false;
             addChild(this._extraIcon);
+        }
+
+        private function getHighlightOffset(param1:int) : int
+        {
+            var _loc2_:int = this.paramNamesField.getLineOffset(param1);
+            var _loc3_:Rectangle = this.paramNamesField.getCharBoundaries(_loc2_);
+            var _loc4_:Number = _loc3_.top + (_loc3_.height - COUNTER_LINE_BIG_UI_HEIGHT) * 0.5;
+            _loc4_ = _loc4_ + COUNTER_LINE_BIG_UI_OFFSET;
+            return Math.round(_loc4_);
         }
 
         private function onExtraIconIconLoadedHandler(param1:IconLoaderEvent) : void

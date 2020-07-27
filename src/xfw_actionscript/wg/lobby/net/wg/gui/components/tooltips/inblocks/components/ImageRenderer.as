@@ -4,6 +4,7 @@ package net.wg.gui.components.tooltips.inblocks.components
     import scaleform.clik.interfaces.IListItemRenderer;
     import net.wg.gui.components.controls.Image;
     import scaleform.clik.core.UIComponent;
+    import net.wg.gui.data.ImageRendererVO;
     import scaleform.clik.data.ListData;
 
     public class ImageRenderer extends UIComponentEx implements IListItemRenderer
@@ -15,7 +16,7 @@ package net.wg.gui.components.tooltips.inblocks.components
 
         private var _owner:UIComponent = null;
 
-        private var _data:Object = null;
+        private var _data:ImageRendererVO = null;
 
         private var _selectable:Boolean = false;
 
@@ -42,8 +43,9 @@ package net.wg.gui.components.tooltips.inblocks.components
 
         public function setData(param1:Object) : void
         {
-            this._data = param1;
-            this.img.source = param1.toString();
+            this._data = ImageRendererVO(param1);
+            this.img.source = this._data.imgSrc;
+            this.img.alpha = this._data.imgAlpha;
         }
 
         public function setListData(param1:ListData) : void

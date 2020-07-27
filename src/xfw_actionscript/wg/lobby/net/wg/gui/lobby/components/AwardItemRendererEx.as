@@ -56,6 +56,8 @@ package net.wg.gui.lobby.components
 
         private var _rendererHeight:Number = 0;
 
+        private var _allowRescaleUpward:Boolean = false;
+
         private var _gap:int = 0;
 
         public function AwardItemRendererEx()
@@ -174,10 +176,10 @@ package net.wg.gui.lobby.components
             {
                 if(this._hasSize)
                 {
-                    if(this.img.width > this._rendererWidth || this.img.height > this._rendererHeight)
+                    if(this.img.width > this._rendererWidth || this.img.height > this._rendererHeight || this._allowRescaleUpward && (this.img.width != this._rendererWidth || this.img.height != this._rendererHeight))
                     {
-                        _loc7_ = this._rendererWidth / this.img.width;
-                        _loc8_ = this._rendererHeight / this.img.height;
+                        _loc7_ = this._rendererWidth / this.img.bitmapWidth;
+                        _loc8_ = this._rendererHeight / this.img.bitmapHeight;
                         this.img.scaleX = this.img.scaleY = _loc7_ > _loc8_?_loc8_:_loc7_;
                     }
                     this.img.x = this._rendererWidth - this.img.width >> 1;
@@ -388,6 +390,11 @@ package net.wg.gui.lobby.components
         private function onImgChangeHandler(param1:Event) : void
         {
             invalidateSize();
+        }
+
+        public function set allowRescaleUpward(param1:Boolean) : void
+        {
+            this._allowRescaleUpward = param1;
         }
     }
 }

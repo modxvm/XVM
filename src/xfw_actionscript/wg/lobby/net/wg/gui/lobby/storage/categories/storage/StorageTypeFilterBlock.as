@@ -6,6 +6,7 @@ package net.wg.gui.lobby.storage.categories.storage
     import net.wg.gui.lobby.components.data.ButtonFiltersVO;
     import flash.text.TextFieldAutoSize;
     import scaleform.clik.constants.InvalidationType;
+    import net.wg.data.constants.Values;
     import net.wg.gui.events.FiltersEvent;
     import flash.events.Event;
     import net.wg.gui.components.containers.HorizontalGroupLayout;
@@ -79,6 +80,7 @@ package net.wg.gui.lobby.storage.categories.storage
 
         public function initTypeFilter(param1:ButtonFiltersVO) : void
         {
+            this.typeFilterName.text = param1.filterTypeName == Values.EMPTY_STR?STORAGE.STORAGE_TABS_MODULES_FILTER_TYPE_LABEL:param1.filterTypeName;
             this._typeFiltersVO = param1;
             invalidateData();
         }

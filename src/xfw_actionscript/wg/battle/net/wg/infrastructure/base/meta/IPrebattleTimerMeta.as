@@ -12,5 +12,7 @@ package net.wg.infrastructure.base.meta
         function as_addInfo(param1:String, param2:Object) : void;
 
         function as_setInfoHint(param1:String) : void;
+
+        function as_showInfo() : void;
     }
 }

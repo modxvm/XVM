@@ -349,8 +349,7 @@ package net.wg.gui.battle.battleloading
 
         private function configureTip(param1:int, param2:int, param3:String = null) : void
         {
-            var _loc4_:* = false;
-            _loc4_ = StringUtils.isNotEmpty(param3);
+            var _loc4_:Boolean = StringUtils.isNotEmpty(param3);
             this.tipBackground.visible = this.tipImage.visible = _loc4_;
             if(_loc4_)
             {

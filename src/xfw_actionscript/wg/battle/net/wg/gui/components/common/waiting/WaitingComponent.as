@@ -1,11 +1,18 @@
 package net.wg.gui.components.common.waiting
 {
     import net.wg.infrastructure.base.UIComponentEx;
+    import flash.geom.Rectangle;
     import flash.display.Sprite;
+    import net.wg.gui.components.controls.Image;
     import flash.geom.Point;
+    import net.wg.gui.components.interfaces.ISparksManager;
     import scaleform.clik.utils.Constraints;
     import scaleform.clik.constants.ConstrainMode;
     import scaleform.clik.constants.InvalidationType;
+    import net.wg.data.constants.Values;
+    import flash.events.Event;
+    import net.wg.data.constants.ImageCacheTypes;
+    import net.wg.data.constants.Linkages;
 
     public class WaitingComponent extends UIComponentEx
     {
@@ -16,9 +23,17 @@ package net.wg.gui.components.common.waiting
 
         private static const INV_BACKGROUND_VISIBILITY:String = "InvBackgroundVisibility";
 
+        private static const SPARK_ZONE:Rectangle = new Rectangle(100,0,-200,-100);
+
+        private static const SPARK_QUANTITY:uint = 150;
+
         public var waitingMc:WaitingMc = null;
 
         public var backgroundMc:Sprite = null;
+
+        public var backgroundImg:Image = null;
+
+        private var _sparksMc:Sprite = null;
 
         private var _waitingOffset:Point = null;
 
@@ -27,6 +42,8 @@ package net.wg.gui.components.common.waiting
         private var _isStopped:Boolean = false;
 
         private var _backgroundVisibility:Boolean = true;
+
+        private var _sparksManager:ISparksManager = null;
 
         public function WaitingComponent()
         {
@@ -59,6 +76,14 @@ package net.wg.gui.components.common.waiting
                 this.waitingMc.y = this.waitingMc.y + (this._waitingOffset.y ^ 0);
                 this.waitingMc.x = this.waitingMc.x ^ 0;
                 this.waitingMc.y = this.waitingMc.y ^ 0;
+                if(this.backgroundImg != null && this.backgroundImg.source != Values.EMPTY_STR)
+                {
+                    this.resizeBGImg();
+                }
+                if(this._sparksManager != null)
+                {
+                    this._sparksManager.resetZone(this.getSparkZone());
+                }
             }
             if(isInvalid(TEXT_INVALID))
             {
@@ -87,6 +112,13 @@ package net.wg.gui.components.common.waiting
             this.waitingMc = null;
             this.backgroundMc = null;
             this._waitingOffset = null;
+            if(this.backgroundImg != null)
+            {
+                this.backgroundImg.removeEventListener(Event.CHANGE,this.onImageChangeHandler);
+                this.backgroundImg.dispose();
+                this.backgroundImg = null;
+            }
+            this.destroySparks();
             super.onDispose();
         }
 
@@ -97,6 +129,29 @@ package net.wg.gui.components.common.waiting
                 this._isStopped = param1;
                 invalidate(ANIMATION_STATUS_INVALID);
             }
+        }
+
+        public function setBackgroundImg(param1:String) : void
+        {
+            if(this.backgroundImg == null && param1 == Values.EMPTY_STR)
+            {
+                return;
+            }
+            if(this.backgroundImg == null)
+            {
+                this.backgroundImg = new Image();
+                addChildAt(this.backgroundImg,getChildIndex(this.backgroundMc) + 1);
+                this.backgroundImg.addEventListener(Event.CHANGE,this.onImageChangeHandler);
+                this.backgroundImg.cacheType = ImageCacheTypes.NOT_USE_CACHE;
+            }
+            this.backgroundImg.source = param1;
+            if(this._sparksMc == null)
+            {
+                this._sparksMc = new Sprite();
+                addChildAt(this._sparksMc,getChildIndex(this.backgroundImg) + 1);
+                this.createSparks();
+            }
+            this._sparksMc.visible = this.backgroundImg.visible = param1 != Values.EMPTY_STR;
         }
 
         public function setMessage(param1:String) : void
@@ -110,6 +165,44 @@ package net.wg.gui.components.common.waiting
             this._waitingOffset = param1;
         }
 
+        private function destroySparks() : void
+        {
+            if(this._sparksManager != null)
+            {
+                this._sparksManager.dispose();
+                this._sparksManager = null;
+            }
+            if(this._sparksMc != null)
+            {
+                removeChild(this._sparksMc);
+                this._sparksMc = null;
+            }
+        }
+
+        private function createSparks() : void
+        {
+            if(this._sparksManager == null)
+            {
+                this._sparksManager = ISparksManager(App.utils.classFactory.getObject(Linkages.SPARKS_MGR));
+                this._sparksManager.zone = this.getSparkZone();
+                this._sparksManager.scope = this._sparksMc;
+                this._sparksManager.sparkQuantity = SPARK_QUANTITY;
+                this._sparksManager.createSparks();
+            }
+        }
+
+        private function getSparkZone() : Rectangle
+        {
+            return new Rectangle(SPARK_ZONE.x,SPARK_ZONE.y,_width + SPARK_ZONE.right,_height + SPARK_ZONE.bottom);
+        }
+
+        private function resizeBGImg() : void
+        {
+            this.backgroundImg.scaleX = this.backgroundImg.scaleY = Math.max(_width / this.backgroundImg.bitmapWidth,_height / this.backgroundImg.bitmapHeight);
+            this.backgroundImg.x = _width - this.backgroundImg.width >> 1;
+            this.backgroundImg.y = _height - this.backgroundImg.height >> 1;
+        }
+
         public function get backgroundVisibility() : Boolean
         {
             return this._backgroundVisibility;
@@ -119,6 +212,14 @@ package net.wg.gui.components.common.waiting
         {
             this._backgroundVisibility = param1;
             invalidate(INV_BACKGROUND_VISIBILITY);
+        }
+
+        private function onImageChangeHandler(param1:Event) : void
+        {
+            if(this.backgroundImg.source != Values.EMPTY_STR)
+            {
+                this.resizeBGImg();
+            }
         }
     }
 }

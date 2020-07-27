@@ -3,103 +3,113 @@ package net.wg.gui.lobby.vehiclePreview.infoPanel.browse
     import net.wg.infrastructure.base.meta.impl.VehiclePreviewBrowseTabMeta;
     import net.wg.infrastructure.interfaces.IViewStackExContent;
     import net.wg.infrastructure.base.meta.IVehiclePreviewBrowseTabMeta;
-    import flash.text.TextField;
     import flash.events.MouseEvent;
-    import scaleform.clik.constants.InvalidationType;
-    import flash.text.TextFieldAutoSize;
-    import net.wg.data.constants.generated.VEHPREVIEW_CONSTANTS;
-    import flash.events.Event;
-    import flash.display.InteractiveObject;
     import net.wg.data.constants.generated.TOOLTIPS_CONSTANTS;
+    import flash.events.Event;
+    import flash.text.TextField;
+    import net.wg.gui.lobby.techtree.controls.BenefitsComponent;
+    import flash.text.TextFieldAutoSize;
+    import scaleform.clik.constants.InvalidationType;
+    import net.wg.gui.lobby.vehiclePreview.data.VPBrowseTabVO;
+    import net.wg.data.constants.generated.VEHPREVIEW_CONSTANTS;
+    import flash.display.InteractiveObject;
+    import scaleform.clik.data.DataProvider;
 
     public class VPBrowseTab extends VehiclePreviewBrowseTabMeta implements IViewStackExContent, IVehiclePreviewBrowseTabMeta
     {
 
-        private static const TITLE_OFFSET:int = 30;
+        private static const TITLE_OFFSET:int = 40;
 
         private static const COLLECTIBLE_OFFSET:int = 30;
 
-        private static const HISTORIC_REFERENCE_OFFSET:int = 4;
+        private static const BENEFITS_OFFSET:int = -30;
+
+        private static const MINIMAL_HEIGHT:int = 900;
 
         public var title:TextField;
 
         public var historicReference:TextField;
 
-        public var renderer0:VPKPIItemRenderer;
-
-        public var renderer1:VPKPIItemRenderer;
-
-        public var renderer2:VPKPIItemRenderer;
-
         public var collectibleInfo:VPCollectibleInfo;
 
-        private var _renderers:Vector.<VPKPIItemRenderer>;
+        private var _benefitsComponent:BenefitsComponent = null;
+
+        private var _titleInfoStr:String = "";
 
         private var _isCollectible:Boolean = false;
+
+        private var _isTooltip:Boolean = false;
+
+        private var _isSmallAndCompact:Boolean = false;
 
         public function VPBrowseTab()
         {
             super();
         }
 
+        private static function onHistoricReferenceRollOutHandler(param1:MouseEvent) : void
+        {
+            App.toolTipMgr.hide();
+        }
+
+        private static function onHistoricReferenceRollOverHandler(param1:MouseEvent) : void
+        {
+            App.toolTipMgr.showSpecial(TOOLTIPS_CONSTANTS.VEHICLE_HISTORICAL_REFERENCE,null);
+        }
+
+        private static function onTitleRollOutHandler(param1:Event) : void
+        {
+            App.toolTipMgr.hide();
+        }
+
+        private static function onTitleRollOverHandler(param1:Event) : void
+        {
+            App.toolTipMgr.showSpecial(TOOLTIPS_CONSTANTS.VEHICLE_HISTORICAL_REFERENCE,null);
+        }
+
         override public function setSize(param1:Number, param2:Number) : void
         {
-            var _loc5_:VPKPIItemRenderer = null;
-            var _loc3_:uint = this._renderers.length;
-            var _loc4_:int = param1 / _loc3_;
-            for each(_loc5_ in this._renderers)
-            {
-                _loc5_.width = _loc4_;
-                _loc5_.validateNow();
-            }
             super.setSize(param1,param2);
             validateNow();
-        }
-
-        override protected function initialize() : void
-        {
-            super.initialize();
-            this._renderers = new <VPKPIItemRenderer>[this.renderer0,this.renderer1,this.renderer2];
-        }
-
-        override protected function onDispose() : void
-        {
-            var _loc1_:VPKPIItemRenderer = null;
-            this.historicReference.removeEventListener(MouseEvent.ROLL_OVER,this.onHistoricReferenceRollOverHandler);
-            this.historicReference.removeEventListener(MouseEvent.ROLL_OUT,this.onHistoricReferenceRollOutHandler);
-            this.collectibleInfo.removeEventListener(InvalidationType.LAYOUT,this.updateLayout);
-            for each(_loc1_ in this._renderers)
-            {
-                _loc1_.dispose();
-            }
-            this._renderers.length = 0;
-            this._renderers = null;
-            this.renderer0 = null;
-            this.renderer1 = null;
-            this.renderer2 = null;
-            this.historicReference = null;
-            this.title = null;
-            this.collectibleInfo.dispose();
-            this.collectibleInfo = null;
-            super.onDispose();
         }
 
         override protected function configUI() : void
         {
             super.configUI();
             mouseEnabled = false;
-            this.title.text = VEHICLE_PREVIEW.INFOPANEL_TAB_ELITEFACTSHEET_INFO;
             this.historicReference.autoSize = TextFieldAutoSize.LEFT;
             this.historicReference.wordWrap = true;
             this.historicReference.multiline = true;
-            this.historicReference.addEventListener(MouseEvent.ROLL_OVER,this.onHistoricReferenceRollOverHandler);
-            this.historicReference.addEventListener(MouseEvent.ROLL_OUT,this.onHistoricReferenceRollOutHandler);
             this.collectibleInfo.addEventListener(InvalidationType.LAYOUT,this.updateLayout);
+            this.title.text = VEHICLE_PREVIEW.INFOPANEL_TAB_ELITEFACTSHEET_INFO;
+            this.title.autoSize = TextFieldAutoSize.LEFT;
+            this.historicReference.addEventListener(MouseEvent.ROLL_OVER,onHistoricReferenceRollOverHandler);
+            this.historicReference.addEventListener(MouseEvent.ROLL_OUT,onHistoricReferenceRollOutHandler);
+        }
+
+        override protected function onDispose() : void
+        {
+            this.title.removeEventListener(MouseEvent.ROLL_OVER,onTitleRollOverHandler);
+            this.title.removeEventListener(MouseEvent.ROLL_OUT,onTitleRollOutHandler);
+            this.historicReference.removeEventListener(MouseEvent.ROLL_OVER,onHistoricReferenceRollOverHandler);
+            this.historicReference.removeEventListener(MouseEvent.ROLL_OUT,onHistoricReferenceRollOutHandler);
+            this.collectibleInfo.removeEventListener(InvalidationType.LAYOUT,this.updateLayout);
+            this.historicReference = null;
+            this.title = null;
+            if(this._benefitsComponent)
+            {
+                this._benefitsComponent.dispose();
+                this._benefitsComponent = null;
+            }
+            this.collectibleInfo.dispose();
+            this.collectibleInfo = null;
+            super.onDispose();
         }
 
         override protected function draw() : void
         {
-            var _loc1_:* = 0;
+            var _loc1_:* = false;
+            var _loc2_:* = 0;
             super.draw();
             if(isInvalid(InvalidationType.SIZE))
             {
@@ -107,33 +117,53 @@ package net.wg.gui.lobby.vehiclePreview.infoPanel.browse
                 this.collectibleInfo.width = width;
                 this.title.width = width;
                 this.historicReference.width = width;
+                _loc1_ = this._benefitsComponent && this._benefitsComponent.compact && App.appHeight <= MINIMAL_HEIGHT;
+                if(_loc1_ != this._isSmallAndCompact)
+                {
+                    this._isSmallAndCompact = _loc1_;
+                    this.historicReference.visible = !this._isSmallAndCompact;
+                    if(this._isSmallAndCompact)
+                    {
+                        this.title.addEventListener(MouseEvent.ROLL_OVER,onTitleRollOverHandler);
+                        this.title.addEventListener(MouseEvent.ROLL_OUT,onTitleRollOutHandler);
+                        this.title.htmlText = this._titleInfoStr;
+                        mouseChildren = true;
+                    }
+                    else
+                    {
+                        this.title.removeEventListener(MouseEvent.ROLL_OVER,onTitleRollOverHandler);
+                        this.title.removeEventListener(MouseEvent.ROLL_OUT,onTitleRollOutHandler);
+                        this.title.text = VEHICLE_PREVIEW.INFOPANEL_TAB_ELITEFACTSHEET_INFO;
+                        mouseChildren = this._isTooltip;
+                    }
+                }
                 invalidateLayout();
             }
             if(isInvalid(InvalidationType.LAYOUT))
             {
-                _loc1_ = 0;
+                _loc2_ = 0;
                 if(this._isCollectible)
                 {
-                    _loc1_ = this.collectibleInfo.y + this.collectibleInfo.height + COLLECTIBLE_OFFSET >> 0;
+                    _loc2_ = this.collectibleInfo.y + this.collectibleInfo.height + COLLECTIBLE_OFFSET >> 0;
                 }
-                if(this.renderer0.visible)
+                if(this._benefitsComponent)
                 {
-                    this.title.y = this.renderer0.y + this.renderer0.height + TITLE_OFFSET >> 0;
+                    this._benefitsComponent.y = _loc2_ + BENEFITS_OFFSET;
+                    _loc2_ = this._benefitsComponent.y + this._benefitsComponent.height + TITLE_OFFSET >> 0;
                 }
-                else
-                {
-                    this.title.y = this.renderer0.y + _loc1_;
-                }
-                this.historicReference.y = this.title.y + this.title.height + HISTORIC_REFERENCE_OFFSET >> 0;
+                this.title.y = _loc2_;
+                this.historicReference.y = _loc2_ + this.title.height >> 0;
             }
         }
 
-        override protected function setData(param1:String, param2:Boolean, param3:int, param4:Array) : void
+        override protected function setData(param1:VPBrowseTabVO) : void
         {
-            this.historicReference.htmlText = param1;
-            this._isCollectible = param3 == VEHPREVIEW_CONSTANTS.COLLECTIBLE || param3 == VEHPREVIEW_CONSTANTS.COLLECTIBLE_WITHOUT_MODULES;
-            mouseChildren = param2;
-            this.setRenderersData(param4);
+            this.historicReference.htmlText = param1.historicReferenceTxt;
+            this._isCollectible = param1.vehicleType == VEHPREVIEW_CONSTANTS.COLLECTIBLE || param1.vehicleType == VEHPREVIEW_CONSTANTS.COLLECTIBLE_WITHOUT_MODULES;
+            this._titleInfoStr = param1.titleInfo;
+            this._isTooltip = param1.showTooltip;
+            mouseChildren = this._isTooltip;
+            this.setRenderersData(param1.benefitsData);
             invalidateSize();
         }
 
@@ -161,37 +191,20 @@ package net.wg.gui.lobby.vehiclePreview.infoPanel.browse
         {
         }
 
-        private function setRenderersData(param1:Array) : void
+        private function setRenderersData(param1:DataProvider) : void
         {
-            var _loc2_:int = this._renderers.length;
-            var _loc3_:* = 0;
-            if(param1)
+            if(param1 != null && param1.length > 0)
             {
-                while(_loc3_ < _loc2_)
+                if(this._benefitsComponent == null)
                 {
-                    this._renderers[_loc3_].setData(param1[_loc3_]);
-                    this._renderers[_loc3_].visible = _loc3_ < param1.length;
-                    _loc3_++;
+                    this._benefitsComponent = new BenefitsComponent();
+                    this._benefitsComponent.mouseEnabled = this._benefitsComponent.mouseChildren = false;
+                    this.addChild(this._benefitsComponent);
+                    invalidateSize();
                 }
+                this._benefitsComponent.setData(param1);
+                this._benefitsComponent.compact = true;
             }
-            else
-            {
-                while(_loc3_ < _loc2_)
-                {
-                    this._renderers[_loc3_].visible = false;
-                    _loc3_++;
-                }
-            }
-        }
-
-        private function onHistoricReferenceRollOutHandler(param1:MouseEvent) : void
-        {
-            App.toolTipMgr.hide();
-        }
-
-        private function onHistoricReferenceRollOverHandler(param1:MouseEvent) : void
-        {
-            App.toolTipMgr.showSpecial(TOOLTIPS_CONSTANTS.VEHICLE_HISTORICAL_REFERENCE,null);
         }
     }
 }

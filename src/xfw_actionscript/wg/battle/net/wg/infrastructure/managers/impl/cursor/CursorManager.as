@@ -121,11 +121,6 @@ package net.wg.infrastructure.managers.impl.cursor
             setCursor(param1);
         }
 
-        public function initCursor(param1:String) : void
-        {
-            setCursor(param1);
-        }
-
         public function lock() : void
         {
             this._asserter.assert(this._customLock == false,DUPLICATE_LOCK,InfrastructureException);

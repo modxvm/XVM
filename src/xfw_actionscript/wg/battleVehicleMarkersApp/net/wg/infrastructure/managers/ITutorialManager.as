@@ -6,6 +6,7 @@ package net.wg.infrastructure.managers
     import net.wg.infrastructure.interfaces.ITutorialCustomComponent;
     import net.wg.infrastructure.interfaces.IView;
     import net.wg.data.TutorialBuilderVO;
+    import flash.display.DisplayObjectContainer;
 
     public interface ITutorialManager extends ITutorialManagerMeta
     {
@@ -27,5 +28,9 @@ package net.wg.infrastructure.managers
         function setViewForTutorialId(param1:IView, param2:String) : void;
 
         function onEffectComplete(param1:DisplayObject, param2:String) : void;
+
+        function addHintZoneForGFComponent(param1:DisplayObjectContainer, param2:String, param3:int, param4:int, param5:int, param6:int) : void;
+
+        function removeHintZoneForGFComponent(param1:DisplayObjectContainer, param2:String) : void;
     }
 }

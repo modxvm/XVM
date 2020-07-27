@@ -11,7 +11,7 @@ package net.wg.data.constants.generated
 
         public static const BATTLEPASS_TANK_CAROUSEL:String = "battlePassTankCarousel";
 
-        public static const BOB_TANK_CAROUSEL:String = "bobTankCarousel";
+        public static const ROYALE_TANK_CAROUSEL:String = "royaleTankCarousel";
 
         public static const CREW:String = "crew";
 
@@ -37,10 +37,6 @@ package net.wg.data.constants.generated
 
         public static const EPIC_PRIME_TIME:String = "epicPrimeTime.swf";
 
-        public static const EVENT_10YC_PRIME_TIME:String = "event10YCPrimeTime.swf";
-
-        public static const BOB_PRIME_TIME:String = "rankedPrimeTime.swf";
-
         public static const TANK_CAROUSEL_UI:String = "TankCarouselUI";
 
         public static const VEH_PARAM_RENDERER_STATE_SIMPLE_TOP:String = "simpleTop";
@@ -51,6 +47,10 @@ package net.wg.data.constants.generated
 
         public static const VEH_PARAM_RENDERER_STATE_SEPARATOR:String = "separator";
 
+        public static const VEH_PARAM_RENDERER_STATE_LINE_SEPARATOR:String = "lineSeparator";
+
+        public static const VEH_PARAM_RENDERER_STATE_EXTRA:String = "extra";
+
         public static const PROGRESSIVE_REWARD_WIDGET:String = "progressiveRewardWdgt";
 
         public static const DAILY_QUEST_WIDGET:String = "dqWidget";
@@ -58,6 +58,12 @@ package net.wg.data.constants.generated
         public static const BATTLE_PASSS_ENTRY_POINT:String = "battlePassEntryPoint";
 
         public static const TEN_YEARS_COUNTDOWN_ENTRY_POINT_INJECT:String = "tenYearsCountdownEntryPointInject";
+
+        public static const AMMUNITION_SETUP_VIEW_VEHICLE_PARAMS:String = "ammunitionSetupViewVehicleParams";
+
+        public static const AMMUNITION_PANEL_INJECT:String = "ammunitionPanelInject";
+
+        public static const AMMUNITION_SETUP_VIEW_INJECT:String = "ammunitionSetupViewInject";
 
         public function HANGAR_ALIASES()
         {

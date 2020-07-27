@@ -26,6 +26,8 @@ package net.wg.gui.lobby.header.itemSelectorPopover
 
         public var icon:UILoaderAlt = null;
 
+        public var ribbon:UILoaderAlt = null;
+
         public var specialBg:UILoaderAlt = null;
 
         public var mainTextField:TextField = null;
@@ -110,6 +112,8 @@ package net.wg.gui.lobby.header.itemSelectorPopover
             this.hitAreaA = null;
             this.specialBg.dispose();
             this.specialBg = null;
+            this.ribbon.dispose();
+            this.ribbon = null;
             this.icon.dispose();
             this.icon = null;
             this._dataVo = null;
@@ -137,7 +141,7 @@ package net.wg.gui.lobby.header.itemSelectorPopover
 
         private function applyData(param1:ExtraItemSelectorRendererVO) : void
         {
-            var _loc3_:* = false;
+            var _loc2_:* = false;
             selected = param1.active;
             this._mainLabel = param1.mainLabel;
             this._infoLabel = param1.infoLabel;
@@ -145,16 +149,17 @@ package net.wg.gui.lobby.header.itemSelectorPopover
             this.updateText();
             if(this.newIndicator)
             {
-                _loc3_ = param1.isNew && !param1.disabled;
-                if(this.newIndicator.visible != _loc3_)
+                _loc2_ = param1.isNew && !param1.disabled;
+                if(this.newIndicator.visible != _loc2_)
                 {
-                    this.newIndicator.visible = _loc3_;
-                    this.updateNewAnimation(_loc3_);
+                    this.newIndicator.visible = _loc2_;
+                    this.updateNewAnimation(_loc2_);
                 }
             }
-            var _loc2_:String = param1.icon;
-            this.icon.visible = StringUtils.isNotEmpty(_loc2_);
-            this.icon.source = _loc2_;
+            this.icon.source = param1.icon;
+            this.icon.visible = StringUtils.isNotEmpty(param1.icon);
+            this.ribbon.source = param1.ribbonSrc;
+            this.ribbon.visible = StringUtils.isNotEmpty(param1.ribbonSrc);
             this.specialBg.source = param1.specialBgIcon;
             this.specialBg.visible = StringUtils.isNotEmpty(this.specialBg.source);
         }

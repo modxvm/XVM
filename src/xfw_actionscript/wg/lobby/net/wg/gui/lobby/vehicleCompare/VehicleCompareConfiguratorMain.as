@@ -3,6 +3,7 @@ package net.wg.gui.lobby.vehicleCompare
     import net.wg.infrastructure.base.meta.impl.VehicleCompareConfiguratorMainMeta;
     import net.wg.infrastructure.base.meta.IVehicleCompareConfiguratorMainMeta;
     import net.wg.gui.components.advanced.ViewStack;
+    import flash.display.DisplayObject;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.infrastructure.base.UIComponentEx;
     import net.wg.gui.events.ViewStackEvent;
@@ -14,9 +15,15 @@ package net.wg.gui.lobby.vehicleCompare
 
         private static const INV_BACKGROUND_SIZE:String = "InvBackgroundSize";
 
+        private static const TOP_OFFSET:int = 53;
+
         public var viewStack:ViewStack = null;
 
         private var _currentAlias:String = null;
+
+        private var _backgroundOriginWidth:int;
+
+        private var _backgroundOriginHeight:int;
 
         public function VehicleCompareConfiguratorMain()
         {
@@ -27,6 +34,19 @@ package net.wg.gui.lobby.vehicleCompare
         {
             super.configUI();
             setBackground(RES_ICONS.MAPS_ICONS_LOBBY_SETTINGS_BLURED_BG);
+        }
+
+        override protected function updateBgHolder(param1:DisplayObject) : void
+        {
+            this._backgroundOriginWidth = param1.width;
+            this._backgroundOriginHeight = param1.height;
+            super.updateBgHolder(param1);
+        }
+
+        override protected function layoutBackground() : void
+        {
+            bgHolder.scaleX = bgHolder.scaleY = Math.max(App.appWidth / this._backgroundOriginWidth,(App.appHeight - TOP_OFFSET) / this._backgroundOriginHeight);
+            bgHolder.x = App.appWidth - bgHolder.width >> 1;
         }
 
         override protected function draw() : void

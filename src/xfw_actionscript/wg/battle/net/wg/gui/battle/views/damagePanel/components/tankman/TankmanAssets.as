@@ -57,6 +57,8 @@ package net.wg.gui.battle.views.damagePanel.components.tankman
 
         private var _isOtherStatusActive:Boolean = false;
 
+        private var _isDisposed:Boolean = false;
+
         public function TankmanAssets(param1:String, param2:String, param3:String, param4:int, param5:int, param6:int)
         {
             super();
@@ -94,6 +96,7 @@ package net.wg.gui.battle.views.damagePanel.components.tankman
             this._critical = null;
             this._normal.bitmapData.dispose();
             this._normal = null;
+            this._isDisposed = true;
         }
 
         public function getDisplayItems() : Vector.<DisplayObject>
@@ -155,6 +158,10 @@ package net.wg.gui.battle.views.damagePanel.components.tankman
 
         private function showStatusIndicator(param1:int, param2:Boolean = true) : void
         {
+            if(this._isDisposed)
+            {
+                return;
+            }
             this.clearStunAnimationTimeout();
             if(param1 == STUN_STATUS_ID)
             {

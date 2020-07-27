@@ -45,7 +45,14 @@ package net.wg.gui.battle.views.vehicleMarkers.statusMarkers
             this.oneShotAnimation = false;
             if(currentFrameLabel && currentFrameLabel != STATE_HIDDEN)
             {
-                gotoAndPlay(param1?STATE_HIDE:STATE_HIDDEN);
+                if(param1)
+                {
+                    gotoAndPlay(HIDE_STATE_NEXT_PLAY_FRAME);
+                }
+                else
+                {
+                    gotoAndStop(STATE_HIDDEN);
+                }
             }
             else
             {
@@ -60,13 +67,6 @@ package net.wg.gui.battle.views.vehicleMarkers.statusMarkers
                 return false;
             }
             return visible || currentFrameLabel != STATE_HIDDEN;
-        }
-
-        public function onDispose() : void
-        {
-            stop();
-            addFrameScript(HIDE_STATE_STOP_FRAME,null);
-            addFrameScript(HIDDEN_STATE_STOP_FRAME,null);
         }
 
         public function resetMarkerStates() : void
@@ -110,18 +110,11 @@ package net.wg.gui.battle.views.vehicleMarkers.statusMarkers
             addFrameScript(HIDE_STATE_STOP_FRAME,this.evaluateOneShotAnimationFrameStates);
         }
 
-        public function showEffectTimer(param1:Number, param2:Boolean = true, param3:Boolean = true) : void
+        public function showEffectTimer(param1:Number, param2:Boolean, param3:Boolean, param4:Boolean = true) : void
         {
-            this.oneShotAnimation = false;
+            this.oneShotAnimation = param3;
             visible = true;
-            gotoAndPlay(param2?STATE_SHOW:STATE_BASE);
-        }
-
-        public function showOneshotAnimation(param1:Number, param2:Boolean, param3:Boolean) : void
-        {
-            this.oneShotAnimation = true;
-            visible = true;
-            gotoAndPlay(param3?STATE_SHOW:STATE_BASE);
+            gotoAndPlay(param4?STATE_SHOW:STATE_BASE);
         }
 
         public function updateEffectTimer(param1:int, param2:Boolean, param3:Boolean = false) : void
@@ -142,6 +135,13 @@ package net.wg.gui.battle.views.vehicleMarkers.statusMarkers
             {
                 gotoAndPlay(STATE_SHOW);
             }
+        }
+
+        protected function onDispose() : void
+        {
+            stop();
+            addFrameScript(HIDE_STATE_STOP_FRAME,null);
+            addFrameScript(HIDDEN_STATE_STOP_FRAME,null);
         }
 
         protected function updateColorSettings(param1:uint) : void

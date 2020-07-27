@@ -51,7 +51,7 @@ package net.wg.gui.battle.views.epicDeploymentMap.components
                 {
                     return;
                 }
-                dispatchEvent(new EpicDeploymentMapEvent(EpicDeploymentMapEvent.MAP_CLICKED,this.mapHit.mouseX,this.mapHit.mouseY,MouseEventEx(param1).buttonIdx == MouseEventEx.RIGHT_BUTTON));
+                dispatchEvent(new EpicDeploymentMapEvent(EpicDeploymentMapEvent.MAP_CLICKED,this.mapHit.mouseX,this.mapHit.mouseY,MouseEventEx(param1).buttonIdx));
             }
         }
     }

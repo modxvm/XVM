@@ -2,8 +2,10 @@ package net.wg.gui.lobby.battlequeue
 {
     import net.wg.infrastructure.base.UIComponentEx;
     import scaleform.clik.interfaces.IListItemRenderer;
-    import net.wg.gui.components.controls.UILoaderAlt;
+    import net.wg.gui.components.controls.ImageComponent;
     import flash.text.TextField;
+    import net.wg.data.constants.AlignType;
+    import flash.text.TextFieldAutoSize;
     import scaleform.clik.constants.InvalidationType;
     import org.idmedia.as3commons.util.StringUtils;
     import scaleform.clik.data.ListData;
@@ -14,7 +16,7 @@ package net.wg.gui.lobby.battlequeue
 
         private static const INVALIDATE_COUNT:String = "invalidateCount";
 
-        public var tankType:UILoaderAlt;
+        public var tankType:ImageComponent;
 
         public var textField:TextField;
 
@@ -38,6 +40,15 @@ package net.wg.gui.lobby.battlequeue
             return "[WG BattleQueueItemRenderer " + name + "]";
         }
 
+        override protected function configUI() : void
+        {
+            super.configUI();
+            this.tankType.tooltipEnabled = false;
+            this.tankType.horizontalAlign = AlignType.CENTER;
+            this.tankType.verticalAlign = AlignType.CENTER;
+            this.textField.autoSize = TextFieldAutoSize.LEFT;
+        }
+
         override protected function draw() : void
         {
             super.draw();
@@ -51,7 +62,7 @@ package net.wg.gui.lobby.battlequeue
                 {
                     this.countField.text = String(this._data.count);
                 }
-                if(this.tankType && StringUtils.isNotEmpty(this._data.icon) && this.tankType.source != this._data.icon)
+                if(this.tankType && StringUtils.isNotEmpty(this._data.icon))
                 {
                     this.tankType.source = this._data.icon;
                 }

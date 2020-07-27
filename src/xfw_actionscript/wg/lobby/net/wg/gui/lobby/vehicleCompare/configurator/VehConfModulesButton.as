@@ -14,9 +14,9 @@ package net.wg.gui.lobby.vehicleCompare.configurator
     public class VehConfModulesButton extends SoundButtonEx
     {
 
-        private static const BG_ROLL_OVER_ALPHA:Number = 0.1;
+        private static const BG_ROLL_OVER_ALPHA:Number = 0.07;
 
-        private static const BG_ROLL_OUT_ALPHA:Number = 0.05;
+        private static const BG_ROLL_OUT_ALPHA:Number = 0.03;
 
         private static const TWEEN_DURATION:Number = 150;
 

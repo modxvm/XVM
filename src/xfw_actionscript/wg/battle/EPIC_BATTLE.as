@@ -91,10 +91,6 @@ package
 
         public static const CHAT_SHORTCUTS_ATTENTION_TO_OBJECTIVE_DEF:String = "#epic_battle:chat_shortcuts/attention_to_objective_def";
 
-        public static const CHAT_SHORTCUTS_ATTENTION_TO_BASE_ATK:String = "#epic_battle:chat_shortcuts/attention_to_base_atk";
-
-        public static const CHAT_SHORTCUTS_ATTENTION_TO_BASE_DEF:String = "#epic_battle:chat_shortcuts/attention_to_base_def";
-
         public static const PROGRESS_TIMERS_BASE_CAPTURE:String = "#epic_battle:progress_timers/base_capture";
 
         public static const PROGRESS_TIMERS_CAPTURED:String = "#epic_battle:progress_timers/captured";
@@ -272,6 +268,8 @@ package
         public static const METAABILITYSCREEN_UNSPENT_POINTS:String = "#epic_battle:metaAbilityScreen/Unspent_points";
 
         public static const METAABILITYSCREEN_GET_SKILL_POINTS:String = "#epic_battle:metaAbilityScreen/get_skill_points";
+
+        public static const METAABILITYSCREEN_HOW_TO_ACTIVATE:String = "#epic_battle:metaAbilityScreen/how_to_activate";
 
         public static const SMOKE_IN_SMOKE:String = "#epic_battle:smoke/In_smoke";
 
@@ -471,6 +469,8 @@ package
 
         public static const QUESTSTOOLTIP_EPICBATTLE_HEADER:String = "#epic_battle:questsTooltip/epicBattle/header";
 
+        public static const QUESTSTOOLTIP_EPICBATTLE_STEELHUNTER_HEADER:String = "#epic_battle:questsTooltip/epicBattle/steelhunter/header";
+
         public static const QUESTSTOOLTIP_EPICBATTLE_TIMELEFT:String = "#epic_battle:questsTooltip/epicBattle/timeLeft";
 
         public static const QUESTSTOOLTIP_EPICBATTLE_STARTIN:String = "#epic_battle:questsTooltip/epicBattle/startIn";
@@ -525,17 +525,9 @@ package
 
         public static const BOOSTER_DESCRIPTION_BONUSVALUETIME_BOOSTER_CREW_XP:String = "#epic_battle:booster/description/bonusValueTime/booster_crew_xp";
 
-        public static const FITTINGSELECTPOPOVER_REMOVEBUTTON:String = "#epic_battle:fittingSelectPopover/RemoveButton";
-
-        public static const FITTINGSELECTPOPOVER_CHANGEORDER:String = "#epic_battle:fittingSelectPopover/ChangeOrder";
-
-        public static const FITTINGSELECTPOPOVER_NOTACTIVATED:String = "#epic_battle:fittingSelectPopover/notActivated";
-
-        public static const FITTINGSELECTPOPOVERBATTKEABILITY_TITLETEXT:String = "#epic_battle:fittingSelectPopoverBattkeAbility/titleText";
-
-        public static const FITTINGSELECTPOPOVERBATTKEABILITY_DESCTEXT:String = "#epic_battle:fittingSelectPopoverBattkeAbility/descText";
-
         public static const PRIMETIME_TITLE:String = "#epic_battle:primeTime/title";
+
+        public static const PRIMETIME_STEELHUNTER_TITLE:String = "#epic_battle:primeTime/steelhunter/title";
 
         public static const PRIMETIME_TITLEWELCOME:String = "#epic_battle:primeTime/titleWelcome";
 
@@ -575,11 +567,11 @@ package
 
         public static const TUTORIAL_HINT_EPICRESERVESSLOTHINT:String = "#epic_battle:tutorial/hint/epicReservesSlotHint";
 
-        public static const TUTORIAL_HINT_EPICRESERVESBTNHINT:String = "#epic_battle:tutorial/hint/epicReservesBtnHint";
-
         public static const SEASON_201902_NAME:String = "#epic_battle:season/201902/name";
 
         public static const SEASON_202002_NAME:String = "#epic_battle:season/202002/name";
+
+        public static const SEASON_202008_NAME:String = "#epic_battle:season/202008/name";
 
         public static const EPICBATTLEITEM_REWARDPOINTS_HEADER:String = "#epic_battle:epicBattleItem/rewardPoints/header";
 

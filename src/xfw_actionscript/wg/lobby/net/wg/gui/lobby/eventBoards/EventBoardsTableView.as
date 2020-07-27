@@ -77,8 +77,6 @@ package net.wg.gui.lobby.eventBoards
 
         private static const STATUS_OFFSET:int = 15;
 
-        private static const TICKER_HEIGHT:int = 22;
-
         private static const INV_HEADER_DATA:String = "InvHeaderData";
 
         private static const INV_AWARD:String = "InvAward";
@@ -622,7 +620,6 @@ package net.wg.gui.lobby.eventBoards
 
         private function updateLayout() : void
         {
-            var _loc3_:* = 0;
             var _loc1_:int = App.appWidth;
             var _loc2_:int = App.appHeight;
             this.waitingCmp.setSize(_loc1_,_loc2_);
@@ -649,8 +646,7 @@ package net.wg.gui.lobby.eventBoards
             if(this.status.visible)
             {
                 this.status.x = (_loc1_ - this.status.width >> 1) + STATUS_OFFSET;
-                _loc3_ = App.globalVarsMgr.isShowTickerS()?TICKER_HEIGHT + PADDING_TOP:PADDING_TOP;
-                this.status.y = _loc2_ - _loc3_ - this.status.getHeight();
+                this.status.y = _loc2_ - PADDING_TOP - this.status.getHeight();
             }
             this.emptyDataTF.x = this.scrollPane.x + (PANE_WIDTH - this.emptyDataTF.width) * 0.5;
             this.emptyDataTF.y = TOP_PANEL_HEIGHT + this._freeSpace * 0.5;
@@ -683,11 +679,9 @@ package net.wg.gui.lobby.eventBoards
 
         private function onStatusChangeHeight(param1:Event) : void
         {
-            var _loc2_:* = 0;
             if(this.status.visible)
             {
-                _loc2_ = App.globalVarsMgr.isShowTickerS()?TICKER_HEIGHT + PADDING_TOP:PADDING_TOP;
-                this.status.y = App.appHeight - _loc2_ - this.status.getHeight();
+                this.status.y = App.appHeight - PADDING_TOP - this.status.getHeight();
                 this._freeSpace = height - y - this.status.getHeight() - UNAVAILABLE_HEIGHT;
                 this.scrollPane.setSize(PANE_WIDTH,this._freeSpace);
             }
@@ -703,7 +697,7 @@ package net.wg.gui.lobby.eventBoards
             var _loc1_:Object = null;
             if(this._popoverAlias != Values.EMPTY_STR)
             {
-                _loc1_ = new Object();
+                _loc1_ = {};
                 _loc1_.caller = "excel";
                 _loc1_.eventID = null;
                 App.popoverMgr.show(this,this._popoverAlias,_loc1_);

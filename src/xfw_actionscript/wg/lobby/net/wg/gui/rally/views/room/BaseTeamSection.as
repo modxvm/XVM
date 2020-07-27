@@ -9,6 +9,7 @@ package net.wg.gui.rally.views.room
     import net.wg.gui.rally.vo.ActionButtonVO;
     import scaleform.clik.events.ButtonEvent;
     import net.wg.gui.rally.controls.RallyInvalidationType;
+    import org.idmedia.as3commons.util.StringUtils;
     import net.wg.data.constants.Values;
     import net.wg.gui.rally.interfaces.IRallySlotVO;
     import net.wg.gui.rally.vo.VehicleVO;
@@ -88,24 +89,30 @@ package net.wg.gui.rally.views.room
                     this.lblStatus.htmlText = this._actionButtonData.stateString;
                     this.btnFight.visible = !this._actionButtonData.isReady;
                     this.btnFight.enabled = this._actionButtonData.isEnabled && !this._isFightBtnInCoolDown;
+                    this.btnFight.label = this._actionButtonData.label;
                     if(!this.btnFight.enabled && this.btnFight.state != "disabled")
                     {
                         this.btnFight.setDisabled();
                     }
-                    this.btnFight.label = this._actionButtonData.label;
-                    this.btnFight.tooltip = this._actionButtonData.toolTipData;
+                    if(this._actionButtonData.toolTipData && StringUtils.isNotEmpty(this.actionButtonData.toolTipData))
+                    {
+                        this.btnFight.tooltip = this._actionButtonData.toolTipData;
+                    }
                     this.btnFight.mouseEnabledOnDisabled = true;
                     this.btnFight.invalidateState();
                     if(this.btnNotReady)
                     {
                         this.btnNotReady.visible = this._actionButtonData.isReady;
                         this.btnNotReady.enabled = this._actionButtonData.isEnabled && !this._isFightBtnInCoolDown;
+                        this.btnNotReady.label = this._actionButtonData.label;
                         if(!this.btnNotReady.enabled && this.btnNotReady.state != "disabled")
                         {
                             this.btnNotReady.setDisabled();
                         }
-                        this.btnNotReady.label = this._actionButtonData.label;
-                        this.btnNotReady.tooltip = this._actionButtonData.toolTipData;
+                        if(this._actionButtonData.toolTipData && StringUtils.isNotEmpty(this.actionButtonData.toolTipData))
+                        {
+                            this.btnNotReady.tooltip = this._actionButtonData.toolTipData;
+                        }
                         this.btnNotReady.invalidateState();
                     }
                 }

@@ -11,6 +11,10 @@ package net.wg.gui.lobby.battleResults.event
 
         public static const SHOW_PROGRESSIVE_REWARD_VIEW:String = "ShowProgressiveRewardView";
 
+        public static const BATTLE_QUEUE_ENTERED:String = "BattleLoadingStarted";
+
+        public static const BATTLE_QUEUE_EXITED:String = "BattleLoadingFinished";
+
         public function BattleResultsViewEvent(param1:String)
         {
             super(param1,true,true);

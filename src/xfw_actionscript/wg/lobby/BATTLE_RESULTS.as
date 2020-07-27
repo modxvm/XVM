@@ -137,6 +137,8 @@ package
 
         public static const COMMON_QUESTS_NOPROGRESS:String = "#battle_results:common/quests/noprogress";
 
+        public static const COMMON_TOOLTIP_XPTITLESQUAD:String = "#battle_results:common/tooltip/xpTitleSquad";
+
         public static const COMMON_TOOLTIP_ASSIST_HEADER:String = "#battle_results:common/tooltip/assist/header";
 
         public static const COMMON_TOOLTIP_ASSIST_DESCRIPTION:String = "#battle_results:common/tooltip/assist/description";
@@ -328,6 +330,8 @@ package
         public static const COMMON_NOINCOME_ALERT_TITLE:String = "#battle_results:common/noIncome/alert/title";
 
         public static const COMMON_NOINCOME_ALERT_TEXT:String = "#battle_results:common/noIncome/alert/text";
+
+        public static const COMMON_VEHICLESTATE_VICTORY:String = "#battle_results:common/vehicleState/victory";
 
         public static const COMMON_PREMIUMBONUS_DESCRIPTION:String = "#battle_results:common/premiumBonus/description";
 
@@ -625,6 +629,8 @@ package
 
         public static const DETAILS_CALCULATIONS_AUTOEQUIP:String = "#battle_results:details/calculations/autoEquip";
 
+        public static const DETAILS_CALCULATIONS_AUTOBOOSTERS:String = "#battle_results:details/calculations/autoBoosters";
+
         public static const DETAILS_CALCULATIONS_AOGASFACTOR:String = "#battle_results:details/calculations/aogasFactor";
 
         public static const DETAILS_CALCULATIONS_PREMIUMVEHICLEXP:String = "#battle_results:details/calculations/premiumVehicleXP";
@@ -656,8 +662,6 @@ package
         public static const DETAILS_CALCULATIONS_SQUAD_RESTRICTIONS_TITLE:String = "#battle_results:details/calculations/squad/restrictions/title";
 
         public static const DETAILS_CALCULATIONS_CRYSTAL_TOTAL:String = "#battle_results:details/calculations/crystal/total";
-
-        public static const DETAILS_CALCULATIONS_CRYSTAL_ACHIEVEMENT:String = "#battle_results:details/calculations/crystal/achievement";
 
         public static const TANKSELECTOR_NEXT:String = "#battle_results:tankSelector/next";
 

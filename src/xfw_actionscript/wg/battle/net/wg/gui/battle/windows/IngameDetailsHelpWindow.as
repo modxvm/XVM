@@ -23,8 +23,8 @@ package net.wg.gui.battle.windows
     import net.wg.infrastructure.constants.WindowViewInvalidationType;
     import net.wg.data.constants.InvalidationType;
     import net.wg.gui.components.paginator.PaginatorArrowsController;
-    import flash.geom.Point;
     import net.wg.data.constants.Values;
+    import flash.geom.Point;
     import net.wg.gui.components.paginator.PaginationDetailsNumButton;
 
     public class IngameDetailsHelpWindow extends IngameDetailsHelpWindowMeta implements IIngameDetailsHelpWindowMeta
@@ -123,6 +123,10 @@ package net.wg.gui.battle.windows
             this._pageController.addEventListener(Event.CHANGE,this.onPageControllerChangeHandler);
             this.warning.text = INGAME_HELP.DETAILSHELP_NOKEYSWARNING;
             this.warning.visible = false;
+            this.arrowLeftBtn.focusable = false;
+            this.arrowRightBtn.focusable = false;
+            this.pageButtons.focusable = false;
+            this.btnClose.focusable = false;
             this._keyViewersList = new KeyViewersList();
             addChild(this._keyViewersList);
             this._keyViewersList.y = height - KEY_BOTTOM >> 0;
@@ -235,7 +239,7 @@ package net.wg.gui.battle.windows
 
         public function createPaginatorController() : IPaginatorArrowsController
         {
-            return new PaginatorArrowsController(this,this.pageButtons,this.arrowLeftBtn,this.arrowRightBtn,DETAILS_HELP_PAGE_GROUP);
+            return new PaginatorArrowsController(this,this.pageButtons,this.arrowLeftBtn,this.arrowRightBtn,DETAILS_HELP_PAGE_GROUP,Values.ZERO,true);
         }
 
         private function updateLayout() : void
@@ -263,11 +267,12 @@ package net.wg.gui.battle.windows
         private function setData(param1:IngameDetailsPageVO) : void
         {
             var _loc2_:Array = null;
+            var _loc3_:* = false;
             this.description.text = param1.descr;
             this.pageTitle.text = param1.title;
             this.pageBg.source = param1.image;
             _loc2_ = param1.buttons;
-            var _loc3_:* = _loc2_.indexOf(Values.EMPTY_STR) > -1;
+            _loc3_ = _loc2_.indexOf(Values.EMPTY_STR) > -1;
             this._keyViewersList.clearKeys();
             this._keyViewersList.visible = _loc2_.length > 0;
             this.warning.visible = _loc3_;

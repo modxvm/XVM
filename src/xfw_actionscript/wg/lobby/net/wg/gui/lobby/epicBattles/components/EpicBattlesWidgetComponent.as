@@ -1,29 +1,85 @@
 package net.wg.gui.lobby.epicBattles.components
 {
     import net.wg.infrastructure.base.UIComponentEx;
+    import net.wg.data.constants.generated.EVENTPROGRESSION_CONSTS;
     import net.wg.gui.components.controls.Image;
     import net.wg.gui.lobby.epicBattles.data.EpicBattlesWidgetVO;
+    import net.wg.gui.lobby.eventProgression.components.metaLevel.BaseMetaLevel;
     import flash.events.Event;
     import scaleform.clik.constants.InvalidationType;
+    import net.wg.data.constants.generated.EVENTPROGRESSION_ALIASES;
+    import net.wg.utils.StageSizeBoundaries;
 
     public class EpicBattlesWidgetComponent extends UIComponentEx
     {
 
-        private static const IMAGE_DEF_SIZE:int = 150;
+        private static const RIBBON_MEDIUM_BY_MODE:Object = {};
 
-        private static const IMAGE_SMALL_SIZE:int = 130;
+        private static const RIBBON_BIG_BY_MODE:Object = {};
 
-        private static const SMALL_H_RESOLUTION:int = 900;
-
-        public var metaLevelElement:EpicBattlesMetaLevel = null;
+        {
+            RIBBON_MEDIUM_BY_MODE[EVENTPROGRESSION_CONSTS.FRONT_LINE_MODE] = RES_ICONS.MAPS_ICONS_EPICBATTLES_RIBBON_MEDIUM;
+            RIBBON_MEDIUM_BY_MODE[EVENTPROGRESSION_CONSTS.STEEL_HUNTER_MODE] = RES_ICONS.MAPS_ICONS_BATTLEROYALE_RIBBON_MEDIUM;
+            RIBBON_BIG_BY_MODE[EVENTPROGRESSION_CONSTS.FRONT_LINE_MODE] = RES_ICONS.MAPS_ICONS_EPICBATTLES_RIBBON_BIG;
+            RIBBON_BIG_BY_MODE[EVENTPROGRESSION_CONSTS.STEEL_HUNTER_MODE] = RES_ICONS.MAPS_ICONS_BATTLEROYALE_RIBBON_BIG;
+        }
 
         public var ribbon:Image = null;
 
-        private var _epicData:EpicBattlesWidgetVO = null;
+        private var _data:EpicBattlesWidgetVO = null;
+
+        private var _eventMode:String = null;
+
+        private var _metaLevelElement:BaseMetaLevel = null;
 
         public function EpicBattlesWidgetComponent()
         {
             super();
+        }
+
+        override protected function configUI() : void
+        {
+            super.configUI();
+            this.ribbon.mouseEnabled = this.ribbon.mouseChildren = false;
+            this.ribbon.addEventListener(Event.CHANGE,this.onImageChangeHandler);
+        }
+
+        override protected function draw() : void
+        {
+            var _loc1_:String = null;
+            var _loc2_:* = false;
+            var _loc3_:String = null;
+            super.draw();
+            if(this._data != null)
+            {
+                if(isInvalid(InvalidationType.DATA))
+                {
+                    if(this._eventMode != this._data.eventMode)
+                    {
+                        this._eventMode = this._data.eventMode;
+                        this.cleanMetaLevel();
+                        _loc1_ = this._eventMode == EVENTPROGRESSION_CONSTS.FRONT_LINE_MODE?EVENTPROGRESSION_ALIASES.EPIC_BATTLE_META_LEVEL_UI:EVENTPROGRESSION_ALIASES.BATTLE_ROYALE_META_LEVEL_UI;
+                        this._metaLevelElement = App.utils.classFactory.getComponent(_loc1_,BaseMetaLevel);
+                        addChild(this._metaLevelElement);
+                        this._metaLevelElement.mouseEnabled = this._metaLevelElement.mouseChildren = false;
+                    }
+                    this._metaLevelElement.setData(this._data.epicMetaLevelIconData);
+                    invalidateSize();
+                    invalidateLayout();
+                }
+                if(isInvalid(InvalidationType.SIZE))
+                {
+                    _loc2_ = App.appHeight <= StageSizeBoundaries.HEIGHT_900;
+                    _loc3_ = _loc2_?BaseMetaLevel.EXTRA_SMALL:BaseMetaLevel.SMALL;
+                    this._metaLevelElement.setIconSize(_loc3_);
+                    this.ribbon.source = _loc2_?RIBBON_MEDIUM_BY_MODE[this._data.eventMode]:RIBBON_BIG_BY_MODE[this._data.eventMode];
+                }
+                if(isInvalid(InvalidationType.LAYOUT))
+                {
+                    this.ribbon.x = -this.ribbon.width >> 1;
+                    this._metaLevelElement.y = this.ribbon.height >> 1;
+                }
+            }
         }
 
         override protected function onDispose() : void
@@ -31,50 +87,33 @@ package net.wg.gui.lobby.epicBattles.components
             this.ribbon.removeEventListener(Event.CHANGE,this.onImageChangeHandler);
             this.ribbon.dispose();
             this.ribbon = null;
-            this.metaLevelElement.dispose();
-            this.metaLevelElement = null;
-            if(this._epicData)
-            {
-                this._epicData = null;
-            }
+            this.cleanMetaLevel();
+            this._data = null;
             super.onDispose();
         }
 
-        override protected function draw() : void
+        public function setData(param1:EpicBattlesWidgetVO) : void
         {
-            super.draw();
-            var _loc1_:* = App.appHeight <= SMALL_H_RESOLUTION;
-            var _loc2_:int = _loc1_?IMAGE_SMALL_SIZE:IMAGE_DEF_SIZE;
-            if(isInvalid(InvalidationType.DATA) && this._epicData != null)
+            if(param1 != null && this._data != param1)
             {
-                this.metaLevelElement.setData(this._epicData.epicMetaLevelIconData);
-                this.metaLevelElement.setIconSize(_loc2_);
-            }
-            if(isInvalid(InvalidationType.SIZE))
-            {
-                this.metaLevelElement.setIconSize(_loc2_);
-                this.ribbon.source = _loc1_?RES_ICONS.MAPS_ICONS_EPICBATTLES_RIBBON_MEDIUM:RES_ICONS.MAPS_ICONS_EPICBATTLES_RIBBON_BIG;
+                this._data = param1;
+                invalidateData();
             }
         }
 
-        override protected function configUI() : void
+        private function cleanMetaLevel() : void
         {
-            super.configUI();
-            this.metaLevelElement.mouseEnabled = this.metaLevelElement.mouseChildren = false;
-            this.ribbon.mouseEnabled = this.ribbon.mouseChildren = false;
-            this.ribbon.addEventListener(Event.CHANGE,this.onImageChangeHandler);
-        }
-
-        public function setEpicData(param1:EpicBattlesWidgetVO) : void
-        {
-            this._epicData = param1;
-            invalidateData();
+            if(this._metaLevelElement)
+            {
+                removeChild(this._metaLevelElement);
+                this._metaLevelElement.dispose();
+                this._metaLevelElement = null;
+            }
         }
 
         private function onImageChangeHandler(param1:Event) : void
         {
-            this.ribbon.x = -this.ribbon.width >> 1;
-            this.metaLevelElement.y = this.ribbon.height >> 1;
+            invalidateLayout();
         }
     }
 }

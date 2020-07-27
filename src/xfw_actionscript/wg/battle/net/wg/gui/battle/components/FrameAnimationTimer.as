@@ -13,13 +13,13 @@ package net.wg.gui.battle.components
     public class FrameAnimationTimer extends BattleUIComponent
     {
 
-        public static const HIDE_TIMER_STEPS:int = 101;
+        private static const HIDE_TIMER_STEPS:int = 101;
 
-        public static const HIDE_TIMER_INTERVAL:int = 30;
-
-        public var isActive:Boolean = false;
+        private static const HIDE_TIMER_INTERVAL:int = 30;
 
         protected var lastStrTime:String = "";
+
+        private var _isActive:Boolean = false;
 
         private var _totalFrames:int = -1;
 
@@ -83,7 +83,7 @@ package net.wg.gui.battle.components
                 this.pauseRadialTimer();
                 this._speed = param1;
                 this.recalculateIntervalTimer();
-                if(this.isActive)
+                if(this._isActive)
                 {
                     this.runInterval();
                 }
@@ -193,39 +193,7 @@ package net.wg.gui.battle.components
             this.getTimerTF().text = this.lastStrTime;
         }
 
-        private function cleanTimerTextValues() : void
-        {
-            if(this._timerTextValues)
-            {
-                this._timerTextValues.fixed = false;
-                this._timerTextValues.splice(0,this._timerTextValues.length);
-                this._timerTextValues = null;
-            }
-        }
-
-        private function cleanProgressValues() : void
-        {
-            if(this._progressValues)
-            {
-                this._progressValues.fixed = false;
-                this._progressValues.splice(0,this._progressValues.length);
-                this._progressValues = null;
-            }
-        }
-
-        private function recalculateIntervalTimer() : void
-        {
-            if(this._totalTime >= 0)
-            {
-                this._intervalTime = Time.MILLISECOND_IN_SECOND * this._totalTime / this._totalFrames / this._speed;
-            }
-            else
-            {
-                this._intervalTime = Values.DEFAULT_INT;
-            }
-        }
-
-        private function recalculateTimeRelatedValues() : void
+        protected function recalculateTimeRelatedValues() : void
         {
             var _loc1_:* = 0;
             var _loc2_:* = NaN;
@@ -279,6 +247,38 @@ package net.wg.gui.battle.components
             }
         }
 
+        private function cleanTimerTextValues() : void
+        {
+            if(this._timerTextValues)
+            {
+                this._timerTextValues.fixed = false;
+                this._timerTextValues.splice(0,this._timerTextValues.length);
+                this._timerTextValues = null;
+            }
+        }
+
+        private function cleanProgressValues() : void
+        {
+            if(this._progressValues)
+            {
+                this._progressValues.fixed = false;
+                this._progressValues.splice(0,this._progressValues.length);
+                this._progressValues = null;
+            }
+        }
+
+        private function recalculateIntervalTimer() : void
+        {
+            if(this._totalTime >= 0)
+            {
+                this._intervalTime = Time.MILLISECOND_IN_SECOND * this._totalTime / this._totalFrames / this._speed;
+            }
+            else
+            {
+                this._intervalTime = Values.DEFAULT_INT;
+            }
+        }
+
         private function updateCurrentTime() : void
         {
             this._currentTimerIndex = this._currentTime * this._totalFrames / this._totalTime;
@@ -288,17 +288,25 @@ package net.wg.gui.battle.components
             }
             if(this._isUpdateProgressValues)
             {
+                if(this._currentTimerIndex >= this._progressValues.length)
+                {
+                    this._currentTimerIndex = this._progressValues.length - 1;
+                }
                 this.setProgressMcPosition(this._progressValues[this._currentTimerIndex]);
             }
             if(this._isUpdateTextValues)
             {
+                if(this._currentTimerIndex >= this._timerTextValues.length)
+                {
+                    this._currentTimerIndex = this._timerTextValues.length - 1;
+                }
                 this.setTimerTFText(this._timerTextValues[this._currentTimerIndex]);
             }
         }
 
         private function runInterval() : void
         {
-            if(this._speed > 0 && this._intervalTime > 0)
+            if(this._intervalTime > 0)
             {
                 this._scheduler.scheduleRepeatableTask(this.onIntervalUpdateHandler,this._intervalTime,this._totalFrames);
             }
@@ -335,6 +343,16 @@ package net.wg.gui.battle.components
                 this._lastFrameID = param1;
                 this.getProgressBarMc().gotoAndStop(this._lastFrameID);
             }
+        }
+
+        public function get isActive() : Boolean
+        {
+            return this._isActive;
+        }
+
+        public function set isActive(param1:Boolean) : void
+        {
+            this._isActive = param1;
         }
     }
 }

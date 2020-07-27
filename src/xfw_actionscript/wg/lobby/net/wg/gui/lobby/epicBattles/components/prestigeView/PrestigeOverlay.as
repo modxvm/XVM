@@ -2,7 +2,7 @@ package net.wg.gui.lobby.epicBattles.components.prestigeView
 {
     import net.wg.infrastructure.base.UIComponentEx;
     import flash.text.TextField;
-    import net.wg.gui.lobby.epicBattles.components.EpicBattlesMetaLevel;
+    import net.wg.gui.lobby.eventProgression.components.metaLevel.EpicBattleMetaLevel;
     import net.wg.gui.lobby.components.AwardItemRendererEx;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.gui.lobby.epicBattles.data.EpicBattlesPrestigeViewVO;
@@ -31,7 +31,7 @@ package net.wg.gui.lobby.epicBattles.components.prestigeView
 
         public var prestigeLevelTF:TextField = null;
 
-        public var prestigeMetaLevel:EpicBattlesMetaLevel = null;
+        public var prestigeMetaLevel:EpicBattleMetaLevel = null;
 
         public var exchangeTF:TextField = null;
 

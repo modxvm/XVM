@@ -8,9 +8,8 @@ package net.wg.gui.lobby
     import net.wg.gui.notification.ServiceMessagePopUp;
     import net.wg.gui.notification.NotificationPopUpViewer;
     import net.wg.gui.lobby.messengerBar.MessengerBar;
-    import net.wg.gui.components.common.ticker.Ticker;
-    import flash.display.Sprite;
     import net.wg.gui.components.common.waiting.Waiting;
+    import flash.display.Sprite;
     import scaleform.clik.motion.Tween;
     import flash.display.Bitmap;
     import net.wg.gui.events.LobbyEvent;
@@ -20,7 +19,6 @@ package net.wg.gui.lobby
     import flash.events.MouseEvent;
     import flash.display.InteractiveObject;
     import scaleform.clik.constants.InvalidationType;
-    import net.wg.data.daapi.ViewRestrictionVO;
     import net.wg.data.Aliases;
     import net.wg.data.constants.Linkages;
     import net.wg.data.constants.generated.APP_CONTAINERS_NAMES;
@@ -65,17 +63,11 @@ package net.wg.gui.lobby
 
         public var messengerBar:MessengerBar;
 
-        public var ticker:Ticker;
-
-        public var tickerBg:Sprite;
-
         public var waiting:Waiting = null;
 
         private var _dragOffsetX:Number = 0;
 
         private var _dragOffsetY:Number = 0;
-
-        private var _tickerHeight:Number = 0;
 
         private var _resetDragParams:Boolean;
 
@@ -97,31 +89,25 @@ package net.wg.gui.lobby
 
         override public function updateStage(param1:Number, param2:Number) : void
         {
-            var _loc6_:IManagedContainer = null;
+            var _loc5_:IManagedContainer = null;
             _originalWidth = param1;
             _originalHeight = param2;
             setSize(param1,param2);
-            this.ticker.y = this._tickerHeight - this.ticker.height >> 1;
-            this.ticker.x = param1 - this.ticker.width >> 1;
-            this.tickerBg.width = _originalWidth;
-            this.vehicleHitArea.y = TOP_SUB_VIEW_POSITION + this._tickerHeight;
             this.vehicleHitArea.width = param1;
             this.vehicleHitArea.height = param2 - this.vehicleHitArea.y;
             this.messengerBar.updateStage(param1,param2);
-            this.header.y = this._tickerHeight;
             var _loc3_:Array = this.getSubContainers();
-            var _loc4_:int = TOP_SUB_VIEW_POSITION + this._tickerHeight;
-            var _loc5_:Number = param2 - _loc4_;
+            var _loc4_:Number = param2 - TOP_SUB_VIEW_POSITION;
             if(this.messengerBar.visible)
             {
-                _loc5_ = _loc5_ - MessengerBar.BAR_VISIBLE_HEIGHT;
+                _loc4_ = _loc4_ - MessengerBar.BAR_VISIBLE_HEIGHT;
             }
-            for each(_loc6_ in _loc3_)
+            for each(_loc5_ in _loc3_)
             {
-                if(_loc6_)
+                if(_loc5_)
                 {
-                    _loc6_.y = _loc4_;
-                    _loc6_.updateStage(param1,_loc5_);
+                    _loc5_.y = TOP_SUB_VIEW_POSITION;
+                    _loc5_.updateStage(param1,_loc4_);
                 }
             }
             this.header.width = param1;
@@ -139,7 +125,6 @@ package net.wg.gui.lobby
             App.stage.addEventListener(LobbyEvent.UNREGISTER_DRAGGING,this.onUnregisterDraggingHandler);
             addEventListener(TeaserEvent.HIDE,this.onTeaserHideHandler,true);
             constraints = new Constraints(this,ConstrainMode.COUNTER_SCALE);
-            this.ticker.isTickerVisible = App.globalVarsMgr.isShowTickerS();
             this.updateStage(App.appWidth,App.appHeight);
             this.messagePopupTemplate.dispose();
             this.messagePopupTemplate.parent.removeChild(this.messagePopupTemplate);
@@ -174,16 +159,7 @@ package net.wg.gui.lobby
         override protected function onPopulate() : void
         {
             super.onPopulate();
-            var _loc1_:Boolean = App.globalVarsMgr.isShowTickerS();
-            if(_loc1_)
-            {
-                this._tickerHeight = this.ticker.tickerHeight;
-                App.utils.viewRestrictions.updateRestrictions(Ticker.ALIAS,new ViewRestrictionVO(ViewRestrictionVO.LAYOUT_TYPE_TOP,this._tickerHeight));
-            }
-            this.tickerBg.height = this._tickerHeight;
-            this.tickerBg.visible = _loc1_;
             registerFlashComponentS(this.header,Aliases.LOBBY_HEADER);
-            registerFlashComponentS(this.ticker,Aliases.TICKER);
             if(!this.notificationPopupViewer)
             {
                 this.notificationPopupViewer = new NotificationPopUpViewer(App.utils.classFactory.getClass(Linkages.SERVICE_MESSAGES_POPUP));
@@ -232,8 +208,6 @@ package net.wg.gui.lobby
             this.header = null;
             this.notificationPopupViewer = null;
             this.messengerBar = null;
-            this.ticker = null;
-            this.tickerBg = null;
             this._teaserOverlay = null;
             ControlsFactory.instance.dispose();
             super.onDispose();
@@ -351,9 +325,10 @@ package net.wg.gui.lobby
 
         private function onTeaserHideHandler(param1:TeaserEvent) : void
         {
+            var _loc2_:Point = null;
             addChildAt(this._teaserOverlay = new Sprite(),getChildIndex(this.header) + 1);
             this._teaser = param1.teaser.drawToBitmap();
-            var _loc2_:Point = new Point(this._teaser.x,this._teaser.y);
+            _loc2_ = new Point(this._teaser.x,this._teaser.y);
             _loc2_ = this._teaserOverlay.globalToLocal(_loc2_);
             this._teaser.x = _loc2_.x;
             this._teaser.y = _loc2_.y;

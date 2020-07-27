@@ -165,8 +165,6 @@ package
 
         public static const PREBATTLE_VEHICLEINVALID_EPICONLY:String = "#system_messages:prebattle/vehicleInvalid/epicOnly";
 
-        public static const PREBATTLE_VEHICLEINVALID_BOBONLY:String = "#system_messages:prebattle/vehicleInvalid/bobOnly";
-
         public static const PREBATTLE_VEHICLEINVALID_NOTSETREADYSTATUS:String = "#system_messages:prebattle/vehicleInvalid/notSetReadyStatus";
 
         public static const PREBATTLE_VEHICLEINVALID_FALLOUTONLY:String = "#system_messages:prebattle/vehicleInvalid/falloutOnly";
@@ -989,6 +987,8 @@ package
 
         public static const VEHICLE_REPAIR_NOT_ENOUGH_CREDITS:String = "#system_messages:vehicle_repair/not_enough_credits";
 
+        public static const VEHICLE_REPAIR_CREDITS_ERROR:String = "#system_messages:vehicle_repair/credits_error";
+
         public static const VEHICLE_REPAIR_SERVER_ERROR:String = "#system_messages:vehicle_repair/server_error";
 
         public static const BUY_TANKMEN_BERTHS_SUCCESS:String = "#system_messages:buy_tankmen_berths/success";
@@ -1257,13 +1257,7 @@ package
 
         public static const LAYOUT_APPLY_SUCCESS_MONEY_SPENT:String = "#system_messages:layout_apply/success_money_spent";
 
-        public static const LAYOUT_APPLY_SERVER_ERROR:String = "#system_messages:layout_apply/server_error";
-
-        public static const LAYOUT_APPLY_WRONG_ARGS_TYPE:String = "#system_messages:layout_apply/WRONG_ARGS_TYPE";
-
-        public static const LAYOUT_APPLY_SHOP_DESYNC:String = "#system_messages:layout_apply/SHOP_DESYNC";
-
-        public static const LAYOUT_APPLY_WRONG_ARG_VALUE:String = "#system_messages:layout_apply/WRONG_ARG_VALUE";
+        public static const LAYOUT_APPLY_ERROR:String = "#system_messages:layout_apply/error";
 
         public static const LAYOUT_APPLY_SHELLS_NO_CREDITS:String = "#system_messages:layout_apply/SHELLS_NO_CREDITS";
 
@@ -1302,6 +1296,36 @@ package
         public static const LAYOUT_APPLY_INVALID_VEHICLE:String = "#system_messages:layout_apply/invalid_vehicle";
 
         public static const LAYOUT_APPLY_VEHICLE_LOCKED:String = "#system_messages:layout_apply/vehicle_locked";
+
+        public static const OPTIONALDEVICES_APPLY_ERROR:String = "#system_messages:optionalDevices_apply/error";
+
+        public static const OPTIONALDEVICES_APPLY_NOT_ENOUGH_MONEY:String = "#system_messages:optionalDevices_apply/not_enough_money";
+
+        public static const OPTIONALDEVICES_APPLY_WALLET_NOT_AVAILABLE:String = "#system_messages:optionalDevices_apply/wallet_not_available";
+
+        public static const OPTIONALDEVICES_REMOVE_ERROR:String = "#system_messages:optionalDevices_remove/error";
+
+        public static const SHELLS_APPLY_SUCCESS_MONEY_SPENT:String = "#system_messages:shells_apply/success_money_spent";
+
+        public static const SHELLS_APPLY_ERROR:String = "#system_messages:shells_apply/error";
+
+        public static const SHELLS_APPLY_NOT_ENOUGH_MONEY:String = "#system_messages:shells_apply/not_enough_money";
+
+        public static const SHELLS_APPLY_WALLET_NOT_AVAILABLE:String = "#system_messages:shells_apply/wallet_not_available";
+
+        public static const CONSUMABLES_APPLY_ERROR:String = "#system_messages:consumables_apply/error";
+
+        public static const CONSUMABLES_APPLY_NOT_ENOUGH_MONEY:String = "#system_messages:consumables_apply/not_enough_money";
+
+        public static const CONSUMABLES_APPLY_WALLET_NOT_AVAILABLE:String = "#system_messages:consumables_apply/wallet_not_available";
+
+        public static const BATTLEBOOSTERS_APPLY_ERROR:String = "#system_messages:battleBoosters_apply/error";
+
+        public static const BATTLEBOOSTERS_APPLY_NOT_ENOUGH_MONEY:String = "#system_messages:battleBoosters_apply/not_enough_money";
+
+        public static const BATTLEBOOSTERS_APPLY_WALLET_NOT_AVAILABLE:String = "#system_messages:battleBoosters_apply/wallet_not_available";
+
+        public static const BATTLEABILITIES_APPLY_ERROR:String = "#system_messages:battleAbilities_apply/error";
 
         public static const REQUEST_ISINCOOLDOWN:String = "#system_messages:request/isInCoolDown";
 
@@ -1694,6 +1718,8 @@ package
         public static const UNIT_ERRORS_SLOT_NOT_CLOSED:String = "#system_messages:unit/errors/SLOT_NOT_CLOSED";
 
         public static const UNIT_WARNINGS_CANT_PICK_LEADER:String = "#system_messages:unit/warnings/CANT_PICK_LEADER";
+
+        public static const UNIT_WARNINGS_EXTERNAL_LEGIONARIES_MATCHING_CANCELED:String = "#system_messages:unit/warnings/EXTERNAL_LEGIONARIES_MATCHING_CANCELED";
 
         public static const UNIT_ERRORS_RESTRICT_LEGIONARIES:String = "#system_messages:unit/errors/RESTRICT_LEGIONARIES";
 
@@ -2131,6 +2157,12 @@ package
 
         public static const RANKED_NOTIFICATION_AVAILABLE:String = "#system_messages:ranked/notification/available";
 
+        public static const ROYALE_NOTIFICATION_PRIMETIME:String = "#system_messages:royale/notification/primeTime";
+
+        public static const ROYALE_NOTIFICATION_CONGRATULATIONS:String = "#system_messages:royale/notification/congratulations";
+
+        public static const ROYALE_NOTIFICATIONS_SINGLELEVEL_TEXT:String = "#system_messages:royale/notifications/singleLevel/text";
+
         public static const TOKENS_NOTIFICATION_MARK_ACQUIRED:String = "#system_messages:tokens/notification/mark_acquired";
 
         public static const RANKED_NOTIFICATION_YEARLB_POSITIVE_TITLE:String = "#system_messages:ranked/notification/yearLB/positive/title";
@@ -2318,12 +2350,6 @@ package
         public static const OFFERS_UNAVAILABLE_ONE:String = "#system_messages:offers/unavailable_one";
 
         public static const OFFERS_UNAVAILABLE_MANY:String = "#system_messages:offers/unavailable_many";
-
-        public static const SPGEVENT_NOTIFICATION_PRIMETIME:String = "#system_messages:spgEvent/notification/primeTime";
-
-        public static const SPGEVENT_NOTIFICATION_NOTSET:String = "#system_messages:spgEvent/notification/notSet";
-
-        public static const SPGEVENT_NOTIFICATION_AVAILABLE:String = "#system_messages:spgEvent/notification/available";
 
         public function SYSTEM_MESSAGES()
         {

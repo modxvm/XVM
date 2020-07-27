@@ -8,6 +8,7 @@ package net.wg.gui.lobby.battleResults.components
     import net.wg.gui.lobby.battleResults.data.PersonalDataVO;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.data.constants.generated.BATTLE_RESULTS_PREMIUM_STATES;
+    import net.wg.gui.lobby.battleResults.event.BattleResultsViewEvent;
 
     public class DetailsBlock extends UIComponentEx
     {
@@ -43,6 +44,8 @@ package net.wg.gui.lobby.battleResults.components
                     if(this.premiumInfoState.visible)
                     {
                         this.premiumInfoState.setData(this._data.premiumInfo);
+                        this._data.addEventListener(BattleResultsViewEvent.BATTLE_QUEUE_ENTERED,this.onBattleQueueEnteredHandler);
+                        this._data.addEventListener(BattleResultsViewEvent.BATTLE_QUEUE_EXITED,this.onBattleQueueExitedHandler);
                     }
                     if(this.compareState.visible)
                     {
@@ -74,8 +77,22 @@ package net.wg.gui.lobby.battleResults.components
             this.premiumInfoState = null;
             this.advertisingState.dispose();
             this.advertisingState = null;
+            if(this._data != null)
+            {
+                this._data.removeEventListener(BattleResultsViewEvent.BATTLE_QUEUE_ENTERED,this.onBattleQueueEnteredHandler);
+                this._data.removeEventListener(BattleResultsViewEvent.BATTLE_QUEUE_EXITED,this.onBattleQueueExitedHandler);
+            }
             this._data = null;
             super.onDispose();
+        }
+
+        private function updateIsInBattleQueue(param1:Boolean) : void
+        {
+            if(this.premiumInfoState.visible)
+            {
+                this._data.premiumInfo.inBattleQueue = param1;
+                this.premiumInfoState.invalidateData();
+            }
         }
 
         public function set data(param1:PersonalDataVO) : void
@@ -88,6 +105,16 @@ package net.wg.gui.lobby.battleResults.components
         {
             this._currentSelectedVehIdx = param1;
             invalidate(InvalidationType.SELECTED_INDEX);
+        }
+
+        private function onBattleQueueEnteredHandler(param1:BattleResultsViewEvent) : void
+        {
+            this.updateIsInBattleQueue(true);
+        }
+
+        private function onBattleQueueExitedHandler(param1:BattleResultsViewEvent) : void
+        {
+            this.updateIsInBattleQueue(false);
         }
     }
 }

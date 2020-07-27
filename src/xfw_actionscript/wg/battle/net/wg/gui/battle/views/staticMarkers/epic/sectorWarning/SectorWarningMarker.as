@@ -8,8 +8,6 @@ package net.wg.gui.battle.views.staticMarkers.epic.sectorWarning
     public class SectorWarningMarker extends Sprite implements IDisposable
     {
 
-        public const markerType:String = "warning";
-
         public var marker:MovieClip = null;
 
         public var txtLabel:TextField = null;

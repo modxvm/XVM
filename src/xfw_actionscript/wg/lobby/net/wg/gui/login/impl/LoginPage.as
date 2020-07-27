@@ -14,7 +14,7 @@ package net.wg.gui.login.impl
     import net.wg.gui.login.ILoginFormView;
     import net.wg.gui.login.impl.vo.SimpleFormVo;
     import net.wg.gui.login.impl.vo.FilledLoginFormVo;
-    import net.wg.gui.login.ISparksManager;
+    import net.wg.gui.components.interfaces.ISparksManager;
     import org.idmedia.as3commons.util.Map;
     import flash.geom.Point;
     import scaleform.clik.motion.Tween;
@@ -56,6 +56,8 @@ package net.wg.gui.login.impl
         private static const VIEW_SIMPLE_FORM:String = "LoginFormUI";
 
         private static const VIEW_FILLED_LOGIN_FORM:String = "FilledLoginFormUI";
+
+        private static const VIEW_CHINA_LOGIN_FORM:String = "ChinaLoginFormUI";
 
         private static const INV_CSIS_LISTENING:String = "invCsisListening";
 
@@ -99,6 +101,10 @@ package net.wg.gui.login.impl
 
         private static const BG_IMAGE_HEIGHT:int = 1200;
 
+        private static const HEALTH_NOTICE_TEXT_ALPHA:Number = 0.6;
+
+        private static const HEALTH_NOTICE_OFFSET:int = 25;
+
         public var bgImage:UILoaderAlt = null;
 
         public var videoPlayer:SimpleVideoPlayer;
@@ -133,6 +139,8 @@ package net.wg.gui.login.impl
 
         public var blackScreen:Sprite = null;
 
+        public var healthNotice:TextField = null;
+
         private var _currentView:ILoginFormView = null;
 
         private var _simpleFormDataVo:SimpleFormVo = null;
@@ -163,6 +171,8 @@ package net.wg.gui.login.impl
 
         private var _isWGC:Boolean = true;
 
+        private var _isChinaForm:Boolean;
+
         private var _tween:Tween;
 
         private var _scheduler:IScheduler = null;
@@ -174,6 +184,7 @@ package net.wg.gui.login.impl
             super();
             this._serversDataProvider = new ListDAAPIDataProvider(ServerVO);
             this._scheduler = App.utils.scheduler;
+            this._isChinaForm = App.globalVarsMgr.isChinaS();
         }
 
         override public function updateStage(param1:Number, param2:Number) : void
@@ -216,6 +227,7 @@ package net.wg.gui.login.impl
             }
             this.copyright.addEventListener(CopyrightEvent.TO_LEGAL,this.onCopyrightToLegalHandler);
             this.copyright.addEventListener(Event.CHANGE,this.onCopyrightChangeHandler);
+            this.healthNotice.alpha = HEALTH_NOTICE_TEXT_ALPHA;
             invalidate(LAYOUT);
             this.soundButton.addEventListener(ButtonEvent.CLICK,this.onSoundButtonClickHandler);
             this.bgModeButton.addEventListener(ButtonEvent.CLICK,this.onSwitchModeButtonClickHandler);
@@ -339,10 +351,11 @@ package net.wg.gui.login.impl
             super.onDispose();
         }
 
-        override protected function showSimpleForm(param1:Boolean, param2:DataProvider) : void
+        override protected function showSimpleForm(param1:Boolean, param2:DataProvider, param3:Boolean) : void
         {
             this._simpleFormDataVo.invalidType = LoginFormView.INV_ALL_DATA;
             this._simpleFormDataVo.isShowSocial = param1 && param2;
+            this._simpleFormDataVo.showRegisterLink = param3;
             if(this._simpleFormDataVo.isShowSocial)
             {
                 this._simpleFormDataVo.socialList = param2;
@@ -361,7 +374,7 @@ package net.wg.gui.login.impl
         {
             this._filledLoginFormDataVo = param1;
             this._filledLoginFormDataVo.invalidType = LoginFormView.INV_ALL_DATA;
-            this.changeView(VIEW_FILLED_LOGIN_FORM);
+            this.changeView(this._isChinaForm?VIEW_CHINA_LOGIN_FORM:VIEW_FILLED_LOGIN_FORM);
         }
 
         override protected function onSetFocus(param1:InteractiveObject) : void
@@ -456,6 +469,13 @@ package net.wg.gui.login.impl
         {
             assertNotNull(param1);
             this.version.text = param1;
+        }
+
+        public function as_showHealthNotice(param1:String) : void
+        {
+            this.healthNotice.text = param1;
+            App.utils.commons.updateTextFieldSize(this.healthNotice);
+            this.updateHealthNotice();
         }
 
         public function as_showLoginVideo(param1:String, param2:Number, param3:Boolean) : void
@@ -615,12 +635,22 @@ package net.wg.gui.login.impl
             invalidateSize();
         }
 
+        private function updateHealthNotice() : void
+        {
+            this.healthNotice.x = App.appWidth - this.healthNotice.width >> 1;
+            this.healthNotice.y = this.copyright.y - this.healthNotice.height - HEALTH_NOTICE_OFFSET;
+        }
+
         private function updateCopyrightPos() : void
         {
             App.utils.commons.updateTextFieldSize(this.copyrightSmall,true,false);
             this.copyrightSmall.y = this.copyright.y = App.appHeight - COPYRIGHT_OFFSET_Y;
             this.copyright.x = this.loginViewStack.x - (this.copyright.getWidth() >> 1);
             this.copyrightSmall.x = this.loginViewStack.x - (this.copyrightSmall.width >> 1);
+            if(this._isChinaForm)
+            {
+                this.updateHealthNotice();
+            }
         }
 
         private function updateLoginWarningPos() : void

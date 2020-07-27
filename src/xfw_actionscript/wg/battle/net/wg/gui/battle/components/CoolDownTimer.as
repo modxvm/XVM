@@ -4,21 +4,22 @@ package net.wg.gui.battle.components
     import flash.display.MovieClip;
     import net.wg.gui.battle.components.interfaces.ICoolDownCompleteHandler;
     import net.wg.utils.IScheduler;
-    import net.wg.gui.battle.views.consumablesPanel.BattleEquipmentButton;
     import net.wg.data.constants.Time;
 
     public class CoolDownTimer extends Object implements IDisposable
     {
 
-        private var _totalFrames:int;
+        private var _reversed:Boolean = false;
 
-        private var _currentFrame:int;
+        private var _totalFrames:uint;
 
-        private var _progressValues:Vector.<int>;
+        private var _currentFrame:uint;
 
-        private var _context:MovieClip;
+        private var _progressValues:Vector.<int> = null;
 
-        private var _coolDownHandler:ICoolDownCompleteHandler;
+        private var _context:MovieClip = null;
+
+        private var _coolDownHandler:ICoolDownCompleteHandler = null;
 
         private var _scheduler:IScheduler;
 
@@ -42,7 +43,6 @@ package net.wg.gui.battle.components
         public function end() : void
         {
             this._scheduler.cancelTask(this.run);
-            this.moveToFrame(BattleEquipmentButton.COOLDOWN_START_FRAME);
         }
 
         public function moveToFrame(param1:int) : void
@@ -52,8 +52,15 @@ package net.wg.gui.battle.components
 
         public function restartFromCurrentFrame(param1:Number) : void
         {
+            var _loc3_:* = NaN;
             this.end();
-            this._scheduler.scheduleRepeatableTask(this.run,param1 / (this._progressValues.length - this._currentFrame) * Time.MILLISECOND_IN_SECOND,int.MAX_VALUE);
+            var _loc2_:int = (this._reversed?this._currentFrame:this._totalFrames - this._currentFrame) + 1;
+            if(_loc2_ > 0)
+            {
+                _loc3_ = param1 * Time.MILLISECOND_IN_SECOND / _loc2_;
+                this._scheduler.scheduleRepeatableTask(this.run,_loc3_,int.MAX_VALUE);
+            }
+            this.run();
         }
 
         public function setFrames(param1:Number, param2:Number) : void
@@ -75,26 +82,45 @@ package net.wg.gui.battle.components
             this.moveToFrame(this._currentFrame);
         }
 
-        public function start(param1:Number, param2:ICoolDownCompleteHandler, param3:int, param4:Number) : void
+        public function start(param1:Number, param2:ICoolDownCompleteHandler, param3:int, param4:Number, param5:Boolean = false, param6:Boolean = false) : void
         {
-            this._currentFrame = param3;
-            this._coolDownHandler = param2;
+            var _loc8_:* = NaN;
             this.end();
+            this._reversed = param5;
+            if(param6)
+            {
+                this._currentFrame = this._reversed?this._totalFrames:0;
+            }
+            else
+            {
+                this._currentFrame = param3;
+            }
+            this._coolDownHandler = param2;
+            var _loc7_:int = (this._reversed?this._currentFrame:this._totalFrames - this._currentFrame) + 1;
+            if(_loc7_ > 0)
+            {
+                _loc8_ = param1 * Time.MILLISECOND_IN_SECOND / _loc7_ / param4;
+                this._scheduler.scheduleRepeatableTask(this.run,_loc8_,int.MAX_VALUE);
+            }
             this.run();
-            this._scheduler.scheduleRepeatableTask(this.run,param1 / (this._totalFrames - this._currentFrame) * Time.MILLISECOND_IN_SECOND * param4,int.MAX_VALUE);
         }
 
         private function run() : void
         {
-            this._currentFrame++;
-            if(this._currentFrame >= this._progressValues.length)
+            if(this._currentFrame < 0 || this._currentFrame >= this._progressValues.length)
             {
                 this.end();
                 this._coolDownHandler.onCoolDownComplete();
+                return;
+            }
+            this.moveToFrame(this._currentFrame);
+            if(this._reversed)
+            {
+                this._currentFrame--;
             }
             else
             {
-                this.moveToFrame(this._currentFrame);
+                this._currentFrame++;
             }
         }
 

@@ -41,27 +41,41 @@ package
 
         public static const COST_MESSAGEVIEWBUY:String = "#bootcamp:cost/messageViewBuy";
 
+        public static const ARENA_NAME:String = "#bootcamp:arena/name";
+
         public static const AWARD_OPTIONS:String = "#bootcamp:award/options";
 
         public static const AWARD_OPTIONS_TITLE:String = "#bootcamp:award/options/title";
 
-        public static const AWARD_OPTIONS_NATION_US:String = "#bootcamp:award/options/nation/us";
+        public static const AWARD_OPTIONS_NATION_USA:String = "#bootcamp:award/options/nation/usa";
 
-        public static const AWARD_OPTIONS_NATION_GE:String = "#bootcamp:award/options/nation/ge";
+        public static const AWARD_OPTIONS_NATION_USA_CN:String = "#bootcamp:award/options/nation/usa_CN";
+
+        public static const AWARD_OPTIONS_NATION_GERMANY:String = "#bootcamp:award/options/nation/germany";
+
+        public static const AWARD_OPTIONS_NATION_GERMANY_CN:String = "#bootcamp:award/options/nation/germany_CN";
 
         public static const AWARD_OPTIONS_NATION_USSR:String = "#bootcamp:award/options/nation/ussr";
 
-        public static const AWARD_OPTIONS_NAME_US:String = "#bootcamp:award/options/name/us";
+        public static const AWARD_OPTIONS_NATION_USSR_CN:String = "#bootcamp:award/options/nation/ussr_CN";
 
-        public static const AWARD_OPTIONS_DESCRIPTION_US:String = "#bootcamp:award/options/description/us";
+        public static const AWARD_OPTIONS_NAME_USA:String = "#bootcamp:award/options/name/usa";
 
-        public static const AWARD_OPTIONS_NAME_GE:String = "#bootcamp:award/options/name/ge";
+        public static const AWARD_OPTIONS_DESCRIPTION_USA:String = "#bootcamp:award/options/description/usa";
 
-        public static const AWARD_OPTIONS_DESCRIPTION_GE:String = "#bootcamp:award/options/description/ge";
+        public static const AWARD_OPTIONS_DESCRIPTION_USA_CN:String = "#bootcamp:award/options/description/usa_CN";
+
+        public static const AWARD_OPTIONS_NAME_GERMANY:String = "#bootcamp:award/options/name/germany";
+
+        public static const AWARD_OPTIONS_DESCRIPTION_GERMANY:String = "#bootcamp:award/options/description/germany";
+
+        public static const AWARD_OPTIONS_DESCRIPTION_GERMANY_CN:String = "#bootcamp:award/options/description/germany_CN";
 
         public static const AWARD_OPTIONS_NAME_USSR:String = "#bootcamp:award/options/name/ussr";
 
         public static const AWARD_OPTIONS_DESCRIPTION_USSR:String = "#bootcamp:award/options/description/ussr";
+
+        public static const AWARD_OPTIONS_DESCRIPTION_USSR_CN:String = "#bootcamp:award/options/description/ussr_CN";
 
         public static const HINT_CAMERA_CONTROLS:String = "#bootcamp:hint/camera/controls";
 
@@ -301,10 +315,6 @@ package
 
         public static const MESSAGE_EQUIPMENT_TEXT:String = "#bootcamp:message/equipment/text";
 
-        public static const MESSAGE_BONUS_EQUIPMENT_LABEL:String = "#bootcamp:message/bonus/equipment/label";
-
-        public static const MESSAGE_BONUS_EQUIPMENT_TEXT:String = "#bootcamp:message/bonus/equipment/text";
-
         public static const MESSAGE_GOLDRECEIVED_LABEL:String = "#bootcamp:message/goldReceived/label";
 
         public static const MESSAGE_GOLD_LABEL:String = "#bootcamp:message/gold/label";
@@ -476,10 +486,6 @@ package
         public static const RESULT_AWARD_EXTINGUISHER_LABEL:String = "#bootcamp:result/award/extinguisher/label";
 
         public static const RESULT_AWARD_EXTINGUISHER_TEXT:String = "#bootcamp:result/award/extinguisher/text";
-
-        public static const RESULT_AWARD_TOOLBOX_LABEL:String = "#bootcamp:result/award/toolbox/label";
-
-        public static const RESULT_AWARD_TOOLBOX_TEXT:String = "#bootcamp:result/award/toolbox/text";
 
         public static const MESSAGE_INTRO_LESSON_II_LABEL:String = "#bootcamp:message/intro/lesson/ii/label";
 

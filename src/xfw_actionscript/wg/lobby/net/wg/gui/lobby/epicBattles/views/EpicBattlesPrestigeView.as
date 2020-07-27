@@ -16,6 +16,7 @@ package net.wg.gui.lobby.epicBattles.views
     import flash.ui.Keyboard;
     import flash.events.KeyboardEvent;
     import scaleform.clik.constants.InvalidationType;
+    import net.wg.data.constants.Linkages;
     import scaleform.clik.events.InputEvent;
 
     public class EpicBattlesPrestigeView extends EpicBattlesPrestigeViewMeta implements IEpicBattlesPrestigeViewMeta
@@ -161,7 +162,7 @@ package net.wg.gui.lobby.epicBattles.views
             {
                 this.prestigeOverlayContent.setData(this._data);
                 this.rewardRibbon.setAwards(this._data.awards);
-                this.rewardRibbon.setLevel(this._data.epicMetaLevelIconData);
+                this.rewardRibbon.setLevel(this._data.epicMetaLevelIconData,Linkages.EPIC_META_LEVEL_UI);
                 this.continueBTN.visible = false;
                 this.rewardTitle.visible = false;
                 this.rewardTitle.setText(this._data.rewardTitleText);

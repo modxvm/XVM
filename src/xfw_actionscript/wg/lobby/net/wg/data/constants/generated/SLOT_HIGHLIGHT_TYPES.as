@@ -45,6 +45,18 @@ package net.wg.data.constants.generated
 
         public static const TOOLTIP_HIGHLIGHT_PADDING_TOP:int = -18;
 
+        public static const TOOLTIP_BIG_OVERLAY_PADDING_LEFT:int = -28;
+
+        public static const TOOLTIP_BIG_OVERLAY_PADDING_TOP:int = -43;
+
+        public static const TOOLTIP_BIG_HIGHLIGHT_PADDING_LEFT:int = 0;
+
+        public static const TOOLTIP_BIG_HIGHLIGHT_PADDING_TOP:int = 0;
+
+        public static const TOOLTIP_BUILD_IN_180_X_135_OVERLAY_PADDING_LEFT:int = 75;
+
+        public static const TOOLTIP_BUILD_IN_180_X_135_OVERLAY_PADDING_TOP:int = -20;
+
         public function SLOT_HIGHLIGHT_TYPES()
         {
             super();

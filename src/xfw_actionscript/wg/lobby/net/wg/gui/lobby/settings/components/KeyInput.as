@@ -101,7 +101,7 @@ package net.wg.gui.lobby.settings.components
             }
             if(this._keys && isInvalid(INVALID_KEYS))
             {
-                this.__keysToUpperCase();
+                this.keysToUpperCase();
             }
             super.draw();
         }
@@ -109,10 +109,10 @@ package net.wg.gui.lobby.settings.components
         public function setupKey(param1:Array, param2:Number) : void
         {
             this._keys = param1;
-            this.__keysToUpperCase();
+            this.keysToUpperCase();
             this._keyString = App.utils.commons.keyToString(param2).keyName;
             var _loc3_:KeyProps = App.utils.commons.keyToString(param2);
-            if(this.__isInKeySet(_loc3_.keyCommand))
+            if(this.isInKeySet(_loc3_.keyCommand))
             {
                 this.key = param2;
             }
@@ -122,7 +122,7 @@ package net.wg.gui.lobby.settings.components
             }
         }
 
-        private function __keysToUpperCase() : void
+        private function keysToUpperCase() : void
         {
             var _loc1_:int = this._keys.length;
             var _loc2_:uint = 0;
@@ -147,7 +147,7 @@ package net.wg.gui.lobby.settings.components
             App.stage.removeEventListener(MouseEvent.MOUSE_DOWN,this.onStageMouseDownHandler);
         }
 
-        private function __processCode(param1:Number) : void
+        private function processCode(param1:Number) : void
         {
             var _loc3_:Point = null;
             var _loc4_:ITooltipProps = null;
@@ -155,15 +155,15 @@ package net.wg.gui.lobby.settings.components
             var _loc6_:String = null;
             if(param1 == Keyboard.ESCAPE)
             {
-                this.__inputClose();
+                this.inputClose();
                 return;
             }
             var _loc2_:KeyProps = App.utils.commons.keyToString(param1);
-            if(this.__isInKeySet(_loc2_.keyCommand))
+            if(this.isInKeySet(_loc2_.keyCommand))
             {
                 this.key = param1;
                 dispatchEvent(new KeyInputEvents(KeyInputEvents.CHANGE,this.key));
-                this.__inputClose();
+                this.inputClose();
             }
             else
             {
@@ -172,16 +172,16 @@ package net.wg.gui.lobby.settings.components
                 _loc5_ = App.utils.locale.makeString(this._alertMessageAlias,{"keyName":_loc2_.keyName});
                 _loc6_ = App.textMgr.getTextStyleById(TEXT_MANAGER_STYLES.ALERT_TEXT,_loc5_);
                 App.toolTipMgr.show(_loc6_,_loc4_);
-                this.__inputClose();
+                this.inputClose();
             }
         }
 
-        private function __isInKeySet(param1:String) : Boolean
+        private function isInKeySet(param1:String) : Boolean
         {
             return this._keys.indexOf(param1,0) > -1;
         }
 
-        private function __inputClose() : void
+        private function inputClose() : void
         {
             selected = false;
             invalidate();
@@ -260,7 +260,7 @@ package net.wg.gui.lobby.settings.components
                 _loc2_ = param1.details;
                 if(_loc2_.value == InputValue.KEY_DOWN && selected)
                 {
-                    this.__processCode(_loc2_.code);
+                    this.processCode(_loc2_.code);
                 }
             }
             else
@@ -369,12 +369,12 @@ package net.wg.gui.lobby.settings.components
 
         private function onPressHandler(param1:ButtonEvent) : void
         {
-            this.__processCode(param1.isKeyboard?param1.controllerIdx:param1.buttonIdx);
+            this.processCode(param1.isKeyboard?param1.controllerIdx:param1.buttonIdx);
         }
 
         private function onReleaseOutsideHandler(param1:ButtonEvent) : void
         {
-            this.__processCode(param1.isKeyboard?param1.controllerIdx:param1.buttonIdx);
+            this.processCode(param1.isKeyboard?param1.controllerIdx:param1.buttonIdx);
         }
     }
 }

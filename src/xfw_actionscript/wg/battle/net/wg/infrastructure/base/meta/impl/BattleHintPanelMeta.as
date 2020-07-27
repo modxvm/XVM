@@ -8,6 +8,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public var onPlaySound:Function;
 
+        public var onHideComplete:Function;
+
         public function BattleHintPanelMeta()
         {
             super();
@@ -17,6 +19,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.onPlaySound,"onPlaySound" + Errors.CANT_NULL);
             this.onPlaySound(param1);
+        }
+
+        public function onHideCompleteS() : void
+        {
+            App.utils.asserter.assertNotNull(this.onHideComplete,"onHideComplete" + Errors.CANT_NULL);
+            this.onHideComplete();
         }
     }
 }

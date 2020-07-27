@@ -40,6 +40,10 @@ package net.wg.gui.battle.components.stats.playersPanel.interfaces
 
         function setFrags(param1:int) : void;
 
+        function setChatCommand(param1:String, param2:uint) : void;
+
+        function triggerChatCommand(param1:String) : void;
+
         function setIsCurrentPlayer(param1:Boolean) : void;
 
         function isIgnoredTmp(param1:Boolean) : void;

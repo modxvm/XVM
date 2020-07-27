@@ -13,6 +13,8 @@ package net.wg.gui.components.tooltips.inblocks.data
 
         public var useHtmlValue:Boolean = true;
 
+        public var highlight:Boolean = false;
+
         public var valueWidth:int = -1;
 
         public var gap:int = -1;

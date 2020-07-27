@@ -2,6 +2,7 @@ package net.wg.gui.lobby.modulesPanel.components
 {
     import net.wg.gui.lobby.modulesPanel.interfaces.IModuleSlot;
     import flash.display.MovieClip;
+    import net.wg.gui.components.advanced.ModuleTypesUIWithFill;
     import scaleform.clik.constants.InvalidationType;
 
     public class ModuleSlot extends DeviceSlot implements IModuleSlot
@@ -11,7 +12,7 @@ package net.wg.gui.lobby.modulesPanel.components
 
         public var disabledBg:MovieClip = null;
 
-        public var icon:MovieClip = null;
+        public var icon:ModuleTypesUIWithFill = null;
 
         public function ModuleSlot()
         {
@@ -27,6 +28,7 @@ package net.wg.gui.lobby.modulesPanel.components
 
         override protected function onDispose() : void
         {
+            this.icon.dispose();
             this.icon = null;
             this.levelMC = null;
             this.disabledBg = null;
@@ -39,7 +41,7 @@ package net.wg.gui.lobby.modulesPanel.components
             if(slotData && isInvalid(InvalidationType.DATA))
             {
                 this.levelMC.gotoAndStop(slotData.level);
-                this.icon.gotoAndStop(slotData.slotType);
+                this.icon.setModuleTypeIcon(slotData.slotType);
                 invalidateState();
             }
             if(this.disabledBg && isInvalid(InvalidationType.STATE))

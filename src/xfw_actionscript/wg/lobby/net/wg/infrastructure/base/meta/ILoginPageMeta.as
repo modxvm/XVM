@@ -77,7 +77,7 @@ package net.wg.infrastructure.base.meta
 
         function as_switchToAutoAndSubmit(param1:String) : void;
 
-        function as_showSimpleForm(param1:Boolean, param2:Array) : void;
+        function as_showSimpleForm(param1:Boolean, param2:Array, param3:Boolean) : void;
 
         function as_showFilledLoginForm(param1:Object) : void;
 
@@ -86,5 +86,7 @@ package net.wg.infrastructure.base.meta
         function as_getServersDP() : Object;
 
         function as_setSelectedServerIndex(param1:int) : void;
+
+        function as_showHealthNotice(param1:String) : void;
     }
 }

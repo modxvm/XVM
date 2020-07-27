@@ -58,7 +58,7 @@ package net.wg.mock
         {
         }
 
-        public function show(param1:String, param2:DisplayObject, param3:Object = null) : void
+        public function show(param1:String, param2:DisplayObject = null, param3:Object = null) : void
         {
         }
 
@@ -73,6 +73,10 @@ package net.wg.mock
         }
 
         public function as_forcePopover(param1:String, param2:Object) : void
+        {
+        }
+
+        public function as_show(param1:String, param2:Object) : void
         {
         }
     }

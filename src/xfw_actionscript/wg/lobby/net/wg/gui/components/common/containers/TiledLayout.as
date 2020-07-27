@@ -97,5 +97,11 @@ package net.wg.gui.components.common.containers
         {
             return this._columns;
         }
+
+        public function set columns(param1:uint) : void
+        {
+            this._columns = param1;
+            this.invokeLayout();
+        }
     }
 }

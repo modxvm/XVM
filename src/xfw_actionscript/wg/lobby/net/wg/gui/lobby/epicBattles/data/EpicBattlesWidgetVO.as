@@ -2,6 +2,7 @@ package net.wg.gui.lobby.epicBattles.data
 {
     import net.wg.data.daapi.base.DAAPIDataClass;
     import net.wg.gui.lobby.hangar.data.AlertMessageBlockVO;
+    import net.wg.gui.lobby.eventProgression.components.metaLevel.data.MetaLevelVO;
     import net.wg.gui.lobby.hangar.data.HeaderQuestGroupVO;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import net.wg.data.constants.Errors;
@@ -17,9 +18,11 @@ package net.wg.gui.lobby.epicBattles.data
 
         public var calendarStatus:AlertMessageBlockVO = null;
 
-        public var epicMetaLevelIconData:EpicMetaLevelIconVO = null;
+        public var epicMetaLevelIconData:MetaLevelVO = null;
 
         public var showAlert:Boolean = false;
+
+        public var eventMode:String = "front_line_mode";
 
         private var _questsGroups:Vector.<HeaderQuestGroupVO> = null;
 
@@ -66,7 +69,7 @@ package net.wg.gui.lobby.epicBattles.data
             }
             if(param1 == EPIC_META_LEVEL_ICON_VO)
             {
-                this.epicMetaLevelIconData = new EpicMetaLevelIconVO(param2);
+                this.epicMetaLevelIconData = new MetaLevelVO(param2);
                 return false;
             }
             if(param1 == QUESTS_FIELD)

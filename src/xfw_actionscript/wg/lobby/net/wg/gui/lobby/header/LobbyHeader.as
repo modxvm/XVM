@@ -133,7 +133,7 @@ package net.wg.gui.lobby.header
 
         override public function getRectangles() : Vector.<Rectangle>
         {
-            if(!visible || !stage)
+            if(!visible)
             {
                 return null;
             }
@@ -515,6 +515,11 @@ package net.wg.gui.lobby.header
             _loc6_.isEvent = param4;
             _loc6_.icon = param5;
             this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_SQUAD);
+        }
+
+        public function as_setServerName(param1:String) : void
+        {
+            this.onlineCounter.setServerName(param1);
         }
 
         public function getTabRenderer(param1:String) : HeaderButton

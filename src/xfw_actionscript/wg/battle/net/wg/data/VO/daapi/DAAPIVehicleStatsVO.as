@@ -12,6 +12,10 @@ package net.wg.data.VO.daapi
 
         public var frags:int = -1;
 
+        public var chatCommand:String = "";
+
+        public var chatCommandFlags:uint = 1.0;
+
         public function DAAPIVehicleStatsVO(param1:Object = null)
         {
             super(param1);

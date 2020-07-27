@@ -1,45 +1,40 @@
 package net.wg.gui.battle.views.vehicleMarkers
 {
-    import flash.display.Sprite;
+    import net.wg.gui.battle.views.actionMarkers.BaseActionMarker;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import flash.display.MovieClip;
     import scaleform.clik.motion.Tween;
+    import flash.geom.Point;
     import net.wg.data.constants.Values;
+    import net.wg.gui.battle.views.actionMarkers.ActionMarkerStates;
     import flash.utils.getDefinitionByName;
-    import net.wg.data.constants.Errors;
 
-    public class VehicleActionMarker extends Sprite implements IDisposable
+    public class VehicleActionMarker extends BaseActionMarker implements IDisposable
     {
 
         private static const BASE_HEIGHT:int = 20;
 
         private static const HIDE_DURATION:int = 1000;
 
-        private static const ALLY_ACTION_RENDERER_MAP:Object = {
+        private static const ACTION_RENDERER_MAP:Object = {
             "reloading_gun":VehicleMarkersLinkages.ACTION_RELOADING,
-            "reloading_gunSPG":VehicleMarkersLinkages.ACTION_RELOADING,
             "help_me":VehicleMarkersLinkages.ACTION_HELP_ME,
-            "help_meSPG":VehicleMarkersLinkages.ACTION_HELP_ME,
-            "follow_me":VehicleMarkersLinkages.ACTION_FOLLOW_ME,
-            "follow_meSPG":VehicleMarkersLinkages.ACTION_FOLLOW_ME,
             "attackSender":VehicleMarkersLinkages.ACTION_ATTACK_SENDER,
-            "attackSenderSPG":VehicleMarkersLinkages.ACTION_ATTACK_SENDER,
-            "negative":VehicleMarkersLinkages.ACTION_NEGATIVE,
-            "negativeSPG":VehicleMarkersLinkages.ACTION_NEGATIVE,
             "positive":VehicleMarkersLinkages.ACTION_POSITIVE,
-            "positiveSPG":VehicleMarkersLinkages.ACTION_POSITIVE,
-            "stop":VehicleMarkersLinkages.ACTION_STOP,
-            "stopSPG":VehicleMarkersLinkages.ACTION_STOP,
+            "thanks":VehicleMarkersLinkages.ACTION_THANKS,
             "help_me_ex":VehicleMarkersLinkages.ACTION_HELP_ME_EX,
-            "help_me_exSPG":VehicleMarkersLinkages.ACTION_HELP_ME_EX,
             "turn_back":VehicleMarkersLinkages.ACTION_TURN_BACK,
-            "turn_backSPG":VehicleMarkersLinkages.ACTION_TURN_BACK
+            "supportingAlly":VehicleMarkersLinkages.ACTION_SUPPORTING_ALLY,
+            "supportingYou":VehicleMarkersLinkages.ACTION_SUPPORTING_YOU,
+            "attack":VehicleMarkersLinkages.ACTION_ATTACK,
+            "attackAlternative":VehicleMarkersLinkages.ACTION_ATTACK_ALTERNATIVE,
+            "supportingAllyAlternative":VehicleMarkersLinkages.ACTION_SUPPORTING_ALLY_ALTERNATIVE,
+            "goingToAlternative":VehicleMarkersLinkages.ACTION_GOING_TO,
+            "attackBaseAlternative":VehicleMarkersLinkages.ACTION_ATTACK_BASE,
+            "defendBaseAlternative":VehicleMarkersLinkages.ACTION_DEFEND_BASE
         };
 
-        private static const ENEMY_ACTION_RENDERER_MAP:Object = {
-            "attack":VehicleMarkersLinkages.ACTION_ATTACK,
-            "attackSPG":VehicleMarkersLinkages.ACTION_ATTACK_SPG
-        };
+        private static const ACTION_ICON_STATE:String = "actionIconState";
 
         private var _isVisible:Boolean = false;
 
@@ -49,12 +44,41 @@ package net.wg.gui.battle.views.vehicleMarkers
 
         private var _entityName:String = "enemy";
 
+        private var _actionJustChanged:Boolean = false;
+
+        private var _actionIconStateMarker:ActionIconStateMarker = null;
+
+        private var _count:int = 0;
+
+        public const ARROW_POSITION:Point = new Point(0,0);
+
+        public const REPLY_POSITION:Point = new Point(20,-1);
+
+        public const DISTANCE_POSITION:Point = new Point(-43,15);
+
+        private var _lastState:int = -1;
+
         public function VehicleActionMarker()
         {
             super();
         }
 
-        public final function dispose() : void
+        override protected function get getReplyPosition() : Point
+        {
+            return this.REPLY_POSITION;
+        }
+
+        override protected function get getArrowPosition() : Point
+        {
+            return this.ARROW_POSITION;
+        }
+
+        override protected function get getDistanceToMarkerPosition() : Point
+        {
+            return this.DISTANCE_POSITION;
+        }
+
+        override protected function onDispose() : void
         {
             this.removeActionRenderer();
             if(this._hideTween)
@@ -63,35 +87,82 @@ package net.wg.gui.battle.views.vehicleMarkers
             }
             this._hideTween = null;
             this._currentRenderer = null;
+            if(this._actionIconStateMarker != null)
+            {
+                this._actionIconStateMarker.dispose();
+            }
+            this._actionIconStateMarker = null;
+            super.onDispose();
         }
 
-        public function showAction(param1:String) : void
+        public function triggerClickAnimation() : void
+        {
+            if(this._actionIconStateMarker != null)
+            {
+                this._actionIconStateMarker.playClickAnimation();
+            }
+        }
+
+        public function showAction(param1:String, param2:Boolean = false) : void
         {
             if(param1 == Values.EMPTY_STR)
             {
                 return;
             }
-            var _loc2_:String = Values.EMPTY_STR;
-            if(this._entityName == VehicleMarkersConstants.ENTITY_NAME_ENEMY)
-            {
-                _loc2_ = ENEMY_ACTION_RENDERER_MAP[param1];
-            }
-            else
-            {
-                _loc2_ = ALLY_ACTION_RENDERER_MAP[param1];
-            }
-            if(_loc2_ != Values.EMPTY_STR)
+            var _loc3_:String = ACTION_RENDERER_MAP[param1];
+            if(_loc3_ != Values.EMPTY_STR)
             {
                 this._isVisible = true;
-                this._currentRenderer = this.createActionRenderer(_loc2_);
+                this._currentRenderer = this.createActionRenderer(_loc3_);
+            }
+            this._actionIconStateMarker = ActionIconStateMarker(this._currentRenderer.getChildByName(ACTION_ICON_STATE));
+            this._actionJustChanged = true;
+            if(param2 && this._lastState != -1)
+            {
+                this.updateActionRenderer(this._lastState);
             }
         }
 
-        public function stopAction() : void
+        public function updateActionRenderer(param1:int) : void
+        {
+            if(!this._currentRenderer)
+            {
+                return;
+            }
+            if(this._actionIconStateMarker != null)
+            {
+                if(this._actionJustChanged && param1 != ActionMarkerStates.REPLIED_ALLY && param1 != ActionMarkerStates.REPLIED_ME && this._count == 0)
+                {
+                    this._actionIconStateMarker.playBlinkAnimation(true);
+                }
+                else if(this._count >= 1)
+                {
+                    this._actionIconStateMarker.playBlinkAnimation(false);
+                }
+                this._actionJustChanged = false;
+                this._actionIconStateMarker.gotoAndStop(ActionMarkerStates.STATE_INT_TO_STRING[param1]);
+                this._lastState = param1;
+            }
+        }
+
+        override public function setReplyCount(param1:int) : void
+        {
+            this._count = param1;
+            super.setReplyCount(param1);
+        }
+
+        public function stopAction(param1:Boolean = true) : void
         {
             if(this._currentRenderer)
             {
-                this._hideTween = new Tween(HIDE_DURATION,this._currentRenderer,{"alpha":0.0});
+                if(param1)
+                {
+                    this._hideTween = new Tween(HIDE_DURATION,this._currentRenderer,{"alpha":0.0});
+                }
+                else
+                {
+                    this._currentRenderer.alpha = 0.0;
+                }
                 this._isVisible = false;
             }
         }
@@ -123,7 +194,6 @@ package net.wg.gui.battle.views.vehicleMarkers
             }
             catch(error:ReferenceError)
             {
-                DebugUtils.LOG_ERROR(Errors.BAD_LINKAGE + rendererLinkage);
             }
             return renderer;
         }

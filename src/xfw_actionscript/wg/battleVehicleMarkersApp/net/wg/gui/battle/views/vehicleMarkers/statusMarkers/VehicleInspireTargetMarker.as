@@ -3,16 +3,16 @@ package net.wg.gui.battle.views.vehicleMarkers.statusMarkers
     public class VehicleInspireTargetMarker extends VehicleAnimatedStatusBaseMarker
     {
 
-        public var glowContainer:GlowMarkerContainer = null;
+        public var glowContainer:MarkerAssetContainer = null;
 
-        public var arrowContainer:ArrowMarkerContainer = null;
+        public var arrowContainer:MarkerAssetContainer = null;
 
         public function VehicleInspireTargetMarker()
         {
             super();
         }
 
-        override public function onDispose() : void
+        override protected function onDispose() : void
         {
             this.glowContainer.dispose();
             this.glowContainer = null;

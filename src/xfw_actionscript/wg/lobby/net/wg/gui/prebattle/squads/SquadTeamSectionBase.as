@@ -19,9 +19,9 @@ package net.wg.gui.prebattle.squads
 
         override protected function configUI() : void
         {
-            super.configUI();
             btnFight.tooltip = TOOLTIPS.SQUADWINDOW_BUTTONS_BTNFIGHT;
             btnNotReady.tooltip = TOOLTIPS.SQUADWINDOW_BUTTONS_BTNNOTREADY;
+            super.configUI();
         }
 
         override protected function onDispose() : void

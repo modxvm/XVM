@@ -2,11 +2,14 @@ package net.wg.gui.battle.components.stats.playersPanel.list
 {
     import net.wg.gui.battle.components.BattleUIComponent;
     import net.wg.gui.battle.components.stats.playersPanel.interfaces.IPlayersPanelListItem;
+    import flash.utils.Dictionary;
+    import net.wg.data.constants.generated.PLAYERS_PANEL_STATE;
     import flash.text.TextField;
     import net.wg.gui.components.controls.BadgeComponent;
     import net.wg.gui.battle.components.BattleAtlasSprite;
     import net.wg.gui.battle.views.stats.SpeakAnimation;
     import flash.display.Sprite;
+    import net.wg.gui.battle.components.stats.playersPanel.ChatCommandItemComponent;
     import net.wg.gui.components.controls.VO.BadgeVisualVO;
     import net.wg.infrastructure.interfaces.IUserProps;
     import net.wg.utils.ICommons;
@@ -17,7 +20,6 @@ package net.wg.gui.battle.components.stats.playersPanel.list
     import net.wg.data.constants.Values;
     import net.wg.data.constants.InvalidationType;
     import net.wg.gui.battle.random.views.stats.constants.VehicleActions;
-    import net.wg.data.constants.generated.PLAYERS_PANEL_STATE;
     import net.wg.gui.battle.views.stats.constants.PlayerStatusSchemeName;
     import net.wg.infrastructure.interfaces.IColorScheme;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.list.PlayersPanelDynamicSquad;
@@ -44,6 +46,37 @@ package net.wg.gui.battle.components.stats.playersPanel.list
         private static const BADGE_ALPHA:int = 1;
 
         private static const BADGE_ALPHA_NOT_ACTIVE:Number = 0.7;
+
+        private static const CHAT_COMMAND_HIGHLIGHT_OFFSET:int = 36;
+
+        private static const CHAT_COMMAND_OFFSET_FROM_VEHICLE_TF:int = 88;
+
+        private static const CHAT_COMMAND_RIGHT_SIDE_OFFSET_FROM_HIT:int = -370;
+
+        private static var CHAT_COMMAND_LEFT_STATE_OFFSETS:Dictionary = new Dictionary();
+
+        private static var CHAT_COMMAND_RIGHT_STATE_OFFSETS:Dictionary = new Dictionary();
+
+        {
+            CHAT_COMMAND_LEFT_STATE_OFFSETS[PLAYERS_PANEL_STATE.HIDDEN] = 0;
+            CHAT_COMMAND_LEFT_STATE_OFFSETS[PLAYERS_PANEL_STATE.SHORT] = 174;
+            CHAT_COMMAND_LEFT_STATE_OFFSETS[PLAYERS_PANEL_STATE.MEDIUM] = 219;
+            CHAT_COMMAND_LEFT_STATE_OFFSETS[PLAYERS_PANEL_STATE.LONG] = 244;
+            CHAT_COMMAND_LEFT_STATE_OFFSETS[PLAYERS_PANEL_STATE.FULL] = 324;
+            CHAT_COMMAND_LEFT_STATE_OFFSETS[PLAYERS_PANEL_STATE.SHORT_NO_BADGES] = 150;
+            CHAT_COMMAND_LEFT_STATE_OFFSETS[PLAYERS_PANEL_STATE.MEDIUM_NO_BADGES] = 195;
+            CHAT_COMMAND_LEFT_STATE_OFFSETS[PLAYERS_PANEL_STATE.LONG_NO_BADGES] = 220;
+            CHAT_COMMAND_LEFT_STATE_OFFSETS[PLAYERS_PANEL_STATE.FULL_NO_BADGES] = 300;
+            CHAT_COMMAND_RIGHT_STATE_OFFSETS[PLAYERS_PANEL_STATE.HIDDEN] = 0;
+            CHAT_COMMAND_RIGHT_STATE_OFFSETS[PLAYERS_PANEL_STATE.SHORT] = -107;
+            CHAT_COMMAND_RIGHT_STATE_OFFSETS[PLAYERS_PANEL_STATE.MEDIUM] = -158;
+            CHAT_COMMAND_RIGHT_STATE_OFFSETS[PLAYERS_PANEL_STATE.LONG] = -184;
+            CHAT_COMMAND_RIGHT_STATE_OFFSETS[PLAYERS_PANEL_STATE.FULL] = -309;
+            CHAT_COMMAND_RIGHT_STATE_OFFSETS[PLAYERS_PANEL_STATE.SHORT_NO_BADGES] = -500;
+            CHAT_COMMAND_RIGHT_STATE_OFFSETS[PLAYERS_PANEL_STATE.MEDIUM_NO_BADGES] = -400;
+            CHAT_COMMAND_RIGHT_STATE_OFFSETS[PLAYERS_PANEL_STATE.LONG_NO_BADGES] = -600;
+            CHAT_COMMAND_RIGHT_STATE_OFFSETS[PLAYERS_PANEL_STATE.FULL_NO_BADGES] = -450;
+        }
 
         public var fragsTF:TextField = null;
 
@@ -76,6 +109,8 @@ package net.wg.gui.battle.components.stats.playersPanel.list
         public var hit:Sprite = null;
 
         public var disableCommunication:BattleAtlasSprite = null;
+
+        public var chatCommandState:ChatCommandItemComponent = null;
 
         protected var maxPlayerNameWidth:uint = 0;
 
@@ -139,6 +174,8 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             this.disableCommunication = null;
             this._userProps = null;
             this.fragsTF = null;
+            this.chatCommandState.dispose();
+            this.chatCommandState = null;
             this.playerNameFullTF = null;
             this.playerNameCutTF = null;
             this.vehicleTF = null;
@@ -175,6 +212,7 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             this.speakAnimation.mouseChildren = false;
             this.actionMarker.mouseEnabled = false;
             this.badge.mouseEnabled = this.badge.mouseChildren = false;
+            this.chatCommandState.mouseEnabled = false;
             TextFieldEx.setNoTranslate(this.fragsTF,true);
             TextFieldEx.setNoTranslate(this.playerNameFullTF,true);
             TextFieldEx.setNoTranslate(this.playerNameCutTF,true);
@@ -306,6 +344,16 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             }
             this._frags = param1;
             invalidate(PlayersPanelInvalidationType.FRAGS);
+        }
+
+        public function setChatCommand(param1:String, param2:uint) : void
+        {
+            this.chatCommandState.setActiveChatCommand(param1,param2);
+        }
+
+        public function triggerChatCommand(param1:String) : void
+        {
+            this.chatCommandState.playCommandAnimation(param1);
         }
 
         public function setIsAlive(param1:Boolean) : void
@@ -502,6 +550,7 @@ package net.wg.gui.battle.components.stats.playersPanel.list
         private function updatePositions() : void
         {
             var _loc1_:* = 0;
+            var _loc2_:* = 0;
             if(this._isRightAligned)
             {
                 switch(this._state)
@@ -614,6 +663,11 @@ package net.wg.gui.battle.components.stats.playersPanel.list
                             this.fragsTF.x = VEHICLE_TF_RIGHT_X;
                         }
                         break;
+                }
+                this.chatCommandState.iconOffset(CHAT_COMMAND_RIGHT_SIDE_OFFSET_FROM_HIT);
+                if(this.chatCommandState.x != 0)
+                {
+                    this.chatCommandState.x = 0;
                 }
                 this.updatePositionsRight();
             }
@@ -738,6 +792,19 @@ package net.wg.gui.battle.components.stats.playersPanel.list
                         }
                         break;
                 }
+                _loc2_ = this.fragsTF.x - CHAT_COMMAND_HIGHLIGHT_OFFSET ^ 0;
+                if(this._state == PLAYERS_PANEL_STATE.FULL || this._state == PLAYERS_PANEL_STATE.FULL_NO_BADGES)
+                {
+                    this.chatCommandState.iconOffset(this.vehicleTF.x - _loc2_ + this.vehicleTF.width + CHAT_COMMAND_OFFSET_FROM_VEHICLE_TF);
+                }
+                else
+                {
+                    this.chatCommandState.iconOffset(CHAT_COMMAND_LEFT_STATE_OFFSETS[this._state]);
+                }
+                if(this.chatCommandState.x != _loc2_)
+                {
+                    this.chatCommandState.x = _loc2_;
+                }
                 this.updatePositionsLeft();
             }
         }
@@ -855,6 +922,7 @@ package net.wg.gui.battle.components.stats.playersPanel.list
                     this.vehicleTF.textColor = _loc3_;
                 }
             }
+            this.chatCommandState.updateColors(App.colorSchemeMgr.getIsColorBlindS());
         }
 
         public function get holderItemID() : uint

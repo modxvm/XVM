@@ -15,13 +15,11 @@ package net.wg.gui.battle.views.consumablesPanel
     import net.wg.gui.battle.views.consumablesPanel.constants.COLOR_STATES;
     import net.wg.data.constants.InteractiveStates;
     import net.wg.data.constants.generated.BATTLE_ITEM_STATES;
-    import net.wg.data.constants.generated.CONSUMABLES_PANEL_SETTINGS;
+    import net.wg.data.constants.generated.ANIMATION_TYPES;
     import net.wg.data.constants.Values;
 
     public class BattleEquipmentButton extends BattleToolTipButton implements IConsumablesButton, ICoolDownCompleteHandler
     {
-
-        public static const COOLDOWN_START_FRAME:int = 0;
 
         protected static const KEY_VALIDATION:uint = InvalidationType.SYSTEM_FLAGS_BORDER << 2;
 
@@ -31,15 +29,25 @@ package net.wg.gui.battle.views.consumablesPanel
 
         private static const COOLDOWN_COUNTER_BG_HIDE:String = "hide";
 
-        private static const COOLDOWN_END_FRAME:int = 51;
+        private static const COOLDOWN_START_FRAME:int = 1;
 
-        private static const DEFAULT_TIME_COEF:Number = 1;
+        private static const COOLDOWN_END_FRAME:int = 49;
 
-        private static const INTERVAL_SIZE:Number = 1000;
+        private static const DEFAULT_TIME_COEF:int = 1;
+
+        private static const INTERVAL_SIZE:int = 1000;
+
+        private static const SMALL_INTERVAL_SIZE:int = 100;
+
+        private static const INTERVALS_RATIO:int = INTERVAL_SIZE / SMALL_INTERVAL_SIZE;
 
         private static const COOLDOWN_TEXT_COLOR:uint = 16768409;
 
         private static const NORMAL_TEXT_COLOR:uint = 11854471;
+
+        private static const GREEN_GLOW_MC_SHOW:String = "show";
+
+        private static const GREEN_GLOW_MC_HIDE:String = "hide";
 
         public var iconLoader:UILoaderAlt = null;
 
@@ -53,9 +61,13 @@ package net.wg.gui.battle.views.consumablesPanel
 
         public var counterBg:MovieClip = null;
 
-        public var cooldown:MovieClip = null;
+        public var cooldownMc:MovieClip = null;
 
-        public var isReplay:Boolean;
+        public var bigCooldownTimerTf:TextField = null;
+
+        public var greenGlowMc:MovieClip = null;
+
+        private var _isReplay:Boolean;
 
         private var _lockColorTransform:Boolean = false;
 
@@ -85,11 +97,25 @@ package net.wg.gui.battle.views.consumablesPanel
 
         private var _scheduler:IScheduler;
 
+        private var _prevAnimation:int = 0;
+
+        private var _currentPercent:Number = 0;
+
+        private var _currReloadingInPercent:Number = 0;
+
+        private var _curAnimReversed:Boolean = false;
+
+        private var _useBigTimer:Boolean = false;
+
+        private var _isFillPartially:Boolean = false;
+
         public function BattleEquipmentButton()
         {
             this._scheduler = App.utils.scheduler;
             super();
-            this._coolDownTimer = new CoolDownTimer(this.cooldown);
+            this.greenGlowMc.visible = false;
+            this.cooldownMc.visible = false;
+            this._coolDownTimer = new CoolDownTimer(this.cooldownMc);
             this._coolDownTimer.setFrames(COOLDOWN_START_FRAME,COOLDOWN_END_FRAME);
             isAllowedToShowToolTipOnDisabledState = true;
             hideToolTipOnClickActions = false;
@@ -104,19 +130,24 @@ package net.wg.gui.battle.views.consumablesPanel
             this.consumableBackground.visible = false;
         }
 
+        protected function setBindKeyText() : void
+        {
+            if(this._bindSfKeyCode == KeyProps.KEY_NONE)
+            {
+                this.glow.setBindKeyText(App.utils.locale.makeString(READABLE_KEY_NAMES.KEY_NONE_ALT));
+            }
+            else
+            {
+                this.glow.setBindKeyText(App.utils.commons.keyToString(this._bindSfKeyCode).keyName);
+            }
+        }
+
         override protected function draw() : void
         {
             super.draw();
             if(isInvalid(KEY_VALIDATION))
             {
-                if(this._bindSfKeyCode == KeyProps.KEY_NONE)
-                {
-                    this.glow.setBindKeyText(App.utils.locale.makeString(READABLE_KEY_NAMES.KEY_NONE_ALT));
-                }
-                else
-                {
-                    this.glow.setBindKeyText(App.utils.commons.keyToString(this._bindSfKeyCode).keyName);
-                }
+                this.setBindKeyText();
             }
         }
 
@@ -126,17 +157,19 @@ package net.wg.gui.battle.views.consumablesPanel
             this._scheduler = null;
             this.iconLoader.dispose();
             this.iconLoader = null;
-            this.cooldownTimerTf = null;
             this.glow.dispose();
             this.glow = null;
-            this._delayColorTransform = null;
-            this._consumablesVO = null;
+            this.cooldownTimerTf = null;
+            this.bigCooldownTimerTf = null;
             this.counterBg = null;
+            this.cooldownMc = null;
+            this.greenGlowMc = null;
+            this.consumableBackground = null;
+            this.hit = null;
+            this._consumablesVO = null;
             this._coolDownTimer.dispose();
             this._coolDownTimer = null;
-            this.consumableBackground = null;
-            this.cooldown = null;
-            this.hit = null;
+            this._delayColorTransform = null;
             super.onDispose();
         }
 
@@ -157,7 +190,7 @@ package net.wg.gui.battle.views.consumablesPanel
         public function clearCoolDownTime() : void
         {
             this._isActivated = false;
-            this._coolDownTimer.end();
+            this.endCooldownTimer();
             this._isReloading = false;
             this.state = InteractiveStates.UP;
             if(this._baseTime > 0)
@@ -199,8 +232,12 @@ package net.wg.gui.battle.views.consumablesPanel
         {
         }
 
-        public function setActivated() : void
+        public function set activated(param1:Boolean) : void
         {
+            if(!param1)
+            {
+                return;
+            }
             this.state = BATTLE_ITEM_STATES.RELOADED;
             this._isActivated = true;
         }
@@ -220,36 +257,122 @@ package net.wg.gui.battle.views.consumablesPanel
 
         public function setCoolDownPosAsPercent(param1:Number) : void
         {
+            var _loc2_:* = NaN;
+            this._currentPercent = param1;
             if(param1 < 100)
             {
-                this._coolDownTimer.setPositionAsPercent(param1);
+                _loc2_ = this._curAnimReversed?100 - this._currentPercent:this._currentPercent;
+                if(this._isFillPartially)
+                {
+                    _loc2_ = _loc2_ - 100 * this._currReloadingInPercent;
+                }
+                this._coolDownTimer.setPositionAsPercent(_loc2_);
             }
-            else if(!this.isReplay)
+            else if(!this._isReplay)
             {
-                this.setCoolDownTime(0,this._baseTime,0,false);
+                this.setCoolDownTime(0,this._baseTime,0);
             }
         }
 
-        public function setCoolDownTime(param1:Number, param2:Number, param3:Number, param4:Boolean) : void
+        public function setCoolDownTime(param1:Number, param2:Number, param3:Number, param4:int = 1) : void
         {
+            var _loc5_:* = 0;
             this._isActivated = false;
             this._isPermanent = false;
             this._baseTime = param2;
+            this.greenGlowMc.visible = false;
+            this.bigCooldownTimerTf.visible = false;
+            this.endCooldownTimer();
+            this.enableMouse();
+            App.utils.scheduler.cancelTask(this.intervalRun);
             if(param1 > 0)
             {
                 this._firstShow = false;
                 this._isReloading = true;
                 this.setColorTransform(COLOR_STATES.DARK_COLOR_TRANSFORM);
                 this._lockColorTransform = true;
-                this.cooldownTimerTf.textColor = COOLDOWN_TEXT_COLOR;
                 this._delayColorTransform = COLOR_STATES.DARK_COLOR_TRANSFORM;
-                this.counterBg.gotoAndStop(COOLDOWN_COUNTER_BG_RED);
-                if(!this.isReplay)
+                this.cooldownMc.visible = false;
+                this._curAnimReversed = false;
+                if((param4 & ANIMATION_TYPES.MOVE_GREEN_BAR_DOWN) > 0)
                 {
-                    this._currentIntervalTime = param2 - param3 + 1;
-                    this._coolDownTimer.start(param1,this,(COOLDOWN_END_FRAME - COOLDOWN_START_FRAME) * param3 / param2,DEFAULT_TIME_COEF);
-                    this.intervalRun();
+                    this.cooldownMc.transform.colorTransform = COLOR_STATES.GREEN_COOLDOWN_COLOR_TRANSFORM;
+                    this._currReloadingInPercent = param1 / param2;
+                    this._curAnimReversed = true;
+                    this.intervalRun(false);
                     this._scheduler.scheduleRepeatableTask(this.intervalRun,INTERVAL_SIZE,param2);
+                }
+                else if((param4 & ANIMATION_TYPES.MOVE_GREEN_BAR_UP) > 0)
+                {
+                    this.cooldownMc.transform.colorTransform = COLOR_STATES.GREEN_COOLDOWN_COLOR_TRANSFORM;
+                    this._currReloadingInPercent = param3 / param2;
+                }
+                else if((param4 & ANIMATION_TYPES.MOVE_ORANGE_BAR_DOWN) > 0)
+                {
+                    this.cooldownMc.transform.colorTransform = COLOR_STATES.ORANGE_COOLDOWN_COLOR_TRANSFORM;
+                    this._currReloadingInPercent = param1 / param2;
+                    this._curAnimReversed = true;
+                }
+                else if((param4 & ANIMATION_TYPES.MOVE_ORANGE_BAR_UP) > 0)
+                {
+                    this.cooldownMc.transform.colorTransform = COLOR_STATES.ORANGE_COOLDOWN_COLOR_TRANSFORM;
+                    this._currReloadingInPercent = param3 / param2;
+                }
+                this._isFillPartially = false;
+                if((param4 & ANIMATION_TYPES.FILL_PARTIALLY) > 0)
+                {
+                    var param3:Number = 0;
+                    this._isFillPartially = true;
+                }
+                this._currentIntervalTime = param2 - param3;
+                this._useBigTimer = (param4 & ANIMATION_TYPES.CENTER_COUNTER) > 0;
+                this.cooldownTimerTf.visible = this.counterBg.visible = !this._useBigTimer;
+                _loc5_ = this._useBigTimer?SMALL_INTERVAL_SIZE:INTERVAL_SIZE;
+                if(this._useBigTimer)
+                {
+                    this.bigCooldownTimerTf.visible = true;
+                    this._currentIntervalTime = this._currentIntervalTime * INTERVALS_RATIO;
+                    var param2:Number = param2 * INTERVALS_RATIO;
+                }
+                this._currentIntervalTime = this._currentIntervalTime + 1;
+                if((param4 & ANIMATION_TYPES.SHOW_COUNTER_GREEN) > 0)
+                {
+                    this.cooldownTimerTf.textColor = NORMAL_TEXT_COLOR;
+                    this.counterBg.gotoAndStop(COOLDOWN_COUNTER_BG_GREEN);
+                }
+                else if((param4 & ANIMATION_TYPES.SHOW_COUNTER_ORANGE) > 0)
+                {
+                    this.cooldownTimerTf.textColor = COOLDOWN_TEXT_COLOR;
+                    this.counterBg.gotoAndStop(COOLDOWN_COUNTER_BG_RED);
+                }
+                if((param4 & ANIMATION_TYPES.GREEN_GLOW_SHOW) > 0)
+                {
+                    this.greenGlowMc.visible = true;
+                    if(this._prevAnimation != param4)
+                    {
+                        this.greenGlowMc.gotoAndPlay(GREEN_GLOW_MC_SHOW);
+                    }
+                }
+                else if((param4 & ANIMATION_TYPES.GREEN_GLOW_HIDE) > 0)
+                {
+                    this.greenGlowMc.visible = true;
+                    if(this._prevAnimation != param4)
+                    {
+                        this.greenGlowMc.gotoAndPlay(GREEN_GLOW_MC_HIDE);
+                    }
+                }
+                this._prevAnimation = param4;
+                if((param4 & ANIMATION_TYPES.DARK_COLOR_TRANSFORM) > 0)
+                {
+                    this.setColorTransform(COLOR_STATES.DARK_COLOR_TRANSFORM);
+                }
+                this.cooldownMc.visible = true;
+                this.intervalRun(this._useBigTimer);
+                if(!this._isReplay)
+                {
+                    this.startCooldownTimer(param1,this._currReloadingInPercent,this._curAnimReversed,this._isFillPartially);
+                    this.disableMouse();
+                    App.utils.scheduler.scheduleRepeatableTask(this.intervalRun,_loc5_,param2,this._useBigTimer);
                 }
             }
             else
@@ -257,6 +380,8 @@ package net.wg.gui.battle.views.consumablesPanel
                 this._isReloading = false;
                 this._coolDownTimer.end();
                 this._scheduler.cancelTask(this.intervalRun);
+                this.enableMouse();
+                App.utils.scheduler.cancelTask(this.intervalRun);
                 this._delayColorTransform = null;
                 this.flushColorTransform();
                 this.cooldownTimerTf.textColor = NORMAL_TEXT_COLOR;
@@ -280,19 +405,37 @@ package net.wg.gui.battle.views.consumablesPanel
 
         public function setTimerSnapshot(param1:int, param2:Boolean) : void
         {
-            this.cooldownTimerTf.text = param1.toString();
-            if(this._isBaseTimeSnapshot != param2)
+            var _loc3_:* = NaN;
+            var _loc4_:* = NaN;
+            if(this._useBigTimer)
             {
-                this._isBaseTimeSnapshot = param2;
-                if(param2)
+                _loc3_ = (this._curAnimReversed?100 - this._currentPercent:this._currentPercent) / 100;
+                _loc4_ = _loc3_ * this._baseTime;
+                this.bigCooldownTimerTf.text = _loc4_.toFixed(_loc4_ < 10);
+            }
+            else if(param1 > 0)
+            {
+                if(this._isFillPartially)
                 {
-                    this.cooldownTimerTf.textColor = NORMAL_TEXT_COLOR;
-                    this.clearColorTransform();
+                    this.cooldownTimerTf.text = (this._baseTime - this._baseTime * (1 - this._currReloadingInPercent) + param1).toString();
                 }
                 else
                 {
-                    this.cooldownTimerTf.textColor = COOLDOWN_TEXT_COLOR;
-                    this.setColorTransform(COLOR_STATES.DARK_COLOR_TRANSFORM);
+                    this.cooldownTimerTf.text = param1.toString();
+                }
+                if(this._isBaseTimeSnapshot != param2)
+                {
+                    this._isBaseTimeSnapshot = param2;
+                    if(param2)
+                    {
+                        this.cooldownTimerTf.textColor = NORMAL_TEXT_COLOR;
+                        this.clearColorTransform();
+                    }
+                    else
+                    {
+                        this.cooldownTimerTf.textColor = COOLDOWN_TEXT_COLOR;
+                        this.setColorTransform(COLOR_STATES.DARK_COLOR_TRANSFORM);
+                    }
                 }
             }
         }
@@ -303,24 +446,52 @@ package net.wg.gui.battle.views.consumablesPanel
             {
                 return;
             }
-            if(param1 == CONSUMABLES_PANEL_SETTINGS.GLOW_ID_GREEN)
+            this.glow.showGlow(param1);
+        }
+
+        private function intervalRun(param1:Boolean) : void
+        {
+            this._currentIntervalTime = this._currentIntervalTime - 1;
+            if(param1)
             {
-                this.glow.glowGreen();
+                this.bigCooldownTimerTf.text = Number(this._currentIntervalTime / INTERVALS_RATIO).toFixed(this._currentIntervalTime < 100);
             }
-            else if(param1 == CONSUMABLES_PANEL_SETTINGS.GLOW_ID_ORANGE)
+            else
             {
-                this.glow.glowOrange();
+                this.cooldownTimerTf.text = this._currentIntervalTime.toString();
             }
-            else if(param1 == CONSUMABLES_PANEL_SETTINGS.GLOW_ID_GREEN_SPECIAL)
+            if(!this._currentIntervalTime)
             {
-                this.glow.glowGreenSpecial();
+                App.utils.scheduler.scheduleTask(this.onIntervalEnd,this._useBigTimer?SMALL_INTERVAL_SIZE:INTERVAL_SIZE);
             }
         }
 
-        private function intervalRun() : void
+        private function onIntervalEnd() : void
         {
-            this._currentIntervalTime = this._currentIntervalTime - 1;
-            this.cooldownTimerTf.text = this._currentIntervalTime.toString();
+            this.enableMouse();
+            this.endCooldownTimer();
+            this.clearCoolDownText();
+        }
+
+        private function enableMouse() : void
+        {
+            mouseEnabled = mouseChildren = true;
+        }
+
+        private function disableMouse() : void
+        {
+            mouseEnabled = mouseChildren = false;
+        }
+
+        private function endCooldownTimer() : void
+        {
+            this._coolDownTimer.end();
+            this.cooldownMc.visible = false;
+        }
+
+        private function startCooldownTimer(param1:Number, param2:Number, param3:Boolean, param4:Boolean = false) : void
+        {
+            this._coolDownTimer.start(param1,this,Math.round((COOLDOWN_END_FRAME - COOLDOWN_START_FRAME) * param2),DEFAULT_TIME_COEF,param3,param4);
         }
 
         private function clearCoolDownText() : void
@@ -355,6 +526,11 @@ package net.wg.gui.battle.views.consumablesPanel
         public function set quantity(param1:int) : void
         {
             this.empty = param1 == 0;
+        }
+
+        public function get bindSfKeyCode() : Number
+        {
+            return this._bindSfKeyCode;
         }
 
         public function set key(param1:Number) : void
@@ -403,6 +579,16 @@ package net.wg.gui.battle.views.consumablesPanel
         public function set showConsumableBorder(param1:Boolean) : void
         {
             this.consumableBackground.visible = param1;
+        }
+
+        public function set isReplay(param1:Boolean) : void
+        {
+            this._isReplay = param1;
+        }
+
+        protected function get cooldownTimer() : CoolDownTimer
+        {
+            return this._coolDownTimer;
         }
     }
 }

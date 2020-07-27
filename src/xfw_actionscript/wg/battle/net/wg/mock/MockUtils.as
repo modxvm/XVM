@@ -121,6 +121,16 @@ package net.wg.mock
             return "";
         }
 
+        public function mapScaleformToVirtualKeyS(param1:int) : int
+        {
+            return 0;
+        }
+
+        public function getCharFromVirtualKeyS(param1:int) : int
+        {
+            return 0;
+        }
+
         public function dispose() : void
         {
         }

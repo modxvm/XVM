@@ -20,6 +20,8 @@ package net.wg.gui.components.carousels.data
 
         public var infoHoverText:String = "";
 
+        public var smallInfoHoverText:String = "";
+
         public var icon:String = "";
 
         public var iconAlt:String = "";
@@ -54,7 +56,9 @@ package net.wg.gui.components.carousels.data
 
         public var hasProgression:Boolean = false;
 
-        public var isEvent:Boolean = false;
+        public var isEarnCrystals:Boolean = false;
+
+        public var isCrystalsLimitReached:Boolean = false;
 
         public var label:String = "";
 
@@ -90,11 +94,7 @@ package net.wg.gui.components.carousels.data
 
         public var progressionPoints:ProgressionPointsVO = null;
 
-        public var specialBgSrc:String = "";
-
-        public var specialBgSmallSrc:String = "";
-
-        public var isSpecialBgOverFlag:Boolean = false;
+        public var isNull:Boolean = true;
 
         private var _slotPriceActionData:ActionPriceVO = null;
 
@@ -103,6 +103,7 @@ package net.wg.gui.components.carousels.data
         public function VehicleCarouselVO(param1:Object)
         {
             super(param1);
+            this.isNull = param1 == null;
         }
 
         override protected function onDataWrite(param1:String, param2:Object) : Boolean

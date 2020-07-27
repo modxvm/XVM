@@ -42,7 +42,7 @@ package net.wg.gui.battle.views.consumablesPanel
 
         public var iconLoader:UILoaderAlt = null;
 
-        public var bindKeyField:TextField = null;
+        public var glow:BattleEquipmentButtonGlow = null;
 
         private var _isCurrent:Boolean;
 
@@ -54,7 +54,7 @@ package net.wg.gui.battle.views.consumablesPanel
 
         private var _quantity:int;
 
-        private var _isEmpty:Boolean;
+        private var _isEmpty:Boolean = true;
 
         private var _isAfterCoolDown:Boolean;
 
@@ -73,7 +73,6 @@ package net.wg.gui.battle.views.consumablesPanel
             isAllowedToShowToolTipOnDisabledState = true;
             hideToolTipOnClickActions = false;
             addFrameScript(END_RELOADING_FRAME,this.reloadingEnd);
-            TextFieldEx.setNoTranslate(this.bindKeyField,true);
             TextFieldEx.setNoTranslate(this.quantityField,true);
         }
 
@@ -83,19 +82,24 @@ package net.wg.gui.battle.views.consumablesPanel
             this.nextIndicator.visible = this._isNext;
         }
 
+        protected function setBindKeyText() : void
+        {
+            if(this._bindSfKeyCode == KeyProps.KEY_NONE)
+            {
+                this.glow.setBindKeyText(App.utils.locale.makeString(READABLE_KEY_NAMES.KEY_NONE_ALT));
+            }
+            else
+            {
+                this.glow.setBindKeyText(App.utils.commons.keyToString(this._bindSfKeyCode).keyName);
+            }
+        }
+
         override protected function draw() : void
         {
             super.draw();
             if(isInvalid(KEY_VALIDATION))
             {
-                if(this._bindSfKeyCode == KeyProps.KEY_NONE)
-                {
-                    this.bindKeyField.text = App.utils.locale.makeString(READABLE_KEY_NAMES.KEY_NONE_ALT);
-                }
-                else
-                {
-                    this.bindKeyField.text = App.utils.commons.keyToString(this._bindSfKeyCode).keyName;
-                }
+                this.setBindKeyText();
             }
             if(isInvalid(QUANTITY_VALIDATION))
             {
@@ -112,11 +116,13 @@ package net.wg.gui.battle.views.consumablesPanel
 
         override protected function onDispose() : void
         {
-            this.iconLoader.dispose();
-            this.iconLoader = null;
+            addFrameScript(END_RELOADING_FRAME,null);
             this._coolDownTimer.dispose();
             this._coolDownTimer = null;
-            this.bindKeyField = null;
+            this.iconLoader.dispose();
+            this.iconLoader = null;
+            this.glow.dispose();
+            this.glow = null;
             this.selectedIndicator = null;
             this.nextIndicator = null;
             this.quantityField = null;
@@ -138,13 +144,14 @@ package net.wg.gui.battle.views.consumablesPanel
 
         public function hideGlow() : void
         {
+            this.glow.hideGlow();
         }
 
         public function onCoolDownComplete() : void
         {
         }
 
-        public function setActivated() : void
+        public function set activated(param1:Boolean) : void
         {
         }
 
@@ -166,11 +173,11 @@ package net.wg.gui.battle.views.consumablesPanel
             }
             else
             {
-                this.setCoolDownTime(0,0,0,false);
+                this.setCoolDownTime(0,0,0);
             }
         }
 
-        public function setCoolDownTime(param1:Number, param2:Number, param3:Number, param4:Boolean) : void
+        public function setCoolDownTime(param1:Number, param2:Number, param3:Number, param4:int = 1) : void
         {
             var _loc5_:* = NaN;
             this._isAfterCoolDown = false;
@@ -183,12 +190,12 @@ package net.wg.gui.battle.views.consumablesPanel
             {
                 _loc5_ = param3 / param2;
                 this.state = BATTLE_ITEM_STATES.COOLDOWN;
-                this._isReloading = param4;
+                this._isReloading = true;
                 this._coolDownTimer.start(param1,this,(END_FRAME - START_FRAME) * _loc5_,DEFAULT_TIME_COEF);
             }
             else
             {
-                this._isReloading = param4;
+                this._isReloading = false;
                 this._coolDownTimer.end();
                 if(param1 == 0)
                 {
@@ -268,17 +275,17 @@ package net.wg.gui.battle.views.consumablesPanel
             }
         }
 
-        public function setQuantity(param1:Number, param2:Boolean = false) : void
+        public function setQuantity(param1:int, param2:Boolean = false) : void
         {
             if(this._quantity == param1 && !param2)
             {
                 return;
             }
-            if(this._quantity == 0 && param1 > 0)
+            this._quantity = param1;
+            if(this._quantity > 0)
             {
                 this.setEmpty(false,param2);
             }
-            this._quantity = param1;
             if(this._quantity == 0)
             {
                 this.setEmpty(true,param2);
@@ -292,6 +299,7 @@ package net.wg.gui.battle.views.consumablesPanel
 
         public function showGlow(param1:int) : void
         {
+            this.glow.showGlow(param1);
         }
 
         private function reloadingEnd() : void
@@ -318,6 +326,11 @@ package net.wg.gui.battle.views.consumablesPanel
         public function set icon(param1:String) : void
         {
             this.iconLoader.source = param1;
+        }
+
+        public function get bindSfKeyCode() : Number
+        {
+            return this._bindSfKeyCode;
         }
 
         public function set key(param1:Number) : void
@@ -361,6 +374,10 @@ package net.wg.gui.battle.views.consumablesPanel
         }
 
         public function set showConsumableBorder(param1:Boolean) : void
+        {
+        }
+
+        public function set isReplay(param1:Boolean) : void
         {
         }
     }

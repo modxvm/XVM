@@ -332,7 +332,7 @@ package net.wg.infrastructure.base
             this._scheduler.cancelTask(this.animateUnblur);
         }
 
-        private function updateBgHolder(param1:DisplayObject) : void
+        protected function updateBgHolder(param1:DisplayObject) : void
         {
             this.clearBackground();
             this.bgHolder.scaleX = this.bgHolder.scaleY = 1;

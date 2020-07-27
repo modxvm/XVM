@@ -75,6 +75,7 @@ package net.wg.gui.lobby.techtree.controls
                 this.progressBar.completed = this._progressValue >= 1;
                 this.progressBar.visible = this._progressVisible;
                 this.plus.enabled = this._plusVisible;
+                this.plus.validateNow();
             }
         }
 
@@ -119,7 +120,11 @@ package net.wg.gui.lobby.techtree.controls
         override public function set visible(param1:Boolean) : void
         {
             super.visible = param1;
-            this.plus.enabled = this._plusVisible = param1;
+            if(param1 != this._plusVisible)
+            {
+                this._plusVisible = param1;
+                invalidateData();
+            }
         }
 
         private function onPlusRollOverHandler(param1:MouseEvent) : void

@@ -87,13 +87,13 @@ package net.wg.gui.battle.windows
 
         public var makeScreenshort:TextField = null;
 
+        public var highlightLocation:TextField = null;
+
+        public var highlightActiveTarget:TextField = null;
+
         public var radialMenuShow:TextField = null;
 
         public var radialMenuShowExt:TextField = null;
-
-        public var attackEnemy:TextField = null;
-
-        public var attackEnemyExt:TextField = null;
 
         public var enterToChatMode:TextField = null;
 
@@ -199,7 +199,9 @@ package net.wg.gui.battle.windows
 
         public var showRadialMenuTF:TextField = null;
 
-        public var attackTF:TextField = null;
+        public var highlightLocationTF:TextField = null;
+
+        public var highlightActiveTargetTF:TextField = null;
 
         public var background:BattleAtlasSprite = null;
 
@@ -231,7 +233,8 @@ package net.wg.gui.battle.windows
             this._keysDictionary[KEYBOARD_KEYS.SHOW_EX_PLAYER_INFO] = this.showExPlayerInfoTF;
             this._keysDictionary[KEYBOARD_KEYS.SHOW_HUD] = this.showHUDTF;
             this._keysDictionary[KEYBOARD_KEYS.SHOW_RADIAL_MENU] = this.showRadialMenuTF;
-            this._keysDictionary[KEYBOARD_KEYS.ATTACK] = this.attackTF;
+            this._keysDictionary[KEYBOARD_KEYS.HIGHLIGHT_LOCATION] = this.highlightLocationTF;
+            this._keysDictionary[KEYBOARD_KEYS.HIGHLIGHT_TARGET] = this.highlightActiveTargetTF;
         }
 
         override protected function configUI() : void
@@ -303,8 +306,8 @@ package net.wg.gui.battle.windows
             this.makeScreenshort = null;
             this.radialMenuShow = null;
             this.radialMenuShowExt = null;
-            this.attackEnemy = null;
-            this.attackEnemyExt = null;
+            this.highlightLocation = null;
+            this.highlightActiveTarget = null;
             this.enterToChatMode = null;
             this.changetf = null;
             this.send = null;
@@ -357,7 +360,8 @@ package net.wg.gui.battle.windows
             this.showExPlayerInfoTF = null;
             this.showHUDTF = null;
             this.showRadialMenuTF = null;
-            this.attackTF = null;
+            this.highlightLocationTF = null;
+            this.highlightActiveTargetTF = null;
             super.onDispose();
         }
 
@@ -384,7 +388,7 @@ package net.wg.gui.battle.windows
         {
             this.pageTitle.text = INGAME_HELP.BATTLECONTROLS_PAGETITLE;
             this.battleControlsTitle.text = INGAME_HELP.BATTLECONTROLS_TITLE;
-            this.radialMenuTitle.text = INGAME_HELP.RADIALMENU_TITLE;
+            this.radialMenuTitle.text = INGAME_HELP.TEAMCOMM_TITLE;
             this.chatControlsTitle.text = INGAME_HELP.CHATCONTROLS_TITLE;
             this.vehicleTypesTitle.text = INGAME_HELP.VEHICLETYPES_TITLE;
             this.crosshairControlsTitle.text = INGAME_HELP.CROSSHAIRCONTROLS_TITLE;
@@ -415,10 +419,10 @@ package net.wg.gui.battle.windows
             this.showCursor.text = INGAME_HELP.BATTLECONTROLS_SHOWCURSOR;
             this.showCursorExt.text = INGAME_HELP.BATTLECONTROLS_SHOWCURSOR_EXT;
             this.makeScreenshort.text = INGAME_HELP.BATTLECONTROLS_MAKESCREENSHORT;
-            this.radialMenuShow.text = INGAME_HELP.RADIALMENU_SHOW;
-            this.radialMenuShowExt.text = INGAME_HELP.RADIALMENU_SHOW_EXT;
-            this.attackEnemy.text = INGAME_HELP.RADIALMENU_ATTACKENEMY;
-            this.attackEnemyExt.text = INGAME_HELP.RADIALMENU_ATTACKENEMY_EXT;
+            this.highlightLocation.text = INGAME_HELP.TEAMCOMM_HIGHLIGHTLOCATION;
+            this.highlightActiveTarget.text = INGAME_HELP.TEAMCOMM_HIGHLIGHTASACTIVETARGET;
+            this.radialMenuShow.text = INGAME_HELP.TEAMCOMM_SHOW;
+            this.radialMenuShowExt.text = INGAME_HELP.TEAMCOMM_SHOW_EXT;
             this.enterToChatMode.text = INGAME_HELP.CHATCONTROLS_ENTERTOCHATMODE;
             this.changetf.text = INGAME_HELP.CHATCONTROLS_CHANGE;
             this.send.text = INGAME_HELP.CHATCONTROLS_SEND;

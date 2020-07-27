@@ -77,6 +77,12 @@ package net.wg.infrastructure.managers.utils.impl
             this._textFieldUtils = TextFieldUtils.instance;
         }
 
+        private static function isKeyboardKey(param1:Number) : Boolean
+        {
+            var _loc2_:* = 7;
+            return param1 > _loc2_;
+        }
+
         public function addBlankLines(param1:String, param2:TextField, param3:Vector.<TextField>) : void
         {
             var _loc6_:TextField = null;
@@ -152,35 +158,68 @@ package net.wg.infrastructure.managers.utils.impl
             }
         }
 
+        private function getVirtualKey(param1:Number) : Number
+        {
+            var _loc2_:* = NaN;
+            if(param1 != KeyProps.KEY_NONE && isKeyboardKey(param1))
+            {
+                _loc2_ = App.utils.mapScaleformToVirtualKeyS(param1);
+                if(_loc2_ != 0)
+                {
+                    var param1:Number = _loc2_;
+                }
+            }
+            return param1;
+        }
+
+        private function getCharFromKey(param1:Number) : Number
+        {
+            var _loc2_:Number = App.utils.getCharFromVirtualKeyS(param1);
+            if(_loc2_ != 0)
+            {
+                return _loc2_;
+            }
+            return param1;
+        }
+
         public function keyToString(param1:Number) : KeyProps
         {
-            var _loc2_:KeyProps = new KeyProps();
-            var _loc3_:String = String.fromCharCode(param1);
-            if(KeysMap.mapping.hasOwnProperty(param1.toString()))
+            var _loc2_:Number = this.getVirtualKey(param1);
+            var _loc3_:KeyProps = new KeyProps();
+            var _loc4_:Number = this.getCharFromKey(_loc2_);
+            var _loc5_:String = String.fromCharCode(_loc4_?_loc4_:_loc2_);
+            var _loc6_:String = String.fromCharCode(param1);
+            if(KeysMap.mapping.hasOwnProperty(_loc2_.toString()))
             {
-                if(KeysMap.mapping[param1].hasOwnProperty(FIELD_TO_SHOW))
+                if(KeysMap.mapping[_loc2_].hasOwnProperty(FIELD_TO_SHOW))
                 {
-                    _loc2_.keyName = App.utils.locale.makeString(KeysMap.mapping[param1].to_show);
+                    _loc3_.keyName = App.utils.locale.makeString(KeysMap.mapping[_loc2_].to_show);
                 }
                 else
                 {
-                    _loc2_.keyName = App.utils.toUpperOrLowerCase(_loc3_,true);
-                }
-                if(KeysMap.mapping[param1].hasOwnProperty(FIELD_COMMAND))
-                {
-                    _loc2_.keyCommand = KeysMap.mapping[param1].command;
-                }
-                else
-                {
-                    _loc2_.keyCommand = App.utils.toUpperOrLowerCase(_loc3_,true);
+                    _loc3_.keyName = App.utils.toUpperOrLowerCase(_loc5_,true);
                 }
             }
             else
             {
-                _loc2_.keyName = App.utils.toUpperOrLowerCase(_loc3_,true);
-                _loc2_.keyCommand = App.utils.toUpperOrLowerCase(_loc3_,true);
+                _loc3_.keyName = App.utils.toUpperOrLowerCase(_loc5_,true);
             }
-            return _loc2_;
+            if(KeysMap.mapping.hasOwnProperty(param1.toString()))
+            {
+                if(KeysMap.mapping[param1].hasOwnProperty(FIELD_COMMAND))
+                {
+                    _loc3_.keyCommand = KeysMap.mapping[param1].command;
+                }
+                else
+                {
+                    _loc3_.keyCommand = App.utils.toUpperOrLowerCase(_loc6_,true);
+                }
+            }
+            else
+            {
+                _loc3_.keyCommand = App.utils.toUpperOrLowerCase(_loc6_,true);
+            }
+            return _loc3_;
         }
 
         public function moveDsiplObjToEndOfText(param1:DisplayObject, param2:TextField, param3:int = 0, param4:int = 0) : void

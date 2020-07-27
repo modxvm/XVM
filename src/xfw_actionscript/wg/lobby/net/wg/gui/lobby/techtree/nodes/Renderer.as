@@ -555,5 +555,9 @@ package net.wg.gui.lobby.techtree.nodes
         {
             this.showTooltip();
         }
+
+        public function cleanUp() : void
+        {
+        }
     }
 }

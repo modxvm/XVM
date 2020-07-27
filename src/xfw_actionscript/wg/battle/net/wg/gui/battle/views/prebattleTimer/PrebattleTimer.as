@@ -23,10 +23,9 @@ package net.wg.gui.battle.views.prebattleTimer
             super();
         }
 
-        override public function setCompVisible(param1:Boolean) : void
+        public function as_showInfo() : void
         {
-            super.setCompVisible(param1);
-            if(param1 && !this._isInfoDisplayed && componentVisibility)
+            if(!this._isInfoDisplayed && componentVisibility)
             {
                 this._isInfoDisplayed = true;
                 if(this.infoContainer.showInfo() && this.infoContainer.isInfoHasAnimation)

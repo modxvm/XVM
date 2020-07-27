@@ -11,19 +11,23 @@ package net.wg.gui.lobby.storage.categories.cards
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.components.controls.ButtonIconNormal;
     import net.wg.gui.components.controls.Image;
+    import net.wg.gui.components.containers.GroupEx;
+    import net.wg.gui.lobby.storage.categories.storage.ExtraParams;
     import flash.display.Sprite;
     import scaleform.clik.motion.Tween;
     import net.wg.gui.lobby.storage.categories.cards.configs.CardSizeVO;
     import net.wg.gui.lobby.storage.categories.cards.configs.CardImageSizeVO;
     import flash.events.MouseEvent;
     import flash.events.Event;
+    import net.wg.gui.components.containers.VerticalGroupLayout;
     import flash.text.TextFieldAutoSize;
+    import net.wg.gui.components.containers.HorizontalGroupLayout;
+    import net.wg.data.constants.Linkages;
     import flash.display.Graphics;
     import scaleform.clik.constants.InvalidationType;
     import flash.geom.Point;
     import net.wg.gui.lobby.storage.categories.cards.configs.CardConfigs;
     import net.wg.gui.components.controls.VO.PriceVO;
-    import net.wg.data.constants.Linkages;
     import net.wg.data.constants.generated.SLOT_HIGHLIGHT_TYPES;
     import scaleform.clik.core.UIComponent;
     import net.wg.infrastructure.managers.ITooltipMgr;
@@ -36,6 +40,8 @@ package net.wg.gui.lobby.storage.categories.cards
     {
 
         protected static const FIRST_ANIMATION_DURATION:Number = 200;
+
+        protected static const HALF_FIRST_ANIMATION_DURATION:Number = 100;
 
         protected static const FLAG_SIZE:Rectangle = new Rectangle(0,0,205,171);
 
@@ -73,6 +79,20 @@ package net.wg.gui.lobby.storage.categories.cards
 
         private static const GAP_BUTTONS:int = -5;
 
+        private static const SPECIALIZATION_X:int = -5;
+
+        private static const SPECIALIZATION_Y:int = -12;
+
+        private static const SPECIALIZATION_GAP:int = 32;
+
+        private static const EXTRA_PARAMS_GAP:int = -4;
+
+        private static const EXTRA_PARAMS_SMALL_CARD_MAX_NUM:int = 3;
+
+        private static const EXTRA_PARAMS_BIG_CARD_MAX_NUM:int = 4;
+
+        private static const CARD_SMALL_WIDTH:int = 280;
+
         public var inInventoryIcon:MovieClip;
 
         public var discountIcon:MovieClip;
@@ -98,6 +118,10 @@ package net.wg.gui.lobby.storage.categories.cards
         public var image:Image;
 
         public var flags:Image;
+
+        public var specialization:GroupEx;
+
+        public var extraParams:ExtraParams;
 
         protected var _container:Sprite;
 
@@ -166,6 +190,16 @@ package net.wg.gui.lobby.storage.categories.cards
                 this.price.dispose();
                 this.price = null;
             }
+            if(this.specialization)
+            {
+                this.specialization.dispose();
+                this.specialization = null;
+            }
+            if(this.extraParams)
+            {
+                this.extraParams.dispose();
+                this.extraParams = null;
+            }
             this.titleTF = null;
             this.descriptionTF = null;
             this.inInventoryCountTF = null;
@@ -182,6 +216,7 @@ package net.wg.gui.lobby.storage.categories.cards
 
         override protected function configUI() : void
         {
+            var _loc1_:VerticalGroupLayout = null;
             super.configUI();
             this._tweens = new Vector.<Tween>(0);
             this._overlay = new Sprite();
@@ -230,6 +265,24 @@ package net.wg.gui.lobby.storage.categories.cards
                 this.descriptionTF.alpha = 0;
                 this.descriptionTF.autoSize = TextFieldAutoSize.LEFT;
             }
+            if(this.specialization)
+            {
+                this.specialization.x = SPECIALIZATION_X;
+                this.specialization.y = SPECIALIZATION_Y;
+                this.specialization.layout = new HorizontalGroupLayout(SPECIALIZATION_GAP,false);
+                this.specialization.itemRendererLinkage = Linkages.SPECIALIZATION_ITEM_RENDERER;
+                this.specialization.mouseEnabled = false;
+                this.specialization.mouseChildren = false;
+            }
+            if(this.extraParams)
+            {
+                _loc1_ = new VerticalGroupLayout();
+                _loc1_.gap = EXTRA_PARAMS_GAP;
+                this.extraParams.layout = _loc1_;
+                this.extraParams.itemRendererLinkage = Linkages.EXTRA_PARAMS_RENDERER;
+                this._container.addChild(this.extraParams);
+                this.extraParams.alpha = 0;
+            }
             this.sellButton.label = STORAGE.BUTTONLABEL_SELL;
             this.sellButton.alpha = 0;
             this.sellButton.minWidth = SELL_BUTTON_MIN_WIDTH;
@@ -263,6 +316,20 @@ package net.wg.gui.lobby.storage.categories.cards
                     if(this._resetViewOnDataChange)
                     {
                         this.descriptionTF.alpha = 0;
+                    }
+                }
+                if(this.extraParams)
+                {
+                    if(this._resetViewOnDataChange)
+                    {
+                        this.extraParams.alpha = 0;
+                    }
+                }
+                if(this.specialization)
+                {
+                    if(this._resetViewOnDataChange)
+                    {
+                        this.specialization.alpha = 1;
                     }
                 }
                 this.drawPrice();
@@ -321,6 +388,10 @@ package net.wg.gui.lobby.storage.categories.cards
                     this.image.sourceAlt = this._data.imageAlt;
                     this.image.source = this._data.image;
                 }
+                if(this.specialization)
+                {
+                    this.specialization.alpha = 1;
+                }
                 _loc2_ = graphics;
                 _loc2_.clear();
                 _loc2_.lineStyle(1,16777215,0.15);
@@ -378,6 +449,17 @@ package net.wg.gui.lobby.storage.categories.cards
                     this.descriptionTF.y = this.titleTF.y + this.titleTF.height + this._sizeVO.descriptionOffset;
                     this.descriptionTF.width = _loc3_.width >> 0;
                 }
+                if(this.extraParams)
+                {
+                    if(this._data.description == "")
+                    {
+                        this.extraParams.y = this.descriptionTF.y;
+                    }
+                    else
+                    {
+                        this.extraParams.y = this.descriptionTF.y + this.descriptionTF.height + this._sizeVO.descriptionOffset;
+                    }
+                }
                 this.sellButton.x = _loc3_.right - this.sellButton.width >> 0;
                 this.sellButton.y = _loc3_.bottom - this.sellButton.height >> 0;
                 this.sellButton.validateNow();
@@ -416,6 +498,7 @@ package net.wg.gui.lobby.storage.categories.cards
             this._stageWidthBoundary = App.stageSizeMgr.calcAllowSize(param1,CardConfigs.getInstance().allowCardsResolution);
             this._sizeVO = CardConfigs.getInstance().cardSize.getConfig(this._stageWidthBoundary);
             this._imageSizeVO = CardConfigs.getInstance().cardImage.getConfig(this._stageWidthBoundary);
+            this.updateExtraParamsLayout();
         }
 
         protected function drawPrice() : void
@@ -466,11 +549,25 @@ package net.wg.gui.lobby.storage.categories.cards
                 "fastTransform":false,
                 "delay":ROLL_OVER_ANIMATION_DELAY
             })];
+            if(this.specialization)
+            {
+                _loc2_.push(new Tween(FIRST_ANIMATION_DURATION,this.specialization,{"alpha":0.1},{
+                    "fastTransform":false,
+                    "delay":ROLL_OVER_ANIMATION_DELAY
+                }));
+            }
             if(this.descriptionTF)
             {
-                _loc2_.push(new Tween(FIRST_ANIMATION_DURATION / 2,this.descriptionTF,{"alpha":1},{
+                _loc2_.push(new Tween(HALF_FIRST_ANIMATION_DURATION,this.descriptionTF,{"alpha":1},{
                     "fastTransform":false,
-                    "delay":ROLL_OVER_ANIMATION_DELAY + FIRST_ANIMATION_DURATION / 2
+                    "delay":ROLL_OVER_ANIMATION_DELAY + HALF_FIRST_ANIMATION_DURATION
+                }));
+            }
+            if(this.extraParams)
+            {
+                _loc2_.push(new Tween(HALF_FIRST_ANIMATION_DURATION,this.extraParams,{"alpha":1},{
+                    "fastTransform":false,
+                    "delay":ROLL_OVER_ANIMATION_DELAY + HALF_FIRST_ANIMATION_DURATION
                 }));
             }
             if(this.equipmentType)
@@ -519,9 +616,17 @@ package net.wg.gui.lobby.storage.categories.cards
         {
             var _loc1_:int = this.getContainerYRolloutPosition();
             var _loc2_:Vector.<Tween> = new <Tween>[new Tween(FIRST_ANIMATION_DURATION,this._container,{"y":_loc1_},{"fastTransform":false}),new Tween(FIRST_ANIMATION_DURATION,this._overlay,{"alpha":0},{"fastTransform":false}),new Tween(FIRST_ANIMATION_DURATION,this.image,{"alpha":1},{"fastTransform":false})];
+            if(this.specialization)
+            {
+                _loc2_.unshift(new Tween(HALF_FIRST_ANIMATION_DURATION,this.specialization,{"alpha":1},{"fastTransform":false}));
+            }
             if(this.descriptionTF)
             {
-                _loc2_.unshift(new Tween(FIRST_ANIMATION_DURATION / 2,this.descriptionTF,{"alpha":0},{"fastTransform":false}));
+                _loc2_.unshift(new Tween(HALF_FIRST_ANIMATION_DURATION,this.descriptionTF,{"alpha":0},{"fastTransform":false}));
+            }
+            if(this.extraParams)
+            {
+                _loc2_.unshift(new Tween(HALF_FIRST_ANIMATION_DURATION,this.extraParams,{"alpha":0},{"fastTransform":false}));
             }
             if(this.sellButton.visible)
             {
@@ -706,7 +811,27 @@ package net.wg.gui.lobby.storage.categories.cards
 
         protected function setData(param1:BaseCardVO) : void
         {
+            if(this.extraParams)
+            {
+                this.updateExtraParamsLayout();
+                this.extraParams.dataProvider = param1.extraParams;
+            }
+            if(this.specialization)
+            {
+                this.specialization.dataProvider = param1.specializations;
+            }
             this._data = param1;
+        }
+
+        private function updateExtraParamsLayout() : void
+        {
+            var _loc1_:* = 0;
+            if(this.extraParams)
+            {
+                _loc1_ = this._sizeVO.size.width < CARD_SMALL_WIDTH?EXTRA_PARAMS_SMALL_CARD_MAX_NUM:EXTRA_PARAMS_BIG_CARD_MAX_NUM;
+                this.extraParams.setMaxTextLines(_loc1_);
+                this.extraParams.setMaxTextWidth(this._sizeVO.innerPadding.width >> 0);
+            }
         }
 
         public function set tooltipDecorator(param1:ITooltipMgr) : void

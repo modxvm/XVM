@@ -10,9 +10,10 @@ package net.wg.infrastructure.managers.impl
     import flash.events.Event;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import net.wg.infrastructure.interfaces.IContextItem;
+    import flash.geom.Point;
+    import flash.display.Stage;
     import net.wg.utils.IClassFactory;
     import net.wg.data.constants.Linkages;
-    import flash.geom.Point;
 
     public class ContextMenuManager extends ContextMenuManagerMeta implements IContextMenuManager
     {
@@ -43,6 +44,11 @@ package net.wg.infrastructure.managers.impl
         public function as_hide() : void
         {
             this.hide();
+        }
+
+        public function as_show(param1:String, param2:Object) : void
+        {
+            this.show(param1,null,param2);
         }
 
         public function dispose() : void
@@ -79,7 +85,7 @@ package net.wg.infrastructure.managers.impl
             return this._currentMenu != null;
         }
 
-        public function show(param1:String, param2:DisplayObject, param3:Object = null) : void
+        public function show(param1:String, param2:DisplayObject = null, param3:Object = null) : void
         {
             this.hide();
             this._currentMenu = this.constructMenu(null,param2);
@@ -89,11 +95,21 @@ package net.wg.infrastructure.managers.impl
 
         protected function constructMenu(param1:Vector.<IContextItem>, param2:DisplayObject) : IContextMenu
         {
+            var _loc6_:Point = null;
+            var _loc7_:Stage = null;
             var _loc3_:IClassFactory = App.utils.classFactory;
             var _loc4_:IContextMenu = _loc3_.getComponent(Linkages.CONTEXT_MENU,IContextMenu);
             var _loc5_:DisplayObject = DisplayObject(_loc4_);
             _loc5_.visible = false;
-            var _loc6_:Point = param2.localToGlobal(new Point(param2.mouseX,param2.mouseY));
+            if(param2)
+            {
+                _loc6_ = param2.localToGlobal(new Point(param2.mouseX,param2.mouseY));
+            }
+            else
+            {
+                _loc7_ = App.stage;
+                _loc6_ = new Point(_loc7_.mouseX * _loc7_.scaleX,_loc7_.mouseY * _loc7_.scaleX);
+            }
             _loc6_.x = _loc6_.x / App.appScale >> 0;
             _loc6_.y = _loc6_.y / App.appScale >> 0;
             App.utils.popupMgr.show(_loc5_,_loc6_.x,_loc6_.y);
@@ -115,16 +131,16 @@ package net.wg.infrastructure.managers.impl
             this.hide();
         }
 
-        private function onStageResizeHandler(param1:Event) : void
-        {
-            this.hide();
-        }
-
         private function callLogEvent(param1:IContextMenu, param2:String) : void
         {
             var _loc3_:DisplayObject = param1 as DisplayObject;
             App.utils.asserter.assertNotNull(_loc3_,Errors.CANT_NULL);
             App.eventLogManager.logUIEventContextMenu(_loc3_,param2,0);
+        }
+
+        private function onStageResizeHandler(param1:Event) : void
+        {
+            this.hide();
         }
     }
 }

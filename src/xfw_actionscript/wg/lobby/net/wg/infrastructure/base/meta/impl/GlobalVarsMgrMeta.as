@@ -28,8 +28,6 @@ package net.wg.infrastructure.base.meta.impl
 
         public var isFortificationAvailable:Function;
 
-        public var isShowTicker:Function;
-
         public var isRentalsEnabled:Function;
 
         public var isPersonalMissionsEnabled:Function;
@@ -109,12 +107,6 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.isFortificationAvailable,"isFortificationAvailable" + Errors.CANT_NULL);
             return this.isFortificationAvailable();
-        }
-
-        public function isShowTickerS() : Boolean
-        {
-            App.utils.asserter.assertNotNull(this.isShowTicker,"isShowTicker" + Errors.CANT_NULL);
-            return this.isShowTicker();
         }
 
         public function isRentalsEnabledS() : Boolean

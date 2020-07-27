@@ -123,15 +123,15 @@ package net.wg.gui.lobby.modulesPanel.components
 
         protected function setup() : void
         {
+            var _loc1_:* = false;
             if(this._deviceData == null)
             {
                 return;
             }
             this.titleField.htmlText = this._deviceData.name;
             this._commons.updateTextFieldSize(this.titleField,false,true);
-            App.utils.asserter.assertFrameExists(this._deviceData.moduleLabel,this.moduleType);
-            this.moduleType.gotoAndStop(this._deviceData.moduleLabel);
-            var _loc1_:Boolean = this._deviceData.showPrice;
+            this.moduleType.setModuleTypeIcon(this._deviceData.moduleLabel);
+            _loc1_ = this._deviceData.showPrice;
             this.priceMC.visible = _loc1_;
             if(_loc1_)
             {

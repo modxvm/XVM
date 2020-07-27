@@ -1,11 +1,14 @@
 package net.wg.gui.lobby.window
 {
+    import net.wg.infrastructure.base.meta.impl.EpicPrimeTimeMeta;
+    import net.wg.infrastructure.base.meta.IEpicPrimeTimeMeta;
     import flash.text.TextField;
     import flash.display.MovieClip;
+    import org.idmedia.as3commons.util.StringUtils;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.data.constants.generated.TEXT_MANAGER_STYLES;
 
-    public class EpicPrimeTime extends PrimeTime
+    public class EpicPrimeTime extends EpicPrimeTimeMeta implements IEpicPrimeTimeMeta
     {
 
         private static const TITLE_TF_DEF_OFFSET:int = 70;
@@ -27,13 +30,6 @@ package net.wg.gui.lobby.window
             super();
         }
 
-        override protected function configUI() : void
-        {
-            super.configUI();
-            this._titleText = EPIC_BATTLE.PRIMETIME_TITLE;
-            setBackground(RES_ICONS.MAPS_ICONS_EPICBATTLES_PRIMETIME_PRIME_TIME_BACK_DEFAULT);
-        }
-
         override protected function onDispose() : void
         {
             this.titleTf = null;
@@ -45,7 +41,7 @@ package net.wg.gui.lobby.window
         {
             var _loc1_:String = null;
             super.draw();
-            if(isInvalid(InvalidationType.SIZE))
+            if(StringUtils.isNotEmpty(this._titleText) && isInvalid(InvalidationType.SIZE))
             {
                 this.titleTf.x = 0;
                 this.titleTf.width = width;
@@ -67,6 +63,17 @@ package net.wg.gui.lobby.window
                     this.titleTf.htmlText = App.textMgr.getTextStyleById(_loc1_,this._titleText);
                 }
             }
+        }
+
+        public function as_setBackgroundSource(param1:String) : void
+        {
+            setBackground(param1);
+        }
+
+        public function as_setHeaderText(param1:String) : void
+        {
+            this._titleText = param1;
+            invalidateSize();
         }
     }
 }

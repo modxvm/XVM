@@ -174,6 +174,7 @@ package net.wg.app.impl
             this._browser = new ManagedContainer(APP_CONTAINERS_NAMES.BROWSER);
             this._dialogs = new ManagedContainer(APP_CONTAINERS_NAMES.DIALOGS);
             this._toolTips = new SimpleManagedContainer(APP_CONTAINERS_NAMES.TOOL_TIPS);
+            this._toolTips.updateMouseHandling(false);
             this._cursorCtnr = new CursorManagedContainer(APP_CONTAINERS_NAMES.CURSOR);
             this._waiting = new WaitingManagedContainer(APP_CONTAINERS_NAMES.WAITING);
             this._overlay = new ManagedContainer(APP_CONTAINERS_NAMES.OVERLAY);
@@ -214,9 +215,13 @@ package net.wg.app.impl
 
         override protected function getContainers() : Vector.<DisplayObject>
         {
-            var _loc1_:DisplayObject = DisplayObject(utils.IME.getContainer());
-            var _loc2_:Vector.<DisplayObject> = new <DisplayObject>[this._markers,this._views,this._windows,this._systemMessages,this._browser,this._dialogs,this._overlay,_loc1_,this._serviceLayout,this._toolTips,this._cursorCtnr,this._waiting];
-            return _loc2_;
+            var _loc1_:DisplayObject = null;
+            if(!containers)
+            {
+                _loc1_ = DisplayObject(utils.IME.getContainer());
+                containers = new <DisplayObject>[this._markers,this._views,this._windows,this._systemMessages,this._browser,this._dialogs,this._overlay,_loc1_,this._serviceLayout,this._toolTips,this._cursorCtnr,this._waiting];
+            }
+            return containers;
         }
 
         override protected function getNewEnvironment() : IEnvironmentManager

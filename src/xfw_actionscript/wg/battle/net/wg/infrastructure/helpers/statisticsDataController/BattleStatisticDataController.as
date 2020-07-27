@@ -19,6 +19,7 @@ package net.wg.infrastructure.helpers.statisticsDataController
     import net.wg.data.VO.daapi.DAAPIVehiclesInvitationStatusVO;
     import net.wg.infrastructure.events.LifeCycleEvent;
     import flash.events.Event;
+    import net.wg.data.VO.daapi.DAAPITriggeredCommandsVO;
     import net.wg.gui.components.questProgress.interfaces.data.IQPProgressData;
     import net.wg.gui.components.questProgress.interfaces.data.IQuestProgressItemData;
 
@@ -235,6 +236,15 @@ package net.wg.infrastructure.helpers.statisticsDataController
                 {
                     _loc2_.updateHeaderProgress(this._questProgressData.headerConditions);
                 }
+            }
+        }
+
+        override protected function updateTriggeredChatCommands(param1:DAAPITriggeredCommandsVO) : void
+        {
+            var _loc2_:IBattleComponentDataController = null;
+            for each(_loc2_ in this._componentControllers)
+            {
+                _loc2_.updateTriggeredChatCommands(param1);
             }
         }
 

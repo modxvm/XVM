@@ -8,8 +8,6 @@ package net.wg.gui.battle.views.staticMarkers.epic.sectorWaypoint
     public class SectorWaypointMarker extends Sprite implements IDisposable
     {
 
-        public const markerType:String = "waypoint";
-
         public var marker:SectorWaypointIcon = null;
 
         public var arrow:MovieClip = null;

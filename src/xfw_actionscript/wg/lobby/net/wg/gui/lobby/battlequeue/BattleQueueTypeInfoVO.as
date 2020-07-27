@@ -19,6 +19,8 @@ package net.wg.gui.lobby.battlequeue
 
         public var tankName:String = "";
 
+        public var layoutStr:String = "";
+
         public function BattleQueueTypeInfoVO(param1:Object)
         {
             super(param1);

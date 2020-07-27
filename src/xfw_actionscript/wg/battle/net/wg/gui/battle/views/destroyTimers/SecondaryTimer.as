@@ -1,18 +1,19 @@
 package net.wg.gui.battle.views.destroyTimers
 {
-    import net.wg.gui.battle.components.FrameAnimationTimer;
+    import net.wg.gui.battle.components.interfaces.IStatusNotification;
     import net.wg.data.constants.InvalidationType;
     import net.wg.gui.battle.views.destroyTimers.components.secondaryTimerFx.SecondaryTimerFXContainer;
     import net.wg.gui.battle.views.destroyTimers.components.SecondaryTimerContainer;
     import flash.display.Bitmap;
     import net.wg.gui.battle.views.destroyTimers.components.secondaryTimerFx.ISecondaryTimerFX;
+    import net.wg.gui.battle.views.destroyTimers.data.NotificationTimerSettingVO;
     import flash.display.MovieClip;
     import flash.text.TextField;
     import net.wg.utils.IClassFactory;
     import flash.display.Sprite;
-    import net.wg.gui.battle.views.destroyTimers.components.SecondaryTimerSetting;
+    import net.wg.gui.battle.components.interfaces.IStatusNotificationCallback;
 
-    public class SecondaryTimer extends FrameAnimationTimer
+    public class SecondaryTimer extends SecondaryTimerBase implements IStatusNotification
     {
 
         private static const HIDE_SCALE_STEP_VALUE:Number = 0.005;
@@ -31,7 +32,15 @@ package net.wg.gui.battle.views.destroyTimers
 
         private static const END_FRAME:int = 190;
 
+        private static const PADDING:uint = 20;
+
+        private static const CROPPED_SIZE_PADDING:uint = 15;
+
+        private static const CROPPED_SIZE_WIDTH:uint = 100;
+
         private static const ICON_BTM_POSITION_VALIDATE:int = InvalidationType.SYSTEM_FLAGS_BORDER << 1;
+
+        private static const SECONDARY_TIMER_NAME:String = "secondaryTimer";
 
         public var fxContainer:SecondaryTimerFXContainer = null;
 
@@ -58,8 +67,72 @@ package net.wg.gui.battle.views.destroyTimers
         public function SecondaryTimer()
         {
             super();
+            stop();
+            mouseEnabled = mouseChildren = false;
+            name = SECONDARY_TIMER_NAME;
             this._secString = App.utils.locale.makeString(INGAME_GUI.STUN_SECONDS);
             init(true,true);
+        }
+
+        override public function cropSize() : Boolean
+        {
+            this.container.textFieldLabel.visible = false;
+            this.container.textField.y = TEXT_FIELD_CROP_Y;
+            return true;
+        }
+
+        override public function fullSize() : Boolean
+        {
+            this.container.textFieldLabel.visible = true;
+            this.container.textField.y = TEXT_FIELD_FULL_Y;
+            return true;
+        }
+
+        override public function hideTimer() : void
+        {
+            if(!this._isShowing)
+            {
+                return;
+            }
+            if(this._timerFX)
+            {
+                this._timerFX.hide();
+            }
+            gotoAndPlay(HIDE_FRAME_LABEL);
+            this._isShowing = false;
+        }
+
+        override public function setSettings(param1:NotificationTimerSettingVO) : void
+        {
+            this.container.setTimerSettings(param1);
+            this.setIcon(param1.iconName);
+            super.setSettings(param1);
+        }
+
+        override public function setStaticText(param1:String, param2:String = "") : void
+        {
+            this.container.textFieldLabel.text = param1;
+        }
+
+        override public function setTimerFx(param1:ISecondaryTimerFX) : void
+        {
+            this._timerFX = param1;
+            this._timerFX.setFxContainer(this.fxContainer);
+        }
+
+        override public function showTimer(param1:Boolean) : void
+        {
+            super.showTimer(param1);
+            if(this._isShowing)
+            {
+                return;
+            }
+            if(this._timerFX)
+            {
+                this._timerFX.show(param1);
+            }
+            gotoAndPlay(SHOW_FRAME_LABEL);
+            this._isShowing = true;
         }
 
         override protected function onDispose() : void
@@ -93,6 +166,11 @@ package net.wg.gui.battle.views.destroyTimers
                 pauseHideTimer();
                 pauseRadialTimer();
                 stop();
+                isActive = false;
+                if(onIntervalHideComplete != null)
+                {
+                    onIntervalHideComplete();
+                }
             }
             else
             {
@@ -132,7 +210,10 @@ package net.wg.gui.battle.views.destroyTimers
 
         override protected function setTimerTimeString() : void
         {
-            this.container.textField.text = lastStrTime + this._secString;
+            if(lastStrTime)
+            {
+                this.container.textField.text = lastStrTime + this._secString;
+            }
         }
 
         override protected function getProgressBarMc() : MovieClip
@@ -155,58 +236,8 @@ package net.wg.gui.battle.views.destroyTimers
             return END_FRAME;
         }
 
-        public function cropSize() : void
+        public function updateViewID(param1:String, param2:Boolean) : void
         {
-            this.container.textFieldLabel.visible = false;
-            this.container.textField.y = TEXT_FIELD_CROP_Y;
-        }
-
-        public function fullSize() : void
-        {
-            this.container.textFieldLabel.visible = true;
-            this.container.textField.y = TEXT_FIELD_FULL_Y;
-        }
-
-        public function setTimerFx(param1:ISecondaryTimerFX) : void
-        {
-            this._timerFX = param1;
-            this._timerFX.setFxContainer(this.fxContainer);
-        }
-
-        public function showTimer(param1:Boolean) : void
-        {
-            this.resetAnimState();
-            if(this._isShowing)
-            {
-                return;
-            }
-            if(this._timerFX)
-            {
-                this._timerFX.show(param1);
-            }
-            gotoAndPlay(SHOW_FRAME_LABEL);
-            this._isShowing = true;
-        }
-
-        public function hideTimer() : void
-        {
-            if(!this._isShowing)
-            {
-                return;
-            }
-            if(this._timerFX)
-            {
-                this._timerFX.hide();
-            }
-            gotoAndPlay(HIDE_FRAME_LABEL);
-            this._isShowing = false;
-        }
-
-        public function resetTimer() : void
-        {
-            pauseHideTimer();
-            pauseRadialTimer();
-            this.hideTimer();
         }
 
         private function setIcon(param1:String) : void
@@ -221,16 +252,23 @@ package net.wg.gui.battle.views.destroyTimers
             invalidate(ICON_BTM_POSITION_VALIDATE);
         }
 
-        public function setSettings(param1:SecondaryTimerSetting) : void
+        public function get actualWidth() : Number
         {
-            this.container.setTimerSettings(param1);
-            this.setIcon(param1.iconName);
-            invalidateData();
+            if(this.container.textFieldLabel.visible)
+            {
+                return super.width + PADDING;
+            }
+            return CROPPED_SIZE_WIDTH + CROPPED_SIZE_PADDING;
         }
 
-        public function setStaticText(param1:String) : void
+        public function get isShowing() : Boolean
         {
-            this.container.textFieldLabel.text = param1;
+            return this._isShowing;
+        }
+
+        public function getStatusCallback() : IStatusNotificationCallback
+        {
+            return null;
         }
     }
 }

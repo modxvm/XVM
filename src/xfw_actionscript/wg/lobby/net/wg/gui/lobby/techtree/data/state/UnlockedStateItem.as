@@ -9,6 +9,8 @@ package net.wg.gui.lobby.techtree.data.state
 
         private static const PARENT_UNLOCKED_INFO_FIELD:String = "isParentUnlocked";
 
+        public static const RESEARCH_GRAPH:String = "isResearchGraph";
+
         private var _availableForBuy:StateProperties;
 
         public function UnlockedStateItem(param1:StateProperties, param2:StateProperties)
@@ -19,9 +21,16 @@ package net.wg.gui.lobby.techtree.data.state
 
         override public function resolveProps(param1:Object = null) : StateProperties
         {
-            if(param1 != null && param1[ROOT_INVENTORY_INFO_FIELD] && param1[PARENT_UNLOCKED_INFO_FIELD])
+            if(param1 != null)
             {
-                return this._availableForBuy;
+                if(param1[ROOT_INVENTORY_INFO_FIELD] && param1[PARENT_UNLOCKED_INFO_FIELD])
+                {
+                    return this._availableForBuy;
+                }
+                if(param1[RESEARCH_GRAPH])
+                {
+                    return this._availableForBuy;
+                }
             }
             return super.resolveProps(param1);
         }

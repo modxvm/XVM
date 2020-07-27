@@ -41,6 +41,7 @@ package net.wg.gui.lobby.rankedBattles19.view.base
             this.bgLoader = new Loader();
             this.bgLoader.name = BG_LOADER_NAME;
             addChildAt(this.bgLoader,0);
+            this.bgLoader.contentLoaderInfo.addEventListener(Event.COMPLETE,this.onLoaderCompleteHandler);
             this.viewRestrictions = App.utils.viewRestrictions;
         }
 

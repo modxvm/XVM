@@ -4,12 +4,14 @@ package net.wg.gui.lobby.unboundInjectWindow
     import net.wg.infrastructure.base.meta.IUnboundInjectWindowMeta;
     import net.wg.gui.components.controls.UILoaderAlt;
     import net.wg.gui.components.controls.SoundButtonEx;
+    import net.wg.gui.components.UnboundComponent;
     import net.wg.gui.components.containers.inject.GFInjectComponent;
     import net.wg.utils.StageSizeBoundaries;
     import flash.events.MouseEvent;
     import flash.display.Graphics;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.data.Aliases;
+    import flash.events.Event;
     import net.wg.data.constants.generated.TOOLTIPS_CONSTANTS;
 
     public class UnboundInjectWindow extends UnboundInjectWindowMeta implements IUnboundInjectWindowMeta
@@ -25,7 +27,7 @@ package net.wg.gui.lobby.unboundInjectWindow
 
         public var btn:SoundButtonEx = null;
 
-        public var ubComponent:UnboundTestComponent = null;
+        public var ubComponent:UnboundComponent = null;
 
         public var gfComponent:GFInjectComponent = null;
 
@@ -46,6 +48,7 @@ package net.wg.gui.lobby.unboundInjectWindow
             window.title = DEVELOPMENT.WULF_UNBOUNDINJECTIONWINDOW_TITLE;
             window.setMaxHeight(StageSizeBoundaries.HEIGHT_1080);
             window.setMaxWidth(StageSizeBoundaries.WIDTH_1920);
+            App.stage.addEventListener(MouseEvent.MOUSE_UP,this.onStageMouseUp);
             this.btn.addEventListener(MouseEvent.MOUSE_OVER,this.btnMouseOverHandler);
             this.btn.addEventListener(MouseEvent.MOUSE_OUT,this.btnMouseOutHandler);
         }
@@ -79,6 +82,7 @@ package net.wg.gui.lobby.unboundInjectWindow
 
         override protected function onDispose() : void
         {
+            App.stage.removeEventListener(MouseEvent.MOUSE_UP,this.onStageMouseUp);
             this.image.dispose();
             this.image = null;
             this.btn.removeEventListener(MouseEvent.MOUSE_OVER,this.btnMouseOverHandler);
@@ -94,6 +98,11 @@ package net.wg.gui.lobby.unboundInjectWindow
         {
             this.btn.label = param2;
             this.image.source = param1;
+        }
+
+        private function onStageMouseUp(param1:MouseEvent) : void
+        {
+            this.gfComponent.wrapper.dispatchEvent(new Event(Event.RESIZE));
         }
 
         private function btnMouseOverHandler(param1:MouseEvent) : void

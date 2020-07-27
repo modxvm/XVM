@@ -19,12 +19,17 @@ package net.wg.gui.bootcamp
 
         private static const SHOW_GLOW_HIGHLIGHT_STATE:String = "highlight";
 
+        private static const COOLDOWN_START_FRAME:int = 1;
+
+        private static const COOLDOWN_END_FRAME:int = 60;
+
         private var _highlighted:Boolean = false;
 
         public function BCBattleEquipmentButton()
         {
             super();
             consumableBackground = new MovieClip();
+            cooldownTimer.setFrames(COOLDOWN_START_FRAME,COOLDOWN_END_FRAME);
         }
 
         override protected function draw() : void

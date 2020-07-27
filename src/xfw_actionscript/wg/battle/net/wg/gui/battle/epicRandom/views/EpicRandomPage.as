@@ -6,8 +6,7 @@ package net.wg.gui.battle.epicRandom.views
     import net.wg.gui.battle.random.views.teamBasesPanel.TeamBasesPanel;
     import net.wg.gui.battle.views.sixthSense.SixthSense;
     import net.wg.gui.battle.views.consumablesPanel.ConsumablesPanel;
-    import net.wg.gui.battle.components.DestroyTimersPanel;
-    import net.wg.gui.battle.views.ticker.BattleTicker;
+    import net.wg.gui.battle.components.TimersPanel;
     import net.wg.gui.components.hintPanel.HintPanel;
     import net.wg.gui.battle.views.damageInfoPanel.DamageInfoPanel;
     import net.wg.gui.battle.views.battleMessenger.BattleMessenger;
@@ -22,7 +21,6 @@ package net.wg.gui.battle.epicRandom.views
     import flash.events.MouseEvent;
     import net.wg.gui.battle.views.consumablesPanel.events.ConsumablesPanelEvent;
     import net.wg.infrastructure.events.FocusRequestEvent;
-    import net.wg.gui.components.common.ticker.events.BattleTickerEvent;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.events.PlayersPanelSwitchEvent;
     import flash.events.Event;
     import net.wg.data.constants.generated.BATTLE_VIEW_ALIASES;
@@ -31,7 +29,6 @@ package net.wg.gui.battle.epicRandom.views
     import net.wg.gui.battle.views.minimap.constants.MinimapSizeConst;
     import net.wg.gui.components.battleDamagePanel.constants.BattleDamageLogConstants;
     import net.wg.gui.battle.views.questProgress.interfaces.IQuestProgressView;
-    import net.wg.gui.components.common.ticker.Ticker;
     import flash.display.DisplayObject;
     import net.wg.data.constants.generated.PLAYERS_PANEL_STATE;
     import net.wg.data.constants.generated.ATLAS_CONSTANTS;
@@ -65,9 +62,7 @@ package net.wg.gui.battle.epicRandom.views
 
         public var consumablesPanel:ConsumablesPanel = null;
 
-        public var destroyTimersPanel:DestroyTimersPanel = null;
-
-        public var battleTicker:BattleTicker = null;
+        public var destroyTimersPanel:TimersPanel = null;
 
         public var hintPanel:HintPanel = null;
 
@@ -87,14 +82,11 @@ package net.wg.gui.battle.epicRandom.views
 
         public var siegeModePanel:SiegeModePanel = null;
 
-        private var _fragCorrelationBarStartYPos:Number = 0;
-
         private var _isPlayersPanelIsEmpty:Boolean = true;
 
         public function EpicRandomPage()
         {
             super();
-            this._fragCorrelationBarStartYPos = this.epicRandomScorePanel.y;
             this.battleDamageLogPanel.init(ATLAS_CONSTANTS.BATTLE_ATLAS);
             this.teamBasesPanelUI.addEventListener(Event.CHANGE,this.onTeamBasesPanelUIChangeHandler);
             this.epicRandomPlayersPanel.addEventListener(Event.CHANGE,this.onPlayersPanelChangeHandler);
@@ -108,8 +100,6 @@ package net.wg.gui.battle.epicRandom.views
             this.teamBasesPanelUI.x = _loc3_;
             this.sixthSense.x = _loc3_;
             this.sixthSense.y = param2 >> 2;
-            this.battleTicker.x = param1 - this.battleTicker.width >> 1;
-            this.battleTicker.y = 0;
             this.epicRandomScorePanel.x = _loc3_;
             this.battleMessenger.x = damagePanel.x;
             this.battleMessenger.y = damagePanel.y - this.battleMessenger.height + MESSENGER_Y_OFFSET >> 0;
@@ -123,7 +113,6 @@ package net.wg.gui.battle.epicRandom.views
             this.radialMenu.updateStage(param1,param2);
             this.endWarningPanel.x = _loc3_;
             this.updateHintPanelPosition();
-            this.updateTopConstraintOffset();
         }
 
         override protected function createStatisticsController() : BattleStatisticDataController
@@ -149,8 +138,6 @@ package net.wg.gui.battle.epicRandom.views
             this.consumablesPanel.addEventListener(ConsumablesPanelEvent.SWITCH_POPUP,this.onConsumablesPanelSwitchPopupHandler);
             this.battleMessenger.addEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onBattleMessengerRequestFocusHandler);
             this.battleMessenger.addEventListener(BattleMessenger.REMOVE_FOCUS,this.onBattleMessengerRemoveFocusHandler);
-            this.battleTicker.addEventListener(BattleTickerEvent.SHOW,this.onBattleTickerShowHandler);
-            this.battleTicker.addEventListener(BattleTickerEvent.HIDE,this.onBattleTickerShowHandler);
             this.epicRandomPlayersPanel.addEventListener(PlayersPanelSwitchEvent.STATE_REQUESTED,this.onPlayersPanelStateRequestedHandler);
             super.configUI();
             minimap.updateSizeIndex(false);
@@ -169,9 +156,8 @@ package net.wg.gui.battle.epicRandom.views
             registerComponent(this.epicRandomScorePanel,BATTLE_VIEW_ALIASES.EPIC_RANDOM_SCORE_PANEL);
             registerComponent(this.epicRandomPlayersPanel,BATTLE_VIEW_ALIASES.PLAYERS_PANEL);
             registerComponent(this.consumablesPanel,BATTLE_VIEW_ALIASES.CONSUMABLES_PANEL);
-            registerComponent(this.destroyTimersPanel,BATTLE_VIEW_ALIASES.DESTROY_TIMERS_PANEL);
+            registerComponent(this.destroyTimersPanel,BATTLE_VIEW_ALIASES.TIMERS_PANEL);
             registerComponent(this.radialMenu,BATTLE_VIEW_ALIASES.RADIAL_MENU);
-            registerComponent(this.battleTicker,BATTLE_VIEW_ALIASES.TICKER);
             registerComponent(this.endWarningPanel,BATTLE_VIEW_ALIASES.BATTLE_END_WARNING_PANEL);
             registerComponent(this.siegeModePanel,BATTLE_VIEW_ALIASES.SIEGE_MODE_INDICATOR);
             registerComponent(this.hintPanel,BATTLE_VIEW_ALIASES.HINT_PANEL);
@@ -206,9 +192,6 @@ package net.wg.gui.battle.epicRandom.views
             this.consumablesPanel = null;
             this.destroyTimersPanel = null;
             this.radialMenu = null;
-            this.battleTicker.removeEventListener(BattleTickerEvent.SHOW,this.onBattleTickerShowHandler);
-            this.battleTicker.removeEventListener(BattleTickerEvent.HIDE,this.onBattleTickerShowHandler);
-            this.battleTicker = null;
             this.endWarningPanel = null;
             this.battleDamageLogPanel = null;
             this.siegeModePanel = null;
@@ -269,15 +252,6 @@ package net.wg.gui.battle.epicRandom.views
         override protected function getFullStatsTabQuestProgress() : IQuestProgressView
         {
             return this.fullStats.getStatsProgressView();
-        }
-
-        protected function updateTopConstraintOffset() : void
-        {
-            var _loc1_:Number = this.battleTicker.visible?this.battleTicker.y + this.battleTicker.height + Ticker.TICKER_Y_PADDING:0;
-            prebattleTimer.y = _loc1_ >> 0;
-            this.epicRandomScorePanel.y = this._fragCorrelationBarStartYPos + _loc1_ >> 0;
-            this.teamBasesPanelUI.y = this.epicRandomScorePanel.y + this.epicRandomScorePanel.panelHeight >> 0;
-            this.updatePositionForQuestProgress();
         }
 
         private function updatePositionForQuestProgress() : void
@@ -401,11 +375,6 @@ package net.wg.gui.battle.epicRandom.views
         {
             setFocus(this);
             this.swapElementsByMouseInteraction(this.epicRandomPlayersPanel,this.battleMessenger);
-        }
-
-        private function onBattleTickerShowHandler(param1:BattleTickerEvent) : void
-        {
-            this.updateTopConstraintOffset();
         }
 
         private function onConsumablesPanelUpdatePositionHandler(param1:ConsumablesPanelEvent) : void

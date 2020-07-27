@@ -89,6 +89,7 @@ package net.wg.gui.bootcamp
 
         override protected function draw() : void
         {
+            var _loc1_:* = NaN;
             super.draw();
             if(this._introInfo && isInvalid(INTRO_INFO_CHANGED))
             {
@@ -108,7 +109,18 @@ package net.wg.gui.bootcamp
             }
             if(this._stageDimensions != null && isInvalid(STAGE_RESIZED))
             {
-                this.videoPlayer.scaleX = this.videoPlayer.scaleY = Math.max(this._playerOriginalScaleX * this._stageDimensions.x / this._playerOriginalWidth,this._playerOriginalScaleY * this._stageDimensions.y / this._playerOriginalHeight);
+                if(this._stageDimensions.x / this._stageDimensions.y > this._playerOriginalWidth / this._playerOriginalHeight)
+                {
+                    _loc1_ = this._stageDimensions.x / this._playerOriginalWidth;
+                }
+                else
+                {
+                    _loc1_ = this._stageDimensions.y / this._playerOriginalHeight;
+                }
+                this.videoPlayer.scaleX = this._playerOriginalScaleX * _loc1_;
+                this.videoPlayer.scaleY = this._playerOriginalScaleY * _loc1_;
+                this.videoPlayer.x = this._stageDimensions.x - this.videoPlayer.width >> 1;
+                this.videoPlayer.y = this._stageDimensions.y - this.videoPlayer.height >> 1;
                 this.blackBG.width = this._stageDimensions.x;
                 this.blackBG.height = this._stageDimensions.y;
                 this.btnSkipVideo.x = this._stageDimensions.x - this.btnSkipVideo.width >> 1;

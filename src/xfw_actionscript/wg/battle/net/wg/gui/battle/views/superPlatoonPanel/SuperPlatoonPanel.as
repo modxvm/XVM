@@ -248,6 +248,10 @@ package net.wg.gui.battle.views.superPlatoonPanel
         {
         }
 
+        public function updateTriggeredChatCommands(param1:IDAAPIDataClass) : void
+        {
+        }
+
         private function applyVehicleData(param1:DAAPIVehiclesDataVO) : void
         {
             var _loc3_:DAAPIVehicleInfoVO = null;

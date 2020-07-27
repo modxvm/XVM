@@ -15,5 +15,9 @@ package net.wg.gui.lobby.rankedBattles19.components.interfaces
         function hasVisibleShield() : Boolean;
 
         function useButtonMode(param1:Boolean) : void;
+
+        function get isEnabled() : Boolean;
+
+        function set isEnabled(param1:Boolean) : void;
     }
 }

@@ -76,7 +76,6 @@ package net.wg.gui.lobby.rankedBattles19.view.intro
         {
             super.configUI();
             setBackground(RES_ICONS.MAPS_ICONS_RANKEDBATTLES_BG_INTRO);
-            this.header.subTitleMultiline = true;
             closeBtn.label = RANKED_BATTLES.RANKEDBATTLEPAGE_CLOSEBTN;
             closeBtn.validateNow();
         }

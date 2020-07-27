@@ -7,9 +7,9 @@ package net.wg.gui.components.controls
     import flash.events.Event;
     import flash.events.MouseEvent;
     import scaleform.clik.constants.InvalidationType;
-    import flash.text.TextFieldAutoSize;
     import net.wg.data.constants.AlignType;
     import net.wg.data.constants.IconTextPosition;
+    import flash.text.TextFieldAutoSize;
 
     public class ImageTextComponent extends UIComponentEx
     {
@@ -64,7 +64,7 @@ package net.wg.gui.components.controls
 
         private var _iconPosition:String = "left";
 
-        private var _updateTextFieldSize:Boolean = false;
+        private var _updateTextFieldSize:Boolean = true;
 
         private var _textWidth:int = 0;
 
@@ -102,6 +102,8 @@ package net.wg.gui.components.controls
         {
             super.configUI();
             this._textFormat = this.textField.getTextFormat();
+            addEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
+            addEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
         }
 
         override protected function draw() : void
@@ -118,7 +120,6 @@ package net.wg.gui.components.controls
                     this._textFormat.size = this._textSize;
                     this._textFormat.font = this._textFont;
                     this._textFormat.align = this._textAlign;
-                    this.textField.autoSize = this._textAutoSize;
                     this.textField.antiAliasType = this._antiAliasing;
                 }
                 else
@@ -134,17 +135,11 @@ package net.wg.gui.components.controls
                 }
                 else
                 {
-                    if(this._styleSheet)
-                    {
-                        _loc3_ = false;
-                        this.textField.styleSheet = this._styleSheet;
-                    }
+                    this.textField.styleSheet = this._styleSheet;
                     this.textField.text = this._text;
+                    _loc3_ = this._styleSheet == null;
                 }
-                if(this._updateTextFieldSize || this._textWidth == 0 || this._textHeight == 0 || this._textAutoSize != TextFieldAutoSize.NONE)
-                {
-                    _loc4_ = true;
-                }
+                _loc4_ = _loc4_ || this._updateTextFieldSize || this._textWidth == 0 || this._textHeight == 0;
             }
             if(_loc3_)
             {
@@ -463,7 +458,19 @@ package net.wg.gui.components.controls
             if(this._textAutoSize != param1)
             {
                 this._textAutoSize = param1;
-                this.invalidateStyle();
+                this.updateTextFieldSize = param1 != TextFieldAutoSize.NONE;
+                switch(param1)
+                {
+                    case TextFieldAutoSize.LEFT:
+                        this.horizontalAlign = AlignType.LEFT;
+                        break;
+                    case TextFieldAutoSize.RIGHT:
+                        this.horizontalAlign = AlignType.RIGHT;
+                        break;
+                    case TextFieldAutoSize.CENTER:
+                        this.horizontalAlign = AlignType.CENTER;
+                        break;
+                }
             }
         }
 
@@ -524,7 +531,7 @@ package net.wg.gui.components.controls
             }
         }
 
-        public function get useHtmlText() : String
+        public function get htmlText() : String
         {
             return this._htmlText;
         }

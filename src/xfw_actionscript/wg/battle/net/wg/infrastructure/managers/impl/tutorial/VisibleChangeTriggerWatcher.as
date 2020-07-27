@@ -32,7 +32,7 @@ package net.wg.infrastructure.managers.impl.tutorial
 
         private function onTargetVisibleChangeHandler(param1:Event) : void
         {
-            if(target.visible != this._visible)
+            if(target && target.visible != this._visible)
             {
                 this._visible = target.visible;
                 dispatchEvent(new TriggerEvent(TriggerEvent.TRIGGER_ACTIVATED,false,false,this._visible));

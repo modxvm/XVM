@@ -57,6 +57,28 @@ package net.wg.gui.lobby.messengerBar
 
         private static const REFERRAL_MASK_HEIGHT_OFFSET:uint = 4;
 
+        private static const NOTIFICATION_SHIFT_X:int = 7;
+
+        private static const NOTIFICATION_SHIFT_Y:int = 1;
+
+        private static const CONTACTS_SHIFT_X:int = 1;
+
+        private static const CONTACTS_HEIGHT_INCREMENT:int = -2;
+
+        private static const CHANNEL_SHIFT_X:int = 3;
+
+        private static const CHANNEL_SHIFT_Y:int = 3;
+
+        private static const CHANNEL_WIDTH_INCREMENT:int = -20;
+
+        private static const CHANNEL_HEIGHT_INCREMENT:int = -5;
+
+        private static const VEHICLE_COMPARE_SHIFT_X:int = -5;
+
+        private static const VEHICLE_COMPARE_WIDTH_INCREMENT:int = -2;
+
+        private static const SESSION_STATS_SHIFT_X:int = -4;
+
         private static const HELP_LAYOUT_ID_CONTACTS_BUTTON:String = "contactsButton";
 
         private static const HELP_LAYOUT_ID_CHANNELS_CAROUSEL:String = "channelsCarousel";
@@ -86,8 +108,6 @@ package net.wg.gui.lobby.messengerBar
         public var circleAnimMask:Sprite;
 
         public var circleAnimation:MovieClip;
-
-        public var mouseBlocker:Sprite;
 
         public var fakeChnlBtn:MovieClip;
 
@@ -182,7 +202,6 @@ package net.wg.gui.lobby.messengerBar
             this.sessionStatsBtn = null;
             this._stageDimensions = null;
             this.bg = null;
-            this.mouseBlocker = null;
             if(this._anim)
             {
                 this.animPlacer.removeChild(this._anim);
@@ -199,7 +218,6 @@ package net.wg.gui.lobby.messengerBar
         {
             var _loc1_:* = false;
             super.configUI();
-            this.bg.visible = false;
             this.circleAnimation.visible = false;
             this.circleAnimation.mouseChildren = false;
             this.circleAnimation.mouseEnabled = false;
@@ -284,8 +302,8 @@ package net.wg.gui.lobby.messengerBar
                 y = this._stageDimensions.y - this.height - this.paddingBottom;
                 x = this.paddingLeft;
                 width = this._stageDimensions.x - this.paddingLeft - this.paddingRight;
-                this.mouseBlocker.x = this.bg.x = -this.paddingLeft;
-                this.mouseBlocker.width = this.bg.width = this._stageDimensions.x;
+                this.bg.x = -this.paddingLeft;
+                this.bg.width = this._stageDimensions.x;
             }
             if(isInvalid(InvalidationType.SIZE))
             {
@@ -372,6 +390,11 @@ package net.wg.gui.lobby.messengerBar
             }
         }
 
+        public function as_setReferralButtonEnabled(param1:Boolean) : void
+        {
+            this.referralBtn.enabled = param1;
+        }
+
         public function as_setReferralProgramButtonVisible(param1:Boolean) : void
         {
             if(this._initData.isReferralEnabled != param1)
@@ -379,11 +402,6 @@ package net.wg.gui.lobby.messengerBar
                 this._initData.isReferralEnabled = param1;
                 invalidate(INV_REFERRAL_BUTTON);
             }
-        }
-
-        public function as_setReferralButtonEnabled(param1:Boolean) : void
-        {
-            this.referralBtn.enabled = param1;
         }
 
         public function as_setVehicleCompareCartButtonVisible(param1:Boolean) : void
@@ -429,29 +447,25 @@ package net.wg.gui.lobby.messengerBar
         public function getLayoutProperties() : Vector.<HelpLayoutVO>
         {
             var _loc1_:Vector.<HelpLayoutVO> = new Vector.<HelpLayoutVO>();
-            var _loc2_:* = 7;
-            var _loc3_:* = 1;
-            var _loc4_:* = 1;
-            var _loc5_:* = -2;
-            var _loc6_:* = 3;
-            var _loc7_:* = 3;
-            var _loc8_:* = -20;
-            var _loc9_:* = -5;
-            var _loc10_:* = -5;
-            var _loc11_:* = -2;
-            var _loc12_:* = -4;
-            _loc1_.push(this.createHelpLayoutVO(HELP_LAYOUT_ID_CONTACTS_BUTTON,LOBBY_HELP.CHAT_CONTACTS_CHANNEL,this.contactsListBtn.x + _loc4_,this.contactsListBtn.y,this.channelButton.x + this.channelButton.width - this.contactsListBtn.x - _loc4_,this.contactsListBtn.height + _loc5_));
-            _loc1_.push(this.createHelpLayoutVO(HELP_LAYOUT_ID_CHANNELS_CAROUSEL,LOBBY_HELP.CHANNELCAROUSEL_CHANNELS,this.channelCarousel.x + _loc6_,this.channelCarousel.y + _loc7_,this.channelCarousel.width + _loc8_,this.channelCarousel.height + _loc9_));
+            _loc1_.push(this.createHelpLayoutVO(HELP_LAYOUT_ID_CONTACTS_BUTTON,LOBBY_HELP.CHAT_CONTACTS_CHANNEL,this.contactsListBtn.x + CONTACTS_SHIFT_X,this.contactsListBtn.y,this.channelButton.x + this.channelButton.width - this.contactsListBtn.x - CONTACTS_SHIFT_X,this.contactsListBtn.height + CONTACTS_HEIGHT_INCREMENT));
+            _loc1_.push(this.createHelpLayoutVO(HELP_LAYOUT_ID_CHANNELS_CAROUSEL,LOBBY_HELP.CHANNELCAROUSEL_CHANNELS,this.channelCarousel.x + CHANNEL_SHIFT_X,this.channelCarousel.y + CHANNEL_SHIFT_Y,this.channelCarousel.width + CHANNEL_WIDTH_INCREMENT,this.channelCarousel.height + CHANNEL_HEIGHT_INCREMENT));
             if(this._vehicleCmpBtnVisible)
             {
-                _loc1_.push(this.createHelpLayoutVO(HELP_LAYOUT_ID_VEHICLE_COMPARE_BUTTON,LOBBY_HELP.VEHICLE_COMPARE,this.vehicleCompareCartBtn.x + _loc10_,this.vehicleCompareCartBtn.y,this.vehicleCompareCartBtn.width + _loc11_,this.notificationListBtn.height));
+                _loc1_.push(this.createHelpLayoutVO(HELP_LAYOUT_ID_VEHICLE_COMPARE_BUTTON,LOBBY_HELP.VEHICLE_COMPARE,this.vehicleCompareCartBtn.x + VEHICLE_COMPARE_SHIFT_X,this.vehicleCompareCartBtn.y,this.vehicleCompareCartBtn.width + VEHICLE_COMPARE_WIDTH_INCREMENT,this.notificationListBtn.height));
             }
             if(this._sessionStatsBtnVisible)
             {
-                _loc1_.push(this.createHelpLayoutVO(HELP_LAYOUT_ID_SESSION_STATS_BUTTON,LOBBY_HELP.HANGAR_SESSIONSTATS,this.sessionStatsBtn.x + _loc12_,this.sessionStatsBtn.y,this.sessionStatsBtn.width + _loc11_,this.notificationListBtn.height));
+                _loc1_.push(this.createHelpLayoutVO(HELP_LAYOUT_ID_SESSION_STATS_BUTTON,LOBBY_HELP.HANGAR_SESSIONSTATS,this.sessionStatsBtn.x + SESSION_STATS_SHIFT_X,this.sessionStatsBtn.y,this.sessionStatsBtn.width + VEHICLE_COMPARE_WIDTH_INCREMENT,this.notificationListBtn.height));
             }
-            _loc1_.push(this.createHelpLayoutVO(HELP_LAYOUT_ID_NOTIFICATIONS_BUTTON,LOBBY_HELP.CHAT_SERVICE_CHANNEL,this.notificationListBtn.x + _loc2_,this.notificationListBtn.y + _loc3_,this.notificationListBtn.width,this.notificationListBtn.height));
+            _loc1_.push(this.createHelpLayoutVO(HELP_LAYOUT_ID_NOTIFICATIONS_BUTTON,LOBBY_HELP.CHAT_SERVICE_CHANNEL,this.notificationListBtn.x + NOTIFICATION_SHIFT_X,this.notificationListBtn.y + NOTIFICATION_SHIFT_Y,this.notificationListBtn.width,this.notificationListBtn.height));
             return _loc1_;
+        }
+
+        public function updateStage(param1:Number, param2:Number) : void
+        {
+            this._stageDimensions.x = param1;
+            this._stageDimensions.y = param2;
+            invalidate(LAYOUT_INVALID);
         }
 
         private function createHelpLayoutVO(param1:String, param2:String, param3:int, param4:int, param5:int, param6:int) : HelpLayoutVO
@@ -466,13 +480,6 @@ package net.wg.gui.lobby.messengerBar
             _loc7_.width = param5;
             _loc7_.height = param6;
             return _loc7_;
-        }
-
-        public function updateStage(param1:Number, param2:Number) : void
-        {
-            this._stageDimensions.x = param1;
-            this._stageDimensions.y = param2;
-            invalidate(LAYOUT_INVALID);
         }
 
         private function updateChannelCarouselWidth() : void

@@ -17,9 +17,9 @@ package net.wg.gui.lobby.vehicleCompare.configurator
     public class VehConfCrewSkillSlot extends SoundButtonEx
     {
 
-        private static const BG_ROLL_OVER_ALPHA:Number = 0.1;
+        private static const BG_ROLL_OVER_ALPHA:Number = 0.07;
 
-        private static const BG_ROLL_OUT_ALPHA:Number = 0.05;
+        private static const BG_ROLL_OUT_ALPHA:Number = 0.03;
 
         private static const ICON_ROLL_OVER_ALPHA:Number = 1;
 
@@ -28,6 +28,8 @@ package net.wg.gui.lobby.vehicleCompare.configurator
         private static const TWEEN_DURATION:Number = 150;
 
         private static const TOGGLE_ON:String = "on";
+
+        private static const TOGGLE_OFF:String = "off";
 
         public var toggleIndicator:MovieClip;
 
@@ -89,8 +91,7 @@ package net.wg.gui.lobby.vehicleCompare.configurator
             toggle = true;
             allowDeselect = true;
             this.glow.visible = false;
-            this.toggleIndicator.visible = false;
-            this.toggleIndicator.gotoAndStop(TOGGLE_ON);
+            this.toggleIndicator.gotoAndStop(TOGGLE_OFF);
             TextFieldEx.setVerticalAlign(this.labelTf,TextFieldEx.VALIGN_CENTER);
             this.applyAlpha(BG_ROLL_OUT_ALPHA,ICON_ROLL_OUT_ALPHA,true);
             addEventListener(ButtonEvent.CLICK,this.onButtonClickHandler);
@@ -134,7 +135,7 @@ package net.wg.gui.lobby.vehicleCompare.configurator
             }
             super.selected = param1;
             this.glow.visible = selected;
-            this.toggleIndicator.visible = selected;
+            this.toggleIndicator.gotoAndStop(selected?TOGGLE_ON:TOGGLE_OFF);
             if(selected)
             {
                 this.applyAlpha(BG_ROLL_OVER_ALPHA,ICON_ROLL_OVER_ALPHA);
@@ -163,7 +164,7 @@ package net.wg.gui.lobby.vehicleCompare.configurator
         override protected function handleMouseRollOver(param1:MouseEvent) : void
         {
             super.handleMouseRollOver(param1);
-            App.toolTipMgr.showSpecial(TOOLTIPS_CONSTANTS.TANKMAN_SKILL_EXTENDED,null,this._vo.skillType,!selected);
+            App.toolTipMgr.showSpecial(TOOLTIPS_CONSTANTS.TANKMAN_SKILL_EXTENDED,null,this._vo.skillType,false);
             if(!selected)
             {
                 this.applyAlpha(BG_ROLL_OVER_ALPHA,ICON_ROLL_OVER_ALPHA);

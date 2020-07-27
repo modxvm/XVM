@@ -17,6 +17,8 @@ package
 
         public static const COMMON_DOT:String = "#common:common/dot";
 
+        public static const COMMON_NBSP:String = "#common:common/nbsp";
+
         public static const CLANTAG:String = "#common:clanTag";
 
         public function COMMON()

@@ -23,15 +23,15 @@ package
 
         public static const CHANNELCAROUSEL_CHANNELS:String = "#lobby_help:channelCarousel/channels";
 
-        public static const HANGAR_MODULES:String = "#lobby_help:hangar/modules";
+        public static const HANGAR_AMMUNITIONPANEL_OPTDEVICES:String = "#lobby_help:hangar/ammunitionPanel/optDevices";
 
-        public static const HANGAR_OPTIONAL_DEVICES:String = "#lobby_help:hangar/optional-devices";
+        public static const HANGAR_AMMUNITIONPANEL_SHELLS:String = "#lobby_help:hangar/ammunitionPanel/shells";
 
-        public static const HANGAR_SHELLS:String = "#lobby_help:hangar/shells";
+        public static const HANGAR_AMMUNITIONPANEL_CONSUMABLES:String = "#lobby_help:hangar/ammunitionPanel/consumables";
 
-        public static const HANGAR_EQUIPMENT:String = "#lobby_help:hangar/equipment";
+        public static const HANGAR_AMMUNITIONPANEL_BATTLEBOOSTERS:String = "#lobby_help:hangar/ammunitionPanel/battleBoosters";
 
-        public static const HANGAR_BOOSTER:String = "#lobby_help:hangar/booster";
+        public static const HANGAR_AMMUNITIONPANEL_BATTLEABILITIES:String = "#lobby_help:hangar/ammunitionPanel/battleAbilities";
 
         public static const HANGAR_CREW:String = "#lobby_help:hangar/crew";
 
@@ -53,9 +53,22 @@ package
 
         public static const HANGAR_SESSIONSTATS:String = "#lobby_help:hangar/sessionStats";
 
+        public static const HANGAR_AMMUNITIONPANEL_ENUM:Array = [HANGAR_AMMUNITIONPANEL_OPTDEVICES,HANGAR_AMMUNITIONPANEL_SHELLS,HANGAR_AMMUNITIONPANEL_CONSUMABLES,HANGAR_AMMUNITIONPANEL_BATTLEBOOSTERS,HANGAR_AMMUNITIONPANEL_BATTLEABILITIES];
+
         public function LOBBY_HELP()
         {
             super();
+        }
+
+        public static function getAmmunitionPanelHelpMsg(param1:String) : String
+        {
+            var _loc2_:String = "#lobby_help:" + "hangar/ammunitionPanel/" + param1;
+            if(HANGAR_AMMUNITIONPANEL_ENUM.indexOf(_loc2_) == -1)
+            {
+                DebugUtils.LOG_WARNING("[getAmmunitionPanelHelpMsg]:locale key \"" + _loc2_ + "\" was not found");
+                return null;
+            }
+            return _loc2_;
         }
     }
 }

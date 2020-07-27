@@ -70,7 +70,10 @@ package net.wg.gui.lobby.stronghold
 
         private function onStageResizeHandler(param1:Event) : void
         {
-            updateBrowserS();
+            if(param1.target == stage)
+            {
+                updateBrowserS();
+            }
         }
 
         private function onBrowserLoadingStartedHandler(param1:BrowserEvent) : void

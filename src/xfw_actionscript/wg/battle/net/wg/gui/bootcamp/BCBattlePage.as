@@ -41,7 +41,7 @@ package net.wg.gui.bootcamp
             this.secondaryHint.x = param1 >> 1;
         }
 
-        override protected function getRibbonsCenterOffset() : int
+        override protected function getRibbonsCenterOffset(param1:Number) : int
         {
             return RIBBONS_CENTER_SCREEN_OFFSET_Y;
         }

@@ -390,7 +390,7 @@ package net.wg.gui.lobby.techtree.sub
 
         public function closePremiumPanel(param1:Boolean = false) : void
         {
-            if(param1 || this.premiumPanel.isOpened && this.premiumHitArea && !this.premiumHitArea.hitTestPoint(App.stage.mouseX,App.stage.mouseY) && !this._isDragging)
+            if(param1 || this.premiumPanel.isOpened && this.premiumHitArea && this.premiumHitArea.mouseY <= 0 && !this._isDragging)
             {
                 if(this.premiumPanel.isOpened)
                 {
@@ -731,7 +731,7 @@ package net.wg.gui.lobby.techtree.sub
             this._scheduler.scheduleTask(this.deactivateCoolDown,DEF_ACTIVATE_COOLDOWN);
         }
 
-        private function onPremPanelMouseOverHandler() : void
+        private function onPremPanelMouseOverHandler(param1:Event) : void
         {
             if(!this._isDragging)
             {
@@ -748,7 +748,7 @@ package net.wg.gui.lobby.techtree.sub
             this.premiumHitArea.height = PREMIUM_PANEL_HEIGHT;
         }
 
-        private function onPremPanelMouseOutHandler() : void
+        private function onPremPanelMouseOutHandler(param1:Event) : void
         {
             this.closePremiumPanel();
         }

@@ -23,6 +23,8 @@ package net.wg.infrastructure.managers.counter
 
         public static const DEF_COUNTER_NO_VIEWED_VALUE:String = "1";
 
+        public static const EXCLAMATION_COUNTER_VALUE:String = "!";
+
         private var _countersContainers:Object;
 
         public function CounterManager()

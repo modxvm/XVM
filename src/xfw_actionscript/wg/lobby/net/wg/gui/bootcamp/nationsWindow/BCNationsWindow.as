@@ -8,6 +8,7 @@ package net.wg.gui.bootcamp.nationsWindow
     import net.wg.gui.bootcamp.nationsWindow.containers.NationsSelectorContainer;
     import net.wg.gui.interfaces.ISoundButtonEx;
     import flash.geom.Point;
+    import net.wg.gui.bootcamp.nationsWindow.data.NationItemVO;
     import flash.text.TextFieldAutoSize;
     import scaleform.clik.events.ButtonEvent;
     import net.wg.gui.bootcamp.nationsWindow.events.NationSelectEvent;
@@ -45,7 +46,7 @@ package net.wg.gui.bootcamp.nationsWindow
 
         private var _stageDimensions:Point = null;
 
-        private var _nationsList:Vector.<int> = null;
+        private var _nationsList:Vector.<NationItemVO> = null;
 
         public function BCNationsWindow()
         {
@@ -106,6 +107,7 @@ package net.wg.gui.bootcamp.nationsWindow
         {
             var _loc1_:* = 0;
             var _loc2_:* = 0;
+            var _loc3_:NationItemVO = null;
             super.draw();
             if(this._stageDimensions && (geometry && isInvalid(WindowViewInvalidationType.POSITION_INVALID) || isInvalid(STAGE_RESIZED)))
             {
@@ -130,14 +132,15 @@ package net.wg.gui.bootcamp.nationsWindow
             if(this._nationsList != null && isInvalid(InvalidationType.DATA))
             {
                 this.bottom.selectNation(this._selectedNation);
-                this.info.selectNation(this._selectedNation);
+                this.bottom.setNationsOrder(this._nationsList);
+                _loc3_ = this._nationsList[this._selectedNation];
+                this.info.selectNation(_loc3_.name,_loc3_.description);
             }
         }
 
-        override protected function selectNation(param1:uint, param2:Vector.<int>) : void
+        override protected function selectNation(param1:uint, param2:Vector.<NationItemVO>) : void
         {
-            var _loc3_:int = param2.indexOf(param1);
-            this._selectedNation = _loc3_;
+            this._selectedNation = param1;
             this._nationsList = param2;
             invalidateData();
         }
@@ -145,15 +148,15 @@ package net.wg.gui.bootcamp.nationsWindow
         private function onBottomNationShowHandler(param1:NationSelectEvent) : void
         {
             this._selectedNation = param1.selectedNation;
-            var _loc2_:int = this._nationsList[param1.selectedNation];
-            this.info.selectNation(this._selectedNation);
-            onNationShowS(_loc2_);
+            var _loc2_:NationItemVO = this._nationsList[this._selectedNation];
+            this.info.selectNation(_loc2_.name,_loc2_.description);
+            onNationShowS(_loc2_.id);
         }
 
         private function onBtnSelectClickHandler(param1:ButtonEvent) : void
         {
-            var _loc2_:int = this._nationsList[this._selectedNation];
-            onNationSelectedS(_loc2_);
+            var _loc2_:NationItemVO = this._nationsList[this._selectedNation];
+            onNationSelectedS(_loc2_.id);
         }
     }
 }

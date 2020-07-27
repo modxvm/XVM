@@ -70,17 +70,22 @@ package net.wg.gui.lobby.components
 
         override protected function showSelectedVehicle(param1:VehicleCarouselVO) : void
         {
-            if(param1 != null)
+            if(!param1.isNull)
             {
                 this._selectedVehicleData = param1;
                 invalidateData();
                 visible = true;
+            }
+            else
+            {
+                this._selectedVehicleData = null;
             }
         }
 
         override protected function draw() : void
         {
             super.draw();
+            this.selectVehicleButton.visible = false;
             if(isInvalid(InvalidationType.DATA))
             {
                 if(this._selectedVehicleData != null)

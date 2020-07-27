@@ -3,6 +3,7 @@ package net.wg.gui.lobby.epicBattles.components
     import flash.display.MovieClip;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import net.wg.gui.components.controls.UILoaderAlt;
+    import net.wg.gui.lobby.eventProgression.components.metaLevel.EpicBattleMetaLevel;
     import net.wg.gui.events.UILoaderEvent;
     import net.wg.gui.lobby.epicBattles.data.EpicBattlesRewardRibbonVO;
 
@@ -11,7 +12,7 @@ package net.wg.gui.lobby.epicBattles.components
 
         public var imageIcon:UILoaderAlt = null;
 
-        public var epicMetaLevelRegular:EpicBattlesMetaLevel = null;
+        public var epicMetaLevelRegular:EpicBattleMetaLevel = null;
 
         public function AnimatedRewardRibbonIconContainer()
         {
@@ -29,7 +30,7 @@ package net.wg.gui.lobby.epicBattles.components
 
         public function setData(param1:EpicBattlesRewardRibbonVO) : void
         {
-            if(param1.epicMetaLevelIconData.level)
+            if(param1.epicMetaLevelIconData.seasonLevel)
             {
                 this.imageIcon.visible = false;
                 this.epicMetaLevelRegular.visible = true;

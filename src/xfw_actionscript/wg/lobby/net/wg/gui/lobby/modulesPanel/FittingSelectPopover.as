@@ -168,7 +168,7 @@ package net.wg.gui.lobby.modulesPanel
                 }
                 _loc1_ = this._data.rendererName;
                 this.battleAbilitiesButton.visible = this._data.battleAbilitiesButtonVisible;
-                this._utils.asserter.assert(FITTING_TYPES.FITTING_RENDERERS.indexOf(_loc1_) >= 0,Errors.INVALID_TYPE);
+                this._utils.asserter.assert(FITTING_TYPES.FITTING_RENDERERS.indexOf(_loc1_) >= 0,Errors.INVALID_TYPE + ". Got " + _loc1_);
                 this.itemsList.itemRendererName = _loc1_;
                 this.itemsList.dataProvider = this._data.availableDevices;
                 this.itemsList.selectedIndex = this._data.selectedIndex;

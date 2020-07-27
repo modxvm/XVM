@@ -460,6 +460,24 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             }
         }
 
+        public function setChatCommand(param1:Number, param2:String, param3:uint) : void
+        {
+            var _loc4_:IPlayersPanelListItemHolder = this.getHolderByVehicleID(param1);
+            if(_loc4_)
+            {
+                _loc4_.setChatCommand(param2,param3);
+            }
+        }
+
+        public function triggerChatCommand(param1:Number, param2:String) : void
+        {
+            var _loc3_:IPlayersPanelListItemHolder = this.getHolderByVehicleID(param1);
+            if(_loc3_)
+            {
+                _loc3_.triggerChatCommand(param2);
+            }
+        }
+
         public function updateOrder(param1:Vector.<Number>) : void
         {
             if(!param1 || this._playerGroupID == -1)

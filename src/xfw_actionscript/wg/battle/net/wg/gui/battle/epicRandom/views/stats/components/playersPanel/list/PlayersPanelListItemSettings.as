@@ -25,6 +25,10 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
 
         public var xPosition:int = 0;
 
+        public var chatCommunicationIconXOffset:int = 0;
+
+        public var chatCommunicationIconYOffset:int = 0;
+
         public function PlayersPanelListItemSettings()
         {
             super();

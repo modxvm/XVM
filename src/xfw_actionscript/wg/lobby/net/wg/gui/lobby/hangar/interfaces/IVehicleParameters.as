@@ -11,5 +11,13 @@ package net.wg.gui.lobby.hangar.interfaces
         function getHelpLayoutWidth() : Number;
 
         function showHelpLayoutEx(param1:Number, param2:Number) : void;
+
+        function set snapHeightToRenderers(param1:Boolean) : void;
+
+        function hideBg() : void;
+
+        function set forceInvalidateOnDataChange(param1:Boolean) : void;
+
+        function set showShadowLipWhenOverflow(param1:Boolean) : void;
     }
 }

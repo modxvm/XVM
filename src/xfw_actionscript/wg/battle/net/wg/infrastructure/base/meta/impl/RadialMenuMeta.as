@@ -11,6 +11,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public var onAction:Function;
 
+        public var onHideCompleted:Function;
+
         private var _array:Array;
 
         private var _array1:Array;
@@ -52,6 +54,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.onAction,"onAction" + Errors.CANT_NULL);
             this.onAction(param1);
+        }
+
+        public function onHideCompletedS() : void
+        {
+            App.utils.asserter.assertNotNull(this.onHideCompleted,"onHideCompleted" + Errors.CANT_NULL);
+            this.onHideCompleted();
         }
 
         public final function as_buildData(param1:Array) : void

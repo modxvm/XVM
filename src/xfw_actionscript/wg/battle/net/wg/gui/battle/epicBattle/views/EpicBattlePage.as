@@ -25,6 +25,7 @@ package net.wg.gui.battle.epicBattle.views
     import net.wg.gui.battle.views.superPlatoonPanel.SuperPlatoonPanel;
     import net.wg.gui.battle.views.epicInGameRank.EpicInGameRankPanel;
     import net.wg.gui.components.hintPanel.HintPanel;
+    import net.wg.gui.battle.views.prebattleTimer.PrebattleTimerBg;
     import net.wg.data.constants.generated.DAMAGE_INFO_PANEL_CONSTS;
     import net.wg.infrastructure.helpers.statisticsDataController.BattleStatisticDataController;
     import net.wg.infrastructure.helpers.statisticsDataController.EpicBattleStatisticDataController;
@@ -32,6 +33,7 @@ package net.wg.gui.battle.epicBattle.views
     import net.wg.gui.battle.views.minimap.EpicMinimap;
     import net.wg.infrastructure.events.FocusRequestEvent;
     import net.wg.gui.battle.views.consumablesPanel.events.ConsumablesPanelEvent;
+    import net.wg.gui.battle.views.prebattleTimer.PrebattleTimerEvent;
     import flash.events.Event;
     import net.wg.data.constants.generated.BATTLE_VIEW_ALIASES;
     import net.wg.gui.battle.views.epicRespawnView.events.EpicRespawnEvent;
@@ -77,6 +79,8 @@ package net.wg.gui.battle.epicBattle.views
         private static const CAPTURE_BAR_TWEEN_LENGTH:int = 600;
 
         private static const PREBATTLE_TIMER_TWEEN_LENGTH:int = 1000;
+
+        private static const PREBATTLE_TIMER_BACKGROUND_TWEEN_LENGTH:int = 700;
 
         private static const TOP_EPIC_BATTLE_EAR_ELEMENTS_OFFSET:int = 60;
 
@@ -130,6 +134,8 @@ package net.wg.gui.battle.epicBattle.views
 
         public var hintPanel:HintPanel = null;
 
+        public var prebattleTimerBackground:PrebattleTimerBg = null;
+
         private var _scorePanelState:int = 0;
 
         private var _messagePlaying:Boolean = false;
@@ -153,6 +159,12 @@ package net.wg.gui.battle.epicBattle.views
             var _loc3_:Number = param1 >> 1;
             _originalWidth = param1;
             _originalHeight = param2;
+            if(this.prebattleTimerBackground)
+            {
+                this.prebattleTimerBackground.y = 0;
+                this.prebattleTimerBackground.x = _loc3_;
+                this.prebattleTimerBackground.updateSize(param1,param2);
+            }
             gameMessagesPanel.x = param1 >> 1;
             gameMessagesPanel.y = MSG_PNL_OFFSET;
             if(param2 >= MSG_PNL_Y_BREAKPOINT)
@@ -235,6 +247,8 @@ package net.wg.gui.battle.epicBattle.views
             this.battleMessenger.addEventListener(BattleMessenger.REMOVE_FOCUS,this.onBattleMessengerRemoveFocusHandler);
             this.consumablesPanel.addEventListener(ConsumablesPanelEvent.UPDATE_POSITION,this.onConsumablesPanelUpdatePositionHandler);
             super.configUI();
+            prebattleTimer.hideBackground();
+            prebattleTimer.addEventListener(PrebattleTimerEvent.START_HIDING,this.onPrebattleTimerStartHiding);
             this.epicRespawnView.mouseEnabled = false;
             this.hintPanel.addEventListener(Event.RESIZE,this.onHintPanelResizeHandler);
         }
@@ -252,7 +266,7 @@ package net.wg.gui.battle.epicBattle.views
             registerComponent(this.battleDamageLogPanel,BATTLE_VIEW_ALIASES.BATTLE_DAMAGE_LOG_PANEL);
             registerComponent(this.siegeModePanel,BATTLE_VIEW_ALIASES.SIEGE_MODE_INDICATOR);
             registerComponent(this.epicScorePanelUI,BATTLE_VIEW_ALIASES.EPIC_SCORE_PANEL);
-            registerComponent(this.epicDestroyTimersPanel,BATTLE_VIEW_ALIASES.DESTROY_TIMERS_PANEL);
+            registerComponent(this.epicDestroyTimersPanel,BATTLE_VIEW_ALIASES.TIMERS_PANEL);
             registerComponent(this.epicRespawnView,BATTLE_VIEW_ALIASES.EPIC_RESPAWN_VIEW);
             registerComponent(this.epicDeploymentMap,BATTLE_VIEW_ALIASES.EPIC_DEPLOYMENT_MAP);
             registerComponent(this.epicOverviewMapScreen,BATTLE_VIEW_ALIASES.EPIC_OVERVIEW_MAP_SCREEN);
@@ -274,6 +288,7 @@ package net.wg.gui.battle.epicBattle.views
 
         override protected function onDispose() : void
         {
+            prebattleTimer.removeEventListener(PrebattleTimerEvent.START_HIDING,this.onPrebattleTimerStartHiding);
             this.battleMessenger.removeEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onBattleMessengerRequestFocusHandler);
             this.battleMessenger.removeEventListener(BattleMessenger.REMOVE_FOCUS,this.onBattleMessengerRemoveFocusHandler);
             this.consumablesPanel.removeEventListener(ConsumablesPanelEvent.UPDATE_POSITION,this.onConsumablesPanelUpdatePositionHandler);
@@ -304,6 +319,7 @@ package net.wg.gui.battle.epicBattle.views
             this.superPlatoonPanel = null;
             this.epicInGameRank = null;
             this.siegeModePanel = null;
+            this.prebattleTimerBackground = null;
             super.onDispose();
         }
 
@@ -510,6 +526,28 @@ package net.wg.gui.battle.epicBattle.views
             if(!this._messagePlaying)
             {
                 this.teamBasesPanelUI.y = TEAM_BASES_PANEL_OFFSETS[this._scorePanelState];
+            }
+        }
+
+        private function onPrebattleTimerStartHiding(param1:PrebattleTimerEvent) : void
+        {
+            var countDownEnding:Tween = null;
+            var event:PrebattleTimerEvent = param1;
+            if(this.prebattleTimerBackground)
+            {
+                if(event.useAnim && this.prebattleTimerBackground.visible)
+                {
+                    countDownEnding = new Tween(PREBATTLE_TIMER_BACKGROUND_TWEEN_LENGTH,this.prebattleTimerBackground,{"alpha":0},{"onComplete":function(param1:Tween):void
+                    {
+                        prebattleTimerBackground.visible = false;
+                        param1.dispose();
+                        var param1:Tween = null;
+                    }});
+                }
+                else
+                {
+                    this.prebattleTimerBackground.visible = false;
+                }
             }
         }
     }

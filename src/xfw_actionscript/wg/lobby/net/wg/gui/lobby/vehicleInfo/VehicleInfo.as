@@ -2,6 +2,7 @@ package net.wg.gui.lobby.vehicleInfo
 {
     import net.wg.infrastructure.base.meta.impl.VehicleInfoMeta;
     import net.wg.infrastructure.base.meta.IVehicleInfoMeta;
+    import net.wg.infrastructure.managers.counter.CounterProps;
     import net.wg.gui.components.advanced.TankIcon;
     import flash.text.TextField;
     import net.wg.gui.components.advanced.TextAreaSimple;
@@ -16,7 +17,7 @@ package net.wg.gui.lobby.vehicleInfo
     import scaleform.clik.events.ButtonEvent;
     import scaleform.clik.constants.InvalidationType;
     import flash.display.DisplayObject;
-    import net.wg.infrastructure.managers.counter.CounterProps;
+    import net.wg.infrastructure.managers.counter.CounterManager;
     import scaleform.clik.utils.Padding;
     import flash.display.InteractiveObject;
     import net.wg.infrastructure.interfaces.IViewStackContent;
@@ -34,6 +35,8 @@ package net.wg.gui.lobby.vehicleInfo
         private static const INV_COMPARE_DATA:String = "InvCompareData";
 
         private static const INV_CHANGE_NATION_DATA:String = "InvChangeNationData";
+
+        private static const COUNTER_PROPS:CounterProps = new CounterProps(3,-3);
 
         public var vehicleIcon:TankIcon;
 
@@ -126,7 +129,7 @@ package net.wg.gui.lobby.vehicleInfo
                 {
                     if(this._changeNationData.isNew)
                     {
-                        this._counterManager.setCounter(this.changeNationBtn as DisplayObject,"!",null,new CounterProps(3,-3));
+                        this._counterManager.setCounter(this.changeNationBtn as DisplayObject,CounterManager.EXCLAMATION_COUNTER_VALUE,null,COUNTER_PROPS);
                     }
                     this.compareBtn.x = this.changeNationBtn.x + this.changeNationBtn.width + this._closeBtnOffset;
                 }
@@ -139,17 +142,6 @@ package net.wg.gui.lobby.vehicleInfo
             if(this._compareData && isInvalid(INV_COMPARE_DATA))
             {
                 this.initButton(this.compareBtn,this._compareData);
-            }
-        }
-
-        private function initButton(param1:ISoundButtonEx, param2:VehicleInfoButtonDataVO) : void
-        {
-            param1.visible = param2.visible;
-            if(param2.visible)
-            {
-                param1.enabled = param2.enabled;
-                param1.label = param2.label;
-                param1.tooltip = param2.tooltip;
             }
         }
 
@@ -187,6 +179,7 @@ package net.wg.gui.lobby.vehicleInfo
             this._compareData = null;
             this._data = null;
             this._counterManager = null;
+            this._changeNationData = null;
             super.onDispose();
         }
 
@@ -200,6 +193,17 @@ package net.wg.gui.lobby.vehicleInfo
         {
             this._data = param1;
             invalidateData();
+        }
+
+        private function initButton(param1:ISoundButtonEx, param2:VehicleInfoButtonDataVO) : void
+        {
+            param1.visible = param2.visible;
+            if(param2.visible)
+            {
+                param1.enabled = param2.enabled;
+                param1.label = param2.label;
+                param1.tooltip = param2.tooltip;
+            }
         }
 
         private function onCompareBtnClickHandler(param1:ButtonEvent) : void

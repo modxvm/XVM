@@ -240,6 +240,10 @@ package net.wg.gui.battle.epicBattle.views.stats
         {
         }
 
+        public function updateTriggeredChatCommands(param1:IDAAPIDataClass) : void
+        {
+        }
+
         private function applyPersonalStatus() : void
         {
             this._tableCtrl.setIsInviteShown(PersonalStatus.isShowAllyInvites(this._personalStatus),PersonalStatus.isShowEnemyInvites(this._personalStatus));

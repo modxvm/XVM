@@ -146,6 +146,7 @@ package scaleform.clik.motion
         public function dispose() : void
         {
             var _loc1_:String = null;
+            this.paused = true;
             this.target = null;
             this.ease = null;
             for(_loc1_ in this.easeParam)

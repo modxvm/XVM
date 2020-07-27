@@ -1,6 +1,6 @@
 package net.wg.gui.battle.views.minimap.components.entries.teambase
 {
-    import net.wg.gui.battle.components.BattleUIComponent;
+    import net.wg.gui.battle.views.minimap.components.entries.personal.PingFlashMinimapEntry;
     import flash.display.Sprite;
     import net.wg.infrastructure.managers.IAtlasManager;
     import net.wg.data.constants.generated.ATLAS_CONSTANTS;
@@ -8,7 +8,7 @@ package net.wg.gui.battle.views.minimap.components.entries.teambase
     import net.wg.gui.battle.views.minimap.constants.MinimapColorConst;
     import net.wg.gui.battle.views.minimap.MinimapEntryController;
 
-    public class AllyTeamBaseMinimapEntry extends BattleUIComponent
+    public class AllyTeamBaseMinimapEntry extends PingFlashMinimapEntry
     {
 
         public var atlasPlaceholder:Sprite = null;
@@ -20,6 +20,15 @@ package net.wg.gui.battle.views.minimap.components.entries.teambase
             this._atlasManager = App.atlasMgr;
             super();
             MinimapEntryController.instance.registerScalableEntry(this);
+        }
+
+        override protected function SetAtlasPlaceholderVisible(param1:Boolean) : void
+        {
+            if(this.atlasPlaceholder == null)
+            {
+                return;
+            }
+            this.atlasPlaceholder.visible = param1;
         }
 
         public function setPointNumber(param1:int) : void

@@ -3,17 +3,22 @@ package net.wg.gui.battle.views.staticMarkers.epic.sectorbase
     import net.wg.gui.battle.components.BattleIconHolder;
     import net.wg.gui.battle.components.EpicProgressCircle;
     import flash.display.MovieClip;
+    import net.wg.gui.battle.views.vehicleMarkers.VehicleMarkersManager;
 
     public class SectorBaseIcon extends BattleIconHolder
     {
 
-        private static const PROGRESS_SCALE:Number = 0.5;
+        public static const HOVER_STATE:int = 6;
 
-        private static const BASE_ID_SCALE:Number = 0.75;
+        private static const BG_POSTFIX:String = "Base";
 
-        private static const BASE_ICN_SCALE:Number = 0.75;
+        private static const BG_COLORBLIND_POSTFIX:String = "ColorBlindBase";
 
-        private static const TARGET_SCALE:Number = 0.9;
+        private static const HOVER_POSTFIX:String = "BaseHover";
+
+        private static const HOVER_COLORBLIND_POSTFIX:String = "ColorBlindBaseHover";
+
+        private static const ENEMY:String = "enemy";
 
         public var progressCircle:EpicProgressCircle = null;
 
@@ -23,10 +28,19 @@ package net.wg.gui.battle.views.staticMarkers.epic.sectorbase
 
         public var targetHighlight:MovieClip = null;
 
+        public var sectorBaseHover:MovieClip = null;
+
+        private var _owningTeam:String = null;
+
+        private var _vmManager:VehicleMarkersManager;
+
         public function SectorBaseIcon()
         {
             super();
+            this._vmManager = VehicleMarkersManager.getInstance();
             this.bg.visible = true;
+            this.progressCircle.visible = false;
+            this.sectorBaseHover.visible = false;
         }
 
         override protected function onDispose() : void
@@ -36,6 +50,7 @@ package net.wg.gui.battle.views.staticMarkers.epic.sectorbase
             this.baseId = null;
             this.bg = null;
             this.targetHighlight = null;
+            this.sectorBaseHover = null;
             super.onDispose();
         }
 
@@ -49,22 +64,56 @@ package net.wg.gui.battle.views.staticMarkers.epic.sectorbase
             this.progressCircle.updateProgress(param1);
         }
 
-        public function setInternalIconScale(param1:Number) : void
-        {
-            var _loc2_:Number = PROGRESS_SCALE * param1;
-            this.progressCircle.scaleX = this.progressCircle.scaleY = _loc2_;
-            _loc2_ = BASE_ID_SCALE * param1;
-            this.baseId.scaleX = this.baseId.scaleY = _loc2_;
-            _loc2_ = BASE_ICN_SCALE * param1;
-            this.bg.scaleX = this.bg.scaleY = _loc2_;
-            _loc2_ = TARGET_SCALE * param1;
-            this.targetHighlight.scaleX = this.targetHighlight.scaleY = _loc2_;
-        }
-
-        public function setOwningTeam(param1:Boolean) : void
+        public function activateEpicVisibility() : void
         {
             this.progressCircle.visible = true;
-            this.progressCircle.setOwner(param1);
+            this.bg.visible = true;
+            this.baseId.visible = true;
+        }
+
+        public function getOwningTeam() : String
+        {
+            return this._owningTeam;
+        }
+
+        public function setOwningTeam(param1:String) : void
+        {
+            this._owningTeam = param1;
+            this.progressCircle.setOwner(param1 != ENEMY);
+            this.setBackgroundColor();
+        }
+
+        public function setBackgroundColor() : void
+        {
+            var _loc1_:String = BG_POSTFIX;
+            if(this._owningTeam == ENEMY && this._vmManager.isColorBlind)
+            {
+                _loc1_ = BG_COLORBLIND_POSTFIX;
+            }
+            this.bg.gotoAndStop(this._owningTeam + _loc1_);
+        }
+
+        public function setActiveState(param1:int) : void
+        {
+            if(param1 == HOVER_STATE)
+            {
+                this.sectorBaseHover.visible = true;
+                this.setHoverColor();
+            }
+            else
+            {
+                this.sectorBaseHover.visible = false;
+            }
+        }
+
+        public function setHoverColor() : void
+        {
+            var _loc1_:String = HOVER_POSTFIX;
+            if(this._vmManager.isColorBlind && this._owningTeam == ENEMY)
+            {
+                _loc1_ = HOVER_COLORBLIND_POSTFIX;
+            }
+            this.sectorBaseHover.gotoAndStop(this._owningTeam + _loc1_);
         }
     }
 }

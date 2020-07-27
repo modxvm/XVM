@@ -84,5 +84,7 @@ package net.wg.gui.lobby.techtree.interfaces
         function get container() : INodesContainer;
 
         function set container(param1:INodesContainer) : void;
+
+        function cleanUp() : void;
     }
 }

@@ -6,8 +6,7 @@ package net.wg.gui.battle.random.views
     import net.wg.gui.battle.random.views.teamBasesPanel.TeamBasesPanel;
     import net.wg.gui.battle.views.sixthSense.SixthSense;
     import net.wg.gui.battle.views.consumablesPanel.ConsumablesPanel;
-    import net.wg.gui.battle.components.DestroyTimersPanel;
-    import net.wg.gui.battle.views.ticker.BattleTicker;
+    import net.wg.gui.battle.components.TimersPanel;
     import net.wg.gui.components.hintPanel.HintPanel;
     import net.wg.gui.battle.views.damageInfoPanel.DamageInfoPanel;
     import net.wg.gui.battle.views.battleMessenger.BattleMessenger;
@@ -22,7 +21,6 @@ package net.wg.gui.battle.random.views
     import flash.events.MouseEvent;
     import net.wg.gui.battle.views.consumablesPanel.events.ConsumablesPanelEvent;
     import net.wg.infrastructure.events.FocusRequestEvent;
-    import net.wg.gui.components.common.ticker.events.BattleTickerEvent;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.events.PlayersPanelEvent;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.events.PlayersPanelSwitchEvent;
     import flash.events.Event;
@@ -32,7 +30,6 @@ package net.wg.gui.battle.random.views
     import net.wg.gui.battle.views.minimap.constants.MinimapSizeConst;
     import net.wg.gui.components.battleDamagePanel.constants.BattleDamageLogConstants;
     import net.wg.gui.battle.views.questProgress.interfaces.IQuestProgressView;
-    import net.wg.gui.components.common.ticker.Ticker;
     import flash.display.DisplayObject;
     import net.wg.data.constants.generated.PLAYERS_PANEL_STATE;
     import net.wg.data.constants.generated.ATLAS_CONSTANTS;
@@ -70,9 +67,7 @@ package net.wg.gui.battle.random.views
 
         public var consumablesPanel:ConsumablesPanel = null;
 
-        public var destroyTimersPanel:DestroyTimersPanel = null;
-
-        public var battleTicker:BattleTicker = null;
+        public var destroyTimersPanel:TimersPanel = null;
 
         public var hintPanel:HintPanel = null;
 
@@ -92,10 +87,6 @@ package net.wg.gui.battle.random.views
 
         public var siegeModePanel:SiegeModePanel = null;
 
-        private var _team_bases_panel_start_y_pos:Number = 0;
-
-        private var _frag_correlation_bar_start_y_pos:Number = 0;
-
         private var _playersPanelState:int = -1;
 
         private var _playersPanelHasInvite:Boolean = false;
@@ -105,8 +96,6 @@ package net.wg.gui.battle.random.views
         public function BattlePage()
         {
             super();
-            this._team_bases_panel_start_y_pos = this.teamBasesPanelUI.y;
-            this._frag_correlation_bar_start_y_pos = this.fragCorrelationBar.y;
             this.battleDamageLogPanel.init(ATLAS_CONSTANTS.BATTLE_ATLAS);
             this.playersPanel.addEventListener(Event.CHANGE,this.onPlayersPanelChangeHandler);
             this.teamBasesPanelUI.addEventListener(Event.CHANGE,this.onTeamBasesPanelUIChangeHandler);
@@ -123,8 +112,6 @@ package net.wg.gui.battle.random.views
             var _loc4_:Number = stage.scaleY;
             this.damageInfoPanel.y = (param2 >> 1) / _loc4_ + DAMAGE_INFO_PANEL_CONSTS.HEIGHT * _loc4_ | 0;
             this.damageInfoPanel.x = param1 - DAMAGE_INFO_PANEL_CONSTS.WIDTH >> 1;
-            this.battleTicker.x = param1 - this.battleTicker.width >> 1;
-            this.battleTicker.y = 0;
             this.fragCorrelationBar.x = param1 - FRAG_CORELATION_BAR_WIDTH >> 1;
             this.battleMessenger.x = damagePanel.x;
             this.battleMessenger.y = damagePanel.y - this.battleMessenger.height + MESSENGER_Y_OFFSET;
@@ -139,7 +126,6 @@ package net.wg.gui.battle.random.views
             this.endWarningPanel.x = _loc3_;
             this.battleMessenger.updateSwapAreaHeight(damagePanel.y - (this.playersPanel.y + this.playersPanel.height) + MESSANGER_SWAP_AREA_TOP_OFFSET);
             this.updateHintPanelPosition();
-            this.updateTopConstraintOffset();
         }
 
         override protected function createStatisticsController() : BattleStatisticDataController
@@ -165,8 +151,6 @@ package net.wg.gui.battle.random.views
             this.consumablesPanel.addEventListener(ConsumablesPanelEvent.SWITCH_POPUP,this.onConsumablesPanelSwitchPopupHandler);
             this.battleMessenger.addEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onBattleMessengerRequestFocusHandler);
             this.battleMessenger.addEventListener(BattleMessenger.REMOVE_FOCUS,this.onBattleMessengerRemoveFocusHandler);
-            this.battleTicker.addEventListener(BattleTickerEvent.SHOW,this.onBattleTickerShowHandler);
-            this.battleTicker.addEventListener(BattleTickerEvent.HIDE,this.onBattleTickerShowHandler);
             this.playersPanel.addEventListener(PlayersPanelEvent.ON_ITEMS_COUNT_CHANGE,this.onPlayersPanelOnItemsCountChangeHandler);
             this.playersPanel.addEventListener(PlayersPanelSwitchEvent.STATE_REQUESTED,this.onPlayersPanelStateRequestedHandler);
             this.hintPanel.addEventListener(Event.RESIZE,this.onHintPanelResizeHandler);
@@ -185,9 +169,8 @@ package net.wg.gui.battle.random.views
             registerComponent(this.battleMessenger,BATTLE_VIEW_ALIASES.BATTLE_MESSENGER);
             registerComponent(this.fragCorrelationBar,BATTLE_VIEW_ALIASES.FRAG_CORRELATION_BAR);
             registerComponent(this.consumablesPanel,BATTLE_VIEW_ALIASES.CONSUMABLES_PANEL);
-            registerComponent(this.destroyTimersPanel,BATTLE_VIEW_ALIASES.DESTROY_TIMERS_PANEL);
+            registerComponent(this.destroyTimersPanel,BATTLE_VIEW_ALIASES.TIMERS_PANEL);
             registerComponent(this.radialMenu,BATTLE_VIEW_ALIASES.RADIAL_MENU);
-            registerComponent(this.battleTicker,BATTLE_VIEW_ALIASES.TICKER);
             registerComponent(this.endWarningPanel,BATTLE_VIEW_ALIASES.BATTLE_END_WARNING_PANEL);
             registerComponent(this.siegeModePanel,BATTLE_VIEW_ALIASES.SIEGE_MODE_INDICATOR);
             registerComponent(this.hintPanel,BATTLE_VIEW_ALIASES.HINT_PANEL);
@@ -225,9 +208,6 @@ package net.wg.gui.battle.random.views
             this.consumablesPanel = null;
             this.destroyTimersPanel = null;
             this.radialMenu = null;
-            this.battleTicker.removeEventListener(BattleTickerEvent.SHOW,this.onBattleTickerShowHandler);
-            this.battleTicker.removeEventListener(BattleTickerEvent.HIDE,this.onBattleTickerShowHandler);
-            this.battleTicker = null;
             this.endWarningPanel = null;
             this.battleDamageLogPanel = null;
             this.siegeModePanel = null;
@@ -295,15 +275,6 @@ package net.wg.gui.battle.random.views
         override protected function getFullStatsTabQuestProgress() : IQuestProgressView
         {
             return this.fullStats.getStatsProgressView();
-        }
-
-        protected function updateTopConstraintOffset() : void
-        {
-            var _loc1_:Number = this.battleTicker.visible?this.battleTicker.y + this.battleTicker.height + Ticker.TICKER_Y_PADDING:0;
-            prebattleTimer.y = _loc1_;
-            this.fragCorrelationBar.y = this._frag_correlation_bar_start_y_pos + _loc1_;
-            this.teamBasesPanelUI.y = this._team_bases_panel_start_y_pos + _loc1_;
-            this.updatePositionForQuestProgress();
         }
 
         private function updateHintPanelPosition() : void
@@ -431,11 +402,6 @@ package net.wg.gui.battle.random.views
         {
             setFocus(this);
             this.swapElementsByMouseInteraction(this.playersPanel,this.battleMessenger);
-        }
-
-        private function onBattleTickerShowHandler(param1:BattleTickerEvent) : void
-        {
-            this.updateTopConstraintOffset();
         }
 
         private function onPlayersPanelOnItemsCountChangeHandler(param1:PlayersPanelEvent) : void

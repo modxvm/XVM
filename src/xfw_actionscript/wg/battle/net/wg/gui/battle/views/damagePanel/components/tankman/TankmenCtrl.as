@@ -151,7 +151,7 @@ package net.wg.gui.battle.views.damagePanel.components.tankman
                 _loc5_ = TankmanAssets(this._order[_loc6_]);
                 if(param2)
                 {
-                    _loc5_.showStatus(param1,param3,_loc6_ * STUN_ANIMATION_DELAY);
+                    _loc5_.showStatus(param1,param3,param3?_loc6_ * STUN_ANIMATION_DELAY:0);
                 }
                 else
                 {

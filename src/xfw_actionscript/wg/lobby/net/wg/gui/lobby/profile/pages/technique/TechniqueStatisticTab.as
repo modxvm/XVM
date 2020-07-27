@@ -6,7 +6,7 @@ package net.wg.gui.lobby.profile.pages.technique
     import net.wg.gui.lobby.profile.pages.technique.data.ProfileVehicleDossierVO;
     import net.wg.gui.utils.ExcludeTweenManager;
     import flash.events.Event;
-    import net.wg.gui.components.common.containers.VerticalGroupLayout;
+    import net.wg.gui.components.containers.VerticalGroupLayout;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.data.constants.Linkages;
     import flash.display.Sprite;

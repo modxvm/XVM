@@ -29,8 +29,6 @@ package net.wg.gui.lobby.battlequeue
 
         private static const LEAGUE_ICON_OFFSET:int = 17;
 
-        private static const TICKER_HEIGHT:int = 22;
-
         private static const LEAGUES_RENDERER_WIDTH:Number = 250;
 
         private static const LEAGUES_RENDERER_HEIGHT:Number = 250;
@@ -88,15 +86,7 @@ package net.wg.gui.lobby.battlequeue
         override public function updateStage(param1:Number, param2:Number) : void
         {
             this.x = param1 - this.actualWidth >> 1;
-            var _loc3_:Number = Math.max(param2 - this.actualHeight >> 1,MIN_POS_Y);
-            if(App.globalVarsMgr.isShowTickerS())
-            {
-                this.y = _loc3_ + TICKER_HEIGHT;
-            }
-            else
-            {
-                this.y = _loc3_;
-            }
+            this.y = Math.max(param2 - this.actualHeight >> 1,MIN_POS_Y);
         }
 
         override protected function configUI() : void

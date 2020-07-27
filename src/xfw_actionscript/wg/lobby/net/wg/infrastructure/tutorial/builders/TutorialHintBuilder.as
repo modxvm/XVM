@@ -87,7 +87,6 @@ package net.wg.infrastructure.tutorial.builders
 
         protected function layoutHint() : void
         {
-            var _loc1_:Point = null;
             var _loc2_:* = NaN;
             var _loc3_:* = NaN;
             var _loc4_:* = NaN;
@@ -96,7 +95,7 @@ package net.wg.infrastructure.tutorial.builders
             {
                 return;
             }
-            _loc1_ = component.localToGlobal(EMPTY_POINT);
+            var _loc1_:Point = component.localToGlobal(EMPTY_POINT);
             _loc1_ = view.globalToLocal(_loc1_);
             if(this._componentPosition.x != _loc1_.x || this._componentPosition.y != _loc1_.y || this._componentWidth != component.width || this._componentHeight != component.height)
             {
@@ -147,7 +146,7 @@ package net.wg.infrastructure.tutorial.builders
         {
             var _loc1_:* = NaN;
             this.layoutHint();
-            if(this._hintChanged && this._model.checkViewArea)
+            if(this._hintChanged && this._model.checkViewArea && view.width > 0)
             {
                 _loc1_ = component.width - this._model.padding.left - this._model.padding.right;
                 if(this._hint.x < -_loc1_ - HINT_GLOW_OFFSET)

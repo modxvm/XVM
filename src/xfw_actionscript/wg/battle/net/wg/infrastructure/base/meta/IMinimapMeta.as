@@ -5,7 +5,7 @@ package net.wg.infrastructure.base.meta
     public interface IMinimapMeta extends IEventDispatcher
     {
 
-        function setAttentionToCellS(param1:Number, param2:Number, param3:Boolean) : void;
+        function onMinimapClickedS(param1:Number, param2:Number, param3:Number, param4:Number) : void;
 
         function applyNewSizeS(param1:Number) : void;
 
@@ -18,5 +18,11 @@ package net.wg.infrastructure.base.meta
         function as_showVehiclesName(param1:Boolean) : void;
 
         function as_setBackground(param1:String) : void;
+
+        function as_enableHintPanelWithData(param1:Boolean, param2:Boolean) : void;
+
+        function as_disableHintPanel() : void;
+
+        function as_updateHintPanelData(param1:Boolean, param2:Boolean) : void;
     }
 }

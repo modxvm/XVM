@@ -11,10 +11,10 @@ package net.wg.gui.components.tooltips.inblocks
     import net.wg.gui.components.tooltips.inblocks.data.BlockDataItemVO;
     import net.wg.data.VO.PaddingVO;
     import net.wg.gui.components.tooltips.Separator;
+    import flash.events.Event;
     import net.wg.gui.components.tooltips.inblocks.events.ToolTipBlockEvent;
     import net.wg.gui.components.tooltips.helpers.Utils;
     import org.idmedia.as3commons.util.StringUtils;
-    import flash.events.Event;
     import net.wg.data.constants.Errors;
 
     public class TooltipInBlocks extends ToolTipSpecial implements IReusable
@@ -154,6 +154,7 @@ package net.wg.gui.components.tooltips.inblocks
         {
             this.rearrangeBlocks();
             this.updateSize();
+            dispatchEvent(new Event(Event.RESIZE));
         }
 
         private function clearBlocks() : void
@@ -309,6 +310,11 @@ package net.wg.gui.components.tooltips.inblocks
         override protected function get isBeginShowAfterRedraw() : Boolean
         {
             return false;
+        }
+
+        public function get contentHeight() : Number
+        {
+            return this._contentHeight;
         }
 
         private function onEnterFrameHandler(param1:Event) : void

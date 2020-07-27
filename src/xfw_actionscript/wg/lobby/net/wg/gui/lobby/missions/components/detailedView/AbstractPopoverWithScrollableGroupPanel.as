@@ -5,7 +5,7 @@ package net.wg.gui.lobby.missions.components.detailedView
     import flash.display.DisplayObject;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.gui.components.containers.GroupLayout;
-    import net.wg.gui.components.common.containers.VerticalGroupLayout;
+    import net.wg.gui.components.containers.VerticalGroupLayout;
     import net.wg.gui.components.containers.GroupEx;
     import scaleform.clik.interfaces.IDataProvider;
     import net.wg.infrastructure.exceptions.AbstractException;

@@ -1,8 +1,8 @@
 package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.gui.battle.components.BattleDisplayable;
+    import net.wg.gui.battle.random.views.fragCorrelationBar.FragsAndEnemiesBar;
 
-    public class FragCorrelationBarMeta extends BattleDisplayable
+    public class FragCorrelationBarMeta extends FragsAndEnemiesBar
     {
 
         public function FragCorrelationBarMeta()

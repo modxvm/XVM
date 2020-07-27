@@ -43,7 +43,7 @@ package net.wg.gui.rally.vo
 
         private var _selectedVehicleLevel:int = 0;
 
-        private var _isFallout:Boolean = false;
+        private var _isEvent:Boolean = false;
 
         private var _isLegionaries:Boolean = false;
 
@@ -310,14 +310,14 @@ package net.wg.gui.rally.vo
             this._compatibleVehiclesCount = param1;
         }
 
-        public function get isFallout() : Boolean
+        public function get isEvent() : Boolean
         {
-            return this._isFallout;
+            return this._isEvent;
         }
 
-        public function set isFallout(param1:Boolean) : void
+        public function set isEvent(param1:Boolean) : void
         {
-            this._isFallout = param1;
+            this._isEvent = param1;
         }
 
         public function get isLegionaries() : Boolean

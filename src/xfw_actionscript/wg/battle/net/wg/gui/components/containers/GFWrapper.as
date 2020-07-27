@@ -84,6 +84,7 @@ package net.wg.gui.components.containers
             this.inputFixTF.alpha = 0;
             this.inputFixTF.type = TextFieldType.DYNAMIC;
             this.inputFixTF.selectable = false;
+            this.inputFixTF.width = this.inputFixTF.height = 0;
             addChild(this.inputFixTF);
         }
 

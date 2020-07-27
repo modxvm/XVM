@@ -36,6 +36,8 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         public var border:Sprite = null;
 
+        public var crystalsBorder:Sprite = null;
+
         public var selectedMc:Sprite = null;
 
         private var _index:uint = 0;
@@ -70,6 +72,8 @@ package net.wg.gui.lobby.hangar.tcarousel
             mouseEnabled = false;
             this.border.mouseEnabled = false;
             this.border.mouseChildren = false;
+            this.crystalsBorder.mouseEnabled = false;
+            this.crystalsBorder.mouseChildren = false;
             this.selectedMc.mouseEnabled = false;
             this.selectedMc.mouseChildren = false;
             this.content.cacheAsBitmap = true;
@@ -88,6 +92,9 @@ package net.wg.gui.lobby.hangar.tcarousel
             this._dataVO = null;
             _owner = null;
             this._toolTipMgr = null;
+            this.border = null;
+            this.crystalsBorder = null;
+            this.selectedMc = null;
             this.clearRankedBonus();
             this.clearProgressionPoints();
             super.onDispose();
@@ -100,13 +107,16 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         protected function updateData() : void
         {
-            var _loc1_:* = this._dataVO != null;
+            var _loc1_:* = false;
+            _loc1_ = this._dataVO != null;
             if(_loc1_)
             {
                 alpha = this._dataVO.alpha;
                 isUseRightBtn = this._dataVO.isUseRightBtn;
                 this._isClickEnabled = this._dataVO.clickEnabled;
                 this._isSpecialSlot = this._dataVO.buySlot || this._dataVO.buyTank || this._dataVO.isRentPromotion;
+                this.crystalsBorder.visible = this._dataVO.isEarnCrystals && !this._dataVO.isCrystalsLimitReached;
+                this.border.visible = !this.crystalsBorder.visible;
                 mouseEnabledOnDisabled = true;
             }
             else
@@ -115,6 +125,7 @@ package net.wg.gui.lobby.hangar.tcarousel
                 isUseRightBtn = false;
                 this._isClickEnabled = false;
                 this._isSpecialSlot = false;
+                this.crystalsBorder.visible = false;
                 mouseEnabledOnDisabled = false;
             }
             this.updateRankedBonus(_loc1_?this._dataVO.hasRankedBonus:false);
@@ -147,12 +158,12 @@ package net.wg.gui.lobby.hangar.tcarousel
                     addChild(this._progressionPoints);
                 }
                 this._progressionPoints.visible = true;
-                this.border.visible = !this._dataVO.progressionPoints.isSpecialVehicle;
+                this.border.visible = !this._dataVO.progressionPoints.isSpecialVehicle && !this.crystalsBorder.visible;
             }
             else
             {
                 this.clearProgressionPoints();
-                this.border.visible = true;
+                this.border.visible = !this.crystalsBorder.visible;
             }
         }
 
@@ -354,7 +365,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
             else
             {
-                this._toolTipMgr.showSpecial(TOOLTIPS_CONSTANTS.CAROUSEL_VEHICLE,null,this._dataVO.intCD);
+                this._toolTipMgr.showSpecial(this._dataVO.tooltip,null,this._dataVO.intCD);
                 this.content.handleRollOver(this._dataVO);
             }
         }

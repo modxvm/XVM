@@ -75,6 +75,8 @@ package
 
         public static const MAPS_LOGIN_BACK_8_WITHOUT_SPARKS:String = "../maps/login/back_8_without_sparks.png";
 
+        public static const MAPS_LOGIN_BLACKBG:String = "../maps/login/blackBg.png";
+
         public static const MAPS_LOGIN_LOGIN_BG:String = "../maps/login/__login_bg.png";
 
         public static const MAPS_LOGIN_LOGIN_LOGO:String = "../maps/login/__login_logo.png";

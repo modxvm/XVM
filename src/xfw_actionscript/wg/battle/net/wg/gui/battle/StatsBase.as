@@ -217,6 +217,10 @@ package net.wg.gui.battle
         {
         }
 
+        public function updateTriggeredChatCommands(param1:IDAAPIDataClass) : void
+        {
+        }
+
         protected function updateFrags(param1:IDAAPIDataClass) : void
         {
         }

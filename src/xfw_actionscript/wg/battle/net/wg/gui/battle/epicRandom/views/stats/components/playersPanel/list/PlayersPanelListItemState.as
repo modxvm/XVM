@@ -75,6 +75,16 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
 
         private static const DEAD_BACKGROUND_LONG_WIDTH:uint = 200;
 
+        private static const CHAT_COMMUNICATION_X_TINY_OFFSET:uint = 0;
+
+        private static const CHAT_COMMUNICATION_X_SHORT_OFFSET:uint = 120;
+
+        private static const CHAT_COMMUNICATION_X_MEDIUM_OFFSET:uint = 190;
+
+        private static const CHAT_COMMUNICATION_Y_TINY_OFFSET:uint = 0;
+
+        private static const CHAT_COMMUNICATION_Y_OFFSET:uint = 16;
+
         private static const X_SHORT_OFFSETS:Vector.<int> = new <int>[0,132,188];
 
         private static const X_LONG_OFFSETS:Vector.<int> = new <int>[0,200,256];
@@ -200,6 +210,8 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
                 _loc3_.speakAnimationX = SPEAK_ANIMATION_X_TINY_OFFSET;
                 _loc3_.deadBgWidth = DEAD_BACKGROUND_TINY_WIDTH;
                 _loc3_.hitWidth = HITBOX_TINY_WIDTH;
+                _loc3_.chatCommunicationIconXOffset = CHAT_COMMUNICATION_X_TINY_OFFSET;
+                _loc3_.chatCommunicationIconYOffset = CHAT_COMMUNICATION_Y_TINY_OFFSET;
                 switch(param1)
                 {
                     case TINY_SHORT_STATE:
@@ -223,6 +235,8 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
                 _loc3_.muteX = MUTE_X_FULL_OFFSET;
                 _loc3_.disableCommX = DISABLE_COMMUNICATION_X_FULL_OFFSET;
                 _loc3_.hitWidth = HITBOX_LONG_WIDTH;
+                _loc3_.chatCommunicationIconXOffset = CHAT_COMMUNICATION_X_MEDIUM_OFFSET;
+                _loc3_.chatCommunicationIconYOffset = CHAT_COMMUNICATION_Y_OFFSET;
                 _loc3_.xPosition = 0;
                 switch(param1)
                 {
@@ -250,6 +264,8 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
                 _loc3_.muteX = MUTE_X_SHORT_OFFSET;
                 _loc3_.disableCommX = DISABLE_COMMUNICATION_X_SHORT_OFFSET;
                 _loc3_.hitWidth = HITBOX_SHORT_WIDTH;
+                _loc3_.chatCommunicationIconXOffset = CHAT_COMMUNICATION_X_SHORT_OFFSET;
+                _loc3_.chatCommunicationIconYOffset = CHAT_COMMUNICATION_Y_OFFSET;
                 switch(param1)
                 {
                     case SHORT_RENDERER_STATE:

@@ -7,6 +7,8 @@ package net.wg.infrastructure.base.meta
 
         function onEscapeS() : void;
 
+        function onCloseBtnClickS() : void;
+
         function showHelpLayoutS() : void;
 
         function closeHelpLayoutS() : void;
@@ -51,14 +53,16 @@ package net.wg.infrastructure.base.meta
 
         function as_setNotificationEnabled(param1:Boolean) : void;
 
-        function as_updateSeniorityAwardsEntryPoint(param1:Boolean) : void;
-
         function as_createDQWidget() : void;
 
         function as_destroyDQWidget() : void;
 
-        function as_toggleSPGEvent(param1:Boolean) : void;
+        function as_updateSeniorityAwardsEntryPoint(param1:Boolean) : void;
 
         function as_updateEventEntryPoint(param1:String, param2:Boolean) : void;
+
+        function as_toggleBattleRoyale(param1:Boolean) : void;
+
+        function as_showSwitchToAmmunition() : void;
     }
 }

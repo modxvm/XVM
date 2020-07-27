@@ -45,7 +45,7 @@ package net.wg.gui.battle.views.destroyTimers
             }
         }
 
-        override protected function hideSecondaryTimer(param1:int) : void
+        override protected function hideSecondaryTimer(param1:String) : void
         {
             super.hideSecondaryTimer(param1);
             if(this._resupplyTimer.isActive)
@@ -54,7 +54,7 @@ package net.wg.gui.battle.views.destroyTimers
             }
         }
 
-        override protected function showTimer(param1:int, param2:int, param3:Boolean) : void
+        override protected function showTimer(param1:String, param2:String, param3:Boolean) : void
         {
             super.showTimer(param1,param2,param3);
             this._isDestroyTimerActive = true;
@@ -64,7 +64,7 @@ package net.wg.gui.battle.views.destroyTimers
             }
         }
 
-        override protected function showSecondaryTimer(param1:int, param2:int, param3:Number, param4:Boolean = false) : void
+        override protected function showSecondaryTimer(param1:String, param2:int, param3:Number, param4:Boolean = false) : void
         {
             super.showSecondaryTimer(param1,param2,param3,param4);
             if(this._resupplyTimer.isActive)
@@ -129,15 +129,6 @@ package net.wg.gui.battle.views.destroyTimers
                     this._resupplyTimer.visible = false;
                 }
             }
-        }
-
-        override protected function getTimersIcons() : Vector.<String>
-        {
-            var _loc1_:Vector.<String> = super.getTimersIcons();
-            _loc1_.push(Linkages.UNDER_FIRE_ICON);
-            _loc1_.push(Linkages.AIRSTRIKE_ICON);
-            _loc1_.push(Linkages.RECOVERY_ICON);
-            return _loc1_;
         }
 
         override protected function onDispose() : void

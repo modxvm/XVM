@@ -151,6 +151,10 @@ package net.wg.gui.battle.battleloading
         {
         }
 
+        override public function updateTriggeredChatCommands(param1:IDAAPIDataClass) : void
+        {
+        }
+
         override protected function setVisualTipInfo(param1:VisualTipInfoVO) : void
         {
             this.form.setFormDisplayData(param1);
@@ -169,16 +173,23 @@ package net.wg.gui.battle.battleloading
         override protected function onDispose() : void
         {
             this.removeMapIconListeners();
-            this.form.dispose();
+            if(this.form != null)
+            {
+                this.form.dispose();
+            }
             this.form = null;
             super.onDispose();
         }
 
         private function removeMapIconListeners() : void
         {
-            var _loc1_:UILoaderAlt = this.form.getMapIconComponent();
-            _loc1_.removeEventListener(UILoaderEvent.COMPLETE,this.onMapIconCompleteHandler);
-            _loc1_.removeEventListener(UILoaderEvent.IOERROR,this.onMapIconCompleteHandler);
+            var _loc1_:UILoaderAlt = null;
+            if(this.form)
+            {
+                _loc1_ = this.form.getMapIconComponent();
+                _loc1_.removeEventListener(UILoaderEvent.COMPLETE,this.onMapIconCompleteHandler);
+                _loc1_.removeEventListener(UILoaderEvent.IOERROR,this.onMapIconCompleteHandler);
+            }
         }
 
         private function onMapIconCompleteHandler(param1:UILoaderEvent) : void

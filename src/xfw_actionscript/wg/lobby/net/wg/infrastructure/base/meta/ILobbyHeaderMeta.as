@@ -75,6 +75,8 @@ package net.wg.infrastructure.base.meta
 
         function as_initOnlineCounter(param1:Boolean) : void;
 
+        function as_setServerName(param1:String) : void;
+
         function as_setHangarMenuData(param1:Array) : void;
 
         function as_setButtonCounter(param1:String, param2:String) : void;

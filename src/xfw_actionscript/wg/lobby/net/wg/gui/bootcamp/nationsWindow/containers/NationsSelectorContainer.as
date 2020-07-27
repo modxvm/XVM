@@ -2,8 +2,9 @@ package net.wg.gui.bootcamp.nationsWindow.containers
 {
     import flash.display.MovieClip;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
-    import net.wg.gui.components.controls.SoundButtonEx;
     import scaleform.clik.events.ButtonEvent;
+    import net.wg.gui.bootcamp.nationsWindow.data.NationItemVO;
+    import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.bootcamp.nationsWindow.events.NationSelectEvent;
 
     public class NationsSelectorContainer extends MovieClip implements IDisposable
@@ -21,12 +22,13 @@ package net.wg.gui.bootcamp.nationsWindow.containers
 
         private var _selectedNation:int = 0;
 
-        private var _nationButtons:Vector.<SoundButtonEx>;
+        private var _nationButtons:Vector.<NationButton>;
 
         public function NationsSelectorContainer()
         {
-            this._nationButtons = new Vector.<SoundButtonEx>();
+            this._nationButtons = new Vector.<NationButton>();
             super();
+            this._nationButtons.push(this.btnUssr,this.btnGe,this.btnUsa);
             this.configUI();
         }
 
@@ -56,6 +58,22 @@ package net.wg.gui.bootcamp.nationsWindow.containers
             }
         }
 
+        public function setNationsOrder(param1:Vector.<NationItemVO>) : void
+        {
+            var _loc4_:NationButton = null;
+            var _loc5_:NationItemVO = null;
+            var _loc2_:int = param1.length;
+            var _loc3_:* = 0;
+            while(_loc3_ < _loc2_)
+            {
+                _loc4_ = this._nationButtons[_loc3_];
+                _loc5_ = param1[_loc3_];
+                _loc4_.setSource(_loc5_.icon);
+                _loc4_.label = _loc5_.label;
+                _loc3_++;
+            }
+        }
+
         public function setWidth(param1:int) : void
         {
             this.bottomBG.width = param1;
@@ -64,16 +82,9 @@ package net.wg.gui.bootcamp.nationsWindow.containers
 
         protected function configUI() : void
         {
-            this.btnUsa.setSource(RES_ICONS.MAPS_ICONS_BOOTCAMP_REWARDS_NATIONSSELECTUSA);
-            this.btnGe.setSource(RES_ICONS.MAPS_ICONS_BOOTCAMP_REWARDS_NATIONSSELECTGE);
-            this.btnUssr.setSource(RES_ICONS.MAPS_ICONS_BOOTCAMP_REWARDS_NATIONSSELECTUSSR);
             this.btnUsa.addEventListener(ButtonEvent.CLICK,this.onBtnNationClickHandler);
             this.btnGe.addEventListener(ButtonEvent.CLICK,this.onBtnNationClickHandler);
             this.btnUssr.addEventListener(ButtonEvent.CLICK,this.onBtnNationClickHandler);
-            this.btnUsa.label = BOOTCAMP.AWARD_OPTIONS_NATION_US;
-            this.btnGe.label = BOOTCAMP.AWARD_OPTIONS_NATION_GE;
-            this.btnUssr.label = BOOTCAMP.AWARD_OPTIONS_NATION_USSR;
-            this._nationButtons.push(this.btnUsa,this.btnGe,this.btnUssr);
             this.selectItem.mouseEnabled = this.selectItem.mouseChildren = this.bottomBG.mouseEnabled = this.bottomBG.mouseChildren = false;
         }
 

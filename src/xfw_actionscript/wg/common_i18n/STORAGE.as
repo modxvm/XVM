@@ -57,6 +57,8 @@ package
 
         public static const STORAGE_TABS_SHELLS_FILTER_TYPE_LABEL:String = "#storage:storage/tabs/shells/filter/type/label";
 
+        public static const STORAGE_TABS_DEVICES_FILTER_TYPE_LABEL:String = "#storage:storage/tabs/devices/filter/type/label";
+
         public static const STORAGE_TABS_SHELLS_FILTER_APPROPRIATE_LABEL:String = "#storage:storage/tabs/shells/filter/appropriate/label";
 
         public static const STORAGE_TABS_MODULES_FILTER_TYPE_LABEL:String = "#storage:storage/tabs/modules/filter/type/label";
@@ -200,6 +202,8 @@ package
         public static const OFFERS_EXPIRATION:String = "#storage:offers/expiration";
 
         public static const OFFERS_NOITEMS_TITLE:String = "#storage:offers/noItems/title";
+
+        public static const OPTDEVICE_HOVER_EFFECT:String = "#storage:optDevice/hover/effect";
 
         public function STORAGE()
         {

@@ -36,7 +36,7 @@ package net.wg.gui.lobby.vehicleCompare.configurator
             this.titleTf.text = VEH_COMPARE.VEHCONF_MODULES;
             this.topModulesTf.text = VEH_COMPARE.VEHCONF_TOPMODULESLABEL;
             this.topModulesCb.addEventListener(ButtonEvent.CLICK,this.onTopModulesBtnClickHandler);
-            this.topModulesCb.toolTip = this.topModulesCb.selected?VEH_COMPARE.VEHCONF_TOOLTIPS_TOPMODULESON:VEH_COMPARE.VEHCONF_TOOLTIPS_TOPMODULESOFF;
+            this.updateCbTooltip();
             this.topModulesCb.label = VEH_COMPARE.VEHCONF_TOPMODULESBTNLABEL;
             this.topModulesCb.validateNow();
             this.topModulesCb.autoSize = TextFieldAutoSize.RIGHT;
@@ -78,6 +78,7 @@ package net.wg.gui.lobby.vehicleCompare.configurator
         public function setTopModulesSelected(param1:Boolean) : void
         {
             this.topModulesCb.selected = param1;
+            this.updateCbTooltip();
         }
 
         private function onTopModulesTfRollOutHandler(param1:MouseEvent) : void
@@ -93,6 +94,11 @@ package net.wg.gui.lobby.vehicleCompare.configurator
         private function onTopModulesBtnClickHandler(param1:ButtonEvent) : void
         {
             dispatchEvent(new VehConfEvent(this.topModulesCb.selected?VehConfEvent.TOP_MODULES_ON:VehConfEvent.TOP_MODULES_OFF,true));
+            this.updateCbTooltip();
+        }
+
+        private function updateCbTooltip() : void
+        {
             this.topModulesCb.toolTip = this.topModulesCb.selected?VEH_COMPARE.VEHCONF_TOOLTIPS_TOPMODULESON:VEH_COMPARE.VEHCONF_TOOLTIPS_TOPMODULESOFF;
         }
     }

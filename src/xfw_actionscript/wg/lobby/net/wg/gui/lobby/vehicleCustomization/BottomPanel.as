@@ -291,6 +291,7 @@ package net.wg.gui.lobby.vehicleCustomization
                 }
                 if(_loc3_ != Values.DEFAULT_INT)
                 {
+                    this.carousel.validateNow();
                     this.carousel.goToItem(_loc3_,true,this._scrollImmediately);
                 }
                 this._intCDToScroll = Values.DEFAULT_INT;

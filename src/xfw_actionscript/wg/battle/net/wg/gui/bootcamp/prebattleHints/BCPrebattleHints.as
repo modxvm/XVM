@@ -8,6 +8,7 @@ package net.wg.gui.bootcamp.prebattleHints
     import scaleform.clik.utils.Constraints;
     import scaleform.clik.constants.ConstrainMode;
     import flash.display.DisplayObject;
+    import flash.display.MovieClip;
 
     public class BCPrebattleHints extends BCPrebattleHintsMeta implements IBCPrebattleHintsMeta
     {
@@ -27,6 +28,8 @@ package net.wg.gui.bootcamp.prebattleHints
         private var _visible:Vector.<String>;
 
         private var _hidden:Vector.<String>;
+
+        private var _countCrew:int = 0;
 
         public function BCPrebattleHints()
         {
@@ -104,6 +107,7 @@ package net.wg.gui.bootcamp.prebattleHints
                     _loc3_.visible = false;
                     _loc2_++;
                 }
+                this.changeCrewCount();
             }
         }
 
@@ -112,6 +116,25 @@ package net.wg.gui.bootcamp.prebattleHints
             this._visible = param1;
             this._hidden = param2;
             invalidate(HINTS_VISIBILITY);
+        }
+
+        public function as_setCrewCount(param1:int) : void
+        {
+            this._countCrew = param1;
+            invalidate();
+        }
+
+        private function changeCrewCount() : void
+        {
+            var _loc1_:MovieClip = this.crewHint.animationMC["anim"];
+            if(_loc1_)
+            {
+                _loc1_.gotoAndStop(this._countCrew);
+            }
+            else
+            {
+                DebugUtils.LOG_ERROR("animationMC has to include MovieClip with name \"anim\"!!!!!");
+            }
         }
     }
 }

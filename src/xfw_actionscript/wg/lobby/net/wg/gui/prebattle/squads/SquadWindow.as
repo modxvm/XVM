@@ -2,6 +2,7 @@ package net.wg.gui.prebattle.squads
 {
     import net.wg.infrastructure.base.meta.impl.SquadWindowMeta;
     import net.wg.infrastructure.base.meta.ISquadWindowMeta;
+    import net.wg.utils.IScheduler;
     import net.wg.infrastructure.interfaces.IWindow;
     import net.wg.gui.prebattle.squads.ev.SquadViewEvent;
     import flash.display.DisplayObject;
@@ -29,8 +30,11 @@ package net.wg.gui.prebattle.squads
 
         private var _componentId:String;
 
+        private var _scheduler:IScheduler;
+
         public function SquadWindow()
         {
+            this._scheduler = App.utils.scheduler;
             super();
         }
 
@@ -58,14 +62,16 @@ package net.wg.gui.prebattle.squads
             if(isInvalid(INVALID_CONTENT_SIZE))
             {
                 this.updateWindowSize();
-                App.utils.scheduler.scheduleOnNextFrame(this.showWindow);
+                this._scheduler.scheduleOnNextFrame(this.showWindow);
             }
         }
 
         override protected function onDispose() : void
         {
+            this._scheduler.cancelTask(this.showWindow);
             this.squadView.removeEventListener(SquadViewEvent.ON_POPULATED,this.onViewPopulatedHandler);
             this.squadView = null;
+            this._scheduler = null;
             super.onDispose();
         }
 

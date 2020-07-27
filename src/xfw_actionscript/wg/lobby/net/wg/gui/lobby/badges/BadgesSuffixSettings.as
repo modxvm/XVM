@@ -4,8 +4,8 @@ package net.wg.gui.lobby.badges
     import net.wg.gui.interfaces.IUpdatableComponent;
     import net.wg.gui.components.controls.CheckBox;
     import net.wg.gui.lobby.badges.data.BadgeSuffixVO;
-    import flash.events.Event;
     import flash.text.TextFieldAutoSize;
+    import flash.events.Event;
     import net.wg.gui.lobby.badges.events.BadgesEvent;
     import scaleform.clik.constants.InvalidationType;
 
@@ -26,7 +26,6 @@ package net.wg.gui.lobby.badges
         override protected function configUI() : void
         {
             super.configUI();
-            this.showCheckBox.addEventListener(Event.SELECT,this.onShowCheckBoxSelectHandler);
             this.showCheckBox.autoSize = TextFieldAutoSize.LEFT;
             this.suffixContainer.addEventListener(Event.RESIZE,this.onSuffixContainerResizeHandler);
             this.suffixContainer.addEventListener(BadgesEvent.SUFFIX_BADGE_SELECT,this.onSuffixBadgeSelectHandler);
@@ -40,6 +39,7 @@ package net.wg.gui.lobby.badges
                 if(isInvalid(InvalidationType.DATA))
                 {
                     this.showCheckBox.selected = this._data.checkboxSelected;
+                    this.showCheckBox.addEventListener(Event.SELECT,this.onShowCheckBoxSelectHandler);
                     this.showCheckBox.label = this._data.checkboxLabel;
                     this.showCheckBox.toolTip = this._data.checkboxTooltip;
                     this.showCheckBox.validateNow();

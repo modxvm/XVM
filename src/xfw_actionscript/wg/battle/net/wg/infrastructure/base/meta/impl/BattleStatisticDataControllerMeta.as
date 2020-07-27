@@ -12,6 +12,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.data.VO.daapi.DAAPIVehicleUserTagsVO;
     import net.wg.data.VO.daapi.DAAPIVehiclesInvitationStatusVO;
     import net.wg.gui.components.questProgress.data.QuestProgressVO;
+    import net.wg.data.VO.daapi.DAAPITriggeredCommandsVO;
     import net.wg.infrastructure.exceptions.AbstractException;
 
     public class BattleStatisticDataControllerMeta extends BattleDAAPIComponent
@@ -203,6 +204,12 @@ package net.wg.infrastructure.base.meta.impl
             }
         }
 
+        public final function as_updateTriggeredChatCommands(param1:Object) : void
+        {
+            var _loc2_:DAAPITriggeredCommandsVO = new DAAPITriggeredCommandsVO(param1);
+            this.updateTriggeredChatCommands(_loc2_);
+        }
+
         protected function getDAAPIVehiclesDataVOForVehData(param1:Object) : DAAPIVehiclesDataVO
         {
             var _loc2_:String = "getDAAPIVehiclesDataVOForVehData" + Errors.ABSTRACT_INVOKE;
@@ -318,6 +325,13 @@ package net.wg.infrastructure.base.meta.impl
         protected function updateQuestHeaderProgress(param1:Array) : void
         {
             var _loc2_:String = "as_updateQuestHeaderProgress" + Errors.ABSTRACT_INVOKE;
+            DebugUtils.LOG_ERROR(_loc2_);
+            throw new AbstractException(_loc2_);
+        }
+
+        protected function updateTriggeredChatCommands(param1:DAAPITriggeredCommandsVO) : void
+        {
+            var _loc2_:String = "as_updateTriggeredChatCommands" + Errors.ABSTRACT_INVOKE;
             DebugUtils.LOG_ERROR(_loc2_);
             throw new AbstractException(_loc2_);
         }

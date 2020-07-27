@@ -12,7 +12,7 @@ package net.wg.gui.components.controls
     public class TextFieldShort extends ListItemRenderer implements ITextContainer
     {
 
-        private static const REPLACE_SYMBOLS:String = "..";
+        private static const REPLACE_SYMBOLS:String = "...";
 
         public var useDropShadow:Boolean = true;
 

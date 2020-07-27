@@ -1,6 +1,7 @@
 package net.wg.gui.lobby.epicBattles.data
 {
     import net.wg.data.daapi.base.DAAPIDataClass;
+    import net.wg.gui.lobby.eventProgression.components.metaLevel.data.MetaLevelVO;
     import net.wg.gui.lobby.components.data.AwardItemRendererExVO;
 
     public class EpicBattlesPrestigeViewVO extends DAAPIDataClass
@@ -24,9 +25,9 @@ package net.wg.gui.lobby.epicBattles.data
 
         public var backgroundImageSrc:String = "";
 
-        public var metaLevelIconPrestige:EpicMetaLevelIconVO = null;
+        public var metaLevelIconPrestige:MetaLevelVO = null;
 
-        public var epicMetaLevelIconData:EpicMetaLevelIconVO = null;
+        public var epicMetaLevelIconData:MetaLevelVO = null;
 
         public var awards:Vector.<AwardItemRendererExVO> = null;
 
@@ -49,12 +50,12 @@ package net.wg.gui.lobby.epicBattles.data
             }
             if(param1 == EPIC_META_LEVEL_ICON_VO)
             {
-                this.epicMetaLevelIconData = new EpicMetaLevelIconVO(param2);
+                this.epicMetaLevelIconData = new MetaLevelVO(param2);
                 return false;
             }
             if(param1 == EPIC_PRESTIGE_META_LEVEL_ICON_VO)
             {
-                this.metaLevelIconPrestige = new EpicMetaLevelIconVO(param2);
+                this.metaLevelIconPrestige = new MetaLevelVO(param2);
                 return false;
             }
             return super.onDataWrite(param1,param2);

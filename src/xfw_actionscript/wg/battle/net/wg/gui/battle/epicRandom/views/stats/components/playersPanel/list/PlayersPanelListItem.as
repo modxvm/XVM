@@ -8,6 +8,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
     import net.wg.gui.battle.views.stats.SpeakAnimation;
     import net.wg.gui.components.controls.BadgeComponent;
     import flash.display.MovieClip;
+    import net.wg.gui.battle.components.stats.playersPanel.ChatCommandItemComponent;
     import net.wg.gui.components.controls.VO.BadgeVisualVO;
     import net.wg.utils.ICommons;
     import net.wg.infrastructure.interfaces.IUserProps;
@@ -63,6 +64,8 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
 
         public var deadBg:MovieClip = null;
 
+        public var chatCommandState:ChatCommandItemComponent = null;
+
         public var holderItemID:int = -1;
 
         private var _state:uint = 0;
@@ -74,6 +77,8 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
         private var _frags:int = 0;
 
         private var _badgeVO:BadgeVisualVO = null;
+
+        private var _chatCommands:int = 0;
 
         private var _isMute:Boolean = false;
 
@@ -124,6 +129,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             this.speakAnimation.mouseEnabled = false;
             this.speakAnimation.mouseChildren = false;
             this.badge.mouseEnabled = this.badge.mouseChildren = false;
+            this.chatCommandState.mouseEnabled = false;
             TextFieldEx.setNoTranslate(this.shortTitleTF,true);
             this.hitArea = this.hit;
             addEventListener(MouseEvent.CLICK,this.onMouseClickHandler);
@@ -138,6 +144,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             removeEventListener(MouseEvent.MOUSE_OUT,this.onMouseOutHandler);
             this.dynamicSquad.dispose();
             this.speakAnimation.dispose();
+            this.chatCommandState.dispose();
             this.disableCommunication = null;
             this.fragsTF = null;
             this.shortTitleTF = null;
@@ -147,6 +154,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             this.speakAnimation = null;
             this.deadBg = null;
             this.hit = null;
+            this.chatCommandState = null;
             this._rendererSettings = null;
             this.badge.dispose();
             this.badge = null;
@@ -253,6 +261,16 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             }
             this._frags = param1;
             invalidate(PlayersPanelInvalidationType.FRAGS);
+        }
+
+        public function setCharCommand(param1:String, param2:uint) : void
+        {
+            this.chatCommandState.setActiveChatCommand(param1,param2);
+        }
+
+        public function triggerChatCommand(param1:String) : void
+        {
+            this.chatCommandState.playCommandAnimation(param1);
         }
 
         public function setIsAlive(param1:Boolean) : void
@@ -444,6 +462,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
                 this.badge.visible = this._hasBadge && (_loc2_ || _loc3_);
                 this._isVisibleState = param1 == PlayersPanelListItemState.SHORT_RENDERER_STATE || _loc2_ || _loc3_;
                 this.fragsTF.visible = this.dynamicSquad.visible = this._isVisibleState;
+                this.chatCommandState.visible = this._isVisibleState;
                 this.invalidateVariableElements();
                 if(this._hasBadge && (_loc2_ || _loc3_))
                 {
@@ -487,12 +506,14 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             this.speakAnimation.y = this._rendererSettings.speakAnimationY;
             this.deadBg.width = this._rendererSettings.deadBgWidth;
             this.hit.width = this._rendererSettings.hitWidth;
+            this.chatCommandState.y = this._rendererSettings.chatCommunicationIconYOffset;
             if(this._isRightAligned)
             {
                 this.deadBg.x = -this._rendererSettings.deadBgX;
                 this.mute.x = -MUTE_ICON_WIDTH - this._rendererSettings.muteX;
                 this.disableCommunication.x = -TOXIC_CHAT_ICON_WIDTH - this._rendererSettings.disableCommX;
                 this.vehicleIcon.x = -this._rendererSettings.vehicleIconXOffset;
+                this.chatCommandState.iconOffset(-this._rendererSettings.chatCommunicationIconXOffset);
                 x = -this._rendererSettings.xPosition;
             }
             else
@@ -501,8 +522,10 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
                 this.mute.x = this._rendererSettings.muteX;
                 this.disableCommunication.x = this._rendererSettings.disableCommX;
                 this.vehicleIcon.x = this._rendererSettings.vehicleIconXOffset;
+                this.chatCommandState.iconOffset(this._rendererSettings.chatCommunicationIconXOffset);
                 x = this._rendererSettings.xPosition;
             }
+            this.chatCommandState.x = this.dynamicSquad.x;
         }
 
         private function updateColors() : void
@@ -529,6 +552,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
                     this.shortTitleTF.textColor = _loc3_;
                 }
             }
+            this.chatCommandState.updateColors(App.colorSchemeMgr.getIsColorBlindS());
         }
 
         public function get columnNumber() : int

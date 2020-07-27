@@ -11,19 +11,19 @@ package net.wg.gui.battle.views.epicDeploymentMap.events
 
         private var _mouseY:Number = 0;
 
-        private var _isMouseRightClick:Boolean = true;
+        private var _buttonIdx:Number = 0;
 
-        public function EpicDeploymentMapEvent(param1:String, param2:Number, param3:Number, param4:Boolean, param5:Boolean = false, param6:Boolean = false)
+        public function EpicDeploymentMapEvent(param1:String, param2:Number, param3:Number, param4:Number, param5:Boolean = false, param6:Boolean = false)
         {
             super(param1,param5,param6);
             this._mouseX = param2;
             this._mouseY = param3;
-            this._isMouseRightClick = param4;
+            this._buttonIdx = param4;
         }
 
         override public function clone() : Event
         {
-            return new EpicDeploymentMapEvent(type,this._mouseX,this._mouseY,this._isMouseRightClick,bubbles,cancelable);
+            return new EpicDeploymentMapEvent(type,this._mouseX,this._mouseY,this._buttonIdx,bubbles,cancelable);
         }
 
         public function get mouseX() : Number
@@ -36,9 +36,9 @@ package net.wg.gui.battle.views.epicDeploymentMap.events
             return this._mouseY;
         }
 
-        public function get isMouseRightClick() : Boolean
+        public function get buttonIdx() : Number
         {
-            return this._isMouseRightClick;
+            return this._buttonIdx;
         }
     }
 }

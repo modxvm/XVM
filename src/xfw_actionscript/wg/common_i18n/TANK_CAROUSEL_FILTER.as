@@ -37,6 +37,8 @@ package
 
         public static const POPOVER_CHECKBOX_EVENT:String = "#tank_carousel_filter:popover/checkbox/event";
 
+        public static const POPOVER_CHECKBOX_BATTLEROYALE:String = "#tank_carousel_filter:popover/checkbox/battleRoyale";
+
         public static const POPOVER_CHECKBOX_UNLOCK_AVAILABLE:String = "#tank_carousel_filter:popover/checkbox/unlock_available";
 
         public static const POPOVER_COUNTER:String = "#tank_carousel_filter:popover/counter";
@@ -57,6 +59,10 @@ package
 
         public static const TOOLTIP_PREMIUM_BODY:String = "#tank_carousel_filter:tooltip/premium/body";
 
+        public static const TOOLTIP_CRYSTALS_HEADER:String = "#tank_carousel_filter:tooltip/crystals/header";
+
+        public static const TOOLTIP_CRYSTALS_BODY:String = "#tank_carousel_filter:tooltip/crystals/body";
+
         public static const TOOLTIP_ELITE_HEADER:String = "#tank_carousel_filter:tooltip/elite/header";
 
         public static const TOOLTIP_ELITE_BODY:String = "#tank_carousel_filter:tooltip/elite/body";
@@ -76,6 +82,10 @@ package
         public static const TOOLTIP_EVENT_HEADER:String = "#tank_carousel_filter:tooltip/event/header";
 
         public static const TOOLTIP_EVENT_BODY:String = "#tank_carousel_filter:tooltip/event/body";
+
+        public static const TOOLTIP_BATTLEROYALE_HEADER:String = "#tank_carousel_filter:tooltip/battleRoyale/header";
+
+        public static const TOOLTIP_BATTLEROYALE_BODY:String = "#tank_carousel_filter:tooltip/battleRoyale/body";
 
         public static const TOOLTIP_IGR_HEADER:String = "#tank_carousel_filter:tooltip/igr/header";
 

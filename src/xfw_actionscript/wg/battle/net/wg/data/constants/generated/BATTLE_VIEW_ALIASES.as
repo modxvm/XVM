@@ -37,7 +37,9 @@ package net.wg.data.constants.generated
 
         public static const DAMAGE_INDICATOR:String = "damageIndicator";
 
-        public static const DESTROY_TIMERS_PANEL:String = "destroyTimersPanel";
+        public static const TIMERS_PANEL:String = "timersPanel";
+
+        public static const STATUS_NOTIFICATIONS_PANEL:String = "statusNotificationsPanel";
 
         public static const DUAL_GUN_PANEL:String = "dualGunPanel";
 
@@ -52,8 +54,6 @@ package net.wg.data.constants.generated
         public static const RADIAL_MENU:String = "radialMenu";
 
         public static const PLAYERS_PANEL:String = "playersPanel";
-
-        public static const TICKER:String = "battleTicker";
 
         public static const REPAIR_POINT_TIMER:String = "repairPointTimer";
 
@@ -116,6 +116,42 @@ package net.wg.data.constants.generated
         public static const HINT_PANEL:String = "battleHintPanel";
 
         public static const HELP_DETAILED:String = "helpDetailed";
+
+        public static const PLAYERS_PANEL_EVENT:String = "playersPanelEvent";
+
+        public static const BATTLE_HINT:String = "battleHint";
+
+        public static const EVENT_POINT_COUNTER:String = "eventPointCounter";
+
+        public static const EVENT_TIMER:String = "eventTimer";
+
+        public static const EVENT_STATS:String = "eventStats";
+
+        public static const EVENT_DESTROY_TIMERS_PANEL:String = "eventDestroyTimersPanel";
+
+        public static const EVENT_BUFFS_PANEL:String = "eventBuffsPanel";
+
+        public static const EVENT_OBJECTIVES:String = "eventObjectives";
+
+        public static const CALLOUT_PANEL:String = "calloutPanel";
+
+        public static const EVENT_POSTMORTEM_PANEL:String = "eventPostmortemPanel";
+
+        public static const BATTLE_VEHICLE_CONFIGURATOR:String = "battleVehicleConfigurator";
+
+        public static const BATTLE_LEVEL_PANEL:String = "levelPanel";
+
+        public static const BATTLE_TEAM_PANEL:String = "teamPanel";
+
+        public static const BATTLE_VEH_MODULES_CONFIGURATOR_CMP:String = "battleVehModulesConfiguratorCmp";
+
+        public static const RADAR_BUTTON:String = "radarButton";
+
+        public static const UPGRADE_PANEL:String = "upgradePanel";
+
+        public static const BR_SELECT_RESPAWN:String = "BRSelectRespawn";
+
+        public static const FRAG_PANEL:String = "fragPanel";
 
         public function BATTLE_VIEW_ALIASES()
         {

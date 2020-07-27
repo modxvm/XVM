@@ -12,5 +12,7 @@ package net.wg.infrastructure.interfaces
         function get styleID() : String;
 
         function get styledDisplayObjects() : IUniversalBtnStyledDisplayObjects;
+
+        function switchAlertIndicatorVisible(param1:Boolean) : void;
     }
 }

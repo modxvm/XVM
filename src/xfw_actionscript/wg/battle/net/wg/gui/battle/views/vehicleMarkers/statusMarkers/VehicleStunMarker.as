@@ -20,17 +20,17 @@ package net.wg.gui.battle.views.vehicleMarkers.statusMarkers
             super();
         }
 
-        override public function onDispose() : void
-        {
-            this.counterMc = null;
-            this.arrowMc = null;
-            super.onDispose();
-        }
-
         override public function updateEffectTimer(param1:int, param2:Boolean, param3:Boolean = false) : void
         {
             super.updateEffectTimer(param1,param2,param3);
             this.setEffectTimerText(param1);
+        }
+
+        override protected function onDispose() : void
+        {
+            this.counterMc = null;
+            this.arrowMc = null;
+            super.onDispose();
         }
 
         override protected function updateColorSettings(param1:uint) : void

@@ -1,7 +1,7 @@
 package net.wg.gui.lobby.sessionStats
 {
     import flash.text.TextField;
-    import net.wg.gui.components.common.containers.VerticalGroupLayout;
+    import net.wg.gui.components.containers.VerticalGroupLayout;
     import net.wg.data.constants.Linkages;
     import net.wg.data.constants.Values;
     import flash.text.TextFieldAutoSize;

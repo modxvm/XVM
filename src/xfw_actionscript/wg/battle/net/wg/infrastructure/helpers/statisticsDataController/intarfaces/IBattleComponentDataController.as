@@ -34,5 +34,7 @@ package net.wg.infrastructure.helpers.statisticsDataController.intarfaces
         function setPersonalStatus(param1:uint) : void;
 
         function updateInvitationsStatuses(param1:IDAAPIDataClass) : void;
+
+        function updateTriggeredChatCommands(param1:IDAAPIDataClass) : void;
     }
 }

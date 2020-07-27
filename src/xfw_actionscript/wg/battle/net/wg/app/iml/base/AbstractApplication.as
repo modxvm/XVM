@@ -2,6 +2,7 @@ package net.wg.app.iml.base
 {
     import net.wg.infrastructure.base.meta.impl.ApplicationMeta;
     import net.wg.app.IApplication;
+    import flash.display.DisplayObject;
     import net.wg.infrastructure.managers.IGlobalVarsManager;
     import net.wg.infrastructure.managers.ITooltipMgr;
     import net.wg.infrastructure.managers.IEnvironmentManager;
@@ -27,13 +28,11 @@ package net.wg.app.iml.base
     import net.wg.infrastructure.managers.IStageSizeManager;
     import lesta.unbound2.proxy.UbPlayerProxy;
     import net.wg.infrastructure.managers.impl.ElementBlurAdapter;
-    import net.wg.infrastructure.interfaces.ISimpleManagedContainer;
-    import flash.display.DisplayObject;
-    import flash.utils.Dictionary;
     import net.wg.infrastructure.interfaces.IView;
     import net.wg.infrastructure.exceptions.AbstractException;
     import net.wg.data.constants.Errors;
     import net.wg.infrastructure.managers.impl.GraphicsOptimizationManager;
+    import net.wg.infrastructure.interfaces.ISimpleManagedContainer;
     import net.wg.infrastructure.events.LibraryLoaderEvent;
     import net.wg.infrastructure.events.LoaderEvent;
     import scaleform.gfx.Extensions;
@@ -47,6 +46,8 @@ package net.wg.app.iml.base
     {
 
         private static const POPUP_MGR_INIT_EVENT:String = "popUpManagerInited";
+
+        protected var containers:Vector.<DisplayObject> = null;
 
         private var _classLoaderMgr:Object = null;
 
@@ -110,11 +111,10 @@ package net.wg.app.iml.base
 
         private var _ubPlayerProxy:UbPlayerProxy;
 
-        private var _elementBlurAdapter:ElementBlurAdapter;
+        private var _elementBlurAdapter:ElementBlurAdapter = null;
 
         public function AbstractApplication()
         {
-            this._elementBlurAdapter = new ElementBlurAdapter();
             super();
             App.instance = this;
             this._utils = this.getNewUtils();
@@ -141,34 +141,7 @@ package net.wg.app.iml.base
 
         override protected function blurBackgroundViews(param1:String, param2:Vector.<String>, param3:Number) : void
         {
-            var _loc7_:ISimpleManagedContainer = null;
-            var _loc8_:String = null;
-            var _loc9_:* = 0;
-            var _loc4_:Vector.<DisplayObject> = new Vector.<DisplayObject>(0);
-            var _loc5_:Vector.<DisplayObject> = this.getContainers();
-            var _loc6_:Dictionary = new Dictionary();
-            for each(_loc6_[_loc7_.type] in _loc5_)
-            {
-            }
-            for each(_loc8_ in param2)
-            {
-                _loc7_ = _loc6_[_loc8_];
-                if(_loc7_ != null)
-                {
-                    _loc4_.push(_loc7_);
-                }
-            }
-            _loc7_ = _loc6_[param1];
-            if(_loc7_ != null)
-            {
-                _loc9_ = 0;
-                while(_loc9_ < _loc7_.numChildren)
-                {
-                    _loc4_.push(_loc7_.getChildAt(_loc9_));
-                    _loc9_++;
-                }
-            }
-            this._elementBlurAdapter.blurElements(_loc4_,param3);
+            this._elementBlurAdapter.blurElements(param1,param2,param3);
         }
 
         override protected function onDispose() : void
@@ -270,17 +243,22 @@ package net.wg.app.iml.base
 
         protected function createContainers() : void
         {
+            this._elementBlurAdapter = new ElementBlurAdapter(this.getContainers());
         }
 
         protected function disposeContainers() : void
         {
-            var _loc2_:DisplayObject = null;
+            var _loc1_:DisplayObject = null;
             this._elementBlurAdapter.dispose();
             this._elementBlurAdapter = null;
-            var _loc1_:Vector.<DisplayObject> = this.getContainers();
-            for each(_loc2_ in _loc1_)
+            if(this.containers)
             {
-                removeChild(_loc2_);
+                for each(_loc1_ in this.containers)
+                {
+                    removeChild(_loc1_);
+                }
+                this.containers.splice(0,this.containers.length);
+                this.containers = null;
             }
         }
 

@@ -26,7 +26,7 @@ package net.wg.gui.prebattle.squads
 
         private static const CHANGE_READY_STATE:int = 1;
 
-        private static const SET_ES_PLAYER_STATE:int = 35;
+        private static const SET_ES_PLAYER_STATE:int = 6;
 
         public var inviteBtn:SoundButtonEx = null;
 

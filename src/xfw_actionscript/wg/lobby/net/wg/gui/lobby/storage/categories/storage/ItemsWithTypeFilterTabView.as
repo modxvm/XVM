@@ -60,6 +60,7 @@ package net.wg.gui.lobby.storage.categories.storage
             this.filtersBlock.dispose();
             this.filtersBlock = null;
             carousel.removeEventListener(CardEvent.SELL,this.onCardSellHandler);
+            carousel.removeEventListener(CardEvent.UPGRADE,this.onCardUpgradeHandler);
             super.onDispose();
         }
 
@@ -70,9 +71,16 @@ package net.wg.gui.lobby.storage.categories.storage
             carousel.scrollList.paddingTop = CAROUSEL_PADDING_TOP;
             carousel.scrollList.paddingBottom = CAROUSEL_PADDING_BOTTOM;
             carousel.addEventListener(CardEvent.SELL,this.onCardSellHandler);
+            carousel.addEventListener(CardEvent.UPGRADE,this.onCardUpgradeHandler);
             this.initNoItemsView();
             this.filtersBlock.addEventListener(FiltersEvent.FILTERS_CHANGED,this.onFiltersBlockFiltersChangedHandler);
             this.filtersBlock.addEventListener(FiltersEvent.RESET_ALL_FILTERS,this.onFiltersBlockResetAllFiltersHandler);
+        }
+
+        private function onCardUpgradeHandler(param1:CardEvent) : void
+        {
+            param1.stopImmediatePropagation();
+            upgradeItemS(param1.data.id);
         }
 
         override protected function draw() : void

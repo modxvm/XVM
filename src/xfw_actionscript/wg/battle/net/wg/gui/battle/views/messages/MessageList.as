@@ -291,5 +291,10 @@ package net.wg.gui.battle.views.messages
         {
             this.visible = param1;
         }
+
+        public function isCompVisible() : Boolean
+        {
+            return this.visible;
+        }
     }
 }

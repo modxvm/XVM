@@ -9,17 +9,21 @@ package net.wg.gui.components.hintPanel
     public class KeyViewer extends Sprite implements IDisposable
     {
 
+        public static const DEFAULT_KEY_SIDE_OFFSET:int = 17;
+
         private static const TEXTFIELD_PADDING:int = 5;
-
-        private static const KEY_LEFT_SIDE:int = 17;
-
-        private static const KEY_RIGHT_SIDE:int = 17;
 
         private static const LEFT_MOUSE_BUTTON:String = "LMB";
 
+        private static const LEFT_MOUSE_BUTTON_ALTERNATIVE:String = "KEY_LEFTMOUSE";
+
         private static const RIGHT_MOUSE_BUTTON:String = "RMB";
 
+        private static const RIGHT_MOUSE_BUTTON_ALTERNATIVE:String = "KEY_RIGHTMOUSE";
+
         private static const MIDDLE_MOUSE_BUTTON:String = "MMB";
+
+        private static const MIDDLE_MOUSE_BUTTON_ALTERNATIVE:String = "KEY_MIDDLEMOUSE";
 
         private static const ADDITIONAL_MOUSE_BUTTON_UP:String = "UP_MB";
 
@@ -33,7 +37,7 @@ package net.wg.gui.components.hintPanel
 
         private static const UP_ARROW_BUTTON:String = "Up Arrow";
 
-        private static const BUTTONS_WITH_CUSTOM_ICON:Vector.<String> = new <String>[LEFT_MOUSE_BUTTON,RIGHT_MOUSE_BUTTON,MIDDLE_MOUSE_BUTTON,ADDITIONAL_MOUSE_BUTTON_UP,ADDITIONAL_MOUSE_BUTTON_DOWN,LEFT_ARROW_BUTTON,RIGHT_ARROW_BUTTON,DOWN_ARROW_BUTTON,UP_ARROW_BUTTON];
+        private static const BUTTONS_WITH_CUSTOM_ICON:Vector.<String> = new <String>[LEFT_MOUSE_BUTTON,LEFT_MOUSE_BUTTON_ALTERNATIVE,RIGHT_MOUSE_BUTTON,RIGHT_MOUSE_BUTTON_ALTERNATIVE,MIDDLE_MOUSE_BUTTON,MIDDLE_MOUSE_BUTTON_ALTERNATIVE,ADDITIONAL_MOUSE_BUTTON_UP,ADDITIONAL_MOUSE_BUTTON_DOWN,LEFT_ARROW_BUTTON,RIGHT_ARROW_BUTTON,DOWN_ARROW_BUTTON,UP_ARROW_BUTTON];
 
         public var keyTF:TextField = null;
 
@@ -41,11 +45,12 @@ package net.wg.gui.components.hintPanel
 
         public var customButtonIcon:MovieClip = null;
 
+        private var _keySideOffset:int = 17;
+
         public function KeyViewer()
         {
             super();
             this.keyTF.autoSize = TextFieldAutoSize.LEFT;
-            this.keyTF.x = KEY_LEFT_SIDE;
         }
 
         public final function dispose() : void
@@ -68,10 +73,16 @@ package net.wg.gui.components.hintPanel
             }
             else
             {
+                this.keyTF.x = this._keySideOffset;
                 this.keyTF.text = param1;
                 this.keyTF.width = this.keyTF.textWidth + TEXTFIELD_PADDING | 0;
-                this.buttonBgMc.width = this.keyTF.width + KEY_LEFT_SIDE + KEY_RIGHT_SIDE;
+                this.buttonBgMc.width = this.keyTF.width + (this._keySideOffset << 1);
             }
+        }
+
+        public function set keySideOffset(param1:int) : void
+        {
+            this._keySideOffset = param1;
         }
     }
 }

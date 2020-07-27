@@ -6,12 +6,15 @@ package net.wg.gui.lobby.vehicleCompare
     import flash.text.TextField;
     import net.wg.gui.interfaces.ISoundButtonEx;
     import net.wg.gui.lobby.vehicleCompare.configurator.VehConfBottomPanel;
+    import flash.utils.Dictionary;
     import net.wg.gui.lobby.vehicleCompare.data.VehicleCompareConfiguratorInitDataVO;
     import flash.text.TextFieldAutoSize;
     import scaleform.clik.events.ButtonEvent;
     import net.wg.gui.lobby.vehicleCompare.events.VehConfEvent;
     import scaleform.clik.constants.InvalidationType;
     import flash.display.InteractiveObject;
+    import flash.display.DisplayObject;
+    import net.wg.utils.StageSizeBoundaries;
 
     public class VehicleCompareConfiguratorBaseView extends VehicleCompareConfiguratorBaseViewMeta implements IVehicleCompareConfiguratorBaseViewMeta, IViewStackContent
     {
@@ -26,11 +29,20 @@ package net.wg.gui.lobby.vehicleCompare
 
         public var bottomPanel:VehConfBottomPanel;
 
+        protected var offsets:Dictionary;
+
         private var _initData:VehicleCompareConfiguratorInitDataVO;
 
         public function VehicleCompareConfiguratorBaseView()
         {
+            this.offsets = new Dictionary();
             super();
+        }
+
+        override protected function initialize() : void
+        {
+            super.initialize();
+            this.offsets[this.titleTf] = new Offsets(41,115);
         }
 
         override protected function configUI() : void
@@ -46,6 +58,8 @@ package net.wg.gui.lobby.vehicleCompare
 
         override protected function onDispose() : void
         {
+            App.utils.data.cleanupDynamicObject(this.offsets);
+            this.offsets = null;
             this.bottomPanel.removeEventListener(VehConfEvent.CLOSE_CLICK,this.onBottomPanelCloseClickHandler);
             this.bottomPanel.removeEventListener(VehConfEvent.RESET_CLICK,this.onBottomPanelResetClickHandler);
             this.bottomPanel.removeEventListener(VehConfEvent.APPLY_CLICK,this.onBottomPanelApplyClickHandler);
@@ -64,7 +78,7 @@ package net.wg.gui.lobby.vehicleCompare
             super.draw();
             if(this._initData && isInvalid(INV_INIT_DATA))
             {
-                this.titleTf.htmlText = this._initData.title;
+                this.titleTf.text = this._initData.title;
                 this.bottomPanel.setTexts(this._initData.resetBtnLabel,this._initData.resetBtnTooltip,this._initData.cancelBtnLabel,this._initData.cancelBtnTooltip,this._initData.applyBtnLabel,this._initData.applyBtnTooltip);
             }
             if(isInvalid(InvalidationType.SIZE))
@@ -110,8 +124,26 @@ package net.wg.gui.lobby.vehicleCompare
 
         protected function updateLayout() : void
         {
+            var _loc3_:DisplayObject = null;
+            var _loc4_:Offsets = null;
+            var _loc5_:* = 0;
+            var _loc6_:DisplayObject = null;
+            var _loc1_:Number = (App.appHeight - StageSizeBoundaries.HEIGHT_768) / (StageSizeBoundaries.HEIGHT_1080 - StageSizeBoundaries.HEIGHT_768);
+            var _loc2_:Vector.<DisplayObject> = this.itemsToLayoutList;
+            for each(_loc6_ in _loc2_)
+            {
+                _loc4_ = this.offsets[_loc6_];
+                _loc5_ = _loc3_?_loc3_.y + _loc3_.height:0;
+                _loc6_.y = int(_loc5_ + _loc4_.min + (_loc4_.max - _loc4_.min) * _loc1_);
+                _loc3_ = _loc6_;
+            }
             this.closeBtn.x = width - this.closeBtn.width - CLOSE_BTN_BORDER_OFFSET;
             this.titleTf.x = width - this.titleTf.width >> 1;
+        }
+
+        protected function get itemsToLayoutList() : Vector.<DisplayObject>
+        {
+            return new <DisplayObject>[this.titleTf];
         }
 
         private function onBottomPanelApplyClickHandler(param1:VehConfEvent) : void

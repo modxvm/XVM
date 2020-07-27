@@ -68,11 +68,9 @@ package net.wg.infrastructure.tutorial.builders.bootcamp
 
         protected function layoutHint() : void
         {
-            var _loc1_:Point = null;
-            var _loc2_:PaddingVO = null;
-            _loc1_ = component.localToGlobal(new Point(0,0));
+            var _loc1_:Point = component.localToGlobal(new Point(0,0));
             _loc1_ = view.globalToLocal(_loc1_);
-            _loc2_ = this._model.padding;
+            var _loc2_:PaddingVO = this._model.padding;
             if(!_loc2_)
             {
                 _loc2_ = new PaddingVO({});

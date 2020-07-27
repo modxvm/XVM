@@ -11,8 +11,6 @@ package net.wg.gui.components.controls
 
         public var image:Image;
 
-        protected var _source:String = "";
-
         protected var _tooltipEnabled:Boolean = true;
 
         protected var _horizontalAlign:String = "left";
@@ -130,13 +128,11 @@ package net.wg.gui.components.controls
 
         private function adjustSizeToImage(param1:Boolean) : void
         {
-            this._horizontalAlign = AlignType.LEFT;
-            this._verticalAlign = AlignType.TOP;
-            this._paddingTop = this._paddingBottom = this._paddingLeft = this._paddingRight = this._horizontalCenter = this._verticalCenter = 0;
+            this._paddingTop = this._paddingBottom = this._paddingLeft = this._paddingRight = 0;
+            this._horizontalCenter = -this.image.bitmapWidth >> 1;
+            this._verticalCenter = -this.image.bitmapHeight >> 1;
             var param1:Boolean = param1 || this.image.bitmapWidth != _width || this.image.bitmapHeight != _height;
-            var _loc2_:Boolean = this._adjustSize;
-            this.setSize(this.image.bitmapWidth,this.image.bitmapHeight);
-            this._adjustSize = _loc2_;
+            super.setSize(this.image.bitmapWidth,this.image.bitmapHeight);
             if(param1)
             {
                 dispatchEvent(new Event(Event.CHANGE));
@@ -159,16 +155,22 @@ package net.wg.gui.components.controls
 
         public function get source() : String
         {
-            return this._source;
+            return this.image.source;
         }
 
         public function set source(param1:String) : void
         {
-            if(this._source == param1)
-            {
-                return;
-            }
             this.image.source = param1;
+        }
+
+        public function get sourceAlt() : String
+        {
+            return this.image.sourceAlt;
+        }
+
+        public function set sourceAlt(param1:String) : void
+        {
+            this.image.sourceAlt = param1;
         }
 
         public function get tooltipEnabled() : Boolean
@@ -321,7 +323,7 @@ package net.wg.gui.components.controls
                 this._adjustSize = param1;
                 if(param1)
                 {
-                    this.readjustSize();
+                    this.adjustSizeToImage(true);
                 }
             }
         }

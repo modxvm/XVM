@@ -86,6 +86,11 @@ package net.wg.infrastructure.managers.impl.cursor.base
             return this._attachedSprite;
         }
 
+        public final function forceSetCursor(param1:String) : void
+        {
+            App.environment.call(CPP_SET_CURSOR_METHOD_NAME,param1);
+        }
+
         protected function resetCursor() : void
         {
             this.setCursor(this._lastCursor);
@@ -105,11 +110,6 @@ package net.wg.infrastructure.managers.impl.cursor.base
             this.forceSetCursor(MouseCursor.ARROW);
             this._cursorContainer = App.containerMgr.cursorContainer;
             this._stage.addEventListener(MouseCursorEvent.CURSOR_CHANGE,this.onChangeCursorHandler);
-        }
-
-        protected final function forceSetCursor(param1:String) : void
-        {
-            App.environment.call(CPP_SET_CURSOR_METHOD_NAME,param1);
         }
 
         protected final function tryToResetCursor() : void

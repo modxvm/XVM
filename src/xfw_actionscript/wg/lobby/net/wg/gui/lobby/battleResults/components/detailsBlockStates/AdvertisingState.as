@@ -43,6 +43,7 @@ package net.wg.gui.lobby.battleResults.components.detailsBlockStates
                 {
                     backgroundIcon.source = this._data.backgroundIcon;
                     this.description.htmlText = this._data.premiumBonusStr;
+                    this.detailsBtn.visible = this._data.visibleDetailsBtn;
                     invalidateSize();
                 }
                 if(isInvalid(InvalidationType.SIZE))

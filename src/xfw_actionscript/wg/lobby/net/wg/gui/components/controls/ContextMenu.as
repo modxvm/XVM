@@ -16,6 +16,7 @@ package net.wg.gui.components.controls
     import net.wg.data.constants.Linkages;
     import org.idmedia.as3commons.util.StringUtils;
     import scaleform.clik.events.ButtonEvent;
+    import net.wg.infrastructure.managers.counter.CounterManager;
     import net.wg.infrastructure.managers.counter.CounterProps;
     import net.wg.data.VO.SeparateItem;
     import fl.transitions.easing.Strong;
@@ -220,7 +221,7 @@ package net.wg.gui.components.controls
                         addChild(_loc16_);
                         if(_loc16_.isNew)
                         {
-                            this._counterManager.setCounter(_loc16_,"!",null,new CounterProps(-7,10));
+                            this._counterManager.setCounter(_loc16_,CounterManager.EXCLAMATION_COUNTER_VALUE,null,new CounterProps(-7,10));
                         }
                     }
                     _loc6_++;
@@ -509,6 +510,16 @@ package net.wg.gui.components.controls
             this._onReleaseOutsideCallback = param1;
         }
 
+        public function get parentObj() : DisplayObject
+        {
+            return this._parentObj;
+        }
+
+        public function set parentObj(param1:DisplayObject) : void
+        {
+            this._parentObj = param1;
+        }
+
         private function onAppMouseDownHandler(param1:MouseEvent) : void
         {
             if(!this.hit.hitTestPoint(App.stage.mouseX,App.stage.mouseY))
@@ -531,16 +542,6 @@ package net.wg.gui.components.controls
                     this._onItemSelectCallback(_loc2_.id);
                 }
             }
-        }
-
-        public function get parentObj() : DisplayObject
-        {
-            return this._parentObj;
-        }
-
-        public function set parentObj(param1:DisplayObject) : void
-        {
-            this._parentObj = param1;
         }
     }
 }

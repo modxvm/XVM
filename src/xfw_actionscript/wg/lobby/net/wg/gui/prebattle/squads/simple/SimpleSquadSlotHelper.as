@@ -40,7 +40,6 @@ package net.wg.gui.prebattle.squads.simple
             var _loc9_:String = null;
             var _loc10_:* = false;
             var _loc11_:VehicleVO = null;
-            var _loc12_:* = false;
             var _loc5_:RallySlotVO = param3 as RallySlotVO;
             if(_loc5_)
             {
@@ -68,18 +67,23 @@ package net.wg.gui.prebattle.squads.simple
                             _loc11_ = _loc5_.selectedVehicle;
                             if(_loc11_ != null)
                             {
-                                _loc12_ = _loc11_.isFalloutVehicle && !_loc5_.isFallout;
-                                _loc12_ = _loc12_ || _loc5_.isFallout && !_loc11_.isFalloutVehicle;
-                                if(_loc12_)
+                                if(_loc11_.enabled)
                                 {
-                                    App.toolTipMgr.showComplex(_loc11_.tooltip);
+                                    if(_loc11_.isEventVehicle)
+                                    {
+                                        App.toolTipMgr.showSpecial(_loc11_.tooltip,null,_loc11_.intCD);
+                                    }
+                                    else
+                                    {
+                                        App.toolTipMgr.showSpecial(TOOLTIPS_CONSTANTS.SQUAD_SLOT_VEHICLE_SELECTED,null,param2.index,_loc5_.rallyIdx);
+                                    }
+                                    _loc10_ = true;
                                 }
                                 else
                                 {
-                                    App.toolTipMgr.showSpecial(TOOLTIPS_CONSTANTS.SQUAD_SLOT_VEHICLE_SELECTED,null,param2.index,_loc5_.rallyIdx);
+                                    _loc7_ = _loc11_.tooltip;
                                 }
                             }
-                            _loc10_ = true;
                         }
                         break;
                 }

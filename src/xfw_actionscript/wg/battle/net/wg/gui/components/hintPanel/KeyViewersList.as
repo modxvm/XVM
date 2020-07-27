@@ -10,17 +10,19 @@ package net.wg.gui.components.hintPanel
     public class KeyViewersList extends Sprite implements IDisposable
     {
 
-        private static const KEY_GAP:int = 35;
+        private static const DEFAULT_KEY_GAP:int = 35;
 
         private static const PLUS_SIZE:int = 8;
-
-        private static const PLUS_LEFT:int = KEY_GAP + PLUS_SIZE >> 1;
 
         private var _keys:Vector.<KeyViewer>;
 
         private var _pluses:Vector.<Image>;
 
-        private var _keyClass:Class;
+        private var _keyClass:Class = null;
+
+        private var _keyGap:int = 35;
+
+        private var _keySideOffset:int = 17;
 
         public function KeyViewersList()
         {
@@ -73,14 +75,15 @@ package net.wg.gui.components.hintPanel
                 for each(_loc4_ in param1)
                 {
                     _loc5_ = new this._keyClass();
+                    _loc5_.keySideOffset = this._keySideOffset;
                     _loc5_.setKey(_loc4_);
                     _loc5_.x = _loc2_ >> 0;
-                    _loc2_ = _loc2_ + (_loc5_.width + KEY_GAP);
+                    _loc2_ = _loc2_ + (_loc5_.width + this._keyGap);
                     if(!_loc3_)
                     {
                         _loc6_ = new Image();
                         _loc6_.source = RES_ICONS.MAPS_ICONS_LIBRARY_HINT_PLUS;
-                        _loc6_.x = _loc5_.x - PLUS_LEFT;
+                        _loc6_.x = _loc5_.x - (this._keyGap + PLUS_SIZE >> 1);
                         _loc6_.y = _loc5_.height - PLUS_SIZE >> 1;
                         this._pluses.push(_loc6_);
                         addChild(_loc6_);
@@ -92,6 +95,24 @@ package net.wg.gui.components.hintPanel
                 cacheAsBitmap = true;
                 blendMode = BlendMode.SCREEN;
             }
+        }
+
+        public function set keyClass(param1:Class) : void
+        {
+            if(param1 != null)
+            {
+                this._keyClass = param1;
+            }
+        }
+
+        public function set keyGap(param1:int) : void
+        {
+            this._keyGap = param1;
+        }
+
+        public function set keySideOffset(param1:int) : void
+        {
+            this._keySideOffset = param1;
         }
     }
 }

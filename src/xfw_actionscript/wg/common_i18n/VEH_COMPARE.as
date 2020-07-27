@@ -297,14 +297,6 @@ package
 
         public static const VEHCONF_COMPAREBTNLABEL_TOOLTIP_BODY:String = "#veh_compare:vehConf/compareBtnLabel/tooltip/body";
 
-        public static const VEHCONF_TOOLTIPS_EMPTYEQSLOT_HEADER:String = "#veh_compare:vehConf/tooltips/emptyEqSlot/header";
-
-        public static const VEHCONF_TOOLTIPS_EMPTYEQSLOT_BODY:String = "#veh_compare:vehConf/tooltips/emptyEqSlot/body";
-
-        public static const VEHCONF_TOOLTIPS_EMPTYOPTDEVICESLOT_HEADER:String = "#veh_compare:vehConf/tooltips/emptyOptDeviceSlot/header";
-
-        public static const VEHCONF_TOOLTIPS_EMPTYOPTDEVICESLOT_BODY:String = "#veh_compare:vehConf/tooltips/emptyOptDeviceSlot/body";
-
         public static const VEHCONF_TOOLTIPS_CAMOTITLE:String = "#veh_compare:vehConf/tooltips/camoTitle";
 
         public static const VEHCONF_CREWTITLE:String = "#veh_compare:vehConf/crewTitle";

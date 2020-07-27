@@ -80,11 +80,6 @@ package net.wg.mock
             return false;
         }
 
-        public function isShowTickerS() : Boolean
-        {
-            return false;
-        }
-
         public function isTutorialRunningS(param1:String) : Boolean
         {
             return false;

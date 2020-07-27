@@ -1,11 +1,12 @@
 package net.wg.gui.lobby.hangar.seniorityAwards
 {
+    import net.wg.infrastructure.managers.counter.CounterProps;
+    import flash.text.TextFormatAlign;
     import flash.display.MovieClip;
     import net.wg.utils.ICounterManager;
     import flash.events.MouseEvent;
     import flash.display.DisplayObject;
-    import net.wg.infrastructure.managers.counter.CounterProps;
-    import flash.text.TextFormatAlign;
+    import net.wg.infrastructure.managers.counter.CounterManager;
 
     public class SeniorityAwardsEntryPointHangar extends SeniorityAwardsEntryPoint
     {
@@ -21,6 +22,8 @@ package net.wg.gui.lobby.hangar.seniorityAwards
         private static const OVER_SOUND:String = "gui_hangar_award_woosh";
 
         private static const HOVER_HIDE_FRAME_IDX:int = 27;
+
+        private static const COUNTER_PROPS:CounterProps = new CounterProps(12,-2,TextFormatAlign.RIGHT);
 
         public var hover:MovieClip = null;
 
@@ -42,7 +45,7 @@ package net.wg.gui.lobby.hangar.seniorityAwards
             bounds.addEventListener(MouseEvent.ROLL_OVER,this.onMouseRollOverHandler);
             bounds.addEventListener(MouseEvent.ROLL_OUT,this.onMouseRollOutHandler);
             openBtn.addEventListener(MouseEvent.ROLL_OVER,this.onMouseRollOverHandler);
-            this._counterMgr.setCounter(DisplayObject(openBtn),"!",null,new CounterProps(12,-2,TextFormatAlign.RIGHT));
+            this._counterMgr.setCounter(DisplayObject(openBtn),CounterManager.EXCLAMATION_COUNTER_VALUE,null,COUNTER_PROPS);
         }
 
         override protected function onDispose() : void

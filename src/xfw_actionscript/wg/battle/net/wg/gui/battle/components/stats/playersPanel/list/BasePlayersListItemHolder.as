@@ -42,6 +42,16 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             this._listItem.setFrags(this._frags);
         }
 
+        public function setChatCommand(param1:String, param2:uint) : void
+        {
+            this._listItem.setChatCommand(param1,param2);
+        }
+
+        public function triggerChatCommand(param1:String) : void
+        {
+            this._listItem.triggerChatCommand(param1);
+        }
+
         public function setInvitationStatus(param1:uint) : void
         {
             if(!this.vehicleData || this.vehicleData.invitationStatus == param1)

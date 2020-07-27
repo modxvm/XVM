@@ -1,6 +1,7 @@
 package net.wg.gui.lobby.epicBattles.data
 {
     import net.wg.data.daapi.base.DAAPIDataClass;
+    import net.wg.gui.lobby.eventProgression.components.metaLevel.data.MetaLevelVO;
     import net.wg.gui.lobby.components.data.AwardItemRendererExVO;
 
     public class EpicBattlesRewardRibbonVO extends DAAPIDataClass
@@ -12,7 +13,7 @@ package net.wg.gui.lobby.epicBattles.data
 
         public var rewardTitleHtmlText:String = "";
 
-        public var epicMetaLevelIconData:EpicMetaLevelIconVO = null;
+        public var epicMetaLevelIconData:MetaLevelVO = null;
 
         public var imageSource:String = "";
 
@@ -39,7 +40,7 @@ package net.wg.gui.lobby.epicBattles.data
             }
             if(param1 == EPIC_META_LEVEL_ICON_VO)
             {
-                this.epicMetaLevelIconData = new EpicMetaLevelIconVO(param2);
+                this.epicMetaLevelIconData = new MetaLevelVO(param2);
                 return false;
             }
             return super.onDataWrite(param1,param2);

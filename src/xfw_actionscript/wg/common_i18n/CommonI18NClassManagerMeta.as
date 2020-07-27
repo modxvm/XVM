@@ -9,6 +9,8 @@ package
 
         public static const BATTLE_RESULTS:Class = BATTLE_RESULTS;
 
+        public static const BATTLE_ROYALE:Class = BATTLE_ROYALE;
+
         public static const BATTLE_TUTORIAL:Class = BATTLE_TUTORIAL;
 
         public static const BOOTCAMP:Class = BOOTCAMP;
@@ -34,6 +36,8 @@ package
         public static const DIALOGS:Class = DIALOGS;
 
         public static const EPIC_BATTLE:Class = EPIC_BATTLE;
+
+        public static const EVENT:Class = EVENT;
 
         public static const EVENT_BOARDS:Class = EVENT_BOARDS;
 

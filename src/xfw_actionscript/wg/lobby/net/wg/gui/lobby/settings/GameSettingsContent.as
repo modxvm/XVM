@@ -24,6 +24,8 @@ package net.wg.gui.lobby.settings
 
         public var fieldSetBattleTypes:FieldSet = null;
 
+        public var fieldSetBattleCommunication:FieldSet = null;
+
         public var enableOlFilterCheckbox:CheckBox = null;
 
         public var enableSpamFilterCheckbox:CheckBox = null;
@@ -63,6 +65,16 @@ package net.wg.gui.lobby.settings
         public var battleLoadingRankedInfoLabelControl:LabelControl = null;
 
         public var battleLoadingRankedInfoDropDown:DropdownMenu = null;
+
+        public var enableBattleCommCheckbox:CheckBox = null;
+
+        public var showCommInPlayerlistCheckbox:CheckBox = null;
+
+        public var showStickyMarkersCheckbox:CheckBox = null;
+
+        public var showCalloutMessagesCheckbox:CheckBox = null;
+
+        public var showMarkersCheckbox:CheckBox = null;
 
         public var minimapAlphaSlider:Slider = null;
 
@@ -147,6 +159,7 @@ package net.wg.gui.lobby.settings
             this.fieldSetBattlePanel.label = SETTINGS.GAME_BATTLEPANELSETTINGS;
             this.fieldSetBattleTypes.label = SETTINGS.GAME_FIELDSET_HEADERGAMEPLAY;
             this.fieldSetMinimap.label = SETTINGS.GAME_MINIMAPGROUPTITLE;
+            this.fieldSetBattleCommunication.label = SETTINGS.GAME_FIELDSET_HEADERBATTLECOMMUNICATION;
             var _loc1_:TextField = this.fieldSetMinimap.textField;
             this.minimapCirclesInfo.x = this.fieldSetMinimap.x + _loc1_.x + _loc1_.textWidth + MINIMAP_CIRCLE_INFO_LEFT_PADDING;
             this.minimapCirclesInfo.tooltipType = ToolTipShowType.SPECIAL;
@@ -172,6 +185,18 @@ package net.wg.gui.lobby.settings
             this.disableBattleChatCheckbox.label = SETTINGS.CHAT_DISABLEBATTLECHAT;
             this.disableBattleChatCheckbox.toolTip = TOOLTIPS.TURNOFFCOMBATCHAT;
             this.disableBattleChatCheckbox.infoIcoType = InfoIcon.TYPE_INFO;
+            this.enableBattleCommCheckbox.label = SETTINGS.BATTLECOMM_ENABLEBATTLECOMM;
+            this.enableBattleCommCheckbox.toolTip = TOOLTIPS.ENABLEBATTLECOMM;
+            this.enableBattleCommCheckbox.infoIcoType = InfoIcon.TYPE_INFO;
+            this.enableBattleCommCheckbox.addEventListener(Event.SELECT,this.onBcEnableBattleCommCheckboxSelectHandler);
+            this.showCommInPlayerlistCheckbox.label = SETTINGS.BATTLECOMM_SHOWCOMMINPLAYERLIST;
+            this.showCommInPlayerlistCheckbox.toolTip = TOOLTIPS.SHOWCOMMINPLAYERLIST;
+            this.showCommInPlayerlistCheckbox.infoIcoType = InfoIcon.TYPE_INFO;
+            this.showStickyMarkersCheckbox.label = SETTINGS.BATTLECOMM_SHOWSTICKYMARKERS;
+            this.showCalloutMessagesCheckbox.label = SETTINGS.BATTLECOMM_SHOWCALLOUTMESSAGES;
+            this.showMarkersCheckbox.label = SETTINGS.BATTLECOMM_SHOWMARKERS;
+            this.showMarkersCheckbox.toolTip = TOOLTIPS.SHOWBASEMARKERS;
+            this.showMarkersCheckbox.infoIcoType = InfoIcon.TYPE_INFO;
             this.ppShowLevelsCheckbox.label = SETTINGS.GAME_PPSHOWLEVELS;
             this.gameplay_ctfCheckbox.label = SETTINGS.GAMEPLAY_CTF;
             this.gameplay_dominationCheckbox.label = SETTINGS.GAMEPLAY_DOMINATION;
@@ -243,6 +268,8 @@ package net.wg.gui.lobby.settings
             this.fieldSetBattleTypes = null;
             this.fieldSetMinimap.dispose();
             this.fieldSetMinimap = null;
+            this.fieldSetBattleCommunication.dispose();
+            this.fieldSetBattleCommunication = null;
             this.minimapCirclesInfo.dispose();
             this.minimapCirclesInfo = null;
             this.enableOlFilterCheckbox.dispose();
@@ -267,6 +294,17 @@ package net.wg.gui.lobby.settings
             this.disableBattleChatCheckbox = null;
             this.ppShowLevelsCheckbox.dispose();
             this.ppShowLevelsCheckbox = null;
+            this.enableBattleCommCheckbox.removeEventListener(Event.SELECT,this.onBcEnableBattleCommCheckboxSelectHandler);
+            this.enableBattleCommCheckbox.dispose();
+            this.enableBattleCommCheckbox = null;
+            this.showCommInPlayerlistCheckbox.dispose();
+            this.showCommInPlayerlistCheckbox = null;
+            this.showStickyMarkersCheckbox.dispose();
+            this.showStickyMarkersCheckbox = null;
+            this.showCalloutMessagesCheckbox.dispose();
+            this.showCalloutMessagesCheckbox = null;
+            this.showMarkersCheckbox.dispose();
+            this.showMarkersCheckbox = null;
             this.gameplay_ctfCheckbox.dispose();
             this.gameplay_ctfCheckbox = null;
             this.gameplay_dominationCheckbox.dispose();
@@ -355,9 +393,21 @@ package net.wg.gui.lobby.settings
             super.onDispose();
         }
 
+        public function setEnableStateForBattleCommSettings() : void
+        {
+            this.showCommInPlayerlistCheckbox.enabled = this.enableBattleCommCheckbox.selected;
+            this.showCalloutMessagesCheckbox.enabled = this.enableBattleCommCheckbox.selected;
+            this.showStickyMarkersCheckbox.enabled = this.enableBattleCommCheckbox.selected;
+        }
+
         private function onGuiGraphicsOptimizationCheckboxSelectHandler(param1:Event) : void
         {
             this.minimapAlphaSlider.enabled = this.minimapAlphaEnabledCheckbox.selected;
+        }
+
+        private function onBcEnableBattleCommCheckboxSelectHandler(param1:Event) : void
+        {
+            this.setEnableStateForBattleCommSettings();
         }
     }
 }

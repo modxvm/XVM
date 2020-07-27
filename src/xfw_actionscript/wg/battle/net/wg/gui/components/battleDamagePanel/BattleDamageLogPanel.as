@@ -203,6 +203,11 @@ package net.wg.gui.components.battleDamagePanel
             visible = param1;
         }
 
+        public function isCompVisible() : Boolean
+        {
+            return visible;
+        }
+
         public function setDetailActionCount(param1:int) : void
         {
             this._detailActionRowsCount = param1;

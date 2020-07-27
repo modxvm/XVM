@@ -12,9 +12,7 @@ package net.wg.gui.cyberSport.controls
 
         public var vehicleLevel:MovieClip;
 
-        private var state:String;
-
-        private var levels:uint = 0;
+        private var _level:uint = 0;
 
         public function CSVehicleButtonLevels()
         {
@@ -29,23 +27,29 @@ package net.wg.gui.cyberSport.controls
         override protected function draw() : void
         {
             super.draw();
-            if(isInvalid(UPDATE_LEVELS) && this.levels != 0)
+            if(this._level != 0 && isInvalid(UPDATE_LEVELS))
             {
-                this.vehicleLevel.gotoAndStop(this.levels);
-                this.vehicleLevelEff.gotoAndStop(this.levels);
+                this.vehicleLevel.gotoAndStop(this._level);
+                this.vehicleLevelEff.gotoAndStop(this._level);
             }
+        }
+
+        override protected function onDispose() : void
+        {
+            this.vehicleLevelEff = null;
+            this.vehicleLevel = null;
+            super.onDispose();
         }
 
         public function setData(param1:uint) : void
         {
-            this.levels = param1;
+            this._level = param1;
             invalidate(UPDATE_LEVELS);
         }
 
         public function setState(param1:String) : void
         {
-            this.state = param1;
-            gotoAndPlay(this.state);
+            gotoAndPlay(param1);
         }
     }
 }

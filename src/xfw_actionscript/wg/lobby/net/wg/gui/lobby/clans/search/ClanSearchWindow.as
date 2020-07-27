@@ -233,8 +233,7 @@ package net.wg.gui.lobby.clans.search
 
         private function updateItem(param1:ClanSearchItemVO) : void
         {
-            var _loc2_:* = false;
-            _loc2_ = param1 != null;
+            var _loc2_:* = param1 != null;
             this.info.visible = _loc2_;
             this.noInfoImage.visible = !_loc2_;
             if(_loc2_)

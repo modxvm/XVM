@@ -21,6 +21,11 @@ package net.wg.gui.components.containers
             mouseEnabled = false;
         }
 
+        public function updateMouseHandling(param1:Boolean) : void
+        {
+            mouseChildren = mouseEnabled = param1;
+        }
+
         public function get type() : String
         {
             return this._type;

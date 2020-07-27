@@ -196,18 +196,10 @@ package net.wg.gui.components.advanced
 
         private function updateInProgressSkillState() : void
         {
-            var _loc1_:* = 0;
-            var _loc2_:* = 0;
             this.levelMc.visible = false;
             if(this._isShowLoadingBar)
             {
                 this.loadingBar.position = this._skillLevel;
-                if(this._skillLevel != 0)
-                {
-                    _loc1_ = 54;
-                    _loc2_ = 18;
-                    this.loadingBar.setActualSize(_loc1_,_loc2_);
-                }
             }
             this._titleLabel.text = this._skillLevel.toString() + "%";
         }

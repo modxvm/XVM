@@ -9,7 +9,6 @@ package net.wg.gui.battle.views.minimap
     import net.wg.gui.components.controls.UILoaderAlt;
     import flash.display.Sprite;
     import flash.geom.Rectangle;
-    import net.wg.gui.battle.views.minimap.constants.MinimapSizeConst;
     import net.wg.gui.battle.views.minimap.events.MinimapEvent;
     import net.wg.infrastructure.events.LifeCycleEvent;
     import flash.events.MouseEvent;
@@ -26,19 +25,25 @@ package net.wg.gui.battle.views.minimap
 
         private static const TOPLEFT_OFFSET:Point = new Point(0,-60);
 
-        private static const SCALE_SIZES:Vector.<Number> = new <Number>[1,1.21,1.48,1.86,2.33,2.9];
-
-        private static const MINIMAP_SCALE_SIZES:Vector.<Number> = new <Number>[216,260,320,400,502,624];
-
         private static const FRAME_WIDTH_MULTIPLIER:int = 2;
 
         private static const FRAME_IMG_OFFSET:int = 24;
 
         private static const MMAP_BASE_SIZE:int = 210;
 
-        private static const MMAP_AREA_HIGHLIGHT_SIZE:int = 14;
-
         private static const SECTORS_FIELD:String = "sectors";
+
+        private static const MAX_ZOOM_MODE:Number = 2;
+
+        private static const ZOOM_MODE_STEP:Number = 0.5;
+
+        private static const MINIMAP_SCALE:Vector.<Number> = new <Number>[1,1.21,1.48,1.86,2.33,2.9,3.33];
+
+        private static const MINIMAP_SIZE:Vector.<Number> = new <Number>[216,260,320,400,502,624,700];
+
+        public static const TAB_MODE_502_IDX:int = MINIMAP_SIZE.indexOf(502);
+
+        public static const TAB_MODE_700_IDX:int = MINIMAP_SIZE.indexOf(700);
 
         public var mapHit:MovieClip = null;
 
@@ -60,6 +65,8 @@ package net.wg.gui.battle.views.minimap
 
         private var _currentSizeIndex:int = 0;
 
+        private var _savedSizeIndex:int = 0;
+
         private var _mapWidth:int = 210;
 
         private var _mapHeight:int = 210;
@@ -69,6 +76,18 @@ package net.wg.gui.battle.views.minimap
         private var _sectorState:Vector.<int> = null;
 
         private var _isAttacker:Boolean = false;
+
+        private var _isTabMode:Boolean = false;
+
+        private var _zoomMode:Number = 0;
+
+        private var _settingsAlpha:Number = 1.0;
+
+        private var _tabModeCustomAlpha:Number = 1.0;
+
+        private var _isTabModeCustomAlpha:Boolean = false;
+
+        private var mapScaleIndex:int = 1;
 
         public function EpicMinimap()
         {
@@ -81,6 +100,19 @@ package net.wg.gui.battle.views.minimap
             this._clickAreaSpr.hitArea = this.mapHit;
             this.mapZoomMode.visible = true;
             this.mapShortcutLabel.sectorOverview.mmapAreaHighlight.visible = false;
+            if(TAB_MODE_502_IDX < 0 || TAB_MODE_700_IDX < 0)
+            {
+                App.utils.asserter.assert(false,"You must update constants TAB_MODE because MINIMAP_SIZEs were changed");
+            }
+        }
+
+        override public function as_setAlpha(param1:Number) : void
+        {
+            if(this._settingsAlpha != param1)
+            {
+                this._settingsAlpha = param1;
+                this.updateAlpha();
+            }
         }
 
         override public function as_setBackground(param1:String) : void
@@ -93,6 +125,10 @@ package net.wg.gui.battle.views.minimap
 
         override public function as_setSize(param1:int) : void
         {
+            if(this._isTabMode)
+            {
+                return;
+            }
             if(!initialized)
             {
                 this._currentSizeIndex = param1;
@@ -111,21 +147,21 @@ package net.wg.gui.battle.views.minimap
         override public function getMinimapRectBySizeIndex(param1:int) : Rectangle
         {
             var _loc2_:int = this._currentSizeIndex;
-            if(param1 >= 0 && param1 < MinimapSizeConst.MAP_SIZE.length)
+            if(param1 >= 0 && param1 < MINIMAP_SIZE.length)
             {
                 _loc2_ = param1;
             }
-            return new Rectangle(0,0,MINIMAP_SCALE_SIZES[_loc2_],MINIMAP_SCALE_SIZES[_loc2_]);
+            return new Rectangle(0,0,MINIMAP_SIZE[_loc2_],MINIMAP_SIZE[_loc2_]);
         }
 
         override public function getMinmapHeightBySizeIndex(param1:int) : Number
         {
-            return MAP_OFFSET;
+            return MINIMAP_SIZE[param1];
         }
 
         override public function getRectangles() : Vector.<Rectangle>
         {
-            if(!visible)
+            if(!visible || this._isTabMode)
             {
                 return null;
             }
@@ -138,29 +174,25 @@ package net.wg.gui.battle.views.minimap
             {
                 this._currentSizeIndex = param1;
                 dispatchEvent(new MinimapEvent(MinimapEvent.SIZE_CHANGED));
-                this.updateContainersSize();
+                this.updateContainersSize(this._currentSizeIndex);
                 dispatchEvent(new LifeCycleEvent(LifeCycleEvent.ON_GRAPHICS_RECTANGLES_UPDATE));
-                applyNewSizeS(param1);
+                applyNewSizeS(this._currentSizeIndex);
+                this._updateSizeIndexForce = false;
             }
-            else
-            {
-                this._currentSizeIndex = param1;
-            }
-            this._updateSizeIndexForce = false;
         }
 
         override public function updateSizeIndex(param1:Boolean) : void
         {
-            this._updateSizeIndexForce = param1;
+            this._updateSizeIndexForce = param1 || this._updateSizeIndexForce;
             this.checkNewSize(this._currentSizeIndex);
         }
 
         override protected function configUI() : void
         {
             super.configUI();
-            this.updateContainersSize();
-            this._clickAreaSpr.addEventListener(MouseEvent.CLICK,this.onMouseClickHandler);
-            this._clickAreaSpr.addEventListener(MouseEvent.MOUSE_WHEEL,this.onMouseWheelHandler);
+            this.updateSizeIndex(true);
+            this._clickAreaSpr.addEventListener(MouseEvent.CLICK,this.onAreaMouseClickHandler);
+            this._clickAreaSpr.addEventListener(MouseEvent.MOUSE_WHEEL,this.onAreaMouseWheelHandler);
             this.mapShortcutLabel.mapBtnTF.text = READABLE_KEY_NAMES.KEY_M;
             this._sectors = new <MovieClip>[this.mapShortcutLabel.sectorOverview.sector1,this.mapShortcutLabel.sectorOverview.sector2,this.mapShortcutLabel.sectorOverview.sector3,this.mapShortcutLabel.sectorOverview.sector4,this.mapShortcutLabel.sectorOverview.sector5,this.mapShortcutLabel.sectorOverview.sector6,this.mapShortcutLabel.sectorOverview.sectorHQ];
             this.updateSectorOverview();
@@ -168,8 +200,8 @@ package net.wg.gui.battle.views.minimap
 
         override protected function onDispose() : void
         {
-            this._clickAreaSpr.removeEventListener(MouseEvent.CLICK,this.onMouseClickHandler);
-            this._clickAreaSpr.removeEventListener(MouseEvent.MOUSE_WHEEL,this.onMouseWheelHandler);
+            this._clickAreaSpr.removeEventListener(MouseEvent.CLICK,this.onAreaMouseClickHandler);
+            this._clickAreaSpr.removeEventListener(MouseEvent.MOUSE_WHEEL,this.onAreaMouseWheelHandler);
             this._clickAreaSpr = null;
             this.mapHit = null;
             this.mapShortcutLabel = null;
@@ -196,18 +228,18 @@ package net.wg.gui.battle.views.minimap
 
         public function as_setZoomMode(param1:Number, param2:String) : void
         {
-            var _loc3_:MovieClip = this.mapShortcutLabel.sectorOverview.mmapAreaHighlight;
-            var _loc4_:Number = (param1 * MMAP_AREA_HIGHLIGHT_SIZE >> 0) + (param1 >> 0);
-            _loc3_.width = _loc3_.height = _loc4_ + (_loc4_ % 2?1:0);
-            this.mapZoomMode.mapZoomModeContainer.zoomLevelTF.text = param2;
-            this.mapZoomMode.gotoAndPlay(2);
+            if(!this._isTabMode)
+            {
+                this._zoomMode = param1;
+                this.mapZoomMode.mapZoomModeContainer.zoomLevelTF.text = param2;
+                this.mapZoomMode.gotoAndPlay(2);
+            }
         }
 
         public function as_updateSectorStateStats(param1:Object) : void
         {
-            var _loc3_:MovieClip = null;
             var _loc2_:int = this._sectorState.length;
-            _loc3_ = this.mapShortcutLabel.sectorOverview.changeOwnerAnim;
+            var _loc3_:MovieClip = this.mapShortcutLabel.sectorOverview.changeOwnerAnim;
             var _loc4_:* = 0;
             while(_loc4_ < _loc2_)
             {
@@ -226,8 +258,45 @@ package net.wg.gui.battle.views.minimap
             this.updateSectorOverview();
         }
 
+        public function restoreZoomMode() : void
+        {
+            var _loc1_:int = (this._zoomMode - MAX_ZOOM_MODE) / ZOOM_MODE_STEP;
+            onZoomModeChangedS(_loc1_);
+        }
+
         public function setEpicVehiclesStats(param1:EpicVehiclesStatsVO) : void
         {
+        }
+
+        public function setTabZoomMode() : void
+        {
+            var _loc1_:int = (MAX_ZOOM_MODE - this._zoomMode) / ZOOM_MODE_STEP;
+            if(_loc1_ > 0)
+            {
+                onZoomModeChangedS(_loc1_);
+            }
+        }
+
+        public function toggleTabMode(param1:Boolean) : void
+        {
+            if(param1 == this._isTabMode)
+            {
+                return;
+            }
+            if(param1)
+            {
+                this._savedSizeIndex = this._currentSizeIndex;
+                this._clickAreaSpr.removeEventListener(MouseEvent.MOUSE_WHEEL,this.onAreaMouseWheelHandler);
+            }
+            else
+            {
+                this._currentSizeIndex = this._savedSizeIndex;
+                this._clickAreaSpr.addEventListener(MouseEvent.MOUSE_WHEEL,this.onAreaMouseWheelHandler);
+            }
+            this._isTabMode = param1;
+            this.fgFrame.visible = this.bgFrame.visible = !this._isTabMode;
+            this.updateSizeIndex(true);
+            this.updateAlpha();
         }
 
         public function updateEpicPlayerStats(param1:EpicPlayerStatsVO) : void
@@ -241,6 +310,11 @@ package net.wg.gui.battle.views.minimap
 
         public function updateEpicVehiclesStats(param1:EpicVehiclesStatsVO) : void
         {
+        }
+
+        private function updateAlpha() : void
+        {
+            this.alpha = this._isTabMode && this._isTabModeCustomAlpha?this._tabModeCustomAlpha:this._settingsAlpha;
         }
 
         private function updateSectorOverview() : void
@@ -266,25 +340,21 @@ package net.wg.gui.battle.views.minimap
             }
         }
 
-        private function updateContainersSize() : void
+        private function updateContainersSize(param1:int) : void
         {
-            var _loc1_:* = NaN;
-            var _loc2_:* = NaN;
-            var _loc4_:* = NaN;
-            _loc1_ = SCALE_SIZES[this._currentSizeIndex];
-            this.entriesContainer.scaleX = this.entriesContainer.scaleY = _loc1_;
-            _loc2_ = _loc1_ * MMAP_BASE_SIZE;
-            var _loc3_:Number = _loc2_ + FRAME_WIDTH_MULTIPLIER * FRAME_IMG_OFFSET;
-            _loc4_ = _loc1_ * FRAME_WIDTH_MULTIPLIER;
-            this.fgFrame.width = this.fgFrame.height = _loc3_;
-            this.bgFrame.width = this.bgFrame.height = _loc3_ + _loc4_ * FRAME_WIDTH_MULTIPLIER;
-            this.fgFrame.x = -FRAME_IMG_OFFSET;
-            this.fgFrame.y = -FRAME_IMG_OFFSET;
-            this.bgFrame.x = this.fgFrame.x - _loc4_;
-            this.bgFrame.y = this.bgFrame.x;
-            this.mapHit.scaleX = this.mapHit.scaleY = _loc1_;
-            this.mapShortcutLabel.x = -BORDER_OFFSET - _loc4_;
-            this.mapZoomMode.y = -FRAME_IMG_OFFSET - _loc4_;
+            this.entriesContainer.scaleX = this.entriesContainer.scaleY = MINIMAP_SCALE[param1];
+            var _loc2_:Number = MINIMAP_SCALE[param1];
+            var _loc3_:Number = _loc2_ * MMAP_BASE_SIZE;
+            this.mapScaleIndex = param1;
+            var _loc4_:Number = _loc3_ + FRAME_WIDTH_MULTIPLIER * FRAME_IMG_OFFSET;
+            var _loc5_:Number = _loc2_ * FRAME_WIDTH_MULTIPLIER;
+            this.fgFrame.width = this.fgFrame.height = _loc4_;
+            this.bgFrame.width = this.bgFrame.height = _loc4_ + _loc5_ * FRAME_WIDTH_MULTIPLIER;
+            this.fgFrame.x = this.fgFrame.y = -FRAME_IMG_OFFSET;
+            this.bgFrame.x = this.bgFrame.y = this.fgFrame.x - _loc5_;
+            this.mapHit.scaleX = this.mapHit.scaleY = _loc2_;
+            this.mapShortcutLabel.x = -BORDER_OFFSET - _loc5_;
+            this.mapZoomMode.y = -FRAME_IMG_OFFSET - _loc5_;
         }
 
         private function checkNewSize(param1:int) : void
@@ -305,12 +375,12 @@ package net.wg.gui.battle.views.minimap
 
         override public function get currentWidth() : int
         {
-            return MINIMAP_SCALE_SIZES[this._currentSizeIndex];
+            return MINIMAP_SIZE[this._currentSizeIndex];
         }
 
         override public function get currentHeight() : int
         {
-            return MINIMAP_SCALE_SIZES[this._currentSizeIndex];
+            return MINIMAP_SIZE[this._currentSizeIndex];
         }
 
         override public function get currentTopLeftPoint() : Point
@@ -323,7 +393,36 @@ package net.wg.gui.battle.views.minimap
             return this._currentSizeIndex;
         }
 
-        private function onMouseClickHandler(param1:MouseEvent) : void
+        public function set isTabModeCustomAlpha(param1:Boolean) : void
+        {
+            if(param1 != this._isTabModeCustomAlpha)
+            {
+                this._isTabModeCustomAlpha = param1;
+                if(this._isTabMode)
+                {
+                    this.updateAlpha();
+                }
+            }
+        }
+
+        public function set tabModeCustomAlpha(param1:Number) : void
+        {
+            if(param1 != this._tabModeCustomAlpha)
+            {
+                this._tabModeCustomAlpha = param1;
+                if(this._isTabMode)
+                {
+                    this.updateAlpha();
+                }
+            }
+        }
+
+        public function get isTabMode() : Boolean
+        {
+            return this._isTabMode;
+        }
+
+        private function onAreaMouseClickHandler(param1:MouseEvent) : void
         {
             if(param1 is MouseEventEx && param1.target == this._clickAreaSpr)
             {
@@ -331,11 +430,11 @@ package net.wg.gui.battle.views.minimap
                 {
                     return;
                 }
-                setAttentionToCellS(this.mapHit.mouseX,this.mapHit.mouseY,MouseEventEx(param1).buttonIdx == MouseEventEx.RIGHT_BUTTON);
+                onMinimapClickedS(this.mapHit.mouseX,this.mapHit.mouseY,MouseEventEx(param1).buttonIdx,this.mapScaleIndex);
             }
         }
 
-        private function onMouseWheelHandler(param1:MouseEvent) : void
+        private function onAreaMouseWheelHandler(param1:MouseEvent) : void
         {
             if(param1 is MouseEventEx && param1.target == this._clickAreaSpr)
             {

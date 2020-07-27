@@ -2,23 +2,27 @@ package net.wg.gui.battle.views.radialMenu.components
 {
     import flash.display.Sprite;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
-    import net.wg.gui.battle.components.BattleAtlasSprite;
-    import net.wg.data.constants.generated.BATTLEATLAS;
+    import flash.display.MovieClip;
 
     public class SectorHoveredWrapper extends Sprite implements IDisposable
     {
 
         public var content:Content = null;
 
-        public var light:BattleAtlasSprite = null;
+        public var light:MovieClip = null;
 
         public function SectorHoveredWrapper()
         {
             super();
-            this.light.imageName = BATTLEATLAS.RADIAL_MENU_LIGHT;
         }
 
-        public function dispose() : void
+        public function setLightState(param1:String) : void
+        {
+            this.light.hoverEffect.hoverEffectColor.gotoAndStop(param1);
+            this.light.hoverEffectWithShadow.hoverEffectWithShadowColor.gotoAndStop(param1);
+        }
+
+        public final function dispose() : void
         {
             this.content.dispose();
             this.content = null;

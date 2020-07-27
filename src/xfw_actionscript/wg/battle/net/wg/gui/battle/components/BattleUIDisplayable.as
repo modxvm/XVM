@@ -28,6 +28,11 @@ package net.wg.gui.battle.components
             }
         }
 
+        public function isCompVisible() : Boolean
+        {
+            return visible;
+        }
+
         protected function updateVisibility() : void
         {
             visible = this._isCompVisible;

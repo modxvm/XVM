@@ -1,39 +1,29 @@
 package net.wg.gui.components.icons
 {
     import net.wg.infrastructure.base.UIComponentEx;
-    import flash.display.FrameLabel;
+    import scaleform.clik.constants.InvalidationType;
 
     public class BattleTypeIcon extends UIComponentEx
     {
 
-        private var _type:String = "neutral";
+        public static const TYPE_NEUTRAL:String = "neutral";
 
-        private var _typeByNumber:uint = 1;
+        public static const TYPE_TRAINING:String = "training";
+
+        private var _type:String = "neutral";
 
         public function BattleTypeIcon()
         {
             super();
-            stop();
-        }
-
-        override public function toString() : String
-        {
-            return "[WG BattleTypeIcon " + name + "]";
         }
 
         override protected function draw() : void
         {
             super.draw();
-            if(currentLabel != this._type)
+            if(isInvalid(InvalidationType.STATE))
             {
-                gotoAndStop(this._type);
-                this._typeByNumber = currentFrame;
+                super.gotoAndStop(this._type);
             }
-        }
-
-        override protected function onDispose() : void
-        {
-            super.onDispose();
         }
 
         public function get type() : String
@@ -43,19 +33,21 @@ package net.wg.gui.components.icons
 
         public function set type(param1:String) : void
         {
-            this._type = param1;
-            invalidate();
-        }
-
-        public function set typeByNumber(param1:uint) : void
-        {
-            if(this._typeByNumber == param1)
+            if(param1 == this._type)
             {
                 return;
             }
-            this._typeByNumber = param1;
-            this.type = FrameLabel(this.currentLabels[this._typeByNumber - 1]).name;
-            invalidate();
+            this._type = param1;
+            invalidateState();
+        }
+
+        override public function gotoAndStop(param1:Object, param2:String = null) : void
+        {
+            if(param1 is String)
+            {
+                this._type = param1 as String;
+            }
+            super.gotoAndStop(param1,param2);
         }
     }
 }

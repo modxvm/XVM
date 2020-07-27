@@ -5,16 +5,16 @@ package net.wg.gui.battle.views.vehicleMarkers.statusMarkers
     public class VehicleInspireMarker extends VehicleStunMarker
     {
 
-        public var glowContainer:GlowMarkerContainer = null;
+        public var glowContainer:MarkerAssetContainer = null;
 
         public function VehicleInspireMarker()
         {
             super();
         }
 
-        override public function onDispose() : void
+        override protected function onDispose() : void
         {
-            var _loc1_:ArrowMarkerContainer = arrowMc as ArrowMarkerContainer;
+            var _loc1_:MarkerAssetContainer = arrowMc as MarkerAssetContainer;
             if(_loc1_)
             {
                 _loc1_.dispose();
@@ -26,7 +26,7 @@ package net.wg.gui.battle.views.vehicleMarkers.statusMarkers
 
         override protected function updateColorSettings(param1:uint) : void
         {
-            var _loc2_:ArrowMarkerContainer = arrowMc as ArrowMarkerContainer;
+            var _loc2_:MarkerAssetContainer = arrowMc as MarkerAssetContainer;
             if(_loc2_)
             {
                 _loc2_.updateColorSettings(color);

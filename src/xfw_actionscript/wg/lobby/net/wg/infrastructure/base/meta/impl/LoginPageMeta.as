@@ -226,31 +226,31 @@ package net.wg.infrastructure.base.meta.impl
             }
         }
 
-        public final function as_showSimpleForm(param1:Boolean, param2:Array) : void
+        public final function as_showSimpleForm(param1:Boolean, param2:Array, param3:Boolean) : void
         {
-            var _loc4_:uint = 0;
-            var _loc5_:* = 0;
-            var _loc6_:SocialIconVo = null;
-            var _loc3_:DataProvider = this._dataProviderSocialIconVo;
+            var _loc5_:uint = 0;
+            var _loc6_:* = 0;
+            var _loc7_:SocialIconVo = null;
+            var _loc4_:DataProvider = this._dataProviderSocialIconVo;
             this._dataProviderSocialIconVo = new DataProvider();
             if(param2)
             {
-                _loc4_ = param2.length;
-                _loc5_ = 0;
-                while(_loc5_ < _loc4_)
+                _loc5_ = param2.length;
+                _loc6_ = 0;
+                while(_loc6_ < _loc5_)
                 {
-                    this._dataProviderSocialIconVo[_loc5_] = new SocialIconVo(param2[_loc5_]);
-                    _loc5_++;
+                    this._dataProviderSocialIconVo[_loc6_] = new SocialIconVo(param2[_loc6_]);
+                    _loc6_++;
                 }
             }
-            this.showSimpleForm(param1,this._dataProviderSocialIconVo);
-            if(_loc3_)
+            this.showSimpleForm(param1,this._dataProviderSocialIconVo,param3);
+            if(_loc4_)
             {
-                for each(_loc6_ in _loc3_)
+                for each(_loc7_ in _loc4_)
                 {
-                    _loc6_.dispose();
+                    _loc7_.dispose();
                 }
-                _loc3_.cleanUp();
+                _loc4_.cleanUp();
             }
         }
 
@@ -272,11 +272,11 @@ package net.wg.infrastructure.base.meta.impl
             throw new AbstractException(_loc2_);
         }
 
-        protected function showSimpleForm(param1:Boolean, param2:DataProvider) : void
+        protected function showSimpleForm(param1:Boolean, param2:DataProvider, param3:Boolean) : void
         {
-            var _loc3_:String = "as_showSimpleForm" + Errors.ABSTRACT_INVOKE;
-            DebugUtils.LOG_ERROR(_loc3_);
-            throw new AbstractException(_loc3_);
+            var _loc4_:String = "as_showSimpleForm" + Errors.ABSTRACT_INVOKE;
+            DebugUtils.LOG_ERROR(_loc4_);
+            throw new AbstractException(_loc4_);
         }
 
         protected function showFilledLoginForm(param1:FilledLoginFormVo) : void

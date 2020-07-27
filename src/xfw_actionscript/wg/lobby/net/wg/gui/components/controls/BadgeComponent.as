@@ -13,9 +13,9 @@ package net.wg.gui.components.controls
     public class BadgeComponent extends Sprite implements IDisposable
     {
 
-        private static const CONTENT_NAME:String = "content";
+        private static const CONTENT_VERTICAL_OFFSETS:Dictionary = new Dictionary();
 
-        private static var CONTENT_VERTICAL_OFFSETS:Dictionary = new Dictionary();
+        private static const CONTENT_NAME:String = "content";
 
         {
             CONTENT_VERTICAL_OFFSETS[BadgeSizes.X24] = 0.3;
@@ -52,9 +52,9 @@ package net.wg.gui.components.controls
 
         public function setData(param1:BadgeVisualVO) : void
         {
+            visible = param1 != null;
             if(param1 == null)
             {
-                visible = false;
                 DebugUtils.LOG_WARNING("Empty badge data");
                 return;
             }

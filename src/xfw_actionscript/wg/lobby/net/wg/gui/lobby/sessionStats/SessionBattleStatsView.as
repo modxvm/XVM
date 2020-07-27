@@ -10,7 +10,7 @@ package net.wg.gui.lobby.sessionStats
     import net.wg.gui.components.common.containers.TiledLayout;
     import net.wg.data.constants.generated.TEXT_ALIGN;
     import net.wg.data.constants.Linkages;
-    import net.wg.gui.components.common.containers.VerticalGroupLayout;
+    import net.wg.gui.components.containers.VerticalGroupLayout;
     import scaleform.clik.events.ButtonEvent;
     import flash.events.MouseEvent;
     import flash.events.Event;

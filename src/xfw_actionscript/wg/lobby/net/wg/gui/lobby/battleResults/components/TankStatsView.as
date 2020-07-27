@@ -1,6 +1,7 @@
 package net.wg.gui.lobby.battleResults.components
 {
     import net.wg.infrastructure.base.UIComponentEx;
+    import flash.events.MouseEvent;
     import net.wg.gui.components.controls.UserNameField;
     import flash.text.TextField;
     import net.wg.gui.components.controls.DropdownMenu;
@@ -12,7 +13,6 @@ package net.wg.gui.lobby.battleResults.components
     import net.wg.gui.lobby.battleResults.data.CommonStatsVO;
     import net.wg.data.VO.UserVO;
     import scaleform.clik.constants.InvalidationType;
-    import flash.events.MouseEvent;
     import scaleform.clik.data.DataProvider;
     import net.wg.infrastructure.interfaces.IUserProps;
 
@@ -28,6 +28,8 @@ package net.wg.gui.lobby.battleResults.components
         public static const DEFAULT_COMPONENT_HEIGHT:uint = 235;
 
         private static const PLAYER_TANK_NAME_PADDING:uint = 20;
+
+        private static const ALPHA:Number = 0.8;
 
         public var playerNameLbl:UserNameField = null;
 
@@ -62,19 +64,24 @@ package net.wg.gui.lobby.battleResults.components
             this.imageSwitcher.mask = this._tankMaskObj;
         }
 
+        private static function onVehicleStateLblRollOutHandler(param1:MouseEvent) : void
+        {
+            App.toolTipMgr.hide();
+        }
+
         override protected function configUI() : void
         {
             super.configUI();
             this.dropDown.addEventListener(ListEvent.INDEX_CHANGE,this.onDropDownIndexChangeHandler);
-            this.playerNameLbl.alpha = 0.8;
+            this.playerNameLbl.alpha = ALPHA;
             this.playerNameLbl.blendMode = BlendMode.ADD;
-            this.arenaCreateDateLbl.alpha = 0.8;
+            this.arenaCreateDateLbl.alpha = ALPHA;
             this.arenaCreateDateLbl.blendMode = BlendMode.ADD;
-            this.vehicleStateLbl.alpha = 0.8;
+            this.vehicleStateLbl.alpha = ALPHA;
             this.vehicleStateLbl.blendMode = BlendMode.ADD;
-            this.tankNameLbl.alpha = 0.8;
+            this.tankNameLbl.alpha = ALPHA;
             this.tankNameLbl.blendMode = BlendMode.ADD;
-            this.tankNameDashLbl.alpha = 0.8;
+            this.tankNameDashLbl.alpha = ALPHA;
             this.tankNameDashLbl.blendMode = BlendMode.ADD;
         }
 
@@ -124,7 +131,7 @@ package net.wg.gui.lobby.battleResults.components
             this.tankNameLbl = null;
             this.tankNameDashLbl = null;
             this.vehicleStateLbl.removeEventListener(MouseEvent.ROLL_OVER,this.onVehicleStateLblRollOverHandler);
-            this.vehicleStateLbl.removeEventListener(MouseEvent.ROLL_OUT,this.onVehicleStateLblRollOutHandler);
+            this.vehicleStateLbl.removeEventListener(MouseEvent.ROLL_OUT,onVehicleStateLblRollOutHandler);
             this.vehicleStateLbl = null;
             this.imageSwitcher.mask = null;
             this.imageSwitcher.dispose();
@@ -215,17 +222,12 @@ package net.wg.gui.lobby.battleResults.components
         {
             this._toolTip = param1;
             this.vehicleStateLbl.addEventListener(MouseEvent.ROLL_OVER,this.onVehicleStateLblRollOverHandler);
-            this.vehicleStateLbl.addEventListener(MouseEvent.ROLL_OUT,this.onVehicleStateLblRollOutHandler);
+            this.vehicleStateLbl.addEventListener(MouseEvent.ROLL_OUT,onVehicleStateLblRollOutHandler);
         }
 
         private function onVehicleStateLblRollOverHandler(param1:MouseEvent) : void
         {
             App.toolTipMgr.show(this.toolTip);
-        }
-
-        private function onVehicleStateLblRollOutHandler(param1:MouseEvent) : void
-        {
-            App.toolTipMgr.hide();
         }
 
         private function onDropDownIndexChangeHandler(param1:ListEvent) : void

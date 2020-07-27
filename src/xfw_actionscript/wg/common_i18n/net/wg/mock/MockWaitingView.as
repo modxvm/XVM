@@ -749,5 +749,9 @@ package net.wg.mock
         public function as_showAwards(param1:Boolean) : void
         {
         }
+
+        public function as_showBackgroundImg(param1:String) : void
+        {
+        }
     }
 }

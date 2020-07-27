@@ -15,6 +15,10 @@ package net.wg.infrastructure.base.meta
 
         function changeStringCasingS(param1:String, param2:Boolean, param3:IStrCaseProperties) : String;
 
+        function mapScaleformToVirtualKeyS(param1:int) : int;
+
+        function getCharFromVirtualKeyS(param1:int) : int;
+
         function getAbsoluteUrlS(param1:String) : String;
 
         function getHtmlIconTextS(param1:IImageUrlProperties) : String;

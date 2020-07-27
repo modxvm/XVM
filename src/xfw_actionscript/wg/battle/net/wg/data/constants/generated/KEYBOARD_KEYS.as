@@ -29,7 +29,9 @@ package net.wg.data.constants.generated
 
         public static const SHOW_RADIAL_MENU:String = "showRadialMenu";
 
-        public static const ATTACK:String = "attack";
+        public static const HIGHLIGHT_LOCATION:String = "highlightLocation";
+
+        public static const HIGHLIGHT_TARGET:String = "highlightTarget";
 
         public static const PUSH_TO_TALK:String = "pushToTalk";
 

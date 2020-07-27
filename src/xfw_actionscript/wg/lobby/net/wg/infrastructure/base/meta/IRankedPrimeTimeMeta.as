@@ -6,5 +6,7 @@ package net.wg.infrastructure.base.meta
     {
 
         function as_setHeaderData(param1:Object) : void;
+
+        function as_setBackgroundSource(param1:String) : void;
     }
 }

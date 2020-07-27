@@ -52,6 +52,8 @@ package net.wg.gui.lobby.battleResults.components.detailsBlockStates
                     this.creditsValue.htmlText = this._data.creditsPremiumBonusStr;
                     this.xpValue.htmlText = this._data.xpPremiumBonusStr;
                     backgroundIcon.source = this._data.backgroundIcon;
+                    this.detailsBtn.visible = this._data.visibleDetailsBtn;
+                    this.detailsBtn.enabled = !this._data.inBattleQueue;
                     invalidateSize();
                 }
                 if(isInvalid(InvalidationType.SIZE))

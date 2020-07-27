@@ -55,43 +55,33 @@ package
 
         public static const BATTLECONTROLS_SHOWCURSOR_EXT:String = "#ingame_help:battleControls/showCursor/ext";
 
-        public static const RADIALMENU_TITLE:String = "#ingame_help:radialMenu/title";
+        public static const TEAMCOMM_TITLE:String = "#ingame_help:teamComm/title";
 
-        public static const RADIALMENU_SHOW:String = "#ingame_help:radialMenu/show";
+        public static const TEAMCOMM_SHOW:String = "#ingame_help:teamComm/show";
 
-        public static const RADIALMENU_SHOW_EXT:String = "#ingame_help:radialMenu/show/ext";
+        public static const TEAMCOMM_SHOW_EXT:String = "#ingame_help:teamComm/show/ext";
 
-        public static const RADIALMENU_ATTACKENEMY:String = "#ingame_help:radialMenu/attackEnemy";
+        public static const TEAMCOMM_HIGHLIGHTLOCATION:String = "#ingame_help:teamComm/highlightLocation";
 
-        public static const RADIALMENU_ATTACKENEMY_EXT:String = "#ingame_help:radialMenu/attackEnemy/ext";
+        public static const TEAMCOMM_HIGHLIGHTASACTIVETARGET:String = "#ingame_help:teamComm/highlightAsActiveTarget";
 
         public static const CHATSHORTCUTS_TITLE:String = "#ingame_help:chatShortcuts/title";
 
-        public static const CHATSHORTCUTS_ATTACK:String = "#ingame_help:chatShortcuts/attack";
-
-        public static const CHATSHORTCUTS_BACKTOBASE:String = "#ingame_help:chatShortcuts/backToBase";
-
         public static const CHATSHORTCUTS_TOBACK:String = "#ingame_help:chatShortcuts/toBack";
 
-        public static const CHATSHORTCUTS_FOLLOWME:String = "#ingame_help:chatShortcuts/followMe";
-
         public static const CHATSHORTCUTS_POSITIVE:String = "#ingame_help:chatShortcuts/positive";
-
-        public static const CHATSHORTCUTS_NEGATIVE:String = "#ingame_help:chatShortcuts/negative";
 
         public static const CHATSHORTCUTS_HELPME:String = "#ingame_help:chatShortcuts/helpMe";
 
         public static const CHATSHORTCUTS_HELPMEEX:String = "#ingame_help:chatShortcuts/helpMeEx";
 
-        public static const CHATSHORTCUTS_SUPPORTMEWITHFIRE:String = "#ingame_help:chatShortcuts/supportMeWithFire";
+        public static const CHATSHORTCUTS_ATTACK_ENEMY:String = "#ingame_help:chatShortcuts/attack_enemy";
 
         public static const CHATSHORTCUTS_RELOADINGGUN:String = "#ingame_help:chatShortcuts/reloadingGun";
 
-        public static const CHATSHORTCUTS_STOP:String = "#ingame_help:chatShortcuts/stop";
+        public static const CHATSHORTCUTS_ATTACK_ENEMY_WITH_SPG:String = "#ingame_help:chatShortcuts/attack_enemy_with_SPG";
 
-        public static const CHATSHORTCUTS_ATTACKENEMY:String = "#ingame_help:chatShortcuts/attackEnemy";
-
-        public static const CHATSHORTCUTS_ATTACKENEMY_EXT:String = "#ingame_help:chatShortcuts/attackEnemy/ext";
+        public static const CHATSHORTCUTS_ATTACK_ENEMY_WITH_SPG_EXT:String = "#ingame_help:chatShortcuts/attack_enemy_with_SPG/ext";
 
         public static const CHATCONTROLS_TITLE:String = "#ingame_help:chatControls/title";
 
@@ -197,9 +187,79 @@ package
 
         public static const DETAILSHELP_DUALGUN_VOLLEY_FIRE:String = "#ingame_help:detailsHelp/dualGun/volley_fire";
 
+        public static const DETAILSHELP_ENGINEMODE_ENGINEMODEPAGE1_TITLE:String = "#ingame_help:detailsHelp/engineMode/engineModePage1/title";
+
+        public static const DETAILSHELP_ENGINEMODE_ENGINEMODEPAGE1:String = "#ingame_help:detailsHelp/engineMode/engineModePage1";
+
+        public static const DETAILSHELP_ENGINEMODE_ENGINEMODEPAGE2_TITLE:String = "#ingame_help:detailsHelp/engineMode/engineModePage2/title";
+
+        public static const DETAILSHELP_ENGINEMODE_ENGINEMODEPAGE2:String = "#ingame_help:detailsHelp/engineMode/engineModePage2";
+
         public static const DETAILSHELP_NOKEYSWARNING:String = "#ingame_help:detailsHelp/noKeysWarning";
 
+        public static const DETAILSHELP_BATTLEROYALE_RADAR_TITLE:String = "#ingame_help:detailsHelp/battleRoyale/radar/title";
+
+        public static const DETAILSHELP_BATTLEROYALE_RADAR_DESCRIPTION:String = "#ingame_help:detailsHelp/battleRoyale/radar/description";
+
+        public static const DETAILSHELP_BATTLEROYALE_SECTORVISION_TITLE:String = "#ingame_help:detailsHelp/battleRoyale/sectorVision/title";
+
+        public static const DETAILSHELP_BATTLEROYALE_SECTORVISION_DESCRIPTION:String = "#ingame_help:detailsHelp/battleRoyale/sectorVision/description";
+
+        public static const DETAILSHELP_BATTLEROYALE_ZONE_TITLE:String = "#ingame_help:detailsHelp/battleRoyale/zone/title";
+
+        public static const DETAILSHELP_BATTLEROYALE_ZONE_DESCRIPTION:String = "#ingame_help:detailsHelp/battleRoyale/zone/description";
+
+        public static const DETAILSHELP_BATTLEROYALE_AIRDROP_TITLE:String = "#ingame_help:detailsHelp/battleRoyale/airDrop/title";
+
+        public static const DETAILSHELP_BATTLEROYALE_AIRDROP_DESCRIPTION:String = "#ingame_help:detailsHelp/battleRoyale/airDrop/description";
+
+        public static const DETAILSHELP_BATTLEROYALE_UPGRADE_TITLE:String = "#ingame_help:detailsHelp/battleRoyale/upgrade/title";
+
+        public static const DETAILSHELP_BATTLEROYALE_UPGRADE_DESCRIPTION:String = "#ingame_help:detailsHelp/battleRoyale/upgrade/description";
+
+        public static const DETAILSHELP_BATTLEROYALE_UNIQUEABILITIES_TITLE:String = "#ingame_help:detailsHelp/battleRoyale/uniqueAbilities/title";
+
+        public static const DETAILSHELP_BATTLEROYALE_UNIQUEABILITIES_DESCRIPTION:String = "#ingame_help:detailsHelp/battleRoyale/uniqueAbilities/description";
+
         public static const DETAILSHELP_NOKEY:String = "#ingame_help:detailsHelp/noKey";
+
+        public static const RADIALMENU_ATTENTION_TO_POSITION:String = "#ingame_help:radialMenu/attention_to_position";
+
+        public static const RADIALMENU_GOING_THERE:String = "#ingame_help:radialMenu/going_there";
+
+        public static const RADIALMENU_HELPME:String = "#ingame_help:radialMenu/helpMe";
+
+        public static const RADIALMENU_RELOADINGGUN:String = "#ingame_help:radialMenu/reloadingGun";
+
+        public static const RADIALMENU_ATTACKAREASPG:String = "#ingame_help:radialMenu/attackAreaSPG";
+
+        public static const RADIALMENU_ATTACK_ENEMY:String = "#ingame_help:radialMenu/attack_enemy";
+
+        public static const RADIALMENU_ATTACKING_ENEMY:String = "#ingame_help:radialMenu/attacking_enemy";
+
+        public static const RADIALMENU_ATTACK_ENEMY_WITH_SPG:String = "#ingame_help:radialMenu/attack_enemy_with_SPG";
+
+        public static const RADIALMENU_ATTENTION_TO_BASE_ATK:String = "#ingame_help:radialMenu/attention_to_base_atk";
+
+        public static const RADIALMENU_ATTACKING_BASE:String = "#ingame_help:radialMenu/attacking_base";
+
+        public static const RADIALMENU_ATTENTION_TO_BASE_DEF:String = "#ingame_help:radialMenu/attention_to_base_def";
+
+        public static const RADIALMENU_DEFENDING_BASE:String = "#ingame_help:radialMenu/defending_base";
+
+        public static const RADIALMENU_HELPMEEX:String = "#ingame_help:radialMenu/helpMeEx";
+
+        public static const RADIALMENU_SUPPORTING_ALLY:String = "#ingame_help:radialMenu/supporting_ally";
+
+        public static const RADIALMENU_TURN_BACK:String = "#ingame_help:radialMenu/turn_back";
+
+        public static const RADIALMENU_THANKS:String = "#ingame_help:radialMenu/thanks";
+
+        public static const RADIALMENU_REPLY_TO_PLAYER:String = "#ingame_help:radialMenu/reply_to_player";
+
+        public static const RADIALMENU_CANCEL_REPLY:String = "#ingame_help:radialMenu/cancel_reply";
+
+        public static const RADIALMENU_POSITIVE:String = "#ingame_help:radialMenu/positive";
 
         public function INGAME_HELP()
         {

@@ -60,7 +60,7 @@ package net.wg.gui.components.advanced
                 {
                     if(this._data.moduleType)
                     {
-                        this.moduleType.gotoAndStop(this._data.moduleType);
+                        this.moduleType.setModuleTypeIcon(this._data.moduleType);
                         this.moduleType.visible = true;
                     }
                     else if(this._data.iconSource)

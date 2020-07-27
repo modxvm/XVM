@@ -4,7 +4,6 @@ package net.wg.gui.components.common.serverStats
     import net.wg.infrastructure.base.meta.IServerStatsMeta;
     import net.wg.gui.components.controls.helpers.ServerCsisState;
     import flash.text.TextField;
-    import flash.display.Sprite;
     import scaleform.clik.interfaces.IDataProvider;
     import scaleform.clik.events.ListEvent;
     import net.wg.gui.components.controls.events.DropdownMenuEvent;
@@ -21,10 +20,6 @@ package net.wg.gui.components.common.serverStats
         private static const INV_REGION_DD:String = "invRegionDD";
 
         public var regionDD:ServerDropDown;
-
-        public var singleServerField:TextField;
-
-        public var singleServerBackground:Sprite;
 
         public var serverInfo:ServerInfo;
 
@@ -44,15 +39,12 @@ package net.wg.gui.components.common.serverStats
 
         private var _currentServerIndex:int = -1;
 
-        private var _isChina:Boolean = false;
-
         public function ServerStats()
         {
             super();
             this._dataProvider = new ListDAAPIDataProvider(ServerVO);
             this._dataProvider.addEventListener(Event.CHANGE,this.onDataProviderChangeHandler);
             this.regionDD.checkItemDisabledFunction = checkItemDisabledFunction;
-            this._isChina = App.globalVarsMgr.isChinaS();
         }
 
         private static function checkItemDisabledFunction(param1:ServerVO) : Boolean
@@ -154,17 +146,8 @@ package net.wg.gui.components.common.serverStats
 
         private function updaterRegionDD() : void
         {
-            var _loc2_:ServerVO = null;
-            var _loc1_:Boolean = this._currentServerIndex > -1 && (this._isChina || this._dataProvider.length == 1);
+            var _loc1_:Boolean = this._currentServerIndex > -1 && this._dataProvider.length == 1;
             this.regionDD.enabled = !_loc1_ && !this._regionDDDisabed;
-            this.regionDD.visible = !this._isChina;
-            this.singleServerField.visible = this._isChina;
-            this.singleServerBackground.visible = this._isChina;
-            if(this._isChina)
-            {
-                _loc2_ = ServerVO(this._dataProvider.requestItemAt(this._currentServerIndex));
-                this.singleServerField.htmlText = _loc2_.label;
-            }
         }
 
         private function onRegionCloseDropDownHandler(param1:DropdownMenuEvent) : void
@@ -186,7 +169,7 @@ package net.wg.gui.components.common.serverStats
 
         private function onRegionIndexChangeHandler(param1:ListEvent) : void
         {
-            if(!this._isChina && !this._serverResetMode)
+            if(!this._serverResetMode)
             {
                 reloginS(ServerVO(param1.itemData).id);
             }

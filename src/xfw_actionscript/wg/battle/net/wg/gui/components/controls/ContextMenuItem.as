@@ -93,10 +93,10 @@ package net.wg.gui.components.controls
             super.draw();
             if(isInvalid(InvalidationType.STATE))
             {
-                visible = true;
                 switch(this.type)
                 {
                     case CONTEXT_MENU_ITEM_MAIN:
+                        visible = true;
                         this.arrowMc.visible = false;
                         this.circleMc.visible = false;
                         textField.visible = true;
@@ -104,6 +104,7 @@ package net.wg.gui.components.controls
                         this.iconsMc.visible = Boolean(this._iconType);
                         break;
                     case this.CONTEXT_MENU_ITEM_GROUP:
+                        visible = true;
                         this.arrowMc.visible = true;
                         this.circleMc.visible = false;
                         textField.visible = true;
@@ -226,7 +227,7 @@ package net.wg.gui.components.controls
         private function applyText(param1:TextField, param2:String) : void
         {
             param1.text = param2;
-            if(this._textColor >= 0)
+            if(this._textColor >= 0 && enabled)
             {
                 param1.textColor = this._textColor;
             }

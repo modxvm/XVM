@@ -20,10 +20,6 @@ package net.wg.gui.lobby.tankman
 
         public var SPG:DataProvider;
 
-        public var testData:PersonalCaseModel = null;
-
-        public var testStats:Object = null;
-
         public var currentVehicle:PersonalCaseCurrentVehicle = null;
 
         public var nativeVehicle:Object = null;
@@ -85,9 +81,8 @@ package net.wg.gui.lobby.tankman
             }
         }
 
-        public function setTestData(param1:PersonalCaseModel) : void
+        public function updateData(param1:PersonalCaseModel) : void
         {
-            this.testData = param1;
             this.nationID = param1.nationID;
             this.tankmanID = param1.inventoryID;
             this.currentVehicle = param1.currentVehicle;
@@ -98,8 +93,6 @@ package net.wg.gui.lobby.tankman
         public function dispose() : void
         {
             var _loc1_:RetrainButtonVO = null;
-            this.testData = null;
-            this.testStats = null;
             this.currentVehicle = null;
             this.nativeVehicle = null;
             for each(_loc1_ in this.retrainButtonsData)

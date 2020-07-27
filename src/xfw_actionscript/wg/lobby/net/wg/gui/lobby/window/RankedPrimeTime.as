@@ -58,6 +58,11 @@ package net.wg.gui.lobby.window
             invalidateSize();
         }
 
+        public function as_setBackgroundSource(param1:String) : void
+        {
+            setBackground(param1);
+        }
+
         public function setStateSizeBoundaries(param1:int, param2:int) : void
         {
             this._headerSizeId = this._headerHelper.getSizeId(param1,param2);

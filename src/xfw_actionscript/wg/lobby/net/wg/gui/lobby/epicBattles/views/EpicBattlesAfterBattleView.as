@@ -17,6 +17,7 @@ package net.wg.gui.lobby.epicBattles.views
     import flash.events.KeyboardEvent;
     import scaleform.clik.events.ButtonEvent;
     import net.wg.gui.lobby.epicBattles.events.AfterBattleFameBarEvent;
+    import net.wg.data.constants.Linkages;
     import scaleform.clik.constants.InvalidationType;
     import scaleform.clik.events.InputEvent;
 
@@ -103,7 +104,7 @@ package net.wg.gui.lobby.epicBattles.views
         {
             this.titleTextWrapper.stop();
             App.gameInputMgr.clearKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.onEscapeKeyDownHandler);
-            this._scheduler.cancelTask(this.startAnimation);
+            this._scheduler.cancelTask(this.startIntroAnimation);
             this._scheduler.cancelTask(this.delayedPlayerRankIntroTweenTask);
             this._scheduler.cancelTask(this.delayedFameBarIntroTweenTask);
             this._scheduler.cancelTask(this.delayedNextButtonIntroTweenTask);
@@ -193,7 +194,7 @@ package net.wg.gui.lobby.epicBattles.views
             this._completedBattleData = param1;
             this._fameBarVisible = this._completedBattleData.fameBarVisible;
             this.rewardRibbon.setAwards(param1.awards);
-            this.rewardRibbon.setLevel(param1.epicMetaLevelIconData,param1.maxLvlReached);
+            this.rewardRibbon.setLevel(param1.epicMetaLevelIconData,Linkages.EPIC_META_LEVEL_UI,param1.maxLvlReached);
             this.background.setBackground(param1.backgroundImageSrc);
             invalidateData();
         }

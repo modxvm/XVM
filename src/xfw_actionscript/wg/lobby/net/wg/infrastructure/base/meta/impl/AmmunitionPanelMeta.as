@@ -1,23 +1,20 @@
 package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.gui.lobby.modulesPanel.ModulesPanel;
-    import net.wg.gui.components.controls.VO.ShellButtonVO;
+    import net.wg.infrastructure.base.BaseDAAPIComponent;
     import net.wg.gui.lobby.hangar.ammunitionPanel.data.VehicleMessageVO;
     import net.wg.data.constants.Errors;
     import net.wg.infrastructure.exceptions.AbstractException;
 
-    public class AmmunitionPanelMeta extends ModulesPanel
+    public class AmmunitionPanelMeta extends BaseDAAPIComponent
     {
 
-        public var showTechnicalMaintenance:Function;
+        public var showRepairDialog:Function;
 
         public var showCustomization:Function;
 
         public var toRentContinue:Function;
 
         public var showChangeNation:Function;
-
-        private var _vectorShellButtonVO:Vector.<ShellButtonVO>;
 
         private var _vehicleMessageVO:VehicleMessageVO;
 
@@ -28,16 +25,6 @@ package net.wg.infrastructure.base.meta.impl
 
         override protected function onDispose() : void
         {
-            var _loc1_:ShellButtonVO = null;
-            if(this._vectorShellButtonVO)
-            {
-                for each(_loc1_ in this._vectorShellButtonVO)
-                {
-                    _loc1_.dispose();
-                }
-                this._vectorShellButtonVO.splice(0,this._vectorShellButtonVO.length);
-                this._vectorShellButtonVO = null;
-            }
             if(this._vehicleMessageVO)
             {
                 this._vehicleMessageVO.dispose();
@@ -46,10 +33,10 @@ package net.wg.infrastructure.base.meta.impl
             super.onDispose();
         }
 
-        public function showTechnicalMaintenanceS() : void
+        public function showRepairDialogS() : void
         {
-            App.utils.asserter.assertNotNull(this.showTechnicalMaintenance,"showTechnicalMaintenance" + Errors.CANT_NULL);
-            this.showTechnicalMaintenance();
+            App.utils.asserter.assertNotNull(this.showRepairDialog,"showRepairDialog" + Errors.CANT_NULL);
+            this.showRepairDialog();
         }
 
         public function showCustomizationS() : void
@@ -70,29 +57,6 @@ package net.wg.infrastructure.base.meta.impl
             this.showChangeNation();
         }
 
-        public final function as_setAmmo(param1:Array, param2:Boolean) : void
-        {
-            var _loc6_:ShellButtonVO = null;
-            var _loc3_:Vector.<ShellButtonVO> = this._vectorShellButtonVO;
-            this._vectorShellButtonVO = new Vector.<ShellButtonVO>(0);
-            var _loc4_:uint = param1.length;
-            var _loc5_:* = 0;
-            while(_loc5_ < _loc4_)
-            {
-                this._vectorShellButtonVO[_loc5_] = new ShellButtonVO(param1[_loc5_]);
-                _loc5_++;
-            }
-            this.setAmmo(this._vectorShellButtonVO,param2);
-            if(_loc3_)
-            {
-                for each(_loc6_ in _loc3_)
-                {
-                    _loc6_.dispose();
-                }
-                _loc3_.splice(0,_loc3_.length);
-            }
-        }
-
         public final function as_updateVehicleStatus(param1:Object) : void
         {
             var _loc2_:VehicleMessageVO = this._vehicleMessageVO;
@@ -102,13 +66,6 @@ package net.wg.infrastructure.base.meta.impl
             {
                 _loc2_.dispose();
             }
-        }
-
-        protected function setAmmo(param1:Vector.<ShellButtonVO>, param2:Boolean) : void
-        {
-            var _loc3_:String = "as_setAmmo" + Errors.ABSTRACT_INVOKE;
-            DebugUtils.LOG_ERROR(_loc3_);
-            throw new AbstractException(_loc3_);
         }
 
         protected function updateVehicleStatus(param1:VehicleMessageVO) : void

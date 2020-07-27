@@ -13,6 +13,8 @@ package net.wg.gui.battle.views.consumablesPanel.interfaces
 
         function setCurrent(param1:Boolean, param2:Boolean = false) : void;
 
+        function setQuantity(param1:int, param2:Boolean = false) : void;
+
         function set empty(param1:Boolean) : void;
 
         function get empty() : Boolean;

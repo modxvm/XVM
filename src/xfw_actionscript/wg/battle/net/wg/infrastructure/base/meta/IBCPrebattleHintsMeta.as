@@ -6,5 +6,7 @@ package net.wg.infrastructure.base.meta
     {
 
         function as_setHintsVisibility(param1:Array, param2:Array) : void;
+
+        function as_setCrewCount(param1:int) : void;
     }
 }

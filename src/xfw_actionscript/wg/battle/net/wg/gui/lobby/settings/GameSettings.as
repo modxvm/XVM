@@ -175,6 +175,7 @@ package net.wg.gui.lobby.settings
                 }
                 _loc11_++;
             }
+            _loc7_.setEnableStateForBattleCommSettings();
         }
 
         override protected function onDispose() : void

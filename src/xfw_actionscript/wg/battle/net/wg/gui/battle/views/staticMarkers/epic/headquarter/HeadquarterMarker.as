@@ -5,7 +5,6 @@ package net.wg.gui.battle.views.staticMarkers.epic.headquarter
     import net.wg.gui.battle.views.vehicleMarkers.HealthBarAnimatedLabel;
     import net.wg.gui.battle.views.vehicleMarkers.HealthBar;
     import flash.display.MovieClip;
-    import flash.text.TextField;
     import scaleform.clik.motion.Tween;
     import net.wg.gui.battle.views.vehicleMarkers.VO.VehicleMarkerFlags;
     import net.wg.gui.battle.views.vehicleMarkers.VehicleMarkersConstants;
@@ -14,10 +13,6 @@ package net.wg.gui.battle.views.staticMarkers.epic.headquarter
     {
 
         private static const SEPARATOR:String = " / ";
-
-        private static const LABEL_SELECTED:String = "selected";
-
-        private static const LABEL_UNSELECTED:String = "unselected";
 
         private static const FIRST_FRAME:int = 1;
 
@@ -39,8 +34,6 @@ package net.wg.gui.battle.views.staticMarkers.epic.headquarter
 
         private static const ACTIVE_ACTIONS_Y_OFFSET:Number = -40;
 
-        private static const ACTIVE_TEXT_LABEL__Y_OFFSET:Number = 50;
-
         private static const ACTIVE_HIT_LABEL_Y_OFFSET:Number = 48;
 
         private static const ACTIVE_HP_FIELD_CONTAINER_Y_OFFSET:Number = 53;
@@ -59,8 +52,6 @@ package net.wg.gui.battle.views.staticMarkers.epic.headquarter
 
         private static const INACTIVE_HEALTH_BAR_SHADOW_Y_OFFSET:Number = 74;
 
-        public const markerType:String = "headquarter";
-
         public var hpFieldContainer:HPFieldContainer = null;
 
         public var hitLabel:HealthBarAnimatedLabel = null;
@@ -69,11 +60,9 @@ package net.wg.gui.battle.views.staticMarkers.epic.headquarter
 
         public var healthBarShadow:MovieClip = null;
 
+        public var actionMarker:HeadquarterActionMarker = null;
+
         public var marker:HeadquarterIcon = null;
-
-        public var arrow:MovieClip = null;
-
-        public var txtLabel:TextField = null;
 
         public var actions:MovieClip = null;
 
@@ -93,8 +82,6 @@ package net.wg.gui.battle.views.staticMarkers.epic.headquarter
         {
             super();
             this.marker.visible = true;
-            this.arrow.visible = false;
-            this.txtLabel.visible = false;
             this.marker.targetHighlight.visible = false;
             this.actions.attack.visible = false;
             this.actions.defend.visible = false;
@@ -116,10 +103,13 @@ package net.wg.gui.battle.views.staticMarkers.epic.headquarter
             this.healthBarShadow = null;
             this.marker.dispose();
             this.marker = null;
-            this.arrow = null;
-            this.txtLabel = null;
             this.actions = null;
             super.onDispose();
+        }
+
+        public function setReplyCount(param1:int) : void
+        {
+            this.actionMarker.setReplyCount(param1);
         }
 
         public function setDead(param1:Boolean) : void
@@ -171,13 +161,10 @@ package net.wg.gui.battle.views.staticMarkers.epic.headquarter
         {
             if(param1)
             {
-                this.arrow.gotoAndStop(LABEL_SELECTED);
                 this.marker.targetHighlight.visible = true;
                 this.marker.setInternalIconScale(ACTIVE_ICON_SCALE);
                 this._alphaVal = ACTIVE_ALPHA_VALUE;
-                this.txtLabel.visible = true;
                 this.actions.y = ACTIVE_ACTIONS_Y_OFFSET;
-                this.txtLabel.y = ACTIVE_TEXT_LABEL__Y_OFFSET;
                 this.hitLabel.y = ACTIVE_HIT_LABEL_Y_OFFSET;
                 this.hpFieldContainer.y = ACTIVE_HP_FIELD_CONTAINER_Y_OFFSET;
                 this.healthBar.y = ACTIVE_HEALTH_BAR_Y_OFFSET;
@@ -185,10 +172,8 @@ package net.wg.gui.battle.views.staticMarkers.epic.headquarter
             }
             else
             {
-                this.arrow.gotoAndStop(LABEL_UNSELECTED);
                 this.marker.targetHighlight.visible = false;
                 this.marker.setInternalIconScale(INACTIVE_ICON_SCALE);
-                this.txtLabel.visible = false;
                 this._alphaVal = INACTIVE_ALPHA_VALUE;
                 this.actions.y = INACTIVE_ACTIONS_Y_OFFSET;
                 this.hitLabel.y = INACTIVE_HIT_LABEL_Y_OFFSET;
@@ -225,10 +210,6 @@ package net.wg.gui.battle.views.staticMarkers.epic.headquarter
 
         public function setTarget() : void
         {
-            if(this.arrow.visible == true)
-            {
-                return;
-            }
             if(!this.actions.visible)
             {
                 this.actions.visible = true;

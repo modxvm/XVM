@@ -26,6 +26,15 @@ package net.wg.gui.components.containers.inject
             return super.addChild(param1);
         }
 
+        override public function removeChild(param1:DisplayObject) : DisplayObject
+        {
+            if(this._wrapper != null && param1.name == GFWrapper.GF_WRAPPER_NAME)
+            {
+                this._wrapper = null;
+            }
+            return super.removeChild(param1);
+        }
+
         override public function setSize(param1:Number, param2:Number) : void
         {
             super.setSize(param1,param2);
@@ -36,7 +45,7 @@ package net.wg.gui.components.containers.inject
             }
         }
 
-        protected function get wrapper() : BaseContainerWrapper
+        public function get wrapper() : BaseContainerWrapper
         {
             return this._wrapper;
         }

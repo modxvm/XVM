@@ -25,6 +25,8 @@ package net.wg.gui.battle.views.battleMessenger
 
         public static const DEFAULT_TEXT_WIDTH:int = 360;
 
+        public static const SMALL_TEXT_WIDTH:int = 185;
+
         public static const DEFAULT_TEXT_LINE_SPACING:int = 2;
 
         public static const DEFAULT_TEXT_SIZE:int = 14;
@@ -83,6 +85,8 @@ package net.wg.gui.battle.views.battleMessenger
 
         private static const INVALID_Y_POSITION:uint = InvalidationType.SYSTEM_FLAGS_BORDER << 3;
 
+        private static const INVALID_MESSAGES_SIZE:uint = InvalidationType.SYSTEM_FLAGS_BORDER << 4;
+
         private static const USER_INTERACTION_TIMER_BY_MILLISECONDS:int = 100;
 
         private static const DEFAULT_MESSAGE_Y_PADDING:int = 2;
@@ -140,6 +144,8 @@ package net.wg.gui.battle.views.battleMessenger
         private var _messageText:String = "";
 
         private var _isBlockedMessage:Boolean = false;
+
+        private var _availableWidth:int = 360;
 
         public function BattleMessage(param1:int, param2:int, param3:Number, param4:Number, param5:int, param6:Function, param7:Function = null)
         {
@@ -230,6 +236,10 @@ package net.wg.gui.battle.views.battleMessenger
                     this.messageField.y = this._y + TEXT_OFFSET_Y;
                 }
             }
+            if(isInvalid(INVALID_MESSAGES_SIZE))
+            {
+                this.updateMessageSize();
+            }
         }
 
         override protected function onDispose() : void
@@ -265,6 +275,19 @@ package net.wg.gui.battle.views.battleMessenger
             this.messageField.multiline = this.messageField.wordWrap = true;
             this.updateData(this._messageText);
             this.messageField.y = this.background.y + DEFAULT_MESSAGE_Y_PADDING;
+        }
+
+        public function setAvailableWidth(param1:int) : void
+        {
+            if(param1 > DEFAULT_TEXT_WIDTH)
+            {
+                this._availableWidth = DEFAULT_TEXT_WIDTH;
+            }
+            else
+            {
+                this._availableWidth = param1 < SMALL_TEXT_WIDTH?SMALL_TEXT_WIDTH:param1;
+            }
+            invalidate(INVALID_MESSAGES_SIZE);
         }
 
         public function setBlockMessage(param1:String) : void
@@ -305,6 +328,19 @@ package net.wg.gui.battle.views.battleMessenger
             this.setState(PRESHOWANIM_MES,true);
         }
 
+        private function updateMessageSize() : void
+        {
+            this.messageField.width = this._availableWidth;
+            this.messageField.height = this.messageField.textHeight + TEXT_HEIGHT_OFFSET | 0;
+            App.utils.commons.updateTextFieldSize(this.messageField,true,false);
+            this.background.width = this.messageField.textWidth + TEXT_RIGHT_PADDING | 0;
+            if(this.isOpenedToxicPanel)
+            {
+                this.background.width = this.background.width + ADDITIONAL_TF_PADDING;
+            }
+            this.background.height = this.messageField.height + TEXT_BOTTOM_PADDING | 0;
+        }
+
         private function setYPositionByCenter() : void
         {
             this.messageField.y = this.background.y + (this.background.height - this.messageField.height >> 1);
@@ -312,7 +348,7 @@ package net.wg.gui.battle.views.battleMessenger
 
         private function updateData(param1:String, param2:Boolean = true, param3:Boolean = true) : void
         {
-            this.messageField.width = DEFAULT_TEXT_WIDTH;
+            this.messageField.width = this._availableWidth;
             this.messageField.htmlText = param1;
             this.messageField.height = this.messageField.textHeight + TEXT_HEIGHT_OFFSET | 0;
             App.utils.commons.updateTextFieldSize(this.messageField,true,false);

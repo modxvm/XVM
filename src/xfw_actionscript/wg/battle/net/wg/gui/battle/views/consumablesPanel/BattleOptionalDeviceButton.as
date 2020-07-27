@@ -3,20 +3,34 @@ package net.wg.gui.battle.views.consumablesPanel
     import net.wg.gui.battle.components.buttons.BattleToolTipButton;
     import net.wg.gui.battle.views.consumablesPanel.interfaces.IConsumablesButton;
     import net.wg.gui.components.controls.UILoaderAlt;
+    import flash.display.MovieClip;
     import net.wg.gui.battle.views.consumablesPanel.VO.ConsumablesVO;
+    import flash.geom.ColorTransform;
     import net.wg.gui.battle.views.consumablesPanel.constants.COLOR_STATES;
     import net.wg.data.constants.InteractiveStates;
-    import flash.geom.ColorTransform;
     import net.wg.data.constants.generated.BATTLE_ITEM_STATES;
+    import flash.events.Event;
 
     public class BattleOptionalDeviceButton extends BattleToolTipButton implements IConsumablesButton
     {
 
         public var iconLoader:UILoaderAlt = null;
 
+        public var glow:BattleEquipmentButtonGlow = null;
+
+        public var hit:MovieClip = null;
+
         private var _isEmpty:Boolean = false;
 
+        private var _lockColorTransform:Boolean = false;
+
         private var _consumablesVO:ConsumablesVO = null;
+
+        private var _intCD:int = -1;
+
+        private var _delayColorTransform:ColorTransform = null;
+
+        private var _isUsed:Boolean = false;
 
         public function BattleOptionalDeviceButton()
         {
@@ -28,16 +42,35 @@ package net.wg.gui.battle.views.consumablesPanel
             state = InteractiveStates.UP;
         }
 
+        override protected function configUI() : void
+        {
+            super.configUI();
+            hitArea = this.hit;
+        }
+
         override protected function onDispose() : void
         {
             this.iconLoader.dispose();
             this.iconLoader = null;
+            this.glow.removeEventListener(BattleEquipmentButtonGlow.ON_IDLE_STATE,this.onGlowOnIdleStateHandler);
+            this.glow.dispose();
+            this.glow = null;
             this._consumablesVO = null;
+            this.hit = null;
             super.onDispose();
+        }
+
+        override protected function showSpecialTooltip() : void
+        {
+            App.toolTipMgr.showSpecial(_tooltipStr,null,this._intCD,state);
         }
 
         public function clearColorTransform() : void
         {
+            if(this._lockColorTransform)
+            {
+                return;
+            }
             this.iconLoader.transform.colorTransform = COLOR_STATES.NORMAL_COLOR_TRANSFORM;
         }
 
@@ -48,14 +81,31 @@ package net.wg.gui.battle.views.consumablesPanel
 
         public function hideGlow() : void
         {
+            this.glow.removeEventListener(BattleEquipmentButtonGlow.ON_IDLE_STATE,this.onGlowOnIdleStateHandler);
+            this.glow.hideGlow(false);
         }
 
-        public function setActivated() : void
+        public function set activated(param1:Boolean) : void
         {
+        }
+
+        public function setUsed(param1:Boolean, param2:Boolean = false) : void
+        {
+            this._isUsed = param1;
+            if(param2 && this._isUsed)
+            {
+                this._lockColorTransform = true;
+                this.setDarkColorTransform();
+            }
         }
 
         public function setColorTransform(param1:ColorTransform) : void
         {
+            if(this._lockColorTransform)
+            {
+                this._delayColorTransform = param1;
+                return;
+            }
             if(param1)
             {
                 this.iconLoader.transform.colorTransform = param1;
@@ -66,19 +116,24 @@ package net.wg.gui.battle.views.consumablesPanel
         {
         }
 
-        public function setCoolDownTime(param1:Number, param2:Number, param3:Number, param4:Boolean) : void
+        public function setCoolDownTime(param1:Number, param2:Number, param3:Number, param4:int = 1) : void
         {
             if(param1 > 0)
             {
                 this.clearCoolDownTime();
+                this._delayColorTransform = COLOR_STATES.DARK_COLOR_TRANSFORM;
             }
-            else if(param1 == -1)
+            else
             {
-                state = BATTLE_ITEM_STATES.PERMANENT;
-            }
-            else if(param1 == 0)
-            {
-                this.clearCoolDownTime();
+                if(param1 == -1)
+                {
+                    state = BATTLE_ITEM_STATES.PERMANENT;
+                }
+                else if(param1 == 0)
+                {
+                    this.clearCoolDownTime();
+                }
+                this.flushColorTransform();
             }
         }
 
@@ -88,6 +143,8 @@ package net.wg.gui.battle.views.consumablesPanel
 
         public function showGlow(param1:int) : void
         {
+            this.glow.addEventListener(BattleEquipmentButtonGlow.ON_IDLE_STATE,this.onGlowOnIdleStateHandler);
+            this.glow.showGlow(param1);
         }
 
         public function get consumablesVO() : ConsumablesVO
@@ -127,6 +184,10 @@ package net.wg.gui.battle.views.consumablesPanel
             else
             {
                 state = InteractiveStates.UP;
+                if(this.icon)
+                {
+                    this.flushColorTransform();
+                }
             }
         }
 
@@ -137,6 +198,58 @@ package net.wg.gui.battle.views.consumablesPanel
 
         public function set showConsumableBorder(param1:Boolean) : void
         {
+        }
+
+        public function set isReplay(param1:Boolean) : void
+        {
+        }
+
+        public function get intCD() : int
+        {
+            return this._intCD;
+        }
+
+        public function set intCD(param1:int) : void
+        {
+            this._intCD = param1;
+        }
+
+        public function get icon() : String
+        {
+            return this.iconLoader.source;
+        }
+
+        private function onGlowOnIdleStateHandler(param1:Event) : void
+        {
+            if(this._lockColorTransform)
+            {
+                return;
+            }
+            if(this._isUsed)
+            {
+                this.glow.removeEventListener(BattleEquipmentButtonGlow.ON_IDLE_STATE,this.onGlowOnIdleStateHandler);
+                this.setDarkColorTransform();
+                this._lockColorTransform = true;
+            }
+        }
+
+        public function flushColorTransform() : void
+        {
+            this._lockColorTransform = this._isEmpty;
+            if(!this._lockColorTransform)
+            {
+                this.setColorTransform(this._delayColorTransform);
+                this._delayColorTransform = null;
+            }
+            else
+            {
+                this.clearColorTransform();
+            }
+        }
+
+        private function setDarkColorTransform() : void
+        {
+            this.setColorTransform(COLOR_STATES.DARK_COLOR_TRANSFORM);
         }
     }
 }

@@ -1,6 +1,6 @@
 diff -Naur battleVehicleMarkersApp.orig/App.as battleVehicleMarkersApp/App.as
---- battleVehicleMarkersApp.orig/App.as	2020-04-14 21:45:00.370847400 +0300
-+++ battleVehicleMarkersApp/App.as	2020-04-14 21:45:00.272133300 +0300
+--- battleVehicleMarkersApp.orig/App.as	2020-07-27 14:30:03.521556800 +0300
++++ battleVehicleMarkersApp/App.as	2020-07-27 14:41:27.935585500 +0300
 @@ -1,5 +1,6 @@
  package
  {
@@ -9,9 +9,9 @@ diff -Naur battleVehicleMarkersApp.orig/App.as battleVehicleMarkersApp/App.as
      import scaleform.gfx.Extensions;
      import net.wg.mock.MockApplication;
 diff -Naur battleVehicleMarkersApp.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.as battleVehicleMarkersApp/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.as
---- battleVehicleMarkersApp.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.as	2019-09-10 14:54:38.965850500 +0300
-+++ battleVehicleMarkersApp/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.as	2019-09-10 15:06:56.299135600 +0300
-@@ -543,8 +543,16 @@
+--- battleVehicleMarkersApp.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.as	2020-07-27 14:30:03.956062400 +0300
++++ battleVehicleMarkersApp/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.as	2020-07-27 14:41:27.966835300 +0300
+@@ -631,8 +631,16 @@
              this._stunSchemeName = VM_STUN_PREFIX + this._entityName + VM_STUN_POSTFIX;
          }
  
@@ -28,7 +28,7 @@ diff -Naur battleVehicleMarkersApp.orig/net/wg/gui/battle/views/vehicleMarkers/V
              var _loc9_:Point = null;
              var _loc1_:Boolean = this.getIsPartVisible(ICON);
              var _loc2_:Boolean = this.getIsPartVisible(LEVEL);
-@@ -788,6 +788,11 @@
+@@ -880,6 +888,11 @@
              this._vmManager.drawWithCenterAlign(_loc1_,this.marker.vehicleTypeIcon.graphics,true,false,0,V_TYPE_ICON_Y);
          }
  
@@ -41,9 +41,9 @@ diff -Naur battleVehicleMarkersApp.orig/net/wg/gui/battle/views/vehicleMarkers/V
          {
              this.vehicleIcon.transform.colorTransform = this._vmManager.getTransform(this._markerSchemeName);
 diff -Naur battleVehicleMarkersApp.orig/net/wg/infrastructure/base/meta/impl/ClassManagerBattleMarkersMeta.as battleVehicleMarkersApp/net/wg/infrastructure/base/meta/impl/ClassManagerBattleMarkersMeta.as
---- battleVehicleMarkersApp.orig/net/wg/infrastructure/base/meta/impl/ClassManagerBattleMarkersMeta.as	2019-09-10 14:54:38.187846100 +0300
-+++ battleVehicleMarkersApp/net/wg/infrastructure/base/meta/impl/ClassManagerBattleMarkersMeta.as	2019-09-10 15:06:56.326133900 +0300
-@@ -116,7 +116,7 @@
+--- battleVehicleMarkersApp.orig/net/wg/infrastructure/base/meta/impl/ClassManagerBattleMarkersMeta.as	2020-07-27 14:30:03.405670300 +0300
++++ battleVehicleMarkersApp/net/wg/infrastructure/base/meta/impl/ClassManagerBattleMarkersMeta.as	2020-07-27 14:41:28.020225800 +0300
+@@ -137,7 +137,7 @@
  
          public static const NET_WG_GUI_BATTLE_VIEWS_VEHICLEMARKERS_VEHICLEICONANIMATION:Class = VehicleIconAnimation;
  
@@ -53,8 +53,8 @@ diff -Naur battleVehicleMarkersApp.orig/net/wg/infrastructure/base/meta/impl/Cla
          public static const NET_WG_GUI_BATTLE_VIEWS_VEHICLEMARKERS_VEHICLEMARKERSCONSTANTS:Class = VehicleMarkersConstants;
  
 diff -Naur battleVehicleMarkersApp.orig/scaleform/clik/ui/InputDetails.as battleVehicleMarkersApp/scaleform/clik/ui/InputDetails.as
---- battleVehicleMarkersApp.orig/scaleform/clik/ui/InputDetails.as	2019-09-10 14:54:40.104853900 +0300
-+++ battleVehicleMarkersApp/scaleform/clik/ui/InputDetails.as	2019-09-10 15:06:56.347136000 +0300
+--- battleVehicleMarkersApp.orig/scaleform/clik/ui/InputDetails.as	2020-07-27 14:30:04.430849800 +0300
++++ battleVehicleMarkersApp/scaleform/clik/ui/InputDetails.as	2020-07-27 14:41:28.035857000 +0300
 @@ -7,7 +7,7 @@
  
          public var code:Number;

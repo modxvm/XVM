@@ -1,6 +1,6 @@
 diff -Naur battle.orig/App.as battle/App.as
---- battle.orig/App.as	2020-04-14 21:45:00.298432000 +0200
-+++ battle/App.as	2020-04-14 21:45:00.024686600 +0200
+--- battle.orig/App.as	2020-07-27 14:29:45.876086800 +0300
++++ battle/App.as	2020-07-27 14:41:24.806212700 +0300
 @@ -1,5 +1,6 @@
  package
  {
@@ -18,9 +18,9 @@ diff -Naur battle.orig/App.as battle/App.as
              return ms_instance;
          }
 diff -Naur battle.orig/net/wg/data/constants/Linkages.as battle/net/wg/data/constants/Linkages.as
---- battle.orig/net/wg/data/constants/Linkages.as	2020-02-28 20:15:14.955407100 +0200
-+++ battle/net/wg/data/constants/Linkages.as	2020-02-28 20:19:11.047673400 +0200
-@@ -495,7 +495,7 @@
+--- battle.orig/net/wg/data/constants/Linkages.as	2020-07-27 14:29:47.446781200 +0300
++++ battle/net/wg/data/constants/Linkages.as	2020-07-27 14:41:24.871682400 +0300
+@@ -537,7 +537,7 @@
  
          public static const BATTLE_PROGRESS_TASK_SEPARATOR:String = "battleProgressTaskSeparatorUI";
  
@@ -30,8 +30,8 @@ diff -Naur battle.orig/net/wg/data/constants/Linkages.as battle/net/wg/data/cons
          public static const VEH_CMP_WINDOW_BG_UI:String = "WindowBgUI";
  
 diff -Naur battle.orig/net/wg/gui/battle/battleloading/BattleLoadingForm.as battle/net/wg/gui/battle/battleloading/BattleLoadingForm.as
---- battle.orig/net/wg/gui/battle/battleloading/BattleLoadingForm.as	2020-02-28 20:15:22.908476400 +0200
-+++ battle/net/wg/gui/battle/battleloading/BattleLoadingForm.as	2020-02-28 20:19:11.063664800 +0200
+--- battle.orig/net/wg/gui/battle/battleloading/BattleLoadingForm.as	2020-07-27 14:29:54.813003400 +0300
++++ battle/net/wg/gui/battle/battleloading/BattleLoadingForm.as	2020-07-27 14:41:24.891793200 +0300
 @@ -84,10 +84,25 @@
  
          private var _rightTeamName:String = "";
@@ -59,8 +59,8 @@ diff -Naur battle.orig/net/wg/gui/battle/battleloading/BattleLoadingForm.as batt
  
          public function BattleLoadingForm()
 diff -Naur battle.orig/net/wg/gui/battle/battleloading/data/VehiclesDataProvider.as battle/net/wg/gui/battle/battleloading/data/VehiclesDataProvider.as
---- battle.orig/net/wg/gui/battle/battleloading/data/VehiclesDataProvider.as	2020-02-28 20:15:22.895484200 +0200
-+++ battle/net/wg/gui/battle/battleloading/data/VehiclesDataProvider.as	2020-02-28 20:19:11.082658200 +0200
+--- battle.orig/net/wg/gui/battle/battleloading/data/VehiclesDataProvider.as	2020-07-27 14:29:54.802955600 +0300
++++ battle/net/wg/gui/battle/battleloading/data/VehiclesDataProvider.as	2020-07-27 14:41:24.909952100 +0300
 @@ -82,7 +82,7 @@
              }
              for each(_loc3_ in param1)
@@ -80,9 +80,9 @@ diff -Naur battle.orig/net/wg/gui/battle/battleloading/data/VehiclesDataProvider
          }
  
 diff -Naur battle.orig/net/wg/gui/battle/components/PlayersPanelBase.as battle/net/wg/gui/battle/components/PlayersPanelBase.as
---- battle.orig/net/wg/gui/battle/components/PlayersPanelBase.as	2020-02-28 20:15:22.543703700 +0200
-+++ battle/net/wg/gui/battle/components/PlayersPanelBase.as	2020-02-28 20:19:11.099642300 +0200
-@@ -55,6 +55,9 @@
+--- battle.orig/net/wg/gui/battle/components/PlayersPanelBase.as	2020-07-27 14:29:54.460796900 +0300
++++ battle/net/wg/gui/battle/components/PlayersPanelBase.as	2020-07-27 14:41:24.942074600 +0300
+@@ -57,6 +57,9 @@
  
          private var _isInteractive:Boolean = false;
  
@@ -92,10 +92,39 @@ diff -Naur battle.orig/net/wg/gui/battle/components/PlayersPanelBase.as battle/n
          public function PlayersPanelBase()
          {
              this.contextMenuMgr = App.contextMenuMgr;
+diff -Naur battle.orig/net/wg/gui/battle/components/TimersPanel.as battle/net/wg/gui/battle/components/TimersPanel.as
+--- battle.orig/net/wg/gui/battle/components/TimersPanel.as	2020-07-27 14:29:55.748334800 +0300
++++ battle/net/wg/gui/battle/components/TimersPanel.as	2020-07-27 14:50:38.812581500 +0300
+@@ -302,10 +302,12 @@
+                 return;
+             }
+             var _loc3_:int = this.activeSecondaryTimers.length;
++            /*
+             if(this.activeSecondaryTimers.indexOf(param1) != -1)
+             {
+                 this.activeSecondaryTimers.splice(this.activeSecondaryTimers.indexOf(param1),1);
+             }
++            */
+             _loc2_.resetTimer();
+             _loc2_.isActive = false;
+             this._secondaryTimerVisibleBefore = false;
+@@ -337,10 +339,12 @@
+             {
+                 return;
+             }
++            /*
+             if(this.activeSecondaryTimers.indexOf(param1) == -1)
+             {
+                 this.activeSecondaryTimers.push(param1);
+             }
++            */
+             _loc5_.updateRadialTimer(param2,param3);
+             _loc5_.visible = true;
+             _loc5_.isActive = true;
 diff -Naur battle.orig/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.as battle/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.as
---- battle.orig/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.as	2020-02-28 20:15:24.039779000 +0200
-+++ battle/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.as	2020-02-28 20:19:11.119650800 +0200
-@@ -81,6 +81,11 @@
+--- battle.orig/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.as	2020-07-27 14:29:56.472778900 +0300
++++ battle/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.as	2020-07-27 14:41:25.012476000 +0300
+@@ -116,6 +116,11 @@
  
          private var _holderItemID:int = -1;
  
@@ -108,9 +137,9 @@ diff -Naur battle.orig/net/wg/gui/battle/components/stats/playersPanel/list/Base
  
          private var _vehicleName:String = null;
 diff -Naur battle.orig/net/wg/gui/battle/epicRandom/views/EpicRandomPage.as battle/net/wg/gui/battle/epicRandom/views/EpicRandomPage.as
---- battle.orig/net/wg/gui/battle/epicRandom/views/EpicRandomPage.as	2020-02-28 20:15:22.871502700 +0200
-+++ battle/net/wg/gui/battle/epicRandom/views/EpicRandomPage.as	2020-02-28 20:19:11.138638200 +0200
-@@ -346,6 +346,11 @@
+--- battle.orig/net/wg/gui/battle/epicRandom/views/EpicRandomPage.as	2020-07-27 14:29:54.792899600 +0300
++++ battle/net/wg/gui/battle/epicRandom/views/EpicRandomPage.as	2020-07-27 14:41:25.040629000 +0300
+@@ -320,6 +320,11 @@
              this.updatePositionForQuestProgress();
          }
  
@@ -123,9 +152,9 @@ diff -Naur battle.orig/net/wg/gui/battle/epicRandom/views/EpicRandomPage.as batt
          {
              this.updatePositionForQuestProgress();
 diff -Naur battle.orig/net/wg/gui/battle/random/views/BattlePage.as battle/net/wg/gui/battle/random/views/BattlePage.as
---- battle.orig/net/wg/gui/battle/random/views/BattlePage.as	2020-02-28 20:15:23.026402600 +0200
-+++ battle/net/wg/gui/battle/random/views/BattlePage.as	2020-02-28 20:19:11.156484600 +0200
-@@ -46,7 +46,7 @@
+--- battle.orig/net/wg/gui/battle/random/views/BattlePage.as	2020-07-27 14:29:54.923679700 +0300
++++ battle/net/wg/gui/battle/random/views/BattlePage.as	2020-07-27 14:41:25.066265700 +0300
+@@ -43,7 +43,7 @@
  
          private static const CONSUMABLES_POPUP_OFFSET:int = 60;
  
@@ -134,7 +163,7 @@ diff -Naur battle.orig/net/wg/gui/battle/random/views/BattlePage.as battle/net/w
  
          private static const MINIMAP_MARGIN_WIDTH:int = 0;
  
-@@ -372,6 +372,11 @@
+@@ -343,6 +343,11 @@
              this.updatePositionForQuestProgress();
          }
  
@@ -147,8 +176,8 @@ diff -Naur battle.orig/net/wg/gui/battle/random/views/BattlePage.as battle/net/w
          {
              this.updatePositionForQuestProgress();
 diff -Naur battle.orig/net/wg/gui/battle/random/views/stats/components/fullStats/FullStats.as battle/net/wg/gui/battle/random/views/stats/components/fullStats/FullStats.as
---- battle.orig/net/wg/gui/battle/random/views/stats/components/fullStats/FullStats.as	2020-02-28 20:15:22.420778000 +0200
-+++ battle/net/wg/gui/battle/random/views/stats/components/fullStats/FullStats.as	2020-02-28 20:19:11.173521200 +0200
+--- battle.orig/net/wg/gui/battle/random/views/stats/components/fullStats/FullStats.as	2020-07-27 14:29:54.358236000 +0300
++++ battle/net/wg/gui/battle/random/views/stats/components/fullStats/FullStats.as	2020-07-27 14:41:25.097513500 +0300
 @@ -11,6 +11,11 @@
      public class FullStats extends TabbedFullStats
      {
@@ -162,8 +191,8 @@ diff -Naur battle.orig/net/wg/gui/battle/random/views/stats/components/fullStats
  
          public function FullStats()
 diff -Naur battle.orig/net/wg/gui/battle/random/views/stats/components/fullStats/FullStatsTableCtrl.as battle/net/wg/gui/battle/random/views/stats/components/fullStats/FullStatsTableCtrl.as
---- battle.orig/net/wg/gui/battle/random/views/stats/components/fullStats/FullStatsTableCtrl.as	2020-02-28 20:15:25.673760800 +0200
-+++ battle/net/wg/gui/battle/random/views/stats/components/fullStats/FullStatsTableCtrl.as	2020-02-28 20:19:11.188513600 +0200
+--- battle.orig/net/wg/gui/battle/random/views/stats/components/fullStats/FullStatsTableCtrl.as	2020-07-27 14:29:57.620476600 +0300
++++ battle/net/wg/gui/battle/random/views/stats/components/fullStats/FullStatsTableCtrl.as	2020-07-27 14:41:25.113138600 +0300
 @@ -29,6 +29,11 @@
  
          private static const SQUAD_BT_Y_START:int = 38;
@@ -192,8 +221,8 @@ diff -Naur battle.orig/net/wg/gui/battle/random/views/stats/components/fullStats
              var _loc3_:int = param1 * numRows + param2;
              return new DynamicSquadCtrl(this._table.squadStatusCollection[_loc3_],this._table.squadCollection[_loc3_],this._table.squadAcceptBt,this._table.squadAddBt,this._table.hitCollection[_loc3_],this._table.noSoundCollection[_loc3_]);
 diff -Naur battle.orig/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListLeft.as battle/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListLeft.as
---- battle.orig/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListLeft.as	2020-02-28 20:15:27.194818800 +0200
-+++ battle/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListLeft.as	2020-02-28 20:19:11.204986800 +0200
+--- battle.orig/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListLeft.as	2020-07-27 14:29:58.836913800 +0300
++++ battle/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListLeft.as	2020-07-27 14:41:25.128763300 +0300
 @@ -3,7 +3,7 @@
      public class PlayersPanelListLeft extends PlayersPanelList
      {
@@ -204,8 +233,8 @@ diff -Naur battle.orig/net/wg/gui/battle/random/views/stats/components/playersPa
          public function PlayersPanelListLeft()
          {
 diff -Naur battle.orig/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListRight.as battle/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListRight.as
---- battle.orig/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListRight.as	2020-02-28 20:15:25.186065500 +0200
-+++ battle/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListRight.as	2020-02-28 20:19:11.215979900 +0200
+--- battle.orig/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListRight.as	2020-07-27 14:29:57.206127400 +0300
++++ battle/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListRight.as	2020-07-27 14:41:25.150897000 +0300
 @@ -3,7 +3,7 @@
      public class PlayersPanelListRight extends PlayersPanelList
      {
@@ -216,8 +245,8 @@ diff -Naur battle.orig/net/wg/gui/battle/random/views/stats/components/playersPa
          public function PlayersPanelListRight()
          {
 diff -Naur battle.orig/net/wg/gui/battle/random/views/teamBasesPanel/TeamBasesPanel.as battle/net/wg/gui/battle/random/views/teamBasesPanel/TeamBasesPanel.as
---- battle.orig/net/wg/gui/battle/random/views/teamBasesPanel/TeamBasesPanel.as	2020-02-28 20:15:27.009933700 +0200
-+++ battle/net/wg/gui/battle/random/views/teamBasesPanel/TeamBasesPanel.as	2020-02-28 20:19:11.229971700 +0200
+--- battle.orig/net/wg/gui/battle/random/views/teamBasesPanel/TeamBasesPanel.as	2020-07-27 14:29:58.696124900 +0300
++++ battle/net/wg/gui/battle/random/views/teamBasesPanel/TeamBasesPanel.as	2020-07-27 14:41:25.166530000 +0300
 @@ -12,8 +12,16 @@
  
      public class TeamBasesPanel extends TeamBasesPanelMeta implements ITeamBasesPanelMeta
@@ -249,8 +278,8 @@ diff -Naur battle.orig/net/wg/gui/battle/random/views/teamBasesPanel/TeamBasesPa
          {
              var _loc2_:* = NaN;
 diff -Naur battle.orig/net/wg/gui/battle/random/views/teamBasesPanel/TeamCaptureBar.as battle/net/wg/gui/battle/random/views/teamBasesPanel/TeamCaptureBar.as
---- battle.orig/net/wg/gui/battle/random/views/teamBasesPanel/TeamCaptureBar.as	2020-02-28 20:15:25.233035200 +0200
-+++ battle/net/wg/gui/battle/random/views/teamBasesPanel/TeamCaptureBar.as	2020-02-28 20:19:11.245961600 +0200
+--- battle.orig/net/wg/gui/battle/random/views/teamBasesPanel/TeamCaptureBar.as	2020-07-27 14:29:57.258478000 +0300
++++ battle/net/wg/gui/battle/random/views/teamBasesPanel/TeamCaptureBar.as	2020-07-27 14:41:25.213403200 +0300
 @@ -21,7 +21,7 @@
  
          private static const ALPHA_FADE_SPEED:Number = 500;
@@ -261,8 +290,8 @@ diff -Naur battle.orig/net/wg/gui/battle/random/views/teamBasesPanel/TeamCapture
          private static const EXIT_TWEEN_DELAY:Number = 4500;
  
 diff -Naur battle.orig/net/wg/gui/battle/ranked/battleloading/renderers/RankedPlayerItemRenderer.as battle/net/wg/gui/battle/ranked/battleloading/renderers/RankedPlayerItemRenderer.as
---- battle.orig/net/wg/gui/battle/ranked/battleloading/renderers/RankedPlayerItemRenderer.as	2020-02-28 20:15:23.599047500 +0200
-+++ battle/net/wg/gui/battle/ranked/battleloading/renderers/RankedPlayerItemRenderer.as	2020-02-28 20:19:11.261970000 +0200
+--- battle.orig/net/wg/gui/battle/ranked/battleloading/renderers/RankedPlayerItemRenderer.as	2020-07-27 14:29:56.009880400 +0300
++++ battle/net/wg/gui/battle/ranked/battleloading/renderers/RankedPlayerItemRenderer.as	2020-07-27 14:41:25.244651900 +0300
 @@ -9,6 +9,11 @@
      public class RankedPlayerItemRenderer extends BasePlayerItemRenderer
      {
@@ -276,8 +305,8 @@ diff -Naur battle.orig/net/wg/gui/battle/ranked/battleloading/renderers/RankedPl
  
          public function RankedPlayerItemRenderer(param1:BaseRendererContainer, param2:int, param3:Boolean)
 diff -Naur battle.orig/net/wg/gui/battle/ranked/stats/components/fullStats/FullStats.as battle/net/wg/gui/battle/ranked/stats/components/fullStats/FullStats.as
---- battle.orig/net/wg/gui/battle/ranked/stats/components/fullStats/FullStats.as	2020-02-28 20:15:24.745339300 +0200
-+++ battle/net/wg/gui/battle/ranked/stats/components/fullStats/FullStats.as	2020-02-28 20:19:11.276820800 +0200
+--- battle.orig/net/wg/gui/battle/ranked/stats/components/fullStats/FullStats.as	2020-07-27 14:29:56.744577800 +0300
++++ battle/net/wg/gui/battle/ranked/stats/components/fullStats/FullStats.as	2020-07-27 14:41:25.251159500 +0300
 @@ -11,6 +11,11 @@
      public class FullStats extends StatsBase
      {
@@ -291,8 +320,8 @@ diff -Naur battle.orig/net/wg/gui/battle/ranked/stats/components/fullStats/FullS
  
          public function FullStats()
 diff -Naur battle.orig/net/wg/gui/battle/ranked/stats/components/fullStats/FullStatsTableCtrl.as battle/net/wg/gui/battle/ranked/stats/components/fullStats/FullStatsTableCtrl.as
---- battle.orig/net/wg/gui/battle/ranked/stats/components/fullStats/FullStatsTableCtrl.as	2020-02-28 20:15:26.376328400 +0200
-+++ battle/net/wg/gui/battle/ranked/stats/components/fullStats/FullStatsTableCtrl.as	2020-02-28 20:19:11.291812100 +0200
+--- battle.orig/net/wg/gui/battle/ranked/stats/components/fullStats/FullStatsTableCtrl.as	2020-07-27 14:29:58.173336500 +0300
++++ battle/net/wg/gui/battle/ranked/stats/components/fullStats/FullStatsTableCtrl.as	2020-07-27 14:41:25.282415800 +0300
 @@ -20,6 +20,11 @@
  
          private static const TABLE_START_POINT:int = 33;
@@ -315,8 +344,8 @@ diff -Naur battle.orig/net/wg/gui/battle/ranked/stats/components/fullStats/FullS
              return new StatsTableItem(this._table,param1,param2);
          }
 diff -Naur battle.orig/net/wg/gui/battle/ranked/stats/components/playersPanel/list/PlayersPanelListLeft.as battle/net/wg/gui/battle/ranked/stats/components/playersPanel/list/PlayersPanelListLeft.as
---- battle.orig/net/wg/gui/battle/ranked/stats/components/playersPanel/list/PlayersPanelListLeft.as	2020-02-28 20:15:27.458655700 +0200
-+++ battle/net/wg/gui/battle/ranked/stats/components/playersPanel/list/PlayersPanelListLeft.as	2020-02-28 20:19:11.307806600 +0200
+--- battle.orig/net/wg/gui/battle/ranked/stats/components/playersPanel/list/PlayersPanelListLeft.as	2020-07-27 14:29:59.038022700 +0300
++++ battle/net/wg/gui/battle/ranked/stats/components/playersPanel/list/PlayersPanelListLeft.as	2020-07-27 14:41:25.298040300 +0300
 @@ -3,7 +3,7 @@
      public class PlayersPanelListLeft extends PlayersPanelList
      {
@@ -327,8 +356,8 @@ diff -Naur battle.orig/net/wg/gui/battle/ranked/stats/components/playersPanel/li
          public function PlayersPanelListLeft()
          {
 diff -Naur battle.orig/net/wg/gui/battle/ranked/stats/components/playersPanel/list/PlayersPanelListRight.as battle/net/wg/gui/battle/ranked/stats/components/playersPanel/list/PlayersPanelListRight.as
---- battle.orig/net/wg/gui/battle/ranked/stats/components/playersPanel/list/PlayersPanelListRight.as	2020-02-28 20:15:25.392936800 +0200
-+++ battle/net/wg/gui/battle/ranked/stats/components/playersPanel/list/PlayersPanelListRight.as	2020-02-28 20:19:11.319375900 +0200
+--- battle.orig/net/wg/gui/battle/ranked/stats/components/playersPanel/list/PlayersPanelListRight.as	2020-07-27 14:29:57.459612400 +0300
++++ battle/net/wg/gui/battle/ranked/stats/components/playersPanel/list/PlayersPanelListRight.as	2020-07-27 14:41:25.313664200 +0300
 @@ -3,7 +3,7 @@
      public class PlayersPanelListRight extends PlayersPanelList
      {
@@ -339,9 +368,9 @@ diff -Naur battle.orig/net/wg/gui/battle/ranked/stats/components/playersPanel/li
          public function PlayersPanelListRight()
          {
 diff -Naur battle.orig/net/wg/gui/battle/views/BaseBattlePage.as battle/net/wg/gui/battle/views/BaseBattlePage.as
---- battle.orig/net/wg/gui/battle/views/BaseBattlePage.as	2020-02-28 20:15:22.339827700 +0200
-+++ battle/net/wg/gui/battle/views/BaseBattlePage.as	2020-02-28 20:19:11.332370600 +0200
-@@ -67,6 +67,11 @@
+--- battle.orig/net/wg/gui/battle/views/BaseBattlePage.as	2020-07-27 14:29:54.208876200 +0300
++++ battle/net/wg/gui/battle/views/BaseBattlePage.as	2020-07-27 14:41:25.329292900 +0300
+@@ -74,6 +74,11 @@
  
          protected var playerMessageList:MessageListDAAPI;
  
@@ -353,8 +382,8 @@ diff -Naur battle.orig/net/wg/gui/battle/views/BaseBattlePage.as battle/net/wg/g
          protected var battleStatisticDataController:BattleStatisticDataController;
  
          protected var postmortemTips:PostmortemPanel = null;
-@@ -313,6 +313,11 @@
-             this.playerMessageList.setLocation(_originalWidth - PLAYER_MESSAGES_LIST_OFFSET.x | 0,_originalHeight - this.minimap.getMessageCoordinate() + PLAYER_MESSAGES_LIST_OFFSET.y);
+@@ -343,6 +348,11 @@
+             }
          }
  
 +        public function xfw_registerComponent(param1:IDAAPIModule, param2:String) : void
@@ -365,7 +394,7 @@ diff -Naur battle.orig/net/wg/gui/battle/views/BaseBattlePage.as battle/net/wg/g
          protected function registerComponent(param1:IDAAPIModule, param2:String) : void
          {
              this._componentsStorage[param2] = param1;
-@@ -367,6 +367,11 @@
+@@ -392,6 +402,11 @@
              return false;
          }
  
@@ -377,7 +406,7 @@ diff -Naur battle.orig/net/wg/gui/battle/views/BaseBattlePage.as battle/net/wg/g
          protected function onMiniMapChangeHandler(param1:MinimapEvent) : void
          {
              this.playerMessageListPositionUpdate();
-@@ -392,6 +392,11 @@
+@@ -417,6 +432,11 @@
              this.ribbonsPanel.x = (_originalWidth >> 1) + this.ribbonsPanel.offsetX;
          }
  
@@ -390,11 +419,11 @@ diff -Naur battle.orig/net/wg/gui/battle/views/BaseBattlePage.as battle/net/wg/g
          {
              this.updateMinimapSizeIndex(param1.sizeIndex);
 diff -Naur battle.orig/net/wg/gui/battle/views/minimap/Minimap.as battle/net/wg/gui/battle/views/minimap/Minimap.as
---- battle.orig/net/wg/gui/battle/views/minimap/Minimap.as	2020-02-28 20:15:25.360956600 +0200
-+++ battle/net/wg/gui/battle/views/minimap/Minimap.as	2020-02-28 20:19:11.351355900 +0200
-@@ -41,6 +41,11 @@
+--- battle.orig/net/wg/gui/battle/views/minimap/Minimap.as	2020-07-27 14:29:57.419399600 +0300
++++ battle/net/wg/gui/battle/views/minimap/Minimap.as	2020-07-27 14:41:25.351422400 +0300
+@@ -47,6 +47,11 @@
  
-         public var background:UILoaderAlt = null;
+         public var minimapHint:MinimapHint = null;
  
 +        public function get xfw_foregrounds():Vector.<Sprite>
 +        {
@@ -405,8 +434,8 @@ diff -Naur battle.orig/net/wg/gui/battle/views/minimap/Minimap.as battle/net/wg/
  
          private var _currForeground:Sprite = null;
 diff -Naur battle.orig/net/wg/gui/battle/views/minimap/MinimapEntryController.as battle/net/wg/gui/battle/views/minimap/MinimapEntryController.as
---- battle.orig/net/wg/gui/battle/views/minimap/MinimapEntryController.as	2020-02-28 20:15:27.157841900 +0200
-+++ battle/net/wg/gui/battle/views/minimap/MinimapEntryController.as	2020-02-28 20:19:11.370346800 +0200
+--- battle.orig/net/wg/gui/battle/views/minimap/MinimapEntryController.as	2020-07-27 14:29:58.806782800 +0300
++++ battle/net/wg/gui/battle/views/minimap/MinimapEntryController.as	2020-07-27 14:41:25.382678300 +0300
 @@ -13,8 +13,18 @@
  
          private static var _instance:MinimapEntryController = null;
@@ -448,8 +477,8 @@ diff -Naur battle.orig/net/wg/gui/battle/views/minimap/MinimapEntryController.as
                  {
                      this._scalableEntriesWithNonScaleContent.splice(_loc3_,1);
 diff -Naur battle.orig/net/wg/gui/battle/views/minimap/components/entries/vehicle/VehicleMinimapEntry.as battle/net/wg/gui/battle/views/minimap/components/entries/vehicle/VehicleMinimapEntry.as
---- battle.orig/net/wg/gui/battle/views/minimap/components/entries/vehicle/VehicleMinimapEntry.as	2020-02-28 20:15:27.062901400 +0200
-+++ battle/net/wg/gui/battle/views/minimap/components/entries/vehicle/VehicleMinimapEntry.as	2020-02-28 20:19:11.389048200 +0200
+--- battle.orig/net/wg/gui/battle/views/minimap/components/entries/vehicle/VehicleMinimapEntry.as	2020-07-27 14:29:58.736338600 +0300
++++ battle/net/wg/gui/battle/views/minimap/components/entries/vehicle/VehicleMinimapEntry.as	2020-07-27 14:41:25.398307100 +0300
 @@ -76,6 +76,11 @@
  
          public var allyGreenAnimation:VehicleAnimationMinimapEntry = null;
@@ -463,9 +492,9 @@ diff -Naur battle.orig/net/wg/gui/battle/views/minimap/components/entries/vehicl
  
          private var _currentTextField:TextField = null;
 diff -Naur battle.orig/net/wg/infrastructure/helpers/statisticsDataController/BattleStatisticDataController.as battle/net/wg/infrastructure/helpers/statisticsDataController/BattleStatisticDataController.as
---- battle.orig/net/wg/infrastructure/helpers/statisticsDataController/BattleStatisticDataController.as	2020-02-28 20:15:23.896865000 +0200
-+++ battle/net/wg/infrastructure/helpers/statisticsDataController/BattleStatisticDataController.as	2020-02-28 20:19:11.408035800 +0200
-@@ -25,8 +25,18 @@
+--- battle.orig/net/wg/infrastructure/helpers/statisticsDataController/BattleStatisticDataController.as	2020-07-27 14:29:56.311843200 +0300
++++ battle/net/wg/infrastructure/helpers/statisticsDataController/BattleStatisticDataController.as	2020-07-27 14:41:25.413926800 +0300
+@@ -26,8 +26,18 @@
      public class BattleStatisticDataController extends BattleStatisticDataControllerMeta implements IBattleStatisticDataControllerMeta, IDAAPIModule, IQuestProgressDataHub
      {
  
@@ -485,8 +514,8 @@ diff -Naur battle.orig/net/wg/infrastructure/helpers/statisticsDataController/Ba
  
          private var _container:DisplayObjectContainer;
 diff -Naur battle.orig/net/wg/infrastructure/managers/IContainerManager.as battle/net/wg/infrastructure/managers/IContainerManager.as
---- battle.orig/net/wg/infrastructure/managers/IContainerManager.as	2020-02-28 20:15:13.520294500 +0200
-+++ battle/net/wg/infrastructure/managers/IContainerManager.as	2020-02-28 20:19:11.426826900 +0200
+--- battle.orig/net/wg/infrastructure/managers/IContainerManager.as	2020-07-27 14:29:46.097990800 +0300
++++ battle/net/wg/infrastructure/managers/IContainerManager.as	2020-07-27 14:41:25.445176000 +0300
 @@ -23,6 +23,8 @@
  
          function storeVisibleContainers() : void;
@@ -497,8 +526,8 @@ diff -Naur battle.orig/net/wg/infrastructure/managers/IContainerManager.as battl
  
          function get lastFocusedView() : IView;
 diff -Naur battle.orig/net/wg/infrastructure/managers/impl/AtlasManager.as battle/net/wg/infrastructure/managers/impl/AtlasManager.as
---- battle.orig/net/wg/infrastructure/managers/impl/AtlasManager.as	2020-02-28 20:15:14.287820400 +0200
-+++ battle/net/wg/infrastructure/managers/impl/AtlasManager.as	2020-02-28 20:19:11.438820000 +0200
+--- battle.orig/net/wg/infrastructure/managers/impl/AtlasManager.as	2020-07-27 14:29:46.802920400 +0300
++++ battle/net/wg/infrastructure/managers/impl/AtlasManager.as	2020-07-27 14:41:25.451684400 +0300
 @@ -182,6 +182,11 @@
              }
          }
@@ -512,8 +541,8 @@ diff -Naur battle.orig/net/wg/infrastructure/managers/impl/AtlasManager.as battl
          {
              if(this._lastAtlas && this._lastAtlas.atlasName == param1)
 diff -Naur battle.orig/scaleform/clik/data/DataProvider.as battle/scaleform/clik/data/DataProvider.as
---- battle.orig/scaleform/clik/data/DataProvider.as	2020-02-28 20:15:22.882492200 +0200
-+++ battle/scaleform/clik/data/DataProvider.as	2020-02-28 20:19:11.456808300 +0200
+--- battle.orig/scaleform/clik/data/DataProvider.as	2020-07-27 14:29:54.800934200 +0300
++++ battle/scaleform/clik/data/DataProvider.as	2020-07-27 14:41:25.482943900 +0300
 @@ -5,8 +5,9 @@
      import flash.events.EventDispatcher;
      import flash.events.Event;
@@ -526,8 +555,8 @@ diff -Naur battle.orig/scaleform/clik/data/DataProvider.as battle/scaleform/clik
          protected var dispatcher:EventDispatcher;
  
 diff -Naur battle.orig/scaleform/clik/ui/InputDetails.as battle/scaleform/clik/ui/InputDetails.as
---- battle.orig/scaleform/clik/ui/InputDetails.as	2020-02-28 20:15:14.701561500 +0200
-+++ battle/scaleform/clik/ui/InputDetails.as	2020-02-28 20:19:11.472688900 +0200
+--- battle.orig/scaleform/clik/ui/InputDetails.as	2020-07-27 14:29:47.195127100 +0300
++++ battle/scaleform/clik/ui/InputDetails.as	2020-07-27 14:41:25.498567500 +0300
 @@ -7,7 +7,7 @@
  
          public var code:Number;

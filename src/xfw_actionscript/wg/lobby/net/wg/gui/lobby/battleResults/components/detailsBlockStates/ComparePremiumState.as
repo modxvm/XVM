@@ -3,8 +3,10 @@ package net.wg.gui.lobby.battleResults.components.detailsBlockStates
     import flash.text.TextField;
     import net.wg.gui.lobby.battleResults.data.PersonalDataVO;
     import flash.text.TextFieldAutoSize;
+    import flash.events.MouseEvent;
     import net.wg.gui.lobby.battleResults.data.PremiumEarningsVO;
     import scaleform.clik.constants.InvalidationType;
+    import org.idmedia.as3commons.util.StringUtils;
     import scaleform.gfx.TextFieldEx;
 
     public class ComparePremiumState extends DetailsState
@@ -48,6 +50,8 @@ package net.wg.gui.lobby.battleResults.components.detailsBlockStates
             this.premTitleLbl.text = BATTLE_RESULTS.COMMON_DETAILS_PREMTITLE;
             this.creditsTitle.text = BATTLE_RESULTS.COMMON_DETAILS_CREDITSTITLE;
             this.xpTitleLbl.autoSize = TextFieldAutoSize.LEFT;
+            this.xpTitleLbl.addEventListener(MouseEvent.MOUSE_OVER,this.onMouseOverHandler);
+            this.xpTitleLbl.addEventListener(MouseEvent.MOUSE_OUT,this.onMouseOutHandler);
         }
 
         override protected function draw() : void
@@ -84,6 +88,8 @@ package net.wg.gui.lobby.battleResults.components.detailsBlockStates
 
         override protected function onDispose() : void
         {
+            this.xpTitleLbl.removeEventListener(MouseEvent.MOUSE_OVER,this.onMouseOverHandler);
+            this.xpTitleLbl.removeEventListener(MouseEvent.MOUSE_OUT,this.onMouseOutHandler);
             this._data = null;
             this.noPremTitleLbl = null;
             this.premTitleLbl = null;
@@ -106,6 +112,20 @@ package net.wg.gui.lobby.battleResults.components.detailsBlockStates
         {
             this._currentSelectedVehIdx = param1;
             invalidateData();
+        }
+
+        private function onMouseOverHandler(param1:MouseEvent) : void
+        {
+            var _loc2_:String = this._data.premiumEarnings.xpTitleTooltips[this._currentSelectedVehIdx];
+            if(StringUtils.isNotEmpty(_loc2_))
+            {
+                App.toolTipMgr.show(_loc2_);
+            }
+        }
+
+        private function onMouseOutHandler(param1:MouseEvent) : void
+        {
+            App.toolTipMgr.hide();
         }
     }
 }

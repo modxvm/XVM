@@ -83,6 +83,7 @@ package net.wg.gui.lobby.training
         {
             super.configUI();
             this.updateStage(App.appWidth,App.appHeight);
+            this.battleIcon.type = BattleTypeIcon.TYPE_TRAINING;
             this.ownerTitle.text = MENU.TRAINING_OWNERTITLE;
             this.playersTitle.text = MENU.TRAINING_PLAYERSTITLE;
             this.listTitle.text = MENU.TRAINING_LISTTITLE;

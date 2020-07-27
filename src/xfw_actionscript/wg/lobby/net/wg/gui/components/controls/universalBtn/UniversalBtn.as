@@ -17,6 +17,7 @@ package net.wg.gui.components.controls.universalBtn
     import net.wg.gui.components.controls.BitmapFill;
     import org.idmedia.as3commons.util.StringUtils;
     import scaleform.clik.constants.InvalidationType;
+    import net.wg.data.constants.Linkages;
     import flash.filters.DropShadowFilter;
     import scaleform.clik.core.UIComponent;
     import flash.display.DisplayObject;
@@ -48,6 +49,10 @@ package net.wg.gui.components.controls.universalBtn
         private static const TEXT_FIELD_DISPLAY_NAME:String = "textField";
 
         private static const TEXT_FIELD_LAYOUT_INDEX:uint = 3;
+
+        private static const INV_ALERT_INDICATOR:String = "invAlertIndicator";
+
+        private static const ALERT_INDICATOR_NAME:String = "alertIndicatorName";
 
         public var image:Image = null;
 
@@ -86,6 +91,10 @@ package net.wg.gui.components.controls.universalBtn
         private var _visibilityBeforeInitialized:Boolean = true;
 
         private var _needRestoreVisibilityAfterCreate:Boolean = false;
+
+        private var _alertIndicator:MovieClip = null;
+
+        private var _alertIndicatorVisible:Boolean;
 
         public function UniversalBtn()
         {
@@ -160,6 +169,23 @@ package net.wg.gui.components.controls.universalBtn
             {
                 this.updatePositions();
             }
+            if(isInvalid(INV_ALERT_INDICATOR))
+            {
+                if(this._alertIndicatorVisible)
+                {
+                    if(!this._alertIndicator)
+                    {
+                        this._alertIndicator = App.utils.classFactory.getComponent(Linkages.BTN_ALERT_INDICATOR,MovieClip,{"name":ALERT_INDICATOR_NAME});
+                        addChildAt(this._alertIndicator,getChildIndex(focusIndicator));
+                        this.updateAlertIndicatorSize();
+                    }
+                    this._alertIndicator.visible = true;
+                }
+                else if(this._alertIndicator)
+                {
+                    this._alertIndicator.visible = false;
+                }
+            }
         }
 
         override protected function updateDynamicSizeByText() : void
@@ -195,6 +221,7 @@ package net.wg.gui.components.controls.universalBtn
             this.image.removeEventListener(Event.CHANGE,this.onIconChangeHandler);
             this.image.dispose();
             this.image = null;
+            this._alertIndicator = null;
             this._tFormat = null;
             this._textFieldAlphaMap = null;
             this.clearStyledDisplayObjects();
@@ -234,6 +261,12 @@ package net.wg.gui.components.controls.universalBtn
                 setState(_state);
             }
             invalidate(InvalidationType.LAYOUT);
+        }
+
+        public function switchAlertIndicatorVisible(param1:Boolean) : void
+        {
+            this._alertIndicatorVisible = param1;
+            invalidate(INV_ALERT_INDICATOR);
         }
 
         private function updateTextFieldStyle(param1:uint, param2:uint) : void
@@ -288,6 +321,16 @@ package net.wg.gui.components.controls.universalBtn
                 _loc2_ = this.height;
                 this._states.width = _loc1_;
                 this._states.height = _loc2_;
+            }
+            this.updateAlertIndicatorSize();
+        }
+
+        private function updateAlertIndicatorSize() : void
+        {
+            if(this._alertIndicator)
+            {
+                this._alertIndicator.scaleX = this._baseScaleX;
+                this._alertIndicator.scaleY = this._baseScaleY;
             }
         }
 
@@ -457,6 +500,12 @@ package net.wg.gui.components.controls.universalBtn
             invalidate(INDICATOR_INVALID);
         }
 
+        override public function set enabled(param1:Boolean) : void
+        {
+            super.enabled = param1;
+            invalidate(IMAGE_ALPHA_INVALID);
+        }
+
         public function get styledDisplayObjects() : IUniversalBtnStyledDisplayObjects
         {
             return this._styledDisplayObjects;
@@ -495,12 +544,6 @@ package net.wg.gui.components.controls.universalBtn
         public function set disabledImageAlpha(param1:Number) : void
         {
             this._disabledImageAlpha = param1;
-            invalidate(IMAGE_ALPHA_INVALID);
-        }
-
-        override public function set enabled(param1:Boolean) : void
-        {
-            super.enabled = param1;
             invalidate(IMAGE_ALPHA_INVALID);
         }
 

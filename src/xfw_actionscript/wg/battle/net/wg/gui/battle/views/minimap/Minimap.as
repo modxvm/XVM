@@ -19,6 +19,10 @@ package net.wg.gui.battle.views.minimap
 
         private static const OPTIMIZE_OFFSET:int = 10;
 
+        private static const ANIM_FADE_IN:String = "fadeIn";
+
+        private static const ANIM_FADE_OUT:String = "fadeOut";
+
         public var mapHit:Sprite = null;
 
         public var fakePixel:MovieClip = null;
@@ -41,6 +45,8 @@ package net.wg.gui.battle.views.minimap
 
         public var background:UILoaderAlt = null;
 
+        public var minimapHint:MinimapHint = null;
+
         public function get xfw_foregrounds():Vector.<Sprite>
         {
             return _foregrounds;
@@ -55,6 +61,8 @@ package net.wg.gui.battle.views.minimap
         private var _updateSizeIndexForce:Boolean = false;
 
         private var _clickAreaSpr:Sprite = null;
+
+        private var _bIsHintPanelEnabled:Boolean = false;
 
         public function Minimap()
         {
@@ -75,6 +83,15 @@ package net.wg.gui.battle.views.minimap
             this._clickAreaSpr.hitArea = this.mapHit;
             removeChild(this.fakePixel);
             this.fakePixel = null;
+            this.updateIntenalHintPanelData(false,false);
+            this.minimapHint.gotoAndStop(ANIM_FADE_IN);
+        }
+
+        public function onButtonClick(param1:Object) : void
+        {
+            if(0)
+            {
+            }
         }
 
         override public function as_setAlpha(param1:Number) : void
@@ -97,6 +114,24 @@ package net.wg.gui.battle.views.minimap
             {
                 this.checkNewSize(param1);
             }
+        }
+
+        override public function as_enableHintPanelWithData(param1:Boolean, param2:Boolean) : void
+        {
+            this.updateIntenalHintPanelData(param1,param2);
+            this._bIsHintPanelEnabled = true;
+            this.minimapHint.gotoAndPlay(ANIM_FADE_IN);
+        }
+
+        override public function as_disableHintPanel() : void
+        {
+            this._bIsHintPanelEnabled = false;
+            this.minimapHint.gotoAndPlay(ANIM_FADE_OUT);
+        }
+
+        override public function as_updateHintPanelData(param1:Boolean, param2:Boolean) : void
+        {
+            this.updateIntenalHintPanelData(param1,param2);
         }
 
         override public function as_setVisible(param1:Boolean) : void
@@ -162,6 +197,8 @@ package net.wg.gui.battle.views.minimap
             super.configUI();
             this.updateSizeIndex(true);
             this._clickAreaSpr.addEventListener(MouseEvent.CLICK,this.onMouseClickHandler);
+            this._clickAreaSpr.addEventListener(MouseEvent.MOUSE_OVER,this.onMouseOverHandler);
+            this._clickAreaSpr.addEventListener(MouseEvent.MOUSE_OUT,this.onMouseOutHandler);
         }
 
         override protected function onDispose() : void
@@ -187,6 +224,8 @@ package net.wg.gui.battle.views.minimap
             this.mapHit = null;
             this.background.dispose();
             this.background = null;
+            this.minimapHint.dispose();
+            this.minimapHint = null;
             super.onDispose();
         }
 
@@ -200,13 +239,12 @@ package net.wg.gui.battle.views.minimap
 
         private function updateContainersSize() : void
         {
-            var _loc2_:Point = null;
             var _loc1_:Rectangle = MinimapSizeConst.MAP_SIZE[this._currentSizeIndex];
             this.background.width = _loc1_.width;
             this.background.height = _loc1_.height;
             this.background.x = _loc1_.x;
             this.background.y = _loc1_.y;
-            _loc2_ = MinimapSizeConst.ENTRY_CONTAINER_POINT[this._currentSizeIndex];
+            var _loc2_:Point = MinimapSizeConst.ENTRY_CONTAINER_POINT[this._currentSizeIndex];
             this.entriesContainer.scaleX = this.background.scaleX;
             this.entriesContainer.scaleY = this.background.scaleY;
             MinimapEntryController.instance.updateScale(this._currentSizeIndex);
@@ -220,11 +258,28 @@ package net.wg.gui.battle.views.minimap
             this.mapHit.height = _loc1_.height;
             this.mapHit.x = _loc1_.x;
             this.mapHit.y = _loc1_.y;
+            this.minimapHint.x = _loc1_.x;
+            this.minimapHint.y = _loc1_.y;
         }
 
         private function checkNewSize(param1:int) : void
         {
             dispatchEvent(new MinimapEvent(MinimapEvent.TRY_SIZE_CHANGED,false,false,param1));
+        }
+
+        private function updateIntenalHintPanelData(param1:Boolean, param2:Boolean) : void
+        {
+            this.minimapHint.setLeftMinimapHintIconType(MinimapIconCollection.ICON_ATTENTION);
+            if(param2)
+            {
+                this.minimapHint.setRightMinimapHintIconType(MinimapIconCollection.ICON_REPOSITION_VIEW);
+                if(param1)
+                {
+                    this.minimapHint.setLeftMinimapHintIconType(MinimapIconCollection.ICON_SPG);
+                }
+                return;
+            }
+            this.minimapHint.setRightMinimapHintIconType(MinimapIconCollection.ICON_WAYPOINT);
         }
 
         override public function set visible(param1:Boolean) : void
@@ -252,7 +307,23 @@ package net.wg.gui.battle.views.minimap
         {
             if(param1 is MouseEventEx && param1.target == this._clickAreaSpr)
             {
-                setAttentionToCellS(this.mapHit.mouseX,this.mapHit.mouseY,MouseEventEx(param1).buttonIdx == MouseEventEx.RIGHT_BUTTON);
+                onMinimapClickedS(this.mapHit.mouseX,this.mapHit.mouseY,MouseEventEx(param1).buttonIdx,0);
+            }
+        }
+
+        private function onMouseOverHandler(param1:MouseEvent) : void
+        {
+            if(param1 is MouseEventEx && param1.target == this._clickAreaSpr && this._bIsHintPanelEnabled)
+            {
+                this.minimapHint.gotoAndPlay(ANIM_FADE_OUT);
+            }
+        }
+
+        private function onMouseOutHandler(param1:MouseEvent) : void
+        {
+            if(param1 is MouseEventEx && param1.target == this._clickAreaSpr && this._bIsHintPanelEnabled)
+            {
+                this.minimapHint.gotoAndPlay(ANIM_FADE_IN);
             }
         }
     }

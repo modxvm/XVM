@@ -323,6 +323,8 @@ package
 
         public static const WINDOW_UNIT_SLOT_EMPTYSLOT:String = "#cyberSport:window/unit/slot/emptySlot";
 
+        public static const WINDOW_UNIT_SLOT_BATTLEROYALE:String = "#cyberSport:window/unit/slot/battleRoyale";
+
         public static const WINDOW_UNIT_SLOT_NOTAVAILABLE:String = "#cyberSport:window/unit/slot/notAvailable";
 
         public static const WINDOW_UNIT_SLOT_NOTALLOWED:String = "#cyberSport:window/unit/slot/notAllowed";
@@ -446,10 +448,6 @@ package
         public static const RESPAWN_FIGHT_STATUS_PRIVATE:String = "#cyberSport:respawn/fight/status/private";
 
         public static const SQUADWINDOW_WAITINGFORBATTLE:String = "#cyberSport:squadWindow/waitingForBattle";
-
-        public static const SQUADWINDOW_EVENTDISABLEDMESSAGE:String = "#cyberSport:squadWindow/eventDisabledMessage";
-
-        public static const SQUADWINDOW_EVENTNOTSETMESSAGE:String = "#cyberSport:squadWindow/eventNotSetMessage";
 
         public function CYBERSPORT()
         {

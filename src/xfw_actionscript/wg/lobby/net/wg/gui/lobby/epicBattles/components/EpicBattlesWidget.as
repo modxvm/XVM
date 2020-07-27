@@ -9,6 +9,7 @@ package net.wg.gui.lobby.epicBattles.components
     import flash.events.MouseEvent;
     import net.wg.gui.lobby.hangar.quests.HeaderQuestsEvent;
     import scaleform.clik.constants.InvalidationType;
+    import net.wg.utils.StageSizeBoundaries;
 
     public class EpicBattlesWidget extends EpicBattlesWidgetMeta implements IEpicBattlesWidgetMeta
     {
@@ -16,6 +17,10 @@ package net.wg.gui.lobby.epicBattles.components
         private static const BG_NORMAL_Y_OFFSET:int = -1;
 
         private static const ALERT_BG_Y_OFFSET:int = 39;
+
+        private static const QUEST_FLAG_X_POSS_BIG:int = -80;
+
+        private static const QUEST_FLAG_X_POSS_SMALL:int = -60;
 
         public var calendarStatus:AlertMessageBlock = null;
 
@@ -81,7 +86,20 @@ package net.wg.gui.lobby.epicBattles.components
             }
             if(isInvalid(InvalidationType.SIZE))
             {
-                this.button.updateSize();
+                this.validateSize();
+            }
+        }
+
+        private function validateSize() : void
+        {
+            this.button.updateSize();
+            if(App.appWidth >= StageSizeBoundaries.WIDTH_1366)
+            {
+                this.questsFlags.x = QUEST_FLAG_X_POSS_BIG;
+            }
+            else
+            {
+                this.questsFlags.x = QUEST_FLAG_X_POSS_SMALL;
             }
         }
 

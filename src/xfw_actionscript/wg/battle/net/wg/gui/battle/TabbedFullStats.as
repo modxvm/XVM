@@ -10,9 +10,8 @@ package net.wg.gui.battle
     import net.wg.infrastructure.interfaces.IDAAPIDataClass;
     import net.wg.data.constants.Linkages;
     import scaleform.clik.events.IndexEvent;
-    import scaleform.clik.data.DataProvider;
-    import net.wg.gui.lobby.settings.vo.TabsDataVo;
     import net.wg.gui.battle.views.questProgress.events.QuestProgressTabEvent;
+    import scaleform.clik.data.DataProvider;
     import net.wg.gui.battle.views.questProgress.data.QPProgressTrackingVO;
     import net.wg.gui.battle.views.questProgress.data.QPTrackingDataItemVO;
     import net.wg.gui.battle.views.questProgress.data.QuestProgressPerformVO;
@@ -66,22 +65,21 @@ package net.wg.gui.battle
             }
         }
 
-        override public function updateStageSize(param1:Number, param2:Number) : void
-        {
-            super.updateStageSize(param1,param2);
-        }
-
         override protected function configUI() : void
         {
             super.configUI();
             this.tabs.itemRendererName = Linkages.CONTENT_TAB_RENDERER;
             this.tabs.minRendererWidth = MIN_TABS_RENDERER_WIDTH;
             this.tabs.addEventListener(IndexEvent.INDEX_CHANGE,this.onTabsIndexChangeHandler);
-            this.tabs.dataProvider = new DataProvider([new TabsDataVo({"label":INGAME_GUI.STATISTICS_TAB_LINE_UP_HEADER}),new TabsDataVo({"label":INGAME_GUI.STATISTICS_TAB_QUESTS_HEADER})]);
             if(this.tabQuest != null)
             {
                 this.tabQuest.addEventListener(QuestProgressTabEvent.QUEST_SELECT,this.onProgressTrackingQuestSelectHandler);
             }
+        }
+
+        override protected function updateTabs(param1:DataProvider) : void
+        {
+            this.tabs.dataProvider = param1;
         }
 
         override protected function onDispose() : void

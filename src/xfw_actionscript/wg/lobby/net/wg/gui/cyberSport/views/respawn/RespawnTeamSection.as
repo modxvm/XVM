@@ -21,6 +21,8 @@ package net.wg.gui.cyberSport.views.respawn
 
         private static const INVALID_TOTAL_POINTS:String = "invalidTotalPoints";
 
+        private static const STATUS_START_Y_POS:Number = 437;
+
         private static const FIGHT_BTN_TOP_MARGIN:Number = 4;
 
         public var lblTeamPoints:TextField;
@@ -40,10 +42,6 @@ package net.wg.gui.cyberSport.views.respawn
         public var slot6:IRallySimpleSlotRenderer;
 
         private var _totalSumStr:String = "";
-
-        private var STATUS_START_Y_POS:Number = 437;
-
-        private var STATUS_START_Y_POS_WITH_CHINA_TICKER:Number = 417;
 
         public function RespawnTeamSection()
         {
@@ -71,7 +69,7 @@ package net.wg.gui.cyberSport.views.respawn
                 this._totalSumStr = CYBERSPORT.RESPAWN_TEAM_POINTS;
             }
             tooltipSubscribe([this.lblTeamPoints]);
-            lblStatus.y = App.globalVarsMgr.isShowTickerS()?this.STATUS_START_Y_POS_WITH_CHINA_TICKER:this.STATUS_START_Y_POS;
+            lblStatus.y = STATUS_START_Y_POS;
             btnFight.y = lblStatus.y + lblStatus.height + FIGHT_BTN_TOP_MARGIN;
         }
 

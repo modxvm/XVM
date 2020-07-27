@@ -298,5 +298,9 @@ package net.wg.gui.lobby.vehicleCompare.nodes
         {
             return false;
         }
+
+        public function cleanUp() : void
+        {
+        }
     }
 }

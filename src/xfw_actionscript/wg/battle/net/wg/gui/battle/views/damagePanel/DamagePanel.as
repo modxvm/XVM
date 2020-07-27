@@ -196,8 +196,9 @@ package net.wg.gui.battle.views.damagePanel
 
         override protected function configUI() : void
         {
-            super.configUI();
             var _loc1_:Shape = null;
+            super.configUI();
+            _loc1_ = null;
             var _loc2_:* = 0;
             while(_loc2_ < CRUISE_STATE_COUNT)
             {

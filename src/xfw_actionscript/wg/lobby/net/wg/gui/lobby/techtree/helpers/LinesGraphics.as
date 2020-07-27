@@ -70,6 +70,7 @@ package net.wg.gui.lobby.techtree.helpers
 
         public function clearUpRenderer(param1:IRenderer) : void
         {
+            param1.cleanUp();
         }
 
         public final function dispose() : void

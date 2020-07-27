@@ -96,8 +96,6 @@ package net.wg.gui.lobby.vehicleCompare
             this.clearBtn.addEventListener(ButtonEvent.CLICK,this.onClearBtnClickHandler);
             this.toCmpBtn.addEventListener(ButtonEvent.CLICK,this.onToCmpBtnClickHandler);
             this.toCmpWarnBtn.addEventListener(ButtonEvent.CLICK,this.onToCmpBtnClickHandler);
-            this.clearBtn.mouseEnabledOnDisabled = true;
-            this.toCmpBtn.mouseEnabledOnDisabled = true;
             this.toCmpWarnBtn.mouseEnabledOnDisabled = true;
             this.toCmpWarnBtn.caps = false;
         }

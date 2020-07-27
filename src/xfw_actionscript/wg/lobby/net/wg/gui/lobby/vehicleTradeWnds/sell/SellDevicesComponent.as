@@ -135,7 +135,7 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
             }
             if(this.isActive)
             {
-                this._complexDevicesArr.header = DIALOGS.VEHICLESELLDIALOG_COMPLEXOPTIONALDEVICE;
+                this._complexDevicesArr.header = DIALOGS.VEHICLESELLDIALOG_OPTIONALDEVICE;
             }
             invalidateData();
         }

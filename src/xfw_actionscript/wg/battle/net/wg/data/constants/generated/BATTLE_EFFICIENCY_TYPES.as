@@ -61,6 +61,20 @@ package net.wg.data.constants.generated
 
         public static const ASSIST_BY_ABILITY:String = "assistByAbility";
 
+        public static const DEATH_ZONE:String = "deathZone";
+
+        public static const BERSERKER:String = "berserker";
+
+        public static const SPAWNED_BOT_DMG:String = "spawnedBotDmg";
+
+        public static const RECEIVED_DMG_BY_SPAWNED_BOT:String = "receivedDmgBySpawnedBot";
+
+        public static const RECEIVED_BY_MINEFIELD:String = "receivedByMinefield";
+
+        public static const DAMAGE_BY_MINEFIELD:String = "damageByMinefield";
+
+        public static const RECEIVED_BY_SMOKE:String = "receivedBySmoke";
+
         public function BATTLE_EFFICIENCY_TYPES()
         {
             super();

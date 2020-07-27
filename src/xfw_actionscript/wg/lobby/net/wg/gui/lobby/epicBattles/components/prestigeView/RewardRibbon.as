@@ -1,150 +1,162 @@
 package net.wg.gui.lobby.epicBattles.components.prestigeView
 {
     import net.wg.infrastructure.base.UIComponentEx;
-    import net.wg.gui.lobby.components.AwardItemRendererEx;
-    import net.wg.gui.lobby.epicBattles.components.EpicBattlesMetaLevel;
     import flash.display.MovieClip;
+    import net.wg.gui.lobby.eventProgression.components.metaLevel.BaseMetaLevel;
+    import flash.display.DisplayObjectContainer;
+    import scaleform.clik.constants.InvalidationType;
     import net.wg.gui.lobby.components.data.AwardItemRendererExVO;
-    import net.wg.gui.lobby.epicBattles.data.EpicMetaLevelIconVO;
+    import net.wg.gui.lobby.eventProgression.components.metaLevel.data.MetaLevelVO;
 
     public class RewardRibbon extends UIComponentEx
     {
 
         private static const SHOW_RIBBON_STATE:String = "showRibbon";
 
-        private static const SHOW_AWARD_TEMPLATE_STATE:String = "showAward";
+        private static const END_FRAME:int = 32;
 
-        private static const END_FRAME:int = 33;
+        private static const RIBBON_RED_LABEL_TEMPLATE:String = "red_";
 
-        private static const EPIC_META_LEVEL_SIZE:int = 190;
+        private static const RIBBON_GOLD_LABEL_TEMPLATE:String = "gold_";
 
-        private static const RIBBON_RED_GOLD_LABEL:String = "red_gold";
+        private static const LEVEL_OFFSET_Y_LARGE:int = -10;
 
-        public var award1:AwardItemRendererEx = null;
+        private static const LEVEL_OFFSET_Y_EXTRA_LARGE:int = -16;
 
-        public var award2:AwardItemRendererEx = null;
+        private static const AWARDS_OFFSET_Y_LARGE:int = 30;
 
-        public var award3:AwardItemRendererEx = null;
+        private static const AWARDS_OFFSET_Y_EXTRA_LARGE:int = 40;
 
-        public var award4:AwardItemRendererEx = null;
+        private static const AWARDS_GAP_SMALL:int = 20;
 
-        public var award5:AwardItemRendererEx = null;
+        private static const AWARDS_GAP_BIG:int = 40;
 
-        public var award6:AwardItemRendererEx = null;
+        public static const SIZE_BIG:String = "big";
 
-        public var epicMetaLevelRegular:EpicBattlesMetaLevel = null;
+        public static const SIZE_MEDIUM:String = "medium";
+
+        public static const SIZE_SMALL:String = "small";
+
+        public var awardsCont:AwardsRibbonAnim = null;
+
+        public var levelCont:MovieClip = null;
 
         public var glow:MovieClip = null;
 
         public var ribbon:MovieClip = null;
 
-        private var _awards:Vector.<AwardItemRendererEx> = null;
+        private var _epicMetaLevelRegular:BaseMetaLevel = null;
 
-        private var _awardCount:int = 0;
+        private var _initialAwardsY:int = 0;
 
-        private var _maxAwardCount:int = 2147483647;
+        private var _initialLevelY:int = 0;
 
         private var _state:String = "";
+
+        private var _ribbonSize:String = "small";
+
+        private var _isMaxLevel:Boolean = false;
 
         public function RewardRibbon()
         {
             super();
-            addFrameScript(END_FRAME,this.onShowRibbonAnimationComplete);
-        }
-
-        override protected function onBeforeDispose() : void
-        {
-            stop();
-            super.onBeforeDispose();
         }
 
         override protected function onDispose() : void
         {
             stop();
             addFrameScript(END_FRAME,null);
-            if(this.award1)
-            {
-                this.award1.dispose();
-                this.award1 = null;
-            }
-            if(this.award2)
-            {
-                this.award2.dispose();
-                this.award2 = null;
-            }
-            if(this.award3)
-            {
-                this.award3.dispose();
-                this.award3 = null;
-            }
-            if(this.award4)
-            {
-                this.award4.dispose();
-                this.award4 = null;
-            }
-            if(this.award5)
-            {
-                this.award5.dispose();
-                this.award5 = null;
-            }
-            if(this.award6)
-            {
-                this.award6.dispose();
-                this.award6 = null;
-            }
-            this.epicMetaLevelRegular.dispose();
-            this.epicMetaLevelRegular = null;
+            var _loc1_:DisplayObjectContainer = this.levelCont.level;
+            _loc1_.removeChild(this._epicMetaLevelRegular);
+            this.levelCont = null;
+            this._epicMetaLevelRegular.dispose();
+            this._epicMetaLevelRegular = null;
+            this.awardsCont.dispose();
+            this.awardsCont = null;
             this.glow = null;
             this.ribbon = null;
-            this._awards.splice(0,this._awards.length);
-            this._awards = null;
             super.onDispose();
         }
 
         override protected function initialize() : void
         {
             super.initialize();
-            this._awards = new <AwardItemRendererEx>[this.award1,this.award2,this.award3,this.award4,this.award5,this.award6];
-            this._maxAwardCount = this._awards.length;
+            this.awardsCont.awardGap = AWARDS_GAP_SMALL;
+            this.awardsCont.awardSize = AwardsRibbonAnim.AWARD_SIZE_BIG;
+            this._initialAwardsY = this.awardsCont.y;
+            this._initialLevelY = this.levelCont.y;
+            addFrameScript(END_FRAME,this.onShowRibbonAnimationComplete);
+        }
+
+        override protected function draw() : void
+        {
+            var _loc1_:String = null;
+            super.draw();
+            if(isInvalid(InvalidationType.LAYOUT))
+            {
+                if(this._ribbonSize == SIZE_SMALL)
+                {
+                    this._epicMetaLevelRegular.setIconSize(BaseMetaLevel.MEDIUM);
+                    this.awardsCont.awardSize = AwardsRibbonAnim.AWARD_SIZE_SMALL;
+                    this.awardsCont.awardGap = AWARDS_GAP_SMALL;
+                }
+                else if(this._ribbonSize == SIZE_MEDIUM)
+                {
+                    this._epicMetaLevelRegular.setIconSize(BaseMetaLevel.LARGE);
+                    this.awardsCont.awardSize = AwardsRibbonAnim.AWARD_SIZE_BIG;
+                    this.awardsCont.awardGap = AWARDS_GAP_BIG;
+                }
+                else
+                {
+                    this._epicMetaLevelRegular.setIconSize(BaseMetaLevel.EXTRA_LARGE);
+                    this.awardsCont.awardSize = AwardsRibbonAnim.AWARD_SIZE_BIG;
+                    this.awardsCont.awardGap = AWARDS_GAP_BIG;
+                }
+                this.levelCont.y = this._initialLevelY;
+                this.awardsCont.y = this._initialAwardsY;
+                _loc1_ = this._isMaxLevel?RIBBON_GOLD_LABEL_TEMPLATE:RIBBON_RED_LABEL_TEMPLATE;
+                if(this._ribbonSize == SIZE_MEDIUM)
+                {
+                    this.levelCont.y = this.levelCont.y + LEVEL_OFFSET_Y_LARGE;
+                    this.awardsCont.y = this.awardsCont.y + AWARDS_OFFSET_Y_LARGE;
+                }
+                else if(this._ribbonSize == SIZE_BIG)
+                {
+                    this.levelCont.y = this.levelCont.y + LEVEL_OFFSET_Y_EXTRA_LARGE;
+                    this.awardsCont.y = this.awardsCont.y + AWARDS_OFFSET_Y_EXTRA_LARGE;
+                }
+                _loc1_ = _loc1_ + this._ribbonSize;
+                this.ribbon.gotoAndStop(_loc1_);
+            }
         }
 
         public function setAwards(param1:Vector.<AwardItemRendererExVO>) : void
         {
-            this._awardCount = Math.min(param1.length,this._maxAwardCount);
-            var _loc2_:* = 0;
-            while(_loc2_ < this._awardCount)
-            {
-                this._awards[_loc2_].setData(param1[_loc2_]);
-                _loc2_++;
-            }
-            if(param1.length > this._maxAwardCount)
-            {
-                App.utils.asserter.assert(false,"Too many awards");
-            }
+            this.awardsCont.setAwards(param1);
         }
 
-        public function setLevel(param1:EpicMetaLevelIconVO, param2:Boolean = false) : void
+        public function setLevel(param1:MetaLevelVO, param2:String, param3:Boolean = false) : void
         {
-            this.epicMetaLevelRegular.setIconSize(EPIC_META_LEVEL_SIZE);
-            this.epicMetaLevelRegular.setData(param1);
-            this.glow.visible = param2;
-            if(param2)
+            this._epicMetaLevelRegular = App.utils.classFactory.getComponent(param2,BaseMetaLevel);
+            var _loc4_:DisplayObjectContainer = this.levelCont.level;
+            _loc4_.addChild(this._epicMetaLevelRegular);
+            this._isMaxLevel = param3;
+            this._epicMetaLevelRegular.setData(param1);
+            this.glow.visible = param3;
+        }
+
+        public function set ribbonSize(param1:String) : void
+        {
+            if(this._ribbonSize != param1)
             {
-                this.ribbon.gotoAndStop(RIBBON_RED_GOLD_LABEL);
+                this._ribbonSize = param1;
+                invalidateLayout();
             }
         }
 
         public function show() : void
         {
             this.setState(SHOW_RIBBON_STATE);
-        }
-
-        private function onShowRibbonAnimationComplete() : void
-        {
-            if(this._awardCount > 0)
-            {
-                this.setState(SHOW_AWARD_TEMPLATE_STATE + this._awardCount.toString());
-            }
         }
 
         private function setState(param1:String) : void
@@ -155,6 +167,12 @@ package net.wg.gui.lobby.epicBattles.components.prestigeView
             }
             this._state = param1;
             gotoAndPlay(param1);
+            this.levelCont.gotoAndPlay(param1);
+        }
+
+        private function onShowRibbonAnimationComplete() : void
+        {
+            this.awardsCont.show();
         }
     }
 }

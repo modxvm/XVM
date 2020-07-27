@@ -13,17 +13,19 @@ package
 
         public static const DIALOGUE_DESCRIPTION_COMMON:String = "#demount_kit:dialogue/description/common";
 
-        public static const EQUIPMENTINSTALL_DEMOUNTDESCRIPTION_COMMON:String = "#demount_kit:equipmentInstall/demountDescription/common";
+        public static const EQUIPMENTINSTALL_DEMOUNTOR:String = "#demount_kit:equipmentInstall/demountOr";
 
-        public static const EQUIPMENTINSTALL_DEMOUNTDESCRIPTION_BONDS:String = "#demount_kit:equipmentInstall/demountDescription/bonds";
-
-        public static const EQUIPMENTINSTALL_DEMOUNTDESCRIPTION_TROPHY:String = "#demount_kit:equipmentInstall/demountDescription/trophy";
+        public static const EQUIPMENTINSTALL_DEMOUNT:String = "#demount_kit:equipmentInstall/demount";
 
         public static const EQUIPMENTDEMOUNT_OPTIONFREE:String = "#demount_kit:equipmentDemount/optionFree";
 
         public static const EQUIPMENTDEMOUNT_CONFIRMATION:String = "#demount_kit:equipmentDemount/confirmation";
 
+        public static const EQUIPMENTDEMOUNT_CONFIRMATIONFORFITTING:String = "#demount_kit:equipmentDemount/confirmationForFitting";
+
         public static const EQUIPMENTDEMOUNT_CONFIRMATION_DESCRIPTION:String = "#demount_kit:equipmentDemount/confirmation/description";
+
+        public static const EQUIPMENTDEMOUNT_CONFIRMATION_DESCRIPTIONFORINAPPROPRIATECLASS:String = "#demount_kit:equipmentDemount/confirmation/descriptionForInappropriateClass";
 
         public static const EQUIPMENTDEMOUNTPRICE:String = "#demount_kit:equipmentDemountPrice";
 

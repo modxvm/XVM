@@ -93,8 +93,7 @@ package net.wg.gui.lobby.techtree.nodes
             if(_loc2_.length > 0)
             {
                 this.typeIcon.visible = true;
-                App.utils.asserter.assertFrameExists(_loc2_,this.typeIcon);
-                this.typeIcon.gotoAndStop(_loc2_);
+                this.typeIcon.setModuleTypeIcon(_loc2_);
             }
             else
             {

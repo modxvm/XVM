@@ -160,7 +160,7 @@ package net.wg.mock
             return false;
         }
 
-        public function initCursor(param1:String) : void
+        public function forceSetCursor(param1:String) : void
         {
         }
 

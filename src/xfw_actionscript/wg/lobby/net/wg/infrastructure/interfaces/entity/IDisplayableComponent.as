@@ -4,5 +4,7 @@ package net.wg.infrastructure.interfaces.entity
     {
 
         function setCompVisible(param1:Boolean) : void;
+
+        function isCompVisible() : Boolean;
     }
 }

@@ -9,6 +9,9 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
     import scaleform.clik.constants.InvalidationType;
     import net.wg.gui.lobby.hangar.ammunitionPanel.events.AmmunitionPanelEvents;
     import net.wg.data.constants.generated.TOOLTIPS_CONSTANTS;
+    import net.wg.utils.helpLayout.HelpLayoutVO;
+    import org.idmedia.as3commons.util.StringUtils;
+    import net.wg.data.constants.Directions;
 
     public class VehicleStateMsg extends UIComponentEx
     {
@@ -20,6 +23,18 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         private static const TEXT_PADDING:int = 6;
 
         private static const BG_OFFSET:int = 3;
+
+        private static const HELP_LAYOUT_ID_DELIMITER:String = "_";
+
+        private static const HELP_LAYOUT_WIDTH:int = 280;
+
+        private static const HELP_LAYOUT_HEIGHT:int = 65;
+
+        private static const HELP_LAYOUT_HEIGHT_NO_BG:int = 47;
+
+        private static const HELP_LAYOUT_NO_BG_OFFSET_Y:int = -63;
+
+        private static const HELP_LAYOUT_OFFSET_Y:int = -5;
 
         public var tankTypeIcon:TankTypeIco;
 
@@ -33,6 +48,10 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
 
         private var _data:VehicleMessageVO = null;
 
+        private var _hitArea:Sprite = null;
+
+        private var _vehicleStateHelpLayoutId:String = "";
+
         public function VehicleStateMsg()
         {
             super();
@@ -42,6 +61,9 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         {
             super.configUI();
             this.tankTypeIcon.mouseEnabled = this.tankTypeIcon.mouseChildren = false;
+            this._hitArea = new Sprite();
+            addChild(this._hitArea);
+            this.statusBg.hitArea = this._hitArea;
             this.vehicleMsg.addEventListener(MouseEvent.ROLL_OVER,this.onVehicleMsgRollOverHandler);
             this.vehicleMsg.addEventListener(MouseEvent.ROLL_OUT,this.onVehicleMsgRollOutHandler);
         }
@@ -54,6 +76,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this.tankTypeIcon.dispose();
             this.tankTypeIcon = null;
             this.vehicleName = null;
+            this._hitArea = null;
+            this.statusBg.hitArea = null;
             this.statusBg = null;
             this.vehicleLevel = null;
             this._data = null;
@@ -115,12 +139,12 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             return this.vehicleMsg.visible?this.vehicleMsg.y + this.vehicleMsg.height:this.vehicleName.height;
         }
 
-        public function get textX() : Number
+        public function get textX() : int
         {
             return this.x + this.vehicleMsg.x + this.vehicleMsg.textWidth;
         }
 
-        public function get textY() : Number
+        public function get textY() : int
         {
             return this.y + this.vehicleMsg.y;
         }
@@ -136,6 +160,25 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         private function onVehicleMsgRollOutHandler(param1:MouseEvent) : void
         {
             App.toolTipMgr.hide();
+        }
+
+        public function createHelpLayoutData() : HelpLayoutVO
+        {
+            if(StringUtils.isEmpty(this._vehicleStateHelpLayoutId))
+            {
+                this._vehicleStateHelpLayoutId = name + HELP_LAYOUT_ID_DELIMITER + Math.random();
+            }
+            var _loc1_:Boolean = this.statusBg.visible;
+            var _loc2_:HelpLayoutVO = new HelpLayoutVO();
+            _loc2_.x = -HELP_LAYOUT_WIDTH >> 1;
+            _loc2_.y = y + _loc1_?HELP_LAYOUT_OFFSET_Y:HELP_LAYOUT_NO_BG_OFFSET_Y;
+            _loc2_.width = HELP_LAYOUT_WIDTH;
+            _loc2_.height = _loc1_?HELP_LAYOUT_HEIGHT:HELP_LAYOUT_HEIGHT_NO_BG;
+            _loc2_.extensibilityDirection = Directions.RIGHT;
+            _loc2_.message = LOBBY_HELP.HANGAR_HEADER_VEHICLE;
+            _loc2_.id = this._vehicleStateHelpLayoutId;
+            _loc2_.scope = this;
+            return _loc2_;
         }
     }
 }

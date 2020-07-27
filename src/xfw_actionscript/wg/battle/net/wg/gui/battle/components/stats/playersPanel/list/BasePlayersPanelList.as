@@ -5,6 +5,10 @@ package net.wg.gui.battle.components.stats.playersPanel.list
     import net.wg.gui.battle.components.stats.playersPanel.interfaces.IPlayersPanelListItem;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.interfaces.IPlayersPanelListItemHolder;
     import flash.utils.Dictionary;
+    import net.wg.utils.ICommons;
+    import net.wg.infrastructure.managers.ITooltipMgr;
+    import net.wg.utils.ILocale;
+    import net.wg.utils.IClassFactory;
     import net.wg.infrastructure.exceptions.AbstractException;
     import net.wg.data.constants.Errors;
     import flash.geom.Rectangle;
@@ -13,8 +17,8 @@ package net.wg.gui.battle.components.stats.playersPanel.list
     import net.wg.gui.battle.views.minimap.MinimapEntryController;
     import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
     import net.wg.gui.battle.components.events.PlayersPanelListEvent;
-    import flash.display.DisplayObject;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.events.PlayersPanelItemEvent;
+    import flash.display.DisplayObject;
 
     public class BasePlayersPanelList extends Sprite implements IPlayersPanelList
     {
@@ -43,8 +47,20 @@ package net.wg.gui.battle.components.stats.playersPanel.list
 
         private var _toolTipString:String = null;
 
+        private var _commons:ICommons;
+
+        private var _tooltipMgr:ITooltipMgr;
+
+        private var _locale:ILocale;
+
+        private var _classFactory:IClassFactory;
+
         public function BasePlayersPanelList()
         {
+            this._commons = App.utils.commons;
+            this._tooltipMgr = App.toolTipMgr;
+            this._locale = App.utils.locale;
+            this._classFactory = App.utils.classFactory;
             super();
             this._items = new Vector.<IPlayersPanelListItemHolder>();
             this._mapHolderByVehicleID = new Dictionary();
@@ -120,6 +136,24 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             if(_loc3_)
             {
                 _loc3_.setFrags(param2);
+            }
+        }
+
+        public function setChatCommand(param1:Number, param2:String, param3:uint) : void
+        {
+            var _loc4_:IPlayersPanelListItemHolder = this.getHolderByVehicleID(param1);
+            if(_loc4_)
+            {
+                _loc4_.setChatCommand(param2,param3);
+            }
+        }
+
+        public function triggerChatCommand(param1:Number, param2:String) : void
+        {
+            var _loc3_:IPlayersPanelListItemHolder = this.getHolderByVehicleID(param1);
+            if(_loc3_)
+            {
+                _loc3_.triggerChatCommand(param2);
             }
         }
 
@@ -211,19 +245,6 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             dispatchEvent(new PlayersPanelListEvent(PlayersPanelListEvent.ITEMS_COUNT_CHANGE,0));
         }
 
-        private function setSquadTooltipInfo(param1:Boolean) : void
-        {
-            var _loc2_:IPlayersPanelListItem = null;
-            for each(_loc2_ in this.panelListItems)
-            {
-                if(_loc2_.getDynamicSquad())
-                {
-                    _loc2_.getDynamicSquad().setCurrentPlayerAnonymized();
-                    _loc2_.getDynamicSquad().setIsCurrentPlayerInClan(param1);
-                }
-            }
-        }
-
         public function setVehicleLevelVisible(param1:Boolean) : void
         {
             var _loc2_:IPlayersPanelListItem = null;
@@ -282,6 +303,46 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             }
         }
 
+        public function resetFrags() : void
+        {
+            if(this.panelListItems == null)
+            {
+                return;
+            }
+            var _loc1_:int = this.panelListItems.length;
+            var _loc2_:uint = 0;
+            while(_loc2_ < _loc1_)
+            {
+                this.panelListItems[_loc2_].setFrags(0);
+                _loc2_++;
+            }
+        }
+
+        public function get state() : int
+        {
+            return this._state;
+        }
+
+        public function set state(param1:int) : void
+        {
+            var _loc2_:IPlayersPanelListItem = null;
+            if(this._state == param1)
+            {
+                return;
+            }
+            for each(_loc2_ in this.panelListItems)
+            {
+                _loc2_.setState(param1);
+            }
+            this._state = param1;
+            this.initializeState();
+        }
+
+        public function get isInviteReceived() : Boolean
+        {
+            return false;
+        }
+
         protected function updateVehicleData() : void
         {
         }
@@ -305,6 +366,20 @@ package net.wg.gui.battle.components.stats.playersPanel.list
         }
 
         protected function initializeState() : void
+        {
+        }
+
+        protected function get itemLinkage() : String
+        {
+            throw new AbstractException(Errors.ABSTRACT_INVOKE);
+        }
+
+        protected function get isRightAligned() : Boolean
+        {
+            throw new AbstractException(Errors.ABSTRACT_INVOKE);
+        }
+
+        protected function onPlayersListItemRightClick(param1:PlayersPanelItemEvent) : void
         {
         }
 
@@ -335,7 +410,7 @@ package net.wg.gui.battle.components.stats.playersPanel.list
 
         private function addItem(param1:DAAPIVehicleInfoVO) : void
         {
-            var _loc2_:IPlayersPanelListItem = App.utils.classFactory.getComponent(this.itemLinkage,IPlayersPanelListItem);
+            var _loc2_:IPlayersPanelListItem = this._classFactory.getComponent(this.itemLinkage,IPlayersPanelListItem);
             var _loc3_:int = this._items.length;
             this.initializeListItem(_loc2_);
             _loc2_.setVehicleLevelVisible(this._isVehicleLevelVisible);
@@ -363,17 +438,17 @@ package net.wg.gui.battle.components.stats.playersPanel.list
 
         private function makeTooltipString(param1:String, param2:Boolean) : void
         {
-            this._toolTipString = param2?App.utils.locale.makeString(TOOLTIPS.ANONYMIZER_BATTLE_TEAMLIST_CLAN,{"fakeName":param1}):App.utils.locale.makeString(TOOLTIPS.ANONYMIZER_BATTLE_TEAMLIST_NOCLAN,{"fakeName":param1});
+            this._toolTipString = param2?this._locale.makeString(TOOLTIPS.ANONYMIZER_BATTLE_TEAMLIST_CLAN,{"fakeName":param1}):this._locale.makeString(TOOLTIPS.ANONYMIZER_BATTLE_TEAMLIST_NOCLAN,{"fakeName":param1});
         }
 
         private function onHitMouseOverHandler(param1:MouseEvent) : void
         {
-            App.toolTipMgr.show(this._toolTipString);
+            this._tooltipMgr.show(this._toolTipString);
         }
 
         private function onHitMouseOutHandler(param1:MouseEvent) : void
         {
-            App.toolTipMgr.hide();
+            this._tooltipMgr.hide();
         }
 
         private function setMouseListenersEnabled(param1:Boolean) : void
@@ -396,21 +471,6 @@ package net.wg.gui.battle.components.stats.playersPanel.list
                     _loc2_.removeEventListener(PlayersPanelItemEvent.ON_ITEM_OUT,this.onPlayersListItemOnItemOutHandler);
                     _loc2_.removeEventListener(PlayersPanelItemEvent.ON_ITEM_CLICK,this.onPlayersListItemOnItemClickHandler);
                 }
-            }
-        }
-
-        public function resetFrags() : void
-        {
-            if(this.panelListItems == null)
-            {
-                return;
-            }
-            var _loc1_:int = this.panelListItems.length;
-            var _loc2_:uint = 0;
-            while(_loc2_ < _loc1_)
-            {
-                this.panelListItems[_loc2_].setFrags(0);
-                _loc2_++;
             }
         }
 
@@ -486,43 +546,17 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             return true;
         }
 
-        public function get state() : int
-        {
-            return this._state;
-        }
-
-        public function set state(param1:int) : void
+        private function setSquadTooltipInfo(param1:Boolean) : void
         {
             var _loc2_:IPlayersPanelListItem = null;
-            if(this._state == param1)
-            {
-                return;
-            }
             for each(_loc2_ in this.panelListItems)
             {
-                _loc2_.setState(param1);
+                if(_loc2_.getDynamicSquad())
+                {
+                    _loc2_.getDynamicSquad().setCurrentPlayerAnonymized();
+                    _loc2_.getDynamicSquad().setIsCurrentPlayerInClan(param1);
+                }
             }
-            this._state = param1;
-            this.initializeState();
-        }
-
-        public function get itemsHeight() : Number
-        {
-            return this._items.length * ITEM_HEIGHT;
-        }
-
-        protected function get itemLinkage() : String
-        {
-            throw new AbstractException(Errors.ABSTRACT_INVOKE);
-        }
-
-        protected function get isRightAligned() : Boolean
-        {
-            throw new AbstractException(Errors.ABSTRACT_INVOKE);
-        }
-
-        protected function onPlayersListItemRightClick(param1:PlayersPanelItemEvent) : void
-        {
         }
 
         private function onPlayersListItemOnItemOverHandler(param1:PlayersPanelItemEvent) : void
@@ -541,7 +575,7 @@ package net.wg.gui.battle.components.stats.playersPanel.list
         private function onPlayersListItemOnItemClickHandler(param1:PlayersPanelItemEvent) : void
         {
             var _loc2_:IPlayersPanelListItemHolder = this._items[param1.holderItemID];
-            if(App.utils.commons.isRightButton(param1.mEvent) && !_loc2_.isCurrentPlayer)
+            if(this._commons.isRightButton(param1.mEvent) && !_loc2_.isCurrentPlayer)
             {
                 this.onPlayersListItemRightClick(param1);
             }
@@ -549,11 +583,6 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             {
                 dispatchEvent(new PlayersPanelListEvent(PlayersPanelListEvent.ITEM_SELECTED,_loc2_.vehicleID));
             }
-        }
-
-        public function get isInviteReceived() : Boolean
-        {
-            return false;
         }
     }
 }

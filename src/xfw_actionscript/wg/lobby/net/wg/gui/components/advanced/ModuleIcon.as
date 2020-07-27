@@ -76,7 +76,6 @@ package net.wg.gui.components.advanced
 
         public function setValuesWithType(param1:String, param2:String, param3:int) : void
         {
-            this.moduleType.gotoAndStop(1);
             this.moduleType.visible = false;
             this.moduleLevel.gotoAndStop(1);
             this.moduleLevel.visible = false;
@@ -104,8 +103,7 @@ package net.wg.gui.components.advanced
 
         private function showItemInModuleType(param1:String) : void
         {
-            App.utils.asserter.assertFrameExists(param1,this.moduleType);
-            this.moduleType.gotoAndStop(param1);
+            this.moduleType.setModuleTypeIcon(param1);
             this.moduleType.visible = true;
         }
 

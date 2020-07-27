@@ -157,6 +157,10 @@ package net.wg.gui.cyberSport.controls
 
         protected function setSpeakers(param1:Boolean, param2:Boolean = false) : void
         {
+            if(!visible)
+            {
+                return;
+            }
             if(param1)
             {
                 var param2:* = false;

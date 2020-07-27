@@ -4,7 +4,7 @@ package net.wg.gui.lobby.sessionStats
     import flash.text.TextField;
     import net.wg.gui.lobby.sessionStats.components.SessionStatsInfoParamsRenderer;
     import net.wg.gui.lobby.sessionStats.data.SessionStatsEfficiencyParamVO;
-    import net.wg.gui.components.common.containers.VerticalGroupLayout;
+    import net.wg.gui.components.containers.VerticalGroupLayout;
     import net.wg.data.constants.Linkages;
     import net.wg.gui.lobby.components.events.DashLineTextItemRendererEvent;
     import flash.events.Event;

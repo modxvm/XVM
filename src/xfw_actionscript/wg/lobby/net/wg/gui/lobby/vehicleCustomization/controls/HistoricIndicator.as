@@ -5,8 +5,8 @@ package net.wg.gui.lobby.vehicleCustomization.controls
     import flash.text.TextField;
     import flash.display.MovieClip;
     import net.wg.gui.lobby.vehicleCustomization.data.HistoricIndicatorVO;
-    import flash.text.TextFieldAutoSize;
     import flash.display.Sprite;
+    import flash.text.TextFieldAutoSize;
     import scaleform.clik.constants.InvalidationType;
     import org.idmedia.as3commons.util.StringUtils;
     import flash.events.Event;
@@ -37,6 +37,7 @@ package net.wg.gui.lobby.vehicleCustomization.controls
 
         override protected function configUI() : void
         {
+            var _loc1_:Sprite = null;
             super.configUI();
             this.textField.mouseEnabled = false;
             this.nonHistoricIcon.mouseEnabled = this.nonHistoricIcon.mouseChildren = false;
@@ -44,7 +45,7 @@ package net.wg.gui.lobby.vehicleCustomization.controls
             this.nonHistoricIcon.visible = false;
             this.textField.autoSize = TextFieldAutoSize.LEFT;
             this.glow.mouseEnabled = this.glow.mouseChildren = false;
-            var _loc1_:Sprite = new Sprite();
+            _loc1_ = new Sprite();
             this.glow.hitArea = _loc1_;
             addChild(_loc1_);
         }

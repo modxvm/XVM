@@ -1,7 +1,7 @@
 diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/BattlePage.class.asasm battle.orig-0/net/wg/gui/battle/random/views/BattlePage.class.asasm
---- battle.orig-0.orig/net/wg/gui/battle/random/views/BattlePage.class.asasm	2019-08-22 22:42:04.358616300 +0300
-+++ battle.orig-0/net/wg/gui/battle/random/views/BattlePage.class.asasm	2019-08-22 22:44:08.478634600 +0300
-@@ -1932,7 +1932,7 @@
+--- battle.orig-0.orig/net/wg/gui/battle/random/views/BattlePage.class.asasm	2020-07-27 15:01:41.486586900 +0300
++++ battle.orig-0/net/wg/gui/battle/random/views/BattlePage.class.asasm	2020-07-27 15:07:59.486058900 +0300
+@@ -1767,7 +1767,7 @@
      initproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "CONSUMABLES_POPUP_OFFSET")
  
      findproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "MINIMAP_MARGIN_HEIGHT")
@@ -10,7 +10,7 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/BattlePage.class.as
      initproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "MINIMAP_MARGIN_HEIGHT")
  
      findproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "MINIMAP_MARGIN_WIDTH")
-@@ -1966,7 +1966,7 @@
+@@ -1801,7 +1801,7 @@
   trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "BATTLE_DAMAGE_LOG_X_POSITION") slotid 1 type QName(PackageNamespace(""), "int") value Integer(229) end
   trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "BATTLE_DAMAGE_LOG_Y_PADDING") slotid 2 type QName(PackageNamespace(""), "int") value Integer(3) end
   trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "CONSUMABLES_POPUP_OFFSET") slotid 3 type QName(PackageNamespace(""), "int") value Integer(60) end
@@ -20,12 +20,12 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/BattlePage.class.as
   trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "FRAG_CORELATION_BAR_WIDTH") slotid 6 type QName(PackageNamespace(""), "int") value Integer(1020) end
   trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "MESSANGER_SWAP_AREA_TOP_OFFSET") slotid 7 type QName(PackageNamespace(""), "Number") value Integer(-27) end
 diff -Naur battle.orig-0.orig/net/wg/gui/battle/views/minimap/Minimap.class.asasm battle.orig-0/net/wg/gui/battle/views/minimap/Minimap.class.asasm
---- battle.orig-0.orig/net/wg/gui/battle/views/minimap/Minimap.class.asasm	2019-08-22 22:42:05.260065200 +0300
-+++ battle.orig-0/net/wg/gui/battle/views/minimap/Minimap.class.asasm	2019-08-22 22:44:08.487288700 +0300
-@@ -210,6 +210,25 @@
-   trait slot QName(PackageNamespace(""), "entriesContainerMask") type QName(PackageNamespace("flash.display"), "Sprite") value Null() end
+--- battle.orig-0.orig/net/wg/gui/battle/views/minimap/Minimap.class.asasm	2020-07-27 15:01:42.752220400 +0300
++++ battle.orig-0/net/wg/gui/battle/views/minimap/Minimap.class.asasm	2020-07-27 15:09:06.048525600 +0300
+@@ -221,6 +221,25 @@
    trait slot QName(PackageNamespace(""), "entriesContainer") type QName(PackageNamespace("net.wg.gui.battle.views.minimap.containers"), "MinimapEntriesContainer") value Null() end
    trait slot QName(PackageNamespace(""), "background") type QName(PackageNamespace("net.wg.gui.components.controls"), "UILoaderAlt") value Null() end
+   trait slot QName(PackageNamespace(""), "minimapHint") type QName(PackageNamespace("net.wg.gui.battle.views.minimap"), "MinimapHint") value Null() end
 +  trait getter QName(PackageNamespace(""), "xfw_foregrounds")
 +   method
 +    returns TypeName(QName(PackageNamespace("__AS3__.vec"), "Vector")<QName(PackageNamespace("flash.display"), "Sprite")>)
@@ -49,8 +49,8 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/views/minimap/Minimap.class.asas
    trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.views.minimap:Minimap"), "_currForeground") type QName(PackageNamespace("flash.display"), "Sprite") value Null() end
    trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.views.minimap:Minimap"), "_currentSizeIndex") type QName(PackageNamespace(""), "int") value Integer(0) end
 diff -Naur battle.orig-0.orig/net/wg/gui/battle/views/minimap/MinimapEntryController.class.asasm battle.orig-0/net/wg/gui/battle/views/minimap/MinimapEntryController.class.asasm
---- battle.orig-0.orig/net/wg/gui/battle/views/minimap/MinimapEntryController.class.asasm	2019-08-22 22:42:05.791114700 +0300
-+++ battle.orig-0/net/wg/gui/battle/views/minimap/MinimapEntryController.class.asasm	2019-08-22 22:44:08.494730400 +0300
+--- battle.orig-0.orig/net/wg/gui/battle/views/minimap/MinimapEntryController.class.asasm	2020-07-27 15:01:43.692339200 +0300
++++ battle.orig-0/net/wg/gui/battle/views/minimap/MinimapEntryController.class.asasm	2020-07-27 15:07:59.532931400 +0300
 @@ -82,12 +82,69 @@
      end ; code
     end ; body
@@ -122,8 +122,8 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/views/minimap/MinimapEntryContro
    trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.views.minimap:MinimapEntryController#1"), "_scalableEntriesWithNonScaleContent") type TypeName(QName(PackageNamespace("__AS3__.vec"), "Vector")<QName(PackageNamespace("net.wg.gui.battle.views.minimap.components.entries.interfaces"), "IMinimapEntryWithNonScaleContent")>) end
    trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.views.minimap:MinimapEntryController#1"), "_sizeIndex") type QName(PackageNamespace(""), "int") value Integer(0) end
 diff -Naur battle.orig-0.orig/net/wg/gui/battle/views/minimap/components/entries/vehicle/VehicleMinimapEntry.class.asasm battle.orig-0/net/wg/gui/battle/views/minimap/components/entries/vehicle/VehicleMinimapEntry.class.asasm
---- battle.orig-0.orig/net/wg/gui/battle/views/minimap/components/entries/vehicle/VehicleMinimapEntry.class.asasm	2019-08-22 22:42:05.761235800 +0300
-+++ battle.orig-0/net/wg/gui/battle/views/minimap/components/entries/vehicle/VehicleMinimapEntry.class.asasm	2019-08-22 22:44:08.503733300 +0300
+--- battle.orig-0.orig/net/wg/gui/battle/views/minimap/components/entries/vehicle/VehicleMinimapEntry.class.asasm	2020-07-27 15:01:43.607711100 +0300
++++ battle.orig-0/net/wg/gui/battle/views/minimap/components/entries/vehicle/VehicleMinimapEntry.class.asasm	2020-07-27 15:07:59.548555700 +0300
 @@ -200,6 +200,25 @@
    trait slot QName(PackageNamespace(""), "squadmanGoldAnimation") type QName(PackageNamespace("net.wg.gui.battle.views.minimap.components.entries.vehicle"), "VehicleAnimationMinimapEntry") value Null() end
    trait slot QName(PackageNamespace(""), "teamKillerBlueAnimation") type QName(PackageNamespace("net.wg.gui.battle.views.minimap.components.entries.vehicle"), "VehicleAnimationMinimapEntry") value Null() end

@@ -49,8 +49,6 @@ package net.wg.data.constants
 
         public static const BARRACKS_BUY_SOUND_TYPE:String = "barracksItemRendererBuy";
 
-        public static const SHELL_ITEM_RENDERER:String = "shellItemRenderer";
-
         public static const ARTEFACT_RENDERER:String = "artefactRenderer";
 
         public static const TANK_SHELL_SLOT:String = "tankShell";
@@ -82,6 +80,8 @@ package net.wg.data.constants
         public static const CUSTOMIZATION_DEFAULT:String = "customizationDefault";
 
         public static const CUSTOMIZATION_SELECT:String = "cust_select";
+
+        public static const CUSTOMIZATION_REMOVE:String = "customizationRemove";
 
         public static const CUSTOMIZATION_BIG_CLOSE:String = "radial_big_close";
 

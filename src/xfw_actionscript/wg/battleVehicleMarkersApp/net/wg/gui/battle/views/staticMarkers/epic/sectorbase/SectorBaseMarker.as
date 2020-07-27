@@ -1,50 +1,56 @@
 package net.wg.gui.battle.views.staticMarkers.epic.sectorbase
 {
-    import flash.display.Sprite;
-    import net.wg.infrastructure.interfaces.entity.IDisposable;
-    import flash.display.MovieClip;
-    import flash.text.TextField;
+    import net.wg.gui.battle.components.BattleUIComponent;
+    import net.wg.gui.battle.views.vehicleMarkers.VehicleMarkersManager;
+    import net.wg.gui.battle.views.vehicleMarkers.events.VehicleMarkersManagerEvent;
+    import net.wg.data.constants.InvalidationType;
+    import net.wg.gui.battle.views.actionMarkers.ActionMarkerStates;
 
-    public class SectorBaseMarker extends Sprite implements IDisposable
+    public class SectorBaseMarker extends BattleUIComponent
     {
-
-        private static const SELECTED_STATE:String = "selected";
-
-        private static const UNSELECTED_STATE:String = "unselected";
-
-        private static const ACTIVE_ICON_SCALE:Number = 0.75;
-
-        private static const INACTIVE_ICON_SCALE:Number = 0.7;
 
         private static const INACTIVE_ALPHA_VALUE:Number = 0.75;
 
-        private static const ACTIVE_Y_OFFSET:Number = 50;
-
-        public const markerType:String = "base";
+        public var actionMarker:SectorBaseActions = null;
 
         public var marker:SectorBaseIcon = null;
 
-        public var arrow:MovieClip = null;
-
-        public var txtLabel:TextField = null;
-
         private var _alphaVal:Number = 1;
+
+        private var _activeMarkerState:int = -1;
+
+        private var _activateHover:Boolean = false;
+
+        private var _vmManager:VehicleMarkersManager = null;
+
+        private var _isEpic:Boolean = false;
 
         public function SectorBaseMarker()
         {
             super();
             this.marker.visible = true;
             this.marker.targetHighlight.visible = false;
-            this.arrow.visible = false;
-            this.txtLabel.visible = true;
+            this._vmManager = VehicleMarkersManager.getInstance();
+            this._vmManager.addEventListener(VehicleMarkersManagerEvent.UPDATE_COLORS,this.onUpdateColorsHandler);
         }
 
-        public final function dispose() : void
+        private function onUpdateColorsHandler(param1:VehicleMarkersManagerEvent) : void
         {
+            this.marker.setBackgroundColor();
+            this.marker.setHoverColor();
+            this.actionMarker.setBaseColor();
+            invalidateData();
+        }
+
+        override protected function onDispose() : void
+        {
+            this._vmManager.removeEventListener(VehicleMarkersManagerEvent.UPDATE_COLORS,this.onUpdateColorsHandler);
             this.marker.dispose();
+            this.actionMarker.dispose();
             this.marker = null;
-            this.arrow = null;
-            this.txtLabel = null;
+            this.actionMarker = null;
+            this._vmManager = null;
+            super.onDispose();
         }
 
         public function notifyVehicleInCircle(param1:Boolean) : void
@@ -64,26 +70,37 @@ package net.wg.gui.battle.views.staticMarkers.epic.sectorbase
             this.marker.setCapturePoints(param1);
         }
 
+        public function setMarkerReplied(param1:Boolean) : void
+        {
+            this.actionMarker.setMarkerReplied(param1);
+        }
+
+        public function triggerClickAnimation() : void
+        {
+            this.actionMarker.triggerClickAnimation();
+        }
+
+        public function setReplyCount(param1:int) : void
+        {
+            this.actionMarker.setReplyCount(param1);
+        }
+
         public function setActive(param1:Boolean) : void
         {
-            if(param1)
+            if(this._isEpic)
             {
-                this.arrow.gotoAndStop(SELECTED_STATE);
-                this.marker.setInternalIconScale(ACTIVE_ICON_SCALE);
-                this.marker.targetHighlight.visible = true;
-                this._alphaVal = 1;
-                this.alpha = this._alphaVal;
-                this.txtLabel.y = ACTIVE_Y_OFFSET;
-                this.txtLabel.visible = true;
-            }
-            else
-            {
-                this.arrow.gotoAndStop(UNSELECTED_STATE);
-                this.marker.setInternalIconScale(INACTIVE_ICON_SCALE);
-                this.marker.targetHighlight.visible = false;
-                this._alphaVal = INACTIVE_ALPHA_VALUE;
-                this.alpha = this._alphaVal;
-                this.txtLabel.visible = false;
+                if(param1)
+                {
+                    this.marker.targetHighlight.visible = true;
+                    this._alphaVal = 1;
+                    this.alpha = this._alphaVal;
+                }
+                else
+                {
+                    this.marker.targetHighlight.visible = false;
+                    this._alphaVal = INACTIVE_ALPHA_VALUE;
+                    this.alpha = this._alphaVal;
+                }
             }
         }
 
@@ -92,9 +109,44 @@ package net.wg.gui.battle.views.staticMarkers.epic.sectorbase
             this.marker.setBaseId(param1);
         }
 
-        public function setOwningTeam(param1:Boolean) : void
+        public function setIsEpicMarker(param1:Boolean) : void
+        {
+            this._isEpic = param1;
+            if(this._isEpic)
+            {
+                this.actionMarker.deactivateAttackAndDefendStates();
+                this.marker.activateEpicVisibility();
+            }
+        }
+
+        public function setOwningTeam(param1:String) : void
         {
             this.marker.setOwningTeam(param1);
+            this.actionMarker.initializeBase(param1);
+        }
+
+        public function setActiveState(param1:int) : void
+        {
+            this._activeMarkerState = param1;
+            invalidateData();
+        }
+
+        public function activateHover(param1:Boolean) : void
+        {
+            this._activateHover = param1;
+            invalidateData();
+        }
+
+        override protected function draw() : void
+        {
+            super.draw();
+            if(isInvalid(InvalidationType.DATA))
+            {
+                this.marker.visible = this._activeMarkerState == ActionMarkerStates.NEUTRAL || this._isEpic;
+                this.marker.setActiveState(this._activeMarkerState);
+                this.actionMarker.setActiveState(this._activeMarkerState,this.marker.getOwningTeam());
+                this.actionMarker.activateHover(this._activateHover,this.marker.getOwningTeam());
+            }
         }
     }
 }

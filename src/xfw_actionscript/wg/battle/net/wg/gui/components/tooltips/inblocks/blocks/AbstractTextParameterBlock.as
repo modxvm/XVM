@@ -14,9 +14,21 @@ package net.wg.gui.components.tooltips.inblocks.blocks
 
         private var _blockWidth:int = 0;
 
+        private var _defaultValueTFWidth:Number;
+
         public function AbstractTextParameterBlock()
         {
             super();
+            this._defaultValueTFWidth = this.valueTF.width;
+        }
+
+        override public function cleanUp() : void
+        {
+            this.clearData();
+            this.valueTF.text = null;
+            this.valueTF.width = this._defaultValueTFWidth;
+            this._blockWidth = 0;
+            super.cleanUp();
         }
 
         override public function setBlockData(param1:Object) : void

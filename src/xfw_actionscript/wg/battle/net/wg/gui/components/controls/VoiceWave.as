@@ -12,6 +12,8 @@ package net.wg.gui.components.controls
 
         private static const LABEL_HIDE:String = "hide";
 
+        private static const LABEL_IDLE:String = "idle";
+
         public var crossX:int;
 
         public var crossY:int;
@@ -25,6 +27,8 @@ package net.wg.gui.components.controls
         private var _forcedStop:Boolean;
 
         private var _speakVisible:Boolean;
+
+        private var _state:String = "idle";
 
         public function VoiceWave()
         {
@@ -40,8 +44,9 @@ package net.wg.gui.components.controls
 
         override protected function configUI() : void
         {
+            var _loc1_:MovieClip = null;
             super.configUI();
-            var _loc1_:MovieClip = this.mutedClip.cross;
+            _loc1_ = this.mutedClip.cross;
             _loc1_.x = this.crossX;
             _loc1_.y = this.crossY;
         }
@@ -89,15 +94,21 @@ package net.wg.gui.components.controls
             this._speak = param1;
             if(param2)
             {
-                gotoAndStop(1);
+                gotoAndStop(LABEL_IDLE);
+                this._state = LABEL_IDLE;
             }
             else if(param1)
             {
                 gotoAndPlay(LABEL_SHOW);
+                this._state = LABEL_SHOW;
             }
             else
             {
-                gotoAndPlay(LABEL_HIDE);
+                if(this._state == LABEL_SHOW)
+                {
+                    gotoAndPlay(LABEL_HIDE);
+                }
+                this._state = LABEL_HIDE;
             }
             invalidate(INVALIDATE_SPEAKING);
         }

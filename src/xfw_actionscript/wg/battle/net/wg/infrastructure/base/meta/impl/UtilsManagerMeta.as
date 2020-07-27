@@ -16,6 +16,10 @@ package net.wg.infrastructure.base.meta.impl
 
         public var changeStringCasing:Function;
 
+        public var mapScaleformToVirtualKey:Function;
+
+        public var getCharFromVirtualKey:Function;
+
         public var getAbsoluteUrl:Function;
 
         public var getHtmlIconText:Function;
@@ -57,6 +61,18 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.changeStringCasing,"changeStringCasing" + Errors.CANT_NULL);
             return this.changeStringCasing(param1,param2,param3);
+        }
+
+        public function mapScaleformToVirtualKeyS(param1:int) : int
+        {
+            App.utils.asserter.assertNotNull(this.mapScaleformToVirtualKey,"mapScaleformToVirtualKey" + Errors.CANT_NULL);
+            return this.mapScaleformToVirtualKey(param1);
+        }
+
+        public function getCharFromVirtualKeyS(param1:int) : int
+        {
+            App.utils.asserter.assertNotNull(this.getCharFromVirtualKey,"getCharFromVirtualKey" + Errors.CANT_NULL);
+            return this.getCharFromVirtualKey(param1);
         }
 
         public function getAbsoluteUrlS(param1:String) : String

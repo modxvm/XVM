@@ -18,8 +18,6 @@ package net.wg.gui.lobby.vehicleCompare
 
         private static const SEPARATOR_OFFSET_SD:int = 280;
 
-        private static const TITLE_OFFSET:int = 46;
-
         public var tree:VehicleModulesTree = null;
 
         public function VehicleModulesView()
@@ -57,23 +55,19 @@ package net.wg.gui.lobby.vehicleCompare
 
         override protected function updateLayout() : void
         {
-            var _loc1_:* = 0;
             super.updateLayout();
             this.tree.x = width - this.tree.width >> 1;
             this.tree.y = height >> 1;
-            _loc1_ = App.appHeight >= HEIGHT_SD?SEPARATOR_OFFSET_HD:SEPARATOR_OFFSET_SD;
+            var _loc1_:int = App.appHeight >= HEIGHT_SD?SEPARATOR_OFFSET_HD:SEPARATOR_OFFSET_SD;
             bottomPanel.x = width - bottomPanel.width >> 1;
             bottomPanel.y = (height >> 1) + _loc1_;
             titleTf.visible = App.appHeight >= HEIGHT_SD;
-            if(App.appHeight >= HEIGHT_SD)
-            {
-                titleTf.y = TITLE_OFFSET;
-            }
         }
 
         public function as_setItem(param1:String, param2:Object) : void
         {
             this.tree.invalidateNodesData(param1,param2);
+            App.utils.focusHandler.setFocus(this);
         }
 
         private function onTreeModuleItemClickedHandler(param1:VehicleModuleItemEvent) : void

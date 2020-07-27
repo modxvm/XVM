@@ -2,11 +2,17 @@ package net.wg.gui.lobby.storage.categories.cards
 {
     import net.wg.data.daapi.base.DAAPIDataClass;
     import net.wg.gui.components.controls.VO.ItemPriceVO;
+    import scaleform.clik.data.DataProvider;
+    import net.wg.data.constants.Errors;
 
     public class BaseCardVO extends DAAPIDataClass
     {
 
         private static const PRICE:String = "price";
+
+        private static const SPECIALIZATIONS_ARRAY:String = "specializations";
+
+        private static const EXTRA_PARAMS:String = "extraParams";
 
         public var id:Number;
 
@@ -46,6 +52,10 @@ package net.wg.gui.lobby.storage.categories.cards
 
         public var upgradeButtonTooltip:String = "";
 
+        public var specializations:DataProvider = null;
+
+        public var extraParams:DataProvider = null;
+
         public function BaseCardVO(param1:Object)
         {
             super(param1);
@@ -58,9 +68,40 @@ package net.wg.gui.lobby.storage.categories.cards
 
         override protected function onDataWrite(param1:String, param2:Object) : Boolean
         {
+            var _loc3_:Array = null;
+            var _loc4_:* = 0;
+            var _loc5_:* = 0;
             if(param1 == PRICE && param2 != null)
             {
                 this.price = new ItemPriceVO(param2);
+                return false;
+            }
+            if(param1 == SPECIALIZATIONS_ARRAY)
+            {
+                this.specializations = new DataProvider();
+                _loc3_ = param2 as Array;
+                App.utils.asserter.assertNotNull(_loc3_,Errors.INVALID_TYPE + Array);
+                _loc4_ = _loc3_.length;
+                _loc5_ = 0;
+                while(_loc5_ < _loc4_)
+                {
+                    this.specializations.push(_loc3_[_loc5_]);
+                    _loc5_++;
+                }
+                return false;
+            }
+            if(param1 == EXTRA_PARAMS)
+            {
+                this.extraParams = new DataProvider();
+                _loc3_ = param2 as Array;
+                App.utils.asserter.assertNotNull(_loc3_,Errors.INVALID_TYPE + Array);
+                _loc4_ = _loc3_.length;
+                _loc5_ = 0;
+                while(_loc5_ < _loc4_)
+                {
+                    this.extraParams.push(_loc3_[_loc5_]);
+                    _loc5_++;
+                }
                 return false;
             }
             return super.onDataWrite(param1,param2);

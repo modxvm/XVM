@@ -81,6 +81,8 @@ package net.wg.gui.components.hintPanel
 
         private var _height:int = 0;
 
+        private var _isShow:Boolean = false;
+
         public function HintPanel()
         {
             super();
@@ -170,7 +172,7 @@ package net.wg.gui.components.hintPanel
 
         public function hide() : void
         {
-            this.visible = false;
+            visible = false;
         }
 
         public function show(param1:String, param2:String, param3:String) : void
@@ -209,7 +211,7 @@ package net.wg.gui.components.hintPanel
 
         private function onFadeOutComplete() : void
         {
-            super.visible = false;
+            onHideCompleteS();
         }
 
         private function playSnd(param1:String) : void
@@ -217,13 +219,13 @@ package net.wg.gui.components.hintPanel
             onPlaySoundS(param1);
         }
 
-        override public function set visible(param1:Boolean) : void
+        public function as_toggle(param1:Boolean) : void
         {
-            if(super.visible != param1)
+            if(this._isShow != param1)
             {
+                this._isShow = param1;
                 if(param1)
                 {
-                    super.visible = param1;
                     this._fadeOutBgTween.paused = true;
                     this.bg.y = BG_INIT_Y;
                     this.bg.scaleY = BG_INIT_SCALE;

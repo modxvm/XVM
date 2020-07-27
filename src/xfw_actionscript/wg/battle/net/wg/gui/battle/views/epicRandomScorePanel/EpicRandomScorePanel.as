@@ -235,6 +235,10 @@ package net.wg.gui.battle.views.epicRandomScorePanel
         {
         }
 
+        public function updateTriggeredChatCommands(param1:IDAAPIDataClass) : void
+        {
+        }
+
         private function updateFrags(param1:int, param2:int) : void
         {
             this._allyTeamFragsStr = param1.toString();

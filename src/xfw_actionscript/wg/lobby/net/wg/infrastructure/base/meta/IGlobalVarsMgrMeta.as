@@ -27,8 +27,6 @@ package net.wg.infrastructure.base.meta
 
         function isFortificationAvailableS() : Boolean;
 
-        function isShowTickerS() : Boolean;
-
         function isRentalsEnabledS() : Boolean;
 
         function isPersonalMissionsEnabledS() : Boolean;

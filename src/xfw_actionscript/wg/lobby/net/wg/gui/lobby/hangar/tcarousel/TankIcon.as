@@ -1,5 +1,6 @@
 package net.wg.gui.lobby.hangar.tcarousel
 {
+    import flash.geom.Rectangle;
     import flash.text.TextField;
     import net.wg.gui.components.carousels.data.VehicleCarouselVO;
     import org.idmedia.as3commons.util.StringUtils;
@@ -10,6 +11,8 @@ package net.wg.gui.lobby.hangar.tcarousel
     {
 
         private static const INFO_IMG_OFFSET_V:int = 3;
+
+        private static const IMG_ICON_BOUNDS:Rectangle = new Rectangle(1,1,160,100);
 
         public var txtRentInfo:TextField = null;
 
@@ -41,7 +44,6 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.txtRentInfo.htmlText = param1.rentLeft;
             imgIcon.source = param1.icon;
             imgIcon.sourceAlt = param1.iconAlt;
-            updateSpecialBg(param1.specialBgSrc,param1.isSpecialBgOverFlag);
         }
 
         override protected function setVisibleVehicleInfo(param1:Boolean) : void
@@ -92,6 +94,11 @@ package net.wg.gui.lobby.hangar.tcarousel
                 infoImg.x = txtInfo.x - infoImgOffset;
                 infoImg.y = txtInfo.y - INFO_IMG_OFFSET_V;
             }
+        }
+
+        override protected function get maxIconBounds() : Rectangle
+        {
+            return IMG_ICON_BOUNDS;
         }
     }
 }

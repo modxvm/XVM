@@ -7,7 +7,7 @@ package net.wg.infrastructure.managers
     public interface IContextMenuManager extends IContextMenuManagerMeta, IDisposable
     {
 
-        function show(param1:String, param2:DisplayObject, param3:Object = null) : void;
+        function show(param1:String, param2:DisplayObject = null, param3:Object = null) : void;
 
         function hide() : void;
 

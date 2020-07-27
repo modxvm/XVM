@@ -15,7 +15,7 @@ package net.wg.gui.battle.views.radialMenu.components
             super();
         }
 
-        public function dispose() : void
+        public final function dispose() : void
         {
             this.content.dispose();
             this.content = null;

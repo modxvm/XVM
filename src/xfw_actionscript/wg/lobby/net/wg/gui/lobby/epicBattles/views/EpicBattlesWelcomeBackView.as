@@ -118,7 +118,7 @@ package net.wg.gui.lobby.epicBattles.views
             this.backBtn.addEventListener(ButtonEvent.CLICK,this.onBackBtnClickHandler);
             closeBtn.label = MENU.VIEWHEADER_CLOSEBTN_LABEL;
             this.changesLink.label = Values.EMPTY_STR;
-            this.continueBtn.label = Values.EMPTY_STR;
+            this.continueBtn.label = MENU.VIEWHEADER_BACKBTN_LABEL;
             this.backBtn.label = MENU.VIEWHEADER_BACKBTN_LABEL;
         }
 

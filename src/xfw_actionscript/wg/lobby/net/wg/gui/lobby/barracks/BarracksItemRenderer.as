@@ -218,6 +218,7 @@ package net.wg.gui.lobby.barracks
             removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
             removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
             this.btnDismiss.removeEventListener(ButtonEvent.CLICK,this.onBtnDismissButtonEventClickHandler);
+            this.btnDismiss.removeEventListener(MouseEvent.MOUSE_DOWN,this.onBtnDismissMouseDownHandler);
             this.btnDismiss.removeEventListener(MouseEvent.ROLL_OVER,this.onBtnDismissRollOverHandler,false);
             this.btnDismiss.removeEventListener(MouseEvent.ROLL_OUT,this.onBtnDismissRollOutHandler,false);
             super.onBeforeDispose();
@@ -283,6 +284,7 @@ package net.wg.gui.lobby.barracks
             tabChildren = false;
             this.btnDismiss.focusTarget = this;
             this.btnDismiss.addEventListener(ButtonEvent.CLICK,this.onBtnDismissButtonEventClickHandler);
+            this.btnDismiss.addEventListener(MouseEvent.MOUSE_DOWN,this.onBtnDismissMouseDownHandler);
             this.icon.mouseEnabled = this.iconRole.mouseEnabled = this.iconRank.mouseEnabled = false;
             this.icon.mouseChildren = this.iconRole.mouseChildren = this.iconRank.mouseChildren = false;
             addEventListener(ButtonEvent.CLICK,this.onButtonEventClickHandler,false,0,true);
@@ -557,6 +559,11 @@ package net.wg.gui.lobby.barracks
         {
             dispatchEvent(new CrewEvent(CrewEvent.ACT_TANKMAN,data));
             this._toolTipMgr.hide();
+        }
+
+        private function onBtnDismissMouseDownHandler(param1:MouseEvent) : void
+        {
+            param1.stopImmediatePropagation();
         }
 
         private function onButtonEventClickHandler(param1:ButtonEvent) : void

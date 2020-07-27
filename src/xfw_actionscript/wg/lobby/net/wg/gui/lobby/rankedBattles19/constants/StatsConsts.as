@@ -3,6 +3,10 @@ package net.wg.gui.lobby.rankedBattles19.constants
     public class StatsConsts extends Object
     {
 
+        public static const ICON_SIZE_120:int = 120;
+
+        public static const ICON_SIZE_96:int = 96;
+
         public static const ICON_SIZE_84:int = 84;
 
         public static const ICON_SIZE_70:int = 70;

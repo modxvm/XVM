@@ -9,6 +9,10 @@ package net.wg.gui.battle.views.epicMissionsPanel.components
     public class EpicMissionsAnimatedMarker extends BattleUIComponent
     {
 
+        private static const ALLY:String = "ally";
+
+        private static const ENEMY:String = "enemy";
+
         public var hqMarker:HeadquarterIcon = null;
 
         public var waypointMarker:SectorWaypointIcon = null;
@@ -44,7 +48,14 @@ package net.wg.gui.battle.views.epicMissionsPanel.components
             if(param1 == EPIC_CONSTS.PRIMARY_BASE_MISSION)
             {
                 this.baseMarker.visible = true;
-                this.baseMarker.setOwningTeam(!param2);
+                if(!param2)
+                {
+                    this.baseMarker.setOwningTeam(ALLY);
+                }
+                else
+                {
+                    this.baseMarker.setOwningTeam(ENEMY);
+                }
                 if(param1)
                 {
                     this.baseMarker.setBaseId(param3);

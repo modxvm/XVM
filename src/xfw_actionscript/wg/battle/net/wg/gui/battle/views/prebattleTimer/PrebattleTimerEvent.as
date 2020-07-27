@@ -9,6 +9,8 @@ package net.wg.gui.battle.views.prebattleTimer
 
         public static const RESET_ANIM_QP:String = "onResetShowAnimQP";
 
+        public static const START_HIDING:String = "onStartHiding";
+
         public var useAnim:Boolean = false;
 
         public function PrebattleTimerEvent(param1:String, param2:Boolean, param3:Boolean = false, param4:Boolean = false)

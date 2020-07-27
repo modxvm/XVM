@@ -4,6 +4,7 @@ package net.wg.gui.lobby.linkedSet
     import net.wg.infrastructure.base.meta.ILinkedSetHintsViewMeta;
     import net.wg.infrastructure.interfaces.IPopOverCaller;
     import net.wg.gui.lobby.linkedSet.components.AnimatedMovieClipContainer;
+    import net.wg.gui.lobby.linkedSet.components.AnimatedLoaderContainer;
     import net.wg.gui.components.controls.IconTextBigButton;
     import net.wg.gui.lobby.linkedSet.data.LinkedSetHintsVO;
     import scaleform.clik.events.ButtonEvent;
@@ -32,7 +33,7 @@ package net.wg.gui.lobby.linkedSet
 
         public var descriptionContainer:AnimatedMovieClipContainer = null;
 
-        public var iconContainer:AnimatedMovieClipContainer = null;
+        public var iconContainer:AnimatedLoaderContainer = null;
 
         public var lightContainer:AnimatedMovieClipContainer = null;
 
@@ -141,7 +142,7 @@ package net.wg.gui.lobby.linkedSet
                 }
                 this.titleContainer.text = this._data.title;
                 this.descriptionContainer.text = this._data.description;
-                this.iconContainer.frame = this._data.icon;
+                this.iconContainer.source = this._data.icon;
                 this.lightContainer.frame = this._data.back;
                 this.effectContainer.frame = this._data.back;
                 this.backContainer.frame = this._data.back;

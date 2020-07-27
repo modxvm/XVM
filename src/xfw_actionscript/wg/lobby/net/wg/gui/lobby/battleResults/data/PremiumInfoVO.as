@@ -17,6 +17,10 @@ package net.wg.gui.lobby.battleResults.data
 
         public var isUpgradeToPremiumPlus:Boolean = false;
 
+        public var visibleDetailsBtn:Boolean = false;
+
+        public var inBattleQueue:Boolean = false;
+
         public function PremiumInfoVO(param1:Object)
         {
             super(param1);

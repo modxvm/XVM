@@ -233,6 +233,7 @@ package net.wg.gui.login.impl.views
                 this.rememberPwdCheckbox.selected = this._dataVo.memberMe;
                 this.rememberPwdCheckbox.visible = this._dataVo.memberMeVisible;
                 this.recoveryLink.visible = this._dataVo.showRecoveryLink;
+                this.registerLink.visible = this._dataVo.showRegisterLink;
                 this.updateSubmitEnabled();
                 this.updatePosition();
             }

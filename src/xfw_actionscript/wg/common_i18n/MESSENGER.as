@@ -261,6 +261,8 @@ package
 
         public static const DIALOGS_SQUAD_MESSAGE_INVALIDVEHICLELEVEL:String = "#messenger:dialogs/squad/message/invalidVehicleLevel";
 
+        public static const DIALOGS_SQUAD_MESSAGE_INVALIDVEHICLE:String = "#messenger:dialogs/squad/message/invalidVehicle";
+
         public static const DIALOGS_SQUAD_MESSAGE_SPGFORBIDDEN:String = "#messenger:dialogs/squad/message/spgForbidden";
 
         public static const DIALOGS_SQUAD_MESSAGE_SPGFULL:String = "#messenger:dialogs/squad/message/spgFull";
@@ -303,6 +305,8 @@ package
 
         public static const DIALOGS_SIMPLESQUAD_EPICBATTLE_VEHICLERESTRICTION:String = "#messenger:dialogs/simpleSquad/epicBattle/VehicleRestriction";
 
+        public static const DIALOGS_SIMPLESQUAD_BATTLEROYALE_VEHICLERESTRICTION:String = "#messenger:dialogs/simpleSquad/battleRoyale/VehicleRestriction";
+
         public static const DIALOGS_EVENTSQUAD_VEHICLE:String = "#messenger:dialogs/eventSquad/vehicle";
 
         public static const DIALOGS_SQUADCHANNEL_BATTLETYPE:String = "#messenger:dialogs/squadChannel/battleType";
@@ -332,6 +336,8 @@ package
         public static const DIALOGS_SQUADCHANNEL_HEADERMSG_SQUADFORMATION:String = "#messenger:dialogs/squadChannel/headerMsg/squadFormation";
 
         public static const DIALOGS_SQUADCHANNEL_HEADERMSG_SQUADFORMATIONRESTRICTION:String = "#messenger:dialogs/squadChannel/headerMsg/squadFormationRestriction";
+
+        public static const DIALOGS_SQUADCHANNEL_HEADERMSG_BATTLEROYALEHINT:String = "#messenger:dialogs/squadChannel/headerMsg/battleRoyaleHint";
 
         public static const DIALOGS_SQUADCHANNEL_HEADERMSG_EVENTFORMATIONRESTRICTION:String = "#messenger:dialogs/squadChannel/headerMsg/eventFormationRestriction";
 
@@ -1116,10 +1122,6 @@ package
         public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_RANKEDBATTLESAVAILABLE:String = "#messenger:serviceChannelMessages/sysMsg/titles/rankedBattlesAvailable";
 
         public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_RANKEDBATTLESNOTSET:String = "#messenger:serviceChannelMessages/sysMsg/titles/rankedBattlesNotSet";
-
-        public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_BOBBATTLESAVAILABLE:String = "#messenger:serviceChannelMessages/sysMsg/titles/bobBattlesAvailable";
-
-        public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_BOBBATTLESPRIMETIME:String = "#messenger:serviceChannelMessages/sysMsg/titles/bobBattlesPrimeTime";
 
         public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_PAYMENTMETHODLINK:String = "#messenger:serviceChannelMessages/sysMsg/titles/paymentMethodLink";
 
@@ -1917,11 +1919,25 @@ package
 
         public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_UPGRADE:String = "#messenger:serviceChannelMessages/sysMsg/titles/upgrade";
 
-        public static const SERVICECHANNELMESSAGES_SPGEVENT_TITLES_AVAILABLE:String = "#messenger:serviceChannelMessages/spgEvent/titles/available";
+        public static const SERVER_ERRORS_COMMANDINTEAMCOOLDOWN_MESSAGE:String = "#messenger:server/errors/commandInTeamCooldown/message";
 
-        public static const SERVICECHANNELMESSAGES_SPGEVENT_TITLES_NOTSET:String = "#messenger:serviceChannelMessages/spgEvent/titles/notSet";
+        public static const CLIENT_ERRORS_COMMANDINCOOLDOWN_SUSPENDEDTEXT:String = "#messenger:client/errors/commandInCooldown/suspendedText";
 
-        public static const SERVICECHANNELMESSAGES_SPGEVENT_TITLES_PRIMETIME:String = "#messenger:serviceChannelMessages/spgEvent/titles/primeTime";
+        public static const SERVICECHANNELMESSAGES_BRBATTLERESULTS_VICTORY:String = "#messenger:serviceChannelMessages/BRbattleResults/victory";
+
+        public static const SERVICECHANNELMESSAGES_BRBATTLERESULTS_ENDED:String = "#messenger:serviceChannelMessages/BRbattleResults/ended";
+
+        public static const SERVICECHANNELMESSAGES_BRBATTLERESULTS_POINTSEARNED:String = "#messenger:serviceChannelMessages/BRbattleResults/pointsEarned";
+
+        public static const SERVICECHANNELMESSAGES_BRBATTLERESULTS_LEVELEARNED:String = "#messenger:serviceChannelMessages/BRbattleResults/levelEarned";
+
+        public static const SERVICECHANNELMESSAGES_BRVEHICLESINVOICE_BUTTON:String = "#messenger:serviceChannelMessages/BRVehiclesInvoice/button";
+
+        public static const SERVICECHANNELMESSAGES_BRVEHICLESINVOICE_DESCR:String = "#messenger:serviceChannelMessages/BRVehiclesInvoice/descr";
+
+        public static const SERVICECHANNELMESSAGES_DEDICATIONREWARD_HEADER:String = "#messenger:serviceChannelMessages/dedicationReward/header";
+
+        public static const SERVICECHANNELMESSAGES_DEDICATIONREWARD_TEXT:String = "#messenger:serviceChannelMessages/dedicationReward/text";
 
         public static const DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_ENUM:Array = [DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_OFFLINE,DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_NOTREADY,DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_READY,DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_INBATTLE,DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_AFK];
 

@@ -6,7 +6,7 @@ package net.wg.gui.lobby.techtree
     import net.wg.gui.components.advanced.interfaces.IBackButton;
     import flash.display.Sprite;
     import net.wg.gui.lobby.techtree.controls.ResearchRootTitle;
-    import net.wg.gui.lobby.techtree.controls.PremiumLayout;
+    import net.wg.gui.lobby.techtree.controls.BenefitsComponent;
     import net.wg.gui.lobby.techtree.data.ResearchPageVO;
     import net.wg.gui.lobby.techtree.data.ResearchRootVO;
     import flash.ui.Keyboard;
@@ -38,9 +38,13 @@ package net.wg.gui.lobby.techtree
 
         private static const RESEARCH_ITEMS_CENTER_OFFSET_X:int = -252;
 
-        private static const PREMIUM_LAYOUT_SOURCE:String = "PremiumLayoutSkinned";
+        private static const PREMIUM_LAYOUT_OFFSET_X:int = 150;
 
-        private static const PREMIUM_LAYOUT_OFFSET_X:int = 170;
+        private static const PREMIUM_LAYOUT_OFFSET_Y:int = 60;
+
+        private static const PREMIUM_LAYOUT_OFFSET_SMALL_Y:int = 160;
+
+        private static const PREMIUM_VIEW_COMPACT_WIDTH:int = 1600;
 
         private static const PREMIUM_VIEW_NOMINAL_WIDTH:int = 1920;
 
@@ -60,7 +64,7 @@ package net.wg.gui.lobby.techtree
 
         public var footerBg:Sprite = null;
 
-        private var _premiumLayout:PremiumLayout = null;
+        private var _benefitsComponent:BenefitsComponent = null;
 
         public function ResearchPage()
         {
@@ -80,11 +84,11 @@ package net.wg.gui.lobby.techtree
         {
             this.backButton.label = param1.backBtnLabel;
             this.backButton.descrLabel = param1.backBtnDescrLabel;
-            if(param1.isPremiumLayout && this._premiumLayout == null)
+            if(param1.isPremiumLayout && this._benefitsComponent == null)
             {
-                this._premiumLayout = App.utils.classFactory.getComponent(PREMIUM_LAYOUT_SOURCE,PremiumLayout);
-                this.addChild(this._premiumLayout);
-                this._premiumLayout.setData(param1);
+                this._benefitsComponent = new BenefitsComponent();
+                this.addChild(this._benefitsComponent);
+                this._benefitsComponent.setData(param1.benefitsData);
                 invalidateSize();
             }
         }
@@ -116,11 +120,11 @@ package net.wg.gui.lobby.techtree
 
         override protected function onDispose() : void
         {
-            if(this._premiumLayout != null)
+            if(this._benefitsComponent != null)
             {
-                this.removeChild(this._premiumLayout);
-                this._premiumLayout.dispose();
-                this._premiumLayout = null;
+                this.removeChild(this._benefitsComponent);
+                this._benefitsComponent.dispose();
+                this._benefitsComponent = null;
             }
             this.title.dispose();
             this.title = null;
@@ -219,6 +223,7 @@ package net.wg.gui.lobby.techtree
 
         protected function updateLayouts() : void
         {
+            var _loc4_:* = 0;
             var _loc1_:* = width >> 1;
             var _loc2_:* = height >> 1;
             this.researchItems.y = _loc2_;
@@ -227,10 +232,12 @@ package net.wg.gui.lobby.techtree
             var _loc3_:uint = _loc2_ + TITLE_CENTER_Y_OFFSET >> 1;
             this.title.y = _loc3_ > TITLE_MIN_Y_VALUE?_loc3_:TITLE_MIN_Y_VALUE;
             this.title.isSmallSized = _loc3_ < TITLE_SIZE_Y_FACTOR;
-            if(this._premiumLayout != null)
+            if(this._benefitsComponent != null)
             {
-                this._premiumLayout.y = _loc2_;
-                this._premiumLayout.x = _loc1_ + PREMIUM_LAYOUT_OFFSET_X * width / PREMIUM_VIEW_NOMINAL_WIDTH | 0;
+                this._benefitsComponent.compact = width < PREMIUM_VIEW_COMPACT_WIDTH;
+                _loc4_ = this._benefitsComponent.compact?PREMIUM_LAYOUT_OFFSET_SMALL_Y:PREMIUM_LAYOUT_OFFSET_Y;
+                this._benefitsComponent.y = _loc2_ - _loc4_;
+                this._benefitsComponent.x = _loc1_ + PREMIUM_LAYOUT_OFFSET_X * width / PREMIUM_VIEW_NOMINAL_WIDTH | 0;
             }
             this.footerBg.width = _width;
             this.footerBg.y = _height;

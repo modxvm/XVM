@@ -3,6 +3,8 @@ package net.wg.data.constants
     public class Linkages extends Object
     {
 
+        public static const BTN_ALERT_INDICATOR:String = "Button_AlertIndicatorUI";
+
         public static const BC_STAT_RENDERER:String = "StatRendererContainerUI";
 
         public static const BC_BASE_RENDERER:String = "BaseRendererContainerUI";
@@ -51,11 +53,9 @@ package net.wg.data.constants
 
         public static const SALE_ITEM_BLOCK_RENDERER:String = "saleItemBlockUI";
 
-        public static const SPARKS_MGR:String = "net.wg.gui.login.impl.SparksManager";
+        public static const SPARKS_MGR:String = "net.wg.gui.components.common.SparksManager";
 
         public static const SKILL_ITEM_VIEW_MINI:String = "SkillItemViewMiniUI";
-
-        public static const TICKER_ITEM:String = "TickerItemUI";
 
         public static const PROGRESS_ELEMENT:String = "ProgressElement_UI";
 
@@ -211,11 +211,19 @@ package net.wg.data.constants
 
         public static const DESTROY_TIMER_UI:String = "destroyTimerUI";
 
+        public static const BATTLE_ROYALE_DESTROY_TIMER_UI:String = "BattleRoyaleDestroyTimerUI";
+
         public static const STUN_TIMER_UI:String = "stunTimerUI";
 
         public static const FIRE_ICON:String = "destroyTimerFireUI";
 
+        public static const BERSERKER_ICON:String = "destroyTimerBerserkerUI";
+
+        public static const RECOVERY_ZONE_ICON:String = "secondaryRecoveryZoneIconUI";
+
         public static const OVERTURNED_ICON:String = "destroyTimerOverTurnedUI";
+
+        public static const HALF_OVERTURNED_ICON:String = "HalfOverTurnedIconUI";
 
         public static const DEATHZONE_ICON:String = "destroyTimerDeathZoneUI";
 
@@ -227,6 +235,8 @@ package net.wg.data.constants
 
         public static const DROWN_ICON:String = "destroyTimerDrownUI";
 
+        public static const EVENTWARNING_ICON:String = "destroyTimerEventWarningUI";
+
         public static const GAS_DRAFT_ICON:String = "destroyTimerGazDraftUI";
 
         public static const STUN_ICON:String = "secondaryStunIconUI";
@@ -237,6 +247,12 @@ package net.wg.data.constants
 
         public static const INSPIRE_ICON:String = "secondaryInspireIconUI";
 
+        public static const HEAL_POINT_ICON:String = "secondaryHealPointIconUI";
+
+        public static const RECOVERY_ICON_CONTENT:String = "RecoverIconContentUI";
+
+        public static const ORANGE_ZONE_ICON_CONTENT:String = "OrangeZoneIconContentUI";
+
         public static const SECONDARY_TIMER_UI:String = "secondaryTimerUI";
 
         public static const RESUPPLY_TIMER_UI:String = "resupplyTimerUI";
@@ -246,6 +262,22 @@ package net.wg.data.constants
         public static const SIDE_BAR_NORMAL_RENDERER:String = "SideBarRendererUI";
 
         public static const RESUPPLY_TIMER_SMALL_UI:String = "resupplyTimerSmallUI";
+
+        public static const BATTLE_ROYALE_TIMER_UI:String = "BattleRoyaleTimerUI";
+
+        public static const BATTLE_ROYALE_COLUMN_BG:String = "BRColumnBGUI";
+
+        public static const CHEVRON_ADD_ANIM:String = "AddItemAnimUI";
+
+        public static const CHEVRON_REMOVE_ANIM:String = "RemoveItemAnimUI";
+
+        public static const CHEVRON_ADD_SIGN_ANIM:String = "AddSignAnimUI";
+
+        public static const CHEVRON_REMOVE_SIGN_ANIM:String = "RemoveSignAnimUI";
+
+        public static const CHEVRON_NO_CHANGE_ANIM:String = "NoChangeChevronAnimUI";
+
+        public static const CHEVRON_NO_CHANGE_TEXT_ANIM:String = "NoChangeTextAnimUI";
 
         public static const FC_MARKER_ITEM:String = "fcMarkerItemUI";
 
@@ -262,6 +294,12 @@ package net.wg.data.constants
         public static const ENTITIES_POPUP:String = "EntitiesStatePopUpUI";
 
         public static const ENTITY_BUTTON:String = "EntityStateButtonUI";
+
+        public static const BATTLE_ROYALE_CONSUMABLE_BUTTON:String = "BattleRoyaleConsumableButtonUI";
+
+        public static const EVENT_SHELL_BUTTON_BATTLE:String = "EventShellButtonBattleUI";
+
+        public static const EVENT_EQUIPMENT_BUTTON:String = "EventEquipmentButtonUI";
 
         public static const OPTIONAL_DEVICE_BUTTON:String = "OptionalDeviceButtonUI";
 
@@ -477,6 +515,10 @@ package net.wg.data.constants
 
         public static const WHEEL:String = "WheelUI";
 
+        public static const SIEGE_MODE_ANIMATION_UI:String = "SiegeModeAnimationUI";
+
+        public static const TURBO_SIEGE_MODE_ANIMATION_UI:String = "TurboSiegeModeAnimationUI";
+
         public static const POSTMORTEN_PANEL:String = "PostmortemPanelUI";
 
         public static const GROUP_IRENDERER:String = "net.wg.test.gui.components.common.containers.GroupIRenderer";
@@ -540,6 +582,28 @@ package net.wg.data.constants
         public static const DIP_DRIVER_DAMAGED:String = "DipDriverDamagedUI";
 
         public static const DIP_RADIOMAN_DAMAGED:String = "DipRadiomanDamagedUI";
+
+        public static const MINIMAP_LEGEND_ITEM_RENDERER:String = "MinimapLegendRendererUI";
+
+        public static const MINIMAP_LEGEND_ITEM_RENDERER_SMALL:String = "MinimapLegendRendererSmallUI";
+
+        public static const CONFIGURATOR_RENDERER:String = "ConfiguratorRendererUI";
+
+        public static const CONFIGURATOR_RENDERER_BIG:String = "ConfiguratorRendererBigUI";
+
+        public static const CONFIGURATOR_RENDERER_SMALL:String = "ConfiguratorRendererSmallUI";
+
+        public static const PLAYERS_PANEL_LIST_ITEM:String = "BattleRoyalePlayersPanelListItemUI";
+
+        public static const COLUMN_SELECTOR:String = "ColumnSelectorUI";
+
+        public static const COLUMN_HEADER:String = "ColumnHeaderUI";
+
+        public static const NATIONS_VEHICLES_RENDERER:String = "BattleRoyaleNationsVehiclesRendererUI";
+
+        public static const PLATOON_RENDERER:String = "BattleRoyalePlatoonRendererUI";
+
+        public static const BATTLE_ROYALE_META_LEVEL_UI:String = "BattleRoyaleMetaLevelUI";
 
         public static const DIP_LOADER_DAMAGED:String = "DipLoaderDamagedUI";
 
@@ -658,8 +722,6 @@ package net.wg.data.constants
         public static const INVITE_INDICATOR:String = "inviteIndicator_UI";
 
         public static const BADGE_RENDERER_UI:String = "BadgeRendererUI";
-
-        public static const BATTLE_ABILITIES_HIGHLIGHTER_UI:String = "BattleAbilitiesHighlighterUI";
 
         public static const BATTLE_ABILITIES_BTN_AREA_UI:String = "BattleAbilitiesBtnAreaUI";
 
@@ -831,11 +893,17 @@ package net.wg.data.constants
 
         public static const OFFER_CARD_RENDERER:String = "OfferCardUI";
 
+        public static const SPECIALIZATION_ITEM_RENDERER:String = "SpecializationItemRendererUI";
+
+        public static const EXTRA_PARAMS_RENDERER:String = "ExtraParamsRendererUI";
+
         public static const EPIC_BATTLE_RESULTS_VEHICLE_RENDERER:String = "EpicVehicleSelectionItemRendererUI";
 
         public static const LINK_EPIC_EFFICIENCY_ITEM_RENDERER:String = "EpicEfficiencyItemRendererUI";
 
         public static const EPIC_BATTLE_WELCOME_BACK_INFO_RENDERER_UI:String = "EpicBattlesWelcomeBackInfoRendererUI";
+
+        public static const EPIC_META_LEVEL_UI:String = "EpicMetaLevelRegularUI";
 
         public static const BLUEPRINTS_NATIONS_BAR_RENDERER:String = "BlueprintFragmentRendererUI";
 
@@ -858,6 +926,10 @@ package net.wg.data.constants
         public static const PROGRESSIVE_REWARD_GIFT_UI:String = "ProgressiveRewardGiftUI";
 
         public static const SIMPLE_SQUAD_BONUS_RENDERER:String = "SimpleSquadBonusRendererUI";
+
+        public static const REPLIED_MARKER_UI:String = "RepliedMarkerUI";
+
+        public static const STICKY_MARKER_UI:String = "StickyMarkerUI";
 
         public static const SESSION_BATTLE_EFFICIENCY_STATS_RENDERER_UI:String = "SessionBattleEfficiencyStatsRendererUI";
 

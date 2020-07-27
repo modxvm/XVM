@@ -7,22 +7,23 @@ package net.wg.infrastructure.managers.impl
     import net.wg.infrastructure.interfaces.ICustomObjectFinder;
     import net.wg.infrastructure.managers.impl.tutorial.BuildersMap;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
+    import flash.display.DisplayObjectContainer;
     import net.wg.data.vo.TutorialComponentPathVO;
     import net.wg.infrastructure.interfaces.ITriggerWatcher;
     import net.wg.data.TutorialBuilderVO;
     import net.wg.infrastructure.interfaces.IView;
     import org.idmedia.as3commons.util.StringUtils;
+    import net.wg.infrastructure.managers.impl.tutorial.TutorialHintZone;
+    import flash.events.Event;
     import net.wg.infrastructure.interfaces.ITutorialCustomComponent;
     import net.wg.infrastructure.events.TutorialEvent;
     import net.wg.data.constants.Values;
     import net.wg.data.vo.TutorialCriteriaVo;
     import net.wg.infrastructure.events.LifeCycleEvent;
     import net.wg.data.vo.TutorialUnboundViewVO;
-    import flash.events.Event;
     import net.wg.infrastructure.interfaces.ITutorialBuilder;
     import net.wg.infrastructure.managers.impl.tutorial.TriggerEvent;
     import net.wg.infrastructure.managers.impl.tutorial.TriggerWatcherFactory;
-    import flash.display.DisplayObjectContainer;
 
     public class TutorialManager extends TutorialManagerMeta implements ITutorialManager
     {
@@ -71,6 +72,8 @@ package net.wg.infrastructure.managers.impl
 
         private var _unboundComponents:Dictionary;
 
+        private var _gfComponents:Dictionary;
+
         public function TutorialManager(param1:ICustomObjectFinder)
         {
             this._ignoredInTutorialComponents = new Vector.<DisplayObject>();
@@ -86,6 +89,7 @@ package net.wg.infrastructure.managers.impl
             this._buildersMap = new BuildersMap();
             this._unboudViewsForRegister = new Dictionary();
             this._unboundComponents = new Dictionary();
+            this._gfComponents = new Dictionary();
             super();
             this._customObjectFinder = param1;
         }
@@ -120,9 +124,11 @@ package net.wg.infrastructure.managers.impl
             var _loc4_:String = null;
             var _loc5_:String = null;
             var _loc6_:IDisposable = null;
-            var _loc7_:DisplayObject = null;
-            var _loc8_:Vector.<String> = null;
-            var _loc9_:TutorialComponentPathVO = null;
+            var _loc7_:Vector.<DisplayObjectContainer> = null;
+            var _loc8_:Object = null;
+            var _loc9_:DisplayObject = null;
+            var _loc10_:Vector.<String> = null;
+            var _loc11_:TutorialComponentPathVO = null;
             App.utils.data.cleanupDynamicObject(this._descriptions);
             for(_loc1_ in this._criteriaHash)
             {
@@ -135,23 +141,23 @@ package net.wg.infrastructure.managers.impl
             _loc3_ = 0;
             while(_loc3_ < _loc2_)
             {
-                _loc7_ = this._ignoredInTutorialComponents[_loc3_];
-                this.removeListenersFromNotTutorialObject(_loc7_);
+                _loc9_ = this._ignoredInTutorialComponents[_loc3_];
+                this.removeListenersFromNotTutorialObject(_loc9_);
                 _loc3_++;
             }
             this._ignoredInTutorialComponents.splice(0,_loc2_);
             this._tutorialLinkages.splice(0,this._tutorialLinkages.length);
             for(_loc4_ in this._aliasToPathsList)
             {
-                _loc8_ = this._aliasToPathsList[_loc4_];
-                _loc8_.splice(0,_loc8_.length);
+                _loc10_ = this._aliasToPathsList[_loc4_];
+                _loc10_.splice(0,_loc10_.length);
             }
             App.utils.data.cleanupDynamicObject(this._aliasToPathsList);
             this._aliasToPathsList = null;
             for(_loc5_ in this._fullPathToVO)
             {
-                _loc9_ = this._fullPathToVO[_loc5_];
-                _loc9_.dispose();
+                _loc11_ = this._fullPathToVO[_loc5_];
+                _loc11_.dispose();
             }
             App.utils.data.cleanupDynamicObject(this._fullPathToVO);
             App.utils.data.cleanupDynamicObject(this._idToVO);
@@ -164,6 +170,15 @@ package net.wg.infrastructure.managers.impl
             }
             App.utils.data.cleanupDynamicObject(this._unboudViewsForRegister);
             App.utils.data.cleanupDynamicObject(this._unboundComponents);
+            _loc7_ = new Vector.<DisplayObjectContainer>();
+            for(_loc8_ in this._gfComponents)
+            {
+                _loc7_.push(_loc8_);
+            }
+            for(_loc8_ in _loc7_)
+            {
+                this.removeAllGFHintsFromComponent(DisplayObjectContainer(_loc8_));
+            }
             this._componentToVO = null;
             this._fullPathToVO = null;
             this._idToVO = null;
@@ -173,6 +188,7 @@ package net.wg.infrastructure.managers.impl
             this._compIdToWatchers = null;
             this._unboudViewsForRegister = null;
             this._unboundComponents = null;
+            this._gfComponents = null;
             this._shownIds.splice(0,this._shownIds.length);
             this._shownIds = null;
             this._customObjectFinder = null;
@@ -218,6 +234,32 @@ package net.wg.infrastructure.managers.impl
             {
                 this.setupEffectBuilder(_loc4_,param3,null);
             }
+        }
+
+        public function addHintZoneForGFComponent(param1:DisplayObjectContainer, param2:String, param3:int, param4:int, param5:int, param6:int) : void
+        {
+            var _loc7_:TutorialHintZone = null;
+            var _loc8_:Dictionary = this._gfComponents[param1];
+            if(!_loc8_)
+            {
+                this._gfComponents[param1] = new Dictionary(true);
+                _loc8_ = this._gfComponents[param1];
+                param1.addEventListener(Event.REMOVED_FROM_STAGE,this.onGFComponentRemoveFromStage);
+            }
+            if(!_loc8_[param2])
+            {
+                _loc7_ = new TutorialHintZone(param1);
+                _loc7_.name = param2;
+                param1.addChild(_loc7_);
+                _loc8_[param2] = _loc7_;
+            }
+            else
+            {
+                _loc7_ = _loc8_[param2];
+            }
+            _loc7_.x = param3;
+            _loc7_.y = param4;
+            _loc7_.setSize(param5,param6);
         }
 
         public function addListenersToCustomTutorialComponent(param1:ITutorialCustomComponent) : void
@@ -509,6 +551,31 @@ package net.wg.infrastructure.managers.impl
             else
             {
                 assert(false,"registerUnboundView: View already registered. viewTutorialId = " + param1);
+            }
+        }
+
+        public function removeHintZoneForGFComponent(param1:DisplayObjectContainer, param2:String) : void
+        {
+            var _loc4_:TutorialHintZone = null;
+            var _loc3_:Dictionary = this._gfComponents[param1];
+            if(!_loc3_)
+            {
+                DebugUtils.LOG_ERROR("Hints for " + param1 + "/" + param1.name + "doesn\'t exist");
+            }
+            else
+            {
+                _loc4_ = _loc3_[param2];
+                if(_loc4_)
+                {
+                    _loc4_.dispose();
+                    param1.removeChild(_loc4_);
+                    delete _loc3_[param2];
+                }
+                if(_loc3_.length == 0)
+                {
+                    param1.removeEventListener(Event.REMOVED_FROM_STAGE,this.onGFComponentRemoveFromStage);
+                    delete this._gfComponents[param1];
+                }
             }
         }
 
@@ -965,9 +1032,28 @@ package net.wg.infrastructure.managers.impl
             }
         }
 
+        private function removeAllGFHintsFromComponent(param1:DisplayObjectContainer) : void
+        {
+            var _loc3_:TutorialHintZone = null;
+            param1.removeEventListener(Event.REMOVED_FROM_STAGE,this.onGFComponentRemoveFromStage);
+            var _loc2_:Dictionary = this._gfComponents[param1];
+            for each(_loc3_ in _loc2_)
+            {
+                param1.removeChild(_loc3_);
+                _loc3_.dispose();
+            }
+            App.utils.data.cleanupDynamicObject(_loc2_);
+            delete this._gfComponents[param1];
+        }
+
         public function get isSystemEnabled() : Object
         {
             return this._isSystemEnabled;
+        }
+
+        private function onGFComponentRemoveFromStage(param1:Event) : void
+        {
+            this.removeAllGFHintsFromComponent(DisplayObjectContainer(param1.currentTarget));
         }
 
         private function onViewOnDisposeHandler(param1:Event) : void

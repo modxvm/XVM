@@ -12,6 +12,7 @@ package net.wg.gui.lobby.header.itemSelectorPopover
     import scaleform.clik.constants.InvalidationType;
     import net.wg.data.constants.Values;
     import net.wg.gui.components.controls.events.ItemSelectorRendererEvent;
+    import org.idmedia.as3commons.util.StringUtils;
     import net.wg.data.constants.SoundTypes;
 
     public class ItemSelectorRenderer extends SoundListItemRenderer
@@ -114,6 +115,7 @@ package net.wg.gui.lobby.header.itemSelectorPopover
             if(_label != null && textField != null)
             {
                 textField.htmlText = _label;
+                textField.wordWrap = true;
                 this._commons.updateTextFieldSize(textField,false);
                 textField.y = height - textField.height >> 1;
                 textField.alpha = enabled?1:ICON_DISABLED_ALPHA;
@@ -188,6 +190,10 @@ package net.wg.gui.lobby.header.itemSelectorPopover
         private function onMouseOverHandler(param1:MouseEvent) : void
         {
             dispatchEvent(new ItemSelectorRendererEvent(ItemSelectorRendererEvent.RENDERER_OVER,true,false,this._dataVo.data,this._dataVo.disabled));
+            if(StringUtils.isNotEmpty(this._dataVo.tooltip))
+            {
+                this._toolTipMgr.showComplex(this._dataVo.tooltip,null);
+            }
         }
 
         private function onMouseOutHandler(param1:MouseEvent) : void

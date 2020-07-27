@@ -251,6 +251,16 @@ package net.wg.gui.bootcamp.introVideoPage
             super.onDispose();
         }
 
+        protected function set imageGoRight(param1:Boolean) : void
+        {
+            this._imageGoRight = param1;
+        }
+
+        protected function get introData() : BCIntroVideoVO
+        {
+            return this._introData;
+        }
+
         override protected function setData(param1:BCIntroVideoVO) : void
         {
             this._introData = param1;
@@ -530,7 +540,7 @@ package net.wg.gui.bootcamp.introVideoPage
             this.tweenFadeIn();
         }
 
-        private function tweenFadeOut() : void
+        protected function tweenFadeOut() : void
         {
             var _loc1_:Tween = new Tween(OVERLAY_TWEEN_DURATION,this.blackOverlay,{"alpha":0},{
                 "ease":Strong.easeIn,
@@ -539,7 +549,7 @@ package net.wg.gui.bootcamp.introVideoPage
             this._tweens.push(_loc1_);
         }
 
-        private function continueToBattle() : void
+        protected function continueToBattle() : void
         {
             App.stage.removeEventListener(MouseEvent.CLICK,this.onStageClickHandler);
             goToBattleS();
@@ -581,7 +591,7 @@ package net.wg.gui.bootcamp.introVideoPage
             this.showSkip();
         }
 
-        private function onStageClickHandler(param1:MouseEvent) : void
+        protected function onStageClickHandler(param1:MouseEvent) : void
         {
             if(!this._introData || param1 is MouseEventEx && MouseEventEx(param1).buttonIdx != MouseEventEx.LEFT_BUTTON)
             {

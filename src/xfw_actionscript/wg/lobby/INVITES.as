@@ -47,6 +47,8 @@ package
 
         public static const INVITES_TEXT_EVENT:String = "#invites:invites/text/EVENT";
 
+        public static const INVITES_TEXT_BATTLE_ROYALE:String = "#invites:invites/text/BATTLE_ROYALE";
+
         public static const INVITES_TEXT_FALLOUT:String = "#invites:invites/text/FALLOUT";
 
         public static const INVITES_TEXT_FALLOUT_FALLOUT_CLASSIC:String = "#invites:invites/text/FALLOUT/FALLOUT_CLASSIC";
@@ -64,8 +66,6 @@ package
         public static const INVITES_TEXT_FORT_BATTLE:String = "#invites:invites/text/FORT_BATTLE";
 
         public static const INVITES_TEXT_STRONGHOLD:String = "#invites:invites/text/STRONGHOLD";
-
-        public static const INVITES_TEXT_BOB:String = "#invites:invites/text/BOB";
 
         public static const INVITES_TEXT_FORT_OFFENCE:String = "#invites:invites/text/fort/offence";
 
@@ -107,77 +107,89 @@ package
 
         public static const INVITES_NOTE_SERVER_CHANGE:String = "#invites:invites/note/server_change";
 
-        public static const INVITES_NOTE_CHANGE_AND_LEAVE_EVENT:String = "#invites:invites/note/change_and_leave/EVENT";
+        public static const INVITES_NOTE_CHANGE_AND_LEAVE_QUEUE_EVENT_BATTLES:String = "#invites:invites/note/change_and_leave/QUEUE_EVENT_BATTLES";
 
-        public static const INVITES_NOTE_LEAVE_SQUAD:String = "#invites:invites/note/leave/SQUAD";
+        public static const INVITES_NOTE_LEAVE_QUEUE_EVENT_BATTLES:String = "#invites:invites/note/leave/QUEUE_EVENT_BATTLES";
 
-        public static const INVITES_NOTE_LEAVE_EVENT:String = "#invites:invites/note/leave/EVENT";
+        public static const INVITES_NOTE_CHANGE_AND_LEAVE_PREBATTLE_EVENT:String = "#invites:invites/note/change_and_leave/PREBATTLE_EVENT";
 
-        public static const INVITES_NOTE_LEAVE_FALLOUT:String = "#invites:invites/note/leave/FALLOUT";
+        public static const INVITES_NOTE_LEAVE_PREBATTLE_EVENT:String = "#invites:invites/note/leave/PREBATTLE_EVENT";
 
-        public static const INVITES_NOTE_CHANGE_AND_LEAVE_SQUAD:String = "#invites:invites/note/change_and_leave/SQUAD";
+        public static const INVITES_NOTE_LEAVE_PREBATTLE_SQUAD:String = "#invites:invites/note/leave/PREBATTLE_SQUAD";
 
-        public static const INVITES_NOTE_CHANGE_AND_LEAVE_FALLOUT:String = "#invites:invites/note/change_and_leave/FALLOUT";
+        public static const INVITES_NOTE_CHANGE_AND_LEAVE_PREBATTLE_SQUAD:String = "#invites:invites/note/change_and_leave/PREBATTLE_SQUAD";
 
-        public static const INVITES_NOTE_LEAVE_TRAINING:String = "#invites:invites/note/leave/TRAINING";
+        public static const INVITES_NOTE_LEAVE_QUEUE_RANDOMS:String = "#invites:invites/note/leave/QUEUE_RANDOMS";
 
-        public static const INVITES_NOTE_CHANGE_AND_LEAVE_TRAINING:String = "#invites:invites/note/change_and_leave/TRAINING";
+        public static const INVITES_NOTE_CHANGE_AND_LEAVE_QUEUE_RANDOMS:String = "#invites:invites/note/change_and_leave/QUEUE_RANDOMS";
 
-        public static const INVITES_NOTE_LEAVE_EPIC_TRAINING:String = "#invites:invites/note/leave/EPIC_TRAINING";
+        public static const INVITES_NOTE_LEAVE_PREBATTLE_FALLOUT:String = "#invites:invites/note/leave/PREBATTLE_FALLOUT";
 
-        public static const INVITES_NOTE_CHANGE_AND_LEAVE_EPIC_TRAINING:String = "#invites:invites/note/change_and_leave/EPIC_TRAINING";
+        public static const INVITES_NOTE_CHANGE_AND_LEAVE_PREBATTLE_FALLOUT:String = "#invites:invites/note/change_and_leave/PREBATTLE_FALLOUT";
 
-        public static const INVITES_NOTE_LEAVE_UNIT:String = "#invites:invites/note/leave/UNIT";
+        public static const INVITES_NOTE_LEAVE_PREBATTLE_TRAINING:String = "#invites:invites/note/leave/PREBATTLE_TRAINING";
 
-        public static const INVITES_NOTE_CHANGE_AND_LEAVE_UNIT:String = "#invites:invites/note/change_and_leave/UNIT";
+        public static const INVITES_NOTE_CHANGE_AND_LEAVE_PREBATTLE_TRAINING:String = "#invites:invites/note/change_and_leave/PREBATTLE_TRAINING";
 
-        public static const INVITES_NOTE_LEAVE_CLAN:String = "#invites:invites/note/leave/CLAN";
+        public static const INVITES_NOTE_LEAVE_PREBATTLE_EPIC_TRAINING:String = "#invites:invites/note/leave/PREBATTLE_EPIC_TRAINING";
 
-        public static const INVITES_NOTE_CHANGE_AND_LEAVE_CLAN:String = "#invites:invites/note/change_and_leave/CLAN";
+        public static const INVITES_NOTE_CHANGE_AND_LEAVE_PREBATTLE_EPIC_TRAINING:String = "#invites:invites/note/change_and_leave/PREBATTLE_EPIC_TRAINING";
 
-        public static const INVITES_NOTE_LEAVE_TOURNAMENT:String = "#invites:invites/note/leave/TOURNAMENT";
+        public static const INVITES_NOTE_LEAVE_PREBATTLE_UNIT:String = "#invites:invites/note/leave/PREBATTLE_UNIT";
 
-        public static const INVITES_NOTE_CHANGE_AND_LEAVE_TOURNAMENT:String = "#invites:invites/note/change_and_leave/TOURNAMENT";
+        public static const INVITES_NOTE_CHANGE_AND_LEAVE_PREBATTLE_UNIT:String = "#invites:invites/note/change_and_leave/PREBATTLE_UNIT";
 
-        public static const INVITES_NOTE_LEAVE_SORTIE:String = "#invites:invites/note/leave/SORTIE";
+        public static const INVITES_NOTE_LEAVE_PREBATTLE_CLAN:String = "#invites:invites/note/leave/PREBATTLE_CLAN";
 
-        public static const INVITES_NOTE_CHANGE_AND_LEAVE_SORTIE:String = "#invites:invites/note/change_and_leave/SORTIE";
+        public static const INVITES_NOTE_CHANGE_AND_LEAVE_PREBATTLE_CLAN:String = "#invites:invites/note/change_and_leave/PREBATTLE_CLAN";
 
-        public static const INVITES_NOTE_LEAVE_FORT_COMMON:String = "#invites:invites/note/leave/FORT_COMMON";
+        public static const INVITES_NOTE_LEAVE_PREBATTLE_TOURNAMENT:String = "#invites:invites/note/leave/PREBATTLE_TOURNAMENT";
 
-        public static const INVITES_NOTE_CHANGE_AND_LEAVE_FORT_COMMON:String = "#invites:invites/note/change_and_leave/FORT_COMMON";
+        public static const INVITES_NOTE_CHANGE_AND_LEAVE_PREBATTLE_TOURNAMENT:String = "#invites:invites/note/change_and_leave/PREBATTLE_TOURNAMENT";
 
-        public static const INVITES_NOTE_LEAVE_E_SPORT_COMMON:String = "#invites:invites/note/leave/E_SPORT_COMMON";
+        public static const INVITES_NOTE_LEAVE_PREBATTLE_SORTIE:String = "#invites:invites/note/leave/PREBATTLE_SORTIE";
 
-        public static const INVITES_NOTE_CHANGE_AND_LEAVE_E_SPORT_COMMON:String = "#invites:invites/note/change_and_leave/E_SPORT_COMMON";
+        public static const INVITES_NOTE_CHANGE_AND_LEAVE_PREBATTLE_SORTIE:String = "#invites:invites/note/change_and_leave/PREBATTLE_SORTIE";
 
-        public static const INVITES_NOTE_LEAVE_FORT_BATTLE:String = "#invites:invites/note/leave/FORT_BATTLE";
+        public static const INVITES_NOTE_LEAVE_PREBATTLE_FORT_COMMON:String = "#invites:invites/note/leave/PREBATTLE_FORT_COMMON";
 
-        public static const INVITES_NOTE_CHANGE_AND_LEAVE_FORT_BATTLE:String = "#invites:invites/note/change_and_leave/FORT_BATTLE";
+        public static const INVITES_NOTE_CHANGE_AND_LEAVE_PREBATTLE_FORT_COMMON:String = "#invites:invites/note/change_and_leave/PREBATTLE_FORT_COMMON";
 
-        public static const INVITES_NOTE_LEAVE_STRONGHOLD:String = "#invites:invites/note/leave/STRONGHOLD";
+        public static const INVITES_NOTE_LEAVE_PREBATTLE_E_SPORT_COMMON:String = "#invites:invites/note/leave/PREBATTLE_E_SPORT_COMMON";
 
-        public static const INVITES_NOTE_CHANGE_AND_LEAVE_STRONGHOLD:String = "#invites:invites/note/change_and_leave/STRONGHOLD";
+        public static const INVITES_NOTE_CHANGE_AND_LEAVE_PREBATTLE_E_SPORT_COMMON:String = "#invites:invites/note/change_and_leave/PREBATTLE_E_SPORT_COMMON";
 
-        public static const INVITES_NOTE_CHANGE_AND_LEAVE_RANDOMS:String = "#invites:invites/note/change_and_leave/RANDOMS";
+        public static const INVITES_NOTE_LEAVE_PREBATTLE_FORT_BATTLE:String = "#invites:invites/note/leave/PREBATTLE_FORT_BATTLE";
 
-        public static const INVITES_NOTE_CHANGE_AND_LEAVE_EVENT_BATTLES:String = "#invites:invites/note/change_and_leave/EVENT_BATTLES";
+        public static const INVITES_NOTE_CHANGE_AND_LEAVE_PREBATTLE_FORT_BATTLE:String = "#invites:invites/note/change_and_leave/PREBATTLE_FORT_BATTLE";
 
-        public static const INVITES_NOTE_LEAVE_SANDBOX:String = "#invites:invites/note/leave/SANDBOX";
+        public static const INVITES_NOTE_LEAVE_PREBATTLE_STRONGHOLD:String = "#invites:invites/note/leave/PREBATTLE_STRONGHOLD";
 
-        public static const INVITES_NOTE_CHANGE_AND_LEAVE_SANDBOX:String = "#invites:invites/note/change_and_leave/SANDBOX";
+        public static const INVITES_NOTE_CHANGE_AND_LEAVE_PREBATTLE_STRONGHOLD:String = "#invites:invites/note/change_and_leave/PREBATTLE_STRONGHOLD";
 
-        public static const INVITES_NOTE_LEAVE_EPIC:String = "#invites:invites/note/leave/EPIC";
+        public static const INVITES_NOTE_LEAVE_QUEUE_SANDBOX:String = "#invites:invites/note/leave/QUEUE_SANDBOX";
 
-        public static const INVITES_NOTE_CHANGE_AND_LEAVE_EPIC:String = "#invites:invites/note/change_and_leave/EPIC";
+        public static const INVITES_NOTE_CHANGE_AND_LEAVE_QUEUE_SANDBOX:String = "#invites:invites/note/change_and_leave/QUEUE_SANDBOX";
 
-        public static const INVITES_NOTE_LEAVE_RANKED:String = "#invites:invites/note/leave/RANKED";
+        public static const INVITES_NOTE_LEAVE_PREBATTLE_EPIC:String = "#invites:invites/note/leave/PREBATTLE_EPIC";
 
-        public static const INVITES_NOTE_CHANGE_AND_LEAVE_RANKED:String = "#invites:invites/note/change_and_leave/RANKED";
+        public static const INVITES_NOTE_CHANGE_AND_LEAVE_PREBATTLE_EPIC:String = "#invites:invites/note/change_and_leave/PREBATTLE_EPIC";
 
-        public static const INVITES_NOTE_LEAVE_BOB:String = "#invites:invites/note/leave/BOB";
+        public static const INVITES_NOTE_LEAVE_QUEUE_EPIC:String = "#invites:invites/note/leave/QUEUE_EPIC";
 
-        public static const INVITES_NOTE_CHANGE_AND_LEAVE_BOB:String = "#invites:invites/note/change_and_leave/BOB";
+        public static const INVITES_NOTE_CHANGE_AND_LEAVE_QUEUE_EPIC:String = "#invites:invites/note/change_and_leave/QUEUE_EPIC";
+
+        public static const INVITES_NOTE_LEAVE_QUEUE_RANKED:String = "#invites:invites/note/leave/QUEUE_RANKED";
+
+        public static const INVITES_NOTE_CHANGE_AND_LEAVE_QUEUE_RANKED:String = "#invites:invites/note/change_and_leave/QUEUE_RANKED";
+
+        public static const INVITES_NOTE_LEAVE_PREBATTLE_BATTLE_ROYALE:String = "#invites:invites/note/leave/PREBATTLE_BATTLE_ROYALE";
+
+        public static const INVITES_NOTE_CHANGE_AND_LEAVE_PREBATTLE_BATTLE_ROYALE:String = "#invites:invites/note/change_and_leave/PREBATTLE_BATTLE_ROYALE";
+
+        public static const INVITES_NOTE_LEAVE_QUEUE_BATTLE_ROYALE:String = "#invites:invites/note/leave/QUEUE_BATTLE_ROYALE";
+
+        public static const INVITES_NOTE_CHANGE_AND_LEAVE_QUEUE_BATTLE_ROYALE:String = "#invites:invites/note/change_and_leave/QUEUE_BATTLE_ROYALE";
 
         public static const INVITES_WARNING_ANONYMIZED:String = "#invites:invites/warning/anonymized";
 

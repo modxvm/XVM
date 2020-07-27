@@ -114,6 +114,11 @@ package net.wg.gui.battle.battleloading
             this.throwAbstractException();
         }
 
+        public function updateTriggeredChatCommands(param1:IDAAPIDataClass) : void
+        {
+            this.throwAbstractException();
+        }
+
         private function throwAbstractException() : void
         {
             DebugUtils.LOG_ERROR(MSG_MUST_BE_OVERRIDEN);

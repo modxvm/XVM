@@ -38,5 +38,10 @@ package net.wg.gui.battle.components
         {
             visible = this._isCompVisible;
         }
+
+        public function isCompVisible() : Boolean
+        {
+            return visible;
+        }
     }
 }

@@ -92,8 +92,7 @@ package net.wg.gui.lobby.tankman
         override protected function setRetrainingData(param1:PersonalCaseRetrainingModel) : void
         {
             this.retrainingData = param1;
-            this.retrainingData.testStats = this.stats;
-            this.retrainingData.setTestData(this.data);
+            this.retrainingData.updateData(this.data);
             this.runtimeUpdateByModel(CrewTankmanRetraining,this.retrainingData);
         }
 

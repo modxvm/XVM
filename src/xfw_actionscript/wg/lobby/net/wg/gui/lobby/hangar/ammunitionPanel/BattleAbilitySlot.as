@@ -84,8 +84,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                 _loc2_ = _loc1_?EMPTY:slotData.moduleLabel;
                 _loc3_ = type == FITTING_TYPES.BOOSTER;
                 _loc4_ = slotData.affectsAtTTC;
-                App.utils.asserter.assertFrameExists(_loc2_,this.moduleType);
-                this.moduleType.gotoAndStop(_loc2_);
+                this.moduleType.setModuleTypeIcon(_loc2_);
                 this.locked.visible = _loc3_?false:_loc1_?false:!slotData.removable;
                 this.moduleType.alpha = _loc1_ || _loc4_?AFFECTS_TTC_ALPHA:NOT_AFFECTS_TTC_ALPHA;
                 this.greenBorderMc.visible = slotData.highlight;

@@ -16,5 +16,7 @@ package net.wg.infrastructure.base.meta
         function as_updateLayout(param1:Number, param2:Number) : void;
 
         function as_setVisible(param1:Boolean) : void;
+
+        function as_setSiegeModeType(param1:String) : void;
     }
 }

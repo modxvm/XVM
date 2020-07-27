@@ -87,6 +87,8 @@ package
 
         public static const PLAYER_ERRORS_EQUIPMENT_REPAIRKIT_ALLDEVICESARENOTDAMAGED:String = "#ingame_gui:player_errors/equipment/repairkit/allDevicesAreNotDamaged";
 
+        public static const PLAYER_ERRORS_EQUIPMENT_REPAIREVERYTHING_CREWANDDEVICESAREOK:String = "#ingame_gui:player_errors/equipment/repairEverything/crewAndDevicesAreOk";
+
         public static const PLAYER_ERRORS_EQUIPMENT_EXTINGUISHER_DOESNOTACTIVATED:String = "#ingame_gui:player_errors/equipment/extinguisher/doesNotActivated";
 
         public static const PLAYER_ERRORS_EQUIPMENT_ORDER_NOTREADY:String = "#ingame_gui:player_errors/equipment/order/notReady";
@@ -114,6 +116,8 @@ package
         public static const PLAYER_MESSAGES_DEVICE_REPAIRED_TO_CRITICAL:String = "#ingame_gui:player_messages/DEVICE_REPAIRED_TO_CRITICAL";
 
         public static const PLAYER_MESSAGES_FIRE_STOPPED:String = "#ingame_gui:player_messages/FIRE_STOPPED";
+
+        public static const PLAYER_MESSAGES_OPT_DEVICE_USED:String = "#ingame_gui:player_messages/OPT_DEVICE_USED";
 
         public static const PLAYER_MESSAGES_TANKMAN_RESTORED:String = "#ingame_gui:player_messages/TANKMAN_RESTORED";
 
@@ -165,9 +169,11 @@ package
 
         public static const PLAYER_MESSAGES_LOADER_INTUITION_WAS_USED:String = "#ingame_gui:player_messages/loader_intuition_was_used";
 
-        public static const CHAT_SHORTCUTS_TURN_BACK:String = "#ingame_gui:chat_shortcuts/turn_back";
+        public static const CHAT_SHORTCUTS_ATTENTION_TO_POSITION:String = "#ingame_gui:chat_shortcuts/attention_to_position";
 
-        public static const CHAT_SHORTCUTS_SUPPORT_ME_WITH_FIRE:String = "#ingame_gui:chat_shortcuts/support_me_with_fire";
+        public static const CHAT_SHORTCUTS_GOING_THERE:String = "#ingame_gui:chat_shortcuts/going_there";
+
+        public static const CHAT_SHORTCUTS_HELP_ME:String = "#ingame_gui:chat_shortcuts/help_me";
 
         public static const CHAT_SHORTCUTS_RELOADING_GUN:String = "#ingame_gui:chat_shortcuts/reloading_gun";
 
@@ -179,37 +185,45 @@ package
 
         public static const CHAT_SHORTCUTS_RELOADING_UNAVAILABLE:String = "#ingame_gui:chat_shortcuts/reloading_unavailable";
 
-        public static const CHAT_SHORTCUTS_STOP:String = "#ingame_gui:chat_shortcuts/stop";
-
-        public static const CHAT_SHORTCUTS_HELP_ME:String = "#ingame_gui:chat_shortcuts/help_me";
-
-        public static const CHAT_SHORTCUTS_HELP_ME_EX:String = "#ingame_gui:chat_shortcuts/help_me_ex";
-
-        public static const CHAT_SHORTCUTS_FOLLOW_ME:String = "#ingame_gui:chat_shortcuts/follow_me";
-
-        public static const CHAT_SHORTCUTS_ATTACK:String = "#ingame_gui:chat_shortcuts/attack";
-
-        public static const CHAT_SHORTCUTS_BACK_TO_BASE:String = "#ingame_gui:chat_shortcuts/back_to_base";
-
-        public static const CHAT_SHORTCUTS_POSITIVE:String = "#ingame_gui:chat_shortcuts/positive";
-
-        public static const CHAT_SHORTCUTS_NEGATIVE:String = "#ingame_gui:chat_shortcuts/negative";
-
-        public static const CHAT_SHORTCUTS_ATTENTION_TO_CELL:String = "#ingame_gui:chat_shortcuts/attention_to_cell";
-
         public static const CHAT_SHORTCUTS_SPG_AIM_AREA:String = "#ingame_gui:chat_shortcuts/spg_aim_area";
 
         public static const CHAT_SHORTCUTS_SPG_AIM_AREA_RELOADING:String = "#ingame_gui:chat_shortcuts/spg_aim_area_reloading";
 
-        public static const CHAT_SHORTCUTS_ATTENTION_TO_POSITION:String = "#ingame_gui:chat_shortcuts/attention_to_position";
+        public static const CHAT_SHORTCUTS_ATTACK_ENEMY:String = "#ingame_gui:chat_shortcuts/attack_enemy";
 
-        public static const CHAT_SHORTCUTS_ATTENTION_TO_OBJECTIVE_ATK:String = "#ingame_gui:chat_shortcuts/attention_to_objective_atk";
+        public static const CHAT_SHORTCUTS_ATTACKING_ENEMY:String = "#ingame_gui:chat_shortcuts/attacking_enemy";
 
-        public static const CHAT_SHORTCUTS_ATTENTION_TO_OBJECTIVE_DEF:String = "#ingame_gui:chat_shortcuts/attention_to_objective_def";
+        public static const CHAT_SHORTCUTS_ATTACK_ENEMY_WITH_SPG:String = "#ingame_gui:chat_shortcuts/attack_enemy_with_SPG";
+
+        public static const CHAT_SHORTCUTS_ATTACK_ENEMY_WITH_SPG_RELOADING:String = "#ingame_gui:chat_shortcuts/attack_enemy_with_SPG_reloading";
 
         public static const CHAT_SHORTCUTS_ATTENTION_TO_BASE_ATK:String = "#ingame_gui:chat_shortcuts/attention_to_base_atk";
 
+        public static const CHAT_SHORTCUTS_ATTENTION_TO_BASE_ATK_NUMBERED:String = "#ingame_gui:chat_shortcuts/attention_to_base_atk_numbered";
+
+        public static const CHAT_SHORTCUTS_ATTACKING_BASE:String = "#ingame_gui:chat_shortcuts/attacking_base";
+
+        public static const CHAT_SHORTCUTS_ATTENTION_TO_OBJECTIVE_ATK:String = "#ingame_gui:chat_shortcuts/attention_to_objective_atk";
+
         public static const CHAT_SHORTCUTS_ATTENTION_TO_BASE_DEF:String = "#ingame_gui:chat_shortcuts/attention_to_base_def";
+
+        public static const CHAT_SHORTCUTS_ATTENTION_TO_BASE_DEF_NUMBERED:String = "#ingame_gui:chat_shortcuts/attention_to_base_def_numbered";
+
+        public static const CHAT_SHORTCUTS_DEFENDING_BASE:String = "#ingame_gui:chat_shortcuts/defending_base";
+
+        public static const CHAT_SHORTCUTS_ATTENTION_TO_OBJECTIVE_DEF:String = "#ingame_gui:chat_shortcuts/attention_to_objective_def";
+
+        public static const CHAT_SHORTCUTS_HELP_ME_EX:String = "#ingame_gui:chat_shortcuts/help_me_ex";
+
+        public static const CHAT_SHORTCUTS_SUPPORTING_ALLY:String = "#ingame_gui:chat_shortcuts/supporting_ally";
+
+        public static const CHAT_SHORTCUTS_TURN_BACK:String = "#ingame_gui:chat_shortcuts/turn_back";
+
+        public static const CHAT_SHORTCUTS_THANKS:String = "#ingame_gui:chat_shortcuts/thanks";
+
+        public static const CHAT_SHORTCUTS_POSITIVE:String = "#ingame_gui:chat_shortcuts/positive";
+
+        public static const CHAT_SHORTCUTS_ATTENTION_TO_CELL:String = "#ingame_gui:chat_shortcuts/attention_to_cell";
 
         public static const CHAT_SHORTCUTS_GLOBAL_MSG_ATK_SAVE_TANKS:String = "#ingame_gui:chat_shortcuts/global_msg/atk/save_tanks";
 
@@ -229,9 +243,11 @@ package
 
         public static const CHAT_SHORTCUTS_GLOBAL_MSG_DEF_FOCUS_HQ:String = "#ingame_gui:chat_shortcuts/global_msg/def/focus_hq";
 
-        public static const CHAT_SHORTCUTS_ATTACK_ENEMY:String = "#ingame_gui:chat_shortcuts/attack_enemy";
+        public static const CHAT_EXAMPLE_ATTENTION_TO_BASE_DEF:String = "#ingame_gui:chat_example/attention_to_base_def";
 
-        public static const CHAT_SHORTCUTS_ATTACK_ENEMY_RELOADING:String = "#ingame_gui:chat_shortcuts/attack_enemy_reloading";
+        public static const CHAT_EXAMPLE_ATTENTION_TO_BASE_ATK:String = "#ingame_gui:chat_example/attention_to_base_atk";
+
+        public static const CHAT_EXAMPLE_GOING_THERE:String = "#ingame_gui:chat_example/going_there";
 
         public static const CHAT_EXAMPLE_GLOBAL_MSG_DEF_SAVE_TANKS:String = "#ingame_gui:chat_example/global_msg/def/save_tanks";
 
@@ -253,7 +269,7 @@ package
 
         public static const CHAT_EXAMPLE_GLOBAL_MSG_DEF_FOCUS_HQ:String = "#ingame_gui:chat_example/global_msg/def/focus_hq";
 
-        public static const CHAT_EXAMPLE_SUPPORT_ME_WITH_FIRE:String = "#ingame_gui:chat_example/support_me_with_fire";
+        public static const CHAT_EXAMPLE_ATTACK_ENEMY:String = "#ingame_gui:chat_example/attack_enemy";
 
         public static const CHAT_EXAMPLE_RELOADING_GUN:String = "#ingame_gui:chat_example/reloading_gun";
 
@@ -267,29 +283,25 @@ package
 
         public static const CHAT_EXAMPLE_RELOADING_UNAVAILABLE:String = "#ingame_gui:chat_example/reloading_unavailable";
 
-        public static const CHAT_EXAMPLE_STOP:String = "#ingame_gui:chat_example/stop";
-
         public static const CHAT_EXAMPLE_HELP_ME:String = "#ingame_gui:chat_example/help_me";
 
         public static const CHAT_EXAMPLE_HELP_ME_EX:String = "#ingame_gui:chat_example/help_me_ex";
 
-        public static const CHAT_EXAMPLE_FOLLOW_ME:String = "#ingame_gui:chat_example/follow_me";
-
-        public static const CHAT_EXAMPLE_ATTACK:String = "#ingame_gui:chat_example/attack";
-
-        public static const CHAT_EXAMPLE_BACK_TO_BASE:String = "#ingame_gui:chat_example/back_to_base";
-
         public static const CHAT_EXAMPLE_POSITIVE:String = "#ingame_gui:chat_example/positive";
 
-        public static const CHAT_EXAMPLE_NEGATIVE:String = "#ingame_gui:chat_example/negative";
+        public static const CHAT_EXAMPLE_THANKS:String = "#ingame_gui:chat_example/thanks";
 
         public static const CHAT_EXAMPLE_ATTENTION_TO_CELL:String = "#ingame_gui:chat_example/attention_to_cell";
 
-        public static const CHAT_EXAMPLE_ATTACK_ENEMY:String = "#ingame_gui:chat_example/attack_enemy";
+        public static const CHAT_EXAMPLE_ATTACK_ENEMY_WITH_SPG:String = "#ingame_gui:chat_example/attack_enemy_with_SPG";
 
         public static const CHAT_EXAMPLE_SPG_AIM_AREA:String = "#ingame_gui:chat_example/spg_aim_area";
 
         public static const CHAT_EXAMPLE_ATTENTION_TO_POSITION:String = "#ingame_gui:chat_example/attention_to_position";
+
+        public static const CHAT_EXAMPLE_REPLY_TO_PLAYER:String = "#ingame_gui:chat_example/reply_to_player";
+
+        public static const CHAT_EXAMPLE_SUPPORTING_ALLY:String = "#ingame_gui:chat_example/supporting_ally";
 
         public static const STATISTICS_TAB_LINE_UP_HEADER:String = "#ingame_gui:statistics/tab/line_up/header";
 
@@ -409,11 +421,15 @@ package
 
         public static const SHELLS_KINDS_ARMOR_PIERCING_CR:String = "#ingame_gui:shells_kinds/ARMOR_PIERCING_CR";
 
-        public static const SHELLS_KINDS_PARAMS:String = "#ingame_gui:shells_kinds/params";
+        public static const SHELLS_KINDS_PARAMS_DAMAGE:String = "#ingame_gui:shells_kinds/params/damage";
 
-        public static const SHELLS_KINDS_PARAMSNOPIERCING:String = "#ingame_gui:shells_kinds/paramsNoPiercing";
+        public static const SHELLS_KINDS_PARAMS_PIERCINGPOWER:String = "#ingame_gui:shells_kinds/params/piercingPower";
 
-        public static const SHELLS_KINDS_STUNPARAMS:String = "#ingame_gui:shells_kinds/stunParams";
+        public static const SHELLS_KINDS_PARAMS_SHOTSPEED:String = "#ingame_gui:shells_kinds/params/shotSpeed";
+
+        public static const SHELLS_KINDS_PARAMS_EXPLOSIONRADIUS:String = "#ingame_gui:shells_kinds/params/explosionRadius";
+
+        public static const SHELLS_KINDS_PARAMS_STUNDURATION:String = "#ingame_gui:shells_kinds/params/stunDuration";
 
         public static const DAMAGE_PANEL_DEVICES_TURRETROTATOR_NORMAL:String = "#ingame_gui:damage_panel/devices/turretRotator/normal";
 
@@ -691,6 +707,8 @@ package
 
         public static const POSTMORTEM_MESSAGES_DEATH_FROM_OVERTURN_ALLY_SELF:String = "#ingame_gui:postmortem_messages/DEATH_FROM_OVERTURN_ALLY_SELF";
 
+        public static const POSTMORTEM_MESSAGES_DEATH_FROM_MINE_EXPLOSION:String = "#ingame_gui:postmortem_messages/DEATH_FROM_MINE_EXPLOSION";
+
         public static const PLAYER_MESSAGES_DEATH_FROM_SHOT_SELF_ALLY:String = "#ingame_gui:player_messages/DEATH_FROM_SHOT_SELF_ALLY";
 
         public static const PLAYER_MESSAGES_DEATH_FROM_SHOT_SELF_ALLY_ARTILLERY:String = "#ingame_gui:player_messages/DEATH_FROM_SHOT_SELF_ALLY_ARTILLERY";
@@ -849,6 +867,10 @@ package
 
         public static const PLAYER_MESSAGES_COMBAT_EQUIPMENT_USED_INSPIRE:String = "#ingame_gui:player_messages/COMBAT_EQUIPMENT_USED_INSPIRE";
 
+        public static const PLAYER_MESSAGES_COMBAT_EQUIPMENT_USED_HEALPOINT:String = "#ingame_gui:player_messages/COMBAT_EQUIPMENT_USED_HEALPOINT";
+
+        public static const PLAYER_MESSAGES_COMBAT_BR_EQUIPMENT_READY:String = "#ingame_gui:player_messages/COMBAT_BR_EQUIPMENT_READY";
+
         public static const VEHICLE_MESSAGES_DEATH_FROM_WORLD_COLLISION_SELF_SUICIDE:String = "#ingame_gui:vehicle_messages/DEATH_FROM_WORLD_COLLISION_SELF_SUICIDE";
 
         public static const POSTMORTEM_MESSAGES_DEATH_FROM_WORLD_COLLISION_SELF_SUICIDE:String = "#ingame_gui:postmortem_messages/DEATH_FROM_WORLD_COLLISION_SELF_SUICIDE";
@@ -997,6 +1019,8 @@ package
 
         public static const PLAYER_MESSAGES_DEATH_FROM_RAMMING_ALLY_ENEMY:String = "#ingame_gui:player_messages/DEATH_FROM_RAMMING_ALLY_ENEMY";
 
+        public static const POSTMORTEM_MESSAGES_DEATH_FROM_KAMIKAZE:String = "#ingame_gui:postmortem_messages/DEATH_FROM_KAMIKAZE";
+
         public static const PLAYER_MESSAGES_DEATH_FROM_OVERTURN_SELF_SUICIDE:String = "#ingame_gui:player_messages/DEATH_FROM_OVERTURN_SELF_SUICIDE";
 
         public static const PLAYER_MESSAGES_DEATH_FROM_OVERTURN_SELF_ALLY:String = "#ingame_gui:player_messages/DEATH_FROM_OVERTURN_SELF_ALLY";
@@ -1071,6 +1095,18 @@ package
 
         public static const EFFICIENCYRIBBONS_RECEIVEDBURN:String = "#ingame_gui:efficiencyRibbons/receivedBurn";
 
+        public static const EFFICIENCYRIBBONS_BERSERKER:String = "#ingame_gui:efficiencyRibbons/berserker";
+
+        public static const EFFICIENCYRIBBONS_SPAWNEDBOTDMG:String = "#ingame_gui:efficiencyRibbons/spawnedBotDmg";
+
+        public static const EFFICIENCYRIBBONS_RECEIVEDDMGBYSPAWNEDBOT:String = "#ingame_gui:efficiencyRibbons/receivedDmgBySpawnedBot";
+
+        public static const EFFICIENCYRIBBONS_DAMAGEBYMINEFIELD:String = "#ingame_gui:efficiencyRibbons/damageByMinefield";
+
+        public static const EFFICIENCYRIBBONS_RECEIVEDBYMINEFIELD:String = "#ingame_gui:efficiencyRibbons/receivedByMinefield";
+
+        public static const EFFICIENCYRIBBONS_RECEIVEDBYSMOKE:String = "#ingame_gui:efficiencyRibbons/receivedBySmoke";
+
         public static const EFFICIENCYRIBBONS_RECEIVEDRAM:String = "#ingame_gui:efficiencyRibbons/receivedRam";
 
         public static const EFFICIENCYRIBBONS_RECEIVEDWORLDCOLLISION:String = "#ingame_gui:efficiencyRibbons/receivedWorldCollision";
@@ -1082,6 +1118,8 @@ package
         public static const EFFICIENCYRIBBONS_STUN:String = "#ingame_gui:efficiencyRibbons/stun";
 
         public static const EFFICIENCYRIBBONS_ASSISTSTUN:String = "#ingame_gui:efficiencyRibbons/assistStun";
+
+        public static const EFFICIENCYRIBBONS_DEATHZONE:String = "#ingame_gui:efficiencyRibbons/deathZone";
 
         public static const DAMAGELOG_SHELLTYPE_ARMOR_PIERCING:String = "#ingame_gui:damageLog/shellType/ARMOR_PIERCING";
 
@@ -1208,6 +1246,8 @@ package
         public static const SIEGEMODE_HINT_NOBINDING:String = "#ingame_gui:siegeMode/hint/noBinding";
 
         public static const SIEGEMODE_HINT_WHEELED:String = "#ingame_gui:siegeMode/hint/wheeled";
+
+        public static const SIEGEMODE_HINT_TURBOSHAFTENGINE:String = "#ingame_gui:siegeMode/hint/turboshaftEngine";
 
         public static const EFFICIENCYRIBBONS_ENEMYSECTORCAPTURED:String = "#ingame_gui:efficiencyRibbons/enemySectorCaptured";
 
@@ -1415,6 +1455,10 @@ package
 
         public static const HELPSCREEN_HINT_DESCRIPTION:String = "#ingame_gui:helpScreen/hint/description";
 
+        public static const BATTLECOMMUNICATION_HINT_PRESS:String = "#ingame_gui:battleCommunication/hint/press";
+
+        public static const BATTLECOMMUNICATION_HINT_DESCRIPTION:String = "#ingame_gui:battleCommunication/hint/description";
+
         public static const BURNOUT_HINT_ENGINEDAMAGEWARNING:String = "#ingame_gui:burnout/hint/engineDamageWarning";
 
         public static const BURNOUT_HINT_ENGINEDAMAGED:String = "#ingame_gui:burnout/hint/engineDamaged";
@@ -1428,6 +1472,12 @@ package
         public static const REWARDWINDOW_ANNIVERSARY_GA_DESCTEXT:String = "#ingame_gui:rewardWindow/anniversary_ga/descText";
 
         public static const REWARDWINDOW_ANNIVERSARY_GA_BTNLABEL:String = "#ingame_gui:rewardWindow/anniversary_ga/btnLabel";
+
+        public static const QUICKREPLY_HINT_PRESS:String = "#ingame_gui:quickReply/hint/press";
+
+        public static const QUICKREPLY_HINT_TOHELP:String = "#ingame_gui:quickReply/hint/toHelp";
+
+        public static const QUICKREPLY_HINT_TOACKNOWLEDGE:String = "#ingame_gui:quickReply/hint/toAcknowledge";
 
         public static const REWARDWINDOW_PIGGYBANK_WINHEADERTEXT:String = "#ingame_gui:rewardWindow/piggyBank/winHeaderText";
 
@@ -1456,6 +1506,118 @@ package
         public static const REWARDWINDOW_COMMANDER_PATRICK_BTNLABEL:String = "#ingame_gui:rewardWindow/commander_patrick/btnLabel";
 
         public static const DAMAGEINDICATOR_FRIENDLYFIRE_NODAMAGELABEL:String = "#ingame_gui:damageIndicator/friendlyFire/noDamageLabel";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_0:String = "#ingame_gui:prebattlemarker/prebattlemarker_0";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_1:String = "#ingame_gui:prebattlemarker/prebattlemarker_1";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_2:String = "#ingame_gui:prebattlemarker/prebattlemarker_2";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_3:String = "#ingame_gui:prebattlemarker/prebattlemarker_3";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_4:String = "#ingame_gui:prebattlemarker/prebattlemarker_4";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_5:String = "#ingame_gui:prebattlemarker/prebattlemarker_5";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_6:String = "#ingame_gui:prebattlemarker/prebattlemarker_6";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_7:String = "#ingame_gui:prebattlemarker/prebattlemarker_7";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_8:String = "#ingame_gui:prebattlemarker/prebattlemarker_8";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_9:String = "#ingame_gui:prebattlemarker/prebattlemarker_9";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_10:String = "#ingame_gui:prebattlemarker/prebattlemarker_10";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_11:String = "#ingame_gui:prebattlemarker/prebattlemarker_11";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_12:String = "#ingame_gui:prebattlemarker/prebattlemarker_12";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_13:String = "#ingame_gui:prebattlemarker/prebattlemarker_13";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_14:String = "#ingame_gui:prebattlemarker/prebattlemarker_14";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_15:String = "#ingame_gui:prebattlemarker/prebattlemarker_15";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_16:String = "#ingame_gui:prebattlemarker/prebattlemarker_16";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_17:String = "#ingame_gui:prebattlemarker/prebattlemarker_17";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_18:String = "#ingame_gui:prebattlemarker/prebattlemarker_18";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_19:String = "#ingame_gui:prebattlemarker/prebattlemarker_19";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_20:String = "#ingame_gui:prebattlemarker/prebattlemarker_20";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_21:String = "#ingame_gui:prebattlemarker/prebattlemarker_21";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_22:String = "#ingame_gui:prebattlemarker/prebattlemarker_22";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_23:String = "#ingame_gui:prebattlemarker/prebattlemarker_23";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_24:String = "#ingame_gui:prebattlemarker/prebattlemarker_24";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_25:String = "#ingame_gui:prebattlemarker/prebattlemarker_25";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_26:String = "#ingame_gui:prebattlemarker/prebattlemarker_26";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_27:String = "#ingame_gui:prebattlemarker/prebattlemarker_27";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_28:String = "#ingame_gui:prebattlemarker/prebattlemarker_28";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_29:String = "#ingame_gui:prebattlemarker/prebattlemarker_29";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_30:String = "#ingame_gui:prebattlemarker/prebattlemarker_30";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_31:String = "#ingame_gui:prebattlemarker/prebattlemarker_31";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_32:String = "#ingame_gui:prebattlemarker/prebattlemarker_32";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_33:String = "#ingame_gui:prebattlemarker/prebattlemarker_33";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_34:String = "#ingame_gui:prebattlemarker/prebattlemarker_34";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_35:String = "#ingame_gui:prebattlemarker/prebattlemarker_35";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_36:String = "#ingame_gui:prebattlemarker/prebattlemarker_36";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_37:String = "#ingame_gui:prebattlemarker/prebattlemarker_37";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_38:String = "#ingame_gui:prebattlemarker/prebattlemarker_38";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_39:String = "#ingame_gui:prebattlemarker/prebattlemarker_39";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_40:String = "#ingame_gui:prebattlemarker/prebattlemarker_40";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_41:String = "#ingame_gui:prebattlemarker/prebattlemarker_41";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_42:String = "#ingame_gui:prebattlemarker/prebattlemarker_42";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_43:String = "#ingame_gui:prebattlemarker/prebattlemarker_43";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_44:String = "#ingame_gui:prebattlemarker/prebattlemarker_44";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_45:String = "#ingame_gui:prebattlemarker/prebattlemarker_45";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_46:String = "#ingame_gui:prebattlemarker/prebattlemarker_46";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_47:String = "#ingame_gui:prebattlemarker/prebattlemarker_47";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_48:String = "#ingame_gui:prebattlemarker/prebattlemarker_48";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_49:String = "#ingame_gui:prebattlemarker/prebattlemarker_49";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_50:String = "#ingame_gui:prebattlemarker/prebattlemarker_50";
+
+        public static const PREBATTLEMARKER_PREBATTLEMARKER_51:String = "#ingame_gui:prebattlemarker/prebattlemarker_51";
+
+        public static const LEVELPROGRESS_MAXLEVEL:String = "#ingame_gui:levelProgress/maxLevel";
+
+        public static const OPTDEVICERESURRECTION_ENGINE:String = "#ingame_gui:optDeviceResurrection/engine";
+
+        public static const OPTDEVICERESURRECTION_FUELTANK:String = "#ingame_gui:optDeviceResurrection/fuelTank";
+
+        public static const OPTDEVICERESURRECTION_AMMOBAY:String = "#ingame_gui:optDeviceResurrection/ammoBay";
 
         public function INGAME_GUI()
         {

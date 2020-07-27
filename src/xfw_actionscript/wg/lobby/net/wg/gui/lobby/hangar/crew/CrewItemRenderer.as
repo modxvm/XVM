@@ -70,6 +70,8 @@ package net.wg.gui.lobby.hangar.crew
 
         private static const EMPTY_STR:String = "";
 
+        private static const DROPDOWN_LIST_NAME:String = "dropDownList";
+
         public var icon:UILoaderAlt = null;
 
         public var iconRole:TankmenIcons = null;
@@ -97,6 +99,8 @@ package net.wg.gui.lobby.hangar.crew
         public var vehicleType:TextField = null;
 
         public var emptySlotBgAnim:MovieClip = null;
+
+        public var emptySlotAnimMc:MovieClip = null;
 
         private var _index:uint = 0;
 
@@ -126,21 +130,6 @@ package net.wg.gui.lobby.hangar.crew
             this.bg.mouseChildren = false;
             this.tankmenName.mouseEnabled = false;
             this.tankmenName.mouseChildren = false;
-        }
-
-        public function generatedUnstoppableEvents() : Boolean
-        {
-            return true;
-        }
-
-        public function getTutorialDescriptionName() : String
-        {
-            return null;
-        }
-
-        public function needPreventInnerEvents() : Boolean
-        {
-            return true;
         }
 
         override protected function showDropdown() : void
@@ -194,7 +183,7 @@ package net.wg.gui.lobby.hangar.crew
                 _loc1_.labelFunction = _labelFunction;
                 _loc1_.canCleanDataProvider = false;
                 _dropdownRef = _loc1_;
-                _dropdownRef.name = "dropDownList";
+                _dropdownRef.name = DROPDOWN_LIST_NAME;
                 _dropdownRef.addEventListener(ListEvent.ITEM_CLICK,this.onDropDownItemClickHandler,false,0,true);
                 _dropdownRef.addEventListener(TutorialEvent.VIEW_READY_FOR_TUTORIAL,this.onDropDownViewReadyForTutorialHandler);
                 _loc3_ = new Point(x + menuOffset.left,menuDirection == DOWN_MENU_DIRECTION?y + height + menuOffset.top:y - _dropdownRef.height + menuOffset.bottom);
@@ -334,6 +323,7 @@ package net.wg.gui.lobby.hangar.crew
             this.role = null;
             this.vehicleType = null;
             this.emptySlotBgAnim = null;
+            this.emptySlotAnimMc = null;
             if(_data && _data is IDisposable)
             {
                 IDisposable(_data).dispose();
@@ -347,19 +337,29 @@ package net.wg.gui.lobby.hangar.crew
             return false;
         }
 
+        public function generatedUnstoppableEvents() : Boolean
+        {
+            return true;
+        }
+
         public function getData() : Object
         {
             return this.data;
         }
 
+        public function getTutorialDescriptionName() : String
+        {
+            return null;
+        }
+
+        public function needPreventInnerEvents() : Boolean
+        {
+            return true;
+        }
+
         public function openPersonalCase(param1:uint = 0) : void
         {
             dispatchEvent(new CrewEvent(CrewEvent.OPEN_PERSONAL_CASE,this.data,false,param1));
-        }
-
-        private function playSound(param1:String) : void
-        {
-            App.soundMgr.playControlsSnd(param1,SOUND_TYPE,SOUND_ID);
         }
 
         public function setData(param1:Object) : void
@@ -417,15 +417,37 @@ package net.wg.gui.lobby.hangar.crew
             }
             this.roles.dataProvider = new DataProvider(_loc7_);
             this.speed_xp_bg.visible = _loc5_.isLessMastered;
-            if(isNaN(_loc2_.tankmanID) && App.globalVarsMgr.isKoreaS())
+            if(isNaN(_loc2_.tankmanID))
             {
-                this.emptySlotBgAnim.gotoAndPlay(1);
-                this.emptySlotBgAnim.visible = true;
+                if(App.globalVarsMgr.isKoreaS())
+                {
+                    this.emptySlotBgAnim.visible = true;
+                    this.emptySlotBgAnim.gotoAndPlay(1);
+                }
+                else
+                {
+                    this.hideEmptySlotBgAnim();
+                }
+                if(_baseDisposed)
+                {
+                    return;
+                }
+                this.emptySlotAnimMc.visible = true;
+                this.emptySlotAnimMc.gotoAndPlay(2);
             }
             else
             {
-                this.emptySlotBgAnim.gotoAndStop(1);
-                this.emptySlotBgAnim.visible = false;
+                this.hideEmptySlotBgAnim();
+                if(_baseDisposed)
+                {
+                    return;
+                }
+                this.emptySlotAnimMc.visible = false;
+                this.emptySlotAnimMc.gotoAndStop(1);
+            }
+            if(_baseDisposed)
+            {
+                return;
             }
             this.skills.updateSkills(_loc5_);
             this.newSkillAnim.visible = _loc5_.canBuySkill;
@@ -438,6 +460,24 @@ package net.wg.gui.lobby.hangar.crew
             this.index = param1.index;
             selected = param1.selected;
             label = param1.label || EMPTY_LABEL;
+        }
+
+        protected function getTopPositionPadding() : int
+        {
+            var _loc1_:TankmanRoleVO = TankmanRoleVO(this.data);
+            var _loc2_:Number = _height * (_loc1_.recruitList.length < menuRowCount?_loc1_.recruitList.length:menuRowCount);
+            return (_height - _loc2_ >> 1) - _height;
+        }
+
+        private function playSound(param1:String) : void
+        {
+            App.soundMgr.playControlsSnd(param1,SOUND_TYPE,SOUND_ID);
+        }
+
+        private function hideEmptySlotBgAnim() : void
+        {
+            this.emptySlotBgAnim.visible = false;
+            this.emptySlotBgAnim.gotoAndStop(1);
         }
 
         override public function get data() : Object
@@ -566,6 +606,12 @@ package net.wg.gui.lobby.hangar.crew
             }
         }
 
+        override protected function dropdownRefReadyForTutorialHandler(param1:TutorialEvent) : void
+        {
+            param1.stopImmediatePropagation();
+            dispatchEvent(param1);
+        }
+
         private function onDropDownItemClickHandler(param1:ListEvent) : void
         {
             handleMenuItemClick(param1);
@@ -574,19 +620,6 @@ package net.wg.gui.lobby.hangar.crew
         private function onDropDownViewReadyForTutorialHandler(param1:TutorialEvent) : void
         {
             this.dropdownRefReadyForTutorialHandler(param1);
-        }
-
-        override protected function dropdownRefReadyForTutorialHandler(param1:TutorialEvent) : void
-        {
-            param1.stopImmediatePropagation();
-            dispatchEvent(param1);
-        }
-
-        protected function getTopPositionPadding() : int
-        {
-            var _loc1_:TankmanRoleVO = TankmanRoleVO(this.data);
-            var _loc2_:Number = _height * (_loc1_.recruitList.length < menuRowCount?_loc1_.recruitList.length:menuRowCount);
-            return (_height - _loc2_ >> 1) - _height;
         }
     }
 }

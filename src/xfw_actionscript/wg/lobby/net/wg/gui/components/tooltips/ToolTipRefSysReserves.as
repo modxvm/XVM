@@ -1,9 +1,8 @@
 package net.wg.gui.components.tooltips
 {
-    import net.wg.gui.components.advanced.ModuleTypesUIWithFill;
+    import net.wg.gui.components.advanced.ReserveTypesUIWithFill;
     import flash.text.TextField;
     import net.wg.gui.components.tooltips.VO.ToolTipRefSysReservesVO;
-    import net.wg.data.constants.Values;
 
     public class ToolTipRefSysReserves extends ToolTipSpecial
     {
@@ -14,11 +13,7 @@ package net.wg.gui.components.tooltips
 
         private static const TEXT_OFFSET:int = 10;
 
-        private static const LEVELS_WITHOUT_GLOW:int = 10;
-
-        private static const GLOW_STRING:String = "Glow";
-
-        private var _moduleType:ModuleTypesUIWithFill = null;
+        private var _moduleType:ReserveTypesUIWithFill = null;
 
         private var _infoTitleTF:TextField = null;
 
@@ -99,9 +94,8 @@ package net.wg.gui.components.tooltips
         {
             this.tryDisposeModel();
             this._model = new ToolTipRefSysReservesVO(_data);
-            var _loc1_:String = this._model.moduleLabel + (this._model.level > LEVELS_WITHOUT_GLOW?GLOW_STRING:Values.EMPTY_STR);
-            App.utils.asserter.assertFrameExists(_loc1_,this._moduleType);
-            this._moduleType.gotoAndStop(_loc1_);
+            var _loc1_:String = this._model.moduleLabel + (this._model.level > ReserveTypesUIWithFill.LEVELS_WITHOUT_GLOW?ReserveTypesUIWithFill.GLOW_BIG_ENDING:ReserveTypesUIWithFill.NO_GLOW_BIG_ENDING);
+            this._moduleType.setModuleTypeIcon(_loc1_);
             this._infoTitleTF.htmlText = this._model.infoTitle;
             this._infoDescriptionTF.htmlText = this._model.infoDescription;
             this._infoLevelTF.htmlText = this._model.infoLevel;

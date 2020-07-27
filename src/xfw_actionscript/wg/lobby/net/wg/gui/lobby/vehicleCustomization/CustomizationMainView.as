@@ -378,7 +378,7 @@ package net.wg.gui.lobby.vehicleCustomization
             this.vehicleView.anchorsSet.highlightAnchor(param1);
             if(param4)
             {
-                this._cursor.initCursor(param3?Cursors.BUTTON:Cursors.DRAG_OPEN);
+                this._cursor.forceSetCursor(param3?Cursors.BUTTON:Cursors.DRAG_OPEN);
             }
             if(!param2)
             {

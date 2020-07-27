@@ -148,8 +148,9 @@ package net.wg.gui.battle.views.epicRespawnView
 
         public function updateStage(param1:Number, param2:Number) : void
         {
+            var _loc3_:* = 0;
             this._originalHeight = param2;
-            var _loc3_:* = param1 >> 1;
+            _loc3_ = param1 >> 1;
             this.topBarBG.x = -_loc3_;
             this.topBarBG.y = 0;
             this.topBarBG.width = param1;

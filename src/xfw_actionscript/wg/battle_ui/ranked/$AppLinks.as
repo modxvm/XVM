@@ -36,6 +36,8 @@ TeamCaptureBarUI;
 
 // minimap.swf
 minimapUI;
+
+// minimapEntriesLibrary.swf
 ArcadeCameraEntry;
 CellFlashEntry;
 DeadPointEntry;

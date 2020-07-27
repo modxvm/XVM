@@ -7,5 +7,7 @@ package net.wg.gui.battle.interfaces
     {
 
         function updateStage(param1:Number, param2:Number) : void;
+
+        function hideBackground() : void;
     }
 }

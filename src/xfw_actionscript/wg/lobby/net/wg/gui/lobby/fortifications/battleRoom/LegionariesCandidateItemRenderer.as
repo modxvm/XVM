@@ -100,7 +100,7 @@ package net.wg.gui.lobby.fortifications.battleRoom
         {
             var _loc2_:LegionariesCandidateVO = null;
             _loc2_ = LegionariesCandidateVO(param1);
-            visible = _loc2_ != null;
+            this.visible = _loc2_ != null;
             if(!_loc2_)
             {
                 return;
@@ -136,6 +136,12 @@ package net.wg.gui.lobby.fortifications.battleRoom
         {
             this.candidateItemRender.enabled = param1;
             this.candidateItemRender.mouseChildren = false;
+        }
+
+        override public function set visible(param1:Boolean) : void
+        {
+            this.candidateItemRender.visible = param1;
+            super.visible = param1;
         }
     }
 }

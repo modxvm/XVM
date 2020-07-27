@@ -30,6 +30,14 @@ package net.wg.gui.lobby.hangar.crew
             super();
         }
 
+        private static function hideTooltip() : void
+        {
+            if(App.toolTipMgr)
+            {
+                App.toolTipMgr.hide();
+            }
+        }
+
         override protected function configUI() : void
         {
             super.configUI();
@@ -37,11 +45,16 @@ package net.wg.gui.lobby.hangar.crew
             this.iconRole.imageLoader.source = RES_COMMON.MAPS_ICONS_TANKMEN_ROLES_BIG_DOG;
             this.toMoreInfo.label = MENU.HANGAR_CREW_RODY_DOG_MOREINFOLABEL;
             this.toMoreInfo.addEventListener(ButtonEvent.CLICK,this.onToMoreInfoPressHandler);
-            this.hitMc.addEventListener(MouseEvent.CLICK,this.onMouseClickHandler);
-            this.hitMc.addEventListener(MouseEvent.MOUSE_OVER,this.onMouseOverHandler);
-            this.hitMc.addEventListener(MouseEvent.MOUSE_OUT,this.onMouseOutHandler);
-            this.hitMc.useHandCursor = false;
-            this.hitMc.buttonMode = false;
+            this.hitArea = this.hitMc;
+            addEventListener(MouseEvent.CLICK,this.onClickHandler);
+            addEventListener(MouseEvent.MOUSE_OVER,this.onMouseOverHandler);
+            addEventListener(MouseEvent.MOUSE_OUT,this.onMouseOutHandler);
+            useHandCursor = false;
+            buttonMode = false;
+            this.bg.mouseEnabled = false;
+            this.bg.mouseChildren = false;
+            this.dogName.mouseEnabled = false;
+            this.dogName.mouseChildren = false;
             App.utils.commons.updateChildrenMouseEnabled(this,false);
             this.hitMc.mouseEnabled = true;
             this.toMoreInfo.mouseEnabled = true;
@@ -54,9 +67,9 @@ package net.wg.gui.lobby.hangar.crew
 
         override protected function onDispose() : void
         {
-            this.hitMc.removeEventListener(MouseEvent.CLICK,this.onMouseClickHandler);
-            this.hitMc.removeEventListener(MouseEvent.MOUSE_OVER,this.onMouseOverHandler);
-            this.hitMc.removeEventListener(MouseEvent.MOUSE_OUT,this.onMouseOutHandler);
+            removeEventListener(MouseEvent.CLICK,this.onClickHandler);
+            removeEventListener(MouseEvent.MOUSE_OVER,this.onMouseOverHandler);
+            removeEventListener(MouseEvent.MOUSE_OUT,this.onMouseOutHandler);
             this.hitMc = null;
             this.toMoreInfo.removeEventListener(ButtonEvent.CLICK,this.onToMoreInfoPressHandler);
             this.toMoreInfo.dispose();
@@ -90,14 +103,6 @@ package net.wg.gui.lobby.hangar.crew
             }
         }
 
-        private function hideTooltip() : void
-        {
-            if(App.toolTipMgr)
-            {
-                App.toolTipMgr.hide();
-            }
-        }
-
         override public function set enabled(param1:Boolean) : void
         {
             this.hitMc.mouseEnabled = param1;
@@ -110,9 +115,9 @@ package net.wg.gui.lobby.hangar.crew
             dispatchEvent(new CrewDogEvent(CrewDogEvent.TO_MORE_INFO_CLICK));
         }
 
-        private function onMouseClickHandler(param1:MouseEvent) : void
+        private function onClickHandler(param1:MouseEvent) : void
         {
-            this.hideTooltip();
+            hideTooltip();
             dispatchEvent(new CrewDogEvent(CrewDogEvent.ON_ITEM_CLICK));
         }
 
@@ -123,7 +128,7 @@ package net.wg.gui.lobby.hangar.crew
 
         private function onMouseOutHandler(param1:MouseEvent) : void
         {
-            this.hideTooltip();
+            hideTooltip();
         }
     }
 }

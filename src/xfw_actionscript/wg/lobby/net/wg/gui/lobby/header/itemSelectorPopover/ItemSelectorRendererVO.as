@@ -7,6 +7,8 @@ package net.wg.gui.lobby.header.itemSelectorPopover
 
         public var label:String = "";
 
+        public var tooltip:String = "";
+
         public var data:String = "";
 
         public var disabled:Boolean;

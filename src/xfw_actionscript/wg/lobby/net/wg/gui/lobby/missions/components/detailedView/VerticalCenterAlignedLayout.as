@@ -1,6 +1,6 @@
 package net.wg.gui.lobby.missions.components.detailedView
 {
-    import net.wg.gui.components.common.containers.VerticalGroupLayout;
+    import net.wg.gui.components.containers.VerticalGroupLayout;
     import flash.display.DisplayObject;
     import flash.geom.Point;
 

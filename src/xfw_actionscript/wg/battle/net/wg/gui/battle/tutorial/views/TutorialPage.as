@@ -3,7 +3,7 @@ package net.wg.gui.battle.tutorial.views
     import net.wg.gui.battle.views.BaseBattlePage;
     import net.wg.gui.battle.tutorial.views.tutorial.BattleTutorial;
     import net.wg.gui.battle.views.consumablesPanel.ConsumablesPanel;
-    import net.wg.gui.battle.components.DestroyTimersPanel;
+    import net.wg.gui.battle.components.TimersPanel;
     import net.wg.data.constants.generated.BATTLE_VIEW_ALIASES;
 
     public class TutorialPage extends BaseBattlePage
@@ -13,7 +13,7 @@ package net.wg.gui.battle.tutorial.views
 
         public var consumablesPanel:ConsumablesPanel = null;
 
-        public var destroyTimersPanel:DestroyTimersPanel = null;
+        public var destroyTimersPanel:TimersPanel = null;
 
         public function TutorialPage()
         {
@@ -24,7 +24,7 @@ package net.wg.gui.battle.tutorial.views
         {
             registerComponent(this.battleTutorial,BATTLE_VIEW_ALIASES.BATTLE_TUTORIAL);
             registerComponent(this.consumablesPanel,BATTLE_VIEW_ALIASES.CONSUMABLES_PANEL);
-            registerComponent(this.destroyTimersPanel,BATTLE_VIEW_ALIASES.DESTROY_TIMERS_PANEL);
+            registerComponent(this.destroyTimersPanel,BATTLE_VIEW_ALIASES.TIMERS_PANEL);
             super.onPopulate();
         }
 

@@ -14,5 +14,7 @@ package net.wg.infrastructure.base.meta
         function as_resetActiveTab() : void;
 
         function as_updateProgressTracking(param1:Object) : void;
+
+        function as_updateTabs(param1:Array) : void;
     }
 }

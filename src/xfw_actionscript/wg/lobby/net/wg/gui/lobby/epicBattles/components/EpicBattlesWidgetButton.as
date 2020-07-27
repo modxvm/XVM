@@ -4,9 +4,9 @@ package net.wg.gui.lobby.epicBattles.components
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import net.wg.infrastructure.managers.ITooltipMgr;
     import flash.events.MouseEvent;
+    import net.wg.gui.lobby.epicBattles.data.EpicBattlesWidgetVO;
     import net.wg.data.constants.generated.TOOLTIPS_CONSTANTS;
     import scaleform.gfx.MouseEventEx;
-    import net.wg.gui.lobby.epicBattles.data.EpicBattlesWidgetVO;
 
     public class EpicBattlesWidgetButton extends MovieClip implements IDisposable
     {
@@ -26,6 +26,27 @@ package net.wg.gui.lobby.epicBattles.components
             this._toolTipMgr = App.toolTipMgr;
             super();
             this.init();
+        }
+
+        public final function dispose() : void
+        {
+            removeEventListener(MouseEvent.ROLL_OVER,this.onMouseRollOverHandler);
+            removeEventListener(MouseEvent.ROLL_OUT,this.onMouseRollOutHandler);
+            removeEventListener(MouseEvent.CLICK,this.onPreventMiddleRightClickHandler);
+            this.widget.dispose();
+            this.widget = null;
+            this.hitMc = null;
+            this._toolTipMgr = null;
+        }
+
+        public function setData(param1:EpicBattlesWidgetVO) : void
+        {
+            this.widget.setData(param1);
+        }
+
+        public function updateSize() : void
+        {
+            this.widget.invalidateSize();
         }
 
         private function init() : void
@@ -55,27 +76,6 @@ package net.wg.gui.lobby.epicBattles.components
             {
                 param1.stopImmediatePropagation();
             }
-        }
-
-        public final function dispose() : void
-        {
-            removeEventListener(MouseEvent.ROLL_OVER,this.onMouseRollOverHandler);
-            removeEventListener(MouseEvent.ROLL_OUT,this.onMouseRollOutHandler);
-            removeEventListener(MouseEvent.CLICK,this.onPreventMiddleRightClickHandler);
-            this.widget.dispose();
-            this.widget = null;
-            this.hitMc = null;
-            this._toolTipMgr = null;
-        }
-
-        public function setData(param1:EpicBattlesWidgetVO) : void
-        {
-            this.widget.setEpicData(param1);
-        }
-
-        public function updateSize() : void
-        {
-            this.widget.invalidateSize();
         }
     }
 }

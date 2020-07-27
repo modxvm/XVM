@@ -9,6 +9,8 @@ package net.wg.data.constants.generated
 
         public static const TANKMAN_NOT_RECRUITED:String = "tankmanNotRecruited";
 
+        public static const BATTLE_ROYALE_TANKMAN:String = "battleRoyaleTankman";
+
         public static const CONTACT:String = "contact";
 
         public static const BATTLE_STATS_ACHIEVS:String = "battleStatsAchievementData";
@@ -57,6 +59,14 @@ package net.wg.data.constants.generated
 
         public static const HANGAR_MODULE:String = "hangarModule";
 
+        public static const HANGAR_CARD_MODULE:String = "hangarCardModule";
+
+        public static const HANGAR_SLOT_MODULE:String = "hangarSlotModule";
+
+        public static const OPT_DEVICE_EMPTY_SLOT:String = "optDeviceEmptySlot";
+
+        public static const AMMUNITION_EMPTY_SLOT:String = "ammunitionEmptySlot";
+
         public static const CREW_SKIN:String = "crewSkin";
 
         public static const CREW_SKIN_NO_AVAILABLE_SKINS:String = "crewSkinNoAvailableSkins";
@@ -76,6 +86,8 @@ package net.wg.data.constants.generated
         public static const NATION_CHANGE_HANGAR_MODULE:String = "nationChangeHangarModule";
 
         public static const COMPARE_MODULE:String = "compareModule";
+
+        public static const COMPARE_SLOT_MODULE:String = "compareSlotModule";
 
         public static const DIRECT_MODULE:String = "directModule";
 
@@ -143,8 +155,6 @@ package net.wg.data.constants.generated
 
         public static const EFFICIENCY_PARAM:String = "efficiencyParam";
 
-        public static const RSS_NEWS:String = "rssNews";
-
         public static const MAP:String = "map";
 
         public static const SETTINGS_CONTROL:String = "control";
@@ -178,6 +188,8 @@ package net.wg.data.constants.generated
         public static const FORT_CONSUMABLE_ORDER:String = "fortConsumableOrder";
 
         public static const BATTLE_CONSUMABLE:String = "battleConsumable";
+
+        public static const BATTLE_OPT_DEVICE:String = "battleOptDevice";
 
         public static const IGR_INFO:String = "igrInfo";
 
@@ -309,6 +321,8 @@ package net.wg.data.constants.generated
 
         public static const VEHICLE_CMP_PARAMETERS:String = "vehicleCmpParameters";
 
+        public static const VEHICLE_TANK_SETUP_PARAMETERS:String = "vehicleTankSetupParameters";
+
         public static const BASE_VEHICLE_PARAMETERS:String = "baseVehicleParameters";
 
         public static const DEFAULT_CREW_MEMBER:String = "defaultCrewMember";
@@ -356,8 +370,6 @@ package net.wg.data.constants.generated
         public static const OPERATION_POSTPONED:String = "operationPostponed";
 
         public static const SQUAD_BONUS:String = "squadBonus";
-
-        public static const TENYEARS_ENTRY_POINT:String = "tenyearsEntryPoint";
 
         public static const GF_TEST_TOOLTIP:String = "gfTestTooltip";
 
@@ -409,8 +421,6 @@ package net.wg.data.constants.generated
 
         public static const RANKED_CALENDAR_DAY_INFO:String = "rankedCalendarDayInfo";
 
-        public static const SPG_CALENDAR_DAY_INFO:String = "SPGCalendarDayTooltip";
-
         public static const RANKED_SELECTOR_INFO:String = "rankedSelectorInfo";
 
         public static const RANKED_UNAVAILABLE_INFO:String = "rankedUnavailableInfo";
@@ -437,6 +447,24 @@ package net.wg.data.constants.generated
 
         public static const EPIC_PRESTIGE_PROGRESS_BLOCK_INFO:String = "epicPrestigeProgressBlockInfo";
 
+        public static const BATTLE_ROYALE_WEAK_ZONES:String = "BattleRoyaleWeakZonesBlockUI";
+
+        public static const BATTLE_ROYALE_MODULES:String = "battleRoyaleModules";
+
+        public static const BATTLE_ROYALE_MODULES_HANGAR:String = "battleRoyaleModulesHangar";
+
+        public static const BATTLE_ROYALE_BATTLE_PROGRESSION:String = "battleRoyaleBattleProgression";
+
+        public static const BATTLE_ROYALE_EQUIPMENT:String = "battleRoyaleEquipment";
+
+        public static const BATTLE_ROYALE_VEHICLE:String = "battleRoyaleVehicle";
+
+        public static const BATTLE_ROYALE_PERF_SIMPLE:String = "battleRoyalePerfSimple";
+
+        public static const BATTLE_ROYALE_PERF_ADVANCED:String = "battleRoyalePerfAdvanced";
+
+        public static const BATTLE_ROYALE_SELECTOR_INFO:String = "battleRoyaleSelectorInfo";
+
         public static const BLUEPRINT_INFO:String = "blueprintInfo";
 
         public static const BLUEPRINT_CONVERT_INFO:String = "blueprintConvertInfo";
@@ -446,10 +474,6 @@ package net.wg.data.constants.generated
         public static const BLUEPRINT_EMPTY_SLOT_INFO:String = "blueprintEmptySlotInfo";
 
         public static const BLUEPRINT_RANDOM_INFO:String = "blueprintRandomInfo";
-
-        public static const BOB_SELECTOR_INFO:String = "bobSelectorInfo";
-
-        public static const BOB_SERVER_PRIMETIME:String = "bobServerPrimeTime";
 
         public static const BLOCKS_DEFAULT_UI:String = "ToolTipInblocksDefaultUI";
 
@@ -468,8 +492,6 @@ package net.wg.data.constants.generated
         public static const VEHICLE_INFO_UI:String = "ToolTipInblocksDefaultUI";
 
         public static const EQUIPMENT_UI:String = "ToolTipEquipmentUI";
-
-        public static const RSS_NEWS_UI:String = "ToolTipRSSNewsUI";
 
         public static const INBLOCKS_DEFAULT_UI:String = "ToolTipInblocksDefaultUI";
 
@@ -557,22 +579,6 @@ package net.wg.data.constants.generated
 
         public static const VEHICLE_PREVIEW_CREW_MEMBER_UI:String = "ToolTipInblocksDefaultUI";
 
-        public static const SETTINGS_KEY_FOLLOW_ME:String = "SettingsKeyFollowMe";
-
-        public static const SETTINGS_KEY_FOLLOW_ME_UI:String = "ToolTipInblocksDefaultUI";
-
-        public static const SETTINGS_KEY_TURN_BACK:String = "SettingsKeyTurnBack";
-
-        public static const SETTINGS_KEY_TURN_BACK_UI:String = "ToolTipInblocksDefaultUI";
-
-        public static const SETTINGS_KEY_NEED_HELP:String = "SettingsKeyNeedHelp";
-
-        public static const SETTINGS_KEY_NEED_HELP_UI:String = "ToolTipInblocksDefaultUI";
-
-        public static const SETTINGS_KEY_RELOAD:String = "SettingsKeyReload";
-
-        public static const SETTINGS_KEY_RELOAD_UI:String = "ToolTipInblocksDefaultUI";
-
         public static const VEH_CMP_CUSTOMIZATION:String = "vehCmpCustomiztion";
 
         public static const VEH_CMP_CUSTOMIZATION_UI:String = "ToolTipInblocksDefaultUI";
@@ -580,6 +586,18 @@ package net.wg.data.constants.generated
         public static const SETTINGS_KEY_SWITCH_MODE:String = "SettingKeySwitchMode";
 
         public static const SETTINGS_KEY_SWITCH_MODE_UI:String = "ToolTipInblocksDefaultUI";
+
+        public static const SETTINGS_KEY_HIGHLIGHTLOCATION:String = "SettingsKeyHighlightLocation";
+
+        public static const SETTINGS_KEY_HIGHLIGHTLOCATION_UI:String = "ToolTipInblocksDefaultUI";
+
+        public static const SETTINGS_KEY_HIGHLIGHTTARGET:String = "SettingsKeyHighlightTarget";
+
+        public static const SETTINGS_KEY_HIGHLIGHTTARGET_UI:String = "ToolTipInblocksDefaultUI";
+
+        public static const SETTINGS_KEY_SHOWRADIALMENU:String = "SettingsKeyShowRadialMenu";
+
+        public static const SETTINGS_KEY_SHOWRADIALMENU_UI:String = "ToolTipInblocksDefaultUI";
 
         public static const SETTINGS_KEY_CHARGE_FIRE:String = "SettingsKeyChargeFire";
 
@@ -629,11 +647,15 @@ package net.wg.data.constants.generated
 
         public static const BADGES_SUFFIX_RANKED_ITEM_UI:String = "ToolTipInblocksDefaultUI";
 
+        public static const EVENT_PROGRESSION_COMPLETED_QUESTS_INFO:String = "EventProgressionQuestsTooltipData";
+
+        public static const BATTLE_OPT_DEVICE_UI:String = "ToolTipInblocksDefaultUI";
+
         public static const ACHIEVEMENTS_SET:Array = [BATTLE_STATS_ACHIEVS,BATTLE_STATS_MARKS_ON_GUN_ACHIEVEMENT,ACHIEVEMENT,MARKS_ON_GUN_ACHIEVEMENT,GLOBAL_RATING,MARK_OF_MASTERY,ACHIEVEMENT_ATTR,SHOP_ACHIEVEMENT,SHOP_BADGE,REFERRAL_BADGE];
 
         public static const BOOSTERS_SET:Array = [INVENTORY_BATTLE_BOOSTER,AWARD_BATTLE_BOOSTER,EPIC_AWARD_BATTLE_BOOSTER,BATTLE_BOOSTER_BLOCK,DEFAULT_BATTLE_BOOSTER,SHOP_BATTLE_BOOSTER,BATTLE_BOOSTER_COMPARE,BOOSTERS_BOOSTER_INFO,CLAN_RESERVE_INFO,BOOSTER,SHOP_BOOSTER,BOOSTERS_QUESTS,NATION_CHANGE_BATTLE_BOOSTER];
 
-        public static const COMMON_SET:Array = [TENYEARS_ENTRY_POINT,SPG_CALENDAR_DAY_INFO,EFFICIENCY_PARAM,IGR_INFO,CONTACT,SORTIE_DIVISION,MAP,MAP_SMALL,CLAN_COMMON_INFO,ACTION_PRICE,ACTION_SLOT_PRICE,PRICE_DISCOUNT,FRONTLINE_PRICE_DISCOUNT,ACTION_XP,QUESTS_VEHICLE_BONUSES,ENVIRONMENT,SQUAD_RESTRICTIONS_INFO,MISSIONS_TOKEN,RESERVE_MODULE,CRYSTAL_INFO,EVENT_COIN_INFO,CREDITS_INFO,GOLD_INFO,FREEXP_INFO,VEHICLE_FILTER,RSS_NEWS,VEHICLE_ELITE_BONUS,VEHICLE_HISTORICAL_REFERENCE,BATTLE_TRAINING,SQUAD_BONUS,BATTLE_PASS_VEHICLE_POINTS,BATTLE_PASS_IN_PROGRESS,BATTLE_PASS_COMPLETED,BATTLE_PASS_CHOSE_WINNER,TECHTREE_DISCOUNT_INFO,TECHTREE_NATION_DISCOUNT];
+        public static const COMMON_SET:Array = [EFFICIENCY_PARAM,IGR_INFO,CONTACT,SORTIE_DIVISION,MAP,MAP_SMALL,CLAN_COMMON_INFO,ACTION_PRICE,ACTION_SLOT_PRICE,PRICE_DISCOUNT,FRONTLINE_PRICE_DISCOUNT,ACTION_XP,QUESTS_VEHICLE_BONUSES,ENVIRONMENT,SQUAD_RESTRICTIONS_INFO,MISSIONS_TOKEN,RESERVE_MODULE,CRYSTAL_INFO,EVENT_COIN_INFO,CREDITS_INFO,GOLD_INFO,FREEXP_INFO,VEHICLE_FILTER,VEHICLE_ELITE_BONUS,VEHICLE_HISTORICAL_REFERENCE,BATTLE_TRAINING,SQUAD_BONUS,BATTLE_PASS_VEHICLE_POINTS,BATTLE_PASS_IN_PROGRESS,BATTLE_PASS_COMPLETED,BATTLE_PASS_CHOSE_WINNER,TECHTREE_DISCOUNT_INFO,TECHTREE_NATION_DISCOUNT];
 
         public static const CUSTOMIZATION_SET:Array = [TECH_CUSTOMIZATION_ITEM,TECH_CUSTOMIZATION_NONHISTORIC_ITEM,TECH_CUSTOMIZATION_POPOVER_ITEM,TECH_CUSTOMIZATION_ITEM_ICON,TECH_CUSTOMIZATION_ITEM_AWARD,TECH_CUSTOMIZATION_ITEM_PURCHASE,SHOP_CUSTOMIZATION_ITEM];
 
@@ -645,7 +667,7 @@ package net.wg.data.constants.generated
 
         public static const EVENT_PROGRESSION_SET:Array = [EVENT_PROGRESSION_SELECTOR_INFO,EVENT_PROGRESSION_PROGRESS_INFO];
 
-        public static const EPIC_BATTLE_SET:Array = [EPIC_SKILL_INFO,EPIC_SKILL_SLOT_INFO,EPIC_PRESTIGE_PROGRESS_BLOCK_INFO,EPIC_QUESTS_PREVIEW];
+        public static const EPIC_BATTLE_SET:Array = [EPIC_SKILL_INFO,EPIC_SKILL_SLOT_INFO,EPIC_PRESTIGE_PROGRESS_BLOCK_INFO,EPIC_QUESTS_PREVIEW,EVENT_PROGRESSION_COMPLETED_QUESTS_INFO];
 
         public static const PERSONAL_MISSION_SET:Array = [PERSONAL_QUESTS_PREVIEW,PERSONAL_MISSIONS_TANKWOMAN,PERSONAL_MISSIONS_TANKMODULE,FREE_SHEET,FREE_SHEET_RETURN,FREE_SHEET_NOT_ENOUGH,FREE_SHEET_USED,BADGE,BADGE_LOYAL_SERVICE,OPERATION,PERSONAL_MISSION_INFO,PERSONAL_MISSIONS_MAP_REGION,OPERATIONS_CHAIN_DETAILS,OPERATION_POSTPONED];
 
@@ -653,21 +675,21 @@ package net.wg.data.constants.generated
 
         public static const MARATHON_SET:Array = [MARATHON_QUESTS_PREVIEW];
 
-        public static const TANKMAN_SET:Array = [TANKMAN,TANKMAN_SKILL,TANKMAN_NEW_SKILL,TANKMAN_SKILL_EXTENDED,TANKMAN_NOT_RECRUITED,PREVIEW_CREW_SKILL];
+        public static const TANKMAN_SET:Array = [TANKMAN,TANKMAN_SKILL,TANKMAN_NEW_SKILL,TANKMAN_SKILL_EXTENDED,TANKMAN_NOT_RECRUITED,PREVIEW_CREW_SKILL,BATTLE_ROYALE_TANKMAN];
 
         public static const RANKED_SET:Array = [RANKED_BATTLES_POSITION,RANKED_BATTLES_EFFICIENCY,RANKED_BATTLES_LEAGUE,RANKED_BATTLES_BONUS,RANKED_BATTLES_RANK,RANKED_STEP,RANKED_CALENDAR_DAY_INFO,RANKED_CALENDAR_STEPS_INFO,RANKED_SELECTOR_INFO,RANKED_UNAVAILABLE_INFO,RANKED_DIVISION_INFO,RANKED_BATTLES_YEAR_REWARD,RANKED_SERVER_PRIMETIME,RANKED_BATTLES_ROLES,RANKED_QUESTS_PREVIEW];
 
-        public static const SETTINGS_SET:Array = [SETTINGS_CONTROL,SETTINGS_BUTTON,SETTINGS_MINIMAP_CIRCLES,SETTINGS_KEY_FOLLOW_ME,SETTINGS_KEY_TURN_BACK,SETTINGS_KEY_NEED_HELP,SETTINGS_KEY_RELOAD,SETTINGS_KEY_SWITCH_MODE,SETTINGS_KEY_CHARGE_FIRE];
+        public static const SETTINGS_SET:Array = [SETTINGS_CONTROL,SETTINGS_BUTTON,SETTINGS_MINIMAP_CIRCLES,SETTINGS_KEY_SWITCH_MODE,SETTINGS_KEY_HIGHLIGHTLOCATION,SETTINGS_KEY_HIGHLIGHTTARGET,SETTINGS_KEY_SHOWRADIALMENU,SETTINGS_KEY_CHARGE_FIRE];
 
         public static const TUTORIAL_SET:Array = [HANGAR_TUTORIAL_CUSTOMIZATION_TYPES,HANGAR_TUTORIAL_PERSONAL_CASE_SKILLS,HANGAR_TUTORIAL_PERSONAL_CASE_PERKS,HANGAR_TUTORIAL_PERSONAL_CASE_ADDITIONAL,HANGAR_TUTORIAL_AMMUNITION,HANGAR_TUTORIAL_EQUPMENT];
 
         public static const VEH_CMP_SET:Array = [VEH_CMP_CUSTOMIZATION,VEH_CMP_SKILLS];
 
-        public static const VEHICLES_SET:Array = [CAROUSEL_VEHICLE,INVENTORY_VEHICLE,TECHTREE_VEHICLE,SHOP_VEHICLE,AWARD_VEHICLE,TRADE_IN,TRADE_IN_PRICE,HISTORICAL_VEHICLE,VEHICLE_SIMPLE_PARAMETERS,BASE_VEHICLE_PARAMETERS,VEHICLE_CMP_PARAMETERS,VEHICLE_AVG_PARAMETERS,VEHICLE_ADVANCED_PARAMETERS,VEHICLE_PREVIEW_SIMPLE_PARAMETERS,VEHICLE_PREVIEW_AVG_PARAMETERS,VEHICLE_PREVIEW_ADVANCED_PARAMETERS,DEFAULT_CREW_MEMBER,VEHICLE_PREVIEW_CREW_MEMBER,TECHTREE_VEHICLE_ANNOUNCEMENT,TECHTREE_VEHICLE_STATUS];
+        public static const VEHICLES_SET:Array = [CAROUSEL_VEHICLE,INVENTORY_VEHICLE,TECHTREE_VEHICLE,SHOP_VEHICLE,AWARD_VEHICLE,TRADE_IN,TRADE_IN_PRICE,HISTORICAL_VEHICLE,VEHICLE_SIMPLE_PARAMETERS,BASE_VEHICLE_PARAMETERS,VEHICLE_CMP_PARAMETERS,VEHICLE_AVG_PARAMETERS,VEHICLE_ADVANCED_PARAMETERS,VEHICLE_PREVIEW_SIMPLE_PARAMETERS,VEHICLE_PREVIEW_AVG_PARAMETERS,VEHICLE_PREVIEW_ADVANCED_PARAMETERS,DEFAULT_CREW_MEMBER,VEHICLE_PREVIEW_CREW_MEMBER,TECHTREE_VEHICLE_ANNOUNCEMENT,TECHTREE_VEHICLE_STATUS,VEHICLE_TANK_SETUP_PARAMETERS];
 
         public static const BLUEPRINTS_SET:Array = [BLUEPRINT_INFO,BLUEPRINT_FRAGMENT_INFO,BLUEPRINT_EMPTY_SLOT_INFO,BLUEPRINT_CONVERT_INFO,BLUEPRINT_RANDOM_INFO];
 
-        public static const VEHICLES_ITEMS_SET:Array = [INVENTORY_MODULE,DEFAULT_MODULE,SHOP_MODULE,TECHTREE_MODULE,TECH_MAIN_MODULE,HANGAR_MODULE,COMPARE_MODULE,VEH_COMPARE_TECHTREE_MODULE,PREVIEW_MODULE,AWARD_MODULE,DEFAULT_SHELL,SHOP_SHELL,AWARD_SHELL,HANGAR_SHELL,COMPARE_SHELL,INVENTORY_SHELL,TECH_MAIN_SHELL,NATION_CHANGE_HANGAR_SHELL,NATION_CHANGE_HANGAR_MODULE];
+        public static const VEHICLES_ITEMS_SET:Array = [INVENTORY_MODULE,DEFAULT_MODULE,SHOP_MODULE,TECHTREE_MODULE,TECH_MAIN_MODULE,HANGAR_MODULE,HANGAR_SLOT_MODULE,COMPARE_MODULE,COMPARE_SLOT_MODULE,VEH_COMPARE_TECHTREE_MODULE,PREVIEW_MODULE,AWARD_MODULE,DEFAULT_SHELL,SHOP_SHELL,AWARD_SHELL,HANGAR_SHELL,COMPARE_SHELL,INVENTORY_SHELL,TECH_MAIN_SHELL,NATION_CHANGE_HANGAR_SHELL,NATION_CHANGE_HANGAR_MODULE,OPT_DEVICE_EMPTY_SLOT,AMMUNITION_EMPTY_SLOT,HANGAR_CARD_MODULE];
 
         public static const WGM_CURRENCY_SET:Array = [GOLD_STATS,CREDITS_STATS];
 
@@ -691,7 +713,17 @@ package net.wg.data.constants.generated
 
         public static const BADGES_SET:Array = [BADGES_SUFFIX_ITEM,BADGES_SUFFIX_RANKED_ITEM];
 
-        public static const BOB_SET:Array = [BOB_SELECTOR_INFO,BOB_SERVER_PRIMETIME];
+        public static const ROYALE_BATTLE_SET:Array = [BATTLE_ROYALE_WEAK_ZONES,BATTLE_ROYALE_MODULES];
+
+        public static const ROYALE_LOBBY_SET:Array = [BATTLE_ROYALE_VEHICLE,BATTLE_ROYALE_MODULES_HANGAR,BATTLE_ROYALE_BATTLE_PROGRESSION,BATTLE_ROYALE_EQUIPMENT,BATTLE_ROYALE_PERF_SIMPLE,BATTLE_ROYALE_PERF_ADVANCED,BATTLE_ROYALE_SELECTOR_INFO];
+
+        public static const BATTLE_BLOCK_TOOLTIPS:Array = [BATTLE_OPT_DEVICE];
+
+        public static const OPTDEV_SLOT_STATE_EMPTY:String = "empty";
+
+        public static const OPTDEV_SLOT_STATE_EMPTY_SELECTED:String = "emptySelected";
+
+        public static const OPTDEV_SLOT_STATE_ACTIVE_SELECTED:String = "activeSelected";
 
         public function TOOLTIPS_CONSTANTS()
         {

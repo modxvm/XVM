@@ -8,6 +8,8 @@ package net.wg.gui.lobby.tradeIn
     import flash.events.MouseEvent;
     import flash.text.TextFieldAutoSize;
     import scaleform.clik.constants.InvalidationType;
+    import net.wg.data.constants.SoundManagerStates;
+    import net.wg.data.constants.SoundTypes;
 
     public class TradeOffWidget extends TradeOffWidgetMeta
     {
@@ -170,6 +172,7 @@ package net.wg.gui.lobby.tradeIn
             this.buttonHover.visible = enabled;
             var _loc2_:Object = getTooltipS();
             App.toolTipMgr.showSpecial(_loc2_.type,null,_loc2_.data);
+            App.soundMgr.playControlsSnd(SoundManagerStates.SND_OVER,SoundTypes.CUSTOMIZATION_DEFAULT,null);
         }
 
         private function onButtonRollOutHandler(param1:MouseEvent) : void

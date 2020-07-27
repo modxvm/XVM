@@ -465,6 +465,7 @@ package net.wg.gui.lobby.tankman
             var _loc2_:PersonalCaseEvent = null;
             if(param1.itemData)
             {
+                this._retrainVehicleCD = this.vehiclesDropdown.dataProvider[this.vehiclesDropdown.selectedIndex].intCD;
                 _loc2_ = new PersonalCaseEvent(PersonalCaseEvent.CHANGE_RETRAIN_VEHICLE);
                 _loc2_.vehicleId = param1.itemData.intCD;
                 dispatchEvent(_loc2_);

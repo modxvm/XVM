@@ -7,10 +7,6 @@ package net.wg.infrastructure.base.meta
 
         function onCancelClickS() : void;
 
-        function onActionButtonClickS() : void;
-
         function as_setModuleInfo(param1:Object) : void;
-
-        function as_setActionButton(param1:Object) : void;
     }
 }

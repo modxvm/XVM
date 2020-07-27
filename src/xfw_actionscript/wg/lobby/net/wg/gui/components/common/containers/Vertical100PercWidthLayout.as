@@ -1,5 +1,6 @@
 package net.wg.gui.components.common.containers
 {
+    import net.wg.gui.components.containers.VerticalGroupLayout;
     import scaleform.clik.core.UIComponent;
 
     public class Vertical100PercWidthLayout extends VerticalGroupLayout

@@ -10,6 +10,7 @@ package net.wg.gui.lobby.techtree.nodes
     import net.wg.gui.lobby.techtree.controls.XPField;
     import net.wg.gui.components.controls.TradeIco;
     import net.wg.infrastructure.managers.ITooltipMgr;
+    import net.wg.gui.lobby.techtree.sub.ResearchItems;
     import net.wg.gui.lobby.techtree.interfaces.IRenderer;
     import net.wg.gui.lobby.techtree.constants.ColorIndex;
     import flash.geom.Point;
@@ -96,6 +97,11 @@ package net.wg.gui.lobby.techtree.nodes
         {
             this._tooltipMgr = App.toolTipMgr;
             super();
+        }
+
+        override public function getExtraState() : Object
+        {
+            return {"isResearchGraph":container is ResearchItems};
         }
 
         override public function getColorIndex(param1:IRenderer = null) : uint
@@ -255,6 +261,12 @@ package net.wg.gui.lobby.techtree.nodes
             this.nameTF.width = valueObject.isNationChangeAvailable?NAME_TF_SHORT_WIDTH_FOR_NATION_CHANGE_ICON:NAME_TF_FULL_WIDTH;
             this.setTradeIcon();
             this.updateTechTreeEventBorder();
+        }
+
+        override public function cleanUp() : void
+        {
+            super.cleanUp();
+            this.blueprintPlus.enabled = false;
         }
 
         override protected function draw() : void

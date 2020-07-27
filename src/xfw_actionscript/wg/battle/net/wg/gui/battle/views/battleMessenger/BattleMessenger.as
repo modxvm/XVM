@@ -10,10 +10,10 @@ package net.wg.gui.battle.views.battleMessenger
     import net.wg.utils.IScheduler;
     import net.wg.gui.battle.views.battleMessenger.actionPanel.BattleMessengerActionContainer;
     import net.wg.gui.battle.views.battleMessenger.VO.BattleMessengerToxicVO;
-    import flash.events.MouseEvent;
     import net.wg.gui.battle.views.battleMessenger.VO.BattleMessengerSettingsVO;
     import net.wg.data.constants.generated.BATTLE_MESSAGES_CONSTS;
     import flash.text.TextFieldAutoSize;
+    import flash.events.MouseEvent;
     import flash.events.KeyboardEvent;
     import scaleform.clik.events.InputEvent;
     import net.wg.data.constants.Values;
@@ -45,8 +45,6 @@ package net.wg.gui.battle.views.battleMessenger
         private static const BOTTOM_SIDE_Y_POSITION:Number = 48;
 
         private static const BOTTOM_SIDE_WIDTH:Number = 230;
-
-        private static const MESSAGE_RENDERER_WIDTH:Number = 350;
 
         public var receiverField:TextField = null;
 
@@ -146,6 +144,8 @@ package net.wg.gui.battle.views.battleMessenger
 
         private var _defaultWidth:int = -1;
 
+        private var _availableWidth:int = 360;
+
         private var _hoverWidth:int = 0;
 
         private var _hoverHeight:int = 0;
@@ -153,6 +153,8 @@ package net.wg.gui.battle.views.battleMessenger
         private var _hoverYPosition:int = 0;
 
         private var _hoverState:int = 0;
+
+        private var _isSmallState:Boolean = false;
 
         public function BattleMessenger()
         {
@@ -184,45 +186,6 @@ package net.wg.gui.battle.views.battleMessenger
         private static function receiversSort(param1:BattleMessengerReceiverVO, param2:BattleMessengerReceiverVO) : int
         {
             return param1.orderIndex - param2.orderIndex;
-        }
-
-        private function onBattleMessengerRollOverHandler(param1:MouseEvent) : void
-        {
-            this.switchSwapArea(false);
-        }
-
-        private function onBattleMessengerRollOutHandler(param1:MouseEvent) : void
-        {
-            this.switchSwapArea(true);
-        }
-
-        public function updateSwapAreaHeight(param1:Number) : void
-        {
-            this.swapArea.graphics.clear();
-            this.drawRect(this.swapArea,0,param1 - BOTTOM_SIDE_Y_POSITION,BOTTOM_SIDE_WIDTH,BOTTOM_SIDE_Y_POSITION);
-            this.drawRect(this.swapArea,0,0,MESSAGE_RENDERER_WIDTH,param1 - BOTTOM_SIDE_Y_POSITION);
-            this.swapArea.y = -param1 + BOTTOM_SIDE_Y_POSITION;
-        }
-
-        private function switchSwapArea(param1:Boolean) : void
-        {
-            if(param1)
-            {
-                hitArea = this.swapArea;
-            }
-            else
-            {
-                hitArea = null;
-            }
-            this.swapArea.mouseEnabled = param1;
-            mouseChildren = !param1;
-        }
-
-        private function drawRect(param1:Sprite, param2:Number, param3:Number, param4:Number, param5:Number) : void
-        {
-            param1.graphics.beginFill(0);
-            param1.graphics.drawRect(param2,param3,param4,param5);
-            param1.graphics.endFill();
         }
 
         override protected function setupList(param1:BattleMessengerSettingsVO) : void
@@ -268,6 +231,7 @@ package net.wg.gui.battle.views.battleMessenger
         override protected function onDispose() : void
         {
             var _loc1_:BattleMessage = null;
+            this._scheduler.cancelTask(this.updateMesYPositions);
             if(this._userInteractionCmp)
             {
                 this._toxicPanelData = null;
@@ -331,6 +295,22 @@ package net.wg.gui.battle.views.battleMessenger
             this.hit = null;
             this.hoverMC = null;
             super.onDispose();
+        }
+
+        override protected function setReceiver(param1:BattleMessengerReceiverVO, param2:Boolean) : void
+        {
+            if(param2)
+            {
+                this.clearReceivers();
+            }
+            this._receivers.push(param1);
+            this.updateReceivers();
+        }
+
+        override protected function setReceivers(param1:Vector.<BattleMessengerReceiverVO>) : void
+        {
+            this._receivers = param1;
+            this.updateReceivers();
         }
 
         public function as_changeReceiver(param1:int) : void
@@ -424,22 +404,6 @@ package net.wg.gui.battle.views.battleMessenger
         public function as_setFocus() : void
         {
             this.showViewElements(true);
-        }
-
-        override protected function setReceiver(param1:BattleMessengerReceiverVO, param2:Boolean) : void
-        {
-            if(param2)
-            {
-                this.clearReceivers();
-            }
-            this._receivers.push(param1);
-            this.updateReceivers();
-        }
-
-        override protected function setReceivers(param1:Vector.<BattleMessengerReceiverVO>) : void
-        {
-            this._receivers = param1;
-            this.updateReceivers();
         }
 
         public function as_setUserPreferences(param1:String) : void
@@ -536,6 +500,47 @@ package net.wg.gui.battle.views.battleMessenger
                     this.showLastIndexMessages();
                     break;
             }
+        }
+
+        public function setAvailableWidthForMessages(param1:int) : void
+        {
+            var _loc2_:BattleMessage = null;
+            this._availableWidth = param1;
+            for each(_loc2_ in this._messages)
+            {
+                _loc2_.setAvailableWidth(param1);
+            }
+            this._scheduler.cancelTask(this.updateMesYPositions);
+            this._scheduler.scheduleOnNextFrame(this.updateMesYPositions);
+        }
+
+        public function updateSwapAreaHeight(param1:Number) : void
+        {
+            this.swapArea.graphics.clear();
+            this.drawRect(this.swapArea,0,param1 - BOTTOM_SIDE_Y_POSITION,BOTTOM_SIDE_WIDTH,BOTTOM_SIDE_Y_POSITION);
+            this.drawRect(this.swapArea,0,0,this._isSmallState?BOTTOM_SIDE_WIDTH:BattleMessage.DEFAULT_TEXT_WIDTH,param1 - BOTTOM_SIDE_Y_POSITION);
+            this.swapArea.y = -param1 + BOTTOM_SIDE_Y_POSITION;
+        }
+
+        private function switchSwapArea(param1:Boolean) : void
+        {
+            if(param1)
+            {
+                hitArea = this.swapArea;
+            }
+            else
+            {
+                hitArea = null;
+            }
+            this.swapArea.mouseEnabled = param1;
+            mouseChildren = !param1;
+        }
+
+        private function drawRect(param1:Sprite, param2:Number, param3:Number, param4:Number, param5:Number) : void
+        {
+            param1.graphics.beginFill(0);
+            param1.graphics.drawRect(param2,param3,param4,param5);
+            param1.graphics.endFill();
         }
 
         private function fillBG() : void
@@ -819,6 +824,18 @@ package net.wg.gui.battle.views.battleMessenger
             }
         }
 
+        private function updateMesYPositions() : void
+        {
+            var _loc1_:int = this._bottomMessageIndex - 1;
+            var _loc2_:* = 0;
+            while(_loc1_ >= this._topMessageIndex)
+            {
+                _loc2_ = _loc2_ - this._messages[_loc1_].height;
+                this._messages[_loc1_].y = _loc2_;
+                _loc1_--;
+            }
+        }
+
         private function moveDownMessages() : void
         {
             var _loc1_:int = this._messages[this._bottomMessageIndex].height;
@@ -1030,6 +1047,7 @@ package net.wg.gui.battle.views.battleMessenger
             }
             var _loc4_:BattleMessage = param2.createItem(this.userInteraction);
             _loc4_.messageID = param3;
+            _loc4_.setAvailableWidth(this._availableWidth);
             _loc4_.setMessageData(param1);
             this.pushMessage(_loc4_);
         }
@@ -1051,6 +1069,16 @@ package net.wg.gui.battle.views.battleMessenger
             {
                 this._userInteractionCmp.hide();
             }
+        }
+
+        public function set isSmallState(param1:Boolean) : void
+        {
+            this._isSmallState = param1;
+        }
+
+        public function get isEnterButtonPressed() : Boolean
+        {
+            return this._isEnterButtonPressed;
         }
 
         private function set receiverIdx(param1:int) : void
@@ -1076,6 +1104,16 @@ package net.wg.gui.battle.views.battleMessenger
         private function get isEnableReceiver() : Boolean
         {
             return this._receivers.length > 0?this._receivers[this._receiverIdx].isEnabled:false;
+        }
+
+        private function onBattleMessengerRollOverHandler(param1:MouseEvent) : void
+        {
+            this.switchSwapArea(false);
+        }
+
+        private function onBattleMessengerRollOutHandler(param1:MouseEvent) : void
+        {
+            this.switchSwapArea(true);
         }
 
         private function onMessengerRollOutHandler(param1:MouseEvent) : void
@@ -1241,11 +1279,6 @@ package net.wg.gui.battle.views.battleMessenger
                 }
             }
             this._selectedTargetOnMouseDown = null;
-        }
-
-        public function get isEnterButtonPressed() : Boolean
-        {
-            return this._isEnterButtonPressed;
         }
     }
 }

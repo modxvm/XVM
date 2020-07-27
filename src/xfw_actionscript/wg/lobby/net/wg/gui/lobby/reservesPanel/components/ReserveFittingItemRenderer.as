@@ -1,7 +1,7 @@
 package net.wg.gui.lobby.reservesPanel.components
 {
     import net.wg.gui.components.controls.TableRenderer;
-    import net.wg.gui.components.advanced.ModuleTypesUIWithFill;
+    import net.wg.gui.components.advanced.ReserveTypesUIWithFill;
     import net.wg.gui.interfaces.ISoundButtonEx;
     import flash.display.MovieClip;
     import flash.text.TextField;
@@ -10,17 +10,12 @@ package net.wg.gui.lobby.reservesPanel.components
     import scaleform.clik.events.ButtonEvent;
     import flash.events.MouseEvent;
     import scaleform.clik.constants.InvalidationType;
-    import net.wg.data.constants.Values;
     import net.wg.gui.events.DeviceEvent;
 
     public class ReserveFittingItemRenderer extends TableRenderer
     {
 
-        private static const LEVELS_WITHOUT_GLOW:int = 10;
-
-        private static const GLOW_STRING:String = "Glow";
-
-        public var moduleType:ModuleTypesUIWithFill;
+        public var moduleType:ReserveTypesUIWithFill;
 
         public var removeButton:ISoundButtonEx;
 
@@ -108,9 +103,8 @@ package net.wg.gui.lobby.reservesPanel.components
             {
                 return;
             }
-            var _loc1_:String = this._moduleData.moduleLabel + (this._moduleData.level > LEVELS_WITHOUT_GLOW?GLOW_STRING:Values.EMPTY_STR);
-            App.utils.asserter.assertFrameExists(_loc1_,this.moduleType);
-            this.moduleType.gotoAndStop(_loc1_);
+            var _loc1_:String = this._moduleData.moduleLabel + (this._moduleData.level > ReserveTypesUIWithFill.LEVELS_WITHOUT_GLOW?ReserveTypesUIWithFill.GLOW_BIG_ENDING:ReserveTypesUIWithFill.NO_GLOW_BIG_ENDING);
+            this.moduleType.setModuleTypeIcon(_loc1_);
             this.levelIcon.gotoAndStop(this._moduleData.level);
             this.paramValuesField.htmlText = this._moduleData.paramValues;
             this.paramNamesField.htmlText = this._moduleData.paramNames;

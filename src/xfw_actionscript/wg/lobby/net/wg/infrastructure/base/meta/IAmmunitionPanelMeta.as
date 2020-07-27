@@ -5,7 +5,7 @@ package net.wg.infrastructure.base.meta
     public interface IAmmunitionPanelMeta extends IEventDispatcher
     {
 
-        function showTechnicalMaintenanceS() : void;
+        function showRepairDialogS() : void;
 
         function showCustomizationS() : void;
 
@@ -13,20 +13,10 @@ package net.wg.infrastructure.base.meta
 
         function showChangeNationS() : void;
 
-        function as_setAmmo(param1:Array, param2:Boolean) : void;
+        function as_setWarningState(param1:Boolean) : void;
 
         function as_updateVehicleStatus(param1:Object) : void;
 
-        function as_showBattleAbilitiesAlert(param1:Boolean) : void;
-
         function as_setCustomizationBtnCounter(param1:int) : void;
-
-        function as_setBoosterBtnCounter(param1:int) : void;
-
-        function as_showAnimation(param1:String, param2:int, param3:String) : void;
-
-        function as_setEquipmentEnabled(param1:Boolean) : void;
-
-        function as_optionalDevicesEnabled(param1:Boolean) : void;
     }
 }

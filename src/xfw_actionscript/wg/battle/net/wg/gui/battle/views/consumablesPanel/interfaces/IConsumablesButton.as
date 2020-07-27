@@ -15,7 +15,7 @@ package net.wg.gui.battle.views.consumablesPanel.interfaces
 
         function set quantity(param1:int) : void;
 
-        function setCoolDownTime(param1:Number, param2:Number, param3:Number, param4:Boolean) : void;
+        function setCoolDownTime(param1:Number, param2:Number, param3:Number, param4:int = 1) : void;
 
         function setCoolDownPosAsPercent(param1:Number) : void;
 
@@ -23,7 +23,7 @@ package net.wg.gui.battle.views.consumablesPanel.interfaces
 
         function clearColorTransform() : void;
 
-        function setActivated() : void;
+        function set activated(param1:Boolean) : void;
 
         function clearCoolDownTime() : void;
 
@@ -36,5 +36,7 @@ package net.wg.gui.battle.views.consumablesPanel.interfaces
         function get showConsumableBorder() : Boolean;
 
         function set showConsumableBorder(param1:Boolean) : void;
+
+        function set isReplay(param1:Boolean) : void;
     }
 }

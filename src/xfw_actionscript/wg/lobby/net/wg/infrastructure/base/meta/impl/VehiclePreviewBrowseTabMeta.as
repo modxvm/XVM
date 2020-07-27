@@ -1,6 +1,7 @@
 package net.wg.infrastructure.base.meta.impl
 {
     import net.wg.infrastructure.base.BaseDAAPIComponent;
+    import net.wg.gui.lobby.vehiclePreview.data.VPBrowseTabVO;
     import net.wg.data.constants.Errors;
     import net.wg.infrastructure.exceptions.AbstractException;
 
@@ -9,7 +10,7 @@ package net.wg.infrastructure.base.meta.impl
 
         public var setActiveState:Function;
 
-        private var _array:Array;
+        private var _vPBrowseTabVO:VPBrowseTabVO;
 
         public function VehiclePreviewBrowseTabMeta()
         {
@@ -18,10 +19,10 @@ package net.wg.infrastructure.base.meta.impl
 
         override protected function onDispose() : void
         {
-            if(this._array)
+            if(this._vPBrowseTabVO)
             {
-                this._array.splice(0,this._array.length);
-                this._array = null;
+                this._vPBrowseTabVO.dispose();
+                this._vPBrowseTabVO = null;
             }
             super.onDispose();
         }
@@ -32,22 +33,22 @@ package net.wg.infrastructure.base.meta.impl
             this.setActiveState(param1);
         }
 
-        public final function as_setData(param1:String, param2:Boolean, param3:int, param4:Array) : void
+        public final function as_setData(param1:Object) : void
         {
-            var _loc5_:Array = this._array;
-            this._array = param4;
-            this.setData(param1,param2,param3,this._array);
-            if(_loc5_)
+            var _loc2_:VPBrowseTabVO = this._vPBrowseTabVO;
+            this._vPBrowseTabVO = new VPBrowseTabVO(param1);
+            this.setData(this._vPBrowseTabVO);
+            if(_loc2_)
             {
-                _loc5_.splice(0,_loc5_.length);
+                _loc2_.dispose();
             }
         }
 
-        protected function setData(param1:String, param2:Boolean, param3:int, param4:Array) : void
+        protected function setData(param1:VPBrowseTabVO) : void
         {
-            var _loc5_:String = "as_setData" + Errors.ABSTRACT_INVOKE;
-            DebugUtils.LOG_ERROR(_loc5_);
-            throw new AbstractException(_loc5_);
+            var _loc2_:String = "as_setData" + Errors.ABSTRACT_INVOKE;
+            DebugUtils.LOG_ERROR(_loc2_);
+            throw new AbstractException(_loc2_);
         }
     }
 }

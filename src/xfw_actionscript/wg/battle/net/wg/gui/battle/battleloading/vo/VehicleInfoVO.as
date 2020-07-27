@@ -57,8 +57,6 @@ package net.wg.gui.battle.battleloading.vo
 
         public var vLevel:int = -1;
 
-        public var isFallout:Boolean = false;
-
         public function VehicleInfoVO(param1:Object)
         {
             super(param1);

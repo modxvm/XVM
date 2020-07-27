@@ -7,7 +7,7 @@ package net.wg.gui.lobby.sessionStats
     import net.wg.gui.components.containers.GroupEx;
     import flash.display.MovieClip;
     import net.wg.gui.lobby.sessionStats.data.SessionVehicleStatsViewVO;
-    import net.wg.gui.components.common.containers.VerticalGroupLayout;
+    import net.wg.gui.components.containers.VerticalGroupLayout;
     import net.wg.data.constants.Linkages;
     import scaleform.clik.constants.InvalidationType;
     import flash.display.InteractiveObject;

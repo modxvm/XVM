@@ -25,7 +25,7 @@ package net.wg.gui.lobby.hangar.alertMessage
 
         private static const MESSAGE_ICON_GAP:int = 9;
 
-        private static const BTN_WITH_LABEL_WIDTH:int = 140;
+        private static const BTN_TEXT_PADDING:int = 15;
 
         public var alertIcon:Image = null;
 
@@ -121,7 +121,8 @@ package net.wg.gui.lobby.hangar.alertMessage
                         if(StringUtils.isNotEmpty(this._data.buttonLabel))
                         {
                             this.popoverIconButton.label = this._data.buttonLabel;
-                            this.popoverIconButton.width = BTN_WITH_LABEL_WIDTH;
+                            this.popoverIconButton.dynamicSizeByText = true;
+                            this.popoverIconButton.paddingHorizontal = BTN_TEXT_PADDING;
                         }
                         else
                         {

@@ -67,6 +67,14 @@ package net.wg.gui.lobby.header
             this.regionOnlineCounter.visible = param1;
         }
 
+        public function setServerName(param1:String) : void
+        {
+            this.clusterOnlineCounter.visible = this.bgOnlineCounter.visible = true;
+            this.clusterOnlineCounter.htmlText = param1;
+            this.bgOnlineCounter.height = this.hitMc.height = this.clusterOnlineCounter.height;
+            this.hitMc.width = this.clusterOnlineCounter.textWidth;
+        }
+
         public function updateCount(param1:String, param2:String, param3:String, param4:Boolean) : void
         {
             this._tooltipOnlineCounter = param3;
@@ -103,7 +111,7 @@ package net.wg.gui.lobby.header
 
         private function onMouseOverHandler(param1:MouseEvent) : void
         {
-            if(this.bgOnlineCounter.visible)
+            if(this.bgOnlineCounter.visible && this._tooltipOnlineCounter)
             {
                 App.toolTipMgr.showComplex(this._tooltipOnlineCounter);
             }

@@ -54,7 +54,6 @@ package net.wg.gui.battle.views.damagePanel.components.modules
 
         public function ModuleAssets(param1:String, param2:Boolean, param3:int)
         {
-            var _loc6_:* = 0;
             super();
             this._name = param1;
             var _loc4_:IClassFactory = App.utils.classFactory;
@@ -69,7 +68,7 @@ package net.wg.gui.battle.views.damagePanel.components.modules
             this._repairAnim.visible = false;
             this._warningAnim.visible = false;
             this._modulesHit.visible = false;
-            _loc6_ = LEFT_X_POSITION;
+            var _loc6_:int = LEFT_X_POSITION;
             if(!param2)
             {
                 _loc6_ = RIGHT_X_POSITION;

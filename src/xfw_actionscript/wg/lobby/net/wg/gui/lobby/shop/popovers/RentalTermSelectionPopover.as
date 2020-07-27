@@ -10,7 +10,7 @@ package net.wg.gui.lobby.shop.popovers
     import net.wg.gui.components.popovers.PopOver;
     import flash.events.Event;
     import net.wg.data.constants.Linkages;
-    import net.wg.gui.components.common.containers.VerticalGroupLayout;
+    import net.wg.gui.components.containers.VerticalGroupLayout;
     import net.wg.gui.lobby.shop.controls.RentalTermSlotButton;
 
     public class RentalTermSelectionPopover extends RentalTermSelectionPopoverMeta implements IRentalTermSelectionPopoverMeta

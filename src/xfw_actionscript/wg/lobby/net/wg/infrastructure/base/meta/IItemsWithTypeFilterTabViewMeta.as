@@ -13,6 +13,8 @@ package net.wg.infrastructure.base.meta
 
         function navigateToStoreS() : void;
 
+        function upgradeItemS(param1:int) : void;
+
         function as_initTypeFilter(param1:Object) : void;
 
         function as_resetFilter(param1:int) : void;

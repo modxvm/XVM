@@ -4,7 +4,7 @@ package net.wg.gui.lobby.sessionStats.settings
     import flash.text.TextField;
     import net.wg.gui.components.containers.GroupEx;
     import net.wg.gui.lobby.sessionStats.data.SessionStatsSettingsBattleVO;
-    import net.wg.gui.components.common.containers.VerticalGroupLayout;
+    import net.wg.gui.components.containers.VerticalGroupLayout;
     import net.wg.data.constants.Linkages;
     import flash.events.Event;
     import scaleform.clik.constants.InvalidationType;

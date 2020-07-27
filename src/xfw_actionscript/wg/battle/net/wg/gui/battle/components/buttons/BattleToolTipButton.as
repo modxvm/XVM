@@ -13,6 +13,8 @@ package net.wg.gui.battle.components.buttons
 
         protected var _tooltipStr:String = "";
 
+        private var _isTooltipSpecial:Boolean = false;
+
         public function BattleToolTipButton()
         {
             super();
@@ -51,6 +53,27 @@ package net.wg.gui.battle.components.buttons
             super.invokeRollOverActions();
         }
 
+        protected function showSpecialTooltip() : void
+        {
+            App.toolTipMgr.showSpecial(this._tooltipStr,null);
+        }
+
+        private function showTooltip() : void
+        {
+            if(!this._isTooltipVisible)
+            {
+                this._isTooltipVisible = true;
+                if(this.isTooltipSpecial)
+                {
+                    this.showSpecialTooltip();
+                }
+                else
+                {
+                    App.toolTipMgr.showComplex(this._tooltipStr);
+                }
+            }
+        }
+
         private function tryToHideTooltip() : void
         {
             if(this.hideToolTipOnClickActions)
@@ -65,15 +88,6 @@ package net.wg.gui.battle.components.buttons
             {
                 this._isTooltipVisible = false;
                 App.toolTipMgr.hide();
-            }
-        }
-
-        private function showTooltip() : void
-        {
-            if(!this._isTooltipVisible)
-            {
-                this._isTooltipVisible = true;
-                App.toolTipMgr.showComplex(this._tooltipStr);
             }
         }
 
@@ -101,6 +115,16 @@ package net.wg.gui.battle.components.buttons
         public function set tooltipStr(param1:String) : void
         {
             this._tooltipStr = param1;
+        }
+
+        public function get isTooltipSpecial() : Boolean
+        {
+            return this._isTooltipSpecial;
+        }
+
+        public function set isTooltipSpecial(param1:Boolean) : void
+        {
+            this._isTooltipSpecial = param1;
         }
 
         private function get allowShowTooltip() : Boolean

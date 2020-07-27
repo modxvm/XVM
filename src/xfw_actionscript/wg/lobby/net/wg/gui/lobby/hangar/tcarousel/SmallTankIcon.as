@@ -1,9 +1,10 @@
 package net.wg.gui.lobby.hangar.tcarousel
 {
-    import flash.geom.Point;
+    import flash.geom.Rectangle;
     import net.wg.utils.ICommons;
     import net.wg.gui.components.carousels.data.VehicleCarouselVO;
     import org.idmedia.as3commons.util.StringUtils;
+    import net.wg.data.constants.AlignType;
     import flash.text.TextFormat;
     import net.wg.data.constants.generated.TEXT_ALIGN;
     import net.wg.gui.components.controls.data.ActionPriceBgConstants;
@@ -11,9 +12,9 @@ package net.wg.gui.lobby.hangar.tcarousel
     public class SmallTankIcon extends BaseTankIcon
     {
 
-        private static const ICON_OFFSET_DEF:Point = new Point(35,3);
+        private static const ACTION_PRICE_BG_OFFSET_Y:int = 3;
 
-        private static const ICON_OFFSET_EMPTY:Point = new Point(0,0);
+        private static const IMG_ICON_BOUNDS:Rectangle = new Rectangle(1,1,160,35);
 
         private var _commons:ICommons;
 
@@ -59,6 +60,8 @@ package net.wg.gui.lobby.hangar.tcarousel
         override protected function configUI() : void
         {
             super.configUI();
+            imgIcon.horizontalAlign = AlignType.RIGHT;
+            imgIcon.verticalAlign = AlignType.BOTTOM;
             imgFavorite.source = RES_ICONS.MAPS_ICONS_LIBRARY_FAVORITE_SMALL;
         }
 
@@ -86,25 +89,19 @@ package net.wg.gui.lobby.hangar.tcarousel
             {
                 txtInfo.visible = infoImg.visible;
             }
-            if(param1.buyTank || param1.restoreTank || param1.isEvent)
-            {
-                imgIcon.x = ICON_OFFSET_EMPTY.x;
-                imgIcon.y = ICON_OFFSET_EMPTY.y;
-            }
-            else
-            {
-                imgIcon.x = ICON_OFFSET_DEF.x;
-                imgIcon.y = ICON_OFFSET_DEF.y;
-            }
             if(param1.hasSale && param1.buySlot)
             {
                 actionPrice.bg.gotoAndStop(ActionPriceBgConstants.STATE_TECH_TREE_VEHICLE);
-                actionPrice.bg.y = ICON_OFFSET_DEF.y;
+                actionPrice.bg.y = ACTION_PRICE_BG_OFFSET_Y;
             }
             imgIcon.source = param1.iconSmall;
             imgIcon.sourceAlt = param1.iconSmallAlt;
             addImg.visible = false;
-            updateSpecialBg(param1.specialBgSmallSrc,param1.isSpecialBgOverFlag);
+        }
+
+        override protected function get maxIconBounds() : Rectangle
+        {
+            return IMG_ICON_BOUNDS;
         }
 
         override protected function onDispose() : void

@@ -406,7 +406,8 @@ package net.wg.gui.lobby.vehicleTradeWnds.buy.views
 
         private function updateControlsEnabling(param1:Boolean, param2:Boolean, param3:Boolean) : void
         {
-            var _loc4_:Boolean = param1 && param2;
+            var _loc4_:* = false;
+            _loc4_ = param1 && param2;
             var _loc5_:Number = _loc4_?ENABLE_TEXT_ALPHA:DISABLE_TEXT_ALPHA;
             this.warningIco.visible = !param1 || param1 && param3;
             this.vehicleBtn.enabled = param1;

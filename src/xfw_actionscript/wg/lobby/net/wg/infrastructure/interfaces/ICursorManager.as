@@ -26,6 +26,6 @@ package net.wg.infrastructure.interfaces
 
         function unlock() : void;
 
-        function initCursor(param1:String) : void;
+        function forceSetCursor(param1:String) : void;
     }
 }

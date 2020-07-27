@@ -12,6 +12,8 @@ package net.wg.gui.battle.random.views.stats.components.playersPanel.interfaces
 
         function setFrags(param1:int) : void;
 
+        function setChatCommand(param1:String, param2:uint) : void;
+
         function get vehicleID() : Number;
 
         function get accountDBID() : Number;
@@ -27,5 +29,7 @@ package net.wg.gui.battle.random.views.stats.components.playersPanel.interfaces
         function get isInviteReceived() : Boolean;
 
         function get isCurrentPlayer() : Boolean;
+
+        function triggerChatCommand(param1:String) : void;
     }
 }

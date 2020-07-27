@@ -31,7 +31,7 @@ package net.wg.gui.rally.vo
 
         public var state:String = "";
 
-        public var isFalloutVehicle:Boolean = false;
+        public var isEventVehicle:Boolean = false;
 
         public function VehicleVO(param1:Object)
         {

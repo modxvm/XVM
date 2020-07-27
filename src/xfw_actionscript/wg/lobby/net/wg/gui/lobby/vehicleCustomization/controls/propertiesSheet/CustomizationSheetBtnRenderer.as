@@ -20,6 +20,10 @@ package net.wg.gui.lobby.vehicleCustomization.controls.propertiesSheet
 
         private static const START_POSITIONS:Vector.<Point> = new <Point>[new Point(23,-10),new Point(-115,21),new Point(-115,-44),new Point(-263,0)];
 
+        private static const ACTION_REMOVE_ONE:int = 2;
+
+        private static const ACTION_REMOVE_FROM_ALL_PARTS:int = 6;
+
         public var tfAnimated:TextFieldAnimated = null;
 
         protected var model:CustomizationPropertiesSheetRendererVO = null;
@@ -166,7 +170,12 @@ package net.wg.gui.lobby.vehicleCustomization.controls.propertiesSheet
         override public function onClickHandler() : void
         {
             super.onClickHandler();
-            this._sound.playControlsSnd(SoundManagerStates.SND_PRESS,SoundTypes.CUSTOMIZATION_DEFAULT,Values.EMPTY_STR);
+            var _loc1_:String = SoundTypes.CUSTOMIZATION_DEFAULT;
+            if(this.model.actionType == ACTION_REMOVE_ONE || this.model.actionType == ACTION_REMOVE_FROM_ALL_PARTS)
+            {
+                _loc1_ = SoundTypes.CUSTOMIZATION_REMOVE;
+            }
+            this._sound.playControlsSnd(SoundManagerStates.SND_PRESS,_loc1_,Values.EMPTY_STR);
             this.dispatchClickAction();
         }
 

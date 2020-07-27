@@ -27,6 +27,8 @@ package net.wg.gui.login.impl.vo
 
         public var socialList:DataProvider = null;
 
+        public var showRegisterLink:Boolean = true;
+
         public function SimpleFormVo(param1:Object)
         {
             super(param1);

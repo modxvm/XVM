@@ -26,6 +26,7 @@ package net.wg.gui.lobby.vehicleCompare.configurator
             var _loc1_:int = this.alertTF.textWidth + this.alertIcon.width + GAP;
             this.alertIcon.x = width - _loc1_ >> 1;
             this.alertTF.x = this.alertIcon.x + this.alertIcon.width + GAP;
+            this.alertIcon.mouseEnabled = false;
         }
 
         override protected function onDispose() : void

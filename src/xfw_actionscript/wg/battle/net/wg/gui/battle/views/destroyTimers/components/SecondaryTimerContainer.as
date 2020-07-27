@@ -2,14 +2,12 @@ package net.wg.gui.battle.views.destroyTimers.components
 {
     import flash.display.MovieClip;
     import flash.text.TextField;
+    import net.wg.gui.battle.views.destroyTimers.data.NotificationTimerSettingVO;
+    import flash.text.TextFieldAutoSize;
     import scaleform.gfx.TextFieldEx;
 
-    public class SecondaryTimerContainer extends DestroyTimerContainer
+    public class SecondaryTimerContainer extends TimerContainer
     {
-
-        public static const ORANGE_STATE:String = "orange";
-
-        public static const GREEN_STATE:String = "green";
 
         public var pulse:MovieClip = null;
 
@@ -37,9 +35,10 @@ package net.wg.gui.battle.views.destroyTimers.components
             return progressBar;
         }
 
-        public function setTimerSettings(param1:SecondaryTimerSetting) : void
+        public function setTimerSettings(param1:NotificationTimerSettingVO) : void
         {
-            gotoAndStop(param1.state);
+            gotoAndStop(param1.color);
+            this.textFieldLabel.autoSize = TextFieldAutoSize.LEFT;
             this.textFieldLabel.text = param1.text;
             this.noise.visible = param1.noiseVisible;
             this.pulse.visible = param1.pulseVisible;

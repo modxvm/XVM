@@ -11,6 +11,8 @@ package net.wg.gui.lobby.components.data
 
         public var minSelectedItems:int = -1;
 
+        public var filterTypeName:String = "";
+
         public function ButtonFiltersVO(param1:Object)
         {
             super(param1);

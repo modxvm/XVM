@@ -23,6 +23,10 @@ package net.wg.gui.battle.random.views.stats.components.playersPanel.interfaces
 
         function setFrags(param1:Number, param2:int) : void;
 
+        function setChatCommand(param1:Number, param2:String, param3:uint) : void;
+
+        function triggerChatCommand(param1:Number, param2:String) : void;
+
         function updateOrder(param1:Vector.<Number>) : void;
 
         function setInvitationStatus(param1:Number, param2:uint) : void;

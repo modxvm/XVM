@@ -45,7 +45,7 @@ package net.wg.gui.rally.interfaces
 
         function get compatibleVehiclesCount() : int;
 
-        function get isFallout() : Boolean;
+        function get isEvent() : Boolean;
 
         function get isLegionaries() : Boolean;
 

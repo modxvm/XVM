@@ -27,6 +27,10 @@ package net.wg.gui.cyberSport.controls
 
         private static const UPDATE_VEH_ICON:String = "updateVehIcon";
 
+        private static const BATTLE_ROYALE_NATION_POSTFIX:String = "_br";
+
+        private static const BATTLE_ROYALE_CUT_RECTANGLE:Rectangle = new Rectangle(0,2,100,20);
+
         public static const SELECTED_VEHICLE:int = 0;
 
         public static const CHOOSE_VEHICLE:int = 1;
@@ -124,7 +128,7 @@ package net.wg.gui.cyberSport.controls
 
         override protected function draw() : void
         {
-            if(_newFrame != null && isInvalid(InvalidationType.STATE) && this.vehicleLevel)
+            if(_newFrame != null && isInvalid(InvalidationType.STATE))
             {
                 this.vehicleLevel.setState(_newFrame);
             }
@@ -211,11 +215,8 @@ package net.wg.gui.cyberSport.controls
                 this.rangeView.dispose();
                 this.rangeView = null;
             }
-            if(this.vehicleLevel)
-            {
-                this.vehicleLevel.dispose();
-                this.vehicleLevel = null;
-            }
+            this.vehicleLevel.dispose();
+            this.vehicleLevel = null;
             this.cutVehicleIcon = null;
             this.cutVehicleIconEff = null;
             this.vehicleNameEff = null;
@@ -269,11 +270,6 @@ package net.wg.gui.cyberSport.controls
                 return new CSVehicleButtonSelectionVO(-1,this.getNationRange(),this.getVType(),this.getLevelsRange());
             }
             return null;
-        }
-
-        public function getFullMode() : VehicleVO
-        {
-            return this._vehicleModel;
         }
 
         public function reset() : void
@@ -352,9 +348,13 @@ package net.wg.gui.cyberSport.controls
         {
             this._currentState = SELECTED_VEHICLE;
             var _loc1_:String = this._utils.nations.getNationName(this._vehicleModel.nationID);
+            if(this._vehicleModel.isEventVehicle)
+            {
+                _loc1_ = _loc1_ + BATTLE_ROYALE_NATION_POSTFIX;
+            }
             this.nationType.gotoAndStop(_loc1_);
             this.nationTypeEff.gotoAndStop(_loc1_);
-            this.cutVehicleIcon.vehicleIcon.cutRect = this.cutVehicleIconEff.vehicleIcon.cutRect = CUT_RECTANGLE;
+            this.cutVehicleIcon.vehicleIcon.cutRect = this.cutVehicleIconEff.vehicleIcon.cutRect = this._vehicleModel.isEventVehicle?BATTLE_ROYALE_CUT_RECTANGLE:CUT_RECTANGLE;
             this.cutVehicleIcon.vehicleIcon.source = this.cutVehicleIconEff.vehicleIcon.source = this._vehicleModel.smallIconPath;
             App.utils.commons.formatPlayerName(this.vehicleName.textField,App.utils.commons.getUserProps(this._vehicleModel.shortUserName));
             this.vehicleNameEff.textField.htmlText = this.vehicleName.textField.htmlText;
@@ -402,7 +402,7 @@ package net.wg.gui.cyberSport.controls
             this.cutVehicleIcon.visible = this.cutVehicleIconEff.visible = this._currentState == SELECTED_VEHICLE;
             this.vehicleName.visible = this.vehicleNameEff.visible = this._currentState == SELECTED_VEHICLE;
             this.vehicleTypeEff.visible = this.vehicleType.visible = this._currentState == SELECTED_VEHICLE;
-            this.vehicleLevel.visible = this._currentState == SELECTED_VEHICLE;
+            this.vehicleLevel.visible = this._currentState == SELECTED_VEHICLE && this._vehicleModel && this._vehicleModel.level != 0;
             this.vCountMsg.visible = this.defaultMsg.visible = this._currentState == COUNT_VEHICLE;
             this.updateVehIcon();
             this.chooseVhclAnim.visible = this.chooseVhclAnimEffect.visible = this.currentState == CHOOSE_VEHICLE;
@@ -460,6 +460,22 @@ package net.wg.gui.cyberSport.controls
                 return this._rangeModel.vLevelRange.slice();
             }
             return [];
+        }
+
+        private function updateClickableArea(param1:Boolean) : void
+        {
+            this.clickableArea.buttonMode = this._clickableAreaEnable && param1;
+            if(this._clickableAreaEnable && param1)
+            {
+                if(!this.clickableArea.hasEventListener(MouseEvent.CLICK))
+                {
+                    this.clickableArea.addEventListener(MouseEvent.CLICK,this.onAreaClickHandler);
+                }
+            }
+            else
+            {
+                this.clickableArea.removeEventListener(MouseEvent.CLICK,this.onAreaClickHandler);
+            }
         }
 
         override public function set enabled(param1:Boolean) : void
@@ -530,22 +546,6 @@ package net.wg.gui.cyberSport.controls
             this.updateClickableArea(enabled);
         }
 
-        private function updateClickableArea(param1:Boolean) : void
-        {
-            this.clickableArea.buttonMode = this._clickableAreaEnable && param1;
-            if(this._clickableAreaEnable && param1)
-            {
-                if(!this.clickableArea.hasEventListener(MouseEvent.CLICK))
-                {
-                    this.clickableArea.addEventListener(MouseEvent.CLICK,this.onAreaClickHandler);
-                }
-            }
-            else
-            {
-                this.clickableArea.removeEventListener(MouseEvent.CLICK,this.onAreaClickHandler);
-            }
-        }
-
         public function get currentState() : int
         {
             return this._currentState;
@@ -559,6 +559,12 @@ package net.wg.gui.cyberSport.controls
         public function set showAlertIcon(param1:Boolean) : void
         {
             this._showAlertIcon = param1;
+        }
+
+        public function set showVehicleIcon(param1:Boolean) : void
+        {
+            this._showVehicleIcon = param1;
+            invalidate(UPDATE_VEH_ICON);
         }
 
         override protected function handleMousePress(param1:MouseEvent) : void
@@ -636,12 +642,6 @@ package net.wg.gui.cyberSport.controls
             {
                 dispatchEvent(new RallyViewsEvent(RallyViewsEvent.VEH_BTN_ROLL_OVER));
             }
-        }
-
-        public function set showVehicleIcon(param1:Boolean) : void
-        {
-            this._showVehicleIcon = param1;
-            invalidate(UPDATE_VEH_ICON);
         }
     }
 }

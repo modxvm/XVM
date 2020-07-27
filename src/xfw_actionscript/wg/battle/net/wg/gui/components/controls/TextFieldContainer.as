@@ -4,6 +4,7 @@ package net.wg.gui.components.controls
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import flash.text.TextField;
     import flash.text.TextFormat;
+    import flash.text.TextFieldAutoSize;
     import scaleform.gfx.TextFieldEx;
 
     public class TextFieldContainer extends Sprite implements IDisposable
@@ -21,6 +22,8 @@ package net.wg.gui.components.controls
 
         private var _tf:TextFormat = null;
 
+        private var _autoSize:String = "none";
+
         public function TextFieldContainer()
         {
             super();
@@ -36,8 +39,30 @@ package net.wg.gui.components.controls
 
         private function updateSize() : void
         {
-            App.utils.commons.updateTextFieldSize(this.textField,this._isUpdateWidth,this._isMultiline);
-            this.textField.height = this.textField.textHeight + TEXT_FIELD_BOUNDS_HEIGHT | 0;
+            if(this._autoSize == TextFieldAutoSize.NONE)
+            {
+                App.utils.commons.updateTextFieldSize(this.textField,this._isUpdateWidth,this._isMultiline);
+                this.textField.height = this.textField.textHeight + TEXT_FIELD_BOUNDS_HEIGHT | 0;
+            }
+            else if(this._isMultiline || this._isUpdateWidth)
+            {
+                App.utils.asserter.assert(false,"Wrong TextFieldContainer properties!");
+            }
+        }
+
+        public function get textColor() : uint
+        {
+            return this.textField.textColor;
+        }
+
+        public function set textColor(param1:uint) : void
+        {
+            this.textField.textColor = param1;
+        }
+
+        public function set defaultTextFormat(param1:TextFormat) : void
+        {
+            this.textField.defaultTextFormat = param1;
         }
 
         public function set noTranslateTextfield(param1:Boolean) : void
@@ -96,6 +121,17 @@ package net.wg.gui.components.controls
             this._tf.size = param1;
             this.textField.setTextFormat(this._tf);
             this.updateSize();
+        }
+
+        public function get autoSize() : String
+        {
+            return this._autoSize;
+        }
+
+        public function set autoSize(param1:String) : void
+        {
+            this._autoSize = param1;
+            this.textField.autoSize = param1;
         }
     }
 }

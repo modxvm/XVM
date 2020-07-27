@@ -9,6 +9,7 @@ package net.wg.gui.lobby.hangar
     import net.wg.data.constants.Linkages;
     import flash.events.MouseEvent;
     import net.wg.gui.events.ListEventEx;
+    import flash.display.Graphics;
     import flash.events.Event;
     import net.wg.data.ListDAAPIDataProvider;
     import net.wg.gui.lobby.components.data.VehParamVO;
@@ -25,6 +26,10 @@ package net.wg.gui.lobby.hangar
     public class VehicleParameters extends VehicleParametersMeta implements IVehicleParameters
     {
 
+        private static const BOTTOM_SHADOW_OFFSET:int = 11;
+
+        private static const TOP_SHADOW_OFFSET:int = 8;
+
         private static const BG_MARGIN:int = 20;
 
         private static const SB_PADDING:Padding = new Padding(0,0,0,7);
@@ -39,13 +44,23 @@ package net.wg.gui.lobby.hangar
 
         private static const BG_WIDTH_SMALL:int = 300;
 
+        private static const LIST_MASK_WIDTH:int = 415;
+
+        private static const INV_LIPS:String = "invLips";
+
+        private static const CHAR_UNDERSCORE:String = "_";
+
         public var paramsList:ScrollingListEx = null;
 
         public var bg:Sprite = null;
 
         public var rendererBG:Sprite = null;
 
-        protected var _snapHeightToRenderers:Boolean = true;
+        public var topShadow:Sprite = null;
+
+        public var bottomShadow:Sprite = null;
+
+        private var _snapHeightToRenderers:Boolean = true;
 
         private var _dataProvider:IDataProvider = null;
 
@@ -56,6 +71,12 @@ package net.wg.gui.lobby.hangar
         private var _isParamsAnimated:Boolean = true;
 
         private var _hasListeners:Boolean = false;
+
+        private var _listMask:Sprite = null;
+
+        private var _forceInvalidateOnDataChange:Boolean;
+
+        private var _showShadowLipWhenOverflow:Boolean;
 
         public function VehicleParameters()
         {
@@ -77,6 +98,18 @@ package net.wg.gui.lobby.hangar
             this.paramsList.addEventListener(MouseEvent.ROLL_OUT,this.onParamsListRollOutHandler);
             mouseEnabled = this.paramsList.mouseEnabled = this.bg.mouseEnabled = this.bg.mouseChildren = false;
             this.hideRendererBG();
+            this.topShadow.mouseEnabled = this.topShadow.mouseChildren = false;
+            this.bottomShadow.mouseEnabled = this.bottomShadow.mouseChildren = false;
+            this.topShadow.visible = this.bottomShadow.visible = false;
+            this._listMask = new Sprite();
+            var _loc1_:Graphics = this._listMask.graphics;
+            _loc1_.beginFill(0);
+            _loc1_.drawRect(0,0,LIST_MASK_WIDTH,1);
+            _loc1_.endFill();
+            this._listMask.mouseEnabled = false;
+            this._listMask.mouseChildren = false;
+            addChild(this._listMask);
+            this.paramsList.mask = this._listMask;
         }
 
         override protected function onDispose() : void
@@ -93,8 +126,12 @@ package net.wg.gui.lobby.hangar
             this.paramsList.removeEventListener(MouseEvent.ROLL_OUT,this.onParamsListRollOutHandler);
             this.bg = null;
             this.rendererBG = null;
+            this.topShadow = null;
+            this.bottomShadow = null;
+            this.paramsList.mask = null;
             this.paramsList.dispose();
             this.paramsList = null;
+            this._listMask = null;
             this._dataProvider.cleanUp();
             this._dataProvider = null;
             super.onDispose();
@@ -111,6 +148,7 @@ package net.wg.gui.lobby.hangar
         override protected function draw() : void
         {
             var _loc1_:* = 0;
+            var _loc2_:* = false;
             super.draw();
             if(isInvalid(InvalidationType.SIZE))
             {
@@ -123,7 +161,23 @@ package net.wg.gui.lobby.hangar
                 }
                 this.paramsList.height = _loc1_;
                 this.bg.height = _loc1_ + BG_MARGIN;
+                this._listMask.height = this.bg.height;
+                invalidate(INV_LIPS);
                 dispatchEvent(new Event(Event.RESIZE));
+            }
+            if(isInvalid(INV_LIPS))
+            {
+                if(!this._showShadowLipWhenOverflow)
+                {
+                    this.topShadow.visible = this.bottomShadow.visible = false;
+                }
+                else
+                {
+                    _loc1_ = this.paramsList.rowHeight * this.paramsList.dataProvider.length;
+                    _loc2_ = _loc1_ > height;
+                    this.topShadow.visible = this.bottomShadow.visible = _loc2_;
+                    this.updateLipsPosition();
+                }
             }
             if(!this._hasListeners)
             {
@@ -152,7 +206,7 @@ package net.wg.gui.lobby.hangar
         {
             if(StringUtils.isEmpty(this._helpLayoutId))
             {
-                this._helpLayoutId = name + "_" + Math.random();
+                this._helpLayoutId = name + CHAR_UNDERSCORE + Math.random();
             }
             var _loc1_:HelpLayoutVO = new HelpLayoutVO();
             _loc1_.x = HELP_LAYOUT_X_CORRECTION;
@@ -164,6 +218,11 @@ package net.wg.gui.lobby.hangar
             _loc1_.id = this._helpLayoutId;
             _loc1_.scope = this;
             return new <HelpLayoutVO>[_loc1_];
+        }
+
+        public function hideBg() : void
+        {
+            this.bg.visible = false;
         }
 
         public function showHelpLayoutEx(param1:Number, param2:Number) : void
@@ -180,6 +239,12 @@ package net.wg.gui.lobby.hangar
             return Linkages.VEH_PARAMS_RENDERER_UI;
         }
 
+        protected function updateLipsPosition() : void
+        {
+            this.topShadow.y = TOP_SHADOW_OFFSET;
+            this.bottomShadow.y = height + BOTTOM_SHADOW_OFFSET;
+        }
+
         private function hideRendererBG() : void
         {
             if(this.rendererBG.visible)
@@ -187,6 +252,25 @@ package net.wg.gui.lobby.hangar
                 App.soundMgr.playControlsSnd(SoundManagerStates.SND_OVER,SoundTypes.ITEM_RDR,null);
                 this.rendererBG.visible = false;
             }
+        }
+
+        public function set showShadowLipWhenOverflow(param1:Boolean) : void
+        {
+            if(this._showShadowLipWhenOverflow != param1)
+            {
+                this._showShadowLipWhenOverflow = param1;
+                invalidate(INV_LIPS);
+            }
+        }
+
+        public function set snapHeightToRenderers(param1:Boolean) : void
+        {
+            this._snapHeightToRenderers = param1;
+        }
+
+        public function set forceInvalidateOnDataChange(param1:Boolean) : void
+        {
+            this._forceInvalidateOnDataChange = param1;
         }
 
         private function onParamsListItemRollOverHandler(param1:ListEventEx) : void
@@ -279,12 +363,12 @@ package net.wg.gui.lobby.hangar
             App.toolTipMgr.hide();
             this.hideRendererBG();
             onParamClickS(VehParamVO(param1.itemData).paramID);
-            this.onRendererClick();
+            invalidate(INV_LIPS);
         }
 
         private function onDataProviderChangeHandler(param1:Event) : void
         {
-            if(this._dataProvider.length > 0 && this.paramsList.renderersCount > 0)
+            if(this._dataProvider.length > 0 && (this.paramsList.renderersCount > 0 || this._forceInvalidateOnDataChange))
             {
                 invalidateSize();
             }

@@ -15,9 +15,13 @@ package net.wg.data.constants.generated
 
         public static const TOOLTIP_IMAGETEXT_BLOCK_LINKAGE:String = "ImageTextBlockInBloksUI";
 
+        public static const TOOLTIP_ATLASICON_TEXT_BLOCK_LINKAGE:String = "AtlasIconTextBlockUI";
+
         public static const TOOLTIP_RENDERER_TEXT_BLOCK_LINKAGE:String = "RendererTextBlockInBlockUI";
 
         public static const TOOLTIP_TEXT_PARAMETER_BLOCK_LINKAGE:String = "TextParameterBlockUI";
+
+        public static const TOOLTIP_OPT_DEVICE_SLOT_BLOCK:String = "OptDeviceSlotBlockUI";
 
         public static const TOOLTIP_TEXT_PARAMETER_WITH_ICON_BLOCK_LINKAGE:String = "TextParameterWithIconBlockUI";
 
@@ -63,6 +67,8 @@ package net.wg.data.constants.generated
 
         public static const TOOLTIP_RANK_BLOCK_LINKAGE:String = "RankBlockUI";
 
+        public static const TOOLTIP_TITLE_BLOCK_LINKAGE:String = "TitleBlockUI";
+
         public static const TOOLTIP_COUNTER_TEXT_BLOCK_LINKAGE:String = "CounterTextBlockUI";
 
         public static const TOOLTIP_BADGE_INFO_BLOCK_LINKAGE:String = "BadgeInfoBlockUI";
@@ -77,7 +83,9 @@ package net.wg.data.constants.generated
 
         public static const TOOLTIP_META_LEVEL_PROGRESS_BLOCK_LINKAGE:String = "EpicMetaLevelProgressBlockUI";
 
-        public static const TOOLTIP_META_LEVEL_ICON_BLOCK_LINKAGE:String = "EpicMetaLevelIconBlockUI";
+        public static const TOOLTIP_EPIC_BATTLE_META_LEVEL_BLOCK_LINKAGE:String = "EpicBattleMetaLevelBlockUI";
+
+        public static const TOOLTIP_BATTLE_ROYALE_META_LEVEL_BLOCK_LINKAGE:String = "BattleRoyaleMetaLevelBlockUI";
 
         public static const TOOLTIP_COMPOUND_PRICE_BLOCK_LINKAGE:String = "CompoundPriceBlockUI";
 
@@ -90,6 +98,16 @@ package net.wg.data.constants.generated
         public static const TOOLTIP_SESSION_STATS_TANK_INFO_STATUS_BLOCK:String = "SessionStatsStatusBlockUI";
 
         public static const TOOLTIP_SESSION_STATS_EFFICIENCY_PARAM_BLOCK:String = "SessionStatsEfficiencyParamBlockUI";
+
+        public static const TOOLTIP_BUILD_BLOCK_VIOLET_LINKAGE:String = "TooltipBuildUpBlockVioletBgUI";
+
+        public static const TOOLTIP_BUILD_BLOCK_VIOLET_BIG_LINKAGE:String = "TooltipBuildUpBlockVioletBgBigUI";
+
+        public static const TOOLTIP_BUILD_BLOCK_GRAY_LINKAGE:String = "TooltipBuildUpBlockGrayBgUI";
+
+        public static const TOOLTIP_EPIC_PROGRESS_BLOCK_LINKAGE:String = "EpicProgressBlockUI";
+
+        public static const BATTLE_ROYALE_WEAK_ZONES_UI:String = "BattleRoyaleWeakZonesBlockUI";
 
         public static const ALIGN_LEFT:String = "left";
 

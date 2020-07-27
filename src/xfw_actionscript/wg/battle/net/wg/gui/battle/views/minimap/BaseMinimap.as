@@ -45,6 +45,18 @@ package net.wg.gui.battle.views.minimap
         {
         }
 
+        public function as_enableHintPanelWithData(param1:Boolean, param2:Boolean) : void
+        {
+        }
+
+        public function as_disableHintPanel() : void
+        {
+        }
+
+        public function as_updateHintPanelData(param1:Boolean, param2:Boolean) : void
+        {
+        }
+
         public function get currentWidth() : int
         {
             return initedWidth;

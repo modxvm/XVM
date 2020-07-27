@@ -1,6 +1,6 @@
 diff -Naur battle.orig-0.orig/net/wg/gui/battle/components/PlayersPanelBase.class.asasm battle.orig-0/net/wg/gui/battle/components/PlayersPanelBase.class.asasm
---- battle.orig-0.orig/net/wg/gui/battle/components/PlayersPanelBase.class.asasm	2017-11-18 20:58:48.523993600 +0200
-+++ battle.orig-0/net/wg/gui/battle/components/PlayersPanelBase.class.asasm	2017-11-18 21:46:01.048917000 +0200
+--- battle.orig-0.orig/net/wg/gui/battle/components/PlayersPanelBase.class.asasm	2020-07-27 15:01:41.185802800 +0300
++++ battle.orig-0/net/wg/gui/battle/components/PlayersPanelBase.class.asasm	2020-07-27 15:09:50.218540600 +0300
 @@ -25,12 +25,24 @@
       initproperty        QName(ProtectedNamespace("net.wg.gui.battle.components:PlayersPanelBase"), "contextMenuMgr")
  
@@ -27,12 +27,12 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/components/PlayersPanelBase.clas
    trait slot QName(PackageNamespace(""), "listRight") type QName(PackageNamespace("net.wg.gui.battle.random.views.stats.components.playersPanel.interfaces"), "IPlayersPanelList") value Null() end
    trait slot QName(PackageNamespace(""), "panelSwitch") type QName(PackageNamespace("net.wg.gui.battle.components"), "PlayersPanelSwitchBase") value Null() end
 diff -Naur battle.orig-0.orig/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.class.asasm battle.orig-0/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.class.asasm
---- battle.orig-0.orig/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.class.asasm	2017-11-18 20:58:46.988473800 +0200
-+++ battle.orig-0/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.class.asasm	2017-11-18 21:48:37.163528000 +0200
-@@ -48,6 +48,25 @@
-   trait slot QName(PackageNamespace(""), "disableCommunication") type QName(PackageNamespace("net.wg.gui.battle.components"), "BattleAtlasSprite") value Null() end
+--- battle.orig-0.orig/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.class.asasm	2020-07-27 15:01:42.166282100 +0300
++++ battle.orig-0/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.class.asasm	2020-07-27 15:10:54.675241800 +0300
+@@ -49,6 +49,25 @@
+   trait slot QName(PackageNamespace(""), "chatCommandState") type QName(PackageNamespace("net.wg.gui.battle.components.stats.playersPanel"), "ChatCommandItemComponent") value Null() end
    trait slot QName(ProtectedNamespace("net.wg.gui.battle.components.stats.playersPanel.list:BasePlayersPanelListItem"), "maxPlayerNameWidth") type QName(PackageNamespace(""), "uint") value Integer(0) end
-   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.components.stats.playersPanel.list:BasePlayersPanelListItem"), "_holderItemID") type QName(PackageNamespace(""), "int") value Integer(-1) end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.components.stats.playersPanel.list:BasePlayersPanelListItem#0"), "_holderItemID") type QName(PackageNamespace(""), "int") value Integer(-1) end
 +  trait getter QName(PackageNamespace(""), "xfw_state")
 +   method
 +    returns QName(PackageNamespace(""), "int")
@@ -46,18 +46,18 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/components/stats/playersPanel/li
 +      pushscope
 +
 +      getlocal0
-+      getproperty         QName(PrivateNamespace(null, "net.wg.gui.battle.components.stats.playersPanel.list:BasePlayersPanelListItem"), "_state")
++      getproperty         QName(PrivateNamespace(null, "net.wg.gui.battle.components.stats.playersPanel.list:BasePlayersPanelListItem#0"), "_state")
 +      returnvalue
 +     end ; code
 +    end ; body
 +   end ; method
 +  end ; trait
-   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.components.stats.playersPanel.list:BasePlayersPanelListItem"), "_state") type QName(PackageNamespace(""), "int") value Integer(-1) end
-   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.components.stats.playersPanel.list:BasePlayersPanelListItem"), "_vehicleName") type QName(PackageNamespace(""), "String") value Null() end
-   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.components.stats.playersPanel.list:BasePlayersPanelListItem"), "_frags") type QName(PackageNamespace(""), "int") value Integer(0) end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.components.stats.playersPanel.list:BasePlayersPanelListItem#0"), "_state") type QName(PackageNamespace(""), "int") value Integer(-1) end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.components.stats.playersPanel.list:BasePlayersPanelListItem#0"), "_vehicleName") type QName(PackageNamespace(""), "String") value Null() end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.components.stats.playersPanel.list:BasePlayersPanelListItem#0"), "_frags") type QName(PackageNamespace(""), "int") value Integer(0) end
 diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListLeft.class.asasm battle.orig-0/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListLeft.class.asasm
---- battle.orig-0.orig/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListLeft.class.asasm	2017-11-18 20:58:56.575996100 +0200
-+++ battle.orig-0/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListLeft.class.asasm	2017-11-18 21:46:01.088418900 +0200
+--- battle.orig-0.orig/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListLeft.class.asasm	2020-07-27 15:01:43.723594200 +0300
++++ battle.orig-0/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListLeft.class.asasm	2020-07-27 15:09:50.265411700 +0300
 @@ -36,7 +36,7 @@
        getlocal0
        pushscope
@@ -85,8 +85,8 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/stats/components/pl
 + trait slot QName(PackageNamespace(""), "LINKAGE") slotid 1 type QName(PackageNamespace(""), "String") value Utf8("PlayersPanelListItemLeftUI") end
  end ; class
 diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListRight.class.asasm battle.orig-0/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListRight.class.asasm
---- battle.orig-0.orig/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListRight.class.asasm	2017-11-18 20:58:57.919994100 +0200
-+++ battle.orig-0/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListRight.class.asasm	2017-11-18 21:46:01.097420200 +0200
+--- battle.orig-0.orig/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListRight.class.asasm	2020-07-27 15:01:42.620710300 +0300
++++ battle.orig-0/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListRight.class.asasm	2020-07-27 15:09:50.265411700 +0300
 @@ -36,7 +36,7 @@
        getlocal0
        pushscope

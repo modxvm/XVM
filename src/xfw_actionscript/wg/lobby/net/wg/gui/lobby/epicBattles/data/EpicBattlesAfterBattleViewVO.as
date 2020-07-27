@@ -2,6 +2,7 @@ package net.wg.gui.lobby.epicBattles.data
 {
     import net.wg.data.daapi.base.DAAPIDataClass;
     import net.wg.gui.lobby.components.data.AwardItemRendererExVO;
+    import net.wg.gui.lobby.eventProgression.components.metaLevel.data.MetaLevelVO;
 
     public class EpicBattlesAfterBattleViewVO extends DAAPIDataClass
     {
@@ -18,7 +19,7 @@ package net.wg.gui.lobby.epicBattles.data
 
         public var barBoostText:String = "";
 
-        public var epicMetaLevelIconData:EpicMetaLevelIconVO = null;
+        public var epicMetaLevelIconData:MetaLevelVO = null;
 
         public var rank:int = -1;
 
@@ -55,7 +56,7 @@ package net.wg.gui.lobby.epicBattles.data
             }
             if(param1 == EPIC_META_LEVEL_ICON_VO)
             {
-                this.epicMetaLevelIconData = new EpicMetaLevelIconVO(param2);
+                this.epicMetaLevelIconData = new MetaLevelVO(param2);
                 return false;
             }
             return super.onDataWrite(param1,param2);

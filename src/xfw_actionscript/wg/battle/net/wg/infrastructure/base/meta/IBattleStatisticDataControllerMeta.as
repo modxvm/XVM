@@ -44,5 +44,7 @@ package net.wg.infrastructure.base.meta
         function as_updateQuestProgress(param1:String, param2:Object) : void;
 
         function as_updateQuestHeaderProgress(param1:Array) : void;
+
+        function as_updateTriggeredChatCommands(param1:Object) : void;
     }
 }

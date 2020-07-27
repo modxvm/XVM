@@ -158,6 +158,7 @@ package net.wg.app.impl
             this._systemMessages = new SimpleManagedContainer(APP_CONTAINERS_NAMES.SYSTEM_MESSAGES);
             this._dialogs = new ManagedContainer(APP_CONTAINERS_NAMES.DIALOGS);
             this._toolTips = new SimpleManagedContainer(APP_CONTAINERS_NAMES.TOOL_TIPS);
+            this._toolTips.updateMouseHandling(false);
             this._cursorCtnr = new CursorManagedContainer(APP_CONTAINERS_NAMES.CURSOR);
             this._overlay = new ManagedContainer(APP_CONTAINERS_NAMES.OVERLAY);
             super.createContainers();
@@ -184,9 +185,13 @@ package net.wg.app.impl
 
         override protected function getContainers() : Vector.<DisplayObject>
         {
-            var _loc1_:DisplayObject = DisplayObject(utils.IME.getContainer());
-            var _loc2_:Vector.<DisplayObject> = new <DisplayObject>[this._views,this._windows,this._systemMessages,_loc1_,this._dialogs,this._overlay,this._serviceLayout,this._toolTips,this._cursorCtnr];
-            return _loc2_;
+            var _loc1_:DisplayObject = null;
+            if(!containers)
+            {
+                _loc1_ = DisplayObject(utils.IME.getContainer());
+                containers = new <DisplayObject>[this._views,this._windows,this._systemMessages,_loc1_,this._dialogs,this._overlay,this._serviceLayout,this._toolTips,this._cursorCtnr];
+            }
+            return containers;
         }
 
         override protected function getRegCmdName() : String

@@ -31,6 +31,8 @@ package net.wg.gui.lobby.missions
 
         private static const BOTTOM_STATUS_GAP:int = 8;
 
+        private static const AWARDS_Y_SHIFT:int = -7;
+
         public var dateTf:TextField;
 
         public var resetDateTf:TextField;
@@ -165,6 +167,12 @@ package net.wg.gui.lobby.missions
             this.dateTf.addEventListener(MouseEvent.ROLL_OVER,this.onDateTfRollOverHandler);
             this.dateTf.addEventListener(MouseEvent.ROLL_OUT,this.onComponentRollOutHandler);
             this.battleConditions.addEventListener(MissionConditionRendererEvent.CLICK,this.onBattleConditionsClickHandler);
+        }
+
+        override protected function updateAwardsLayout() : void
+        {
+            super.updateAwardsLayout();
+            awardsGroup.y = awardsBg.y + (awardsBg.height - awardsGroup.height >> 1);
         }
 
         override protected function updateInfoIconParams() : void

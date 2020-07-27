@@ -152,40 +152,45 @@ package net.wg.infrastructure.managers.utils.impl
 
         private function createControls() : void
         {
-            var _loc3_:IHelpLayoutComponent = null;
-            var _loc4_:Vector.<HelpLayoutVO> = null;
-            var _loc5_:HelpLayoutVO = null;
-            var _loc6_:HelpLayoutControl = null;
+            var _loc4_:IHelpLayoutComponent = null;
+            var _loc5_:Vector.<HelpLayoutVO> = null;
+            var _loc6_:HelpLayoutVO = null;
+            var _loc7_:HelpLayoutControl = null;
             var _loc1_:IUtils = App.utils;
             var _loc2_:IAssertable = _loc1_.asserter;
-            for each(_loc3_ in this._components)
+            var _loc3_:DisplayObject = null;
+            for each(_loc4_ in this._components)
             {
-                _loc4_ = _loc3_.getLayoutProperties();
-                for each(_loc5_ in _loc4_)
+                _loc3_ = _loc4_ as DisplayObject;
+                if(!(_loc3_ && !_loc3_.visible))
                 {
-                    _loc2_.assertNotNull(_loc5_.message,"HelpLayoutVO#message" + Errors.CANT_NULL);
-                    _loc2_.assert(_loc5_.message.length > 0,"text in HelpLayoutVO#message can`t empty!");
-                    if(this._controlsByComponentsMap[_loc3_] == undefined)
+                    _loc5_ = _loc4_.getLayoutProperties();
+                    for each(_loc6_ in _loc5_)
                     {
-                        this._controlsByComponentsMap[_loc3_] = {};
+                        _loc2_.assertNotNull(_loc6_.message,"HelpLayoutVO#message" + Errors.CANT_NULL);
+                        _loc2_.assert(_loc6_.message.length > 0,"text in HelpLayoutVO#message can`t empty!");
+                        if(this._controlsByComponentsMap[_loc4_] == undefined)
+                        {
+                            this._controlsByComponentsMap[_loc4_] = {};
+                        }
+                        _loc7_ = this._controlsByComponentsMap[_loc4_][_loc6_.id] as HelpLayoutControl;
+                        if(_loc7_)
+                        {
+                            _loc1_.popupMgr.show(_loc7_,_loc6_.x,_loc6_.y,_loc6_.scope);
+                        }
+                        else
+                        {
+                            _loc7_ = _loc1_.popupMgr.create(Linkages.HELP_LAYOUT_CONTROL_LINKAGE,_loc6_) as HelpLayoutControl;
+                            App.utils.asserter.assertNotNull(_loc7_,"control" + Errors.CANT_NULL);
+                            this._controlsByComponentsMap[_loc4_][_loc6_.id] = _loc7_;
+                        }
+                        _loc7_.setData(_loc6_);
+                        _loc6_.dispose();
                     }
-                    _loc6_ = this._controlsByComponentsMap[_loc3_][_loc5_.id] as HelpLayoutControl;
-                    if(_loc6_)
+                    if(_loc5_)
                     {
-                        _loc1_.popupMgr.show(_loc6_,_loc5_.x,_loc5_.y,_loc5_.scope);
+                        _loc5_.length = 0;
                     }
-                    else
-                    {
-                        _loc6_ = _loc1_.popupMgr.create(Linkages.HELP_LAYOUT_CONTROL_LINKAGE,_loc5_) as HelpLayoutControl;
-                        App.utils.asserter.assertNotNull(_loc6_,"control" + Errors.CANT_NULL);
-                        this._controlsByComponentsMap[_loc3_][_loc5_.id] = _loc6_;
-                    }
-                    _loc6_.setData(_loc5_);
-                    _loc5_.dispose();
-                }
-                if(_loc4_)
-                {
-                    _loc4_.length = 0;
                 }
             }
         }

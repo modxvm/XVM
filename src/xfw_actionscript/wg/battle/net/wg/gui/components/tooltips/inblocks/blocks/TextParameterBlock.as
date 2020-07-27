@@ -2,6 +2,7 @@ package net.wg.gui.components.tooltips.inblocks.blocks
 {
     import flash.text.TextField;
     import net.wg.gui.components.tooltips.inblocks.data.TextParameterVO;
+    import flash.text.TextFieldAutoSize;
 
     public class TextParameterBlock extends AbstractTextParameterBlock
     {
@@ -11,6 +12,7 @@ package net.wg.gui.components.tooltips.inblocks.blocks
         public function TextParameterBlock()
         {
             super();
+            this.nameTF.autoSize = TextFieldAutoSize.LEFT;
         }
 
         override protected function onSetBlockWidth(param1:int) : void

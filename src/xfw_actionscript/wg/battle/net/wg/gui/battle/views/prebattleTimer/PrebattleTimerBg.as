@@ -11,7 +11,6 @@ package net.wg.gui.battle.views.prebattleTimer
         public function PrebattleTimerBg()
         {
             super();
-            this.shadow.cacheAsBitmap = true;
         }
 
         public final function dispose() : void
@@ -22,7 +21,8 @@ package net.wg.gui.battle.views.prebattleTimer
         public function updateSize(param1:int, param2:int) : void
         {
             this.shadow.x = -param1 >> 1;
-            this.shadow.width = param1 | 0;
+            this.shadow.width = param1;
+            this.shadow.height = param2;
         }
     }
 }

@@ -68,6 +68,8 @@ package net.wg.gui.battle.views.prebattleTimer
 
         private var _isNeedWinChangePosition:Boolean = true;
 
+        private var _isBackgroundHided:Boolean = false;
+
         public function PrebattleTimerBase()
         {
             super();
@@ -184,6 +186,12 @@ package net.wg.gui.battle.views.prebattleTimer
             invalidateSize();
         }
 
+        public function hideBackground() : void
+        {
+            this._isBackgroundHided = true;
+            this.background.visible = false;
+        }
+
         protected function doUpdateSize(param1:Boolean) : void
         {
             this.timer.scaleX = this.timer.scaleY = param1?TIMER_SMALL_SCALE:TIMER_LARGE_SCALE;
@@ -199,8 +207,8 @@ package net.wg.gui.battle.views.prebattleTimer
         {
             this.win.visible = param1;
             this.timer.visible = param1;
-            this.background.visible = param1;
             this.message.visible = param1;
+            this.background.visible = this._isBackgroundHided?false:param1;
         }
 
         protected function hideComponent(param1:Boolean) : void
@@ -215,6 +223,7 @@ package net.wg.gui.battle.views.prebattleTimer
                 this._hideAnimProgress = false;
                 gotoAndStop(FRAME_LABEL_HIDE_COMPLETED);
             }
+            dispatchEvent(new PrebattleTimerEvent(PrebattleTimerEvent.START_HIDING,param1));
         }
 
         protected final function hideFinalize() : void

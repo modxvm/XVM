@@ -5,7 +5,6 @@ package net.wg.gui.lobby.header.headerButtonBar
     import net.wg.gui.components.controls.UILoaderAlt;
     import net.wg.gui.lobby.header.vo.HBC_SquadDataVo;
     import net.wg.gui.events.UILoaderEvent;
-    import org.idmedia.as3commons.util.StringUtils;
     import scaleform.clik.constants.InvalidationType;
 
     public class HBC_Squad extends HeaderButtonContentItem
@@ -24,8 +23,6 @@ package net.wg.gui.lobby.header.headerButtonBar
         public var icon:UILoaderAlt = null;
 
         private var _squadDataVo:HBC_SquadDataVo = null;
-
-        private var _iconIsLoaded:Boolean = false;
 
         public function HBC_Squad()
         {
@@ -56,10 +53,6 @@ package net.wg.gui.lobby.header.headerButtonBar
 
         override protected function updateSize() : void
         {
-            if(!this._iconIsLoaded)
-            {
-                return;
-            }
             var _loc1_:* = wideScreenPrc > WIDE_SCREEN_PRC_BORDER;
             if(_loc1_)
             {
@@ -93,7 +86,6 @@ package net.wg.gui.lobby.header.headerButtonBar
             {
                 this.textField.text = MENU.HEADERBUTTONS_BTNLABEL_CREATESQUAD;
             }
-            this._iconIsLoaded = this._squadDataVo.icon == this.icon.source || StringUtils.isEmpty(this._squadDataVo.icon);
             this.icon.source = this._squadDataVo.icon;
             var _loc1_:* = wideScreenPrc > WIDE_SCREEN_PRC_BORDER;
             this.textField.visible = _loc1_;
@@ -141,7 +133,6 @@ package net.wg.gui.lobby.header.headerButtonBar
 
         private function onIconLoadCompleteHandler(param1:UILoaderEvent) : void
         {
-            this._iconIsLoaded = true;
             invalidate(InvalidationType.DATA,InvalidationType.SIZE);
         }
     }

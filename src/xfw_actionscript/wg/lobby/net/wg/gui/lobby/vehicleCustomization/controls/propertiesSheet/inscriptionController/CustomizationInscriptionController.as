@@ -66,11 +66,10 @@ package net.wg.gui.lobby.vehicleCustomization.controls.propertiesSheet.inscripti
 
         override protected function configUI() : void
         {
-            var _loc1_:Sprite = null;
             super.configUI();
             visible = false;
             this.hint.visible = false;
-            _loc1_ = new Sprite();
+            var _loc1_:Sprite = new Sprite();
             this.lines.hitArea = _loc1_;
             addChild(_loc1_);
             this.lines.mouseEnabled = this.lines.mouseChildren = false;

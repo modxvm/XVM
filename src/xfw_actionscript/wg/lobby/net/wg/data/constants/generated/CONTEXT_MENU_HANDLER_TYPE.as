@@ -75,6 +75,38 @@ package net.wg.data.constants.generated
 
         public static const STORAGE_OPTIONAL_DEVICE_ITEM:String = "storageOptionalDeviceItem";
 
+        public static const TANK_SETUP_OPTIONAL_DEVICE_ITEM:String = "tankSetupOptionalDeviceItem";
+
+        public static const TANK_SETUP_MODULE_ITEM:String = "tankSetupModuleItem";
+
+        public static const TANK_SETUP_CONSUMABLE_ITEM:String = "tankSetupConsumableItem";
+
+        public static const TANK_SETUP_BATTLE_BOOSTER_ITEM:String = "tankSetupBattleBoosterItem";
+
+        public static const TANK_SETUP_BATTLE_ABILITY_ITEM:String = "tankSetupBattleAbilityItem";
+
+        public static const TANK_SETUP_SHELL_ITEM:String = "tankSetupShellItem";
+
+        public static const TANK_SETUP_OPTIONAL_DEVICE_SLOT:String = "tankSetupOptionalDeviceSlotWW";
+
+        public static const TANK_SETUP_CONSUMABLE_SLOT:String = "tankSetupConsumableSlot";
+
+        public static const TANK_SETUP_BATTLE_BOOSTER_SLOT:String = "tankSetupBattleBoosterSlot";
+
+        public static const TANK_SETUP_BATTLE_ABILITY_SLOT:String = "tankSetupBattleAbilitySlot";
+
+        public static const TANK_SETUP_SHELL_SLOT:String = "tankSetupShellSlot";
+
+        public static const TANK_SETUP_HANGAR_OPTIONAL_DEVICE_SLOT:String = "tankSetupHangarOptionalDeviceSlot";
+
+        public static const TANK_SETUP_HANGAR_CONSUMABLE_SLOT:String = "tankSetupHangarConsumableSlot";
+
+        public static const TANK_SETUP_HANGAR_BATTLE_BOOSTER_SLOT:String = "tankSetupHangarBattleBoosterSlot";
+
+        public static const TANK_SETUP_HANGAR_BATTLE_ABILITY_SLOT:String = "tankSetupHangarBattleAbilitySlot";
+
+        public static const TANK_SETUP_HANGAR_SHELL_SLOT:String = "tankSetupHangarShellSlot";
+
         public function CONTEXT_MENU_HANDLER_TYPE()
         {
             super();

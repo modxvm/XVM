@@ -1,15 +1,17 @@
 package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.infrastructure.base.AbstractView;
+    import net.wg.gui.tutorial.GFTutorialView;
     import net.wg.gui.lobby.hangar.ammunitionPanel.data.AmmunitionPanelVO;
     import net.wg.gui.lobby.post.data.TeaserVO;
     import net.wg.data.constants.Errors;
     import net.wg.infrastructure.exceptions.AbstractException;
 
-    public class HangarMeta extends AbstractView
+    public class HangarMeta extends GFTutorialView
     {
 
         public var onEscape:Function;
+
+        public var onCloseBtnClick:Function;
 
         public var showHelpLayout:Function;
 
@@ -54,6 +56,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.onEscape,"onEscape" + Errors.CANT_NULL);
             this.onEscape();
+        }
+
+        public function onCloseBtnClickS() : void
+        {
+            App.utils.asserter.assertNotNull(this.onCloseBtnClick,"onCloseBtnClick" + Errors.CANT_NULL);
+            this.onCloseBtnClick();
         }
 
         public function showHelpLayoutS() : void

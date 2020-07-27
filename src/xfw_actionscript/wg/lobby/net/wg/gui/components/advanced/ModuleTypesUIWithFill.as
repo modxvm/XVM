@@ -3,32 +3,73 @@ package net.wg.gui.components.advanced
     import net.wg.infrastructure.base.UIComponentEx;
     import net.wg.gui.components.controls.BitmapFill;
     import net.wg.gui.components.controls.Image;
+    import flash.display.Sprite;
     import flash.events.Event;
+    import net.wg.data.constants.Errors;
 
     public class ModuleTypesUIWithFill extends UIComponentEx
     {
 
+        private static const INV_MODULE_ICON_POS:String = "invModuleIconPos";
+
+        protected static const MODULE_TYPE_NONE:String = "none";
+
+        private static const ERROR_NO_MODULE_ICON:String = "[ModuleTypesUIWithFill] moduleIcon ";
+
         public var extraIconBitmapFill:BitmapFill = null;
 
-        private var _icon:Image = null;
+        public var moduleIcon:Image = null;
+
+        public var bg:Sprite = null;
+
+        private var _extraIcon:Image = null;
 
         public function ModuleTypesUIWithFill()
         {
             super();
+        }
+
+        override protected function configUI() : void
+        {
+            super.configUI();
             this.hideExtraIcon();
+            if(this.moduleIcon != null)
+            {
+                this.moduleIcon.addEventListener(Event.CHANGE,this.onModuleIconHandler);
+            }
+            else
+            {
+                DebugUtils.LOG_ERROR(ERROR_NO_MODULE_ICON + Errors.WASNT_FOUND);
+            }
         }
 
         override protected function onDispose() : void
         {
-            if(this._icon != null)
+            if(this._extraIcon != null)
             {
-                this._icon.removeEventListener(Event.CHANGE,this.onIconLoadedHandler);
-                this._icon.dispose();
-                this._icon = null;
+                this._extraIcon.removeEventListener(Event.CHANGE,this.onIconLoadedHandler);
+                this._extraIcon.dispose();
+                this._extraIcon = null;
             }
             this.extraIconBitmapFill.dispose();
             this.extraIconBitmapFill = null;
+            if(this.moduleIcon != null)
+            {
+                this.moduleIcon.removeEventListener(Event.CHANGE,this.onModuleIconHandler);
+                this.moduleIcon.dispose();
+                this.moduleIcon = null;
+            }
             super.onDispose();
+        }
+
+        override protected function draw() : void
+        {
+            super.draw();
+            if(INV_MODULE_ICON_POS && this.moduleIcon)
+            {
+                this.moduleIcon.x = this.bg.width - this.moduleIcon.width * scaleX >> 1;
+                this.moduleIcon.y = this.bg.height - this.moduleIcon.height * scaleY >> 1;
+            }
         }
 
         public function hideExtraIcon() : void
@@ -44,12 +85,29 @@ package net.wg.gui.components.advanced
 
         public function setExtraIconBySource(param1:String) : void
         {
-            if(this._icon == null)
+            if(this._extraIcon == null)
             {
-                this._icon = new Image();
-                this._icon.addEventListener(Event.CHANGE,this.onIconLoadedHandler);
+                this._extraIcon = new Image();
+                this._extraIcon.addEventListener(Event.CHANGE,this.onIconLoadedHandler);
             }
-            this._icon.source = param1;
+            this._extraIcon.source = param1;
+        }
+
+        public function setModuleTypeIcon(param1:String) : void
+        {
+            if(this.moduleIcon == null)
+            {
+                DebugUtils.LOG_ERROR(ERROR_NO_MODULE_ICON + Errors.WASNT_FOUND);
+                return;
+            }
+            if(param1 != MODULE_TYPE_NONE)
+            {
+                this.moduleIcon.source = RES_ICONS.getModuleTypesIcon(param1);
+            }
+            else
+            {
+                this.moduleIcon.source = null;
+            }
         }
 
         public function showExtraIcon() : void
@@ -77,9 +135,14 @@ package net.wg.gui.components.advanced
             this.extraIconBitmapFill.alpha = param1;
         }
 
+        private function onModuleIconHandler(param1:Event) : void
+        {
+            invalidate(INV_MODULE_ICON_POS);
+        }
+
         private function onIconLoadedHandler(param1:Event) : void
         {
-            this.extraIconBitmapFill.setBitmap(this._icon.bitmapData);
+            this.extraIconBitmapFill.setBitmap(this._extraIcon.bitmapData);
             this.extraIconBitmapFill.validateNow();
         }
     }

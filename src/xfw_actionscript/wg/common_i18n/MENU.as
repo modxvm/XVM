@@ -121,6 +121,12 @@ package
 
         public static const LOGIN_SOCIAL_STATUS_WGC_ERROR:String = "#menu:login/social/status/WGC_ERROR";
 
+        public static const LOGIN_HEALTHNOTICE:String = "#menu:login/healthNotice";
+
+        public static const LOGIN_LICENSES_HEADER_1:String = "#menu:login/licenses/header_1";
+
+        public static const LOGIN_LICENSES_HEADER_2:String = "#menu:login/licenses/header_2";
+
         public static const HANGAR_CREW_RODY_DOG_USSR_NAME:String = "#menu:hangar/crew/rody/dog/ussr/name";
 
         public static const HANGAR_CREW_RODY_DOG_POLAND_NAME:String = "#menu:hangar/crew/rody/dog/poland/name";
@@ -757,6 +763,8 @@ package
 
         public static const AMMORELOAD_TOTALCOST:String = "#menu:ammoReload/totalcost";
 
+        public static const SHELL_CALIBER_UNITS:String = "#menu:shell/caliber/units";
+
         public static const RATING_TITLE:String = "#menu:rating/title";
 
         public static const PREBATTLE_PLAYERSLABEL:String = "#menu:prebattle/playersLabel";
@@ -766,6 +774,10 @@ package
         public static const PREBATTLE_SIDEA:String = "#menu:prebattle/sideA";
 
         public static const PREBATTLE_SIDEB:String = "#menu:prebattle/sideB";
+
+        public static const PREBATTLE_BATTLEROYALE_SOLO:String = "#menu:prebattle/battleRoyale/solo";
+
+        public static const PREBATTLE_BATTLEROYALE_SQUAD:String = "#menu:prebattle/battleRoyale/squad";
 
         public static const PREBATTLE_TIMERLABEL:String = "#menu:prebattle/timerLabel";
 
@@ -784,8 +796,6 @@ package
         public static const PREBATTLE_DESCRIPTION:String = "#menu:prebattle/description";
 
         public static const PREBATTLE_WAITINGTIMEWARNING:String = "#menu:prebattle/waitingTimeWarning";
-
-        public static const PREBATTLE_EVENTWAITINGTIMEWARNING:String = "#menu:prebattle/eventWaitingTimeWarning";
 
         public static const PREBATTLE_COMPANIESTITLE_JUNIOR:String = "#menu:prebattle/CompaniesTitle/JUNIOR";
 
@@ -977,6 +987,14 @@ package
 
         public static const TANK_PARAMS_SPEEDLIMITS:String = "#menu:tank_params/speedLimits";
 
+        public static const TANK_PARAMS_FORWARDMAXSPEED:String = "#menu:tank_params/forwardMaxSpeed";
+
+        public static const TANK_PARAMS_CHASSISMODULEROTATIONSPEED:String = "#menu:tank_params/chassisModuleRotationSpeed";
+
+        public static const TANK_PARAMS_TURRETMODULEROTATIONSPEED:String = "#menu:tank_params/turretModuleRotationSpeed";
+
+        public static const TANK_PARAMS_GUNMODULEAVGDAMAGELIST:String = "#menu:tank_params/gunModuleAvgDamageList";
+
         public static const TANK_PARAMS_CHASSISROTATIONSPEED:String = "#menu:tank_params/chassisRotationSpeed";
 
         public static const TANK_PARAMS_MAXSTEERINGLOCKANGLE:String = "#menu:tank_params/maxSteeringLockAngle";
@@ -989,11 +1007,17 @@ package
 
         public static const TANK_PARAMS_WHEELEDSWITCHOFFTIME:String = "#menu:tank_params/wheeledSwitchOffTime";
 
+        public static const TANK_PARAMS_TURBOSHAFTSWITCHTIME:String = "#menu:tank_params/turboshaftSwitchTime";
+
         public static const TANK_PARAMS_SWITCHTIME:String = "#menu:tank_params/switchTime";
 
         public static const TANK_PARAMS_WHEELEDSWITCHTIME:String = "#menu:tank_params/wheeledSwitchTime";
 
         public static const TANK_PARAMS_WHEELEDSPEEDMODESPEED:String = "#menu:tank_params/wheeledSpeedModeSpeed";
+
+        public static const TANK_PARAMS_TURBOSHAFTSPEEDMODESPEED:String = "#menu:tank_params/turboshaftSpeedModeSpeed";
+
+        public static const TANK_PARAMS_TURBOSHAFTENGINEPOWER:String = "#menu:tank_params/turboshaftEnginePower";
 
         public static const TANK_PARAMS_TIMEOFREACHING:String = "#menu:tank_params/timeOfReaching";
 
@@ -1017,7 +1041,11 @@ package
 
         public static const TANK_PARAMS_AVGDAMAGE:String = "#menu:tank_params/avgDamage";
 
+        public static const TANK_PARAMS_SHOTSPEED:String = "#menu:tank_params/shotSpeed";
+
         public static const TANK_PARAMS_AVGPIERCINGPOWER:String = "#menu:tank_params/avgPiercingPower";
+
+        public static const TANK_PARAMS_SHORTENED_AVGPIERCINGPOWER:String = "#menu:tank_params/shortened/avgPiercingPower";
 
         public static const TANK_PARAMS_AVGDAMAGEPERMINUTE:String = "#menu:tank_params/avgDamagePerMinute";
 
@@ -1026,6 +1054,10 @@ package
         public static const TANK_PARAMS_CIRCULARVISIONRADIUS:String = "#menu:tank_params/circularVisionRadius";
 
         public static const TANK_PARAMS_RADIODISTANCE:String = "#menu:tank_params/radioDistance";
+
+        public static const TANK_PARAMS_RADARRADIUS:String = "#menu:tank_params/radarRadius";
+
+        public static const TANK_PARAMS_RADARCOOLDOWN:String = "#menu:tank_params/radarCooldown";
 
         public static const TANK_PARAMS_TURRETYAWLIMITS:String = "#menu:tank_params/turretYawLimits";
 
@@ -1056,6 +1088,12 @@ package
         public static const TANK_PARAMS_INVISIBILITYSTILLFACTOR:String = "#menu:tank_params/invisibilityStillFactor";
 
         public static const TANK_PARAMS_INVISIBILITYMOVINGFACTOR:String = "#menu:tank_params/invisibilityMovingFactor";
+
+        public static const TANK_PARAMS_EXTRAREPAIRSPEED:String = "#menu:tank_params/extraRepairSpeed";
+
+        public static const TANK_PARAMS_TURBOSHAFTINVISIBILITYSTILLFACTOR:String = "#menu:tank_params/turboshaftInvisibilityStillFactor";
+
+        public static const TANK_PARAMS_TURBOSHAFTINVISIBILITYMOVINGFACTOR:String = "#menu:tank_params/turboshaftInvisibilityMovingFactor";
 
         public static const TANK_PARAMS_VALUES_PARAM12_VALUE0:String = "#menu:tank_params/values/param12/value0";
 
@@ -1119,13 +1157,67 @@ package
 
         public static const TANK_PARAMS_KG:String = "#menu:tank_params/kg";
 
+        public static const TANK_PARAMS_MPS:String = "#menu:tank_params/mps";
+
         public static const TANK_PARAMS_CLIPSEC:String = "#menu:tank_params/clipSec";
 
         public static const TANK_PARAMS_STUNMAXDURATION:String = "#menu:tank_params/stunMaxDuration";
 
         public static const TANK_PARAMS_STUNMINDURATION:String = "#menu:tank_params/stunMinDuration";
 
+        public static const TANK_PARAMS_STUNDURATIONLIST:String = "#menu:tank_params/stunDurationList";
+
         public static const TANK_PARAMS_CHARGETIME:String = "#menu:tank_params/chargeTime";
+
+        public static const TANK_PARAMS_NO_BRACKETS_KG:String = "#menu:tank_params/no_brackets/kg";
+
+        public static const TANK_PARAMS_NO_BRACKETS_S:String = "#menu:tank_params/no_brackets/s";
+
+        public static const TANK_PARAMS_NO_BRACKETS_MM:String = "#menu:tank_params/no_brackets/mm";
+
+        public static const EXTRAPARAMS_HEADER:String = "#menu:extraParams/header";
+
+        public static const EXTRAPARAMS_MULTIDESC:String = "#menu:extraParams/multiDesc";
+
+        public static const EXTRAPARAMS_DESC:String = "#menu:extraParams/desc";
+
+        public static const EXTRAPARAMS_NAME_VEHICLEGUNSHOTDISPERSION:String = "#menu:extraParams/name/vehicleGunShotDispersion";
+
+        public static const EXTRAPARAMS_NAME_VEHICLERELOADTIMEAFTERSHELLCHANGE:String = "#menu:extraParams/name/vehicleReloadTimeAfterShellChange";
+
+        public static const EXTRAPARAMS_NAME_VEHICLEREPAIRSPEED:String = "#menu:extraParams/name/vehicleRepairSpeed";
+
+        public static const EXTRAPARAMS_NAME_VEHICLERAMOREXPLOSIONDAMAGERESISTANCE:String = "#menu:extraParams/name/vehicleRamOrExplosionDamageResistance";
+
+        public static const EXTRAPARAMS_NAME_CREWHITCHANCE:String = "#menu:extraParams/name/crewHitChance";
+
+        public static const EXTRAPARAMS_NAME_CREWSTUNDURATION:String = "#menu:extraParams/name/crewStunDuration";
+
+        public static const EXTRAPARAMS_NAME_CREWREPEATEDSTUNDURATION:String = "#menu:extraParams/name/crewRepeatedStunDuration";
+
+        public static const EXTRAPARAMS_NAME_VEHICLECHASSISSTRENGTH:String = "#menu:extraParams/name/vehicleChassisStrength";
+
+        public static const EXTRAPARAMS_NAME_VEHICLECHASSISFALLDAMAGE:String = "#menu:extraParams/name/vehicleChassisFallDamage";
+
+        public static const EXTRAPARAMS_NAME_VEHICLECHASSISREPAIRSPEED:String = "#menu:extraParams/name/vehicleChassisRepairSpeed";
+
+        public static const EXTRAPARAMS_NAME_VEHICLEAMMOBAYSTRENGTH:String = "#menu:extraParams/name/vehicleAmmoBayStrength";
+
+        public static const EXTRAPARAMS_NAME_VEHICLEAMMOBAYENGINEFUELSTRENGTH:String = "#menu:extraParams/name/vehicleAmmoBayEngineFuelStrength";
+
+        public static const EXTRAPARAMS_NAME_VEHPENALTYFORDAMAGEENGINEANDCOMBAT:String = "#menu:extraParams/name/vehPenaltyForDamageEngineAndCombat";
+
+        public static const EXTRAPARAMS_NAME_VEHICLEFIRECHANCE:String = "#menu:extraParams/name/vehicleFireChance";
+
+        public static const EXTRAPARAMS_NAME_VEHICLESPEEDGAIN:String = "#menu:extraParams/name/vehicleSpeedGain";
+
+        public static const EXTRAPARAMS_NAME_VEHICLEENEMYSPOTTINGTIME:String = "#menu:extraParams/name/vehicleEnemySpottingTime";
+
+        public static const EXTRAPARAMS_NAME_VEHICLEOWNSPOTTINGTIME:String = "#menu:extraParams/name/vehicleOwnSpottingTime";
+
+        public static const EXTRAPARAMS_NAME_DEMASKMOVINGFACTOR:String = "#menu:extraParams/name/demaskMovingFactor";
+
+        public static const EXTRAPARAMS_NAME_DEMASKFOLIAGEFACTOR:String = "#menu:extraParams/name/demaskFoliageFactor";
 
         public static const DESCRIPTIONS_VEHICLE:String = "#menu:descriptions/vehicle";
 
@@ -1203,13 +1295,29 @@ package
 
         public static const HEADERBUTTONS_BATTLE_TYPES_SQUAD:String = "#menu:headerButtons/battle/types/squad";
 
+        public static const HEADERBUTTONS_BATTLE_TYPES_SQUAD_DESCRIPTION:String = "#menu:headerButtons/battle/types/squad/description";
+
+        public static const HEADERBUTTONS_BATTLE_TYPES_SIMPLESQUAD:String = "#menu:headerButtons/battle/types/simpleSquad";
+
+        public static const HEADERBUTTONS_BATTLE_TYPES_EVENTSQUAD:String = "#menu:headerButtons/battle/types/eventSquad";
+
+        public static const HEADERBUTTONS_BATTLE_TYPES_BATTLEROYALE:String = "#menu:headerButtons/battle/types/battleRoyale";
+
+        public static const HEADERBUTTONS_BATTLE_TYPES_BATTLEROYALE_EXTRA_FROZEN:String = "#menu:headerButtons/battle/types/battleRoyale/extra/frozen";
+
+        public static const HEADERBUTTONS_BATTLE_TYPES_BATTLEROYALE_EXTRA_FINISHED:String = "#menu:headerButtons/battle/types/battleRoyale/extra/finished";
+
+        public static const HEADERBUTTONS_BATTLE_TYPES_BATTLEROYALESQUAD:String = "#menu:headerButtons/battle/types/battleRoyaleSquad";
+
+        public static const HEADERBUTTONS_BATTLE_TYPES_BATTLEROYALESQUAD_DESCRIPTION:String = "#menu:headerButtons/battle/types/battleRoyaleSquad/description";
+
         public static const HEADERBUTTONS_BATTLE_TYPES_SQUAD_RANDOMBATTLE:String = "#menu:headerButtons/battle/types/squad/randomBattle";
 
         public static const HEADERBUTTONS_BATTLE_TYPES_SQUAD_EVENT:String = "#menu:headerButtons/battle/types/squad/event";
 
         public static const HEADERBUTTONS_BATTLE_TYPES_SQUAD_EPIC:String = "#menu:headerButtons/battle/types/squad/epic";
 
-        public static const HEADERBUTTONS_BATTLE_TYPES_SQUAD_BOB:String = "#menu:headerButtons/battle/types/squad/bob";
+        public static const HEADERBUTTONS_BATTLE_TYPES_SQUAD_BATTLEROYALE:String = "#menu:headerButtons/battle/types/squad/battleRoyale";
 
         public static const HEADERBUTTONS_BATTLE_TYPES_SQUADLEAVEOWNER:String = "#menu:headerButtons/battle/types/squadLeaveOwner";
 
@@ -1232,10 +1340,6 @@ package
         public static const HEADERBUTTONS_BATTLE_TYPES_LEAVETRAINING_DESCR:String = "#menu:headerButtons/battle/types/leaveTraining/descr";
 
         public static const HEADERBUTTONS_BATTLE_TYPES_TRAININGLEAVEOWNER:String = "#menu:headerButtons/battle/types/trainingLeaveOwner";
-
-        public static const HEADERBUTTONS_BATTLE_TYPES_SIMPLESQUAD:String = "#menu:headerButtons/battle/types/simpleSquad";
-
-        public static const HEADERBUTTONS_BATTLE_TYPES_EVENTSQUAD:String = "#menu:headerButtons/battle/types/eventSquad";
 
         public static const HEADERBUTTONS_BATTLE_TYPES_TRAININGLEAVE:String = "#menu:headerButtons/battle/types/trainingLeave";
 
@@ -1268,10 +1372,6 @@ package
         public static const HEADERBUTTONS_BATTLE_TYPES_BATTLETUTORIAL:String = "#menu:headerButtons/battle/types/battleTutorial";
 
         public static const HEADERBUTTONS_BATTLE_TYPES_FALLOUT:String = "#menu:headerButtons/battle/types/fallout";
-
-        public static const HEADERBUTTONS_BATTLE_TYPES_BOB:String = "#menu:headerButtons/battle/types/bob";
-
-        public static const HEADERBUTTONS_BATTLE_TYPES_BOB_DESCR:String = "#menu:headerButtons/battle/types/bob/descr";
 
         public static const HEADERBUTTONS_BATTLE_AVAILABLESINCE:String = "#menu:headerButtons/battle/availableSince";
 
@@ -1371,10 +1471,6 @@ package
 
         public static const HEADERBUTTONS_FIGHTBTN_TOOLTIP_EPICBATTLEONLY_BODY:String = "#menu:headerButtons/fightBtn/tooltip/epicBattleOnly/body";
 
-        public static const HEADERBUTTONS_FIGHTBTN_TOOLTIP_BOBONLY_HEADER:String = "#menu:headerButtons/fightBtn/tooltip/bobOnly/header";
-
-        public static const HEADERBUTTONS_FIGHTBTN_TOOLTIP_BOBONLY_BODY:String = "#menu:headerButtons/fightBtn/tooltip/bobOnly/body";
-
         public static const HEADERBUTTONS_FIGHTBTN_TOOLTIP_RANKEDDISABLED_HEADER:String = "#menu:headerButtons/fightBtn/tooltip/rankedDisabled/header";
 
         public static const HEADERBUTTONS_FIGHTBTN_TOOLTIP_RANKEDDISABLED_BODY:String = "#menu:headerButtons/fightBtn/tooltip/rankedDisabled/body";
@@ -1383,13 +1479,13 @@ package
 
         public static const HEADERBUTTONS_FIGHTBTN_TOOLTIP_RANKEDNOTSET_BODY:String = "#menu:headerButtons/fightBtn/tooltip/rankedNotSet/body";
 
-        public static const HEADERBUTTONS_FIGHTBTN_TOOLTIP_SPGEVENTDISABLED_HEADER:String = "#menu:headerButtons/fightBtn/tooltip/spgEventDisabled/header";
+        public static const HEADERBUTTONS_FIGHTBTN_TOOLTIP_BATTLEROYALEDISABLED_HEADER:String = "#menu:headerButtons/fightBtn/tooltip/battleRoyaleDisabled/header";
 
-        public static const HEADERBUTTONS_FIGHTBTN_TOOLTIP_SPGEVENTDISABLED_BODY:String = "#menu:headerButtons/fightBtn/tooltip/spgEventDisabled/body";
+        public static const HEADERBUTTONS_FIGHTBTN_TOOLTIP_BATTLEROYALEDISABLED_BODY:String = "#menu:headerButtons/fightBtn/tooltip/battleRoyaleDisabled/body";
 
-        public static const HEADERBUTTONS_FIGHTBTN_TOOLTIP_SPGEVENTNOTSET_HEADER:String = "#menu:headerButtons/fightBtn/tooltip/spgEventNotSet/header";
+        public static const HEADERBUTTONS_FIGHTBTN_TOOLTIP_UNSUTABLETOBATTLEROYALE_HEADER:String = "#menu:headerButtons/fightBtn/tooltip/unsutableToBattleRoyale/header";
 
-        public static const HEADERBUTTONS_FIGHTBTN_TOOLTIP_SPGEVENTNOTSET_BODY:String = "#menu:headerButtons/fightBtn/tooltip/spgEventNotSet/body";
+        public static const HEADERBUTTONS_FIGHTBTN_TOOLTIP_UNSUTABLETOBATTLEROYALE_BODY:String = "#menu:headerButtons/fightBtn/tooltip/unsutableToBattleRoyale/body";
 
         public static const HEADERBUTTONS_DEFAULTCOUNTER:String = "#menu:headerButtons/defaultCounter";
 
@@ -1629,10 +1725,6 @@ package
 
         public static const MODULEFITS_REMOVENAME:String = "#menu:moduleFits/removeName";
 
-        public static const MODULEFITS_UPGRADEBTN_LABEL:String = "#menu:moduleFits/upgradeBtn/label";
-
-        public static const MODULEFITS_UPGRADEBTN_TOOLTIP_HEADER:String = "#menu:moduleFits/upgradeBtn/tooltip/header";
-
         public static const MODULEFITS_UPGRADEBTN_TOOLTIP_BODY:String = "#menu:moduleFits/upgradeBtn/tooltip/body";
 
         public static const MODULEFITS_REMOVEDESCR:String = "#menu:moduleFits/removeDescr";
@@ -1646,8 +1738,6 @@ package
         public static const BATTLEABILITY_TITLE:String = "#menu:battleAbility/title";
 
         public static const FITTINGPOPOVER_MANAGEABILITIES:String = "#menu:fittingPopover/manageAbilities";
-
-        public static const EQUIPMENTFITS_TITLE:String = "#menu:equipmentFits/title";
 
         public static const EXCHANGE_TITLE:String = "#menu:exchange/title";
 
@@ -1945,6 +2035,10 @@ package
 
         public static const MODULEINFO_HYDRAULICWHEELEDCHASSISLABEL:String = "#menu:moduleInfo/hydraulicWheeledChassisLabel";
 
+        public static const MODULEINFO_PARAMS_SHOTSPEED:String = "#menu:moduleInfo/params/shotSpeed";
+
+        public static const MODULEINFO_TURBOSHAFTENGINE:String = "#menu:moduleInfo/turboshaftEngine";
+
         public static const MODULEINFO_PARAMS_MAXLOAD:String = "#menu:moduleInfo/params/maxLoad";
 
         public static const MODULEINFO_PARAMS_MAXSTEERINGLOCKANGLE:String = "#menu:moduleInfo/params/maxSteeringLockAngle";
@@ -2027,6 +2121,8 @@ package
 
         public static const MODULEINFO_PARAMS_NOPIERCINGDISTANCE_FOOTNOTE:String = "#menu:moduleInfo/params/noPiercingDistance/footnote";
 
+        public static const MODULEINFO_PARAMS_PIERCINGDISTANCE_FOOTNOTE:String = "#menu:moduleInfo/params/piercingDistance/footnote";
+
         public static const MODULEINFO_PARAMS_NOPIERCINGDISTANCE_FOOTNOTE_MAXDISTANCE:String = "#menu:moduleInfo/params/noPiercingDistance/footnote/maxDistance";
 
         public static const MODULEINFO_PARAMS_STUNMAXDURATION:String = "#menu:moduleInfo/params/stunMaxDuration";
@@ -2037,7 +2133,31 @@ package
 
         public static const MODULEINFO_PARAMS_STUNMINDURATIONLIST:String = "#menu:moduleInfo/params/stunMinDurationList";
 
+        public static const MODULEINFO_PARAMS_STUNDURATIONLIST:String = "#menu:moduleInfo/params/stunDurationList";
+
         public static const MODULEINFO_PARAMS_COOLDOWNSECONDS:String = "#menu:moduleInfo/params/cooldownSeconds";
+
+        public static const MODULEINFO_PARAMS_RADARRADIUS:String = "#menu:moduleInfo/params/radarRadius";
+
+        public static const MODULEINFO_PARAMS_RADARCOOLDOWN:String = "#menu:moduleInfo/params/radarCooldown";
+
+        public static const MODULEINFO_PARAMS_MAXHEALTH:String = "#menu:moduleInfo/params/maxHealth";
+
+        public static const MODULEINFO_PARAMS_MAXHULLHEALTH:String = "#menu:moduleInfo/params/maxHullHealth";
+
+        public static const MODULEINFO_PARAMS_HULLWEIGHT:String = "#menu:moduleInfo/params/hullWeight";
+
+        public static const MODULEINFO_PARAMS_HULLANDCHASSISWEIGHT:String = "#menu:moduleInfo/params/hullAndChassisWeight";
+
+        public static const MODULEINFO_PARAMS_HULLARMOR:String = "#menu:moduleInfo/params/hullArmor";
+
+        public static const MODULEINFO_PARAMS_FORWARDMAXSPEED:String = "#menu:moduleInfo/params/forwardMaxSpeed";
+
+        public static const MODULEINFO_PARAMS_DRIVINGCONTROL:String = "#menu:moduleInfo/params/drivingControl";
+
+        public static const MODULEINFO_PARAMS_ENGINEPOWERPERTON:String = "#menu:moduleInfo/params/enginePowerPerTon";
+
+        public static const MODULEINFO_PARAMS_TURBOSHAFTENGINEPOWER:String = "#menu:moduleInfo/params/turboshaftEnginePower";
 
         public static const MODULEINFO_COMPATIBLE_TURRETS:String = "#menu:moduleInfo/compatible/turrets";
 
@@ -2083,6 +2203,8 @@ package
 
         public static const VEHICLEINFO_PARAMS_AVGDAMAGE:String = "#menu:vehicleInfo/params/avgDamage";
 
+        public static const VEHICLEINFO_PARAMS_SHOTSPEED:String = "#menu:vehicleInfo/params/shotSpeed";
+
         public static const VEHICLEINFO_PARAMS_AVGPIERCINGPOWER:String = "#menu:vehicleInfo/params/avgPiercingPower";
 
         public static const VEHICLEINFO_PARAMS_TURRETROTATIONSPEED:String = "#menu:vehicleInfo/params/turretRotationSpeed";
@@ -2113,6 +2235,10 @@ package
 
         public static const VEHICLEINFO_PARAMS_INVISIBILITYMOVINGFACTOR:String = "#menu:vehicleInfo/params/invisibilityMovingFactor";
 
+        public static const VEHICLEINFO_PARAMS_TURBOSHAFTINVISIBILITYSTILLFACTOR:String = "#menu:vehicleInfo/params/turboshaftInvisibilityStillFactor";
+
+        public static const VEHICLEINFO_PARAMS_TURBOSHAFTINVISIBILITYMOVINGFACTOR:String = "#menu:vehicleInfo/params/turboshaftInvisibilityMovingFactor";
+
         public static const VEHICLEINFO_PARAMS_RELOADTIMESECS:String = "#menu:vehicleInfo/params/reloadTimeSecs";
 
         public static const VEHICLEINFO_PARAMS_CHARGETIME:String = "#menu:vehicleInfo/params/chargeTime";
@@ -2127,11 +2253,17 @@ package
 
         public static const VEHICLEINFO_PARAMS_WHEELEDSWITCHOFFTIME:String = "#menu:vehicleInfo/params/wheeledSwitchOffTime";
 
+        public static const VEHICLEINFO_PARAMS_TURBOSHAFTSWITCHTIME:String = "#menu:vehicleInfo/params/turboshaftSwitchTime";
+
         public static const VEHICLEINFO_PARAMS_SWITCHTIME:String = "#menu:vehicleInfo/params/switchTime";
 
         public static const VEHICLEINFO_PARAMS_WHEELEDSWITCHTIME:String = "#menu:vehicleInfo/params/wheeledSwitchTime";
 
         public static const VEHICLEINFO_PARAMS_WHEELEDSPEEDMODESPEED:String = "#menu:vehicleInfo/params/wheeledSpeedModeSpeed";
+
+        public static const VEHICLEINFO_PARAMS_TURBOSHAFTSPEEDMODESPEED:String = "#menu:vehicleInfo/params/turboshaftSpeedModeSpeed";
+
+        public static const VEHICLEINFO_PARAMS_TURBOSHAFTENGINEPOWER:String = "#menu:vehicleInfo/params/turboshaftEnginePower";
 
         public static const VEHICLEINFO_PARAMS_STUNMAXDURATION:String = "#menu:vehicleInfo/params/stunMaxDuration";
 
@@ -2775,15 +2907,9 @@ package
 
         public static const FITTINGLISTITEMRENDERER_REPLACE:String = "#menu:fittingListItemRenderer/replace";
 
-        public static const SHELLLISTITEMRENDERER_REPLACE:String = "#menu:shellListItemRenderer/replace";
-
-        public static const SHELLLISTITEMRENDERER_SETASDEFAULT:String = "#menu:shellListItemRenderer/setAsDefault";
-
         public static const CUSTOMIZATION_TITLE:String = "#menu:customization/title";
 
         public static const SCREENSHOT_SAVE:String = "#menu:screenshot/save";
-
-        public static const TECHNICALMAINTENANCE_AMMOTITLEEX:String = "#menu:technicalMaintenance/ammoTitleEx";
 
         public static const CONTEXTMENU_EXCHANGE:String = "#menu:contextMenu/exchange";
 
@@ -2895,7 +3021,7 @@ package
 
         public static const CONTEXTMENU_CREATEEVENTSQUAD:String = "#menu:contextMenu/createEventSquad";
 
-        public static const CONTEXTMENU_CREATEBOBSQUAD:String = "#menu:contextMenu/createBobSquad";
+        public static const CONTEXTMENU_CREATEBATTLEROYALESQUAD:String = "#menu:contextMenu/createBattleRoyaleSquad";
 
         public static const CONTEXTMENU_INVITE:String = "#menu:contextMenu/invite";
 
@@ -3129,7 +3255,7 @@ package
 
         public static const BONUSTYPE_27:String = "#menu:bonusType/27";
 
-        public static const BONUSTYPE_32:String = "#menu:bonusType/32";
+        public static const BONUSTYPE_29:String = "#menu:bonusType/29";
 
         public static const FORTIFICATIONCTX_ASSIGNEDPLAYERS:String = "#menu:fortificationCtx/assignedPlayers";
 
@@ -3723,45 +3849,7 @@ package
 
         public static const HANGAR_HEADER_PERSONAL_QUESTS_LABEL_ALL_DONE:String = "#menu:hangar_header/personal_quests_label/all_done";
 
-        public static const BOOSTERSELECTPOPOVER_TITLE:String = "#menu:boosterSelectPopover/title";
-
-        public static const BOOSTERSELECTPOPOVER_REARMCHECKBOXLABEL:String = "#menu:boosterSelectPopover/rearmCheckBoxLabel";
-
-        public static const BOOSTERSELECTPOPOVER_TABS_FORCREW:String = "#menu:boosterSelectPopover/tabs/forCrew";
-
-        public static const BOOSTERSELECTPOPOVER_TABS_FOREQUIPMENT:String = "#menu:boosterSelectPopover/tabs/forEquipment";
-
-        public static const BOOSTERINSTALLWINDOW_TITLE:String = "#menu:boosterInstallWindow/title";
-
-        public static const BOOSTERINSTALLWINDOW_MESSAGE:String = "#menu:boosterInstallWindow/message";
-
-        public static const BOOSTERINSTALLWINDOW_CANTWORKSTATUS:String = "#menu:boosterInstallWindow/cantWorkStatus";
-
-        public static const BOOSTERINSTALLWINDOW_INSTALLBUTTON:String = "#menu:boosterInstallWindow/installButton";
-
-        public static const BOOSTERFITTINGRENDERER_BUYBUTTON:String = "#menu:boosterFittingRenderer/buyButton";
-
-        public static const BOOSTERFITTINGRENDERER_REMOVEBUTTON:String = "#menu:boosterFittingRenderer/removeButton";
-
-        public static const CRYSTALS_PROMOWINDOW_HEADER:String = "#menu:crystals/promoWindow/header";
-
         public static const CRYSTALS_PROMOWINDOW_TITLE:String = "#menu:crystals/promoWindow/title";
-
-        public static const CRYSTALS_PROMOWINDOW_SUBTITLE0:String = "#menu:crystals/promoWindow/subTitle0";
-
-        public static const CRYSTALS_PROMOWINDOW_SUBDESCR0:String = "#menu:crystals/promoWindow/subDescr0";
-
-        public static const CRYSTALS_PROMOWINDOW_SUBTITLE1:String = "#menu:crystals/promoWindow/subTitle1";
-
-        public static const CRYSTALS_PROMOWINDOW_SUBDESCR1:String = "#menu:crystals/promoWindow/subDescr1";
-
-        public static const CRYSTALS_PROMOWINDOW_SUBTITLE2:String = "#menu:crystals/promoWindow/subTitle2";
-
-        public static const CRYSTALS_PROMOWINDOW_SUBDESCR2:String = "#menu:crystals/promoWindow/subDescr2";
-
-        public static const CRYSTALS_PROMOWINDOW_CLOSEBTN:String = "#menu:crystals/promoWindow/closebtn";
-
-        public static const CRYSTALS_PROMOWINDOW_OPENSHOPBTNLABEL:String = "#menu:crystals/promoWindow/openShopBtnLabel";
 
         public static const BOOSTERBUYWINDOW_BUYBUTTONLABEL:String = "#menu:boosterBuyWindow/buyButtonLabel";
 
@@ -3777,23 +3865,11 @@ package
 
         public static const BOOSTERSELLWINDOW_PRICEPERITEM:String = "#menu:boosterSellWindow/pricePerItem";
 
-        public static const OPTIONALDEVICESELECTPOPOVER_TABS_SIMPLE:String = "#menu:optionalDeviceSelectPopover/tabs/simple";
-
-        public static const OPTIONALDEVICESELECTPOPOVER_TABS_DELUXE:String = "#menu:optionalDeviceSelectPopover/tabs/deluxe";
-
-        public static const FITTINGSELECTPOPOVER_TITLETEXT:String = "#menu:fittingSelectPopover/titleText";
-
-        public static const FITTINGSELECTPOPOVER_OKBTNLABEL:String = "#menu:fittingSelectPopover/okBtnLabel";
+        public static const BOOSTERSELECTPOPOVER_REARMCHECKBOXLABEL:String = "#menu:boosterSelectPopover/rearmCheckBoxLabel";
 
         public static const FITTINGSELECTPOPOVER_DESCTEXT:String = "#menu:fittingSelectPopover/descText";
 
         public static const FITTINGSELECTPOPOVER_DESCTEXT_CRYSTAL:String = "#menu:fittingSelectPopover/descText/crystal";
-
-        public static const FITTINGSELECTPOPOVER_TROPHYOVERLAY_TITLETEXT:String = "#menu:fittingSelectPopover/trophyOverlay/titleText";
-
-        public static const FITTINGSELECTPOPOVER_TROPHYOVERLAY_DESCTEXT:String = "#menu:fittingSelectPopover/trophyOverlay/descText";
-
-        public static const FITTINGSELECTPOPOVER_TROPHYOVERLAY_OKBTNLABEL:String = "#menu:fittingSelectPopover/trophyOverlay/okBtnLabel";
 
         public static const QUOTE:String = "#menu:quote";
 
@@ -3888,6 +3964,22 @@ package
         public static const CST_ITEM_CTX_MENU_EDITSTYLE:String = "#menu:cst_item_ctx_menu/editStyle";
 
         public static const CST_ITEM_CTX_MENU_BASESTYLE:String = "#menu:cst_item_ctx_menu/baseStyle";
+
+        public static const CST_ITEM_CTX_MENU_DEMOUNT:String = "#menu:cst_item_ctx_menu/demount";
+
+        public static const CST_ITEM_CTX_MENU_TAKEOFF:String = "#menu:cst_item_ctx_menu/takeOff";
+
+        public static const CST_ITEM_CTX_MENU_SELECT:String = "#menu:cst_item_ctx_menu/select";
+
+        public static const CST_ITEM_CTX_MENU_DESTROY:String = "#menu:cst_item_ctx_menu/destroy";
+
+        public static const CST_ITEM_CTX_MENU_PUTONFIRST:String = "#menu:cst_item_ctx_menu/putOnFirst";
+
+        public static const CST_ITEM_CTX_MENU_PUTONSECOND:String = "#menu:cst_item_ctx_menu/putOnSecond";
+
+        public static const CST_ITEM_CTX_MENU_PUTONTHIRD:String = "#menu:cst_item_ctx_menu/putOnThird";
+
+        public static const CST_ITEM_CTX_MENU_UNLOAD:String = "#menu:cst_item_ctx_menu/unload";
 
         public static const VIEWHEADER_BACKBTN_LABEL:String = "#menu:viewHeader/backBtn/label";
 
@@ -4005,6 +4097,42 @@ package
 
         public static const MODULEFITS_DESTROYEQUIPMENT:String = "#menu:moduleFits/destroyEquipment";
 
+        public static const CRYSTALS_INFO_TITLE:String = "#menu:crystals/info/title";
+
+        public static const CRYSTALS_INFO_TAB_GETTAB:String = "#menu:crystals/info/tab/getTab";
+
+        public static const CRYSTALS_INFO_TAB_EARNTAB:String = "#menu:crystals/info/tab/earnTab";
+
+        public static const CRYSTALS_INFO_TAB_SPENDTAB:String = "#menu:crystals/info/tab/spendTab";
+
+        public static const CRYSTALS_INFO_TAB_EARN_LEVEL_TITLE:String = "#menu:crystals/info/tab/earn/level/title";
+
+        public static const CRYSTALS_INFO_TAB_EARN_LEVEL_DESCRIPTION:String = "#menu:crystals/info/tab/earn/level/description";
+
+        public static const CRYSTALS_INFO_TAB_EARN_LEVEL_DESCRIPTIONCONTENT_LEVEL10:String = "#menu:crystals/info/tab/earn/level/descriptionContent/level10";
+
+        public static const CRYSTALS_INFO_TAB_EARN_LEVEL_MOD_0:String = "#menu:crystals/info/tab/earn/level/mod/0";
+
+        public static const CRYSTALS_INFO_TAB_EARN_LEVEL_MOD_1:String = "#menu:crystals/info/tab/earn/level/mod/1";
+
+        public static const CRYSTALS_INFO_TAB_EARN_LEVEL_MOD_2:String = "#menu:crystals/info/tab/earn/level/mod/2";
+
+        public static const CRYSTALS_INFO_TAB_EARN_MARKER_TITLE:String = "#menu:crystals/info/tab/earn/marker/title";
+
+        public static const CRYSTALS_INFO_TAB_EARN_MARKER_DESCRIPTION_1:String = "#menu:crystals/info/tab/earn/marker/description/1";
+
+        public static const CRYSTALS_INFO_TAB_EARN_MARKER_DESCRIPTION_2:String = "#menu:crystals/info/tab/earn/marker/description/2";
+
+        public static const CRYSTALS_INFO_TAB_EARN_MARKER_DESCRIPTION_3:String = "#menu:crystals/info/tab/earn/marker/description/3";
+
+        public static const CRYSTALS_INFO_TAB_EARN_MARKER_DESCRIPTIONCONTENT_WEEK:String = "#menu:crystals/info/tab/earn/marker/descriptionContent/week";
+
+        public static const CRYSTALS_INFO_TAB_EARN_EVENTS_TITLE:String = "#menu:crystals/info/tab/earn/events/title";
+
+        public static const CRYSTALS_INFO_TAB_EARN_EVENTS_DESCRIPTION:String = "#menu:crystals/info/tab/earn/events/description";
+
+        public static const CRYSTALS_INFO_TAB_EARN_EVENTS_DESCRIPTIONCONTENT:String = "#menu:crystals/info/tab/earn/events/descriptionContent";
+
         public static const ROLEEXP_ACTIONSGROUP_NOTDEFINED:String = "#menu:roleExp/actionsGroup/notDefined";
 
         public static const ROLEEXP_ACTIONSGROUP_TANK1:String = "#menu:roleExp/actionsGroup/tank1";
@@ -4055,17 +4183,41 @@ package
 
         public static const ROLEEXP_ACTION_DOINVISASSIST:String = "#menu:roleExp/action/doInvisAssist";
 
-        public static const EVENT10YC_STANDALONE:String = "#menu:event10YC/standalone";
+        public static const CRYSTALS_INFO_TAB_GET_DESCRIPTION:String = "#menu:crystals/info/tab/get/description";
 
-        public static const EVENT10YC_AVAILABLESERVER:String = "#menu:event10YC/availableServer";
+        public static const CRYSTALS_INFO_TAB_GET_RANDOM:String = "#menu:crystals/info/tab/get/random";
 
-        public static const EVENT10YC_NOTAVAILABLESERVER:String = "#menu:event10YC/notAvailableServer";
+        public static const CRYSTALS_INFO_TAB_GET_GENERAL:String = "#menu:crystals/info/tab/get/general";
 
-        public static const EVENT10YC_ALLSERVER:String = "#menu:event10YC/allServer";
+        public static const CRYSTALS_INFO_TAB_GET_RANKED:String = "#menu:crystals/info/tab/get/ranked";
 
-        public static const EVENT10YC_BUTTON:String = "#menu:event10YC/button";
+        public static const CRYSTALS_INFO_TAB_GET_CARD_CONDITION:String = "#menu:crystals/info/tab/get/card/condition";
 
-        public static const CONTEXTMENU_ENUM:Array = [CONTEXTMENU_EXCHANGE,CONTEXTMENU_VEHICLEINFO,CONTEXTMENU_VEHICLEINFOEX,CONTEXTMENU_GOTONATIONTREE,CONTEXTMENU_GOTONEXTVEHICLE,CONTEXTMENU_VEHICLESELL,CONTEXTMENU_NATIONCHANGE,CONTEXTMENU_GOTOCOLLECTION,CONTEXTMENU_VEHICLERESEARCH,CONTEXTMENU_VEHICLECHECK,CONTEXTMENU_VEHICLEUNCHECK,CONTEXTMENU_VEHICLEBUY,CONTEXTMENU_VEHICLERESTORE,CONTEXTMENU_VEHICLEREMOVE,CONTEXTMENU_VEHICLERENTRENEW,CONTEXTMENU_USERINFO,CONTEXTMENU_CLANINFO,CONTEXTMENU_SENDCLANINVITE,CONTEXTMENU_MONEYTRANSFER,CONTEXTMENU_CREATEPRIVATECHANNEL,CONTEXTMENU_ADDTOFRIENDS,CONTEXTMENU_ADDTOFRIENDSAGAIN,CONTEXTMENU_REJECTFRIENDSHIP,CONTEXTMENU_REMOVEFROMFRIENDS,CONTEXTMENU_ADDTOIGNORED,CONTEXTMENU_REMOVEFROMIGNORED,CONTEXTMENU_ENABLECOMMUNICATIONS,CONTEXTMENU_DISABLECOMMUNICATIONS,CONTEXTMENU_COPYTOCLIPBOARD,CONTEXTMENU_SETMUTED,CONTEXTMENU_UNSETMUTED,CONTEXTMENU_MODULEINFO,CONTEXTMENU_SELL,CONTEXTMENU_SELLFROMINVENTORY,CONTEXTMENU_SELECTVEHICLEINHANGAR,CONTEXTMENU_SHOWVEHICLESTATISTICS,CONTEXTMENU_SHOWVEHICLEPREVIEW,CONTEXTMENU_VEHICLEPREVIEW,CONTEXTMENU_BUY,CONTEXTMENU_BUYORTRADEIN,CONTEXTMENU_RESTORE,CONTEXTMENU_UNLOAD,CONTEXTMENU_CANCELBUY,CONTEXTMENU_UNEQUIP,CONTEXTMENU_BUYANDEQUIP,CONTEXTMENU_EQUIP,CONTEXTMENU_UNLOCK,CONTEXTMENU_KICKPLAYERFROMPREBATTLE,CONTEXTMENU_KICKPLAYERFROMUNIT,CONTEXTMENU_GIVELEADERSHIP,CONTEXTMENU_TAKEEQUIPMENTCOMMANDER,CONTEXTMENU_GIVEEQUIPMENTCOMMANDER,CONTEXTMENU_TAKELEADERSHIP,CONTEXTMENU_CREATESQUAD,CONTEXTMENU_CREATEEVENTSQUAD,CONTEXTMENU_CREATEBOBSQUAD,CONTEXTMENU_INVITE,CONTEXTMENU_APPEAL,CONTEXTMENU_INCORRECTBEHAVIOR,CONTEXTMENU_NOTFAIRPLAY,CONTEXTMENU_FORBIDDENNICK,CONTEXTMENU_BOT,CONTEXTMENU_ASSIGNPRIVATE,CONTEXTMENU_ASSIGNOFFICER,CONTEXTMENU_PERSONALCASE,CONTEXTMENU_PERSONALCASE_STATSBLOCKTITLE,CONTEXTMENU_PERSONALCASE_STATS_FIRSTINFO,CONTEXTMENU_PERSONALCASE_STATS_SECONDINFO,CONTEXTMENU_TANKMANUNLOAD,CONTEXTMENU_TANKMANUNLOADALL,CONTEXTMENU_DISMISS,CONTEXTMENU_LOCKSLOT,CONTEXTMENU_UNLOCKSLOT,CONTEXTMENU_MESSENGER_MINIMIZEALL,CONTEXTMENU_MESSENGER_CLOSECURRENT,CONTEXTMENU_MESSENGER_CLOSEALLEXCEPTCURRENT,CONTEXTMENU_CREATECONTACTNOTE,CONTEXTMENU_EDITCONTACTNOTE,CONTEXTMENU_REMOVECONTACTNOTE,CONTEXTMENU_BOTNOACTIONS,CONTEXTMENU_COMPARE,CONTEXTMENU_USERVEHICLECOMPARE,CONTEXTMENU_PROFILEVEHICLECOMPARE,CONTEXTMENU_INSQUAD,CONTEXTMENU_LEAVESQUAD,CONTEXTMENU_EXCLUDEDFROMSQUAD,CONTEXTMENU_SENDINVITATIONTOSQUAD,CONTEXTMENU_WITHDRAWINVITATIONTOSQUAD,CONTEXTMENU_ACCEPTINVITATIONTOSQUAD,CONTEXTMENU_REJECTINVITATIONTOSQUAD,CONTEXTMENU_GOTOBLUEPRINT,CONTEXTMENU_VIEWCLANPROFILE,CONTEXTMENU_COPYCLANNAME];
+        public static const CRYSTALS_INFO_TAB_GET_CARD_WIN:String = "#menu:crystals/info/tab/get/card/win";
+
+        public static const CRYSTALS_INFO_TAB_GET_CARD_DEFEAT:String = "#menu:crystals/info/tab/get/card/defeat";
+
+        public static const CRYSTALS_INFO_TAB_GET_CARD_DESCRIPTION:String = "#menu:crystals/info/tab/get/card/description";
+
+        public static const CRYSTALS_INFO_TAB_SPEND_DESCRIPTION:String = "#menu:crystals/info/tab/spend/description";
+
+        public static const CRYSTALS_INFO_TAB_SPEND_CARD_SPECIALTANKS_TITLE:String = "#menu:crystals/info/tab/spend/card/specialTanks/title";
+
+        public static const CRYSTALS_INFO_TAB_SPEND_CARD_SPECIALTANKS_DESCRIPTION:String = "#menu:crystals/info/tab/spend/card/specialTanks/description";
+
+        public static const CRYSTALS_INFO_TAB_SPEND_CARD_SPECIALEQUIPMENT_TITLE:String = "#menu:crystals/info/tab/spend/card/specialEquipment/title";
+
+        public static const CRYSTALS_INFO_TAB_SPEND_CARD_SPECIALEQUIPMENT_DESCRIPTION:String = "#menu:crystals/info/tab/spend/card/specialEquipment/description";
+
+        public static const CRYSTALS_INFO_TAB_SPEND_CARD_INSTRUCTIONS_TITLE:String = "#menu:crystals/info/tab/spend/card/instructions/title";
+
+        public static const CRYSTALS_INFO_TAB_SPEND_CARD_INSTRUCTIONS_DESCRIPTION:String = "#menu:crystals/info/tab/spend/card/instructions/description";
+
+        public static const CRYSTALS_INFO_TAB_SPEND_CARD_TOSHOP:String = "#menu:crystals/info/tab/spend/card/toShop";
+
+        public static const CRYSTALS_INFO_TAB_SPEND_CARD_PRICE:String = "#menu:crystals/info/tab/spend/card/price";
+
+        public static const CONTEXTMENU_ENUM:Array = [CONTEXTMENU_EXCHANGE,CONTEXTMENU_VEHICLEINFO,CONTEXTMENU_VEHICLEINFOEX,CONTEXTMENU_GOTONATIONTREE,CONTEXTMENU_GOTONEXTVEHICLE,CONTEXTMENU_VEHICLESELL,CONTEXTMENU_NATIONCHANGE,CONTEXTMENU_GOTOCOLLECTION,CONTEXTMENU_VEHICLERESEARCH,CONTEXTMENU_VEHICLECHECK,CONTEXTMENU_VEHICLEUNCHECK,CONTEXTMENU_VEHICLEBUY,CONTEXTMENU_VEHICLERESTORE,CONTEXTMENU_VEHICLEREMOVE,CONTEXTMENU_VEHICLERENTRENEW,CONTEXTMENU_USERINFO,CONTEXTMENU_CLANINFO,CONTEXTMENU_SENDCLANINVITE,CONTEXTMENU_MONEYTRANSFER,CONTEXTMENU_CREATEPRIVATECHANNEL,CONTEXTMENU_ADDTOFRIENDS,CONTEXTMENU_ADDTOFRIENDSAGAIN,CONTEXTMENU_REJECTFRIENDSHIP,CONTEXTMENU_REMOVEFROMFRIENDS,CONTEXTMENU_ADDTOIGNORED,CONTEXTMENU_REMOVEFROMIGNORED,CONTEXTMENU_ENABLECOMMUNICATIONS,CONTEXTMENU_DISABLECOMMUNICATIONS,CONTEXTMENU_COPYTOCLIPBOARD,CONTEXTMENU_SETMUTED,CONTEXTMENU_UNSETMUTED,CONTEXTMENU_MODULEINFO,CONTEXTMENU_SELL,CONTEXTMENU_SELLFROMINVENTORY,CONTEXTMENU_SELECTVEHICLEINHANGAR,CONTEXTMENU_SHOWVEHICLESTATISTICS,CONTEXTMENU_SHOWVEHICLEPREVIEW,CONTEXTMENU_VEHICLEPREVIEW,CONTEXTMENU_BUY,CONTEXTMENU_BUYORTRADEIN,CONTEXTMENU_RESTORE,CONTEXTMENU_UNLOAD,CONTEXTMENU_CANCELBUY,CONTEXTMENU_UNEQUIP,CONTEXTMENU_BUYANDEQUIP,CONTEXTMENU_EQUIP,CONTEXTMENU_UNLOCK,CONTEXTMENU_KICKPLAYERFROMPREBATTLE,CONTEXTMENU_KICKPLAYERFROMUNIT,CONTEXTMENU_GIVELEADERSHIP,CONTEXTMENU_TAKEEQUIPMENTCOMMANDER,CONTEXTMENU_GIVEEQUIPMENTCOMMANDER,CONTEXTMENU_TAKELEADERSHIP,CONTEXTMENU_CREATESQUAD,CONTEXTMENU_CREATEEVENTSQUAD,CONTEXTMENU_CREATEBATTLEROYALESQUAD,CONTEXTMENU_INVITE,CONTEXTMENU_APPEAL,CONTEXTMENU_INCORRECTBEHAVIOR,CONTEXTMENU_NOTFAIRPLAY,CONTEXTMENU_FORBIDDENNICK,CONTEXTMENU_BOT,CONTEXTMENU_ASSIGNPRIVATE,CONTEXTMENU_ASSIGNOFFICER,CONTEXTMENU_PERSONALCASE,CONTEXTMENU_PERSONALCASE_STATSBLOCKTITLE,CONTEXTMENU_PERSONALCASE_STATS_FIRSTINFO,CONTEXTMENU_PERSONALCASE_STATS_SECONDINFO,CONTEXTMENU_TANKMANUNLOAD,CONTEXTMENU_TANKMANUNLOADALL,CONTEXTMENU_DISMISS,CONTEXTMENU_LOCKSLOT,CONTEXTMENU_UNLOCKSLOT,CONTEXTMENU_MESSENGER_MINIMIZEALL,CONTEXTMENU_MESSENGER_CLOSECURRENT,CONTEXTMENU_MESSENGER_CLOSEALLEXCEPTCURRENT,CONTEXTMENU_CREATECONTACTNOTE,CONTEXTMENU_EDITCONTACTNOTE,CONTEXTMENU_REMOVECONTACTNOTE,CONTEXTMENU_BOTNOACTIONS,CONTEXTMENU_COMPARE,CONTEXTMENU_USERVEHICLECOMPARE,CONTEXTMENU_PROFILEVEHICLECOMPARE,CONTEXTMENU_INSQUAD,CONTEXTMENU_LEAVESQUAD,CONTEXTMENU_EXCLUDEDFROMSQUAD,CONTEXTMENU_SENDINVITATIONTOSQUAD,CONTEXTMENU_WITHDRAWINVITATIONTOSQUAD,CONTEXTMENU_ACCEPTINVITATIONTOSQUAD,CONTEXTMENU_REJECTINVITATIONTOSQUAD,CONTEXTMENU_GOTOBLUEPRINT,CONTEXTMENU_VIEWCLANPROFILE,CONTEXTMENU_COPYCLANNAME];
 
         public static const NATIONS_ENUM:Array = [NATIONS_TITLE,NATIONS_USSR,NATIONS_GERMANY,NATIONS_USA,NATIONS_FRANCE,NATIONS_CHINA,NATIONS_JAPAN,NATIONS_UK,NATIONS_CZECH,NATIONS_SWEDEN,NATIONS_POLAND,NATIONS_ITALY,NATIONS_ALL];
 
@@ -4099,7 +4251,7 @@ package
 
         public static const TANKMANTRAININGWINDOW_ENUM:Array = [TANKMANTRAININGWINDOW_TITLE,TANKMANTRAININGWINDOW_ACADEMY,TANKMANTRAININGWINDOW_SCOOL,TANKMANTRAININGWINDOW_FREE,TANKMANTRAININGWINDOW_FREE_PRICE,TANKMANTRAININGWINDOW_TRAININGTO,TANKMANTRAININGWINDOW_CLOSEBTN];
 
-        public static const VEHICLEINFO_PARAMS_ENUM:Array = [VEHICLEINFO_PARAMS_MAXHEALTH,VEHICLEINFO_PARAMS_VEHICLEWEIGHT,VEHICLEINFO_PARAMS_ENGINEPOWER,VEHICLEINFO_PARAMS_SPEEDLIMITS,VEHICLEINFO_PARAMS_CHASSISROTATIONSPEED,VEHICLEINFO_PARAMS_MAXSTEERINGLOCKANGLE,VEHICLEINFO_PARAMS_HULLARMOR,VEHICLEINFO_PARAMS_TURRETARMOR,VEHICLEINFO_PARAMS_RELOADTIME,VEHICLEINFO_PARAMS_AUTORELOADTIME,VEHICLEINFO_PARAMS_PIERCINGPOWER,VEHICLEINFO_PARAMS_AVGDAMAGE,VEHICLEINFO_PARAMS_AVGPIERCINGPOWER,VEHICLEINFO_PARAMS_TURRETROTATIONSPEED,VEHICLEINFO_PARAMS_CIRCULARVISIONRADIUS,VEHICLEINFO_PARAMS_RADIODISTANCE,VEHICLEINFO_PARAMS_PITCHLIMITS,VEHICLEINFO_PARAMS_GUNYAWLIMITS,VEHICLEINFO_PARAMS_AIMINGTIME,VEHICLEINFO_PARAMS_SHOTDISPERSIONANGLE,VEHICLEINFO_PARAMS_AVGDAMAGEPERMINUTE,VEHICLEINFO_PARAMS_ENGINEPOWERPERTON,VEHICLEINFO_PARAMS_CLIPFIRERATE,VEHICLEINFO_PARAMS_TURRETYAWLIMITS,VEHICLEINFO_PARAMS_INVISIBILITY,VEHICLEINFO_PARAMS_INVISIBILITYSTILLFACTOR,VEHICLEINFO_PARAMS_INVISIBILITYMOVINGFACTOR,VEHICLEINFO_PARAMS_RELOADTIMESECS,VEHICLEINFO_PARAMS_CHARGETIME,VEHICLEINFO_PARAMS_RATETIME,VEHICLEINFO_PARAMS_SWITCHONTIME,VEHICLEINFO_PARAMS_SWITCHOFFTIME,VEHICLEINFO_PARAMS_WHEELEDSWITCHONTIME,VEHICLEINFO_PARAMS_WHEELEDSWITCHOFFTIME,VEHICLEINFO_PARAMS_SWITCHTIME,VEHICLEINFO_PARAMS_WHEELEDSWITCHTIME,VEHICLEINFO_PARAMS_WHEELEDSPEEDMODESPEED,VEHICLEINFO_PARAMS_STUNMAXDURATION,VEHICLEINFO_PARAMS_STUNMINDURATION];
+        public static const VEHICLEINFO_PARAMS_ENUM:Array = [VEHICLEINFO_PARAMS_MAXHEALTH,VEHICLEINFO_PARAMS_VEHICLEWEIGHT,VEHICLEINFO_PARAMS_ENGINEPOWER,VEHICLEINFO_PARAMS_SPEEDLIMITS,VEHICLEINFO_PARAMS_CHASSISROTATIONSPEED,VEHICLEINFO_PARAMS_MAXSTEERINGLOCKANGLE,VEHICLEINFO_PARAMS_HULLARMOR,VEHICLEINFO_PARAMS_TURRETARMOR,VEHICLEINFO_PARAMS_RELOADTIME,VEHICLEINFO_PARAMS_AUTORELOADTIME,VEHICLEINFO_PARAMS_PIERCINGPOWER,VEHICLEINFO_PARAMS_AVGDAMAGE,VEHICLEINFO_PARAMS_SHOTSPEED,VEHICLEINFO_PARAMS_AVGPIERCINGPOWER,VEHICLEINFO_PARAMS_TURRETROTATIONSPEED,VEHICLEINFO_PARAMS_CIRCULARVISIONRADIUS,VEHICLEINFO_PARAMS_RADIODISTANCE,VEHICLEINFO_PARAMS_PITCHLIMITS,VEHICLEINFO_PARAMS_GUNYAWLIMITS,VEHICLEINFO_PARAMS_AIMINGTIME,VEHICLEINFO_PARAMS_SHOTDISPERSIONANGLE,VEHICLEINFO_PARAMS_AVGDAMAGEPERMINUTE,VEHICLEINFO_PARAMS_ENGINEPOWERPERTON,VEHICLEINFO_PARAMS_CLIPFIRERATE,VEHICLEINFO_PARAMS_TURRETYAWLIMITS,VEHICLEINFO_PARAMS_INVISIBILITY,VEHICLEINFO_PARAMS_INVISIBILITYSTILLFACTOR,VEHICLEINFO_PARAMS_INVISIBILITYMOVINGFACTOR,VEHICLEINFO_PARAMS_TURBOSHAFTINVISIBILITYSTILLFACTOR,VEHICLEINFO_PARAMS_TURBOSHAFTINVISIBILITYMOVINGFACTOR,VEHICLEINFO_PARAMS_RELOADTIMESECS,VEHICLEINFO_PARAMS_CHARGETIME,VEHICLEINFO_PARAMS_RATETIME,VEHICLEINFO_PARAMS_SWITCHONTIME,VEHICLEINFO_PARAMS_SWITCHOFFTIME,VEHICLEINFO_PARAMS_WHEELEDSWITCHONTIME,VEHICLEINFO_PARAMS_WHEELEDSWITCHOFFTIME,VEHICLEINFO_PARAMS_TURBOSHAFTSWITCHTIME,VEHICLEINFO_PARAMS_SWITCHTIME,VEHICLEINFO_PARAMS_WHEELEDSWITCHTIME,VEHICLEINFO_PARAMS_WHEELEDSPEEDMODESPEED,VEHICLEINFO_PARAMS_TURBOSHAFTSPEEDMODESPEED,VEHICLEINFO_PARAMS_TURBOSHAFTENGINEPOWER,VEHICLEINFO_PARAMS_STUNMAXDURATION,VEHICLEINFO_PARAMS_STUNMINDURATION];
 
         public static const TANKMANPERSONALCASE_MODIFIERS_ENUM:Array = [TANKMANPERSONALCASE_MODIFIERS_FROMCOMMANDER,TANKMANPERSONALCASE_MODIFIERS_FROMEQUIPMENT,TANKMANPERSONALCASE_MODIFIERS_CUSTOMIZATION,TANKMANPERSONALCASE_MODIFIERS_FROMSKILLS,TANKMANPERSONALCASE_MODIFIERS_PENALTY];
 

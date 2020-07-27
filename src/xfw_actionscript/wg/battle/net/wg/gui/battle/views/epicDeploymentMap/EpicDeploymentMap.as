@@ -169,7 +169,7 @@ package net.wg.gui.battle.views.epicDeploymentMap
 
         private function onDeploymentMapClickedHandler(param1:EpicDeploymentMapEvent) : void
         {
-            setAttentionToCellS(param1.mouseX,param1.mouseY,param1.isMouseRightClick);
+            onMinimapClickedS(param1.mouseX,param1.mouseY,param1.buttonIdx,0);
         }
     }
 }

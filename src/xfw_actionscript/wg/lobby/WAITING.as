@@ -329,6 +329,8 @@ package
 
         public static const CHOOSEFINALREWARD:String = "#waiting:chooseFinalReward";
 
+        public static const BATTLEROYALE_HANGARLOADING:String = "#waiting:battleRoyale/hangarLoading";
+
         public function WAITING()
         {
             super();

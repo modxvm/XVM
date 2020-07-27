@@ -161,6 +161,11 @@ package net.wg.gui.lobby.battleResults
             this.onEmblemLoaded(param1,param2,null);
         }
 
+        public function as_setIsInBattleQueue(param1:Boolean) : void
+        {
+            this._data.personal.dispatchEvent(new BattleResultsViewEvent(param1?BattleResultsViewEvent.BATTLE_QUEUE_ENTERED:BattleResultsViewEvent.BATTLE_QUEUE_EXITED));
+        }
+
         public function as_setTeamInfo(param1:String, param2:String, param3:String) : void
         {
             this.onEmblemLoaded(param1,param2,param3);
@@ -174,6 +179,14 @@ package net.wg.gui.lobby.battleResults
                 _loc4_ = IEmblemLoadedDelegate(this._emblemLoadingDelegates[param1]);
                 _loc4_.onEmblemLoaded(param1,param2,param3);
                 delete this._emblemLoadingDelegates[param1];
+            }
+        }
+
+        private function registerComponent(param1:IRegisteredComponent) : void
+        {
+            if(param1)
+            {
+                param1.registerFlashComponentVia(this);
             }
         }
 
@@ -227,14 +240,6 @@ package net.wg.gui.lobby.battleResults
         {
             this.registerComponent(param1.view as IRegisteredComponent);
             param1.view.update(this._data);
-        }
-
-        private function registerComponent(param1:IRegisteredComponent) : void
-        {
-            if(param1)
-            {
-                param1.registerFlashComponentVia(this);
-            }
         }
 
         private function onShowEventsWindowHandler(param1:QuestEvent) : void

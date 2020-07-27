@@ -4,6 +4,7 @@ package net.wg.gui.lobby.techtree.nodes
     import net.wg.gui.lobby.techtree.interfaces.IRenderer;
     import net.wg.infrastructure.interfaces.ITutorialCustomComponent;
     import net.wg.gui.lobby.techtree.math.MatrixPosition;
+    import net.wg.infrastructure.managers.counter.CounterProps;
     import net.wg.gui.lobby.techtree.controls.VehicleButton;
     import net.wg.gui.components.controls.price.CompoundPrice;
     import net.wg.gui.components.controls.universalBtn.UniversalBtn;
@@ -18,11 +19,13 @@ package net.wg.gui.lobby.techtree.nodes
     import net.wg.utils.IClassFactory;
     import net.wg.utils.IUniversalBtnStyles;
     import net.wg.utils.ICounterManager;
+    import net.wg.infrastructure.managers.ITooltipMgr;
     import scaleform.clik.events.ButtonEvent;
     import flash.events.MouseEvent;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.data.constants.generated.NODE_STATE_FLAGS;
     import net.wg.gui.lobby.techtree.constants.ColorIndex;
+    import net.wg.data.constants.Values;
     import net.wg.gui.lobby.techtree.data.state.NodeStateCollection;
     import net.wg.gui.lobby.techtree.data.state.StateProperties;
     import flash.geom.Point;
@@ -30,8 +33,7 @@ package net.wg.gui.lobby.techtree.nodes
     import net.wg.gui.components.controls.VO.ItemPriceVO;
     import net.wg.data.constants.UniversalBtnStylesConst;
     import net.wg.gui.lobby.techtree.constants.ActionName;
-    import net.wg.infrastructure.managers.counter.CounterProps;
-    import net.wg.data.constants.Values;
+    import net.wg.infrastructure.managers.counter.CounterManager;
     import net.wg.data.constants.Linkages;
     import flash.display.MovieClip;
     import net.wg.gui.lobby.techtree.constants.NodeEntityType;
@@ -55,23 +57,25 @@ package net.wg.gui.lobby.techtree.nodes
 
         private static const MATRIX_POSITION:MatrixPosition = new MatrixPosition(0,0);
 
-        private static const BANNER_Y_GAP:Number = 40;
+        private static const BANNER_Y_GAP:int = 40;
 
-        private static const ACTION_BUTTON_Y_GAP:Number = 8;
+        private static const ACTION_BUTTON_Y_GAP:int = 8;
 
-        private static const BLUEPRINT_BAR_Y_GAP:Number = 12;
+        private static const BLUEPRINT_BAR_Y_GAP:int = 12;
 
-        private static const EXPERIENCE_Y_GAP:Number = 10;
+        private static const EXPERIENCE_Y_GAP:int = 10;
 
-        private static const SMALL_VEHICLE_BOTTOM_Y_GAP:Number = 10;
+        private static const SMALL_VEHICLE_BOTTOM_Y_GAP:int = 10;
 
-        private static const COLLECTIBLE_STATUS_Y_GAP:Number = 6;
+        private static const COLLECTIBLE_STATUS_Y_GAP:int = 6;
 
-        private static const TRADE_OFF_WIDGET_OFFSET:Number = 8;
+        private static const TRADE_OFF_WIDGET_OFFSET:int = 8;
 
         private static const TRADE_OFF_WIDGET_DO_INTERNAL_X_SHIFT:int = -30;
 
         private static const CHANGE_NATION_DISABLE_ICON_ALPHA:Number = 0.5;
+
+        private static const COUNTER_PROPS:CounterProps = new CounterProps(3,-1);
 
         public var price:CompoundPrice = null;
 
@@ -121,11 +125,14 @@ package net.wg.gui.lobby.techtree.nodes
 
         private var _counterManager:ICounterManager;
 
+        private var _tooltipMgr:ITooltipMgr;
+
         public function ResearchRoot()
         {
             this._classFactory = App.utils.classFactory;
             this._universalBtnStyles = App.utils.universalBtnStyles;
             this._counterManager = App.utils.counterManager;
+            this._tooltipMgr = App.toolTipMgr;
             super();
         }
 
@@ -190,6 +197,7 @@ package net.wg.gui.lobby.techtree.nodes
             this._classFactory = null;
             this._universalBtnStyles = null;
             this._counterManager = null;
+            this._tooltipMgr = null;
             super.onDispose();
         }
 
@@ -267,22 +275,22 @@ package net.wg.gui.lobby.techtree.nodes
 
         public function getIconPath() : String
         {
-            return this._nodeData?this._nodeData.shopIconPath:"";
+            return this._nodeData?this._nodeData.shopIconPath:Values.EMPTY_STR;
         }
 
         public function getInX() : Number
         {
-            return x - this.vehicleButton.contentWidth * 0.5;
+            return x - (this.vehicleButton.contentWidth >> 1);
         }
 
         public function getItemName() : String
         {
-            return this._nodeData?this._nodeData.nameString:"";
+            return this._nodeData?this._nodeData.nameString:Values.EMPTY_STR;
         }
 
         public function getItemType() : String
         {
-            return this._nodeData?this._nodeData.primaryClassName:"";
+            return this._nodeData?this._nodeData.primaryClassName:Values.EMPTY_STR;
         }
 
         public function getLevel() : int
@@ -292,12 +300,12 @@ package net.wg.gui.lobby.techtree.nodes
 
         public function getOutX() : Number
         {
-            return x - this._internalXShift + this.vehicleButton.contentWidth * 0.5;
+            return x - this._internalXShift + (this.vehicleButton.contentWidth >> 1);
         }
 
         public function getRatioY() : Number
         {
-            return this.vehicleButton.contentHeight * 0.5;
+            return this.vehicleButton.contentHeight >> 1;
         }
 
         public function getSoundId() : String
@@ -340,6 +348,11 @@ package net.wg.gui.lobby.techtree.nodes
             return this._actionEnabled;
         }
 
+        public function isCollectible() : Boolean
+        {
+            return this._nodeData != null && (this._nodeData.state & NODE_STATE_FLAGS.COLLECTIBLE) > 0;
+        }
+
         public function isElite() : Boolean
         {
             return this._nodeData != null && (this._nodeData.state & NODE_STATE_FLAGS.ELITE) > 0;
@@ -378,11 +391,6 @@ package net.wg.gui.lobby.techtree.nodes
         public function isUnlocked() : Boolean
         {
             return this._nodeData != null && (this._nodeData.state & NODE_STATE_FLAGS.UNLOCKED) > 0;
-        }
-
-        public function isCollectible() : Boolean
-        {
-            return this._nodeData != null && (this._nodeData.state & NODE_STATE_FLAGS.COLLECTIBLE) > 0;
         }
 
         public function needPreventInnerEvents() : Boolean
@@ -453,7 +461,7 @@ package net.wg.gui.lobby.techtree.nodes
             {
                 this.discountBanner.setData(this._data.discountStr,this.isLocked() || this.isNext2Unlock());
             }
-            var _loc1_:* = "";
+            var _loc1_:String = Values.EMPTY_STR;
             switch(this._nodeState)
             {
                 case NodeRendererState.ROOT_BUY:
@@ -493,7 +501,7 @@ package net.wg.gui.lobby.techtree.nodes
                 this._changeNationBtn.tooltip = this._data.nationChangeTooltip;
                 if(this._data.nationChangeIsNew)
                 {
-                    this._counterManager.setCounter(this._changeNationBtn,"!",null,new CounterProps(3,-1));
+                    this._counterManager.setCounter(this._changeNationBtn,CounterManager.EXCLAMATION_COUNTER_VALUE,null,COUNTER_PROPS);
                 }
                 else
                 {
@@ -702,7 +710,7 @@ package net.wg.gui.lobby.techtree.nodes
         private function onButtonRollOverHandler(param1:MouseEvent) : void
         {
             var _loc2_:String = null;
-            if(App.toolTipMgr == null)
+            if(this._tooltipMgr)
             {
                 return;
             }
@@ -711,31 +719,31 @@ package net.wg.gui.lobby.techtree.nodes
                 if(this.actionButton.enabled)
                 {
                     _loc2_ = App.utils.locale.makeString(NATIONS.genetiveCase(this._owner.getNation()));
-                    App.toolTipMgr.showComplexWithParams(TOOLTIPS.RESEARCHPAGE_COLLECTIBLEVEHICLE_VEHICLEENABLED,new ToolTipParams({},{"nation":_loc2_}));
+                    this._tooltipMgr.showComplexWithParams(TOOLTIPS.RESEARCHPAGE_COLLECTIBLEVEHICLE_VEHICLEENABLED,new ToolTipParams({},{"nation":_loc2_}));
                 }
                 else
                 {
-                    App.toolTipMgr.showSpecial(TOOLTIPS_CONSTANTS.VEHICLE_COLLECTOR_DISABLED,null);
+                    this._tooltipMgr.showSpecial(TOOLTIPS_CONSTANTS.VEHICLE_COLLECTOR_DISABLED,null);
                 }
             }
             else if(!this.actionButton.enabled)
             {
                 if(this.isTradeIn())
                 {
-                    App.toolTipMgr.showComplex(TOOLTIPS.TRADEINUNAVAILABLE);
+                    this._tooltipMgr.showComplex(TOOLTIPS.TRADEINUNAVAILABLE);
                 }
                 else
                 {
-                    App.toolTipMgr.showSpecial(TOOLTIPS_CONSTANTS.TECHTREE_VEHICLE_STATUS,null,this._nodeData,this._nodeData.id);
+                    this._tooltipMgr.showSpecial(TOOLTIPS_CONSTANTS.TECHTREE_VEHICLE_STATUS,null,this._nodeData,this._nodeData.id);
                 }
             }
         }
 
         private function onButtonRollOutHandler(param1:MouseEvent) : void
         {
-            if(App.toolTipMgr)
+            if(this._tooltipMgr)
             {
-                App.toolTipMgr.hide();
+                this._tooltipMgr.hide();
             }
         }
 
@@ -793,6 +801,10 @@ package net.wg.gui.lobby.techtree.nodes
         public function isTopActionNode() : Boolean
         {
             return false;
+        }
+
+        public function cleanUp() : void
+        {
         }
     }
 }

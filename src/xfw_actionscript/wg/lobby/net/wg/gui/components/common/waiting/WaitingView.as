@@ -4,6 +4,7 @@ package net.wg.gui.components.common.waiting
     import net.wg.infrastructure.managers.IWaitingView;
     import flash.display.Sprite;
     import scaleform.clik.events.InputEvent;
+    import net.wg.data.constants.Values;
     import net.wg.infrastructure.events.ChildVisibilityEvent;
 
     public class WaitingView extends WaitingViewMeta implements IWaitingView
@@ -78,12 +79,18 @@ package net.wg.gui.components.common.waiting
             {
                 App.utils.scheduler.scheduleOnNextFrame(this.performHide);
             }
+            this.waitingComponent.setBackgroundImg(Values.EMPTY_STR);
         }
 
         public function as_showAwards(param1:Boolean) : void
         {
             this.awards.visible = param1;
             this.updateAwardsPosition();
+        }
+
+        public function as_showBackgroundImg(param1:String) : void
+        {
+            this.waitingComponent.setBackgroundImg(param1);
         }
 
         public function as_showWaiting(param1:String) : void

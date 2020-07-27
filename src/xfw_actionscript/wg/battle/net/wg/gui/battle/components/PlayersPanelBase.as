@@ -21,6 +21,8 @@ package net.wg.gui.battle.components
     import net.wg.data.VO.daapi.DAAPIVehiclesInvitationStatusVO;
     import net.wg.data.VO.daapi.DAAPIPlayerStatusVO;
     import net.wg.data.VO.daapi.DAAPIVehicleStatusVO;
+    import net.wg.data.VO.daapi.DAAPITriggeredCommandVO;
+    import net.wg.data.VO.daapi.DAAPITriggeredCommandsVO;
     import net.wg.data.VO.daapi.DAAPIVehicleStatsVO;
     import net.wg.data.VO.daapi.DAAPIVehiclesStatsVO;
     import net.wg.data.constants.PersonalStatus;
@@ -287,6 +289,18 @@ package net.wg.gui.battle.components
         public function updateVehiclesStat(param1:IDAAPIDataClass) : void
         {
             this.updateFrags(param1);
+            this.updateChatCommands(param1);
+        }
+
+        public function updateTriggeredChatCommands(param1:IDAAPIDataClass) : void
+        {
+            var _loc4_:DAAPITriggeredCommandVO = null;
+            var _loc2_:DAAPITriggeredCommandsVO = DAAPITriggeredCommandsVO(param1);
+            var _loc3_:Vector.<DAAPITriggeredCommandVO> = _loc2_.triggeredCommands;
+            for each(_loc4_ in _loc3_)
+            {
+                this.listLeft.triggerChatCommand(_loc4_.vehicleID,_loc4_.chatCommandName);
+            }
         }
 
         protected function applyVehicleData(param1:IDAAPIDataClass) : void
@@ -326,6 +340,22 @@ package net.wg.gui.battle.components
             for each(_loc4_ in _loc3_)
             {
                 this.listRight.setFrags(_loc4_.vehicleID,_loc4_.frags);
+            }
+        }
+
+        private function updateChatCommands(param1:IDAAPIDataClass) : void
+        {
+            var _loc4_:DAAPIVehicleStatsVO = null;
+            var _loc2_:DAAPIVehiclesStatsVO = DAAPIVehiclesStatsVO(param1);
+            var _loc3_:Vector.<DAAPIVehicleStatsVO> = _loc2_.leftFrags;
+            for each(_loc4_ in _loc3_)
+            {
+                this.listLeft.setChatCommand(_loc4_.vehicleID,_loc4_.chatCommand,_loc4_.chatCommandFlags);
+            }
+            _loc3_ = _loc2_.rightFrags;
+            for each(_loc4_ in _loc3_)
+            {
+                this.listRight.setChatCommand(_loc4_.vehicleID,_loc4_.chatCommand,_loc4_.chatCommandFlags);
             }
         }
 

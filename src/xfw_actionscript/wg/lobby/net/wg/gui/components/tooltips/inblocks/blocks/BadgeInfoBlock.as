@@ -67,7 +67,7 @@ package net.wg.gui.components.tooltips.inblocks.blocks
         {
             this.badgeImg.source = this._data.badgeImgSource;
             this.vehImg.source = this._data.vehImgSource;
-            this.playerNameTf.htmlText = this._data.playerName;
+            App.utils.commons.truncateHtmlTextMultiline(this.playerNameTf,this._data.playerName);
             this.vehNameTf.htmlText = this._data.vehName;
             this._isDataApplied = true;
         }

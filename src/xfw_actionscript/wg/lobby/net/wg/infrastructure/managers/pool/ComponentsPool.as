@@ -11,14 +11,14 @@ package net.wg.infrastructure.managers.pool
 
         private var _instanceClass:Class;
 
-        public function ComponentsPool(param1:uint, param2:String, param3:Class, param4:Boolean = true)
+        public function ComponentsPool(param1:uint, param2:String, param3:Class)
         {
-            var _loc5_:IAssertable = App.utils.asserter;
-            _loc5_.assert(StringUtils.isNotEmpty(param2),"Tooltip block linkage" + Errors.CANT_EMPTY);
+            var _loc4_:IAssertable = App.utils.asserter;
+            _loc4_.assert(StringUtils.isNotEmpty(param2),"Tooltip block linkage" + Errors.CANT_EMPTY);
             this._linkage = param2;
-            _loc5_.assert(param3 != null,"Instance class" + Errors.CANT_NULL);
+            _loc4_.assert(param3 != null,"Instance class" + Errors.CANT_NULL);
             this._instanceClass = param3;
-            super(param1,this.createBlock,param4);
+            super(param1,this.createBlock);
         }
 
         override protected function onDispose() : void

@@ -2,10 +2,10 @@ package net.wg.gui.lobby.profile.pages.technique
 {
     import net.wg.gui.components.controls.SortableScrollingList;
     import scaleform.clik.events.ListEvent;
+    import net.wg.gui.lobby.profile.pages.technique.data.TechniqueListVehicleVO;
     import flash.events.Event;
     import scaleform.clik.interfaces.IListItemRenderer;
     import scaleform.clik.constants.InvalidationType;
-    import net.wg.gui.lobby.profile.pages.technique.data.TechniqueListVehicleVO;
 
     public class TechniqueList extends SortableScrollingList
     {
@@ -32,7 +32,11 @@ package net.wg.gui.lobby.profile.pages.technique
             selectedIndex = Math.max(this.getVehicleIndexByID(this._selectedVehicleId),0);
             updateSelectedIndex();
             super.refreshData();
-            dispatchEvent(new Event(SELECTED_INDEX_CHANGE));
+            var _loc1_:TechniqueListVehicleVO = getSelectedVO() as TechniqueListVehicleVO;
+            if(_loc1_ == null || _loc1_.id != this._selectedVehicleId)
+            {
+                dispatchEvent(new Event(SELECTED_INDEX_CHANGE));
+            }
         }
 
         override protected function drawLayout() : void
@@ -106,8 +110,11 @@ package net.wg.gui.lobby.profile.pages.technique
             var _loc2_:TechniqueListVehicleVO = getSelectedVO() as TechniqueListVehicleVO;
             if(_loc2_)
             {
-                this._selectedVehicleId = _loc2_.id;
-                dispatchEvent(new Event(SELECTED_INDEX_CHANGE));
+                if(_loc2_.id != this._selectedVehicleId)
+                {
+                    this._selectedVehicleId = _loc2_.id;
+                    dispatchEvent(new Event(SELECTED_INDEX_CHANGE));
+                }
             }
         }
     }

@@ -395,6 +395,8 @@ package
 
         public static const DETAILS_STATUS_COMPLETED_DAILY:String = "#quests:details/status/completed/daily";
 
+        public static const DETAILS_STATUS_COMPLETED_WEEKLY:String = "#quests:details/status/completed/weekly";
+
         public static const DETAILS_STATUS_NOTAVAILABLE_IN_FUTURE:String = "#quests:details/status/notAvailable/in_future";
 
         public static const DETAILS_STATUS_NOTAVAILABLE_INVALID_WEEKDAY:String = "#quests:details/status/notAvailable/invalid_weekday";
@@ -704,6 +706,8 @@ package
         public static const DETAILS_CONDITIONS_RESULTS_SINGLE_HALFTEAM_TOP:String = "#quests:details/conditions/results/single/halfTeam/top";
 
         public static const DETAILS_CONDITIONS_RESULTS_SINGLE_HALFTEAM_TOP_NOT:String = "#quests:details/conditions/results/single/halfTeam/top/not";
+
+        public static const DETAILS_CONDITIONS_RESULTS_SINGLE_BATTLEROYALE_TOP1:String = "#quests:details/conditions/results/single/battleRoyale/top1";
 
         public static const DETAILS_CONDITIONS_RESULTS_SINGLE_BOTHTEAMS_TOP:String = "#quests:details/conditions/results/single/bothTeams/top";
 
@@ -1299,6 +1303,8 @@ package
 
         public static const DETAILS_CONDITIONS_POSTBATTLE_DELTADAILYRESET_TIMEFMT:String = "#quests:details/conditions/postBattle/deltaDailyReset/timeFmt";
 
+        public static const DETAILS_CONDITIONS_POSTBATTLE_WEEKLYRESET_TIMEFMT:String = "#quests:details/conditions/postBattle/weeklyReset/timeFmt";
+
         public static const DETAILS_CONDITIONS_POSTBATTLE_DAILYRESET:String = "#quests:details/conditions/postBattle/dailyReset";
 
         public static const DETAILS_CONDITIONS_CUMULATIVE_HEALTH:String = "#quests:details/conditions/cumulative/health";
@@ -1843,48 +1849,6 @@ package
 
         public static const DETAILS_DOSSIER_LADDER_DAMAGEASSISTEDRADIO:String = "#quests:details/dossier/ladder/damageAssistedRadio";
 
-        public static const DETAILS_DOSSIER_BOB_XP:String = "#quests:details/dossier/bob/xp";
-
-        public static const DETAILS_DOSSIER_BOB_BATTLESCOUNT:String = "#quests:details/dossier/bob/battlesCount";
-
-        public static const DETAILS_DOSSIER_BOB_WINS:String = "#quests:details/dossier/bob/wins";
-
-        public static const DETAILS_DOSSIER_BOB_LOSSES:String = "#quests:details/dossier/bob/losses";
-
-        public static const DETAILS_DOSSIER_BOB_SURVIVEDBATTLES:String = "#quests:details/dossier/bob/survivedBattles";
-
-        public static const DETAILS_DOSSIER_BOB_FRAGS:String = "#quests:details/dossier/bob/frags";
-
-        public static const DETAILS_DOSSIER_BOB_DIRECTHITS:String = "#quests:details/dossier/bob/directHits";
-
-        public static const DETAILS_DOSSIER_BOB_SPOTTED:String = "#quests:details/dossier/bob/spotted";
-
-        public static const DETAILS_DOSSIER_BOB_DAMAGEDEALT:String = "#quests:details/dossier/bob/damageDealt";
-
-        public static const DETAILS_DOSSIER_BOB_MAXDAMAGE:String = "#quests:details/dossier/bob/maxDamage";
-
-        public static const DETAILS_DOSSIER_BOB_DAMAGERECEIVED:String = "#quests:details/dossier/bob/damageReceived";
-
-        public static const DETAILS_DOSSIER_BOB_CAPTUREPOINTS:String = "#quests:details/dossier/bob/capturePoints";
-
-        public static const DETAILS_DOSSIER_BOB_DROPPEDCAPTUREPOINTS:String = "#quests:details/dossier/bob/droppedCapturePoints";
-
-        public static const DETAILS_DOSSIER_BOB_PIERCINGS:String = "#quests:details/dossier/bob/piercings";
-
-        public static const DETAILS_DOSSIER_BOB_NODAMAGEDIRECTHITSRECEIVED:String = "#quests:details/dossier/bob/noDamageDirectHitsReceived";
-
-        public static const DETAILS_DOSSIER_BOB_PIERCINGSRECEIVED:String = "#quests:details/dossier/bob/piercingsReceived";
-
-        public static const DETAILS_DOSSIER_BOB_POTENTIALDAMAGERECEIVED:String = "#quests:details/dossier/bob/potentialDamageReceived";
-
-        public static const DETAILS_DOSSIER_BOB_DAMAGEBLOCKEDBYARMOR:String = "#quests:details/dossier/bob/damageBlockedByArmor";
-
-        public static const DETAILS_DOSSIER_BOB_ORIGINALXP:String = "#quests:details/dossier/bob/originalXP";
-
-        public static const DETAILS_DOSSIER_BOB_DAMAGEASSISTEDTRACK:String = "#quests:details/dossier/bob/damageAssistedTrack";
-
-        public static const DETAILS_DOSSIER_BOB_DAMAGEASSISTEDRADIO:String = "#quests:details/dossier/bob/damageAssistedRadio";
-
         public static const DETAILS_DOSSIER_BATTLESCOUNT:String = "#quests:details/dossier/battlesCount";
 
         public static const DETAILS_DOSSIER_0_BATTLESCOUNT:String = "#quests:details/dossier/0/battlesCount";
@@ -1921,8 +1885,6 @@ package
 
         public static const DETAILS_DOSSIER_27_BATTLESCOUNT:String = "#quests:details/dossier/27/battlesCount";
 
-        public static const DETAILS_DOSSIER_32_BATTLESCOUNT:String = "#quests:details/dossier/32/battlesCount";
-
         public static const DETAILS_MODIFIERS_TITLE_DISCOUNT:String = "#quests:details/modifiers/title/discount";
 
         public static const DETAILS_MODIFIERS_TITLE_SELLING:String = "#quests:details/modifiers/title/selling";
@@ -1944,8 +1906,6 @@ package
         public static const DETAILS_MODIFIERS_ECONOMICS_EXCHANGERATE:String = "#quests:details/modifiers/economics/exchangeRate";
 
         public static const DETAILS_MODIFIERS_ECONOMICS_EXCHANGERATEFORSHELLSANDEQS:String = "#quests:details/modifiers/economics/exchangeRateForShellsAndEqs";
-
-        public static const DETAILS_MODIFIERS_ECONOMICS_PAIDREMOVALCOST:String = "#quests:details/modifiers/economics/paidRemovalCost";
 
         public static const DETAILS_MODIFIERS_ECONOMICS_PASSPORTCHANGECOST:String = "#quests:details/modifiers/economics/passportChangeCost";
 
@@ -2189,6 +2149,8 @@ package
 
         public static const MISSIONDETAILS_STATUS_COMPLETED_DAILY:String = "#quests:missionDetails/status/completed/daily";
 
+        public static const MISSIONDETAILS_STATUS_COMPLETED_WEEKLY:String = "#quests:missionDetails/status/completed/weekly";
+
         public static const MISSIONDETAILS_STATUS_NOTAVAILABLE:String = "#quests:missionDetails/status/notAvailable";
 
         public static const MISSIONDETAILS_STATUS_WRONGVEHICLE:String = "#quests:missionDetails/status/wrongVehicle";
@@ -2245,6 +2207,8 @@ package
 
         public static const MISSIONDETAILS_MISSIONSCOMPLETE_DAILY:String = "#quests:missionDetails/missionsComplete/daily";
 
+        public static const MISSIONDETAILS_MISSIONSCOMPLETE_WEEKLY:String = "#quests:missionDetails/missionsComplete/weekly";
+
         public static const MISSIONDETAILS_MISSIONSCOMPLETECOUNTER:String = "#quests:missionDetails/missionsCompleteCounter";
 
         public static const MISSIONDETAILS_PERSONALQUEST_COMPLETE_LEFT:String = "#quests:missionDetails/personalQuest/complete/left";
@@ -2253,7 +2217,13 @@ package
 
         public static const MISSIONDETAILS_PERSONALQUEST_DETAILS_COMPLETE_LEFT_DAILY:String = "#quests:missionDetails/personalQuest/details/complete/left/daily";
 
+        public static const MISSIONDETAILS_PERSONALQUEST_COMPLETE_LEFT_WEEKLY:String = "#quests:missionDetails/personalQuest/complete/left/weekly";
+
+        public static const MISSIONDETAILS_PERSONALQUEST_DETAILS_COMPLETE_LEFT_WEEKLY:String = "#quests:missionDetails/personalQuest/details/complete/left/weekly";
+
         public static const MISSIONDETAILS_RESETDATE:String = "#quests:missionDetails/resetDate";
+
+        public static const MISSIONDETAILS_WEEKLYRESET:String = "#quests:missionDetails/weeklyReset";
 
         public static const MISSIONDETAILS_DATE:String = "#quests:missionDetails/date";
 
@@ -2504,6 +2474,8 @@ package
         public static const BONUSNAME_ENTITLEMENTS_RANKED_2020_DISCOUNT:String = "#quests:bonusName/entitlements/ranked_2020_discount";
 
         public static const BONUSNAME_ENTITLEMENTS_RANKED_202007_ACCESS:String = "#quests:bonusName/entitlements/ranked_202007_access";
+
+        public static const BONUSNAME_BATTLE_BONUS_X5:String = "#quests:bonusName/battle_bonus_x5";
 
         public static const ACTION_AUTO_CALENDAR:String = "#quests:action/auto/calendar";
 

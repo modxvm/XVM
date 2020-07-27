@@ -109,19 +109,9 @@ package net.wg.data
 
         public static const FITTING_SELECT_POPOVER:String = "fittingSelectPopover";
 
-        public static const BOOSTER_SELECT_POPOVER:String = "boosterSelectPopover";
-
         public static const OPT_DEVICES_SELECT_POPOVER:String = "optDevicesSelectPopover";
 
         public static const BATTLE_ABILITY_SELECT_POPOVER:String = "battleAbilitySelectPopover";
-
-        public static const BATTLE_ABILITIES_AVAILABLE:String = "battleAbilitiesAvailable";
-
-        public static const FITTING_CMP_SELECT_POPOVER:String = "fittingCmpSelectPopover";
-
-        public static const BOOSTER_CMP_SELECT_POPOVER:String = "boosterCmpSelectPopover";
-
-        public static const OPT_DEVICES_CMP_SELECT_POPOVER:String = "optDevicesCmpSelectPopover";
 
         public static const TRADEIN_POPOVER:String = "TradeInPopover";
 
@@ -171,8 +161,6 @@ package net.wg.data
 
         public static const VEHICLE_COMPARE_CART_BUTTON:String = "vehicleCompareCartButton";
 
-        public static const TICKER:String = "ticker";
-
         public static const CHANNEL_COMPONENT:String = "channelComponent";
 
         public static const CHANNEL_CAROUSEL:String = "channelCarousel";
@@ -220,6 +208,8 @@ package net.wg.data
         public static const LOBBY_EVENT_BOARDS_PAGINATION:String = "eventBoardsPaginationLobby";
 
         public static const LOBBY_EVENT_BOARDS_MAINTENANCE:String = "eventBoardsMaintenanceLobby";
+
+        public static const VEH_MODULES_CONFIGURATOR_CMP:String = "vehicleModulesConfiguratorComponent";
 
         public static const DEBUG_CONTROLS:String = LIB_CONTROLS;
 
