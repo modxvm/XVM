@@ -10,9 +10,9 @@
 
       `"hangar"/"enableEquipAutoReturn"`
 
-  #### Battle
+  #### Бой
 
-  * Added option:
+  * Добавлена опция:
 
       `"battle"/"battleHint"/"hideRadarHint"` — скрыть подсказку активации радара (режим "Стальной охотник")
 
