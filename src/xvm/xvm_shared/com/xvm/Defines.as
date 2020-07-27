@@ -100,6 +100,8 @@ package com.xvm
         public static const BATTLE_TYPE_EVENT_BATTLES_2:Number = 26;
         public static const BATTLE_TYPE_EPIC_BATTLE:Number = 27;
         public static const BATTLE_TYPE_EPIC_BATTLE_TRAINING:Number = 28;
+        public static const BATTLE_TYPE_BATTLE_ROYALE_SOLO:Number = 29;
+        public static const BATTLE_TYPE_BATTLE_ROYALE_SQUAD:Number = 30;
         public static const BATTLE_TYPE_TOURNAMENT_EVENT:Number = 31;
         public static const BATTLE_TYPE_EVENT_RANDOM:Number = 33;
 
@@ -143,6 +145,7 @@ package com.xvm
         public static const APP_TYPE_BATTLE_EPICRANDOM:int = 0x0008;
         public static const APP_TYPE_BATTLE_RANKED:int =     0x0010;
         public static const APP_TYPE_VEHICLE_MARKERS:int =   0x0020;
-        public static const APP_TYPE_BATTLE:int =            APP_TYPE_BATTLE_CLASSIC | APP_TYPE_BATTLE_EPICBATTLE | APP_TYPE_BATTLE_EPICRANDOM | APP_TYPE_BATTLE_RANKED;
+        public static const APP_TYPE_BATTLE_ROYALE:int =     0x0040;
+        public static const APP_TYPE_BATTLE:int =            APP_TYPE_BATTLE_CLASSIC | APP_TYPE_BATTLE_EPICBATTLE | APP_TYPE_BATTLE_EPICRANDOM | APP_TYPE_BATTLE_RANKED | APP_TYPE_BATTLE_ROYALE;
     }
 }

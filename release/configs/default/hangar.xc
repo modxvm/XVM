@@ -158,9 +158,6 @@
       // Смещение по оси Y.
       "offsetY": 0
     },
-    // true - enable removable equipment auto return (Camouflage net, Stereoscope, Toolbox).
-    // true - включить автовозврат съемного оборудования (Маскировочная сеть, Стереотруба, Ящик с инструментами).
-    "enableEquipAutoReturn": false,
     // true - make vehicle not ready for battle if low ammo.
     // true - сделать машину не готовой к битве если мало снарядов.
     "blockVehicleIfLowAmmo": false,

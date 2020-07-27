@@ -32,4 +32,3 @@ build_as3_swf \
     -include-libraries+=../../~output/xvm/swc/xvm_app.swc \
     -output ../../~output/xvm/res_mods/mods/xfw_packages/xvm_lobby/as_lobby/xvm_lobby.swf \
     $doc
-

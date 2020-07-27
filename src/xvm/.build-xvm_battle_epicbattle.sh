@@ -24,4 +24,3 @@ build_as3_swf \
     -include-libraries+=swc/greensock.swc \
     -output ../../~output/xvm/res_mods/mods/xfw_packages/xvm_battle/as_battle_epicbattle/xvm_battle_epicbattle.swf \
     $doc
-

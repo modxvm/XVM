@@ -20,4 +20,3 @@ build_as3_swf \
     -external-library-path+=../../~output/xvm/swc/xvm_lobby.swc \
     -output ../../~output/xvm/res_mods/mods/xfw_packages/xvm_lobby/as_lobby/xvm_lobby_ui.swf \
     $doc
-

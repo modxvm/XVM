@@ -183,6 +183,10 @@ package com.xfw
                 return -1;
             if (StringUtils.endsWith(b, '/xvm_battle_ranked.swf'))
                 return 1;
+            if (StringUtils.endsWith(a, '/xvm_battle_royale.swf'))
+                return -1;
+            if (StringUtils.endsWith(b, '/xvm_battle_royale.swf'))
+                return 1;
             return a < b ? -1 : a > b ? 1 : 0;
         }
 

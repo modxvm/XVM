@@ -15,12 +15,12 @@ doc="xvm_battle/com/xvm/battle/BattleXvmApp.as"
 build_as3_swf \
     -inline \
     -source-path xvm_battle \
-    -source-path xvm_battle_classic \
+    -source-path xvm_battle_royale \
     -external-library-path+=../../~output/xfw/swc/wg_battle.swc \
-    -external-library-path+=../../~output/xfw/swc/wg_battle_classic_ui.swc \
+    -external-library-path+=../../~output/xfw/swc/wg_battle_royale_ui.swc \
     -external-library-path+=../../~output/xfw/swc/xfw.swc \
     -include-libraries+=../../~output/xvm/swc/xvm_shared.swc \
     -include-libraries+=../../~output/xvm/swc/xvm_app.swc \
     -include-libraries+=swc/greensock.swc \
-    -output ../../~output/xvm/res_mods/mods/xfw_packages/xvm_battle/as_battle_classic/xvm_battle_classic.swf \
+    -output ../../~output/xvm/res_mods/mods/xfw_packages/xvm_battle/as_battle_royale/xvm_battle_royale.swf \
     $doc

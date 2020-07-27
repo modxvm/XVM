@@ -9,8 +9,8 @@ import simplejson
 
 import constants
 from account_helpers.AccountSettings import AccountSettings, DEFAULT_VALUES, KEY_FILTERS
-from account_helpers.AccountSettings import CAROUSEL_FILTER_2, RANKED_CAROUSEL_FILTER_2, EPICBATTLE_CAROUSEL_FILTER_2, BOB_CAROUSEL_FILTER_2
-from account_helpers.AccountSettings import CAROUSEL_FILTER_CLIENT_1, RANKED_CAROUSEL_FILTER_CLIENT_1, EPICBATTLE_CAROUSEL_FILTER_CLIENT_1, BATTLEPASS_CAROUSEL_FILTER_CLIENT_1, BOB_CAROUSEL_FILTER_CLIENT_1
+from account_helpers.AccountSettings import CAROUSEL_FILTER_2, RANKED_CAROUSEL_FILTER_2, EPICBATTLE_CAROUSEL_FILTER_2
+from account_helpers.AccountSettings import CAROUSEL_FILTER_CLIENT_1, RANKED_CAROUSEL_FILTER_CLIENT_1, EPICBATTLE_CAROUSEL_FILTER_CLIENT_1, BATTLEPASS_CAROUSEL_FILTER_CLIENT_1
 from account_helpers.settings_core.ServerSettingsManager import ServerSettingsManager
 from gui.shared.gui_items.dossier.achievements import MarkOfMasteryAchievement
 from gui.shared.utils.functions import makeTooltip
@@ -38,6 +38,7 @@ class PREFS(object):
     PREMIUM = 'premium'
     ELITE = 'elite'
     RENTED = 'rented'
+    CRYSTALS = 'crystals'
     EVENT = 'event'
     IGR = 'igr'
     # added by XVM
@@ -53,7 +54,7 @@ class PREFS(object):
 class USERPREFS(object):
     CAROUSEL_FILTERS = "users/{accountDBID}/tankcarousel/filters"
 
-_SUPPORTED_SECTIONS = (CAROUSEL_FILTER_2, RANKED_CAROUSEL_FILTER_2, EPICBATTLE_CAROUSEL_FILTER_2, BOB_CAROUSEL_FILTER_2)
+_SUPPORTED_SECTIONS = (CAROUSEL_FILTER_2, RANKED_CAROUSEL_FILTER_2, EPICBATTLE_CAROUSEL_FILTER_2)
 
 #####################################################################
 # initialization/finalization
@@ -93,13 +94,13 @@ def _ServerSettingsManager_setSections(base, self, sections, settings):
 
 @overrideStaticMethod(AccountSettings, 'setFilter')
 def _AccountSettings_setFilter(base, name, value):
-    if name in (CAROUSEL_FILTER_CLIENT_1, RANKED_CAROUSEL_FILTER_CLIENT_1, EPICBATTLE_CAROUSEL_FILTER_CLIENT_1, BATTLEPASS_CAROUSEL_FILTER_CLIENT_1, BOB_CAROUSEL_FILTER_CLIENT_1):
+    if name in (CAROUSEL_FILTER_CLIENT_1, RANKED_CAROUSEL_FILTER_CLIENT_1, EPICBATTLE_CAROUSEL_FILTER_CLIENT_1, BATTLEPASS_CAROUSEL_FILTER_CLIENT_1):
         value = {key: value for key, value in value.iteritems() if key not in PREFS.XVM_KEYS}
     base(name, value)
 
 # Filters:
-#   Premium       Special       Normal    Elite    NonElite
-#   CompleteCrew  TrainingCrew  NoMaster  Reserve  Rented    [igr]
+#   Premium       Special       Normal    Elite    NonElite  [igr]
+#   CompleteCrew  TrainingCrew  NoMaster  Reserve  Crystals  Rented
 @overrideMethod(TankCarouselFilterPopover, '_getInitialVO')
 def _TankCarouselFilterPopover_getInitialVO(base, self, filters, xpRateMultiplier):
     data = base(self, filters, xpRateMultiplier)
@@ -119,6 +120,8 @@ def _TankCarouselFilterPopover_getInitialVO(base, self, filters, xpRateMultiplie
             training_crew = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/trainingcrew.png', 'tooltip': makeTooltip(l10n('TrainingCrewTooltipHeader'), l10n('TrainingCrewTooltipBody')), 'selected': filters[PREFS.TRAINING_CREW]}
             no_master = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/nomaster.png', 'tooltip': makeTooltip(l10n('NoMasterTooltipHeader'), l10n('NoMasterTooltipBody')), 'selected': filters[PREFS.NO_MASTER]}
             reserve = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/reserve.png', 'tooltip': makeTooltip(l10n('ReserveFilterTooltipHeader'), l10n('ReserveFilterTooltipBody')), 'selected': filters[PREFS.RESERVE]}
+            crystals = data['specials'][mapping[_SECTION.SPECIALS].index(PREFS.CRYSTALS)]
+            crystals['value'] = '../../../mods/shared_resources/xvm/res/icons/carousel/filter/crystals.png'
             rented = data['specials'][mapping[_SECTION.SPECIALS].index(PREFS.RENTED)]
             rented['value'] = '../../../mods/shared_resources/xvm/res/icons/carousel/filter/rented.png'
 
@@ -127,7 +130,8 @@ def _TankCarouselFilterPopover_getInitialVO(base, self, filters, xpRateMultiplie
                 igr = data['specials'][-1]
             data['specials'] = [
                 premium, special, normal, elite, non_elite,
-                full_crew, training_crew, no_master, reserve, rented]
+                full_crew, training_crew, no_master, reserve, crystals,
+                rented]
             if is_igr:
                 data['specials'].append(igr)
         except Exception as ex:
@@ -135,12 +139,13 @@ def _TankCarouselFilterPopover_getInitialVO(base, self, filters, xpRateMultiplie
     return data
 
 @overrideClassMethod(TankCarouselFilterPopover, '_generateMapping')
-def _TankCarouselFilterPopover_generateMapping(base, cls, hasRented, hasEvent, hasRoles):
-    mapping = base(hasRented, hasEvent, hasRoles)
+def _TankCarouselFilterPopover_generateMapping(base, cls, hasRented, hasEvent, hasRoles, isBattleRoyaleEnabled=False):
+    mapping = base(hasRented, hasEvent, hasRoles, isBattleRoyaleEnabled=False)
     is_igr = PREFS.IGR in mapping[_SECTION.SPECIALS]
     mapping[_SECTION.SPECIALS] = [
         PREFS.PREMIUM, PREFS.SPECIAL, PREFS.NORMAL, PREFS.ELITE, PREFS.NON_ELITE,
-        PREFS.FULL_CREW, PREFS.TRAINING_CREW, PREFS.NO_MASTER, PREFS.RESERVE, PREFS.RENTED]
+        PREFS.FULL_CREW, PREFS.TRAINING_CREW, PREFS.NO_MASTER, PREFS.RESERVE, PREFS.CRYSTALS,
+        PREFS.RENTED]
     if is_igr:
         mapping[_SECTION.SPECIALS].append(PREFS.IGR)
     return mapping

@@ -21,27 +21,17 @@ set -e
 
 currentdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 source "$currentdir"/../../build_lib/library.sh
-PATH="$currentdir"/../../build/bin/msil/:$PATH
 
-mkdir -p "$currentdir/../../~output/xfw/swf/"
 
-projects="
-    wg_shared
-    wg_lobby
-    wg_battle
-    wg_battle_classic_ui
-    wg_battle_epicbattle_ui
-    wg_battle_epicrandom_ui
-    wg_battle_ranked_ui
-    wg_battle_royale_ui
-    wg_vm
-    xfw_shared
-    xfw
-"
+detect_os
+detect_actionscript_sdk
 
-for project in ${projects}; do
-    echo "building ${project}"
-    . .build-${project}.sh
-done
-
-echo ""
+class="\$AppLinks"
+build_as3_swc \
+    -source-path wg/battle_ui/royale \
+    -source-path wg/battle_ui/ui/* \
+    -source-path wg/battle \
+    -source-path wg/common_i18n \
+    -external-library-path+=../../~output/xfw/swc/wg_battle.swc \
+    -output ../../~output/xfw/swc/wg_battle_royale_ui.swc \
+    -include-classes $class
