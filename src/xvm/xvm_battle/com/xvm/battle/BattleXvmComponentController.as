@@ -101,5 +101,10 @@ package com.xvm.battle
         {
             BattleState.instance.updateVehicleStatus(data);
         }
+
+        public function updateTriggeredChatCommands(data:IDAAPIDataClass):void
+        {
+            BattleState.instance.updateTriggeredChatCommands(data);
+        }
     }
 }

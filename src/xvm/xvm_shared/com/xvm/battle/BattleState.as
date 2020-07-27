@@ -253,6 +253,12 @@ package com.xvm.battle
             }
         }
 
+        public function updateTriggeredChatCommands(data:Object):void
+        {
+
+        }
+
+
         public function updatePersonalStatus(param1:uint, param2:uint):void
         {
             //Logger.add("[BattleState] updatePersonalStatus: " + param1 + ", " + param2);

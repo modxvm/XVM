@@ -10,7 +10,8 @@ package com.xvm.battle.shared.teamBasesPanel
     import com.xvm.battle.*;
     import flash.utils.*;
     import net.wg.data.constants.*;
-    import net.wg.gui.components.common.ticker.events.*;
+    // TODO:1.10.0
+    //import net.wg.gui.components.common.ticker.events.*;
 
     public class UI_teamBasesPanel extends teamBasesPanelUI
     {
@@ -18,7 +19,7 @@ package com.xvm.battle.shared.teamBasesPanel
         private var DEFAULT_CAPTURE_BAR_LINKAGE:String = Linkages.CAPTURE_BAR_LINKAGE;
         private var XVM_CAPTURE_BAR_LINKAGE:String = getQualifiedClassName(UI_TeamCaptureBar);
         private var DEFAULT_Y:Number;
-
+/* TODO:1.10.0
         public function UI_teamBasesPanel()
         {
             //Logger.add("UI_teamBasesPanel()");
@@ -62,7 +63,7 @@ package com.xvm.battle.shared.teamBasesPanel
             Xvm.dispatchEvent(new BooleanEvent(BattleEvents.TEAM_BASES_PANEL_VISIBLE, value));
             super.setCompVisible(value);
         }
-
+*/
         // PRIVATE
 
         private function setup():void
