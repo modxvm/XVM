@@ -20,7 +20,8 @@ package com.xvm.battle
     import flash.text.*;
     import net.wg.gui.battle.views.*;
     import net.wg.gui.battle.views.debugPanel.*;
-    import net.wg.gui.battle.views.ticker.*;
+    // TODO:1.10.0
+    //import net.wg.gui.battle.views.ticker.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
     import scaleform.clik.utils.*;
@@ -46,7 +47,7 @@ package com.xvm.battle
             }
             return null;
         }
-
+/* TODO:1.10
         public static function get battlePageBattleTicker():BattleTicker
         {
             try
@@ -58,7 +59,7 @@ package com.xvm.battle
             }
             return null;
         }
-
+*/
         private var _battleController:BattleXvmComponentController = null;
         private var _battleClock:BattleClock = null;
         private var _battleElements:BattleElements = null;
