@@ -25,7 +25,6 @@ from gui.shared.utils.requesters.StatsRequester import StatsRequester
 from gui.Scaleform.daapi.view.lobby.techtree.settings import UNKNOWN_VEHICLE_LEVEL
 from gui.Scaleform.daapi.view.lobby.techtree.techtree_page import TechTree
 from gui.Scaleform.daapi.view.lobby.techtree.research_page import Research
-from gui.Scaleform.daapi.view.lobby.hangar.TechnicalMaintenance import TechnicalMaintenance
 from gui.Scaleform.daapi.view.lobby.recruitWindow.RecruitWindow import RecruitWindow
 from gui.Scaleform.daapi.view.lobby.PersonalCase import PersonalCase
 from gui.Scaleform.daapi.view.lobby.exchange.ExchangeFreeToTankmanXpWindow import ExchangeFreeToTankmanXpWindow
@@ -208,16 +207,6 @@ def Research_populate(self, *args, **kwargs):
 def Research_dispose(self, *args, **kwargs):
     global Research_handler
     Research_handler = None
-
-@registerEvent(TechnicalMaintenance, '_populate')
-def TechnicalMaintenance_populate(self, *args, **kwargs):
-    global TechnicalMaintenance_handler
-    TechnicalMaintenance_handler = self
-
-@registerEvent(TechnicalMaintenance, '_dispose')
-def TechnicalMaintenance_dispose(self, *args, **kwargs):
-    global TechnicalMaintenance_handler
-    TechnicalMaintenance_handler = None
 
 @registerEvent(RecruitWindow, '_populate')
 def RecruitWindow_populate(self, *args, **kwargs):

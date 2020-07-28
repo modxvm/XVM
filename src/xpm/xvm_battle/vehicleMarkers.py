@@ -19,7 +19,7 @@ from skeletons.gui.battle_session import IBattleSessionProvider
 from gui.battle_control import avatar_getter
 from gui.shared import g_eventBus, events
 from gui.Scaleform.daapi.view.battle.shared.markers2d.manager import MarkersManager
-from gui.Scaleform.daapi.view.battle.shared.markers2d.plugins import VehicleMarkerPlugin
+from gui.Scaleform.daapi.view.battle.shared.markers2d.vehicle_plugins import VehicleMarkerPlugin
 
 from xfw import *
 from xvm_main.python.consts import *
@@ -143,7 +143,7 @@ def _MarkersManager_as_setShowExInfoFlagS(base, self, flag):
 
 # add attackerID if XVM markers are active
 @overrideMethod(VehicleMarkerPlugin, '_VehicleMarkerPlugin__updateVehicleHealth')
-def _VehicleMarkerPlugin__updateVehicleHealth(base, self, handle, newHealth, aInfo, attackReasonID):
+def _VehicleMarkerPlugin__updateVehicleHealth(base, self, vehicleID, handle, newHealth, aInfo, attackReasonID):
     if g_markers.active:
         if not (g_replayCtrl.isPlaying and g_replayCtrl.isTimeWarpInProgress):
             attackerID = aInfo.vehicleID if aInfo else 0
@@ -153,7 +153,7 @@ def _VehicleMarkerPlugin__updateVehicleHealth(base, self, handle, newHealth, aIn
                                self._VehicleMarkerPlugin__getVehicleDamageType(aInfo),
                                '{},{}'.format(constants.ATTACK_REASONS[attackReasonID], str(attackerID)))
             return
-    base(self, handle, newHealth, aInfo, attackReasonID)
+    base(self, vehicleID, handle, newHealth, aInfo, attackReasonID)
 
 def as_xvm_cmdS(self, *args):
     if self._isDAAPIInited():
