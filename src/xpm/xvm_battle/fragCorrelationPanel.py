@@ -15,7 +15,7 @@ from gui import g_guiResetters
 from gui.battle_control import avatar_getter
 from gui.battle_control.battle_constants import FEEDBACK_EVENT_ID
 from gui.Scaleform.daapi.view.battle.classic.stats_exchange import FragsCollectableStats
-from gui.Scaleform.daapi.view.battle.shared.markers2d.plugins import VehicleMarkerPlugin
+from gui.Scaleform.daapi.view.battle.shared.markers2d.vehicle_plugins import VehicleMarkerPlugin
 from gui.shared import g_eventBus, events, EVENT_BUS_SCOPE
 from helpers import dependency
 from skeletons.gui.app_loader import IAppLoader, GuiGlobalSpaceID

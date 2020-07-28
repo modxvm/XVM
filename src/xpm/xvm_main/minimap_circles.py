@@ -249,7 +249,7 @@ class _MinimapCircles(object):
 
     # cola, chocolate etc.
     def _isStimulatorEquipped(self):
-        for item in self.vehicleItem._equipmentLayout.regularConsumables:
+        for item in self.vehicleItem.consumables.installed:
             # debug(vars(item))
             if item is not None and item.isStimulator:
                 return True

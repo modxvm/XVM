@@ -94,8 +94,9 @@ def _MinimapComponent_addEntry(base, self, symbol, *args, **kwargs):
             symbol = XVM_ENTRY_SYMBOL_NAME.STRATEGIC_CAMERA
         elif symbol == ENTRY_SYMBOL_NAME.VIEW_RANGE_CIRCLES:
             symbol = XVM_ENTRY_SYMBOL_NAME.VIEW_RANGE_CIRCLES
-        elif symbol == ENTRY_SYMBOL_NAME.MARK_CELL:
-            symbol = XVM_ENTRY_SYMBOL_NAME.MARK_CELL
+        # TODO: 1.10.0
+        #elif symbol == ENTRY_SYMBOL_NAME.MARK_CELL:
+            #symbol = XVM_ENTRY_SYMBOL_NAME.MARK_CELL
         #else:
         #    debug('add minimap entry: ' + symbol)
     entryID = base(self, symbol, *args, **kwargs)
@@ -271,14 +272,14 @@ def _ADDITIONAL_FEATURES_isOn(base, cls, mask):
 def _ADDITIONAL_FEATURES_isChanged(base, cls, mask):
     return False if g_minimap.active and g_minimap.opt_labelsEnabled else base(mask)
 
-@overrideMethod(PersonalEntriesPlugin, '_PersonalEntriesPlugin__onVehicleFeedbackReceived')
-def _PersonalEntriesPlugin__onVehicleFeedbackReceived(base, self, eventID, _, value):
+@overrideMethod(PersonalEntriesPlugin, '_onVehicleFeedbackReceived')
+def _PersonalEntriesPlugin_onVehicleFeedbackReceived(base, self, eventID, _, __):
     if g_minimap.active and g_minimap.opt_circlesEnabled:
         VISIBILITY.MAX_RADIUS = 1000
-        base(self, eventID, _, value)
+        base(self, eventID, _, __)
         VISIBILITY.MAX_RADIUS = 445
     else:
-        base(self, eventID, _, value)
+        base(self, eventID, _, __)
 
 
 #####################################################################

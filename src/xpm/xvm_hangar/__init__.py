@@ -83,7 +83,7 @@ def Vehicle_isAmmoFull(base, self):
             mult = self.NOT_FULL_AMMO_MULTIPLIER
         else:
             mult = 1.0
-        return sum((s.count for s in self.shells)) >= self.ammoMaxSize * mult
+        return sum((s.count for s in self.shells.installed.getItems())) >= self.ammoMaxSize * mult
     except Exception as ex:
         err(traceback.format_exc())
         return base(self)
