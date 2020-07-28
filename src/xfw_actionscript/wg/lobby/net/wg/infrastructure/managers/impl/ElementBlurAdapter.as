@@ -69,6 +69,7 @@ package net.wg.infrastructure.managers.impl
                     }
                 }
             }
+            this._blurAnimCount = 0;
             this._bluredElements = _loc6_;
             this._blurAnimRepeatCount = param3;
             App.utils.scheduler.scheduleRepeatableTask(this.animateBlur,ANIM_STEP_TIME,this._blurAnimRepeatCount,this._bluredElements);
@@ -77,10 +78,7 @@ package net.wg.infrastructure.managers.impl
         public function dispose() : void
         {
             this.cancelScheduled();
-            if(this._bluredElements)
-            {
-                this.cleanUpBluredElements();
-            }
+            this.cleanUpBluredElements();
             App.utils.data.cleanupDynamicObject(this._containersDict);
             this._containersDict = null;
         }
@@ -101,8 +99,11 @@ package net.wg.infrastructure.managers.impl
 
         private function cleanUpBluredElements() : void
         {
-            this._bluredElements.splice(0,this._bluredElements.length);
-            this._bluredElements = null;
+            if(this._bluredElements)
+            {
+                this._bluredElements.splice(0,this._bluredElements.length);
+                this._bluredElements = null;
+            }
         }
 
         private function animateBlur(param1:Vector.<DisplayObject>) : void

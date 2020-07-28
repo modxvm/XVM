@@ -10,7 +10,7 @@ package net.wg.gui.battle.eventBattle.views
     import net.wg.gui.battle.views.damageInfoPanel.DamageInfoPanel;
     import net.wg.gui.battle.views.battleMessenger.BattleMessenger;
     import net.wg.gui.battle.eventBattle.views.eventStats.EventStats;
-    import net.wg.gui.battle.eventBattle.views.radialMenu.EventRadialMenu;
+    import net.wg.gui.battle.views.radialMenu.RadialMenu;
     import net.wg.gui.battle.eventBattle.views.eventPlayersPanel.EventPlayersPanel;
     import net.wg.gui.battle.eventBattle.views.battleHints.EventBattleHint;
     import net.wg.gui.battle.eventBattle.views.eventPointCounter.EventPointCounter;
@@ -64,7 +64,7 @@ package net.wg.gui.battle.eventBattle.views
 
         public var fullStats:EventStats = null;
 
-        public var radialMenu:EventRadialMenu = null;
+        public var radialMenu:RadialMenu = null;
 
         public var playersPanelEvent:EventPlayersPanel = null;
 
