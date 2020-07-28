@@ -8,6 +8,7 @@ package net.wg.gui.lobby.hangar.tcarousel
     import net.wg.gui.components.carousels.events.TankItemEvent;
     import net.wg.gui.components.controls.events.RendererEvent;
     import flash.events.Event;
+    import flash.display.Sprite;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.data.VO.TankCarouselFilterInitVO;
     import net.wg.data.VO.TankCarouselFilterSelectedVO;
@@ -45,6 +46,8 @@ package net.wg.gui.lobby.hangar.tcarousel
         private static const GO_TO_OFFSET:Number = 0.5;
 
         private static const INV_ROW_COUNT:String = "invRowCount";
+
+        private static const HIT_AREA_NAME:String = "emptyHitArea";
 
         private static const OPTIMIZE_OFFSET:int = 10;
 
@@ -123,6 +126,10 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.vehicleFilters.addEventListener(Event.RESIZE,this.onVehicleFiltersResizeHandler);
             this.background.mouseEnabled = false;
             this.background.mouseChildren = false;
+            var _loc2_:Sprite = new Sprite();
+            _loc2_.name = HIT_AREA_NAME;
+            addChild(_loc2_);
+            this.background.hitArea = _loc2_;
             mouseEnabled = false;
             App.utils.helpLayout.registerComponent(this);
         }

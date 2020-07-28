@@ -9,8 +9,6 @@ package net.wg.gui.lobby.reservesPanel.components
     public class ReserveSlot extends DeviceSlot
     {
 
-        private static const COUNT_FRAMES_WITHOUT_LEVEL:int = 3;
-
         public var levelMC:MovieClip = null;
 
         public var icon:ReserveTypesUIWithFill = null;
@@ -44,7 +42,7 @@ package net.wg.gui.lobby.reservesPanel.components
                 _loc1_ = slotData.slotType + (slotData.level > ReserveTypesUIWithFill.LEVELS_WITHOUT_GLOW?ReserveTypesUIWithFill.GLOW_ENDING:Values.EMPTY_STR);
                 this.icon.setModuleTypeIcon(_loc1_);
                 this.levelMC.gotoAndStop(slotData.level);
-                this.levelMC.visible = this.icon.currentFrame > COUNT_FRAMES_WITHOUT_LEVEL;
+                this.levelMC.visible = slotData.level > 0;
             }
         }
     }
