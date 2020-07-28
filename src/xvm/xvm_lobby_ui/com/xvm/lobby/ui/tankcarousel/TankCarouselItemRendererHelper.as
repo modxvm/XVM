@@ -77,6 +77,8 @@ package com.xvm.lobby.ui.tankcarousel
             _setupStandardFieldPrice();
             _setupStandardFieldActionPrice();
             _setupStandardFieldFavorite();
+            _setupStandardFieldCrystalsBorder();
+            _setupStandardFieldCrystalsIcon();
             _setupStandardFieldStats();
             //}, 1000);
         }
@@ -448,6 +450,18 @@ package com.xvm.lobby.ui.tankcarousel
         {
             _setupStandardFieldAlpha(renderer.content.imgFavorite, cfg.fields.favorite);
             _setupStandardFieldScale(renderer.content.imgFavorite, cfg.fields.favorite);
+        }
+
+        private function _setupStandardFieldCrystalsBorder():void
+        {
+            _setupStandardFieldAlpha(renderer.crystalsBorder, cfg.fields.crystalsBorder);
+            _setupStandardFieldAlpha(renderer.content.crystalsGlow, cfg.fields.crystalsBorder);
+            _setupStandardFieldAlpha(renderer.content.crystalsGlowBlend, cfg.fields.crystalsBorder);
+        }
+
+        private function _setupStandardFieldCrystalsIcon():void
+        {
+            _setupStandardFieldAlpha(renderer.content.crystalsIcon, cfg.fields.crystalsIcon);
         }
 
         private function _setupStandardFieldStats():void

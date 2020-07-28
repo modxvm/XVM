@@ -4,19 +4,27 @@
 
   * Compatibility with World of Tanks 1.10.0.0
 
-  #### Hangar
-
-  * Removed option:
-
-      `"hangar"/"enableEquipAutoReturn"`
-
   #### Battle
 
   * Added option:
 
       `"battle"/"battleHint"/"hideRadarHint"` — hide the tips about radar activation ("Steel Hunter" mode)
 
+  #### Hangar
+
+  * Removed option:
+
+      `"hangar"/"enableEquipAutoReturn"`
+
+  #### Carousel
+
+  * Added options in the "carousel"/"normal"/"fields" and "carousel"/"small"/"fields" sections:
+
+      `"crystalsBorder"` — vehicle mark with the ability to earn bonds
+      `"crystalsIcon"` — image in in the stats field "stats" for vehicle with the ability to earn bonds
+
 ______________________________
+
 ### XVM 8.5.7
 
   #### General
