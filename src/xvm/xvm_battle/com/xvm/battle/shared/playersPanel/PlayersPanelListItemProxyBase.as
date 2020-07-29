@@ -80,6 +80,8 @@ package com.xvm.battle.shared.playersPanel
 
         private static const MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED:String = "MAX_PLAYER_NAME_TEXT_WIDTH_CHANGED";
 
+        private static const CONTENT_NAME:String = "content";
+
         // PRIVATE STATIC VARS
 
         private static var s_maxPlayerNameTextWidthsLeft:Dictionary = new Dictionary();
@@ -188,6 +190,7 @@ package com.xvm.battle.shared.playersPanel
             DEFAULT_VEHICLE_LEVEL_X = ui.vehicleLevel.x;
             DEFAULT_FRAGS_WIDTH = ui.fragsTF.width;
             DEFAULT_VEHICLE_WIDTH = ui.vehicleTF.width;
+            // ui.badge.width equal to zero :(
             DEFAULT_BADGEICON_WIDTH = ui.badge.width;
             DEFAULT_PLAYERNAMECUT_WIDTH = ui.playerNameCutTF.width;
 
@@ -783,6 +786,11 @@ package com.xvm.battle.shared.playersPanel
                     if (int(ui.badge.width) != w)
                     {
                         ui.badge.width = w;
+                        var _content:DisplayObject = ui.badge.getChildByName(CONTENT_NAME);
+                        if(_content != null && _content.visible)
+                        {
+                            _content.x = Math.floor((w / ui.badge.scaleX - _content.width) * 0.5);
+                        }
                     }
                     break;
                 case ui.playerNameFullTF:
