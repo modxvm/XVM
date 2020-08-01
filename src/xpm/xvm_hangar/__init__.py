@@ -219,20 +219,12 @@ def _populate(base, self):
         return
     base(self)
 
-# hide display session statistics help hints
-def hideSessionStatsHint():
-    settingsCore = dependency.instance(ISettingsCore)
-    settingsCore.serverSettings.setOnceOnlyHintsSettings({'SessionStatsOpenBtnHint': 1})
-    settingsCore.serverSettings.setOnceOnlyHintsSettings({'SessionStatsSettingsBtnHint': 1})
-    settingsCore.serverSettings.setSessionStatsSettings({'OnlyOnceHintShownField': 1})
-    return
-
 # hide display session statistics button
 @overrideMethod(MessengerBar, '_MessengerBar__updateSessionStatsBtn')
 def updateSessionStatsBtn(base, self):
     if not config.get('hangar/sessionStatsButton/showButton', True):
         self.as_setSessionStatsButtonVisibleS(False)
-        hideSessionStatsHint()
+        self._MessengerBar__onSessionStatsBtnOnlyOnceHintHidden(True) # hide display session statistics help hints
         return
     base(self)
 
