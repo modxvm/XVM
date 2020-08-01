@@ -476,7 +476,7 @@ package com.xvm.lobby.ui.tankcarousel
             _setupStandardFieldScale(renderer.content.statsTF, cfg.fields.stats);
             _setupStandardTextField(renderer.content.statsTF, cfg.fields.stats, 0);
         }
-//
+
         private var orig_txtInfo_x:Number = NaN;
         private var orig_txtInfo_y:Number = NaN;
         private var orig_infoImg_x:Number = NaN;
@@ -543,6 +543,11 @@ package com.xvm.lobby.ui.tankcarousel
                 _setupStandardFieldScale(img, cfg.fields.infoImg);
                 img.x = orig_infoImg_x + cfg.fields.infoImg.dx;
                 img.y = orig_infoImg_y + cfg.fields.infoImg.dy;
+            }
+
+            if (!cfg.fields.crystalsBorder.enabled && item.vehicleCarouselVO.isEarnCrystals)
+            {
+                renderer.border.visible = true;
             }
         }
     }
