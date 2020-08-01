@@ -204,6 +204,7 @@ package com.xvm.types.dossier
         public var camouflageWinter:String;
         public var camouflageDesert:String;
         public var camouflageCount:int;
+        public var crystalEarned:Number;
 
         // extra
         public var elite:String;
