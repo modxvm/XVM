@@ -462,6 +462,7 @@ package com.xvm.lobby.ui.tankcarousel
         private function _setupStandardFieldCrystalsIcon():void
         {
             _setupStandardFieldAlpha(renderer.content.crystalsIcon, cfg.fields.crystalsIcon);
+            _setupStandardFieldScale(renderer.content.crystalsIcon, cfg.fields.crystalsIcon);
         }
 
         private function _setupStandardFieldStats():void
