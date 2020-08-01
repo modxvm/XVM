@@ -130,6 +130,7 @@ package com.xvm.types.dossier
                     marksOnGun = isNaN(vdossier.marksOnGun) || level < 5 ? null : Utils.getMarksOnGunText(vdossier.marksOnGun);
                     damageRating = level < 5 ? NaN : vdossier.damageRating;
                     c_damageRating = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_DAMAGERATING, damageRating, NaN, "#");
+                    crystalEarned = isNaN(vdossier.crystalEarned) || vdossier.crystalEarned == 0 ? NaN : vdossier.crystalEarned;
                 }
             }
         }

@@ -74,6 +74,7 @@ Legend:
 │ {{v.camouflageWinter}}     │ X │ X │ value 'winter' if winter camouflage installed, empty - if not
 │ {{v.camouflageDesert}}     │ X │ X │ value 'desert' if desert camouflage installed, empty - if not
 │ {{v.camouflageCount}}      │ X │ X │ count of camouflages installed
+│ {{v.crystalEarned}}        │ X │ X │ number of bonds earned (from weekly limit)
 │ {{v.equipment1}}           │ . │ . │ small icon of equipment in 1st slot
 │ {{v.equipment2}}           │ . │ . │ small icon of equipment in 2nd slot
 │ {{v.equipment3}}           │ . │ . │ small icon of equipment in 3rd slot

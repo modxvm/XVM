@@ -161,6 +161,7 @@ class _Dossier(object):
         winter_camo = outfit is not None and bool(outfit.hull.slotFor(GUI_ITEM_TYPE.CAMOUFLAGE).getItemCD())
         outfit = vehicle.getOutfit(SeasonType.DESERT)
         desert_camo = outfit is not None and bool(outfit.hull.slotFor(GUI_ITEM_TYPE.CAMOUFLAGE).getItemCD())
+        crystalEarned = self.itemsCache.items.stats.getWeeklyVehicleCrystals(vehCD)
 
         if self.__isVehicleDossierLoaded(accountDBID, vehCD):
             dossier = self.itemsCache.items.getVehicleDossier(vehCD, accountDBID)
@@ -209,7 +210,7 @@ class _Dossier(object):
                 #    wtr = -1
                 #else:
                 #    xwtr = vehinfo.calculateXvmScale('wtr', wtr)
-        res = self.__prepareVehicleResult(accountDBID, vehCD, dossier, xtdb, xte, wtr, xwtr, earnedXP, freeXP, xpToElite, rent, multiNation)
+        res = self.__prepareVehicleResult(accountDBID, vehCD, dossier, xtdb, xte, wtr, xwtr, earnedXP, freeXP, xpToElite, rent, multiNation, crystalEarned)
         self.__updateCamouflageResult(res, summer_camo, winter_camo, desert_camo)
         self._cache[cache_key] = res
         return res
@@ -337,7 +338,7 @@ class _Dossier(object):
 
         return res
 
-    def __prepareVehicleResult(self, accountDBID, vehCD, dossier, xtdb, xte, wtr, xwtr, earnedXP, freeXP, xpToElite, rent, multiNation):
+    def __prepareVehicleResult(self, accountDBID, vehCD, dossier, xtdb, xte, wtr, xwtr, earnedXP, freeXP, xpToElite, rent, multiNation, crystalEarned):
         res = self.__prepareCommonResult(accountDBID, dossier)
         res.update({
             'vehCD': vehCD,
@@ -351,7 +352,8 @@ class _Dossier(object):
             'rent': 'rent' if rent else None,
             'multiNation': 'multi' if multiNation else None,
             'marksOnGun': int(dossier.getRecordValue(_AB.TOTAL, 'marksOnGun')),
-            'damageRating': dossier.getRecordValue(_AB.TOTAL, 'damageRating') / 100.0})
+            'damageRating': dossier.getRecordValue(_AB.TOTAL, 'damageRating') / 100.0,
+            'crystalEarned': crystalEarned})
         return res
 
     def __updateCamouflageResult(self, res, summer_camo, winter_camo, desert_camo):

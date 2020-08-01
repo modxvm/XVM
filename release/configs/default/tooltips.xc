@@ -10,6 +10,9 @@
     // true - hide simplified vehicle parameters.
     // true - спрятать упрощенные ТТХ.
     "hideSimplifiedVehParams": true,
+    // true - hide block "Weekly earning limit".
+    // true - спрятать блок "Заработок бон".
+    "hideCrystalBlock": false,
     // true - hide text at bottom of tooltip showing quantity of used equipment, optional devices and crew.
     // true - спрятать текст внизу подсказки показывающий количество используемого оборудования, доп. модулей и экипаж.
     "hideBottomText": true,
