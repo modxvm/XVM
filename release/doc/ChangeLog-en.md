@@ -12,9 +12,17 @@
 
   #### Hangar
 
+  * Added option:
+
+      `"tooltips"/"hideCrystalBlock"` — hide block "Weekly earning limit"
+
   * Removed option:
 
       `"hangar"/"enableEquipAutoReturn"`
+
+  * Added macros:
+
+      `{{v.crystalEarned}}` — number of bonds earned (from weekly limit)
 
   #### Carousel
 

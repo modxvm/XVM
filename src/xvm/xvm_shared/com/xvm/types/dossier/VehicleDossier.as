@@ -24,6 +24,7 @@ package com.xvm.types.dossier
         public var xpToEliteLeft:Number;
         public var damageRating:Number;
         public var marksOnGun:Number;
+        public var crystalEarned:Number;
         public var rent:String = Values.EMPTY_STR;
         public var multiNation:String = Values.EMPTY_STR;
         public var camouflageSummer:String = Values.EMPTY_STR;

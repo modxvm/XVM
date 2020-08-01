@@ -105,11 +105,9 @@ def _ToolTip_onCreateTypedTooltip(base, self, type, *args):
     except Exception as ex:
         err(traceback.format_exc())
 
-    if args:
-        if not isinstance(args[0], basestring):
-            _createTooltip(self, lambda: _onCreateTypedTooltip_callback(base, self, type, *args))
-        elif XVM_TOOLTIPS.HIDE not in args[0]:
-            _createTooltip(self, lambda: _onCreateTypedTooltip_callback(base, self, type, *args))
+    if isinstance(args[0], basestring) and XVM_TOOLTIPS.HIDE in args[0]:
+        return
+    _createTooltip(self, lambda: _onCreateTypedTooltip_callback(base, self, type, *args))
 
 @overrideMethod(ToolTip, 'onHideTooltip')
 def _ToolTip_onHideTooltip(base, self, tooltipId):
@@ -167,6 +165,13 @@ def VehicleInfoTooltipData_packBlocks(base, self, *args, **kwargs):
 def SimplifiedStatsBlockConstructor_construct(base, self):
     if config.get('tooltips/hideSimplifiedVehParams'):
         return []
+    else:
+        return base(self)
+
+@overrideMethod(tooltips_vehicle.CrystalBlockConstructor, 'construct')
+def CrystalBlockConstructor_construct(base, self):
+    if config.get('tooltips/hideCrystalBlock'):
+        return [], None
     else:
         return base(self)
 
