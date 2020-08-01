@@ -73,7 +73,7 @@
       "favorite": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100 },
       // Vehicle mark with the ability to earn bonds.
       // Маркер техники с возможностью заработка бон.
-      "crystalsBorder": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100 },
+      "crystalsBorder": { "enabled": true, "alpha": 100 },
       // Image in in the stats field "stats" for vehicle with the ability to earn bonds.
       // Иконка в поле статистики "stats" для техники с возможностью заработка бон.
       "crystalsIcon": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100 },
