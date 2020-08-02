@@ -26,8 +26,11 @@
     // false - отключить отображение рекламы премиум техники (на фоне в ангаре).
     "showPromoPremVehicle": true,
     // true - show info windows with the battle results in the "Ranked battle" mode.
-    // true - показывать информационные окна результатов боя в режиме "Ранговый бой".
+    // true - показывать информационное окно результатов боя в режиме "Ранговый бой".
     "showRankedBattleResults": true,
+    // true - show info windows when receiving progressive decals.
+    // true - показывать информационное окно при получении этапной декали.
+    "showProgressiveDecalsWindow": true,
     // true - show widget "Daily Quests" in the hangar.
     // true - показывать виджет "Ежедневные задачи" в ангаре.
     "showDailyQuestWidget": true,
