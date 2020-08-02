@@ -15,6 +15,7 @@
 
   * Added option:
 
+      `"hangar"/"showProgressiveDecalsWindow"` — show info windows when receiving progressive decals
       `"tooltips"/"hideCrystalBlock"` — hide block "Weekly earning limit"
 
   * Removed option:

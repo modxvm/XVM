@@ -23,6 +23,7 @@ from messenger.gui.Scaleform.lobby_entry import LobbyEntry
 from HeroTank import HeroTank
 from vehicle_systems.tankStructure import ModelStates
 from gui.promo.hangar_teaser_widget import TeaserViewer
+from gui.game_control.AwardController import ProgressiveItemsRewardHandler
 from gui.game_control.PromoController import PromoController
 from skeletons.account_helpers.settings_core import ISettingsCore
 from gui.Scaleform.daapi.view.lobby.messengerBar.messenger_bar import MessengerBar
@@ -241,6 +242,13 @@ def shouldHide(base, self):
     if not config.get('hangar/showDailyQuestWidget', True):
         return True
     base(self)
+
+# hide display pop-up window when receiving progressive decals
+@overrideMethod(ProgressiveItemsRewardHandler, '_showAward')
+def _showAward(base, self, ctx):
+    if not config.get('hangar/showProgressiveDecalsWindow', True):
+        return
+    base(self, ctx)
 
 # hide display banner - World of Tanks' 10th Anniversary
 @overrideMethod(Hangar, '_Hangar__updateTenYearsCountdownEntryPointVisibility')
