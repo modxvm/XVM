@@ -367,8 +367,8 @@ class Battle(object):
                     vInfoVO = arenaDP.getVehicleInfo(vehicleID)
                     if vInfoVO:
                         data['maxHealth'] = vInfoVO.vehicleType.maxHealth
-                    elif entity and hasattr(entity, 'typeDescriptor'):
-                        data['maxHealth'] = entity.typeDescriptor.maxHealth
+                    elif entity and hasattr(entity, 'maxHealth'):
+                        data['maxHealth'] = entity.maxHealth
 
                 if targets & INV.MARKS_ON_GUN:
                     if entity and hasattr(entity, 'publicInfo'):
