@@ -235,6 +235,12 @@ def canDisplayHelpHint(base, self, typeDescriptor):
         return False
     base(self, typeDescriptor)
 
+@overrideMethod(PreBattleHintPlugin, '_PreBattleHintPlugin__canDisplayBattleCommunicationHint')
+def canDisplayBattleCommunicationHint(base, self):
+    if config.get('battle/battleHint/hideBattleCommunication'):
+        return False
+    base(self)
+
 @overrideMethod(RadarHintPlugin, '_RadarHintPlugin__updateHint')
 def updateHint(base, self):
     if config.get('battle/battleHint/hideRadarHint'):

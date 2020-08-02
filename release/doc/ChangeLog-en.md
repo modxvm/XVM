@@ -6,8 +6,9 @@
 
   #### Battle
 
-  * Added option:
+  * Added options:
 
+      `"battle"/"battleHint"/"hideBattleCommunication"` — hide the hint about new battle communication
       `"battle"/"battleHint"/"hideRadarHint"` — hide the tips about radar activation ("Steel Hunter" mode)
 
   #### Hangar
