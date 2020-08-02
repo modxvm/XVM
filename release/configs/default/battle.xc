@@ -41,6 +41,9 @@
       // true - hide the hint of the transition to the window of exploring the features of the machine (for wheeled vehicles).
       // true - скрыть подсказку перехода к окну знакомства с особенностями машины (для колесной техники).
       "hideHelpScreen": false,
+      // true - hide the hint about new battle communication.
+      // true - скрыть подсказку о новой коммуникации в бою.
+      "hideBattleCommunication": false,
       // true - hide the tips about radar activation ("Steel Hunter" mode).
       // true - скрыть подсказку активации радара (режим "Стальной охотник").
       "hideRadarHint": false
