@@ -348,6 +348,8 @@ class Battle(object):
         try:
             data = {}
 
+            arenaDP = self.sessionProvider.getArenaDP()
+
             if targets & INV.SPOTTED_STATUS:
                 data['spottedStatus'] = self.getSpottedStatus(vehicleID)
 
@@ -362,7 +364,10 @@ class Battle(object):
                         data['curHealth'] = entity.health
 
                 if targets & INV.MAX_HEALTH:
-                    if entity and hasattr(entity, 'typeDescriptor'):
+                    vInfoVO = arenaDP.getVehicleInfo(vehicleID)
+                    if vInfoVO:
+                        data['maxHealth'] = vInfoVO.vehicleType.maxHealth
+                    elif entity and hasattr(entity, 'typeDescriptor'):
                         data['maxHealth'] = entity.typeDescriptor.maxHealth
 
                 if targets & INV.MARKS_ON_GUN:
@@ -370,7 +375,6 @@ class Battle(object):
                         data['marksOnGun'] = entity.publicInfo.marksOnGun
 
             if targets & (INV.ALL_VINFO | INV.ALL_VSTATS):
-                arenaDP = self.sessionProvider.getArenaDP()
                 if targets & INV.ALL_VINFO:
                     vInfoVO = arenaDP.getVehicleInfo(vehicleID)
                 if targets & INV.ALL_VSTATS:
