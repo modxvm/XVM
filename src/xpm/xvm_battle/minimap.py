@@ -312,8 +312,11 @@ class _Minimap(object):
     def init(self, minimapComponent):
         self.initialized = True
         arena = avatar_getter.getArena()
-        self.guiType = arena.guiType
-        self.battleType = arena.bonusType
+        if arena is not None:
+            self.guiType = arena.guiType
+            self.battleType = arena.bonusType
+        else:
+            warn('_Minimap::init(): arena does not exists')
         self.minimapComponent = minimapComponent
         self.entrySymbols = {}
 
