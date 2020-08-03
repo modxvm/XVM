@@ -19,7 +19,7 @@ package com.xvm.battle.shared.teamBasesPanel
         private var DEFAULT_CAPTURE_BAR_LINKAGE:String = Linkages.CAPTURE_BAR_LINKAGE;
         private var XVM_CAPTURE_BAR_LINKAGE:String = getQualifiedClassName(UI_TeamCaptureBar);
         private var DEFAULT_Y:Number;
-/* TODO:1.10.0
+
         public function UI_teamBasesPanel()
         {
             //Logger.add("UI_teamBasesPanel()");
@@ -32,11 +32,13 @@ package com.xvm.battle.shared.teamBasesPanel
         {
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
             Xfw.addCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, setup);
+            /* TODO:1.10.0
             if (BattleXvmView.battlePageBattleTicker)
             {
                 BattleXvmView.battlePageBattleTicker.addEventListener(BattleTickerEvent.SHOW, setup);
                 BattleXvmView.battlePageBattleTicker.addEventListener(BattleTickerEvent.HIDE, setup);
             }
+            */
         }
 
         override protected function configUI():void
@@ -50,11 +52,13 @@ package com.xvm.battle.shared.teamBasesPanel
         {
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
             Xfw.removeCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, setup);
+            /* TODO:1.10.0
             if (BattleXvmView.battlePageBattleTicker)
             {
                 BattleXvmView.battlePageBattleTicker.removeEventListener(BattleTickerEvent.SHOW, setup);
                 BattleXvmView.battlePageBattleTicker.removeEventListener(BattleTickerEvent.HIDE, setup);
             }
+            */
             super.onDispose();
         }
 
@@ -63,7 +67,7 @@ package com.xvm.battle.shared.teamBasesPanel
             Xvm.dispatchEvent(new BooleanEvent(BattleEvents.TEAM_BASES_PANEL_VISIBLE, value));
             super.setCompVisible(value);
         }
-*/
+
         // PRIVATE
 
         private function setup():void
