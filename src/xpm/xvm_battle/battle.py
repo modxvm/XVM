@@ -323,13 +323,13 @@ class Battle(object):
                 self.is_moving = is_moving
                 as_xfw_cmd(XVM_BATTLE_COMMAND.AS_MOVING_STATE_CHANGED, is_moving)
 
-    def onOptionalDeviceAdded(self, intCD, descriptor, isOn):
-        if intCD == INT_CD.STEREOSCOPE:
-            as_xfw_cmd(XVM_BATTLE_COMMAND.AS_STEREOSCOPE_TOGGLED, isOn)
+    def onOptionalDeviceAdded(self, optDeviceInBattle):
+        if optDeviceInBattle.getIntCD() == INT_CD.STEREOSCOPE:
+            as_xfw_cmd(XVM_BATTLE_COMMAND.AS_STEREOSCOPE_TOGGLED, bool(optDeviceInBattle.getStatus()))
 
-    def onOptionalDeviceUpdated(self, intCD, isOn):
-        if intCD == INT_CD.STEREOSCOPE:
-            as_xfw_cmd(XVM_BATTLE_COMMAND.AS_STEREOSCOPE_TOGGLED, isOn)
+    def onOptionalDeviceUpdated(self, optDeviceInBattle):
+        if optDeviceInBattle.getIntCD() == INT_CD.STEREOSCOPE:
+            as_xfw_cmd(XVM_BATTLE_COMMAND.AS_STEREOSCOPE_TOGGLED, bool(optDeviceInBattle.getStatus()))
 
     def onVehicleHealthChanged(self, vehicleID, newHealth, attackerID, attackReasonID):
         inv = INV.CUR_HEALTH
