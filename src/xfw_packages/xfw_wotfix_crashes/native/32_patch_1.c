@@ -25,11 +25,11 @@
 static const char* function_signature = "\x55\x8B\xEC\x83\xEC\x18\x53\x8B\xD9\x56\x57\x8D\x7B\x08\x89\x5D";
 static const char* function_signature_mask = "xxxxxxxxxxxxxxxx";
 
-static const DWORD replace_addr_offset = 0x180;
+static const DWORD replace_addr_offset = 0x1A0;
 static const char replace_addr_test = 0x8B;
 static DWORD* replace_addr = NULL;
 
-static const DWORD return_addr_offset = 0x18E;
+static const DWORD return_addr_offset = 0x1AE;
 static const char return_addr_test = 0x47;
 static DWORD* return_addr = NULL;
 

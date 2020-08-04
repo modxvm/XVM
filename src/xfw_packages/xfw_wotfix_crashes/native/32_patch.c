@@ -5,7 +5,7 @@ extern int bugfix4_apply();
 
 
 int patch_get_count() {
-    return 4;
+    return 2;
 }
 
 int patch_apply(int i) {
@@ -16,10 +16,10 @@ int patch_apply(int i) {
         result = bugfix1_apply();
         break;
     case 2:
-        result = bugfix2_apply();
+        result = bugfix3_apply();
         break;
     case 3:
-        result = bugfix3_apply();
+        result = bugfix2_apply();
         break;
     case 4:
         result = bugfix4_apply();
