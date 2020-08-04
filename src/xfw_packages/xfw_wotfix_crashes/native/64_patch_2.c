@@ -21,15 +21,15 @@
 #include "all_common.h"
 #include "64_common.h"
 
-//IDA search: 48 85 D2 0F 84 E1 00 00 00 56 48 83 EC 20 48 8B
-static const char* function_signature = "\x48\x85\xD2\x0F\x84\xE1\x00\x00\x00\x56\x48\x83\xEC\x20\x48\x8B";
-static const char* function_signature_mask = "xxxxxxxxxxxxxxxx";
+//IDA search: 40 56 41 54 41 55 48 83 EC 30 4C 8B A1 E8 4C 00 00
+static const char* function_signature = "\x40\x56\x41\x54\x41\x55\x48\x83\xEC\x30\x4C\x8B\xA1\xE8\x4C\x00\x00";
+static const char* function_signature_mask = "xxxxxxxxxxxxxxxxx";
 
-static const DWORD replace_addr_offset = 0x3A;
+static const DWORD replace_addr_offset = 0x10E;
 static const char replace_addr_test = 0x48;
 
-static const DWORD return_addr_offset = 0x77;
-static const char return_addr_test = 0x48;
+static const DWORD return_addr_offset = 0x126;
+static const char return_addr_test = 0x75;
 
 //ASM
 extern size_t patch_2_replaceaddr;
