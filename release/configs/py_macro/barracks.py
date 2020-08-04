@@ -9,7 +9,7 @@ from xfw import *
 
 # sorting in the barracks
 @overrideMethod(barrack.Barracks, '_Barracks__showActiveTankmen')
-def __showActiveTankmen(base, self, criteria):
+def __showActiveTankmen(base, self, criteria, vehicleCriteria):
 
     def keySorted(_tankman):
         # vehicle = self.itemsCache.items.getVehicle(_tankman.vehicleInvID)
