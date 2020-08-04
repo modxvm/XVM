@@ -116,16 +116,16 @@ package net.wg.gui.battle.views.radialMenu
             }
         }
 
-        override protected function show(param1:String, param2:Array, param3:Array) : void
+        override protected function show(param1:Number, param2:Number, param3:String, param4:Array, param5:Array) : void
         {
             this._isAction = false;
-            this._state = param1;
-            if(RADIAL_MENU_CONSTS.GREEN_TARGET_STATES.indexOf(param1) >= 0)
+            this._state = param3;
+            if(RADIAL_MENU_CONSTS.GREEN_TARGET_STATES.indexOf(param3) >= 0)
             {
                 this._color = RADIAL_MENU_CONSTS.GREEN_STATE;
-                this._backgroundColor = param1 == RADIAL_MENU_CONSTS.TARGET_STATE_ALLY?RADIAL_MENU_CONSTS.GREEN_STATE:RADIAL_MENU_CONSTS.GREEN_STATE_2;
+                this._backgroundColor = param3 == RADIAL_MENU_CONSTS.TARGET_STATE_ALLY?RADIAL_MENU_CONSTS.GREEN_STATE:RADIAL_MENU_CONSTS.GREEN_STATE_2;
             }
-            else if(RADIAL_MENU_CONSTS.RED_TARGET_STATES.indexOf(param1) >= 0)
+            else if(RADIAL_MENU_CONSTS.RED_TARGET_STATES.indexOf(param3) >= 0)
             {
                 this._color = this._backgroundColor = this._isColorBlind?RADIAL_MENU_CONSTS.PURPLE_STATE:RADIAL_MENU_CONSTS.RED_STATE;
             }
@@ -138,10 +138,10 @@ package net.wg.gui.battle.views.radialMenu
             this.circleBackground.gotoAndStop(this._backgroundColor);
             App.utils.scheduler.cancelTask(this.internalHide);
             App.utils.scheduler.cancelTask(this.hideButton);
-            this.updateData(param2);
-            this.internalShow();
-            x = param3[0];
-            y = param3[1];
+            this.updateData(param4);
+            this.internalShow(param1,param2);
+            x = param5[0];
+            y = param5[1];
         }
 
         override protected function draw() : void
@@ -293,19 +293,19 @@ package net.wg.gui.battle.views.radialMenu
             param1.selected = false;
         }
 
-        private function internalShow() : void
+        private function internalShow(param1:Number, param2:Number) : void
         {
             this._scaleKoefX = 1 / App.stage.scaleX;
             this._scaleKoefY = 1 / App.stage.scaleY;
             this._hideWithAnimationState = false;
             visible = true;
             this.background.visible = true;
-            var _loc1_:uint = 0;
-            while(_loc1_ < this._buttonsCount)
+            var _loc3_:uint = 0;
+            while(_loc3_ < this._buttonsCount)
             {
-                this.cancelButton(this._buttons[_loc1_]);
-                this._buttons[_loc1_].visible = this._buttons[_loc1_].buttonVisualState != RADIAL_MENU_CONSTS.EMPTY_BUTTON_STATE;
-                _loc1_++;
+                this.cancelButton(this._buttons[_loc3_]);
+                this._buttons[_loc3_].visible = this._buttons[_loc3_].buttonVisualState != RADIAL_MENU_CONSTS.EMPTY_BUTTON_STATE;
+                _loc3_++;
             }
             if(App.stage)
             {
@@ -317,7 +317,7 @@ package net.wg.gui.battle.views.radialMenu
             this._mouseOffset.x = 0;
             this._mouseOffset.y = 0;
             this._wheelPosition = -1;
-            this.checkButtonSelectionWithMouse();
+            this.checkButtonSelectionWithMouse(param1,param2);
         }
 
         private function hideWithAnimation() : void
@@ -455,68 +455,68 @@ package net.wg.gui.battle.views.radialMenu
 
         private function onMouseMoveHandler(param1:MouseEvent) : void
         {
-            this.checkButtonSelectionWithMouse();
+            this.checkButtonSelectionWithMouse(this.mouseX,this.mouseY);
         }
 
-        private function checkButtonSelectionWithMouse() : void
+        private function checkButtonSelectionWithMouse(param1:Number, param2:Number) : void
         {
-            var _loc1_:uint = 0;
-            var _loc2_:Point = null;
-            var _loc3_:* = 0;
-            var _loc4_:* = 0;
-            var _loc5_:* = NaN;
-            var _loc6_:* = NaN;
+            var _loc3_:uint = 0;
+            var _loc4_:Point = null;
+            var _loc5_:* = 0;
+            var _loc6_:* = 0;
             var _loc7_:* = NaN;
             var _loc8_:* = NaN;
             var _loc9_:* = NaN;
-            var _loc10_:RadialButton = null;
+            var _loc10_:* = NaN;
+            var _loc11_:* = NaN;
+            var _loc12_:RadialButton = null;
             if(this.visible && !this._isAction)
             {
                 this._wheelPosition = -1;
-                _loc1_ = 0;
-                _loc2_ = new Point(this.mouseX,this.mouseY);
-                _loc3_ = _loc2_.x - this._mouseOffset.x;
-                _loc4_ = _loc2_.y - this._mouseOffset.y;
-                _loc5_ = Math.sqrt(_loc3_ * _loc3_ + _loc4_ * _loc4_);
-                if(_loc5_ > INTERNAL_MENU_RADIUS)
+                _loc3_ = 0;
+                _loc4_ = new Point(param1,param2);
+                _loc5_ = _loc4_.x - this._mouseOffset.x;
+                _loc6_ = _loc4_.y - this._mouseOffset.y;
+                _loc7_ = Math.sqrt(_loc5_ * _loc5_ + _loc6_ * _loc6_);
+                if(_loc7_ > INTERNAL_MENU_RADIUS)
                 {
-                    _loc7_ = Math.atan2(_loc4_,_loc3_);
-                    _loc8_ = POINT_RADIUS * Math.cos(_loc7_);
-                    _loc9_ = POINT_RADIUS * Math.sin(_loc7_);
-                    _loc2_.x = _loc8_;
-                    _loc2_.y = _loc9_;
-                    if(_loc5_ > POINT_RADIUS)
+                    _loc9_ = Math.atan2(_loc6_,_loc5_);
+                    _loc10_ = POINT_RADIUS * Math.cos(_loc9_);
+                    _loc11_ = POINT_RADIUS * Math.sin(_loc9_);
+                    _loc4_.x = _loc10_;
+                    _loc4_.y = _loc11_;
+                    if(_loc7_ > POINT_RADIUS)
                     {
-                        this._mouseOffset.x = this.mouseX - _loc8_;
-                        this._mouseOffset.y = this.mouseY - _loc9_;
+                        this._mouseOffset.x = this.mouseX - _loc10_;
+                        this._mouseOffset.y = this.mouseY - _loc11_;
                     }
-                    if(_loc5_ > INTERNAL_MENU_RADIUS)
+                    if(_loc7_ > INTERNAL_MENU_RADIUS)
                     {
-                        _loc2_ = this.localToGlobal(_loc2_);
-                        while(_loc1_ < this._buttonsCount)
+                        _loc4_ = this.localToGlobal(_loc4_);
+                        while(_loc3_ < this._buttonsCount)
                         {
-                            _loc10_ = this._buttons[_loc1_];
-                            if(_loc10_.hitAreaSpr.hitTestPoint(_loc2_.x * this._scaleKoefX,_loc2_.y * this._scaleKoefY,true))
+                            _loc12_ = this._buttons[_loc3_];
+                            if(_loc12_.hitAreaSpr.hitTestPoint(_loc4_.x * this._scaleKoefX,_loc4_.y * this._scaleKoefY,true))
                             {
-                                this.selectButton(_loc10_);
+                                this.selectButton(_loc12_);
                             }
                             else
                             {
-                                this.unSelectButton(_loc10_);
+                                this.unSelectButton(_loc12_);
                             }
-                            _loc1_++;
+                            _loc3_++;
                         }
                     }
-                    _loc6_ = Math.atan2(_loc4_,_loc3_) * 180 / Math.PI;
-                    this.arrowElement.rotation = _loc6_;
+                    _loc8_ = Math.atan2(_loc6_,_loc5_) * 180 / Math.PI;
+                    this.arrowElement.rotation = _loc8_;
                     this.arrowElement.visible = this.visible;
                 }
                 else
                 {
-                    while(_loc1_ < this._buttonsCount)
+                    while(_loc3_ < this._buttonsCount)
                     {
-                        this.unSelectButton(this._buttons[_loc1_]);
-                        _loc1_++;
+                        this.unSelectButton(this._buttons[_loc3_]);
+                        _loc3_++;
                     }
                     this.arrowElement.visible = false;
                     return;

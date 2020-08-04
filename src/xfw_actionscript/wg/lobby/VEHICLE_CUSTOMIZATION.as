@@ -1921,6 +1921,10 @@ package
 
         public static const CAMOUFLAGE_APAC_HUNGRY_GHOST_DESCRIPTION:String = "#vehicle_customization:camouflage/apac_hungry_ghost/description";
 
+        public static const CAMOUFLAGE_TWITCH_AUGUST_2020_LABEL:String = "#vehicle_customization:camouflage/twitch_august_2020/label";
+
+        public static const CAMOUFLAGE_TWITCH_AUGUST_2020_DESCRIPTION:String = "#vehicle_customization:camouflage/twitch_august_2020/description";
+
         public static const EMBLEM:String = "#vehicle_customization:emblem";
 
         public static const EMBLEM_CLAN_CONTENT:String = "#vehicle_customization:emblem/clan_content";
@@ -7164,6 +7168,10 @@ package
         public static const SPECIAL_STYLE_10YEARS_STRV_DESC:String = "#vehicle_customization:special_style/10years_strv_desc";
 
         public static const SPECIAL_STYLE_10YEARS_STRV_DESC_LONG:String = "#vehicle_customization:special_style/10years_strv_desc/long";
+
+        public static const SPECIAL_STYLE_TWITCH_AUGUST_2020:String = "#vehicle_customization:special_style/twitch_august_2020";
+
+        public static const SPECIAL_STYLE_TWITCH_AUGUST_2020_DESC:String = "#vehicle_customization:special_style/twitch_august_2020_desc";
 
         public static const SPECIAL_STYLE_APAC_HUNGRY_GHOST:String = "#vehicle_customization:special_style/apac_hungry_ghost";
 
