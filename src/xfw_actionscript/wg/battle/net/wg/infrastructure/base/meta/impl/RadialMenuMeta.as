@@ -73,20 +73,20 @@ package net.wg.infrastructure.base.meta.impl
             }
         }
 
-        public final function as_show(param1:String, param2:Array, param3:Array) : void
+        public final function as_show(param1:Number, param2:Number, param3:String, param4:Array, param5:Array) : void
         {
-            var _loc4_:Array = this._array1;
-            this._array1 = param2;
-            var _loc5_:Array = this._array2;
-            this._array2 = param3;
-            this.show(param1,this._array1,this._array2);
-            if(_loc4_)
+            var _loc6_:Array = this._array1;
+            this._array1 = param4;
+            var _loc7_:Array = this._array2;
+            this._array2 = param5;
+            this.show(param1,param2,param3,this._array1,this._array2);
+            if(_loc6_)
             {
-                _loc4_.splice(0,_loc4_.length);
+                _loc6_.splice(0,_loc6_.length);
             }
-            if(_loc5_)
+            if(_loc7_)
             {
-                _loc5_.splice(0,_loc5_.length);
+                _loc7_.splice(0,_loc7_.length);
             }
         }
 
@@ -97,11 +97,11 @@ package net.wg.infrastructure.base.meta.impl
             throw new AbstractException(_loc2_);
         }
 
-        protected function show(param1:String, param2:Array, param3:Array) : void
+        protected function show(param1:Number, param2:Number, param3:String, param4:Array, param5:Array) : void
         {
-            var _loc4_:String = "as_show" + Errors.ABSTRACT_INVOKE;
-            DebugUtils.LOG_ERROR(_loc4_);
-            throw new AbstractException(_loc4_);
+            var _loc6_:String = "as_show" + Errors.ABSTRACT_INVOKE;
+            DebugUtils.LOG_ERROR(_loc6_);
+            throw new AbstractException(_loc6_);
         }
     }
 }
