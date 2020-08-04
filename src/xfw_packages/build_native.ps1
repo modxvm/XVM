@@ -20,10 +20,10 @@ Push-Location $PSScriptRoot
 Import-Module ../../build_lib/library.psm1 -Force -DisableNameChecking
 
 #version
-$version_str = "8.3.0.0"
+$version_str = "8.6.0.0"
 $version = $version_str -replace "\.",","
 
-$xfwnative_url="https://ci.appveyor.com/api/buildjobs/llrln8cg7dplif9l/artifacts/~output%2Fdeploy%2Fcom.modxvm.xfw.native_2.0.0-devel.zip"
+$xfwnative_url="https://gitlab.com/xvm/xfw/xfw.native/uploads/8babfbe9fe26db9effee2f11c599f6b5/com.modxvm.xfw.native_2.0.9-devel.zip"
 
 $projects_32=@(
     "xfw_filewatcher"

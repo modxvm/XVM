@@ -2,7 +2,7 @@ extern int patch_1_apply();
 extern int patch_2_apply();
 
 int patch_get_count() {
-    return 2;
+    return 1;
 }
 
 int patch_apply(int i) {

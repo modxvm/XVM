@@ -25,10 +25,10 @@
 static const char* function_signature = "\x48\x89\x5C\x24\x08\x48\x89\x6C\x24\x10\x48\x89\x74\x24\x18\x57\x41\x54\x41\x55\x41\x56\x41\x57\x48\x83\xEC\x20\x48\xFF\xFF\xFF\xFF\xFF\xFF\x4C\x8B\xF1\x48\x89\x01\x48\x8D\x59\x10";
 static const char* function_signature_mask = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx??????xxxxxxxxxx";
 
-static const DWORD replace_addr_offset = 0x1D0;
+static const DWORD replace_addr_offset = 0x200;
 static const char replace_addr_test = 0x49;
 
-static const DWORD return_addr_offset = 0x1E9;
+static const DWORD return_addr_offset = 0x219;
 static const char return_addr_test = 0x45;
 
 //ASM
