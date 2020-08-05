@@ -1,32 +1,32 @@
 ﻿{
     "RU": {
-        "ver": "8.5.4",
-        "wot": "1.9.1.1",
-        "message": " • World of Tanks 1.9.1.1\nСкачать на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
+        "ver": "8.6.0",
+        "wot": "1.10.0.0",
+        "message": " • World of Tanks 1.10.0.0\nСкачать на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
     },
     "EU": {
-        "ver": "8.5.4",
-        "wot": "1.9.1.1",
-        "message": " • World of Tanks 1.9.1.1\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
+        "ver": "8.6.0",
+        "wot": "1.10.0.0",
+        "message": " • World of Tanks 1.10.0.0\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
     },
     "NA": {
-        "ver": "8.5.4",
-        "wot": "1.9.1.1",
-        "message": " • World of Tanks 1.9.1.1\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
+        "ver": "8.6.0",
+        "wot": "1.10.0.0",
+        "message": " • World of Tanks 1.10.0.0\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
     },
     "ASIA": {
-        "ver": "8.5.4",
-        "wot": "1.9.1.1",
-        "message": " • World of Tanks 1.9.1.1\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
+        "ver": "8.6.0",
+        "wot": "1.10.0.0",
+        "message": " • World of Tanks 1.10.0.0\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
     },
     "CN": {
-        "ver": "7.4.1",
-        "wot": "0.9.22.0.1",
-        "message": " • World of Tanks 1.9.1.1\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
+        "ver": "8.6.0",
+        "wot": "1.10.0.0",
+        "message": " • World of Tanks 1.10.0.0\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
     },
     "CT": {
-        "ver": "8.5.4",
-        "wot": "1.9.1.1",
-        "message": " • World of Tanks 1.9.1.1\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
+        "ver": "8.6.0",
+        "wot": "1.10.0.0",
+        "message": " • World of Tanks 1.10.0.0\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
     }
 }
