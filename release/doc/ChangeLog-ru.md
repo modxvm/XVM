@@ -4,7 +4,7 @@
 
   * Восстановлена функциональность опции:
 
-      `"hangar"/"masteryMarkInTechTree"`
+    * `"hangar"/"masteryMarkInTechTree"`
 
 ______________________________
 
@@ -18,30 +18,30 @@ ______________________________
 
   * Добавлены опции:
 
-      `"battle"/"battleHint"/"hideBattleCommunication"` — скрыть подсказку о новой коммуникации в бою
-      `"battle"/"battleHint"/"hideRadarHint"` — скрыть подсказку активации радара (режим "Стальной охотник")
+    * `"battle"/"battleHint"/"hideBattleCommunication"` — скрыть подсказку о новой коммуникации в бою
+    * `"battle"/"battleHint"/"hideRadarHint"` — скрыть подсказку активации радара (режим "Стальной охотник")
 
   #### Ангар
 
   * Добавлены опции:
 
-      `"hangar"/"showProgressiveDecalsWindow"` — показывать информационное окно при получении этапной декали
-      `"tooltips"/"hideCrystalBlock"` — спрятать блок "Заработок бон"
+    * `"hangar"/"showProgressiveDecalsWindow"` — показывать информационное окно при получении этапной декали
+    * `"tooltips"/"hideCrystalBlock"` — спрятать блок "Заработок бон"
 
   * Удалена опция:
 
-      `"hangar"/"enableEquipAutoReturn"`
+    * `"hangar"/"enableEquipAutoReturn"`
 
   * Добавлен макрос:
 
-      `{{v.crystalEarned}}` — количество заработанных бон (из недельного лимита)
+    * `{{v.crystalEarned}}` — количество заработанных бон (из недельного лимита)
 
   #### Карусель техники
 
-  * Добавлены опции в секциях "carousel"/"normal"/"fields" и "carousel"/"small"/"fields":
+  * Добавлены опции в секциях `"carousel"/"normal"/"fields"` и `"carousel"/"small"/"fields"`:
 
-      `"crystalsBorder"` — маркер техники с возможностью заработка бон
-      `"crystalsIcon"` — иконка в поле статистики "stats" для техники с возможностью заработка бон
+    * `"crystalsBorder"` — маркер техники с возможностью заработка бон
+    * `"crystalsIcon"` — иконка в поле статистики "stats" для техники с возможностью заработка бон
 
 ______________________________
 

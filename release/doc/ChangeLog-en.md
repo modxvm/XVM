@@ -4,7 +4,7 @@
 
   * Restored functionality of the option:
 
-      `"hangar"/"masteryMarkInTechTree"`
+    * `"hangar"/"masteryMarkInTechTree"`
 
 ______________________________
 
@@ -18,30 +18,30 @@ ______________________________
 
   * Added options:
 
-      `"battle"/"battleHint"/"hideBattleCommunication"` — hide the hint about new battle communication
-      `"battle"/"battleHint"/"hideRadarHint"` — hide the tips about radar activation ("Steel Hunter" mode)
+    * `"battle"/"battleHint"/"hideBattleCommunication"` — hide the hint about new battle communication
+    * `"battle"/"battleHint"/"hideRadarHint"` — hide the tips about radar activation ("Steel Hunter" mode)
 
   #### Hangar
 
   * Added options:
 
-      `"hangar"/"showProgressiveDecalsWindow"` — show info windows when receiving progressive decals
-      `"tooltips"/"hideCrystalBlock"` — hide block "Weekly earning limit"
+    * `"hangar"/"showProgressiveDecalsWindow"` — show info windows when receiving progressive decals
+    * `"tooltips"/"hideCrystalBlock"` — hide block "Weekly earning limit"
 
   * Removed option:
 
-      `"hangar"/"enableEquipAutoReturn"`
+    * `"hangar"/"enableEquipAutoReturn"`
 
   * Added macros:
 
-      `{{v.crystalEarned}}` — number of bonds earned (from weekly limit)
+    * `{{v.crystalEarned}}` — number of bonds earned (from weekly limit)
 
   #### Carousel
 
-  * Added options in the "carousel"/"normal"/"fields" and "carousel"/"small"/"fields" sections:
+  * Added options in the `"carousel"/"normal"/"fields"` and `"carousel"/"small"/"fields"` sections:
 
-      `"crystalsBorder"` — vehicle mark with the ability to earn bonds
-      `"crystalsIcon"` — image in in the stats field "stats" for vehicle with the ability to earn bonds
+    * `"crystalsBorder"` — vehicle mark with the ability to earn bonds
+    * `"crystalsIcon"` — image in in the stats field "stats" for vehicle with the ability to earn bonds
 
 ______________________________
 
