@@ -355,7 +355,7 @@ package net.wg.gui.lobby.techtree.helpers
             }
             var _loc7_:Point = new Point(_loc4_[0],_loc4_[1]);
             var _loc13_:int = int.MAX_VALUE;
-            var _loc14_:Vector.<RSetLineInfo> = new Vector.<NTGraphics>();
+            var _loc14_:Vector.<RSetLineInfo> = null;
             var _loc15_:int = DEFAULT_LINE_THICKNESS;
             var _loc16_:uint = ColorIndex.DEFAULT;
             _loc11_ = 0;
