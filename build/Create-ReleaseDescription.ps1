@@ -1,11 +1,58 @@
 ﻿$PSDefaultParameterValues['*:Encoding'] = 'utf8'
 Set-Location $PSScriptRoot
 
-$header_en = '<a href=\"https://gitlab.com/xvm/xvm/raw/master/release/doc/ChangeLog-en.md\">Full ChangeLog</a><br/><br/>'
-$header_ru = '<a href=\"https://gitlab.com/xvm/xvm/raw/master/release/doc/ChangeLog-ru.md\">Полный список изменений</a><br/><br/>'
+function Get-LastVersionInfoHtml($filename) {
+    $output = ((Get-Content -Path $filename -Raw) -replace '\r','' -split '\n\n### XVM ')[0]
 
-$changelog_en = ((Get-Content -Path ../release/doc/ChangeLog-en.md -Raw) -replace '\r','' -split '\n\n### XVM ')[0]
-$changelog_ru = ((Get-Content -Path ../release/doc/ChangeLog-ru.md -Raw) -replace '\r','' -split '\n\n### XVM ')[0]
+    #skip empty lines
+    $output = $output -replace '\r','' -replace '\n\n',"`n" -replace '______________________________',''
+
+    #fix version header
+    $output = $output -replace '^\s*?###\s?(.*)','<h3>$1</h3>'
+
+    #fix group header
+    $output = $output -replace '\n\s*?####\s*(.*)',"`n<h4>`$1</h4>"
+
+    #add first level ul
+    $output = $output -replace '(?ms)</h4>(.*?)<h4>',"</h4>`n<ul>`$1</ul>`n<h4>"
+
+    #add first level li
+    $output = $output -replace '  \* (.*)','    <li>$1</li>'
+
+    #add second level ul li
+    $output = $output -replace '      (.*)',"    <ul>`n       <li>`$1</li>`n    </ul>"
+    $output = $output -replace '\n\s+</ul>\n\s+<ul>',""
+
+    #replace `` with <b></b>
+    $output = $output -replace '`(.*?)`','<code>$1</code>'
+
+    #add ending /ul
+    $output += "</ul>"
+
+    return $output
+}
+
+function Get-LastVersionInfoTxt($filename) {
+    $output = ((Get-Content -Path $filename -Raw) -replace '\r','' -split '\n\n### XVM ')[0]
+
+    #skip empty lines
+    $output = $output -replace '\r','' -replace '`','' -replace '\n\n',"`n"
+
+    #fix version header
+    $output = $output -replace '### XVM','XVM'
+
+    #fix group header
+    $output = $output -replace '  ####','* '
+    $output = $output -replace '      ','    * '
+    
+    return $output
+}
+
+$changelog_en = Get-LastVersionInfoHtml "../release/doc/ChangeLog-en.md"
+$changelog_ru = Get-LastVersionInfoHtml "../release/doc/ChangeLog-ru.md"
+
+Write-Output $changelog_en
+#Write-Output $changelog_ru
 
 (Get-Content -Path ../build/xvm-build.conf -Raw) -match '\nexport XVMBUILD_WOT_VERSION=\$\{TARGET_VERSION:-(.*?)\}' | Out-Null
 $version_wot = $Matches[1]
@@ -17,8 +64,8 @@ $obj = @{
     title = "XVM "+$version_xvm
     type = "zip archive"
     wot_version = $version_wot
-    descr_en = $header_en + ($changelog_en -replace "\n",'<br/>' -replace '"','\"')
-    descr_ru = $header_ru + ($changelog_ru -replace "\n",'<br/>' -replace '"','\"')
+    descr_en = ($changelog_en -replace "\n","" -replace "\\n",'<br/>' -replace '"','\"')
+    descr_ru = ($changelog_ru -replace "\n","" -replace "\\n",'<br/>' -replace '"','\"')
     md_5 = ""
 }
 
