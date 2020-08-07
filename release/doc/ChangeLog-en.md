@@ -1,5 +1,11 @@
 ﻿### XVM 8.6.1-dev
 
+  #### Hangar
+
+  * Restored functionality of the option:
+
+      `"hangar"/"masteryMarkInTechTree"`
+
 ______________________________
 
 ### XVM 8.6.0

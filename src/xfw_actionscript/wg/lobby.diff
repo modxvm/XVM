@@ -246,6 +246,30 @@ diff -Naur lobby.orig/net/wg/gui/lobby/profile/pages/technique/data/TechniqueLis
  
          public var id:int;
  
+diff -Naur lobby.orig/net/wg/gui/lobby/techtree/helpers/NationTreeActionsHelper.as lobby/net/wg/gui/lobby/techtree/helpers/NationTreeActionsHelper.as
+--- lobby.orig/net/wg/gui/lobby/techtree/helpers/NationTreeActionsHelper.as	2020-08-07 14:30:44.145319000 +0300
++++ lobby/net/wg/gui/lobby/techtree/helpers/NationTreeActionsHelper.as	2020-08-07 14:41:31.464690500 +0300
+@@ -52,7 +52,7 @@
+         public function NationTreeActionsHelper()
+         {
+             this._scheduler = App.utils.scheduler;
+-            this._sequence = new Vector.<NationTreeActionsHelper>();
++            //this._sequence = new Vector.<NationTreeActionsHelper>();
+             super();
+         }
+ 
+diff -Naur lobby.orig/net/wg/gui/lobby/techtree/helpers/NTGraphics.as lobby/net/wg/gui/lobby/techtree/helpers/NTGraphics.as
+--- lobby.orig/net/wg/gui/lobby/techtree/helpers/NTGraphics.as	2020-08-07 14:30:44.145319000 +0300
++++ lobby/net/wg/gui/lobby/techtree/helpers/NTGraphics.as	2020-08-07 14:41:31.464690500 +0300
+@@ -355,7 +355,7 @@
+             }
+             var _loc7_:Point = new Point(_loc4_[0],_loc4_[1]);
+             var _loc13_:int = int.MAX_VALUE;
+-            var _loc14_:Vector.<RSetLineInfo> = new Vector.<NTGraphics>();
++            var _loc14_:Vector.<RSetLineInfo> = null;
+             var _loc15_:int = DEFAULT_LINE_THICKNESS;
+             var _loc16_:uint = ColorIndex.DEFAULT;
+             _loc11_ = 0;
 diff -Naur lobby.orig/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as lobby/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as
 --- lobby.orig/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as	2020-07-27 14:30:44.145319000 +0300
 +++ lobby/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as	2020-07-27 14:41:31.464690500 +0300

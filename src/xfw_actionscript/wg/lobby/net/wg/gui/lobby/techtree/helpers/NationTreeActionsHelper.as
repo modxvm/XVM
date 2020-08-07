@@ -52,7 +52,7 @@ package net.wg.gui.lobby.techtree.helpers
         public function NationTreeActionsHelper()
         {
             this._scheduler = App.utils.scheduler;
-            this._sequence = new Vector.<NationTreeActionsHelper>();
+            //this._sequence = new Vector.<NationTreeActionsHelper>();
             super();
         }
 
