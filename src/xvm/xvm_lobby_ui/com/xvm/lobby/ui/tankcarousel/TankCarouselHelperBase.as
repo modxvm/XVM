@@ -27,9 +27,9 @@ package com.xvm.lobby.ui.tankcarousel
         {
             _gap = Macros.FormatNumberGlobal(cfg.gap, DEFAULT_GAP);
             _padding = new Padding(_gap);
-            _width = Macros.FormatNumberGlobal(cfg.width, DEFAULT_RENDERER_WIDTH - 2) + 2;
+            _width = Macros.FormatNumberGlobal(cfg.width, DEFAULT_RENDERER_WIDTH - 8) + 2;
             _heightDiff = DEFAULT_RENDERER_HEIGHT - DEFAULT_RENDERER_VISIBLE_HEIGHT;
-            _height = Macros.FormatNumberGlobal(cfg.height, DEFAULT_RENDERER_VISIBLE_HEIGHT - 2) + 2;
+            _height = Macros.FormatNumberGlobal(cfg.height, DEFAULT_RENDERER_WIDTH - 8) + 2;
             _visibleHeight = _height + _heightDiff;
         }
 
