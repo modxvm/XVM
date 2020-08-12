@@ -246,7 +246,7 @@ package com.xvm.lobby.ui.tankcarousel
         {
             var scale:Number = isNaN(cfg.scale) ? 1 : cfg.scale;
             field.scaleX = DEFAULT_SCALE_X * scale;
-            field.scaleY = DEFAULT_SCALE_X * scale;
+            field.scaleY = DEFAULT_SCALE_Y * scale;
             field.x = (field.x * field.scaleX) + cfg.dx;
             field.y = (field.y * field.scaleY) + cfg.dy;
         }
