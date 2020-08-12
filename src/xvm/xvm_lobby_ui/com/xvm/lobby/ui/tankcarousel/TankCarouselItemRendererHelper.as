@@ -30,6 +30,11 @@ package com.xvm.lobby.ui.tankcarousel
         private var renderer:TankCarouselItemRenderer;
         private var DEFAULT_WIDTH:int;
         private var DEFAULT_HEIGHT:int;
+        private var orig_TankName_x:Number;
+        private var orig_TankName_y:Number;
+        private var DEFAULT_SCALE_X:Number;
+        private var DEFAULT_SCALE_Y:Number;
+
 
         public function TankCarouselItemRendererHelper(item:ITankCarouselItemRenderer, cfg:CCarouselCell, defaultWidth:int, defaultHeight:int):void
         {
@@ -47,10 +52,15 @@ package com.xvm.lobby.ui.tankcarousel
             renderer = item as TankCarouselItemRenderer;
             //XfwUtils.logChilds(renderer);
 
-            renderer.width = int(Macros.FormatNumberGlobal(cfg.width, DEFAULT_WIDTH - 2) + 2);
-            renderer.height = int(Macros.FormatNumberGlobal(cfg.height, DEFAULT_HEIGHT - 2) + 2);
+            this.orig_TankName_x = renderer.content.txtTankName.x;
+            this.orig_TankName_y = renderer.content.txtTankName.y;
+
+            renderer.width = int(Macros.FormatNumberGlobal(cfg.width, DEFAULT_WIDTH - 8) + 8);
+            renderer.height = int(Macros.FormatNumberGlobal(cfg.height, DEFAULT_HEIGHT - 8) + 8);
             renderer.content.scrollRect = new Rectangle(0, 0, DEFAULT_WIDTH, DEFAULT_HEIGHT);
             renderer.setActualSize(renderer.width, renderer.height);
+            DEFAULT_SCALE_X = DEFAULT_WIDTH / renderer.width;
+            DEFAULT_SCALE_Y = DEFAULT_HEIGHT / renderer.height;
 
             var formats:Array = cfg.extraFields;
             if (formats)
@@ -235,8 +245,8 @@ package com.xvm.lobby.ui.tankcarousel
         private function _setupStandardFieldScale(field:InteractiveObject, cfg:CCarouselCellStandardField):void
         {
             var scale:Number = isNaN(cfg.scale) ? 1 : cfg.scale;
-            field.scaleX = DEFAULT_WIDTH / item.width * scale;
-            field.scaleY = DEFAULT_HEIGHT / item.height * scale;
+            field.scaleX = DEFAULT_SCALE_X * scale;
+            field.scaleY = DEFAULT_SCALE_Y * scale;
             field.x = (field.x * field.scaleX) + cfg.dx;
             field.y = (field.y * field.scaleY) + cfg.dy;
         }
@@ -269,7 +279,7 @@ package com.xvm.lobby.ui.tankcarousel
 
         private function _setupStandardFieldXp():void
         {
-            var dx:Number = DEFAULT_WIDTH - renderer.content.imgXp.x - 2;
+            var dx:Number = DEFAULT_WIDTH - renderer.content.imgXp.x;
             _setupStandardFieldAlpha(renderer.content.imgXp, cfg.fields.xp);
             _setupStandardFieldScale(renderer.content.imgXp, cfg.fields.xp);
             renderer.content.imgXp.x = DEFAULT_WIDTH - dx * renderer.content.imgXp.scaleX + cfg.fields.xp.dx;
@@ -278,8 +288,8 @@ package com.xvm.lobby.ui.tankcarousel
         private function _setupStandardTextField(field:TextField, cfg:CCarouselCellStandardField, dy:Number):void
         {
             field.antiAliasType = AntiAliasType.ADVANCED;
-            field.x = cfg.dx + 2;
-            field.width = (DEFAULT_WIDTH - 4) / field.scaleX;
+            //field.x = cfg.dx + 4;
+            //field.width = DEFAULT_WIDTH / field.scaleX - 14;
             field.autoSize = TextFieldAutoSize.NONE;
             field.defaultTextFormat.align = TextFormatAlign.RIGHT;
             _setupTextFormat(field, cfg.textFormat);
@@ -374,26 +384,19 @@ package com.xvm.lobby.ui.tankcarousel
                 }
             }
         }
-        private var orig_TankName_x:Number = NaN;
-        private var orig_TankName_y:Number = NaN;
         private function _setupStandardFieldTankName():void
         {
             var cfg_tankName:CCarouselCellStandardField = cfg.fields.tankName;
             var tankName:InteractiveObject = renderer.content.txtTankName;
             var scale:Number = isNaN(cfg_tankName.scale) ? 1 : cfg_tankName.scale;
-            if (isNaN(orig_TankName_x))
-            {
-                orig_TankName_x = tankName.x;
-                orig_TankName_y = tankName.y;
-            }
-            tankName.scaleX = DEFAULT_WIDTH / item.width * scale;
-            tankName.scaleY = DEFAULT_HEIGHT / item.height * scale;
-            tankName.x = (orig_TankName_x * tankName.scaleX) + cfg_tankName.dx;
-            tankName.y = (orig_TankName_y * tankName.scaleY) + cfg_tankName.dy;
+            tankName.scaleX = DEFAULT_SCALE_X * scale;
+            tankName.scaleY = DEFAULT_SCALE_Y * scale;
             //var dy:Number = DEFAULT_HEIGHT - renderer.content.txtTankName.y - 2;
             _setupStandardFieldAlpha(renderer.content.txtTankName, cfg_tankName);
             //_setupStandardFieldScale(renderer.content.txtTankName, cfg.fields.tankName);
             _setupStandardTextField(renderer.content.txtTankName, cfg_tankName, 0);
+            tankName.x = (orig_TankName_x * tankName.scaleX) + cfg_tankName.dx;
+            tankName.y = (orig_TankName_y * tankName.scaleY) + cfg_tankName.dy;
             //renderer.content.txtTankName.y = DEFAULT_HEIGHT - dy * renderer.content.txtTankName.scaleY + cfg.fields.xp.dy;
             if (item.vehicleCarouselVO && item.vehicleCarouselVO.isNationChangeAvailable)
             {
