@@ -57,10 +57,12 @@
     "battleLoading"                 - Экран загрузки боя                                     / Battle Loading screen
     "battleMessenger"               - Чат                                                    / Chat
     "battleTimer"                   - Таймер боя                                             / Battle timer
+    "calloutPanel"                  - Панель подтверждения команды (коммуникация в бою)      / Command confirmation panel (communication in battle)
     "consumablesPanel"              - Панель снарядов и расходников                          / Ammo bar
     "damageInfoPanel"               - Внутриигровая панель критов от навыка "эксперт"        / Ingame crits panel by "expert" skill
     "damagePanel"                   - Панель повреждений                                     / Damage panel
     "debugPanel"                    - Панель пинга/лага/фпс                                  / Debug panel (ping/lag/fps)
+    "destroyTimersPanel"            - Таймер до уничтожения (утопление, переворот)           / Destroy timers (drowning, overturned)
     "dualGunPanel"                  - Панель для техники с двумя орудиями                    / Panel for vehicle with two guns
     "endWarningPanel"               - Панель оповещающая о конце боя                         / Panel informing about the imminent end of the battle
     "fragCorrelationBar"            - Счёт боя                                               / Battle score
@@ -77,7 +79,6 @@
     "siegeModePanel"                - Панель осадного режима                                 / Siege mode panel
     "sixthSense"                    - Лампа шестого чувства                                  / Sixth sense lamp
     "teamBasesPanelUI"              - Полоса захвата баз                                     / Capture bar
-    "timersPanel"                   - Таймер до уничтожения (утопление, переворот)           / Destroy timers (drowning, overturned)
     ┌─────────────┐
     │ epic_random │
     └─────────────┘
