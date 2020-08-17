@@ -1352,22 +1352,6 @@
           }
         }
       },
-      "equipAutoReturn": {
-        "name": "equipment_auto_return",
-        "description": "equipment_auto_return",
-        "checked": false,
-        "imageIfSelected": "",
-        "imageIfNotSelected": "",
-        "valueIfSelected": {
-          "equipAutoReturnEnabled": {
-            "configFileName": "hangar.xc",
-            "value": {
-              "hangar": { "enableEquipAutoReturn": true }
-            }
-          }
-        },
-        "valueIfNotSelected": ""
-      },
       "crewAutoReturn": {
         "name": "crew_auto_return",
         "description": "crew_auto_return",
@@ -1383,6 +1367,22 @@
             }
           }
         }
+      },
+      "crewReturnByDefault": {
+        "name": "crew_return_default",
+        "description": "crew_return_default",
+        "checked": false,
+        "imageIfSelected": "",
+        "imageIfNotSelected": "",
+        "valueIfSelected":  {
+          "crewReturnByDefaultDisabled": {
+            "configFileName": "hangar.xc",
+            "value": {
+              "hangar": {"crewReturnByDefault": true}
+            }
+          }
+        },
+        "valueIfNotSelected": ""
       },
       "lockers": {
         "name": "lockers",
