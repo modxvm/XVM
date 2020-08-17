@@ -1,5 +1,9 @@
 ﻿### XVM 8.6.1-dev
 
+  #### General
+
+  * Compatibility with World of Tanks 1.10.0.1
+
   #### Hangar
 
   * Restored functionality of the option:
