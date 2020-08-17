@@ -677,6 +677,8 @@ package
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS:String = "#messenger:serviceChannelMessages/battleResults/quests";
 
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_LOWTIERREWARDSQUESTS:String = "#messenger:serviceChannelMessages/battleResults/lowTierRewardsQuests";
+
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_VEHICLESLOTS:String = "#messenger:serviceChannelMessages/battleResults/quests/vehicleSlots";
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_FREEXP:String = "#messenger:serviceChannelMessages/battleResults/quests/freeXP";

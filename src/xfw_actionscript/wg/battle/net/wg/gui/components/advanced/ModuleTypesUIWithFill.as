@@ -67,8 +67,8 @@ package net.wg.gui.components.advanced
             super.draw();
             if(INV_MODULE_ICON_POS && this.moduleIcon)
             {
-                this.moduleIcon.x = this.bg.width - this.moduleIcon.width * scaleX >> 1;
-                this.moduleIcon.y = this.bg.height - this.moduleIcon.height * scaleY >> 1;
+                this.moduleIcon.x = (this.bg.width - this.moduleIcon.width) * scaleX >> 1;
+                this.moduleIcon.y = (this.bg.height - this.moduleIcon.height) * scaleY >> 1;
             }
         }
 

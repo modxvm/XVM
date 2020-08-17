@@ -2509,6 +2509,10 @@ package
 
         public static const VEHICLESTATUS_ROTATIONGROUPUNLOCKED_HEADER:String = "#tooltips:vehicleStatus/rotationGroupUnlocked/header";
 
+        public static const GIVEAWAY_HEADER:String = "#tooltips:giveaway/header";
+
+        public static const GIVEAWAY_BODY:String = "#tooltips:giveaway/body";
+
         public static const TRADEINVEHICLESTATUS_BATTLE_HEADER:String = "#tooltips:tradeInVehicleStatus/battle/header";
 
         public static const TRADEINVEHICLESTATUS_BATTLE_BODY:String = "#tooltips:tradeInVehicleStatus/battle/body";
@@ -3590,6 +3594,8 @@ package
         public static const AWARDITEM_EVENTCOIN_HEADER:String = "#tooltips:awardItem/eventCoin/header";
 
         public static const AWARDITEM_EVENTCOIN_BODY:String = "#tooltips:awardItem/eventCoin/body";
+
+        public static const AWARDITEM_EVENTCOIN_BODY_CN:String = "#tooltips:awardItem/eventCoin/body_CN";
 
         public static const AWARDITEM_STEELHUNTERPOINT_HEADER:String = "#tooltips:awardItem/steelHunterPoint/header";
 

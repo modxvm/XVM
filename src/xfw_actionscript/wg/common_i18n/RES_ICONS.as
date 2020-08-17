@@ -95,6 +95,8 @@ package
 
         public static const MAPS_ICONS_BATTLELOADING_TIPS_EVENT:String = "../maps/icons/battleLoading/tips/event.png";
 
+        public static const MAPS_ICONS_BATTLELOADING_TIPS_LOWTIEREVENT:String = "../maps/icons/battleLoading/tips/lowTierEvent.png";
+
         public static const MAPS_ICONS_BATTLELOADING_TIPS_RANKED1:String = "../maps/icons/battleLoading/tips/ranked1.png";
 
         public static const MAPS_ICONS_BATTLELOADING_TIPS_RANKED2:String = "../maps/icons/battleLoading/tips/ranked2.png";
@@ -11323,11 +11325,15 @@ package
 
         public static const MAPS_ICONS_TENYEARSCOUNTDOWN_ENTRYPOINT_TIME_ICON:String = "../maps/icons/tenYearsCountdown/entryPoint/time_icon.png";
 
+        public static const MAPS_ICONS_TENYEARSCOUNTDOWN_ONBOARDING_BADGE:String = "../maps/icons/tenYearsCountdown/onBoarding/badge.png";
+
         public static const MAPS_ICONS_TENYEARSCOUNTDOWN_ONBOARDING_BADGE_BIG:String = "../maps/icons/tenYearsCountdown/onBoarding/badge_big.png";
 
         public static const MAPS_ICONS_TENYEARSCOUNTDOWN_ONBOARDING_BADGE_SMALL:String = "../maps/icons/tenYearsCountdown/onBoarding/badge_small.png";
 
         public static const MAPS_ICONS_TENYEARSCOUNTDOWN_ONBOARDING_BG:String = "../maps/icons/tenYearsCountdown/onBoarding/bg.png";
+
+        public static const MAPS_ICONS_TENYEARSCOUNTDOWN_ONBOARDING_COIN:String = "../maps/icons/tenYearsCountdown/onBoarding/coin.png";
 
         public static const MAPS_ICONS_TENYEARSCOUNTDOWN_ONBOARDING_GLOW_EFFECT:String = "../maps/icons/tenYearsCountdown/onBoarding/glow_effect.png";
 
@@ -11338,6 +11344,8 @@ package
         public static const MAPS_ICONS_TENYEARSCOUNTDOWN_ONBOARDING_HIDDENREWARD:String = "../maps/icons/tenYearsCountdown/onBoarding/hiddenReward.png";
 
         public static const MAPS_ICONS_TENYEARSCOUNTDOWN_ONBOARDING_LIGHT_EFFECT:String = "../maps/icons/tenYearsCountdown/onBoarding/light_effect.png";
+
+        public static const MAPS_ICONS_TENYEARSCOUNTDOWN_ONBOARDING_MEDAL:String = "../maps/icons/tenYearsCountdown/onBoarding/medal.png";
 
         public static const MAPS_ICONS_TENYEARSCOUNTDOWN_ONBOARDING_PAGE_INDICATOR:String = "../maps/icons/tenYearsCountdown/onBoarding/page_indicator.png";
 
@@ -11380,6 +11388,8 @@ package
         public static const MAPS_ICONS_TOOLTIP_EVIL:String = "../maps/icons/tooltip/evil.png";
 
         public static const MAPS_ICONS_TOOLTIP_FLAGTOOLTIP:String = "../maps/icons/tooltip/flagTooltip.png";
+
+        public static const MAPS_ICONS_TOOLTIP_GIVEAWAY:String = "../maps/icons/tooltip/giveaway.png";
 
         public static const MAPS_ICONS_TOOLTIP_IGR_64X26:String = "../maps/icons/tooltip/igr_64x26.png";
 

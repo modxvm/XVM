@@ -70,6 +70,8 @@ package net.wg.gui.components.carousels.data
 
         public var favorite:Boolean = false;
 
+        public var giveaway:Boolean = false;
+
         public var nation:Number = 0;
 
         public var xpImgSource:String = "";

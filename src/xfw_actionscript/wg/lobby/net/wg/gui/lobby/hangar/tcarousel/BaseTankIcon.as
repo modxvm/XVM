@@ -39,6 +39,8 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         public var imgIcon:ImageComponent = null;
 
+        public var giveaway:MovieClip = null;
+
         public var mcTankType:MovieClip = null;
 
         public var mcLevel:MovieClip = null;
@@ -118,6 +120,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.mcTankType = null;
             this.mcLevel = null;
             this.txtTankName = null;
+            this.giveaway = null;
             this.imgFavorite.dispose();
             this.imgFavorite = null;
             this.price.dispose();
@@ -259,6 +262,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.bpSpecialBorder.visible = param1.progressionPoints && param1.progressionPoints.isSpecialVehicle;
             this.updateLockBg();
             this.imgFavorite.visible = param1.favorite;
+            this.giveaway.visible = param1.giveaway;
             this.clanLock.timer = param1.clanLock;
             this.rentalBG.visible = this._isRentPromotion;
             visible = true;
