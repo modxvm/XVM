@@ -241,10 +241,10 @@ def canDisplayBattleCommunicationHint(base, self):
         return False
     base(self)
 
-@overrideMethod(RadarHintPlugin, '_RadarHintPlugin__updateHint')
-def updateHint(base, self):
+@overrideMethod(RadarHintPlugin, '_RadarHintPlugin__areOtherIndicatorsShown')
+def areOtherIndicatorsShown(base, self):
     if config.get('battle/battleHint/hideRadarHint'):
-        return
+        return True
     base(self)
 
 
