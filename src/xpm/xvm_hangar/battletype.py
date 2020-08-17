@@ -42,7 +42,9 @@ def _LobbyHeader_populate(base, self):
         self._updatePrebattleControls()
         actionName = userprefs.get(USERPREFS.BATTLE_TYPE, None)
         if actionName and actionName in XVM_RESTORE_BATTLE_TYPES:
-            items = battle_selector_items.getItems().getItems()
+            _items = battle_selector_items.getItems()._BattleSelectorItems__items
+            _extraItems = battle_selector_items.getItems()._BattleSelectorItems__extraItems
+            items = dict(_items.items() + _extraItems.items())
             if actionName in items:
                 item = items[actionName]
                 BigWorld.callback(0, lambda: _restore_battle_type(item))
