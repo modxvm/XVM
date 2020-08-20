@@ -2609,6 +2609,8 @@ package net.wg.data.constants.generated
 
         public static const USA_A132_T77:String = "usa-A132_T77";
 
+        public static const USA_A136_T42:String = "usa-A136_T42";
+
         public static const USA_A14_T30:String = "usa-A14_T30";
 
         public static const USA_A15_T57:String = "usa-A15_T57";
