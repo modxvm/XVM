@@ -27,7 +27,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 25.07.2020
+    # Last update: 20.08.2020
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -589,6 +589,7 @@ _data = {
     "usa:A12_T32_FL":                        'T32·fl',
     "usa:A130_Super_Hellcat":                'S.Hellc',
     "usa:A132_T77":                          'T77',
+    "usa:A136_T42":                          'T42',
     "usa:A13_T34_hvy":                       'T34',
     "usa:A13_T34_hvy_BF":                    'T34bf',
     "usa:A13_T34_hvy_FL":                    'T34·fl',
