@@ -545,7 +545,7 @@ package com.xvm.battle.shared.battleloading
                 if (!cfg.removeTesterIcon)
                 {
                     _icoTester.x = nameField.x + nameField.textWidth;
-                    _backTester.x = nameField.x +  _BADGE_ICON_WIDTH / 2 + nameField.textWidth - _backTester.width;
+                    _backTester.x = nameField.x + _BADGE_ICON_WIDTH / 2 + nameField.textWidth - _backTester.width;
                 }
             }
         }
