@@ -5569,11 +5569,19 @@ package
 
         public static const MARATHON_HEADER:String = "#tooltips:marathon/header";
 
+        public static const AUTUMN_MARATHON_HEADER:String = "#tooltips:autumn_marathon/header";
+
         public static const MARATHON_BODY:String = "#tooltips:marathon/body";
+
+        public static const AUTUMN_MARATHON_BODY:String = "#tooltips:autumn_marathon/body";
 
         public static const MARATHON_BODY_EXTRA:String = "#tooltips:marathon/body/extra";
 
+        public static const AUTUMN_MARATHON_BODY_EXTRA:String = "#tooltips:autumn_marathon/body/extra";
+
         public static const MARATHON_BODY_EXTRA_SMART:String = "#tooltips:marathon/body/extra_smart";
+
+        public static const AUTUMN_MARATHON_BODY_EXTRA_SMART:String = "#tooltips:autumn_marathon/body/extra_smart";
 
         public static const MARATHON_STATE_START:String = "#tooltips:marathon/state/start";
 

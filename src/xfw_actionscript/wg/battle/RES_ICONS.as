@@ -5439,6 +5439,8 @@ package
 
         public static const MAPS_ICONS_LIBRARY_HANGARFLAG_FLAG_KURSK:String = "../maps/icons/library/hangarFlag/flag_kursk.png";
 
+        public static const MAPS_ICONS_LIBRARY_HANGARFLAG_FLAG_POLAND:String = "../maps/icons/library/hangarFlag/flag_poland.png";
+
         public static const MAPS_ICONS_LIBRARY_HANGARFLAG_FLAG_RANKED:String = "../maps/icons/library/hangarFlag/flag_ranked.png";
 
         public static const MAPS_ICONS_LIBRARY_HANGARFLAG_FLAG_RED:String = "../maps/icons/library/hangarFlag/flag_red.png";
