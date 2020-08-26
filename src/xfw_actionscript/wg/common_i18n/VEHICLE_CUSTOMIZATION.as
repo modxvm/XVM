@@ -1945,6 +1945,10 @@ package
 
         public static const CAMOUFLAGE_10YEARS_LORRAINE_DESCRIPTION:String = "#vehicle_customization:camouflage/10years_lorraine/description";
 
+        public static const CAMOUFLAGE_PL19_CS_52_LIS_AUTUMN_LABEL:String = "#vehicle_customization:camouflage/Pl19_CS_52_LIS_autumn/label";
+
+        public static const CAMOUFLAGE_PL19_CS_52_LIS_AUTUMN_DESCRIPTION:String = "#vehicle_customization:camouflage/Pl19_CS_52_LIS_autumn/description";
+
         public static const EMBLEM:String = "#vehicle_customization:emblem";
 
         public static const EMBLEM_CLAN_CONTENT:String = "#vehicle_customization:emblem/clan_content";
@@ -5967,6 +5971,8 @@ package
 
         public static const REPAINT_10YEARS_STRV_ALL:String = "#vehicle_customization:repaint/10years_strv_all";
 
+        public static const REPAINT_PL19_CS_52_LIS_AUTUMN:String = "#vehicle_customization:repaint/Pl19_CS_52_LIS_autumn";
+
         public static const MODIFICATIONS_AGE_EFFECT_01:String = "#vehicle_customization:modifications/age_effect_01";
 
         public static const MODIFICATIONS_AGE_EFFECT_01_DESCRIPTION:String = "#vehicle_customization:modifications/age_effect_01/description";
@@ -7249,6 +7255,12 @@ package
 
         public static const SPECIAL_STYLE_10YEARS_LORRAINE_DESC_LONG:String = "#vehicle_customization:special_style/10years_lorraine_desc/long";
 
+        public static const SPECIAL_STYLE_PL19_CS_52_LIS_AUTUMN:String = "#vehicle_customization:special_style/Pl19_CS_52_LIS_autumn";
+
+        public static const SPECIAL_STYLE_PL19_CS_52_LIS_AUTUMN_DESC:String = "#vehicle_customization:special_style/Pl19_CS_52_LIS_autumn_desc";
+
+        public static const SPECIAL_STYLE_PL19_CS_52_LIS_AUTUMN_DESC_LONG:String = "#vehicle_customization:special_style/Pl19_CS_52_LIS_autumn_desc/long";
+
         public static const CUSTOMIZATION_POPOVER_STYLE_SUMMER:String = "#vehicle_customization:customization/popover/style/summer";
 
         public static const CUSTOMIZATION_POPOVER_STYLE_DESERT:String = "#vehicle_customization:customization/popover/style/desert";
@@ -8410,6 +8422,8 @@ package
         public static const PROJECTION_DECALS_SPECIAL_PROJECTION_DECAL_150:String = "#vehicle_customization:projection_decals/special/projection_decal_150";
 
         public static const PROJECTION_DECALS_SPECIAL_PROJECTION_DECAL_150_DESCRIPTION:String = "#vehicle_customization:projection_decals/special/projection_decal_150/description";
+
+        public static const PROJECTION_DECALS_ANIMALS_PROJECTION_DECAL_34:String = "#vehicle_customization:projection_decals/animals/projection_decal_34";
 
         public static const PROPERTYSHEET_KEYBOARD_HINT:String = "#vehicle_customization:propertySheet/keyboard/hint";
 
