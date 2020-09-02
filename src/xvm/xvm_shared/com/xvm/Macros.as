@@ -620,7 +620,7 @@ package com.xvm
                 else
                 {
                     __out.isStaticMacro = false;
-                    value = macroName;
+                    value = parts[PART_NAME];
                 }
             }
 
