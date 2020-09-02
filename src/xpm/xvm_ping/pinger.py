@@ -143,7 +143,7 @@ class _Ping(object):
                 else:
                     hostping = 0
 
-                if hostping<0:
+                if hostping < 0:
                     res.append({'cluster': host, 'time': (self.hangarErrorString if self.hangarSpace.inited else self.loginErrorString)})
                     debug('Ping has returned non-zero status: %d' % hostping)
                     continue

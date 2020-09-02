@@ -61,22 +61,22 @@
     "nameFieldWidthDeltaRight": 0,
     // X offset for allies vehicle names field.
     // Смещение по оси X поля названия танка союзников.
-    "vehicleFieldOffsetXLeft": 0,
+    "vehicleFieldOffsetXLeft": 26,
     // Width delta for allies vehicle names field.
     // Изменение ширины поля названия танка союзников.
     "vehicleFieldWidthDeltaLeft": 0,
     // X offset for enemies vehicle names field.
     // Смещение по оси X поля названия танка противников.
-    "vehicleFieldOffsetXRight": 0,
+    "vehicleFieldOffsetXRight": 23,
     // Width delta for enemies vehicle names field.
     // Изменение ширины поля названия танка противников.
     "vehicleFieldWidthDeltaRight": 0,
     // X offset for allies vehicle icons.
     // Смещение по оси X иконки танка союзников.
-    "vehicleIconOffsetXLeft": 0,
+    "vehicleIconOffsetXLeft": 23,
     // X offset for enemies vehicle icons.
     // Смещение по оси X иконки танка противников.
-    "vehicleIconOffsetXRight": 0,
+    "vehicleIconOffsetXRight": 20,
     // false - disable highlight of icons during battle start depends on ready state.
     // false - отключить затемнение иконки не загрузившегося игрока.
     "darkenNotReadyIcon": true,
