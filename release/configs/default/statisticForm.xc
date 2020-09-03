@@ -17,6 +17,12 @@
       "enabled": true,
       "x": -28, "y": 0, "width": 24, "height": 24, "alpha": "{{alive?100|50}}",
       "src": "img://gui/maps/icons/library/badges/24x24/badge_{{rankBadgeId}}.png"
+    },
+    "bpStage": {
+      "enabled": true,
+      "x": -28, "y": 0, "width": 24, "height": 24, "alpha": "{{alive?100|50}}",
+      "textFormat": { "color": "0xD4CD79", "size": 11, "align": "center" },
+      "format": "{{rankBadgeId=90?{{bp-stage}}}}"
     }
   },
   "statisticForm": {
@@ -122,13 +128,15 @@
     // Набор форматов для левой панели (поддерживается расширенный формат, см. extra-field_ru.txt).
     "extraFieldsLeft": [
       ${"templates.clanIcon"},
-      ${"templates.rankBadgeIcon"}
+      ${"templates.rankBadgeIcon"},
+      ${"templates.bpStage"}
     ],
     // Set of formats for right panel (extended format supported, see extra-field.txt).
     // Набор форматов для правой панели (поддерживается расширенный формат, см. extra-field_ru.txt).
     "extraFieldsRight": [
       ${"templates.clanIcon"},
-      ${"templates.rankBadgeIcon"}
+      ${"templates.rankBadgeIcon"},
+      ${"templates.bpStage"}
     ]
   }
 }

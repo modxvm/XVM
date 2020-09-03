@@ -332,8 +332,8 @@ package com.xvm
             ];
 
         private const STAT_MACROS:Vector.<String> = new <String>[
-            "xvm-user", "flag", "clanrank", "topclan", "region", "comment", "avglvl", "xte", "xeff", "xwtr",
-            "xwn8", "xwgr", "eff", "wtr", "wn8", "wgr", "r", "xr", "xwr", "winrate", "rating", "battles",
+            "xvm-user", "flag", "clanrank", "topclan", "region", "comment", "bp-stage", "avglvl", "xte", "xeff",
+            "xwtr", "xwn8", "xwgr", "eff", "wtr", "wn8", "wgr", "r", "xr", "xwr", "winrate", "rating", "battles",
             "wins", "kb", "t-winrate", "t-rating", "t-battles", "t-wins", "t-kb", "t-hb", "tdb", "xtdb", "tdv",
             "vwtr", "xvwtr", "c:xvwtr", "a:xvwtr",
             "tfb", "tsb", "c:xte", "c:xeff", "c:xwtr", "c:xwn8", "c:xwgr", "c:eff", "c:wtr", "c:wn8",
@@ -1173,6 +1173,8 @@ package com.xvm
                     m_macros_cache_players[pname] = null;
                 }
             }
+            // {{bp-stage}}
+            pdata["bp-stage"] = stat.badgeStage;
             // {{avglvl}}
             pdata["avglvl"] = stat.avglvl;
             // {{xte}}
