@@ -467,6 +467,7 @@ class _Stat(object):
                     stat['name'] = pl.name
                     stat['team'] = TEAM.ALLY if team == pl.team else TEAM.ENEMY
                     stat['badgeId'] = pl.badgeId
+                    stat['badgeStage'] = pl.badgeStage
                     if hasattr(pl, 'alive'):
                         stat['alive'] = pl.alive
                     if hasattr(pl, 'ready'):
@@ -683,8 +684,9 @@ class _Stat(object):
 
 class _Player(object):
 
-    __slots__ = ('vehicleID', 'accountDBID', 'name', 'clan', 'clanInfo', 'badgeId', 'team',
-                 'vehCD', 'vLevel', 'maxHealth', 'vIcon', 'vn', 'vType', 'alive',
+    __slots__ = ('vehicleID', 'accountDBID', 'name', 'clan', 'clanInfo',
+                 'badgeId', 'badgeStage', 'team', 'vehCD', 'vLevel',
+                 'maxHealth', 'vIcon', 'vn', 'vType', 'alive',
                  'ready', 'x_emblem', 'x_emblem_loading', 'clanicon')
 
     sessionProvider = dependency.descriptor(IBattleSessionProvider)
@@ -695,9 +697,11 @@ class _Player(object):
         self.name = vData['name']
         self.clan = vData['clanAbbrev']
         self.badgeId = None
+        self.badgeStage = None
         badges = vData.get('badges', None)
         if badges:
             self.badgeId = str(badges[0])
+            self.badgeStage = str(badges[1][0])
         self.clanInfo = topclans.getClanInfo(self.clan)
         self.vehCD = None
         if 'typeCompDescr' in vData:

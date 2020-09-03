@@ -4,6 +4,12 @@
 
   * Compatibility with World of Tanks 1.10.0.1
 
+  #### Battle
+
+  * Added macros:
+
+    * `{{bp-stage}}` — current stage of battle pass (stage of elite progression)
+
   #### Hangar
 
   * Restored functionality of the option:

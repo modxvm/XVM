@@ -67,6 +67,7 @@ Legend:
 │ H │ {{squad-num}}      │ X │ X │ X │ X │ X │   │ number of squad (1,2,...), empty - if not in squad
 │ S │ {{rank-level}}     │ X │ X │ X │ X │ X │   │ rank level, empty if no rank
 │ S │ {{rankBadgeId}}    │ X │ X │ X │ X │ X │   │ player's badge id
+│ S │ {{bp-stage}}       │ X │ X │ X │ X │ X │   │ current stage of battle pass (stage of elite progression)
 │ S │ {{xvm-user}}       │ X │ X │ X │ X │ X │ X │ player's XVM status with values from "texts"/"xvmuser" section
 │ S │ {{flag}}           │ X │ X │ X │ X │ X │ X │ flag for player selected in the personal cabinet or determined from the client language
 │ D │ {{clanicon}}       │ X │ X │ X │ X │ X │ X │ macro with clan embled image path value
