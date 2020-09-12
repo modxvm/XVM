@@ -207,7 +207,6 @@ detect_actionscript_sdk
 detect_ffdec
 detect_git
 detect_java
-detect_mono
 detect_patch
 detect_python
 detect_unzip

@@ -12,6 +12,7 @@ syntax: glob
 
 #Build output
 ~output/
+~downloads/
 _build/
 _devel/
 _logs/

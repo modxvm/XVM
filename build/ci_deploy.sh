@@ -1,0 +1,135 @@
+#!/bin/bash
+
+# XVM Team (c) https://modxvm.com 2014-2020
+# XVM nightly build system
+
+CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd "$CURRENT_PATH"
+export XVMBUILD_ROOT_PATH="$CURRENT_PATH/.."
+
+source "$XVMBUILD_ROOT_PATH/build/xvm-build.conf"
+source "$XVMBUILD_ROOT_PATH/build_lib/library.sh"
+
+pack_xvm(){
+    echo ""
+    echo "Packing build"
+
+    git_get_repostats "$XVMBUILD_ROOT_PATH"
+
+    echo "$XVMBUILD_XVM_VERSION" >> "$XVMBUILD_ROOT_PATH"/~output/deploy/"${XVMBUILD_XVM_VERSION}_${REPOSITORY_COMMITS_NUMBER}"
+    echo "$REPOSITORY_COMMITS_NUMBER" >> "$XVMBUILD_ROOT_PATH"/~output/deploy/"${XVMBUILD_XVM_VERSION}_${REPOSITORY_COMMITS_NUMBER}"
+    echo "$REPOSITORY_HASH" >> "$XVMBUILD_ROOT_PATH"/~output/deploy/"${XVMBUILD_XVM_VERSION}_${REPOSITORY_COMMITS_NUMBER}"
+    echo "$REPOSITORY_BRANCH" >> "$XVMBUILD_ROOT_PATH"/~output/deploy/"${XVMBUILD_XVM_VERSION}_${REPOSITORY_COMMITS_NUMBER}"
+
+    pushd "$XVMBUILD_ROOT_PATH"/~output/deploy/ > /dev/null
+    zip -9 -r -q xvm_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".zip ./
+    rm "$XVMBUILD_ROOT_PATH"/~output/deploy/"${XVMBUILD_XVM_VERSION}_${REPOSITORY_COMMITS_NUMBER}"
+    popd > /dev/null
+}
+
+pack_xfw(){
+    echo ""
+    echo "Packing XFW"
+
+    git_get_repostats "$XVMBUILD_ROOT_PATH"
+
+    echo "$XVMBUILD_XVM_VERSION" >> "$XVMBUILD_ROOT_PATH"/~output/xfw/"${XVMBUILD_XVM_VERSION}_${REPOSITORY_COMMITS_NUMBER}"
+    echo "$REPOSITORY_COMMITS_NUMBER" >> "$XVMBUILD_ROOT_PATH"/~output/xfw/"${XVMBUILD_XVM_VERSION}_${REPOSITORY_COMMITS_NUMBER}"
+    echo "$REPOSITORY_HASH" >> "$XVMBUILD_ROOT_PATH"/~output/xfw/"${XVMBUILD_XVM_VERSION}_${REPOSITORY_COMMITS_NUMBER}"
+    echo "$REPOSITORY_BRANCH" >> "$XVMBUILD_ROOT_PATH"/~output/xfw/"${XVMBUILD_XVM_VERSION}_${REPOSITORY_COMMITS_NUMBER}"
+
+    pushd "$XVMBUILD_ROOT_PATH"/~output/xfw/ > /dev/null
+    zip -9 -r -q xfw_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".zip ./
+    rm "$XVMBUILD_ROOT_PATH"/~output/xfw/"${XVMBUILD_XVM_VERSION}_${REPOSITORY_COMMITS_NUMBER}"
+    popd > /dev/null
+}
+
+deploy_files(){
+    echo ""
+    echo "Deploying XVM"
+
+    git_get_repostats "$XVMBUILD_ROOT_PATH"
+
+    sshpass -p "$XVMBUILD_UPLOAD_PASSWORD" ssh $XVMBUILD_UPLOAD_USER@$XVMBUILD_UPLOAD_HOST "mkdir -p $XVMBUILD_UPLOAD_PATH/$REPOSITORY_BRANCH/"
+
+    #XVM
+    localpath="$XVMBUILD_ROOT_PATH"/~output/deploy/xvm_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".zip
+    
+    remotepath="$XVMBUILD_UPLOAD_PATH"/"$REPOSITORY_BRANCH"/xvm_latest.zip
+    sshpass -p "$XVMBUILD_UPLOAD_PASSWORD" scp -r "$localpath" "$XVMBUILD_UPLOAD_USER@$XVMBUILD_UPLOAD_HOST:$remotepath"
+
+    remotepath="$XVMBUILD_UPLOAD_PATH"/"$REPOSITORY_BRANCH"/xvm_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".zip
+    sshpass -p "$XVMBUILD_UPLOAD_PASSWORD" scp -r "$localpath" "$XVMBUILD_UPLOAD_USER@$XVMBUILD_UPLOAD_HOST:$remotepath"
+
+    #XFW
+    localpath="$XVMBUILD_ROOT_PATH"/~output/xfw/xfw_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".zip
+    
+    remotepath="$XVMBUILD_UPLOAD_PATH"/"$REPOSITORY_BRANCH"/xfw_latest.zip
+    sshpass -p "$XVMBUILD_UPLOAD_PASSWORD" scp -r "$localpath" "$XVMBUILD_UPLOAD_USER@$XVMBUILD_UPLOAD_HOST:$remotepath"
+
+    remotepath="$XVMBUILD_UPLOAD_PATH"/"$REPOSITORY_BRANCH"/xfw_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".zip
+    sshpass -p "$XVMBUILD_UPLOAD_PASSWORD" scp -r "$localpath" "$XVMBUILD_UPLOAD_USER@$XVMBUILD_UPLOAD_HOST:$remotepath"
+
+    #INSTALLER
+    localpath="$XVMBUILD_ROOT_PATH"/~output/installer/xvm_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".exe
+
+    remotepath="$XVMBUILD_UPLOAD_PATH"/"$REPOSITORY_BRANCH"/xvm_latest_"$REPOSITORY_BRANCH".exe
+    sshpass -p "$XVMBUILD_UPLOAD_PASSWORD" scp -r "$localpath" "$XVMBUILD_UPLOAD_USER@$XVMBUILD_UPLOAD_HOST:$remotepath"
+
+    remotepath="$XVMBUILD_UPLOAD_PATH"/"$REPOSITORY_BRANCH"/xvm_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".exe
+    sshpass -p "$XVMBUILD_UPLOAD_PASSWORD" scp -r "$localpath" "$XVMBUILD_UPLOAD_USER@$XVMBUILD_UPLOAD_HOST:$remotepath"
+}
+
+deploy_meta(){
+    git_get_repostats "$XVMBUILD_ROOT_PATH"
+
+    #XVM-Nightly meta
+    echo "$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER" > xvm_revision.txt
+    sshpass -p "$XVMBUILD_UPLOAD_PASSWORD" scp -r "xvm_revision.txt" "$XVMBUILD_UPLOAD_USER@$XVMBUILD_UPLOAD_HOST:$XVMBUILD_UPLOAD_PATH/$REPOSITORY_BRANCH/xvm_revision.txt"
+
+    echo $REPOSITORY_HASH > xvm_hash.txt
+    sshpass -p "$XVMBUILD_UPLOAD_PASSWORD" scp -r "xvm_hash.txt" "$XVMBUILD_UPLOAD_USER@$XVMBUILD_UPLOAD_HOST:$XVMBUILD_UPLOAD_PATH/$REPOSITORY_BRANCH/xvm_hash.txt"
+
+    echo $REPOSITORY_BRANCH > xvm_branch.txt
+    sshpass -p "$XVMBUILD_UPLOAD_PASSWORD" scp -r "xvm_branch.txt" "$XVMBUILD_UPLOAD_USER@$XVMBUILD_UPLOAD_HOST:$XVMBUILD_UPLOAD_PATH/$REPOSITORY_BRANCH/xvm_branch.txt"
+
+    echo $REPOSITORY_COMMITS_NUMBER > xvm_commits.txt
+    sshpass -p "$XVMBUILD_UPLOAD_PASSWORD" scp -r "xvm_commits.txt" "$XVMBUILD_UPLOAD_USER@$XVMBUILD_UPLOAD_HOST:$XVMBUILD_UPLOAD_PATH/$REPOSITORY_BRANCH/xvm_commits.txt"
+
+    echo $REPOSITORY_COMMITS_NUMBER > xvm_version.txt
+    sshpass -p "$XVMBUILD_UPLOAD_PASSWORD" scp -r "xvm_version.txt" "$XVMBUILD_UPLOAD_USER@$XVMBUILD_UPLOAD_HOST:$XVMBUILD_UPLOAD_PATH/$REPOSITORY_BRANCH/xvm_version.txt"
+
+    echo "$XVMBUILD_WOT_VERSION" > wot_version.txt
+    sshpass -p "$XVMBUILD_UPLOAD_PASSWORD" scp -r "wot_version.txt" "$XVMBUILD_UPLOAD_USER@$XVMBUILD_UPLOAD_HOST:$XVMBUILD_UPLOAD_PATH/$REPOSITORY_BRANCH/wot_version.txt"
+
+    #MODXVM meta
+    XVMBUILD_MX_DATE=$(date +%Y-%m-%dT%H:%M:%S%:z)
+    XVMBUILD_MX_SIZE_EXE=$(stat --printf=%s "$XVMBUILD_ROOT_PATH"/~output/installer/xvm_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".exe)
+    XVMBUILD_MX_SIZE_ZIP=$(stat --printf=%s "$XVMBUILD_ROOT_PATH"/~output/deploy/xvm_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".zip)
+    XVMBUILD_MX_URL_ZIP="${XVMBUILD_URL_DOWNLOAD}/${REPOSITORY_BRANCH}/xvm_${XVMBUILD_XVM_VERSION}_${REPOSITORY_COMMITS_NUMBER}_${REPOSITORY_BRANCH}_${REPOSITORY_HASH}.zip"
+    XVMBUILD_MX_URL_EXE="${XVMBUILD_URL_DOWNLOAD}/${REPOSITORY_BRANCH}/xvm_${XVMBUILD_XVM_VERSION}_${REPOSITORY_COMMITS_NUMBER}_${REPOSITORY_BRANCH}_${REPOSITORY_HASH}.exe"
+
+    dlmeta_output="dl_meta.json"
+    cp "./ci_deploy.json.template" "$dlmeta_output"
+    sed -i "s/XVMBUILD_MX_DATE/$XVMBUILD_MX_DATE/g" "$dlmeta_output"
+    sed -i "s/XVMBUILD_MX_SIZE_EXE/$XVMBUILD_MX_SIZE_EXE/g" "$dlmeta_output"
+    sed -i "s/XVMBUILD_MX_SIZE_ZIP/$XVMBUILD_MX_SIZE_ZIP/g" "$dlmeta_output"
+    sed -i "s/REPOSITORY_BRANCH/$REPOSITORY_BRANCH/g" "$dlmeta_output"
+    sed -i "s/REPOSITORY_HASH/$REPOSITORY_HASH/g" "$dlmeta_output"
+    sed -i "s/XVMBUILD_XVM_VERSION/$XVMBUILD_XVM_VERSION/g" "$dlmeta_output"
+    sed -i "s/REPOSITORY_COMMITS_NUMBER/$REPOSITORY_COMMITS_NUMBER/g" "$dlmeta_output"
+    sed -i "s/XVMBUILD_WOT_VERSION/$XVMBUILD_WOT_VERSION/g" "$dlmeta_output"
+    sed -i "s,XVMBUILD_MX_URL_EXE,$XVMBUILD_MX_URL_EXE,g" "$dlmeta_output"
+    sed -i "s,XVMBUILD_MX_URL_ZIP,$XVMBUILD_MX_URL_ZIP,g" "$dlmeta_output"
+    sed -i "s,XVMBUILD_URL_REPO,$XVMBUILD_URL_REPO,g" "$dlmeta_output"
+
+    sshpass -p "$XVMBUILD_UPLOAD_PASSWORD" scp -r "$dlmeta_output" "$XVMBUILD_UPLOAD_USER@$XVMBUILD_UPLOAD_HOST:$XVMBUILD_UPLOAD_PATH/$REPOSITORY_BRANCH/dl_meta.json"
+}
+
+pack_xvm
+pack_xfw
+
+deploy_files
+deploy_meta
+
+clean_repodir

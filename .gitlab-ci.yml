@@ -1,0 +1,46 @@
+stages:
+  - build-xvm
+  - build-installer
+  - deploy
+  - notify
+
+build-xvm:
+  stage: build-xvm
+  script:
+    - ./build.sh
+  artifacts:
+    paths:
+      - ~output/
+    expire_in: 1 week
+
+build-installer:
+  stage: build-installer
+  script:
+    - ./src/installer/build.sh
+  needs:
+    - job: build-xvm
+      artifacts: true
+  artifacts:
+    paths:
+      - ~output/installer/
+    expire_in: 1 week
+
+deploy:
+  stage: deploy
+  script:
+    - ./build/ci_deploy.sh
+  needs:
+    - job: build-xvm
+      artifacts: true
+    - job: build-installer
+      artifacts: true
+
+notify-krcm:
+  stage: notify
+  script:
+    - ./build/ci_notify_krcm.sh
+
+notify-telegram:
+  stage: notify
+  script:
+    - ./build/ci_notify_telegram.sh

@@ -8,6 +8,10 @@ AS_VERSION_PLAYERGLOBAL="10.2"
 AS_VERSION_PLAYER="10.2"
 AS_VERSION_SWF="11"
 
+#Apache Roayler constants
+APACHEROAYLE_DOWNLOADLINK="https://downloads.apache.org/royale/0.9.4/binaries/apache-royale-0.9.4-bin-js-swf.tar.gz"
+APACHEROAYLE_VER="0.9.4"
+
 # AS3 compilation
 build_as3_swf(){
     if [[ "$XFW_DEVELOPMENT" != "" ]]; then
@@ -81,7 +85,13 @@ git_get_repostats(){
     pushd $1 >/dev/null
     export REPOSITORY_AUTHOR=$(git log -1 --pretty=format:'%an')
 
-    export REPOSITORY_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+    if [[ "$CI_COMMIT_BRANCH" != "" ]]; then
+        export REPOSITORY_BRANCH="$CI_COMMIT_BRANCH"
+    else
+        export REPOSITORY_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+    fi
+
     if [ "$REPOSITORY_BRANCH" = "master" ]; then
         export REPOSITORY_BRANCH_FORFILE=""
     else
@@ -124,6 +134,26 @@ detect_ffdec(){
     fi
 }
 
+detect_tar(){
+    if ! (hash tar 2>/dev/null); then
+        echo "!!! tar is not found"
+        exit 1
+    fi
+}
+
+# Installs Apache Roayle
+install_actionscript_sdk(){
+    detect_tar
+    detect_wget
+
+    assdk_root="$XVMBUILD_ROOT_PATH/~temp/assdk"
+    rm -rf "$1"
+    mkdir -p "$1"
+    wget $APACHEROAYLE_DOWNLOADLINK -O "$1/file.tar.gz"
+    tar xf "$1/file.tar.gz" -C "$1/" --strip 1
+    rm -f "$1/file.tar.gz"
+}
+
 # Detects Apache Royale / Apache Flex SDK
 #
 # Search Order:
@@ -163,12 +193,21 @@ detect_actionscript_sdk(){
     elif [ -d "$LOCALAPPDATA/FlashDevelop/Apps/flexsdk/4.6.0" ]; then
         export ASSDK_HOME="$LOCALAPPDATA/FlashDevelop/Apps/flexsdk/4.6.0"
         export ASSDK_TYPE="flex"
+    elif [ -d "$XVMBUILD_ROOT_PATH/~downloads/as_sdk_$APACHEROAYLE_VER/royale-asjs" ]; then
+        export ASSDK_HOME="$XVMBUILD_ROOT_PATH/~downloads/as_sdk_$APACHEROAYLE_VER/royale-asjs"
+        export ASSDK_TYPE="royale"
     fi
 
-    #check if directory exists
+    #download if not found
     if [ ! -d "$ASSDK_HOME" ]; then
-        echo "!!! Apache Royale/Flex directory is not found"
-        exit 1
+        install_actionscript_sdk "$XVMBUILD_ROOT_PATH/~downloads/as_sdk_$APACHEROAYLE_VER"
+        export ASSDK_HOME="$XVMBUILD_ROOT_PATH/~downloads/as_sdk_$APACHEROAYLE_VER/royale-asjs"
+        export ASSDK_TYPE="royale"
+
+        if [ ! -d "$ASSDK_HOME" ]; then
+            echo "!!! Apache Royale/Flex error on download"
+            exit 1
+        fi
     fi
 
     # extend PATH and set XVMBUILD_MXMLC_FILEPATH and XVMBUILD_COMPC_FILEPATH
@@ -296,7 +335,7 @@ detect_wine(){
             return 0
         else
             echo "!!! Wine is not found"
-            return 1
+            exit 1
         fi
     else
         export XVMBUILD_WINE_FILENAME=
