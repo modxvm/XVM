@@ -5,7 +5,7 @@ stages:
   - pack
   - deploy
   - notify
-  
+
 workflow:
   rules:
     - if: $CI_COMMIT_MESSAGE =~ /\[no-ci\]/
