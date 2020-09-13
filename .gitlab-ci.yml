@@ -5,7 +5,7 @@ stages:
   - pack
   - deploy
   - notify
-  
+
 workflow:
   rules:
     - if: '$CI_PROJECT_NAMESPACE != "xvm"'

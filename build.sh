@@ -150,18 +150,18 @@ function build_xvm_python()
     echo "Building XVM Python"
 
     pushd src/xpm > /dev/null
-    
+
     export XPM_CLEAR=0
     export XPM_RUN_TEST=0
 
     ./build.sh
-    
+
     unset XPM_CLEAR
     unset XPM_RUN_TEST
 
     mkdir -p  "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/xfw_packages/"
     cp -rf "$XVMBUILD_ROOT_PATH"/~output/xvm/res_mods/mods/xfw_packages/* "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/xfw_packages/"
-    
+
     popd >/dev/null
 }
 
@@ -192,7 +192,7 @@ calc_hash_for_xvm_integrity()
 
 
     pushd ~output/deploy > /dev/null
-    
+
     hash_dir='res_mods/mods/xfw_packages/xvm_integrity/python'
     hash_file="$hash_dir/hash_table.py"
     rm -rf "$hash_file"

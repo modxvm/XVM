@@ -54,7 +54,7 @@ deploy_files(){
 
     #XVM
     localpath="$XVMBUILD_ROOT_PATH"/~output/deploy/xvm_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".zip
-    
+
     remotepath="$XVMBUILD_UPLOAD_PATH"/"$REPOSITORY_BRANCH"/xvm_latest.zip
     sshpass -p "$XVMBUILD_UPLOAD_PASSWORD" scp -r "$localpath" "$XVMBUILD_UPLOAD_USER@$XVMBUILD_UPLOAD_HOST:$remotepath"
 
@@ -63,7 +63,7 @@ deploy_files(){
 
     #XFW
     #localpath="$XVMBUILD_ROOT_PATH"/~output/xfw/xfw_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".zip
-    
+
     #remotepath="$XVMBUILD_UPLOAD_PATH"/"$REPOSITORY_BRANCH"/xfw_latest.zip
     #sshpass -p "$XVMBUILD_UPLOAD_PASSWORD" scp -r "$localpath" "$XVMBUILD_UPLOAD_USER@$XVMBUILD_UPLOAD_HOST:$remotepath"
 
