@@ -62,13 +62,13 @@ deploy_files(){
     sshpass -p "$XVMBUILD_UPLOAD_PASSWORD" scp -r "$localpath" "$XVMBUILD_UPLOAD_USER@$XVMBUILD_UPLOAD_HOST:$remotepath"
 
     #XFW
-    localpath="$XVMBUILD_ROOT_PATH"/~output/xfw/xfw_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".zip
+    #localpath="$XVMBUILD_ROOT_PATH"/~output/xfw/xfw_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".zip
     
-    remotepath="$XVMBUILD_UPLOAD_PATH"/"$REPOSITORY_BRANCH"/xfw_latest.zip
-    sshpass -p "$XVMBUILD_UPLOAD_PASSWORD" scp -r "$localpath" "$XVMBUILD_UPLOAD_USER@$XVMBUILD_UPLOAD_HOST:$remotepath"
+    #remotepath="$XVMBUILD_UPLOAD_PATH"/"$REPOSITORY_BRANCH"/xfw_latest.zip
+    #sshpass -p "$XVMBUILD_UPLOAD_PASSWORD" scp -r "$localpath" "$XVMBUILD_UPLOAD_USER@$XVMBUILD_UPLOAD_HOST:$remotepath"
 
-    remotepath="$XVMBUILD_UPLOAD_PATH"/"$REPOSITORY_BRANCH"/xfw_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".zip
-    sshpass -p "$XVMBUILD_UPLOAD_PASSWORD" scp -r "$localpath" "$XVMBUILD_UPLOAD_USER@$XVMBUILD_UPLOAD_HOST:$remotepath"
+    #remotepath="$XVMBUILD_UPLOAD_PATH"/"$REPOSITORY_BRANCH"/xfw_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".zip
+    #sshpass -p "$XVMBUILD_UPLOAD_PASSWORD" scp -r "$localpath" "$XVMBUILD_UPLOAD_USER@$XVMBUILD_UPLOAD_HOST:$remotepath"
 
     #INSTALLER
     localpath="$XVMBUILD_ROOT_PATH"/~output/installer/xvm_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".exe
@@ -127,7 +127,7 @@ deploy_meta(){
 }
 
 pack_xvm
-pack_xfw
+#pack_xfw
 
 deploy_files
 deploy_meta

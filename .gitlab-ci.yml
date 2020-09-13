@@ -1,6 +1,8 @@
 stages:
+  - build-xfw-as
+  - build-xfw-packages
   - build-xvm
-  - build-installer
+  - pack
   - deploy
   - notify
   
@@ -11,35 +13,88 @@ workflow:
     - if: '$CI_PIPELINE_SOURCE == "push"'
       when: always
 
-build-xvm:
-  stage: build-xvm
+build-xfw-swf:
+  stage: build-xfw-as
   script:
-    - ./build.sh
+    - ./build.sh xfw_swf
   artifacts:
     paths:
-      - ~output/
-    expire_in: 1 week
+      - ~output/xfw/swf_wg/
+    expire_in: 1 day
 
-build-installer:
-  stage: build-installer
+
+build-xfw-actionscript:
+  stage: build-xfw-as
   script:
-    - ./src/installer/build.sh
+    - ./build.sh xfw_actionscript
+  artifacts:
+    paths:
+      - ~output/xfw/swc/
+      - ~output/xfw/swf/
+    expire_in: 1 day
+
+build-xfw-packages:
+  stage: build-xfw-packages
+  script:
+    - ./build.sh xfw_packages
   needs:
-    - job: build-xvm
+    - job: build-xfw-actionscript
+      artifacts: true
+    - job: build-xfw-swf
       artifacts: true
   artifacts:
     paths:
+      - ~output/deploy/
+      - ~output/xfw/packages/
+      - ~output/xfw/wotmod/
+    expire_in: 1 day
+
+build-xvm-actionscript:
+  stage: build-xvm
+  script:
+    - ./build.sh xvm_actionscript
+  needs:
+    - job: build-xfw-actionscript
+      artifacts: true
+  artifacts:
+    paths:
+      - ~output/deploy/res_mods/mods/xfw_packages/xvm_battle/
+      - ~output/deploy/res_mods/mods/xfw_packages/xvm_lobby/
+    expire_in: 1 day
+
+build-xvm-python:
+  stage: build-xvm
+  script:
+    - ./build.sh xvm_python
+  artifacts:
+    paths:
+      - ~output/deploy/
+    expire_in: 1 day
+
+pack:
+  stage: pack
+  script:
+    - ./build.sh pack
+    - ./src/installer/build.sh
+  needs:
+    - job: build-xfw-packages
+      artifacts: true
+    - job: build-xvm-actionscript
+      artifacts: true
+    - job: build-xvm-python
+      artifacts: true
+  artifacts:
+    paths:
+      - ~output/deploy/
       - ~output/installer/
-    expire_in: 1 week
+    expire_in: 1 day
 
 deploy:
   stage: deploy
   script:
     - ./build/ci_deploy.sh
   needs:
-    - job: build-xvm
-      artifacts: true
-    - job: build-installer
+    - job: pack
       artifacts: true
   rules:
     - if: $CI_COMMIT_MESSAGE =~ /\[no-deploy\]/

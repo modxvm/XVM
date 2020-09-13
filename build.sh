@@ -35,6 +35,16 @@ source ./build/xvm-build.conf
 ####      CONFIG      ####
 ##########################
 
+# $XFW_BUILD_CLEAR
+if [ "$XFW_BUILD_CLEAR" == "" ]; then
+  export XFW_BUILD_CLEAR=1
+fi
+
+# $XFW_BUILD_LIBS
+if [ "$XFW_BUILD_LIBS" == "" ]; then
+  export XFW_BUILD_LIBS=1
+fi
+
 # $XVMBUILD_L10N_URL
 if [[ "$XVMBUILD_L10N_URL" == "" ]]; then
     export XVMBUILD_L10N_URL="http://translate.modxvm.com/download/xvm-client/xvm-client-l10n_json.zip"
@@ -56,15 +66,6 @@ clean_sha1()
     popd > /dev/null
 }
 
-#creates all needed directories
-create_directories()
-{
-    pushd "$XVMBUILD_ROOT_PATH" > /dev/null
-    mkdir -p ~output/xvm/res_mods/configs/xvm
-    mkdir -p ~output/xvm/res_mods/mods/shared_resources/xvm/
-    popd > /dev/null
-}
-
 #extends PATH system environment variable
 extend_path()
 {
@@ -75,12 +76,44 @@ extend_path()
 ####  BUILD FUNCTIONS ####
 ##########################
 
-#builds XVM ActionScript 3 files
-build_as3(){
+function build_xfw_actionscript()
+{
     echo ""
-    echo "Building AS3 files"
+    echo "Building XFW Actionscript"
 
-    pushd "$XVMBUILD_ROOT_PATH"/src/xvm/ > /dev/null
+    pushd src/xfw_actionscript > /dev/null
+    ./build.sh || exit 1
+    popd > /dev/null
+}
+
+function build_xfw_packages()
+{
+    echo ""
+    echo "Building XFW Packages"
+
+    pushd src/xfw_packages > /dev/null
+    ./build.sh || exit 1
+    popd > /dev/null
+
+    mkdir -p "~output/deploy/mods/$XVMBUILD_WOT_VERSION/com.modxvm.xfw/"
+    cp -rf ~output/xfw/wotmod/*.wotmod "~output/deploy/mods/$XVMBUILD_WOT_VERSION/com.modxvm.xfw/"
+}
+
+function build_xfw_swf()
+{
+    echo ""
+    echo "Building XFW SWF"
+
+    pushd src/xfw_swf > /dev/null
+    ./build.sh || exit 1
+    popd > /dev/null
+}
+
+function build_xvm_actionscript(){
+    echo ""
+    echo "Building XVM actionscript"
+
+    pushd src/xvm/ > /dev/null
 
     top="
         _xvm_shared
@@ -105,37 +138,49 @@ build_as3(){
         fi
     done
 
+    mkdir -p  "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/xfw_packages/"
+    cp -rf "$XVMBUILD_ROOT_PATH"/~output/xvm/res_mods/mods/xfw_packages/* "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/xfw_packages/"
+
     popd > /dev/null
 }
 
-#builds XVM Framework and copy XFW to ~output/
-build_xfw()
+function build_xvm_python()
 {
     echo ""
-    echo "Building XFW"
+    echo "Building XVM Python"
 
-    pushd "$XVMBUILD_ROOT_PATH" >/dev/null
-    ./build_xfw.sh
-    popd >/dev/null
+    pushd src/xpm > /dev/null
+    
+    export XPM_CLEAR=0
+    export XPM_RUN_TEST=0
 
-    pushd "$XVMBUILD_ROOT_PATH" >/dev/null
-    mkdir -p "~output/deploy/mods/$XVMBUILD_WOT_VERSION/com.modxvm.xfw/"
-    cp -rf ~output/xfw/wotmod/*.wotmod "~output/deploy/mods/$XVMBUILD_WOT_VERSION/com.modxvm.xfw/"
+    ./build.sh
+    
+    unset XPM_CLEAR
+    unset XPM_RUN_TEST
+
+    mkdir -p  "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/xfw_packages/"
+    cp -rf "$XVMBUILD_ROOT_PATH"/~output/xvm/res_mods/mods/xfw_packages/* "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/xfw_packages/"
+    
     popd >/dev/null
 }
 
-#builds Python part of XVM
-build_xpm()
+function download_translations()
 {
     echo ""
-    echo "Building XPM"
+    echo "Download translations..."
 
-    pushd "$XVMBUILD_ROOT_PATH"/src/xpm/ >/dev/null
-    export XPM_CLEAR=0
-    export XPM_RUN_TEST=0
-    ./build.sh
-    unset XPM_CLEAR
-    unset XPM_RUN_TEST
+    mkdir -p "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/shared_resources/xvm/l10n/"
+    pushd "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/shared_resources/xvm/l10n/" >/dev/null
+    mkdir -p temp
+    cd temp
+    wget --quiet --output-document=l10n.zip "$XVMBUILD_L10N_URL"
+    unzip -o l10n.zip >/dev/null
+    rm l10n.zip ru.xc
+    rm -f en.xc
+    cd ..
+    mv temp/* ./
+    rm -rf temp/
     popd >/dev/null
 }
 
@@ -145,8 +190,14 @@ calc_hash_for_xvm_integrity()
     echo ""
     echo "Calculating hashes for xvm_integrity"
 
+
     pushd ~output/deploy > /dev/null
-    hash_file='res_mods/mods/xfw_packages/xvm_integrity/python/hash_table.py'
+    
+    hash_dir='res_mods/mods/xfw_packages/xvm_integrity/python'
+    hash_file="$hash_dir/hash_table.py"
+    rm -rf "$hash_file"
+    mkdir -p "$hash_dir"
+
     echo -e '""" Generated automatically by XVM builder """\nHASH_DATA = {' > $hash_file
     find res_mods -name '*.py' -print0 -o -name '*.pyc' -print0 -o -name '*.swf' -print0 | while read -d $'\0' file
     do
@@ -159,32 +210,21 @@ calc_hash_for_xvm_integrity()
 #copies non-binary files and fix directory layout
 copy_files()
 {
+    echo ""
+    echo "Copy files..."
+
     # rename version-dependent folder
     mkdir -p "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/$XVMBUILD_WOT_VERSION"
     mkdir -p  "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/shared_resources/xvm/"
-    mkdir -p  "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/xfw_packages/"
-    mkdir -p  "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/configs/xvm/"
 
     # cp non-binary files
-    cp -rf "$XVMBUILD_ROOT_PATH"/~output/xvm/res_mods/mods/xfw_packages/* "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/xfw_packages/"
     cp -rf "$XVMBUILD_ROOT_PATH"/release/* "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/shared_resources/xvm/"
 
     #move config
+    rm -rf "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/configs/xvm/"
+    mkdir -p  "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/configs/xvm/"
     mv "$XVMBUILD_ROOT_PATH"/~output/deploy/res_mods/mods/shared_resources/xvm/configs/* "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/configs/xvm/"
     rm -r "$XVMBUILD_ROOT_PATH"/~output/deploy/res_mods/mods/shared_resources/xvm/configs/
-
-    # get l10n files from translation server
-    pushd "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/shared_resources/xvm/l10n/" >/dev/null
-    mkdir -p temp
-    cd temp
-    wget --quiet --output-document=l10n.zip "$XVMBUILD_L10N_URL"
-    unzip -o l10n.zip >/dev/null
-    rm l10n.zip ru.xc
-    rm -f en.xc
-    cd ..
-    mv temp/* ./
-    rm -rf temp/
-    popd >/dev/null
 
     # put readmes on root
     pushd "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/shared_resources/xvm/doc/" > /dev/null
@@ -198,31 +238,51 @@ copy_files()
 
 pushd "$XVMBUILD_ROOT_PATH" >/dev/null
 
+#detect OS and dependencies
 detect_os
 detect_arch
 
 extend_path
 
-detect_actionscript_sdk
-detect_ffdec
 detect_git
 detect_java
+detect_zip
 detect_patch
 detect_python
 detect_unzip
 detect_wget
-detect_zip
+detect_actionscript_sdk
+detect_ffdec
 
-create_directories
+#build components
+args="$*"
+args="${args:=xfw_actionscript xfw_swf xfw_packages xvm_actionscript xvm_python pack}" # default - build all
 
-build_xfw
-build_xpm
-build_as3
+if [[ " $args " =~ " xfw_actionscript " ]]; then
+    build_xfw_actionscript
+fi
 
-if [[ "$XFW_DEVELOPMENT" == "" ]]; then
-  clean_sha1
-  copy_files
-  calc_hash_for_xvm_integrity
+if [[ " $args " =~ " xfw_swf " ]]; then
+    build_xfw_swf
+fi
+
+if [[ " $args " =~ " xfw_packages " ]]; then
+    build_xfw_packages
+fi
+
+if [[ " $args " =~ " xvm_python " ]]; then
+    build_xvm_python
+fi
+
+if [[ " $args " =~ " xvm_actionscript " ]]; then
+    build_xvm_actionscript
+fi
+
+if [[ " $args " =~ " pack " && "$XFW_DEVELOPMENT" == "" ]]; then
+    clean_sha1
+    download_translations
+    copy_files
+    calc_hash_for_xvm_integrity
 fi
 
 popd >/dev/null
