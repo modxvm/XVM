@@ -3,6 +3,10 @@ stages:
   - build-installer
   - deploy
   - notify
+  
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
 
 build-xvm:
   stage: build-xvm
@@ -34,13 +38,29 @@ deploy:
       artifacts: true
     - job: build-installer
       artifacts: true
+  rules:
+    - if: $CI_COMMIT_MESSAGE =~ /\[no-deploy\]/
+      when: never
+    - when: always
 
 notify-krcm:
   stage: notify
   script:
     - ./build/ci_notify_krcm.sh
+  rules:
+    - if: $CI_COMMIT_MESSAGE =~ /\[no-deploy\]/
+      when: never
+    - if: $CI_COMMIT_MESSAGE =~ /\[no-notify\]/
+      when: never
+    - when: always
 
 notify-telegram:
   stage: notify
   script:
     - ./build/ci_notify_telegram.sh
+  rules:
+    - if: $CI_COMMIT_MESSAGE =~ /\[no-deploy\]/
+      when: never
+    - if: $CI_COMMIT_MESSAGE =~ /\[no-notify\]/
+      when: never
+    - when: always
