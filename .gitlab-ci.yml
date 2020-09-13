@@ -8,6 +8,8 @@ stages:
   
 workflow:
   rules:
+    - if: '$CI_PROJECT_NAMESPACE != "xvm"'
+      when: never
     - if: $CI_COMMIT_MESSAGE =~ /\[no-ci\]/
       when: never
     - if: '$CI_PIPELINE_SOURCE == "push"'
