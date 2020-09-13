@@ -12,8 +12,7 @@ workflow:
       when: never
     - if: $CI_COMMIT_MESSAGE =~ /\[no-ci\]/
       when: never
-    - if: '$CI_PIPELINE_SOURCE == "push"'
-      when: always
+    - when: always
 
 build-xfw-swf:
   stage: build-xfw-as
@@ -99,6 +98,8 @@ deploy:
     - job: pack
       artifacts: true
   rules:
+    - if: '$CI_PIPELINE_SOURCE != "push"'
+      when: never
     - if: $CI_COMMIT_MESSAGE =~ /\[no-deploy\]/
       when: never
     - when: always
@@ -108,6 +109,8 @@ notify-krcm:
   script:
     - ./build/ci_notify_krcm.sh
   rules:
+    - if: '$CI_PIPELINE_SOURCE != "push"'
+      when: never
     - if: $CI_COMMIT_MESSAGE =~ /\[no-deploy\]/
       when: never
     - if: $CI_COMMIT_MESSAGE =~ /\[no-notify\]/
@@ -119,6 +122,8 @@ notify-telegram:
   script:
     - ./build/ci_notify_telegram.sh
   rules:
+    - if: '$CI_PIPELINE_SOURCE != "push"'
+      when: never
     - if: $CI_COMMIT_MESSAGE =~ /\[no-deploy\]/
       when: never
     - if: $CI_COMMIT_MESSAGE =~ /\[no-notify\]/
