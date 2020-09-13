@@ -6,7 +6,10 @@ stages:
   
 workflow:
   rules:
+    - if: $CI_COMMIT_MESSAGE =~ /\[no-ci\]/
+      when: never
     - if: '$CI_PIPELINE_SOURCE == "push"'
+      when: always
 
 build-xvm:
   stage: build-xvm
