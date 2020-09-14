@@ -283,6 +283,7 @@ class Data(object):
                      'number': None,
                      'reloadGun': 0.0,
                      'caliber': None,
+                     'shellDamage': None,
                      'fireDuration': None,
                      'diff-masses': None,
                      'nation': None,
@@ -360,6 +361,7 @@ class Data(object):
         self.data['costShell'] = 'unknown'
         self.data['shellKind'] = 'not_shell'
         self.data['caliber'] = None
+        self.data['shellDamage'] = None
         if (self.data['attackerID'] == 0) or (self.data['attackReasonID'] != 0):
             return
         player = BigWorld.player()
@@ -371,6 +373,7 @@ class Data(object):
             if effectsIndex == _shell.effectsIndex:
                 self.data['shellKind'] = str(_shell.kind).lower()
                 self.data['caliber'] = _shell.caliber
+                self.data['shellDamage'] = _shell.damage[0]
                 _id = _shell.id
                 nation = nations.NAMES[_id[0]]
                 self.data['costShell'] = 'gold-shell' if _id[1] in self.shells[nation] else 'silver-shell'
@@ -611,6 +614,7 @@ class _Base(object):
                       'reloadGun': value['reloadGun'],
                       'my-alive': 'al' if value['isAlive'] else None,
                       'gun-caliber': value['caliber'],
+                      'shell-dmg': value['shellDamage'],
                       'wn8': value.get('wn8', None),
                       'xwn8': value.get('xwn8', None),
                       'wtr': value.get('wtr', None),

@@ -1,4 +1,13 @@
-﻿### XVM 8.6.1
+﻿### XVM 8.6.2
+
+  #### PYTHON MACROS
+
+  * added macro to **damageLog**:
+    * `{{shell-dmg}}` - shell damage
+
+______________________________
+
+### XVM 8.6.1
 
   #### General
 

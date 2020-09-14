@@ -34,15 +34,16 @@
     {{squad-num}}      - number of squad (1 ,2, ...), empty if not in squad / номер взвода (1, 2, ...), пусто - если игрок не во взводе.
     {{dmg-ratio}}      - received damage percent / полученный урон в процентах.
     {{splash-hit}}     - text for damage with shell splinters (HE/HESH) / текст при уроне осколками снаряда (ОФ/ХФ).
-    {{my-alive}}       - value 'al' for alive own vehicle, '' for dead one / возвращает 'al', для живой собственной техники, '' для мертвой.
+    {{my-alive}}       - value 'al' for alive own vehicle, empty for dead one / возвращает 'al', для живой собственной техники, пусто для мертвой.
     {{reloadGun}}      - gun reloading time / время перезарядки орудия.
     {{gun-caliber}}    - gun caliber / калибр орудия.
+    {{shell-dmg}}      - shell damage / урон снарядом.
     {{wn8}}, {{xwn8}}, {{wtr}}, {{xwtr}}, {{eff}}, {{xeff}}, {{wgr}}, {{xwgr}}, {{xte}}, {{r}}, {{xr}} - statistics macros (see macros.txt) / макросы статистики (смотрите macros_ru.txt).
     {{c:wn8}}, {{c:xwn8}}, {{c:wtr}}, {{c:xwtr}}, {{c:eff}}, {{c:xeff}}, {{c:wgr}}, {{c:xwgr}}, {{c:xte}}, {{c:r}}, {{c:xr}} - color according to the corresponding statistics macro (see macros.txt) / цвет по соответствующему макросу статистики (смотрите macros_ru.txt).
     {{fire-duration}}  - duration of fire ("groupDamagesFromFire" must be enabled to work) / продолжительность пожара (работает только при включенной опции "groupDamagesFromFire").
     {{diff-masses}}    - vehicles weights difference during collision / разность масс техники при столкновении.
     {{nation}}         - vehicle nation / нация техники.
-    {{my-blownup}}     - value 'blownup' if own vehicle's ammunition have been blown up, '' otherwise / возвращает 'blownup', если взорван боекомплект собственной техники, иначе ''.
+    {{my-blownup}}     - value 'blownup' if own vehicle's ammunition have been blown up, empty otherwise / возвращает 'blownup', если взорван боекомплект собственной техники, иначе пусто.
     {{stun-duration}}  - stun duration / продолжительность оглушения.
     {{crit-device}}    - damaged module or shell-shocked crew member / поврежденный модуль или контуженный член экипажа.
     {{type-shell-key}} - shell kind table key value / название ключа таблицы типа снаряда.
