@@ -6,6 +6,7 @@ package com.xvm
 {
     import com.xfw.*;
     import com.xvm.types.cfg.*;
+    import com.xvm.types.TurretType;
     import com.xvm.vo.*;
     import flash.filters.*;
     import flash.text.*;
@@ -232,6 +233,18 @@ package com.xvm
                     return (maxHeight / 2.0) - (value / 2.0);
             }
             return value;
+        }
+
+        public static function getTurret(turret:Number):String
+        {
+            switch (turret)
+            {
+                case TurretType.TOP_GUN_IMPOSSIBLE:
+                    return Config.config.markers.turretMarkers.highVulnerability;
+                case TurretType.TOP_GUN_POSSIBLE:
+                    return Config.config.markers.turretMarkers.lowVulnerability;
+            }
+            return null;
         }
     }
 }

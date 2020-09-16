@@ -33,6 +33,7 @@ package com.xvm.vo
         public var localizedFullName:String;
 
         public var turret:int;
+        public var topTurretCD:int;
 
         public var wn8expDamage:Number;
         public var wn8expSpot:Number;

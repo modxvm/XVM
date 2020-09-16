@@ -288,7 +288,6 @@ package com.xvm.vehiclemarkers.ui
             playerState.update({
                 maxHealth: this.maxHealth
             });
-            RegisterVehicleMarkerData();
             dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.INIT, playerState, exInfo));
             playerState.dispatchEvents();
         }
@@ -328,50 +327,6 @@ package com.xvm.vehiclemarkers.ui
             }
         }
 
-        private function RegisterVehicleMarkerData():void
-        {
-            var dict:Object = Macros.Players;
-            var playerState:VOPlayerState = BattleState.get(vehicleID);
-            var pdata:Object;
-            if (playerState)
-            {
-                var playerFakeName:String = playerState.playerFakeName;
-                if (!(playerFakeName in dict))
-                    dict[playerFakeName] = {};
-                pdata = dict[playerFakeName];
-            }
-            else
-            {
-                if (!(playerName in dict))
-                    dict[playerName] = {};
-                pdata = dict[playerName];
-            }
-            // {{turret}}
-            pdata["turret"] = getTurretData();
-        }
-
-        private function getTurretData():String
-        {
-            var playerState:VOPlayerState = BattleState.get(vehicleID);
-            if (playerState)
-            {
-                var vdata:VOVehicleData = VehicleInfo.get(playerState.vehCD);
-                if (vdata)
-                {
-                    if (vdata.hpTop != playerState.maxHealth)
-                    {
-                        switch (vdata.turret)
-                        {
-                            case XvmVehicleMarkerConstants.TURRET_HIGH_VULN_DATABASE_VAL:
-                                return Config.config.markers.turretMarkers.highVulnerability;
-                            case XvmVehicleMarkerConstants.TURRET_LOW_VULN_DATABASE_VAL:
-                                return Config.config.markers.turretMarkers.lowVulnerability;
-                        }
-                    }
-                }
-            }
-            return null;
-        }
 
         private static var _vmPlayerFrags:Number = 0;
         [Inline]

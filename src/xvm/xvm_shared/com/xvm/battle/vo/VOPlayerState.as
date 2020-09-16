@@ -52,6 +52,7 @@ package com.xvm.battle.vo
 
         // XVM
         private var _marksOnGun:Number = NaN;
+        private var _turretCD:int = 0;
         private var _spottedStatus:String = null;
         private var __curHealth:Number = NaN;
         private var _maxHealth:Number = NaN;
@@ -396,6 +397,11 @@ package com.xvm.battle.vo
         public function get isCrewActive():Boolean
         {
             return _isCrewActive;
+        }
+
+        public function get turretCD():int
+        {
+            return _turretCD;
         }
 
         public function get maxHealth():Number

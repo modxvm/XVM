@@ -326,7 +326,7 @@ package com.xvm
             "clan", "clannb", "anonym",
             // vehicle macros (can be changed during the battle in some game modes)
             "veh-id", "vehicle", "vehiclename", "vehicle-short", "vtype-key", "vtype", "vtype-l", "c:vtype",
-            "battletier-min", "battletier-max", "nation", "level", "rlevel", "premium", "special",
+            "battletier-min", "battletier-max", "nation", "level", "rlevel", "premium", "special", "turret",
             // global macros
             "sys-color-key", "c:system", "my-alive"
             ];

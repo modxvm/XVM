@@ -327,6 +327,10 @@ class VehicleMarkers(object):
                         if entity and hasattr(entity, 'publicInfo'):
                             data['marksOnGun'] = entity.publicInfo.marksOnGun
 
+                    if targets & INV.TURRET:
+                        if entity and hasattr(entity, 'typeDescriptor'):
+                            data['turretCD'] = entity.typeDescriptor.turret.compactDescr
+
                     if targets & INV.CREW_ACTIVE:
                         if entity and hasattr(entity, 'isCrewActive'):
                             data['isCrewActive'] = bool(entity.isCrewActive)

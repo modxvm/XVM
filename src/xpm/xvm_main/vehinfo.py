@@ -150,6 +150,7 @@ _UNKNOWN_VEHICLE_DATA = {
     'tierHi': 0,
     'shortName': 'unknown',
     'isReserved': False,
+    'topTurretCD': 0
 }
 
 def _init():
@@ -185,6 +186,7 @@ def _init():
                 data['hpStock'] = item.hulls[0].maxHealth + stockTurret.maxHealth
                 data['hpTop'] = item.hulls[0].maxHealth + topTurret.maxHealth
                 data['turret'] = _getTurretType(item, nation)
+                data['topTurretCD'] = topTurret.compactDescr
                 (data['visRadius'], data['firingRadius'], data['artyRadius']) = \
                     _getRanges(topTurret, topGun, nation, data['vclass'])
 

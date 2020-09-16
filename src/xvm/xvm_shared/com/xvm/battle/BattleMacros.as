@@ -287,6 +287,13 @@ package com.xvm.battle
                 return o && !isNaN(o.marksOnGun) && o.vehicleData && o.vehicleData.level > 4 ? Utils.getMarksOnGunText(o.marksOnGun) : null;
             }
 
+            // {{turret}}
+            m_globals["turret"] = function(o:IVOMacrosOptions):String
+            {
+                var ps:VOPlayerState = o as VOPlayerState;
+                return ps && ps.turretCD != 0 && ps.turretCD != ps.vehicleData.topTurretCD ?  Utils.getTurret(ps.vehicleData.turret) : null;
+            }
+
             // spotted
 
             // {{spotted}}
