@@ -33,7 +33,7 @@ package net.wg.gui.lobby.battleResults.components
             var _loc4_:VehicleIconPreset = null;
             if(this.vehicleIcon.visible = param1)
             {
-                _loc4_ = VehicleIconPreset.getPreset(param3);
+                //_loc4_ = BattleResultImageSwitcherView.getPreset(param3);
                 App.utils.asserter.assertNotNull(_loc4_,"Icon preset for level: " + param3 + Errors.WASNT_FOUND);
                 this.vehicleIcon.source = RES_SHOP.getVehicleIcon(_loc4_.size,param2);
                 this.vehicleIcon.scaleX = this.vehicleIcon.scaleY = _loc4_.scale;

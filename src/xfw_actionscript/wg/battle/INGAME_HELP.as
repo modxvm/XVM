@@ -65,24 +65,6 @@ package
 
         public static const TEAMCOMM_HIGHLIGHTASACTIVETARGET:String = "#ingame_help:teamComm/highlightAsActiveTarget";
 
-        public static const CHATSHORTCUTS_TITLE:String = "#ingame_help:chatShortcuts/title";
-
-        public static const CHATSHORTCUTS_TOBACK:String = "#ingame_help:chatShortcuts/toBack";
-
-        public static const CHATSHORTCUTS_POSITIVE:String = "#ingame_help:chatShortcuts/positive";
-
-        public static const CHATSHORTCUTS_HELPME:String = "#ingame_help:chatShortcuts/helpMe";
-
-        public static const CHATSHORTCUTS_HELPMEEX:String = "#ingame_help:chatShortcuts/helpMeEx";
-
-        public static const CHATSHORTCUTS_ATTACK_ENEMY:String = "#ingame_help:chatShortcuts/attack_enemy";
-
-        public static const CHATSHORTCUTS_RELOADINGGUN:String = "#ingame_help:chatShortcuts/reloadingGun";
-
-        public static const CHATSHORTCUTS_ATTACK_ENEMY_WITH_SPG:String = "#ingame_help:chatShortcuts/attack_enemy_with_SPG";
-
-        public static const CHATSHORTCUTS_ATTACK_ENEMY_WITH_SPG_EXT:String = "#ingame_help:chatShortcuts/attack_enemy_with_SPG/ext";
-
         public static const CHATCONTROLS_TITLE:String = "#ingame_help:chatControls/title";
 
         public static const CHATCONTROLS_ENTERTOCHATMODE:String = "#ingame_help:chatControls/enterToChatMode";

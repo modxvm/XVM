@@ -849,6 +849,8 @@ package
 
         public static const CLANINVITE_NOTIFICATION_USERNAMEERROR:String = "#clans:clanInvite/notification/userNameError";
 
+        public static const GLOBALMAP_DISABLED:String = "#clans:globalMap/disabled";
+
         public function CLANS()
         {
             super();

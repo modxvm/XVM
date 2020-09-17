@@ -15,6 +15,8 @@ package net.wg.gui.lobby.clans.profile.VOs
 
         public var isShowUrlString:Boolean = false;
 
+        public var isDetailLinkEnabled:Boolean = false;
+
         public var totalRatingTooltip:String = "";
 
         public function ClanProfileSummaryViewVO(param1:Object)

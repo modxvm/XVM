@@ -6,7 +6,5 @@ package net.wg.infrastructure.base.meta
     {
 
         function setIsSmallS(param1:Boolean) : void;
-
-        function as_setIsMouseEnabled(param1:Boolean) : void;
     }
 }

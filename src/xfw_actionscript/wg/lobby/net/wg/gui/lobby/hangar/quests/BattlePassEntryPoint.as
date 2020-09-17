@@ -13,17 +13,25 @@ package net.wg.gui.lobby.hangar.quests
 
         private static const BP_ENTRY_POINT_SIDE_INDENT:int = 2;
 
-        private static const BP_ENTRY_POINT_MARGIN_X:int = 0;
+        private static const BP_ENTRY_POINT_OUTER_MARGIN_X:int = -140;
 
-        private static const BP_ENTRY_POINT_SMALL_WIDTH:int = 100 + BP_ENTRY_POINT_MARGIN_X * 2;
+        private static const BP_ENTRY_POINT_OUTER_MARGIN_SMALL_X:int = -115;
 
-        private static const BP_ENTRY_POINT_SMALL_HEIGHT:int = 120;
+        private static const BP_ENTRY_POINT_MARGIN_X:int = -70;
 
-        private static const BP_ENTRY_POINT_WIDTH:int = 142 + BP_ENTRY_POINT_MARGIN_X * 2;
+        private static const BP_ENTRY_POINT_MARGIN_Y:int = -30;
 
-        private static const BP_ENTRY_POINT_HEIGHT:int = 160;
+        private static const BP_ENTRY_POINT_MARGIN_SMALL_X:int = -60;
 
-        private var _isMouseEnabled:Boolean = true;
+        private static const BP_ENTRY_POINT_MARGIN_SMALL_Y:int = -20;
+
+        private static const BP_ENTRY_POINT_SMALL_WIDTH:int = 100 - BP_ENTRY_POINT_MARGIN_SMALL_X << 1;
+
+        private static const BP_ENTRY_POINT_SMALL_HEIGHT:int = 120 - BP_ENTRY_POINT_MARGIN_SMALL_Y;
+
+        private static const BP_ENTRY_POINT_WIDTH:int = 142 - BP_ENTRY_POINT_MARGIN_X << 1;
+
+        private static const BP_ENTRY_POINT_HEIGHT:int = 160 - BP_ENTRY_POINT_MARGIN_Y;
 
         private var _isSmall:Boolean = false;
 
@@ -35,8 +43,6 @@ package net.wg.gui.lobby.hangar.quests
         override protected function configUI() : void
         {
             super.configUI();
-            buttonMode = this._isMouseEnabled;
-            useHandCursor = this._isMouseEnabled;
             App.stage.addEventListener(Event.RESIZE,this.onStageResizeHandler,false,0,true);
         }
 
@@ -66,13 +72,6 @@ package net.wg.gui.lobby.hangar.quests
             super.onDispose();
         }
 
-        public function as_setIsMouseEnabled(param1:Boolean) : void
-        {
-            this._isMouseEnabled = param1;
-            buttonMode = this._isMouseEnabled;
-            useHandCursor = this._isMouseEnabled;
-        }
-
         private function setIsSmallSize(param1:Boolean) : void
         {
             if(this._isSmall != param1)
@@ -84,7 +83,7 @@ package net.wg.gui.lobby.hangar.quests
 
         public function get marginX() : int
         {
-            return BP_ENTRY_POINT_MARGIN_X;
+            return this._isSmall?BP_ENTRY_POINT_OUTER_MARGIN_SMALL_X:BP_ENTRY_POINT_OUTER_MARGIN_X;
         }
 
         private function onStageResizeHandler(param1:Event) : void

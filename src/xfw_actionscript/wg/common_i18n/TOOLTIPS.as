@@ -335,8 +335,6 @@ package
 
         public static const VEHICLEPREVIEW_BUYINGPANEL_EVENTPROGRESSION_PRICE:String = "#tooltips:vehiclePreview/buyingPanel/eventProgression/price";
 
-        public static const TOOLTIPS_BATTLEPASS_ENTRYPOINT_DISABLED:String = "#tooltips:tooltips/battlePass/entryPoint/disabled";
-
         public static const RANKEDBATTLESVIEW_SPRINTER:String = "#tooltips:rankedBattlesView/sprinter";
 
         public static const BADGEINFO_TITLE:String = "#tooltips:badgeinfo/title";
@@ -1169,10 +1167,6 @@ package
 
         public static const FALLOUTBATTLESELECTORWINDOW_BTNINSQUADDISABLED_BODY:String = "#tooltips:falloutBattleSelectorWindow/btnInSquadDisabled/body";
 
-        public static const TOOLTIPS_BATTLEPASS_ENTRYPOINT_DISABLED_HEADER:String = "#tooltips:tooltips/battlePass/entryPoint/disabled/header";
-
-        public static const TOOLTIPS_BATTLEPASS_ENTRYPOINT_DISABLED_BODY:String = "#tooltips:tooltips/battlePass/entryPoint/disabled/body";
-
         public static const REDBUTTON_DISABLED_BUYNEEDED_HEADER:String = "#tooltips:redButton/disabled/buyNeeded/header";
 
         public static const REDBUTTON_DISABLED_BUYNEEDED_BODY:String = "#tooltips:redButton/disabled/buyNeeded/body";
@@ -1412,6 +1406,10 @@ package
         public static const HEADER_RANKEDSQUAD_HEADER:String = "#tooltips:header/rankedSquad/header";
 
         public static const HEADER_RANKEDSQUAD_BODY:String = "#tooltips:header/rankedSquad/body";
+
+        public static const HEADER_BOBSQUAD_HEADER:String = "#tooltips:header/bobSquad/header";
+
+        public static const HEADER_BOBSQUAD_BODY:String = "#tooltips:header/bobSquad/body";
 
         public static const HEADER_BATTLETYPE_HEADER:String = "#tooltips:header/battleType/header";
 
@@ -2346,6 +2344,8 @@ package
         public static const VEHICLE_TRADE:String = "#tooltips:vehicle/trade";
 
         public static const VEHICLE_DEAL_EPIC_MAIN:String = "#tooltips:vehicle/deal/epic/main";
+
+        public static const VEHICLE_DEAL_BOB_MAIN:String = "#tooltips:vehicle/deal/bob/main";
 
         public static const ANONYMIZER_TEAMSTATS_HEADER:String = "#tooltips:anonymizer/teamStats/header";
 
@@ -5741,6 +5741,10 @@ package
 
         public static const NOTRECRUITEDTANKMAN_COMMANDER_CESARE_DESC:String = "#tooltips:notrecruitedtankman/commander_cesare/desc";
 
+        public static const NOTRECRUITEDTANKMAN_COMMANDER_STARLIGHT_LABEL:String = "#tooltips:notrecruitedtankman/commander_starlight/label";
+
+        public static const NOTRECRUITEDTANKMAN_COMMANDER_STARLIGHT_DESC:String = "#tooltips:notrecruitedtankman/commander_starlight/desc";
+
         public static const NOTRECRUITEDTANKMAN_NY19MEN_LABEL:String = "#tooltips:notrecruitedtankman/ny19men/label";
 
         public static const NOTRECRUITEDTANKMAN_NY19MEN_DESC:String = "#tooltips:notrecruitedtankman/ny19men/desc";
@@ -5882,6 +5886,18 @@ package
         public static const NOTRECRUITEDTANKMAN_BP_COMMANDER_1_2_DESC:String = "#tooltips:notrecruitedtankman/bp-commander-1_2/desc";
 
         public static const NOTRECRUITEDTANKMAN_BP_COMMANDER_1_2_HOWTOGETINFO:String = "#tooltips:notrecruitedtankman/bp-commander-1_2/howToGetInfo";
+
+        public static const NOTRECRUITEDTANKMAN_TANKMEN_BP2_1_LABEL:String = "#tooltips:notrecruitedtankman/tankmen_bp2_1/label";
+
+        public static const NOTRECRUITEDTANKMAN_TANKMEN_BP2_1_DESC:String = "#tooltips:notrecruitedtankman/tankmen_bp2_1/desc";
+
+        public static const NOTRECRUITEDTANKMAN_TANKMEN_BP2_1_HOWTOGETINFO:String = "#tooltips:notrecruitedtankman/tankmen_bp2_1/howToGetInfo";
+
+        public static const NOTRECRUITEDTANKMAN_TANKMEN_BP2_2_LABEL:String = "#tooltips:notrecruitedtankman/tankmen_bp2_2/label";
+
+        public static const NOTRECRUITEDTANKMAN_TANKMEN_BP2_2_DESC:String = "#tooltips:notrecruitedtankman/tankmen_bp2_2/desc";
+
+        public static const NOTRECRUITEDTANKMAN_TANKMEN_BP2_2_HOWTOGETINFO:String = "#tooltips:notrecruitedtankman/tankmen_bp2_2/howToGetInfo";
 
         public static const QUESTS_AWARDS_VEHICLERENT_HEADER:String = "#tooltips:quests/awards/vehicleRent/header";
 
@@ -6072,6 +6088,18 @@ package
         public static const ROLEEXP_STATUS_FOOTER:String = "#tooltips:roleExp/status/footer";
 
         public static const ROLEEXP_STATUS_FOOTEREXP:String = "#tooltips:roleExp/status/footerExp";
+
+        public static const BATTLEPASSDEVICEOFFER_TITLE_TROPHYGIFTTOKEN:String = "#tooltips:battlePassDeviceOffer/title/trophyGiftToken";
+
+        public static const BATTLEPASSDEVICEOFFER_FOOTER_TROPHYGIFTTOKEN:String = "#tooltips:battlePassDeviceOffer/footer/trophyGiftToken";
+
+        public static const BATTLEPASSDEVICEOFFER_ERROR_TROPHYGIFTTOKEN:String = "#tooltips:battlePassDeviceOffer/error/trophyGiftToken";
+
+        public static const BATTLEPASSDEVICEOFFER_TITLE_NEWDEVICEGIFTTOKEN:String = "#tooltips:battlePassDeviceOffer/title/newDeviceGiftToken";
+
+        public static const BATTLEPASSDEVICEOFFER_FOOTER_NEWDEVICEGIFTTOKEN:String = "#tooltips:battlePassDeviceOffer/footer/newDeviceGiftToken";
+
+        public static const BATTLEPASSDEVICEOFFER_ERROR_NEWDEVICEGIFTTOKEN:String = "#tooltips:battlePassDeviceOffer/error/newDeviceGiftToken";
 
         public static const BATTLE_ROYALE_AWARDS_NO_VEHICLE_AVAILABLE_HEADER:String = "#tooltips:battle_royale/awards/no_vehicle_available/header";
 

@@ -475,6 +475,10 @@ package net.wg.data.constants.generated
 
         public static const BLUEPRINT_RANDOM_INFO:String = "blueprintRandomInfo";
 
+        public static const BOB_SELECTOR_INFO:String = "bobSelectorInfo";
+
+        public static const BOB_SERVER_PRIMETIME:String = "bobServerPrimeTime";
+
         public static const BLOCKS_DEFAULT_UI:String = "ToolTipInblocksDefaultUI";
 
         public static const TANKMEN_UI:String = "ToolTipTankmenUI";
@@ -651,6 +655,14 @@ package net.wg.data.constants.generated
 
         public static const BATTLE_OPT_DEVICE_UI:String = "ToolTipInblocksDefaultUI";
 
+        public static const DEVICE_GIFT_TOKEN:String = "deviceGiftToken";
+
+        public static const DEVICE_GIFT_TOKEN_UI:String = "ToolTipInblocksDefaultUI";
+
+        public static const TROPHY_GIFT_TOKEN:String = "trophyGiftToken";
+
+        public static const TROPHY_GIFT_TOKEN_UI:String = "ToolTipInblocksDefaultUI";
+
         public static const ACHIEVEMENTS_SET:Array = [BATTLE_STATS_ACHIEVS,BATTLE_STATS_MARKS_ON_GUN_ACHIEVEMENT,ACHIEVEMENT,MARKS_ON_GUN_ACHIEVEMENT,GLOBAL_RATING,MARK_OF_MASTERY,ACHIEVEMENT_ATTR,SHOP_ACHIEVEMENT,SHOP_BADGE,REFERRAL_BADGE];
 
         public static const BOOSTERS_SET:Array = [INVENTORY_BATTLE_BOOSTER,AWARD_BATTLE_BOOSTER,EPIC_AWARD_BATTLE_BOOSTER,BATTLE_BOOSTER_BLOCK,DEFAULT_BATTLE_BOOSTER,SHOP_BATTLE_BOOSTER,BATTLE_BOOSTER_COMPARE,BOOSTERS_BOOSTER_INFO,CLAN_RESERVE_INFO,BOOSTER,SHOP_BOOSTER,BOOSTERS_QUESTS,NATION_CHANGE_BATTLE_BOOSTER];
@@ -724,6 +736,10 @@ package net.wg.data.constants.generated
         public static const OPTDEV_SLOT_STATE_EMPTY_SELECTED:String = "emptySelected";
 
         public static const OPTDEV_SLOT_STATE_ACTIVE_SELECTED:String = "activeSelected";
+
+        public static const BOB_SET:Array = [BOB_SELECTOR_INFO,BOB_SERVER_PRIMETIME];
+
+        public static const BATTLE_PASS_SET:Array = [DEVICE_GIFT_TOKEN];
 
         public function TOOLTIPS_CONSTANTS()
         {

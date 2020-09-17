@@ -141,6 +141,7 @@ package net.wg.gui.lobby.clans.profile.views
             this.fortNavigationBtn.visible = this._model.isShowFortBtn;
             this.clanNavigationBtn.visible = this._model.isShowClanNavBtn;
             var _loc2_:Boolean = this._model.isShowUrlString;
+            var _loc3_:Boolean = this._model.isDetailLinkEnabled;
             if(_loc2_)
             {
                 this.gotoGlobalMapLink.label = CLANS.CLANPROFILE_SUMMARYVIEW_LINKS_GOTOMAP;
@@ -150,7 +151,8 @@ package net.wg.gui.lobby.clans.profile.views
                 this.gotoDetailsGlobalMapLink.addEventListener(ButtonEvent.CLICK,this.onDetailsMapClickHandler);
                 this.gotoDetailsGlobalMapLink.validateNow();
             }
-            this.gotoGlobalMapLink.visible = this.gotoDetailsGlobalMapLink.visible = _loc2_;
+            this.gotoGlobalMapLink.visible = _loc2_;
+            this.gotoDetailsGlobalMapLink.visible = _loc2_ && _loc3_;
             this.leaguesGroup.visible = false;
             this._scheduler.scheduleOnNextFrame(this.repositionGeneralViewElements);
         }

@@ -114,13 +114,14 @@ package net.wg.gui.tutorial.controls
 
         private function rebuildPhases() : void
         {
+            var _loc1_:* = 0;
             var _loc2_:* = NaN;
             var _loc3_:ProgressSeparator = null;
             var _loc4_:ProgressItem = null;
             this.clearItems(this.separatorsContainer,this.separatorItems);
             this.clearItems(this.phasesContainer,this.phaseItems);
             this._phaseWidth = this._bodyWidth / this._allPhases;
-            var _loc1_:* = 0;
+            _loc1_ = 0;
             while(_loc1_ < this._allPhases)
             {
                 _loc2_ = this._phaseWidth * _loc1_ ^ 0;

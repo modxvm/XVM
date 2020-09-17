@@ -17,6 +17,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 class _SwfLoadedInfo(object):
+
     def __init__(self):
         self.__swfs_loaded = list()
         self.__swfs_names = dict()

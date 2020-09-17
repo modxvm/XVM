@@ -186,7 +186,7 @@ class XFWFonts(object):
         if os.path.isfile(font_path):
             return font_path
 
-        realfs_path = loader.XFWLOADER_TEMPDIR+'/'+self.__package_name + '/fonts/%s' % os.path.basename(font_path)
+        realfs_path = loader.XFWLOADER_TEMPDIR + '/'+self.__package_name + '/fonts/%s' % os.path.basename(font_path)
         if vfs.file_copy(font_path, realfs_path):
             return realfs_path
         else:

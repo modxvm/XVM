@@ -102,8 +102,9 @@ package net.wg.gui.lobby.vehicleCompare
 
         override protected function updateLayout() : void
         {
+            var _loc1_:* = 0;
             super.updateLayout();
-            var _loc1_:int = (width - MIN_SCREEN_WIDTH >> 1) + BORDER_OFFSET;
+            _loc1_ = (width - MIN_SCREEN_WIDTH >> 1) + BORDER_OFFSET;
             this.modules.x = _loc1_;
             this.equipmentWidget.x = _loc1_ + EQUIPMENT_WIDGET_X_OFFSET;
             bottomPanel.x = _loc1_;

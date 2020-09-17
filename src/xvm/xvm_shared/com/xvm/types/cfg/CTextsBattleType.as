@@ -10,6 +10,7 @@ package com.xvm.types.cfg
     {
         public var battle_royale_solo:String;
         public var battle_royale_squad:String;
+        public var bob:String;
         public var bootcamp:String;
         public var clan:String;
         public var cybersport:String;

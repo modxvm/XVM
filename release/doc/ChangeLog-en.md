@@ -1,6 +1,10 @@
 ﻿### XVM 8.6.2
 
-  #### PYTHON MACROS
+  #### General
+
+  * Compatibility with World of Tanks 1.10.0.2
+
+  #### Python macros
 
   * added macro to **damageLog**:
     * `{{shell-dmg}}` - shell damage

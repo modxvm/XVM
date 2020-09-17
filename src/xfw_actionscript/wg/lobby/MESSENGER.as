@@ -1125,6 +1125,8 @@ package
 
         public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_RANKEDBATTLESNOTSET:String = "#messenger:serviceChannelMessages/sysMsg/titles/rankedBattlesNotSet";
 
+        public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_BOBBATTLESAVAILABLE:String = "#messenger:serviceChannelMessages/sysMsg/titles/bobBattlesAvailable";
+
         public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_PAYMENTMETHODLINK:String = "#messenger:serviceChannelMessages/sysMsg/titles/paymentMethodLink";
 
         public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_PAYMENTMETHODUNLINK:String = "#messenger:serviceChannelMessages/sysMsg/titles/paymentMethodUnlink";
@@ -1919,11 +1921,21 @@ package
 
         public static const SERVICECHANNELMESSAGES_BATTLEPASS_BADGES_TEXT_REMOVE:String = "#messenger:serviceChannelMessages/battlePass/badges/text/remove";
 
+        public static const SERVICECHANNELMESSAGES_BATTLEPASS_TROPHYSELECTTOKEN:String = "#messenger:serviceChannelMessages/battlePass/trophySelectToken";
+
+        public static const SERVICECHANNELMESSAGES_BATTLEPASS_NEWDEVICETOKEN:String = "#messenger:serviceChannelMessages/battlePass/newDeviceToken";
+
         public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_UPGRADE:String = "#messenger:serviceChannelMessages/sysMsg/titles/upgrade";
 
         public static const SERVER_ERRORS_COMMANDINTEAMCOOLDOWN_MESSAGE:String = "#messenger:server/errors/commandInTeamCooldown/message";
 
         public static const CLIENT_ERRORS_COMMANDINCOOLDOWN_SUSPENDEDTEXT:String = "#messenger:client/errors/commandInCooldown/suspendedText";
+
+        public static const SERVICECHANNELMESSAGES_NONSELECTEDDEVICES_TEXT_BATTLEPASSTROPHYGIFTTOKEN:String = "#messenger:serviceChannelMessages/nonSelectedDevices/text/battlePassTrophyGiftToken";
+
+        public static const SERVICECHANNELMESSAGES_NONSELECTEDDEVICES_TEXT_BATTLEPASSNEWDEVICEGIFTTOKEN:String = "#messenger:serviceChannelMessages/nonSelectedDevices/text/battlePassNewDeviceGiftToken";
+
+        public static const SERVICECHANNELMESSAGES_NONSELECTEDDEVICES_BUTTON:String = "#messenger:serviceChannelMessages/nonSelectedDevices/button";
 
         public static const SERVICECHANNELMESSAGES_BRBATTLERESULTS_VICTORY:String = "#messenger:serviceChannelMessages/BRbattleResults/victory";
 

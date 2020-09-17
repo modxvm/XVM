@@ -169,7 +169,11 @@ package
 
         public static const PLAYER_MESSAGES_LOADER_INTUITION_WAS_USED:String = "#ingame_gui:player_messages/loader_intuition_was_used";
 
+        public static const CHAT_SHORTCUTS_ATTENTION_TO_POSITION_GRIDINFO:String = "#ingame_gui:chat_shortcuts/attention_to_position_gridInfo";
+
         public static const CHAT_SHORTCUTS_ATTENTION_TO_POSITION:String = "#ingame_gui:chat_shortcuts/attention_to_position";
+
+        public static const CHAT_SHORTCUTS_GOING_THERE_GRIDINFO:String = "#ingame_gui:chat_shortcuts/going_there_gridInfo";
 
         public static const CHAT_SHORTCUTS_GOING_THERE:String = "#ingame_gui:chat_shortcuts/going_there";
 
@@ -185,7 +189,11 @@ package
 
         public static const CHAT_SHORTCUTS_RELOADING_UNAVAILABLE:String = "#ingame_gui:chat_shortcuts/reloading_unavailable";
 
+        public static const CHAT_SHORTCUTS_SPG_AIM_AREA_GRIDINFO:String = "#ingame_gui:chat_shortcuts/spg_aim_area_gridInfo";
+
         public static const CHAT_SHORTCUTS_SPG_AIM_AREA:String = "#ingame_gui:chat_shortcuts/spg_aim_area";
+
+        public static const CHAT_SHORTCUTS_SPG_AIM_AREA_RELOADING_GRIDINFO:String = "#ingame_gui:chat_shortcuts/spg_aim_area_reloading_gridInfo";
 
         public static const CHAT_SHORTCUTS_SPG_AIM_AREA_RELOADING:String = "#ingame_gui:chat_shortcuts/spg_aim_area_reloading";
 
@@ -222,6 +230,10 @@ package
         public static const CHAT_SHORTCUTS_THANKS:String = "#ingame_gui:chat_shortcuts/thanks";
 
         public static const CHAT_SHORTCUTS_POSITIVE:String = "#ingame_gui:chat_shortcuts/positive";
+
+        public static const CHAT_SHORTCUTS_AFFIRMATIVE:String = "#ingame_gui:chat_shortcuts/affirmative";
+
+        public static const CHAT_SHORTCUTS_NEGATIVE:String = "#ingame_gui:chat_shortcuts/negative";
 
         public static const CHAT_SHORTCUTS_ATTENTION_TO_CELL:String = "#ingame_gui:chat_shortcuts/attention_to_cell";
 
@@ -288,6 +300,10 @@ package
         public static const CHAT_EXAMPLE_HELP_ME_EX:String = "#ingame_gui:chat_example/help_me_ex";
 
         public static const CHAT_EXAMPLE_POSITIVE:String = "#ingame_gui:chat_example/positive";
+
+        public static const CHAT_EXAMPLE_AFFIRMATIVE:String = "#ingame_gui:chat_example/affirmative";
+
+        public static const CHAT_EXAMPLE_NEGATIVE:String = "#ingame_gui:chat_example/negative";
 
         public static const CHAT_EXAMPLE_THANKS:String = "#ingame_gui:chat_example/thanks";
 
@@ -1446,6 +1462,14 @@ package
         public static const REWARDWINDOW_TWITCH15_DESCTEXT:String = "#ingame_gui:rewardWindow/twitch15/descText";
 
         public static const REWARDWINDOW_TWITCH15_BTNLABEL:String = "#ingame_gui:rewardWindow/twitch15/btnLabel";
+
+        public static const REWARDWINDOW_TWITCH16_HEADERTEXT:String = "#ingame_gui:rewardWindow/twitch16/headerText";
+
+        public static const REWARDWINDOW_TWITCH16_SUBHEADERTEXT:String = "#ingame_gui:rewardWindow/twitch16/subHeaderText";
+
+        public static const REWARDWINDOW_TWITCH16_DESCTEXT:String = "#ingame_gui:rewardWindow/twitch16/descText";
+
+        public static const REWARDWINDOW_TWITCH16_BTNLABEL:String = "#ingame_gui:rewardWindow/twitch16/btnLabel";
 
         public static const REWARDWINDOW_LOOTBOX_WINHEADERTEXT:String = "#ingame_gui:rewardWindow/lootbox/winHeaderText";
 

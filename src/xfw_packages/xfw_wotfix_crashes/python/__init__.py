@@ -22,8 +22,8 @@ import logging
 #xfw.loader
 import xfw_loader.python as loader
 
-
 g_crashfix = None
+
 class XFWCrashFix(object):
 
     def __init__(self):

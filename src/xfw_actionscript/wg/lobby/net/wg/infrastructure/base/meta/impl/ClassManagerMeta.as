@@ -27,6 +27,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.data.constants.generated.BARRACKS_CONSTANTS;
     import net.wg.data.constants.generated.BATTLEROYALE_ALIASES;
     import net.wg.data.constants.generated.BATTLEROYALE_CONSTS;
+    import net.wg.data.constants.generated.BATTLE_OF_BLOGGERS_ALIASES;
     import net.wg.data.constants.generated.BATTLE_RESULTS_PREMIUM_STATES;
     import net.wg.data.constants.generated.BATTLE_RESULT_TYPES;
     import net.wg.data.constants.generated.BOOSTER_CONSTANTS;
@@ -3457,6 +3458,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_DATA_CONSTANTS_GENERATED_BATTLEROYALE_ALIASES:Class = BATTLEROYALE_ALIASES;
 
         public static const NET_WG_DATA_CONSTANTS_GENERATED_BATTLEROYALE_CONSTS:Class = BATTLEROYALE_CONSTS;
+
+        public static const NET_WG_DATA_CONSTANTS_GENERATED_BATTLE_OF_BLOGGERS_ALIASES:Class = BATTLE_OF_BLOGGERS_ALIASES;
 
         public static const NET_WG_DATA_CONSTANTS_GENERATED_BATTLE_RESULTS_PREMIUM_STATES:Class = BATTLE_RESULTS_PREMIUM_STATES;
 
