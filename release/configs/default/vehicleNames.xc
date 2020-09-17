@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 20.08.2020
+    // Last update: 17.09.2020
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -618,6 +618,7 @@
     "usa-A67_T57_58":                        {"name": null, "short": null},
     "usa-A68_T28_Prototype":                 {"name": null, "short": null},
     "usa-A69_T110E5":                        {"name": null, "short": null},
+    "usa-A69_T110E5_WB":                     {"name": null, "short": null},
     "usa-A71_T21":                           {"name": null, "short": null},
     "usa-A72_T25_2":                         {"name": null, "short": null},
     "usa-A72_T25_2_SH":                      {"name": null, "short": null},
