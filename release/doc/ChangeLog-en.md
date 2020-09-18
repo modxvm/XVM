@@ -1,4 +1,12 @@
-﻿### XVM 8.6.2
+﻿### XVM 8.6.3
+
+  #### General
+
+  * Fix incorrect tankcarousel behaviour
+
+______________________________
+
+### XVM 8.6.2
 
   #### General
 
@@ -81,6 +89,7 @@ ______________________________
   #### General
 
   * Fix incorrect tankcarousel behaviour
+
 ______________________________
 
 ### XVM 8.5.5
