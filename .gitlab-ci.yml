@@ -10,6 +10,8 @@ workflow:
   rules:
     - if: '$CI_PROJECT_NAMESPACE != "xvm"'
       when: never
+    - if: '$CI_COMMIT_TAG != null'
+      when: never
     - if: $CI_COMMIT_MESSAGE =~ /\[no-ci\]/
       when: never
     - when: always
