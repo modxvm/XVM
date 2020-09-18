@@ -1,31 +1,31 @@
 ﻿{
     "RU": {
-        "ver": "8.6.2",
+        "ver": "8.6.3",
         "wot": "1.10.0.2",
         "message": " • World of Tanks 1.10.0.2\nСкачать на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
     },
     "EU": {
-        "ver": "8.6.2",
+        "ver": "8.6.3",
         "wot": "1.10.0.2",
         "message": " • World of Tanks 1.10.0.2\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
     },
     "NA": {
-        "ver": "8.6.2",
+        "ver": "8.6.3",
         "wot": "1.10.0.2",
         "message": " • World of Tanks 1.10.0.2\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
     },
     "ASIA": {
-        "ver": "8.6.2",
+        "ver": "8.6.3",
         "wot": "1.10.0.2",
         "message": " • World of Tanks 1.10.0.2\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
     },
     "CN": {
-        "ver": "8.6.2",
-        "wot": "1.10.0.2",
-        "message": " • World of Tanks 1.10.0.2\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
+        "ver": "7.4.1",
+        "wot": "0.9.22.0.1",
+        "message": " • World of Tanks 0.9.22.0.1\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
     },
     "CT": {
-        "ver": "8.6.2",
+        "ver": "8.6.3",
         "wot": "1.10.0.2",
         "message": " • World of Tanks 1.10.0.2\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
     }
