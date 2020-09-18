@@ -51,10 +51,11 @@ class INV(object):
     MARKS_ON_GUN        = 0x00000080
     SPOTTED_STATUS      = 0x00000100
     FRAGS               = 0x00000200
+    TURRET              = 0x00000400
     DAMAGE_CAUSED       = 0x00010000
     ALL_VINFO           = VEHICLE_STATUS | SQUAD_INDEX | RANK_LEVEL | FRAGS # | PLAYER_STATUS
     ALL_VSTATS          = FRAGS
-    ALL_ENTITY          = CUR_HEALTH | MAX_HEALTH | MARKS_ON_GUN | CREW_ACTIVE
+    ALL_ENTITY          = CUR_HEALTH | MAX_HEALTH | MARKS_ON_GUN | CREW_ACTIVE | TURRET
     ALL                 = 0x0000FFFF
 
 # Spotted statuses
