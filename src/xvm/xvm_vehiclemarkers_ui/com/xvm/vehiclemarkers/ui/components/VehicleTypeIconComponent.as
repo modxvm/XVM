@@ -42,7 +42,7 @@ package com.xvm.vehiclemarkers.ui.components
             var cfg:CMarkersVehicleIcon = e.cfg.vehicleIcon;
             var visible:Boolean = cfg.enabled || (showSpeaker && marker.isSpeaking());
             var marker_marker:VehicleIconAnimation = marker.marker;
-            marker_marker.visible = visible;
+            marker_marker.vehicleTypeIcon.visible = visible;
             if (visible)
             {
                 var offsetX:Number = cfg.offsetX;

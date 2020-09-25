@@ -67,4 +67,4 @@ class SPOTTED_STATUS(object):
     DEAD = 'dead'
 
 class INT_CD(object):
-    STEREOSCOPE = 1273
+    STEREOSCOPE = {17913, 17657, 17401}
