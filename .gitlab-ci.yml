@@ -104,7 +104,7 @@ deploy:
       when: never
     - if: $CI_COMMIT_MESSAGE =~ /\[no-deploy\]/
       when: never
-    - when: always
+    - when: on_success
 
 notify-krcm:
   stage: notify
@@ -117,7 +117,7 @@ notify-krcm:
       when: never
     - if: $CI_COMMIT_MESSAGE =~ /\[no-notify\]/
       when: never
-    - when: always
+    - when: on_success
 
 notify-telegram:
   stage: notify
@@ -130,4 +130,4 @@ notify-telegram:
       when: never
     - if: $CI_COMMIT_MESSAGE =~ /\[no-notify\]/
       when: never
-    - when: always
+    - when: on_success
