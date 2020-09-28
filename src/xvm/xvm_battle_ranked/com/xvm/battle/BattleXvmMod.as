@@ -28,8 +28,8 @@ package com.xvm.battle
         {
             "rankedBattlePage": [
                 RankedBattleLoadingXvmView,
-                RankedFullStatsXvmView,
-                //RankedPlayersPanelXvmView,
+                //RankedFullStatsXvmView,
+                RankedPlayersPanelXvmView,
                 TeamBasesPanelXvmView,
                 MinimapXvmView,
                 SixthSenseXvmView,
