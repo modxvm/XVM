@@ -521,8 +521,8 @@ def CommonStatsBlockConstructor_construct(base, self):
 
 
 # in battle, add tooltip for HE shells - explosion radius
-@overrideMethod(ConsumablesPanel, '_ConsumablesPanel__makeShellTooltip')
-def ConsumablesPanel__makeShellTooltip(base, self, descriptor, piercingPower, shotSpeed):
+@overrideMethod(ConsumablesPanel, '_makeShellTooltip')
+def _makeShellTooltip(base, self, descriptor, piercingPower, shotSpeed):
     result = base(self, descriptor, piercingPower, shotSpeed)
     try:
         if descriptor.kind == SHELL_TYPES.HIGH_EXPLOSIVE:
