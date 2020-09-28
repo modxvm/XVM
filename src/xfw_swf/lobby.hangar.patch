@@ -1,10 +1,10 @@
 diff -Naur lobby.orig-0.orig/net/wg/gui/lobby/hangar/Hangar.class.asasm lobby.orig-0/net/wg/gui/lobby/hangar/Hangar.class.asasm
---- lobby.orig-0.orig/net/wg/gui/lobby/hangar/Hangar.class.asasm	2020-07-27 15:02:03.056379600 +0300
-+++ lobby.orig-0/net/wg/gui/lobby/hangar/Hangar.class.asasm	2020-07-27 15:13:21.805338400 +0300
-@@ -158,6 +158,24 @@
-   trait slot QName(PackageNamespace(""), "teaser") type QName(PackageNamespace("net.wg.gui.lobby.post"), "Teaser") end
-   trait slot QName(PackageNamespace(""), "dqWidget") type QName(PackageNamespace("net.wg.gui.lobby.hangar"), "DailyQuestWidget") end
-   trait slot QName(PackageNamespace(""), "closeBtn") type QName(PackageNamespace("net.wg.gui.components.controls"), "CloseButtonText") end
+--- lobby.orig-0.orig/net/wg/gui/lobby/hangar/Hangar.class.asasm.orig	2020-09-28 16:16:33.613168100 +0300
++++ lobby.orig-0/net/wg/gui/lobby/hangar/Hangar.class.asasm	2020-09-28 16:18:25.865725000 +0300
+@@ -241,6 +241,24 @@
+   trait slot QName(PackageNamespace(""), "eventCarouselWidget") type QName(PackageNamespace("net.wg.gui.lobby.hangar.wtEvent"), "WTEventCarouselWidget") value Null() end
+   trait slot QName(PackageNamespace(""), "eventCrewWidget") type QName(PackageNamespace("net.wg.gui.lobby.hangar.wtEvent"), "WTEventCrewWidget") value Null() end
+   trait slot QName(PackageNamespace(""), "eventParamsWidget") type QName(PackageNamespace("net.wg.gui.lobby.hangar.wtEvent"), "WTEventParamsWidget") value Null() end
 +  trait getter QName(PackageNamespace(""), "xfw_header")
 +   method
 +    returns QName(PackageNamespace("net.wg.gui.lobby.hangar"), "HangarHeader")
@@ -12,7 +12,7 @@ diff -Naur lobby.orig-0.orig/net/wg/gui/lobby/hangar/Hangar.class.asasm lobby.or
 +     maxstack 1
 +     localcount 1
 +     initscopedepth 11
-+     maxscopedepth 12
++    maxscopedepth 12
 +     code
 +      getlocal0
 +      pushscope
@@ -23,6 +23,6 @@ diff -Naur lobby.orig-0.orig/net/wg/gui/lobby/hangar/Hangar.class.asasm lobby.or
 +    end ; body
 +   end ; method
 +  end ; trait
-   trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar:Hangar"), "_header") type QName(PackageNamespace("net.wg.gui.lobby.hangar"), "HangarHeader") end
-   trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar:Hangar"), "_carousel") type QName(PackageNamespace("net.wg.gui.lobby.hangar.tcarousel"), "TankCarousel") end
-   trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar:Hangar"), "_isControlsVisible") type QName(PackageNamespace(""), "Boolean") value False() end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar:Hangar"), "_hangarMode") type QName(PackageNamespace(""), "String") value Utf8("hangarCommon") end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar:Hangar"), "_hidedComponents") type TypeName(QName(PackageNamespace("__AS3__.vec"), "Vector")<QName(PackageNamespace("flash.display"), "DisplayObject")>) end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar:Hangar"), "_componentsToHide") type QName(PackageNamespace("flash.utils"), "Dictionary") end
