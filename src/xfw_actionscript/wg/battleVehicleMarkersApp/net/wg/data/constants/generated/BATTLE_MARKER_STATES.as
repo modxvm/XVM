@@ -17,6 +17,8 @@ package net.wg.data.constants.generated
 
         public static const REPAIRING_STATE:int = 6;
 
+        public static const POWER_UP_STATE:int = 7;
+
         public function BATTLE_MARKER_STATES()
         {
             super();

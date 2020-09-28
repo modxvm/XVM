@@ -301,7 +301,6 @@ package net.wg.gui.lobby.battleResults
 
         public function update(param1:Object) : void
         {
-            var _loc7_:* = false;
             var _loc9_:* = 0;
             var _loc10_:* = 0;
             this._data = BattleResultsVO(param1);
@@ -336,7 +335,7 @@ package net.wg.gui.lobby.battleResults
             this.initEfficiencyList(_loc2_);
             this.initEfficiencyHeader(_loc2_);
             var _loc6_:ProgressiveRewardVO = this._data.progressiveReward;
-            _loc7_ = Boolean(_loc6_.isEnabled);
+            var _loc7_:Boolean = Boolean(_loc6_.isEnabled);
             if(_loc7_)
             {
                 this.progressiveReward.setData(_loc6_);

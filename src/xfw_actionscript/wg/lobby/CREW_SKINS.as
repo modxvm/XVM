@@ -359,6 +359,36 @@ package
 
         public static const RAMIREZ_DESCR:String = "#crew_skins:ramirez/Descr";
 
+        public static const KRIEGER_NAME:String = "#crew_skins:krieger/Name";
+
+        public static const KRIEGER_LASTNAME:String = "#crew_skins:krieger/LastName";
+
+        public static const KRIEGER_DESCR:String = "#crew_skins:krieger/Descr";
+
+        public static const LAUDORF_NAME:String = "#crew_skins:laudorf/Name";
+
+        public static const LAUDORF_LASTNAME:String = "#crew_skins:laudorf/LastName";
+
+        public static const LAUDORF_DESCR:String = "#crew_skins:laudorf/Descr";
+
+        public static const SALDERN_NAME:String = "#crew_skins:saldern/Name";
+
+        public static const SALDERN_LASTNAME:String = "#crew_skins:saldern/LastName";
+
+        public static const SALDERN_DESCR:String = "#crew_skins:saldern/Descr";
+
+        public static const SAFRONOV_NAME:String = "#crew_skins:safronov/Name";
+
+        public static const SAFRONOV_LASTNAME:String = "#crew_skins:safronov/LastName";
+
+        public static const SAFRONOV_DESCR:String = "#crew_skins:safronov/Descr";
+
+        public static const GRADOVSKIY_NAME:String = "#crew_skins:gradovskiy/Name";
+
+        public static const GRADOVSKIY_LASTNAME:String = "#crew_skins:gradovskiy/LastName";
+
+        public static const GRADOVSKIY_DESCR:String = "#crew_skins:gradovskiy/Descr";
+
         public function CREW_SKINS()
         {
             super();

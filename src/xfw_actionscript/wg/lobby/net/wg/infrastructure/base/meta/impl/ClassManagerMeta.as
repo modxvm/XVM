@@ -650,6 +650,9 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.battlequeue.BattleStrongholdsLeaguesVO;
     import net.wg.gui.lobby.battlequeue.BattleStrongholdsQueue;
     import net.wg.gui.lobby.battlequeue.BattleStrongholdsQueueTypeInfoVO;
+    import net.wg.gui.lobby.battlequeue.WTEventBattleQueue;
+    import net.wg.gui.lobby.battlequeue.WTEventChangeVehicleWidget;
+    import net.wg.gui.lobby.battlequeue.WTEventChangeVehicleWidgetVO;
     import net.wg.gui.lobby.battleResults.AwardExtractor;
     import net.wg.gui.lobby.battleResults.BattleResults;
     import net.wg.gui.lobby.battleResults.CommonStats;
@@ -942,6 +945,8 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.components.interfaces.IVehicleSelectorFilterVO;
     import net.wg.gui.lobby.confirmModuleWindow.ConfirmModuleWindow;
     import net.wg.gui.lobby.confirmModuleWindow.ModuleInfoVo;
+    import net.wg.gui.lobby.congrats.CongratulationAnimation;
+    import net.wg.gui.lobby.congrats.VehicleCongratulationAnimation;
     import net.wg.gui.lobby.demonstration.DemonstratorWindow;
     import net.wg.gui.lobby.demonstration.MapItemRenderer;
     import net.wg.gui.lobby.demonstration.data.DemonstratorVO;
@@ -1194,6 +1199,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.hangar.Hangar;
     import net.wg.gui.lobby.hangar.HangarAmunitionSwitchAnimator;
     import net.wg.gui.lobby.hangar.HangarHeader;
+    import net.wg.gui.lobby.hangar.LootBoxesEntryPointWidget;
     import net.wg.gui.lobby.hangar.ResearchPanel;
     import net.wg.gui.lobby.hangar.SwitchModePanel;
     import net.wg.gui.lobby.hangar.TmenXpPanel;
@@ -1248,6 +1254,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.hangar.quests.QuestFlagIconContainer;
     import net.wg.gui.lobby.hangar.quests.QuestInformerButton;
     import net.wg.gui.lobby.hangar.quests.QuestInformerContent;
+    import net.wg.gui.lobby.hangar.quests.WhiteTigerWidget;
     import net.wg.gui.lobby.hangar.seniorityAwards.SeniorityAwardsEntryPoint;
     import net.wg.gui.lobby.hangar.seniorityAwards.SeniorityAwardsEntryPointHangar;
     import net.wg.gui.lobby.hangar.seniorityAwards.SeniorityAwardsEntryPointVO;
@@ -1272,6 +1279,11 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.hangar.tenYearsCountdown.TenYearsCountdownEntryPointInject;
     import net.wg.gui.lobby.hangar.tenYearsCountdown.TenYearsEntryPointAnim;
     import net.wg.gui.lobby.hangar.vehicleParameters.components.VehParamRenderer;
+    import net.wg.gui.lobby.hangar.wtEvent.WTEventCarouselWidget;
+    import net.wg.gui.lobby.hangar.wtEvent.WTEventCrewWidget;
+    import net.wg.gui.lobby.hangar.wtEvent.WTEventEntryPointInject;
+    import net.wg.gui.lobby.hangar.wtEvent.WTEventEntryPointTextInfo;
+    import net.wg.gui.lobby.hangar.wtEvent.WTEventParamsWidget;
     import net.wg.gui.lobby.header.BadgeSlot;
     import net.wg.gui.lobby.header.LobbyHeader;
     import net.wg.gui.lobby.header.OnlineCounter;
@@ -2472,7 +2484,6 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.vehicleCompare.nodes.ModuleRenderer;
     import net.wg.gui.lobby.vehicleCompare.nodes.ModulesRootNode;
     import net.wg.gui.lobby.vehicleCompare.nodes.ModulesTreeDataProvider;
-    import net.wg.gui.lobby.vehicleCongratulation.VehicleCongratulationAnimation;
     import net.wg.gui.lobby.vehicleCustomization.BottomPanel;
     import net.wg.gui.lobby.vehicleCustomization.ConfirmCustomizationItemDialog;
     import net.wg.gui.lobby.vehicleCustomization.CustomizationAnchorRenderer;
@@ -2659,6 +2670,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.vehiclePreview.buyingPanel.SetVehiclesView;
     import net.wg.gui.lobby.vehiclePreview.buyingPanel.VPBuyingPanel;
     import net.wg.gui.lobby.vehiclePreview.buyingPanel.VPEventProgressionBuyingPanel;
+    import net.wg.gui.lobby.vehiclePreview.buyingPanel.VPEventProgressionStyleBuyingPanel;
     import net.wg.gui.lobby.vehiclePreview.buyingPanel.VPOfferGiftBuyingPanel;
     import net.wg.gui.lobby.vehiclePreview.buyingPanel.VPScrollCarousel;
     import net.wg.gui.lobby.vehiclePreview.buyingPanel.VPTradeInBuyingPanel;
@@ -2778,6 +2790,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.window.RankedPrimeTime;
     import net.wg.gui.lobby.window.SwitchPeripheryWindow;
     import net.wg.gui.lobby.window.VcoinExchangeDataVO;
+    import net.wg.gui.lobby.window.WtEventPrimeTime;
     import net.wg.gui.login.IFormBaseVo;
     import net.wg.gui.login.ILoginForm;
     import net.wg.gui.login.ILoginFormView;
@@ -3368,6 +3381,12 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.infrastructure.base.meta.IVehicleSellDialogMeta;
     import net.wg.infrastructure.base.meta.IWGNCDialogMeta;
     import net.wg.infrastructure.base.meta.IWGNCPollWindowMeta;
+    import net.wg.infrastructure.base.meta.IWhiteTigerWidgetMeta;
+    import net.wg.infrastructure.base.meta.IWTEventBattleQueueMeta;
+    import net.wg.infrastructure.base.meta.IWTEventCarouselWidgetMeta;
+    import net.wg.infrastructure.base.meta.IWTEventCrewWidgetMeta;
+    import net.wg.infrastructure.base.meta.IWTEventEntryPointMeta;
+    import net.wg.infrastructure.base.meta.IWTEventParamsWidgetMeta;
     import net.wg.infrastructure.events.DragEvent;
     import net.wg.infrastructure.events.DropEvent;
     import net.wg.infrastructure.events.FocusChainChangeEvent;
@@ -4705,6 +4724,12 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_LOBBY_BATTLEQUEUE_BATTLESTRONGHOLDSQUEUETYPEINFOVO:Class = BattleStrongholdsQueueTypeInfoVO;
 
+        public static const NET_WG_GUI_LOBBY_BATTLEQUEUE_WTEVENTBATTLEQUEUE:Class = WTEventBattleQueue;
+
+        public static const NET_WG_GUI_LOBBY_BATTLEQUEUE_WTEVENTCHANGEVEHICLEWIDGET:Class = WTEventChangeVehicleWidget;
+
+        public static const NET_WG_GUI_LOBBY_BATTLEQUEUE_WTEVENTCHANGEVEHICLEWIDGETVO:Class = WTEventChangeVehicleWidgetVO;
+
         public static const NET_WG_GUI_LOBBY_BATTLERESULTS_AWARDEXTRACTOR:Class = AwardExtractor;
 
         public static const NET_WG_GUI_LOBBY_BATTLERESULTS_BATTLERESULTS:Class = BattleResults;
@@ -5289,6 +5314,10 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_LOBBY_CONFIRMMODULEWINDOW_MODULEINFOVO:Class = ModuleInfoVo;
 
+        public static const NET_WG_GUI_LOBBY_CONGRATS_CONGRATULATIONANIMATION:Class = CongratulationAnimation;
+
+        public static const NET_WG_GUI_LOBBY_CONGRATS_VEHICLECONGRATULATIONANIMATION:Class = VehicleCongratulationAnimation;
+
         public static const NET_WG_GUI_LOBBY_DEMONSTRATION_DEMONSTRATORWINDOW:Class = DemonstratorWindow;
 
         public static const NET_WG_GUI_LOBBY_DEMONSTRATION_MAPITEMRENDERER:Class = MapItemRenderer;
@@ -5793,6 +5822,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_LOBBY_HANGAR_HANGARHEADER:Class = HangarHeader;
 
+        public static const NET_WG_GUI_LOBBY_HANGAR_LOOTBOXESENTRYPOINTWIDGET:Class = LootBoxesEntryPointWidget;
+
         public static const NET_WG_GUI_LOBBY_HANGAR_RESEARCHPANEL:Class = ResearchPanel;
 
         public static const NET_WG_GUI_LOBBY_HANGAR_SWITCHMODEPANEL:Class = SwitchModePanel;
@@ -5901,6 +5932,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_LOBBY_HANGAR_QUESTS_QUESTINFORMERCONTENT:Class = QuestInformerContent;
 
+        public static const NET_WG_GUI_LOBBY_HANGAR_QUESTS_WHITETIGERWIDGET:Class = WhiteTigerWidget;
+
         public static const NET_WG_GUI_LOBBY_HANGAR_SENIORITYAWARDS_SENIORITYAWARDSENTRYPOINT:Class = SeniorityAwardsEntryPoint;
 
         public static const NET_WG_GUI_LOBBY_HANGAR_SENIORITYAWARDS_SENIORITYAWARDSENTRYPOINTHANGAR:Class = SeniorityAwardsEntryPointHangar;
@@ -5948,6 +5981,16 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_LOBBY_HANGAR_TENYEARSCOUNTDOWN_TENYEARSENTRYPOINTANIM:Class = TenYearsEntryPointAnim;
 
         public static const NET_WG_GUI_LOBBY_HANGAR_VEHICLEPARAMETERS_COMPONENTS_VEHPARAMRENDERER:Class = VehParamRenderer;
+
+        public static const NET_WG_GUI_LOBBY_HANGAR_WTEVENT_WTEVENTCAROUSELWIDGET:Class = WTEventCarouselWidget;
+
+        public static const NET_WG_GUI_LOBBY_HANGAR_WTEVENT_WTEVENTCREWWIDGET:Class = WTEventCrewWidget;
+
+        public static const NET_WG_GUI_LOBBY_HANGAR_WTEVENT_WTEVENTENTRYPOINTINJECT:Class = WTEventEntryPointInject;
+
+        public static const NET_WG_GUI_LOBBY_HANGAR_WTEVENT_WTEVENTENTRYPOINTTEXTINFO:Class = WTEventEntryPointTextInfo;
+
+        public static const NET_WG_GUI_LOBBY_HANGAR_WTEVENT_WTEVENTPARAMSWIDGET:Class = WTEventParamsWidget;
 
         public static const NET_WG_GUI_LOBBY_HEADER_BADGESLOT:Class = BadgeSlot;
 
@@ -8349,8 +8392,6 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_LOBBY_VEHICLECOMPARE_NODES_MODULESTREEDATAPROVIDER:Class = ModulesTreeDataProvider;
 
-        public static const NET_WG_GUI_LOBBY_VEHICLECONGRATULATION_VEHICLECONGRATULATIONANIMATION:Class = VehicleCongratulationAnimation;
-
         public static const NET_WG_GUI_LOBBY_VEHICLECUSTOMIZATION_BOTTOMPANEL:Class = BottomPanel;
 
         public static const NET_WG_GUI_LOBBY_VEHICLECUSTOMIZATION_CONFIRMCUSTOMIZATIONITEMDIALOG:Class = ConfirmCustomizationItemDialog;
@@ -8723,6 +8764,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_LOBBY_VEHICLEPREVIEW_BUYINGPANEL_VPEVENTPROGRESSIONBUYINGPANEL:Class = VPEventProgressionBuyingPanel;
 
+        public static const NET_WG_GUI_LOBBY_VEHICLEPREVIEW_BUYINGPANEL_VPEVENTPROGRESSIONSTYLEBUYINGPANEL:Class = VPEventProgressionStyleBuyingPanel;
+
         public static const NET_WG_GUI_LOBBY_VEHICLEPREVIEW_BUYINGPANEL_VPOFFERGIFTBUYINGPANEL:Class = VPOfferGiftBuyingPanel;
 
         public static const NET_WG_GUI_LOBBY_VEHICLEPREVIEW_BUYINGPANEL_VPSCROLLCAROUSEL:Class = VPScrollCarousel;
@@ -8960,6 +9003,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_LOBBY_WINDOW_SWITCHPERIPHERYWINDOW:Class = SwitchPeripheryWindow;
 
         public static const NET_WG_GUI_LOBBY_WINDOW_VCOINEXCHANGEDATAVO:Class = VcoinExchangeDataVO;
+
+        public static const NET_WG_GUI_LOBBY_WINDOW_WTEVENTPRIMETIME:Class = WtEventPrimeTime;
 
         public static const NET_WG_GUI_LOGIN_IFORMBASEVO:Class = IFormBaseVo;
 
@@ -10141,6 +10186,18 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IWGNCPOLLWINDOWMETA:Class = IWGNCPollWindowMeta;
 
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IWHITETIGERWIDGETMETA:Class = IWhiteTigerWidgetMeta;
+
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IWTEVENTBATTLEQUEUEMETA:Class = IWTEventBattleQueueMeta;
+
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IWTEVENTCAROUSELWIDGETMETA:Class = IWTEventCarouselWidgetMeta;
+
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IWTEVENTCREWWIDGETMETA:Class = IWTEventCrewWidgetMeta;
+
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IWTEVENTENTRYPOINTMETA:Class = IWTEventEntryPointMeta;
+
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IWTEVENTPARAMSWIDGETMETA:Class = IWTEventParamsWidgetMeta;
+
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_ABSTRACTRALLYVIEWMETA:Class = AbstractRallyViewMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_ABSTRACTRALLYWINDOWMETA:Class = AbstractRallyWindowMeta;
@@ -10732,6 +10789,18 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_WGNCDIALOGMETA:Class = WGNCDialogMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_WGNCPOLLWINDOWMETA:Class = WGNCPollWindowMeta;
+
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_WHITETIGERWIDGETMETA:Class = WhiteTigerWidgetMeta;
+
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_WTEVENTBATTLEQUEUEMETA:Class = WTEventBattleQueueMeta;
+
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_WTEVENTCAROUSELWIDGETMETA:Class = WTEventCarouselWidgetMeta;
+
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_WTEVENTCREWWIDGETMETA:Class = WTEventCrewWidgetMeta;
+
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_WTEVENTENTRYPOINTMETA:Class = WTEventEntryPointMeta;
+
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_WTEVENTPARAMSWIDGETMETA:Class = WTEventParamsWidgetMeta;
 
         public static const NET_WG_INFRASTRUCTURE_EVENTS_DRAGEVENT:Class = DragEvent;
 

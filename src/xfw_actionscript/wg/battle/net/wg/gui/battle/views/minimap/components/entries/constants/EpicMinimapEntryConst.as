@@ -23,6 +23,8 @@ package net.wg.gui.battle.views.minimap.components.entries.constants
 
         public static const SUFIX_ALLY:String = "Ally";
 
+        public static const SUFIX_COLORBLIND:String = "Colorblind";
+
         public static const SUFIX_DESTROYED:String = "Destroyed";
 
         public static const EMPTY:String = "Empty";

@@ -104,6 +104,16 @@ package net.wg.gui.battle.views.battleTankCarousel
             super.onDispose();
         }
 
+        override public function set visible(param1:Boolean) : void
+        {
+            if(visible == param1)
+            {
+                return;
+            }
+            this.vehicleFilters.visible = param1;
+            super.visible = param1;
+        }
+
         override protected function draw() : void
         {
             var _loc1_:Boolean = isInvalid(InvalidationType.SIZE);
@@ -168,7 +178,7 @@ package net.wg.gui.battle.views.battleTankCarousel
         protected function getNewHelper() : BattleTankCarouselHelper
         {
             var _loc1_:BattleTankCarouselHelper = this._helper;
-            if(!(_loc1_ is BattleTankCarouselHelper))
+            if(!(_loc1_ is BattleTankCarousel))
             {
                 _loc1_ = new BattleTankCarouselHelper();
                 invalidate(InvalidationType.SETTINGS);

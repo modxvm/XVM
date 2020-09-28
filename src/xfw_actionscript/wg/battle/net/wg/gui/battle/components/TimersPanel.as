@@ -5,6 +5,7 @@ package net.wg.gui.battle.components
     import net.wg.data.constants.InvalidationType;
     import flash.display.MovieClip;
     import net.wg.utils.IScheduler;
+    import scaleform.clik.motion.Tween;
     import net.wg.gui.battle.views.destroyTimers.data.TimersPanelInitVO;
     import net.wg.gui.battle.views.destroyTimers.data.NotificationTimerSettingVO;
     import net.wg.gui.battle.components.interfaces.IStatusNotification;
@@ -14,6 +15,8 @@ package net.wg.gui.battle.components
     import net.wg.gui.battle.views.destroyTimers.DestroyTimer;
     import net.wg.gui.battle.views.destroyTimers.SecondaryTimerBase;
     import net.wg.gui.battle.views.destroyTimers.events.DestroyTimerEvent;
+    import net.wg.data.constants.Values;
+    import fl.motion.easing.Cubic;
 
     public class TimersPanel extends TimersPanelMeta implements ITimersPanelMeta
     {
@@ -21,6 +24,8 @@ package net.wg.gui.battle.components
         protected static const INVALID_STATE:uint = InvalidationType.SYSTEM_FLAGS_BORDER << 1;
 
         protected static const SECONDARY_TIMER_OFFSET_X:int = 110;
+
+        private static const SECONDARY_TIMER_SHIFT:int = 110;
 
         private static const TOP_OFFSET_Y:int = 114;
 
@@ -32,15 +37,7 @@ package net.wg.gui.battle.components
 
         private static const X_ADDITIONAL_SHIFT:int = TIMER_OFFSET_X - X_SHIFT;
 
-        private static const SHOW_STUN:String = "showStun";
-
-        private static const HIDE_STATUS:String = "hideStatus";
-
-        private static const ONLY_STUN:String = "onlyStun";
-
-        private static const NO_STUN:String = "noStun";
-
-        private static const STATUS_AND_STUN:String = "statusAndStun";
+        private static const SECONDARY_CONTAINER_TWEEN_DURATION:int = 400;
 
         private static const MAX_DISPLAYED_SECONDARY_TIMERS:int = 2;
 
@@ -52,21 +49,19 @@ package net.wg.gui.battle.components
 
         protected var stageHeight:int = 0;
 
-        protected var activeSecondaryTimers:Vector.<int> = null;
+        protected var activeSecondaryTimers:Vector.<String> = null;
 
         protected var secondaryTimers:Object;
 
         private var _additionalTopOffset:int = 0;
-
-        private var _statusVisibleBefore:Boolean = false;
-
-        private var _secondaryTimerVisibleBefore:Boolean = false;
 
         private var _timers:Object;
 
         private var _stackView:Boolean = true;
 
         private var _scheduler:IScheduler = null;
+
+        private var _secondaryContainerTween:Tween = null;
 
         public function TimersPanel()
         {
@@ -110,49 +105,35 @@ package net.wg.gui.battle.components
             super.configUI();
             mouseChildren = false;
             mouseEnabled = false;
-            this.activeSecondaryTimers = new Vector.<int>(0);
+            this.activeSecondaryTimers = new Vector.<String>(0);
         }
 
         override protected function draw() : void
         {
-            var _loc1_:* = false;
-            var _loc2_:* = false;
-            var _loc3_:DestroyTimer = null;
-            var _loc4_:* = 0;
-            var _loc5_:DestroyTimer = null;
+            var _loc1_:* = 0;
+            var _loc2_:DestroyTimer = null;
             super.draw();
             if(isInvalid(INVALID_STATE))
             {
                 if(this._stackView)
                 {
-                    _loc2_ = this.activeSecondaryTimers.length > 0;
                     x = this.stageWidth >> 1;
                     y = (this.stageHeight >> 1) + TOP_OFFSET_Y;
-                    for each(_loc3_ in this._timers)
-                    {
-                        _loc1_ = _loc3_.isActive;
-                        if(_loc1_)
-                        {
-                            break;
-                        }
-                    }
-                    this.evaluateState(_loc1_,_loc2_);
-                    this._secondaryTimerVisibleBefore = _loc2_;
-                    this._statusVisibleBefore = _loc1_;
+                    this.evaluateState();
                 }
                 else
                 {
-                    _loc4_ = 0;
-                    for each(_loc5_ in this._timers)
+                    _loc1_ = 0;
+                    for each(_loc2_ in this._timers)
                     {
-                        if(_loc5_.isActive)
+                        if(_loc2_.isActive)
                         {
-                            _loc4_ = _loc4_ + TIMER_OFFSET_X;
-                            _loc5_.x = _loc4_;
+                            _loc1_ = _loc1_ + TIMER_OFFSET_X;
+                            _loc2_.x = _loc1_;
                         }
                     }
-                    _loc4_ = _loc4_ + X_ADDITIONAL_SHIFT;
-                    x = this.stageWidth - _loc4_ >> 1;
+                    _loc1_ = _loc1_ + X_ADDITIONAL_SHIFT;
+                    x = this.stageWidth - _loc1_ >> 1;
                     y = (this.stageHeight >> 1) + TOP_OFFSET_Y;
                 }
                 y = y + this._additionalTopOffset;
@@ -164,6 +145,7 @@ package net.wg.gui.battle.components
         {
             var _loc1_:DestroyTimer = null;
             var _loc2_:SecondaryTimerBase = null;
+            this.clearSecondaryContainerTween();
             this._scheduler.cancelTask(this.onTimerCompleteTask);
             this._scheduler = null;
             stop();
@@ -286,6 +268,29 @@ package net.wg.gui.battle.components
             invalidate(INVALID_STATE);
         }
 
+        protected function isAnySecondaryTimerActive() : Boolean
+        {
+            return this.activeSecondaryTimers.length > 0;
+        }
+
+        protected function isAnyTimerActive() : Boolean
+        {
+            var _loc1_:DestroyTimer = null;
+            for each(_loc1_ in this._timers)
+            {
+                if(_loc1_.isActive)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        protected function isAnyTimerInCenter() : Boolean
+        {
+            return this.isAnyTimerActive();
+        }
+
         protected function hideTimer(param1:DestroyTimer) : void
         {
             param1.resetTimer();
@@ -310,7 +315,6 @@ package net.wg.gui.battle.components
             */
             _loc2_.resetTimer();
             _loc2_.isActive = false;
-            this._secondaryTimerVisibleBefore = false;
             _loc2_.hideTimer();
             if(_loc3_ > 1)
             {
@@ -352,63 +356,40 @@ package net.wg.gui.battle.components
             invalidate(INVALID_STATE);
         }
 
-        protected function evaluateState(param1:Boolean, param2:Boolean) : void
+        protected function evaluateState() : void
         {
-            if(param1)
+            this.clearSecondaryContainerTween();
+            var _loc1_:int = this.calculateSecondaryContainerShift();
+            var _loc2_:int = _loc1_;
+            if(_loc1_ == Values.ZERO && this.activeSecondaryTimers.length > 1)
             {
-                if(param2)
-                {
-                    if(!this.statusVisibleBefore)
-                    {
-                        gotoAndPlay(SHOW_STUN);
-                    }
-                    else
-                    {
-                        gotoAndStop(STATUS_AND_STUN);
-                    }
-                    this.updateSecondaryTimersPositions(true);
-                }
-                else if(this.secondaryTimerVisibleBefore)
-                {
-                    gotoAndStop(NO_STUN);
-                }
+                _loc2_ = -((this.activeSecondaryTimers.length - 1) * SECONDARY_TIMER_OFFSET_X >> 1);
             }
-            else if(param2)
-            {
-                if(this.statusVisibleBefore)
-                {
-                    gotoAndPlay(HIDE_STATUS);
-                }
-                else
-                {
-                    gotoAndStop(ONLY_STUN);
-                }
-                this.updateSecondaryTimersPositions(false);
-            }
-            else
-            {
-                gotoAndStop(NO_STUN);
-            }
+            this._secondaryContainerTween = new Tween(SECONDARY_CONTAINER_TWEEN_DURATION,this.secondaryContainer,{"x":_loc2_},{
+                "paused":false,
+                "ease":Cubic.easeOut
+            });
+            this.updateSecondaryTimersPositions();
         }
 
-        protected function updateSecondaryTimersPositions(param1:Boolean) : void
+        protected function updateSecondaryTimersPositions() : void
         {
-            var _loc2_:SecondaryTimerBase = null;
-            var _loc3_:* = 0;
-            for each(_loc2_ in this.secondaryTimers)
+            var _loc1_:SecondaryTimerBase = null;
+            var _loc2_:* = 0;
+            for each(_loc1_ in this.secondaryTimers)
             {
-                if(_loc2_.isActive)
+                if(_loc1_.isActive)
                 {
-                    if(param1 || this.activeSecondaryTimers.length > 1)
+                    if(this.isAnyTimerInCenter() || this.activeSecondaryTimers.length > 1)
                     {
-                        _loc2_.cropSize();
-                        _loc2_.x = _loc3_;
-                        _loc3_ = _loc3_ + SECONDARY_TIMER_OFFSET_X;
+                        _loc1_.cropSize();
+                        _loc1_.x = _loc2_;
+                        _loc2_ = _loc2_ + SECONDARY_TIMER_OFFSET_X;
                     }
-                    else if(!param1 || this.activeSecondaryTimers.length < MAX_DISPLAYED_SECONDARY_TIMERS)
+                    else if(!this.isAnyTimerInCenter() || this.activeSecondaryTimers.length < MAX_DISPLAYED_SECONDARY_TIMERS)
                     {
-                        _loc2_.x = 0;
-                        _loc2_.fullSize();
+                        _loc1_.x = 0;
+                        _loc1_.fullSize();
                     }
                 }
             }
@@ -419,29 +400,29 @@ package net.wg.gui.battle.components
             return this.secondaryTimers[param1];
         }
 
+        protected function calculateSecondaryContainerShift() : int
+        {
+            var _loc1_:int = Values.ZERO;
+            if(this.isAnyTimerActive() && this.isAnySecondaryTimerActive())
+            {
+                _loc1_ = SECONDARY_TIMER_SHIFT;
+            }
+            return _loc1_;
+        }
+
+        private function clearSecondaryContainerTween() : void
+        {
+            if(this._secondaryContainerTween)
+            {
+                this._secondaryContainerTween.paused = true;
+                this._secondaryContainerTween.dispose();
+                this._secondaryContainerTween = null;
+            }
+        }
+
         private function onTimerCompleteTask() : void
         {
             invalidate(INVALID_STATE);
-        }
-
-        public function get statusVisibleBefore() : Boolean
-        {
-            return this._statusVisibleBefore;
-        }
-
-        public function set statusVisibleBefore(param1:Boolean) : void
-        {
-            this._statusVisibleBefore = param1;
-        }
-
-        public function get secondaryTimerVisibleBefore() : Boolean
-        {
-            return this._secondaryTimerVisibleBefore;
-        }
-
-        public function set secondaryTimerVisibleBefore(param1:Boolean) : void
-        {
-            this._secondaryTimerVisibleBefore = param1;
         }
 
         private function onCurrentTimerTimerHiddenEventHandler(param1:DestroyTimerEvent) : void

@@ -69,7 +69,7 @@ package net.wg.gui.prebattle.squads.simple
                             {
                                 if(_loc11_.enabled)
                                 {
-                                    if(_loc11_.isEventVehicle)
+                                    if(_loc11_.isBattleRoyaleVehicle)
                                     {
                                         App.toolTipMgr.showSpecial(_loc11_.tooltip,null,_loc11_.intCD);
                                     }

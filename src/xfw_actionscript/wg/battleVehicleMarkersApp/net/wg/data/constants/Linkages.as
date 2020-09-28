@@ -957,6 +957,14 @@ package net.wg.data.constants
 
         public static const TEN_YEARS_ENTRY_POINT_ANIM_UI:String = "TenYearsEntryPointAnimUI";
 
+        public static const WT_EVENT_ENTRY_POINT_ANIM_UI:String = "WTEventEntryPointAnimUI";
+
+        public static const WT_EVENT_ENTRY_POINT_STATIC_BG_UI:String = "WTEventEntryPointStaticUI";
+
+        public static const WT_EVENT_ENTRY_TEXT_INFO_UI:String = "WTEventEntryTextInfoUI";
+
+        public static const WT_ENERGY_SPAWN_ENTRY_UI:String = "WTEnergySpawnFlashEntry";
+
         public function Linkages()
         {
             super();

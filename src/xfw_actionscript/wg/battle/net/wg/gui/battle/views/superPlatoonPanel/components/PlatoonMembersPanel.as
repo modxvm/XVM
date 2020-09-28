@@ -103,6 +103,11 @@ package net.wg.gui.battle.views.superPlatoonPanel.components
             this.platoonPanelList.setVehicleStatus(param1.vehicleID,param1.status);
         }
 
+        public function triggerChatCommand(param1:Number, param2:String) : void
+        {
+            this.platoonPanelList.triggerChatCommand(param1,param2);
+        }
+
         private function onStartSpeakingHandler(param1:VoiceChatEvent) : void
         {
             this.platoonPanelList.setSpeaking(param1.getAccountDBID(),true);

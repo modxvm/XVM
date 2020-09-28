@@ -41,6 +41,10 @@ package
 
         public static const MAPS_ICONS_TENYEARSCOUNTDOWN_ONBOARDING_BG:String = "../maps/icons/tenYearsCountdown/onBoarding/bg.png";
 
+        public static const MAPS_ICONS_WTEVENT_CAROUSEL_BG:String = "../maps/icons/wtevent/carousel/bg.png";
+
+        public static const MAPS_ICONS_WTEVENT_COLLECTION_BG:String = "../maps/icons/wtevent/collection/bg.png";
+
         public function RES_COMMON()
         {
             super();

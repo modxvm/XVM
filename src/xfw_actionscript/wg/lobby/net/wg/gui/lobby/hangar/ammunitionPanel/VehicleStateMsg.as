@@ -61,6 +61,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         {
             super.configUI();
             this.tankTypeIcon.mouseEnabled = this.tankTypeIcon.mouseChildren = false;
+            this.vehicleMsg.addEventListener(MouseEvent.ROLL_OVER,this.onVehicleMsgRollOverHandler);
+            this.vehicleMsg.addEventListener(MouseEvent.ROLL_OUT,this.onVehicleMsgRollOutHandler);
             this._hitArea = new Sprite();
             addChild(this._hitArea);
             this.statusBg.hitArea = this._hitArea;

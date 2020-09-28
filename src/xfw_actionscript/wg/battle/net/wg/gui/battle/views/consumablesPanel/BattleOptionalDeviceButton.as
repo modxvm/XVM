@@ -200,6 +200,10 @@ package net.wg.gui.battle.views.consumablesPanel
         {
         }
 
+        public function setStage(param1:int) : void
+        {
+        }
+
         public function set isReplay(param1:Boolean) : void
         {
         }

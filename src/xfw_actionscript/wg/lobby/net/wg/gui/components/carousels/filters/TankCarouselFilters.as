@@ -242,7 +242,10 @@ package net.wg.gui.components.carousels.filters
 
         private function onParamsFilterClickHandler(param1:ButtonEvent) : void
         {
-            this.showPopup();
+            if(visible)
+            {
+                this.showPopup();
+            }
         }
 
         private function onHideHandler(param1:ComponentEvent) : void

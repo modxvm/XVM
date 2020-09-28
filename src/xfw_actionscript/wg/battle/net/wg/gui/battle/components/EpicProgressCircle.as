@@ -12,6 +12,8 @@ package net.wg.gui.battle.components
 
         public static const ENEMY_STATE:String = "enemy";
 
+        public static const COLORBLIND_STATE:String = "colorblind";
+
         public var progressCircle:MovieClip = null;
 
         private var _currentFrame:int = 180;
@@ -20,14 +22,18 @@ package net.wg.gui.battle.components
 
         private var _isPlayerTeam:Boolean = false;
 
+        private var _isOwnerSet:Boolean = false;
+
         private var _state:String = "";
+
+        private var _colorblindMode:Boolean = false;
 
         public function EpicProgressCircle()
         {
             super();
             Extensions.setEdgeAAMode(this.progressCircle,Extensions.EDGEAA_ON);
-            this._state = ENEMY_STATE;
-            gotoAndStop(ENEMY_STATE);
+            this._state = this.getCorrectState(ENEMY_STATE);
+            gotoAndStop(this.getCorrectState(ENEMY_STATE));
             this.progressCircle.gotoAndStop(SEMI_LAST_FRAME);
         }
 
@@ -39,13 +45,14 @@ package net.wg.gui.battle.components
 
         public function setOwner(param1:Boolean) : void
         {
-            if(this._isPlayerTeam == param1 || this._capturingActive)
+            if(this._isPlayerTeam == param1 && this._isOwnerSet || this._capturingActive)
             {
                 return;
             }
+            this._isOwnerSet = true;
             this._isPlayerTeam = param1;
             this._capturingActive = false;
-            this._state = param1?ALLY_STATE:ENEMY_STATE;
+            this._state = param1?ALLY_STATE:this.getCorrectState(ENEMY_STATE);
             gotoAndStop(this._state);
             this._currentFrame = SEMI_LAST_FRAME;
             this.progressCircle.gotoAndStop(SEMI_LAST_FRAME);
@@ -66,7 +73,7 @@ package net.wg.gui.battle.components
             else if(_loc2_ > 0 && _loc3_ == 0 && this._capturingActive)
             {
                 this._capturingActive = false;
-                this._state = this._isPlayerTeam?ALLY_STATE:ENEMY_STATE;
+                this._state = this._isPlayerTeam?ALLY_STATE:this.getCorrectState(ENEMY_STATE);
                 this._currentFrame = SEMI_LAST_FRAME;
                 gotoAndStop(this._state);
                 this.progressCircle.gotoAndStop(SEMI_LAST_FRAME);
@@ -78,9 +85,25 @@ package net.wg.gui.battle.components
             }
         }
 
+        private function getCorrectState(param1:String) : String
+        {
+            if(param1 == ENEMY_STATE)
+            {
+                return this._colorblindMode?COLORBLIND_STATE:ENEMY_STATE;
+            }
+            return ALLY_STATE;
+        }
+
+        public function setColorBlindMode(param1:Boolean) : void
+        {
+            this._colorblindMode = param1;
+            this._isOwnerSet = false;
+            this.setOwner(this._isPlayerTeam);
+        }
+
         private function getCapturingActiveState() : String
         {
-            return this._isPlayerTeam?ENEMY_STATE:ALLY_STATE;
+            return this._isPlayerTeam?this.getCorrectState(ENEMY_STATE):ALLY_STATE;
         }
 
         public function get capturingActive() : Boolean

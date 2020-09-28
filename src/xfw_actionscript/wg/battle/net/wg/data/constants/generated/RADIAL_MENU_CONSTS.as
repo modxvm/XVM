@@ -49,11 +49,19 @@ package net.wg.data.constants.generated
 
         public static const ATTACK_BASE:String = "AttackBase";
 
+        public static const ATTACK_HQ:String = "AttackBaseHQ";
+
         public static const DEFEND_BASE:String = "DefendBase";
+
+        public static const DEFEND_HQ:String = "DefendBaseHQ";
 
         public static const ATTACKING_BASE:String = "AttackingBase";
 
+        public static const ATTACKING_HQ:String = "AttackingBaseHQ";
+
         public static const DEFENDING_BASE:String = "SupportingBase";
+
+        public static const DEFENDING_HQ:String = "SupportingBaseHQ";
 
         public static const TARGET_STATE_DEFAULT:String = "default";
 
@@ -65,17 +73,21 @@ package net.wg.data.constants.generated
 
         public static const TARGET_STATE_BASE_ENEMY:String = "base_enemy";
 
+        public static const TARGET_STATE_HQ_ALLY:String = "hq_ally";
+
+        public static const TARGET_STATE_HQ_ENEMY:String = "hq_enemy";
+
         public static const TARGET_STATE_SPG_DEFAULT:String = "spg_default";
 
         public static const TARGET_STATE_SPG_ENEMY:String = "spg_enemy";
 
         public static const TARGET_STATE_EMPTY:String = "empty_state";
 
-        public static const ALL_TARGET_STATES:Array = [TARGET_STATE_DEFAULT,TARGET_STATE_ALLY,TARGET_STATE_ENEMY,TARGET_STATE_BASE_ALLY,TARGET_STATE_BASE_ENEMY,TARGET_STATE_SPG_DEFAULT,TARGET_STATE_SPG_ENEMY,TARGET_STATE_EMPTY];
+        public static const ALL_TARGET_STATES:Array = [TARGET_STATE_DEFAULT,TARGET_STATE_ALLY,TARGET_STATE_ENEMY,TARGET_STATE_BASE_ALLY,TARGET_STATE_BASE_ENEMY,TARGET_STATE_SPG_DEFAULT,TARGET_STATE_SPG_ENEMY,TARGET_STATE_EMPTY,TARGET_STATE_HQ_ALLY,TARGET_STATE_HQ_ENEMY];
 
-        public static const GREEN_TARGET_STATES:Array = [TARGET_STATE_ALLY,TARGET_STATE_BASE_ALLY];
+        public static const GREEN_TARGET_STATES:Array = [TARGET_STATE_ALLY,TARGET_STATE_BASE_ALLY,TARGET_STATE_HQ_ALLY];
 
-        public static const RED_TARGET_STATES:Array = [TARGET_STATE_ENEMY,TARGET_STATE_BASE_ENEMY,TARGET_STATE_SPG_ENEMY];
+        public static const RED_TARGET_STATES:Array = [TARGET_STATE_ENEMY,TARGET_STATE_BASE_ENEMY,TARGET_STATE_SPG_ENEMY,TARGET_STATE_HQ_ENEMY];
 
         public static const ORANGE_TARGET_STATES:Array = [TARGET_STATE_DEFAULT,TARGET_STATE_SPG_DEFAULT];
 

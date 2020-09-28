@@ -31,7 +31,13 @@ package net.wg.gui.battle.views.vehicleMarkers
             "supportingAllyAlternative":VehicleMarkersLinkages.ACTION_SUPPORTING_ALLY_ALTERNATIVE,
             "goingToAlternative":VehicleMarkersLinkages.ACTION_GOING_TO,
             "attackBaseAlternative":VehicleMarkersLinkages.ACTION_ATTACK_BASE,
-            "defendBaseAlternative":VehicleMarkersLinkages.ACTION_DEFEND_BASE
+            "defendBaseAlternative":VehicleMarkersLinkages.ACTION_DEFEND_BASE,
+            "attackingBaseAlternative":VehicleMarkersLinkages.ACTION_ATTACK_BASE,
+            "defendingBaseAlternative":VehicleMarkersLinkages.ACTION_DEFEND_BASE,
+            "attackObjectiveAlternative":VehicleMarkersLinkages.ACTION_ATTACKING_OBJECTIVE,
+            "defendObjectiveAlternative":VehicleMarkersLinkages.ACTION_DEFENDING_OBJECTIVE,
+            "attackingObjectiveAlternative":VehicleMarkersLinkages.ACTION_ATTACKING_OBJECTIVE,
+            "defendingObjectiveAlternative":VehicleMarkersLinkages.ACTION_DEFENDING_OBJECTIVE
         };
 
         private static const ACTION_ICON_STATE:String = "actionIconState";

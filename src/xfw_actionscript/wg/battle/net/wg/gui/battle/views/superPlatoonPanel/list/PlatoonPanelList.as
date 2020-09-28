@@ -65,6 +65,7 @@ package net.wg.gui.battle.views.superPlatoonPanel.list
             {
                 _loc2_.setFrags(param1.frags);
                 _loc2_.setRank(param1.rank + 1);
+                _loc2_.setChatCommand(param1.chatCommand,param1.chatCommandFlags);
                 return true;
             }
             return false;
@@ -128,6 +129,15 @@ package net.wg.gui.battle.views.superPlatoonPanel.list
             for each(_loc1_ in this._items)
             {
                 _loc1_.listItem.updateColorBlind();
+            }
+        }
+
+        public function triggerChatCommand(param1:Number, param2:String) : void
+        {
+            var _loc3_:PlatoonMemberListItemHolder = this.getHolderByVehicleID(param1);
+            if(_loc3_)
+            {
+                _loc3_.triggerChatCommand(param2);
             }
         }
 

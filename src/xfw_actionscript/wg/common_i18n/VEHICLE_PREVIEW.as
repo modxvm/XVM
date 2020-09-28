@@ -25,6 +25,8 @@ package
 
         public static const HEADER_BACKBTN_DESCRLABEL_FRONTLINE:String = "#vehicle_preview:header/backBtn/descrLabel/frontline";
 
+        public static const HEADER_BACKBTN_DESCRLABEL_EVENTPROGRESSION:String = "#vehicle_preview:header/backBtn/descrLabel/eventProgression";
+
         public static const HEADER_BACKBTN_DESCRLABEL_MARATHON:String = "#vehicle_preview:header/backBtn/descrLabel/marathon";
 
         public static const HEADER_BACKBTN_DESCRLABEL_AUTUMN_MARATHON:String = "#vehicle_preview:header/backBtn/descrLabel/autumn_marathon";

@@ -69,6 +69,30 @@ package net.wg.data.constants.generated
 
         public static const AMMUNITION_SETUP_VIEW_INJECT:String = "ammunitionSetupViewInject";
 
+        public static const WHITE_TIGER_WIDGET:String = "whiteTigerWidget";
+
+        public static const LOOTBOXES_WIDGET:String = "lootboxesWidget";
+
+        public static const WT_EVENT_ENTRY_POINT:String = "wtEventEntryPoint";
+
+        public static const WT_EVENT_PRIME_TIME_VIEW:String = "wtEventPrimeTimeView";
+
+        public static const WT_EVENT_PRIME_TIME:String = "wtEventPrimeTime.swf";
+
+        public static const WT_EVENT_CAROUSEL_WIDGET:String = "wtEventCarouselWidget";
+
+        public static const WT_EVENT_CREW_WIDGET:String = "wtEventCrewWidget";
+
+        public static const WT_EVENT_PARAMS_WIDGET:String = "wtEventParamsWidget";
+
+        public static const HANGAR_COMMON:String = "hangarCommon";
+
+        public static const HANGAR_EVENT:String = "hangarEvent";
+
+        public static const HANGAR_BATTLE_ROYALE:String = "hangarBattleRoyale";
+
+        public static const HANGAR_MODES:Array = [HANGAR_COMMON,HANGAR_EVENT,HANGAR_BATTLE_ROYALE];
+
         public function HANGAR_ALIASES()
         {
             super();

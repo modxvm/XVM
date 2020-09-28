@@ -2,6 +2,7 @@ package net.wg.gui.lobby.vehiclePreview.buyingPanel
 {
     import net.wg.infrastructure.base.meta.impl.VehiclePreviewEventProgressionBuyingPanelMeta;
     import net.wg.infrastructure.base.meta.IVehiclePreviewEventProgressionBuyingPanelMeta;
+    import net.wg.utils.StageSizeBoundaries;
     import flash.text.TextField;
     import net.wg.gui.components.controls.IconTextBigButton;
     import net.wg.gui.lobby.vehiclePreview.data.VPEventProgressionBuyingPanelVO;
@@ -14,6 +15,7 @@ package net.wg.gui.lobby.vehiclePreview.buyingPanel
     import net.wg.gui.lobby.vehiclePreview.data.VPSetItemsVO;
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.lobby.vehiclePreview.data.VPSetItemVO;
+    import org.idmedia.as3commons.util.StringUtils;
 
     public class VPEventProgressionBuyingPanel extends VehiclePreviewEventProgressionBuyingPanelMeta implements IVehiclePreviewEventProgressionBuyingPanelMeta, IVPBottomPanel
     {
@@ -22,17 +24,17 @@ package net.wg.gui.lobby.vehiclePreview.buyingPanel
 
         private static const PRICE_GAP:int = 15;
 
-        private static const LEFT_OFFSET:int = -15;
+        private static const LEFT_OFFSET:int = 6;
 
         private static const BUTTON_TOP_OFFSET:int = 2;
 
         private static const MIN_BTNS_WIDTH:int = 160;
 
-        public var moneyLabel:TextField;
+        public var moneyLabel:TextField = null;
 
-        public var priceLabel:TextField;
+        public var priceLabel:TextField = null;
 
-        public var titleLabel:TextField;
+        public var titleLabel:TextField = null;
 
         public var buyBtnOrange:IconTextBigButton = null;
 
@@ -45,6 +47,11 @@ package net.wg.gui.lobby.vehiclePreview.buyingPanel
             super();
         }
 
+        private static function get isNormalWidth() : Boolean
+        {
+            return App.appWidth > StageSizeBoundaries.WIDTH_1280;
+        }
+
         override protected function configUI() : void
         {
             super.configUI();
@@ -55,10 +62,10 @@ package net.wg.gui.lobby.vehiclePreview.buyingPanel
             this.buyBtnOrange.addEventListener(ButtonEvent.CLICK,this.onBuyButtonClickHandler);
             this.setItemsView.addEventListener(Event.RESIZE,this.onContentResizeHandler);
             this.setItemsView.addEventListener(VehiclePreviewEvent.SHOW_TOOLTIP,this.onSetItemsViewShowTooltipHandler);
-            this.moneyLabel.addEventListener(MouseEvent.ROLL_OUT,this.onPriceLabelRollOutHandler);
-            this.moneyLabel.addEventListener(MouseEvent.ROLL_OVER,this.onPriceLabelRollOverHandler);
-            this.priceLabel.addEventListener(MouseEvent.ROLL_OUT,this.onPriceLabelRollOutHandler);
-            this.priceLabel.addEventListener(MouseEvent.ROLL_OVER,this.onPriceLabelRollOverHandler);
+            this.moneyLabel.addEventListener(MouseEvent.ROLL_OUT,this.onLabelRollOutHandler);
+            this.moneyLabel.addEventListener(MouseEvent.ROLL_OVER,this.onLabelRollOverHandler);
+            this.priceLabel.addEventListener(MouseEvent.ROLL_OUT,this.onLabelRollOutHandler);
+            this.priceLabel.addEventListener(MouseEvent.ROLL_OVER,this.onLabelRollOverHandler);
         }
 
         override protected function draw() : void
@@ -68,7 +75,7 @@ package net.wg.gui.lobby.vehiclePreview.buyingPanel
             {
                 this.moneyLabel.htmlText = this._data.money;
                 this.priceLabel.htmlText = this._data.price;
-                this.titleLabel.htmlText = this._data.title;
+                this.titleLabel.htmlText = isNormalWidth?this._data.title:this._data.shortTitle;
                 this.buyBtnOrange.visible = true;
                 this.buyBtnOrange.enabled = this._data.buyButtonEnabled;
                 this.buyBtnOrange.minWidth = MIN_BTNS_WIDTH;
@@ -80,7 +87,7 @@ package net.wg.gui.lobby.vehiclePreview.buyingPanel
             }
             if(isInvalid(InvalidationType.SIZE))
             {
-                this.titleLabel.x = (this.width >> 1) - (this.titleLabel.width + this.moneyLabel.width >> 1);
+                this.titleLabel.x = (width >> 1) - (this.titleLabel.width + this.moneyLabel.width >> 1);
                 this.moneyLabel.x = this.titleLabel.x + this.titleLabel.width >> 0;
                 this.moneyLabel.y = this.titleLabel.y;
                 this.setItemsView.x = this.titleLabel.x + LEFT_OFFSET + this.setItemsView.actualWidth + (this.titleLabel.width - this.setItemsView.actualWidth - this.priceLabel.width - this.buyBtnOrange.width - BTN_GAP - PRICE_GAP >> 1);
@@ -93,10 +100,10 @@ package net.wg.gui.lobby.vehiclePreview.buyingPanel
 
         override protected function onDispose() : void
         {
-            this.priceLabel.removeEventListener(MouseEvent.ROLL_OUT,this.onPriceLabelRollOutHandler);
-            this.priceLabel.removeEventListener(MouseEvent.ROLL_OVER,this.onPriceLabelRollOverHandler);
-            this.moneyLabel.removeEventListener(MouseEvent.ROLL_OUT,this.onPriceLabelRollOutHandler);
-            this.moneyLabel.removeEventListener(MouseEvent.ROLL_OVER,this.onPriceLabelRollOverHandler);
+            this.priceLabel.removeEventListener(MouseEvent.ROLL_OUT,this.onLabelRollOutHandler);
+            this.priceLabel.removeEventListener(MouseEvent.ROLL_OVER,this.onLabelRollOverHandler);
+            this.moneyLabel.removeEventListener(MouseEvent.ROLL_OUT,this.onLabelRollOutHandler);
+            this.moneyLabel.removeEventListener(MouseEvent.ROLL_OVER,this.onLabelRollOverHandler);
             this.setItemsView.removeEventListener(VehiclePreviewEvent.SHOW_TOOLTIP,this.onSetItemsViewShowTooltipHandler);
             this.setItemsView.removeEventListener(Event.RESIZE,this.onContentResizeHandler);
             this.buyBtnOrange.removeEventListener(ButtonEvent.CLICK,this.onBuyButtonClickHandler);
@@ -132,11 +139,6 @@ package net.wg.gui.lobby.vehiclePreview.buyingPanel
             return height;
         }
 
-        override public function get width() : Number
-        {
-            return this.titleLabel.width;
-        }
-
         private function onBuyButtonClickHandler(param1:ButtonEvent) : void
         {
             onBuyClickS();
@@ -151,27 +153,20 @@ package net.wg.gui.lobby.vehiclePreview.buyingPanel
 
         private function onContentResizeHandler(param1:Event) : void
         {
-            invalidateSize();
+            invalidateData();
         }
 
-        private function onPriceLabelRollOutHandler(param1:MouseEvent) : void
-        {
-            this.hideTooltip();
-        }
-
-        private function onPriceLabelRollOverHandler(param1:MouseEvent) : void
-        {
-            this.showComplexTooltip(TOOLTIPS.VEHICLEPREVIEW_BUYINGPANEL_EVENTPROGRESSION_PRICE);
-        }
-
-        private function showComplexTooltip(param1:String) : void
-        {
-            App.toolTipMgr.showComplex(param1);
-        }
-
-        private function hideTooltip() : void
+        private function onLabelRollOutHandler(param1:MouseEvent) : void
         {
             App.toolTipMgr.hide();
+        }
+
+        private function onLabelRollOverHandler(param1:MouseEvent) : void
+        {
+            if(StringUtils.isNotEmpty(this._data.priceTooltip))
+            {
+                App.toolTipMgr.showComplex(this._data.priceTooltip);
+            }
         }
     }
 }

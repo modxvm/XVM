@@ -7,9 +7,19 @@ package net.wg.gui.battle.eventBattle.views
     public class EventBattleLoading extends BCIntroVideoPage
     {
 
+        private static const TEXT_GROUP_OFFSET_LEFT:int = 200;
+
+        private static const TEXT_GROUP_OFFSET_BOTTOM:int = 100;
+
+        private static const LOADING_PROGRESS_OFFSET_BOTTOM:int = 40;
+
         public function EventBattleLoading()
         {
             super();
+            eventModeEnabled = true;
+            customTextPaddingLeft = TEXT_GROUP_OFFSET_LEFT;
+            customTextPaddingBottom = TEXT_GROUP_OFFSET_BOTTOM;
+            customLoadingProgressBottom = LOADING_PROGRESS_OFFSET_BOTTOM;
         }
 
         override protected function configUI() : void

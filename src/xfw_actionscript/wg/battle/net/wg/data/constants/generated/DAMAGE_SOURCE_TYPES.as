@@ -17,7 +17,9 @@ package net.wg.data.constants.generated
 
         public static const AIRSTRIKE:String = "airstrike";
 
-        public static const DAMAGE_SOURCES:Array = [HEAVY_TANK,MEDIUM_TANK,LIGHT_TANK,AT_SPG,SPG,ARTILLERY,AIRSTRIKE];
+        public static const EVENT_BOSS:String = "event_boss";
+
+        public static const DAMAGE_SOURCES:Array = [HEAVY_TANK,MEDIUM_TANK,LIGHT_TANK,AT_SPG,SPG,ARTILLERY,AIRSTRIKE,EVENT_BOSS];
 
         public function DAMAGE_SOURCE_TYPES()
         {

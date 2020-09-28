@@ -436,8 +436,7 @@ package net.wg.gui.battle.battleRoyale
 
         private function updateBattleMessengerPosition() : void
         {
-            var _loc1_:* = 0;
-            _loc1_ = this.teamPanel.y + this.teamPanel.height;
+            var _loc1_:int = this.teamPanel.y + this.teamPanel.height;
             if(this._respawnVisible)
             {
                 this.battleMessenger.x = damagePanel.x + MESSENGER_RESPAWN_X_OFFSET;

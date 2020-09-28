@@ -2211,7 +2211,11 @@ package
 
         public static const EVENT_PROGRESSION_BUY_VEHICLE_SERVER_ERROR:String = "#system_messages:event_progression_buy_vehicle/server_error";
 
-        public static const EVENT_PROGRESSION_BUY_VEHICLE_BUY:String = "#system_messages:event_progression_buy_vehicle/buy";
+        public static const EVENT_PROGRESSION_BUY_VEHICLE_SUCCESS:String = "#system_messages:event_progression_buy_vehicle/success";
+
+        public static const EVENT_PROGRESSION_BUY_STYLE_SERVER_ERROR:String = "#system_messages:event_progression_buy_style/server_error";
+
+        public static const EVENT_PROGRESSION_BUY_STYLE_SUCCESS:String = "#system_messages:event_progression_buy_style/success";
 
         public static const MAPS_BLACK_LIST_SELECT_SUCCESS:String = "#system_messages:maps_black_list/select/success";
 
@@ -2352,6 +2356,30 @@ package
         public static const OFFERS_UNAVAILABLE_ONE:String = "#system_messages:offers/unavailable_one";
 
         public static const OFFERS_UNAVAILABLE_MANY:String = "#system_messages:offers/unavailable_many";
+
+        public static const WT_EVENT_LOOTBOXES_HEADER:String = "#system_messages:wt_event/lootboxes/header";
+
+        public static const WT_EVENT_LOOTBOXES_ENABLED:String = "#system_messages:wt_event/lootboxes/enabled";
+
+        public static const WT_EVENT_LOOTBOXES_DISABLED:String = "#system_messages:wt_event/lootboxes/disabled";
+
+        public static const WT_EVENT_LOOTBOXES_BUTTON:String = "#system_messages:wt_event/lootboxes/button";
+
+        public static const WT_EVENT_EVENT_ENABLED:String = "#system_messages:wt_event/event/enabled";
+
+        public static const WT_EVENT_EVENT_DISABLED:String = "#system_messages:wt_event/event/disabled";
+
+        public static const WT_EVENT_DETAILS_BUTTON:String = "#system_messages:wt_event/details/button";
+
+        public static const WT_EVENT_TICKET_OWNED:String = "#system_messages:wt_event/ticket/owned";
+
+        public static const WT_EVENT_TICKET_FREE:String = "#system_messages:wt_event/ticket/free";
+
+        public static const WT_EVENT_TICKET_TASKS:String = "#system_messages:wt_event/ticket/tasks";
+
+        public static const WT_EVENT_TICKET_BUY:String = "#system_messages:wt_event/ticket/buy";
+
+        public static const WT_EVENT_OPENED_BOX:String = "#system_messages:wt_event/opened_box";
 
         public function SYSTEM_MESSAGES()
         {

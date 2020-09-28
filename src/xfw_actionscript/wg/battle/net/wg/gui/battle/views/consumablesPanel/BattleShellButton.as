@@ -8,11 +8,11 @@ package net.wg.gui.battle.views.consumablesPanel
     import net.wg.gui.components.controls.UILoaderAlt;
     import net.wg.gui.battle.components.CoolDownTimer;
     import net.wg.gui.battle.views.consumablesPanel.VO.ConsumablesVO;
-    import net.wg.data.constants.KeyProps;
     import net.wg.gui.battle.views.consumablesPanel.constants.COLOR_STATES;
     import net.wg.data.constants.InteractiveStates;
     import flash.geom.ColorTransform;
     import net.wg.data.constants.generated.BATTLE_ITEM_STATES;
+    import net.wg.data.constants.KeyProps;
     import scaleform.gfx.TextFieldEx;
 
     public class BattleShellButton extends BattleToolTipButton implements IBattleShellButton
@@ -64,6 +64,8 @@ package net.wg.gui.battle.views.consumablesPanel
 
         private var _consumablesVO:ConsumablesVO = null;
 
+        private var _isQuantityFieldVisible:Boolean = true;
+
         public function BattleShellButton()
         {
             super();
@@ -82,18 +84,6 @@ package net.wg.gui.battle.views.consumablesPanel
             this.nextIndicator.visible = this._isNext;
         }
 
-        protected function setBindKeyText() : void
-        {
-            if(this._bindSfKeyCode == KeyProps.KEY_NONE)
-            {
-                this.glow.setBindKeyText(App.utils.locale.makeString(READABLE_KEY_NAMES.KEY_NONE_ALT));
-            }
-            else
-            {
-                this.glow.setBindKeyText(App.utils.commons.keyToString(this._bindSfKeyCode).keyName);
-            }
-        }
-
         override protected function draw() : void
         {
             super.draw();
@@ -106,6 +96,7 @@ package net.wg.gui.battle.views.consumablesPanel
                 if(this.quantityField)
                 {
                     this.quantityField.text = this._quantity.toString();
+                    this.quantityField.visible = this._isQuantityFieldVisible;
                 }
             }
             if(isInvalid(SELECTED_INDICATOR_VISIBILITY))
@@ -293,6 +284,10 @@ package net.wg.gui.battle.views.consumablesPanel
             invalidate(QUANTITY_VALIDATION);
         }
 
+        public function setStage(param1:int) : void
+        {
+        }
+
         public function setTimerSnapshot(param1:int, param2:Boolean) : void
         {
         }
@@ -300,6 +295,18 @@ package net.wg.gui.battle.views.consumablesPanel
         public function showGlow(param1:int) : void
         {
             this.glow.showGlow(param1);
+        }
+
+        protected function setBindKeyText() : void
+        {
+            if(this._bindSfKeyCode == KeyProps.KEY_NONE)
+            {
+                this.glow.setBindKeyText(App.utils.locale.makeString(READABLE_KEY_NAMES.KEY_NONE_ALT));
+            }
+            else
+            {
+                this.glow.setBindKeyText(App.utils.commons.keyToString(this._bindSfKeyCode).keyName);
+            }
         }
 
         private function reloadingEnd() : void
@@ -315,6 +322,15 @@ package net.wg.gui.battle.views.consumablesPanel
             if(!this._isReloading && !this._isAfterCoolDown)
             {
                 super.state = param1;
+            }
+        }
+
+        public function set isQuantityFieldVisible(param1:Boolean) : void
+        {
+            if(this._isQuantityFieldVisible != param1)
+            {
+                this._isQuantityFieldVisible = param1;
+                invalidate(QUANTITY_VALIDATION);
             }
         }
 

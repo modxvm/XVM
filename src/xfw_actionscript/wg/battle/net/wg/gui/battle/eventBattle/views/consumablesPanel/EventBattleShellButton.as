@@ -1,36 +1,31 @@
 package net.wg.gui.battle.eventBattle.views.consumablesPanel
 {
     import net.wg.gui.battle.views.consumablesPanel.BattleShellButton;
-    import net.wg.gui.eventcomponents.NumberProgress;
-    import net.wg.data.constants.KeyProps;
+    import net.wg.gui.battle.views.consumablesPanel.constants.COLOR_STATES;
 
     public class EventBattleShellButton extends BattleShellButton
     {
-
-        public var bindKeyFieldEvent:NumberProgress = null;
 
         public function EventBattleShellButton()
         {
             super();
         }
 
-        override protected function setBindKeyText() : void
+        override public function setCoolDownTime(param1:Number, param2:Number, param3:Number, param4:int = 1) : void
         {
-            if(bindSfKeyCode == KeyProps.KEY_NONE)
+            super.setCoolDownTime(param1,param2,param3,param4);
+            if(reloading)
             {
-                this.bindKeyFieldEvent.setText(App.utils.locale.makeString(READABLE_KEY_NAMES.KEY_NONE_ALT));
+                iconLoader.transform.colorTransform = COLOR_STATES.DARK_COLOR_TRANSFORM;
             }
             else
             {
-                this.bindKeyFieldEvent.setText(App.utils.commons.keyToString(bindSfKeyCode).keyName);
+                iconLoader.transform.colorTransform = null;
             }
         }
 
-        override protected function onDispose() : void
+        override public function set buttonMode(param1:Boolean) : void
         {
-            this.bindKeyFieldEvent.dispose();
-            this.bindKeyFieldEvent = null;
-            super.onDispose();
         }
     }
 }

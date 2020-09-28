@@ -25,6 +25,10 @@ package
 
         public static const TANKS_CAROUSEL_RESTORE_VEHICLE:String = "#tooltips:tanks_carousel/restore_vehicle";
 
+        public static const VEHICLEPREVIEW_BUYINGPANEL_EVENTPROGRESSION_PRICE:String = "#tooltips:vehiclePreview/buyingPanel/eventProgression/price";
+
+        public static const VEHICLEPREVIEW_BUYINGPANEL_EVENTPROGRESSION_STYLE_PRICE:String = "#tooltips:vehiclePreview/buyingPanel/eventProgression/style_price";
+
         public static const VEHICLEPREVIEW_MODULSNOMODULES:String = "#tooltips:vehiclePreview/modulsnoModules";
 
         public static const VEHICLEPREVIEW_MODULS:String = "#tooltips:vehiclePreview/moduls";
@@ -333,9 +337,9 @@ package
 
         public static const AWARDITEM_ONEOF_RANKEDSEASON_PREVIEWSTYLE:String = "#tooltips:awardItem/oneof/rankedSeason/previewStyle";
 
-        public static const VEHICLEPREVIEW_BUYINGPANEL_EVENTPROGRESSION_PRICE:String = "#tooltips:vehiclePreview/buyingPanel/eventProgression/price";
-
         public static const RANKEDBATTLESVIEW_SPRINTER:String = "#tooltips:rankedBattlesView/sprinter";
+
+        public static const SETTTINGSDISABLEDNOTIFICATION:String = "#tooltips:setttingsDisabledNotification";
 
         public static const BADGEINFO_TITLE:String = "#tooltips:badgeinfo/title";
 
@@ -4139,6 +4143,10 @@ package
 
         public static const VEHICLEPREVIEW_BUYINGPANEL_EVENTPROGRESSION_PRICE_BODY:String = "#tooltips:vehiclePreview/buyingPanel/eventProgression/price/body";
 
+        public static const VEHICLEPREVIEW_BUYINGPANEL_EVENTPROGRESSION_STYLE_PRICE_HEADER:String = "#tooltips:vehiclePreview/buyingPanel/eventProgression/style_price/header";
+
+        public static const VEHICLEPREVIEW_BUYINGPANEL_EVENTPROGRESSION_STYLE_PRICE_BODY:String = "#tooltips:vehiclePreview/buyingPanel/eventProgression/style_price/body";
+
         public static const VEHICLEPREVIEW_CREW_COMMANDER:String = "#tooltips:vehiclePreview/crew/commander";
 
         public static const VEHICLEPREVIEW_CREW_DRIVER:String = "#tooltips:vehiclePreview/crew/driver";
@@ -5899,6 +5907,16 @@ package
 
         public static const NOTRECRUITEDTANKMAN_TANKMEN_BP2_2_HOWTOGETINFO:String = "#tooltips:notrecruitedtankman/tankmen_bp2_2/howToGetInfo";
 
+        public static const NOTRECRUITEDTANKMAN_CH_COMPENSATION_LABEL:String = "#tooltips:notrecruitedtankman/ch_compensation/label";
+
+        public static const NOTRECRUITEDTANKMAN_CH_COMPENSATION_DESC:String = "#tooltips:notrecruitedtankman/ch_compensation/desc";
+
+        public static const NOTRECRUITEDTANKMAN_WT_RAIDBOSS_COMMANDER_LABEL:String = "#tooltips:notrecruitedtankman/wt_raidboss_commander/label";
+
+        public static const NOTRECRUITEDTANKMAN_WT_RAIDBOSS_COMMANDER_DESC:String = "#tooltips:notrecruitedtankman/wt_raidboss_commander/desc";
+
+        public static const NOTRECRUITEDTANKMAN_WT_RAIDBOSS_COMMANDER_HOWTOGETINFO:String = "#tooltips:notrecruitedtankman/wt_raidboss_commander/howToGetInfo";
+
         public static const QUESTS_AWARDS_VEHICLERENT_HEADER:String = "#tooltips:quests/awards/vehicleRent/header";
 
         public static const QUESTS_AWARDS_VEHICLERENT_EXPIRE:String = "#tooltips:quests/awards/vehicleRent/expire";
@@ -6053,13 +6071,21 @@ package
 
         public static const EVENTPROGRESSION_DESCRIPTION:String = "#tooltips:eventProgression/description";
 
+        public static const EVENTPROGRESSION_DESCRIPTION_CN:String = "#tooltips:eventProgression/description_cn";
+
+        public static const EVENTPROGRESSION_SEASON_CN:String = "#tooltips:eventProgression/season_cn";
+
         public static const EVENTPROGRESSION_SEASON:String = "#tooltips:eventProgression/season";
 
         public static const EVENTPROGRESSION_STEELHUNTER_SEASON:String = "#tooltips:eventProgression/steelHunter/season";
 
-        public static const EVENTPROGRESSION_TIMETOSTART:String = "#tooltips:eventProgression/timeToStart";
+        public static const EVENTPROGRESSION_TIMETOSTART_SEASON:String = "#tooltips:eventProgression/timeToStart/season";
 
-        public static const EVENTPROGRESSION_TIMETOLEFT:String = "#tooltips:eventProgression/timeToLeft";
+        public static const EVENTPROGRESSION_TIMETOLEFT_SEASON:String = "#tooltips:eventProgression/timeToLeft/season";
+
+        public static const EVENTPROGRESSION_TIMETOSTART_CYCLE:String = "#tooltips:eventProgression/timeToStart/cycle";
+
+        public static const EVENTPROGRESSION_TIMETOLEFT_CYCLE:String = "#tooltips:eventProgression/timeToLeft/cycle";
 
         public static const EVENTPROGRESSION_DISABLED:String = "#tooltips:eventProgression/disabled";
 
@@ -6067,7 +6093,9 @@ package
 
         public static const EVENTPROGRESSION_UNLOCKEDDAILYMISSIONS:String = "#tooltips:eventProgression/unlockedDailyMissions";
 
-        public static const EVENTPROGRESSION_ALLSEASONSAREOVER:String = "#tooltips:eventProgression/allSeasonsAreOver";
+        public static const EVENTPROGRESSION_ALLSEASONSAREOVER_MULTI:String = "#tooltips:eventProgression/allSeasonsAreOver/multi";
+
+        public static const EVENTPROGRESSION_ALLSEASONSAREOVER_SINGLE:String = "#tooltips:eventProgression/allSeasonsAreOver/single";
 
         public static const EVENTPROGRESSION_FRONTLINE:String = "#tooltips:eventProgression/frontLine";
 
@@ -6180,6 +6208,10 @@ package
         public static const BATTLE_ROYALE_VIEWSTACK_REWARDS_HEADER:String = "#tooltips:battle_royale/viewStack/rewards/header";
 
         public static const BATTLE_ROYALE_VIEWSTACK_REWARDS_BODY:String = "#tooltips:battle_royale/viewStack/rewards/body";
+
+        public static const SETTTINGSDISABLEDNOTIFICATION_HEADER:String = "#tooltips:setttingsDisabledNotification/header";
+
+        public static const SETTTINGSDISABLEDNOTIFICATION_BODY:String = "#tooltips:setttingsDisabledNotification/body";
 
         public static const ELEN_SUMMARY_RANK_ENUM:Array = [ELEN_SUMMARY_RANK_1,ELEN_SUMMARY_RANK_2,ELEN_SUMMARY_RANK_3,ELEN_SUMMARY_RANK_4,ELEN_SUMMARY_RANK_NORANK];
 

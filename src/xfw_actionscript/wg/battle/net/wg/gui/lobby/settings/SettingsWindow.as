@@ -7,6 +7,7 @@ package net.wg.gui.lobby.settings
     import flash.display.Sprite;
     import net.wg.gui.components.advanced.ViewStack;
     import net.wg.gui.components.controls.SoundButtonEx;
+    import net.wg.gui.lobby.settings.components.EventSettingLabel;
     import net.wg.gui.lobby.settings.vo.base.SettingsDataVo;
     import scaleform.clik.data.DataProvider;
     import net.wg.gui.lobby.settings.config.SettingsConfigHelper;
@@ -108,6 +109,8 @@ package net.wg.gui.lobby.settings
 
         public var applyBtn:SoundButtonEx = null;
 
+        public var eventDisableLabel:EventSettingLabel = null;
+
         private var _invalidTabs:Object;
 
         private var _invalidTabsNewCounterData:Object;
@@ -149,6 +152,12 @@ package net.wg.gui.lobby.settings
                 window.title = SETTINGS.TITLE;
                 window.contentPadding = WINDOW_PADDINGS;
             }
+        }
+
+        override protected function initialize() : void
+        {
+            super.initialize();
+            this.eventDisableLabel.visible = false;
         }
 
         override protected function configUI() : void
@@ -216,6 +225,8 @@ package net.wg.gui.lobby.settings
             this.tabLine = null;
             this.applyBtn.dispose();
             this.applyBtn = null;
+            this.eventDisableLabel.dispose();
+            this.eventDisableLabel = null;
             if(this.view)
             {
                 this.view.removeEventListener(ViewStackEvent.NEED_UPDATE,this.onViewNeedUpdateHandler);
@@ -427,6 +438,11 @@ package net.wg.gui.lobby.settings
                 _loc2_.setPresetAfterAutoDetect(this._graphicsPresetToSelect);
                 this._graphicsPresetToSelect = -1;
             }
+        }
+
+        public function as_setTigerEvent(param1:Boolean) : void
+        {
+            this.eventDisableLabel.visible = param1;
         }
 
         public function as_updateVideoSettings(param1:Object) : void

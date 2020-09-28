@@ -71,6 +71,16 @@ package net.wg.gui.battle.views.minimap.components.entries.personal
             return this._currentState;
         }
 
+        protected function getCurrentAnimationFrame() : int
+        {
+            return this._currentAnimationFrame;
+        }
+
+        protected function getCurrentReplyFrame() : int
+        {
+            return this._currentReplyFrame;
+        }
+
         override protected function onDispose() : void
         {
             this.reply.stop();
@@ -80,7 +90,7 @@ package net.wg.gui.battle.views.minimap.components.entries.personal
             super.onDispose();
         }
 
-        private function setAttackState(param1:Boolean) : void
+        protected function setAttackState(param1:Boolean) : void
         {
             this.animation.visible = true;
             this.animation.gotoAndPlay(param1?START_ANIMATION_FRAME:this._currentAnimationFrame);
@@ -88,7 +98,7 @@ package net.wg.gui.battle.views.minimap.components.entries.personal
             this.SetAtlasPlaceholderVisible(false);
         }
 
-        private function setReplyState(param1:Boolean) : void
+        protected function setReplyState(param1:Boolean) : void
         {
             this.reply.visible = true;
             this.animation.visible = false;
@@ -96,7 +106,7 @@ package net.wg.gui.battle.views.minimap.components.entries.personal
             this.SetAtlasPlaceholderVisible(false);
         }
 
-        private function setIdleState(param1:Boolean) : void
+        protected function setIdleState(param1:Boolean) : void
         {
             this.animation.visible = true;
             this.animation.gotoAndPlay(param1?IDLE_FRAME:this._currentAnimationFrame);
@@ -104,7 +114,7 @@ package net.wg.gui.battle.views.minimap.components.entries.personal
             this.SetAtlasPlaceholderVisible(false);
         }
 
-        private function setDefaultState() : void
+        protected function setDefaultState() : void
         {
             this.animation.visible = false;
             this.reply.visible = false;

@@ -112,10 +112,12 @@ package net.wg.gui.lobby.epicBattles.views
 
         public function layoutElements() : void
         {
+            var _loc4_:* = 0;
+            var _loc6_:* = 0;
             var _loc1_:int = EpicHelper.calculateStaticMargin(this._currentHeight);
             var _loc2_:Number = _loc1_ + EpicHelper.MAIN_MENU_BUTTON_BAR_HEIGHT;
             var _loc3_:Boolean = EpicHelper.isMinResolution(this._currentHeight);
-            var _loc4_:* = 0;
+            _loc4_ = 0;
             if(_loc3_)
             {
                 this.title.y = _loc2_ - EpicHelper.VISUAL_HERO_TITLE_TOP_PADDING;
@@ -128,7 +130,7 @@ package net.wg.gui.lobby.epicBattles.views
             }
             this.title.x = this._currentWidth - this.title.width >> 1;
             var _loc5_:int = this.centerBlock.height;
-            var _loc6_:int = this._currentHeight - _loc1_ - this.prestigeProgressPanel.calculateHeight();
+            _loc6_ = this._currentHeight - _loc1_ - this.prestigeProgressPanel.calculateHeight();
             var _loc7_:* = _loc6_ - _loc4_ - _loc5_ >> 1;
             this.centerBlock.y = _loc4_ + _loc7_;
             this.centerBlock.x = this._currentWidth - this.centerBlock.width >> 1;

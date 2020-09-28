@@ -6,6 +6,7 @@ package net.wg.gui.battle.views.superPlatoonPanel.renderers
     import flash.text.TextField;
     import net.wg.gui.battle.components.BattleAtlasSprite;
     import net.wg.gui.battle.views.stats.SpeakAnimation;
+    import net.wg.gui.battle.components.stats.playersPanel.ChatCommandItemComponent;
     import net.wg.data.constants.generated.BATTLEATLAS;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.constants.PlayersPanelInvalidationType;
     import net.wg.data.constants.Values;
@@ -20,6 +21,8 @@ package net.wg.gui.battle.views.superPlatoonPanel.renderers
     {
 
         private static const UNKNOWN_VEHICLE_LEVEL:int = -1;
+
+        private static const CHAT_COMMAND_OFFSET:int = 206;
 
         public var hit:Sprite = null;
 
@@ -50,6 +53,8 @@ package net.wg.gui.battle.views.superPlatoonPanel.renderers
         public var deadBg:MovieClip = null;
 
         public var noSound:BattleAtlasSprite = null;
+
+        public var chatCommandState:ChatCommandItemComponent = null;
 
         public var holderItemID:Number = -1;
 
@@ -93,6 +98,7 @@ package net.wg.gui.battle.views.superPlatoonPanel.renderers
             this.speakAnimation.mouseEnabled = false;
             this.speakAnimation.mouseChildren = false;
             this.actionMarker.mouseEnabled = false;
+            this.chatCommandState.mouseEnabled = false;
             TextFieldEx.setNoTranslate(this.fragsTF,true);
             this.hitArea = this.hit;
         }
@@ -101,6 +107,8 @@ package net.wg.gui.battle.views.superPlatoonPanel.renderers
         {
             this.speakAnimation.dispose();
             this.disableCommunication = null;
+            this.chatCommandState.dispose();
+            this.chatCommandState = null;
             this.fragsTF = null;
             this.icoIGR = null;
             this.vehicleLevel = null;
@@ -134,6 +142,7 @@ package net.wg.gui.battle.views.superPlatoonPanel.renderers
             }
             this.selfBg.visible = false;
             this.deadBg.visible = false;
+            this.chatCommandState.iconOffset(CHAT_COMMAND_OFFSET);
         }
 
         override protected function draw() : void
@@ -354,6 +363,16 @@ package net.wg.gui.battle.views.superPlatoonPanel.renderers
             invalidate(PlayersPanelInvalidationType.PLAYER_SCHEME);
         }
 
+        public function setChatCommand(param1:String, param2:uint) : void
+        {
+            this.chatCommandState.setActiveChatCommand(param1,param2);
+        }
+
+        public function triggerChatCommand(param1:String) : void
+        {
+            this.chatCommandState.playCommandAnimation(param1);
+        }
+
         private function updateColors() : void
         {
             var _loc1_:String = PlayerStatusSchemeName.getSchemeNameForVehicle(this._isCurrentPlayer,true,this._isTeamKiller,!this._isAlive,this._isOffline);
@@ -381,6 +400,7 @@ package net.wg.gui.battle.views.superPlatoonPanel.renderers
                     this.playerNameTF.textColor = _loc2_.rgb;
                 }
             }
+            this.chatCommandState.updateColors(App.colorSchemeMgr.getIsColorBlindS());
         }
     }
 }

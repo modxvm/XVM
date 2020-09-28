@@ -6,6 +6,7 @@ package net.wg.gui.battle.views.vehicleMarkers
     import net.wg.gui.battle.views.vehicleMarkers.statusMarkers.VehicleInspireTargetMarker;
     import net.wg.gui.battle.views.vehicleMarkers.statusMarkers.VehicleStunMarker;
     import net.wg.gui.battle.views.vehicleMarkers.statusMarkers.VehicleBerserkerMarker;
+    import net.wg.gui.battle.views.vehicleMarkers.statusMarkers.VehiclePowerUpMarker;
     import flash.utils.Dictionary;
     import net.wg.gui.battle.views.vehicleMarkers.events.StatusAnimationEvent;
     import net.wg.gui.battle.views.vehicleMarkers.statusMarkers.VehicleAnimatedStatusBaseMarker;
@@ -31,6 +32,8 @@ package net.wg.gui.battle.views.vehicleMarkers
 
         public var recoveryMarker:VehicleInspireTargetMarker = null;
 
+        public var powerUpMarker:VehiclePowerUpMarker = null;
+
         private var _statusEffectMarkers:Dictionary = null;
 
         private var _activeEffectID:int = -1;
@@ -50,6 +53,7 @@ package net.wg.gui.battle.views.vehicleMarkers
             this.setupMarker(BATTLE_MARKER_STATES.HEALING_STATE,this.healMarker);
             this.setupMarker(BATTLE_MARKER_STATES.BERSERKER_STATE,this.berserkerMarker);
             this.setupMarker(BATTLE_MARKER_STATES.REPAIRING_STATE,this.recoveryMarker);
+            this.setupMarker(BATTLE_MARKER_STATES.POWER_UP_STATE,this.powerUpMarker);
         }
 
         override protected function configUI() : void
@@ -62,6 +66,7 @@ package net.wg.gui.battle.views.vehicleMarkers
             this.healMarker.addEventListener(StatusAnimationEvent.EVENT_HIDDEN,this.onStatusAnimationEventHiddenHandler);
             this.berserkerMarker.addEventListener(StatusAnimationEvent.EVENT_HIDDEN,this.onStatusAnimationEventHiddenHandler);
             this.recoveryMarker.addEventListener(StatusAnimationEvent.EVENT_HIDDEN,this.onStatusAnimationEventHiddenHandler);
+            this.powerUpMarker.addEventListener(StatusAnimationEvent.EVENT_HIDDEN,this.onStatusAnimationEventHiddenHandler);
             this.stunMarker.setupFrameEvents();
             this.baseEngineerMarker.setupFrameEvents();
             this.inspireMarker.setupFrameEvents();
@@ -69,6 +74,7 @@ package net.wg.gui.battle.views.vehicleMarkers
             this.healMarker.setupFrameEvents();
             this.berserkerMarker.setupFrameEvents();
             this.recoveryMarker.setupFrameEvents();
+            this.powerUpMarker.setupFrameEvents();
         }
 
         override protected function onDispose() : void
@@ -81,6 +87,7 @@ package net.wg.gui.battle.views.vehicleMarkers
             this.healMarker.removeEventListener(StatusAnimationEvent.EVENT_HIDDEN,this.onStatusAnimationEventHiddenHandler);
             this.berserkerMarker.removeEventListener(StatusAnimationEvent.EVENT_HIDDEN,this.onStatusAnimationEventHiddenHandler);
             this.recoveryMarker.removeEventListener(StatusAnimationEvent.EVENT_HIDDEN,this.onStatusAnimationEventHiddenHandler);
+            this.powerUpMarker.removeEventListener(StatusAnimationEvent.EVENT_HIDDEN,this.onStatusAnimationEventHiddenHandler);
             this.baseEngineerMarker.dispose();
             this.baseEngineerMarker = null;
             this.inspireMarker.dispose();
@@ -95,6 +102,8 @@ package net.wg.gui.battle.views.vehicleMarkers
             this.berserkerMarker = null;
             this.recoveryMarker.dispose();
             this.recoveryMarker = null;
+            this.powerUpMarker.dispose();
+            this.powerUpMarker = null;
             for(_loc1_ in this._statusEffectMarkers)
             {
                 delete this._statusEffectMarkers[_loc1_];
@@ -117,6 +126,7 @@ package net.wg.gui.battle.views.vehicleMarkers
             this.healMarker.setEffectColor(param1,param2);
             this.berserkerMarker.setEffectColor(param1,param2);
             this.recoveryMarker.setEffectColor(param1,param2);
+            this.powerUpMarker.setEffectColor(param1,param2);
         }
 
         public function setSecondString(param1:String) : void
@@ -152,7 +162,10 @@ package net.wg.gui.battle.views.vehicleMarkers
             {
                 for each(_loc6_ in this._statusEffectMarkers)
                 {
-                    _loc6_.setVisibility(false);
+                    if(_loc6_ && _loc6_ != _loc4_)
+                    {
+                        _loc6_.setVisibility(false);
+                    }
                 }
             }
         }

@@ -1,15 +1,9 @@
 package net.wg.gui.battle.epicBattle.VO.daapi
 {
-    import net.wg.data.daapi.base.DAAPIDataClass;
+    import net.wg.data.VO.daapi.DAAPIVehicleStatsVO;
 
-    public class EpicVehicleStatsVO extends DAAPIDataClass
+    public class EpicVehicleStatsVO extends DAAPIVehicleStatsVO
     {
-
-        public var isEnemy:Boolean = false;
-
-        public var vehicleID:Number = -1;
-
-        public var frags:int = -1;
 
         public var rank:int = -1;
 

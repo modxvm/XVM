@@ -8,7 +8,5 @@ package net.wg.infrastructure.base.meta
         function navigateToStoreS() : void;
 
         function openOfferWindowS(param1:int) : void;
-
-        function as_setTotalClicksText(param1:String) : void;
     }
 }

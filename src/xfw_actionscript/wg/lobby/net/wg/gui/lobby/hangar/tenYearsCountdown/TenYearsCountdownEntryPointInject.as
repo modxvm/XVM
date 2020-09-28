@@ -45,33 +45,6 @@ package net.wg.gui.lobby.hangar.tenYearsCountdown
             mouseEnabled = false;
         }
 
-        public function set isSmall(param1:Boolean) : void
-        {
-            this._isSmall = param1;
-            this.updateSize();
-        }
-
-        public function set isWide(param1:Boolean) : void
-        {
-            this._isWide = param1;
-            this.updateSize();
-        }
-
-        private function updateSize() : void
-        {
-            var _loc1_:* = 0;
-            if(this._isWide)
-            {
-                _loc1_ = this._isSmall?WIDTH_SMALL_WIDE:WIDTH_BIG_WIDE;
-            }
-            else
-            {
-                _loc1_ = this._isSmall?WIDTH_SMALL:WIDTH_BIG;
-            }
-            var _loc2_:int = this._isSmall?HEIGHT_SMALL:HEIGHT_BIG;
-            setSize(_loc1_,_loc2_);
-        }
-
         override public function addChild(param1:DisplayObject) : DisplayObject
         {
             var _loc2_:DisplayObject = super.addChild(param1);
@@ -101,6 +74,50 @@ package net.wg.gui.lobby.hangar.tenYearsCountdown
             {
                 this.updateAnimPosition();
             }
+        }
+
+        override protected function onDispose() : void
+        {
+            super.onDispose();
+            if(this._anim)
+            {
+                this._anim.stop();
+                removeChild(this._anim);
+                this._anim = null;
+            }
+        }
+
+        public function as_setAnimationEnabled(param1:Boolean) : void
+        {
+            if(this._isAnimationEnabled != param1)
+            {
+                this._isAnimationEnabled = param1;
+                invalidate(ANIMATION_INVALID);
+            }
+        }
+
+        public function as_updateActivity(param1:Boolean) : void
+        {
+            if(this._isStageActive != param1)
+            {
+                this._isStageActive = param1;
+                invalidate(STAGE_STATE_INVALID);
+            }
+        }
+
+        private function updateSize() : void
+        {
+            var _loc1_:* = 0;
+            if(this._isWide)
+            {
+                _loc1_ = this._isSmall?WIDTH_SMALL_WIDE:WIDTH_BIG_WIDE;
+            }
+            else
+            {
+                _loc1_ = this._isSmall?WIDTH_SMALL:WIDTH_BIG;
+            }
+            var _loc2_:int = this._isSmall?HEIGHT_SMALL:HEIGHT_BIG;
+            setSize(_loc1_,_loc2_);
         }
 
         private function createAnimation() : void
@@ -135,33 +152,16 @@ package net.wg.gui.lobby.hangar.tenYearsCountdown
             }
         }
 
-        override protected function onDispose() : void
+        public function set isSmall(param1:Boolean) : void
         {
-            super.onDispose();
-            if(this._anim)
-            {
-                this._anim.stop();
-                removeChild(this._anim);
-                this._anim = null;
-            }
+            this._isSmall = param1;
+            this.updateSize();
         }
 
-        public function as_updateActivity(param1:Boolean) : void
+        public function set isWide(param1:Boolean) : void
         {
-            if(this._isStageActive != param1)
-            {
-                this._isStageActive = param1;
-                invalidate(STAGE_STATE_INVALID);
-            }
-        }
-
-        public function as_setAnimationEnabled(param1:Boolean) : void
-        {
-            if(this._isAnimationEnabled != param1)
-            {
-                this._isAnimationEnabled = param1;
-                invalidate(ANIMATION_INVALID);
-            }
+            this._isWide = param1;
+            this.updateSize();
         }
     }
 }

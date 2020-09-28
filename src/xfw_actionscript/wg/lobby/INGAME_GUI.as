@@ -211,7 +211,11 @@ package
 
         public static const CHAT_SHORTCUTS_ATTACKING_BASE:String = "#ingame_gui:chat_shortcuts/attacking_base";
 
+        public static const CHAT_SHORTCUTS_ATTACKING_BASE_NUMBERED:String = "#ingame_gui:chat_shortcuts/attacking_base_numbered";
+
         public static const CHAT_SHORTCUTS_ATTENTION_TO_OBJECTIVE_ATK:String = "#ingame_gui:chat_shortcuts/attention_to_objective_atk";
+
+        public static const CHAT_SHORTCUTS_ATTENTION_TO_OBJECTIVE_ATK_AUTOCOMMIT:String = "#ingame_gui:chat_shortcuts/attention_to_objective_atk_autocommit";
 
         public static const CHAT_SHORTCUTS_ATTENTION_TO_BASE_DEF:String = "#ingame_gui:chat_shortcuts/attention_to_base_def";
 
@@ -219,7 +223,11 @@ package
 
         public static const CHAT_SHORTCUTS_DEFENDING_BASE:String = "#ingame_gui:chat_shortcuts/defending_base";
 
+        public static const CHAT_SHORTCUTS_DEFENDING_BASE_NUMBERED:String = "#ingame_gui:chat_shortcuts/defending_base_numbered";
+
         public static const CHAT_SHORTCUTS_ATTENTION_TO_OBJECTIVE_DEF:String = "#ingame_gui:chat_shortcuts/attention_to_objective_def";
+
+        public static const CHAT_SHORTCUTS_ATTENTION_TO_OBJECTIVE_DEF_AUTOCOMMIT:String = "#ingame_gui:chat_shortcuts/attention_to_objective_def_autocommit";
 
         public static const CHAT_SHORTCUTS_HELP_ME_EX:String = "#ingame_gui:chat_shortcuts/help_me_ex";
 

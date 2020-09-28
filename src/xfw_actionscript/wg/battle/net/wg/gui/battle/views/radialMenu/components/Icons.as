@@ -43,6 +43,14 @@ package net.wg.gui.battle.views.radialMenu.components
 
         public var attackingBaseIcon:MovieClip = null;
 
+        public var attackHQIcon:MovieClip = null;
+
+        public var attackingHQIcon:MovieClip = null;
+
+        public var defendHQIcon:MovieClip = null;
+
+        public var defendingHQIcon:MovieClip = null;
+
         private var _currentState:String = "";
 
         private var _iconsDictionary:Dictionary;
@@ -68,6 +76,10 @@ package net.wg.gui.battle.views.radialMenu.components
             this._iconsDictionary[RADIAL_MENU_CONSTS.DEFENDING_BASE] = this.defendingBaseIcon;
             this._iconsDictionary[RADIAL_MENU_CONSTS.ATTACK_BASE] = this.attackBaseIcon;
             this._iconsDictionary[RADIAL_MENU_CONSTS.ATTACKING_BASE] = this.attackingBaseIcon;
+            this._iconsDictionary[RADIAL_MENU_CONSTS.ATTACK_HQ] = this.attackHQIcon;
+            this._iconsDictionary[RADIAL_MENU_CONSTS.ATTACKING_HQ] = this.attackingHQIcon;
+            this._iconsDictionary[RADIAL_MENU_CONSTS.DEFEND_HQ] = this.defendHQIcon;
+            this._iconsDictionary[RADIAL_MENU_CONSTS.DEFENDING_HQ] = this.defendingHQIcon;
         }
 
         public function showIcon(param1:String) : void
@@ -130,6 +142,10 @@ package net.wg.gui.battle.views.radialMenu.components
             this.attackBaseIcon.visible = false;
             this.defendingBaseIcon.visible = false;
             this.attackingBaseIcon.visible = false;
+            this.attackHQIcon.visible = false;
+            this.attackingHQIcon.visible = false;
+            this.defendHQIcon.visible = false;
+            this.defendingHQIcon.visible = false;
         }
     }
 }

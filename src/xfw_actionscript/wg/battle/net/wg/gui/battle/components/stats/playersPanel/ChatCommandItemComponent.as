@@ -10,6 +10,8 @@ package net.wg.gui.battle.components.stats.playersPanel
 
         private static const DEFAULT_ANIMATION_WIDTH:int = 410;
 
+        private static const INVALID_INDEX:int = -1;
+
         private static const PLAYER_IS_ALLY_TARGET_STATE:String = "TARGET";
 
         private static const COMMAND_TARGET_STATE:String = "sos";
@@ -26,21 +28,25 @@ package net.wg.gui.battle.components.stats.playersPanel
 
         private static const ATTACK_BASE_PURPLE_STATE:String = "attackBasePurple";
 
+        private static const ATTACK_OBJECTIVE_PURPLE_STATE:String = "attackObjectivePurple";
+
         private static const ATTACK_PURPLE_STATE:String = "attackPurple";
 
-        private static const GREEN_COLOR_ANIMATION_LIST:Array = ["defendBase","help_me_ex","help_me","thanks","goingTo","attention_to_base_def_and_commit","goingTo","supportingAlly"];
+        private static const GREEN_COLOR_ANIMATION_LIST:Array = ["defendBase","help_me_ex","help_me","thanks","goingTo","defendingBase","goingTo","supportingAlly","defendObjective","defendingObjective"];
 
-        private static const RED_COLOR_ANIMATION_LIST:Array = ["attackBase","attack","attention_to_base_atk_and_commit"];
+        private static const RED_COLOR_ANIMATION_LIST:Array = ["attackBase","attack","attackingBase","attackObjective","attackingObjective"];
 
         private static const ATTACK_BASE_COMMANDS:Array = ["attackBase","attention_to_base_atk_and_commit"];
 
+        private static const ATTACK_OBJECTIVE_COMMANDS:Array = ["attackObjective","attackingObjective"];
+
         private static const COMMAND_NAME_TO_FRAME_STATE:Object = {
             "":1,
-            "attention_to_base_atk_and_commit":2,
+            "attackingBase":2,
             "attackBase":2,
             "attention_to":3,
             "defendBase":4,
-            "attention_to_base_def_and_commit":4,
+            "defendingBase":4,
             "attack":5,
             "help_me_ex":6,
             "help_me":6,
@@ -49,7 +55,12 @@ package net.wg.gui.battle.components.stats.playersPanel
             "goingTo":8,
             "sos":9,
             "attackBasePurple":10,
-            "attackPurple":11
+            "attackPurple":11,
+            "defendObjective":12,
+            "defendingObjective":12,
+            "attackObjective":13,
+            "attackingObjective":13,
+            "attackObjectivePurple":14
         };
 
         private static const TARGET_CHAT_CMD_FLAGS:uint = 1;
@@ -96,11 +107,11 @@ package net.wg.gui.battle.components.stats.playersPanel
             }
             this.chatCommandAnimation.width = this._animationWidth;
             var _loc2_:String = ORANGE_STATE;
-            if(GREEN_COLOR_ANIMATION_LIST.indexOf(param1) != -1)
+            if(GREEN_COLOR_ANIMATION_LIST.indexOf(param1) != INVALID_INDEX)
             {
                 _loc2_ = GREEN_STATE;
             }
-            else if(RED_COLOR_ANIMATION_LIST.indexOf(param1) != -1)
+            else if(RED_COLOR_ANIMATION_LIST.indexOf(param1) != INVALID_INDEX)
             {
                 _loc2_ = this._isColorBlind?PURPLE_STATE:RED_STATE;
             }
@@ -140,7 +151,7 @@ package net.wg.gui.battle.components.stats.playersPanel
         private function evaluateCorrectState(param1:String, param2:uint) : String
         {
             var _loc3_:String = param1;
-            if(GREEN_COLOR_ANIMATION_LIST.indexOf(param1) != -1)
+            if(GREEN_COLOR_ANIMATION_LIST.indexOf(param1) != INVALID_INDEX)
             {
                 if((param2 & TARGET_CHAT_CMD_FLAGS) > 0)
                 {
@@ -151,11 +162,15 @@ package net.wg.gui.battle.components.stats.playersPanel
                     _loc3_ = PLAYER_IS_ALLY_TARGET_STATE;
                 }
             }
-            if(ATTACK_BASE_COMMANDS.indexOf(param1) != -1 && this._isColorBlind)
+            if(ATTACK_BASE_COMMANDS.indexOf(param1) != INVALID_INDEX && this._isColorBlind)
             {
                 _loc3_ = ATTACK_BASE_PURPLE_STATE;
             }
-            else if(RED_COLOR_ANIMATION_LIST.indexOf(param1) != -1 && this._isColorBlind)
+            else if(ATTACK_OBJECTIVE_COMMANDS.indexOf(param1) != INVALID_INDEX && this._isColorBlind)
+            {
+                _loc3_ = ATTACK_OBJECTIVE_PURPLE_STATE;
+            }
+            else if(RED_COLOR_ANIMATION_LIST.indexOf(param1) != INVALID_INDEX && this._isColorBlind)
             {
                 _loc3_ = ATTACK_PURPLE_STATE;
             }

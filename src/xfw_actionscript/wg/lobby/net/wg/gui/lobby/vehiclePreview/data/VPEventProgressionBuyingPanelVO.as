@@ -7,9 +7,13 @@ package net.wg.gui.lobby.vehiclePreview.data
 
         public var title:String = "";
 
+        public var shortTitle:String = "";
+
         public var money:String = "";
 
         public var price:String = "";
+
+        public var priceTooltip:String = "";
 
         public var buyButtonEnabled:Boolean = false;
 

@@ -4,9 +4,9 @@ package net.wg.gui.lobby.hangar.eventEntryPoint
     import net.wg.gui.lobby.hangar.Hangar;
     import flash.utils.Dictionary;
     import flash.geom.Rectangle;
+    import flash.events.Event;
     import flash.display.DisplayObject;
     import scaleform.clik.constants.InvalidationType;
-    import flash.events.Event;
 
     public class HangarEventEntriesContainer extends UIComponentEx
     {
@@ -45,25 +45,13 @@ package net.wg.gui.lobby.hangar.eventEntryPoint
             visible = false;
         }
 
-        public function addEntry(param1:IEventEntryPoint, param2:String, param3:Boolean = true) : void
+        override public function setSize(param1:Number, param2:Number) : void
         {
-            App.utils.asserter.assertNull(this._entryByAlias[param2],"entry with alias " + param2 + " already added");
-            this._entryByAlias[param2] = param1;
-            addChild(DisplayObject(param1));
-            if(param3)
+            var _loc3_:Boolean = param1 != _width || param2 != _height;
+            super.setSize(param1,param2);
+            if(_loc3_)
             {
-                this._hangar.registerFlashComponentS(param1,param2);
-            }
-            invalidate(InvalidationType.LAYOUT);
-        }
-
-        public function updateEntry(param1:String, param2:Boolean) : void
-        {
-            var _loc3_:IEventEntryPoint = this._entryByAlias[param1];
-            if(_loc3_ && _loc3_.visible != param2)
-            {
-                _loc3_.visible = param2;
-                invalidate(InvalidationType.LAYOUT);
+                dispatchEvent(new Event(Event.RESIZE));
             }
         }
 
@@ -125,6 +113,29 @@ package net.wg.gui.lobby.hangar.eventEntryPoint
             }
         }
 
+        public function addEntry(param1:IEventEntryPoint, param2:String, param3:Boolean = true) : void
+        {
+            App.utils.asserter.assertNull(this._entryByAlias[param2],"entry with alias " + param2 + " already added");
+            this._entryByAlias[param2] = param1;
+            addChild(DisplayObject(param1));
+            if(param3)
+            {
+                this._hangar.registerFlashComponentS(param1,param2);
+            }
+            invalidate(InvalidationType.LAYOUT);
+        }
+
+        public function setGap(param1:int, param2:int) : void
+        {
+            if(this._gapSmall == param1 && this._gapBig == param2)
+            {
+                return;
+            }
+            this._gapSmall = param1;
+            this._gapBig = param2;
+            invalidate(InvalidationType.LAYOUT);
+        }
+
         public function setMarginBig(param1:int, param2:int, param3:int, param4:int) : void
         {
             if(this._marginBig.left != param1 || this._marginBig.top != param2 || this._marginBig.right != param3 || this._marginBig.bottom != param4)
@@ -155,24 +166,13 @@ package net.wg.gui.lobby.hangar.eventEntryPoint
             }
         }
 
-        public function setGap(param1:int, param2:int) : void
+        public function updateEntry(param1:String, param2:Boolean) : void
         {
-            if(this._gapSmall == param1 && this._gapBig == param2)
+            var _loc3_:IEventEntryPoint = this._entryByAlias[param1];
+            if(_loc3_ && _loc3_.visible != param2)
             {
-                return;
-            }
-            this._gapSmall = param1;
-            this._gapBig = param2;
-            invalidate(InvalidationType.LAYOUT);
-        }
-
-        override public function setSize(param1:Number, param2:Number) : void
-        {
-            var _loc3_:Boolean = param1 != _width || param2 != _height;
-            super.setSize(param1,param2);
-            if(_loc3_)
-            {
-                dispatchEvent(new Event(Event.RESIZE));
+                _loc3_.visible = param2;
+                invalidate(InvalidationType.LAYOUT);
             }
         }
 

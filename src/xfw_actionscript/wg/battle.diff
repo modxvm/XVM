@@ -95,7 +95,7 @@ diff -Naur battle.orig/net/wg/gui/battle/components/PlayersPanelBase.as battle/n
 diff -Naur battle.orig/net/wg/gui/battle/components/TimersPanel.as battle/net/wg/gui/battle/components/TimersPanel.as
 --- battle.orig/net/wg/gui/battle/components/TimersPanel.as	2020-07-27 14:29:55.748334800 +0300
 +++ battle/net/wg/gui/battle/components/TimersPanel.as	2020-07-27 14:50:38.812581500 +0300
-@@ -302,10 +302,12 @@
+@@ -307,10 +307,12 @@
                  return;
              }
              var _loc3_:int = this.activeSecondaryTimers.length;
@@ -107,8 +107,8 @@ diff -Naur battle.orig/net/wg/gui/battle/components/TimersPanel.as battle/net/wg
 +            */
              _loc2_.resetTimer();
              _loc2_.isActive = false;
-             this._secondaryTimerVisibleBefore = false;
-@@ -337,10 +339,12 @@
+             _loc2_.hideTimer();
+@@ -341,10 +341,12 @@
              {
                  return;
              }
@@ -163,7 +163,7 @@ diff -Naur battle.orig/net/wg/gui/battle/random/views/BattlePage.as battle/net/w
  
          private static const MINIMAP_MARGIN_WIDTH:int = 0;
  
-@@ -343,6 +343,11 @@
+@@ -361,6 +361,11 @@
              this.updatePositionForQuestProgress();
          }
  
@@ -202,7 +202,7 @@ diff -Naur battle.orig/net/wg/gui/battle/random/views/stats/components/fullStats
 +            return _table;
 +        }
 +
-         private var _table:FullStatsTable = null;
+         protected var _table:FullStatsTable = null;
  
          private var _squadHandler:StatsBaseMeta = null;
 @@ -240,12 +245,12 @@
@@ -370,7 +370,7 @@ diff -Naur battle.orig/net/wg/gui/battle/ranked/stats/components/playersPanel/li
 diff -Naur battle.orig/net/wg/gui/battle/views/BaseBattlePage.as battle/net/wg/gui/battle/views/BaseBattlePage.as
 --- battle.orig/net/wg/gui/battle/views/BaseBattlePage.as	2020-07-27 14:29:54.208876200 +0300
 +++ battle/net/wg/gui/battle/views/BaseBattlePage.as	2020-07-27 14:41:25.329292900 +0300
-@@ -74,6 +74,11 @@
+@@ -76,6 +76,11 @@
  
          protected var playerMessageList:MessageListDAAPI;
  
@@ -381,9 +381,9 @@ diff -Naur battle.orig/net/wg/gui/battle/views/BaseBattlePage.as battle/net/wg/g
 +
          protected var battleStatisticDataController:BattleStatisticDataController;
  
-         protected var postmortemTips:PostmortemPanel = null;
-@@ -343,6 +348,11 @@
-             }
+         protected var isPostMortem:Boolean = false;
+@@ -343,6 +343,11 @@
+             return BATTLE_VIEW_ALIASES.PREBATTLE_TIMER;
          }
  
 +        public function xfw_registerComponent(param1:IDAAPIModule, param2:String) : void
@@ -394,7 +394,7 @@ diff -Naur battle.orig/net/wg/gui/battle/views/BaseBattlePage.as battle/net/wg/g
          protected function registerComponent(param1:IDAAPIModule, param2:String) : void
          {
              this._componentsStorage[param2] = param1;
-@@ -392,6 +402,11 @@
+@@ -404,6 +404,11 @@
              return false;
          }
  
@@ -406,7 +406,7 @@ diff -Naur battle.orig/net/wg/gui/battle/views/BaseBattlePage.as battle/net/wg/g
          protected function onMiniMapChangeHandler(param1:MinimapEvent) : void
          {
              this.playerMessageListPositionUpdate();
-@@ -417,6 +432,11 @@
+@@ -429,6 +429,11 @@
              this.ribbonsPanel.x = (_originalWidth >> 1) + this.ribbonsPanel.offsetX;
          }
  

@@ -104,6 +104,16 @@ package net.wg.gui.battle.views.superPlatoonPanel.list
             this.applyVehicleStatus();
         }
 
+        public function setChatCommand(param1:String, param2:uint) : void
+        {
+            this._listItem.setChatCommand(param1,param2);
+        }
+
+        public function triggerChatCommand(param1:String) : void
+        {
+            this._listItem.triggerChatCommand(param1);
+        }
+
         private function applyVehicleData() : void
         {
             this._listItem.setIsIGR(this._vehicleData.isIGR);

@@ -4,6 +4,7 @@ package net.wg.gui.battle.views.staticMarkers.epic.sectorbase
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import flash.geom.Point;
     import flash.display.MovieClip;
+    import net.wg.gui.battle.views.staticMarkers.epic.ObjectiveIdReplyState;
     import net.wg.gui.battle.views.vehicleMarkers.VehicleMarkersManager;
     import net.wg.gui.battle.views.actionMarkers.ActionMarkerStates;
 
@@ -26,19 +27,17 @@ package net.wg.gui.battle.views.staticMarkers.epic.sectorbase
 
         private static const NEUTRAL:String = "neutral";
 
-        public var highlightAnimationAttackBase:MovieClip = null;
-
-        public var attackBaseMarker:MovieClip = null;
-
-        public var hoverShadowAttack:MovieClip = null;
-
         public var clickAnimation:MovieClip = null;
 
-        public var highlightAnimationDefendBase:MovieClip = null;
+        public var highlightAnimation:MovieClip = null;
 
-        public var defendBaseMarker:MovieClip = null;
+        public var epicBaseID:ObjectiveIdReplyState = null;
 
-        public var hoverShadowDefend:MovieClip = null;
+        public var epicBaseMarker:MovieClip = null;
+
+        public var baseMarker:MovieClip = null;
+
+        public var hoverShadow:MovieClip = null;
 
         private var _count:int = 0;
 
@@ -47,6 +46,10 @@ package net.wg.gui.battle.views.staticMarkers.epic.sectorbase
         private var _vmManager:VehicleMarkersManager = null;
 
         private var _baseType:String = "";
+
+        private var _baseColor:String = "";
+
+        private var _isEpic:Boolean = false;
 
         public function SectorBaseActions()
         {
@@ -73,49 +76,29 @@ package net.wg.gui.battle.views.staticMarkers.epic.sectorbase
 
         public function deactivateAttackAndDefendStates() : void
         {
-            if(this.attackBaseMarker != null)
-            {
-                this.attackBaseMarker.visible = false;
-            }
-            if(this.defendBaseMarker != null)
-            {
-                this.defendBaseMarker.visible = false;
-            }
-            if(this.hoverShadowDefend != null)
-            {
-                this.hoverShadowDefend.visible = false;
-            }
-            if(this.hoverShadowAttack != null)
-            {
-                this.hoverShadowAttack.visible = false;
-            }
-            if(this.highlightAnimationDefendBase != null)
-            {
-                this.highlightAnimationDefendBase.visible = false;
-            }
-            if(this.highlightAnimationAttackBase != null)
-            {
-                this.highlightAnimationAttackBase.visible = false;
-            }
+            this.clickAnimation.visible = false;
+            this.highlightAnimation.visible = false;
+            this.epicBaseID.visible = false;
+            this.epicBaseMarker.visible = false;
+            this.baseMarker.visible = false;
+            this.hoverShadow.visible = false;
         }
 
         override protected function onDispose() : void
         {
-            if(this.highlightAnimationAttackBase != null)
-            {
-                this.highlightAnimationAttackBase.stop();
-                this.highlightAnimationAttackBase = null;
-            }
-            this.attackBaseMarker = null;
-            this.hoverShadowAttack = null;
-            if(this.highlightAnimationDefendBase != null)
-            {
-                this.highlightAnimationDefendBase.stop();
-                this.highlightAnimationDefendBase = null;
-            }
-            this.defendBaseMarker = null;
-            this.hoverShadowDefend = null;
+            this.clickAnimation.stop();
             this.clickAnimation = null;
+            this.highlightAnimation.stop();
+            this.highlightAnimation = null;
+            this.epicBaseID.dispose();
+            this.epicBaseID = null;
+            this.epicBaseMarker.stop();
+            this.epicBaseMarker = null;
+            this.baseMarker.stop();
+            this.baseMarker = null;
+            this.hoverShadow.stop();
+            this.hoverShadow = null;
+            this._vmManager = null;
             super.onDispose();
         }
 
@@ -129,14 +112,15 @@ package net.wg.gui.battle.views.staticMarkers.epic.sectorbase
         {
             this._baseType = param1;
             this.setBaseColor();
-            if(this.attackBaseMarker != null)
-            {
-                this.attackBaseMarker.visible = false;
-            }
-            if(this.defendBaseMarker != null)
-            {
-                this.defendBaseMarker.visible = false;
-            }
+            this.baseMarker.visible = false;
+        }
+
+        public function activateEpicVisibility(param1:Boolean) : void
+        {
+            this._isEpic = param1;
+            this.epicBaseID.visible = param1;
+            this.epicBaseMarker.visible = param1;
+            this.baseMarker.visible = !param1;
         }
 
         public function setBaseColor() : void
@@ -145,32 +129,26 @@ package net.wg.gui.battle.views.staticMarkers.epic.sectorbase
             {
                 if(this._vmManager.isColorBlind)
                 {
-                    gotoAndStop(ATTACK_COLORBLIND);
+                    this._baseColor = ATTACK_COLORBLIND;
                 }
                 else
                 {
-                    gotoAndStop(ATTACK);
+                    this._baseColor = ATTACK;
                 }
             }
             else
             {
-                gotoAndStop(DEFEND);
+                this._baseColor = DEFEND;
             }
+            gotoAndStop(this._baseColor);
         }
 
-        public function activateHover(param1:Boolean, param2:String) : void
+        public function activateHover(param1:Boolean) : void
         {
-            if(param2 == ENEMY || param2 == NEUTRAL)
-            {
-                this.hoverShadowAttack.visible = param1;
-            }
-            else
-            {
-                this.hoverShadowDefend.visible = param1;
-            }
+            this.hoverShadow.visible = param1;
         }
 
-        public function setActiveState(param1:int, param2:String) : void
+        public function setActiveState(param1:int) : void
         {
             if(param1 == ActionMarkerStates.NEUTRAL)
             {
@@ -178,38 +156,29 @@ package net.wg.gui.battle.views.staticMarkers.epic.sectorbase
                 this._showHighlight = true;
                 return;
             }
-            if(param2 == ENEMY || param2 == NEUTRAL)
-            {
-                if(this._vmManager.isColorBlind)
-                {
-                    this.setStateForBase(param1,ATTACK_COLORBLIND,this.attackBaseMarker,this.highlightAnimationAttackBase);
-                }
-                else
-                {
-                    this.setStateForBase(param1,ATTACK,this.attackBaseMarker,this.highlightAnimationAttackBase);
-                }
-            }
-            else
-            {
-                this.setStateForBase(param1,DEFEND,this.defendBaseMarker,this.highlightAnimationDefendBase);
-            }
-        }
-
-        private function setStateForBase(param1:int, param2:String, param3:MovieClip, param4:MovieClip) : void
-        {
-            gotoAndStop(param2);
-            param3.visible = true;
-            param4.visible = this._count == 0;
+            gotoAndStop(this._baseColor);
+            this.baseMarker.visible = !this._isEpic;
+            this.epicBaseID.visible = this._isEpic;
+            this.epicBaseMarker.visible = this._isEpic;
+            this.highlightAnimation.visible = this._count == 0;
             if(this._count == 0 && this._showHighlight)
             {
-                param4.play();
+                this.highlightAnimation.play();
             }
             else if(this._count >= 1)
             {
                 this._showHighlight = false;
-                param4.stop();
+                this.highlightAnimation.stop();
             }
-            param3.gotoAndStop(ActionMarkerStates.STATE_INT_TO_STRING[param1]);
+            if(this._isEpic)
+            {
+                this.epicBaseMarker.gotoAndStop(ActionMarkerStates.STATE_INT_TO_STRING[param1]);
+                this.epicBaseID.setActiveState(param1,id);
+            }
+            else
+            {
+                this.baseMarker.gotoAndStop(ActionMarkerStates.STATE_INT_TO_STRING[param1]);
+            }
         }
 
         override public function setReplyCount(param1:int) : void

@@ -9,6 +9,7 @@ package net.wg.gui.lobby.hangar
     import net.wg.gui.lobby.hangar.data.HangarHeaderVO;
     import net.wg.gui.lobby.hangar.quests.BattlePassEntryPoint;
     import net.wg.gui.lobby.rankedBattles19.components.widget.RankedBattlesHangarWidget;
+    import net.wg.gui.lobby.hangar.quests.WhiteTigerWidget;
     import net.wg.utils.IScheduler;
     import net.wg.gui.lobby.hangar.quests.HeaderQuestsEvent;
     import scaleform.clik.constants.InvalidationType;
@@ -37,6 +38,8 @@ package net.wg.gui.lobby.hangar
         private var _battlePassEntryPoint:BattlePassEntryPoint = null;
 
         private var _rankedBattlesWidget:RankedBattlesHangarWidget = null;
+
+        private var _whiteTigerWidget:WhiteTigerWidget = null;
 
         private var _scheduler:IScheduler = null;
 
@@ -116,6 +119,15 @@ package net.wg.gui.lobby.hangar
             }
         }
 
+        public function as_createWhiteTigerWidget() : void
+        {
+            if(this._whiteTigerWidget == null)
+            {
+                this._scheduler.cancelTask(this.createWhiteTiger);
+                this._scheduler.scheduleOnNextFrame(this.createWhiteTiger);
+            }
+        }
+
         public function as_removeBattlePass() : void
         {
             if(this._battlePassEntryPoint != null)
@@ -148,6 +160,22 @@ package net.wg.gui.lobby.hangar
             }
         }
 
+        public function as_removeWhiteTigerWidget() : void
+        {
+            if(this._whiteTigerWidget != null)
+            {
+                if(this.questsFlags.getEntryPoint() is WhiteTigerWidget)
+                {
+                    this.questsFlags.setEntryPoint(null);
+                }
+                if(isFlashComponentRegisteredS(HANGAR_ALIASES.WHITE_TIGER_WIDGET))
+                {
+                    unregisterFlashComponentS(HANGAR_ALIASES.WHITE_TIGER_WIDGET);
+                }
+                this._whiteTigerWidget = null;
+            }
+        }
+
         public function getLayoutProperties() : Vector.<HelpLayoutVO>
         {
             var _loc1_:HelpLayoutVO = new HelpLayoutVO();
@@ -168,11 +196,23 @@ package net.wg.gui.lobby.hangar
             return this.questsFlags.getQuestGroupByID(param1);
         }
 
+        public function updateStage(param1:Number, param2:Number) : void
+        {
+            this.questsFlags.updateStage(param1,param2);
+        }
+
         private function createBattlePass() : void
         {
             this._battlePassEntryPoint = new BattlePassEntryPoint();
             this.questsFlags.setEntryPoint(this._battlePassEntryPoint);
             registerFlashComponentS(this._battlePassEntryPoint,HANGAR_ALIASES.BATTLE_PASSS_ENTRY_POINT);
+        }
+
+        private function createWhiteTiger() : void
+        {
+            this._whiteTigerWidget = new WhiteTigerWidget();
+            this.questsFlags.setEntryPoint(this._whiteTigerWidget,true);
+            registerFlashComponentS(this._whiteTigerWidget,HANGAR_ALIASES.WHITE_TIGER_WIDGET);
         }
 
         private function onBtnHeaderQuestClickHandler(param1:HeaderQuestsEvent) : void

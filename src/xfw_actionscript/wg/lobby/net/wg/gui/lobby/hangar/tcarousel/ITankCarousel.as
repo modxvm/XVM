@@ -7,5 +7,9 @@ package net.wg.gui.lobby.hangar.tcarousel
 
     public interface ITankCarousel extends ITankCarouselMeta, IHelpLayoutComponent, IUIComponentEx, IGraphicsOptimizationComponent
     {
+
+        function get rowCount() : int;
+
+        function get smallDoubleCarouselEnable() : Boolean;
     }
 }

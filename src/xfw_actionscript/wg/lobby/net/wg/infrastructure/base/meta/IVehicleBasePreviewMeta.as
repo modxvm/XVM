@@ -18,5 +18,7 @@ package net.wg.infrastructure.base.meta
         function as_show3DSceneTooltip(param1:String, param2:Array) : void;
 
         function as_hide3DSceneTooltip() : void;
+
+        function as_setBottomPanel(param1:String) : void;
     }
 }

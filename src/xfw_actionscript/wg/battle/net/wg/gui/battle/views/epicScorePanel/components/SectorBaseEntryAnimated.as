@@ -46,6 +46,7 @@ package net.wg.gui.battle.views.epicScorePanel.components
         {
             this.base.setBaseId(param1);
             this.progressCircleElement.setOwner(param2);
+            this.progressCircleElement.setColorBlindMode(App.colorSchemeMgr.getIsColorBlindS());
             this.setState(DEFAULT_STATE);
         }
 

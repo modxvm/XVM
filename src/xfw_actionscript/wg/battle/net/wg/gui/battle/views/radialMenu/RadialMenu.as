@@ -446,7 +446,7 @@ package net.wg.gui.battle.views.radialMenu
                 {
                     this.internalHide();
                 }
-                else if(MouseEventEx(param1).buttonIdx == MouseEventEx.LEFT_BUTTON || MouseEventEx(param1).buttonIdx == MouseEventEx.MIDDLE_BUTTON)
+                else if(MouseEventEx(param1).buttonIdx == MouseEventEx.LEFT_BUTTON)
                 {
                     this.doActionAndHideRadialMenu();
                 }

@@ -1,7 +1,10 @@
 package net.wg.infrastructure.base.meta.impl
 {
+    import net.wg.gui.battle.views.staticMarkers.epic.ObjectiveIdReplyState;
     import net.wg.gui.battle.views.staticMarkers.epic.headquarter.HeadquarterActionMarker;
+    import net.wg.gui.battle.views.staticMarkers.epic.headquarter.HeadquarterAnimation;
     import net.wg.gui.battle.views.staticMarkers.epic.headquarter.HeadquarterIcon;
+    import net.wg.gui.battle.views.staticMarkers.epic.headquarter.HeadquarterLifeStates;
     import net.wg.gui.battle.views.staticMarkers.epic.headquarter.HeadquarterMarker;
     import net.wg.gui.battle.views.staticMarkers.epic.resupplyPoint.ResupplyIcon;
     import net.wg.gui.battle.views.staticMarkers.epic.resupplyPoint.ResupplyMarker;
@@ -52,6 +55,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.battle.views.vehicleMarkers.statusMarkers.VehicleEngineerEffectMarker;
     import net.wg.gui.battle.views.vehicleMarkers.statusMarkers.VehicleInspireMarker;
     import net.wg.gui.battle.views.vehicleMarkers.statusMarkers.VehicleInspireTargetMarker;
+    import net.wg.gui.battle.views.vehicleMarkers.statusMarkers.VehiclePowerUpMarker;
     import net.wg.gui.battle.views.vehicleMarkers.statusMarkers.VehicleStunMarker;
     import net.wg.gui.battle.views.vehicleMarkers.VO.CrossOffset;
     import net.wg.gui.battle.views.vehicleMarkers.VO.HPDisplayMode;
@@ -63,9 +67,15 @@ package net.wg.infrastructure.base.meta.impl
     public class ClassManagerBattleMarkersMeta extends Object
     {
 
+        public static const NET_WG_GUI_BATTLE_VIEWS_STATICMARKERS_EPIC_OBJECTIVEIDREPLYSTATE:Class = ObjectiveIdReplyState;
+
         public static const NET_WG_GUI_BATTLE_VIEWS_STATICMARKERS_EPIC_HEADQUARTER_HEADQUARTERACTIONMARKER:Class = HeadquarterActionMarker;
 
+        public static const NET_WG_GUI_BATTLE_VIEWS_STATICMARKERS_EPIC_HEADQUARTER_HEADQUARTERANIMATION:Class = HeadquarterAnimation;
+
         public static const NET_WG_GUI_BATTLE_VIEWS_STATICMARKERS_EPIC_HEADQUARTER_HEADQUARTERICON:Class = HeadquarterIcon;
+
+        public static const NET_WG_GUI_BATTLE_VIEWS_STATICMARKERS_EPIC_HEADQUARTER_HEADQUARTERLIFESTATES:Class = HeadquarterLifeStates;
 
         public static const NET_WG_GUI_BATTLE_VIEWS_STATICMARKERS_EPIC_HEADQUARTER_HEADQUARTERMARKER:Class = HeadquarterMarker;
 
@@ -166,6 +176,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_BATTLE_VIEWS_VEHICLEMARKERS_STATUSMARKERS_VEHICLEINSPIREMARKER:Class = VehicleInspireMarker;
 
         public static const NET_WG_GUI_BATTLE_VIEWS_VEHICLEMARKERS_STATUSMARKERS_VEHICLEINSPIRETARGETMARKER:Class = VehicleInspireTargetMarker;
+
+        public static const NET_WG_GUI_BATTLE_VIEWS_VEHICLEMARKERS_STATUSMARKERS_VEHICLEPOWERUPMARKER:Class = VehiclePowerUpMarker;
 
         public static const NET_WG_GUI_BATTLE_VIEWS_VEHICLEMARKERS_STATUSMARKERS_VEHICLESTUNMARKER:Class = VehicleStunMarker;
 

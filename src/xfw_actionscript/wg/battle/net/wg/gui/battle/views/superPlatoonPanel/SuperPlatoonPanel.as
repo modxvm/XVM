@@ -21,6 +21,8 @@ package net.wg.gui.battle.views.superPlatoonPanel
     import net.wg.data.constants.InvitationStatus;
     import net.wg.data.VO.daapi.DAAPIPlayerStatusVO;
     import net.wg.data.VO.daapi.DAAPIVehicleStatusVO;
+    import net.wg.data.VO.daapi.DAAPITriggeredCommandVO;
+    import net.wg.data.VO.daapi.DAAPITriggeredCommandsVO;
     import net.wg.gui.battle.epicBattle.VO.daapi.EpicVehicleStatsVO;
 
     public class SuperPlatoonPanel extends SuperPlatoonPanelMeta implements IEpicBattleStatisticDataController, IBattleComponentDataController, ISuperPlatoonPanelMeta, IStatsBaseMeta
@@ -250,6 +252,17 @@ package net.wg.gui.battle.views.superPlatoonPanel
 
         public function updateTriggeredChatCommands(param1:IDAAPIDataClass) : void
         {
+            var _loc4_:DAAPITriggeredCommandVO = null;
+            if(this._playerSquad == DAAPIVehicleInfoVO.DEFAULT_SQUAD_IDX)
+            {
+                return;
+            }
+            var _loc2_:DAAPITriggeredCommandsVO = DAAPITriggeredCommandsVO(param1);
+            var _loc3_:Vector.<DAAPITriggeredCommandVO> = _loc2_.triggeredCommands;
+            for each(_loc4_ in _loc3_)
+            {
+                this.platoonMembersPanel.triggerChatCommand(_loc4_.vehicleID,_loc4_.chatCommandName);
+            }
         }
 
         private function applyVehicleData(param1:DAAPIVehiclesDataVO) : void
@@ -345,6 +358,8 @@ package net.wg.gui.battle.views.superPlatoonPanel
                 {
                     this._epicStatsDict[_loc3_.vehicleID].frags = _loc3_.frags;
                     this._epicStatsDict[_loc3_.vehicleID].rank = _loc3_.rank;
+                    this._epicStatsDict[_loc3_.vehicleID].chatCommand = _loc3_.chatCommand;
+                    this._epicStatsDict[_loc3_.vehicleID].chatCommandFlags = _loc3_.chatCommandFlags;
                 }
                 else
                 {

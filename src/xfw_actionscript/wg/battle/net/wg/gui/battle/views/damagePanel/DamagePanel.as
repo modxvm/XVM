@@ -126,6 +126,8 @@ package net.wg.gui.battle.views.damagePanel
 
         private var _hasWheel:Boolean = false;
 
+        private var _isEventBoss:Boolean = false;
+
         private var _playerName:String = "";
 
         private var _clanName:String = "";
@@ -152,7 +154,6 @@ package net.wg.gui.battle.views.damagePanel
             this._atlasManager = App.atlasMgr;
             this._toolTipMgr = App.toolTipMgr;
             super();
-            this._modulesCtrl = new ModulesCtrl();
             this._clickableAreas = new Vector.<DamagePanelItemClickArea>();
             this._tooltipData = new DamagePanelTooltipVO();
             TextFieldEx.setNoTranslate(this.speedTF,true);
@@ -239,9 +240,12 @@ package net.wg.gui.battle.views.damagePanel
             this.fireIndicator = null;
             this.healthBar.dispose();
             this.healthBar = null;
-            this.toggleClickableAreas(this._modulesCtrl.getItems(),false);
-            this._modulesCtrl.dispose();
-            this._modulesCtrl = null;
+            if(this._modulesCtrl)
+            {
+                this.toggleClickableAreas(this._modulesCtrl.getItems(),false);
+                this._modulesCtrl.dispose();
+                this._modulesCtrl = null;
+            }
             this._atlasManager = null;
             this.stunHitMC = null;
             this._toolTipMgr = null;
@@ -279,8 +283,11 @@ package net.wg.gui.battle.views.damagePanel
             {
                 if(this._isDestroyed)
                 {
-                    this._modulesCtrl.showDestroyed();
-                    this._tankmenCtrl.showDestroyed();
+                    if(!this._isEventBoss)
+                    {
+                        this._modulesCtrl.showDestroyed();
+                        this._tankmenCtrl.showDestroyed();
+                    }
                     this.tankIndicator.showDestroyed();
                     this.fireIndicator.state = BATTLE_ITEM_STATES.NORMAL;
                 }
@@ -306,10 +313,19 @@ package net.wg.gui.battle.views.damagePanel
                 this._cruiseVector[this._cruiseNewStateId].visible = true;
                 this._cruiseCurrentStateId = this._cruiseNewStateId;
             }
-            this.background.imageName = this._hasWheel?BATTLEATLAS.DAMAGE_PANEL_BG_WHEELED:BATTLEATLAS.DAMAGE_PANEL_BG;
+            var _loc1_:String = BATTLEATLAS.DAMAGE_PANEL_BG;
+            if(this._hasWheel)
+            {
+                _loc1_ = BATTLEATLAS.DAMAGE_PANEL_BG_WHEELED;
+            }
+            else if(this._isEventBoss)
+            {
+                _loc1_ = BATTLEATLAS.DAMAGE_PANEL_BG_EVENT_BOSS;
+            }
+            this.background.imageName = _loc1_;
         }
 
-        override protected function setup(param1:String, param2:int, param3:String, param4:Array, param5:Array, param6:Boolean, param7:Boolean, param8:Boolean) : void
+        override protected function setup(param1:String, param2:int, param3:String, param4:Array, param5:Array, param6:Boolean, param7:Boolean, param8:Boolean, param9:Boolean) : void
         {
             this.updateHealth(param1,param2);
             if(this._tankmenCtrl != null)
@@ -326,15 +342,20 @@ package net.wg.gui.battle.views.damagePanel
             this.tankIndicator.isVehicleWithTurret = param6;
             this.tankIndicator.isVehicleWithWheel = param7;
             this._hasWheel = param7;
-            this._modulesCtrl.setChassis(param7);
-            this._modulesCtrl.hasTurretRotator = param6;
-            this.changeDisplayListForCtrl(this._modulesCtrl,true);
-            this.toggleClickableAreas(this._modulesCtrl.getItems(),true);
-            this.updateModuleAssets();
+            this._isEventBoss = param9;
             this.setRotatorType(param3,param5);
-            this._tankmenCtrl = new TankmenCtrl(param4);
-            this.changeDisplayListForCtrl(this._tankmenCtrl,true);
-            this.toggleClickableAreas(this._tankmenCtrl.getItems(),true);
+            if(!param9)
+            {
+                this._modulesCtrl = new ModulesCtrl();
+                this._modulesCtrl.setChassis(param7);
+                this._modulesCtrl.hasTurretRotator = param6;
+                this.changeDisplayListForCtrl(this._modulesCtrl,true);
+                this.toggleClickableAreas(this._modulesCtrl.getItems(),true);
+                this.updateModuleAssets();
+                this._tankmenCtrl = new TankmenCtrl(param4);
+                this.changeDisplayListForCtrl(this._tankmenCtrl,true);
+                this.toggleClickableAreas(this._tankmenCtrl.getItems(),true);
+            }
             this._isInited = true;
             invalidateData();
         }
@@ -346,7 +367,10 @@ package net.wg.gui.battle.views.damagePanel
                 this.stunCounterMc.hideStun(param2);
                 this.stunHitMC.visible = false;
             }
-            this._tankmenCtrl.hideStatus(param1,param2);
+            if(this._tankmenCtrl)
+            {
+                this._tankmenCtrl.hideStatus(param1,param2);
+            }
         }
 
         public function as_reset() : void
@@ -357,8 +381,14 @@ package net.wg.gui.battle.views.damagePanel
                 this._cruiseNewStateId = this._cruiseStateShift;
                 invalidate(INVALID_CRUISE_STATE);
                 this.tankIndicator.reset();
-                this._modulesCtrl.reset();
-                this._tankmenCtrl.reset();
+                if(this._modulesCtrl)
+                {
+                    this._modulesCtrl.reset();
+                }
+                if(this._tankmenCtrl)
+                {
+                    this._tankmenCtrl.reset();
+                }
                 this.speedModeIndicator.gotoAndStop(LABEL_SIEGE_MODE_DISABLED);
                 this.updateSpeed(0);
                 this.setAutoRotation(true);
@@ -390,7 +420,10 @@ package net.wg.gui.battle.views.damagePanel
 
         public function as_setPlaybackSpeed(param1:Number) : void
         {
-            ModulesCtrl(this._modulesCtrl).setPlaybackSpeed(param1);
+            if(this._modulesCtrl)
+            {
+                ModulesCtrl(this._modulesCtrl).setPlaybackSpeed(param1);
+            }
         }
 
         public function as_setPlayerInfo(param1:String, param2:String, param3:String, param4:String) : void
@@ -443,7 +476,10 @@ package net.wg.gui.battle.views.damagePanel
 
         public function as_setupWheeled(param1:int) : void
         {
-            this._modulesCtrl.setWheelCount(param1);
+            if(this._modulesCtrl)
+            {
+                this._modulesCtrl.setWheelCount(param1);
+            }
             this.tankIndicator.setWheelCount(param1);
         }
 
@@ -459,7 +495,10 @@ package net.wg.gui.battle.views.damagePanel
                 this.stunCounterMc.showStun(param2,param3);
                 this.stunHitMC.visible = true;
             }
-            this._tankmenCtrl.showStatus(param1,param3);
+            if(this._tankmenCtrl)
+            {
+                this._tankmenCtrl.showStatus(param1,param3);
+            }
         }
 
         public function as_updateDeviceState(param1:String, param2:String) : void
@@ -467,12 +506,18 @@ package net.wg.gui.battle.views.damagePanel
             if(checkModuleName(param1))
             {
                 this.updateModuleAssets();
-                this._modulesCtrl.setState(param1,param2);
+                if(this._modulesCtrl)
+                {
+                    this._modulesCtrl.setState(param1,param2);
+                }
                 this.tankIndicator.setModuleState(param1,param2);
             }
             else if(checkTankmanName(param1))
             {
-                this._tankmenCtrl.setState(param1,param2);
+                if(this._tankmenCtrl)
+                {
+                    this._tankmenCtrl.setState(param1,param2);
+                }
             }
             else
             {
@@ -487,7 +532,10 @@ package net.wg.gui.battle.views.damagePanel
 
         public function as_updateRepairingDevice(param1:String, param2:int, param3:Number) : void
         {
-            ModulesCtrl(this._modulesCtrl).setModuleRepairing(param1,param2,param3 * 1000);
+            if(this._modulesCtrl)
+            {
+                ModulesCtrl(this._modulesCtrl).setModuleRepairing(param1,param2,param3 * 1000);
+            }
         }
 
         public function as_updateSpeed(param1:int) : void
@@ -558,7 +606,10 @@ package net.wg.gui.battle.views.damagePanel
         {
             if(this._isReseted)
             {
-                this._modulesCtrl.updateAvailableAssets();
+                if(this._modulesCtrl)
+                {
+                    this._modulesCtrl.updateAvailableAssets();
+                }
                 this._isReseted = false;
             }
         }

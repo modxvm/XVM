@@ -14,6 +14,8 @@ package net.wg.gui.battle.views.actionMarkers
 
         protected var putTextVisible:Boolean = false;
 
+        protected var id:int = -1;
+
         public function BaseActionMarker()
         {
             super();
@@ -34,6 +36,11 @@ package net.wg.gui.battle.views.actionMarkers
         protected function get getDistanceToMarkerPosition() : Point
         {
             return new Point(0,0);
+        }
+
+        public function setIdentifier(param1:int) : void
+        {
+            this.id = param1;
         }
 
         private function setStickyAndReplyMarkers() : void

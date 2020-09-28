@@ -9,6 +9,10 @@ package net.wg.data.constants.generated
 
         public static const BATTLE_ROYALE_SETTINGS_ID:int = 2;
 
+        public static const WT_EVENT_HUNTER:int = 3;
+
+        public static const WT_EVENT_BOSS:int = 4;
+
         public static const GLOW_ID_GREEN:int = 0;
 
         public static const GLOW_ID_ORANGE:int = 1;

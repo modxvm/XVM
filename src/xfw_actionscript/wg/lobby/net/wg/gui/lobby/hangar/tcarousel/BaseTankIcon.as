@@ -35,6 +35,10 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         private static const CRYSTALS_LIMIT_REACH_FRAME:String = "Deactivated";
 
+        private static const EVENT_FLAG_LABEL:String = "event";
+
+        private static const EVENT_FLAG_SPECIAL_LABEL:String = "event_special";
+
         public var mcFlag:MovieClip = null;
 
         public var imgIcon:ImageComponent = null;
@@ -258,6 +262,16 @@ package net.wg.gui.lobby.hangar.tcarousel
                 }
                 this.setVisibleVehicleInfo(true);
                 this.mcLevel.visible = param1.level != 0;
+                if(param1.isEventVehicle)
+                {
+                    this.mcFlag.gotoAndStop(EVENT_FLAG_LABEL);
+                    this.mcTankType.visible = this.mcLevel.visible = false;
+                }
+                if(param1.isEventVehicleSpecial)
+                {
+                    this.mcFlag.gotoAndStop(EVENT_FLAG_SPECIAL_LABEL);
+                    this.mcTankType.visible = this.mcLevel.visible = false;
+                }
             }
             this.bpSpecialBorder.visible = param1.progressionPoints && param1.progressionPoints.isSpecialVehicle;
             this.updateLockBg();
@@ -277,6 +291,22 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
         }
 
+        private function updateLockBg() : void
+        {
+            this.lockedBG.visible = !(this._isBuySlot || this._isBuyTank) && (this._isLockBackground || !enabled);
+        }
+
+        override public function set enabled(param1:Boolean) : void
+        {
+            super.enabled = param1;
+            this.updateLockBg();
+        }
+
+        public function get infoImgOffset() : int
+        {
+            return this._infoImgOffset;
+        }
+
         protected function get maxIconBounds() : Rectangle
         {
             return null;
@@ -293,22 +323,6 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.imgIcon.x = param1.x;
             this.imgIcon.y = param1.y;
             this.imgIcon.setSize(param1.width,param1.height);
-        }
-
-        private function updateLockBg() : void
-        {
-            this.lockedBG.visible = !(this._isBuySlot || this._isBuyTank) && (this._isLockBackground || !enabled);
-        }
-
-        override public function set enabled(param1:Boolean) : void
-        {
-            super.enabled = param1;
-            this.updateLockBg();
-        }
-
-        public function get infoImgOffset() : int
-        {
-            return this._infoImgOffset;
         }
     }
 }

@@ -29,6 +29,8 @@ package net.wg.gui.battle.views.destroyTimers
 
         private var _isActive:Boolean = false;
 
+        private var _isSmallSize:Boolean = false;
+
         public function ResupplyTimer()
         {
             super();
@@ -119,6 +121,16 @@ package net.wg.gui.battle.views.destroyTimers
         public function set isActive(param1:Boolean) : void
         {
             this._isActive = param1;
+        }
+
+        public function get isSmallSize() : Boolean
+        {
+            return this._isSmallSize;
+        }
+
+        public function set isSmallSize(param1:Boolean) : void
+        {
+            this._isSmallSize = param1;
         }
     }
 }

@@ -229,6 +229,14 @@ package
 
         public static const RADIALMENU_DEFENDING_BASE:String = "#ingame_help:radialMenu/defending_base";
 
+        public static const RADIALMENU_ENEMY_HQ_ATTACK_COMMAND:String = "#ingame_help:radialMenu/enemy_hq_attack_command";
+
+        public static const RADIALMENU_ENEMY_HQ_ATTACK_COMMIT:String = "#ingame_help:radialMenu/enemy_hq_attack_commit";
+
+        public static const RADIALMENU_ALLY_HQ_DEFEND_COMMAND:String = "#ingame_help:radialMenu/ally_hq_defend_command";
+
+        public static const RADIALMENU_ALLY_HQ_DEFEND_COMMIT:String = "#ingame_help:radialMenu/ally_hq_defend_commit";
+
         public static const RADIALMENU_HELPMEEX:String = "#ingame_help:radialMenu/helpMeEx";
 
         public static const RADIALMENU_SUPPORTING_ALLY:String = "#ingame_help:radialMenu/supporting_ally";

@@ -29,6 +29,8 @@ package
 
         public static const INVITES_PREBATTLE_ALREADYJOINED_FALLOUT:String = "#invites:invites/prebattle/alreadyJoined/FALLOUT";
 
+        public static const INVITES_PREBATTLE_ALREADYJOINED_EVENT:String = "#invites:invites/prebattle/alreadyJoined/EVENT";
+
         public static const INVITES_PREBATTLE_ALREADYJOINED_TRAINING:String = "#invites:invites/prebattle/alreadyJoined/TRAINING";
 
         public static const INVITES_PREBATTLE_ALREADYJOINED_EPIC_TRAINING:String = "#invites:invites/prebattle/alreadyJoined/EPIC_TRAINING";
@@ -109,9 +111,9 @@ package
 
         public static const INVITES_NOTE_SERVER_CHANGE:String = "#invites:invites/note/server_change";
 
-        public static const INVITES_NOTE_CHANGE_AND_LEAVE_QUEUE_EVENT_BATTLES:String = "#invites:invites/note/change_and_leave/QUEUE_EVENT_BATTLES";
-
         public static const INVITES_NOTE_LEAVE_QUEUE_EVENT_BATTLES:String = "#invites:invites/note/leave/QUEUE_EVENT_BATTLES";
+
+        public static const INVITES_NOTE_CHANGE_AND_LEAVE_QUEUE_EVENT_BATTLES:String = "#invites:invites/note/change_and_leave/QUEUE_EVENT_BATTLES";
 
         public static const INVITES_NOTE_CHANGE_AND_LEAVE_PREBATTLE_EVENT:String = "#invites:invites/note/change_and_leave/PREBATTLE_EVENT";
 

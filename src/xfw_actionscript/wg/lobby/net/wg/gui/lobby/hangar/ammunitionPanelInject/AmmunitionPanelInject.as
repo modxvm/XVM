@@ -22,6 +22,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanelInject
 
         private var _offsetY:int = 0;
 
+        private var _slotsWidth:int = 0;
+
         private var _helpLayoutData:Dictionary;
 
         public function AmmunitionPanelInject()
@@ -85,6 +87,20 @@ package net.wg.gui.lobby.hangar.ammunitionPanelInject
             this._panelHeight = param2;
             this._offsetY = param3;
             dispatchEvent(new Event(Event.RESIZE));
+        }
+
+        public function as_setSlotsWidth(param1:int) : void
+        {
+            if(param1 != this._slotsWidth)
+            {
+                this._slotsWidth = param1;
+                dispatchEvent(new Event(Event.RESIZE));
+            }
+        }
+
+        public function get slotsWidth() : int
+        {
+            return this._slotsWidth;
         }
 
         public function getLayoutProperties() : Vector.<HelpLayoutVO>

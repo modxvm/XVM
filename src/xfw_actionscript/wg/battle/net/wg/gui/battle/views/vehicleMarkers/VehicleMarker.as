@@ -71,6 +71,8 @@ package net.wg.gui.battle.views.vehicleMarkers
 
         private static const VM_STUN_POSTFIX:String = "_schema";
 
+        private static const VM_WT_POSTFIX:String = "_wt";
+
         private static const MAX_HEALTH_PERCENT:int = 100;
 
         private static const VEHICLE_DESTROY_COLOR:Number = 6710886;
@@ -170,6 +172,8 @@ package net.wg.gui.battle.views.vehicleMarkers
         private var _lastPlayerName:String = "";
 
         private var _isStickyAndOutOfScreen:Boolean = false;
+
+        private var _isWhiteTiger:Boolean = false;
 
         public function VehicleMarker()
         {
@@ -388,12 +392,12 @@ package net.wg.gui.battle.views.vehicleMarkers
             this.updateMarkerSettings();
         }
 
-        public function setVehicleInfo(param1:String, param2:String, param3:String, param4:int, param5:String, param6:String, param7:String, param8:String, param9:int, param10:String, param11:Boolean, param12:int, param13:String) : void
+        public function setVehicleInfo(param1:String, param2:String, param3:String, param4:int, param5:String, param6:String, param7:String, param8:String, param9:int, param10:String, param11:Boolean, param12:int, param13:String, param14:Boolean) : void
         {
-            var _loc14_:* = 0;
+            var _loc15_:* = 0;
             if(this._model)
             {
-                _loc14_ = this._model.currHealth;
+                _loc15_ = this._model.currHealth;
             }
             this._model = new VehicleMarkerVO();
             this._model.vClass = param1;
@@ -408,8 +412,9 @@ package net.wg.gui.battle.views.vehicleMarkers
             this._model.entityName = param10;
             this._model.hunt = param11;
             this._model.squadIndex = param12;
-            this._model.currHealth = _loc14_;
+            this._model.currHealth = _loc15_;
             this._model.locSecString = param13;
+            this._isWhiteTiger = param14;
             this._maxHealthMult = MAX_HEALTH_PERCENT / this._model.maxHealth;
             this.statusContainer.setSecondString(this._model.locSecString);
             if(this._model.entityName != Values.EMPTY_STR)
@@ -628,7 +633,7 @@ package net.wg.gui.battle.views.vehicleMarkers
         private function makeColorSchemeName() : void
         {
             this._markerSchemeName = (this._vehicleDestroyed?VM_DEAD_PREFIX:VM_PREFIX) + this._entityName;
-            this._stunSchemeName = VM_STUN_PREFIX + this._entityName + VM_STUN_POSTFIX;
+            this._stunSchemeName = VM_STUN_PREFIX + this._entityName + (this._isWhiteTiger?VM_WT_POSTFIX:"") + VM_STUN_POSTFIX;
         }
 
         private function updateMarkerSettings() : void
@@ -641,6 +646,10 @@ package net.wg.gui.battle.views.vehicleMarkers
             var _loc5_:Boolean = this.getIsPartVisible(HEALTH_BAR);
             var _loc6_:Boolean = this.getIsPartVisible(HEALTH_LBL);
             var _loc7_:Boolean = this.getIsPartVisible(DAMAGE_PANEL);
+            if(this._model.pName.length == 0)
+            {
+                _loc3_ = false;
+            }
             if(_loc3_ && this._lastPlayerName != this._model.pName)
             {
                 this._lastPlayerName = this._model.pName;

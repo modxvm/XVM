@@ -107,11 +107,13 @@ package net.wg.gui.battle.views.staticMarkers.epic.sectorbase
         public function setIdentifier(param1:int) : void
         {
             this.marker.setBaseId(param1);
+            this.actionMarker.setIdentifier(param1);
         }
 
         public function setIsEpicMarker(param1:Boolean) : void
         {
             this._isEpic = param1;
+            this.actionMarker.activateEpicVisibility(param1);
             if(this._isEpic)
             {
                 this.actionMarker.deactivateAttackAndDefendStates();
@@ -144,8 +146,8 @@ package net.wg.gui.battle.views.staticMarkers.epic.sectorbase
             {
                 this.marker.visible = this._activeMarkerState == ActionMarkerStates.NEUTRAL || this._isEpic;
                 this.marker.setActiveState(this._activeMarkerState);
-                this.actionMarker.setActiveState(this._activeMarkerState,this.marker.getOwningTeam());
-                this.actionMarker.activateHover(this._activateHover,this.marker.getOwningTeam());
+                this.actionMarker.setActiveState(this._activeMarkerState);
+                this.actionMarker.activateHover(this._activateHover);
             }
         }
     }

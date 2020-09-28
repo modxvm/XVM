@@ -30,7 +30,7 @@ package net.wg.gui.battle.views.consumablesPanel
 
         private static const GREEN_TEXT_COLOR:uint = 11854471;
 
-        private static const NORMAL_TEXT_COLOR:uint = 0;
+        protected static const NORMAL_TEXT_COLOR:uint = 0;
 
         public var tfContainer:MovieClip = null;
 
@@ -112,11 +112,16 @@ package net.wg.gui.battle.views.consumablesPanel
             this._textField.text = param1;
         }
 
-        private function goIdle() : void
+        protected function goIdle() : void
         {
             stop();
             this._textField.textColor = NORMAL_TEXT_COLOR;
             dispatchEvent(new Event(BattleEquipmentButtonGlow.ON_IDLE_STATE));
+        }
+
+        protected function get bindKeyField() : TextField
+        {
+            return this._textField;
         }
     }
 }

@@ -65,6 +65,26 @@ package net.wg.gui.components.controls
             this.textField.defaultTextFormat = param1;
         }
 
+        public function get offsetX() : int
+        {
+            return this.textField.x;
+        }
+
+        public function set offsetX(param1:int) : void
+        {
+            this.textField.x = param1;
+        }
+
+        public function get offsetY() : int
+        {
+            return this.textField.y;
+        }
+
+        public function set offsetY(param1:int) : void
+        {
+            this.textField.y = param1;
+        }
+
         public function set noTranslateTextfield(param1:Boolean) : void
         {
             TextFieldEx.setNoTranslate(this.textField,param1);
@@ -119,6 +139,7 @@ package net.wg.gui.components.controls
                 return;
             }
             this._tf.size = param1;
+            this.textField.defaultTextFormat = this._tf;
             this.textField.setTextFormat(this._tf);
             this.updateSize();
         }

@@ -2,16 +2,10 @@ package net.wg.gui.battle.views.staticMarkers.epic.headquarter
 {
     import net.wg.gui.battle.components.BattleIconHolder;
     import flash.display.MovieClip;
-    import flash.display.DisplayObject;
+    import net.wg.gui.battle.views.vehicleMarkers.VehicleMarkersManager;
 
     public class HeadquarterIcon extends BattleIconHolder
     {
-
-        private static const HQ_ID_SCALE:Number = 0.75;
-
-        private static const HQ_ICN_SCALE:Number = 0.75;
-
-        private static const TARGET_SCALE:Number = 0.9;
 
         private static const LABEL_LIVE:String = "live";
 
@@ -21,50 +15,84 @@ package net.wg.gui.battle.views.staticMarkers.epic.headquarter
 
         private static const LABEL_HIT_PIERCED:String = "hit_pierced";
 
+        private static const ALLY:String = "ally";
+
+        private static const ENEMY:String = "enemy";
+
+        private static const COLORBLIND:String = "colorblind";
+
+        private static const ALLY_BASE_HOVER:String = "allyBaseHover";
+
+        private static const ENEMY_BASE_HOVER:String = "enemyBaseHover";
+
+        private static const COLORBLIND_BASE_HOVER:String = "enemyColorBlindBaseHover";
+
         public var hqId:MovieClip = null;
-
-        public var hqEnemy:MovieClip = null;
-
-        public var hqAlly:MovieClip = null;
 
         public var targetHighlight:MovieClip = null;
 
-        private var _isPlayerTeam:Boolean;
+        public var hover:MovieClip = null;
+
+        public var bgAnimation:HeadquarterAnimation = null;
+
+        private var _isPlayerTeam:Boolean = false;
+
+        private var _vmManager:VehicleMarkersManager = null;
 
         public function HeadquarterIcon()
         {
             super();
-            this.hqAlly.visible = false;
-            this.hqEnemy.visible = false;
+            this.hover.visible = false;
+            this.targetHighlight.visible = false;
+            this.hqId.visible = true;
+            this.bgAnimation.visible = true;
+            this._vmManager = VehicleMarkersManager.getInstance();
         }
 
-        public function setInternalIconScale(param1:Number) : void
+        public function setColor() : void
         {
-            var _loc2_:Number = HQ_ID_SCALE * param1;
-            this.hqId.scaleX = this.hqId.scaleY = _loc2_;
-            _loc2_ = HQ_ICN_SCALE * param1;
-            this.hqAlly.scaleX = this.hqAlly.scaleY = _loc2_;
-            this.hqEnemy.scaleX = this.hqEnemy.scaleY = _loc2_;
-            _loc2_ = TARGET_SCALE * param1;
-            this.targetHighlight.scaleX = this.targetHighlight.scaleY = _loc2_;
+            var _loc1_:String = null;
+            var _loc2_:String = null;
+            if(this._isPlayerTeam)
+            {
+                _loc1_ = ALLY;
+                _loc2_ = ALLY_BASE_HOVER;
+            }
+            else if(this._vmManager.isColorBlind)
+            {
+                _loc1_ = COLORBLIND;
+                _loc2_ = COLORBLIND_BASE_HOVER;
+            }
+            else
+            {
+                _loc1_ = ENEMY;
+                _loc2_ = ENEMY_BASE_HOVER;
+            }
+            this.bgAnimation.gotoAndStop(_loc1_);
+            this.hover.gotoAndStop(_loc2_);
         }
 
         public function setOwningTeam(param1:Boolean) : void
         {
+            showItem(this.bgAnimation);
             this._isPlayerTeam = param1;
-            showItem(this._isPlayerTeam?this.hqAlly:this.hqEnemy);
+            this.setColor();
+        }
+
+        public function activateHover(param1:Boolean) : void
+        {
+            this.hover.visible = param1;
         }
 
         public function setDead(param1:Boolean) : void
         {
-            var _loc2_:MovieClip = this._isPlayerTeam?this.hqAlly:this.hqEnemy;
             if(!param1)
             {
-                _loc2_.gotoAndStop(LABEL_LIVE);
+                this.bgAnimation.gotoAndPlayAnimation(LABEL_LIVE);
             }
             else
             {
-                _loc2_.gotoAndPlay(LABEL_DEAD);
+                this.bgAnimation.gotoAndPlayAnimation(LABEL_DEAD);
             }
         }
 
@@ -75,19 +103,21 @@ package net.wg.gui.battle.views.staticMarkers.epic.headquarter
 
         override protected function onDispose() : void
         {
-            this.hqEnemy.stop();
-            this.hqEnemy = null;
-            this.hqAlly.stop();
-            this.hqAlly = null;
+            this.hqId.stop();
             this.hqId = null;
+            this.targetHighlight.stop();
             this.targetHighlight = null;
+            this.hover.stop();
+            this.hover = null;
+            this.bgAnimation.dispose();
+            this.bgAnimation = null;
+            this._vmManager = null;
             super.onDispose();
         }
 
         public function setHit(param1:Boolean) : void
         {
-            var _loc2_:MovieClip = this._isPlayerTeam?this.hqAlly:this.hqEnemy;
-            _loc2_.gotoAndPlay(param1?LABEL_HIT_PIERCED:LABEL_HIT);
+            this.bgAnimation.gotoAndPlayAnimation(param1?LABEL_HIT_PIERCED:LABEL_HIT);
         }
     }
 }

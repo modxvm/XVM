@@ -1,4 +1,4 @@
-package net.wg.gui.lobby.vehicleCongratulation
+package net.wg.gui.lobby.congrats
 {
     import net.wg.infrastructure.base.UIComponentEx;
     import net.wg.utils.IStageSizeDependComponent;

@@ -4,11 +4,14 @@ package net.wg.gui.battle.views.staticMarkers.epic.sectorbase
     import net.wg.gui.battle.components.EpicProgressCircle;
     import flash.display.MovieClip;
     import net.wg.gui.battle.views.vehicleMarkers.VehicleMarkersManager;
+    import net.wg.gui.battle.views.actionMarkers.ActionMarkerStates;
 
     public class SectorBaseIcon extends BattleIconHolder
     {
 
         public static const HOVER_STATE:int = 6;
+
+        private static const EPIC_BASE:String = "epicBase";
 
         private static const BG_POSTFIX:String = "Base";
 
@@ -34,6 +37,8 @@ package net.wg.gui.battle.views.staticMarkers.epic.sectorbase
 
         private var _vmManager:VehicleMarkersManager;
 
+        private var _isEpic:Boolean = false;
+
         public function SectorBaseIcon()
         {
             super();
@@ -51,6 +56,7 @@ package net.wg.gui.battle.views.staticMarkers.epic.sectorbase
             this.bg = null;
             this.targetHighlight = null;
             this.sectorBaseHover = null;
+            this._vmManager = null;
             super.onDispose();
         }
 
@@ -66,6 +72,7 @@ package net.wg.gui.battle.views.staticMarkers.epic.sectorbase
 
         public function activateEpicVisibility() : void
         {
+            this._isEpic = true;
             this.progressCircle.visible = true;
             this.bg.visible = true;
             this.baseId.visible = true;
@@ -90,7 +97,15 @@ package net.wg.gui.battle.views.staticMarkers.epic.sectorbase
             {
                 _loc1_ = BG_COLORBLIND_POSTFIX;
             }
-            this.bg.gotoAndStop(this._owningTeam + _loc1_);
+            if(!this._isEpic)
+            {
+                this.bg.gotoAndStop(this._owningTeam + _loc1_);
+            }
+            else
+            {
+                this.bg.gotoAndStop(EPIC_BASE);
+                this.progressCircle.setColorBlindMode(this._vmManager.isColorBlind);
+            }
         }
 
         public function setActiveState(param1:int) : void
@@ -103,6 +118,7 @@ package net.wg.gui.battle.views.staticMarkers.epic.sectorbase
             else
             {
                 this.sectorBaseHover.visible = false;
+                this.baseId.visible = param1 == ActionMarkerStates.NEUTRAL;
             }
         }
 

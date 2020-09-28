@@ -5,6 +5,7 @@ package net.wg.gui.battle.views.destroyTimers
     import net.wg.data.constants.InvalidationType;
     import flash.display.MovieClip;
     import net.wg.utils.StageSizeBoundaries;
+    import net.wg.data.constants.Values;
     import net.wg.data.constants.Linkages;
 
     public class EpicDestroyTimersPanel extends EpicDestroyTimersPanelMeta implements IEpicDestroyTimersPanelMeta
@@ -14,13 +15,21 @@ package net.wg.gui.battle.views.destroyTimers
 
         private static const RESUPPLY_CIRCLE:int = 1;
 
-        public var additionalTimerContainer:MovieClip = null;
+        private static const RESUPPLY_TIMER_SHIFT_SMALL:int = 110;
 
-        private var _isDestroyTimerActive:Boolean = false;
+        private static const RESUPPLY_TIMER_SHIFT_HUGE:int = 130;
+
+        private static const SECONDARY_TIMER_SHIFT_SMALL:int = 90;
+
+        private static const SECONDARY_TIMER_SHIFT_HUGE:int = 120;
+
+        public var additionalTimerContainer:MovieClip = null;
 
         private var _isSmall:Boolean = false;
 
         private var _isTimerShow:Boolean = false;
+
+        private var _showWithWarning:Boolean = false;
 
         private var _progress:Number = 0;
 
@@ -38,7 +47,6 @@ package net.wg.gui.battle.views.destroyTimers
         override protected function hideTimer(param1:DestroyTimer) : void
         {
             super.hideTimer(param1);
-            this._isDestroyTimerActive = false;
             if(this._resupplyTimer.isActive)
             {
                 invalidate(INVALID_RESUPPLY_STATE);
@@ -57,7 +65,6 @@ package net.wg.gui.battle.views.destroyTimers
         override protected function showTimer(param1:String, param2:String, param3:Boolean) : void
         {
             super.showTimer(param1,param2,param3);
-            this._isDestroyTimerActive = true;
             if(this._resupplyTimer.isActive)
             {
                 invalidate(INVALID_RESUPPLY_STATE);
@@ -75,46 +82,28 @@ package net.wg.gui.battle.views.destroyTimers
 
         override protected function draw() : void
         {
-            var _loc1_:String = null;
+            var _loc1_:* = false;
+            var _loc2_:* = false;
             super.draw();
             if(this._resupplyTimer && isInvalid(InvalidationType.SIZE))
             {
                 if(this._isSmall != stageWidth < StageSizeBoundaries.WIDTH_1280)
                 {
                     this._isSmall = stageWidth < StageSizeBoundaries.WIDTH_1280;
-                    _loc1_ = this._isSmall?Linkages.RESUPPLY_TIMER_SMALL_UI:Linkages.RESUPPLY_TIMER_UI;
-                    this.additionalTimerContainer.removeChild(this._resupplyTimer);
-                    this._resupplyTimer = App.utils.classFactory.getComponent(_loc1_,ResupplyTimer);
-                    this._resupplyTimer.stop();
-                    this._resupplyTimer.visible = false;
-                    this._resupplyTimer.mouseEnabled = false;
-                    this._resupplyTimer.mouseChildren = false;
-                    this._resupplyTimer.setProgressValue(this._progress);
-                    this._resupplyTimer.setState(this._state);
-                    this._resupplyTimer.setCooldownTime(this._cooldownTime);
-                    this._resupplyTimer.isActive = this._isTimerShow;
-                    if(this._isTimerShow)
-                    {
-                        this._resupplyTimer.visible = true;
-                        this._resupplyTimer.showTimer();
-                    }
-                    else
-                    {
-                        this._resupplyTimer.resetTimer();
-                        this._resupplyTimer.hideTimer();
-                    }
-                    this.additionalTimerContainer.addChild(this._resupplyTimer);
+                    this.recreateTimerBySize(this._isSmall || isAnyTimerActive());
                     invalidate(INVALID_STATE);
                     invalidate(INVALID_RESUPPLY_STATE);
                 }
             }
             if(isInvalid(INVALID_RESUPPLY_STATE))
             {
-                if(!this._isDestroyTimerActive && this._resupplyTimer.isActive)
+                if(this._resupplyTimer.isActive)
                 {
-                    this._resupplyTimer.visible = true;
-                    evaluateState(true,secondaryTimerVisibleBefore);
-                    if(secondaryTimerVisibleBefore)
+                    _loc1_ = isAnyTimerActive();
+                    _loc2_ = isAnySecondaryTimerActive();
+                    this._showWithWarning = _loc1_ || _loc2_;
+                    this.recreateTimerBySize(this._isSmall || isAnyTimerActive());
+                    if(this._showWithWarning)
                     {
                         this._resupplyTimer.cropSize();
                     }
@@ -122,13 +111,32 @@ package net.wg.gui.battle.views.destroyTimers
                     {
                         this._resupplyTimer.fullSize();
                     }
-                    statusVisibleBefore = true;
+                    this._resupplyTimer.x = _loc1_?this._resupplyTimer.isSmallSize?RESUPPLY_TIMER_SHIFT_SMALL:RESUPPLY_TIMER_SHIFT_HUGE:Values.ZERO;
+                    evaluateState();
+                }
+            }
+        }
+
+        override protected function isAnyTimerInCenter() : Boolean
+        {
+            return this._isTimerShow || super.isAnyTimerInCenter();
+        }
+
+        override protected function calculateSecondaryContainerShift() : int
+        {
+            var _loc1_:int = super.calculateSecondaryContainerShift();
+            if(this._isTimerShow)
+            {
+                if(isAnyTimerActive())
+                {
+                    _loc1_ = _loc1_ + (this._resupplyTimer.isSmallSize?SECONDARY_TIMER_SHIFT_SMALL:SECONDARY_TIMER_SHIFT_HUGE);
                 }
                 else
                 {
-                    this._resupplyTimer.visible = false;
+                    _loc1_ = SECONDARY_TIMER_OFFSET_X;
                 }
             }
+            return _loc1_;
         }
 
         override protected function onDispose() : void
@@ -207,6 +215,40 @@ package net.wg.gui.battle.views.destroyTimers
                 invalidate(INVALID_STATE);
                 invalidate(INVALID_RESUPPLY_STATE);
             }
+        }
+
+        private function recreateTimerBySize(param1:Boolean) : void
+        {
+            if(this._resupplyTimer)
+            {
+                if(this._resupplyTimer.isSmallSize == param1)
+                {
+                    return;
+                }
+                this.additionalTimerContainer.removeChild(this._resupplyTimer);
+            }
+            var _loc2_:String = param1?Linkages.RESUPPLY_TIMER_SMALL_UI:Linkages.RESUPPLY_TIMER_UI;
+            this._resupplyTimer = App.utils.classFactory.getComponent(_loc2_,ResupplyTimer);
+            this._resupplyTimer.stop();
+            this._resupplyTimer.visible = false;
+            this._resupplyTimer.mouseEnabled = false;
+            this._resupplyTimer.mouseChildren = false;
+            this._resupplyTimer.isSmallSize = param1;
+            this._resupplyTimer.setProgressValue(this._progress);
+            this._resupplyTimer.setState(this._state);
+            this._resupplyTimer.setCooldownTime(this._cooldownTime);
+            this._resupplyTimer.isActive = this._isTimerShow;
+            if(this._isTimerShow)
+            {
+                this._resupplyTimer.visible = true;
+                this._resupplyTimer.showTimer();
+            }
+            else
+            {
+                this._resupplyTimer.resetTimer();
+                this._resupplyTimer.hideTimer();
+            }
+            this.additionalTimerContainer.addChild(this._resupplyTimer);
         }
     }
 }

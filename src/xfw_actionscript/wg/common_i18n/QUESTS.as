@@ -2203,6 +2203,12 @@ package
 
         public static const MISSIONDETAILS_STATUS_COMPLETED_WEEKLY:String = "#quests:missionDetails/status/completed/weekly";
 
+        public static const MISSIONDETAILS_STATUS_COMPLETED_SECRETEVENT:String = "#quests:missionDetails/status/completed/secretEvent";
+
+        public static const MISSIONDETAILS_STATUS_COMPLETE:String = "#quests:missionDetails/status/complete";
+
+        public static const MISSIONDETAILS_STATUS_INPROGRESS:String = "#quests:missionDetails/status/inProgress";
+
         public static const MISSIONDETAILS_STATUS_NOTAVAILABLE:String = "#quests:missionDetails/status/notAvailable";
 
         public static const MISSIONDETAILS_STATUS_WRONGVEHICLE:String = "#quests:missionDetails/status/wrongVehicle";
@@ -2292,6 +2298,8 @@ package
         public static const MISSIONDETAILS_REQUIREMENTS_CONCLUSION_AVAILABLE:String = "#quests:missionDetails/requirements/conclusion/available";
 
         public static const MISSIONDETAILS_REQUIREMENTS_CONCLUSION_UNAVAILABLE:String = "#quests:missionDetails/requirements/conclusion/unavailable";
+
+        public static const MISSIONDETAILS_REQUIREMENTS_CONCLUSION_PREVIOUSINCOMPLETE:String = "#quests:missionDetails/requirements/conclusion/previousIncomplete";
 
         public static const MISSIONDETAILS_VEHICLESSELECT:String = "#quests:missionDetails/vehiclesSelect";
 

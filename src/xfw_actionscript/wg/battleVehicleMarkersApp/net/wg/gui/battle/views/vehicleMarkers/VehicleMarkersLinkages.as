@@ -29,6 +29,10 @@ package net.wg.gui.battle.views.vehicleMarkers
 
         public static const ACTION_ATTACK_SPG:String = "AttackSPGUI";
 
+        public static const ACTION_ATTACKING_OBJECTIVE:String = "AttackingObjectiveAlternativeUI";
+
+        public static const ACTION_DEFENDING_OBJECTIVE:String = "DefendingObjectiveAlternativeUI";
+
         public static const ACTION_SUPPORTING_YOU:String = "SupportingYouUI";
 
         public static const ACTION_SUPPORTING_ALLY:String = "SupportingAllyUI";

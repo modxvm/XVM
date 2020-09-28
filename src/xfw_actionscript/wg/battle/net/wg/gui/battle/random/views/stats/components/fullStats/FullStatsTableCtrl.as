@@ -34,7 +34,7 @@ package net.wg.gui.battle.random.views.stats.components.fullStats
             return _table;
         }
 
-        private var _table:FullStatsTable = null;
+        protected var _table:FullStatsTable = null;
 
         private var _squadHandler:StatsBaseMeta = null;
 

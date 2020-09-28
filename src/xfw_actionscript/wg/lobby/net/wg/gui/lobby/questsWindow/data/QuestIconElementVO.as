@@ -23,6 +23,8 @@ package net.wg.gui.lobby.questsWindow.data
 
         private var _iconAutoSize:Boolean = true;
 
+        private var _isWulfTooltip:Boolean = false;
+
         public function QuestIconElementVO(param1:Object)
         {
             super(param1);
@@ -131,6 +133,16 @@ package net.wg.gui.lobby.questsWindow.data
         public function set iconAutoSize(param1:Boolean) : void
         {
             this._iconAutoSize = param1;
+        }
+
+        public function get isWulfTooltip() : Boolean
+        {
+            return this._isWulfTooltip;
+        }
+
+        public function set isWulfTooltip(param1:Boolean) : void
+        {
+            this._isWulfTooltip = param1;
         }
     }
 }

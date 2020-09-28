@@ -4,6 +4,7 @@ package net.wg.gui.battle.views.epicMessagesPanel.components
     import flash.display.MovieClip;
     import net.wg.gui.battle.views.epicMessagesPanel.data.SectorBaseContestedMessageVO;
     import net.wg.gui.battle.views.gameMessagesPanel.data.GameMessageVO;
+    import net.wg.infrastructure.events.ColorSchemeEvent;
     import net.wg.data.constants.generated.GAME_MESSAGES_CONSTS;
 
     public class BaseContestedMessage extends MessageContainerBase
@@ -29,6 +30,7 @@ package net.wg.gui.battle.views.epicMessagesPanel.components
 
         override public function setData(param1:GameMessageVO) : void
         {
+            App.colorSchemeMgr.addEventListener(ColorSchemeEvent.SCHEMAS_UPDATED,this.onColorSchemeChangeHandler);
             messageData = param1;
             var _loc2_:SectorBaseContestedMessageVO = param1.msgData as SectorBaseContestedMessageVO;
             App.utils.asserter.assertNotNull(_loc2_,ERROR_CONVERTING_VO);
@@ -45,7 +47,13 @@ package net.wg.gui.battle.views.epicMessagesPanel.components
             this.epicBaseInProgress = null;
             this.mainTextMc = null;
             this._msgDataVO = null;
+            App.colorSchemeMgr.removeEventListener(ColorSchemeEvent.SCHEMAS_UPDATED,this.onColorSchemeChangeHandler);
             super.onDispose();
+        }
+
+        private function onColorSchemeChangeHandler(param1:ColorSchemeEvent) : void
+        {
+            this.epicBaseInProgress.captureCircle.setColorBlindMode(App.colorSchemeMgr.getIsColorBlindS());
         }
     }
 }

@@ -419,6 +419,8 @@ package
 
         public static const BADGE_89_DESCR:String = "#badge:badge_89_descr";
 
+        public static const BADGE_89_DESCR_CN:String = "#badge:badge_89_descr_cn";
+
         public static const BADGE_91:String = "#badge:badge_91";
 
         public static const BADGE_91_DESCR:String = "#badge:badge_91_descr";

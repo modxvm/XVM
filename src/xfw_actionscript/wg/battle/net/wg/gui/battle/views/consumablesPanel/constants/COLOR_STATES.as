@@ -15,6 +15,8 @@ package net.wg.gui.battle.views.consumablesPanel.constants
 
         public static const GREEN_COOLDOWN_COLOR_TRANSFORM:ColorTransform = new ColorTransform(0,0.5,0,1,-255,0,-255,0);
 
+        public static const EVENT_BLUE_COOLDOWN_COLOR_TRANSFORM:ColorTransform = new ColorTransform(0,1,1,1,0,90,255,0);
+
         public function COLOR_STATES()
         {
             super();

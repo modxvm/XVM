@@ -267,6 +267,8 @@ package
 
         public static const DIALOGS_SQUAD_MESSAGE_SPGFULL:String = "#messenger:dialogs/squad/message/spgFull";
 
+        public static const DIALOGS_SQUAD_MESSAGE_WHITETIGERFORBIDDEN:String = "#messenger:dialogs/squad/message/whiteTigerForbidden";
+
         public static const DIALOGS_SQUAD_MESSAGE_VEHICLES_DIFFERENTLEVELS:String = "#messenger:dialogs/squad/message/vehicles/differentLevels";
 
         public static const DIALOGS_FALLOUTSQUADCHANNEL_VEHICLES:String = "#messenger:dialogs/falloutSquadChannel/vehicles";
@@ -801,6 +803,24 @@ package
 
         public static const SERVICECHANNELMESSAGES_BOOTCAMP_CREW:String = "#messenger:serviceChannelMessages/bootcamp/crew";
 
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_WT_EVENT_GAMEMODE:String = "#messenger:serviceChannelMessages/battleResults/wt_event/gameMode";
+
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_WT_EVENT_GAMEMODENAME:String = "#messenger:serviceChannelMessages/battleResults/wt_event/gameModeName";
+
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_WT_EVENT_SIDE:String = "#messenger:serviceChannelMessages/battleResults/wt_event/side";
+
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_WT_EVENT_SIDE_HUNTER:String = "#messenger:serviceChannelMessages/battleResults/wt_event/side/hunter";
+
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_WT_EVENT_SIDE_BOSS:String = "#messenger:serviceChannelMessages/battleResults/wt_event/side/boss";
+
+        public static const SERVICECHANNELMESSAGES_WT_EVENT_COMPLETEDQUESTS:String = "#messenger:serviceChannelMessages/wt_event/completedQuests";
+
+        public static const SERVICECHANNELMESSAGES_WT_EVENT_BOXESEARNED:String = "#messenger:serviceChannelMessages/wt_event/boxesEarned";
+
+        public static const SERVICECHANNELMESSAGES_WT_EVENT_SPECIALBOXESEARNED:String = "#messenger:serviceChannelMessages/wt_event/specialBoxesEarned";
+
+        public static const SERVICECHANNELMESSAGES_WT_EVENT_TICKET:String = "#messenger:serviceChannelMessages/wt_event/ticket";
+
         public static const SERVICECHANNELMESSAGES_CURRENCYUPDATE_AUCTION:String = "#messenger:serviceChannelMessages/currencyUpdate/auction";
 
         public static const SERVICECHANNELMESSAGES_CURRENCYUPDATE_FINANCIAL_TRANSACTION:String = "#messenger:serviceChannelMessages/currencyUpdate/financial_transaction";
@@ -1301,7 +1321,11 @@ package
 
         public static const SERVICECHANNELMESSAGES_LOOTBOXESAUTOOPEN_TEXT:String = "#messenger:serviceChannelMessages/lootBoxesAutoOpen/text";
 
+        public static const SERVICECHANNELMESSAGES_LOOTBOXESAUTOOPEN_BOXES:String = "#messenger:serviceChannelMessages/lootBoxesAutoOpen/boxes";
+
         public static const SERVICECHANNELMESSAGES_LOOTBOXESAUTOOPEN_COUNTER:String = "#messenger:serviceChannelMessages/lootBoxesAutoOpen/counter";
+
+        public static const SERVICECHANNELMESSAGES_LOOTBOXESAUTOOPEN_REWARDS:String = "#messenger:serviceChannelMessages/lootBoxesAutoOpen/rewards";
 
         public static const SERVICECHANNELMESSAGES_LOOTBOXESAUTOOPEN_BUTTON:String = "#messenger:serviceChannelMessages/lootBoxesAutoOpen/button";
 

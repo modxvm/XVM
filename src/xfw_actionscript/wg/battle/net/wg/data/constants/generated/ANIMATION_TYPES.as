@@ -27,6 +27,10 @@ package net.wg.data.constants.generated
 
         public static const DARK_COLOR_TRANSFORM:int = 1024;
 
+        public static const SHOW_COUNTER_BLUE:int = 2048;
+
+        public static const SHOW_PROGRESSBAR_BLUE:int = 4096;
+
         public function ANIMATION_TYPES()
         {
             super();
