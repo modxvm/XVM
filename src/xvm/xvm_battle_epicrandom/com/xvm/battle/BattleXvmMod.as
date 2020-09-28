@@ -26,7 +26,7 @@ package com.xvm.battle
         {
             "epicRandomPage": [
                 EpicRandomBattleLoadingXvmView,
-                EpicRandomPlayersPanelXvmView,
+                //EpicRandomPlayersPanelXvmView,
                 TeamBasesPanelXvmView,
                 MinimapXvmView,
                 SixthSenseXvmView,
