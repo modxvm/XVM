@@ -258,10 +258,10 @@ def _showAward(base, self, ctx):
         return
     base(self, ctx)
 
-# hide display banner - World of Tanks' 10th Anniversary
-@overrideMethod(Hangar, '_Hangar__updateTenYearsCountdownEntryPointVisibility')
-def updateTenYearsCountdownEntryPointVisibility(base, self):
-    if not config.get('hangar/showTenYearsBanner', True):
-        self.as_updateEventEntryPointS(HANGAR_ALIASES.TEN_YEARS_COUNTDOWN_ENTRY_POINT_INJECT, False)
+# hide display banner - Last Waffenträger
+@overrideMethod(Hangar, '_Hangar__updateWTCountdownEntryPointVisibility')
+def updateWTCountdownEntryPointVisibility(base, self):
+    if not config.get('hangar/showLastWtBanner', True):
+        self.as_updateEventEntryPointS(HANGAR_ALIASES.WT_EVENT_ENTRY_POINT, False)
         return
     base(self)

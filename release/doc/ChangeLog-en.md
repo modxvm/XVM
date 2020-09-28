@@ -1,4 +1,22 @@
-﻿### XVM 8.6.3
+﻿### XVM 8.6.4
+
+  #### General
+
+  * Compatibility with World of Tanks 1.10.0.4
+
+  #### Hangar
+
+  * Added option:
+
+    * `"hangar"/"showLastWtBanner"` — show banner "Last Waffenträger" in the hangar
+
+  * Removed option:
+
+    * `"hangar"/"showTenYearsBanner"`
+
+______________________________
+
+### XVM 8.6.3
 
   #### General
 
