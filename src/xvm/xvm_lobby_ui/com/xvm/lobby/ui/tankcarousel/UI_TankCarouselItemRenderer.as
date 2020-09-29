@@ -36,7 +36,7 @@ package com.xvm.lobby.ui.tankcarousel
                 //preventAutosizing = false;
 
                 _helper = new TankCarouselItemRendererHelper(this, Config.config.hangar.carousel.normal, DEFAULT_RENDERER_WIDTH, DEFAULT_RENDERER_HEIGHT);
-                Xfw.addCommandListener(LobbyXvmApp.AS_UPDATE_BATTLE_TYPE, updateData);
+                Xfw.addCommandListener(LobbyXvmApp.AS_UPDATE_BATTLE_TYPE, onUpdateBattleType);
                 if (bgMc)
                 {
                     bgMc.alpha = Macros.FormatNumberGlobal(Config.config.hangar.carousel.slotBackgroundAlpha, 100) / 100.0;
@@ -69,7 +69,7 @@ package com.xvm.lobby.ui.tankcarousel
             {
                 removeEventListener(MouseEvent.ROLL_OVER, onSlotMouseRollOverHandler);
                 removeEventListener(MouseEvent.ROLL_OUT, onSlotMouseRollOutHandler);
-                Xfw.removeCommandListener(LobbyXvmApp.AS_UPDATE_BATTLE_TYPE, updateData);
+                Xfw.removeCommandListener(LobbyXvmApp.AS_UPDATE_BATTLE_TYPE, onUpdateBattleType);
                 _helper.dispose();
                 _helper = null;
             }
@@ -109,6 +109,14 @@ package com.xvm.lobby.ui.tankcarousel
             {
                 super.selected = value;
                 _helper.updateDataXvm();
+            }
+        }
+
+        private function onUpdateBattleType(battleType:String):void
+        {
+            //tankcarousel in WhiteTiger event is based on Gameface, so we do not need to update it
+            if(battleType != "eventBattle"){
+                updateData();
             }
         }
 
