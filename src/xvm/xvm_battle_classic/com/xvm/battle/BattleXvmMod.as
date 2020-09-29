@@ -28,7 +28,7 @@ package com.xvm.battle
         {
             "classicBattlePage": [
                 RandomBattleLoadingXvmView,
-                //FullStatsXvmView,
+                FullStatsXvmView,
                 PlayersPanelXvmView,
                 TeamBasesPanelXvmView,
                 MinimapXvmView,
