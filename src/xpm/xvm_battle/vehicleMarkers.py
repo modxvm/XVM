@@ -182,7 +182,9 @@ class VehicleMarkers(object):
         return self.enabled and \
                self.initialized and \
                (self.guiType != constants.ARENA_GUI_TYPE.TUTORIAL) and \
-               (self.battleType != constants.ARENA_BONUS_TYPE.TUTORIAL)
+               (self.battleType != constants.ARENA_BONUS_TYPE.TUTORIAL) and \
+               (self.guiType != constants.ARENA_GUI_TYPE.EVENT_BATTLES) and \
+               (self.battleType != constants.ARENA_BONUS_TYPE.EVENT_BATTLES)
 
     @property
     def plugins(self):
@@ -278,8 +280,8 @@ class VehicleMarkers(object):
                 else:
                     self.call(
                         XVM_COMMAND.AS_SET_CONFIG,
-                        {'markers':{'enabled':False}},
-                        {'locale':{}},
+                        {'markers': {'enabled': False}},
+                        {'locale': {}},
                         None,
                         None,
                         IS_DEVELOPMENT)
