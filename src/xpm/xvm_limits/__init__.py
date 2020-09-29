@@ -4,7 +4,6 @@
 # constants
 
 class XVM_LIMITS_COMMAND(object):
-    SET_GOLD_LOCK_STATUS = "xvm_limits.set_gold_lock_status"
     SET_FREEXP_LOCK_STATUS = "xvm_limits.set_freexp_lock_status"
     SET_CRYSTAL_LOCK_STATUS = "xvm_limits.set_crystal_lock_status"
 
@@ -45,11 +44,9 @@ import xvm_main.python.config as config
 #####################################################################
 # globals
 
-cfg_hangar_enableGoldLocker = False
 cfg_hangar_enableFreeXpLocker = False
 cfg_hangar_enableCrystalLocker = False
 
-gold_enable = True
 freeXP_enable = True
 crystal_enable = True
 TechTree_handler = None
@@ -70,10 +67,8 @@ def start():
 BigWorld.callback(0, start)
 
 def onConfigLoaded(self, e=None):
-    global cfg_hangar_enableGoldLocker
     global cfg_hangar_enableFreeXpLocker
     global cfg_hangar_enableCrystalLocker
-    cfg_hangar_enableGoldLocker = config.get('hangar/enableGoldLocker', False) == True
     cfg_hangar_enableFreeXpLocker = config.get('hangar/enableFreeXpLocker', False) == True
     cfg_hangar_enableCrystalLocker = config.get('hangar/enableCrystalLocker', False) == True
 
@@ -91,16 +86,7 @@ def fini():
 # returns: (result, status)
 def onXfwCommand(cmd, *args):
     try:
-        if cmd == XVM_LIMITS_COMMAND.SET_GOLD_LOCK_STATUS:
-            global gold_enable
-            gold_enable = not args[0]
-            handlersInvalidate('invalidateGold()', TechTree_handler, Research_handler)
-            handlersInvalidate('onGoldChange(0)', TechnicalMaintenance_handler)
-            handlersInvalidate('onGoldChange(0)', RecruitWindow_handler)
-            handlersInvalidate("onClientChanged({'stats': 'gold'})", PersonalCase_handlers)
-            handlersInvalidate("_MainView__setBuyingPanelData()", MainView_handler)
-            return (None, True)
-        elif cmd == XVM_LIMITS_COMMAND.SET_FREEXP_LOCK_STATUS:
+        if cmd == XVM_LIMITS_COMMAND.SET_FREEXP_LOCK_STATUS:
             global freeXP_enable
             freeXP_enable = not args[0]
             handlersInvalidate('invalidateFreeXP()', TechTree_handler, Research_handler)
@@ -117,7 +103,7 @@ def onXfwCommand(cmd, *args):
         return (None, True)
     return (None, False)
 
-# run function that updates gold/freeXP/crystal status in active handlers
+# run function that updates freeXP/crystal status in active handlers
 def handlersInvalidate(function, *handlers):
     try:
         handlers_arr = []
@@ -135,26 +121,6 @@ def handlersInvalidate(function, *handlers):
 
 #####################################################################
 # handlers
-
-# enable or disable active usage of gold
-@overrideMethod(shop, 'canBuyGoldForItemThroughWeb')
-def canBuyGoldForItemThroughWeb(base, itemID, *args, **kwargs):
-    if not cfg_hangar_enableGoldLocker or gold_enable:
-        return base(itemID, *args, **kwargs)
-    return False
-
-@overrideMethod(shop, 'canBuyGoldForVehicleThroughWeb')
-def canBuyGoldForVehicleThroughWeb(base, vehicle, *args, **kwargs):
-    if not cfg_hangar_enableGoldLocker or gold_enable:
-        return base(vehicle, *args, **kwargs)
-    return False
-
-# enable or disable usage of gold
-@overrideMethod(StatsRequester, 'gold')
-def StatsRequester_gold(base, self):
-    if not cfg_hangar_enableGoldLocker or gold_enable:
-        return max(self.actualGold, 0)
-    return 0
 
 # enable or disable usage of free experience
 @overrideMethod(StatsRequester, 'freeXP')
@@ -186,7 +152,7 @@ def _getValue(base, self):
     return valueStr
 
 ##############################################################
-# handlers of windows that use gold/freeXP/crystal
+# handlers of windows that use freeXP/crystal
 
 @registerEvent(TechTree, '_populate')
 def TechTree_populate(self, *args, **kwargs):

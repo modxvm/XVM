@@ -219,8 +219,6 @@
     "stats_link/profile": "<a href='event:https://stats.modxvm.com/en/stats/players/{0}#profile'><font color='#E2D2A2'><u>Player stats on the XVM website</u></font></a>",
 
     // Lobby
-    "lobby/header/gold_locked_tooltip": "Gold is locked",
-    "lobby/header/gold_unlocked_tooltip": "Gold is unlocked",
     "lobby/header/freexp_locked_tooltip": "Free XP is locked",
     "lobby/header/freexp_unlocked_tooltip": "Free XP is unlocked",
     "lobby/header/crystal_locked_tooltip": "Bonds are locked",

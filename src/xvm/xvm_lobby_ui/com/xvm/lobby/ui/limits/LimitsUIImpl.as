@@ -16,16 +16,12 @@ package com.xvm.lobby.ui.limits
 
     public class LimitsUIImpl implements ILimitsUI
     {
-        private static const SETTINGS_GOLD_LOCK_STATUS:String = "users/{accountDBID}/limits/gold_lock_status";
         private static const SETTINGS_FREEXP_LOCK_STATUS:String = "users/{accountDBID}/limits/freexp_lock_status";
         private static const SETTINGS_CRYSTAL_LOCK_STATUS:String = "users/{accountDBID}/limits/crystal_lock_status";
 
-        private static const XVM_LIMITS_COMMAND_SET_GOLD_LOCK_STATUS:String = "xvm_limits.set_gold_lock_status";
         private static const XVM_LIMITS_COMMAND_SET_FREEXP_LOCK_STATUS:String = "xvm_limits.set_freexp_lock_status";
         private static const XVM_LIMITS_COMMAND_SET_CRYSTAL_LOCK_STATUS:String = "xvm_limits.set_crystal_lock_status";
 
-        private static const L10N_GOLD_LOCKED_TOOLTIP:String = "lobby/header/gold_locked_tooltip";
-        private static const L10N_GOLD_UNLOCKED_TOOLTIP:String = "lobby/header/gold_unlocked_tooltip";
         private static const L10N_FREEXP_LOCKED_TOOLTIP:String = "lobby/header/freexp_locked_tooltip";
         private static const L10N_FREEXP_UNLOCKED_TOOLTIP:String = "lobby/header/freexp_unlocked_tooltip";
         private static const L10N_CRYSTAL_LOCKED_TOOLTIP:String = "lobby/header/crystal_locked_tooltip";
@@ -33,7 +29,6 @@ package com.xvm.lobby.ui.limits
 
         private var page:LobbyPage = null;
 
-        private var goldLocker:LockerControl = null;
         private var freeXpLocker:LockerControl = null;
         private var crystalLocker:LockerControl = null;
 
@@ -47,15 +42,6 @@ package com.xvm.lobby.ui.limits
         public function init(page:LobbyPage):void
         {
             this.page = page;
-
-            if (Config.config.hangar.enableGoldLocker)
-            {
-                goldLocker = page.header.addChild(new LockerControl()) as LockerControl;
-                goldLocker.addEventListener(Event.SELECT, onGoldLockerSwitched, false, 0, true);
-                goldLocker.toolTip = Locale.get(L10N_GOLD_UNLOCKED_TOOLTIP);
-                goldLocker.selected = Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_GOLD_LOCK_STATUS, false);
-                goldLocker.visible = false;
-            }
 
             if (Config.config.hangar.enableFreeXpLocker)
             {
@@ -80,12 +66,6 @@ package com.xvm.lobby.ui.limits
 
         public function dispose():void
         {
-            if (goldLocker)
-            {
-                goldLocker.dispose();
-                goldLocker = null;
-            }
-
             if (freeXpLocker)
             {
                 freeXpLocker.dispose();
@@ -106,28 +86,6 @@ package com.xvm.lobby.ui.limits
             try
             {
                 var minWidth:int;
-
-                if (goldLocker)
-                {
-                    var goldControl:HeaderButton = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(CURRENCIES_CONSTANTS.GOLD);
-                    if (goldControl)
-                    {
-                        var goldContent:HBC_Finance = goldControl.content as HBC_Finance;
-                        if (goldContent)
-                        {
-                            goldLocker.visible = true;
-                            goldLocker.x = goldControl.x + goldContent.x + goldContent.moneyIconText.x + 3;
-                            goldLocker.y = goldControl.y + goldContent.y + goldContent.moneyIconText.y + 17;
-                            goldContent.doItTextField.x = 20;
-                            minWidth = goldContent.doItTextField.x + goldContent.doItTextField.textWidth;
-                            if (goldContent.bounds.width < minWidth)
-                            {
-                                goldContent.bounds.width = minWidth;
-                                goldContent.dispatchEvent(new HeaderEvents(HeaderEvents.HBC_SIZE_UPDATED, goldContent.bounds.width, goldContent.xfw_leftPadding, goldContent.xfw_rightPadding));
-                            }
-                        }
-                    }
-                }
 
                 if (freeXpLocker)
                 {
@@ -177,13 +135,6 @@ package com.xvm.lobby.ui.limits
             {
                 Logger.err(ex);
             }
-        }
-
-        private function onGoldLockerSwitched(e:Event):void
-        {
-            Xfw.cmd(XVM_LIMITS_COMMAND_SET_GOLD_LOCK_STATUS, goldLocker.selected);
-            Xfw.cmd(XvmCommands.SAVE_SETTINGS, SETTINGS_GOLD_LOCK_STATUS, goldLocker.selected);
-            goldLocker.toolTip = Locale.get(goldLocker.selected ? L10N_GOLD_LOCKED_TOOLTIP : L10N_GOLD_UNLOCKED_TOOLTIP);
         }
 
         private function onFreeXpLockerSwitched(e:Event):void
