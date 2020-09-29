@@ -49,7 +49,7 @@ package com.xvm.lobby.limits
         private function setup():void
         {
             dispose();
-            if (Config.config.hangar.enableFreeXpLocker || Config.config.hangar.enableCrystalLocker)
+            if (Config.config.hangar.enableGoldLocker || Config.config.hangar.enableFreeXpLocker || Config.config.hangar.enableCrystalLocker)
             {
                 var cls:Class = App.utils.classFactory.getClass("com.xvm.lobby.ui.limits::LimitsUIImpl");
                 if (!cls)

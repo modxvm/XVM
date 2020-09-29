@@ -8,6 +8,7 @@ package com.xvm.types.cfg
 
     public dynamic class CHangar implements ICloneable
     {
+        public var enableGoldLocker:*;
         public var enableFreeXpLocker:*;
         public var enableCrystalLocker:*;
         public var hidePricesInTechTree:*;

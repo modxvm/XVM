@@ -67,6 +67,9 @@
       // false - отключить отображение счетчика проведенных боев на кнопке.
       "showBattleCount": true
     },
+    // true - enable locker for gold.
+    // true - включить замок для золота.
+    "enableGoldLocker": false,
     // true - enable locker for free XP.
     // true - включить замок для свободного опыта.
     "enableFreeXpLocker": false,
