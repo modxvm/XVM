@@ -291,15 +291,15 @@ class _Stat(object):
             # update players
             for (vehicleID, vData) in value['vehicles'].iteritems():
                 accountDBID = vData[0]['accountDBID']
-                if accountDBID in value['players']:
-                    plData = value['players'][accountDBID]
-                    vData = {
-                        'accountDBID': accountDBID,
-                        'name': plData['name'],
-                        'clanAbbrev': plData['clanAbbrev'],
-                        'typeCompDescr': vData[0]['typeCompDescr'],
-                        'team': vData[0]['team']}
-                    self.players[vehicleID] = _Player(vehicleID, vData)
+                plData = value['players'][accountDBID]
+                vData = {
+                    'accountDBID': accountDBID,
+                    'name': plData['name'],
+                    'clanAbbrev': plData['clanAbbrev'],
+                    'typeCompDescr': vData[0]['typeCompDescr'],
+                    'team': vData[0]['team']}
+                self.players[vehicleID] = _Player(vehicleID, vData)
+
 
             battleinfo = {
                 'arena_unique_id': value['arenaUniqueID'],
