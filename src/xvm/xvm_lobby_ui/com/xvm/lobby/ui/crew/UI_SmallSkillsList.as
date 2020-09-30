@@ -12,7 +12,7 @@ package com.xvm.lobby.ui.crew
     {
         public function UI_SmallSkillsList()
         {
-            //Logger.add("UI_SmallSkillsList");
+            Logger.add("UI_SmallSkillsList");
             super();
         }
 

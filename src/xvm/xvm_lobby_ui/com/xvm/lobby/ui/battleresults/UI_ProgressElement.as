@@ -13,12 +13,14 @@ package com.xvm.lobby.ui.battleresults
     {
         public function UI_ProgressElement()
         {
-            //Logger.add("UI_ProgressElement");
+            Logger.add("UI_ProgressElement -- begin");
             super();
             var tf:TextFormat = this.progressIndicator.textField.defaultTextFormat;
             tf.color = XfwConst.UICOLOR_VALUE;
             tf.size = 12;
             this.progressIndicator.textField.defaultTextFormat = tf;
+
+            Logger.add("UI_ProgressElement -- end");
         }
     }
 }

@@ -29,7 +29,7 @@ package com.xvm.lobby.ui.tankcarousel
 
         public function UI_TankCarouselItemRenderer()
         {
-            //Logger.add(getQualifiedClassName(this));
+            Logger.add(getQualifiedClassName(this));
             super();
             try
             {

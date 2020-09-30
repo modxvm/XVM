@@ -20,12 +20,14 @@ package com.xvm.lobby.ui.battleresults
 
         public function UI_BattleResultsAwards()
         {
-            //Logger.add("UI_BattleResultsAwards");
+            Logger.add("UI_BattleResultsAwards -- begin");
             super();
+            Logger.add("UI_BattleResultsAwards -- end");
         }
 
         override protected function draw():void
         {
+            Logger.add("UI_BattleResultsAwards -- draw -- begin");
             super.draw();
             //return;
 
@@ -59,6 +61,8 @@ package com.xvm.lobby.ui.battleresults
                     dispatchEvent(new Event(Event.RESIZE));
                 }
             }
+
+            Logger.add("UI_BattleResultsAwards -- draw -- end");
         }
     }
 }

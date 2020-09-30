@@ -16,13 +16,16 @@ package com.xvm.lobby.ui.battleresults
 
         public function XvmCommonStatsDataListVO(data:Object)
         {
+            Logger.add("XvmCommonStatsDataListVO -- begin");
             // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
             _init(data);
             super(data);
+            Logger.add("XvmCommonStatsDataListVO -- end");
         }
 
         private function _init(data:Object):void
         {
+            Logger.add("XvmCommonStatsDataListVO::_init -- begin");
             this.data = [];
             var d:Array = data.data;
             var len:int = d.length;
@@ -31,6 +34,7 @@ package com.xvm.lobby.ui.battleresults
                 this.data.push(new XvmCommonStatsDataVO(d[i]));
             }
             delete data.data;
+            Logger.add("XvmCommonStatsDataListVO::_init -- end");
         }
     }
 }

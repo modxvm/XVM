@@ -13,7 +13,7 @@ package com.xvm.lobby.ui.crew
 
         public function UI_CrewItemRenderer()
         {
-            //Logger.add("UI_CrewItemRenderer");
+            Logger.add("UI_CrewItemRenderer");
             super();
 
             orig_skills_x = skills.x;

@@ -25,7 +25,7 @@ package com.xvm.lobby.ui.tankcarousel
 
         public function UI_TankCarousel()
         {
-            //Logger.add(getQualifiedClassName(this));
+            Logger.add(getQualifiedClassName(this));
             super();
             // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
             _init();

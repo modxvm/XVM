@@ -38,7 +38,9 @@ package com.xvm.lobby.ui.battleresults
 
         public function XvmCommonStatsDataVO(data:Object)
         {
+            Logger.add("XvmCommonStatsDataVO -- begin");
             super(data);
+            Logger.add("XvmCommonStatsDataVO -- end");
         }
     }
 }
