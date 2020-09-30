@@ -10,6 +10,7 @@ import weakref
 
 import BigWorld
 import game
+from constants import QUEUE_TYPE
 from dossiers2.ui.achievements import ACHIEVEMENT_BLOCK as ACHIEVEMENT_BLOCK
 from gui import GUI_NATIONS_ORDER_INDEX
 from gui.shared import g_eventBus
@@ -95,25 +96,33 @@ def onXfwCommand(cmd, *args):
 
 XVM_LOBBY_UI_SWF = 'xvm_lobby_ui.swf'
 
-#TODO: 1.10.0.4 breaks hangar after battle in WT mode
-#TODO: if it calls on gamemode switch then check for WT event / regular events
-#      end bypass to the base on WT event
-#@overrideMethod(Hangar, 'as_setCarouselS')
+@overrideMethod(Hangar, 'as_setCarouselS')
 def _Hangar_as_setCarouselS(base, self, linkage, alias):
-    log('_Hangar_as_setCarouselS')
+    log('xvm_tankcarousel: Hangar::as_setCarouselS, linkage=%s, alias=%s' % (linkage, alias))
 
-    if not isInBootcamp():
-        if swf_loaded_info.swf_loaded_get(XVM_LOBBY_UI_SWF):
-            if linkage == HANGAR_ALIASES.TANK_CAROUSEL_UI:
-                linkage = 'com.xvm.lobby.ui.tankcarousel::UI_TankCarousel'
-        else:
-            log('WARNING: as_setCarouselS: ({}) {} is not loaded'.format(linkage, XVM_LOBBY_UI_SWF))
-            g_eventBus.removeListener(XFW_EVENT.SWF_LOADED, onSwfLoaded)
-            g_eventBus.addListener(XFW_EVENT.SWF_LOADED, onSwfLoaded)
-    base(self, linkage, alias)
+    #do not modify tankcarousel in bootcamp
+    if isInBootcamp():
+        return base(self, linkage, alias)
+       
+    #do not modify tankcarousel in events
+    isEvent = self.prbDispatcher.getFunctionalState().isQueueSelected(QUEUE_TYPE.EVENT_BATTLES)
+    if isEvent:
+        return base(self, linkage, alias)
+    
+    #in other cases, replace UI linkage with XVMs one    
+    if swf_loaded_info.swf_loaded_get(XVM_LOBBY_UI_SWF):
+        if linkage == HANGAR_ALIASES.TANK_CAROUSEL_UI:
+            linkage = 'com.xvm.lobby.ui.tankcarousel::UI_TankCarousel'
+    else:
+        log('WARNING: as_setCarouselS: ({}) {} is not loaded'.format(linkage, XVM_LOBBY_UI_SWF))
+        g_eventBus.removeListener(XFW_EVENT.SWF_LOADED, onSwfLoaded)
+        g_eventBus.addListener(XFW_EVENT.SWF_LOADED, onSwfLoaded)
+
+    return base(self, linkage, alias)
+    
 
 def onSwfLoaded(e):
-    log('onSwfLoaded: {}'.format(e.ctx))
+    log('xvm_tankcarousel: onSwfLoaded: {}'.format(e.ctx))
     if e.ctx.lower() == XVM_LOBBY_UI_SWF:
         g_eventBus.removeListener(XFW_EVENT.SWF_LOADED, onSwfLoaded)
         wgutils.reloadHangar()
