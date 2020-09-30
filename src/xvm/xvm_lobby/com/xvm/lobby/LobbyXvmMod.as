@@ -10,7 +10,6 @@ package com.xvm.lobby
     import com.xvm.infrastructure.*;
     import com.xvm.lobby.battleresults.BattleResultsXvmView;
     import com.xvm.lobby.contacts.ContactsXvmView;
-    import com.xvm.lobby.crew.CrewXvmView;
     import com.xvm.lobby.hangar.HangarXvmView;
     import com.xvm.lobby.limits.LimitsXvmView;
     import com.xvm.lobby.online.OnlineLobbyXvmView;
@@ -45,7 +44,7 @@ package com.xvm.lobby
         {
             "login": [ OnlineLoginXvmView, PingLoginXvmView, WidgetsLoginXvmView ],
             "lobby": [ LobbyXvmView, LimitsXvmView, OnlineLobbyXvmView, PingLobbyXvmView, WidgetsLobbyXvmView ],
-            "hangar": [ CrewXvmView, HangarXvmView ],
+            "hangar": [ HangarXvmView ],
             "battleResults": [ BattleResultsXvmView ],
             "ContactsPopover": [ ContactsXvmView ],
             "profile": [ ProfileXvmView ],
