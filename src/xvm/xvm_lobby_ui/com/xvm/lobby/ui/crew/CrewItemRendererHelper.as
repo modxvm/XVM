@@ -12,6 +12,7 @@ package com.xvm.lobby.ui.crew
     {
         public static function init(r:CrewItemRenderer, x:int, y:int):void
         {
+            Logger.add("CrewItemRendererHelper::init --begin");
             try
             {
                 if (!(r.skills is UI_SmallSkillsList))
@@ -49,8 +50,11 @@ package com.xvm.lobby.ui.crew
             }
             catch (ex:Error)
             {
+                Logger.add("CrewItemRendererHelper::init --exc");
                 Logger.err(ex);
             }
+
+            Logger.add("CrewItemRendererHelper::init --end");
         }
     }
 }

@@ -20,10 +20,12 @@ package com.xvm.lobby.ui.crew
             orig_skills_y = skills.y;
 
             CrewItemRendererHelper.init(this, orig_skills_x, orig_skills_y);
+            Logger.add("UI_CrewItemRendererSmall -- end");
         }
 
         override protected function updateAfterStateChange():void
         {
+            Logger.add("UI_CrewItemRendererSmall::updateAfterStateChange --begin");
             super.updateAfterStateChange();
             CrewItemRendererHelper.init(this, orig_skills_x, orig_skills_y);
         }
