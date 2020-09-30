@@ -97,6 +97,8 @@ XVM_LOBBY_UI_SWF = 'xvm_lobby_ui.swf'
 
 @overrideMethod(Hangar, 'as_setCarouselS')
 def _Hangar_as_setCarouselS(base, self, linkage, alias):
+    log('_Hangar_as_setCarouselS')
+
     if not isInBootcamp():
         if swf_loaded_info.swf_loaded_get(XVM_LOBBY_UI_SWF):
             if linkage == HANGAR_ALIASES.TANK_CAROUSEL_UI:
