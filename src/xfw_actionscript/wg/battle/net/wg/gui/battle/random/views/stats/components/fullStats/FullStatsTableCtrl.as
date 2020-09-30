@@ -29,11 +29,6 @@ package net.wg.gui.battle.random.views.stats.components.fullStats
 
         private static const SQUAD_BT_Y_START:int = 38;
 
-        public function get xfw_table():FullStatsTable
-        {
-            return _table;
-        }
-
         protected var _table:FullStatsTable = null;
 
         private var _squadHandler:StatsBaseMeta = null;

@@ -193,19 +193,7 @@ diff -Naur battle.orig/net/wg/gui/battle/random/views/stats/components/fullStats
 diff -Naur battle.orig/net/wg/gui/battle/random/views/stats/components/fullStats/FullStatsTableCtrl.as battle/net/wg/gui/battle/random/views/stats/components/fullStats/FullStatsTableCtrl.as
 --- battle.orig/net/wg/gui/battle/random/views/stats/components/fullStats/FullStatsTableCtrl.as	2020-07-27 14:29:57.620476600 +0300
 +++ battle/net/wg/gui/battle/random/views/stats/components/fullStats/FullStatsTableCtrl.as	2020-07-27 14:41:25.113138600 +0300
-@@ -29,6 +29,11 @@
- 
-         private static const SQUAD_BT_Y_START:int = 38;
- 
-+        public function get xfw_table():FullStatsTable
-+        {
-+            return _table;
-+        }
-+
-         protected var _table:FullStatsTable = null;
- 
-         private var _squadHandler:StatsBaseMeta = null;
-@@ -240,12 +245,12 @@
+@@ -240,12 +240,12 @@
              }
          }
  
