@@ -95,7 +95,10 @@ def onXfwCommand(cmd, *args):
 
 XVM_LOBBY_UI_SWF = 'xvm_lobby_ui.swf'
 
-@overrideMethod(Hangar, 'as_setCarouselS')
+#TODO: 1.10.0.4 breaks hangar after battle in WT mode
+#TODO: if it calls on gamemode switch then check for WT event / regular events
+#      end bypass to the base on WT event
+#@overrideMethod(Hangar, 'as_setCarouselS')
 def _Hangar_as_setCarouselS(base, self, linkage, alias):
     log('_Hangar_as_setCarouselS')
 
