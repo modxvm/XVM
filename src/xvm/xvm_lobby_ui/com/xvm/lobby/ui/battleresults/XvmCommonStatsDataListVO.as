@@ -3,7 +3,8 @@
  * https://modxvm.com/
  */
 package com.xvm.lobby.ui.battleresults
-{
+{    
+    import com.xfw.*;
     import net.wg.data.constants.*;
     import net.wg.data.daapi.base.*;
 

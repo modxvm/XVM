@@ -27,7 +27,7 @@ package com.xvm.lobby.ui.tankcarousel
 
         public function UI_SmallTankCarouselItemRenderer()
         {
-            Logger.add(getQualifiedClassName(this));
+            Logger.add("UI_SmallTankCarouselItemRenderer");
             super();
             try
             {
