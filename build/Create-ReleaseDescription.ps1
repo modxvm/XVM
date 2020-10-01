@@ -6,7 +6,7 @@ function Get-LastVersionInfoHtml($filename) {
 
     #skip empty lines
     $output = $output -replace '\r','' -replace '\n\n',"`n" -replace '______________________________',''
-
+  
     #fix version header
     $output = $output -replace '^\s*?###\s?(.*)','<h3>$1</h3>'
 
@@ -14,20 +14,19 @@ function Get-LastVersionInfoHtml($filename) {
     $output = $output -replace '\n\s*?####\s*(.*)',"`n<h4>`$1</h4>"
 
     #add first level ul
-    $output = $output -replace '(?ms)</h4>(.*?)<h4>',"</h4>`n<ul>`$1</ul>`n<h4>"
+    $output = $output -replace "</h4>`n","</h4>`n  <ul>`n"
+    $output = $output -replace "<h4>","  </ul>`n<h4>"
+    $output = $output -replace "</h3>`n  </ul>","<h3>`n"
+    $output += "  </ul>"
 
     #add first level li
-    $output = $output -replace '  \* (.*)','    <li>$1</li>'
+    $output = $output -replace "`n  \* (.*)","`n    <li>`$1</li>"
 
     #add second level ul li
-    $output = $output -replace '      (.*)',"    <ul>`n       <li>`$1</li>`n    </ul>"
-    $output = $output -replace '\n\s+</ul>\n\s+<ul>',""
+    $output = $output -replace "`n    \*(.*)","`n    <ul>`n       <li>`$1</li>`n    </ul>"
 
     #replace `` with <b></b>
     $output = $output -replace '`(.*?)`','<code>$1</code>'
-
-    #add ending /ul
-    $output += "</ul>"
 
     return $output
 }
@@ -52,7 +51,7 @@ $changelog_en = Get-LastVersionInfoHtml "../release/doc/ChangeLog-en.md"
 $changelog_ru = Get-LastVersionInfoHtml "../release/doc/ChangeLog-ru.md"
 
 Write-Output $changelog_en
-#Write-Output $changelog_ru
+Write-Output $changelog_ru
 
 (Get-Content -Path ../build/xvm-build.conf -Raw) -match '\nexport XVMBUILD_WOT_VERSION=\$\{TARGET_VERSION:-(.*?)\}' | Out-Null
 $version_wot = $Matches[1]
