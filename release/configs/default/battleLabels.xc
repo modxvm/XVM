@@ -20,6 +20,7 @@
       ${"battleLabelsTemplates.xc":"def.mainGun"},
       ${"battleLabelsTemplates.xc":"def.damageLogBackground"},
       ${"battleLabelsTemplates.xc":"def.damageLog"},
+      ${"battleLabelsTemplates.xc":"def.lastHitBackground"},
       ${"battleLabelsTemplates.xc":"def.lastHit"},
       ${"battleLabelsTemplates.xc":"def.fire"},
       ${"battleLabelsTemplates.xc":"def.repairTimeEngine"},

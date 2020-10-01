@@ -31,6 +31,11 @@ def damageLog_lastHit():
     return damageLog.lastHit()
 
 
+@xvm.export('xvm.damageLog.lastHit.bg', deterministic=False)
+def damageLog_lastHit():
+    return damageLog.lastHit_bg()
+
+
 @xvm.export('xvm.damageLog.lastHit.shadow', deterministic=False)
 def damageLog_lastHit_shadow(setting):
     return damageLog.lastHit_shadow(setting)

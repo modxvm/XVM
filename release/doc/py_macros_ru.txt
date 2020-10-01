@@ -7,7 +7,8 @@
 │                             │ ---//---                      │ {{py:xvm.damageLog.log.x}}                 │ значение "x" из секции "log" файла damageLog.xc или сохраненное значение координаты х в бою
 │                             │ ---//---                      │ {{py:xvm.damageLog.log.y}}                 │ значение "y" из секции "log" файла damageLog.xc или сохраненное значение координаты y в бою
 │                             │ ---//---                      │ {{py:xvm.damageLog.log.shadow('XXX')}}     │ значение "XXX" из секции "log\shadow" файла damageLog.xc
-│                             │ PY(ON_LAST_HIT)               │ {{py:xvm.damageLog.lastHit}}               │ значение "formatLastHit" из файла damageLog.xc
+│                             │ PY(ON_LAST_HIT)               │ {{py:xvm.damageLog.lastHit}}               │ значение "formatLastHit" из секции "lastHit" файла damageLog.xc
+│                             │ ---//---                      │ {{py:xvm.damageLog.lastHit.bg}}            │ значение "formatLastHit" из секции "lastHitBackground" файла damageLog.xc
 │                             │ ---//---                      │ {{py:xvm.damageLog.lastHit.x}}             │ значение "x" из секции "lastHit" файла damageLog.xc или сохраненное значение координаты х в бою
 │                             │ ---//---                      │ {{py:xvm.damageLog.lastHit.y}}             │ значение "y" из секции "lastHit" файла damageLog.xc или сохраненное значение координаты y в бою
 │                             │ ---//---                      │ {{py:xvm.damageLog.lastHit.shadow('XXX')}} │ значение "XXX" из секции "lastHit\shadow" файла damageLog.xc

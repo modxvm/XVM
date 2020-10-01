@@ -1,4 +1,15 @@
-﻿### XVM 8.6.4
+﻿### XVM 8.6.5
+
+  #### Макросы на Python
+
+  * в **damageLog** добавлено:
+
+    * секция **"lastHitBackground"** в файл **damageLog.xc**
+    * макрос `{{py:xvm.damageLog.lastHit.bg}}` - возвращает значение **"formatLastHit"** из секции **"lastHitBackground"** файла **damageLog.xc**
+
+______________________________
+
+### XVM 8.6.4
 
   #### Общее
 

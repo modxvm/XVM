@@ -190,7 +190,8 @@ class DAMAGE_LOG_SECTIONS(object):
     LOG_BACKGROUND = DAMAGE_LOG + 'logBackground/'
     LOG_ALT_BACKGROUND = DAMAGE_LOG + 'logAltBackground/'
     LAST_HIT = DAMAGE_LOG + 'lastHit/'
-    SECTIONS = (LOG, LOG_ALT, LOG_BACKGROUND, LOG_ALT_BACKGROUND, LAST_HIT)
+    LAST_HIT_BACKGROUND = DAMAGE_LOG + 'lastHitBackground/'
+    SECTIONS = (LOG, LOG_ALT, LOG_BACKGROUND, LOG_ALT_BACKGROUND, LAST_HIT, LAST_HIT_BACKGROUND)
 
 
 def keyLower(_dict):
@@ -421,6 +422,7 @@ class Data(object):
         _logAlt.output()
         _log.output()
         _lastHit.output()
+        _lastHitBackground.output()
         _logBackground.output()
         _logAltBackground.output()
         self.data['critDevice'] = 'no-critical'
@@ -919,6 +921,7 @@ _logAlt = DamageLog(DAMAGE_LOG_SECTIONS.LOG_ALT)
 _logBackground = DamageLog(DAMAGE_LOG_SECTIONS.LOG_BACKGROUND)
 _logAltBackground = DamageLog(DAMAGE_LOG_SECTIONS.LOG_ALT_BACKGROUND)
 _lastHit = LastHit(DAMAGE_LOG_SECTIONS.LAST_HIT)
+_lastHitBackground = LastHit(DAMAGE_LOG_SECTIONS.LAST_HIT_BACKGROUND)
 
 
 @registerEvent(PlayerAvatar, 'onBecomePlayer')
@@ -1080,6 +1083,7 @@ def PlayerAvatar__destroyGUI(self):
     _logBackground.reset(_logBackground.section)
     _logAltBackground.reset(_logAltBackground.section)
     _lastHit.reset()
+    _lastHitBackground.reset()
 
 
 @registerEvent(PlayerAvatar, 'handleKey')
@@ -1125,6 +1129,10 @@ def dLog_y():
 
 def lastHit():
     return _lastHit.strLastHit
+
+
+def lastHit_bg():
+    return _lastHitBackground.strLastHit
 
 
 def lastHit_shadow(setting):

@@ -171,6 +171,13 @@
         "mouseMove": "lastHit_mouseMove"
       }
     },
+    // Background of the last damage (hit) (see damageLog.xc).
+    // Подложка последнего урона (попадания) (см. damageLog.xc).
+    "lastHitBackground": {
+      "enabled": false,
+      "$ref": { "path":"def.lastHit" },
+      "format": "{{py:xvm.damageLog.lastHit.bg}}"
+    },
     // Message in case of fire in vehicle.
     // Сообщение при возникновении пожара в технике.
     "fire": {
