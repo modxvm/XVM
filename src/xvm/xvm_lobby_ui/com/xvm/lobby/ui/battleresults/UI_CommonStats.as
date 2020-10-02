@@ -77,25 +77,20 @@ package com.xvm.lobby.ui.battleresults
 
         public function UI_CommonStats()
         {
-            Logger.add("UI_CommonStats -- begin");
+            //Logger.add("UI_CommonStats");
             super();
-            Logger.add("UI_CommonStats -- end");
         }
 
         override protected function configUI():void
         {
-            Logger.add("UI_CommonStats::configUI -- begin");
             super.configUI();
             tooltips = { };
             tankSlot.addEventListener(ListEvent.INDEX_CHANGE, onDropDownIndexChangeHandler, false, 0, true);
             Stat.instance.addEventListener(Stat.COMPLETE_BATTLERESULTS, onStatLoaded, false, 0, true);
-            Logger.add("UI_CommonStats::configUI -- end");
         }
 
         override protected function onDispose():void
         {
-            Logger.add("UI_CommonStats::onDispose -- begin");
-
             tankSlot.removeEventListener(ListEvent.INDEX_CHANGE, onDropDownIndexChangeHandler);
             Stat.instance.removeEventListener(Stat.COMPLETE_BATTLERESULTS, onStatLoaded);
 
@@ -120,14 +115,10 @@ package com.xvm.lobby.ui.battleresults
                     Logger.err(ex);
                 }
             }
-
-            Logger.add("UI_CommonStats::onDispose -- end");
-
         }
 
         override protected function draw():void
         {
-            Logger.add("UI_CommonStats::draw -- begin");
             super.draw();
             if (_data != null)
             {
@@ -154,12 +145,11 @@ package com.xvm.lobby.ui.battleresults
                     damageTotalField.visible =
                     killsTotalField.visible = efficiencyHeader.visible;
             }
-            Logger.add("UI_CommonStats::draw -- end");
         }
 
         override public function update(data:Object):void
         {
-            Logger.add("UI_CommonStats::update -- begin");
+            //Logger.add("update");
             try
             {
                 // Use data['common']['regionNameStr'] value to transfer XVM data.
@@ -265,27 +255,21 @@ package com.xvm.lobby.ui.battleresults
                 updateValues();
             }
             catch (ex:Error)
-            {            
-                Logger.add("UI_CommonStats::update -- exc");
+            {
                 Logger.err(ex);
             }
-
-            Logger.add("UI_CommonStats::update -- end");
         }
 
         // PRIVATE
 
         private function onDropDownIndexChangeHandler(e:ListEvent) : void
         {
-            Logger.add("UI_CommonStats::onDropDownIndexChangeHandler -- begin");
             _currentTankIndex = e.index;
             updateValues();
-            Logger.add("UI_CommonStats::onDropDownIndexChangeHandler -- end");
         }
 
         private function initializeFields():void
         {
-            Logger.add("UI_CommonStats::initializeFields -- begin");
             compactQuests();
 
             if (Config.config.battleResults.showTotals)
@@ -307,31 +291,25 @@ package com.xvm.lobby.ui.battleresults
             {
                 initCrewExperience();
             }
-            Logger.add("UI_CommonStats::initializeFields -- begin");
         }
 
         private function get _xdata():XvmCommonStatsDataVO
         {
-            Logger.add("UI_CommonStats::_xdata -- begin");
             return _xvmData.data[_currentTankIndex];
         }
 
         private function compactQuests():void
         {
-            Logger.add("UI_CommonStats::compactQuests -- begin");
             if (xfw_progressReport)
             {
                 xfw_progressReport.linkage = getQualifiedClassName(UI_BR_SubtaskComponent);
             }
-            Logger.add("UI_CommonStats::compactQuests -- end");
         }
 
         private function hideQuestsShadows():void
         {
-            Logger.add("UI_CommonStats::hideQuestsShadows -- begin");
             upperShadow.visible = false;
             lowerShadow.visible = false;
-            Logger.add("UI_CommonStats::hideQuestsShadows -- end");
         }
 
         private function initPremiumBonusFields():void

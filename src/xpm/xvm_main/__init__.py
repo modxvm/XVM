@@ -75,7 +75,7 @@ def start():
     g_eventBus.addListener(XVM_EVENT.CHECK_ACTIVATION, g_xvm.onCheckActivation)
 
     # config already loaded, just send event to apply required code
-    g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.CONFIG_LOADED, {'fromInitStage':True}))
+    g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.CONFIG_LOADED, {'fromInitStage': True}))
 
 @registerEvent(game, 'fini')
 def fini():

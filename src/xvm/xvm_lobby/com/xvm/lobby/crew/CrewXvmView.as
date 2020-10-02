@@ -49,7 +49,7 @@ package com.xvm.lobby.crew
 
         override public function onBeforePopulate(e:LifeCycleEvent):void
         {
-            Logger.add("onBeforePopulate");
+            //Logger.add("onBeforePopulate");
             super.onBeforePopulate(e);
 
             page.addEventListener(Event.RESIZE, onHangarResize);
@@ -69,7 +69,7 @@ package com.xvm.lobby.crew
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
-            Logger.add("onBeforeDispose");
+            //Logger.add("onBeforeDispose");
             super.onBeforeDispose(e);
             CrewLoader.dispose(page);
             if (enablePrevCrewCheckBox)
@@ -118,7 +118,7 @@ package com.xvm.lobby.crew
 
         private function onVehicleChanged(invID:Number, isElite:Boolean, vehID:Number):Object
         {
-            Logger.add('onVehicleChanged: ' + invID);
+            //Logger.add('onVehicleChanged: ' + invID);
 
             currentInvID = invID;
 

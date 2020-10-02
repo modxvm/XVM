@@ -67,7 +67,7 @@ def _exec(req, data=None, showLog=True, api=XVM.API_VERSION, params={}):
         url = XVM.SERVERS[randint(0, len(XVM.SERVERS) - 1)]
         url = url.format(API=api, REQ=req)
         for k, v in params.iteritems():
-            url = url.replace('{'+k+'}', '' if v is None else str(v))
+            url = url.replace('{'+ k +'}', '' if v is None else str(v))
 
         accountDBID = utils.getAccountDBID()
         if accountDBID is None:
