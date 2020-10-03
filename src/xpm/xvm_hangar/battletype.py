@@ -72,7 +72,8 @@ def _LobbyHeader__handleFightButtonUpdated(base, self, _):
                     debug('save battle type: ' + actionName)
                     userprefs.set(USERPREFS.BATTLE_TYPE, actionName)
 
-@overrideMethod(LobbyHeader, 'as_updateBattleTypeS')
-def _LobbyHeader_as_updateBattleTypeS(base, self, battleTypeName, battleTypeIcon, isEnabled, tooltip, tooltipType, battleTypeID, eventBgEnabled, eventAnimEnabled):
-    base(self, battleTypeName, battleTypeIcon, isEnabled, tooltip, tooltipType, battleTypeID, eventBgEnabled, eventAnimEnabled)
-    as_xfw_cmd(COMMAND.AS_UPDATE_BATTLE_TYPE, battleTypeID)
+#TODO: 1.10.0.4: Looks like it is needed and causes crashes
+#@overrideMethod(LobbyHeader, 'as_updateBattleTypeS')
+#def _LobbyHeader_as_updateBattleTypeS(base, self, battleTypeName, battleTypeIcon, isEnabled, tooltip, tooltipType, battleTypeID, eventBgEnabled, eventAnimEnabled):
+#    base(self, battleTypeName, battleTypeIcon, isEnabled, tooltip, tooltipType, battleTypeID, eventBgEnabled, eventAnimEnabled)
+#    as_xfw_cmd(COMMAND.AS_UPDATE_BATTLE_TYPE, battleTypeID)
