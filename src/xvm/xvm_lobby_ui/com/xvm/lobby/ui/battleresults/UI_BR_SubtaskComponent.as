@@ -30,7 +30,7 @@ package com.xvm.lobby.ui.battleresults
 
         public function UI_BR_SubtaskComponent()
         {
-            Logger.add("UI_BR_SubtaskComponent -- begin");
+            //Logger.add("UI_BR_SubtaskComponent");
             super();
             //return;
 
@@ -38,34 +38,27 @@ package com.xvm.lobby.ui.battleresults
             removeChild(awards);
             awards = App.utils.classFactory.getComponent(getQualifiedClassName(UI_BattleResultsAwards), QuestAwardsBlock);
             addChildAt(awards, index);
-
-            Logger.add("UI_BR_SubtaskComponent -- end");
         }
 
         override protected function configUI():void
         {
-            Logger.add("UI_BR_SubtaskComponent:: configUI -- begin");
             super.configUI();
             //return;
 
             progressList.linkage = getQualifiedClassName(UI_ProgressElement);
-            Logger.add("UI_BR_SubtaskComponent:: configUI -- end");
         }
 
         override protected function onDispose() : void
         {
-            Logger.add("UI_BR_SubtaskComponent:: onDispose -- begin");
             if (this._data)
             {
                 this._data.dispose();
                 this._data = null;
             }
-            Logger.add("UI_BR_SubtaskComponent:: onDispose -- end");
         }
 
         override protected function draw():void
         {
-            Logger.add("UI_BR_SubtaskComponent:: draw -- begin");
             super.draw();
             //return;
 
@@ -108,18 +101,15 @@ package com.xvm.lobby.ui.battleresults
                     dispatchEvent(new Event(Event.RESIZE));
                 }
             }
-            Logger.add("UI_BR_SubtaskComponent:: draw -- end");
         }
 
         override public function setData(value:Object):void
         {
-            Logger.add("UI_BR_SubtaskComponent:: setdata -- begin");
             if (value != null)
             {
                 this._data = new BattleResultsQuestVO(value);
             }
             super.setData(value);
-            Logger.add("UI_BR_SubtaskComponent:: setdata -- end");
         }
     }
 }

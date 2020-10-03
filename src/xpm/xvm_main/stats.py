@@ -261,7 +261,7 @@ class _Stat(object):
     def _get_battleresults(self):
         (arenaUniqueID,) = self.req['args']
         try:
-            log('BigWorld.player().battleResultsCache.get(): start')
+            #log('BigWorld.player().battleResultsCache.get(): start')
             while True:
                 BigWorld.player().battleResultsCache.get(int(arenaUniqueID), self._battleResultsCallback)
                 if self.resp is not None:
@@ -271,11 +271,11 @@ class _Stat(object):
             err(traceback.format_exc())
         finally:
             pass
-            log('BigWorld.player().battleResultsCache.get(): end')
+            #log('BigWorld.player().battleResultsCache.get(): end')
 
     def _battleResultsCallback(self, responseCode, value=None, revision=0):
         try:
-            log('_Stat._battleResultsCallback({})'.format(responseCode))
+            #log('_Stat._battleResultsCallback({})'.format(responseCode))
             if responseCode == AccountCommands.RES_COOLDOWN:
                 BigWorld.callback(0.3, self._get_battleresults)
                 return
