@@ -114,10 +114,16 @@ package com.xvm.lobby.ui.tankcarousel
 
         private function onUpdateBattleType(battleType:String):void
         {
+            Logger.add("UI_TankCarouselItemRenderer::onUpdateBattleType -- begin");
+            Logger.add("   battleType:" + battleType);
+            Logger.add("   data:");
+            Logger.addObject(this.data, 10, "data");
+
             //tankcarousel in WhiteTiger event is based on Gameface, so we do not need to update it
             if(battleType != "eventBattle"){
                 updateData();
             }
+            Logger.add("UI_TankCarouselItemRenderer::onUpdateBattleType -- end");
         }
 
         override protected function updateData():void
