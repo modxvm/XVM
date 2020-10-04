@@ -2,7 +2,7 @@
 
   #### Python macros
 
-  * in **damageLog** added:
+  * In **damageLog** added:
 
     * section **"lastHitBackground"** to the file **damageLog.xc**
     * macro `{{py:xvm.damageLog.lastHit.bg}}` - returns the value **"formatLastHit"** from the **"lastHitBackground"** section of the **damageLog.xc** file
@@ -43,7 +43,7 @@ ______________________________
 
   #### Python macros
 
-  * added macro to **damageLog**:
+  * Added macro to **damageLog**:
     * `{{shell-dmg}}` - shell damage
 
 ______________________________

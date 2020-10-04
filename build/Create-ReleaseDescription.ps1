@@ -6,7 +6,7 @@ function Get-LastVersionInfoHtml($filename) {
 
     #skip empty lines
     $output = $output -replace '\r','' -replace '\n\n',"`n" -replace '______________________________',''
-  
+
     #fix version header
     $output = $output -replace '^\s*?###\s?(.*)','<h3>$1</h3>'
 
@@ -43,7 +43,7 @@ function Get-LastVersionInfoTxt($filename) {
     #fix group header
     $output = $output -replace '  ####','* '
     $output = $output -replace '      ','    * '
-    
+
     return $output
 }
 

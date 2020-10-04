@@ -35,10 +35,10 @@ import xvm_main.python.userprefs as userprefs
 
 
 class XVM_Hangar_BattleType():
- 
+
     def __init__(self):
-        self.__userpref = "users/{accountDBID}/last_battle_type_ctrl"
-        
+        self.__userpref = "users/{accountDBID}/last_battle_type"
+
         g_eventBus.addListener(events.GUICommonEvent.LOBBY_VIEW_LOADED, self.changeMode )
 
         @overrideMethod(battle_selector_items._BattleSelectorItems, 'select')
@@ -55,7 +55,7 @@ class XVM_Hangar_BattleType():
 g_xvm_hangar_battle_type = XVM_Hangar_BattleType()
 
 
-#needed for {{battleType macro}}
+#needed for {{battleType}} macro
 @overrideMethod(LobbyHeader, 'as_updateBattleTypeS')
 def _LobbyHeader_as_updateBattleTypeS(base, self, battleTypeName, battleTypeIcon, isEnabled, tooltip, tooltipType, battleTypeID, eventBgEnabled, eventAnimEnabled):
     base(self, battleTypeName, battleTypeIcon, isEnabled, tooltip, tooltipType, battleTypeID, eventBgEnabled, eventAnimEnabled)

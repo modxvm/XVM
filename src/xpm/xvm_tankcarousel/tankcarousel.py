@@ -98,18 +98,18 @@ XVM_LOBBY_UI_SWF = 'xvm_lobby_ui.swf'
 
 @overrideMethod(Hangar, 'as_setCarouselS')
 def _Hangar_as_setCarouselS(base, self, linkage, alias):
-    log('xvm_tankcarousel: Hangar::as_setCarouselS, linkage=%s, alias=%s' % (linkage, alias))
+    #log('xvm_tankcarousel: Hangar::as_setCarouselS, linkage=%s, alias=%s' % (linkage, alias))
 
     #do not modify tankcarousel in bootcamp
     if isInBootcamp():
         return base(self, linkage, alias)
-       
+
     #do not modify tankcarousel in events
     isEvent = self.prbDispatcher.getFunctionalState().isQueueSelected(QUEUE_TYPE.EVENT_BATTLES)
     if isEvent:
         return base(self, linkage, alias)
-    
-    #in other cases, replace UI linkage with XVMs one    
+
+    #in other cases, replace UI linkage with XVMs one
     if swf_loaded_info.swf_loaded_get(XVM_LOBBY_UI_SWF):
         if linkage == HANGAR_ALIASES.TANK_CAROUSEL_UI:
             linkage = 'com.xvm.lobby.ui.tankcarousel::UI_TankCarousel'
@@ -119,7 +119,7 @@ def _Hangar_as_setCarouselS(base, self, linkage, alias):
         g_eventBus.addListener(XFW_EVENT.SWF_LOADED, onSwfLoaded)
 
     return base(self, linkage, alias)
-    
+
 
 def onSwfLoaded(e):
     log('xvm_tankcarousel: onSwfLoaded: {}'.format(e.ctx))

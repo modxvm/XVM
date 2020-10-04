@@ -2,7 +2,7 @@
 
   #### Макросы на Python
 
-  * в **damageLog** добавлено:
+  * В **damageLog** добавлено:
 
     * секция **"lastHitBackground"** в файл **damageLog.xc**
     * макрос `{{py:xvm.damageLog.lastHit.bg}}` - возвращает значение **"formatLastHit"** из секции **"lastHitBackground"** файла **damageLog.xc**
@@ -43,7 +43,7 @@ ______________________________
 
   #### Макросы на Python
 
-  * в **damageLog** добавлен макрос:
+  * В **damageLog** добавлен макрос:
     * `{{shell-dmg}}` - урон снарядом
 
 ______________________________
