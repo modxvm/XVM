@@ -347,7 +347,8 @@
     // Подложка последнего урона (попадание).
     "lastHitBackground": {
       "$ref": { "path":"damageLog.lastHit" },
-      "enabled": true
+      "enabled": false,
+      "formatLastHit": ""
     }
   }
 }
