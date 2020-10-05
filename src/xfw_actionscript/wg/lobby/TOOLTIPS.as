@@ -5579,17 +5579,25 @@ package
 
         public static const AUTUMN_MARATHON_HEADER:String = "#tooltips:autumn_marathon/header";
 
+        public static const EVENT_MARATHON_HEADER:String = "#tooltips:event_marathon/header";
+
         public static const MARATHON_BODY:String = "#tooltips:marathon/body";
 
         public static const AUTUMN_MARATHON_BODY:String = "#tooltips:autumn_marathon/body";
 
+        public static const EVENT_MARATHON_BODY:String = "#tooltips:event_marathon/body";
+
         public static const MARATHON_BODY_EXTRA:String = "#tooltips:marathon/body/extra";
+
+        public static const EVENT_MARATHON_BODY_EXTRA:String = "#tooltips:event_marathon/body/extra";
 
         public static const AUTUMN_MARATHON_BODY_EXTRA:String = "#tooltips:autumn_marathon/body/extra";
 
         public static const MARATHON_BODY_EXTRA_SMART:String = "#tooltips:marathon/body/extra_smart";
 
         public static const AUTUMN_MARATHON_BODY_EXTRA_SMART:String = "#tooltips:autumn_marathon/body/extra_smart";
+
+        public static const EVENT_MARATHON_BODY_EXTRA_SMART:String = "#tooltips:event_marathon/body/extra_smart";
 
         public static const MARATHON_STATE_START:String = "#tooltips:marathon/state/start";
 
@@ -5599,9 +5607,15 @@ package
 
         public static const MARATHON_EXTRA_STATE_STEPS:String = "#tooltips:marathon/extra_state/steps";
 
+        public static const EVENT_MARATHON_EXTRA_STATE_STEPS:String = "#tooltips:event_marathon/extra_state/steps";
+
         public static const MARATHON_EXTRA_STATE_COMPLETED:String = "#tooltips:marathon/extra_state/completed";
 
+        public static const EVENT_MARATHON_EXTRA_STATE_COMPLETED:String = "#tooltips:event_marathon/extra_state/completed";
+
         public static const MARATHON_EXTRA_STATE_DISCOUNT:String = "#tooltips:marathon/extra_state/discount";
+
+        public static const EVENT_MARATHON_EXTRA_STATE_DISCOUNT:String = "#tooltips:event_marathon/extra_state/discount";
 
         public static const MARATHON_OFF_HEADER:String = "#tooltips:marathon/off/header";
 
@@ -5610,6 +5624,10 @@ package
         public static const MARATHON_ERROR_BATTLE_TYPE:String = "#tooltips:marathon/error/battle_type";
 
         public static const MARATHON_ERROR_VEH_TYPE:String = "#tooltips:marathon/error/veh_type";
+
+        public static const EVENT_MARATHON_ERROR_BATTLE_TYPE:String = "#tooltips:event_marathon/error/battle_type";
+
+        public static const EVENT_MARATHON_ERROR_VEH_TYPE:String = "#tooltips:event_marathon/error/veh_type";
 
         public static const XPEXCHANGEWINDOW_GOLD_GOLDAFTEREXCHANGE_HEADER:String = "#tooltips:xpExchangewindow/gold/goldAfterExchange/header";
 

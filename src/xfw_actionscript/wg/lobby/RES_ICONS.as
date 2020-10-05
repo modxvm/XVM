@@ -7449,6 +7449,8 @@ package
 
         public static const MAPS_ICONS_QUESTS_MARATHONTOOLTIPHEADER:String = "../maps/icons/quests/marathonTooltipHeader.png";
 
+        public static const MAPS_ICONS_QUESTS_MARATHONTOOLTIPHEADERCN:String = "../maps/icons/quests/marathonTooltipHeaderCN.png";
+
         public static const MAPS_ICONS_QUESTS_MTAWARDBACK:String = "../maps/icons/quests/MTAwardBack.png";
 
         public static const MAPS_ICONS_QUESTS_MULTITEAMFALLOUTAWARDBACK:String = "../maps/icons/quests/multiteamFalloutAwardBack.png";

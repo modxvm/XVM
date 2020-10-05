@@ -2077,19 +2077,27 @@ package
 
         public static const MISSIONS_TAB_LABEL_AUTUMN_MARATHON:String = "#quests:missions/tab/label/autumn_marathon";
 
+        public static const MISSIONS_TAB_LABEL_EVENT_MARATHON:String = "#quests:missions/tab/label/event_marathon";
+
         public static const MISSIONS_TAB_KURSK_HEADER:String = "#quests:missions/tab/kursk/header";
 
         public static const MISSIONS_TAB_KURSK_BODY:String = "#quests:missions/tab/kursk/body";
 
         public static const MISSIONS_TAB_AUTUMN_MARATHON:String = "#quests:missions/tab/autumn_marathon";
 
+        public static const MISSIONS_TAB_EVENT_MARATHON:String = "#quests:missions/tab/event_marathon";
+
         public static const MISSIONS_TAB_MARATHONS_HEADER:String = "#quests:missions/tab/marathons/header";
 
         public static const MISSIONS_TAB_AUTUMN_MARATHON_HEADER:String = "#quests:missions/tab/autumn_marathon/header";
 
+        public static const MISSIONS_TAB_EVENT_MARATHON_HEADER:String = "#quests:missions/tab/event_marathon/header";
+
         public static const MISSIONS_TAB_MARATHONS_BODY:String = "#quests:missions/tab/marathons/body";
 
         public static const MISSIONS_TAB_AUTUMN_MARATHON_BODY:String = "#quests:missions/tab/autumn_marathon/body";
+
+        public static const MISSIONS_TAB_EVENT_MARATHON_BODY:String = "#quests:missions/tab/event_marathon/body";
 
         public static const MISSIONS_TAB_MISSIONS_HEADER:String = "#quests:missions/tab/missions/header";
 
