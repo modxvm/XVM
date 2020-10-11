@@ -7,6 +7,10 @@
     * section **"lastHitBackground"** to the file **damageLog.xc**
     * macro `{{py:xvm.damageLog.lastHit.bg}}` - returns the value **"formatLastHit"** from the **"lastHitBackground"** section of the **damageLog.xc** file
 
+  * Added macro to **hitLog**:
+
+    * `{{shell-dmg}}` - shell damage
+
 ______________________________
 
 ### XVM 8.6.4

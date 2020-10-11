@@ -7,6 +7,10 @@
     * секция **"lastHitBackground"** в файл **damageLog.xc**
     * макрос `{{py:xvm.damageLog.lastHit.bg}}` - возвращает значение **"formatLastHit"** из секции **"lastHitBackground"** файла **damageLog.xc**
 
+  * В **hitLog** добавлен макрос:
+
+    * `{{shell-dmg}}` - урон снарядом
+
 ______________________________
 
 ### XVM 8.6.4

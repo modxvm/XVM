@@ -46,7 +46,8 @@
     {{dmg-kind-player}}    - all kinds of damage done to targets (attack, fire, ramming, ...) / все типы нанесенного урона по цели (атака, пожар, таран, ...).
     {{dmg-deviation}}      - TODO / отклонение нанесенного урона от номинального урона снаряда в процентах. Возвращает 0.0, если техника была уничтожена выстрелом, или выстрел был фугасом и отклонение составило больше 25%.
     {{vehiclename}}        - vehicle system name (usa-A34_M24_Chaffee) / название техники в системе (usa-A34_M24_Chaffee).
-    {{battletype-key}}     - название ключа таблицы типа текущего боя / current battle type table key value
+    {{battletype-key}}     - название ключа таблицы типа текущего боя / current battle type table key value.
+    {{shell-dmg}}          - shell damage / урон снарядом.
 */
 
 {
