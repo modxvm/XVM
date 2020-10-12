@@ -25,13 +25,10 @@ from vehicle_systems.tankStructure import ModelStates
 from gui.promo.hangar_teaser_widget import TeaserViewer
 from gui.game_control.AwardController import ProgressiveItemsRewardHandler
 from gui.game_control.PromoController import PromoController
-from skeletons.account_helpers.settings_core import ISettingsCore
 from gui.Scaleform.daapi.view.lobby.messengerBar.messenger_bar import MessengerBar
 from gui.Scaleform.daapi.view.lobby.messengerBar.session_stats_button import SessionStatsButton
 from gui.Scaleform.daapi.view.lobby.rankedBattles.ranked_battles_results import RankedBattlesResults
 from gui.Scaleform.daapi.view.lobby.hangar.daily_quest_widget import DailyQuestWidget
-from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
-from gui.Scaleform.genConsts.HANGAR_ALIASES import HANGAR_ALIASES
 
 from xfw import *
 
@@ -257,11 +254,3 @@ def _showAward(base, self, ctx):
     if not config.get('hangar/showProgressiveDecalsWindow', True):
         return
     base(self, ctx)
-
-# hide display banner - Last Waffenträger
-@overrideMethod(Hangar, '_Hangar__updateWTCountdownEntryPointVisibility')
-def updateWTCountdownEntryPointVisibility(base, self):
-    if not config.get('hangar/showLastWtBanner', True):
-        self.as_updateEventEntryPointS(HANGAR_ALIASES.WT_EVENT_ENTRY_POINT, False)
-        return
-    base(self)

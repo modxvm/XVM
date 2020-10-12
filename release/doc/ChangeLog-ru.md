@@ -1,5 +1,11 @@
 ﻿### XVM 8.6.5
 
+  #### Ангар
+
+  * Удалена опция:
+
+    * `"hangar"/"showLastWtBanner"`
+
   #### Макросы на Python
 
   * В **damageLog** добавлено:

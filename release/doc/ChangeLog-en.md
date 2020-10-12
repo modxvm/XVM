@@ -1,5 +1,11 @@
 ﻿### XVM 8.6.5
 
+  #### Hangar
+
+  * Removed option:
+
+    * `"hangar"/"showLastWtBanner"`
+
   #### Python macros
 
   * In **damageLog** added:
