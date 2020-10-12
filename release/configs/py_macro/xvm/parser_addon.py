@@ -14,7 +14,7 @@ def comparing(_macro, _operator, _math):
     elif isinstance(_macro, float):
         _math = float(_math)
     elif isinstance(_macro, int):
-        _math = int(_math)
+        _math = int(float(_math))
     if isinstance(_macro, (float, int)) and isinstance(_math, (float, int)):
         if _operator == '>=':
             return _macro >= _math
