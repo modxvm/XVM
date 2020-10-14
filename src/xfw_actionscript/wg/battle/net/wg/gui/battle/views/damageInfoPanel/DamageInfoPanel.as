@@ -12,6 +12,16 @@ package net.wg.gui.battle.views.damageInfoPanel
     public class DamageInfoPanel extends DamageInfoPanelMeta implements IDamageInfoPanelMeta
     {
 
+        private static const ALPHA_DECREASE_STEP:Number = 0.01;
+
+        private static const ACTIVE_STATE_ID:int = 0;
+
+        private static const INACTIVE_STATE_ID:int = 1;
+
+        private static const HIDDING_STATE_ID:int = 2;
+
+        private static const ITEM_WIDTH:int = 32;
+
         public var fire:Fire = null;
 
         public var engine:DamageItem = null;
@@ -31,6 +41,8 @@ package net.wg.gui.battle.views.damageInfoPanel
         public var turretRotator:DamageItem = null;
 
         public var surveyingDevice:DamageItem = null;
+
+        public var wheel:DamageItem = null;
 
         public var commander:DamageItem = null;
 
@@ -54,21 +66,11 @@ package net.wg.gui.battle.views.damageInfoPanel
 
         private var _stateID:int = -1;
 
-        private const ALPHA_DECREASE_STEP:Number = 0.01;
-
-        private const ACTIVE_STATE_ID:int = 0;
-
-        private const INACTIVE_STATE_ID:int = 1;
-
-        private const HIDDING_STATE_ID:int = 2;
-
-        private const ITEM_WIDTH:int = 32;
-
         public function DamageInfoPanel()
         {
             this._scheduler = App.utils.scheduler;
             super();
-            this._items = new <DamageItem>[this.gun,this.turretRotator,this.surveyingDevice,this.engine,this.fuelTank,this.radio,this.ammoBay,this.leftTrack,this.rightTrack,this.driver,this.firstLoader,this.secondLoader,this.firstGunner,this.secondGunner,this.firstRadioman,this.secondRadioman,this.commander];
+            this._items = new <DamageItem>[this.gun,this.turretRotator,this.surveyingDevice,this.engine,this.fuelTank,this.radio,this.ammoBay,this.leftTrack,this.rightTrack,this.wheel,this.driver,this.firstLoader,this.secondLoader,this.firstGunner,this.secondGunner,this.firstRadioman,this.secondRadioman,this.commander];
         }
 
         override protected function configUI() : void
@@ -85,6 +87,7 @@ package net.wg.gui.battle.views.damageInfoPanel
             this.gun.setBitmapData(Linkages.DIP_GUN_DAMAGED,Linkages.DIP_GUN_DESTROYED);
             this.turretRotator.setBitmapData(Linkages.DIP_TURRET_ROTATOR_DAMAGED,Linkages.DIP_TURRET_ROTATOR_DESTROYED);
             this.surveyingDevice.setBitmapData(Linkages.DIP_SURVEYING_DEVICE_DAMAGED,Linkages.DIP_SURVEYING_DEVICE_DESTROYED);
+            this.wheel.setBitmapData(Linkages.DIP_WHEEL_DEVICE_DAMAGED,Linkages.DIP_WHEEL_DEVICE_DESTROYED);
             this.commander.setBitmapData(Linkages.DIP_COMMANDER_DAMAGED,Linkages.DIP_COMMANDER_DAMAGED);
             this.firstGunner.setBitmapData(Linkages.DIP_GUNNER_DAMAGED,Linkages.DIP_GUNNER_DAMAGED);
             this.secondGunner.setBitmapData(Linkages.DIP_GUNNER_DAMAGED,Linkages.DIP_GUNNER_DAMAGED);
@@ -102,11 +105,11 @@ package net.wg.gui.battle.views.damageInfoPanel
             if(isInvalid(InvalidationType.STATE))
             {
                 alpha = 1;
-                if(this._stateID == this.ACTIVE_STATE_ID)
+                if(this._stateID == ACTIVE_STATE_ID)
                 {
                     visible = true;
                 }
-                else if(this._stateID == this.INACTIVE_STATE_ID)
+                else if(this._stateID == INACTIVE_STATE_ID)
                 {
                     visible = false;
                 }
@@ -143,6 +146,8 @@ package net.wg.gui.battle.views.damageInfoPanel
             this.firstGunner = null;
             this.secondGunner.dispose();
             this.secondGunner = null;
+            this.wheel.dispose();
+            this.wheel = null;
             this.driver.dispose();
             this.driver = null;
             this.firstRadioman.dispose();
@@ -158,15 +163,42 @@ package net.wg.gui.battle.views.damageInfoPanel
             super.onDispose();
         }
 
+        override protected function show(param1:Array, param2:int) : void
+        {
+            var _loc3_:Array = null;
+            var _loc4_:DamageItem = null;
+            var _loc5_:* = 0;
+            this.setActiveState();
+            this.hideItems();
+            for each(_loc3_ in param1)
+            {
+                _loc4_ = this._items[_loc3_[DAMAGE_INFO_PANEL_CONSTS.ITEM_ID]];
+                _loc5_ = _loc3_[DAMAGE_INFO_PANEL_CONSTS.STATE_ID];
+                if(_loc4_ != this.wheel || _loc5_ != DAMAGE_INFO_PANEL_CONSTS.DAMAGED)
+                {
+                    _loc4_.updateItem(_loc5_,false);
+                }
+            }
+            if(param2 == DAMAGE_INFO_PANEL_CONSTS.HIDE_FIRE)
+            {
+                this.as_hideFire();
+            }
+            else if(param2 == DAMAGE_INFO_PANEL_CONSTS.SHOW_FIRE)
+            {
+                this.as_showFire(false);
+            }
+            else
+            {
+                this.as_showFire(true);
+            }
+            this.updateDevicesPosition();
+            this.updateTankmenPosition();
+        }
+
         public function as_hide() : void
         {
             this.setHiddingState();
             this._scheduler.scheduleRepeatableTask(this.hidePanel,DAMAGE_INFO_PANEL_CONSTS.HIDE_SPEED,DAMAGE_INFO_PANEL_CONSTS.HIDE_STEPS);
-        }
-
-        public function as_hideFire() : void
-        {
-            this.fire.hideFire();
         }
 
         public function as_hideAmmoBay() : void
@@ -189,6 +221,26 @@ package net.wg.gui.battle.views.damageInfoPanel
             this.hideItem(this.engine,true);
         }
 
+        public function as_hideFire() : void
+        {
+            this.fire.hideFire();
+        }
+
+        public function as_hideFirstGunner() : void
+        {
+            this.hideItem(this.firstGunner,false);
+        }
+
+        public function as_hideFirstLoader() : void
+        {
+            this.hideItem(this.firstLoader,false);
+        }
+
+        public function as_hideFirstRadioman() : void
+        {
+            this.hideItem(this.firstRadioman,false);
+        }
+
         public function as_hideFuelTank() : void
         {
             this.hideItem(this.fuelTank,true);
@@ -199,29 +251,9 @@ package net.wg.gui.battle.views.damageInfoPanel
             this.hideItem(this.gun,true);
         }
 
-        public function as_hideFirstGunner() : void
-        {
-            this.hideItem(this.firstGunner,false);
-        }
-
-        public function as_hideSecondGunner() : void
-        {
-            this.hideItem(this.secondGunner,false);
-        }
-
         public function as_hideLeftTrack() : void
         {
             this.hideItem(this.leftTrack,true);
-        }
-
-        public function as_hideFirstLoader() : void
-        {
-            this.hideItem(this.firstLoader,false);
-        }
-
-        public function as_hideSecondLoader() : void
-        {
-            this.hideItem(this.secondLoader,false);
         }
 
         public function as_hideRadio() : void
@@ -229,19 +261,24 @@ package net.wg.gui.battle.views.damageInfoPanel
             this.hideItem(this.radio,true);
         }
 
-        public function as_hideFirstRadioman() : void
+        public function as_hideRightTrack() : void
         {
-            this.hideItem(this.firstRadioman,false);
+            this.hideItem(this.rightTrack,true);
+        }
+
+        public function as_hideSecondGunner() : void
+        {
+            this.hideItem(this.secondGunner,false);
+        }
+
+        public function as_hideSecondLoader() : void
+        {
+            this.hideItem(this.secondLoader,false);
         }
 
         public function as_hideSecondRadioman() : void
         {
             this.hideItem(this.secondRadioman,false);
-        }
-
-        public function as_hideRightTrack() : void
-        {
-            this.hideItem(this.rightTrack,true);
         }
 
         public function as_hideSurveyingDevice() : void
@@ -254,29 +291,9 @@ package net.wg.gui.battle.views.damageInfoPanel
             this.hideItem(this.turretRotator,true);
         }
 
-        override protected function show(param1:Array, param2:int) : void
+        public function as_hideWheel() : void
         {
-            var _loc3_:Array = null;
-            this.setActiveState();
-            this.hideItems();
-            for each(_loc3_ in param1)
-            {
-                this._items[_loc3_[DAMAGE_INFO_PANEL_CONSTS.ITEM_ID]].updateItem(_loc3_[DAMAGE_INFO_PANEL_CONSTS.STATE_ID],false);
-            }
-            if(param2 == DAMAGE_INFO_PANEL_CONSTS.HIDE_FIRE)
-            {
-                this.as_hideFire();
-            }
-            else if(param2 == DAMAGE_INFO_PANEL_CONSTS.SHOW_FIRE)
-            {
-                this.as_showFire(false);
-            }
-            else
-            {
-                this.as_showFire(true);
-            }
-            this.updateDevicesPosition();
-            this.updateTankmenPosition();
+            this.hideItem(this.wheel,true);
         }
 
         public function as_showFire(param1:Boolean) : void
@@ -313,6 +330,27 @@ package net.wg.gui.battle.views.damageInfoPanel
             this.updateDevicesPosition();
         }
 
+        public function as_updateFirstGunner(param1:int, param2:Boolean) : void
+        {
+            this.setActiveState();
+            this.firstGunner.updateItem(param1,param2);
+            this.updateTankmenPosition();
+        }
+
+        public function as_updateFirstLoader(param1:int, param2:Boolean) : void
+        {
+            this.setActiveState();
+            this.firstLoader.updateItem(param1,param2);
+            this.updateTankmenPosition();
+        }
+
+        public function as_updateFirstRadioman(param1:int, param2:Boolean) : void
+        {
+            this.setActiveState();
+            this.firstRadioman.updateItem(param1,param2);
+            this.updateTankmenPosition();
+        }
+
         public function as_updateFuelTank(param1:int, param2:Boolean) : void
         {
             this.setActiveState();
@@ -327,20 +365,6 @@ package net.wg.gui.battle.views.damageInfoPanel
             this.updateDevicesPosition();
         }
 
-        public function as_updateFirstGunner(param1:int, param2:Boolean) : void
-        {
-            this.setActiveState();
-            this.firstGunner.updateItem(param1,param2);
-            this.updateTankmenPosition();
-        }
-
-        public function as_updateSecondGunner(param1:int, param2:Boolean) : void
-        {
-            this.setActiveState();
-            this.secondGunner.updateItem(param1,param2);
-            this.updateTankmenPosition();
-        }
-
         public function as_updateLeftTrack(param1:int, param2:Boolean) : void
         {
             this.setActiveState();
@@ -348,10 +372,24 @@ package net.wg.gui.battle.views.damageInfoPanel
             this.updateDevicesPosition();
         }
 
-        public function as_updateFirstLoader(param1:int, param2:Boolean) : void
+        public function as_updateRadio(param1:int, param2:Boolean) : void
         {
             this.setActiveState();
-            this.firstLoader.updateItem(param1,param2);
+            this.radio.updateItem(param1,param2);
+            this.updateDevicesPosition();
+        }
+
+        public function as_updateRightTrack(param1:int, param2:Boolean) : void
+        {
+            this.setActiveState();
+            this.rightTrack.updateItem(param1,param2);
+            this.updateDevicesPosition();
+        }
+
+        public function as_updateSecondGunner(param1:int, param2:Boolean) : void
+        {
+            this.setActiveState();
+            this.secondGunner.updateItem(param1,param2);
             this.updateTankmenPosition();
         }
 
@@ -362,32 +400,11 @@ package net.wg.gui.battle.views.damageInfoPanel
             this.updateTankmenPosition();
         }
 
-        public function as_updateRadio(param1:int, param2:Boolean) : void
-        {
-            this.setActiveState();
-            this.radio.updateItem(param1,param2);
-            this.updateDevicesPosition();
-        }
-
-        public function as_updateFirstRadioman(param1:int, param2:Boolean) : void
-        {
-            this.setActiveState();
-            this.firstRadioman.updateItem(param1,param2);
-            this.updateTankmenPosition();
-        }
-
         public function as_updateSecondRadioman(param1:int, param2:Boolean) : void
         {
             this.setActiveState();
             this.secondRadioman.updateItem(param1,param2);
             this.updateTankmenPosition();
-        }
-
-        public function as_updateRightTrack(param1:int, param2:Boolean) : void
-        {
-            this.setActiveState();
-            this.rightTrack.updateItem(param1,param2);
-            this.updateDevicesPosition();
         }
 
         public function as_updateSurveyingDevice(param1:int, param2:Boolean) : void
@@ -404,9 +421,17 @@ package net.wg.gui.battle.views.damageInfoPanel
             this.updateDevicesPosition();
         }
 
+        public function as_updateWheel(param1:int, param2:Boolean) : void
+        {
+            this.setActiveState();
+            var _loc3_:int = param1 == DAMAGE_INFO_PANEL_CONSTS.DAMAGED?DAMAGE_INFO_PANEL_CONSTS.NORMAL:param1;
+            this.wheel.updateItem(_loc3_,param2);
+            this.updateDevicesPosition();
+        }
+
         private function hidePanel() : void
         {
-            alpha = alpha - this.ALPHA_DECREASE_STEP;
+            alpha = alpha - ALPHA_DECREASE_STEP;
             if(alpha <= 0)
             {
                 this.setInActiveState();
@@ -431,47 +456,52 @@ package net.wg.gui.battle.views.damageInfoPanel
             var _loc1_:int = DAMAGE_INFO_PANEL_CONSTS.ITEM_START_X;
             if(this.gun.stateId)
             {
-                _loc1_ = _loc1_ - this.ITEM_WIDTH;
+                _loc1_ = _loc1_ - ITEM_WIDTH;
                 this.gun.updateXPos(_loc1_);
             }
             if(this.turretRotator.stateId)
             {
-                _loc1_ = _loc1_ - this.ITEM_WIDTH;
+                _loc1_ = _loc1_ - ITEM_WIDTH;
                 this.turretRotator.updateXPos(_loc1_);
             }
             if(this.surveyingDevice.stateId)
             {
-                _loc1_ = _loc1_ - this.ITEM_WIDTH;
+                _loc1_ = _loc1_ - ITEM_WIDTH;
                 this.surveyingDevice.updateXPos(_loc1_);
+            }
+            if(this.wheel.stateId)
+            {
+                _loc1_ = _loc1_ - ITEM_WIDTH;
+                this.wheel.updateXPos(_loc1_);
             }
             if(this.engine.stateId)
             {
-                _loc1_ = _loc1_ - this.ITEM_WIDTH;
+                _loc1_ = _loc1_ - ITEM_WIDTH;
                 this.engine.updateXPos(_loc1_);
             }
             if(this.fuelTank.stateId)
             {
-                _loc1_ = _loc1_ - this.ITEM_WIDTH;
+                _loc1_ = _loc1_ - ITEM_WIDTH;
                 this.fuelTank.updateXPos(_loc1_);
             }
             if(this.radio.stateId)
             {
-                _loc1_ = _loc1_ - this.ITEM_WIDTH;
+                _loc1_ = _loc1_ - ITEM_WIDTH;
                 this.radio.updateXPos(_loc1_);
             }
             if(this.ammoBay.stateId)
             {
-                _loc1_ = _loc1_ - this.ITEM_WIDTH;
+                _loc1_ = _loc1_ - ITEM_WIDTH;
                 this.ammoBay.updateXPos(_loc1_);
             }
             if(this.leftTrack.stateId)
             {
-                _loc1_ = _loc1_ - this.ITEM_WIDTH;
+                _loc1_ = _loc1_ - ITEM_WIDTH;
                 this.leftTrack.updateXPos(_loc1_);
             }
             if(this.rightTrack.stateId)
             {
-                _loc1_ = _loc1_ - this.ITEM_WIDTH;
+                _loc1_ = _loc1_ - ITEM_WIDTH;
                 this.rightTrack.updateXPos(_loc1_);
             }
         }
@@ -482,37 +512,37 @@ package net.wg.gui.battle.views.damageInfoPanel
             if(this.commander.stateId)
             {
                 this.commander.updateXPos(_loc1_);
-                _loc1_ = _loc1_ + this.ITEM_WIDTH;
+                _loc1_ = _loc1_ + ITEM_WIDTH;
             }
             if(this.firstGunner.stateId)
             {
                 this.firstGunner.updateXPos(_loc1_);
-                _loc1_ = _loc1_ + this.ITEM_WIDTH;
+                _loc1_ = _loc1_ + ITEM_WIDTH;
             }
             if(this.secondGunner.stateId)
             {
                 this.secondGunner.updateXPos(_loc1_);
-                _loc1_ = _loc1_ + this.ITEM_WIDTH;
+                _loc1_ = _loc1_ + ITEM_WIDTH;
             }
             if(this.driver.stateId)
             {
                 this.driver.updateXPos(_loc1_);
-                _loc1_ = _loc1_ + this.ITEM_WIDTH;
+                _loc1_ = _loc1_ + ITEM_WIDTH;
             }
             if(this.firstRadioman.stateId)
             {
                 this.firstRadioman.updateXPos(_loc1_);
-                _loc1_ = _loc1_ + this.ITEM_WIDTH;
+                _loc1_ = _loc1_ + ITEM_WIDTH;
             }
             if(this.secondRadioman.stateId)
             {
                 this.secondRadioman.updateXPos(_loc1_);
-                _loc1_ = _loc1_ + this.ITEM_WIDTH;
+                _loc1_ = _loc1_ + ITEM_WIDTH;
             }
             if(this.firstLoader.stateId)
             {
                 this.firstLoader.updateXPos(_loc1_);
-                _loc1_ = _loc1_ + this.ITEM_WIDTH;
+                _loc1_ = _loc1_ + ITEM_WIDTH;
             }
             if(this.secondLoader.stateId)
             {
@@ -526,6 +556,7 @@ package net.wg.gui.battle.views.damageInfoPanel
             this.ammoBay.updateItem(DAMAGE_INFO_PANEL_CONSTS.NORMAL,false);
             this.turretRotator.updateItem(DAMAGE_INFO_PANEL_CONSTS.NORMAL,false);
             this.surveyingDevice.updateItem(DAMAGE_INFO_PANEL_CONSTS.NORMAL,false);
+            this.wheel.updateItem(DAMAGE_INFO_PANEL_CONSTS.NORMAL,false);
             this.leftTrack.updateItem(DAMAGE_INFO_PANEL_CONSTS.NORMAL,false);
             this.rightTrack.updateItem(DAMAGE_INFO_PANEL_CONSTS.NORMAL,false);
             this.gun.updateItem(DAMAGE_INFO_PANEL_CONSTS.NORMAL,false);
@@ -543,9 +574,9 @@ package net.wg.gui.battle.views.damageInfoPanel
 
         private function setActiveState() : void
         {
-            if(this._stateID != this.ACTIVE_STATE_ID)
+            if(this._stateID != ACTIVE_STATE_ID)
             {
-                this._stateID = this.ACTIVE_STATE_ID;
+                this._stateID = ACTIVE_STATE_ID;
                 this._scheduler.cancelTask(this.hidePanel);
                 invalidate(InvalidationType.STATE);
             }
@@ -553,9 +584,9 @@ package net.wg.gui.battle.views.damageInfoPanel
 
         private function setInActiveState() : void
         {
-            if(this._stateID != this.INACTIVE_STATE_ID)
+            if(this._stateID != INACTIVE_STATE_ID)
             {
-                this._stateID = this.INACTIVE_STATE_ID;
+                this._stateID = INACTIVE_STATE_ID;
                 this._scheduler.cancelTask(this.hidePanel);
                 this.hideItems();
                 this.fire.hideFireImmediately();
@@ -565,9 +596,9 @@ package net.wg.gui.battle.views.damageInfoPanel
 
         private function setHiddingState() : void
         {
-            if(this._stateID != this.HIDDING_STATE_ID)
+            if(this._stateID != HIDDING_STATE_ID)
             {
-                this._stateID = this.HIDDING_STATE_ID;
+                this._stateID = HIDDING_STATE_ID;
                 this._scheduler.cancelTask(this.hidePanel);
                 this.fire.stopAnim();
                 invalidate(InvalidationType.STATE);

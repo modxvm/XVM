@@ -148,6 +148,10 @@ package net.wg.gui.lobby.barracks
                 return;
             }
             this.btnDismiss.focusTarget = this;
+            if(this._tankmanData)
+            {
+                this._tankmanData.dispose();
+            }
             this._tankmanData = BarracksTankmanVO(param1);
             this.empty = this._tankmanData.empty;
             this.buy = this._tankmanData.buy;
@@ -271,6 +275,10 @@ package net.wg.gui.lobby.barracks
             {
                 this.skills.dispose();
                 this.skills = null;
+            }
+            if(this._tankmanData)
+            {
+                this._tankmanData.dispose();
             }
             this._tankmanData = null;
             this._toolTipMgr = null;

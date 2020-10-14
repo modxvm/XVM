@@ -707,7 +707,13 @@ package
 
         public static const GAME_SHOWMARKSONGUN:String = "#settings:game/showMarksOnGun";
 
+        public static const GAME_SHOWDOGTAG:String = "#settings:game/showDogTag";
+
         public static const GAME_ANONYMIZER:String = "#settings:game/anonymizer";
+
+        public static const GAME_SHOWVICTIMSDOGTAG:String = "#settings:game/showVictimsDogTag";
+
+        public static const GAME_SHOWDOGTAGTOKILLER:String = "#settings:game/showDogTagToKiller";
 
         public static const GAME_FIELDSET_HEADERCHAT:String = "#settings:game/fieldset/headerChat";
 
@@ -751,13 +757,13 @@ package
 
         public static const GAME_PLAYERSPANELSTATE_LARGE:String = "#settings:game/playersPanelState/large";
 
-        public static const BATTLECOMM_ENABLEBATTLECOMM:String = "#settings:battlecomm/enableBattleComm";
-
         public static const BATTLECOMM_SHOWCOMMINPLAYERLIST:String = "#settings:battlecomm/showCommInPlayerlist";
 
         public static const BATTLECOMM_SHOWSTICKYMARKERS:String = "#settings:battlecomm/showStickyMarkers";
 
         public static const BATTLECOMM_SHOWCALLOUTMESSAGES:String = "#settings:battlecomm/showCalloutMessages";
+
+        public static const BATTLECOMM_SHOWLOCATIONMARKERS:String = "#settings:battlecomm/showLocationMarkers";
 
         public static const BATTLECOMM_SHOWMARKERS:String = "#settings:battlecomm/showMarkers";
 
@@ -1378,8 +1384,6 @@ package
         public static const COLORSETTINGS_VIEW_AFTER:String = "#settings:colorSettings/view/after";
 
         public static const UNEQUIP_BUTTON:String = "#settings:unequip_button";
-
-        public static const EVENTSETTINGDISABLED:String = "#settings:eventSettingDisabled";
 
         public static const AIM_ENUM:Array = [AIM_MIXING,AIM_MIXING_TYPE0,AIM_MIXING_TYPE1,AIM_MIXING_TYPE2,AIM_MIXING_TYPE3,AIM_MIXING_TYPE4,AIM_MIXING_TYPE5,AIM_MIXING_TYPE6,AIM_GUNTAG,AIM_GUNTAG_TYPE0,AIM_GUNTAG_TYPE1,AIM_GUNTAG_TYPE2,AIM_GUNTAG_TYPE3,AIM_GUNTAG_TYPE4,AIM_GUNTAG_TYPE5,AIM_GUNTAG_TYPE6,AIM_GUNTAG_TYPE7,AIM_GUNTAG_TYPE8,AIM_GUNTAG_TYPE9,AIM_GUNTAG_TYPE10,AIM_GUNTAG_TYPE11,AIM_GUNTAG_TYPE12,AIM_GUNTAG_TYPE13,AIM_GUNTAG_TYPE14,AIM_CENTRALTAG,AIM_CENTRALTAG_TYPE0,AIM_CENTRALTAG_TYPE1,AIM_CENTRALTAG_TYPE2,AIM_CENTRALTAG_TYPE3,AIM_CENTRALTAG_TYPE4,AIM_CENTRALTAG_TYPE5,AIM_CENTRALTAG_TYPE6,AIM_CENTRALTAG_TYPE7,AIM_CENTRALTAG_TYPE8,AIM_CENTRALTAG_TYPE9,AIM_CENTRALTAG_TYPE10,AIM_CENTRALTAG_TYPE11,AIM_CENTRALTAG_TYPE12,AIM_CENTRALTAG_TYPE13,AIM_NET,AIM_NET_TYPE0,AIM_NET_TYPE1,AIM_NET_TYPE2,AIM_NET_TYPE3,AIM_RELOADER,AIM_RELOADERTIMER,AIM_CONDITION,AIM_CASSETTE,AIM_ZOOMINDICATOR,AIM_X2];
 

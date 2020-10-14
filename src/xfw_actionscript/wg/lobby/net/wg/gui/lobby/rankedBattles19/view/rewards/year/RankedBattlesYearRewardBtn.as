@@ -36,7 +36,10 @@ package net.wg.gui.lobby.rankedBattles19.view.rewards.year
             this._tooltipMgr = App.toolTipMgr;
             bgMc.mouseEnabled = bgMc.mouseChildren = false;
             this.glow.mouseEnabled = this.glow.mouseChildren = false;
-            focusIndicator.mouseEnabled = focusIndicator.mouseChildren = false;
+            if(focusIndicator)
+            {
+                focusIndicator.mouseEnabled = focusIndicator.mouseChildren = false;
+            }
             this.updateActivity();
         }
 

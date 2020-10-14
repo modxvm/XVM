@@ -119,14 +119,14 @@ package net.wg.gui.bootcamp.messageWindow.views
             {
                 this.lockIcon.addFrameScript(this.lockIcon.totalFrames - 1,this.onUnlockComplete);
                 this.lockIcon.gotoAndPlay(ACCEPT_STATE);
-                this.btnExecute.enabled = false;
-                this.btnCancel.enabled = false;
                 this._isUnlockComplete = true;
             }
             else
             {
                 setExecuteState(true);
             }
+            this.btnExecute.enabled = false;
+            this.btnCancel.enabled = false;
             this.btnExecute.removeEventListener(ButtonEvent.CLICK,this.onBtnExecuteClickHandler);
         }
 

@@ -8,6 +8,8 @@ package net.wg.gui.lobby.vehicleCompare
     import net.wg.gui.lobby.vehicleCompare.configurator.VehConfBottomPanel;
     import flash.utils.Dictionary;
     import net.wg.gui.lobby.vehicleCompare.data.VehicleCompareConfiguratorInitDataVO;
+    import net.wg.gui.lobby.techtree.helpers.TweenWrapper;
+    import scaleform.clik.motion.Tween;
     import flash.text.TextFieldAutoSize;
     import scaleform.clik.events.ButtonEvent;
     import net.wg.gui.lobby.vehicleCompare.events.VehConfEvent;
@@ -21,7 +23,9 @@ package net.wg.gui.lobby.vehicleCompare
 
         private static const INV_INIT_DATA:String = "InvInitData";
 
-        private static const CLOSE_BTN_BORDER_OFFSET:int = 20;
+        private static const CLOSE_BTN_BORDER_OFFSET:int = 27;
+
+        private static const TWEEN_DURATION:int = 150;
 
         public var titleTf:TextField;
 
@@ -33,6 +37,12 @@ package net.wg.gui.lobby.vehicleCompare
 
         private var _initData:VehicleCompareConfiguratorInitDataVO;
 
+        private var _newVisibility:Boolean = false;
+
+        private var _tweenWrapper:TweenWrapper = null;
+
+        private var _tween:Tween = null;
+
         public function VehicleCompareConfiguratorBaseView()
         {
             this.offsets = new Dictionary();
@@ -43,6 +53,8 @@ package net.wg.gui.lobby.vehicleCompare
         {
             super.initialize();
             this.offsets[this.titleTf] = new Offsets(41,115);
+            alpha = 0;
+            this._tweenWrapper = new TweenWrapper(this);
         }
 
         override protected function configUI() : void
@@ -58,6 +70,9 @@ package net.wg.gui.lobby.vehicleCompare
 
         override protected function onDispose() : void
         {
+            this.clearTween();
+            this._tweenWrapper.dispose();
+            this._tweenWrapper = null;
             App.utils.data.cleanupDynamicObject(this.offsets);
             this.offsets = null;
             this.bottomPanel.removeEventListener(VehConfEvent.CLOSE_CLICK,this.onBottomPanelCloseClickHandler);
@@ -139,6 +154,40 @@ package net.wg.gui.lobby.vehicleCompare
             }
             this.closeBtn.x = width - this.closeBtn.width - CLOSE_BTN_BORDER_OFFSET;
             this.titleTf.x = width - this.titleTf.width >> 1;
+        }
+
+        private function clearTween() : void
+        {
+            if(this._tween)
+            {
+                this._tween.paused = true;
+                this._tween.dispose();
+                this._tween = null;
+            }
+        }
+
+        private function onHideAnimationComplete(param1:Tween) : void
+        {
+            super.visible = this._newVisibility;
+        }
+
+        override public function set visible(param1:Boolean) : void
+        {
+            if(this._newVisibility == param1)
+            {
+                return;
+            }
+            this._newVisibility = param1;
+            this.clearTween();
+            if(this._newVisibility)
+            {
+                super.visible = this._newVisibility;
+                this._tween = new Tween(TWEEN_DURATION,this._tweenWrapper,{"alpha":1});
+            }
+            else
+            {
+                this._tween = new Tween(TWEEN_DURATION,this._tweenWrapper,{"alpha":0},{"onComplete":this.onHideAnimationComplete});
+            }
         }
 
         protected function get itemsToLayoutList() : Vector.<DisplayObject>

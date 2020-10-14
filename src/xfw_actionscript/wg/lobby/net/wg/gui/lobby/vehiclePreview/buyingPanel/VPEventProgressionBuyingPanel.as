@@ -15,7 +15,6 @@ package net.wg.gui.lobby.vehiclePreview.buyingPanel
     import net.wg.gui.lobby.vehiclePreview.data.VPSetItemsVO;
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.lobby.vehiclePreview.data.VPSetItemVO;
-    import org.idmedia.as3commons.util.StringUtils;
 
     public class VPEventProgressionBuyingPanel extends VehiclePreviewEventProgressionBuyingPanelMeta implements IVehiclePreviewEventProgressionBuyingPanelMeta, IVPBottomPanel
     {
@@ -30,11 +29,11 @@ package net.wg.gui.lobby.vehiclePreview.buyingPanel
 
         private static const MIN_BTNS_WIDTH:int = 160;
 
-        public var moneyLabel:TextField = null;
+        public var moneyLabel:TextField;
 
-        public var priceLabel:TextField = null;
+        public var priceLabel:TextField;
 
-        public var titleLabel:TextField = null;
+        public var titleLabel:TextField;
 
         public var buyBtnOrange:IconTextBigButton = null;
 
@@ -62,10 +61,10 @@ package net.wg.gui.lobby.vehiclePreview.buyingPanel
             this.buyBtnOrange.addEventListener(ButtonEvent.CLICK,this.onBuyButtonClickHandler);
             this.setItemsView.addEventListener(Event.RESIZE,this.onContentResizeHandler);
             this.setItemsView.addEventListener(VehiclePreviewEvent.SHOW_TOOLTIP,this.onSetItemsViewShowTooltipHandler);
-            this.moneyLabel.addEventListener(MouseEvent.ROLL_OUT,this.onLabelRollOutHandler);
-            this.moneyLabel.addEventListener(MouseEvent.ROLL_OVER,this.onLabelRollOverHandler);
-            this.priceLabel.addEventListener(MouseEvent.ROLL_OUT,this.onLabelRollOutHandler);
-            this.priceLabel.addEventListener(MouseEvent.ROLL_OVER,this.onLabelRollOverHandler);
+            this.moneyLabel.addEventListener(MouseEvent.ROLL_OUT,this.onPriceLabelRollOutHandler);
+            this.moneyLabel.addEventListener(MouseEvent.ROLL_OVER,this.onPriceLabelRollOverHandler);
+            this.priceLabel.addEventListener(MouseEvent.ROLL_OUT,this.onPriceLabelRollOutHandler);
+            this.priceLabel.addEventListener(MouseEvent.ROLL_OVER,this.onPriceLabelRollOverHandler);
         }
 
         override protected function draw() : void
@@ -100,10 +99,10 @@ package net.wg.gui.lobby.vehiclePreview.buyingPanel
 
         override protected function onDispose() : void
         {
-            this.priceLabel.removeEventListener(MouseEvent.ROLL_OUT,this.onLabelRollOutHandler);
-            this.priceLabel.removeEventListener(MouseEvent.ROLL_OVER,this.onLabelRollOverHandler);
-            this.moneyLabel.removeEventListener(MouseEvent.ROLL_OUT,this.onLabelRollOutHandler);
-            this.moneyLabel.removeEventListener(MouseEvent.ROLL_OVER,this.onLabelRollOverHandler);
+            this.priceLabel.removeEventListener(MouseEvent.ROLL_OUT,this.onPriceLabelRollOutHandler);
+            this.priceLabel.removeEventListener(MouseEvent.ROLL_OVER,this.onPriceLabelRollOverHandler);
+            this.moneyLabel.removeEventListener(MouseEvent.ROLL_OUT,this.onPriceLabelRollOutHandler);
+            this.moneyLabel.removeEventListener(MouseEvent.ROLL_OVER,this.onPriceLabelRollOverHandler);
             this.setItemsView.removeEventListener(VehiclePreviewEvent.SHOW_TOOLTIP,this.onSetItemsViewShowTooltipHandler);
             this.setItemsView.removeEventListener(Event.RESIZE,this.onContentResizeHandler);
             this.buyBtnOrange.removeEventListener(ButtonEvent.CLICK,this.onBuyButtonClickHandler);
@@ -156,17 +155,24 @@ package net.wg.gui.lobby.vehiclePreview.buyingPanel
             invalidateData();
         }
 
-        private function onLabelRollOutHandler(param1:MouseEvent) : void
+        private function onPriceLabelRollOutHandler(param1:MouseEvent) : void
         {
-            App.toolTipMgr.hide();
+            this.hideTooltip();
         }
 
-        private function onLabelRollOverHandler(param1:MouseEvent) : void
+        private function onPriceLabelRollOverHandler(param1:MouseEvent) : void
         {
-            if(StringUtils.isNotEmpty(this._data.priceTooltip))
-            {
-                App.toolTipMgr.showComplex(this._data.priceTooltip);
-            }
+            this.showComplexTooltip(TOOLTIPS.VEHICLEPREVIEW_BUYINGPANEL_EVENTPROGRESSION_PRICE);
+        }
+
+        private function showComplexTooltip(param1:String) : void
+        {
+            App.toolTipMgr.showComplex(param1);
+        }
+
+        private function hideTooltip() : void
+        {
+            App.toolTipMgr.hide();
         }
     }
 }

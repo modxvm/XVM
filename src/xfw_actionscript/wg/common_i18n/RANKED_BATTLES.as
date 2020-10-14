@@ -37,6 +37,8 @@ package
 
         public static const RANKEDBATTLEMAINVIEW_LEAGUESVIEW_DESCR:String = "#ranked_battles:rankedBattleMainView/leaguesView/descr";
 
+        public static const RANKEDBATTLEMAINVIEW_LEAGUESVIEW_YEARLEADERBOARDDISABLED:String = "#ranked_battles:rankedBattleMainView/leaguesView/yearLeaderboardDisabled";
+
         public static const RANKEDBATTLEMAINVIEW_LEAGUESVIEW_UNAVAILABLEDESCR:String = "#ranked_battles:rankedBattleMainView/leaguesView/unavailableDescr";
 
         public static const RANKEDBATTLEMAINVIEW_LEAGUESVIEW_TOPDESCR:String = "#ranked_battles:rankedBattleMainView/leaguesView/topDescr";
@@ -74,6 +76,8 @@ package
         public static const RANKEDBATTLEMAINVIEW_SEASONGAP_NOTINDIVISIONS_DESCR:String = "#ranked_battles:rankedBattleMainView/seasonGap/notInDivisions/descr";
 
         public static const RANKEDBATTLEMAINVIEW_SEASONGAP_BANNEDLEAGUE_DESCR:String = "#ranked_battles:rankedBattleMainView/seasonGap/bannedLeague/descr";
+
+        public static const RANKEDBATTLEMAINVIEW_SEASONGAP_BANNEDLEAGUE_WITHOUTPOINTS_DESCR:String = "#ranked_battles:rankedBattleMainView/seasonGap/bannedLeague/withoutPoints/descr";
 
         public static const RANKEDBATTLEMAINVIEW_SEASONGAP_BANNEDDIVISION_DESCR:String = "#ranked_battles:rankedBattleMainView/seasonGap/bannedDivision/descr";
 
@@ -327,7 +331,11 @@ package
 
         public static const RANKEDBATTLESUNREACHABLEVIEW_SUBTITLETEXT:String = "#ranked_battles:rankedBattlesUnreachableView/subtitleText";
 
-        public static const RANKEDBATTLESUNREACHABLEVIEW_UNREACHABLETEXT:String = "#ranked_battles:rankedBattlesUnreachableView/unreachableText";
+        public static const RANKEDBATTLESUNREACHABLEVIEW_VEHICLEUNAVAILABLE:String = "#ranked_battles:rankedBattlesUnreachableView/vehicleUnavailable";
+
+        public static const RANKEDBATTLESUNREACHABLEVIEW_VEHICLEAVAILABLEFORBUY:String = "#ranked_battles:rankedBattlesUnreachableView/vehicleAvailableForBuy";
+
+        public static const RANKEDBATTLESUNREACHABLEVIEW_VEHICLEAVAILABLEFORRESTORE:String = "#ranked_battles:rankedBattlesUnreachableView/vehicleAvailableForRestore";
 
         public static const RANKEDBATTLESUNREACHABLEVIEW_CLOSEBTNLABEL:String = "#ranked_battles:rankedBattlesUnreachableView/closeBtnLabel";
 
@@ -743,23 +751,25 @@ package
 
         public static const DIVISION_TOOLTIP_STATUS_COMPLETEDQUAL:String = "#ranked_battles:division/tooltip/status/completedQual";
 
-        public static const INTOPAGE_DESCRIPTION:String = "#ranked_battles:intoPage/description";
+        public static const INTROPAGE_DESCRIPTION:String = "#ranked_battles:introPage/description";
 
-        public static const INTOPAGE_BTNS_ACCEPT:String = "#ranked_battles:intoPage/btns/accept";
+        public static const INTROPAGE_BTNS_ACCEPT:String = "#ranked_battles:introPage/btns/accept";
 
-        public static const INTOPAGE_BTNS_DETAILED:String = "#ranked_battles:intoPage/btns/detailed";
+        public static const INTROPAGE_BTNS_DETAILED:String = "#ranked_battles:introPage/btns/detailed";
 
-        public static const INTOPAGE_BLOCKS_BLOCK1_TITLE:String = "#ranked_battles:intoPage/blocks/block1/title";
+        public static const INTROPAGE_BLOCKS_BLOCK1_TITLE:String = "#ranked_battles:introPage/blocks/block1/title";
 
-        public static const INTOPAGE_BLOCKS_BLOCK1_DESCRIPTION:String = "#ranked_battles:intoPage/blocks/block1/description";
+        public static const INTROPAGE_BLOCKS_BLOCK1_DESCRIPTION:String = "#ranked_battles:introPage/blocks/block1/description";
 
-        public static const INTOPAGE_BLOCKS_BLOCK2_TITLE:String = "#ranked_battles:intoPage/blocks/block2/title";
+        public static const INTROPAGE_BLOCKS_BLOCK2_TITLE:String = "#ranked_battles:introPage/blocks/block2/title";
 
-        public static const INTOPAGE_BLOCKS_BLOCK2_DESCRIPTION:String = "#ranked_battles:intoPage/blocks/block2/description";
+        public static const INTROPAGE_BLOCKS_BLOCK2_DESCRIPTION:String = "#ranked_battles:introPage/blocks/block2/description";
 
-        public static const INTOPAGE_BLOCKS_BLOCK3_TITLE:String = "#ranked_battles:intoPage/blocks/block3/title";
+        public static const INTROPAGE_BLOCKS_BLOCK3_TITLE:String = "#ranked_battles:introPage/blocks/block3/title";
 
-        public static const INTOPAGE_BLOCKS_BLOCK3_DESCRIPTION:String = "#ranked_battles:intoPage/blocks/block3/description";
+        public static const INTROPAGE_BLOCKS_BLOCK3_DESCRIPTION:String = "#ranked_battles:introPage/blocks/block3/description";
+
+        public static const INTROPAGE_BLOCKS_YEARREWARDDISABLED:String = "#ranked_battles:introPage/blocks/yearRewardDisabled";
 
         public static const YEARREWARDS_BOX_SMALL_TITLE:String = "#ranked_battles:yearRewards/box/small/title";
 
@@ -926,6 +936,24 @@ package
         public static const QUESTSTOOLTIP_COOLDOWN_LESSMIN:String = "#ranked_battles:questsTooltip/cooldown/lessMin";
 
         public static const QUESTSTOOLTIP_BOTTOM:String = "#ranked_battles:questsTooltip/bottom";
+
+        public static const ENTRYPOINT_TITLE:String = "#ranked_battles:entryPoint/title";
+
+        public static const ENTRYPOINT_BEFORESEASON:String = "#ranked_battles:entryPoint/beforeSeason";
+
+        public static const ENTRYPOINT_ACTIVESEASON:String = "#ranked_battles:entryPoint/activeSeason";
+
+        public static const ENTRYPOINT_WAITNEXTSEASONDATE_WIDE:String = "#ranked_battles:entryPoint/waitNextSeasonDate/wide";
+
+        public static const ENTRYPOINT_WAITNEXTSEASONDATE_THIN_SEASONEND:String = "#ranked_battles:entryPoint/waitNextSeasonDate/thin/seasonEnd";
+
+        public static const ENTRYPOINT_WAITNEXTSEASONDATE_THIN_NEWSEASONSOON:String = "#ranked_battles:entryPoint/waitNextSeasonDate/thin/newSeasonSoon";
+
+        public static const ENTRYPOINT_WAITNEXTSEASONWITHOUTDATE:String = "#ranked_battles:entryPoint/waitNextSeasonWithoutDate";
+
+        public static const ENTRYPOINT_FROZEN_WIDE:String = "#ranked_battles:entryPoint/frozen/wide";
+
+        public static const ENTRYPOINT_FROZEN_THIN:String = "#ranked_battles:entryPoint/frozen/thin";
 
         public function RANKED_BATTLES()
         {

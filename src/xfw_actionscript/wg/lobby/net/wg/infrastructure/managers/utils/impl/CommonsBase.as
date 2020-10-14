@@ -2,6 +2,7 @@ package net.wg.infrastructure.managers.utils.impl
 {
     import net.wg.utils.ICommons;
     import flash.text.TextFormat;
+    import flash.ui.Keyboard;
     import net.wg.utils.TextFieldUtils;
     import flash.text.TextField;
     import net.wg.data.constants.Values;
@@ -81,6 +82,11 @@ package net.wg.infrastructure.managers.utils.impl
         {
             var _loc2_:* = 7;
             return param1 > _loc2_;
+        }
+
+        private static function isNumberKey(param1:Number) : Boolean
+        {
+            return param1 >= Keyboard.NUMBER_0 && param1 <= Keyboard.NUMBER_9;
         }
 
         public function addBlankLines(param1:String, param2:TextField, param3:Vector.<TextField>) : void
@@ -186,7 +192,7 @@ package net.wg.infrastructure.managers.utils.impl
         {
             var _loc2_:Number = this.getVirtualKey(param1);
             var _loc3_:KeyProps = new KeyProps();
-            var _loc4_:Number = this.getCharFromKey(_loc2_);
+            var _loc4_:Number = isNumberKey(_loc2_)?_loc2_:this.getCharFromKey(_loc2_);
             var _loc5_:String = String.fromCharCode(_loc4_?_loc4_:_loc2_);
             var _loc6_:String = String.fromCharCode(param1);
             if(KeysMap.mapping.hasOwnProperty(_loc2_.toString()))

@@ -7,6 +7,8 @@ package net.wg.gui.battle.views.consumablesPanel.VO
 
         public var idx:int;
 
+        public var tag:String;
+
         public var shellIconPath:String;
 
         public var noShellIconPath:String;

@@ -2,6 +2,7 @@ package net.wg.gui.components.crosshairPanel
 {
     import flash.display.MovieClip;
     import flash.text.TextField;
+    import net.wg.gui.components.crosshairPanel.components.autoloader.BoostIndicatorStateParamsVO;
 
     public class CrosshairPostmortem extends MovieClip implements ICrosshair
     {
@@ -121,6 +122,19 @@ package net.wg.gui.components.crosshairPanel
 
         public function set isUseFrameAnimation(param1:Boolean) : void
         {
+        }
+
+        public function autoloaderBoostUpdate(param1:BoostIndicatorStateParamsVO, param2:Number, param3:Boolean = false) : void
+        {
+        }
+
+        public function autoloaderBoostUpdateAsPercent(param1:Number, param2:Number) : void
+        {
+        }
+
+        public function get autoloaderBoostParams() : BoostIndicatorStateParamsVO
+        {
+            return null;
         }
     }
 }

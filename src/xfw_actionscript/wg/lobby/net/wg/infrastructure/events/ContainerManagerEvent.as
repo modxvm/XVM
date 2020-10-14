@@ -12,18 +12,18 @@ package net.wg.infrastructure.events
 
         private var _view:IView;
 
-        private var _containerName:String;
+        private var _layer:int;
 
-        public function ContainerManagerEvent(param1:String, param2:IView, param3:String, param4:Boolean = false, param5:Boolean = false)
+        public function ContainerManagerEvent(param1:String, param2:IView, param3:int, param4:Boolean = false, param5:Boolean = false)
         {
             super(param1,param4,param5);
             this._view = param2;
-            this._containerName = param3;
+            this._layer = param3;
         }
 
         override public function clone() : Event
         {
-            return new ContainerManagerEvent(type,this._view,this._containerName,bubbles,cancelable);
+            return new ContainerManagerEvent(type,this._view,this._layer,bubbles,cancelable);
         }
 
         override public function toString() : String
@@ -36,9 +36,9 @@ package net.wg.infrastructure.events
             return this._view;
         }
 
-        public function get containerName() : String
+        public function get layer() : int
         {
-            return this._containerName;
+            return this._layer;
         }
     }
 }

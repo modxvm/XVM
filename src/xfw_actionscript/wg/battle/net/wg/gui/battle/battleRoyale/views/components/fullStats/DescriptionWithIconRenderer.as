@@ -7,7 +7,6 @@ package net.wg.gui.battle.battleRoyale.views.components.fullStats
     import flash.text.TextField;
     import net.wg.gui.battle.battleRoyale.data.DescriptionBlockWithIconVO;
     import net.wg.data.constants.Errors;
-    import scaleform.gfx.TextFieldEx;
 
     public class DescriptionWithIconRenderer extends Sprite implements IUpdatable, IDisposable
     {
@@ -24,7 +23,6 @@ package net.wg.gui.battle.battleRoyale.views.components.fullStats
         {
             super();
             this.icon.isCentralize = true;
-            TextFieldEx.setVerticalAlign(this.descriptionTF,TextFieldEx.VALIGN_CENTER);
         }
 
         protected function onDispose() : void

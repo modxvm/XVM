@@ -2,7 +2,6 @@ package net.wg.mock
 {
     import flash.events.EventDispatcher;
     import net.wg.app.IApplication;
-    import lesta.unbound2.proxy.UbPlayerProxy;
     import net.wg.infrastructure.managers.IGlobalVarsManager;
     import net.wg.infrastructure.managers.ISoundManager;
     import net.wg.infrastructure.managers.ITooltipMgr;
@@ -21,7 +20,6 @@ package net.wg.mock
     import net.wg.utils.IUtils;
     import net.wg.utils.ITweenManager;
     import net.wg.infrastructure.managers.IImageManager;
-    import net.wg.infrastructure.interfaces.IManagedContainer;
     import net.wg.infrastructure.base.meta.ICacheManagerMeta;
     import net.wg.infrastructure.managers.IEventLogManager;
     import net.wg.infrastructure.base.meta.IGameInputManagerMeta;
@@ -29,6 +27,7 @@ package net.wg.mock
     import net.wg.infrastructure.managers.IGraphicsOptimizationManager;
     import net.wg.infrastructure.base.meta.ILoaderManagerMeta;
     import net.wg.infrastructure.managers.ITutorialManager;
+    import lesta.unbound2.proxy.UbPlayerProxy;
     import net.wg.infrastructure.base.meta.IUtilsManagerMeta;
     import flash.display.Stage;
     import flash.display.DisplayObjectContainer;
@@ -37,8 +36,6 @@ package net.wg.mock
 
     public class MockApplication extends EventDispatcher implements IApplication
     {
-
-        public var ubPlayerProxy:UbPlayerProxy;
 
         private var _globalVarsMgr:IGlobalVarsManager;
 
@@ -99,7 +96,7 @@ package net.wg.mock
             this._imageMgr = new MockImageManager();
         }
 
-        public function as_blurBackgroundViews(param1:String, param2:Array, param3:Number) : void
+        public function as_blurBackgroundViews(param1:int, param2:Number) : void
         {
         }
 
@@ -130,11 +127,6 @@ package net.wg.mock
 
         public function as_updateStage(param1:Number, param2:Number, param3:Number) : void
         {
-        }
-
-        public function getManagedContainer(param1:String) : IManagedContainer
-        {
-            return null;
         }
 
         public function handleGlobalKeyEventS(param1:String) : void
@@ -318,7 +310,7 @@ package net.wg.mock
 
         public function get eventLogManager() : IEventLogManager
         {
-            return this.eventLogManager;
+            return null;
         }
 
         public function get loaderMgr() : ILoaderManager
@@ -339,16 +331,6 @@ package net.wg.mock
         public function get tweenMgr() : ITweenManager
         {
             return this._tweenMgr;
-        }
-
-        public function get browserBgClass() : Class
-        {
-            return null;
-        }
-
-        public function get altBrowserBgClass() : Class
-        {
-            return null;
         }
 
         public function get tutorialMgr() : ITutorialManager

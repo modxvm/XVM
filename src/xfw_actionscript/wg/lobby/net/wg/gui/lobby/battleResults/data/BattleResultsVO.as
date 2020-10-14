@@ -37,6 +37,8 @@ package net.wg.gui.lobby.battleResults.data
 
         public var progressiveReward:ProgressiveRewardVO = null;
 
+        public var dog_tags:Array = null;
+
         public var cyberSport:Object = null;
 
         public var quests:Array = null;

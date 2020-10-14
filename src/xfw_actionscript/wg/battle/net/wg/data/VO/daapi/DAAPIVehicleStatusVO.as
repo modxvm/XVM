@@ -1,6 +1,7 @@
 package net.wg.data.VO.daapi
 {
     import net.wg.data.daapi.base.DAAPIDataClass;
+    import net.wg.gui.components.dogtag.VO.DogTagVO;
 
     public class DAAPIVehicleStatusVO extends DAAPIDataClass
     {
@@ -21,6 +22,8 @@ package net.wg.data.VO.daapi
 
         public var rightCorrelationIDs:Vector.<Number> = null;
 
+        public var dogTag:DogTagVO = null;
+
         private const LEFT_ITEMS_IDS_FIELD_NAME:String = "leftItemsIDs";
 
         private const RIGHT_ITEMS_IDS_FIELD_NAME:String = "rightItemsIDs";
@@ -30,6 +33,8 @@ package net.wg.data.VO.daapi
         private const RIGHT_CORRELATION_IDS_FIELD_NAME:String = "rightCorrelationIDs";
 
         private const TOTAL_STATS_FIELD_NAME:String = "totalStats";
+
+        private const DOG_TAG:String = "dogTag";
 
         public function DAAPIVehicleStatusVO(param1:Object)
         {
@@ -67,6 +72,9 @@ package net.wg.data.VO.daapi
                 case this.TOTAL_STATS_FIELD_NAME:
                     this.totalStats = new DAAPITotalStatsVO(param2);
                     return false;
+                case this.DOG_TAG:
+                    this.dogTag = new DogTagVO(param2);
+                    return false;
                 default:
                     return super.onDataWrite(param1,param2);
             }
@@ -94,6 +102,11 @@ package net.wg.data.VO.daapi
             {
                 this.totalStats.dispose();
                 this.totalStats = null;
+            }
+            if(this.dogTag)
+            {
+                this.dogTag.dispose();
+                this.dogTag = null;
             }
             super.onDispose();
         }

@@ -2,6 +2,7 @@ package net.wg.gui.components.containers
 {
     import net.wg.infrastructure.base.UIComponentEx;
     import net.wg.infrastructure.interfaces.IView;
+    import net.wg.data.constants.generated.LAYER_NAMES;
     import net.wg.data.daapi.LoadViewVO;
     import flash.events.FocusEvent;
     import flash.events.MouseEvent;
@@ -16,6 +17,8 @@ package net.wg.gui.components.containers
     public class BaseContainerWrapper extends UIComponentEx implements IView
     {
 
+        private static const LAYER_INDEX_VIEW:int = LAYER_NAMES.LAYER_ORDER.indexOf(LAYER_NAMES.VIEWS);
+
         private var _loadViewVO:LoadViewVO = null;
 
         private var _isFocused:Boolean = true;
@@ -23,7 +26,7 @@ package net.wg.gui.components.containers
         public function BaseContainerWrapper()
         {
             super();
-            this._loadViewVO = new LoadViewVO({"config":{"type":"view"}});
+            this._loadViewVO = new LoadViewVO({"config":{"layer":LAYER_INDEX_VIEW}});
         }
 
         override protected function configUI() : void

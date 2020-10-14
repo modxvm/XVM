@@ -103,8 +103,6 @@ package
 
         public static const WAITING:Class = WAITING;
 
-        public static const WT_EVENT:Class = WT_EVENT;
-
         public function CommonI18NClassManagerMeta()
         {
             super();

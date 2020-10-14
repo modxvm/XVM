@@ -9,8 +9,6 @@ package net.wg.data.constants.generated
 
         public static const RED:String = "red";
 
-        public static const BLUE:String = "blue";
-
         public function BATTLE_NOTIFICATIONS_TIMER_COLORS()
         {
             super();

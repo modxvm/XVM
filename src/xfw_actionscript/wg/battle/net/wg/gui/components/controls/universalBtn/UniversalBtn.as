@@ -173,7 +173,7 @@ package net.wg.gui.components.controls.universalBtn
             {
                 if(this._alertIndicatorVisible)
                 {
-                    if(!this._alertIndicator)
+                    if(!this._alertIndicator && focusIndicator)
                     {
                         this._alertIndicator = App.utils.classFactory.getComponent(Linkages.BTN_ALERT_INDICATOR,MovieClip,{"name":ALERT_INDICATOR_NAME});
                         addChildAt(this._alertIndicator,getChildIndex(focusIndicator));

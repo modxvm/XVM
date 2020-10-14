@@ -6,13 +6,13 @@ package net.wg.gui.bootcamp.messageWindow
     import net.wg.gui.bootcamp.messageWindow.views.MessageViewBase;
     import net.wg.gui.bootcamp.messageWindow.data.MessageContentVO;
     import flash.display.DisplayObject;
-    import flash.display.DisplayObjectContainer;
-    import net.wg.gui.components.windows.Window;
-    import flash.filters.BlurFilter;
-    import flash.filters.BitmapFilterQuality;
     import net.wg.infrastructure.base.DefaultWindowGeometry;
     import scaleform.clik.utils.Padding;
     import scaleform.clik.constants.InvalidationType;
+    import net.wg.infrastructure.interfaces.ISimpleManagedContainer;
+    import net.wg.gui.components.windows.Window;
+    import flash.filters.BlurFilter;
+    import flash.filters.BitmapFilterQuality;
     import net.wg.gui.bootcamp.messageWindow.interfaces.IMessageView;
     import net.wg.gui.bootcamp.messageWindow.events.MessageViewEvent;
     import flash.events.Event;
@@ -47,32 +47,6 @@ package net.wg.gui.bootcamp.messageWindow
         {
             super.updateStage(param1,param2);
             invalidate(STAGE_RESIZED);
-        }
-
-        public function as_blurOtherWindows(param1:String) : void
-        {
-            var _loc4_:uint = 0;
-            var _loc5_:uint = 0;
-            var _loc6_:DisplayObject = null;
-            this.clearBlurWindows();
-            this._blurWindows = new Vector.<DisplayObject>(0);
-            var _loc2_:Object = Object(App.containerMgr).containersMap;
-            var _loc3_:DisplayObjectContainer = _loc2_[param1] as DisplayObjectContainer;
-            if(_loc3_)
-            {
-                _loc4_ = _loc3_.numChildren;
-                _loc5_ = 0;
-                while(_loc5_ < _loc4_)
-                {
-                    _loc6_ = _loc3_.getChildAt(_loc5_);
-                    if(!(_loc6_ is Window && (_loc6_ as Window).sourceView == this))
-                    {
-                        this._blurWindows.push(_loc6_);
-                        _loc6_.filters = [new BlurFilter(BLUR_XY,BLUR_XY,BitmapFilterQuality.MEDIUM)];
-                    }
-                    _loc5_++;
-                }
-            }
         }
 
         override protected function onPopulate() : void
@@ -123,6 +97,31 @@ package net.wg.gui.bootcamp.messageWindow
             }
         }
 
+        public function as_blurOtherWindows(param1:int) : void
+        {
+            var _loc3_:uint = 0;
+            var _loc4_:uint = 0;
+            var _loc5_:DisplayObject = null;
+            this.clearBlurWindows();
+            this._blurWindows = new Vector.<DisplayObject>(0);
+            var _loc2_:ISimpleManagedContainer = App.containerMgr.getContainer(param1);
+            if(_loc2_)
+            {
+                _loc3_ = _loc2_.numChildren;
+                _loc4_ = 0;
+                while(_loc4_ < _loc3_)
+                {
+                    _loc5_ = _loc2_.getChildAt(_loc4_);
+                    if(!(_loc5_ is Window && (_loc5_ as Window).sourceView == this))
+                    {
+                        this._blurWindows.push(_loc5_);
+                        _loc5_.filters = [new BlurFilter(BLUR_XY,BLUR_XY,BitmapFilterQuality.MEDIUM)];
+                    }
+                    _loc4_++;
+                }
+            }
+        }
+
         private function updatePositions() : void
         {
             this.messageContainer.x = _width >> 1;
@@ -167,6 +166,20 @@ package net.wg.gui.bootcamp.messageWindow
             this._contentRenderer = null;
         }
 
+        private function clearBlurWindows() : void
+        {
+            var _loc1_:DisplayObject = null;
+            if(this._blurWindows)
+            {
+                while(this._blurWindows.length)
+                {
+                    _loc1_ = this._blurWindows.pop();
+                    _loc1_.filters = [];
+                }
+                this._blurWindows = null;
+            }
+        }
+
         private function onContentRendererMessageOpenNationsHandler(param1:Event) : void
         {
             onMessageButtonClickedS();
@@ -196,20 +209,6 @@ package net.wg.gui.bootcamp.messageWindow
                 return;
             }
             onMessageRemovedS();
-        }
-
-        private function clearBlurWindows() : void
-        {
-            var _loc1_:DisplayObject = null;
-            if(this._blurWindows)
-            {
-                while(this._blurWindows.length)
-                {
-                    _loc1_ = this._blurWindows.pop();
-                    _loc1_.filters = [];
-                }
-                this._blurWindows = null;
-            }
         }
     }
 }

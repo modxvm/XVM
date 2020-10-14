@@ -225,7 +225,7 @@ package net.wg.gui.lobby.settings.feedback.ribbons
             setElementEnabled(this.battleEventsEventNameCheckbox,_loc1_);
             setElementEnabled(this.battleEventsVehicleInfoCheckbox,_loc1_);
             setElementEnabled(this.ribbonsContainer,_loc1_);
-            this.ribbonsContainer.visible = this.battleEventsShowInBattleCheckbox.selected;
+            this.ribbonsContainer.visible = _loc1_;
         }
 
         override public function get formId() : String

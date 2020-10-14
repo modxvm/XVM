@@ -10,7 +10,5 @@ package net.wg.infrastructure.base.meta
         function as_setData(param1:Object) : void;
 
         function as_setVehicleHasTurret(param1:Boolean) : void;
-
-        function as_setModulesEnabled(param1:Boolean) : void;
     }
 }

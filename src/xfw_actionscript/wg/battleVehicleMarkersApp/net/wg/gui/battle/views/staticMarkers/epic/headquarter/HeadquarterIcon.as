@@ -3,6 +3,7 @@ package net.wg.gui.battle.views.staticMarkers.epic.headquarter
     import net.wg.gui.battle.components.BattleIconHolder;
     import flash.display.MovieClip;
     import net.wg.gui.battle.views.vehicleMarkers.VehicleMarkersManager;
+    import net.wg.infrastructure.events.ColorSchemeEvent;
 
     public class HeadquarterIcon extends BattleIconHolder
     {
@@ -39,6 +40,8 @@ package net.wg.gui.battle.views.staticMarkers.epic.headquarter
 
         private var _vmManager:VehicleMarkersManager = null;
 
+        private var _isHudElement:Boolean;
+
         public function HeadquarterIcon()
         {
             super();
@@ -51,25 +54,26 @@ package net.wg.gui.battle.views.staticMarkers.epic.headquarter
 
         public function setColor() : void
         {
-            var _loc1_:String = null;
             var _loc2_:String = null;
+            var _loc3_:String = null;
+            var _loc1_:Boolean = this._isHudElement?App.colorSchemeMgr.getIsColorBlindS():this._vmManager.isColorBlind;
             if(this._isPlayerTeam)
             {
-                _loc1_ = ALLY;
-                _loc2_ = ALLY_BASE_HOVER;
+                _loc2_ = ALLY;
+                _loc3_ = ALLY_BASE_HOVER;
             }
-            else if(this._vmManager.isColorBlind)
+            else if(_loc1_)
             {
-                _loc1_ = COLORBLIND;
-                _loc2_ = COLORBLIND_BASE_HOVER;
+                _loc2_ = COLORBLIND;
+                _loc3_ = COLORBLIND_BASE_HOVER;
             }
             else
             {
-                _loc1_ = ENEMY;
-                _loc2_ = ENEMY_BASE_HOVER;
+                _loc2_ = ENEMY;
+                _loc3_ = ENEMY_BASE_HOVER;
             }
-            this.bgAnimation.gotoAndStop(_loc1_);
-            this.hover.gotoAndStop(_loc2_);
+            this.bgAnimation.gotoAndStop(_loc2_);
+            this.hover.gotoAndStop(_loc3_);
         }
 
         public function setOwningTeam(param1:Boolean) : void
@@ -103,6 +107,10 @@ package net.wg.gui.battle.views.staticMarkers.epic.headquarter
 
         override protected function onDispose() : void
         {
+            if(this._isHudElement)
+            {
+                App.colorSchemeMgr.removeEventListener(ColorSchemeEvent.SCHEMAS_UPDATED,this.onColorSchemasUpdatedHandler);
+            }
             this.hqId.stop();
             this.hqId = null;
             this.targetHighlight.stop();
@@ -118,6 +126,20 @@ package net.wg.gui.battle.views.staticMarkers.epic.headquarter
         public function setHit(param1:Boolean) : void
         {
             this.bgAnimation.gotoAndPlayAnimation(param1?LABEL_HIT_PIERCED:LABEL_HIT);
+        }
+
+        public function set isHudElement(param1:Boolean) : void
+        {
+            this._isHudElement = param1;
+            if(this._isHudElement)
+            {
+                App.colorSchemeMgr.addEventListener(ColorSchemeEvent.SCHEMAS_UPDATED,this.onColorSchemasUpdatedHandler);
+            }
+        }
+
+        private function onColorSchemasUpdatedHandler(param1:ColorSchemeEvent) : void
+        {
+            this.setColor();
         }
     }
 }

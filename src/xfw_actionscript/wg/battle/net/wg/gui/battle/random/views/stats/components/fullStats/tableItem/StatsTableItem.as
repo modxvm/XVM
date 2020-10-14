@@ -81,6 +81,16 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
             invalidate(RandomFullStatsValidationType.PLAYER_STATUS);
         }
 
+        override public function setShowDogTag(param1:Boolean) : void
+        {
+            if(dogTag == param1)
+            {
+                return;
+            }
+            super.setShowDogTag(param1);
+            invalidate(RandomFullStatsValidationType.PLAYER_STATUS);
+        }
+
         override public function setIsOffline(param1:Boolean) : void
         {
             if(isOffline == param1)
@@ -108,6 +118,10 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
                 if(isOffline)
                 {
                     this._playerStatus.showOffline();
+                }
+                else if(dogTag)
+                {
+                    this._playerStatus.showDogTag();
                 }
                 else if(isDead)
                 {

@@ -42,15 +42,11 @@ package net.wg.gui.lobby.modulesPanel
 
         protected var _slots:Vector.<IDeviceSlot> = null;
 
-        private var _hasTurret:Boolean = false;
-
         protected var _modules:Vector.<IModuleSlot> = null;
 
         private var _toolTipMgr:ITooltipMgr;
 
         private var _utils:IUtils;
-
-        private var _modulesEnabled:Boolean = false;
 
         public function ModulesPanel()
         {
@@ -120,10 +116,6 @@ package net.wg.gui.lobby.modulesPanel
         {
             var _loc1_:ButtonGroup = null;
             super.draw();
-            if(isInvalid(INV_BUTTONS_ENABLED))
-            {
-                this.updateButtonsEnabled();
-            }
             if(isInvalid(INV_SELECTION))
             {
                 _loc1_ = ButtonGroup.getGroup(MODULES_PANEL_BTN_GROUP,this);
@@ -141,33 +133,9 @@ package net.wg.gui.lobby.modulesPanel
             dispatchEvent(new Event(Event.RESIZE));
         }
 
-        public function as_setModulesEnabled(param1:Boolean) : void
-        {
-            this.modulesEnabled = param1;
-            this.resetSelection();
-            this.invalidateButtonsEnabled();
-        }
-
         public function as_setVehicleHasTurret(param1:Boolean) : void
         {
-            this._hasTurret = param1;
-            this.turret.enabled = this._hasTurret && this.modulesEnabled;
-        }
-
-        public function setItemsEnabled(param1:Vector.<IDeviceSlot>, param2:Boolean) : void
-        {
-            var _loc3_:IDeviceSlot = null;
-            for each(_loc3_ in param1)
-            {
-                if(_loc3_ == this.turret)
-                {
-                    _loc3_.enabled = param2 && this._hasTurret;
-                }
-                else
-                {
-                    _loc3_.enabled = param2;
-                }
-            }
+            this.turret.enabled = param1;
         }
 
         protected function addToButtonGroup(param1:Button) : void
@@ -194,11 +162,6 @@ package net.wg.gui.lobby.modulesPanel
         protected function clearSlot(param1:IDeviceSlot) : void
         {
             param1.removeEventListener(ButtonEvent.CLICK,this.onSlotClickHandler);
-        }
-
-        protected function updateButtonsEnabled() : void
-        {
-            this.setItemsEnabled(this._slots,this.modulesEnabled);
         }
 
         protected function trySetupDevice(param1:DeviceSlotVO) : Boolean
@@ -242,16 +205,6 @@ package net.wg.gui.lobby.modulesPanel
                     this._utils.asserter.assert(false,"Undefined slotType: " + _loc2_.slotType);
                 }
             }
-        }
-
-        protected function get modulesEnabled() : Boolean
-        {
-            return this._modulesEnabled;
-        }
-
-        protected function set modulesEnabled(param1:Boolean) : void
-        {
-            this._modulesEnabled = param1;
         }
 
         private function onModuleSlotClickHandler(param1:ButtonEvent) : void

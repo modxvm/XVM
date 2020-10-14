@@ -24,6 +24,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public var onShowDetailsPremium:Function;
 
+        public var showDogTagWindow:Function;
+
         private var _battleResultsVO:BattleResultsVO;
 
         public function BattleResultsMeta()
@@ -87,6 +89,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.onShowDetailsPremium,"onShowDetailsPremium" + Errors.CANT_NULL);
             this.onShowDetailsPremium();
+        }
+
+        public function showDogTagWindowS(param1:int) : void
+        {
+            App.utils.asserter.assertNotNull(this.showDogTagWindow,"showDogTagWindow" + Errors.CANT_NULL);
+            this.showDogTagWindow(param1);
         }
 
         public final function as_setData(param1:Object) : void

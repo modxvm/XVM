@@ -24,10 +24,13 @@ package net.wg.gui.lobby.rankedBattles19
     import net.wg.gui.lobby.components.SideBarRenderer;
     import scaleform.clik.interfaces.IDataProvider;
     import scaleform.clik.utils.Padding;
+    import net.wg.gui.lobby.components.BrowserViewStackExPadding;
     import net.wg.infrastructure.interfaces.IDAAPIModule;
 
     public class RankedBattlesPage extends RankedBattlesPageMeta implements IRankedBattlesPageMeta, IStageSizeDependComponent
     {
+
+        private static const DELAY_FRAMES_FOR_BROWSER_SHOW:int = 3;
 
         private static const PROPERTY_ID:String = "id";
 
@@ -78,6 +81,8 @@ package net.wg.gui.lobby.rankedBattles19
         private var _itemRendererHeight:int = 78;
 
         private var _headerHelper:RankedBattlesPageHeaderHelper = null;
+
+        private var _countFrames:int = 0;
 
         public function RankedBattlesPage()
         {
@@ -175,6 +180,11 @@ package net.wg.gui.lobby.rankedBattles19
             this.menu.removeEventListener(Event.RESIZE,this.onMenuResizeHandler);
             this.menu.dispose();
             this.menu = null;
+            var _loc1_:DisplayObject = this.content.cachedViews[RANKEDBATTLES_ALIASES.RANKED_BATTLES_SHOP_ALIAS];
+            if(_loc1_)
+            {
+                _loc1_.removeEventListener(Event.COMPLETE,this.onShopBrowserCompleteHandler);
+            }
             this.content.removeEventListener(ViewStackEvent.VIEW_CHANGED,this.onContentViewChangedHandler);
             this.content.dispose();
             this.content = null;
@@ -222,9 +232,7 @@ package net.wg.gui.lobby.rankedBattles19
                 bgHolder.height = _loc6_;
                 bgHolder.x = _loc4_ - bgHolder.width >> 1;
                 bgHolder.y = (height - bgHolder.height >> 1) - _loc5_ + SHOP_BG_OFFSET_Y;
-                graphics.beginFill(0);
-                graphics.drawRect(0,0,App.appWidth,App.appHeight);
-                graphics.endFill();
+                this.bgFill();
             }
             else
             {
@@ -261,6 +269,13 @@ package net.wg.gui.lobby.rankedBattles19
             }
         }
 
+        private function bgFill() : void
+        {
+            graphics.beginFill(0);
+            graphics.drawRect(0,0,App.appWidth,App.appHeight);
+            graphics.endFill();
+        }
+
         private function getCounterTarget(param1:String) : DisplayObject
         {
             var _loc4_:Object = null;
@@ -293,6 +308,19 @@ package net.wg.gui.lobby.rankedBattles19
             this.header.x = width - this.header.width >> 1;
         }
 
+        private function checkBrowserShow() : void
+        {
+            if(this._countFrames > 0)
+            {
+                this._countFrames--;
+                App.utils.scheduler.scheduleOnNextFrame(this.checkBrowserShow);
+            }
+            else
+            {
+                BrowserViewStackExPadding(this.content.currentView).isDisableShowBrowser = false;
+            }
+        }
+
         override protected function get autoShowViewProperty() : int
         {
             return SHOW_VIEW_PROP_AFTER_BG_READY;
@@ -311,12 +339,27 @@ package net.wg.gui.lobby.rankedBattles19
 
         private function onContentViewChangedHandler(param1:ViewStackEvent) : void
         {
+            var _loc2_:BrowserViewStackExPadding = null;
             if(!isFlashComponentRegisteredS(param1.viewId))
             {
                 registerFlashComponentS(IDAAPIModule(param1.view),param1.viewId);
             }
+            if(param1.viewId == RANKEDBATTLES_ALIASES.RANKED_BATTLES_SHOP_ALIAS)
+            {
+                _loc2_ = BrowserViewStackExPadding(this.content.currentView);
+                _loc2_.addEventListener(Event.COMPLETE,this.onShopBrowserCompleteHandler);
+                _loc2_.isDisableShowBrowser = true;
+            }
             setBackground(this.menu.selectedItem.background);
             onPageChangedS(param1.viewId);
+        }
+
+        private function onShopBrowserCompleteHandler(param1:Event) : void
+        {
+            var _loc2_:BrowserViewStackExPadding = BrowserViewStackExPadding(param1.currentTarget);
+            _loc2_.removeEventListener(Event.COMPLETE,this.onShopBrowserCompleteHandler);
+            App.utils.scheduler.scheduleOnNextFrame(this.checkBrowserShow);
+            this._countFrames = DELAY_FRAMES_FOR_BROWSER_SHOW;
         }
     }
 }

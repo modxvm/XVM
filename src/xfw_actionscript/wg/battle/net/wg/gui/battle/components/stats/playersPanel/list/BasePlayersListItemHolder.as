@@ -4,6 +4,7 @@ package net.wg.gui.battle.components.stats.playersPanel.list
     import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
     import net.wg.gui.battle.components.stats.playersPanel.interfaces.IPlayersPanelListItem;
     import net.wg.gui.battle.views.stats.StatsUserProps;
+    import net.wg.gui.components.dogtag.VO.DogTagVO;
     import net.wg.data.constants.Errors;
     import net.wg.data.constants.UserTags;
     import net.wg.data.constants.PlayerStatus;
@@ -20,6 +21,8 @@ package net.wg.gui.battle.components.stats.playersPanel.list
         private var _userProps:StatsUserProps = null;
 
         private var _isDisposed:Boolean = false;
+
+        private var _dogTag:DogTagVO = null;
 
         public function BasePlayersListItemHolder(param1:IPlayersPanelListItem)
         {
@@ -40,6 +43,21 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             }
             this._frags = param1;
             this._listItem.setFrags(this._frags);
+        }
+
+        public function setDogTag(param1:DogTagVO) : void
+        {
+            this._dogTag = param1;
+        }
+
+        public function getDogTag() : DogTagVO
+        {
+            return this._dogTag;
+        }
+
+        public function getListItem() : IPlayersPanelListItem
+        {
+            return this._listItem;
         }
 
         public function setChatCommand(param1:String, param2:uint) : void
@@ -89,6 +107,11 @@ package net.wg.gui.battle.components.stats.playersPanel.list
         {
             this.vehicleData = param1.clone();
             this.applyVehicleData();
+        }
+
+        public function getVehicleData() : DAAPIVehicleInfoVO
+        {
+            return this.vehicleData;
         }
 
         public function setVehicleStatus(param1:int) : void

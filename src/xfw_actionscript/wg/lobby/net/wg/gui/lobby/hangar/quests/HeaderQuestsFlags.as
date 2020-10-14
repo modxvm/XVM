@@ -14,7 +14,6 @@ package net.wg.gui.lobby.hangar.quests
     import flash.geom.Rectangle;
     import net.wg.gui.lobby.hangar.interfaces.IQuestInformerButton;
     import flash.events.Event;
-    import net.wg.utils.StageSizeBoundaries;
     import net.wg.data.Aliases;
     import fl.motion.easing.Quadratic;
     import fl.motion.easing.Quartic;
@@ -33,10 +32,6 @@ package net.wg.gui.lobby.hangar.quests
         private static const COLLAPSE_ANIM_DELAY:int = 100;
 
         private static const QUESTS_GROUP_OFFSET:int = 34;
-
-        private static const EVENT_QUESTS_GROUP_OFFSET:int = -15;
-
-        private static const EVENT_QUESTS_GROUP_OFFSET_WIDE:int = 34;
 
         private static const RIGHT_SIDE_GROUP_X_OFFSET:int = -11;
 
@@ -65,10 +60,6 @@ package net.wg.gui.lobby.hangar.quests
         private var _scheduler:IScheduler = null;
 
         private var _entryPoint:IHeaderFlagsEntryPoint = null;
-
-        private var _isWide:Boolean = true;
-
-        private var _useEventGroupOffset:Boolean = false;
 
         public function HeaderQuestsFlags()
         {
@@ -205,7 +196,7 @@ package net.wg.gui.lobby.hangar.quests
             }
         }
 
-        public function setEntryPoint(param1:IHeaderFlagsEntryPoint, param2:Boolean = false) : void
+        public function setEntryPoint(param1:IHeaderFlagsEntryPoint) : void
         {
             this.clearEntryPoint();
             if(param1 != null)
@@ -214,13 +205,6 @@ package net.wg.gui.lobby.hangar.quests
                 DisplayObject(param1).addEventListener(Event.RESIZE,this.onEntryPointResizeHandler);
             }
             this._entryPoint = param1;
-            this._useEventGroupOffset = param2;
-            invalidateSize();
-        }
-
-        public function updateStage(param1:Number, param2:Number) : void
-        {
-            this._isWide = param1 >= StageSizeBoundaries.WIDTH_1600 && param2 >= StageSizeBoundaries.HEIGHT_900;
             invalidateSize();
         }
 
@@ -248,7 +232,7 @@ package net.wg.gui.lobby.hangar.quests
                     for each(_loc2_ in this._questsGroupsContainers)
                     {
                         _loc1_ = findGroupDataByID(this._questsGroupsData,_loc2_.groupID);
-                        if(!_loc1_ || !_loc2_.hasInformersEqualNewData(_loc1_))
+                        if(!_loc2_.hasInformersEqualNewData(_loc1_))
                         {
                             _loc5_ = true;
                             break;
@@ -382,7 +366,7 @@ package net.wg.gui.lobby.hangar.quests
         private function updateHitArea() : void
         {
             var _loc3_:IHeaderQuestsContainer = null;
-            var _loc1_:int = this.entryPointWidth + 2 * this.entryPointMarginX + 2 * this.questGroupOffset;
+            var _loc1_:int = this.entryPointWidth + 2 * this.entryPointMarginX + 2 * QUESTS_GROUP_OFFSET;
             var _loc2_:* = 0;
             for each(_loc3_ in this._questsGroupsContainers)
             {
@@ -553,12 +537,12 @@ package net.wg.gui.lobby.hangar.quests
 
         private function getInitialRightSideX() : int
         {
-            return (this.entryPointWidth >> 1) + this.entryPointMarginX + this.questGroupOffset + RIGHT_SIDE_GROUP_X_OFFSET;
+            return (this.entryPointWidth >> 1) + this.entryPointMarginX + QUESTS_GROUP_OFFSET + RIGHT_SIDE_GROUP_X_OFFSET;
         }
 
         private function getInitialLeftSideX(param1:int) : int
         {
-            return -((this.entryPointWidth >> 1) + (param1 >> 1) + this.entryPointMarginX + this.questGroupOffset);
+            return -((this.entryPointWidth >> 1) + (param1 >> 1) + this.entryPointMarginX + QUESTS_GROUP_OFFSET);
         }
 
         private function onMoveContainerCompleted() : void
@@ -574,11 +558,6 @@ package net.wg.gui.lobby.hangar.quests
         private function get entryPointMarginX() : int
         {
             return this._entryPoint?this._entryPoint.marginX:0;
-        }
-
-        private function get questGroupOffset() : int
-        {
-            return this._entryPoint && this._useEventGroupOffset?this._isWide?EVENT_QUESTS_GROUP_OFFSET_WIDE:EVENT_QUESTS_GROUP_OFFSET:QUESTS_GROUP_OFFSET;
         }
 
         private function onBtnHeaderQuestClickHandler(param1:HeaderQuestsEvent) : void

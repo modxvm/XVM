@@ -19,6 +19,8 @@ package net.wg.infrastructure.base.meta
 
         function as_setReloadingAsPercent(param1:Number, param2:Boolean) : void;
 
+        function as_setBoostAsPercent(param1:Number, param2:Number) : void;
+
         function as_setHealth(param1:Number) : void;
 
         function as_setAmmoStock(param1:Number, param2:Number, param3:Boolean, param4:String, param5:Boolean) : void;
@@ -50,6 +52,10 @@ package net.wg.infrastructure.base.meta
         function as_autoloaderUpdate(param1:Number, param2:Number, param3:Boolean, param4:Boolean, param5:Boolean, param6:Boolean) : void;
 
         function as_setAutoloaderReloading(param1:Number, param2:Number) : void;
+
+        function as_showBoost(param1:Number, param2:Number) : void;
+
+        function as_hideBoost(param1:Boolean) : void;
 
         function as_showShot() : void;
 

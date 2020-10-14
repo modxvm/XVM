@@ -320,7 +320,7 @@ package net.wg.gui.lobby.personalMissions.components
             this._commons.updateTextFieldSize(this.addConditionsTf);
             this.statusIcon.isCentralize = true;
             this.bottomStatus2Icon.isCentralize = true;
-            this.awardsFullyCompletedGroup.layout = new CenterAlignedGroupLayout(AWARD_RENDERER_WIDTH,AWARD_RENDERER_HEIGHT);
+            this.awardsFullyCompletedGroup.layout = new CenterAlignedGroupLayout(BIG_AWARD_RENDERER_SIZE,BIG_AWARD_RENDERER_SIZE);
             this.awardsFullyCompletedGroup.itemRendererLinkage = Linkages.AWARD_RENDERER;
             this.startBtn.label = PERSONAL_MISSIONS.DETAILEDVIEW_STARTBTNLABEL;
             this.discardBtn.label = PERSONAL_MISSIONS.DETAILEDVIEW_DISCARDBTNLABEL;
@@ -805,7 +805,7 @@ package net.wg.gui.lobby.personalMissions.components
             var _loc1_:int = this._vo.awardsFullyCompleted.length <= BIG_AWARDS_MAX_NUM?BIG_AWARDS_GAP:BIG_AWARDS_SMALL_GAP;
             var _loc2_:CenterAlignedGroupLayout = CenterAlignedGroupLayout(this.awardsFullyCompletedGroup.layout);
             _loc2_.gap = _loc1_;
-            _loc2_.rendererWidth = _loc2_.rendererHeight = BIG_AWARDS_HEIGHT;
+            _loc2_.rendererWidth = _loc2_.rendererHeight = BIG_AWARD_RENDERER_SIZE;
             this.awardsFullyCompletedGroup.dataProvider = this._vo.awardsFullyCompleted;
             this.awardsFullyCompletedGroup.width = AWARDS_FULLY_WIDTH;
             this.awardsFullyCompletedGroup.height = BIG_AWARDS_HEIGHT;

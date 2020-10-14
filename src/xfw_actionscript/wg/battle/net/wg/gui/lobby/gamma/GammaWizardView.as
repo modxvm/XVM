@@ -2,7 +2,7 @@ package net.wg.gui.lobby.gamma
 {
     import net.wg.infrastructure.base.meta.impl.GammaWizardViewMeta;
     import net.wg.infrastructure.base.meta.IGammaWizardViewMeta;
-    import net.wg.data.constants.generated.APP_CONTAINERS_NAMES;
+    import net.wg.data.constants.generated.LAYER_NAMES;
     import flash.text.TextField;
     import flash.display.MovieClip;
     import flash.display.Sprite;
@@ -17,7 +17,7 @@ package net.wg.gui.lobby.gamma
     public class GammaWizardView extends GammaWizardViewMeta implements IGammaWizardViewMeta
     {
 
-        private static const excludeContainers:Vector.<String> = Vector.<String>([APP_CONTAINERS_NAMES.OVERLAY,APP_CONTAINERS_NAMES.CURSOR,APP_CONTAINERS_NAMES.WAITING,APP_CONTAINERS_NAMES.SERVICE_LAYOUT]);
+        private static const excludeContainers:Vector.<int> = Vector.<int>([LAYER_NAMES.LAYER_ORDER.indexOf(LAYER_NAMES.FULLSCREEN_WINDOWS),LAYER_NAMES.LAYER_ORDER.indexOf(LAYER_NAMES.CURSOR),LAYER_NAMES.LAYER_ORDER.indexOf(LAYER_NAMES.WAITING),LAYER_NAMES.LAYER_ORDER.indexOf(LAYER_NAMES.SERVICE_LAYOUT)]);
 
         private static const SHINE_STATE_SMALL:String = "small";
 

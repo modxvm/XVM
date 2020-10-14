@@ -3,7 +3,7 @@ package net.wg.gui.lobby.colorSettings
     import net.wg.infrastructure.base.meta.impl.ColorSettingsViewMeta;
     import net.wg.infrastructure.base.meta.IColorSettingsViewMeta;
     import net.wg.infrastructure.interfaces.entity.IDraggable;
-    import net.wg.data.constants.generated.APP_CONTAINERS_NAMES;
+    import net.wg.data.constants.generated.LAYER_NAMES;
     import flash.display.Sprite;
     import flash.text.TextField;
     import flash.display.MovieClip;
@@ -29,7 +29,7 @@ package net.wg.gui.lobby.colorSettings
     public class ColorSettingsView extends ColorSettingsViewMeta implements IColorSettingsViewMeta, IDraggable
     {
 
-        private static const excludeContainers:Vector.<String> = Vector.<String>([APP_CONTAINERS_NAMES.OVERLAY,APP_CONTAINERS_NAMES.CURSOR,APP_CONTAINERS_NAMES.WAITING,APP_CONTAINERS_NAMES.SERVICE_LAYOUT]);
+        private static const excludeContainers:Vector.<int> = Vector.<int>([LAYER_NAMES.LAYER_ORDER.indexOf(LAYER_NAMES.FULLSCREEN_WINDOWS),LAYER_NAMES.LAYER_ORDER.indexOf(LAYER_NAMES.CURSOR),LAYER_NAMES.LAYER_ORDER.indexOf(LAYER_NAMES.WAITING),LAYER_NAMES.LAYER_ORDER.indexOf(LAYER_NAMES.SERVICE_LAYOUT)]);
 
         private static const INVALID_SETTINGS:String = "INVALID_SETTINGS";
 

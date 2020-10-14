@@ -25,6 +25,8 @@ package net.wg.gui.battle.random.views.stats.components.playersPanel.constants
 
         public static const BADGE_CHANGED:uint = InvalidationType.SYSTEM_FLAGS_BORDER << 11;
 
+        public static const DOG_TAG_CHANGED:uint = InvalidationType.SYSTEM_FLAGS_BORDER << 12;
+
         public function PlayersPanelInvalidationType()
         {
             super();

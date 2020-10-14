@@ -9,7 +9,9 @@ package net.wg.data.daapi
 
         public var url:String = "";
 
-        public var type:String = "";
+        public var layer:int = -1;
+
+        public var flags:int = 0;
 
         public var event:String = "";
 

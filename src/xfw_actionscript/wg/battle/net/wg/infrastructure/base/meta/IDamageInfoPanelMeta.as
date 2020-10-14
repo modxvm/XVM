@@ -45,6 +45,10 @@ package net.wg.infrastructure.base.meta
 
         function as_hideSurveyingDevice() : void;
 
+        function as_updateWheel(param1:int, param2:Boolean) : void;
+
+        function as_hideWheel() : void;
+
         function as_updateCommander(param1:int, param2:Boolean) : void;
 
         function as_hideCommander() : void;

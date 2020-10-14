@@ -15,11 +15,7 @@ package net.wg.gui.lobby.modulesPanel.components
 
         public var moduleSlot:ModuleSlot;
 
-        public var moduleAnim1:Image;
-
-        public var moduleAnim2:Image;
-
-        public var moduleAnim3:Image;
+        public var moduleAnim:Image;
 
         public function AnimatedModuleSlot()
         {
@@ -31,9 +27,7 @@ package net.wg.gui.lobby.modulesPanel.components
             super.draw();
             if(isInvalid(InvalidationType.DATA))
             {
-                this.moduleAnim1.source = RES_ICONS.getModuleType(this.moduleSlot.type);
-                this.moduleAnim2.source = RES_ICONS.getModuleType(this.moduleSlot.type);
-                this.moduleAnim3.source = RES_ICONS.getModuleType(this.moduleSlot.type);
+                this.moduleAnim.source = RES_ICONS.getModuleType(this.moduleSlot.type);
             }
         }
 
@@ -41,12 +35,9 @@ package net.wg.gui.lobby.modulesPanel.components
         {
             this.moduleSlot.dispose();
             this.moduleSlot = null;
-            this.moduleAnim1.dispose();
-            this.moduleAnim1 = null;
-            this.moduleAnim2.dispose();
-            this.moduleAnim2 = null;
-            this.moduleAnim3.dispose();
-            this.moduleAnim3 = null;
+            this.moduleAnim.dispose();
+            this.moduleAnim = null;
+            super.onDispose();
         }
 
         public function canPlaySound(param1:String) : Boolean
@@ -77,6 +68,11 @@ package net.wg.gui.lobby.modulesPanel.components
         public function playAnimation() : void
         {
             gotoAndPlay(ANIMATION_START);
+        }
+
+        public function resetAnimation() : void
+        {
+            gotoAndStop(1);
         }
 
         public function update(param1:Object) : void

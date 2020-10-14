@@ -13,8 +13,6 @@ package net.wg.gui.lobby.vehiclePreview.data
 
         public var price:String = "";
 
-        public var priceTooltip:String = "";
-
         public var buyButtonEnabled:Boolean = false;
 
         public var buyButtonLabel:String = "";

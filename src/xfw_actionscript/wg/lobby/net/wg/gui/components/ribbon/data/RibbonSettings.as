@@ -177,7 +177,6 @@ package net.wg.gui.components.ribbon.data
             DAMAGE_SOURCE_MAP[DAMAGE_SOURCE_TYPES.HEAVY_TANK] = new DamageSourceSetting(BATTLEATLAS.WHITE_ICON_HEAVY_TANK16X16);
             DAMAGE_SOURCE_MAP[DAMAGE_SOURCE_TYPES.AT_SPG] = new DamageSourceSetting(BATTLEATLAS.WHITE_ICON_AT_SPG16X16);
             DAMAGE_SOURCE_MAP[DAMAGE_SOURCE_TYPES.SPG] = new DamageSourceSetting(BATTLEATLAS.WHITE_ICON_SPG16X16);
-            DAMAGE_SOURCE_MAP[DAMAGE_SOURCE_TYPES.EVENT_BOSS] = new DamageSourceSetting(BATTLEATLAS.WHITE_ICON_WT_16X16);
             this.setupComplexDamageSourceSettings();
             var _loc5_:* = 0;
             for each(_loc6_ in DAMAGE_SOURCE_MAP)
@@ -225,7 +224,6 @@ package net.wg.gui.components.ribbon.data
                 ICON_X_PADDINGS[DAMAGE_SOURCE_TYPES.SPG] = -1;
                 ICON_X_PADDINGS[DAMAGE_SOURCE_TYPES.ARTILLERY] = 0;
                 ICON_X_PADDINGS[DAMAGE_SOURCE_TYPES.AIRSTRIKE] = 0;
-                ICON_X_PADDINGS[DAMAGE_SOURCE_TYPES.EVENT_BOSS] = 0;
                 ICON_Y_PADDINGS[DAMAGE_SOURCE_TYPES.LIGHT_TANK] = 11;
                 ICON_Y_PADDINGS[DAMAGE_SOURCE_TYPES.MEDIUM_TANK] = 11;
                 ICON_Y_PADDINGS[DAMAGE_SOURCE_TYPES.HEAVY_TANK] = 11;
@@ -233,7 +231,6 @@ package net.wg.gui.components.ribbon.data
                 ICON_Y_PADDINGS[DAMAGE_SOURCE_TYPES.SPG] = 11;
                 ICON_Y_PADDINGS[DAMAGE_SOURCE_TYPES.ARTILLERY] = -6;
                 ICON_Y_PADDINGS[DAMAGE_SOURCE_TYPES.AIRSTRIKE] = -6;
-                ICON_Y_PADDINGS[DAMAGE_SOURCE_TYPES.EVENT_BOSS] = 11;
             }
         }
     }

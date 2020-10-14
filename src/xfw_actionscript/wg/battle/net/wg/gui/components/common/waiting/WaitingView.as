@@ -14,6 +14,8 @@ package net.wg.gui.components.common.waiting
 
         private static const AWARDS_MARGIN:uint = 65;
 
+        private static const SOFT_SHOW_DELAY:uint = 500;
+
         public var waitingComponent:WaitingComponent;
 
         public var awards:Sprite;
@@ -23,6 +25,8 @@ package net.wg.gui.components.common.waiting
         private var _stageWidth:int;
 
         private var _stageHeight:int;
+
+        private var _isComponentShown:Boolean = false;
 
         public function WaitingView()
         {
@@ -58,6 +62,7 @@ package net.wg.gui.components.common.waiting
         override protected function onDispose() : void
         {
             App.utils.scheduler.cancelTask(this.performHide);
+            App.utils.scheduler.cancelTask(this.showWaitingComponent);
             if(this.waitingComponent)
             {
                 this.waitingComponent.parent.removeChild(this.waitingComponent);
@@ -93,7 +98,7 @@ package net.wg.gui.components.common.waiting
             this.waitingComponent.setBackgroundImg(param1);
         }
 
-        public function as_showWaiting(param1:String) : void
+        public function as_showWaiting(param1:String, param2:Boolean) : void
         {
             this._frameOnShow = this.waitingComponent.waitingMc.currentFrame;
             App.utils.scheduler.cancelTask(this.performHide);
@@ -101,6 +106,19 @@ package net.wg.gui.components.common.waiting
             assertNotNull(this.waitingComponent,WAITING_COMPONENT_NAME);
             this.waitingComponent.setMessage(param1);
             this.setAnimationStatus(true);
+            if(param2)
+            {
+                if(!this._isComponentShown)
+                {
+                    App.utils.scheduler.scheduleTask(this.showWaitingComponent,SOFT_SHOW_DELAY);
+                }
+            }
+            else
+            {
+                App.utils.scheduler.cancelTask(this.showWaitingComponent);
+                this.showWaitingComponent();
+            }
+            this._isComponentShown = true;
         }
 
         public function setAnimationStatus(param1:Boolean) : void
@@ -128,7 +146,15 @@ package net.wg.gui.components.common.waiting
 
         private function performHide() : void
         {
+            App.utils.scheduler.cancelTask(this.showWaitingComponent);
+            this._isComponentShown = false;
+            this.waitingComponent.movieVisible = false;
             this.setAnimationStatus(false);
+        }
+
+        private function showWaitingComponent() : void
+        {
+            this.waitingComponent.movieVisible = true;
         }
 
         public function get isFocusable() : Boolean

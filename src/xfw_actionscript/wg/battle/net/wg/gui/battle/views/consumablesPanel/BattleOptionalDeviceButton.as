@@ -144,7 +144,7 @@ package net.wg.gui.battle.views.consumablesPanel
         public function showGlow(param1:int) : void
         {
             this.glow.addEventListener(BattleEquipmentButtonGlow.ON_IDLE_STATE,this.onGlowOnIdleStateHandler);
-            this.glow.showGlow(param1);
+            this.glow.showGlow(param1,false);
         }
 
         public function get consumablesVO() : ConsumablesVO
@@ -197,10 +197,6 @@ package net.wg.gui.battle.views.consumablesPanel
         }
 
         public function set showConsumableBorder(param1:Boolean) : void
-        {
-        }
-
-        public function setStage(param1:int) : void
         {
         }
 

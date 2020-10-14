@@ -7,6 +7,7 @@ package net.wg.gui.battle.battleloading.renderers
     import net.wg.gui.components.controls.BadgeComponent;
     import net.wg.gui.components.icons.PlayerActionMarker;
     import net.wg.infrastructure.managers.IColorSchemeManager;
+    import net.wg.data.constants.Values;
     import net.wg.data.constants.generated.BATTLEATLAS;
     import org.idmedia.as3commons.util.StringUtils;
     import net.wg.gui.battle.battleloading.BattleLoadingHelper;
@@ -149,7 +150,7 @@ package net.wg.gui.battle.battleloading.renderers
                 this.setSelfBG();
                 this.setBadge();
                 this._textField.visible = true;
-                App.utils.commons.formatPlayerName(this._textField,App.utils.commons.getUserProps(this.model.playerName,this.model.clanAbbrev,this.model.region,0,this.model.userTags,this.model.playerFakeName),!this.model.isCurrentPlayer,this.model.isCurrentPlayer);
+                App.utils.commons.formatPlayerName(this._textField,App.utils.commons.getUserProps(this.model.playerName,this.model.clanAbbrev,this.model.region,Values.ZERO,this.model.userTags,this.model.playerFakeName),!this.model.isCurrentPlayer,this.model.isCurrentPlayer);
                 this._vehicleField.visible = true;
                 this._vehicleField.text = this.model.vehicleName;
                 this._icoIGR.visible = this.model.isIGR;

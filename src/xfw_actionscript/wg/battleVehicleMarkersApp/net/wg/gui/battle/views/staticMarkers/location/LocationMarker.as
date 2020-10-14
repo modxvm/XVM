@@ -67,6 +67,7 @@ package net.wg.gui.battle.views.staticMarkers.location
         public function activateHover(param1:Boolean) : void
         {
             this.marker.hoverShadow.visible = param1;
+            this.marker.setCreatorNameVisible(false);
         }
 
         public function setActiveState(param1:int) : void

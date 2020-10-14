@@ -85,8 +85,8 @@ package net.wg.gui.lobby.rankedBattles19.view.intro
             super.onPopulate();
             this._utils.universalBtnStyles.setStyle(this.acceptBtn,UniversalBtnStylesConst.STYLE_HEAVY_GREEN);
             this._utils.universalBtnStyles.setStyle(this.detailedBtn,UniversalBtnStylesConst.STYLE_HEAVY_BLACK);
-            this.acceptBtn.label = RANKED_BATTLES.INTOPAGE_BTNS_ACCEPT;
-            this.detailedBtn.label = RANKED_BATTLES.INTOPAGE_BTNS_DETAILED;
+            this.acceptBtn.label = RANKED_BATTLES.INTROPAGE_BTNS_ACCEPT;
+            this.detailedBtn.label = RANKED_BATTLES.INTROPAGE_BTNS_DETAILED;
             this.acceptBtn.addEventListener(ButtonEvent.CLICK,this.onAcceptBtnClickHandler);
             this.detailedBtn.addEventListener(ButtonEvent.CLICK,this.onDetailedBtnClickHandler);
             this.playBtn.addEventListener(ButtonEvent.CLICK,this.onPlayBtnClickHandler);

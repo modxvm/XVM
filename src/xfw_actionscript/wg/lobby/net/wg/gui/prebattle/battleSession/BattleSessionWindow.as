@@ -61,7 +61,7 @@ package net.wg.gui.prebattle.battleSession
 
         public var mapValue:TextField;
 
-        public var topInfo:MovieClip;
+        public var topInfo:TopInfo;
 
         public var memberStackList:ScrollingListEx;
 
@@ -324,6 +324,7 @@ package net.wg.gui.prebattle.battleSession
             this.vehicleLevelText = null;
             this.vehicleTypeText = null;
             this.requiredText = null;
+            this.topInfo.dispose();
             this.topInfo = null;
             this.mapValue = null;
             this.mapText = null;
@@ -398,14 +399,19 @@ package net.wg.gui.prebattle.battleSession
         {
             this.winsValue.text = param2;
             this.mapValue.text = param3;
-            TextField(this.topInfo.firstTeamText).text = param4;
-            TextField(this.topInfo.secondTeamText).text = param5;
-            TextField(this.topInfo.winTeamsText).text = param6;
+            this.topInfo.firstTeamText.text = param4;
+            this.topInfo.secondTeamText.text = param5;
+            this.topInfo.winTeamsText.text = param6;
             window.title = param7;
             var param1:Boolean = param1 && !this._isAssigned;
             this.commentValue.text = param8;
             this.upButtonTournament.visible = param1;
             this.upButtonClan.visible = !param1;
+        }
+
+        public function as_setWinnerIfDraw(param1:int) : void
+        {
+            this.topInfo.winnerIfDraw = param1;
         }
 
         public function as_setPlayersCountText(param1:String) : void
@@ -415,7 +421,8 @@ package net.wg.gui.prebattle.battleSession
 
         public function as_setStartTime(param1:String) : void
         {
-            TextField(this.topInfo.startTimeValue).text = param1;
+            this.topInfo.startTimeValue.text = param1;
+            this.topInfo.invalidateLayout();
         }
 
         public function as_setTotalPlayersCount(param1:String) : void

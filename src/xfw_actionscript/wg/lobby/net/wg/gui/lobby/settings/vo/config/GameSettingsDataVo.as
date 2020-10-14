@@ -61,6 +61,10 @@ package net.wg.gui.lobby.settings.vo.config
 
         public var anonymizer:SettingsControlProp = null;
 
+        public var showVictimsDogTag:SettingsControlProp = null;
+
+        public var showDogTagToKiller:SettingsControlProp = null;
+
         public var c11nHistoricallyAccurate:SettingsControlProp = null;
 
         public var loginServerSelection:SettingsControlProp = null;
@@ -99,13 +103,13 @@ package net.wg.gui.lobby.settings.vo.config
 
         public var minimapAlphaEnabled:SettingsControlProp = null;
 
-        public var enableBattleComm:SettingsControlProp = null;
-
         public var showCommInPlayerlist:SettingsControlProp = null;
 
         public var showStickyMarkers:SettingsControlProp = null;
 
         public var showCalloutMessages:SettingsControlProp = null;
+
+        public var showLocationMarkers:SettingsControlProp = null;
 
         public var showMarkers:SettingsControlProp = null;
 
@@ -145,6 +149,8 @@ package net.wg.gui.lobby.settings.vo.config
                 "loginServerSelection":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "showMarksOnGun":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "anonymizer":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
+                "showVictimsDogTag":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
+                "showDogTagToKiller":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "minimapViewRange":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "minimapMaxViewRange":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "minimapDrawRange":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
@@ -158,10 +164,10 @@ package net.wg.gui.lobby.settings.vo.config
                 "carouselType":createControl(ControlsFactory.TYPE_BUTTON_BAR).build(),
                 "doubleCarouselType":createControl(ControlsFactory.TYPE_DROPDOWN).build(),
                 "vehicleCarouselStats":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
-                "enableBattleComm":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "showCommInPlayerlist":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "showStickyMarkers":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "showCalloutMessages":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
+                "showLocationMarkers":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "showMarkers":createControl(ControlsFactory.TYPE_CHECKBOX).build()
             });
         }
@@ -197,6 +203,8 @@ package net.wg.gui.lobby.settings.vo.config
             this.showVehiclesCounter = null;
             this.showMarksOnGun = null;
             this.anonymizer = null;
+            this.showVictimsDogTag = null;
+            this.showDogTagToKiller = null;
             this.loginServerSelection = null;
             this.c11nHistoricallyAccurate = null;
             this.showVehModelsOnMap = null;
@@ -220,14 +228,14 @@ package net.wg.gui.lobby.settings.vo.config
             this.vehicleCarouselStats = null;
             this.minimapAlphaEnabled.dispose();
             this.minimapAlphaEnabled = null;
-            this.enableBattleComm.dispose();
-            this.enableBattleComm = null;
             this.showCommInPlayerlist.dispose();
             this.showCommInPlayerlist = null;
             this.showStickyMarkers.dispose();
             this.showStickyMarkers = null;
             this.showCalloutMessages.dispose();
             this.showCalloutMessages = null;
+            this.showLocationMarkers.dispose();
+            this.showLocationMarkers = null;
             this.showMarkers.dispose();
             this.showMarkers = null;
             super.onDispose();

@@ -12,15 +12,16 @@ package net.wg.gui.battle.views
     import net.wg.gui.battle.views.ribbonsPanel.RibbonsPanel;
     import net.wg.gui.battle.views.gameMessagesPanel.GameMessagesPanel;
     import net.wg.gui.battle.views.calloutPanel.CalloutPanel;
-    import net.wg.gui.battle.views.postmortemPanel.PostmortemPanel;
     import net.wg.gui.battle.views.vehicleMessages.VehicleMessages;
     import net.wg.gui.battle.views.messages.MessageListDAAPI;
     import net.wg.infrastructure.helpers.statisticsDataController.BattleStatisticDataController;
+    import net.wg.gui.battle.views.postmortemPanel.BasePostmortemPanel;
     import flash.display.Sprite;
     import net.wg.gui.battle.views.gameMessagesPanel.events.GameMessagesPanelEvent;
     import net.wg.gui.battle.views.minimap.events.MinimapEvent;
     import net.wg.data.constants.generated.BATTLE_VIEW_ALIASES;
     import net.wg.data.constants.Linkages;
+    import net.wg.gui.battle.views.postmortemPanel.PostmortemPanel;
     import flash.events.Event;
     import net.wg.gui.battle.views.minimap.MinimapEntryController;
     import net.wg.gui.lobby.settings.config.ControlsFactory;
@@ -68,8 +69,6 @@ package net.wg.gui.battle.views
 
         public var calloutPanel:CalloutPanel = null;
 
-        public var postmortemTips:PostmortemPanel = null;
-
         protected var vehicleMessageList:VehicleMessages;
 
         protected var vehicleErrorMessageList:MessageListDAAPI;
@@ -82,6 +81,8 @@ package net.wg.gui.battle.views
         }
 
         protected var battleStatisticDataController:BattleStatisticDataController;
+
+        protected var postmortemTips:BasePostmortemPanel = null;
 
         protected var isPostMortem:Boolean = false;
 
@@ -163,7 +164,7 @@ package net.wg.gui.battle.views
         {
             this.registerComponent(this.battleLoading,BATTLE_VIEW_ALIASES.BATTLE_LOADING);
             this.registerComponent(this.minimap,BATTLE_VIEW_ALIASES.MINIMAP);
-            this.registerComponent(this.prebattleTimer,this.prebattleTimerAlias);
+            this.registerComponent(this.prebattleTimer,BATTLE_VIEW_ALIASES.PREBATTLE_TIMER);
             this.registerComponent(this.damagePanel,BATTLE_VIEW_ALIASES.DAMAGE_PANEL);
             this.registerComponent(this.battleTimer,BATTLE_VIEW_ALIASES.BATTLE_TIMER);
             this.registerComponent(this.ribbonsPanel,BATTLE_VIEW_ALIASES.RIBBONS_PANEL);
@@ -176,10 +177,7 @@ package net.wg.gui.battle.views
             {
                 this.registerComponent(this.dualGunPanel,BATTLE_VIEW_ALIASES.DUAL_GUN_PANEL);
             }
-            if(!this.postmortemTips)
-            {
-                this.postmortemTips = App.utils.classFactory.getComponent(Linkages.POSTMORTEN_PANEL,PostmortemPanel);
-            }
+            this.postmortemTips = App.utils.classFactory.getComponent(Linkages.POSTMORTEN_PANEL,PostmortemPanel);
             this.postmortemTips.setCompVisible(false);
             this.updatePostmortemTipsPosition();
             addChild(this.postmortemTips);
@@ -264,13 +262,9 @@ package net.wg.gui.battle.views
             return _loc2_.isCompVisible();
         }
 
-        public function as_showPostmortemNotification() : void
-        {
-        }
-
         public function as_setPostmortemTipsVisible(param1:Boolean) : void
         {
-            this.postmortemTips.visible = param1;
+            this.postmortemTips.setCompVisible(param1);
             this.vehicleMessageListPositionUpdate();
             this.isPostMortem = param1;
             if(this.isPostMortem)
@@ -316,9 +310,9 @@ package net.wg.gui.battle.views
         protected function initializeMessageLists() : void
         {
             this._messagesContainer = new Sprite();
+            this._messagesContainer.name = "messageListsContainer";
             this._messagesContainer.mouseEnabled = this._messagesContainer.mouseChildren = false;
-            addChild(this._messagesContainer);
-            swapChildren(this._messagesContainer,this.battleLoading);
+            addChildAt(this._messagesContainer,0);
             this.vehicleMessageList = new VehicleMessages(this._messagesContainer);
             this.vehicleErrorMessageList = new MessageListDAAPI(this._messagesContainer);
             this.playerMessageList = new MessageListDAAPI(this._messagesContainer);
@@ -343,9 +337,16 @@ package net.wg.gui.battle.views
             this.vehicleErrorMessageList.setLocation(_originalWidth - VEHICLE_ERRORS_LIST_OFFSET.x >> 1,(_originalHeight >> 2) + VEHICLE_ERRORS_LIST_OFFSET.y);
         }
 
-        protected function get prebattleTimerAlias() : String
+        protected function vehicleMessageListPositionUpdate() : void
         {
-            return BATTLE_VIEW_ALIASES.PREBATTLE_TIMER;
+            if(this.postmortemTips && this.postmortemTips.visible)
+            {
+                this.vehicleMessageList.setLocation(_originalWidth - VEHICLE_MESSAGES_LIST_OFFSET.x >> 1,this.postmortemTips.y - VEHICLE_MESSAGES_LIST_OFFSET.y - VEHICLE_MESSAGES_LIST_POSTMORTEM_Y_OFFSET | 0);
+            }
+            else
+            {
+                this.vehicleMessageList.setLocation(_originalWidth - VEHICLE_MESSAGES_LIST_OFFSET.x >> 1,_originalHeight - VEHICLE_MESSAGES_LIST_OFFSET.y | 0);
+            }
         }
 
         public function xfw_registerComponent(param1:IDAAPIModule, param2:String) : void
@@ -374,18 +375,6 @@ package net.wg.gui.battle.views
             this.minimap.x = _width - this.minimap.currentWidth;
             this.minimap.y = _height - this.minimap.currentHeight;
             this.minimap.dispatchEvent(new LifeCycleEvent(LifeCycleEvent.ON_GRAPHICS_RECTANGLES_UPDATE));
-        }
-
-        protected function vehicleMessageListPositionUpdate() : void
-        {
-            if(this.postmortemTips && this.postmortemTips.visible)
-            {
-                this.vehicleMessageList.setLocation(_originalWidth - VEHICLE_MESSAGES_LIST_OFFSET.x >> 1,this.postmortemTips.y - VEHICLE_MESSAGES_LIST_OFFSET.y - VEHICLE_MESSAGES_LIST_POSTMORTEM_Y_OFFSET | 0);
-            }
-            else
-            {
-                this.vehicleMessageList.setLocation(_originalWidth - VEHICLE_MESSAGES_LIST_OFFSET.x >> 1,_originalHeight - VEHICLE_MESSAGES_LIST_OFFSET.y | 0);
-            }
         }
 
         private function showComponent(param1:String, param2:Boolean) : void
@@ -421,6 +410,10 @@ package net.wg.gui.battle.views
 
         protected function onMiniMapChangeHandler(param1:MinimapEvent) : void
         {
+            if(this.postmortemTips)
+            {
+                PostmortemPanel(this.postmortemTips).anchorVictimDogTag(this.minimap.currentTopLeftPoint.y);
+            }
             this.playerMessageListPositionUpdate();
         }
 

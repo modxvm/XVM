@@ -66,13 +66,13 @@ package net.wg.gui.lobby.settings
 
         public var battleLoadingRankedInfoDropDown:DropdownMenu = null;
 
-        public var enableBattleCommCheckbox:CheckBox = null;
-
         public var showCommInPlayerlistCheckbox:CheckBox = null;
 
         public var showStickyMarkersCheckbox:CheckBox = null;
 
         public var showCalloutMessagesCheckbox:CheckBox = null;
+
+        public var showLocationMarkersCheckbox:CheckBox = null;
 
         public var showMarkersCheckbox:CheckBox = null;
 
@@ -148,6 +148,10 @@ package net.wg.gui.lobby.settings
 
         public var enableSpeedometerCheckbox:CheckBox = null;
 
+        public var showDogTagToKillerCheckbox:CheckBox = null;
+
+        public var showVictimsDogTagCheckbox:CheckBox = null;
+
         public function GameSettingsContent()
         {
             super();
@@ -185,15 +189,15 @@ package net.wg.gui.lobby.settings
             this.disableBattleChatCheckbox.label = SETTINGS.CHAT_DISABLEBATTLECHAT;
             this.disableBattleChatCheckbox.toolTip = TOOLTIPS.TURNOFFCOMBATCHAT;
             this.disableBattleChatCheckbox.infoIcoType = InfoIcon.TYPE_INFO;
-            this.enableBattleCommCheckbox.label = SETTINGS.BATTLECOMM_ENABLEBATTLECOMM;
-            this.enableBattleCommCheckbox.toolTip = TOOLTIPS.ENABLEBATTLECOMM;
-            this.enableBattleCommCheckbox.infoIcoType = InfoIcon.TYPE_INFO;
-            this.enableBattleCommCheckbox.addEventListener(Event.SELECT,this.onBcEnableBattleCommCheckboxSelectHandler);
             this.showCommInPlayerlistCheckbox.label = SETTINGS.BATTLECOMM_SHOWCOMMINPLAYERLIST;
             this.showCommInPlayerlistCheckbox.toolTip = TOOLTIPS.SHOWCOMMINPLAYERLIST;
             this.showCommInPlayerlistCheckbox.infoIcoType = InfoIcon.TYPE_INFO;
             this.showStickyMarkersCheckbox.label = SETTINGS.BATTLECOMM_SHOWSTICKYMARKERS;
             this.showCalloutMessagesCheckbox.label = SETTINGS.BATTLECOMM_SHOWCALLOUTMESSAGES;
+            this.showLocationMarkersCheckbox.label = SETTINGS.BATTLECOMM_SHOWLOCATIONMARKERS;
+            this.showLocationMarkersCheckbox.tooltipType = ToolTipShowType.SPECIAL;
+            this.showLocationMarkersCheckbox.toolTip = TOOLTIPS_CONSTANTS.SETTINGS_SHOW_LOCATION_MARKERS;
+            this.showLocationMarkersCheckbox.infoIcoType = InfoIcon.TYPE_INFO;
             this.showMarkersCheckbox.label = SETTINGS.BATTLECOMM_SHOWMARKERS;
             this.showMarkersCheckbox.toolTip = TOOLTIPS.SHOWBASEMARKERS;
             this.showMarkersCheckbox.infoIcoType = InfoIcon.TYPE_INFO;
@@ -255,6 +259,10 @@ package net.wg.gui.lobby.settings
             this.hangarCamLabelControl.toolTip = TOOLTIPS.HANGARCAMDROPDOWN;
             this.showDamageIconCheckbox.infoIcoType = InfoIcon.TYPE_INFO;
             this.enableSpeedometerCheckbox.label = SETTINGS.GAME_ENABLESPEEDOMETER;
+            this.showDogTagToKillerCheckbox.label = SETTINGS.GAME_SHOWDOGTAGTOKILLER;
+            this.showDogTagToKillerCheckbox.toolTip = TOOLTIPS.SHOWDOGTAG;
+            this.showDogTagToKillerCheckbox.infoIcoType = InfoIcon.TYPE_INFO;
+            this.showVictimsDogTagCheckbox.label = SETTINGS.GAME_SHOWVICTIMSDOGTAG;
             super.configUI();
         }
 
@@ -294,15 +302,14 @@ package net.wg.gui.lobby.settings
             this.disableBattleChatCheckbox = null;
             this.ppShowLevelsCheckbox.dispose();
             this.ppShowLevelsCheckbox = null;
-            this.enableBattleCommCheckbox.removeEventListener(Event.SELECT,this.onBcEnableBattleCommCheckboxSelectHandler);
-            this.enableBattleCommCheckbox.dispose();
-            this.enableBattleCommCheckbox = null;
             this.showCommInPlayerlistCheckbox.dispose();
             this.showCommInPlayerlistCheckbox = null;
             this.showStickyMarkersCheckbox.dispose();
             this.showStickyMarkersCheckbox = null;
             this.showCalloutMessagesCheckbox.dispose();
             this.showCalloutMessagesCheckbox = null;
+            this.showLocationMarkersCheckbox.dispose();
+            this.showLocationMarkersCheckbox = null;
             this.showMarkersCheckbox.dispose();
             this.showMarkersCheckbox = null;
             this.gameplay_ctfCheckbox.dispose();
@@ -348,6 +355,10 @@ package net.wg.gui.lobby.settings
             this.showMarksOnGunCheckbox = null;
             this.anonymizerCheckbox.dispose();
             this.anonymizerCheckbox = null;
+            this.showDogTagToKillerCheckbox.dispose();
+            this.showDogTagToKillerCheckbox = null;
+            this.showVictimsDogTagCheckbox.dispose();
+            this.showVictimsDogTagCheckbox = null;
             this.c11nHistoricallyAccurateCheckbox.dispose();
             this.c11nHistoricallyAccurateCheckbox = null;
             this.loginServerSelectionCheckbox.dispose();
@@ -393,21 +404,9 @@ package net.wg.gui.lobby.settings
             super.onDispose();
         }
 
-        public function setEnableStateForBattleCommSettings() : void
-        {
-            this.showCommInPlayerlistCheckbox.enabled = this.enableBattleCommCheckbox.selected;
-            this.showCalloutMessagesCheckbox.enabled = this.enableBattleCommCheckbox.selected;
-            this.showStickyMarkersCheckbox.enabled = this.enableBattleCommCheckbox.selected;
-        }
-
         private function onGuiGraphicsOptimizationCheckboxSelectHandler(param1:Event) : void
         {
             this.minimapAlphaSlider.enabled = this.minimapAlphaEnabledCheckbox.selected;
-        }
-
-        private function onBcEnableBattleCommCheckboxSelectHandler(param1:Event) : void
-        {
-            this.setEnableStateForBattleCommSettings();
         }
     }
 }

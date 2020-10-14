@@ -25,10 +25,6 @@ package
 
         public static const TANKS_CAROUSEL_RESTORE_VEHICLE:String = "#tooltips:tanks_carousel/restore_vehicle";
 
-        public static const VEHICLEPREVIEW_BUYINGPANEL_EVENTPROGRESSION_PRICE:String = "#tooltips:vehiclePreview/buyingPanel/eventProgression/price";
-
-        public static const VEHICLEPREVIEW_BUYINGPANEL_EVENTPROGRESSION_STYLE_PRICE:String = "#tooltips:vehiclePreview/buyingPanel/eventProgression/style_price";
-
         public static const VEHICLEPREVIEW_MODULSNOMODULES:String = "#tooltips:vehiclePreview/modulsnoModules";
 
         public static const VEHICLEPREVIEW_MODULS:String = "#tooltips:vehiclePreview/moduls";
@@ -179,7 +175,7 @@ package
 
         public static const SHOWMARKSONGUN:String = "#tooltips:showMarksOnGun";
 
-        public static const ENABLEBATTLECOMM:String = "#tooltips:enableBattleComm";
+        public static const SHOWDOGTAG:String = "#tooltips:showDogTag";
 
         public static const SHOWCOMMINPLAYERLIST:String = "#tooltips:showCommInPlayerList";
 
@@ -337,17 +333,15 @@ package
 
         public static const AWARDITEM_ONEOF_RANKEDSEASON_PREVIEWSTYLE:String = "#tooltips:awardItem/oneof/rankedSeason/previewStyle";
 
-        public static const RANKEDBATTLESVIEW_SPRINTER:String = "#tooltips:rankedBattlesView/sprinter";
+        public static const VEHICLEPREVIEW_BUYINGPANEL_EVENTPROGRESSION_PRICE:String = "#tooltips:vehiclePreview/buyingPanel/eventProgression/price";
 
-        public static const SETTTINGSDISABLEDNOTIFICATION:String = "#tooltips:setttingsDisabledNotification";
+        public static const RANKEDBATTLESVIEW_SPRINTER:String = "#tooltips:rankedBattlesView/sprinter";
 
         public static const BADGEINFO_TITLE:String = "#tooltips:badgeinfo/title";
 
         public static const BADGEINFO_TEXT:String = "#tooltips:badgeinfo/text";
 
         public static const BADGEPAGE_RANKED_SUFFIXITEM_POSITION:String = "#tooltips:badgepage/ranked/suffixItem/position";
-
-        public static const BADGEPAGE_RANKED_SUFFIXITEM_CONFIRMATION:String = "#tooltips:badgepage/ranked/suffixItem/confirmation";
 
         public static const BADGEPAGE_RANKED_SUFFIXITEM_DURATION:String = "#tooltips:badgepage/ranked/suffixItem/duration";
 
@@ -783,13 +777,15 @@ package
 
         public static const CHATCONTACTSLISTONLY_BODY:String = "#tooltips:chatContactsListOnly/body";
 
-        public static const ENABLEBATTLECOMM_HEADER:String = "#tooltips:enableBattleComm/header";
-
-        public static const ENABLEBATTLECOMM_BODY:String = "#tooltips:enableBattleComm/body";
-
         public static const SHOWCOMMINPLAYERLIST_HEADER:String = "#tooltips:showCommInPlayerList/header";
 
         public static const SHOWCOMMINPLAYERLIST_BODY:String = "#tooltips:showCommInPlayerList/body";
+
+        public static const SETTINGS_SHOWLOCATIONMARKERS_HEADER:String = "#tooltips:settings/showLocationMarkers/header";
+
+        public static const SETTINGS_SHOWLOCATIONMARKERS_BODY:String = "#tooltips:settings/showLocationMarkers/body";
+
+        public static const SETTINGS_SHOWLOCATIONMARKERS_BODYFOOTER:String = "#tooltips:settings/showLocationMarkers/bodyFooter";
 
         public static const SHOWBASEMARKERS_HEADER:String = "#tooltips:showBaseMarkers/header";
 
@@ -810,6 +806,10 @@ package
         public static const SHOWMARKSONGUN_HEADER:String = "#tooltips:showMarksOnGun/header";
 
         public static const SHOWMARKSONGUN_BODY:String = "#tooltips:showMarksOnGun/body";
+
+        public static const SHOWDOGTAG_HEADER:String = "#tooltips:showDogTag/header";
+
+        public static const SHOWDOGTAG_BODY:String = "#tooltips:showDogTag/body";
 
         public static const ANONYMIZER_HEADER:String = "#tooltips:anonymizer/header";
 
@@ -1197,6 +1197,8 @@ package
 
         public static const REDBUTTON_DISABLED_VEHICLE_NOT_SUPPORTED_BODY:String = "#tooltips:redButton/disabled/vehicle/not_supported/body";
 
+        public static const REDBUTTON_DISABLED_VEHICLE_TOOHEAVY_BODY:String = "#tooltips:redButton/disabled/vehicle/tooHeavy/body";
+
         public static const REDBUTTON_DISABLED_CREW_NOTFULL_HEADER:String = "#tooltips:redButton/disabled/crew/notFull/header";
 
         public static const REDBUTTON_DISABLED_CREW_NOTFULL_BODY:String = "#tooltips:redButton/disabled/crew/notFull/body";
@@ -1238,6 +1240,8 @@ package
         public static const HANGAR_STARTBTN_BATTLEROYALESQUADNOTREADY_NOTREADY_BODY:String = "#tooltips:hangar/startBtn/battleRoyaleSquadNotReady/notReady/body";
 
         public static const HANGAR_STARTBTN_PREVIEW_BODY:String = "#tooltips:hangar/startBtn/preview/body";
+
+        public static const HANGAR_STARTBTN_VEHICLETOHEAVY_BODY:String = "#tooltips:hangar/startBtn/vehicleToHeavy/body";
 
         public static const HANGAR_TANKCARUSEL_WRONGSQUADVEHICLE_HEADER:String = "#tooltips:hangar/tankCarusel/wrongSquadVehicle/header";
 
@@ -1410,10 +1414,6 @@ package
         public static const HEADER_RANKEDSQUAD_HEADER:String = "#tooltips:header/rankedSquad/header";
 
         public static const HEADER_RANKEDSQUAD_BODY:String = "#tooltips:header/rankedSquad/body";
-
-        public static const HEADER_BOBSQUAD_HEADER:String = "#tooltips:header/bobSquad/header";
-
-        public static const HEADER_BOBSQUAD_BODY:String = "#tooltips:header/bobSquad/body";
 
         public static const HEADER_BATTLETYPE_HEADER:String = "#tooltips:header/battleType/header";
 
@@ -1789,10 +1789,6 @@ package
 
         public static const DEVICEFITS_NOT_FOR_THIS_VEHICLE_TYPE_TEXT:String = "#tooltips:deviceFits/not_for_this_vehicle_type/text";
 
-        public static const DEVICEFITS_INCOMPATIBLE_DEVICE_HEADER:String = "#tooltips:deviceFits/incompatible_device/header";
-
-        public static const DEVICEFITS_INCOMPATIBLE_DEVICE_TEXT:String = "#tooltips:deviceFits/incompatible_device/text";
-
         public static const MODULE_COUNT:String = "#tooltips:module/count";
 
         public static const EQUIPMENT_EFFECT:String = "#tooltips:equipment/effect";
@@ -1937,11 +1933,7 @@ package
 
         public static const TRAINING_OBSERVER_BTN_BODY:String = "#tooltips:training/observer/btn/body";
 
-        public static const TRAINING_OBSERVER_SELECTEDICON_HEADER:String = "#tooltips:training/observer/selectedicon/header";
-
         public static const TRAINING_OBSERVER_SELECTEDICON_BODY:String = "#tooltips:training/observer/selectedicon/body";
-
-        public static const TRAINING_OBSERVER_ICON_HEADER:String = "#tooltips:training/observer/icon/header";
 
         public static const TRAINING_OBSERVER_ICON_BODY:String = "#tooltips:training/observer/icon/body";
 
@@ -2349,8 +2341,6 @@ package
 
         public static const VEHICLE_DEAL_EPIC_MAIN:String = "#tooltips:vehicle/deal/epic/main";
 
-        public static const VEHICLE_DEAL_BOB_MAIN:String = "#tooltips:vehicle/deal/bob/main";
-
         public static const ANONYMIZER_TEAMSTATS_HEADER:String = "#tooltips:anonymizer/teamStats/header";
 
         public static const ANONYMIZER_TEAMSTATS_BODY:String = "#tooltips:anonymizer/teamStats/body";
@@ -2455,6 +2445,8 @@ package
 
         public static const VEHICLESTATUS_CREWNOTFULL_HEADER:String = "#tooltips:vehicleStatus/crewNotFull/header";
 
+        public static const VEHICLESTATUS_TOOHEAVY_HEADER:String = "#tooltips:vehicleStatus/tooHeavy/header";
+
         public static const VEHICLESTATUS_NOTUNLOCKED_HEADER:String = "#tooltips:vehicleStatus/notUnlocked/header";
 
         public static const VEHICLESTATUS_INHANGAR_HEADER:String = "#tooltips:vehicleStatus/inHangar/header";
@@ -2512,10 +2504,6 @@ package
         public static const VEHICLESTATUS_UNSUITABLETOUNIT_HEADER:String = "#tooltips:vehicleStatus/unsuitableToUnit/header";
 
         public static const VEHICLESTATUS_ROTATIONGROUPUNLOCKED_HEADER:String = "#tooltips:vehicleStatus/rotationGroupUnlocked/header";
-
-        public static const GIVEAWAY_HEADER:String = "#tooltips:giveaway/header";
-
-        public static const GIVEAWAY_BODY:String = "#tooltips:giveaway/body";
 
         public static const TRADEINVEHICLESTATUS_BATTLE_HEADER:String = "#tooltips:tradeInVehicleStatus/battle/header";
 
@@ -3599,8 +3587,6 @@ package
 
         public static const AWARDITEM_EVENTCOIN_BODY:String = "#tooltips:awardItem/eventCoin/body";
 
-        public static const AWARDITEM_EVENTCOIN_BODY_CN:String = "#tooltips:awardItem/eventCoin/body_CN";
-
         public static const AWARDITEM_STEELHUNTERPOINT_HEADER:String = "#tooltips:awardItem/steelHunterPoint/header";
 
         public static const AWARDITEM_STEELHUNTERPOINT_BODY:String = "#tooltips:awardItem/steelHunterPoint/body";
@@ -3831,9 +3817,9 @@ package
 
         public static const AWARDITEM_RANKED_2020_DISCOUNT_BODY:String = "#tooltips:awardItem/ranked_2020_discount/body";
 
-        public static const AWARDITEM_RANKED_202007_ACCESS_HEADER:String = "#tooltips:awardItem/ranked_202007_access/header";
+        public static const AWARDITEM_RANKED_202010_ACCESS_HEADER:String = "#tooltips:awardItem/ranked_202010_access/header";
 
-        public static const AWARDITEM_RANKED_202007_ACCESS_BODY:String = "#tooltips:awardItem/ranked_202007_access/body";
+        public static const AWARDITEM_RANKED_202010_ACCESS_BODY:String = "#tooltips:awardItem/ranked_202010_access/body";
 
         public static const AWARDITEM_RANKEDDAILYBATTLES_HEADER:String = "#tooltips:awardItem/rankedDailyBattles/header";
 
@@ -3894,6 +3880,8 @@ package
         public static const RANKEDBATTLESVIEW_REWARDS_HEADER:String = "#tooltips:rankedBattlesView/rewards/header";
 
         public static const RANKEDBATTLESVIEW_REWARDS_BODY:String = "#tooltips:rankedBattlesView/rewards/body";
+
+        public static const RANKEDBATTLESVIEW_REWARDS_BODY_SEASONOFF:String = "#tooltips:rankedBattlesView/rewards/body/seasonOff";
 
         public static const RANKEDBATTLESVIEW_SHOP_HEADER:String = "#tooltips:rankedBattlesView/shop/header";
 
@@ -4142,10 +4130,6 @@ package
         public static const VEHICLEPREVIEW_BUYINGPANEL_EVENTPROGRESSION_PRICE_HEADER:String = "#tooltips:vehiclePreview/buyingPanel/eventProgression/price/header";
 
         public static const VEHICLEPREVIEW_BUYINGPANEL_EVENTPROGRESSION_PRICE_BODY:String = "#tooltips:vehiclePreview/buyingPanel/eventProgression/price/body";
-
-        public static const VEHICLEPREVIEW_BUYINGPANEL_EVENTPROGRESSION_STYLE_PRICE_HEADER:String = "#tooltips:vehiclePreview/buyingPanel/eventProgression/style_price/header";
-
-        public static const VEHICLEPREVIEW_BUYINGPANEL_EVENTPROGRESSION_STYLE_PRICE_BODY:String = "#tooltips:vehiclePreview/buyingPanel/eventProgression/style_price/body";
 
         public static const VEHICLEPREVIEW_CREW_COMMANDER:String = "#tooltips:vehiclePreview/crew/commander";
 
@@ -5577,27 +5561,11 @@ package
 
         public static const MARATHON_HEADER:String = "#tooltips:marathon/header";
 
-        public static const AUTUMN_MARATHON_HEADER:String = "#tooltips:autumn_marathon/header";
-
-        public static const EVENT_MARATHON_HEADER:String = "#tooltips:event_marathon/header";
-
         public static const MARATHON_BODY:String = "#tooltips:marathon/body";
-
-        public static const AUTUMN_MARATHON_BODY:String = "#tooltips:autumn_marathon/body";
-
-        public static const EVENT_MARATHON_BODY:String = "#tooltips:event_marathon/body";
 
         public static const MARATHON_BODY_EXTRA:String = "#tooltips:marathon/body/extra";
 
-        public static const EVENT_MARATHON_BODY_EXTRA:String = "#tooltips:event_marathon/body/extra";
-
-        public static const AUTUMN_MARATHON_BODY_EXTRA:String = "#tooltips:autumn_marathon/body/extra";
-
         public static const MARATHON_BODY_EXTRA_SMART:String = "#tooltips:marathon/body/extra_smart";
-
-        public static const AUTUMN_MARATHON_BODY_EXTRA_SMART:String = "#tooltips:autumn_marathon/body/extra_smart";
-
-        public static const EVENT_MARATHON_BODY_EXTRA_SMART:String = "#tooltips:event_marathon/body/extra_smart";
 
         public static const MARATHON_STATE_START:String = "#tooltips:marathon/state/start";
 
@@ -5607,15 +5575,9 @@ package
 
         public static const MARATHON_EXTRA_STATE_STEPS:String = "#tooltips:marathon/extra_state/steps";
 
-        public static const EVENT_MARATHON_EXTRA_STATE_STEPS:String = "#tooltips:event_marathon/extra_state/steps";
-
         public static const MARATHON_EXTRA_STATE_COMPLETED:String = "#tooltips:marathon/extra_state/completed";
 
-        public static const EVENT_MARATHON_EXTRA_STATE_COMPLETED:String = "#tooltips:event_marathon/extra_state/completed";
-
         public static const MARATHON_EXTRA_STATE_DISCOUNT:String = "#tooltips:marathon/extra_state/discount";
-
-        public static const EVENT_MARATHON_EXTRA_STATE_DISCOUNT:String = "#tooltips:event_marathon/extra_state/discount";
 
         public static const MARATHON_OFF_HEADER:String = "#tooltips:marathon/off/header";
 
@@ -5624,10 +5586,6 @@ package
         public static const MARATHON_ERROR_BATTLE_TYPE:String = "#tooltips:marathon/error/battle_type";
 
         public static const MARATHON_ERROR_VEH_TYPE:String = "#tooltips:marathon/error/veh_type";
-
-        public static const EVENT_MARATHON_ERROR_BATTLE_TYPE:String = "#tooltips:event_marathon/error/battle_type";
-
-        public static const EVENT_MARATHON_ERROR_VEH_TYPE:String = "#tooltips:event_marathon/error/veh_type";
 
         public static const XPEXCHANGEWINDOW_GOLD_GOLDAFTEREXCHANGE_HEADER:String = "#tooltips:xpExchangewindow/gold/goldAfterExchange/header";
 
@@ -5929,12 +5887,6 @@ package
 
         public static const NOTRECRUITEDTANKMAN_CH_COMPENSATION_DESC:String = "#tooltips:notrecruitedtankman/ch_compensation/desc";
 
-        public static const NOTRECRUITEDTANKMAN_WT_RAIDBOSS_COMMANDER_LABEL:String = "#tooltips:notrecruitedtankman/wt_raidboss_commander/label";
-
-        public static const NOTRECRUITEDTANKMAN_WT_RAIDBOSS_COMMANDER_DESC:String = "#tooltips:notrecruitedtankman/wt_raidboss_commander/desc";
-
-        public static const NOTRECRUITEDTANKMAN_WT_RAIDBOSS_COMMANDER_HOWTOGETINFO:String = "#tooltips:notrecruitedtankman/wt_raidboss_commander/howToGetInfo";
-
         public static const QUESTS_AWARDS_VEHICLERENT_HEADER:String = "#tooltips:quests/awards/vehicleRent/header";
 
         public static const QUESTS_AWARDS_VEHICLERENT_EXPIRE:String = "#tooltips:quests/awards/vehicleRent/expire";
@@ -6089,21 +6041,13 @@ package
 
         public static const EVENTPROGRESSION_DESCRIPTION:String = "#tooltips:eventProgression/description";
 
-        public static const EVENTPROGRESSION_DESCRIPTION_CN:String = "#tooltips:eventProgression/description_cn";
-
-        public static const EVENTPROGRESSION_SEASON_CN:String = "#tooltips:eventProgression/season_cn";
-
         public static const EVENTPROGRESSION_SEASON:String = "#tooltips:eventProgression/season";
 
         public static const EVENTPROGRESSION_STEELHUNTER_SEASON:String = "#tooltips:eventProgression/steelHunter/season";
 
-        public static const EVENTPROGRESSION_TIMETOSTART_SEASON:String = "#tooltips:eventProgression/timeToStart/season";
+        public static const EVENTPROGRESSION_TIMETOSTART:String = "#tooltips:eventProgression/timeToStart";
 
-        public static const EVENTPROGRESSION_TIMETOLEFT_SEASON:String = "#tooltips:eventProgression/timeToLeft/season";
-
-        public static const EVENTPROGRESSION_TIMETOSTART_CYCLE:String = "#tooltips:eventProgression/timeToStart/cycle";
-
-        public static const EVENTPROGRESSION_TIMETOLEFT_CYCLE:String = "#tooltips:eventProgression/timeToLeft/cycle";
+        public static const EVENTPROGRESSION_TIMETOLEFT:String = "#tooltips:eventProgression/timeToLeft";
 
         public static const EVENTPROGRESSION_DISABLED:String = "#tooltips:eventProgression/disabled";
 
@@ -6111,9 +6055,7 @@ package
 
         public static const EVENTPROGRESSION_UNLOCKEDDAILYMISSIONS:String = "#tooltips:eventProgression/unlockedDailyMissions";
 
-        public static const EVENTPROGRESSION_ALLSEASONSAREOVER_MULTI:String = "#tooltips:eventProgression/allSeasonsAreOver/multi";
-
-        public static const EVENTPROGRESSION_ALLSEASONSAREOVER_SINGLE:String = "#tooltips:eventProgression/allSeasonsAreOver/single";
+        public static const EVENTPROGRESSION_ALLSEASONSAREOVER:String = "#tooltips:eventProgression/allSeasonsAreOver";
 
         public static const EVENTPROGRESSION_FRONTLINE:String = "#tooltips:eventProgression/frontLine";
 
@@ -6226,10 +6168,6 @@ package
         public static const BATTLE_ROYALE_VIEWSTACK_REWARDS_HEADER:String = "#tooltips:battle_royale/viewStack/rewards/header";
 
         public static const BATTLE_ROYALE_VIEWSTACK_REWARDS_BODY:String = "#tooltips:battle_royale/viewStack/rewards/body";
-
-        public static const SETTTINGSDISABLEDNOTIFICATION_HEADER:String = "#tooltips:setttingsDisabledNotification/header";
-
-        public static const SETTTINGSDISABLEDNOTIFICATION_BODY:String = "#tooltips:setttingsDisabledNotification/body";
 
         public static const ELEN_SUMMARY_RANK_ENUM:Array = [ELEN_SUMMARY_RANK_1,ELEN_SUMMARY_RANK_2,ELEN_SUMMARY_RANK_3,ELEN_SUMMARY_RANK_4,ELEN_SUMMARY_RANK_NORANK];
 

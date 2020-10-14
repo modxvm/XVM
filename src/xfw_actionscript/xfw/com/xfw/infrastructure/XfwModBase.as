@@ -76,8 +76,10 @@ package com.xfw.infrastructure
         private function postInit():void
         {
             // view can be already loaded
+            // TODO: 1.10.1
+            /*
             var mgr:ContainerManagerBase = App.containerMgr as ContainerManagerBase;
-            for each (var c:ISimpleManagedContainer in mgr.containersMap)
+            for each (var c:ISimpleManagedContainer in mgr._containersMap)
             {
                 var vc:MainViewContainer = c as MainViewContainer;
                 if (vc != null)
@@ -93,6 +95,7 @@ package com.xfw.infrastructure
             }
 
             App.containerMgr.loader.addEventListener(LoaderEvent.VIEW_LOADED, onViewLoaded);
+            */
         }
 
         private function onViewLoaded(e:LoaderEvent):void

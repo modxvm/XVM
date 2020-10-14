@@ -16,7 +16,7 @@ package net.wg.gui.notification
     import scaleform.clik.motion.Tween;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import flash.events.Event;
-    import net.wg.data.constants.generated.APP_CONTAINERS_NAMES;
+    import net.wg.data.constants.generated.LAYER_NAMES;
 
     public class NotificationPopUpViewer extends NotificationPopUpViewerMeta implements INotificationPopUpViewerMeta
     {
@@ -442,7 +442,7 @@ package net.wg.gui.notification
 
         private function onContainerMgrViewLoadingHandler(param1:ContainerManagerEvent) : void
         {
-            if(param1.containerName == APP_CONTAINERS_NAMES.SUBVIEW)
+            if(LAYER_NAMES.LAYER_ORDER[param1.layer] == LAYER_NAMES.SUBVIEW)
             {
                 this.setPadding(DEFAULT_PADDING);
             }

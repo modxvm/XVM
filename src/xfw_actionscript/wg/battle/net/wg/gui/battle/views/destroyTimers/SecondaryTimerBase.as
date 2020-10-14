@@ -22,8 +22,6 @@ package net.wg.gui.battle.views.destroyTimers
 
         private var _typeId:String = null;
 
-        private var _color:String = null;
-
         public function SecondaryTimerBase()
         {
             super();
@@ -63,7 +61,6 @@ package net.wg.gui.battle.views.destroyTimers
             this._isCanBeMainType = param1.isCanBeMainType;
             this._countdownVisible = param1.countdownVisible;
             this._typeId = param1.typeId;
-            this._color = param1.color;
             invalidateData();
         }
 
@@ -105,11 +102,6 @@ package net.wg.gui.battle.views.destroyTimers
         public function get typeId() : String
         {
             return this._typeId;
-        }
-
-        public function get color() : String
-        {
-            return this._color;
         }
 
         public function get priority() : uint

@@ -11,10 +11,6 @@ package net.wg.gui.bootcamp.containers
     public class TutorialPageContainer extends Sprite implements IDisposable
     {
 
-        private static const TEXT_RIGHT_OFFSET:int = 50;
-
-        private static const TEXT_Y_OFFSET:int = 14;
-
         public var txtHeader1:TextField;
 
         public var txtHeader2:TextField;
@@ -43,34 +39,9 @@ package net.wg.gui.bootcamp.containers
 
         public var loaderBlind:UILoaderAlt;
 
-        private var _isAdaptable:Boolean = false;
-
         public function TutorialPageContainer()
         {
             super();
-        }
-
-        public final function dispose() : void
-        {
-            this.txtHeader1 = null;
-            this.txtHeader2 = null;
-            this.txtHeader2Blind = null;
-            this.txtHeader3 = null;
-            this.txtHeader4 = null;
-            this.txtDescription1 = null;
-            this.txtDescription2 = null;
-            this.txtDescription3 = null;
-            this.txtDescription4 = null;
-            this.txtTitle1 = null;
-            this.txtTitle2 = null;
-            this.txtTitle3 = null;
-            if(this.loaderBlind)
-            {
-                this.loaderBlind.dispose();
-                this.loaderBlind = null;
-            }
-            this.loader.dispose();
-            this.loader = null;
         }
 
         public function setData(param1:BCTutorialPageVO) : void
@@ -86,86 +57,134 @@ package net.wg.gui.bootcamp.containers
             {
                 this.txtHeader1.text = param1.header1Text;
                 this.txtHeader1.autoSize = param1.header1AutoSize;
+                this.txtHeader1 = null;
             }
             if(this.txtHeader2)
             {
                 this.txtHeader2.text = param1.header2Text;
                 this.txtHeader2.autoSize = param1.header2AutoSize;
+                this.txtHeader2 = null;
             }
             if(this.txtHeader2Blind)
             {
                 this.txtHeader2Blind.textColor = _loc2_.rgb;
                 this.txtHeader2Blind.text = param1.header2Text;
                 this.txtHeader2Blind.autoSize = param1.header2AutoSize;
+                this.txtHeader2Blind = null;
             }
             if(this.txtHeader3)
             {
                 this.txtHeader3.text = param1.header3Text;
                 this.txtHeader3.autoSize = param1.header3AutoSize;
+                this.txtHeader3 = null;
             }
             if(this.txtHeader4)
             {
                 this.txtHeader4.text = param1.header4Text;
                 this.txtHeader4.autoSize = param1.header4AutoSize;
+                this.txtHeader4 = null;
             }
             if(this.txtDescription1)
             {
                 this.txtDescription1.text = param1.description1Text;
                 this.txtDescription1.autoSize = param1.description1AutoSize;
+                this.txtDescription1 = null;
             }
             if(this.txtDescription2)
             {
                 this.txtDescription2.text = param1.description2Text;
                 this.txtDescription2.autoSize = param1.description2AutoSize;
+                this.txtDescription2 = null;
             }
             if(this.txtDescription3)
             {
                 this.txtDescription3.text = param1.description3Text;
                 this.txtDescription3.autoSize = param1.description3AutoSize;
+                this.txtDescription3 = null;
             }
             if(this.txtDescription4)
             {
                 this.txtDescription4.text = param1.description4Text;
                 this.txtDescription4.autoSize = param1.description4AutoSize;
+                this.txtDescription4 = null;
             }
             if(this.txtTitle1)
             {
                 this.txtTitle1.text = param1.title1Text;
                 this.txtTitle1.autoSize = param1.title1AutoSize;
+                this.txtTitle1 = null;
             }
             if(this.txtTitle2)
             {
                 this.txtTitle2.text = param1.title2Text;
                 this.txtTitle2.autoSize = param1.title2AutoSize;
+                this.txtTitle2 = null;
             }
             if(this.txtTitle3)
             {
                 this.txtTitle3.text = param1.title3Text;
                 this.txtTitle3.autoSize = param1.title3AutoSize;
+                this.txtTitle3 = null;
             }
         }
 
-        public function updateTextPosition(param1:int, param2:int, param3:int, param4:int, param5:int, param6:int) : void
+        public final function dispose() : void
         {
-            var _loc7_:* = 0;
-            var _loc8_:* = 0;
-            if(this._isAdaptable && this.txtHeader1 && this.txtHeader2 && this.txtHeader3)
+            if(this.txtHeader1)
             {
-                _loc7_ = param3 + param5;
-                _loc8_ = param1 - param5 - TEXT_RIGHT_OFFSET;
-                this.txtHeader1.x = _loc7_;
-                this.txtHeader2.x = _loc7_;
-                this.txtHeader3.x = _loc7_;
-                this.txtHeader1.width = this.txtHeader2.width = this.txtHeader3.width = _loc8_;
-                this.txtHeader3.y = param2 - this.txtHeader3.height - param4 - param6 >> 0;
-                this.txtHeader2.y = this.txtHeader3.y - TEXT_Y_OFFSET - this.txtHeader2.height >> 0;
-                this.txtHeader1.y = this.txtHeader2.y - TEXT_Y_OFFSET - this.txtHeader1.height >> 0;
+                this.txtHeader1 = null;
             }
-        }
-
-        public function set isAdaptable(param1:Boolean) : void
-        {
-            this._isAdaptable = param1;
+            if(this.txtHeader2)
+            {
+                this.txtHeader2 = null;
+            }
+            if(this.txtHeader2Blind)
+            {
+                this.txtHeader2Blind = null;
+            }
+            if(this.txtHeader3)
+            {
+                this.txtHeader3 = null;
+            }
+            if(this.txtHeader4)
+            {
+                this.txtHeader4 = null;
+            }
+            if(this.txtDescription1)
+            {
+                this.txtDescription1 = null;
+            }
+            if(this.txtDescription2)
+            {
+                this.txtDescription2 = null;
+            }
+            if(this.txtDescription3)
+            {
+                this.txtDescription3 = null;
+            }
+            if(this.txtDescription4)
+            {
+                this.txtDescription4 = null;
+            }
+            if(this.txtTitle1)
+            {
+                this.txtTitle1 = null;
+            }
+            if(this.txtTitle2)
+            {
+                this.txtTitle2 = null;
+            }
+            if(this.txtTitle3)
+            {
+                this.txtTitle3 = null;
+            }
+            if(this.loaderBlind)
+            {
+                this.loaderBlind.dispose();
+                this.loaderBlind = null;
+            }
+            this.loader.dispose();
+            this.loader = null;
         }
     }
 }

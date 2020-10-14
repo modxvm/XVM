@@ -6,6 +6,7 @@ package net.wg.gui.battle.views.stats.fullStats
     import net.wg.gui.battle.views.stats.StatsUserProps;
     import net.wg.data.constants.PlayerStatus;
     import net.wg.data.constants.UserTags;
+    import net.wg.gui.components.dogtag.VO.DogTagVO;
     import net.wg.gui.battle.battleloading.BattleLoadingHelper;
 
     public class StatsTableItemHolderBase extends Object implements IStatsTableItemHolderBase, IDisposable
@@ -44,6 +45,11 @@ package net.wg.gui.battle.views.stats.fullStats
             {
                 this._isRenderingRequired = true;
             }
+        }
+
+        public function getVehicleID() : Number
+        {
+            return this.data.vehicleID;
         }
 
         public function setActivePlayerData(param1:DAAPIVehicleInfoVO) : void
@@ -145,6 +151,11 @@ package net.wg.gui.battle.views.stats.fullStats
                 this._userProps.tags = this.data.userTags;
             }
             this.statsItem.setPlayerName(this._userProps);
+        }
+
+        public function showDogTag(param1:DogTagVO) : void
+        {
+            this.statsItem.setShowDogTag(param1 != null);
         }
 
         protected function updateVehicleType() : void

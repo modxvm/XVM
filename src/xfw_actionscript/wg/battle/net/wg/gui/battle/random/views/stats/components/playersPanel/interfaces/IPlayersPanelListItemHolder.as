@@ -2,6 +2,8 @@ package net.wg.gui.battle.random.views.stats.components.playersPanel.interfaces
 {
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
+    import net.wg.gui.components.dogtag.VO.DogTagVO;
+    import net.wg.gui.battle.components.stats.playersPanel.interfaces.IPlayersPanelListItem;
 
     public interface IPlayersPanelListItemHolder extends IDisposable
     {
@@ -31,5 +33,11 @@ package net.wg.gui.battle.random.views.stats.components.playersPanel.interfaces
         function get isCurrentPlayer() : Boolean;
 
         function triggerChatCommand(param1:String) : void;
+
+        function setDogTag(param1:DogTagVO) : void;
+
+        function getDogTag() : DogTagVO;
+
+        function getListItem() : IPlayersPanelListItem;
     }
 }

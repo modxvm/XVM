@@ -2,7 +2,9 @@ package net.wg.gui.battle.views.postmortemPanel
 {
     import net.wg.infrastructure.base.meta.impl.BasePostmortemPanelMeta;
     import flash.text.TextField;
+    import net.wg.gui.battle.components.BattleAtlasSprite;
     import net.wg.gui.components.controls.UserNameField;
+    import net.wg.data.constants.Values;
     import flash.events.Event;
     import net.wg.data.VO.UserVO;
     import net.wg.data.constants.Linkages;
@@ -11,11 +13,13 @@ package net.wg.gui.battle.views.postmortemPanel
     public class BasePostmortemPanel extends BasePostmortemPanelMeta
     {
 
+        private static const WHITE_TEXT_COLOR:uint = 16777215;
+
+        protected static const INVALID_VEHICLE_PANEL:uint = 1 << 8;
+
         private static const EMPTY_STR:String = "";
 
         private static const INVALID_PLAYER_INFO:uint = 1 << 7;
-
-        private static const INVALID_VEHICLE_PANEL:uint = 1 << 8;
 
         private static const INVALID_PLAYER_INFO_POSITION:uint = 1 << 9;
 
@@ -25,7 +29,9 @@ package net.wg.gui.battle.views.postmortemPanel
 
         protected static const PLAYER_INFO_DELTA_Y:int = 250;
 
-        protected static const GAP_VEHICLE_PANEL_DEAD_REASON:int = 35;
+        protected static const GAP_VEHICLE_PANEL_DEAD_REASON:int = 40;
+
+        protected static const GAP_USER_NAME_DEAD_REASON:int = 5;
 
         public var playerInfoTF:TextField = null;
 
@@ -33,13 +39,17 @@ package net.wg.gui.battle.views.postmortemPanel
 
         public var vehiclePanel:VehiclePanel = null;
 
+        public var deadReasonBG:BattleAtlasSprite = null;
+
+        public var vehiclePanelBG:BattleAtlasSprite = null;
+
         protected var _userName:UserNameField = null;
 
-        private var _deadReason:String = "";
+        protected var _deadReason:String = "";
 
         private var _playerInfo:String = "";
 
-        private var _showVehiclePanel:Boolean = true;
+        private var _showVehiclePanel:Boolean = false;
 
         private var _vehicleLevel:String = "";
 
@@ -66,6 +76,11 @@ package net.wg.gui.battle.views.postmortemPanel
                     this._userName.visible = true;
                 }
                 this.vehiclePanel.visible = this._showVehiclePanel;
+                if(this.vehiclePanelBG && this.deadReasonBG)
+                {
+                    this.vehiclePanelBG.visible = true;
+                    this.deadReasonBG.visible = true;
+                }
             }
             if(isInvalid(INVALID_PLAYER_INFO))
             {
@@ -76,6 +91,11 @@ package net.wg.gui.battle.views.postmortemPanel
                     this._userName.visible = false;
                 }
                 this.vehiclePanel.visible = false;
+                if(this.vehiclePanelBG && this.deadReasonBG)
+                {
+                    this.vehiclePanelBG.visible = false;
+                    this.deadReasonBG.visible = false;
+                }
                 if(this._playerInfo != this.playerInfoTF.htmlText)
                 {
                     this.playerInfoTF.htmlText = this._playerInfo;
@@ -84,19 +104,26 @@ package net.wg.gui.battle.views.postmortemPanel
             if(isInvalid(INVALID_VEHICLE_PANEL))
             {
                 this.playerInfoTF.visible = false;
-                this.deadReasonTF.visible = true;
+                this.deadReasonTF.visible = this._deadReason != Values.EMPTY_STR;
                 if(this._userName != null)
                 {
                     this._userName.visible = true;
                 }
-                if(this._deadReason != this.deadReasonTF.htmlText)
+                if(this._deadReason != this.deadReasonTF.text)
                 {
-                    this.deadReasonTF.htmlText = this._deadReason;
+                    this.deadReasonTF.text = this._deadReason;
+                }
+                if(this.vehiclePanelBG && this.deadReasonBG)
+                {
+                    this.vehiclePanelBG.visible = this._showVehiclePanel;
+                    this.deadReasonBG.visible = this._deadReason != Values.EMPTY_STR;
+                    this.vehiclePanelBG.x = -this.vehiclePanelBG.width >> 1;
                 }
                 this.vehiclePanel.visible = this._showVehiclePanel;
                 if(this._showVehiclePanel)
                 {
-                    this.vehiclePanel.setVehicleData(this._vehicleLevel,this._vehicleImg,this._vehicleType,this._vehicleName);
+                    this.vehiclePanel.setVehicleData(this._vehicleLevel,this._vehicleType,this._vehicleName);
+                    this.vehiclePanel.x = -this.vehiclePanel.width >> 1;
                 }
             }
             if(isInvalid(INVALID_PLAYER_INFO_POSITION))
@@ -164,9 +191,15 @@ package net.wg.gui.battle.views.postmortemPanel
             this.deadReasonTF.y = this.vehiclePanel.y - GAP_VEHICLE_PANEL_DEAD_REASON - this.deadReasonTF.height;
             if(this._userName != null)
             {
-                this._userName.y = this.deadReasonTF.y + this.deadReasonTF.textHeight;
+                this._userName.y = this.deadReasonTF.y + this.deadReasonTF.textHeight + GAP_USER_NAME_DEAD_REASON;
                 this._userName.x = -this._userName.textWidth >> 1;
                 this._userName.verticalAlign = VerticalAlign.MIDDLE;
+                this._userName.textColor = WHITE_TEXT_COLOR;
+            }
+            if(this.vehiclePanelBG && this.deadReasonBG)
+            {
+                this.deadReasonBG.y = this.deadReasonTF.y - (this.deadReasonBG.height - this.deadReasonTF.height >> 1);
+                this.vehiclePanelBG.y = this.deadReasonTF.y - (this.vehiclePanelBG.height >> 1);
             }
         }
 
@@ -175,6 +208,11 @@ package net.wg.gui.battle.views.postmortemPanel
             this.playerInfoTF.visible = param1;
             this.vehiclePanel.visible = param1;
             this.deadReasonTF.visible = param1;
+            if(this.vehiclePanelBG && this.deadReasonBG)
+            {
+                this.deadReasonBG.visible = param1;
+                this.vehiclePanelBG.visible = param1;
+            }
             if(this._userName != null)
             {
                 this._userName.visible = param1;

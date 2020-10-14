@@ -90,8 +90,14 @@ package net.wg.gui.lobby.components
 
         override public function set selected(param1:Boolean) : void
         {
-            enabled = buttonMode = !param1;
+            buttonMode = !param1 && enabled;
             super.selected = param1;
+        }
+
+        override public function set enabled(param1:Boolean) : void
+        {
+            buttonMode = param1;
+            super.enabled = param1;
         }
 
         override public function set data(param1:Object) : void

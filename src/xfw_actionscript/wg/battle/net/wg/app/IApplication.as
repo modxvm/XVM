@@ -85,8 +85,6 @@ package net.wg.app
 
         function get tweenMgr() : ITweenManager;
 
-        function get browserBgClass() : Class;
-
         function get graphicsOptimizationMgr() : IGraphicsOptimizationManager;
 
         function get stageSizeMgr() : IStageSizeManager;

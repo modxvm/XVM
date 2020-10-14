@@ -5,8 +5,6 @@ package net.wg.data.constants.generated
 
         public static const ALLY_AT_SPG:String = "ally_AT-SPG";
 
-        public static const ALLY_EVENT_BOSS:String = "ally_event_boss";
-
         public static const ALLY_HEAVY_TANK:String = "ally_heavyTank";
 
         public static const ALLY_LIGHT_TANK:String = "ally_lightTank";
@@ -66,8 +64,6 @@ package net.wg.data.constants.generated
         public static const DRIVER_CIRCLE:String = "driverCircle";
 
         public static const ENGINE_CIRCLE:String = "engineCircle";
-
-        public static const EVENT_BOSS:String = "event_boss";
 
         public static const GUN_CIRCLE:String = "gunCircle";
 

@@ -12,7 +12,7 @@ package net.wg.gui.battle.battleRoyale.views.components
 
         private static const TIME_TF_Y:int = 16;
 
-        private static const TIME_TF_SMALL_X:int = -9;
+        private static const TIME_TF_SMALL_X:int = -14;
 
         private static const TIME_TF_SMALL_Y:int = 15;
 
@@ -43,14 +43,11 @@ package net.wg.gui.battle.battleRoyale.views.components
 
         public function cropSize() : void
         {
-            var _loc1_:uint = 0;
-            _loc1_ = this.tf.textColor;
             gotoAndStop(BattleRoyaleTimer.SMALL_SIZE_FRAME_LABEL);
             this.updateTimeTfVisible();
             this.tf.visible = false;
             this.timeTF.x = TIME_TF_SMALL_X;
             this.timeTF.y = TIME_TF_SMALL_Y;
-            this.setTextColor(_loc1_);
         }
 
         public final function dispose() : void
@@ -61,8 +58,6 @@ package net.wg.gui.battle.battleRoyale.views.components
 
         public function fullSize() : void
         {
-            var _loc1_:uint = 0;
-            _loc1_ = this.tf.textColor;
             gotoAndStop(BattleRoyaleTimer.FULL_SIZE_FRAME_LABEL);
             this.updateTimeTfVisible();
             this.tf.autoSize = this._defaultAutoSize;
@@ -71,13 +66,6 @@ package net.wg.gui.battle.battleRoyale.views.components
             this.timeTF.autoSize = this._defaultAutoSize;
             this.timeTF.x = TIME_TF_X;
             this.timeTF.y = TIME_TF_Y;
-            this.setTextColor(_loc1_);
-        }
-
-        public function setTextColor(param1:uint) : void
-        {
-            this.tf.textColor = param1;
-            this.timeTF.textColor = param1;
         }
 
         public function setTime(param1:String) : void

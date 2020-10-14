@@ -30,7 +30,7 @@ package net.wg.app.impl
     import net.wg.infrastructure.managers.impl.CommonsBattle;
     import net.wg.infrastructure.managers.utils.impl.FocusHandlerEx;
     import net.wg.infrastructure.managers.utils.impl.IME;
-    import net.wg.data.constants.generated.APP_CONTAINERS_NAMES;
+    import net.wg.data.constants.generated.LAYER_NAMES;
     import net.wg.infrastructure.managers.utils.impl.StyleSheetManager;
     import net.wg.infrastructure.managers.utils.impl.TweenAnimator;
     import net.wg.infrastructure.managers.utils.impl.DateTimeBattle;
@@ -94,6 +94,8 @@ package net.wg.app.impl
 
         private var _windows:ManagedContainer;
 
+        private var _fullscreenWindows:ManagedContainer;
+
         private var _dialogs:ManagedContainer;
 
         private var _toolTips:SimpleManagedContainer;
@@ -140,7 +142,7 @@ package net.wg.app.impl
 
         override protected function getNewUtils() : IUtils
         {
-            var _loc1_:IUtils = new Utils(new Asserter(),new Scheduler(),new LocaleBase(),new WGJSON(),null,new ClassFactory(),new PopupManager(),new CommonsBattle(),new FocusHandlerEx(),new IME(new SimpleManagedContainer(APP_CONTAINERS_NAMES.IME)),null,null,new StyleSheetManager(),new TweenAnimator(),null,new DateTimeBattle(),new PoolManager(),new DataUtils(),new CounterManager(),new ViewRestrictions(),new UniversalBtnStyles());
+            var _loc1_:IUtils = new Utils(new Asserter(),new Scheduler(),new LocaleBase(),new WGJSON(),null,new ClassFactory(),new PopupManager(),new CommonsBattle(),new FocusHandlerEx(),new IME(new SimpleManagedContainer(LAYER_NAMES.IME)),null,null,new StyleSheetManager(),new TweenAnimator(),null,new DateTimeBattle(),new PoolManager(),new DataUtils(),new CounterManager(),new ViewRestrictions(),new UniversalBtnStyles());
             _loc1_.universalBtnStyles.setClassFactory(_loc1_.classFactory);
             return _loc1_;
         }
@@ -152,15 +154,16 @@ package net.wg.app.impl
 
         override protected function createContainers() : void
         {
-            this._serviceLayout = new ManagedContainer(APP_CONTAINERS_NAMES.SERVICE_LAYOUT);
-            this._views = new MainViewContainer(APP_CONTAINERS_NAMES.VIEWS);
-            this._windows = new ManagedContainer(APP_CONTAINERS_NAMES.WINDOWS);
-            this._systemMessages = new SimpleManagedContainer(APP_CONTAINERS_NAMES.SYSTEM_MESSAGES);
-            this._dialogs = new ManagedContainer(APP_CONTAINERS_NAMES.DIALOGS);
-            this._toolTips = new SimpleManagedContainer(APP_CONTAINERS_NAMES.TOOL_TIPS);
+            this._serviceLayout = new ManagedContainer(LAYER_NAMES.SERVICE_LAYOUT);
+            this._views = new MainViewContainer(LAYER_NAMES.VIEWS);
+            this._windows = new ManagedContainer(LAYER_NAMES.WINDOWS);
+            this._fullscreenWindows = new ManagedContainer(LAYER_NAMES.FULLSCREEN_WINDOWS);
+            this._systemMessages = new SimpleManagedContainer(LAYER_NAMES.SYSTEM_MESSAGES);
+            this._dialogs = new ManagedContainer(LAYER_NAMES.DIALOGS);
+            this._toolTips = new SimpleManagedContainer(LAYER_NAMES.TOOL_TIPS);
             this._toolTips.updateMouseHandling(false);
-            this._cursorCtnr = new CursorManagedContainer(APP_CONTAINERS_NAMES.CURSOR);
-            this._overlay = new ManagedContainer(APP_CONTAINERS_NAMES.OVERLAY);
+            this._cursorCtnr = new CursorManagedContainer(LAYER_NAMES.CURSOR);
+            this._overlay = new ManagedContainer(LAYER_NAMES.OVERLAY);
             super.createContainers();
         }
 
@@ -171,6 +174,8 @@ package net.wg.app.impl
             this._views = null;
             this._dialogs.dispose();
             this._dialogs = null;
+            this._fullscreenWindows.dispose();
+            this._fullscreenWindows = null;
             this._windows.dispose();
             this._windows = null;
             this._cursorCtnr.dispose();
@@ -189,7 +194,7 @@ package net.wg.app.impl
             if(!containers)
             {
                 _loc1_ = DisplayObject(utils.IME.getContainer());
-                containers = new <DisplayObject>[this._views,this._windows,this._systemMessages,_loc1_,this._dialogs,this._overlay,this._serviceLayout,this._toolTips,this._cursorCtnr];
+                containers = new <DisplayObject>[this._views,this._windows,this._fullscreenWindows,this._systemMessages,this._dialogs,this._overlay,_loc1_,this._serviceLayout,this._toolTips,this._cursorCtnr];
             }
             return containers;
         }

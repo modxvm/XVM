@@ -70,8 +70,6 @@ package net.wg.infrastructure.base.meta.impl
 
         private var _vectorString:Vector.<String>;
 
-        private var _vectorString1:Vector.<String>;
-
         public function ApplicationMeta()
         {
             super();
@@ -83,11 +81,6 @@ package net.wg.infrastructure.base.meta.impl
             {
                 this._vectorString.splice(0,this._vectorString.length);
                 this._vectorString = null;
-            }
-            if(this._vectorString1)
-            {
-                this._vectorString1.splice(0,this._vectorString1.length);
-                this._vectorString1 = null;
             }
             super.onDispose();
         }
@@ -236,36 +229,11 @@ package net.wg.infrastructure.base.meta.impl
             }
         }
 
-        public final function as_blurBackgroundViews(param1:String, param2:Array, param3:Number) : void
-        {
-            var _loc4_:Vector.<String> = this._vectorString1;
-            this._vectorString1 = new Vector.<String>(0);
-            var _loc5_:uint = param2.length;
-            var _loc6_:* = 0;
-            while(_loc6_ < _loc5_)
-            {
-                this._vectorString1[_loc6_] = param2[_loc6_];
-                _loc6_++;
-            }
-            this.blurBackgroundViews(param1,this._vectorString1,param3);
-            if(_loc4_)
-            {
-                _loc4_.splice(0,_loc4_.length);
-            }
-        }
-
         protected function loadLibraries(param1:Vector.<String>) : void
         {
             var _loc2_:String = "as_loadLibraries" + Errors.ABSTRACT_INVOKE;
             DebugUtils.LOG_ERROR(_loc2_);
             throw new AbstractException(_loc2_);
-        }
-
-        protected function blurBackgroundViews(param1:String, param2:Vector.<String>, param3:Number) : void
-        {
-            var _loc4_:String = "as_blurBackgroundViews" + Errors.ABSTRACT_INVOKE;
-            DebugUtils.LOG_ERROR(_loc4_);
-            throw new AbstractException(_loc4_);
         }
     }
 }

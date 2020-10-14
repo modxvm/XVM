@@ -10,12 +10,15 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
     import net.wg.gui.battle.random.views.stats.components.fullStats.interfaces.ISquadHandler;
     import net.wg.gui.battle.views.stats.SquadTooltip;
     import net.wg.infrastructure.managers.ITooltipMgr;
+    import net.wg.gui.components.dogtag.DogtagComponent;
     import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
+    import net.wg.gui.components.dogtag.VO.DogTagVO;
     import flash.events.MouseEvent;
     import net.wg.data.constants.InvalidationType;
     import net.wg.gui.battle.views.stats.constants.SquadInvalidationType;
     import net.wg.gui.battle.views.stats.constants.DynamicSquadState;
     import net.wg.data.constants.generated.BATTLEATLAS;
+    import net.wg.data.constants.Linkages;
     import org.idmedia.as3commons.util.StringUtils;
 
     public class DynamicSquadCtrl extends BattleUIComponentsHolder implements IClickButtonHandler, IRollOutButtonHandler
@@ -67,7 +70,13 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
 
         private var _tooltipMgr:ITooltipMgr = null;
 
+        private var _dogTag:DogtagComponent;
+
         private var _activePlayerData:DAAPIVehicleInfoVO = null;
+
+        private var _playerData:DAAPIVehicleInfoVO = null;
+
+        private var _dogTagData:DogTagVO;
 
         public function DynamicSquadCtrl(param1:SquadInviteStatusView, param2:BattleAtlasSprite, param3:BattleButton, param4:BattleButton, param5:Sprite, param6:BattleAtlasSprite = null)
         {
@@ -88,6 +97,7 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
                 this._noSoundSpr.imageName = BATTLEATLAS.SQUAD_NO_SOUND;
             }
             this._tooltip = new SquadTooltip();
+            this.buildDogTag();
         }
 
         override protected function onDispose() : void
@@ -95,6 +105,8 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
             this.setMouseEnabled(false);
             this._hitArea.removeEventListener(MouseEvent.ROLL_OVER,this.onMouseRollOverHandler);
             this._hitArea.removeEventListener(MouseEvent.ROLL_OUT,this.onMouseRollOutHandler);
+            this._hitArea.removeEventListener(MouseEvent.ROLL_OVER,this.dogTagFadeIn);
+            this._hitArea.removeEventListener(MouseEvent.ROLL_OUT,this.dogTagFadeOut);
             this._squadStatus = null;
             this._squadIcon = null;
             this._squadAcceptBt = null;
@@ -109,6 +121,11 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
             this._currentPlayerFakeName = null;
             this._activePlayerData = null;
             this._tooltipMgr = null;
+            if(this._dogTag)
+            {
+                this._dogTag.dispose();
+                this._dogTag = null;
+            }
             super.onDispose();
         }
 
@@ -193,6 +210,40 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
         public function setActivePlayerData(param1:DAAPIVehicleInfoVO) : void
         {
             this._activePlayerData = param1;
+        }
+
+        public function setPlayerData(param1:DAAPIVehicleInfoVO) : void
+        {
+            this._playerData = param1;
+        }
+
+        public function setDogTag(param1:DogTagVO) : void
+        {
+            this.resetDogTag();
+            if(param1)
+            {
+                this._dogTagData = param1;
+                this._hitArea.addEventListener(MouseEvent.ROLL_OVER,this.dogTagFadeIn);
+                this._hitArea.addEventListener(MouseEvent.ROLL_OUT,this.dogTagFadeOut);
+            }
+        }
+
+        private function resetDogTag() : void
+        {
+            this._dogTag.alpha = 0;
+            this._dogTagData = null;
+            this._hitArea.removeEventListener(MouseEvent.ROLL_OVER,this.dogTagFadeIn);
+            this._hitArea.removeEventListener(MouseEvent.ROLL_OUT,this.dogTagFadeOut);
+        }
+
+        private function buildDogTag() : void
+        {
+            this._dogTag = App.utils.classFactory.getComponent(Linkages.DOGTAG,DogtagComponent);
+            this._hitArea.parent.addChild(this._dogTag);
+            this._dogTag.hideNameAndClan();
+            this._dogTag.x = this._dogTag.width >> 2;
+            this._dogTag.goToLabel(DogtagComponent.DOGTAG_LABEL_END_FULL);
+            this._dogTag.alpha = 0;
         }
 
         public function setCurrentPlayerAnonymized() : void
@@ -407,6 +458,18 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
         public function get isAcceptBtAvailable() : Boolean
         {
             return this._activeButton == this._squadAcceptBt;
+        }
+
+        private function dogTagFadeIn(param1:MouseEvent) : void
+        {
+            this._dogTag.setDogTagInfo(this._dogTagData);
+            this._dogTag.y = this._hitArea.y + this._dogTag.height >> 1;
+            this._dogTag.fadeIn();
+        }
+
+        private function dogTagFadeOut(param1:MouseEvent) : void
+        {
+            this._dogTag.fadeOut();
         }
 
         private function onMouseRollOverHandler(param1:MouseEvent) : void

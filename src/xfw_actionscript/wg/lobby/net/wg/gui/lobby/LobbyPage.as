@@ -21,7 +21,7 @@ package net.wg.gui.lobby
     import scaleform.clik.constants.InvalidationType;
     import net.wg.data.Aliases;
     import net.wg.data.constants.Linkages;
-    import net.wg.data.constants.generated.APP_CONTAINERS_NAMES;
+    import net.wg.data.constants.generated.LAYER_NAMES;
     import net.wg.gui.lobby.settings.config.ControlsFactory;
     import net.wg.data.constants.DragType;
     import flash.geom.Point;
@@ -167,8 +167,8 @@ package net.wg.gui.lobby
                 registerFlashComponentS(this.notificationPopupViewer,Aliases.SYSTEM_MESSAGES);
             }
             registerFlashComponentS(this.messengerBar,Aliases.MESSENGER_BAR);
-            this.subViewContainer = this.addSubContainer(APP_CONTAINERS_NAMES.SUBVIEW,SUB_VIEW_CONTAINER_ZINDEX);
-            this.subTopContainer = this.addSubContainer(APP_CONTAINERS_NAMES.TOP_SUB_VIEW,SUB_TOP_CONTAINER_ZINDEX);
+            this.subViewContainer = this.addSubContainer(LAYER_NAMES.SUBVIEW,SUB_VIEW_CONTAINER_ZINDEX);
+            this.subTopContainer = this.addSubContainer(LAYER_NAMES.TOP_SUB_VIEW,SUB_TOP_CONTAINER_ZINDEX);
             this.subViewContainer.manageSize = false;
             this.subTopContainer.manageSize = false;
         }

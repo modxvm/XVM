@@ -6,7 +6,6 @@ package net.wg.gui.lobby.vehiclePreview
     import net.wg.gui.interfaces.ISoundButtonEx;
     import net.wg.gui.components.advanced.interfaces.IBackButton;
     import flash.display.MovieClip;
-    import net.wg.gui.lobby.vehiclePreview.buyingPanel.IVPBottomPanel;
     import flash.display.Sprite;
     import net.wg.infrastructure.managers.ITooltipMgr;
     import net.wg.gui.lobby.vehiclePreview.additionalInfo.VPAdditionalInfoPanel;
@@ -18,11 +17,7 @@ package net.wg.gui.lobby.vehiclePreview
     import net.wg.gui.events.LobbyEvent;
     import flash.ui.Keyboard;
     import flash.events.KeyboardEvent;
-    import net.wg.gui.lobby.vehiclePreview.buyingPanel.VPEventProgressionStyleBuyingPanel;
-    import net.wg.data.constants.generated.VEHPREVIEW_CONSTANTS;
-    import flash.events.Event;
     import scaleform.clik.constants.InvalidationType;
-    import flash.display.DisplayObject;
     import net.wg.utils.StageSizeBoundaries;
     import scaleform.clik.events.InputEvent;
 
@@ -63,8 +58,6 @@ package net.wg.gui.lobby.vehiclePreview
 
         public var rightBackground:MovieClip = null;
 
-        public var bottomPanel:IVPBottomPanel;
-
         public var messengerBg:Sprite = null;
 
         public var fadingPanels:MovieClip = null;
@@ -100,14 +93,8 @@ package net.wg.gui.lobby.vehiclePreview
         {
             super.onInitModalFocus(param1);
             var _loc2_:Vector.<InteractiveObject> = new <InteractiveObject>[InteractiveObject(this.backButton),InteractiveObject(this.closeButton)];
-            var _loc3_:* = 0;
-            if(this.bottomPanel != null)
-            {
-                _loc2_.push(InteractiveObject(this.bottomPanel.getBtn()));
-                _loc3_ = 2;
-            }
             App.utils.commons.initTabIndex(_loc2_);
-            setFocus(_loc2_[_loc3_]);
+            setFocus(_loc2_[0]);
             _loc2_.splice(0,_loc2_.length);
         }
 
@@ -149,11 +136,6 @@ package net.wg.gui.lobby.vehiclePreview
             super.onPopulate();
             App.stage.dispatchEvent(new LobbyEvent(LobbyEvent.REGISTER_DRAGGING));
             App.gameInputMgr.setKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.onEscapeKeyUpHandler,true);
-            var _loc1_:* = this.bottomPanel is VPEventProgressionStyleBuyingPanel;
-            if(_loc1_)
-            {
-                registerFlashComponentS(VPEventProgressionStyleBuyingPanel(this.bottomPanel),VEHPREVIEW_CONSTANTS.EVENT_PROGRESSION_STYLE_BUYING_PANEL_PY_ALIAS);
-            }
         }
 
         override protected function onBeforeDispose() : void
@@ -183,11 +165,6 @@ package net.wg.gui.lobby.vehiclePreview
             this._additionalInfoPanel = null;
             this.background = null;
             this.fadingPanels = null;
-            if(this.bottomPanel != null)
-            {
-                this.bottomPanel.removeEventListener(Event.RESIZE,this.onBottomPanelResizeHandler);
-                this.bottomPanel = null;
-            }
             super.onDispose();
         }
 
@@ -210,11 +187,6 @@ package net.wg.gui.lobby.vehiclePreview
                 this._additionalInfoPanel.x = this._offset;
                 this._additionalInfoPanel.y = this._offset + this._panelVerticalOffset;
                 this._additionalInfoPanel.height = _loc1_;
-                if(this.bottomPanel != null)
-                {
-                    this.bottomPanel.x = width - this.bottomPanel.width >> 1;
-                    this.bottomPanel.y = height - this._offset - this.bottomPanel.height | 0;
-                }
             }
             if(!this._isIntroFinished && isInvalid(INTRO_FLAG))
             {
@@ -225,15 +197,6 @@ package net.wg.gui.lobby.vehiclePreview
         public function as_hide3DSceneTooltip() : void
         {
             this.hideTooltip();
-        }
-
-        public function as_setBottomPanel(param1:String) : void
-        {
-            if(this.bottomPanel == null && param1 != "")
-            {
-                this.bottomPanel = App.utils.classFactory.getComponent(param1,MovieClip);
-                addChild(DisplayObject(this.bottomPanel));
-            }
         }
 
         public function setStateSizeBoundaries(param1:int, param2:int) : void
@@ -329,11 +292,6 @@ package net.wg.gui.lobby.vehiclePreview
         private function onBackBtnClickHandler(param1:ButtonEvent) : void
         {
             onBackClickS();
-        }
-
-        private function onBottomPanelResizeHandler(param1:Event) : void
-        {
-            invalidateSize();
         }
     }
 }

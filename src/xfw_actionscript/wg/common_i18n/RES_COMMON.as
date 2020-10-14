@@ -23,8 +23,6 @@ package
 
         public static const MAPS_ICONS_BATTLEROYALE_BATTLERESULT_BG:String = "../maps/icons/battleRoyale/battleResult/bg.png";
 
-        public static const MAPS_ICONS_BOB_HANGAR_PRIMETIMEVIEW_BG:String = "../maps/icons/bob/hangar/primeTimeView/bg.png";
-
         public static const MAPS_ICONS_CRYSTALSINFO_BG:String = "../maps/icons/crystalsInfo/bg.png";
 
         public static const MAPS_ICONS_DEDICATION_BG:String = "../maps/icons/dedication/bg.png";
@@ -38,12 +36,6 @@ package
         public static const MAPS_ICONS_TANKMEN_ROLES_BIG_DOG:String = "../maps/icons/tankmen/roles/big/dog.png";
 
         public static const MAPS_ICONS_TANKMEN_SKILLS_BIG_NEW_SKILL:String = "../maps/icons/tankmen/skills/big/new_skill.png";
-
-        public static const MAPS_ICONS_TENYEARSCOUNTDOWN_ONBOARDING_BG:String = "../maps/icons/tenYearsCountdown/onBoarding/bg.png";
-
-        public static const MAPS_ICONS_WTEVENT_CAROUSEL_BG:String = "../maps/icons/wtevent/carousel/bg.png";
-
-        public static const MAPS_ICONS_WTEVENT_COLLECTION_BG:String = "../maps/icons/wtevent/collection/bg.png";
 
         public function RES_COMMON()
         {

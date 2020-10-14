@@ -24,6 +24,8 @@ package net.wg.gui.components.advanced
 
         private var _extraIcon:Image = null;
 
+        private var _isExtraIconShowedBeforeInit:Boolean;
+
         public function ModuleTypesUIWithFill()
         {
             super();
@@ -32,7 +34,10 @@ package net.wg.gui.components.advanced
         override protected function configUI() : void
         {
             super.configUI();
-            this.hideExtraIcon();
+            if(!this._isExtraIconShowedBeforeInit)
+            {
+                this.hideExtraIcon();
+            }
             if(this.moduleIcon != null)
             {
                 this.moduleIcon.addEventListener(Event.CHANGE,this.onModuleIconHandler);
@@ -74,6 +79,10 @@ package net.wg.gui.components.advanced
 
         public function hideExtraIcon() : void
         {
+            if(!initialized)
+            {
+                this._isExtraIconShowedBeforeInit = false;
+            }
             this.extraIconBitmapFill.visible = false;
         }
 
@@ -112,6 +121,10 @@ package net.wg.gui.components.advanced
 
         public function showExtraIcon() : void
         {
+            if(!initialized)
+            {
+                this._isExtraIconShowedBeforeInit = true;
+            }
             this.extraIconBitmapFill.visible = true;
         }
 

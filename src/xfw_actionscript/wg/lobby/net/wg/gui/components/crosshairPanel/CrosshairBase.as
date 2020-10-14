@@ -5,6 +5,7 @@ package net.wg.gui.components.crosshairPanel
     import net.wg.gui.components.crosshairPanel.components.CrosshairClipQuantityBarContainer;
     import flash.display.Sprite;
     import net.wg.gui.components.crosshairPanel.components.autoloader.AutoloaderIndicator;
+    import net.wg.gui.components.crosshairPanel.components.autoloader.BoostIndicatorStateParamsVO;
     import net.wg.gui.components.crosshairPanel.constants.CrosshairConsts;
     import net.wg.data.constants.generated.CROSSHAIR_CONSTANTS;
     import net.wg.data.constants.Values;
@@ -106,6 +107,21 @@ package net.wg.gui.components.crosshairPanel
         public function autoloaderUpdate(param1:Number, param2:Number, param3:Boolean, param4:Boolean) : void
         {
             this.autoloaderComponent.autoloaderUpdate(param1,param2,param3,param4);
+        }
+
+        public function autoloaderBoostUpdate(param1:BoostIndicatorStateParamsVO, param2:Number, param3:Boolean = false) : void
+        {
+            this.autoloaderComponent.autoloaderBoostUpdate(param1,param2,param3);
+        }
+
+        public function autoloaderBoostUpdateAsPercent(param1:Number, param2:Number) : void
+        {
+            this.autoloaderComponent.autoloaderBoostUpdateAsPercent(param1,param2);
+        }
+
+        public function get autoloaderBoostParams() : BoostIndicatorStateParamsVO
+        {
+            return this.autoloaderComponent.autoloaderBoostParams;
         }
 
         public function clearDistance(param1:Boolean) : void

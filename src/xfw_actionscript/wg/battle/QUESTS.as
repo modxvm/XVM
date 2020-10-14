@@ -1849,48 +1849,6 @@ package
 
         public static const DETAILS_DOSSIER_LADDER_DAMAGEASSISTEDRADIO:String = "#quests:details/dossier/ladder/damageAssistedRadio";
 
-        public static const DETAILS_DOSSIER_BOB_XP:String = "#quests:details/dossier/bob/xp";
-
-        public static const DETAILS_DOSSIER_BOB_BATTLESCOUNT:String = "#quests:details/dossier/bob/battlesCount";
-
-        public static const DETAILS_DOSSIER_BOB_WINS:String = "#quests:details/dossier/bob/wins";
-
-        public static const DETAILS_DOSSIER_BOB_LOSSES:String = "#quests:details/dossier/bob/losses";
-
-        public static const DETAILS_DOSSIER_BOB_SURVIVEDBATTLES:String = "#quests:details/dossier/bob/survivedBattles";
-
-        public static const DETAILS_DOSSIER_BOB_FRAGS:String = "#quests:details/dossier/bob/frags";
-
-        public static const DETAILS_DOSSIER_BOB_DIRECTHITS:String = "#quests:details/dossier/bob/directHits";
-
-        public static const DETAILS_DOSSIER_BOB_SPOTTED:String = "#quests:details/dossier/bob/spotted";
-
-        public static const DETAILS_DOSSIER_BOB_DAMAGEDEALT:String = "#quests:details/dossier/bob/damageDealt";
-
-        public static const DETAILS_DOSSIER_BOB_MAXDAMAGE:String = "#quests:details/dossier/bob/maxDamage";
-
-        public static const DETAILS_DOSSIER_BOB_DAMAGERECEIVED:String = "#quests:details/dossier/bob/damageReceived";
-
-        public static const DETAILS_DOSSIER_BOB_CAPTUREPOINTS:String = "#quests:details/dossier/bob/capturePoints";
-
-        public static const DETAILS_DOSSIER_BOB_DROPPEDCAPTUREPOINTS:String = "#quests:details/dossier/bob/droppedCapturePoints";
-
-        public static const DETAILS_DOSSIER_BOB_PIERCINGS:String = "#quests:details/dossier/bob/piercings";
-
-        public static const DETAILS_DOSSIER_BOB_NODAMAGEDIRECTHITSRECEIVED:String = "#quests:details/dossier/bob/noDamageDirectHitsReceived";
-
-        public static const DETAILS_DOSSIER_BOB_PIERCINGSRECEIVED:String = "#quests:details/dossier/bob/piercingsReceived";
-
-        public static const DETAILS_DOSSIER_BOB_POTENTIALDAMAGERECEIVED:String = "#quests:details/dossier/bob/potentialDamageReceived";
-
-        public static const DETAILS_DOSSIER_BOB_DAMAGEBLOCKEDBYARMOR:String = "#quests:details/dossier/bob/damageBlockedByArmor";
-
-        public static const DETAILS_DOSSIER_BOB_ORIGINALXP:String = "#quests:details/dossier/bob/originalXP";
-
-        public static const DETAILS_DOSSIER_BOB_DAMAGEASSISTEDTRACK:String = "#quests:details/dossier/bob/damageAssistedTrack";
-
-        public static const DETAILS_DOSSIER_BOB_DAMAGEASSISTEDRADIO:String = "#quests:details/dossier/bob/damageAssistedRadio";
-
         public static const DETAILS_DOSSIER_BATTLESCOUNT:String = "#quests:details/dossier/battlesCount";
 
         public static const DETAILS_DOSSIER_0_BATTLESCOUNT:String = "#quests:details/dossier/0/battlesCount";
@@ -1926,8 +1884,6 @@ package
         public static const DETAILS_DOSSIER_24_BATTLESCOUNT:String = "#quests:details/dossier/24/battlesCount";
 
         public static const DETAILS_DOSSIER_27_BATTLESCOUNT:String = "#quests:details/dossier/27/battlesCount";
-
-        public static const DETAILS_DOSSIER_32_BATTLESCOUNT:String = "#quests:details/dossier/32/battlesCount";
 
         public static const DETAILS_MODIFIERS_TITLE_DISCOUNT:String = "#quests:details/modifiers/title/discount";
 
@@ -2075,29 +2031,13 @@ package
 
         public static const MISSIONS_TAB_LABEL_MARATHONS:String = "#quests:missions/tab/label/marathons";
 
-        public static const MISSIONS_TAB_LABEL_AUTUMN_MARATHON:String = "#quests:missions/tab/label/autumn_marathon";
-
-        public static const MISSIONS_TAB_LABEL_EVENT_MARATHON:String = "#quests:missions/tab/label/event_marathon";
-
         public static const MISSIONS_TAB_KURSK_HEADER:String = "#quests:missions/tab/kursk/header";
 
         public static const MISSIONS_TAB_KURSK_BODY:String = "#quests:missions/tab/kursk/body";
 
-        public static const MISSIONS_TAB_AUTUMN_MARATHON:String = "#quests:missions/tab/autumn_marathon";
-
-        public static const MISSIONS_TAB_EVENT_MARATHON:String = "#quests:missions/tab/event_marathon";
-
         public static const MISSIONS_TAB_MARATHONS_HEADER:String = "#quests:missions/tab/marathons/header";
 
-        public static const MISSIONS_TAB_AUTUMN_MARATHON_HEADER:String = "#quests:missions/tab/autumn_marathon/header";
-
-        public static const MISSIONS_TAB_EVENT_MARATHON_HEADER:String = "#quests:missions/tab/event_marathon/header";
-
         public static const MISSIONS_TAB_MARATHONS_BODY:String = "#quests:missions/tab/marathons/body";
-
-        public static const MISSIONS_TAB_AUTUMN_MARATHON_BODY:String = "#quests:missions/tab/autumn_marathon/body";
-
-        public static const MISSIONS_TAB_EVENT_MARATHON_BODY:String = "#quests:missions/tab/event_marathon/body";
 
         public static const MISSIONS_TAB_MISSIONS_HEADER:String = "#quests:missions/tab/missions/header";
 
@@ -2211,12 +2151,6 @@ package
 
         public static const MISSIONDETAILS_STATUS_COMPLETED_WEEKLY:String = "#quests:missionDetails/status/completed/weekly";
 
-        public static const MISSIONDETAILS_STATUS_COMPLETED_SECRETEVENT:String = "#quests:missionDetails/status/completed/secretEvent";
-
-        public static const MISSIONDETAILS_STATUS_COMPLETE:String = "#quests:missionDetails/status/complete";
-
-        public static const MISSIONDETAILS_STATUS_INPROGRESS:String = "#quests:missionDetails/status/inProgress";
-
         public static const MISSIONDETAILS_STATUS_NOTAVAILABLE:String = "#quests:missionDetails/status/notAvailable";
 
         public static const MISSIONDETAILS_STATUS_WRONGVEHICLE:String = "#quests:missionDetails/status/wrongVehicle";
@@ -2306,8 +2240,6 @@ package
         public static const MISSIONDETAILS_REQUIREMENTS_CONCLUSION_AVAILABLE:String = "#quests:missionDetails/requirements/conclusion/available";
 
         public static const MISSIONDETAILS_REQUIREMENTS_CONCLUSION_UNAVAILABLE:String = "#quests:missionDetails/requirements/conclusion/unavailable";
-
-        public static const MISSIONDETAILS_REQUIREMENTS_CONCLUSION_PREVIOUSINCOMPLETE:String = "#quests:missionDetails/requirements/conclusion/previousIncomplete";
 
         public static const MISSIONDETAILS_VEHICLESSELECT:String = "#quests:missionDetails/vehiclesSelect";
 
@@ -2541,7 +2473,7 @@ package
 
         public static const BONUSNAME_ENTITLEMENTS_RANKED_2020_DISCOUNT:String = "#quests:bonusName/entitlements/ranked_2020_discount";
 
-        public static const BONUSNAME_ENTITLEMENTS_RANKED_202007_ACCESS:String = "#quests:bonusName/entitlements/ranked_202007_access";
+        public static const BONUSNAME_ENTITLEMENTS_RANKED_202010_ACCESS:String = "#quests:bonusName/entitlements/ranked_202010_access";
 
         public static const BONUSNAME_BATTLE_BONUS_X5:String = "#quests:bonusName/battle_bonus_x5";
 

@@ -12,6 +12,8 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         private static const INFO_IMG_OFFSET_V:int = 3;
 
+        private static const W_OFFSET:int = 7;
+
         private static const IMG_ICON_BOUNDS:Rectangle = new Rectangle(1,1,160,100);
 
         public var txtRentInfo:TextField = null;
@@ -19,6 +21,24 @@ package net.wg.gui.lobby.hangar.tcarousel
         public function TankIcon()
         {
             super();
+        }
+
+        override public function handleRollOut(param1:VehicleCarouselVO) : void
+        {
+            super.handleRollOut(param1);
+            if(param1 != null)
+            {
+                this.updateTextInfo(param1,false);
+            }
+        }
+
+        override public function handleRollOver(param1:VehicleCarouselVO) : void
+        {
+            super.handleRollOver(param1);
+            if(param1 != null)
+            {
+                this.updateTextInfo(param1,true);
+            }
         }
 
         override protected function configUI() : void
@@ -52,24 +72,6 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.txtRentInfo.visible = param1;
         }
 
-        override public function handleRollOut(param1:VehicleCarouselVO) : void
-        {
-            super.handleRollOut(param1);
-            if(param1 != null)
-            {
-                this.updateTextInfo(param1,false);
-            }
-        }
-
-        override public function handleRollOver(param1:VehicleCarouselVO) : void
-        {
-            super.handleRollOver(param1);
-            if(param1 != null)
-            {
-                this.updateTextInfo(param1,true);
-            }
-        }
-
         protected function updateTextInfo(param1:VehicleCarouselVO, param2:Boolean) : void
         {
             var _loc4_:String = null;
@@ -81,7 +83,7 @@ package net.wg.gui.lobby.hangar.tcarousel
                     _loc4_ = param1.infoHoverText;
                 }
             }
-            txtInfo.width = width - infoImgOffset ^ 0;
+            txtInfo.width = width - W_OFFSET - infoImgOffset ^ 0;
             txtInfo.htmlText = _loc4_;
             App.utils.commons.updateTextFieldSize(txtInfo,true,true);
             txtInfo.x = width - txtInfo.width + infoImgOffset >> 1;

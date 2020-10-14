@@ -17,7 +17,6 @@ package net.wg.gui.lobby.window
     import scaleform.clik.events.ButtonEvent;
     import flash.events.Event;
     import scaleform.clik.constants.InvalidationType;
-    import net.wg.data.constants.Values;
     import scaleform.clik.events.InputEvent;
     import net.wg.data.ListDAAPIDataProvider;
     import net.wg.gui.lobby.components.data.PrimeTimeServerVO;
@@ -118,10 +117,6 @@ package net.wg.gui.lobby.window
                 this.alertBG.visible = this._data.showAlertBG;
                 this.serversDD.visible = this._data.serverDDVisible;
                 this.serversDD.enabled = this._data.serversDDEnabled;
-                if(this._data.background != Values.EMPTY_STR)
-                {
-                    setBackground(this._data.background);
-                }
                 App.utils.commons.updateTextFieldSize(this.serversTf,true,false);
                 invalidateSize();
             }

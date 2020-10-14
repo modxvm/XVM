@@ -1,6 +1,7 @@
 package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
 {
     import net.wg.gui.battle.views.stats.fullStats.StatsTableItemHolderBase;
+    import net.wg.gui.components.dogtag.VO.DogTagVO;
     import net.wg.gui.battle.random.views.stats.constants.VehicleActions;
     import net.wg.data.constants.UserTags;
     import org.idmedia.as3commons.util.StringUtils;
@@ -48,6 +49,12 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
             super.onDispose();
         }
 
+        override public function showDogTag(param1:DogTagVO) : void
+        {
+            super.showDogTag(param1);
+            this._squadItem.setDogTag(param1);
+        }
+
         override protected function vehicleDataSync() : void
         {
             var _loc1_:uint = 0;
@@ -72,6 +79,7 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
                 {
                     this._squadItem.setActivePlayerData(activePlayerData);
                 }
+                this._squadItem.setPlayerData(data);
                 if(UserTags.isCurrentPlayer(data.userTags) && data.isAnonymized)
                 {
                     this._squadItem.setCurrentPlayerAnonymized();

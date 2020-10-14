@@ -191,11 +191,6 @@ package
             return instance.stage;
         }
 
-        public static function get browserBgClass() : Class
-        {
-            return instance.browserBgClass;
-        }
-
         public static function get systemMessages() : DisplayObjectContainer
         {
             return instance.systemMessages;

@@ -97,7 +97,6 @@ package net.wg.gui.lobby.rankedBattles19.rankedBattlesBattleResults
             var _loc8_:RankedListWithBackground = null;
             var _loc9_:RankedListVO = null;
             var _loc10_:RankedListWithBackground = null;
-            var _loc11_:* = 0;
             var _loc12_:* = false;
             this.titleTF.htmlText = param1.title;
             this.titleTF.alpha = param1.titleAlpha;
@@ -114,7 +113,7 @@ package net.wg.gui.lobby.rankedBattles19.rankedBattlesBattleResults
                 this._lists.push(_loc8_);
                 _loc6_--;
             }
-            _loc11_ = this._lists[0].rendererHeight;
+            var _loc11_:int = this._lists[0].rendererHeight;
             _loc12_ = false;
             var _loc13_:* = 0;
             while(_loc13_ < _loc5_)

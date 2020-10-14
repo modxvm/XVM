@@ -15,6 +15,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
     import net.wg.gui.battle.epicRandom.VO.daapi.EpicRandomDAAPIVehicleInfoVO;
     import net.wg.data.constants.generated.PLAYERS_PANEL_STATE;
     import net.wg.data.constants.Values;
+    import net.wg.gui.components.dogtag.VO.DogTagVO;
     import net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.events.PlayersPanelItemEvent;
     import net.wg.infrastructure.exceptions.AbstractException;
     import net.wg.data.constants.Errors;
@@ -694,6 +695,14 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
         private function makeTooltipString(param1:String, param2:Boolean) : void
         {
             this._toolTipString = param2?App.utils.locale.makeString(TOOLTIPS.ANONYMIZER_BATTLE_TEAMLIST_CLAN,{"fakeName":param1}):App.utils.locale.makeString(TOOLTIPS.ANONYMIZER_BATTLE_TEAMLIST_NOCLAN,{"fakeName":param1});
+        }
+
+        public function setShowDogTag(param1:Boolean) : void
+        {
+        }
+
+        public function showDogTag(param1:Number, param2:DogTagVO) : void
+        {
         }
 
         private function getHolderByVehicleID(param1:Number) : PlayersPanelListItemHolder

@@ -20,7 +20,7 @@ diff -Naur battle.orig/App.as battle/App.as
 diff -Naur battle.orig/net/wg/data/constants/Linkages.as battle/net/wg/data/constants/Linkages.as
 --- battle.orig/net/wg/data/constants/Linkages.as	2020-07-27 14:29:47.446781200 +0300
 +++ battle/net/wg/data/constants/Linkages.as	2020-07-27 14:41:24.871682400 +0300
-@@ -537,7 +537,7 @@
+@@ -541,7 +541,7 @@
  
          public static const BATTLE_PROGRESS_TASK_SEPARATOR:String = "battleProgressTaskSeparatorUI";
  
@@ -124,7 +124,7 @@ diff -Naur battle.orig/net/wg/gui/battle/components/TimersPanel.as battle/net/wg
 diff -Naur battle.orig/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.as battle/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.as
 --- battle.orig/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.as	2020-07-27 14:29:56.472778900 +0300
 +++ battle/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.as	2020-07-27 14:41:25.012476000 +0300
-@@ -116,6 +116,11 @@
+@@ -123,6 +123,11 @@
  
          private var _holderItemID:int = -1;
  
@@ -163,7 +163,7 @@ diff -Naur battle.orig/net/wg/gui/battle/random/views/BattlePage.as battle/net/w
  
          private static const MINIMAP_MARGIN_WIDTH:int = 0;
  
-@@ -361,6 +361,11 @@
+@@ -343,6 +343,11 @@
              this.updatePositionForQuestProgress();
          }
  
@@ -193,7 +193,19 @@ diff -Naur battle.orig/net/wg/gui/battle/random/views/stats/components/fullStats
 diff -Naur battle.orig/net/wg/gui/battle/random/views/stats/components/fullStats/FullStatsTableCtrl.as battle/net/wg/gui/battle/random/views/stats/components/fullStats/FullStatsTableCtrl.as
 --- battle.orig/net/wg/gui/battle/random/views/stats/components/fullStats/FullStatsTableCtrl.as	2020-07-27 14:29:57.620476600 +0300
 +++ battle/net/wg/gui/battle/random/views/stats/components/fullStats/FullStatsTableCtrl.as	2020-07-27 14:41:25.113138600 +0300
-@@ -240,12 +240,12 @@
+@@ -30,6 +30,11 @@
+ 
+         private static const SQUAD_BT_Y_START:int = 38;
+ 
++        public function get xfw_table():FullStatsTable
++        {
++            return _table;
++        }
++
+         private var _table:FullStatsTable = null;
+ 
+         private var _squadHandler:StatsBaseMeta = null;
+@@ -241,12 +241,12 @@
              }
          }
  
@@ -358,7 +370,7 @@ diff -Naur battle.orig/net/wg/gui/battle/ranked/stats/components/playersPanel/li
 diff -Naur battle.orig/net/wg/gui/battle/views/BaseBattlePage.as battle/net/wg/gui/battle/views/BaseBattlePage.as
 --- battle.orig/net/wg/gui/battle/views/BaseBattlePage.as	2020-07-27 14:29:54.208876200 +0300
 +++ battle/net/wg/gui/battle/views/BaseBattlePage.as	2020-07-27 14:41:25.329292900 +0300
-@@ -76,6 +76,11 @@
+@@ -75,6 +75,11 @@
  
          protected var playerMessageList:MessageListDAAPI;
  
@@ -369,9 +381,9 @@ diff -Naur battle.orig/net/wg/gui/battle/views/BaseBattlePage.as battle/net/wg/g
 +
          protected var battleStatisticDataController:BattleStatisticDataController;
  
-         protected var isPostMortem:Boolean = false;
-@@ -343,6 +343,11 @@
-             return BATTLE_VIEW_ALIASES.PREBATTLE_TIMER;
+         protected var postmortemTips:BasePostmortemPanel = null;
+@@ -344,6 +344,11 @@
+             }
          }
  
 +        public function xfw_registerComponent(param1:IDAAPIModule, param2:String) : void
@@ -382,7 +394,7 @@ diff -Naur battle.orig/net/wg/gui/battle/views/BaseBattlePage.as battle/net/wg/g
          protected function registerComponent(param1:IDAAPIModule, param2:String) : void
          {
              this._componentsStorage[param2] = param1;
-@@ -404,6 +404,11 @@
+@@ -393,6 +393,11 @@
              return false;
          }
  
@@ -393,8 +405,8 @@ diff -Naur battle.orig/net/wg/gui/battle/views/BaseBattlePage.as battle/net/wg/g
 +
          protected function onMiniMapChangeHandler(param1:MinimapEvent) : void
          {
-             this.playerMessageListPositionUpdate();
-@@ -429,6 +429,11 @@
+             if(this.postmortemTips)
+@@ -422,6 +422,11 @@
              this.ribbonsPanel.x = (_originalWidth >> 1) + this.ribbonsPanel.offsetX;
          }
  
@@ -504,7 +516,7 @@ diff -Naur battle.orig/net/wg/infrastructure/helpers/statisticsDataController/Ba
 diff -Naur battle.orig/net/wg/infrastructure/managers/IContainerManager.as battle/net/wg/infrastructure/managers/IContainerManager.as
 --- battle.orig/net/wg/infrastructure/managers/IContainerManager.as	2020-07-27 14:29:46.097990800 +0300
 +++ battle/net/wg/infrastructure/managers/IContainerManager.as	2020-07-27 14:41:25.445176000 +0300
-@@ -23,6 +23,8 @@
+@@ -25,6 +25,8 @@
  
          function storeVisibleContainers() : void;
  
@@ -516,7 +528,7 @@ diff -Naur battle.orig/net/wg/infrastructure/managers/IContainerManager.as battl
 diff -Naur battle.orig/net/wg/infrastructure/managers/impl/AtlasManager.as battle/net/wg/infrastructure/managers/impl/AtlasManager.as
 --- battle.orig/net/wg/infrastructure/managers/impl/AtlasManager.as	2020-07-27 14:29:46.802920400 +0300
 +++ battle/net/wg/infrastructure/managers/impl/AtlasManager.as	2020-07-27 14:41:25.451684400 +0300
-@@ -182,6 +182,11 @@
+@@ -192,6 +192,11 @@
              }
          }
  

@@ -67,5 +67,7 @@ package net.wg.gui.battle.components.stats.playersPanel.interfaces
         function set holderItemID(param1:uint) : void;
 
         function getDynamicSquad() : PlayersPanelDynamicSquad;
+
+        function showDogTag() : void;
     }
 }

@@ -15,8 +15,6 @@ package net.wg.infrastructure.base.meta.impl
 
         private var _array1:Array;
 
-        private var _array2:Array;
-
         public function ConsumablesPanelMeta()
         {
             super();
@@ -33,11 +31,6 @@ package net.wg.infrastructure.base.meta.impl
             {
                 this._array1.splice(0,this._array1.length);
                 this._array1 = null;
-            }
-            if(this._array2)
-            {
-                this._array2.splice(0,this._array2.length);
-                this._array2 = null;
             }
             super.onDispose();
         }
@@ -65,22 +58,11 @@ package net.wg.infrastructure.base.meta.impl
             }
         }
 
-        public final function as_addEquipmentSlot(param1:int, param2:Number, param3:Number, param4:int, param5:Number, param6:Number, param7:String, param8:String, param9:int, param10:int, param11:Array) : void
-        {
-            var _loc12_:Array = this._array1;
-            this._array1 = param11;
-            this.addEquipmentSlot(param1,param2,param3,param4,param5,param6,param7,param8,param9,param10,this._array1);
-            if(_loc12_)
-            {
-                _loc12_.splice(0,_loc12_.length);
-            }
-        }
-
         public final function as_expandEquipmentSlot(param1:int, param2:Array) : void
         {
-            var _loc3_:Array = this._array2;
-            this._array2 = param2;
-            this.expandEquipmentSlot(param1,this._array2);
+            var _loc3_:Array = this._array1;
+            this._array1 = param2;
+            this.expandEquipmentSlot(param1,this._array1);
             if(_loc3_)
             {
                 _loc3_.splice(0,_loc3_.length);
@@ -92,13 +74,6 @@ package net.wg.infrastructure.base.meta.impl
             var _loc2_:String = "as_setKeysToSlots" + Errors.ABSTRACT_INVOKE;
             DebugUtils.LOG_ERROR(_loc2_);
             throw new AbstractException(_loc2_);
-        }
-
-        protected function addEquipmentSlot(param1:int, param2:Number, param3:Number, param4:int, param5:Number, param6:Number, param7:String, param8:String, param9:int, param10:int, param11:Array) : void
-        {
-            var _loc12_:String = "as_addEquipmentSlot" + Errors.ABSTRACT_INVOKE;
-            DebugUtils.LOG_ERROR(_loc12_);
-            throw new AbstractException(_loc12_);
         }
 
         protected function expandEquipmentSlot(param1:int, param2:Array) : void

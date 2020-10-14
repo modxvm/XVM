@@ -8,8 +8,8 @@ package net.wg.gui.components.containers
     import net.wg.infrastructure.interfaces.IManagedContent;
     import net.wg.infrastructure.interfaces.IView;
     import net.wg.infrastructure.events.LifeCycleEvent;
+    import net.wg.data.constants.generated.LAYER_NAMES;
     import org.idmedia.as3commons.util.StringUtils;
-    import net.wg.data.constants.generated.APP_CONTAINERS_NAMES;
     import flash.events.MouseEvent;
     import net.wg.utils.IAssertable;
     import net.wg.data.constants.Errors;
@@ -53,8 +53,9 @@ package net.wg.gui.components.containers
             var _loc3_:IAbstractWrapperView = null;
             var _loc4_:IWrapper = null;
             var _loc5_:ViewSettingsVO = null;
-            var _loc6_:DisplayObject = null;
-            var _loc7_:String = null;
+            var _loc6_:uint = 0;
+            var _loc7_:DisplayObject = null;
+            var _loc8_:String = null;
             this.assertContent(param1);
             var _loc2_:IView = IManagedContent(param1).sourceView;
             if(param1 is IAbstractWrapperView)
@@ -68,23 +69,24 @@ package net.wg.gui.components.containers
             if(_loc2_ && _loc2_.as_config && _loc2_.as_config.configVO)
             {
                 _loc5_ = _loc2_.as_config.configVO;
-                if(StringUtils.isNotEmpty(_loc5_.type))
+                _loc6_ = LAYER_NAMES.LAYER_ORDER.length;
+                if(-1 < _loc5_.layer && _loc5_.layer <= _loc6_)
                 {
-                    _loc6_ = DisplayObject(_loc2_.containerContent);
-                    super.addChild(_loc6_);
-                    _loc2_.playShowTween(_loc6_);
-                    if(type == APP_CONTAINERS_NAMES.WINDOWS || type == APP_CONTAINERS_NAMES.DIALOGS)
+                    _loc7_ = DisplayObject(_loc2_.containerContent);
+                    super.addChild(_loc7_);
+                    _loc2_.playShowTween(_loc7_);
+                    if(layerName == LAYER_NAMES.WINDOWS || layerName == LAYER_NAMES.DIALOGS)
                     {
-                        _loc7_ = _loc5_.group;
-                        if(_loc5_.isGrouped && StringUtils.isNotEmpty(_loc7_))
+                        _loc8_ = _loc5_.group;
+                        if(_loc5_.isGrouped && StringUtils.isNotEmpty(_loc8_))
                         {
-                            this.addGroupCounter(_loc7_,_loc2_.as_config.name);
-                            this.movieViewToVector(_loc6_,_loc7_);
+                            this.addGroupCounter(_loc8_,_loc2_.as_config.name);
+                            this.movieViewToVector(_loc7_,_loc8_);
                         }
                     }
                     if(manageFocus)
                     {
-                        _loc6_.addEventListener(MouseEvent.MOUSE_DOWN,this.onViewMouseDownHandler,false,0,true);
+                        _loc7_.addEventListener(MouseEvent.MOUSE_DOWN,this.onViewMouseDownHandler,false,0,true);
                     }
                     _loc2_.sourceView.updateStage(width,height);
                     return DisplayObject(_loc2_);
@@ -97,8 +99,9 @@ package net.wg.gui.components.containers
         override public function removeChild(param1:DisplayObject) : DisplayObject
         {
             var _loc5_:ViewSettingsVO = null;
-            var _loc6_:String = null;
-            var _loc7_:GroupCounter = null;
+            var _loc6_:uint = 0;
+            var _loc7_:String = null;
+            var _loc8_:GroupCounter = null;
             var _loc2_:IAssertable = App.utils.asserter;
             _loc2_.assertNotNull(param1,"child" + Errors.CANT_NULL);
             this.assertContent(param1);
@@ -107,18 +110,19 @@ package net.wg.gui.components.containers
             if(_loc3_ && _loc3_.as_config && _loc3_.as_config.configVO)
             {
                 _loc5_ = _loc3_.as_config.configVO;
-                if(StringUtils.isNotEmpty(_loc5_.type))
+                _loc6_ = LAYER_NAMES.LAYER_ORDER.length;
+                if(-1 < _loc5_.layer && _loc5_.layer <= _loc6_)
                 {
-                    if(_loc5_.type != APP_CONTAINERS_NAMES.VIEWS)
+                    if(LAYER_NAMES.LAYER_ORDER[_loc5_.layer] != LAYER_NAMES.VIEWS)
                     {
-                        _loc6_ = _loc5_.group;
-                        if(_loc5_.isGrouped && StringUtils.isNotEmpty(_loc6_) && this._groupCounters.hasOwnProperty(_loc6_))
+                        _loc7_ = _loc5_.group;
+                        if(_loc5_.isGrouped && StringUtils.isNotEmpty(_loc7_) && this._groupCounters.hasOwnProperty(_loc7_))
                         {
-                            _loc7_ = this._groupCounters[_loc6_];
-                            _loc7_.decrement(_loc3_.as_config.name);
-                            if(_loc7_.views.length == 0)
+                            _loc8_ = this._groupCounters[_loc7_];
+                            _loc8_.decrement(_loc3_.as_config.name);
+                            if(_loc8_.views.length == 0)
                             {
-                                delete this._groupCounters[_loc6_];
+                                delete this._groupCounters[_loc7_];
                             }
                         }
                     }
@@ -464,6 +468,19 @@ class GroupCounter extends Object implements IDisposable
         this.views = new Vector.<GroupViewObject>();
     }
 
+    public function decrement(param1:String) : void
+    {
+        var _loc2_:GroupViewObject = null;
+        for each(_loc2_ in this.views)
+        {
+            if(_loc2_.id == param1)
+            {
+                this.views.splice(this.views.indexOf(_loc2_),1);
+                break;
+            }
+        }
+    }
+
     public function dispose() : void
     {
         this.views.splice(0,this.views.length);
@@ -480,19 +497,6 @@ class GroupCounter extends Object implements IDisposable
         _loc2_.xAdjust = _loc5_ + _loc3_;
         _loc2_.yAdjust = _loc6_ + _loc4_;
         this.views.push(_loc2_);
-    }
-
-    public function decrement(param1:String) : void
-    {
-        var _loc2_:GroupViewObject = null;
-        for each(_loc2_ in this.views)
-        {
-            if(_loc2_.id == param1)
-            {
-                this.views.splice(this.views.indexOf(_loc2_),1);
-                break;
-            }
-        }
     }
 
     public function get xAdjust() : int

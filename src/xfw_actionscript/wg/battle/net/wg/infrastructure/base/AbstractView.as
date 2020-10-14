@@ -363,7 +363,7 @@ package net.wg.infrastructure.base
 
         public function getFocusIndex() : Number
         {
-            return App.containerMgr.getFocusPriority(this._config.configVO.type);
+            return App.containerMgr.getFocusPriority(this._config.configVO.layer);
         }
 
         protected function get autoShowViewProperty() : int

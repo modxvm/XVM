@@ -22,6 +22,8 @@ package net.wg.gui.battle.views.epicMissionsPanel.components
         public function EpicMissionsAnimatedMarker()
         {
             super();
+            this.hqMarker.isHudElement = true;
+            this.baseMarker.isHudElement = true;
         }
 
         override protected function onDispose() : void

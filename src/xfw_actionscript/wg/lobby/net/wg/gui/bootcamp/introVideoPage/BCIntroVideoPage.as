@@ -18,13 +18,12 @@ package net.wg.gui.bootcamp.introVideoPage
     import net.wg.gui.components.common.video.VideoPlayerStatusEvent;
     import scaleform.clik.events.ButtonEvent;
     import flash.events.KeyboardEvent;
+    import scaleform.gfx.FocusManager;
     import net.wg.gui.bootcamp.data.BCTutorialPageVO;
     import fl.transitions.easing.Strong;
-    import scaleform.gfx.FocusManager;
-    import flash.display.DisplayObject;
     import org.idmedia.as3commons.util.StringUtils;
-    import scaleform.gfx.MouseEventEx;
     import flash.events.Event;
+    import scaleform.gfx.MouseEventEx;
     import net.wg.gui.components.common.video.PlayerStatus;
 
     public class BCIntroVideoPage extends BCIntroVideoPageMeta implements IBCIntroVideoPageMeta
@@ -101,14 +100,6 @@ package net.wg.gui.bootcamp.introVideoPage
         public var btnRight:MovieClip = null;
 
         public var stepperBar:StepperContainer = null;
-
-        protected var eventModeEnabled:Boolean = false;
-
-        protected var customTextPaddingLeft:int = 0;
-
-        protected var customTextPaddingBottom:int = 0;
-
-        protected var customLoadingProgressBottom:int = 0;
 
         private var _inited:Boolean = false;
 
@@ -260,6 +251,16 @@ package net.wg.gui.bootcamp.introVideoPage
             super.onDispose();
         }
 
+        protected function set imageGoRight(param1:Boolean) : void
+        {
+            this._imageGoRight = param1;
+        }
+
+        protected function get introData() : BCIntroVideoVO
+        {
+            return this._introData;
+        }
+
         override protected function setData(param1:BCIntroVideoVO) : void
         {
             this._introData = param1;
@@ -321,48 +322,6 @@ package net.wg.gui.bootcamp.introVideoPage
                 this.videoPlayer.dispose();
                 this.videoPlayer = null;
             }
-        }
-
-        protected function createImagesList() : void
-        {
-            var _loc4_:BCTutorialPageVO = null;
-            var _loc5_:TutorialPageContainer = null;
-            this._inited = true;
-            if(this._tutorialPageList.length)
-            {
-                this.disposeBackgroundRenderers();
-            }
-            var _loc1_:Vector.<BCTutorialPageVO> = this._useBigPictures?this._introData.lessonPagesBigData:this._introData.lessonPagesSmallData;
-            var _loc2_:int = _loc1_.length;
-            var _loc3_:uint = 0;
-            while(_loc3_ < _loc2_)
-            {
-                _loc4_ = _loc1_[_loc3_];
-                _loc5_ = App.utils.classFactory.getComponent(_loc4_.rendererLinkage,TutorialPageContainer);
-                _loc5_.isAdaptable = this.eventModeEnabled;
-                _loc5_.setData(_loc4_);
-                this._tutorialPageList.push(_loc5_);
-                _loc3_++;
-            }
-            if(_loc2_ > 1)
-            {
-                this.stepperBar.setCount(_loc2_);
-            }
-        }
-
-        protected function tweenFadeOut() : void
-        {
-            var _loc1_:Tween = new Tween(OVERLAY_TWEEN_DURATION,this.blackOverlay,{"alpha":0},{
-                "ease":Strong.easeIn,
-                "onComplete":this.onFadeOutTweenComplete
-            });
-            this._tweens.push(_loc1_);
-        }
-
-        protected function continueToBattle() : void
-        {
-            App.stage.removeEventListener(MouseEvent.CLICK,this.onStageClickHandler);
-            goToBattleS();
         }
 
         private function prepareSkip() : void
@@ -438,6 +397,32 @@ package net.wg.gui.bootcamp.introVideoPage
             this._tutorialPageList.splice(0,this._tutorialPageList.length);
         }
 
+        private function createImagesList() : void
+        {
+            var _loc4_:BCTutorialPageVO = null;
+            var _loc5_:TutorialPageContainer = null;
+            this._inited = true;
+            if(this._tutorialPageList.length)
+            {
+                this.disposeBackgroundRenderers();
+            }
+            var _loc1_:Vector.<BCTutorialPageVO> = this._useBigPictures?this._introData.lessonPagesBigData:this._introData.lessonPagesSmallData;
+            var _loc2_:int = _loc1_.length;
+            var _loc3_:uint = 0;
+            while(_loc3_ < _loc2_)
+            {
+                _loc4_ = _loc1_[_loc3_];
+                _loc5_ = App.utils.classFactory.getComponent(_loc4_.rendererLinkage,TutorialPageContainer);
+                _loc5_.setData(_loc4_);
+                this._tutorialPageList.push(_loc5_);
+                _loc3_++;
+            }
+            if(_loc2_ > 1)
+            {
+                this.stepperBar.setCount(_loc2_);
+            }
+        }
+
         private function updateUIPosition() : void
         {
             var _loc4_:* = NaN;
@@ -484,7 +469,6 @@ package net.wg.gui.bootcamp.introVideoPage
                 }
                 this.backgroundContainer.x = -((this._useBigPictures?BACK_WIDTH_BIG:BACK_WIDTH_SMALL) - _loc1_ >> 1);
                 this.backgroundContainer.y = -((this._useBigPictures?BACK_HEIGHT_SMALL:BACK_HEIGHT_BIG) - _loc2_ >> 1);
-                this.updateTutorialPageLayout();
             }
             else
             {
@@ -503,7 +487,7 @@ package net.wg.gui.bootcamp.introVideoPage
             this.closeBtn.validateNow();
             this.closeBtn.x = _loc1_ - this.closeBtn.width - CLOSE_BTN_PADDING_RIGHT;
             this.loadingProgress.x = _loc1_ >> 1;
-            this.loadingProgress.y = _loc2_ + this.customLoadingProgressBottom;
+            this.loadingProgress.y = _loc2_;
             this.loadingProgress.setWidth(_loc1_);
             if(this.waitingMC.visible)
             {
@@ -514,19 +498,13 @@ package net.wg.gui.bootcamp.introVideoPage
             }
         }
 
-        private function updateTutorialPageLayout() : void
-        {
-            this._tutorialPageList[this._picIndex].updateTextPosition(App.appWidth,this._useBigPictures?BACK_HEIGHT_SMALL:BACK_HEIGHT_BIG,-this.backgroundContainer.x,-this.backgroundContainer.y,this.customTextPaddingLeft,this.customTextPaddingBottom);
-        }
-
         private function updateBackgroundRenderer() : void
         {
             if(this.backgroundContainer.numChildren > 0)
             {
                 this.backgroundContainer.removeChildAt(0);
             }
-            this.backgroundContainer.addChild(this._tutorialPageList[this._picIndex] as DisplayObject);
-            this.updateTutorialPageLayout();
+            this.backgroundContainer.addChild(this._tutorialPageList[this._picIndex]);
             this.stepperBar.selectItem(this._picIndex);
         }
 
@@ -562,6 +540,21 @@ package net.wg.gui.bootcamp.introVideoPage
             this.tweenFadeIn();
         }
 
+        protected function tweenFadeOut() : void
+        {
+            var _loc1_:Tween = new Tween(OVERLAY_TWEEN_DURATION,this.blackOverlay,{"alpha":0},{
+                "ease":Strong.easeIn,
+                "onComplete":this.onFadeOutTweenComplete
+            });
+            this._tweens.push(_loc1_);
+        }
+
+        protected function continueToBattle() : void
+        {
+            App.stage.removeEventListener(MouseEvent.CLICK,this.onStageClickHandler);
+            goToBattleS();
+        }
+
         private function completeVideo() : void
         {
             if(this.videoPlayer.source == this._introData.source)
@@ -593,14 +586,9 @@ package net.wg.gui.bootcamp.introVideoPage
             }
         }
 
-        protected function set imageGoRight(param1:Boolean) : void
+        private function onKeyDownHandler(param1:Event) : void
         {
-            this._imageGoRight = param1;
-        }
-
-        protected function get introData() : BCIntroVideoVO
-        {
-            return this._introData;
+            this.showSkip();
         }
 
         protected function onStageClickHandler(param1:MouseEvent) : void
@@ -632,11 +620,6 @@ package net.wg.gui.bootcamp.introVideoPage
                     this.tweenFadeOut();
                 }
             }
-        }
-
-        private function onKeyDownHandler(param1:Event) : void
-        {
-            this.showSkip();
         }
 
         private function onSelectButtonClickHandler(param1:ButtonEvent) : void

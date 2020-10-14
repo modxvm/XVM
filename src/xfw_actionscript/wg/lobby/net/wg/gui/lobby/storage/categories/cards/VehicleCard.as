@@ -9,9 +9,9 @@ package net.wg.gui.lobby.storage.categories.cards
     import flash.text.TextFieldAutoSize;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.gui.components.controls.VO.PriceVO;
+    import flash.events.MouseEvent;
     import scaleform.clik.motion.Tween;
     import org.idmedia.as3commons.util.StringUtils;
-    import flash.events.MouseEvent;
     import net.wg.utils.ICommons;
 
     public class VehicleCard extends BaseCard
@@ -163,6 +163,24 @@ package net.wg.gui.lobby.storage.categories.cards
             {
                 image.alpha = IMAGE_HOVER_ALPHA;
             }
+        }
+
+        override protected function onTooltipHitAreaRollOver(param1:MouseEvent) : void
+        {
+            if(this.cantSell)
+            {
+                return;
+            }
+            super.onTooltipHitAreaRollOver(param1);
+        }
+
+        override protected function onTooltipHitAreaRollOut(param1:MouseEvent) : void
+        {
+            if(this.cantSell)
+            {
+                return;
+            }
+            super.onTooltipHitAreaRollOut(param1);
         }
 
         override protected function onRollOver() : void

@@ -103,10 +103,6 @@ package net.wg.app.iml.base
 
         private var _appScale:Number = 1;
 
-        private var _screenWidth:Number = 0;
-
-        private var _screenHeight:Number = 0;
-
         private var _isDAAPIInited:Boolean = false;
 
         private var _ubPlayerProxy:UbPlayerProxy;
@@ -139,11 +135,6 @@ package net.wg.app.iml.base
             this.loaderMgr.loadLibraries(param1);
         }
 
-        override protected function blurBackgroundViews(param1:String, param2:Vector.<String>, param3:Number) : void
-        {
-            this._elementBlurAdapter.blurElements(param1,param2,param3);
-        }
-
         override protected function onDispose() : void
         {
             this.disposeManagers();
@@ -151,6 +142,11 @@ package net.wg.app.iml.base
             this._utils.dispose();
             this._utils = null;
             super.onDispose();
+        }
+
+        public function as_blurBackgroundViews(param1:int, param2:Number) : void
+        {
+            this._elementBlurAdapter.blurElements(param1,param2);
         }
 
         public final function as_dispose() : void
@@ -193,8 +189,6 @@ package net.wg.app.iml.base
                 {
                     return;
                 }
-                this._screenWidth = w;
-                this._screenHeight = h;
                 this._appScale = scale;
                 h = h / scale >> 0;
                 w = w / scale >> 0;
@@ -418,11 +412,6 @@ package net.wg.app.iml.base
         protected function getNewStageSizeManager() : IStageSizeManager
         {
             throw new AbstractException("BaseApp.getNewStageSizeManager" + Errors.ABSTRACT_INVOKE);
-        }
-
-        protected function getMaxReleaseSize() : Number
-        {
-            throw new AbstractException("BaseApp.getMaxReleaseSize" + Errors.ABSTRACT_INVOKE);
         }
 
         protected function initializeAtlasManager() : void
@@ -656,11 +645,6 @@ package net.wg.app.iml.base
         public function get containerMgr() : IContainerManager
         {
             return this._containersMgr;
-        }
-
-        public function get browserBgClass() : Class
-        {
-            return null;
         }
 
         public function get graphicsOptimizationMgr() : IGraphicsOptimizationManager

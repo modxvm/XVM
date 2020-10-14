@@ -20,7 +20,7 @@ diff -Naur lobby.orig/App.as lobby/App.as
 diff -Naur lobby.orig/net/wg/data/constants/Linkages.as lobby/net/wg/data/constants/Linkages.as
 --- lobby.orig/net/wg/data/constants/Linkages.as	2020-07-27 14:30:19.806075700 +0300
 +++ lobby/net/wg/data/constants/Linkages.as	2020-07-27 14:41:30.976998700 +0300
-@@ -409,7 +409,7 @@
+@@ -411,7 +411,7 @@
  
          public static const TECHNIQUE_STATISTICS_PERCENT_SIGN:String = "TechniqueStatisticsPercentSign_UI";
  
@@ -56,7 +56,7 @@ diff -Naur lobby.orig/net/wg/gui/data/BenefitsDataVO.as lobby/net/wg/gui/data/Be
 diff -Naur lobby.orig/net/wg/gui/lobby/battleResults/BattleResults.as lobby/net/wg/gui/lobby/battleResults/BattleResults.as
 --- lobby.orig/net/wg/gui/lobby/battleResults/BattleResults.as	2020-07-27 14:30:44.192190700 +0300
 +++ lobby/net/wg/gui/lobby/battleResults/BattleResults.as	2020-07-27 14:41:31.008248200 +0300
-@@ -41,6 +41,12 @@
+@@ -42,6 +42,12 @@
  
          private var _emblemLoadingDelegates:Dictionary;
  
@@ -121,7 +121,7 @@ diff -Naur lobby.orig/net/wg/gui/lobby/components/SmallSkillsList.as lobby/net/w
 diff -Naur lobby.orig/net/wg/gui/lobby/hangar/Hangar.as lobby/net/wg/gui/lobby/hangar/Hangar.as
 --- lobby.orig/net/wg/gui/lobby/hangar/Hangar.as	2020-07-27 14:30:34.568675800 +0300
 +++ lobby/net/wg/gui/lobby/hangar/Hangar.as	2020-07-27 14:41:31.132652900 +0300
-@@ -224,6 +224,11 @@
+@@ -167,6 +167,11 @@
  
          public var closeBtn:CloseButtonText;
  
@@ -130,9 +130,9 @@ diff -Naur lobby.orig/net/wg/gui/lobby/hangar/Hangar.as lobby/net/wg/gui/lobby/h
 +            return _header;
 +        }
 +
-         public var lootboxesWidget:LootBoxesEntryPointWidget;
+         private var _header:HangarHeader;
  
-         public var eventCarouselWidget:WTEventCarouselWidget = null;
+         private var _carousel:TankCarousel;
 diff -Naur lobby.orig/net/wg/gui/lobby/header/LobbyHeader.as lobby/net/wg/gui/lobby/header/LobbyHeader.as
 --- lobby.orig/net/wg/gui/lobby/header/LobbyHeader.as	2020-07-27 14:30:36.509183400 +0300
 +++ lobby/net/wg/gui/lobby/header/LobbyHeader.as	2020-07-27 14:41:31.264166500 +0300
@@ -253,11 +253,23 @@ diff -Naur lobby.orig/net/wg/gui/lobby/battleResults/components/BattleResultImag
              var _loc4_:VehicleIconPreset = null;
              if(this.vehicleIcon.visible = param1)
              {
--                _loc4_ = BattleResultImageSwitcherView.getPreset(param3);
-+                //_loc4_ = BattleResultImageSwitcherView.getPreset(param3);
+-                _loc4_ = VehicleIconPreset.getPreset(param3);
++                //_loc4_ = VehicleIconPreset.getPreset(param3);
                  App.utils.asserter.assertNotNull(_loc4_,"Icon preset for level: " + param3 + Errors.WASNT_FOUND);
                  this.vehicleIcon.source = RES_SHOP.getVehicleIcon(_loc4_.size,param2);
                  this.vehicleIcon.scaleX = this.vehicleIcon.scaleY = _loc4_.scale;
+diff -Naur lobby.orig/net/wg/gui/lobby/techtree/helpers/NationTreeActionsHelper.as lobby/net/wg/gui/lobby/techtree/helpers/NationTreeActionsHelper.as
+--- lobby.orig/net/wg/gui/lobby/techtree/helpers/NationTreeActionsHelper.as	2020-08-07 14:30:44.145319000 +0300
++++ lobby/net/wg/gui/lobby/techtree/helpers/NationTreeActionsHelper.as	2020-08-07 14:41:31.464690500 +0300
+@@ -52,7 +52,7 @@
+         public function NationTreeActionsHelper()
+         {
+             this._scheduler = App.utils.scheduler;
+-            this._sequence = new Vector.<NationTreeActionsHelper>();
++            //this._sequence = new Vector.<NationTreeActionsHelper>();
+             super();
+         }
+ 
 diff -Naur lobby.orig/net/wg/gui/lobby/techtree/helpers/NTGraphics.as lobby/net/wg/gui/lobby/techtree/helpers/NTGraphics.as
 --- lobby.orig/net/wg/gui/lobby/techtree/helpers/NTGraphics.as	2020-08-07 14:30:44.145319000 +0300
 +++ lobby/net/wg/gui/lobby/techtree/helpers/NTGraphics.as	2020-08-07 14:41:31.464690500 +0300
@@ -407,7 +419,7 @@ diff -Naur lobby.orig/net/wg/gui/rally/events/RallyViewsEvent.as lobby/net/wg/gu
 diff -Naur lobby.orig/net/wg/infrastructure/managers/IContainerManager.as lobby/net/wg/infrastructure/managers/IContainerManager.as
 --- lobby.orig/net/wg/infrastructure/managers/IContainerManager.as	2020-07-27 14:30:15.901017400 +0300
 +++ lobby/net/wg/infrastructure/managers/IContainerManager.as	2020-07-27 14:41:31.668942400 +0300
-@@ -23,6 +23,8 @@
+@@ -25,6 +25,8 @@
  
          function storeVisibleContainers() : void;
  
@@ -419,18 +431,18 @@ diff -Naur lobby.orig/net/wg/infrastructure/managers/IContainerManager.as lobby/
 diff -Naur lobby.orig/net/wg/infrastructure/managers/impl/ContainerManagerBase.as lobby/net/wg/infrastructure/managers/impl/ContainerManagerBase.as
 --- lobby.orig/net/wg/infrastructure/managers/impl/ContainerManagerBase.as	2020-07-27 14:30:16.414479100 +0300
 +++ lobby/net/wg/infrastructure/managers/impl/ContainerManagerBase.as	2020-07-27 14:41:31.680982100 +0300
-@@ -651,6 +651,7 @@
+@@ -640,6 +640,7 @@
  
          private function onStartLoadViewHandler(param1:LoaderEvent) : void
          {
 +            /*
-             var _loc2_:String = param1.config.type;
+             var _loc2_:int = param1.config.layer;
              var _loc3_:String = param1.config.alias;
              var _loc4_:Vector.<AliasVO> = this._containersForLoadingViews[_loc2_];
-@@ -662,6 +663,7 @@
-             {
-                 _loc4_.push(new AliasVO(_loc3_,param1.name));
+@@ -649,6 +649,7 @@
+                 this._containersForLoadingViews[_loc2_] = _loc4_;
              }
+             _loc4_.push(new AliasVO(_loc3_,param1.name));
 +            */
          }
  

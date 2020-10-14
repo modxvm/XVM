@@ -18,21 +18,6 @@ package net.wg.gui.lobby.hangar
             super();
         }
 
-        public function as_showWidget() : void
-        {
-            if(!this.visible)
-            {
-                App.utils.helpLayout.registerComponent(this);
-            }
-            this.visible = true;
-        }
-
-        public function as_hideWidget() : void
-        {
-            this.visible = false;
-            App.utils.helpLayout.unregisterComponent(this);
-        }
-
         override protected function configUI() : void
         {
             super.configUI();

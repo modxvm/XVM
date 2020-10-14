@@ -4,6 +4,7 @@ package net.wg.gui.battle.views.staticMarkers.epic.sectorbase
     import net.wg.gui.battle.components.EpicProgressCircle;
     import flash.display.MovieClip;
     import net.wg.gui.battle.views.vehicleMarkers.VehicleMarkersManager;
+    import net.wg.infrastructure.events.ColorSchemeEvent;
     import net.wg.gui.battle.views.actionMarkers.ActionMarkerStates;
 
     public class SectorBaseIcon extends BattleIconHolder
@@ -39,6 +40,8 @@ package net.wg.gui.battle.views.staticMarkers.epic.sectorbase
 
         private var _isEpic:Boolean = false;
 
+        private var _isHudElement:Boolean;
+
         public function SectorBaseIcon()
         {
             super();
@@ -50,6 +53,10 @@ package net.wg.gui.battle.views.staticMarkers.epic.sectorbase
 
         override protected function onDispose() : void
         {
+            if(this._isHudElement)
+            {
+                App.colorSchemeMgr.removeEventListener(ColorSchemeEvent.SCHEMAS_UPDATED,this.onColorSchemasUpdatedHandler);
+            }
             this.progressCircle.dispose();
             this.progressCircle = null;
             this.baseId = null;
@@ -92,19 +99,20 @@ package net.wg.gui.battle.views.staticMarkers.epic.sectorbase
 
         public function setBackgroundColor() : void
         {
-            var _loc1_:String = BG_POSTFIX;
-            if(this._owningTeam == ENEMY && this._vmManager.isColorBlind)
+            var _loc1_:Boolean = this._isHudElement?App.colorSchemeMgr.getIsColorBlindS():this._vmManager.isColorBlind;
+            var _loc2_:String = BG_POSTFIX;
+            if(this._owningTeam == ENEMY && _loc1_)
             {
-                _loc1_ = BG_COLORBLIND_POSTFIX;
+                _loc2_ = BG_COLORBLIND_POSTFIX;
             }
             if(!this._isEpic)
             {
-                this.bg.gotoAndStop(this._owningTeam + _loc1_);
+                this.bg.gotoAndStop(this._owningTeam + _loc2_);
             }
             else
             {
                 this.bg.gotoAndStop(EPIC_BASE);
-                this.progressCircle.setColorBlindMode(this._vmManager.isColorBlind);
+                this.progressCircle.setColorBlindMode(_loc1_);
             }
         }
 
@@ -130,6 +138,20 @@ package net.wg.gui.battle.views.staticMarkers.epic.sectorbase
                 _loc1_ = HOVER_COLORBLIND_POSTFIX;
             }
             this.sectorBaseHover.gotoAndStop(this._owningTeam + _loc1_);
+        }
+
+        public function set isHudElement(param1:Boolean) : void
+        {
+            this._isHudElement = param1;
+            if(this._isHudElement)
+            {
+                App.colorSchemeMgr.addEventListener(ColorSchemeEvent.SCHEMAS_UPDATED,this.onColorSchemasUpdatedHandler);
+            }
+        }
+
+        private function onColorSchemasUpdatedHandler(param1:ColorSchemeEvent) : void
+        {
+            this.setBackgroundColor();
         }
     }
 }

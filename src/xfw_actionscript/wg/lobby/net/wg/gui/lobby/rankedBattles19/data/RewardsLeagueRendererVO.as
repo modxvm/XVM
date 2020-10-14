@@ -7,6 +7,8 @@ package net.wg.gui.lobby.rankedBattles19.data
 
         public var leagueID:int = 0;
 
+        public var styleID:int = 0;
+
         public var title:String = "";
 
         public var description:String = "";

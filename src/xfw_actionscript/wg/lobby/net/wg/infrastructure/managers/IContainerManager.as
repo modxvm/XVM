@@ -15,11 +15,13 @@ package net.wg.infrastructure.managers
 
         function isModalViewsExisting() : Boolean;
 
+        function getContainer(param1:uint) : ISimpleManagedContainer;
+
         function getContainersFocusOrder() : Array;
 
-        function getFocusPriority(param1:String) : Number;
+        function getFocusPriority(param1:int) : Number;
 
-        function setVisibleContainers(param1:Boolean, param2:Vector.<String>) : void;
+        function setVisibleContainers(param1:Boolean, param2:Vector.<int>) : void;
 
         function storeVisibleContainers() : void;
 

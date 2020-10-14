@@ -15,8 +15,6 @@ package
 
         public static const HEADER_BACKBTN_DESCRLABEL_ADVENTCALENDAR:String = "#vehicle_preview:header/backBtn/descrLabel/adventCalendar";
 
-        public static const HEADER_BACKBTN_DESCRLABEL_OVERLAYTENYEARSCOUNTDOWN:String = "#vehicle_preview:header/backBtn/descrLabel/overlayTenYearsCountdown";
-
         public static const HEADER_BACKBTN_DESCRLABEL_HANGAR:String = "#vehicle_preview:header/backBtn/descrLabel/hangar";
 
         public static const HEADER_BACKBTN_DESCRLABEL_VEHICLECOMPARE:String = "#vehicle_preview:header/backBtn/descrLabel/vehicleCompare";
@@ -25,11 +23,9 @@ package
 
         public static const HEADER_BACKBTN_DESCRLABEL_FRONTLINE:String = "#vehicle_preview:header/backBtn/descrLabel/frontline";
 
-        public static const HEADER_BACKBTN_DESCRLABEL_EVENTPROGRESSION:String = "#vehicle_preview:header/backBtn/descrLabel/eventProgression";
-
         public static const HEADER_BACKBTN_DESCRLABEL_MARATHON:String = "#vehicle_preview:header/backBtn/descrLabel/marathon";
 
-        public static const HEADER_BACKBTN_DESCRLABEL_AUTUMN_MARATHON:String = "#vehicle_preview:header/backBtn/descrLabel/autumn_marathon";
+        public static const HEADER_BACKBTN_DESCRLABEL_WINTERMARATHON:String = "#vehicle_preview:header/backBtn/descrLabel/winterMarathon";
 
         public static const HEADER_BACKBTN_DESCRLABEL_RANKED:String = "#vehicle_preview:header/backBtn/descrLabel/ranked";
 

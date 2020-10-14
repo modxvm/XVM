@@ -214,6 +214,16 @@ package net.wg.gui.components.common.waiting
             invalidate(INV_BACKGROUND_VISIBILITY);
         }
 
+        public function get movieVisible() : Boolean
+        {
+            return this.waitingMc.visible;
+        }
+
+        public function set movieVisible(param1:Boolean) : void
+        {
+            this.waitingMc.visible = param1;
+        }
+
         private function onImageChangeHandler(param1:Event) : void
         {
             if(this.backgroundImg.source != Values.EMPTY_STR)

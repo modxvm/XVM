@@ -27,9 +27,9 @@ package net.wg.gui.cyberSport.controls
 
         private static const UPDATE_VEH_ICON:String = "updateVehIcon";
 
-        private static const BATTLE_ROYALE_NATION_POSTFIX:String = "_br";
+        private static const INV_ALERT_ICON:String = "invAlertIcon";
 
-        private static const WHITE_TIGER_NATION_POSTFIX:String = "_wt";
+        private static const BATTLE_ROYALE_NATION_POSTFIX:String = "_br";
 
         private static const BATTLE_ROYALE_CUT_RECTANGLE:Rectangle = new Rectangle(0,2,100,20);
 
@@ -155,6 +155,10 @@ package net.wg.gui.cyberSport.controls
             else if(isInvalid(UPDATE_VEH_ICON))
             {
                 this.updateVehIcon();
+            }
+            if(isInvalid(INV_ALERT_ICON))
+            {
+                this.alertIcon.visible = this._showAlertIcon && this._vehicleModel && !this._vehicleModel.isReadyToFight;
             }
         }
 
@@ -350,18 +354,13 @@ package net.wg.gui.cyberSport.controls
         {
             this._currentState = SELECTED_VEHICLE;
             var _loc1_:String = this._utils.nations.getNationName(this._vehicleModel.nationID);
-            if(this._vehicleModel.isBattleRoyaleVehicle)
+            if(this._vehicleModel.isEventVehicle)
             {
                 _loc1_ = _loc1_ + BATTLE_ROYALE_NATION_POSTFIX;
             }
-            else if(this._vehicleModel.isEventVehicle)
-            {
-                _loc1_ = _loc1_ + WHITE_TIGER_NATION_POSTFIX;
-            }
             this.nationType.gotoAndStop(_loc1_);
             this.nationTypeEff.gotoAndStop(_loc1_);
-            var _loc2_:Rectangle = this._vehicleModel.isBattleRoyaleVehicle || this._vehicleModel.isEventVehicle?BATTLE_ROYALE_CUT_RECTANGLE:CUT_RECTANGLE;
-            this.cutVehicleIcon.vehicleIcon.cutRect = this.cutVehicleIconEff.vehicleIcon.cutRect = _loc2_;
+            this.cutVehicleIcon.vehicleIcon.cutRect = this.cutVehicleIconEff.vehicleIcon.cutRect = this._vehicleModel.isEventVehicle?BATTLE_ROYALE_CUT_RECTANGLE:CUT_RECTANGLE;
             this.cutVehicleIcon.vehicleIcon.source = this.cutVehicleIconEff.vehicleIcon.source = this._vehicleModel.smallIconPath;
             App.utils.commons.formatPlayerName(this.vehicleName.textField,App.utils.commons.getUserProps(this._vehicleModel.shortUserName));
             this.vehicleNameEff.textField.htmlText = this.vehicleName.textField.htmlText;
@@ -409,7 +408,7 @@ package net.wg.gui.cyberSport.controls
             this.cutVehicleIcon.visible = this.cutVehicleIconEff.visible = this._currentState == SELECTED_VEHICLE;
             this.vehicleName.visible = this.vehicleNameEff.visible = this._currentState == SELECTED_VEHICLE;
             this.vehicleTypeEff.visible = this.vehicleType.visible = this._currentState == SELECTED_VEHICLE;
-            this.vehicleLevel.visible = this._currentState == SELECTED_VEHICLE && this._vehicleModel && !this._vehicleModel.isEventVehicle && !this._vehicleModel.isBattleRoyaleVehicle;
+            this.vehicleLevel.visible = this._currentState == SELECTED_VEHICLE && this._vehicleModel && this._vehicleModel.level != 0;
             this.vCountMsg.visible = this.defaultMsg.visible = this._currentState == COUNT_VEHICLE;
             this.updateVehIcon();
             this.chooseVhclAnim.visible = this.chooseVhclAnimEffect.visible = this.currentState == CHOOSE_VEHICLE;
@@ -423,7 +422,7 @@ package net.wg.gui.cyberSport.controls
                 this.bgAnimationSelectVehicle.visible = this._showRangeRosterBg;
                 this.bgAnimationSelectVehicleDef.visible = this._showRangeRosterBg;
             }
-            this.alertIcon.visible = this._showAlertIcon && this._vehicleModel && !this._vehicleModel.isReadyToFight;
+            invalidate(INV_ALERT_ICON);
         }
 
         private function updateVehIcon() : void
@@ -566,6 +565,7 @@ package net.wg.gui.cyberSport.controls
         public function set showAlertIcon(param1:Boolean) : void
         {
             this._showAlertIcon = param1;
+            invalidate(INV_ALERT_ICON);
         }
 
         public function set showVehicleIcon(param1:Boolean) : void

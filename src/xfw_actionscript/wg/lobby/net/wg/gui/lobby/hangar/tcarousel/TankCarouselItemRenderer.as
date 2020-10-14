@@ -107,7 +107,8 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         protected function updateData() : void
         {
-            var _loc1_:* = this._dataVO != null;
+            var _loc1_:* = false;
+            _loc1_ = this._dataVO != null;
             if(_loc1_)
             {
                 alpha = this._dataVO.alpha;
@@ -364,14 +365,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
             else
             {
-                if(this._dataVO.isWulfTooltip)
-                {
-                    this._toolTipMgr.showWulfTooltip(this._dataVO.tooltip,this._dataVO.intCD);
-                }
-                else
-                {
-                    this._toolTipMgr.showSpecial(this._dataVO.tooltip,null,this._dataVO.intCD);
-                }
+                this._toolTipMgr.showSpecial(this._dataVO.tooltip,null,this._dataVO.intCD);
                 this.content.handleRollOver(this._dataVO);
             }
         }

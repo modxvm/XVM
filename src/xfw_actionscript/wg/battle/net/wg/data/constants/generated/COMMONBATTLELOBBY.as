@@ -203,8 +203,6 @@ package net.wg.data.constants.generated
 
         public static const WHITE_EDGE:String = "whiteEdge";
 
-        public static const WHITE_ICON_WT_16X16:String = "whiteIcon_wt_16x16";
-
         public static const WHITE_ICON_AT_SPG16X16:String = "whiteIconAt-SPG16x16";
 
         public static const WHITE_ICON_HEAVY_TANK16X16:String = "whiteIconHeavyTank16x16";

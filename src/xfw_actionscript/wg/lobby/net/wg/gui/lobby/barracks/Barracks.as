@@ -115,6 +115,11 @@ package net.wg.gui.lobby.barracks
             this.form.setCountersData(param1);
         }
 
+        public function as_getDataProvider() : Object
+        {
+            return this.form.dataProvider;
+        }
+
         public function as_setTankmenFilter(param1:Number, param2:String, param3:String, param4:String, param5:String) : void
         {
             this.form.setTankmenFilter(param1,param2,param3,param4,param5);

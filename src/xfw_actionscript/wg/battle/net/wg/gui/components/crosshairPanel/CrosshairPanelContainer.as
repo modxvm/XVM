@@ -12,6 +12,8 @@ package net.wg.gui.components.crosshairPanel
     import flash.utils.setInterval;
     import net.wg.data.constants.Values;
     import net.wg.gui.components.crosshairPanel.components.gunMarker.IGunMarker;
+    import net.wg.gui.components.crosshairPanel.components.autoloader.BoostIndicatorStateParamsVO;
+    import net.wg.data.constants.generated.AUTOLOADERBOOSTVIEWSTATES;
     import net.wg.gui.components.crosshairPanel.VO.CrosshairSettingsVO;
     import flash.display.StageScaleMode;
     import flash.display.StageAlign;
@@ -342,6 +344,57 @@ package net.wg.gui.components.crosshairPanel
             this.applyAutoloaderAnimationState();
         }
 
+        public function as_showBoost(param1:Number, param2:Number) : void
+        {
+            var _loc3_:BoostIndicatorStateParamsVO = null;
+            var _loc4_:* = false;
+            if(this._currentCrosshair != null)
+            {
+                _loc3_ = this._currentCrosshair.autoloaderBoostParams;
+                _loc4_ = false;
+                if(_loc3_)
+                {
+                    if(_loc3_.currentState != AUTOLOADERBOOSTVIEWSTATES.RECHARGE)
+                    {
+                        _loc3_.resetToDefault();
+                    }
+                    else
+                    {
+                        _loc3_.currentLeftX = _loc3_.leftShiftedX;
+                        _loc3_.currentRightX = _loc3_.rightShiftedX;
+                        _loc3_.isRecharging = true;
+                        _loc4_ = true;
+                    }
+                    _loc3_.currentState = param1;
+                    _loc3_.remainingDurationMsec = param1 * 1000;
+                    this._currentCrosshair.autoloaderBoostUpdate(_loc3_,param2,_loc4_);
+                }
+            }
+        }
+
+        public function as_hideBoost(param1:Boolean) : void
+        {
+            var _loc2_:BoostIndicatorStateParamsVO = null;
+            if(this._currentCrosshair != null)
+            {
+                _loc2_ = this._currentCrosshair.autoloaderBoostParams;
+                if(_loc2_)
+                {
+                    _loc2_.currentState = AUTOLOADERBOOSTVIEWSTATES.INVISIBLE;
+                    _loc2_.isSideFadeOut = param1;
+                    this._currentCrosshair.autoloaderBoostUpdate(_loc2_,0);
+                }
+            }
+        }
+
+        public function as_setBoostAsPercent(param1:Number, param2:Number) : void
+        {
+            if(this._currentCrosshair != null)
+            {
+                this._currentCrosshair.autoloaderBoostUpdateAsPercent(param2,param1);
+            }
+        }
+
         public function as_setBurnoutWarning(param1:String) : void
         {
             this._burnoutWarning = param1;
@@ -566,6 +619,7 @@ package net.wg.gui.components.crosshairPanel
 
         public function as_setView(param1:int, param2:int) : void
         {
+            var _loc3_:BoostIndicatorStateParamsVO = null;
             if(this._viewId == param1 && this._settingId == param2)
             {
                 return;
@@ -582,10 +636,15 @@ package net.wg.gui.components.crosshairPanel
                 {
                     this._currentCrosshair.visible = false;
                 }
+                _loc3_ = this._currentCrosshair.autoloaderBoostParams;
                 this._currentCrosshair = this._crosshairs[this._viewId - 1];
                 this._currentCrosshair.visible = true;
                 this._currentCrosshair.setVisibleNet(this._visibleNet);
                 this._currentCrosshair.setNetSeparatorVisible(this._visibleNetSeparator);
+                if(_loc3_)
+                {
+                    this._currentCrosshair.autoloaderBoostUpdate(_loc3_,0,true);
+                }
             }
             this._sniperCameraTransitionFx.setView(param1,this._currentCrosshair);
             this.applySettings();

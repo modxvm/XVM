@@ -5,7 +5,7 @@ package net.wg.gui.demoPage
     import net.wg.gui.components.controls.SimpleTileList;
     import net.wg.infrastructure.interfaces.IManagedContainer;
     import scaleform.clik.data.DataProvider;
-    import net.wg.data.constants.generated.APP_CONTAINERS_NAMES;
+    import net.wg.data.constants.generated.LAYER_NAMES;
     import scaleform.clik.constants.DirectionMode;
     import net.wg.gui.components.controls.events.RendererEvent;
     import net.wg.gui.components.containers.MainViewContainer;
@@ -52,7 +52,7 @@ package net.wg.gui.demoPage
         override protected function onPopulate() : void
         {
             super.onPopulate();
-            this.subViewContainer = this.addSubContainer(APP_CONTAINERS_NAMES.SUBVIEW,1);
+            this.subViewContainer = this.addSubContainer(LAYER_NAMES.SUBVIEW,1);
             this.subViewContainer.manageSize = false;
         }
 

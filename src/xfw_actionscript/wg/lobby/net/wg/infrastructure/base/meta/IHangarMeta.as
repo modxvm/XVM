@@ -21,8 +21,6 @@ package net.wg.infrastructure.base.meta
 
         function as_setCarouselEnabled(param1:Boolean) : void;
 
-        function as_setCarouselVisible(param1:Boolean) : void;
-
         function as_setupAmmunitionPanel(param1:Object) : void;
 
         function as_setControlsVisible(param1:Boolean) : void;
@@ -59,28 +57,8 @@ package net.wg.infrastructure.base.meta
 
         function as_destroyDQWidget() : void;
 
-        function as_updateSeniorityAwardsEntryPoint(param1:Boolean) : void;
-
-        function as_updateEventEntryPoint(param1:String, param2:Boolean) : void;
-
         function as_showSwitchToAmmunition() : void;
 
-        function as_setLootboxesVisible(param1:Boolean) : void;
-
-        function as_createEventCarouselWidget() : void;
-
-        function as_destroyEventCarouselWidget() : void;
-
-        function as_createEventCrewWidget(param1:Boolean) : void;
-
-        function as_destroyEventCrewWidget() : void;
-
-        function as_createEventParamsWidget() : void;
-
-        function as_destroyEventParamsWidget() : void;
-
-        function as_setHangarMode(param1:String) : void;
-
-        function as_setCloseBtnVisible(param1:Boolean) : void;
+        function as_toggleBattleRoyale(param1:Boolean) : void;
     }
 }

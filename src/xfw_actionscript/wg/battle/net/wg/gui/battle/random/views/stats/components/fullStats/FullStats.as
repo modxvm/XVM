@@ -63,6 +63,10 @@ package net.wg.gui.battle.random.views.stats.components.fullStats
         override public function updateVehicleStatus(param1:IDAAPIDataClass) : void
         {
             var _loc2_:DAAPIVehicleStatusVO = DAAPIVehicleStatusVO(param1);
+            if(_loc2_.dogTag)
+            {
+                this._tableCtrl.setDogTagToShow(_loc2_.vehicleID,_loc2_.dogTag);
+            }
             this._tableCtrl.setVehicleStatus(false,_loc2_.vehicleID,_loc2_.status,_loc2_.leftVehiclesIDs);
             this._tableCtrl.setVehicleStatus(true,_loc2_.vehicleID,_loc2_.status,_loc2_.rightVehiclesIDs);
         }

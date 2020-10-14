@@ -53,5 +53,9 @@ package net.wg.gui.lobby.modulesPanel.components
         public function playAnimation() : void
         {
         }
+
+        public function resetAnimation() : void
+        {
+        }
     }
 }

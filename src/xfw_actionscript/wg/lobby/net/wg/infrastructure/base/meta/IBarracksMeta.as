@@ -32,5 +32,7 @@ package net.wg.infrastructure.base.meta
         function as_switchFilterEnable(param1:Boolean, param2:Boolean, param3:Boolean) : void;
 
         function as_setCountersData(param1:Array) : void;
+
+        function as_getDataProvider() : Object;
     }
 }

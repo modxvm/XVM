@@ -4,6 +4,7 @@ package net.wg.gui.battle.views.stats.fullStats
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
     import net.wg.gui.battle.battleloading.data.VehiclesDataProvider;
+    import flash.utils.Dictionary;
     import net.wg.infrastructure.events.ListDataProviderEvent;
     import net.wg.data.VO.daapi.DAAPIVehicleUserTagsVO;
     import net.wg.infrastructure.exceptions.AbstractException;
@@ -26,6 +27,8 @@ package net.wg.gui.battle.views.stats.fullStats
 
         protected var _enemyRenderers:Vector.<StatsTableItemHolderBase>;
 
+        protected var _dogTagsToShow:Dictionary;
+
         private var _isRenderingAvailable:Boolean;
 
         public function StatsTableControllerBase()
@@ -37,12 +40,14 @@ package net.wg.gui.battle.views.stats.fullStats
             this._enemyDP.addEventListener(ListDataProviderEvent.VALIDATE_ITEMS,this.onEnemyDataProviderUpdateItemHandler);
             this._allyRenderers = new Vector.<StatsTableItemHolderBase>(0);
             this._enemyRenderers = new Vector.<StatsTableItemHolderBase>(0);
+            this._dogTagsToShow = new Dictionary();
         }
 
         protected function onAllyDataProviderUpdateItemHandler(param1:ListDataProviderEvent) : void
         {
             var _loc4_:* = 0;
             var _loc5_:StatsTableItemHolderBase = null;
+            var _loc6_:DAAPIVehicleInfoVO = null;
             var _loc2_:uint = this._allyRenderers.length - 1;
             var _loc3_:Vector.<int> = Vector.<int>(param1.data);
             if(this.activePlayerData == null)
@@ -54,14 +59,15 @@ package net.wg.gui.battle.views.stats.fullStats
                 if(_loc4_ <= _loc2_)
                 {
                     _loc5_ = this._allyRenderers[_loc4_];
-                    _loc5_.setDAAPIVehicleData(this._teamDP.requestItemAt(_loc4_) as DAAPIVehicleInfoVO);
+                    _loc6_ = this._teamDP.requestItemAt(_loc4_) as DAAPIVehicleInfoVO;
+                    _loc5_.setDAAPIVehicleData(_loc6_);
                     if(this.activePlayerData)
                     {
                         _loc5_.setActivePlayerData(this.activePlayerData);
                     }
                     if(_loc5_.isSelected)
                     {
-                        this.setSelectedItem(false,_loc4_);
+                        this.setSelectedItem(true,_loc4_);
                     }
                     this.onItemDataSet(_loc5_,false);
                 }
@@ -85,6 +91,8 @@ package net.wg.gui.battle.views.stats.fullStats
         {
             var _loc4_:* = 0;
             var _loc5_:StatsTableItemHolderBase = null;
+            var _loc6_:DAAPIVehicleInfoVO = null;
+            var _loc7_:String = null;
             var _loc2_:uint = this._enemyRenderers.length - 1;
             var _loc3_:Vector.<int> = Vector.<int>(param1.data);
             for each(_loc4_ in _loc3_)
@@ -92,12 +100,44 @@ package net.wg.gui.battle.views.stats.fullStats
                 if(_loc4_ <= _loc2_)
                 {
                     _loc5_ = this._enemyRenderers[_loc4_];
-                    _loc5_.setDAAPIVehicleData(this._enemyDP.requestItemAt(_loc4_) as DAAPIVehicleInfoVO);
+                    _loc6_ = this._enemyDP.requestItemAt(_loc4_) as DAAPIVehicleInfoVO;
+                    _loc5_.setDAAPIVehicleData(_loc6_);
+                    _loc5_.showDogTag(null);
+                    for(_loc7_ in this._dogTagsToShow)
+                    {
+                        if(Number(_loc7_) == _loc6_.vehicleID)
+                        {
+                            _loc5_.showDogTag(this._dogTagsToShow[_loc7_]);
+                            break;
+                        }
+                    }
                     if(_loc5_.isSelected)
                     {
                         this.setSelectedItem(true,_loc4_);
                     }
                     this.onItemDataSet(_loc5_,true);
+                }
+            }
+            this.updateDogTags();
+        }
+
+        protected function updateDogTags() : void
+        {
+            var _loc1_:StatsTableItemHolderBase = null;
+            var _loc2_:* = NaN;
+            var _loc3_:String = null;
+            for each(_loc1_ in this._enemyRenderers)
+            {
+                if(_loc1_.containsData)
+                {
+                    _loc2_ = _loc1_.getVehicleID();
+                    for(_loc3_ in this._dogTagsToShow)
+                    {
+                        if(Number(_loc3_) == _loc2_)
+                        {
+                            _loc1_.showDogTag(this._dogTagsToShow[_loc3_]);
+                        }
+                    }
                 }
             }
         }
@@ -193,6 +233,7 @@ package net.wg.gui.battle.views.stats.fullStats
         protected function onDispose() : void
         {
             var _loc1_:StatsTableItemHolderBase = null;
+            var _loc2_:String = null;
             this._teamDP.removeEventListener(ListDataProviderEvent.VALIDATE_ITEMS,this.onAllyDataProviderUpdateItemHandler);
             this._teamDP.cleanUp();
             this._teamDP = null;
@@ -211,6 +252,11 @@ package net.wg.gui.battle.views.stats.fullStats
             }
             this._enemyRenderers.splice(0,this._enemyRenderers.length);
             this._enemyRenderers = null;
+            for(_loc2_ in this._dogTagsToShow)
+            {
+                delete this._dogTagsToShow[_loc2_];
+            }
+            this._dogTagsToShow = null;
         }
 
         protected function onItemDataSet(param1:StatsTableItemHolderBase, param2:Boolean) : void

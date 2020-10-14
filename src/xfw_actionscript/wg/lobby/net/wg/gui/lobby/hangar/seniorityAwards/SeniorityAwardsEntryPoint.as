@@ -14,14 +14,6 @@ package net.wg.gui.lobby.hangar.seniorityAwards
     public class SeniorityAwardsEntryPoint extends SeniorityAwardsEntryPointMeta implements ISeniorityAwardsEntryPointMeta
     {
 
-        public static const SMALL_TRESHOLD_X:int = 1360;
-
-        public static const SMALL_TRESHOLD_Y:int = 900;
-
-        public static const TOP_OFFSET:int = -24;
-
-        public static const BOTTOM_OFFSET:int = -15;
-
         private static const DESCRIPTION_BREAKPOINT:int = 21;
 
         private static const BTN_TOP_MARGIN:int = 12;

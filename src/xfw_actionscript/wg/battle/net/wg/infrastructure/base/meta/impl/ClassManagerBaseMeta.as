@@ -22,6 +22,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.data.constants.VehicleModules;
     import net.wg.data.constants.VehicleTypes;
     import net.wg.data.constants.generated.ACOUSTICS;
+    import net.wg.data.constants.generated.AUTOLOADERBOOSTVIEWSTATES;
     import net.wg.data.constants.generated.BATTLEDAMAGELOG_IMAGES;
     import net.wg.data.constants.generated.BATTLE_EFFICIENCY_TYPES;
     import net.wg.data.constants.generated.BLOCKS_TOOLTIP_TYPES;
@@ -69,7 +70,6 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.bootcamp.containers.AnimatedTextContainer;
     import net.wg.gui.bootcamp.containers.AnimatedTextContainerWithBackground;
     import net.wg.gui.bootcamp.containers.HintContainer;
-    import net.wg.gui.bootcamp.containers.StartBootcampTransition;
     import net.wg.gui.bootcamp.containers.TipHintAnimation;
     import net.wg.gui.bootcamp.containers.TutorialPageContainer;
     import net.wg.gui.bootcamp.controls.BCAnimatedHintBase;
@@ -180,6 +180,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.components.carousels.interfaces.IScrollerLayoutController;
     import net.wg.gui.components.carousels.interfaces.IScrollerViewPort;
     import net.wg.gui.components.carousels.interfaces.IScrollerViewPortBase;
+    import net.wg.gui.components.common.AlphaPropertyWrapper;
     import net.wg.gui.components.common.BaseLogoView;
     import net.wg.gui.components.common.Counter;
     import net.wg.gui.components.common.CounterBase;
@@ -266,6 +267,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.components.controls.CoreListEx;
     import net.wg.gui.components.controls.CrewOperationBtn;
     import net.wg.gui.components.controls.CurrencyContextMenuItem;
+    import net.wg.gui.components.controls.DogTagIcon;
     import net.wg.gui.components.controls.DragableListItemRenderer;
     import net.wg.gui.components.controls.DropDownImageText;
     import net.wg.gui.components.controls.DropDownListItemRendererSound;
@@ -418,6 +420,8 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.components.crosshairPanel.components.autoloader.AutoloaderIndicator;
     import net.wg.gui.components.crosshairPanel.components.autoloader.AutoloaderShellsCassette;
     import net.wg.gui.components.crosshairPanel.components.autoloader.AutoloaderTimer;
+    import net.wg.gui.components.crosshairPanel.components.autoloader.BoostIndicator;
+    import net.wg.gui.components.crosshairPanel.components.autoloader.BoostIndicatorStateParamsVO;
     import net.wg.gui.components.crosshairPanel.components.gunMarker.DualGunMarker;
     import net.wg.gui.components.crosshairPanel.components.gunMarker.DualGunMarkerDebug;
     import net.wg.gui.components.crosshairPanel.components.gunMarker.GunMarker;
@@ -448,6 +452,16 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.components.damageIndicator.ExtendedStateContainer;
     import net.wg.gui.components.damageIndicator.ItemWithRotation;
     import net.wg.gui.components.damageIndicator.StandardStateContainer;
+    import net.wg.gui.components.dogtag.DogtagAnimWrapper;
+    import net.wg.gui.components.dogtag.DogtagComponent;
+    import net.wg.gui.components.dogtag.DogtagDownPlate;
+    import net.wg.gui.components.dogtag.DogTagEvent;
+    import net.wg.gui.components.dogtag.DogtagUpPlate;
+    import net.wg.gui.components.dogtag.DogtagUpPlateVictim;
+    import net.wg.gui.components.dogtag.DogtagVictimComponent;
+    import net.wg.gui.components.dogtag.ImageRepository;
+    import net.wg.gui.components.dogtag.VO.ComponentVO;
+    import net.wg.gui.components.dogtag.VO.DogTagVO;
     import net.wg.gui.components.icons.BattleTypeIcon;
     import net.wg.gui.components.icons.PlayerActionMarker;
     import net.wg.gui.components.icons.PlayerActionMarkerController;
@@ -699,7 +713,6 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.settings.SoundSettingsBase;
     import net.wg.gui.lobby.settings.SoundSpecialForm;
     import net.wg.gui.lobby.settings.SoundVivoxForm;
-    import net.wg.gui.lobby.settings.components.EventSettingLabel;
     import net.wg.gui.lobby.settings.components.KeyInput;
     import net.wg.gui.lobby.settings.components.KeysItemRenderer;
     import net.wg.gui.lobby.settings.components.KeysScrollingList;
@@ -822,7 +835,6 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.infrastructure.base.meta.ISettingsWindowMeta;
     import net.wg.infrastructure.base.meta.ISimpleDialogMeta;
     import net.wg.infrastructure.base.meta.ISmartPopOverViewMeta;
-    import net.wg.infrastructure.base.meta.IStartBootcampTransitionMeta;
     import net.wg.infrastructure.base.meta.ISubtitlesWindowMeta;
     import net.wg.infrastructure.base.meta.ITankCarouselFilterPopoverMeta;
     import net.wg.infrastructure.base.meta.ITutorialDialogMeta;
@@ -891,6 +903,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_DATA_CONSTANTS_VEHICLETYPES:Class = VehicleTypes;
 
         public static const NET_WG_DATA_CONSTANTS_GENERATED_ACOUSTICS:Class = ACOUSTICS;
+
+        public static const NET_WG_DATA_CONSTANTS_GENERATED_AUTOLOADERBOOSTVIEWSTATES:Class = AUTOLOADERBOOSTVIEWSTATES;
 
         public static const NET_WG_DATA_CONSTANTS_GENERATED_BATTLEDAMAGELOG_IMAGES:Class = BATTLEDAMAGELOG_IMAGES;
 
@@ -985,8 +999,6 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_BOOTCAMP_CONTAINERS_ANIMATEDTEXTCONTAINERWITHBACKGROUND:Class = AnimatedTextContainerWithBackground;
 
         public static const NET_WG_GUI_BOOTCAMP_CONTAINERS_HINTCONTAINER:Class = HintContainer;
-
-        public static const NET_WG_GUI_BOOTCAMP_CONTAINERS_STARTBOOTCAMPTRANSITION:Class = StartBootcampTransition;
 
         public static const NET_WG_GUI_BOOTCAMP_CONTAINERS_TIPHINTANIMATION:Class = TipHintAnimation;
 
@@ -1208,6 +1220,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_COMPONENTS_CAROUSELS_INTERFACES_ISCROLLERVIEWPORTBASE:Class = IScrollerViewPortBase;
 
+        public static const NET_WG_GUI_COMPONENTS_COMMON_ALPHAPROPERTYWRAPPER:Class = AlphaPropertyWrapper;
+
         public static const NET_WG_GUI_COMPONENTS_COMMON_BASELOGOVIEW:Class = BaseLogoView;
 
         public static const NET_WG_GUI_COMPONENTS_COMMON_COUNTER:Class = Counter;
@@ -1379,6 +1393,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_COMPONENTS_CONTROLS_CREWOPERATIONBTN:Class = CrewOperationBtn;
 
         public static const NET_WG_GUI_COMPONENTS_CONTROLS_CURRENCYCONTEXTMENUITEM:Class = CurrencyContextMenuItem;
+
+        public static const NET_WG_GUI_COMPONENTS_CONTROLS_DOGTAGICON:Class = DogTagIcon;
 
         public static const NET_WG_GUI_COMPONENTS_CONTROLS_DRAGABLELISTITEMRENDERER:Class = DragableListItemRenderer;
 
@@ -1684,6 +1700,10 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_COMPONENTS_CROSSHAIRPANEL_COMPONENTS_AUTOLOADER_AUTOLOADERTIMER:Class = AutoloaderTimer;
 
+        public static const NET_WG_GUI_COMPONENTS_CROSSHAIRPANEL_COMPONENTS_AUTOLOADER_BOOSTINDICATOR:Class = BoostIndicator;
+
+        public static const NET_WG_GUI_COMPONENTS_CROSSHAIRPANEL_COMPONENTS_AUTOLOADER_BOOSTINDICATORSTATEPARAMSVO:Class = BoostIndicatorStateParamsVO;
+
         public static const NET_WG_GUI_COMPONENTS_CROSSHAIRPANEL_COMPONENTS_GUNMARKER_DUALGUNMARKER:Class = DualGunMarker;
 
         public static const NET_WG_GUI_COMPONENTS_CROSSHAIRPANEL_COMPONENTS_GUNMARKER_DUALGUNMARKERDEBUG:Class = DualGunMarkerDebug;
@@ -1743,6 +1763,26 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_COMPONENTS_DAMAGEINDICATOR_ITEMWITHROTATION:Class = ItemWithRotation;
 
         public static const NET_WG_GUI_COMPONENTS_DAMAGEINDICATOR_STANDARDSTATECONTAINER:Class = StandardStateContainer;
+
+        public static const NET_WG_GUI_COMPONENTS_DOGTAG_DOGTAGANIMWRAPPER:Class = DogtagAnimWrapper;
+
+        public static const NET_WG_GUI_COMPONENTS_DOGTAG_DOGTAGCOMPONENT:Class = DogtagComponent;
+
+        public static const NET_WG_GUI_COMPONENTS_DOGTAG_DOGTAGDOWNPLATE:Class = DogtagDownPlate;
+
+        public static const NET_WG_GUI_COMPONENTS_DOGTAG_DOGTAGEVENT:Class = DogTagEvent;
+
+        public static const NET_WG_GUI_COMPONENTS_DOGTAG_DOGTAGUPPLATE:Class = DogtagUpPlate;
+
+        public static const NET_WG_GUI_COMPONENTS_DOGTAG_DOGTAGUPPLATEVICTIM:Class = DogtagUpPlateVictim;
+
+        public static const NET_WG_GUI_COMPONENTS_DOGTAG_DOGTAGVICTIMCOMPONENT:Class = DogtagVictimComponent;
+
+        public static const NET_WG_GUI_COMPONENTS_DOGTAG_IMAGEREPOSITORY:Class = ImageRepository;
+
+        public static const NET_WG_GUI_COMPONENTS_DOGTAG_VO_COMPONENTVO:Class = ComponentVO;
+
+        public static const NET_WG_GUI_COMPONENTS_DOGTAG_VO_DOGTAGVO:Class = DogTagVO;
 
         public static const NET_WG_GUI_COMPONENTS_ICONS_BATTLETYPEICON:Class = BattleTypeIcon;
 
@@ -2246,8 +2286,6 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_LOBBY_SETTINGS_SOUNDVIVOXFORM:Class = SoundVivoxForm;
 
-        public static const NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_EVENTSETTINGLABEL:Class = EventSettingLabel;
-
         public static const NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_KEYINPUT:Class = KeyInput;
 
         public static const NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_KEYSITEMRENDERER:Class = KeysItemRenderer;
@@ -2492,8 +2530,6 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_ISMARTPOPOVERVIEWMETA:Class = ISmartPopOverViewMeta;
 
-        public static const NET_WG_INFRASTRUCTURE_BASE_META_ISTARTBOOTCAMPTRANSITIONMETA:Class = IStartBootcampTransitionMeta;
-
         public static const NET_WG_INFRASTRUCTURE_BASE_META_ISUBTITLESWINDOWMETA:Class = ISubtitlesWindowMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_ITANKCAROUSELFILTERPOPOVERMETA:Class = ITankCarouselFilterPopoverMeta;
@@ -2545,8 +2581,6 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SIMPLEDIALOGMETA:Class = SimpleDialogMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SMARTPOPOVERVIEWMETA:Class = SmartPopOverViewMeta;
-
-        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_STARTBOOTCAMPTRANSITIONMETA:Class = StartBootcampTransitionMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SUBTITLESWINDOWMETA:Class = SubtitlesWindowMeta;
 

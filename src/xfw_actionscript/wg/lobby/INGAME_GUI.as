@@ -323,8 +323,6 @@ package
 
         public static const CHAT_EXAMPLE_ATTENTION_TO_POSITION:String = "#ingame_gui:chat_example/attention_to_position";
 
-        public static const CHAT_EXAMPLE_REPLY_TO_PLAYER:String = "#ingame_gui:chat_example/reply_to_player";
-
         public static const CHAT_EXAMPLE_SUPPORTING_ALLY:String = "#ingame_gui:chat_example/supporting_ally";
 
         public static const STATISTICS_TAB_LINE_UP_HEADER:String = "#ingame_gui:statistics/tab/line_up/header";
@@ -1335,13 +1333,19 @@ package
 
         public static const REWARDWINDOW_WGCQ_CLAN_REWARD_BTNLABEL:String = "#ingame_gui:rewardWindow/wgcq_clan_reward/btnLabel";
 
+        public static const REWARDWINDOW_WGCQ_CLAN_REWARD_SECONDBTNLABEL:String = "#ingame_gui:rewardWindow/wgcq_clan_reward/secondBtnLabel";
+
         public static const REWARDWINDOW_WGCQ_PLAYER_REWARD_WINHEADERTEXT:String = "#ingame_gui:rewardWindow/wgcq_player_reward/winHeaderText";
 
         public static const REWARDWINDOW_WGCQ_PLAYER_REWARD_HEADERTEXT:String = "#ingame_gui:rewardWindow/wgcq_player_reward/headerText";
 
         public static const REWARDWINDOW_WGCQ_PLAYER_REWARD_SUBHEADERTEXT:String = "#ingame_gui:rewardWindow/wgcq_player_reward/subHeaderText";
 
+        public static const REWARDWINDOW_WGCQ_PLAYER_REWARD_DESCTEXT:String = "#ingame_gui:rewardWindow/wgcq_player_reward/descText";
+
         public static const REWARDWINDOW_WGCQ_PLAYER_REWARD_BTNLABEL:String = "#ingame_gui:rewardWindow/wgcq_player_reward/btnLabel";
+
+        public static const REWARDWINDOW_WGCQ_PLAYER_REWARD_SECONDBTNLABEL:String = "#ingame_gui:rewardWindow/wgcq_player_reward/secondBtnLabel";
 
         public static const REWARDWINDOW_TWITCH0_HEADERTEXT:String = "#ingame_gui:rewardWindow/twitch0/headerText";
 
@@ -1651,13 +1655,13 @@ package
 
         public static const PREBATTLEMARKER_PREBATTLEMARKER_51:String = "#ingame_gui:prebattlemarker/prebattlemarker_51";
 
-        public static const LEVELPROGRESS_MAXLEVEL:String = "#ingame_gui:levelProgress/maxLevel";
-
         public static const OPTDEVICERESURRECTION_ENGINE:String = "#ingame_gui:optDeviceResurrection/engine";
 
         public static const OPTDEVICERESURRECTION_FUELTANK:String = "#ingame_gui:optDeviceResurrection/fuelTank";
 
         public static const OPTDEVICERESURRECTION_AMMOBAY:String = "#ingame_gui:optDeviceResurrection/ammoBay";
+
+        public static const LEVELPROGRESS_MAXLEVEL:String = "#ingame_gui:levelProgress/maxLevel";
 
         public function INGAME_GUI()
         {

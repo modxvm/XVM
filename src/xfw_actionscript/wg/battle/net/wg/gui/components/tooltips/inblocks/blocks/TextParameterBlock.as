@@ -9,10 +9,20 @@ package net.wg.gui.components.tooltips.inblocks.blocks
 
         public var nameTF:TextField;
 
+        private var _defaultNameTFWidth:int;
+
         public function TextParameterBlock()
         {
             super();
+            this._defaultNameTFWidth = this.nameTF.width;
             this.nameTF.autoSize = TextFieldAutoSize.LEFT;
+        }
+
+        override public function cleanUp() : void
+        {
+            this.nameTF.text = this.nameTF.htmlText = null;
+            this.nameTF.width = this._defaultNameTFWidth;
+            super.cleanUp();
         }
 
         override protected function onSetBlockWidth(param1:int) : void

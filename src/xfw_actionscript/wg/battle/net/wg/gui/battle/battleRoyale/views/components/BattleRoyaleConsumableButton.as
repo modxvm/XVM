@@ -234,10 +234,6 @@ package net.wg.gui.battle.battleRoyale.views.components
             super.onDispose();
         }
 
-        public function setStage(param1:int) : void
-        {
-        }
-
         public function get consumablesVO() : ConsumablesVO
         {
             return this._consumablesVo;

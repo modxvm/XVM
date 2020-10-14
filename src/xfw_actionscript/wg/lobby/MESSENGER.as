@@ -267,8 +267,6 @@ package
 
         public static const DIALOGS_SQUAD_MESSAGE_SPGFULL:String = "#messenger:dialogs/squad/message/spgFull";
 
-        public static const DIALOGS_SQUAD_MESSAGE_WHITETIGERFORBIDDEN:String = "#messenger:dialogs/squad/message/whiteTigerForbidden";
-
         public static const DIALOGS_SQUAD_MESSAGE_VEHICLES_DIFFERENTLEVELS:String = "#messenger:dialogs/squad/message/vehicles/differentLevels";
 
         public static const DIALOGS_FALLOUTSQUADCHANNEL_VEHICLES:String = "#messenger:dialogs/falloutSquadChannel/vehicles";
@@ -679,8 +677,6 @@ package
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS:String = "#messenger:serviceChannelMessages/battleResults/quests";
 
-        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_LOWTIERREWARDSQUESTS:String = "#messenger:serviceChannelMessages/battleResults/lowTierRewardsQuests";
-
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_VEHICLESLOTS:String = "#messenger:serviceChannelMessages/battleResults/quests/vehicleSlots";
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_FREEXP:String = "#messenger:serviceChannelMessages/battleResults/quests/freeXP";
@@ -802,24 +798,6 @@ package
         public static const SERVICECHANNELMESSAGES_BOOTCAMP_DEVICES:String = "#messenger:serviceChannelMessages/bootcamp/devices";
 
         public static const SERVICECHANNELMESSAGES_BOOTCAMP_CREW:String = "#messenger:serviceChannelMessages/bootcamp/crew";
-
-        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_WT_EVENT_GAMEMODE:String = "#messenger:serviceChannelMessages/battleResults/wt_event/gameMode";
-
-        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_WT_EVENT_GAMEMODENAME:String = "#messenger:serviceChannelMessages/battleResults/wt_event/gameModeName";
-
-        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_WT_EVENT_SIDE:String = "#messenger:serviceChannelMessages/battleResults/wt_event/side";
-
-        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_WT_EVENT_SIDE_HUNTER:String = "#messenger:serviceChannelMessages/battleResults/wt_event/side/hunter";
-
-        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_WT_EVENT_SIDE_BOSS:String = "#messenger:serviceChannelMessages/battleResults/wt_event/side/boss";
-
-        public static const SERVICECHANNELMESSAGES_WT_EVENT_COMPLETEDQUESTS:String = "#messenger:serviceChannelMessages/wt_event/completedQuests";
-
-        public static const SERVICECHANNELMESSAGES_WT_EVENT_BOXESEARNED:String = "#messenger:serviceChannelMessages/wt_event/boxesEarned";
-
-        public static const SERVICECHANNELMESSAGES_WT_EVENT_SPECIALBOXESEARNED:String = "#messenger:serviceChannelMessages/wt_event/specialBoxesEarned";
-
-        public static const SERVICECHANNELMESSAGES_WT_EVENT_TICKET:String = "#messenger:serviceChannelMessages/wt_event/ticket";
 
         public static const SERVICECHANNELMESSAGES_CURRENCYUPDATE_AUCTION:String = "#messenger:serviceChannelMessages/currencyUpdate/auction";
 
@@ -999,11 +977,15 @@ package
 
         public static const SERVICECHANNELMESSAGES_PREMIUMEXTENDED:String = "#messenger:serviceChannelMessages/premiumExtended";
 
+        public static const SERVICECHANNELMESSAGES_PREMIUMCHANGED:String = "#messenger:serviceChannelMessages/premiumChanged";
+
         public static const SERVICECHANNELMESSAGES_PREMIUMEXPIRED:String = "#messenger:serviceChannelMessages/premiumExpired";
 
         public static const SERVICECHANNELMESSAGES_PREMIUMPLUSBOUGHT:String = "#messenger:serviceChannelMessages/premiumPlusBought";
 
         public static const SERVICECHANNELMESSAGES_PREMIUMPLUSEXTENDED:String = "#messenger:serviceChannelMessages/premiumPlusExtended";
+
+        public static const SERVICECHANNELMESSAGES_PREMIUMPLUSCHANGED:String = "#messenger:serviceChannelMessages/premiumPlusChanged";
 
         public static const SERVICECHANNELMESSAGES_PREMIUMPLUSEXPIRED:String = "#messenger:serviceChannelMessages/premiumPlusExpired";
 
@@ -1144,8 +1126,6 @@ package
         public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_RANKEDBATTLESAVAILABLE:String = "#messenger:serviceChannelMessages/sysMsg/titles/rankedBattlesAvailable";
 
         public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_RANKEDBATTLESNOTSET:String = "#messenger:serviceChannelMessages/sysMsg/titles/rankedBattlesNotSet";
-
-        public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_BOBBATTLESAVAILABLE:String = "#messenger:serviceChannelMessages/sysMsg/titles/bobBattlesAvailable";
 
         public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_PAYMENTMETHODLINK:String = "#messenger:serviceChannelMessages/sysMsg/titles/paymentMethodLink";
 
@@ -1321,11 +1301,17 @@ package
 
         public static const SERVICECHANNELMESSAGES_LOOTBOXESAUTOOPEN_TEXT:String = "#messenger:serviceChannelMessages/lootBoxesAutoOpen/text";
 
-        public static const SERVICECHANNELMESSAGES_LOOTBOXESAUTOOPEN_BOXES:String = "#messenger:serviceChannelMessages/lootBoxesAutoOpen/boxes";
-
         public static const SERVICECHANNELMESSAGES_LOOTBOXESAUTOOPEN_COUNTER:String = "#messenger:serviceChannelMessages/lootBoxesAutoOpen/counter";
 
-        public static const SERVICECHANNELMESSAGES_LOOTBOXESAUTOOPEN_REWARDS:String = "#messenger:serviceChannelMessages/lootBoxesAutoOpen/rewards";
+        public static const SERVICECHANNELMESSAGES_LOOTBOXESAUTOOPEN_EVENT_HEADER:String = "#messenger:serviceChannelMessages/lootBoxesAutoOpen/event/header";
+
+        public static const SERVICECHANNELMESSAGES_LOOTBOXESAUTOOPEN_EVENT_TEXT:String = "#messenger:serviceChannelMessages/lootBoxesAutoOpen/event/text";
+
+        public static const SERVICECHANNELMESSAGES_LOOTBOXESAUTOOPEN_EVENT_BOXES:String = "#messenger:serviceChannelMessages/lootBoxesAutoOpen/event/boxes";
+
+        public static const SERVICECHANNELMESSAGES_LOOTBOXESAUTOOPEN_EVENT_COUNTER:String = "#messenger:serviceChannelMessages/lootBoxesAutoOpen/event/counter";
+
+        public static const SERVICECHANNELMESSAGES_LOOTBOXESAUTOOPEN_EVENT_REWARDS:String = "#messenger:serviceChannelMessages/lootBoxesAutoOpen/event/rewards";
 
         public static const SERVICECHANNELMESSAGES_LOOTBOXESAUTOOPEN_BUTTON:String = "#messenger:serviceChannelMessages/lootBoxesAutoOpen/button";
 
@@ -1951,15 +1937,29 @@ package
 
         public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_UPGRADE:String = "#messenger:serviceChannelMessages/sysMsg/titles/upgrade";
 
-        public static const SERVER_ERRORS_COMMANDINTEAMCOOLDOWN_MESSAGE:String = "#messenger:server/errors/commandInTeamCooldown/message";
-
-        public static const CLIENT_ERRORS_COMMANDINCOOLDOWN_SUSPENDEDTEXT:String = "#messenger:client/errors/commandInCooldown/suspendedText";
-
         public static const SERVICECHANNELMESSAGES_NONSELECTEDDEVICES_TEXT_BATTLEPASSTROPHYGIFTTOKEN:String = "#messenger:serviceChannelMessages/nonSelectedDevices/text/battlePassTrophyGiftToken";
 
         public static const SERVICECHANNELMESSAGES_NONSELECTEDDEVICES_TEXT_BATTLEPASSNEWDEVICEGIFTTOKEN:String = "#messenger:serviceChannelMessages/nonSelectedDevices/text/battlePassNewDeviceGiftToken";
 
         public static const SERVICECHANNELMESSAGES_NONSELECTEDDEVICES_BUTTON:String = "#messenger:serviceChannelMessages/nonSelectedDevices/button";
+
+        public static const SERVER_ERRORS_COMMANDINTEAMCOOLDOWN_MESSAGE:String = "#messenger:server/errors/commandInTeamCooldown/message";
+
+        public static const CLIENT_ERRORS_COMMANDINCOOLDOWN_SUSPENDEDTEXT:String = "#messenger:client/errors/commandInCooldown/suspendedText";
+
+        public static const SERVICECHANNELMESSAGES_DOGTAGS_UNLOCKMESSAGE_TITLE:String = "#messenger:serviceChannelMessages/dogTags/unlockMessage/title";
+
+        public static const SERVICECHANNELMESSAGES_DOGTAGS_GRADINGMESSAGE_TITLE:String = "#messenger:serviceChannelMessages/dogTags/gradingMessage/title";
+
+        public static const SERVICECHANNELMESSAGES_DOGTAGS_GRADINGMESSAGE_LEVELUPTOTEXT:String = "#messenger:serviceChannelMessages/dogTags/gradingMessage/levelUpToText";
+
+        public static const SERVICECHANNELMESSAGES_DOGTAGS_VIEWTYPE_ENGRAVING:String = "#messenger:serviceChannelMessages/dogTags/viewType/engraving";
+
+        public static const SERVICECHANNELMESSAGES_DOGTAGS_VIEWTYPE_BACKGROUND:String = "#messenger:serviceChannelMessages/dogTags/viewType/background";
+
+        public static const SERVICECHANNELMESSAGES_DEDICATIONREWARD_HEADER:String = "#messenger:serviceChannelMessages/dedicationReward/header";
+
+        public static const SERVICECHANNELMESSAGES_DEDICATIONREWARD_TEXT:String = "#messenger:serviceChannelMessages/dedicationReward/text";
 
         public static const SERVICECHANNELMESSAGES_BRBATTLERESULTS_VICTORY:String = "#messenger:serviceChannelMessages/BRbattleResults/victory";
 
@@ -1972,10 +1972,6 @@ package
         public static const SERVICECHANNELMESSAGES_BRVEHICLESINVOICE_BUTTON:String = "#messenger:serviceChannelMessages/BRVehiclesInvoice/button";
 
         public static const SERVICECHANNELMESSAGES_BRVEHICLESINVOICE_DESCR:String = "#messenger:serviceChannelMessages/BRVehiclesInvoice/descr";
-
-        public static const SERVICECHANNELMESSAGES_DEDICATIONREWARD_HEADER:String = "#messenger:serviceChannelMessages/dedicationReward/header";
-
-        public static const SERVICECHANNELMESSAGES_DEDICATIONREWARD_TEXT:String = "#messenger:serviceChannelMessages/dedicationReward/text";
 
         public static const DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_ENUM:Array = [DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_OFFLINE,DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_NOTREADY,DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_READY,DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_INBATTLE,DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_AFK];
 

@@ -18,12 +18,17 @@ package net.wg.mock
         {
         }
 
+        public function getContainer(param1:uint) : ISimpleManagedContainer
+        {
+            return null;
+        }
+
         public function getContainersFocusOrder() : Array
         {
             return null;
         }
 
-        public function getFocusPriority(param1:String) : Number
+        public function getFocusPriority(param1:int) : Number
         {
             return 0;
         }
@@ -54,7 +59,7 @@ package net.wg.mock
         {
         }
 
-        public function setVisibleContainers(param1:Boolean, param2:Vector.<String>) : void
+        public function setVisibleContainers(param1:Boolean, param2:Vector.<int>) : void
         {
         }
 
@@ -92,14 +97,14 @@ package net.wg.mock
         {
         }
 
-        public function dispatchEvent(param1:Event) : Boolean
-        {
-            return false;
-        }
-
         public function get cursorContainer() : ISimpleManagedContainer
         {
             return null;
+        }
+
+        public function dispatchEvent(param1:Event) : Boolean
+        {
+            return false;
         }
     }
 }

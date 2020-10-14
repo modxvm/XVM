@@ -42,6 +42,8 @@ package net.wg.gui.lobby.rankedBattles19.view.rewards
 
         private static const INV_REWARD_REQUEST:String = "invRequest";
 
+        private static const REWARDS_Y_OFFSET:int = 5;
+
         public var divisionSelector:DivisionSelector = null;
 
         public var qualificationRewards:QualificationRewardsView = null;
@@ -133,7 +135,7 @@ package net.wg.gui.lobby.rankedBattles19.view.rewards
                 _loc1_ = this._divisionHeightID == DIVISION_HEIGHT_ID_SHORT;
                 this.divisionSelector.isShort = _loc1_;
                 this.divisionSelector.y = _loc1_?DIVISION_SELECTOR_TOP_POSITION_SHORT:DIVISION_SELECTOR_TOP_POSITION_HIGH;
-                _loc2_ = this.divisionSelector.y + this.divisionSelector.height;
+                _loc2_ = this.divisionSelector.y + this.divisionSelector.height + REWARDS_Y_OFFSET;
                 this.divisionRewards.y = this.qualificationRewards.y = _loc2_;
                 _loc3_ = height - _loc2_;
                 this.divisionRewards.setSize(width,_loc3_);

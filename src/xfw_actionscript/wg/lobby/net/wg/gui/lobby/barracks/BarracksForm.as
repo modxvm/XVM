@@ -16,6 +16,7 @@ package net.wg.gui.lobby.barracks
     import net.wg.infrastructure.managers.ITooltipMgr;
     import net.wg.utils.ICounterManager;
     import net.wg.data.VO.CountersVo;
+    import net.wg.gui.lobby.barracks.data.TankmenDataProvider;
     import scaleform.clik.events.ListEvent;
     import scaleform.clik.data.DataProvider;
     import net.wg.data.constants.RolesState;
@@ -30,6 +31,7 @@ package net.wg.gui.lobby.barracks
     import scaleform.clik.controls.ButtonBar;
     import net.wg.infrastructure.exceptions.TypeCastException;
     import net.wg.gui.events.CrewEvent;
+    import net.wg.data.daapi.base.DAAPIDataProvider;
     import net.wg.gui.lobby.barracks.data.BarracksTankmanVO;
     import net.wg.data.constants.generated.TOOLTIPS_CONSTANTS;
 
@@ -104,12 +106,15 @@ package net.wg.gui.lobby.barracks
 
         private var _visitedCounters:Array;
 
+        private var _dataProvider:TankmenDataProvider = null;
+
         public function BarracksForm()
         {
             this._visitedCounters = [];
             super();
             this._toolTipMgr = App.toolTipMgr;
             this._counterMgr = App.utils.counterManager;
+            this._dataProvider = new TankmenDataProvider();
         }
 
         override protected function configUI() : void
@@ -176,6 +181,8 @@ package net.wg.gui.lobby.barracks
                 "label":MENU.BARRACKS_MENU_LOCATIONFILTER_NOTRECRUITED,
                 "data":BARRACKS_CONSTANTS.LOCATION_FILTER_NOT_RECRUITED
             }]);
+            this._dataProvider.addEventListener(Event.CHANGE,this.onTankmanDataChangeHandler);
+            this.tankmenTileList.dataProvider = this._dataProvider;
             this.tankmenTileList.addEventListener(ListEvent.ITEM_ROLL_OVER,this.onTankmenTileListItemRollOverHandler);
             this.tankmenTileList.addEventListener(ListEvent.ITEM_ROLL_OUT,this.onTankmenTileListItemRollOutHandler);
             this.tankmenTileList.addEventListener(ListEvent.ITEM_PRESS,this.onTankmenTileListItemPressHandler);
@@ -209,6 +216,8 @@ package net.wg.gui.lobby.barracks
             this.titleBtn.dispose();
             this.closeButton.dispose();
             this.noTankmenCmp.dispose();
+            this._dataProvider.removeEventListener(Event.CHANGE,this.onTankmanDataChangeHandler);
+            this._dataProvider = null;
             this.scrollBar = null;
             this.titleBtn = null;
             this.tankmenTileList = null;
@@ -373,9 +382,6 @@ package net.wg.gui.lobby.barracks
             {
                 this.tankmenTileList.dataProvider.cleanUp();
             }
-            this.tankmenTileList.dataProvider = new DataProvider(param1.tankmenData);
-            this.tankmenTileList.validateNow();
-            this.tankmenTileList.selectedIndex = -1;
             this.placesCountTF.htmlText = param1.placesCount;
             if(StringUtils.isNotEmpty(this._tankmenData.placesCountTooltip))
             {
@@ -537,6 +543,17 @@ package net.wg.gui.lobby.barracks
         private function onButtonBarReady() : void
         {
             invalidate(INV_COUNTERS);
+        }
+
+        public function get dataProvider() : DAAPIDataProvider
+        {
+            return this._dataProvider;
+        }
+
+        private function onTankmanDataChangeHandler(param1:Event) : void
+        {
+            this.tankmenTileList.selectedIndex = -1;
+            this.tankmenTileList.invalidateData();
         }
 
         private function onLocationButtonBarCompleteHandler(param1:Event) : void

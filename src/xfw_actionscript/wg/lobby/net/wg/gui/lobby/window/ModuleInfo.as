@@ -144,6 +144,7 @@ package net.wg.gui.lobby.window
             var _loc3_:uint = this._blocks.y + this._blocks.contentHeight;
             this.closeBottomBtn.y = _loc3_ + MIDDLE_PADDING;
             window.title = this._windowTitle;
+            window.titleUseHtml = true;
             window.invalidate(Window.INVALID_SRC_VIEW);
             this._sizeInitialized = true;
             window.alpha = alpha = 1;

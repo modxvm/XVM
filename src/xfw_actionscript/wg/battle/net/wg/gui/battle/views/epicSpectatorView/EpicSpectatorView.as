@@ -143,5 +143,37 @@ package net.wg.gui.battle.views.epicSpectatorView
             this._stageWidth = param1;
             this.updatePlayerInfoPosition();
         }
+
+        public function onDogTagKillerInPlaySoundS() : void
+        {
+        }
+
+        public function onDogTagKillerSlidePlaySoundS() : void
+        {
+        }
+
+        public function onDogTagKillerZoomOutPlaySoundS() : void
+        {
+        }
+
+        public function onVictimDogTagInPlaySoundS() : void
+        {
+        }
+
+        public function onVictimDogTagOutPlaySoundS() : void
+        {
+        }
+
+        public function as_showKillerDogTag(param1:Object) : void
+        {
+        }
+
+        public function as_showVictimDogTag(param1:Object) : void
+        {
+        }
+
+        public function as_preloadComponents(param1:Array) : void
+        {
+        }
     }
 }

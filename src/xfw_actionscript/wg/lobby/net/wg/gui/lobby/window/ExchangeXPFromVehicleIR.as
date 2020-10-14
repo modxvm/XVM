@@ -73,7 +73,10 @@ package net.wg.gui.lobby.window
         {
             super.configUI();
             this.xpLabel.textColor = App.colorSchemeMgr.getRGB(ColorSchemeNames.TEXT_COLOR_XP);
-            constraints.addElement(focusIndicator.name,focusIndicator,Constraints.ALL);
+            if(focusIndicator)
+            {
+                constraints.addElement(focusIndicator.name,focusIndicator,Constraints.ALL);
+            }
             constraints.addElement(this.background.name,this.background,Constraints.ALL);
             constraints.addElement(this.mcGreyAssets.name,this.mcGreyAssets,Constraints.LEFT);
             constraints.addElement(this.checkboxVehicle.name,this.checkboxVehicle,Constraints.LEFT);
@@ -153,7 +156,10 @@ package net.wg.gui.lobby.window
         override protected function updateAfterStateChange() : void
         {
             super.updateAfterStateChange();
-            constraints.updateElement(focusIndicator.name,focusIndicator);
+            if(focusIndicator)
+            {
+                constraints.updateElement(focusIndicator.name,focusIndicator);
+            }
             constraints.updateElement(this.background.name,this.background);
             constraints.updateElement(this.mcGreyAssets.name,this.mcGreyAssets);
             constraints.updateElement(this.checkboxVehicle.name,this.checkboxVehicle);

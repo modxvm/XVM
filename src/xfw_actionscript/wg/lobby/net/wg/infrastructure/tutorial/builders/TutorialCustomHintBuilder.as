@@ -25,12 +25,13 @@ package net.wg.infrastructure.tutorial.builders
 
         override protected function layoutHint() : void
         {
+            var _loc3_:* = 0;
             var _loc6_:HeaderButton = null;
             var _loc7_:MovieClip = null;
             var _loc8_:ContentTabRenderer = null;
             var _loc1_:Point = new Point();
             var _loc2_:* = 0;
-            var _loc3_:* = 0;
+            _loc3_ = 0;
             var _loc4_:* = 0;
             var _loc5_:* = 0;
             if(component is HeaderButton)

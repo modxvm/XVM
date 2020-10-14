@@ -23,8 +23,6 @@ package net.wg.data.constants.generated
 
         public static const PREBATTLE_TIMER:String = "prebattleTimer";
 
-        public static const EVENT_PREBATTLE_TIMER:String = "eventPrebattleTimer";
-
         public static const DEBUG_PANEL:String = "debugPanel";
 
         public static const SIXTH_SENSE:String = "sixthSense";
@@ -154,16 +152,6 @@ package net.wg.data.constants.generated
         public static const BR_SELECT_RESPAWN:String = "BRSelectRespawn";
 
         public static const FRAG_PANEL:String = "fragPanel";
-
-        public static const WT_EVENT_BOSS_PROGRESS_WIDGET:String = "wtEventBossProgressWidget";
-
-        public static const WT_EVENT_HUNTERS_PROGRESS_WIDGET:String = "wtEventHuntersProgressWidget";
-
-        public static const WT_EVENT_PLAYERS_PANEL_WIDGET:String = "wtEventPlayersPanelWidget";
-
-        public static const WT_EVENT_PLAYER_LIVES:String = "wtEventPlayerLives";
-
-        public static const WT_EVENT_REINFORCEMENT_PANEL:String = "wtEventReinforcementPanel";
 
         public function BATTLE_VIEW_ALIASES()
         {

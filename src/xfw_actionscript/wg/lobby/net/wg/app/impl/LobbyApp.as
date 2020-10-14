@@ -32,7 +32,7 @@ package net.wg.app.impl
     import net.wg.infrastructure.managers.utils.impl.CommonsLobby;
     import net.wg.infrastructure.managers.utils.impl.FocusHandlerEx;
     import net.wg.infrastructure.managers.utils.impl.IME;
-    import net.wg.data.constants.generated.APP_CONTAINERS_NAMES;
+    import net.wg.data.constants.generated.LAYER_NAMES;
     import net.wg.infrastructure.managers.utils.impl.VOManager;
     import net.wg.infrastructure.managers.utils.impl.Icons;
     import net.wg.infrastructure.managers.utils.impl.StyleSheetManager;
@@ -100,8 +100,6 @@ package net.wg.app.impl
 
         public static const APP_REG_CMD:String = "registerApplication";
 
-        public var browserBgClassValue:Class;
-
         private var _serviceLayout:ManagedContainer;
 
         private var _markers:ManagedContainer;
@@ -110,7 +108,7 @@ package net.wg.app.impl
 
         private var _windows:ManagedContainer;
 
-        private var _browser:ManagedContainer;
+        private var _fullscreenWindows:ManagedContainer;
 
         private var _dialogs:ManagedContainer;
 
@@ -126,7 +124,6 @@ package net.wg.app.impl
 
         public function LobbyApp()
         {
-            this.browserBgClassValue = LobbyApp_browserBgClassValue;
             super();
             Extensions.enabled = true;
             Extensions.noInvisibleAdvance = true;
@@ -154,7 +151,7 @@ package net.wg.app.impl
 
         override protected function getNewUtils() : IUtils
         {
-            var _loc1_:IUtils = new Utils(new Asserter(),new Scheduler(),new LocaleLobby(),new WGJSON(),new HelpLayoutManager(),new ClassFactory(),new PopupManager(),new CommonsLobby(),new FocusHandlerEx(),new IME(new SimpleManagedContainer(APP_CONTAINERS_NAMES.IME)),new VOManager(),new Icons(),new StyleSheetManager(),new TweenAnimator(),new AnimBuilder(),new DateTimeLobby(),new PoolManager(),new DataUtils(),new CounterManager(),new ViewRestrictions(),new UniversalBtnStyles());
+            var _loc1_:IUtils = new Utils(new Asserter(),new Scheduler(),new LocaleLobby(),new WGJSON(),new HelpLayoutManager(),new ClassFactory(),new PopupManager(),new CommonsLobby(),new FocusHandlerEx(),new IME(new SimpleManagedContainer(LAYER_NAMES.IME)),new VOManager(),new Icons(),new StyleSheetManager(),new TweenAnimator(),new AnimBuilder(),new DateTimeLobby(),new PoolManager(),new DataUtils(),new CounterManager(),new ViewRestrictions(),new UniversalBtnStyles());
             _loc1_.setNations(new Nations(_loc1_));
             _loc1_.universalBtnStyles.setClassFactory(_loc1_.classFactory);
             return _loc1_;
@@ -167,18 +164,18 @@ package net.wg.app.impl
 
         override protected function createContainers() : void
         {
-            this._serviceLayout = new ManagedContainer(APP_CONTAINERS_NAMES.SERVICE_LAYOUT);
-            this._views = new MainViewContainer(APP_CONTAINERS_NAMES.VIEWS);
-            this._windows = new ManagedContainer(APP_CONTAINERS_NAMES.WINDOWS);
-            this._systemMessages = new SimpleManagedContainer(APP_CONTAINERS_NAMES.SYSTEM_MESSAGES);
-            this._browser = new ManagedContainer(APP_CONTAINERS_NAMES.BROWSER);
-            this._dialogs = new ManagedContainer(APP_CONTAINERS_NAMES.DIALOGS);
-            this._toolTips = new SimpleManagedContainer(APP_CONTAINERS_NAMES.TOOL_TIPS);
+            this._serviceLayout = new ManagedContainer(LAYER_NAMES.SERVICE_LAYOUT);
+            this._views = new MainViewContainer(LAYER_NAMES.VIEWS);
+            this._windows = new ManagedContainer(LAYER_NAMES.WINDOWS);
+            this._fullscreenWindows = new ManagedContainer(LAYER_NAMES.FULLSCREEN_WINDOWS);
+            this._systemMessages = new SimpleManagedContainer(LAYER_NAMES.SYSTEM_MESSAGES);
+            this._dialogs = new ManagedContainer(LAYER_NAMES.DIALOGS);
+            this._toolTips = new SimpleManagedContainer(LAYER_NAMES.TOOL_TIPS);
             this._toolTips.updateMouseHandling(false);
-            this._cursorCtnr = new CursorManagedContainer(APP_CONTAINERS_NAMES.CURSOR);
-            this._waiting = new WaitingManagedContainer(APP_CONTAINERS_NAMES.WAITING);
-            this._overlay = new ManagedContainer(APP_CONTAINERS_NAMES.OVERLAY);
-            this._markers = new ManagedContainer(APP_CONTAINERS_NAMES.MARKER);
+            this._cursorCtnr = new CursorManagedContainer(LAYER_NAMES.CURSOR);
+            this._waiting = new WaitingManagedContainer(LAYER_NAMES.WAITING);
+            this._overlay = new ManagedContainer(LAYER_NAMES.OVERLAY);
+            this._markers = new ManagedContainer(LAYER_NAMES.MARKER);
             super.createContainers();
         }
 
@@ -195,10 +192,10 @@ package net.wg.app.impl
             this._views = null;
             this._markers.dispose();
             this._markers = null;
+            this._fullscreenWindows.dispose();
+            this._fullscreenWindows = null;
             this._windows.dispose();
             this._windows = null;
-            this._browser.dispose();
-            this._browser = null;
             this._dialogs.dispose();
             this._dialogs = null;
             this._systemMessages = null;
@@ -219,7 +216,7 @@ package net.wg.app.impl
             if(!containers)
             {
                 _loc1_ = DisplayObject(utils.IME.getContainer());
-                containers = new <DisplayObject>[this._markers,this._views,this._windows,this._systemMessages,this._browser,this._dialogs,this._overlay,_loc1_,this._serviceLayout,this._toolTips,this._cursorCtnr,this._waiting];
+                containers = new <DisplayObject>[this._markers,this._views,this._windows,this._fullscreenWindows,this._systemMessages,this._dialogs,this._overlay,_loc1_,this._serviceLayout,this._toolTips,this._cursorCtnr,this._waiting];
             }
             return containers;
         }
@@ -348,11 +345,6 @@ package net.wg.app.impl
         override public function get systemMessages() : DisplayObjectContainer
         {
             return this._systemMessages;
-        }
-
-        override public function get browserBgClass() : Class
-        {
-            return this.browserBgClassValue;
         }
 
         override protected function initStage(param1:Event = null) : void

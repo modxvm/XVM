@@ -9,8 +9,6 @@ package net.wg.data.constants.generated
 
         public static const GAME_LOADING_REGISTER_CALLBACK:String = "registerGameLoading";
 
-        public static const BOOTCAMP_TRANISITION_CALLBACK:String = "registerBootcampTransition";
-
         public static const WAITING_TRANSITION_CALLBACK:String = "registerWaitingTransition";
 
         public function ROOT_SWF_CONSTANTS()

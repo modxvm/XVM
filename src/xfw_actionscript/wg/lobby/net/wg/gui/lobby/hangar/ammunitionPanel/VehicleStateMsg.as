@@ -61,8 +61,6 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         {
             super.configUI();
             this.tankTypeIcon.mouseEnabled = this.tankTypeIcon.mouseChildren = false;
-            this.vehicleMsg.addEventListener(MouseEvent.ROLL_OVER,this.onVehicleMsgRollOverHandler);
-            this.vehicleMsg.addEventListener(MouseEvent.ROLL_OUT,this.onVehicleMsgRollOutHandler);
             this._hitArea = new Sprite();
             addChild(this._hitArea);
             this.statusBg.hitArea = this._hitArea;
@@ -97,7 +95,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                 {
                     this.vehicleMsg.htmlText = this._data.message;
                     this.vehicleLevel.text = this._data.vehicleLevel;
-                    this.vehicleName.text = this._data.vehicleName;
+                    this.vehicleName.htmlText = this._data.vehicleName;
                     this.tankTypeIcon.type = this._data.tankType;
                     this.tankTypeIcon.validateNow();
                     this.statusBg.visible = this.vehicleMsg.visible = this._data.message.length > 0;

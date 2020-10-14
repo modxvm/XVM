@@ -267,6 +267,10 @@ package net.wg.gui.battle.components
             if(_loc2_.isEnemy)
             {
                 this.listRight.setVehicleStatus(_loc2_.vehicleID,_loc2_.status);
+                if(_loc2_.dogTag)
+                {
+                    this.listRight.showDogTag(_loc2_.vehicleID,_loc2_.dogTag);
+                }
                 if(_loc2_.rightVehiclesIDs)
                 {
                     this.listRight.updateOrder(_loc2_.rightVehiclesIDs);

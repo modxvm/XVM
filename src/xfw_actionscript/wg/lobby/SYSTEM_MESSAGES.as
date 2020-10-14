@@ -165,8 +165,6 @@ package
 
         public static const PREBATTLE_VEHICLEINVALID_EPICONLY:String = "#system_messages:prebattle/vehicleInvalid/epicOnly";
 
-        public static const PREBATTLE_VEHICLEINVALID_BOBONLY:String = "#system_messages:prebattle/vehicleInvalid/bobOnly";
-
         public static const PREBATTLE_VEHICLEINVALID_NOTSETREADYSTATUS:String = "#system_messages:prebattle/vehicleInvalid/notSetReadyStatus";
 
         public static const PREBATTLE_VEHICLEINVALID_FALLOUTONLY:String = "#system_messages:prebattle/vehicleInvalid/falloutOnly";
@@ -1301,11 +1299,15 @@ package
 
         public static const OPTIONALDEVICES_APPLY_ERROR:String = "#system_messages:optionalDevices_apply/error";
 
+        public static const OPTIONALDEVICES_APPLY_ERROR_TOO_HEAVY:String = "#system_messages:optionalDevices_apply/error_too_heavy";
+
         public static const OPTIONALDEVICES_APPLY_NOT_ENOUGH_MONEY:String = "#system_messages:optionalDevices_apply/not_enough_money";
 
         public static const OPTIONALDEVICES_APPLY_WALLET_NOT_AVAILABLE:String = "#system_messages:optionalDevices_apply/wallet_not_available";
 
         public static const OPTIONALDEVICES_REMOVE_ERROR:String = "#system_messages:optionalDevices_remove/error";
+
+        public static const OPTIONALDEVICES_REMOVE_ERROR_TOO_HEAVY:String = "#system_messages:optionalDevices_remove/error_too_heavy";
 
         public static const SHELLS_APPLY_SUCCESS_MONEY_SPENT:String = "#system_messages:shells_apply/success_money_spent";
 
@@ -1512,6 +1514,8 @@ package
         public static const CLANS_NOTIFICATIONS_REQUESTSENT:String = "#system_messages:clans/notifications/requestSent";
 
         public static const CLANS_NOTIFICATIONS_INVITESENT:String = "#system_messages:clans/notifications/inviteSent";
+
+        public static const CLANS_NOTIFICATIONS_ALREADYINVITESENT:String = "#system_messages:clans/notifications/alreadyInviteSent";
 
         public static const CLANS_NOTIFICATIONS_INVITESSENT:String = "#system_messages:clans/notifications/invitesSent";
 
@@ -2211,11 +2215,7 @@ package
 
         public static const EVENT_PROGRESSION_BUY_VEHICLE_SERVER_ERROR:String = "#system_messages:event_progression_buy_vehicle/server_error";
 
-        public static const EVENT_PROGRESSION_BUY_VEHICLE_SUCCESS:String = "#system_messages:event_progression_buy_vehicle/success";
-
-        public static const EVENT_PROGRESSION_BUY_STYLE_SERVER_ERROR:String = "#system_messages:event_progression_buy_style/server_error";
-
-        public static const EVENT_PROGRESSION_BUY_STYLE_SUCCESS:String = "#system_messages:event_progression_buy_style/success";
+        public static const EVENT_PROGRESSION_BUY_VEHICLE_BUY:String = "#system_messages:event_progression_buy_vehicle/buy";
 
         public static const MAPS_BLACK_LIST_SELECT_SUCCESS:String = "#system_messages:maps_black_list/select/success";
 
@@ -2357,29 +2357,19 @@ package
 
         public static const OFFERS_UNAVAILABLE_MANY:String = "#system_messages:offers/unavailable_many";
 
-        public static const WT_EVENT_LOOTBOXES_HEADER:String = "#system_messages:wt_event/lootboxes/header";
+        public static const MISSINGEVENTS_BUTTON:String = "#system_messages:missingEvents/button";
 
-        public static const WT_EVENT_LOOTBOXES_ENABLED:String = "#system_messages:wt_event/lootboxes/enabled";
+        public static const MISSINGEVENTS_HEADER:String = "#system_messages:missingEvents/header";
 
-        public static const WT_EVENT_LOOTBOXES_DISABLED:String = "#system_messages:wt_event/lootboxes/disabled";
+        public static const MISSINGEVENTS_TEXT:String = "#system_messages:missingEvents/text";
 
-        public static const WT_EVENT_LOOTBOXES_BUTTON:String = "#system_messages:wt_event/lootboxes/button";
+        public static const DOG_TAGS_SWITCH_OFF_TITLE:String = "#system_messages:dog_tags/switch_off/title";
 
-        public static const WT_EVENT_EVENT_ENABLED:String = "#system_messages:wt_event/event/enabled";
+        public static const DOG_TAGS_SWITCH_OFF_BODY:String = "#system_messages:dog_tags/switch_off/body";
 
-        public static const WT_EVENT_EVENT_DISABLED:String = "#system_messages:wt_event/event/disabled";
+        public static const DOG_TAGS_SWITCH_ON_TITLE:String = "#system_messages:dog_tags/switch_on/title";
 
-        public static const WT_EVENT_DETAILS_BUTTON:String = "#system_messages:wt_event/details/button";
-
-        public static const WT_EVENT_TICKET_OWNED:String = "#system_messages:wt_event/ticket/owned";
-
-        public static const WT_EVENT_TICKET_FREE:String = "#system_messages:wt_event/ticket/free";
-
-        public static const WT_EVENT_TICKET_TASKS:String = "#system_messages:wt_event/ticket/tasks";
-
-        public static const WT_EVENT_TICKET_BUY:String = "#system_messages:wt_event/ticket/buy";
-
-        public static const WT_EVENT_OPENED_BOX:String = "#system_messages:wt_event/opened_box";
+        public static const DOG_TAGS_SWITCH_ON_BODY:String = "#system_messages:dog_tags/switch_on/body";
 
         public function SYSTEM_MESSAGES()
         {

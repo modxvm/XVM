@@ -104,7 +104,7 @@ package net.wg.infrastructure.managers.impl.TooltipMgr
 
         public function getDefaultTooltipProps() : ITooltipProps
         {
-            throw new AbstractException("AbstractApplication.getManagedContainer" + Errors.ABSTRACT_INVOKE);
+            throw new AbstractException("AbstractApplication.getDefaultTooltipProps" + Errors.ABSTRACT_INVOKE);
         }
 
         public function getNewFormatter() : ITooltipFormatter

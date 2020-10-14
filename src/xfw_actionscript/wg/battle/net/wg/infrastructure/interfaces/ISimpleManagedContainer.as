@@ -3,7 +3,9 @@ package net.wg.infrastructure.interfaces
     public interface ISimpleManagedContainer extends IUIComponentEx
     {
 
-        function get type() : String;
+        function get layer() : int;
+
+        function get layerName() : String;
 
         function get manageFocus() : Boolean;
 

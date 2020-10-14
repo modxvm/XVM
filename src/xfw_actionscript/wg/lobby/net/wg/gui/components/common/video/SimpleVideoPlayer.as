@@ -4,8 +4,8 @@ package net.wg.gui.components.common.video
     import flash.media.Video;
     import flash.net.NetStream;
     import flash.net.NetConnection;
-    import flash.events.NetStatusEvent;
     import flash.media.SoundTransform;
+    import flash.events.NetStatusEvent;
     import flash.events.Event;
 
     public class SimpleVideoPlayer extends UIComponentEx
@@ -61,21 +61,21 @@ package net.wg.gui.components.common.video
         {
             this._status = PlayerStatus.STOP;
             super();
-        }
-
-        override protected function configUI() : void
-        {
-            super.configUI();
+            DebugUtils.LOG_DEBUG("SimpleVideoPlayer()");
+            DebugUtils.LOG_DEBUG("SimpleVideoPlayer | _ncConnection = new NetConnection()");
             this._ncConnection = new NetConnection();
             this._ncConnection.addEventListener(NetStatusEvent.NET_STATUS,this.onNetStatusHandler,false,0,true);
             this._ncConnection.connect(null);
+            DebugUtils.LOG_DEBUG("SimpleVideoPlayer | _nsStream = new NetStream(_ncConnection)");
             this._nsStream = new NetStream(this._ncConnection);
             this._nsStream.addEventListener(NetStatusEvent.NET_STATUS,this.onNetStatusHandler,false,0,true);
             this._nsStream.client = {
                 "onMetaData":this.onMetaDataHandler,
                 "onSubtitle":this.onSubtitleHandler
             };
+            DebugUtils.LOG_DEBUG("SimpleVideoPlayer | _nsStream.bufferTime = " + this._bufferTime);
             this._nsStream.bufferTime = this._bufferTime;
+            DebugUtils.LOG_DEBUG("SimpleVideoPlayer | video.attachNetStream(_nsStream)");
             this.video.attachNetStream(this._nsStream);
         }
 
@@ -90,6 +90,7 @@ package net.wg.gui.components.common.video
             {
                 if(this._nsStream)
                 {
+                    DebugUtils.LOG_DEBUG("SimpleVideoPlayer | draw() set SOUND_LEVEL_INVALID");
                     this._nsStream.soundTransform = new SoundTransform(this._volume);
                 }
             }
@@ -97,38 +98,28 @@ package net.wg.gui.components.common.video
             {
                 if(this._nsStream.hasOwnProperty(SUBTITLE_TRACK_PROP_NAME))
                 {
-                    if(this._subtitleTotalTracks >= this._subtitleTrack)
-                    {
-                        this._nsStream[SUBTITLE_TRACK_PROP_NAME] = this._subtitleTrack;
-                    }
-                    else
-                    {
-                        this._nsStream[SUBTITLE_TRACK_PROP_NAME] = 0;
-                    }
+                    DebugUtils.LOG_DEBUG("SimpleVideoPlayer | draw() set SUBTITLE_TRACK_PROP_NAME");
+                    this._nsStream[SUBTITLE_TRACK_PROP_NAME] = this._subtitleTotalTracks >= this._subtitleTrack?this._subtitleTrack:0;
                 }
             }
             if(isInvalid(SELECTED_AUDIO_TRACK_INVALID))
             {
                 if(this._nsStream.hasOwnProperty(AUDIO_TRACK_PROP_NAME))
                 {
-                    if(this._audioTotalTracks > this._audioTrack)
-                    {
-                        this._nsStream[AUDIO_TRACK_PROP_NAME] = this._audioTrack;
-                    }
-                    else
-                    {
-                        this._nsStream[AUDIO_TRACK_PROP_NAME] = 0;
-                    }
+                    DebugUtils.LOG_DEBUG("SimpleVideoPlayer | draw() set AUDIO_TRACK_PROP_NAME");
+                    this._nsStream[AUDIO_TRACK_PROP_NAME] = this._audioTotalTracks > this._audioTrack?this._audioTrack:0;
                 }
             }
             if(isInvalid(INV_BUFFER_TIME))
             {
+                DebugUtils.LOG_DEBUG("SimpleVideoPlayer | draw() _nsStream.bufferTime = " + this._bufferTime);
                 this._nsStream.bufferTime = this._bufferTime;
             }
         }
 
         override protected function onDispose() : void
         {
+            DebugUtils.LOG_DEBUG("SimpleVideoPlayer | onDispose()");
             App.utils.scheduler.cancelTask(invalidate);
             if(this._ncConnection)
             {
@@ -178,12 +169,14 @@ package net.wg.gui.components.common.video
 
         public function seek(param1:Number) : void
         {
+            DebugUtils.LOG_DEBUG("SimpleVideoPlayer | seek(" + param1 + ")");
             dispatchEvent(new Event(VideoPlayerEvent.SEEK_START));
             this._nsStream.seek(param1);
         }
 
         public function stopPlayback() : void
         {
+            DebugUtils.LOG_DEBUG("SimpleVideoPlayer | stopPlayback()");
             this._nsStream.close();
         }
 
@@ -210,6 +203,7 @@ package net.wg.gui.components.common.video
 
         private function applyVideoLoading() : void
         {
+            DebugUtils.LOG_DEBUG("SimpleVideoPlayer | applyVideoLoading() _source = " + this._source);
             if(this._source != null && this._source != "")
             {
                 this.setStatus(PlayerStatus.LOADING);
@@ -221,6 +215,7 @@ package net.wg.gui.components.common.video
 
         private function onMetaDataHandler(param1:Object) : void
         {
+            DebugUtils.LOG_DEBUG("SimpleVideoPlayer | onMetaDataHandler() _metaData = " + param1);
             this._metaData = param1;
             if(this._nsStream.hasOwnProperty(SUBTITLE_TRACK_PROP_NAME))
             {
@@ -237,6 +232,7 @@ package net.wg.gui.components.common.video
 
         private function onSubtitleHandler(param1:String) : void
         {
+            DebugUtils.LOG_DEBUG("SimpleVideoPlayer | onSubtitleHandler() subTitle = " + param1);
             this.setSubtitle(param1);
         }
 
@@ -248,6 +244,7 @@ package net.wg.gui.components.common.video
 
         private function onPlaybackStopped() : void
         {
+            DebugUtils.LOG_DEBUG("SimpleVideoPlayer | onPlaybackStopped() _isLoop = " + this._isLoop);
             if(this._isLoop)
             {
                 this.seek(0);
@@ -265,12 +262,14 @@ package net.wg.gui.components.common.video
 
         private function setPause() : void
         {
+            DebugUtils.LOG_DEBUG("SimpleVideoPlayer | setPause()");
             this._nsStream.pause();
             this.setStatus(PlayerStatus.PAUSE);
         }
 
         private function setPlay() : void
         {
+            DebugUtils.LOG_DEBUG("SimpleVideoPlayer | setPlay()");
             this._nsStream.resume();
             this.setStatus(PlayerStatus.PLAYING);
         }
@@ -296,6 +295,7 @@ package net.wg.gui.components.common.video
         {
             if(this._source != param1)
             {
+                DebugUtils.LOG_DEBUG("SimpleVideoPlayer | set source = " + param1);
                 this._curAttempt = 0;
                 this._source = param1;
                 invalidate(VIDEO_SOURCE_INVALID);
@@ -316,6 +316,7 @@ package net.wg.gui.components.common.video
         {
             if(this._volume != param1)
             {
+                DebugUtils.LOG_DEBUG("SimpleVideoPlayer | set volume = " + param1);
                 this._volume = param1;
                 invalidate(SOUND_LEVEL_INVALID);
                 dispatchEvent(new Event(VideoPlayerEvent.VOLUME_CHANGED));
@@ -406,6 +407,7 @@ package net.wg.gui.components.common.video
             var _loc4_:VideoPlayerStatusEvent = null;
             var _loc2_:Object = param1.info;
             var _loc3_:String = _loc2_.code;
+            DebugUtils.LOG_DEBUG("SimpleVideoPlayer | onNetStatusHandler() streamStatus: " + _loc3_);
             switch(_loc3_)
             {
                 case NetStreamStatusCode.START:

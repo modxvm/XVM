@@ -29,8 +29,6 @@ package
 
         public static const INVITES_PREBATTLE_ALREADYJOINED_FALLOUT:String = "#invites:invites/prebattle/alreadyJoined/FALLOUT";
 
-        public static const INVITES_PREBATTLE_ALREADYJOINED_EVENT:String = "#invites:invites/prebattle/alreadyJoined/EVENT";
-
         public static const INVITES_PREBATTLE_ALREADYJOINED_TRAINING:String = "#invites:invites/prebattle/alreadyJoined/TRAINING";
 
         public static const INVITES_PREBATTLE_ALREADYJOINED_EPIC_TRAINING:String = "#invites:invites/prebattle/alreadyJoined/EPIC_TRAINING";
@@ -68,8 +66,6 @@ package
         public static const INVITES_TEXT_FORT_BATTLE:String = "#invites:invites/text/FORT_BATTLE";
 
         public static const INVITES_TEXT_STRONGHOLD:String = "#invites:invites/text/STRONGHOLD";
-
-        public static const INVITES_TEXT_BOB:String = "#invites:invites/text/BOB";
 
         public static const INVITES_TEXT_FORT_OFFENCE:String = "#invites:invites/text/fort/offence";
 
@@ -111,9 +107,9 @@ package
 
         public static const INVITES_NOTE_SERVER_CHANGE:String = "#invites:invites/note/server_change";
 
-        public static const INVITES_NOTE_LEAVE_QUEUE_EVENT_BATTLES:String = "#invites:invites/note/leave/QUEUE_EVENT_BATTLES";
-
         public static const INVITES_NOTE_CHANGE_AND_LEAVE_QUEUE_EVENT_BATTLES:String = "#invites:invites/note/change_and_leave/QUEUE_EVENT_BATTLES";
+
+        public static const INVITES_NOTE_LEAVE_QUEUE_EVENT_BATTLES:String = "#invites:invites/note/leave/QUEUE_EVENT_BATTLES";
 
         public static const INVITES_NOTE_CHANGE_AND_LEAVE_PREBATTLE_EVENT:String = "#invites:invites/note/change_and_leave/PREBATTLE_EVENT";
 
@@ -194,10 +190,6 @@ package
         public static const INVITES_NOTE_LEAVE_QUEUE_BATTLE_ROYALE:String = "#invites:invites/note/leave/QUEUE_BATTLE_ROYALE";
 
         public static const INVITES_NOTE_CHANGE_AND_LEAVE_QUEUE_BATTLE_ROYALE:String = "#invites:invites/note/change_and_leave/QUEUE_BATTLE_ROYALE";
-
-        public static const INVITES_NOTE_LEAVE_PREBATTLE_BOB:String = "#invites:invites/note/leave/PREBATTLE_BOB";
-
-        public static const INVITES_NOTE_CHANGE_AND_LEAVE_PREBATTLE_BOB:String = "#invites:invites/note/change_and_leave/PREBATTLE_BOB";
 
         public static const INVITES_WARNING_ANONYMIZED:String = "#invites:invites/warning/anonymized";
 

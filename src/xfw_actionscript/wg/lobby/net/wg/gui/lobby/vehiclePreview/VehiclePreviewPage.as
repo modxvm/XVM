@@ -410,7 +410,10 @@ package net.wg.gui.lobby.vehiclePreview
             this.fadingPanels.mouseChildren = true;
             if(this.fadingPanels.alpha != SHOW_SLOTS_ALPHA)
             {
-                this._tweens.push(new Tween(FADE_ANIMATION_DURATION,this.fadingPanels,{"alpha":SHOW_SLOTS_ALPHA},{"fastTransform":false}),new Tween(FADE_ANIMATION_DURATION,this.compareBlock,{
+                this._tweens.push(new Tween(FADE_ANIMATION_DURATION,this.fadingPanels,{"alpha":SHOW_SLOTS_ALPHA},{
+                    "fastTransform":false,
+                    "onComplete":this.onFadingPanelsShow
+                }),new Tween(FADE_ANIMATION_DURATION,this.compareBlock,{
                     "alpha":SHOW_SLOTS_ALPHA,
                     "visible":true
                 },{"fastTransform":false}),new Tween(FADE_ANIMATION_DURATION,this.leftBackground,{"alpha":SHOW_SLOTS_ALPHA},{"fastTransform":false}),new Tween(FADE_ANIMATION_DURATION,this.rightBackground,{"alpha":SHOW_SLOTS_ALPHA},{"fastTransform":false}));
@@ -426,7 +429,8 @@ package net.wg.gui.lobby.vehiclePreview
             this.fadingPanels.mouseChildren = false;
             this._tweens.push(new Tween(FADE_ANIMATION_DURATION,this.fadingPanels,{"alpha":HIDE_SLOTS_ALPHA},{
                 "delay":FADE_ANIMATION_DELAY,
-                "fastTransform":false
+                "fastTransform":false,
+                "onComplete":this.onFadingPanelsHide
             }),new Tween(FADE_ANIMATION_DURATION,this.compareBlock,{
                 "alpha":HIDE_SLOTS_ALPHA,
                 "visible":false
@@ -480,6 +484,16 @@ package net.wg.gui.lobby.vehiclePreview
         private function onBottomPanelResizeHandler(param1:Event) : void
         {
             invalidateSize();
+        }
+
+        private function onFadingPanelsHide() : void
+        {
+            this._infoPanel.visible = false;
+        }
+
+        private function onFadingPanelsShow() : void
+        {
+            this._infoPanel.visible = true;
         }
     }
 }

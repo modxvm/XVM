@@ -2,20 +2,21 @@ package net.wg.gui.components.containers
 {
     import net.wg.infrastructure.base.UIComponentEx;
     import net.wg.infrastructure.interfaces.ISimpleManagedContainer;
+    import net.wg.data.constants.generated.LAYER_NAMES;
 
     public class SimpleManagedContainer extends UIComponentEx implements ISimpleManagedContainer
     {
 
         protected var _manageFocus:Boolean = true;
 
-        private var _type:String = "view";
+        private var _layer:int = -1;
 
         private var _manageSize:Boolean = true;
 
         public function SimpleManagedContainer(param1:String)
         {
             super();
-            this._type = param1;
+            this._layer = LAYER_NAMES.LAYER_ORDER.indexOf(param1);
             name = param1;
             this._manageSize = false;
             mouseEnabled = false;
@@ -26,9 +27,14 @@ package net.wg.gui.components.containers
             mouseChildren = mouseEnabled = param1;
         }
 
-        public function get type() : String
+        public function get layer() : int
         {
-            return this._type;
+            return this._layer;
+        }
+
+        public function get layerName() : String
+        {
+            return name;
         }
 
         public function get manageFocus() : Boolean

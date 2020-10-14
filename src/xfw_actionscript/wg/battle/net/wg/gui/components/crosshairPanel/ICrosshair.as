@@ -2,6 +2,7 @@ package net.wg.gui.components.crosshairPanel
 {
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import net.wg.infrastructure.interfaces.IDisplayObject;
+    import net.wg.gui.components.crosshairPanel.components.autoloader.BoostIndicatorStateParamsVO;
 
     public interface ICrosshair extends IDisposable, IDisplayObject
     {
@@ -47,6 +48,12 @@ package net.wg.gui.components.crosshairPanel
         function setNetSeparatorVisible(param1:Boolean) : void;
 
         function autoloaderUpdate(param1:Number, param2:Number, param3:Boolean, param4:Boolean) : void;
+
+        function autoloaderBoostUpdate(param1:BoostIndicatorStateParamsVO, param2:Number, param3:Boolean = false) : void;
+
+        function autoloaderBoostUpdateAsPercent(param1:Number, param2:Number) : void;
+
+        function get autoloaderBoostParams() : BoostIndicatorStateParamsVO;
 
         function autoloaderShowShot() : void;
 

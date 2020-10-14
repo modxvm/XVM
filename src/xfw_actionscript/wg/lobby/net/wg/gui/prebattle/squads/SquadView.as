@@ -136,7 +136,8 @@ package net.wg.gui.prebattle.squads
 
         private function initBattleType() : void
         {
-            var _loc1_:String = SQUADTYPES.SQUAD_TYPE_SIMPLE;
+            var _loc1_:String = null;
+            _loc1_ = SQUADTYPES.SQUAD_TYPE_SIMPLE;
             this.inviteBtn.y = INVITE_BTN_Y_SIMPLE_SQUAD;
             var _loc2_:ISquadAbstractFactory = new SquadAbstractFactory(_loc1_);
             teamSection = _loc2_.getTeamSection();

@@ -9,8 +9,6 @@ package net.wg.gui.battle.views.prebattleTimer
     import net.wg.gui.utils.FrameHelper;
     import net.wg.data.constants.Values;
     import net.wg.data.constants.generated.PREBATTLE_TIMER;
-    import flash.text.TextFormat;
-    import net.wg.data.constants.Fonts;
     import flash.display.FrameLabel;
 
     public class PrebattleTimerBase extends PrebattleTimerBaseMeta implements IPrebattleTimerBase, IPrebattleTimerBaseMeta
@@ -22,9 +20,9 @@ package net.wg.gui.battle.views.prebattleTimer
 
         protected static const INVALID_WIN_TF:uint = InvalidationType.SYSTEM_FLAGS_BORDER << 3;
 
-        protected static const INVALID_MESSAGE_TF:uint = InvalidationType.SYSTEM_FLAGS_BORDER << 4;
+        private static const INVALID_MESSAGE_TF:uint = InvalidationType.SYSTEM_FLAGS_BORDER << 4;
 
-        protected static const INVALID_TIME_TF:uint = InvalidationType.SYSTEM_FLAGS_BORDER << 5;
+        private static const INVALID_TIME_TF:uint = InvalidationType.SYSTEM_FLAGS_BORDER << 5;
 
         private static const FRAME_LABEL_INIT:String = "init";
 
@@ -32,13 +30,13 @@ package net.wg.gui.battle.views.prebattleTimer
 
         private static const FRAME_LABEL_HIDE_COMPLETED:String = "hideCompleted";
 
-        protected static const TIMER_LARGE_SCALE:Number = 1;
+        private static const TIMER_LARGE_SCALE:Number = 1;
 
-        protected static const TIMER_SMALL_SCALE:Number = 0.75;
+        private static const TIMER_SMALL_SCALE:Number = 0.75;
 
-        protected static const TIMER_LARGE_Y:int = -14;
+        private static const TIMER_LARGE_Y:int = -14;
 
-        protected static const TIMER_SMALL_Y:int = 25;
+        private static const TIMER_SMALL_Y:int = 25;
 
         private static const SMALL_STATE:String = "smallState";
 
@@ -153,7 +151,11 @@ package net.wg.gui.battle.views.prebattleTimer
 
         public function as_setMessage(param1:String) : void
         {
-            this.setMessage(param1);
+            if(this._messageText != param1)
+            {
+                this._messageText = param1;
+                invalidate(INVALID_MESSAGE_TF);
+            }
         }
 
         public function as_setTimer(param1:int) : void
@@ -171,16 +173,11 @@ package net.wg.gui.battle.views.prebattleTimer
 
         public function as_setWinConditionText(param1:String) : void
         {
-            var _loc2_:TextFormat = new TextFormat();
-            _loc2_.font = Fonts.FIELD_FONT;
-            this.win.defaultTextFormat = _loc2_;
-            this.setWinConditionText(param1);
-        }
-
-        public function hideBackground() : void
-        {
-            this._isBackgroundHided = true;
-            this.background.visible = false;
+            if(this._winMessageText != param1)
+            {
+                this._winMessageText = param1;
+                invalidate(INVALID_WIN_TF);
+            }
         }
 
         public function updateStage(param1:Number, param2:Number) : void
@@ -189,22 +186,10 @@ package net.wg.gui.battle.views.prebattleTimer
             invalidateSize();
         }
 
-        protected function setWinConditionText(param1:String) : void
+        public function hideBackground() : void
         {
-            if(this._winMessageText != param1)
-            {
-                this._winMessageText = param1;
-                invalidate(INVALID_WIN_TF);
-            }
-        }
-
-        protected function setMessage(param1:String) : void
-        {
-            if(this._messageText != param1)
-            {
-                this._messageText = param1;
-                invalidate(INVALID_MESSAGE_TF);
-            }
+            this._isBackgroundHided = true;
+            this.background.visible = false;
         }
 
         protected function doUpdateSize(param1:Boolean) : void

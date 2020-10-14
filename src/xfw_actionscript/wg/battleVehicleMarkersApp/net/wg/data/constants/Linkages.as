@@ -347,6 +347,8 @@ package net.wg.data.constants
 
         public static const UNLOCK_PROGRESS_LINK:String = "BattleResultUnlockItem_UI";
 
+        public static const UNLOCK_DOG_TAG:String = "BattleResultUnlockDogTag_UI";
+
         public static const PERSONAL_QUEST_LINK:String = "PersonalQuestSubTaskUI";
 
         public static const MAGAZINE_GUN_ICON:String = "MagazineGunIcon";
@@ -523,6 +525,8 @@ package net.wg.data.constants
 
         public static const GROUP_IRENDERER:String = "net.wg.test.gui.components.common.containers.GroupIRenderer";
 
+        public static const DOGTAG:String = "DogtagUI";
+
         public static const LEFT_ITEM_RENDERER_TABLE:String = "LeftItemRendererTableUI";
 
         public static const RIGHT_ITEM_RENDERER_TABLE:String = "RightItemRendererTableUI";
@@ -574,6 +578,10 @@ package net.wg.data.constants
         public static const DIP_SURVEYING_DEVICE_DAMAGED:String = "DipSurveyingDeviceDamagedUI";
 
         public static const DIP_SURVEYING_DEVICE_DESTROYED:String = "DipSurveyingDeviceDestroyedUI";
+
+        public static const DIP_WHEEL_DEVICE_DAMAGED:String = "DipWheelDamagedUI";
+
+        public static const DIP_WHEEL_DEVICE_DESTROYED:String = "DipWheelDestroyedUI";
 
         public static const DIP_COMMANDER_DAMAGED:String = "DipCommanderDamagedUI";
 
@@ -954,16 +962,6 @@ package net.wg.data.constants
         public static const NATION_TREE_NODE_PREMIUM_COLLECTOR_BTN:String = "NationTreeNodeBtnUI";
 
         public static const NATION_TREE_PREMIUM_DOTS_PATTERN:String = "PremiumDotUI";
-
-        public static const TEN_YEARS_ENTRY_POINT_ANIM_UI:String = "TenYearsEntryPointAnimUI";
-
-        public static const WT_EVENT_ENTRY_POINT_ANIM_UI:String = "WTEventEntryPointAnimUI";
-
-        public static const WT_EVENT_ENTRY_POINT_STATIC_BG_UI:String = "WTEventEntryPointStaticUI";
-
-        public static const WT_EVENT_ENTRY_TEXT_INFO_UI:String = "WTEventEntryTextInfoUI";
-
-        public static const WT_ENERGY_SPAWN_ENTRY_UI:String = "WTEnergySpawnFlashEntry";
 
         public function Linkages()
         {

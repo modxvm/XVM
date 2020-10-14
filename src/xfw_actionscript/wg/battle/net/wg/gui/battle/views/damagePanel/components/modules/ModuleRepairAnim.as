@@ -74,6 +74,10 @@ package net.wg.gui.battle.views.damagePanel.components.modules
         {
             var _loc2_:* = NaN;
             var _loc3_:* = 0;
+            if(param1 < 1.0E-4)
+            {
+                var param1:Number = 1.0E-4;
+            }
             if(this._timer.running)
             {
                 _loc2_ = this._playbackSpeed / param1;

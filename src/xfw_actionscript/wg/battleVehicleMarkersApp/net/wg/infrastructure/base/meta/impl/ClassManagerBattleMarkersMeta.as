@@ -55,7 +55,6 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.battle.views.vehicleMarkers.statusMarkers.VehicleEngineerEffectMarker;
     import net.wg.gui.battle.views.vehicleMarkers.statusMarkers.VehicleInspireMarker;
     import net.wg.gui.battle.views.vehicleMarkers.statusMarkers.VehicleInspireTargetMarker;
-    import net.wg.gui.battle.views.vehicleMarkers.statusMarkers.VehiclePowerUpMarker;
     import net.wg.gui.battle.views.vehicleMarkers.statusMarkers.VehicleStunMarker;
     import net.wg.gui.battle.views.vehicleMarkers.VO.CrossOffset;
     import net.wg.gui.battle.views.vehicleMarkers.VO.HPDisplayMode;
@@ -176,8 +175,6 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_BATTLE_VIEWS_VEHICLEMARKERS_STATUSMARKERS_VEHICLEINSPIREMARKER:Class = VehicleInspireMarker;
 
         public static const NET_WG_GUI_BATTLE_VIEWS_VEHICLEMARKERS_STATUSMARKERS_VEHICLEINSPIRETARGETMARKER:Class = VehicleInspireTargetMarker;
-
-        public static const NET_WG_GUI_BATTLE_VIEWS_VEHICLEMARKERS_STATUSMARKERS_VEHICLEPOWERUPMARKER:Class = VehiclePowerUpMarker;
 
         public static const NET_WG_GUI_BATTLE_VIEWS_VEHICLEMARKERS_STATUSMARKERS_VEHICLESTUNMARKER:Class = VehicleStunMarker;
 

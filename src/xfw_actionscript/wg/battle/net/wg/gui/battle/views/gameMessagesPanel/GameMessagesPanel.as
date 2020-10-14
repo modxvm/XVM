@@ -49,26 +49,14 @@ package net.wg.gui.battle.views.gameMessagesPanel
 
         override protected function onDispose() : void
         {
-            var _loc1_:MessageContainerBase = null;
-            var _loc2_:GameMessageVO = null;
             this._scheduler.cancelTask(this.onOutroTaskComplete);
             this._scheduler.cancelTask(this.onMessageTaskComplete);
             this._scheduler.cancelTask(this.removeMessageFromContainer);
             this._scheduler = null;
-            for each(_loc1_ in this._activeMessages)
-            {
-                _loc1_.stop();
-                this.messagesContainer.removeChild(_loc1_);
-                _loc1_.dispose();
-            }
-            this._activeMessages.splice(0,this._activeMessages.length);
+            this.removeActiveMessages();
             this._activeMessages = null;
             this.messagesContainer = null;
-            for each(_loc2_ in this._messagesStack)
-            {
-                _loc2_.dispose();
-            }
-            this._messagesStack.splice(0,this._messagesStack.length);
+            this.removeStackMessages();
             this._messagesStack = null;
             App.utils.data.cleanupDynamicObject(this.msgLinkageTypeDict);
             this.msgLinkageTypeDict = null;
@@ -107,6 +95,17 @@ package net.wg.gui.battle.views.gameMessagesPanel
             }
         }
 
+        public function as_clearMessages() : void
+        {
+            this._enablePlaying = true;
+            this._isPlayingMessages = false;
+            this._scheduler.cancelTask(this.onOutroTaskComplete);
+            this._scheduler.cancelTask(this.onMessageTaskComplete);
+            this._scheduler.cancelTask(this.removeMessageFromContainer);
+            this.removeActiveMessages();
+            this.removeStackMessages();
+        }
+
         protected function initMappingDict() : void
         {
             this.msgLinkageTypeDict = new Dictionary();
@@ -117,6 +116,28 @@ package net.wg.gui.battle.views.gameMessagesPanel
             this.msgClassTypeDict[GAME_MESSAGES_CONSTS.WIN] = EndGameMessage;
             this.msgClassTypeDict[GAME_MESSAGES_CONSTS.DEFEAT] = EndGameMessage;
             this.msgClassTypeDict[GAME_MESSAGES_CONSTS.DRAW] = EndGameMessage;
+        }
+
+        private function removeStackMessages() : void
+        {
+            var _loc1_:GameMessageVO = null;
+            for each(_loc1_ in this._messagesStack)
+            {
+                _loc1_.dispose();
+            }
+            this._messagesStack.splice(0,this._messagesStack.length);
+        }
+
+        private function removeActiveMessages() : void
+        {
+            var _loc1_:MessageContainerBase = null;
+            for each(_loc1_ in this._activeMessages)
+            {
+                _loc1_.stop();
+                this.messagesContainer.removeChild(_loc1_);
+                _loc1_.dispose();
+            }
+            this._activeMessages.splice(0,this._activeMessages.length);
         }
 
         private function onMessageTaskComplete() : void

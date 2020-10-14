@@ -3,8 +3,11 @@ package net.wg.gui.bootcamp
     import net.wg.infrastructure.base.meta.impl.BCHighlightsMeta;
     import net.wg.infrastructure.base.meta.IBCHighlightsMeta;
     import flash.display.DisplayObjectContainer;
+    import net.wg.infrastructure.interfaces.ISimpleManagedContainer;
     import flash.display.DisplayObject;
     import net.wg.infrastructure.interfaces.IView;
+    import net.wg.infrastructure.managers.IContainerManager;
+    import net.wg.data.constants.generated.LAYER_NAMES;
     import net.wg.gui.components.windows.Window;
     import net.wg.infrastructure.base.BaseViewWrapper;
     import flash.utils.Dictionary;
@@ -74,45 +77,47 @@ package net.wg.gui.bootcamp
 
         public static function seekView(param1:String) : DisplayObjectContainer
         {
-            var _loc3_:String = null;
-            var _loc4_:DisplayObjectContainer = null;
-            var _loc5_:uint = 0;
+            var _loc4_:ISimpleManagedContainer = null;
+            var _loc5_:String = null;
             var _loc6_:uint = 0;
-            var _loc7_:DisplayObject = null;
-            var _loc8_:IView = null;
-            var _loc2_:Object = Object(App.containerMgr).containersMap;
-            for(_loc3_ in _loc2_)
+            var _loc7_:uint = 0;
+            var _loc8_:DisplayObject = null;
+            var _loc9_:IView = null;
+            var _loc2_:IContainerManager = App.containerMgr;
+            var _loc3_:Array = LAYER_NAMES.LAYER_ORDER;
+            for(_loc5_ in _loc3_)
             {
-                _loc4_ = _loc2_[_loc3_] as DisplayObjectContainer;
+                _loc4_ = _loc2_.getContainer(Number(_loc5_));
                 if(_loc4_)
                 {
-                    _loc5_ = _loc4_.numChildren;
-                    _loc6_ = 0;
-                    while(_loc6_ < _loc5_)
+                    _loc6_ = _loc4_.numChildren;
+                    _loc7_ = 0;
+                    while(_loc7_ < _loc6_)
                     {
-                        _loc7_ = _loc4_.getChildAt(_loc6_);
-                        _loc8_ = null;
-                        if(_loc7_ is IView)
+                        _loc8_ = _loc4_.getChildAt(_loc7_);
+                        _loc9_ = null;
+                        if(_loc8_ is IView)
                         {
-                            _loc8_ = IView(_loc7_);
+                            _loc9_ = IView(_loc8_);
                         }
-                        else if(_loc7_ is Window)
+                        else if(_loc8_ is Window)
                         {
-                            _loc8_ = Window(_loc7_).sourceView;
+                            _loc9_ = Window(_loc8_).sourceView;
                         }
-                        else if(_loc7_ is BaseViewWrapper)
+                        else if(_loc8_ is BaseViewWrapper)
                         {
-                            _loc8_ = BaseViewWrapper(_loc7_).sourceView;
+                            _loc9_ = BaseViewWrapper(_loc8_).sourceView;
                         }
-                        if(_loc8_ && _loc8_.as_config.alias == param1)
+                        if(_loc9_ && _loc9_.as_config.alias == param1)
                         {
-                            return DisplayObjectContainer(_loc8_);
+                            return DisplayObjectContainer(_loc9_);
                         }
-                        _loc6_++;
+                        _loc7_++;
                     }
                     continue;
                 }
             }
+            DebugUtils.LOG_WARNING("View name = " + param1 + " was not found!");
             return null;
         }
 
@@ -397,24 +402,6 @@ package net.wg.gui.bootcamp
             this.addHintToComponent(param1,_loc4_,_loc2_);
         }
 
-        private function onLoaderViewLoadedHandler(param1:LoaderEvent) : void
-        {
-            var _loc4_:HighlightData = null;
-            var _loc2_:IView = param1.view;
-            var _loc3_:String = _loc2_.as_config.alias;
-            this._viewsCache[_loc3_] = _loc2_;
-            this.removeLoaderListener();
-            _loc2_.addEventListener(LifeCycleEvent.ON_DISPOSE,this.onViewOnDisposeHandler);
-            if(this._currentComponentSearching)
-            {
-                _loc4_ = this._highlightsData[this._currentComponentSearching];
-                if(_loc4_.viewAlias == _loc3_)
-                {
-                    this.highlightRoutine(this._currentComponentSearching);
-                }
-            }
-        }
-
         private function updateComponentPosition(param1:Object, param2:String) : void
         {
             var _loc3_:HighlightData = this._highlightsData[param2];
@@ -440,12 +427,6 @@ package net.wg.gui.bootcamp
             {
                 _loc4_.addChild(_loc6_);
             }
-        }
-
-        private function onViewOnDisposeHandler(param1:LifeCycleEvent) : void
-        {
-            delete this._viewsCache[param1.target.as_config.alias];
-            param1.target.removeEventListener(LifeCycleEvent.ON_DISPOSE,this.onViewOnDisposeHandler);
         }
 
         private function getComponentBounds(param1:Object, param2:DisplayObject) : Rectangle
@@ -549,6 +530,36 @@ package net.wg.gui.bootcamp
             this.highlightRoutine(this._currentComponentSearching);
         }
 
+        private function removeLoaderListener() : void
+        {
+            var _loc1_:IEventDispatcher = App.instance.loaderMgr;
+            _loc1_.removeEventListener(LoaderEvent.VIEW_LOADED,this.onLoaderViewLoadedHandler);
+        }
+
+        private function onLoaderViewLoadedHandler(param1:LoaderEvent) : void
+        {
+            var _loc4_:HighlightData = null;
+            var _loc2_:IView = param1.view;
+            var _loc3_:String = _loc2_.as_config.alias;
+            this._viewsCache[_loc3_] = _loc2_;
+            this.removeLoaderListener();
+            _loc2_.addEventListener(LifeCycleEvent.ON_DISPOSE,this.onViewOnDisposeHandler);
+            if(this._currentComponentSearching)
+            {
+                _loc4_ = this._highlightsData[this._currentComponentSearching];
+                if(_loc4_.viewAlias == _loc3_)
+                {
+                    this.highlightRoutine(this._currentComponentSearching);
+                }
+            }
+        }
+
+        private function onViewOnDisposeHandler(param1:LifeCycleEvent) : void
+        {
+            delete this._viewsCache[param1.target.as_config.alias];
+            param1.target.removeEventListener(LifeCycleEvent.ON_DISPOSE,this.onViewOnDisposeHandler);
+        }
+
         private function onHintRendrererCompleteHandler(param1:Event) : void
         {
             var _loc3_:String = null;
@@ -604,12 +615,6 @@ package net.wg.gui.bootcamp
             this.disposeReadyForTutorialDispatcher();
             this.restartHighlightRoutine();
         }
-
-        private function removeLoaderListener() : void
-        {
-            var _loc1_:IEventDispatcher = App.instance.loaderMgr;
-            _loc1_.removeEventListener(LoaderEvent.VIEW_LOADED,this.onLoaderViewLoadedHandler);
-        }
     }
 }
 
@@ -654,11 +659,6 @@ class HighlightData extends DAAPIDataClass
         super(param1);
     }
 
-    public function update(param1:Object) : void
-    {
-        fromHash(param1);
-    }
-
     override protected function onDataWrite(param1:String, param2:Object) : Boolean
     {
         if(param1 == PADDING_NAME)
@@ -673,5 +673,10 @@ class HighlightData extends DAAPIDataClass
     {
         this.padding = null;
         super.onDispose();
+    }
+
+    public function update(param1:Object) : void
+    {
+        fromHash(param1);
     }
 }

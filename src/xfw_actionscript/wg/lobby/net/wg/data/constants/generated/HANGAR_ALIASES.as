@@ -7,13 +7,13 @@ package net.wg.data.constants.generated
 
         public static const RANKED_TANK_CAROUSEL:String = "rankedTankCarousel";
 
+        public static const ENTRIES_CONTAINER:String = "entriesContainer";
+
         public static const EPICBATTLE_TANK_CAROUSEL:String = "epicBattleTankCarousel";
 
         public static const BATTLEPASS_TANK_CAROUSEL:String = "battlePassTankCarousel";
 
         public static const ROYALE_TANK_CAROUSEL:String = "royaleTankCarousel";
-
-        public static const BOB_TANK_CAROUSEL:String = "bobTankCarousel";
 
         public static const CREW:String = "crew";
 
@@ -33,13 +33,11 @@ package net.wg.data.constants.generated
 
         public static const EPIC_WIDGET:String = "epicWdgt";
 
-        public static const SENIORITY_AWARDS_ENTRY_POINT:String = "SENIORITY_AWARDS_ENTRY_POINT";
+        public static const SENIORITY_AWARDS_ENTRY_POINT_2020:String = "SeniorityAwardsEntryPoint2020";
 
         public static const RANKED_PRIME_TIME:String = "rankedPrimeTime.swf";
 
         public static const EPIC_PRIME_TIME:String = "epicPrimeTime.swf";
-
-        public static const BOB_PRIME_TIME:String = "rankedPrimeTime.swf";
 
         public static const TANK_CAROUSEL_UI:String = "TankCarouselUI";
 
@@ -61,37 +59,11 @@ package net.wg.data.constants.generated
 
         public static const BATTLE_PASSS_ENTRY_POINT:String = "battlePassEntryPoint";
 
-        public static const TEN_YEARS_COUNTDOWN_ENTRY_POINT_INJECT:String = "tenYearsCountdownEntryPointInject";
-
         public static const AMMUNITION_SETUP_VIEW_VEHICLE_PARAMS:String = "ammunitionSetupViewVehicleParams";
 
         public static const AMMUNITION_PANEL_INJECT:String = "ammunitionPanelInject";
 
         public static const AMMUNITION_SETUP_VIEW_INJECT:String = "ammunitionSetupViewInject";
-
-        public static const WHITE_TIGER_WIDGET:String = "whiteTigerWidget";
-
-        public static const LOOTBOXES_WIDGET:String = "lootboxesWidget";
-
-        public static const WT_EVENT_ENTRY_POINT:String = "wtEventEntryPoint";
-
-        public static const WT_EVENT_PRIME_TIME_VIEW:String = "wtEventPrimeTimeView";
-
-        public static const WT_EVENT_PRIME_TIME:String = "wtEventPrimeTime.swf";
-
-        public static const WT_EVENT_CAROUSEL_WIDGET:String = "wtEventCarouselWidget";
-
-        public static const WT_EVENT_CREW_WIDGET:String = "wtEventCrewWidget";
-
-        public static const WT_EVENT_PARAMS_WIDGET:String = "wtEventParamsWidget";
-
-        public static const HANGAR_COMMON:String = "hangarCommon";
-
-        public static const HANGAR_EVENT:String = "hangarEvent";
-
-        public static const HANGAR_BATTLE_ROYALE:String = "hangarBattleRoyale";
-
-        public static const HANGAR_MODES:Array = [HANGAR_COMMON,HANGAR_EVENT,HANGAR_BATTLE_ROYALE];
 
         public function HANGAR_ALIASES()
         {

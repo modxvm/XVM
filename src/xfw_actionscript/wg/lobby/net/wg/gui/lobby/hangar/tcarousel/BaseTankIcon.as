@@ -35,15 +35,9 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         private static const CRYSTALS_LIMIT_REACH_FRAME:String = "Deactivated";
 
-        private static const EVENT_FLAG_LABEL:String = "event";
-
-        private static const EVENT_FLAG_SPECIAL_LABEL:String = "event_special";
-
         public var mcFlag:MovieClip = null;
 
         public var imgIcon:ImageComponent = null;
-
-        public var giveaway:MovieClip = null;
 
         public var mcTankType:MovieClip = null;
 
@@ -124,7 +118,6 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.mcTankType = null;
             this.mcLevel = null;
             this.txtTankName = null;
-            this.giveaway = null;
             this.imgFavorite.dispose();
             this.imgFavorite = null;
             this.price.dispose();
@@ -262,21 +255,10 @@ package net.wg.gui.lobby.hangar.tcarousel
                 }
                 this.setVisibleVehicleInfo(true);
                 this.mcLevel.visible = param1.level != 0;
-                if(param1.isEventVehicle)
-                {
-                    this.mcFlag.gotoAndStop(EVENT_FLAG_LABEL);
-                    this.mcTankType.visible = this.mcLevel.visible = false;
-                }
-                if(param1.isEventVehicleSpecial)
-                {
-                    this.mcFlag.gotoAndStop(EVENT_FLAG_SPECIAL_LABEL);
-                    this.mcTankType.visible = this.mcLevel.visible = false;
-                }
             }
             this.bpSpecialBorder.visible = param1.progressionPoints && param1.progressionPoints.isSpecialVehicle;
             this.updateLockBg();
             this.imgFavorite.visible = param1.favorite;
-            this.giveaway.visible = param1.giveaway;
             this.clanLock.timer = param1.clanLock;
             this.rentalBG.visible = this._isRentPromotion;
             visible = true;

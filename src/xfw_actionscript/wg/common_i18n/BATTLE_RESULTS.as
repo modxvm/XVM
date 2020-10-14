@@ -663,6 +663,8 @@ package
 
         public static const DETAILS_CALCULATIONS_CRYSTAL_TOTAL:String = "#battle_results:details/calculations/crystal/total";
 
+        public static const DETAILS_CALCULATIONS_CRYSTAL_EVENTS:String = "#battle_results:details/calculations/crystal/events";
+
         public static const TANKSELECTOR_NEXT:String = "#battle_results:tankSelector/next";
 
         public static const VICTORYSCORE:String = "#battle_results:victoryScore";

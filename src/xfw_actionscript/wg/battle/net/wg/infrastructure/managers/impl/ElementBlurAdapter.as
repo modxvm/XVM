@@ -2,7 +2,6 @@ package net.wg.infrastructure.managers.impl
 {
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import flash.display.DisplayObject;
-    import flash.utils.Dictionary;
     import net.wg.infrastructure.interfaces.ISimpleManagedContainer;
     import flash.filters.BlurFilter;
     import flash.filters.BitmapFilter;
@@ -21,57 +20,51 @@ package net.wg.infrastructure.managers.impl
 
         private var _blurAnimRepeatCount:int = 10;
 
-        private var _containersDict:Dictionary = null;
+        private var _containers:Vector.<DisplayObject> = null;
 
         public function ElementBlurAdapter(param1:Vector.<DisplayObject>)
         {
-            var _loc2_:ISimpleManagedContainer = null;
             super();
-            this._containersDict = new Dictionary();
-            for each(this._containersDict[_loc2_.type] in param1)
-            {
-            }
+            this._containers = param1;
         }
 
-        public function blurElements(param1:String, param2:Vector.<String>, param3:int) : void
+        public function blurElements(param1:int, param2:int) : void
         {
             var _loc4_:ISimpleManagedContainer = null;
             var _loc5_:* = 0;
-            var _loc7_:String = null;
-            var _loc8_:DisplayObject = null;
-            var _loc6_:Vector.<DisplayObject> = new Vector.<DisplayObject>(0);
+            var _loc6_:DisplayObject = null;
             this.cancelScheduled();
-            for each(_loc7_ in param2)
+            var _loc3_:Vector.<DisplayObject> = new Vector.<DisplayObject>(0);
+            for each(_loc4_ in this._containers)
             {
-                _loc4_ = this._containersDict[_loc7_];
-                if(_loc4_ != null)
+                if(_loc4_.layer < param1)
                 {
-                    _loc6_.push(_loc4_);
+                    _loc3_.push(_loc4_);
                 }
-            }
-            _loc4_ = this._containersDict[param1];
-            if(_loc4_ != null)
-            {
-                _loc5_ = 0;
-                while(_loc5_ < _loc4_.numChildren)
+                else if(_loc4_.layer == param1)
                 {
-                    _loc6_.push(_loc4_.getChildAt(_loc5_));
-                    _loc5_++;
+                    _loc5_ = 0;
+                    while(_loc5_ < _loc4_.numChildren)
+                    {
+                        _loc3_.push(_loc4_.getChildAt(_loc5_));
+                        _loc5_++;
+                    }
+                    continue;
                 }
             }
             if(this._bluredElements && this._bluredElements.length)
             {
-                for each(_loc8_ in this._bluredElements)
+                for each(_loc6_ in this._bluredElements)
                 {
-                    if(_loc6_.indexOf(_loc8_) == -1)
+                    if(_loc3_.indexOf(_loc6_) == -1)
                     {
-                        _loc8_.filters = null;
+                        _loc6_.filters = null;
                     }
                 }
             }
             this._blurAnimCount = 0;
-            this._bluredElements = _loc6_;
-            this._blurAnimRepeatCount = param3;
+            this._bluredElements = _loc3_;
+            this._blurAnimRepeatCount = param2;
             App.utils.scheduler.scheduleRepeatableTask(this.animateBlur,ANIM_STEP_TIME,this._blurAnimRepeatCount,this._bluredElements);
         }
 
@@ -79,8 +72,7 @@ package net.wg.infrastructure.managers.impl
         {
             this.cancelScheduled();
             this.cleanUpBluredElements();
-            App.utils.data.cleanupDynamicObject(this._containersDict);
-            this._containersDict = null;
+            this._containers = null;
         }
 
         public function unblurElements() : void

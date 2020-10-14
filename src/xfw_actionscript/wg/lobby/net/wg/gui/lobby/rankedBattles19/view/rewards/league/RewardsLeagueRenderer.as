@@ -211,11 +211,11 @@ package net.wg.gui.lobby.rankedBattles19.view.rewards.league
             {
                 if(this._styleIconWidth == STYLE_ICON_WIDTH_NORMAL)
                 {
-                    this.styleReward.setData(RewardsLeagueStyleReward.SIZE_NORMAL,this._data.leagueID);
+                    this.styleReward.setData(RewardsLeagueStyleReward.SIZE_NORMAL,this._data.styleID);
                 }
                 else
                 {
-                    this.styleReward.setData(RewardsLeagueStyleReward.SIZE_WIDE,this._data.leagueID);
+                    this.styleReward.setData(RewardsLeagueStyleReward.SIZE_WIDE,this._data.styleID);
                 }
             }
         }

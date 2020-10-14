@@ -5,10 +5,12 @@ package net.wg.gui.battle.components.stats.playersPanel.list
     import net.wg.gui.battle.components.stats.playersPanel.interfaces.IPlayersPanelListItem;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.interfaces.IPlayersPanelListItemHolder;
     import flash.utils.Dictionary;
+    import net.wg.gui.components.dogtag.DogtagComponent;
     import net.wg.utils.ICommons;
     import net.wg.infrastructure.managers.ITooltipMgr;
     import net.wg.utils.ILocale;
     import net.wg.utils.IClassFactory;
+    import net.wg.data.constants.Linkages;
     import net.wg.infrastructure.exceptions.AbstractException;
     import net.wg.data.constants.Errors;
     import flash.geom.Rectangle;
@@ -17,11 +19,14 @@ package net.wg.gui.battle.components.stats.playersPanel.list
     import net.wg.gui.battle.views.minimap.MinimapEntryController;
     import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
     import net.wg.gui.battle.components.events.PlayersPanelListEvent;
+    import net.wg.gui.components.dogtag.VO.DogTagVO;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.events.PlayersPanelItemEvent;
     import flash.display.DisplayObject;
 
     public class BasePlayersPanelList extends Sprite implements IPlayersPanelList
     {
+
+        private static const DOG_TAG_OFFSET_X:int = 30;
 
         private static const ITEM_HEIGHT:int = 25;
 
@@ -47,6 +52,8 @@ package net.wg.gui.battle.components.stats.playersPanel.list
 
         private var _toolTipString:String = null;
 
+        private var _dogTag:DogtagComponent;
+
         private var _commons:ICommons;
 
         private var _tooltipMgr:ITooltipMgr;
@@ -68,6 +75,18 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             this._currOrder = new Vector.<Number>();
             this._renderersContainer = new Sprite();
             addChild(this._renderersContainer);
+            this.initDogTag();
+        }
+
+        private function initDogTag() : void
+        {
+            this._dogTag = App.utils.classFactory.getComponent(Linkages.DOGTAG,DogtagComponent);
+            addChild(this._dogTag);
+            this._dogTag.visible = false;
+            this._dogTag.hideNameAndClan();
+            this._dogTag.x = -this._dogTag.width - DOG_TAG_OFFSET_X;
+            this._dogTag.goToLabel(DogtagComponent.DOGTAG_LABEL_END_FULL);
+            this._dogTag.alpha = 0;
         }
 
         public final function dispose() : void
@@ -116,6 +135,8 @@ package net.wg.gui.battle.components.stats.playersPanel.list
                 {
                     _loc3_.removeEventListener(MouseEvent.MOUSE_OVER,this.onHitMouseOverHandler);
                     _loc3_.removeEventListener(MouseEvent.MOUSE_OUT,this.onHitMouseOutHandler);
+                    _loc3_.removeEventListener(MouseEvent.MOUSE_OVER,this.onHitMouseOverHandlerDogTag);
+                    _loc3_.removeEventListener(MouseEvent.MOUSE_OUT,this.onHitMouseOutHandlerDogTag);
                     _loc3_.dispose();
                 }
                 this.panelListItems.splice(0,this.panelListItems.length);
@@ -268,6 +289,18 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             }
         }
 
+        public function showDogTag(param1:Number, param2:DogTagVO) : void
+        {
+            var _loc3_:IPlayersPanelListItemHolder = this.getHolderByVehicleID(param1);
+            if(_loc3_)
+            {
+                _loc3_.getListItem().showDogTag();
+                _loc3_.getListItem().addEventListener(MouseEvent.MOUSE_OVER,this.onHitMouseOverHandlerDogTag);
+                _loc3_.getListItem().addEventListener(MouseEvent.MOUSE_OUT,this.onHitMouseOutHandlerDogTag);
+                _loc3_.setDogTag(param2);
+            }
+        }
+
         public function updateColorBlind() : void
         {
             var _loc1_:IPlayersPanelListItem = null;
@@ -338,6 +371,10 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             this.initializeState();
         }
 
+        public function setShowDogTag(param1:Boolean) : void
+        {
+        }
+
         public function get isInviteReceived() : Boolean
         {
             return false;
@@ -359,6 +396,11 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             this._renderersContainer = null;
             this._toolTipString = null;
             this._currentPlayerIsAnonymized = false;
+            if(this._dogTag)
+            {
+                this._dogTag.dispose();
+                this._dogTag = null;
+            }
         }
 
         protected function initializeListItem(param1:IPlayersPanelListItem) : void
@@ -449,6 +491,30 @@ package net.wg.gui.battle.components.stats.playersPanel.list
         private function onHitMouseOutHandler(param1:MouseEvent) : void
         {
             this._tooltipMgr.hide();
+        }
+
+        private function onHitMouseOverHandlerDogTag(param1:MouseEvent) : void
+        {
+            var _loc2_:IPlayersPanelListItem = param1.currentTarget as IPlayersPanelListItem;
+            var _loc3_:IPlayersPanelListItemHolder = this._items[_loc2_.holderItemID];
+            var _loc4_:DogTagVO = _loc3_.getDogTag();
+            this._dogTag.setDogTagInfo(_loc4_);
+            this._dogTag.y = _loc2_.y;
+            this._dogTag.visible = true;
+            this._dogTag.fadeIn();
+        }
+
+        private function onHitMouseOutHandlerDogTag(param1:MouseEvent) : void
+        {
+            if(this._dogTag)
+            {
+                this._dogTag.fadeOut(this.setDogTagVisibleOff);
+            }
+        }
+
+        private function setDogTagVisibleOff() : void
+        {
+            this._dogTag.visible = false;
         }
 
         private function setMouseListenersEnabled(param1:Boolean) : void

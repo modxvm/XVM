@@ -19,6 +19,6 @@ package net.wg.infrastructure.base.meta
 
         function as_setMessageData(param1:Array) : void;
 
-        function as_blurOtherWindows(param1:String) : void;
+        function as_blurOtherWindows(param1:int) : void;
     }
 }

@@ -17,14 +17,6 @@ package net.wg.gui.components.damageIndicator
 
         private static const DAMAGE_Y_OFFSET:int = -565;
 
-        private static const POWER_HIGH:String = "high";
-
-        private static const POWER_MEDIUM:String = "medium";
-
-        private static const POWER_LOW:String = "low";
-
-        private static const BG_STR_DELIM:String = ":";
-
         protected var statesBG:Dictionary = null;
 
         protected var currentState:Shape = null;
@@ -33,15 +25,9 @@ package net.wg.gui.components.damageIndicator
 
         protected var offsetY:int = 0;
 
-        private var _powerAlpha:Dictionary;
-
         public function StandardStateContainer()
         {
-            this._powerAlpha = new Dictionary();
             super();
-            this._powerAlpha[POWER_HIGH] = 1;
-            this._powerAlpha[POWER_MEDIUM] = 0.6;
-            this._powerAlpha[POWER_LOW] = 0.3;
         }
 
         protected static function createIndicatorAtlasShape(param1:String, param2:DisplayObjectContainer) : Shape
@@ -78,10 +64,8 @@ package net.wg.gui.components.damageIndicator
         {
             RootSWFAtlasManager.instance.removeEventListener(AtlasEvent.ATLAS_INITIALIZED,this.onAtlasInitializedHandler);
             this.cleanupDynamicObject(this.statesBG);
-            this.cleanupDynamicObject(this._powerAlpha);
             this.statesBG = null;
             this.currentState = null;
-            this._powerAlpha = null;
         }
 
         public function init() : void
@@ -89,10 +73,6 @@ package net.wg.gui.components.damageIndicator
             this.statesBG = createItemsFromAtlas(this.stateNames,this,null);
             RootSWFAtlasManager.instance.addEventListener(AtlasEvent.ATLAS_INITIALIZED,this.onAtlasInitializedHandler);
             this.currentState = this.statesBG[DAMAGEINDICATOR.DAMAGE_STANDARD];
-        }
-
-        public function rotateInfo(param1:Number) : void
-        {
         }
 
         public function setYOffset(param1:int) : void
@@ -103,18 +83,6 @@ package net.wg.gui.components.damageIndicator
 
         public function updateBGState(param1:String) : void
         {
-            var _loc4_:String = null;
-            var _loc2_:Array = param1.split(BG_STR_DELIM);
-            var _loc3_:Number = 1;
-            if(_loc2_.length == 2)
-            {
-                _loc4_ = _loc2_[1];
-                if(this._powerAlpha[_loc4_] != null)
-                {
-                    _loc3_ = this._powerAlpha[_loc4_];
-                    var param1:String = _loc2_[0];
-                }
-            }
             if(this.currentBGStr != param1)
             {
                 this.currentBGStr = param1;
@@ -122,7 +90,6 @@ package net.wg.gui.components.damageIndicator
                 this.currentState = this.statesBG[param1];
                 this.currentState.visible = true;
             }
-            this.currentState.alpha = _loc3_;
         }
 
         protected function cleanupDynamicObject(param1:Object) : Object
@@ -157,6 +124,10 @@ package net.wg.gui.components.damageIndicator
         private function onAtlasInitializedHandler(param1:AtlasEvent) : void
         {
             this.updatePosition();
+        }
+
+        public function rotateInfo(param1:Number) : void
+        {
         }
     }
 }

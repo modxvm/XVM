@@ -15,7 +15,7 @@ package net.wg.gui.battle.views.vehicleMarkers
 
         function setStatusTimerSnapshot(param1:int) : void;
 
-        function setVehicleInfo(param1:String, param2:String, param3:String, param4:int, param5:String, param6:String, param7:String, param8:String, param9:int, param10:String, param11:Boolean, param12:int, param13:String, param14:Boolean) : void;
+        function setVehicleInfo(param1:String, param2:String, param3:String, param4:int, param5:String, param6:String, param7:String, param8:String, param9:int, param10:String, param11:Boolean, param12:int, param13:String) : void;
 
         function showActionMarker(param1:String) : void;
 

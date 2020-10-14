@@ -30,17 +30,17 @@ package net.wg.gui.lobby.components
 
         protected static const BIG_AWARDS_GAP:int = 35;
 
-        protected static const AWARD_RENDERER_WIDTH:int = 80;
-
-        protected static const AWARD_RENDERER_HEIGHT:int = 80;
-
-        private static const DISABLED_ALPHA:Number = 0.7;
-
-        private static const SMALL_AWARDS_GAP:int = 22;
+        protected static const BIG_AWARD_RENDERER_SIZE:int = 80;
 
         private static const SMALL_AWARDS_HEIGHT:int = 50;
 
+        private static const SMALL_AWARDS_GAP:int = 22;
+
+        private static const SMALL_AWARD_RENDERER_SIZE:int = 48;
+
         private static const BIG_AWARDS_MAX_NUM:int = 6;
+
+        private static const DISABLED_ALPHA:Number = 0.7;
 
         private static const TWEEN_TIME:int = 300;
 
@@ -98,7 +98,7 @@ package net.wg.gui.lobby.components
             super.configUI();
             this.titleTf.addEventListener(MouseEvent.ROLL_OVER,this.onTitleTfRollOverHandler);
             this.titleTf.addEventListener(MouseEvent.ROLL_OUT,this.onComponentRollOutHandler);
-            this.awardsGroup.layout = new CenterAlignedGroupLayout(AWARD_RENDERER_WIDTH,AWARD_RENDERER_HEIGHT);
+            this.awardsGroup.layout = new CenterAlignedGroupLayout(BIG_AWARD_RENDERER_SIZE,BIG_AWARD_RENDERER_SIZE);
             this.awardsGroup.itemRendererLinkage = Linkages.AWARD_RENDERER;
             this.contentAlpha = Values.ZERO;
             this.statusLabelTf.addEventListener(MouseEvent.ROLL_OVER,this.onStatusLabelTfRollOverHandler);
@@ -284,7 +284,7 @@ package net.wg.gui.lobby.components
             var _loc1_:* = this._vo.awards.length <= BIG_AWARDS_MAX_NUM;
             var _loc2_:CenterAlignedGroupLayout = CenterAlignedGroupLayout(this.awardsGroup.layout);
             _loc2_.gap = _loc1_?BIG_AWARDS_GAP:SMALL_AWARDS_GAP;
-            _loc2_.rendererWidth = _loc2_.rendererHeight = _loc1_?BIG_AWARDS_HEIGHT:SMALL_AWARDS_HEIGHT;
+            _loc2_.rendererWidth = _loc2_.rendererHeight = _loc1_?BIG_AWARD_RENDERER_SIZE:SMALL_AWARD_RENDERER_SIZE;
             this.awardsGroup.dataProvider = this._vo.awards;
             this.awardsGroup.width = this.getAwardsWidth();
             this.awardsGroup.height = _loc1_?BIG_AWARDS_HEIGHT:SMALL_AWARDS_HEIGHT;

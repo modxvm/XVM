@@ -16,9 +16,5 @@ package net.wg.infrastructure.base.meta
         function as_createRankedBattles() : void;
 
         function as_removeRankedBattles() : void;
-
-        function as_createWhiteTigerWidget() : void;
-
-        function as_removeWhiteTigerWidget() : void;
     }
 }

@@ -12,6 +12,7 @@ package net.wg.gui.battle.random.views.stats.components.fullStats
     import net.wg.gui.battle.battleloading.data.VehiclesDataProvider;
     import net.wg.data.VO.daapi.DAAPIInvitationStatusVO;
     import net.wg.data.constants.generated.BATTLEATLAS;
+    import net.wg.gui.components.dogtag.VO.DogTagVO;
     import scaleform.gfx.TextFieldEx;
 
     public class FullStatsTableCtrl extends StatsTableControllerBase implements ITabbedFullStatsTableController, ISquadHandler
@@ -29,7 +30,12 @@ package net.wg.gui.battle.random.views.stats.components.fullStats
 
         private static const SQUAD_BT_Y_START:int = 38;
 
-        protected var _table:FullStatsTable = null;
+        public function get xfw_table():FullStatsTable
+        {
+            return _table;
+        }
+
+        private var _table:FullStatsTable = null;
 
         private var _squadHandler:StatsBaseMeta = null;
 
@@ -264,6 +270,11 @@ package net.wg.gui.battle.random.views.stats.components.fullStats
             setNoTranslateForCollection(this._table.playerNameCollection);
             setNoTranslateForCollection(this._table.vehicleNameCollection);
             setNoTranslateForCollection(this._table.fragsCollection);
+        }
+
+        public function setDogTagToShow(param1:Number, param2:DogTagVO) : void
+        {
+            _dogTagsToShow[param1] = param2;
         }
 
         private function getHolderByIndex(param1:Boolean, param2:int) : StatsTableItemHolder

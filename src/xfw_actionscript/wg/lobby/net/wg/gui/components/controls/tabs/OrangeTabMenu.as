@@ -79,6 +79,22 @@ package net.wg.gui.components.controls.tabs
             super.dataProvider = param1;
         }
 
+        override public function set visible(param1:Boolean) : void
+        {
+            if(visible == param1)
+            {
+                return;
+            }
+            super.visible = param1;
+            var _loc2_:int = _renderers.length;
+            var _loc3_:* = 0;
+            while(_loc3_ < _loc2_)
+            {
+                _renderers[_loc3_].visible = param1;
+                _loc3_++;
+            }
+        }
+
         public function set tabsSoundType(param1:String) : void
         {
             if(this._tabsSoundType != param1)

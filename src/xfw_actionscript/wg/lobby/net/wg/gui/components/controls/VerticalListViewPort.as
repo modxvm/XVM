@@ -147,7 +147,7 @@ package net.wg.gui.components.controls
 
         public function getRendererY(param1:int) : int
         {
-            if(param1 >= 0 && param1 < this._renderersY.length)
+            if(param1 >= 0 && this._renderersY != null && param1 < this._renderersY.length)
             {
                 return this._renderersY[param1];
             }
@@ -455,7 +455,7 @@ package net.wg.gui.components.controls
 
         private function getRendererHeight(param1:int) : int
         {
-            if(param1 >= 0 && param1 < this._renderersHeight.length)
+            if(param1 >= 0 && this._renderersHeight && param1 < this._renderersHeight.length)
             {
                 return this._renderersHeight[param1];
             }

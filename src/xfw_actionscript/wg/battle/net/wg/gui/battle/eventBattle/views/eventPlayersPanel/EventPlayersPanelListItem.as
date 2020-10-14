@@ -1,237 +1,192 @@
 package net.wg.gui.battle.eventBattle.views.eventPlayersPanel
 {
-    import net.wg.gui.battle.components.stats.playersPanel.list.BasePlayersPanelListItem;
-    import net.wg.gui.battle.eventBattle.views.eventPlayersPanel.VO.DAAPIPlayerPanelInfoVO;
-    import net.wg.gui.battle.views.stats.constants.DynamicSquadState;
-    import net.wg.data.constants.InvitationStatus;
-    import net.wg.gui.battle.random.views.stats.components.playersPanel.list.PlayersPanelDynamicSquad;
+    import net.wg.gui.battle.components.BattleUIComponent;
     import flash.display.MovieClip;
-    import net.wg.gui.battle.views.stats.StatsUserProps;
-    import flash.events.MouseEvent;
-    import net.wg.data.constants.PlayerStatus;
+    import net.wg.gui.eventcomponents.NumberProgress;
+    import flash.text.TextField;
+    import net.wg.gui.components.controls.BadgeComponent;
+    import net.wg.gui.battle.components.BattleAtlasSprite;
+    import net.wg.gui.battle.eventBattle.views.eventPlayersPanel.VO.DAAPIPlayerPanelInfoVO;
     import org.idmedia.as3commons.util.StringUtils;
-    import net.wg.gui.battle.random.views.stats.components.playersPanel.constants.PlayersPanelInvalidationType;
-    import net.wg.data.constants.generated.BATTLEATLAS;
 
-    public class EventPlayersPanelListItem extends BasePlayersPanelListItem
+    public class EventPlayersPanelListItem extends BattleUIComponent
     {
 
-        private static const LIVES_PREFIX:String = "lives_";
+        private static const SUFFIX_SQUAD:String = "_Squad";
 
-        private static const VEHICLE_APLHA_ALIVE:Number = 1;
+        private static const NAME_COLOR_GREY:int = 1;
 
-        private static const VEHICLE_ALPHA_DEAD:Number = 0.5;
+        private static const NAME_COLOR_SQUAD:int = 2;
 
-        private static const SQUAD_INVALID:uint = 1 << 17;
+        private static const NAME_COLOR_BLACK:int = 3;
 
-        public var dynamicSquad:PlayersPanelDynamicSquad = null;
+        private static const POINTS_VALUE1:int = 10;
 
-        public var lives:MovieClip = null;
+        private static const POINTS_VALUE2:int = 100;
 
-        private var _data:DAAPIPlayerPanelInfoVO = null;
+        private static const POINTS_LABEL_1DIGIT:String = "1digit";
+
+        private static const POINTS_LABEL_2DIGIT:String = "2digit";
+
+        private static const POINTS_LABEL_3DIGIT:String = "3digit";
+
+        private static const BADGE_GAP:int = 2;
+
+        private static const ICON_MARGIN:uint = 23;
+
+        public var resurrect:MovieClip = null;
+
+        public var namePlayer:NumberProgress = null;
+
+        public var typeVehicle:MovieClip = null;
+
+        public var healthBar:EventHealthBar = null;
+
+        public var pointsTF:TextField = null;
+
+        public var pointsImage:MovieClip = null;
+
+        public var badgeIcon:BadgeComponent = null;
+
+        public var testerIcon:BattleAtlasSprite = null;
+
+        public var testerBG:BattleAtlasSprite = null;
+
+        private var _namePlayer:String = "";
+
+        private var _isSquad:Boolean = false;
+
+        private var _countPoints:uint = 0;
 
         private var _vehID:uint = 0;
 
-        private var _userProps:StatsUserProps = null;
-
-        private var _playerStatus:uint = 0;
-
-        private var _isSquadPersonal:Boolean = false;
+        private var _isEnabled:Boolean = true;
 
         public function EventPlayersPanelListItem()
         {
             super();
         }
 
-        private static function getState(param1:DAAPIPlayerPanelInfoVO) : int
-        {
-            var _loc2_:* = false;
-            var _loc3_:Boolean = param1.isSquadMan();
-            var _loc4_:Boolean = param1.isPlayer;
-            if(_loc4_)
-            {
-                return _loc3_?DynamicSquadState.IN_SQUAD:DynamicSquadState.NONE;
-            }
-            if(InvitationStatus.isSent(param1.invitationStatus) && !InvitationStatus.isSentInactive(param1.invitationStatus))
-            {
-                return DynamicSquadState.INVITE_SENT;
-            }
-            if(InvitationStatus.isReceived(param1.invitationStatus) && !InvitationStatus.isReceivedInactive(param1.invitationStatus) && !_loc2_)
-            {
-                return _loc3_?DynamicSquadState.INVITE_RECEIVED_FROM_SQUAD:DynamicSquadState.INVITE_RECEIVED;
-            }
-            if(_loc2_ || InvitationStatus.isForbidden(param1.invitationStatus))
-            {
-                return _loc3_?DynamicSquadState.IN_SQUAD:DynamicSquadState.INVITE_DISABLED;
-            }
-            return _loc3_?DynamicSquadState.IN_SQUAD:DynamicSquadState.INVITE_AVAILABLE;
-        }
-
-        override protected function configUI() : void
-        {
-            super.configUI();
-            addEventListener(MouseEvent.MOUSE_OVER,this.onMouseOverHandler);
-            addEventListener(MouseEvent.MOUSE_OUT,this.onMouseOutHandler);
-            playerNameCutTF.visible = false;
-        }
-
         override protected function onDispose() : void
         {
-            removeEventListener(MouseEvent.MOUSE_OVER,this.onMouseOverHandler);
-            removeEventListener(MouseEvent.MOUSE_OUT,this.onMouseOutHandler);
-            this._data = null;
-            if(this._userProps)
-            {
-                this._userProps.dispose();
-                this._userProps = null;
-            }
-            this.dynamicSquad.dispose();
-            this.dynamicSquad = null;
-            this.lives = null;
+            this.resurrect = null;
+            this.namePlayer.dispose();
+            this.namePlayer = null;
+            this.typeVehicle = null;
+            this.healthBar.dispose();
+            this.healthBar = null;
+            this.pointsTF = null;
+            this.pointsImage = null;
+            this.badgeIcon.dispose();
+            this.badgeIcon = null;
+            this.testerIcon = null;
+            this.testerBG = null;
             super.onDispose();
         }
 
-        override protected function draw() : void
+        public function setHp(param1:int, param2:int) : void
         {
-            var _loc1_:* = 0;
-            super.draw();
-            if(this._data && this.dynamicSquad && isInvalid(SQUAD_INVALID))
+            var _loc3_:Number = this.healthBar.getHpMaskWidth();
+            this.healthBar.gotoAndStop(this.healthBar.totalFrames * (1 - param2 / param1));
+            var _loc4_:Number = this.healthBar.getHpMaskWidth();
+            this.healthBar.playFx(_loc3_,_loc4_);
+            if(!this._isEnabled && param2 > 0)
             {
-                _loc1_ = getState(this._data);
-                this.dynamicSquad.setState(_loc1_);
-                this.dynamicSquad.setIsEnemy(this._data.isEnemy);
-                this.dynamicSquad.setSessionID(this._data.sessionID);
-                this.dynamicSquad.setNoSound(PlayerStatus.isVoipDisabled(this._playerStatus));
-                this.dynamicSquad.setCurrentSquad(this._isSquadPersonal,this._data.squadIndex);
+                this.setEnable(true);
             }
-        }
-
-        override public function getDynamicSquad() : PlayersPanelDynamicSquad
-        {
-            return this.dynamicSquad;
-        }
-
-        public function setHp(param1:Number) : void
-        {
         }
 
         public function setResurrect(param1:Boolean) : void
         {
+            this.resurrect.visible = param1;
+        }
+
+        public function getCountPoints() : uint
+        {
+            return this._countPoints;
+        }
+
+        public function setCountPoints(param1:uint) : void
+        {
+            this.pointsTF.text = param1.toString();
+            if(param1 < POINTS_VALUE1)
+            {
+                this.pointsImage.gotoAndStop(POINTS_LABEL_1DIGIT);
+            }
+            else if(param1 < POINTS_VALUE2)
+            {
+                this.pointsImage.gotoAndStop(POINTS_LABEL_2DIGIT);
+            }
+            else
+            {
+                this.pointsImage.gotoAndStop(POINTS_LABEL_3DIGIT);
+            }
+            this.pointsImage.visible = this.pointsTF.visible = param1 > 0;
+            this._countPoints = param1;
         }
 
         public function setData(param1:DAAPIPlayerPanelInfoVO) : void
         {
-            this._data = param1;
-            this.updateUserProps(param1);
-            this.setLives(param1.countLives);
-            setBadge(param1.badgeVO,StringUtils.isNotEmpty(param1.badgeVO.icon));
-            setIsAlive(param1.isAlive());
-            setIsOffline(!param1.isReady());
-            setIsTeamKiller(param1.isTeamKiller());
-            setIsSelected(PlayerStatus.isSelected(param1.playerStatus));
-            setIsCurrentPlayer(param1.isPlayer);
-            this.initVehicleIcon(param1);
-            if(this.dynamicSquad)
+            this.namePlayer.setColor(param1.isSquad?NAME_COLOR_SQUAD:NAME_COLOR_GREY);
+            this.namePlayer.setValue(param1.name);
+            var _loc2_:String = param1.typeVehicle;
+            if(param1.isSquad)
             {
-                invalidate(SQUAD_INVALID);
+                _loc2_ = _loc2_ + SUFFIX_SQUAD;
             }
-            setFrags(param1.kills);
-            this.setHp(param1.hpCurrent);
+            this.typeVehicle.gotoAndStop(_loc2_);
+            this.typeVehicle.visible = true;
+            this.setHp(param1.hpMax,param1.hpCurrent);
+            this.setResurrect(param1.isResurrect);
+            this.setCountPoints(param1.countPoints);
+            if(param1.hpCurrent == 0)
+            {
+                this.setEnable(false);
+            }
+            if(param1.badgeVO)
+            {
+                this.badgeIcon.visible = true;
+                this.badgeIcon.setData(param1.badgeVO);
+                this.namePlayer.x = this.badgeIcon.x + ICON_MARGIN;
+            }
+            else
+            {
+                this.namePlayer.x = this.badgeIcon.x;
+                this.badgeIcon.visible = false;
+            }
+            var _loc3_:Boolean = StringUtils.isNotEmpty(param1.suffixBadgeIcon);
+            this.testerIcon.visible = this.testerBG.visible = _loc3_;
+            if(_loc3_)
+            {
+                this.testerIcon.imageName = param1.suffixBadgeIcon;
+                this.testerBG.imageName = param1.suffixBadgeStripIcon;
+                this.testerIcon.x = this.namePlayer.x + this.namePlayer.getTextWidth() + BADGE_GAP >> 0;
+                this.testerBG.x = (this.testerIcon.width >> 1) + this.testerIcon.x - this.testerBG.width >> 0;
+            }
+            this._namePlayer = param1.name;
+            this._isSquad = param1.isSquad;
             this._vehID = param1.vehID;
         }
 
-        public function setPlayerStatus(param1:int) : void
+        public function setEnable(param1:Boolean) : void
         {
-            if(this._playerStatus == param1)
+            if(param1)
             {
-                return;
+                this.namePlayer.setColor(this._isSquad?NAME_COLOR_SQUAD:NAME_COLOR_GREY);
             }
-            this._playerStatus = param1;
-            var _loc2_:Boolean = PlayerStatus.isSquadPersonal(param1);
-            if(this._isSquadPersonal != _loc2_)
+            else
             {
-                this._isSquadPersonal = _loc2_;
-                invalidate(PlayersPanelInvalidationType.PLAYER_SCHEME);
+                this.namePlayer.setColor(NAME_COLOR_BLACK);
             }
-            invalidate(SQUAD_INVALID);
-        }
-
-        override public function isSquadPersonal() : Boolean
-        {
-            return this._isSquadPersonal;
-        }
-
-        public function setLives(param1:int) : void
-        {
-            if(this.lives)
-            {
-                this.lives.gotoAndStop(LIVES_PREFIX + param1);
-            }
+            this.namePlayer.setValue(this._namePlayer);
+            this.typeVehicle.visible = param1;
+            this.pointsImage.visible = this.pointsTF.visible = param1?this._countPoints > 0:false;
+            this._isEnabled = param1;
         }
 
         public function get vehID() : uint
         {
             return this._vehID;
-        }
-
-        private function updateUserProps(param1:DAAPIPlayerPanelInfoVO) : void
-        {
-            if(!this._userProps)
-            {
-                this._userProps = new StatsUserProps(param1.playerName,param1.playerFakeName,param1.clanAbbrev,param1.region,0);
-            }
-            else
-            {
-                this._userProps.userName = param1.playerName;
-                this._userProps.fakeName = param1.playerFakeName;
-                this._userProps.clanAbbrev = param1.clanAbbrev;
-                this._userProps.region = param1.region;
-            }
-            if(this._userProps.isChanged)
-            {
-                this._userProps.applyChanges();
-                setPlayerNameProps(this._userProps);
-            }
-        }
-
-        protected function initVehicleIcon(param1:DAAPIPlayerPanelInfoVO) : void
-        {
-            this.updateVehicleIcon(param1.isEnemy,param1.isAlive());
-        }
-
-        override public function setIsInviteShown(param1:Boolean) : void
-        {
-            this.dynamicSquad.setIsInviteShown(param1);
-        }
-
-        override public function setIsInteractive(param1:Boolean) : void
-        {
-            this.dynamicSquad.setIsInteractive(param1);
-        }
-
-        protected function updateVehicleIcon(param1:Boolean, param2:Boolean) : void
-        {
-            if(param1)
-            {
-                setVehicleIcon(param2?BATTLEATLAS.WT_VEHICLE_ICON_QUESTION:BATTLEATLAS.WT_VEHICLE_ICON);
-                vehicleIcon.alpha = param2?VEHICLE_APLHA_ALIVE:VEHICLE_ALPHA_DEAD;
-            }
-        }
-
-        private function onMouseOverHandler(param1:MouseEvent) : void
-        {
-            if(this.dynamicSquad)
-            {
-                this.dynamicSquad.onItemOver();
-            }
-        }
-
-        private function onMouseOutHandler(param1:MouseEvent) : void
-        {
-            if(this.dynamicSquad)
-            {
-                this.dynamicSquad.onItemOut();
-            }
         }
     }
 }

@@ -12,7 +12,13 @@ package net.wg.gui.components.crosshairPanel.components.autoloader
 
         private static const SHOOT_STATE:int = 2;
 
+        private static const SHELL_RELOAD_INDICATOR_OFFSETS_X:Vector.<int> = Vector.<int>([0,20,10,-4,-15,0,0,0]);
+
+        private static const SHELL_RELOAD_INDICATOR_OFFSETS_Y:Vector.<int> = Vector.<int>([0,1,8,15,25,0,0,0]);
+
         public var cassette:AutoloaderShellsCassette = null;
+
+        public var boostndicator:BoostIndicator = null;
 
         public var fireMc:MovieClip = null;
 
@@ -27,10 +33,21 @@ package net.wg.gui.components.crosshairPanel.components.autoloader
 
         override protected function draw() : void
         {
+            var _loc1_:uint = 0;
             super.draw();
             if(isInvalid(TOTAL_AMMO))
             {
                 this.cassette.totalAmmo = this._totalAmmo;
+                if(this._totalAmmo > -1)
+                {
+                    _loc1_ = this._totalAmmo - 1;
+                    if(_loc1_ > SHELL_RELOAD_INDICATOR_OFFSETS_X.length - 1)
+                    {
+                        _loc1_ = SHELL_RELOAD_INDICATOR_OFFSETS_X.length - 1;
+                    }
+                    this.boostndicator.x = this.cassette.x + SHELL_RELOAD_INDICATOR_OFFSETS_X[_loc1_];
+                    this.boostndicator.y = this.cassette.y - SHELL_RELOAD_INDICATOR_OFFSETS_Y[_loc1_];
+                }
             }
             if(isInvalid(CURRENT_AMMO))
             {
@@ -42,6 +59,8 @@ package net.wg.gui.components.crosshairPanel.components.autoloader
         {
             this.cassette.dispose();
             this.cassette = null;
+            this.boostndicator.dispose();
+            this.boostndicator = null;
             this.fireMc = null;
             super.onDispose();
         }
@@ -54,6 +73,21 @@ package net.wg.gui.components.crosshairPanel.components.autoloader
         public function autoloaderUpdate(param1:Number, param2:Number, param3:Boolean, param4:Boolean) : void
         {
             this.cassette.autoloadProgress(param1,param2,param3,param4);
+        }
+
+        public function autoloaderBoostUpdate(param1:BoostIndicatorStateParamsVO, param2:Number, param3:Boolean = false) : void
+        {
+            this.boostndicator.autoloaderBoostUpdate(param1,param2,param3);
+        }
+
+        public function autoloaderBoostUpdateAsPercent(param1:Number, param2:Number) : void
+        {
+            this.boostndicator.autoloaderBoostUpdateAsPercent(param1,param2);
+        }
+
+        public function get autoloaderBoostParams() : BoostIndicatorStateParamsVO
+        {
+            return this.boostndicator.stateParams;
         }
 
         public function setGunReloadingPercent(param1:Number, param2:Boolean) : void

@@ -19,9 +19,9 @@ package net.wg.gui.battle.views.battleTimer
 
         private var _isCritical:Boolean = false;
 
-        protected var _minutes:String = null;
+        private var _minutes:String = null;
 
-        protected var _seconds:String = null;
+        private var _seconds:String = null;
 
         public function BattleAnimationTimer()
         {
@@ -30,13 +30,18 @@ package net.wg.gui.battle.views.battleTimer
             TextFieldEx.setNoTranslate(this.secondsTF,true);
         }
 
-        override protected function onDispose() : void
+        public function as_setTotalTime(param1:String, param2:String) : void
         {
-            this.background = null;
-            this.minutesTF = null;
-            this.secondsTF = null;
-            this.shadow = null;
-            super.onDispose();
+            if(this._minutes != param1)
+            {
+                this._minutes = param1;
+                this.minutesTF.text = param1;
+            }
+            if(this._seconds != param2)
+            {
+                this._seconds = param2;
+                this.secondsTF.text = param2;
+            }
         }
 
         public function as_setColor(param1:Boolean) : void
@@ -56,26 +61,21 @@ package net.wg.gui.battle.views.battleTimer
             }
         }
 
-        public function as_setTotalTime(param1:String, param2:String) : void
-        {
-            if(this._minutes != param1)
-            {
-                this._minutes = param1;
-                this.minutesTF.text = param1;
-            }
-            if(this._seconds != param2)
-            {
-                this._seconds = param2;
-                this.secondsTF.text = param2;
-            }
-        }
-
         public function as_showBattleTimer(param1:Boolean) : void
         {
             if(visible != param1)
             {
                 visible = param1;
             }
+        }
+
+        override protected function onDispose() : void
+        {
+            this.background = null;
+            this.minutesTF = null;
+            this.secondsTF = null;
+            this.shadow = null;
+            super.onDispose();
         }
     }
 }

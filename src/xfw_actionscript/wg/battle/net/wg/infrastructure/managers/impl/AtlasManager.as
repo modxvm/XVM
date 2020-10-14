@@ -7,8 +7,8 @@ package net.wg.infrastructure.managers.impl
     import net.wg.data.constants.Errors;
     import net.wg.infrastructure.events.AtlasEvent;
     import flash.display.BitmapData;
-    import flash.geom.Rectangle;
     import net.wg.infrastructure.interfaces.IAtlasItemVO;
+    import flash.geom.Rectangle;
     import flash.geom.Point;
     import flash.display.Graphics;
     import flash.geom.Matrix;
@@ -47,16 +47,21 @@ package net.wg.infrastructure.managers.impl
 
         public function getNewBitmapData(param1:String, param2:String, param3:String = "") : BitmapData
         {
-            var _loc7_:Rectangle = null;
             var _loc4_:IAtlas = this.getAtlas(param1);
-            App.utils.asserter.assertNotNull(_loc4_,"AtlasManager atlas \'" + param1 + Errors.CANT_NULL);
-            var _loc5_:IAtlasItemVO = this.getAtlasItem(_loc4_,param2,param3);
-            var _loc6_:BitmapData = new BitmapData(_loc5_.width,_loc5_.height);
-            if(_loc5_)
+            App.utils.asserter.assert(_loc4_ != null && _loc4_.atlasBitmapData != null,"AtlasManager atlas or atlas bitmap \'" + param1 + Errors.CANT_NULL);
+            if(_loc4_ == null || _loc4_.atlasBitmapData == null)
             {
-                _loc7_ = new Rectangle(_loc5_.x,_loc5_.y,_loc5_.width,_loc5_.height);
-                _loc6_.copyPixels(_loc4_.atlasBitmapData,_loc7_,new Point());
+                return new BitmapData(1,1);
             }
+            var _loc5_:IAtlasItemVO = this.getAtlasItem(_loc4_,param2,param3);
+            App.utils.asserter.assertNotNull(_loc5_,"AtlasManager item \'" + _loc5_ + "\' for atlas \'" + param1 + "\'" + Errors.CANT_NULL);
+            if(_loc5_ == null)
+            {
+                return new BitmapData(1,1);
+            }
+            var _loc6_:BitmapData = new BitmapData(_loc5_.width,_loc5_.height);
+            var _loc7_:Rectangle = new Rectangle(_loc5_.x,_loc5_.y,_loc5_.width,_loc5_.height);
+            _loc6_.copyPixels(_loc4_.atlasBitmapData,_loc7_,new Point());
             return _loc6_;
         }
 
@@ -66,7 +71,11 @@ package net.wg.infrastructure.managers.impl
             var _loc11_:* = NaN;
             var _loc12_:Matrix = null;
             var _loc8_:IAtlas = this.getAtlas(param1);
-            App.utils.asserter.assertNotNull(_loc8_,"AtlasManager atlas \'" + param1 + Errors.CANT_NULL);
+            App.utils.asserter.assert(_loc8_ != null && _loc8_.atlasBitmapData != null,"AtlasManager atlas or atlas bitmap \'" + param1 + Errors.CANT_NULL);
+            if(_loc8_ == null || _loc8_.atlasBitmapData == null)
+            {
+                return;
+            }
             var _loc9_:IAtlasItemVO = this.getAtlasItem(_loc8_,param2,param4);
             if(_loc9_)
             {
@@ -86,6 +95,7 @@ package net.wg.infrastructure.managers.impl
             }
             else
             {
+                DebugUtils.LOG_WARNING("AtlasManager can\'t find item \'" + _loc9_ + "\' for atlas \'" + param1 + "\'");
                 param3.clear();
                 param3.beginFill(16711680,0.5);
                 param3.drawRect(0,0,10,10);

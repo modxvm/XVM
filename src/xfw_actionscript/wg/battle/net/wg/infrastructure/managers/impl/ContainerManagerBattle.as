@@ -10,31 +10,31 @@ package net.wg.infrastructure.managers.impl
             super();
         }
 
-        override public function as_isContainerShown(param1:String) : Boolean
+        override public function as_isContainerShown(param1:int) : Boolean
         {
-            assert(containersMap.hasOwnProperty(param1),"ContainerManagerBattle does not have container with type " + param1);
-            var _loc2_:ManagedContainer = containersMap[param1] as ManagedContainer;
+            assert(_containersMap[param1] != null,"ContainerManagerBattle does not have container for layer " + param1);
+            var _loc2_:ManagedContainer = _containersMap[param1] as ManagedContainer;
             return _loc2_?_loc2_.visible:false;
         }
 
-        override protected function showContainers(param1:Vector.<String>) : void
+        override protected function showContainers(param1:Vector.<int>) : void
         {
             this.setVisibility(param1,true);
         }
 
-        override protected function hideContainers(param1:Vector.<String>) : void
+        override protected function hideContainers(param1:Vector.<int>) : void
         {
             this.setVisibility(param1,false);
         }
 
-        private function setVisibility(param1:Vector.<String>, param2:Boolean) : void
+        private function setVisibility(param1:Vector.<int>, param2:Boolean) : void
         {
-            var _loc3_:String = null;
+            var _loc3_:* = 0;
             var _loc4_:ManagedContainer = null;
             for each(_loc3_ in param1)
             {
-                assert(containersMap.hasOwnProperty(_loc3_),"ContainerManagerBattle does not have container with type " + _loc3_);
-                _loc4_ = containersMap[_loc3_] as ManagedContainer;
+                assert(_containersMap[_loc3_] != null,"ContainerManagerBattle does not have container for layer " + _loc3_);
+                _loc4_ = _containersMap[_loc3_] as ManagedContainer;
                 if(_loc4_)
                 {
                     _loc4_.visible = param2;

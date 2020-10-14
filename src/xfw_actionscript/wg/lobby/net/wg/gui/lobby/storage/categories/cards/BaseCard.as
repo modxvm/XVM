@@ -25,6 +25,7 @@ package net.wg.gui.lobby.storage.categories.cards
     import net.wg.data.constants.Linkages;
     import flash.display.Graphics;
     import scaleform.clik.constants.InvalidationType;
+    import flash.display.DisplayObject;
     import flash.geom.Point;
     import net.wg.gui.lobby.storage.categories.cards.configs.CardConfigs;
     import net.wg.gui.components.controls.VO.PriceVO;
@@ -93,6 +94,8 @@ package net.wg.gui.lobby.storage.categories.cards
 
         private static const CARD_SMALL_WIDTH:int = 280;
 
+        private static const TOOLTIP_HIT_AREA_NAME:String = "tooltipHitArea";
+
         public var inInventoryIcon:MovieClip;
 
         public var discountIcon:MovieClip;
@@ -141,6 +144,8 @@ package net.wg.gui.lobby.storage.categories.cards
 
         protected var _stageWidthBoundary:int;
 
+        private var _tooltipHitArea:Sprite = null;
+
         private var _index:uint;
 
         public function BaseCard()
@@ -162,6 +167,7 @@ package net.wg.gui.lobby.storage.categories.cards
             {
                 App.soundMgr.removeSoundHdlrs(this);
             }
+            this.disposeTooltipHitArea();
             this.disposeTweens();
             removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
             removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
@@ -301,14 +307,12 @@ package net.wg.gui.lobby.storage.categories.cards
 
         override protected function draw() : void
         {
-            var _loc1_:* = false;
-            var _loc2_:Graphics = null;
-            var _loc3_:Rectangle = null;
+            var _loc1_:Graphics = null;
+            var _loc2_:Rectangle = null;
             super.draw();
             if(this._data && isInvalid(InvalidationType.DATA))
             {
                 buttonMode = this._data.enabled;
-                _loc1_ = this._data.price && this._data.price.action != null;
                 this.titleTF.htmlText = this._data.title;
                 if(this.descriptionTF)
                 {
@@ -361,7 +365,7 @@ package net.wg.gui.lobby.storage.categories.cards
                 }
                 if(this.discountIcon)
                 {
-                    this.discountIcon.visible = _loc1_ && this._data.enabled;
+                    this.discountIcon.visible = this.hasAction && this._data.enabled;
                 }
                 this.sellButton.visible = this._data.enabled;
                 this.createUpgradeButton();
@@ -392,62 +396,62 @@ package net.wg.gui.lobby.storage.categories.cards
                 {
                     this.specialization.alpha = 1;
                 }
-                _loc2_ = graphics;
-                _loc2_.clear();
-                _loc2_.lineStyle(1,16777215,0.15);
-                _loc2_.beginFill(0,0.25);
-                _loc2_.drawRoundRect(BORDER_OFFSET,BORDER_OFFSET,width - BORDER_SIZE_CORRECTION,height - BORDER_SIZE_CORRECTION,BORDER_CORNER_RADIUS,BORDER_CORNER_RADIUS);
-                _loc2_.endFill();
-                _loc2_ = this._overlay.graphics;
-                _loc2_.clear();
-                _loc2_.beginFill(1973272);
-                _loc2_.drawRoundRect(1,1,width - OVERLAY_SIZE_CORRECTION,height - OVERLAY_SIZE_CORRECTION,BORDER_CORNER_RADIUS,BORDER_CORNER_RADIUS);
-                _loc2_.endFill();
+                _loc1_ = graphics;
+                _loc1_.clear();
+                _loc1_.lineStyle(1,16777215,0.15);
+                _loc1_.beginFill(0,0.25);
+                _loc1_.drawRoundRect(BORDER_OFFSET,BORDER_OFFSET,width - BORDER_SIZE_CORRECTION,height - BORDER_SIZE_CORRECTION,BORDER_CORNER_RADIUS,BORDER_CORNER_RADIUS);
+                _loc1_.endFill();
+                _loc1_ = this._overlay.graphics;
+                _loc1_.clear();
+                _loc1_.beginFill(1973272);
+                _loc1_.drawRoundRect(1,1,width - OVERLAY_SIZE_CORRECTION,height - OVERLAY_SIZE_CORRECTION,BORDER_CORNER_RADIUS,BORDER_CORNER_RADIUS);
+                _loc1_.endFill();
                 if(this.flags)
                 {
                     this.flags.y = this._sizeVO.flagsOffset;
                 }
-                _loc3_ = this._sizeVO.innerPadding;
+                _loc2_ = this._sizeVO.innerPadding;
                 if(this.price)
                 {
                     if(this.discountIcon && this.discountIcon.visible)
                     {
-                        this.discountIcon.x = _loc3_.left;
+                        this.discountIcon.x = _loc2_.left;
                         this.price.x = this.discountIcon.x + this.discountIcon.width + DISCOUNT_OFFSET >> 0;
-                        this.price.y = _loc3_.bottom - this.price.height >> 0;
+                        this.price.y = _loc2_.bottom - this.price.height >> 0;
                         this.discountIcon.y = this.price.y + (this.price.height - this.discountIcon.height >> 1);
                     }
                     else
                     {
-                        this.price.x = _loc3_.left;
-                        this.price.y = _loc3_.bottom - this.price.height >> 0;
+                        this.price.x = _loc2_.left;
+                        this.price.y = _loc2_.bottom - this.price.height >> 0;
                     }
                 }
                 if(this.cannotSellTF)
                 {
-                    this.cannotSellTF.x = _loc3_.left + this.cannotSellIcon.width + ININVENTORY_ICON_OFFSET;
-                    this.cannotSellTF.y = _loc3_.bottom - this.cannotSellTF.height >> 0;
-                    this.cannotSellIcon.x = _loc3_.left;
+                    this.cannotSellTF.x = _loc2_.left + this.cannotSellIcon.width + ININVENTORY_ICON_OFFSET;
+                    this.cannotSellTF.y = _loc2_.bottom - this.cannotSellTF.height >> 0;
+                    this.cannotSellIcon.x = _loc2_.left;
                     this.cannotSellIcon.y = this.cannotSellTF.y + (this.cannotSellTF.height - this.cannotSellIcon.height >> 1) + CANNOT_SELL_ICON_V_OFFSET;
                 }
                 if(this.inInventoryCountTF)
                 {
-                    this.inInventoryCountTF.x = _loc3_.right - this.inInventoryCountTF.width >> 0;
-                    this.inInventoryCountTF.y = _loc3_.bottom - this.inInventoryCountTF.height >> 0;
+                    this.inInventoryCountTF.x = _loc2_.right - this.inInventoryCountTF.width >> 0;
+                    this.inInventoryCountTF.y = _loc2_.bottom - this.inInventoryCountTF.height >> 0;
                     this.inInventoryIcon.x = this.inInventoryCountTF.x - this.inInventoryIcon.width - ININVENTORY_ICON_OFFSET;
                     this.inInventoryIcon.y = this.inInventoryCountTF.y - ININVENTORY_ICON_OFFSET;
                 }
-                this.titleTF.x = _loc3_.left;
-                this.titleTF.width = this.price && this.price.visible || !this.inInventoryIcon || !this.inInventoryIcon.visible?_loc3_.width:this.inInventoryIcon.x - this.titleTF.x;
+                this.titleTF.x = _loc2_.left;
+                this.titleTF.width = this.price && this.price.visible || !this.inInventoryIcon || !this.inInventoryIcon.visible?_loc2_.width:this.inInventoryIcon.x - this.titleTF.x;
                 if(!this._isOver)
                 {
                     this._container.y = this.getContainerYRolloutPosition();
                 }
                 if(this.descriptionTF)
                 {
-                    this.descriptionTF.x = _loc3_.left;
+                    this.descriptionTF.x = _loc2_.left;
                     this.descriptionTF.y = this.titleTF.y + this.titleTF.height + this._sizeVO.descriptionOffset;
-                    this.descriptionTF.width = _loc3_.width >> 0;
+                    this.descriptionTF.width = _loc2_.width >> 0;
                 }
                 if(this.extraParams)
                 {
@@ -460,8 +464,8 @@ package net.wg.gui.lobby.storage.categories.cards
                         this.extraParams.y = this.descriptionTF.y + this.descriptionTF.height + this._sizeVO.descriptionOffset;
                     }
                 }
-                this.sellButton.x = _loc3_.right - this.sellButton.width >> 0;
-                this.sellButton.y = _loc3_.bottom - this.sellButton.height >> 0;
+                this.sellButton.x = _loc2_.right - this.sellButton.width >> 0;
+                this.sellButton.y = _loc2_.bottom - this.sellButton.height >> 0;
                 this.sellButton.validateNow();
                 if(this._data.upgradable)
                 {
@@ -470,6 +474,51 @@ package net.wg.gui.lobby.storage.categories.cards
                 }
                 this.renderEquipmentType();
                 this.onImageComplete();
+                this.drawTooltipHitArea();
+            }
+        }
+
+        private function drawTooltipHitArea() : void
+        {
+            var _loc2_:* = 0;
+            if(this._tooltipHitArea == null)
+            {
+                this._tooltipHitArea = new Sprite();
+                this._tooltipHitArea.name = TOOLTIP_HIT_AREA_NAME;
+                this._tooltipHitArea.buttonMode = this._data.enabled;
+                this._tooltipHitArea.addEventListener(MouseEvent.ROLL_OVER,this.onTooltipHitAreaRollOver);
+                this._tooltipHitArea.addEventListener(MouseEvent.ROLL_OUT,this.onTooltipHitAreaRollOut);
+                _loc2_ = getChildIndex(this.upgradeButton || this.sellButton);
+                addChildAt(this._tooltipHitArea,_loc2_);
+            }
+            var _loc1_:Graphics = this._tooltipHitArea.graphics;
+            _loc1_.clear();
+            _loc1_.beginFill(0,0);
+            _loc1_.drawRect(0,0,width,height);
+            _loc1_.endFill();
+        }
+
+        protected function onTooltipHitAreaRollOver(param1:MouseEvent) : void
+        {
+            if(this.hasAction && this._data.enabled)
+            {
+                this.showDiscountTooltip();
+            }
+        }
+
+        protected function onTooltipHitAreaRollOut(param1:MouseEvent) : void
+        {
+            App.toolTipMgr.hide();
+        }
+
+        private function disposeTooltipHitArea() : void
+        {
+            if(this._tooltipHitArea)
+            {
+                this._tooltipHitArea.removeEventListener(MouseEvent.ROLL_OVER,this.onTooltipHitAreaRollOver);
+                this._tooltipHitArea.removeEventListener(MouseEvent.ROLL_OUT,this.onTooltipHitAreaRollOut);
+                removeChild(this._tooltipHitArea);
+                this._tooltipHitArea = null;
             }
         }
 
@@ -671,15 +720,10 @@ package net.wg.gui.lobby.storage.categories.cards
 
         protected function onRollOver() : void
         {
-            var _loc1_:Boolean = this._data.price && this._data.price.action != null;
             this._isOver = true;
             this.disposeTweens();
             this._tweens = this.getRollOverTweens();
             App.utils.scheduler.scheduleTask(dispatchEvent,ROLL_OVER_ANIMATION_DELAY,new CardEvent(CardEvent.PLAY_INFO_SOUND));
-            if(_loc1_ && this._data.enabled)
-            {
-                this.showDiscountTooltip();
-            }
         }
 
         protected function onRollOut() : void
@@ -688,7 +732,6 @@ package net.wg.gui.lobby.storage.categories.cards
             this.disposeTweens();
             this._tweens = this.getRollOutTweens();
             App.utils.scheduler.cancelTask(dispatchEvent);
-            App.toolTipMgr.hide();
         }
 
         protected function animateImage() : void
@@ -763,6 +806,11 @@ package net.wg.gui.lobby.storage.categories.cards
                     }
                 }
             }
+        }
+
+        private function get hasAction() : Boolean
+        {
+            return this._data != null && this._data.price && this._data.price.action != null;
         }
 
         public function get index() : uint

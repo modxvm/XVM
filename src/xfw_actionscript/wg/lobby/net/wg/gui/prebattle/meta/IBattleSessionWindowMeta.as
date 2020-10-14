@@ -19,6 +19,8 @@ package net.wg.gui.prebattle.meta
 
         function as_setInfo(param1:Boolean, param2:String, param3:String, param4:String, param5:String, param6:String, param7:String, param8:String) : void;
 
+        function as_setWinnerIfDraw(param1:int) : void;
+
         function as_setNationsLimits(param1:Array) : void;
 
         function as_setClassesLimits(param1:Object, param2:Boolean) : void;

@@ -76,6 +76,7 @@ package net.wg.gui.lobby.rankedBattles19.view.rewards
 
         override protected function draw() : void
         {
+            var _loc1_:* = false;
             super.draw();
             if(isInvalid(INV_VIEW_PADDING))
             {
@@ -87,6 +88,9 @@ package net.wg.gui.lobby.rankedBattles19.view.rewards
                 if(isInvalid(InvalidationType.DATA))
                 {
                     this.updateRewardsData();
+                    _loc1_ = App.globalVarsMgr.isChinaS();
+                    this.rewardsDivider.visible = !_loc1_;
+                    this.rewardsDescriptionTf.visible = !_loc1_;
                     this.rewardsDescriptionTf.htmlText = this._rewards.description;
                     App.utils.commons.updateTextFieldSize(this.rewardsDescriptionTf,false,true);
                     invalidateSize();

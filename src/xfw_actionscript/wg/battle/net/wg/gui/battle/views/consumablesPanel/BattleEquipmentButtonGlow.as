@@ -20,7 +20,7 @@ package net.wg.gui.battle.views.consumablesPanel
 
         private static const SHOW_GLOW_ORANGE_STATE:String = "orange";
 
-        private static const SHOW_GLOW_GREE_NO_HOT_KEY_STATE:String = "greenNoHotKey";
+        private static const SHOW_GLOW_GREEN_NO_HOT_KEY_STATE:String = "greenNoHotKey";
 
         private static const SHOW_GLOW_ORANGE_NO_HOT_KEY_STATE:String = "orangeNoHotKey";
 
@@ -30,7 +30,7 @@ package net.wg.gui.battle.views.consumablesPanel
 
         private static const GREEN_TEXT_COLOR:uint = 11854471;
 
-        protected static const NORMAL_TEXT_COLOR:uint = 0;
+        private static const NORMAL_TEXT_COLOR:uint = 0;
 
         public var tfContainer:MovieClip = null;
 
@@ -65,25 +65,17 @@ package net.wg.gui.battle.views.consumablesPanel
             super.onDispose();
         }
 
-        public function showGlow(param1:int) : void
+        public function showGlow(param1:int, param2:Boolean = true) : void
         {
             switch(param1)
             {
                 case CONSUMABLES_PANEL_SETTINGS.GLOW_ID_GREEN:
                     this._textField.textColor = GREEN_TEXT_COLOR;
-                    gotoAndPlay(SHOW_GLOW_GREEN_STATE);
-                    break;
-                case CONSUMABLES_PANEL_SETTINGS.GLOW_ID_GREEN_NO_HOT_KEY:
-                    this._textField.textColor = GREEN_TEXT_COLOR;
-                    gotoAndPlay(SHOW_GLOW_GREE_NO_HOT_KEY_STATE);
+                    gotoAndPlay(param2?SHOW_GLOW_GREEN_STATE:SHOW_GLOW_GREEN_NO_HOT_KEY_STATE);
                     break;
                 case CONSUMABLES_PANEL_SETTINGS.GLOW_ID_ORANGE:
                     this._textField.textColor = RED_TEXT_COLOR;
-                    gotoAndPlay(SHOW_GLOW_ORANGE_STATE);
-                    break;
-                case CONSUMABLES_PANEL_SETTINGS.GLOW_ID_ORANGE_NO_HOT_KEY:
-                    this._textField.textColor = RED_TEXT_COLOR;
-                    gotoAndPlay(SHOW_GLOW_ORANGE_NO_HOT_KEY_STATE);
+                    gotoAndPlay(param2?SHOW_GLOW_ORANGE_STATE:SHOW_GLOW_ORANGE_NO_HOT_KEY_STATE);
                     break;
                 case CONSUMABLES_PANEL_SETTINGS.GLOW_ID_GREEN_SPECIAL:
                     this._textField.textColor = GREEN_TEXT_COLOR;
@@ -112,16 +104,11 @@ package net.wg.gui.battle.views.consumablesPanel
             this._textField.text = param1;
         }
 
-        protected function goIdle() : void
+        private function goIdle() : void
         {
             stop();
             this._textField.textColor = NORMAL_TEXT_COLOR;
             dispatchEvent(new Event(BattleEquipmentButtonGlow.ON_IDLE_STATE));
-        }
-
-        protected function get bindKeyField() : TextField
-        {
-            return this._textField;
         }
     }
 }

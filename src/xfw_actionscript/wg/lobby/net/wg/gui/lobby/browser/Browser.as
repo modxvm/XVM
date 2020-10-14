@@ -3,10 +3,14 @@ package net.wg.gui.lobby.browser
     import net.wg.infrastructure.base.meta.impl.BrowserMeta;
     import net.wg.infrastructure.base.meta.IBrowserMeta;
     import flash.display.Bitmap;
+    import flash.display.Loader;
     import scaleform.clik.constants.InvalidationType;
     import flash.events.MouseEvent;
+    import flash.events.Event;
+    import flash.events.IOErrorEvent;
     import net.wg.gui.lobby.browser.events.BrowserTitleEvent;
     import net.wg.gui.lobby.browser.events.BrowserEvent;
+    import flash.net.URLRequest;
 
     public class Browser extends BrowserMeta implements IBrowserMeta
     {
@@ -20,6 +24,10 @@ package net.wg.gui.lobby.browser
         private var _mouseDown:Boolean = false;
 
         private var _showContentUnderWaiting:Boolean = true;
+
+        private var _bgLoader:Loader = null;
+
+        private var _bitmapUrl:String = null;
 
         public function Browser()
         {
@@ -64,11 +72,16 @@ package net.wg.gui.lobby.browser
             removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
             removeEventListener(MouseEvent.MOUSE_DOWN,this.onMouseDownHandler);
             removeEventListener(MouseEvent.MOUSE_UP,this.onMouseUpHandler);
+            if(this._bgLoader != null)
+            {
+                this._bgLoader.contentLoaderInfo.removeEventListener(Event.COMPLETE,this.onBgLoaderCompleteHandler);
+                this._bgLoader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR,this.onBgLoaderIoErrorHandler);
+                this._bgLoader.unload();
+                this._bgLoader = null;
+            }
             if(this._bgImg != null)
             {
                 removeChild(this._bgImg);
-                this._bgImg.bitmapData.dispose();
-                this._bgImg.bitmapData = null;
                 this._bgImg = null;
             }
             this.serviceView.dispose();
@@ -108,7 +121,7 @@ package net.wg.gui.lobby.browser
             this._showContentUnderWaiting = param1;
             if(this._bgImg)
             {
-                this._bgImg.alpha = this._showContentUnderWaiting?1:0;
+                this._bgImg.alpha = this.bgImagaAlpha;
             }
             if(!this._showContentUnderWaiting)
             {
@@ -120,15 +133,54 @@ package net.wg.gui.lobby.browser
             }
         }
 
+        public function as_loadBitmap(param1:String) : void
+        {
+            if(this._bitmapUrl == param1)
+            {
+                DebugUtils.LOG_WARNING("Requested bitmap already loaded or in progress. url: " + this._bitmapUrl);
+                return;
+            }
+            if(this._bgLoader != null)
+            {
+                this._bgLoader.unload();
+            }
+            else
+            {
+                this._bgLoader = new Loader();
+                this._bgLoader.contentLoaderInfo.addEventListener(Event.COMPLETE,this.onBgLoaderCompleteHandler);
+                this._bgLoader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,this.onBgLoaderIoErrorHandler);
+            }
+            this._bitmapUrl = param1;
+            this._bgLoader.load(new URLRequest(this._bitmapUrl));
+        }
+
+        private function onBgLoaderCompleteHandler(param1:Event) : void
+        {
+            DebugUtils.LOG_DEBUG("Browser bitmap is loaded: " + this._bitmapUrl);
+            if(this._bgImg != null)
+            {
+                removeChild(this._bgImg);
+            }
+            this._bgImg = Bitmap(this._bgLoader.content);
+            this._bgImg.alpha = this.bgImagaAlpha;
+            this.resizeBgImg(width,height);
+            addChild(this._bgImg);
+            this.invalidBgImgVisible();
+        }
+
+        private function onBgLoaderIoErrorHandler(param1:IOErrorEvent) : void
+        {
+            DebugUtils.LOG_ERROR("Cant load browser bitmap: " + this._bitmapUrl);
+        }
+
         public function as_loadingStop() : void
         {
+            this._showContentUnderWaiting = true;
             if(this._bgImg)
             {
-                this._bgImg.alpha = 1;
+                this._bgImg.alpha = this.bgImagaAlpha;
             }
             graphics.clear();
-            this._showContentUnderWaiting = true;
-            this.checkAndCreateBgImg();
             this.invalidBgImgVisible();
             dispatchEvent(new BrowserEvent(BrowserEvent.LOADING_STOPPED));
         }
@@ -164,9 +216,12 @@ package net.wg.gui.lobby.browser
 
         private function resizeBgImg(param1:Number, param2:Number) : void
         {
-            setBrowserSizeS(param1,param2);
-            this._bgImg.width = param1;
-            this._bgImg.height = param2;
+            if(this._bgImg.width != param1 || this._bgImg.height != param2)
+            {
+                setBrowserSizeS(param1,param2);
+                this._bgImg.width = param1;
+                this._bgImg.height = param2;
+            }
         }
 
         private function invalidBgImgVisible() : void
@@ -174,16 +229,9 @@ package net.wg.gui.lobby.browser
             invalidate(BG_IMG_VISIBLE_INVALID);
         }
 
-        private function checkAndCreateBgImg() : void
+        private function get bgImagaAlpha() : Number
         {
-            if(this._bgImg == null)
-            {
-                this._bgImg = new App.browserBgClass();
-                this._bgImg.visible = false;
-                this.resizeBgImg(width,height);
-                addChild(this._bgImg);
-                this.invalidBgImgVisible();
-            }
+            return this._showContentUnderWaiting?1:0;
         }
 
         private function onRollOverHandler(param1:MouseEvent) : void

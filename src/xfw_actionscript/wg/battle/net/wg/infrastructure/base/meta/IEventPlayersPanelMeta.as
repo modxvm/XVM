@@ -5,17 +5,9 @@ package net.wg.infrastructure.base.meta
     public interface IEventPlayersPanelMeta extends IEventDispatcher
     {
 
-        function acceptSquadS(param1:String) : void;
-
-        function addToSquadS(param1:String) : void;
-
-        function as_setPlayersPanelData(param1:Object) : void;
-
         function as_setPlayerPanelInfo(param1:Object) : void;
 
-        function as_setPlayerPanelHp(param1:int, param2:Number) : void;
-
-        function as_setPlayerLives(param1:int, param2:int) : void;
+        function as_setPlayerPanelHp(param1:int, param2:int, param3:int) : void;
 
         function as_setPlayerDead(param1:int) : void;
 

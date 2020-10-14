@@ -273,17 +273,17 @@ package net.wg.gui.lobby.training
 
         override protected function setPlayerTagsInOther(param1:Number, param2:Array) : void
         {
-            checkUserTags(this.other,param1,param2);
+            checkUserTags(this.other,param1,param2.slice(0));
         }
 
         override protected function setPlayerTagsInTeam1(param1:Number, param2:Array) : void
         {
-            this.doSetPlayerTagsInTeam1(param1,param2);
+            this.doSetPlayerTagsInTeam1(param1,param2.slice(0));
         }
 
         override protected function setPlayerTagsInTeam2(param1:Number, param2:Array) : void
         {
-            this.doSetPlayerTagsInTeam2(param1,param2);
+            this.doSetPlayerTagsInTeam2(param1,param2.slice(0));
         }
 
         override protected function draw() : void

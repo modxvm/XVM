@@ -1,97 +1,109 @@
 package net.wg.gui.battle.eventBattle.views.eventStats
 {
-    import net.wg.gui.battle.TabbedFullStats;
-    import net.wg.infrastructure.interfaces.IDAAPIDataClass;
-    import net.wg.data.VO.daapi.DAAPIVehiclesDataVO;
-    import net.wg.gui.battle.interfaces.ITabbedFullStatsTableController;
-    import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
-    import net.wg.data.VO.daapi.DAAPIVehicleStatusVO;
-    import net.wg.data.VO.daapi.DAAPIVehiclesStatsVO;
+    import net.wg.infrastructure.base.meta.impl.EventStatsMeta;
+    import net.wg.infrastructure.base.meta.IEventStatsMeta;
+    import net.wg.data.constants.InvalidationType;
+    import net.wg.gui.battle.eventBattle.views.eventStats.renderers.StatsPlayerRenderer;
+    import flash.text.TextField;
+    import net.wg.gui.battle.components.FullStatsTitle;
+    import flash.display.MovieClip;
+    import net.wg.gui.battle.eventBattle.views.eventStats.VO.EventStatsPlayerVO;
+    import net.wg.data.VO.daapi.DAAPIQuestStatusVO;
+    import net.wg.data.constants.Values;
+    import net.wg.data.constants.generated.TEXT_MANAGER_STYLES;
 
-    public class EventStats extends TabbedFullStats
+    public class EventStats extends EventStatsMeta implements IEventStatsMeta
     {
 
-        private var _tableCtrl:EventFullStatsTableCtrl = null;
+        protected static const INVALID_STATS:uint = InvalidationType.SYSTEM_FLAGS_BORDER << 1;
+
+        public var player0:StatsPlayerRenderer = null;
+
+        public var player1:StatsPlayerRenderer = null;
+
+        public var player2:StatsPlayerRenderer = null;
+
+        public var player3:StatsPlayerRenderer = null;
+
+        public var player4:StatsPlayerRenderer = null;
+
+        public var titleTF:TextField = null;
+
+        public var descriptionTF:TextField = null;
+
+        public var teamVehiclesHeader:FullStatsTitle = null;
+
+        public var dimmer:MovieClip = null;
+
+        private var _players:Vector.<StatsPlayerRenderer> = null;
+
+        private var _title:String = "";
+
+        private var _description:String = "";
 
         public function EventStats()
         {
             super();
-            visible = false;
-            this._tableCtrl = EventFullStatsTableCtrl(tableCtrl);
+            this._players = new <StatsPlayerRenderer>[this.player0,this.player1,this.player2,this.player3,this.player4];
         }
 
-        override public function addVehiclesInfo(param1:IDAAPIDataClass) : void
+        public function updateStageSize(param1:Number, param2:Number) : void
         {
-            var _loc2_:DAAPIVehiclesDataVO = DAAPIVehiclesDataVO(param1);
-            this._tableCtrl.addVehiclesInfo(_loc2_.leftVehicleInfos,_loc2_.leftVehiclesIDs,false);
-            this._tableCtrl.addVehiclesInfo(_loc2_.rightVehicleInfos,_loc2_.rightVehiclesIDs,true);
+            this.dimmer.width = param1;
+            this.dimmer.height = param2;
         }
 
-        override public function getTableCtrl() : ITabbedFullStatsTableController
+        public function as_updateTitle(param1:String, param2:String) : void
         {
-            return new EventFullStatsTableCtrl(EventFullStatsTable(statsTable),this);
+            this._title = param1;
+            this._description = param2;
+            invalidate(INVALID_STATS);
         }
 
-        override public function setFrags(param1:IDAAPIDataClass) : void
+        override protected function updatePlayerStats(param1:EventStatsPlayerVO, param2:uint) : void
         {
-            this.updateFrags(param1);
-        }
-
-        override public function setVehiclesData(param1:IDAAPIDataClass) : void
-        {
-            var _loc4_:DAAPIVehicleInfoVO = null;
-            var _loc2_:DAAPIVehiclesDataVO = DAAPIVehiclesDataVO(param1);
-            var _loc3_:Array = [];
-            for each(_loc4_ in _loc2_.leftVehicleInfos)
-            {
-                _loc3_.push(_loc4_);
-            }
-            this._tableCtrl.setVehiclesData(_loc3_,_loc2_.leftVehiclesIDs,false);
-            _loc3_ = [];
-            for each(_loc4_ in _loc2_.rightVehicleInfos)
-            {
-                _loc3_.push(_loc4_);
-            }
-            this._tableCtrl.setVehiclesData(_loc3_,_loc2_.rightVehiclesIDs,true);
-        }
-
-        override public function updateVehicleStatus(param1:IDAAPIDataClass) : void
-        {
-            var _loc2_:DAAPIVehicleStatusVO = DAAPIVehicleStatusVO(param1);
-            this._tableCtrl.setVehicleStatus(false,_loc2_.vehicleID,_loc2_.status,_loc2_.leftVehiclesIDs);
-            this._tableCtrl.setVehicleStatus(true,_loc2_.vehicleID,_loc2_.status,_loc2_.rightVehiclesIDs);
-        }
-
-        override public function updateVehiclesData(param1:IDAAPIDataClass) : void
-        {
-            var _loc2_:DAAPIVehiclesDataVO = DAAPIVehiclesDataVO(param1);
-            this._tableCtrl.updateVehiclesData(_loc2_.leftVehicleInfos,_loc2_.leftVehiclesIDs,false);
-            this._tableCtrl.updateVehiclesData(_loc2_.rightVehicleInfos,_loc2_.rightVehiclesIDs,true);
-        }
-
-        override public function updateVehiclesStat(param1:IDAAPIDataClass) : void
-        {
-            this.updateFrags(param1);
+            this._players[param2].update(param1);
         }
 
         override protected function configUI() : void
         {
             super.configUI();
-            noQuestTitleTF.visible = false;
-            noQuestDescrTF.visible = false;
-            header.visible = false;
+            var _loc1_:DAAPIQuestStatusVO = new DAAPIQuestStatusVO({"status":Values.EMPTY_STR});
+            this.teamVehiclesHeader.setStatus(_loc1_);
+            this.teamVehiclesHeader.setTitle(App.textMgr.getTextStyleById(TEXT_MANAGER_STYLES.SUPER_PROMO_TITLE,App.utils.locale.makeString(INGAME_GUI.STATISTICS_TAB_LINE_UP_TITLE)));
+        }
+
+        override protected function draw() : void
+        {
+            if(isInvalid(INVALID_STATS))
+            {
+                this.titleTF.text = this._title;
+                this.descriptionTF.text = this._description;
+            }
+            super.draw();
         }
 
         override protected function onDispose() : void
         {
-            this._tableCtrl = null;
+            var _loc1_:StatsPlayerRenderer = null;
+            for each(_loc1_ in this._players)
+            {
+                _loc1_.dispose();
+                _loc1_ = null;
+            }
+            this._players.splice(0,this._players.length);
+            this._players = null;
+            this.player0 = null;
+            this.player1 = null;
+            this.player2 = null;
+            this.player3 = null;
+            this.player4 = null;
+            this.teamVehiclesHeader.dispose();
+            this.teamVehiclesHeader = null;
+            this.dimmer = null;
+            this.titleTF = null;
+            this.descriptionTF = null;
             super.onDispose();
-        }
-
-        override protected function updateFrags(param1:IDAAPIDataClass) : void
-        {
-            var _loc2_:DAAPIVehiclesStatsVO = DAAPIVehiclesStatsVO(param1);
-            this._tableCtrl.setVehiclesStats(_loc2_.leftFrags,_loc2_.rightFrags);
         }
     }
 }

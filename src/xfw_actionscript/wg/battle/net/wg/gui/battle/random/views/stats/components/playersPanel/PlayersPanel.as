@@ -16,6 +16,8 @@ package net.wg.gui.battle.random.views.stats.components.playersPanel
 
         private var _rightListHasBadges:Boolean;
 
+        private var _showDogTagsInLists:Boolean;
+
         public function PlayersPanel()
         {
             super();
@@ -51,11 +53,27 @@ package net.wg.gui.battle.random.views.stats.components.playersPanel
         override protected function applyVehicleData(param1:IDAAPIDataClass) : void
         {
             var _loc2_:DAAPIVehiclesDataVO = DAAPIVehiclesDataVO(param1);
+            this.checkDogTags(_loc2_);
             this.checkBadges(_loc2_);
+            listLeft.setShowDogTag(false);
+            listRight.setShowDogTag(this._showDogTagsInLists);
             listLeft.setVehicleData(_loc2_.leftVehicleInfos);
             listLeft.updateOrder(_loc2_.leftVehiclesIDs);
             listRight.setVehicleData(_loc2_.rightVehicleInfos);
             listRight.updateOrder(_loc2_.rightVehiclesIDs);
+        }
+
+        private function checkDogTags(param1:DAAPIVehiclesDataVO) : void
+        {
+            var _loc2_:DAAPIVehicleInfoVO = null;
+            for each(_loc2_ in param1.leftVehicleInfos)
+            {
+                if(_loc2_.isCurrentPlayer)
+                {
+                    this._showDogTagsInLists = true;
+                    break;
+                }
+            }
         }
 
         private function checkBadges(param1:DAAPIVehiclesDataVO) : void

@@ -220,7 +220,14 @@ package net.wg.gui.lobby.hangar.alertMessage
         {
             if(this._data && this._data.tooltip)
             {
-                this._tooltipMgr.showSpecial(this._data.tooltip,null,null);
+                if(this._data.isSimpleTooltip)
+                {
+                    this._tooltipMgr.showComplex(this._data.tooltip);
+                }
+                else
+                {
+                    this._tooltipMgr.showSpecial(this._data.tooltip,null,null);
+                }
             }
         }
 

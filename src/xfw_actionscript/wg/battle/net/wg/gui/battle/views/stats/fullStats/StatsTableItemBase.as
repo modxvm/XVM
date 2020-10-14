@@ -36,6 +36,8 @@ package net.wg.gui.battle.views.stats.fullStats
 
         protected var isDead:Boolean = false;
 
+        protected var dogTag:Boolean = false;
+
         protected var isCurrentPlayer:Boolean = false;
 
         protected var isSquadPersonal:Boolean = false;
@@ -291,6 +293,7 @@ package net.wg.gui.battle.views.stats.fullStats
             this._frags = 0;
             this._isSelected = false;
             this._userProps = null;
+            this.dogTag = false;
             this.isDead = false;
             this.isCurrentPlayer = false;
             this.isSquadPersonal = false;
@@ -356,6 +359,15 @@ package net.wg.gui.battle.views.stats.fullStats
             }
             this._isIGR = param1;
             invalidate(FullStatsValidationType.IS_IGR);
+        }
+
+        public function setShowDogTag(param1:Boolean) : void
+        {
+            if(this.dogTag == param1)
+            {
+                return;
+            }
+            this.dogTag = param1;
         }
 
         public function setIsOffline(param1:Boolean) : void

@@ -7,7 +7,6 @@ package net.wg.gui.lobby.settings
     import flash.display.Sprite;
     import net.wg.gui.components.advanced.ViewStack;
     import net.wg.gui.components.controls.SoundButtonEx;
-    import net.wg.gui.lobby.settings.components.EventSettingLabel;
     import net.wg.gui.lobby.settings.vo.base.SettingsDataVo;
     import scaleform.clik.data.DataProvider;
     import net.wg.gui.lobby.settings.config.SettingsConfigHelper;
@@ -109,8 +108,6 @@ package net.wg.gui.lobby.settings
 
         public var applyBtn:SoundButtonEx = null;
 
-        public var eventDisableLabel:EventSettingLabel = null;
-
         private var _invalidTabs:Object;
 
         private var _invalidTabsNewCounterData:Object;
@@ -152,12 +149,6 @@ package net.wg.gui.lobby.settings
                 window.title = SETTINGS.TITLE;
                 window.contentPadding = WINDOW_PADDINGS;
             }
-        }
-
-        override protected function initialize() : void
-        {
-            super.initialize();
-            this.eventDisableLabel.visible = false;
         }
 
         override protected function configUI() : void
@@ -225,8 +216,6 @@ package net.wg.gui.lobby.settings
             this.tabLine = null;
             this.applyBtn.dispose();
             this.applyBtn = null;
-            this.eventDisableLabel.dispose();
-            this.eventDisableLabel = null;
             if(this.view)
             {
                 this.view.removeEventListener(ViewStackEvent.NEED_UPDATE,this.onViewNeedUpdateHandler);
@@ -324,16 +313,21 @@ package net.wg.gui.lobby.settings
                     }
                     else
                     {
-                        this.tabs.selectedIndex = CONTROL_SETTINGS_TAB_INDEX;
+                        this.tabs.selectedIndex = SOUND_SETTINGS_TAB_INDEX;
                     }
                     this.updateSettingsConfig();
                     break;
                 case SETTINGS_DIALOGS.CONTROLS_WRONG_NOTIFICATION:
-                    if(!param1)
+                    if(param1)
                     {
-                        this.tabs.selectedIndex = SOUND_SETTINGS_TAB_INDEX;
+                        this.updateSettingsConfig();
                     }
-                    this.updateSettingsConfig();
+                    else
+                    {
+                        this.tabs.selectedIndex = CONTROL_SETTINGS_TAB_INDEX;
+                        this.cancelBtn.enabled = this.submitBtn.enabled = true;
+                        this.updateApplyBtnState();
+                    }
                     break;
             }
         }
@@ -438,11 +432,6 @@ package net.wg.gui.lobby.settings
                 _loc2_.setPresetAfterAutoDetect(this._graphicsPresetToSelect);
                 this._graphicsPresetToSelect = -1;
             }
-        }
-
-        public function as_setTigerEvent(param1:Boolean) : void
-        {
-            this.eventDisableLabel.visible = param1;
         }
 
         public function as_updateVideoSettings(param1:Object) : void
@@ -770,7 +759,12 @@ package net.wg.gui.lobby.settings
 
         private function updateApplyBtnState() : void
         {
-            this.applyBtn.enabled = this._settingsConfigHelper.changesData.length > 0;
+            this.applyBtn.enabled = this.hasChangesData;
+        }
+
+        private function get hasChangesData() : Boolean
+        {
+            return this._settingsConfigHelper.changesData.length > 0;
         }
 
         private function tryGetView(param1:String) : MovieClip
@@ -1038,19 +1032,21 @@ package net.wg.gui.lobby.settings
 
         private function checkControlsWrong() : Boolean
         {
-            var _loc2_:Object = null;
-            var _loc3_:SettingsKeyProp = null;
-            var _loc4_:String = null;
+            var _loc2_:Vector.<String> = null;
+            var _loc3_:Object = null;
+            var _loc4_:Vector.<Object> = null;
+            var _loc5_:SettingsKeyProp = null;
             var _loc1_:ControlsSettings = ControlsSettings(this.tryGetView(SettingsConfigHelper.CONTROLS_SETTINGS));
             if(_loc1_)
             {
-                return _loc1_.isControlsChanged(true);
+                return _loc1_.isControlsChanged(!this.hasChangesData);
             }
-            _loc2_ = this._settingsConfigHelper.settingsData[SettingsConfigHelper.CONTROLS_SETTINGS][SettingsConfigHelper.KEYBOARD];
-            for(_loc4_ in _loc2_)
+            _loc2_ = this._settingsConfigHelper.settingsData[SettingsConfigHelper.CONTROLS_SETTINGS][SettingsConfigHelper.KEYBOARD_IMPORTANT_BINDS];
+            _loc3_ = this._settingsConfigHelper.settingsData[SettingsConfigHelper.CONTROLS_SETTINGS][SettingsConfigHelper.KEYBOARD];
+            _loc4_ = SettingsDataVo(_loc3_).values;
+            for each(_loc5_ in _loc4_)
             {
-                _loc3_ = SettingsKeyProp(_loc2_[_loc4_]);
-                if(_loc3_.key == KeyProps.KEY_NONE)
+                if(_loc5_.key == KeyProps.KEY_NONE && _loc2_.indexOf(_loc5_.id) != -1)
                 {
                     return true;
                 }

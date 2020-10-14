@@ -2,7 +2,7 @@ package net.wg.gui.lobby.battleResults.progressReport
 {
     import net.wg.infrastructure.base.UIComponentEx;
     import net.wg.gui.lobby.interfaces.ISubtaskComponent;
-    import scaleform.clik.core.UIComponent;
+    import net.wg.gui.components.advanced.ModuleTypesUIWithFill;
     import net.wg.gui.components.controls.UILoaderAlt;
     import net.wg.gui.components.controls.SoundButtonEx;
     import flash.text.TextField;
@@ -15,7 +15,7 @@ package net.wg.gui.lobby.battleResults.progressReport
 
         private static const LINK_BTN_OFFSET:int = 5;
 
-        public var fittingIcon:UIComponent;
+        public var fittingIcon:ModuleTypesUIWithFill;
 
         public var vehicleIcon:UILoaderAlt;
 
@@ -81,7 +81,7 @@ package net.wg.gui.lobby.battleResults.progressReport
             this.fittingIcon.visible = this._itemData.fittingType.length > 0;
             if(this.fittingIcon.visible)
             {
-                this.fittingIcon.gotoAndStop(this._itemData.fittingType);
+                this.fittingIcon.setModuleTypeIcon(this._itemData.fittingType);
             }
             this.initIcon(this.vehicleIcon,this._itemData.vehicleIcon);
             this.initIcon(this.tankmenIcon,this._itemData.tankmenIcon);

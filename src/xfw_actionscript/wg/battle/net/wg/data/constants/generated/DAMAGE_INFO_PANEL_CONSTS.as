@@ -21,21 +21,23 @@ package net.wg.data.constants.generated
 
         public static const RIGHT_TRACK:int = 8;
 
-        public static const DRIVER:int = 9;
+        public static const WHEEL:int = 9;
 
-        public static const FIRST_LOADER:int = 10;
+        public static const DRIVER:int = 10;
 
-        public static const SECOND_LOADER:int = 11;
+        public static const FIRST_LOADER:int = 11;
 
-        public static const FIRST_GUNNER:int = 12;
+        public static const SECOND_LOADER:int = 12;
 
-        public static const SECOND_GUNNER:int = 13;
+        public static const FIRST_GUNNER:int = 13;
 
-        public static const FIRST_RADIOMAN:int = 14;
+        public static const SECOND_GUNNER:int = 14;
 
-        public static const SECOND_RADIOMAN:int = 15;
+        public static const FIRST_RADIOMAN:int = 15;
 
-        public static const COMMANDER:int = 16;
+        public static const SECOND_RADIOMAN:int = 16;
+
+        public static const COMMANDER:int = 17;
 
         public static const ITEM_ID:int = 0;
 

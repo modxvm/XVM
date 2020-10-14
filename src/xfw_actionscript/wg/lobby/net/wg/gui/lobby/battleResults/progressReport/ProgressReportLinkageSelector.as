@@ -32,6 +32,10 @@ package net.wg.gui.lobby.battleResults.progressReport
             {
                 return Linkages.PERSONAL_QUEST_LINK;
             }
+            if(param1.hasOwnProperty("dogTagType"))
+            {
+                return Linkages.UNLOCK_DOG_TAG;
+            }
             if(param1.hasOwnProperty("linkage"))
             {
                 return param1.linkage;

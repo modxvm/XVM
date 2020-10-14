@@ -9,12 +9,6 @@ package net.wg.data.constants.generated
 
         public static const REPAIR_KIT:String = "repairkit";
 
-        public static const TRIGGER:String = "trigger";
-
-        public static const EVENT_ITEM:String = "eventItem";
-
-        public static const EVENT_ALT_ITEM:String = "eventAltItem";
-
         public function BATTLE_CONSUMABLES_PANEL_TAGS()
         {
             super();

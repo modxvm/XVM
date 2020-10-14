@@ -205,6 +205,12 @@ package net.wg.gui.lobby.vehiclePreview.infoPanel
             return this.tabButtonBar.getWidth();
         }
 
+        override public function set visible(param1:Boolean) : void
+        {
+            super.visible = param1;
+            this.tabButtonBar.visible = param1;
+        }
+
         private function updateBulletVisibility() : void
         {
             var _loc1_:Button = this.tabButtonBar.getButtonAt(this._bulletTabIdx);

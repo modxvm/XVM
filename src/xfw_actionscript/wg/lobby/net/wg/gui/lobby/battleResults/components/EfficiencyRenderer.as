@@ -276,7 +276,7 @@ package net.wg.gui.lobby.battleResults.components
             this.baseDefenceIcon.visible = false;
             this.baseNameTF.visible = false;
             this.playerName.userVO = new UserVO({
-                "userName":this._data.playerFakeName,
+                "userName":this._data.playerRealName,
                 "clanAbbrev":this._data.playerClan,
                 "fullName":this._data.playerFullName,
                 "region":this._data.playerRegion,

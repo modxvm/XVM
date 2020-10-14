@@ -1,14 +1,17 @@
 package net.wg.gui.lobby.hangar.seniorityAwards
 {
+    import net.wg.gui.lobby.hangar.eventEntryPoint.IEventEntryPoint;
     import net.wg.infrastructure.managers.counter.CounterProps;
+    import flash.geom.Rectangle;
     import flash.text.TextFormatAlign;
     import flash.display.MovieClip;
     import net.wg.utils.ICounterManager;
     import flash.events.MouseEvent;
     import flash.display.DisplayObject;
     import net.wg.infrastructure.managers.counter.CounterManager;
+    import net.wg.gui.lobby.hangar.eventEntryPoint.EntryPointSize;
 
-    public class SeniorityAwardsEntryPointHangar extends SeniorityAwardsEntryPoint
+    public class SeniorityAwardsEntryPointHangar extends SeniorityAwardsEntryPoint implements IEventEntryPoint
     {
 
         private static const HOVER_SHOW_LABEL:String = "show";
@@ -25,17 +28,22 @@ package net.wg.gui.lobby.hangar.seniorityAwards
 
         private static const COUNTER_PROPS:CounterProps = new CounterProps(12,-2,TextFormatAlign.RIGHT);
 
+        public static const SMALL_MARGINS:Rectangle = new Rectangle(-71,-50,-36,-50);
+
+        public static const BIG_MARGINS:Rectangle = new Rectangle(0,-20,-36,-20);
+
         public var hover:MovieClip = null;
 
         public var hoverBG:MovieClip = null;
 
-        private var _isSmall:Boolean = false;
-
         private var _counterMgr:ICounterManager;
+
+        private var _size:int;
 
         public function SeniorityAwardsEntryPointHangar()
         {
             this._counterMgr = App.utils.counterManager;
+            this._size = EntryPointSize.BIG;
             super();
         }
 
@@ -59,14 +67,24 @@ package net.wg.gui.lobby.hangar.seniorityAwards
             super.onDispose();
         }
 
-        public function setMode(param1:Boolean) : void
+        public function get margin() : Rectangle
         {
-            if(this._isSmall == param1 || !visible)
+            return EntryPointSize.isSmall(this._size)?SMALL_MARGINS:BIG_MARGINS;
+        }
+
+        public function get size() : int
+        {
+            return this._size;
+        }
+
+        public function set size(param1:int) : void
+        {
+            if(param1 == this._size)
             {
                 return;
             }
-            this._isSmall = param1;
-            if(this._isSmall)
+            this._size = param1;
+            if(EntryPointSize.isSmall(this._size))
             {
                 gotoAndStop(SMALL_FRAME_LBL);
             }
@@ -76,12 +94,6 @@ package net.wg.gui.lobby.hangar.seniorityAwards
             }
             applyData();
             updatePosition();
-        }
-
-        public function updateSize(param1:Number, param2:Number) : void
-        {
-            var _loc3_:Boolean = param1 < SeniorityAwardsEntryPoint.SMALL_TRESHOLD_X || param2 < SeniorityAwardsEntryPoint.SMALL_TRESHOLD_Y;
-            this.setMode(_loc3_);
         }
 
         private function onMouseRollOverHandler(param1:MouseEvent) : void

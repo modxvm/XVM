@@ -301,14 +301,16 @@ package net.wg.gui.lobby.battleResults
 
         public function update(param1:Object) : void
         {
-            var _loc9_:* = 0;
             var _loc10_:* = 0;
+            var _loc11_:* = 0;
             this._data = BattleResultsVO(param1);
             var _loc2_:PersonalDataVO = this._data.personal;
             var _loc3_:CommonStatsVO = this._data.common;
             var _loc4_:Array = AwardExtractor.extract(this._data.quests);
-            var _loc5_:Array = this._data.unlocks;
-            this._unlocksAndQuests = StatsUtilsManager.getInstance().mergeArrays(_loc5_,_loc4_);
+            var _loc5_:Array = this._data.dog_tags;
+            var _loc6_:Array = this._data.unlocks;
+            this._unlocksAndQuests = StatsUtilsManager.getInstance().mergeArrays(_loc6_,_loc4_);
+            this._unlocksAndQuests = StatsUtilsManager.getInstance().mergeArrays(this._unlocksAndQuests,_loc5_);
             if(_loc3_.rank)
             {
                 this._unlocksAndQuests.unshift(_loc3_.rank);
@@ -334,28 +336,28 @@ package net.wg.gui.lobby.battleResults
             this.medalsListRight.dataProvider = _loc2_.achievementsRight;
             this.initEfficiencyList(_loc2_);
             this.initEfficiencyHeader(_loc2_);
-            var _loc6_:ProgressiveRewardVO = this._data.progressiveReward;
-            var _loc7_:Boolean = Boolean(_loc6_.isEnabled);
-            if(_loc7_)
+            var _loc7_:ProgressiveRewardVO = this._data.progressiveReward;
+            var _loc8_:Boolean = Boolean(_loc7_.isEnabled);
+            if(_loc8_)
             {
-                this.progressiveReward.setData(_loc6_);
+                this.progressiveReward.setData(_loc7_);
                 this.progressiveReward.addEventListener(ProgressiveRewardEvent.LINK_BTN_CLICK,this.onProgressiveRewardLinkClickHandler);
             }
-            this.progressiveReward.visible = _loc7_;
-            this.progressiveRewardDelimiter.visible = _loc7_;
-            this.layoutProgressReport(_loc7_);
-            var _loc8_:Boolean = _loc2_.showNoIncomeAlert;
-            this.setNoIncomeVisible(_loc8_);
-            if(!_loc8_)
+            this.progressiveReward.visible = _loc8_;
+            this.progressiveRewardDelimiter.visible = _loc8_;
+            this.layoutProgressReport(_loc8_);
+            var _loc9_:Boolean = _loc2_.showNoIncomeAlert;
+            this.setNoIncomeVisible(_loc9_);
+            if(!_loc9_)
             {
                 this.detailsMc.data = _loc2_;
-                _loc9_ = _loc5_.length;
+                _loc10_ = _loc6_.length;
                 if(_loc3_.rank)
                 {
-                    _loc9_ = _loc9_ + 1;
-                    _loc10_ = 1;
+                    _loc10_ = _loc10_ + 1;
+                    _loc11_ = 1;
                 }
-                this.initProgressReport(_loc10_,_loc9_);
+                this.initProgressReport(_loc11_,_loc10_);
                 this.subtasksScrollBar.visible = true;
             }
             else

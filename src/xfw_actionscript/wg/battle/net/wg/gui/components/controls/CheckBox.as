@@ -4,6 +4,7 @@ package net.wg.gui.components.controls
     import net.wg.infrastructure.interfaces.entity.ISoundable;
     import net.wg.infrastructure.interfaces.ITextContainer;
     import flash.display.Sprite;
+    import net.wg.gui.components.controls.constants.ToolTipShowType;
     import scaleform.clik.events.ResizeEvent;
     import flash.text.TextFormat;
     import scaleform.clik.constants.InvalidationType;
@@ -48,6 +49,8 @@ package net.wg.gui.components.controls
 
         public var hit:Sprite = null;
 
+        public var tooltipType:ToolTipShowType;
+
         private var _textColor:Number = 9868935;
 
         private var _disabledTextAlpha:Number = 0.5;
@@ -80,12 +83,14 @@ package net.wg.gui.components.controls
 
         public function CheckBox()
         {
+            this.tooltipType = ToolTipShowType.COMPLEX;
             super();
         }
 
         override protected function onBeforeDispose() : void
         {
             this.hit = null;
+            this.tooltipType = null;
             if(App.soundMgr)
             {
                 App.soundMgr.removeSoundHdlrs(this);
@@ -162,6 +167,7 @@ package net.wg.gui.components.controls
                         this.createInfoIco();
                         isInvalid(VISIBILITY_INV);
                     }
+                    this._infoIco.tooltipType = this.tooltipType;
                     this._infoIco.tooltip = this._tooltip;
                     this._infoIco.icoType = this._infoIcoType;
                     this.repositionInfoIcon();
@@ -263,7 +269,14 @@ package net.wg.gui.components.controls
         {
             if(this._tooltip && App.toolTipMgr && !this._infoIco)
             {
-                App.toolTipMgr.showComplex(this._tooltip);
+                if(this.tooltipType.value == ToolTipShowType.COMPLEX.value)
+                {
+                    App.toolTipMgr.showComplex(this._tooltip);
+                }
+                else if(this.tooltipType.value == ToolTipShowType.SPECIAL.value)
+                {
+                    App.toolTipMgr.showSpecial(this._tooltip,null);
+                }
             }
         }
 

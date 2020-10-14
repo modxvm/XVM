@@ -60,14 +60,7 @@ package net.wg.infrastructure.managers.impl
             var _loc3_:String = Values.EMPTY_STR;
             if(param1 && UserTags.isInIGR(param1))
             {
-                if(UserTags.isBaseIGR(param1))
-                {
-                    _loc3_ = IMG_TAG_OPEN_BASIC;
-                }
-                else
-                {
-                    _loc3_ = IMG_TAG_OPEN_PREMIUM;
-                }
+                _loc3_ = UserTags.isBaseIGR(param1)?IMG_TAG_OPEN_BASIC:IMG_TAG_OPEN_PREMIUM;
                 return Values.SPACE_STR + _loc3_ + param2 + IMG_TAG_CLOSE;
             }
             return _loc3_;
@@ -89,8 +82,8 @@ package net.wg.infrastructure.managers.impl
             if(param1.width < param1.textWidth + TEXT_FIELD_BOUNDS_WIDTH)
             {
                 _loc11_ = true;
-                _loc12_ = _loc7_ + _loc8_;
-                _loc13_ = new <String>["",_loc6_,_loc8_,_loc10_,_loc12_,_loc6_ + _loc12_];
+                _loc12_ = _loc7_ + _loc8_ + _loc10_;
+                _loc13_ = new <String>[Values.EMPTY_STR,_loc6_,_loc8_,_loc12_,_loc6_ + _loc12_];
                 _loc14_ = _loc13_.length - 1;
                 while(_loc14_ >= 0)
                 {

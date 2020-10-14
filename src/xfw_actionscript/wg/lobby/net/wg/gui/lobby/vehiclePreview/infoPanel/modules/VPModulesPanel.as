@@ -4,6 +4,7 @@ package net.wg.gui.lobby.vehiclePreview.infoPanel.modules
     import net.wg.utils.IStageSizeDependComponent;
     import flash.text.TextField;
     import net.wg.utils.IScheduler;
+    import net.wg.gui.lobby.modulesPanel.interfaces.IModuleSlot;
     import net.wg.gui.lobby.components.data.DeviceSlotVO;
     import net.wg.gui.lobby.modulesPanel.DeviceIndexHelper;
     import net.wg.utils.StageSizeBoundaries;
@@ -17,6 +18,8 @@ package net.wg.gui.lobby.vehiclePreview.infoPanel.modules
         private static const SMALL_SLOTS_OFFSET:int = 55;
 
         private static const BIG_SLOTS_OFFSET:int = 65;
+
+        private static const START_DELAY:int = 200;
 
         private static const DELAY:int = 600;
 
@@ -38,6 +41,20 @@ package net.wg.gui.lobby.vehiclePreview.infoPanel.modules
         {
             this._scheduler = App.utils.scheduler;
             super();
+        }
+
+        override public function playAnimation() : void
+        {
+            var _loc1_:IModuleSlot = null;
+            var _loc2_:int = _modules.length;
+            var _loc3_:* = 0;
+            while(_loc3_ < _loc2_)
+            {
+                _loc1_ = _modules[_loc3_];
+                _loc1_.resetAnimation();
+                this._scheduler.scheduleTask(_loc1_.playAnimation,_loc3_ * DELAY + START_DELAY);
+                _loc3_++;
+            }
         }
 
         override protected function initialize() : void
@@ -107,17 +124,6 @@ package net.wg.gui.lobby.vehiclePreview.infoPanel.modules
                 _loc5_++;
             }
             dispatchEvent(new Event(Event.RESIZE));
-        }
-
-        override public function playAnimation() : void
-        {
-            var _loc1_:int = _modules.length;
-            var _loc2_:* = 0;
-            while(_loc2_ < _loc1_)
-            {
-                this._scheduler.scheduleTask(_modules[_loc2_].playAnimation,_loc2_ * DELAY);
-                _loc2_++;
-            }
         }
     }
 }

@@ -4,5 +4,7 @@ package net.wg.gui.lobby.modulesPanel.interfaces
     {
 
         function playAnimation() : void;
+
+        function resetAnimation() : void;
     }
 }

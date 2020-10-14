@@ -21,6 +21,8 @@ package net.wg.infrastructure.base.meta
 
         function onShowDetailsPremiumS() : void;
 
+        function showDogTagWindowS(param1:int) : void;
+
         function as_setData(param1:Object) : void;
 
         function as_setClanEmblem(param1:String, param2:String) : void;

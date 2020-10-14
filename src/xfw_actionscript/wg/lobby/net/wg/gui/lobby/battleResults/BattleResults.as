@@ -12,6 +12,7 @@ package net.wg.gui.lobby.battleResults
     import flash.events.FocusEvent;
     import net.wg.gui.events.ViewStackEvent;
     import net.wg.gui.lobby.battleResults.progressReport.UnlockLinkEvent;
+    import net.wg.gui.lobby.battleResults.progressReport.DogTagLinkEvent;
     import net.wg.gui.lobby.battleResults.event.TeamTableSortEvent;
     import net.wg.gui.lobby.battleResults.event.BattleResultsViewEvent;
     import net.wg.gui.events.QuestEvent;
@@ -68,6 +69,7 @@ package net.wg.gui.lobby.battleResults
             this.tabs_mc.addEventListener(FocusEvent.FOCUS_IN,this.onTabFocusInHandler);
             this.view_mc.addEventListener(ViewStackEvent.VIEW_CHANGED,this.onViewChangedHandler);
             addEventListener(UnlockLinkEvent.TYPE,this.onUnlockLinkBtnHandler);
+            addEventListener(DogTagLinkEvent.BATTLE_RESULTS_DOG_TAG_LINK_BTN_EVENT,this.onDogTagLinkBtnHandler);
             addEventListener(TeamTableSortEvent.TYPE,this.onTeamTableSortEventHandler);
             addEventListener(BattleResultsViewEvent.SHOW_PROGRESSIVE_REWARD_VIEW,this.onShowProgressiveRewardViewHandler,false,0,true);
             addEventListener(QuestEvent.SELECT_QUEST,this.onShowEventsWindowHandler,false,0,true);
@@ -102,6 +104,7 @@ package net.wg.gui.lobby.battleResults
             removeEventListener(QuestEvent.SELECT_QUEST,this.onShowEventsWindowHandler);
             removeEventListener(BattleResultsViewEvent.APPLIED_PREMIUM_BONUS,this.onAppliedPremiumBonusHandler);
             removeEventListener(BattleResultsViewEvent.SHOW_DETAILS_PREMIUM,this.onShowDetailsPremiumHandler);
+            removeEventListener(DogTagLinkEvent.BATTLE_RESULTS_DOG_TAG_LINK_BTN_EVENT,this.onDogTagLinkBtnHandler);
             App.utils.data.cleanupDynamicObject(this._emblemLoadingDelegates);
             this._emblemLoadingDelegates = null;
             this.tabs_mc.removeEventListener(FocusEvent.FOCUS_IN,this.onTabFocusInHandler);
@@ -206,6 +209,11 @@ package net.wg.gui.lobby.battleResults
         private function onUnlockLinkBtnHandler(param1:UnlockLinkEvent) : void
         {
             showUnlockWindowS(param1.itemId,param1.unlockType);
+        }
+
+        private function onDogTagLinkBtnHandler(param1:DogTagLinkEvent) : void
+        {
+            showDogTagWindowS(param1.componentId);
         }
 
         private function onResultsShareBtnClickHandler(param1:ButtonEvent) : void

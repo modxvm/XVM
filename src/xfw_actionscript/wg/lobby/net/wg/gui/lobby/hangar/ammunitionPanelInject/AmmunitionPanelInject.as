@@ -5,8 +5,10 @@ package net.wg.gui.lobby.hangar.ammunitionPanelInject
     import net.wg.utils.helpLayout.IHelpLayoutComponent;
     import flash.utils.Dictionary;
     import net.wg.gui.lobby.hangar.ammunitionPanelInject.data.HelpLayoutDataVO;
+    import net.wg.gui.lobby.hangar.ammunitionPanelInject.events.AmmunitionPanelInjectEvents;
     import flash.events.Event;
     import net.wg.utils.helpLayout.HelpLayoutVO;
+    import net.wg.data.constants.Values;
     import flash.display.Bitmap;
     import net.wg.gui.components.containers.GFWrapper;
     import net.wg.data.constants.Directions;
@@ -21,8 +23,6 @@ package net.wg.gui.lobby.hangar.ammunitionPanelInject
         private var _panelHeight:int = 0;
 
         private var _offsetY:int = 0;
-
-        private var _slotsWidth:int = 0;
 
         private var _helpLayoutData:Dictionary;
 
@@ -67,6 +67,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanelInject
             {
                 this._helpLayoutData[_loc2_] = param1;
             }
+            dispatchEvent(new AmmunitionPanelInjectEvents(AmmunitionPanelInjectEvents.HELP_LAYOUT_CHANGED));
         }
 
         override protected function configUI() : void
@@ -89,18 +90,32 @@ package net.wg.gui.lobby.hangar.ammunitionPanelInject
             dispatchEvent(new Event(Event.RESIZE));
         }
 
-        public function as_setSlotsWidth(param1:int) : void
+        public function getFirstLayoutProperty() : HelpLayoutVO
         {
-            if(param1 != this._slotsWidth)
+            var _loc2_:HelpLayoutDataVO = null;
+            var _loc1_:HelpLayoutDataVO = null;
+            for each(_loc2_ in this._helpLayoutData)
             {
-                this._slotsWidth = param1;
-                dispatchEvent(new Event(Event.RESIZE));
+                if(_loc1_ == null || _loc1_.offsetX > _loc2_.offsetX)
+                {
+                    _loc1_ = _loc2_;
+                }
             }
+            return _loc1_ != null?this.createHelpLayoutData(_loc1_.offsetX,_loc1_.offsetY,_loc1_.width,_loc1_.height,Values.EMPTY_STR,Values.EMPTY_STR):null;
         }
 
-        public function get slotsWidth() : int
+        public function getLastLayoutProperty() : HelpLayoutVO
         {
-            return this._slotsWidth;
+            var _loc2_:HelpLayoutDataVO = null;
+            var _loc1_:HelpLayoutDataVO = null;
+            for each(_loc2_ in this._helpLayoutData)
+            {
+                if(_loc1_ == null || _loc1_.offsetX < _loc2_.offsetX)
+                {
+                    _loc1_ = _loc2_;
+                }
+            }
+            return _loc1_ != null?this.createHelpLayoutData(_loc1_.offsetX,_loc1_.offsetY,_loc1_.width,_loc1_.height,Values.EMPTY_STR,Values.EMPTY_STR):null;
         }
 
         public function getLayoutProperties() : Vector.<HelpLayoutVO>

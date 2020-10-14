@@ -70,8 +70,6 @@ package net.wg.gui.components.carousels.data
 
         public var favorite:Boolean = false;
 
-        public var giveaway:Boolean = false;
-
         public var nation:Number = 0;
 
         public var xpImgSource:String = "";
@@ -92,21 +90,15 @@ package net.wg.gui.components.carousels.data
 
         public var tooltip:String = "";
 
-        public var isWulfTooltip:Boolean = false;
-
         public var lockedTooltip:String = "";
 
         public var progressionPoints:ProgressionPointsVO = null;
 
         public var isNull:Boolean = true;
 
-        public var isNationChangeAvailable:Boolean = false;
-
-        public var isEventVehicle:Boolean = false;
-
-        public var isEventVehicleSpecial:Boolean = false;
-
         private var _slotPriceActionData:ActionPriceVO = null;
+
+        public var isNationChangeAvailable:Boolean = false;
 
         public function VehicleCarouselVO(param1:Object)
         {

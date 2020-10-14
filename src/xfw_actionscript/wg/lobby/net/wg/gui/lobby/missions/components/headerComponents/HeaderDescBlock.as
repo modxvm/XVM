@@ -15,7 +15,7 @@ package net.wg.gui.lobby.missions.components.headerComponents
 
         private static const PERFORMED_TASKS_RIGHT_PADDING:int = 26;
 
-        private static const DESC_TEXT_OFFSET_Y:int = 30;
+        private static const DESC_TEXT_OFFSET_Y:int = 15;
 
         private static const DOTS:String = "...";
 
@@ -29,8 +29,6 @@ package net.wg.gui.lobby.missions.components.headerComponents
 
         private var _tooltipMgr:ITooltipMgr = null;
 
-        private var _isDescrTextTruncated:Boolean = false;
-
         public function HeaderDescBlock()
         {
             super();
@@ -40,6 +38,7 @@ package net.wg.gui.lobby.missions.components.headerComponents
         override protected function draw() : void
         {
             var _loc1_:* = false;
+            var _loc2_:* = false;
             super.draw();
             if(this._data != null && isInvalid(InvalidationType.DATA))
             {
@@ -47,8 +46,8 @@ package net.wg.gui.lobby.missions.components.headerComponents
                 if(this._data.isMultiline)
                 {
                     TextFieldEx.setVerticalAlign(this.descText,TextFieldEx.VAUTOSIZE_CENTER);
-                    this._isDescrTextTruncated = App.utils.commons.truncateHtmlTextMultiline(this.descText,this._data.descr,MAX_LINE_NUMBER,DOTS);
-                    if(this._isDescrTextTruncated)
+                    _loc2_ = App.utils.commons.truncateHtmlTextMultiline(this.descText,this._data.descr,MAX_LINE_NUMBER,DOTS);
+                    if(_loc2_)
                     {
                         this.descText.addEventListener(MouseEvent.ROLL_OVER,this.onDescTextRollOverHandler);
                         this.descText.addEventListener(MouseEvent.ROLL_OUT,this.onDescTextRollOutHandler);
@@ -62,11 +61,12 @@ package net.wg.gui.lobby.missions.components.headerComponents
                 this.calendar.visible = _loc1_;
                 if(_loc1_)
                 {
+                    this.calendar.multiline = this._data.isMultiline;
                     this.calendar.setText(this._data.period);
                     this.calendar.isIconVisible = this._data.hasCalendarIcon;
-                    if(this.calendar.isCalendarTextTruncated)
+                    if(this._data.isMultiline)
                     {
-                        this.descText.y = this.calendar.height + DESC_TEXT_OFFSET_Y;
+                        this.descText.y = this.calendar.height + DESC_TEXT_OFFSET_Y | 0;
                     }
                 }
                 invalidateSize();
@@ -100,11 +100,8 @@ package net.wg.gui.lobby.missions.components.headerComponents
 
         private function removeDescTextListeners() : void
         {
-            if(this._isDescrTextTruncated)
-            {
-                this.descText.removeEventListener(MouseEvent.ROLL_OVER,this.onDescTextRollOverHandler);
-                this.descText.removeEventListener(MouseEvent.ROLL_OUT,this.onDescTextRollOutHandler);
-            }
+            this.descText.removeEventListener(MouseEvent.ROLL_OVER,this.onDescTextRollOverHandler);
+            this.descText.removeEventListener(MouseEvent.ROLL_OUT,this.onDescTextRollOutHandler);
         }
 
         private function onDescTextRollOverHandler(param1:MouseEvent) : void

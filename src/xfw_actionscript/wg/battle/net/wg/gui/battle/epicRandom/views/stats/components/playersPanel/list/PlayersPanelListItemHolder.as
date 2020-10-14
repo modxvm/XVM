@@ -8,6 +8,8 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
     import net.wg.data.constants.PlayerStatus;
     import net.wg.gui.battle.views.stats.constants.DynamicSquadState;
     import net.wg.data.constants.InvitationStatus;
+    import net.wg.gui.components.dogtag.VO.DogTagVO;
+    import net.wg.gui.battle.components.stats.playersPanel.interfaces.IPlayersPanelListItem;
 
     public class PlayersPanelListItemHolder extends Object implements IPlayersPanelListItemHolder
     {
@@ -103,6 +105,11 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
         {
             this._vehicleData = param1.clone() as EpicRandomDAAPIVehicleInfoVO;
             this.applyVehicleData();
+        }
+
+        public function getVehicleData() : DAAPIVehicleInfoVO
+        {
+            return this._vehicleData;
         }
 
         public function setVehicleStatus(param1:int) : void
@@ -237,6 +244,20 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
         public function get isCurrentPlayer() : Boolean
         {
             return this._isCurrPlayer;
+        }
+
+        public function setDogTag(param1:DogTagVO) : void
+        {
+        }
+
+        public function getDogTag() : DogTagVO
+        {
+            return null;
+        }
+
+        public function getListItem() : IPlayersPanelListItem
+        {
+            return null;
         }
     }
 }

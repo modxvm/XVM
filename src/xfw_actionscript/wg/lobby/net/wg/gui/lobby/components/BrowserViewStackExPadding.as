@@ -11,6 +11,7 @@ package net.wg.gui.lobby.components
     import net.wg.data.constants.Linkages;
     import net.wg.data.Aliases;
     import flash.display.InteractiveObject;
+    import flash.events.Event;
 
     public class BrowserViewStackExPadding extends BrowserViewStackExPaddingMeta implements IViewStackExPaddingContent, IBrowserViewStackExPaddingMeta
     {
@@ -24,6 +25,8 @@ package net.wg.gui.lobby.components
         private var _allowWaiting:Boolean = true;
 
         private var _isWaitingTime:Boolean = true;
+
+        private var _isDisableShowBrowser:Boolean = false;
 
         private var _isSizeInited:Boolean = false;
 
@@ -137,7 +140,7 @@ package net.wg.gui.lobby.components
         {
             if(this.browser)
             {
-                this.browser.visible = !this._isWaitingTime;
+                this.browser.visible = !this._isWaitingTime && !this._isDisableShowBrowser;
             }
             if(this._isWaitingTime && this._allowWaiting && this._isSizeInited)
             {
@@ -151,8 +154,9 @@ package net.wg.gui.lobby.components
 
         private function updateLayout() : void
         {
+            var _loc2_:* = 0;
             var _loc1_:int = this.browserWidth;
-            var _loc2_:int = this.browserHeight;
+            _loc2_ = this.browserHeight;
             if(!this._isSizeInited && isDAAPIInited && _loc1_ > 0 && _loc2_ > 0)
             {
                 if(this._isApplyPadding)
@@ -183,6 +187,21 @@ package net.wg.gui.lobby.components
             return _height;
         }
 
+        public function get isDisableShowBrowser() : Boolean
+        {
+            return this._isDisableShowBrowser;
+        }
+
+        public function set isDisableShowBrowser(param1:Boolean) : void
+        {
+            if(param1 == this._isDisableShowBrowser)
+            {
+                return;
+            }
+            this._isDisableShowBrowser = param1;
+            invalidate(WAITING_INVALID);
+        }
+
         private function onBrowserLoadingStartedHandler(param1:BrowserEvent) : void
         {
             this._isWaitingTime = true;
@@ -192,6 +211,7 @@ package net.wg.gui.lobby.components
         private function onBrowserLoadingStoppedHandler(param1:BrowserEvent) : void
         {
             this._isWaitingTime = false;
+            dispatchEvent(new Event(Event.COMPLETE));
             invalidate(WAITING_INVALID);
         }
     }

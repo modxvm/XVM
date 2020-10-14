@@ -3,6 +3,7 @@ package net.wg.gui.battle.random.views.stats.components.playersPanel.interfaces
     import flash.events.IEventDispatcher;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
+    import net.wg.gui.components.dogtag.VO.DogTagVO;
 
     public interface IPlayersPanelList extends IEventDispatcher, IDisposable
     {
@@ -58,5 +59,9 @@ package net.wg.gui.battle.random.views.stats.components.playersPanel.interfaces
         function get height() : Number;
 
         function get isInviteReceived() : Boolean;
+
+        function setShowDogTag(param1:Boolean) : void;
+
+        function showDogTag(param1:Number, param2:DogTagVO) : void;
     }
 }
