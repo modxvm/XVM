@@ -8,6 +8,8 @@
 
   #### Макросы на Python
 
+  * Добавлены макросы `{{py:xvm.XFromRight(x)}}` и `{{py:xvm.YFromBottom(y)}}`
+
   * В **damageLog** добавлено:
 
     * секция **"lastHitBackground"** в файл **damageLog.xc**

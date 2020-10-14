@@ -8,6 +8,8 @@
 
   #### Python macros
 
+  * Added `{{py:xvm.XFromRight(x)}}` and `{{py:xvm.YFromBottom(y)}}` macros
+
   * In **damageLog** added:
 
     * section **"lastHitBackground"** to the file **damageLog.xc**

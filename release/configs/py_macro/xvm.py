@@ -148,6 +148,23 @@ def xvm_screenHCenter():
     return BigWorld.screenWidth() // 2
 
 
+@xvm.export('xvm.XFromRight', deterministic=False)
+def xvm_XFromRight(x=0):
+    screenWidth = BigWorld.screenWidth()
+    try:
+        return screenWidth - float(x)
+    except ValueError:
+        return screenWidth
+
+
+@xvm.export('xvm.YFromBottom', deterministic=False)
+def xvm_YFromBottom(y=0):
+    screenHeight = BigWorld.screenHeight()
+    try:
+        return screenHeight - float(y)
+    except ValueError:
+        return screenHeight
+
 # xvm2sup
 
 from xvm import xvm2sup
