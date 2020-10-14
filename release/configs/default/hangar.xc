@@ -34,6 +34,9 @@
     // true - show widget "Daily Quests" in the hangar.
     // true - показывать виджет "Ежедневные задачи" в ангаре.
     "showDailyQuestWidget": true,
+    // true - show banner of various events in the hangar.
+    // true - показывать баннер различных событий в ангаре.
+    "showEventBanner": true,
     // Consumables panel - show/hide the number of consumables and directives.
     // Панель снаряжения - показывать/прятать количество снаряжения и инструкций.
     "equipmentPanel": {

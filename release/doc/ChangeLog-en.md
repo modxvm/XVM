@@ -1,6 +1,14 @@
 ﻿### XVM 8.6.5
 
+  #### General
+
+  * Compatibility with World of Tanks 1.10.10.0
+
   #### Hangar
+
+  * Added option:
+
+    * `"hangar"/"showEventBanner"` — banner of various events in the hangar
 
   * Removed option:
 
