@@ -200,7 +200,7 @@ def handleLazyChannelCtlInited(base, self, event):
 # hide premium vehicle on the background in the hangar
 @overrideMethod(HeroTank, 'recreateVehicle')
 def recreateVehicle(base, self, typeDescriptor=None, state=ModelStates.UNDAMAGED, callback=None):
-    if not config.get('hangar/showPromoPremVehicle', True) and not self.isEvent:
+    if not config.get('hangar/showPromoPremVehicle', True):
         return
     base(self, typeDescriptor, state, callback)
 

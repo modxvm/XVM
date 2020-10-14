@@ -64,7 +64,7 @@ package com.xvm.vehiclemarkers.ui
 
         override public function setVehicleInfo(vClass:String, vIconSource:String, vType:String, vLevel:int,
             pFullName:String, pName:String, pClan:String, pRegion:String,
-            maxHealth:int, entityName:String, hunt:Boolean, squadIndex:int, locSecString:String, _isWhiteTiger:Boolean):void
+            maxHealth:int, entityName:String, hunt:Boolean, squadIndex:int, locSecString:String):void
         {
             super.setVehicleInfo.apply(this, arguments);
             vehicleIconName = vIconSource.substr(vIconSource.lastIndexOf("/") + 1).replace(".png", "");

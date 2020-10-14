@@ -309,7 +309,7 @@ class Battle(object):
             (newHealth, aInfo, attackReasonID) = value
             attackerID = aInfo.vehicleID if aInfo is not None else -1
             self.onVehicleHealthChanged(vehicleID, newHealth, attackerID, attackReasonID)
-        elif eventID == FEEDBACK_EVENT_ID.ENTITY_IN_FOCUS:
+        elif eventID == FEEDBACK_EVENT_ID.VEHICLE_IN_FOCUS:
             self.targetVehicleID = vehicleID
             if self.updateTargetCallbackID:
                 BigWorld.cancelCallback(self.updateTargetCallbackID)
