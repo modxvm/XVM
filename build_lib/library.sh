@@ -20,7 +20,7 @@ build_as3_swf(){
         opt="-compiler.optimize=true -compiler.verbose-stacktraces=false -compiler.debug=false"
     fi
     if [ "$ASSDK_TYPE" == "royale" ]; then
-        "$XVMBUILD_MXMLC_FILEPATH" -targets=SWF -target-player $AS_VERSION_PLAYER -swf-version $AS_VERSION_SWF $opt "$@"
+        "$XVMBUILD_MXMLC_FILEPATH" -targets=SWF -target-player $AS_VERSION_PLAYER -swf-version $AS_VERSION_SWF -load-config $XVMBUILD_ROYALECONFIG_PATH $opt "$@"
     else
         "$XVMBUILD_MXMLC_FILEPATH" -target-player $AS_VERSION_PLAYER -swf-version $AS_VERSION_SWF $opt "$@"
     fi
@@ -28,7 +28,7 @@ build_as3_swf(){
 
 build_as3_swc(){
     if [ "$ASSDK_TYPE" == "royale" ]; then
-        "$XVMBUILD_COMPC_FILEPATH" -targets=SWF -target-player $AS_VERSION_PLAYER -swf-version $AS_VERSION_SWF "$@"
+        "$XVMBUILD_COMPC_FILEPATH" -targets=SWF -target-player $AS_VERSION_PLAYER -swf-version $AS_VERSION_SWF -load-config $XVMBUILD_ROYALECONFIG_PATH "$@"
     else
         "$XVMBUILD_COMPC_FILEPATH" -target-player $AS_VERSION_PLAYER -swf-version $AS_VERSION_SWF "$@"
     fi
@@ -249,6 +249,9 @@ detect_actionscript_sdk(){
             wget --quiet "https://github.com/nexussays/playerglobal/raw/master/$playerglobalver/playerglobal.swc" --output-document="$PLAYERGLOBAL_HOME/$playerglobalver/playerglobal.swc"
         fi
     done
+
+    # set roayle config path
+    export XVMBUILD_ROYALECONFIG_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/royale_toolchain/xvm-config.xml"
 }
 
 detect_java(){
