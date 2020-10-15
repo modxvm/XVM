@@ -15,7 +15,7 @@
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
-    <class path="wg\battleVehicleMarkersApp" />
+    <class path="wg\battle_ui\royale" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -76,7 +76,7 @@
   </library>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="wg\battleVehicleMarkersApp_links\$AppLinks.as" />
+    <compile path="wg\battle_ui\royale\$AppLinks.as" />
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
@@ -89,7 +89,7 @@
   <!-- Executed before build -->
   <preBuildCommand />
   <!-- Executed after build -->
-  <postBuildCommand alwaysRun="True">bash .build-wg_vm_ui.sh</postBuildCommand>
+  <postBuildCommand alwaysRun="True">bash .build-wg_battle_royale_ui.sh</postBuildCommand>
   <!-- Other project options -->
   <options>
     <option showHiddenPaths="False" />
