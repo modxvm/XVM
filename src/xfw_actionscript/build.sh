@@ -26,15 +26,13 @@ PATH="$currentdir"/../../build/bin/msil/:$PATH
 mkdir -p "$currentdir/../../~output/xfw/swf/"
 
 projects="
-    wg_shared
-    wg_lobby
-    wg_battle
+    wg_lobby_ui
     wg_battle_classic_ui
     wg_battle_epicbattle_ui
     wg_battle_epicrandom_ui
     wg_battle_ranked_ui
     wg_battle_royale_ui
-    wg_vm
+    wg_vm_ui
     xfw_shared
     xfw
 "

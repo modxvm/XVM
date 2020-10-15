@@ -92,7 +92,7 @@ package com.xfw.infrastructure
                 }
             }
 
-            App.containerMgr.loader.addEventListener(LoaderEvent.VIEW_LOADED, onViewLoaded);
+            mgr.loader.addEventListener(LoaderEvent.VIEW_LOADED, onViewLoaded);
         }
 
         private function onViewLoaded(e:LoaderEvent):void

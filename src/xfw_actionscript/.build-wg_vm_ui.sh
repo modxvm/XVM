@@ -26,10 +26,14 @@ source "$currentdir"/../../build_lib/library.sh
 detect_os
 detect_actionscript_sdk
 
-class="App"
+class="\$AppLinks"
 build_as3_swc \
-    -source-path wg/battleVehicleMarkersApp \
     -source-path wg/battleVehicleMarkersApp_links \
     -source-path wg/battleVehicleMarkersApp_ui/* \
-    -output ../../~output/xfw/swc/wg_vm.swc \
+    -external-library-path+=../wg_swc/common-1.0-SNAPSHOT.swc \
+    -external-library-path+=../wg_swc/common_i18n_library-1.0-SNAPSHOT.swc \
+    -external-library-path+=../wg_swc/base_app-1.0-SNAPSHOT.swc \
+    -external-library-path+=../wg_swc/gui_base-1.0-SNAPSHOT.swc \
+    -external-library-path+=../wg_swc/gui_battle-1.0-SNAPSHOT.swc \
+    -output ../../~output/xfw/swc/wg_vm_ui.swc \
     -include-classes $class

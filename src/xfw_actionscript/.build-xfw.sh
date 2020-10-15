@@ -28,7 +28,9 @@ class="com.xfw.XfwView"
 build_as3_swc \
     -inline \
     -source-path xfw \
-    -external-library-path+=../../~output/xfw/swc/wg_lobby.swc \
+    -external-library-path+=../wg_swc/common-1.0-SNAPSHOT.swc \
+    -external-library-path+=../wg_swc/base_app-1.0-SNAPSHOT.swc \
+    -external-library-path+=../wg_swc/gui_base-1.0-SNAPSHOT.swc \
     -include-libraries+=../../~output/xfw/swc/xfw_shared.swc \
     -output ../../~output/xfw/swc/xfw.swc \
     -include-classes $class
@@ -37,7 +39,9 @@ doc="xfw/com/xfw/XfwView.as"
 build_as3_swf \
     -inline \
     -source-path xfw \
-    -external-library-path+=../../~output/xfw/swc/wg_lobby.swc \
+    -external-library-path+=../wg_swc/common-1.0-SNAPSHOT.swc \
+    -external-library-path+=../wg_swc/base_app-1.0-SNAPSHOT.swc \
+    -external-library-path+=../wg_swc/gui_base-1.0-SNAPSHOT.swc \
     -include-libraries+=../../~output/xfw/swc/xfw_shared.swc \
     -output ../../~output/xfw/swf/xfw.swf \
     $doc

@@ -72,7 +72,7 @@
   </library>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="wg\battleVehicleMarkersApp\App.as" />
+    <compile path="wg\battleVehicleMarkersApp_links\$AppLinks.as" />
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
@@ -85,7 +85,7 @@
   <!-- Executed before build -->
   <preBuildCommand />
   <!-- Executed after build -->
-  <postBuildCommand alwaysRun="True">bash .build-wg_vm.sh</postBuildCommand>
+  <postBuildCommand alwaysRun="True">bash .build-wg_vm_ui.sh</postBuildCommand>
   <!-- Other project options -->
   <options>
     <option showHiddenPaths="False" />
