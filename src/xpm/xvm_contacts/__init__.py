@@ -18,9 +18,10 @@ class VIEW(object):
 #####################################################################
 # includes
 
-from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, ViewTypes, ScopeTemplates
+from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, ScopeTemplates
 from gui.Scaleform.framework.entities.View import View
 from gui.shared.tooltips.common import ContactTooltipData
+from frameworks.wulf import WindowLayer
 from messenger.gui.Scaleform.view.lobby.ContactsListPopover import ContactsListPopover
 from messenger.gui.Scaleform.data.contacts_vo_converter import ContactConverter
 from messenger.gui.Scaleform.data.contacts_cm_handlers import PlayerContactsCMHandler
@@ -42,7 +43,7 @@ g_entitiesFactories.addSettings(ViewSettings(
     VIEW.XVM_EDIT_CONTACT_DATA_ALIAS,
     view.XvmEditContactDataView,
     None,
-    ViewTypes.COMPONENT,
+    WindowLayer.UNDEFINED,
     None,
     ScopeTemplates.DEFAULT_SCOPE))
 

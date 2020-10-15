@@ -17,7 +17,6 @@ from gui.shared import g_eventBus
 from gui.shared.gui_items.Vehicle import VEHICLE_TYPES_ORDER_INDICES
 from gui.shared.utils.requesters import REQ_CRITERIA
 from gui.DialogsInterface import showDialog
-from gui.Scaleform.framework import ViewTypes
 from gui.Scaleform.framework.managers.containers import POP_UP_CRITERIA
 from gui.Scaleform.genConsts.HANGAR_ALIASES import HANGAR_ALIASES
 from gui.Scaleform.genConsts.PROFILE_DROPDOWN_KEYS import PROFILE_DROPDOWN_KEYS
@@ -28,6 +27,7 @@ import gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers as hangar_cm_han
 from gui.Scaleform.daapi.view.lobby.hangar.carousels.basic.carousel_data_provider import CarouselDataProvider, HangarCarouselDataProvider, _SUPPLY_ITEMS
 from gui.Scaleform.daapi.view.lobby.hangar.carousels.basic.tank_carousel import TankCarousel
 from gui.Scaleform.daapi.view.common.vehicle_carousel import carousel_data_provider
+from frameworks.wulf import WindowLayer
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache
 
@@ -277,7 +277,7 @@ def updateReserve(vehCD, isReserved):
         reserve.set_reserved(vehCD, isReserved)
         as_xfw_cmd(XVM_COMMAND.AS_UPDATE_RESERVE, vehinfo.getVehicleInfoDataArray())
         app = getLobbyApp()
-        hangar = app.containerManager.getView(ViewTypes.LOBBY_SUB,
+        hangar = app.containerManager.getView(WindowLayer.SUB_VIEW,
             criteria={POP_UP_CRITERIA.VIEW_ALIAS: VIEW_ALIAS.LOBBY_HANGAR})
         #log(str(hangar))
         if hangar:

@@ -32,10 +32,11 @@ from gui.battle_control import avatar_getter
 from gui.shared import g_eventBus, EVENT_BUS_SCOPE
 from gui.shared.events import HasCtxEvent, ComponentEvent
 from gui.Scaleform.daapi.view import dialogs
-from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, ViewTypes, ScopeTemplates
+from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, ScopeTemplates
 from gui.Scaleform.framework.entities.View import View
 from gui.Scaleform.framework.entities.BaseDAAPIComponent import BaseDAAPIComponent
 from gui.Scaleform.genConsts.BATTLE_VIEW_ALIASES import BATTLE_VIEW_ALIASES
+from frameworks.wulf import WindowLayer
 from helpers import dependency
 from skeletons.gui.app_loader import IAppLoader
 
@@ -202,7 +203,7 @@ g_entitiesFactories.addSettings(ViewSettings(
     CONST.XFW_VIEW_ALIAS,
     _XfwInjectorView,
     PATH.XFW_SWF_URL,
-    ViewTypes.WINDOW,
+    WindowLayer.WINDOW,
     None,
     ScopeTemplates.GLOBAL_SCOPE))
 
@@ -210,6 +211,6 @@ g_entitiesFactories.addSettings(ViewSettings(
     CONST.XFW_COMPONENT_ALIAS,
     _XfwComponent,
     None,
-    ViewTypes.COMPONENT,
+    WindowLayer.UNDEFINED,
     None,
     ScopeTemplates.DEFAULT_SCOPE))
