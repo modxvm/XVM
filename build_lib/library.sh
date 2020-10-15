@@ -91,6 +91,7 @@ git_get_repostats(){
     else
         export REPOSITORY_BRANCH=$(git rev-parse --abbrev-ref HEAD)
     fi
+    export REPOSITORY_BRANCH=${REPOSITORY_BRANCH/\//_}
 
     if [ "$REPOSITORY_BRANCH" = "master" ]; then
         export REPOSITORY_BRANCH_FORFILE=""
