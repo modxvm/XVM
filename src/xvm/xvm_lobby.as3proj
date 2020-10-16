@@ -57,12 +57,12 @@
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
-    <element path="..\wg_swc\common-1.0-SNAPSHOT.swc" /> 
-    <element path="..\wg_swc\common_i18n_library-1.0-SNAPSHOT.swc" /> 
-    <element path="..\wg_swc\base_app-1.0-SNAPSHOT.swc" /> 
-    <element path="..\wg_swc\gui_base-1.0-SNAPSHOT.swc" /> 
-    <element path="..\wg_swc\gui_lobby-1.0-SNAPSHOT.swc" /> 
-    <element path="..\..\~output\xfw\swc\wg_lobby_ui.swc" /> 
+    <element path="..\wg_swc\common-1.0-SNAPSHOT.swc" />
+    <element path="..\wg_swc\common_i18n_library-1.0-SNAPSHOT.swc" />
+    <element path="..\wg_swc\base_app-1.0-SNAPSHOT.swc" />
+    <element path="..\wg_swc\gui_base-1.0-SNAPSHOT.swc" />
+    <element path="..\wg_swc\gui_lobby-1.0-SNAPSHOT.swc" />
+    <element path="..\..\~output\xfw\swc\wg_lobby_ui.swc" />
     <element path="..\..\~output\xfw\swc\xfw.swc" />
   </externalLibraryPaths>
   <!-- Runtime Shared Libraries -->

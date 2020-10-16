@@ -86,12 +86,12 @@ package com.xvm.battle.ranked.fullStats
             var newAtlas:String = Macros.FormatStringGlobal(cfgAtlas);
             if (currentAtlas != newAtlas)
             {
-				var atlasMgr:AtlasManager = App.atlasMgr as AtlasManager;
-				
+                var atlasMgr:AtlasManager = App.atlasMgr as AtlasManager;
+
                 var atlas:Atlas = XfwUtils.getPrivateField(atlasMgr, 'xfw_getAtlas')(newAtlas) as Atlas;
                 if (atlas == null)
                 {
-					atlasMgr.registerAtlas(newAtlas);
+                    atlasMgr.registerAtlas(newAtlas);
                     atlas = XfwUtils.getPrivateField(atlasMgr, 'xfw_getAtlas')(newAtlas) as Atlas;
                     atlas.addEventListener(AtlasEvent.ATLAS_INITIALIZED, onAtlasInitializedHandler, false, 0, true);
                 }

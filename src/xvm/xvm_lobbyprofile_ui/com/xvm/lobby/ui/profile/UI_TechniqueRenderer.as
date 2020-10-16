@@ -119,8 +119,8 @@ package com.xvm.lobby.ui.profile
                         var vdossier:VehicleDossier = Dossier.getVehicleDossier(data.id, tech.accountDBID);
                         if (vdossier)
                         {
-							//Hack access to the private field
-							var dataAsterisk:* = data;
+                            //Hack access to the private field
+                            var dataAsterisk:* = data;
                             xte = dataAsterisk.xvm_xte = vdossier.xte;
                             dataAsterisk.xvm_xte_flag &= ~0x01;
                         }

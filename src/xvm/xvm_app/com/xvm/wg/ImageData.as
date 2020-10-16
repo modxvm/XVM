@@ -130,7 +130,7 @@ package com.xvm.wg
         private function onLoaderCompleteHandler(param1:Event) : void
         {
             this.removeLoaderListeners();
-            App.utils.asserter.assert(this._loader.contentLoaderInfo.contentType != CONTENT_TYPE_SWF,"Content loader is not image: " + this._source);
+            App.utils.asserter.assert(this._loader.contentLoaderInfo.contentType != CONTENT_TYPE_SWF, "Content loader is not image: " + this._source);
             var _loc2_:BitmapData = Bitmap(this._loader.content).bitmapData;
             this._weakBitmapData = new WeakRef(_loc2_, true);
             this._size = _loc2_.width * _loc2_.height * BYTE_PER_PIXEL;

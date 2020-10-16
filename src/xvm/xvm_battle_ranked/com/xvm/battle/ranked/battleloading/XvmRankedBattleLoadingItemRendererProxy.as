@@ -4,7 +4,7 @@
  */
 package com.xvm.battle.ranked.battleloading
 {
-	import com.xfw.XfwUtils;
+    import com.xfw.XfwUtils;
     import com.xvm.battle.shared.battleloading.XvmBattleLoadingItemRendererProxyBase;
     import net.wg.gui.battle.battleloading.renderers.BasePlayerItemRenderer;
     import net.wg.gui.battle.battleloading.renderers.BaseRendererContainer;

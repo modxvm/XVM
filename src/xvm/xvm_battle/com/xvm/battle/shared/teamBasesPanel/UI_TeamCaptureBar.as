@@ -38,9 +38,9 @@ package com.xvm.battle.shared.teamBasesPanel
 
         public function UI_TeamCaptureBar()
         {
-			var thisAsterisk: * = this;
-			thisAsterisk.EXIT_TWEEN_Y -= HIDE_ICONS_HACK_OFFSET_Y;
-			
+            var thisAsterisk: * = this;
+            thisAsterisk.EXIT_TWEEN_Y -= HIDE_ICONS_HACK_OFFSET_Y;
+
             //Logger.add("UI_TeamCaptureBar()");
             super();
 

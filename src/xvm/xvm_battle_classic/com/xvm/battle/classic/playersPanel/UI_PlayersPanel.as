@@ -72,13 +72,13 @@ package com.xvm.battle.classic.playersPanel
         {
             Logger.add("UI_PlayersPanel()");
             super();
-			
-			//HACK: access to the private const
-			var ppLeft:* = PlayersPanelListLeft;
-			ppLeft.LINKAGE = XVM_PLAYERS_PANEL_LIST_ITEM_LEFT_LINKAGE;
-			
-			//HACK: access to the private const
-			var ppRight:* = PlayersPanelListRight;
+
+            //HACK: access to the private const
+            var ppLeft:* = PlayersPanelListLeft;
+            ppLeft.LINKAGE = XVM_PLAYERS_PANEL_LIST_ITEM_LEFT_LINKAGE;
+
+            //HACK: access to the private const
+            var ppRight:* = PlayersPanelListRight;
             ppRight.LINKAGE = XVM_PLAYERS_PANEL_LIST_ITEM_RIGHT_LINKAGE;
 
 
@@ -106,8 +106,8 @@ package com.xvm.battle.classic.playersPanel
             listLeft.addEventListener(MouseEvent.ROLL_OVER, onListRollOverHandler, false, 0, true);
             listLeft.addEventListener(MouseEvent.ROLL_OUT, onListRollOutHandler, false, 0, true);
             listLeft.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMoveHandler, false, 0, true);
-            
-			listRight.addEventListener(MouseEvent.ROLL_OVER, onListRollOverHandler, false, 0, true);
+
+            listRight.addEventListener(MouseEvent.ROLL_OVER, onListRollOverHandler, false, 0, true);
             listRight.addEventListener(MouseEvent.ROLL_OUT, onListRollOutHandler, false, 0, true);
             listRight.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMoveHandler, false, 0, true);
         }
@@ -393,10 +393,10 @@ package com.xvm.battle.classic.playersPanel
             var newAtlas:String = Macros.FormatStringGlobal(cfgAtlas);
             if (currentAtlas != newAtlas)
             {
-				var atlasMgr:AtlasManager = App.atlasMgr as AtlasManager;
+                var atlasMgr:AtlasManager = App.atlasMgr as AtlasManager;
                 var atlas:Atlas = XfwUtils.getPrivateField(atlasMgr , 'xfw_getAtlas')(newAtlas);
-				
-				if (atlas == null)
+
+                if (atlas == null)
                 {
                     atlasMgr.registerAtlas(newAtlas);
                     atlas = XfwUtils.getPrivateField(atlasMgr , 'xfw_getAtlas')(newAtlas);

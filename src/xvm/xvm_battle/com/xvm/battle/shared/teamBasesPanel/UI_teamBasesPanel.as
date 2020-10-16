@@ -15,7 +15,7 @@ package com.xvm.battle.shared.teamBasesPanel
 
     public class UI_teamBasesPanel extends teamBasesPanelUI
     {
-		private var DEFAULT_RENDERER_LENGTH:Number = 0;
+        private var DEFAULT_RENDERER_LENGTH:Number = 0;
         private var DEFAULT_CAPTURE_BAR_LINKAGE:String = Linkages.CAPTURE_BAR_LINKAGE;
         private var XVM_CAPTURE_BAR_LINKAGE:String = getQualifiedClassName(UI_TeamCaptureBar);
         private var DEFAULT_Y:Number;
@@ -24,9 +24,9 @@ package com.xvm.battle.shared.teamBasesPanel
         {
             //Logger.add("UI_teamBasesPanel()");
             super();
-			
-			DEFAULT_RENDERER_LENGTH = XfwUtils.getPrivateField(this, 'xfw_RENDERER_HEIGHT');
-			
+
+            DEFAULT_RENDERER_LENGTH = XfwUtils.getPrivateField(this, 'xfw_RENDERER_HEIGHT');
+
             // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
             _init();
         }
@@ -78,29 +78,29 @@ package com.xvm.battle.shared.teamBasesPanel
             //Xvm.swfProfilerBegin("UI_teamBasesPanel.update()");
             try
             {
-				//HACK: access to const field
-				var linkagesAsterisk:* = Linkages;
-				
-				//HACK: modify private field
-				var thisAsterisk:* = this;
-				
+                //HACK: access to const field
+                var linkagesAsterisk:* = Linkages;
+
+                //HACK: modify private field
+                var thisAsterisk:* = this;
+
                 if (Macros.FormatBooleanGlobal(Config.config.captureBar.enabled, true))
                 {
-					//HACK: access to const field
+                    //HACK: access to const field
                     linkagesAsterisk.CAPTURE_BAR_LINKAGE = XVM_CAPTURE_BAR_LINKAGE;
                     y = Macros.FormatNumberGlobal(Config.config.captureBar.y, DEFAULT_Y);
-					
-					//HACK: modify private field
+
+                    //HACK: modify private field
                     thisAsterisk.xfw_RENDERER_HEIGHT = Macros.FormatNumberGlobal(Config.config.captureBar.distanceOffset, 0) + DEFAULT_RENDERER_LENGTH;
                 }
                 else
                 {
-					//HACK: access to const field
+                    //HACK: access to const field
                     linkagesAsterisk.CAPTURE_BAR_LINKAGE = DEFAULT_CAPTURE_BAR_LINKAGE;
-                    
-					y = DEFAULT_Y;
-					
-					//HACK: modify private field
+
+                    y = DEFAULT_Y;
+
+                    //HACK: modify private field
                     thisAsterisk.xfw_RENDERER_HEIGHT = DEFAULT_RENDERER_LENGTH;
                 }
                 // TODO: The game crashes on replay of EpicRandom when xfw_updatePositions() is called

@@ -10,7 +10,7 @@ package com.xvm.battle.classic.fullStats
     import net.wg.gui.battle.interfaces.*;
     import net.wg.gui.battle.views.questProgress.interfaces.IQuestProgressViewUpdatable;
     import net.wg.infrastructure.events.*;
-	import net.wg.infrastructure.helpers.statisticsDataController.BattleStatisticDataController;
+    import net.wg.infrastructure.helpers.statisticsDataController.BattleStatisticDataController;
     import net.wg.infrastructure.helpers.statisticsDataController.intarfaces.IBattleComponentDataController;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.data.constants.generated.*;
@@ -40,13 +40,13 @@ package com.xvm.battle.classic.fullStats
         {
             var fullStats:DisplayObject = page.fullStats as DisplayObject;
             var idx:int = page.getChildIndex(fullStats);
-            
-			var bsdController:BattleStatisticDataController = XfwUtils.getPrivateField(page, 'xfw_battleStatisticDataController');
-			var qpw:Vector.<IQuestProgressViewUpdatable> = XfwUtils.getPrivateField(bsdController, 'xfw_questProgressViews');
-			var cController:Vector.<IBattleComponentDataController> = XfwUtils.getPrivateField(bsdController, 'xfw_componentControllers');
-		
+
+            var bsdController:BattleStatisticDataController = XfwUtils.getPrivateField(page, 'xfw_battleStatisticDataController');
+            var qpw:Vector.<IQuestProgressViewUpdatable> = XfwUtils.getPrivateField(bsdController, 'xfw_questProgressViews');
+            var cController:Vector.<IBattleComponentDataController> = XfwUtils.getPrivateField(bsdController, 'xfw_componentControllers');
+
             var qidx:int = qpw.indexOf((fullStats as IFullStats).getStatsProgressView());
-			
+
             page.unregisterComponent(BATTLE_VIEW_ALIASES.FULL_STATS);
             cController.splice(cController.indexOf(page.fullStats), 1);
             page.removeChild(fullStats);

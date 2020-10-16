@@ -13,7 +13,7 @@ package com.xvm.battle.ranked.fullStats
     import net.wg.gui.battle.ranked.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
-	import net.wg.infrastructure.helpers.statisticsDataController.BattleStatisticDataController;
+    import net.wg.infrastructure.helpers.statisticsDataController.BattleStatisticDataController;
     import net.wg.infrastructure.helpers.statisticsDataController.intarfaces.IBattleComponentDataController;
 
     public class RankedFullStatsXvmView extends XvmViewBase
@@ -40,14 +40,14 @@ package com.xvm.battle.ranked.fullStats
         {
             var fullStats:DisplayObject = page.fullStats as DisplayObject;
             var idx:int = page.getChildIndex(fullStats);
-			
-			var bsdController:BattleStatisticDataController = XfwUtils.getPrivateField(page, 'xfw_battleStatisticDataController');
-			var qpw:Vector.<IQuestProgressViewUpdatable> = XfwUtils.getPrivateField(bsdController, 'xfw_questProgressViews');
-			var cController:Vector.<IBattleComponentDataController> = XfwUtils.getPrivateField(bsdController, 'xfw_componentControllers');
-			
+
+            var bsdController:BattleStatisticDataController = XfwUtils.getPrivateField(page, 'xfw_battleStatisticDataController');
+            var qpw:Vector.<IQuestProgressViewUpdatable> = XfwUtils.getPrivateField(bsdController, 'xfw_questProgressViews');
+            var cController:Vector.<IBattleComponentDataController> = XfwUtils.getPrivateField(bsdController, 'xfw_componentControllers');
+
             var qidx:int = qpw.indexOf((fullStats as IFullStats).getStatsProgressView());
             page.unregisterComponent(BATTLE_VIEW_ALIASES.FULL_STATS);
-			cController.splice(cController.indexOf(page.fullStats), 1);
+            cController.splice(cController.indexOf(page.fullStats), 1);
             page.removeChild(fullStats);
             var component:UI_RankedFullStats = new UI_RankedFullStats();
             component.x = fullStats.x;

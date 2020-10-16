@@ -123,7 +123,7 @@ package com.xvm.lobby.ui.limits
                             if (goldContent.bounds.width < minWidth)
                             {
                                 goldContent.bounds.width = minWidth;
-                                goldContent.dispatchEvent(new HeaderEvents(HeaderEvents.HBC_SIZE_UPDATED, goldContent.bounds.width, XfwUtils.getPrivateField(goldContent,"xfw_leftPadding"), XfwUtils.getPrivateField(goldContent,"xfw_rightPadding")));
+                                goldContent.dispatchEvent(new HeaderEvents(HeaderEvents.HBC_SIZE_UPDATED, goldContent.bounds.width, XfwUtils.getPrivateField(goldContent, "xfw_leftPadding"), XfwUtils.getPrivateField(goldContent, "xfw_rightPadding")));
                             }
                         }
                     }
@@ -145,7 +145,7 @@ package com.xvm.lobby.ui.limits
                             if (freeXpContent.bounds.width < minWidth)
                             {
                                 freeXpContent.bounds.width = minWidth;
-                                freeXpContent.dispatchEvent(new HeaderEvents(HeaderEvents.HBC_SIZE_UPDATED, freeXpContent.bounds.width, XfwUtils.getPrivateField(freeXpContent,"xfw_leftPadding"), XfwUtils.getPrivateField(freeXpContent,"xfw_rightPadding")));
+                                freeXpContent.dispatchEvent(new HeaderEvents(HeaderEvents.HBC_SIZE_UPDATED, freeXpContent.bounds.width, XfwUtils.getPrivateField(freeXpContent, "xfw_leftPadding"), XfwUtils.getPrivateField(freeXpContent, "xfw_rightPadding")));
                             }
                         }
                     }
@@ -167,7 +167,7 @@ package com.xvm.lobby.ui.limits
                             if (crystalContent.bounds.width < minWidth)
                             {
                                 crystalContent.bounds.width = minWidth;
-                                crystalContent.dispatchEvent(new HeaderEvents(HeaderEvents.HBC_SIZE_UPDATED, crystalContent.bounds.width, XfwUtils.getPrivateField(crystalContent,"xfw_leftPadding"), XfwUtils.getPrivateField(crystalContent, "xfw_rightPadding")));
+                                crystalContent.dispatchEvent(new HeaderEvents(HeaderEvents.HBC_SIZE_UPDATED, crystalContent.bounds.width, XfwUtils.getPrivateField(crystalContent, "xfw_leftPadding"), XfwUtils.getPrivateField(crystalContent, "xfw_rightPadding")));
                             }
                         }
                     }

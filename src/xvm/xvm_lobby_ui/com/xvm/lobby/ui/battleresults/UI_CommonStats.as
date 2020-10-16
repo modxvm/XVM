@@ -31,7 +31,7 @@ package com.xvm.lobby.ui.battleresults
     import net.wg.gui.lobby.battleResults.data.IconEfficiencyTooltipData;
     import net.wg.gui.lobby.battleResults.data.PersonalDataVO;
     import net.wg.gui.lobby.battleResults.data.TeamMemberItemVO;
-	import net.wg.gui.lobby.questsWindow.SubtasksList;
+    import net.wg.gui.lobby.questsWindow.SubtasksList;
     import scaleform.clik.constants.InvalidationType;
     import scaleform.clik.events.ListEvent;
     import scaleform.gfx.TextFieldEx;
@@ -301,7 +301,7 @@ package com.xvm.lobby.ui.battleresults
 
         private function compactQuests():void
         {
-		    var progressReport:SubtasksList = XfwUtils.getPrivateField(this, "xfw_progressReport"); //requires swf patch
+            var progressReport:SubtasksList = XfwUtils.getPrivateField(this, "xfw_progressReport"); //requires swf patch
             if (progressReport)
             {
                 progressReport.linkage = getQualifiedClassName(UI_BR_SubtaskComponent);

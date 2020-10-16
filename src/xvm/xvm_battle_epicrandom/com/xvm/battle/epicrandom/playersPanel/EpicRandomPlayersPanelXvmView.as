@@ -10,7 +10,7 @@ package com.xvm.battle.epicrandom.playersPanel
     import net.wg.gui.battle.epicRandom.views.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
-	import net.wg.infrastructure.helpers.statisticsDataController.BattleStatisticDataController;
+    import net.wg.infrastructure.helpers.statisticsDataController.BattleStatisticDataController;
     import net.wg.infrastructure.helpers.statisticsDataController.intarfaces.IBattleComponentDataController;
 
     public class EpicRandomPlayersPanelXvmView extends XvmViewBase
@@ -37,10 +37,10 @@ package com.xvm.battle.epicrandom.playersPanel
         {
             page.unregisterComponent(BATTLE_VIEW_ALIASES.PLAYERS_PANEL);
 
-			var bsdController:BattleStatisticDataController = XfwUtils.getPrivateField(page, 'xfw_battleStatisticDataController')
-			var cController:Vector.<IBattleComponentDataController> = XfwUtils.getPrivateField(bsdController, 'xfw_componentControllers');
-			cController.splice(cController.indexOf(page.epicRandomPlayersPanel), 1);
-            
+            var bsdController:BattleStatisticDataController = XfwUtils.getPrivateField(page, 'xfw_battleStatisticDataController')
+            var cController:Vector.<IBattleComponentDataController> = XfwUtils.getPrivateField(bsdController, 'xfw_componentControllers');
+            cController.splice(cController.indexOf(page.epicRandomPlayersPanel), 1);
+
             var idx:int = page.getChildIndex(page.epicRandomPlayersPanel);
             page.removeChild(page.epicRandomPlayersPanel);
             var component:UI_EpicRandomPlayersPanel = new UI_EpicRandomPlayersPanel();
@@ -49,7 +49,7 @@ package com.xvm.battle.epicrandom.playersPanel
             component.visible = page.epicRandomPlayersPanel.visible;
             page.epicRandomPlayersPanel = component;
             page.addChildAt(page.epicRandomPlayersPanel, idx);
-			bsdController.registerComponentController(page.epicRandomPlayersPanel);
+            bsdController.registerComponentController(page.epicRandomPlayersPanel);
             XfwUtils.getPrivateField(page,'xfw_registerComponent')(page.epicRandomPlayersPanel, BATTLE_VIEW_ALIASES.PLAYERS_PANEL);
         }
     }

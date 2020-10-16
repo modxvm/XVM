@@ -7,7 +7,7 @@ package com.xvm.lobby.contacts
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-	import net.wg.gui.lobby.profile.LinkageUtils;
+    import net.wg.gui.lobby.profile.LinkageUtils;
     import net.wg.gui.messenger.*;
     import net.wg.gui.messenger.data.*;
     import net.wg.infrastructure.events.*;
@@ -69,8 +69,8 @@ package com.xvm.lobby.contacts
         {
             page.treeComponent.list.itemRendererName =  "com.xvm.lobby.ui.contacts::UI_ContactsTreeItemRenderer";
             Xfw.addCommandListener(CMD_XVM_CONTACTS_AS_EDIT_CONTACT_DATA, editContactData);
-			
-			var linkageUtils:LinkageUtils = XfwUtils.getPrivateField(page, "xfw_linkageUtils");
+
+            var linkageUtils:LinkageUtils = XfwUtils.getPrivateField(page, "xfw_linkageUtils");
             linkageUtils.addEntity(XVM_EDIT_CONTACT_DATA_ALIAS, "com.xvm.lobby.ui.contacts::UI_EditContactDataView");
         }
 
