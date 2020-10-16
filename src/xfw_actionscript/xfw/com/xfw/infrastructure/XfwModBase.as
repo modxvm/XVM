@@ -8,6 +8,7 @@ package com.xfw.infrastructure
     import flash.display.*;
     import flash.events.*;
     import flash.utils.*;
+    import net.wg.data.constants.generated.LAYER_NAMES;
     import net.wg.gui.components.containers.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
@@ -76,26 +77,20 @@ package com.xfw.infrastructure
         private function postInit():void
         {
             // view can be already loaded
-            // TODO: 1.10.1
-            /*
             var mgr:ContainerManagerBase = App.containerMgr as ContainerManagerBase;
-            for each (var c:ISimpleManagedContainer in mgr._containersMap)
+            var vc:MainViewContainer = mgr.getContainer(LAYER_NAMES.LAYER_ORDER.indexOf(LAYER_NAMES.VIEWS)) as MainViewContainer;
+            if (vc != null)
             {
-                var vc:MainViewContainer = c as MainViewContainer;
-                if (vc != null)
+                var n:int = vc.numChildren;
+                for (var i:int = 0; i < n; ++i)
                 {
-                    var n:int = vc.numChildren;
-                    for (var i:int = 0; i < n; ++i)
-                    {
-                        var view:IView = vc.getChildAt(i) as IView;
-                        if (view != null)
-                            processView(view, view.isDAAPIInited);
-                    }
+                    var view:IView = vc.getChildAt(i) as IView;
+                    if (view != null)
+                        processView(view, view.isDAAPIInited);
                 }
             }
 
             App.containerMgr.loader.addEventListener(LoaderEvent.VIEW_LOADED, onViewLoaded);
-            */
         }
 
         private function onViewLoaded(e:LoaderEvent):void
