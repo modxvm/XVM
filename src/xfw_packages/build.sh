@@ -57,7 +57,6 @@ libraries=(
   'xfw_ping'
   'xfw_wotfix_crashes'
   'xfw_wotfix_hidpi'
-  'xfw_wwise'
 )
 
 

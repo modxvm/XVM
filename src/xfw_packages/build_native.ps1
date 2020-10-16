@@ -32,7 +32,6 @@ $projects_32=@(
     "xfw_ping"
     "xfw_wotfix_crashes"
     "xfw_wotfix_hidpi"
-    "xfw_wwise"
 )
 
 
@@ -43,7 +42,6 @@ $projects_64=@(
     "xfw_ping"
     "xfw_wotfix_crashes"
     "xfw_wotfix_hidpi"
-    "xfw_wwise"
 )
 
 function Download-DevelPackage()
