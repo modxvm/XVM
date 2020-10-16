@@ -152,25 +152,22 @@ package com.xfw
             return o == null ? null : XfwUtils.jsonclone(o);
         }
 
-		public static function getPrivateField(obj:*, field:String):*
-		{
-			var result:* = null;
-			if (obj == null) {
-				Logger.add("XfwUtils::getPrivateField -> input object is null");
+        public static function getPrivateField(obj:*, field:String):*
+        {
+            var result:* = null;
+            if (obj == null) {
+                Logger.add("XfwUtils::getPrivateField -> input object is null, field=" + field);
                 return result;
-			}
-            Logger.add("XfwUtils::getPrivateField -> " + flash.utils.getQualifiedClassName(obj) + ", " + field);
+            }
 
-			result = obj[field];
+            result = obj[field];
 
-			if (!result){
-				Logger.add("    -- FAILED");
-			}
-			else{
-				Logger.add("    -- OK");
-			}
-			return result;
-		}
+            if (result === undefined){
+                Logger.add("XfwUtils::getPrivateField -> " + flash.utils.getQualifiedClassName(obj) + ", " + field + " -- FAILED");
+            }
+
+            return result;
+        }
 
         /**
          * Deep copy
