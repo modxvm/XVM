@@ -21,7 +21,7 @@ package com.xvm.lobby.ui.contacts
         override public function set data(value:ContactItemVO):void
         {
             super.data = value;
-            xvm_contact_data = value.xvm_contact_data;
+            xvm_contact_data = XfwUtils.getPrivateField(value,"xvm_contact_data");
         }
 
         override public function applyLayout():void

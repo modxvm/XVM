@@ -10,6 +10,8 @@ package com.xvm.battle.epicrandom.battleloading
     import net.wg.gui.battle.epicRandom.views.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
+	import net.wg.infrastructure.helpers.statisticsDataController.BattleStatisticDataController;
+	import net.wg.infrastructure.helpers.statisticsDataController.intarfaces.IBattleComponentDataController;
 
     public class EpicRandomBattleLoadingXvmView extends XvmViewBase
     {
@@ -34,7 +36,10 @@ package com.xvm.battle.epicrandom.battleloading
         private function init():void
         {
             page.unregisterComponent(BATTLE_VIEW_ALIASES.BATTLE_LOADING);
-            page.xfw_battleStatisticDataController.xfw_componentControllers.splice(page.xfw_battleStatisticDataController.xfw_componentControllers.indexOf(page.battleLoading), 1);
+			var bsdc:BattleStatisticDataController = XfwUtils.getPrivateField(page, 'xfw_battleStatisticDataController');
+			var cc:Vector.<IBattleComponentDataController> =XfwUtils.getPrivateField(bsdc, 'xfw_componentControllers');
+			
+            cc.splice(cc.indexOf(page.battleLoading), 1);
             var idx:int = page.getChildIndex(page.battleLoading);
             page.removeChild(page.battleLoading);
             var component:UI_EpicRandomBattleLoading = new UI_EpicRandomBattleLoading();
@@ -43,8 +48,8 @@ package com.xvm.battle.epicrandom.battleloading
             component.setCompVisible(page.battleLoading.visible);
             page.battleLoading = component;
             page.addChildAt(page.battleLoading, idx);
-            page.xfw_battleStatisticDataController.registerComponentController(page.battleLoading);
-            page.xfw_registerComponent(page.battleLoading, BATTLE_VIEW_ALIASES.BATTLE_LOADING);
+            bsdc.registerComponentController(page.battleLoading);
+            XfwUtils.getPrivateField(page,'xfw_registerComponent')(page.battleLoading, BATTLE_VIEW_ALIASES.BATTLE_LOADING);
         }
     }
 }

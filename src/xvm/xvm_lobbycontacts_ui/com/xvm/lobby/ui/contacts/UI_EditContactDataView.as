@@ -61,7 +61,7 @@ package com.xvm.lobby.ui.contacts
             return; // disable original behavior
         }
 
-        override public function as_setUserProps(value:Object):void
+        public function as_setUserProps_xvm(value:Object):void
         {
             //Logger.addObject(value, 2, "as_setUserProps");
 

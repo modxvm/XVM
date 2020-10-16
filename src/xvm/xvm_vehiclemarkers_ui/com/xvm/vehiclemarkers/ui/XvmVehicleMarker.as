@@ -77,9 +77,9 @@ package com.xvm.vehiclemarkers.ui
             }
         }
 
-        override public function settingsUpdate(param1:int):void
+        override public function settingsUpdate(param0:int):void
         {
-            super.settingsUpdate(param1);
+            super.settingsUpdate(param0);
             var playerState:VOPlayerState = BattleState.get(vehicleID);
             if (playerState)
             {
@@ -187,7 +187,7 @@ package com.xvm.vehiclemarkers.ui
         /**
          * Allow only one updateMarkerSettings() call from the original code (to hide controls)
          */
-        override public final function xvm_active():Boolean
+        public final function xvm_active():Boolean
         {
             if (!_xvm_active_called)
             {
@@ -315,7 +315,6 @@ package com.xvm.vehiclemarkers.ui
             }
         }
 
-        [Inline]
         private final function setupVehicleIcon(isAlly:Boolean):void
         {
             var atlasManager:RootSWFAtlasManager = RootSWFAtlasManager.instance;
@@ -323,13 +322,14 @@ package com.xvm.vehiclemarkers.ui
             if (atlasManager.isAtlasInitialized(atlasName))
             {
                 RootSWFAtlasManager.instance.drawWithCenterAlign(atlasName, vehicleIconName, vehicleIcon.graphics, true, false);
-                xfw_updateIconColor();
+				
+				XfwUtils.getPrivateField(this, 'xfw_updateIconColor')();
             }
         }
 
 
         private static var _vmPlayerFrags:Number = 0;
-        [Inline]
+
         private static function updatePlayerFrags():void
         {
             if (_vmPlayerFrags == BattleState.playerFrags)

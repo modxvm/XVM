@@ -11,6 +11,7 @@ package com.xvm.lobby
     import com.xvm.types.cfg.*;
     import flash.events.*;
     import net.wg.gui.lobby.*;
+    import net.wg.gui.lobby.header.headerButtonBar.HeaderButtonsHelper;
     import net.wg.gui.lobby.header.headerButtonBar.*;
     import net.wg.gui.lobby.header.vo.*;
     import net.wg.infrastructure.events.*;
@@ -100,8 +101,10 @@ package com.xvm.lobby
                 onGraphicsRectanglesUpdateHandler(null);
 
                 var btn:HeaderButton;
+				
+				var headerButtonsHelper:HeaderButtonsHelper = XfwUtils.getPrivateField(page.header, "xfw_headerButtonsHelper");
 
-                btn = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_PREM);
+                btn = XfwUtils.getPrivateField(headerButtonsHelper, 'xfw_searchButtonById')(HeaderButtonsHelper.ITEM_ID_PREM);
                 if (btn)
                 {
                     btn.mouseEnabled = Config.config.hangar.showBuyPremiumButton;
@@ -109,7 +112,7 @@ package com.xvm.lobby
                     btn.alpha = Config.config.hangar.showBuyPremiumButton ? 1 : 0;
                 }
 
-                btn = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_PREMSHOP);
+                btn = XfwUtils.getPrivateField(headerButtonsHelper, 'xfw_searchButtonById')(HeaderButtonsHelper.ITEM_ID_PREMSHOP);
                 if (btn)
                 {
                     btn.mouseEnabled = Config.config.hangar.showPremiumShopButton;
@@ -117,7 +120,7 @@ package com.xvm.lobby
                     btn.alpha = Config.config.hangar.showPremiumShopButton ? 1 : 0;
                 }
 
-                btn = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_BATTLE_SELECTOR);
+                btn = XfwUtils.getPrivateField(headerButtonsHelper, 'xfw_searchButtonById')(HeaderButtonsHelper.ITEM_ID_BATTLE_SELECTOR);
                 if (btn)
                 {
                     btn.headerButtonData.isUseFreeSize = false;
@@ -129,9 +132,11 @@ package com.xvm.lobby
         {
             var btn:HeaderButton;
 
+			var headerButtonsHelper:HeaderButtonsHelper = XfwUtils.getPrivateField(page.header, "xfw_headerButtonsHelper");
+
             if (!Config.config.hangar.showCreateSquadButtonText)
             {
-                btn = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_SQUAD);
+                btn = XfwUtils.getPrivateField(headerButtonsHelper, 'xfw_searchButtonById')(HeaderButtonsHelper.ITEM_ID_SQUAD);
                 if (btn)
                 {
                     var ctxSquad:HBC_Squad = btn.content as HBC_Squad;
@@ -141,7 +146,7 @@ package com.xvm.lobby
 
             if (!Config.config.hangar.showBattleTypeSelectorText)
             {
-                btn = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(HeaderButtonsHelper.ITEM_ID_BATTLE_SELECTOR);
+                btn = XfwUtils.getPrivateField(headerButtonsHelper, 'xfw_searchButtonById')(HeaderButtonsHelper.ITEM_ID_BATTLE_SELECTOR);
                 if (btn)
                 {
                     var ctxBattleSelector:HBC_BattleSelector = btn.content as HBC_BattleSelector;
