@@ -299,6 +299,8 @@ detect_patch(){
 }
 
 detect_python(){
+    detect_os
+
     if [[ "$XVMBUILD_PYTHON_FILEPATH" == "" ]]; then
         if hash "python" 2>/dev/null; then
             export XVMBUILD_PYTHON_FILEPATH="python"                  #Default name of python executable
@@ -306,11 +308,14 @@ detect_python(){
         if hash "python2.7" 2>/dev/null; then
             export XVMBUILD_PYTHON_FILEPATH="python2.7"               #Installed by cygwin or *nix
         fi
-        if hash "/c/Python27/python.exe" 2>/dev/null; then
-            export XVMBUILD_PYTHON_FILEPATH="/c/Python27/python.exe"  #Windows default path
-        fi
-        if hash "/c/Software/Python/27_64/python.exe" 2>/dev/null; then
-            export XVMBUILD_PYTHON_FILEPATH="/c/Software/Python/27_64/python.exe"  #Mikhail's path
+
+        if [ "$OS" == "Windows" ]; then
+            if hash "/c/Python27/python.exe" 2>/dev/null; then
+                export XVMBUILD_PYTHON_FILEPATH="/c/Python27/python.exe"  #Windows default path
+            fi
+            if hash "/c/Software/Python/27_64/python.exe" 2>/dev/null; then
+                export XVMBUILD_PYTHON_FILEPATH="/c/Software/Python/27_64/python.exe"  #Mikhail's path
+            fi
         fi
     fi
 
