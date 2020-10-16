@@ -97,10 +97,10 @@ package com.xvm.battle.classic.playersPanel
         override protected function configUI():void
         {
             super.configUI();
-            listLeft.removeEventListener(MouseEvent.ROLL_OVER, XfwUtils.getPrivateField(this,'xfw_onListRollOverHandler'));
-            listLeft.removeEventListener(MouseEvent.ROLL_OUT, XfwUtils.getPrivateField(this,'xfw_onListRollOutHandler'));
+            listLeft.removeEventListener(MouseEvent.ROLL_OVER, XfwUtils.getPrivateField(this, 'xfw_onListRollOverHandler'));
+            listLeft.removeEventListener(MouseEvent.ROLL_OUT, XfwUtils.getPrivateField(this, 'xfw_onListRollOutHandler'));
 
-            listRight.removeEventListener(MouseEvent.ROLL_OVER, XfwUtils.getPrivateField(this,'xfw_onListRollOverHandler'));
+            listRight.removeEventListener(MouseEvent.ROLL_OVER, XfwUtils.getPrivateField(this, 'xfw_onListRollOverHandler'));
             listRight.removeEventListener(MouseEvent.ROLL_OUT, XfwUtils.getPrivateField(this, 'xfw_onListRollOutHandler'));
 
             listLeft.addEventListener(MouseEvent.ROLL_OVER, onListRollOverHandler, false, 0, true);

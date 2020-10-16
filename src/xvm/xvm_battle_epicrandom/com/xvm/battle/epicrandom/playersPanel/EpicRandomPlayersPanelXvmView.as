@@ -50,7 +50,7 @@ package com.xvm.battle.epicrandom.playersPanel
             page.epicRandomPlayersPanel = component;
             page.addChildAt(page.epicRandomPlayersPanel, idx);
             bsdController.registerComponentController(page.epicRandomPlayersPanel);
-            XfwUtils.getPrivateField(page,'xfw_registerComponent')(page.epicRandomPlayersPanel, BATTLE_VIEW_ALIASES.PLAYERS_PANEL);
+            XfwUtils.getPrivateField(page, 'xfw_registerComponent')(page.epicRandomPlayersPanel, BATTLE_VIEW_ALIASES.PLAYERS_PANEL);
         }
     }
 }

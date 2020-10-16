@@ -106,7 +106,7 @@ package com.xvm.battle.shared.teamBasesPanel
                 // TODO: The game crashes on replay of EpicRandom when xfw_updatePositions() is called
                 if (Xvm.appType != Defines.APP_TYPE_BATTLE_EPICRANDOM)
                 {
-                    XfwUtils.getPrivateField(this,'xfw_updatePositions')();
+                    XfwUtils.getPrivateField(this, 'xfw_updatePositions')();
                 }
             }
             catch (ex:Error)
