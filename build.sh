@@ -251,7 +251,6 @@ detect_patch
 detect_python
 detect_unzip
 detect_wget
-detect_actionscript_sdk
 detect_ffdec
 
 #build components
@@ -259,6 +258,7 @@ args="$*"
 args="${args:=xfw_actionscript xfw_swf xfw_packages xvm_actionscript xvm_python pack}" # default - build all
 
 if [[ " $args " =~ " xfw_actionscript " ]]; then
+    detect_actionscript_sdk
     build_xfw_actionscript
 fi
 
@@ -275,6 +275,7 @@ if [[ " $args " =~ " xvm_python " ]]; then
 fi
 
 if [[ " $args " =~ " xvm_actionscript " ]]; then
+    detect_actionscript_sdk
     build_xvm_actionscript
 fi
 
