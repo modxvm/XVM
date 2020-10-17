@@ -110,11 +110,12 @@ def totalEfficiency_updatePlayerStatus(self, **kwargs):
     if battle.isBattleTypeSupported and _player is not None and kwargs.get('isSquadMan', False):
         isPlayerVehicle = (self.vehicleID == _player.playerVehicleID)
         isPlayerInSquad |= isPlayerVehicle
-        if isPlayerInSquad:
+        if isPlayerInSquad and arenaDP.isSquadMan(vID=self.vehicleID):
             vehicles = arenaDP.getVehiclesStatsIterator()
-            fragsSquad_dict = {stats.vehicleID: stats.frags for stats in vehicles if not isPlayerVehicle and arenaDP.isSquadMan(vID=stats.vehicleID)}
+            fragsSquad_dict = {stats.vehicleID: stats.frags for stats in vehicles
+                               if (_player.playerVehicleID != stats.vehicleID) and arenaDP.isSquadMan(vID=stats.vehicleID)}
             fragsSquad = sum(fragsSquad_dict.itervalues())
-            if not isPlayerVehicle and self.vehicleID in alliesDamage:
+            if not isPlayerVehicle:
                 damagesSquad += alliesDamage[self.vehicleID]
             updateLabels.update()
 
