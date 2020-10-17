@@ -114,7 +114,7 @@ def totalEfficiency_updatePlayerStatus(self, **kwargs):
             vehicles = arenaDP.getVehiclesStatsIterator()
             fragsSquad_dict = {stats.vehicleID: stats.frags for stats in vehicles if not isPlayerVehicle and arenaDP.isSquadMan(vID=stats.vehicleID)}
             fragsSquad = sum(fragsSquad_dict.itervalues())
-            if not isPlayerVehicle:
+            if not isPlayerVehicle and self.vehicleID in alliesDamage:
                 damagesSquad += alliesDamage[self.vehicleID]
             updateLabels.update()
 
