@@ -1067,7 +1067,7 @@ def Vehicle_updateStunInfo(self):
 @registerEvent(DamagePanelMeta, 'as_setFireInVehicleS')
 def DamagePanelMeta_as_setFireInVehicleS(self, isInFire):
     global on_fire
-    if isShowDamageLog:
+    if isShowDamageLog and data.data['isAlive']:
         on_fire = 100 if isInFire else 0
         as_event(EVENTS_NAMES.ON_FIRE)
 
