@@ -29,6 +29,7 @@ from gui.Scaleform.daapi.view.battle.shared.damage_panel import DamagePanel
 from gui.Scaleform.daapi.view.battle.shared.markers2d import settings as markers2d_settings
 from gui.Scaleform.daapi.view.battle.shared.minimap.plugins import ArenaVehiclesPlugin
 from gui.Scaleform.daapi.view.battle.shared.page import SharedPage
+from gui.Scaleform.daapi.view.battle.shared.postmortem_panel import PostmortemPanel
 from gui.Scaleform.daapi.view.battle.shared.stats_exchage import BattleStatisticsDataController
 from gui.Scaleform.daapi.view.battle.shared.hint_panel.plugins import TrajectoryViewHintPlugin, SiegeIndicatorHintPlugin, PreBattleHintPlugin, RadarHintPlugin
 from helpers import dependency
@@ -246,6 +247,18 @@ def areOtherIndicatorsShown(base, self):
     if config.get('battle/battleHint/hideRadarHint'):
         return True
     base(self)
+
+@overrideMethod(PostmortemPanel, 'onDogTagKillerInPlaySound')
+def onDogTagKillerInPlaySound(base, self):
+    if not config.get('battle/showPostmortemDogTag', True):
+        return
+    base(self)
+
+@overrideMethod(PostmortemPanel, '_PostmortemPanel__onKillerDogTagSet')
+def onKillerDogTagSet(base, self, dogTagInfo):
+    if not config.get('battle/showPostmortemDogTag', True):
+        return
+    base(self, dogTagInfo)
 
 
 #####################################################################

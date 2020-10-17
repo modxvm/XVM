@@ -4,6 +4,12 @@
 
   * Compatibility with World of Tanks 1.10.1.0
 
+  #### Battle
+
+  * Added option:
+
+    * `"battle"/"showPostmortemDogTag"` — display pop-up panel with a dog tag
+
   #### Hangar
 
   * Added option:
