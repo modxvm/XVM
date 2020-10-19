@@ -1,12 +1,12 @@
 diff -Naur lobby.orig-0.orig/net/wg/data/constants/Linkages.class.asasm lobby.orig-0/net/wg/data/constants/Linkages.class.asasm
---- lobby.orig-0.orig/net/wg/data/constants/Linkages.class.asasm	2020-07-27 15:01:56.966647400 +0300
-+++ lobby.orig-0/net/wg/data/constants/Linkages.class.asasm	2020-07-27 15:14:55.684797700 +0300
-@@ -2163,7 +2163,7 @@
-  trait const QName(PackageNamespace(""), "CHART_STATISTICS_VIEW") slotid 202 type QName(PackageNamespace(""), "String") value Utf8("ChartsStatisticsView_UI") end
-  trait const QName(PackageNamespace(""), "STATISTICS_DASH_LINE_TEXT_ITEM_RENDERER") slotid 203 type QName(PackageNamespace(""), "String") value Utf8("StatisticsDashLineTextItemIRenderer_UI") end
-  trait const QName(PackageNamespace(""), "TECHNIQUE_STATISTICS_PERCENT_SIGN") slotid 204 type QName(PackageNamespace(""), "String") value Utf8("TechniqueStatisticsPercentSign_UI") end
-- trait const QName(PackageNamespace(""), "TECHNIQUE_STATISTIC_TAB") slotid 205 type QName(PackageNamespace(""), "String") value Utf8("TechniqueStatisticTab_UI") end
-+ trait slot QName(PackageNamespace(""), "TECHNIQUE_STATISTIC_TAB") slotid 205 type QName(PackageNamespace(""), "String") value Utf8("TechniqueStatisticTab_UI") end
-  trait const QName(PackageNamespace(""), "TECHNIQUE_ACHIEVEMENT_TAB") slotid 206 type QName(PackageNamespace(""), "String") value Utf8("TechniqueAchievementTab_UI") end
-  trait const QName(PackageNamespace(""), "DETAILED_STATISTICS_ROOT_UNIT") slotid 207 type QName(PackageNamespace(""), "String") value Utf8("DetailedStatisticsRootUnitUI") end
-  trait const QName(PackageNamespace(""), "DEFAULT_HELP_BTN_CONTROLLER_LNK") slotid 208 type QName(PackageNamespace(""), "String") value Utf8("net.wg.infrastructure.tutorial.helpBtnControllers.TutorialWindowHelpBtnCtrllr") end
+--- lobby.orig-0.orig/net/wg/data/constants/Linkages.class.asasm	2020-10-19 16:51:54.271406600 +0300
++++ lobby.orig-0/net/wg/data/constants/Linkages.class.asasm	2020-10-19 16:52:47.974911400 +0300
+@@ -2202,7 +2202,7 @@
+  trait const QName(PackageNamespace(""), "CHART_STATISTICS_VIEW") slotid 209 type QName(PackageNamespace(""), "String") value Utf8("ChartsStatisticsView_UI") end
+  trait const QName(PackageNamespace(""), "STATISTICS_DASH_LINE_TEXT_ITEM_RENDERER") slotid 210 type QName(PackageNamespace(""), "String") value Utf8("StatisticsDashLineTextItemIRenderer_UI") end
+  trait const QName(PackageNamespace(""), "TECHNIQUE_STATISTICS_PERCENT_SIGN") slotid 211 type QName(PackageNamespace(""), "String") value Utf8("TechniqueStatisticsPercentSign_UI") end
+- trait const QName(PackageNamespace(""), "TECHNIQUE_STATISTIC_TAB") slotid 212 type QName(PackageNamespace(""), "String") value Utf8("TechniqueStatisticTab_UI") end
++ trait slot QName(PackageNamespace(""), "TECHNIQUE_STATISTIC_TAB") slotid 212 type QName(PackageNamespace(""), "String") value Utf8("TechniqueStatisticTab_UI") end
+  trait const QName(PackageNamespace(""), "TECHNIQUE_ACHIEVEMENT_TAB") slotid 213 type QName(PackageNamespace(""), "String") value Utf8("TechniqueAchievementTab_UI") end
+  trait const QName(PackageNamespace(""), "DETAILED_STATISTICS_ROOT_UNIT") slotid 214 type QName(PackageNamespace(""), "String") value Utf8("DetailedStatisticsRootUnitUI") end
+  trait const QName(PackageNamespace(""), "DEFAULT_HELP_BTN_CONTROLLER_LNK") slotid 215 type QName(PackageNamespace(""), "String") value Utf8("net.wg.infrastructure.tutorial.helpBtnControllers.TutorialWindowHelpBtnCtrllr") end
