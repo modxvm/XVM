@@ -862,7 +862,7 @@
     "usa-A63_M46_Patton_HALL"                {"name": null, "short": null},
     "usa-A66_M103_Halloween_event"           {"name": null, "short": null},
     "usa-A68_T28_Prototype_HELL"             {"name": null, "short": null},
-    "ussr-R40_T-54_Halloween_event"          {"name": null, "short": null}
+    "ussr-R40_T-54_Halloween_event"          {"name": null, "short": null},
     /** Unused
     "china-Ch04_T34_1_training":             {"name": null, "short": null},
     "germany-G03_PzV_Panther_training":      {"name": null, "short": null},
