@@ -52,7 +52,12 @@ ATTACK_REASONS = {
     12: 'recovery',
     13: 'artillery_eq',
     14: 'bomber_eq',
-    15: 'none',
+    15: 'minefield_eq',
+    16: 'spawned_bot_explosion',
+    17: 'berserker_eq',
+    18: 'spawned_bot_ram',
+    19: 'smoke',
+    20: 'none',
     24: 'art_attack',
     25: 'air_strike'
 }
@@ -403,7 +408,8 @@ class Data(object):
     def hitShell(self, attackerID, effectsIndex, damageFactor):
         self.data['stun-duration'] = None
         self.data['attackerID'] = attackerID
-        self.data['attackReasonID'] = effectsIndex if effectsIndex in [24, 25] else 0
+        # self.data['attackReasonID'] = effectsIndex if effectsIndex in [24, 25] else 0
+        self.data['attackReasonID'] = 0
         self.data['reloadGun'] = self.timeReload(attackerID)
         self.typeShell(effectsIndex)
         self.data['damage'] = 0
