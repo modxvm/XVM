@@ -329,6 +329,8 @@ package net.wg.data.constants.generated
 
         public static const VEHICLE_PREVIEW_CREW_MEMBER:String = "vehiclePreviewCrewMember";
 
+        public static const PERSONAL_TRADE_IN_INFO:String = "personalTradeInInfo";
+
         public static const TRADE_IN:String = "tradeIn";
 
         public static const TRADE_IN_INFO:String = "tradeInInfo";
@@ -358,6 +360,36 @@ package net.wg.data.constants.generated
         public static const EVENT_BOARDS_BADGE:String = "eventBoardsBadge";
 
         public static const EVENT_BOARDS_BADGES_GROUP:String = "eventBoardsBadgesGroup";
+
+        public static const EVENT_BONUSES_INFO:String = "eventBonusesInfo";
+
+        public static const EVENT_TANK_REPAIR_INFO:String = "eventTankRepairInfo";
+
+        public static const EVENT_CREW_BOOSTER_INFO:String = "eventCrewBoosterInfo";
+
+        public static const EVENT_TANK_RENT_INFO:String = "eventTankRentInfo";
+
+        public static const EVENT_BANNER_INFO:String = "eventBannerInfo";
+
+        public static const EVENT_CAROUSEL_VEHICLE:String = "eventCarouselVehicle";
+
+        public static const EVENT_COMMANDERS_INFO:String = "eventCommandersInfo";
+
+        public static const EVENT_COMMANDER_IN_BATTLE:String = "eventCommanderInBattle";
+
+        public static const EVENT_MISSION_INFO:String = "eventMissionInfo";
+
+        public static const EVENT_SELECTOR_INFO:String = "eventSelectorInfo";
+
+        public static const EVENT_CRDITS_ERROR:String = "eventCreditsError";
+
+        public static const EVENT_TOKEN_ERROR:String = "eventTokenError";
+
+        public static const EVENT_GOLD_ERROR:String = "eventGoldError";
+
+        public static const EVENT_BAN_INFO:String = "eventBanInfo";
+
+        public static const EVENT_TOKEN_INFO:String = "eventTokenInfo";
 
         public static const OPERATION:String = "operation";
 
@@ -663,6 +695,12 @@ package net.wg.data.constants.generated
 
         public static const EVENT_PROGRESSION_COMPLETED_QUESTS_INFO:String = "EventProgressionQuestsTooltipData";
 
+        public static const HALLOWEEN_QUESTS_PREVIEW:String = "halloweenQuestsPreview";
+
+        public static const HALLOWEEN_TOKEN_BONUS:String = "halloweenTokenBonus";
+
+        public static const HALLOWEEN_NO_SUITABLE_VEHICLE_FOR_QUEST:String = "halloweenNoSuitableVechileForQuest";
+
         public static const ACHIEVEMENTS_SET:Array = [BATTLE_STATS_ACHIEVS,BATTLE_STATS_MARKS_ON_GUN_ACHIEVEMENT,ACHIEVEMENT,MARKS_ON_GUN_ACHIEVEMENT,GLOBAL_RATING,MARK_OF_MASTERY,ACHIEVEMENT_ATTR,SHOP_ACHIEVEMENT,SHOP_BADGE,REFERRAL_BADGE];
 
         public static const BOOSTERS_SET:Array = [INVENTORY_BATTLE_BOOSTER,AWARD_BATTLE_BOOSTER,EPIC_AWARD_BATTLE_BOOSTER,BATTLE_BOOSTER_BLOCK,DEFAULT_BATTLE_BOOSTER,SHOP_BATTLE_BOOSTER,BATTLE_BOOSTER_COMPARE,BOOSTERS_BOOSTER_INFO,CLAN_RESERVE_INFO,BOOSTER,SHOP_BOOSTER,BOOSTERS_QUESTS,NATION_CHANGE_BATTLE_BOOSTER];
@@ -715,7 +753,7 @@ package net.wg.data.constants.generated
 
         public static const SESSION_STATS_SET:Array = [SESSION_STATS_TANK_INFO,SESSION_STATS_EFFICIENCY_PARAM];
 
-        public static const TRADE_IN_SET:Array = [TRADE_IN_INFO,TRADE_IN_INFO_NOT_AVAILABLE,TRADE_IN_STATE_NOT_AVAILABLE];
+        public static const TRADE_IN_SET:Array = [TRADE_IN_INFO,TRADE_IN_INFO_NOT_AVAILABLE,TRADE_IN_STATE_NOT_AVAILABLE,PERSONAL_TRADE_IN_INFO];
 
         public static const DEMOUNT_KIT_SET:Array = [AWARD_DEMOUNT_KIT,GOLD_ALTERNATIVE_INFO,GOLD_ALTERNATIVE_STATS,NOT_ENOUGH_MONEY];
 
@@ -738,6 +776,8 @@ package net.wg.data.constants.generated
         public static const ROYALE_BATTLE_SET:Array = [BATTLE_ROYALE_WEAK_ZONES,BATTLE_ROYALE_MODULES];
 
         public static const ROYALE_LOBBY_SET:Array = [BATTLE_ROYALE_VEHICLE,BATTLE_ROYALE_MODULES_HANGAR,BATTLE_ROYALE_BATTLE_PROGRESSION,BATTLE_ROYALE_EQUIPMENT,BATTLE_ROYALE_PERF_SIMPLE,BATTLE_ROYALE_PERF_ADVANCED,BATTLE_ROYALE_SELECTOR_INFO];
+
+        public static const EVENT_SET:Array = [EVENT_BONUSES_INFO,EVENT_TANK_REPAIR_INFO,EVENT_CREW_BOOSTER_INFO,EVENT_TANK_RENT_INFO,EVENT_BANNER_INFO,EVENT_CAROUSEL_VEHICLE,EVENT_COMMANDERS_INFO,EVENT_MISSION_INFO,EVENT_SELECTOR_INFO,EVENT_CRDITS_ERROR,EVENT_TOKEN_ERROR,EVENT_GOLD_ERROR,EVENT_BAN_INFO,EVENT_TOKEN_INFO,HALLOWEEN_QUESTS_PREVIEW,HALLOWEEN_TOKEN_BONUS,EVENT_COMMANDER_IN_BATTLE,HALLOWEEN_NO_SUITABLE_VEHICLE_FOR_QUEST];
 
         public function TOOLTIPS_CONSTANTS()
         {

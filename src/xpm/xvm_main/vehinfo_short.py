@@ -27,7 +27,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 19.10.2020
+    # Last update: 21.10.2020
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -856,21 +856,20 @@ _data = {
     "germany:G00_Bomber_Hell":               'Bomber',
     "germany:G114_Rheinmetall_Skorpian_HELL":'skorp',
     "germany:G146_E100_Hell_Boss":           'E·100',
+    "germany:G25_PzII_Luchs_HELL":           'Luchs',
     "germany:G25_PzII_Luchs_HELL_HALL":      'Luchs',
     "germany:G54_E-50_Hall_minion":          'E·50',
     "germany:G64_Panther_II_Hall_minion":    'Pant2',
     "germany:G73_E50_Ausf_M_Hall_minion":    'E·50m',
-    "germany:G81_Pz_IV_AusfH_HELL":          'Pz4h',
     "italy:It09_P43_ter_HELL":               'P43·ter',
     "italy:It10_P43_bis_HELL":               'P43·bis',
     "italy:It14_P44_Pantera_HELL":           'P44·Pant',
-    "italy:It14_P44_Pantera_HELL_Hell":      'P44·Pant',
     "poland:Pl05_50TP_Tyszkiewicza_HELL":    '50TP',
     "poland:Pl10_40TP_Habicha_HELL":         '40TP',
     "poland:Pl11_45TP_Habicha_HELL":         '45TP',
     "poland:Pl13_53TP_Markowskiego_HELL":    '53TP',
+    "sweden:S13_Leo_HELL":                   'leo',
     "sweden:S27_UDES_16_HELL":               'udes·16',
-    "sweden:S28_UDES_15_16_HELL":            'udes·15/16',
     "sweden:S29_UDES_14_5_HELL":             'udes·14·5',
     "uk:GB09_Churchill_VII_HALL":            'Chrch7',
     "uk:GB10_Black_Prince_HALL":             'BlPrn',

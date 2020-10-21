@@ -44,7 +44,11 @@ package net.wg.gui.lobby.tradeIn
 
         public var resetBackgroundShadow:Sprite;
 
+        public var resetButtonPersonal:Sprite;
+
         public var resetButton:Sprite;
+
+        private var _isPersonal:Boolean;
 
         private var _data:TradeOffWidgetVO;
 
@@ -71,6 +75,7 @@ package net.wg.gui.lobby.tradeIn
             this.resetButtonHover = null;
             this.resetBackgroundShadow = null;
             this.resetButton = null;
+            this.resetButtonPersonal = null;
             this.buttonHitArea.removeEventListener(MouseEvent.CLICK,this.onButtonHitAreaClickHandler);
             this.buttonHitArea.removeEventListener(MouseEvent.ROLL_OVER,this.onButtonRollOverHandler);
             this.buttonHitArea.removeEventListener(MouseEvent.ROLL_OUT,this.onButtonRollOutHandler);
@@ -86,10 +91,12 @@ package net.wg.gui.lobby.tradeIn
         {
             super.configUI();
             this.backgroundShadow.mouseEnabled = this.backgroundShadow.mouseChildren = false;
+            this.resetButtonPersonal.visible = false;
             this.resetBackgroundShadow.mouseEnabled = this.resetBackgroundShadow.mouseChildren = false;
             this.buttonHover.mouseEnabled = this.buttonHover.mouseChildren = this.buttonHover.visible = false;
             this.resetButtonHover.mouseEnabled = this.resetButtonHover.mouseChildren = this.resetButtonHover.visible = false;
             this.resetButton.mouseEnabled = this.resetButton.mouseChildren = false;
+            this.resetButtonPersonal.mouseEnabled = this.resetButtonPersonal.mouseChildren = false;
             this.buttonHitArea.addEventListener(MouseEvent.CLICK,this.onButtonHitAreaClickHandler);
             this.buttonHitArea.addEventListener(MouseEvent.ROLL_OVER,this.onButtonRollOverHandler);
             this.buttonHitArea.addEventListener(MouseEvent.ROLL_OUT,this.onButtonRollOutHandler);
@@ -117,6 +124,7 @@ package net.wg.gui.lobby.tradeIn
             super.draw();
             if(this._data && isInvalid(InvalidationType.DATA))
             {
+                this._isPersonal = this._data.isPersonal;
                 enabled = this._data.available;
                 alpha = enabled?ENABLED_ALPHA:DISABLED_ALPHA;
                 _loc1_ = this._data.showTradeOff;
@@ -136,11 +144,25 @@ package net.wg.gui.lobby.tradeIn
                 this.vehicleType.visible = _loc2_;
                 this.vehicleLevel.visible = _loc2_;
                 this.vehicleTitleTF.visible = _loc2_;
-                this.resetBackgroundShadow.visible = _loc2_;
-                this.resetButton.visible = _loc2_;
-                this.resetButtonHitArea.visible = _loc2_;
+                this.resetBackgroundShadow.visible = _loc2_ || this._isPersonal;
+                this.resetButton.visible = _loc2_ && !this._isPersonal;
+                this.resetButtonPersonal.visible = this._isPersonal;
+                this.resetButtonHitArea.visible = _loc2_ || this._isPersonal;
                 this.buttonHitArea.buttonMode = this._data.available;
             }
+        }
+
+        override protected function setData(param1:TradeOffWidgetVO) : void
+        {
+            this._data = param1;
+            invalidateData();
+        }
+
+        private function showTooltip() : void
+        {
+            var _loc1_:Object = getTooltipS();
+            App.toolTipMgr.showSpecial(_loc1_.type,null,_loc1_.data);
+            App.soundMgr.playControlsSnd(SoundManagerStates.SND_OVER,SoundTypes.CUSTOMIZATION_DEFAULT,null);
         }
 
         override public function get width() : Number
@@ -151,12 +173,6 @@ package net.wg.gui.lobby.tradeIn
         override public function get height() : Number
         {
             return this.backgroundShadow.height;
-        }
-
-        override protected function setData(param1:TradeOffWidgetVO) : void
-        {
-            this._data = param1;
-            invalidateData();
         }
 
         private function onButtonHitAreaClickHandler(param1:MouseEvent) : void
@@ -170,9 +186,7 @@ package net.wg.gui.lobby.tradeIn
         private function onButtonRollOverHandler(param1:MouseEvent) : void
         {
             this.buttonHover.visible = enabled;
-            var _loc2_:Object = getTooltipS();
-            App.toolTipMgr.showSpecial(_loc2_.type,null,_loc2_.data);
-            App.soundMgr.playControlsSnd(SoundManagerStates.SND_OVER,SoundTypes.CUSTOMIZATION_DEFAULT,null);
+            this.showTooltip();
         }
 
         private function onButtonRollOutHandler(param1:MouseEvent) : void
@@ -188,12 +202,20 @@ package net.wg.gui.lobby.tradeIn
 
         private function onResetButtonRollOverHandler(param1:MouseEvent) : void
         {
-            this.resetButtonHover.visible = this.resetButton.visible;
+            this.resetButtonHover.visible = enabled;
+            if(this._isPersonal)
+            {
+                this.showTooltip();
+            }
         }
 
         private function onResetButtonRollOutHandler(param1:MouseEvent) : void
         {
             this.resetButtonHover.visible = false;
+            if(this._isPersonal)
+            {
+                App.toolTipMgr.hide();
+            }
         }
     }
 }

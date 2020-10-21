@@ -65,5 +65,15 @@ package net.wg.gui.components.dogtag
             App.utils.asserter.assertNotNull(this._images[param1],"preloaded image " + Errors.CANT_NULL);
             return null;
         }
+
+        public function dispose() : void
+        {
+            var _loc1_:String = null;
+            for(_loc1_ in this._images)
+            {
+                this._images[_loc1_].dispose();
+                this._images[_loc1_] = null;
+            }
+        }
     }
 }

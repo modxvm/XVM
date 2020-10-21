@@ -79,6 +79,8 @@ package
 
         public static const BUYINGPANEL_TRADEIN_TRADEOFFPRICETEXT:String = "#vehicle_preview:buyingPanel/tradeIn/tradeOffPriceText";
 
+        public static const BUYINGPANEL_TRADEIN_PERSONALTRADEOFFPRICETEXT:String = "#vehicle_preview:buyingPanel/tradeIn/personaltradeOffPriceText";
+
         public static const BUYINGPANEL_TRADEIN_AVAILABLELEVELS:String = "#vehicle_preview:buyingPanel/tradeIn/availableLevels";
 
         public static const BUYINGPANEL_TRADEIN_NOTAVAILABLETRADEOFFVEHICLES:String = "#vehicle_preview:buyingPanel/tradeIn/notAvailableTradeOffVehicles";
@@ -176,6 +178,8 @@ package
         public static const BUYINGPANEL_FRONTLINEPACK_TITLELABEL_INACTIVE:String = "#vehicle_preview:buyingPanel/frontlinePack/titleLabel/inactive";
 
         public static const BUYINGPANEL_FRONTLINEPACK_COUPONLABEL:String = "#vehicle_preview:buyingPanel/frontlinePack/couponLabel";
+
+        public static const BUYINGPANEL_PERSONALTRADEIN_TITLE:String = "#vehicle_preview:buyingPanel/personalTradeIn/title";
 
         public function VEHICLE_PREVIEW()
         {

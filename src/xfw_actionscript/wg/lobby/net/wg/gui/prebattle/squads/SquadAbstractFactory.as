@@ -19,12 +19,20 @@ package net.wg.gui.prebattle.squads
         public function getChatSection() : IBaseChatSection
         {
             var _loc1_:String = SQUADTYPES.SIMPLE_SQUAD_CHAT_SECTION;
+            if(this._squadType == SQUADTYPES.SQUAD_TYPE_EVENT)
+            {
+                _loc1_ = SQUADTYPES.EVENT_SQUAD_CHAT_SECTION;
+            }
             return App.utils.classFactory.getComponent(_loc1_,IBaseChatSection);
         }
 
         public function getTeamSection() : IBaseTeamSection
         {
             var _loc1_:String = SQUADTYPES.SIMPLE_SQUAD_TEAM_SECTION;
+            if(this._squadType == SQUADTYPES.SQUAD_TYPE_EVENT)
+            {
+                _loc1_ = SQUADTYPES.EVENT_SQUAD_TEAM_SECTION;
+            }
             return App.utils.classFactory.getComponent(_loc1_,IBaseTeamSection);
         }
     }

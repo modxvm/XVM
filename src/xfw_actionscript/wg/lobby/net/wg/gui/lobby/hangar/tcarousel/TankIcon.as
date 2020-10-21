@@ -2,6 +2,7 @@ package net.wg.gui.lobby.hangar.tcarousel
 {
     import flash.geom.Rectangle;
     import flash.text.TextField;
+    import flash.display.Sprite;
     import net.wg.gui.components.carousels.data.VehicleCarouselVO;
     import org.idmedia.as3commons.util.StringUtils;
     import flash.text.TextFormat;
@@ -17,6 +18,10 @@ package net.wg.gui.lobby.hangar.tcarousel
         private static const IMG_ICON_BOUNDS:Rectangle = new Rectangle(1,1,160,100);
 
         public var txtRentInfo:TextField = null;
+
+        public var eventBg:Sprite = null;
+
+        public var eventLock:Sprite = null;
 
         public function TankIcon()
         {
@@ -50,6 +55,8 @@ package net.wg.gui.lobby.hangar.tcarousel
         override protected function onDispose() : void
         {
             this.txtRentInfo = null;
+            this.eventBg = null;
+            this.eventLock = null;
             super.onDispose();
         }
 
@@ -64,6 +71,14 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.txtRentInfo.htmlText = param1.rentLeft;
             imgIcon.source = param1.icon;
             imgIcon.sourceAlt = param1.iconAlt;
+            if(this.eventBg)
+            {
+                this.eventBg.visible = param1.isEvent;
+            }
+            if(this.eventLock)
+            {
+                this.eventLock.visible = param1.eventLock;
+            }
         }
 
         override protected function setVisibleVehicleInfo(param1:Boolean) : void

@@ -64,6 +64,7 @@ package net.wg.infrastructure.managers.impl
         {
             var _loc1_:IPoolManager = App.utils.poolManager;
             this.addTooltipBlocksPool(_loc1_,BLOCKS_TOOLTIP_TYPES.TOOLTIP_TEXT_BLOCK_LINKAGE,NUM_TEXT_BLOCK_POOL_ITEMS);
+            this.addTooltipBlocksPool(_loc1_,BLOCKS_TOOLTIP_TYPES.TOOLTIP_GLOW_TEXT_BLOCK_LINKAGE,NUM_TEXT_BLOCK_POOL_ITEMS);
             this.addTooltipBlocksPool(_loc1_,BLOCKS_TOOLTIP_TYPES.TOOLTIP_BUILDUP_BLOCK_LINKAGE,NUM_BUILD_UP_BLOCK_POOL_ITEMS);
             this.addTooltipBlocksPool(_loc1_,BLOCKS_TOOLTIP_TYPES.TOOLTIP_IMAGETEXT_BLOCK_LINKAGE,NUM_IMAGE_TEXT_BLOCK_POOL_ITEMS);
             this.addTooltipBlocksPool(_loc1_,BLOCKS_TOOLTIP_TYPES.TOOLTIP_TEXT_PARAMETER_BLOCK_LINKAGE,NUM_TEXT_PARAMETER_BLOCK_POOL_ITEMS);

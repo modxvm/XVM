@@ -5,8 +5,8 @@ package net.wg.infrastructure.base.meta
     public interface IEventBuffsPanelMeta extends IEventDispatcher
     {
 
-        function as_addBuffSlot(param1:uint, param2:String, param3:String) : void;
+        function as_addBuffSlot(param1:String, param2:String, param3:String) : void;
 
-        function as_removeBuffSlot(param1:uint) : void;
+        function as_removeBuffSlot(param1:String) : void;
     }
 }

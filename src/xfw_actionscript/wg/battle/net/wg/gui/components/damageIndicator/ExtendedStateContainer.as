@@ -2,6 +2,7 @@ package net.wg.gui.components.damageIndicator
 {
     import flash.display.Shape;
     import net.wg.data.constants.generated.DAMAGEINDICATOR;
+    import net.wg.data.constants.generated.DAMAGE_SOURCE_TYPES;
     import flash.display.MovieClip;
     import flash.text.TextField;
     import flash.display.Sprite;
@@ -44,7 +45,7 @@ package net.wg.gui.components.damageIndicator
 
         private static const CRITS_ITEMS_CIRCLES:Vector.<String> = new <String>[DAMAGEINDICATOR.GUN_CIRCLE,DAMAGEINDICATOR.TRIPLEX_CIRCLE,DAMAGEINDICATOR.TRACKS_CIRCLE,DAMAGEINDICATOR.WHEEL_CIRCLE,DAMAGEINDICATOR.AMMO_CIRCLE,DAMAGEINDICATOR.COMMANDER_CIRCLE,DAMAGEINDICATOR.DRIVER_CIRCLE,DAMAGEINDICATOR.ENGINE_CIRCLE,DAMAGEINDICATOR.GUNNER_CIRCLE,DAMAGEINDICATOR.RADIO_CIRCLE,DAMAGEINDICATOR.RADIOMAN_CIRCLE,DAMAGEINDICATOR.RELOADER_CIRCLE,DAMAGEINDICATOR.TANKS_CIRCLE,DAMAGEINDICATOR.TURRET_CIRCLE];
 
-        private static const TANK_TYPE_ICONS:Vector.<String> = new <String>[DAMAGEINDICATOR.HEAVY_TANK,DAMAGEINDICATOR.MEDIUM_TANK,DAMAGEINDICATOR.LIGHT_TANK,DAMAGEINDICATOR.AT_SPG,DAMAGEINDICATOR.SPG,DAMAGEINDICATOR.ALLY_HEAVY_TANK,DAMAGEINDICATOR.ALLY_MEDIUM_TANK,DAMAGEINDICATOR.ALLY_LIGHT_TANK,DAMAGEINDICATOR.ALLY_AT_SPG,DAMAGEINDICATOR.ALLY_SPG];
+        private static const TANK_TYPE_ICONS:Vector.<String> = new <String>[DAMAGEINDICATOR.HEAVY_TANK,DAMAGEINDICATOR.MEDIUM_TANK,DAMAGEINDICATOR.LIGHT_TANK,DAMAGEINDICATOR.AT_SPG,DAMAGEINDICATOR.SPG,DAMAGEINDICATOR.ALLY_HEAVY_TANK,DAMAGEINDICATOR.ALLY_MEDIUM_TANK,DAMAGEINDICATOR.ALLY_LIGHT_TANK,DAMAGEINDICATOR.ALLY_AT_SPG,DAMAGEINDICATOR.ALLY_SPG,DAMAGE_SOURCE_TYPES.BOSS,DAMAGE_SOURCE_TYPES.BOMBER,DAMAGE_SOURCE_TYPES.HUNTER,DAMAGE_SOURCE_TYPES.RUNNER,DAMAGE_SOURCE_TYPES.RUNNER_SHOOTER,DAMAGE_SOURCE_TYPES.SENTRY,DAMAGE_SOURCE_TYPES.TURRET];
 
         public var offsetContainer:MovieClip = null;
 
@@ -183,10 +184,11 @@ package net.wg.gui.components.damageIndicator
             setNewPosition(this._tankTypeIconsMap,TANK_ICON_Y_PADDING);
         }
 
-        public function setExtendedData(param1:String, param2:String, param3:String, param4:String, param5:String, param6:Boolean, param7:Boolean = true) : void
+        public function setExtendedData(param1:String, param2:String, param3:String, param4:String, param5:String, param6:Boolean, param7:String, param8:Boolean = true) : void
         {
-            var _loc10_:* = false;
-            var _loc8_:Boolean = param1 == DAMAGEINDICATOR.CRIT || param1 == DAMAGEINDICATOR.CRIT_BLIND;
+            var _loc11_:String = null;
+            var _loc12_:* = false;
+            var _loc9_:Boolean = param1 == DAMAGEINDICATOR.CRIT || param1 == DAMAGEINDICATOR.CRIT_BLIND;
             updateBGState(param1);
             this._circleCrit.visible = false;
             if(param1 == DAMAGEINDICATOR.CRIT)
@@ -199,13 +201,18 @@ package net.wg.gui.components.damageIndicator
             }
             if(this._settingIsWithTankInfo)
             {
-                if(this._currentTankIconStr != param4)
+                _loc11_ = param4;
+                if(param7 && param7 != Values.EMPTY_STR)
+                {
+                    _loc11_ = param7;
+                }
+                if(this._currentTankIconStr != _loc11_)
                 {
                     this._currentTankIcon.visible = false;
-                    if(param4 != Values.EMPTY_STR)
+                    if(_loc11_ != Values.EMPTY_STR)
                     {
-                        this._currentTankIconStr = param4;
-                        this._currentTankIcon = this._tankTypeIconsMap[param4];
+                        this._currentTankIconStr = _loc11_;
+                        this._currentTankIcon = this._tankTypeIconsMap[_loc11_];
                         this._currentTankIcon.visible = true;
                     }
                 }
@@ -235,7 +242,7 @@ package net.wg.gui.components.damageIndicator
                         this._currentCircle.visible = true;
                     }
                 }
-                if(_loc8_)
+                if(_loc9_)
                 {
                     this._circleCrit.visible = this._critIsVisible = true;
                 }
@@ -243,23 +250,23 @@ package net.wg.gui.components.damageIndicator
                 {
                     this._circleCrit.visible = this._critIsVisible = false;
                 }
-                _loc10_ = param5.length > LOW_COUNT_SYMBOLS;
-                if(this._isBigTitle != _loc10_)
+                _loc12_ = param5.length > LOW_COUNT_SYMBOLS;
+                if(this._isBigTitle != _loc12_)
                 {
-                    this._isBigTitle = _loc10_;
+                    this._isBigTitle = _loc12_;
                     this._damageTextFormat.size = this._isBigTitle?TEXT_SIZE_WITH_LOW_SYMBOLS:DEFAULT_TEXT_SIZE_WITH_SYMBOLS;
                     this.damageTF.setTextFormat(this._damageTextFormat);
                 }
                 this.damageTF.text = param5;
             }
-            var _loc9_:String = _loc8_?CRIT_FRAME_LABEL:DAMAGE_FRAME_LABEL;
-            if(param7)
+            var _loc10_:String = _loc9_?CRIT_FRAME_LABEL:DAMAGE_FRAME_LABEL;
+            if(param8)
             {
-                this.offsetContainer.gotoAndPlay(_loc9_);
+                this.offsetContainer.gotoAndPlay(_loc10_);
             }
             else
             {
-                this.offsetContainer.gotoAndStop(_loc9_);
+                this.offsetContainer.gotoAndStop(_loc10_);
             }
         }
 

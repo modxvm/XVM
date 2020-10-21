@@ -3,6 +3,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.tutorial.GFTutorialView;
     import net.wg.gui.lobby.hangar.ammunitionPanel.data.AmmunitionPanelVO;
     import net.wg.gui.lobby.post.data.TeaserVO;
+    import net.wg.gui.lobby.eventCrew.data.EventCrewVO;
     import net.wg.data.constants.Errors;
     import net.wg.infrastructure.exceptions.AbstractException;
 
@@ -21,11 +22,17 @@ package net.wg.infrastructure.base.meta.impl
 
         public var onTeaserClick:Function;
 
+        public var onEventExitClick:Function;
+
+        public var onEventParamsToggle:Function;
+
         private var _ammunitionPanelVO:AmmunitionPanelVO;
 
         private var _array:Array;
 
         private var _teaserVO:TeaserVO;
+
+        private var _eventCrewVO:EventCrewVO;
 
         public function HangarMeta()
         {
@@ -48,6 +55,11 @@ package net.wg.infrastructure.base.meta.impl
             {
                 this._teaserVO.dispose();
                 this._teaserVO = null;
+            }
+            if(this._eventCrewVO)
+            {
+                this._eventCrewVO.dispose();
+                this._eventCrewVO = null;
             }
             super.onDispose();
         }
@@ -88,6 +100,18 @@ package net.wg.infrastructure.base.meta.impl
             this.onTeaserClick();
         }
 
+        public function onEventExitClickS() : void
+        {
+            App.utils.asserter.assertNotNull(this.onEventExitClick,"onEventExitClick" + Errors.CANT_NULL);
+            this.onEventExitClick();
+        }
+
+        public function onEventParamsToggleS(param1:Boolean) : void
+        {
+            App.utils.asserter.assertNotNull(this.onEventParamsToggle,"onEventParamsToggle" + Errors.CANT_NULL);
+            this.onEventParamsToggle(param1);
+        }
+
         public final function as_setupAmmunitionPanel(param1:Object) : void
         {
             var _loc2_:AmmunitionPanelVO = this._ammunitionPanelVO;
@@ -121,6 +145,17 @@ package net.wg.infrastructure.base.meta.impl
             }
         }
 
+        public final function as_setEventCrew(param1:Object) : void
+        {
+            var _loc2_:EventCrewVO = this._eventCrewVO;
+            this._eventCrewVO = new EventCrewVO(param1);
+            this.setEventCrew(this._eventCrewVO);
+            if(_loc2_)
+            {
+                _loc2_.dispose();
+            }
+        }
+
         protected function setupAmmunitionPanel(param1:AmmunitionPanelVO) : void
         {
             var _loc2_:String = "as_setupAmmunitionPanel" + Errors.ABSTRACT_INVOKE;
@@ -138,6 +173,13 @@ package net.wg.infrastructure.base.meta.impl
         protected function showTeaser(param1:TeaserVO) : void
         {
             var _loc2_:String = "as_showTeaser" + Errors.ABSTRACT_INVOKE;
+            DebugUtils.LOG_ERROR(_loc2_);
+            throw new AbstractException(_loc2_);
+        }
+
+        protected function setEventCrew(param1:EventCrewVO) : void
+        {
+            var _loc2_:String = "as_setEventCrew" + Errors.ABSTRACT_INVOKE;
             DebugUtils.LOG_ERROR(_loc2_);
             throw new AbstractException(_loc2_);
         }

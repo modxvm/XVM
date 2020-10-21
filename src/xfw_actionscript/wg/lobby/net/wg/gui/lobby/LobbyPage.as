@@ -5,6 +5,7 @@ package net.wg.gui.lobby
     import net.wg.gui.lobby.vehicleHitArea.LobbyVehicleHitArea;
     import net.wg.infrastructure.interfaces.IManagedContainer;
     import net.wg.gui.lobby.header.LobbyHeader;
+    import net.wg.gui.lobby.eventHangar.LobbyHangarHeader;
     import net.wg.gui.notification.ServiceMessagePopUp;
     import net.wg.gui.notification.NotificationPopUpViewer;
     import net.wg.gui.lobby.messengerBar.MessengerBar;
@@ -47,7 +48,7 @@ package net.wg.gui.lobby
 
         private static const SUB_VIEW_CONTAINER_ZINDEX:int = 3;
 
-        private static const SUB_TOP_CONTAINER_ZINDEX:int = 4;
+        private static const SUB_TOP_CONTAINER_ZINDEX:int = 5;
 
         public var vehicleHitArea:LobbyVehicleHitArea = null;
 
@@ -56,6 +57,8 @@ package net.wg.gui.lobby
         public var subViewContainer:IManagedContainer = null;
 
         public var header:LobbyHeader;
+
+        public var eventHeader:LobbyHangarHeader = null;
 
         public var messagePopupTemplate:ServiceMessagePopUp;
 
@@ -115,6 +118,8 @@ package net.wg.gui.lobby
             {
                 this.notificationPopupViewer.updateStage(param1,param2);
             }
+            this.eventHeader.x = param1 >> 1;
+            this.eventHeader.updateStage(param1,param2);
             this.waiting.setSize(param1,param2);
         }
 
@@ -160,6 +165,7 @@ package net.wg.gui.lobby
         {
             super.onPopulate();
             registerFlashComponentS(this.header,Aliases.LOBBY_HEADER);
+            registerFlashComponentS(this.eventHeader,Aliases.EVENT_HEADER);
             if(!this.notificationPopupViewer)
             {
                 this.notificationPopupViewer = new NotificationPopUpViewer(App.utils.classFactory.getClass(Linkages.SERVICE_MESSAGES_POPUP));
@@ -206,6 +212,7 @@ package net.wg.gui.lobby
                 this.messagePopupTemplate = null;
             }
             this.header = null;
+            this.eventHeader = null;
             this.notificationPopupViewer = null;
             this.messengerBar = null;
             this._teaserOverlay = null;

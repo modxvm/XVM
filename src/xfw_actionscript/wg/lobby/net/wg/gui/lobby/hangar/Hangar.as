@@ -11,6 +11,14 @@ package net.wg.gui.lobby.hangar
     import net.wg.gui.lobby.hangar.ammunitionPanelInject.AmmunitionPanelInject;
     import flash.display.Sprite;
     import net.wg.gui.lobby.post.Teaser;
+    import net.wg.gui.lobby.eventCrew.EventCrew;
+    import net.wg.gui.lobby.eventManageCrewPanel.EventManageCrew;
+    import net.wg.gui.lobby.eventCrewPremiumInfo.EventCrewPremiumInfo;
+    import net.wg.gui.lobby.eventTankRent.EventTankRent;
+    import net.wg.gui.lobby.eventQuests.EventHangarQuests;
+    import net.wg.gui.lobby.eventBanInfo.EventBanInfo;
+    import net.wg.gui.lobby.eventCoins.EventCoins;
+    import net.wg.gui.interfaces.ISoundButtonEx;
     import net.wg.gui.components.controls.CloseButtonText;
     import net.wg.gui.lobby.hangar.tcarousel.TankCarousel;
     import net.wg.gui.lobby.hangar.alertMessage.AlertMessageBlock;
@@ -37,19 +45,21 @@ package net.wg.gui.lobby.hangar
     import net.wg.infrastructure.events.FocusRequestEvent;
     import net.wg.gui.lobby.post.TeaserEvent;
     import scaleform.clik.events.ComponentEvent;
+    import flash.display.DisplayObject;
     import net.wg.gui.notification.events.NotificationLayoutEvent;
     import flash.geom.Point;
     import flash.display.InteractiveObject;
     import net.wg.gui.lobby.hangar.ammunitionPanel.data.AmmunitionPanelVO;
+    import net.wg.gui.lobby.eventCrew.data.EventCrewVO;
     import net.wg.gui.lobby.post.data.TeaserVO;
     import fl.motion.easing.Quadratic;
     import net.wg.data.constants.Linkages;
-    import flash.display.DisplayObject;
     import net.wg.infrastructure.base.BaseDAAPIComponent;
     import net.wg.data.constants.generated.BATTLEROYALE_ALIASES;
     import net.wg.data.constants.generated.DAILY_QUESTS_WIDGET_CONSTANTS;
     import net.wg.utils.helpLayout.HelpLayoutVO;
     import net.wg.utils.StageSizeBoundaries;
+    import net.wg.data.constants.Values;
     import scaleform.clik.events.InputEvent;
     import flash.display.MovieClip;
     import scaleform.clik.ui.InputDetails;
@@ -67,11 +77,17 @@ package net.wg.gui.lobby.hangar
 
         private static const PARAMS_POSITION_INVALID:String = "paramsPositionInvalid";
 
+        private static const MANAGE_CREW_POSITION_INVALID:String = "manageCrewPositionInvalid";
+
         private static const CAROUSEL_NAME:String = "carousel";
 
         private static const PARAMS_TOP_MARGIN:int = 3;
 
         private static const PARAMS_BOTTOM_MARGIN:int = 80;
+
+        private static const MESSENGER_BAR_PADDING:int = 45;
+
+        private static const BOTTOM_PANEL_SIZE:int = 35;
 
         private static const TOP_MARGIN:Number = 33;
 
@@ -84,6 +100,8 @@ package net.wg.gui.lobby.hangar
         private static const TEASER_SHOW_SMALL_X_OFFSET:int = -110;
 
         private static const TEASER_HIDE_SMALL_X_OFFSET:int = -355;
+
+        private static const TANK_REPAIR_Y_OFFSET:int = -6;
 
         private static const SM_CAROUSEL_PADDING:Number = 30;
 
@@ -102,6 +120,8 @@ package net.wg.gui.lobby.hangar
         private static const BR_UNBOUND_HEADER_TOP_MARGIN:int = 17;
 
         private static const VEH_RESERCH_PANEL_Y:int = 45;
+
+        private static const VEH_RESERCH_PANEL_EVENT_PADDING:int = 97;
 
         private static const CREW_OPERATION_BG_Y:int = 47;
 
@@ -135,6 +155,40 @@ package net.wg.gui.lobby.hangar
 
         private static const AMMUNITION_PANEL_INJECT_OFFSET_RIGHT:int = 5;
 
+        private static const CLOSE_BTN_OFFSET:int = 20;
+
+        private static const EVENT_TANK_PANELS_OFFSET:int = 180;
+
+        private static const EVENT_QUEST_PANEL_SPACING_OFFSET:int = 10;
+
+        private static const BOTTOM_EVENT_OFFSET:int = 40;
+
+        private static const EVENT_AMMO_OFFSET:int = 171;
+
+        private static const EVENT_PARAMS_OFFSET:int = 415;
+
+        private static const TWEEN_SHOW_TIME:int = 300;
+
+        private static const SMALL_HEIGHT:int = 1000;
+
+        private static const SMALL_WIDTH:int = 1500;
+
+        private static const SMALL_EVENT_PANELS_Y:int = 89;
+
+        private static const SMALL_EVENT_TOKENS_OFFSET_Y:int = 12;
+
+        private static const EVENT_PANELS_Y:int = 149;
+
+        private static const EVENT_TOKENS_OFFSET_Y:int = 5;
+
+        private static const EVENT_CREW_OFFSET_Y:int = -66;
+
+        private static const SMALL_BAN_INFO_Y:int = 130;
+
+        private static const BAN_INFO_Y:int = 180;
+
+        private static const COINS_PADDING:int = 5;
+
         private static const WIDGETS_OFFSET_Y:int = 64;
 
         public var vehResearchPanel:ResearchPanel;
@@ -164,6 +218,26 @@ package net.wg.gui.lobby.hangar
         public var teaser:Teaser;
 
         public var dqWidget:DailyQuestWidget;
+
+        public var eventCrew:EventCrew;
+
+        public var crewHealing:EventManageCrew;
+
+        public var crewBooster:EventManageCrew;
+
+        public var crewPremiumInfo:EventCrewPremiumInfo;
+
+        public var eventTankRent:EventTankRent;
+
+        public var eventQuestPanel:EventHangarQuests;
+
+        public var eventBanInfo:EventBanInfo;
+
+        public var eventCoins:EventCoins;
+
+        public var closeBtnEvent:ISoundButtonEx = null;
+
+        public var toggleParamsBtn:ISoundButtonEx = null;
 
         public var closeBtn:CloseButtonText;
 
@@ -212,6 +286,16 @@ package net.wg.gui.lobby.hangar
 
         private var _appStage:Stage;
 
+        private var _eventParamsOffsetX:int = 0;
+
+        private var _paramsToggle:Boolean = false;
+
+        private var _eventMode:Boolean = false;
+
+        private var _eventContainer:Sprite;
+
+        private var _tweenShow:Tween;
+
         private var _topMargin:int = 0;
 
         private var _currentWidgetLayout:int = 99;
@@ -231,6 +315,7 @@ package net.wg.gui.lobby.hangar
             this._utils = App.utils;
             this._helpLayout = App.utils.helpLayout;
             this._appStage = App.stage;
+            this._eventContainer = new Sprite();
             super();
             _deferredDispose = true;
             this.switchModePanel.visible = false;
@@ -240,8 +325,9 @@ package net.wg.gui.lobby.hangar
             this.setupWidgetSizes();
             this._eventsEntryContainer = new HangarEventEntriesContainer();
             this._eventsEntryContainer.addEventListener(Event.RESIZE,this.onEventsEntryContainerResizeHandler);
-            addChildAt(this._eventsEntryContainer,0);
+            addChildAt(this._eventsEntryContainer,getChildIndex(this.carouselContainer as DisplayObject) + 1);
             this.closeBtn.visible = false;
+            this.toggleParamsBtn.visible = false;
         }
 
         override public function updateStage(param1:Number, param2:Number) : void
@@ -263,6 +349,7 @@ package net.wg.gui.lobby.hangar
             }
             this.alignToCenter(this.switchModePanel);
             this.alignToCenter(this._miniClient);
+            this.alignToCenter(this.eventBanInfo);
             if(this.header != null)
             {
                 this.header.x = param1 >> 1;
@@ -282,8 +369,29 @@ package net.wg.gui.lobby.hangar
                 _loc3_ = this.vehResearchBG.getBounds(this.vehResearchBG);
                 this.vehResearchBG.x = param1 - _loc3_.x - _loc3_.width - RIGHT_MARGIN >> 0;
             }
+            this.eventTankRent.x = _width >> 1;
+            this.eventTankRent.y = _height - EVENT_TANK_PANELS_OFFSET;
+            this.toggleParamsBtn.x = _width - this.toggleParamsBtn.width;
+            this.eventCoins.x = _width - COINS_PADDING | 0;
+            if(App.appWidth < SMALL_WIDTH || App.appHeight < SMALL_HEIGHT)
+            {
+                this.eventCrew.y = SMALL_EVENT_PANELS_Y + EVENT_CREW_OFFSET_Y;
+                this.toggleParamsBtn.y = SMALL_EVENT_PANELS_Y - this.toggleParamsBtn.height;
+                this.eventBanInfo.y = SMALL_BAN_INFO_Y;
+                this.eventCoins.y = SMALL_EVENT_PANELS_Y + SMALL_EVENT_TOKENS_OFFSET_Y;
+            }
+            else
+            {
+                this.eventCrew.y = EVENT_PANELS_Y + EVENT_CREW_OFFSET_Y;
+                this.toggleParamsBtn.y = EVENT_PANELS_Y - this.toggleParamsBtn.height;
+                this.eventBanInfo.y = BAN_INFO_Y;
+                this.eventCoins.y = EVENT_PANELS_Y + EVENT_TOKENS_OFFSET_Y;
+            }
+            this.eventCrew.updateStage(param1,param2);
+            this.positionLeftPanels();
             this._helpLayout.hide();
             invalidate(ENTRY_CONT_POSITION_INVALID);
+            this.updateCloseBtnPosition();
         }
 
         override protected function onPopulate() : void
@@ -299,6 +407,12 @@ package net.wg.gui.lobby.hangar
             registerFlashComponentS(this._eventsEntryContainer,HANGAR_ALIASES.ENTRIES_CONTAINER);
             this.ammunitionPanelInject.addEventListener(Event.RESIZE,this.onAmmunitionPanelInjectResizeHandler);
             this.ammunitionPanelInject.addEventListener(AmmunitionPanelInjectEvents.HELP_LAYOUT_CHANGED,this.onAmmunitionPanelInjectHelpLayoutChangedHandler);
+            registerFlashComponentS(this.crewHealing,HANGAR_ALIASES.EVENT_CREW_HEALING_COMPONENT);
+            registerFlashComponentS(this.crewBooster,HANGAR_ALIASES.EVENT_CREW_BOOSTER_COMPONENT);
+            registerFlashComponentS(this.eventTankRent,HANGAR_ALIASES.EVENT_TANK_RENT_COMPONENT);
+            registerFlashComponentS(this.eventQuestPanel,HANGAR_ALIASES.EVENT_QUESTS_COMPONENT);
+            registerFlashComponentS(this.eventBanInfo,HANGAR_ALIASES.EVENT_BAN_INFO_COMPONENT);
+            registerFlashComponentS(this.eventCoins,HANGAR_ALIASES.EVENT_COINS_COMPONENT);
             addEventListener(CrewDropDownEvent.SHOW_DROP_DOWN,this.onHangarShowDropDownHandler);
             if(this.vehResearchPanel != null)
             {
@@ -326,6 +440,12 @@ package net.wg.gui.lobby.hangar
             this.switchModePanel.removeEventListener(ComponentEvent.SHOW,this.onSwitchModePanelShowHandler);
             this.switchModePanel.removeEventListener(ComponentEvent.HIDE,this.onSwitchModePanelHideHandler);
             this.carousel.removeEventListener(Event.RESIZE,this.onCarouselResizeHandler);
+            this.closeBtnEvent.removeEventListener(ButtonEvent.CLICK,this.onCloseBtnClickHandler);
+            this.closeBtnEvent.removeEventListener(Event.RESIZE,this.onCloseBtnResizedHandler);
+            this.toggleParamsBtn.removeEventListener(ButtonEvent.CLICK,this.onToggleParamsBtnClickHandler);
+            this.crewHealing.removeEventListener(EventManageCrew.VISIBILITY_CHANGED,this.onManageCrewPanelVisibilityChangedHandler);
+            this.crewBooster.removeEventListener(EventManageCrew.VISIBILITY_CHANGED,this.onManageCrewPanelVisibilityChangedHandler);
+            this.eventCrew.removeEventListener(Event.RESIZE,this.onEventCrewResizeHandler);
             super.onBeforeDispose();
         }
 
@@ -344,6 +464,17 @@ package net.wg.gui.lobby.hangar
             this.crewBG = null;
             this.teaser.dispose();
             this.teaser = null;
+            this.eventCrew.dispose();
+            this.eventCrew = null;
+            this._eventContainer = null;
+            this.crewHealing = null;
+            this.crewBooster = null;
+            this.eventTankRent = null;
+            this.eventQuestPanel = null;
+            this.eventCoins = null;
+            this.crewPremiumInfo.dispose();
+            this.crewPremiumInfo = null;
+            this.eventBanInfo = null;
             this.closeBtn.removeEventListener(ButtonEvent.CLICK,this.onCloseBtnClickHandler);
             this.closeBtn.dispose();
             this.closeBtn = null;
@@ -388,6 +519,16 @@ package net.wg.gui.lobby.hangar
             removeChild(this._eventsEntryContainer);
             this._eventsEntryContainer = null;
             this._currentWidgetLayout = 99;
+            this.toggleParamsBtn.dispose();
+            this.toggleParamsBtn = null;
+            if(this._tweenShow)
+            {
+                this._tweenShow.paused = true;
+                this._tweenShow.dispose();
+                this._tweenShow = null;
+            }
+            this.closeBtnEvent.dispose();
+            this.closeBtnEvent = null;
             App.utils.data.cleanupDynamicObject(this._headerTypeDict);
             this._headerTypeDict = null;
             App.utils.data.cleanupDynamicObject(this._widgetSizes);
@@ -418,6 +559,28 @@ package net.wg.gui.lobby.hangar
             this.teaser.addEventListener(TeaserEvent.HIDE,this.onTeaserHideHandler);
             this.carouselContainer.mouseEnabled = false;
             this._teaserX = -this.teaser.over.width;
+            this.toggleParamsBtn.addEventListener(ButtonEvent.CLICK,this.onToggleParamsBtnClickHandler);
+            this.toggleParamsBtn.focusTarget = this;
+            this.toggleParamsBtn.toggle = true;
+            this.closeBtnEvent.addEventListener(ButtonEvent.CLICK,this.onCloseBtnEventClickHandler);
+            this.closeBtnEvent.addEventListener(Event.RESIZE,this.onCloseBtnResizedHandler);
+            this.closeBtnEvent.label = EVENT.EVENT_CLOSEBTN;
+            this.closeBtnEvent.validateNow();
+            this.crewHealing.addEventListener(EventManageCrew.VISIBILITY_CHANGED,this.onManageCrewPanelVisibilityChangedHandler);
+            this.crewBooster.addEventListener(EventManageCrew.VISIBILITY_CHANGED,this.onManageCrewPanelVisibilityChangedHandler);
+            this.eventCrew.addEventListener(Event.RESIZE,this.onEventCrewResizeHandler);
+            this._eventContainer.addChild(this.eventCrew);
+            this._eventContainer.addChild(this.eventTankRent);
+            this._eventContainer.addChild(this.crewHealing);
+            this._eventContainer.addChild(this.crewBooster);
+            this._eventContainer.addChild(this.crewPremiumInfo);
+            this._eventContainer.addChild(this.eventQuestPanel);
+            this._eventContainer.addChild(this.eventCoins);
+            this._eventContainer.addChild(this.eventBanInfo);
+            this._eventContainer.addChild(DisplayObject(this.closeBtnEvent));
+            this._eventContainer.addChild(DisplayObject(this.toggleParamsBtn));
+            addChild(this._eventContainer);
+            this.positionEventQuestPanel();
             this.closeBtn.addEventListener(ButtonEvent.CLICK,this.onCloseBtnClickHandler);
             this.closeBtn.label = BATTLE_ROYALE.HANGAR_CLOSEBTN;
             this.closeBtn.validateNow();
@@ -431,7 +594,7 @@ package net.wg.gui.lobby.hangar
 
         override protected function draw() : void
         {
-            var _loc3_:* = NaN;
+            var _loc4_:* = NaN;
             super.draw();
             if(isInvalid(INVALIDATE_ENABLED_CREW))
             {
@@ -440,6 +603,7 @@ package net.wg.gui.lobby.hangar
             }
             var _loc1_:Boolean = isInvalid(ENTRY_CONT_POSITION_INVALID,INVALIDATE_AMMUNITION_PANEL_SIZE);
             var _loc2_:Boolean = isInvalid(PARAMS_POSITION_INVALID);
+            var _loc3_:Boolean = isInvalid(MANAGE_CREW_POSITION_INVALID);
             if(isInvalid(INVALIDATE_CAROUSEL_SIZE))
             {
                 this.carousel.visible = true;
@@ -449,13 +613,13 @@ package net.wg.gui.lobby.hangar
                 {
                     dispatchEvent(new Event(Event.RESIZE));
                 }
-                _loc3_ = SM_CAROUSEL_PADDING;
+                _loc4_ = SM_CAROUSEL_PADDING;
                 if(width > SM_THRESHOLD_X)
                 {
-                    _loc3_ = SM_AMMUNITION_PANEL_PADDING;
+                    _loc4_ = SM_AMMUNITION_PANEL_PADDING;
                 }
                 this.updateTeaserSize();
-                App.systemMessages.dispatchEvent(new NotificationLayoutEvent(NotificationLayoutEvent.UPDATE_LAYOUT,new Point(SM_PADDING_X,height - this.ammunitionPanel.y - _loc3_)));
+                App.systemMessages.dispatchEvent(new NotificationLayoutEvent(NotificationLayoutEvent.UPDATE_LAYOUT,new Point(SM_PADDING_X,height - this.ammunitionPanel.y - _loc4_)));
                 this.checkToIfLayoutNeedsUpdate();
                 this.updateBRComponentsPos();
                 _loc1_ = true;
@@ -469,6 +633,11 @@ package net.wg.gui.lobby.hangar
             {
                 this.updateParamsPosition();
             }
+            if(_loc3_)
+            {
+                this.positionLeftPanels();
+            }
+            this.checkToIfLayoutNeedsUpdate();
         }
 
         override protected function onSetModalFocus(param1:InteractiveObject) : void
@@ -482,14 +651,25 @@ package net.wg.gui.lobby.hangar
 
         override protected function setupAmmunitionPanel(param1:AmmunitionPanelVO) : void
         {
-            this.ammunitionPanel.updateAmmunitionPanel(param1.maintenanceEnabled,param1.maintenanceTooltip);
+            var _loc2_:Boolean = param1.isEvent;
+            this.ammunitionPanel.updateAmmunitionPanel(param1.maintenanceEnabled,param1.maintenanceTooltip,!_loc2_);
             this.ammunitionPanel.updateTuningButton(param1.customizationEnabled,param1.customizationTooltip);
-            this.ammunitionPanel.updateChangeNationButton(param1.changeNationVisible,param1.changeNationEnable,param1.changeNationTooltip,param1.changeNationIsNew);
+            this.ammunitionPanel.updateChangeNationButton(!_loc2_ && param1.changeNationVisible,param1.changeNationEnable,param1.changeNationTooltip,param1.changeNationIsNew);
         }
 
         override protected function show3DSceneTooltip(param1:String, param2:Array) : void
         {
             this._toolTipMgr.showSpecial.apply(this._toolTipMgr,[param1,null].concat(param2));
+        }
+
+        override protected function setEventCrew(param1:EventCrewVO) : void
+        {
+            this.eventCrew.setData(param1);
+            if(this.crewPremiumInfo.visible != param1.showPremiumInfo)
+            {
+                this.crewPremiumInfo.visible = param1.showPremiumInfo;
+                this.positionEventQuestPanel();
+            }
         }
 
         override protected function showTeaser(param1:TeaserVO) : void
@@ -712,6 +892,28 @@ package net.wg.gui.lobby.hangar
             this.visible = param1;
         }
 
+        public function as_showEventHangar(param1:Boolean, param2:Boolean) : void
+        {
+            this._eventMode = param1;
+            this.crew.visible = this.crewOperationBtn.visible = !param1;
+            this.tmenXpPanel.visible = !param1;
+            this.crewBG.visible = !param1;
+            this._eventContainer.visible = param1;
+            this.toggleParamsBtn.selected = param2;
+            this._paramsToggle = this.toggleParamsBtn.selected;
+            this.vehResearchPanel.visible = !param1;
+            this.vehResearchBG.visible = !param1;
+            this.ammunitionPanel.eventMode = this._eventMode;
+            this.teaser.visible = !param1;
+            var _loc3_:int = this._paramsToggle?RIGHT_MARGIN:EVENT_PARAMS_OFFSET;
+            this.paramsOffset = this._eventMode?_loc3_:0;
+            this.updateHeaderMargin();
+            this.updateBottomPosition();
+            this.updateCloseBtnPosition();
+            this.updateAmmunitionPanelPosition();
+            invalidate(PARAMS_POSITION_INVALID);
+        }
+
         public function as_showHelpLayout() : void
         {
             var _loc1_:* = NaN;
@@ -814,6 +1016,10 @@ package net.wg.gui.lobby.hangar
                 }
                 this.ammunitionPanel.updateStage(_width,this.carousel.y);
                 this.updateAmmunitionPanelInjectPosition();
+                if(this._eventMode)
+                {
+                    this.ammunitionPanel.x = this.ammunitionPanel.x - EVENT_AMMO_OFFSET;
+                }
             }
             invalidate(PARAMS_POSITION_INVALID);
         }
@@ -829,6 +1035,31 @@ package net.wg.gui.lobby.hangar
             this.vehResearchBG.visible = this.isControlsVisible;
             this.crewBG.visible = this.isControlsVisible;
             this.ammunitionPanelInject.visible = this.isControlsVisible;
+        }
+
+        private function positionLeftPanels() : void
+        {
+            this.crewHealing.y = this.crewBooster.y = this.crewPremiumInfo.y = this.eventCrew.y + this.eventCrew.height + TANK_REPAIR_Y_OFFSET | 0;
+            this.positionEventQuestPanel();
+        }
+
+        private function positionEventQuestPanel() : void
+        {
+            var _loc1_:DisplayObject = this.eventCrew;
+            if(this.crewPremiumInfo.visible)
+            {
+                _loc1_ = this.crewPremiumInfo;
+            }
+            else if(this.crewHealing.visible)
+            {
+                _loc1_ = this.crewHealing;
+            }
+            else if(this.crewBooster.visible)
+            {
+                _loc1_ = this.crewBooster;
+            }
+            var _loc2_:int = _loc1_.y + _loc1_.height;
+            this.eventQuestPanel.updateLayout(_originalHeight,_loc2_,this.eventTankRent.y - _loc2_ + EVENT_QUEST_PANEL_SPACING_OFFSET);
         }
 
         private function initHangarSwitchAnimator() : void
@@ -853,8 +1084,9 @@ package net.wg.gui.lobby.hangar
             var _loc2_:HelpLayoutVO = null;
             var _loc3_:* = false;
             var _loc4_:* = false;
-            var _loc5_:* = 0;
+            var _loc5_:* = NaN;
             var _loc6_:* = 0;
+            var _loc7_:* = 0;
             if(this.carousel && this._eventsEntryContainer.isActive)
             {
                 this._eventsEntryContainer.isSmall = width < StageSizeBoundaries.WIDTH_1600 || height < StageSizeBoundaries.HEIGHT_900;
@@ -866,9 +1098,9 @@ package net.wg.gui.lobby.hangar
                 _loc4_ = false;
                 if(this.ammunitionPanelInject.visible && _loc1_ != null && _loc2_ != null)
                 {
-                    _loc5_ = _loc2_.x + _loc2_.width - _loc1_.x;
-                    _loc6_ = this.ammunitionPanelInject.width - _loc5_ >> 1;
-                    _loc3_ = Math.abs(_loc6_ - _loc1_.x) <= 1;
+                    _loc6_ = _loc2_.x + _loc2_.width - _loc1_.x;
+                    _loc7_ = this.ammunitionPanelInject.width - _loc6_ >> 1;
+                    _loc3_ = Math.abs(_loc7_ - _loc1_.x) <= 1;
                     _loc4_ = this.ammunitionPanelInject.x + _loc2_.x + _loc2_.width + AMMUNITION_PANEL_INJECT_OFFSET_RIGHT > this._eventsEntryContainer.x;
                 }
                 if(_loc3_ && _loc4_)
@@ -879,6 +1111,16 @@ package net.wg.gui.lobby.hangar
                 {
                     this._eventsEntryContainer.y = this._eventsEntryContainer.y - this._eventsEntryContainer.margin.height;
                 }
+                _loc5_ = Values.DEFAULT_INT;
+                if(!this._eventMode)
+                {
+                    _loc5_ = this._eventsEntryContainer.y - BOTTOM_PANEL_SIZE - SM_CAROUSEL_PADDING;
+                }
+                else
+                {
+                    _loc5_ = SM_AMMUNITION_PANEL_PADDING + this.ammunitionPanel.y;
+                }
+                App.systemMessages.dispatchEvent(new NotificationLayoutEvent(NotificationLayoutEvent.UPDATE_LAYOUT,new Point(SM_PADDING_X,height - _loc5_)));
             }
         }
 
@@ -934,6 +1176,16 @@ package net.wg.gui.lobby.hangar
                 return DAILY_QUESTS_WIDGET_CONSTANTS.WIDGET_LAYOUT_MINI;
             }
             return DAILY_QUESTS_WIDGET_CONSTANTS.WIDGET_LAYOUT_MICRO;
+        }
+
+        private function updateBottomPosition() : void
+        {
+            if(this.bottomBg != null)
+            {
+                this.bottomBg.x = 0;
+                this.bottomBg.y = _originalHeight - this.bottomBg.height + MESSENGER_BAR_PADDING + (this._eventMode?BOTTOM_EVENT_OFFSET:0) >> 0;
+                this.bottomBg.width = _originalWidth;
+            }
         }
 
         private function updateBRComponentsPos() : void
@@ -1022,6 +1274,10 @@ package net.wg.gui.lobby.hangar
         {
             this.params.x = _originalWidth - this.params.width - RIGHT_MARGIN ^ 0;
             this.params.y = this.vehResearchBG.y + this.vehResearchBG.height + PARAMS_TOP_MARGIN ^ 0;
+            if(this._eventMode)
+            {
+                this.params.y = this.eventCoins.y + this.eventCoins.height + COINS_PADDING;
+            }
             var _loc1_:int = _originalWidth <= SMALL_SCREEN_WIDTH_THRESHOLD?PARAMS_SMALL_SCREEN_BOTTOM_MARGIN:0;
             var _loc2_:int = this.ammunitionPanel.y - this.params.y + PARAMS_BOTTOM_MARGIN - _loc1_;
             if(this._eventsEntryContainer && this._eventsEntryContainer.isActive && this._eventsEntryContainer.height > 0)
@@ -1083,6 +1339,11 @@ package net.wg.gui.lobby.hangar
             }
         }
 
+        private function updateCloseBtnPosition() : void
+        {
+            this.closeBtnEvent.x = _width - this.closeBtnEvent.width - CLOSE_BTN_OFFSET;
+        }
+
         private function alignToCenter(param1:DisplayObject) : void
         {
             if(param1)
@@ -1110,6 +1371,17 @@ package net.wg.gui.lobby.hangar
                 this.ammunitionPanelInject.y = this.ammunitionPanel.y + this.ammunitionPanelInject.offsetY;
                 this.ammunitionPanelInject.validatePanelSize();
             }
+        }
+
+        public function get paramsOffset() : int
+        {
+            return this._eventParamsOffsetX;
+        }
+
+        public function set paramsOffset(param1:int) : void
+        {
+            this._eventParamsOffsetX = param1;
+            invalidate(PARAMS_POSITION_INVALID);
         }
 
         public function get carousel() : TankCarousel
@@ -1140,6 +1412,11 @@ package net.wg.gui.lobby.hangar
         private function onTeaserHideHandler(param1:TeaserEvent) : void
         {
             this.hideTeaserAnim();
+        }
+
+        private function onEventCrewResizeHandler(param1:Event) : void
+        {
+            invalidate(MANAGE_CREW_POSITION_INVALID);
         }
 
         private function onAmmunitionPanelResizeHandler(param1:Event) : void
@@ -1201,7 +1478,31 @@ package net.wg.gui.lobby.hangar
 
         private function onVehResearchPanelResizeHandler(param1:Event) : void
         {
-            this.updateParamsPosition();
+            invalidate(PARAMS_POSITION_INVALID);
+        }
+
+        private function onToggleParamsBtnClickHandler(param1:ButtonEvent) : void
+        {
+            this._paramsToggle = !this._paramsToggle;
+            onEventParamsToggleS(this._paramsToggle);
+            if(this._tweenShow)
+            {
+                this._tweenShow.paused = true;
+                this._tweenShow.dispose();
+            }
+            if(this._paramsToggle)
+            {
+                this._tweenShow = new Tween(TWEEN_SHOW_TIME,this,{"paramsOffset":RIGHT_MARGIN});
+            }
+            else
+            {
+                this._tweenShow = new Tween(TWEEN_SHOW_TIME,this,{"paramsOffset":EVENT_PARAMS_OFFSET});
+            }
+        }
+
+        private function onCloseBtnEventClickHandler(param1:ButtonEvent) : void
+        {
+            onEventExitClickS();
         }
 
         private function onEventsEntryContainerResizeHandler(param1:Event) : void
@@ -1217,6 +1518,16 @@ package net.wg.gui.lobby.hangar
         private function onAmmunitionPanelInjectHelpLayoutChangedHandler(param1:Event) : void
         {
             invalidate(ENTRY_CONT_POSITION_INVALID);
+        }
+
+        private function onCloseBtnResizedHandler(param1:Event) : void
+        {
+            this.updateCloseBtnPosition();
+        }
+
+        private function onManageCrewPanelVisibilityChangedHandler(param1:Event) : void
+        {
+            this.positionEventQuestPanel();
         }
     }
 }

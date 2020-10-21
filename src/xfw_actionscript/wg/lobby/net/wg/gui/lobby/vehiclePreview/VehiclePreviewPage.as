@@ -27,6 +27,7 @@ package net.wg.gui.lobby.vehiclePreview
     import flash.events.KeyboardEvent;
     import net.wg.gui.lobby.vehiclePreview.buyingPanel.VPBuyingPanel;
     import net.wg.gui.lobby.vehiclePreview.buyingPanel.VPEventProgressionBuyingPanel;
+    import net.wg.gui.lobby.vehiclePreview.buyingPanel.VPPersonalTradeInBuyingPanel;
     import net.wg.gui.lobby.vehiclePreview.buyingPanel.VPTradeInBuyingPanel;
     import net.wg.gui.lobby.vehiclePreview.buyingPanel.VPOfferGiftBuyingPanel;
     import flash.events.Event;
@@ -68,6 +69,8 @@ package net.wg.gui.lobby.vehiclePreview
         private static const VEH_PARAMS_H_OFFSET:int = 35;
 
         private static const VEH_PARAMS_V_OFFSET:int = 20;
+
+        private static const LEFT_OFFSET:int = 8;
 
         public var closeButton:ISoundButtonEx;
 
@@ -198,8 +201,9 @@ package net.wg.gui.lobby.vehiclePreview
             App.gameInputMgr.setKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.onEscapeKeyUpHandler,true);
             var _loc1_:* = this.bottomPanel is VPBuyingPanel;
             var _loc2_:* = this.bottomPanel is VPEventProgressionBuyingPanel;
-            var _loc3_:* = this.bottomPanel is VPTradeInBuyingPanel;
-            var _loc4_:* = this.bottomPanel is VPOfferGiftBuyingPanel;
+            var _loc3_:* = this.bottomPanel is VPPersonalTradeInBuyingPanel;
+            var _loc4_:* = this.bottomPanel is VPTradeInBuyingPanel;
+            var _loc5_:* = this.bottomPanel is VPOfferGiftBuyingPanel;
             if(this.bottomPanel != null)
             {
                 this.bottomPanel.alpha = 0;
@@ -214,11 +218,16 @@ package net.wg.gui.lobby.vehiclePreview
             {
                 registerFlashComponentS(VPEventProgressionBuyingPanel(this.bottomPanel),VEHPREVIEW_CONSTANTS.EVENT_PROGRESSION_BUYING_PANEL_PY_ALIAS);
             }
-            else if(_loc3_)
+            else if(_loc4_)
             {
                 registerFlashComponentS(VPTradeInBuyingPanel(this.bottomPanel),VEHPREVIEW_CONSTANTS.TRADE_IN_BUYING_PANEL_PY_ALIAS);
             }
-            else if(_loc4_)
+            else if(_loc3_)
+            {
+                registerFlashComponentS(VPPersonalTradeInBuyingPanel(this.bottomPanel),VEHPREVIEW_CONSTANTS.PERSONAL_TRADE_IN_BUYING_PANEL_PY_ALIAS);
+                this.bottomPanel.addEventListener(Event.RESIZE,this.onBottomPanelResizeHandler);
+            }
+            else if(_loc5_)
             {
                 registerFlashComponentS(VPOfferGiftBuyingPanel(this.bottomPanel),VEHPREVIEW_CONSTANTS.OFFER_GIFT_BUYING_PANEL_PY_ALIAS);
             }
@@ -299,7 +308,7 @@ package net.wg.gui.lobby.vehiclePreview
                 this._infoPanel.height = _loc2_ - this._infoPanel.y;
                 if(this.bottomPanel != null)
                 {
-                    this.bottomPanel.x = width - this.bottomPanel.width >> 1;
+                    this.bottomPanel.x = (width - this.bottomPanel.width >> 1) + LEFT_OFFSET;
                     this.bottomPanel.y = height - this._offset - this.bottomPanel.height | 0;
                 }
                 this.compareBlock.x = width - this._offset - this.compareBlock.width | 0;

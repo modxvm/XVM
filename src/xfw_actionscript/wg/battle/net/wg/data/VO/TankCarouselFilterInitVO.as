@@ -17,6 +17,8 @@ package net.wg.data.VO
 
         public var isFrontline:Boolean = false;
 
+        public var isEvent:Boolean = false;
+
         public var popoverAlias:String = "TankCarouselFilterPopover";
 
         private var _mainBtn:SimpleRendererVO = null;

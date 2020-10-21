@@ -34,6 +34,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
 
         public var background:MovieClip = null;
 
+        private var _isCreateDisabled:Boolean = false;
+
         public function EquipmentSlot()
         {
             super();
@@ -113,7 +115,16 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                 {
                     this.countTF.visible = false;
                 }
+                if(this._isCreateDisabled)
+                {
+                    enabled = false;
+                }
             }
+        }
+
+        public function setCreateDisabled() : void
+        {
+            this._isCreateDisabled = true;
         }
     }
 }

@@ -339,6 +339,7 @@ package net.wg.gui.lobby.hangar.tcarousel
         private function onSlotMouseRollOverHandler(param1:MouseEvent) : void
         {
             var _loc2_:ActionPriceVO = null;
+            var _loc3_:String = null;
             if(!this._isInteractive || !this._dataVO)
             {
                 return;
@@ -365,7 +366,8 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
             else
             {
-                this._toolTipMgr.showSpecial(this._dataVO.tooltip,null,this._dataVO.intCD);
+                _loc3_ = !this._dataVO.isEvent?this._dataVO.tooltip:TOOLTIPS_CONSTANTS.EVENT_CAROUSEL_VEHICLE;
+                this._toolTipMgr.showSpecial(_loc3_,null,this._dataVO.intCD);
                 this.content.handleRollOver(this._dataVO);
             }
         }

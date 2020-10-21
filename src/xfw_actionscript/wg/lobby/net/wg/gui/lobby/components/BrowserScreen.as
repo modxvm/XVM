@@ -64,7 +64,7 @@ package net.wg.gui.lobby.components
             this.browser.visible = !this.browserParams.isHidden;
             addChild(this.browser);
             registerFlashComponentS(this.browser,Aliases.BROWSER);
-            this.browser.setSize(_width,_height);
+            this.updateBrowser();
             this.browser.addEventListener(BrowserEvent.SERVICE_VIEW_SHOWED,this.onBrowserServiceViewShowedHandler);
             this.browser.addEventListener(BrowserEvent.SERVICE_VIEW_HIDDEN,this.onBrowserServiceViewHiddenHandler);
             if(this.browser.visible)
@@ -112,13 +112,18 @@ package net.wg.gui.lobby.components
             }
             if(isInvalid(InvalidationType.SIZE))
             {
-                if(this.browser != null)
-                {
-                    this.browser.setSize(_width,_height);
-                }
+                this.updateBrowser();
                 this.waiting.setSize(_width,_height);
                 this.screenBg.setSize(_width,_height + this.bottomPanelHeight);
                 this.closeBtn.x = _width - this.closeBtn.actualWidth + CLOSE_BUTTON_RIGHT_OFFSET;
+            }
+        }
+
+        protected function updateBrowser() : void
+        {
+            if(this.browser != null)
+            {
+                this.browser.setSize(_width,_height);
             }
         }
 

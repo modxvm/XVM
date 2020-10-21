@@ -513,6 +513,8 @@ package
 
         public static const CLIENT_WARNING_INVALIDUSERSEARCHTOKEN_MESSAGE:String = "#messenger:client/warning/invalidUserSearchToken/message";
 
+        public static const CLIENT_WARNING_AFKWARNING_MESSAGE:String = "#messenger:client/warning/AFKWarning/message";
+
         public static const CLIENT_ERROR_BROADCASTINCOOLDOWN:String = "#messenger:client/error/broadcastInCooldown";
 
         public static const CLIENT_ERROR_COMMANDINCOOLDOWN_LIMITED:String = "#messenger:client/error/commandInCooldown/limited";
@@ -701,6 +703,8 @@ package
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_ITEMS_NAME:String = "#messenger:serviceChannelMessages/battleResults/quests/items/name";
 
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_ITEMS_SINGLENAME:String = "#messenger:serviceChannelMessages/battleResults/quests/items/singleName";
+
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_ENTITLEMENTS_MULTIPLIER:String = "#messenger:serviceChannelMessages/battleResults/quests/entitlements/multiplier";
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_ENTITLEMENTS_FMTMULTIPLIER:String = "#messenger:serviceChannelMessages/battleResults/quests/entitlements/fmtMultiplier";
@@ -776,6 +780,8 @@ package
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_TANKMAN:String = "#messenger:serviceChannelMessages/battleResults/tankman";
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_BATTLEPASS:String = "#messenger:serviceChannelMessages/battleResults/battlePass";
+
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_COMMANDERPOINTS:String = "#messenger:serviceChannelMessages/battleResults/commanderPoints";
 
         public static const SERVICECHANNELMESSAGES_BATTLETUTORIAL_RESULTS_FINISHED:String = "#messenger:serviceChannelMessages/battleTutorial/results/finished";
 
@@ -1130,6 +1136,20 @@ package
         public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_PAYMENTMETHODLINK:String = "#messenger:serviceChannelMessages/sysMsg/titles/paymentMethodLink";
 
         public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_PAYMENTMETHODUNLINK:String = "#messenger:serviceChannelMessages/sysMsg/titles/paymentMethodUnlink";
+
+        public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_EVENTREPAIR:String = "#messenger:serviceChannelMessages/sysMsg/titles/eventRepair";
+
+        public static const SERVICECHANNELMESSAGES_SYSMSG_MESSAGE_EVENTREPAIR:String = "#messenger:serviceChannelMessages/sysMsg/message/eventRepair";
+
+        public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_EVENTBOOSTER:String = "#messenger:serviceChannelMessages/sysMsg/titles/eventBooster";
+
+        public static const SERVICECHANNELMESSAGES_SYSMSG_MESSAGE_EVENTBOOSTER:String = "#messenger:serviceChannelMessages/sysMsg/message/eventBooster";
+
+        public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_EVENTRESTORE:String = "#messenger:serviceChannelMessages/sysMsg/titles/eventRestore";
+
+        public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_EVENTBOOSTERACTIVATED:String = "#messenger:serviceChannelMessages/sysMsg/titles/eventBoosterActivated";
+
+        public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_EVENTHEALINGALL:String = "#messenger:serviceChannelMessages/sysMsg/titles/eventHealingAll";
 
         public static const SERVICECHANNELMESSAGES_PREBATTLE_BATTLETYPE_TOURNAMENT:String = "#messenger:serviceChannelMessages/prebattle/battleType/tournament";
 
@@ -1973,6 +1993,24 @@ package
 
         public static const SERVICECHANNELMESSAGES_BRVEHICLESINVOICE_DESCR:String = "#messenger:serviceChannelMessages/BRVehiclesInvoice/descr";
 
+        public static const SERVICECHANNELMESSAGES_HALLOWEENHANGAR_VEHICLERENT:String = "#messenger:serviceChannelMessages/halloweenHangar/vehicleRent";
+
+        public static const SERVICECHANNELMESSAGES_HALLOWEENHANGAR_STYLEBOUGHT:String = "#messenger:serviceChannelMessages/halloweenHangar/styleBought";
+
+        public static const SERVICECHANNELMESSAGES_HALLOWEENHANGAR_STYLEBUNDLEBOUGHT:String = "#messenger:serviceChannelMessages/halloweenHangar/styleBundleBought";
+
+        public static const SERVICECHANNELMESSAGES_HALLOWEENHANGAR_BESTDEALBOUGHT:String = "#messenger:serviceChannelMessages/halloweenHangar/bestdealBought";
+
+        public static const SERVICECHANNELMESSAGES_HALLOWEENHANGAR_BUYSHOPITEM:String = "#messenger:serviceChannelMessages/halloweenHangar/buyShopItem";
+
+        public static const SERVICECHANNELMESSAGES_HALLOWEENHANGAR_HALLOWEENCOMMANDERLEVELREACHED:String = "#messenger:serviceChannelMessages/halloweenHangar/halloweenCommanderLevelReached";
+
+        public static const SERVICECHANNELMESSAGES_HALLOWEENHANGAR_HALLOWEENDIFFICULTYLEVELREACHED:String = "#messenger:serviceChannelMessages/halloweenHangar/halloweenDifficultyLevelReached";
+
+        public static const SERVICECHANNELMESSAGES_HALLOWEENHANGAR_HALLOWEENDIFFICULTYLEVELREACHEDTEXT:String = "#messenger:serviceChannelMessages/halloweenHangar/halloweenDifficultyLevelReachedText";
+
+        public static const SERVICECHANNELMESSAGES_HALLOWEENHANGAR_SPENTCOINS:String = "#messenger:serviceChannelMessages/halloweenHangar/spentCoins";
+
         public static const DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_ENUM:Array = [DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_OFFLINE,DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_NOTREADY,DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_READY,DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_INBATTLE,DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_AFK];
 
         public function MESSENGER()
@@ -1982,7 +2020,8 @@ package
 
         public static function getSquadChannelTooltipsStatus(param1:String) : String
         {
-            var _loc2_:String = "#messenger:" + "dialogs/squadChannel/tooltips/status/" + param1;
+            var _loc2_:String = null;
+            _loc2_ = "#messenger:" + "dialogs/squadChannel/tooltips/status/" + param1;
             if(DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_ENUM.indexOf(_loc2_) == -1)
             {
                 DebugUtils.LOG_WARNING("[getSquadChannelTooltipsStatus]:locale key \"" + _loc2_ + "\" was not found");

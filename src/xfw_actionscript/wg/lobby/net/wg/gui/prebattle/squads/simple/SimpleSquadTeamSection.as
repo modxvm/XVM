@@ -13,7 +13,6 @@ package net.wg.gui.prebattle.squads.simple
     import net.wg.gui.rally.interfaces.IRallySlotVO;
     import net.wg.gui.prebattle.squads.simple.vo.SimpleSquadRallySlotVO;
     import net.wg.gui.rally.controls.RallyInvalidationType;
-    import scaleform.clik.constants.InvalidationType;
     import net.wg.gui.rally.controls.interfaces.IRallySimpleSlotRenderer;
     import net.wg.gui.rally.controls.interfaces.ISlotRendererHelper;
     import net.wg.data.constants.Errors;
@@ -60,12 +59,20 @@ package net.wg.gui.prebattle.squads.simple
         override protected function initialize() : void
         {
             super.initialize();
-            this._bonuses = new GroupEx();
-            this._bonuses.name = GROUP_BONUSES_NAME;
-            this._bonuses.itemRendererLinkage = Linkages.SIMPLE_SQUAD_BONUS_RENDERER;
-            this._bonuses.layout = new HorizontalGroupLayout(BONUSES_GAP);
-            this._bonuses.y = BONUSES_Y;
-            addChild(this._bonuses);
+            if(this.showBonuses())
+            {
+                this._bonuses = new GroupEx();
+                this._bonuses.name = GROUP_BONUSES_NAME;
+                this._bonuses.itemRendererLinkage = Linkages.SIMPLE_SQUAD_BONUS_RENDERER;
+                this._bonuses.layout = new HorizontalGroupLayout(BONUSES_GAP);
+                this._bonuses.y = BONUSES_Y;
+                addChild(this._bonuses);
+            }
+        }
+
+        protected function showBonuses() : Boolean
+        {
+            return true;
         }
 
         override protected function configUI() : void
@@ -85,14 +92,29 @@ package net.wg.gui.prebattle.squads.simple
         override protected function draw() : void
         {
             super.draw();
-            if(isInvalid(RallyInvalidationType.VEHICLE_LABEL) && this.infoIcon.visible)
+            if(RallyInvalidationType.SECTION_DATA)
+            {
+                this.infoIcon.visible = this._sectionData.isVisibleInfoIcon;
+                if(this.infoIcon.visible)
+                {
+                    lblTeamVehicles.addEventListener(MouseEvent.ROLL_OVER,this.onLabelRollOverHandler);
+                    lblTeamVehicles.addEventListener(MouseEvent.ROLL_OUT,this.onLabelRollOutHandler);
+                }
+                this.headerIcon.visible = this._sectionData.isVisibleHeaderIcon;
+                this.headerIcon.source = this._sectionData.headerIconSource;
+                this.headerMessage.htmlText = this._sectionData.headerMessageText;
+                this.headerMessage.visible = this._sectionData.isVisibleHeaderMessage;
+                this.backgroundHeader.source = this._sectionData.backgroundHeaderSource;
+                if(this.showBonuses())
+                {
+                    this._bonuses.dataProvider = this._sectionData.bonuses;
+                    this._bonuses.validateNow();
+                    this._bonuses.x = width - this._bonuses.width - BONUSES_OFFSET ^ 0;
+                }
+            }
+            if(this.infoIcon.visible && isInvalid(RallyInvalidationType.VEHICLE_LABEL))
             {
                 this.infoIcon.x = lblTeamVehicles.x + lblTeamVehicles.width + INFO_ICON_OFFSET ^ 0;
-            }
-            if(isInvalid(InvalidationType.SIZE))
-            {
-                this._bonuses.validateNow();
-                this._bonuses.x = width - this._bonuses.width - BONUSES_OFFSET ^ 0;
                 if(!this._sectionData.isVisibleHeaderIcon)
                 {
                     this.headerMessage.x = width - this.headerMessage.width - HEADER_MESSAGE_OFFSET;
@@ -124,8 +146,11 @@ package net.wg.gui.prebattle.squads.simple
             this.headerIcon = null;
             this.backgroundHeader.dispose();
             this.backgroundHeader = null;
-            this._bonuses.dispose();
-            this._bonuses = null;
+            if(this._bonuses != null)
+            {
+                this._bonuses.dispose();
+                this._bonuses = null;
+            }
             this.headerMessage = null;
             this._tooltipMgr = null;
             super.onDispose();
@@ -147,19 +172,7 @@ package net.wg.gui.prebattle.squads.simple
         public function setSimpleSquadTeamSectionVO(param1:SimpleSquadTeamSectionVO) : void
         {
             this._sectionData = param1;
-            this.infoIcon.visible = this._sectionData.isVisibleInfoIcon;
-            if(this.infoIcon.visible)
-            {
-                lblTeamVehicles.addEventListener(MouseEvent.ROLL_OVER,this.onLabelRollOverHandler);
-                lblTeamVehicles.addEventListener(MouseEvent.ROLL_OUT,this.onLabelRollOutHandler);
-            }
-            this.headerIcon.visible = this._sectionData.isVisibleHeaderIcon;
-            this.headerIcon.source = this._sectionData.headerIconSource;
-            this.headerMessage.htmlText = this._sectionData.headerMessageText;
-            this.headerMessage.visible = this._sectionData.isVisibleHeaderMessage;
-            this.backgroundHeader.source = this._sectionData.backgroundHeaderSource;
-            this._bonuses.dataProvider = this._sectionData.bonuses;
-            invalidateSize();
+            invalidate(RallyInvalidationType.SECTION_DATA);
         }
 
         private function hideTooltip() : void

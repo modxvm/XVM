@@ -7,6 +7,8 @@ package net.wg.gui.components.dogtag
 
         public static const ON_VICTIM_DOGTAG_FADE_OUT:String = "onVictimDogTagFadeOut";
 
+        public static const ON_DOGTAG_COMPONENT_ANIMATE_HIDE_START:String = "onDogtagComponentAnimateHideStart";
+
         public function DogTagEvent(param1:String, param2:Boolean = false, param3:Boolean = false)
         {
             super(param1,param2,param3);

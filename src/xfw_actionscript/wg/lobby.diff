@@ -20,7 +20,7 @@ diff -Naur lobby.orig/App.as lobby/App.as
 diff -Naur lobby.orig/net/wg/data/constants/Linkages.as lobby/net/wg/data/constants/Linkages.as
 --- lobby.orig/net/wg/data/constants/Linkages.as	2020-07-27 14:30:19.806075700 +0300
 +++ lobby/net/wg/data/constants/Linkages.as	2020-07-27 14:41:30.976998700 +0300
-@@ -411,7 +411,7 @@
+@@ -425,7 +425,7 @@
  
          public static const TECHNIQUE_STATISTICS_PERCENT_SIGN:String = "TechniqueStatisticsPercentSign_UI";
  
@@ -121,7 +121,7 @@ diff -Naur lobby.orig/net/wg/gui/lobby/components/SmallSkillsList.as lobby/net/w
 diff -Naur lobby.orig/net/wg/gui/lobby/hangar/Hangar.as lobby/net/wg/gui/lobby/hangar/Hangar.as
 --- lobby.orig/net/wg/gui/lobby/hangar/Hangar.as	2020-07-27 14:30:34.568675800 +0300
 +++ lobby/net/wg/gui/lobby/hangar/Hangar.as	2020-07-27 14:41:31.132652900 +0300
-@@ -167,6 +167,11 @@
+@@ -241,6 +241,11 @@
  
          public var closeBtn:CloseButtonText;
  

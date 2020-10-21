@@ -1,7 +1,7 @@
 package net.wg.infrastructure.base.meta.impl
 {
     import net.wg.gui.battle.components.BattleDisplayable;
-    import net.wg.gui.battle.eventBattle.views.battleHints.data.HintInfoVO;
+    import net.wg.gui.battle.pveEvent.views.battleHints.data.HintInfoVO;
     import net.wg.data.constants.Errors;
     import net.wg.infrastructure.exceptions.AbstractException;
 
@@ -25,22 +25,22 @@ package net.wg.infrastructure.base.meta.impl
             super.onDispose();
         }
 
-        public final function as_showHint(param1:Object) : void
+        public final function as_showHint(param1:String, param2:Object) : void
         {
-            var _loc2_:HintInfoVO = this._hintInfoVO;
-            this._hintInfoVO = new HintInfoVO(param1);
-            this.showHint(this._hintInfoVO);
-            if(_loc2_)
+            var _loc3_:HintInfoVO = this._hintInfoVO;
+            this._hintInfoVO = new HintInfoVO(param2);
+            this.showHint(param1,this._hintInfoVO);
+            if(_loc3_)
             {
-                _loc2_.dispose();
+                _loc3_.dispose();
             }
         }
 
-        protected function showHint(param1:HintInfoVO) : void
+        protected function showHint(param1:String, param2:HintInfoVO) : void
         {
-            var _loc2_:String = "as_showHint" + Errors.ABSTRACT_INVOKE;
-            DebugUtils.LOG_ERROR(_loc2_);
-            throw new AbstractException(_loc2_);
+            var _loc3_:String = "as_showHint" + Errors.ABSTRACT_INVOKE;
+            DebugUtils.LOG_ERROR(_loc3_);
+            throw new AbstractException(_loc3_);
         }
     }
 }

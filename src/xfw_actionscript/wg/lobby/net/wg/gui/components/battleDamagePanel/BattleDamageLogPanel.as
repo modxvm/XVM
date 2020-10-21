@@ -76,6 +76,8 @@ package net.wg.gui.components.battleDamagePanel
 
         private var _topContainerXPos:Number = 0;
 
+        private var _topDetailsOffsetY:Number = 0;
+
         public function BattleDamageLogPanel()
         {
             super();
@@ -84,6 +86,7 @@ package net.wg.gui.components.battleDamagePanel
             this._detailsTopContainer.name = "detailsTopContainer";
             this._detailsBottomContainer = new Sprite();
             this._detailsBottomContainer.name = "detailsBottomContainer";
+            this._topDetailsOffsetY = TOP_DETAILS_OFFSET_Y;
         }
 
         override protected function initialize() : void
@@ -270,9 +273,14 @@ package net.wg.gui.components.battleDamagePanel
             this._detailsBottomContainer.y = BOTTOM_DETAILS_POS_Y - this._additionalRowsCount * BattleDamageLogConstants.RENDER_STEP_SIZE;
         }
 
+        public function setTopDetailsOffsetY(param1:Number) : void
+        {
+            this._topDetailsOffsetY = param1;
+        }
+
         public function updateSize(param1:Number, param2:Number) : void
         {
-            this._detailsTopContainer.y = -param2 + TOP_DETAILS_OFFSET_Y;
+            this._detailsTopContainer.y = -param2 + this._topDetailsOffsetY;
         }
 
         public function updateTopContainerPosition(param1:Number) : void

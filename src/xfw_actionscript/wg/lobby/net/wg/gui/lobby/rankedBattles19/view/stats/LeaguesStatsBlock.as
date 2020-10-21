@@ -53,9 +53,10 @@ package net.wg.gui.lobby.rankedBattles19.view.stats
 
         override protected function maximizeElements() : void
         {
+            var _loc1_:* = 0;
             var _loc2_:RankedBattleStats = null;
             super.maximizeElements();
-            var _loc1_:* = -GAP_BIG * (this._blocks.length - 1) >> 1;
+            _loc1_ = -GAP_BIG * (this._blocks.length - 1) >> 1;
             for each(_loc2_ in this._blocks)
             {
                 _loc2_.maximize();

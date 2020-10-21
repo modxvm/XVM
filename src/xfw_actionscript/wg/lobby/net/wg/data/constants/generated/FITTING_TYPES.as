@@ -17,6 +17,8 @@ package net.wg.data.constants.generated
 
         public static const BOOSTER:String = "battleBooster";
 
+        public static const RESURRECT:String = "resurrect";
+
         public static const CREW_BOOKS:String = "crewBooks";
 
         public static const CUSTOMIZATION:String = "customization";

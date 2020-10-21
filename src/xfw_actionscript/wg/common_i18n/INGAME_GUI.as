@@ -229,6 +229,14 @@ package
 
         public static const CHAT_SHORTCUTS_ATTENTION_TO_OBJECTIVE_DEF_AUTOCOMMIT:String = "#ingame_gui:chat_shortcuts/attention_to_objective_def_autocommit";
 
+        public static const CHAT_SHORTCUTS_MOVETO_COLLECTOR:String = "#ingame_gui:chat_shortcuts/moveto_collector";
+
+        public static const CHAT_SHORTCUTS_MOVING_TO_COLLECTOR:String = "#ingame_gui:chat_shortcuts/moving_to_collector";
+
+        public static const CHAT_SHORTCUTS_MOVETO_CAMP:String = "#ingame_gui:chat_shortcuts/moveto_camp";
+
+        public static const CHAT_SHORTCUTS_MOVING_TO_CAMP:String = "#ingame_gui:chat_shortcuts/moving_to_camp";
+
         public static const CHAT_SHORTCUTS_HELP_ME_EX:String = "#ingame_gui:chat_shortcuts/help_me_ex";
 
         public static const CHAT_SHORTCUTS_SUPPORTING_ALLY:String = "#ingame_gui:chat_shortcuts/supporting_ally";
@@ -567,6 +575,10 @@ package
 
         public static const POSTMORTEM_TIPS_EXITHANGAR_TEXT:String = "#ingame_gui:postmortem/tips/exitHangar/text";
 
+        public static const POSTMORTEM_TIPS_HINT_TITLE:String = "#ingame_gui:postmortem/tips/hint/title";
+
+        public static const POSTMORTEM_TIPS_HINT_DESC:String = "#ingame_gui:postmortem/tips/hint/desc";
+
         public static const PLAYERS_PANEL_STATE_NONE_HEADER:String = "#ingame_gui:players_panel/state/none/header";
 
         public static const PLAYERS_PANEL_STATE_NONE_BODY:String = "#ingame_gui:players_panel/state/none/body";
@@ -606,6 +618,12 @@ package
         public static const PLAYERS_PANEL_UNKNOWN_VEHICLESTATE:String = "#ingame_gui:players_panel/unknown_vehicleState";
 
         public static const PLAYERS_PANEL_UNKNOWN_CLAN:String = "#ingame_gui:players_panel/unknown_clan";
+
+        public static const PLAYERS_PANEL_INFO_TEAM:String = "#ingame_gui:players_panel/info/team";
+
+        public static const PLAYERS_PANEL_INFO_COLLECTOR:String = "#ingame_gui:players_panel/info/collector";
+
+        public static const PLAYERS_PANEL_INFO_COLLECTOR_FULL:String = "#ingame_gui:players_panel/info/collector_full";
 
         public static const EPIC_PLAYERS_PANEL_STATE_HIDDEN_HEADER:String = "#ingame_gui:epic_players_panel/state/hidden/header";
 
@@ -722,6 +740,18 @@ package
         public static const POSTMORTEM_MESSAGES_DEATH_FROM_SHOT_ARTILLERY:String = "#ingame_gui:postmortem_messages/DEATH_FROM_SHOT_ARTILLERY";
 
         public static const POSTMORTEM_MESSAGES_DEATH_FROM_SHOT_BOMBER:String = "#ingame_gui:postmortem_messages/DEATH_FROM_SHOT_BOMBER";
+
+        public static const POSTMORTEM_MESSAGES_EVENT_DEATH_FROM_SHOT:String = "#ingame_gui:postmortem_messages/EVENT_DEATH_FROM_SHOT";
+
+        public static const POSTMORTEM_MESSAGES_EVENT_DEATH_ON_PHASE_CHANGE:String = "#ingame_gui:postmortem_messages/EVENT_DEATH_ON_PHASE_CHANGE";
+
+        public static const POSTMORTEM_MESSAGES_EVENT_DEATH_ON_PHASE_CHANGE_FULL_SC:String = "#ingame_gui:postmortem_messages/EVENT_DEATH_ON_PHASE_CHANGE_FULL_SC";
+
+        public static const POSTMORTEM_MESSAGES_EVENT_DEATH_FROM_BOSS_AURA:String = "#ingame_gui:postmortem_messages/EVENT_DEATH_FROM_BOSS_AURA";
+
+        public static const PLAYER_MESSAGES_EVENT_DEATH_FROM_BOSS_AURA_ENEMY_SELF:String = "#ingame_gui:player_messages/EVENT_DEATH_FROM_BOSS_AURA_ENEMY_SELF";
+
+        public static const PLAYER_MESSAGES_EVENT_DEATH_FROM_BOSS_AURA_ENEMY_ALLY:String = "#ingame_gui:player_messages/EVENT_DEATH_FROM_BOSS_AURA_ENEMY_ALLY";
 
         public static const POSTMORTEM_MESSAGES_DEATH_FROM_OVERTURN_SELF_SUICIDE:String = "#ingame_gui:postmortem_messages/DEATH_FROM_OVERTURN_SELF_SUICIDE";
 
@@ -973,6 +1003,8 @@ package
 
         public static const POSTMORTEM_MESSAGES_DEATH_FROM_DEATH_ZONE_ALLY_SELF:String = "#ingame_gui:postmortem_messages/DEATH_FROM_DEATH_ZONE_ALLY_SELF";
 
+        public static const POSTMORTEM_MESSAGES_EVENT_DEATH_FROM_DEATH_ZONE:String = "#ingame_gui:postmortem_messages/EVENT_DEATH_FROM_DEATH_ZONE";
+
         public static const VEHICLE_MESSAGES_DEATH_FROM_GAS_ATTACK_ENEMY_SELF:String = "#ingame_gui:vehicle_messages/DEATH_FROM_GAS_ATTACK_ENEMY_SELF";
 
         public static const VEHICLE_MESSAGES_DEATH_FROM_GAS_ATTACK_ALLY_SELF:String = "#ingame_gui:vehicle_messages/DEATH_FROM_GAS_ATTACK_ALLY_SELF";
@@ -1143,6 +1175,8 @@ package
 
         public static const EFFICIENCYRIBBONS_DEATHZONE:String = "#ingame_gui:efficiencyRibbons/deathZone";
 
+        public static const EFFICIENCYRIBBONS_EVENTDEATHONPHASECHANGE:String = "#ingame_gui:efficiencyRibbons/eventDeathOnPhaseChange";
+
         public static const DAMAGELOG_SHELLTYPE_ARMOR_PIERCING:String = "#ingame_gui:damageLog/shellType/ARMOR_PIERCING";
 
         public static const DAMAGELOG_SHELLTYPE_HIGH_EXPLOSIVE:String = "#ingame_gui:damageLog/shellType/HIGH_EXPLOSIVE";
@@ -1160,6 +1194,8 @@ package
         public static const HITMARKER_RICOCHET:String = "#ingame_gui:hitMarker/ricochet";
 
         public static const HITMARKER_CRITICAL:String = "#ingame_gui:hitMarker/critical";
+
+        public static const HITMARKER_BOSS:String = "#ingame_gui:hitMarker/boss";
 
         public static const RESPAWNVIEW_TITLE:String = "#ingame_gui:respawnView/title";
 
@@ -1483,6 +1519,14 @@ package
 
         public static const REWARDWINDOW_TWITCH16_BTNLABEL:String = "#ingame_gui:rewardWindow/twitch16/btnLabel";
 
+        public static const REWARDWINDOW_TWITCH17_HEADERTEXT:String = "#ingame_gui:rewardWindow/twitch17/headerText";
+
+        public static const REWARDWINDOW_TWITCH17_SUBHEADERTEXT:String = "#ingame_gui:rewardWindow/twitch17/subHeaderText";
+
+        public static const REWARDWINDOW_TWITCH17_DESCTEXT:String = "#ingame_gui:rewardWindow/twitch17/descText";
+
+        public static const REWARDWINDOW_TWITCH17_BTNLABEL:String = "#ingame_gui:rewardWindow/twitch17/btnLabel";
+
         public static const REWARDWINDOW_LOOTBOX_WINHEADERTEXT:String = "#ingame_gui:rewardWindow/lootbox/winHeaderText";
 
         public static const REWARDWINDOW_LOOTBOX_HEADERTEXT:String = "#ingame_gui:rewardWindow/lootbox/headerText";
@@ -1662,6 +1706,26 @@ package
         public static const OPTDEVICERESURRECTION_AMMOBAY:String = "#ingame_gui:optDeviceResurrection/ammoBay";
 
         public static const LEVELPROGRESS_MAXLEVEL:String = "#ingame_gui:levelProgress/maxLevel";
+
+        public static const PLAYER_MESSAGES_PICKUP_SOULS:String = "#ingame_gui:player_messages/PICKUP_SOULS";
+
+        public static const PLAYER_MESSAGES_PICKUP_LORE_ITEM:String = "#ingame_gui:player_messages/PICKUP_LORE_ITEM";
+
+        public static const PLAYER_MESSAGES_EQUIPMENT_USAGE:String = "#ingame_gui:player_messages/EQUIPMENT_USAGE";
+
+        public static const PLAYER_MESSAGES_TEAM_EQUIPMENT_USAGE:String = "#ingame_gui:player_messages/TEAM_EQUIPMENT_USAGE";
+
+        public static const PLAYER_ERRORS_EQUIPMENT_HPREPAIRANDCREWHEAL_NOTREQUIRED:String = "#ingame_gui:player_errors/equipment/hpRepairAndCrewHeal/notRequired";
+
+        public static const PLAYER_ERRORS_EQUIPMENT_INSTANTRELOAD_NOTREQUIRED:String = "#ingame_gui:player_errors/equipment/instantReload/notRequired";
+
+        public static const REWARDWINDOW_HW19_COMMANDERS_HEADERTEXT:String = "#ingame_gui:rewardWindow/hw19_commanders/headerText";
+
+        public static const REWARDWINDOW_HW19_COMMANDERS_SUBHEADERTEXT:String = "#ingame_gui:rewardWindow/hw19_commanders/subHeaderText";
+
+        public static const REWARDWINDOW_HW19_COMMANDERS_DESCTEXT:String = "#ingame_gui:rewardWindow/hw19_commanders/descText";
+
+        public static const REWARDWINDOW_HW19_COMMANDERS_BTNLABEL:String = "#ingame_gui:rewardWindow/hw19_commanders/btnLabel";
 
         public function INGAME_GUI()
         {

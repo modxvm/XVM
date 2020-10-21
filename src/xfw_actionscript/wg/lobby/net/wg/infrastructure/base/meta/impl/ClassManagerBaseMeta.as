@@ -596,6 +596,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.components.tooltips.inblocks.blocks.BaseTooltipBlock;
     import net.wg.gui.components.tooltips.inblocks.blocks.BuildUpBlock;
     import net.wg.gui.components.tooltips.inblocks.blocks.CounterTextBlock;
+    import net.wg.gui.components.tooltips.inblocks.blocks.GlowTextBlock;
     import net.wg.gui.components.tooltips.inblocks.blocks.ImageTextBlockInBlocks;
     import net.wg.gui.components.tooltips.inblocks.blocks.ItemTitleDescBlock;
     import net.wg.gui.components.tooltips.inblocks.blocks.SpriteTextBlockInBlocks;
@@ -608,6 +609,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.components.tooltips.inblocks.data.BlocksVO;
     import net.wg.gui.components.tooltips.inblocks.data.BuildUpBlockVO;
     import net.wg.gui.components.tooltips.inblocks.data.CounterTextBlockVO;
+    import net.wg.gui.components.tooltips.inblocks.data.GlowTextBlockVO;
     import net.wg.gui.components.tooltips.inblocks.data.ImageBlockVO;
     import net.wg.gui.components.tooltips.inblocks.data.ImageTextBlockVO;
     import net.wg.gui.components.tooltips.inblocks.data.SpriteTextBlockVO;
@@ -637,6 +639,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.data.WaitingPointcutsVO;
     import net.wg.gui.data.WaitingQueueCounterMessageVO;
     import net.wg.gui.data.WaitingQueueWindowVO;
+    import net.wg.gui.dialogs.EventAFKDialog;
     import net.wg.gui.dialogs.ItemStatusData;
     import net.wg.gui.dialogs.SimpleDialog;
     import net.wg.gui.eventcomponents.NumberProgress;
@@ -823,6 +826,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.infrastructure.base.meta.IColorSettingsViewMeta;
     import net.wg.infrastructure.base.meta.ICrosshairPanelContainerMeta;
     import net.wg.infrastructure.base.meta.IDAAPISimpleContainerMeta;
+    import net.wg.infrastructure.base.meta.IEventAFKDialogMeta;
     import net.wg.infrastructure.base.meta.IGameLoadingMeta;
     import net.wg.infrastructure.base.meta.IGammaWizardViewMeta;
     import net.wg.infrastructure.base.meta.IGFTutorialViewMeta;
@@ -2052,6 +2056,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_INBLOCKS_BLOCKS_COUNTERTEXTBLOCK:Class = CounterTextBlock;
 
+        public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_INBLOCKS_BLOCKS_GLOWTEXTBLOCK:Class = GlowTextBlock;
+
         public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_INBLOCKS_BLOCKS_IMAGETEXTBLOCKINBLOCKS:Class = ImageTextBlockInBlocks;
 
         public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_INBLOCKS_BLOCKS_ITEMTITLEDESCBLOCK:Class = ItemTitleDescBlock;
@@ -2075,6 +2081,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_INBLOCKS_DATA_BUILDUPBLOCKVO:Class = BuildUpBlockVO;
 
         public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_INBLOCKS_DATA_COUNTERTEXTBLOCKVO:Class = CounterTextBlockVO;
+
+        public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_INBLOCKS_DATA_GLOWTEXTBLOCKVO:Class = GlowTextBlockVO;
 
         public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_INBLOCKS_DATA_IMAGEBLOCKVO:Class = ImageBlockVO;
 
@@ -2133,6 +2141,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_DATA_WAITINGQUEUECOUNTERMESSAGEVO:Class = WaitingQueueCounterMessageVO;
 
         public static const NET_WG_GUI_DATA_WAITINGQUEUEWINDOWVO:Class = WaitingQueueWindowVO;
+
+        public static const NET_WG_GUI_DIALOGS_EVENTAFKDIALOG:Class = EventAFKDialog;
 
         public static const NET_WG_GUI_DIALOGS_ITEMSTATUSDATA:Class = ItemStatusData;
 
@@ -2506,6 +2516,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IDAAPISIMPLECONTAINERMETA:Class = IDAAPISimpleContainerMeta;
 
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IEVENTAFKDIALOGMETA:Class = IEventAFKDialogMeta;
+
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IGAMELOADINGMETA:Class = IGameLoadingMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IGAMMAWIZARDVIEWMETA:Class = IGammaWizardViewMeta;
@@ -2557,6 +2569,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CROSSHAIRPANELCONTAINERMETA:Class = CrosshairPanelContainerMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_DAAPISIMPLECONTAINERMETA:Class = DAAPISimpleContainerMeta;
+
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_EVENTAFKDIALOGMETA:Class = EventAFKDialogMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_GAMELOADINGMETA:Class = GameLoadingMeta;
 

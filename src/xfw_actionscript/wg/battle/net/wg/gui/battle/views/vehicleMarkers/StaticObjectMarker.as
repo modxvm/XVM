@@ -1,32 +1,57 @@
 package net.wg.gui.battle.views.vehicleMarkers
 {
-    import net.wg.gui.battle.components.BattleUIComponent;
+    import net.wg.gui.battle.views.actionMarkers.BaseActionMarker;
     import flash.geom.Point;
+    import flash.display.Sprite;
     import flash.display.MovieClip;
     import flash.text.TextField;
-    import flash.display.Sprite;
     import scaleform.clik.motion.Tween;
     import flash.display.Bitmap;
+    import net.wg.data.constants.Values;
     import flash.utils.getDefinitionByName;
+    import net.wg.gui.battle.views.vehicleMarkers.event.EventConstants;
     import net.wg.data.constants.Errors;
     import scaleform.gfx.TextFieldEx;
+    import flash.display.BlendMode;
 
-    public class StaticObjectMarker extends BattleUIComponent
+    public class StaticObjectMarker extends BaseActionMarker
     {
 
         private static const ALPHA_SPEED:int = 1;
 
         private static const SHAPE_XY:Point = new Point(-145,-178);
 
+        private static const REPLY_POSITION:Point = new Point(24,0);
+
+        private static const COLOR_WHITE:String = "white";
+
         private static const COLOR_GREEN:String = "green";
 
         private static const COLOR_YELLOW:String = "yellow";
 
+        private static const COLOR_FULL:String = "full";
+
+        private static const COLOR_NOT_FULL:String = "notFull";
+
+        private static const REPLIED_ME_STATE:int = 1;
+
+        private static const EVENT_ENEMY_CAMP:String = "EventEnemyCamp";
+
+        public var repliedMe:Sprite;
+
+        public var hover:MovieClip;
+
         public var marker:MovieClip = null;
+
+        public var distanceFieldWhite:TextField = null;
 
         public var distanceFieldGreen:TextField = null;
 
         public var distanceFieldYellow:TextField = null;
+
+        public var distanceFieldEventFull:TextField = null;
+
+        public var distanceFieldEventNotFull:TextField = null;
 
         public var bgShadow:Sprite = null;
 
@@ -52,10 +77,20 @@ package net.wg.gui.battle.views.vehicleMarkers
         {
             super();
             this._distanceTF = this.distanceFieldGreen;
+            this.distanceFieldWhite.visible = false;
             this.distanceFieldGreen.visible = false;
             this.distanceFieldYellow.visible = false;
+            this.distanceFieldEventFull.visible = false;
+            this.distanceFieldEventNotFull.visible = false;
+            this.hover.visible = false;
+            this.repliedMe.visible = false;
+            TextFieldEx.setNoTranslate(this.distanceFieldWhite,true);
             TextFieldEx.setNoTranslate(this.distanceFieldGreen,true);
             TextFieldEx.setNoTranslate(this.distanceFieldYellow,true);
+            TextFieldEx.setNoTranslate(this.distanceFieldEventFull,true);
+            TextFieldEx.setNoTranslate(this.distanceFieldEventNotFull,true);
+            this.distanceFieldEventFull.blendMode = BlendMode.ADD;
+            this.distanceFieldEventNotFull.blendMode = BlendMode.ADD;
         }
 
         override protected function onDispose() : void
@@ -70,8 +105,12 @@ package net.wg.gui.battle.views.vehicleMarkers
                 this._shapeBitmap = null;
             }
             this.marker = null;
+            this.repliedMe = null;
+            this.distanceFieldWhite = null;
             this.distanceFieldGreen = null;
             this.distanceFieldYellow = null;
+            this.distanceFieldEventFull = null;
+            this.distanceFieldEventNotFull = null;
             this.bgShadow = null;
             this.clearTween();
             this._distanceTF = null;
@@ -84,6 +123,11 @@ package net.wg.gui.battle.views.vehicleMarkers
             this.setShape();
             this.setInitialAlpha();
             this.setDistanceText();
+        }
+
+        public function activateHover(param1:Boolean) : void
+        {
+            this.hover.visible = param1;
         }
 
         public function doAlphaAnimation() : void
@@ -112,7 +156,24 @@ package net.wg.gui.battle.views.vehicleMarkers
             this._minDistance = param2;
             this._alphaZone = param3 - param2;
             this._distance = !isNaN(param4)?Math.round(param4):-1;
-            this._distanceTF = param6 == COLOR_GREEN?this.distanceFieldGreen:this.distanceFieldYellow;
+            switch(param6)
+            {
+                case COLOR_FULL:
+                    this._distanceTF = this.distanceFieldEventFull;
+                    break;
+                case COLOR_NOT_FULL:
+                    this._distanceTF = this.distanceFieldEventNotFull;
+                    break;
+                case COLOR_GREEN:
+                    this._distanceTF = this.distanceFieldGreen;
+                    break;
+                case COLOR_WHITE:
+                    this._distanceTF = this.distanceFieldWhite;
+                    break;
+                case COLOR_YELLOW:
+                default:
+                    this._distanceTF = this.distanceFieldYellow;
+            }
             this._metersString = param5;
             this._distanceTF.visible = true;
             if(initialized)
@@ -121,6 +182,11 @@ package net.wg.gui.battle.views.vehicleMarkers
                 this.setInitialAlpha();
                 this.setDistanceText();
             }
+        }
+
+        public function setActiveState(param1:int) : void
+        {
+            this.repliedMe.visible = param1 == REPLIED_ME_STATE;
         }
 
         public function setDistance(param1:Number) : void
@@ -160,7 +226,7 @@ package net.wg.gui.battle.views.vehicleMarkers
             }
             else
             {
-                this._distanceTF.text = "";
+                this._distanceTF.text = Values.EMPTY_STR;
             }
         }
 
@@ -173,7 +239,12 @@ package net.wg.gui.battle.views.vehicleMarkers
                 if(this._shapeBitmap.bitmapData != null)
                 {
                     this._shapeBitmap.bitmapData.dispose();
+                    this._shapeBitmap.filters = null;
                     this._shapeBitmap.bitmapData = null;
+                }
+                if(replyMarker != null)
+                {
+                    replyMarker.filters = null;
                 }
             }
             try
@@ -182,6 +253,11 @@ package net.wg.gui.battle.views.vehicleMarkers
                 this._shapeBitmap = new Bitmap(new shapeBitmapClass());
                 this._shapeBitmap.x = SHAPE_XY.x;
                 this._shapeBitmap.y = SHAPE_XY.y;
+                if(this._shapeName == EVENT_ENEMY_CAMP)
+                {
+                    this._shapeBitmap.filters = [EventConstants.MARKER_FILTER];
+                    replyMarker.filters = [EventConstants.REPLY_FILTER];
+                }
                 this.marker.addChild(this._shapeBitmap);
                 return;
             }
@@ -200,6 +276,11 @@ package net.wg.gui.battle.views.vehicleMarkers
                 this._tween.dispose();
                 this._tween = null;
             }
+        }
+
+        override protected function get getReplyPosition() : Point
+        {
+            return REPLY_POSITION;
         }
     }
 }

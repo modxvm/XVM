@@ -53,6 +53,8 @@ package
 
         public static const HANGAR_SESSIONSTATS:String = "#lobby_help:hangar/sessionStats";
 
+        public static const HANGAR_EVENT:String = "#lobby_help:hangar/event";
+
         public static const HANGAR_AMMUNITIONPANEL_ENUM:Array = [HANGAR_AMMUNITIONPANEL_OPTDEVICES,HANGAR_AMMUNITIONPANEL_SHELLS,HANGAR_AMMUNITIONPANEL_CONSUMABLES,HANGAR_AMMUNITIONPANEL_BATTLEBOOSTERS,HANGAR_AMMUNITIONPANEL_BATTLEABILITIES];
 
         public function LOBBY_HELP()

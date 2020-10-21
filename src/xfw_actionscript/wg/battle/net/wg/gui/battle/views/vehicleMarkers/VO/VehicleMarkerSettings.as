@@ -17,6 +17,8 @@ package net.wg.gui.battle.views.vehicleMarkers.VO
 
         public var markerBasePlayerName:Boolean = true;
 
+        public var markerBaseAimMarker2D:Boolean = true;
+
         public var markerAltHp:int = 0;
 
         public var markerAltIcon:Boolean = true;
@@ -30,6 +32,8 @@ package net.wg.gui.battle.views.vehicleMarkers.VO
         public var markerAltVehicleName:Boolean = true;
 
         public var markerAltPlayerName:Boolean = true;
+
+        public var markerAltAimMarker2D:Boolean = true;
 
         public function VehicleMarkerSettings()
         {

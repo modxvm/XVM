@@ -1,9 +1,9 @@
 diff -Naur lobby.orig-0.orig/net/wg/gui/lobby/hangar/Hangar.class.asasm lobby.orig-0/net/wg/gui/lobby/hangar/Hangar.class.asasm
 --- lobby.orig-0.orig/net/wg/gui/lobby/hangar/Hangar.class.asasm	2020-07-27 15:02:03.056379600 +0300
 +++ lobby.orig-0/net/wg/gui/lobby/hangar/Hangar.class.asasm	2020-07-27 15:13:21.805338400 +0300
-@@ -131,6 +131,24 @@
-   trait slot QName(PackageNamespace(""), "teaser") type QName(PackageNamespace("net.wg.gui.lobby.post"), "Teaser") end
-   trait slot QName(PackageNamespace(""), "dqWidget") type QName(PackageNamespace("net.wg.gui.lobby.hangar"), "DailyQuestWidget") end
+@@ -158,6 +158,24 @@
+   trait slot QName(PackageNamespace(""), "closeBtnEvent") type QName(PackageNamespace("net.wg.gui.interfaces"), "ISoundButtonEx") value Null() end
+   trait slot QName(PackageNamespace(""), "toggleParamsBtn") type QName(PackageNamespace("net.wg.gui.interfaces"), "ISoundButtonEx") value Null() end
    trait slot QName(PackageNamespace(""), "closeBtn") type QName(PackageNamespace("net.wg.gui.components.controls"), "CloseButtonText") end
 +  trait getter QName(PackageNamespace(""), "xfw_header")
 +   method

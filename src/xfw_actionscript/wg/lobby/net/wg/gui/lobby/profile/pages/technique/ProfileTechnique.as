@@ -104,12 +104,13 @@ package net.wg.gui.lobby.profile.pages.technique
 
         override protected function applyResizing() : void
         {
+            var _loc1_:* = NaN;
             if(layoutManager != null)
             {
                 layoutManager.setDimension(currentDimension.x,currentDimension.y);
             }
             this.x = (currentDimension.x >> 1) - centerOffset;
-            var _loc1_:Number = Math.min(currentDimension.x,ProfileConstants.MIN_APP_WIDTH);
+            _loc1_ = Math.min(currentDimension.x,ProfileConstants.MIN_APP_WIDTH);
             this.emptyScreen.x = _loc1_ - this.emptyScreen.width >> 1;
             this.listComponent.setSize(currentDimension.x,currentDimension.y - this.listComponent.y + ADDITIONAL_LIST_HEIGHT);
             this.stackComponent.setViewSize(_loc1_ - this.stackComponent.x,currentDimension.y - this.stackComponent.y);

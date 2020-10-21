@@ -314,15 +314,15 @@ package net.wg.gui.battle.windows
             {
                 this.quitBattleBtn.y = this.quitBattleBtn.y + param1;
                 this.settingsBtn.y = this.settingsBtn.y + param1;
+                _loc2_ = this._showBootcampButton?0:Y_OFFSET_MENU_BUTTON;
                 if(this._showHelpButton)
                 {
                     this.helpBtn.y = this.helpBtn.y + param1;
                 }
                 else
                 {
-                    var param1:int = param1 + Y_OFFSET_MENU_BUTTON;
+                    _loc2_ = _loc2_ + Y_OFFSET_MENU_BUTTON;
                 }
-                _loc2_ = this._showBootcampButton?0:Y_OFFSET_MENU_BUTTON;
                 this.cancelBtn.y = this.cancelBtn.y + (param1 + _loc2_);
                 this.background.height = this.background.height + (param1 + _loc2_);
                 this.requestBootcampQuitBtn.y = this.requestBootcampQuitBtn.y + param1;

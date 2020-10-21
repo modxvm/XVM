@@ -105,6 +105,8 @@ package
 
         public static const ARENA_START_ERRORS_JOIN_NO_VEHICLE:String = "#system_messages:arena_start_errors/join/no_vehicle";
 
+        public static const ARENA_START_ERRORS_JOIN_NOT_ENOUGH_ENERGY:String = "#system_messages:arena_start_errors/join/NOT_ENOUGH_ENERGY";
+
         public static const ARENA_START_ERRORS_JOIN_NO_READYVEHICLE:String = "#system_messages:arena_start_errors/join/no_readyVehicle";
 
         public static const ARENA_START_ERRORS_JOIN_WRONG_BATTLE_ID:String = "#system_messages:arena_start_errors/join/WRONG_BATTLE_ID";
@@ -1775,9 +1777,17 @@ package
 
         public static const UNIT_NOTIFICATION_PLAYERADDED:String = "#system_messages:unit/notification/playerAdded";
 
+        public static const UNIT_NOTIFICATION_EVENTPLAYERADDED:String = "#system_messages:unit/notification/eventPlayerAdded";
+
         public static const UNIT_NOTIFICATION_PLAYERREMOVED:String = "#system_messages:unit/notification/playerRemoved";
 
+        public static const UNIT_NOTIFICATION_EVENTPLAYERREMOVED:String = "#system_messages:unit/notification/eventPlayerRemoved";
+
         public static const UNIT_NOTIFICATION_GIVELEADERSHIP:String = "#system_messages:unit/notification/giveLeadership";
+
+        public static const UNIT_NOTIFICATION_SELECTEDDIFFICULTYLEVEL:String = "#system_messages:unit/notification/selectedDifficultyLevel";
+
+        public static const UNIT_NOTIFICATION_NOTREADYDIFFICULTYLEVEL:String = "#system_messages:unit/notification/notReadyDifficultyLevel";
 
         public static const UNIT_NOTIFICATION_CHANGEDIVISION:String = "#system_messages:unit/notification/changeDivision";
 
@@ -1814,6 +1824,10 @@ package
         public static const UNIT_ERRORS_BAD_VEHICLES_SET:String = "#system_messages:unit/errors/BAD_VEHICLES_SET";
 
         public static const UNIT_ERRORS_WRONG_VEHICLE:String = "#system_messages:unit/errors/WRONG_VEHICLE";
+
+        public static const UNIT_ERRORS_WRONG_DIFFICULTY_LEVEL:String = "#system_messages:unit/errors/WRONG_DIFFICULTY_LEVEL";
+
+        public static const UNIT_ERRORS_MISSING_DIFFICULTY_LEVEL:String = "#system_messages:unit/errors/MISSING_DIFFICULTY_LEVEL";
 
         public static const IGR_CUSTOMIZATION_BEGIN:String = "#system_messages:igr/customization/begin";
 
@@ -2370,6 +2384,84 @@ package
         public static const DOG_TAGS_SWITCH_ON_TITLE:String = "#system_messages:dog_tags/switch_on/title";
 
         public static const DOG_TAGS_SWITCH_ON_BODY:String = "#system_messages:dog_tags/switch_on/body";
+
+        public static const HW19_SERVER_ERROR:String = "#system_messages:hw19/server_error";
+
+        public static const HW19_VEHICLE_ALREADY_BOUGHT:String = "#system_messages:hw19_vehicle/already_bought";
+
+        public static const HW19_VEHICLE_BUY_SUCCESS:String = "#system_messages:hw19_vehicle/buy_success";
+
+        public static const HW19_BUY_ENERGY_SERVER_ERROR:String = "#system_messages:hw19_buy_energy/server_error";
+
+        public static const HW19_BUY_ENERGY_VEHICLE_CAN_NOT_HAVE_ENERGY:String = "#system_messages:hw19_buy_energy/vehicle_can_not_have_energy";
+
+        public static const HW19_BUY_ENERGY_VEHICLE_ALREADY_HAS_ENERGY:String = "#system_messages:hw19_buy_energy/vehicle_already_has_energy";
+
+        public static const HW19_BUY_ENERGY_BOOSTER_ALREADY_ACTIVATED:String = "#system_messages:hw19_buy_energy/booster_already_activated";
+
+        public static const HW19_BUY_ENERGY_VEHICLE_IN_BATTLE:String = "#system_messages:hw19_buy_energy/vehicle_in_battle";
+
+        public static const HW19_BUY_ENERGY_SUCCESS:String = "#system_messages:hw19_buy_energy/success";
+
+        public static const HW19_DRAW_ENERGY_SUCCESS:String = "#system_messages:hw19_draw_energy/success";
+
+        public static const HW19_LOCK_ENERGY_SUCCESS:String = "#system_messages:hw19_lock_energy/success";
+
+        public static const HW19_DRAW_ENERGY_SERVER_ERROR:String = "#system_messages:hw19_draw_energy/server_error";
+
+        public static const HW19_LOCK_ENERGY_SERVER_ERROR:String = "#system_messages:hw19_lock_energy/server_error";
+
+        public static const HW19_DRAW_ENERGY_VEHICLE_IN_BATTLE:String = "#system_messages:hw19_draw_energy/vehicle_in_battle";
+
+        public static const HW19_LOCK_ENERGY_VEHICLE_IN_BATTLE:String = "#system_messages:hw19_lock_energy/vehicle_in_battle";
+
+        public static const HW19_LOCK_ENERGY_BOOSTER_ALREADY_ACTIVATED:String = "#system_messages:hw19_lock_energy/booster_already_activated";
+
+        public static const HW19_DRAW_ENERGY_VEHICLE_ALREADY_HAS_ENERGY:String = "#system_messages:hw19_draw_energy/vehicle_already_has_energy";
+
+        public static const HW19_LOCK_ENERGY_ACCOUNT_DOES_NOT_HAVE_BOOSTER_ITEMS:String = "#system_messages:hw19_lock_energy/account_does_not_have_booster_items";
+
+        public static const HW19_DRAW_ENERGY_ACCOUNT_DOES_NOT_HAVE_HEALING_ITEMS:String = "#system_messages:hw19_draw_energy/account_does_not_have_healing_items";
+
+        public static const HW19_SHOP_BUY_COINS_SUCCESS:String = "#system_messages:hw19_shop/buy_coins_success";
+
+        public static const HW19_SHOP_SELL_COINS_SUCCESS:String = "#system_messages:hw19_shop/sell_coins_success";
+
+        public static const HW19_BESTDEAL_NO_GOLD:String = "#system_messages:hw19_bestdeal/NO_GOLD";
+
+        public static const HW19_BESTDEAL_NO_CREDITS:String = "#system_messages:hw19_bestdeal/NO_CREDITS";
+
+        public static const HW19_TOKEN_AWARD:String = "#system_messages:hw19_token/award";
+
+        public static const EVENT_AFK_WARNING_HEADER:String = "#system_messages:event/afk/warning/header";
+
+        public static const EVENT_AFK_WARNING_BODY:String = "#system_messages:event/afk/warning/body";
+
+        public static const EVENT_AFK_BAN_HEADER:String = "#system_messages:event/afk/ban/header";
+
+        public static const EVENT_AFK_BAN_BODY:String = "#system_messages:event/afk/ban/body";
+
+        public static const EVENT_AFK_BUTTON:String = "#system_messages:event/afk/button";
+
+        public static const EVENT_AFK_QUEST_HEADER:String = "#system_messages:event/afk/quest/header";
+
+        public static const EVENT_AFK_QUEST_BODY:String = "#system_messages:event/afk/quest/body";
+
+        public static const EVENT_AFK_QUEST_QUESTNAME:String = "#system_messages:event/afk/quest/questName";
+
+        public static const EVENT_AFK_QUEST_BUTTON:String = "#system_messages:event/afk/quest/button";
+
+        public static const EVENT_AFK_ERROR_HEADER:String = "#system_messages:event/afk/error/header";
+
+        public static const EVENT_AFK_ERROR_BODY:String = "#system_messages:event/afk/error/body";
+
+        public static const EVENT_AFK_UNBAN_HEADER:String = "#system_messages:event/afk/unban/header";
+
+        public static const EVENT_AFK_UNBAN_BODY:String = "#system_messages:event/afk/unban/body";
+
+        public static const EVENT_AFK_QUESTUNBAN_HEADER:String = "#system_messages:event/afk/questUnban/header";
+
+        public static const EVENT_AFK_QUESTUNBAN_BODY:String = "#system_messages:event/afk/questUnban/body";
 
         public function SYSTEM_MESSAGES()
         {

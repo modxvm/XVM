@@ -20,7 +20,7 @@ diff -Naur battle.orig/App.as battle/App.as
 diff -Naur battle.orig/net/wg/data/constants/Linkages.as battle/net/wg/data/constants/Linkages.as
 --- battle.orig/net/wg/data/constants/Linkages.as	2020-07-27 14:29:47.446781200 +0300
 +++ battle/net/wg/data/constants/Linkages.as	2020-07-27 14:41:24.871682400 +0300
-@@ -541,7 +541,7 @@
+@@ -555,7 +555,7 @@
  
          public static const BATTLE_PROGRESS_TASK_SEPARATOR:String = "battleProgressTaskSeparatorUI";
  
@@ -154,7 +154,7 @@ diff -Naur battle.orig/net/wg/gui/battle/epicRandom/views/EpicRandomPage.as batt
 diff -Naur battle.orig/net/wg/gui/battle/random/views/BattlePage.as battle/net/wg/gui/battle/random/views/BattlePage.as
 --- battle.orig/net/wg/gui/battle/random/views/BattlePage.as	2020-07-27 14:29:54.923679700 +0300
 +++ battle/net/wg/gui/battle/random/views/BattlePage.as	2020-07-27 14:41:25.066265700 +0300
-@@ -43,7 +43,7 @@
+@@ -44,7 +44,7 @@
  
          private static const CONSUMABLES_POPUP_OFFSET:int = 60;
  
@@ -163,7 +163,7 @@ diff -Naur battle.orig/net/wg/gui/battle/random/views/BattlePage.as battle/net/w
  
          private static const MINIMAP_MARGIN_WIDTH:int = 0;
  
-@@ -343,6 +343,11 @@
+@@ -407,6 +407,11 @@
              this.updatePositionForQuestProgress();
          }
  
@@ -382,7 +382,7 @@ diff -Naur battle.orig/net/wg/gui/battle/views/BaseBattlePage.as battle/net/wg/g
          protected var battleStatisticDataController:BattleStatisticDataController;
  
          protected var postmortemTips:BasePostmortemPanel = null;
-@@ -344,6 +344,11 @@
+@@ -362,6 +362,11 @@
              }
          }
  
@@ -394,7 +394,7 @@ diff -Naur battle.orig/net/wg/gui/battle/views/BaseBattlePage.as battle/net/wg/g
          protected function registerComponent(param1:IDAAPIModule, param2:String) : void
          {
              this._componentsStorage[param2] = param1;
-@@ -393,6 +393,11 @@
+@@ -411,6 +411,11 @@
              return false;
          }
  
@@ -406,8 +406,8 @@ diff -Naur battle.orig/net/wg/gui/battle/views/BaseBattlePage.as battle/net/wg/g
          protected function onMiniMapChangeHandler(param1:MinimapEvent) : void
          {
              if(this.postmortemTips)
-@@ -422,6 +422,11 @@
-             this.ribbonsPanel.x = (_originalWidth >> 1) + this.ribbonsPanel.offsetX;
+@@ -440,6 +440,11 @@
+             this.setRibbonsPanelX();
          }
  
 +        public function xfw_onMiniMapTrySizeChangeHandler(param1:MinimapEvent) : void

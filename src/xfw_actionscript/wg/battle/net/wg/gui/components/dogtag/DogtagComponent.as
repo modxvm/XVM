@@ -12,19 +12,17 @@ package net.wg.gui.components.dogtag
     public class DogtagComponent extends UIComponentEx
     {
 
-        public static const FADE_IN_FLAMES_ANIMATION_TIME:int = 250;
-
         public static const FADE_ANIMATION_TIME:int = 250;
 
         public static const DOGTAG_LABEL_ANIMATE:String = "animate";
-
-        public static const DOGTAG_LABEL_ANIMATE_SLIDE:String = "animate_slide";
 
         public static const DOGTAG_LABEL_END_FULL:String = "end_full";
 
         public static const DOGTAG_LABEL_FLAMES:String = "flames";
 
         public static const DOGTAG_LABEL_END_TOP:String = "end_top";
+
+        public static const DOGTAG_LABEL_ANIMATE_HIDE:String = "animate_hide";
 
         public var dogtagUp:DogtagUpPlate = null;
 
@@ -50,7 +48,13 @@ package net.wg.gui.components.dogtag
             mouseEnabled = false;
             mouseChildren = false;
             this._dogtagFrameHelper = new FrameHelper(this);
-            this.addAnimationCallback(DogtagComponent.DOGTAG_LABEL_FLAMES,this.onFlamesPlay);
+            this.addAnimationCallback(DOGTAG_LABEL_FLAMES,this.onFlamesPlay);
+            this.addAnimationCallback(DOGTAG_LABEL_ANIMATE_HIDE,this.onAnimateHideStart);
+        }
+
+        private function onAnimateHideStart() : void
+        {
+            dispatchEvent(new DogTagEvent(DogTagEvent.ON_DOGTAG_COMPONENT_ANIMATE_HIDE_START));
         }
 
         public function addAnimationCallback(param1:String, param2:Function) : void
@@ -119,12 +123,6 @@ package net.wg.gui.components.dogtag
             }
         }
 
-        public function fadeInFlames() : void
-        {
-            this.flames.alpha = 0;
-            this._fadeInFlames = new Tween(FADE_IN_FLAMES_ANIMATION_TIME,this.flames,{"alpha":1},{"paused":false});
-        }
-
         public function hideNameAndClan() : void
         {
             this.dogtagUp.playerName.visible = false;
@@ -137,7 +135,6 @@ package net.wg.gui.components.dogtag
             {
                 this.flames.visible = true;
                 this.flames.gotoAndPlay("play");
-                this.fadeInFlames();
             }
             else
             {
@@ -171,9 +168,11 @@ package net.wg.gui.components.dogtag
             }
             this.dogtagUp.dispose();
             this.dogtagUp = null;
-            this.dogtagDown.dispose();
-            this.dogtagDown = null;
-            super.onDispose();
+            if(this.dogtagDown)
+            {
+                this.dogtagDown.dispose();
+                this.dogtagDown = null;
+            }
             if(this._fadeIn)
             {
                 this._fadeIn.paused = true;
@@ -192,6 +191,7 @@ package net.wg.gui.components.dogtag
                 this._fadeInFlames.dispose();
                 this._fadeInFlames = null;
             }
+            super.onDispose();
         }
     }
 }

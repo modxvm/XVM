@@ -5,6 +5,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel.data
     public class AmmunitionPanelVO extends DAAPIDataClass
     {
 
+        public var isEvent:Boolean = true;
+
         public var maintenanceEnabled:Boolean = false;
 
         public var maintenanceTooltip:String = "";

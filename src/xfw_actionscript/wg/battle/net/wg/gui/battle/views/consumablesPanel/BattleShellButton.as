@@ -3,8 +3,8 @@ package net.wg.gui.battle.views.consumablesPanel
     import net.wg.gui.battle.components.buttons.BattleToolTipButton;
     import net.wg.gui.battle.views.consumablesPanel.interfaces.IBattleShellButton;
     import net.wg.data.constants.InvalidationType;
-    import flash.text.TextField;
     import flash.display.MovieClip;
+    import flash.text.TextField;
     import net.wg.gui.components.controls.UILoaderAlt;
     import net.wg.gui.battle.components.CoolDownTimer;
     import net.wg.gui.battle.views.consumablesPanel.VO.ConsumablesVO;
@@ -33,6 +33,8 @@ package net.wg.gui.battle.views.consumablesPanel
         private static const QUANTITY_VALIDATION:uint = InvalidationType.SYSTEM_FLAGS_BORDER << 3;
 
         private static const SELECTED_INDICATOR_VISIBILITY:uint = InvalidationType.SYSTEM_FLAGS_BORDER << 4;
+
+        public var hit:MovieClip = null;
 
         public var quantityField:TextField = null;
 
@@ -73,13 +75,21 @@ package net.wg.gui.battle.views.consumablesPanel
             isAllowedToShowToolTipOnDisabledState = true;
             hideToolTipOnClickActions = false;
             addFrameScript(END_RELOADING_FRAME,this.reloadingEnd);
-            TextFieldEx.setNoTranslate(this.quantityField,true);
+            if(this.quantityField)
+            {
+                TextFieldEx.setNoTranslate(this.quantityField,true);
+            }
         }
 
         override protected function configUI() : void
         {
             super.configUI();
             this.nextIndicator.visible = this._isNext;
+            if(this.hit != null)
+            {
+                this.hit.mouseEnabled = false;
+                hitArea = this.hit;
+            }
         }
 
         protected function setBindKeyText() : void
@@ -116,6 +126,7 @@ package net.wg.gui.battle.views.consumablesPanel
 
         override protected function onDispose() : void
         {
+            this.hit = null;
             addFrameScript(END_RELOADING_FRAME,null);
             this._coolDownTimer.dispose();
             this._coolDownTimer = null;
@@ -177,9 +188,9 @@ package net.wg.gui.battle.views.consumablesPanel
             }
         }
 
-        public function setCoolDownTime(param1:Number, param2:Number, param3:Number, param4:int = 1) : void
+        public function setCoolDownTime(param1:Number, param2:Number, param3:Number, param4:int = 1, param5:Boolean = false) : void
         {
-            var _loc5_:* = NaN;
+            var _loc6_:* = NaN;
             this._isAfterCoolDown = false;
             if(param1 >= 0 && param2 != -1)
             {
@@ -188,10 +199,10 @@ package net.wg.gui.battle.views.consumablesPanel
             }
             if(param1 > 0)
             {
-                _loc5_ = param3 / param2;
+                _loc6_ = param3 / param2;
                 this.state = BATTLE_ITEM_STATES.COOLDOWN;
                 this._isReloading = true;
-                this._coolDownTimer.start(param1,this,(END_FRAME - START_FRAME) * _loc5_,DEFAULT_TIME_COEF);
+                this._coolDownTimer.start(param1,this,(END_FRAME - START_FRAME) * _loc6_,DEFAULT_TIME_COEF);
             }
             else
             {
@@ -297,6 +308,10 @@ package net.wg.gui.battle.views.consumablesPanel
         {
         }
 
+        public function setCoolDownReverse() : void
+        {
+        }
+
         public function showGlow(param1:int) : void
         {
             this.glow.showGlow(param1);
@@ -371,6 +386,10 @@ package net.wg.gui.battle.views.consumablesPanel
         public function get showConsumableBorder() : Boolean
         {
             return false;
+        }
+
+        public function setStage(param1:int) : void
+        {
         }
 
         public function set showConsumableBorder(param1:Boolean) : void

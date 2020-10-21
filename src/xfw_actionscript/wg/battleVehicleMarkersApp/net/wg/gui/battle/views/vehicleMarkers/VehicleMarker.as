@@ -21,25 +21,25 @@ package net.wg.gui.battle.views.vehicleMarkers
 
         private static const SHADOW_POSITIONS:Array = [null,new Point(-94,-59),new Point(-94,-85),new Point(-94,-42),new Point(-94,-72),new Point(-94,-77)];
 
-        private static const ICON:String = "Icon";
+        protected static const ICON:String = "Icon";
 
-        private static const LEVEL:String = "Level";
+        protected static const LEVEL:String = "Level";
 
-        private static const HEALTH_LBL:String = "Hp";
+        protected static const HEALTH_LBL:String = "Hp";
 
-        private static const HEALTH_BAR:String = "HpIndicator";
+        protected static const HEALTH_BAR:String = "HpIndicator";
 
         private static const P_NAME_LBL:String = "PlayerName";
 
-        private static const V_NAME_LBL:String = "VehicleName";
+        protected static const V_NAME_LBL:String = "VehicleName";
 
         private static const DAMAGE_PANEL:String = "Damage";
 
-        private static const MARKER:String = "marker";
+        protected static const MARKER:String = "marker";
 
-        private static const ALT:String = "Alt";
+        protected static const ALT:String = "Alt";
 
-        private static const BASE:String = "Base";
+        protected static const BASE:String = "Base";
 
         private static const DEAD:String = "Dead";
 
@@ -616,6 +616,10 @@ package net.wg.gui.battle.views.vehicleMarkers
         {
         }
 
+        protected function layoutExtended(param1:int) : void
+        {
+        }
+
         private function updateHitLayout() : void
         {
             var _loc1_:Boolean = this.hitLabel.visible && this.hitLabel.isActive();
@@ -636,7 +640,7 @@ package net.wg.gui.battle.views.vehicleMarkers
             return false;
         }
 
-        private function updateMarkerSettings() : void
+        protected function updateMarkerSettings() : void
         {
             if (xvm_active())
               return;
@@ -755,6 +759,7 @@ package net.wg.gui.battle.views.vehicleMarkers
             this.healthBar.y = HEALTH_BAR_Y;
             this.hpField.y = this.healthBar.y + HP_FIELD_VERTICAL_OFFSET;
             this._canUseCachedVisibility = true;
+            this.layoutExtended(_loc2_ - _loc6_);
         }
 
         private function prepareLayout() : void
@@ -1010,6 +1015,11 @@ package net.wg.gui.battle.views.vehicleMarkers
         public function set entityType(param1:String) : void
         {
             this._entityType = param1;
+        }
+
+        protected function get vmManager() : VehicleMarkersManager
+        {
+            return this._vmManager;
         }
 
         private function onShowExInfoHandler(param1:VehicleMarkersManagerEvent) : void

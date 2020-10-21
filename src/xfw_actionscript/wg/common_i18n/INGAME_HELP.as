@@ -251,6 +251,12 @@ package
 
         public static const RADIALMENU_POSITIVE:String = "#ingame_help:radialMenu/positive";
 
+        public static const EVENTRADIALMENU_CANCEL:String = "#ingame_help:eventRadialMenu/cancel";
+
+        public static const EVENTRADIALMENU_CAMP:String = "#ingame_help:eventRadialMenu/camp";
+
+        public static const EVENTRADIALMENU_COLLECTOR:String = "#ingame_help:eventRadialMenu/collector";
+
         public function INGAME_HELP()
         {
             super();

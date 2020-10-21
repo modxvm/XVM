@@ -9,9 +9,11 @@ package net.wg.gui.battle.views.postmortemPanel
     import net.wg.data.constants.generated.BATTLEATLAS;
     import scaleform.gfx.TextFieldEx;
     import net.wg.data.constants.Linkages;
+    import net.wg.gui.components.dogtag.DogTagEvent;
     import net.wg.gui.components.dogtag.VO.DogTagVO;
     import net.wg.gui.components.dogtag.ImageRepository;
     import net.wg.data.constants.Values;
+    import flash.events.Event;
 
     public class PostmortemPanel extends PostmortemPanelMeta implements IPostmortemPanelMeta
     {
@@ -20,17 +22,19 @@ package net.wg.gui.battle.views.postmortemPanel
 
         private static const PANEL_ANIMATION_DELAY:int = 500;
 
-        private static const FADE_OUT_DEAD_REASON_ANIMATION_DELAY:int = 500;
-
         private static const DOGTAG_VICTIM_MINI_MAP_OFFSET:int = -760;
 
-        private static const DOGTAG_KILLER_OFFSET_Y:int = 50;
+        private static const DOGTAG_KILLER_OFFSET_Y:int = 60;
 
         private static const DOG_TAG_VICTIM_TWEEN_ANIMATION_TIME:int = 300;
 
         private static const VICTIM_DOGTAG_LINGERING_TIME:int = 1700;
 
+        private static const DEAD_REASON_ALPHA:Number = 0.5;
+
         public var bg:BattleAtlasSprite = null;
+
+        public var nicknameKillerBG:BattleAtlasSprite = null;
 
         public var observerModeTitleTF:TextField = null;
 
@@ -40,23 +44,25 @@ package net.wg.gui.battle.views.postmortemPanel
 
         public var exitToHangarDescTF:TextField = null;
 
+        public var hintBg:BattleAtlasSprite = null;
+
+        public var hintTitleTF:TextField = null;
+
+        public var hintDescTF:TextField = null;
+
         private var _dogTagVictim:DogtagComponent = null;
 
         private var _dogTagKiller:DogtagComponent = null;
 
-        private var _dogTagKillerInitialized:Boolean = false;
-
         private var _vehPanelFadeInTween:Tween = null;
 
-        private var _deadReasonFadeInTween:Tween = null;
+        private var _deadReasonTextFieldTween:Tween = null;
 
-        private var _deadReasonFadeOutTween:Tween = null;
+        private var _deadReasonBGTween:Tween = null;
 
-        private var _deadReasonBGFadeOutTween:Tween = null;
+        private var _userNameTextFieldFadeInTween:Tween = null;
 
-        private var _userNameFadeInTween:Tween = null;
-
-        private var _deadReasonBGFadeInTween:Tween = null;
+        private var _nicknameKillerBGTween:Tween = null;
 
         private var _victimDogTagTweenIn:Tween = null;
 
@@ -69,13 +75,16 @@ package net.wg.gui.battle.views.postmortemPanel
             super();
             mouseChildren = false;
             mouseEnabled = false;
+            this.hintBg.visible = false;
+            this.hintTitleTF.visible = false;
+            this.hintDescTF.visible = false;
         }
 
         override protected function configUI() : void
         {
             super.configUI();
             this.bg.imageName = BATTLEATLAS.POSTMORTEM_TIPS_BG;
-            vehiclePanelBG.imageName = BATTLEATLAS.POSTMORTEM_BG;
+            this.nicknameKillerBG.imageName = BATTLEATLAS.POSTMORTEM_NICKNAME_BG;
             deadReasonBG.imageName = BATTLEATLAS.POSTMORTEM_DEAD_REASON_BG;
             this.observerModeTitleTF.text = INGAME_GUI.POSTMORTEM_TIPS_OBSERVERMODE_LABEL;
             this.observerModeDescTF.text = INGAME_GUI.POSTMORTEM_TIPS_OBSERVERMODE_TEXT;
@@ -94,7 +103,7 @@ package net.wg.gui.battle.views.postmortemPanel
             addChild(this._dogTagKiller);
             this._dogTagKiller.x = -this._dogTagKiller.width >> 1;
             this._dogTagKiller.y = deadReasonTF.y - this._dogTagKiller.height - DOGTAG_KILLER_OFFSET_Y;
-            this._dogTagKillerInitialized = true;
+            this._dogTagKiller.addEventListener(DogTagEvent.ON_DOGTAG_COMPONENT_ANIMATE_HIDE_START,this.onDogTagAnimateHideStart);
         }
 
         override protected function updatePlayerInfoPosition() : void
@@ -103,6 +112,8 @@ package net.wg.gui.battle.views.postmortemPanel
             if(this._dogTagKiller)
             {
                 this._dogTagKiller.y = deadReasonTF.y - this._dogTagKiller.height - DOGTAG_KILLER_OFFSET_Y;
+                this.nicknameKillerBG.x = -this.nicknameKillerBG.width >> 1;
+                this.nicknameKillerBG.y = _userName.y;
             }
         }
 
@@ -113,12 +124,13 @@ package net.wg.gui.battle.views.postmortemPanel
             this._dogTagVictim.x = App.appWidth >> 1;
             this._dogTagVictim.y = this._dogTagVictimMiniMapAnchor;
             this._dogTagVictim.goToLabel(DogtagComponent.DOGTAG_LABEL_END_TOP);
+            this._dogTagVictim.visible = false;
             this._dogTagVictim.hideNameAndClan();
         }
 
         override protected function showKillerDogTag(param1:DogTagVO) : void
         {
-            if(!this._dogTagKillerInitialized)
+            if(!this._dogTagKiller)
             {
                 this.initDogTagKiller();
             }
@@ -159,6 +171,7 @@ package net.wg.gui.battle.views.postmortemPanel
 
         public function animateVictimDogTag() : void
         {
+            this._dogTagVictim.visible = true;
             this._dogTagVictim.alpha = 1;
             this._dogTagVictim.x = App.appWidth >> 1;
             if(this._victimDogTagTweenIn)
@@ -196,6 +209,7 @@ package net.wg.gui.battle.views.postmortemPanel
                 {
                     this.showSpectatorPanel(true);
                 }
+                this.nicknameKillerBG.visible = _showVehiclePanel;
                 if(_userName && _userName.userVO && _userName.userVO.userName != Values.EMPTY_STR)
                 {
                     this.showPanel();
@@ -218,19 +232,21 @@ package net.wg.gui.battle.views.postmortemPanel
             deadReasonTF.alpha = 0;
             _userName.alpha = 0;
             deadReasonBG.alpha = 0;
+            this.nicknameKillerBG.alpha = 0;
+            this.clearTweens();
             this._vehPanelFadeInTween = new Tween(FADE_ANIMATION_TIME,vehiclePanel,{"alpha":1},{
                 "delay":PANEL_ANIMATION_DELAY,
                 "paused":false
             });
-            this._deadReasonFadeInTween = new Tween(FADE_ANIMATION_TIME,deadReasonTF,{"alpha":1},{
+            this._deadReasonTextFieldTween = new Tween(FADE_ANIMATION_TIME,deadReasonTF,{"alpha":1},{
                 "delay":PANEL_ANIMATION_DELAY,
                 "paused":false
             });
-            this._userNameFadeInTween = new Tween(FADE_ANIMATION_TIME,_userName,{"alpha":1},{
+            this._deadReasonBGTween = new Tween(FADE_ANIMATION_TIME,deadReasonBG,{"alpha":1},{
                 "delay":PANEL_ANIMATION_DELAY,
                 "paused":false
             });
-            this._deadReasonBGFadeInTween = new Tween(FADE_ANIMATION_TIME,deadReasonBG,{"alpha":1},{
+            this._userNameTextFieldFadeInTween = new Tween(FADE_ANIMATION_TIME,_userName,{"alpha":1},{
                 "delay":PANEL_ANIMATION_DELAY,
                 "paused":false,
                 "onComplete":this.onPanelFadeInAnimationComplete
@@ -239,27 +255,27 @@ package net.wg.gui.battle.views.postmortemPanel
 
         private function onPanelFadeInAnimationComplete(param1:Tween) : void
         {
-            if(this._dogTagKillerInitialized)
-            {
-                this._deadReasonFadeOutTween = new Tween(FADE_ANIMATION_TIME,deadReasonTF,{"alpha":0},{
-                    "delay":FADE_OUT_DEAD_REASON_ANIMATION_DELAY,
-                    "paused":false,
-                    "onComplete":this.onDeadReasonFadeOutComplete
-                });
-                this._deadReasonBGFadeOutTween = new Tween(FADE_ANIMATION_TIME,deadReasonBG,{"alpha":0},{
-                    "delay":FADE_OUT_DEAD_REASON_ANIMATION_DELAY,
-                    "paused":false
-                });
-            }
-        }
-
-        private function onDeadReasonFadeOutComplete(param1:Tween) : void
-        {
             if(this._dogTagKiller)
             {
                 this._dogTagKiller.animate();
                 onDogTagKillerInPlaySoundS();
+                this.tweenReasonAndName(true);
             }
+        }
+
+        private function tweenReasonAndName(param1:Boolean) : void
+        {
+            this._deadReasonTextFieldTween = new Tween(FADE_ANIMATION_TIME,deadReasonTF,{"alpha":(param1?DEAD_REASON_ALPHA:1)},{
+                "delay":PANEL_ANIMATION_DELAY,
+                "paused":false
+            });
+            this._deadReasonBGTween = new Tween(FADE_ANIMATION_TIME,deadReasonBG,{"alpha":(param1?DEAD_REASON_ALPHA:1)},{"paused":false});
+            this._nicknameKillerBGTween = new Tween(FADE_ANIMATION_TIME,this.nicknameKillerBG,{"alpha":(param1?1:0)},{"paused":false});
+        }
+
+        private function onDogTagAnimateHideStart(param1:Event) : void
+        {
+            this.tweenReasonAndName(false);
         }
 
         public function anchorVictimDogTag(param1:int) : void
@@ -288,6 +304,9 @@ package net.wg.gui.battle.views.postmortemPanel
             this.observerModeDescTF = null;
             this.exitToHangarTitleTF = null;
             this.exitToHangarDescTF = null;
+            this.hintBg = null;
+            this.hintTitleTF = null;
+            this.hintDescTF = null;
             if(this._dogTagVictim)
             {
                 this._dogTagVictim.dispose();
@@ -296,29 +315,30 @@ package net.wg.gui.battle.views.postmortemPanel
             {
                 this._dogTagKiller.dispose();
             }
+            this.clearTweens();
+            ImageRepository.getInstance().dispose();
+            super.onDispose();
+        }
+
+        private function clearTweens() : void
+        {
             if(this._vehPanelFadeInTween)
             {
                 this._vehPanelFadeInTween.paused = true;
                 this._vehPanelFadeInTween.dispose();
                 this._vehPanelFadeInTween = null;
             }
-            if(this._userNameFadeInTween)
+            if(this._userNameTextFieldFadeInTween)
             {
-                this._userNameFadeInTween.paused = true;
-                this._userNameFadeInTween.dispose();
-                this._userNameFadeInTween = null;
+                this._userNameTextFieldFadeInTween.paused = true;
+                this._userNameTextFieldFadeInTween.dispose();
+                this._userNameTextFieldFadeInTween = null;
             }
-            if(this._deadReasonFadeInTween)
+            if(this._deadReasonTextFieldTween)
             {
-                this._deadReasonFadeInTween.paused = true;
-                this._deadReasonFadeInTween.dispose();
-                this._deadReasonFadeInTween = null;
-            }
-            if(this._deadReasonFadeOutTween)
-            {
-                this._deadReasonFadeOutTween.paused = true;
-                this._deadReasonFadeOutTween.dispose();
-                this._deadReasonFadeOutTween = null;
+                this._deadReasonTextFieldTween.paused = true;
+                this._deadReasonTextFieldTween.dispose();
+                this._deadReasonTextFieldTween = null;
             }
             if(this._victimDogTagTweenIn)
             {
@@ -332,19 +352,28 @@ package net.wg.gui.battle.views.postmortemPanel
                 this._victimDogTagTweenOut.dispose();
                 this._victimDogTagTweenOut = null;
             }
-            if(this._deadReasonBGFadeOutTween)
+            if(this._deadReasonBGTween)
             {
-                this._deadReasonBGFadeOutTween.paused = true;
-                this._deadReasonBGFadeOutTween.dispose();
-                this._deadReasonBGFadeOutTween = null;
+                this._deadReasonBGTween.paused = true;
+                this._deadReasonBGTween.dispose();
+                this._deadReasonBGTween = null;
             }
-            if(this._deadReasonBGFadeInTween)
+            if(this._nicknameKillerBGTween)
             {
-                this._deadReasonBGFadeInTween.paused = true;
-                this._deadReasonBGFadeInTween.dispose();
-                this._deadReasonBGFadeInTween = null;
+                this._nicknameKillerBGTween.paused = true;
+                this._nicknameKillerBGTween.dispose();
+                this._nicknameKillerBGTween = null;
             }
-            super.onDispose();
+        }
+
+        public function as_showHint() : void
+        {
+            this.hintBg.visible = true;
+            this.hintTitleTF.visible = true;
+            this.hintDescTF.visible = true;
+            this.hintBg.imageName = BATTLEATLAS.POSTMORTEM_TIPS_HINTBG;
+            this.hintTitleTF.text = INGAME_GUI.POSTMORTEM_TIPS_HINT_TITLE;
+            this.hintDescTF.text = INGAME_GUI.POSTMORTEM_TIPS_HINT_DESC;
         }
     }
 }

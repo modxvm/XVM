@@ -134,7 +134,7 @@ package net.wg.gui.lobby.window
             var _loc12_:PriceVO = null;
             var _loc13_:String = null;
             var _loc1_:DropdownMenu = content.dropdownMenu;
-            content.moduleName.text = this.data.name;
+            content.moduleName.htmlText = this.data.name;
             content.description.htmlText = this.data.description;
             var _loc2_:String = this.data.currency;
             var _loc3_:CompoundPriceVO = this.data.price;

@@ -237,6 +237,8 @@ package net.wg.data.constants
 
         public static const EVENTWARNING_ICON:String = "destroyTimerEventWarningUI";
 
+        public static const EVENTOVERTURNED_ICON:String = "halfOverTurnedIconUI";
+
         public static const GAS_DRAFT_ICON:String = "destroyTimerGazDraftUI";
 
         public static const STUN_ICON:String = "secondaryStunIconUI";
@@ -262,6 +264,18 @@ package net.wg.data.constants
         public static const SIDE_BAR_NORMAL_RENDERER:String = "SideBarRendererUI";
 
         public static const RESUPPLY_TIMER_SMALL_UI:String = "resupplyTimerSmallUI";
+
+        public static const EVENT_WAIT_FOR_ALLIES_UI:String = "EventWaitForAlliesUI";
+
+        public static const SECONDARY_EVENT_WAIT_FOR_ALLIES_UI:String = "secondaryEventWaitForAlliesUI";
+
+        public static const EVENT_FILLING_IN_PROGRESS_UI:String = "EventFillingInProgressUI";
+
+        public static const SECONDARY_EVENT_FILLING_IN_PROGRESS_UI:String = "secondaryEventFillingInProgressUI";
+
+        public static const EVENT_GOTO_POINT_TIMER_UI:String = "EventGotoPointTimerUI";
+
+        public static const SECONDARY_EVENT_GOTO_POINT_TIMER_UI:String = "secondaryEventGotoPointTimerUI";
 
         public static const BATTLE_ROYALE_TIMER_UI:String = "BattleRoyaleTimerUI";
 
@@ -962,6 +976,8 @@ package net.wg.data.constants
         public static const NATION_TREE_NODE_PREMIUM_COLLECTOR_BTN:String = "NationTreeNodeBtnUI";
 
         public static const NATION_TREE_PREMIUM_DOTS_PATTERN:String = "PremiumDotUI";
+
+        public static const STATS_PLAYERBLOCK_RENDERER:String = "StatsPlayerBlockRendererUI";
 
         public function Linkages()
         {

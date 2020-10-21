@@ -110,7 +110,7 @@ package com.xvm.wg
                 }
                 else
                 {
-                    App.utils.asserter.assert(false,"Unload a non-existent data: " + _loc3_);
+                    App.utils.asserter.assert(false, "Unload a non-existent data: " + _loc3_);
                 }
             }
         }
@@ -164,7 +164,7 @@ package com.xvm.wg
 
         private function getLoader(param1:String, param2:int = 1) : ImageData
         {
-            App.utils.asserter.assert(this._init,"ImageManager not been initialized");
+            App.utils.asserter.assert(this._init, "ImageManager not been initialized");
             var _loc3_:ImageData = null;
             if(param2 == ImageCacheTypes.USE_WEB_CACHE && this._webCache.hasOwnProperty(param1))
             {
@@ -214,7 +214,7 @@ package com.xvm.wg
         {
             if(param1.cacheType != ImageCacheTypes.NOT_USE_CACHE)
             {
-                App.utils.asserter.assert(this._minCacheSize > param1.size,"Image size exceeds the buffer cache: " + param1.source + " " + this._minCacheSize);
+                App.utils.asserter.assert(this._minCacheSize > param1.size, "Image size exceeds the buffer cache: " + param1.source + " " + this._minCacheSize);
             }
             if(param1.cacheType == ImageCacheTypes.USE_CACHE)
             {

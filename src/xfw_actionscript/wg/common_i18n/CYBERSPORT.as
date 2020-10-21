@@ -235,6 +235,12 @@ package
 
         public static const WINDOW_UNIT_DESCRIPTIONDEFAULT:String = "#cyberSport:window/unit/descriptionDefault";
 
+        public static const WINDOW_UNIT_MESSAGE_DIFFICULTYLEVELINACTIVE:String = "#cyberSport:window/unit/message/difficultyLevelInactive";
+
+        public static const WINDOW_UNIT_MESSAGE_DIFFICULTYLEVELNOTVALID:String = "#cyberSport:window/unit/message/difficultyLevelNotValid";
+
+        public static const WINDOW_UNIT_MESSAGE_SQUADDIFFICULTYLEVELNOTENABLE:String = "#cyberSport:window/unit/message/squadDifficultyLevelNotEnable";
+
         public static const WINDOW_UNITLISTVIEW_TITLE:String = "#cyberSport:window/unitListView/title";
 
         public static const WINDOW_UNITLISTVIEW_SORT_LABEL:String = "#cyberSport:window/unitListView/sort/label";

@@ -11,6 +11,8 @@ package net.wg.gui.battle.components
 
         private var _reversed:Boolean = false;
 
+        private var _isReverse:Boolean = false;
+
         private var _totalFrames:uint;
 
         private var _currentFrame:uint;
@@ -47,7 +49,7 @@ package net.wg.gui.battle.components
 
         public function moveToFrame(param1:int) : void
         {
-            this._context.gotoAndStop(this._progressValues[param1]);
+            this._context.gotoAndStop(this._progressValues[this._isReverse?this._totalFrames - param1:param1]);
         }
 
         public function restartFromCurrentFrame(param1:Number) : void
@@ -127,6 +129,11 @@ package net.wg.gui.battle.components
         public function get currentFrame() : int
         {
             return this._currentFrame;
+        }
+
+        public function setReverse() : void
+        {
+            this._isReverse = !this._isReverse;
         }
     }
 }

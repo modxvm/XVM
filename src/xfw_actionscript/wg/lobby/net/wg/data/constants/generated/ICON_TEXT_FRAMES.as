@@ -73,6 +73,10 @@ package net.wg.data.constants.generated
 
         public static const BONUS_BATTLE:String = "bonusBattle";
 
+        public static const HW20_EVENT_COIN:String = "HW20EventCoin";
+
+        public static const ATTENTION1:String = "attention1";
+
         public function ICON_TEXT_FRAMES()
         {
             super();

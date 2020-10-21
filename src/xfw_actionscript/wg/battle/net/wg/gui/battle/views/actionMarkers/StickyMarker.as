@@ -2,14 +2,14 @@ package net.wg.gui.battle.views.actionMarkers
 {
     import flash.display.Sprite;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
-    import flash.display.MovieClip;
     import flash.text.TextField;
+    import flash.display.MovieClip;
     import flash.geom.Point;
 
     public class StickyMarker extends Sprite implements IDisposable
     {
 
-        public var arrow:MovieClip = null;
+        public var arrow:StickyArrow = null;
 
         public var txtLabel:TextField = null;
 
@@ -30,19 +30,25 @@ package net.wg.gui.battle.views.actionMarkers
             this.targetHighlight = null;
         }
 
-        public function setTextLabelVisible(param1:Boolean) : void
+        public function setArrowPosition(param1:Point) : void
         {
-            this.txtLabel.visible = param1;
+            this.arrow.x = param1.x;
+            this.arrow.y = param1.y;
         }
 
-        public function setTextLabelEnabled(param1:Boolean) : void
+        public function setArrowRadius(param1:int) : void
         {
-            this.txtLabel.alpha = param1?1:0.0;
+            this.arrow.setRadius(param1);
         }
 
         public function setArrowVisible(param1:Boolean) : void
         {
             this.arrow.visible = param1;
+        }
+
+        public function setTextLabelEnabled(param1:Boolean) : void
+        {
+            this.txtLabel.alpha = param1?1:0.0;
         }
 
         public function setTextLabelPosition(param1:Point) : void
@@ -51,10 +57,9 @@ package net.wg.gui.battle.views.actionMarkers
             this.txtLabel.y = param1.y;
         }
 
-        public function setArrowPosition(param1:Point) : void
+        public function setTextLabelVisible(param1:Boolean) : void
         {
-            this.arrow.x = param1.x;
-            this.arrow.y = param1.y;
+            this.txtLabel.visible = param1;
         }
     }
 }

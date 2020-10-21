@@ -16,9 +16,13 @@ package net.wg.gui.lobby.vehiclePreview.data
 
         public var statusText:String = "";
 
+        public var title:String = "";
+
         public var statusOk:Boolean = true;
 
         public var tradeOffAvailable:Boolean = true;
+
+        public var isFreeExchange:Boolean = false;
 
         public function VPTradeInBuyingPanelVO(param1:Object)
         {

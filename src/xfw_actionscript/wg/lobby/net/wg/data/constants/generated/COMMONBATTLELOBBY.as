@@ -87,6 +87,18 @@ package net.wg.data.constants.generated
 
         public static const ENGINE_SPEED:String = "engine_speed";
 
+        public static const EVENT_BIG_BOSS_BOT:String = "eventBigBossBot";
+
+        public static const EVENT_BOMBER_BOT:String = "eventBomberBot";
+
+        public static const EVENT_HUNTER_BOT:String = "eventHunterBot";
+
+        public static const EVENT_RUNNER_BOT:String = "eventRunnerBot";
+
+        public static const EVENT_SENTRY_BOT:String = "eventSentryBot";
+
+        public static const EVENT_TURRET_BOT:String = "eventTurretBot";
+
         public static const GOLD_CENTER:String = "goldCenter";
 
         public static const GOLD_EDGE:String = "goldEdge";

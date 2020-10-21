@@ -19,6 +19,8 @@ package net.wg.gui.lobby.tradeIn.vo
 
         public var available:Boolean = true;
 
+        public var isPersonal:Boolean = false;
+
         public function TradeOffWidgetVO(param1:Object)
         {
             super(param1);

@@ -8,8 +8,9 @@ import xvm_main.python.config as config
 from xfw import *
 
 # sorting in the barracks
-@overrideMethod(barrack.Barracks, '_Barracks__showActiveTankmen')
-def __showActiveTankmen(base, self, criteria, vehicleCriteria):
+# TODO: 1.10.1
+# @overrideMethod(barrack.Barracks, '_Barracks__showActiveTankmen')
+def __showActiveTankmen(base, self, criteria):
 
     def keySorted(_tankman):
         # vehicle = self.itemsCache.items.getVehicle(_tankman.vehicleInvID)

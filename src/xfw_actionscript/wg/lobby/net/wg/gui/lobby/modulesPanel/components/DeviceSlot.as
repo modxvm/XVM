@@ -141,7 +141,7 @@ package net.wg.gui.lobby.modulesPanel.components
 
         private function tryAddCounter() : void
         {
-            if(this._slotData.counter > 0)
+            if(this._slotData.counter > 0 && visible)
             {
                 this._counterManager.setCounter(this,this._slotData.counter.toString(),null,new CounterProps(CounterProps.DEFAULT_OFFSET_X,0));
                 this._haveCounter = true;

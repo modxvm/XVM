@@ -5,8 +5,8 @@ package net.wg.infrastructure.base.meta
     public interface IEventStatsMeta extends IEventDispatcher
     {
 
-        function as_updatePlayerStats(param1:Object, param2:uint) : void;
+        function as_updatePlayerStats(param1:Array) : void;
 
-        function as_updateTitle(param1:String, param2:String) : void;
+        function as_updateTitle(param1:String, param2:String, param3:int) : void;
     }
 }

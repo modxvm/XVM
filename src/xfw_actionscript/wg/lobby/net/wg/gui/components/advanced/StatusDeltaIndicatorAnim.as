@@ -253,7 +253,7 @@ package net.wg.gui.components.advanced
 
         public function set delta(param1:Number) : void
         {
-            if(this._delta == param1)
+            if(this._delta == param1 && this._endDelta == param1)
             {
                 return;
             }

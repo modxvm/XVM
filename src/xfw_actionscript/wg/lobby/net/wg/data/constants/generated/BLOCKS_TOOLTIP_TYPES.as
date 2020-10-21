@@ -5,6 +5,8 @@ package net.wg.data.constants.generated
 
         public static const TOOLTIP_TEXT_BLOCK_LINKAGE:String = "TooltipTextBlockUI";
 
+        public static const TOOLTIP_GLOW_TEXT_BLOCK_LINKAGE:String = "TooltipGlowTextBlockUI";
+
         public static const TOOLTIP_TEXT_WITH_BG_BLOCK_LINKAGE:String = "TooltipTextWithBgBlockUI";
 
         public static const TOOLTIP_BUILDUP_BLOCK_LINKAGE:String = "TooltipBuildUpBlockUI";

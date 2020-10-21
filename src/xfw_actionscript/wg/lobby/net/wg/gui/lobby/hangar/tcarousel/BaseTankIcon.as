@@ -95,6 +95,8 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         private var _isEarnCrystals:Boolean = false;
 
+        private var _isEvent:Boolean = false;
+
         public function BaseTankIcon()
         {
             super();
@@ -173,7 +175,7 @@ package net.wg.gui.lobby.hangar.tcarousel
                 }
                 else
                 {
-                    this.statsBg.visible = this.statsTF.visible = true;
+                    this.statsBg.visible = this.statsTF.visible = !this._isEvent;
                     this.crystalsIcon.visible = this._isEarnCrystals;
                 }
             }
@@ -202,6 +204,7 @@ package net.wg.gui.lobby.hangar.tcarousel
         protected function updateData(param1:VehicleCarouselVO) : void
         {
             this.gotoAndStop(param1.isNationChangeAvailable?LABEL_WITH_NATION_CHANGE:LABEL_WITHOUT_NATION_CHANGE);
+            this._isEvent = param1.isEvent;
             this.price.visible = this.actionPrice.visible = this.lockedBG.visible = this.infoImg.visible = false;
             this._showStats = param1.visibleStats;
             this._isEarnCrystals = param1.isEarnCrystals;
@@ -242,7 +245,7 @@ package net.wg.gui.lobby.hangar.tcarousel
                 this.mcLevel.gotoAndStop(param1.level);
                 this.imgXp.source = param1.xpImgSource;
                 this.txtTankName.htmlText = param1.label;
-                this.txtTankName.filters = param1.premium?[PREM_FILTER]:[DEF_FILTER];
+                this.txtTankName.filters = param1.premium || param1.isEvent?[PREM_FILTER]:[DEF_FILTER];
                 this.statsTF.htmlText = param1.statsText;
                 this._isLockBackground = param1.lockBackground;
                 if(this.infoImg.visible)
@@ -254,7 +257,7 @@ package net.wg.gui.lobby.hangar.tcarousel
                     this.addImg.source = param1.additionalImgSrc;
                 }
                 this.setVisibleVehicleInfo(true);
-                this.mcLevel.visible = param1.level != 0;
+                this.mcLevel.visible = !param1.isEvent && param1.level != 0;
             }
             this.bpSpecialBorder.visible = param1.progressionPoints && param1.progressionPoints.isSpecialVehicle;
             this.updateLockBg();

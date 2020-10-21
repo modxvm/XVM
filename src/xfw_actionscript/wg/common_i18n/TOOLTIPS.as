@@ -41,6 +41,10 @@ package
 
         public static const SENIORITYAWARDS_HANGARENTRYPOINT_TOOLTIP:String = "#tooltips:seniorityAwards/hangarEntryPoint/tooltip";
 
+        public static const EVENT_AFK_WARNING:String = "#tooltips:event/afk/warning";
+
+        public static const EVENT_AFK_BAN:String = "#tooltips:event/afk/ban";
+
         public static const ACHIEVEMENT_PARAMS:String = "#tooltips:achievement/params";
 
         public static const ANONYMIZER_TEAMSTATS:String = "#tooltips:anonymizer/teamStats";
@@ -2537,6 +2541,12 @@ package
 
         public static const TRADEININFO_ACTIONTIME:String = "#tooltips:tradeInInfo/actionTime";
 
+        public static const PERSONALTRADEININFO_HEADER:String = "#tooltips:personalTradeInInfo/header";
+
+        public static const PERSONALTRADEININFO_INFO:String = "#tooltips:personalTradeInInfo/info";
+
+        public static const PERSONALTRADEININFO_DISCOUNT:String = "#tooltips:personalTradeInInfo/discount";
+
         public static const TRADEINUNAVAILABLE_HEADER:String = "#tooltips:tradeInUnavailable/header";
 
         public static const TRADEINUNAVAILABLE_BODY:String = "#tooltips:tradeInUnavailable/body";
@@ -3035,6 +3045,8 @@ package
 
         public static const CYBERSPORT_UNIT_FIGHTBTN_PRESSFORREADY_BODY:String = "#tooltips:cyberSport/unit/fightBtn/pressForReady/body";
 
+        public static const CYBERSPORT_UNIT_FIGHTBTN_DIFFICULTYLEVELNOTUNLOCKED_BODY:String = "#tooltips:cyberSport/unit/fightBtn/difficultyLevelNotUnlocked/body";
+
         public static const CYBERSPORT_UNIT_FIGHTBTN_PRESSFORNOTREADY_BODY:String = "#tooltips:cyberSport/unit/fightBtn/pressForNotReady/body";
 
         public static const CYBERSPORT_UNIT_FIGHTBTN_EVENTVEHICLEWRONGMODE_HEADER:String = "#tooltips:cyberSport/unit/fightBtn/eventVehicleWrongMode/header";
@@ -3300,6 +3312,8 @@ package
         public static const CONTACT_STATUS_INBATTLE_SPECIAL:String = "#tooltips:Contact/status/inBattle/special";
 
         public static const CONTACT_STATUS_ONLINE:String = "#tooltips:Contact/status/online";
+
+        public static const CONTACT_STATUS_MAXDIFFICULTYLEVEL:String = "#tooltips:Contact/status/maxdifficultylevel";
 
         public static const CONTACT_RESOURCE_WOWP:String = "#tooltips:Contact/resource/wowp";
 
@@ -3951,7 +3965,23 @@ package
 
         public static const EVENT_SQUAD_DISABLE_HEADER:String = "#tooltips:event/squad/disable/header";
 
+        public static const EVENT_SQUAD_DISABLEWRONGDIFFICULTY_HEADER:String = "#tooltips:event/squad/disableWrongDifficulty/header";
+
+        public static const EVENT_SQUAD_DISABLEWRONGDIFFICULTYCOMMANDER_BODY:String = "#tooltips:event/squad/disableWrongDifficultyCommander/body";
+
+        public static const EVENT_SQUAD_DISABLEWRONGDIFFICULTYPLAYER_BODY:String = "#tooltips:event/squad/disableWrongDifficultyPlayer/body";
+
         public static const EVENT_SQUAD_DISABLE_BODY:String = "#tooltips:event/squad/disable/body";
+
+        public static const EVENT_SQUAD_DIFFICULTY_DROPDOWN_HEADER:String = "#tooltips:event/squad/difficulty/dropdown/header";
+
+        public static const EVENT_SQUAD_DIFFICULTY_DROPDOWN_COMMANDER_BODY:String = "#tooltips:event/squad/difficulty/dropdown/commander/body";
+
+        public static const EVENT_SQUAD_DIFFICULTY_DROPDOWN_BODY:String = "#tooltips:event/squad/difficulty/dropdown/body";
+
+        public static const EVENT_SQUAD_DIFFICULTY_LOCK:String = "#tooltips:event/squad/difficulty/lock";
+
+        public static const EVENT_SQUAD_DIFFICULTY_WARNING:String = "#tooltips:event/squad/difficulty/warning";
 
         public static const CUSTOMIZATION_BUYWINDOW_COPY_HEADER:String = "#tooltips:customization/buyWindow/copy/header";
 
@@ -4282,6 +4312,8 @@ package
         public static const CONTENTBUYVIEW_SLOTCHECKBOX_NOTENOUGHSLOTS_BODY:String = "#tooltips:contentBuyView/slotCheckbox/notEnoughSlots/body";
 
         public static const SQUADWINDOW_EVENTVEHICLE:String = "#tooltips:squadWindow/eventVehicle";
+
+        public static const SQUADWINDOW_HEADERRESTRICTION_DIFFICULTYNOTUNLOCKED:String = "#tooltips:squadWindow/headerRestriction/difficultyNotUnlocked";
 
         public static const DISMISSTANKMANDIALOG_CANTRESTORALERT_HEADER:String = "#tooltips:dismissTankmanDialog/cantRestorAlert/header";
 
@@ -5729,6 +5761,10 @@ package
 
         public static const NOTRECRUITEDTANKMAN_COMMANDER_STARLIGHT_DESC:String = "#tooltips:notrecruitedtankman/commander_starlight/desc";
 
+        public static const NOTRECRUITEDTANKMAN_COMMANDER_MAEVE_LABEL:String = "#tooltips:notrecruitedtankman/commander_maeve/label";
+
+        public static const NOTRECRUITEDTANKMAN_COMMANDER_MAEVE_DESC:String = "#tooltips:notrecruitedtankman/commander_maeve/desc";
+
         public static const NOTRECRUITEDTANKMAN_NY19MEN_LABEL:String = "#tooltips:notrecruitedtankman/ny19men/label";
 
         public static const NOTRECRUITEDTANKMAN_NY19MEN_DESC:String = "#tooltips:notrecruitedtankman/ny19men/desc";
@@ -5766,6 +5802,12 @@ package
         public static const NOTRECRUITEDTANKMAN_COMMANDER_MARINA_LABEL:String = "#tooltips:notrecruitedtankman/commander_marina/label";
 
         public static const NOTRECRUITEDTANKMAN_COMMANDER_MARINA_DESC:String = "#tooltips:notrecruitedtankman/commander_marina/desc";
+
+        public static const NOTRECRUITEDTANKMAN_HW19_COMMANDERS_LABEL:String = "#tooltips:notrecruitedtankman/hw19_commanders/label";
+
+        public static const NOTRECRUITEDTANKMAN_HW19_COMMANDERS_DESC:String = "#tooltips:notrecruitedtankman/hw19_commanders/desc";
+
+        public static const NOTRECRUITEDTANKMAN_HW19_COMMANDERS_HOWTOGETINFO:String = "#tooltips:notrecruitedtankman/hw19_commanders/howToGetInfo";
 
         public static const NOTRECRUITEDTANKMAN_COMMANDER_PATRICK_LABEL:String = "#tooltips:notrecruitedtankman/commander_patrick/label";
 
@@ -6168,6 +6210,124 @@ package
         public static const BATTLE_ROYALE_VIEWSTACK_REWARDS_HEADER:String = "#tooltips:battle_royale/viewStack/rewards/header";
 
         public static const BATTLE_ROYALE_VIEWSTACK_REWARDS_BODY:String = "#tooltips:battle_royale/viewStack/rewards/body";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_HE19_MONEY:String = "#tooltips:quests/bonuses/token/header/he19_money";
+
+        public static const QUESTS_BONUSES_TOKEN_BODY_HE19_MONEY:String = "#tooltips:quests/bonuses/token/body/he19_money";
+
+        public static const QUESTS_BONUSES_TOKEN_HE19_MONEY_HOWTOGET:String = "#tooltips:quests/bonuses/token/he19_money/howToGet";
+
+        public static const QUESTS_BONUSES_TOKEN_HE19_MONEY_HOWTOGETVARIANTS:String = "#tooltips:quests/bonuses/token/he19_money/howToGetVariants";
+
+        public static const QUESTS_BONUSES_TOKEN_HE19_MONEY_SPECIALCONDITIONS:String = "#tooltips:quests/bonuses/token/he19_money/specialConditions";
+
+        public static const QUESTS_BONUSES_TOKEN_HE19_MONEY_SPECIALCONDITIONSDESC:String = "#tooltips:quests/bonuses/token/he19_money/specialConditionsDesc";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_HE19_R40_T_54_HALLOWEEN:String = "#tooltips:quests/bonuses/token/header/he19_R40_T_54_Halloween";
+
+        public static const QUESTS_BONUSES_TOKEN_BODY_HE19_R40_T_54_HALLOWEEN:String = "#tooltips:quests/bonuses/token/body/he19_R40_T_54_Halloween";
+
+        public static const QUESTS_BONUSES_TOKEN_DESCRIPTION_HE19_R40_T_54_HALLOWEEN:String = "#tooltips:quests/bonuses/token/description/he19_R40_T_54_Halloween";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_HE19_A100_T49_HALLOWEEN:String = "#tooltips:quests/bonuses/token/header/he19_A100_T49_Halloween";
+
+        public static const QUESTS_BONUSES_TOKEN_BODY_HE19_A100_T49_HALLOWEEN:String = "#tooltips:quests/bonuses/token/body/he19_A100_T49_Halloween";
+
+        public static const QUESTS_BONUSES_TOKEN_DESCRIPTION_HE19_A100_T49_HALLOWEEN:String = "#tooltips:quests/bonuses/token/description/he19_A100_T49_Halloween";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_PREMIUM_PLUS:String = "#tooltips:quests/bonuses/token/header/premium_plus";
+
+        public static const QUESTS_BONUSES_TOKEN_DESCRIPTION_PREMIUM_PLUS:String = "#tooltips:quests/bonuses/token/description/premium_plus";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_HE19_TANKSRANK1:String = "#tooltips:quests/bonuses/token/header/he19_tanksRank1";
+
+        public static const QUESTS_BONUSES_TOKEN_BODY_HE19_TANKSRANK1:String = "#tooltips:quests/bonuses/token/body/he19_tanksRank1";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_HE19_TANKSRANK2:String = "#tooltips:quests/bonuses/token/header/he19_tanksRank2";
+
+        public static const QUESTS_BONUSES_TOKEN_BODY_HE19_TANKSRANK2:String = "#tooltips:quests/bonuses/token/body/he19_tanksRank2";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_HE19_TANKSRANK3:String = "#tooltips:quests/bonuses/token/header/he19_tanksRank3";
+
+        public static const QUESTS_BONUSES_TOKEN_BODY_HE19_TANKSRANK3:String = "#tooltips:quests/bonuses/token/body/he19_tanksRank3";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_HE19_ENERGY_FOR_USE_HEALING:String = "#tooltips:quests/bonuses/token/header/he19_energy_for_use_healing";
+
+        public static const QUESTS_BONUSES_TOKEN_BODY_HE19_ENERGY_FOR_USE_HEALING:String = "#tooltips:quests/bonuses/token/body/he19_energy_for_use_healing";
+
+        public static const QUESTS_BONUSES_TOKEN_DESCRIPTION_HE19_ENERGY_FOR_USE_HEALING:String = "#tooltips:quests/bonuses/token/description/he19_energy_for_use_healing";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_HE19_ENERGY_FOR_USE_BOOSTER:String = "#tooltips:quests/bonuses/token/header/he19_energy_for_use_booster";
+
+        public static const QUESTS_BONUSES_TOKEN_BODY_HE19_ENERGY_FOR_USE_BOOSTER:String = "#tooltips:quests/bonuses/token/body/he19_energy_for_use_booster";
+
+        public static const QUESTS_BONUSES_TOKEN_DESCRIPTION_HE19_ENERGY_FOR_USE_BOOSTER:String = "#tooltips:quests/bonuses/token/description/he19_energy_for_use_booster";
+
+        public static const QUESTS_BONUSES_TOKEN_HEADER_HE20_AFK_PARDON_ORDER:String = "#tooltips:quests/bonuses/token/header/he20_afk_pardon_order";
+
+        public static const QUESTS_BONUSES_TOKEN_BODY_HE20_AFK_PARDON_ORDER:String = "#tooltips:quests/bonuses/token/body/he20_afk_pardon_order";
+
+        public static const BATTLETYPES_EVENT_HEADER:String = "#tooltips:battleTypes/event/header";
+
+        public static const BATTLETYPES_EVENT_BODY:String = "#tooltips:battleTypes/event/body";
+
+        public static const BATTLETYPES_EVENT_DESCRIPTION:String = "#tooltips:battleTypes/event/description";
+
+        public static const BATTLETYPES_EVENT_END:String = "#tooltips:battleTypes/event/end";
+
+        public static const BATTLETYPES_EVENT_DAYS:String = "#tooltips:battleTypes/event/days";
+
+        public static const BATTLETYPES_EVENT_HOURS:String = "#tooltips:battleTypes/event/hours";
+
+        public static const BATTLETYPES_EVENT_MIN:String = "#tooltips:battleTypes/event/min";
+
+        public static const BATTLETYPES_EVENT_LESSMIN:String = "#tooltips:battleTypes/event/lessMin";
+
+        public static const EVENT_COMMANDERS_HEADER:String = "#tooltips:event/commanders/header";
+
+        public static const EVENT_COMMANDERS_PREMIUM:String = "#tooltips:event/commanders/premium";
+
+        public static const EVENT_COMMANDERS_FOOTER:String = "#tooltips:event/commanders/footer";
+
+        public static const EVENT_COMMANDERS_DESCRIPTION1:String = "#tooltips:event/commanders/description1";
+
+        public static const EVENT_COMMANDERS_DESCRIPTION2:String = "#tooltips:event/commanders/description2";
+
+        public static const EVENT_HEALING_DESCRIPTION:String = "#tooltips:event/healing/description";
+
+        public static const EVENT_HEALING_TIMELEFT:String = "#tooltips:event/healing/timeLeft";
+
+        public static const EVENT_AFK_WARNING_HEADER:String = "#tooltips:event/afk/warning/header";
+
+        public static const EVENT_AFK_WARNING_BODY:String = "#tooltips:event/afk/warning/body";
+
+        public static const EVENT_AFK_BAN_HEADER:String = "#tooltips:event/afk/ban/header";
+
+        public static const EVENT_AFK_BAN_FBBODY:String = "#tooltips:event/afk/ban/fbBody";
+
+        public static const EVENT_AFK_BAN_BODY:String = "#tooltips:event/afk/ban/body";
+
+        public static const EVENT_LOBBY_BAN_HEADER:String = "#tooltips:event/lobby/ban/header";
+
+        public static const EVENT_LOBBY_BAN_HEADERDESCRIPTION:String = "#tooltips:event/lobby/ban/headerDescription";
+
+        public static const EVENT_LOBBY_BAN_QUEST:String = "#tooltips:event/lobby/ban/quest";
+
+        public static const EVENT_LOBBY_BAN_QUESTDESCRIPTION:String = "#tooltips:event/lobby/ban/questDescription";
+
+        public static const EVENT_LOBBY_BAN_EXPIRATION:String = "#tooltips:event/lobby/ban/expiration";
+
+        public static const HANGAR_HEADER_HALLOWEEN_NOVEHICLE_HEADER:String = "#tooltips:hangar/header/halloween/noVehicle/header";
+
+        public static const HANGAR_HEADER_HALLOWEEN_NOVEHICLE_BODY:String = "#tooltips:hangar/header/halloween/noVehicle/body";
+
+        public static const HANGAR_HEADER_HALLOWEEN_QUESTS_HEADER:String = "#tooltips:hangar/header/halloween/quests/header";
+
+        public static const EVENT_COMMANDER_CANNOTUSE_INBATTLE_TITLE:String = "#tooltips:event/commander/canNotUse/inBattle/title";
+
+        public static const EVENT_COMMANDER_CANNOTUSE_INBATTLE_DESCRIPTION:String = "#tooltips:event/commander/canNotUse/inBattle/description";
+
+        public static const EVENT_HEADER_QUESTS_EMPTY:String = "#tooltips:event/header/quests/empty";
 
         public static const ELEN_SUMMARY_RANK_ENUM:Array = [ELEN_SUMMARY_RANK_1,ELEN_SUMMARY_RANK_2,ELEN_SUMMARY_RANK_3,ELEN_SUMMARY_RANK_4,ELEN_SUMMARY_RANK_NORANK];
 

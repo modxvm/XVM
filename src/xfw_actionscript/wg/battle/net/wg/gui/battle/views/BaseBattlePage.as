@@ -99,6 +99,11 @@ package net.wg.gui.battle.views
             this.initializeMessageLists();
         }
 
+        protected function setRibbonsPanelX() : void
+        {
+            this.ribbonsPanel.x = (_originalWidth >> 1) + this.ribbonsPanel.offsetX;
+        }
+
         override public function updateStage(param1:Number, param2:Number) : void
         {
             super.updateStage(param1,param2);
@@ -118,7 +123,7 @@ package net.wg.gui.battle.views
             {
                 this.dualGunPanel.updateStage(param1,param2);
             }
-            this.ribbonsPanel.x = _loc3_ + this.ribbonsPanel.offsetX;
+            this.setRibbonsPanelX();
             var _loc5_:int = this.getRibbonsCenterOffset(param2);
             var _loc6_:Number = _loc4_ - _loc5_ - RIBBONS_MIN_BOTTOM_PADDING_Y;
             this.ribbonsPanel.setFreeWorkingHeight(_loc6_);
@@ -137,7 +142,11 @@ package net.wg.gui.battle.views
             this.playerMessageListPositionUpdate();
             this.vehicleMessageList.updateStage();
             this.vehicleMessageListPositionUpdate();
-            this.battleLoading.updateStage(param1,param2);
+            var _loc8_:BaseBattleLoading = this.getBattleLoading();
+            if(_loc8_)
+            {
+                _loc8_.updateStage(param1,param2);
+            }
             this.gameMessagesPanel.x = _loc3_;
             this.calloutPanel.x = _loc3_ - CALLOUT_CENTER_SCREEN_OFFSET_X;
             this.calloutPanel.y = _loc4_ + CALLOUT_CENTER_SCREEN_OFFSET_Y;
@@ -162,7 +171,11 @@ package net.wg.gui.battle.views
 
         override protected function onPopulate() : void
         {
-            this.registerComponent(this.battleLoading,BATTLE_VIEW_ALIASES.BATTLE_LOADING);
+            var _loc1_:BaseBattleLoading = this.getBattleLoading();
+            if(_loc1_)
+            {
+                this.registerComponent(_loc1_,BATTLE_VIEW_ALIASES.BATTLE_LOADING);
+            }
             this.registerComponent(this.minimap,BATTLE_VIEW_ALIASES.MINIMAP);
             this.registerComponent(this.prebattleTimer,BATTLE_VIEW_ALIASES.PREBATTLE_TIMER);
             this.registerComponent(this.damagePanel,BATTLE_VIEW_ALIASES.DAMAGE_PANEL);
@@ -276,6 +289,11 @@ package net.wg.gui.battle.views
         public function as_toggleCtrlPressFlag(param1:Boolean) : void
         {
             App.toolTipMgr.hide();
+        }
+
+        protected function getBattleLoading() : BaseBattleLoading
+        {
+            return this.battleLoading;
         }
 
         protected function onComponentVisibilityChanged(param1:String, param2:Boolean) : void
@@ -434,7 +452,7 @@ package net.wg.gui.battle.views
 
         private function onRibbonsPanelChangeHandler(param1:Event) : void
         {
-            this.ribbonsPanel.x = (_originalWidth >> 1) + this.ribbonsPanel.offsetX;
+            this.setRibbonsPanelX();
         }
 
         public function xfw_onMiniMapTrySizeChangeHandler(param1:MinimapEvent) : void
