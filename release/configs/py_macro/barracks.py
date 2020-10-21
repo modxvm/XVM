@@ -1,16 +1,14 @@
-import gui.Scaleform.daapi.view.lobby.barracks.Barracks as barrack
+import gui.Scaleform.daapi.view.lobby.barracks.barracks_data_provider as barrack
 import nations
-from gui.Scaleform.locale.MENU import MENU
-from gui.Scaleform.locale.TOOLTIPS import TOOLTIPS
 from gui.shared.gui_items.Tankman import Tankman
+from gui.shared.utils.requesters import REQ_CRITERIA
 
 import xvm_main.python.config as config
 from xfw import *
 
 # sorting in the barracks
-# TODO: 1.10.1
-# @overrideMethod(barrack.Barracks, '_Barracks__showActiveTankmen')
-def __showActiveTankmen(base, self, criteria):
+@overrideMethod(barrack.BarracksDataProvider, 'showActiveTankmen')
+def showActiveTankmen(base, self, criteria):
 
     def keySorted(_tankman):
         # vehicle = self.itemsCache.items.getVehicle(_tankman.vehicleInvID)
@@ -46,38 +44,21 @@ def __showActiveTankmen(base, self, criteria):
     else:
         roles_order = Tankman.TANKMEN_ROLES_ORDER
 
-    allTankmen = self.itemsCache.items.getTankmen().values()
+    allTankmen = self.itemsCache.items.removeUnsuitableTankmen(self.itemsCache.items.getTankmen().values(), ~REQ_CRITERIA.VEHICLE.BATTLE_ROYALE)
+    self._BarracksDataProvider__totalCount = len(allTankmen)
     tankmenInBarracks = 0
     tankmenList = [barrack._packBuyBerthsSlot()]
     for tankman in sorted(allTankmen, key=keySorted):
         if not tankman.isInTank:
             tankmenInBarracks += 1
-        if not criteria(tankman):
-            continue
-        tankmanData = barrack._packTankmanData(tankman)
-        if tankmanData is not None:
-            if tankman.isInTank:
-                actionBtnLabel = MENU.BARRACKS_BTNUNLOAD
-                actionBtnTooltip = TOOLTIPS.BARRACKS_TANKMEN_UNLOAD
-            else:
-                actionBtnLabel = MENU.BARRACKS_BTNDISSMISS
-                actionBtnTooltip = TOOLTIPS.BARRACKS_TANKMEN_DISMISS
-            tankmanData.update({'isRankNameVisible': True,
-                                'recoveryPeriodText': None,
-                                'actionBtnLabel': actionBtnLabel,
-                                'actionBtnTooltip': actionBtnTooltip,
-                                'skills': None,
-                                'isSkillsVisible': False})
-            tankmenList.append(tankmanData)
+        if criteria(tankman):
+            tankmenList.append(tankman)
 
-    tankmenInSlots = len(tankmenList) - 1
+    self._BarracksDataProvider__filteredCount = len(tankmenList) - 1
     slots = self.itemsCache.items.stats.tankmenBerthsCount
     if tankmenInBarracks < slots:
         tankmenList.insert(1, {'empty': True,
-                               'freePlaces': slots - tankmenInBarracks})
-    self.as_setTankmenS({'tankmenCount': self._Barracks__getTankmenCountStr(tankmenInSlots=tankmenInSlots, totalCount=len(allTankmen)),
-                         'placesCount': self._Barracks__getPlaceCountStr(free=max(slots - tankmenInBarracks, 0), totalCount=slots),
-                         'placesCountTooltip': None,
-                         'tankmenData': tankmenList,
-                         'hasNoInfoData': False})
-    return
+         'freePlaces': slots - tankmenInBarracks})
+    self._BarracksDataProvider__placeCount = max(slots - tankmenInBarracks, 0)
+    self.setItemWrapper(barrack._packActiveTankman)
+    self.buildList(tankmenList)
