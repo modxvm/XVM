@@ -8,6 +8,7 @@ import traceback
 import game
 import helpers
 import nations
+import gui.Scaleform.daapi.view.lobby.barracks.barracks_data_provider as barrack
 from CurrentVehicle import g_currentVehicle
 from gui.shared import g_eventBus
 from gui.prb_control.entities.base.actions_validator import CurrentVehicleActionsValidator
@@ -15,6 +16,7 @@ from gui.prb_control.items import ValidationResult
 from gui.prb_control.settings import PREBATTLE_RESTRICTION
 from gui.Scaleform.daapi.view.meta.BarracksMeta import BarracksMeta
 from gui.Scaleform.locale.MENU import MENU
+from gui.Scaleform.locale.TOOLTIPS import TOOLTIPS
 from gui.shared.gui_items.Vehicle import Vehicle
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache
@@ -30,6 +32,7 @@ from gui.Scaleform.daapi.view.lobby.messengerBar.session_stats_button import Ses
 from gui.Scaleform.daapi.view.lobby.rankedBattles.ranked_battles_results import RankedBattlesResults
 from gui.Scaleform.daapi.view.lobby.hangar.daily_quest_widget import DailyQuestWidget
 from gui.Scaleform.daapi.view.lobby.hangar.event_entry_points_container import EventEntryPointsContainer
+from gui.shared.gui_items.Tankman import Tankman
 
 from xfw import *
 
@@ -90,22 +93,35 @@ def Vehicle_isAmmoFull(base, self):
         return base(self)
 
 # barracks: add nation flag and skills for tanksman
-@overrideMethod(BarracksMeta, 'as_setTankmenS')
-def BarracksMeta_as_setTankmenS(base, self, data):
+@overrideMethod(barrack, '_packActiveTankman')
+def barrack_packActiveTankman(base, tankman):
     try:
-        if cfg_hangar_barracksShowFlags or cfg_hangar_barracksShowSkills:
-            imgPath = 'img://../mods/shared_resources/xvm/res/icons/barracks'
-            for tankman in data['tankmenData']:
-                if ('role' not in tankman) or tankman['notRecruited']:
-                    continue
-                tankman['rank'] = tankman['role']
+        if isinstance(tankman, Tankman):
+            tankmanData = barrack._packTankmanData(tankman)
+
+            if tankman.isInTank:
+                actionBtnLabel = MENU.BARRACKS_BTNUNLOAD
+                actionBtnTooltip = TOOLTIPS.BARRACKS_TANKMEN_UNLOAD
+            else:
+                actionBtnLabel = MENU.BARRACKS_BTNDISSMISS
+                actionBtnTooltip = TOOLTIPS.BARRACKS_TANKMEN_DISMISS
+            tankmanData.update({'isRankNameVisible': True,
+                                'recoveryPeriodText': None,
+                                'actionBtnLabel': actionBtnLabel,
+                                'actionBtnTooltip': actionBtnTooltip,
+                                'skills': None,
+                                'isSkillsVisible': False})
+
+            if cfg_hangar_barracksShowFlags or cfg_hangar_barracksShowSkills:
+                imgPath = 'img://../mods/shared_resources/xvm/res/icons/barracks'
+                tankmanData['rank'] = tankmanData['role']
                 tankman_role_arr = []
                 if cfg_hangar_barracksShowFlags:
-                    tankman_role_arr.append("<img src='%s/nations/%s.png' vspace='-3'>" % (imgPath, nations.NAMES[tankman['nationID']]))
+                    tankman_role_arr.append("<img src='%s/nations/%s.png' vspace='-3'>" % (imgPath, nations.NAMES[tankmanData['nationID']]))
                 if cfg_hangar_barracksShowSkills:
                     tankman_role_arr.append('')
                     itemsCache = dependency.instance(IItemsCache)
-                    tankman_full_info = itemsCache.items.getTankman(tankman['tankmanID'])
+                    tankman_full_info = itemsCache.items.getTankman(tankmanData['tankmanID'])
                     if tankman_full_info is not None:
                         for skill in tankman_full_info.skills:
                             tankman_role_arr[-1] += "<img src='%s/skills/%s' vspace='-3'>" % (imgPath, skill.icon)
@@ -115,10 +131,13 @@ def BarracksMeta_as_setTankmenS(base, self, data):
                             tankman_role_arr[-1] += "<img src='%s/skills/new_skill.png' vspace='-3'>x%s" % (imgPath, tankman_full_info.newSkillCount[0])
                     if not tankman_role_arr[-1]:
                         tankman_role_arr[-1] = l10n('noSkills')
-                tankman['role'] = ' '.join(tankman_role_arr)
+                    tankmanData['role'] = ' '.join(tankman_role_arr)
+            return tankmanData
+        else:
+            return tankman
     except Exception as ex:
         err(traceback.format_exc())
-    return base(self, data)
+
 
 # low ammo => vehicle not ready
 @overrideMethod(Vehicle, 'isReadyToPrebattle')
