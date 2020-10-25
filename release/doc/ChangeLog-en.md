@@ -1,4 +1,18 @@
-﻿### XVM 8.6.5
+﻿### XVM 8.6.6
+
+  #### General
+
+  * Compatibility with World of Tanks 1.10.1.1
+
+  #### Hangar
+
+  * Removed section:
+
+    * `"hangar"/"equipmentPanel"`
+
+______________________________
+
+### XVM 8.6.5
 
   #### General
 

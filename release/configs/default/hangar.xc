@@ -37,16 +37,6 @@
     // true - show banner of various events in the hangar.
     // true - показывать баннер различных событий в ангаре.
     "showEventBanner": true,
-    // Consumables panel - show/hide the number of consumables and directives.
-    // Панель снаряжения - показывать/прятать количество снаряжения и инструкций.
-    "equipmentPanel": {
-      //true - show the remaining quantity of consumables in depot.
-      //true - показать оставшиеся количество снаряжения на складе.
-      "showConsumablesCount": true,
-      //true - show the remaining quantity of directives in depot.
-      //true - показать оставшиеся количество инструкций на складе.
-      "showDirectivesCount": false
-    },
     // "Combat Intelligence" - show/hide notifications in the main window and counters in the menu.
     // "Полевая почта" - показывать/прятать уведомления в главном окне и счетчики в меню.
     "combatIntelligence": {
