@@ -14,7 +14,6 @@ from gui.shared import g_eventBus
 from gui.prb_control.entities.base.actions_validator import CurrentVehicleActionsValidator
 from gui.prb_control.items import ValidationResult
 from gui.prb_control.settings import PREBATTLE_RESTRICTION
-from gui.Scaleform.daapi.view.meta.BarracksMeta import BarracksMeta
 from gui.Scaleform.locale.MENU import MENU
 from gui.Scaleform.locale.TOOLTIPS import TOOLTIPS
 from gui.shared.gui_items.Vehicle import Vehicle
