@@ -34,26 +34,24 @@ import xvm_main.python.config as config
 import xvm_main.python.userprefs as userprefs
 
 
-class XVM_Hangar_BattleType():
+class XVM_Hangar_BattleType(object):
 
     def __init__(self):
-        self.__userpref = "users/{accountDBID}/last_battle_type"
-
-        g_eventBus.addListener(events.GUICommonEvent.LOBBY_VIEW_LOADED, self.changeMode )
-
-        @overrideMethod(battle_selector_items._BattleSelectorItems, 'select')
-        def select(baseMethod, baseObject, action):
-            userprefs.set(self.__userpref, action)
-            baseMethod(baseObject, action)
+        self._userpref = "users/{accountDBID}/last_battle_type"
+        g_eventBus.addListener(events.GUICommonEvent.LOBBY_VIEW_LOADED, self.changeMode)
 
     def changeMode(self, *a, **kw):
         if config.get('hangar/restoreBattleType', False):
-            actionName = userprefs.get(self.__userpref, None)
+            actionName = userprefs.get(self._userpref, None)
             if actionName is not None:
                 battle_selector_items.getItems().select(actionName)
 
 g_xvm_hangar_battle_type = XVM_Hangar_BattleType()
 
+@overrideMethod(battle_selector_items._BattleSelectorItems, 'select')
+def select(base, self, action, onlyActive=False):
+    userprefs.set(g_xvm_hangar_battle_type._userpref, action)
+    base(self, action, onlyActive)
 
 #needed for {{battleType}} macro
 @overrideMethod(LobbyHeader, 'as_updateBattleTypeS')

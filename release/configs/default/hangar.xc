@@ -181,8 +181,8 @@
     // true - show skills in barracks.
     // true - показывать умения в казарме.
     "barracksShowSkills": true,
-    // true - restore selected battle type on switching to another server (only random, frontline and rank battle modes).
-    // true - восстанавливать выбранный тип боя при переключении на другой сервер (только рандом, Линия Фронта и ранговые бои).
+    // true - restore selected battle type on switching to another server, at the next login to the client.
+    // true - восстанавливать выбранный тип боя при переключении на другой сервер, при следующем входе в клиент.
     "restoreBattleType": false,
     // Ping servers.
     // Пинг серверов.
