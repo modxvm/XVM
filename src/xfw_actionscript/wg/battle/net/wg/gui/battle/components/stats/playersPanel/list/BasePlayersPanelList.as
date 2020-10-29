@@ -81,8 +81,6 @@ package net.wg.gui.battle.components.stats.playersPanel.list
         private function initDogTag() : void
         {
             this._dogTag = App.utils.classFactory.getComponent(Linkages.DOGTAG,DogtagComponent);
-            addChild(this._dogTag);
-            this._dogTag.visible = false;
             this._dogTag.hideNameAndClan();
             this._dogTag.x = -this._dogTag.width - DOG_TAG_OFFSET_X;
             this._dogTag.goToLabel(DogtagComponent.DOGTAG_LABEL_END_FULL);
@@ -498,9 +496,9 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             var _loc2_:IPlayersPanelListItem = param1.currentTarget as IPlayersPanelListItem;
             var _loc3_:IPlayersPanelListItemHolder = this._items[_loc2_.holderItemID];
             var _loc4_:DogTagVO = _loc3_.getDogTag();
+            addChild(this._dogTag);
             this._dogTag.setDogTagInfo(_loc4_);
             this._dogTag.y = _loc2_.y;
-            this._dogTag.visible = true;
             this._dogTag.fadeIn();
         }
 
@@ -514,7 +512,7 @@ package net.wg.gui.battle.components.stats.playersPanel.list
 
         private function setDogTagVisibleOff() : void
         {
-            this._dogTag.visible = false;
+            removeChild(this._dogTag);
         }
 
         private function setMouseListenersEnabled(param1:Boolean) : void
