@@ -27,7 +27,7 @@ from gui.shared import g_eventBus, events
 
 #XFW
 from xfw_actionscript.python import as_xfw_cmd
-from xfw.events import overrideMethod
+from xfw.events import *
 
 #XVM
 import xvm_main.python.config as config
@@ -48,10 +48,10 @@ class XVM_Hangar_BattleType(object):
 
 g_xvm_hangar_battle_type = XVM_Hangar_BattleType()
 
-@overrideMethod(battle_selector_items._BattleSelectorItems, 'select')
-def select(base, self, action, onlyActive=False):
-    userprefs.set(g_xvm_hangar_battle_type._userpref, action)
-    base(self, action, onlyActive)
+@registerEvent(battle_selector_items._BattleSelectorItems, 'select')
+def select(self, action, onlyActive=False):
+    if config.get('hangar/restoreBattleType', False):
+        userprefs.set(g_xvm_hangar_battle_type._userpref, action)
 
 #needed for {{battleType}} macro
 @overrideMethod(LobbyHeader, 'as_updateBattleTypeS')
