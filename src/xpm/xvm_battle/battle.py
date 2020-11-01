@@ -250,7 +250,7 @@ def areOtherIndicatorsShown(base, self):
 
 @overrideMethod(PostmortemPanel, 'onDogTagKillerInPlaySound')
 def onDogTagKillerInPlaySound(base, self):
-    if not config.get('battle/showPostmortemDogTag', True):
+    if not config.get('battle/showPostmortemDogTag', True) or not config.get('battle/showPostmortemTips', True):
         return
     base(self)
 
