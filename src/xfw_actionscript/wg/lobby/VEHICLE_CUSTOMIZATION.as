@@ -3429,6 +3429,8 @@ package
 
         public static const EMBLEM_SPECIAL_STICKER_643:String = "#vehicle_customization:emblem/special/sticker_643";
 
+        public static const EMBLEM_SPECIAL_STICKER_645:String = "#vehicle_customization:emblem/special/sticker_645";
+
         public static const INSCRIPTION:String = "#vehicle_customization:inscription";
 
         public static const INSCRIPTION_HISTORICAL:String = "#vehicle_customization:inscription/historical";

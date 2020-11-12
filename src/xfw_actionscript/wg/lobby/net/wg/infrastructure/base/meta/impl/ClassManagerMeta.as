@@ -1317,6 +1317,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.fortifications.popovers.FortVehicleSelectPopover;
     import net.wg.gui.lobby.fortifications.popovers.PopoverWithDropdown;
     import net.wg.gui.lobby.goldFishEvent.GoldFishWindow;
+    import net.wg.gui.lobby.hangar.ChinaLootBoxesEntryPointWidget;
     import net.wg.gui.lobby.hangar.CrewDropDownEvent;
     import net.wg.gui.lobby.hangar.DailyQuestWidget;
     import net.wg.gui.lobby.hangar.Hangar;
@@ -6203,6 +6204,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_POPOVERWITHDROPDOWN:Class = PopoverWithDropdown;
 
         public static const NET_WG_GUI_LOBBY_GOLDFISHEVENT_GOLDFISHWINDOW:Class = GoldFishWindow;
+
+        public static const NET_WG_GUI_LOBBY_HANGAR_CHINALOOTBOXESENTRYPOINTWIDGET:Class = ChinaLootBoxesEntryPointWidget;
 
         public static const NET_WG_GUI_LOBBY_HANGAR_CREWDROPDOWNEVENT:Class = CrewDropDownEvent;
 

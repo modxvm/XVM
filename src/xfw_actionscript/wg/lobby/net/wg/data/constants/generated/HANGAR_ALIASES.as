@@ -81,6 +81,8 @@ package net.wg.data.constants.generated
 
         public static const HE20_EVENT_ENTRY_POINT:String = "he20EventEntryPoint";
 
+        public static const CHINA_LOOTBOXES_WIDGET:String = "chinaLootboxesWidget";
+
         public function HANGAR_ALIASES()
         {
             super();

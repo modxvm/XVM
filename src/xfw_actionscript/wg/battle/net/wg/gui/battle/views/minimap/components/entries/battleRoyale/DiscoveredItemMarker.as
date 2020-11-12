@@ -19,9 +19,9 @@ package net.wg.gui.battle.views.minimap.components.entries.battleRoyale
 
         private var _fadeOutTween:Tween = null;
 
-        private var _isShown:Boolean = false;
-
         private var _atlasMgr:IAtlasManager;
+
+        private var _img:String = "";
 
         public function DiscoveredItemMarker()
         {
@@ -32,34 +32,47 @@ package net.wg.gui.battle.views.minimap.components.entries.battleRoyale
 
         public function dispose() : void
         {
-            this._fadeInTween.dispose();
-            this._fadeOutTween.dispose();
-            this._fadeInTween = null;
-            this._fadeOutTween = null;
+            this.clearTweens();
             this._atlasMgr = null;
         }
 
         public function show(param1:String, param2:Number, param3:Number, param4:Number) : void
         {
-            var _loc5_:* = 0;
-            this._atlasMgr.drawGraphics(ATLAS_CONSTANTS.BATTLE_ATLAS,param1,this.graphics,"",false,false,true);
-            blendMode = ITESM_WITH_ADD.indexOf(param1) >= 0?BlendMode.ADD:BlendMode.NORMAL;
-            if(!this._isShown)
+            if(this._img != param1)
             {
-                _loc5_ = DELAY_MAX_TIE_MS * Math.random();
-                this._fadeInTween = new Tween(param2,this,{"alpha":1});
-                this._fadeInTween.onComplete = this.onCompleteFadeInAnim;
-                this._fadeInTween.delay = _loc5_;
-                this._fadeInTween.paused = false;
-                this._fadeOutTween = new Tween(param4,this,{"alpha":0});
-                this._fadeOutTween.delay = param3 - _loc5_;
-                this._isShown = true;
+                this._img = param1;
+                this._atlasMgr.drawGraphics(ATLAS_CONSTANTS.BATTLE_ATLAS,param1,this.graphics,"",false,false,true);
+                blendMode = ITESM_WITH_ADD.indexOf(param1) >= 0?BlendMode.ADD:BlendMode.NORMAL;
             }
+            this.clearTweens();
+            var _loc5_:int = DELAY_MAX_TIE_MS * Math.random();
+            this._fadeInTween = new Tween(param2,this,{"alpha":1});
+            this._fadeInTween.onComplete = this.onCompleteFadeInAnim;
+            this._fadeInTween.delay = _loc5_;
+            this._fadeInTween.paused = false;
+            this._fadeOutTween = new Tween(param4,this,{"alpha":0});
+            this._fadeOutTween.delay = param3 - _loc5_;
         }
 
         private function onCompleteFadeInAnim() : void
         {
             this._fadeOutTween.paused = false;
+        }
+
+        private function clearTweens() : void
+        {
+            if(this._fadeInTween)
+            {
+                this._fadeInTween.paused = true;
+                this._fadeInTween.dispose();
+                this._fadeInTween = null;
+            }
+            if(this._fadeOutTween)
+            {
+                this._fadeOutTween.paused = true;
+                this._fadeOutTween.dispose();
+                this._fadeOutTween = null;
+            }
         }
     }
 }

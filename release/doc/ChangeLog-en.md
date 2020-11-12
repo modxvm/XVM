@@ -1,4 +1,22 @@
-﻿### XVM 8.6.6
+﻿### XVM 8.6.7
+
+  #### General
+
+  * Compatibility with World of Tanks 1.10.1.3
+
+  #### Battle
+
+  * Added option:
+
+    * `"battle"/"showBattleHint"` — display battle hints
+
+  * Removed section:
+
+    * `"battle"/"battleHint"`
+
+______________________________
+
+### XVM 8.6.6
 
   #### General
 

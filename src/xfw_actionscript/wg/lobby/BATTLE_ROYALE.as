@@ -335,6 +335,10 @@ package
 
         public static const BATTLERESULT_STATS_DAMAGEBLOCKEDBYARMOR_BODY:String = "#battle_royale:battleResult/stats/damageBlockedByArmor/body";
 
+        public static const BATTLERESULT_STATS_ANONYMIZER_HEADER:String = "#battle_royale:battleResult/stats/anonymizer/header";
+
+        public static const BATTLERESULT_STATS_ANONYMIZER_BODY:String = "#battle_royale:battleResult/stats/anonymizer/body";
+
         public static const BATTLERESULT_INBATTLE_REWARDWARNING:String = "#battle_royale:battleResult/inBattle/rewardWarning";
 
         public static const BATTLERESULT_INBATTLE_SKIPANIM_TEXT:String = "#battle_royale:battleResult/inBattle/skipAnim/text";

@@ -63,8 +63,7 @@ package net.wg.gui.lobby.epicBattles.utils
 
         public static function positionAboutButton(param1:AlignedIconTextButton, param2:int, param3:int) : void
         {
-            var _loc4_:* = NaN;
-            _loc4_ = calculateStaticMargin(param2);
+            var _loc4_:Number = calculateStaticMargin(param2);
             param1.x = _loc4_ - VISUAL_TOP_PADDING_ABOUT_BUTTON;
             param1.y = _loc4_ + MAIN_MENU_BUTTON_BAR_HEIGHT - BUTTON_TEXT_FIELD_VERTICAL_OFFSET - BUTTON_TOP_FONT_PADDING;
         }

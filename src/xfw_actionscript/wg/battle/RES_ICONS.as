@@ -1909,6 +1909,8 @@ package
 
         public static const MAPS_ICONS_BLUEPRINTS_FRAGMENT_MEDIUM_VEHICLE:String = "../maps/icons/blueprints/fragment/medium/vehicle.png";
 
+        public static const MAPS_ICONS_BLUEPRINTS_FRAGMENT_MEDIUM_VEHICLE_COMPLETE:String = "../maps/icons/blueprints/fragment/medium/vehicle_complete.png";
+
         public static const MAPS_ICONS_BLUEPRINTS_FRAGMENT_SMALL_CHINA:String = "../maps/icons/blueprints/fragment/small/china.png";
 
         public static const MAPS_ICONS_BLUEPRINTS_FRAGMENT_SMALL_CZECH:String = "../maps/icons/blueprints/fragment/small/czech.png";
@@ -2432,6 +2434,166 @@ package
         public static const MAPS_ICONS_CLANS_ROLES_TREASURER:String = "../maps/icons/clans/roles/treasurer.png";
 
         public static const MAPS_ICONS_CLANS_ROLES_VICE_LEADER:String = "../maps/icons/clans/roles/vice_leader.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_ENTRYPOINT_BOXESAVAILABLETOBUYBG:String = "../maps/icons/cnLootBoxes/entryPoint/boxesAvailableToBuyBg.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_ENTRYPOINT_CAROUSELBG:String = "../maps/icons/cnLootBoxes/entryPoint/carouselBg.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_ENTRYPOINT_INFO:String = "../maps/icons/cnLootBoxes/entryPoint/info.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_ENTRYPOINT_LOCK:String = "../maps/icons/cnLootBoxes/entryPoint/lock.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_ENTRYPOINT_LOOTBOXICON:String = "../maps/icons/cnLootBoxes/entryPoint/lootboxIcon.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_ENTRYPOINT_LOOTBOXICONEMPTY:String = "../maps/icons/cnLootBoxes/entryPoint/lootboxIconEmpty.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_ENTRYPOINT_LOOTBOXTOOLTIP:String = "../maps/icons/cnLootBoxes/entryPoint/lootboxTooltip.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_ENTRYPOINT_MULTIPLIER:String = "../maps/icons/cnLootBoxes/entryPoint/multiplier.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_OPENBOX_ANIMATED_BOX_COMMON:String = "../maps/icons/cnLootBoxes/openBox/animated_box_common.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_OPENBOX_ANIMATED_BOX_PREM:String = "../maps/icons/cnLootBoxes/openBox/animated_box_prem.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_OPENBOX_BUY_TEXTURE:String = "../maps/icons/cnLootBoxes/openBox/buy_texture.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_OPENBOX_CLOSED:String = "../maps/icons/cnLootBoxes/openBox/closed.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_OPENBOX_COMPENSATION:String = "../maps/icons/cnLootBoxes/openBox/compensation.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_OPENBOX_COMPENSATIONARROW:String = "../maps/icons/cnLootBoxes/openBox/compensationArrow.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_OPENBOX_ICON_HIDE_VIDEO:String = "../maps/icons/cnLootBoxes/openBox/icon_hide_video.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_OPENBOX_ICON_SHOW_VIDEO:String = "../maps/icons/cnLootBoxes/openBox/icon_show_video.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_OPENBOX_ICON_VIDEO_GLOW:String = "../maps/icons/cnLootBoxes/openBox/icon_video_glow.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_OPENBOX_LINES:String = "../maps/icons/cnLootBoxes/openBox/lines.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_OPENBOX_PREMIUM_RIBBON:String = "../maps/icons/cnLootBoxes/openBox/premium_ribbon.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_OPENBOX_PREMIUM_RIBBON_MEDIUM:String = "../maps/icons/cnLootBoxes/openBox/premium_ribbon_medium.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_OPENBOX_PREMIUM_RIBBON_SMALL:String = "../maps/icons/cnLootBoxes/openBox/premium_ribbon_small.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_OPENBOX_REGULAR_RIBBON:String = "../maps/icons/cnLootBoxes/openBox/regular_ribbon.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_OPENBOX_REGULAR_RIBBON_MEDIUM:String = "../maps/icons/cnLootBoxes/openBox/regular_ribbon_medium.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_OPENBOX_REGULAR_RIBBON_SMALL:String = "../maps/icons/cnLootBoxes/openBox/regular_ribbon_small.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_OPENBOX_SILVER_COINS:String = "../maps/icons/cnLootBoxes/openBox/silver_coins.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_REWARDS_AUTOEXTINGUISHERS:String = "../maps/icons/cnLootBoxes/rewards/autoExtinguishers.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_REWARDS_BONUS_BATTLE_TASK:String = "../maps/icons/cnLootBoxes/rewards/bonus_battle_task.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_REWARDS_BOOSTER_CREW_XP:String = "../maps/icons/cnLootBoxes/rewards/booster_crew_xp.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_REWARDS_BOOSTER_FREE_XP:String = "../maps/icons/cnLootBoxes/rewards/booster_free_xp.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_REWARDS_BOOSTER_XP:String = "../maps/icons/cnLootBoxes/rewards/booster_xp.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_REWARDS_BROCHURE_RANDOM:String = "../maps/icons/cnLootBoxes/rewards/brochure_random.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_REWARDS_COMMON:String = "../maps/icons/cnLootBoxes/rewards/common.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_REWARDS_CREDITS:String = "../maps/icons/cnLootBoxes/rewards/credits.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_REWARDS_HANDEXTINGUISHERS:String = "../maps/icons/cnLootBoxes/rewards/handExtinguishers.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_REWARDS_INTELLIGENCE:String = "../maps/icons/cnLootBoxes/rewards/intelligence.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_REWARDS_LARGEMEDKIT:String = "../maps/icons/cnLootBoxes/rewards/largeMedkit.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_REWARDS_LARGEREPAIRKIT:String = "../maps/icons/cnLootBoxes/rewards/largeRepairkit.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_REWARDS_PERSONALBOOK:String = "../maps/icons/cnLootBoxes/rewards/personalBook.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_REWARDS_PREMIUM_PLUS_1:String = "../maps/icons/cnLootBoxes/rewards/premium_plus_1.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_REWARDS_PREMIUM_PLUS_2:String = "../maps/icons/cnLootBoxes/rewards/premium_plus_2.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_REWARDS_PREMIUM_PLUS_3:String = "../maps/icons/cnLootBoxes/rewards/premium_plus_3.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_REWARDS_RANDOM:String = "../maps/icons/cnLootBoxes/rewards/random.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_REWARDS_SLOTS:String = "../maps/icons/cnLootBoxes/rewards/slots.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_REWARDS_STYLE:String = "../maps/icons/cnLootBoxes/rewards/style.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_REWARDS_VEHICLE:String = "../maps/icons/cnLootBoxes/rewards/vehicle.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_REWARDS_VEHICLE_COMPLETE:String = "../maps/icons/cnLootBoxes/rewards/vehicle_complete.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_SHARED_GEARS:String = "../maps/icons/cnLootBoxes/shared/gears.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_SHARED_INFO_ICON:String = "../maps/icons/cnLootBoxes/shared/info_icon.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_SHARED_PREMIUMBOX:String = "../maps/icons/cnLootBoxes/shared/premiumBox.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_SHARED_PREMIUMBOXSMALL:String = "../maps/icons/cnLootBoxes/shared/premiumBoxSmall.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_SHARED_REGULARBOX:String = "../maps/icons/cnLootBoxes/shared/regularBox.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_SHARED_REGULARBOXSMALL:String = "../maps/icons/cnLootBoxes/shared/regularBoxSmall.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_STORAGESCREEN_GLOW_LINES:String = "../maps/icons/cnLootBoxes/storageScreen/glow_lines.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_STORAGESCREEN_INFO:String = "../maps/icons/cnLootBoxes/storageScreen/info.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_STORAGESCREEN_LOCK:String = "../maps/icons/cnLootBoxes/storageScreen/lock.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_STORAGESCREEN_PREMIUM_300_220:String = "../maps/icons/cnLootBoxes/storageScreen/premium_300_220.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_STORAGESCREEN_PREMIUM_380_280:String = "../maps/icons/cnLootBoxes/storageScreen/premium_380_280.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_STORAGESCREEN_PREMIUM_RIBBON:String = "../maps/icons/cnLootBoxes/storageScreen/premium_ribbon.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_STORAGESCREEN_PURCHASE_GLOW:String = "../maps/icons/cnLootBoxes/storageScreen/purchase_glow.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_STORAGESCREEN_REGULAR_300_220:String = "../maps/icons/cnLootBoxes/storageScreen/regular_300_220.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_STORAGESCREEN_REGULAR_380_280:String = "../maps/icons/cnLootBoxes/storageScreen/regular_380_280.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_STORAGESCREEN_REGULAR_RIBBON:String = "../maps/icons/cnLootBoxes/storageScreen/regular_ribbon.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_STORAGESCREEN_REWARD_1:String = "../maps/icons/cnLootBoxes/storageScreen/reward_1.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_STORAGESCREEN_REWARD_2:String = "../maps/icons/cnLootBoxes/storageScreen/reward_2.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_STORAGESCREEN_REWARD_3:String = "../maps/icons/cnLootBoxes/storageScreen/reward_3.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_STORAGESCREEN_REWARD_4:String = "../maps/icons/cnLootBoxes/storageScreen/reward_4.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_STORAGESCREEN_REWARD_5:String = "../maps/icons/cnLootBoxes/storageScreen/reward_5.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_STORAGESCREEN_REWARD_6:String = "../maps/icons/cnLootBoxes/storageScreen/reward_6.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_STORAGESCREEN_REWARD_7:String = "../maps/icons/cnLootBoxes/storageScreen/reward_7.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_TYPES_CHINA_COMMON:String = "../maps/icons/cnLootBoxes/types/china_common.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_TYPES_CHINA_PREMIUM:String = "../maps/icons/cnLootBoxes/types/china_premium.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_WELCOMESCREEN_ASIA:String = "../maps/icons/cnLootBoxes/welcomeScreen/asia.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_WELCOMESCREEN_BOXES:String = "../maps/icons/cnLootBoxes/welcomeScreen/boxes.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_WELCOMESCREEN_BOXES_SMALL:String = "../maps/icons/cnLootBoxes/welcomeScreen/boxes_small.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_WELCOMESCREEN_BUYTEXTURE:String = "../maps/icons/cnLootBoxes/welcomeScreen/buyTexture.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_WELCOMESCREEN_LIMIT:String = "../maps/icons/cnLootBoxes/welcomeScreen/limit.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_WELCOMESCREEN_LIMIT_SMALL:String = "../maps/icons/cnLootBoxes/welcomeScreen/limit_small.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_WELCOMESCREEN_STUFF:String = "../maps/icons/cnLootBoxes/welcomeScreen/stuff.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_WELCOMESCREEN_STUFF_SMALL:String = "../maps/icons/cnLootBoxes/welcomeScreen/stuff_small.png";
+
+        public static const MAPS_ICONS_CNLOOTBOXES_WELCOMESCREEN_TIME:String = "../maps/icons/cnLootBoxes/welcomeScreen/time.png";
 
         public static const MAPS_ICONS_COMPONENTS_BUTTON_BACK_MAIN:String = "../maps/icons/components/button/back_main.png";
 
@@ -8129,6 +8291,8 @@ package
 
         public static const MAPS_ICONS_LIBRARY_HANGARFLAG_FLAG_VINOUS:String = "../maps/icons/library/hangarFlag/flag_vinous.png";
 
+        public static const MAPS_ICONS_LIBRARY_HANGARFLAG_S_FLAG:String = "../maps/icons/library/hangarFlag/s_flag.png";
+
         public static const MAPS_ICONS_LIBRARY_MARATHON_ALERT_ICON:String = "../maps/icons/library/marathon/alert_icon.png";
 
         public static const MAPS_ICONS_LIBRARY_MARATHON_CUP_DISABLE_ICON:String = "../maps/icons/library/marathon/cup_disable_icon.png";
@@ -9452,6 +9616,8 @@ package
         public static const MAPS_ICONS_QUESTS_RANKED_QUESTS_INFOTIP:String = "../maps/icons/quests/ranked_quests_infotip.png";
 
         public static const MAPS_ICONS_QUESTS_SEASONSVIEWBG:String = "../maps/icons/quests/seasonsViewBg.png";
+
+        public static const MAPS_ICONS_QUESTS_SMARATHONTOOLTIPHEADER:String = "../maps/icons/quests/sMarathonTooltipHeader.png";
 
         public static const MAPS_ICONS_QUESTS_SPGAWARDBACK:String = "../maps/icons/quests/SPGAwardBack.png";
 

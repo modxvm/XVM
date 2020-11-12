@@ -214,37 +214,37 @@ def _BattleStatisticsDataController_as_setQuestsInfoS(base, self, data, setForce
 
 @overrideMethod(TrajectoryViewHintPlugin, '_TrajectoryViewHintPlugin__addHint')
 def addHint(base, self):
-    if config.get('battle/battleHint/hideTrajectoryView'):
+    if not config.get('battle/showBattleHint'):
         return
     base(self)
 
 @overrideMethod(SiegeIndicatorHintPlugin, '_SiegeIndicatorHintPlugin__updateHint')
 def updateHint(base, self):
-    if config.get('battle/battleHint/hideSiegeIndicator'):
+    if not config.get('battle/showBattleHint'):
         return
     base(self)
 
 @overrideMethod(PreBattleHintPlugin, '_PreBattleHintPlugin__canDisplayQuestHint')
 def canDisplayQuestHint(base, self):
-    if config.get('battle/battleHint/hideQuestProgress'):
+    if not config.get('battle/showBattleHint'):
         return False
     base(self)
 
 @overrideMethod(PreBattleHintPlugin, '_PreBattleHintPlugin__canDisplayHelpHint')
 def canDisplayHelpHint(base, self, typeDescriptor):
-    if config.get('battle/battleHint/hideHelpScreen'):
+    if not config.get('battle/showBattleHint'):
         return False
     base(self, typeDescriptor)
 
 @overrideMethod(PreBattleHintPlugin, '_PreBattleHintPlugin__canDisplayBattleCommunicationHint')
 def canDisplayBattleCommunicationHint(base, self):
-    if config.get('battle/battleHint/hideBattleCommunication'):
+    if not config.get('battle/showBattleHint'):
         return False
     base(self)
 
 @overrideMethod(RadarHintPlugin, '_RadarHintPlugin__areOtherIndicatorsShown')
 def areOtherIndicatorsShown(base, self):
-    if config.get('battle/battleHint/hideRadarHint'):
+    if not config.get('battle/showBattleHint'):
         return True
     base(self)
 

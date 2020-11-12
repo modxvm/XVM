@@ -67,6 +67,8 @@ package net.wg.infrastructure.base.meta
 
         function as_toggleBattleRoyale(param1:Boolean) : void;
 
+        function as_setChinaLootboxesVisible(param1:Boolean) : void;
+
         function as_showEventHangar(param1:Boolean, param2:Boolean) : void;
     }
 }

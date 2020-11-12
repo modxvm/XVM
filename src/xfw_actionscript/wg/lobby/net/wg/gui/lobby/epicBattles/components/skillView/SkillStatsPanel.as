@@ -55,6 +55,7 @@ package net.wg.gui.lobby.epicBattles.components.skillView
 
         private function buildBlocks() : void
         {
+            var _loc2_:* = NaN;
             var _loc3_:* = false;
             var _loc4_:PaddingVO = null;
             var _loc5_:BlockDataItemVO = null;
@@ -64,7 +65,7 @@ package net.wg.gui.lobby.epicBattles.components.skillView
             var _loc12_:Class = null;
             var _loc13_:ISkillParameterBlock = null;
             var _loc1_:int = this._blockData.gap;
-            var _loc2_:Number = STARTING_TOP_OFFSET;
+            _loc2_ = STARTING_TOP_OFFSET;
             var _loc7_:Vector.<BlockDataItemVO> = this._blockData.blocksData;
             var _loc8_:int = _loc7_.length;
             this._blocks = new Vector.<ISkillParameterBlock>(_loc8_,true);

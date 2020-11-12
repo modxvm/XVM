@@ -23,6 +23,6 @@ diff -Naur lobby.orig-0.orig/net/wg/gui/lobby/hangar/Hangar.class.asasm lobby.or
 +    end ; body
 +   end ; method
 +  end ; trait
+   trait slot QName(PackageNamespace(""), "chinaLootboxesWidget") type QName(PackageNamespace("net.wg.gui.lobby.hangar"), "ChinaLootBoxesEntryPointWidget") end
    trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar:Hangar"), "_header") type QName(PackageNamespace("net.wg.gui.lobby.hangar"), "HangarHeader") end
    trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar:Hangar"), "_carousel") type QName(PackageNamespace("net.wg.gui.lobby.hangar.tcarousel"), "TankCarousel") end
-   trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar:Hangar"), "_isControlsVisible") type QName(PackageNamespace(""), "Boolean") value False() end

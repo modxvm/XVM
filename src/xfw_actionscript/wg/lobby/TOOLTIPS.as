@@ -5593,11 +5593,19 @@ package
 
         public static const MARATHON_HEADER:String = "#tooltips:marathon/header";
 
+        public static const EVENT_MARATHON_HEADER:String = "#tooltips:event_marathon/header";
+
         public static const MARATHON_BODY:String = "#tooltips:marathon/body";
+
+        public static const EVENT_MARATHON_BODY:String = "#tooltips:event_marathon/body";
 
         public static const MARATHON_BODY_EXTRA:String = "#tooltips:marathon/body/extra";
 
+        public static const EVENT_MARATHON_BODY_EXTRA:String = "#tooltips:event_marathon/body/extra";
+
         public static const MARATHON_BODY_EXTRA_SMART:String = "#tooltips:marathon/body/extra_smart";
+
+        public static const EVENT_MARATHON_BODY_EXTRA_SMART:String = "#tooltips:event_marathon/body/extra_smart";
 
         public static const MARATHON_STATE_START:String = "#tooltips:marathon/state/start";
 
