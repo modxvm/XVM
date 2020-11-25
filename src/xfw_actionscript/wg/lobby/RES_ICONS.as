@@ -8289,9 +8289,13 @@ package
 
         public static const MAPS_ICONS_LIBRARY_HANGARFLAG_FLAG_RED:String = "../maps/icons/library/hangarFlag/flag_red.png";
 
+        public static const MAPS_ICONS_LIBRARY_HANGARFLAG_FLAG_SENIORITY_AWARDS:String = "../maps/icons/library/hangarFlag/flag_seniority_awards.png";
+
         public static const MAPS_ICONS_LIBRARY_HANGARFLAG_FLAG_VINOUS:String = "../maps/icons/library/hangarFlag/flag_vinous.png";
 
         public static const MAPS_ICONS_LIBRARY_HANGARFLAG_S_FLAG:String = "../maps/icons/library/hangarFlag/s_flag.png";
+
+        public static const MAPS_ICONS_LIBRARY_HANGARFLAG_WINTER_FLAG:String = "../maps/icons/library/hangarFlag/winter_flag.png";
 
         public static const MAPS_ICONS_LIBRARY_MARATHON_ALERT_ICON:String = "../maps/icons/library/marathon/alert_icon.png";
 
@@ -8308,6 +8312,10 @@ package
         public static const MAPS_ICONS_LIBRARY_MARATHON_TIME_ICON:String = "../maps/icons/library/marathon/time_icon.png";
 
         public static const MAPS_ICONS_LIBRARY_MARATHON_TIME_ICON_GLOW:String = "../maps/icons/library/marathon/time_icon_glow.png";
+
+        public static const MAPS_ICONS_LIBRARY_MARATHON_WINTER_DISABLE_ICON:String = "../maps/icons/library/marathon/winter_disable_icon.png";
+
+        public static const MAPS_ICONS_LIBRARY_MARATHON_WINTER_ICON:String = "../maps/icons/library/marathon/winter_icon.png";
 
         public static const MAPS_ICONS_LIBRARY_OUTLINE_BEGINNER:String = "../maps/icons/library/outline/beginner.png";
 
@@ -8370,6 +8378,8 @@ package
         public static const MAPS_ICONS_LIBRARY_QUALIFIERS_42X42_RADIOMAN:String = "../maps/icons/library/qualifiers/42x42/radioman.png";
 
         public static const MAPS_ICONS_LIBRARY_QUALIFIERS_48X48_CAMOUFLAGE:String = "../maps/icons/library/qualifiers/48x48/camouflage.png";
+
+        public static const MAPS_ICONS_LIBRARY_SENIORITYAWARDS_REWARD:String = "../maps/icons/library/seniorityAwards/reward.png";
 
         public static const MAPS_ICONS_LIBRARY_STORE_CONDITION_OFF:String = "../maps/icons/library/store/condition_off.png";
 
@@ -9628,6 +9638,8 @@ package
         public static const MAPS_ICONS_QUESTS_TOKEN128:String = "../maps/icons/quests/token128.png";
 
         public static const MAPS_ICONS_QUESTS_TOKEN16:String = "../maps/icons/quests/token16.png";
+
+        public static const MAPS_ICONS_QUESTS_WINTERMARATHONTOOLTIPHEADER:String = "../maps/icons/quests/winterMarathonTooltipHeader.png";
 
         public static const MAPS_ICONS_QUESTS_BATTLECONDITION_128_ICON_BATTLE_CONDITION_ASSIST_128X128:String = "../maps/icons/quests/battleCondition/128/icon_battle_condition_assist_128x128.png";
 
@@ -12725,6 +12737,8 @@ package
 
         public static const MAPS_ICONS_SENIORITYAWARDS_AWARD_BG:String = "../maps/icons/seniorityAwards/award_bg.png";
 
+        public static const MAPS_ICONS_SENIORITYAWARDS_AWARD_BG2:String = "../maps/icons/seniorityAwards/award_bg2.png";
+
         public static const MAPS_ICONS_SENIORITYAWARDS_AWARD_RIBBON:String = "../maps/icons/seniorityAwards/award_ribbon.png";
 
         public static const MAPS_ICONS_SENIORITYAWARDS_AWARD_RIBBON_SMALL:String = "../maps/icons/seniorityAwards/award_ribbon_small.png";
@@ -12732,6 +12746,8 @@ package
         public static const MAPS_ICONS_SENIORITYAWARDS_CONFETTI:String = "../maps/icons/seniorityAwards/confetti.png";
 
         public static const MAPS_ICONS_SENIORITYAWARDS_CONFETTI_SMALL:String = "../maps/icons/seniorityAwards/confetti_small.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_FLAG_TOOLTIP_BG:String = "../maps/icons/seniorityAwards/flag_tooltip_bg.png";
 
         public static const MAPS_ICONS_SENIORITYAWARDS_GLOW_BUTTON:String = "../maps/icons/seniorityAwards/glow_button.png";
 
@@ -12747,6 +12763,18 @@ package
 
         public static const MAPS_ICONS_SENIORITYAWARDS_SPARKS:String = "../maps/icons/seniorityAwards/sparks.png";
 
+        public static const MAPS_ICONS_SENIORITYAWARDS_INFO_MAIN_BG:String = "../maps/icons/seniorityAwards/info/main_bg.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_INFO_SEPARATOR:String = "../maps/icons/seniorityAwards/info/separator.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_REWARDBOX_LARGE:String = "../maps/icons/seniorityAwards/rewardBox/large.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_REWARDBOX_MEDIUM:String = "../maps/icons/seniorityAwards/rewardBox/medium.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_REWARDBOX_MEDIUM_WIDE:String = "../maps/icons/seniorityAwards/rewardBox/medium_wide.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_REWARDBOX_SMALL_WIDE:String = "../maps/icons/seniorityAwards/rewardBox/small_wide.png";
+
         public static const MAPS_ICONS_SENIORITYAWARDS_REWARDS_BIG:String = "../maps/icons/seniorityAwards/rewards/big.png";
 
         public static const MAPS_ICONS_SENIORITYAWARDS_REWARDS_BIG_HIDDEN:String = "../maps/icons/seniorityAwards/rewards/big_hidden.png";
@@ -12758,6 +12786,36 @@ package
         public static const MAPS_ICONS_SENIORITYAWARDS_REWARDS_SMALL_HIDDEN:String = "../maps/icons/seniorityAwards/rewards/small_hidden.png";
 
         public static const MAPS_ICONS_SENIORITYAWARDS_REWARDS_SMALL_WITH_SHINE:String = "../maps/icons/seniorityAwards/rewards/small_with_shine.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_SEASON2020_A130_SUPER_HELLCAT:String = "../maps/icons/seniorityAwards/season2020/A130_Super_Hellcat.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_SEASON2020_A130_SUPER_HELLCAT_SMALL:String = "../maps/icons/seniorityAwards/season2020/A130_Super_Hellcat_small.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_SEASON2020_A134_M24E2_SUPERCHAFFEE:String = "../maps/icons/seniorityAwards/season2020/A134_M24E2_SuperChaffee.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_SEASON2020_A134_M24E2_SUPERCHAFFEE_SMALL:String = "../maps/icons/seniorityAwards/season2020/A134_M24E2_SuperChaffee_small.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_SEASON2020_FLAG_BG:String = "../maps/icons/seniorityAwards/season2020/flag_bg.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_SEASON2020_GLOW_SMALL_BUTTN:String = "../maps/icons/seniorityAwards/season2020/glow_small_buttn.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_SEASON2020_LINE_LEFT:String = "../maps/icons/seniorityAwards/season2020/line_left.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_SEASON2020_LINE_RIGHT:String = "../maps/icons/seniorityAwards/season2020/line_right.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_SEASON2020_R160_T_50_2:String = "../maps/icons/seniorityAwards/season2020/R160_T_50_2.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_SEASON2020_R160_T_50_2_SMALL:String = "../maps/icons/seniorityAwards/season2020/R160_T_50_2_small.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_SEASON2020_RAYS:String = "../maps/icons/seniorityAwards/season2020/rays.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_SEASON2020_RIBBON:String = "../maps/icons/seniorityAwards/season2020/ribbon.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_SEASON2020_RIBBON_GLOW:String = "../maps/icons/seniorityAwards/season2020/ribbon_glow.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_SEASON2020_RIBBON_LIGHT:String = "../maps/icons/seniorityAwards/season2020/ribbon_light.png";
+
+        public static const MAPS_ICONS_SENIORITYAWARDS_SEASON2020_RIBBON_SMALL:String = "../maps/icons/seniorityAwards/season2020/ribbon_small.png";
 
         public static const MAPS_ICONS_SENIORITYAWARDS_VEHICLES_390X245_A130_SUPER_HELLCAT:String = "../maps/icons/seniorityAwards/vehicles/390x245/A130_Super_Hellcat.png";
 

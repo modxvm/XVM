@@ -509,6 +509,8 @@ package net.wg.data.constants.generated
 
         public static const BLUEPRINT_RANDOM_NATIONAL_INFO:String = "blueprintRandomNationalInfo";
 
+        public static const SENIORITY_FLAG:String = "seniorityFlag";
+
         public static const BLOCKS_DEFAULT_UI:String = "ToolTipInblocksDefaultUI";
 
         public static const TANKMEN_UI:String = "ToolTipTankmenUI";
@@ -768,6 +770,8 @@ package net.wg.data.constants.generated
         public static const BADGES_SET:Array = [BADGES_SUFFIX_ITEM,BADGES_SUFFIX_RANKED_ITEM];
 
         public static const BATTLE_BLOCK_TOOLTIPS:Array = [BATTLE_OPT_DEVICE];
+
+        public static const SENIORITY_SET:Array = [SENIORITY_FLAG];
 
         public static const OPTDEV_SLOT_STATE_EMPTY:String = "empty";
 

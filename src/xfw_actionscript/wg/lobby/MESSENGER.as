@@ -715,6 +715,10 @@ package
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_RANKEDBONUSBATTLES_DAILY:String = "#messenger:serviceChannelMessages/battleResults/quests/rankedBonusBattles/daily";
 
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_SENIORITYREWARDHEADER:String = "#messenger:serviceChannelMessages/battleResults/seniorityRewardHeader";
+
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_SENIORITYREWARDBODY:String = "#messenger:serviceChannelMessages/battleResults/seniorityRewardBody";
+
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_PERSONALMISSIONS:String = "#messenger:serviceChannelMessages/battleResults/personalMissions";
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_PERSONALMISSIONS_1:String = "#messenger:serviceChannelMessages/battleResults/personalMissions/1";

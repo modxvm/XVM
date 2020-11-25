@@ -5595,17 +5595,25 @@ package
 
         public static const EVENT_MARATHON_HEADER:String = "#tooltips:event_marathon/header";
 
+        public static const WINTER_MARATHON_HEADER:String = "#tooltips:winter_marathon/header";
+
         public static const MARATHON_BODY:String = "#tooltips:marathon/body";
 
         public static const EVENT_MARATHON_BODY:String = "#tooltips:event_marathon/body";
+
+        public static const WINTER_MARATHON_BODY:String = "#tooltips:winter_marathon/body";
 
         public static const MARATHON_BODY_EXTRA:String = "#tooltips:marathon/body/extra";
 
         public static const EVENT_MARATHON_BODY_EXTRA:String = "#tooltips:event_marathon/body/extra";
 
+        public static const WINTER_MARATHON_BODY_EXTRA:String = "#tooltips:winter_marathon/body/extra";
+
         public static const MARATHON_BODY_EXTRA_SMART:String = "#tooltips:marathon/body/extra_smart";
 
         public static const EVENT_MARATHON_BODY_EXTRA_SMART:String = "#tooltips:event_marathon/body/extra_smart";
+
+        public static const WINTER_MARATHON_BODY_EXTRA_SMART:String = "#tooltips:winter_marathon/body/extra_smart";
 
         public static const MARATHON_STATE_START:String = "#tooltips:marathon/state/start";
 
@@ -5626,6 +5634,10 @@ package
         public static const MARATHON_ERROR_BATTLE_TYPE:String = "#tooltips:marathon/error/battle_type";
 
         public static const MARATHON_ERROR_VEH_TYPE:String = "#tooltips:marathon/error/veh_type";
+
+        public static const WINTER_MARATHON_ERROR_BATTLE_TYPE:String = "#tooltips:winter_marathon/error/battle_type";
+
+        public static const WINTER_MARATHON_ERROR_VEH_TYPE:String = "#tooltips:winter_marathon/error/veh_type";
 
         public static const XPEXCHANGEWINDOW_GOLD_GOLDAFTEREXCHANGE_HEADER:String = "#tooltips:xpExchangewindow/gold/goldAfterExchange/header";
 
