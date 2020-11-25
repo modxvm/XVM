@@ -50,7 +50,7 @@ g_xvm_hangar_battle_type = XVM_Hangar_BattleType()
 
 @registerEvent(battle_selector_items._BattleSelectorItems, 'select')
 def select(self, action, onlyActive=False):
-    if config.get('hangar/restoreBattleType', False):
+    if config.get('hangar/restoreBattleType', False) and self.isSelected(action):
         userprefs.set(g_xvm_hangar_battle_type._userpref, action)
 
 #needed for {{battleType}} macro

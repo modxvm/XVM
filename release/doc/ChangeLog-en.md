@@ -1,4 +1,12 @@
-﻿### XVM 8.6.7
+﻿### XVM 8.6.8
+
+  #### General
+
+  * Compatibility with World of Tanks 1.10.1.4
+
+______________________________
+
+### XVM 8.6.7
 
   #### General
 
