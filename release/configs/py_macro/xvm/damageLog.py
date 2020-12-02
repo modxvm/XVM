@@ -52,25 +52,9 @@ ATTACK_REASONS = {
     12: 'recovery',
     13: 'artillery_eq',
     14: 'bomber_eq',
-    15: 'minefield_eq',
-    16: 'none',
-    17: 'spawned_bot_explosion',
-    18: 'berserker_eq',
-    19: 'spawned_bot_ram',
-    20: 'smoke',
-    21: 'event_bomber_explosion',
-    22: 'event_death_on_phase_change',
-    23: 'event_death_on_phase_change_full_sc',
-    24: 'event_boss_aur',
-    31: 'art_attack',
-    32: 'air_strike'
-}
-
-SHOT_EFFECTS_INDEXES = {
-    31: 31,
-    32: 32,
-    33: 31,
-    34: 32
+    15: 'none',
+    24: 'art_attack',
+    25: 'air_strike'
 }
 
 VEHICLE_CLASSES_SHORT = {
@@ -419,12 +403,11 @@ class Data(object):
     def hitShell(self, attackerID, effectsIndex, damageFactor):
         self.data['stun-duration'] = None
         self.data['attackerID'] = attackerID
-        # self.data['attackReasonID'] = effectsIndex if effectsIndex in [24, 25] else 0
-        self.data['attackReasonID'] = SHOT_EFFECTS_INDEXES.get(effectsIndex, 0)
+        self.data['attackReasonID'] = effectsIndex if effectsIndex in [24, 25] else 0
         self.data['reloadGun'] = self.timeReload(attackerID)
         self.typeShell(effectsIndex)
         self.data['damage'] = 0
-        if damageFactor > 0:
+        if self.data['isDamage']:
             self.data['hitEffect'] = HIT_EFFECT_CODES[4]
         elif self.data['shells_stunning']:
             pass
@@ -447,7 +430,6 @@ class Data(object):
         self.data['isDamage'] = False
         self.data['hitEffect'] = 'unknown'
         self.data['splashHit'] = 'no-splash'
-        self.data['attackReasonID'] = 0
 
     def showDamageFromShot(self, vehicle, attackerID, points, effectsIndex, damageFactor):
         if not vehicle.isStarted:
@@ -464,7 +446,7 @@ class Data(object):
             self.data['compName'] = 'unknown'
 
         # self.data['criticalHit'] = (maxHitEffectCode == 5)
-        if damageFactor == 0:
+        if not self.data['isDamage']:
             self.data['hitEffect'] = HIT_EFFECT_CODES[min(3, maxHitEffectCode)]
             self.data['isAlive'] = bool(vehicle.isCrewActive)
         self.hitShell(attackerID, effectsIndex, damageFactor)
@@ -472,7 +454,7 @@ class Data(object):
     def showDamageFromExplosion(self, vehicle, attackerID, center, effectsIndex, damageFactor):
         self.data['splashHit'] = 'splash'
         # self.data['criticalHit'] = False
-        if damageFactor == 0:
+        if not self.data['isDamage']:
             self.data['hitEffect'] = HIT_EFFECT_CODES[3]
             self.data['isAlive'] = bool(vehicle.isCrewActive)
         self.hitShell(attackerID, effectsIndex, damageFactor)
@@ -532,13 +514,12 @@ class Data(object):
         self.data['oldHealth'] = newHealth
         if self.data['damage'] < 0:
             return
-        if self.data['attackReasonID'] == 0:
-            if (attackReasonID < 8) or (attackReasonID == 12):
-                self.data['attackReasonID'] = attackReasonID
-            elif attackReasonID in [9, 10, 13]:
-                self.data['attackReasonID'] = 31
-            elif attackReasonID in [11, 14]:
-                self.data['attackReasonID'] = 32
+        if (attackReasonID < 8) or (attackReasonID == 12):
+            self.data['attackReasonID'] = attackReasonID
+        elif attackReasonID in [9, 10, 13, 24]:
+            self.data['attackReasonID'] = 24
+        elif attackReasonID in [11, 14, 25]:
+            self.data['attackReasonID'] = 25
 
         self.data['isDamage'] = (self.data['damage'] > 0)
         self.data['isAlive'] = vehicle.isAlive()

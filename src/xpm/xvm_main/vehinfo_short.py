@@ -27,7 +27,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 21.10.2020
+    # Last update: 02.12.2020
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -81,6 +81,7 @@ _data = {
     "china:Ch41_WZ_111_5A_bob":              '111·5a·bb',
     "china:Ch41_WZ_111_QL":                  '111·lq',
     "china:Ch42_WalkerBulldog_M41D":         'M41D',
+    "china:Ch43_WZ_122_2":                   'wz122·2',
     "czech:Cz01_Skoda_T40":                  'skT40',
     "czech:Cz02_TVP_T50":                    'skT50',
     "czech:Cz03_LT_vz35":                    'vz.35',
@@ -251,6 +252,7 @@ _data = {
     "germany:G142_M48RPz":                   '7501k',
     "germany:G143_E75_TS":                   '7501k',
     "germany:G144_Kpz_50t":                  'Kpz50t',
+    "germany:G151_Pz_Sfl_IC":                'pz.Sfl.IC',
     "germany:G15_VK3601H":                   '3601h',
     "germany:G16_PzVIB_Tiger_II":            'Tig2',
     "germany:G16_PzVIB_Tiger_II_F":          'Tig2·h',
@@ -850,41 +852,7 @@ _data = {
     "ussr:R97_Object_140_bob":               'obj140·bb',
     "ussr:R98_T44_85":                       't44·85',
     "ussr:R98_T44_85M":                      't44·85m',
-    "ussr:R99_T44_122":                      't44·122',
-    # Halloween event
-    "france:F17_AMX_13_90_Halloween_event":  '13·90',
-    "germany:G00_Bomber_Hell":               'Bomber',
-    "germany:G114_Rheinmetall_Skorpian_HELL":'skorp',
-    "germany:G146_E100_Hell_Boss":           'E·100',
-    "germany:G25_PzII_Luchs_HELL":           'Luchs',
-    "germany:G25_PzII_Luchs_HELL_HALL":      'Luchs',
-    "germany:G54_E-50_Hall_minion":          'E·50',
-    "germany:G64_Panther_II_Hall_minion":    'Pant2',
-    "germany:G73_E50_Ausf_M_Hall_minion":    'E·50m',
-    "italy:It09_P43_ter_HELL":               'P43·ter',
-    "italy:It10_P43_bis_HELL":               'P43·bis',
-    "italy:It14_P44_Pantera_HELL":           'P44·Pant',
-    "poland:Pl05_50TP_Tyszkiewicza_HELL":    '50TP',
-    "poland:Pl10_40TP_Habicha_HELL":         '40TP',
-    "poland:Pl11_45TP_Habicha_HELL":         '45TP',
-    "poland:Pl13_53TP_Markowskiego_HELL":    '53TP',
-    "sweden:S13_Leo_HELL":                   'leo',
-    "sweden:S27_UDES_16_HELL":               'udes·16',
-    "sweden:S29_UDES_14_5_HELL":             'udes·14·5',
-    "uk:GB09_Churchill_VII_HALL":            'Chrch7',
-    "uk:GB10_Black_Prince_HALL":             'BlPrn',
-    "uk:GB11_Caernarvon_HALL":               'Caer',
-    "uk:GB24_Centurion_Mk3_Halloween_event": 'Cent7',
-    "uk:GB81_FV4004_HELL":                   'Conw',
-    "uk:GB83_FV4005_HELL":                   'fv4005',
-    "usa:A100_T49_Halloween_event":          'T49',
-    "usa:A14_T30_HELL":                      'T30',
-    "usa:A35_Pershing_HELL":                 'Persh',
-    "usa:A36_Sherman_Jumbo_HELL":            'Jumbo',
-    "usa:A63_M46_Patton_HALL":               'M46Pt',
-    "usa:A66_M103_Halloween_event":          'M103',
-    "usa:A68_T28_Prototype_HELL":            'T28Pr',
-    "ussr:R40_T-54_Halloween_event":         't54'
+    "ussr:R99_T44_122":                      't44·122'
     # Unused
     #"china:Ch04_T34_1_training":             't34·1',
     #"germany:G03_PzV_Panther_training":      'Pant',

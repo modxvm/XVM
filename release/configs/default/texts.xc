@@ -142,7 +142,10 @@
       "tournament_event": "",
       // ?.
       // ?.
-      "event_random": ""
+      "event_random": "",
+      // «Brawl» mode.
+      // Режим «Схватка».
+      "bob": ""
     },
     // Text for {{topclan}} macro.
     // Текст для макроса {{topclan}}.

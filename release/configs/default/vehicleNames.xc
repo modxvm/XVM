@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 21.10.2020
+    // Last update: 02.12.2020
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -58,6 +58,7 @@
     "china-Ch41_WZ_111_5A_bob":              {"name": null, "short": null},
     "china-Ch41_WZ_111_QL":                  {"name": null, "short": null},
     "china-Ch42_WalkerBulldog_M41D":         {"name": null, "short": null},
+    "china-Ch43_WZ_122_2":                   {"name": null, "short": null},
     "czech-Cz01_Skoda_T40":                  {"name": null, "short": null},
     "czech-Cz02_TVP_T50":                    {"name": null, "short": null},
     "czech-Cz03_LT_vz35":                    {"name": null, "short": null},
@@ -228,6 +229,7 @@
     "germany-G142_M48RPz":                   {"name": null, "short": null},
     "germany-G143_E75_TS":                   {"name": null, "short": null},
     "germany-G144_Kpz_50t":                  {"name": null, "short": null},
+    "germany-G151_Pz_Sfl_IC":                {"name": null, "short": null},
     "germany-G15_VK3601H":                   {"name": null, "short": null},
     "germany-G16_PzVIB_Tiger_II":            {"name": null, "short": null},
     "germany-G16_PzVIB_Tiger_II_F":          {"name": null, "short": null},
@@ -827,41 +829,7 @@
     "ussr-R97_Object_140_bob":               {"name": null, "short": null},
     "ussr-R98_T44_85":                       {"name": null, "short": null},
     "ussr-R98_T44_85M":                      {"name": null, "short": null},
-    "ussr-R99_T44_122":                      {"name": null, "short": null},
-    // Halloween event
-    "france-F17_AMX_13_90_Halloween_event":  {"name": null, "short": null},
-    "germany-G00_Bomber_Hell":               {"name": null, "short": null},
-    "germany-G114_Rheinmetall_Skorpian_HELL":{"name": null, "short": null},
-    "germany-G146_E100_Hell_Boss":           {"name": null, "short": null},
-    "germany-G25_PzII_Luchs_HELL":           {"name": null, "short": null},
-    "germany-G25_PzII_Luchs_HELL_HALL":      {"name": null, "short": null},
-    "germany-G54_E-50_Hall_minion":          {"name": null, "short": null},
-    "germany-G64_Panther_II_Hall_minion":    {"name": null, "short": null},
-    "germany-G73_E50_Ausf_M_Hall_minion":    {"name": null, "short": null},
-    "italy-It09_P43_ter_HELL":               {"name": null, "short": null},
-    "italy-It10_P43_bis_HELL":               {"name": null, "short": null},
-    "italy-It14_P44_Pantera_HELL":           {"name": null, "short": null},
-    "poland-Pl05_50TP_Tyszkiewicza_HELL":    {"name": null, "short": null},
-    "poland-Pl10_40TP_Habicha_HELL":         {"name": null, "short": null},
-    "poland-Pl11_45TP_Habicha_HELL":         {"name": null, "short": null},
-    "poland-Pl13_53TP_Markowskiego_HELL":    {"name": null, "short": null},
-    "sweden-S13_Leo_HELL":                   {"name": null, "short": null},
-    "sweden-S27_UDES_16_HELL":               {"name": null, "short": null},
-    "sweden-S29_UDES_14_5_HELL":             {"name": null, "short": null},
-    "uk-GB09_Churchill_VII_HALL":            {"name": null, "short": null},
-    "uk-GB10_Black_Prince_HALL":             {"name": null, "short": null},
-    "uk-GB11_Caernarvon_HALL":               {"name": null, "short": null},
-    "uk-GB24_Centurion_Mk3_Halloween_event": {"name": null, "short": null},
-    "uk-GB81_FV4004_HELL":                   {"name": null, "short": null},
-    "uk-GB83_FV4005_HELL":                   {"name": null, "short": null},
-    "usa-A100_T49_Halloween_event":          {"name": null, "short": null},
-    "usa-A14_T30_HELL":                      {"name": null, "short": null},
-    "usa-A35_Pershing_HELL":                 {"name": null, "short": null},
-    "usa-A36_Sherman_Jumbo_HELL":            {"name": null, "short": null},
-    "usa-A63_M46_Patton_HALL":               {"name": null, "short": null},
-    "usa-A66_M103_Halloween_event":          {"name": null, "short": null},
-    "usa-A68_T28_Prototype_HELL":            {"name": null, "short": null},
-    "ussr-R40_T-54_Halloween_event":         {"name": null, "short": null}
+    "ussr-R99_T44_122":                      {"name": null, "short": null}
     /** Unused
     "china-Ch04_T34_1_training":             {"name": null, "short": null},
     "germany-G03_PzV_Panther_training":      {"name": null, "short": null},

@@ -3,7 +3,7 @@
 #####################################################################
 # imports
 
-from gui.Scaleform.daapi.view.battle.shared.stats_exchage import BattleStatisticsDataController
+from gui.Scaleform.daapi.view.battle.shared.stats_exchange import BattleStatisticsDataController
 
 from xfw import *
 
