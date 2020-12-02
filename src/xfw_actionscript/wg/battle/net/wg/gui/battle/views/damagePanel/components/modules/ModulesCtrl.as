@@ -282,14 +282,14 @@ package net.wg.gui.battle.views.damagePanel.components.modules
             else if(param3 == BATTLE_ITEM_STATES.CRITICAL)
             {
                 this._lastBrokenChassisDevice = param2;
-                _loc4_ = this._destroyedChassisDevicesCount == 0?BATTLE_ITEM_STATES.CRITICAL:BATTLE_ITEM_STATES.DESTROYED;
+                _loc4_ = this._destroyedChassisDevicesCount <= 0?BATTLE_ITEM_STATES.CRITICAL:BATTLE_ITEM_STATES.DESTROYED;
             }
             else if(param3 == BATTLE_ITEM_STATES.REPAIRED || param3 == BATTLE_ITEM_STATES.REPAIRED_FULL)
             {
                 this._destroyedChassisDevices[param2] = 0;
                 this._lastBrokenChassisDevice = param2;
                 this._destroyedChassisDevicesCount--;
-                if(this._destroyedChassisDevicesCount == 0)
+                if(this._destroyedChassisDevicesCount <= 0)
                 {
                     this._lastDestroyedChassisDevice = Values.EMPTY_STR;
                     _loc4_ = param3;

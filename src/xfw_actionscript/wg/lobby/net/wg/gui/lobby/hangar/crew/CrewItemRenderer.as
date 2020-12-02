@@ -476,10 +476,6 @@ package net.wg.gui.lobby.hangar.crew
 
         private function hideEmptySlotBgAnim() : void
         {
-            if(_baseDisposed)
-            {
-                return;
-            }
             this.emptySlotBgAnim.visible = false;
             this.emptySlotBgAnim.gotoAndStop(1);
         }

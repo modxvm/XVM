@@ -87,6 +87,8 @@ package
 
         public static const CREWBOOKS_WARNING_MEMBERSINBATTLE_TOOLTIP_BODY:String = "#crew_operations:crewBooks/warning/membersInBattle/tooltip/body";
 
+        public static const CREWBOOKS_ERROR_LOCKED:String = "#crew_operations:crewBooks/error/locked";
+
         public function CREW_OPERATIONS()
         {
             super();

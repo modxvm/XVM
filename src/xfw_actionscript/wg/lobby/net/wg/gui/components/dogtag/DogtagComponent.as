@@ -131,7 +131,12 @@ package net.wg.gui.components.dogtag
 
         private function onFlamesPlay() : void
         {
-            if(this._isEngravingMaxLevel)
+            this.setFlamesPlay(this._isEngravingMaxLevel);
+        }
+
+        private function setFlamesPlay(param1:Boolean) : void
+        {
+            if(param1)
             {
                 this.flames.visible = true;
                 this.flames.gotoAndPlay("play");
@@ -147,6 +152,10 @@ package net.wg.gui.components.dogtag
         {
             this._isEngravingMaxLevel = param1.isEngravingMaxLevel;
             this.dogtagUp.setDogTagInfo(param1.playerName,param1.clanTag,param1.background.imageStr,param1.engraving.imageStr);
+            if(this.flames)
+            {
+                this.setFlamesPlay(this._isEngravingMaxLevel);
+            }
             if(this._currentLabel == DOGTAG_LABEL_END_TOP)
             {
                 return;

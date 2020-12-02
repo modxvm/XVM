@@ -5,6 +5,8 @@ package net.wg.infrastructure.base.meta
     public interface ICrosshairPanelContainerMeta extends IEventDispatcher
     {
 
+        function as_playSoundS(param1:String) : void;
+
         function as_setSettings(param1:Object) : void;
 
         function as_setScale(param1:Number) : void;
@@ -61,7 +63,7 @@ package net.wg.infrastructure.base.meta
 
         function as_setAutoloaderReloadasPercent(param1:Number) : void;
 
-        function as_setAutoloaderPercent(param1:Number, param2:Number, param3:Boolean) : void;
+        function as_setAutoloaderPercent(param1:Number, param2:Number, param3:Boolean, param4:Boolean) : void;
 
         function as_setSpeedMode(param1:Boolean) : void;
 

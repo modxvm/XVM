@@ -465,7 +465,7 @@ class GroupCounter extends Object implements IDisposable
     function GroupCounter()
     {
         super();
-        this.views = new Vector.<GroupViewObject>();
+        this.views = new Vector.<GroupCounter>();
     }
 
     public function decrement(param1:String) : void

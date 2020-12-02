@@ -116,7 +116,7 @@ package net.wg.gui.battle.views.consumablesPanel
         {
         }
 
-        public function setCoolDownTime(param1:Number, param2:Number, param3:Number, param4:int = 1, param5:Boolean = false) : void
+        public function setCoolDownTime(param1:Number, param2:Number, param3:Number, param4:int = 1) : void
         {
             if(param1 > 0)
             {
@@ -138,10 +138,6 @@ package net.wg.gui.battle.views.consumablesPanel
         }
 
         public function setTimerSnapshot(param1:int, param2:Boolean) : void
-        {
-        }
-
-        public function setCoolDownReverse() : void
         {
         }
 
@@ -205,10 +201,6 @@ package net.wg.gui.battle.views.consumablesPanel
         }
 
         public function set isReplay(param1:Boolean) : void
-        {
-        }
-
-        public function setStage(param1:int) : void
         {
         }
 

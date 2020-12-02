@@ -25,6 +25,8 @@ package net.wg.gui.rally.views.room
     public class BaseTeamSection extends UIComponentEx implements IBaseTeamSection
     {
 
+        private static const DISABLED_STATE:String = "disabled";
+
         public var lblTeamMembers:TextField;
 
         public var lblTeamVehicles:TextField;
@@ -79,6 +81,7 @@ package net.wg.gui.rally.views.room
             }
             if(isInvalid(RallyInvalidationType.RALLY_DATA) && this._rallyData)
             {
+                this.updateDynamicSlots();
                 this.updateComponents();
                 this.updateTeamLabel();
             }
@@ -90,7 +93,7 @@ package net.wg.gui.rally.views.room
                     this.btnFight.visible = !this._actionButtonData.isReady;
                     this.btnFight.enabled = this._actionButtonData.isEnabled && !this._isFightBtnInCoolDown;
                     this.btnFight.label = this._actionButtonData.label;
-                    if(!this.btnFight.enabled && this.btnFight.state != "disabled")
+                    if(!this.btnFight.enabled && this.btnFight.state != DISABLED_STATE)
                     {
                         this.btnFight.setDisabled();
                     }
@@ -105,7 +108,7 @@ package net.wg.gui.rally.views.room
                         this.btnNotReady.visible = this._actionButtonData.isReady;
                         this.btnNotReady.enabled = this._actionButtonData.isEnabled && !this._isFightBtnInCoolDown;
                         this.btnNotReady.label = this._actionButtonData.label;
-                        if(!this.btnNotReady.enabled && this.btnNotReady.state != "disabled")
+                        if(!this.btnNotReady.enabled && this.btnNotReady.state != DISABLED_STATE)
                         {
                             this.btnNotReady.setDisabled();
                         }
@@ -244,6 +247,10 @@ package net.wg.gui.rally.views.room
         protected function getSlotsUI() : Vector.<IRallySimpleSlotRenderer>
         {
             return new Vector.<IRallySimpleSlotRenderer>();
+        }
+
+        protected function updateDynamicSlots() : void
+        {
         }
 
         protected function updateComponents() : void

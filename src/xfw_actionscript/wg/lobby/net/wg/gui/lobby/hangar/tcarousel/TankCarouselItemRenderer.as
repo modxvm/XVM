@@ -107,7 +107,8 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         protected function updateData() : void
         {
-            var _loc1_:* = this._dataVO != null;
+            var _loc1_:* = false;
+            _loc1_ = this._dataVO != null;
             if(_loc1_)
             {
                 alpha = this._dataVO.alpha;
@@ -338,7 +339,6 @@ package net.wg.gui.lobby.hangar.tcarousel
         private function onSlotMouseRollOverHandler(param1:MouseEvent) : void
         {
             var _loc2_:ActionPriceVO = null;
-            var _loc3_:String = null;
             if(!this._isInteractive || !this._dataVO)
             {
                 return;
@@ -365,8 +365,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
             else
             {
-                _loc3_ = !this._dataVO.isEvent?this._dataVO.tooltip:TOOLTIPS_CONSTANTS.EVENT_CAROUSEL_VEHICLE;
-                this._toolTipMgr.showSpecial(_loc3_,null,this._dataVO.intCD);
+                this._toolTipMgr.showSpecial(this._dataVO.tooltip,null,this._dataVO.intCD);
                 this.content.handleRollOver(this._dataVO);
             }
         }

@@ -175,19 +175,21 @@ package net.wg.gui.lobby.components
             super.draw();
             if(this._data != null && isInvalid(INV_PAGINATOR_DATA))
             {
-                _loc1_ = this._pageController.getPageIndex();
-                _loc2_ = this._data.pages;
-                this._pageController.setPages(_loc2_);
-                for each(_loc3_ in _loc2_)
+                _loc1_ = this._data.len;
+                if(_loc1_ > MIN_PAGES)
                 {
-                    if(_loc3_.selected)
+                    _loc2_ = this._data.pages;
+                    this._pageController.setPages(_loc2_);
+                    for each(_loc3_ in _loc2_)
                     {
-                        this._pageController.setPageIndex(_loc3_.pageIndex);
-                        break;
+                        if(_loc3_.selected)
+                        {
+                            this._pageController.setPageIndex(_loc3_.pageIndex);
+                            break;
+                        }
                     }
                 }
-                this.pageButtons.visible = this._data.pages.length > MIN_PAGES;
-                if(_loc1_ == this._currentMissionIndex)
+                else
                 {
                     requestMissionDataS(this._currentMissionIndex);
                 }
@@ -239,8 +241,7 @@ package net.wg.gui.lobby.components
 
         protected function updateArrowsLayout() : void
         {
-            var _loc1_:* = 0;
-            _loc1_ = this.view.width >> 1;
+            var _loc1_:* = this.view.width >> 1;
             this.arrowLeftBtn.x = this.view.x - _loc1_ - ARROW_HORIZONTAL_GAP - this.arrowLeftBtn.width | 0;
             this.arrowRightBtn.x = this.view.x + _loc1_ + ARROW_HORIZONTAL_GAP + this.arrowLeftBtn.width | 0;
             this.arrowLeftBtn.y = this.arrowRightBtn.y = this.view.y;

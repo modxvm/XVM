@@ -60,10 +60,6 @@ package net.wg.gui.components.carousels.data
 
         public var isCrystalsLimitReached:Boolean = false;
 
-        public var isEvent:Boolean = false;
-
-        public var eventLock:Boolean = false;
-
         public var label:String = "";
 
         public var level:Number = 0;

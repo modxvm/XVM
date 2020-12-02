@@ -2,14 +2,16 @@ package net.wg.gui.components.common
 {
     import net.wg.infrastructure.base.UIComponentEx;
     import flash.text.TextField;
-    import flash.display.DisplayObject;
+    import flash.display.Sprite;
 
     public class CounterView extends UIComponentEx
     {
 
         public var label:TextField = null;
 
-        public var back:DisplayObject = null;
+        public var back:Sprite = null;
+
+        public var hitMc:Sprite = null;
 
         private var _originalBackWidth:int = 0;
 
@@ -21,10 +23,19 @@ package net.wg.gui.components.common
             this._originalBackWidth = this.back.width;
         }
 
+        override protected function configUI() : void
+        {
+            super.configUI();
+            hitArea = this.hitMc;
+            this.back.mouseEnabled = false;
+            this.back.mouseChildren = false;
+        }
+
         override protected function onDispose() : void
         {
             this.label = null;
             this.back = null;
+            this.hitMc = null;
             super.onDispose();
         }
 

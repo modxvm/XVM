@@ -89,8 +89,6 @@ package net.wg.gui.lobby.vehicleCustomization.data.customizationPanel
 
         public var scale:Number = 1.0;
 
-        public var customVehicleCD:int = -1;
-
         public function CustomizationCarouselRendererVO(param1:Object)
         {
             super(param1);

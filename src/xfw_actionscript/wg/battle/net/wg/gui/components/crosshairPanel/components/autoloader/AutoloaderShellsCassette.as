@@ -14,9 +14,11 @@ package net.wg.gui.components.crosshairPanel.components.autoloader
 
         private static const AUTOLOADING_FRAMES:int = 83;
 
-        private static const STATUS_RELOAD_IDLE_STATE:int = 1;
+        private static const STATUS_RELOAD_IDLE_STATE:int = 11;
 
         private static const STATUS_RELOAD_COMPLETE_STATE:int = 2;
+
+        private static const STATUS_RELOAD_COMPLETE_IDLE:int = 1;
 
         private static const SHELL_STATE_COMEIN:String = "comeIn";
 
@@ -119,6 +121,7 @@ package net.wg.gui.components.crosshairPanel.components.autoloader
             if(isInvalid(TIMER_STATE_INVALID))
             {
                 this.timer.updateTimerColor(this._isTimerRed,this._isCritical,this._isAutoloadInProgress);
+                this.updateStatusMC();
             }
         }
 
@@ -140,22 +143,28 @@ package net.wg.gui.components.crosshairPanel.components.autoloader
                     }
                 }
             }
-            this.setTimerRed(param4);
+            if(this._currentReloadingPercent >= GUN_RELOADING_COMPLETE_STATE)
+            {
+                this.setTimerRed(param4);
+            }
             this.timer.updateTimer(param2,param3);
         }
 
-        public function reloadingPercent(param1:Number, param2:Boolean) : void
+        public function reloadingPercent(param1:Number) : void
         {
-            this._currentReloadingPercent = param1;
-            if(param1 < GUN_RELOADING_COMPLETE_STATE)
+            if(param1 != this._currentReloadingPercent)
             {
-                this.reloadingInProgress(param1);
-                this.setTimerRed(true);
-            }
-            else
-            {
-                this.reloadingComplete(param2);
-                this.setTimerRed(false);
+                this._currentReloadingPercent = param1;
+                if(param1 < GUN_RELOADING_COMPLETE_STATE)
+                {
+                    this.reloadingInProgress(param1);
+                    this.setTimerRed(true);
+                }
+                else
+                {
+                    this.reloadingComplete();
+                    this.setTimerRed(false);
+                }
             }
         }
 
@@ -207,22 +216,14 @@ package net.wg.gui.components.crosshairPanel.components.autoloader
             this._lastLoadedShell = this._shells[this._currentAmmo];
         }
 
-        private function reloadingComplete(param1:Boolean) : void
+        private function reloadingComplete() : void
         {
-            var _loc2_:Boolean = this._isAnimationInProgress;
+            var _loc1_:Boolean = this._isAnimationInProgress;
             this._isAnimationInProgress = false;
             invalidate(TIMER_STATE_INVALID);
             gotoAndStop(IDLE_STATE);
             this.updateCurrentAmmoStates(this._currentAmmo);
-            if(param1 || !param1 && !_loc2_)
-            {
-                this.statusMc.gotoAndStop(STATUS_RELOAD_IDLE_STATE);
-            }
-            else
-            {
-                this.statusMc.gotoAndPlay(STATUS_RELOAD_COMPLETE_STATE);
-            }
-            if(this._lastShell && _loc2_)
+            if(this._lastShell && _loc1_)
             {
                 this._lastShell.gotoAndPlay(SHELL_STATE_COMEIN);
             }
@@ -244,6 +245,22 @@ package net.wg.gui.components.crosshairPanel.components.autoloader
             {
                 this._isTimerRed = param1;
                 invalidate(TIMER_STATE_INVALID);
+            }
+        }
+
+        private function updateStatusMC() : void
+        {
+            if(this.statusMc.totalFrames == 1)
+            {
+                return;
+            }
+            if(this._isTimerRed)
+            {
+                this.statusMc.gotoAndStop(STATUS_RELOAD_COMPLETE_IDLE);
+            }
+            else if(this.statusMc.currentFrame != STATUS_RELOAD_IDLE_STATE)
+            {
+                this.statusMc.gotoAndPlay(STATUS_RELOAD_COMPLETE_STATE);
             }
         }
 

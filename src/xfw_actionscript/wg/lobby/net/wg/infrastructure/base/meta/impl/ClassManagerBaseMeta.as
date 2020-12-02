@@ -22,6 +22,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.data.constants.VehicleModules;
     import net.wg.data.constants.VehicleTypes;
     import net.wg.data.constants.generated.ACOUSTICS;
+    import net.wg.data.constants.generated.AUTOLOADERBOOSTVIEWSOUNDS;
     import net.wg.data.constants.generated.AUTOLOADERBOOSTVIEWSTATES;
     import net.wg.data.constants.generated.BATTLEDAMAGELOG_IMAGES;
     import net.wg.data.constants.generated.BATTLE_EFFICIENCY_TYPES;
@@ -407,6 +408,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.components.crosshairPanel.CrosshairDistanceContainer;
     import net.wg.gui.components.crosshairPanel.CrosshairDistanceField;
     import net.wg.gui.components.crosshairPanel.CrosshairPanelContainer;
+    import net.wg.gui.components.crosshairPanel.CrosshairPanelEvent;
     import net.wg.gui.components.crosshairPanel.CrosshairPanelSniperCameraTransitionFx;
     import net.wg.gui.components.crosshairPanel.CrosshairPostmortem;
     import net.wg.gui.components.crosshairPanel.CrosshairSniper;
@@ -421,6 +423,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.components.crosshairPanel.components.autoloader.AutoloaderShellsCassette;
     import net.wg.gui.components.crosshairPanel.components.autoloader.AutoloaderTimer;
     import net.wg.gui.components.crosshairPanel.components.autoloader.BoostIndicator;
+    import net.wg.gui.components.crosshairPanel.components.autoloader.BoostIndicatorElement;
     import net.wg.gui.components.crosshairPanel.components.autoloader.BoostIndicatorStateParamsVO;
     import net.wg.gui.components.crosshairPanel.components.gunMarker.DualGunMarker;
     import net.wg.gui.components.crosshairPanel.components.gunMarker.DualGunMarkerDebug;
@@ -596,7 +599,6 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.components.tooltips.inblocks.blocks.BaseTooltipBlock;
     import net.wg.gui.components.tooltips.inblocks.blocks.BuildUpBlock;
     import net.wg.gui.components.tooltips.inblocks.blocks.CounterTextBlock;
-    import net.wg.gui.components.tooltips.inblocks.blocks.GlowTextBlock;
     import net.wg.gui.components.tooltips.inblocks.blocks.ImageTextBlockInBlocks;
     import net.wg.gui.components.tooltips.inblocks.blocks.ItemTitleDescBlock;
     import net.wg.gui.components.tooltips.inblocks.blocks.SpriteTextBlockInBlocks;
@@ -609,7 +611,6 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.components.tooltips.inblocks.data.BlocksVO;
     import net.wg.gui.components.tooltips.inblocks.data.BuildUpBlockVO;
     import net.wg.gui.components.tooltips.inblocks.data.CounterTextBlockVO;
-    import net.wg.gui.components.tooltips.inblocks.data.GlowTextBlockVO;
     import net.wg.gui.components.tooltips.inblocks.data.ImageBlockVO;
     import net.wg.gui.components.tooltips.inblocks.data.ImageTextBlockVO;
     import net.wg.gui.components.tooltips.inblocks.data.SpriteTextBlockVO;
@@ -639,7 +640,6 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.data.WaitingPointcutsVO;
     import net.wg.gui.data.WaitingQueueCounterMessageVO;
     import net.wg.gui.data.WaitingQueueWindowVO;
-    import net.wg.gui.dialogs.EventAFKDialog;
     import net.wg.gui.dialogs.ItemStatusData;
     import net.wg.gui.dialogs.SimpleDialog;
     import net.wg.gui.eventcomponents.NumberProgress;
@@ -826,7 +826,6 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.infrastructure.base.meta.IColorSettingsViewMeta;
     import net.wg.infrastructure.base.meta.ICrosshairPanelContainerMeta;
     import net.wg.infrastructure.base.meta.IDAAPISimpleContainerMeta;
-    import net.wg.infrastructure.base.meta.IEventAFKDialogMeta;
     import net.wg.infrastructure.base.meta.IGameLoadingMeta;
     import net.wg.infrastructure.base.meta.IGammaWizardViewMeta;
     import net.wg.infrastructure.base.meta.IGFTutorialViewMeta;
@@ -907,6 +906,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_DATA_CONSTANTS_VEHICLETYPES:Class = VehicleTypes;
 
         public static const NET_WG_DATA_CONSTANTS_GENERATED_ACOUSTICS:Class = ACOUSTICS;
+
+        public static const NET_WG_DATA_CONSTANTS_GENERATED_AUTOLOADERBOOSTVIEWSOUNDS:Class = AUTOLOADERBOOSTVIEWSOUNDS;
 
         public static const NET_WG_DATA_CONSTANTS_GENERATED_AUTOLOADERBOOSTVIEWSTATES:Class = AUTOLOADERBOOSTVIEWSTATES;
 
@@ -1678,6 +1679,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_COMPONENTS_CROSSHAIRPANEL_CROSSHAIRPANELCONTAINER:Class = CrosshairPanelContainer;
 
+        public static const NET_WG_GUI_COMPONENTS_CROSSHAIRPANEL_CROSSHAIRPANELEVENT:Class = CrosshairPanelEvent;
+
         public static const NET_WG_GUI_COMPONENTS_CROSSHAIRPANEL_CROSSHAIRPANELSNIPERCAMERATRANSITIONFX:Class = CrosshairPanelSniperCameraTransitionFx;
 
         public static const NET_WG_GUI_COMPONENTS_CROSSHAIRPANEL_CROSSHAIRPOSTMORTEM:Class = CrosshairPostmortem;
@@ -1705,6 +1708,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_COMPONENTS_CROSSHAIRPANEL_COMPONENTS_AUTOLOADER_AUTOLOADERTIMER:Class = AutoloaderTimer;
 
         public static const NET_WG_GUI_COMPONENTS_CROSSHAIRPANEL_COMPONENTS_AUTOLOADER_BOOSTINDICATOR:Class = BoostIndicator;
+
+        public static const NET_WG_GUI_COMPONENTS_CROSSHAIRPANEL_COMPONENTS_AUTOLOADER_BOOSTINDICATORELEMENT:Class = BoostIndicatorElement;
 
         public static const NET_WG_GUI_COMPONENTS_CROSSHAIRPANEL_COMPONENTS_AUTOLOADER_BOOSTINDICATORSTATEPARAMSVO:Class = BoostIndicatorStateParamsVO;
 
@@ -2056,8 +2061,6 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_INBLOCKS_BLOCKS_COUNTERTEXTBLOCK:Class = CounterTextBlock;
 
-        public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_INBLOCKS_BLOCKS_GLOWTEXTBLOCK:Class = GlowTextBlock;
-
         public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_INBLOCKS_BLOCKS_IMAGETEXTBLOCKINBLOCKS:Class = ImageTextBlockInBlocks;
 
         public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_INBLOCKS_BLOCKS_ITEMTITLEDESCBLOCK:Class = ItemTitleDescBlock;
@@ -2081,8 +2084,6 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_INBLOCKS_DATA_BUILDUPBLOCKVO:Class = BuildUpBlockVO;
 
         public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_INBLOCKS_DATA_COUNTERTEXTBLOCKVO:Class = CounterTextBlockVO;
-
-        public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_INBLOCKS_DATA_GLOWTEXTBLOCKVO:Class = GlowTextBlockVO;
 
         public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_INBLOCKS_DATA_IMAGEBLOCKVO:Class = ImageBlockVO;
 
@@ -2141,8 +2142,6 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_DATA_WAITINGQUEUECOUNTERMESSAGEVO:Class = WaitingQueueCounterMessageVO;
 
         public static const NET_WG_GUI_DATA_WAITINGQUEUEWINDOWVO:Class = WaitingQueueWindowVO;
-
-        public static const NET_WG_GUI_DIALOGS_EVENTAFKDIALOG:Class = EventAFKDialog;
 
         public static const NET_WG_GUI_DIALOGS_ITEMSTATUSDATA:Class = ItemStatusData;
 
@@ -2516,8 +2515,6 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IDAAPISIMPLECONTAINERMETA:Class = IDAAPISimpleContainerMeta;
 
-        public static const NET_WG_INFRASTRUCTURE_BASE_META_IEVENTAFKDIALOGMETA:Class = IEventAFKDialogMeta;
-
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IGAMELOADINGMETA:Class = IGameLoadingMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IGAMMAWIZARDVIEWMETA:Class = IGammaWizardViewMeta;
@@ -2569,8 +2566,6 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CROSSHAIRPANELCONTAINERMETA:Class = CrosshairPanelContainerMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_DAAPISIMPLECONTAINERMETA:Class = DAAPISimpleContainerMeta;
-
-        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_EVENTAFKDIALOGMETA:Class = EventAFKDialogMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_GAMELOADINGMETA:Class = GameLoadingMeta;
 

@@ -26,7 +26,7 @@ package net.wg.gui.lobby.vehiclePreview
     import flash.ui.Keyboard;
     import flash.events.KeyboardEvent;
     import net.wg.gui.lobby.vehiclePreview.buyingPanel.VPBuyingPanel;
-    import net.wg.gui.lobby.vehiclePreview.buyingPanel.VPEventProgressionBuyingPanel;
+    import net.wg.gui.lobby.vehiclePreview.buyingPanel.VPEventProgressionVehicleBuyingPanel;
     import net.wg.gui.lobby.vehiclePreview.buyingPanel.VPPersonalTradeInBuyingPanel;
     import net.wg.gui.lobby.vehiclePreview.buyingPanel.VPTradeInBuyingPanel;
     import net.wg.gui.lobby.vehiclePreview.buyingPanel.VPOfferGiftBuyingPanel;
@@ -200,7 +200,7 @@ package net.wg.gui.lobby.vehiclePreview
             this._stage.dispatchEvent(new LobbyEvent(LobbyEvent.REGISTER_DRAGGING));
             App.gameInputMgr.setKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.onEscapeKeyUpHandler,true);
             var _loc1_:* = this.bottomPanel is VPBuyingPanel;
-            var _loc2_:* = this.bottomPanel is VPEventProgressionBuyingPanel;
+            var _loc2_:* = this.bottomPanel is VPEventProgressionVehicleBuyingPanel;
             var _loc3_:* = this.bottomPanel is VPPersonalTradeInBuyingPanel;
             var _loc4_:* = this.bottomPanel is VPTradeInBuyingPanel;
             var _loc5_:* = this.bottomPanel is VPOfferGiftBuyingPanel;
@@ -216,7 +216,7 @@ package net.wg.gui.lobby.vehiclePreview
             }
             else if(_loc2_)
             {
-                registerFlashComponentS(VPEventProgressionBuyingPanel(this.bottomPanel),VEHPREVIEW_CONSTANTS.EVENT_PROGRESSION_BUYING_PANEL_PY_ALIAS);
+                registerFlashComponentS(VPEventProgressionVehicleBuyingPanel(this.bottomPanel),VEHPREVIEW_CONSTANTS.EVENT_PROGRESSION_VEHICLE_BUYING_PANEL_PY_ALIAS);
             }
             else if(_loc4_)
             {

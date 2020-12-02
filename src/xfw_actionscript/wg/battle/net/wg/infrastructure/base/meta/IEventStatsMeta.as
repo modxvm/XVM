@@ -7,6 +7,6 @@ package net.wg.infrastructure.base.meta
 
         function as_updatePlayerStats(param1:Array) : void;
 
-        function as_updateTitle(param1:String, param2:String, param3:int) : void;
+        function as_updateTitle(param1:String, param2:String) : void;
     }
 }

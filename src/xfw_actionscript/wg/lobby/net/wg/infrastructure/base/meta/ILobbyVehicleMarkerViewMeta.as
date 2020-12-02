@@ -6,8 +6,8 @@ package net.wg.infrastructure.base.meta
     public interface ILobbyVehicleMarkerViewMeta extends IEventDispatcher
     {
 
-        function as_createMarker(param1:String, param2:String, param3:int, param4:int) : DisplayObject;
+        function as_createMarker(param1:String, param2:String) : DisplayObject;
 
-        function as_removeMarker(param1:int) : void;
+        function as_removeMarker() : void;
     }
 }

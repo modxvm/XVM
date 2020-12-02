@@ -117,8 +117,7 @@ package net.wg.gui.battle.views.minimap.components.entries.personal
 
         private function initializeCircle(param1:Number, param2:Number, param3:Number) : Shape
         {
-            var _loc4_:Shape = null;
-            _loc4_ = new Shape();
+            var _loc4_:Shape = new Shape();
             this.addChild(_loc4_);
             _loc4_.blendMode = BlendMode.ADD;
             _loc4_.x = 0;

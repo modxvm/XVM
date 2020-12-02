@@ -37,9 +37,7 @@ package net.wg.gui.battle.views.vehicleMarkers
             "attackObjectiveAlternative":VehicleMarkersLinkages.ACTION_ATTACKING_OBJECTIVE,
             "defendObjectiveAlternative":VehicleMarkersLinkages.ACTION_DEFENDING_OBJECTIVE,
             "attackingObjectiveAlternative":VehicleMarkersLinkages.ACTION_ATTACKING_OBJECTIVE,
-            "defendingObjectiveAlternative":VehicleMarkersLinkages.ACTION_DEFENDING_OBJECTIVE,
-            "eventCampAlternative":VehicleMarkersLinkages.ACTION_EVENT_GOTO_CAMP_ALTERNATIVE,
-            "eventCollectorAlternative":VehicleMarkersLinkages.ACTION_EVENT_GOTO_VOLOT_ALTERNATIVE
+            "defendingObjectiveAlternative":VehicleMarkersLinkages.ACTION_DEFENDING_OBJECTIVE
         };
 
         private static const ACTION_ICON_STATE:String = "actionIconState";

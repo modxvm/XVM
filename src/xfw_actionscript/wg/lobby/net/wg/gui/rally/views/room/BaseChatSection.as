@@ -51,7 +51,7 @@ package net.wg.gui.rally.views.room
             addEventListener(InputEvent.INPUT,this.handleInput,false,0,true);
             this.channelComponent.messageArea.bgForm.alpha = 0;
             this.channelComponent.messageArea.bgForm.visible = false;
-            this.channelComponent.addEventListener(Event.CHANGE,this.onHeaderChangedHandler);
+            this.channelComponent.addEventListener(Event.CHANGE,this.onHeaderChangeHandler);
             this.chatSubmitButton.tooltip = this.chatSubmitBtnTooltip;
             this.chatSubmitButton.iconSource = RES_ICONS.MAPS_ICONS_BUTTONS_ENTERWHITE;
         }
@@ -67,8 +67,9 @@ package net.wg.gui.rally.views.room
             this.lblChatHeader = null;
             this.chatSubmitButton.dispose();
             this.chatSubmitButton = null;
-            this.channelComponent.removeEventListener(Event.CHANGE,this.onHeaderChangedHandler);
+            this.channelComponent.removeEventListener(Event.CHANGE,this.onHeaderChangeHandler);
             this.channelComponent = null;
+            this._rallyData = null;
             super.onDispose();
         }
 
@@ -127,14 +128,19 @@ package net.wg.gui.rally.views.room
             super.handleInput(param1);
         }
 
-        private function onHeaderChangedHandler(param1:Event) : void
+        private function onHeaderChangeHandler(param1:Event) : void
         {
             var _loc2_:String = this.getHeader();
             if(_loc2_ != this.lblChatHeader.htmlText)
             {
                 this.lblChatHeader.htmlText = _loc2_;
+                this.layoutChatHeader();
                 invalidateData();
             }
+        }
+
+        protected function layoutChatHeader() : void
+        {
         }
     }
 }

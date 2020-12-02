@@ -179,6 +179,8 @@ package
 
         public static const WINDOW_UNIT_MESSAGE_VEHICLEINNOTREADY_WRONGMODE:String = "#cyberSport:window/unit/message/vehicleInNotReady/wrongMode";
 
+        public static const WINDOW_UNIT_MESSAGE_VEHICLEINNOTREADY_WRONGUNITDATA:String = "#cyberSport:window/unit/message/vehicleInNotReady/wrongUnitData";
+
         public static const WINDOW_UNIT_MESSAGE_GETREADY:String = "#cyberSport:window/unit/message/getReady";
 
         public static const WINDOW_UNIT_MESSAGE_GETNOTREADY:String = "#cyberSport:window/unit/message/getNotReady";
@@ -234,12 +236,6 @@ package
         public static const WINDOW_UNIT_UNLOCKSLOT:String = "#cyberSport:window/unit/unlockSlot";
 
         public static const WINDOW_UNIT_DESCRIPTIONDEFAULT:String = "#cyberSport:window/unit/descriptionDefault";
-
-        public static const WINDOW_UNIT_MESSAGE_DIFFICULTYLEVELINACTIVE:String = "#cyberSport:window/unit/message/difficultyLevelInactive";
-
-        public static const WINDOW_UNIT_MESSAGE_DIFFICULTYLEVELNOTVALID:String = "#cyberSport:window/unit/message/difficultyLevelNotValid";
-
-        public static const WINDOW_UNIT_MESSAGE_SQUADDIFFICULTYLEVELNOTENABLE:String = "#cyberSport:window/unit/message/squadDifficultyLevelNotEnable";
 
         public static const WINDOW_UNITLISTVIEW_TITLE:String = "#cyberSport:window/unitListView/title";
 

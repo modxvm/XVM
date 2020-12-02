@@ -20,8 +20,6 @@ package net.wg.gui.rally.vo
 
         private var _isRatingAvailable:Boolean = false;
 
-        private var _eventTooltip:String = "";
-
         public function RallyCandidateVO(param1:Object)
         {
             _colors = [Number.NaN,Number.NaN];
@@ -94,16 +92,6 @@ package net.wg.gui.rally.vo
         public function set isRatingAvailable(param1:Boolean) : void
         {
             this._isRatingAvailable = param1;
-        }
-
-        public function get eventTooltip() : String
-        {
-            return this._eventTooltip;
-        }
-
-        public function set eventTooltip(param1:String) : void
-        {
-            this._eventTooltip = param1;
         }
     }
 }

@@ -520,7 +520,7 @@ package net.wg.gui.bootcamp.introVideoPage
             }
         }
 
-        protected function tweenFadeIn() : void
+        private function tweenFadeIn() : void
         {
             if(this._imageGoRight)
             {

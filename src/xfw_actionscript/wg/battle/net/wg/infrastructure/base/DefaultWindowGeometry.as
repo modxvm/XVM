@@ -15,6 +15,8 @@ package net.wg.infrastructure.base
 
         private var _doPositionOnce:Boolean = true;
 
+        private var _doRepositionYOnce:Boolean = true;
+
         private var _minY:int = 0;
 
         public function DefaultWindowGeometry(param1:int = 0)
@@ -31,6 +33,11 @@ package net.wg.infrastructure.base
         public function setSize(param1:IWindow) : Boolean
         {
             param1.updateSize(param1.getMinWidth(),param1.getMinHeight());
+            if(this._doRepositionYOnce && param1.y + param1.height > App.appHeight)
+            {
+                param1.y = Math.max(Math.round(App.appHeight - param1.height >> 1),this._minY);
+                this._doRepositionYOnce = false;
+            }
             return true;
         }
 

@@ -10,6 +10,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public var onDogTagKillerInPlaySound:Function;
 
+        public var onDogTagKillerOutPlaySound:Function;
+
         public var onVictimDogTagInPlaySound:Function;
 
         private var _dogTagVO:DogTagVO;
@@ -47,6 +49,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.onDogTagKillerInPlaySound,"onDogTagKillerInPlaySound" + Errors.CANT_NULL);
             this.onDogTagKillerInPlaySound();
+        }
+
+        public function onDogTagKillerOutPlaySoundS() : void
+        {
+            App.utils.asserter.assertNotNull(this.onDogTagKillerOutPlaySound,"onDogTagKillerOutPlaySound" + Errors.CANT_NULL);
+            this.onDogTagKillerOutPlaySound();
         }
 
         public function onVictimDogTagInPlaySoundS() : void

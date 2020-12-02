@@ -274,7 +274,18 @@ package net.wg.gui.battle.random.views.stats.components.fullStats
 
         public function setDogTagToShow(param1:Number, param2:DogTagVO) : void
         {
+            var _loc3_:StatsTableItemHolderBase = null;
             _dogTagsToShow[param1] = param2;
+            for each(_loc3_ in _enemyRenderers)
+            {
+                if(_loc3_.containsData)
+                {
+                    if(_loc3_.getVehicleID() == param1)
+                    {
+                        _loc3_.showDogTag(param2);
+                    }
+                }
+            }
         }
 
         private function getHolderByIndex(param1:Boolean, param2:int) : StatsTableItemHolder

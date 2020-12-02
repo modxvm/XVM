@@ -12,7 +12,7 @@ package net.wg.gui.components.crosshairPanel.components.autoloader
 
         private static const SHOOT_STATE:int = 2;
 
-        private static const SHELL_RELOAD_INDICATOR_OFFSETS_X:Vector.<int> = Vector.<int>([0,20,10,-4,-15,0,0,0]);
+        private static const SHELL_RELOAD_INDICATOR_OFFSETS_X:Vector.<int> = Vector.<int>([0,15,5,-9,-20,0,0,0]);
 
         private static const SHELL_RELOAD_INDICATOR_OFFSETS_Y:Vector.<int> = Vector.<int>([0,1,8,15,25,0,0,0]);
 
@@ -90,9 +90,9 @@ package net.wg.gui.components.crosshairPanel.components.autoloader
             return this.boostndicator.stateParams;
         }
 
-        public function setGunReloadingPercent(param1:Number, param2:Boolean) : void
+        public function setGunReloadingPercent(param1:Number) : void
         {
-            this.cassette.reloadingPercent(param1,param2);
+            this.cassette.reloadingPercent(param1);
         }
 
         public function updateCritical(param1:Boolean) : void

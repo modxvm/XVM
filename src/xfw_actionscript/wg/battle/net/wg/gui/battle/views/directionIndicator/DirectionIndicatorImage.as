@@ -15,10 +15,6 @@ package net.wg.gui.battle.views.directionIndicator
 
         public var yellow:DisplayObject;
 
-        public var eventFull:DisplayObject;
-
-        public var eventNotFull:DisplayObject;
-
         public function DirectionIndicatorImage()
         {
             super();
@@ -26,8 +22,6 @@ package net.wg.gui.battle.views.directionIndicator
             this.red.visible = false;
             this.purple.visible = false;
             this.yellow.visible = false;
-            this.eventFull.visible = false;
-            this.eventNotFull.visible = false;
         }
 
         public final function dispose() : void
@@ -35,9 +29,6 @@ package net.wg.gui.battle.views.directionIndicator
             this.green = null;
             this.red = null;
             this.purple = null;
-            this.eventFull = null;
-            this.eventNotFull = null;
-            this.yellow = null;
         }
 
         public function setShape(param1:String) : void
@@ -46,8 +37,6 @@ package net.wg.gui.battle.views.directionIndicator
             this.red.visible = param1 == DirectionIndicatorShape.SHAPE_RED;
             this.purple.visible = param1 == DirectionIndicatorShape.SHAPE_PURPLE;
             this.yellow.visible = param1 == DirectionIndicatorShape.SHAPE_YELLOW;
-            this.eventFull.visible = param1 == DirectionIndicatorShape.EVENT_SHAPE_FULL;
-            this.eventNotFull.visible = param1 == DirectionIndicatorShape.EVENT_SHAPE_NOT_FULL;
         }
 
         public function setArrowPositionY(param1:int) : void

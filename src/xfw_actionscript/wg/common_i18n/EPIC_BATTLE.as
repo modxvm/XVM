@@ -481,7 +481,9 @@ package
 
         public static const QUESTSTOOLTIP_EPICBATTLE_RESTRICT_LEVEL:String = "#epic_battle:questsTooltip/epicBattle/restrict/level";
 
-        public static const WIDGETALERTMESSAGEBLOCK_NOCYCLEMESSAGE:String = "#epic_battle:widgetAlertMessageBlock/noCycleMessage";
+        public static const WIDGETALERTMESSAGEBLOCK_NOCYCLEMESSAGE_MULTI:String = "#epic_battle:widgetAlertMessageBlock/noCycleMessage/multi";
+
+        public static const WIDGETALERTMESSAGEBLOCK_NOCYCLEMESSAGE_SINGLE:String = "#epic_battle:widgetAlertMessageBlock/noCycleMessage/single";
 
         public static const WIDGETALERTMESSAGEBLOCK_ALLPERIPHERIESHALT:String = "#epic_battle:widgetAlertMessageBlock/allPeripheriesHalt";
 
@@ -491,7 +493,9 @@ package
 
         public static const WIDGETALERTMESSAGEBLOCK_BUTTON:String = "#epic_battle:widgetAlertMessageBlock/button";
 
-        public static const WIDGETALERTMESSAGEBLOCK_STARTIN:String = "#epic_battle:widgetAlertMessageBlock/startIn";
+        public static const WIDGETALERTMESSAGEBLOCK_STARTIN_MULTI:String = "#epic_battle:widgetAlertMessageBlock/startIn/multi";
+
+        public static const WIDGETALERTMESSAGEBLOCK_STARTIN_SINGLE:String = "#epic_battle:widgetAlertMessageBlock/startIn/single";
 
         public static const STATUS_TIMELEFT_DAYS:String = "#epic_battle:status/timeLeft/days";
 

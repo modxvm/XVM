@@ -12,5 +12,7 @@ package net.wg.infrastructure.base.meta
         function as_playFx() : void;
 
         function as_updateTitle(param1:String) : void;
+
+        function as_updateProgressBar(param1:Number, param2:Boolean) : void;
     }
 }

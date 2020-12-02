@@ -65,6 +65,14 @@ package
 
         public static const EDITOR_RESUME:String = "#development:editor/Resume";
 
+        public static const DROPDOWN_PLACEHOLDER_SELECT:String = "#development:dropdown/placeholder/select";
+
+        public static const INPUT_PLACEHOLDER_EMAIL:String = "#development:input/placeholder/email";
+
+        public static const INPUT_PLACEHOLDER_SEARCH:String = "#development:input/placeholder/search";
+
+        public static const INPUT_PLACEHOLDER_PASSWORD:String = "#development:input/placeholder/password";
+
         public static const WULF_CONTENT_PAGER:String = "#development:wulf/content/pager";
 
         public static const WULF_PROPS_TITLE:String = "#development:wulf/props/title";

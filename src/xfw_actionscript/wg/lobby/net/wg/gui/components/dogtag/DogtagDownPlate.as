@@ -34,13 +34,13 @@ package net.wg.gui.components.dogtag
         {
             this._characters = [];
             super();
-            this._engravingStatValueContainer = new Sprite();
             this._plate = new Image();
         }
 
         override protected function configUI() : void
         {
             addChildAt(this._plate,0);
+            this._engravingStatValueContainer = new Sprite();
             this._engravingStatValueContainer.y = ENGRAVING_STAT_VALUE_CONTAINER_OFFSET_Y;
             addChild(this._engravingStatValueContainer);
             super.configUI();

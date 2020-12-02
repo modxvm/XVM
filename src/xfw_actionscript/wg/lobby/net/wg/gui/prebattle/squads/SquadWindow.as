@@ -5,6 +5,7 @@ package net.wg.gui.prebattle.squads
     import net.wg.utils.IScheduler;
     import net.wg.infrastructure.interfaces.IWindow;
     import net.wg.gui.prebattle.squads.ev.SquadViewEvent;
+    import flash.events.Event;
     import flash.display.DisplayObject;
     import net.wg.gui.components.windows.Window;
     import scaleform.clik.utils.Padding;
@@ -69,7 +70,8 @@ package net.wg.gui.prebattle.squads
         override protected function onDispose() : void
         {
             this._scheduler.cancelTask(this.showWindow);
-            this.squadView.removeEventListener(SquadViewEvent.ON_POPULATED,this.onViewPopulatedHandler);
+            this.squadView.removeEventListener(SquadViewEvent.ON_POPULATED,this.onViewOnPopulatedHandler);
+            this.squadView.removeEventListener(Event.RESIZE,this.onViewResizeHandler);
             this.squadView = null;
             this._scheduler = null;
             super.onDispose();
@@ -77,7 +79,8 @@ package net.wg.gui.prebattle.squads
 
         override protected function onPopulate() : void
         {
-            this.squadView.addEventListener(SquadViewEvent.ON_POPULATED,this.onViewPopulatedHandler);
+            this.squadView.addEventListener(Event.RESIZE,this.onViewResizeHandler);
+            this.squadView.addEventListener(SquadViewEvent.ON_POPULATED,this.onViewOnPopulatedHandler);
             registerFlashComponentS(this.squadView,this._componentId);
         }
 
@@ -149,9 +152,14 @@ package net.wg.gui.prebattle.squads
         {
         }
 
-        private function onViewPopulatedHandler(param1:SquadViewEvent) : void
+        private function onViewResizeHandler(param1:Event) : void
         {
-            this.squadView.removeEventListener(SquadViewEvent.ON_POPULATED,this.onViewPopulatedHandler);
+            invalidate(INVALID_CONTENT_SIZE);
+        }
+
+        private function onViewOnPopulatedHandler(param1:SquadViewEvent) : void
+        {
+            this.squadView.removeEventListener(SquadViewEvent.ON_POPULATED,this.onViewOnPopulatedHandler);
             registerFlashComponentS(this.squadView.getChannelComponent(),Aliases.CHANNEL_COMPONENT);
             invalidate(INVALID_CONTENT_SIZE);
         }

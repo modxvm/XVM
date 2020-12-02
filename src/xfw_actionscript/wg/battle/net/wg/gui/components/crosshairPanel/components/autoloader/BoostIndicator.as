@@ -1,38 +1,22 @@
 package net.wg.gui.components.crosshairPanel.components.autoloader
 {
     import net.wg.infrastructure.base.SimpleContainer;
-    import flash.display.MovieClip;
-    import scaleform.clik.motion.Tween;
     import net.wg.data.constants.generated.AUTOLOADERBOOSTVIEWSTATES;
+    import flash.utils.setTimeout;
+    import flash.utils.clearTimeout;
 
     public class BoostIndicator extends SimpleContainer
     {
 
-        private static const OFFSET_X:uint = 9;
+        private static const WAITING_TO_START_OFFSET_FACTOR:Number = 0.07;
 
-        private static const RECHARGE_ALPHA_START:Number = 0.1;
+        private static const CHARGED_OFFSET_MSECS:uint = 300;
 
-        private static const RECHARGE_ALPHA_END:Number = 0.8;
+        public var left:BoostIndicatorElement = null;
 
-        private static const FADE_OUT_DURATION:uint = 280;
+        public var right:BoostIndicatorElement = null;
 
-        public var left:MovieClip = null;
-
-        public var right:MovieClip = null;
-
-        private var _tweens:Vector.<Tween>;
-
-        private var _leftOriginX:Number;
-
-        private var _rightOriginX:Number;
-
-        private var _leftShiftedX:Number;
-
-        private var _rightShiftedX:Number;
-
-        private var _duration:int;
-
-        private var _currentState:int = -1;
+        private var _currentState:int = -2;
 
         private var _stateParams:BoostIndicatorStateParamsVO = null;
 
@@ -40,50 +24,39 @@ package net.wg.gui.components.crosshairPanel.components.autoloader
 
         private var _isFadingOut:Boolean = false;
 
+        private var _isCharging:Boolean = false;
+
+        private var _rechargeEnabled:Boolean = true;
+
+        private var _timeOutId:int = -1;
+
         public function BoostIndicator()
         {
-            this._tweens = Vector.<Tween>([]);
             super();
-            this.left.alpha = this.right.alpha = 0;
-            this._leftOriginX = this.left.x;
-            this._rightOriginX = this.right.x;
-            this._leftShiftedX = this._leftOriginX - OFFSET_X;
-            this._rightShiftedX = this._rightOriginX + OFFSET_X;
-            this._stateParams = new BoostIndicatorStateParamsVO(this._leftOriginX,this._rightOriginX,this._leftShiftedX,this._rightShiftedX);
+            this.left.onRechargeComplete = this.onFinishRechargeAnimation;
+            this.left.onChargeComplete = this.onFinishChargeAnimation;
+            this.left.onFadeOutComplete = this.onFinishFadeOutAnimation;
+            this.left.soundsEnabled = false;
+            this.left.hide();
+            this.right.hide();
+            this._stateParams = new BoostIndicatorStateParamsVO();
         }
 
         public function get stateParams() : BoostIndicatorStateParamsVO
         {
-            var _loc1_:Tween = null;
-            this._stateParams.remainingDurationMsec = 0;
-            this._stateParams.currentLeftX = this.left.x;
-            this._stateParams.currentRightX = this.right.x;
-            this._stateParams.currentAlpha = this.left.alpha;
+            this._stateParams.remainingDurationMSec = this.left.remainingDurationMSc;
             this._stateParams.currentFrame = this.left.currentFrame;
             this._stateParams.currentState = this._currentState;
             this._stateParams.isRecharging = this._isRecharging;
             this._stateParams.isFadingOut = this._isFadingOut;
-            if(this._currentState != AUTOLOADERBOOSTVIEWSTATES.CHARGED && this._tweens.length)
-            {
-                _loc1_ = this._tweens[0];
-                if(_loc1_ && _loc1_.position)
-                {
-                    if(this._currentState == AUTOLOADERBOOSTVIEWSTATES.RECHARGE)
-                    {
-                        this._stateParams.remainingDurationMsec = this._duration - _loc1_.position;
-                    }
-                    else if(this._currentState == AUTOLOADERBOOSTVIEWSTATES.INVISIBLE)
-                    {
-                        this._stateParams.remainingDurationMsec = FADE_OUT_DURATION - _loc1_.position;
-                    }
-                }
-            }
+            this._stateParams.isCharging = this._isCharging;
             return this._stateParams;
         }
 
         public function autoloaderBoostUpdate(param1:BoostIndicatorStateParamsVO, param2:Number, param3:Boolean = false) : void
         {
-            var _loc6_:* = NaN;
+            var _loc4_:* = NaN;
+            var _loc5_:* = NaN;
             if(!param3 && param1.currentState != AUTOLOADERBOOSTVIEWSTATES.RECHARGE && this._currentState == param1.currentState)
             {
                 return;
@@ -92,90 +65,81 @@ package net.wg.gui.components.crosshairPanel.components.autoloader
             {
                 this._isRecharging = false;
             }
+            this.cancelTasks();
             this._stateParams = param1;
-            this._duration = this._stateParams.remainingDurationMsec;
-            var _loc4_:Tween = null;
-            var _loc5_:Tween = null;
-            if(param1.currentState == AUTOLOADERBOOSTVIEWSTATES.INVISIBLE && !this._isFadingOut)
+            if(param1.currentState == AUTOLOADERBOOSTVIEWSTATES.WAITING_TO_START)
+            {
+                this._currentState = AUTOLOADERBOOSTVIEWSTATES.WAITING_TO_START;
+                _loc4_ = (param2 - param2 * WAITING_TO_START_OFFSET_FACTOR) * 1000;
+                this.left.hide();
+                this.left.showFadeIn(_loc4_);
+                this.right.hide();
+                this.right.showFadeIn(_loc4_);
+            }
+            else if(param1.currentState == AUTOLOADERBOOSTVIEWSTATES.INVISIBLE && !this._isFadingOut)
             {
                 this._currentState = AUTOLOADERBOOSTVIEWSTATES.INVISIBLE;
                 this._isRecharging = false;
-                this.left.gotoAndStop(1);
-                this.right.gotoAndStop(1);
+                this._isCharging = false;
                 if(param1.isSideFadeOut)
                 {
-                    this.clearTweens();
-                    _loc6_ = param1.isFadingOut?param1.remainingDurationMsec:FADE_OUT_DURATION;
-                    this.left.x = param1.currentLeftX;
-                    this.right.x = param1.currentRightX;
-                    this.left.alpha = this.right.alpha = param1.currentAlpha;
-                    _loc4_ = new Tween(_loc6_,this.left,{
-                        "x":this._leftShiftedX,
-                        "alpha":0
-                    },{"onComplete":this.onFinishFadeOutAnimation});
-                    _loc5_ = new Tween(_loc6_,this.right,{
-                        "x":this._rightShiftedX,
-                        "alpha":0
-                    });
-                    this._tweens.push(_loc4_);
-                    this._tweens.push(_loc5_);
+                    this.left.showFadeOut();
+                    this.right.showFadeOut();
                     this._isFadingOut = true;
                 }
                 else
                 {
-                    this.left.alpha = this.right.alpha = 0;
+                    this.left.hide();
+                    this.right.hide();
+                }
+                if(!this._rechargeEnabled)
+                {
+                    this.autoloaderBoostUpdateAsPercent(param1.currentState,param1.percent);
                 }
             }
-            else if(param1.currentState == AUTOLOADERBOOSTVIEWSTATES.CHARGED)
+            else if(this._rechargeEnabled && param1.currentState == AUTOLOADERBOOSTVIEWSTATES.CHARGED)
             {
                 this._currentState = AUTOLOADERBOOSTVIEWSTATES.CHARGED;
                 this._isRecharging = false;
                 this._isFadingOut = false;
-                this.clearTweens();
-                this.left.x = this._leftOriginX;
-                this.right.x = this._rightOriginX;
-                this.left.alpha = this.right.alpha = 1;
-                if(this._stateParams.currentFrame < this.left.totalFrames)
+                if(param1.isCharging)
                 {
-                    this.left.gotoAndPlay(this._stateParams.currentFrame);
-                    this.right.gotoAndPlay(this._stateParams.currentFrame);
+                    this.left.showCharged(param1.currentFrame);
+                    this.right.showCharged(param1.currentFrame);
                 }
                 else
                 {
-                    this.left.gotoAndPlay(this.left.totalFrames - 2);
-                    this.right.gotoAndPlay(this.right.totalFrames - 2);
+                    this.left.showCharged();
+                    this.right.showCharged();
                 }
+                this._isCharging = true;
             }
-            else if(param1.currentState > 0 && !this._isRecharging)
+            else if(this._rechargeEnabled && param1.currentState > 0 && !this._isRecharging)
             {
                 this._currentState = AUTOLOADERBOOSTVIEWSTATES.RECHARGE;
+                this._isRecharging = true;
                 this._isFadingOut = false;
-                this.clearTweens();
-                this.left.gotoAndStop(1);
-                this.right.gotoAndStop(1);
+                this._isCharging = false;
                 if(param1.isRecharging)
                 {
-                    this.left.x = param1.currentLeftX;
-                    this.right.x = param1.currentRightX;
-                    this.left.alpha = this.right.alpha = param1.currentAlpha;
+                    this.left.currentFrame = this.right.currentFrame = param1.currentFrame;
                 }
                 else
                 {
-                    this.left.x = this._leftShiftedX;
-                    this.right.x = this._rightShiftedX;
-                    this.left.alpha = this.right.alpha = RECHARGE_ALPHA_START;
+                    this.left.currentFrame = this.right.currentFrame = BoostIndicatorElement.RECHARGE_BEGIN_FRAME;
                 }
-                _loc4_ = new Tween(this._duration,this.left,{
-                    "x":this._leftOriginX,
-                    "alpha":RECHARGE_ALPHA_END
-                },{"onComplete":this.onFinishRechargeAnimation});
-                _loc5_ = new Tween(this._duration,this.right,{
-                    "x":this._rightOriginX,
-                    "alpha":RECHARGE_ALPHA_END
-                });
-                this._tweens.push(_loc4_);
-                this._tweens.push(_loc5_);
-                this._isRecharging = true;
+                this.left.showRecharge(param1.remainingDurationMSec);
+                this.right.showRecharge(param1.remainingDurationMSec);
+                _loc5_ = param1.remainingDurationMSec - CHARGED_OFFSET_MSECS;
+                if(_loc5_ > 0)
+                {
+                    this._stateParams.remainingDurationMSec = this._stateParams.currentState = AUTOLOADERBOOSTVIEWSTATES.CHARGED;
+                    this._stateParams.currentFrame = BoostIndicatorElement.RECHARGE_END_FRAME;
+                    this._stateParams.isRecharging = true;
+                    this._stateParams.isFadingOut = false;
+                    this._stateParams.isCharging = false;
+                    this._timeOutId = setTimeout(this.autoloaderBoostUpdate,_loc5_,param1,0);
+                }
             }
         }
 
@@ -185,59 +149,38 @@ package net.wg.gui.components.crosshairPanel.components.autoloader
             {
                 return;
             }
-            this.clearTweens();
-            if(param1 == AUTOLOADERBOOSTVIEWSTATES.CHARGED)
+            if(param1 == AUTOLOADERBOOSTVIEWSTATES.INVISIBLE && !this._isFadingOut)
+            {
+                this._currentState = AUTOLOADERBOOSTVIEWSTATES.INVISIBLE;
+                this._isRecharging = false;
+                this._isCharging = false;
+            }
+            else if(param1 == AUTOLOADERBOOSTVIEWSTATES.CHARGED)
             {
                 this._currentState = AUTOLOADERBOOSTVIEWSTATES.CHARGED;
-                this.left.x = this._leftOriginX;
-                this.right.x = this._rightOriginX;
-                this.left.alpha = this.right.alpha = 1;
-                this.left.gotoAndPlay(2);
-                this.right.gotoAndPlay(2);
+                this._isRecharging = false;
+                this._isFadingOut = false;
             }
-            else if(param1 > 0)
+            else if(param1 > 0 && !this._isRecharging)
             {
                 this._currentState = AUTOLOADERBOOSTVIEWSTATES.RECHARGE;
-                this.left.x = this._leftShiftedX + (this._leftOriginX - this._leftShiftedX) / 100 * param2;
-                this.right.x = this._rightShiftedX + (this._rightOriginX - this._rightShiftedX) / 100 * param2;
-                this.left.alpha = this.right.alpha = RECHARGE_ALPHA_START + (RECHARGE_ALPHA_END - RECHARGE_ALPHA_START) / 100 * param2;
-                this.left.gotoAndStop(1);
-                this.right.gotoAndStop(1);
+                this._isRecharging = true;
+                this._isFadingOut = false;
+                this._isCharging = false;
             }
+            this._rechargeEnabled = false;
+            this.left.currentFrame = this.right.currentFrame = param2 + 1;
+            this.stateParams.percent = param2;
         }
 
         override protected function onDispose() : void
         {
-            this.clearTweens();
-            this._tweens = null;
             this._stateParams = null;
+            this.left.dispose();
             this.left = null;
+            this.right.dispose();
             this.right = null;
             super.onDispose();
-        }
-
-        private function clearTweens() : void
-        {
-            var _loc1_:Tween = null;
-            var _loc2_:* = 0;
-            var _loc3_:* = 0;
-            if(this._tweens)
-            {
-                _loc1_ = null;
-                _loc2_ = this._tweens.length;
-                _loc3_ = 0;
-                while(_loc3_ < _loc2_)
-                {
-                    _loc1_ = this._tweens[_loc3_];
-                    if(_loc1_)
-                    {
-                        _loc1_.paused = true;
-                        _loc1_.dispose();
-                    }
-                    _loc3_++;
-                }
-                this._tweens.length = 0;
-            }
         }
 
         private function onFinishRechargeAnimation() : void
@@ -246,10 +189,26 @@ package net.wg.gui.components.crosshairPanel.components.autoloader
             this._isRecharging = false;
         }
 
+        private function onFinishChargeAnimation() : void
+        {
+            this._isCharging = false;
+        }
+
         private function onFinishFadeOutAnimation() : void
         {
             this.stateParams.resetToDefault();
             this._isFadingOut = false;
+        }
+
+        private function cancelTasks() : void
+        {
+            this.left.cancelTasks();
+            this.right.cancelTasks();
+            if(this._timeOutId != -1)
+            {
+                clearTimeout(this._timeOutId);
+                this._timeOutId = -1;
+            }
         }
     }
 }

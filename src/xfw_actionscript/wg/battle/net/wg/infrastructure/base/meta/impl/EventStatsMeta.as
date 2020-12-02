@@ -1,7 +1,7 @@
 package net.wg.infrastructure.base.meta.impl
 {
     import net.wg.gui.battle.components.BattleDisplayable;
-    import net.wg.gui.battle.pveEvent.views.eventStats.VO.EventStatsPlayerVO;
+    import net.wg.gui.battle.eventBattle.views.eventStats.VO.EventStatsPlayerVO;
     import net.wg.data.constants.Errors;
     import net.wg.infrastructure.exceptions.AbstractException;
 

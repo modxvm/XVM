@@ -131,10 +131,6 @@ package net.wg.gui.battle.views.epicSpectatorView
             showDeadReason();
         }
 
-        public function as_showHint() : void
-        {
-        }
-
         public function updateStage(param1:int, param2:int) : void
         {
             this.damagePanelOverlay.x = 0;
@@ -152,19 +148,11 @@ package net.wg.gui.battle.views.epicSpectatorView
         {
         }
 
-        public function onDogTagKillerSlidePlaySoundS() : void
-        {
-        }
-
-        public function onDogTagKillerZoomOutPlaySoundS() : void
+        public function onDogTagKillerOutPlaySoundS() : void
         {
         }
 
         public function onVictimDogTagInPlaySoundS() : void
-        {
-        }
-
-        public function onVictimDogTagOutPlaySoundS() : void
         {
         }
 

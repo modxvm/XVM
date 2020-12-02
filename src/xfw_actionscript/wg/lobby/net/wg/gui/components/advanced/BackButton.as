@@ -20,8 +20,6 @@ package net.wg.gui.components.advanced
 
         public var secondaryStates:BackButtonStates = null;
 
-        private var _hitWidth:int = 0;
-
         public function BackButton()
         {
             super();
@@ -40,23 +38,24 @@ package net.wg.gui.components.advanced
 
         override protected function updateText() : void
         {
+            var _loc2_:* = 0;
             super.updateText();
             var _loc1_:BackButtonHelper = BackButtonHelper.getInstance();
             _loc1_.updateStatesWidth(this.mainStates);
             _loc1_.updateStatesWidth(this.secondaryStates);
             if(hitMc != null)
             {
-                this._hitWidth = this.mainStates.x + this.mainStates.textMc.x + this.mainStates.textMc.width;
+                _loc2_ = this.mainStates.x + this.mainStates.textMc.x + this.mainStates.textMc.width;
                 if(StringUtils.isNotEmpty(this.secondaryStates.textMc.textField.text))
                 {
                     this.secondaryStates.x = this.mainStates.textMc.x + this.mainStates.textMc.width + SECONDARY_TEXT_OFFSET ^ 0;
-                    this._hitWidth = this.secondaryStates.x + this.secondaryStates.width;
+                    _loc2_ = this.secondaryStates.x + this.secondaryStates.width;
                 }
                 else
                 {
                     this.secondaryStates.x = 0;
                 }
-                hitMc.width = this._hitWidth + HIT_AREA_OFFSET;
+                hitMc.width = _loc2_ + HIT_AREA_OFFSET;
             }
         }
 
@@ -96,11 +95,6 @@ package net.wg.gui.components.advanced
         public function set descrVisible(param1:Boolean) : void
         {
             this.secondaryStates.textMc.visible = param1;
-        }
-
-        public function get hitWidth() : int
-        {
-            return this._hitWidth;
         }
     }
 }

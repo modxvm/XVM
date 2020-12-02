@@ -615,6 +615,10 @@ package
 
         public static const DETAILS_CALCULATIONS_FAIRPLAYVIOLATION_SUICIDE:String = "#battle_results:details/calculations/fairPlayViolation/suicide";
 
+        public static const DETAILS_CALCULATIONS_FAIRPLAYVIOLATION_EVENT_DESERTER:String = "#battle_results:details/calculations/fairPlayViolation/event_deserter";
+
+        public static const DETAILS_CALCULATIONS_FAIRPLAYVIOLATION_EVENT_AFK:String = "#battle_results:details/calculations/fairPlayViolation/event_afk";
+
         public static const DETAILS_CALCULATIONS_FRIENDLYFIREPENALTY:String = "#battle_results:details/calculations/friendlyFirePenalty";
 
         public static const DETAILS_CALCULATIONS_FRIENDLYFIRERANKEDXPPENALTY:String = "#battle_results:details/calculations/friendlyFireRankedXpPenalty";

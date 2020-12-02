@@ -11,7 +11,7 @@ diff -Naur battleVehicleMarkersApp.orig/App.as battleVehicleMarkersApp/App.as
 diff -Naur battleVehicleMarkersApp.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.as battleVehicleMarkersApp/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.as
 --- battleVehicleMarkersApp.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.as	2020-07-27 14:30:03.956062400 +0300
 +++ battleVehicleMarkersApp/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.as	2020-07-27 14:41:27.966835300 +0300
-@@ -635,8 +635,16 @@
+@@ -631,8 +631,16 @@
              this._stunSchemeName = VM_STUN_PREFIX + this._entityName + VM_STUN_POSTFIX;
          }
  
@@ -20,7 +20,7 @@ diff -Naur battleVehicleMarkersApp.orig/net/wg/gui/battle/views/vehicleMarkers/V
 +            return false;
 +        }
 +
-         protected function updateMarkerSettings() : void
+         private function updateMarkerSettings() : void
          {
 +            if (xvm_active())
 +              return;
@@ -28,7 +28,7 @@ diff -Naur battleVehicleMarkersApp.orig/net/wg/gui/battle/views/vehicleMarkers/V
              var _loc9_:Point = null;
              var _loc1_:Boolean = this.getIsPartVisible(ICON);
              var _loc2_:Boolean = this.getIsPartVisible(LEVEL);
-@@ -885,6 +885,11 @@
+@@ -880,6 +880,11 @@
              this._vmManager.drawWithCenterAlign(_loc1_,this.marker.vehicleTypeIcon.graphics,true,false,0,V_TYPE_ICON_Y);
          }
  
@@ -43,7 +43,7 @@ diff -Naur battleVehicleMarkersApp.orig/net/wg/gui/battle/views/vehicleMarkers/V
 diff -Naur battleVehicleMarkersApp.orig/net/wg/infrastructure/base/meta/impl/ClassManagerBattleMarkersMeta.as battleVehicleMarkersApp/net/wg/infrastructure/base/meta/impl/ClassManagerBattleMarkersMeta.as
 --- battleVehicleMarkersApp.orig/net/wg/infrastructure/base/meta/impl/ClassManagerBattleMarkersMeta.as	2020-07-27 14:30:03.405670300 +0300
 +++ battleVehicleMarkersApp/net/wg/infrastructure/base/meta/impl/ClassManagerBattleMarkersMeta.as	2020-07-27 14:41:28.020225800 +0300
-@@ -162,7 +162,7 @@
+@@ -146,7 +146,7 @@
  
          public static const NET_WG_GUI_BATTLE_VIEWS_VEHICLEMARKERS_VEHICLEICONANIMATION:Class = VehicleIconAnimation;
  

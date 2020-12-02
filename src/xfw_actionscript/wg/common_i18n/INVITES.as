@@ -193,8 +193,6 @@ package
 
         public static const INVITES_WARNING_ANONYMIZED:String = "#invites:invites/warning/anonymized";
 
-        public static const INVITES_ERROR_AFKBAN:String = "#invites:invites/error/afkban";
-
         public static const GUI_TITLES_RECEIVEDINVITES:String = "#invites:gui/titles/receivedInvites";
 
         public static const GUI_TITLES_INVITE:String = "#invites:gui/titles/invite";

@@ -198,7 +198,7 @@ package net.wg.gui.lobby.techtree.nodes
             this.typeAndLevel.setOwner(this);
             this.nameTF.text = getItemName();
             var _loc2_:String = hasAction && (isLocked() || isNext2Unlock())?DISCOUNT_LABEL_BLUE:DISCOUNT_LABEL_RED;
-            var _loc3_:Boolean = hasAction || hasTechTreeEvent;
+            var _loc3_:Boolean = hasAction || hasTechTreeEvent || hasTechTreeEventDiscountOnly;
             if(this.discountIcon)
             {
                 this.discountIcon.visible = _loc3_;

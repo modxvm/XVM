@@ -499,6 +499,11 @@ package net.wg.gui.lobby.techtree.nodes
             return this._dataInited && this._valueObject.hasTechTreeEvent;
         }
 
+        protected function get hasTechTreeEventDiscountOnly() : Boolean
+        {
+            return this._dataInited && (this._valueObject.state & NODE_STATE_FLAGS.TECH_TREE_EVENT_DISCOUNT_ONLY) > 0;
+        }
+
         protected function get mouseEnabledChildren() : Vector.<DisplayObject>
         {
             this._enabledChildren.splice(0,this._enabledChildren.length);

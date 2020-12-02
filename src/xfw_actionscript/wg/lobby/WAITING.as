@@ -333,12 +333,6 @@ package
 
         public static const BATTLEROYALE_HANGARLOADING:String = "#waiting:battleRoyale/hangarLoading";
 
-        public static const BUYENERGY:String = "#waiting:buyEnergy";
-
-        public static const DRAWENERGY:String = "#waiting:drawEnergy";
-
-        public static const LOCKENERGY:String = "#waiting:lockEnergy";
-
         public function WAITING()
         {
             super();

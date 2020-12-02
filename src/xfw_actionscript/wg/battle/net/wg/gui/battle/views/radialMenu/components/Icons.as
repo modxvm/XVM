@@ -51,12 +51,6 @@ package net.wg.gui.battle.views.radialMenu.components
 
         public var defendingHQIcon:MovieClip = null;
 
-        public var eventCampIcon:MovieClip = null;
-
-        public var eventCollectorIcon:MovieClip = null;
-
-        public var eventCancelIcon:MovieClip = null;
-
         private var _currentState:String = "";
 
         private var _iconsDictionary:Dictionary;
@@ -86,9 +80,6 @@ package net.wg.gui.battle.views.radialMenu.components
             this._iconsDictionary[RADIAL_MENU_CONSTS.ATTACKING_HQ] = this.attackingHQIcon;
             this._iconsDictionary[RADIAL_MENU_CONSTS.DEFEND_HQ] = this.defendHQIcon;
             this._iconsDictionary[RADIAL_MENU_CONSTS.DEFENDING_HQ] = this.defendingHQIcon;
-            this._iconsDictionary[RADIAL_MENU_CONSTS.EVENT_CAMP] = this.eventCampIcon;
-            this._iconsDictionary[RADIAL_MENU_CONSTS.EVENT_COLLECTOR] = this.eventCollectorIcon;
-            this._iconsDictionary[RADIAL_MENU_CONSTS.EVENT_CANCEL] = this.eventCancelIcon;
         }
 
         public function showIcon(param1:String) : void
@@ -130,9 +121,6 @@ package net.wg.gui.battle.views.radialMenu.components
             this.attackBaseIcon = null;
             this.defendingBaseIcon = null;
             this.attackingBaseIcon = null;
-            this.eventCampIcon = null;
-            this.eventCollectorIcon = null;
-            this.eventCancelIcon = null;
         }
 
         private function hideAll() : void
@@ -158,9 +146,6 @@ package net.wg.gui.battle.views.radialMenu.components
             this.attackingHQIcon.visible = false;
             this.defendHQIcon.visible = false;
             this.defendingHQIcon.visible = false;
-            this.eventCampIcon.visible = false;
-            this.eventCollectorIcon.visible = false;
-            this.eventCancelIcon.visible = false;
         }
     }
 }

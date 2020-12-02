@@ -179,6 +179,11 @@ package net.wg.gui.messenger
             return this.messageInput;
         }
 
+        public function setChannelHeight(param1:int) : void
+        {
+            this._startHeight = height = param1;
+        }
+
         private function hideExternalTF() : void
         {
             if(this._externalHintTF && this._externalHintTF.visible)

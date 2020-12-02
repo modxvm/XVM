@@ -8,7 +8,6 @@ package net.wg.gui.battle.views.ribbonsPanel
     import flash.display.MovieClip;
     import net.wg.infrastructure.events.ColorSchemeEvent;
     import net.wg.gui.battle.views.ribbonsPanel.data.RibbonAnimationStates;
-    import net.wg.data.constants.generated.BATTLE_EFFICIENCY_TYPES;
     import org.idmedia.as3commons.util.StringUtils;
     import flash.display.FrameLabel;
     import net.wg.gui.components.ribbon.data.RibbonSettings;
@@ -188,33 +187,10 @@ package net.wg.gui.battle.views.ribbonsPanel
             }
         }
 
-        private function isBuff() : Boolean
-        {
-            var _loc1_:int = BATTLE_EFFICIENCY_TYPES.BUFFS_SET.length;
-            var _loc2_:* = 0;
-            while(_loc2_ < _loc1_)
-            {
-                if(BATTLE_EFFICIENCY_TYPES.BUFFS_SET[_loc2_] == this.ribbonType)
-                {
-                    return true;
-                }
-                _loc2_++;
-            }
-            return false;
-        }
-
         public function setSettings(param1:Boolean, param2:Boolean, param3:Boolean) : void
         {
-            if(!this.isBuff())
-            {
-                this._texts.setSettings(param1,param2,param3);
-                this._icons.setSettings(param2,param3);
-            }
-            else
-            {
-                this._texts.setSettings(param1,true,true);
-                this._icons.setSettings(true,true);
-            }
+            this._texts.setSettings(param1,param2,param3);
+            this._icons.setSettings(param2,param3);
             this._bonus.setSettings(param1);
             this._isExtendedAnim = param1;
             if(param1)

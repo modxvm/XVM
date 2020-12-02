@@ -1463,10 +1463,6 @@ package
 
         public static const DETAILS_CONDITIONS_CUMULATIVE_XP_OTHER:String = "#quests:details/conditions/cumulative/xp/other";
 
-        public static const DETAILS_CONDITIONS_CUMULATIVE_EVENTPOINTS:String = "#quests:details/conditions/cumulative/eventPoints";
-
-        public static const DETAILS_CONDITIONS_CUMULATIVE_ENVIRONMENTID:String = "#quests:details/conditions/cumulative/environmentID";
-
         public static const DETAILS_DOSSIER_SNIPERSERIES:String = "#quests:details/dossier/sniperSeries";
 
         public static const DETAILS_DOSSIER_MAXSNIPERSERIES:String = "#quests:details/dossier/maxSniperSeries";
@@ -2035,10 +2031,6 @@ package
 
         public static const MISSIONS_TAB_LABEL_MARATHONS:String = "#quests:missions/tab/label/marathons";
 
-        public static const MISSIONS_TAB_LABEL_EVENT_MARATHON:String = "#quests:missions/tab/label/event_marathon";
-
-        public static const MISSIONS_TAB_LABEL_WINTER_MARATHON:String = "#quests:missions/tab/label/winter_marathon";
-
         public static const MISSIONS_TAB_KURSK_HEADER:String = "#quests:missions/tab/kursk/header";
 
         public static const MISSIONS_TAB_KURSK_BODY:String = "#quests:missions/tab/kursk/body";
@@ -2046,18 +2038,6 @@ package
         public static const MISSIONS_TAB_MARATHONS_HEADER:String = "#quests:missions/tab/marathons/header";
 
         public static const MISSIONS_TAB_MARATHONS_BODY:String = "#quests:missions/tab/marathons/body";
-
-        public static const MISSIONS_TAB_EVENT_MARATHON:String = "#quests:missions/tab/event_marathon";
-
-        public static const MISSIONS_TAB_EVENT_MARATHON_HEADER:String = "#quests:missions/tab/event_marathon/header";
-
-        public static const MISSIONS_TAB_EVENT_MARATHON_BODY:String = "#quests:missions/tab/event_marathon/body";
-
-        public static const MISSIONS_TAB_WINTER_MARATHON:String = "#quests:missions/tab/winter_marathon";
-
-        public static const MISSIONS_TAB_WINTER_MARATHON_HEADER:String = "#quests:missions/tab/winter_marathon/header";
-
-        public static const MISSIONS_TAB_WINTER_MARATHON_BODY:String = "#quests:missions/tab/winter_marathon/body";
 
         public static const MISSIONS_TAB_MISSIONS_HEADER:String = "#quests:missions/tab/missions/header";
 
@@ -2171,12 +2151,6 @@ package
 
         public static const MISSIONDETAILS_STATUS_COMPLETED_WEEKLY:String = "#quests:missionDetails/status/completed/weekly";
 
-        public static const MISSIONDETAILS_STATUS_COMPLETED_EVENT:String = "#quests:missionDetails/status/completed/event";
-
-        public static const MISSIONDETAILS_STATUS_COMPLETE:String = "#quests:missionDetails/status/complete";
-
-        public static const MISSIONDETAILS_STATUS_INPROGRESS:String = "#quests:missionDetails/status/inProgress";
-
         public static const MISSIONDETAILS_STATUS_NOTAVAILABLE:String = "#quests:missionDetails/status/notAvailable";
 
         public static const MISSIONDETAILS_STATUS_WRONGVEHICLE:String = "#quests:missionDetails/status/wrongVehicle";
@@ -2266,8 +2240,6 @@ package
         public static const MISSIONDETAILS_REQUIREMENTS_CONCLUSION_AVAILABLE:String = "#quests:missionDetails/requirements/conclusion/available";
 
         public static const MISSIONDETAILS_REQUIREMENTS_CONCLUSION_UNAVAILABLE:String = "#quests:missionDetails/requirements/conclusion/unavailable";
-
-        public static const MISSIONDETAILS_REQUIREMENTS_CONCLUSION_PREVIOUSINCOMPLETE:String = "#quests:missionDetails/requirements/conclusion/previousIncomplete";
 
         public static const MISSIONDETAILS_VEHICLESSELECT:String = "#quests:missionDetails/vehiclesSelect";
 
@@ -2370,26 +2342,6 @@ package
         public static const TOKEN_DEFAULT_BOX:String = "#quests:token/default/box";
 
         public static const TOKEN_DEFAULT_TANKREWARDS:String = "#quests:token/default/tankrewards";
-
-        public static const TOKEN_DEFAULT_HE19_MONEY:String = "#quests:token/default/he19_money";
-
-        public static const TOKEN_DEFAULT_HE19_R40_T_54_HALLOWEEN:String = "#quests:token/default/he19_R40_T_54_Halloween";
-
-        public static const TOKEN_DEFAULT_HE19_A100_T49_HALLOWEEN:String = "#quests:token/default/he19_A100_T49_Halloween";
-
-        public static const TOKEN_DEFAULT_HE19_TANKSRANK1:String = "#quests:token/default/he19_tanksRank1";
-
-        public static const TOKEN_DEFAULT_HE19_TANKSRANK2:String = "#quests:token/default/he19_tanksRank2";
-
-        public static const TOKEN_DEFAULT_HE19_TANKSRANK3:String = "#quests:token/default/he19_tanksRank3";
-
-        public static const TOKEN_DEFAULT_HE19_ENERGY_FOR_USE_HEALING:String = "#quests:token/default/he19_energy_for_use_healing";
-
-        public static const TOKEN_DEFAULT_HE19_ENERGY_FOR_USE_BOOSTER:String = "#quests:token/default/he19_energy_for_use_booster";
-
-        public static const TOKEN_DEFAULT_HE20_AFK_PARDON_ORDER:String = "#quests:token/default/he20_afk_pardon_order";
-
-        public static const TOKEN_DEFAULT_HE20_RECRUIT:String = "#quests:token/default/he20_recruit";
 
         public static const BONUSNAME_CREDITS:String = "#quests:bonusName/credits";
 

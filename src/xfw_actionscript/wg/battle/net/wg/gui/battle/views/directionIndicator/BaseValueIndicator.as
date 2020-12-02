@@ -2,17 +2,15 @@ package net.wg.gui.battle.views.directionIndicator
 {
     import flash.display.Sprite;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
+    import net.wg.data.constants.Values;
     import flash.text.TextField;
     import flash.text.TextFormat;
-    import flash.display.BlendMode;
     import scaleform.gfx.TextFieldEx;
 
     public class BaseValueIndicator extends Sprite implements IDisposable
     {
 
-        public var eventFullTF:TextField = null;
-
-        public var eventNotFullTF:TextField = null;
+        private static const EMPTY_STR:String = Values.EMPTY_STR;
 
         public var greenTF:TextField = null;
 
@@ -31,16 +29,10 @@ package net.wg.gui.battle.views.directionIndicator
         public function BaseValueIndicator()
         {
             super();
-            this.eventFullTF.visible = false;
-            this.eventFullTF.blendMode = BlendMode.ADD;
-            this.eventNotFullTF.visible = false;
-            this.eventNotFullTF.blendMode = BlendMode.ADD;
             this.greenTF.visible = false;
             this.redTF.visible = false;
             this.purpleTF.visible = false;
             this.yellowTF.visible = false;
-            TextFieldEx.setNoTranslate(this.eventFullTF,true);
-            TextFieldEx.setNoTranslate(this.eventNotFullTF,true);
             TextFieldEx.setNoTranslate(this.greenTF,true);
             TextFieldEx.setNoTranslate(this.redTF,true);
             TextFieldEx.setNoTranslate(this.purpleTF,true);
@@ -49,8 +41,6 @@ package net.wg.gui.battle.views.directionIndicator
 
         public final function dispose() : void
         {
-            this.eventFullTF = null;
-            this.eventNotFullTF = null;
             this.greenTF = null;
             this.redTF = null;
             this.purpleTF = null;
@@ -83,12 +73,6 @@ package net.wg.gui.battle.views.directionIndicator
             }
             switch(param1)
             {
-                case DirectionIndicatorShape.EVENT_SHAPE_FULL:
-                    this._currTF = this.eventFullTF;
-                    break;
-                case DirectionIndicatorShape.EVENT_SHAPE_NOT_FULL:
-                    this._currTF = this.eventNotFullTF;
-                    break;
                 case DirectionIndicatorShape.SHAPE_GREEN:
                     this._currTF = this.greenTF;
                     break;
@@ -114,8 +98,6 @@ package net.wg.gui.battle.views.directionIndicator
             {
                 return;
             }
-            this.applyTextAlign(this.eventFullTF,param1);
-            this.applyTextAlign(this.eventNotFullTF,param1);
             this.applyTextAlign(this.greenTF,param1);
             this.applyTextAlign(this.redTF,param1);
             this.applyTextAlign(this.purpleTF,param1);

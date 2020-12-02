@@ -161,7 +161,7 @@ package net.wg.gui.lobby.hangar
                 }
                 this.paramsList.height = _loc1_;
                 this.bg.height = _loc1_ + BG_MARGIN;
-                this._listMask.height = this.bg.height;
+                this._listMask.height = this.bg.height - BG_MARGIN * 0.5;
                 invalidate(INV_LIPS);
                 dispatchEvent(new Event(Event.RESIZE));
             }

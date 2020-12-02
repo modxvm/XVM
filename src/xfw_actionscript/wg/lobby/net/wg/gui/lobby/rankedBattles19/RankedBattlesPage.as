@@ -18,8 +18,8 @@ package net.wg.gui.lobby.rankedBattles19
     import scaleform.clik.constants.InvalidationType;
     import net.wg.gui.lobby.rankedBattles19.data.RankedBattlesPageHeaderVO;
     import net.wg.data.constants.generated.RANKEDBATTLES_ALIASES;
-    import net.wg.utils.StageSizeBoundaries;
     import net.wg.data.constants.Values;
+    import net.wg.utils.StageSizeBoundaries;
     import net.wg.data.constants.Linkages;
     import net.wg.gui.lobby.components.SideBarRenderer;
     import scaleform.clik.interfaces.IDataProvider;
@@ -207,39 +207,6 @@ package net.wg.gui.lobby.rankedBattles19
             onCloseS();
         }
 
-        override protected function layoutBackground() : void
-        {
-            var _loc1_:* = NaN;
-            var _loc2_:* = NaN;
-            var _loc3_:* = NaN;
-            var _loc4_:* = NaN;
-            var _loc5_:* = 0;
-            var _loc6_:* = 0;
-            graphics.clear();
-            if(this.content.currentViewId == RANKEDBATTLES_ALIASES.RANKED_BATTLES_SHOP_ALIAS)
-            {
-                _loc1_ = App.appWidth / StageSizeBoundaries.WIDTH_1920;
-                _loc2_ = App.appHeight / StageSizeBoundaries.HEIGHT_1080;
-                _loc3_ = Math.min(_loc1_,_loc2_);
-                bgHolder.scaleX = bgHolder.scaleY = _loc3_;
-                _loc4_ = width + bgPaddingLayout.horizontal;
-                _loc5_ = Math.max(0,SHOP_BG_MAGIC_OFFSET_Y * _loc3_ - (height >> 1));
-                _loc6_ = bgHolder.width;
-                _loc6_ = _loc6_ + _loc6_ % 2;
-                bgHolder.width = _loc6_;
-                _loc6_ = bgHolder.height;
-                _loc6_ = _loc6_ + _loc6_ % 2;
-                bgHolder.height = _loc6_;
-                bgHolder.x = _loc4_ - bgHolder.width >> 1;
-                bgHolder.y = (height - bgHolder.height >> 1) - _loc5_ + SHOP_BG_OFFSET_Y;
-                this.bgFill();
-            }
-            else
-            {
-                super.layoutBackground();
-            }
-        }
-
         public function setStateSizeBoundaries(param1:int, param2:int) : void
         {
             var _loc3_:String = this._headerHelper.getSizeId(param1,param2);
@@ -267,13 +234,6 @@ package net.wg.gui.lobby.rankedBattles19
                 this._itemRendererName = _loc4_;
                 invalidate(COUNTERS_INVALID);
             }
-        }
-
-        private function bgFill() : void
-        {
-            graphics.beginFill(0);
-            graphics.drawRect(0,0,App.appWidth,App.appHeight);
-            graphics.endFill();
         }
 
         private function getCounterTarget(param1:String) : DisplayObject
@@ -347,6 +307,7 @@ package net.wg.gui.lobby.rankedBattles19
             if(param1.viewId == RANKEDBATTLES_ALIASES.RANKED_BATTLES_SHOP_ALIAS)
             {
                 _loc2_ = BrowserViewStackExPadding(this.content.currentView);
+                _loc2_.waiting.backgroundVisibility = false;
                 _loc2_.addEventListener(Event.COMPLETE,this.onShopBrowserCompleteHandler);
                 _loc2_.isDisableShowBrowser = true;
             }

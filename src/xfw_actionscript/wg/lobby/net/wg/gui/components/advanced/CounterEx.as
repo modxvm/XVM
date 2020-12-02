@@ -216,6 +216,7 @@ package net.wg.gui.components.advanced
                     _loc8_.setTextFormat(this._tFormat);
                     _loc9_++;
                 }
+                _loc3_.gotoAndStop(Math.floor(ANIMATE_STEP_FRAMES * Math.floor(this._tweenNum / Math.pow(10,_loc7_) % 10)) + START_FRAME);
                 this.lines[_loc7_] = _loc3_;
                 _loc7_++;
             }
@@ -271,20 +272,22 @@ package net.wg.gui.components.advanced
 
         private function setLinesPosition(param1:Number) : void
         {
+            var _loc3_:* = false;
             var _loc2_:int = this.lines.length;
-            var _loc3_:* = 0;
-            while(_loc3_ < _loc2_)
+            var _loc4_:* = 0;
+            while(_loc4_ < _loc2_)
             {
-                if(!this.checkTruePosition[_loc3_].stand && this.checkTruePosition[_loc3_ + 1].stand && this.lines[_loc3_].currentFrame + START_FRAME > this.checkTruePosition[_loc3_].num || param1 == Math.abs(this.number))
+                _loc3_ = param1 < Math.abs(this.number)?this.lines[_loc4_].currentFrame >= this.checkTruePosition[_loc4_].num:this.lines[_loc4_].currentFrame <= this.checkTruePosition[_loc4_].num;
+                if(!this.checkTruePosition[_loc4_].stand && this.checkTruePosition[_loc4_ + 1].stand && _loc3_ || param1 == Math.abs(this.number))
                 {
-                    this.checkTruePosition[_loc3_].stand = true;
-                    this.lines[_loc3_].gotoAndStop(this.checkTruePosition[_loc3_].num);
+                    this.checkTruePosition[_loc4_].stand = true;
+                    this.lines[_loc4_].gotoAndStop(this.checkTruePosition[_loc4_].num);
                 }
-                else if(!this.checkTruePosition[_loc3_].stand)
+                else if(!this.checkTruePosition[_loc4_].stand)
                 {
-                    this.lines[_loc3_].gotoAndStop(START_FRAME + ANIMATE_STEP_FRAMES * (param1 / Math.pow(10,_loc3_) % 10) ^ 0);
+                    this.lines[_loc4_].gotoAndStop(START_FRAME + ANIMATE_STEP_FRAMES * (param1 / Math.pow(10,_loc4_) % 10) ^ 0);
                 }
-                _loc3_++;
+                _loc4_++;
             }
         }
 

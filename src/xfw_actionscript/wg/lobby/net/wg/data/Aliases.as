@@ -143,8 +143,6 @@ package net.wg.data
 
         public static const LOBBY_HEADER:String = "lobbyHeader";
 
-        public static const EVENT_HEADER:String = "eventHeader";
-
         public static const CUSTOMIZATION_PROPERTIES_SHEET:String = "customizationPropertiesSheet";
 
         public static const CUSTOMIZATION_BOTTOM_PANEL:String = "customizationBottomPanel";

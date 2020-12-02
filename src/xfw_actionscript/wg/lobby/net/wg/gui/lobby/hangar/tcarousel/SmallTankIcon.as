@@ -91,7 +91,8 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
             if(param1.hasSale && param1.buySlot)
             {
-                actionPrice.bg.gotoAndStop(ActionPriceBgConstants.STATE_TECH_TREE_VEHICLE);
+                actionPrice.validateNow();
+                actionPrice.bg.state = ActionPriceBgConstants.STATE_TECH_TREE_VEHICLE;
                 actionPrice.bg.y = ACTION_PRICE_BG_OFFSET_Y;
             }
             imgIcon.source = param1.iconSmall;
@@ -99,15 +100,15 @@ package net.wg.gui.lobby.hangar.tcarousel
             addImg.visible = false;
         }
 
-        override protected function get maxIconBounds() : Rectangle
-        {
-            return IMG_ICON_BOUNDS;
-        }
-
         override protected function onDispose() : void
         {
             this._commons = null;
             super.onDispose();
+        }
+
+        override protected function get maxIconBounds() : Rectangle
+        {
+            return IMG_ICON_BOUNDS;
         }
     }
 }

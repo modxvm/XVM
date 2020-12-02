@@ -1,9 +1,9 @@
 diff -Naur lobby.orig-0.orig/net/wg/gui/lobby/hangar/Hangar.class.asasm lobby.orig-0/net/wg/gui/lobby/hangar/Hangar.class.asasm
 --- lobby.orig-0.orig/net/wg/gui/lobby/hangar/Hangar.class.asasm	2020-07-27 15:02:03.056379600 +0300
 +++ lobby.orig-0/net/wg/gui/lobby/hangar/Hangar.class.asasm	2020-07-27 15:13:21.805338400 +0300
-@@ -158,6 +158,24 @@
-   trait slot QName(PackageNamespace(""), "closeBtnEvent") type QName(PackageNamespace("net.wg.gui.interfaces"), "ISoundButtonEx") value Null() end
-   trait slot QName(PackageNamespace(""), "toggleParamsBtn") type QName(PackageNamespace("net.wg.gui.interfaces"), "ISoundButtonEx") value Null() end
+@@ -136,6 +136,24 @@
+   trait slot QName(PackageNamespace(""), "teaser") type QName(PackageNamespace("net.wg.gui.lobby.post"), "Teaser") end
+   trait slot QName(PackageNamespace(""), "dqWidget") type QName(PackageNamespace("net.wg.gui.lobby.hangar"), "DailyQuestWidget") end
    trait slot QName(PackageNamespace(""), "closeBtn") type QName(PackageNamespace("net.wg.gui.components.controls"), "CloseButtonText") end
 +  trait getter QName(PackageNamespace(""), "xfw_header")
 +   method
@@ -23,6 +23,6 @@ diff -Naur lobby.orig-0.orig/net/wg/gui/lobby/hangar/Hangar.class.asasm lobby.or
 +    end ; body
 +   end ; method
 +  end ; trait
-   trait slot QName(PackageNamespace(""), "chinaLootboxesWidget") type QName(PackageNamespace("net.wg.gui.lobby.hangar"), "ChinaLootBoxesEntryPointWidget") end
    trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar:Hangar"), "_header") type QName(PackageNamespace("net.wg.gui.lobby.hangar"), "HangarHeader") end
    trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar:Hangar"), "_carousel") type QName(PackageNamespace("net.wg.gui.lobby.hangar.tcarousel"), "TankCarousel") end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar:Hangar"), "_isControlsVisible") type QName(PackageNamespace(""), "Boolean") value False() end

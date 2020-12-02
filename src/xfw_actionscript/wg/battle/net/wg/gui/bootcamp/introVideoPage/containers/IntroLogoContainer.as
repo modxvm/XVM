@@ -31,17 +31,29 @@ package net.wg.gui.bootcamp.introVideoPage.containers
             }
         }
 
-        override protected function onDispose() : void
+        public function set referralDescription(param1:String) : void
         {
-            this.txtDescription = null;
-            this.txtReferral = null;
-            this.dashline = null;
-            if(this.wotLogo != null)
-            {
-                this.wotLogo.dispose();
-                this.wotLogo = null;
-            }
-            super.onDispose();
+            this.txtReferral.text = param1;
+        }
+
+        public function get referralDescription() : String
+        {
+            return this.txtReferral.text;
+        }
+
+        public function set logoDescription(param1:String) : void
+        {
+            this.txtDescription.text = param1;
+        }
+
+        public function get logoDescription() : String
+        {
+            return this.txtDescription.text;
+        }
+
+        public function set dashLength(param1:Number) : void
+        {
+            this.dashline.x = Math.ceil(this.dashline.width >> 1) * -1;
         }
 
         public function setReferralVisibility(param1:Boolean = false) : void
@@ -50,29 +62,14 @@ package net.wg.gui.bootcamp.introVideoPage.containers
             this.txtReferral.visible = param1;
         }
 
-        public function get referralDescription() : String
+        override protected function onDispose() : void
         {
-            return this.txtReferral.text;
-        }
-
-        public function set referralDescription(param1:String) : void
-        {
-            this.txtReferral.text = param1;
-        }
-
-        public function get logoDescription() : String
-        {
-            return this.txtDescription.text;
-        }
-
-        public function set logoDescription(param1:String) : void
-        {
-            this.txtDescription.text = param1;
-        }
-
-        public function set dashLength(param1:Number) : void
-        {
-            this.dashline.x = Math.ceil(this.dashline.width >> 1) * -1;
+            this.txtDescription = null;
+            this.txtReferral = null;
+            this.dashline = null;
+            this.wotLogo.dispose();
+            this.wotLogo = null;
+            super.onDispose();
         }
     }
 }

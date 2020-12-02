@@ -1,10 +1,8 @@
 package net.wg.gui.lobby.questsWindow.components
 {
-    import flash.events.MouseEvent;
     import flash.text.TextField;
-    import net.wg.infrastructure.managers.ITooltipMgr;
-    import net.wg.gui.components.paginator.vo.ToolTipVO;
     import net.wg.gui.lobby.questsWindow.data.TextBlockVO;
+    import flash.events.MouseEvent;
     import net.wg.data.managers.impl.TooltipProps;
     import net.wg.data.constants.BaseTooltips;
 
@@ -19,31 +17,9 @@ package net.wg.gui.lobby.questsWindow.components
 
         private var _tooltip:String;
 
-        private var _tooltipMgr:ITooltipMgr;
-
-        private var _customTooltip:ToolTipVO;
-
         public function QuestTextAwardBlock()
         {
-            this._tooltipMgr = App.toolTipMgr;
             super();
-        }
-
-        private static function getItemsStringLen(param1:Vector.<String>, param2:int, param3:int) : int
-        {
-            var _loc4_:* = 0;
-            var _loc5_:* = 0;
-            while(_loc5_ < param2)
-            {
-                _loc4_ = _loc4_ + (param1[_loc5_].length + param3);
-                _loc5_++;
-            }
-            return _loc4_;
-        }
-
-        private static function onTextTfRollOutHandler(param1:MouseEvent) : void
-        {
-            App.toolTipMgr.hide();
         }
 
         override public function setData(param1:Object) : void
@@ -59,7 +35,7 @@ package net.wg.gui.lobby.questsWindow.components
             this.textTf.htmlText = _loc5_;
             while(this.textTf.textHeight + TEXT_FIELD_PADDING > _loc6_)
             {
-                this.textTf.htmlText = _loc5_.substr(0,getItemsStringLen(_loc3_,--_loc9_,_loc7_)) + _loc8_;
+                this.textTf.htmlText = _loc5_.substr(0,this.getItemsStringLen(_loc3_,--_loc9_,_loc7_)) + _loc8_;
             }
             if(_loc9_ == 0)
             {
@@ -69,12 +45,11 @@ package net.wg.gui.lobby.questsWindow.components
             {
                 App.utils.commons.updateTextFieldSize(this.textTf,false,true);
                 setSize(width,actualHeight);
-                if(this.textTf.htmlText != _loc5_ || _loc2_.tooltipVO != null)
+                if(this.textTf.htmlText != _loc5_)
                 {
                     this.textTf.addEventListener(MouseEvent.ROLL_OVER,this.onTextTfRollOverHandler);
-                    this.textTf.addEventListener(MouseEvent.ROLL_OUT,onTextTfRollOutHandler);
+                    this.textTf.addEventListener(MouseEvent.ROLL_OUT,this.onTextTfRollOutHandler);
                     this._tooltip = _loc5_;
-                    this._customTooltip = _loc2_.tooltipVO;
                 }
             }
             _loc2_.dispose();
@@ -82,31 +57,32 @@ package net.wg.gui.lobby.questsWindow.components
 
         override protected function onDispose() : void
         {
-            this._tooltipMgr = null;
             this.textTf.removeEventListener(MouseEvent.ROLL_OVER,this.onTextTfRollOverHandler);
-            this.textTf.removeEventListener(MouseEvent.ROLL_OUT,onTextTfRollOutHandler);
+            this.textTf.removeEventListener(MouseEvent.ROLL_OUT,this.onTextTfRollOutHandler);
             this.textTf = null;
-            this._customTooltip = null;
             super.onDispose();
+        }
+
+        private function getItemsStringLen(param1:Vector.<String>, param2:int, param3:int) : int
+        {
+            var _loc4_:* = 0;
+            var _loc5_:* = 0;
+            while(_loc5_ < param2)
+            {
+                _loc4_ = _loc4_ + (param1[_loc5_].length + param3);
+                _loc5_++;
+            }
+            return _loc4_;
         }
 
         private function onTextTfRollOverHandler(param1:MouseEvent) : void
         {
-            if(this._customTooltip != null)
-            {
-                if(this._customTooltip.isSpecial)
-                {
-                    this._tooltipMgr.showSpecial.apply(this,[this._customTooltip.specialAlias,null].concat(this._customTooltip.specialArgs));
-                }
-                else
-                {
-                    this._tooltipMgr.showComplex(this._customTooltip.tooltip);
-                }
-            }
-            else
-            {
-                this._tooltipMgr.show(this._tooltip,new TooltipProps(BaseTooltips.TYPE_INFO,0,0,0,-1,0,MAX_TOOLTIP_WIDTH));
-            }
+            App.toolTipMgr.show(this._tooltip,new TooltipProps(BaseTooltips.TYPE_INFO,0,0,0,-1,0,MAX_TOOLTIP_WIDTH));
+        }
+
+        private function onTextTfRollOutHandler(param1:MouseEvent) : void
+        {
+            App.toolTipMgr.hide();
         }
     }
 }

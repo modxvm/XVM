@@ -134,20 +134,15 @@ package net.wg.gui.prebattle.squads
             this.inviteBtn.enabled = param1;
         }
 
-        protected function get squadType() : String
+        protected function getSquadType() : String
         {
             return SQUADTYPES.SQUAD_TYPE_SIMPLE;
         }
 
-        protected function get teamSectionPosY() : Number
+        private function initBattleType() : void
         {
-            return INVITE_BTN_Y_SIMPLE_SQUAD;
-        }
-
-        protected function initBattleType() : void
-        {
-            this.inviteBtn.y = this.teamSectionPosY;
-            var _loc1_:ISquadAbstractFactory = new SquadAbstractFactory(this.squadType);
+            this.inviteBtn.y = INVITE_BTN_Y_SIMPLE_SQUAD;
+            var _loc1_:ISquadAbstractFactory = new SquadAbstractFactory(this.getSquadType());
             teamSection = _loc1_.getTeamSection();
             chatSection = _loc1_.getChatSection();
             chatSection.x = CHAT_SECTION_X_POS;

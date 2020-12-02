@@ -185,6 +185,8 @@ package net.wg.gui.lobby.vehicleCustomization.controls
 
         public var isResponsive:Boolean = true;
 
+        public var considerWidth:Boolean = false;
+
         public var formIcon:Image = null;
 
         public var btnBackground:MovieClip = null;
@@ -224,8 +226,6 @@ package net.wg.gui.lobby.vehicleCustomization.controls
         private var _originalImgWidth:Number = 0;
 
         private var _originalImgHeight:Number = 0;
-
-        private var _considerWidth:Boolean = false;
 
         public function CarouselItemRenderer()
         {
@@ -390,7 +390,6 @@ package net.wg.gui.lobby.vehicleCustomization.controls
             var _loc1_:PriceVO = null;
             var _loc2_:PriceVO = null;
             var _loc3_:PriceVO = null;
-            var _loc4_:PriceVO = null;
             super.draw();
             if(isInvalid(InvalidationType.DATA))
             {
@@ -401,14 +400,8 @@ package net.wg.gui.lobby.vehicleCustomization.controls
                 _loc1_ = new PriceVO([CURRENCIES_CONSTANTS.GOLD,int(this._buyOperationAllowed)]);
                 _loc2_ = new PriceVO([CURRENCIES_CONSTANTS.CREDITS,int(this._buyOperationAllowed)]);
                 _loc3_ = new PriceVO([CURRENCIES_CONSTANTS.CRYSTAL,int(this._buyOperationAllowed)]);
-                _loc4_ = new PriceVO([CURRENCIES_CONSTANTS.EVENT_COIN,int(this._buyOperationAllowed)]);
-                this.compoundPrice.updateEnoughStatuses(new <PriceVO>[_loc1_,_loc2_,_loc3_,_loc4_]);
+                this.compoundPrice.updateEnoughStatuses(new <PriceVO>[_loc1_,_loc2_,_loc3_]);
             }
-        }
-
-        protected function set considerWidth(param1:Boolean) : void
-        {
-            this._considerWidth = param1;
         }
 
         public function applyData() : void
@@ -421,7 +414,7 @@ package net.wg.gui.lobby.vehicleCustomization.controls
             var _loc10_:* = 0;
             var _loc1_:Boolean = this._data != null && this._data.intCD;
             this._isMinResolution = this.isResponsive && App.appHeight < MIN_HEIGHT_RESOLUTION;
-            if(this._considerWidth && !this._isMinResolution)
+            if(this.considerWidth && !this._isMinResolution)
             {
                 this._isMinResolution = this.isResponsive && App.appWidth <= MIN_WIDTH_RESOLUTION;
             }
@@ -750,7 +743,7 @@ package net.wg.gui.lobby.vehicleCustomization.controls
 
         private function showItemTooltip() : void
         {
-            this.tooltipDecorator.showSpecial(TOOLTIPS_CONSTANTS.TECH_CUSTOMIZATION_ITEM,null,this._data.intCD,-1,true,this._data.progressionLevel,null,this._data.customVehicleCD);
+            this.tooltipDecorator.showSpecial(TOOLTIPS_CONSTANTS.TECH_CUSTOMIZATION_ITEM,null,this._data.intCD,-1,true,this._data.progressionLevel);
             App.soundMgr.playControlsSnd(SoundManagerStates.SND_OVER,SoundTypes.CUSTOMIZATION_DEFAULT,null);
         }
 
@@ -899,10 +892,7 @@ package net.wg.gui.lobby.vehicleCustomization.controls
 
         private function onStorageIconChangeHandler(param1:Event) : void
         {
-            if(this._data != null)
-            {
-                this.layoutStorageInfo();
-            }
+            this.layoutStorageInfo();
         }
 
         private function onClickHandler(param1:MouseEvent) : void

@@ -45,6 +45,8 @@ package net.wg.gui.lobby.header.headerButtonBar
 
         private var _accountVo:HBC_AccountDataVo = null;
 
+        private var _userNameOffset:int = 0;
+
         public function HBC_Account()
         {
             super();
@@ -56,7 +58,7 @@ package net.wg.gui.lobby.header.headerButtonBar
 
         override protected function updateSize() : void
         {
-            bounds.width = this.userName.x + this.userName.textWidth + this.anonymizerIconWidth << 0;
+            bounds.width = this.userName.x + this.userName.textWidth + this._userNameOffset + this.anonymizerIconWidth << 0;
             super.updateSize();
         }
 
@@ -69,6 +71,7 @@ package net.wg.gui.lobby.header.headerButtonBar
             if(data)
             {
                 this.badge.visible = this._accountVo.selectedBadge;
+                this.anonymizerIcon.visible = this._accountVo.isAnonymized;
                 this.userName.textColor = this._accountVo.isTeamKiller?App.colorSchemeMgr.getScheme(ColorSchemeNames.TEAMKILLER).rgb:UserNameField.DEF_USER_NAME_COLOR;
                 _loc1_ = 0;
                 if(this.badge.visible)
@@ -102,13 +105,20 @@ package net.wg.gui.lobby.header.headerButtonBar
                     }
                 }
                 _loc3_ = BADGE_OFFSET;
-                this.anonymizerIcon.visible = this._accountVo.isAnonymized;
                 _loc4_ = _loc1_ + this.userName.textWidth + this.anonymizerIconWidth;
                 if(_loc4_ < MIN_WIDTH)
                 {
                     _loc3_ = (availableWidth > MIN_WIDTH?MIN_WIDTH:availableWidth) - _loc4_ >> 1;
                 }
-                this.userName.x = _loc3_ + _loc1_;
+                if(!this.anonymizerIcon.visible && !this.badge.visible)
+                {
+                    this._userNameOffset = _loc3_ + leftPadding - rightPadding >> 1;
+                }
+                else
+                {
+                    this._userNameOffset = 0;
+                }
+                this.userName.x = _loc3_ + _loc1_ - this._userNameOffset;
                 if(this.anonymizerIcon.visible)
                 {
                     this.anonymizerIcon.source = RES_ICONS.MAPS_ICONS_LIBRARY_ICON_EYE;

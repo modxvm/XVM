@@ -694,7 +694,7 @@ package net.wg.gui.lobby.settings
             var _loc2_:* = currentScreenModeId == SettingsConfigHelper.RESOLUTION;
             if(_loc2_)
             {
-                _loc1_ = SettingsControlProp(data[SettingsConfigHelper.RESOLUTION]).changedVal == SettingsControlProp(data[SettingsConfigHelper.NATIVE_RESOLUTION]).changedVal;
+                _loc1_ = SettingsControlProp(data[SettingsConfigHelper.RESOLUTION]).changedVal == SettingsControlProp(data[SettingsConfigHelper.NATIVE_RESOLUTION]).changedVal && this._settingsConfigHelper.changesData.length <= 0;
             }
             else
             {

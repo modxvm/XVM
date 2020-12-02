@@ -31,34 +31,8 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/stats/components/fu
    trait method QName(PackageNamespace(""), "addVehiclesInfo") flag OVERRIDE
     method
 diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/stats/components/fullStats/FullStatsTableCtrl.class.asasm battle.orig-0/net/wg/gui/battle/random/views/stats/components/fullStats/FullStatsTableCtrl.class.asasm
---- battle.orig-0.orig/net/wg/gui/battle/random/views/stats/components/fullStats/FullStatsTableCtrl.class.asasm	2018-08-05 20:22:44.225750500 +0300
-+++ battle.orig-0/net/wg/gui/battle/random/views/stats/components/fullStats/FullStatsTableCtrl.class.asasm	2018-08-05 20:26:30.567564500 +0300
-@@ -58,6 +58,25 @@
-     end ; code
-    end ; body
-   end ; method
-+  trait getter QName(PackageNamespace(""), "xfw_table")
-+   method
-+    returns QName(PackageNamespace("net.wg.gui.battle.random.views.stats.components.fullStats"), "FullStatsTable")
-+    body
-+     maxstack 1
-+     localcount 1
-+     initscopedepth 11
-+     maxscopedepth 12
-+     code
-+      getlocal0
-+      pushscope
-+
-+      getlocal0
-+      getproperty         QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.stats.components.fullStats:FullStatsTableCtrl"), "_table")
-+      returnvalue
-+     end ; code
-+    end ; body
-+   end ; method
-+  end ; trait
-   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.stats.components.fullStats:FullStatsTableCtrl"), "_table") type QName(PackageNamespace("net.wg.gui.battle.random.views.stats.components.fullStats"), "FullStatsTable") value Null() end
-   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.stats.components.fullStats:FullStatsTableCtrl"), "_squadHandler") type QName(PackageNamespace("net.wg.infrastructure.base.meta.impl"), "StatsBaseMeta") value Null() end
-   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.stats.components.fullStats:FullStatsTableCtrl"), "_isAllyInviteShown") type QName(PackageNamespace(""), "Boolean") value False() end
+--- battle.orig-0.orig/net/wg/gui/battle/random/views/stats/components/fullStats/FullStatsTableCtrl.class.asasm	2020-09-28 16:07:39.228762900 +0300
++++ battle.orig-0/net/wg/gui/battle/random/views/stats/components/fullStats/FullStatsTableCtrl.class.asasm	2020-09-28 16:09:12.759486300 +0300
 @@ -114,14 +114,14 @@
        getlocal0
        getlocal1

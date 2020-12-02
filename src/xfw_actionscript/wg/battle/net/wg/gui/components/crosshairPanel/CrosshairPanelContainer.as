@@ -154,9 +154,16 @@ package net.wg.gui.components.crosshairPanel
             return new _loc2_();
         }
 
+        override protected function configUI() : void
+        {
+            super.configUI();
+            addEventListener(CrosshairPanelEvent.SOUND,this.onCrosshairPanelSoundHandler);
+        }
+
         override protected function onDispose() : void
         {
             var _loc1_:IDisposable = null;
+            removeEventListener(CrosshairPanelEvent.SOUND,this.onCrosshairPanelSoundHandler);
             this.clearReloadingTimer();
             this.clearAutoloaderReloadTimer();
             this.clearAutoloaderAtimationTimer();
@@ -310,11 +317,11 @@ package net.wg.gui.components.crosshairPanel
             this._ammoClipReloaded = false;
         }
 
-        public function as_setAutoloaderPercent(param1:Number, param2:Number, param3:Boolean) : void
+        public function as_setAutoloaderPercent(param1:Number, param2:Number, param3:Boolean, param4:Boolean) : void
         {
             if(this._currentCrosshair != null)
             {
-                this._currentCrosshair.autoloaderUpdate(param1,param2,param3,false);
+                this._currentCrosshair.autoloaderUpdate(param1,param2,param3,param4);
             }
         }
 
@@ -360,13 +367,10 @@ package net.wg.gui.components.crosshairPanel
                     }
                     else
                     {
-                        _loc3_.currentLeftX = _loc3_.leftShiftedX;
-                        _loc3_.currentRightX = _loc3_.rightShiftedX;
-                        _loc3_.isRecharging = true;
                         _loc4_ = true;
                     }
                     _loc3_.currentState = param1;
-                    _loc3_.remainingDurationMsec = param1 * 1000;
+                    _loc3_.remainingDurationMSec = param1 * 1000;
                     this._currentCrosshair.autoloaderBoostUpdate(_loc3_,param2,_loc4_);
                 }
             }
@@ -941,6 +945,11 @@ package net.wg.gui.components.crosshairPanel
             {
                 _loc1_.visible = false;
             }
+        }
+
+        private function onCrosshairPanelSoundHandler(param1:CrosshairPanelEvent) : void
+        {
+            as_playSound(param1.key);
         }
     }
 }

@@ -27,8 +27,6 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
 
         public static const SLOTS_HEIGHT_AND_OFFSET:int = 67;
 
-        public static const NO_BUTTONS_BOTTOM:int = 50;
-
         private static const INV_BUTTONS_ENABLED:String = "InvButtonsEnabled";
 
         private static const VEHICLE_STATUS_INVALID:String = "vehicleStatusInvalid";
@@ -40,8 +38,6 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         private static const INV_TUNING_BUTTON_STATE:String = "InvTuningState";
 
         private static const INV_NATION_CHANGE_BUTTON_STATE:String = "invNationChangeState";
-
-        private static const INV_POSITION:String = "invPosition";
 
         private static const OFFSET_BTN_TO_RENT:int = 3;
 
@@ -70,8 +66,6 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         public var toRent:SoundButtonEx = null;
 
         private var _panelEnabled:Boolean = true;
-
-        private var _ismaintenanceButtonVisible:Boolean = true;
 
         private var _maintenanceTooltip:String = "";
 
@@ -104,8 +98,6 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         private var _buttonWidth:int = 131;
 
         private var _buttonsList:Vector.<IUniversalBtn>;
-
-        private var _eventMode:Boolean = false;
 
         public function AmmunitionPanel()
         {
@@ -178,7 +170,6 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             if(isInvalid(INV_BUTTONS_ENABLED))
             {
                 this.updateButtonsEnabled();
-                invalidate(INV_POSITION);
             }
             if(isInvalid(VEHICLE_STATUS_INVALID) && this._msgVo != null)
             {
@@ -221,12 +212,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                 }
                 if(_loc1_)
                 {
-                    invalidate(INV_POSITION);
+                    this.centerPanel();
                 }
-            }
-            if(isInvalid(INV_POSITION))
-            {
-                this.repositionPanel();
             }
         }
 
@@ -278,11 +265,10 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             return new <HelpLayoutVO>[this.vehicleStateMsg.createHelpLayoutData()];
         }
 
-        public function updateAmmunitionPanel(param1:Boolean, param2:String, param3:Boolean) : void
+        public function updateAmmunitionPanel(param1:Boolean, param2:String) : void
         {
             this._panelEnabled = param1;
             this._maintenanceTooltip = param2;
-            this._ismaintenanceButtonVisible = param3;
             invalidate(INV_BUTTONS_ENABLED);
         }
 
@@ -299,7 +285,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         {
             this.vehicleStateMsg.updateStage(param1,param2);
             this._screenWidth = param1;
-            this.repositionPanel();
+            this.centerPanel();
         }
 
         public function updateTuningButton(param1:Boolean, param2:String) : void
@@ -312,10 +298,9 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         private function updateButtonsEnabled() : void
         {
             this.maintenanceBtn.enabled = this._panelEnabled;
-            this.maintenanceBtn.visible = this._ismaintenanceButtonVisible;
         }
 
-        private function repositionPanel() : void
+        private function centerPanel() : void
         {
             this.x = this._screenWidth - this.width >> 1;
             this.maintenanceBtn.x = 0;
@@ -325,20 +310,10 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             dispatchEvent(new Event(Event.RESIZE));
         }
 
-        public function set eventMode(param1:Boolean) : void
-        {
-            this._eventMode = param1;
-        }
-
         private function placeVehicleStateMsg() : void
         {
             this.vehicleStateMsg.x = this.width >> 1;
-            var _loc1_:* = false;
-            if(!this._eventMode)
-            {
-                _loc1_ = this.maintenanceBtn.visible || this.changeNationBtn.visible || this.tuningBtn.visible;
-            }
-            this.vehicleStateMsg.y = (_loc1_?this.maintenanceBtn.y:NO_BUTTONS_BOTTOM) - this.vehicleStateMsg.height - VEHICLE_STATUS_TO_BUTTONS_OFFSET_Y | 0;
+            this.vehicleStateMsg.y = this.maintenanceBtn.y - this.vehicleStateMsg.height - VEHICLE_STATUS_TO_BUTTONS_OFFSET_Y | 0;
         }
 
         private function configButton(param1:UniversalBtn, param2:String, param3:Function, param4:String) : void
@@ -380,7 +355,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         {
             if(this._msgVo != null)
             {
-                this.repositionPanel();
+                this.placeVehicleStateMsg();
                 this.toRent.x = this.vehicleStateMsg.textX + TO_RENT_LEFT_MARGIN;
                 this.toRent.y = this.vehicleStateMsg.textY + OFFSET_BTN_TO_RENT;
                 this.toRent.visible = this._msgVo.rentAvailable;
@@ -473,7 +448,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                     }
                     _loc4_++;
                 }
-                this.repositionPanel();
+                this.centerPanel();
             }
         }
     }

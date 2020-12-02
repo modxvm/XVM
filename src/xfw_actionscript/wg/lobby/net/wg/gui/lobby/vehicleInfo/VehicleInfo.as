@@ -89,13 +89,16 @@ package net.wg.gui.lobby.vehicleInfo
             this.view.addEventListener(ViewStackEvent.NEED_UPDATE,this.onViewNeedUpdateHandler);
             this.tabs.dataProvider = new DataProvider([{
                 "label":MENU.VEHICLEINFO_TABS_PROPERTIES,
-                "linkage":VEHICLE_INFO_PROPS
+                "linkage":VEHICLE_INFO_PROPS,
+                "viewId":VEHICLE_INFO_PROPS
             },{
                 "label":MENU.VEHICLEINFO_TABS_BASE,
-                "linkage":VEHICLE_INFO_BASE
+                "linkage":VEHICLE_INFO_BASE,
+                "viewId":VEHICLE_INFO_BASE
             },{
                 "label":MENU.VEHICLEINFO_TABS_CREW,
-                "linkage":VEHICLE_INFO_CREW
+                "linkage":VEHICLE_INFO_CREW,
+                "viewId":VEHICLE_INFO_CREW
             }]);
             this.compareBtn.mouseEnabledOnDisabled = true;
             this.compareBtn.addEventListener(ButtonEvent.CLICK,this.onCompareBtnClickHandler);

@@ -89,13 +89,19 @@ package
 
         public static const CONGRATULATIONANIM_BUYINGLABEL:String = "#store:congratulationAnim/buyingLabel";
 
+        public static const CONGRATULATIONANIM_DESCRIPTIONLABEL_STYLE:String = "#store:congratulationAnim/descriptionLabel/style";
+
+        public static const CONGRATULATIONANIM_CONFIRMLABEL:String = "#store:congratulationAnim/confirmLabel";
+
+        public static const CONGRATULATIONANIM_BACKLABEL:String = "#store:congratulationAnim/backLabel";
+
         public static const CONGRATULATIONANIM_COLLECTIBLELABEL:String = "#store:congratulationAnim/collectibleLabel";
 
         public static const CONGRATULATIONANIM_RESTORELABEL:String = "#store:congratulationAnim/restoreLabel";
 
         public static const CONGRATULATIONANIM_SHOWPREVIEWBTNLABEL:String = "#store:congratulationAnim/showPreviewBtnLabel";
 
-        public static const CONGRATULATIONANIM_SHOWEPICBTNLABEL:String = "#store:congratulationAnim/showEpicBtnLabel";
+        public static const CONGRATULATIONANIM_BACKTOEPICLABEL:String = "#store:congratulationAnim/backToEpicLabel";
 
         public static const BUYVEHICLEWINDOW_SLOT_ENUM:Array = [BUYVEHICLEWINDOW_SLOT_0,BUYVEHICLEWINDOW_SLOT_1,BUYVEHICLEWINDOW_SLOT_2];
 

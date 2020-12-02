@@ -123,8 +123,6 @@ package net.wg.data.constants.generated
 
         public static const EVENT_POINT_COUNTER:String = "eventPointCounter";
 
-        public static const BOSS_INDICATOR_PROGRESS:String = "bossIndicatorProgress";
-
         public static const EVENT_TIMER:String = "eventTimer";
 
         public static const EVENT_STATS:String = "eventStats";
@@ -136,8 +134,6 @@ package net.wg.data.constants.generated
         public static const EVENT_OBJECTIVES:String = "eventObjectives";
 
         public static const CALLOUT_PANEL:String = "calloutPanel";
-
-        public static const EVENT_PHASE_INDICATOR:String = "eventPhaseIndicator";
 
         public static const EVENT_POSTMORTEM_PANEL:String = "eventPostmortemPanel";
 

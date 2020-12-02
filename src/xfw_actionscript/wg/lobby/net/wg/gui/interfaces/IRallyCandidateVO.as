@@ -16,7 +16,5 @@ package net.wg.gui.interfaces
         function get isPlayerSpeaking() : Boolean;
 
         function set isPlayerSpeaking(param1:Boolean) : void;
-
-        function get eventTooltip() : String;
     }
 }

@@ -10,7 +10,6 @@ package net.wg.gui.lobby.hangar.quests
     import net.wg.data.Aliases;
     import net.wg.data.constants.generated.HANGAR_HEADER_QUESTS;
     import flash.display.DisplayObject;
-    import org.idmedia.as3commons.util.StringUtils;
     import scaleform.clik.events.ButtonEvent;
     import flash.events.MouseEvent;
     import net.wg.data.constants.Values;
@@ -136,10 +135,6 @@ package net.wg.gui.lobby.hangar.quests
         {
             var _loc4_:HeaderQuestsVO = null;
             var _loc5_:String = null;
-            if(!param1)
-            {
-                return false;
-            }
             var _loc2_:Vector.<HeaderQuestsVO> = param1.getQuests;
             var _loc3_:Vector.<String> = new Vector.<String>();
             for each(_loc4_ in _loc2_)
@@ -231,7 +226,7 @@ package net.wg.gui.lobby.hangar.quests
                     this._isAllQuestsItemsDisabled = this._isAllQuestsItemsDisabled && !_loc6_.enable;
                     _loc7_++;
                 }
-                if(!this._isSingle || StringUtils.isNotEmpty(param2) && StringUtils.isEmpty(param1[0].icon))
+                if(!this._isSingle)
                 {
                     this.clearIcon();
                     this.addIcon(_loc3_,param2);

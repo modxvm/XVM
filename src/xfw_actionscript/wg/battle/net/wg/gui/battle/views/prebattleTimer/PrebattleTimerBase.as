@@ -120,7 +120,7 @@ package net.wg.gui.battle.views.prebattleTimer
             }
             if(isInvalid(INVALID_MESSAGE_TF))
             {
-                this.message.htmlLabel = this._messageText;
+                this.message.label = this._messageText;
                 invalidateSize();
             }
             if(isInvalid(INVALID_WIN_TF))
@@ -209,6 +209,10 @@ package net.wg.gui.battle.views.prebattleTimer
             this.timer.visible = param1;
             this.message.visible = param1;
             this.background.visible = this._isBackgroundHided?false:param1;
+            if(!param1)
+            {
+                dispatchEvent(new PrebattleTimerEvent(PrebattleTimerEvent.START_HIDING,false));
+            }
         }
 
         protected function hideComponent(param1:Boolean) : void

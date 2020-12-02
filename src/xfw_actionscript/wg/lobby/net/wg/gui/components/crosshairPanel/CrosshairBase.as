@@ -171,7 +171,7 @@ package net.wg.gui.components.crosshairPanel
 
         public function setAutoloaderReloadingAsPercent(param1:Number, param2:Boolean) : void
         {
-            this.autoloaderComponent.setGunReloadingPercent(param1,param2);
+            this.autoloaderComponent.setGunReloadingPercent(param1);
         }
 
         public function setCenterType(param1:Number) : void

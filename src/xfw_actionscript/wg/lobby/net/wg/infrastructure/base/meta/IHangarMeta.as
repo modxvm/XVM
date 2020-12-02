@@ -17,10 +17,6 @@ package net.wg.infrastructure.base.meta
 
         function onTeaserClickS() : void;
 
-        function onEventExitClickS() : void;
-
-        function onEventParamsToggleS(param1:Boolean) : void;
-
         function as_setCrewEnabled(param1:Boolean) : void;
 
         function as_setCarouselEnabled(param1:Boolean) : void;
@@ -51,8 +47,6 @@ package net.wg.infrastructure.base.meta
 
         function as_showTeaser(param1:Object) : void;
 
-        function as_setEventCrew(param1:Object) : void;
-
         function as_setTeaserTimer(param1:String) : void;
 
         function as_hideTeaserTimer() : void;
@@ -66,9 +60,5 @@ package net.wg.infrastructure.base.meta
         function as_showSwitchToAmmunition() : void;
 
         function as_toggleBattleRoyale(param1:Boolean) : void;
-
-        function as_setChinaLootboxesVisible(param1:Boolean) : void;
-
-        function as_showEventHangar(param1:Boolean, param2:Boolean) : void;
     }
 }
