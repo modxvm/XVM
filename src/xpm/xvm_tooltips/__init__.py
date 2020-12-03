@@ -559,13 +559,13 @@ def ModuleInfoMeta_as_setModuleInfoS(base, self, moduleInfo):
 # paint 'weight (kg)' with red if module does not fit due to overweight
 
 @overrideMethod(param_formatter, 'formatModuleParamName')
-def formatters_formatModuleParamName(base, paramName):
+def formatters_formatModuleParamName(base, paramName, vDescr=None):
     builder = text_styles.builder()
     if weightTooHeavy and paramName == 'weight':
         builder.addStyledText(text_styles.error, MENU.moduleinfo_params(paramName))
         builder.addStyledText(text_styles.error, param_formatter.MEASURE_UNITS.get(paramName, ''))
         return builder.render()
-    return base (paramName)
+    return base(paramName, vDescr)
 
 @overrideMethod(ModuleBlockTooltipData, '_packBlocks')
 def ModuleBlockTooltipData_packBlocks(base, self, *args, **kwargs):
