@@ -29,12 +29,8 @@ from gui.Scaleform.locale.STORAGE import STORAGE
 from gui.Scaleform.locale.RES_ICONS import RES_ICONS
 from gui.Scaleform.genConsts.TOOLTIPS_CONSTANTS import TOOLTIPS_CONSTANTS
 from gui.Scaleform.framework.tooltip_mgr import ToolTip
-from gui.Scaleform.daapi.view.battle.shared.consumables_panel import ConsumablesPanel
-from gui.Scaleform.daapi.view.meta.ModuleInfoMeta import ModuleInfoMeta
 from gui.shared.tooltips.module import ModuleBlockTooltipData
 from gui.impl.backport.backport_system_locale import getNiceNumberFormat
-from helpers import dependency
-from skeletons.gui.shared import IItemsCache
 import ResMgr
 import nations
 import BigWorld
@@ -53,7 +49,6 @@ from xvm_main.python.xvm import l10n
 #####################################################################
 # globals
 
-shells_vehicles_compatibility = {}
 carousel_tooltips_cache = {}
 styles_templates = {}
 toolTipDelayIntervalId = None
@@ -519,32 +514,6 @@ def CommonStatsBlockConstructor_construct(base, self):
         err(traceback.format_exc())
         return base(self)
 
-
-# in battle, add tooltip for HE shells - explosion radius
-@overrideMethod(ConsumablesPanel, '_ConsumablesPanel__makeShellTooltip')
-def ConsumablesPanel__makeShellTooltip(base, self, descriptor, piercingPower, shotSpeed):
-    result = base(self, descriptor, piercingPower, shotSpeed)
-    try:
-        if descriptor.kind == SHELL_TYPES.HIGH_EXPLOSIVE:
-            key_str = i18n.makeString(MENU.TANK_PARAMS_EXPLOSIONRADIUS)
-            result = result.replace('{/BODY}', '\n%s: %s{/BODY}' % (key_str, formatNumber(descriptor.type.explosionRadius)))
-    except Exception as ex:
-        err(traceback.format_exc())
-    return result
-
-# show compatible vehicles for shells info window in warehouse and shop
-@overrideMethod(ModuleInfoMeta, 'as_setModuleInfoS')
-def ModuleInfoMeta_as_setModuleInfoS(base, self, moduleInfo):
-    try:
-        if moduleInfo.get('type') == 'shell':
-            if not shells_vehicles_compatibility:
-                relate_shells_vehicles()
-            if self.moduleCompactDescr in shells_vehicles_compatibility:
-                moduleInfo['compatible'].append({'type': i18n.makeString(MENU.MODULEINFO_COMPATIBLE_VEHICLES), 'value': ', '.join(shells_vehicles_compatibility[self.moduleCompactDescr])})
-    except Exception as ex:
-        err(traceback.format_exc())
-    base(self, moduleInfo)
-
 # # add '#menu:moduleInfo/params/weightTooHeavy' (red 'weight (kg)')
 # @overrideMethod(i18n, 'makeString')
 # def makeString(base, key, *args, **kwargs):
@@ -594,29 +563,6 @@ def gold_pad(text):
 
 def red_pad(text):
     return "<font color='#FF0000'>%s</font>" % text
-
-# make dict: shells => compatible vehicles
-def relate_shells_vehicles():
-    global shells_vehicles_compatibility
-    try:
-        shells_vehicles_compatibility = {}
-        itemsCache = dependency.instance(IItemsCache)
-        for vehicle in itemsCache.items.getVehicles().values():
-            if vehicle.name.find('_IGR') > 0 or vehicle.name.find('_training') > 0:
-                continue
-            for turrets in vehicle.descriptor.type.turrets:
-                for turret in turrets:
-                    for gun in turret.guns:
-                        for shot in gun.shots:
-                            shell_id = shot.shell.compactDescr
-                            if shell_id in shells_vehicles_compatibility:
-                                if vehicle.userName not in shells_vehicles_compatibility[shell_id]:
-                                    shells_vehicles_compatibility[shell_id].append(vehicle.userName)
-                            else:
-                                shells_vehicles_compatibility[shell_id] = [vehicle.userName]
-    except Exception as ex:
-        err(traceback.format_exc())
-        shells_vehicles_compatibility = {}
 
 
 @registerEvent(ItemsRequester, '_invalidateItems')
