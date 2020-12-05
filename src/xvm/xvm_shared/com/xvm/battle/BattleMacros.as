@@ -460,9 +460,9 @@ package com.xvm.battle
                     {
                         switch (o.damageInfo.damageType)
                         {
-                            case "world_collision":
+                            //case "world_collision":
                             case "death_zone":
-                            case "drowning":
+                            //case "drowning":
                                 return getDmgKindValue(o.damageInfo.damageType);
                             default:
                                 return getDmgSrcColorValue(o);
@@ -557,7 +557,11 @@ package com.xvm.battle
 
         private static function getEntityName(o:VOPlayerState):String
         {
-            return !o ? null : !o.isAlly ? "enemy" : o.isSquadPersonal ? "squadman" : o.isTeamKiller ? "teamKiller" : "ally";
+            if (o) {
+                var isSelf:Boolean = o.damageInfo ? o.damageInfo.attackerID == o.vehicleID : false;
+                return isSelf ? "self" : !o.isAlly ? "enemy" : o.isSquadPersonal ? "squadman" : o.isTeamKiller ? "teamKiller" : "ally";
+            }
+            return null
         }
 
         /**

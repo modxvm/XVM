@@ -4,6 +4,10 @@
 
   * Compatibility with World of Tanks 1.11.0.0
 
+  #### Battle
+
+  * New parameters have been added in the `"colors"/"system"`, `"colors"/"damage"` and `"colors"/"dmg_kind"` sections
+
 ______________________________
 
 ### XVM 8.6.8
@@ -118,6 +122,7 @@ ______________________________
   #### Python macros
 
   * Added macro to **damageLog**:
+
     * `{{shell-dmg}}` - shell damage
 
 ______________________________

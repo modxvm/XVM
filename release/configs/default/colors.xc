@@ -6,28 +6,29 @@
   // Color values for substitutions.
   // Значения цветов для подстановок.
   "def": {
-    "al": "0x96FF00",                 // ally       / союзник
-    "sq": "0xFFB964",                 // squadman   / взводный
-    "tk": "0x00EAFF",                 // teamKiller / тимкиллер
-    "en": "0xF50800",                 // enemy      / противник
-    "pl": "0xFFDD33",                 // player     / игрок
+    "al":   "0x96FF00",            // ally       / союзник
+    "sq":   "0xFFB964",            // squadman   / взводный
+    "tk":   "0x00EAFF",            // teamKiller / тимкиллер
+    "en":   "0xF50800",            // enemy      / противник
+    "pl":   "0xFFDD33",            // player     / игрок
+    "self": "0xDD00DD",            // self       / сам себе
     // Dynamic color by various statistical parameters.
     // Динамический цвет по различным статистическим показателям.
     "colorRating": {
-      "very_bad":     "0xFE0E00",     // very bad  / очень плохо
-      "bad":          "0xFE7903",     // bad       / плохо
-      "normal":       "0xF8F400",     // normal    / средне
-      "good":         "0x60FF00",     // good      / хорошо
-      "very_good":    "0x02C9B3",     // very good / очень хорошо
-      "unique":       "0xD042F3"      // unique    / уникально
+      "very_bad":  "0xFE0E00",     // very bad  / очень плохо
+      "bad":       "0xFE7903",     // bad       / плохо
+      "normal":    "0xF8F400",     // normal    / средне
+      "good":      "0x60FF00",     // good      / хорошо
+      "very_good": "0x02C9B3",     // very good / очень хорошо
+      "unique":    "0xD042F3"      // unique    / уникально
     },
     // Dynamic color by remaining health points.
     // Динамический цвет по оставшемуся запасу прочности.
     "colorHP": {
-      "very_low":         "0xFF0000", // very low      / очень низкий
-      "low":              "0xDD4444", // low           / низкий
-      "average":          "0xFFCC22", // average       / средний
-      "above_average":    "0xFCFCFC"  // above-average / выше среднего
+      "very_low":      "0xFF0000", // very low      / очень низкий
+      "low":           "0xDD4444", // low           / низкий
+      "average":       "0xFFCC22", // average       / средний
+      "above_average": "0xFCFCFC"  // above-average / выше среднего
     }
   },
   "colors": {
@@ -35,12 +36,12 @@
     // Системные цвета.
     "system": {
       // Format:    object_state
-      // Object:    ally, squadman, teamKiller, enemy
-      // State:     alive, dead, blowedup
+      // Object:    ally, squadman, teamKiller, enemy, self.
+      // State:     alive, dead, blowedup.
       // ----
       // Формат:    объект_состояние
-      // Объект:    ally - союзник, squadman - взводный, teamKiller - тимкиллер, enemy - противник
-      // Состояние: alive - живой, dead - мертвый, blowedup - взорвана боеукладка
+      // Объект:    ally - союзник, squadman - взводный, teamKiller - тимкиллер, enemy - противник, self - урон наносимый самому себе.
+      // Состояние: alive - живой, dead - мертвый, blowedup - взорвана боеукладка.
       "ally_alive":          ${"def.al"},
       "ally_dead":           "0x009900",
       "ally_blowedup":       "0x007700",
@@ -53,19 +54,21 @@
       "enemy_alive":         ${"def.en"},
       "enemy_dead":          "0x840500",
       "enemy_blowedup":      "0x5A0401",
-      "ally_base":           ${"def.al"},
-      "enemy_base":          ${"def.en"}
+      "self_alive":          ${"def.self"},
+      "self_dead":           "0xBB00BB",
+      "self_blowedup":       "0x990099"
     },
     // Dynamic color by damage kind.
     // Динамический цвет по типу урона.
     "dmg_kind": {
-      "shot": "0xFFAA55",            // shot / попадание
-      "fire": "0xFF6655",            // fire / пожар
-      "ramming": "0x998855",         // ramming / таран
+      "shot":            "0xFFAA55", // shot            / попадание
+      "fire":            "0xFF6655", // fire            / пожар
+      "ramming":         "0x998855", // ramming         / таран
       "world_collision": "0x228855", // world collision / столкновение с объектами, падение
-      "death_zone": "0xCCCCCC",      // death_zone / опасная зона
-      "drowning": "0xCCCCCC",        // drowning / затопление
-      "other": "0xCCCCCC"            // other / другое
+      "death_zone":      "0xCCCCCC", // death_zone      / опасная зона
+      "drowning":        "0xCCCCCC", // drowning        / затопление
+      "overturn":        "0xCCCCCC", // overturn        / опрокидывание
+      "other":           "0xCCCCCC"  // other           / другое
     },
     // Dynamic color by vehicle type.
     // Динамический цвет по типу техники.
@@ -109,12 +112,12 @@
     "damage": {
       // Format: src_dst_type.
       // Src:  ally, squadman, enemy, unknown, player.
-      // Dst:  ally, squadman, allytk, enemytk, enemy.
+      // Dst:  ally, squadman, allytk, enemytk, enemy, self.
       // Type: hit, kill, blowup.
       // ----
       // Формат: источник_получатель_тип.
       // Источник:   ally - союзник, squadman - взводный, enemy - противник, unknown - неизвестный (не виден игроку), player - игрок.
-      // Получатель: ally, squadman, enemy, allytk - союзник тимкиллер, enemytk - противник тимкиллер.
+      // Получатель: ally, squadman, enemy, allytk - союзник тимкиллер, enemytk - противник тимкиллер, self - урон наносимый самому себе.
       // Тип:        hit - попадание, kill - убийство, blowup - боеукладка.
       "ally_ally_hit":              ${"def.tk"},
       "ally_ally_kill":             ${"def.tk"},
@@ -131,36 +134,9 @@
       "ally_enemytk_hit":           ${"def.en"},
       "ally_enemytk_kill":          ${"def.en"},
       "ally_enemytk_blowup":        ${"def.en"},
-      "enemy_ally_hit":             ${"def.al"},
-      "enemy_ally_kill":            ${"def.al"},
-      "enemy_ally_blowup":          ${"def.al"},
-      "enemy_squadman_hit":         ${"def.al"},
-      "enemy_squadman_kill":        ${"def.al"},
-      "enemy_squadman_blowup":      ${"def.al"},
-      "enemy_enemy_hit":            ${"def.en"},
-      "enemy_enemy_kill":           ${"def.en"},
-      "enemy_enemy_blowup":         ${"def.en"},
-      "enemy_allytk_hit":           ${"def.al"},
-      "enemy_allytk_kill":          ${"def.al"},
-      "enemy_allytk_blowup":        ${"def.al"},
-      "enemy_enemytk_hit":          ${"def.en"},
-      "enemy_enemytk_kill":         ${"def.en"},
-      "enemy_enemytk_blowup":       ${"def.en"},
-      "unknown_ally_hit":           ${"def.al"},
-      "unknown_ally_kill":          ${"def.al"},
-      "unknown_ally_blowup":        ${"def.al"},
-      "unknown_squadman_hit":       ${"def.al"},
-      "unknown_squadman_kill":      ${"def.al"},
-      "unknown_squadman_blowup":    ${"def.al"},
-      "unknown_enemy_hit":          ${"def.en"},
-      "unknown_enemy_kill":         ${"def.en"},
-      "unknown_enemy_blowup":       ${"def.en"},
-      "unknown_allytk_hit":         ${"def.al"},
-      "unknown_allytk_kill":        ${"def.al"},
-      "unknown_allytk_blowup":      ${"def.al"},
-      "unknown_enemytk_hit":        ${"def.en"},
-      "unknown_enemytk_kill":       ${"def.en"},
-      "unknown_enemytk_blowup":     ${"def.en"},
+      "ally_self_hit":              ${"def.self"},
+      "ally_self_kill":             ${"def.self"},
+      "ally_self_blowup":           ${"def.self"},
       "squadman_ally_hit":          ${"def.sq"},
       "squadman_ally_kill":         ${"def.sq"},
       "squadman_ally_blowup":       ${"def.sq"},
@@ -176,6 +152,45 @@
       "squadman_enemytk_hit":       ${"def.sq"},
       "squadman_enemytk_kill":      ${"def.sq"},
       "squadman_enemytk_blowup":    ${"def.sq"},
+      "squadman_self_hit":          ${"def.self"},
+      "squadman_self_kill":         ${"def.self"},
+      "squadman_self_blowup":       ${"def.self"},
+      "enemy_ally_hit":             ${"def.al"},
+      "enemy_ally_kill":            ${"def.al"},
+      "enemy_ally_blowup":          ${"def.al"},
+      "enemy_squadman_hit":         ${"def.al"},
+      "enemy_squadman_kill":        ${"def.al"},
+      "enemy_squadman_blowup":      ${"def.al"},
+      "enemy_enemy_hit":            ${"def.en"},
+      "enemy_enemy_kill":           ${"def.en"},
+      "enemy_enemy_blowup":         ${"def.en"},
+      "enemy_allytk_hit":           ${"def.al"},
+      "enemy_allytk_kill":          ${"def.al"},
+      "enemy_allytk_blowup":        ${"def.al"},
+      "enemy_enemytk_hit":          ${"def.en"},
+      "enemy_enemytk_kill":         ${"def.en"},
+      "enemy_enemytk_blowup":       ${"def.en"},
+      "enemy_self_hit":             ${"def.self"},
+      "enemy_self_kill":            ${"def.self"},
+      "enemy_self_blowup":          ${"def.self"},
+      "unknown_ally_hit":           ${"def.al"},
+      "unknown_ally_kill":          ${"def.al"},
+      "unknown_ally_blowup":        ${"def.al"},
+      "unknown_squadman_hit":       ${"def.al"},
+      "unknown_squadman_kill":      ${"def.al"},
+      "unknown_squadman_blowup":    ${"def.al"},
+      "unknown_enemy_hit":          ${"def.en"},
+      "unknown_enemy_kill":         ${"def.en"},
+      "unknown_enemy_blowup":       ${"def.en"},
+      "unknown_allytk_hit":         ${"def.al"},
+      "unknown_allytk_kill":        ${"def.al"},
+      "unknown_allytk_blowup":      ${"def.al"},
+      "unknown_enemytk_hit":        ${"def.en"},
+      "unknown_enemytk_kill":       ${"def.en"},
+      "unknown_enemytk_blowup":     ${"def.en"},
+      "unknown_self_hit":           ${"def.self"},
+      "unknown_self_kill":          ${"def.self"},
+      "unknown_self_blowup":        ${"def.self"},
       "player_ally_hit":            ${"def.pl"},
       "player_ally_kill":           ${"def.pl"},
       "player_ally_blowup":         ${"def.pl"},
@@ -190,7 +205,10 @@
       "player_allytk_blowup":       ${"def.pl"},
       "player_enemytk_hit":         ${"def.pl"},
       "player_enemytk_kill":        ${"def.pl"},
-      "player_enemytk_blowup":      ${"def.pl"}
+      "player_enemytk_blowup":      ${"def.pl"},
+      "player_self_hit":            ${"def.self"},
+      "player_self_kill":           ${"def.self"},
+      "player_self_blowup":         ${"def.self"}
     },
     // Values below should be from smaller to larger.
     // Значения ниже должны быть от меньшего к большему.
