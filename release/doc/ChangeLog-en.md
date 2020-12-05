@@ -8,6 +8,9 @@
 
   * New parameters have been added in the `"colors"/"system"`, `"colors"/"damage"` and `"colors"/"dmg_kind"` sections
 
+  #### Python macros
+
+  * Added `"{{py:calc(expression [, ...])}}"` macro
 ______________________________
 
 ### XVM 8.6.8

@@ -1,4 +1,12 @@
-﻿# Addition. Сложение.
+﻿from xvm import calculator
+
+@xvm.export('calc')
+def calc(expression, *args):
+    if args:
+        expression = expression.format(*args)
+    return calculator.calc(expression)
+
+# Addition. Сложение.
 @xvm.export('math.add')
 @xvm.export('math.sum')
 @xvm.export('add')
