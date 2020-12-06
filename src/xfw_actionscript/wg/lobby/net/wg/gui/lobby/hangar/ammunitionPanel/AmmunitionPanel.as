@@ -4,6 +4,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
     import net.wg.infrastructure.managers.counter.CounterProps;
     import net.wg.gui.components.controls.universalBtn.UniversalBtn;
     import net.wg.gui.components.controls.SoundButtonEx;
+    import net.wg.gui.lobby.ny2020.NYVehicleBonusPanel;
     import net.wg.infrastructure.managers.ITooltipMgr;
     import net.wg.utils.IUtils;
     import net.wg.gui.lobby.hangar.ammunitionPanel.data.VehicleMessageVO;
@@ -17,10 +18,10 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
     import net.wg.infrastructure.managers.counter.CounterManager;
     import flash.display.InteractiveObject;
     import net.wg.utils.helpLayout.HelpLayoutVO;
+    import net.wg.utils.StageSizeBoundaries;
     import net.wg.data.constants.UniversalBtnStylesConst;
     import net.wg.infrastructure.events.FocusRequestEvent;
     import net.wg.infrastructure.managers.ITooltipFormatter;
-    import net.wg.data.constants.Linkages;
 
     public class AmmunitionPanel extends AmmunitionPanelMeta implements IAmmunitionPanel
     {
@@ -65,6 +66,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
 
         public var toRent:SoundButtonEx = null;
 
+        public var nyBonusPanel:NYVehicleBonusPanel = null;
+
         private var _panelEnabled:Boolean = true;
 
         private var _maintenanceTooltip:String = "";
@@ -93,8 +96,6 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
 
         private var _changeNationIsNew:Boolean;
 
-        private var _animationEquipmentSlot:EquipmentSlot;
-
         private var _buttonWidth:int = 131;
 
         private var _buttonsList:Vector.<IUniversalBtn>;
@@ -106,7 +107,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             super();
             this._buttonsList = new <IUniversalBtn>[this.maintenanceBtn,this.tuningBtn,this.changeNationBtn];
             this._counterManager = App.utils.counterManager;
-            this._animationEquipmentSlot = App.utils.classFactory.getComponent(Linkages.EQUIPMENT_SLOT_UI,EquipmentSlot);
+            this.nyBonusPanel.visible = false;
         }
 
         override protected function initialize() : void
@@ -115,11 +116,17 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this.tuningBtn.enabled = false;
             App.waiting.addEventListener(ChildVisibilityEvent.CHILD_SHOWN,this.onChildShownHandler);
             App.waiting.addEventListener(ChildVisibilityEvent.CHILD_HIDDEN,this.onChildHiddenHandler);
+            this.nyBonusPanel.addEventListener(MouseEvent.CLICK,this.onNYBonusPanelClickHandler);
+            this.nyBonusPanel.addEventListener(MouseEvent.MOUSE_OVER,this.onNYBonusPanelMouseOverHandler);
+            this.nyBonusPanel.addEventListener(MouseEvent.MOUSE_OUT,this.onNYBonusPanelMouseOutHandler);
         }
 
         override protected function onBeforeDispose() : void
         {
             var _loc1_:IUniversalBtn = null;
+            this.nyBonusPanel.removeEventListener(MouseEvent.CLICK,this.onNYBonusPanelClickHandler);
+            this.nyBonusPanel.removeEventListener(MouseEvent.MOUSE_OVER,this.onNYBonusPanelMouseOverHandler);
+            this.nyBonusPanel.removeEventListener(MouseEvent.MOUSE_OUT,this.onNYBonusPanelMouseOutHandler);
             for each(_loc1_ in this._buttonsList)
             {
                 _loc1_.removeEventListener(MouseEvent.ROLL_OVER,this.onBtnRollOverHandler);
@@ -158,8 +165,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this._utils = null;
             this._buttonsList.splice(0,this._buttonsList.length);
             this._buttonsList = null;
-            this._animationEquipmentSlot.dispose();
-            this._animationEquipmentSlot = null;
+            this.nyBonusPanel.dispose();
+            this.nyBonusPanel = null;
             super.onDispose();
         }
 
@@ -249,6 +256,18 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
 
+        public function as_setNeyYearVehicleBonus(param1:Boolean, param2:String, param3:String, param4:String, param5:String, param6:Boolean, param7:String) : void
+        {
+            var _loc8_:Boolean = param1 || param6;
+            if(this.nyBonusPanel)
+            {
+                this.nyBonusPanel.update(param1,param2,param3,param4,param5,param6,param7);
+                this.nyBonusPanel.visible = _loc8_;
+            }
+            this.vehicleStateMsg.visible = !_loc8_;
+            this.toRent.visible = !_loc8_;
+        }
+
         public function as_setWarningState(param1:Boolean) : void
         {
             this._maintenanceStateWarning = param1;
@@ -307,6 +326,11 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this.tuningBtn.x = this.maintenanceBtn.x + this._buttonWidth + INDENT_BETWEEN_BUTTONS;
             this.changeNationBtn.x = this.tuningBtn.x + this._buttonWidth + INDENT_BETWEEN_BUTTONS;
             this.placeVehicleStateMsg();
+            var _loc1_:* = stage.stageHeight <= StageSizeBoundaries.HEIGHT_768;
+            this.nyBonusPanel.setIsSmall(_loc1_);
+            this.nyBonusPanel.validateNow();
+            this.nyBonusPanel.x = this.width >> 1;
+            this.nyBonusPanel.y = this.maintenanceBtn.y - this.nyBonusPanel.height | 0;
             dispatchEvent(new Event(Event.RESIZE));
         }
 
@@ -349,6 +373,24 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                 _loc1_ = _loc1_ + (this._buttonWidth + INDENT_BETWEEN_BUTTONS);
             }
             return _loc1_;
+        }
+
+        private function onNYBonusPanelClickHandler(param1:MouseEvent) : void
+        {
+            if(this.nyBonusPanel.isNYVehicle)
+            {
+                onNYBonusPanelClickedS();
+            }
+        }
+
+        private function onNYBonusPanelMouseOverHandler(param1:MouseEvent) : void
+        {
+            this.nyBonusPanel.showOver();
+        }
+
+        private function onNYBonusPanelMouseOutHandler(param1:MouseEvent) : void
+        {
+            this.nyBonusPanel.showOut();
         }
 
         private function onAmmunitionPanelVehicleStateMsgResizeHandler(param1:AmmunitionPanelEvents) : void

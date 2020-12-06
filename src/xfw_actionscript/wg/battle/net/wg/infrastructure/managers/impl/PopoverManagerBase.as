@@ -96,6 +96,21 @@ package net.wg.infrastructure.managers.impl
             return this._popoverCaller;
         }
 
+        public function set popoverCaller(param1:IPopOverCaller) : void
+        {
+            App.utils.asserter.assertNotNull(param1,"popoverCaller" + Errors.CANT_NULL,NullPointerException);
+            if(this._popoverCaller == param1)
+            {
+                return;
+            }
+            if(this._popoverCaller != null)
+            {
+                this.hide();
+            }
+            this._popoverCaller = param1;
+            this._stage.addEventListener(MouseEvent.MOUSE_DOWN,this.onStageMouseDownHandler,true,0,true);
+        }
+
         private function onStageMouseDownHandler(param1:MouseEvent) : void
         {
             App.utils.asserter.assertNotNull(this._popoverCaller,this + " _lastPopoverCaller have not to be NULL!",NullPointerException);

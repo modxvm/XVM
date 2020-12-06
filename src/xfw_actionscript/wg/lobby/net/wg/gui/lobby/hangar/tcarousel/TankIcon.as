@@ -64,6 +64,12 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.txtRentInfo.htmlText = param1.rentLeft;
             imgIcon.source = param1.icon;
             imgIcon.sourceAlt = param1.iconAlt;
+            hasHoverImg = StringUtils.isNotEmpty(param1.iconHover);
+            if(hasHoverImg)
+            {
+                hoverImgIcon.source = param1.iconHover;
+                hoverImgIcon.sourceAlt = param1.iconHoverAlt;
+            }
         }
 
         override protected function setVisibleVehicleInfo(param1:Boolean) : void

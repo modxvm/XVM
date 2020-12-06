@@ -7,6 +7,7 @@ package net.wg.gui.components.controls
     import net.wg.gui.events.ListEventEx;
     import flash.events.Event;
     import net.wg.data.constants.Errors;
+    import scaleform.clik.constants.InvalidationType;
     import scaleform.gfx.MouseEventEx;
 
     public class CoreListEx extends CoreList
@@ -118,7 +119,7 @@ package net.wg.gui.components.controls
             var _loc3_:String = null;
             var _loc2_:IListItemRenderer = param1.currentTarget as IListItemRenderer;
             App.utils.asserter.assertNotNull(_loc2_,"renderer" + Errors.CANT_NULL);
-            if(_loc2_.getData() == null)
+            if(_loc2_.getData() == null || isInvalid(InvalidationType.DATA))
             {
                 return false;
             }

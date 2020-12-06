@@ -2301,6 +2301,50 @@ package
 
         public static const NATION_CHANGE_ERROR:String = "#system_messages:nation_change/error";
 
+        public static const NEWYEAR_CRAFTTOY_SERVER_ERROR:String = "#system_messages:newYear/craftToy/server_error";
+
+        public static const NEWYEAR_BUYTOY_SERVER_ERROR:String = "#system_messages:newYear/buyToy/server_error";
+
+        public static const NEWYEAR_BUYMEGATOY_SERVER_ERROR:String = "#system_messages:newYear/buyMegaToy/server_error";
+
+        public static const NEWYEAR_APPLYVEHICLEDISCOUNT_SUCCESS:String = "#system_messages:newYear/applyVehicleDiscount/success";
+
+        public static const NEWYEAR_APPLYVEHICLEDISCOUNT_SERVER_ERROR:String = "#system_messages:newYear/applyVehicleDiscount/server_error";
+
+        public static const NEWYEAR_APPLYVEHICLEDISCOUNT_SERVER_ERROR_NODISCOUNTS:String = "#system_messages:newYear/applyVehicleDiscount/server_error/noDiscounts";
+
+        public static const NEWYEAR_APPLYVEHICLEDISCOUNT_SERVER_ERROR_ALREADYACTIVE:String = "#system_messages:newYear/applyVehicleDiscount/server_error/alreadyActive";
+
+        public static const NEWYEAR_APPLYVEHICLEDISCOUNT_SERVER_ERROR_ALREADYBOUGHT:String = "#system_messages:newYear/applyVehicleDiscount/server_error/alreadyBought";
+
+        public static const NEWYEAR_APPLYVEHICLEDISCOUNT_SERVER_ERROR_NODISCOUNTFORVEHICLE:String = "#system_messages:newYear/applyVehicleDiscount/server_error/noDiscountForVehicle";
+
+        public static const NEWYEAR_HANGTOY_SERVER_ERROR:String = "#system_messages:newYear/hangToy/server_error";
+
+        public static const NEWYEAR_BREAKTOYS_SERVER_ERROR:String = "#system_messages:newYear/breakToys/server_error";
+
+        public static const NEWYEAR_SETVEHICLEBRANCH_SERVER_ERROR:String = "#system_messages:newYear/setVehicleBranch/server_error";
+
+        public static const NEWYEAR_ADDTALISMAN_SERVER_ERROR:String = "#system_messages:newYear/addTalisman/server_error";
+
+        public static const NEWYEAR_GETTALISMANTOY_SERVER_ERROR:String = "#system_messages:newYear/getTalismanToy/server_error";
+
+        public static const NEWYEAR_BUYCOLLECTION_SERVER_ERROR:String = "#system_messages:newYear/buyCollection/server_error";
+
+        public static const NEWYEAR_SETVEHICLEBRANCHSLOTBONUS_SERVER_ERROR:String = "#system_messages:newYear/setVehicleBranchSlotBonus/server_error";
+
+        public static const NEWYEAR_CHANGETALISMANBONUSSTAGE_SERVER_ERROR:String = "#system_messages:newYear/changeTalismanBonusStage/server_error";
+
+        public static const NEWYEAR_CELEBRITYCHALLENGE_CONGRATULATIONS:String = "#system_messages:newYear/celebrityChallenge/congratulations";
+
+        public static const NEWYEAR_CELEBRITYCHALLENGE_SIMPLIFICATION_TITLE:String = "#system_messages:newYear/celebrityChallenge/simplification/title";
+
+        public static const NEWYEAR_CELEBRITYCHALLENGE_SIMPLIFICATION_MESSAGE:String = "#system_messages:newYear/celebrityChallenge/simplification/message";
+
+        public static const NEWYEAR_CELEBRITYCHALLENGE_PROGRESSREWARD:String = "#system_messages:newYear/celebrityChallenge/progressReward";
+
+        public static const NEWYEAR_CELEBRITYCHALLENGE_QUESTREWARD:String = "#system_messages:newYear/celebrityChallenge/questReward";
+
         public static const DEMOUNTKIT_RESTORED_SWITCHEDON:String = "#system_messages:demountKit_restored/switchedOn";
 
         public static const DEMOUNTKIT_FAILED_SWITCHEDOFF:String = "#system_messages:demountKit_failed/switchedOff";
@@ -2368,6 +2412,8 @@ package
         public static const OFFERS_UNAVAILABLE_ONE:String = "#system_messages:offers/unavailable_one";
 
         public static const OFFERS_UNAVAILABLE_MANY:String = "#system_messages:offers/unavailable_many";
+
+        public static const OFFERS_SERVER_ERROR:String = "#system_messages:offers/server_error";
 
         public static const MISSINGEVENTS_BUTTON:String = "#system_messages:missingEvents/button";
 

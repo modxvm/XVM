@@ -389,6 +389,12 @@ package
 
         public static const GRADOVSKIY_DESCR:String = "#crew_skins:gradovskiy/Descr";
 
+        public static const KADETTKNABE_NAME:String = "#crew_skins:kadettKnabe/Name";
+
+        public static const KADETTKNABE_LASTNAME:String = "#crew_skins:kadettKnabe/LastName";
+
+        public static const KADETTKNABE_DESCR:String = "#crew_skins:kadettKnabe/Descr";
+
         public function CREW_SKINS()
         {
             super();

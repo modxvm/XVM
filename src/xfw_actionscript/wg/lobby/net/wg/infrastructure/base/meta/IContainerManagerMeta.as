@@ -26,5 +26,9 @@ package net.wg.infrastructure.base.meta
         function as_hideContainers(param1:Array) : void;
 
         function as_isContainerShown(param1:int) : Boolean;
+
+        function as_setContainersVisible(param1:Boolean, param2:Array) : void;
+
+        function as_storeContainersVisible() : void;
     }
 }

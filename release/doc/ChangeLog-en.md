@@ -11,6 +11,7 @@
   #### Python macros
 
   * Added `"{{py:calc(expression [, ...])}}"` macro
+
 ______________________________
 
 ### XVM 8.6.8

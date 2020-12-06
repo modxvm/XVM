@@ -76,5 +76,7 @@ package net.wg.infrastructure.base.meta
         function as_blurBackgroundViews(param1:int, param2:Number) : void;
 
         function as_unblurBackgroundViews() : void;
+
+        function as_setMouseEventsEnabled(param1:Boolean) : void;
     }
 }

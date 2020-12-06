@@ -10,6 +10,7 @@ package net.wg.gui.lobby.hangar.quests
     import net.wg.data.Aliases;
     import net.wg.data.constants.generated.HANGAR_HEADER_QUESTS;
     import flash.display.DisplayObject;
+    import org.idmedia.as3commons.util.StringUtils;
     import scaleform.clik.events.ButtonEvent;
     import flash.events.MouseEvent;
     import net.wg.data.constants.Values;
@@ -40,6 +41,8 @@ package net.wg.gui.lobby.hangar.quests
         private static const GROUP_ICON_SHIFT_Y:int = 37;
 
         private static const SHOW_CONTENT_DELAY_STEP_INDEX:int = 100;
+
+        private static const LEFTSIDE_EXPAND_OFFSET_X:int = 20;
 
         private var _questsInformers:Vector.<IQuestInformerButton> = null;
 
@@ -135,6 +138,10 @@ package net.wg.gui.lobby.hangar.quests
         {
             var _loc4_:HeaderQuestsVO = null;
             var _loc5_:String = null;
+            if(!param1)
+            {
+                return false;
+            }
             var _loc2_:Vector.<HeaderQuestsVO> = param1.getQuests;
             var _loc3_:Vector.<String> = new Vector.<String>();
             for each(_loc4_ in _loc2_)
@@ -226,7 +233,7 @@ package net.wg.gui.lobby.hangar.quests
                     this._isAllQuestsItemsDisabled = this._isAllQuestsItemsDisabled && !_loc6_.enable;
                     _loc7_++;
                 }
-                if(!this._isSingle)
+                if(!this._isSingle || StringUtils.isNotEmpty(param2) && StringUtils.isEmpty(param1[0].icon))
                 {
                     this.clearIcon();
                     this.addIcon(_loc3_,param2);
@@ -272,6 +279,10 @@ package net.wg.gui.lobby.hangar.quests
                 _loc4_ = Values.ZERO;
                 _loc5_ = Values.ZERO;
                 _loc6_ = Values.ZERO;
+                if(!this._isRightSide)
+                {
+                    _loc6_ = _loc6_ + LEFTSIDE_EXPAND_OFFSET_X;
+                }
             }
             else
             {
@@ -281,7 +292,12 @@ package net.wg.gui.lobby.hangar.quests
                     _loc4_ = _loc4_ - HEADER_QUESTS_CONSTANTS.QUEST_BUTTONS_GROUP_STEP;
                 }
                 _loc5_ = !param3?GROUPED_FLAG_START_Y:0;
-                _loc6_ = param2 * HEADER_QUESTS_CONSTANTS.QUEST_BUTTONS_STEP * (this._isRightSide?1:-1);
+                _loc6_ = param2 * HEADER_QUESTS_CONSTANTS.QUEST_BUTTONS_STEP;
+                if(!this._isRightSide)
+                {
+                    _loc6_ = _loc6_ * -1;
+                    _loc6_ = _loc6_ + LEFTSIDE_EXPAND_OFFSET_X;
+                }
                 if(!param3)
                 {
                     this.addMask(param1,_loc4_);
@@ -496,6 +512,10 @@ package net.wg.gui.lobby.hangar.quests
             _loc1_ = this._questsInformers.length;
             if(this.isAnimExpanded)
             {
+                if(!this._isRightSide)
+                {
+                    return _loc1_ * HEADER_QUESTS_CONSTANTS.QUEST_BUTTONS_STEP - LEFTSIDE_EXPAND_OFFSET_X;
+                }
                 return _loc1_ * HEADER_QUESTS_CONSTANTS.QUEST_BUTTONS_STEP;
             }
             return (_loc1_ - 1) * HEADER_QUESTS_CONSTANTS.QUEST_BUTTONS_GROUP_STEP + HEADER_QUESTS_CONSTANTS.QUEST_BUTTONS_STEP;

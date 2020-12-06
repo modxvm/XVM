@@ -963,6 +963,12 @@ package net.wg.data.constants
 
         public static const NATION_TREE_PREMIUM_DOTS_PATTERN:String = "PremiumDotUI";
 
+        public static const NY_COUNTER_VIEW_UI:String = "NYCounterViewUI";
+
+        public static const NY_LB_NOTIFICATION_BG_UI:String = "NYLBNotificationBg_UI";
+
+        public static const NY_VEHICLE_BONUS_UI:String = "NYVehicleBonusUI";
+
         public function Linkages()
         {
             super();

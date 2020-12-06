@@ -29,18 +29,6 @@ diff -Naur lobby.orig/net/wg/data/constants/Linkages.as lobby/net/wg/data/consta
  
          public static const TECHNIQUE_ACHIEVEMENT_TAB:String = "TechniqueAchievementTab_UI";
  
-diff -Naur lobby.orig/net/wg/gui/components/containers/ManagedContainer.as lobby/net/wg/gui/components/containers/ManagedContainer.as
---- lobby.orig/net/wg/gui/components/containers/ManagedContainer.as	2020-12-02 14:30:48.273344300 +0300
-+++ lobby/net/wg/gui/components/containers/ManagedContainer.as	2020-12-02 14:41:31.110513900 +0300
-@@ -465,7 +465,7 @@
-     function GroupCounter()
-     {
-         super();
--        this.views = new Vector.<GroupCounter>();
-+        this.views = new Vector.<GroupViewObject>();
-     }
- 
-     public function decrement(param1:String) : void
 diff -Naur lobby.orig/net/wg/gui/components/tooltips/helpers/Utils.as lobby/net/wg/gui/components/tooltips/helpers/Utils.as
 --- lobby.orig/net/wg/gui/components/tooltips/helpers/Utils.as	2020-07-27 14:30:24.504153100 +0300
 +++ lobby/net/wg/gui/components/tooltips/helpers/Utils.as	2020-07-27 14:41:30.992623200 +0300
@@ -133,7 +121,7 @@ diff -Naur lobby.orig/net/wg/gui/lobby/components/SmallSkillsList.as lobby/net/w
 diff -Naur lobby.orig/net/wg/gui/lobby/hangar/Hangar.as lobby/net/wg/gui/lobby/hangar/Hangar.as
 --- lobby.orig/net/wg/gui/lobby/hangar/Hangar.as	2020-07-27 14:30:34.568675800 +0300
 +++ lobby/net/wg/gui/lobby/hangar/Hangar.as	2020-07-27 14:41:31.132652900 +0300
-@@ -167,6 +167,11 @@
+@@ -176,6 +176,11 @@
  
          public var closeBtn:CloseButtonText;
  
@@ -142,13 +130,13 @@ diff -Naur lobby.orig/net/wg/gui/lobby/hangar/Hangar.as lobby/net/wg/gui/lobby/h
 +            return _header;
 +        }
 +
-         private var _header:HangarHeader;
+         public var lootboxesEntrancePoint:LootboxesEntrancePointWidget;
  
-         private var _carousel:TankCarousel;
+         private var _header:HangarHeader;
 diff -Naur lobby.orig/net/wg/gui/lobby/header/LobbyHeader.as lobby/net/wg/gui/lobby/header/LobbyHeader.as
 --- lobby.orig/net/wg/gui/lobby/header/LobbyHeader.as	2020-07-27 14:30:36.509183400 +0300
 +++ lobby/net/wg/gui/lobby/header/LobbyHeader.as	2020-07-27 14:41:31.264166500 +0300
-@@ -100,6 +100,12 @@
+@@ -109,6 +109,12 @@
  
          private var _headerButtonsHelper:HeaderButtonsHelper;
  
@@ -443,7 +431,7 @@ diff -Naur lobby.orig/net/wg/infrastructure/managers/IContainerManager.as lobby/
 diff -Naur lobby.orig/net/wg/infrastructure/managers/impl/ContainerManagerBase.as lobby/net/wg/infrastructure/managers/impl/ContainerManagerBase.as
 --- lobby.orig/net/wg/infrastructure/managers/impl/ContainerManagerBase.as	2020-07-27 14:30:16.414479100 +0300
 +++ lobby/net/wg/infrastructure/managers/impl/ContainerManagerBase.as	2020-07-27 14:41:31.680982100 +0300
-@@ -640,6 +640,7 @@
+@@ -650,6 +650,7 @@
  
          private function onStartLoadViewHandler(param1:LoaderEvent) : void
          {
@@ -451,7 +439,7 @@ diff -Naur lobby.orig/net/wg/infrastructure/managers/impl/ContainerManagerBase.a
              var _loc2_:int = param1.config.layer;
              var _loc3_:String = param1.config.alias;
              var _loc4_:Vector.<AliasVO> = this._containersForLoadingViews[_loc2_];
-@@ -649,6 +649,7 @@
+@@ -659,6 +659,7 @@
                  this._containersForLoadingViews[_loc2_] = _loc4_;
              }
              _loc4_.push(new AliasVO(_loc3_,param1.name));

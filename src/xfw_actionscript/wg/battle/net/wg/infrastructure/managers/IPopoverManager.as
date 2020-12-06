@@ -15,5 +15,7 @@ package net.wg.infrastructure.managers
         function isPopover(param1:IView) : Boolean;
 
         function get popoverCaller() : IPopOverCaller;
+
+        function set popoverCaller(param1:IPopOverCaller) : void;
     }
 }

@@ -711,6 +711,14 @@ package
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_RANKEDBONUSBATTLES_DAILY:String = "#messenger:serviceChannelMessages/battleResults/quests/rankedBonusBattles/daily";
 
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_SENIORITYREWARDHEADER:String = "#messenger:serviceChannelMessages/battleResults/seniorityRewardHeader";
+
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_SENIORITYREWARDBODY:String = "#messenger:serviceChannelMessages/battleResults/seniorityRewardBody";
+
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_NYBOXES:String = "#messenger:serviceChannelMessages/battleResults/quests/nyBoxes";
+
+        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_VARIADICDISCOUNT:String = "#messenger:serviceChannelMessages/battleResults/quests/variadicDiscount";
+
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_PERSONALMISSIONS:String = "#messenger:serviceChannelMessages/battleResults/personalMissions";
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_PERSONALMISSIONS_1:String = "#messenger:serviceChannelMessages/battleResults/personalMissions/1";
@@ -972,6 +980,20 @@ package
         public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_RANKEDBONUSBATTLESACCRUED:String = "#messenger:serviceChannelMessages/invoiceReceived/rankedBonusBattlesAccrued";
 
         public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_RANKEDBONUSBATTLESDEBITED:String = "#messenger:serviceChannelMessages/invoiceReceived/rankedBonusBattlesDebited";
+
+        public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_NYTOYSACCRUEDINVOICERECEIVED:String = "#messenger:serviceChannelMessages/invoiceReceived/nyToysAccruedInvoiceReceived";
+
+        public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_NYTOYSDEBITEDINVOICERECEIVED:String = "#messenger:serviceChannelMessages/invoiceReceived/nyToysDebitedInvoiceReceived";
+
+        public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_NYFILLERSACCRUED:String = "#messenger:serviceChannelMessages/invoiceReceived/nyFillersAccrued";
+
+        public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_NYFILLERSDEBITED:String = "#messenger:serviceChannelMessages/invoiceReceived/nyFillersDebited";
+
+        public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_NYFRAGMENTSACCRUED:String = "#messenger:serviceChannelMessages/invoiceReceived/nyFragmentsAccrued";
+
+        public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_NYFRAGMENTSDEBITED:String = "#messenger:serviceChannelMessages/invoiceReceived/nyFragmentsDebited";
+
+        public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_TOYTYPEWRAPPER:String = "#messenger:serviceChannelMessages/invoiceReceived/toyTypeWrapper";
 
         public static const SERVICECHANNELMESSAGES_DURATIONOFPREMIUMACCOUNTEXPIRES:String = "#messenger:serviceChannelMessages/durationOfPremiumAccountExpires";
 
@@ -1402,6 +1424,12 @@ package
         public static const SERVICECHANNELMESSAGES_RECRUITREMINDER_TEXT:String = "#messenger:serviceChannelMessages/recruitReminder/text";
 
         public static const SERVICECHANNELMESSAGES_RECRUITREMINDERTERMLESS_TEXT:String = "#messenger:serviceChannelMessages/recruitReminderTermless/text";
+
+        public static const SERVICECHANNELMESSAGES_LOOTBOXESGIFT_HEADER:String = "#messenger:serviceChannelMessages/lootBoxesGift/header";
+
+        public static const SERVICECHANNELMESSAGES_LOOTBOXESGIFT_BODY:String = "#messenger:serviceChannelMessages/lootBoxesGift/body";
+
+        public static const SERVICECHANNELMESSAGES_LOOTBOXESGIFT_BUTTON:String = "#messenger:serviceChannelMessages/lootBoxesGift/button";
 
         public static const COMMAND_SUCCESS_USERBAN:String = "#messenger:command/success/USERBAN";
 
@@ -1851,6 +1879,8 @@ package
 
         public static const SERVICECHANNELMESSAGES_FLEXCHANGE_QUESTS_REWARD:String = "#messenger:serviceChannelMessages/flExchange/quests/reward";
 
+        public static const SERVICECHANNELMESSAGES_NEWYEARTALISMAN_BUTTON:String = "#messenger:serviceChannelMessages/newYearTalisman/button";
+
         public static const SERVICECHANNELMESSAGES_RANKEDFINALEAWARDSNOTIFICATION_TITLE:String = "#messenger:serviceChannelMessages/rankedFinaleAwardsNotification/title";
 
         public static const SERVICECHANNELMESSAGES_RANKEDFINALEAWARDSNOTIFICATION_CONGRATULATION:String = "#messenger:serviceChannelMessages/rankedFinaleAwardsNotification/congratulation";
@@ -1982,7 +2012,8 @@ package
 
         public static function getSquadChannelTooltipsStatus(param1:String) : String
         {
-            var _loc2_:String = "#messenger:" + "dialogs/squadChannel/tooltips/status/" + param1;
+            var _loc2_:String = null;
+            _loc2_ = "#messenger:" + "dialogs/squadChannel/tooltips/status/" + param1;
             if(DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_ENUM.indexOf(_loc2_) == -1)
             {
                 DebugUtils.LOG_WARNING("[getSquadChannelTooltipsStatus]:locale key \"" + _loc2_ + "\" was not found");

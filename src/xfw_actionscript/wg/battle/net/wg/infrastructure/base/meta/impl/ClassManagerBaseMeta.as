@@ -782,6 +782,16 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.settings.vo.config.marker.MarkerSettingsDataVo;
     import net.wg.gui.login.impl.components.LoginLogos;
     import net.wg.gui.login.impl.ev.LoginLogosEvent;
+    import net.wg.gui.ny.cmpnts.NYButtonBarGroup;
+    import net.wg.gui.ny.cmpnts.NYCraftLevelsBlock;
+    import net.wg.gui.ny.cmpnts.NYCraftLevelsBlockAlt;
+    import net.wg.gui.ny.cmpnts.NYCraftSettingsBlock;
+    import net.wg.gui.ny.cmpnts.NYLinearSlider;
+    import net.wg.gui.ny.cmpnts.NYRadialSlider;
+    import net.wg.gui.ny.cmpnts.NYSliderBase;
+    import net.wg.gui.ny.cmpnts.NySliderBlock;
+    import net.wg.gui.ny.cmpnts.NYSliderTab;
+    import net.wg.gui.ny.ev.NYSliderEv;
     import net.wg.gui.popover.AcousticButton;
     import net.wg.gui.popover.AcousticPopover;
     import net.wg.gui.popover.data.AcousticItemData;
@@ -806,6 +816,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.infrastructure.base.AbstractWindowView;
     import net.wg.infrastructure.base.AbstractWrapperView;
     import net.wg.infrastructure.base.Animation;
+    import net.wg.infrastructure.base.BackportPopOverCaller;
     import net.wg.infrastructure.base.BaseLayout;
     import net.wg.infrastructure.base.BaseViewWrapper;
     import net.wg.infrastructure.base.ComponentWithModel;
@@ -2427,6 +2438,26 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_LOGIN_IMPL_EV_LOGINLOGOSEVENT:Class = LoginLogosEvent;
 
+        public static const NET_WG_GUI_NY_CMPNTS_NYBUTTONBARGROUP:Class = NYButtonBarGroup;
+
+        public static const NET_WG_GUI_NY_CMPNTS_NYCRAFTLEVELSBLOCK:Class = NYCraftLevelsBlock;
+
+        public static const NET_WG_GUI_NY_CMPNTS_NYCRAFTLEVELSBLOCKALT:Class = NYCraftLevelsBlockAlt;
+
+        public static const NET_WG_GUI_NY_CMPNTS_NYCRAFTSETTINGSBLOCK:Class = NYCraftSettingsBlock;
+
+        public static const NET_WG_GUI_NY_CMPNTS_NYLINEARSLIDER:Class = NYLinearSlider;
+
+        public static const NET_WG_GUI_NY_CMPNTS_NYRADIALSLIDER:Class = NYRadialSlider;
+
+        public static const NET_WG_GUI_NY_CMPNTS_NYSLIDERBASE:Class = NYSliderBase;
+
+        public static const NET_WG_GUI_NY_CMPNTS_NYSLIDERBLOCK:Class = NySliderBlock;
+
+        public static const NET_WG_GUI_NY_CMPNTS_NYSLIDERTAB:Class = NYSliderTab;
+
+        public static const NET_WG_GUI_NY_EV_NYSLIDEREV:Class = NYSliderEv;
+
         public static const NET_WG_GUI_POPOVER_ACOUSTICBUTTON:Class = AcousticButton;
 
         public static const NET_WG_GUI_POPOVER_ACOUSTICPOPOVER:Class = AcousticPopover;
@@ -2474,6 +2505,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_INFRASTRUCTURE_BASE_ABSTRACTWRAPPERVIEW:Class = AbstractWrapperView;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_ANIMATION:Class = Animation;
+
+        public static const NET_WG_INFRASTRUCTURE_BASE_BACKPORTPOPOVERCALLER:Class = BackportPopOverCaller;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_BASELAYOUT:Class = BaseLayout;
 

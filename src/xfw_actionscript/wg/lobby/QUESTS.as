@@ -147,6 +147,12 @@ package
 
         public static const BONUSES_NOTAVAILABLE:String = "#quests:bonuses/notAvailable";
 
+        public static const BONUSNAME_NY21FILLERS:String = "#quests:bonusName/ny21Fillers";
+
+        public static const BONUSES_VARIADICDISCOUNT_DISCOUNTAMOUNT:String = "#quests:bonuses/variadicDiscount/discountAmount";
+
+        public static const BONUSES_VARIADICDISCOUNT_BUTTONLABEL:String = "#quests:bonuses/variadicDiscount/buttonLabel";
+
         public static const QUESTS_TITLE:String = "#quests:quests/title";
 
         public static const QUESTS_TITLE_MANEUVERSQUESTS:String = "#quests:quests/title/maneuversQuests";

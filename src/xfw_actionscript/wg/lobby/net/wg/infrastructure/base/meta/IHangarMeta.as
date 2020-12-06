@@ -53,6 +53,8 @@ package net.wg.infrastructure.base.meta
 
         function as_setNotificationEnabled(param1:Boolean) : void;
 
+        function as_setLootboxesVisible(param1:Boolean) : void;
+
         function as_createDQWidget() : void;
 
         function as_destroyDQWidget() : void;

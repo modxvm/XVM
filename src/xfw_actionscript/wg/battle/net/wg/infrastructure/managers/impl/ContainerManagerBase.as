@@ -117,6 +117,11 @@ package net.wg.infrastructure.managers.impl
             super.onDispose();
         }
 
+        override protected function setContainersVisible(param1:Boolean, param2:Vector.<int>) : void
+        {
+            this.setVisibleContainers(param1,param2);
+        }
+
         public function addGFItemInContainer(param1:uint, param2:IManagedContent, param3:Boolean = false) : void
         {
             this.addItemInContainer(param1,param2,param3);
@@ -271,6 +276,11 @@ package net.wg.infrastructure.managers.impl
             throw new InfrastructureException("net.wg.infrastructure.base.BaseView is not found using name = " + param1);
         }
 
+        public function as_storeContainersVisible() : void
+        {
+            this.storeVisibleContainers();
+        }
+
         public function as_unregisterContainer(param1:int) : void
         {
             assertNotNull(this._containersMap[param1],"ContainerManager.as_unregisterContainer container for layer " + param1 + " is not registered");
@@ -370,7 +380,7 @@ package net.wg.infrastructure.managers.impl
             for each(_loc2_ in _loc5_)
             {
                 _loc3_ = this.getInteractiveContainer(LAYER_ORDER.indexOf(_loc2_));
-                if(!(!_loc3_ || _loc3_ == param1))
+                if(!(!_loc3_ || _loc3_ == param1 || !_loc3_.visible))
                 {
                     _loc6_ = _loc3_.getTopmostView() as IWaitingView;
                     if(!(_loc6_ && !_loc6_.isFocusable))

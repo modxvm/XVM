@@ -14,6 +14,10 @@ package net.wg.gui.notification.vo
 
         public var defaultIcon:String = "";
 
+        public var nyData:Object = null;
+
+        public var buttonsAlign:String = "left";
+
         private var _buttonsLayout:Vector.<ButtonVO>;
 
         private var _buttonsStates:Object;

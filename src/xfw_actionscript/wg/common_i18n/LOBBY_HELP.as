@@ -33,6 +33,8 @@ package
 
         public static const HANGAR_AMMUNITIONPANEL_BATTLEABILITIES:String = "#lobby_help:hangar/ammunitionPanel/battleAbilities";
 
+        public static const HANGAR_AMMUNITIONPANEL_TOGGLENYSTYLE:String = "#lobby_help:hangar/ammunitionPanel/toggleNYStyle";
+
         public static const HANGAR_CREW:String = "#lobby_help:hangar/crew";
 
         public static const HANGAR_VEHICLE_PARAMETERS:String = "#lobby_help:hangar/vehicle-parameters";
@@ -53,7 +55,7 @@ package
 
         public static const HANGAR_SESSIONSTATS:String = "#lobby_help:hangar/sessionStats";
 
-        public static const HANGAR_AMMUNITIONPANEL_ENUM:Array = [HANGAR_AMMUNITIONPANEL_OPTDEVICES,HANGAR_AMMUNITIONPANEL_SHELLS,HANGAR_AMMUNITIONPANEL_CONSUMABLES,HANGAR_AMMUNITIONPANEL_BATTLEBOOSTERS,HANGAR_AMMUNITIONPANEL_BATTLEABILITIES];
+        public static const HANGAR_AMMUNITIONPANEL_ENUM:Array = [HANGAR_AMMUNITIONPANEL_OPTDEVICES,HANGAR_AMMUNITIONPANEL_SHELLS,HANGAR_AMMUNITIONPANEL_CONSUMABLES,HANGAR_AMMUNITIONPANEL_BATTLEBOOSTERS,HANGAR_AMMUNITIONPANEL_BATTLEABILITIES,HANGAR_AMMUNITIONPANEL_TOGGLENYSTYLE];
 
         public function LOBBY_HELP()
         {

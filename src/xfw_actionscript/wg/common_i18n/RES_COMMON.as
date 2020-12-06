@@ -29,6 +29,10 @@ package
 
         public static const MAPS_ICONS_DEMOUNTKIT_BG:String = "../maps/icons/demountKit/bg.png";
 
+        public static const MAPS_ICONS_NEW_YEAR_LEVELS_REWARDS_LEVELS_BG:String = "../maps/icons/new_year/levels_rewards/levels/bg.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_TOOLTIPS_DISCOUNT_REWARD_TOOLTIP_BG:String = "../maps/icons/new_year/tooltips/discount_reward_tooltip/bg.png";
+
         public static const MAPS_ICONS_PREMACC_DASHBOARD_HEADER_BADGESLOT_BG:String = "../maps/icons/premacc/dashboard/header/badgeSlot/bg.png";
 
         public static const MAPS_ICONS_TANKMEN_ICONS_SMALL_USSR_DOG_1:String = "../maps/icons/tankmen/icons/small/ussr-dog-1.png";

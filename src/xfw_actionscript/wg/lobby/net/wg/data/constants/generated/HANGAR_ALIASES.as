@@ -53,6 +53,10 @@ package net.wg.data.constants.generated
 
         public static const VEH_PARAM_RENDERER_STATE_EXTRA:String = "extra";
 
+        public static const NY_MAIN_WIDGET_UI:String = "NYMainWidgetUI";
+
+        public static const LOOTBOXES_ENTRANCE_POINT:String = "lootboxesEntrancePoint";
+
         public static const PROGRESSIVE_REWARD_WIDGET:String = "progressiveRewardWdgt";
 
         public static const DAILY_QUEST_WIDGET:String = "dqWidget";
@@ -66,6 +70,14 @@ package net.wg.data.constants.generated
         public static const AMMUNITION_SETUP_VIEW_INJECT:String = "ammunitionSetupViewInject";
 
         public static const CRAFT_MACHINE_ENTRY_POINT:String = "CraftMachineEntryPoint";
+
+        public static const NY_MAIN_VIEW_GF_INJECT:String = "nyMainViewGFInjectUI";
+
+        public static const NY_MAIN_VIEW_UB_INJECT:String = "nyMainViewUBInjectUI";
+
+        public static const NY_MAIN_VIEW_MAIN_MENU_INJECT:String = "nyMainViewMainMenuInjectUI";
+
+        public static const NY_MAIN_VIEW_SIDEBAR_UB_INJECT:String = "nyMainViewSidebarInjectUI";
 
         public function HANGAR_ALIASES()
         {

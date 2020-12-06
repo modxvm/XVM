@@ -39,5 +39,9 @@ package net.wg.mock
         {
             return null;
         }
+
+        public function set popoverCaller(param1:IPopOverCaller) : void
+        {
+        }
     }
 }
