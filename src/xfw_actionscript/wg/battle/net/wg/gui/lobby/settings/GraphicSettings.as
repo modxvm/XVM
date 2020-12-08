@@ -475,6 +475,14 @@ package net.wg.gui.lobby.settings
             return _loc4_;
         }
 
+        public function onSettingsChanged() : void
+        {
+            if(currentScreenModeId == SettingsConfigHelper.RESOLUTION)
+            {
+                this.updateColorSettingsEnabled();
+            }
+        }
+
         private function updateCurrentTab() : void
         {
             screenForm.visible = tabs.selectedIndex == 0;
@@ -694,7 +702,7 @@ package net.wg.gui.lobby.settings
             var _loc2_:* = currentScreenModeId == SettingsConfigHelper.RESOLUTION;
             if(_loc2_)
             {
-                _loc1_ = SettingsControlProp(data[SettingsConfigHelper.RESOLUTION]).changedVal == SettingsControlProp(data[SettingsConfigHelper.NATIVE_RESOLUTION]).changedVal && this._settingsConfigHelper.changesData.length <= 0;
+                _loc1_ = this.gammaSettingsEnabled();
             }
             else
             {
@@ -702,6 +710,12 @@ package net.wg.gui.lobby.settings
             }
             gammaSettingButton.enabled = _loc1_;
             colorFilterButton.enabled = this._isAdvanced;
+        }
+
+        private function gammaSettingsEnabled() : Boolean
+        {
+            var _loc1_:Object = this._settingsConfigHelper.changesData.getChanges();
+            return SettingsControlProp(data[SettingsConfigHelper.RESOLUTION]).changedVal == SettingsControlProp(data[SettingsConfigHelper.NATIVE_RESOLUTION]).changedVal && !_loc1_.hasOwnProperty(SettingsConfigHelper.RESOLUTION) && !_loc1_.hasOwnProperty(SettingsConfigHelper.RENDER_PIPELINE);
         }
 
         private function setSizeControl(param1:Boolean = true) : void

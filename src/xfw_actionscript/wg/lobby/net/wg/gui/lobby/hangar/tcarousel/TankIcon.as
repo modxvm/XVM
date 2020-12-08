@@ -91,7 +91,14 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
             txtInfo.width = width - W_OFFSET - infoImgOffset ^ 0;
             txtInfo.htmlText = _loc4_;
-            App.utils.commons.updateTextFieldSize(txtInfo,true,true);
+            if(param1.nySlot)
+            {
+                App.utils.commons.updateTextFieldSize(txtInfo,false,true);
+            }
+            else
+            {
+                App.utils.commons.updateTextFieldSize(txtInfo,true,true);
+            }
             txtInfo.x = width - txtInfo.width + infoImgOffset >> 1;
             txtInfo.y = height - txtInfo.height >> 1;
             var _loc3_:TextFormat = txtInfo.getTextFormat();

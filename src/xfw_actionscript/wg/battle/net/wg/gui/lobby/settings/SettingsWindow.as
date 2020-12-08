@@ -116,6 +116,8 @@ package net.wg.gui.lobby.settings
 
         private var _feedbackDataProvider:DataProvider = null;
 
+        private var _graphicSettings:GraphicSettings = null;
+
         private var _isFeedbackDPInstalled:Boolean = false;
 
         private var _needToUpdateGraphicSettings:Boolean = false;
@@ -1197,6 +1199,14 @@ package net.wg.gui.lobby.settings
             var _loc10_:Boolean = this.controlDefValEqNewVal(_loc7_.getByKey(_loc4_),_loc5_);
             onSettingsChangeS(_loc8_,_loc9_);
             this.checkChanges(_loc10_,_loc8_,_loc9_);
+            if(!this._graphicSettings)
+            {
+                this._graphicSettings = this.getGraphicsSettings();
+            }
+            if(this._graphicSettings)
+            {
+                this._graphicSettings.onSettingsChanged();
+            }
             if(_loc4_ == SettingsConfigHelper.MINIMAP_ALPHA_ENABLED && _loc5_)
             {
                 _loc11_ = this._settingsConfigHelper.changesData.getChanges();

@@ -73,7 +73,14 @@ package net.wg.gui.lobby.hangar.tcarousel
             {
                 txtInfo.width = width - infoImgOffset ^ 0;
                 txtInfo.htmlText = param1.smallInfoText;
-                this._commons.updateTextFieldSize(txtInfo,true,true);
+                if(param1.nySlot)
+                {
+                    this._commons.updateTextFieldSize(txtInfo,false,true);
+                }
+                else
+                {
+                    this._commons.updateTextFieldSize(txtInfo,true,true);
+                }
                 if(txtInfo.height > height)
                 {
                     txtInfo.height = height;

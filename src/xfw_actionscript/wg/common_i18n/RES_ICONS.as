@@ -8163,6 +8163,90 @@ package
 
         public static const MAPS_ICONS_LOBBY_SETTINGS_BLURED_BG:String = "../maps/icons/lobby/settings_blured_bg.png";
 
+        public static const MAPS_ICONS_LOOTBOXES_ARROW:String = "../maps/icons/lootboxes/arrow.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_BIGCONVERT:String = "../maps/icons/lootboxes/bigConvert.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_CAPTIONSHADOW:String = "../maps/icons/lootboxes/captionShadow.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_CAROUSELBG:String = "../maps/icons/lootboxes/carouselBg.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_COUNTERBG:String = "../maps/icons/lootboxes/counterBg.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_DEVIDER:String = "../maps/icons/lootboxes/devider.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_ERRORBG:String = "../maps/icons/lootboxes/errorBg.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_FOCUS:String = "../maps/icons/lootboxes/focus.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_FRAGMENTS:String = "../maps/icons/lootboxes/fragments.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_FRAGMENTS_BIG:String = "../maps/icons/lootboxes/fragments_big.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_FRAGMENTS_EPIC:String = "../maps/icons/lootboxes/fragments_epic.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_FRAGMENTS_SMALL:String = "../maps/icons/lootboxes/fragments_small.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_ICONVIDEOOFF:String = "../maps/icons/lootboxes/iconVideoOff.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_ICONVIDEOON:String = "../maps/icons/lootboxes/iconVideoOn.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_LEFT_SHADOW:String = "../maps/icons/lootboxes/left_shadow.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_LOOTBOXICON:String = "../maps/icons/lootboxes/lootboxIcon.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_LOOTBOXICONEMPTY:String = "../maps/icons/lootboxes/lootboxIconEmpty.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_LOOTBOXICONEMPTYNOBG:String = "../maps/icons/lootboxes/lootboxIconEmptyNoBg.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_MULTIOPENRENDERERBG:String = "../maps/icons/lootboxes/multiOpenRendererBg.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_PAUSE:String = "../maps/icons/lootboxes/pause.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_PLAY:String = "../maps/icons/lootboxes/play.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_RIGHT_SHADOW:String = "../maps/icons/lootboxes/right_shadow.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_VIGNETE:String = "../maps/icons/lootboxes/vignete.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_SPECIALREWARD_F116_BAT_CHATILLON_BOURRASQUE:String = "../maps/icons/lootboxes/specialReward/F116_Bat_Chatillon_Bourrasque.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_SPECIALREWARD_GB109_GSOR_1008:String = "../maps/icons/lootboxes/specialReward/GB109_GSOR_1008.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_SPECIALREWARD_IT18_PROGETTO_C45_MOD_71:String = "../maps/icons/lootboxes/specialReward/It18_Progetto_C45_mod_71.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_SPECIALREWARD_NY20MEN:String = "../maps/icons/lootboxes/specialReward/ny20men.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_SPECIALREWARD_NY20SNOWMEN:String = "../maps/icons/lootboxes/specialReward/ny20snowmen.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_SPECIALREWARD_R177_ISU_152K_BL10:String = "../maps/icons/lootboxes/specialReward/R177_ISU_152K_BL10.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_SPECIALREWARD_STYLE_A83_T110E4:String = "../maps/icons/lootboxes/specialReward/style_A83_T110E4.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_SPECIALREWARD_STYLE_CH41_WZ_111_5A:String = "../maps/icons/lootboxes/specialReward/style_Ch41_WZ_111_5A.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_SPECIALREWARD_STYLE_F88_AMX_13_105:String = "../maps/icons/lootboxes/specialReward/style_F88_AMX_13_105.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_SPECIALREWARD_STYLE_G42_MAUS:String = "../maps/icons/lootboxes/specialReward/style_G42_Maus.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_SPECIALREWARD_STYLE_G56_E_100:String = "../maps/icons/lootboxes/specialReward/style_G56_E_100.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_SPECIALREWARD_STYLE_G72_JAGDPZ_E100:String = "../maps/icons/lootboxes/specialReward/style_G72_JagdPz_E100.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_SPECIALREWARD_STYLE_GB31_CONQUEROR_GUN:String = "../maps/icons/lootboxes/specialReward/style_GB31_Conqueror_Gun.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_SPECIALREWARD_STYLE_J16_ST_B1:String = "../maps/icons/lootboxes/specialReward/style_J16_ST_B1.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_SPECIALREWARD_STYLE_PL15_60TP_LEWANDOWSKIEGO:String = "../maps/icons/lootboxes/specialReward/style_Pl15_60TP_Lewandowskiego.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_SPECIALREWARD_STYLE_R148_OBJECT_430_U:String = "../maps/icons/lootboxes/specialReward/style_R148_Object_430_U.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_SPECIALREWARD_STYLE_R97_OBJECT_140:String = "../maps/icons/lootboxes/specialReward/style_R97_Object_140.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_TYPES_NEWYEAR_PREMIUM:String = "../maps/icons/lootboxes/types/newYear_premium.png";
+
+        public static const MAPS_ICONS_LOOTBOXES_TYPES_NEWYEAR_USUAL:String = "../maps/icons/lootboxes/types/newYear_usual.png";
+
         public static const MAPS_ICONS_MANUAL_BACKGROUNDS_ACHIEVES:String = "../maps/icons/manual/backgrounds/achieves.png";
 
         public static const MAPS_ICONS_MANUAL_BACKGROUNDS_AMMO:String = "../maps/icons/manual/backgrounds/ammo.png";
@@ -10488,26 +10572,6 @@ package
         public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_LEVELS_ALT_LEVEL8:String = "../maps/icons/new_year/level_up_view/levels_alt/level8.png";
 
         public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_LEVELS_ALT_LEVEL9:String = "../maps/icons/new_year/level_up_view/levels_alt/level9.png";
-
-        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_SNOWFLAKES_324X324_1:String = "../maps/icons/new_year/level_up_view/snowflakes/324x324_1.png";
-
-        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_SNOWFLAKES_324X324_10:String = "../maps/icons/new_year/level_up_view/snowflakes/324x324_10.png";
-
-        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_SNOWFLAKES_324X324_2:String = "../maps/icons/new_year/level_up_view/snowflakes/324x324_2.png";
-
-        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_SNOWFLAKES_324X324_3:String = "../maps/icons/new_year/level_up_view/snowflakes/324x324_3.png";
-
-        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_SNOWFLAKES_324X324_4:String = "../maps/icons/new_year/level_up_view/snowflakes/324x324_4.png";
-
-        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_SNOWFLAKES_324X324_5:String = "../maps/icons/new_year/level_up_view/snowflakes/324x324_5.png";
-
-        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_SNOWFLAKES_324X324_6:String = "../maps/icons/new_year/level_up_view/snowflakes/324x324_6.png";
-
-        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_SNOWFLAKES_324X324_7:String = "../maps/icons/new_year/level_up_view/snowflakes/324x324_7.png";
-
-        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_SNOWFLAKES_324X324_8:String = "../maps/icons/new_year/level_up_view/snowflakes/324x324_8.png";
-
-        public static const MAPS_ICONS_NEW_YEAR_LEVEL_UP_VIEW_SNOWFLAKES_324X324_9:String = "../maps/icons/new_year/level_up_view/snowflakes/324x324_9.png";
 
         public static const MAPS_ICONS_NEW_YEAR_LOOTBOXES_AUTO_OPEN_BACKGROUND:String = "../maps/icons/new_year/lootboxes/auto_open_background.png";
 
@@ -14692,6 +14756,8 @@ package
         public static const MAPS_ICONS_NEW_YEAR_VEHICLES_VIEW_ICONS_SLOTS_SLOT_3:String = "../maps/icons/new_year/vehicles_view/icons/slots/slot_3.png";
 
         public static const MAPS_ICONS_NEW_YEAR_WIDGET_BOOSTER:String = "../maps/icons/new_year/widget/booster.png";
+
+        public static const MAPS_ICONS_NEW_YEAR_WIDGET_NYBIGIDLEANIM:String = "../maps/icons/new_year/widget/nyBigIdleAnim.png";
 
         public static const MAPS_ICONS_NEW_YEAR_WIDGET_HEADER_TITLE_BE:String = "../maps/icons/new_year/widget/header_title/BE.png";
 

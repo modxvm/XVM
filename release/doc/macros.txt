@@ -183,12 +183,12 @@ Legend:
 ┌───┬────────────────────┬───┬───┬───┬───┬───┬───┬─────────────────────────────────────────────────
 │SDH│ macro              │ BL│ PP│ SF│ MM│ VM│BLb│ Description
 ├───┼────────────────────┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────────
-│ H │ {{x-enabled}}      │   │ X │ X │ X │ X │   │ xmqp services enabled
-│ H │ {{x-sense-on}}     │   │ X │ X │ X │ X │   │ player studied "sixth sense" perk
-│ H │ {{x-spotted}}      │   │   │   │ X │ X │   │ player vehicle is spotted
-│ H │ {{x-fire}}         │   │   │   │ X │ X │   │ fire in vehicle
-│ H │ {{x-overturned}}   │   │   │   │ X │ X │   │ player vehicle is overturned
-│ H │ {{x-drowning}}     │   │   │   │ X │ X │   │ player vehicle is drowning
+│ H │ {{x-enabled}}      │   │ X │ X │ X │ X │   │ value 'true' if XMQP services enabled, empty - if not
+│ H │ {{x-sense-on}}     │   │ X │ X │ X │ X │   │ value 'true' if player studied "sixth sense" perk, empty - if not
+│ H │ {{x-spotted}}      │   │   │   │ X │ X │   │ value 'true' if player vehicle is spotted, empty - if not
+│ H │ {{x-fire}}         │   │   │   │ X │ X │   │ value 'true' if fire in vehicle, empty - if not
+│ H │ {{x-overturned}}   │   │   │   │ X │ X │   │ value 'true' if player vehicle is overturned, empty - if not
+│ H │ {{x-drowning}}     │   │   │   │ X │ X │   │ value 'true' if player vehicle is drowning, empty - if not
 └───┴────────────────────┴───┴───┴───┴───┴───┴───┴─────────────────────────────────────────────────
 
   Capture bar macros
