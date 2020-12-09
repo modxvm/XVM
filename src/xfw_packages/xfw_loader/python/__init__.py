@@ -444,12 +444,11 @@ def mods_load():
 
             #load python feature
             if 'python' in mod['features']:
-                if mod['fs'] == 'realfs':
-                    open(mod['dir_path'] + '/__init__.py', 'a').close()
-                    compileall.compile_dir(mod['dir_path'], quiet = 1)
-
-
                 try:
+                    if mod['fs'] == 'realfs':
+                        open(mod['dir_path'] + '/__init__.py', 'a').close()
+                        compileall.compile_dir(mod['dir_path'], quiet = 1)
+
                     #try to load module
                     module = importlib.import_module('%s.python' % mod['dir_name'])
 
