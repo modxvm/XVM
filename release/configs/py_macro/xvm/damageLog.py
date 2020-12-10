@@ -2,6 +2,7 @@
 # ktulho <https://kr.cm/f/p/17624/>
 
 import BigWorld
+import game
 import ResMgr
 import nations
 from Avatar import PlayerAvatar
@@ -1101,25 +1102,25 @@ def PlayerAvatar__destroyGUI(self):
     _lastHitBackground.reset()
 
 
-@registerEvent(PlayerAvatar, 'handleKey')
-def PlayerAvatar_handleKey(self, isDown, key, mods):
+@registerEvent(game, 'handleKeyEvent')
+def game_handleKeyEvent(event):
     global isDownAlt
     if isShowDamageLog:
+        isDown, key, mods, isRepeat = game.convertKeyEvent(event)
         hotkey = _config.get('hotkeys/damageLogAltMode')
         if hotkey[ENABLED] and (key == hotkey['keyCode']):
-            if isDown:
-                if hotkey['onHold']:
+            if hotkey['onHold']:
+                if isDown:
                     if not isDownAlt:
                         isDownAlt = True
                         as_event(EVENTS_NAMES.ON_HIT)
                 else:
-                    isDownAlt = not isDownAlt
-                    as_event(EVENTS_NAMES.ON_HIT)
-            else:
-                if hotkey['onHold']:
                     if isDownAlt:
                         isDownAlt = False
                         as_event(EVENTS_NAMES.ON_HIT)
+            else:
+                    isDownAlt = not isDownAlt
+                    as_event(EVENTS_NAMES.ON_HIT)
 
 
 def dLog():

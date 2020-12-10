@@ -2,6 +2,7 @@
 # ktulho <https://kr.cm/f/p/17624/>
 
 import BigWorld
+import game
 import ResMgr
 import nations
 from Avatar import PlayerAvatar
@@ -926,24 +927,24 @@ def PlayerAvatar__destroyGUI(self):
         g_dataHitLog.reset()
 
 
-@registerEvent(PlayerAvatar, 'handleKey')
-def PlayerAvatar_handleKey(self, isDown, key, mods):
+@registerEvent(game, 'handleKeyEvent')
+def game_handleKeyEvent(event):
     if _config.get(HIT_LOG_ENABLED, True) and battle.isBattleTypeSupported:
+        isDown, key, mods, isRepeat = game.convertKeyEvent(event)
         hotkey = _config.get('hotkeys/hitLogAltMode')
         if hotkey['enabled'] and (key == hotkey['keyCode']):
-            if isDown:
-                if hotkey['onHold']:
+            if hotkey['onHold']:
+                if isDown:
                     if not g_hitLogs.isDownAlt:
                         g_hitLogs.isDownAlt = True
                         as_event(ON_HIT_LOG)
                 else:
-                    g_hitLogs.isDownAlt = not g_hitLogs.isDownAlt
-                    as_event(ON_HIT_LOG)
-            else:
-                if hotkey['onHold']:
                     if g_hitLogs.isDownAlt:
                         g_hitLogs.isDownAlt = False
                         as_event(ON_HIT_LOG)
+            else:
+                g_hitLogs.isDownAlt = not g_hitLogs.isDownAlt
+                as_event(ON_HIT_LOG)
 
 
 def hLog():
