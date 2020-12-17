@@ -7767,6 +7767,12 @@ package
 
         public static const SPECIAL_STYLE_NY_2021_CHUCK_DESC_LONG:String = "#vehicle_customization:special_style/ny_2021_chuck_desc/long";
 
+        public static const SPECIAL_STYLE_EU_COMMUNITY_2020:String = "#vehicle_customization:special_style/eu_community_2020";
+
+        public static const SPECIAL_STYLE_EU_COMMUNITY_2020_DESC:String = "#vehicle_customization:special_style/eu_community_2020_desc";
+
+        public static const SPECIAL_STYLE_EU_COMMUNITY_2020_DESC_LONG:String = "#vehicle_customization:special_style/eu_community_2020_desc/long";
+
         public static const CUSTOMIZATION_POPOVER_STYLE_SUMMER:String = "#vehicle_customization:customization/popover/style/summer";
 
         public static const CUSTOMIZATION_POPOVER_STYLE_DESERT:String = "#vehicle_customization:customization/popover/style/desert";

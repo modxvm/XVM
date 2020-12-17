@@ -2,7 +2,7 @@
 
   #### General
 
-  * fixed keyboard shortcuts in hitLog and damageLog
+  * Fixed keyboard shortcuts in hitLog and damageLog
 
 ______________________________
 

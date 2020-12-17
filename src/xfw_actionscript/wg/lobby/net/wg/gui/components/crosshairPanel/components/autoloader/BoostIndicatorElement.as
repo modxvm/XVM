@@ -85,8 +85,9 @@ package net.wg.gui.components.crosshairPanel.components.autoloader
             this.onFadeOutComplete = null;
         }
 
-        public function set currentFrame(param1:int) : void
+        public function set percent(param1:int) : void
         {
+            param1++;
             if(param1 < 1 || param1 > 100)
             {
                 this._soundProgress = START;
@@ -119,6 +120,35 @@ package net.wg.gui.components.crosshairPanel.components.autoloader
             this._prevFrame = param1;
         }
 
+        public function set currentFrame(param1:int) : void
+        {
+            gotoAndStop(param1);
+            if(this.soundsEnabled && this._prevFrame != param1)
+            {
+                if(param1 == START)
+                {
+                    this.dispatchSoundEvent(AUTOLOADERBOOSTVIEWSOUNDS.START);
+                    this._soundProgress = PROGRESS_QUARTER;
+                }
+                else if(param1 == PROGRESS_QUARTER)
+                {
+                    this.dispatchSoundEvent(AUTOLOADERBOOSTVIEWSOUNDS.PROGRESS);
+                    this._soundProgress = PROGRESS_HALF;
+                }
+                else if(param1 == PROGRESS_HALF)
+                {
+                    this.dispatchSoundEvent(AUTOLOADERBOOSTVIEWSOUNDS.PROGRESS);
+                    this._soundProgress = CHARGE_MAX;
+                }
+                else if(param1 == CHARGE_MAX)
+                {
+                    this.onMaxCharge();
+                    this._soundProgress = START;
+                }
+            }
+            this._prevFrame = param1;
+        }
+
         private function dispatchSoundEvent(param1:String) : void
         {
             dispatchEvent(new CrosshairPanelEvent(CrosshairPanelEvent.SOUND,param1));
@@ -140,6 +170,7 @@ package net.wg.gui.components.crosshairPanel.components.autoloader
                 return;
             }
             this._durationMSec = 0;
+            this._soundProgress = CHARGE_MAX;
             this.clearTween();
             this.cancelTasks();
             if(param1)

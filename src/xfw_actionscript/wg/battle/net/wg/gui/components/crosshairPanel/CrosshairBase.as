@@ -94,6 +94,7 @@ package net.wg.gui.components.crosshairPanel
             this.timerCompleteTextField.visible = true;
             this.ammoLowTextField.visible = false;
             this.ammoNormalTextField.visible = true;
+            addEventListener(CrosshairPanelEvent.SOUND,this.onCrosshairPanelSoundHandler);
         }
 
         public function autoloaderShowShot() : void
@@ -131,6 +132,7 @@ package net.wg.gui.components.crosshairPanel
 
         public function dispose() : void
         {
+            removeEventListener(CrosshairPanelEvent.SOUND,this.onCrosshairPanelSoundHandler);
             this.timerProgressTextField = null;
             this.timerCompleteTextField = null;
             this._currentTimerTextField = null;
@@ -546,6 +548,14 @@ package net.wg.gui.components.crosshairPanel
         public function set isUseFrameAnimation(param1:Boolean) : void
         {
             this._isUseFrameAnimation = param1;
+        }
+
+        private function onCrosshairPanelSoundHandler(param1:CrosshairPanelEvent) : void
+        {
+            if(!visible)
+            {
+                param1.stopImmediatePropagation();
+            }
         }
     }
 }

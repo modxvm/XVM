@@ -169,7 +169,7 @@ package net.wg.gui.components.crosshairPanel.components.autoloader
                 this._isCharging = false;
             }
             this._rechargeEnabled = false;
-            this.left.currentFrame = this.right.currentFrame = param2 + 1;
+            this.left.percent = this.right.percent = param2;
             this.stateParams.percent = param2;
         }
 
