@@ -1,4 +1,12 @@
-﻿### XVM 8.7.0
+﻿### XVM 8.7.1
+
+  #### General
+
+  * fixed keyboard shortcuts in hitLog and damageLog
+
+______________________________
+
+### XVM 8.7.0
 
   #### General
 
