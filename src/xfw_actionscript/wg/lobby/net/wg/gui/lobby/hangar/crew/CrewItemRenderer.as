@@ -72,7 +72,15 @@ package net.wg.gui.lobby.hangar.crew
 
         private static const DROPDOWN_LIST_NAME:String = "dropDownList";
 
+        private static const OVER_ANIMATION_END_FRAME:int = 19;
+
+        private static const OUT_ANIMATION_START_FRAME:int = 50;
+
+        private static const SWAP_ICONS_FRAME_OFFSET:int = 3;
+
         public var icon:UILoaderAlt = null;
+
+        public var iconExtra:UILoaderAlt = null;
 
         public var iconRole:TankmenIcons = null;
 
@@ -109,6 +117,8 @@ package net.wg.gui.lobby.hangar.crew
         public function CrewItemRenderer()
         {
             super();
+            addFrameScript(OVER_ANIMATION_END_FRAME - SWAP_ICONS_FRAME_OFFSET,this.onOverAnimation);
+            addFrameScript(OUT_ANIMATION_START_FRAME + SWAP_ICONS_FRAME_OFFSET,this.onOutAnimation);
         }
 
         override protected function configUI() : void
@@ -130,6 +140,8 @@ package net.wg.gui.lobby.hangar.crew
             this.bg.mouseChildren = false;
             this.tankmenName.mouseEnabled = false;
             this.tankmenName.mouseChildren = false;
+            this.icon.visible = true;
+            this.iconExtra.visible = false;
         }
 
         override protected function showDropdown() : void
@@ -293,6 +305,8 @@ package net.wg.gui.lobby.hangar.crew
 
         override protected function onDispose() : void
         {
+            addFrameScript(OVER_ANIMATION_END_FRAME - SWAP_ICONS_FRAME_OFFSET,null);
+            addFrameScript(OUT_ANIMATION_START_FRAME + SWAP_ICONS_FRAME_OFFSET,null);
             this.hideDropdown();
             if(scrollBar && scrollBar is IDisposable)
             {
@@ -301,6 +315,8 @@ package net.wg.gui.lobby.hangar.crew
             scrollBar = null;
             this.icon.dispose();
             this.icon = null;
+            this.iconExtra.dispose();
+            this.iconExtra = null;
             this.iconRole.dispose();
             this.iconRole = null;
             this.iconRank.dispose();
@@ -364,6 +380,7 @@ package net.wg.gui.lobby.hangar.crew
 
         public function setData(param1:Object) : void
         {
+            var _loc2_:TankmanRoleVO = null;
             close();
             this.data = param1;
             if(!param1)
@@ -371,7 +388,7 @@ package net.wg.gui.lobby.hangar.crew
                 this.visible = false;
                 return;
             }
-            var _loc2_:TankmanRoleVO = TankmanRoleVO(param1);
+            _loc2_ = TankmanRoleVO(param1);
             if(dataProvider != null)
             {
                 dataProvider.cleanUp();
@@ -383,8 +400,8 @@ package net.wg.gui.lobby.hangar.crew
             var _loc5_:TankmanVO = _loc2_.tankman;
             if(_loc5_.iconFile != this.icon.source && _loc5_.iconFile)
             {
-                this.icon.visible = true;
                 this.icon.source = TANKMEN_ICONS_SMALL + _loc5_.iconFile;
+                this.iconExtra.source = this.icon.source;
             }
             if(_loc5_.rankIconFile != this.iconRank.imageLoader.source && _loc5_.rankIconFile)
             {
@@ -610,6 +627,18 @@ package net.wg.gui.lobby.hangar.crew
         {
             param1.stopImmediatePropagation();
             dispatchEvent(param1);
+        }
+
+        private function onOverAnimation() : void
+        {
+            this.iconExtra.visible = true;
+            this.icon.visible = false;
+        }
+
+        private function onOutAnimation() : void
+        {
+            this.icon.visible = true;
+            this.iconExtra.visible = false;
         }
 
         private function onDropDownItemClickHandler(param1:ListEvent) : void

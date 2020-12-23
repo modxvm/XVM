@@ -66,11 +66,11 @@
 
     // The minimum required version of the XVM mod.
     // Минимально необходимая версия мода XVM.
-    "modMinVersion": "8.7.1",
+    "modMinVersion": "8.7.2",
 
     // Config last modified.
     // Дата последней модификации конфига.
-    "date": "17.12.2020"
+    "date": "23.12.2020"
   },
 
   // Parameters for login screen.

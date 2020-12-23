@@ -150,10 +150,9 @@ package net.wg.gui.lobby.missions.components
 
         private function rebuildHorizontal() : void
         {
-            var _loc1_:* = 0;
             this.bg.x = this._currentWidth - this.bg.width >> 1;
             this.messageTF.x = this._currentWidth - this.messageTF.width >> 1;
-            _loc1_ = this._isBigSize?BTN_HALF_GAP:BTN_HALF_GAP_SMALL;
+            var _loc1_:int = this._isBigSize?BTN_HALF_GAP:BTN_HALF_GAP_SMALL;
             this.toChallengeBtn.paddingHorizontal = this.toDailyQuestsBtn.paddingHorizontal = this._isBigSize?10:5;
             this.toChallengeBtn.x = (this._currentWidth >> 1) - this.toChallengeBtn.width - _loc1_ | 0;
             this.toDailyQuestsBtn.x = (this._currentWidth >> 1) + _loc1_ | 0;

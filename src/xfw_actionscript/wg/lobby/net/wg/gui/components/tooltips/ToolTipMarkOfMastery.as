@@ -3,9 +3,9 @@ package net.wg.gui.components.tooltips
     import flash.text.TextField;
     import flash.display.Sprite;
     import net.wg.gui.components.tooltips.helpers.Utils;
+    import net.wg.gui.components.tooltips.VO.ToolTipTankClassVO;
     import net.wg.gui.components.tooltips.VO.ToolTipStatusColorsVO;
     import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
-    import net.wg.gui.components.tooltips.VO.ToolTipTankClassVO;
     import flash.text.TextFormat;
     import flash.text.TextFormatAlign;
     import net.wg.utils.ILocale;
@@ -42,6 +42,8 @@ package net.wg.gui.components.tooltips
 
         override protected function redraw() : void
         {
+            var _loc1_:ToolTipTankClassVO = null;
+            var _loc2_:* = NaN;
             var _loc13_:String = null;
             var _loc14_:String = null;
             var _loc15_:String = null;
@@ -50,8 +52,8 @@ package net.wg.gui.components.tooltips
             topPosition = bgShadowMargin.top + contentMargin.top;
             blockResults = new Vector.<ToolTipBlockResultVO>();
             separators = new Vector.<Separator>();
-            var _loc1_:ToolTipTankClassVO = new ToolTipTankClassVO(_data);
-            var _loc2_:Number = bgShadowMargin.left + contentMargin.left;
+            _loc1_ = new ToolTipTankClassVO(_data);
+            _loc2_ = bgShadowMargin.left + contentMargin.left;
             var _loc3_:TextFormat = new TextFormat();
             _loc3_.leading = -2;
             _loc3_.align = TextFormatAlign.LEFT;

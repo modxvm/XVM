@@ -253,23 +253,11 @@ diff -Naur lobby.orig/net/wg/gui/lobby/battleResults/components/BattleResultImag
              var _loc4_:VehicleIconPreset = null;
              if(this.vehicleIcon.visible = param1)
              {
--                _loc4_ = VehicleIconPreset.getPreset(param3);
-+                //_loc4_ = VehicleIconPreset.getPreset(param3);
+-                _loc4_ = BattleResultImageSwitcherView.getPreset(param3);
++                //_loc4_ = BattleResultImageSwitcherView.getPreset(param3);
                  App.utils.asserter.assertNotNull(_loc4_,"Icon preset for level: " + param3 + Errors.WASNT_FOUND);
                  this.vehicleIcon.source = RES_SHOP.getVehicleIcon(_loc4_.size,param2);
                  this.vehicleIcon.scaleX = this.vehicleIcon.scaleY = _loc4_.scale;
-diff -Naur lobby.orig/net/wg/gui/lobby/techtree/helpers/NationTreeActionsHelper.as lobby/net/wg/gui/lobby/techtree/helpers/NationTreeActionsHelper.as
---- lobby.orig/net/wg/gui/lobby/techtree/helpers/NationTreeActionsHelper.as	2020-08-07 14:30:44.145319000 +0300
-+++ lobby/net/wg/gui/lobby/techtree/helpers/NationTreeActionsHelper.as	2020-08-07 14:41:31.464690500 +0300
-@@ -52,7 +52,7 @@
-         public function NationTreeActionsHelper()
-         {
-             this._scheduler = App.utils.scheduler;
--            this._sequence = new Vector.<NationTreeActionsHelper>();
-+            //this._sequence = new Vector.<NationTreeActionsHelper>();
-             super();
-         }
- 
 diff -Naur lobby.orig/net/wg/gui/lobby/techtree/helpers/NTGraphics.as lobby/net/wg/gui/lobby/techtree/helpers/NTGraphics.as
 --- lobby.orig/net/wg/gui/lobby/techtree/helpers/NTGraphics.as	2020-08-07 14:30:44.145319000 +0300
 +++ lobby/net/wg/gui/lobby/techtree/helpers/NTGraphics.as	2020-08-07 14:41:31.464690500 +0300

@@ -5773,6 +5773,10 @@ package
 
         public static const NOTRECRUITEDTANKMAN_COMMANDER_MAEVE_DESC:String = "#tooltips:notrecruitedtankman/commander_maeve/desc";
 
+        public static const NOTRECRUITEDTANKMAN_COMMANDER_OMELIA_LABEL:String = "#tooltips:notrecruitedtankman/commander_omelia/label";
+
+        public static const NOTRECRUITEDTANKMAN_COMMANDER_OMELIA_DESC:String = "#tooltips:notrecruitedtankman/commander_omelia/desc";
+
         public static const NOTRECRUITEDTANKMAN_NY19MEN_LABEL:String = "#tooltips:notrecruitedtankman/ny19men/label";
 
         public static const NOTRECRUITEDTANKMAN_NY19MEN_DESC:String = "#tooltips:notrecruitedtankman/ny19men/desc";

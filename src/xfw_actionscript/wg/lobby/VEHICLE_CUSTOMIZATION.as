@@ -2065,6 +2065,14 @@ package
 
         public static const CAMOUFLAGE_NY_2021_CHUCK_DESCRIPTION:String = "#vehicle_customization:camouflage/ny_2021_chuck/description";
 
+        public static const CAMOUFLAGE_KOHAKU2021_WHITE_LABEL:String = "#vehicle_customization:camouflage/kohaku2021_white/label";
+
+        public static const CAMOUFLAGE_KOHAKU2021_WHITE_DESCRIPTION:String = "#vehicle_customization:camouflage/kohaku2021_white/description";
+
+        public static const CAMOUFLAGE_KOHAKU2021_RED_LABEL:String = "#vehicle_customization:camouflage/kohaku2021_red/label";
+
+        public static const CAMOUFLAGE_KOHAKU2021_RED_DESCRIPTION:String = "#vehicle_customization:camouflage/kohaku2021_red/description";
+
         public static const EMBLEM:String = "#vehicle_customization:emblem";
 
         public static const EMBLEM_CLAN_CONTENT:String = "#vehicle_customization:emblem/clan_content";
@@ -5048,6 +5056,12 @@ package
         public static const INSCRIPTION_SPECIAL_SPECIAL_448:String = "#vehicle_customization:inscription/special/special_448";
 
         public static const INSCRIPTION_SPECIAL_SPECIAL_449:String = "#vehicle_customization:inscription/special/special_449";
+
+        public static const INSCRIPTION_SPECIAL_SPECIAL_454:String = "#vehicle_customization:inscription/special/special_454";
+
+        public static const INSCRIPTION_SPECIAL_SPECIAL_454_DESCRIPTION:String = "#vehicle_customization:inscription/special/special_454/description";
+
+        public static const INSCRIPTION_SPECIAL_SPECIAL_455:String = "#vehicle_customization:inscription/special/special_455";
 
         public static const ITEM_EMBLEM1:String = "#vehicle_customization:item/emblem1";
 
@@ -9042,6 +9056,10 @@ package
         public static const PROJECTION_DECALS_FLAGS_PROJECTION_DECAL_31:String = "#vehicle_customization:projection_decals/flags/projection_decal_31";
 
         public static const PROJECTION_DECALS_HOLIDAY_PROJECTION_DECAL_51:String = "#vehicle_customization:projection_decals/holiday/projection_decal_51";
+
+        public static const PROJECTION_DECALS_SPECIAL_PROJECTION_DECAL_173:String = "#vehicle_customization:projection_decals/special/projection_decal_173";
+
+        public static const PROJECTION_DECALS_SPECIAL_PROJECTION_DECAL_173_DESCRIPTION:String = "#vehicle_customization:projection_decals/special/projection_decal_173/description";
 
         public static const PROPERTYSHEET_KEYBOARD_HINT:String = "#vehicle_customization:propertySheet/keyboard/hint";
 
