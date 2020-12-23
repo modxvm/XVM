@@ -2,6 +2,7 @@
 
   #### General
 
+  * Compatibility with World of Tanks 1.11.0.0 2020.12.23
   * Fixed keyboard shortcuts in hitLog and damageLog
 
 ______________________________
