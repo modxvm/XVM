@@ -1119,6 +1119,7 @@ def game_handleKeyEvent(event):
                         isDownAlt = False
                         as_event(EVENTS_NAMES.ON_HIT)
             else:
+                if isDown:
                     isDownAlt = not isDownAlt
                     as_event(EVENTS_NAMES.ON_HIT)
 

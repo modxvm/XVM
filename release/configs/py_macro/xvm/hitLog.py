@@ -943,8 +943,9 @@ def game_handleKeyEvent(event):
                         g_hitLogs.isDownAlt = False
                         as_event(ON_HIT_LOG)
             else:
-                g_hitLogs.isDownAlt = not g_hitLogs.isDownAlt
-                as_event(ON_HIT_LOG)
+                if isDown:
+                    g_hitLogs.isDownAlt = not g_hitLogs.isDownAlt
+                    as_event(ON_HIT_LOG)
 
 
 def hLog():
