@@ -3,7 +3,7 @@
 #include "dll\findwot\src_innosetup\findwot.iss"
 
 [Setup]
-AppCopyright    = "2020 (c) XVM Team"
+AppCopyright    = "2021 (c) XVM Team"
 AppId           = {{2865cd27-6b8b-4413-8272-cd968f316050}
 AppName         = "XVM"
 AppPublisher    = "XVM Team"

@@ -19,7 +19,6 @@ package com.xvm.lobby.online.OnlineServers
 
     public class OnlineServersView extends UIComponent
     {
-
         private static const QUALITY_BAD:String = "bad";
         private static const QUALITY_POOR:String = "poor";
         private static const QUALITY_GOOD:String = "good";

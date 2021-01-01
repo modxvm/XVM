@@ -1,7 +1,7 @@
 ﻿/*
  * This file is part of the Findwot project.
  *
- * Copyright (c) 2016-2020 Findwot contributors.
+ * Copyright (c) 2016-2021 Findwot contributors.
  *
  * Findwot is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
