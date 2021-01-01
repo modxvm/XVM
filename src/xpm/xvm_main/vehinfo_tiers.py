@@ -1,4 +1,4 @@
-""" XVM (c) https://modxvm.com 2013-2020 """
+""" XVM (c) https://modxvm.com 2013-2021 """
 
 # PUBLIC
 
@@ -15,7 +15,7 @@ from skeletons.gui.shared import IItemsCache
 
 _special = {
     # Data from https://forum.worldoftanks.ru/index.php?/topic/1894923-
-    # Last update: 02.12.2020
+    # Last update: 02.12.2021
 
     # level 2
     'germany:G53_PzI':                     [ 2, 2 ],

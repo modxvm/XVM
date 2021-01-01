@@ -1,8 +1,8 @@
 """
 This file is part of the XVM project.
 
-Copyright (c) 2013-2020 XVM Team.
-Copyright (c) 2020      Andrey Andruschyshyn
+Copyright (c) 2013-2021 XVM Team.
+Copyright (c) 2020      Andrey Andruschyshyn.
 
 XVM is free software: you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as

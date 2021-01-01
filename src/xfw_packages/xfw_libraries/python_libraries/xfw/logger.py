@@ -1,4 +1,4 @@
-""" XFW Library (c) https://modxvm.com 2013-2020 """
+""" XFW Library (c) https://modxvm.com 2013-2021 """
 
 #####################################################################
 # Logging to python.log

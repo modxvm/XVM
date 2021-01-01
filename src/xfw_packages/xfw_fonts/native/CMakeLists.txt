@@ -1,6 +1,6 @@
 # This file is part of the XVM project.
 #
-# Copyright (c) 2018-2020 XVM Team.
+# Copyright (c) 2018-2021 XVM Team.
 #
 # This file is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as

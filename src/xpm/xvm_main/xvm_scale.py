@@ -1,4 +1,4 @@
-""" XVM (c) https://modxvm.com 2013-2020 """
+""" XVM (c) https://modxvm.com 2013-2021 """
 """
  XVM Scale for ratings
  https://kr.cm/f/t/2625/

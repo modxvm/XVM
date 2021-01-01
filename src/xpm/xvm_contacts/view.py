@@ -1,4 +1,4 @@
-""" XVM (c) https://modxvm.com 2013-2020 """
+""" XVM (c) https://modxvm.com 2013-2021 """
 
 from messenger.gui.Scaleform.view.lobby.contact_manage_note_views import ContactEditNoteView
 
