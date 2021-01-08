@@ -18,6 +18,8 @@ package com.xvm.battle.classic.playersPanel
     {
         private static const SQUAD_ITEMS_AREA_WIDTH:int = 25;
 
+        private static const DOG_TAG_OFFSET:int = -30;
+
         private var ui:PlayersPanelListItem;
 
         private var mopt_removeSquadIcon:Boolean;
@@ -83,6 +85,7 @@ package com.xvm.battle.classic.playersPanel
         {
             ui.x = -(lastX + (mopt_removeSquadIcon ? 0 : SQUAD_ITEMS_AREA_WIDTH));
             ui.dynamicSquad.x = -ui.x;
+            ui.dogTag.x = -ui.x + (mopt_removeSquadIcon ? 0 : DOG_TAG_OFFSET);
         }
 
         override protected function createExtraFields():void
