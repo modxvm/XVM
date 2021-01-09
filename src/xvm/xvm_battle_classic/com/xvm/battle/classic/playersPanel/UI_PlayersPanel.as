@@ -321,7 +321,7 @@ package com.xvm.battle.classic.playersPanel
                     (listLeft as PlayersPanelListLeft).inviteReceivedIndicator.y = DEFAULT_INVITE_INDICATOR_Y_LEFT + Macros.FormatNumberGlobal(cfg.none.inviteIndicatorY, 0);
                     (listRight as PlayersPanelListRight).inviteReceivedIndicator.alpha = Macros.FormatNumberGlobal(cfg.none.inviteIndicatorAlpha, 100) / 100.0;
                     (listRight as PlayersPanelListRight).inviteReceivedIndicator.x = DEFAULT_INVITE_INDICATOR_X_RIGHT - Macros.FormatNumberGlobal(cfg.none.inviteIndicatorX, 0);
-                    (listRight as PlayersPanelListRight).inviteReceivedIndicator.x = DEFAULT_INVITE_INDICATOR_Y_RIGHT + Macros.FormatNumberGlobal(cfg.none.inviteIndicatorY, 0);
+                    (listRight as PlayersPanelListRight).inviteReceivedIndicator.y = DEFAULT_INVITE_INDICATOR_Y_RIGHT + Macros.FormatNumberGlobal(cfg.none.inviteIndicatorY, 0);
                 }
                 else
                 {
@@ -331,7 +331,7 @@ package com.xvm.battle.classic.playersPanel
                     (listLeft as PlayersPanelListLeft).inviteReceivedIndicator.y = DEFAULT_INVITE_INDICATOR_Y_LEFT;
                     (listRight as PlayersPanelListRight).inviteReceivedIndicator.alpha = 1;
                     (listRight as PlayersPanelListRight).inviteReceivedIndicator.x = DEFAULT_INVITE_INDICATOR_X_RIGHT;
-                    (listRight as PlayersPanelListRight).inviteReceivedIndicator.x = DEFAULT_INVITE_INDICATOR_Y_RIGHT;
+                    (listRight as PlayersPanelListRight).inviteReceivedIndicator.y = DEFAULT_INVITE_INDICATOR_Y_RIGHT;
                 }
             }
             catch (ex:Error)
