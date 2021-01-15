@@ -27,7 +27,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 02.12.2021
+    # Last update: 15.01.2021
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -54,6 +54,7 @@ _data = {
     "china:Ch19_121":                        '121',
     "china:Ch19_121_IGR":                    '121',
     "china:Ch20_Type58":                     'Typ58',
+    "china:Ch20_Type58_bootcamp":            'Typ58',
     "china:Ch21_T34":                        'tp·t34',
     "china:Ch22_113":                        '113',
     "china:Ch22_113P":                       '113',
@@ -252,7 +253,9 @@ _data = {
     "germany:G142_M48RPz":                   '7501k',
     "germany:G143_E75_TS":                   '7501k',
     "germany:G144_Kpz_50t":                  'Kpz50t',
+    "germany:G147_Kunze_Panzer":             'Kunze.Pz',
     "germany:G151_Pz_Sfl_IC":                'pz.Sfl.IC',
+    "germany:G154_Kpz_07_RH":                'kpz.07.RH',
     "germany:G15_VK3601H":                   '3601h',
     "germany:G16_PzVIB_Tiger_II":            'Tig2',
     "germany:G16_PzVIB_Tiger_II_F":          'Tig2·h',
@@ -356,7 +359,11 @@ _data = {
     "italy:It12_Prototipo_Standard_B":       'Stand·B',
     "italy:It13_Progetto_M35_mod_46":        'Prog46',
     "italy:It14_P44_Pantera":                'P44·Pant',
+    "italy:It15_Rinoceronte":                'Rinocer.',
+    "italy:It16_Carro_d_assalto_P88":        'Carro.P88',
+    "italy:It17_Progetto_CC55_mod_54":       'Prog54',
     "italy:It18_Progetto_C45_mod_71":        'Prog71',
+    "italy:It19_Progetto_C50_mod_66":        'Prog66',
     "italy:It20_Carro_Combattimento_45t":    'Carro45t',
     "japan:J01_NC27":                        'R.Ots',
     "japan:J01_NC27_bot":                    'R.Ots',
@@ -470,6 +477,7 @@ _data = {
     "uk:GB108_A46":                          'A46',
     "uk:GB109_GSOR_1008":                    'GSOR',
     "uk:GB10_Black_Prince":                  'BlPrn',
+    "uk:GB111_Charlemagne":                  'Charlem.',
     "uk:GB11_Caernarvon":                    'Caer',
     "uk:GB11_Caernarvon_IGR":                'Caer',
     "uk:GB12_Conqueror":                     'Conq',
@@ -766,6 +774,7 @@ _data = {
     "ussr:R178_Object_780":                  'obj780',
     "ussr:R17_SU-100":                       'Su100',
     "ussr:R180_Object_274_A":                'obj274a',
+    "ussr:R183_K_91_PT":                     'k91·PT',
     "ussr:R18_SU-152":                       'Su152',
     "ussr:R18_SU-152_IGR":                   'Su152',
     "ussr:R19_IS-3":                         'Is·3',

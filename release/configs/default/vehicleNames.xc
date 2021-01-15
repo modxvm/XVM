@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 02.12.2020
+    // Last update: 15.01.2021
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -31,6 +31,7 @@
     "china-Ch19_121":                        {"name": null, "short": null},
     "china-Ch19_121_IGR":                    {"name": null, "short": null},
     "china-Ch20_Type58":                     {"name": null, "short": null},
+    "china-Ch20_Type58_bootcamp":            {"name": null, "short": null},
     "china-Ch21_T34":                        {"name": null, "short": null},
     "china-Ch22_113":                        {"name": null, "short": null},
     "china-Ch22_113P":                       {"name": null, "short": null},
@@ -229,7 +230,9 @@
     "germany-G142_M48RPz":                   {"name": null, "short": null},
     "germany-G143_E75_TS":                   {"name": null, "short": null},
     "germany-G144_Kpz_50t":                  {"name": null, "short": null},
+    "germany-G147_Kunze_Panzer":             {"name": null, "short": null},
     "germany-G151_Pz_Sfl_IC":                {"name": null, "short": null},
+    "germany-G154_Kpz_07_RH":                {"name": null, "short": null},
     "germany-G15_VK3601H":                   {"name": null, "short": null},
     "germany-G16_PzVIB_Tiger_II":            {"name": null, "short": null},
     "germany-G16_PzVIB_Tiger_II_F":          {"name": null, "short": null},
@@ -333,7 +336,11 @@
     "italy-It12_Prototipo_Standard_B":       {"name": null, "short": null},
     "italy-It13_Progetto_M35_mod_46":        {"name": null, "short": null},
     "italy-It14_P44_Pantera":                {"name": null, "short": null},
+    "italy-It15_Rinoceronte":                {"name": null, "short": null},
+    "italy-It16_Carro_d_assalto_P88":        {"name": null, "short": null},
+    "italy-It17_Progetto_CC55_mod_54":       {"name": null, "short": null},
     "italy-It18_Progetto_C45_mod_71":        {"name": null, "short": null},
+    "italy-It19_Progetto_C50_mod_66":        {"name": null, "short": null},
     "italy-It20_Carro_Combattimento_45t":    {"name": null, "short": null},
     "japan-J01_NC27":                        {"name": null, "short": null},
     "japan-J01_NC27_bot":                    {"name": null, "short": null},
@@ -447,6 +454,7 @@
     "uk-GB108_A46":                          {"name": null, "short": null},
     "uk-GB109_GSOR_1008":                    {"name": null, "short": null},
     "uk-GB10_Black_Prince":                  {"name": null, "short": null},
+    "uk-GB111_Charlemagne":                  {"name": null, "short": null},
     "uk-GB11_Caernarvon":                    {"name": null, "short": null},
     "uk-GB11_Caernarvon_IGR":                {"name": null, "short": null},
     "uk-GB12_Conqueror":                     {"name": null, "short": null},
@@ -743,6 +751,7 @@
     "ussr-R178_Object_780":                  {"name": null, "short": null},
     "ussr-R17_SU-100":                       {"name": null, "short": null},
     "ussr-R180_Object_274_A":                {"name": null, "short": null},
+    "ussr-R183_K_91_PT":                     {"name": null, "short": null},
     "ussr-R18_SU-152":                       {"name": null, "short": null},
     "ussr-R18_SU-152_IGR":                   {"name": null, "short": null},
     "ussr-R19_IS-3":                         {"name": null, "short": null},

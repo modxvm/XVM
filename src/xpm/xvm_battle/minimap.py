@@ -172,7 +172,8 @@ _CIRCLES_SETTINGS = (
     settings_constants.GAME.MINIMAP_DRAW_RANGE,
     settings_constants.GAME.MINIMAP_MAX_VIEW_RANGE,
     settings_constants.GAME.MINIMAP_VIEW_RANGE,
-    settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP)
+    settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP,
+    settings_constants.GAME.MINIMAP_MIN_SPOTTING_RANGE)
 _LINES_SETTINGS = (
     settings_constants.GAME.SHOW_VECTOR_ON_MAP,
     settings_constants.GAME.SHOW_SECTOR_ON_MAP)
@@ -185,6 +186,7 @@ _DEFAULTS = {
     settings_constants.GAME.MINIMAP_MAX_VIEW_RANGE: True,
     settings_constants.GAME.MINIMAP_VIEW_RANGE: True,
     settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP: False,
+    settings_constants.GAME.MINIMAP_MIN_SPOTTING_RANGE: False,
 }
 
 _in_PersonalEntriesPlugin_setSettings = False
@@ -245,6 +247,8 @@ def _PersonalEntriesPlugin_updateSettings(base, self, diff):
                 diff[settings_constants.GAME.MINIMAP_MAX_VIEW_RANGE] = _DEFAULTS[settings_constants.GAME.MINIMAP_MAX_VIEW_RANGE]
             if settings_constants.GAME.MINIMAP_VIEW_RANGE in diff:
                 diff[settings_constants.GAME.MINIMAP_VIEW_RANGE] = _DEFAULTS[settings_constants.GAME.MINIMAP_VIEW_RANGE]
+            if settings_constants.GAME.MINIMAP_MIN_SPOTTING_RANGE in diff:
+                diff[settings_constants.GAME.MINIMAP_MIN_SPOTTING_RANGE] = _DEFAULTS[settings_constants.GAME.MINIMAP_MIN_SPOTTING_RANGE]
     base(self, diff)
 
 @overrideMethod(ArenaVehiclesPlugin, 'setSettings')
