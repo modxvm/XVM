@@ -23,7 +23,9 @@ package net.wg.infrastructure.base.meta
 
         function onPaymentS() : void;
 
-        function showSquadS() : void;
+        function movePlatoonPopoverS(param1:int) : void;
+
+        function showSquadS(param1:int) : void;
 
         function fightClickS(param1:int, param2:String) : void;
 
@@ -39,7 +41,7 @@ package net.wg.infrastructure.base.meta
 
         function as_setGoldFishEnabled(param1:Boolean, param2:Boolean, param3:String, param4:String) : void;
 
-        function as_updateSquad(param1:Boolean, param2:String, param3:String, param4:Boolean, param5:String) : void;
+        function as_updateSquad(param1:Boolean, param2:String, param3:String, param4:Boolean, param5:String, param6:Boolean, param7:Object) : void;
 
         function as_nameResponse(param1:Object) : void;
 
@@ -89,6 +91,6 @@ package net.wg.infrastructure.base.meta
 
         function as_toggleVisibilityMenu(param1:uint) : void;
 
-        function as_updateNYVisibility(param1:Boolean, param2:Boolean, param3:Boolean) : void;
+        function as_setIsPlatoonDropdownShowing(param1:Boolean) : void;
     }
 }

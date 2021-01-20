@@ -159,6 +159,12 @@ package net.wg.gui.battle.components
             this.panelSwitch.setState(param1);
         }
 
+        public function as_setChatCommandsVisibility(param1:Boolean) : void
+        {
+            this.listLeft.setChatCommandVisibility(param1);
+            this.listRight.setChatCommandVisibility(param1);
+        }
+
         public function setArenaInfo(param1:IDAAPIDataClass) : void
         {
         }

@@ -323,24 +323,6 @@ package
 
         public static const CREWBOOKS_USECREWBOOK:String = "#waiting:crewBooks/useCrewBook";
 
-        public static const NEWYEAR_BREAKDECORATIONSWAITING:String = "#waiting:newYear/breakDecorationsWaiting";
-
-        public static const NEWYEAR_BUYCOLLECTIONWAITING:String = "#waiting:newYear/buyCollectionWaiting";
-
-        public static const NEWYEAR_HANGTOYWAITING:String = "#waiting:newYear/hangToyWaiting";
-
-        public static const NEWYEAR_BUYTOYWAITING:String = "#waiting:newYear/buyToyWaiting";
-
-        public static const NEWYEAR_SETVEHICLEBRANCH:String = "#waiting:newYear/setVehicleBranch";
-
-        public static const NEWYEAR_DELVEHICLEBRANCH:String = "#waiting:newYear/delVehicleBranch";
-
-        public static const NEWYEAR_CHANGEEXTRASLOTBONUS:String = "#waiting:newYear/changeExtraSlotBonus";
-
-        public static const NEWYEAR_SETNEWYEARSTYLE:String = "#waiting:newYear/setNewYearStyle";
-
-        public static const NEWYEAR_APPLYVEHICLEDISCOUNT:String = "#waiting:newYear/applyVehicleDiscount";
-
         public static const DAILYQUESTS_WAITREROLL:String = "#waiting:dailyQuests/waitReroll";
 
         public static const BUYBATTLEPASS:String = "#waiting:buyBattlePass";

@@ -11,6 +11,8 @@ package net.wg.data.constants
 
         public static const BC_BOTTOM_REWARD_RENDERER:String = "BottomRewardRendererContainerUI";
 
+        public static const BC_VIDEO_BUTTON:String = "VideoButtonUI";
+
         public static const WINDOW:String = "WindowUI";
 
         public static const NOTIFICATION_TIME_COMPONENT:String = "NotificationTimeComponentUI";
@@ -799,6 +801,8 @@ package net.wg.data.constants
 
         public static const LOBBY_VEH_MARKER:String = "VehicleMarkersUI";
 
+        public static const PLATOON_VEH_MARKER:String = "PlatoonMarkerUI";
+
         public static const ITEM_SLOT_80X80_RENDERER:String = "ItemSlot80x80_UI";
 
         public static const WIN_UI_LINKAGE:String = "msgVictoryUI";
@@ -933,8 +937,6 @@ package net.wg.data.constants
 
         public static const PROGRESSIVE_REWARD_GIFT_UI:String = "ProgressiveRewardGiftUI";
 
-        public static const SIMPLE_SQUAD_BONUS_RENDERER:String = "SimpleSquadBonusRendererUI";
-
         public static const REPLIED_MARKER_UI:String = "RepliedMarkerUI";
 
         public static const STICKY_MARKER_UI:String = "StickyMarkerUI";
@@ -962,12 +964,6 @@ package net.wg.data.constants
         public static const NATION_TREE_NODE_PREMIUM_COLLECTOR_BTN:String = "NationTreeNodeBtnUI";
 
         public static const NATION_TREE_PREMIUM_DOTS_PATTERN:String = "PremiumDotUI";
-
-        public static const NY_COUNTER_VIEW_UI:String = "NYCounterViewUI";
-
-        public static const NY_LB_NOTIFICATION_BG_UI:String = "NYLBNotificationBg_UI";
-
-        public static const NY_VEHICLE_BONUS_UI:String = "NYVehicleBonusUI";
 
         public function Linkages()
         {

@@ -7,6 +7,8 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
     import flash.utils.Dictionary;
     import flash.display.Sprite;
     import net.wg.infrastructure.managers.ITooltipMgr;
+    import net.wg.gui.components.dogtag.DogtagComponent;
+    import net.wg.data.constants.Linkages;
     import flash.events.MouseEvent;
     import net.wg.gui.battle.views.minimap.MinimapEntryController;
     import net.wg.data.constants.PlayerStatus;
@@ -19,7 +21,6 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
     import net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.events.PlayersPanelItemEvent;
     import net.wg.infrastructure.exceptions.AbstractException;
     import net.wg.data.constants.Errors;
-    import flash.events.Event;
 
     public class PlayersPanelList extends MovieClip implements IEpicPlayersPanelList
     {
@@ -69,6 +70,8 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
         private static const SECOND_COLUMN:int = 1;
 
         private static const THIRD_COLUMN:int = 2;
+
+        private static const DOG_TAG_OFFSET_X:int = 30;
 
         public var inviteReceivedIndicator:InviteReceivedIndicator;
 
@@ -124,6 +127,8 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
 
         private var _tooltipMgr:ITooltipMgr = null;
 
+        private var _dogTag:DogtagComponent = null;
+
         public function PlayersPanelList()
         {
             super();
@@ -173,7 +178,14 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             this.spawnGroupIcon1.addEventListener(MouseEvent.MOUSE_OVER,this.onFirstSpawnGroupMouseOverHandler);
             this.spawnGroupIcon2.addEventListener(MouseEvent.MOUSE_OVER,this.onSecondSpawnGroupMouseOverHandler);
             this.spawnGroupIcon3.addEventListener(MouseEvent.MOUSE_OVER,this.onThirdSpawnGroupMouseOverHandler);
-            addEventListener(Event.ENTER_FRAME,this.onEnterFrameHandler);
+        }
+
+        public function initDogTag() : void
+        {
+            this._dogTag = App.utils.classFactory.getComponent(Linkages.DOGTAG,DogtagComponent);
+            this._dogTag.hideNameAndClan();
+            this._dogTag.goToLabel(DogtagComponent.DOGTAG_LABEL_END_FULL);
+            this._dogTag.alpha = 0;
         }
 
         public final function dispose() : void
@@ -312,6 +324,10 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
                     this._itemUnderMouse = null;
                     MinimapEntryController.instance.unhighlight();
                 }
+            }
+            if(!this._isCursorVisible && this._dogTag)
+            {
+                removeChild(this._dogTag);
             }
         }
 
@@ -553,6 +569,11 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             this._listWidths = null;
             this._renderersContainer = null;
             this._tooltipMgr = null;
+            if(this._dogTag)
+            {
+                this._dogTag.dispose();
+                this._dogTag = null;
+            }
         }
 
         protected function setGroupIcons() : void
@@ -565,14 +586,6 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             this.spawnGroupIcon3.setText((_loc3_ + 1).toString());
             var _loc4_:Boolean = this._currentState != PLAYERS_PANEL_STATE.HIDDEN && this._currentState != PLAYERS_PANEL_STATE.EPIC_RANDOM_THREE_COLUMN_HIDDEN;
             this.spawnGroupIcon1.visible = this.spawnGroupIcon2.visible = this.spawnGroupIcon3.visible = _loc4_;
-        }
-
-        private function initialize() : void
-        {
-            if(this._state == PLAYERS_PANEL_STATE.NONE)
-            {
-                this.state = PLAYERS_PANEL_STATE.EPIC_RANDOM_THREE_COLUMN_SHORT;
-            }
         }
 
         private function updateInviteIndicator() : void
@@ -703,6 +716,8 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
 
         public function showDogTag(param1:Number, param2:DogTagVO) : void
         {
+            var _loc3_:PlayersPanelListItemHolder = this.getHolderByVehicleID(param1);
+            _loc3_.listItem.showDogTag(param2);
         }
 
         private function getHolderByVehicleID(param1:Number) : PlayersPanelListItemHolder
@@ -875,12 +890,6 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             dispatchEvent(new PlayersPanelListEvent(PlayersPanelListEvent.ITEM_SELECTED,-1,FIRST_COLUMN));
         }
 
-        private function onEnterFrameHandler(param1:Event) : void
-        {
-            this.initialize();
-            removeEventListener(Event.ENTER_FRAME,this.onEnterFrameHandler);
-        }
-
         private function onThirdSpawnGroupMouseOverHandler(param1:MouseEvent) : void
         {
             dispatchEvent(new PlayersPanelListEvent(PlayersPanelListEvent.ITEMS_GROUP_MOUSE_OVER_CHANGED,-1,THIRD_COLUMN));
@@ -905,12 +914,29 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             {
                 dispatchEvent(new PlayersPanelListEvent(PlayersPanelListEvent.ITEMS_GROUP_MOUSE_OVER_CHANGED,_loc2_.vehicleID,this._itemUnderMouse.columnNumber));
             }
+            if(this._itemUnderMouse.dogTag)
+            {
+                addChild(this._dogTag);
+                this._dogTag.setDogTagInfo(this._itemUnderMouse.dogTag);
+                this._dogTag.x = this._itemUnderMouse.x - this._dogTag.width - DOG_TAG_OFFSET_X;
+                this._dogTag.y = this._itemUnderMouse.y;
+                this._dogTag.fadeIn();
+            }
         }
 
         private function onPlayersPanelOnItemOutHandler(param1:PlayersPanelItemEvent) : void
         {
             this._itemUnderMouse = null;
             MinimapEntryController.instance.unhighlight();
+            if(this._dogTag)
+            {
+                this._dogTag.fadeOut(this.removeDogTag);
+            }
+        }
+
+        private function removeDogTag() : void
+        {
+            removeChild(this._dogTag);
         }
 
         private function onPlayersPanelOnItemClickHandler(param1:PlayersPanelItemEvent) : void
@@ -938,6 +964,18 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
         public function get isInviteReceived() : Boolean
         {
             return this._isInviteReceived;
+        }
+
+        public function setChatCommandVisibility(param1:Boolean) : void
+        {
+            var _loc2_:PlayersPanelListItem = null;
+            if(this._panelListItems)
+            {
+                for each(_loc2_ in this._panelListItems)
+                {
+                    _loc2_.setChatCommandVisibility(param1);
+                }
+            }
         }
     }
 }

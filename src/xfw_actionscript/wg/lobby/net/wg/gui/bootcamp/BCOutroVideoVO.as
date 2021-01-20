@@ -11,6 +11,8 @@ package net.wg.gui.bootcamp
 
         public var bufferTime:Number = -1;
 
+        public var fitToScreen:Boolean = false;
+
         public function BCOutroVideoVO(param1:Object)
         {
             super(param1);

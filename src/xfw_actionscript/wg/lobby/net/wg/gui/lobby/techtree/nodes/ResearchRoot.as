@@ -449,7 +449,7 @@ package net.wg.gui.lobby.techtree.nodes
             }
             this.collectibleStatus.visible = this.isCollectible();
             this.price.visible = this._nodeState != NodeRendererState.ROOT_HANGAR && this._nodeState != NodeRendererState.ROOT_COLLECTIBLE;
-            if(this.price.visible)
+            if(this.price.visible && this._data && this._data.itemPrices)
             {
                 this.price.setData(new ItemPriceVO(this._data.itemPrices[0]));
             }

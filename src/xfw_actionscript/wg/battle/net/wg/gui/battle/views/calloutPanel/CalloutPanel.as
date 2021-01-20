@@ -74,6 +74,10 @@ package net.wg.gui.battle.views.calloutPanel
 
         override public function setCompVisible(param1:Boolean) : void
         {
+            if(param1 == _isCompVisible)
+            {
+                return;
+            }
             if(param1 && this._hasShowData)
             {
                 super.setCompVisible(param1);

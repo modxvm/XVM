@@ -59,6 +59,10 @@ package
 
         public static const AWARD_OPTIONS_NATION_USSR_CN:String = "#bootcamp:award/options/nation/ussr_CN";
 
+        public static const AWARD_OPTIONS_NATION_CHINA:String = "#bootcamp:award/options/nation/china";
+
+        public static const AWARD_OPTIONS_NATION_CHINA_CN:String = "#bootcamp:award/options/nation/china_CN";
+
         public static const AWARD_OPTIONS_NAME_USA:String = "#bootcamp:award/options/name/usa";
 
         public static const AWARD_OPTIONS_DESCRIPTION_USA:String = "#bootcamp:award/options/description/usa";
@@ -76,6 +80,12 @@ package
         public static const AWARD_OPTIONS_DESCRIPTION_USSR:String = "#bootcamp:award/options/description/ussr";
 
         public static const AWARD_OPTIONS_DESCRIPTION_USSR_CN:String = "#bootcamp:award/options/description/ussr_CN";
+
+        public static const AWARD_OPTIONS_NAME_CHINA:String = "#bootcamp:award/options/name/china";
+
+        public static const AWARD_OPTIONS_DESCRIPTION_CHINA:String = "#bootcamp:award/options/description/china";
+
+        public static const AWARD_OPTIONS_DESCRIPTION_CHINA_CN:String = "#bootcamp:award/options/description/china_CN";
 
         public static const HINT_CAMERA_CONTROLS:String = "#bootcamp:hint/camera/controls";
 

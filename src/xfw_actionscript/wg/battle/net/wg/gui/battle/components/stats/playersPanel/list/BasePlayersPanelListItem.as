@@ -362,6 +362,11 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             invalidate(PlayersPanelInvalidationType.DOG_TAG_CHANGED);
         }
 
+        public function setChatCommandVisibility(param1:Boolean) : void
+        {
+            this.chatCommandState.setChatCommandVisibility(param1);
+        }
+
         public function setBadge(param1:BadgeVisualVO, param2:Boolean) : void
         {
             if(this._badgeVO == null || !this._badgeVO.isEquals(param1) && this._hasBadge != param2)

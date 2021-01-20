@@ -35,10 +35,6 @@ package net.wg.gui.lobby.hangar.quests
 
         private static const RIGHT_SIDE_GROUP_X_OFFSET:int = -11;
 
-        private static const LEFTSIDE_SIDE_OFFSET_X:int = 20;
-
-        private static const INV_RECREATE_DATA:String = "invRecreateData";
-
         public var questsHitArea:Sprite = null;
 
         private var _questsGroupsData:Vector.<HeaderQuestGroupVO> = null;
@@ -64,8 +60,6 @@ package net.wg.gui.lobby.hangar.quests
         private var _scheduler:IScheduler = null;
 
         private var _entryPoint:IHeaderFlagsEntryPoint = null;
-
-        private var _useLeftSideOffset:Boolean = true;
 
         public function HeaderQuestsFlags()
         {
@@ -115,14 +109,12 @@ package net.wg.gui.lobby.hangar.quests
 
         override protected function draw() : void
         {
-            var _loc1_:* = false;
             super.draw();
             if(this._questsGroupsData)
             {
-                _loc1_ = isInvalid(INV_RECREATE_DATA);
-                if(isInvalid(InvalidationType.DATA) || _loc1_)
+                if(isInvalid(InvalidationType.DATA))
                 {
-                    this.doUpdateData(_loc1_);
+                    this.doUpdateData();
                     invalidateSize();
                 }
                 if(isInvalid(InvalidationType.SIZE))
@@ -197,44 +189,10 @@ package net.wg.gui.lobby.hangar.quests
 
         public function setData(param1:Vector.<HeaderQuestGroupVO>) : void
         {
-            var _loc2_:* = false;
-            var _loc3_:* = 0;
-            var _loc4_:* = 0;
-            var _loc5_:* = 0;
             if(param1 != null && this._questsGroupsData != param1)
             {
-                _loc2_ = false;
-                if(this._questsGroupsContainers)
-                {
-                    _loc3_ = this._questsGroupsContainers.length;
-                    _loc4_ = param1.length;
-                    if(_loc3_ == _loc4_)
-                    {
-                        _loc5_ = 0;
-                        while(_loc5_ < _loc3_)
-                        {
-                            if(param1[_loc5_].isRightSide != this._questsGroupsContainers[_loc5_].isRightSide)
-                            {
-                                _loc2_ = true;
-                                break;
-                            }
-                            _loc5_++;
-                        }
-                    }
-                    else
-                    {
-                        _loc2_ = true;
-                    }
-                }
                 this._questsGroupsData = param1;
-                if(_loc2_)
-                {
-                    invalidate(INV_RECREATE_DATA);
-                }
-                else
-                {
-                    invalidateData();
-                }
+                invalidateData();
             }
         }
 
@@ -260,33 +218,33 @@ package net.wg.gui.lobby.hangar.quests
             }
         }
 
-        private function doUpdateData(param1:Boolean) : void
+        private function doUpdateData() : void
         {
-            var _loc3_:IHeaderQuestsContainer = null;
-            var _loc2_:HeaderQuestGroupVO = null;
-            var _loc4_:int = this._questsGroupsData?this._questsGroupsData.length:0;
-            var _loc5_:int = this._questsGroupsContainers?this._questsGroupsContainers.length:0;
-            var _loc6_:Boolean = param1 || _loc4_ != _loc5_;
-            if(!_loc6_)
+            var _loc2_:IHeaderQuestsContainer = null;
+            var _loc1_:HeaderQuestGroupVO = null;
+            var _loc3_:int = this._questsGroupsData?this._questsGroupsData.length:0;
+            var _loc4_:int = this._questsGroupsContainers?this._questsGroupsContainers.length:0;
+            var _loc5_:* = _loc3_ != _loc4_;
+            if(!_loc5_)
             {
-                if(_loc5_ > 0)
+                if(_loc4_ > 0)
                 {
-                    for each(_loc3_ in this._questsGroupsContainers)
+                    for each(_loc2_ in this._questsGroupsContainers)
                     {
-                        _loc2_ = findGroupDataByID(this._questsGroupsData,_loc3_.groupID);
-                        if(!_loc3_.hasInformersEqualNewData(_loc2_))
+                        _loc1_ = findGroupDataByID(this._questsGroupsData,_loc2_.groupID);
+                        if(!_loc2_.hasInformersEqualNewData(_loc1_))
                         {
-                            _loc6_ = true;
+                            _loc5_ = true;
                             break;
                         }
                     }
                 }
                 else
                 {
-                    _loc6_ = true;
+                    _loc5_ = true;
                 }
             }
-            if(_loc6_)
+            if(_loc5_)
             {
                 App.toolTipMgr.hide();
                 this.disposeQuestContainers();
@@ -408,15 +366,13 @@ package net.wg.gui.lobby.hangar.quests
         private function updateHitArea() : void
         {
             var _loc3_:IHeaderQuestsContainer = null;
-            var _loc4_:* = 0;
-            var _loc1_:int = this.entryPointWidth + 2 * this.entryPointMarginX + this._entryPoint?2 * QUESTS_GROUP_OFFSET:0 - this.leftSideOffset;
+            var _loc1_:int = this.entryPointWidth + 2 * this.entryPointMarginX + 2 * QUESTS_GROUP_OFFSET;
             var _loc2_:* = 0;
             for each(_loc3_ in this._questsGroupsContainers)
             {
-                _loc4_ = _loc3_.isRightSide?_loc3_.x:_loc3_.x + this.leftSideOffset + QUESTS_GROUP_OFFSET;
-                if(_loc4_ < _loc2_)
+                if(_loc3_.x < _loc2_)
                 {
-                    _loc2_ = _loc4_;
+                    _loc2_ = _loc3_.x;
                 }
                 _loc1_ = _loc1_ + _loc3_.cmptWidth;
             }
@@ -586,27 +542,12 @@ package net.wg.gui.lobby.hangar.quests
 
         private function getInitialLeftSideX(param1:int) : int
         {
-            return -((this.entryPointWidth >> 1) + (param1 >> 1) + this.entryPointMarginX + QUESTS_GROUP_OFFSET) + this.leftSideOffset;
+            return -((this.entryPointWidth >> 1) + (param1 >> 1) + this.entryPointMarginX + QUESTS_GROUP_OFFSET);
         }
 
         private function onMoveContainerCompleted() : void
         {
             this._isMoveContainerInProgress = false;
-            this.updateHitArea();
-        }
-
-        public function set useLeftSideOffset(param1:Boolean) : void
-        {
-            if(this._useLeftSideOffset != param1)
-            {
-                this._useLeftSideOffset = param1;
-                invalidateSize();
-            }
-        }
-
-        private function get leftSideOffset() : Number
-        {
-            return this._useLeftSideOffset?LEFTSIDE_SIDE_OFFSET_X:0;
         }
 
         private function get entryPointWidth() : int

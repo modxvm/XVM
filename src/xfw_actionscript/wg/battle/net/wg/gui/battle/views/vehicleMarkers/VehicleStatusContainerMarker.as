@@ -44,6 +44,7 @@ package net.wg.gui.battle.views.vehicleMarkers
             super();
             this._statusEffectMarkers = new Dictionary();
             this.setupMarker(BATTLE_MARKER_STATES.STUN_STATE,this.stunMarker);
+            this.setupMarker(BATTLE_MARKER_STATES.DEBUFF_STATE,this.stunMarker);
             this.setupMarker(BATTLE_MARKER_STATES.INSPIRING_STATE,this.inspireMarker);
             this.setupMarker(BATTLE_MARKER_STATES.INSPIRED_STATE,this.inspireTargetMarker);
             this.setupMarker(BATTLE_MARKER_STATES.ENGINEER_STATE,this.baseEngineerMarker);

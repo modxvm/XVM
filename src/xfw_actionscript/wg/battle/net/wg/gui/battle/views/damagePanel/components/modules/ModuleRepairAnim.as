@@ -2,10 +2,12 @@ package net.wg.gui.battle.views.damagePanel.components.modules
 {
     import net.wg.gui.battle.views.damagePanel.components.DamagePanelItemFrameStates;
     import net.wg.data.constants.InvalidationType;
+    import flash.text.TextField;
     import flash.utils.Timer;
     import flash.events.TimerEvent;
     import net.wg.data.constants.generated.BATTLE_ITEM_STATES;
     import flash.utils.getTimer;
+    import net.wg.data.constants.Time;
 
     public class ModuleRepairAnim extends DamagePanelItemFrameStates
     {
@@ -22,7 +24,15 @@ package net.wg.gui.battle.views.damagePanel.components.modules
 
         private static const IS_REPAIRING_INVALID_MASK:uint = InvalidationType.SYSTEM_FLAGS_BORDER << 2;
 
-        private var _timer:Timer;
+        private static const LABEL_UPDATE_TIME:Number = 100;
+
+        public var repairTimeTF:TextField;
+
+        private var _showRepairTimer:Boolean = false;
+
+        private var _animationTimer:Timer;
+
+        private var _labelTimer:Timer;
 
         private var _startTime:int;
 
@@ -34,22 +44,31 @@ package net.wg.gui.battle.views.damagePanel.components.modules
 
         private var _isRepairing:Boolean = false;
 
+        private var _repairTime:Number = 0;
+
         public function ModuleRepairAnim()
         {
             super();
             stop();
+            this.repairTimeTF.visible = false;
             var _loc1_:int = REPAIR_ANIM_COUNT_FRAMES + FIRST_FRAME_REPAIR_ANIM - currentFrame + 1;
-            this._timer = new Timer(DEFAULT_DELAY,_loc1_);
-            this._timer.addEventListener(TimerEvent.TIMER,this.onTimerHandler);
-            this._timer.addEventListener(TimerEvent.TIMER_COMPLETE,this.onTimerCompleteHandler);
+            this._animationTimer = new Timer(DEFAULT_DELAY,_loc1_);
+            this._animationTimer.addEventListener(TimerEvent.TIMER,this.onAnimationTimerHandler);
+            this._animationTimer.addEventListener(TimerEvent.TIMER_COMPLETE,this.onAnimationTimerCompleteHandler);
+            this._labelTimer = new Timer(LABEL_UPDATE_TIME);
+            this._labelTimer.addEventListener(TimerEvent.TIMER,this.onLabelTimerHandler);
         }
 
         override protected function onDispose() : void
         {
-            this._timer.stop();
-            this._timer.removeEventListener(TimerEvent.TIMER,this.onTimerHandler);
-            this._timer.removeEventListener(TimerEvent.TIMER_COMPLETE,this.onTimerCompleteHandler);
-            this._timer = null;
+            this._animationTimer.stop();
+            this._animationTimer.removeEventListener(TimerEvent.TIMER,this.onAnimationTimerHandler);
+            this._animationTimer.removeEventListener(TimerEvent.TIMER_COMPLETE,this.onAnimationTimerCompleteHandler);
+            this._animationTimer = null;
+            this._labelTimer.stop();
+            this._labelTimer.removeEventListener(TimerEvent.TIMER,this.onLabelTimerHandler);
+            this._labelTimer = null;
+            this.repairTimeTF = null;
             super.onDispose();
         }
 
@@ -63,6 +82,10 @@ package net.wg.gui.battle.views.damagePanel.components.modules
             if(isInvalid(IS_REPAIRING_INVALID_MASK))
             {
                 visible = this._isRepairing;
+                if(this._showRepairTimer)
+                {
+                    this.repairTimeTF.visible = this._isRepairing;
+                }
             }
             if(isInvalid(REPAIRING_PROGRESS_INVALID_MASK))
             {
@@ -77,14 +100,21 @@ package net.wg.gui.battle.views.damagePanel.components.modules
             if(param1 < 1.0E-4)
             {
                 var param1:Number = 1.0E-4;
+                this._animationTimer.stop();
             }
-            if(this._timer.running)
+            if(this._animationTimer.running)
             {
                 _loc2_ = this._playbackSpeed / param1;
                 _loc3_ = getTimer();
                 this._startTime = _loc3_ - (_loc3_ - this._startTime) * _loc2_;
                 this._animDuration = this._animDuration * _loc2_;
-                this._timer.delay = this._timer.delay * _loc2_;
+                this._animationTimer.delay = this._animationTimer.delay * _loc2_;
+            }
+            if(this._labelTimer.running)
+            {
+                this._labelTimer.stop();
+                this._labelTimer.delay = LABEL_UPDATE_TIME * 1 / param1;
+                this._labelTimer.start();
             }
             this._playbackSpeed = param1;
         }
@@ -94,6 +124,13 @@ package net.wg.gui.battle.views.damagePanel.components.modules
             this.setRepairing(true);
             this.updateTimer(param1,param2);
             this._repairPercents = param1;
+            if(!this._labelTimer.running || param2 > this._repairTime)
+            {
+                this._repairTime = param2;
+                this._labelTimer.reset();
+                this._labelTimer.delay = LABEL_UPDATE_TIME * 1 / this._playbackSpeed;
+                this._labelTimer.start();
+            }
             invalidate(REPAIRING_PROGRESS_INVALID_MASK);
         }
 
@@ -107,10 +144,11 @@ package net.wg.gui.battle.views.damagePanel.components.modules
             this._animDuration = _loc5_ - this._startTime;
             var _loc6_:int = REPAIR_ANIM_COUNT_FRAMES + FIRST_FRAME_REPAIR_ANIM - this.currentRepairFrame(param1);
             var _loc7_:int = param2 / _loc6_;
-            this._timer.reset();
-            this._timer.delay = _loc7_;
-            this._timer.repeatCount = _loc6_;
-            this._timer.start();
+            this._animationTimer.reset();
+            this._animationTimer.delay = _loc7_;
+            this._animationTimer.repeatCount = _loc6_;
+            this._animationTimer.start();
+            this._repairTime = Math.min(_loc7_ * _loc6_,this._repairTime);
         }
 
         private function currentRepairFrame(param1:int) : int
@@ -132,18 +170,35 @@ package net.wg.gui.battle.views.damagePanel.components.modules
         {
             super.state = param1;
             this.setRepairing(false);
-            this._timer.stop();
+            this._animationTimer.stop();
+            this._labelTimer.stop();
         }
 
-        private function onTimerHandler(param1:TimerEvent) : void
+        private function onAnimationTimerHandler(param1:TimerEvent) : void
         {
             this._repairPercents = 100 * (getTimer() - this._startTime) / this._animDuration;
             invalidate(REPAIRING_PROGRESS_INVALID_MASK);
         }
 
-        private function onTimerCompleteHandler(param1:TimerEvent = null) : void
+        private function onLabelTimerHandler(param1:TimerEvent) : void
+        {
+            this._repairTime = this._repairTime - LABEL_UPDATE_TIME;
+            this._repairTime = Math.max(this._repairTime,0);
+            this.repairTimeTF.text = (this._repairTime / Time.MILLISECOND_IN_SECOND).toFixed(1);
+        }
+
+        private function onAnimationTimerCompleteHandler(param1:TimerEvent = null) : void
         {
             this.setRepairing(false);
+        }
+
+        public function setRepairTimeVisible(param1:Boolean) : void
+        {
+            this._showRepairTimer = param1;
+            if(this._labelTimer.running)
+            {
+                this.repairTimeTF.visible = param1;
+            }
         }
     }
 }

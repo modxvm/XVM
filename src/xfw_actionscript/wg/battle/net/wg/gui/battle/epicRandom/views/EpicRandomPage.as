@@ -16,6 +16,7 @@ package net.wg.gui.battle.epicRandom.views
     import net.wg.gui.battle.views.radialMenu.RadialMenu;
     import net.wg.gui.battle.views.battleEndWarning.BattleEndWarningPanel;
     import net.wg.gui.battle.views.siegeModePanel.SiegeModePanel;
+    import net.wg.data.constants.generated.DAMAGE_INFO_PANEL_CONSTS;
     import net.wg.infrastructure.helpers.statisticsDataController.BattleStatisticDataController;
     import net.wg.gui.battle.epicRandom.infrastructure.EpicRandomStatisticsDataController;
     import flash.events.MouseEvent;
@@ -100,6 +101,9 @@ package net.wg.gui.battle.epicRandom.views
             this.teamBasesPanelUI.x = _loc3_;
             this.sixthSense.x = _loc3_;
             this.sixthSense.y = param2 >> 2;
+            var _loc4_:Number = stage.scaleY;
+            this.damageInfoPanel.y = (param2 >> 1) / _loc4_ + DAMAGE_INFO_PANEL_CONSTS.HEIGHT * _loc4_ | 0;
+            this.damageInfoPanel.x = param1 - DAMAGE_INFO_PANEL_CONSTS.WIDTH >> 1;
             this.epicRandomScorePanel.x = _loc3_;
             this.battleMessenger.x = damagePanel.x;
             this.battleMessenger.y = damagePanel.y - this.battleMessenger.height + MESSENGER_Y_OFFSET >> 0;

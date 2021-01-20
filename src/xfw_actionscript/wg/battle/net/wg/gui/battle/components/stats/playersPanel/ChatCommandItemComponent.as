@@ -32,11 +32,11 @@ package net.wg.gui.battle.components.stats.playersPanel
 
         private static const ATTACK_PURPLE_STATE:String = "attackPurple";
 
-        private static const GREEN_COLOR_ANIMATION_LIST:Array = ["defendBase","help_me_ex","help_me","thanks","goingTo","defendingBase","goingTo","supportingAlly","defendObjective","defendingObjective"];
+        private static const GREEN_COLOR_ANIMATION_LIST:Array = ["goingTo","thanks","help_me_ex","help_me","supportingAlly","defendBase","defendingBase","defendObjective","defendingObjective"];
 
         private static const RED_COLOR_ANIMATION_LIST:Array = ["attackBase","attack","attackingBase","attackObjective","attackingObjective"];
 
-        private static const ATTACK_BASE_COMMANDS:Array = ["attackBase","attention_to_base_atk_and_commit"];
+        private static const ATTACK_BASE_COMMANDS:Array = ["attackBase","attackingBase"];
 
         private static const ATTACK_OBJECTIVE_COMMANDS:Array = ["attackObjective","attackingObjective"];
 
@@ -78,6 +78,8 @@ package net.wg.gui.battle.components.stats.playersPanel
         private var _isColorBlind:Boolean = false;
 
         private var _chatCommandFlags:uint = 0;
+
+        private var _shouldBeShown:Boolean = true;
 
         public function ChatCommandItemComponent()
         {
@@ -125,7 +127,8 @@ package net.wg.gui.battle.components.stats.playersPanel
             {
                 return;
             }
-            var param1:String = this.evaluateCorrectState(param1,param2);
+            this._activeChatCommand = param1;
+            this._chatCommandFlags = param2;
             if(param1 != EMPTY_FRAME_STATE)
             {
                 this.playCommandAnimation(param1);
@@ -135,7 +138,6 @@ package net.wg.gui.battle.components.stats.playersPanel
 
         public function updateColors(param1:Boolean) : void
         {
-            var _loc2_:String = null;
             if(this._isColorBlind == param1)
             {
                 return;
@@ -143,12 +145,20 @@ package net.wg.gui.battle.components.stats.playersPanel
             this._isColorBlind = param1;
             if(this._activeChatCommand != EMPTY_FRAME_STATE)
             {
-                _loc2_ = this.evaluateCorrectState(this._activeChatCommand,this._chatCommandFlags);
-                this.setChatCommandState(_loc2_,this._chatCommandFlags);
+                this.setChatCommandState(this._activeChatCommand,this._chatCommandFlags);
             }
         }
 
-        private function evaluateCorrectState(param1:String, param2:uint) : String
+        public function setChatCommandVisibility(param1:Boolean) : void
+        {
+            if(param1 == this._shouldBeShown)
+            {
+                return;
+            }
+            visible = this._shouldBeShown = param1;
+        }
+
+        private function setChatCommandState(param1:String, param2:uint) : void
         {
             var _loc3_:String = param1;
             if(GREEN_COLOR_ANIMATION_LIST.indexOf(param1) != INVALID_INDEX)
@@ -174,15 +184,8 @@ package net.wg.gui.battle.components.stats.playersPanel
             {
                 _loc3_ = ATTACK_PURPLE_STATE;
             }
-            return _loc3_;
-        }
-
-        private function setChatCommandState(param1:String, param2:uint) : void
-        {
-            this.activeChatCommand.gotoAndStop(COMMAND_NAME_TO_FRAME_STATE[param1]);
-            this.activeChatCommand.visible = param1 != EMPTY_FRAME_STATE;
-            this._activeChatCommand = param1;
-            this._chatCommandFlags = param2;
+            this.activeChatCommand.gotoAndStop(COMMAND_NAME_TO_FRAME_STATE[_loc3_]);
+            this.activeChatCommand.visible = _loc3_ != EMPTY_FRAME_STATE;
         }
     }
 }

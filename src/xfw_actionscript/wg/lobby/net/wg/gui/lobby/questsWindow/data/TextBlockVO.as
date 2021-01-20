@@ -20,8 +20,6 @@ package net.wg.gui.lobby.questsWindow.data
 
         public var showInNewLine:Boolean = false;
 
-        public var complexTooltip:String = "";
-
         public function TextBlockVO(param1:Object)
         {
             super(param1);

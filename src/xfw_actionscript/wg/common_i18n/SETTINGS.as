@@ -255,6 +255,8 @@ package
 
         public static const GAME_ENABLESPEEDOMETER:String = "#settings:game/enableSpeedometer";
 
+        public static const GAME_ENABLEREPAIRTIMER:String = "#settings:game/enableRepairTimer";
+
         public static const POST_PROCESSING_QUALITY:String = "#settings:POST_PROCESSING_QUALITY";
 
         public static const POST_PROCESSING_QUALITY_DESCRIPTION:String = "#settings:POST_PROCESSING_QUALITY/description";
@@ -355,6 +357,8 @@ package
 
         public static const GAME_MINIMAPDRAWRANGE:String = "#settings:game/minimapDrawRange";
 
+        public static const GAME_MINIMAPMINSPOTTINGRANGE:String = "#settings:game/minimapMinSpottingRange";
+
         public static const GAME_HANGARCAMGROUPTITLE:String = "#settings:game/hangarCamGroupTitle";
 
         public static const GAME_HANGARCAMDROPDOWNTITLE:String = "#settings:game/hangarCamDropdownTitle";
@@ -372,6 +376,8 @@ package
         public static const GAME_DYNAMICCAMERA:String = "#settings:game/dynamicCamera";
 
         public static const GAME_C11NHISTORICALLYACCURATE:String = "#settings:game/c11nHistoricallyAccurate";
+
+        public static const GAME_DISPLAYPLATOONMEMBERS:String = "#settings:game/displayPlatoonMembers";
 
         public static const GAME_LOGINSERVERSELECTION:String = "#settings:game/loginServerSelection";
 

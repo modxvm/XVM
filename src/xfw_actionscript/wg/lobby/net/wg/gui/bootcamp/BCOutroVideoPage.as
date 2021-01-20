@@ -90,6 +90,8 @@ package net.wg.gui.bootcamp
         override protected function draw() : void
         {
             var _loc1_:* = NaN;
+            var _loc2_:* = false;
+            var _loc3_:* = false;
             super.draw();
             if(this._introInfo && isInvalid(INTRO_INFO_CHANGED))
             {
@@ -107,9 +109,15 @@ package net.wg.gui.bootcamp
                     videoFinishedS();
                 }
             }
-            if(this._stageDimensions != null && isInvalid(STAGE_RESIZED))
+            if(this._stageDimensions != null && isInvalid(STAGE_RESIZED,INTRO_INFO_CHANGED))
             {
-                if(this._stageDimensions.x / this._stageDimensions.y > this._playerOriginalWidth / this._playerOriginalHeight)
+                _loc2_ = this._stageDimensions.x / this._stageDimensions.y > this._playerOriginalWidth / this._playerOriginalHeight;
+                _loc3_ = this._introInfo != null?this._introInfo.fitToScreen:false;
+                if(_loc3_)
+                {
+                    _loc2_ = !_loc2_;
+                }
+                if(_loc2_)
                 {
                     _loc1_ = this._stageDimensions.x / this._playerOriginalWidth;
                 }

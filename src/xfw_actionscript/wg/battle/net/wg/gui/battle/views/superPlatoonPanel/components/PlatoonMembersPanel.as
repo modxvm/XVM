@@ -48,6 +48,11 @@ package net.wg.gui.battle.views.superPlatoonPanel.components
             super.onDispose();
         }
 
+        public function updateColorBlind() : void
+        {
+            this.platoonPanelList.updateColorBlind();
+        }
+
         public function forceOrderUpdate() : void
         {
             this.platoonPanelList.forceOrderUpdate();
@@ -106,6 +111,11 @@ package net.wg.gui.battle.views.superPlatoonPanel.components
         public function triggerChatCommand(param1:Number, param2:String) : void
         {
             this.platoonPanelList.triggerChatCommand(param1,param2);
+        }
+
+        public function setChatCommandsVisibility(param1:Boolean) : void
+        {
+            this.platoonPanelList.setChatCommandsVisibility(param1);
         }
 
         private function onStartSpeakingHandler(param1:VoiceChatEvent) : void

@@ -17,10 +17,16 @@ package net.wg.gui.components.dogtag
 
         private var _images:Dictionary = null;
 
+        private var _characters:Dictionary = null;
+
+        private var _hasImages:Boolean = false;
+
         public function ImageRepository()
         {
             super();
             this._images = new Dictionary();
+            this._characters = new Dictionary();
+            this.preloadCharacters();
         }
 
         public static function getInstance() : ImageRepository
@@ -32,28 +38,56 @@ package net.wg.gui.components.dogtag
             return _instance;
         }
 
-        public function setImages(param1:Array) : void
+        public function preloadCharacters() : void
         {
             var _loc3_:Image = null;
+            var _loc4_:String = null;
+            var _loc1_:int = RES_ICONS.MAPS_ICONS_DOGTAGS_SMALL_DIGITS_ENUM.length;
             var _loc2_:* = 0;
-            while(_loc2_ < param1.length)
+            while(_loc2_ < _loc1_)
             {
                 _loc3_ = new Image();
-                if(param1[_loc2_].indexOf(BACKGROUND) != -1)
+                _loc4_ = RES_ICONS.MAPS_ICONS_DOGTAGS_SMALL_DIGITS_ENUM[_loc2_].split("/").pop().split(".")[0];
+                _loc3_.source = RES_ICONS.getDogTagCharacterSmall(_loc4_);
+                this._characters[_loc4_] = _loc3_;
+                _loc2_++;
+            }
+        }
+
+        public function setImages(param1:Array) : void
+        {
+            var _loc4_:Image = null;
+            this._hasImages = true;
+            var _loc2_:int = param1.length;
+            var _loc3_:* = 0;
+            while(_loc3_ < _loc2_)
+            {
+                _loc4_ = new Image();
+                if(param1[_loc3_].indexOf(BACKGROUND) != -1)
                 {
-                    _loc3_.source = RES_ICONS.maps_icons_dogtags_small_backgrounds_all_png(param1[_loc2_]);
+                    _loc4_.source = RES_ICONS.maps_icons_dogtags_small_backgrounds_all_png(param1[_loc3_]);
                 }
-                if(param1[_loc2_].indexOf(ENGRAVING) != -1)
+                if(param1[_loc3_].indexOf(ENGRAVING) != -1)
                 {
-                    _loc3_.source = RES_ICONS.maps_icons_dogtags_small_engravings_all_png(param1[_loc2_]);
+                    _loc4_.source = RES_ICONS.maps_icons_dogtags_small_engravings_all_png(param1[_loc3_]);
                 }
-                if(_loc3_.source == Values.EMPTY_STR)
+                if(_loc4_.source == Values.EMPTY_STR)
                 {
                     App.utils.asserter.assert(false,"Unsupported image name convention");
                 }
-                this._images[param1[_loc2_]] = _loc3_;
-                _loc2_++;
+                this._images[param1[_loc3_]] = _loc4_;
+                _loc3_++;
             }
+        }
+
+        public function getCharacterBitmapData(param1:String) : BitmapData
+        {
+            if(this._characters[param1])
+            {
+                return this._characters[param1].bitmapData;
+            }
+            App.utils.asserter.assertNotNull(this._characters[param1],"preloaded image digit " + Errors.CANT_NULL);
+            return null;
         }
 
         public function getImageBitmapData(param1:String) : BitmapData
@@ -66,14 +100,26 @@ package net.wg.gui.components.dogtag
             return null;
         }
 
-        public function dispose() : void
+        public final function dispose() : void
         {
             var _loc1_:String = null;
+            var _loc2_:String = null;
             for(_loc1_ in this._images)
             {
                 this._images[_loc1_].dispose();
                 this._images[_loc1_] = null;
             }
+            for(_loc2_ in this._characters)
+            {
+                this._characters[_loc2_].dispose();
+                this._characters[_loc2_] = null;
+            }
+            this._hasImages = false;
+        }
+
+        public function get hasImages() : Boolean
+        {
+            return this._hasImages;
         }
     }
 }

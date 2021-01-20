@@ -104,6 +104,8 @@ package net.wg.gui.lobby.settings
 
         public var c11nHistoricallyAccurateCheckbox:CheckBox = null;
 
+        public var displayPlatoonMembersCheckbox:CheckBox = null;
+
         public var loginServerSelectionCheckbox:CheckBox = null;
 
         public var showVectorOnMapCheckbox:CheckBox = null;
@@ -121,6 +123,8 @@ package net.wg.gui.lobby.settings
         public var minimapDrawRangeCheckbox:CheckBox = null;
 
         public var minimapCirclesInfo:InfoIcon = null;
+
+        public var minimapMinSpottingRangeCheckbox:CheckBox = null;
 
         public var fieldSetMinimap:FieldSet = null;
 
@@ -147,6 +151,8 @@ package net.wg.gui.lobby.settings
         public var showDamageIconCheckbox:CheckBox = null;
 
         public var enableSpeedometerCheckbox:CheckBox = null;
+
+        public var enableRepairTimerCheckbox:CheckBox = null;
 
         public var showDogTagToKillerCheckbox:CheckBox = null;
 
@@ -231,13 +237,19 @@ package net.wg.gui.lobby.settings
             this.c11nHistoricallyAccurateCheckbox.label = SETTINGS.GAME_C11NHISTORICALLYACCURATE;
             this.c11nHistoricallyAccurateCheckbox.toolTip = TOOLTIPS.C11NHISTORICALLYACCURATE;
             this.c11nHistoricallyAccurateCheckbox.infoIcoType = InfoIcon.TYPE_INFO;
+            this.displayPlatoonMembersCheckbox.label = SETTINGS.GAME_DISPLAYPLATOONMEMBERS;
+            this.displayPlatoonMembersCheckbox.toolTip = TOOLTIPS.DISPLAYPLATOONMEMBERS;
+            this.displayPlatoonMembersCheckbox.infoIcoType = InfoIcon.TYPE_INFO;
             this.loginServerSelectionCheckbox.label = SETTINGS.GAME_LOGINSERVERSELECTION;
+            this.loginServerSelectionCheckbox.toolTip = TOOLTIPS.LOGINSERVERSELECTION;
+            this.loginServerSelectionCheckbox.infoIcoType = InfoIcon.TYPE_INFO;
             this.minimapAlphaEnabledCheckbox.label = SETTINGS.MINIMAP_LABELS_ALPHA;
             this.minimapAlphaEnabledCheckbox.toolTip = TOOLTIPS.MINIMAPALPHA;
             this.minimapAlphaEnabledCheckbox.infoIcoType = InfoIcon.TYPE_INFO;
             this.minimapAlphaEnabledCheckbox.addEventListener(Event.SELECT,this.onGuiGraphicsOptimizationCheckboxSelectHandler);
             this.minimapViewRangeCheckbox.label = SETTINGS.GAME_MINIMAPVIEWRANGE;
             this.minimapMaxViewRangeCheckbox.label = SETTINGS.GAME_MINIMAPMAXVIEWRANGE;
+            this.minimapMinSpottingRangeCheckbox.label = SETTINGS.GAME_MINIMAPMINSPOTTINGRANGE;
             this.minimapDrawRangeCheckbox.label = SETTINGS.GAME_MINIMAPDRAWRANGE;
             this.showVectorOnMapCheckbox.label = SETTINGS.GAME_SHOWVECTORONMAP;
             this.showVectorOnMapCheckbox.toolTip = TOOLTIPS.SHOWVECTORONMAP;
@@ -259,6 +271,7 @@ package net.wg.gui.lobby.settings
             this.hangarCamLabelControl.toolTip = TOOLTIPS.HANGARCAMDROPDOWN;
             this.showDamageIconCheckbox.infoIcoType = InfoIcon.TYPE_INFO;
             this.enableSpeedometerCheckbox.label = SETTINGS.GAME_ENABLESPEEDOMETER;
+            this.enableRepairTimerCheckbox.label = SETTINGS.GAME_ENABLEREPAIRTIMER;
             this.showDogTagToKillerCheckbox.label = SETTINGS.GAME_SHOWDOGTAGTOKILLER;
             this.showDogTagToKillerCheckbox.toolTip = TOOLTIPS.SHOWDOGTAG;
             this.showDogTagToKillerCheckbox.infoIcoType = InfoIcon.TYPE_INFO;
@@ -361,6 +374,8 @@ package net.wg.gui.lobby.settings
             this.showVictimsDogTagCheckbox = null;
             this.c11nHistoricallyAccurateCheckbox.dispose();
             this.c11nHistoricallyAccurateCheckbox = null;
+            this.displayPlatoonMembersCheckbox.dispose();
+            this.displayPlatoonMembersCheckbox = null;
             this.loginServerSelectionCheckbox.dispose();
             this.loginServerSelectionCheckbox = null;
             this.showVectorOnMapCheckbox.dispose();
@@ -378,6 +393,8 @@ package net.wg.gui.lobby.settings
             this.minimapViewRangeCheckbox = null;
             this.minimapMaxViewRangeCheckbox.dispose();
             this.minimapMaxViewRangeCheckbox = null;
+            this.minimapMinSpottingRangeCheckbox.dispose();
+            this.minimapMinSpottingRangeCheckbox = null;
             this.minimapDrawRangeCheckbox.dispose();
             this.minimapDrawRangeCheckbox = null;
             this.carouselTypeFieldSet.dispose();
@@ -401,6 +418,8 @@ package net.wg.gui.lobby.settings
             this.showDamageIconCheckbox = null;
             this.enableSpeedometerCheckbox.dispose();
             this.enableSpeedometerCheckbox = null;
+            this.enableRepairTimerCheckbox.dispose();
+            this.enableRepairTimerCheckbox = null;
             super.onDispose();
         }
 

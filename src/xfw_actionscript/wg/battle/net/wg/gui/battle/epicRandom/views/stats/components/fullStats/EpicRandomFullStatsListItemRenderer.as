@@ -13,6 +13,9 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
     import net.wg.gui.battle.random.views.stats.components.fullStats.tableItem.DynamicSquadCtrl;
     import net.wg.gui.components.controls.VO.BadgeVisualVO;
     import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
+    import net.wg.gui.components.dogtag.DogtagComponent;
+    import net.wg.gui.components.dogtag.VO.DogTagVO;
+    import flash.events.MouseEvent;
     import net.wg.data.constants.generated.BATTLEATLAS;
     import scaleform.gfx.TextFieldEx;
     import net.wg.infrastructure.interfaces.IColorScheme;
@@ -23,12 +26,14 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
     import scaleform.clik.data.ListData;
     import net.wg.gui.battle.components.buttons.BattleButton;
     import org.idmedia.as3commons.util.StringUtils;
+    import net.wg.gui.battle.epicRandom.views.stats.events.EpicRandomFullStatsListItemRendererEvent;
     import net.wg.gui.battle.random.views.stats.constants.VehicleActions;
     import net.wg.data.constants.UserTags;
     import net.wg.data.constants.PlayerStatus;
     import net.wg.data.constants.Values;
     import net.wg.gui.battle.views.stats.constants.DynamicSquadState;
     import net.wg.gui.battle.battleloading.BattleLoadingHelper;
+    import net.wg.data.constants.Linkages;
     import scaleform.clik.core.UIComponent;
 
     public class EpicRandomFullStatsListItemRenderer extends UIComponentEx implements IListItemRenderer
@@ -84,6 +89,8 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
 
         private var _isDead:Boolean = false;
 
+        private var _showDogTag:Boolean = false;
+
         private var _isInBattle:Boolean = false;
 
         private var _isCurrentPlayer:Boolean = false;
@@ -134,6 +141,10 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
 
         private var _hasBadge:Boolean = false;
 
+        private var _dogTag:DogtagComponent;
+
+        private var _dogTagData:DogTagVO;
+
         public function EpicRandomFullStatsListItemRenderer()
         {
             super();
@@ -182,6 +193,18 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
             }
             this._badgeVO = null;
             this._activePlayerData = null;
+            if(this._dogTag)
+            {
+                this._dogTag.dispose();
+                this._dogTag = null;
+            }
+            if(this._dogTagData)
+            {
+                this._dogTagData.dispose();
+                this._dogTagData = null;
+            }
+            this.removeEventListener(MouseEvent.ROLL_OVER,this.dogTagFadeIn);
+            this.removeEventListener(MouseEvent.ROLL_OUT,this.dogTagFadeOut);
             super.onDispose();
         }
 
@@ -218,10 +241,6 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
             if(isInvalid(FullStatsValidationType.BADGE))
             {
                 this.rankBadge.visible = this._hasBadge;
-                if(this._hasBadge)
-                {
-                    this.rankBadge.setData(this._badgeVO);
-                }
                 if(this.rankBadge.visible)
                 {
                     if(this._isEnemy)
@@ -312,10 +331,14 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
             }
             if(isInvalid(RandomFullStatsValidationType.PLAYER_STATUS))
             {
-                this.playerStatus.visible = this._isOffline || this._isDead || this._isInBattle;
+                this.playerStatus.visible = this._isOffline || this._isDead || this._isInBattle || this._showDogTag;
                 if(this._isOffline)
                 {
                     this.playerStatus.showOffline();
+                }
+                else if(this._showDogTag)
+                {
+                    this.playerStatus.showDogTag();
                 }
                 else if(this._isDead)
                 {
@@ -545,6 +568,11 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
         {
             if(this._data)
             {
+                if(this._dogTag)
+                {
+                    this.parent.removeChild(this._dogTag);
+                }
+                dispatchEvent(new EpicRandomFullStatsListItemRendererEvent(EpicRandomFullStatsListItemRendererEvent.ON_DATA_SYNC,true));
                 this.setVehicleName(this._data.vehicleName);
                 this.setVehicleLevel(this._data.vehicleLevel);
                 this.setVehicleIcon(this._data.vehicleIconName);
@@ -688,6 +716,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
             {
                 this._badgeVO = param1;
                 this._hasBadge = param1 != null && param2;
+                this.rankBadge.setData(this._badgeVO);
                 invalidate(FullStatsValidationType.BADGE);
             }
         }
@@ -733,6 +762,54 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
             this.deadBg.visible = param1 && !this._isSelected;
             invalidate(FullStatsValidationType.COLORS);
             invalidate(RandomFullStatsValidationType.PLAYER_STATUS);
+        }
+
+        public function showDogTag(param1:DogTagVO) : void
+        {
+            if(!this._dogTag && param1)
+            {
+                this.buildDogTag();
+            }
+            this._showDogTag = param1 != null;
+            this._dogTagData = param1;
+            invalidate(RandomFullStatsValidationType.PLAYER_STATUS);
+            if(this._showDogTag)
+            {
+                this.addEventListener(MouseEvent.ROLL_OVER,this.dogTagFadeIn);
+                this.addEventListener(MouseEvent.ROLL_OUT,this.dogTagFadeOut);
+            }
+            else
+            {
+                this.removeEventListener(MouseEvent.ROLL_OVER,this.dogTagFadeIn);
+                this.removeEventListener(MouseEvent.ROLL_OUT,this.dogTagFadeOut);
+            }
+        }
+
+        private function buildDogTag() : void
+        {
+            this._dogTag = App.utils.classFactory.getComponent(Linkages.DOGTAG,DogtagComponent);
+            this._dogTag.hideNameAndClan();
+            this._dogTag.x = this._dogTag.width >> 2;
+            this._dogTag.goToLabel(DogtagComponent.DOGTAG_LABEL_END_FULL);
+            this._dogTag.alpha = 0;
+        }
+
+        private function dogTagFadeIn(param1:MouseEvent) : void
+        {
+            this.parent.addChild(this._dogTag);
+            this._dogTag.y = this.y - this._dogTag.height;
+            this._dogTag.setDogTagInfo(this._dogTagData);
+            this._dogTag.fadeIn();
+        }
+
+        private function dogTagFadeOut(param1:MouseEvent) : void
+        {
+            this._dogTag.fadeOut(this.onFadeOut);
+        }
+
+        private function onFadeOut() : void
+        {
+            this.parent.removeChild(this._dogTag);
         }
 
         private function setIsCurrentPlayer(param1:Boolean) : void
@@ -787,6 +864,11 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
         {
             var _loc2_:uint = DynamicSquadState.getState(param1);
             this._squadItem.setState(_loc2_);
+        }
+
+        public function get vehicleID() : Number
+        {
+            return this._data.vehicleID;
         }
 
         override public function set enabled(param1:Boolean) : void

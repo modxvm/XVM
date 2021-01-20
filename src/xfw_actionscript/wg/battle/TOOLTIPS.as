@@ -67,16 +67,6 @@ package
 
         public static const EPICRANDOMSTANDARDNOTIFICATION:String = "#tooltips:epicRandomStandardNotification";
 
-        public static const SQUADWINDOW_BUTTONS_INVITE:String = "#tooltips:squadWindow/buttons/invite";
-
-        public static const SQUADWINDOW_BUTTONS_RECOMMEND:String = "#tooltips:squadWindow/buttons/recommend";
-
-        public static const SQUADWINDOW_BUTTONS_BTNFIGHT:String = "#tooltips:squadWindow/buttons/btnFight";
-
-        public static const SQUADWINDOW_BUTTONS_BTNNOTREADY:String = "#tooltips:squadWindow/buttons/btnNotReady";
-
-        public static const SQUADWINDOW_BUTTONS_SENDMESSAGE:String = "#tooltips:squadWindow/buttons/sendMessage";
-
         public static const LOGIN_LEGAL:String = "#tooltips:login/legal";
 
         public static const LOGIN_REMEMBERPASSWORD_SIMPLE:String = "#tooltips:login/rememberPassword/simple";
@@ -186,6 +176,10 @@ package
         public static const SHOWBASEMARKERS:String = "#tooltips:showBaseMarkers";
 
         public static const C11NHISTORICALLYACCURATE:String = "#tooltips:c11nHistoricallyAccurate";
+
+        public static const DISPLAYPLATOONMEMBERS:String = "#tooltips:displayPlatoonMembers";
+
+        public static const LOGINSERVERSELECTION:String = "#tooltips:loginServerSelection";
 
         public static const FORTIFICATION_WELCOME_CLANSEARCH:String = "#tooltips:fortification/welcome/clanSearch";
 
@@ -497,100 +491,6 @@ package
 
         public static const PRIVATEQUESTS_PARAMS_RECRUITEDTANKMANFEMALE:String = "#tooltips:privateQuests/params/recruitedTankmanFemale";
 
-        public static const SQUADWINDOW_SIMPLESLOTNOTIFICATION_ALERT_HEADER:String = "#tooltips:squadWindow/simpleSlotNotification/alert/header";
-
-        public static const SQUADWINDOW_SIMPLESLOTNOTIFICATION_ALERT_BODY:String = "#tooltips:squadWindow/simpleSlotNotification/alert/body";
-
-        public static const SQUADWINDOW_SIMPLESLOTNOTIFICATION_ALERT_ALERT:String = "#tooltips:squadWindow/simpleSlotNotification/alert/alert";
-
-        public static const SQUADWINDOW_SIMPLESLOTNOTIFICATION_INFO_HEADER:String = "#tooltips:squadWindow/simpleSlotNotification/info/header";
-
-        public static const SQUADWINDOW_SIMPLESLOTNOTIFICATION_INFO_BODY:String = "#tooltips:squadWindow/simpleSlotNotification/info/body";
-
-        public static const SQUADWINDOW_BATTLETYPEINFO_HEADER:String = "#tooltips:squadWindow/battleTypeInfo/header";
-
-        public static const SQUADWINDOW_BATTLETYPEINFO_BODY:String = "#tooltips:squadWindow/battleTypeInfo/body";
-
-        public static const SQUADWINDOW_BUTTONS_BTNNOTREADY_HEADER:String = "#tooltips:squadWindow/buttons/btnNotReady/header";
-
-        public static const SQUADWINDOW_BUTTONS_BTNNOTREADY_BODY:String = "#tooltips:squadWindow/buttons/btnNotReady/body";
-
-        public static const SQUADWINDOW_BUTTONS_BTNFIGHT_HEADER:String = "#tooltips:squadWindow/buttons/btnFight/header";
-
-        public static const SQUADWINDOW_BUTTONS_BTNFIGHT_BODY:String = "#tooltips:squadWindow/buttons/btnFight/body";
-
-        public static const SQUADWINDOW_BUTTONS_INVITE_HEADER:String = "#tooltips:squadWindow/buttons/invite/header";
-
-        public static const SQUADWINDOW_BUTTONS_INVITE_BODY:String = "#tooltips:squadWindow/buttons/invite/body";
-
-        public static const SQUADWINDOW_BUTTONS_RECOMMEND_HEADER:String = "#tooltips:squadWindow/buttons/recommend/header";
-
-        public static const SQUADWINDOW_BUTTONS_RECOMMEND_BODY:String = "#tooltips:squadWindow/buttons/recommend/body";
-
-        public static const SQUADWINDOW_BUTTONS_LEAVESQUAD_HEADER:String = "#tooltips:squadWindow/buttons/leaveSquad/header";
-
-        public static const SQUADWINDOW_BUTTONS_LEAVESQUAD_BODY:String = "#tooltips:squadWindow/buttons/leaveSquad/body";
-
-        public static const SQUADWINDOW_BUTTONS_LEAVEEVENTSQUAD_HEADER:String = "#tooltips:squadWindow/buttons/leaveEventSquad/header";
-
-        public static const SQUADWINDOW_BUTTONS_LEAVEEVENTSQUAD_BODY:String = "#tooltips:squadWindow/buttons/leaveEventSquad/body";
-
-        public static const SQUADWINDOW_INFOICON_TECH_HEADER:String = "#tooltips:squadWindow/infoIcon/tech/header";
-
-        public static const SQUADWINDOW_INFOICON_TECH_BODY:String = "#tooltips:squadWindow/infoIcon/tech/body";
-
-        public static const SQUADWINDOW_INFOICON_BATTLEROYALE_HEADER:String = "#tooltips:squadWindow/infoIcon/battleRoyale/header";
-
-        public static const SQUADWINDOW_INFOICON_BATTLEROYALE_BODY:String = "#tooltips:squadWindow/infoIcon/battleRoyale/body";
-
-        public static const SQUADWINDOW_INFOICON_TECHRESTRICTIONS_HEADER:String = "#tooltips:squadWindow/infoIcon/techRestrictions/header";
-
-        public static const SQUADWINDOW_INFOICON_TECHRESTRICTIONS_TITLE0:String = "#tooltips:squadWindow/infoIcon/techRestrictions/title0";
-
-        public static const SQUADWINDOW_INFOICON_TECHRESTRICTIONS_BODY0:String = "#tooltips:squadWindow/infoIcon/techRestrictions/body0";
-
-        public static const SQUADWINDOW_INFOICON_TECHRESTRICTIONS_TITLE1:String = "#tooltips:squadWindow/infoIcon/techRestrictions/title1";
-
-        public static const SQUADWINDOW_INFOICON_TECHRESTRICTIONS_BODY1:String = "#tooltips:squadWindow/infoIcon/techRestrictions/body1";
-
-        public static const SQUADWINDOW_INFOICON_TECHRESTRICTIONS_TITLE2:String = "#tooltips:squadWindow/infoIcon/techRestrictions/title2";
-
-        public static const SQUADWINDOW_INFOICON_TECHRESTRICTIONS_BODY2:String = "#tooltips:squadWindow/infoIcon/techRestrictions/body2";
-
-        public static const SQUADWINDOW_BUTTONS_SENDMESSAGE_HEADER:String = "#tooltips:squadWindow/buttons/sendMessage/header";
-
-        public static const SQUADWINDOW_BUTTONS_SENDMESSAGE_BODY:String = "#tooltips:squadWindow/buttons/sendMessage/body";
-
-        public static const SQUADWINDOW_STATUS_COMMANDER:String = "#tooltips:squadWindow/status/commander";
-
-        public static const SQUADWINDOW_STATUS_NORMAL:String = "#tooltips:squadWindow/status/normal";
-
-        public static const SQUADWINDOW_STATUS_CANCELED:String = "#tooltips:squadWindow/status/canceled";
-
-        public static const SQUADWINDOW_STATUS_READY:String = "#tooltips:squadWindow/status/ready";
-
-        public static const SQUADWINDOW_STATUS_INBATTLE:String = "#tooltips:squadWindow/status/inBattle";
-
-        public static const SQUADWINDOW_STATUS_LOCKED:String = "#tooltips:squadWindow/status/locked";
-
-        public static const SQUADWINDOW_STATUS_DISABLED:String = "#tooltips:squadWindow/status/disabled";
-
-        public static const SQUADWINDOW_EVENT_DOMINATION:String = "#tooltips:squadWindow/event/domination";
-
-        public static const SQUADWINDOW_EVENT_DOMINATION_NOTE:String = "#tooltips:squadWindow/event/domination/note";
-
-        public static const SQUADWINDOW_TEAMMATE_NOTVALIDVEHICLE_HEADER:String = "#tooltips:squadWindow/teammate/notValidVehicle/header";
-
-        public static const SQUADWINDOW_TEAMMATE_NOTVALIDVEHICLE_BODY:String = "#tooltips:squadWindow/teammate/notValidVehicle/body";
-
-        public static const SQUADWINDOW_DEMANDFORVEHICLE_NOTVALIDVEHICLE_HEADER:String = "#tooltips:squadWindow/demandForVehicle/notValidVehicle/header";
-
-        public static const SQUADWINDOW_DEMANDFORVEHICLE_NOTVALIDVEHICLE_BODY:String = "#tooltips:squadWindow/demandForVehicle/notValidVehicle/body";
-
-        public static const SQUADWINDOW_DOMINATION_VEHICLESINFOICON_HEADER:String = "#tooltips:squadWindow/domination/vehiclesInfoIcon/header";
-
-        public static const SQUADWINDOW_DOMINATION_VEHICLESINFOICON_BODY:String = "#tooltips:squadWindow/domination/vehiclesInfoIcon/body";
-
         public static const LOGIN_REMEMBERPASSWORD_SIMPLE_HEADER:String = "#tooltips:login/rememberPassword/simple/header";
 
         public static const LOGIN_REMEMBERPASSWORD_SIMPLE_BODY:String = "#tooltips:login/rememberPassword/simple/body";
@@ -658,6 +558,10 @@ package
         public static const SETTINGSCONTROL_RECOMMENDED:String = "#tooltips:settingsControl/recommended";
 
         public static const SETTINGS_MINIMAPCIRCLES_TITLE:String = "#tooltips:settings/minimapCircles/title";
+
+        public static const SETTINGS_MINIMAPCIRCLES_MINIMUMSPOTTINGRANGE_TITLE:String = "#tooltips:settings/minimapCircles/minimumSpottingRange/title";
+
+        public static const SETTINGS_MINIMAPCIRCLES_MINIMUMSPOTTINGRANGE_BODY:String = "#tooltips:settings/minimapCircles/minimumSpottingRange/body";
 
         public static const SETTINGS_MINIMAPCIRCLES_VIEWRANGE_TITLE:String = "#tooltips:settings/minimapCircles/viewRange/title";
 
@@ -832,6 +736,16 @@ package
         public static const C11NHISTORICALLYACCURATE_HEADER:String = "#tooltips:c11nHistoricallyAccurate/header";
 
         public static const C11NHISTORICALLYACCURATE_BODY:String = "#tooltips:c11nHistoricallyAccurate/body";
+
+        public static const DISPLAYPLATOONMEMBERS_HEADER:String = "#tooltips:displayPlatoonMembers/header";
+
+        public static const DISPLAYPLATOONMEMBERS_BODY:String = "#tooltips:displayPlatoonMembers/body";
+
+        public static const DISPLAYPLATOONMEMBERS_ATTENTION:String = "#tooltips:displayPlatoonMembers/attention";
+
+        public static const LOGINSERVERSELECTION_HEADER:String = "#tooltips:loginServerSelection/header";
+
+        public static const LOGINSERVERSELECTION_BODY:String = "#tooltips:loginServerSelection/body";
 
         public static const SHOWVEHMODELSONMAP_HEADER:String = "#tooltips:showVehModelsOnMap/header";
 
@@ -1393,30 +1307,6 @@ package
 
         public static const HEADER_PREMSHOP_BODY:String = "#tooltips:header/premShop/body";
 
-        public static const HEADER_SQUAD_MEMBER_HEADER:String = "#tooltips:header/squad_member/header";
-
-        public static const HEADER_SQUAD_MEMBER_BODY:String = "#tooltips:header/squad_member/body";
-
-        public static const HEADER_SQUAD_HEADER:String = "#tooltips:header/squad/header";
-
-        public static const HEADER_SQUAD_BODY:String = "#tooltips:header/squad/body";
-
-        public static const HEADER_EVENTSQUAD_HEADER:String = "#tooltips:header/eventSquad/header";
-
-        public static const HEADER_EVENTSQUAD_BODY:String = "#tooltips:header/eventSquad/body";
-
-        public static const HEADER_DOMINATIONSQUAD_HEADER:String = "#tooltips:header/dominationSquad/header";
-
-        public static const HEADER_DOMINATIONSQUAD_BODY:String = "#tooltips:header/dominationSquad/body";
-
-        public static const HEADER_BATTLEROYALESQUAD_HEADER:String = "#tooltips:header/battleRoyaleSquad/header";
-
-        public static const HEADER_BATTLEROYALESQUAD_BODY:String = "#tooltips:header/battleRoyaleSquad/body";
-
-        public static const HEADER_RANKEDSQUAD_HEADER:String = "#tooltips:header/rankedSquad/header";
-
-        public static const HEADER_RANKEDSQUAD_BODY:String = "#tooltips:header/rankedSquad/body";
-
         public static const HEADER_BATTLETYPE_HEADER:String = "#tooltips:header/battleType/header";
 
         public static const HEADER_BATTLETYPE_BODY:String = "#tooltips:header/battleType/body";
@@ -1878,10 +1768,6 @@ package
         public static const TANKCARUSEL_LOCK_TOURNAMENT:String = "#tooltips:tankCarusel/lock/TOURNAMENT";
 
         public static const TANKCARUSEL_LOCK_ROTATION:String = "#tooltips:tankCarusel/lock/rotation";
-
-        public static const TANKCARUSEL_NEWYEARSLOT_HEADER:String = "#tooltips:tankCarusel/newYearSlot/header";
-
-        public static const TANKCARUSEL_NEWYEARSLOT_BODY:String = "#tooltips:tankCarusel/newYearSlot/body";
 
         public static const TANKCARUSEL_LOCK_ROAMING:String = "#tooltips:tankCarusel/lock/ROAMING";
 
@@ -3841,10 +3727,6 @@ package
 
         public static const AWARDITEM_RANKEDBONUSBATTLES_BODY:String = "#tooltips:awardItem/rankedBonusBattles/body";
 
-        public static const AWARDITEM_NY21FILLERS_HEADER:String = "#tooltips:awardItem/ny21Fillers/header";
-
-        public static const AWARDITEM_NY21FILLERS_BODY:String = "#tooltips:awardItem/ny21Fillers/body";
-
         public static const RANKEDBATTLEVIEW_SCOREPOINT_SHORT_HEADER:String = "#tooltips:rankedBattleView/scorePoint/short/header";
 
         public static const RANKEDBATTLEVIEW_SCOREPOINT_HEADER:String = "#tooltips:rankedBattleView/scorePoint/header";
@@ -4211,10 +4093,6 @@ package
 
         public static const VEHICLEPREVIEW_BUYBUTTON_PARENTMODULEISLOCKED_HEADER:String = "#tooltips:vehiclePreview/buyButton/parentModuleIsLocked/header";
 
-        public static const VEHICLEPREVIEW_BUYBUTTON_RESTOREREQUESTED_HEADER:String = "#tooltips:vehiclePreview/buyButton/restoreRequested/header";
-
-        public static const VEHICLEPREVIEW_BUYBUTTON_RESTOREREQUESTED_BODY:String = "#tooltips:vehiclePreview/buyButton/restoreRequested/body";
-
         public static const VEHICLEPREVIEW_BUYBUTTON_PARENTMODULEISLOCKED_BODY:String = "#tooltips:vehiclePreview/buyButton/parentModuleIsLocked/body";
 
         public static const VEHICLEPREVIEW_BUYBUTTON_PARENTVEHICLEISLOCKED_HEADER:String = "#tooltips:vehiclePreview/buyButton/parentVehicleIsLocked/header";
@@ -4312,8 +4190,6 @@ package
         public static const CONTENTBUYVIEW_SLOTCHECKBOX_NOTENOUGHSLOTS_HEADER:String = "#tooltips:contentBuyView/slotCheckbox/notEnoughSlots/header";
 
         public static const CONTENTBUYVIEW_SLOTCHECKBOX_NOTENOUGHSLOTS_BODY:String = "#tooltips:contentBuyView/slotCheckbox/notEnoughSlots/body";
-
-        public static const SQUADWINDOW_EVENTVEHICLE:String = "#tooltips:squadWindow/eventVehicle";
 
         public static const DISMISSTANKMANDIALOG_CANTRESTORALERT_HEADER:String = "#tooltips:dismissTankmanDialog/cantRestorAlert/header";
 
@@ -4644,14 +4520,6 @@ package
         public static const QUESTS_BONUSES_TOKEN_BATTLE_BONUS_X5_HEADER:String = "#tooltips:quests/bonuses/token/battle_bonus_x5/header";
 
         public static const QUESTS_BONUSES_TOKEN_BATTLE_BONUS_X5_BODY:String = "#tooltips:quests/bonuses/token/battle_bonus_x5/body";
-
-        public static const QUESTS_BONUSES_LOOTBOXTOKEN_BODY:String = "#tooltips:quests/bonuses/lootBoxToken/body";
-
-        public static const QUESTS_BONUSES_FREETALISMANTOKEN_HEADER:String = "#tooltips:quests/bonuses/freeTalismanToken/header";
-
-        public static const QUESTS_BONUSES_TALISMANBONUSTOKEN_HEADER:String = "#tooltips:quests/bonuses/talismanBonusToken/header";
-
-        public static const QUESTS_BONUSES_TALISMANBONUSTOKEN_BODY:String = "#tooltips:quests/bonuses/talismanBonusToken/body";
 
         public static const HANGAR_HEADER_WGMONEYTOOLTIP_GOLDNAME:String = "#tooltips:hangar/header/wgmoneyTooltip/goldName";
 
@@ -5823,15 +5691,13 @@ package
 
         public static const NOTRECRUITEDTANKMAN_NY20WOMAN_DESC:String = "#tooltips:notrecruitedtankman/ny20woman/desc";
 
-        public static const NOTRECRUITEDTANKMAN_NY21WOMAN_LABEL:String = "#tooltips:notrecruitedtankman/ny21woman/label";
+        public static const NOTRECRUITEDTANKMAN_NY20DEFAULTGIRL_LABEL:String = "#tooltips:notrecruitedtankman/ny20defaultGirl/label";
 
-        public static const NOTRECRUITEDTANKMAN_NY21WOMAN_DESC:String = "#tooltips:notrecruitedtankman/ny21woman/desc";
+        public static const NOTRECRUITEDTANKMAN_NY20DEFAULTGIRL_DESC:String = "#tooltips:notrecruitedtankman/ny20defaultGirl/desc";
 
-        public static const NOTRECRUITEDTANKMAN_NY21DEFAULTGIRL_LABEL:String = "#tooltips:notrecruitedtankman/ny21defaultGirl/label";
+        public static const NOTRECRUITEDTANKMAN_NY20DEFAULTGIRL_HOWTOGETINFO:String = "#tooltips:notrecruitedtankman/ny20defaultGirl/howToGetInfo";
 
-        public static const NOTRECRUITEDTANKMAN_NY21DEFAULTGIRL_DESC:String = "#tooltips:notrecruitedtankman/ny21defaultGirl/desc";
-
-        public static const NOTRECRUITEDTANKMAN_NY21DEFAULTGIRL_HOWTOGETINFO:String = "#tooltips:notrecruitedtankman/ny21defaultGirl/howToGetInfo";
+        public static const NOTRECRUITEDTANKMAN_NY20DEFAULTGIRL_ADDITIONALALERT:String = "#tooltips:notrecruitedtankman/ny20defaultGirl/additionalAlert";
 
         public static const NOTRECRUITEDTANKMAN_NY20MEN_LABEL:String = "#tooltips:notrecruitedtankman/ny20men/label";
 
@@ -6253,8 +6119,6 @@ package
 
         public static const ACTIONPRICE_SELL_TYPE_ENUM:Array = [ACTIONPRICE_SELL_TYPE_VEHICLE,ACTIONPRICE_SELL_TYPE_MODULE,ACTIONPRICE_SELL_TYPE_EQUIPMENT,ACTIONPRICE_SELL_TYPE_SHELL,ACTIONPRICE_SELL_TYPE_OPTIONALDEVICE,ACTIONPRICE_SELL_TYPE_BOOSTERS];
 
-        public static const SQUADWINDOW_STATUS_ENUM:Array = [SQUADWINDOW_STATUS_COMMANDER,SQUADWINDOW_STATUS_NORMAL,SQUADWINDOW_STATUS_CANCELED,SQUADWINDOW_STATUS_READY,SQUADWINDOW_STATUS_INBATTLE,SQUADWINDOW_STATUS_LOCKED,SQUADWINDOW_STATUS_DISABLED];
-
         public static const PRIVATEQUESTS_PARAMS_ENUM:Array = [PRIVATEQUESTS_PARAMS_SHEETS,PRIVATEQUESTS_PARAMS_RECRUITTANKMANFEMALE,PRIVATEQUESTS_PARAMS_COLLECTEDSHEETS,PRIVATEQUESTS_PARAMS_COMPETEDTASKS,PRIVATEQUESTS_PARAMS_RECRUITEDTANKMANFEMALE];
 
         public static const LOGIN_SOCIAL_ENUM:Array = [LOGIN_SOCIAL_ENTER_HEADER,LOGIN_SOCIAL_ENTER_BODY,LOGIN_SOCIAL_FACEBOOK,LOGIN_SOCIAL_GOOGLE,LOGIN_SOCIAL_YAHOO,LOGIN_SOCIAL_TWITTER,LOGIN_SOCIAL_VKONTAKTE,LOGIN_SOCIAL_ODNOKLASSNIKI,LOGIN_SOCIAL_WGNI,LOGIN_SOCIAL_NAVER];
@@ -6381,18 +6245,6 @@ package
             if(ACTIONPRICE_SELL_TYPE_ENUM.indexOf(_loc2_) == -1)
             {
                 DebugUtils.LOG_WARNING("[actionprice_sell_type]:locale key \"" + _loc2_ + "\" was not found");
-                return null;
-            }
-            return _loc2_;
-        }
-
-        public static function squadwindow_status(param1:String) : String
-        {
-            var _loc2_:String = null;
-            _loc2_ = "#tooltips:" + "squadWindow/status/" + param1;
-            if(SQUADWINDOW_STATUS_ENUM.indexOf(_loc2_) == -1)
-            {
-                DebugUtils.LOG_WARNING("[squadwindow_status]:locale key \"" + _loc2_ + "\" was not found");
                 return null;
             }
             return _loc2_;

@@ -10,8 +10,6 @@ package net.wg.gui.messenger.meta.impl
 
         public var sendMessage:Function;
 
-        public var getInfo:Function;
-
         public var getHistory:Function;
 
         public var getMessageMaxLength:Function;
@@ -33,12 +31,6 @@ package net.wg.gui.messenger.meta.impl
         {
             App.utils.asserter.assertNotNull(this.sendMessage,"sendMessage" + Errors.CANT_NULL);
             return this.sendMessage(param1);
-        }
-
-        public function getInfoS() : String
-        {
-            App.utils.asserter.assertNotNull(this.getInfo,"getInfo" + Errors.CANT_NULL);
-            return this.getInfo();
         }
 
         public function getHistoryS() : String

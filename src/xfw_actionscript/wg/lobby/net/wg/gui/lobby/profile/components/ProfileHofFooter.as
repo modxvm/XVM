@@ -49,6 +49,7 @@ package net.wg.gui.lobby.profile.components
             {
                 gotoAndStop(this._state);
                 this.visible = true;
+                this.attentionIcon.visible = false;
                 switch(this._state)
                 {
                     case PROFILE_CONSTANTS.HOF_RESULTS_SHOW:

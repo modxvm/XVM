@@ -194,5 +194,10 @@ package net.wg.gui.battle.views.damagePanel.components.modules
         {
             return this._modulesHit;
         }
+
+        public function setRepairTimeVisible(param1:Boolean) : void
+        {
+            this._repairAnim.setRepairTimeVisible(param1);
+        }
     }
 }

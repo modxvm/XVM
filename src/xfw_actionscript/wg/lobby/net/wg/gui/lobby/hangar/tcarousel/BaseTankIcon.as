@@ -10,11 +10,8 @@ package net.wg.gui.lobby.hangar.tcarousel
     import net.wg.gui.components.controls.ActionPrice;
     import flash.display.Sprite;
     import net.wg.infrastructure.interfaces.IImage;
-    import scaleform.clik.motion.Tween;
-    import net.wg.gui.components.common.AlphaPropertyWrapper;
     import net.wg.gui.components.carousels.data.VehicleCarouselVO;
     import org.idmedia.as3commons.util.StringUtils;
-    import flash.display.BlendMode;
     import flash.geom.Rectangle;
 
     public class BaseTankIcon extends UIComponentEx
@@ -38,17 +35,9 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         private static const CRYSTALS_LIMIT_REACH_FRAME:String = "Deactivated";
 
-        private static const NY_OVERLAY_LBL_CRYSTALS:String = "crystals";
-
-        private static const NY_OVERLAY_LBL:String = "usual";
-
-        private static const NY_ALPHA_ANIM_DUR:int = 500;
-
         public var mcFlag:MovieClip = null;
 
         public var imgIcon:ImageComponent = null;
-
-        public var hoverImgIcon:ImageComponent = null;
 
         public var mcTankType:MovieClip = null;
 
@@ -80,10 +69,6 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         public var rentalHoverBG:MovieClip = null;
 
-        public var newYearOverlay:MovieClip = null;
-
-        public var nyBlink:MovieClip = null;
-
         public var addImg:IImage = null;
 
         public var bpSpecialBorder:MovieClip = null;
@@ -93,8 +78,6 @@ package net.wg.gui.lobby.hangar.tcarousel
         public var crystalsGlow:Sprite = null;
 
         public var crystalsGlowBlend:Sprite = null;
-
-        protected var hasHoverImg:Boolean = false;
 
         private var _visibleVehicleInfo:Boolean = true;
 
@@ -112,12 +95,6 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         private var _isEarnCrystals:Boolean = false;
 
-        private var _rollAnim:Tween = null;
-
-        private var _hoverImgAlphaWrapper:AlphaPropertyWrapper = null;
-
-        private var _isNYSlot:Boolean = false;
-
         public function BaseTankIcon()
         {
             super();
@@ -130,29 +107,14 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.rentalBG.visible = false;
             this.addImg.visible = false;
             this.imgIcon.tooltipEnabled = false;
-            this.hoverImgIcon.tooltipEnabled = false;
-            this.hoverImgIcon.alpha = 0;
             this.imgIconBoundaries = this.maxIconBounds;
         }
 
         override protected function onDispose() : void
         {
-            if(this._rollAnim)
-            {
-                this._rollAnim.paused = true;
-                this._rollAnim.dispose();
-                this._rollAnim = null;
-            }
-            if(this._hoverImgAlphaWrapper)
-            {
-                this._hoverImgAlphaWrapper.dispose();
-                this._hoverImgAlphaWrapper = null;
-            }
             this.mcFlag = null;
             this.imgIcon.dispose();
             this.imgIcon = null;
-            this.hoverImgIcon.dispose();
-            this.hoverImgIcon = null;
             this.mcTankType = null;
             this.mcLevel = null;
             this.txtTankName = null;
@@ -176,8 +138,6 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.rentalHoverBG = null;
             this.addImg.dispose();
             this.addImg = null;
-            this.newYearOverlay = null;
-            this.nyBlink = null;
             this.bpSpecialBorder = null;
             this.crystalsGlow = null;
             this.crystalsGlowBlend = null;
@@ -200,12 +160,6 @@ package net.wg.gui.lobby.hangar.tcarousel
                 }
             }
             this.addImg.visible = StringUtils.isNotEmpty(param1.additionalImgSrc);
-            this.hoverImgIcon.visible = this.hasHoverImg;
-            if(this.hasHoverImg)
-            {
-                this.prepareHoverAnimation();
-                this._rollAnim = new Tween(NY_ALPHA_ANIM_DUR,this._hoverImgAlphaWrapper,{"alpha":0});
-            }
         }
 
         public function handleRollOver(param1:VehicleCarouselVO) : void
@@ -222,28 +176,6 @@ package net.wg.gui.lobby.hangar.tcarousel
                     this.statsBg.visible = this.statsTF.visible = true;
                     this.crystalsIcon.visible = this._isEarnCrystals;
                 }
-            }
-            this.hoverImgIcon.visible = this.hasHoverImg;
-            if(this.hasHoverImg)
-            {
-                this.prepareHoverAnimation();
-                this._rollAnim = new Tween(NY_ALPHA_ANIM_DUR,this._hoverImgAlphaWrapper,{"alpha":1});
-            }
-        }
-
-        private function prepareHoverAnimation() : void
-        {
-            if(!this.hoverImgIcon.visible)
-            {
-                this.hoverImgIcon.visible = true;
-            }
-            if(this._rollAnim)
-            {
-                this._rollAnim.paused = true;
-            }
-            if(!this._hoverImgAlphaWrapper)
-            {
-                this._hoverImgAlphaWrapper = new AlphaPropertyWrapper(this.hoverImgIcon);
             }
         }
 
@@ -267,29 +199,9 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
         }
 
-        private function enableNyBlink(param1:VehicleCarouselVO) : void
-        {
-            if(this.nyBlink == null)
-            {
-                return;
-            }
-            var _loc2_:Boolean = param1 != null?param1.nyBlinkEnabled:false;
-            this.nyBlink.visible = _loc2_;
-            if(_loc2_)
-            {
-                this.nyBlink.blendMode = BlendMode.ADD;
-                this.nyBlink.gotoAndPlay(0);
-            }
-            else
-            {
-                this.nyBlink.gotoAndStop(0);
-            }
-        }
-
         protected function updateData(param1:VehicleCarouselVO) : void
         {
             this.gotoAndStop(param1.isNationChangeAvailable?LABEL_WITH_NATION_CHANGE:LABEL_WITHOUT_NATION_CHANGE);
-            this.enableNyBlink(param1);
             this.price.visible = this.actionPrice.visible = this.lockedBG.visible = this.infoImg.visible = false;
             this._showStats = param1.visibleStats;
             this._isEarnCrystals = param1.isEarnCrystals;
@@ -299,21 +211,13 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
             this.infoImg.visible = StringUtils.isNotEmpty(param1.infoImgSrc);
             this.addImg.visible = StringUtils.isNotEmpty(param1.additionalImgSrc);
-            var _loc2_:Boolean = this._isEarnCrystals && !param1.isCrystalsLimitReached;
-            this.crystalsGlow.visible = this.crystalsGlowBlend.visible = _loc2_;
-            var _loc3_:Boolean = param1.hasNyBonus;
-            this.newYearOverlay.visible = _loc3_;
-            if(_loc3_)
-            {
-                this.newYearOverlay.gotoAndStop(_loc2_?NY_OVERLAY_LBL_CRYSTALS:NY_OVERLAY_LBL);
-            }
+            this.crystalsGlow.visible = this.crystalsGlowBlend.visible = this._isEarnCrystals && !param1.isCrystalsLimitReached;
             this._infoImgOffset = this.infoImg.visible?INFO_IMG_OFFSET_H:0;
             this._isBuySlot = param1.buySlot;
             this._isBuyTank = param1.buyTank || param1.restoreTank;
             this._isRentPromotion = param1.isRentPromotion;
             this.crystalsIcon.gotoAndStop(param1.isCrystalsLimitReached?CRYSTALS_LIMIT_REACH_FRAME:CRYSTALS_FRAME);
-            this._isNYSlot = param1.nySlot;
-            if(this._isBuyTank || this._isNYSlot)
+            if(this._isBuyTank)
             {
                 this.setVisibleVehicleInfo(false);
             }
@@ -371,14 +275,7 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         private function updateLockBg() : void
         {
-            if(this._isNYSlot)
-            {
-                this.lockedBG.visible = false;
-            }
-            else
-            {
-                this.lockedBG.visible = !(this._isBuySlot || this._isBuyTank) && (this._isLockBackground || !enabled);
-            }
+            this.lockedBG.visible = !(this._isBuySlot || this._isBuyTank) && (this._isLockBackground || !enabled);
         }
 
         override public function set enabled(param1:Boolean) : void
@@ -403,14 +300,11 @@ package net.wg.gui.lobby.hangar.tcarousel
             {
                 this.imgIcon.x = this.imgIcon.y = 0;
                 this.imgIcon.adjustSize = true;
-                this.hoverImgIcon.x = this.hoverImgIcon.y = 0;
-                this.hoverImgIcon.adjustSize = true;
                 return;
             }
-            this.imgIcon.x = this.hoverImgIcon.x = param1.x;
-            this.imgIcon.y = this.hoverImgIcon.y = param1.y;
+            this.imgIcon.x = param1.x;
+            this.imgIcon.y = param1.y;
             this.imgIcon.setSize(param1.width,param1.height);
-            this.hoverImgIcon.setSize(param1.width,param1.height);
         }
     }
 }

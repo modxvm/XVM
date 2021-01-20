@@ -751,14 +751,22 @@ package net.wg.gui.lobby.vehicleCustomization
 
         private function onOverAnchorHandler(param1:CustomizationAnchorEvent) : void
         {
-            var _loc2_:CustomizationSlotIdVO = param1.anchor.id;
-            onHoverAnchorS(_loc2_.areaId,_loc2_.slotType,_loc2_.regionIdx,true);
+            var _loc2_:CustomizationSlotIdVO = null;
+            if(param1.anchor.id != null)
+            {
+                _loc2_ = param1.anchor.id;
+                onHoverAnchorS(_loc2_.areaId,_loc2_.slotType,_loc2_.regionIdx,true);
+            }
         }
 
         private function onOutAnchorHandler(param1:CustomizationAnchorEvent) : void
         {
-            var _loc2_:CustomizationSlotIdVO = param1.anchor.id;
-            onHoverAnchorS(_loc2_.areaId,_loc2_.slotType,_loc2_.regionIdx,false);
+            var _loc2_:CustomizationSlotIdVO = null;
+            if(param1.anchor.id != null)
+            {
+                _loc2_ = param1.anchor.id;
+                onHoverAnchorS(_loc2_.areaId,_loc2_.slotType,_loc2_.regionIdx,false);
+            }
         }
 
         private function onDragAnchorHandler(param1:CustomizationAnchorEvent) : void

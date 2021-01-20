@@ -67,6 +67,8 @@ package net.wg.gui.lobby.settings.vo.config
 
         public var c11nHistoricallyAccurate:SettingsControlProp = null;
 
+        public var displayPlatoonMembers:SettingsControlProp = null;
+
         public var loginServerSelection:SettingsControlProp = null;
 
         public var showVehModelsOnMap:SettingsControlProp = null;
@@ -74,6 +76,8 @@ package net.wg.gui.lobby.settings.vo.config
         public var minimapViewRange:SettingsControlProp = null;
 
         public var minimapMaxViewRange:SettingsControlProp = null;
+
+        public var minimapMinSpottingRange:SettingsControlProp = null;
 
         public var increasedZoom:SettingsControlProp = null;
 
@@ -88,6 +92,8 @@ package net.wg.gui.lobby.settings.vo.config
         public var showDamageIcon:SettingsControlProp = null;
 
         public var enableSpeedometer:SettingsControlProp = null;
+
+        public var enableRepairTimer:SettingsControlProp = null;
 
         public var battleLoadingInfo:SettingsControlProp = null;
 
@@ -146,6 +152,7 @@ package net.wg.gui.lobby.settings.vo.config
                 "useServerAim":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "showVehiclesCounter":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "c11nHistoricallyAccurate":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
+                "displayPlatoonMembers":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "loginServerSelection":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "showMarksOnGun":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "anonymizer":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
@@ -154,11 +161,13 @@ package net.wg.gui.lobby.settings.vo.config
                 "minimapViewRange":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "minimapMaxViewRange":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "minimapDrawRange":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
+                "minimapMinSpottingRange":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "showVehModelsOnMap":createControl(ControlsFactory.TYPE_DROPDOWN).build(),
                 "showVectorOnMap":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "showSectorOnMap":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "showDamageIcon":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "enableSpeedometer":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
+                "enableRepairTimer":createControl(ControlsFactory.TYPE_CHECKBOX).build(),
                 "battleLoadingInfo":createControl(ControlsFactory.TYPE_DROPDOWN).build(),
                 "battleLoadingRankedInfo":createControl(ControlsFactory.TYPE_DROPDOWN).build(),
                 "carouselType":createControl(ControlsFactory.TYPE_BUTTON_BAR).build(),
@@ -207,14 +216,17 @@ package net.wg.gui.lobby.settings.vo.config
             this.showDogTagToKiller = null;
             this.loginServerSelection = null;
             this.c11nHistoricallyAccurate = null;
+            this.displayPlatoonMembers = null;
             this.showVehModelsOnMap = null;
             this.showVectorOnMap = null;
             this.showSectorOnMap = null;
             this.showDamageIcon = null;
             this.enableSpeedometer = null;
+            this.enableRepairTimer = null;
             this.minimapViewRange = null;
             this.minimapMaxViewRange = null;
             this.minimapDrawRange = null;
+            this.minimapMinSpottingRange = null;
             this.increasedZoom = null;
             this.sniperModeByShift = null;
             this.battleLoadingInfo = null;

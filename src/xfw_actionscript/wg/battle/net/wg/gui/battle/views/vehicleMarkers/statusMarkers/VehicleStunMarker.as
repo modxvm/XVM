@@ -20,6 +20,12 @@ package net.wg.gui.battle.views.vehicleMarkers.statusMarkers
             super();
         }
 
+        override public function showEffectTimer(param1:Number, param2:Boolean, param3:Boolean, param4:Boolean = true) : void
+        {
+            this.counterMc.visible = param2;
+            super.showEffectTimer(param1,param2,param3,param4);
+        }
+
         override public function updateEffectTimer(param1:int, param2:Boolean, param3:Boolean = false) : void
         {
             super.updateEffectTimer(param1,param2,param3);

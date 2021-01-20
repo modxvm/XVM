@@ -15,21 +15,11 @@ package net.wg.gui.lobby.header
     import net.wg.utils.ICounterManager;
     import net.wg.utils.IScheduler;
     import flash.geom.Rectangle;
-    import scaleform.clik.utils.Constraints;
-    import scaleform.clik.constants.ConstrainMode;
-    import scaleform.clik.events.ButtonEvent;
-    import scaleform.clik.constants.InvalidationType;
-    import flash.events.MouseEvent;
-    import scaleform.clik.data.DataProvider;
-    import net.wg.gui.lobby.header.vo.AccountDataVo;
     import net.wg.gui.lobby.header.vo.HBC_AccountDataVo;
-    import net.wg.data.VO.UserVO;
-    import net.wg.gui.lobby.header.vo.AccountBoosterVO;
-    import net.wg.gui.lobby.header.vo.HBC_FinanceVo;
-    import net.wg.gui.lobby.header.vo.HBC_PremDataVo;
-    import net.wg.gui.components.controls.VO.BadgeVisualVO;
     import scaleform.clik.controls.Button;
     import org.idmedia.as3commons.util.StringUtils;
+    import flash.events.MouseEvent;
+    import net.wg.gui.lobby.header.vo.HBC_FinanceVo;
     import net.wg.data.constants.generated.CURRENCIES_CONSTANTS;
     import net.wg.gui.lobby.header.vo.HBC_PremShopVO;
     import net.wg.gui.lobby.header.vo.HBC_SettingsVo;
@@ -37,16 +27,27 @@ package net.wg.gui.lobby.header
     import net.wg.data.constants.BaseTooltips;
     import net.wg.data.constants.Linkages;
     import net.wg.gui.lobby.header.vo.HBC_BattleTypeVo;
-    import net.wg.gui.lobby.header.vo.HBC_SquadDataVo;
     import net.wg.gui.lobby.header.headerButtonBar.HeaderButton;
     import scaleform.clik.interfaces.IDataProvider;
     import net.wg.gui.lobby.header.vo.HeaderButtonVo;
+    import scaleform.clik.utils.Constraints;
+    import scaleform.clik.constants.ConstrainMode;
+    import scaleform.clik.events.ButtonEvent;
+    import net.wg.gui.lobby.header.events.HeaderEvents;
+    import scaleform.clik.constants.InvalidationType;
+    import scaleform.clik.data.DataProvider;
+    import net.wg.gui.lobby.header.vo.AccountDataVo;
+    import net.wg.data.VO.UserVO;
+    import net.wg.gui.lobby.header.vo.AccountBoosterVO;
+    import net.wg.gui.lobby.header.vo.HBC_PremDataVo;
+    import net.wg.gui.components.controls.VO.BadgeVisualVO;
+    import net.wg.gui.lobby.header.vo.ExtendedSquadInfoVo;
+    import net.wg.gui.lobby.header.vo.HBC_SquadDataVo;
     import net.wg.data.constants.Errors;
     import net.wg.infrastructure.events.LifeCycleEvent;
     import net.wg.data.Aliases;
     import net.wg.gui.interfaces.ISoundButtonEx;
     import net.wg.gui.lobby.header.vo.HangarMenuTabItemVO;
-    import net.wg.data.constants.generated.HANGAR_ALIASES;
 
     public class LobbyHeader extends LobbyHeaderMeta implements ILobbyHeader
     {
@@ -80,14 +81,6 @@ package net.wg.gui.lobby.header
         private static const BUTTON_BAR_ONLY:uint = 2;
 
         private static const ONLINE_COUNTER_ONLY:uint = 4;
-
-        private static const NY_WIDGET_X_OFFSET:int = -300;
-
-        private static const NY_WIDGET_Y_OFFSET:int = -2;
-
-        public var mainMenuNYGlow:Sprite = null;
-
-        public var nyBtnGlow:Sprite = null;
 
         public var centerBg:Sprite = null;
 
@@ -131,9 +124,9 @@ package net.wg.gui.lobby.header
 
         private var _scheduler:IScheduler = null;
 
-        private var _nyWidget:NYWidgetUI = null;
+        private var _canShowSquad:Boolean = false;
 
-        private var _nyWidgetVisible:Boolean = false;
+        private var _isShowingSquad:Boolean = false;
 
         public function LobbyHeader()
         {
@@ -156,192 +149,12 @@ package net.wg.gui.lobby.header
             return new <Rectangle>[_loc1_];
         }
 
-        override protected function configUI() : void
-        {
-            super.configUI();
-            constraints = new Constraints(this,ConstrainMode.REFLOW);
-            constraints.addElement(this.centerBg.name,this.centerBg,Constraints.CENTER_H);
-            constraints.addElement(this.centerMenuBg.name,this.centerMenuBg,Constraints.CENTER_H);
-            constraints.addElement(this.mainMenuNYGlow.name,this.mainMenuNYGlow,Constraints.CENTER_H);
-            constraints.addElement(this.nyBtnGlow.name,this.nyBtnGlow,Constraints.CENTER_H);
-            constraints.addElement(this.resizeBg.name,this.resizeBg,Constraints.LEFT | Constraints.RIGHT | Constraints.TOP);
-            constraints.addElement(this.fightBtn.name,this.fightBtn,Constraints.CENTER_H);
-            constraints.addElement(this.mainMenuButtonBar.name,this.mainMenuButtonBar,Constraints.CENTER_H);
-            constraints.addElement(this.mainMenuGradient.name,this.mainMenuGradient,Constraints.CENTER_H);
-            this.centerBg.mouseChildren = this.centerBg.mouseEnabled = false;
-            this.centerMenuBg.mouseChildren = this.centerMenuBg.mouseEnabled = false;
-            this.mainMenuNYGlow.mouseChildren = this.mainMenuNYGlow.mouseEnabled = false;
-            this.nyBtnGlow.mouseChildren = this.nyBtnGlow.mouseEnabled = false;
-            this.mainMenuGradient.mouseEnabled = false;
-            this.mainMenuGradient.mouseChildren = false;
-            this.hitArea = this.resizeBg;
-            this.updateSize();
-            this._headerButtonsHelper.invalidateAllData();
-            this.fightBtn.addEventListener(ButtonEvent.CLICK,this.onFightBtnClickHandler);
-            this.headerButtonBar.updateCenterItem(this.fightBtn.getRectangle());
-            this.mainMenuButtonBar.addEventListener(ButtonEvent.CLICK,this.onMainMenuButtonBarClickHandler,false,0,true);
-            this.headerButtonBar.addEventListener(ButtonEvent.CLICK,this.onHeaderButtonBarClickHandler,false,0,true);
-            this.fightBtn.mouseEnabledOnDisabled = true;
-            _deferredDispose = true;
-        }
-
-        override protected function draw() : void
-        {
-            super.draw();
-            if(isInvalid(InvalidationType.DATA))
-            {
-                if(this._nyWidgetVisible && isDAAPIInited)
-                {
-                    if(this._nyWidget == null)
-                    {
-                        this.addNYWidget();
-                    }
-                }
-                else if(this._nyWidget != null)
-                {
-                    this.removeNYWidget();
-                }
-            }
-            if(isInvalid(InvalidationType.SIZE))
-            {
-                constraints.update(width,height);
-                this.updateSize();
-            }
-        }
-
-        override protected function onBeforeDispose() : void
-        {
-            this.disposeBubbleToolTip();
-            this.mainMenuButtonBar.removeEventListener(ButtonEvent.CLICK,this.onMainMenuButtonBarClickHandler);
-            this.headerButtonBar.removeEventListener(ButtonEvent.CLICK,this.onHeaderButtonBarClickHandler);
-            this.fightBtn.removeEventListener(ButtonEvent.CLICK,this.onFightBtnClickHandler);
-            this.fightBtn.removeEventListener(MouseEvent.MOUSE_OVER,this.onFightBtnMouseOverHandler);
-            this.fightBtn.removeEventListener(MouseEvent.MOUSE_OUT,this.onFightBtnMouseOutHandler);
-            super.onBeforeDispose();
-        }
-
-        override protected function onDispose() : void
-        {
-            this._nyWidget = null;
-            this.sparks = null;
-            this._scheduler.cancelTask(this.stopReadyCoolDown);
-            var _loc1_:int = this.mainMenuButtonBar.dataProvider.length;
-            var _loc2_:* = 0;
-            while(_loc2_ < _loc1_)
-            {
-                this._counterManager.removeCounter(this.mainMenuButtonBar.getButtonAt(_loc2_));
-                _loc2_++;
-            }
-            this.mainMenuButtonBar.dispose();
-            this.mainMenuButtonBar = null;
-            this.headerButtonBar.dispose();
-            this.headerButtonBar = null;
-            this.fightBtn.dispose();
-            this.fightBtn = null;
-            this._headerButtonsHelper.dispose();
-            this._headerButtonsHelper = null;
-            this.onlineCounter.dispose();
-            this.onlineCounter = null;
-            this.mainMenuGradient = null;
-            this.resizeBg = null;
-            this.centerBg = null;
-            this.centerMenuBg.dispose();
-            this.centerMenuBg = null;
-            this.mainMenuNYGlow = null;
-            this.nyBtnGlow = null;
-            this._counterManager = null;
-            this._scheduler = null;
-            this._utils = null;
-            super.onDispose();
-        }
-
-        override protected function setHangarMenuData(param1:DataProvider) : void
-        {
-            this.mainMenuButtonBar.dataProvider = param1;
-            this.mainMenuButtonBar.validateNow();
-        }
-
-        override protected function setHeaderButtons(param1:Vector.<String>) : void
-        {
-            this._headerButtonsHelper.setupButtons(param1);
-        }
-
-        override protected function nameResponse(param1:AccountDataVo) : void
-        {
-            var _loc2_:HBC_AccountDataVo = HBC_AccountDataVo(this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT));
-            if(_loc2_ != null)
-            {
-                if(_loc2_.userVO != null)
-                {
-                    _loc2_.userVO.dispose();
-                }
-                _loc2_.userVO = new UserVO({
-                    "fullName":param1.userVO.fullName,
-                    "userName":param1.userVO.userName,
-                    "clanAbbrev":param1.userVO.clanAbbrev
-                });
-                _loc2_.isTeamKiller = param1.isTeamKiller;
-                _loc2_.tooltip = param1.tooltip;
-                _loc2_.tooltipType = param1.tooltipType;
-                this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT);
-            }
-        }
-
         public function as_updateAnonymizedState(param1:Boolean) : void
         {
             var _loc2_:HBC_AccountDataVo = HBC_AccountDataVo(this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT));
             if(_loc2_ != null)
             {
                 _loc2_.isAnonymized = param1;
-                this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT);
-            }
-        }
-
-        override protected function setBoosterData(param1:AccountBoosterVO) : void
-        {
-            var _loc2_:HBC_AccountDataVo = HBC_AccountDataVo(this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT));
-            if(_loc2_ != null)
-            {
-                _loc2_.hasActiveBooster = param1.hasActiveBooster;
-                _loc2_.hasAvailableBoosters = param1.hasAvailableBoosters;
-                _loc2_.boosterIcon = param1.boosterIcon;
-                _loc2_.boosterText = param1.boosterText;
-                _loc2_.boosterBg = param1.boosterBg;
-                this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT);
-            }
-        }
-
-        override protected function updateWalletBtn(param1:String, param2:HBC_FinanceVo) : void
-        {
-            this._headerButtonsHelper.setContentData(param1,param2);
-        }
-
-        override protected function setPremiumParams(param1:HBC_PremDataVo) : void
-        {
-            var _loc2_:HBC_PremDataVo = HBC_PremDataVo(this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_PREM));
-            if(_loc2_)
-            {
-                _loc2_.btnLabel = param1.btnLabel;
-                _loc2_.btnLabelShort = param1.btnLabelShort;
-                _loc2_.doLabel = param1.doLabel;
-                _loc2_.timeLabel = param1.timeLabel;
-                _loc2_.isHasAction = param1.isHasAction;
-                _loc2_.isPremium = param1.isPremium;
-                _loc2_.isSubscription = param1.isSubscription;
-                _loc2_.premiumIcon = param1.premiumIcon;
-                _loc2_.tooltip = param1.tooltip;
-                _loc2_.tooltipType = param1.tooltipType;
-                this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_PREM);
-            }
-        }
-
-        override protected function setBadge(param1:BadgeVisualVO, param2:Boolean) : void
-        {
-            var _loc3_:HBC_AccountDataVo = this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT) as HBC_AccountDataVo;
-            if(_loc3_ != null)
-            {
-                _loc3_.badgeVO = param1;
-                _loc3_.selectedBadge = param2;
                 this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT);
             }
         }
@@ -509,8 +322,8 @@ package net.wg.gui.lobby.header
                 _loc9_.battleTypeID = param6;
                 _loc9_.tooltip = param4;
                 _loc9_.tooltipType = param5;
-                _loc9_.eventBgEnabled = param7 && !this.nyBtnGlow.visible;
-                if(param8 && !this.nyBtnGlow.visible)
+                _loc9_.eventBgEnabled = param7;
+                if(param8)
                 {
                     this.sparks.play();
                 }
@@ -518,19 +331,10 @@ package net.wg.gui.lobby.header
                 {
                     this.sparks.stop();
                 }
-                this.sparks.visible = param8 && !this.nyBtnGlow.visible;
+                this.sparks.visible = param8;
                 this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_BATTLE_SELECTOR);
                 this.as_doDisableHeaderButton(HeaderButtonsHelper.ITEM_ID_BATTLE_SELECTOR,param3);
             }
-        }
-
-        public function as_updateNYVisibility(param1:Boolean, param2:Boolean, param3:Boolean) : void
-        {
-            this.nyBtnGlow.visible = param1;
-            this.mainMenuNYGlow.visible = param2;
-            this._nyWidgetVisible = param3;
-            invalidateData();
-            invalidateSize();
         }
 
         public function as_updateOnlineCounter(param1:String, param2:String, param3:String, param4:Boolean) : void
@@ -549,15 +353,22 @@ package net.wg.gui.lobby.header
             }
         }
 
-        public function as_updateSquad(param1:Boolean, param2:String, param3:String, param4:Boolean, param5:String) : void
+        public function as_setIsPlatoonDropdownShowing(param1:Boolean) : void
         {
-            var _loc6_:HBC_SquadDataVo = HBC_SquadDataVo(this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_SQUAD));
-            _loc6_.isInSquad = param1;
-            _loc6_.tooltip = param2;
-            _loc6_.tooltipType = param3;
-            _loc6_.isEvent = param4;
-            _loc6_.icon = param5;
-            this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_SQUAD);
+            var _loc2_:HeaderButton = this._headerButtonsHelper.searchButtonById(HeaderButtonsHelper.ITEM_ID_SQUAD);
+            if(_loc2_ != null)
+            {
+                this._isShowingSquad = param1;
+                if(param1)
+                {
+                    _loc2_.onPopoverOpen();
+                }
+                else
+                {
+                    _loc2_.onPopoverClose();
+                }
+            }
+            this._canShowSquad = false;
         }
 
         public function as_setServerName(param1:String) : void
@@ -592,6 +403,190 @@ package net.wg.gui.lobby.header
             this._headerButtonsHelper = param1;
         }
 
+        override protected function configUI() : void
+        {
+            super.configUI();
+            constraints = new Constraints(this,ConstrainMode.REFLOW);
+            constraints.addElement(this.centerBg.name,this.centerBg,Constraints.CENTER_H);
+            constraints.addElement(this.centerMenuBg.name,this.centerMenuBg,Constraints.CENTER_H);
+            constraints.addElement(this.resizeBg.name,this.resizeBg,Constraints.LEFT | Constraints.RIGHT | Constraints.TOP);
+            constraints.addElement(this.fightBtn.name,this.fightBtn,Constraints.CENTER_H);
+            constraints.addElement(this.mainMenuButtonBar.name,this.mainMenuButtonBar,Constraints.CENTER_H);
+            constraints.addElement(this.mainMenuGradient.name,this.mainMenuGradient,Constraints.CENTER_H);
+            this.centerBg.mouseChildren = this.centerBg.mouseEnabled = false;
+            this.centerMenuBg.mouseChildren = this.centerMenuBg.mouseEnabled = false;
+            this.mainMenuGradient.mouseEnabled = false;
+            this.mainMenuGradient.mouseChildren = false;
+            this.hitArea = this.resizeBg;
+            this.updateSize();
+            this._headerButtonsHelper.invalidateAllData();
+            this.fightBtn.addEventListener(ButtonEvent.CLICK,this.onFightBtnClickHandler);
+            this.headerButtonBar.updateCenterItem(this.fightBtn.getRectangle());
+            this.mainMenuButtonBar.addEventListener(ButtonEvent.CLICK,this.onMainMenuButtonBarClickHandler,false,0,true);
+            this.headerButtonBar.addEventListener(ButtonEvent.CLICK,this.onHeaderButtonBarClickHandler,false,0,true);
+            this.headerButtonBar.addEventListener(ButtonEvent.PRESS,this.onHeaderButtonBarPressHandler,false,0,true);
+            this.headerButtonBar.addEventListener(HeaderEvents.HEADER_ITEMS_REPOSITION,this.onButtonBarHeaderItemsRepositionHandler);
+            this.fightBtn.mouseEnabledOnDisabled = true;
+            _deferredDispose = true;
+        }
+
+        override protected function draw() : void
+        {
+            super.draw();
+            if(isInvalid(InvalidationType.SIZE))
+            {
+                constraints.update(width,height);
+                this.updateSize();
+            }
+        }
+
+        override protected function onBeforeDispose() : void
+        {
+            this.disposeBubbleToolTip();
+            this.mainMenuButtonBar.removeEventListener(ButtonEvent.CLICK,this.onMainMenuButtonBarClickHandler);
+            this.headerButtonBar.removeEventListener(ButtonEvent.CLICK,this.onHeaderButtonBarClickHandler);
+            this.headerButtonBar.removeEventListener(ButtonEvent.PRESS,this.onHeaderButtonBarPressHandler);
+            this.headerButtonBar.removeEventListener(HeaderEvents.HEADER_ITEMS_REPOSITION,this.onButtonBarHeaderItemsRepositionHandler);
+            this.fightBtn.removeEventListener(ButtonEvent.CLICK,this.onFightBtnClickHandler);
+            this.fightBtn.removeEventListener(MouseEvent.MOUSE_OVER,this.onFightBtnMouseOverHandler);
+            this.fightBtn.removeEventListener(MouseEvent.MOUSE_OUT,this.onFightBtnMouseOutHandler);
+            super.onBeforeDispose();
+        }
+
+        override protected function onDispose() : void
+        {
+            this.sparks = null;
+            this._scheduler.cancelTask(this.stopReadyCoolDown);
+            var _loc1_:int = this.mainMenuButtonBar.dataProvider.length;
+            var _loc2_:* = 0;
+            while(_loc2_ < _loc1_)
+            {
+                this._counterManager.removeCounter(this.mainMenuButtonBar.getButtonAt(_loc2_));
+                _loc2_++;
+            }
+            this.mainMenuButtonBar.dispose();
+            this.mainMenuButtonBar = null;
+            this.headerButtonBar.dispose();
+            this.headerButtonBar = null;
+            this.fightBtn.dispose();
+            this.fightBtn = null;
+            this._headerButtonsHelper.dispose();
+            this._headerButtonsHelper = null;
+            this.onlineCounter.dispose();
+            this.onlineCounter = null;
+            this.mainMenuGradient = null;
+            this.resizeBg = null;
+            this.centerBg = null;
+            this.centerMenuBg.dispose();
+            this.centerMenuBg = null;
+            this._counterManager = null;
+            this._scheduler = null;
+            this._utils = null;
+            super.onDispose();
+        }
+
+        override protected function setHangarMenuData(param1:DataProvider) : void
+        {
+            this.mainMenuButtonBar.dataProvider = param1;
+            this.mainMenuButtonBar.validateNow();
+        }
+
+        override protected function setHeaderButtons(param1:Vector.<String>) : void
+        {
+            this._headerButtonsHelper.setupButtons(param1);
+        }
+
+        override protected function nameResponse(param1:AccountDataVo) : void
+        {
+            var _loc2_:HBC_AccountDataVo = HBC_AccountDataVo(this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT));
+            if(_loc2_ != null)
+            {
+                if(_loc2_.userVO != null)
+                {
+                    _loc2_.userVO.dispose();
+                }
+                _loc2_.userVO = new UserVO({
+                    "fullName":param1.userVO.fullName,
+                    "userName":param1.userVO.userName,
+                    "clanAbbrev":param1.userVO.clanAbbrev
+                });
+                _loc2_.isTeamKiller = param1.isTeamKiller;
+                _loc2_.tooltip = param1.tooltip;
+                _loc2_.tooltipType = param1.tooltipType;
+                this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT);
+            }
+        }
+
+        override protected function setBoosterData(param1:AccountBoosterVO) : void
+        {
+            var _loc2_:HBC_AccountDataVo = HBC_AccountDataVo(this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT));
+            if(_loc2_ != null)
+            {
+                _loc2_.hasActiveBooster = param1.hasActiveBooster;
+                _loc2_.hasAvailableBoosters = param1.hasAvailableBoosters;
+                _loc2_.boosterIcon = param1.boosterIcon;
+                _loc2_.boosterText = param1.boosterText;
+                _loc2_.boosterBg = param1.boosterBg;
+                this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT);
+            }
+        }
+
+        override protected function updateWalletBtn(param1:String, param2:HBC_FinanceVo) : void
+        {
+            this._headerButtonsHelper.setContentData(param1,param2);
+        }
+
+        override protected function setPremiumParams(param1:HBC_PremDataVo) : void
+        {
+            var _loc2_:HBC_PremDataVo = HBC_PremDataVo(this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_PREM));
+            if(_loc2_)
+            {
+                _loc2_.btnLabel = param1.btnLabel;
+                _loc2_.btnLabelShort = param1.btnLabelShort;
+                _loc2_.doLabel = param1.doLabel;
+                _loc2_.timeLabel = param1.timeLabel;
+                _loc2_.isHasAction = param1.isHasAction;
+                _loc2_.isPremium = param1.isPremium;
+                _loc2_.isSubscription = param1.isSubscription;
+                _loc2_.premiumIcon = param1.premiumIcon;
+                _loc2_.tooltip = param1.tooltip;
+                _loc2_.tooltipType = param1.tooltipType;
+                this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_PREM);
+            }
+        }
+
+        override protected function setBadge(param1:BadgeVisualVO, param2:Boolean) : void
+        {
+            var _loc3_:HBC_AccountDataVo = this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT) as HBC_AccountDataVo;
+            if(_loc3_ != null)
+            {
+                _loc3_.badgeVO = param1;
+                _loc3_.selectedBadge = param2;
+                this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT);
+            }
+        }
+
+        override protected function updateSquad(param1:Boolean, param2:String, param3:String, param4:Boolean, param5:String, param6:Boolean, param7:ExtendedSquadInfoVo) : void
+        {
+            var _loc8_:HBC_SquadDataVo = HBC_SquadDataVo(this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_SQUAD));
+            _loc8_.isInSquad = param1;
+            _loc8_.tooltip = param2;
+            _loc8_.tooltipType = param3;
+            _loc8_.isEvent = param4;
+            _loc8_.icon = param5;
+            _loc8_.hasSearchSupport = param6;
+            if(_loc8_.squadExtendInfoVo != null)
+            {
+                _loc8_.squadExtendInfoVo.dispose();
+            }
+            _loc8_.squadExtendInfoVo = new ExtendedSquadInfoVo({
+                "platoonState":param7.platoonState,
+                "squadManStates":param7.squadManStates,
+                "commanderIndex":param7.commanderIndex
+            });
+            this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_SQUAD);
+        }
+
         private function assertMainMenuButtonWasntFound(param1:Button, param2:String) : void
         {
             this._utils.asserter.assertNotNull(param1,"Main menu button alias:" + param2 + Errors.WASNT_FOUND);
@@ -621,18 +616,14 @@ package net.wg.gui.lobby.header
             this.headerButtonBar.updateScreen(_loc1_,_loc4_,_loc2_,_loc3_);
             this.sparks.x = this.fightBtn.x + SPARKS_OFFSET_X;
             this.sparks.y = this.fightBtn.y + SPARKS_OFFSET_Y;
-            if(this._nyWidgetVisible && this._nyWidget)
-            {
-                this._nyWidget.x = this.mainMenuNYGlow.x + (this.mainMenuNYGlow.width >> 1) + NY_WIDGET_X_OFFSET >> 0;
-                this._nyWidget.y = this.mainMenuNYGlow.y + (this.mainMenuNYGlow.height >> 1) + NY_WIDGET_Y_OFFSET >> 0;
-            }
+            movePlatoonPopoverS(this.getSquadButtonMiddleXPosition(this._headerButtonsHelper.searchButtonById(HeaderButtonsHelper.ITEM_ID_SQUAD)));
             dispatchEvent(new LifeCycleEvent(LifeCycleEvent.ON_GRAPHICS_RECTANGLES_UPDATE));
         }
 
         private function stopReadyCoolDown() : void
         {
-            this._isInCoolDown = false;
             this.fightBtn.enabled = this._actualEnabledVal;
+            this._isInCoolDown = false;
         }
 
         private function disposeBubbleToolTip() : void
@@ -652,6 +643,39 @@ package net.wg.gui.lobby.header
             if(this._bubbleTooltip)
             {
                 this._utils.tweenAnimator.addFadeOutAnim(this._bubbleTooltip,null);
+            }
+        }
+
+        private function getSquadButtonMiddleXPosition(param1:HeaderButton) : int
+        {
+            if(param1 != null)
+            {
+                return width - this.fightBtn.hitMc.width - param1.width >> 1;
+            }
+            return 0;
+        }
+
+        private function onHeaderButtonBarPressHandler(param1:ButtonEvent) : void
+        {
+            var _loc4_:HBC_SquadDataVo = null;
+            var _loc2_:HeaderButton = HeaderButton(param1.target);
+            var _loc3_:HeaderButtonVo = HeaderButtonVo(_loc2_.data);
+            switch(_loc3_.id)
+            {
+                case HeaderButtonsHelper.ITEM_ID_SQUAD:
+                    _loc4_ = HBC_SquadDataVo(this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_SQUAD));
+                    if(!_loc4_.isEvent)
+                    {
+                        this._canShowSquad = true;
+                        break;
+                    }
+                default:
+                    _loc4_ = HBC_SquadDataVo(this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_SQUAD));
+                    if(!_loc4_.isEvent)
+                    {
+                        this._canShowSquad = true;
+                        break;
+                    }
             }
         }
 
@@ -682,7 +706,11 @@ package net.wg.gui.lobby.header
                     }
                     else
                     {
-                        showSquadS();
+                        if(this._canShowSquad)
+                        {
+                            showSquadS(this.getSquadButtonMiddleXPosition(_loc2_));
+                        }
+                        this._canShowSquad = false;
                     }
                     break;
                 case HeaderButtonsHelper.ITEM_ID_BATTLE_SELECTOR:
@@ -723,6 +751,11 @@ package net.wg.gui.lobby.header
             App.toolTipMgr.hide();
         }
 
+        private function onButtonBarHeaderItemsRepositionHandler(param1:HeaderEvents) : void
+        {
+            movePlatoonPopoverS(this.getSquadButtonMiddleXPosition(this._headerButtonsHelper.searchButtonById(HeaderButtonsHelper.ITEM_ID_SQUAD)));
+        }
+
         private function onFightBtnMouseOverHandler(param1:MouseEvent) : void
         {
             if(this._isFigthButtonSpecialTooltip)
@@ -733,20 +766,6 @@ package net.wg.gui.lobby.header
             {
                 App.toolTipMgr.showComplex(this._fightBtnTooltipStr);
             }
-        }
-
-        private function addNYWidget() : void
-        {
-            this._nyWidget = App.instance.utils.classFactory.getComponent(HANGAR_ALIASES.NY_MAIN_WIDGET_UI,NYWidgetUI);
-            addChildAt(this._nyWidget,getChildIndex(this.mainMenuNYGlow) - 1);
-            registerFlashComponentS(this._nyWidget,HANGAR_ALIASES.NY_MAIN_WIDGET_UI);
-        }
-
-        private function removeNYWidget() : void
-        {
-            removeChild(this._nyWidget);
-            unregisterFlashComponentS(HANGAR_ALIASES.NY_MAIN_WIDGET_UI);
-            this._nyWidget = null;
         }
     }
 }

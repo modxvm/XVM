@@ -14,7 +14,7 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         private static const ACTION_PRICE_BG_OFFSET_Y:int = 3;
 
-        private static const IMG_ICON_BOUNDS:Rectangle = new Rectangle(0,-1,160,35);
+        private static const IMG_ICON_BOUNDS:Rectangle = new Rectangle(1,1,160,35);
 
         private var _commons:ICommons;
 
@@ -60,8 +60,8 @@ package net.wg.gui.lobby.hangar.tcarousel
         override protected function configUI() : void
         {
             super.configUI();
-            imgIcon.horizontalAlign = hoverImgIcon.horizontalAlign = AlignType.RIGHT;
-            imgIcon.verticalAlign = hoverImgIcon.verticalAlign = AlignType.BOTTOM;
+            imgIcon.horizontalAlign = AlignType.RIGHT;
+            imgIcon.verticalAlign = AlignType.BOTTOM;
             imgFavorite.source = RES_ICONS.MAPS_ICONS_LIBRARY_FAVORITE_SMALL;
         }
 
@@ -73,14 +73,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             {
                 txtInfo.width = width - infoImgOffset ^ 0;
                 txtInfo.htmlText = param1.smallInfoText;
-                if(param1.nySlot)
-                {
-                    this._commons.updateTextFieldSize(txtInfo,false,true);
-                }
-                else
-                {
-                    this._commons.updateTextFieldSize(txtInfo,true,true);
-                }
+                this._commons.updateTextFieldSize(txtInfo,true,true);
                 if(txtInfo.height > height)
                 {
                     txtInfo.height = height;
@@ -104,12 +97,6 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
             imgIcon.source = param1.iconSmall;
             imgIcon.sourceAlt = param1.iconSmallAlt;
-            hasHoverImg = StringUtils.isNotEmpty(param1.iconHoverSmall);
-            if(hasHoverImg)
-            {
-                hoverImgIcon.source = param1.iconHoverSmall;
-                hoverImgIcon.sourceAlt = param1.iconHoverSmallAlt;
-            }
             addImg.visible = false;
         }
 

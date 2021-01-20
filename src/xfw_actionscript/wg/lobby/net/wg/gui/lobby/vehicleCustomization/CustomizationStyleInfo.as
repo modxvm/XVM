@@ -138,6 +138,11 @@ package net.wg.gui.lobby.vehicleCustomization
             invalidateSize();
         }
 
+        public function as_setBackgroundAlpha(param1:Number) : void
+        {
+            this.background.alpha = param1;
+        }
+
         private function onCloseBtnClickHandler(param1:ButtonEvent) : void
         {
             onCloseS();

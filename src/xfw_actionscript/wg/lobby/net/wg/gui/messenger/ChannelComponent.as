@@ -246,11 +246,6 @@ package net.wg.gui.messenger
             return this._externalHintTF;
         }
 
-        public function getChatInfo() : String
-        {
-            return getInfoS();
-        }
-
         public function set externalHintTF(param1:TextField) : void
         {
             if(this._externalHintTF == param1)

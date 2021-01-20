@@ -85,6 +85,7 @@ package net.wg.gui.lobby.techtree.nodes
         override protected function validateData() : void
         {
             var _loc2_:String = null;
+            var _loc4_:* = false;
             var _loc1_:String = getItemName();
             this.nameField.wordWrap = true;
             this.nameField.autoSize = TextFieldAutoSize.CENTER;
@@ -106,14 +107,12 @@ package net.wg.gui.lobby.techtree.nodes
             }
             if(this.xpField)
             {
-                if(!this.isAutoUnlocked)
+                _loc4_ = !this.isAutoUnlocked;
+                if(_loc4_)
                 {
                     this.xpField.setData(valueObject.unlockProps.xpCost,XpTypeStrings.COST_XP_TYPE);
                 }
-                else
-                {
-                    this.xpField.visible = false;
-                }
+                this.xpField.visible = _loc4_;
             }
             if(this.button != null)
             {

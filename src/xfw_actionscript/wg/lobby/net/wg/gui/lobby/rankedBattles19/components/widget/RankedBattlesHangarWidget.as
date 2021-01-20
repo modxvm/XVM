@@ -658,10 +658,11 @@ package net.wg.gui.lobby.rankedBattles19.components.widget
 
         private function setFinalStateData(param1:Boolean = true) : void
         {
+            var _loc2_:RankedBattlesHangarWidgetVO = null;
             var _loc3_:Vector.<String> = null;
             var _loc4_:* = false;
             var _loc5_:* = false;
-            var _loc2_:RankedBattlesHangarWidgetVO = this._animationSteps[this._currentAnimationStep].finalState;
+            _loc2_ = this._animationSteps[this._currentAnimationStep].finalState;
             if(_loc2_)
             {
                 _loc3_ = _loc2_.stepsContainerVO.steps;

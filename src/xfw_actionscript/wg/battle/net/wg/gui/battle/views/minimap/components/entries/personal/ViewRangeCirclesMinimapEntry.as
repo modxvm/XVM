@@ -14,6 +14,8 @@ package net.wg.gui.battle.views.minimap.components.entries.personal
 
         private static var AREA_MAX_SIZE_REAL:Number = 210;
 
+        private var _minMC:Shape = null;
+
         private var _dynamicMC:Shape = null;
 
         private var _maxMC:Shape = null;
@@ -57,6 +59,14 @@ package net.wg.gui.battle.views.minimap.components.entries.personal
             }
         }
 
+        public function as_addMinSpottingRange(param1:Number, param2:Number, param3:Number) : void
+        {
+            if(this._minMC == null)
+            {
+                this._minMC = this.initializeCircle(param1,param2,param3);
+            }
+        }
+
         public function as_delDrawRange() : void
         {
             if(this._drawMC)
@@ -84,6 +94,15 @@ package net.wg.gui.battle.views.minimap.components.entries.personal
             }
         }
 
+        public function as_delMinSpottingRange() : void
+        {
+            if(this._minMC)
+            {
+                this.removeChild(this._minMC);
+                this._minMC = null;
+            }
+        }
+
         public function as_initArenaSize(param1:int, param2:int) : void
         {
             this._mapSizeCoeff = AREA_MAX_SIZE_REAL / param1;
@@ -96,6 +115,7 @@ package net.wg.gui.battle.views.minimap.components.entries.personal
             this.as_delDynRange();
             this.as_delDrawRange();
             this.as_delMaxViewRage();
+            this.as_delMinSpottingRange();
         }
 
         public function as_updateDynRange(param1:Number) : void

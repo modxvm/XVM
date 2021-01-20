@@ -251,24 +251,6 @@ package
 
         public static const DIALOGS_SERVICECHANNEL_TITLE:String = "#messenger:dialogs/serviceChannel/title";
 
-        public static const DIALOGS_SQUAD_MESSAGE_ALLREADY:String = "#messenger:dialogs/squad/message/allReady";
-
-        public static const DIALOGS_SQUAD_MESSAGE_GETREADY:String = "#messenger:dialogs/squad/message/getReady";
-
-        public static const DIALOGS_SQUAD_MESSAGE_GETNOTREADY:String = "#messenger:dialogs/squad/message/getNotReady";
-
-        public static const DIALOGS_SQUAD_EVENT_VEHICLE:String = "#messenger:dialogs/squad/event/vehicle";
-
-        public static const DIALOGS_SQUAD_MESSAGE_INVALIDVEHICLELEVEL:String = "#messenger:dialogs/squad/message/invalidVehicleLevel";
-
-        public static const DIALOGS_SQUAD_MESSAGE_INVALIDVEHICLE:String = "#messenger:dialogs/squad/message/invalidVehicle";
-
-        public static const DIALOGS_SQUAD_MESSAGE_SPGFORBIDDEN:String = "#messenger:dialogs/squad/message/spgForbidden";
-
-        public static const DIALOGS_SQUAD_MESSAGE_SPGFULL:String = "#messenger:dialogs/squad/message/spgFull";
-
-        public static const DIALOGS_SQUAD_MESSAGE_VEHICLES_DIFFERENTLEVELS:String = "#messenger:dialogs/squad/message/vehicles/differentLevels";
-
         public static const DIALOGS_FALLOUTSQUADCHANNEL_VEHICLES:String = "#messenger:dialogs/falloutSquadChannel/vehicles";
 
         public static const DIALOGS_FALLOUTSQUADCHANNEL_VEHICLES_STEELHUNTING:String = "#messenger:dialogs/falloutSquadChannel/vehicles/steelHunting";
@@ -287,65 +269,15 @@ package
 
         public static const DIALOGS_FALLOUTSQUADCHANNEL_VEHICLENOTIFYMULTITEAM:String = "#messenger:dialogs/falloutSquadChannel/vehicleNotifyMultiteam";
 
-        public static const DIALOGS_SIMPLESQUAD_VEHICLE_RECOMMENDATIONLEVEL:String = "#messenger:dialogs/simpleSquad/vehicle/recommendationLevel";
-
-        public static const DIALOGS_SQUADCHANNEL_CHATNAME:String = "#messenger:dialogs/squadChannel/chatName";
-
         public static const DIALOGS_SQUADCHANNEL_SIMPLECHATNAME:String = "#messenger:dialogs/squadChannel/simpleChatName";
 
         public static const DIALOGS_SQUADCHANNEL_SIMPLECHATALERT_ANONYMIZER:String = "#messenger:dialogs/squadChannel/simpleChatAlert/anonymizer";
-
-        public static const DIALOGS_SQUADCHANNEL_MEMBERS:String = "#messenger:dialogs/squadChannel/members";
-
-        public static const DIALOGS_SQUADCHANNEL_VEHICLES:String = "#messenger:dialogs/squadChannel/vehicles";
-
-        public static const DIALOGS_SQUADCHANNEL_VEHICLESLBL:String = "#messenger:dialogs/squadChannel/vehiclesLbl";
-
-        public static const DIALOGS_SIMPLESQUAD_VEHICLELEVEL:String = "#messenger:dialogs/simpleSquad/vehicleLevel";
 
         public static const DIALOGS_SIMPLESQUAD_EPICBATTLE_VEHICLERESTRICTION:String = "#messenger:dialogs/simpleSquad/epicBattle/VehicleRestriction";
 
         public static const DIALOGS_SIMPLESQUAD_BATTLEROYALE_VEHICLERESTRICTION:String = "#messenger:dialogs/simpleSquad/battleRoyale/VehicleRestriction";
 
         public static const DIALOGS_EVENTSQUAD_VEHICLE:String = "#messenger:dialogs/eventSquad/vehicle";
-
-        public static const DIALOGS_SQUADCHANNEL_BATTLETYPE:String = "#messenger:dialogs/squadChannel/battleType";
-
-        public static const DIALOGS_SQUADCHANNEL_BATTLETYPEDOMINATION:String = "#messenger:dialogs/squadChannel/battleTypeDomination";
-
-        public static const DIALOGS_SQUADCHANNEL_BUTTONS_INVITE:String = "#messenger:dialogs/squadChannel/buttons/invite";
-
-        public static const DIALOGS_SQUADCHANNEL_BUTTONS_RECOMMEND:String = "#messenger:dialogs/squadChannel/buttons/recommend";
-
-        public static const DIALOGS_SIMPLESQUAD_RECOMMENDATIONLEVEL:String = "#messenger:dialogs/simpleSquad/recommendationLevel";
-
-        public static const DIALOGS_SQUADCHANNEL_BUTTONS_LEAVE:String = "#messenger:dialogs/squadChannel/buttons/leave";
-
-        public static const DIALOGS_SQUADCHANNEL_BUTTONS_READY:String = "#messenger:dialogs/squadChannel/buttons/ready";
-
-        public static const DIALOGS_SQUADCHANNEL_BUTTONS_NOTREADY:String = "#messenger:dialogs/squadChannel/buttons/notReady";
-
-        public static const DIALOGS_SQUADCHANNEL_BUTTONS_DISMISS:String = "#messenger:dialogs/squadChannel/buttons/dismiss";
-
-        public static const DIALOGS_SQUADCHANNEL_BUTTONS_AFK:String = "#messenger:dialogs/squadChannel/buttons/afk";
-
-        public static const DIALOGS_SQUADCHANNEL_MESSEGE_NOPREMIUM:String = "#messenger:dialogs/squadChannel/messege/noPremium";
-
-        public static const DIALOGS_SQUADCHANNEL_CONTEXT_KICKPLAYER:String = "#messenger:dialogs/squadChannel/context/kickPlayer";
-
-        public static const DIALOGS_SQUADCHANNEL_HEADERMSG_SQUADFORMATION:String = "#messenger:dialogs/squadChannel/headerMsg/squadFormation";
-
-        public static const DIALOGS_SQUADCHANNEL_HEADERMSG_SQUADFORMATIONRESTRICTION:String = "#messenger:dialogs/squadChannel/headerMsg/squadFormationRestriction";
-
-        public static const DIALOGS_SQUADCHANNEL_HEADERMSG_BATTLEROYALEHINT:String = "#messenger:dialogs/squadChannel/headerMsg/battleRoyaleHint";
-
-        public static const DIALOGS_SQUADCHANNEL_HEADERMSG_EVENTFORMATIONRESTRICTION:String = "#messenger:dialogs/squadChannel/headerMsg/eventFormationRestriction";
-
-        public static const DIALOGS_SQUADCHANNEL_HEADERMSG_EPICBATTLEFORMATIONRESTRICTION:String = "#messenger:dialogs/squadChannel/headerMsg/epicBattleFormationRestriction";
-
-        public static const DIALOGS_SQUADCHANNEL_BONUSES_CREDITS:String = "#messenger:dialogs/squadChannel/bonuses/credits";
-
-        public static const DIALOGS_SQUADCHANNEL_BONUSES_EXPERIENCE:String = "#messenger:dialogs/squadChannel/bonuses/experience";
 
         public static const DIALOGS_BSCHANNEL_CONTEXT_KICKPLAYER:String = "#messenger:dialogs/bsChannel/context/kickPlayer";
 
@@ -364,6 +296,16 @@ package
         public static const DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_AFK:String = "#messenger:dialogs/squadChannel/tooltips/status/afk";
 
         public static const DIALOGS_SQUADCHANNEL_TOOLTIPS_MODULE:String = "#messenger:dialogs/squadChannel/tooltips/module";
+
+        public static const DIALOGS_SQUADCHANNEL_HEADERMSG_SQUADFORMATION:String = "#messenger:dialogs/squadChannel/headerMsg/squadFormation";
+
+        public static const DIALOGS_SQUADCHANNEL_HEADERMSG_SQUADFORMATIONRESTRICTION:String = "#messenger:dialogs/squadChannel/headerMsg/squadFormationRestriction";
+
+        public static const DIALOGS_SQUADCHANNEL_HEADERMSG_BATTLEROYALEHINT:String = "#messenger:dialogs/squadChannel/headerMsg/battleRoyaleHint";
+
+        public static const DIALOGS_SQUADCHANNEL_HEADERMSG_EVENTFORMATIONRESTRICTION:String = "#messenger:dialogs/squadChannel/headerMsg/eventFormationRestriction";
+
+        public static const DIALOGS_SQUADCHANNEL_HEADERMSG_EPICBATTLEFORMATIONRESTRICTION:String = "#messenger:dialogs/squadChannel/headerMsg/epicBattleFormationRestriction";
 
         public static const SERVER_ERRORS_SETTINGERROR_CHANGEUNAVAILABLE_MESSAGE:String = "#messenger:server/errors/settingError/changeUnavailable/message";
 
@@ -715,10 +657,6 @@ package
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_SENIORITYREWARDBODY:String = "#messenger:serviceChannelMessages/battleResults/seniorityRewardBody";
 
-        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_NYBOXES:String = "#messenger:serviceChannelMessages/battleResults/quests/nyBoxes";
-
-        public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_VARIADICDISCOUNT:String = "#messenger:serviceChannelMessages/battleResults/quests/variadicDiscount";
-
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_PERSONALMISSIONS:String = "#messenger:serviceChannelMessages/battleResults/personalMissions";
 
         public static const SERVICECHANNELMESSAGES_BATTLERESULTS_PERSONALMISSIONS_1:String = "#messenger:serviceChannelMessages/battleResults/personalMissions/1";
@@ -980,20 +918,6 @@ package
         public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_RANKEDBONUSBATTLESACCRUED:String = "#messenger:serviceChannelMessages/invoiceReceived/rankedBonusBattlesAccrued";
 
         public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_RANKEDBONUSBATTLESDEBITED:String = "#messenger:serviceChannelMessages/invoiceReceived/rankedBonusBattlesDebited";
-
-        public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_NYTOYSACCRUEDINVOICERECEIVED:String = "#messenger:serviceChannelMessages/invoiceReceived/nyToysAccruedInvoiceReceived";
-
-        public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_NYTOYSDEBITEDINVOICERECEIVED:String = "#messenger:serviceChannelMessages/invoiceReceived/nyToysDebitedInvoiceReceived";
-
-        public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_NYFILLERSACCRUED:String = "#messenger:serviceChannelMessages/invoiceReceived/nyFillersAccrued";
-
-        public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_NYFILLERSDEBITED:String = "#messenger:serviceChannelMessages/invoiceReceived/nyFillersDebited";
-
-        public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_NYFRAGMENTSACCRUED:String = "#messenger:serviceChannelMessages/invoiceReceived/nyFragmentsAccrued";
-
-        public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_NYFRAGMENTSDEBITED:String = "#messenger:serviceChannelMessages/invoiceReceived/nyFragmentsDebited";
-
-        public static const SERVICECHANNELMESSAGES_INVOICERECEIVED_TOYTYPEWRAPPER:String = "#messenger:serviceChannelMessages/invoiceReceived/toyTypeWrapper";
 
         public static const SERVICECHANNELMESSAGES_DURATIONOFPREMIUMACCOUNTEXPIRES:String = "#messenger:serviceChannelMessages/durationOfPremiumAccountExpires";
 
@@ -1424,12 +1348,6 @@ package
         public static const SERVICECHANNELMESSAGES_RECRUITREMINDER_TEXT:String = "#messenger:serviceChannelMessages/recruitReminder/text";
 
         public static const SERVICECHANNELMESSAGES_RECRUITREMINDERTERMLESS_TEXT:String = "#messenger:serviceChannelMessages/recruitReminderTermless/text";
-
-        public static const SERVICECHANNELMESSAGES_LOOTBOXESGIFT_HEADER:String = "#messenger:serviceChannelMessages/lootBoxesGift/header";
-
-        public static const SERVICECHANNELMESSAGES_LOOTBOXESGIFT_BODY:String = "#messenger:serviceChannelMessages/lootBoxesGift/body";
-
-        public static const SERVICECHANNELMESSAGES_LOOTBOXESGIFT_BUTTON:String = "#messenger:serviceChannelMessages/lootBoxesGift/button";
 
         public static const COMMAND_SUCCESS_USERBAN:String = "#messenger:command/success/USERBAN";
 
@@ -1879,8 +1797,6 @@ package
 
         public static const SERVICECHANNELMESSAGES_FLEXCHANGE_QUESTS_REWARD:String = "#messenger:serviceChannelMessages/flExchange/quests/reward";
 
-        public static const SERVICECHANNELMESSAGES_NEWYEARTALISMAN_BUTTON:String = "#messenger:serviceChannelMessages/newYearTalisman/button";
-
         public static const SERVICECHANNELMESSAGES_RANKEDFINALEAWARDSNOTIFICATION_TITLE:String = "#messenger:serviceChannelMessages/rankedFinaleAwardsNotification/title";
 
         public static const SERVICECHANNELMESSAGES_RANKEDFINALEAWARDSNOTIFICATION_CONGRATULATION:String = "#messenger:serviceChannelMessages/rankedFinaleAwardsNotification/congratulation";
@@ -2012,8 +1928,7 @@ package
 
         public static function getSquadChannelTooltipsStatus(param1:String) : String
         {
-            var _loc2_:String = null;
-            _loc2_ = "#messenger:" + "dialogs/squadChannel/tooltips/status/" + param1;
+            var _loc2_:String = "#messenger:" + "dialogs/squadChannel/tooltips/status/" + param1;
             if(DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_ENUM.indexOf(_loc2_) == -1)
             {
                 DebugUtils.LOG_WARNING("[getSquadChannelTooltipsStatus]:locale key \"" + _loc2_ + "\" was not found");

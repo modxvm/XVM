@@ -56,6 +56,10 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
             if(_loc2_.isEnemy)
             {
                 this._tableCtrl.setVehicleStatus(true,_loc2_.vehicleID,_loc2_.status,_loc2_.rightVehiclesIDs);
+                if(_loc2_.dogTag)
+                {
+                    this._tableCtrl.setDogTagToShow(_loc2_.vehicleID,_loc2_.dogTag);
+                }
             }
             else
             {

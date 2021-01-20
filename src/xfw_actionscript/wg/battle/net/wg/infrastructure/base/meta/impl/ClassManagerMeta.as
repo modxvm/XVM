@@ -225,6 +225,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list.PlayersPanelListRight;
     import net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.panelSwitch.PlayersPanelSwitch;
     import net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.panelSwitch.PlayersPanelSwitchButtonEx;
+    import net.wg.gui.battle.epicRandom.views.stats.events.EpicRandomFullStatsListItemRendererEvent;
     import net.wg.gui.battle.epicRandom.VO.daapi.EpicRandomDAAPIVehicleInfoVO;
     import net.wg.gui.battle.epicRandom.VO.daapi.EpicRandomDAAPIVehiclesDataVO;
     import net.wg.gui.battle.eventBattle.views.EventBattleLoading;
@@ -1360,6 +1361,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_BATTLE_EPICRANDOM_VIEWS_STATS_COMPONENTS_PLAYERSPANEL_PANELSWITCH_PLAYERSPANELSWITCH:Class = net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.panelSwitch.PlayersPanelSwitch;
 
         public static const NET_WG_GUI_BATTLE_EPICRANDOM_VIEWS_STATS_COMPONENTS_PLAYERSPANEL_PANELSWITCH_PLAYERSPANELSWITCHBUTTONEX:Class = PlayersPanelSwitchButtonEx;
+
+        public static const NET_WG_GUI_BATTLE_EPICRANDOM_VIEWS_STATS_EVENTS_EPICRANDOMFULLSTATSLISTITEMRENDEREREVENT:Class = EpicRandomFullStatsListItemRendererEvent;
 
         public static const NET_WG_GUI_BATTLE_EPICRANDOM_VO_DAAPI_EPICRANDOMDAAPIVEHICLEINFOVO:Class = EpicRandomDAAPIVehicleInfoVO;
 

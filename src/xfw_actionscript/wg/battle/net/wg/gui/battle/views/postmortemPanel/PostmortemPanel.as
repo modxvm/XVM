@@ -32,9 +32,11 @@ package net.wg.gui.battle.views.postmortemPanel
 
         private static const DEAD_REASON_ALPHA:Number = 0.5;
 
-        public var bg:BattleAtlasSprite = null;
+        private static const DELAY_DT_KILLER_APPEARANCE:int = 1000;
 
-        public var nicknameKillerBG:BattleAtlasSprite = null;
+        private static const DELAY_DT_VICTIM_APPEARANCE:int = 600;
+
+        public var bg:BattleAtlasSprite = null;
 
         public var observerModeTitleTF:TextField = null;
 
@@ -56,6 +58,8 @@ package net.wg.gui.battle.views.postmortemPanel
 
         private var _userNameTextFieldFadeInTween:Tween = null;
 
+        private var _dogTagAppearanceDelayTween:Tween = null;
+
         private var _nicknameKillerBGTween:Tween = null;
 
         private var _victimDogTagTweenIn:Tween = null;
@@ -75,7 +79,7 @@ package net.wg.gui.battle.views.postmortemPanel
         {
             super.configUI();
             this.bg.imageName = BATTLEATLAS.POSTMORTEM_TIPS_BG;
-            this.nicknameKillerBG.imageName = BATTLEATLAS.POSTMORTEM_NICKNAME_BG;
+            nicknameKillerBG.imageName = BATTLEATLAS.POSTMORTEM_NICKNAME_BG;
             deadReasonBG.imageName = BATTLEATLAS.POSTMORTEM_DEAD_REASON_BG;
             this.observerModeTitleTF.text = INGAME_GUI.POSTMORTEM_TIPS_OBSERVERMODE_LABEL;
             this.observerModeDescTF.text = INGAME_GUI.POSTMORTEM_TIPS_OBSERVERMODE_TEXT;
@@ -103,8 +107,8 @@ package net.wg.gui.battle.views.postmortemPanel
             if(this._dogTagKiller)
             {
                 this._dogTagKiller.y = deadReasonTF.y - this._dogTagKiller.height - DOGTAG_KILLER_OFFSET_Y;
-                this.nicknameKillerBG.x = -this.nicknameKillerBG.width >> 1;
-                this.nicknameKillerBG.y = _userName.y;
+                nicknameKillerBG.x = -nicknameKillerBG.width >> 1;
+                nicknameKillerBG.y = _userName.y;
             }
         }
 
@@ -174,6 +178,7 @@ package net.wg.gui.battle.views.postmortemPanel
                 this._victimDogTagTweenOut.paused = true;
             }
             this._victimDogTagTweenIn = new Tween(DOG_TAG_VICTIM_TWEEN_ANIMATION_TIME,this._dogTagVictim,{"x":(App.appWidth >> 1) - this._dogTagVictim.width},{
+                "delay":DELAY_DT_VICTIM_APPEARANCE,
                 "paused":false,
                 "onComplete":this.onVictimDogTagFadeInComplete
             });
@@ -200,7 +205,7 @@ package net.wg.gui.battle.views.postmortemPanel
                 {
                     this.showSpectatorPanel(true);
                 }
-                this.nicknameKillerBG.visible = _showVehiclePanel;
+                nicknameKillerBG.visible = _showVehiclePanel;
                 if(_userName && _userName.userVO && _userName.userVO.userName != Values.EMPTY_STR)
                 {
                     this.showPanel();
@@ -223,8 +228,8 @@ package net.wg.gui.battle.views.postmortemPanel
             deadReasonTF.alpha = 0;
             _userName.alpha = 0;
             deadReasonBG.alpha = 0;
-            this.nicknameKillerBG.alpha = 0;
-            this.clearTweens();
+            nicknameKillerBG.alpha = 0;
+            this.clearTweens(false);
             this._vehPanelFadeInTween = new Tween(FADE_ANIMATION_TIME,vehiclePanel,{"alpha":1},{
                 "delay":PANEL_ANIMATION_DELAY,
                 "paused":false
@@ -248,10 +253,19 @@ package net.wg.gui.battle.views.postmortemPanel
         {
             if(this._dogTagKiller)
             {
-                this._dogTagKiller.animate();
-                onDogTagKillerInPlaySoundS();
-                this.tweenReasonAndName(true);
+                this._dogTagAppearanceDelayTween = new Tween(0,this._dogTagKiller,{"visible":true},{
+                    "delay":DELAY_DT_KILLER_APPEARANCE,
+                    "paused":false,
+                    "onComplete":this.onDelayComplete
+                });
             }
+        }
+
+        private function onDelayComplete(param1:Tween) : void
+        {
+            this._dogTagKiller.animate();
+            onDogTagKillerInPlaySoundS();
+            this.tweenReasonAndName(true);
         }
 
         private function tweenReasonAndName(param1:Boolean) : void
@@ -261,7 +275,7 @@ package net.wg.gui.battle.views.postmortemPanel
                 "paused":false
             });
             this._deadReasonBGTween = new Tween(FADE_ANIMATION_TIME,deadReasonBG,{"alpha":(param1?DEAD_REASON_ALPHA:1)},{"paused":false});
-            this._nicknameKillerBGTween = new Tween(FADE_ANIMATION_TIME,this.nicknameKillerBG,{"alpha":(param1?1:0)},{"paused":false});
+            this._nicknameKillerBGTween = new Tween(FADE_ANIMATION_TIME,nicknameKillerBG,{"alpha":(param1?1:0)},{"paused":false});
         }
 
         private function onDogTagAnimateHideStart(param1:Event) : void
@@ -309,7 +323,7 @@ package net.wg.gui.battle.views.postmortemPanel
             super.onDispose();
         }
 
-        private function clearTweens() : void
+        private function clearTweens(param1:Boolean = true) : void
         {
             if(this._vehPanelFadeInTween)
             {
@@ -329,18 +343,6 @@ package net.wg.gui.battle.views.postmortemPanel
                 this._deadReasonTextFieldTween.dispose();
                 this._deadReasonTextFieldTween = null;
             }
-            if(this._victimDogTagTweenIn)
-            {
-                this._victimDogTagTweenIn.paused = true;
-                this._victimDogTagTweenIn.dispose();
-                this._victimDogTagTweenIn = null;
-            }
-            if(this._victimDogTagTweenOut)
-            {
-                this._victimDogTagTweenOut.paused = true;
-                this._victimDogTagTweenOut.dispose();
-                this._victimDogTagTweenOut = null;
-            }
             if(this._deadReasonBGTween)
             {
                 this._deadReasonBGTween.paused = true;
@@ -352,6 +354,27 @@ package net.wg.gui.battle.views.postmortemPanel
                 this._nicknameKillerBGTween.paused = true;
                 this._nicknameKillerBGTween.dispose();
                 this._nicknameKillerBGTween = null;
+            }
+            if(this._dogTagAppearanceDelayTween)
+            {
+                this._dogTagAppearanceDelayTween.paused = true;
+                this._dogTagAppearanceDelayTween.dispose();
+                this._dogTagAppearanceDelayTween = null;
+            }
+            if(param1)
+            {
+                if(this._victimDogTagTweenIn)
+                {
+                    this._victimDogTagTweenIn.paused = true;
+                    this._victimDogTagTweenIn.dispose();
+                    this._victimDogTagTweenIn = null;
+                }
+                if(this._victimDogTagTweenOut)
+                {
+                    this._victimDogTagTweenOut.paused = true;
+                    this._victimDogTagTweenOut.dispose();
+                    this._victimDogTagTweenOut = null;
+                }
             }
         }
     }

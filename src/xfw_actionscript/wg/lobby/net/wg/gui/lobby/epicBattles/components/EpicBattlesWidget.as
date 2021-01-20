@@ -10,6 +10,8 @@ package net.wg.gui.lobby.epicBattles.components
     import net.wg.gui.lobby.hangar.quests.HeaderQuestsEvent;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.utils.StageSizeBoundaries;
+    import net.wg.data.constants.SoundManagerStates;
+    import net.wg.data.constants.SoundTypes;
 
     public class EpicBattlesWidget extends EpicBattlesWidgetMeta implements IEpicBattlesWidgetMeta
     {
@@ -41,6 +43,7 @@ package net.wg.gui.lobby.epicBattles.components
         {
             super.configUI();
             this.button.addEventListener(MouseEvent.CLICK,this.onClickHandler);
+            this.button.addEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
             this.calendarStatus.x = -this.calendarStatus.width >> 1;
             this.mouseEnabled = false;
             this.bg.mouseEnabled = this.bg.mouseChildren = false;
@@ -53,6 +56,7 @@ package net.wg.gui.lobby.epicBattles.components
             this.questsFlags.dispose();
             this.questsFlags = null;
             this.button.removeEventListener(MouseEvent.CLICK,this.onClickHandler);
+            this.button.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
             this.calendarStatus.dispose();
             this.calendarStatus = null;
             this.bg = null;
@@ -110,7 +114,13 @@ package net.wg.gui.lobby.epicBattles.components
 
         private function onClickHandler(param1:MouseEvent) : void
         {
+            App.soundMgr.playControlsSnd(SoundManagerStates.SND_PRESS,SoundTypes.NORMAL_BTN,null);
             onWidgetClickS();
+        }
+
+        private function onRollOverHandler(param1:MouseEvent) : void
+        {
+            App.soundMgr.playControlsSnd(SoundManagerStates.SND_OVER,SoundTypes.NORMAL_BTN,null);
         }
     }
 }

@@ -171,5 +171,11 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel
                 this.updateColumnAndStateLayout(param1.group);
             }
         }
+
+        override public function as_setChatCommandsVisibility(param1:Boolean) : void
+        {
+            this._listLeftEpic.setChatCommandVisibility(param1);
+            this._listRightEpic.setChatCommandVisibility(param1);
+        }
     }
 }

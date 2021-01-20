@@ -54,6 +54,8 @@ package net.wg.gui.battle.components.stats.playersPanel.list
 
         private var _dogTag:DogtagComponent;
 
+        private var _isChatCommVisible:Boolean = true;
+
         private var _commons:ICommons;
 
         private var _tooltipMgr:ITooltipMgr;
@@ -373,6 +375,20 @@ package net.wg.gui.battle.components.stats.playersPanel.list
         {
         }
 
+        public function setChatCommandVisibility(param1:Boolean) : void
+        {
+            var _loc2_:IPlayersPanelListItem = null;
+            if(param1 == this._isChatCommVisible)
+            {
+                return;
+            }
+            this._isChatCommVisible = param1;
+            for each(_loc2_ in this.panelListItems)
+            {
+                _loc2_.setChatCommandVisibility(param1);
+            }
+        }
+
         public function get isInviteReceived() : Boolean
         {
             return false;
@@ -458,6 +474,7 @@ package net.wg.gui.battle.components.stats.playersPanel.list
             _loc2_.y = _loc3_ * ITEM_HEIGHT;
             _loc2_.setIsRightAligned(this.isRightAligned);
             _loc2_.holderItemID = _loc3_;
+            _loc2_.setChatCommandVisibility(this._isChatCommVisible);
             this._renderersContainer.addChild(DisplayObject(_loc2_));
             this.panelListItems.push(_loc2_);
             var _loc4_:Class = this.getItemHolderClass();

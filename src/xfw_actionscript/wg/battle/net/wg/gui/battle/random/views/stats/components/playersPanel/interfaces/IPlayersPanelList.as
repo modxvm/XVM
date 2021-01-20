@@ -40,6 +40,8 @@ package net.wg.gui.battle.random.views.stats.components.playersPanel.interfaces
 
         function setSpeaking(param1:Number, param2:Boolean) : void;
 
+        function setChatCommandVisibility(param1:Boolean) : void;
+
         function getRenderersVisibleWidth() : uint;
 
         function updateColorBlind() : void;

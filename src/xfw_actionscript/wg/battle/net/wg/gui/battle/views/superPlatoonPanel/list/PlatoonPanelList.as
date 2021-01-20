@@ -5,8 +5,8 @@ package net.wg.gui.battle.views.superPlatoonPanel.list
     import flash.display.MovieClip;
     import net.wg.gui.battle.epicBattle.VO.daapi.EpicVehicleStatsVO;
     import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
-    import net.wg.data.constants.Linkages;
     import net.wg.gui.battle.views.superPlatoonPanel.renderers.PlatoonMemberListItemRenderer;
+    import net.wg.data.constants.Linkages;
 
     public class PlatoonPanelList extends Sprite implements IDisposable
     {
@@ -22,6 +22,8 @@ package net.wg.gui.battle.views.superPlatoonPanel.list
         private var _currOrder:Vector.<Number> = null;
 
         private var _totalOrder:Vector.<Number> = null;
+
+        private var _isChatCommVisible:Boolean = true;
 
         public function PlatoonPanelList()
         {
@@ -181,6 +183,20 @@ package net.wg.gui.battle.views.superPlatoonPanel.list
             _loc2_ = null;
         }
 
+        public function setChatCommandsVisibility(param1:Boolean) : void
+        {
+            var _loc2_:PlatoonMemberListItemHolder = null;
+            if(this._isChatCommVisible == param1)
+            {
+                return;
+            }
+            this._isChatCommVisible = param1;
+            for each(_loc2_ in this._items)
+            {
+                _loc2_.setChatCommandsVisibility(param1);
+            }
+        }
+
         private function orderSortFunction(param1:Number, param2:Number) : Number
         {
             var _loc3_:int = this._totalOrder.indexOf(param1);
@@ -206,12 +222,14 @@ package net.wg.gui.battle.views.superPlatoonPanel.list
 
         private function addItem(param1:DAAPIVehicleInfoVO) : void
         {
-            var _loc2_:PlatoonMemberListItemRenderer = App.utils.classFactory.getComponent(Linkages.PLATOON_MEMBER_LIST_ITEM_UI,PlatoonMemberListItemRenderer);
+            var _loc2_:PlatoonMemberListItemRenderer = null;
+            _loc2_ = App.utils.classFactory.getComponent(Linkages.PLATOON_MEMBER_LIST_ITEM_UI,PlatoonMemberListItemRenderer);
             _loc2_.y = STARTING_Y_OFFSET + this._items.length * ITEM_HEIGHT;
             _loc2_.holderItemID = this._items.length;
             this.container.addChild(_loc2_);
             var _loc3_:PlatoonMemberListItemHolder = new PlatoonMemberListItemHolder(_loc2_);
             _loc3_.setVehicleData(param1);
+            _loc3_.setChatCommandsVisibility(this._isChatCommVisible);
             this._items.push(_loc3_);
         }
 

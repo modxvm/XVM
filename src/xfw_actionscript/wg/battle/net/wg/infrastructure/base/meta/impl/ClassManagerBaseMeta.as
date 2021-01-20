@@ -196,6 +196,8 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.components.common.bugreport.ReportBugPanel;
     import net.wg.gui.components.common.lobbyVehicleMarkers.LobbyVehicleMarkers;
     import net.wg.gui.components.common.lobbyVehicleMarkers.LobbyVehicleMarkersVO;
+    import net.wg.gui.components.common.lobbyVehicleMarkers.PlatoonMarker;
+    import net.wg.gui.components.common.lobbyVehicleMarkers.PlatoonMarkerVO;
     import net.wg.gui.components.common.markers.AnimateExplosion;
     import net.wg.gui.components.common.markers.DamageLabel;
     import net.wg.gui.components.common.markers.HealthBar;
@@ -782,16 +784,6 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.settings.vo.config.marker.MarkerSettingsDataVo;
     import net.wg.gui.login.impl.components.LoginLogos;
     import net.wg.gui.login.impl.ev.LoginLogosEvent;
-    import net.wg.gui.ny.cmpnts.NYButtonBarGroup;
-    import net.wg.gui.ny.cmpnts.NYCraftLevelsBlock;
-    import net.wg.gui.ny.cmpnts.NYCraftLevelsBlockAlt;
-    import net.wg.gui.ny.cmpnts.NYCraftSettingsBlock;
-    import net.wg.gui.ny.cmpnts.NYLinearSlider;
-    import net.wg.gui.ny.cmpnts.NYRadialSlider;
-    import net.wg.gui.ny.cmpnts.NYSliderBase;
-    import net.wg.gui.ny.cmpnts.NySliderBlock;
-    import net.wg.gui.ny.cmpnts.NYSliderTab;
-    import net.wg.gui.ny.ev.NYSliderEv;
     import net.wg.gui.popover.AcousticButton;
     import net.wg.gui.popover.AcousticPopover;
     import net.wg.gui.popover.data.AcousticItemData;
@@ -1265,6 +1257,10 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_COMPONENTS_COMMON_LOBBYVEHICLEMARKERS_LOBBYVEHICLEMARKERS:Class = LobbyVehicleMarkers;
 
         public static const NET_WG_GUI_COMPONENTS_COMMON_LOBBYVEHICLEMARKERS_LOBBYVEHICLEMARKERSVO:Class = LobbyVehicleMarkersVO;
+
+        public static const NET_WG_GUI_COMPONENTS_COMMON_LOBBYVEHICLEMARKERS_PLATOONMARKER:Class = PlatoonMarker;
+
+        public static const NET_WG_GUI_COMPONENTS_COMMON_LOBBYVEHICLEMARKERS_PLATOONMARKERVO:Class = PlatoonMarkerVO;
 
         public static const NET_WG_GUI_COMPONENTS_COMMON_MARKERS_ANIMATEEXPLOSION:Class = AnimateExplosion;
 
@@ -2437,26 +2433,6 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_LOGIN_IMPL_COMPONENTS_LOGINLOGOS:Class = LoginLogos;
 
         public static const NET_WG_GUI_LOGIN_IMPL_EV_LOGINLOGOSEVENT:Class = LoginLogosEvent;
-
-        public static const NET_WG_GUI_NY_CMPNTS_NYBUTTONBARGROUP:Class = NYButtonBarGroup;
-
-        public static const NET_WG_GUI_NY_CMPNTS_NYCRAFTLEVELSBLOCK:Class = NYCraftLevelsBlock;
-
-        public static const NET_WG_GUI_NY_CMPNTS_NYCRAFTLEVELSBLOCKALT:Class = NYCraftLevelsBlockAlt;
-
-        public static const NET_WG_GUI_NY_CMPNTS_NYCRAFTSETTINGSBLOCK:Class = NYCraftSettingsBlock;
-
-        public static const NET_WG_GUI_NY_CMPNTS_NYLINEARSLIDER:Class = NYLinearSlider;
-
-        public static const NET_WG_GUI_NY_CMPNTS_NYRADIALSLIDER:Class = NYRadialSlider;
-
-        public static const NET_WG_GUI_NY_CMPNTS_NYSLIDERBASE:Class = NYSliderBase;
-
-        public static const NET_WG_GUI_NY_CMPNTS_NYSLIDERBLOCK:Class = NySliderBlock;
-
-        public static const NET_WG_GUI_NY_CMPNTS_NYSLIDERTAB:Class = NYSliderTab;
-
-        public static const NET_WG_GUI_NY_EV_NYSLIDEREV:Class = NYSliderEv;
 
         public static const NET_WG_GUI_POPOVER_ACOUSTICBUTTON:Class = AcousticButton;
 

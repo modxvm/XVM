@@ -4,8 +4,6 @@ package net.wg.gui.components.dogtag
     import flash.text.TextField;
     import flash.display.Sprite;
     import net.wg.gui.components.controls.Image;
-    import flash.events.Event;
-    import scaleform.clik.constants.InvalidationType;
 
     public class DogtagDownPlate extends UIComponentEx
     {
@@ -22,6 +20,8 @@ package net.wg.gui.components.dogtag
 
         private static const DEFAULT_BACKGROUND:String = "background_66_0";
 
+        private const _imageRepository:ImageRepository = ImageRepository.getInstance();
+
         public var engravingStatName:TextField = null;
 
         private var _characters:Array;
@@ -35,12 +35,12 @@ package net.wg.gui.components.dogtag
             this._characters = [];
             super();
             this._plate = new Image();
+            this._engravingStatValueContainer = new Sprite();
         }
 
         override protected function configUI() : void
         {
             addChildAt(this._plate,0);
-            this._engravingStatValueContainer = new Sprite();
             this._engravingStatValueContainer.y = ENGRAVING_STAT_VALUE_CONTAINER_OFFSET_Y;
             addChild(this._engravingStatValueContainer);
             super.configUI();
@@ -48,81 +48,48 @@ package net.wg.gui.components.dogtag
 
         public function setDogTagInfo(param1:String, param2:String) : void
         {
-            this._plate.bitmapData = ImageRepository.getInstance().getImageBitmapData(DEFAULT_BACKGROUND);
+            this._plate.bitmapData = this._imageRepository.getImageBitmapData(DEFAULT_BACKGROUND);
             this.engravingStatName.text = param1;
             this.buildPhrase(param2);
         }
 
         private function buildPhrase(param1:String) : void
         {
-            var _loc3_:String = null;
-            var _loc4_:Image = null;
-            var _loc5_:* = 0;
+            var _loc4_:String = null;
+            var _loc5_:Image = null;
             var _loc6_:* = 0;
-            var _loc7_:String = null;
+            var _loc7_:* = 0;
+            var _loc8_:String = null;
             this.removeCharacters();
             var _loc2_:* = 0;
-            while(_loc2_ < param1.length)
+            var _loc3_:* = 0;
+            while(_loc3_ < param1.length)
             {
-                _loc3_ = param1.charAt(_loc2_);
-                if(_loc3_ == SPACE)
+                _loc4_ = param1.charAt(_loc3_);
+                if(_loc4_ == SPACE)
                 {
-                    this._characters.push(SPACE);
+                    _loc2_ = _loc2_ + SPACE_GAP;
                 }
                 else
                 {
-                    _loc4_ = new Image();
-                    if(_loc3_ == BRACKET_LEFT)
+                    _loc5_ = new Image();
+                    if(_loc4_ == BRACKET_LEFT)
                     {
-                        _loc5_ = param1.indexOf(BRACKET_RIGHT,_loc2_);
-                        _loc6_ = _loc5_ - _loc2_ - 1;
-                        _loc7_ = param1.substr(_loc2_ + 1,_loc6_);
-                        _loc3_ = _loc7_;
-                        _loc2_ = _loc2_ + (_loc6_ + 1);
+                        _loc6_ = param1.indexOf(BRACKET_RIGHT,_loc3_);
+                        _loc7_ = _loc6_ - _loc3_ - 1;
+                        _loc8_ = param1.substr(_loc3_ + 1,_loc7_);
+                        _loc4_ = _loc8_;
+                        _loc3_ = _loc3_ + (_loc7_ + 1);
                     }
-                    _loc4_.source = RES_ICONS.getDogTagCharacterSmall(_loc3_);
-                    this._characters.push(_loc4_);
+                    _loc5_.bitmapData = this._imageRepository.getCharacterBitmapData(_loc4_);
+                    _loc5_.x = _loc2_;
+                    this._engravingStatValueContainer.addChild(_loc5_);
+                    this._characters.push(_loc5_);
+                    _loc2_ = _loc2_ + _loc5_.bitmapData.width;
                 }
-                _loc2_++;
+                _loc3_++;
             }
-            _loc4_.addEventListener(Event.CHANGE,this.onSourceLoaded);
-        }
-
-        private function onSourceLoaded(param1:Event) : void
-        {
-            invalidateSize();
-        }
-
-        override protected function draw() : void
-        {
-            var _loc1_:* = 0;
-            var _loc2_:* = 0;
-            var _loc3_:Image = null;
-            if(isInvalid(InvalidationType.SIZE))
-            {
-                if(this._engravingStatValueContainer)
-                {
-                    _loc1_ = 0;
-                    _loc2_ = 0;
-                    while(_loc2_ < this._characters.length)
-                    {
-                        if(this._characters[_loc2_] == SPACE)
-                        {
-                            _loc1_ = _loc1_ + SPACE_GAP;
-                        }
-                        else
-                        {
-                            _loc3_ = this._characters[_loc2_];
-                            _loc3_.x = _loc1_;
-                            this._engravingStatValueContainer.addChild(_loc3_);
-                            _loc1_ = _loc1_ + _loc3_.width;
-                        }
-                        _loc2_++;
-                    }
-                    this._engravingStatValueContainer.x = (this.width >> 1) - (this._engravingStatValueContainer.width >> 1);
-                }
-            }
-            super.draw();
+            this._engravingStatValueContainer.x = (this.width >> 1) - (_loc2_ >> 1);
         }
 
         override protected function onDispose() : void
@@ -143,12 +110,8 @@ package net.wg.gui.components.dogtag
             while(_loc2_ < _loc1_)
             {
                 _loc3_ = this._characters.pop();
-                if(_loc3_ != SPACE)
-                {
-                    this._engravingStatValueContainer.removeChild(_loc3_);
-                    _loc3_.removeEventListener(Event.CHANGE,this.onSourceLoaded);
-                    _loc3_.dispose();
-                }
+                this._engravingStatValueContainer.removeChild(_loc3_);
+                _loc3_.dispose();
                 _loc2_++;
             }
         }

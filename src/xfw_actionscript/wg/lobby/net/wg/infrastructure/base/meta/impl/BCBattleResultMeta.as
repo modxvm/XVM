@@ -51,10 +51,10 @@ package net.wg.infrastructure.base.meta.impl
             this.onToolTipShow(param1);
         }
 
-        public function onVideoButtonClickS() : void
+        public function onVideoButtonClickS(param1:int) : void
         {
             App.utils.asserter.assertNotNull(this.onVideoButtonClick,"onVideoButtonClick" + Errors.CANT_NULL);
-            this.onVideoButtonClick();
+            this.onVideoButtonClick(param1);
         }
 
         public final function as_setData(param1:Object) : void

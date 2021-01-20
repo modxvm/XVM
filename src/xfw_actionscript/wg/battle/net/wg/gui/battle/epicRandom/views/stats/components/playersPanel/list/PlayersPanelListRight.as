@@ -9,6 +9,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
         {
             super();
             selfBg.visible = false;
+            initDogTag();
         }
 
         override public function toString() : String

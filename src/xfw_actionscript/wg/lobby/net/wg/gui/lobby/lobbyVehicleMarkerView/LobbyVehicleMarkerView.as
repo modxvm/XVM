@@ -2,23 +2,27 @@ package net.wg.gui.lobby.lobbyVehicleMarkerView
 {
     import net.wg.infrastructure.base.meta.impl.LobbyVehicleMarkerViewMeta;
     import net.wg.infrastructure.base.meta.ILobbyVehicleMarkerViewMeta;
-    import net.wg.gui.components.common.lobbyVehicleMarkers.LobbyVehicleMarkers;
+    import flash.utils.Dictionary;
     import flash.display.DisplayObject;
     import net.wg.data.constants.Linkages;
+    import net.wg.gui.components.common.lobbyVehicleMarkers.LobbyVehicleMarkers;
+    import net.wg.gui.components.common.lobbyVehicleMarkers.PlatoonMarker;
 
     public class LobbyVehicleMarkerView extends LobbyVehicleMarkerViewMeta implements ILobbyVehicleMarkerViewMeta
     {
 
-        private var _marker:LobbyVehicleMarkers;
+        private var _markers:Dictionary;
 
         public function LobbyVehicleMarkerView()
         {
+            this._markers = new Dictionary();
             super();
         }
 
         override protected function onDispose() : void
         {
-            this.removeMarker();
+            App.utils.data.cleanupDynamicObject(this._markers);
+            this._markers = null;
             super.onDispose();
         }
 
@@ -27,26 +31,36 @@ package net.wg.gui.lobby.lobbyVehicleMarkerView
             return false;
         }
 
-        public function as_createMarker(param1:String, param2:String) : DisplayObject
+        public function as_createMarker(param1:int, param2:String, param3:String) : DisplayObject
         {
-            this._marker = App.instance.utils.classFactory.getComponent(Linkages.LOBBY_VEH_MARKER,LobbyVehicleMarkers);
-            this._marker.setVehicleInfo(param1,param2);
-            addChild(this._marker);
-            return this._marker;
+            var _loc4_:LobbyVehicleMarkers = App.instance.utils.classFactory.getComponent(Linkages.LOBBY_VEH_MARKER,LobbyVehicleMarkers);
+            _loc4_.setVehicleInfo(param2,param3);
+            addChild(_loc4_);
+            this._markers[param1] = _loc4_;
+            return _loc4_;
         }
 
-        public function as_removeMarker() : void
+        public function as_createPlatoonMarker(param1:int, param2:String, param3:String) : DisplayObject
         {
-            this.removeMarker();
+            var _loc4_:PlatoonMarker = App.instance.utils.classFactory.getComponent(Linkages.PLATOON_VEH_MARKER,PlatoonMarker);
+            _loc4_.setVehicleInfo(param2,param3);
+            addChild(_loc4_);
+            this._markers[param1] = _loc4_;
+            return _loc4_;
         }
 
-        public function removeMarker() : void
+        public function as_removeMarker(param1:int) : void
         {
-            if(this._marker)
+            this.removeMarker(param1);
+        }
+
+        public function removeMarker(param1:int) : void
+        {
+            if(this._markers[param1])
             {
-                removeChild(this._marker);
-                this._marker.dispose();
-                this._marker = null;
+                removeChild(this._markers[param1]);
+                this._markers[param1].dispose();
+                this._markers[param1] = null;
             }
         }
     }
