@@ -5,9 +5,9 @@ package net.wg.gui.battle.views.postmortemPanel
     import net.wg.gui.battle.components.BattleAtlasSprite;
     import net.wg.gui.components.controls.UserNameField;
     import net.wg.data.constants.Values;
-    import flash.events.Event;
     import net.wg.data.VO.UserVO;
     import net.wg.data.constants.Linkages;
+    import flash.events.Event;
     import flashx.textLayout.formats.VerticalAlign;
 
     public class BasePostmortemPanel extends BasePostmortemPanelMeta
@@ -40,6 +40,8 @@ package net.wg.gui.battle.views.postmortemPanel
         public var vehiclePanel:VehiclePanel = null;
 
         public var deadReasonBG:BattleAtlasSprite = null;
+
+        public var nicknameKillerBG:BattleAtlasSprite = null;
 
         protected var _userName:UserNameField = null;
 
@@ -92,6 +94,10 @@ package net.wg.gui.battle.views.postmortemPanel
                 {
                     this.deadReasonBG.visible = false;
                 }
+                if(this.nicknameKillerBG)
+                {
+                    this.nicknameKillerBG.visible = false;
+                }
                 if(this._playerInfo != this.playerInfoTF.htmlText)
                 {
                     this.playerInfoTF.htmlText = this._playerInfo;
@@ -113,6 +119,10 @@ package net.wg.gui.battle.views.postmortemPanel
                 {
                     this.deadReasonBG.visible = this._deadReason != Values.EMPTY_STR;
                 }
+                if(this.nicknameKillerBG)
+                {
+                    this.nicknameKillerBG.visible = true;
+                }
                 this.vehiclePanel.visible = this._showVehiclePanel;
                 if(this._showVehiclePanel)
                 {
@@ -123,21 +133,6 @@ package net.wg.gui.battle.views.postmortemPanel
             {
                 this.updatePlayerInfoPosition();
             }
-        }
-
-        override protected function onDispose() : void
-        {
-            this.playerInfoTF = null;
-            this.deadReasonTF = null;
-            this.vehiclePanel.dispose();
-            this.vehiclePanel = null;
-            if(this._userName != null)
-            {
-                this._userName.removeEventListener(Event.CHANGE,this.updateDeadReason);
-                this._userName.dispose();
-                this._userName = null;
-            }
-            super.onDispose();
         }
 
         override protected function setDeadReasonInfo(param1:String, param2:Boolean, param3:String, param4:String, param5:String, param6:String, param7:UserVO) : void
@@ -204,6 +199,10 @@ package net.wg.gui.battle.views.postmortemPanel
             {
                 this.deadReasonBG.visible = param1;
             }
+            if(this.nicknameKillerBG)
+            {
+                this.nicknameKillerBG.visible = param1;
+            }
             if(this._userName != null)
             {
                 this._userName.visible = param1;
@@ -213,6 +212,23 @@ package net.wg.gui.battle.views.postmortemPanel
         private function updateDeadReason(param1:Event) : void
         {
             this.updateElementsPosition();
+        }
+
+        override protected function onDispose() : void
+        {
+            this.playerInfoTF = null;
+            this.deadReasonTF = null;
+            this.vehiclePanel.dispose();
+            this.vehiclePanel = null;
+            this.deadReasonBG = null;
+            this.nicknameKillerBG = null;
+            if(this._userName != null)
+            {
+                this._userName.removeEventListener(Event.CHANGE,this.updateDeadReason);
+                this._userName.dispose();
+                this._userName = null;
+            }
+            super.onDispose();
         }
     }
 }

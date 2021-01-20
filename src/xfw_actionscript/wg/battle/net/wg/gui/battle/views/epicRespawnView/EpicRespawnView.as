@@ -185,7 +185,8 @@ package net.wg.gui.battle.views.epicRespawnView
 
         private function updateCarouselElementsPositions() : void
         {
-            var _loc1_:* = this._originalHeight - this.carousel.getBottom() ^ 0;
+            var _loc1_:* = 0;
+            _loc1_ = this._originalHeight - this.carousel.getBottom() ^ 0;
             this.carousel.y = _loc1_;
             this.deployButtonGroup.y = _loc1_ - DEPLOY_BUTTON_GROUP_CAROUSEL_OFFSET;
         }

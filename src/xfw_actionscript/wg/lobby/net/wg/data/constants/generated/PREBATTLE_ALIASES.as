@@ -3,23 +3,7 @@ package net.wg.data.constants.generated
     public class PREBATTLE_ALIASES extends Object
     {
 
-        public static const SQUAD_VIEW_PY:String = "prebattle/company/squad";
-
-        public static const EVENT_SQUAD_VIEW_PY:String = "prebattle/company/eventSquad";
-
         public static const FALLOUT_SQUAD_VIEW_PY:String = "prebattle/company/falloutSquad";
-
-        public static const EPIC_SQUAD_VIEW_PY:String = "prebattle/company/epicSquad";
-
-        public static const BATTLE_ROYALE_SQUAD_VIEW_PY:String = "prebattle/company/battleRoyaleSquad";
-
-        public static const SQUAD_WINDOW_PY:String = "prb_windows/squadWindow";
-
-        public static const EVENT_SQUAD_WINDOW_PY:String = "prb_windows/eventSquadWindow";
-
-        public static const EPIC_SQUAD_WINDOW_PY:String = "prb_windows/epicSquadWindow";
-
-        public static const BATTLE_ROYALE_SQUAD_WINDOW_PY:String = "prb_windows/battleRoyaleSquadWindow";
 
         public static const FALLOUT_SQUAD_WINDOW_PY:String = "prb_windows/falloutSquadWindow";
 

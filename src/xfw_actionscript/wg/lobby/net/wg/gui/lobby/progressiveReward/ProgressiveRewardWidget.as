@@ -34,11 +34,7 @@ package net.wg.gui.lobby.progressiveReward
 
         override protected function setData(param1:ProgressiveRewardVO) : void
         {
-            var _loc2_:Boolean = param1.isEnabled;
-            if(_loc2_)
-            {
-                this.progressiveReward.setData(param1);
-            }
+            this.progressiveReward.setData(param1);
         }
 
         private function onProgressiveRewardOpenBtnClickHandler(param1:Event) : void

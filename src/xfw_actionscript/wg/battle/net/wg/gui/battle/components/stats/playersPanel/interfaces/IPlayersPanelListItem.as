@@ -69,5 +69,7 @@ package net.wg.gui.battle.components.stats.playersPanel.interfaces
         function getDynamicSquad() : PlayersPanelDynamicSquad;
 
         function showDogTag() : void;
+
+        function setChatCommandVisibility(param1:Boolean) : void;
     }
 }

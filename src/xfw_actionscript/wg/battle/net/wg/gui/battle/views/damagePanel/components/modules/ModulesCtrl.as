@@ -382,5 +382,14 @@ package net.wg.gui.battle.views.damagePanel.components.modules
                 this._turretRotator.hideAsset();
             }
         }
+
+        public function setRepairTimesVisible(param1:Boolean) : void
+        {
+            var _loc2_:ModuleAssets = null;
+            for each(_loc2_ in this._modules)
+            {
+                _loc2_.setRepairTimeVisible(param1);
+            }
+        }
     }
 }

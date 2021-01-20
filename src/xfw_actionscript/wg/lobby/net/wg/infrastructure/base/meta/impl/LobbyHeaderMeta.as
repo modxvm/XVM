@@ -2,6 +2,7 @@ package net.wg.infrastructure.base.meta.impl
 {
     import net.wg.infrastructure.base.BaseDAAPIComponent;
     import net.wg.gui.lobby.header.vo.HBC_FinanceVo;
+    import net.wg.gui.lobby.header.vo.ExtendedSquadInfoVo;
     import net.wg.gui.lobby.header.vo.AccountDataVo;
     import net.wg.gui.components.controls.VO.BadgeVisualVO;
     import net.wg.gui.lobby.header.vo.AccountBoosterVO;
@@ -32,11 +33,15 @@ package net.wg.infrastructure.base.meta.impl
 
         public var onPayment:Function;
 
+        public var movePlatoonPopover:Function;
+
         public var showSquad:Function;
 
         public var fightClick:Function;
 
         private var _hBC_FinanceVo:HBC_FinanceVo;
+
+        private var _extendedSquadInfoVo:ExtendedSquadInfoVo;
 
         private var _accountDataVo:AccountDataVo;
 
@@ -62,6 +67,11 @@ package net.wg.infrastructure.base.meta.impl
             {
                 this._hBC_FinanceVo.dispose();
                 this._hBC_FinanceVo = null;
+            }
+            if(this._extendedSquadInfoVo)
+            {
+                this._extendedSquadInfoVo.dispose();
+                this._extendedSquadInfoVo = null;
             }
             if(this._accountDataVo)
             {
@@ -154,10 +164,16 @@ package net.wg.infrastructure.base.meta.impl
             this.onPayment();
         }
 
-        public function showSquadS() : void
+        public function movePlatoonPopoverS(param1:int) : void
+        {
+            App.utils.asserter.assertNotNull(this.movePlatoonPopover,"movePlatoonPopover" + Errors.CANT_NULL);
+            this.movePlatoonPopover(param1);
+        }
+
+        public function showSquadS(param1:int) : void
         {
             App.utils.asserter.assertNotNull(this.showSquad,"showSquad" + Errors.CANT_NULL);
-            this.showSquad();
+            this.showSquad(param1);
         }
 
         public function fightClickS(param1:int, param2:String) : void
@@ -174,6 +190,17 @@ package net.wg.infrastructure.base.meta.impl
             if(_loc3_)
             {
                 _loc3_.dispose();
+            }
+        }
+
+        public final function as_updateSquad(param1:Boolean, param2:String, param3:String, param4:Boolean, param5:String, param6:Boolean, param7:Object) : void
+        {
+            var _loc8_:ExtendedSquadInfoVo = this._extendedSquadInfoVo;
+            this._extendedSquadInfoVo = new ExtendedSquadInfoVo(param7);
+            this.updateSquad(param1,param2,param3,param4,param5,param6,this._extendedSquadInfoVo);
+            if(_loc8_)
+            {
+                _loc8_.dispose();
             }
         }
 
@@ -267,6 +294,13 @@ package net.wg.infrastructure.base.meta.impl
             var _loc3_:String = "as_updateWalletBtn" + Errors.ABSTRACT_INVOKE;
             DebugUtils.LOG_ERROR(_loc3_);
             throw new AbstractException(_loc3_);
+        }
+
+        protected function updateSquad(param1:Boolean, param2:String, param3:String, param4:Boolean, param5:String, param6:Boolean, param7:ExtendedSquadInfoVo) : void
+        {
+            var _loc8_:String = "as_updateSquad" + Errors.ABSTRACT_INVOKE;
+            DebugUtils.LOG_ERROR(_loc8_);
+            throw new AbstractException(_loc8_);
         }
 
         protected function nameResponse(param1:AccountDataVo) : void

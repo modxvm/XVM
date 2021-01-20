@@ -757,5 +757,10 @@ package net.wg.gui.battle.views.damagePanel
         {
             clickToStunTimerS();
         }
+
+        public function as_setRepairTimesVisible(param1:Boolean) : void
+        {
+            this._modulesCtrl.setRepairTimesVisible(param1);
+        }
     }
 }

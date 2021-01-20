@@ -77,10 +77,12 @@ package net.wg.gui.lobby.tradeIn
             this.resetButton = null;
             this.resetButtonPersonal = null;
             this.buttonHitArea.removeEventListener(MouseEvent.CLICK,this.onButtonHitAreaClickHandler);
+            this.buttonHitArea.removeEventListener(MouseEvent.MOUSE_DOWN,this.onButtonHitAreaDownHandler);
             this.buttonHitArea.removeEventListener(MouseEvent.ROLL_OVER,this.onButtonRollOverHandler);
             this.buttonHitArea.removeEventListener(MouseEvent.ROLL_OUT,this.onButtonRollOutHandler);
             this.buttonHitArea = null;
             this.resetButtonHitArea.removeEventListener(MouseEvent.CLICK,this.onResetButtonHitAreaClickHandler);
+            this.resetButtonHitArea.removeEventListener(MouseEvent.MOUSE_DOWN,this.onButtonHitAreaDownHandler);
             this.resetButtonHitArea.removeEventListener(MouseEvent.ROLL_OVER,this.onResetButtonRollOverHandler);
             this.resetButtonHitArea.removeEventListener(MouseEvent.ROLL_OUT,this.onResetButtonRollOutHandler);
             this.resetButtonHitArea = null;
@@ -98,10 +100,12 @@ package net.wg.gui.lobby.tradeIn
             this.resetButton.mouseEnabled = this.resetButton.mouseChildren = false;
             this.resetButtonPersonal.mouseEnabled = this.resetButtonPersonal.mouseChildren = false;
             this.buttonHitArea.addEventListener(MouseEvent.CLICK,this.onButtonHitAreaClickHandler);
+            this.buttonHitArea.addEventListener(MouseEvent.MOUSE_DOWN,this.onButtonHitAreaDownHandler);
             this.buttonHitArea.addEventListener(MouseEvent.ROLL_OVER,this.onButtonRollOverHandler);
             this.buttonHitArea.addEventListener(MouseEvent.ROLL_OUT,this.onButtonRollOutHandler);
             this.buttonHitArea.buttonMode = true;
             this.resetButtonHitArea.addEventListener(MouseEvent.CLICK,this.onResetButtonHitAreaClickHandler);
+            this.resetButtonHitArea.addEventListener(MouseEvent.MOUSE_DOWN,this.onButtonHitAreaDownHandler);
             this.resetButtonHitArea.addEventListener(MouseEvent.ROLL_OVER,this.onResetButtonRollOverHandler);
             this.resetButtonHitArea.addEventListener(MouseEvent.ROLL_OUT,this.onResetButtonRollOutHandler);
             this.resetButtonHitArea.buttonMode = true;
@@ -179,8 +183,16 @@ package net.wg.gui.lobby.tradeIn
         {
             if(enabled)
             {
-                onClickS();
+                if(App.utils.commons.isLeftButton(param1))
+                {
+                    onClickS();
+                }
             }
+        }
+
+        private function onButtonHitAreaDownHandler(param1:MouseEvent) : void
+        {
+            App.soundMgr.playControlsSnd(SoundManagerStates.SND_PRESS,SoundTypes.NORMAL_BTN,null);
         }
 
         private function onButtonRollOverHandler(param1:MouseEvent) : void
@@ -197,7 +209,10 @@ package net.wg.gui.lobby.tradeIn
 
         private function onResetButtonHitAreaClickHandler(param1:MouseEvent) : void
         {
-            onResetClickS();
+            if(App.utils.commons.isLeftButton(param1))
+            {
+                onResetClickS();
+            }
         }
 
         private function onResetButtonRollOverHandler(param1:MouseEvent) : void

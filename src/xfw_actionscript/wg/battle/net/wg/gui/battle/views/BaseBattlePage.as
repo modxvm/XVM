@@ -177,6 +177,10 @@ package net.wg.gui.battle.views
             {
                 this.registerComponent(this.dualGunPanel,BATTLE_VIEW_ALIASES.DUAL_GUN_PANEL);
             }
+            else
+            {
+                DebugUtils.LOG_WARNING("dualGunPanel component doesn\'t configured for this Battle Page");
+            }
             this.postmortemTips = App.utils.classFactory.getComponent(Linkages.POSTMORTEN_PANEL,PostmortemPanel);
             this.postmortemTips.setCompVisible(false);
             this.updatePostmortemTipsPosition();

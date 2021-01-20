@@ -9,8 +9,6 @@ package net.wg.gui.messenger.meta
 
         function sendMessageS(param1:String) : Boolean;
 
-        function getInfoS() : String;
-
         function getHistoryS() : String;
 
         function getMessageMaxLengthS() : int;

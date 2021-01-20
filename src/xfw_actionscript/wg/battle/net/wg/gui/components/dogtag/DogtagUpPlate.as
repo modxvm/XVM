@@ -55,8 +55,16 @@ package net.wg.gui.components.dogtag
             App.utils.commons.updateTextFieldSize(this.playerName,true,false);
             App.utils.commons.truncateTextFieldText(this.playerName,param1);
             App.utils.commons.updateTextFieldSize(this.playerName,true,false);
-            this._plate.bitmapData = ImageRepository.getInstance().getImageBitmapData(param3);
-            this._engraving.bitmapData = ImageRepository.getInstance().getImageBitmapData(param4);
+            if(ImageRepository.getInstance().hasImages)
+            {
+                this._plate.bitmapData = ImageRepository.getInstance().getImageBitmapData(param3);
+                this._engraving.bitmapData = ImageRepository.getInstance().getImageBitmapData(param4);
+            }
+            else
+            {
+                this._plate.source = RES_ICONS.maps_icons_dogtags_small_backgrounds_all_png(param3);
+                this._engraving.source = RES_ICONS.maps_icons_dogtags_small_engravings_all_png(param4);
+            }
         }
 
         public function animateBlink() : void

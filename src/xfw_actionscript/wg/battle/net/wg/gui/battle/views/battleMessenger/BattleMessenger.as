@@ -20,7 +20,6 @@ package net.wg.gui.battle.views.battleMessenger
     import flash.display.InteractiveObject;
     import net.wg.infrastructure.events.FocusRequestEvent;
     import flash.events.Event;
-    import net.wg.data.constants.Time;
     import flash.text.TextFormat;
     import flash.text.TextFieldType;
     import flash.ui.Keyboard;
@@ -31,8 +30,6 @@ package net.wg.gui.battle.views.battleMessenger
     {
 
         public static const REMOVE_FOCUS:String = "removeFocus";
-
-        private static const HINT_ANIMATION_STEPS:int = 5;
 
         private static const MESSAGE_FIELD_AVAILABLE_WIDTH:int = 218;
 
@@ -49,8 +46,6 @@ package net.wg.gui.battle.views.battleMessenger
         public var receiverField:TextField = null;
 
         public var messageInputField:TextField = null;
-
-        public var hintField:TextField = null;
 
         public var hintBackground:MovieClip = null;
 
@@ -73,10 +68,6 @@ package net.wg.gui.battle.views.battleMessenger
         public var swapArea:Sprite = null;
 
         private var _receiverIdx:int = 0;
-
-        private var _countPlaying:int = -1;
-
-        private var _isHintAnimationPlaying:Boolean = false;
 
         private var _receivers:Vector.<BattleMessengerReceiverVO>;
 
@@ -178,7 +169,6 @@ package net.wg.gui.battle.views.battleMessenger
             mouseChildren = false;
             TextFieldEx.setNoTranslate(this.receiverField,true);
             TextFieldEx.setNoTranslate(this.messageInputField,true);
-            TextFieldEx.setNoTranslate(this.hintField,true);
             this.tooltipSymbol.addEventListener(MouseEvent.MOUSE_OVER,this.onMouseOverHandler);
             this.tooltipSymbol.addEventListener(MouseEvent.MOUSE_OUT,this.onMouseOutHandler);
         }
@@ -199,7 +189,6 @@ package net.wg.gui.battle.views.battleMessenger
                 this.setAlpha(this._inactiveStateAlpha);
             }
             this.messageInputField.maxChars = param1.maxMessageLength;
-            this.hintField.htmlText = param1.hintStr;
             this._tooltipStr = param1.toolTipStr;
             this._isHistoryEnabled = param1.isHistoryEnabled;
             var _loc2_:int = param1.lifeTime;
@@ -223,7 +212,6 @@ package net.wg.gui.battle.views.battleMessenger
             this.hideViewElements();
             this.hit.tabEnabled = false;
             this.receiverField.tabEnabled = false;
-            this.hintField.tabEnabled = false;
             tabEnabled = false;
             this.hit.buttonMode = true;
         }
@@ -232,6 +220,7 @@ package net.wg.gui.battle.views.battleMessenger
         {
             var _loc1_:BattleMessage = null;
             this._scheduler.cancelTask(this.updateMesYPositions);
+            this._scheduler = null;
             if(this._userInteractionCmp)
             {
                 this._toxicPanelData = null;
@@ -243,8 +232,6 @@ package net.wg.gui.battle.views.battleMessenger
             removeEventListener(MouseEvent.ROLL_OUT,this.onBattleMessengerRollOutHandler);
             removeEventListener(MouseEvent.ROLL_OVER,this.onBattleMessengerRollOverHandler);
             this.swapArea = null;
-            this._scheduler.cancelTask(this.showHintText);
-            this._scheduler = null;
             this._battleSmileyMap.dispose();
             this._battleSmileyMap = null;
             this.hit.removeEventListener(MouseEvent.CLICK,this.onBattleMessengerMouseClickHandler);
@@ -283,7 +270,6 @@ package net.wg.gui.battle.views.battleMessenger
             this.itemBackground = null;
             this.receiverField = null;
             this.messageInputField = null;
-            this.hintField = null;
             this.hintBackground = null;
             this.historyUpBtn.dispose();
             this.historyUpBtn = null;
@@ -625,7 +611,6 @@ package net.wg.gui.battle.views.battleMessenger
             this.updateFocus(false);
             this.onMouseOutHandler(null);
             this.setPanelElementsVisibility(false);
-            this.hintField.visible = false;
             this.switchListenersViewElements(false);
             this.setAlpha(this._inactiveStateAlpha);
             this.disableInput();
@@ -791,7 +776,6 @@ package net.wg.gui.battle.views.battleMessenger
                     this.showLastIndexMessages();
                 }
             }
-            this.showAnimation(!this._isBottomMessageVisible);
         }
 
         private function setPanelElementsVisibility(param1:Boolean) : void
@@ -801,27 +785,6 @@ package net.wg.gui.battle.views.battleMessenger
             this.historyUpBtn.visible = param1;
             this.historyDownBtn.visible = param1;
             this.historyLastMessageBtn.visible = param1;
-        }
-
-        private function showAnimation(param1:Boolean) : void
-        {
-            if(param1 && !this._isHintAnimationPlaying)
-            {
-                this._isHintAnimationPlaying = true;
-                if(this.hintField.visible)
-                {
-                    this.hintField.visible = false;
-                }
-                this._countPlaying = 1;
-                this._scheduler.cancelTask(this.showHintText);
-                this._scheduler.scheduleRepeatableTask(this.showHintText,Time.MILLISECOND_IN_SECOND,HINT_ANIMATION_STEPS);
-            }
-            else if(!param1)
-            {
-                this._isHintAnimationPlaying = false;
-                this.hintField.visible = false;
-                this._scheduler.cancelTask(this.showHintText);
-            }
         }
 
         private function updateMesYPositions() : void
@@ -968,27 +931,12 @@ package net.wg.gui.battle.views.battleMessenger
                 this._bottomMessageIndex = this._messages.length;
             }
             this._isBottomMessageVisible = this._bottomMessageIndex == this._messages.length;
-            if(this._bottomMessageIndex == this._messages.length)
-            {
-                this.showAnimation(false);
-            }
             if(this._isHistoryEnabled)
             {
                 this.historyUpBtn.enabled = !this._isTopMessageVisible;
                 this.historyDownBtn.enabled = this._bottomMessageIndex < this._messages.length;
                 this.historyLastMessageBtn.enabled = !this._isBottomMessageVisible;
             }
-        }
-
-        private function showHintText() : void
-        {
-            this.hintField.visible = !this.hintField.visible;
-            if(this._countPlaying == HINT_ANIMATION_STEPS)
-            {
-                this._isHintAnimationPlaying = false;
-                this._scheduler.cancelTask(this.showHintText);
-            }
-            this._countPlaying++;
         }
 
         private function updateReceiverField() : void

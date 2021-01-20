@@ -5,12 +5,17 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
     import net.wg.gui.battle.random.views.stats.components.fullStats.interfaces.ISquadHandler;
     import net.wg.infrastructure.base.meta.impl.StatsBaseMeta;
     import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
+    import flash.utils.Dictionary;
     import scaleform.clik.controls.ScrollingList;
     import net.wg.gui.battle.random.views.stats.components.fullStats.tableItem.DynamicSquadCtrl;
     import net.wg.data.VO.daapi.DAAPIVehicleStatsVO;
     import net.wg.data.VO.daapi.DAAPIInvitationStatusVO;
     import net.wg.gui.battle.battleloading.data.VehiclesDataProvider;
     import net.wg.infrastructure.events.ListDataProviderEvent;
+    import net.wg.gui.components.dogtag.VO.DogTagVO;
+    import flash.events.Event;
+    import flash.events.MouseEvent;
+    import net.wg.gui.battle.epicRandom.views.stats.events.EpicRandomFullStatsListItemRendererEvent;
     import scaleform.gfx.TextFieldEx;
 
     public class EpicRandomFullStatsTableCtrl extends EpicRandomStatsTableCtrl implements ITabbedFullStatsTableController, ISquadHandler
@@ -40,12 +45,15 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
 
         private var _activePlayerData:DAAPIVehicleInfoVO;
 
+        private var _dogTagsToShow:Dictionary = null;
+
         public function EpicRandomFullStatsTableCtrl(param1:EpicRandomFullStatsTable, param2:StatsBaseMeta)
         {
             super(param1);
             this._table = param1;
             TextFieldEx.setNoTranslate(this._table.team1TF,true);
             TextFieldEx.setNoTranslate(this._table.team2TF,true);
+            this._dogTagsToShow = new Dictionary();
             this._squadHandler = param2;
         }
 
@@ -58,9 +66,15 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
 
         override protected function onDispose() : void
         {
+            var _loc1_:String = null;
             this._squadHandler = null;
             this._table = null;
             this._activePlayerData = null;
+            for(_loc1_ in this._dogTagsToShow)
+            {
+                delete this._dogTagsToShow[_loc1_];
+            }
+            this._dogTagsToShow = null;
             super.onDispose();
         }
 
@@ -408,6 +422,24 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
             }
         }
 
+        public function setDogTagToShow(param1:Number, param2:DogTagVO) : *
+        {
+            this._dogTagsToShow[param1] = param2;
+        }
+
+        private function onItemRendererDataSync(param1:Event) : void
+        {
+            var _loc2_:EpicRandomFullStatsListItemRenderer = param1.currentTarget as EpicRandomFullStatsListItemRenderer;
+            if(_loc2_)
+            {
+                _loc2_.showDogTag(this._dogTagsToShow[_loc2_.vehicleID]);
+            }
+            if(_loc2_.hitTestPoint(App.stage.mouseX,App.stage.mouseY))
+            {
+                _loc2_.dispatchEvent(new MouseEvent(MouseEvent.ROLL_OVER));
+            }
+        }
+
         override protected function updateEnemyDPItems(param1:ListDataProviderEvent) : void
         {
             var _loc5_:* = 0;
@@ -424,9 +456,17 @@ package net.wg.gui.battle.epicRandom.views.stats.components.fullStats
                     _loc7_ = this.getRendererIfInRange(this._table.team2PlayerList,_loc5_);
                     if(_loc6_ && _loc7_)
                     {
+                        if(this._dogTagsToShow[_loc6_.vehicleID])
+                        {
+                            _loc7_.showDogTag(this._dogTagsToShow[_loc6_.vehicleID]);
+                        }
                         this.setSquadSettingsForRenderer(_loc7_);
                         _loc7_.setDAAPIVehicleInfoVO(_loc6_,true);
                         this.onItemDataSet(_loc7_,true);
+                    }
+                    if(!_loc7_.hasEventListener(EpicRandomFullStatsListItemRendererEvent.ON_DATA_SYNC))
+                    {
+                        _loc7_.addEventListener(EpicRandomFullStatsListItemRendererEvent.ON_DATA_SYNC,this.onItemRendererDataSync,false,0,true);
                     }
                 }
             }

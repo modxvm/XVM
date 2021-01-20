@@ -5,9 +5,9 @@ package net.wg.gui.bootcamp.battleResult.data
     public class RewardVideoDataVO extends DAAPIDataClass
     {
 
-        public var label:String = "";
-
         public var image:String = "";
+
+        public var totalCount:int = 0;
 
         public function RewardVideoDataVO(param1:Object)
         {

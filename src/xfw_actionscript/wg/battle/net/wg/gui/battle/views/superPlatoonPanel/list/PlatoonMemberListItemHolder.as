@@ -114,6 +114,11 @@ package net.wg.gui.battle.views.superPlatoonPanel.list
             this._listItem.triggerChatCommand(param1);
         }
 
+        public function setChatCommandsVisibility(param1:Boolean) : void
+        {
+            this._listItem.setChatCommandsVisibility(param1);
+        }
+
         private function applyVehicleData() : void
         {
             this._listItem.setIsIGR(this._vehicleData.isIGR);

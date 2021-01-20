@@ -1219,6 +1219,10 @@ package
 
         public static const DYNAMICSQUAD_ALLY_ANONYMIZED_NOCLAN:String = "#ingame_gui:dynamicSquad/ally/anonymized/noClan";
 
+        public static const DYNAMICSQUAD_HINT_VOIPTOGGLEKEYLEFT:String = "#ingame_gui:dynamicSquad/hint/voipToggleKeyLeft";
+
+        public static const DYNAMICSQUAD_HINT_VOIPTOGGLEKEYRIGHT:String = "#ingame_gui:dynamicSquad/hint/voipToggleKeyRight";
+
         public static const AIM_ZOOM:String = "#ingame_gui:aim/zoom";
 
         public static const DISTANCE_METERS:String = "#ingame_gui:distance/meters";
@@ -1540,6 +1544,8 @@ package
         public static const QUICKREPLY_HINT_TOHELP:String = "#ingame_gui:quickReply/hint/toHelp";
 
         public static const QUICKREPLY_HINT_TOACKNOWLEDGE:String = "#ingame_gui:quickReply/hint/toAcknowledge";
+
+        public static const QUICKREPLY_HINT_TOTHANK:String = "#ingame_gui:quickReply/hint/toThank";
 
         public static const REWARDWINDOW_PIGGYBANK_WINHEADERTEXT:String = "#ingame_gui:rewardWindow/piggyBank/winHeaderText";
 

@@ -117,12 +117,12 @@ package net.wg.gui.lobby.progressiveReward
                 {
                     this.bgMc.visible = this._progressiveData.showBg;
                     _loc1_ = this._progressiveData.seniorityAwards != null;
-                    if(!_loc1_)
+                    if(!_loc1_ && this._progressiveData.isEnabled)
                     {
                         this.createSteps();
                         this.linkBtn.tooltip = this._progressiveData.btnTooltip;
                     }
-                    this.rewardMc.visible = this.rewardsProgress.visible = !_loc1_;
+                    this.rewardMc.visible = this.rewardsProgress.visible = !_loc1_ && this._progressiveData.isEnabled;
                     this.linkBtn.visible = this._progressiveData.showLinkBtn;
                     this.rewardMc.mouseEnabled = this._progressiveData.showLinkBtn;
                     this.titleTF.htmlText = this._progressiveData.titleText;

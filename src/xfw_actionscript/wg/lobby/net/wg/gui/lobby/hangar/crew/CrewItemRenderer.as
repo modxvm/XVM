@@ -380,7 +380,6 @@ package net.wg.gui.lobby.hangar.crew
 
         public function setData(param1:Object) : void
         {
-            var _loc2_:TankmanRoleVO = null;
             close();
             this.data = param1;
             if(!param1)
@@ -388,7 +387,7 @@ package net.wg.gui.lobby.hangar.crew
                 this.visible = false;
                 return;
             }
-            _loc2_ = TankmanRoleVO(param1);
+            var _loc2_:TankmanRoleVO = TankmanRoleVO(param1);
             if(dataProvider != null)
             {
                 dataProvider.cleanUp();

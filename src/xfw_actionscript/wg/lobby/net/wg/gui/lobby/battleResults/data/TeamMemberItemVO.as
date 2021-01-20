@@ -274,7 +274,7 @@ package net.wg.gui.lobby.battleResults.data
 
         public function get playerName() : String
         {
-            return this.userVO.userName;
+            return this.userVO.isAnonymized && !(this.isSelf || this.isOwnSquad)?this.userVO.fakeName:this.userVO.userName;
         }
     }
 }

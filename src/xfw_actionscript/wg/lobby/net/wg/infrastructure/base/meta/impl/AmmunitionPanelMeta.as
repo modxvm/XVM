@@ -16,8 +16,6 @@ package net.wg.infrastructure.base.meta.impl
 
         public var showChangeNation:Function;
 
-        public var onNYBonusPanelClicked:Function;
-
         private var _vehicleMessageVO:VehicleMessageVO;
 
         public function AmmunitionPanelMeta()
@@ -57,12 +55,6 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.showChangeNation,"showChangeNation" + Errors.CANT_NULL);
             this.showChangeNation();
-        }
-
-        public function onNYBonusPanelClickedS() : void
-        {
-            App.utils.asserter.assertNotNull(this.onNYBonusPanelClicked,"onNYBonusPanelClicked" + Errors.CANT_NULL);
-            this.onNYBonusPanelClicked();
         }
 
         public final function as_updateVehicleStatus(param1:Object) : void

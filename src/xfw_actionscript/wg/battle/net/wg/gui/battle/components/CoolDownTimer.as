@@ -47,7 +47,10 @@ package net.wg.gui.battle.components
 
         public function moveToFrame(param1:int) : void
         {
-            this._context.gotoAndStop(this._progressValues[param1]);
+            if(param1 >= 0 && param1 < this._progressValues.length)
+            {
+                this._context.gotoAndStop(this._progressValues[param1]);
+            }
         }
 
         public function restartFromCurrentFrame(param1:Number) : void

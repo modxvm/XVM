@@ -11,11 +11,11 @@ package net.wg.gui.notification
     import net.wg.gui.notification.events.NotificationLayoutEvent;
     import net.wg.infrastructure.events.ContainerManagerEvent;
     import net.wg.gui.notification.events.ServiceMessageEvent;
-    import flash.events.Event;
     import net.wg.data.constants.Values;
     import fl.transitions.easing.Strong;
     import scaleform.clik.motion.Tween;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
+    import flash.events.Event;
     import net.wg.data.constants.generated.LAYER_NAMES;
 
     public class NotificationPopUpViewer extends NotificationPopUpViewerMeta implements INotificationPopUpViewerMeta
@@ -25,7 +25,7 @@ package net.wg.gui.notification
 
         private static const DELAY:Number = 50;
 
-        private static const DEFAULT_PADDING:Point = new Point(4,40);
+        private static const DEFAULT_PADDING:Point = new Point(4,30);
 
         private var _pendingForDisplay:Vector.<PopUpNotificationInfoVO>;
 
@@ -113,7 +113,6 @@ package net.wg.gui.notification
                         _loc1_.addEventListener(ServiceMessageEvent.MESSAGE_BUTTON_CLICKED,this.onPopUpMessageButtonClickedHandler,false,0,true);
                         _loc1_.addEventListener(ServiceMessageEvent.MESSAGE_LINK_CLICKED,this.onPopUpMessageLinkClickedHandler,false,0,true);
                         _loc1_.addEventListener(ServiceMessagePopUp.HIDED,this.onPopUpHidedHandler,false,0,true);
-                        _loc1_.addEventListener(Event.RESIZE,this.onPopUpResizeHanlder,false,0,true);
                         _loc4_ = _loc4_ + _loc2_;
                         this._displayingNowPopUps.splice(_loc7_,0,_loc1_);
                         _loc7_++;
@@ -326,7 +325,6 @@ package net.wg.gui.notification
             _loc4_.removeEventListener(ServiceMessageEvent.MESSAGE_AREA_CLICKED,this.onPopUpMessageAreaClickedHandler);
             _loc4_.removeEventListener(ServiceMessageEvent.MESSAGE_BUTTON_CLICKED,this.onPopUpMessageButtonClickedHandler);
             _loc4_.removeEventListener(ServiceMessageEvent.MESSAGE_LINK_CLICKED,this.onPopUpMessageLinkClickedHandler);
-            _loc4_.removeEventListener(Event.RESIZE,this.onPopUpResizeHanlder);
             if(param3)
             {
                 _loc5_ = PopUpNotificationInfoVO(_loc4_.data);
@@ -402,12 +400,6 @@ package net.wg.gui.notification
             }
         }
 
-        private function onPopUpResizeHanlder(param1:Event) : void
-        {
-            this._arrangeLayout = true;
-            invalidate();
-        }
-
         private function onSMContainerMouseOverHandler(param1:MouseEvent) : void
         {
             this.applyHiding(true);
@@ -450,7 +442,8 @@ package net.wg.gui.notification
 
         private function onContainerMgrViewLoadingHandler(param1:ContainerManagerEvent) : void
         {
-            if(LAYER_NAMES.LAYER_ORDER[param1.layer] == LAYER_NAMES.SUBVIEW)
+            var _loc2_:String = LAYER_NAMES.LAYER_ORDER[param1.layer];
+            if(_loc2_ == LAYER_NAMES.SUBVIEW || _loc2_ == LAYER_NAMES.FULLSCREEN_WINDOWS)
             {
                 this.setPadding(DEFAULT_PADDING);
             }

@@ -141,12 +141,6 @@ package
 
         public static const WULF_LISTEXAMPLESWINDOW_RENDERERLABEL:String = "#development:wulf/listExamplesWindow/rendererLabel";
 
-        public static const WULF_GFDEMOWINDOW_TITLE:String = "#development:wulf/gfDemoWindow/title";
-
-        public static const WULF_GFDEMOWINDOW_BTNPREV_LABEL:String = "#development:wulf/gfDemoWindow/btnPrev/label";
-
-        public static const WULF_GFDEMOWINDOW_BTNNEXT_LABEL:String = "#development:wulf/gfDemoWindow/btnNext/label";
-
         public static const WULF_DIALOGEXAMPLES_TESTARGS_TITLE:String = "#development:wulf/dialogExamples/testArgs/title";
 
         public static const WULF_DIALOGEXAMPLES_TESTARGS_MESSAGE:String = "#development:wulf/dialogExamples/testArgs/message";

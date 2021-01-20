@@ -97,7 +97,6 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
                 this._noSoundSpr.imageName = BATTLEATLAS.SQUAD_NO_SOUND;
             }
             this._tooltip = new SquadTooltip();
-            this.buildDogTag();
         }
 
         override protected function onDispose() : void
@@ -219,7 +218,14 @@ package net.wg.gui.battle.random.views.stats.components.fullStats.tableItem
 
         public function setDogTag(param1:DogTagVO) : void
         {
-            this.resetDogTag();
+            if(!this._dogTag && param1)
+            {
+                this.buildDogTag();
+            }
+            if(this._dogTag)
+            {
+                this.resetDogTag();
+            }
             if(param1)
             {
                 this._dogTagData = param1;

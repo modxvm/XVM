@@ -59,9 +59,9 @@ package
 
         public static const NATIONS:Class = NATIONS;
 
-        public static const NY:Class = NY;
-
         public static const PERSONAL_MISSIONS:Class = PERSONAL_MISSIONS;
+
+        public static const PLATOON:Class = PLATOON;
 
         public static const PO_FILES:Class = PO_FILES;
 

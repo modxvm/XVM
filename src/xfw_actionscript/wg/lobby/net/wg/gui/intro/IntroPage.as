@@ -108,7 +108,7 @@ package net.wg.gui.intro
             if(this._introInfo && this._introInfo.canSkip)
             {
                 _loc2_ = param1.details;
-                if(_loc2_.value != InputValue.KEY_UP)
+                if(_loc2_.value == InputValue.KEY_DOWN)
                 {
                     _loc3_ = _loc2_.code;
                     if(_loc3_ == Keyboard.ESCAPE || _loc3_ == Keyboard.ENTER || _loc3_ == Keyboard.SPACE)

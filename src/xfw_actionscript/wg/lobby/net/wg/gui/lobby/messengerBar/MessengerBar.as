@@ -216,6 +216,7 @@ package net.wg.gui.lobby.messengerBar
 
         override protected function configUI() : void
         {
+            var _loc1_:* = false;
             super.configUI();
             this.circleAnimation.visible = false;
             this.circleAnimation.mouseChildren = false;
@@ -235,7 +236,7 @@ package net.wg.gui.lobby.messengerBar
             this.circleAnimation.mask = this.circleAnimMask;
             this.animPlacer.mouseEnabled = false;
             this.animPlacer.mouseChildren = false;
-            var _loc1_:Boolean = App.globalVarsMgr.isInRoamingS();
+            _loc1_ = App.globalVarsMgr.isInRoamingS();
             this.channelButton.enabled = !_loc1_;
             this.channelButton.tooltip = TOOLTIPS.LOBY_MESSENGER_CHANNELS_BUTTON;
             this.fakeChnlBtn.visible = _loc1_;

@@ -98,6 +98,8 @@ package net.wg.gui.lobby.techtree.sub
 
         private static const PREMIUM_PANEL_NODES_DEFAULT_START_Y:int = 40;
 
+        private static const PREMIUM_PANEL_CLICK_AREA_OFFSET:int = 11;
+
         private static const LEVELS_BG_COLOR:uint = 1249808;
 
         private static const LEVELS_BG_COLOR_BP:uint = 1449766;
@@ -139,6 +141,8 @@ package net.wg.gui.lobby.techtree.sub
         public var levels:LevelsContainer;
 
         public var premiumHitArea:PremiumPanelHitArea = null;
+
+        public var premiumPanelClickArea:Sprite = null;
 
         private var _blueprintModeOn:Boolean = false;
 
@@ -267,6 +271,7 @@ package net.wg.gui.lobby.techtree.sub
             this.premiumHitArea.removeEventListener(MouseEvent.MOUSE_OUT,this.onPremPanelMouseOutHandler);
             this.premiumHitArea.removeEventListener(MouseEvent.MOUSE_MOVE,this.onPremPanelMouseMoveHandler);
             this.premiumHitArea = null;
+            this.premiumPanelClickArea = null;
             this.ntGraphics.removeEventListener(MouseEvent.MOUSE_MOVE,this.onNtGraphicsMouseMoveHandler);
             this.ntGraphics.dispose();
             this.ntGraphics = null;
@@ -333,6 +338,7 @@ package net.wg.gui.lobby.techtree.sub
             this.premiumPanelBack.panelHeight = PREMIUM_PANEL_HEIGHT;
             this.premiumPanelBack.mouseChildren = this.premiumPanelBack.mouseEnabled = false;
             this.premiumHitArea.x = -x;
+            this.premiumPanelClickArea.x = -x;
             this.premiumPanelShadow.x = -x;
             this.updateTreeNodeSelector();
             this._premiumPanelShadowHitArea = new Sprite();
@@ -511,6 +517,9 @@ package net.wg.gui.lobby.techtree.sub
                 this.premiumPanel.showPanel(PREMIUM_PANEL_ANIMATION_OFFSET - PREMIUM_PANEL_TITLE_OFFSET);
                 this.premiumHitArea.y = this.premiumPanelBack.defaultY - PREMIUM_PANEL_ANIMATION_OFFSET;
                 this.premiumHitArea.height = PREMIUM_PANEL_HEIGHT + PREMIUM_PANEL_HIT_AREA_OPEN_OFFSET;
+                this.premiumPanelClickArea.y = this.premiumHitArea.y;
+                this.premiumPanelClickArea.height = this.premiumHitArea.height;
+                this.premiumPanelClickArea.mouseEnabled = false;
                 this.clearPremiumShadowTween();
                 this._premiumPanelShadowTween = new Tween(PREMIUM_SHADOW_TWEEN_DURATION,this.premiumPanelShadow,{"alpha":0},{"ease":Linear.easeNone});
                 this.vScrollBar.visible = false;
@@ -720,6 +729,7 @@ package net.wg.gui.lobby.techtree.sub
             this.premiumPanel.panelWidth = this.ntGraphics.width;
             this.premiumPanelBack.panelWidth = _width + x;
             this.premiumHitArea.width = _width + x;
+            this.premiumPanelClickArea.width = _width + x;
             this.premiumPanelShadow.width = _width + x;
             this.premiumPanelShadow.y = _height - this.premiumPanelShadow.height;
             this.closePremiumPanel(true);
@@ -746,6 +756,9 @@ package net.wg.gui.lobby.techtree.sub
             var _loc2_:int = _loc1_ != null && _loc1_.start?_loc1_.start.y:PREMIUM_PANEL_NODES_DEFAULT_START_Y;
             this.premiumHitArea.y = this.premiumPanel.defaultY + _loc2_ - PREMIUM_PANEL_HIT_AREA_DEFAULT_OFFSET >> 0;
             this.premiumHitArea.height = PREMIUM_PANEL_HEIGHT;
+            this.premiumPanelClickArea.y = this.premiumPanel.defaultY + PREMIUM_PANEL_CLICK_AREA_OFFSET;
+            this.premiumPanelClickArea.height = PREMIUM_PANEL_HEIGHT + _loc2_;
+            this.premiumPanelClickArea.mouseEnabled = true;
         }
 
         private function onPremPanelMouseOutHandler(param1:Event) : void

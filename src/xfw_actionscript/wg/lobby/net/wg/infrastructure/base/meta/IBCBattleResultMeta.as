@@ -11,7 +11,7 @@ package net.wg.infrastructure.base.meta
 
         function onToolTipShowS(param1:String) : void;
 
-        function onVideoButtonClickS() : void;
+        function onVideoButtonClickS(param1:int) : void;
 
         function as_setData(param1:Object) : void;
     }

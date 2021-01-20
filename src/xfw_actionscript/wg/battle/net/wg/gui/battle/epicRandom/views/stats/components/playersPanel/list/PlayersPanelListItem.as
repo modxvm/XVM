@@ -12,6 +12,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
     import net.wg.gui.components.controls.VO.BadgeVisualVO;
     import net.wg.utils.ICommons;
     import net.wg.infrastructure.interfaces.IUserProps;
+    import net.wg.gui.components.dogtag.VO.DogTagVO;
     import flash.events.MouseEvent;
     import net.wg.data.constants.generated.BATTLEATLAS;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.constants.PlayersPanelInvalidationType;
@@ -44,6 +45,8 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
 
         private static const MUTE_ICON_WIDTH:int = 128;
 
+        private static const DOG_TAG_ICON_OFFSET:int = 33;
+
         public var dynamicSquad:PlayersPanelDynamicSquad;
 
         public var hit:Sprite = null;
@@ -67,6 +70,8 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
         public var chatCommandState:ChatCommandItemComponent = null;
 
         public var holderItemID:int = -1;
+
+        public var dogTagIcon:BattleAtlasSprite = null;
 
         private var _state:uint = 0;
 
@@ -116,6 +121,10 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
 
         private var _userProps:IUserProps = null;
 
+        private var _showDogTag:Boolean = false;
+
+        private var _dogTag:DogTagVO = null;
+
         public function PlayersPanelListItem()
         {
             super();
@@ -146,6 +155,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             this.speakAnimation.dispose();
             this.chatCommandState.dispose();
             this.disableCommunication = null;
+            this.dogTagIcon = null;
             this.fragsTF = null;
             this.shortTitleTF = null;
             this.dynamicSquad = null;
@@ -161,6 +171,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             this._badgeVO = null;
             this._userProps = null;
             this._commons = null;
+            this._dogTag = null;
             super.onDispose();
         }
 
@@ -169,6 +180,13 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             super.configUI();
             this.mute.visible = false;
             this.mute.imageName = this._isRightAligned?BATTLEATLAS.RIGHT_STATS_MUTE:BATTLEATLAS.LEFT_STATS_MUTE;
+            if(this.dogTagIcon)
+            {
+                this.dogTagIcon.visible = false;
+                this.dogTagIcon.imageName = BATTLEATLAS.DOG_TAG_MEDAL;
+                this.dogTagIcon.mouseEnabled = false;
+                this.dogTagIcon.mouseChildren = false;
+            }
             if(this.disableCommunication)
             {
                 this.disableCommunication.visible = false;
@@ -183,9 +201,13 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             if(isInvalid(PlayersPanelInvalidationType.BADGE_CHANGED))
             {
                 this.badge.visible = this._hasBadge && (this._state == PlayersPanelListItemState.MEDIUM_PLAYER_RENDERER_STATE || this._state == PlayersPanelListItemState.MEDIUM_TANK_RENDERER_STATE);
-                if(this.badge.visible)
+            }
+            if(isInvalid(PlayersPanelInvalidationType.DOG_TAG_CHANGED))
+            {
+                if(this.dogTagIcon)
                 {
-                    this.badge.setData(this._badgeVO);
+                    this.dogTagIcon.visible = this._showDogTag && this._isVisibleState;
+                    this.applyListItemState(this._state);
                 }
             }
             if(isInvalid(PlayersPanelInvalidationType.FRAGS))
@@ -249,6 +271,7 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             {
                 this._badgeVO = param1;
                 this._hasBadge = param1 != null && param2;
+                this.badge.setData(param1);
                 invalidate(PlayersPanelInvalidationType.BADGE_CHANGED);
             }
         }
@@ -271,6 +294,11 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
         public function triggerChatCommand(param1:String) : void
         {
             this.chatCommandState.playCommandAnimation(param1);
+        }
+
+        public function setChatCommandVisibility(param1:Boolean) : void
+        {
+            this.chatCommandState.setChatCommandVisibility(param1);
         }
 
         public function setIsAlive(param1:Boolean) : void
@@ -441,6 +469,18 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
             invalidate(PlayersPanelInvalidationType.MUTE);
         }
 
+        public function showDogTag(param1:DogTagVO) : void
+        {
+            this._showDogTag = true;
+            this._dogTag = param1;
+            invalidate(PlayersPanelInvalidationType.DOG_TAG_CHANGED);
+        }
+
+        public function get dogTag() : DogTagVO
+        {
+            return this._dogTag;
+        }
+
         private function applyListItemState(param1:int) : void
         {
             var _loc2_:* = false;
@@ -461,7 +501,12 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
                 this.shortTitleTF.visible = _loc2_ || _loc3_;
                 this.badge.visible = this._hasBadge && (_loc2_ || _loc3_);
                 this._isVisibleState = param1 == PlayersPanelListItemState.SHORT_RENDERER_STATE || _loc2_ || _loc3_;
-                this.fragsTF.visible = this.dynamicSquad.visible = this._isVisibleState;
+                this.fragsTF.visible = this._isVisibleState;
+                this.dynamicSquad.visible = this._isVisibleState && !this._showDogTag;
+                if(this.dogTagIcon)
+                {
+                    this.dogTagIcon.visible = this._showDogTag && this._isVisibleState;
+                }
                 this.chatCommandState.visible = this._isVisibleState;
                 this.invalidateVariableElements();
                 if(this._hasBadge && (_loc2_ || _loc3_))
@@ -524,6 +569,10 @@ package net.wg.gui.battle.epicRandom.views.stats.components.playersPanel.list
                 this.vehicleIcon.x = this._rendererSettings.vehicleIconXOffset;
                 this.chatCommandState.iconOffset(this._rendererSettings.chatCommunicationIconXOffset);
                 x = this._rendererSettings.xPosition;
+            }
+            if(this.dogTagIcon)
+            {
+                this.dogTagIcon.x = -DOG_TAG_ICON_OFFSET;
             }
             this.chatCommandState.x = this.dynamicSquad.x;
         }

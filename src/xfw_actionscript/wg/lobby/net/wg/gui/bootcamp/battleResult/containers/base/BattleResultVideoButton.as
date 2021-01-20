@@ -1,35 +1,63 @@
 package net.wg.gui.bootcamp.battleResult.containers.base
 {
     import net.wg.gui.components.controls.SoundButtonEx;
-    import net.wg.gui.bootcamp.containers.AnimatedLoaderTextContainer;
+    import net.wg.infrastructure.interfaces.entity.IUpdatable;
+    import net.wg.utils.IStageSizeDependComponent;
     import flash.display.MovieClip;
     import net.wg.gui.bootcamp.battleResult.data.RewardVideoDataVO;
+    import net.wg.infrastructure.managers.IStageSizeManager;
     import scaleform.clik.constants.InvalidationType;
 
-    public class BattleResultVideoButton extends SoundButtonEx
+    public class BattleResultVideoButton extends SoundButtonEx implements IUpdatable, IStageSizeDependComponent
     {
 
-        public var content:AnimatedLoaderTextContainer = null;
+        private static const STAGE_SIZE:String = "stageSize";
+
+        public var content:BattleResultVideoButtonContent = null;
 
         public var emptyFocusIndicator:MovieClip = null;
 
         private var _videoData:RewardVideoDataVO = null;
 
+        private var _stageSizeMgr:IStageSizeManager;
+
         public function BattleResultVideoButton()
         {
+            this._stageSizeMgr = App.stageSizeMgr;
             super();
+            preventAutosizing = true;
+            this._stageSizeMgr.register(this);
         }
 
-        public function setData(param1:RewardVideoDataVO) : void
+        public function update(param1:Object) : void
         {
-            this._videoData = param1;
+            this._videoData = RewardVideoDataVO(param1);
             invalidateData();
+        }
+
+        public function get videoData() : RewardVideoDataVO
+        {
+            return this._videoData;
+        }
+
+        public function setStateSizeBoundaries(param1:int, param2:int) : void
+        {
+            invalidate(STAGE_SIZE);
+        }
+
+        override public function get width() : Number
+        {
+            return super.actualWidth;
+        }
+
+        override public function get height() : Number
+        {
+            return super.actualHeight;
         }
 
         override protected function configUI() : void
         {
             super.configUI();
-            textField.mouseEnabled = false;
             focusIndicator = this.emptyFocusIndicator;
         }
 
@@ -40,6 +68,10 @@ package net.wg.gui.bootcamp.battleResult.containers.base
             {
                 this.validateData();
             }
+            if(this._videoData != null && isInvalid(STAGE_SIZE,InvalidationType.DATA))
+            {
+                this.content.updateSize(this._videoData.totalCount);
+            }
         }
 
         override protected function onDispose() : void
@@ -48,13 +80,14 @@ package net.wg.gui.bootcamp.battleResult.containers.base
             this.content = null;
             this.emptyFocusIndicator = null;
             this._videoData = null;
+            this._stageSizeMgr.unregister(this);
+            this._stageSizeMgr = null;
             super.onDispose();
         }
 
         private function validateData() : void
         {
             this.content.source = this._videoData.image;
-            textField.text = this._videoData.label;
         }
     }
 }

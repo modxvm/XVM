@@ -19,8 +19,6 @@ package net.wg.gui.battle.views.battleMessenger.VO
 
         public var maxMessageLength:int = -1;
 
-        public var hintStr:String = "";
-
         public var toolTipStr:String = "";
 
         public var lastMessageAlpha:Number = -1;
@@ -28,12 +26,6 @@ package net.wg.gui.battle.views.battleMessenger.VO
         public var recoveredLatestMessagesAlpha:Number = -1;
 
         public var recoveredMessagesLifeTime:int = -1;
-
-        public var chatDisableAll:Boolean = false;
-
-        public var chatDisableCommon:Boolean = false;
-
-        public var chatDisableCommonEnabled:Boolean = true;
 
         public function BattleMessengerSettingsVO(param1:Object)
         {

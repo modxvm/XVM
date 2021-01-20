@@ -64,12 +64,6 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.txtRentInfo.htmlText = param1.rentLeft;
             imgIcon.source = param1.icon;
             imgIcon.sourceAlt = param1.iconAlt;
-            hasHoverImg = StringUtils.isNotEmpty(param1.iconHover);
-            if(hasHoverImg)
-            {
-                hoverImgIcon.source = param1.iconHover;
-                hoverImgIcon.sourceAlt = param1.iconHoverAlt;
-            }
         }
 
         override protected function setVisibleVehicleInfo(param1:Boolean) : void
@@ -91,14 +85,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
             txtInfo.width = width - W_OFFSET - infoImgOffset ^ 0;
             txtInfo.htmlText = _loc4_;
-            if(param1.nySlot)
-            {
-                App.utils.commons.updateTextFieldSize(txtInfo,false,true);
-            }
-            else
-            {
-                App.utils.commons.updateTextFieldSize(txtInfo,true,true);
-            }
+            App.utils.commons.updateTextFieldSize(txtInfo,true,true);
             txtInfo.x = width - txtInfo.width + infoImgOffset >> 1;
             txtInfo.y = height - txtInfo.height >> 1;
             var _loc3_:TextFormat = txtInfo.getTextFormat();

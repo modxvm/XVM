@@ -17,8 +17,6 @@ package net.wg.infrastructure.base.meta
 
         function as_closeHelpLayout() : void;
 
-        function as_switchLobbyDragging(param1:Boolean) : void;
-
         function as_showWaiting(param1:String) : void;
 
         function as_hideWaiting() : void;

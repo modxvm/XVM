@@ -153,6 +153,10 @@ package net.wg.gui.lobby.header.headerButtonBar
             if(this.data)
             {
                 this.readyToShow = true;
+                if(this.bounds != null)
+                {
+                    dispatchEvent(new HeaderEvents(HeaderEvents.HBC_UPDATED,this.bounds.width));
+                }
             }
         }
 

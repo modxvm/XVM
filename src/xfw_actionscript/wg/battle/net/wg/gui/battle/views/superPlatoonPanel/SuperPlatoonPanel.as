@@ -5,10 +5,13 @@ package net.wg.gui.battle.views.superPlatoonPanel
     import net.wg.infrastructure.helpers.statisticsDataController.intarfaces.IBattleComponentDataController;
     import net.wg.infrastructure.base.meta.ISuperPlatoonPanelMeta;
     import net.wg.infrastructure.base.meta.IStatsBaseMeta;
+    import net.wg.infrastructure.base.meta.IPlayersPanelMeta;
     import net.wg.gui.battle.views.superPlatoonPanel.components.PlatoonMembersPanel;
     import net.wg.gui.battle.views.superPlatoonPanel.components.PlatoonInvitePanel;
     import flash.utils.Dictionary;
+    import net.wg.infrastructure.managers.IColorSchemeManager;
     import net.wg.gui.battle.random.views.stats.events.DynamicSquadEvent;
+    import net.wg.infrastructure.events.ColorSchemeEvent;
     import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
     import net.wg.infrastructure.interfaces.IDAAPIDataClass;
     import net.wg.data.VO.daapi.DAAPIVehiclesDataVO;
@@ -20,12 +23,12 @@ package net.wg.gui.battle.views.superPlatoonPanel
     import net.wg.data.VO.daapi.DAAPIVehiclesInvitationStatusVO;
     import net.wg.data.constants.InvitationStatus;
     import net.wg.data.VO.daapi.DAAPIPlayerStatusVO;
-    import net.wg.data.VO.daapi.DAAPIVehicleStatusVO;
     import net.wg.data.VO.daapi.DAAPITriggeredCommandVO;
     import net.wg.data.VO.daapi.DAAPITriggeredCommandsVO;
+    import net.wg.data.VO.daapi.DAAPIVehicleStatusVO;
     import net.wg.gui.battle.epicBattle.VO.daapi.EpicVehicleStatsVO;
 
-    public class SuperPlatoonPanel extends SuperPlatoonPanelMeta implements IEpicBattleStatisticDataController, IBattleComponentDataController, ISuperPlatoonPanelMeta, IStatsBaseMeta
+    public class SuperPlatoonPanel extends SuperPlatoonPanelMeta implements IEpicBattleStatisticDataController, IBattleComponentDataController, ISuperPlatoonPanelMeta, IStatsBaseMeta, IPlayersPanelMeta
     {
 
         private static const INVITED_STATE:uint = 1;
@@ -46,8 +49,11 @@ package net.wg.gui.battle.views.superPlatoonPanel
 
         private var _epicStatsDict:Dictionary = null;
 
+        private var _colorSchemeMgr:IColorSchemeManager;
+
         public function SuperPlatoonPanel()
         {
+            this._colorSchemeMgr = App.colorSchemeMgr;
             super();
             this._vehicleDataCache = [];
             this._epicStatsDict = new Dictionary();
@@ -59,12 +65,14 @@ package net.wg.gui.battle.views.superPlatoonPanel
         {
             super.configUI();
             addEventListener(DynamicSquadEvent.ACCEPT,this.onDynamicSquadAcceptHandler);
+            this._colorSchemeMgr.addEventListener(ColorSchemeEvent.SCHEMAS_UPDATED,this.onColorSchemasUpdatedHandler);
         }
 
         override protected function onDispose() : void
         {
             var _loc1_:DAAPIVehicleInfoVO = null;
             removeEventListener(DynamicSquadEvent.ACCEPT,this.onDynamicSquadAcceptHandler);
+            this._colorSchemeMgr.removeEventListener(ColorSchemeEvent.SCHEMAS_UPDATED,this.onColorSchemasUpdatedHandler);
             this.platoonMembersPanel.dispose();
             this.platoonMembersPanel = null;
             if(this.platoonInvitePanel)
@@ -82,12 +90,18 @@ package net.wg.gui.battle.views.superPlatoonPanel
                 App.utils.data.cleanupDynamicObject(this._epicStatsDict);
             }
             this._epicStatsDict = null;
+            this._colorSchemeMgr = null;
             super.onDispose();
         }
 
         public function addVehiclesInfo(param1:IDAAPIDataClass) : void
         {
             this.applyVehicleData(DAAPIVehiclesDataVO(param1));
+        }
+
+        public function as_setChatCommandsVisibility(param1:Boolean) : void
+        {
+            this.platoonMembersPanel.setChatCommandsVisibility(param1);
         }
 
         public function as_setIsInteractive(param1:Boolean) : void
@@ -99,9 +113,17 @@ package net.wg.gui.battle.views.superPlatoonPanel
             this.platoonInvitePanel.maxInvites = param1;
         }
 
+        public function as_setPanelMode(param1:int) : void
+        {
+        }
+
         public function as_setPlatoonTitle(param1:String) : void
         {
             this.platoonMembersPanel.setPlatoonTitle(param1.toUpperCase());
+        }
+
+        public function resetFrags() : void
+        {
         }
 
         public function setArenaInfo(param1:IDAAPIDataClass) : void
@@ -111,10 +133,6 @@ package net.wg.gui.battle.views.superPlatoonPanel
         public function setEpicVehiclesStats(param1:EpicVehiclesStatsVO) : void
         {
             this.updateEpicStats(param1.leftItems,param1.leftVehiclesIDs);
-        }
-
-        public function resetFrags() : void
-        {
         }
 
         public function setFrags(param1:IDAAPIDataClass) : void
@@ -211,6 +229,21 @@ package net.wg.gui.battle.views.superPlatoonPanel
             }
         }
 
+        public function updateTriggeredChatCommands(param1:IDAAPIDataClass) : void
+        {
+            var _loc4_:DAAPITriggeredCommandVO = null;
+            if(this._playerSquad == DAAPIVehicleInfoVO.DEFAULT_SQUAD_IDX)
+            {
+                return;
+            }
+            var _loc2_:DAAPITriggeredCommandsVO = DAAPITriggeredCommandsVO(param1);
+            var _loc3_:Vector.<DAAPITriggeredCommandVO> = _loc2_.triggeredCommands;
+            for each(_loc4_ in _loc3_)
+            {
+                this.platoonMembersPanel.triggerChatCommand(_loc4_.vehicleID,_loc4_.chatCommandName);
+            }
+        }
+
         public function updateUserTags(param1:IDAAPIDataClass) : void
         {
             var _loc2_:DAAPIVehicleUserTagsVO = DAAPIVehicleUserTagsVO(param1);
@@ -248,21 +281,6 @@ package net.wg.gui.battle.views.superPlatoonPanel
 
         public function updateVehiclesStat(param1:IDAAPIDataClass) : void
         {
-        }
-
-        public function updateTriggeredChatCommands(param1:IDAAPIDataClass) : void
-        {
-            var _loc4_:DAAPITriggeredCommandVO = null;
-            if(this._playerSquad == DAAPIVehicleInfoVO.DEFAULT_SQUAD_IDX)
-            {
-                return;
-            }
-            var _loc2_:DAAPITriggeredCommandsVO = DAAPITriggeredCommandsVO(param1);
-            var _loc3_:Vector.<DAAPITriggeredCommandVO> = _loc2_.triggeredCommands;
-            for each(_loc4_ in _loc3_)
-            {
-                this.platoonMembersPanel.triggerChatCommand(_loc4_.vehicleID,_loc4_.chatCommandName);
-            }
         }
 
         private function applyVehicleData(param1:DAAPIVehiclesDataVO) : void
@@ -375,6 +393,11 @@ package net.wg.gui.battle.views.superPlatoonPanel
             {
                 this.platoonMembersPanel.forceOrderUpdate();
             }
+        }
+
+        private function onColorSchemasUpdatedHandler(param1:ColorSchemeEvent) : void
+        {
+            this.platoonMembersPanel.updateColorBlind();
         }
 
         private function onDynamicSquadAcceptHandler(param1:DynamicSquadEvent) : void

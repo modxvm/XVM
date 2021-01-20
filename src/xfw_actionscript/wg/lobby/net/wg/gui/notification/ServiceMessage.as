@@ -8,7 +8,6 @@ package net.wg.gui.notification
     import net.wg.gui.components.controls.UILoaderAlt;
     import net.wg.gui.components.controls.BitmapFill;
     import flash.text.TextField;
-    import net.wg.gui.components.common.CounterView;
     import net.wg.gui.notification.vo.NotificationInfoVO;
     import net.wg.gui.components.containers.Group;
     import net.wg.utils.IClassFactory;
@@ -23,7 +22,6 @@ package net.wg.gui.notification
     import org.idmedia.as3commons.util.StringUtils;
     import net.wg.data.constants.Linkages;
     import net.wg.data.constants.Values;
-    import flash.text.TextFormatAlign;
     import flash.events.Event;
     import net.wg.data.constants.Errors;
     import net.wg.gui.notification.events.ServiceMessageEvent;
@@ -50,39 +48,7 @@ package net.wg.gui.notification
 
         private static const MSG_TYPE_ACTION:String = "action";
 
-        private static const MSG_TYPE_NY_BOXES:String = "nyBoxes";
-
         private static const CANT_CREATE_BUTTON:String = "Can\'t create button";
-
-        private static const NY_ICON_X:int = 20;
-
-        private static const NY_ICON_Y:int = 0;
-
-        private static const NY_TEXT_Y:int = 141;
-
-        private static const NY_TEXT_X:int = 19;
-
-        private static const NY_BG_ICON_OFFET:int = 20;
-
-        private static const NY_COUNTER_X:int = 213;
-
-        private static const NY_COUNTER_Y:int = 77;
-
-        private static const NY_COUNTER_SMALL_X:int = 195;
-
-        private static const NY_COUNTER_SMALL_Y:int = 77;
-
-        private static const NY_BTN_PADDING:int = 12;
-
-        private static const NY_BOTTOM_OFFSET:int = 30;
-
-        private static const NY_COUNTER_NAME:String = "nyCounter";
-
-        private static const FIELD_CATEGORY:String = "category";
-
-        private static const FIELD_COUNT:String = "count";
-
-        private static const NY_TEXT_W:int = 250;
 
         public var background:MovieClip;
 
@@ -93,10 +59,6 @@ package net.wg.gui.notification
         public var bmpFill:BitmapFill;
 
         public var textField:TextField;
-
-        private var _nyCounter:CounterView = null;
-
-        private var _nyBg:MovieClip = null;
 
         private var _isTFClickedByMBR:Boolean = false;
 
@@ -115,16 +77,6 @@ package net.wg.gui.notification
         private var _timeStamp:String = "";
 
         private var _classFactory:IClassFactory;
-
-        private var _textDefaultX:int = -1;
-
-        private var _textDefaultY:int = -1;
-
-        private var _textDefaultW:int = -1;
-
-        private var _iconDefaultY:int = -1;
-
-        private var _isNYMessage:Boolean = false;
 
         public function ServiceMessage()
         {
@@ -148,10 +100,6 @@ package net.wg.gui.notification
         override protected function configUI() : void
         {
             super.configUI();
-            this._textDefaultX = this.textField.x;
-            this._textDefaultY = this.textField.y;
-            this._textDefaultW = this.textField.width;
-            this._iconDefaultY = this.icon.y;
             _focusable = tabEnabled = false;
             App.utils.styleSheetManager.setLinkStyle(this.textField);
             this.textField.autoSize = TextFieldAutoSize.LEFT;
@@ -161,7 +109,6 @@ package net.wg.gui.notification
             this.background.tabEnabled = false;
             this.textField.addEventListener(TextEvent.LINK,this.onTextFieldLinkHandler);
             this.textField.addEventListener(MouseEvent.CLICK,this.onTextFieldClickHandler);
-            this.icon.mouseChildren = this.icon.mouseEnabled = false;
             this.icon.addEventListener(UILoaderEvent.COMPLETE,this.onIconCompleteHandler);
             this.icon.addEventListener(UILoaderEvent.IOERROR,this.onIconIoerrorHandler);
             this.bgIcon.addEventListener(UILoaderEvent.COMPLETE,this.onIconCompleteHandler);
@@ -219,15 +166,6 @@ package net.wg.gui.notification
             this.textField = null;
             this.background = null;
             this._classFactory = null;
-            if(this._nyCounter)
-            {
-                this._nyCounter.dispose();
-                this._nyCounter = null;
-            }
-            if(this._nyBg)
-            {
-                this._nyBg = null;
-            }
             super.onDispose();
         }
 
@@ -295,24 +233,15 @@ package net.wg.gui.notification
         {
             var _loc1_:MessageInfoVO = null;
             var _loc2_:String = null;
-            var _loc3_:Object = null;
             if(this._data != null)
             {
                 _loc1_ = this._data.messageVO;
                 this.textField.htmlText = _loc1_.message;
                 _loc2_ = _loc1_.type;
-                _loc3_ = _loc1_.nyData;
                 this.icon.visible = this.icon.source == _loc1_.icon;
                 if(StringUtils.isNotEmpty(_loc1_.icon))
                 {
-                    if(this._isNYMessage && _loc3_ != null)
-                    {
-                        this.icon.source = StringUtils.isNotEmpty(_loc3_[FIELD_CATEGORY])?RES_ICONS.getNYLBcategoryIcon(_loc3_[FIELD_CATEGORY]):_loc1_.icon;
-                    }
-                    else
-                    {
-                        this.icon.source = _loc1_.icon;
-                    }
+                    this.icon.source = _loc1_.icon;
                 }
                 this.bgIcon.visible = false;
                 if(StringUtils.isNotEmpty(_loc1_.bgIcon))
@@ -344,25 +273,6 @@ package net.wg.gui.notification
                 {
                     this.updateButtonsGroup(_loc1_);
                 }
-                if(this._isNYMessage)
-                {
-                    if(!this._nyCounter)
-                    {
-                        this._nyCounter = this._classFactory.getComponent(Linkages.NY_COUNTER_VIEW_UI,CounterView);
-                        this._nyCounter.name = NY_COUNTER_NAME;
-                        this._nyCounter.mouseChildren = this._nyCounter.mouseEnabled = false;
-                        addChild(this._nyCounter);
-                    }
-                    if(_loc1_.nyData != null)
-                    {
-                        this._nyCounter.setCount(_loc1_.nyData[FIELD_COUNT]);
-                    }
-                }
-                else if(this._nyCounter)
-                {
-                    removeChild(this._nyCounter);
-                    this._nyCounter = null;
-                }
                 invalidate(LAYOUT_INVALID);
             }
         }
@@ -370,96 +280,43 @@ package net.wg.gui.notification
         private function updateLayout() : void
         {
             var _loc7_:* = 0;
-            var _loc8_:* = 0;
-            var _loc9_:Object = null;
-            var _loc10_:* = false;
-            var _loc1_:MessageInfoVO = this._data.messageVO;
-            this.background.visible = !this._isNYMessage;
-            if(this._isNYMessage)
-            {
-                if(!this._nyBg)
-                {
-                    this._nyBg = this._classFactory.getComponent(Linkages.NY_LB_NOTIFICATION_BG_UI,MovieClip);
-                    this._nyBg.y = this.bgIcon.y - NY_BG_ICON_OFFET;
-                    addChildAt(this._nyBg,getChildIndex(this.bgIcon));
-                }
-            }
-            else if(this._nyBg)
-            {
-                removeChild(this._nyBg);
-                this._nyBg = null;
-            }
-            this.textField.x = this._isNYMessage?NY_TEXT_X:this._textDefaultX;
-            this.textField.y = this._isNYMessage?NY_TEXT_Y - NY_BG_ICON_OFFET:this._textDefaultY;
-            this.textField.width = this._isNYMessage?NY_TEXT_W:this._textDefaultW;
             if(this._timeComponent)
             {
                 this._timeComponent.y = MessageMetrics.TIME_PADDING_Y;
                 this._timeComponent.x = this.width - (this._timeComponent.width + MessageMetrics.TIME_PADDING_X) ^ 0;
             }
-            var _loc2_:* = 0;
+            var _loc1_:* = 0;
             if(this._buttonsGroup != null)
             {
-                _loc2_ = this._buttonsGroup.height + this.buttonPadding;
+                _loc1_ = this._buttonsGroup.height + this._buttonPadding;
             }
-            var _loc3_:int = this.textField.height;
+            var _loc2_:int = this.textField.height;
+            var _loc3_:int = _loc2_ + this._messageBottomOffset + this._messageTopOffset + _loc1_;
             var _loc4_:* = 0;
-            if(StringUtils.isNotEmpty(this.bgIcon.source) && _loc1_)
+            if(StringUtils.isNotEmpty(this.bgIcon.source) && this._data.messageVO)
             {
-                _loc4_ = _loc1_.bgIconSizeAuto?this.bgIcon.height:_loc1_.bgIconHeight | 0;
+                _loc4_ = this._data.messageVO.bgIconSizeAuto?this.bgIcon.height:this._data.messageVO.bgIconHeight;
             }
-            if(this._buttonsGroup != null)
+            var _loc5_:int = Math.max(_loc3_,_loc4_);
+            if(_loc5_ != this.background.height)
             {
-                this._buttonsGroup.y = _loc3_ + this.textField.y + this.buttonPadding ^ 0;
-                if(this._isNYMessage && _loc1_.buttonsAlign == TextFormatAlign.CENTER)
-                {
-                    this._buttonsGroup.x = this.textField.x + (this.textField.width - this._buttonsGroup.width >> 1) | 0;
-                }
-                else
-                {
-                    this._buttonsGroup.x = this.textField.x;
-                }
-            }
-            var _loc5_:int = this.textField.y + _loc3_ + this.messageBottomOffset + _loc2_;
-            var _loc6_:int = Math.max(_loc5_,_loc4_);
-            if(_loc6_ != this.background.height)
-            {
-                this.background.height = _loc6_;
+                this.background.height = _loc5_;
                 dispatchEvent(new Event(Event.RESIZE));
             }
-            if(this._isNYMessage)
+            if(this._buttonsGroup != null)
             {
-                this._nyBg.height = this.background.height + NY_BG_ICON_OFFET;
+                this._buttonsGroup.y = _loc2_ + this.textField.y + this._buttonPadding ^ 0;
             }
             if(this.bmpFill.visible)
             {
                 _loc7_ = this.bmpFill.y << 1;
-                this.bmpFill.setSize(this.background.width - _loc7_ ^ 0,_loc6_ - _loc7_);
+                this.bmpFill.setSize(this.background.width - _loc7_ ^ 0,_loc5_ - _loc7_);
             }
-            if(this._isNYMessage)
+            var _loc6_:int = MessageMetrics.ICON_DEFAULT_PADDING_X;
+            this.icon.x = _loc6_ + (this.textField.x - _loc6_ - this.icon.width >> 1);
+            if(this.textField.textHeight < this.icon.height)
             {
-                this.icon.x = NY_ICON_X;
-                this.icon.y = NY_ICON_Y;
-            }
-            else
-            {
-                _loc8_ = MessageMetrics.ICON_DEFAULT_PADDING_X;
-                this.icon.x = _loc8_ + (this.textField.x - _loc8_ - this.icon.width >> 1);
-                if(this.textField.textHeight < this.icon.height)
-                {
-                    this.icon.y = this.textField.y + (this.textField.textHeight - this.icon.height >> 1) + MessageMetrics.ICON_DEFAULT_PADDING_Y ^ 0;
-                }
-                else
-                {
-                    this.icon.y = this._iconDefaultY;
-                }
-            }
-            if(this._isNYMessage && this._nyCounter)
-            {
-                _loc9_ = _loc1_.nyData;
-                _loc10_ = StringUtils.isNotEmpty(_loc9_[FIELD_CATEGORY]);
-                this._nyCounter.x = _loc10_?NY_COUNTER_X:NY_COUNTER_SMALL_X;
-                this._nyCounter.y = _loc10_?NY_COUNTER_Y:NY_COUNTER_SMALL_Y;
+                this.icon.y = this.textField.y + (this.textField.textHeight - this.icon.height >> 1) + MessageMetrics.ICON_DEFAULT_PADDING_Y ^ 0;
             }
         }
 
@@ -546,7 +403,7 @@ package net.wg.gui.notification
 
         public function get messageBottomOffset() : Number
         {
-            return this._isNYMessage?NY_BOTTOM_OFFSET:this._messageBottomOffset;
+            return this._messageBottomOffset;
         }
 
         public function set messageBottomOffset(param1:Number) : void
@@ -557,7 +414,7 @@ package net.wg.gui.notification
 
         public function get buttonPadding() : int
         {
-            return this._isNYMessage?NY_BTN_PADDING:this._buttonPadding;
+            return this._buttonPadding;
         }
 
         public function set buttonPadding(param1:int) : void
@@ -575,8 +432,6 @@ package net.wg.gui.notification
         {
             this._data = param1 as NotificationInfoVO;
             App.utils.asserter.assertNotNull(this._data,Errors.INVALID_TYPE + "NotificationInfoVO.");
-            var _loc2_:MessageInfoVO = this._data.messageVO;
-            this._isNYMessage = _loc2_ && _loc2_.type == MSG_TYPE_NY_BOXES;
             invalidate(DATA_INVALID);
         }
 

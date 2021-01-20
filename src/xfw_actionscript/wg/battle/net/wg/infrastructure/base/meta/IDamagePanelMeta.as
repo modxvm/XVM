@@ -54,5 +54,7 @@ package net.wg.infrastructure.base.meta
         function as_setStatusTimerSnapshot(param1:int, param2:int) : void;
 
         function as_setSpeedMode(param1:Boolean) : void;
+
+        function as_setRepairTimesVisible(param1:Boolean) : void;
     }
 }

@@ -20,7 +20,7 @@ package net.wg.gui.bootcamp.battleResult.data
 
         private static const CREDITS_STATS_FIELD:String = "credits";
 
-        private static const VIDEO_BUTTON_FIELD:String = "videoButton";
+        private static const VIDEO_BUTTONS_FIELD:String = "videoButtons";
 
         public var stats:DataProvider;
 
@@ -36,7 +36,7 @@ package net.wg.gui.bootcamp.battleResult.data
 
         public var xp:RewardDataVO = null;
 
-        public var videoButton:RewardVideoDataVO = null;
+        public var videoButtons:DataProvider = null;
 
         public var hasUnlocks:Boolean = false;
 
@@ -73,6 +73,8 @@ package net.wg.gui.bootcamp.battleResult.data
             var _loc4_:BattleItemRendererVO = null;
             var _loc5_:Array = null;
             var _loc6_:String = null;
+            var _loc7_:* = 0;
+            var _loc8_:RewardVideoDataVO = null;
             if(param1 == STATS_FIELD)
             {
                 this.stats = new DataProvider();
@@ -135,9 +137,17 @@ package net.wg.gui.bootcamp.battleResult.data
                 this.credits = new RewardDataVO(param2);
                 return false;
             }
-            if(param1 == VIDEO_BUTTON_FIELD)
+            if(param1 == VIDEO_BUTTONS_FIELD)
             {
-                this.videoButton = new RewardVideoDataVO(param2);
+                this.videoButtons = new DataProvider();
+                _loc5_ = param2 as Array;
+                _loc7_ = _loc5_.length;
+                for each(_loc3_ in _loc5_)
+                {
+                    _loc8_ = new RewardVideoDataVO(_loc3_);
+                    _loc8_.totalCount = _loc7_;
+                    this.videoButtons.push(_loc8_);
+                }
                 return false;
             }
             return super.onDataWrite(param1,param2);
@@ -146,6 +156,7 @@ package net.wg.gui.bootcamp.battleResult.data
         override protected function onDispose() : void
         {
             var _loc1_:BattleItemRendererVO = null;
+            var _loc2_:RewardVideoDataVO = null;
             if(this.stats)
             {
                 for each(_loc1_ in this.stats)
@@ -182,6 +193,15 @@ package net.wg.gui.bootcamp.battleResult.data
                 this.unlocks.cleanUp();
                 this.unlocks = null;
             }
+            if(this.videoButtons)
+            {
+                for each(_loc2_ in this.videoButtons)
+                {
+                    _loc2_.dispose();
+                }
+                this.videoButtons.cleanUp();
+                this.videoButtons = null;
+            }
             this.resultTypeStr = null;
             this.background = null;
             this.finishReasonStr = null;
@@ -194,11 +214,6 @@ package net.wg.gui.bootcamp.battleResult.data
             {
                 this.credits.dispose();
                 this.credits = null;
-            }
-            if(this.videoButton)
-            {
-                this.videoButton.dispose();
-                this.videoButton = null;
             }
             super.onDispose();
         }

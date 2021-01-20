@@ -2,19 +2,13 @@ package net.wg.gui.lobby.hangar.tcarousel
 {
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.components.controls.scroller.IScrollerItemRenderer;
-    import net.wg.infrastructure.managers.counter.CounterProps;
-    import flash.text.TextFormatAlign;
-    import net.wg.data.constants.Linkages;
-    import net.wg.gui.components.common.Counter;
     import flash.display.Sprite;
-    import flash.display.MovieClip;
     import net.wg.gui.components.carousels.data.VehicleCarouselVO;
     import net.wg.infrastructure.managers.ITooltipMgr;
     import net.wg.data.constants.SoundTypes;
     import net.wg.data.constants.SoundManagerStatesLobby;
     import flash.geom.Point;
     import net.wg.data.constants.Values;
-    import net.wg.infrastructure.managers.counter.CounterManager;
     import flash.events.MouseEvent;
     import flash.events.Event;
     import scaleform.gfx.MouseEventEx;
@@ -38,27 +32,13 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         private static const PROGRESSION_POINTS_OFFSET:int = -8;
 
-        private static const CRYSTAL_NY_BORDER_LBL:String = "ny";
-
-        private static const CRYSTAL_BORDER_LBL:String = "usual";
-
-        private static const NY_VEH_COUNTER_PROPS:CounterProps = new CounterProps(CounterProps.DEFAULT_OFFSET_X,CounterProps.DEFAULT_OFFSET_Y,TextFormatAlign.LEFT,true,Linkages.COUNTER_UI,CounterProps.DEFAULT_TF_PADDING,false,Counter.EMPTY_STATE);
-
-        private static const NY_VEHICLE_BONUS_NAME:String = "nyVehicleBonus";
-
-        private static const NY_BONUS_OFFSET_X:int = -2;
-
         public var content:BaseTankIcon = null;
 
         public var border:Sprite = null;
 
-        public var nyBorder:Sprite = null;
-
-        public var crystalsBorder:MovieClip = null;
+        public var crystalsBorder:Sprite = null;
 
         public var selectedMc:Sprite = null;
-
-        public var nySelect:MovieClip = null;
 
         private var _index:uint = 0;
 
@@ -76,8 +56,6 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         private var _rankedBonus:Sprite = null;
 
-        private var _nyBonus:NYVehicleBonus = null;
-
         private var _progressionPoints:CarouselProgressionPoints = null;
 
         public function TankCarouselItemRenderer()
@@ -94,13 +72,10 @@ package net.wg.gui.lobby.hangar.tcarousel
             mouseEnabled = false;
             this.border.mouseEnabled = false;
             this.border.mouseChildren = false;
-            this.nyBorder.mouseChildren = this.nyBorder.mouseEnabled = false;
             this.crystalsBorder.mouseEnabled = false;
             this.crystalsBorder.mouseChildren = false;
             this.selectedMc.mouseEnabled = false;
             this.selectedMc.mouseChildren = false;
-            this.nySelect.mouseEnabled = false;
-            this.nySelect.mouseChildren = false;
             this.content.cacheAsBitmap = true;
             this.content.buttonMode = true;
             this.content.mouseChildren = false;
@@ -114,17 +89,14 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.removeListeners();
             this.content.dispose();
             this.content = null;
-            this.nySelect = null;
             this._dataVO = null;
             _owner = null;
             this._toolTipMgr = null;
-            this.nyBorder = null;
             this.border = null;
             this.crystalsBorder = null;
             this.selectedMc = null;
             this.clearRankedBonus();
             this.clearProgressionPoints();
-            this.clearNyBonus();
             super.onDispose();
         }
 
@@ -135,24 +107,16 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         protected function updateData() : void
         {
-            var _loc2_:* = false;
-            var _loc3_:* = false;
-            var _loc1_:* = this._dataVO != null;
+            var _loc1_:* = false;
+            _loc1_ = this._dataVO != null;
             if(_loc1_)
             {
                 alpha = this._dataVO.alpha;
                 isUseRightBtn = this._dataVO.isUseRightBtn;
                 this._isClickEnabled = this._dataVO.clickEnabled;
-                this._isSpecialSlot = this._dataVO.buySlot || this._dataVO.buyTank || this._dataVO.isRentPromotion || this._dataVO.nySlot;
-                _loc2_ = this._dataVO.isEarnCrystals && !this._dataVO.isCrystalsLimitReached;
-                this.crystalsBorder.visible = _loc2_;
-                _loc3_ = this._dataVO.hasNyBonus;
-                if(_loc2_)
-                {
-                    this.crystalsBorder.gotoAndStop(_loc3_?CRYSTAL_NY_BORDER_LBL:CRYSTAL_BORDER_LBL);
-                }
-                this.border.visible = !_loc2_ && !_loc3_;
-                this.nyBorder.visible = !_loc2_ && _loc3_;
+                this._isSpecialSlot = this._dataVO.buySlot || this._dataVO.buyTank || this._dataVO.isRentPromotion;
+                this.crystalsBorder.visible = this._dataVO.isEarnCrystals && !this._dataVO.isCrystalsLimitReached;
+                this.border.visible = !this.crystalsBorder.visible;
                 mouseEnabledOnDisabled = true;
             }
             else
@@ -162,61 +126,12 @@ package net.wg.gui.lobby.hangar.tcarousel
                 this._isClickEnabled = false;
                 this._isSpecialSlot = false;
                 this.crystalsBorder.visible = false;
-                this.nyBorder.visible = false;
                 mouseEnabledOnDisabled = false;
             }
             this.updateRankedBonus(_loc1_?this._dataVO.hasRankedBonus:false);
-            this.updateNyBonus(_loc1_?this._dataVO.hasNyBonus:false);
             this.updateProgressionPoints(_loc1_?this._dataVO.hasProgression:false);
             this.updateInteractiveState();
             this.content.setData(this._dataVO);
-            if(_loc1_ && this._dataVO.showBubble)
-            {
-                App.utils.counterManager.setCounter(this.border,CounterManager.COUNTER_EMPTY,null,NY_VEH_COUNTER_PROPS);
-            }
-            else
-            {
-                App.utils.counterManager.removeCounter(this.border);
-            }
-            this.selectedMc.visible = _loc1_?!this._dataVO.hasNyBonus:false;
-            this.nySelect.visible = _loc1_?this._dataVO.hasNyBonus || this._dataVO.nySlot:false;
-            this.border.visible = !this.nySelect.visible;
-        }
-
-        private function updateNyBonus(param1:Boolean) : void
-        {
-            if(param1)
-            {
-                if(!this._nyBonus)
-                {
-                    this._nyBonus = App.utils.classFactory.getComponent(Linkages.NY_VEHICLE_BONUS_UI,NYVehicleBonus);
-                    this._nyBonus.name = NY_VEHICLE_BONUS_NAME;
-                    this._nyBonus.x = (width - this._nyBonus.width >> 1) + NY_BONUS_OFFSET_X;
-                    this._nyBonus.y = -(this._nyBonus.height >> 1);
-                    this._nyBonus.updateBonus(this._dataVO.nyBonusValue,this._dataVO.nyBonusIcon);
-                    this._nyBonus.mouseChildren = this._nyBonus.mouseEnabled = false;
-                    addChild(this._nyBonus);
-                }
-                else
-                {
-                    this._nyBonus.updateBonus(this._dataVO.nyBonusValue,this._dataVO.nyBonusIcon);
-                }
-                this._nyBonus.visible = true;
-            }
-            else
-            {
-                this.clearNyBonus();
-            }
-        }
-
-        private function clearNyBonus() : void
-        {
-            if(this._nyBonus != null)
-            {
-                removeChild(this._nyBonus);
-                this._nyBonus.dispose();
-                this._nyBonus = null;
-            }
         }
 
         private function clearProgressionPoints() : void
@@ -243,12 +158,12 @@ package net.wg.gui.lobby.hangar.tcarousel
                     addChild(this._progressionPoints);
                 }
                 this._progressionPoints.visible = true;
-                this.border.visible = !this._dataVO.progressionPoints.isSpecialVehicle && !this.crystalsBorder.visible && !this.nyBorder.visible;
+                this.border.visible = !this._dataVO.progressionPoints.isSpecialVehicle && !this.crystalsBorder.visible;
             }
             else
             {
                 this.clearProgressionPoints();
-                this.border.visible = !this.crystalsBorder.visible && !this.nyBorder.visible;
+                this.border.visible = !this.crystalsBorder.visible;
             }
         }
 
@@ -399,10 +314,6 @@ package net.wg.gui.lobby.hangar.tcarousel
                         {
                             _loc4_ = TankItemEvent.SELECT_RESTORE_TANK;
                         }
-                        else if(this._dataVO.nySlot)
-                        {
-                            _loc4_ = TankItemEvent.SELECT_NEW_YEAR_SLOT;
-                        }
                         else if(this._dataVO.clickEnabled)
                         {
                             _loc4_ = TankItemEvent.SELECT_ITEM;
@@ -411,7 +322,7 @@ package net.wg.gui.lobby.hangar.tcarousel
                         dispatchEvent(new TankItemEvent(_loc4_,this._index));
                     }
                 }
-                else if(_loc3_ == MouseEventEx.RIGHT_BUTTON && isUseRightBtn && !this._dataVO.buySlot && !this._dataVO.buyTank && !this._dataVO.restoreTank && !this._dataVO.isRentPromotion && !this._dataVO.nySlot)
+                else if(_loc3_ == MouseEventEx.RIGHT_BUTTON && isUseRightBtn && !this._dataVO.buySlot && !this._dataVO.buyTank && !this._dataVO.restoreTank && !this._dataVO.isRentPromotion)
                 {
                     App.contextMenuMgr.show(CONTEXT_MENU_HANDLER_TYPE.VEHICLE,this,{"inventoryId":this._dataVO.id});
                 }
@@ -451,11 +362,6 @@ package net.wg.gui.lobby.hangar.tcarousel
             else if(StringUtils.isNotEmpty(this._dataVO.lockedTooltip))
             {
                 this._toolTipMgr.showComplex(this._dataVO.lockedTooltip);
-            }
-            else if(this._dataVO.nySlot)
-            {
-                this._toolTipMgr.showComplex(this._dataVO.tooltip);
-                this.content.handleRollOver(this._dataVO);
             }
             else
             {

@@ -373,6 +373,11 @@ package net.wg.gui.battle.views.superPlatoonPanel.renderers
             this.chatCommandState.playCommandAnimation(param1);
         }
 
+        public function setChatCommandsVisibility(param1:Boolean) : void
+        {
+            this.chatCommandState.setChatCommandVisibility(param1);
+        }
+
         private function updateColors() : void
         {
             var _loc1_:String = PlayerStatusSchemeName.getSchemeNameForVehicle(this._isCurrentPlayer,true,this._isTeamKiller,!this._isAlive,this._isOffline);

@@ -6,16 +6,16 @@ package net.wg.gui.lobby.stronghold
     import net.wg.gui.components.common.waiting.Waiting;
     import net.wg.gui.components.windows.ScreenBg;
     import net.wg.gui.components.controls.CloseButtonText;
+    import scaleform.clik.events.ButtonEvent;
+    import scaleform.clik.constants.InvalidationType;
+    import net.wg.gui.lobby.browser.events.BrowserEvent;
+    import flash.display.InteractiveObject;
     import net.wg.data.constants.Linkages;
     import net.wg.data.Aliases;
-    import net.wg.gui.lobby.browser.events.BrowserEvent;
-    import scaleform.clik.constants.InvalidationType;
-    import scaleform.clik.events.ButtonEvent;
     import scaleform.clik.events.InputEvent;
     import scaleform.clik.ui.InputDetails;
     import flash.ui.Keyboard;
     import scaleform.clik.constants.InputValue;
-    import flash.display.InteractiveObject;
 
     public class StrongholdView extends StrongholdViewMeta implements IStrongholdViewMeta
     {
@@ -35,19 +35,23 @@ package net.wg.gui.lobby.stronghold
             super();
         }
 
-        public function as_loadBrowser() : void
-        {
-            this.browser = App.utils.classFactory.getComponent(Linkages.BROWSER_UI,Browser);
-            addChild(this.browser);
-            registerFlashComponentS(this.browser,Aliases.BROWSER);
-            this.browser.setSize(_width,_height);
-            this.browser.addEventListener(BrowserEvent.LOADING_STARTED,this.onBrowserLoadingStartedHandler);
-            this.browser.addEventListener(BrowserEvent.LOADING_STOPPED,this.onBrowserLoadingStoppedHandler);
-        }
-
         override public function updateStage(param1:Number, param2:Number) : void
         {
             setSize(param1,param2);
+        }
+
+        override protected function configUI() : void
+        {
+            super.configUI();
+            this.waiting.setMessage(WAITING.LOADCONTENT);
+            this.waiting.setSize(_width,_height);
+            this.waiting.show();
+            this.waiting.backgroundVisibility = false;
+            this.screenBg.setSize(_width,_height);
+            this.closeBtn.addEventListener(ButtonEvent.CLICK,this.onCloseBtnClickHandler);
+            this.closeBtn.label = VEHICLE_CUSTOMIZATION.CUSTOMIZATIONHEADER_CLOSE;
+            this.closeBtn.visible = false;
+            viewSizeS(_width,_height);
         }
 
         override protected function draw() : void
@@ -58,12 +62,12 @@ package net.wg.gui.lobby.stronghold
                 if(this.browser)
                 {
                     this.browser.setSize(_width,_height);
-                    this.browser.serviceView.x = _width * 0.5 - this.browser.serviceView.width * 0.5;
-                    this.browser.serviceView.y = _height * 0.5 - this.browser.serviceView.height * 0.5;
+                    this.browser.serviceView.x = (_width >> 1) - (this.browser.serviceView.width >> 1);
+                    this.browser.serviceView.y = (_height >> 1) - (this.browser.serviceView.height >> 1);
                 }
                 this.waiting.setSize(_width,_height);
                 this.screenBg.setSize(_width,_height);
-                this.closeBtn.x = _width - this.closeBtn.width - OFFSET;
+                this.closeBtn.x = _width - this.closeBtn.actualWidth - OFFSET;
             }
         }
 
@@ -73,6 +77,8 @@ package net.wg.gui.lobby.stronghold
             {
                 this.browser.removeEventListener(BrowserEvent.LOADING_STARTED,this.onBrowserLoadingStartedHandler);
                 this.browser.removeEventListener(BrowserEvent.LOADING_STOPPED,this.onBrowserLoadingStoppedHandler);
+                this.browser.removeEventListener(BrowserEvent.SERVICE_VIEW_SHOWED,this.onBrowserServiceViewShowedHandler);
+                this.browser.removeEventListener(BrowserEvent.SERVICE_VIEW_HIDDEN,this.onBrowserServiceViewHiddenHandler);
                 removeChild(this.browser);
                 this.browser = null;
             }
@@ -86,17 +92,28 @@ package net.wg.gui.lobby.stronghold
             super.onDispose();
         }
 
-        override protected function configUI() : void
+        override protected function onSetModalFocus(param1:InteractiveObject) : void
         {
-            super.configUI();
-            this.waiting.setMessage(WAITING.LOADCONTENT);
-            this.waiting.setSize(_width,_height);
-            this.waiting.show();
-            this.waiting.backgroundVisibility = false;
-            this.screenBg.setSize(_width,_height);
-            this.closeBtn.addEventListener(ButtonEvent.CLICK,this.onCloseBtnClickHandler);
-            this.closeBtn.label = VEHICLE_CUSTOMIZATION.CUSTOMIZATIONHEADER_CLOSE;
-            viewSizeS(_width,_height);
+            super.onSetModalFocus(param1);
+            onFocusChangeS(true);
+        }
+
+        override protected function onLeaveModalFocus() : void
+        {
+            super.onLeaveModalFocus();
+            onFocusChangeS(false);
+        }
+
+        public function as_loadBrowser() : void
+        {
+            this.browser = App.utils.classFactory.getComponent(Linkages.BROWSER_UI,Browser);
+            addChild(this.browser);
+            registerFlashComponentS(this.browser,Aliases.BROWSER);
+            this.browser.setSize(_width,_height);
+            this.browser.addEventListener(BrowserEvent.LOADING_STARTED,this.onBrowserLoadingStartedHandler);
+            this.browser.addEventListener(BrowserEvent.LOADING_STOPPED,this.onBrowserLoadingStoppedHandler);
+            this.browser.addEventListener(BrowserEvent.SERVICE_VIEW_SHOWED,this.onBrowserServiceViewShowedHandler);
+            this.browser.addEventListener(BrowserEvent.SERVICE_VIEW_HIDDEN,this.onBrowserServiceViewHiddenHandler);
         }
 
         override public function handleInput(param1:InputEvent) : void
@@ -113,18 +130,6 @@ package net.wg.gui.lobby.stronghold
             }
         }
 
-        override protected function onSetModalFocus(param1:InteractiveObject) : void
-        {
-            super.onSetModalFocus(param1);
-            onFocusChangeS(true);
-        }
-
-        override protected function onLeaveModalFocus() : void
-        {
-            super.onLeaveModalFocus();
-            onFocusChangeS(false);
-        }
-
         private function onBrowserLoadingStartedHandler(param1:BrowserEvent) : void
         {
             this.waiting.show();
@@ -133,6 +138,16 @@ package net.wg.gui.lobby.stronghold
         private function onBrowserLoadingStoppedHandler(param1:BrowserEvent) : void
         {
             this.waiting.hide();
+        }
+
+        private function onBrowserServiceViewShowedHandler(param1:BrowserEvent) : void
+        {
+            this.closeBtn.visible = true;
+        }
+
+        private function onBrowserServiceViewHiddenHandler(param1:BrowserEvent) : void
+        {
+            this.closeBtn.visible = false;
         }
 
         private function onCloseBtnClickHandler(param1:ButtonEvent) : void

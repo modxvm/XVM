@@ -105,6 +105,8 @@ package
 
         public static const INVITES_STATE_ERROR:String = "#invites:invites/state/ERROR";
 
+        public static const INVITES_NOTE_SERVERSELECTIONISREMEMBERED:String = "#invites:invites/note/serverSelectionIsRemembered";
+
         public static const INVITES_NOTE_SERVER_CHANGE:String = "#invites:invites/note/server_change";
 
         public static const INVITES_NOTE_CHANGE_AND_LEAVE_QUEUE_EVENT_BATTLES:String = "#invites:invites/note/change_and_leave/QUEUE_EVENT_BATTLES";

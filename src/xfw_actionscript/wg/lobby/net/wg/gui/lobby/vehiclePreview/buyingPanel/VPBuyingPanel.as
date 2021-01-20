@@ -50,7 +50,11 @@ package net.wg.gui.lobby.vehiclePreview.buyingPanel
 
         private static const ACTION_BUTTON_PADDING:int = 20;
 
-        private static const COMPENSATION_CURRENCY_OFFSET:int = 4;
+        private static const ACTION_BUTTON_OFFSET:int = 16;
+
+        private static const NOT_RESEARCHED_ALERT_ICON_OFFSET:int = 10;
+
+        private static const NOT_RESEARCHED_LABEL_OFFSET:int = 2;
 
         private static const HALF_BUY_BUTTON_DEFAULT_OFFSET:int = BUY_BUTTON_DEFAULT_OFFSET >> 1;
 
@@ -550,9 +554,9 @@ package net.wg.gui.lobby.vehiclePreview.buyingPanel
             if(this.notResearchedAlertIcon.visible)
             {
                 this.notResearchedLabelTf.text = this._data.warning;
-                this.notResearchedAlertIcon.x = this.actionButton.x + this.actionButton.width >> 0;
+                this.notResearchedAlertIcon.x = this.actionButton.x + this.actionButton.width + NOT_RESEARCHED_ALERT_ICON_OFFSET >> 0;
                 this.notResearchedAlertIcon.y = this.actionButton.y + (this.actionButton.height - this.notResearchedAlertIcon.height >> 1) | 0;
-                this.notResearchedLabelTf.x = this.notResearchedAlertIcon.x + this.notResearchedAlertIcon.width + 1 >> 0;
+                this.notResearchedLabelTf.x = this.notResearchedAlertIcon.x + this.notResearchedAlertIcon.width + NOT_RESEARCHED_LABEL_OFFSET >> 0;
                 _loc4_ = localToGlobal(new Point(this.notResearchedLabelTf.x,0));
                 this.notResearchedLabelTf.width = App.appWidth - _loc4_.x;
                 this.notResearchedLabelTf.y = this.notResearchedAlertIcon.y + (this.notResearchedAlertIcon.height - this.notResearchedLabelTf.textHeight >> 1) - TF_V_OFFSET;
@@ -597,7 +601,7 @@ package net.wg.gui.lobby.vehiclePreview.buyingPanel
 
         override public function get width() : Number
         {
-            return this.actionButton.x + this.actionButton.width + (contains(this.setItemsView)?this.setItemsView.actualOffset:0);
+            return this.actionButton.x + this.actionButton.width + ACTION_BUTTON_OFFSET + (contains(this.setItemsView)?this.setItemsView.actualOffset:0);
         }
 
         override public function get height() : Number

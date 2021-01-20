@@ -15,6 +15,8 @@ package net.wg.infrastructure.base.meta
 
         function as_buttonUpdate(param1:Object) : void;
 
+        function as_setBackgroundAlpha(param1:Number) : void;
+
         function as_show() : void;
 
         function as_hide() : void;

@@ -271,12 +271,7 @@ package net.wg.gui.lobby.header.headerButtonBar
             return this._btnsMap[param1];
         }
 
-        public function xfw_searchButtonById(id:String):HeaderButton
-        {
-            return searchButtonById(id);
-        }
-
-        protected function searchButtonById(param1:String) : HeaderButton
+        public function searchButtonById(param1:String) : HeaderButton
         {
             var _loc2_:HeaderButtonVo = this.getButtonDataById(param1);
             if(_loc2_ != null)

@@ -13,6 +13,8 @@ package net.wg.gui.components.dogtag.VO
 
         public var hasData:Boolean = false;
 
+        public var componentID:int = -1;
+
         public function ComponentVO(param1:Object)
         {
             super(param1);
