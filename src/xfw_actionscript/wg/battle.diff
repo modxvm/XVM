@@ -20,7 +20,7 @@ diff -Naur battle.orig/App.as battle/App.as
 diff -Naur battle.orig/net/wg/data/constants/Linkages.as battle/net/wg/data/constants/Linkages.as
 --- battle.orig/net/wg/data/constants/Linkages.as	2020-07-27 14:29:47.446781200 +0300
 +++ battle/net/wg/data/constants/Linkages.as	2020-07-27 14:41:24.871682400 +0300
-@@ -541,7 +541,7 @@
+@@ -543,7 +543,7 @@
  
          public static const BATTLE_PROGRESS_TASK_SEPARATOR:String = "battleProgressTaskSeparatorUI";
  
@@ -139,7 +139,7 @@ diff -Naur battle.orig/net/wg/gui/battle/components/stats/playersPanel/list/Base
 diff -Naur battle.orig/net/wg/gui/battle/epicRandom/views/EpicRandomPage.as battle/net/wg/gui/battle/epicRandom/views/EpicRandomPage.as
 --- battle.orig/net/wg/gui/battle/epicRandom/views/EpicRandomPage.as	2020-07-27 14:29:54.792899600 +0300
 +++ battle/net/wg/gui/battle/epicRandom/views/EpicRandomPage.as	2020-07-27 14:41:25.040629000 +0300
-@@ -320,6 +320,11 @@
+@@ -324,6 +324,11 @@
              this.updatePositionForQuestProgress();
          }
  
@@ -382,7 +382,7 @@ diff -Naur battle.orig/net/wg/gui/battle/views/BaseBattlePage.as battle/net/wg/g
          protected var battleStatisticDataController:BattleStatisticDataController;
  
          protected var postmortemTips:BasePostmortemPanel = null;
-@@ -344,6 +344,11 @@
+@@ -348,6 +348,11 @@
              }
          }
  
@@ -394,7 +394,7 @@ diff -Naur battle.orig/net/wg/gui/battle/views/BaseBattlePage.as battle/net/wg/g
          protected function registerComponent(param1:IDAAPIModule, param2:String) : void
          {
              this._componentsStorage[param2] = param1;
-@@ -393,6 +393,11 @@
+@@ -397,6 +397,11 @@
              return false;
          }
  
@@ -406,7 +406,7 @@ diff -Naur battle.orig/net/wg/gui/battle/views/BaseBattlePage.as battle/net/wg/g
          protected function onMiniMapChangeHandler(param1:MinimapEvent) : void
          {
              if(this.postmortemTips)
-@@ -422,6 +422,11 @@
+@@ -426,6 +426,11 @@
              this.ribbonsPanel.x = (_originalWidth >> 1) + this.ribbonsPanel.offsetX;
          }
  

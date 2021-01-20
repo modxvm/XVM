@@ -1,7 +1,7 @@
 diff -Naur lobby.orig-0.orig/net/wg/gui/lobby/header/LobbyHeader.class.asasm lobby.orig-0/net/wg/gui/lobby/header/LobbyHeader.class.asasm
 --- lobby.orig-0.orig/net/wg/gui/lobby/header/LobbyHeader.class.asasm	2019-05-29 13:25:08.015714900 +0300
 +++ lobby.orig-0/net/wg/gui/lobby/header/LobbyHeader.class.asasm	2019-05-29 13:32:15.863479100 +0300
-@@ -60,6 +60,25 @@
+@@ -58,6 +58,25 @@
    trait slot QName(PackageNamespace(""), "headerButtonBar") type QName(PackageNamespace("net.wg.gui.lobby.header.headerButtonBar"), "HeaderButtonBar") end
    trait slot QName(PackageNamespace(""), "onlineCounter") type QName(PackageNamespace("net.wg.gui.lobby.header"), "OnlineCounter") end
    trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.header:LobbyHeader"), "_headerButtonsHelper") type QName(PackageNamespace("net.wg.gui.lobby.header.headerButtonBar"), "HeaderButtonsHelper") end
@@ -30,7 +30,7 @@ diff -Naur lobby.orig-0.orig/net/wg/gui/lobby/header/LobbyHeader.class.asasm lob
 diff -Naur lobby.orig-0.orig/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonContentItem.class.asasm lobby.orig-0/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonContentItem.class.asasm
 --- lobby.orig-0.orig/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonContentItem.class.asasm	2019-05-29 13:25:03.507758400 +0300
 +++ lobby.orig-0/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonContentItem.class.asasm	2019-05-29 13:32:15.896478200 +0300
-@@ -1201,6 +1201,25 @@
+@@ -1216,6 +1216,25 @@
      end ; body
     end ; method
    end ; trait
@@ -56,7 +56,7 @@ diff -Naur lobby.orig-0.orig/net/wg/gui/lobby/header/headerButtonBar/HeaderButto
    trait getter QName(ProtectedNamespace("net.wg.gui.lobby.header.headerButtonBar:HeaderButtonContentItem"), "leftPadding")
     method
      refid "net.wg.gui.lobby.header.headerButtonBar:HeaderButtonContentItem/instance/net.wg.gui.lobby.header.headerButtonBar:HeaderButtonContentItem:leftPadding/getter"
-@@ -1229,6 +1229,25 @@
+@@ -1244,6 +1244,25 @@
        returnvalue
       end ; code
      end ; body
@@ -82,34 +82,3 @@ diff -Naur lobby.orig-0.orig/net/wg/gui/lobby/header/headerButtonBar/HeaderButto
     end ; method
    end ; trait
    trait getter QName(ProtectedNamespace("net.wg.gui.lobby.header.headerButtonBar:HeaderButtonContentItem"), "rightPadding")
-diff -Naur lobby.orig-0.orig/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonsHelper.class.asasm lobby.orig-0/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonsHelper.class.asasm
---- lobby.orig-0.orig/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonsHelper.class.asasm	2019-05-29 13:25:09.105704000 +0300
-+++ lobby.orig-0/net/wg/gui/lobby/header/headerButtonBar/HeaderButtonsHelper.class.asasm	2019-05-29 13:32:15.919477800 +0300
-@@ -818,6 +818,27 @@
-     end ; body
-    end ; method
-   end ; trait
-+  trait method QName(PackageNamespace(""), "xfw_searchButtonById")
-+   method
-+    param QName(PackageNamespace(""), "String")
-+    returns QName(PackageNamespace("net.wg.gui.lobby.header.headerButtonBar"), "HeaderButton")
-+    body
-+     maxstack 2
-+     localcount 2
-+     initscopedepth 5
-+     maxscopedepth 6
-+     code
-+      getlocal0
-+      pushscope
-+
-+      getlocal0
-+      getlocal1
-+      callproperty        QName(ProtectedNamespace("net.wg.gui.lobby.header.headerButtonBar:HeaderButtonsHelper"), "searchButtonById"), 1
-+      returnvalue
-+     end ; code
-+    end ; body
-+   end ; method
-+  end ; trait
-   trait method QName(ProtectedNamespace("net.wg.gui.lobby.header.headerButtonBar:HeaderButtonsHelper"), "searchButtonById")
-    method
-     refid "net.wg.gui.lobby.header.headerButtonBar:HeaderButtonsHelper/instance/net.wg.gui.lobby.header.headerButtonBar:HeaderButtonsHelper:searchButtonById"

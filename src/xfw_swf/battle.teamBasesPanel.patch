@@ -1,7 +1,7 @@
 diff -Naur battle.orig-0.orig/net/wg/gui/battle/epicRandom/views/EpicRandomPage.class.asasm battle.orig-0/net/wg/gui/battle/epicRandom/views/EpicRandomPage.class.asasm
 --- battle.orig-0.orig/net/wg/gui/battle/epicRandom/views/EpicRandomPage.class.asasm	2019-08-22 22:42:04.291076800 +0300
 +++ battle.orig-0/net/wg/gui/battle/epicRandom/views/EpicRandomPage.class.asasm	2019-08-22 22:44:51.854731800 +0300
-@@ -1268,6 +1268,28 @@
+@@ -1299,6 +1299,28 @@
      end ; body
     end ; method
    end ; trait
