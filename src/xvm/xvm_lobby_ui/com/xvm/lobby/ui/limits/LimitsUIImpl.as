@@ -109,7 +109,7 @@ package com.xvm.lobby.ui.limits
 
                 if (goldLocker)
                 {
-                    var goldControl:HeaderButton = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(CURRENCIES_CONSTANTS.GOLD);
+                    var goldControl:HeaderButton = page.header.xfw_headerButtonsHelper.searchButtonById(CURRENCIES_CONSTANTS.GOLD);
                     if (goldControl)
                     {
                         var goldContent:HBC_Finance = goldControl.content as HBC_Finance;
@@ -131,7 +131,7 @@ package com.xvm.lobby.ui.limits
 
                 if (freeXpLocker)
                 {
-                    var freeXpControl:HeaderButton = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(CURRENCIES_CONSTANTS.FREE_XP);
+                    var freeXpControl:HeaderButton = page.header.xfw_headerButtonsHelper.searchButtonById(CURRENCIES_CONSTANTS.FREE_XP);
                     if (freeXpControl)
                     {
                         var freeXpContent:HBC_Finance = freeXpControl.content as HBC_Finance;
@@ -153,7 +153,7 @@ package com.xvm.lobby.ui.limits
 
                 if (crystalLocker)
                 {
-                    var crystalControl:HeaderButton = page.header.xfw_headerButtonsHelper.xfw_searchButtonById(CURRENCIES_CONSTANTS.CRYSTAL);
+                    var crystalControl:HeaderButton = page.header.xfw_headerButtonsHelper.searchButtonById(CURRENCIES_CONSTANTS.CRYSTAL);
                     if (crystalControl)
                     {
                         var crystalContent:HBC_Finance = crystalControl.content as HBC_Finance;
