@@ -18,8 +18,6 @@ package com.xvm.lobby
     import com.xvm.lobby.ping.PingLobbyXvmView;
     import com.xvm.lobby.ping.PingLoginXvmView;
     import com.xvm.lobby.profile.ProfileXvmView;
-    // TODO: 1.11.1-CT
-    //import com.xvm.lobby.squad.SquadXvmView;
     import com.xvm.lobby.techtree.ResearchXvmView;
     import com.xvm.lobby.techtree.TechTreeXvmView;
     import com.xvm.lobby.widgets.WidgetsLobbyXvmView;
@@ -51,7 +49,6 @@ package com.xvm.lobby
             "ContactsPopover": [ ContactsXvmView ],
             "profile": [ ProfileXvmView ],
             "profileWindow": [ ProfileXvmView ],
-            //"prb_windows/squadWindow": [ SquadXvmView ], // TODO: 1.11.1-CT
             "techtree": [ TechTreeXvmView ],
             "research": [ ResearchXvmView ]
         }
