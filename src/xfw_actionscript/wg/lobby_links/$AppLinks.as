@@ -34,8 +34,6 @@ import net.wg.gui.lobby.techtree.TechTreePage; TechTreePage;
 import net.wg.gui.lobby.window.ProfileWindow; ProfileWindow;
 import net.wg.gui.login.impl.LoginPage; LoginPage;
 import net.wg.gui.messenger.ContactsListPopover; ContactsListPopover;
-// TODO: 1.11.1-CT
-//import net.wg.gui.prebattle.squads.SquadWindow; SquadWindow;
 
 /**
  * UIs

@@ -12,6 +12,10 @@
 
   #### Hangar
 
+  * Removed section:
+
+    * `"squad*"` in **@xvm.xc** file (deleted **squad.xc** file)
+
   * Removed option:
 
     * `"login"/"saveLastServer"`

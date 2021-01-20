@@ -166,14 +166,6 @@
     "(sec)": "(сек)",
     "(m)": "(м)",
 
-    // Squad
-    "Squad battle tiers": "Уровень боев взвода",
-    "Squad tanks battle tiers difference": "Разница уровней боев танков взвода",
-    "Vehicle": "Танк",
-    "Battle tiers": "Уровень боёв",
-    "Type": "Тип",
-    "Nation": "Нация",
-
     // Nation
     "ussr": "СССР",
     "germany": "Германия",
