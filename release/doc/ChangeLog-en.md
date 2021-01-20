@@ -1,4 +1,24 @@
-﻿### XVM 8.7.1
+﻿### XVM 8.7.2
+
+  #### General
+
+  * Compatibility with World of Tanks 1.11.1.0
+
+  #### Battle
+
+  * Removed sections:
+
+    * `"repairTime*"` in **battleLabels.xc**, **battleLabelsTemplates.xc** file
+
+  #### Hangar
+
+  * Removed option:
+
+    * `"login"/"saveLastServer"`
+
+______________________________
+
+### XVM 8.7.1
 
   #### General
 
