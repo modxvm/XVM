@@ -320,7 +320,7 @@ class DataHitLog(object):
                 result = 0.0
         return result
 
-    def onHealthChanged(self, vehicle, newHealth, attackerID, attackReasonID, isVehicle=True):
+    def onHealthChanged(self, vehicle, newHealth, oldHealth, attackerID, attackReasonID, isVehicle=True):
         self.resetData()
         self.isVehicle = isVehicle
         self.vehicleID = vehicle.id
@@ -901,16 +901,16 @@ def _Vehicle_startVisual(self):
 
 
 @registerEvent(Vehicle, 'onHealthChanged')
-def _Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
+def _Vehicle_onHealthChanged(self, newHealth, oldHealth, attackerID, attackReasonID):
     if _config.get(HIT_LOG_ENABLED, True) and battle.isBattleTypeSupported:
         if (g_dataHitLog.playerVehicleID == attackerID) and (self.id not in g_dataHitLog.vehDead or newHealth <= -5):
             attacked = g_dataHitLog.player.arena.vehicles.get(self.id)
             if (g_dataHitLog.player.team != attacked['team']) or _config.get(SHOW_ALLY_DAMAGE, True):
                 if (self.id != attackerID) or _config.get(SHOW_SELF_DAMAGE, True):
-                    g_dataHitLog.onHealthChanged(self, newHealth, attackerID, attackReasonID)
+                    g_dataHitLog.onHealthChanged(self, newHealth, oldHealth, attackerID, attackReasonID)
             else:
                 if (self.id == attackerID) and _config.get(SHOW_SELF_DAMAGE, True):
-                    g_dataHitLog.onHealthChanged(self, newHealth, attackerID, attackReasonID)
+                    g_dataHitLog.onHealthChanged(self, newHealth, oldHealth, attackerID, attackReasonID)
         g_dataHitLog.updateVehInfo(self)
 
 
