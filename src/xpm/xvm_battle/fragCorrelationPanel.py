@@ -155,7 +155,7 @@ def _FragCorrelationPanel_getTotalStats(base, self, arenaVisitor, sessionProvide
     base(self, arenaVisitor, sessionProvider)
 
 @registerEvent(Vehicle, 'onHealthChanged')
-def onHealthChanged(self, newHealth, attackerID, attackReasonID):
+def onHealthChanged(self, newHealth, oldHealth, attackerID, attackReasonID):
     # update only for player vehicle, others handled on vehicle feedback event
     if self.isPlayerVehicle:
         update_hp(self.id, newHealth)

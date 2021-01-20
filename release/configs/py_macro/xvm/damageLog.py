@@ -522,7 +522,7 @@ class Data(object):
                 self.data['critDevice'] = DEVICES_TANKMAN[extra.name + '_destr'] if damageCode in damageInfoDestructions else DEVICES_TANKMAN[extra.name]
             self.data['criticalHit'] = True
 
-    def onHealthChanged(self, vehicle, newHealth, attackerID, attackReasonID):
+    def onHealthChanged(self, vehicle, newHealth, oldHealth, attackerID, attackReasonID):
         self.data['blownup'] = (newHealth <= -5)
         newHealth = max(0, newHealth)
         self.data['damage'] = self.data['oldHealth'] - newHealth
@@ -989,14 +989,14 @@ def as_updateSummaryStunValueS(base, self, value):
 
 
 @registerEvent(Vehicle, 'onHealthChanged')
-def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
+def Vehicle_onHealthChanged(self, newHealth, oldHealth, attackerID, attackReasonID):
     global on_fire, isImpact
     if not isImpact and self.isPlayerVehicle:
         isImpact = True
         as_event(EVENTS_NAMES.ON_IMPACT)
     if isShowDamageLog:
         if self.isPlayerVehicle and data.data['isAlive']:
-            data.onHealthChanged(self, newHealth, attackerID, attackReasonID)
+            data.onHealthChanged(self, newHealth, oldHealth, attackerID, attackReasonID)
             if newHealth <= 0:
                 on_fire = 0
                 as_event(EVENTS_NAMES.ON_FIRE)
