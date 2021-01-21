@@ -298,31 +298,38 @@ detect_patch(){
 detect_python(){
     detect_os
 
+    #check full path for windows
     if [[ "$XVMBUILD_PYTHON_FILEPATH" == "" ]]; then
-        if hash "python" 2>/dev/null; then
-            export XVMBUILD_PYTHON_FILEPATH="python"                  #Default name of python executable
-        fi
-        if hash "python2.7" 2>/dev/null; then
-            export XVMBUILD_PYTHON_FILEPATH="python2.7"               #Installed by cygwin or *nix
-        fi
-
         if [ "$OS" == "Windows" ]; then
-            if hash "/c/Python27/python.exe" 2>/dev/null; then
+            if [ -f "/c/Python27/python.exe" ]; then
                 export XVMBUILD_PYTHON_FILEPATH="/c/Python27/python.exe"  #Windows default path
-            fi
-            if hash "/c/Software/Python/27_64/python.exe" 2>/dev/null; then
+            elif [ -f "/c/Software/Python/27_64/python.exe" ]; then
                 export XVMBUILD_PYTHON_FILEPATH="/c/Software/Python/27_64/python.exe"  #Mikhail's path
+            elif [ -f "/c/Program Files/Python27/python.exe" ]; then
+                export XVMBUILD_PYTHON_FILEPATH="/c/Program Files/Python27/python.exe"  #MSVS default path
             fi
         fi
     fi
 
-    if ! (hash "$XVMBUILD_PYTHON_FILEPATH" 2>/dev/null); then          #Check if file exists
+    #*nix and fallback
+    if [[ "$XVMBUILD_PYTHON_FILEPATH" == "" ]]; then       
+        if hash "python2.7" 2>/dev/null; then
+            export XVMBUILD_PYTHON_FILEPATH="python2.7" #Installed by cygwin or *nix
+        elif hash "python2" 2>/dev/null; then
+            export XVMBUILD_PYTHON_FILEPATH="python2"   #Installed by cygwin or *nix
+        elif hash "python" 2>/dev/null; then
+            export XVMBUILD_PYTHON_FILEPATH="python"    #Default name of python executable
+        fi
+    fi
+
+    #check results
+    if [[ "$XVMBUILD_PYTHON_FILEPATH" == "" ]]; then
         echo "!!! Python 2.7 is not found"
         exit 1
     fi
 
     #Check python version
-    pythonver=$($XVMBUILD_PYTHON_FILEPATH --version 2>&1)
+    pythonver=$("$XVMBUILD_PYTHON_FILEPATH" --version 2>&1)
     if [[ ${pythonver:7:3} != "2.7" ]]; then
         echo "!!! Python 2.7 is not found. Current version is: ${pythonver:7:3}"
         exit 1
