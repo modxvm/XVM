@@ -7,7 +7,6 @@ import traceback
 
 import BigWorld
 from gui.Scaleform.daapi.view.login.LoginView import LoginView
-from gui.login.Manager import Manager
 from xfw import *
 
 from xvm_main.python.logger import *
