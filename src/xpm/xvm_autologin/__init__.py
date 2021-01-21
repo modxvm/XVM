@@ -26,15 +26,9 @@ def LoginView_as_setVersionS(base, self, version):
 @overrideMethod(LoginView, '_populate')
 def LoginView_populate(base, self):
     base(self)
-    if not isReplay():
+    if not isReplay() and not self.loginManager.wgcAvailable:
         global firsttime
         if firsttime:
             firsttime = False
             if config.get('login/autologin'):
                 BigWorld.callback(0, self.as_doAutoLoginS)
-
-@overrideMethod(Manager, 'tryWgcLogin')
-def tryWgcLogin(base, self, serverName=None):
-    if not serverName and not config.get('login/autologin'):
-        return
-    base(self, serverName)
