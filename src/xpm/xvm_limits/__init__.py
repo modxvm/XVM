@@ -97,20 +97,20 @@ def onXfwCommand(cmd, *args):
             handlersInvalidate('invalidateGold()', TechTree_handler, Research_handler)
             handlersInvalidate('onGoldChange(0)', TechnicalMaintenance_handler)
             handlersInvalidate('onGoldChange(0)', RecruitWindow_handler)
-            handlersInvalidate("onClientChanged({'stats': 'gold'})", PersonalCase_handlers)
+            handlersInvalidate("_PersonalCase__onClientChanged({'stats': 'gold'})", PersonalCase_handlers)
             handlersInvalidate("_MainView__setBuyingPanelData()", MainView_handler)
             return (None, True)
         elif cmd == XVM_LIMITS_COMMAND.SET_FREEXP_LOCK_STATUS:
             global freeXP_enable
             freeXP_enable = not args[0]
             handlersInvalidate('invalidateFreeXP()', TechTree_handler, Research_handler)
-            handlersInvalidate("onClientChanged({'stats': 'freeXP'})", PersonalCase_handlers)
+            handlersInvalidate("_PersonalCase__onClientChanged({'stats': 'freeXP'})", PersonalCase_handlers)
             handlersInvalidate('_ExchangeFreeToTankmanXpWindow__onFreeXpChanged()', ExchangeFreeToTankmanXpWindow_handlers)
             return (None, True)
         elif cmd == XVM_LIMITS_COMMAND.SET_CRYSTAL_LOCK_STATUS:
             global crystal_enable
             crystal_enable = not args[0]
-            handlersInvalidate("onClientChanged({'stats': 'crystal'})", PersonalCase_handlers)
+            handlersInvalidate("_PersonalCase__onClientChanged({'stats': 'crystal'})", PersonalCase_handlers)
             return (None, True)
     except Exception, ex:
         err(traceback.format_exc())
