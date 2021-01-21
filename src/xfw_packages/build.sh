@@ -105,7 +105,11 @@ build_python()
       echo "building $1/$fn"
 
       #build
-      _="$("$XVMBUILD_PYTHON_FILEPATH" -c "import py_compile; py_compile.compile('$fn')" 2>&1)"
+      _="$("$XVMBUILD_PYTHON_FILEPATH" -c "import py_compile; py_compile.compile('$fn')")"
+      if [ $? -ne 0 ]; then
+        echo "Failed to build $1/$fn"
+        exit 1
+      fi
 
       #copy to output
       out_py_file="$2/$fn"
@@ -121,9 +125,23 @@ build_python()
 
 build_python_empty()
 {
+    #push to directory
+    if [ ! -d "$1/" ]; then
+      echo "Failed to found $1"
+      exit 1
+    fi
+    pushd "$1" > /dev/null
+
     #create empty file
-    echo "" > "$1/__init__.py"
-    _="$("$XVMBUILD_PYTHON_FILEPATH" -c "import py_compile; py_compile.compile('$1/__init__.py')" 2>&1)"
+    echo "" > "./__init__.py"
+    _="$("$XVMBUILD_PYTHON_FILEPATH" -c "import py_compile; py_compile.compile('./__init__.py')" )"
+    if [ $? -ne 0 ]; then
+      echo "Failed to build $1/__init__.py"
+      exit 1
+    fi
+    rm -f "./__init__.py"
+
+    popd > /dev/null
 }
 
 copy_files()
