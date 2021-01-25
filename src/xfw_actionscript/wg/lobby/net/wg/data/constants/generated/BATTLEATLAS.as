@@ -1157,7 +1157,7 @@ package net.wg.data.constants.generated
 
         public static const GERMANY_G144_KPZ_50T:String = "germany-G144_Kpz_50t";
 
-        public static const GERMANY_G147_KUNZE_PANZER:String = "germany-g147_kunze_panzer";
+        public static const GERMANY_G147_KUNZE_PANZER:String = "germany-G147_Kunze_Panzer";
 
         public static const GERMANY_G15_VK3601_H:String = "germany-G15_VK3601H";
 
