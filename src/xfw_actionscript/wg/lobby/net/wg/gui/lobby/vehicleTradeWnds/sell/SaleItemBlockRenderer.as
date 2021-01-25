@@ -123,6 +123,7 @@ package net.wg.gui.lobby.vehicleTradeWnds.sell
             this.alertIcon.addEventListener(MouseEvent.ROLL_OUT,this.onAlertIconRollOutHandler,false,0,true);
             this.alertIcon.buttonMode = false;
             this.tfShort.buttonMode = false;
+            this.tfShort.useHtml = true;
             if(this.clickArea)
             {
                 this.clickArea.addEventListener(MouseEvent.ROLL_OVER,handleMouseRollOver,false,0,true);
