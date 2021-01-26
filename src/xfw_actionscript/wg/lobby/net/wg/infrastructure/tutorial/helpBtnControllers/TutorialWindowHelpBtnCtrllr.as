@@ -18,11 +18,12 @@ package net.wg.infrastructure.tutorial.helpBtnControllers
 
         override public function layoutHelpBtn() : void
         {
+            var _loc3_:* = NaN;
             var _loc6_:Point = null;
             var _loc1_:AbstractWindowView = view as AbstractWindowView;
             App.utils.asserter.assertNotNull(_loc1_,"view as AbstractWindowView" + Errors.CANT_NULL);
             var _loc2_:Stage = App.stage;
-            var _loc3_:Number = App.appScale;
+            _loc3_ = App.appScale;
             var _loc4_:Rectangle = _loc1_.window.getBtnsBounds();
             var _loc5_:Point = _loc2_.localToGlobal(new Point(_loc4_.x,_loc4_.y));
             _loc6_ = _loc2_.localToGlobal(new Point(view.x,view.y));

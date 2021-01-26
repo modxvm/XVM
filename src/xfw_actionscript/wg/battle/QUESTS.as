@@ -19,6 +19,8 @@ package
 
         public static const MISSIONS_TAB_DAILY:String = "#quests:missions/tab/daily";
 
+        public static const MISSIONS_TAB_BOB:String = "#quests:missions/tab/bob";
+
         public static const MISSIONS_FILTERCOUNTER_CLOSEBUTTON:String = "#quests:missions/filterCounter/closeButton";
 
         public static const MISSIONS_FILTER_FILTERBUTTON:String = "#quests:missions/filter/filterButton";
@@ -1849,6 +1851,48 @@ package
 
         public static const DETAILS_DOSSIER_LADDER_DAMAGEASSISTEDRADIO:String = "#quests:details/dossier/ladder/damageAssistedRadio";
 
+        public static const DETAILS_DOSSIER_BOB_XP:String = "#quests:details/dossier/bob/xp";
+
+        public static const DETAILS_DOSSIER_BOB_BATTLESCOUNT:String = "#quests:details/dossier/bob/battlesCount";
+
+        public static const DETAILS_DOSSIER_BOB_WINS:String = "#quests:details/dossier/bob/wins";
+
+        public static const DETAILS_DOSSIER_BOB_LOSSES:String = "#quests:details/dossier/bob/losses";
+
+        public static const DETAILS_DOSSIER_BOB_SURVIVEDBATTLES:String = "#quests:details/dossier/bob/survivedBattles";
+
+        public static const DETAILS_DOSSIER_BOB_FRAGS:String = "#quests:details/dossier/bob/frags";
+
+        public static const DETAILS_DOSSIER_BOB_DIRECTHITS:String = "#quests:details/dossier/bob/directHits";
+
+        public static const DETAILS_DOSSIER_BOB_SPOTTED:String = "#quests:details/dossier/bob/spotted";
+
+        public static const DETAILS_DOSSIER_BOB_DAMAGEDEALT:String = "#quests:details/dossier/bob/damageDealt";
+
+        public static const DETAILS_DOSSIER_BOB_MAXDAMAGE:String = "#quests:details/dossier/bob/maxDamage";
+
+        public static const DETAILS_DOSSIER_BOB_DAMAGERECEIVED:String = "#quests:details/dossier/bob/damageReceived";
+
+        public static const DETAILS_DOSSIER_BOB_CAPTUREPOINTS:String = "#quests:details/dossier/bob/capturePoints";
+
+        public static const DETAILS_DOSSIER_BOB_DROPPEDCAPTUREPOINTS:String = "#quests:details/dossier/bob/droppedCapturePoints";
+
+        public static const DETAILS_DOSSIER_BOB_PIERCINGS:String = "#quests:details/dossier/bob/piercings";
+
+        public static const DETAILS_DOSSIER_BOB_NODAMAGEDIRECTHITSRECEIVED:String = "#quests:details/dossier/bob/noDamageDirectHitsReceived";
+
+        public static const DETAILS_DOSSIER_BOB_PIERCINGSRECEIVED:String = "#quests:details/dossier/bob/piercingsReceived";
+
+        public static const DETAILS_DOSSIER_BOB_POTENTIALDAMAGERECEIVED:String = "#quests:details/dossier/bob/potentialDamageReceived";
+
+        public static const DETAILS_DOSSIER_BOB_DAMAGEBLOCKEDBYARMOR:String = "#quests:details/dossier/bob/damageBlockedByArmor";
+
+        public static const DETAILS_DOSSIER_BOB_ORIGINALXP:String = "#quests:details/dossier/bob/originalXP";
+
+        public static const DETAILS_DOSSIER_BOB_DAMAGEASSISTEDTRACK:String = "#quests:details/dossier/bob/damageAssistedTrack";
+
+        public static const DETAILS_DOSSIER_BOB_DAMAGEASSISTEDRADIO:String = "#quests:details/dossier/bob/damageAssistedRadio";
+
         public static const DETAILS_DOSSIER_BATTLESCOUNT:String = "#quests:details/dossier/battlesCount";
 
         public static const DETAILS_DOSSIER_0_BATTLESCOUNT:String = "#quests:details/dossier/0/battlesCount";
@@ -1884,6 +1928,8 @@ package
         public static const DETAILS_DOSSIER_24_BATTLESCOUNT:String = "#quests:details/dossier/24/battlesCount";
 
         public static const DETAILS_DOSSIER_27_BATTLESCOUNT:String = "#quests:details/dossier/27/battlesCount";
+
+        public static const DETAILS_DOSSIER_32_BATTLESCOUNT:String = "#quests:details/dossier/32/battlesCount";
 
         public static const DETAILS_MODIFIERS_TITLE_DISCOUNT:String = "#quests:details/modifiers/title/discount";
 
@@ -2029,7 +2075,13 @@ package
 
         public static const MISSIONS_TAB_LABEL_KURSK:String = "#quests:missions/tab/label/kursk";
 
-        public static const MISSIONS_TAB_LABEL_MARATHONS:String = "#quests:missions/tab/label/marathons";
+        public static const MISSIONS_TAB_LABEL_MARATHON:String = "#quests:missions/tab/label/marathon";
+
+        public static const MISSIONS_TAB_LABEL_BOB:String = "#quests:missions/tab/label/bob";
+
+        public static const MISSIONS_TAB_BOB_HEADER:String = "#quests:missions/tab/bob/header";
+
+        public static const MISSIONS_TAB_BOB_BODY:String = "#quests:missions/tab/bob/body";
 
         public static const MISSIONS_TAB_KURSK_HEADER:String = "#quests:missions/tab/kursk/header";
 

@@ -109,6 +109,8 @@ package net.wg.data.constants.generated
 
         public static const BATTLE_ROYALE_WEAK_ZONES_UI:String = "BattleRoyaleWeakZonesBlockUI";
 
+        public static const TOOLTIP_BOB_TEAM_PROGRESS_BLOCK:String = "BobTeamProgressBlockUI";
+
         public static const ALIGN_LEFT:String = "left";
 
         public static const ALIGN_RIGHT:String = "right";

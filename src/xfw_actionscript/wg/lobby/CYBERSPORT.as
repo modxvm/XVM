@@ -165,6 +165,8 @@ package
 
         public static const WINDOW_UNIT_MESSAGE_VEHICLENOTVALID:String = "#cyberSport:window/unit/message/vehicleNotValid";
 
+        public static const WINDOW_UNIT_MESSAGE_VEHICLENOTVALIDFOREVENT:String = "#cyberSport:window/unit/message/vehicleNotValidForEvent";
+
         public static const WINDOW_UNIT_MESSAGE_VEHICLEINNOTREADY_BROKEN:String = "#cyberSport:window/unit/message/vehicleInNotReady/broken";
 
         public static const WINDOW_UNIT_MESSAGE_VEHICLEINNOTREADY_CREWNOTFULL:String = "#cyberSport:window/unit/message/vehicleInNotReady/crewNotFull";

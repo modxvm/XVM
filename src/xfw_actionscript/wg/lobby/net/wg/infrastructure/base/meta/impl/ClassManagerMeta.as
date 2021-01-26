@@ -27,6 +27,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.data.constants.generated.BARRACKS_CONSTANTS;
     import net.wg.data.constants.generated.BATTLEROYALE_ALIASES;
     import net.wg.data.constants.generated.BATTLEROYALE_CONSTS;
+    import net.wg.data.constants.generated.BATTLE_OF_BLOGGERS_ALIASES;
     import net.wg.data.constants.generated.BATTLE_RESULTS_PREMIUM_STATES;
     import net.wg.data.constants.generated.BATTLE_RESULT_TYPES;
     import net.wg.data.constants.generated.BOOSTER_CONSTANTS;
@@ -400,6 +401,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.components.tooltips.inblocks.blocks.AdvancedKeyBlock;
     import net.wg.gui.components.tooltips.inblocks.blocks.BadgeInfoBlock;
     import net.wg.gui.components.tooltips.inblocks.blocks.BlueprintBlock;
+    import net.wg.gui.components.tooltips.inblocks.blocks.BobTeamProgressBlock;
     import net.wg.gui.components.tooltips.inblocks.blocks.CompoundPriceBlock;
     import net.wg.gui.components.tooltips.inblocks.blocks.CrewSkillsBlock;
     import net.wg.gui.components.tooltips.inblocks.blocks.DashLineItemPriceBlock;
@@ -1241,6 +1243,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.hangar.eventEntryPoint.HangarEventEntriesContainer;
     import net.wg.gui.lobby.hangar.eventEntryPoint.IEventEntryPoint;
     import net.wg.gui.lobby.hangar.eventEntryPoint.data.EntryPointVO;
+    import net.wg.gui.lobby.hangar.eventEntryPoint.gfWrapper.BobEntryPoint;
     import net.wg.gui.lobby.hangar.eventEntryPoint.gfWrapper.CraftMachineEntryPoint;
     import net.wg.gui.lobby.hangar.eventEntryPoint.gfWrapper.RankedEntryPoint;
     import net.wg.gui.lobby.hangar.interfaces.IHangar;
@@ -1250,6 +1253,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.hangar.interfaces.IQuestsButtonsContainer;
     import net.wg.gui.lobby.hangar.interfaces.IVehicleParameters;
     import net.wg.gui.lobby.hangar.quests.BattlePassEntryPoint;
+    import net.wg.gui.lobby.hangar.quests.BobHangarWidget;
     import net.wg.gui.lobby.hangar.quests.FlagContainer;
     import net.wg.gui.lobby.hangar.quests.HeaderQuestsContainer;
     import net.wg.gui.lobby.hangar.quests.HeaderQuestsEvent;
@@ -3103,6 +3107,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.infrastructure.base.meta.IBCOutroVideoPageMeta;
     import net.wg.infrastructure.base.meta.IBCQueueWindowMeta;
     import net.wg.infrastructure.base.meta.IBCTooltipsWindowMeta;
+    import net.wg.infrastructure.base.meta.IBOBEventEntryPointMeta;
     import net.wg.infrastructure.base.meta.IBoosterInfoMeta;
     import net.wg.infrastructure.base.meta.IBrowserInViewComponentMeta;
     import net.wg.infrastructure.base.meta.IBrowserMeta;
@@ -3455,6 +3460,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_DATA_CONSTANTS_GENERATED_BATTLEROYALE_ALIASES:Class = BATTLEROYALE_ALIASES;
 
         public static const NET_WG_DATA_CONSTANTS_GENERATED_BATTLEROYALE_CONSTS:Class = BATTLEROYALE_CONSTS;
+
+        public static const NET_WG_DATA_CONSTANTS_GENERATED_BATTLE_OF_BLOGGERS_ALIASES:Class = BATTLE_OF_BLOGGERS_ALIASES;
 
         public static const NET_WG_DATA_CONSTANTS_GENERATED_BATTLE_RESULTS_PREMIUM_STATES:Class = BATTLE_RESULTS_PREMIUM_STATES;
 
@@ -4201,6 +4208,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_INBLOCKS_BLOCKS_BADGEINFOBLOCK:Class = BadgeInfoBlock;
 
         public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_INBLOCKS_BLOCKS_BLUEPRINTBLOCK:Class = BlueprintBlock;
+
+        public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_INBLOCKS_BLOCKS_BOBTEAMPROGRESSBLOCK:Class = BobTeamProgressBlock;
 
         public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_INBLOCKS_BLOCKS_COMPOUNDPRICEBLOCK:Class = CompoundPriceBlock;
 
@@ -5884,6 +5893,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_GUI_LOBBY_HANGAR_EVENTENTRYPOINT_DATA_ENTRYPOINTVO:Class = EntryPointVO;
 
+        public static const NET_WG_GUI_LOBBY_HANGAR_EVENTENTRYPOINT_GFWRAPPER_BOBENTRYPOINT:Class = BobEntryPoint;
+
         public static const NET_WG_GUI_LOBBY_HANGAR_EVENTENTRYPOINT_GFWRAPPER_CRAFTMACHINEENTRYPOINT:Class = CraftMachineEntryPoint;
 
         public static const NET_WG_GUI_LOBBY_HANGAR_EVENTENTRYPOINT_GFWRAPPER_RANKEDENTRYPOINT:Class = RankedEntryPoint;
@@ -5901,6 +5912,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_LOBBY_HANGAR_INTERFACES_IVEHICLEPARAMETERS:Class = IVehicleParameters;
 
         public static const NET_WG_GUI_LOBBY_HANGAR_QUESTS_BATTLEPASSENTRYPOINT:Class = BattlePassEntryPoint;
+
+        public static const NET_WG_GUI_LOBBY_HANGAR_QUESTS_BOBHANGARWIDGET:Class = BobHangarWidget;
 
         public static const NET_WG_GUI_LOBBY_HANGAR_QUESTS_FLAGCONTAINER:Class = FlagContainer;
 
@@ -9608,6 +9621,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IBCTOOLTIPSWINDOWMETA:Class = IBCTooltipsWindowMeta;
 
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IBOBEVENTENTRYPOINTMETA:Class = IBOBEventEntryPointMeta;
+
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IBOOSTERINFOMETA:Class = IBoosterInfoMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IBROWSERINVIEWCOMPONENTMETA:Class = IBrowserInViewComponentMeta;
@@ -10203,6 +10218,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BCQUEUEWINDOWMETA:Class = BCQueueWindowMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BCTOOLTIPSWINDOWMETA:Class = BCTooltipsWindowMeta;
+
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BOBEVENTENTRYPOINTMETA:Class = BOBEventEntryPointMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BOOSTERINFOMETA:Class = BoosterInfoMeta;
 

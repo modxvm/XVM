@@ -11,6 +11,7 @@ package net.wg.gui.battle.battleloading
     import net.wg.data.VO.daapi.DAAPIPlayerStatusVO;
     import net.wg.data.VO.daapi.DAAPIVehicleStatusVO;
     import net.wg.gui.battle.battleloading.vo.VisualTipInfoVO;
+    import net.wg.gui.components.minimap.MinimapPresentation;
     import net.wg.data.Aliases;
     import net.wg.gui.battle.eventInfoPanel.data.EventInfoPanelVO;
 
@@ -163,7 +164,11 @@ package net.wg.gui.battle.battleloading
         override protected function onPopulate() : void
         {
             super.onPopulate();
-            registerFlashComponentS(this.form.getMapComponent(),Aliases.MINIMAP_ON_BATTLE_LOADING);
+            var _loc1_:MinimapPresentation = this.form.getMapComponent();
+            if(_loc1_)
+            {
+                registerFlashComponentS(_loc1_,Aliases.MINIMAP_ON_BATTLE_LOADING);
+            }
         }
 
         override protected function setEventInfoPanelData(param1:EventInfoPanelVO) : void

@@ -143,8 +143,8 @@
       // ?.
       // ?.
       "event_random": "",
-      // «Brawl» mode.
-      // Режим «Схватка».
+      // «Team Clash», «Brawl» mode.
+      // Режим «Битва блогеров», «Схватка».
       "bob": ""
     },
     // Text for {{topclan}} macro.

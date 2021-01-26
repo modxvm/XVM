@@ -25,6 +25,8 @@ package net.wg.gui.components.tooltips.inblocks.data
 
         public var valuePadding:PaddingVO = null;
 
+        public var iconZIndex:int = -1;
+
         public function TitleDescParameterWithIconVO(param1:Object)
         {
             super(param1);

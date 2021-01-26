@@ -24,7 +24,7 @@ diff -Naur lobby.orig-0.orig/net/wg/infrastructure/base/meta/impl/ToolTipMgrMeta
 diff -Naur lobby.orig-0.orig/net/wg/infrastructure/managers/impl/ToolTipManagerLobby.class.asasm lobby.orig-0/net/wg/infrastructure/managers/impl/ToolTipManagerLobby.class.asasm
 --- lobby.orig-0.orig/net/wg/infrastructure/managers/impl/ToolTipManagerLobby.class.asasm	2020-07-27 15:01:56.665863400 +0300
 +++ lobby.orig-0/net/wg/infrastructure/managers/impl/ToolTipManagerLobby.class.asasm	2020-07-27 15:17:09.409063500 +0300
-@@ -355,15 +355,15 @@
+@@ -362,15 +362,15 @@
      initproperty        QName(PrivateNamespace(null, "net.wg.infrastructure.managers.impl:ToolTipManagerLobby"), "NUM_SEPARATOR_POOL_ITEMS")
  
      findproperty        QName(PrivateNamespace(null, "net.wg.infrastructure.managers.impl:ToolTipManagerLobby"), "NUM_IMAGE_TEXT_BLOCK_POOL_ITEMS")

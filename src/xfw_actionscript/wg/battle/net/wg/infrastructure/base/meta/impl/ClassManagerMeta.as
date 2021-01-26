@@ -124,6 +124,23 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.battle.battleRoyale.views.configurator.data.ChoiceInfoPanelVO;
     import net.wg.gui.battle.battleRoyale.views.configurator.data.ModuleInfoVO;
     import net.wg.gui.battle.battleRoyale.views.configurator.data.ModuleParameterVO;
+    import net.wg.gui.battle.bob.BobBattleLoading;
+    import net.wg.gui.battle.bob.BobBattleLoadingForm;
+    import net.wg.gui.battle.bob.BobBattlePage;
+    import net.wg.gui.battle.bob.BobRendererContainer;
+    import net.wg.gui.battle.bob.BobTablePlayerItemRenderer;
+    import net.wg.gui.battle.bob.data.BobBattleStatisticDataController;
+    import net.wg.gui.battle.bob.data.BobDAAPIVehicleInfoVO;
+    import net.wg.gui.battle.bob.data.BobDAAPIVehiclesDataVO;
+    import net.wg.gui.battle.bob.stats.components.playersPanel.BobPlayersPrebattleTeamSkill;
+    import net.wg.gui.battle.bob.stats.components.playersPanel.list.BobPlayersListHeader;
+    import net.wg.gui.battle.bob.stats.components.playersPanel.list.BobPlayersListHeaderLabels;
+    import net.wg.gui.battle.bob.stats.components.playersPanel.list.BobPlayersListTeamSkill;
+    import net.wg.gui.battle.bob.stats.components.playersPanel.list.BobPlayersPanelList;
+    import net.wg.gui.battle.bob.stats.components.playersPanel.list.BobPlayersPanelListItem;
+    import net.wg.gui.battle.bob.stats.components.playersPanel.list.BobPlayersPanelListItemHolder;
+    import net.wg.gui.battle.bob.stats.components.playersPanel.list.BobPlayersPanelListLeft;
+    import net.wg.gui.battle.bob.stats.components.playersPanel.list.BobPlayersPanelListRight;
     import net.wg.gui.battle.components.BattleAtlasSprite;
     import net.wg.gui.battle.components.BattleDAAPIComponent;
     import net.wg.gui.battle.components.BattleDisplayable;
@@ -289,6 +306,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.battle.random.views.stats.components.fullStats.tableItem.DynamicSquadCtrl;
     import net.wg.gui.battle.random.views.stats.components.fullStats.tableItem.StatsTableItem;
     import net.wg.gui.battle.random.views.stats.components.fullStats.tableItem.StatsTableItemHolder;
+    import net.wg.gui.battle.random.views.stats.components.playersPanel.BobPlayersPanel;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.PlayersPanel;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.constants.PlayersPanelInvalidationType;
     import net.wg.gui.battle.random.views.stats.components.playersPanel.events.PlayersPanelEvent;
@@ -845,6 +863,8 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.infrastructure.base.meta.IBCIntroFadeOutMeta;
     import net.wg.infrastructure.base.meta.IBCPrebattleHintsMeta;
     import net.wg.infrastructure.base.meta.IBCSecondaryHintMeta;
+    import net.wg.infrastructure.base.meta.IBobBattleLoadingMeta;
+    import net.wg.infrastructure.base.meta.IBobPlayersPanelMeta;
     import net.wg.infrastructure.base.meta.ICalloutPanelMeta;
     import net.wg.infrastructure.base.meta.IConsumablesPanelMeta;
     import net.wg.infrastructure.base.meta.IDamageInfoPanelMeta;
@@ -1159,6 +1179,40 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_BATTLE_BATTLEROYALE_VIEWS_CONFIGURATOR_DATA_MODULEINFOVO:Class = ModuleInfoVO;
 
         public static const NET_WG_GUI_BATTLE_BATTLEROYALE_VIEWS_CONFIGURATOR_DATA_MODULEPARAMETERVO:Class = ModuleParameterVO;
+
+        public static const NET_WG_GUI_BATTLE_BOB_BOBBATTLELOADING:Class = BobBattleLoading;
+
+        public static const NET_WG_GUI_BATTLE_BOB_BOBBATTLELOADINGFORM:Class = BobBattleLoadingForm;
+
+        public static const NET_WG_GUI_BATTLE_BOB_BOBBATTLEPAGE:Class = BobBattlePage;
+
+        public static const NET_WG_GUI_BATTLE_BOB_BOBRENDERERCONTAINER:Class = BobRendererContainer;
+
+        public static const NET_WG_GUI_BATTLE_BOB_BOBTABLEPLAYERITEMRENDERER:Class = BobTablePlayerItemRenderer;
+
+        public static const NET_WG_GUI_BATTLE_BOB_DATA_BOBBATTLESTATISTICDATACONTROLLER:Class = BobBattleStatisticDataController;
+
+        public static const NET_WG_GUI_BATTLE_BOB_DATA_BOBDAAPIVEHICLEINFOVO:Class = BobDAAPIVehicleInfoVO;
+
+        public static const NET_WG_GUI_BATTLE_BOB_DATA_BOBDAAPIVEHICLESDATAVO:Class = BobDAAPIVehiclesDataVO;
+
+        public static const NET_WG_GUI_BATTLE_BOB_STATS_COMPONENTS_PLAYERSPANEL_BOBPLAYERSPREBATTLETEAMSKILL:Class = BobPlayersPrebattleTeamSkill;
+
+        public static const NET_WG_GUI_BATTLE_BOB_STATS_COMPONENTS_PLAYERSPANEL_LIST_BOBPLAYERSLISTHEADER:Class = BobPlayersListHeader;
+
+        public static const NET_WG_GUI_BATTLE_BOB_STATS_COMPONENTS_PLAYERSPANEL_LIST_BOBPLAYERSLISTHEADERLABELS:Class = BobPlayersListHeaderLabels;
+
+        public static const NET_WG_GUI_BATTLE_BOB_STATS_COMPONENTS_PLAYERSPANEL_LIST_BOBPLAYERSLISTTEAMSKILL:Class = BobPlayersListTeamSkill;
+
+        public static const NET_WG_GUI_BATTLE_BOB_STATS_COMPONENTS_PLAYERSPANEL_LIST_BOBPLAYERSPANELLIST:Class = BobPlayersPanelList;
+
+        public static const NET_WG_GUI_BATTLE_BOB_STATS_COMPONENTS_PLAYERSPANEL_LIST_BOBPLAYERSPANELLISTITEM:Class = BobPlayersPanelListItem;
+
+        public static const NET_WG_GUI_BATTLE_BOB_STATS_COMPONENTS_PLAYERSPANEL_LIST_BOBPLAYERSPANELLISTITEMHOLDER:Class = BobPlayersPanelListItemHolder;
+
+        public static const NET_WG_GUI_BATTLE_BOB_STATS_COMPONENTS_PLAYERSPANEL_LIST_BOBPLAYERSPANELLISTLEFT:Class = BobPlayersPanelListLeft;
+
+        public static const NET_WG_GUI_BATTLE_BOB_STATS_COMPONENTS_PLAYERSPANEL_LIST_BOBPLAYERSPANELLISTRIGHT:Class = BobPlayersPanelListRight;
 
         public static const NET_WG_GUI_BATTLE_COMPONENTS_BATTLEATLASSPRITE:Class = BattleAtlasSprite;
 
@@ -1489,6 +1543,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_BATTLE_RANDOM_VIEWS_STATS_COMPONENTS_FULLSTATS_TABLEITEM_STATSTABLEITEM:Class = net.wg.gui.battle.random.views.stats.components.fullStats.tableItem.StatsTableItem;
 
         public static const NET_WG_GUI_BATTLE_RANDOM_VIEWS_STATS_COMPONENTS_FULLSTATS_TABLEITEM_STATSTABLEITEMHOLDER:Class = net.wg.gui.battle.random.views.stats.components.fullStats.tableItem.StatsTableItemHolder;
+
+        public static const NET_WG_GUI_BATTLE_RANDOM_VIEWS_STATS_COMPONENTS_PLAYERSPANEL_BOBPLAYERSPANEL:Class = BobPlayersPanel;
 
         public static const NET_WG_GUI_BATTLE_RANDOM_VIEWS_STATS_COMPONENTS_PLAYERSPANEL_PLAYERSPANEL:Class = net.wg.gui.battle.random.views.stats.components.playersPanel.PlayersPanel;
 
@@ -2602,6 +2658,10 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IBCSECONDARYHINTMETA:Class = IBCSecondaryHintMeta;
 
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IBOBBATTLELOADINGMETA:Class = IBobBattleLoadingMeta;
+
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IBOBPLAYERSPANELMETA:Class = IBobPlayersPanelMeta;
+
         public static const NET_WG_INFRASTRUCTURE_BASE_META_ICALLOUTPANELMETA:Class = ICalloutPanelMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_ICONSUMABLESPANELMETA:Class = IConsumablesPanelMeta;
@@ -2773,6 +2833,10 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BCPREBATTLEHINTSMETA:Class = BCPrebattleHintsMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BCSECONDARYHINTMETA:Class = BCSecondaryHintMeta;
+
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BOBBATTLELOADINGMETA:Class = BobBattleLoadingMeta;
+
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BOBPLAYERSPANELMETA:Class = BobPlayersPanelMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CALLOUTPANELMETA:Class = CalloutPanelMeta;
 

@@ -27,7 +27,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 15.01.2021
+    # Last update: 26.01.2021
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -241,7 +241,6 @@ _data = {
     "germany:G12_Ltraktor":                  'Ltr',
     "germany:G12_Ltraktor_bot":              'Ltr',
     "germany:G134_PzKpfw_VII":               'PzKf·VII',
-    "germany:G134_PzKpfw_VII_bob":           'PzKf·VII·bb',
     "germany:G136_Tiger_131":                'Tig131',
     "germany:G137_PzVI_Tiger_217":           'Tig217',
     "germany:G138_VK168_02":                 '168.01p',
@@ -335,6 +334,7 @@ _data = {
     "germany:G87_VK3002DB_V1":               '3001d',
     "germany:G88_Indien_Panzer":             'IndPz',
     "germany:G89_Leopard1":                  'Leo1',
+    "germany:G89_Leopard1_bob":              'Leo1·bb',
     "germany:G90_DW_II":                     'DW2',
     "germany:G91_Pro_Ag_A":                  'LeoPrA',
     "germany:G92_VK7201":                    'vk7201',
@@ -437,6 +437,7 @@ _data = {
     "sweden:S14_Ikv_103":                    'lkv103',
     "sweden:S15_L_60":                       'L60',
     "sweden:S16_Kranvagn":                   'kranv',
+    "sweden:S16_Kranvagn_bob":               'kranv·bb',
     "sweden:S17_EMIL_1952_E2":               'emil·II',
     "sweden:S18_EMIL_1951_E1":               'emil·I',
     "sweden:S19_Sav_M43":                    'm/43',
@@ -450,7 +451,6 @@ _data = {
     "sweden:S26_Lansen_C":                   'lans·C',
     "sweden:S27_UDES_16":                    'udes·16',
     "sweden:S28_UDES_15_16":                 'udes·15/16',
-    "sweden:S28_UDES_15_16_bob":             'udes·15/16·bb',
     "sweden:S29_UDES_14_5":                  'udes·14·5',
     "sweden:S30_UDES_03_Alt_3":              'udes·03·3',
     "sweden:S31_Strv_K":                     'strv·K',
@@ -656,6 +656,7 @@ _data = {
     "usa:A67_T57_58":                        'T57hv',
     "usa:A68_T28_Prototype":                 'T28Pr',
     "usa:A69_T110E5":                        '110e5',
+    "usa:A69_T110E5_bob":                    '110e5·bb',
     "usa:A71_T21":                           'T21',
     "usa:A72_T25_2":                         'T25/2',
     "usa:A72_T25_2_SH":                      'raven',
@@ -753,6 +754,7 @@ _data = {
     "ussr:R153_Object_705":                  'obj705',
     "ussr:R154_T_34E_1943":                  't34·s',
     "ussr:R155_Object_277":                  'obj777',
+    "ussr:R155_Object_277_bob":              'obj777·bb',
     "ussr:R156_IS_2M":                       'Is·2M',
     "ussr:R157_Object_279R":                 'obj279R',
     "ussr:R158_LT_432":                      'lt432',
@@ -858,7 +860,6 @@ _data = {
     "ussr:R96_Object_430":                   'obj430',
     "ussr:R96_Object_430B":                  'obj430b',
     "ussr:R97_Object_140":                   'obj140',
-    "ussr:R97_Object_140_bob":               'obj140·bb',
     "ussr:R98_T44_85":                       't44·85',
     "ussr:R98_T44_85M":                      't44·85m',
     "ussr:R99_T44_122":                      't44·122'

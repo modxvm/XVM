@@ -1307,6 +1307,10 @@ package
 
         public static const HEADER_PREMSHOP_BODY:String = "#tooltips:header/premShop/body";
 
+        public static const HEADER_BOBSQUAD_HEADER:String = "#tooltips:header/bobSquad/header";
+
+        public static const HEADER_BOBSQUAD_BODY:String = "#tooltips:header/bobSquad/body";
+
         public static const HEADER_BATTLETYPE_HEADER:String = "#tooltips:header/battleType/header";
 
         public static const HEADER_BATTLETYPE_BODY:String = "#tooltips:header/battleType/body";
@@ -2232,6 +2236,8 @@ package
         public static const VEHICLE_TRADE:String = "#tooltips:vehicle/trade";
 
         public static const VEHICLE_DEAL_EPIC_MAIN:String = "#tooltips:vehicle/deal/epic/main";
+
+        public static const VEHICLE_DEAL_BOB_MAIN:String = "#tooltips:vehicle/deal/bob/main";
 
         public static const ANONYMIZER_TEAMSTATS_HEADER:String = "#tooltips:anonymizer/teamStats/header";
 
@@ -4465,6 +4471,8 @@ package
 
         public static const QUESTS_UNAVAILABLE_TOKEN:String = "#tooltips:quests/unavailable/token";
 
+        public static const QUESTS_UNAVAILABLE_BOBREGISTRATION:String = "#tooltips:quests/unavailable/bobRegistration";
+
         public static const QUESTS_UNAVAILABLE_BOTTOM:String = "#tooltips:quests/unavailable/bottom";
 
         public static const QUESTS_UNAVAILABLE_TIME_STATUSTOOLTIP:String = "#tooltips:quests/unavailable/time/statusTooltip";
@@ -6098,6 +6106,78 @@ package
         public static const BATTLE_ROYALE_VIEWSTACK_REWARDS_HEADER:String = "#tooltips:battle_royale/viewStack/rewards/header";
 
         public static const BATTLE_ROYALE_VIEWSTACK_REWARDS_BODY:String = "#tooltips:battle_royale/viewStack/rewards/body";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_RU1_YUSHA_LABEL:String = "#tooltips:notrecruitedtankman/bob21_commander_ru1_Yusha/label";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_RU1_YUSHA_DESC:String = "#tooltips:notrecruitedtankman/bob21_commander_ru1_Yusha/desc";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_RU1_VSPISHKA_LABEL:String = "#tooltips:notrecruitedtankman/bob21_commander_ru1_Vspishka/label";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_RU1_VSPISHKA_DESC:String = "#tooltips:notrecruitedtankman/bob21_commander_ru1_Vspishka/desc";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_RU2_AMWAY921_LABEL:String = "#tooltips:notrecruitedtankman/bob21_commander_ru2_Amway921/label";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_RU2_AMWAY921_DESC:String = "#tooltips:notrecruitedtankman/bob21_commander_ru2_Amway921/desc";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_RU2_KORBENDAILAS_LABEL:String = "#tooltips:notrecruitedtankman/bob21_commander_ru2_Korbendailas/label";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_RU2_KORBENDAILAS_DESC:String = "#tooltips:notrecruitedtankman/bob21_commander_ru2_Korbendailas/desc";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_RU3_LEBWA_LABEL:String = "#tooltips:notrecruitedtankman/bob21_commander_ru3_Lebwa/label";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_RU3_LEBWA_DESC:String = "#tooltips:notrecruitedtankman/bob21_commander_ru3_Lebwa/desc";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_RU3_INSPIRER_LABEL:String = "#tooltips:notrecruitedtankman/bob21_commander_ru3_Inspirer/label";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_RU3_INSPIRER_DESC:String = "#tooltips:notrecruitedtankman/bob21_commander_ru3_Inspirer/desc";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_RU4_EVILGRANNY_LABEL:String = "#tooltips:notrecruitedtankman/bob21_commander_ru4_Evilgranny/label";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_RU4_EVILGRANNY_DESC:String = "#tooltips:notrecruitedtankman/bob21_commander_ru4_Evilgranny/desc";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_RU4_NEARYOU_LABEL:String = "#tooltips:notrecruitedtankman/bob21_commander_ru4_Nearyou/label";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_RU4_NEARYOU_DESC:String = "#tooltips:notrecruitedtankman/bob21_commander_ru4_Nearyou/desc";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_EU1_CIRCON_LABEL:String = "#tooltips:notrecruitedtankman/bob21_commander_eu1_Circon/label";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_EU1_CIRCON_DESC:String = "#tooltips:notrecruitedtankman/bob21_commander_eu1_Circon/desc";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_EU2_DAKILLZOR_LABEL:String = "#tooltips:notrecruitedtankman/bob21_commander_eu2_Dakillzor/label";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_EU2_DAKILLZOR_DESC:String = "#tooltips:notrecruitedtankman/bob21_commander_eu2_Dakillzor/desc";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_EU3_NEWMULTI2K_LABEL:String = "#tooltips:notrecruitedtankman/bob21_commander_eu3_Newmulti2k/label";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_EU3_NEWMULTI2K_DESC:String = "#tooltips:notrecruitedtankman/bob21_commander_eu3_Newmulti2k/desc";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_EU4_ORZANEL_LABEL:String = "#tooltips:notrecruitedtankman/bob21_commander_eu4_Orzanel/label";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_EU4_ORZANEL_DESC:String = "#tooltips:notrecruitedtankman/bob21_commander_eu4_Orzanel/desc";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_NA1_CABBAGEMECHANIC_LABEL:String = "#tooltips:notrecruitedtankman/bob21_commander_na1_Cabbagemechanic/label";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_NA1_CABBAGEMECHANIC_DESC:String = "#tooltips:notrecruitedtankman/bob21_commander_na1_Cabbagemechanic/desc";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_NA2_TRAGICLOSS_LABEL:String = "#tooltips:notrecruitedtankman/bob21_commander_na2_Tragicloss/label";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_NA2_TRAGICLOSS_DESC:String = "#tooltips:notrecruitedtankman/bob21_commander_na2_Tragicloss/desc";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_NA3_CMDRAF_LABEL:String = "#tooltips:notrecruitedtankman/bob21_commander_na3_Cmdraf/label";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_NA3_CMDRAF_DESC:String = "#tooltips:notrecruitedtankman/bob21_commander_na3_Cmdraf/desc";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_ASIA1_MASTERTORTOISE_LABEL:String = "#tooltips:notrecruitedtankman/bob21_commander_asia1_Mastertortoise/label";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_ASIA1_MASTERTORTOISE_DESC:String = "#tooltips:notrecruitedtankman/bob21_commander_asia1_Mastertortoise/desc";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_ASIA2_SUMMERTIGER_LABEL:String = "#tooltips:notrecruitedtankman/bob21_commander_asia2_Summertiger/label";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_ASIA2_SUMMERTIGER_DESC:String = "#tooltips:notrecruitedtankman/bob21_commander_asia2_Summertiger/desc";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_ASIA3_MAHARLIKA_LABEL:String = "#tooltips:notrecruitedtankman/bob21_commander_asia3_Maharlika/label";
+
+        public static const NOTRECRUITEDTANKMAN_BOB21_COMMANDER_ASIA3_MAHARLIKA_DESC:String = "#tooltips:notrecruitedtankman/bob21_commander_asia3_Maharlika/desc";
 
         public static const ELEN_SUMMARY_RANK_ENUM:Array = [ELEN_SUMMARY_RANK_1,ELEN_SUMMARY_RANK_2,ELEN_SUMMARY_RANK_3,ELEN_SUMMARY_RANK_4,ELEN_SUMMARY_RANK_NORANK];
 
