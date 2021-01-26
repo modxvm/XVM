@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 15.01.2021
+    // Last update: 26.01.2021
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -218,7 +218,6 @@
     "germany-G12_Ltraktor":                  {"name": null, "short": null},
     "germany-G12_Ltraktor_bot":              {"name": null, "short": null},
     "germany-G134_PzKpfw_VII":               {"name": null, "short": null},
-    "germany-G134_PzKpfw_VII_bob":           {"name": null, "short": null},
     "germany-G136_Tiger_131":                {"name": null, "short": null},
     "germany-G137_PzVI_Tiger_217":           {"name": null, "short": null},
     "germany-G138_VK168_02":                 {"name": null, "short": null},
@@ -312,6 +311,7 @@
     "germany-G87_VK3002DB_V1":               {"name": null, "short": null},
     "germany-G88_Indien_Panzer":             {"name": null, "short": null},
     "germany-G89_Leopard1":                  {"name": null, "short": null},
+    "germany-G89_Leopard1_bob":              {"name": null, "short": null},
     "germany-G90_DW_II":                     {"name": null, "short": null},
     "germany-G91_Pro_Ag_A":                  {"name": null, "short": null},
     "germany-G92_VK7201":                    {"name": null, "short": null},
@@ -414,6 +414,7 @@
     "sweden-S14_Ikv_103":                    {"name": null, "short": null},
     "sweden-S15_L_60":                       {"name": null, "short": null},
     "sweden-S16_Kranvagn":                   {"name": null, "short": null},
+    "sweden-S16_Kranvagn_bob":               {"name": null, "short": null},
     "sweden-S17_EMIL_1952_E2":               {"name": null, "short": null},
     "sweden-S18_EMIL_1951_E1":               {"name": null, "short": null},
     "sweden-S19_Sav_M43":                    {"name": null, "short": null},
@@ -427,7 +428,6 @@
     "sweden-S26_Lansen_C":                   {"name": null, "short": null},
     "sweden-S27_UDES_16":                    {"name": null, "short": null},
     "sweden-S28_UDES_15_16":                 {"name": null, "short": null},
-    "sweden-S28_UDES_15_16_bob":             {"name": null, "short": null},
     "sweden-S29_UDES_14_5":                  {"name": null, "short": null},
     "sweden-S30_UDES_03_Alt_3":              {"name": null, "short": null},
     "sweden-S31_Strv_K":                     {"name": null, "short": null},
@@ -633,6 +633,7 @@
     "usa-A67_T57_58":                        {"name": null, "short": null},
     "usa-A68_T28_Prototype":                 {"name": null, "short": null},
     "usa-A69_T110E5":                        {"name": null, "short": null},
+    "usa-A69_T110E5_bob":                    {"name": null, "short": null},
     "usa-A71_T21":                           {"name": null, "short": null},
     "usa-A72_T25_2":                         {"name": null, "short": null},
     "usa-A72_T25_2_SH":                      {"name": null, "short": null},
@@ -730,6 +731,7 @@
     "ussr-R153_Object_705":                  {"name": null, "short": null},
     "ussr-R154_T_34E_1943":                  {"name": null, "short": null},
     "ussr-R155_Object_277":                  {"name": null, "short": null},
+    "ussr-R155_Object_277_bob":              {"name": null, "short": null},
     "ussr-R156_IS_2M":                       {"name": null, "short": null},
     "ussr-R157_Object_279R":                 {"name": null, "short": null},
     "ussr-R158_LT_432":                      {"name": null, "short": null},
@@ -835,7 +837,6 @@
     "ussr-R96_Object_430":                   {"name": null, "short": null},
     "ussr-R96_Object_430B":                  {"name": null, "short": null},
     "ussr-R97_Object_140":                   {"name": null, "short": null},
-    "ussr-R97_Object_140_bob":               {"name": null, "short": null},
     "ussr-R98_T44_85":                       {"name": null, "short": null},
     "ussr-R98_T44_85M":                      {"name": null, "short": null},
     "ussr-R99_T44_122":                      {"name": null, "short": null}
