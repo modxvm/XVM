@@ -64,74 +64,93 @@ package net.wg.gui.lobby.hangar.eventEntryPoint
 
         override protected function draw() : void
         {
-            var _loc1_:EntryPoint = null;
-            var _loc2_:IEventEntryPoint = null;
-            var _loc3_:* = 0;
-            var _loc4_:* = 0;
             super.draw();
-            if(this._data && isInvalid(InvalidationType.LAYOUT))
+            if(this._data)
             {
-                _loc3_ = this._data.length;
-                _loc4_ = this._isSmall?EntryPointSize.SMALL:EntryPointSize.BIG;
-                if(_loc3_ <= 1)
+                if(isInvalid(InvalidationType.DATA))
                 {
-                    _loc4_ = _loc4_ | EntryPointSize.WIDE_MASK;
+                    this.updateData();
                 }
-                for each(_loc1_ in this._entryByLinkageMap)
+                if(isInvalid(InvalidationType.LAYOUT))
                 {
-                    _loc2_ = _loc1_.entryPoint;
-                    if(_loc2_ != null)
-                    {
-                        _loc2_.size = _loc4_;
-                        _loc2_.validateNow();
-                    }
-                }
-                this.layoutEntries();
-                if(this._isActive)
-                {
-                    visible = true;
-                }
-                else
-                {
-                    this.setSize(0,0);
-                    visible = false;
+                    this.updateLayout();
                 }
             }
         }
 
         override protected function updateEntries(param1:Vector.<EntryPointVO>) : void
         {
-            var _loc2_:EntryPoint = null;
-            var _loc3_:EntryPointVO = null;
-            var _loc4_:Vector.<String> = null;
-            var _loc5_:String = null;
             this._data = param1;
+            invalidateData();
+            if(param1.length == 0)
+            {
+                validateNow();
+            }
+        }
+
+        private function updateData() : void
+        {
+            var _loc1_:EntryPoint = null;
+            var _loc2_:EntryPointVO = null;
+            var _loc3_:Vector.<String> = null;
+            var _loc4_:String = null;
             this.removeEntriesFromContainer();
-            for each(_loc3_ in param1)
+            for each(_loc2_ in this._data)
             {
-                _loc2_ = this._entryByLinkageMap[_loc3_.entryLinkage];
-                if(_loc2_ == null)
+                _loc1_ = this._entryByLinkageMap[_loc2_.entryLinkage];
+                if(_loc1_ == null)
                 {
-                    this.createEntry(_loc3_);
+                    this.createEntry(_loc2_);
                 }
-                else if(_loc2_.entryPointDO != null)
+                else if(_loc1_.entryPointDO != null)
                 {
-                    addChildAt(_loc2_.entryPointDO,0);
-                }
-            }
-            _loc4_ = new Vector.<String>(0);
-            for each(_loc2_ in this._entryByLinkageMap)
-            {
-                if(_loc2_.entryPointDO && _loc2_.entryPointDO.parent == null)
-                {
-                    _loc4_.push(_loc2_.linkage);
+                    addChildAt(_loc1_.entryPointDO,0);
                 }
             }
-            for each(_loc5_ in _loc4_)
+            _loc3_ = new Vector.<String>(0);
+            for each(_loc1_ in this._entryByLinkageMap)
             {
-                this.removeEntry(_loc5_);
+                if(_loc1_.entryPointDO && _loc1_.entryPointDO.parent == null)
+                {
+                    _loc3_.push(_loc1_.linkage);
+                }
+            }
+            for each(_loc4_ in _loc3_)
+            {
+                this.removeEntry(_loc4_);
             }
             invalidateLayout();
+        }
+
+        private function updateLayout() : void
+        {
+            var _loc1_:EntryPoint = null;
+            var _loc2_:IEventEntryPoint = null;
+            var _loc3_:int = this._data.length;
+            var _loc4_:int = this._isSmall?EntryPointSize.SMALL:EntryPointSize.BIG;
+            if(_loc3_ <= 1)
+            {
+                _loc4_ = _loc4_ | EntryPointSize.WIDE_MASK;
+            }
+            for each(_loc1_ in this._entryByLinkageMap)
+            {
+                _loc2_ = _loc1_.entryPoint;
+                if(_loc2_ != null)
+                {
+                    _loc2_.size = _loc4_;
+                    _loc2_.validateNow();
+                }
+            }
+            this.layoutEntries();
+            if(this._isActive)
+            {
+                visible = true;
+            }
+            else
+            {
+                this.setSize(0,0);
+                visible = false;
+            }
         }
 
         public function getLayoutProperties() : Vector.<HelpLayoutVO>

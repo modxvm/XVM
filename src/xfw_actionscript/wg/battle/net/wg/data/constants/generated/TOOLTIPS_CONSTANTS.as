@@ -479,6 +479,14 @@ package net.wg.data.constants.generated
 
         public static const SENIORITY_FLAG:String = "seniorityFlag";
 
+        public static const BOB_SELECTOR_INFO:String = "bobSelectorInfo";
+
+        public static const BOB_SERVER_PRIMETIME:String = "bobServerPrimeTime";
+
+        public static const BOB_SKILL_INFO:String = "bobDSkillInfo";
+
+        public static const BOB_PROGRESSIVE_INFO:String = "bobProgressiveInfo";
+
         public static const BLOCKS_DEFAULT_UI:String = "ToolTipInblocksDefaultUI";
 
         public static const TANKMEN_UI:String = "ToolTipTankmenUI";
@@ -740,6 +748,8 @@ package net.wg.data.constants.generated
         public static const ROYALE_BATTLE_SET:Array = [BATTLE_ROYALE_WEAK_ZONES,BATTLE_ROYALE_MODULES];
 
         public static const ROYALE_LOBBY_SET:Array = [BATTLE_ROYALE_VEHICLE,BATTLE_ROYALE_MODULES_HANGAR,BATTLE_ROYALE_BATTLE_PROGRESSION,BATTLE_ROYALE_EQUIPMENT,BATTLE_ROYALE_PERF_SIMPLE,BATTLE_ROYALE_PERF_ADVANCED,BATTLE_ROYALE_SELECTOR_INFO];
+
+        public static const BOB_SET:Array = [BOB_SELECTOR_INFO,BOB_SERVER_PRIMETIME,BOB_SKILL_INFO,BOB_PROGRESSIVE_INFO];
 
         public function TOOLTIPS_CONSTANTS()
         {

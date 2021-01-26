@@ -16,5 +16,9 @@ package net.wg.infrastructure.base.meta
         function as_createRankedBattles() : void;
 
         function as_removeRankedBattles() : void;
+
+        function as_createBob() : void;
+
+        function as_removeBob() : void;
     }
 }

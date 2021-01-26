@@ -19,6 +19,7 @@ package net.wg.app.impl
     import net.wg.gui.components.questProgress.data.metrics.QPMetricsVehicleVO;
     import net.wg.gui.components.questProgress.data.metrics.QPMetricsLimiterVO;
     import net.wg.gui.components.controls.VO.BadgeVisualVO;
+    import net.wg.gui.battle.bob.data.BobDAAPIVehicleInfoVO;
     import net.wg.utils.IUtils;
     import net.wg.infrastructure.managers.utils.impl.Utils;
     import net.wg.infrastructure.managers.utils.impl.Asserter;
@@ -132,6 +133,7 @@ package net.wg.app.impl
             registerClassAlias("net.wg.gui.battle.views.questProgress.data.metrics.QPMetricsVehicleVO",QPMetricsVehicleVO);
             registerClassAlias("net.wg.gui.battle.views.questProgress.data.metrics.QPMetricsLimiterVO",QPMetricsLimiterVO);
             registerClassAlias("net.wg.gui.components.controls.VO.BadgeVisualVO",BadgeVisualVO);
+            registerClassAlias("net.wg.gui.battle.bob.data.BobDAAPIVehicleInfoVO",BobDAAPIVehicleInfoVO);
         }
 
         override protected function onPopUpManagerInit() : void

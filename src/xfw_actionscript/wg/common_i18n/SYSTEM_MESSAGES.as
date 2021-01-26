@@ -165,6 +165,8 @@ package
 
         public static const PREBATTLE_VEHICLEINVALID_EPICONLY:String = "#system_messages:prebattle/vehicleInvalid/epicOnly";
 
+        public static const PREBATTLE_VEHICLEINVALID_BOBONLY:String = "#system_messages:prebattle/vehicleInvalid/bobOnly";
+
         public static const PREBATTLE_VEHICLEINVALID_NOTSETREADYSTATUS:String = "#system_messages:prebattle/vehicleInvalid/notSetReadyStatus";
 
         public static const PREBATTLE_VEHICLEINVALID_FALLOUTONLY:String = "#system_messages:prebattle/vehicleInvalid/falloutOnly";
@@ -2388,6 +2390,10 @@ package
         public static const DOG_TAGS_SWITCH_ON_TITLE:String = "#system_messages:dog_tags/switch_on/title";
 
         public static const DOG_TAGS_SWITCH_ON_BODY:String = "#system_messages:dog_tags/switch_on/body";
+
+        public static const BOB_CLAIMEREWARD_SERVER_ERROR_COOLDOWN:String = "#system_messages:bob/claimeReward/server_error/COOLDOWN";
+
+        public static const BOB_CLAIMEREWARD_SERVER_ERROR:String = "#system_messages:bob/claimeReward/server_error";
 
         public function SYSTEM_MESSAGES()
         {

@@ -9,6 +9,7 @@ package net.wg.gui.lobby.hangar
     import net.wg.gui.lobby.hangar.data.HangarHeaderVO;
     import net.wg.gui.lobby.hangar.quests.BattlePassEntryPoint;
     import net.wg.gui.lobby.rankedBattles19.components.widget.RankedBattlesHangarWidget;
+    import net.wg.gui.lobby.hangar.quests.BobHangarWidget;
     import net.wg.utils.IScheduler;
     import net.wg.gui.lobby.hangar.quests.HeaderQuestsEvent;
     import scaleform.clik.constants.InvalidationType;
@@ -37,6 +38,8 @@ package net.wg.gui.lobby.hangar
         private var _battlePassEntryPoint:BattlePassEntryPoint = null;
 
         private var _rankedBattlesWidget:RankedBattlesHangarWidget = null;
+
+        private var _bobWidget:BobHangarWidget = null;
 
         private var _scheduler:IScheduler = null;
 
@@ -71,6 +74,7 @@ package net.wg.gui.lobby.hangar
             this._data = null;
             this._scheduler.cancelTask(this.createBattlePass);
             this._scheduler = null;
+            this._bobWidget = null;
             super.onDispose();
         }
 
@@ -178,6 +182,32 @@ package net.wg.gui.lobby.hangar
         private function onBtnHeaderQuestClickHandler(param1:HeaderQuestsEvent) : void
         {
             onQuestBtnClickS(param1.questType,param1.questID);
+        }
+
+        public function as_createBob() : void
+        {
+            if(!this._bobWidget)
+            {
+                this._bobWidget = new BobHangarWidget();
+                this.questsFlags.setEntryPoint(this._bobWidget);
+                registerFlashComponentS(this._bobWidget,HANGAR_ALIASES.BOB_HANGAR_WIDGET);
+            }
+        }
+
+        public function as_removeBob() : void
+        {
+            if(this._bobWidget != null)
+            {
+                if(this.questsFlags.getEntryPoint() is BobHangarWidget)
+                {
+                    this.questsFlags.setEntryPoint(null);
+                }
+                if(isFlashComponentRegisteredS(HANGAR_ALIASES.BOB_HANGAR_WIDGET))
+                {
+                    unregisterFlashComponentS(HANGAR_ALIASES.BOB_HANGAR_WIDGET);
+                }
+                this._bobWidget = null;
+            }
         }
     }
 }
