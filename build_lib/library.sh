@@ -323,12 +323,6 @@ detect_python(){
         elif hash "python" 2>/dev/null; then
             export XVMBUILD_PYTHON_FILEPATH="python"    #Default name of python executable
         fi
-        if hash "/c/Python27/python.exe" 2>/dev/null; then
-            export XVMBUILD_PYTHON_FILEPATH="/c/Python27/python.exe"  #Windows default path
-        fi
-        if hash "/c/Software/Python/27_64/python.exe" 2>/dev/null; then
-            export XVMBUILD_PYTHON_FILEPATH="/c/Software/Python/27_64/python.exe"  #Mikhail's path
-        fi
     fi
 
     #check results
