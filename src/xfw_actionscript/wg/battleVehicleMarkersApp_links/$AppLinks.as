@@ -11,8 +11,6 @@ internal class $AppLinks
  *  from the classes specified in manifest.xml.
  */
 
-import net.wg.app.impl.BattleVehicleMarkersApp; BattleVehicleMarkersApp;
-
 /**
  * UIs
  */
