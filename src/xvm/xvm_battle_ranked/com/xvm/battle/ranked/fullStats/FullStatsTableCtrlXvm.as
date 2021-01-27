@@ -15,9 +15,9 @@ package com.xvm.battle.ranked.fullStats
             super(table);
         }
 
-        override public function createPlayerStatsItem(col:int, row:int):StatsTableItem
+        public function createPlayerStatsItem(col:int, row:int):StatsTableItem
         {
-            return new StatsTableItemXvm(xfw_table, col, row);
+            return new StatsTableItemXvm(XfwUtils.getPrivateField(this, 'xfw_table'), col, row);
         }
     }
 }

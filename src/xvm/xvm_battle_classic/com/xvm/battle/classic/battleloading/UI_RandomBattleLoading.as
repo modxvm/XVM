@@ -12,7 +12,9 @@ package com.xvm.battle.classic.battleloading
     import com.xvm.types.cfg.CBattleLoading;
     import flash.events.Event;
     import net.wg.gui.battle.battleloading.BattleLoadingForm;
+    import net.wg.gui.battle.battleloading.renderers.IBattleLoadingRenderer;
     import net.wg.gui.battle.battleloading.renderers.BasePlayerItemRenderer;
+	import net.wg.gui.battle.battleloading.renderers.BaseRendererContainer;
     import net.wg.gui.battle.battleloading.vo.VisualTipInfoVO;
     import net.wg.gui.components.containers.Atlas;
     import net.wg.infrastructure.events.AtlasEvent;
@@ -120,11 +122,13 @@ package com.xvm.battle.classic.battleloading
             var newAtlas:String = Macros.FormatStringGlobal(cfgAtlas);
             if (currentAtlas != newAtlas)
             {
-                var atlas:Atlas = (App.atlasMgr as AtlasManager).xfw_getAtlas(newAtlas) as Atlas;
+				var atlasMgr:AtlasManager = App.atlasMgr as AtlasManager;
+				
+                var atlas:Atlas = XfwUtils.getPrivateField(atlasMgr, 'xfw_getAtlas')(newAtlas) as Atlas;
                 if (atlas == null)
                 {
-                    App.atlasMgr.registerAtlas(newAtlas);
-                    atlas = (App.atlasMgr as AtlasManager).xfw_getAtlas(newAtlas) as Atlas;
+                    atlasMgr.registerAtlas(newAtlas);
+                    atlas = XfwUtils.getPrivateField(atlasMgr, 'xfw_getAtlas')(newAtlas) as Atlas;
                     atlas.addEventListener(AtlasEvent.ATLAS_INITIALIZED, onAtlasInitializedHandler, false, 0, true);
                 }
             }
@@ -139,24 +143,29 @@ package com.xvm.battle.classic.battleloading
 
         private function initRenderers():void
         {
+			var allyRenderers:Vector.<IBattleLoadingRenderer> = XfwUtils.getPrivateField(battleLoadingForm, 'xfw_allyRenderers');
+			var enemyRenderers:Vector.<IBattleLoadingRenderer> = XfwUtils.getPrivateField(battleLoadingForm, 'xfw_enemyRenderers');
+			var renderersContainer:BaseRendererContainer = XfwUtils.getPrivateField(battleLoadingForm, 'xfw_renderersContainer');
+			
+			
             var renderer:BasePlayerItemRenderer;
-            for each(renderer in battleLoadingForm.xfw_allyRenderers)
+            for each(renderer in allyRenderers)
             {
                 renderer.dispose();
             }
-            battleLoadingForm.xfw_allyRenderers.splice(0, battleLoadingForm.xfw_allyRenderers.length);
+            allyRenderers.splice(0, allyRenderers.length);
 
-            for each(renderer in battleLoadingForm.xfw_enemyRenderers)
+            for each(renderer in enemyRenderers)
             {
                 renderer.dispose();
             }
-            battleLoadingForm.xfw_enemyRenderers.splice(0, battleLoadingForm.xfw_enemyRenderers.length);
+            enemyRenderers.splice(0, enemyRenderers.length);
 
             var cls:Class = isTipsForm ? XvmRandomTipPlayerItemRenderer : XvmRandomTablePlayerItemRenderer;
             for (var i:int = 0; i < 15; ++i)
             {
-                battleLoadingForm.xfw_allyRenderers.push(new cls(battleLoadingForm.xfw_renderersContainer, i, false));
-                battleLoadingForm.xfw_enemyRenderers.push(new cls(battleLoadingForm.xfw_renderersContainer, i, true));
+                allyRenderers.push(new cls(renderersContainer, i, false));
+                enemyRenderers.push(new cls(renderersContainer, i, true));
             }
         }
     }

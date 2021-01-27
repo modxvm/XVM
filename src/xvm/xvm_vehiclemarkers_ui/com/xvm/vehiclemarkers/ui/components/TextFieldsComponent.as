@@ -79,7 +79,6 @@ package com.xvm.vehiclemarkers.ui.components
             }
         }
 
-        [Inline]
         public final function update(e:XvmVehicleMarkerEvent):void
         {
             if (extraFieldsHolders)

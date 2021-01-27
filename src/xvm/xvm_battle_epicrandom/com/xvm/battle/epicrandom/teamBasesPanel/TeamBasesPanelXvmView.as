@@ -45,8 +45,8 @@ package com.xvm.battle.epicrandom.teamBasesPanel
             component.visible = battlePage.teamBasesPanelUI.visible;
             battlePage.teamBasesPanelUI = component;
             battlePage.addChildAt(battlePage.teamBasesPanelUI, idx);
-            battlePage.xfw_registerComponent(battlePage.teamBasesPanelUI, BATTLE_VIEW_ALIASES.TEAM_BASES_PANEL);
-            component.addEventListener(Event.CHANGE, battlePage.xfw_onTeamBasesPanelUIChangeHandler);
+            XfwUtils.getPrivateField(battlePage,'xfw_registerComponent')(battlePage.teamBasesPanelUI, BATTLE_VIEW_ALIASES.TEAM_BASES_PANEL);
+            component.addEventListener(Event.CHANGE, XfwUtils.getPrivateField(battlePage,'xfw_onTeamBasesPanelUIChangeHandler'));
         }
     }
 }

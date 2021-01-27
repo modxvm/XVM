@@ -8,10 +8,13 @@ package com.xvm.battle.ranked.fullStats
     import com.xvm.infrastructure.*;
     import flash.display.*;
     import net.wg.gui.battle.interfaces.*;
+    import net.wg.gui.battle.views.questProgress.interfaces.IQuestProgressViewUpdatable;
     import net.wg.data.constants.generated.*;
     import net.wg.gui.battle.ranked.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
+	import net.wg.infrastructure.helpers.statisticsDataController.BattleStatisticDataController;
+    import net.wg.infrastructure.helpers.statisticsDataController.intarfaces.IBattleComponentDataController;
 
     public class RankedFullStatsXvmView extends XvmViewBase
     {
@@ -37,9 +40,14 @@ package com.xvm.battle.ranked.fullStats
         {
             var fullStats:DisplayObject = page.fullStats as DisplayObject;
             var idx:int = page.getChildIndex(fullStats);
-            var qidx:int = page.xfw_battleStatisticDataController.xfw_questProgressViews.indexOf((fullStats as IFullStats).getStatsProgressView());
+			
+			var bsdController:BattleStatisticDataController = XfwUtils.getPrivateField(page, 'xfw_battleStatisticDataController');
+			var qpw:Vector.<IQuestProgressViewUpdatable> = XfwUtils.getPrivateField(bsdController, 'xfw_questProgressViews');
+			var cController:Vector.<IBattleComponentDataController> = XfwUtils.getPrivateField(bsdController, 'xfw_componentControllers');
+			
+            var qidx:int = qpw.indexOf((fullStats as IFullStats).getStatsProgressView());
             page.unregisterComponent(BATTLE_VIEW_ALIASES.FULL_STATS);
-            page.xfw_battleStatisticDataController.xfw_componentControllers.splice(page.xfw_battleStatisticDataController.xfw_componentControllers.indexOf(page.fullStats), 1);
+			cController.splice(cController.indexOf(page.fullStats), 1);
             page.removeChild(fullStats);
             var component:UI_RankedFullStats = new UI_RankedFullStats();
             component.x = fullStats.x;
@@ -47,12 +55,12 @@ package com.xvm.battle.ranked.fullStats
             component.visible = fullStats.visible;
             if (qidx >= 0)
             {
-                page.xfw_battleStatisticDataController.xfw_questProgressViews[qidx] = component.getStatsProgressView();
+                qpw[qidx] = component.getStatsProgressView();
             }
             page.fullStats = component;
             page.addChildAt(component, idx);
-            page.xfw_battleStatisticDataController.registerComponentController(page.fullStats);
-            page.xfw_registerComponent(page.fullStats, BATTLE_VIEW_ALIASES.FULL_STATS);
+            bsdController.registerComponentController(page.fullStats);
+            XfwUtils.getPrivateField(page, 'xfw_registerComponent')(page.fullStats, BATTLE_VIEW_ALIASES.FULL_STATS);
         }
     }
 }

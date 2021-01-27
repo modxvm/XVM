@@ -17,12 +17,12 @@ package com.xvm.battle.classic.fullStats
             super(table, meta);
         }
 
-        override public function createPlayerStatsItem(col:int, row:int):StatsTableItem
+        public function createPlayerStatsItem(col:int, row:int):StatsTableItem
         {
             return new StatsTableItemXvm(xfw_table, col, row);
         }
 
-        override public function createSquadItem(col:int, row:int):DynamicSquadCtrl
+        public function createSquadItem(col:int, row:int):DynamicSquadCtrl
         {
             var index:int = col * StatsTableItemBase.NUM_ITEM_ROWS + row;
             return new DynamicSquadCtrlXvm(
