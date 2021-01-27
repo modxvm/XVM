@@ -8,7 +8,7 @@
     // Автоматический вход в игру.
     //  - Опция вкл/откл автоматический вход в игру когда недоступен логин-менеджер WGC";
     //    В противном случае входом в клиент управляет опция в клиенте "Показывать выбор сервера при запуске игры".
-    //  - Option to enable / disable automatic login to the game when the WGC login-manager is not available;
+    //  - Option to enable/disable automatic login to the game when the WGC login-manager is not available;
     //    Otherwise, client login is controlled by an option in the client "Display server selection upon game launch".
     "autologin": false,
     // Auto confirm old replays playing.
