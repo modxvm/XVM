@@ -104,7 +104,7 @@ package com.xvm.lobby
 				
 				var headerButtonsHelper:HeaderButtonsHelper = XfwUtils.getPrivateField(page.header, "xfw_headerButtonsHelper");
 
-                btn = XfwUtils.getPrivateField(headerButtonsHelper, 'xfw_searchButtonById')(HeaderButtonsHelper.ITEM_ID_PREM);
+                btn = headerButtonsHelper.searchButtonById(HeaderButtonsHelper.ITEM_ID_PREM);
                 if (btn)
                 {
                     btn.mouseEnabled = Config.config.hangar.showBuyPremiumButton;
@@ -112,7 +112,7 @@ package com.xvm.lobby
                     btn.alpha = Config.config.hangar.showBuyPremiumButton ? 1 : 0;
                 }
 
-                btn = XfwUtils.getPrivateField(headerButtonsHelper, 'xfw_searchButtonById')(HeaderButtonsHelper.ITEM_ID_PREMSHOP);
+                btn = headerButtonsHelper.searchButtonById(HeaderButtonsHelper.ITEM_ID_PREMSHOP);
                 if (btn)
                 {
                     btn.mouseEnabled = Config.config.hangar.showPremiumShopButton;
@@ -120,7 +120,7 @@ package com.xvm.lobby
                     btn.alpha = Config.config.hangar.showPremiumShopButton ? 1 : 0;
                 }
 
-                btn = XfwUtils.getPrivateField(headerButtonsHelper, 'xfw_searchButtonById')(HeaderButtonsHelper.ITEM_ID_BATTLE_SELECTOR);
+                btn = headerButtonsHelper.searchButtonById(HeaderButtonsHelper.ITEM_ID_BATTLE_SELECTOR);
                 if (btn)
                 {
                     btn.headerButtonData.isUseFreeSize = false;
@@ -136,7 +136,7 @@ package com.xvm.lobby
 
             if (!Config.config.hangar.showCreateSquadButtonText)
             {
-                btn = XfwUtils.getPrivateField(headerButtonsHelper, 'xfw_searchButtonById')(HeaderButtonsHelper.ITEM_ID_SQUAD);
+                btn = headerButtonsHelper.searchButtonById(HeaderButtonsHelper.ITEM_ID_SQUAD);
                 if (btn)
                 {
                     var ctxSquad:HBC_Squad = btn.content as HBC_Squad;
@@ -146,7 +146,7 @@ package com.xvm.lobby
 
             if (!Config.config.hangar.showBattleTypeSelectorText)
             {
-                btn = XfwUtils.getPrivateField(headerButtonsHelper, 'xfw_searchButtonById')(HeaderButtonsHelper.ITEM_ID_BATTLE_SELECTOR);
+                btn = headerButtonsHelper.searchButtonById(HeaderButtonsHelper.ITEM_ID_BATTLE_SELECTOR);
                 if (btn)
                 {
                     var ctxBattleSelector:HBC_BattleSelector = btn.content as HBC_BattleSelector;

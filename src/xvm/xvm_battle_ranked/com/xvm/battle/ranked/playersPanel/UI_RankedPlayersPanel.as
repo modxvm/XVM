@@ -67,13 +67,8 @@ package com.xvm.battle.ranked.playersPanel
             //Logger.add("UI_RankedPlayersPanel()");
             super();
 			
-			//HACK: access to the private const
-			var ppLeft:* = PlayersPanelListLeft;
-            ppLeft.LINKAGE = XVM_PLAYERS_PANEL_LIST_ITEM_LEFT_LINKAGE;
-			
-			//HACK: access to the private const
-			var ppRight:* = PlayersPanelListRight;
-            ppRight.LINKAGE = XVM_PLAYERS_PANEL_LIST_ITEM_RIGHT_LINKAGE;
+			XfwUtils.setPrivateField(PlayersPanelListLeft, "LINKAGE", XVM_PLAYERS_PANEL_LIST_ITEM_LEFT_LINKAGE);
+			XfwUtils.setPrivateField(PlayersPanelListRight, "LINKAGE", XVM_PLAYERS_PANEL_LIST_ITEM_RIGHT_LINKAGE);
 
             registerPlayersPanelMacros();
 

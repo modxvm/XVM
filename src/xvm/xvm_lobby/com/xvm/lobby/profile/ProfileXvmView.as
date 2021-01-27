@@ -44,9 +44,7 @@ package com.xvm.lobby.profile
             sectionsDataUtil.addEntity(Aliases.PROFILE_TECHNIQUE_WINDOW, "com.xvm.lobby.ui.profile::UI_ProfileTechniqueWindow");
             if (Config.networkServicesSettings.statAwards)
             {
-				//HACK: access to const field
-				var linkagesAsterisk:* = Linkages;
-                linkagesAsterisk.TECHNIQUE_STATISTIC_TAB = "com.xvm.lobby.ui.profile::UI_TechniqueStatisticTab";
+				XfwUtils.setPrivateField(Linkages, "TECHNIQUE_STATISTIC_TAB", "com.xvm.lobby.ui.profile::UI_TechniqueStatisticTab");
             }
         }
     }

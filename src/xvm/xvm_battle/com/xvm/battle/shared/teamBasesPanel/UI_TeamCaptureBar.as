@@ -12,6 +12,8 @@ package com.xvm.battle.shared.teamBasesPanel
     import flash.text.*;
     import mx.utils.*;
     import scaleform.gfx.*;
+	
+	import com.xfw.XfwUtils;
 
     public class UI_TeamCaptureBar extends TeamCaptureBarUI
     {
@@ -38,8 +40,7 @@ package com.xvm.battle.shared.teamBasesPanel
 
         public function UI_TeamCaptureBar()
         {
-			var thisAsterisk: * = this;
-			thisAsterisk.EXIT_TWEEN_Y -= HIDE_ICONS_HACK_OFFSET_Y;
+			XfwUtils.setPrivateField(this, "EXIT_TWEEN_Y", HIDE_ICONS_HACK_OFFSET_Y);
 			
             //Logger.add("UI_TeamCaptureBar()");
             super();

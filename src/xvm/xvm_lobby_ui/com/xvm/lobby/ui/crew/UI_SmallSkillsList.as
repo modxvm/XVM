@@ -4,26 +4,27 @@
  */
 package com.xvm.lobby.ui.crew
 {
-    import com.xfw.*;
-    import com.xvm.*;
-    import net.wg.gui.lobby.components.data.*;
+    import net.wg.gui.lobby.components.SmallSkillsList;
+	import net.wg.gui.lobby.components.data.BaseTankmanVO;
+
+	import com.xfw.XfwUtils;
+    import com.xvm.Config;	
 
     public class UI_SmallSkillsList extends SmallSkillsListUI
     {
         public function UI_SmallSkillsList()
         {
-            //Logger.add("UI_SmallSkillsList");
             super();
         }
 
         override public function updateSkills(data:BaseTankmanVO):void
         {
-			//HACK: access to private const field
-			var thisAsterisk:* = this;
-            thisAsterisk.MAX_RENDER_SKILLS = Config.config.hangar.crewMaxPerksCount + 1;
-            super.updateSkills(data);
+			XfwUtils.setPrivateField(SmallSkillsList, "MAX_RENDER_SKILLS", Config.config.hangar.crewMaxPerksCount + 1);
+            
+			super.updateSkills(data);
             skills.width = (skills.columnWidth + skills.paddingRight) * skills.dataProvider.length;
-            thisAsterisk.MAX_RENDER_SKILLS = 5;
+			
+			XfwUtils.setPrivateField(SmallSkillsList, "MAX_RENDER_SKILLS", 5);
         }
     }
 }

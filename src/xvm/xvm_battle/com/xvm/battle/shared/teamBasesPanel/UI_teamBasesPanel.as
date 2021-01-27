@@ -4,12 +4,23 @@
  */
 package com.xvm.battle.shared.teamBasesPanel
 {
-    import com.xfw.*;
-    import com.xfw.events.*;
-    import com.xvm.*;
-    import com.xvm.battle.*;
-    import flash.utils.*;
-    import net.wg.data.constants.*;
+	import flash.utils.getQualifiedClassName;
+	import net.wg.gui.battle.random.views.teamBasesPanel.TeamBasesPanel;
+
+	import net.wg.data.constants.Linkages;
+	
+	import com.xfw.Logger;
+	import com.xfw.Xfw;
+    import com.xfw.XfwUtils;
+    import com.xfw.events.BooleanEvent;
+
+	import com.xvm.Config;
+    import com.xvm.Defines;
+	import com.xvm.Macros;
+	import com.xvm.Xvm;
+	import com.xvm.XvmCommands;
+    import com.xvm.battle.BattleEvents;
+
     // TODO:1.10.0
     //import net.wg.gui.components.common.ticker.events.*;
 
@@ -25,7 +36,7 @@ package com.xvm.battle.shared.teamBasesPanel
             //Logger.add("UI_teamBasesPanel()");
             super();
 			
-			DEFAULT_RENDERER_LENGTH = XfwUtils.getPrivateField(this, 'xfw_RENDERER_HEIGHT');
+			DEFAULT_RENDERER_LENGTH = XfwUtils.getPrivateField(TeamBasesPanel, "xfw_RENDERER_HEIGHT");
 			
             // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
             _init();
@@ -77,32 +88,24 @@ package com.xvm.battle.shared.teamBasesPanel
         {
             //Xvm.swfProfilerBegin("UI_teamBasesPanel.update()");
             try
-            {
-				//HACK: access to const field
-				var linkagesAsterisk:* = Linkages;
-				
-				//HACK: modify private field
-				var thisAsterisk:* = this;
-				
+            {				
                 if (Macros.FormatBooleanGlobal(Config.config.captureBar.enabled, true))
                 {
-					//HACK: access to const field
-                    linkagesAsterisk.CAPTURE_BAR_LINKAGE = XVM_CAPTURE_BAR_LINKAGE;
+					XfwUtils.setPrivateField(Linkages, "CAPTURE_BAR_LINKAGE", XVM_CAPTURE_BAR_LINKAGE);
+
                     y = Macros.FormatNumberGlobal(Config.config.captureBar.y, DEFAULT_Y);
-					
-					//HACK: modify private field
-                    thisAsterisk.xfw_RENDERER_HEIGHT = Macros.FormatNumberGlobal(Config.config.captureBar.distanceOffset, 0) + DEFAULT_RENDERER_LENGTH;
+
+					XfwUtils.setPrivateField(TeamBasesPanel, "xfw_RENDERER_HEIGHT", Macros.FormatNumberGlobal(Config.config.captureBar.distanceOffset, 0) + DEFAULT_RENDERER_LENGTH);
                 }
                 else
                 {
-					//HACK: access to const field
-                    linkagesAsterisk.CAPTURE_BAR_LINKAGE = DEFAULT_CAPTURE_BAR_LINKAGE;
+					XfwUtils.setPrivateField(Linkages, "CAPTURE_BAR_LINKAGE", DEFAULT_CAPTURE_BAR_LINKAGE);
                     
 					y = DEFAULT_Y;
 					
-					//HACK: modify private field
-                    thisAsterisk.xfw_RENDERER_HEIGHT = DEFAULT_RENDERER_LENGTH;
+					XfwUtils.setPrivateField(TeamBasesPanel, "xfw_RENDERER_HEIGHT", DEFAULT_RENDERER_LENGTH);
                 }
+
                 // TODO: The game crashes on replay of EpicRandom when xfw_updatePositions() is called
                 if (Xvm.appType != Defines.APP_TYPE_BATTLE_EPICRANDOM)
                 {
