@@ -109,7 +109,7 @@ package com.xvm.lobby.ui.limits
 
                 if (goldLocker)
                 {
-                    var goldControl:HeaderButton = page.header.xfw_headerButtonsHelper.searchButtonById(CURRENCIES_CONSTANTS.GOLD);
+                    var goldControl:HeaderButton = XfwUtils.getPrivateField(page.header, "xfw_headerButtonsHelper").searchButtonById(CURRENCIES_CONSTANTS.GOLD);
                     if (goldControl)
                     {
                         var goldContent:HBC_Finance = goldControl.content as HBC_Finance;
@@ -123,7 +123,7 @@ package com.xvm.lobby.ui.limits
                             if (goldContent.bounds.width < minWidth)
                             {
                                 goldContent.bounds.width = minWidth;
-                                goldContent.dispatchEvent(new HeaderEvents(HeaderEvents.HBC_SIZE_UPDATED, goldContent.bounds.width, goldContent.xfw_leftPadding, goldContent.xfw_rightPadding));
+                                goldContent.dispatchEvent(new HeaderEvents(HeaderEvents.HBC_SIZE_UPDATED, goldContent.bounds.width, XfwUtils.getPrivateField(goldContent,"xfw_leftPadding"), XfwUtils.getPrivateField(goldContent,"xfw_rightPadding")));
                             }
                         }
                     }
@@ -131,7 +131,7 @@ package com.xvm.lobby.ui.limits
 
                 if (freeXpLocker)
                 {
-                    var freeXpControl:HeaderButton = page.header.xfw_headerButtonsHelper.searchButtonById(CURRENCIES_CONSTANTS.FREE_XP);
+                    var freeXpControl:HeaderButton = XfwUtils.getPrivateField(page.header, "xfw_headerButtonsHelper").xfw_searchButtonById(CURRENCIES_CONSTANTS.FREE_XP);
                     if (freeXpControl)
                     {
                         var freeXpContent:HBC_Finance = freeXpControl.content as HBC_Finance;
@@ -145,7 +145,7 @@ package com.xvm.lobby.ui.limits
                             if (freeXpContent.bounds.width < minWidth)
                             {
                                 freeXpContent.bounds.width = minWidth;
-                                freeXpContent.dispatchEvent(new HeaderEvents(HeaderEvents.HBC_SIZE_UPDATED, freeXpContent.bounds.width, freeXpContent.xfw_leftPadding, freeXpContent.xfw_rightPadding));
+                                freeXpContent.dispatchEvent(new HeaderEvents(HeaderEvents.HBC_SIZE_UPDATED, freeXpContent.bounds.width, XfwUtils.getPrivateField(freeXpContent,"xfw_leftPadding"), XfwUtils.getPrivateField(freeXpContent,"xfw_rightPadding")));
                             }
                         }
                     }
@@ -153,7 +153,7 @@ package com.xvm.lobby.ui.limits
 
                 if (crystalLocker)
                 {
-                    var crystalControl:HeaderButton = page.header.xfw_headerButtonsHelper.searchButtonById(CURRENCIES_CONSTANTS.CRYSTAL);
+                    var crystalControl:HeaderButton = XfwUtils.getPrivateField(page.header, "xfw_headerButtonsHelper").xfw_searchButtonById(CURRENCIES_CONSTANTS.CRYSTAL);
                     if (crystalControl)
                     {
                         var crystalContent:HBC_Finance = crystalControl.content as HBC_Finance;
@@ -167,7 +167,7 @@ package com.xvm.lobby.ui.limits
                             if (crystalContent.bounds.width < minWidth)
                             {
                                 crystalContent.bounds.width = minWidth;
-                                crystalContent.dispatchEvent(new HeaderEvents(HeaderEvents.HBC_SIZE_UPDATED, crystalContent.bounds.width, crystalContent.xfw_leftPadding, crystalContent.xfw_rightPadding));
+                                crystalContent.dispatchEvent(new HeaderEvents(HeaderEvents.HBC_SIZE_UPDATED, crystalContent.bounds.width, XfwUtils.getPrivateField(crystalContent,"xfw_leftPadding"), XfwUtils.getPrivateField(crystalContent, "xfw_rightPadding")));
                             }
                         }
                     }

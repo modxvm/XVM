@@ -7,6 +7,7 @@ package com.xvm.lobby.profile
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
+	import net.wg.gui.lobby.profile.LinkageUtils;
     import net.wg.data.*;
     import net.wg.data.constants.*;
     import net.wg.gui.lobby.profile.*;
@@ -38,11 +39,14 @@ package com.xvm.lobby.profile
         {
             super.onBeforePopulate(e);
 
-            tabNavigator.xfw_sectionsDataUtil.addEntity(Aliases.PROFILE_TECHNIQUE_PAGE, "com.xvm.lobby.ui.profile::UI_ProfileTechniquePage");
-            tabNavigator.xfw_sectionsDataUtil.addEntity(Aliases.PROFILE_TECHNIQUE_WINDOW, "com.xvm.lobby.ui.profile::UI_ProfileTechniqueWindow");
+			var sectionsDataUtil:LinkageUtils = XfwUtils.getPrivateField(tabNavigator, 'xfw_sectionsDataUtil');
+            sectionsDataUtil.addEntity(Aliases.PROFILE_TECHNIQUE_PAGE, "com.xvm.lobby.ui.profile::UI_ProfileTechniquePage");
+            sectionsDataUtil.addEntity(Aliases.PROFILE_TECHNIQUE_WINDOW, "com.xvm.lobby.ui.profile::UI_ProfileTechniqueWindow");
             if (Config.networkServicesSettings.statAwards)
             {
-                Linkages.TECHNIQUE_STATISTIC_TAB = "com.xvm.lobby.ui.profile::UI_TechniqueStatisticTab";
+				//HACK: access to const field
+				var linkagesAsterisk:* = Linkages;
+                linkagesAsterisk.TECHNIQUE_STATISTIC_TAB = "com.xvm.lobby.ui.profile::UI_TechniqueStatisticTab";
             }
         }
     }

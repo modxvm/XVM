@@ -1,4 +1,4 @@
-﻿/**
+/**
  * XVM: eXtended Visualization Mod for World of Tanks.
  * https://modxvm.com/
  */
@@ -18,10 +18,12 @@ package com.xvm.lobby.ui.crew
 
         override public function updateSkills(data:BaseTankmanVO):void
         {
-            MAX_RENDER_SKILLS = Config.config.hangar.crewMaxPerksCount + 1;
+			//HACK: access to private const field
+			var thisAsterisk:* = this;
+            thisAsterisk.MAX_RENDER_SKILLS = Config.config.hangar.crewMaxPerksCount + 1;
             super.updateSkills(data);
             skills.width = (skills.columnWidth + skills.paddingRight) * skills.dataProvider.length;
-            MAX_RENDER_SKILLS = 5;
+            thisAsterisk.MAX_RENDER_SKILLS = 5;
         }
     }
 }
