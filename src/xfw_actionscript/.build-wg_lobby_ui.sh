@@ -6,7 +6,9 @@
 set -e
 
 currentdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-source "$currentdir"/../../build_lib/library.sh
+XVMBUILD_ROOT_PATH="$currentdir/../../"
+
+source "$XVMBUILD_ROOT_PATH/build_lib/library.sh"
 
 detect_os
 detect_actionscript_sdk

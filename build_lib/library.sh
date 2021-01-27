@@ -9,8 +9,8 @@ AS_VERSION_PLAYER="10.2"
 AS_VERSION_SWF="11"
 
 #Apache Roayler constants
-APACHEROAYLE_DOWNLOADLINK="https://downloads.apache.org/royale/0.9.4/binaries/apache-royale-0.9.4-bin-js-swf.tar.gz"
-APACHEROAYLE_VER="0.9.4"
+APACHE_ROYALE_DOWNLOADLINK="https://downloads.apache.org/royale/0.9.7/binaries/apache-royale-0.9.7-bin-js-swf.tar.gz"
+APACHE_ROYALE_VER="0.9.7"
 
 # AS3 compilation
 build_as3_swf(){
@@ -150,7 +150,7 @@ install_actionscript_sdk(){
     assdk_root="$XVMBUILD_ROOT_PATH/~temp/assdk"
     rm -rf "$1"
     mkdir -p "$1"
-    wget $APACHEROAYLE_DOWNLOADLINK -O "$1/file.tar.gz"
+    wget $APACHE_ROYALE_DOWNLOADLINK -O "$1/file.tar.gz"
     tar xf "$1/file.tar.gz" -C "$1/" --strip 1
     rm -f "$1/file.tar.gz"
 }
@@ -161,6 +161,7 @@ install_actionscript_sdk(){
 #  - $ROYALE_HOME
 #  - /opt/apache-royale
 #  - C:/Apache Royale/royale-asjs/
+#  - <repo>/~downloads/apache_royale_<ver>/
 #  - $FLEX_HOME
 #  - /opt/apache-flex
 #  - $LOCALAPPDATA/FlashDevelop/Apps/flexsdk/4.6.0
@@ -185,6 +186,9 @@ detect_actionscript_sdk(){
     elif [ -d "/opt/apache-royale/royale-asjs" ]; then
         export ASSDK_HOME="/opt/apache-royale/royale-asjs"
         export ASSDK_TYPE="royale"
+    elif [ -d "$XVMBUILD_ROOT_PATH/~downloads/as_sdk_$APACHE_ROYALE_VER/royale-asjs" ]; then
+        export ASSDK_HOME="$XVMBUILD_ROOT_PATH/~downloads/as_sdk_$APACHE_ROYALE_VER/royale-asjs"
+        export ASSDK_TYPE="royale"
     elif [ "$FLEX_HOME" != "" -a -d "$FLEX_HOME" ]; then
         export ASSDK_HOME="$FLEX_HOME"
         export ASSDK_TYPE="flex"
@@ -194,15 +198,12 @@ detect_actionscript_sdk(){
     elif [ -d "$LOCALAPPDATA/FlashDevelop/Apps/flexsdk/4.6.0" ]; then
         export ASSDK_HOME="$LOCALAPPDATA/FlashDevelop/Apps/flexsdk/4.6.0"
         export ASSDK_TYPE="flex"
-    elif [ -d "$XVMBUILD_ROOT_PATH/~downloads/as_sdk_$APACHEROAYLE_VER/royale-asjs" ]; then
-        export ASSDK_HOME="$XVMBUILD_ROOT_PATH/~downloads/as_sdk_$APACHEROAYLE_VER/royale-asjs"
-        export ASSDK_TYPE="royale"
     fi
 
     #download if not found
     if [ ! -d "$ASSDK_HOME" ]; then
-        install_actionscript_sdk "$XVMBUILD_ROOT_PATH/~downloads/as_sdk_$APACHEROAYLE_VER"
-        export ASSDK_HOME="$XVMBUILD_ROOT_PATH/~downloads/as_sdk_$APACHEROAYLE_VER/royale-asjs"
+        install_actionscript_sdk "$XVMBUILD_ROOT_PATH/~downloads/as_sdk_$APACHE_ROYALE_VER"
+        export ASSDK_HOME="$XVMBUILD_ROOT_PATH/~downloads/as_sdk_$APACHE_ROYALE_VER/royale-asjs"
         export ASSDK_TYPE="royale"
 
         if [ ! -d "$ASSDK_HOME" ]; then
