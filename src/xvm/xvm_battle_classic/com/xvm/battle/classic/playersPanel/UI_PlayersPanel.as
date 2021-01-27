@@ -270,11 +270,11 @@ package com.xvm.battle.classic.playersPanel
                         var isInExpandArea:Boolean = (e.stageX < mopt_expandAreaWidth) || (e.stageX > App.appWidth - mopt_expandAreaWidth);
                         if (isInExpandArea)
                         {
-                            super.xfw_onListRollOverHandler(e);
+                            XfwUtils.getPrivateField(this,"xfw_onListRollOverHandler")(e);
                         }
                         else
                         {
-                            super.xfw_onListRollOutHandler(e);
+							XfwUtils.getPrivateField(this,"xfw_onListRollOutHandler")(e);
                         }
                     }
                 }
