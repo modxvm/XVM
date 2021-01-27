@@ -2,7 +2,7 @@
 
 # This file is part of the XVM Framework project.
 #
-# Copyright (c) 2014-2021 XVM Team.
+# Copyright (c) 2014-2020 XVM Team.
 #
 # XVM Framework is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as
@@ -22,11 +22,18 @@ set -e
 currentdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 source "$currentdir"/../../build_lib/library.sh
 
+
 detect_os
 detect_actionscript_sdk
 
-class="App"
+class="\$AppLinks"
 build_as3_swc \
-    -source-path wg/shared \
-    -output ../../~output/xfw/swc/wg_shared.swc \
+    -source-path wg/battleVehicleMarkersApp_links \
+    -source-path wg/battleVehicleMarkersApp_ui/* \
+    -external-library-path+=../wg_swc/common-1.0-SNAPSHOT.swc \
+    -external-library-path+=../wg_swc/common_i18n_library-1.0-SNAPSHOT.swc \
+    -external-library-path+=../wg_swc/base_app-1.0-SNAPSHOT.swc \
+    -external-library-path+=../wg_swc/gui_base-1.0-SNAPSHOT.swc \
+    -external-library-path+=../wg_swc/gui_battle-1.0-SNAPSHOT.swc \
+    -output ../../~output/xfw/swc/wg_vm_ui.swc \
     -include-classes $class

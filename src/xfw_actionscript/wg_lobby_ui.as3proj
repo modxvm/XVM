@@ -15,7 +15,7 @@
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
-    <class path="wg\battle" />
+    <class path="wg\lobby" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -56,7 +56,12 @@
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
-    <!-- example: <element path="..." /> -->
+    <element path="..\wg_swc\common-1.0-SNAPSHOT.swc" />
+    <element path="..\wg_swc\common_i18n_library-1.0-SNAPSHOT.swc" />
+    <element path="..\wg_swc\base_app-1.0-SNAPSHOT.swc" />
+    <element path="..\wg_swc\gui_base-1.0-SNAPSHOT.swc" />
+    <element path="..\wg_swc\gui_battle-1.0-SNAPSHOT.swc" />
+    <element path="..\wg_swc\gui_lobby-1.0-SNAPSHOT.swc" />
   </externalLibraryPaths>
   <!-- Runtime Shared Libraries -->
   <rslPaths>
@@ -72,7 +77,7 @@
   </library>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="wg\battle\App.as" />
+    <compile path="wg\lobby_links\$AppLinks.as" />
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
@@ -85,7 +90,7 @@
   <!-- Executed before build -->
   <preBuildCommand />
   <!-- Executed after build -->
-  <postBuildCommand alwaysRun="True">bash .build-wg_battle.sh</postBuildCommand>
+  <postBuildCommand alwaysRun="True">bash .build-wg_lobby_ui.sh</postBuildCommand>
   <!-- Other project options -->
   <options>
     <option showHiddenPaths="False" />
