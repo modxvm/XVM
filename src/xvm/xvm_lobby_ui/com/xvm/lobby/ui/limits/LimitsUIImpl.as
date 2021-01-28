@@ -132,7 +132,7 @@ package com.xvm.lobby.ui.limits
 
                 if (freeXpLocker)
                 {
-                    
+
                     var freeXpControl:HeaderButton = headerButtonsHelper.searchButtonById(CURRENCIES_CONSTANTS.FREE_XP);
                     if (freeXpControl)
                     {

@@ -100,7 +100,7 @@ package com.xvm.battle.classic.playersPanel
             listLeft.addEventListener(MouseEvent.ROLL_OVER, onListRollOverHandler, false, 0, true);
             listLeft.addEventListener(MouseEvent.ROLL_OUT, onListRollOutHandler, false, 0, true);
             listLeft.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMoveHandler, false, 0, true);
-            
+
 			listRight.addEventListener(MouseEvent.ROLL_OVER, onListRollOverHandler, false, 0, true);
             listRight.addEventListener(MouseEvent.ROLL_OUT, onListRollOutHandler, false, 0, true);
             listRight.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMoveHandler, false, 0, true);

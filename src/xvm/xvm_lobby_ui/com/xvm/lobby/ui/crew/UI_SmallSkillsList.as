@@ -20,7 +20,7 @@ package com.xvm.lobby.ui.crew
         override public function updateSkills(data:BaseTankmanVO):void
         {
 			XfwUtils.setPrivateField(SmallSkillsList, "MAX_RENDER_SKILLS", Config.config.hangar.crewMaxPerksCount + 1);
-            
+
 			super.updateSkills(data);
             skills.width = (skills.columnWidth + skills.paddingRight) * skills.dataProvider.length;
 			

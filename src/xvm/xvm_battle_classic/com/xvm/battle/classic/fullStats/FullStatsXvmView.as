@@ -40,7 +40,7 @@ package com.xvm.battle.classic.fullStats
         {
             var fullStats:DisplayObject = page.fullStats as DisplayObject;
             var idx:int = page.getChildIndex(fullStats);
-            
+
 			var bsdController:BattleStatisticDataController = XfwUtils.getPrivateField(page, 'xfw_battleStatisticDataController');
 			var qpw:Vector.<IQuestProgressViewUpdatable> = XfwUtils.getPrivateField(bsdController, 'xfw_questProgressViews');
 			var cController:Vector.<IBattleComponentDataController> = XfwUtils.getPrivateField(bsdController, 'xfw_componentControllers');

@@ -27,7 +27,7 @@ package com.xvm.battle.classic.fullStats
         {
 			var table:FullStatsTable = XfwUtils.getPrivateField(this, "xfw_table");
             var index:int = col * StatsTableItemBase.NUM_ITEM_ROWS + row;
-            
+
 			return new DynamicSquadCtrlXvm(
                 col == 0,
                 table.squadStatusCollection[index],

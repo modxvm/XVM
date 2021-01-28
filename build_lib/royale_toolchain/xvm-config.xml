@@ -33,7 +33,7 @@
       <targets>
           <target>SWF</target>
       </targets>
-    
+
       <define>
         <name>COMPILE::SWF</name>
         <value>AUTO</value>
@@ -84,14 +84,14 @@
 
          <path-element>libs/adobe_flexsdk/core.swc</path-element>
          <path-element>libs/adobe_libs/flash.swc</path-element>
-         <path-element>libs/adobe_tlfconversion/textLayout.swc</path-element>  
+         <path-element>libs/adobe_tlfconversion/textLayout.swc</path-element>
 
          <path-element>libs/greensock/greensock.swc</path-element>
 
       </library-path>
 
       <allow-subclass-overrides>true</allow-subclass-overrides>
-      
+
       <mxml>
           <children-as-data>true</children-as-data>
       </mxml>
@@ -212,7 +212,7 @@
           -->
 
       </fonts>
-      
+
       <!-- Array.toString() format has changed. -->
       <warn-array-tostring-changes>false</warn-array-tostring-changes>
 
@@ -358,5 +358,5 @@
       <creator>XVM Team</creator>
       <language>EN</language>
    </metadata>
-   
+
 </royale-config>

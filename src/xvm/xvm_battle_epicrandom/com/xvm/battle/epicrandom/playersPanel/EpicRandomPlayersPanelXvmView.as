@@ -40,7 +40,7 @@ package com.xvm.battle.epicrandom.playersPanel
 			var bsdController:BattleStatisticDataController = XfwUtils.getPrivateField(page, 'xfw_battleStatisticDataController')
 			var cController:Vector.<IBattleComponentDataController> = XfwUtils.getPrivateField(bsdController, 'xfw_componentControllers');
 			cController.splice(cController.indexOf(page.epicRandomPlayersPanel), 1);
-            
+
             var idx:int = page.getChildIndex(page.epicRandomPlayersPanel);
             page.removeChild(page.epicRandomPlayersPanel);
             var component:UI_EpicRandomPlayersPanel = new UI_EpicRandomPlayersPanel();

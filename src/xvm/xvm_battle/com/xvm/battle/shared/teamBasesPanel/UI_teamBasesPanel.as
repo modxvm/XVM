@@ -100,7 +100,7 @@ package com.xvm.battle.shared.teamBasesPanel
                 else
                 {
 					XfwUtils.setPrivateField(Linkages, "CAPTURE_BAR_LINKAGE", DEFAULT_CAPTURE_BAR_LINKAGE);
-                    
+
 					y = DEFAULT_Y;
 					
 					XfwUtils.setPrivateField(TeamBasesPanel, "xfw_RENDERER_HEIGHT", DEFAULT_RENDERER_LENGTH);

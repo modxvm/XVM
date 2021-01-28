@@ -39,7 +39,7 @@ package com.xvm.battle.classic.playersPanel
 			var bsdController:BattleStatisticDataController = XfwUtils.getPrivateField(page, 'xfw_battleStatisticDataController')
 			var cController:Vector.<IBattleComponentDataController> = XfwUtils.getPrivateField(bsdController, 'xfw_componentControllers');
 			cController.splice(cController.indexOf(page.playersPanel), 1);
-            
+
 			var idx:int = page.getChildIndex(page.playersPanel);
             page.removeChild(page.playersPanel);
             var component:UI_PlayersPanel = new UI_PlayersPanel();
