@@ -91,10 +91,10 @@ package com.xvm.battle.classic.playersPanel
         override protected function configUI():void
         {
             super.configUI();
-            listLeft.removeEventListener(MouseEvent.ROLL_OVER, XfwUtils.getPrivateField(this,'xfw_onListRollOverHandler'));
-            listLeft.removeEventListener(MouseEvent.ROLL_OUT, XfwUtils.getPrivateField(this,'xfw_onListRollOutHandler'));
+            listLeft.removeEventListener(MouseEvent.ROLL_OVER, XfwUtils.getPrivateField(this, 'xfw_onListRollOverHandler'));
+            listLeft.removeEventListener(MouseEvent.ROLL_OUT, XfwUtils.getPrivateField(this, 'xfw_onListRollOutHandler'));
 
-            listRight.removeEventListener(MouseEvent.ROLL_OVER, XfwUtils.getPrivateField(this,'xfw_onListRollOverHandler'));
+            listRight.removeEventListener(MouseEvent.ROLL_OVER, XfwUtils.getPrivateField(this, 'xfw_onListRollOverHandler'));
             listRight.removeEventListener(MouseEvent.ROLL_OUT, XfwUtils.getPrivateField(this, 'xfw_onListRollOutHandler'));
 
             listLeft.addEventListener(MouseEvent.ROLL_OVER, onListRollOverHandler, false, 0, true);
@@ -270,11 +270,11 @@ package com.xvm.battle.classic.playersPanel
                         var isInExpandArea:Boolean = (e.stageX < mopt_expandAreaWidth) || (e.stageX > App.appWidth - mopt_expandAreaWidth);
                         if (isInExpandArea)
                         {
-                            XfwUtils.getPrivateField(this,"xfw_onListRollOverHandler")(e);
+                            XfwUtils.getPrivateField(this, "xfw_onListRollOverHandler")(e);
                         }
                         else
                         {
-                            XfwUtils.getPrivateField(this,"xfw_onListRollOutHandler")(e);
+                            XfwUtils.getPrivateField(this, "xfw_onListRollOutHandler")(e);
                         }
                     }
                 }

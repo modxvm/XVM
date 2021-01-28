@@ -73,7 +73,7 @@ package com.xvm.battle.shared.minimap
 
             // restore event handlers setted up in the BaseBattlePage.configUI()
             component.addEventListener(MinimapEvent.TRY_SIZE_CHANGED, onMiniMapTrySizeChangeHandler, false, 0, true);
-            component.addEventListener(MinimapEvent.SIZE_CHANGED, XfwUtils.getPrivateField(page,"xfw_onMiniMapChangeHandler"), false, 0, true);
+            component.addEventListener(MinimapEvent.SIZE_CHANGED, XfwUtils.getPrivateField(page, "xfw_onMiniMapChangeHandler"), false, 0, true);
             component.addEventListener(MinimapEvent.VISIBILITY_CHANGED, XfwUtils.getPrivateField(page, "xfw_onMiniMapChangeHandler"), false, 0, true);
         }
 

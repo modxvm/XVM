@@ -49,7 +49,7 @@ package com.xvm.battle.classic.battleloading
             page.battleLoading = component;
             page.addChildAt(page.battleLoading, idx);
             bsdc.registerComponentController(page.battleLoading);
-            XfwUtils.getPrivateField(page,'xfw_registerComponent')(page.battleLoading, BATTLE_VIEW_ALIASES.BATTLE_LOADING);
+            XfwUtils.getPrivateField(page, 'xfw_registerComponent')(page.battleLoading, BATTLE_VIEW_ALIASES.BATTLE_LOADING);
         }
     }
 }

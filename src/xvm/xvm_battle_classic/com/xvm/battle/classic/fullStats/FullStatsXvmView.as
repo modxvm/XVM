@@ -58,7 +58,7 @@ package com.xvm.battle.classic.fullStats
             page.fullStats = component;
             page.addChildAt(component, idx);
             bsdController.registerComponentController(page.fullStats);
-            XfwUtils.getPrivateField(page,'xfw_registerComponent')(page.fullStats, BATTLE_VIEW_ALIASES.FULL_STATS);
+            XfwUtils.getPrivateField(page, 'xfw_registerComponent')(page.fullStats, BATTLE_VIEW_ALIASES.FULL_STATS);
         }
     }
 }

@@ -58,7 +58,7 @@ package com.xvm.lobby.ui.contacts
 
                 super.draw();
 
-                if (XfwUtils.getPrivateField(this,"xfw_currentContentItem") is ContactItem)
+                if (XfwUtils.getPrivateField(this, "xfw_currentContentItem") is ContactItem)
                 {
                     var d:ContactsListTreeItemInfo = data as ContactsListTreeItemInfo;
                     if (d != null)
