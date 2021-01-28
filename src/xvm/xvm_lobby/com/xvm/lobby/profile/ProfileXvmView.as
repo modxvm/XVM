@@ -7,7 +7,7 @@ package com.xvm.lobby.profile
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-	import net.wg.gui.lobby.profile.LinkageUtils;
+    import net.wg.gui.lobby.profile.LinkageUtils;
     import net.wg.data.*;
     import net.wg.data.constants.*;
     import net.wg.gui.lobby.profile.*;
@@ -39,12 +39,12 @@ package com.xvm.lobby.profile
         {
             super.onBeforePopulate(e);
 
-			var sectionsDataUtil:LinkageUtils = XfwUtils.getPrivateField(tabNavigator, 'xfw_sectionsDataUtil');
+            var sectionsDataUtil:LinkageUtils = XfwUtils.getPrivateField(tabNavigator, 'xfw_sectionsDataUtil');
             sectionsDataUtil.addEntity(Aliases.PROFILE_TECHNIQUE_PAGE, "com.xvm.lobby.ui.profile::UI_ProfileTechniquePage");
             sectionsDataUtil.addEntity(Aliases.PROFILE_TECHNIQUE_WINDOW, "com.xvm.lobby.ui.profile::UI_ProfileTechniqueWindow");
             if (Config.networkServicesSettings.statAwards)
             {
-				XfwUtils.setPrivateField(Linkages, "TECHNIQUE_STATISTIC_TAB", "com.xvm.lobby.ui.profile::UI_TechniqueStatisticTab");
+                XfwUtils.setPrivateField(Linkages, "TECHNIQUE_STATISTIC_TAB", "com.xvm.lobby.ui.profile::UI_TechniqueStatisticTab");
             }
         }
     }

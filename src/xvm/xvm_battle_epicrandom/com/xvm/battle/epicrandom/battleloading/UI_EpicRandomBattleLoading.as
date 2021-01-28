@@ -129,8 +129,8 @@ package com.xvm.battle.epicrandom.battleloading
             var newAtlas:String = Macros.FormatStringGlobal(cfgAtlas);
             if (currentAtlas != newAtlas)
             {
-				var atlasMgr:AtlasManager = App.atlasMgr as AtlasManager;
-				
+                var atlasMgr:AtlasManager = App.atlasMgr as AtlasManager;
+
                 var atlas:Atlas = XfwUtils.getPrivateField(atlasMgr, 'xfw_getAtlas')(newAtlas) as Atlas;
                 if (atlas == null)
                 {

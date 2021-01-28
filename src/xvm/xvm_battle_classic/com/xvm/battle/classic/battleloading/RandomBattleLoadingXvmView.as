@@ -10,9 +10,8 @@ package com.xvm.battle.classic.battleloading
     import net.wg.gui.battle.random.views.BattlePage;
     import net.wg.infrastructure.events.LifeCycleEvent;
     import net.wg.infrastructure.interfaces.IView;
-	import net.wg.infrastructure.helpers.statisticsDataController.BattleStatisticDataController;
-	import net.wg.infrastructure.helpers.statisticsDataController.intarfaces.IBattleComponentDataController;
-
+    import net.wg.infrastructure.helpers.statisticsDataController.BattleStatisticDataController;
+    import net.wg.infrastructure.helpers.statisticsDataController.intarfaces.IBattleComponentDataController;
 
     public class RandomBattleLoadingXvmView extends XvmViewBase
     {
@@ -37,9 +36,9 @@ package com.xvm.battle.classic.battleloading
         private function init():void
         {
             page.unregisterComponent(BATTLE_VIEW_ALIASES.BATTLE_LOADING);
-			var bsdc:BattleStatisticDataController = XfwUtils.getPrivateField(page, 'xfw_battleStatisticDataController');
-			var cc:Vector.<IBattleComponentDataController> =XfwUtils.getPrivateField(bsdc, 'xfw_componentControllers');
-			
+            var bsdc:BattleStatisticDataController = XfwUtils.getPrivateField(page, 'xfw_battleStatisticDataController');
+            var cc:Vector.<IBattleComponentDataController> =XfwUtils.getPrivateField(bsdc, 'xfw_componentControllers');
+
             cc.splice(cc.indexOf(page.battleLoading), 1);
             var idx:int = page.getChildIndex(page.battleLoading);
             page.removeChild(page.battleLoading);
@@ -50,7 +49,7 @@ package com.xvm.battle.classic.battleloading
             page.battleLoading = component;
             page.addChildAt(page.battleLoading, idx);
             bsdc.registerComponentController(page.battleLoading);
-            XfwUtils.getPrivateField(page,'xfw_registerComponent')(page.battleLoading, BATTLE_VIEW_ALIASES.BATTLE_LOADING);
+            XfwUtils.getPrivateField(page, 'xfw_registerComponent')(page.battleLoading, BATTLE_VIEW_ALIASES.BATTLE_LOADING);
         }
     }
 }

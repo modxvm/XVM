@@ -119,9 +119,9 @@ package com.xvm.lobby.ui.profile
                         var vdossier:VehicleDossier = Dossier.getVehicleDossier(data.id, tech.accountDBID);
                         if (vdossier)
                         {
-							xte = vdossier.xte;				
-							XfwUtils.setPrivateField(data, "xvm_xte", vdossier.xte);
-							XfwUtils.setPrivateField(data, "xvm_xte_flag", XfwUtils.getPrivateField(data, "xvm_xte_flag") & ~0x01);
+                            xte = vdossier.xte;
+                            XfwUtils.setPrivateField(data, "xvm_xte", vdossier.xte);
+                            XfwUtils.setPrivateField(data, "xvm_xte_flag", XfwUtils.getPrivateField(data, "xvm_xte_flag") & ~0x01);
                         }
                     }
 

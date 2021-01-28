@@ -316,7 +316,7 @@ detect_python(){
     fi
 
     #*nix and fallback
-    if [[ "$XVMBUILD_PYTHON_FILEPATH" == "" ]]; then       
+    if [[ "$XVMBUILD_PYTHON_FILEPATH" == "" ]]; then
         if hash "python2.7" 2>/dev/null; then
             export XVMBUILD_PYTHON_FILEPATH="python2.7" #Installed by cygwin or *nix
         elif hash "python2" 2>/dev/null; then

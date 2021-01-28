@@ -10,7 +10,7 @@ package com.xvm.battle.classic.playersPanel
     import net.wg.infrastructure.interfaces.*;
     import net.wg.data.constants.generated.*;
     import net.wg.gui.battle.random.views.*;
-	import net.wg.infrastructure.helpers.statisticsDataController.BattleStatisticDataController;
+    import net.wg.infrastructure.helpers.statisticsDataController.BattleStatisticDataController;
     import net.wg.infrastructure.helpers.statisticsDataController.intarfaces.IBattleComponentDataController;
 
     public class PlayersPanelXvmView extends XvmViewBase
@@ -36,11 +36,11 @@ package com.xvm.battle.classic.playersPanel
         private function init():void
         {
             page.unregisterComponent(BATTLE_VIEW_ALIASES.PLAYERS_PANEL);
-			var bsdController:BattleStatisticDataController = XfwUtils.getPrivateField(page, 'xfw_battleStatisticDataController')
-			var cController:Vector.<IBattleComponentDataController> = XfwUtils.getPrivateField(bsdController, 'xfw_componentControllers');
-			cController.splice(cController.indexOf(page.playersPanel), 1);
-            
-			var idx:int = page.getChildIndex(page.playersPanel);
+            var bsdController:BattleStatisticDataController = XfwUtils.getPrivateField(page, 'xfw_battleStatisticDataController')
+            var cController:Vector.<IBattleComponentDataController> = XfwUtils.getPrivateField(bsdController, 'xfw_componentControllers');
+            cController.splice(cController.indexOf(page.playersPanel), 1);
+
+            var idx:int = page.getChildIndex(page.playersPanel);
             page.removeChild(page.playersPanel);
             var component:UI_PlayersPanel = new UI_PlayersPanel();
             component.x = page.playersPanel.x;

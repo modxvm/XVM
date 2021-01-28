@@ -5,10 +5,9 @@
 package com.xvm.lobby.ui.crew
 {
     import net.wg.gui.lobby.components.SmallSkillsList;
-	import net.wg.gui.lobby.components.data.BaseTankmanVO;
-
-	import com.xfw.XfwUtils;
-    import com.xvm.Config;	
+    import net.wg.gui.lobby.components.data.BaseTankmanVO;
+    import com.xfw.XfwUtils;
+    import com.xvm.Config;
 
     public class UI_SmallSkillsList extends SmallSkillsListUI
     {
@@ -19,12 +18,12 @@ package com.xvm.lobby.ui.crew
 
         override public function updateSkills(data:BaseTankmanVO):void
         {
-			XfwUtils.setPrivateField(SmallSkillsList, "MAX_RENDER_SKILLS", Config.config.hangar.crewMaxPerksCount + 1);
-            
-			super.updateSkills(data);
+            XfwUtils.setPrivateField(SmallSkillsList, "MAX_RENDER_SKILLS", Config.config.hangar.crewMaxPerksCount + 1);
+
+            super.updateSkills(data);
             skills.width = (skills.columnWidth + skills.paddingRight) * skills.dataProvider.length;
-			
-			XfwUtils.setPrivateField(SmallSkillsList, "MAX_RENDER_SKILLS", 5);
+
+            XfwUtils.setPrivateField(SmallSkillsList, "MAX_RENDER_SKILLS", 5);
         }
     }
 }

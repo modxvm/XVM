@@ -63,7 +63,7 @@ package com.xvm.lobby.ui.contacts
 
         public function as_setUserProps_xvm(value:Object):void
         {
-			Logger.add("UI_EditContactDataView::as_setUserProps_xvm");
+            Logger.add("UI_EditContactDataView::as_setUserProps_xvm");
 
             var xvm_contact_data:Object = value.xvm_contact_data;
             delete value.xvm_contact_data;

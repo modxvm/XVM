@@ -168,26 +168,26 @@ package com.xfw
 
             return result;
         }
-		
-		public static function setPrivateField(obj:*, field:String, val:*): Boolean
+
+        public static function setPrivateField(obj:*, field:String, val:*): Boolean
         {
             var result:* = null;
             if (obj == null) {
                 Logger.add("XfwUtils::setPrivateField -> input object is null, field=" + field);
-				return false;
+                return false;
             }
 
-			try{
-				obj[field] = val;
-			}
-			catch (ex:Error)
-            {
-				Logger.add("XfwUtils::setPrivateField -> " + flash.utils.getQualifiedClassName(obj) + ", " + field + " -- FAILED");
-                Logger.err(ex);
-				return false;
+            try{
+                obj[field] = val;
             }
-			
-			return true;
+            catch (ex:Error)
+            {
+                Logger.add("XfwUtils::setPrivateField -> " + flash.utils.getQualifiedClassName(obj) + ", " + field + " -- FAILED");
+                Logger.err(ex);
+                return false;
+            }
+
+            return true;
         }
 
         /**

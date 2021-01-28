@@ -145,7 +145,7 @@ package com.xvm.battle.shared.minimap.entries.vehicle
 
         private function updateVehicleIcon(playerState:VOPlayerState):void
         {
-			var currVehAnimation:VehicleAnimationMinimapEntry = XfwUtils.getPrivateField(this, "xfw_currVehicleAnimation");
+            var currVehAnimation:VehicleAnimationMinimapEntry = XfwUtils.getPrivateField(this, "xfw_currVehicleAnimation");
             currVehAnimation.alpha = Macros.FormatNumber(UI_Minimap.cfg.iconAlpha, playerState, 100) / 100.0;
             var iconScale:Number = Macros.FormatNumber(UI_Minimap.cfg.iconScale, playerState, 1);
             if (currVehAnimation != deadAnimation)

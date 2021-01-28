@@ -48,7 +48,7 @@ package com.xvm.battle.classic.teamBasesPanel
 
             XfwUtils.getPrivateField(battlePage, 'xfw_registerComponent')(battlePage.teamBasesPanelUI, BATTLE_VIEW_ALIASES.TEAM_BASES_PANEL);
 
-            component.addEventListener(Event.CHANGE, XfwUtils.getPrivateField(battlePage,"xfw_onTeamBasesPanelUIChangeHandler"));
+            component.addEventListener(Event.CHANGE, XfwUtils.getPrivateField(battlePage, "xfw_onTeamBasesPanelUIChangeHandler"));
         }
     }
 }
