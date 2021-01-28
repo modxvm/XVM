@@ -22,12 +22,12 @@
 
 <royale-config>
     <!-- Specifies the minimum player version that will run the compiled SWF. -->
-   <target-player>@playerversion@</target-player>
+    <target-player>@playerversion@</target-player>
 
     <!-- Specifies the version of the compiled SWF -->
-   <swf-version>@swfversion@</swf-version>
+    <swf-version>@swfversion@</swf-version>
 
-   <compiler>
+    <compiler>
 
       <!-- build both SWF and JS. -->
       <targets>
@@ -74,19 +74,19 @@
       <!-- not set -->
       <!--
       <include-libraries>
-         <library>string</library>
+          <library>string</library>
       </include-libraries>
       -->
 
       <!-- List of SWC files or directories that contain SWC files. -->
       <library-path>
-         <path-element>{playerglobalHome}/{targetPlayerMajorVersion}.{targetPlayerMinorVersion}</path-element>
+          <path-element>{playerglobalHome}/{targetPlayerMajorVersion}.{targetPlayerMinorVersion}</path-element>
 
-         <path-element>libs/adobe_flexsdk/core.swc</path-element>
-         <path-element>libs/adobe_libs/flash.swc</path-element>
-         <path-element>libs/adobe_tlfconversion/textLayout.swc</path-element>
+          <path-element>libs/adobe_flexsdk/core.swc</path-element>
+          <path-element>libs/adobe_libs/flash.swc</path-element>
+          <path-element>libs/adobe_tlfconversion/textLayout.swc</path-element>
 
-         <path-element>libs/greensock/greensock.swc</path-element>
+          <path-element>libs/greensock/greensock.swc</path-element>
 
       </library-path>
 
@@ -326,37 +326,37 @@
       <!-- Possible usage of the ActionScript 2.0 XML class. -->
       <warn-xml-class-has-changed>false</warn-xml-class-has-changed>
 
-   </compiler>
+    </compiler>
 
-   <!-- compute-digest: writes a digest to the catalog.xml of a library. Use this when the library will be used as a
-                        cross-domain rsl.-->
-   <!-- compute-digest usage:
-   <compute-digest>boolean</compute-digest>
-   -->
+    <!-- compute-digest: writes a digest to the catalog.xml of a library. Use this when the library will be used as a
+                         cross-domain rsl.-->
+    <!-- compute-digest usage:
+    <compute-digest>boolean</compute-digest>
+    -->
 
-   <!-- remove-unused-rsls: remove RSLs that are not being used by the application-->
-   <remove-unused-rsls>true</remove-unused-rsls>
+    <!-- remove-unused-rsls: remove RSLs that are not being used by the application-->
+    <remove-unused-rsls>true</remove-unused-rsls>
 
-	<!-- static-link-runtime-shared-libraries: statically link the libraries specified by the -runtime-shared-libraries-path option.-->
-	<static-link-runtime-shared-libraries>true</static-link-runtime-shared-libraries>
+    <!-- static-link-runtime-shared-libraries: statically link the libraries specified by the -runtime-shared-libraries-path option.-->
+    <static-link-runtime-shared-libraries>true</static-link-runtime-shared-libraries>
 
-   <!-- target-player: specifies the version of the player the application is targeting.
-                       Features requiring a later version will not be compiled into the application.
-                       The minimum value supported is "9.0.0".-->
-   <!-- target-player usage:
-   <target-player>version</target-player>
-   -->
+    <!-- target-player: specifies the version of the player the application is targeting.
+                        Features requiring a later version will not be compiled into the application.
+                        The minimum value supported is "9.0.0".-->
+    <!-- target-player usage:
+    <target-player>version</target-player>
+    -->
 
-   <!-- Enables SWFs to access the network. -->
-   <use-network>true</use-network>
+    <!-- Enables SWFs to access the network. -->
+    <use-network>true</use-network>
 
-   <!-- Metadata added to SWFs via the SWF Metadata tag. -->
-   <metadata>
+    <!-- Metadata added to SWFs via the SWF Metadata tag. -->
+    <metadata>
       <title>XVM SWF Application</title>
       <description>http://modxvm.com/</description>
       <publisher>XVM Team</publisher>
       <creator>XVM Team</creator>
       <language>EN</language>
-   </metadata>
+    </metadata>
 
 </royale-config>

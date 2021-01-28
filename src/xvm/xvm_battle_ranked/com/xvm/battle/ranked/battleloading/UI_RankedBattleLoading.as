@@ -115,8 +115,8 @@ package com.xvm.battle.ranked.battleloading
             var newAtlas:String = Macros.FormatStringGlobal(cfgAtlas);
             if (currentAtlas != newAtlas)
             {
-				var atlasMgr:AtlasManager = App.atlasMgr as AtlasManager;
-				
+                var atlasMgr:AtlasManager = App.atlasMgr as AtlasManager;
+
                 var atlas:Atlas = XfwUtils.getPrivateField(atlasMgr, 'xfw_getAtlas')(newAtlas) as Atlas;
                 if (atlas == null)
                 {
@@ -136,11 +136,11 @@ package com.xvm.battle.ranked.battleloading
 
         private function initRenderers():void
         {
-			var allyRenderers:Vector.<IBattleLoadingRenderer> = XfwUtils.getPrivateField(battleLoadingForm, 'xfw_allyRenderers');
-			var enemyRenderers:Vector.<IBattleLoadingRenderer> = XfwUtils.getPrivateField(battleLoadingForm, 'xfw_enemyRenderers');
-			var renderersContainer:BaseRendererContainer = XfwUtils.getPrivateField(battleLoadingForm, 'xfw_renderersContainer');
-			
-			
+            var allyRenderers:Vector.<IBattleLoadingRenderer> = XfwUtils.getPrivateField(battleLoadingForm, 'xfw_allyRenderers');
+            var enemyRenderers:Vector.<IBattleLoadingRenderer> = XfwUtils.getPrivateField(battleLoadingForm, 'xfw_enemyRenderers');
+            var renderersContainer:BaseRendererContainer = XfwUtils.getPrivateField(battleLoadingForm, 'xfw_renderersContainer');
+
+
             var renderer:BasePlayerItemRenderer;
             for each(renderer in allyRenderers)
             {

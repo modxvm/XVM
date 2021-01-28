@@ -66,9 +66,9 @@ package com.xvm.battle.ranked.playersPanel
         {
             //Logger.add("UI_RankedPlayersPanel()");
             super();
-			
-			XfwUtils.setPrivateField(PlayersPanelListLeft, "LINKAGE", XVM_PLAYERS_PANEL_LIST_ITEM_LEFT_LINKAGE);
-			XfwUtils.setPrivateField(PlayersPanelListRight, "LINKAGE", XVM_PLAYERS_PANEL_LIST_ITEM_RIGHT_LINKAGE);
+
+            XfwUtils.setPrivateField(PlayersPanelListLeft, "LINKAGE", XVM_PLAYERS_PANEL_LIST_ITEM_LEFT_LINKAGE);
+            XfwUtils.setPrivateField(PlayersPanelListRight, "LINKAGE", XVM_PLAYERS_PANEL_LIST_ITEM_RIGHT_LINKAGE);
 
             registerPlayersPanelMacros();
 
@@ -80,7 +80,7 @@ package com.xvm.battle.ranked.playersPanel
         override protected function configUI():void
         {
             super.configUI();
-			listLeft.removeEventListener(MouseEvent.ROLL_OVER, XfwUtils.getPrivateField(this,'xfw_onListRollOverHandler'));
+            listLeft.removeEventListener(MouseEvent.ROLL_OVER, XfwUtils.getPrivateField(this,'xfw_onListRollOverHandler'));
             listLeft.removeEventListener(MouseEvent.ROLL_OUT, XfwUtils.getPrivateField(this,'xfw_onListRollOutHandler'));
 
             listRight.removeEventListener(MouseEvent.ROLL_OVER, XfwUtils.getPrivateField(this,'xfw_onListRollOverHandler'));

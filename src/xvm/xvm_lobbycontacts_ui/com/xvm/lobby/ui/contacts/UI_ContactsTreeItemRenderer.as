@@ -43,7 +43,7 @@ package com.xvm.lobby.ui.contacts
                         {
                             if (myData.data)
                             {
-								var contactItem:UI_ContactItem = XfwUtils.getPrivateField(this, "xfw_contactItem");
+                                var contactItem:UI_ContactItem = XfwUtils.getPrivateField(this, "xfw_contactItem");
                                 if (contactItem == null)
                                 {
                                     contactItem = new UI_ContactItem();

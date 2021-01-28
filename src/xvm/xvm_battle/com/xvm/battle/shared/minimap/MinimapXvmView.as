@@ -14,7 +14,7 @@ package com.xvm.battle.shared.minimap
     import net.wg.gui.battle.views.*;
     import net.wg.gui.battle.views.minimap.*;
     import net.wg.gui.battle.views.minimap.components.entries.interfaces.IVehicleMinimapEntry;
-	import net.wg.gui.battle.views.minimap.events.*;
+    import net.wg.gui.battle.views.minimap.events.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
 
@@ -41,24 +41,24 @@ package com.xvm.battle.shared.minimap
         private function init():void
         {
             page.unregisterComponent(BATTLE_VIEW_ALIASES.MINIMAP);
-			
-			var minimapEntryController:MinimapEntryController = MinimapEntryController.instance;
-			
-			var scalableEntries:Vector.<DisplayObject> = XfwUtils.getPrivateField(minimapEntryController, "xfw_scalableEntries");
+
+            var minimapEntryController:MinimapEntryController = MinimapEntryController.instance;
+
+            var scalableEntries:Vector.<DisplayObject> = XfwUtils.getPrivateField(minimapEntryController, "xfw_scalableEntries");
             while (scalableEntries.length)
             {
                 minimapEntryController.unregisterScalableEntry(scalableEntries[0], true);
             }
-			
-			var vehicleEntries:Vector.<IVehicleMinimapEntry> = XfwUtils.getPrivateField(minimapEntryController, "xfw_vehicleEntries");
+
+            var vehicleEntries:Vector.<IVehicleMinimapEntry> = XfwUtils.getPrivateField(minimapEntryController, "xfw_vehicleEntries");
             while (vehicleEntries.length)
             {
                 minimapEntryController.unregisterVehicleEntry(vehicleEntries[0]);
             }
-			
-			var vehicleLabelEntries:Vector.<IVehicleMinimapEntry> = XfwUtils.getPrivateField(minimapEntryController, "xfw_vehicleLabelsEntries");
+
+            var vehicleLabelEntries:Vector.<IVehicleMinimapEntry> = XfwUtils.getPrivateField(minimapEntryController, "xfw_vehicleLabelsEntries");
             vehicleLabelEntries.splice(0, vehicleLabelEntries.length);
-			
+
             var idx:int = page.getChildIndex(page.minimap);
             page.removeChild(page.minimap);
             var component:UI_Minimap = new UI_Minimap();
@@ -69,7 +69,7 @@ package com.xvm.battle.shared.minimap
             page.addChildAt(page.minimap, idx);
             //page.minimap.validateNow(); // TODO: remove? brokes initial size restoring
 
-			XfwUtils.getPrivateField(page, 'xfw_registerComponent')(page.minimap, BATTLE_VIEW_ALIASES.MINIMAP);
+            XfwUtils.getPrivateField(page, 'xfw_registerComponent')(page.minimap, BATTLE_VIEW_ALIASES.MINIMAP);
 
             // restore event handlers setted up in the BaseBattlePage.configUI()
             component.addEventListener(MinimapEvent.TRY_SIZE_CHANGED, onMiniMapTrySizeChangeHandler, false, 0, true);
@@ -85,7 +85,7 @@ package com.xvm.battle.shared.minimap
             }
             else
             {
-				XfwUtils.getPrivateField(page, 'xfw_onMiniMapTrySizeChangeHandler')(e);
+                XfwUtils.getPrivateField(page, 'xfw_onMiniMapTrySizeChangeHandler')(e);
             }
         }
     }

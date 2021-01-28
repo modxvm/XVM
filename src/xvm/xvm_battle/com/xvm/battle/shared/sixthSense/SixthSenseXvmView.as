@@ -67,7 +67,7 @@ package com.xvm.battle.shared.sixthSense
                 battlePageSixthSense = customSixthSense;
                 battlePage.addChildAt(battlePageSixthSense, currentIndex);
 
-				XfwUtils.getPrivateField(battlePage, 'xfw_registerComponent')(battlePageSixthSense, BATTLE_VIEW_ALIASES.SIXTH_SENSE);
+                XfwUtils.getPrivateField(battlePage, 'xfw_registerComponent')(battlePageSixthSense, BATTLE_VIEW_ALIASES.SIXTH_SENSE);
             }
             else
             {

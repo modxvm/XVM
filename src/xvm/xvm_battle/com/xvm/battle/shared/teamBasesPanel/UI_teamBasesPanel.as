@@ -4,21 +4,18 @@
  */
 package com.xvm.battle.shared.teamBasesPanel
 {
-	import flash.utils.getQualifiedClassName;
-	import net.wg.gui.battle.random.views.teamBasesPanel.TeamBasesPanel;
-
-	import net.wg.data.constants.Linkages;
-	
-	import com.xfw.Logger;
-	import com.xfw.Xfw;
+    import flash.utils.getQualifiedClassName;
+    import net.wg.gui.battle.random.views.teamBasesPanel.TeamBasesPanel;
+    import net.wg.data.constants.Linkages;
+    import com.xfw.Logger;
+    import com.xfw.Xfw;
     import com.xfw.XfwUtils;
     import com.xfw.events.BooleanEvent;
-
-	import com.xvm.Config;
+    import com.xvm.Config;
     import com.xvm.Defines;
-	import com.xvm.Macros;
-	import com.xvm.Xvm;
-	import com.xvm.XvmCommands;
+    import com.xvm.Macros;
+    import com.xvm.Xvm;
+    import com.xvm.XvmCommands;
     import com.xvm.battle.BattleEvents;
 
     // TODO:1.10.0
@@ -26,7 +23,7 @@ package com.xvm.battle.shared.teamBasesPanel
 
     public class UI_teamBasesPanel extends teamBasesPanelUI
     {
-		private var DEFAULT_RENDERER_LENGTH:Number = 0;
+        private var DEFAULT_RENDERER_LENGTH:Number = 0;
         private var DEFAULT_CAPTURE_BAR_LINKAGE:String = Linkages.CAPTURE_BAR_LINKAGE;
         private var XVM_CAPTURE_BAR_LINKAGE:String = getQualifiedClassName(UI_TeamCaptureBar);
         private var DEFAULT_Y:Number;
@@ -35,9 +32,9 @@ package com.xvm.battle.shared.teamBasesPanel
         {
             //Logger.add("UI_teamBasesPanel()");
             super();
-			
-			DEFAULT_RENDERER_LENGTH = XfwUtils.getPrivateField(TeamBasesPanel, "xfw_RENDERER_HEIGHT");
-			
+
+            DEFAULT_RENDERER_LENGTH = XfwUtils.getPrivateField(TeamBasesPanel, "xfw_RENDERER_HEIGHT");
+
             // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
             _init();
         }
@@ -88,22 +85,22 @@ package com.xvm.battle.shared.teamBasesPanel
         {
             //Xvm.swfProfilerBegin("UI_teamBasesPanel.update()");
             try
-            {				
+            {
                 if (Macros.FormatBooleanGlobal(Config.config.captureBar.enabled, true))
                 {
-					XfwUtils.setPrivateField(Linkages, "CAPTURE_BAR_LINKAGE", XVM_CAPTURE_BAR_LINKAGE);
+                    XfwUtils.setPrivateField(Linkages, "CAPTURE_BAR_LINKAGE", XVM_CAPTURE_BAR_LINKAGE);
 
                     y = Macros.FormatNumberGlobal(Config.config.captureBar.y, DEFAULT_Y);
 
-					XfwUtils.setPrivateField(TeamBasesPanel, "xfw_RENDERER_HEIGHT", Macros.FormatNumberGlobal(Config.config.captureBar.distanceOffset, 0) + DEFAULT_RENDERER_LENGTH);
+                    XfwUtils.setPrivateField(TeamBasesPanel, "xfw_RENDERER_HEIGHT", Macros.FormatNumberGlobal(Config.config.captureBar.distanceOffset, 0) + DEFAULT_RENDERER_LENGTH);
                 }
                 else
                 {
-					XfwUtils.setPrivateField(Linkages, "CAPTURE_BAR_LINKAGE", DEFAULT_CAPTURE_BAR_LINKAGE);
+                    XfwUtils.setPrivateField(Linkages, "CAPTURE_BAR_LINKAGE", DEFAULT_CAPTURE_BAR_LINKAGE);
 
-					y = DEFAULT_Y;
-					
-					XfwUtils.setPrivateField(TeamBasesPanel, "xfw_RENDERER_HEIGHT", DEFAULT_RENDERER_LENGTH);
+                    y = DEFAULT_Y;
+
+                    XfwUtils.setPrivateField(TeamBasesPanel, "xfw_RENDERER_HEIGHT", DEFAULT_RENDERER_LENGTH);
                 }
 
                 // TODO: The game crashes on replay of EpicRandom when xfw_updatePositions() is called
