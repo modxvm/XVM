@@ -2,6 +2,14 @@
 
   #### General
 
+  * Compatibility with World of Tanks 1.11.1.1
+
+______________________________
+
+### XVM 8.7.2
+
+  #### General
+
   * Compatibility with World of Tanks 1.11.1.0
 
   #### Battle
