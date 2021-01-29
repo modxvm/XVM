@@ -222,7 +222,7 @@ class DataHitLog(object):
         self.splashHit = False
 
     def setRatings(self):
-        if (_stat.resp is not None) and (self.data['name'] in _stat.resp['players']):
+        if (_stat.resp is not None) and ('players' in _stat.resp) and (self.data['name'] in _stat.resp['players']):
             stats = _stat.resp['players'][self.data['name']]
             self.data['wn8'] = stats.get('wn8', None)
             self.data['xwn8'] = stats.get('xwn8', None)

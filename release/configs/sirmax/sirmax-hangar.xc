@@ -20,7 +20,6 @@
     }
   },
   "login": {
-    "saveLastServer": true,
     "autologin": true,
     "confirmOldReplays": true,
     //"disabledServers": ["RU10"],
