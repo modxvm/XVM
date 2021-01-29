@@ -152,6 +152,44 @@ package com.xfw
             return o == null ? null : XfwUtils.jsonclone(o);
         }
 
+        public static function getPrivateField(obj:*, field:String):*
+        {
+            var result:* = null;
+            if (obj == null) {
+                Logger.add("XfwUtils::getPrivateField -> input object is null, field=" + field);
+                return result;
+            }
+
+            result = obj[field];
+
+            if (result === undefined){
+                Logger.add("XfwUtils::getPrivateField -> " + flash.utils.getQualifiedClassName(obj) + ", " + field + " -- FAILED");
+            }
+
+            return result;
+        }
+
+        public static function setPrivateField(obj:*, field:String, val:*): Boolean
+        {
+            var result:* = null;
+            if (obj == null) {
+                Logger.add("XfwUtils::setPrivateField -> input object is null, field=" + field);
+                return false;
+            }
+
+            try{
+                obj[field] = val;
+            }
+            catch (ex:Error)
+            {
+                Logger.add("XfwUtils::setPrivateField -> " + flash.utils.getQualifiedClassName(obj) + ", " + field + " -- FAILED");
+                Logger.err(ex);
+                return false;
+            }
+
+            return true;
+        }
+
         /**
          * Deep copy
          */

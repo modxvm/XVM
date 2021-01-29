@@ -74,7 +74,7 @@ package com.xvm.battle
             _battlePageRef = new WeakReference(super.view);
 
             _battleController = new BattleXvmComponentController();
-            battlePage.xfw_battleStatisticDataController.xfw_componentControllers.unshift(_battleController);
+            XfwUtils.getPrivateField(XfwUtils.getPrivateField(battlePage, "xfw_battleStatisticDataController"), "xfw_componentControllers").unshift(_battleController);
         }
 
         public override function onAfterPopulate(e:LifeCycleEvent):void

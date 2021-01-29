@@ -20,7 +20,9 @@
 set -e
 
 currentdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-source "$currentdir"/../../build_lib/library.sh
+XVMBUILD_ROOT_PATH="$currentdir/../../"
+
+source "$XVMBUILD_ROOT_PATH/build_lib/library.sh"
 
 detect_os
 detect_actionscript_sdk
@@ -29,6 +31,6 @@ class="com.xfw.Xfw"
 build_as3_swc \
     -inline \
     -source-path xfw_shared \
-    -external-library-path+=../../~output/xfw/swc/wg_shared.swc \
+    -external-library-path+=../wg_swc/common-1.0-SNAPSHOT.swc \
     -output ../../~output/xfw/swc/xfw_shared.swc \
     -include-classes $class

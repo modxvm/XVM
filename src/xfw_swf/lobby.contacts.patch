@@ -133,15 +133,3 @@ diff -Naur lobby.orig-0.orig/net/wg/gui/messenger/data/ContactItemVO.class.asasm
    trait slot QName(PackageNamespace(""), "dbID") type QName(PackageNamespace(""), "Number") value Integer(0) end
    trait slot QName(PackageNamespace(""), "note") type QName(PackageNamespace(""), "String") value Utf8("") end
    trait slot QName(PackageNamespace(""), "resource") type QName(PackageNamespace(""), "String") value Utf8("") end
-diff -Naur lobby.orig-0.orig/net/wg/gui/messenger/meta/impl/ContactNoteManageViewMeta.class.asasm lobby.orig-0/net/wg/gui/messenger/meta/impl/ContactNoteManageViewMeta.class.asasm
---- lobby.orig-0.orig/net/wg/gui/messenger/meta/impl/ContactNoteManageViewMeta.class.asasm	2016-11-18 23:06:06.598885800 +0200
-+++ lobby.orig-0/net/wg/gui/messenger/meta/impl/ContactNoteManageViewMeta.class.asasm	2016-11-18 23:07:17.654001500 +0200
-@@ -92,7 +92,7 @@
-     end ; body
-    end ; method
-   end ; trait
--  trait method QName(PackageNamespace(""), "as_setUserProps") flag FINAL
-+  trait method QName(PackageNamespace(""), "as_setUserProps")
-    method
-     refid "net.wg.gui.messenger.meta.impl:ContactNoteManageViewMeta/instance/as_setUserProps"
-     param QName(PackageNamespace(""), "Object")
