@@ -145,17 +145,18 @@ package com.xvm.battle.shared.minimap.entries.vehicle
 
         private function updateVehicleIcon(playerState:VOPlayerState):void
         {
-            xfw_currVehicleAnimation.alpha = Macros.FormatNumber(UI_Minimap.cfg.iconAlpha, playerState, 100) / 100.0;
+            var currVehAnimation:VehicleAnimationMinimapEntry = XfwUtils.getPrivateField(this, "xfw_currVehicleAnimation");
+            currVehAnimation.alpha = Macros.FormatNumber(UI_Minimap.cfg.iconAlpha, playerState, 100) / 100.0;
             var iconScale:Number = Macros.FormatNumber(UI_Minimap.cfg.iconScale, playerState, 1);
-            if (xfw_currVehicleAnimation != deadAnimation)
+            if (currVehAnimation != deadAnimation)
             {
-                if (xfw_currVehicleAnimation != deadPermanentAnimation)
+                if (currVehAnimation != deadPermanentAnimation)
                 {
-                    xfw_currVehicleAnimation.x = -DEFAULT_VEHICLE_ICON_WIDTH * iconScale / 2.0;
-                    xfw_currVehicleAnimation.y = -DEFAULT_VEHICLE_ICON_HEIGHT * iconScale / 2.0;
+                    currVehAnimation.x = -DEFAULT_VEHICLE_ICON_WIDTH * iconScale / 2.0;
+                    currVehAnimation.y = -DEFAULT_VEHICLE_ICON_HEIGHT * iconScale / 2.0;
                 }
             }
-            xfw_currVehicleAnimation.scaleX = xfw_currVehicleAnimation.scaleY = DEFAULT_VEHICLE_ICON_SCALE * iconScale;
+            currVehAnimation.scaleX = currVehAnimation.scaleY = DEFAULT_VEHICLE_ICON_SCALE * iconScale;
         }
 
         private function updateLabels(playerState:VOPlayerState):void

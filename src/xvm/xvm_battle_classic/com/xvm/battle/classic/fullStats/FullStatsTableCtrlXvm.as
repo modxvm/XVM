@@ -4,7 +4,7 @@
  */
 package com.xvm.battle.classic.fullStats
 {
-    import com.xfw.*;
+    import com.xfw.XfwUtils;
     import net.wg.gui.battle.random.views.stats.components.fullStats.*;
     import net.wg.gui.battle.random.views.stats.components.fullStats.tableItem.*;
     import net.wg.gui.battle.views.stats.fullStats.*;
@@ -17,22 +17,25 @@ package com.xvm.battle.classic.fullStats
             super(table, meta);
         }
 
-        override public function createPlayerStatsItem(col:int, row:int):StatsTableItem
+        public function createPlayerStatsItem(col:int, row:int):StatsTableItem
         {
-            return new StatsTableItemXvm(xfw_table, col, row);
+            var table:FullStatsTable = XfwUtils.getPrivateField(this, "xfw_table");
+            return new StatsTableItemXvm(table, col, row);
         }
 
-        override public function createSquadItem(col:int, row:int):DynamicSquadCtrl
+        public function createSquadItem(col:int, row:int):DynamicSquadCtrl
         {
+            var table:FullStatsTable = XfwUtils.getPrivateField(this, "xfw_table");
             var index:int = col * StatsTableItemBase.NUM_ITEM_ROWS + row;
+
             return new DynamicSquadCtrlXvm(
                 col == 0,
-                xfw_table.squadStatusCollection[index],
-                xfw_table.squadCollection[index],
-                xfw_table.squadAcceptBt,
-                xfw_table.squadAddBt,
-                xfw_table.hitCollection[index],
-                xfw_table.noSoundCollection[index]);
+                table.squadStatusCollection[index],
+                table.squadCollection[index],
+                table.squadAcceptBt,
+                table.squadAddBt,
+                table.hitCollection[index],
+                table.noSoundCollection[index]);
         }
     }
 }

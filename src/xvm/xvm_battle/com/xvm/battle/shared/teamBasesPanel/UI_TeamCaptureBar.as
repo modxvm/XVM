@@ -12,6 +12,7 @@ package com.xvm.battle.shared.teamBasesPanel
     import flash.text.*;
     import mx.utils.*;
     import scaleform.gfx.*;
+    import com.xfw.XfwUtils;
 
     public class UI_TeamCaptureBar extends TeamCaptureBarUI
     {
@@ -36,10 +37,10 @@ package com.xvm.battle.shared.teamBasesPanel
         private var m_vehiclesCount:String;
         private var m_timeLeft:String
 
-        EXIT_TWEEN_Y -= HIDE_ICONS_HACK_OFFSET_Y;
-
         public function UI_TeamCaptureBar()
         {
+            XfwUtils.setPrivateField(this, "EXIT_TWEEN_Y", HIDE_ICONS_HACK_OFFSET_Y);
+
             //Logger.add("UI_TeamCaptureBar()");
             super();
 

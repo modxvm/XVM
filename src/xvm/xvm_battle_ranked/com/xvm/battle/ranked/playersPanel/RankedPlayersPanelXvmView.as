@@ -10,6 +10,8 @@ package com.xvm.battle.ranked.playersPanel
     import net.wg.gui.battle.ranked.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
+    import net.wg.infrastructure.helpers.statisticsDataController.BattleStatisticDataController;
+    import net.wg.infrastructure.helpers.statisticsDataController.intarfaces.IBattleComponentDataController;
 
     public class RankedPlayersPanelXvmView extends XvmViewBase
     {
@@ -34,7 +36,11 @@ package com.xvm.battle.ranked.playersPanel
         private function init():void
         {
             page.unregisterComponent(BATTLE_VIEW_ALIASES.PLAYERS_PANEL);
-            page.xfw_battleStatisticDataController.xfw_componentControllers.splice(page.xfw_battleStatisticDataController.xfw_componentControllers.indexOf(page.playersPanel), 1);
+
+            var bsdController:BattleStatisticDataController = XfwUtils.getPrivateField(page, 'xfw_battleStatisticDataController')
+            var cController:Vector.<IBattleComponentDataController> = XfwUtils.getPrivateField(bsdController, 'xfw_componentControllers');
+            cController.splice(cController.indexOf(page.playersPanel), 1);
+
             var idx:int = page.getChildIndex(page.playersPanel);
             page.removeChild(page.playersPanel);
             var component:UI_RankedPlayersPanel = new UI_RankedPlayersPanel();
@@ -43,8 +49,8 @@ package com.xvm.battle.ranked.playersPanel
             component.visible = page.playersPanel.visible;
             page.playersPanel = component;
             page.addChildAt(page.playersPanel, idx);
-            page.xfw_battleStatisticDataController.registerComponentController(page.playersPanel);
-            page.xfw_registerComponent(page.playersPanel, BATTLE_VIEW_ALIASES.PLAYERS_PANEL);
+            bsdController.registerComponentController(page.playersPanel);
+            XfwUtils.getPrivateField(page, 'xfw_registerComponent')(page.playersPanel, BATTLE_VIEW_ALIASES.PLAYERS_PANEL);
         }
     }
 }

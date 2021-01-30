@@ -20,21 +20,20 @@
 set -e
 
 currentdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-source "$currentdir"/../../build_lib/library.sh
-PATH="$currentdir"/../../build/bin/msil/:$PATH
+XVMBUILD_ROOT_PATH="$currentdir/../../"
 
-mkdir -p "$currentdir/../../~output/xfw/swf/"
+source "$XVMBUILD_ROOT_PATH/build_lib/library.sh"
+
+mkdir -p "$XVMBUILD_ROOT_PATH/~output/xfw/swf/"
 
 projects="
-    wg_shared
-    wg_lobby
-    wg_battle
+    wg_lobby_ui
     wg_battle_classic_ui
     wg_battle_epicbattle_ui
     wg_battle_epicrandom_ui
     wg_battle_ranked_ui
     wg_battle_royale_ui
-    wg_vm
+    wg_vm_ui
     xfw_shared
     xfw
 "
