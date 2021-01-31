@@ -1,4 +1,12 @@
-﻿### XVM 8.7.3
+﻿### XVM 8.7.4
+
+  #### Ангар
+
+  * В секцию `"hangar"/"notificationCounter"` добавлены новые параметры `"storage", "barracks", "StrongholdView"`
+
+______________________________
+
+### XVM 8.7.3
 
   #### Общее
 
