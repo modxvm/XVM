@@ -1,5 +1,9 @@
 ﻿### XVM 8.7.4
 
+  #### Общее
+
+  * Совместимость с World of Tanks 1.11.1.2
+
   #### Ангар
 
   * В секцию `"hangar"/"notificationCounter"` добавлены новые параметры `"storage", "barracks", "StrongholdView"`
