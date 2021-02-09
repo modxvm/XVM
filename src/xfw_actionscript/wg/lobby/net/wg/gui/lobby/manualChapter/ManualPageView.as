@@ -81,14 +81,16 @@ package net.wg.gui.lobby.manualChapter
 
         override protected function draw() : void
         {
+            var _loc2_:* = 0;
+            var _loc3_:* = 0;
             var _loc7_:* = 0;
             var _loc8_:* = false;
             var _loc9_:* = 0;
             var _loc10_:* = 0;
             super.draw();
             var _loc1_:int = this.SIZE_WIDTH * this._contentScale;
-            var _loc2_:int = this.SIZE_HEIGHT * this._contentScale;
-            var _loc3_:* = _loc1_ >> 1;
+            _loc2_ = this.SIZE_HEIGHT * this._contentScale;
+            _loc3_ = _loc1_ >> 1;
             var _loc4_:* = _loc2_ >> 1;
             var _loc5_:Boolean = isInvalid(InvalidationType.SIZE);
             var _loc6_:Boolean = isInvalid(InvalidationType.DATA);

@@ -21,6 +21,8 @@ package
 
         public static const MISSIONS_TAB_BOB:String = "#quests:missions/tab/bob";
 
+        public static const MISSIONS_TAB_MOON_MARATHON:String = "#quests:missions/tab/moon_marathon";
+
         public static const MISSIONS_FILTERCOUNTER_CLOSEBUTTON:String = "#quests:missions/filterCounter/closeButton";
 
         public static const MISSIONS_FILTER_FILTERBUTTON:String = "#quests:missions/filter/filterButton";
@@ -2090,6 +2092,12 @@ package
         public static const MISSIONS_TAB_MARATHONS_HEADER:String = "#quests:missions/tab/marathons/header";
 
         public static const MISSIONS_TAB_MARATHONS_BODY:String = "#quests:missions/tab/marathons/body";
+
+        public static const MISSIONS_TAB_LABEL_MOON_MARATHON:String = "#quests:missions/tab/label/moon_marathon";
+
+        public static const MISSIONS_TAB_MOON_MARATHON_HEADER:String = "#quests:missions/tab/moon_marathon/header";
+
+        public static const MISSIONS_TAB_MOON_MARATHON_BODY:String = "#quests:missions/tab/moon_marathon/body";
 
         public static const MISSIONS_TAB_MISSIONS_HEADER:String = "#quests:missions/tab/missions/header";
 

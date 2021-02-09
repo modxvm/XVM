@@ -45,9 +45,10 @@ package net.wg.gui.battle.eventBattle.views.radialMenu.components
         {
             var _loc3_:* = false;
             var _loc4_:* = false;
+            var _loc5_:* = false;
             _loc3_ = param2 == EventRadialMenu.DEFAULT_STATE;
             _loc4_ = param2 == EventRadialMenu.ALLY_STATE;
-            var _loc5_:* = param2 == EventRadialMenu.ENEMY_STATE;
+            _loc5_ = param2 == EventRadialMenu.ENEMY_STATE;
             this.titleNormalTF.visible = _loc3_;
             this.titleAllyTF.visible = _loc4_;
             this.titleEnemyTF.visible = _loc5_;

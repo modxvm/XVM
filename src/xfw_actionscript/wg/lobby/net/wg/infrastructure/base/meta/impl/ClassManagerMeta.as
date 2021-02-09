@@ -1245,6 +1245,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.hangar.eventEntryPoint.data.EntryPointVO;
     import net.wg.gui.lobby.hangar.eventEntryPoint.gfWrapper.BobEntryPoint;
     import net.wg.gui.lobby.hangar.eventEntryPoint.gfWrapper.CraftMachineEntryPoint;
+    import net.wg.gui.lobby.hangar.eventEntryPoint.gfWrapper.MarathonEntryPoint;
     import net.wg.gui.lobby.hangar.eventEntryPoint.gfWrapper.RankedEntryPoint;
     import net.wg.gui.lobby.hangar.interfaces.IHangar;
     import net.wg.gui.lobby.hangar.interfaces.IHangarHeader;
@@ -3217,6 +3218,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.infrastructure.base.meta.IMaintenanceComponentMeta;
     import net.wg.infrastructure.base.meta.IManualChapterViewMeta;
     import net.wg.infrastructure.base.meta.IManualMainViewMeta;
+    import net.wg.infrastructure.base.meta.IMarathonEntryPointMeta;
     import net.wg.infrastructure.base.meta.IMessengerBarMeta;
     import net.wg.infrastructure.base.meta.IMiniClientComponentMeta;
     import net.wg.infrastructure.base.meta.IMissionAwardWindowMeta;
@@ -5896,6 +5898,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_GUI_LOBBY_HANGAR_EVENTENTRYPOINT_GFWRAPPER_BOBENTRYPOINT:Class = BobEntryPoint;
 
         public static const NET_WG_GUI_LOBBY_HANGAR_EVENTENTRYPOINT_GFWRAPPER_CRAFTMACHINEENTRYPOINT:Class = CraftMachineEntryPoint;
+
+        public static const NET_WG_GUI_LOBBY_HANGAR_EVENTENTRYPOINT_GFWRAPPER_MARATHONENTRYPOINT:Class = MarathonEntryPoint;
 
         public static const NET_WG_GUI_LOBBY_HANGAR_EVENTENTRYPOINT_GFWRAPPER_RANKEDENTRYPOINT:Class = RankedEntryPoint;
 
@@ -9841,6 +9845,8 @@ package net.wg.infrastructure.base.meta.impl
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMANUALMAINVIEWMETA:Class = IManualMainViewMeta;
 
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMARATHONENTRYPOINTMETA:Class = IMarathonEntryPointMeta;
+
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMESSENGERBARMETA:Class = IMessengerBarMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMINICLIENTCOMPONENTMETA:Class = IMiniClientComponentMeta;
@@ -10438,6 +10444,8 @@ package net.wg.infrastructure.base.meta.impl
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_MANUALCHAPTERVIEWMETA:Class = ManualChapterViewMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_MANUALMAINVIEWMETA:Class = ManualMainViewMeta;
+
+        public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_MARATHONENTRYPOINTMETA:Class = MarathonEntryPointMeta;
 
         public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_MESSENGERBARMETA:Class = MessengerBarMeta;
 

@@ -107,8 +107,7 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         protected function updateData() : void
         {
-            var _loc1_:* = false;
-            _loc1_ = this._dataVO != null;
+            var _loc1_:* = this._dataVO != null;
             if(_loc1_)
             {
                 alpha = this._dataVO.alpha;

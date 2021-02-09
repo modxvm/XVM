@@ -115,7 +115,7 @@ package net.wg.gui.lobby.header.headerButtonBar.container
             }
             this._commanderIndex = param1.commanderIndex;
             this._platoonState = param1.platoonState;
-            this._isNormalSizePlatoon = param1.squadManStates.length <= HBC_Squad.NORMAL_SIZE_PLATOON;
+            this._isNormalSizePlatoon = param1.squadManStates.length && param1.squadManStates.length <= HBC_Squad.NORMAL_SIZE_PLATOON;
             this._squadManArray = param1.squadManStates.concat();
             this._iconContainerIndex = param2;
             invalidateData();

@@ -123,7 +123,6 @@ package net.wg.gui.lobby.modulesPanel.components
 
         protected function setup() : void
         {
-            var _loc1_:* = false;
             if(this._deviceData == null)
             {
                 return;
@@ -131,7 +130,7 @@ package net.wg.gui.lobby.modulesPanel.components
             this.titleField.htmlText = this._deviceData.name;
             this._commons.updateTextFieldSize(this.titleField,false,true);
             this.moduleType.setModuleTypeIcon(this._deviceData.moduleLabel);
-            _loc1_ = this._deviceData.showPrice;
+            var _loc1_:Boolean = this._deviceData.showPrice;
             this.priceMC.visible = _loc1_;
             if(_loc1_)
             {

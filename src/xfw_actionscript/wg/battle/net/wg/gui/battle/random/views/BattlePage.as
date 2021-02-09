@@ -124,7 +124,7 @@ package net.wg.gui.battle.random.views
             this.battleDamageLogPanel.updateSize(param1,param2);
             this.radialMenu.updateStage(param1,param2);
             this.endWarningPanel.x = _loc3_;
-            this.battleMessenger.updateSwapAreaHeight(damagePanel.y - (this.playersPanel.y + this.playersPanel.height) + MESSANGER_SWAP_AREA_TOP_OFFSET);
+            this.updateBattleMessengerArea();
             this.updateHintPanelPosition();
         }
 
@@ -277,6 +277,11 @@ package net.wg.gui.battle.random.views
             return this.fullStats.getStatsProgressView();
         }
 
+        protected function updateBattleMessengerArea() : void
+        {
+            this.battleMessenger.updateSwapAreaHeight(damagePanel.y - (this.playersPanel.y + this.playersPanel.height) + MESSANGER_SWAP_AREA_TOP_OFFSET);
+        }
+
         private function updateHintPanelPosition() : void
         {
             this.hintPanel.x = _originalWidth - this.hintPanel.width >> 1;
@@ -362,7 +367,7 @@ package net.wg.gui.battle.random.views
 
         private function onPlayersPanelChangeHandler(param1:Event) : void
         {
-            this.battleMessenger.updateSwapAreaHeight(damagePanel.y - (this.playersPanel.y + this.playersPanel.height) + MESSANGER_SWAP_AREA_TOP_OFFSET);
+            this.updateBattleMessengerArea();
             if(this._isPlayersPanelIsEmpty || this._playersPanelHasInvite != this.playersPanel.isInviteReceived)
             {
                 this._isPlayersPanelIsEmpty = false;
