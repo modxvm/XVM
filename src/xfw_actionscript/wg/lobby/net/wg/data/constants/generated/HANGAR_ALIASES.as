@@ -75,6 +75,8 @@ package net.wg.data.constants.generated
 
         public static const BOB_HANGAR_WIDGET:String = "BobHangarWidhet";
 
+        public static const MARATHON_ENTRY_POINT:String = "MarathonEntryPoint";
+
         public function HANGAR_ALIASES()
         {
             super();

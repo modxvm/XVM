@@ -88,10 +88,12 @@ package net.wg.gui.lobby.header.headerButtonBar
 
         override protected function draw() : void
         {
+            var _loc1_:* = false;
             super.draw();
             if(isInvalid(UPDATE_SQUAD_STATE_ID))
             {
-                if(this._squadDataVo.squadExtendInfoVo.squadManStates.length <= NORMAL_SIZE_PLATOON)
+                _loc1_ = this._squadDataVo.squadExtendInfoVo.squadManStates.length && this._squadDataVo.squadExtendInfoVo.squadManStates.length <= NORMAL_SIZE_PLATOON;
+                if(_loc1_)
                 {
                     switch(this._squadDataVo.squadExtendInfoVo.platoonState)
                     {
@@ -135,7 +137,8 @@ package net.wg.gui.lobby.header.headerButtonBar
         override protected function updateSize() : void
         {
             this._isWideScreen = wideScreenPrc > WIDE_SCREEN_PRC_BORDER;
-            this.textField.visible = this._isWideScreen && (this._squadDataVo.squadExtendInfoVo.platoonState !== PlatoonShieldIconContainer.STATES.inPlatoon || this._squadDataVo.squadExtendInfoVo.squadManStates.length > NORMAL_SIZE_PLATOON);
+            var _loc1_:Boolean = this._squadDataVo.squadExtendInfoVo.squadManStates.length && this._squadDataVo.squadExtendInfoVo.squadManStates.length <= NORMAL_SIZE_PLATOON;
+            this.textField.visible = this._isWideScreen && (this._squadDataVo.squadExtendInfoVo.platoonState !== PlatoonShieldIconContainer.STATES.inPlatoon || !_loc1_);
             this.updateIconsVisibility();
             if(this._isWideScreen)
             {
@@ -150,26 +153,26 @@ package net.wg.gui.lobby.header.headerButtonBar
             {
                 this.textField.width = 0;
             }
-            var _loc1_:int = this.mainIconContainer.getIconSize(this._squadDataVo.squadExtendInfoVo.platoonState);
-            var _loc2_:int = this.leftIconContainer.getIconSize(this._squadDataVo.squadExtendInfoVo.platoonState);
-            var _loc3_:int = this.rightIconContainer.getIconSize(this._squadDataVo.squadExtendInfoVo.platoonState);
-            var _loc4_:* = 0;
+            var _loc2_:int = this.mainIconContainer.getIconSize(this._squadDataVo.squadExtendInfoVo.platoonState);
+            var _loc3_:int = this.leftIconContainer.getIconSize(this._squadDataVo.squadExtendInfoVo.platoonState);
+            var _loc4_:int = this.rightIconContainer.getIconSize(this._squadDataVo.squadExtendInfoVo.platoonState);
+            var _loc5_:* = 0;
             if(this.searchingAnimation.visible)
             {
-                _loc4_ = this.searchingAnimation.width;
+                _loc5_ = this.searchingAnimation.width;
             }
-            var _loc5_:* = 0;
             var _loc6_:* = 0;
+            var _loc7_:* = 0;
             if(this.textField.visible)
             {
-                _loc5_ = this.textField.width;
-                if(_loc5_ > 0)
+                _loc6_ = this.textField.width;
+                if(_loc6_ > 0)
                 {
-                    _loc6_ = DIMENSIONS.additionalTextPadding;
+                    _loc7_ = DIMENSIONS.additionalTextPadding;
                 }
             }
-            var _loc7_:int = this.getPaddingDependingOnState(this._squadDataVo.squadExtendInfoVo.platoonState);
-            bounds.width = _loc1_ + _loc2_ + _loc3_ + _loc5_ + _loc4_ + _loc7_ + _loc6_;
+            var _loc8_:int = this.getPaddingDependingOnState(this._squadDataVo.squadExtendInfoVo.platoonState);
+            bounds.width = _loc2_ + _loc3_ + _loc4_ + _loc6_ + _loc5_ + _loc8_ + _loc7_;
             invalidate(UPDATE_SQUAD_STATE_ID);
             super.updateSize();
         }
@@ -177,7 +180,7 @@ package net.wg.gui.lobby.header.headerButtonBar
         override protected function updateData() : void
         {
             this.mainIconContainer.setEventIcon(this._squadDataVo.icon);
-            var _loc1_:* = this._squadDataVo.squadExtendInfoVo.squadManStates.length <= NORMAL_SIZE_PLATOON;
+            var _loc1_:Boolean = this._squadDataVo.squadExtendInfoVo.squadManStates.length && this._squadDataVo.squadExtendInfoVo.squadManStates.length <= NORMAL_SIZE_PLATOON;
             switch(this._squadDataVo.squadExtendInfoVo.platoonState)
             {
                 case PlatoonShieldIconContainer.STATES.create:
@@ -258,10 +261,11 @@ package net.wg.gui.lobby.header.headerButtonBar
         private function getPaddingDependingOnState(param1:String) : int
         {
             var _loc2_:* = 0;
+            var _loc3_:Boolean = this._squadDataVo.squadExtendInfoVo.squadManStates.length && this._squadDataVo.squadExtendInfoVo.squadManStates.length <= NORMAL_SIZE_PLATOON;
             switch(param1)
             {
                 case PlatoonShieldIconContainer.STATES.create:
-                    if(this._squadDataVo.squadExtendInfoVo.squadManStates.length > NORMAL_SIZE_PLATOON)
+                    if(!_loc3_)
                     {
                         _loc2_ = DIMENSIONS.createPadding;
                     }
@@ -276,7 +280,7 @@ package net.wg.gui.lobby.header.headerButtonBar
                     break;
                 case PlatoonShieldIconContainer.STATES.squadEvent:
                 case PlatoonShieldIconContainer.STATES.inPlatoon:
-                    if(this._squadDataVo.squadExtendInfoVo.squadManStates.length > NORMAL_SIZE_PLATOON)
+                    if(!_loc3_)
                     {
                         _loc2_ = DIMENSIONS.createPadding;
                     }
@@ -326,7 +330,7 @@ package net.wg.gui.lobby.header.headerButtonBar
         private function updateIconsVisibility() : void
         {
             this.searchingAnimation.visible = this._squadDataVo.squadExtendInfoVo.platoonState == PlatoonShieldIconContainer.STATES.searching;
-            var _loc1_:* = this._squadDataVo.squadExtendInfoVo.squadManStates.length <= NORMAL_SIZE_PLATOON;
+            var _loc1_:Boolean = this._squadDataVo.squadExtendInfoVo.squadManStates.length && this._squadDataVo.squadExtendInfoVo.squadManStates.length <= NORMAL_SIZE_PLATOON;
             this.setHatVisibility(this._isWideScreen && _loc1_ && this._squadDataVo.squadExtendInfoVo.platoonState == PlatoonShieldIconContainer.STATES.inPlatoon);
             if(this._squadDataVo.squadExtendInfoVo.platoonState == PlatoonShieldIconContainer.STATES.inPlatoon)
             {

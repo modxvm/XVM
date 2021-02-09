@@ -857,7 +857,7 @@ package net.wg.gui.lobby.hangar
             var _loc6_:* = 0;
             if(this.carousel && this._eventsEntryContainer.isActive)
             {
-                this._eventsEntryContainer.isSmall = width < StageSizeBoundaries.WIDTH_1600 || height < StageSizeBoundaries.HEIGHT_900;
+                this._eventsEntryContainer.isSmall = App.appWidth < StageSizeBoundaries.WIDTH_1600 || App.appHeight < StageSizeBoundaries.HEIGHT_900;
                 this._eventsEntryContainer.x = _width - this._eventsEntryContainer.width - this._eventsEntryContainer.margin.width | 0;
                 this._eventsEntryContainer.y = this.carousel.y - this._eventsEntryContainer.height | 0;
                 _loc1_ = this.ammunitionPanelInject.getFirstLayoutProperty();

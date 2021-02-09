@@ -3079,6 +3079,12 @@ package
 
         public static const MAPS_ICONS_COMPONENTS_CHECKBOX_ICON_CHECKED_XL_GREEN:String = "../maps/icons/components/checkbox/icon_checked_xl_green.png";
 
+        public static const MAPS_ICONS_COMPONENTS_COUNTDOWN_CLOCK:String = "../maps/icons/components/countdown/clock.png";
+
+        public static const MAPS_ICONS_COMPONENTS_COUNTDOWN_HOURGLASS:String = "../maps/icons/components/countdown/hourglass.png";
+
+        public static const MAPS_ICONS_COMPONENTS_COUNTDOWN_LOCK:String = "../maps/icons/components/countdown/lock.png";
+
         public static const MAPS_ICONS_COMPONENTS_COUNTER_PATTERN:String = "../maps/icons/components/counter/pattern.png";
 
         public static const MAPS_ICONS_COMPONENTS_DROPDOWN_ARROW_MEDIUM:String = "../maps/icons/components/dropdown/arrow_medium.png";
@@ -8645,6 +8651,8 @@ package
 
         public static const MAPS_ICONS_LIBRARY_HANGARFLAG_FLAG_KURSK:String = "../maps/icons/library/hangarFlag/flag_kursk.png";
 
+        public static const MAPS_ICONS_LIBRARY_HANGARFLAG_FLAG_MARATHON:String = "../maps/icons/library/hangarFlag/flag_marathon.png";
+
         public static const MAPS_ICONS_LIBRARY_HANGARFLAG_FLAG_RANKED:String = "../maps/icons/library/hangarFlag/flag_ranked.png";
 
         public static const MAPS_ICONS_LIBRARY_HANGARFLAG_FLAG_RED:String = "../maps/icons/library/hangarFlag/flag_red.png";
@@ -9032,6 +9040,24 @@ package
         public static const MAPS_ICONS_MANUAL_MAINPAGE_MAINVIEWTILE6:String = "../maps/icons/manual/mainPage/mainViewTile6.png";
 
         public static const MAPS_ICONS_MANUAL_MAINPAGE_MAINVIEWTILE7:String = "../maps/icons/manual/mainPage/mainViewTile7.png";
+
+        public static const MAPS_ICONS_MARATHON_BANNER:String = "../maps/icons/marathon/banner.png";
+
+        public static const MAPS_ICONS_MARATHON_BANNER_SMALL:String = "../maps/icons/marathon/banner_small.png";
+
+        public static const MAPS_ICONS_MARATHON_BORDER:String = "../maps/icons/marathon/border.png";
+
+        public static const MAPS_ICONS_MARATHON_ICON:String = "../maps/icons/marathon/icon.png";
+
+        public static const MAPS_ICONS_MARATHON_ICON_URL:String = "../maps/icons/marathon/icon_url.png";
+
+        public static const MAPS_ICONS_MARATHON_SHADOW:String = "../maps/icons/marathon/shadow.png";
+
+        public static const MAPS_ICONS_MARATHON_SHADOW_BIG:String = "../maps/icons/marathon/shadow_big.png";
+
+        public static const MAPS_ICONS_MARATHON_SHADOW_SMALL:String = "../maps/icons/marathon/shadow_small.png";
+
+        public static const MAPS_ICONS_MARATHON_ST:String = "../maps/icons/marathon/st.png";
 
         public static const MAPS_ICONS_MESSENGER_CONTACTCONFIRMNEEDED:String = "../maps/icons/messenger/contactConfirmNeeded.png";
 

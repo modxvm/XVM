@@ -163,7 +163,7 @@ diff -Naur battle.orig/net/wg/gui/battle/random/views/BattlePage.as battle/net/w
  
          private static const MINIMAP_MARGIN_WIDTH:int = 0;
  
-@@ -343,6 +343,11 @@
+@@ -348,6 +348,11 @@
              this.updatePositionForQuestProgress();
          }
  

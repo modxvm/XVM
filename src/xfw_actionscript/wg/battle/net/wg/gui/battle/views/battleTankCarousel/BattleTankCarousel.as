@@ -178,7 +178,7 @@ package net.wg.gui.battle.views.battleTankCarousel
         protected function getNewHelper() : BattleTankCarouselHelper
         {
             var _loc1_:BattleTankCarouselHelper = this._helper;
-            if(!(_loc1_ is BattleTankCarouselHelper))
+            if(!(_loc1_ is BattleTankCarousel))
             {
                 _loc1_ = new BattleTankCarouselHelper();
                 invalidate(InvalidationType.SETTINGS);

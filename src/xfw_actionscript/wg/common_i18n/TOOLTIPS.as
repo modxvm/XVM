@@ -5503,6 +5503,16 @@ package
 
         public static const MARATHON_ERROR_VEH_TYPE:String = "#tooltips:marathon/error/veh_type";
 
+        public static const MOON_MARATHON_EXTRA_STATE_STEPS:String = "#tooltips:moon_marathon/extra_state/steps";
+
+        public static const MOON_MARATHON_EXTRA_STATE_COMPLETED:String = "#tooltips:moon_marathon/extra_state/completed";
+
+        public static const MOON_MARATHON_EXTRA_STATE_DISCOUNT:String = "#tooltips:moon_marathon/extra_state/discount";
+
+        public static const MOON_MARATHON_ERROR_BATTLE_TYPE:String = "#tooltips:moon_marathon/error/battle_type";
+
+        public static const MOON_MARATHON_ERROR_VEH_TYPE:String = "#tooltips:moon_marathon/error/veh_type";
+
         public static const XPEXCHANGEWINDOW_GOLD_GOLDAFTEREXCHANGE_HEADER:String = "#tooltips:xpExchangewindow/gold/goldAfterExchange/header";
 
         public static const XPEXCHANGEWINDOW_GOLD_GOLDAFTEREXCHANGE_BODY:String = "#tooltips:xpExchangewindow/gold/goldAfterExchange/body";
