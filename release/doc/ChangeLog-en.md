@@ -1,4 +1,20 @@
-﻿### XVM 8.7.4
+﻿### XVM 8.7.6
+
+  #### General
+
+  * Compatibility with World of Tanks 1.11.1.3
+
+______________________________
+
+### XVM 8.7.5
+
+  #### General
+
+  * Compatibility with World of Tanks 1.11.1.2
+
+______________________________
+
+### XVM 8.7.4 (was not released)
 
   #### Hangar
 
