@@ -352,8 +352,10 @@ class DataHitLog(object):
         wheelsConfig = vehicle.appearance.typeDescriptor.chassis.generalWheelsAnimatorConfig
         if wheelsConfig:
             maxComponentIdx += wheelsConfig.getWheelsCount()
-        maxHitEffectCode, decodedPoints, maxDamagedComponent = DamageFromShotDecoder.decodeHitPoints(points, vehicle.appearance.collisions, maxComponentIdx)
+        decodedPoints = DamageFromShotDecoder.decodeHitPoints(points, vehicle.appearance.collisions, maxComponentIdx)
         if decodedPoints:
+            maxPriorityHitPoint = decodedPoints[-1]
+            maxHitEffectCode = maxPriorityHitPoint.hitEffectCode
             compName = decodedPoints[0].componentName
             self.compName = compName if compName[0] != 'W' else 'wheel'
         else:
