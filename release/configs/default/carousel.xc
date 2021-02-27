@@ -82,8 +82,8 @@
     // "battles", "-battles", "winRate", "-winRate", "markOfMastery", "-markOfMastery", "xtdb", "-xtdb",
     // "xte", "-xte", "wtr", "-wtr", "damageRating", "-damageRating", "marksOnGun", "-marksOnGun"
     "sorting_criteria": ["nation", "type", "level"],
-    // Suppress the tooltips for tanks in carousel.
-    // Убрать подсказки к танкам в карусели.
+    // true - suppress the tooltips for tanks in carousel.
+    // true - убрать подсказки к танкам в карусели.
     "suppressCarouselTooltips": false
   }
 }

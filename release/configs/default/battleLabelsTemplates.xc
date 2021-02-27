@@ -59,7 +59,7 @@
     // Total hp indicator.
     // Индикатор общего HP команд.
     "totalHP": {
-      "enabled": true,
+      "enabled": false,
       "updateEvent": "PY(ON_UPDATE_HP)",
       "x": 0,
       "y": 30,
