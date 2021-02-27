@@ -17,7 +17,6 @@ package com.xvm.battle.classic.playersPanel
     public class PlayersPanelListItemProxy extends PlayersPanelListItemProxyBase
     {
         private static const SQUAD_ITEMS_AREA_WIDTH:int = 25;
-
         private static const DOG_TAG_OFFSET:int = -30;
 
         private var ui:PlayersPanelListItem;

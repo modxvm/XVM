@@ -161,7 +161,8 @@ class _Dossier(object):
         winter_camo = outfit is not None and bool(outfit.hull.slotFor(GUI_ITEM_TYPE.CAMOUFLAGE).getItemCD())
         outfit = vehicle.getOutfit(SeasonType.DESERT)
         desert_camo = outfit is not None and bool(outfit.hull.slotFor(GUI_ITEM_TYPE.CAMOUFLAGE).getItemCD())
-        crystalEarned = self.itemsCache.items.stats.getWeeklyVehicleCrystals(vehCD)
+        limit = self.itemsCache.items.stats.getWeeklyVehicleCrystals(vehCD)
+        crystalEarned = limit if vehicle.isEarnCrystals else None
 
         if self.__isVehicleDossierLoaded(accountDBID, vehCD):
             dossier = self.itemsCache.items.getVehicleDossier(vehCD, accountDBID)

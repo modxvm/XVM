@@ -5,14 +5,11 @@
 package com.xvm.lobby.ui.contacts
 {
     import flash.display.Sprite;
-
     import scaleform.clik.constants.InvalidationType;
-
     import net.wg.gui.components.controls.UILoaderAlt;
     import net.wg.gui.messenger.controls.ContactItem;
     import net.wg.gui.messenger.data.ContactsListTreeItemInfo;
     import net.wg.gui.messenger.data.ITreeItemInfo;
-
     import com.xfw.Logger;
     import com.xfw.XfwUtils;
 

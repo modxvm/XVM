@@ -589,6 +589,7 @@ package com.xvm.battle.shared.playersPanel
                     }
                     _updateVehicleLevel();
                     _updateBadgeIcon();
+                    _updateSpottedIndicator();
                     updateStandardFields();
                 }
             }
@@ -627,6 +628,11 @@ package com.xvm.battle.shared.playersPanel
         private function _updateBadgeIcon():void
         {
             ui.badge.alpha = Macros.FormatNumber(mcfg.rankBadgeAlpha, currentPlayerState, currentPlayerState.isAlive ? 100 : 70) / 100.0;
+        }
+
+        private function _updateSpottedIndicator():void
+        {
+            ui.spottedIndicator.alpha = mcfg.removeSpottedIndicator ? 0 : 1;
         }
 
         // update positions

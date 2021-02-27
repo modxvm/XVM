@@ -1,4 +1,24 @@
-﻿### XVM 8.7.6
+﻿### XVM 8.7.7
+
+  #### General
+
+  * Compatibility with World of Tanks 1.12.0.0
+
+  #### Players panel
+
+  * Added option in the sections "playersPanel"/"short", "medium", "medium2", "large":
+
+    * `"removeSpottedIndicator"` — disable enemy spotted status icons
+
+  #### Camera
+
+  * Removed option:
+
+    * `"camera"/"sniper"/"startZoom"`
+
+______________________________
+
+### XVM 8.7.6
 
   #### General
 

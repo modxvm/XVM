@@ -1,7 +1,7 @@
 diff -Naur battle.orig-0.orig/net/wg/gui/battle/epicRandom/views/EpicRandomPage.class.asasm battle.orig-0/net/wg/gui/battle/epicRandom/views/EpicRandomPage.class.asasm
 --- battle.orig-0.orig/net/wg/gui/battle/epicRandom/views/EpicRandomPage.class.asasm	2019-08-22 22:42:04.291076800 +0300
 +++ battle.orig-0/net/wg/gui/battle/epicRandom/views/EpicRandomPage.class.asasm	2019-08-22 22:44:51.854731800 +0300
-@@ -1299,6 +1299,28 @@
+@@ -1335,6 +1335,28 @@
      end ; body
     end ; method
    end ; trait
@@ -33,7 +33,7 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/epicRandom/views/EpicRandomPage.
 diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/BattlePage.class.asasm battle.orig-0/net/wg/gui/battle/random/views/BattlePage.class.asasm
 --- battle.orig-0.orig/net/wg/gui/battle/random/views/BattlePage.class.asasm	2019-08-22 22:42:04.358616300 +0300
 +++ battle.orig-0/net/wg/gui/battle/random/views/BattlePage.class.asasm	2019-08-22 22:44:51.864233800 +0300
-@@ -1364,6 +1364,28 @@
+@@ -1383,6 +1383,28 @@
      end ; body
     end ; method
    end ; trait

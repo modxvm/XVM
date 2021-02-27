@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 26.01.2021
+    // Last update: 27.02.2021
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -72,6 +72,7 @@
     "czech-Cz10_LT_vz38":                    {"name": null, "short": null},
     "czech-Cz11_V_8_H":                      {"name": null, "short": null},
     "czech-Cz13_T_27":                       {"name": null, "short": null},
+    "czech-Cz15_Skoda_T-45_Prem":            {"name": null, "short": null},
     "france-F01_RenaultFT":                  {"name": null, "short": null},
     "france-F01_RenaultFT_bot":              {"name": null, "short": null},
     "france-F02_D1":                         {"name": null, "short": null},

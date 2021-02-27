@@ -21,8 +21,6 @@ from AvatarInputHandler.control_modes import SniperControlMode
 from helpers.EffectsList import _FlashBangEffectDesc
 from AvatarInputHandler.AimingSystems.SniperAimingSystem import SniperAimingSystem
 from Keys import KEY_RIGHTMOUSE
-import math_utils
-from gun_rotation_shared import calcPitchLimitsFromDesc
 
 from xfw import *
 from xfw_actionscript.python import *
@@ -138,18 +136,9 @@ def _SniperCamera_updateSettingsFromServer(self):
     if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/zooms'):
         self._cfg['increasedZoom'] = True
 
-@overrideMethod(SniperCamera, 'enable')
-def _SniperCamera_enable(base, self, targetPos, saveZoom):
+@registerEvent(SniperCamera, 'enable')
+def _SniperCamera_enable(self, targetPos, saveZoom):
     #debug('_SniperCamera_enable')
-    if config.get('battle/camera/enabled'):
-        zoom = config.get('battle/camera/sniper/startZoom')
-        if zoom is not None:
-            saveZoom = True
-        else:
-            zoom = self._cfg['zoom']
-        self._cfg['zoom'] = utils.takeClosest(self._cfg['zooms'], zoom)
-
-    base(self, targetPos, saveZoom)
     _sendSniperCameraFlash(True, self._SniperCamera__zoom)
 
 @registerEvent(SniperCamera, 'disable')
@@ -213,16 +202,12 @@ def create(base, self, model, list, args):
 
 @overrideMethod(SniperAimingSystem, '_SniperAimingSystem__clampToLimits')
 def clampToLimits(base, self, turretYaw, gunPitch):
+    res = base(self, turretYaw, gunPitch)
     if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/noCameraLimit/enabled'):
-        if not BigWorld.isKeyDown(KEY_RIGHTMOUSE) and self._SniperAimingSystem__yawLimits is not None and config.get('battle/camera/sniper/noCameraLimit/mode') == "hotkey":
-            turretYaw = math_utils.clamp(self._SniperAimingSystem__yawLimits[0], self._SniperAimingSystem__yawLimits[1], turretYaw)
-        pitchLimits = calcPitchLimitsFromDesc(turretYaw, self.getPitchLimits(turretYaw))
-        adjustment = max(0, self._SniperAimingSystem__returningOscillator.deviation.y)
-        pitchLimits[0] -= adjustment
-        pitchLimits[1] += adjustment
-        gunPitch = math_utils.clamp(pitchLimits[0], pitchLimits[1] + self._SniperAimingSystem__pitchCompensating, gunPitch)
-        return (turretYaw, gunPitch)
-    return base(self, turretYaw, gunPitch)
+        mode = config.get('battle/camera/sniper/noCameraLimit/mode') == "hotkey"
+        if mode and BigWorld.isKeyDown(KEY_RIGHTMOUSE) and self._SniperAimingSystem__yawLimits is not None:
+            return (turretYaw, res[1])
+    return res
 
 @overrideMethod(SniperControlMode, 'getPreferredAutorotationMode')
 def getPreferredAutorotationMode(base, self):
