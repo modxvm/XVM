@@ -47,7 +47,7 @@ package com.xvm.battle
             }
             return null;
         }
-/* TODO:1.10
+        /* TODO:1.10.0
         public static function get battlePageBattleTicker():BattleTicker
         {
             try
@@ -59,7 +59,7 @@ package com.xvm.battle
             }
             return null;
         }
-*/
+        */
         private var _battleController:BattleXvmComponentController = null;
         private var _battleClock:BattleClock = null;
         private var _battleElements:BattleElements = null;
