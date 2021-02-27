@@ -34,7 +34,7 @@ package com.xvm.battle.classic.fullStats
 
         public function UI_FullStats()
         {
-            //Logger.add("UI_fullStats");
+            Logger.add("UI_fullStats");
             super();
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
         }
@@ -86,11 +86,13 @@ package com.xvm.battle.classic.fullStats
             var newAtlas:String = Macros.FormatStringGlobal(cfgAtlas);
             if (currentAtlas != newAtlas)
             {
-                var atlas:Atlas = (App.atlasMgr as AtlasManager).xfw_getAtlas(newAtlas) as Atlas;
+                var atlasMgr:AtlasManager = App.atlasMgr as AtlasManager;
+
+                var atlas:Atlas = XfwUtils.getPrivateField(atlasMgr, 'xfw_getAtlas')(newAtlas) as Atlas;
                 if (atlas == null)
                 {
-                    App.atlasMgr.registerAtlas(newAtlas);
-                    atlas = (App.atlasMgr as AtlasManager).xfw_getAtlas(newAtlas) as Atlas;
+                    atlasMgr.registerAtlas(newAtlas);
+                    atlas = XfwUtils.getPrivateField(atlasMgr, 'xfw_getAtlas')(newAtlas) as Atlas;
                     atlas.addEventListener(AtlasEvent.ATLAS_INITIALIZED, onAtlasInitializedHandler, false, 0, true);
                 }
             }

@@ -9,8 +9,8 @@ AS_VERSION_PLAYER="10.2"
 AS_VERSION_SWF="11"
 
 #Apache Roayler constants
-APACHEROAYLE_DOWNLOADLINK="https://downloads.apache.org/royale/0.9.4/binaries/apache-royale-0.9.4-bin-js-swf.tar.gz"
-APACHEROAYLE_VER="0.9.4"
+APACHE_ROYALE_DOWNLOADLINK="https://downloads.apache.org/royale/0.9.7/binaries/apache-royale-0.9.7-bin-js-swf.tar.gz"
+APACHE_ROYALE_VER="0.9.7"
 
 # AS3 compilation
 build_as3_swf(){
@@ -20,7 +20,7 @@ build_as3_swf(){
         opt="-compiler.optimize=true -compiler.verbose-stacktraces=false -compiler.debug=false"
     fi
     if [ "$ASSDK_TYPE" == "royale" ]; then
-        "$XVMBUILD_MXMLC_FILEPATH" -targets=SWF -target-player $AS_VERSION_PLAYER -swf-version $AS_VERSION_SWF $opt "$@"
+        "$XVMBUILD_MXMLC_FILEPATH" -targets=SWF -target-player $AS_VERSION_PLAYER -swf-version $AS_VERSION_SWF -load-config $XVMBUILD_ROYALECONFIG_PATH $opt "$@"
     else
         "$XVMBUILD_MXMLC_FILEPATH" -target-player $AS_VERSION_PLAYER -swf-version $AS_VERSION_SWF $opt "$@"
     fi
@@ -28,7 +28,7 @@ build_as3_swf(){
 
 build_as3_swc(){
     if [ "$ASSDK_TYPE" == "royale" ]; then
-        "$XVMBUILD_COMPC_FILEPATH" -targets=SWF -target-player $AS_VERSION_PLAYER -swf-version $AS_VERSION_SWF "$@"
+        "$XVMBUILD_COMPC_FILEPATH" -targets=SWF -target-player $AS_VERSION_PLAYER -swf-version $AS_VERSION_SWF -load-config $XVMBUILD_ROYALECONFIG_PATH "$@"
     else
         "$XVMBUILD_COMPC_FILEPATH" -target-player $AS_VERSION_PLAYER -swf-version $AS_VERSION_SWF "$@"
     fi
@@ -150,7 +150,7 @@ install_actionscript_sdk(){
     assdk_root="$XVMBUILD_ROOT_PATH/~temp/assdk"
     rm -rf "$1"
     mkdir -p "$1"
-    wget $APACHEROAYLE_DOWNLOADLINK -O "$1/file.tar.gz"
+    wget $APACHE_ROYALE_DOWNLOADLINK -O "$1/file.tar.gz"
     tar xf "$1/file.tar.gz" -C "$1/" --strip 1
     rm -f "$1/file.tar.gz"
 }
@@ -161,6 +161,7 @@ install_actionscript_sdk(){
 #  - $ROYALE_HOME
 #  - /opt/apache-royale
 #  - C:/Apache Royale/royale-asjs/
+#  - <repo>/~downloads/apache_royale_<ver>/
 #  - $FLEX_HOME
 #  - /opt/apache-flex
 #  - $LOCALAPPDATA/FlashDevelop/Apps/flexsdk/4.6.0
@@ -185,6 +186,9 @@ detect_actionscript_sdk(){
     elif [ -d "/opt/apache-royale/royale-asjs" ]; then
         export ASSDK_HOME="/opt/apache-royale/royale-asjs"
         export ASSDK_TYPE="royale"
+    elif [ -d "$XVMBUILD_ROOT_PATH/~downloads/as_sdk_$APACHE_ROYALE_VER/royale-asjs" ]; then
+        export ASSDK_HOME="$XVMBUILD_ROOT_PATH/~downloads/as_sdk_$APACHE_ROYALE_VER/royale-asjs"
+        export ASSDK_TYPE="royale"
     elif [ "$FLEX_HOME" != "" -a -d "$FLEX_HOME" ]; then
         export ASSDK_HOME="$FLEX_HOME"
         export ASSDK_TYPE="flex"
@@ -194,15 +198,12 @@ detect_actionscript_sdk(){
     elif [ -d "$LOCALAPPDATA/FlashDevelop/Apps/flexsdk/4.6.0" ]; then
         export ASSDK_HOME="$LOCALAPPDATA/FlashDevelop/Apps/flexsdk/4.6.0"
         export ASSDK_TYPE="flex"
-    elif [ -d "$XVMBUILD_ROOT_PATH/~downloads/as_sdk_$APACHEROAYLE_VER/royale-asjs" ]; then
-        export ASSDK_HOME="$XVMBUILD_ROOT_PATH/~downloads/as_sdk_$APACHEROAYLE_VER/royale-asjs"
-        export ASSDK_TYPE="royale"
     fi
 
     #download if not found
     if [ ! -d "$ASSDK_HOME" ]; then
-        install_actionscript_sdk "$XVMBUILD_ROOT_PATH/~downloads/as_sdk_$APACHEROAYLE_VER"
-        export ASSDK_HOME="$XVMBUILD_ROOT_PATH/~downloads/as_sdk_$APACHEROAYLE_VER/royale-asjs"
+        install_actionscript_sdk "$XVMBUILD_ROOT_PATH/~downloads/as_sdk_$APACHE_ROYALE_VER"
+        export ASSDK_HOME="$XVMBUILD_ROOT_PATH/~downloads/as_sdk_$APACHE_ROYALE_VER/royale-asjs"
         export ASSDK_TYPE="royale"
 
         if [ ! -d "$ASSDK_HOME" ]; then
@@ -249,6 +250,9 @@ detect_actionscript_sdk(){
             wget --quiet "https://github.com/nexussays/playerglobal/raw/master/$playerglobalver/playerglobal.swc" --output-document="$PLAYERGLOBAL_HOME/$playerglobalver/playerglobal.swc"
         fi
     done
+
+    # set roayle config path
+    export XVMBUILD_ROYALECONFIG_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/royale_toolchain/xvm-config.xml"
 }
 
 detect_java(){
@@ -312,7 +316,7 @@ detect_python(){
     fi
 
     #*nix and fallback
-    if [[ "$XVMBUILD_PYTHON_FILEPATH" == "" ]]; then       
+    if [[ "$XVMBUILD_PYTHON_FILEPATH" == "" ]]; then
         if hash "python2.7" 2>/dev/null; then
             export XVMBUILD_PYTHON_FILEPATH="python2.7" #Installed by cygwin or *nix
         elif hash "python2" 2>/dev/null; then

@@ -7,6 +7,7 @@ package com.xvm.lobby.ui.profile
     import com.xfw.*;
     import com.xvm.lobby.ui.profile.components.*;
     import flash.utils.*;
+    import net.wg.gui.lobby.profile.pages.technique.TechDetailedUnitGroup
     import net.wg.gui.lobby.profile.pages.technique.data.*;
 
     public dynamic class UI_TechniqueStatisticTab extends TechniqueStatisticTab_UI
@@ -55,11 +56,13 @@ package com.xvm.lobby.ui.profile
             try
             {
                 super.draw();
-                if (xfw_group)
+
+                var group:TechDetailedUnitGroup = XfwUtils.getPrivateField(this, "xfw_group");
+                if (group)
                 {
-                    if (xfw_group.unitRendererLinkage != getQualifiedClassName(UI_StatisticsDashLineTextItemIRenderer))
+                    if (group.unitRendererLinkage != getQualifiedClassName(UI_StatisticsDashLineTextItemIRenderer))
                     {
-                        xfw_group.unitRendererLinkage = getQualifiedClassName(UI_StatisticsDashLineTextItemIRenderer);
+                        group.unitRendererLinkage = getQualifiedClassName(UI_StatisticsDashLineTextItemIRenderer);
                     }
                 }
             }

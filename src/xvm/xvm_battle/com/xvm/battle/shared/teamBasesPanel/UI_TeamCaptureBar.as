@@ -4,15 +4,34 @@
  */
 package com.xvm.battle.shared.teamBasesPanel
 {
-    import com.xfw.*;
-    import com.xvm.*;
-    import com.xvm.battle.*;
-    import com.xvm.types.cfg.*;
-    import flash.events.*;
-    import flash.text.*;
-    import mx.utils.*;
-    import scaleform.gfx.*;
+	import flash.events.Event;
+	import flash.text.AntiAliasType;
+	import flash.text.TextFormat;
+	import flash.text.TextFormatAlign;
+	import flash.text.TextField;
+	import flash.text.TextFieldAutoSize;
+	
+	import mx.utils.StringUtil;
 
+	import scaleform.gfx.TextFieldEx;
+
+	import net.wg.gui.battle.random.views.teamBasesPanel.TeamCaptureBar;
+	
+	import com.xfw.Logger;
+	import com.xfw.Xfw;
+	import com.xfw.XfwUtils;
+	
+	import com.xvm.Config;
+	import com.xvm.Defines;
+	import com.xvm.Macros;
+	import com.xvm.Utils;
+	import com.xvm.Xvm;
+	import com.xvm.battle.BattleCommands;
+	import com.xvm.battle.BattleState;
+	import com.xvm.types.cfg.CCaptureBarTeam;
+	import com.xvm.types.cfg.CCaptureBarTextField;
+
+	
     public class UI_TeamCaptureBar extends TeamCaptureBarUI
     {
         private static const HIDE_ICONS_HACK_OFFSET_Y:Number = -10000;
@@ -36,10 +55,10 @@ package com.xvm.battle.shared.teamBasesPanel
         private var m_vehiclesCount:String;
         private var m_timeLeft:String
 
-        EXIT_TWEEN_Y -= HIDE_ICONS_HACK_OFFSET_Y;
-
         public function UI_TeamCaptureBar()
         {
+            XfwUtils.setPrivateField(TeamCaptureBar, "EXIT_TWEEN_Y", HIDE_ICONS_HACK_OFFSET_Y);
+
             //Logger.add("UI_TeamCaptureBar()");
             super();
 

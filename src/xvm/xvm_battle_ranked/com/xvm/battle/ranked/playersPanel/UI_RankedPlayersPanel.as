@@ -66,8 +66,9 @@ package com.xvm.battle.ranked.playersPanel
         {
             //Logger.add("UI_RankedPlayersPanel()");
             super();
-            PlayersPanelListLeft.LINKAGE = XVM_PLAYERS_PANEL_LIST_ITEM_LEFT_LINKAGE;
-            PlayersPanelListRight.LINKAGE = XVM_PLAYERS_PANEL_LIST_ITEM_RIGHT_LINKAGE;
+
+            XfwUtils.setPrivateField(PlayersPanelListLeft, "LINKAGE", XVM_PLAYERS_PANEL_LIST_ITEM_LEFT_LINKAGE);
+            XfwUtils.setPrivateField(PlayersPanelListRight, "LINKAGE", XVM_PLAYERS_PANEL_LIST_ITEM_RIGHT_LINKAGE);
 
             registerPlayersPanelMacros();
 
@@ -79,10 +80,12 @@ package com.xvm.battle.ranked.playersPanel
         override protected function configUI():void
         {
             super.configUI();
-            listLeft.removeEventListener(MouseEvent.ROLL_OVER, xfw_onListRollOverHandler);
-            listLeft.removeEventListener(MouseEvent.ROLL_OVER, xfw_onListRollOutHandler);
-            listRight.removeEventListener(MouseEvent.ROLL_OVER, xfw_onListRollOverHandler);
-            listRight.removeEventListener(MouseEvent.ROLL_OVER, xfw_onListRollOutHandler);
+            listLeft.removeEventListener(MouseEvent.ROLL_OVER, XfwUtils.getPrivateField(this, 'xfw_onListRollOverHandler'));
+            listLeft.removeEventListener(MouseEvent.ROLL_OUT, XfwUtils.getPrivateField(this, 'xfw_onListRollOutHandler'));
+
+            listRight.removeEventListener(MouseEvent.ROLL_OVER, XfwUtils.getPrivateField(this, 'xfw_onListRollOverHandler'));
+            listRight.removeEventListener(MouseEvent.ROLL_OUT, XfwUtils.getPrivateField(this, 'xfw_onListRollOutHandler'));
+
             listLeft.addEventListener(MouseEvent.ROLL_OVER, onListRollOverHandler, false, 0, true);
             listLeft.addEventListener(MouseEvent.ROLL_OUT, onListRollOutHandler, false, 0, true);
             listLeft.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMoveHandler, false, 0, true);
@@ -256,11 +259,11 @@ package com.xvm.battle.ranked.playersPanel
                         var isInExpandArea:Boolean = (e.stageX < mopt_expandAreaWidth) || (e.stageX > App.appWidth - mopt_expandAreaWidth);
                         if (isInExpandArea)
                         {
-                            super.xfw_onListRollOverHandler(e);
+                            XfwUtils.getPrivateField(this, "xfw_onListRollOverHandler")(e);
                         }
                         else
                         {
-                            super.xfw_onListRollOutHandler(e);
+                            XfwUtils.getPrivateField(this, "xfw_onListRollOutHandler")(e);
                         }
                     }
                 }
@@ -351,11 +354,13 @@ package com.xvm.battle.ranked.playersPanel
             var newAtlas:String = Macros.FormatStringGlobal(cfgAtlas);
             if (currentAtlas != newAtlas)
             {
-                var atlas:Atlas = (App.atlasMgr as AtlasManager).xfw_getAtlas(newAtlas) as Atlas;
+                var atlasMgr:AtlasManager = App.atlasMgr as AtlasManager;
+
+                var atlas:Atlas = XfwUtils.getPrivateField(atlasMgr , 'xfw_getAtlas')(newAtlas);
                 if (atlas == null)
                 {
-                    App.atlasMgr.registerAtlas(newAtlas);
-                    atlas = (App.atlasMgr as AtlasManager).xfw_getAtlas(newAtlas) as Atlas;
+                    atlasMgr.registerAtlas(newAtlas);
+                    atlas = XfwUtils.getPrivateField(atlasMgr , 'xfw_getAtlas')(newAtlas);
                     atlas.addEventListener(AtlasEvent.ATLAS_INITIALIZED, onAtlasInitializedHandler, false, 0, true);
                 }
             }

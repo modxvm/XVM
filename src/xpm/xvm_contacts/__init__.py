@@ -32,6 +32,7 @@ from xfw_actionscript.python import *
 from xvm_main.python.logger import *
 from xvm_main.python.xvm import l10n
 
+import as3
 import contacts
 import view
 
