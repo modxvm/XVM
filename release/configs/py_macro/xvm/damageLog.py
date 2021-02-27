@@ -453,8 +453,11 @@ class Data(object):
         wheelsConfig = vehicle.appearance.typeDescriptor.chassis.generalWheelsAnimatorConfig
         if wheelsConfig:
             maxComponentIdx += wheelsConfig.getWheelsCount()
-        maxHitEffectCode, decodedPoints, maxDamagedComponent = DamageFromShotDecoder.decodeHitPoints(points, vehicle.appearance.collisions, maxComponentIdx)
+        decodedPoints = DamageFromShotDecoder.decodeHitPoints(points, vehicle.appearance.collisions, maxComponentIdx)
         if decodedPoints:
+            maxPriorityHitPoint = decodedPoints[-1]
+            maxHitEffectCode = maxPriorityHitPoint.hitEffectCode
+            self.data['hitEffect'] = HIT_EFFECT_CODES[min(3, maxHitEffectCode)]
             compName = decodedPoints[0].componentName
             self.data['compName'] = compName if compName[0] != 'W' else 'wheel'
         else:
@@ -462,7 +465,6 @@ class Data(object):
 
         # self.data['criticalHit'] = (maxHitEffectCode == 5)
         if damageFactor == 0:
-            self.data['hitEffect'] = HIT_EFFECT_CODES[min(3, maxHitEffectCode)]
             self.data['isAlive'] = bool(vehicle.isCrewActive)
         self.hitShell(attackerID, effectsIndex, damageFactor)
 
