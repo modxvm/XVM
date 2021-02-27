@@ -4,13 +4,17 @@
  */
 package com.xvm.lobby.ui.contacts
 {
-    import com.xfw.*;
     import flash.display.Sprite;
+
+    import scaleform.clik.constants.InvalidationType;
+
     import net.wg.gui.components.controls.UILoaderAlt;
     import net.wg.gui.messenger.controls.ContactItem;
     import net.wg.gui.messenger.data.ContactsListTreeItemInfo;
     import net.wg.gui.messenger.data.ITreeItemInfo;
-    import scaleform.clik.constants.InvalidationType;
+
+    import com.xfw.Logger;
+    import com.xfw.XfwUtils;
 
     public class UI_ContactsTreeItemRenderer extends ContactsTreeItemRendererUI
     {
@@ -43,7 +47,7 @@ package com.xvm.lobby.ui.contacts
                         {
                             if (myData.data)
                             {
-                                var contactItem:UI_ContactItem = XfwUtils.getPrivateField(this, "xfw_contactItem");
+                                var contactItem:ContactItemUI = XfwUtils.getPrivateField(this, "xfw_contactItem");
                                 if (contactItem == null)
                                 {
                                     contactItem = new UI_ContactItem();
@@ -73,6 +77,7 @@ package com.xvm.lobby.ui.contacts
             }
             catch (ex:Error)
             {
+				Logger.add("com.xvm.lobby.ui.contacts.UI_ContactsTreeItemRenderer::draw()")
                 Logger.err(ex);
             }
         }
