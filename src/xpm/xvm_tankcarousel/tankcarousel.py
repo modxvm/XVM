@@ -109,6 +109,11 @@ def _Hangar_as_setCarouselS(base, self, linkage, alias):
     if isEvent:
         return base(self, linkage, alias)
 
+    #do not modify tankcarousel in battle royale
+    isRoyale = self.prbDispatcher.getFunctionalState().isQueueSelected(QUEUE_TYPE.BATTLE_ROYALE)
+    if isRoyale:
+        return base(self, linkage, alias)
+
     #in other cases, replace UI linkage with XVMs one
     if swf_loaded_info.swf_loaded_get(XVM_LOBBY_UI_SWF):
         if linkage == HANGAR_ALIASES.TANK_CAROUSEL_UI:
